@@ -14,50 +14,48 @@
  ],
  "proof": [
   {
-   "text": "Fix a sheaf $\\mathcal F$, an object $U$, and distinct sections $s,s'\\in\\mathcal F(U)$. Let $I_0=\\{0\\}$ with $U_0=U$ and $f_{00}=\\mathrm{id}_U$; then $s,s'$ are distinct in $\\varinjlim_{i\\in I_0}\\mathcal F(U_i)=\\mathcal F(U)$. Inductively, for $n\\geq0$ apply [lem-trf-point-system-refine-all] to the system over $I_n$ and the distinct images of $s,s'$, obtaining a refinement over $I_{n+1}\\supset I_n$ in which the images of $s,s'$ remain distinct and, writing $u_n(W)=\\varinjlim_{i\\in I_n}\\operatorname{Hom}_{\\mathcal C}(U_i,W)$, for every finite covering $\\{W_k\\to W\\}$ and every $f\\in u_n(W)$ the image of $f$ in $u_{n+1}(W)$ comes from some $u_{n+1}(W_k)$. Let $I=\\bigcup_nI_n$ with the induced order and transition maps; it is a nonempty directed poset (any two indices lie in a common directed $I_n$) and the system over $I$ refines each system over $I_n$. Write $u(W)=\\varinjlim_{i\\in I}\\operatorname{Hom}_{\\mathcal C}(U_i,W)=\\varinjlim_nu_n(W)$. (a) The images of $s,s'$ in $\\varinjlim_{i\\in I}\\mathcal F(U_i)$ are distinct: if they agreed, they would agree in $\\mathcal F(U_i)$ for some $i\\geq0$ in $I$; then $i\\in I_n$ for some $n$, and they would already agree in $\\varinjlim_{I_n}\\mathcal F(U_i)$, a contradiction. (b) For every finite covering $\\{W_k\\to W\\}$ and every $f\\in u(W)$: $f$ is represented by some $U_i\\to W$ with $i\\in I_n$, so it is the image of an element of $u_n(W)$; by the choice of $I_{n+1}$ its image in $u_{n+1}(W)$ is the image of some $g\\in u_{n+1}(W_k)$, and mapping $g$ to $u(W_k)$ gives an element whose image in $u(W)$ is $f$. This countable iteration supplies the step that the proof of Tag 00YQ passes over: Tag 00YP lifts only elements of the original $u'$, not of the refined $u$.",
+   "text": "For any sheaf F and unequal sections s,s' in F(W), apply lem-trf-point-system-countable-saturation. It produces a small directed poset system U retaining their unequal section germs and lifting every finite covering in its Hom colimits. The comparison between the Hom-colimit expression and inverseSystemHomFunctor is obtained by evaluating the colimit of representables and removing the harmless ULift. Naturality is checked on the colimit coprojections.",
    "uses": [
-    "lem-trf-point-system-refine-all"
+    "lem-trf-point-system-countable-saturation"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00YP (Lemma lemma-refine-all-at-once), applied countably often, in the proof of Tag 00YQ (Proposition proposition-criterion-points); the iteration is written out by the reviewer because 00YP lifts only elements of the original u'."
+    "place": "Tags 00YP and 00YQ: iterate the all-at-once refinement countably often to close the finite-cover lifting condition under new germs."
    }
   },
   {
-   "text": "For the resulting system define $u(W)=\\varinjlim_i\\operatorname{Hom}_{\\mathcal C}(U_i,W)$ and identify the inverse image of its point with $\\varinjlim_i\\mathcal F(U_i)$. The finite-limit hypothesis gives the finite-limit part of [lem-trf-inverse-system-site-point]. For an arbitrary covering $\\{W_a\\to W\\}$, choose a finite covering refinement $\\{W_k\\to W\\}$ and maps $W_k\\to W_{a(k)}$. Step 1 gives $k$ and a class $g\\in u(W_k)$ mapping to any prescribed $f\\in u(W)$; composing $g$ with $W_k\\to W_{a(k)}$ gives a lift in $u(W_{a(k)})$. Thus the full covering family is jointly surjective, so [lem-trf-inverse-system-site-point] yields a point $p_{\\mathcal F,U,s,s'}:\\mathbf{Set}\\to\\operatorname{Sh}(\\mathcal C)$. Under the canonical colimit identification, the images of $s$ and $s'$ are the classes represented by $(U_i,\\,s|_{U_i})$ and remain distinct.",
+   "text": "For an arbitrary covering indexed by a Type u set, lift its index into Type(max u v) and apply the finite-refinement hypothesis. Reindex the finite refining family by Fin n. The finite lifting property supplies a lift through one refining member; compose with its map to the corresponding original member. Thus inverseSystemSitePoint applies and gives a geometric morphism p with inverse image naturally isomorphic to the section-colimit functor. For the distinguished arrow a:U_i->W, apply the sheafification unit to a to obtain a section of the sheafified representable at U_i, then its colimit class t. Transport t to p^{-1}(h_W^#). Naturality and the sheafification adjunction identify the images of the section morphisms at this element with the retained germs of s and s'. Hence every unequal pair of sections is separated by some point.",
    "uses": [
     "lem-trf-inverse-system-site-point"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00YC (Proposition proposition-point-limits), 00YA (Lemma lemma-point-site-topos), and the last paragraph of 00YQ (Proposition proposition-criterion-points)"
+    "place": "Tags 00YP and 00YQ: iterate the all-at-once refinement countably often to close the finite-cover lifting condition under new germs."
    }
   },
   {
-   "text": "By the fixed-universe convention [def-weil-size-convention], take the chosen site skeleton to be $\\mathcal V$-small and sheaves to be $\\mathcal U$-valued for the fixed Grothendieck universes $\\mathcal U\\in\\mathcal V$. The collection of such sheaves (functors on a $\\mathcal V$-small category satisfying the sheaf equations), objects $U$, and section pairs $s\\ne s'$ is a $\\mathcal V$-set; choice therefore selects one point from Step 2 for each tuple, giving a set-indexed family. For a tuple and its selected point, built from the system $(U_i)_{i\\in I}$ with $U_0=U$, take $x\\in u(U)$ to be the class of $\\mathrm{id}_U:U_0\\to U$; under the identification $p^{-1}\\mathcal F\\cong\\varinjlim_i\\mathcal F(U_i)$ the stalk classes $[U,x,s]$ and $[U,x,s']$ are the images of $s,s'\\in\\mathcal F(U_0)$, which are distinct by Step 2. Hence every distinct pair of sections is separated by a selected point, and [lem-trf-point-family-conservative] implies that the selected inverse-image functors jointly reflect isomorphisms. This is the claimed set-indexed conservative family.",
+   "text": "Make the family small without indexing over all sheaves or all inverse systems. Put A_W=h_W^#. These objects form a separating family by the sheafification adjunction and Yoneda, so Mathlib's wellPowered_of_isDetecting makes Subobject(A_W) small in Type(max u w). For each subobject E of A_W, form Q_E=A_W coproduct_E A_W with its two maps a_E,b_E:A_W->Q_E. Retain the pairs whose corresponding sections differ, and choose a point and an element separating that pair by the previous step. This is a family indexed in Type(max u w). Given unequal sections of any F(W), let f,g:A_W->F be their section morphisms and E their equalizer subobject. The pushout has a map Q_E->F whose composites with a_E,b_E are f,g, so a_E,b_E correspond to unequal sections. The selected point for this E separates them. If its two images under f,g were equal, left exactness would put its chosen element in the image of the equalizer, on which a_E=b_E, a contradiction. Thus the selected small family separates every unequal section pair. Apply point_family_conservative and the equivalence between bijectivity and isomorphy in Type to conclude.",
    "uses": [
-    "def-weil-size-convention",
     "lem-trf-point-family-conservative"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00YK (Definition definition-enough-points) and 00YM (Lemma lemma-enough), with the universe convention of the project"
+    "place": "Tags 00YP and 00YQ: iterate the all-at-once refinement countably often to close the finite-cover lifting condition under new germs."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-size-convention",
   "lem-trf-inverse-system-site-point",
   "lem-trf-point-family-conservative",
-  "lem-trf-point-system-refine-all"
+  "lem-trf-point-system-countable-saturation"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 00YP (iterated countably often), 00YC, 00YA, 00YM and 00YQ: all-at-once refinement, point construction, and conservative-family criterion."
+  "place": "Tags 00YP/00YQ, 00YC/00YA and 00YM, with the countable saturation lemma and the explicit small-family selection via subobjects of sheafified representables, pushouts, and equalizers."
  },
  "mathlib_searches": [
   {
@@ -148,5 +146,15 @@
   "branch": "newtargets-dag",
   "note": "Sheaf values and the point index are in Type (max u w), at least the site universe u (Stacks: the site is a set, sheaves are valued in all sets). The delivered Type w admitted w < u, where the statement is false (presheaves on a meet-semilattice with top, bottom and an antichain indexed by Type w, u = w+1: a left-exact inverse image separating two antichain elements would separate the bottom, so a conservative family needs an injection Type w -> ι : Type w). The universe v of hfinite is harmless: every covering presieve has a Type u presentation and the condition does not depend on the presentation.",
   "fixed_by": "NT-stage2-cc-fb7563a63"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261020T174807-L-798250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

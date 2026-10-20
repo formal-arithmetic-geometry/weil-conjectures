@@ -1,0 +1,163 @@
+{
+ "id": "lem-trf-point-system-countable-saturation",
+ "kind": "statement",
+ "title": "Countable saturation of a section-separating inverse system",
+ "statement": "Let C be a small category in universe u, J a precoverage satisfying the site covering axioms [def-weil-pbc-sites-and-cohomology], and F a sheaf of sets valued in Type(max u w). For an object W and unequal sections s,s' in F(W), there exist a Type u nonempty directed partially ordered set I, a diagram U:I->C^op, an index i, and a morphism a:U_i->W such that the images of F(a)(s) and F(a)(s') in colim_I F(U_i) [def-weil-pbc-category-colimit] are unequal. Moreover, for every finite J-covering family (V_k->X), every element of colim_I Hom(U_i,X) lies in the image of colim_I Hom(U_i,V_k) for some member k. Hom sets are lifted to the common universe u without changing their elements.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tags 00YP and 00YQ: iterate the all-at-once refinement countably often to close the finite-cover lifting condition under new germs."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [
+  {
+   "text": "Start with the singleton directed system at W. Its section colimit is F(W), so the two selected sections are distinct. For each directed system with two distinct section germs, apply lem-trf-point-system-refine-all and retain the new system, the order embedding, the equality of the restricted diagrams, and the two images. Choice and recursion on the natural numbers give systems I_n, diagrams U_n and embeddings e_n with U_n=e_n^*U_{n+1}. Every finite-cover germ from stage n lifts at stage n+1.",
+   "uses": [
+    "lem-trf-point-system-refine-all"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YP and 00YQ: iterate the all-at-once refinement countably often to close the finite-cover lifting condition under new germs."
+   }
+  },
+  {
+   "text": "Package the stages as a functor from the natural numbers to categories over C^op. Its Grothendieck construction G is small and filtered: two objects move into a common stage, whose directedness supplies a common successor; parallel arrows agree since G is thin. Define the union diagram on G by using the stage diagram on objects and transporting along the diagram equality before applying a fibre morphism. The functor laws follow from the naturality of these equalities. Mathlib identifies its colimit with the sequential colimit of the stage colimits. The comparison maps carry each stage coprojection to the union coprojection, and the comparisons commute with the refinement maps.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YP and 00YQ: iterate the all-at-once refinement countably often to close the finite-cover lifting condition under new germs."
+   }
+  },
+  {
+   "text": "The two stage germs form compatible sequences. If their images in the sequential colimit agreed, the filtered-colimit equality criterion would witness equality at one finite stage. The stage comparison is an isomorphism, contradicting the distinctness maintained there. Thus the original sections have distinct images in the union colimit.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YP and 00YQ: iterate the all-at-once refinement countably often to close the finite-cover lifting condition under new germs."
+   }
+  },
+  {
+   "text": "A Hom germ of the union has a representative at an object (n,i) of G. Regard it as a germ of the n-th system. Refinement at n+1 gives a representative b:U_{n+1,j}->V_k whose composite with the selected covering arrow represents its refined image. Compatibility of the stage-to-union maps carries this equality to the union, giving the desired finite-cover lift. The assertion includes the empty cover, where the existence of a germ would contradict the stage lifting property.",
+   "uses": [
+    "lem-weil-pbc-filtered-colimit-sets-elementwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YP and 00YQ: iterate the all-at-once refinement countably often to close the finite-cover lifting condition under new germs."
+   }
+  },
+  {
+   "text": "The thin skeleton of G is a partially ordered type in the same universe. Its equivalence with G transports filteredness, hence nonemptiness and directedness. Precomposition along this equivalence induces isomorphisms on all the colimits. Transport the chosen root and arrow using the counit isomorphism. Naturality of colimit.pre transports the distinctness and every finite-cover lift. This yields the required directed poset system.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 00YP and 00YQ: iterate the all-at-once refinement countably often to close the finite-cover lifting condition under new germs."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-system-refine-all",
+  "lem-weil-pbc-filtered-colimit-sets-elementwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Countable closure argument making explicit the iteration needed between Tags 00YP and 00YQ; implemented with Mathlib Grothendieck constructions, colimit Fubini, and thin skeletons."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "fiberwiseColimit|Grothendieck.*IsFiltered|ThinSkeleton",
+   "results": "Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Lattice.lean; Mathlib/CategoryTheory/Subobject/Types.lean; Mathlib/CategoryTheory/Subobject/Basic.lean; Mathlib/CategoryTheory/Subobject/Basic.lean; Mathlib/CategoryTheory/Subobject/Basic.lean; Mathlib/CategoryTheory/Subobject/Basic.lean",
+   "date": "2026-10-20",
+   "verdict": "No match for the site-specific saturation theorem; the generic Grothendieck-colimit and thin-skeleton infrastructure is used in its proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.colimitFiberwiseColimitIso",
+   "results": "CategoryTheory.Limits.colimitFiberwiseColimitIso; CategoryTheory.Limits.fiberwiseColimCompColimIso_hom_app; CategoryTheory.Limits.fiberwiseColimCompColimIso_inv_app; CategoryTheory.Limits.ι_colimitFiberwiseColimitIso_inv; CategoryTheory.Limits.ι_colimitFiberwiseColimitIso_hom; CategoryTheory.Limits.ι_colimitFiberwiseColimitIso_inv_assoc; CategoryTheory.Limits.ι_colimitFiberwiseColimitIso_hom_assoc",
+   "date": "2026-10-20",
+   "verdict": "No match for the site-specific saturation theorem; the generic Grothendieck-colimit and thin-skeleton infrastructure is used in its proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Countable iteration of inverse system refinements preserves unequal sheaf germs and lifts every finite covering",
+   "results": "InverseSystem.globalEquiv_compatibility; TopCat.Presheaf.SheafCondition.instNonemptyStructuredArrowPairwiseOpensLeCoverPairwiseToOpensLeCover; TopCat.Presheaf.generateEquivalenceOpensLe_inverse'; TopCat.Presheaf.germ_ext; TopCat.Presheaf.germ_eq; nonempty_sections_of_finite_inverse_system; TopCat.Presheaf.germ_exist_of_isBasis; TopCat.Presheaf.SheafCondition.instFinalPairwiseOpensLeCoverPairwiseToOpensLeCover",
+   "date": "2026-10-20",
+   "verdict": "No match for the site-specific saturation theorem; the generic Grothendieck-colimit and thin-skeleton infrastructure is used in its proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given a small site, countably iterate refinements of a directed inverse system to lift every finite covering and preserve two unequal sheaf germs",
+   "results": "TopCat.Sheaf.forget; CategoryTheory.preservesFiniteLimits_presheafToSheaf; CategoryTheory.GrothendieckTopology.sheafifyCompIso_inv_eq_sheafifyLift; CategoryTheory.GrothendieckTopology.isoSheafify_inv; CategoryTheory.GrothendieckTopology.preservesLimitsOfShape_sheafification; CategoryTheory.Meq.refine; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.fac; CategoryTheory.GrothendieckTopology.OneHypercoverFamily.IsSheafIff.lift",
+   "date": "2026-10-20",
+   "verdict": "No match: these are sheafification and ordinary refinement operations, not countable inverse-system saturation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FinitarySiteEnoughPoints",
+  "date": "2026-10-21",
+  "group": "J4"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "The countable iteration in step 1 of lem-trf-finitary-site-enough-points, supporting the pointwise conservativity passage in the local-term-locality proof ancestry.",
+   "via": [
+    "lem-trf-finitary-site-enough-points",
+    "lem-trf-oriented-product-points-conservative",
+    "lem-trf-oriented-nearby-strict-local-description",
+    "lem-trf-good-oriented-nearby-kunneth",
+    "lem-trf-specialization-external-product",
+    "lem-trf-trace-specialization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.Sites.PointSystemSaturation",
+  "file": "lean/Sheaf/CategoryTheory/Sites/PointSystemSaturation.lean",
+  "declaration": "CategoryTheory.exists_pointSystem_finiteCoverLifting",
+  "statement": "theorem exists_pointSystem_finiteCoverLifting\n    {C : Type u} [SmallCategory C] (J : Precoverage C) (hJ : J.IsSiteForCoverings)\n    (F : Sheaf J.toGrothendieck (Type (max u w))) (W : C)\n    (s s' : F.obj.obj (op W)) (hne : s ≠ s') :\n    ∃ (I : Type u) (_ : PartialOrder I) (_ : Nonempty I) (_ : IsDirectedOrder I)\n      (U : I ⥤ Cᵒᵖ) (i : I) (a : (U.obj i).unop ⟶ W),\n      colimit.ι (U ⋙ F.obj) i (F.obj.map a.op s) ≠\n        colimit.ι (U ⋙ F.obj) i (F.obj.map a.op s') ∧\n      ∀ (n : ℕ) (X : C) (V : Fin n → C) (f : ∀ k, V k ⟶ X),\n        Presieve.ofArrows V f ∈ J X →\n        ∀ x : colimit (U ⋙ uliftYoneda.{u}.obj X),\n          ∃ (k : Fin n) (y : colimit (U ⋙ uliftYoneda.{u}.obj (V k))),\n            colimMap (U.whiskerLeft (uliftYoneda.map (f k))) y = x",
+  "branch": "sheaf-dag",
+  "by": "J4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261020T174807-L-798250",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261020T174807-L-798250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
