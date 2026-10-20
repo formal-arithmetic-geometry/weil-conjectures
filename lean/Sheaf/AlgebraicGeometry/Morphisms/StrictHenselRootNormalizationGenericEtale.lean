@@ -18,7 +18,7 @@ public import Mathlib.AlgebraicGeometry.Normalization
 public import Mathlib.AlgebraicGeometry.Noetherian
 
 import Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRegularDivisorQuotient
-import WeilConjectures.RingTheory.ProEtale.FaithfullyFlat
+import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import WeilConjectures.RingTheory.RootAlgebraRegularAtRoot
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootNormalizationGenericSourceEtale
 
@@ -30,8 +30,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
--- The small coordinate-ring colimit has its own structural morphism. Working directly
--- with its cocone avoids mixing the two strict-henselization structural-map APIs.
+-- Apply the existing affine-chart theorem to the identity chart of Spec R.
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 private theorem small_strictHenselization_structural_flat
@@ -40,46 +39,20 @@ private theorem small_strictHenselization_structural_flat
     (b : R ⟶ strictHenselizationRing barY)
     (hb : Spec.map b = strictHenselizationStructuralMap barY) :
     RingHom.Flat b.hom := by
-  classical
-  have := (strictHenselization_properties barY).2.1
-  let I := SmallModel.{u} (strictHenselizationNeighbourhoods barY)
-  let F := (equivSmallModel.{u} (strictHenselizationNeighbourhoods barY)).inverse
-  let ψ (i : I) := ((AffineEtale.Spec (Spec R)).obj (F.obj i).1).hom
-  let t : (Functor.const Iᵒᵖ).obj R ⟶ strictHenselizationAffineDiagram barY :=
-    { app := fun i ↦ (ΓSpecIso R).inv ≫ (ψ i.unop).appTop
-      naturality := fun i j a ↦ by
-        dsimp only [Functor.const_obj_map, Functor.const_obj_obj]
-        rw [Category.id_comp]
-        symm
-        change ((ΓSpecIso R).inv ≫ (ψ i.unop).appTop) ≫
-          (Spec.map (F.map a.unop).1.left.unop).appTop =
-            (ΓSpecIso R).inv ≫ (ψ j.unop).appTop
-        rw [Category.assoc, ← Scheme.Hom.comp_appTop]
-        exact congrArg (fun k ↦ (ΓSpecIso R).inv ≫ k.appTop) (F.map a.unop).1.w }
-  apply RingHom.Flat.of_isColimit b Iᵒᵖ (strictHenselizationAffineDiagram barY)
-    (t := t) (c := (colimit.cocone (strictHenselizationAffineDiagram barY)).ι)
-    (colimit.isColimit (strictHenselizationAffineDiagram barY))
-  intro i
-  constructor
-  · have : Etale (ψ i.unop) := inferInstance
-    have : IsAffine ((AffineEtale.Spec (Spec R)).obj (F.obj i.unop).1).left := by
-      change IsAffine (Spec (F.obj i.unop).1.left.unop)
+  let : Algebra R (strictHenselizationRing barY) := b.hom.toAlgebra
+  have he : Algebra.IndEtale R (strictHenselizationRing barY) :=
+    strictHenselization_indEtale_of_affine_chart
+      (A := strictHenselizationRing barY) barY R (𝟙 _)
+      ⟨barY (IsLocalRing.closedPoint Ω), rfl⟩ (Iso.refl _) b.hom
+      (by
+        change Spec.map b ≫ 𝟙 _ = 𝟙 _ ≫ strictHenselizationStructuralMap barY
+        simpa only [Category.comp_id, Category.id_comp] using hb)
+  obtain ⟨J, _, _, P, hP⟩ := he.exists_colimitPresentation
+  exact ModuleCat.flat_of_colimitPresentation
+    (P.map (forget₂ _ (AlgCat R) ⋙ forget₂ _ (ModuleCat R))) fun j ↦ by
+      change Module.Flat R (P.diag.obj j)
+      have := hP j
       infer_instance
-    exact (RingHom.Flat.of_bijective
-      (ConcreteCategory.bijective_of_isIso (ΓSpecIso R).inv)).comp
-        (Scheme.Hom.flat_appTop (f := ψ i.unop)
-          (X := Spec (F.obj i.unop).1.left.unop) (Y := Spec R))
-  · have h := strictHenselizationStructuralMap_eq barY i.unop
-    apply Spec.map_injective
-    rw [hb]
-    change Spec.map ((ΓSpecIso R).inv ≫ (ψ i.unop).appTop ≫
-      colimit.ι (strictHenselizationAffineDiagram barY) i) = _
-    have ht : (ΓSpecIso R).inv ≫ (ψ i.unop).appTop =
-        Spec.preimage (ψ i.unop) ≫ (ΓSpecIso (F.obj i.unop).1.left.unop).inv := by
-      rw [ΓSpecIso_inv_naturality, Spec.map_preimage]
-    rw [← Category.assoc, ht, Category.assoc, Spec.map_comp, Spec.map_comp,
-      Spec.map_preimage]
-    exact h
 
 -- Finiteness lets source-local etaleness around the whole fibre give a target open.
 private theorem etale_shrink_of_fibre_source_opens {X Y : Scheme.{u}}

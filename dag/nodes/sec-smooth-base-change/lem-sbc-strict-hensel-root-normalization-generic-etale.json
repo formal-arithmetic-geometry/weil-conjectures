@@ -23,14 +23,15 @@
  ],
  "proof": [
   {
-   "text": "The strict henselization regular-divisor quotient gives Noetherianness and a regular domain quotient. Prove flatness for the actual small coordinate-ring colimit directly: its pointed affine etale neighbourhood maps are flat, their maps from R are natural, and the defining structural-map equations identify their common composite with b. RingHom.Flat.of_isColimit supplies flatness of b; flat base change preserves regularity of f. The root-algebra theorem then gives regular local rings at primes containing the root coordinate.",
+   "text": "The strict henselization regular-divisor quotient gives Noetherianness and a regular domain quotient. Apply the existing affine-chart ind-etaleness theorem with the identity chart of Spec R and the identity isomorphism of the small strict-henselization scheme. The hypothesis on b is exactly its structure-map compatibility. Forget the resulting filtered etale algebra presentation to modules; etale stages are flat, and the same-universe flat-colimit-presentation theorem gives flatness of b. Flat base change preserves regularity of f. The root-algebra theorem then gives regular local rings at primes containing the root coordinate.",
    "uses": [
     "lem-sbc-strict-hensel-regular-divisor-quotient",
     "def-weil-pbc-strict-henselization-limit",
     "def-weil-pbc-strict-henselization-structural-map",
     "lem-weil-pbc-etale-algebra-flat",
-    "lem-weil-pbc-flat-ring-map-iff-ind-flat",
-    "lem-sbc-root-algebra-regular-at-root"
+    "lem-sbc-root-algebra-regular-at-root",
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
+    "lem-weil-pbc-flat-colimit-presentation-same-universe"
    ],
    "elementary": false
   },
@@ -62,15 +63,16 @@
   "lem-sbc-root-normalization-generic-source-etale",
   "lem-sbc-strict-hensel-regular-divisor-quotient",
   "lem-weil-pbc-etale-algebra-flat",
-  "lem-weil-pbc-flat-ring-map-iff-ind-flat",
-  "lem-weil-pbc-relative-normalization"
+  "lem-weil-pbc-flat-colimit-presentation-same-universe",
+  "lem-weil-pbc-relative-normalization",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
  ],
  "proof_origin": {
   "kind": "from-document",
   "by": "worker",
-  "group": "F3",
-  "document": "Stacks Project and the existing Lean filtered-colimit API",
-  "place": "Tags 04HX and 07QM for the structural flatness argument; Tags 09EB, 0BRM and 0EYG for generic etaleness. Restored the quarantined small-colimit statement after sync and proved its structural flatness privately with RingHom.Flat.of_isColimit, avoiding the incompatible upstream structural-map API."
+  "group": "D4",
+  "document": "Stacks Project and the existing Lean affine-chart and filtered-colimit APIs",
+  "place": "Tag 04HX for affine-chart ind-etaleness; Tag 05UT for flatness of filtered colimits; Tags 09EB, 0BRM and 0EYG for generic etaleness. Reuse strictHenselization_indEtale_of_affine_chart on the identity chart and ModuleCat.flat_of_colimitPresentation instead of repeating the strict-henselization ring cocone construction."
  },
  "mathlib_searches": [
   {
@@ -147,9 +149,9 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F3",
+  "group": "D4",
   "result": "pass",
-  "landing": "20261020T160753-L-3405407",
+  "landing": "20261020T162301-L-3586052",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
