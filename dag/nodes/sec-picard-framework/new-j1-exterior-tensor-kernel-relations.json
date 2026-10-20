@@ -21,9 +21,10 @@
    "elementary": true
   },
   {
-   "text": "For s≠0, a section k of kernel(q) maps to a section t with q(t)=0 by kernel.condition. Apply the local span theorem at every point of U to t. The hypothesis hzero puts each span generator in the kernel of the linear map ψ(V); Submodule.span_le extends this to the whole span. Naturality identifies ψ(V)(t|V) with ψ(U)(t)|V. Hence the latter is zero near each point. Sheaf section_ext proves ψ(U)(t)=0. Extensionality over U and k gives kernel.ι q ≫ ψ = 0.",
+   "text": "For s≠0, tensor exteriorSheafPowerIso in both factors. Its inverse preserves wedge tensors by tensorHom_app_tmulSection and exteriorSheafPowerIso_inv_wedge; inverse cancellation gives the forward formula. Conjugate q by these comparisons, obtaining the upstream pure-wedge formula from hq. A section k of kernel(q) maps to t with q(t)=0 by kernel.condition. The conjugated map kills the forward image of t. Apply the upstream local span theorem at every point of U. The inverse comparison sends each upstream relation generator to an original relation generator, killed by hzero. Submodule.span_le puts the whole upstream span in the kernel of ψ after the inverse comparison. Naturality and inverse cancellation identify this vanishing with ψ(t restricted to V)=0. Sheaf section_ext and naturality prove ψ(t)=0. Extensionality over U and k gives kernel.ι q ≫ ψ = 0. The comparison helper and all the transport are proved in the consumer; its public signature is unchanged.",
    "uses": [
-    "lem-sc-exterior-tensor-kernel-locally-spanned"
+    "lem-sc-exterior-tensor-kernel-locally-spanned",
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
    "elementary": true
   }
@@ -36,7 +37,7 @@
  "proof_origin": {
   "by": "X3 stage3",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph; degree-zero isomorphism and local kernel generators"
+  "place": "Proof of (*), determinant paragraph; degree-zero isomorphism and positive-degree local kernel generators, transported from the official exteriorPower theorem through the existing canonical exteriorSheafPowerIso."
  },
  "mathlib_searches": [
   {
@@ -123,12 +124,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-8eebc",
-  "group": "P7",
+  "reviewer": "C-d61c1",
+  "group": "G2",
   "result": "pass",
-  "landing": "20261020T144259-L-2261123",
+  "landing": "20261020T221153-L-4152589",
   "kind": "interface",
-  "note": "independent cc review: retire-items.tsv row 64 + hand-off retire-sheaf-twins-20261020 vs delivered stub item, new proved ExteriorSheafPowerComparison (iso via isoMk/uniqueness, transport of WC exteriorTensor_lift_hom_ext) and 5 unclaimed consumers (one-line call/import edits, signatures unchanged); --all compile + 6 second-level importers clean, axioms clean, FreeGenerator import shown necessary"
+  "note": "independent cc review: retired Sheaf copy (stub) + node repointed at proved WeilConjectures twin (statement verbatim) + adapted sole importer ExteriorTensorKernelRelations (signature unchanged) against live clone, retire-items row 750 and the hand-off; compiled stub, importer and DeterminantWedgeQuotientFactor at 560 s, axioms clean"
  },
  "lean_audit": {
   "master": {

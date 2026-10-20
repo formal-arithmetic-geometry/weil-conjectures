@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
-import Sheaf.AlgebraicGeometry.Modules.ExteriorTensorKernelLocallySpanned
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorTensorKernelLocallySpanned
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
 /-!
@@ -23,6 +23,29 @@ Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
 universe v
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorTensor_comparison {X : Scheme.{v}} (A B : X.Modules) (r s : ℕ) :
+    ∃ e : exteriorSheaf A r ⊗ exteriorSheaf B s ≅ exteriorPower A r ⊗ exteriorPower B s,
+      (∀ (U : X.Opens) (a : Fin r → A.val.obj (op U)) (b : Fin s → B.val.obj (op U)),
+        e.hom.app U (tmulSection (exteriorSheafSection A r U a)
+          (exteriorSheafSection B s U b)) = tmulSection (wedge a) (wedge b)) ∧
+      (∀ (U : X.Opens) (a : Fin r → A.val.obj (op U)) (b : Fin s → B.val.obj (op U)),
+        e.inv.app U (tmulSection (wedge a) (wedge b)) =
+          tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf B s)
+            (exteriorSheafSection A r U a) (exteriorSheafSection B s U b)) := by
+  let e := exteriorSheafPowerIso A r ⊗ᵢ exteriorSheafPowerIso B s
+  have hi (U : X.Opens) (a : Fin r → A.val.obj (op U)) (b : Fin s → B.val.obj (op U)) :
+      e.inv.app U (tmulSection (wedge a) (wedge b)) =
+        tmulSection (M := exteriorSheaf A r) (N := exteriorSheaf B s)
+          (exteriorSheafSection A r U a) (exteriorSheafSection B s U b) := by
+    change ((exteriorSheafPowerIso A r).inv ⊗ₘ (exteriorSheafPowerIso B s).inv).app U _ = _
+    rw [tensorHom_app_tmulSection, exteriorSheafPowerIso_inv_wedge,
+      exteriorSheafPowerIso_inv_wedge]
+  refine ⟨e, ?_, hi⟩
+  intro U a b
+  rw [← hi U a b]
+  exact inv_app_hom_app_apply_of_iso e.symm _
 
 set_option backward.isDefEq.respectTransparency false in
 private theorem exteriorTensor_zero_mono {X : Scheme.{v}}
@@ -112,6 +135,16 @@ theorem exteriorTensor_kernel_eq_zero_of_relations {X : Scheme.{v}}
     have : Mono q := exteriorTensor_zero_mono A S.X₂ S.X₃ r S.g q hq
     have hι : kernel.ι q = 0 := (cancel_mono q).mp (by simp)
     rw [hι, zero_comp]
+  obtain ⟨eB, _, hiB⟩ := exteriorTensor_comparison A S.X₂ r s
+  obtain ⟨eC, heC, _⟩ := exteriorTensor_comparison A S.X₃ r s
+  let q' := eB.inv ≫ q ≫ eC.hom
+  have hq' (V : X.Opens) (a : Fin r → A.val.obj (op V))
+      (c : Fin s → S.X₂.val.obj (op V)) :
+      q'.app V (tmulSection (wedge a) (wedge c)) =
+        tmulSection (wedge a) (wedge (fun i ↦ S.g.val.app (op V) (c i))) := by
+    change eC.hom.app V (q.app V (eB.inv.app V _)) = _
+    rw [hiB]
+    exact (congrArg (eC.hom.app V) (hq V a c)).trans (heC V a _)
   ext U k
   change ψ.val.app (op U) ((kernel.ι q).val.app (op U) k) = 0
   let t := (kernel.ι q).val.app (op U) k
@@ -121,8 +154,14 @@ theorem exteriorTensor_kernel_eq_zero_of_relations {X : Scheme.{v}}
     exact h
   apply D.isSheaf.section_ext
   intro x hx
+  have ht' : q'.app U (eB.hom.app U t) = 0 := by
+    change eC.hom.app U (q.app U (eB.inv.app U (eB.hom.app U t))) = 0
+    rw [inv_app_hom_app_apply_of_iso]
+    change eC.hom.val.app (op U) (q.val.app (op U) t) = 0
+    rw [ht, map_zero]
   obtain ⟨V, hVU, hxV, hspan⟩ :=
-    exteriorTensor_kernel_locally_mem_span S hS A r s hs q hq U t ht x hx
+    exteriorTensor_kernel_locally_mem_span S hS A r s hs q' hq'
+      U (eB.hom.app U t) ht' x hx
   refine ⟨V, hVU, hxV, ?_⟩
   have hle : Submodule.span (X.presheaf.obj (op V))
       {z | ∃ (a : Fin r → A.val.obj (op V))
@@ -134,7 +173,27 @@ theorem exteriorTensor_kernel_eq_zero_of_relations {X : Scheme.{v}}
     apply Submodule.span_le.mpr
     rintro z ⟨a, c, j, d, hcd, rfl⟩
     exact hzero V a c j d hcd
-  have hz := hle hspan
+  have hz : ψ.app V (eB.inv.app V
+      ((exteriorPower A r ⊗ exteriorPower S.X₂ s).val.map (homOfLE hVU).op
+        (eB.hom.app U t))) = 0 := by
+    have hspan_le : Submodule.span (X.presheaf.obj (op V))
+        {z | ∃ (a : Fin r → A.val.obj (op V))
+          (c : Fin s → S.X₂.val.obj (op V)) (j : Fin s)
+          (d : S.X₁.val.obj (op V)), c j = S.f.val.app (op V) d ∧
+            z = tmulSection (M := exteriorPower A r) (N := exteriorPower S.X₂ s)
+              (wedge a) (wedge c)} ≤
+        LinearMap.ker ((eB.inv ≫ ψ).val.app (op V)).hom := by
+      apply Submodule.span_le.mpr
+      rintro z ⟨a, c, j, d, hcd, rfl⟩
+      change ψ.app V (eB.inv.app V (tmulSection (wedge a) (wedge c))) = 0
+      rw [hiB]
+      exact hle (Submodule.subset_span ⟨a, c, j, d, hcd, rfl⟩)
+    exact hspan_le hspan
+  have hnB := Hom.app_presheaf_map eB.hom (homOfLE hVU) t
+  change ψ.app V (eB.inv.app V
+    ((exteriorPower A r ⊗ exteriorPower S.X₂ s).presheaf.map (homOfLE hVU).op
+      (eB.hom.app U t))) = 0 at hz
+  rw [← hnB, inv_app_hom_app_apply_of_iso] at hz
   change ψ.val.app (op V)
     ((exteriorSheaf A r ⊗ exteriorSheaf S.X₂ s).val.map (homOfLE hVU).op t) = 0 at hz
   change D.presheaf.map (homOfLE hVU).op (ψ.val.app (op U) t) =
