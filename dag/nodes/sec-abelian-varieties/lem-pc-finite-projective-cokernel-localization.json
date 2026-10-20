@@ -40,7 +40,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "Mathlib local splitting, finite presentation spreading, and Nakayama; literature/stacks-project/algebra.tex Tag 00O0 is the finite-projective-source specialization",
-  "place": "B3 proof retained; E7 2026-10-18 removes its unused source projectivity assumption"
+  "place": "B3 proof retained; E7 2026-10-18 removes its unused source projectivity assumption; K3 2026-10-20 preserves this proof under a distinct finite-source extension name while withdrawing the colliding module"
  },
  "mathlib_searches": [
   {
@@ -104,14 +104,15 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-pcl0145 (reviewer sub-agent of L); spot-checked: Step 1 cites lem-weil-pbc-finite-projective-prime-local-free (Tag 00NX) exactly; residue field of pR_g is kappa(p), composite principal localization R_{ga} stays outside p. Step 2 new finite-free node: true (m x m minor unit at p, invert it, split identity block, cokernel free; iso case m=n, det unit); Coker(phi)_f = Coker(phi_f) by exactness of localization. Isomorphism clause correct. Citer 0756c63f7 uses the isomorphism clause for R^{r+s+t}->K^0 and the injective clause for R^t->K^1, matching. No duplicate: lem-sc-finite-locally-free-residue-isomorphism is scheme-level all-points iso only; lem-sc-perfect-degree-zero-fibre-criterion and lem-weil-pbc-split-injection-after-completion differ. Mathlib: Module.FinitePresentation.exists_notMem_bijective needs bijectivity at the stalk, not the fibre; not a match. Second reading by F1: no missed fault found."
  },
  "lean": {
-  "module": "Sheaf.RingTheory.FiniteProjectiveCokernelLocalization",
-  "declaration": "Module.finiteProjectiveCokernel_residue_localization",
-  "file": "lean/Sheaf/RingTheory/FiniteProjectiveCokernelLocalization.lean",
-  "statement": "theorem finiteProjectiveCokernel_residue_localization {R : Type u} [CommRing R] {P₁ : Type v} [AddCommGroup P₁] [Module R P₁] [Module.Finite R P₁] {P₂ : Type w} [AddCommGroup P₂] [Module R P₂] [Module.Finite R P₂] [Module.Projective R P₂] (φ : P₁ →ₗ[R] P₂) (p : Ideal R) [p.IsPrime] : (Function.Injective (φ.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Injective (φ.baseChange (Localization.Away f)) ∧ Module.Finite (Localization.Away f) (TensorProduct R (Localization.Away f) P₂ ⧸ LinearMap.range (φ.baseChange (Localization.Away f))) ∧ Module.Projective (Localization.Away f) (TensorProduct R (Localization.Away f) P₂ ⧸ LinearMap.range (φ.baseChange (Localization.Away f)))) ∧ (Function.Bijective (φ.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Bijective (φ.baseChange (Localization.Away f)))",
+  "module": "Sheaf.RingTheory.FiniteSourceProjectiveCokernelLocalization",
+  "declaration": "Module.finiteProjectiveCokernel_residue_localization_of_finite",
+  "file": "lean/Sheaf/RingTheory/FiniteSourceProjectiveCokernelLocalization.lean",
+  "statement": "theorem finiteProjectiveCokernel_residue_localization_of_finite {R : Type u} [CommRing R] {P₁ : Type v} [AddCommGroup P₁] [Module R P₁] [Module.Finite R P₁] {P₂ : Type w} [AddCommGroup P₂] [Module R P₂] [Module.Finite R P₂] [Module.Projective R P₂] (φ : P₁ →ₗ[R] P₂) (p : Ideal R) [p.IsPrime] : (Function.Injective (φ.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Injective (φ.baseChange (Localization.Away f)) ∧ Module.Finite (Localization.Away f) (TensorProduct R (Localization.Away f) P₂ ⧸ LinearMap.range (φ.baseChange (Localization.Away f))) ∧ Module.Projective (Localization.Away f) (TensorProduct R (Localization.Away f) P₂ ⧸ LinearMap.range (φ.baseChange (Localization.Away f)))) ∧ (Function.Bijective (φ.baseChange p.ResidueField) → ∃ f : R, f ∉ p ∧ Function.Bijective (φ.baseChange (Localization.Away f)))",
   "branch": "sheaf-dag",
-  "by": "E7",
-  "date": "2026-10-18",
-  "existing": false
+  "by": "K3",
+  "date": "2026-10-20",
+  "existing": false,
+  "note": "The old Sheaf module is retired to remove its declaration-name collision with the upstream finite-projective-source specialization. The node retains its stronger finite-source statement, needed for the image of a differential in AffinePerfectCutDegreeZero, under a distinct name in this extension module. The upstream theorem requires Module.Projective R P₁ and cannot realize this strengthened node unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -134,14 +135,14 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-1c76a",
-  "group": "E7",
+  "reviewer": "C-5444a",
+  "group": "K3",
   "result": "pass",
-  "landing": "20261018T062738-L-645175",
+  "landing": "20261020T135414-L-1819976",
   "kind": "interface",
-  "note": "independent cc review: delivered item proof and strengthened FPCL lemma (binder [Module.Projective R P₁] removed) with nodes lem-pc-affine-perfect-cut-degree-zero / lem-pc-finite-projective-cokernel-localization, change record and compiles of delivery + importers PerfectCutComplexDegreeZero, ResidueConnectiveProjectiveOpcycles; original ResidueBottomDifferential warns hp₀ unused against changed dep, adapted one-line fix clean; axioms: only sorryAx via pre-existing derivedSplittingUnique"
+  "note": "independent cc review: moved theorem Module.finiteProjectiveCokernel_residue_localization_of_finite vs the old Sheaf module text (identical but for name/header) and node lem-pc-finite-projective-cokernel-localization statement; adapted AffinePerfectCutDegreeZero (2-line diff) and its importer PerfectCutComplexDegreeZero compiled; coexistence with upstream WeilConjectures twin and axioms checked"
  },
  "statement_change": {
   "date": "2026-10-18",

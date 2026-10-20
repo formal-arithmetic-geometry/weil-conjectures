@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.Perfect
 public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import Mathlib.RingTheory.Localization.Away.Basic
 import Sheaf.Paper.DerivedSplittingUnique
-import Sheaf.RingTheory.FiniteProjectiveCokernelLocalization
+import Sheaf.RingTheory.FiniteSourceProjectiveCokernelLocalization
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 
@@ -259,7 +259,7 @@ theorem affine_perfect_cut_degree_zero {R : Type v} [CommRing R]
     have : Module.Finite R I := Module.Finite.range d
     have : Module.Projective R (K.X 1) := Module.Projective.of_free
     obtain ⟨f, hf, -, -, hp⟩ :=
-      (Module.finiteProjectiveCokernel_residue_localization d.range.subtype p).1 hinj
+      (Module.finiteProjectiveCokernel_residue_localization_of_finite d.range.subtype p).1 hinj
     let A := Localization.Away f
     let F := ModuleCat.extendScalars (algebraMap R A)
     let L := (RingTensorCohomology.extend R A).obj K
