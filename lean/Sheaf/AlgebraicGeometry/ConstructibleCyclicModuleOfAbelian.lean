@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.ConstructibleAbelianSheaf
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 import WeilConjectures.AlgebraicGeometry.FiniteLocalCyclicModuleForget
-public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
+public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import WeilConjectures.ConstructibleSheaf.Pullback
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 /-!
