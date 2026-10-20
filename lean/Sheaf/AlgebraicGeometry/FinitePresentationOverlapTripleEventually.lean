@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.ChosenPullback
 public import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.AlgebraicGeometry.FinitePresentationZeroMapDescent
-import Sheaf.AlgebraicGeometry.FinitePresentationOverlapTripleCanonicalEventually
+import WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapTripleCanonicalEventually
 import WeilConjectures.AlgebraicGeometry.FinitePresentationOverlapTripleTransport
 
 /-! # Persistent eventual triple overlap equation
