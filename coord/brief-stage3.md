@@ -38,6 +38,27 @@ A lemma the proof needs that the DAG lacks, and every theorem you leave with `so
 
 ## 4. Changing a definition or a statement (stage 3 §3)
 
+**Source-library boundary (human, 2026-10-17; clarified 2026-10-20).**
+The general permissions to prune and repair unclaimed modules do not authorize
+removing declarations from `lean/WeilConjectures/`. In that adopted source tree,
+existing declaration signatures, attributes and public imports stay verbatim.
+You may change theorem proofs, fill existing `sorry` bodies (or only the `sorry`
+fields of a definition/instance), and add proved private helpers and private
+proof imports. Keep the other parts of non-theorem bodies unchanged. New public
+declarations and new modules belong under `lean/Sheaf/`. The supported corrections
+of false upstream statements already listed in
+`coord/upstream-statement-exceptions.tsv` are the only listed exceptions; workers
+do not add entries to authorize a different proof route.
+
+This boundary applies even when no group holds the source module. An unused
+upstream declaration remains in the library. If its proof still imports a
+`Sheaf` dependency, that dependency is still needed: changing its consumers does
+not authorize deleting the declaration or replacing its proved body by `sorry`.
+A shorter route may prune that dependency only after preserving the upstream
+declaration with a complete proof that no longer uses it. A refusal of an
+upstream declaration removal is a packet error to repair under this rule, not a
+broken tool to retry unchanged or bypass.
+
 When a definition or an intermediate statement turns out wrong or hard to use you may change it:
 
 1. Hold the item module. A module no group holds may be changed like your own, including a necessary statement or definition repair, with the same change records and user checks. A module held by another group follows the exception below.
