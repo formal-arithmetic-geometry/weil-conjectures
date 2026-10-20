@@ -7,7 +7,9 @@ module
 
 public import Sheaf.AlgebraicGeometry.VaryingRingProperOpenArrows
 import Mathlib.CategoryTheory.Adjunction.Mates
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
+import Sheaf.AlgebraicGeometry.VaryingRingModulePiComplementZero
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
@@ -37,6 +39,7 @@ is asserted.
 -/
 
 @[expose] public noncomputable section
+set_option linter.style.haveILetI false
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 set_option backward.isDefEq.respectTransparency.types false
@@ -66,6 +69,305 @@ private theorem mate_whisker
   rw [← reassoc_of% ht]
   slice_lhs 4 5 => rw [← R₂.map_comp, ← b.naturality, R₂.map_comp]
 
+
+
+
+section DerivedMaps
+
+variable {A₀ B₁ B₂ C₀ : Type*}
+  [Category A₀] [Category B₁] [Category B₂] [Category C₀]
+  [Abelian A₀] [Abelian B₁] [Abelian B₂] [Abelian C₀]
+  [HasDerivedCategory A₀] [HasDerivedCategory B₁]
+  [HasDerivedCategory B₂] [HasDerivedCategory C₀]
+  (F₁ : A₀ ⥤ B₁) (F₂ : B₁ ⥤ C₀) (G₁ : A₀ ⥤ B₂) (G₂ : B₂ ⥤ C₀)
+  [F₁.Additive] [F₂.Additive] [G₁.Additive] [G₂.Additive]
+  [PreservesFiniteLimits F₁] [PreservesFiniteColimits F₁]
+  [PreservesFiniteLimits F₂] [PreservesFiniteColimits F₂]
+  [PreservesFiniteLimits G₁] [PreservesFiniteColimits G₁]
+  [PreservesFiniteLimits G₂] [PreservesFiniteColimits G₂]
+
+private def derivedSquare (t : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂) :
+    F₁.mapDerivedCategory ⋙ F₂.mapDerivedCategory ⟶
+      G₁.mapDerivedCategory ⋙ G₂.mapDerivedCategory :=
+  (Functor.mapDerivedCategoryCompIso F₁ F₂).inv ≫
+    Localization.liftNatTrans DerivedCategory.Q
+      (HomologicalComplex.quasiIso A₀ (.up ℤ)) _ _
+      (F₁ ⋙ F₂).mapDerivedCategory (G₁ ⋙ G₂).mapDerivedCategory
+      (Functor.whiskerRight (NatTrans.mapHomologicalComplex t (.up ℤ)) DerivedCategory.Q) ≫
+    (Functor.mapDerivedCategoryCompIso G₁ G₂).hom
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem derivedSquare_fac (t : F₁ ⋙ F₂ ⟶ G₁ ⋙ G₂)
+    (K : CochainComplex A₀ ℤ) :
+    (derivedSquare F₁ F₂ G₁ G₂ t).app (DerivedCategory.Q.obj K) ≫
+        G₂.mapDerivedCategory.map (G₁.mapDerivedCategoryFactors.hom.app K) ≫
+        G₂.mapDerivedCategoryFactors.hom.app ((G₁.mapHomologicalComplex (.up ℤ)).obj K) =
+      F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
+        F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t (.up ℤ)).app K) := by
+  have hF := Functor.mapDerivedCategoryCompIso_hom_app_factors F₁ F₂ K
+  have hG := Functor.mapDerivedCategoryCompIso_hom_app_factors G₁ G₂ K
+  dsimp only [derivedSquare, NatTrans.comp_app]
+  rw [Category.assoc, Category.assoc, hG, Localization.liftNatTrans_app]
+  change _ ≫ (_ ≫ _ ≫ (G₁ ⋙ G₂).mapDerivedCategoryFactors.inv.app K) ≫
+      (G₁ ⋙ G₂).mapDerivedCategoryFactors.hom.app K = _
+  simp only [Category.assoc, Iso.inv_hom_id_app, Category.comp_id]
+  change (Functor.mapDerivedCategoryCompIso F₁ F₂).inv.app (DerivedCategory.Q.obj K) ≫
+    (F₁ ⋙ F₂).mapDerivedCategoryFactors.hom.app K ≫
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t (.up ℤ)).app K) = _
+  rw [← hF]
+  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+
+variable (F₀ : A₀ ⥤ C₀) [F₀.Additive]
+  [PreservesFiniteLimits F₀] [PreservesFiniteColimits F₀]
+
+private theorem derivedTriangle_fac (e : F₀ ≅ F₁ ⋙ F₂) (K : CochainComplex A₀ ℤ) :
+    (Functor.mapDerivedCategoryNatIso e ≪≫
+        Functor.mapDerivedCategoryCompIso F₁ F₂).hom.app (DerivedCategory.Q.obj K) ≫
+        F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
+        F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) =
+      F₀.mapDerivedCategoryFactors.hom.app K ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
+  dsimp only [Iso.trans_hom, NatTrans.comp_app]
+  rw [Category.assoc, Functor.mapDerivedCategoryCompIso_hom_app_factors,
+    Functor.mapDerivedCategoryNatIso_fac]
+
+private theorem derivedComp_fac (e : F₁ ⋙ F₂ ≅ F₀) (K : CochainComplex A₀ ℤ) :
+    ((Functor.mapDerivedCategoryCompIso F₁ F₂).symm ≪≫
+        Functor.mapDerivedCategoryNatIso e).hom.app (DerivedCategory.Q.obj K) ≫
+        F₀.mapDerivedCategoryFactors.hom.app K =
+      F₂.mapDerivedCategory.map (F₁.mapDerivedCategoryFactors.hom.app K) ≫
+        F₂.mapDerivedCategoryFactors.hom.app ((F₁.mapHomologicalComplex (.up ℤ)).obj K) ≫
+        DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app K) := by
+  dsimp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app]
+  rw [Category.assoc, Functor.mapDerivedCategoryNatIso_fac,
+    ← Functor.mapDerivedCategoryCompIso_hom_app_factors F₁ F₂ K]
+  simp only [← Category.assoc, Iso.inv_hom_id_app, Category.id_comp]
+
+end DerivedMaps
+
+attribute [local irreducible] derivedSquare Functor.mapDerivedCategoryCompIso
+  Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategory DerivedCategory.Q
+
+section DerivedPasting
+
+variable {A₀ : Type*} [Category A₀] [Abelian A₀] [HasDerivedCategory A₀]
+variable {B₀ : Type*} [Category B₀] [Abelian B₀] [HasDerivedCategory B₀]
+variable {C₀ : Type*} [Category C₀] [Abelian C₀] [HasDerivedCategory C₀]
+variable {D₀ : Type*} [Category D₀] [Abelian D₀] [HasDerivedCategory D₀]
+variable {E₀ : Type*} [Category E₀] [Abelian E₀] [HasDerivedCategory E₀]
+variable {F₀ : Type*} [Category F₀] [Abelian F₀] [HasDerivedCategory F₀]
+variable (J₀ : A₀ ⥤ B₀) (J₁ : C₀ ⥤ D₀) (J₂ : E₀ ⥤ F₀)
+  (P₁ : D₀ ⥤ B₀) (P₂ : F₀ ⥤ D₀) (R₁ : C₀ ⥤ A₀) (R₂ : E₀ ⥤ C₀)
+  (P : F₀ ⥤ B₀) (R : E₀ ⥤ A₀)
+variable [J₀.Additive] [PreservesFiniteLimits J₀] [PreservesFiniteColimits J₀]
+variable [J₁.Additive] [PreservesFiniteLimits J₁] [PreservesFiniteColimits J₁]
+variable [J₂.Additive] [PreservesFiniteLimits J₂] [PreservesFiniteColimits J₂]
+variable [P₁.Additive] [PreservesFiniteLimits P₁] [PreservesFiniteColimits P₁]
+variable [P₂.Additive] [PreservesFiniteLimits P₂] [PreservesFiniteColimits P₂]
+variable [R₁.Additive] [PreservesFiniteLimits R₁] [PreservesFiniteColimits R₁]
+variable [R₂.Additive] [PreservesFiniteLimits R₂] [PreservesFiniteColimits R₂]
+variable [P.Additive] [PreservesFiniteLimits P] [PreservesFiniteColimits P]
+variable [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+
+private theorem derivedSquare_vertical
+    (ep : P ≅ P₂ ⋙ P₁) (er : R ≅ R₂ ⋙ R₁)
+    (t₁ : J₁ ⋙ P₁ ⟶ R₁ ⋙ J₀) (t₂ : J₂ ⋙ P₂ ⟶ R₂ ⋙ J₁)
+    (t : J₂ ⋙ P ⟶ R ⋙ J₀)
+    (ht : ∀ X, ep.hom.app (J₂.obj X) ≫ P₁.map (t₂.app X) ≫ t₁.app (R₂.obj X) =
+      t.app X ≫ J₀.map (er.hom.app X)) (N : DerivedCategory E₀) :
+    (Functor.mapDerivedCategoryNatIso ep ≪≫
+        Functor.mapDerivedCategoryCompIso P₂ P₁).hom.app (J₂.mapDerivedCategory.obj N) ≫
+        P₁.mapDerivedCategory.map ((derivedSquare J₂ P₂ R₂ J₁ t₂).app N) ≫
+        (derivedSquare J₁ P₁ R₁ J₀ t₁).app (R₂.mapDerivedCategory.obj N) =
+      (derivedSquare J₂ P R J₀ t).app N ≫ J₀.mapDerivedCategory.map
+        ((Functor.mapDerivedCategoryNatIso er ≪≫
+          Functor.mapDerivedCategoryCompIso R₂ R₁).hom.app N) := by
+  let ep' := Functor.mapDerivedCategoryNatIso ep ≪≫ Functor.mapDerivedCategoryCompIso P₂ P₁
+  let er' := Functor.mapDerivedCategoryNatIso er ≪≫ Functor.mapDerivedCategoryCompIso R₂ R₁
+  let a₁ := derivedSquare J₁ P₁ R₁ J₀ t₁
+  let a₂ := derivedSquare J₂ P₂ R₂ J₁ t₂
+  let a := derivedSquare J₂ P R J₀ t
+  let L : J₂.mapDerivedCategory ⋙ P.mapDerivedCategory ⟶
+      R₂.mapDerivedCategory ⋙ R₁.mapDerivedCategory ⋙ J₀.mapDerivedCategory :=
+    Functor.whiskerLeft J₂.mapDerivedCategory ep'.hom ≫
+      Functor.whiskerRight a₂ P₁.mapDerivedCategory ≫
+      Functor.whiskerLeft R₂.mapDerivedCategory a₁
+  let H : J₂.mapDerivedCategory ⋙ P.mapDerivedCategory ⟶
+      R₂.mapDerivedCategory ⋙ R₁.mapDerivedCategory ⋙ J₀.mapDerivedCategory :=
+    a ≫ Functor.whiskerRight er'.hom J₀.mapDerivedCategory
+  suffices he : L = H from congr_app he N
+  refine Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso E₀ (.up ℤ)) (fun K ↦ ?_)
+  dsimp only [L, H, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app]
+  let K₂ := (R₂.mapHomologicalComplex (.up ℤ)).obj K
+  let K₁ := (R₁.mapHomologicalComplex (.up ℤ)).obj K₂
+  rw [← cancel_mono (J₀.mapDerivedCategory.map
+    (R₁.mapDerivedCategory.map (R₂.mapDerivedCategoryFactors.hom.app K)) ≫
+    J₀.mapDerivedCategory.map (R₁.mapDerivedCategoryFactors.hom.app K₂) ≫
+    J₀.mapDerivedCategoryFactors.hom.app K₁)]
+  simp only [Category.assoc]
+  have n₁ := a₁.naturality (R₂.mapDerivedCategoryFactors.hom.app K)
+  dsimp only [Functor.comp_map] at n₁
+  rw [← reassoc_of% n₁, derivedSquare_fac J₁ P₁ R₁ J₀ t₁ K₂]
+  have h₂fac := congrArg P₁.mapDerivedCategory.map (derivedSquare_fac J₂ P₂ R₂ J₁ t₂ K)
+  simp only [Functor.map_comp] at h₂fac
+  rw [reassoc_of% h₂fac]
+  have n₂ := P₁.mapDerivedCategoryFactors.hom.naturality
+    ((NatTrans.mapHomologicalComplex t₂ (.up ℤ)).app K)
+  dsimp only [Functor.comp_map] at n₂
+  change P₁.mapDerivedCategory.map
+      (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t₂ (.up ℤ)).app K)) ≫
+      P₁.mapDerivedCategoryFactors.hom.app ((J₁.mapHomologicalComplex (.up ℤ)).obj K₂) =
+    P₁.mapDerivedCategoryFactors.hom.app
+      ((P₂.mapHomologicalComplex (.up ℤ)).obj ((J₂.mapHomologicalComplex (.up ℤ)).obj K)) ≫
+      DerivedCategory.Q.map ((P₁.mapHomologicalComplex (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex t₂ (.up ℤ)).app K)) at n₂
+  rw [reassoc_of% n₂]
+  have n₃ := ep'.hom.naturality (J₂.mapDerivedCategoryFactors.hom.app K)
+  dsimp only [Functor.comp_map] at n₃
+  rw [← reassoc_of% n₃, reassoc_of% (derivedTriangle_fac P₂ P₁ P ep _)]
+  have hr' := congrArg J₀.mapDerivedCategory.map (derivedTriangle_fac R₂ R₁ R er K)
+  simp only [Functor.map_comp] at hr'
+  rw [reassoc_of% hr']
+  have n₄ := J₀.mapDerivedCategoryFactors.hom.naturality
+    ((NatTrans.mapHomologicalComplex er.hom (.up ℤ)).app K)
+  dsimp only [Functor.comp_map] at n₄
+  change J₀.mapDerivedCategory.map (DerivedCategory.Q.map
+      ((NatTrans.mapHomologicalComplex er.hom (.up ℤ)).app K)) ≫
+      J₀.mapDerivedCategoryFactors.hom.app K₁ =
+    J₀.mapDerivedCategoryFactors.hom.app ((R.mapHomologicalComplex (.up ℤ)).obj K) ≫
+      DerivedCategory.Q.map ((J₀.mapHomologicalComplex (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex er.hom (.up ℤ)).app K)) at n₄
+  rw [n₄, reassoc_of% (derivedSquare_fac J₂ P R J₀ t K)]
+  simp only [← DerivedCategory.Q.map_comp]
+  have hc : (NatTrans.mapHomologicalComplex ep.hom (.up ℤ)).app
+        ((J₂.mapHomologicalComplex (.up ℤ)).obj K) ≫
+      (P₁.mapHomologicalComplex (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex t₂ (.up ℤ)).app K) ≫
+      (NatTrans.mapHomologicalComplex t₁ (.up ℤ)).app K₂ =
+    (NatTrans.mapHomologicalComplex t (.up ℤ)).app K ≫
+      (J₀.mapHomologicalComplex (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex er.hom (.up ℤ)).app K) := by
+    ext n
+    change ep.hom.app (J₂.obj (K.X n)) ≫ P₁.map (t₂.app (K.X n)) ≫
+      t₁.app (R₂.obj (K.X n)) = t.app (K.X n) ≫ J₀.map (er.hom.app (K.X n))
+    exact ht (K.X n)
+  exact congrArg (fun f ↦ P.mapDerivedCategory.map (J₂.mapDerivedCategoryFactors.hom.app K) ≫
+    P.mapDerivedCategoryFactors.hom.app ((J₂.mapHomologicalComplex (.up ℤ)).obj K) ≫
+    DerivedCategory.Q.map f) hc
+
+end DerivedPasting
+
+section DerivedHorizontal
+
+variable {A₀ : Type*} [Category A₀] [Abelian A₀] [HasDerivedCategory A₀]
+variable {B₀ : Type*} [Category B₀] [Abelian B₀] [HasDerivedCategory B₀]
+variable {C₀ : Type*} [Category C₀] [Abelian C₀] [HasDerivedCategory C₀]
+variable {D₀ : Type*} [Category D₀] [Abelian D₀] [HasDerivedCategory D₀]
+variable {E₀ : Type*} [Category E₀] [Abelian E₀] [HasDerivedCategory E₀]
+variable {F₀ : Type*} [Category F₀] [Abelian F₀] [HasDerivedCategory F₀]
+variable (K : A₀ ⥤ B₀) (L : B₀ ⥤ E₀) (I : C₀ ⥤ D₀) (J : D₀ ⥤ F₀)
+  (R : C₀ ⥤ A₀) (P : D₀ ⥤ B₀) (Q : F₀ ⥤ E₀) (I' : C₀ ⥤ F₀) (K' : A₀ ⥤ E₀)
+variable [K.Additive] [PreservesFiniteLimits K] [PreservesFiniteColimits K]
+variable [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+variable [I.Additive] [PreservesFiniteLimits I] [PreservesFiniteColimits I]
+variable [J.Additive] [PreservesFiniteLimits J] [PreservesFiniteColimits J]
+variable [R.Additive] [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+variable [P.Additive] [PreservesFiniteLimits P] [PreservesFiniteColimits P]
+variable [Q.Additive] [PreservesFiniteLimits Q] [PreservesFiniteColimits Q]
+variable [I'.Additive] [PreservesFiniteLimits I'] [PreservesFiniteColimits I']
+variable [K'.Additive] [PreservesFiniteLimits K'] [PreservesFiniteColimits K']
+
+private theorem derivedSquare_horizontal
+    (ei : I ⋙ J ≅ I') (ek : K ⋙ L ≅ K')
+    (t₁ : I ⋙ P ⟶ R ⋙ K) (t₂ : J ⋙ Q ⟶ P ⋙ L) (t : I' ⋙ Q ⟶ R ⋙ K')
+    (ht : ∀ X, Q.map (ei.hom.app X) ≫ t.app X =
+      t₂.app (I.obj X) ≫ L.map (t₁.app X) ≫ ek.hom.app (R.obj X))
+    (N : DerivedCategory C₀) :
+    Q.mapDerivedCategory.map (((Functor.mapDerivedCategoryCompIso I J).symm ≪≫
+      Functor.mapDerivedCategoryNatIso ei).hom.app N) ≫
+        (derivedSquare I' Q R K' t).app N =
+      (derivedSquare J Q P L t₂).app (I.mapDerivedCategory.obj N) ≫
+        L.mapDerivedCategory.map ((derivedSquare I P R K t₁).app N) ≫
+        ((Functor.mapDerivedCategoryCompIso K L).symm ≪≫
+          Functor.mapDerivedCategoryNatIso ek).hom.app (R.mapDerivedCategory.obj N) := by
+  let ei' := (Functor.mapDerivedCategoryCompIso I J).symm ≪≫
+    Functor.mapDerivedCategoryNatIso ei
+  let ek' := (Functor.mapDerivedCategoryCompIso K L).symm ≪≫
+    Functor.mapDerivedCategoryNatIso ek
+  let a₁ := derivedSquare I P R K t₁
+  let a₂ := derivedSquare J Q P L t₂
+  let a := derivedSquare I' Q R K' t
+  let lhs : I.mapDerivedCategory ⋙ J.mapDerivedCategory ⋙ Q.mapDerivedCategory ⟶
+      R.mapDerivedCategory ⋙ K'.mapDerivedCategory :=
+    Functor.whiskerRight ei'.hom Q.mapDerivedCategory ≫ a
+  let rhs : I.mapDerivedCategory ⋙ J.mapDerivedCategory ⋙ Q.mapDerivedCategory ⟶
+      R.mapDerivedCategory ⋙ K'.mapDerivedCategory :=
+    Functor.whiskerLeft I.mapDerivedCategory a₂ ≫
+      Functor.whiskerRight a₁ L.mapDerivedCategory ≫
+      Functor.whiskerLeft R.mapDerivedCategory ek'.hom
+  suffices he : lhs = rhs from congr_app he N
+  refine Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso C₀ (.up ℤ)) (fun X ↦ ?_)
+  dsimp only [lhs, rhs, NatTrans.comp_app, Functor.whiskerLeft_app,
+    Functor.whiskerRight_app]
+  let XR := (R.mapHomologicalComplex (.up ℤ)).obj X
+  let XI := (I.mapHomologicalComplex (.up ℤ)).obj X
+  rw [← cancel_mono (K'.mapDerivedCategory.map (R.mapDerivedCategoryFactors.hom.app X) ≫
+    K'.mapDerivedCategoryFactors.hom.app XR)]
+  simp only [Category.assoc]
+  have nk := ek'.hom.naturality (R.mapDerivedCategoryFactors.hom.app X)
+  dsimp only [Functor.comp_map] at nk
+  rw [← reassoc_of% nk, derivedComp_fac K L K' ek XR]
+  have h₁ := congrArg L.mapDerivedCategory.map (derivedSquare_fac I P R K t₁ X)
+  simp only [Functor.map_comp] at h₁
+  rw [reassoc_of% h₁]
+  have n₁ := L.mapDerivedCategoryFactors.hom.naturality
+    ((NatTrans.mapHomologicalComplex t₁ (.up ℤ)).app X)
+  dsimp only [Functor.comp_map] at n₁
+  change L.mapDerivedCategory.map
+      (DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex t₁ (.up ℤ)).app X)) ≫
+      L.mapDerivedCategoryFactors.hom.app ((K.mapHomologicalComplex (.up ℤ)).obj XR) =
+    L.mapDerivedCategoryFactors.hom.app ((P.mapHomologicalComplex (.up ℤ)).obj XI) ≫
+      DerivedCategory.Q.map ((L.mapHomologicalComplex (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex t₁ (.up ℤ)).app X)) at n₁
+  rw [reassoc_of% n₁]
+  have n₂ := a₂.naturality (I.mapDerivedCategoryFactors.hom.app X)
+  dsimp only [Functor.comp_map] at n₂
+  rw [← reassoc_of% n₂, reassoc_of% (derivedSquare_fac J Q P L t₂ XI),
+    derivedSquare_fac I' Q R K' t X]
+  have hi := congrArg Q.mapDerivedCategory.map (derivedComp_fac I J I' ei X)
+  simp only [Functor.map_comp] at hi
+  rw [reassoc_of% hi]
+  have n₃ := Q.mapDerivedCategoryFactors.hom.naturality
+    ((NatTrans.mapHomologicalComplex ei.hom (.up ℤ)).app X)
+  dsimp only [Functor.comp_map] at n₃
+  erw [reassoc_of% n₃]
+  simp only [← DerivedCategory.Q.map_comp]
+  have hc : (Q.mapHomologicalComplex (.up ℤ)).map
+      ((NatTrans.mapHomologicalComplex ei.hom (.up ℤ)).app X) ≫
+      (NatTrans.mapHomologicalComplex t (.up ℤ)).app X =
+    (NatTrans.mapHomologicalComplex t₂ (.up ℤ)).app XI ≫
+      (L.mapHomologicalComplex (.up ℤ)).map
+        ((NatTrans.mapHomologicalComplex t₁ (.up ℤ)).app X) ≫
+      (NatTrans.mapHomologicalComplex ek.hom (.up ℤ)).app XR := by
+    ext n
+    change Q.map (ei.hom.app (X.X n)) ≫ t.app (X.X n) =
+      t₂.app (I.obj (X.X n)) ≫ L.map (t₁.app (X.X n)) ≫ ek.hom.app (R.obj (X.X n))
+    exact ht (X.X n)
+  exact congrArg (fun f ↦ Q.mapDerivedCategory.map
+    (J.mapDerivedCategory.map (I.mapDerivedCategoryFactors.hom.app X)) ≫
+    Q.mapDerivedCategory.map (J.mapDerivedCategoryFactors.hom.app XI) ≫
+    Q.mapDerivedCategoryFactors.hom.app ((J.mapHomologicalComplex (.up ℤ)).obj XI) ≫
+    DerivedCategory.Q.map f) hc
+
+end DerivedHorizontal
+
+
+attribute [local irreducible] moduleAlpha moduleGComp moduleJComp
+
 /-- The system clopen projection is identity on its image and zero on the complement.
 Source: Stacks 09AE; node proof Step 4
 (blueprint: lem-sp-varying-ring-proper-open-pasting).
@@ -80,7 +382,40 @@ theorem modulePi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
     (pull R φ s).map ((modulePi R φ s).app M) =
         (moduleJAdj R φ s).unit.app ((pull R φ s).obj M) ∧
       (pull R φ c).map ((modulePi R φ s).app M) = 0 := by
-  sorry
+  refine ⟨?_, ?_⟩
+  · have hu := moduleJAdj_unit_isIso R φ s
+    letI _inst : IsIso (moduleOpenToP R φ s) := moduleOpenToP_isIso R φ s
+    let t : Adjunction.Triple (extension R φ s) (pull R φ s) (push R φ s) :=
+      ⟨moduleJAdj R φ s, moduleAdj R φ s⟩
+    let ff := (moduleJAdj R φ s).fullyFaithfulLOfIsIsoUnit
+    have hfull := ff.full
+    have hfaith := ff.faithful
+    have he : moduleOpenToP R φ s = t.leftToRight := by
+      ext N
+      simp [moduleOpenToP, push, t, Adjunction.Triple.leftToRight]
+    simp only [modulePi, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.map_comp]
+    apply (cancel_mono ((pull R φ s).map ((moduleOpenToP R φ s).app
+      ((pull R φ s).obj M)))).1
+    rw [← Functor.map_comp]
+    rw [← Functor.map_comp]
+    simp only [Category.assoc]
+    have hh := (asIso (moduleOpenToP R φ s)).inv_hom_id_app
+      ((pull R φ s).obj M)
+    rw [show (inv (moduleOpenToP R φ s)).app ((pull R φ s).obj M) ≫
+        (moduleOpenToP R φ s).app ((pull R φ s).obj M) = 𝟙 _ from hh]
+    rw [he]
+    simp only [Functor.map_comp]
+    rw [t.leftToRight_app_obj]
+    change (pull R φ s).map ((moduleAdj R φ s).unit.app M) ≫
+        (pull R φ s).map (𝟙 _) =
+      (moduleJAdj R φ s).unit.app _ ≫
+        (pull R φ s).map ((moduleJAdj R φ s).counit.app M ≫
+          (moduleAdj R φ s).unit.app M)
+    rw [Functor.map_comp, ← Category.assoc,
+      (moduleJAdj R φ s).right_triangle_components]
+    simp
+  · exact modulePi_complement_zero R φ s c hc M
 
 /-- Intrinsic moduleAlpha agrees with vertical pasting on every input.
 Source: Stacks, Tag 0F7C and blueprint, fifth proof step
@@ -145,7 +480,15 @@ theorem alpha_vertical {A C E B₀ D F : Scheme.{u}}
         (alpha R φ k r₁ p₁ i h₁).app ((G R φ r₂).obj N) =
       (alpha R φ k (r₁ ≫ r₂) (p₁ ≫ p₂) j h).app N ≫
         (J R φ k).map ((gComp R φ r₁ r₂).hom.app N) := by
-  sorry
+  simpa only [alpha, gComp, derivedSquare] using
+    derivedSquare_vertical
+      (extension R φ k) (extension R φ i) (extension R φ j)
+      (pull R φ p₁) (pull R φ p₂) (pull R φ r₁) (pull R φ r₂)
+      (pull R φ (p₁ ≫ p₂)) (pull R φ (r₁ ≫ r₂))
+      (moduleGComp R φ p₁ p₂) (moduleGComp R φ r₁ r₂)
+      (moduleAlpha R φ k r₁ p₁ i h₁) (moduleAlpha R φ i r₂ p₂ j h₂)
+      (moduleAlpha R φ k (r₁ ≫ r₂) (p₁ ≫ p₂) j h)
+      (fun X ↦ moduleAlpha_vertical R φ k i j r₁ r₂ p₁ p₂ h₁ h₂ h X) N
 
 /-- Intrinsic alpha agrees with horizontal pasting on every input.
 Source: Stacks, Tag 0F7D and blueprint, fifth proof step
@@ -166,7 +509,15 @@ theorem alpha_horizontal {A C E B₀ D F : Scheme.{u}}
       (alpha R φ l p q j h₂).app ((J R φ i).obj N) ≫
         (J R φ l).map ((alpha R φ k r p i h₁).app N) ≫
         (jComp R φ k l).hom.app ((G R φ r).obj N) := by
-  sorry
+  simpa only [alpha, jComp, derivedSquare] using
+    derivedSquare_horizontal
+      (extension R φ k) (extension R φ l) (extension R φ i) (extension R φ j)
+      (pull R φ r) (pull R φ p) (pull R φ q)
+      (extension R φ (i ≫ j)) (extension R φ (k ≫ l))
+      (moduleJComp R φ i j) (moduleJComp R φ k l)
+      (moduleAlpha R φ k r p i h₁) (moduleAlpha R φ l p q j h₂)
+      (moduleAlpha R φ (k ≫ l) r q (i ≫ j) h)
+      (fun X ↦ moduleAlpha_horizontal R φ k l i j r p q h₁ h₂ h X) N
 
 /-- Both normalized proper/open mate-pasting laws, as system transformations.
 Source: Stacks 0F7C, 0F7D and the varying-ring extension of the local-pairs argument
