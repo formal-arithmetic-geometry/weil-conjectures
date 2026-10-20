@@ -408,6 +408,38 @@ theorem proEtaleProjectionFormula_baseChange
       proEtaleProjectionFormulaMate f' RY' RX' cf' aY' aX'
         ((proEtaleRingDerivedPullback g' RX RX' cg').obj K)
         ((proEtaleRingDerivedPullback g RY RY' cg).obj Q)  := by
-  sorry
+  let theta := proEtaleAmbientRingedPullbackComparison sq RX RY RX' RY' cf cg cg' cf' hcoeff
+  have hc : ∀ P Q : DerivedCategory (proEtaleRingModules Y RY),
+      theta.hom.app (aY.tensor.obj (P, Q)) ≫
+          (proEtaleRingDerivedPullback g' RX RX' cg').map
+            ((proEtaleCanonicalTensorComparison f RY RX cf aY aX).hom.app (P, Q)) ≫
+          (proEtaleCanonicalTensorComparison g' RX RX' cg' aX aX').hom.app
+            ((proEtaleRingDerivedPullback f RY RX cf).obj P,
+              (proEtaleRingDerivedPullback f RY RX cf).obj Q) =
+        (proEtaleRingDerivedPullback f' RY' RX' cf').map
+            ((proEtaleCanonicalTensorComparison g RY RY' cg aY aY').hom.app (P, Q)) ≫
+          (proEtaleCanonicalTensorComparison f' RY' RX' cf' aY' aX').hom.app
+            ((proEtaleRingDerivedPullback g RY RY' cg).obj P,
+              (proEtaleRingDerivedPullback g RY RY' cg).obj Q) ≫
+          aX'.tensor.map (Prod.mkHom (theta.hom.app P) (theta.hom.app Q)) := by
+    intro P Q
+    exact proEtaleProjectionFormula_tensor_coherence sq RX RY RX' RY' cf cg cg' cf'
+      hcoeff aY aX aY' aX' P Q
+  let adjF := proEtaleRingDerivedAdjunction f RY RX cf
+  let adjK := proEtaleRingDerivedAdjunction f' RY' RX' cf'
+  let tF := proEtaleCanonicalTensorComparison f RY RX cf aY aX
+  let tG := proEtaleCanonicalTensorComparison g RY RY' cg aY aY'
+  let tH := proEtaleCanonicalTensorComparison g' RX RX' cg' aX aX'
+  let tK := proEtaleCanonicalTensorComparison f' RY' RX' cf' aY' aX'
+  have hmain := CategoryTheory.projectionMate_square_of_tensor_coherence_projection
+    adjF adjK aY.tensor aX.tensor aY'.tensor aX'.tensor
+    tF tG.hom tH.hom tK theta hc K Q
+  rw [show proEtaleAmbientRingedExchange sq RX RY RX' RY' cf cg cg' cf' hcoeff =
+      (mateEquiv (proEtaleRingDerivedAdjunction f RY RX cf)
+        (proEtaleRingDerivedAdjunction f' RY' RX' cf')
+        (TwoSquare.mk _ _ _ _ theta.hom)).natTrans from rfl]
+  change (proEtaleRingDerivedPullback g RY RY' cg).map
+      (derivedProjectionFormulaMate _ _ _ _ _ _ K Q) ≫ _ ≫ _ = _
+  exact hmain
 
 end AlgebraicGeometry.Scheme
