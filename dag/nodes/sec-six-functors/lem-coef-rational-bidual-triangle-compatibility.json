@@ -401,12 +401,12 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q108-1e920803b (reviewer sub-agent of L); spot-checked: I read the whole item: the statement, all 13 steps, every cited statement, and the proofs of the cone, restriction and duality-map nodes. I also read Stacks 08JB/08JC/0A97 and the master blueprint ancestor, proof paragraph 3. Every sign was recomputed by hand. Step 2: both differentials of the curry c(g)(x⊗y)=g(x)(y) agree, and it matches the duality-map node's uncurrying. Step 3: d b_E = b_E d. Step 4: the Koszul exchange is a chain map. Step 5: T(r)b_P is the curry of evaluation after symmetry. Step 6: χ = (−1)^{p+r} including the leading minus, which exactness against the cone triangle (last arrow −p) requires. Step 7: χ b_{E[1]} = b_E[1], the exponents differing by 2p. Step 9: Hom complexes restrict componentwise, matching 08JB and the restriction node, and j*I is K-injective through the exact j_! adjunction. Step 10: change of K-injective target and the connecting square check out. Step 11: F is R-linear on fractions. Step 12: T[1/s] is triangulated by the localization lemma, and F̄, d̄, ψ̄ are well defined. Step 13: two-out-of-three applies with all its hypotheses met. Edge cases checked: zero complex, O[0], characteristic 2, s nilpotent, and a non-reflexive vector space; no invertibility is claimed. There are no new nodes, the statement is unchanged, and the search over bidual, double-dual, evaluation and two-out-of-three nodes found no duplicate. The node is not a target, so the base-change check does not apply, and no SGA source is cited. One fault, C8/route: lem-sfb-ringed-site-duality-maps (unit sk-thm-sf-ctf-stability, outside the route, not Lean-closed) is used in steps 3, 5 and 10 without a declaration. The fixes file for the item adds that split_report.tool_uses entry and changes nothing else. I accept all 12 declared tool_uses plus this one; most of the declared ones are in fact inside the route, which is harmless.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-17",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "NT-stage2-Codex-641b1ed9b",
-  "group": "Q58",
+  "reviewer": "NT-stage2-cc-70b7cd2b7",
+  "group": "NC",
   "result": "pass",
-  "note": "Checked all statement clauses, dependencies, canonical maps, signs, universes, edge cases, docstrings, and report sections. scompile.py sandbox and library confirmation passed without diagnostics. Repository unchanged."
+  "note": "Clause-by-clause match. dual/bidual/evaluation are the recorded derived internal Hom into O[0] and ringedSiteBidual. signedShift = −H(sourceShift X 1).hom ≫ sourceShift(dual X)(−1).inv is χ with the leading minus; the sourceShift LeftFormula sign (s*k).negOnePow was checked. TriangleCompatibility gives IsTriangulated, NatTrans.CommShift, the triangle morphism with all three squares, shift closure for all n and all three 2-of-3 cases, with no invertibility claimed. Slice: mapDerivedCategory of the recorded localizedSystemRestriction; h/o/t mirror ringedSiteDualityMaps_restriction; the connecting square follows from beta's CommShift and evaluation square. Scalar: rho/hcentral pin Linear A D; subcategory_linearity proves step 11; scalar_compatibility's structural parameters are exactly the exists_triangulated_scalarLocalization output, and its assuming F linear rather than hcentral is a harmless generalization; the localized CommShift is pinned at every n. H4: RelativeBidualTriangles defines the same dual/bidual/bidualMap at K=O[0], but it, its citers and def-per-ringed-site-bidual-transpose are route-pivot dropped, so the local defs are not a fault. Direct imports hit no dropped-node module. Statement verbatim; node diff is the lean record only; 4 theorem sorries; docstrings with steps; lines ≤100. nt_compile at load ~200: the full file timed out at 60 s (about 10 s CPU, load contention); the three split parts compiled clean in 33–39 s; the delivery records 12.7/16.2 s; land at lower load. Advisory: the report's gate paragraph is stale; proof-plan imports are unused."
  },
  "reviewed_proof": {
   "date": "2026-10-20",
@@ -417,5 +417,34 @@
   "landing": "20261020T141309-L-2033458",
   "kind": "interface",
   "note": "independent cc review: Withdrawal of the unused CoefficientBidualTriangles module (emptied like earlier withdrawn modules; node lean→null only) checked against live: no importers or references, not reachable from Challenge/TargetsCheck (7821 modules), unit realized empty, change record verbatim; compiles"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoefficientBidualTriangleCompatibility",
+  "declaration": "CategoryTheory.CoefficientBidual.compatibility",
+  "declarations": [
+   "CategoryTheory.CoefficientBidual.TriangleCompatibility",
+   "CategoryTheory.CoefficientBidual.ScalarCompatibility",
+   "CategoryTheory.CoefficientBidual.dual",
+   "CategoryTheory.CoefficientBidual.bidual",
+   "CategoryTheory.CoefficientBidual.evaluation",
+   "CategoryTheory.CoefficientBidual.signedShift",
+   "CategoryTheory.CoefficientBidual.compatibility",
+   "CategoryTheory.CoefficientBidual.restriction",
+   "CategoryTheory.CoefficientBidual.restrictionCommShift",
+   "CategoryTheory.CoefficientBidual.restrictionBidualIso",
+   "CategoryTheory.CoefficientBidual.slice_compatibility",
+   "CategoryTheory.CoefficientBidual.coefficientScalar",
+   "CategoryTheory.CoefficientBidual.subcategoryBidual",
+   "CategoryTheory.CoefficientBidual.subcategoryEvaluation",
+   "CategoryTheory.CoefficientBidual.subcategory_linearity",
+   "CategoryTheory.CoefficientBidual.scalar_compatibility"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CoefficientBidualTriangleCompatibility.lean",
+  "statement": "theorem compatibility (M : RingedSiteDualityModel.{c, v, r, w} J R) : ∃ S : (bidual.{c, v, r, w} J R).CommShift ℤ, (∀ X : D.{c, v, r, w} J R, (@Functor.commShiftIso _ _ _ _ (bidual.{c, v, r, w} J R) ℤ _ _ _ S 1).hom.app X = signedShift.{c, v, r, w} J R X) ∧ (fun [_shiftInst : (bidual.{c, v, r, w} J R).CommShift ℤ] ↦ TriangleCompatibility (bidual.{c, v, r, w} J R) (evaluation.{c, v, r, w} J R M)) (_shiftInst := S)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-20",
+  "existing": false,
+  "note": "The declarations compatibility, slice_compatibility, subcategory_linearity and scalar_compatibility together state the complete node. The actual evaluation transpose, signed source comparisons, exact restriction, full subcategory and raw scalar localization are used. Helper predicates expose all three squares, every integer shift, and all three two-out-of-three cases. Scalar structure parameters are exactly the supplied scalar-localization triangulation; linearity follows separately from the central coefficient action."
  }
 }
