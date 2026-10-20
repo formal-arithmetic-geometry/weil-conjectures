@@ -10,7 +10,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 |---|---|---|---|
 | `WeilConjectures.AlgebraicGeometry.Sites.ArtinVanishing.SubalgebraLimit` | 2337 |  | error: WeilConjectures/AlgebraicGeometry/Sites/ArtinVanishing/SubalgebraLimit.lean:38:12: failed to synthesize |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 31, stage 3 167 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 31, stage 3 169 items.
 
 ## Stage 1: nodes to split (0)
 
