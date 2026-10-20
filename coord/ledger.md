@@ -17905,3 +17905,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:20 L: returned deliver/Q6/Sheaf.Paper.FiniteLevelRectangle (reviewer RETURN: (the landing tools, head 2f6d31655) the delivery did not land: lean/Sheaf/Paper/FiniteLevelRectangle.lean changed on she)
 - 12:20 L: returned deliver/Q7/Sheaf.Paper.FiniteLocalizingExceptionalPreservation (reviewer RETURN: (the landing tools, head 7a407b40e) the delivery did not land: lean/Sheaf/Paper/FiniteLocalizingExceptionalPreservation.)
 - 12:20 L: returned deliver/Q9/Sheaf.Paper.IntegralCtfTriangulated (reviewer RETURN: (the landing tools, head f0506b735) the delivery did not land: lean/Sheaf/Paper/IntegralCtfTriangulated.lean changed on )
+- 12:20 L: returned deliver/R1/Sheaf.Paper.AdmissibleVerdierExchange (reviewer RETURN: (the landing tools, head abc79f791) the delivery did not land: lean/Sheaf/Paper/AdmissibleVerdierExchange.lean changed o)
