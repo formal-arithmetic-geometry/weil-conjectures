@@ -27,7 +27,7 @@
    "elementary": false
   },
   {
-   "text": "Apply the proved homotopySingleBaseChangeComparison for the ordinary single-complex exchange calculation. Pre- and postcompose derivedBaseChange_unit_compatibility at M[0], use naturality of the selected left-derived counit and right-derived unit, and localize the ordinary equation. A proved generic category helper rewrites the mapped composites and cancels the hom followed by the inverse of t_g under the single functor and localization. No derived single comparison is inverted.",
+   "text": "Apply the proved homotopySingleBaseChangeComparison for the ordinary single-complex exchange calculation. Pre- and postcompose derivedBaseChange_unit_compatibility at M[0], use naturality of the selected left-derived counit and right-derived unit, and localize the ordinary equation. A proved generic category helper rewrites the mapped composites and cancels the hom followed by the inverse of t_g under the single functor and localization. No derived single comparison is inverted. Reassociation of pre- and postcomposition is proved first for an arbitrary category, then specialized to the pinned scheme functors; the final identification is definitional.",
    "uses": [
     "lem-sc-homotopy-single-base-change-comparison"
    ],
@@ -115,10 +115,11 @@
   "module": "Sheaf.AlgebraicGeometry.CanonicalSingleBaseChangeComparison",
   "file": "lean/Sheaf/AlgebraicGeometry/CanonicalSingleBaseChangeComparison.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.canonicalSingleBaseChangeComparison",
-  "statement": "theorem canonicalSingleBaseChangeComparison\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (p : X' ⟶ X)\n    (h : p ≫ f = f' ≫ g) (M : X.Modules) :\n    (derivedPullback g).map (canonicalSingleDirectImageMap f M) ≫\n      schemeDerivedBaseChangeMap f f' g p h\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M) ≫\n      (schemeDerivedDirectImage f').map (canonicalSinglePullbackMap p M) =\n    canonicalSinglePullbackMap g ((pushforward f).obj M) ≫\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0).map\n        (((Classical.choose (exists_tensorPullbackAdjunction g)).leftAdjointUniq\n          (pullbackPushforwardAdjunction g)).inv.app ((pushforward f).obj M) ≫\n          moduleBaseChangeMap f f' g p h M ≫\n          (pushforward f').map\n            (((Classical.choose (exists_tensorPullbackAdjunction p)).leftAdjointUniq\n              (pullbackPushforwardAdjunction p)).hom.app M)) ≫\n      canonicalSingleDirectImageMap f' ((pullback p).obj M)",
+  "statement": "theorem canonicalSingleBaseChangeComparison\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (p : X' ⟶ X)\n    (h : p ≫ f = f' ≫ g) (M : X.Modules) :\n    (AlgebraicGeometry.derivedPullback.{u, w} g).map (canonicalSingleDirectImageMap.{u, w} f M) ≫\n      schemeDerivedBaseChangeMap f f' g p h\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M) ≫\n      (schemeDerivedDirectImage.{u, w, w} f').map (canonicalSinglePullbackMap.{u, w} p M) =\n    canonicalSinglePullbackMap g ((pushforward f).obj M) ≫\n      (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0).map\n        (((Classical.choose (exists_tensorPullbackAdjunction g)).leftAdjointUniq\n          (pullbackPushforwardAdjunction g)).inv.app ((pushforward f).obj M) ≫\n          moduleBaseChangeMap f f' g p h M ≫\n          (pushforward f').map\n            (((Classical.choose (exists_tensorPullbackAdjunction p)).leftAdjointUniq\n              (pullbackPushforwardAdjunction p)).hom.app M)) ≫\n      canonicalSingleDirectImageMap f' ((pullback p).obj M)",
   "branch": "sheaf-dag",
   "by": "W3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "Restored from the rework quarantine by T2. Explicitly qualify AlgebraicGeometry.derivedPullback to preserve the pinned derived functor after the upstream introduction of Scheme.Modules.derivedPullback. Explicit universes retain the arbitrary shared derived categories. No declaration or dependency is withdrawn. The naturality unit is explicitly typed, and concrete reassociation is handled by a proved private generic-category helper; unnecessary dsimp/convert steps are removed."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -131,13 +132,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S2",
+  "reviewer": "C-2365f",
+  "group": "T2",
   "result": "pass",
-  "landing": "20261013T100118-L-2484206",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T235628-L-1197941",
+  "kind": "proof",
+  "note": "independent cc review: delivered CanonicalSingleBaseChangeComparison.lean vs quarantine copy and live node: only qualification AlgebraicGeometry.derivedPullback.{u,w} plus explicit universes (#check confirms same pinned functor, free u w); proof complete, axioms clean; node lean.statement matches signature; no lean/ importers"
  }
 }
