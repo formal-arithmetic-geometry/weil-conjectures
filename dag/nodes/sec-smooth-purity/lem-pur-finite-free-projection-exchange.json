@@ -26,186 +26,35 @@
  ],
  "proof": [
   {
-   "text": "The coefficient rings are $A_{E,n}$ and $A_{L,en}$; $B$ is finite free over $A$ by [lem-coef-finite-free-extension], so scalar extension is exact. On the etale site, [lem-sf-flat-model] gives bounded flat constructible models, since these finite-type schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. For pro-etale inputs choose etale-origin witnesses by [lem-sf-proetale-constructible-origin]; [lem-sf-comparison-tor-amplitude](ii) gives finite Tor amplitude of the witnesses. Pull back their flat constructible models: flatness follows from [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and constructibility from [lem-sf-proetale-constructible-origin](i). Pullbacks and bounded tensor totals of these models remain flat constructible. A flat $A$-module extended to $B$ is $B$-flat, since tensoring with a $B$-module is its original $A$-tensor; its stalks remain finite. These operations preserve the domains. Open extension preserves them on pro-etale sites by [lem-trf-open-ctf]; on etale sites use flat/K-flat preservation in [lem-coef-etale-open-tensor], and extend a finite constructible stratification by the closed complement, where the extension is zero. Finite dimension by [lem-kun-dimension-finite-type] and [cor-sf-direct-image-ctf-nonproper, cor-sf-direct-image-ctf-proetale] give closure under the separated finite-type direct images used below. Thus $j_!M$ and $j_!(M\\otimes h^*K)$ are legitimate inputs for the proper coefficient comparison. This applies also to the base-changed compactification and to $B=A_{L,en}$.",
+   "text": "Use finite_free_coefficient_extension to show extensionArrow t is finite free. Apply the general finite-free scalar projection lemma to obtain a normalized tensor family and the three projection equations. Apply the finite-free compact scalar lemma for invertibility and coherent refinement, and prove unrestricted comparison naturality directly by naturality of Sites.direct and scalarOpen.",
    "uses": [
     "lem-coef-finite-free-extension",
-    "lem-sf-flat-model",
-    "lem-trf-open-ctf",
-    "lem-kun-dimension-finite-type",
-    "cor-sf-direct-image-ctf-nonproper",
-    "cor-sf-direct-image-ctf-proetale",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-tor-amplitude",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-coef-etale-open-tensor"
+    "lem-pur-finite-free-scalar-projection",
+    "lem-pur-finite-free-compact-scalar",
+    "lem-coef-finite-direct-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
-    "place": "Steps 1 and 3, finite coefficient extension and domains"
-   }
+   "elementary": false
   },
   {
-   "text": "Since $W$ is quasi-compact and quasi-separated, [thm-nagata-compactification] supplies $h=pj$; choose this compactification and its base change. Write $\\chi_p:S Rp_{*,A}\\to Rp_{*,B}S$ for the specified counit transpose. [lem-coef-finite-direct-image] makes $\\chi_p$ a natural $B$-linear isomorphism on the inputs checked in Step 1, on both sites. On the etale site put $q_j:Sj_{!,A}\\cong j_{!,B}S$ as in [lem-coef-etale-open-tensor]. On the pro-etale site apply [lem-sf-open-tensor-normalization] with $g$ the identity of the underlying topos and structural ring map $A\\to B$; its $\\beta$ is the balancing isomorphism $q_j$. Hence\n$$c_h=Rp_{*,B}(q_j)\\,\\chi_p(j_{!,A}-)$$\nis a natural isomorphism for this compactification. The maps are exactly the counit-transpose and open-balancing maps in the item; no quotient coefficient theorem is used.",
+   "text": "Expand compact exchange as proper exchange followed by pushforward of open exchange. Apply scalar_exchange_constituents on the proper pullback square and the open square. Move the open exchange past Sites.direct using its naturality. Substitute the proper coefficient square, then the open coefficient square. Cancel scalarPull.hom followed by scalarPull.inv, and use proper-exchange naturality for scalarOpen. This proves the compact exchange equation; its two constituent equations are the specializations of the same lower result. Combine all six clauses without changing the statement.",
    "uses": [
-    "lem-coef-finite-direct-image",
-    "lem-coef-etale-open-tensor",
-    "lem-sf-open-tensor-normalization",
-    "thm-nagata-compactification"
+    "lem-pur-scalar-exchange-constituents",
+    "lem-coef-finite-direct-image"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
-    "place": "Steps 1 and 3, proper and open finite coefficient comparisons"
-   }
-  },
-  {
-   "text": "Set $\\lambda_u:u_B^*S\\cong S u_A^*$ and $t:S(F\\otimes_A^LG)\\cong SF\\otimes_B^LSG$ to be the canonical balancing maps. [lem-pc-kflat-resolution], [lem-pur-derived-change-of-rings] and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] compute all these maps and the pullback-tensor map $\\mu$ on K-flat representatives. In the square comparing $\\lambda_u$ with $\\mu_u$ and $t$, both routes send $u^{-1}((x\\otimes y)\\otimes b)$ to $(u^{-1}x\\otimes1)\\otimes(u^{-1}y\\otimes b)$. The inverse balanced tensor map sends $(x\\otimes b)\\otimes(y\\otimes b')$ to $(x\\otimes y)\\otimes bb'$. These formulas prove the required tensor/pullback coherence. For two inverse images both scalar/pullback orders send a section to its iterated inverse image tensored with $b$; for two coefficient extensions both orders multiply the coefficient factors. Thus the identity, composition and square cocycles hold. These are equal maps of complexes on each small site and descend to the derived categories by the cited K-flat constructions; they are not tests on cohomology or stalks. The underlying inverse-image composition is the adjunction-compatible comparison of [lem-weil-pbc-site-morphism-composition], applied termwise to these representatives.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-morphism-composition"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 06YY, 07A4: K-flat construction and pullback tensor"
-   }
-  },
-  {
-   "text": "For either site, $\\chi_u$ is the mate of $\\lambda_u$. With $R_{u,R}=Ru_{*,R}$, its defining counit equation is\n$$\\varepsilon_{u,B,SM}\\,u_B^*(\\chi_{u,M})=S(\\varepsilon_{u,A,M})\\lambda_{u,R_{u,A}M}.$$\nThe corresponding unit equation is\n$$\\chi_{u,u_A^*N}S(\\eta_{u,A,N})=R_{u,B}(\\lambda_{u,N})\\eta_{u,B,SN}.$$\nIndeed substitution of the mate formula into the left side, naturality of $\\lambda$ and $\\varepsilon$, and the triangle identity reduce its adjunct to $\\lambda_{u,N}$; this is the adjunct of the right side. Invertibility from Step 2 therefore intertwines the specified adjunctions, including both units and counits. Applying [lem-weil-pbc-mate-pasting] to the composition cocycle in Step 3 proves the composition cocycle for $\\chi$ (also explicitly stated in [lem-coef-finite-direct-image]); the identity case follows from the identity mate. This checks the adjunction hypotheses of the transport lemma, rather than assuming them from existence of an isomorphism.",
-   "uses": [
-    "lem-coef-finite-direct-image",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0E46, 0E47; mate identities for coefficient squares"
-   }
-  },
-  {
-   "text": "Check the open projection map against the scalar balancing map on both sites. In [lem-coef-etale-open-tensor] the etale tensor isomorphism is in the direction opposite to $\\gamma$ of [def-exchange-projection]; invert it. Its inverse adjunct is the identity on restriction. On the pro-etale site [lem-sf-open-tensor-normalization] gives precisely this unit normalization for $\\gamma$ and for $q_j$. In the square comparing $S(\\gamma_A)$ with $\\gamma_B$, use $q_j$ and $t$ to identify sources and targets. Invert the open tensor maps to make the source an object $j_{!,B}H$, and take the $j_{!,B}\\dashv j_B^*$ adjunct. Both composites then become the same balanced reassociation on $U$: $(x\\otimes b)\\otimes(y\\otimes b')\\mapsto(x\\otimes y)\\otimes bb'$, by Step 3. Injectivity of this adjunction bijection proves the open projection square as a $B$-linear derived equality. The same unit normalization shows that $q_j$ intertwines the open units and counits; the etale counit equation is also displayed in [lem-coef-etale-open-tensor]. The final pullback-composition arrow of $\\gamma$ commutes by Step 3. This verifies the previously missing open balancing/tensor coherence.",
-   "uses": [
-    "lem-coef-etale-open-tensor",
-    "lem-sf-open-tensor-normalization",
-    "def-exchange-projection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1, lemma-j-shriek-and-tensor; open-unit normalization"
-   }
-  },
-  {
-   "text": "For the etale open square write $e_R:g_R^*j_{!,R}\\cong j'_{!,R}h_R^*$, with $h:U'\\to U$. [lem-cbc-extension-zero-base-change] states that $e_R^{-1}$ is the $j'_{!,R}\\dashv j_R'^*$ adjunct of $h_R^*\\eta_{j,R}$ followed by the inverse-image square identification; [cor-cbc-derived-extension-zero-base-change] gives its derived normalization. The required scalar equality is\n$$j'_{!,B}(\\lambda_h)e_Bg_B^*(q_j)=q_{j'}S(e_A)\\lambda_g.$$\nInvert $e_A,e_B,q_j,q_{j'}$ and take the open adjunct. Substituting their displayed unit prescriptions, each route is $S(h_A^*\\eta_{j,A})$, followed by $\\lambda$ and the square identification. They agree by Step 3 and the open-unit equation of Step 5. Thus the equality holds in the etale $B$-derived category. On the pro-etale site this exact equation, for the same unit-normalized $q_j$ and $\\lambda$, is the statement of [lem-fix-open-scalar-exchange]. Its hypotheses allow every finite ring map and impose no Tor assumption. The two sites have therefore both been treated with their specified maps.",
-   "uses": [
-    "lem-cbc-extension-zero-base-change",
-    "cor-cbc-derived-extension-zero-base-change",
-    "lem-fix-open-scalar-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03S6, lemma-shriek-base-change; coefficient/unit mate calculation"
-   }
-  },
-  {
-   "text": "For a geometric square with vertical proper $p,p'$ and horizontal $g,\\bar g'$, the proper exchange is the mate of the inverse-image square identification $\\theta$. On the etale site this is exactly the counit/unit formula in [def-cbc-exchange-map]; on the pro-etale site it is the formula in [def-exchange-projection]. Form the cube whose remaining edges are identity topoi with ring map $A\\to B$. Step 3 identifies the two pastings of the left-adjoint faces: both take an iterated inverse image and then tensor its section with the same coefficient. Apply the two pasting rules of [lem-weil-pbc-mate-pasting] to these equal pastings. Their mates give, on each site,\n$$Rp'_{*,B}(\\lambda_{\\bar g'})\\operatorname{Ex}_{*,B}\\,g_B^*(\\chi_p)\n=\\chi_{p'}\\,S(\\operatorname{Ex}_{*,A})\\lambda_g.$$\nBoth sides start at $g_B^*S Rp_{*,A}$ and end at $Rp'_{*,B}S\\bar g_A'^*$. This proves the proper exchange constituent equation for the ordinary etale map as well as the pro-etale map, without extending the scope of a pro-etale-only lemma.",
-   "uses": [
-    "def-cbc-exchange-map",
-    "def-exchange-projection",
-    "lem-weil-pbc-mate-pasting"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47, remark-compose-base-change-horizontal, applied to the coefficient cube"
-   }
-  },
-  {
-   "text": "Apply [lem-sf-pf-coefficient-realization-transport] separately on the etale and pro-etale finite-Tor constructible domains with systems $0=A$, $1=B$, and $T=S$. Step 1 checks closure. The invertible comparisons are $\\lambda^{-1},\\chi,q_j,t$ from Steps 2-3. Step 3 checks tensor/pullback and square/composition coherences; Step 4 checks adjunction units, counits and direct-image cocycles; Steps 5-6 check the canonical open $\\gamma,\\beta$ and open units, with their identity and composition cocycles given by the same restricted identity maps. Thus all the lemma's supplied-data hypotheses hold. Its four map equations give the proper projection and exchange equations and, by its displayed compactification formulas, the two required compact-support equations. Here $c_h=Rp_{*,B}(q_j)\\chi_p$ as in Step 2, so its $b_s,b_t$ are precisely the identifications in the item. [lem-weil-finite-compact-projection-formula] identifies the ordinary etale projection transformation with this proper-counit/open-tensor composite; [def-cbc-exchange-map] identifies its etale exchange. [def-exchange-projection] gives the pro-etale composites. No projection or exchange map has been replaced by an unspecified isomorphism, and no smooth orientation or trace compatibility is used.",
-   "uses": [
-    "lem-sf-pf-coefficient-realization-transport",
-    "lem-weil-finite-compact-projection-formula",
-    "def-cbc-exchange-map",
-    "def-exchange-projection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
-    "place": "Steps 1 and 3: actual constituent compatibilities, applying the conditional structural transport lemma"
-   }
-  },
-  {
-   "text": "It remains to remove the compactification in $c_h$. On etale sites let $u:T_1\\to T_2$ be a proper refinement, with $uj_1=j_2$ and $p_1=p_2u$. Finite-type $k$-schemes, including these compactifications, are Noetherian by [lem-weil-pbc-finite-type-over-noetherian] (a field is Noetherian). Exact finite-free scalar extension preserves bounded-below input. Apply [lem-sf-proper-open-coefficient-refinement] to $M$ and $A\\to B$; its displayed equality is exactly the coefficient square for $\\alpha_u:j_{2!}\\to Ru_*j_{1!}$. Apply $Rp_{2,*,B}$ and use the direct-image composition equation of [lem-coef-finite-direct-image]. This gives the coefficient square for the proper-refinement comparison $Rp_{2,*}\\alpha_u$ of the two compact-support candidates, with $c_h$ on its two sides. By [lem-amb-etale-compact-comparisons] these refinement comparisons are coherent isomorphisms and identify any two compactifications. Hence the etale $c_h$ is independent of proper refinements.",
-   "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-sf-proper-open-coefficient-refinement",
-    "lem-coef-finite-direct-image",
-    "lem-amb-etale-compact-comparisons"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tags 0F7I, lemma-shriek-well-defined, and 0GL6, remark-Rf-lower-shriek-change-of-rings"
-   }
-  },
-  {
-   "text": "For pro-etale refinement independence take an etale-origin witness, available by [lem-sf-proetale-constructible-origin]. Put $N_R=\\nu_R^*$. The canonical square $N_BS_{et}\\cong S_{pro}N_A$ is computed by the K-flat pullback/tensor construction of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]: both orders are inverse image followed by tensor with $B$. The coefficient/site/open cube commutes: take its open adjunct and use the unit equation of [lem-sf-open-comparison-unit-normalization]; both orders are this same unit tensored with $B$. For proper direct image, the site comparison of [lem-weil-pbc-comparison-direct-image-canonical-mate] is a specified counit mate. Its coefficient/site cube commutes by [lem-weil-pbc-mate-pasting], because its left-adjoint cube is the just-verified balancing identity. Finally [lem-sf-proper-open-comparison-site-normalization] identifies the named pro-etale refinement arrow with the site image of the named etale arrow under exactly these open and proper comparisons. Apply $N_B$ to the equality in Step 9 and substitute the three commuting cubes. This gives the coefficient/refinement equality for the actual pro-etale $c_h$, so it too is independent of proper refinements. Naturality carries the result from a witness to its isomorphic input. The fixed-compactification equations of Step 8 now give the asserted equations for these canonical $c_h$ on both sites.",
-   "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-open-comparison-unit-normalization",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-mate-pasting",
-    "lem-sf-proper-open-comparison-site-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
-    "place": "Steps 1 and 3, pro-etale realization of the finite coefficient and refinement comparisons"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "cor-cbc-derived-extension-zero-base-change",
-  "cor-sf-direct-image-ctf-nonproper",
-  "cor-sf-direct-image-ctf-proetale",
-  "def-cbc-exchange-map",
-  "def-exchange-projection",
-  "lem-amb-etale-compact-comparisons",
-  "lem-cbc-extension-zero-base-change",
-  "lem-coef-etale-open-tensor",
-  "lem-coef-finite-direct-image",
   "lem-coef-finite-free-extension",
-  "lem-fix-open-scalar-exchange",
-  "lem-kun-dimension-finite-type",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-sf-comparison-tor-amplitude",
-  "lem-sf-flat-model",
-  "lem-sf-open-comparison-unit-normalization",
-  "lem-sf-open-tensor-normalization",
-  "lem-sf-pf-coefficient-realization-transport",
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-proper-open-coefficient-refinement",
-  "lem-sf-proper-open-comparison-site-normalization",
-  "lem-trf-open-ctf",
-  "lem-weil-finite-compact-projection-formula",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-morphism-composition",
-  "thm-nagata-compactification"
+  "lem-pur-finite-free-scalar-projection",
+  "lem-pur-finite-free-compact-scalar",
+  "lem-coef-finite-direct-image",
+  "lem-pur-scalar-exchange-constituents"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
-  "place": "Steps 1 and 3, expanded using Stacks 07A4, 0E47, 0GL1, 03S6, 0F7I and the specified coefficient and site comparison lemmas"
+  "place": "Steps 1 and 3: specialization of three genuine lower constituent results and explicit exchange pasting"
  },
  "mathlib_searches": [
   {
@@ -416,34 +265,8 @@
   ]
  },
  "tool_uses": [
-  "cor-cbc-derived-extension-zero-base-change",
-  "cor-sf-direct-image-ctf-nonproper",
-  "cor-sf-direct-image-ctf-proetale",
-  "lem-amb-etale-compact-comparisons",
-  "lem-cbc-extension-zero-base-change",
-  "lem-coef-etale-open-tensor",
   "lem-coef-finite-direct-image",
-  "lem-coef-finite-free-extension",
-  "lem-fix-open-scalar-exchange",
-  "lem-kun-dimension-finite-type",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-sf-flat-model",
-  "lem-sf-open-comparison-unit-normalization",
-  "lem-sf-open-tensor-normalization",
-  "lem-sf-pf-coefficient-realization-transport",
-  "lem-sf-proetale-constructible-origin",
-  "lem-sf-proper-open-coefficient-refinement",
-  "lem-sf-proper-open-comparison-site-normalization",
-  "lem-trf-open-ctf",
-  "lem-weil-finite-compact-projection-formula",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-morphism-composition",
-  "lem-sf-comparison-tor-amplitude",
-  "thm-nagata-compactification"
+  "lem-coef-finite-free-extension"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -457,31 +280,6 @@
   "module": "Sheaf.Paper.FiniteFreeProjectionExchange",
   "declaration": "WeilConjectures.FiniteFreeProjectionExchange.finite_free_projection_exchange",
   "declarations": [
-   "WeilConjectures.FiniteFreeProjectionExchange.pull",
-   "WeilConjectures.FiniteFreeProjectionExchange.scalarPull",
-   "WeilConjectures.FiniteFreeProjectionExchange.openExtension",
-   "WeilConjectures.FiniteFreeProjectionExchange.scalarOpen",
-   "WeilConjectures.FiniteFreeProjectionExchange.support",
-   "WeilConjectures.FiniteFreeProjectionExchange.comparison",
-   "WeilConjectures.FiniteFreeProjectionExchange.projection",
-   "WeilConjectures.FiniteFreeProjectionExchange.exchange",
-   "WeilConjectures.FiniteFreeProjectionExchange.TensorFamily",
-   "WeilConjectures.FiniteFreeProjectionExchange.tensorMap",
-   "WeilConjectures.FiniteFreeProjectionExchange.tensorPullTarget",
-   "WeilConjectures.FiniteFreeProjectionExchange.ProjectionEquation",
-   "WeilConjectures.FiniteFreeProjectionExchange.ExchangeEquation",
-   "WeilConjectures.FiniteFreeProjectionExchange.properProjection",
-   "WeilConjectures.FiniteFreeProjectionExchange.properExchange",
-   "WeilConjectures.FiniteFreeProjectionExchange.ProperProjectionEquation",
-   "WeilConjectures.FiniteFreeProjectionExchange.ProperExchangeEquation",
-   "WeilConjectures.FiniteFreeProjectionExchange.openProjection",
-   "WeilConjectures.FiniteFreeProjectionExchange.openExchange",
-   "WeilConjectures.FiniteFreeProjectionExchange.OpenProjectionEquation",
-   "WeilConjectures.FiniteFreeProjectionExchange.OpenExchangeEquation",
-   "WeilConjectures.FiniteFreeProjectionExchange.origin",
-   "WeilConjectures.FiniteFreeProjectionExchange.refinement",
-   "WeilConjectures.FiniteFreeProjectionExchange.RefinementEquation",
-   "WeilConjectures.FiniteFreeProjectionExchange.extensionArrow",
    "WeilConjectures.FiniteFreeProjectionExchange.finite_free_projection_exchange"
   ],
   "file": "lean/Sheaf/Paper/FiniteFreeProjectionExchange.lean",
@@ -499,5 +297,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Node vs Lean matched clause by clause: A=O_E/ϖ_E^n, B=O_L/ϖ_E^n O_L via Stage/baseStage/extensionArrow (n:ℕ+, ramified allowed); both sites via pro:Bool with Sites.Ctf; comparison = Sites.direct (counit-pinned ∃! choose) then Rp_* of the canonical open balancing (étale openIso, pro-étale leftAdjointUniq), no arbitrary map; IsIso, naturality, RefinementEquation for any two compactifications, Projection/Exchange equations and the four constituent equations with correct orientations; ∃μ TensorFamily is fixed by NormalizedTensor (HEq to published étale tensorIso / representative balancing as in landed lem-coef-finite-free-extension), not an unnormalized existential. Edge cases E=L, n=1, ramified e, empty schemes, identity refinements, arbitrary g covered; no extra hypotheses; universes as in deps. No hollow defs, one sorry theorem with 10-step docstring, source/blueprint docstrings, statement verbatim, all 15 dep records identical to side-live. nt_compile --json clean in 16.7 s at load ~68. Advisories: unbounded vs D+ étale exchange decl (same construction); pre-existing compactSupportMap/scalarMate vs finiteCoefficientDirectImageMap duplication."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d357a",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261020T051511-L-1697688",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 3 new sorry statements + moved definitions module vs live FiniteFreeProjectionExchange (moved block identical except a defeq dsimp/unfold in scalarOpen and file-local irreducible attributes), node lean.statements vs signatures, importer FiniteUniversalSmoothTrace compiled against the delivered modules, axioms probe"
  }
 }

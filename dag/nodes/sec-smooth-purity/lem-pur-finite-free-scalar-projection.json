@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-finite-free-scalar-projection",
+ "kind": "statement",
+ "title": "Finite-free scalar extension preserves the specified proper, open and compact projection maps on both sites",
+ "statement": "Finite-free scalar extension preserves the specified proper, open and compact projection maps on both sites. The coefficient rings are finite commutative rings in Type (u+1). All functors, scalar comparison maps and equations are those of [def-pur-finite-free-projection-exchange-data]. The exact quantified statement is recorded below.\n\nPrecisely (Lean notation, with the stated universes and typeclasses):\ntheorem finite_free_scalar_projection {A B : Type (u + 1)}\n    [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B)\n    (_hφ : letI := φ.toAlgebra; Module.Finite A B ∧ Module.Free A B) :\n    ∀ pro : Bool, ∃ μ : TensorFamily pro φ,\n      (∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n        (M : Sites.D pro A X) (K : Sites.D pro A Y),\n        ProperProjectionEquation pro φ μ f M K) ∧\n      (∀ {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]\n        (M : Sites.D pro A X) (K : Sites.D pro A Y),\n        OpenProjectionEquation pro φ μ j M K) ∧\n      (∀ {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n        (M : Sites.D pro A X) (K : Sites.D pro A Y),\n        ProjectionEquation pro φ μ c M K)",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Step 1, compatibility of the three purity constituents and normalized traces with finite coefficients; Step 3, finite coefficient-field extensions; agent-stated finite-free structural lemma underlying these compatibilities"
+ },
+ "stmt_deps": [
+  "def-pur-finite-free-projection-exchange-data"
+ ],
+ "proof": [
+  {
+   "text": "/-- Finite-free scalar extension preserves the normalized projection maps on either site.\nSource: Stacks 07A4 and 0GL1; blueprint main-20261015, sk-thm-purity-transport,\nproof Steps 1 and 3 (blueprint: lem-pur-finite-free-scalar-projection).\n\nProof: ordinary extension by a finite free module is exact and preserves flat objects.\nUse its ordinary balanced tensor isomorphism on K-flat representatives to descend the\nnormalized tensorator on every scheme. The scalar/pullback comparison is the same\nbalanced map, so it commutes with tensor and with composition of inverse images.\nTranspose the proper projection square under the geometric inverse-image adjunction.\nThe direct-image comparison is the transpose of scalar extension of its counit; hence\nboth paths become the same tensor/pullback comparison followed by that counit.\nFor an open immersion transpose under extension by zero. The unit normalization of\nscalarOpen and the open tensor comparison identifies both transposes with ordinary\nbalancing on the open, and with zero outside it. Finally compose proper projection\nwith the pushforward of open projection and the inverse-image composition comparison.\nNaturality of the tensorator and of the direct-image comparison pastes these squares.\nThis is exactly projectionMapOfCompactification on both sites, proving the compact\nformula as well. No invertibility of the geometric projection map is used. -/",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-coef-etale-open-tensor",
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-finite-direct-image",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sf-pf-coefficient-realization-transport",
+    "lem-weil-finite-compact-projection-formula"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-coef-etale-open-tensor",
+  "lem-sf-open-tensor-normalization",
+  "lem-coef-finite-direct-image",
+  "lem-weil-pbc-mate-pasting",
+  "lem-sf-pf-coefficient-realization-transport",
+  "lem-weil-finite-compact-projection-formula"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-purity-transport/sk-thm-purity-transport.proof.md",
+  "place": "Separate constituent result extracted from the assigned ten-step argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-19T22:03:29Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib has ordinary scalar extension and mate formulas, but no site-derived comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "scalar.*(projection|exchange|compact)|finiteFree.*direct",
+   "results": "{\"t\": \"2026-10-19T22:03:32Z\", \"tool\": \"grep\", \"query\": \"scalar.*(projection|exchange|compact)|finiteFree.*direct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/MeasureTheory/Measure/Haar/Unique.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Unique.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Unique.lean\", \"Mathlib/MeasureTheory/Measure/Haar/Unique.lean\"], \"digest\": \"6b36b48524ed0254\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib has ordinary scalar extension and mate formulas, but no site-derived comparison statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension along a finite free ring homomorphism commutes with derived tensor projection formulas, proper and open base change, and compactification comparisons",
+   "results": "{\"t\": \"2026-10-19T22:03:34Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension along a finite free ring homomorphism commutes with derived tensor projection formulas, proper and open base change, and compactification comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.extendScalars\", \"ModuleCat.ExtendScalars.map'\", \"AlgHom.extendScalars\", \"ModuleCat.ExtendScalars.map'_comp\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"ModuleCat.extendScalars_id_comp\"], \"digest\": \"88a1588c18acb2b5\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib has ordinary scalar extension and mate formulas, but no site-derived comparison statement."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteFreeProjectionExchange",
+  "date": "2026-10-20",
+  "group": "K8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-finite-free-projection-exchange",
+   "place": "Step 1, compatibility of the three purity constituents and normalized traces with finite coefficients; Step 3, finite coefficient-field extensions; agent-stated finite-free structural lemma underlying these compatibilities"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteFreeScalarProjection",
+  "file": "lean/Sheaf/Paper/FiniteFreeScalarProjection.lean",
+  "declaration": "WeilConjectures.FiniteFreeProjectionExchange.finite_free_scalar_projection",
+  "statement": "theorem finite_free_scalar_projection {A B : Type (u + 1)}\n    [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B)\n    (_hφ : letI := φ.toAlgebra; Module.Finite A B ∧ Module.Free A B) :\n    ∀ pro : Bool, ∃ μ : TensorFamily pro φ,\n      (∀ {X Y : Scheme.{u}} (f : X ⟶ Y)\n        (M : Sites.D pro A X) (K : Sites.D pro A Y),\n        ProperProjectionEquation pro φ μ f M K) ∧\n      (∀ {X Y : Scheme.{u}} (j : X ⟶ Y) [IsOpenImmersion j]\n        (M : Sites.D pro A X) (K : Sites.D pro A Y),\n        OpenProjectionEquation pro φ μ j M K) ∧\n      (∀ {X Y : Scheme.{u}} {f : X ⟶ Y} (c : Compactification f)\n        (M : Sites.D pro A X) (K : Sites.D pro A Y),\n        ProjectionEquation pro φ μ c M K)",
+  "branch": "sheaf-dag",
+  "by": "K8",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d357a",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261020T051511-L-1697688",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-d357a",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261020T051511-L-1697688",
+  "kind": "interface",
+  "note": "independent cc review: delivered item proof + 3 new sorry statements + moved definitions module vs live FiniteFreeProjectionExchange (moved block identical except a defeq dsimp/unfold in scalarOpen and file-local irreducible attributes), node lean.statements vs signatures, importer FiniteUniversalSmoothTrace compiled against the delivered modules, axioms probe"
+ }
+}
