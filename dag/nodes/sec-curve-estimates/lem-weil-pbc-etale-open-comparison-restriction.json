@@ -18,11 +18,11 @@
  ],
  "proof": [
   {
-   "text": "In degree zero, the inverse of the exact Ext adjunction sends mk₀(f) to the hom adjunction. Naturality of representingHomEquiv identifies precomposition with representingIso.hom with the representing sections equivalence. Consequently etaleCohomologyOverOpenEquiv on mk₀(f) is mk₀ of restrictedSectionsEquiv inverse applied to sectionsEquiv(f). Naturality in the representing object of the sheafification, free-abelian and lifted Yoneda adjunctions sends precomposition with the free sheaf map of k to G(k). Reuse the existing sectionsEquiv_precomp theorem from AbelianRepresentableGeneratorCoherence (made public without changing its statement or proof), rather than redeclaring that identity.",
+   "text": "In degree zero, the inverse of the exact Ext adjunction sends mk₀(f) to the hom adjunction. Naturality of representingHomEquiv identifies precomposition with representingIso.hom with the representing sections equivalence. Consequently etaleCohomologyOverOpenEquiv on mk₀(f) is mk₀ of restrictedSectionsEquiv inverse applied to sectionsEquiv(f). Naturality in the representing object of the sheafification, free-abelian and lifted Yoneda adjunctions sends precomposition with the free sheaf map of k to G(k). Reuse the existing public sectionsEquiv_precomp theorem, preserved with its unchanged statement and proof in EtaleRepresentableSectionsNaturality when retiring the duplicate generator-coherence module, rather than redeclaring that identity.",
    "uses": [
     "def-weil-pbc-etale-open-comparison-data",
     "lem-sc-ext-exact-adjunction",
-    "lem-sbc-abelian-representable-generator-coherence"
+    "lem-sbc-abelian-representable-sections-precomp"
    ],
    "elementary": false
   },
@@ -68,12 +68,12 @@
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-sc-abelian-ext-covariant-exact",
   "lem-weil-pbc-ext-injective-positive-vanishing",
-  "lem-sbc-abelian-representable-generator-coherence"
+  "lem-sbc-abelian-representable-sections-precomp"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "https://stacks.math.columbia.edu/tag/03F3",
-  "place": "Stacks 03F3 and Sites 00XZ; complete Lean proof by G3, 2026-10-16. Degree-zero unit computation and dimension shifting implement the specified comparison. The unit computation follows the proved NestedOpenSectionUnit calculation with arbitrary presentations of the opens. Returned-delivery repair: import and use the existing sectionsEquiv_precomp, exposed in place in AbelianRepresentableGeneratorCoherence."
+  "place": "Stacks 03F3 and Sites 00XZ; complete Lean proof by G3, 2026-10-16. Degree-zero unit computation and dimension shifting implement the specified comparison. The unit computation follows the proved NestedOpenSectionUnit calculation with arbitrary presentations of the opens. Returned-delivery repair: import and use the existing sectionsEquiv_precomp, exposed in place in AbelianRepresentableGeneratorCoherence. D2 2026-10-21: the retained public sectionsEquiv_precomp helper has its own node; dependency updated without changing the Lean proof."
  },
  "mathlib_searches": [
   {
@@ -156,13 +156,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-6e19e",
-  "group": "G3",
+  "reviewer": "C-ab025",
+  "group": "D2",
   "result": "pass",
-  "landing": "20261016T054836-L-157543",
+  "landing": "20261020T221110-L-4143431",
   "kind": "interface",
-  "note": "independent Codex review: Delivered Lean/DAG files matched the recorded statements; both modules and the direct importer compiled, and forced adaptation was necessary and minimal."
+  "note": "independent cc review: Sheaf copy vs WeilConjectures twin: abelianRepresentableGenerator_coherence statements byte-identical; sectionsEquiv_precomp moved verbatim to the new EtaleRepresentableSectionsNaturality module with its own node; sole importer EtaleOpenCohomologyRestrictionCompatibility changes one import and compiles clean (580 s limit, load ~200; the published original also takes 266 s); axioms clean"
  }
 }
