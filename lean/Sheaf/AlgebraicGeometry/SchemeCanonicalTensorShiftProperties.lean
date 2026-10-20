@@ -8,7 +8,7 @@ module
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.CategoryTheory.Triangulated.Functor
 
-public import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShift
+public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftRightUnitor
 /-! # Exactness and unitality of canonical tensor shifts
 Source: Stacks Project, Tag 06YH and the Koszul unitor identity.

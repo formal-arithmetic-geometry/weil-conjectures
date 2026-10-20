@@ -6,7 +6,7 @@ Authors: SHEAF group H3
 module
 
 public import Sheaf.Algebra.Homology.KFlat
-public import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShift
+public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 import WeilConjectures.Mathlib.Algebra.Homology.BifunctorShift
 
 /-! # The canonical tensor shift and the right unitor

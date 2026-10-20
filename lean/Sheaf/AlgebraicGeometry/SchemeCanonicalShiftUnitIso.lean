@@ -5,7 +5,7 @@ Authors: SHEAF group D4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShift
+public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 
 /-! # Tensor with the translated unit
 

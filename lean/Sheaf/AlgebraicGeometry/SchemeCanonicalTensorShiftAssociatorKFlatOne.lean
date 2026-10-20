@@ -5,7 +5,7 @@ Authors: SHEAF group C4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShift
+public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 public import Sheaf.Algebra.Homology.KFlat
 import WeilConjectures.Algebra.Homology.TensorShiftOneAssociator
 import Sheaf.AlgebraicGeometry.SchemeTensorShiftLocalizationNormalization

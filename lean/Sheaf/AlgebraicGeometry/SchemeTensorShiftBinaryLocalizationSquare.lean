@@ -5,7 +5,7 @@ Authors: SHEAF group K4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShift
+public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 
 /-! # Binary localization square for the first tensor shift

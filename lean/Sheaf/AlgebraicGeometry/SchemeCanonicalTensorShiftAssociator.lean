@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShift
+public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShiftAssociatorKFlatOne
 import Sheaf.Algebra.Homology.KFlatResolution
 
@@ -162,7 +162,8 @@ private theorem exists_kFlat_derived_iso (X : Scheme.{u})
     [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]
     (K : schemeDerivedCategory X) :
     ∃ P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ,
-      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P ∧ Nonempty (DerivedCategory.Q.obj P ≅ K) := by
+      CochainComplex.IsAcyclicTensorKFlat (R := X.sheaf) P ∧
+        Nonempty (DerivedCategory.Q.obj P ≅ K) := by
   obtain ⟨P, s, hP, _, hs, _⟩ :=
     CochainComplex.exists_isKFlatResolution (R := X.sheaf) (DerivedCategory.Q.objPreimage K)
   have : QuasiIso s := hs

@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SchemeCanonicalTensorShift
+public import WeilConjectures.AlgebraicGeometry.SchemeCanonicalTensorShift
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 import Sheaf.AlgebraicGeometry.SchemeTensorShiftBinaryLocalizationSquare
