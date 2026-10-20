@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Sheaf.Algebra.Homology.KFlat
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings

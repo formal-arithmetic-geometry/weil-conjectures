@@ -5,7 +5,7 @@ Authors: SHEAF group N2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 

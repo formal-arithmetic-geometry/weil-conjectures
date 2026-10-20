@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses

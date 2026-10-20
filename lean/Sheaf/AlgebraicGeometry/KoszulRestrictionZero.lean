@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 import Sheaf.AlgebraicGeometry.KoszulRestrictionZeroBase
 public import Mathlib.AlgebraicGeometry.Modules.Tilde

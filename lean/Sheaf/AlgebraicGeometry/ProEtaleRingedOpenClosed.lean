@@ -6,7 +6,7 @@ Authors: SHEAF group NG
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-public import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+public import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenComparison

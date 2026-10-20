@@ -6,7 +6,7 @@ Authors: SHEAF group K2
 module
 
 public import Sheaf.Algebra.Homology.HomComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 
 /-!

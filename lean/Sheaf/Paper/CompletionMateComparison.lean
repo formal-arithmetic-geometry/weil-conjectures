@@ -42,12 +42,12 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 public import Mathlib.CategoryTheory.Adjunction.Whiskering
 public import Mathlib.CategoryTheory.Adjunction.Additive
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
+import Sheaf.CategoryTheory.LocalizedModuleAdjunctionExact
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import Mathlib.Algebra.Category.Ring.Limits
 import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import Sheaf.CategoryTheory.ExtensionByZeroPresheaf
 import Sheaf.Paper.LocalHomTowerCriterion
 import Sheaf.CategoryTheory.RingedSiteCompleteElementsIdeal
 import Sheaf.CategoryTheory.RingedKoszulCompletionReflector

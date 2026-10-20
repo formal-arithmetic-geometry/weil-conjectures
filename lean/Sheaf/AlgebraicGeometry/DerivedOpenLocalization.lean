@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 import Sheaf.Algebra.Homology.OpenExtensionRestrictionIso
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Localization.LocallySmall

@@ -5,7 +5,7 @@ Authors: SHEAF group H3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Topology.QuasiSeparated
 
 import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated

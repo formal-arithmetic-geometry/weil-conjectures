@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Sites.Over
 public import Mathlib.CategoryTheory.Sites.PrecoverageToGrothendieck
 public import Mathlib.Algebra.Category.Grp.AB
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-public import WeilConjectures.CategoryTheory.SiteExtensionByZeroExact
+public import Sheaf.CategoryTheory.SiteExtensionByZeroExact
 public import Sheaf.Paper.SiteRestrictionExact
 
 /-!

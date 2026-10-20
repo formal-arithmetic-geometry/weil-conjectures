@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.KFlatStalkResidueCohomology
 import WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import Mathlib.CategoryTheory.Abelian.Exact
