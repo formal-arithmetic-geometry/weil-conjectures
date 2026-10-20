@@ -32,11 +32,11 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "V4",
-  "date": "2026-10-14",
+  "group": "G5",
+  "date": "2026-10-20",
   "document": "Mathlib.Algebra.Homology.ShortComplex.PreservesHomology; Mathlib.Algebra.Homology.DerivedCategory.HomologySequence",
   "place": "ShortComplex.homologyMap_mapNatTrans, lines 725–728; DerivedCategory.homologyFunctorFactors, lines 39–41, inverse naturality.",
-  "note": "Expand the existing concrete comparison, use inverse localization/homology naturality and short-complex natural-transformation homology, then cancel the exact comparison isomorphism. Existing two-step route retained; no new statements or holes."
+  "note": "Reuse the adopted upstream proof of this same declaration. It follows the recorded two-step naturality calculation with explicit SheafOfModules.{u} universes. The former Sheaf module re-exports the upstream module for its quarantined consumer; no new theorem, hypothesis or proof dependency is introduced."
  },
  "mathlib_searches": [
   {
@@ -86,14 +86,14 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.AffinePushforwardComparisonFactorization",
-  "file": "lean/Sheaf/Algebra/Homology/AffinePushforwardComparisonFactorization.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.AffinePushforwardComparisonFactorization",
+  "file": "lean/WeilConjectures/Algebra/Homology/AffinePushforwardComparisonFactorization.lean",
   "declaration": "AlgebraicGeometry.affinePushforwardComparison_factorization",
-  "statement": "theorem affinePushforwardComparison_factorization\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)\n    (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅\n      affinePushforwardTilde A ⋙\n        Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ)))\n    [(affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n      (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).PreservesZeroMorphisms]\n    [(affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n      (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).PreservesHomology]\n    (C : CochainComplex (ModuleCat A) ℤ) :\n    affinePushforwardCohomologyMapOfComparison A B φ σ C i =\n      σ.hom.app (C.homology i) ≫\n        ((C.sc i).mapHomologyIso\n          (affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)).inv ≫\n        ((DerivedCategory.homologyFunctorFactors\n          (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i).app\n          (((affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).mapHomologicalComplex\n              (.up ℤ)).obj C)).inv ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules (moduleRings (Spec (.of B)).toRingedSpace)) i).map\n          ((RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj\n              (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C)))",
+  "statement": "theorem affinePushforwardComparison_factorization\n    (A B : Type u) [CommRing A] [CommRing B] (φ : B →+* A) (i : ℤ)\n    (σ : ModuleCat.restrictScalars φ ⋙ affinePushforwardTilde B ≅\n      affinePushforwardTilde A ⋙\n        Scheme.Modules.pushforward (Spec.map (CommRingCat.ofHom φ)))\n    [(affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n      (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).PreservesZeroMorphisms]\n    [(affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n      (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).PreservesHomology]\n    (C : CochainComplex (ModuleCat A) ℤ) :\n    affinePushforwardCohomologyMapOfComparison A B φ σ C i =\n      σ.hom.app (C.homology i) ≫\n        ((C.sc i).mapHomologyIso\n          (affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom)).inv ≫\n        ((DerivedCategory.homologyFunctorFactors\n          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).app\n          (((affinePushforwardTilde A ⋙ RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).mapHomologicalComplex\n              (.up ℤ)).obj C)).inv ≫\n        (DerivedCategory.homologyFunctor\n          (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i).map\n          ((RingedSpace.moduleDirectImage\n            (Spec.map (CommRingCat.ofHom φ)).toLRSHom.toShHom).rightDerivedFunctorUnit.app\n            ((HomotopyCategory.quotient _ (.up ℤ)).obj\n              (((affinePushforwardTilde A).mapHomologicalComplex (.up ℤ)).obj C)))",
   "branch": "sheaf-dag",
-  "by": "G3",
-  "date": "2026-10-14"
+  "by": "G5",
+  "date": "2026-10-20"
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -106,14 +106,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V4",
+  "reviewer": "C-ed3dc",
+  "group": "G5",
   "result": "pass",
-  "landing": "20261014T074649-L-3571331",
+  "landing": "20261020T153008-L-2861292",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: re-export module + node lean record (existing:true) matched verbatim against upstream WeilConjectures.Algebra.Homology.AffinePushforwardComparisonFactorization theorem; axioms clean; live item file absent, consumer quarantined"
  },
  "lean_audit": {
   "master": {
