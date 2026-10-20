@@ -18577,3 +18577,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:40 L: merged deliver/V3/Sheaf.AlgebraicGeometry.Modules.ExteriorTensorQuotient (stage 3; reviewer PASS; first push; landing 20261020T154054-L-3043145 (interface); batch 20261020T154030; modules 4; new nodes 1; change records: coord/changes/V3-retire-exterior-tensor-quotient.md)
 
 - 23:42 L: batch 20261020T154030 dependency take-out
+- 15:46 L: merged deliver/A4/Sheaf.Paper.CondensedFlatCoefficientCalculus (stage 3; reviewer PASS; first push; landing 20261020T154611-L-3135597 (proof); batch 20261020T154608; modules 1; new nodes 0; change records: coord/changes/A4-condensed-flat-calculus-quarantine-restoration.md)

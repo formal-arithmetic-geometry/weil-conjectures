@@ -37,26 +37,26 @@
  ],
  "proof": [
   {
-   "text": "Choose Module.finBasis E F after proving finite dimensionality by restriction of scalars. Each basis coordinate is continuous by LinearMap.continuous_of_finiteDimensional over Q_ell. Apply the source library continuousBasisSheafIso: its actual coordinate and basis-vector maps on continuous functions, sheafified and transported along the coefficient-ring comparison, give the finite-free isomorphism on the point.",
+   "text": "Choose Module.finBasis E F after proving finite dimensionality by restriction of scalars. Each basis coordinate is continuous by LinearMap.continuous_of_finiteDimensional over Q_ell. The private continuousBasisIso constructs inverse biproduct maps on continuous-function presheaves from the coordinates and basis vectors; their identities follow from sum_repr and coord_apply. The private continuousBasisSheafIso transports this explicit isomorphism through sheafification and the coefficient-ring comparisons. These constructive helpers are restored from the quarantined Compatibility module into this item; no unproved existence assertion supplies data.",
    "uses": [
     "def-weil-l-adic-numbers",
     "def-weil-finite-subextension-directed-set"
    ],
    "elementary": false,
    "source": {
-    "document": "Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
-    "place": "Mathlib/Topology/Algebra/Module/FiniteDimension.lean; Module.Basis.finBasis, sum_repr and coord_apply"
+    "document": "quarantine/Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+    "place": "Private continuousAddHomPresheaf, continuousLinearPresheafHom, continuousLinearPresheafHomFrom, continuousBasisIso and continuousBasisSheafIso; now restored as private helpers in the item module."
    }
   },
   {
-   "text": "Apply the source library Mod.mapFreeRestrictedRegularIso to the exact additive strong monoidal upperStarFromPoint and the point finite-free isomorphism. Its module-transport, regular-module and biproduct comparisons give the specified finite-free isomorphism on the scheme. No duplicate presheaf or scalar-transport construction is required in this module.",
+   "text": "Apply the private Mod.mapFreeRestrictedRegularIso to the exact additive strong monoidal upperStarFromPoint and the point finite-free isomorphism. Its module-transport, regular-module and biproduct comparisons give the finite-free isomorphism on the scheme. The private generic map and ring-isomorphism helpers are restored from the quarantined Compatibility module into this item, since the synchronized adopted source no longer declares them.",
    "uses": [
     "def-weil-size-convention"
    ],
    "elementary": false,
    "source": {
-    "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
-    "place": "private continuousBasisSheafIso and Mod.mapFreeRestrictedRegularIso; proof-only import all"
+    "document": "quarantine/Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
+    "place": "Private Map and RingIso sections, restored in lean/Sheaf/Paper/CondensedFlatCoefficientCalculus.lean."
    }
   },
   {
@@ -142,8 +142,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/upstream-master-20261014/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Colimit/Compatibility.lean",
-  "place": "G2 stage-3 completion, 2026-10-16: complete all eight canonical coefficient coherence clauses by specializing proved scalar/derived transport lemmas. Private canonical module-structure caches have proof-only scope and the generic derived lemmas accept the chosen derived categories. The two exact coefficient calculus proofs share a proved scalarCalculus helper. Reuse the source continuousBasisSheafIso and Mod.mapFreeRestrictedRegularIso instead of duplicate local constructions; all public signatures and specified comparison maps are unchanged."
+  "group": "A4",
+  "document": "lean/Sheaf/Paper/CondensedFlatCoefficientCalculus.lean",
+  "place": "2026-10-20 quarantine restoration after upstream synchronization. Preserve all four public theorem signatures and the proved scalar/derived coherence route. Restore the explicit finite-basis and module-transport private constructions from the quarantined Compatibility extra. Remove its unrelated bounded-pushforward public import and the obsolete import all of the adopted source. Canonical structure caches omit unused section variables. No new proof obligations or changes to coefficient constructions."
  },
  "mathlib_searches": [
   {
@@ -334,13 +335,13 @@
   "existing": false
  },
  "reviewed_proof": {
-  "date": "2026-10-16",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-788cf",
-  "group": "G1",
+  "reviewer": "COMPILER",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261016T072032-L-914019",
-  "kind": "interface",
-  "note": "independent Codex review: Item signature and docstring unchanged; new statements match their nodes and proofs. All seven delivered modules, three adapted-parent importers, and the item importer compile cleanly. DAG fields and axiom checks pass; no new sorry."
+  "landing": "20261020T154611-L-3135597",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
