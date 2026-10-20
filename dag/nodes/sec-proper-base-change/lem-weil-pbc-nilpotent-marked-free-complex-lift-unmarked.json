@@ -14,25 +14,39 @@
  ],
  "proof": [
   {
-   "text": "Construct a bounded-above finite-free lift and its derived and chain isomorphisms, postponing only the prescribed-marking equality.",
+   "text": "Take E = Classical.choose hK with its bound c, finite free terms and isomorphism gamma : Q(E) ≅ K. Its terms are projective. Apply the proved ordinary-module helper CochainComplex.projective_reduction_comparison from the nilpotent projective complex lifting module. It identifies L(Q(E)) with Q(E tensor R/I), allowing independent ring/module and derived localization universes. Compose its inverse with L(gamma) and alpha to obtain the derived reduction isomorphism required by the stably-free lifting theorem.",
    "uses": [
     "def-pc-ring-pseudo-coherent-complex",
-    "def-weil-abstract-derived-category",
-    "lem-pur-derived-change-of-rings"
+    "lem-weil-pbc-nilpotent-projective-complex-lift"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Finite free quotient terms are finite stably free. Apply DerivedCategory.exists_stablyFree_lift_mod_ideal (Stacks 0BCB) to K, hK and the prescribed F, using the preceding derived isomorphism. Obtain P, beta, theta, finite stably free terms, and freeness of P.X i from freeness of F.X i.",
+   "uses": [
+    "lem-sc-pseudo-coherent-lift-stably-free-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For i > b, F.X i is zero. Evaluate theta to see that the scalar extension of P.X i is zero. The zero endomorphism of its scalar extension is therefore surjective. Since P.X i is finite, apply ModuleCat.surjective_of_extendScalars_mod_ideal to the zero endomorphism of P.X i. Its surjectivity makes P.X i a subsingleton, hence a zero object. The criterion P.isStrictlyLE_iff gives the exact bound b. Package P, beta, theta, this bound and the finite free term properties. Only the unit hypothesis is needed for this final Nakayama argument; the nilpotence hypothesis remains unchanged.",
+   "uses": [
+    "lem-sc-finite-module-surjective-mod-ideal"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-ring-pseudo-coherent-complex",
-  "def-weil-abstract-derived-category",
-  "lem-pur-derived-change-of-rings"
+  "lem-weil-pbc-nilpotent-projective-complex-lift",
+  "lem-sc-pseudo-coherent-lift-stably-free-complex",
+  "lem-sc-finite-module-surjective-mod-ideal"
  ],
  "proof_origin": {
-  "by": "B3 stage 3",
+  "by": "G1 stage 3",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tags 0H76, 0BCB and 0BCA",
-  "note": "Strict decomposition of the parent lifting argument."
+  "place": "Tag 0BCB, lemma-lift-complex-stably-frees; its finite-module Nakayama argument, Tag 00DV",
+  "note": "Specialization of the existing proved lifting theorem, using the proved projective reduction comparison helper for independent universes. All glue and the exact-bound argument are proved in Lean; no new statements or holes."
  },
  "mathlib_searches": [
   {
@@ -97,13 +111,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "B3",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261018T071134-L-1663594",
-  "kind": "interface",
+  "landing": "20261020T051307-L-1624416",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
