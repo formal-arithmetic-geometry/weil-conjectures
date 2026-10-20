@@ -1,304 +1,273 @@
 {
-  "id": "lem-sp-compact-projection-base-change",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "det-sp-purity-bc-factors",
-      "place": "proof of (2): 'By naturality of the projection formula under pullback (compatibility of the projection formula with base change), this equals the projection formula for f' followed by id⊗ε_{f'} at v^*K'; this node states that compatibility for finite-ring and tower coefficients.",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sp-compact-projection-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "proof of (2): 'By naturality of the projection formula under pullback (compatibility of the projection formula with base change), this equals the projection formula for f' followed by id⊗ε_{f'} at v^*K'; this node states that compatibility for finite-ring and tower coefficients.",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Compact-support projection map commutes with base change (finite rings and coefficient towers)",
-  "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. Let $X,Y,Y'$ be separated finite-type $k$-schemes, let $f:X\\to Y$ be a separated finite-type $k$-morphism and let $v:Y'\\to Y$ be any $k$-morphism [def-weil-scheme-morphism-properties]. Put $X'=X\\times_YY'$ with projections $u:X'\\to X$ and $f':X'\\to Y'$ [def-pc-base-change]. Choose a compactification $f=p\\circ j$ with $j:X\\hookrightarrow\\overline X$ an open immersion and $p:\\overline X\\to Y$ proper [def-weil-compactifications-refinements], and let $\\overline X'=\\overline X\\times_YY'$, with projections $p':\\overline X'\\to Y'$ and $\\bar u:\\overline X'\\to\\overline X$, and $j':X'\\hookrightarrow\\overline X'$ the base change of $j$, so that $f'=p'\\circ j'$. No flatness, smoothness or properness of $v$ is assumed.\n\nUse one of the following two coefficient settings.\n\n(i) A finite commutative ring $A$ with $\\ell^rA=0$ for some $r\\geq1$, and the ordinary, uncompleted, unbounded derived categories $D(T_{\\mathrm{pro\\acute et}},A)$ of module sheaves over the constant ring $A_T$ on the small pro-étale sites [def-weil-pbc-proetale-modules], with the derived tensor product $\\otimes^{\\mathbf L}_A$ [def-weil-derived-tensor], the derived inverse images $u^*$ (exact, termwise), derived direct images and their adjunctions $u^*\\dashv Ru_*$ [def-weil-pbc-proetale-operations], and termwise extension by zero $j_!$ [def-weil-extension-by-zero].\n\n(ii) A finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, and the ordinary unbounded derived categories $D(\\operatorname{Tow}(T,\\mathcal O_E))$ of varying-coefficient towers [sk-def-sp-coefficient-towers], that is, of modules over the ring system $(\\mathcal O_E/\\ell^n)_{n\\geq1}$ in the topos of inverse systems of sheaves on $T_{\\mathrm{pro\\acute et}}$ [det-sp-coefficient-towers-abelian]. Here inverse image is exact levelwise inverse image, direct images are the total right derived functors of levelwise direct image with their derived adjunctions, extension by zero is levelwise, and $\\otimes^{\\mathbf L}$ is the derived tensor product over the ring system; no completed tensor product is used.\n\nIn either setting put $F_f=Rp_*j_!$ and $F_{f'}=Rp'_*j'_!$, and use the canonical pullback/tensor comparison $v^*(V\\otimes^{\\mathbf L}W)\\cong v^*V\\otimes^{\\mathbf L}v^*W$ of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the pullback-composition isomorphisms. For $M$ on $X$ let\n$$\\beta_M:v^*F_fM\\longrightarrow F_{f'}u^*M$$\nbe the compact-support exchange: the proper exchange $v^*Rp_*\\to Rp'_*\\bar u^*$ (the mate of $p'^*v^*\\cong\\bar u^*p^*$) at $j_!M$, followed by $Rp'_*$ of the extension-by-zero base-change isomorphism $\\bar u^*j_!M\\cong j'_!u^*M$. For $M$ on $X$ and $K$ on $Y$ let\n$$\\operatorname{PF}_f(M,K):F_fM\\otimes^{\\mathbf L}K\\longrightarrow F_f(M\\otimes^{\\mathbf L}f^*K)$$\nbe the projection map: the proper projection map of $p$ at $(j_!M,K)$ (the adjoint transpose under $p^*\\dashv Rp_*$ of the counit $p^*Rp_*j_!M\\to j_!M$ tensored with $1_{p^*K}$, after the pullback/tensor comparison), followed by $Rp_*$ of the extension-by-zero tensor isomorphism $j_!M\\otimes^{\\mathbf L}p^*K\\cong j_!(M\\otimes^{\\mathbf L}j^*p^*K)$ and $j^*p^*\\cong f^*$. In setting (i) these are the compactification composites of [def-exchange-projection] formed with the coefficient ring $A$; in setting (ii) they are the same composites formed in the inverse-system topos.\n\nThen for all $M$ on $X$ and $K$ on $Y$ in these ambient derived categories one has, naturally in $M$ and $K$,\n$$\\beta_{M\\otimes^{\\mathbf L}f^*K}\\circ v^*\\operatorname{PF}_f(M,K)=\\operatorname{PF}_{f'}(u^*M,v^*K)\\circ(\\beta_M\\otimes1_{v^*K})$$\nas maps $v^*F_fM\\otimes^{\\mathbf L}v^*K\\to F_{f'}(u^*M\\otimes^{\\mathbf L}f'^*v^*K)$; here the source of the left side $v^*(F_fM\\otimes^{\\mathbf L}K)$ is identified with $v^*F_fM\\otimes^{\\mathbf L}v^*K$ by the pullback/tensor comparison, and its target $F_{f'}u^*(M\\otimes^{\\mathbf L}f^*K)$ with $F_{f'}(u^*M\\otimes^{\\mathbf L}f'^*v^*K)$ by that comparison and $u^*f^*\\cong f'^*v^*$. Consequently, whenever $\\beta_M$, $\\beta_{M\\otimes^{\\mathbf L}f^*K}$, $\\operatorname{PF}_f(M,K)$ and $\\operatorname{PF}_{f'}(u^*M,v^*K)$ are isomorphisms,\n$$(\\beta_M\\otimes1_{v^*K})\\circ v^*\\operatorname{PF}_f(M,K)^{-1}\\circ\\beta_{M\\otimes^{\\mathbf L}f^*K}^{-1}=\\operatorname{PF}_{f'}(u^*M,v^*K)^{-1}.$$",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Compact-support projection map commutes with base change (finite rings and coefficient towers)",
+ "statement": "Fix the global finite-field datum $k=\\overline{\\mathbf F}_q$ of characteristic $p$ and a prime $\\ell\\ne p$ [def-weil-finite-field-fiber]. Let $X,Y,Y'$ be separated finite-type $k$-schemes, let $f:X\\to Y$ be a separated finite-type $k$-morphism and let $v:Y'\\to Y$ be any $k$-morphism [def-weil-scheme-morphism-properties]. Put $X'=X\\times_YY'$ with projections $u:X'\\to X$ and $f':X'\\to Y'$ [def-pc-base-change]. Choose a compactification $f=p\\circ j$ with $j:X\\hookrightarrow\\overline X$ an open immersion and $p:\\overline X\\to Y$ proper [def-weil-compactifications-refinements], and let $\\overline X'=\\overline X\\times_YY'$, with projections $p':\\overline X'\\to Y'$ and $\\bar u:\\overline X'\\to\\overline X$, and $j':X'\\hookrightarrow\\overline X'$ the base change of $j$, so that $f'=p'\\circ j'$. No flatness, smoothness or properness of $v$ is assumed.\n\nUse one of the following two coefficient settings.\n\n(i) A finite commutative ring $A$ with $\\ell^rA=0$ for some $r\\geq1$, and the ordinary, uncompleted, unbounded derived categories $D(T_{\\mathrm{pro\\acute et}},A)$ of module sheaves over the constant ring $A_T$ on the small pro-étale sites [def-weil-pbc-proetale-modules], with the derived tensor product $\\otimes^{\\mathbf L}_A$ [def-weil-derived-tensor], the derived inverse images $u^*$ (exact, termwise), derived direct images and their adjunctions $u^*\\dashv Ru_*$ [def-weil-pbc-proetale-operations], and termwise extension by zero $j_!$ [def-weil-extension-by-zero].\n\n(ii) A finite extension $E/\\mathbf Q_\\ell$ with valuation ring $\\mathcal O_E$, and the ordinary unbounded derived categories $D(\\operatorname{Tow}(T,\\mathcal O_E))$ of varying-coefficient towers [sk-def-sp-coefficient-towers], that is, of modules over the ring system $(\\mathcal O_E/\\ell^n)_{n\\geq1}$ in the topos of inverse systems of sheaves on $T_{\\mathrm{pro\\acute et}}$ [det-sp-coefficient-towers-abelian]. Here inverse image is exact levelwise inverse image, direct images are the total right derived functors of levelwise direct image with their derived adjunctions, extension by zero is levelwise, and $\\otimes^{\\mathbf L}$ is the derived tensor product over the ring system; no completed tensor product is used.\n\nIn either setting put $F_f=Rp_*j_!$ and $F_{f'}=Rp'_*j'_!$, and use the canonical pullback/tensor comparison $v^*(V\\otimes^{\\mathbf L}W)\\cong v^*V\\otimes^{\\mathbf L}v^*W$ of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] and the pullback-composition isomorphisms. For $M$ on $X$ let\n$$\\beta_M:v^*F_fM\\longrightarrow F_{f'}u^*M$$\nbe the compact-support exchange: the proper exchange $v^*Rp_*\\to Rp'_*\\bar u^*$ (the mate of $p'^*v^*\\cong\\bar u^*p^*$) at $j_!M$, followed by $Rp'_*$ of the extension-by-zero base-change isomorphism $\\bar u^*j_!M\\cong j'_!u^*M$. For $M$ on $X$ and $K$ on $Y$ let\n$$\\operatorname{PF}_f(M,K):F_fM\\otimes^{\\mathbf L}K\\longrightarrow F_f(M\\otimes^{\\mathbf L}f^*K)$$\nbe the projection map: the proper projection map of $p$ at $(j_!M,K)$ (the adjoint transpose under $p^*\\dashv Rp_*$ of the counit $p^*Rp_*j_!M\\to j_!M$ tensored with $1_{p^*K}$, after the pullback/tensor comparison), followed by $Rp_*$ of the extension-by-zero tensor isomorphism $j_!M\\otimes^{\\mathbf L}p^*K\\cong j_!(M\\otimes^{\\mathbf L}j^*p^*K)$ and $j^*p^*\\cong f^*$. In setting (i) these are the compactification composites of [def-exchange-projection] formed with the coefficient ring $A$; in setting (ii) they are the same composites formed in the inverse-system topos.\n\nThen for all $M$ on $X$ and $K$ on $Y$ in these ambient derived categories one has, naturally in $M$ and $K$,\n$$\\beta_{M\\otimes^{\\mathbf L}f^*K}\\circ v^*\\operatorname{PF}_f(M,K)=\\operatorname{PF}_{f'}(u^*M,v^*K)\\circ(\\beta_M\\otimes1_{v^*K})$$\nas maps $v^*F_fM\\otimes^{\\mathbf L}v^*K\\to F_{f'}(u^*M\\otimes^{\\mathbf L}f'^*v^*K)$; here the source of the left side $v^*(F_fM\\otimes^{\\mathbf L}K)$ is identified with $v^*F_fM\\otimes^{\\mathbf L}v^*K$ by the pullback/tensor comparison, and its target $F_{f'}u^*(M\\otimes^{\\mathbf L}f^*K)$ with $F_{f'}(u^*M\\otimes^{\\mathbf L}f'^*v^*K)$ by that comparison and $u^*f^*\\cong f'^*v^*$. Consequently, whenever $\\beta_M$, $\\beta_{M\\otimes^{\\mathbf L}f^*K}$, $\\operatorname{PF}_f(M,K)$ and $\\operatorname{PF}_{f'}(u^*M,v^*K)$ are isomorphisms,\n$$(\\beta_M\\otimes1_{v^*K})\\circ v^*\\operatorname{PF}_f(M,K)^{-1}\\circ\\beta_{M\\otimes^{\\mathbf L}f^*K}^{-1}=\\operatorname{PF}_{f'}(u^*M,v^*K)^{-1}.$$",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "proof of (2), 'compatibility of the projection formula with base change'; proper part: Stacks Tag 0E48, sites-cohomology.tex remark-compatible-with-diagram (verification omitted there); open part: extension by zero, Stacks Tag 0GL1 (sites-cohomology.tex lemma-j-shriek-and-tensor)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-scheme-morphism-properties",
+  "def-pc-base-change",
+  "def-weil-compactifications-refinements",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-derived-tensor",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-extension-by-zero",
+  "sk-def-sp-coefficient-towers",
+  "det-sp-coefficient-towers-abelian",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-exchange-projection"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the simultaneous finite-ring presentation from [lem-sp-compact-projection-finite-presentation]. For varying coefficients, use the explicitly constructed commutative ring sheaves, structural maps and module-presheaf-preserving equivalence of [lem-sp-compact-projection-tower-presentation]. The remaining argument is universal in the presentation and its invertible open mates.",
+   "uses": [
+    "lem-sp-compact-projection-finite-presentation",
+    "lem-sp-compact-projection-tower-presentation"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
-    "place": "proof of (2), 'compatibility of the projection formula with base change'; proper part: Stacks Tag 0E48, sites-cohomology.tex remark-compatible-with-diagram (verification omitted there); open part: extension by zero, Stacks Tag 0GL1 (sites-cohomology.tex lemma-j-shriek-and-tensor)."
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
   },
-  "stmt_deps": [
-    "def-weil-finite-field-fiber",
-    "def-weil-scheme-morphism-properties",
-    "def-pc-base-change",
-    "def-weil-compactifications-refinements",
-    "def-weil-pbc-proetale-modules",
-    "def-weil-derived-tensor",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-extension-by-zero",
-    "sk-def-sp-coefficient-towers",
-    "det-sp-coefficient-towers-abelian",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-exchange-projection"
-  ],
-  "proof": [
-    {
-      "text": "Work uniformly in ringed topoi. In (i) use the constant ring sheaf $A_T$. In (ii), [det-sp-coefficient-towers-abelian] identifies the category with modules over the ring object $(\\mathcal O_E/\\ell^n)_n$ in the inverse-system topos. A small site for this topos is the diagram site of [lem-weil-pbc-diagram-site-realization], with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$; its sheaf equivalence carries this varying ring object as well. The scheme inverse images act levelwise, preserve this ring object, and their right adjoints are levelwise direct images: the usual adjunction bijection restricts to compatible families because its bijections are natural. Their derived adjunctions are exactly the ones stipulated in the item. Thus [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] supplies the canonical uncompleted derived tensors and tensor comparisons in either case. It also gives K-flat representatives preserved by pullback. All subsequent equalities are in these ringed-topos derived categories. Write $G=v^*$, $H=\\bar u^*$, $U=u^*$, $R=Rp_*$, $R'=Rp'_*$, and write $e:GR\\to R'H$ for proper exchange. Let $b_M:Hj_!M\\to j'_!UM$ and $\\gamma_j(M,P):j_!M\\otimes P\\to j_!(M\\otimes j^*P)$ be the canonical open comparisons. The open normalization theorem [lem-sf-open-tensor-normalization] applies both to ring sheaves and to strict ring systems; it supplies these actual maps, their invertibility, and their identity restrictions. In all formulas below insert the canonical pullback/tensor and composition identifications of the statement.",
-      "uses": [
-        "det-sp-coefficient-towers-abelian",
-        "lem-weil-pbc-diagram-site-realization",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "lem-sf-open-tensor-normalization"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
-        "place": "(2), finite and tower calculation in the ambient ringed-topos categories"
-      }
-    },
-    {
-      "text": "For the square with vertical arrows $p,p'$ and horizontal arrows $v,\\bar u$, apply [lem-weil-pbc-ringed-exchange-tensor-coherence] with $E=N=j_!M$ and $Q=K$. Its ringed commutation isomorphism is the canonical one $p'^*v^*\\cong\\bar u^*p^*$: the constant coefficient identifications, or the ring-system identifications at every index, respect the structural ring maps. Its exchange is $e$ because both are the mate of that isomorphism under the specified derived adjunctions. Its projection map $\\pi_p(N,K)$ is the counit transpose used in the item, not an arbitrarily chosen projection isomorphism. Consequently, after the indicated target identification, its equality reads\n$$e_{N\\otimes p^*K}\\,G\\pi_p(N,K)=\\pi_{p'}(HN,GK)(e_N\\otimes1).$$\nThe theorem allows arbitrary objects of the unbounded derived categories and arbitrary commutative ring sheaves, so it applies directly to the ring-system topos too. It requires neither proper base-change invertibility nor a perfectness condition on $K$.",
-      "uses": [
-        "lem-weil-pbc-ringed-exchange-tensor-coherence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0E48, remark-compatible-with-diagram; use the existing node for its omitted verification"
-      }
-    },
-    {
-      "text": "For an arbitrary object $P$ on $\\overline X$, the open-factor equality is\n$$b_{M\\otimes j^*P}\\,H\\gamma_j(M,P)=\\gamma_{j'}(UM,HP)(b_M\\otimes1),$$\nwhere the left target is identified using $Uj^*\\cong j'^*H$ and the source using the tensor comparison for $H$. To prove it, [lem-sf-open-tensor-normalization] identifies the common source $H(j_!M\\otimes P)$, by $\\mu_H$, $b_M\\otimes1$, and $\\gamma_{j'}$, with $j'_!(UM\\otimes j'^*HP)$. Thus source and target are in the essential image of the fully faithful $j'_!$, and it suffices to restrict the two maps to $X'$. That theorem says that the restrictions of $b$ and $\\gamma$ are the identities under their open unit identifications. The remaining comparisons on both routes identify $U(M\\otimes j^*P)$ with $UM\\otimes j'^*HP$. They agree directly on the K-flat representatives of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]: in every bidegree both send an inverse-image tensor $m\\otimes t$ to the same two inverse-image factors, with $Uj^*t=j'^*Ht$; they preserve bidegrees and the total differential. These equations on tensor generators are local equations of sheaves and descend to the derived category. This also works on the diagram site itself. Full faithfulness now proves the displayed open equality as an equality of system-derived morphisms, without trying to infer it from equality of level evaluations.",
-      "uses": [
-        "lem-sf-open-tensor-normalization",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0GL1, lemma-j-shriek-and-tensor; sites-modules.tex Tag 0E8I, lemma-j-shriek-and-tensor; normalized open restriction argument"
-      }
-    },
-    {
-      "text": "Put $N=j_!M$, $W=M\\otimes f^*K$, $C=N\\otimes p^*K$, and let $\\gamma:C\\to j_!W$ include $j^*p^*\\cong f^*$. Write $\\pi=\\pi_p(N,K)$, and let $\\gamma'$ be the corresponding open tensor map for $j'$ with second input $p'^*GK$. The preceding open equality, applied with $P=p^*K$, includes $Hp^*K\\cong p'^*GK$ and therefore says $b_W H\\gamma=\\gamma'(b_M\\otimes1)$. Expand the two definitions in the item and use naturality of $e$:\n$$\\begin{aligned}\n\\beta_W\\,G\\operatorname{PF}_f\n &=R'(b_W)e_{j_!W}\\,G(R\\gamma)\\,G\\pi\\\\\n &=R'(b_W H\\gamma)e_C\\,G\\pi\\\\\n &=R'\\gamma'\\,R'(b_M\\otimes1)\\,\\pi_{p'}(HN,GK)(e_N\\otimes1)\\\\\n &=R'\\gamma'\\,\\pi_{p'}(j'_!UM,GK)(R'b_M\\,e_N\\otimes1)\\\\\n &=\\operatorname{PF}_{f'}(UM,GK)(\\beta_M\\otimes1).\n\\end{aligned}$$\nThe third line uses step 3 and step 2. The fourth uses naturality of the proper projection map in its first input, supplied by [lem-weil-pbc-ringed-projection-mate-exact], applied to $b_M:HN\\to j'_!UM$; its counit-transpose definition is precisely the present $\\pi_{p'}$. The first naturality is that of the mate transformation $e$ of [lem-weil-pbc-ringed-exchange-tensor-coherence]. Every displayed target is identified using the same pullback comparisons as in the statement; the open comparison uses $Uj^*p^*\\cong j'^*Hp^*\\cong j'^*p'^*G$. The last line is the required forward identity. All component maps are natural in $M,K$, so this equality is natural in them.",
-      "uses": [
-        "lem-weil-pbc-ringed-exchange-tensor-coherence",
-        "lem-weil-pbc-ringed-projection-mate-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
-        "place": "(2), compatibility of the projection formula with base change: paste the proper and open factors"
-      }
-    },
-    {
-      "text": "For the final assertion write $B=\\beta_M\\otimes1$, $C=\\beta_{M\\otimes f^*K}$, $P=G\\operatorname{PF}_f(M,K)$, and $Q=\\operatorname{PF}_{f'}(UM,GK)$, with exactly the preceding identifications. Step 4 gives $CP=QB$. Under the isomorphism hypotheses, compose on the left with $Q^{-1}$ and on the right with $P^{-1}C^{-1}$ to obtain $BP^{-1}C^{-1}=Q^{-1}$. Functoriality gives $P^{-1}=v^*(\\operatorname{PF}_f(M,K)^{-1})$. This is the displayed inverse identity.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
-        "place": "(2), inverse projection-formula expression obtained from the forward compatibility"
-      }
-    }
-  ],
-  "proof_deps": [
-    "det-sp-coefficient-towers-abelian",
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-open-tensor-normalization",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-  ],
-  "proof_origin": {
-    "by": "agent",
+  {
+   "text": "Apply the inverse-image tensor-square equation [lem-sp-compact-projection-tensor-square]. Expand the actual right-adjoint projection map and the exchange mate. Transpose through the derived adjunction and use naturality, the tensor square and the triangle identities. This is tensor_mate_coherence and proper_compatibility in Lean, with independent category universes and without proper-exchange invertibility.",
+   "uses": [
+    "lem-sp-compact-projection-tensor-square"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
-    "place": "(2), compatibility of the projection formula with base change; Stacks Tags 0E48 and 0GL1; explicit open restriction and pasting calculation in ordinary finite-ring and tower categories"
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "rg -n -i 'projection.?formula' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
-      "results": "3 hits: Mathlib/RingTheory/WittVector/Identities.lean:20,98 (verschiebung_mul_frobenius, Witt vector identity) and Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean:146 (a comment). None concerns sheaves, derived categories or base change.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -n -i 'projectionFormula|projFormula' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
-      "results": "no hits",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rg -l 'extensionByZero|extendByZero' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
-      "results": "no hits (Mathlib has no extension by zero of sheaves of modules)",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "not run: LeanSearch and Loogle are not reachable from the review machine",
-      "results": "none",
-      "date": "2026-10-17",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "The projection formula map for compactly supported derived direct image of sheaves commutes with base change",
-      "results": "Hits: TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_assoc, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardNatTrans_app_val_app_apply; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"projection\"",
-      "results": "Hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "projectionFormula|projection.*baseChange|baseChange.*projection",
-      "results": "No hits",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "The projection formula for derived pushforward with compact support commutes with pullback",
-      "results": "Hits: CompHausLike.pullback.condition, CategoryTheory.ChosenPullbacksAlong.pullbackMap_snd, SheafOfModules.pullbackComp, CategoryTheory.ChosenPullbacksAlong.pullbackMap_fst, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_snd, AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, AlgebraicGeometry.Scheme.Modules.pullbackComp, CategoryTheory.ExponentiableMorphism.pushforwardUncurry; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Tensor projection morphisms defined by an adjunction counit commute with the mate of a square of monoidal pullback functors",
-      "results": "Hits: CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.mateEquiv_counit; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"rightAdjointProjectionMap\"",
-      "results": "No hits",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "rightAdjointProjectionMap|projectionMap_mate|extensionByZero",
-      "results": "No hits",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "created": {
-    "by": "reviewer",
-    "item": "det-sp-purity-bc-factors",
-    "date": "2026-10-17",
-    "group": "Q149"
+  {
+   "text": "Invert the same tensor-square identity by cancellation of the displayed tensor and square isomorphisms. Apply the proved arbitrary-bifunctor projectionMap_mate theorem to the two open adjunctions, using the inverse square as its mate. The definitions gammaInvNat and betaInvNat identify its components with the present inverse open tensor and inverse open exchange maps. Cancel the open isomorphisms to obtain open_compatibility.",
+   "uses": [
+    "lem-sp-compact-projection-tensor-square",
+    "lem-asd-adjunction-projection-map-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
   },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-prop-sp-purity-bc",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "Expand the supplied-domain compactification projection and exchange into their proper and open factors. Naturality of proper exchange moves the open tensor map through exchange. Apply the open equality, then proper_compatibility, and then naturality of the actual rightAdjointProjectionMap natural transformation in the first input. This gives forward_compatibility. Naturality of each constituent supplies the simultaneous naturality clause.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
   },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-sp-compact-projection-base-change",
-    "worker": "stage1",
-    "summary": "Proved the finite-ring and tower ambient compatibility by applying the existing general ringed-topos exchange/tensor theorem to the proper factor, deriving the open factor from unit normalization and full faithfulness, and writing the explicit naturality/pasting computation. The inverse clause follows by composing with inverses. No statement correction and no new nodes. The etale Lean declarations and bounded/completed six-functor coherence statements do not attach this ambient pro-etale/tower item.",
-    "blueprint": "Realizes det-sp-purity-bc-factors proof (2), the sentence 'By naturality of the projection formula under pullback (compatibility of the projection formula with base change)'. It supplies the compact-support identity used by unit sk-prop-sp-purity-bc step 3 without changing that unit's route.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-diagram-site-realization",
-        "why": "Generic small diagram-site presentation for the inverse-system topos; not a replacement for a purity argument."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "why": "Generic unbounded ringed-topos tensor and K-flat construction, applicable also to the ring-system topos."
-      },
-      {
-        "node": "lem-sf-open-tensor-normalization",
-        "why": "Generic open adjunction normalization and full faithfulness, explicitly including strict coefficient systems; needed to prove the open-factor identity."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
-        "why": "Generic counit/mate coherence for ordinary unbounded ringed topoi, used for the proper factor of the prescribed compactification composite."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-projection-mate-exact",
-        "why": "Generic naturality in the first projection input, needed in the explicit pasting computation."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sf-open-tensor-normalization",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-Codex-Q114-310b6ca73",
-    "group": "Q114",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q114-310b6ca73 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements and source passages. All five steps check, including canonical mate directions, unbounded tower coefficients, open normalization and inverse order. No duplicate, cycle, target weakening or repair found. Five generic tool uses accepted; detailed checks are in review.md."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.SmoothPurityCompactProjectionBaseChange",
-    "declaration": "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.compact_projection_base_change",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Coefficients",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Coefficients.moduleMap",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.siteSquare",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.OpenModel",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.ordinarySquare",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.square",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.shriek",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.openAdjunction",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.curryPostIso",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.curryPreIso",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.curriedTensorComparison",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.gammaInvNat",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.gammaInv",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.betaInvNat",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.betaInv",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.OpenComparisons",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.gammaIso",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.betaIso",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.openProjectionIso",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.projection",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.exchange",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.targetIso",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.pulledProjection",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.tensorTargetExchange",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.tensorExchange",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.DiagramAssertion",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.finiteCoefficients",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.TowerCoefficients",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.GeometricAssertion",
-      "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.compact_projection_base_change"
-    ],
-    "file": "lean/Sheaf/Paper/SmoothPurityCompactProjectionBaseChange.lean",
-    "statement": "theorem compact_projection_base_change (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) : (∀ (A : Type (u + 1)) [CommRing A] [Finite A] (_ha : ∃ r : ℕ, 1 ≤ r ∧ (l ^ r : A) = 0), (∃ o : Presentation (finiteCoefficients A), Nonempty (OpenComparisons o)) ∧ ∀ (o : Presentation (finiteCoefficients A)) (h : OpenComparisons o), GeometricAssertion D o h) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], (∃ c : Coefficients.{u} .systems, TowerCoefficients l E c ∧ ∃ o : Presentation c, Nonempty (OpenComparisons o)) ∧ ∀ (c : Coefficients.{u} .systems), TowerCoefficients l E c → ∀ (o : Presentation c) (h : OpenComparisons o), GeometricAssertion D o h)",
-    "branch": "newtargets-dag",
-    "by": "Q110",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "Both coefficient settings are stated on their actual ordinary/vertical ringed sites, with nonempty canonical presentations and universal compatibility for every such presentation. The recorded supplied-domain compactificationExchangeFromData and compactificationProjectionFromData are used literally. All operation and comparison data are pinned by section maps, adjunctions, exact localization and pure-tensor/K-flat representative equations; none of the desired coherence is an input. TowerCoefficients retains the actual varying coefficient presheaf and a module-presheaf-preserving equivalence with spCoefficientTowers. The inverse clause includes its source and target identifications explicitly."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-026defa26",
-    "group": "Q110",
-    "result": "pass",
-    "note": "Read the node, all 12 stmt_deps records, the report, the module and the upstream interfaces it uses: Operation, TensorModel, TensorComparison, Mode/Site/topology, Compactification, spCoefficientPresheaf/Towers, and compactificationExchangeFromData/ProjectionFromData (called literally). Every hypothesis matches the node with nothing stronger: v has no flatness, smoothness or properness condition; the compactification is the upstream Compactification; pullbacks are arbitrary IsPullback realizations. Setting (i): finite CommRing A in Type (u+1) with ∃ r ≥ 1, l^r = 0, over the constant ring sheaf, unbounded and uncompleted. Setting (ii): TowerCoefficients pins the ring presheaf to spCoefficientPresheaf, the structure maps to the constant maps on O_E/l^(n+1), and gives a normalized equivalence with spCoefficientTowers. Each setting asserts that a presentation exists, so the statement is not vacuous, and claims the result for every presentation; all presentation data are pinned up to unique iso, so this is not stronger in substance. DiagramAssertion gives the forward identity with the node's source and target identifications, simultaneous naturality in M and K, and the inverse identity under exactly the four IsIso hypotheses, in the right order. Edge cases (zero ring, r=1, first level exponent 1, empty schemes, unbounded complexes, nonflat transitions, universes) are covered. No hollow defs; one sorry, in the main theorem, with the 5-step proof docstring; source and blueprint docstrings throughout; no line over 100 chars; proof-dependency imports are plain imports; lean.statement is verbatim and only the lean field changed. nt_compile.py on the snapshot: rc 0, 8.9 s, no errors or warnings; #check matches the statement; axioms are propext, sorryAx, Classical.choice, Quot.sound. Non-blocking: the second-reading section is a short self-check by the worker (weak against H11, covered by this review); citers must transport the recorded finite operations into a Presentation; some public imports are cite-only."
+  {
+   "text": "Under exactly the four stated invertibility hypotheses, cancel the forward identity with the corresponding inverses and expand tensorTargetExchange and tensorExchange. This gives the inverse equation in DiagramAssertion. The geometric assertion follows by specializing the two compactification squares, and the coefficient-existence witnesses complete the conjunction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-asd-adjunction-projection-map-mate",
+  "lem-sp-compact-projection-finite-presentation",
+  "lem-sp-compact-projection-tensor-square",
+  "lem-sp-compact-projection-tower-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), direct mate and compactification pasting calculation in the delivered Lean module; Stacks 0E48 and 0GL1"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'projection.?formula' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "3 hits: Mathlib/RingTheory/WittVector/Identities.lean:20,98 (verschiebung_mul_frobenius, Witt vector identity) and Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean:146 (a comment). None concerns sheaves, derived categories or base change.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'projectionFormula|projFormula' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "no hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l 'extensionByZero|extendByZero' /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "no hits (Mathlib has no extension by zero of sheaves of modules)",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "not run: LeanSearch and Loogle are not reachable from the review machine",
+   "results": "none",
+   "date": "2026-10-17",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The projection formula map for compactly supported derived direct image of sheaves commutes with base change",
+   "results": "Hits: TopCat.Sheaf.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, SheafOfModules.pushforward_assoc, CategoryTheory.Functor.sheafPushforwardContinuousComp'_hom_app_val_app, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardNatTrans_app_val_app_apply; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\"",
+   "results": "Hits: Lean.AuxParentProjectionInfo, Lean.ProjectionFunctionInfo, Lean.instInhabitedAuxParentProjectionInfo, Lean.instInhabitedProjectionFunctionInfo, Lean.instReprAuxParentProjectionInfo, Lean.instReprProjectionFunctionInfo, Lean.projectionFnInfoExt, Lean.AuxParentProjectionInfo.fromClass; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection.*baseChange|baseChange.*projection",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for derived pushforward with compact support commutes with pullback",
+   "results": "Hits: CompHausLike.pullback.condition, CategoryTheory.ChosenPullbacksAlong.pullbackMap_snd, SheafOfModules.pullbackComp, CategoryTheory.ChosenPullbacksAlong.pullbackMap_fst, AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.pullbackConeOfLeftLift_snd, AlgebraicGeometry.Scheme.Pullback.lift_comp_ι, AlgebraicGeometry.Scheme.Modules.pullbackComp, CategoryTheory.ExponentiableMorphism.pushforwardUncurry; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor projection morphisms defined by an adjunction counit commute with the mate of a square of monoidal pullback functors",
+   "results": "Hits: CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.ExponentiableMorphism.ev_coev_assoc, CategoryTheory.ExponentiableMorphism.ev_coev, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.mateEquiv_counit; these are adjunction, pullback-composition or unrelated projection facts, not the asserted derived compact-support identity.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightAdjointProjectionMap\"",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|projectionMap_mate|extensionByZero",
+   "results": "No hits",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "reviewer",
+  "item": "det-sp-purity-bc-factors",
+  "date": "2026-10-17",
+  "group": "Q149"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-sp-compact-projection-base-change",
+  "worker": "stage1",
+  "summary": "Proved the finite-ring and tower ambient compatibility by applying the existing general ringed-topos exchange/tensor theorem to the proper factor, deriving the open factor from unit normalization and full faithfulness, and writing the explicit naturality/pasting computation. The inverse clause follows by composing with inverses. No statement correction and no new nodes. The etale Lean declarations and bounded/completed six-functor coherence statements do not attach this ambient pro-etale/tower item.",
+  "blueprint": "Realizes det-sp-purity-bc-factors proof (2), the sentence 'By naturality of the projection formula under pullback (compatibility of the projection formula with base change)'. It supplies the compact-support identity used by unit sk-prop-sp-purity-bc step 3 without changing that unit's route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-diagram-site-realization",
+    "why": "Generic small diagram-site presentation for the inverse-system topos; not a replacement for a purity argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic unbounded ringed-topos tensor and K-flat construction, applicable also to the ring-system topos."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic open adjunction normalization and full faithfulness, explicitly including strict coefficient systems; needed to prove the open-factor identity."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic counit/mate coherence for ordinary unbounded ringed topoi, used for the proper factor of the prescribed compactification composite."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Generic naturality in the first projection input, needed in the explicit pasting computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-Codex-Q114-310b6ca73",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q114-310b6ca73 (reviewer sub-agent of L); spot-checked: Read the complete item, cited statements and source passages. All five steps check, including canonical mate directions, unbounded tower coefficients, open normalization and inverse order. No duplicate, cycle, target weakening or repair found. Five generic tool uses accepted; detailed checks are in review.md."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SmoothPurityCompactProjectionBaseChange",
+  "declaration": "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.compact_projection_base_change",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.compact_projection_base_change"
+  ],
+  "file": "lean/Sheaf/Paper/SmoothPurityCompactProjectionBaseChange.lean",
+  "statement": "theorem compact_projection_base_change (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) : (∀ (A : Type (u + 1)) [CommRing A] [Finite A] (_ha : ∃ r : ℕ, 1 ≤ r ∧ (l ^ r : A) = 0), (∃ o : Presentation (finiteCoefficients A), Nonempty (OpenComparisons o)) ∧ ∀ (o : Presentation (finiteCoefficients A)) (h : OpenComparisons o), GeometricAssertion D o h) ∧ (∀ (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E], (∃ c : Coefficients.{u} .systems, TowerCoefficients l E c ∧ ∃ o : Presentation c, Nonempty (OpenComparisons o)) ∧ ∀ (c : Coefficients.{u} .systems), TowerCoefficients l E c → ∀ (o : Presentation c) (h : OpenComparisons o), GeometricAssertion D o h)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-20",
+  "existing": false,
+  "note": "Both coefficient settings are stated on their actual ordinary/vertical ringed sites, with nonempty canonical presentations and universal compatibility for every such presentation. The recorded supplied-domain compactificationExchangeFromData and compactificationProjectionFromData are used literally. All operation and comparison data are pinned by section maps, adjunctions, exact localization and pure-tensor/K-flat representative equations; none of the desired coherence is an input. TowerCoefficients retains the actual varying coefficient presheaf and a module-presheaf-preserving equivalence with spCoefficientTowers. The inverse clause includes its source and target identifications explicitly. Existing public data declarations have identical signatures and bodies, relocated to SmoothPurityCompactProjectionData and publicly reexported here. The three independent construction/coherence gaps have their own nodes; the categorical assembly is complete."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-026defa26",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Read the node, all 12 stmt_deps records, the report, the module and the upstream interfaces it uses: Operation, TensorModel, TensorComparison, Mode/Site/topology, Compactification, spCoefficientPresheaf/Towers, and compactificationExchangeFromData/ProjectionFromData (called literally). Every hypothesis matches the node with nothing stronger: v has no flatness, smoothness or properness condition; the compactification is the upstream Compactification; pullbacks are arbitrary IsPullback realizations. Setting (i): finite CommRing A in Type (u+1) with ∃ r ≥ 1, l^r = 0, over the constant ring sheaf, unbounded and uncompleted. Setting (ii): TowerCoefficients pins the ring presheaf to spCoefficientPresheaf, the structure maps to the constant maps on O_E/l^(n+1), and gives a normalized equivalence with spCoefficientTowers. Each setting asserts that a presentation exists, so the statement is not vacuous, and claims the result for every presentation; all presentation data are pinned up to unique iso, so this is not stronger in substance. DiagramAssertion gives the forward identity with the node's source and target identifications, simultaneous naturality in M and K, and the inverse identity under exactly the four IsIso hypotheses, in the right order. Edge cases (zero ring, r=1, first level exponent 1, empty schemes, unbounded complexes, nonflat transitions, universes) are covered. No hollow defs; one sorry, in the main theorem, with the 5-step proof docstring; source and blueprint docstrings throughout; no line over 100 chars; proof-dependency imports are plain imports; lean.statement is verbatim and only the lean field changed. nt_compile.py on the snapshot: rc 0, 8.9 s, no errors or warnings; #check matches the statement; axioms are propext, sorryAx, Classical.choice, Quot.sound. Non-blocking: the second-reading section is a short self-check by the worker (weak against H11, covered by this review); citers must transport the recorded finite operations into a Presentation; some public imports are cite-only."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-804e2",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261020T051256-L-1617433",
+  "kind": "interface"
+ }
 }

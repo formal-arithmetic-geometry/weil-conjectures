@@ -1,0 +1,147 @@
+{
+ "id": "lem-sp-compact-projection-tower-operations",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (2), the sentence asserting compatibility of the projection formula with base change",
+   "via": [
+    "lem-sp-compact-projection-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Operations on an already normalized varying coefficient system",
+ "statement": "Fix a prime l and a finite extension E of Q_l. Suppose a family c of commutative ring sheaves on the vertical pro-etale sites satisfies TowerCoefficients of [def-sp-compact-projection-presentation]: its underlying ring presheaf is the recorded quotient-ring system, its spatial structural maps are the constant-section maps, and its module categories are equivalent to the coefficient towers by equivalences preserving whole module presheaves and maps. Then c admits a simultaneous presentation with invertible inverse open projection and open base-change mates. This conclusion does not construct c or its normalized equivalence.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), compatibility of compact-support projection with base change"
+ },
+ "stmt_deps": [
+  "def-sp-compact-projection-presentation"
+ ],
+ "proof": [
+  {
+   "text": "On the vertical diagram site, scheme inverse image keeps the coefficient index fixed. The actual quotient-ring sheaves and spatial constant-section maps identify the pulled-back coefficient ring with the target ring. Inverse image of module sheaves is therefore exact. The actual module adjunction and K-injective resolutions give the spatial operations.",
+   "uses": [
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
+  },
+  {
+   "text": "Localize signed total tensor on flat-term K-flat complexes, using one tensor model per scheme. Pure scalar-extension tensors and their bidegree totalizations supply the normalized comparisons for every spatial pullback. The coefficient transitions remain part of the vertical site, rather than separate derived evaluations.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
+  },
+  {
+   "text": "The iterated fibre-product comparison gives the section-normalized direct-image square. Construct exact open extension on the same vertical site; its unit is invertible. Apply the normalized open theorem and adjunction uniqueness to identify the two open mates with its invertible comparisons.",
+   "uses": [
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-operations",
+  "lem-sf-open-tensor-normalization",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), compatibility of compact-support projection with base change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor pullback on ringed sites and normalized extension by zero commute with a base change square",
+   "results": "SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; Algebra.Extension.baseChange; CategoryTheory.Precoverage.ZeroHypercover.pullback₂_toPreZeroHypercover; PresheafOfModules.pullback; SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; KaehlerDifferential.cotangentComplexBaseChange_tmul",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned elementary pullback and adjunction declarations do not construct the simultaneous normalized presentations or their derived tensor square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of exact pullback functors for sheaves of modules over constant rings on pro-etale sites",
+   "results": "SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackComp; SheafOfModules.pullback; SheafOfModules.pullbackIso; SheafOfModules.pullbackObjFreeIso; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; PresheafOfModules.pullbackObjIsDefined",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned elementary pullback and adjunction declarations do not construct the simultaneous normalized presentations or their derived tensor square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackPushforwardAdjunction\"",
+   "results": "PresheafOfModules.pullbackPushforwardAdjunction; PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; TopCat.Presheaf.pullbackPushforwardAdjunction; TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk; TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk_assoc",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned elementary pullback and adjunction declarations do not construct the simultaneous normalized presentations or their derived tensor square"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(comp|square)|pullback.*[Tt]ensor",
+   "results": "Mathlib/Algebra/Lie/Weights/Basic.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean; Mathlib/Algebra/Module/LinearMap/Polynomial.lean; Mathlib/CategoryTheory/MarkovCategory/Positive.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned elementary pullback and adjunction declarations do not construct the simultaneous normalized presentations or their derived tensor square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityCompactProjectionBaseChange",
+  "date": "2026-10-20",
+  "group": "F8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityCompactProjectionTowerOperations",
+  "file": "lean/Sheaf/Paper/SmoothPurityCompactProjectionTowerOperations.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.normalized_tower_operations_exists",
+  "statement": "theorem normalized_tower_operations_exists (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (c : Coefficients.{u} .systems) (_hc : TowerCoefficients l E c) : ∃ o : Presentation c, Nonempty (OpenComparisons o)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-20"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-804e2",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261020T051256-L-1617433",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-804e2",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261020T051256-L-1617433",
+  "kind": "interface"
+ }
+}

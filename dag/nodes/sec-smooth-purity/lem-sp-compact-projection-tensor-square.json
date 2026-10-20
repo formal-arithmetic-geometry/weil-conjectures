@@ -1,0 +1,147 @@
+{
+ "id": "lem-sp-compact-projection-tensor-square",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-purity-bc-factors",
+   "place": "Proof (2), the sentence asserting compatibility of the projection formula with base change",
+   "via": [
+    "lem-sp-compact-projection-base-change"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Tensor coherence for the section-normalized inverse-image square",
+ "statement": "For a presentation as in [def-sp-compact-projection-presentation] and a commutative square of schemes, the derived pullback square commutes with the two successive normalized tensor comparisons. Explicitly, starting at the pullback along the first route of the derived tensor of M and N, applying the square and then the two tensor comparisons equals applying the two tensor comparisons for the other route and then the tensor of the square components at M and N. This statement concerns inverse images only and assumes no compact-support operation or proper base-change invertibility.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), compatibility of compact-support projection with base change"
+ },
+ "stmt_deps": [
+  "def-sp-compact-projection-presentation"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate the section-normalized direct-image square through the ordinary module adjunctions. Its inverse-image square sends scalar-extension insertion generators to the same iterated fibre-product sections. Apply the pure-unit normalization to both tensor comparisons: both routes split the same two factors. The tensor universal property and sheafification give equality of ordinary module maps.",
+   "uses": [
+    "lem-weil-pbc-ringed-square-tensor-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
+  },
+  {
+   "text": "Apply the ordinary equality in each bidegree of two flat-term K-flat complexes and sum along total degrees. Both maps preserve bidegrees and the sign in the second differential, so they agree as chain maps. The tensor representative equations and exact localization formula for the square identify these maps with the displayed derived routes.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
+  },
+  {
+   "text": "Use two-variable flat K-flat descent to extend the equation to all derived inputs, on the vertical ringed site itself in the system case.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+    "place": "Proof (2), compatibility of compact-support projection with base change"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-square-tensor-compatibility",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-purity-bc/sk-prop-sp-purity-bc-factors.proof.md",
+  "place": "Proof (2), compatibility of compact-support projection with base change"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor pullback on ringed sites and normalized extension by zero commute with a base change square",
+   "results": "SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; Algebra.Extension.baseChange; CategoryTheory.Precoverage.ZeroHypercover.pullback₂_toPreZeroHypercover; PresheafOfModules.pullback; SheafOfModules.pullbackComp; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; KaehlerDifferential.cotangentComplexBaseChange_tmul",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned elementary pullback and adjunction declarations do not construct the simultaneous normalized presentations or their derived tensor square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of exact pullback functors for sheaves of modules over constant rings on pro-etale sites",
+   "results": "SheafOfModules.instIsLeftAdjointPullback; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackComp; SheafOfModules.pullback; SheafOfModules.pullbackIso; SheafOfModules.pullbackObjFreeIso; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback; PresheafOfModules.pullbackObjIsDefined",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned elementary pullback and adjunction declarations do not construct the simultaneous normalized presentations or their derived tensor square"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullbackPushforwardAdjunction\"",
+   "results": "PresheafOfModules.pullbackPushforwardAdjunction; PresheafOfModulesOfCommRing.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; TopCat.Presheaf.pullbackPushforwardAdjunction; TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk; TopCat.Presheaf.pullbackPushforwardAdjunction_unit_app_app_germToPullbackStalk_assoc",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned elementary pullback and adjunction declarations do not construct the simultaneous normalized presentations or their derived tensor square"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*(comp|square)|pullback.*[Tt]ensor",
+   "results": "Mathlib/Algebra/Lie/Weights/Basic.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Lie/Loop.lean; Mathlib/Algebra/Algebra/Subalgebra/Centralizer.lean; Mathlib/Algebra/Module/LinearMap/Polynomial.lean; Mathlib/CategoryTheory/MarkovCategory/Positive.lean",
+   "date": "2026-10-19",
+   "verdict": "no match: the returned elementary pullback and adjunction declarations do not construct the simultaneous normalized presentations or their derived tensor square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.SmoothPurityCompactProjectionBaseChange",
+  "date": "2026-10-20",
+  "group": "F8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-purity-bc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.SmoothPurityCompactProjectionTensorSquare",
+  "file": "lean/Sheaf/Paper/SmoothPurityCompactProjectionTensorSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CompactProjectionBaseChange.Presentation.tensor_square",
+  "statement": "theorem Presentation.tensor_square {m : Mode} {c : Coefficients.{u} m} (o : Presentation c) {X' X Y' Y : Scheme.{u}} {a : X' ⟶ X} {b : X' ⟶ Y'} {f : X ⟶ Y} {g : Y' ⟶ Y} (s : CommSq a b f g) (M N : Der (c.ring Y)) : (o.square s).hom.app ((o.tensor Y).functor.obj (M, N)) ≫ (o.operation a).left.map ((o.tensorComparison f).comparison.hom.app (M, N)) ≫ (o.tensorComparison a).comparison.hom.app ((o.operation f).left.obj M, (o.operation f).left.obj N) = (o.operation b).left.map ((o.tensorComparison g).comparison.hom.app (M, N)) ≫ (o.tensorComparison b).comparison.hom.app ((o.operation g).left.obj M, (o.operation g).left.obj N) ≫ (o.tensor X').functor.map (CategoryTheory.Prod.mkHom ((o.square s).hom.app M) ((o.square s).hom.app N))",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-20"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-804e2",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261020T051256-L-1617433",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-804e2",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261020T051256-L-1617433",
+  "kind": "interface"
+ }
+}
