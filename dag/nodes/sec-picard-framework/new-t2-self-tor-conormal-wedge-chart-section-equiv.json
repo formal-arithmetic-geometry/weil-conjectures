@@ -20,16 +20,15 @@
  },
  "proof": [
   {
-   "text": "Identify exteriorSheafPresheaf with PresheafOfModules.exteriorPower: the object modules coincide and exteriorSheafRestriction_existsUnique identifies their restriction maps, using the upstream pure-wedge formula. Transport the upstream affine-unit bijectivity theorem through this equality. Use affine_conormal_sections to supply quasi-coherence of N. Since i is affine, V is an affine open. The canonical exterior sheafification unit on V is bijective by new-q1-exterior-sheaf-affine-unit-bijective, so LinearEquiv.ofBijective gives e1 from the algebraic exterior module of N(V) to E(V).",
+   "text": "Use affine_conormal_sections to supply quasi-coherence of N. Since i is affine, V is an affine open. The canonical exterior sheafification unit for PresheafOfModules.exteriorPower on V is bijective by new-q1-exterior-sheaf-affine-unit-bijective, so LinearEquiv.ofBijective gives e1 from the algebraic exterior module of N(V) to sections of Scheme.Modules.exteriorPower N n. This is the existing upstream proof; the consumer transports from exteriorSheaf by equality of restriction maps and naturality of the unit.",
    "uses": [
     "lem-weil-pbc-affine-conormal-sections",
-    "new-q1-exterior-sheaf-affine-unit-bijective",
-    "def-sc-sheaf-exterior-power"
+    "new-q1-exterior-sheaf-affine-unit-bijective"
    ],
    "elementary": true
   },
   {
-   "text": "Obtain e2 from the same algebraic exterior module to T(M)(V) with its unit-wedge formula from new-q1-self-tor-conormal-exterior-section-model. Take e = e1.symm.trans e2. exteriorSheafSection is definitionally e1 applied to the algebraic wedge; e1.symm_apply_apply and the formula for e2 prove the required equation. Evaluating the over-site modules at the identity is definitionally evaluation on V.",
+   "text": "Obtain e2 from the same algebraic exterior module to T(M)(V) with its unit-wedge formula from new-q1-self-tor-conormal-exterior-section-model. Take e = e1.symm.trans e2. Scheme.Modules.wedge is definitionally e1 applied to the algebraic wedge; e1.symm_apply_apply and the formula for e2 prove the required equation. Evaluating the over-site modules at the identity is definitionally evaluation on V.",
    "uses": [
     "new-q1-self-tor-conormal-exterior-section-model"
    ],
@@ -39,15 +38,14 @@
  "proof_deps": [
   "lem-weil-pbc-affine-conormal-sections",
   "new-q1-exterior-sheaf-affine-unit-bijective",
-  "new-q1-self-tor-conormal-exterior-section-model",
-  "def-sc-sheaf-exterior-power"
+  "new-q1-self-tor-conormal-exterior-section-model"
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "E7",
-  "date": "2026-10-20",
-  "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafAffineUnit.lean",
-  "place": "Retirement adaptation: canonical exterior-presheaf equality and upstream affine-unit theorem; the remaining existing proof is preserved."
+  "group": "R6",
+  "date": "2026-10-21",
+  "document": "lean/WeilConjectures/AlgebraicGeometry/SelfTorConormalWedgeChartSectionEquiv.lean",
+  "place": "Retirement attachment to the existing upstream proof. The consumer uses sheafification of the exterior-presheaf isomorphism and naturality of its unit."
  },
  "mathlib_searches": [
   {
@@ -128,14 +126,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChartSectionEquiv",
-  "file": "lean/Sheaf/AlgebraicGeometry/SelfTorConormalWedgeChartSectionEquiv.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChartSectionEquiv",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/SelfTorConormalWedgeChartSectionEquiv.lean",
   "declaration": "AlgebraicGeometry.exists_selfTor_conormal_wedge_chart_section_equiv",
-  "statement": "theorem exists_selfTor_conormal_wedge_chart_section_equiv\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (n : ℕ) (U : Y.affineOpens) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let E := Scheme.Modules.exteriorSheaf N n\n    let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n      Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    ∃ e : ((E.over (i ⁻¹ᵁ U.1)).val.obj\n          (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))) ≃ₗ[Z.presheaf.obj (op (i ⁻¹ᵁ U.1))]\n        ((T.obj M).over (i ⁻¹ᵁ U.1)).val.obj\n          (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1)))),\n      ∀ b : Fin n → i.ker.toModules.val.obj (op U.1),\n        e (Scheme.Modules.exteriorSheafSection N n (i ⁻¹ᵁ U.1)\n          (fun j ↦ ((Classical.choose\n            (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app\n              i.ker.toModules).val.app (op U.1) (b j))) =\n          selfTorAffineSection i U M (selfTorIdealWedge i U n b)",
+  "statement": "theorem exists_selfTor_conormal_wedge_chart_section_equiv\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    (n : ℕ) (U : Y.affineOpens) :\n    let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules\n    let E := Scheme.Modules.exteriorPower N n\n    let M := conormalExteriorModule (Γ(Y, U.1) : Type u) (i.ker.ideal U) n\n    let T := tilde.functor Γ(Y, U.1) ⋙ Scheme.Modules.restrictFunctor U.2.isoSpec.hom ⋙\n      Scheme.Modules.pushforward U.1.ι ⋙ Scheme.Modules.tensorPullback i\n    ∃ e : ((E.over (i ⁻¹ᵁ U.1)).val.obj\n          (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1))))) ≃ₗ[Z.presheaf.obj (op (i ⁻¹ᵁ U.1))]\n        ((T.obj M).over (i ⁻¹ᵁ U.1)).val.obj\n          (op (Over.mk (𝟙 (i ⁻¹ᵁ U.1)))),\n      ∀ b : Fin n → i.ker.toModules.val.obj (op U.1),\n        e (Scheme.Modules.wedge (M := N) (r := n) (U := (i ⁻¹ᵁ U.1))\n          (fun j ↦ ((Classical.choose\n            (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app\n              i.ker.toModules).val.app (op U.1) (b j))) =\n          selfTorAffineSection i U M (selfTorIdealWedge i U n b)",
   "branch": "sheaf-dag",
-  "by": "H1",
-  "date": "2026-10-14"
+  "by": "R6",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf duplicate. The direct consumer transports the upstream equivalence along the identity-on-objects isomorphism of the two exterior presheaves, with its wedge equation supplied by naturality of the sheafification unit; its public statement is unchanged."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -150,12 +149,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-863a2",
-  "group": "E7",
-  "result": "pass",
-  "landing": "20261020T151216-L-2647231",
+  "reviewer": "C-606f5",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T221337-L-4176246",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf twin ExteriorSheafAffineUnit vs upstream WeilConjectures twin (node lean.statement verbatim upstream, existing:true); both adapted consumers + next-level importers compiled; axioms clean"
+  "note": "independent cc review: node lean.statement vs live upstream WeilConjectures twin (verbatim); adapted consumer vs live original (public statement and public imports unchanged); private exterior iso vs Sheaf.AlgebraicGeometry.ExteriorSheafComparison (duplicate)"
  },
  "lean_audit": {
   "master": {

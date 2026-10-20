@@ -7,8 +7,9 @@ module
 public import WeilConjectures.AlgebraicGeometry.SelfTorAffineSection
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChartSectionEquiv
+import WeilConjectures.AlgebraicGeometry.SelfTorConormalWedgeChartSectionEquiv
 import Sheaf.AlgebraicGeometry.SelfTorConormalWedgeChartFromSections
+import Sheaf.AlgebraicGeometry.ExteriorSheafComparison
 
 /-! # Affine conormal exterior coordinates preserving ideal wedges
 
@@ -21,6 +22,8 @@ universe u
 open CategoryTheory Opposite
 namespace AlgebraicGeometry
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- On one affine chart the exterior conormal coordinate sends the wedge of the
 pullback-unit images of ideal sections to the associated algebraic conormal wedge.
 This statement involves no derived category or Tor module.
@@ -44,7 +47,12 @@ asserted equality on each tuple. The affine model section in the conclusion is
 constructed by the tilde unit and tensor-pullback unit, so it is the same constant
 wedge, not a chosen section. For n=0 both sides are the quotient unit. The empty
 chart and zero quotient have zero section modules; the zero ideal is allowed.
-No finite generation or regularity is used. -/
+No finite generation or regularity is used.
+
+The implementation uses the existing upstream affine section equivalence. Evaluate
+the canonical comparison exteriorSheafIsoExteriorPower on the chart; it sends
+exteriorSheafSection to wedge (exteriorSheafIsoExteriorPower_hom_wedge). Compose with
+the upstream equivalence and extend it by the affine section reconstruction theorem. -/
 theorem exists_selfTor_conormal_wedge_chart
     {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]
     (n : ℕ) (U : Y.affineOpens) :
@@ -61,11 +69,24 @@ theorem exists_selfTor_conormal_wedge_chart
                 (Scheme.Modules.exists_tensorPullbackAdjunction i)).unit.app
                   i.ker.toModules).val.app (op U.1) (b j))) =
           selfTorAffineSection i U M (selfTorIdealWedge i U n b) := by
-  obtain ⟨e, he⟩ := exists_selfTor_conormal_wedge_chart_section_equiv i n U
+  let N := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
+  let V := i ⁻¹ᵁ U.1
+  let e₀ : (Scheme.Modules.exteriorSheaf N n).val.obj (op V) ≃ₗ[
+      Z.presheaf.obj (op V)] (Scheme.Modules.exteriorPower N n).val.obj (op V) :=
+    ((SheafOfModules.evaluation Z.ringCatSheaf (op V)).mapIso
+      (Scheme.Modules.exteriorSheafIsoExteriorPower N n)).toLinearEquiv
+  have hc (a : Fin n → N.val.obj (op V)) :
+      e₀ (Scheme.Modules.exteriorSheafSection N n V a) =
+        Scheme.Modules.wedge (M := N) a :=
+    Scheme.Modules.exteriorSheafIsoExteriorPower_hom_wedge N n V a
+  obtain ⟨e₁, h₁⟩ := exists_selfTor_conormal_wedge_chart_section_equiv i n U
+  let e := e₀.trans e₁
   obtain ⟨s, hs⟩ := exists_selfTor_conormal_wedge_chart_from_sections i n U e
   refine ⟨s, ?_⟩
   intro b
   rw [hs]
-  exact he b
+  change e₁ (e₀ _) = _
+  rw [hc]
+  exact h₁ b
 
 end AlgebraicGeometry

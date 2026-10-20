@@ -20,8 +20,9 @@
  },
  "proof": [
   {
-   "text": "Obtain the Gamma(Z,i⁻¹U)-linear section equivalence e and its pure-wedge formula from the affine conormal section calculation.",
+   "text": "Evaluate the canonical comparison exteriorSheafIsoExteriorPower N n (the sheafified identity-on-objects isomorphism of exteriorSheafPresheaf with PresheafOfModules.exteriorPower) on V to obtain a section equivalence e0; exteriorSheafIsoExteriorPower_hom_wedge says e0 sends exteriorSheafSection to Scheme.Modules.wedge. Compose e0 with the upstream affine conormal section equivalence and retain its pure-wedge formula.",
    "uses": [
+    "lem-sc-exterior-sheaf-comparison",
     "new-t2-self-tor-conormal-wedge-chart-section-equiv"
    ],
    "elementary": false
@@ -35,15 +36,16 @@
   }
  ],
  "proof_deps": [
+  "lem-sc-exterior-sheaf-comparison",
   "new-t2-self-tor-conormal-wedge-chart-section-equiv",
   "new-t2-self-tor-conormal-wedge-chart-from-sections"
  ],
  "proof_origin": {
-  "by": "worker",
-  "agent": "H1",
-  "date": "2026-10-14",
-  "document": "https://stacks.math.columbia.edu/tag/01I6",
-  "place": "Linear affine section calculation followed by affine quasi-coherent sheaf reconstruction; conormal input from Tag 01R3."
+  "by": "agent",
+  "group": "R6",
+  "date": "2026-10-21",
+  "document": "lean/Sheaf/AlgebraicGeometry/SelfTorConormalWedgeChart.lean",
+  "place": "Retirement adaptation: the canonical exterior-sheaf comparison evaluated on the chart, then the upstream section equivalence and the existing affine section extension theorem."
  },
  "mathlib_searches": [
   {
@@ -144,14 +146,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
-  "result": "pass",
-  "landing": "20261014T001720-L-2550147",
+  "reviewer": "C-606f5",
+  "group": "R6",
+  "result": "fix",
+  "landing": "20261020T221337-L-4176246",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: node lean.statement vs live upstream WeilConjectures twin (verbatim); adapted consumer vs live original (public statement and public imports unchanged); private exterior iso vs Sheaf.AlgebraicGeometry.ExteriorSheafComparison (duplicate)"
  },
  "lean_audit": {
   "master": {
