@@ -120,15 +120,16 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by R-frd2748 (reviewer sub-agent of L); spot-checked: Statement matches Tag 01ZR(3) and the citer lem-pc-fp-complex-descent step 3 (d^{r+1}d^r=0 on fixed models). FIX more, RETURN less: (1) C1/E: step 2 said the images of generators are 'coefficients zero in the filtered colimit ring R' - they are elements of the target module over an affine coordinate ring, not of R, and R=colim R_j was uncited; rewrote as steps 2-4: finite affine cover, R=colim R_j via lem-weil-pbc-spec-colimit-limit, B=colim B_j by tensor, presentation of the target (finite presentation of G used, only finite generation of F), lifts/vanishing via lem-pc-filtered-colimit-commrings-elementwise (1)(2), common stage; both cross-unit nodes declared as generic tool_uses. (2) E: Noetherian hypothesis now declared unused. Step 1 kept (models are given; part (2) only aligns maps). Hom-colimit 05N7 not needed in the elementwise route.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.FiniteRelationDescent",
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteRelationDescent",
   "declaration": "AlgebraicGeometry.finiteRelation_module_map_descent",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRelationDescent.lean",
-  "statement": "theorem finiteRelation_module_map_descent {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] (R : I ⥤ CommRingCat.{u}) [∀ k : I, IsNoetherianRing (R.obj k)] (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt] (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i)) [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f] (j : I) (hij : i ≤ j) (M : Type u) [Finite M] (Fj : M → (pullback f (Spec.map (R.map (homOfLE hij)))).Modules) (hFj_fp : ∀ k : M, (Fj k).IsFinitePresentation) (hFj_qc : ∀ k : M, (Fj k).IsQuasicoherent) (n : ℕ) (src tgt : Fin n → M) (lhs rhs : ∀ k : Fin n, Fj (src k) ⟶ Fj (tgt k)) (hrel : ∀ k : Fin n, (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (lhs k) = (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (c.π.app (op i))) (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (rhs k)) : ∃ (j' : I) (hjj' : j ≤ j'), ∀ k : Fin n, (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).map (lhs k) = (Scheme.Modules.moduleBaseChange f (T := Over.mk (Spec.map (R.map (homOfLE hij)))) (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj'))))) (Over.homMk (Spec.map (R.map (homOfLE hjj'))) (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).map (rhs k)",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteRelationDescent.lean",
+  "statement": "theorem finiteRelation_module_map_descent\n    {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)]\n    (R : I ⥤ CommRingCat.{u})\n    (c : Cone (R.op ⋙ Scheme.Spec)) (hc : IsLimit c) [IsAffine c.pt]\n    (i : I) {Xi : Scheme.{u}} (f : Xi ⟶ Spec (R.obj i))\n    [LocallyOfFinitePresentation f] [QuasiCompact f] [QuasiSeparated f]\n    (j : I) (hij : i ≤ j)\n    (M : Type u) [Finite M]\n    (Fj : M → (pullback f (Spec.map (R.map (homOfLE hij)))).Modules)\n    (hFj_fp : ∀ k : M, (Fj k).IsFinitePresentation)\n    (hFj_qc : ∀ k : M, (Fj k).IsQuasicoherent)\n    (n : ℕ) (src tgt : Fin n → M)\n    (lhs rhs : ∀ k : Fin n, Fj (src k) ⟶ Fj (tgt k))\n    (hrel : ∀ k : Fin n,\n      (Scheme.Modules.moduleBaseChange f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (lhs k) =\n      (Scheme.Modules.moduleBaseChange f\n        (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n        (T' := Over.mk (c.π.app (op i)))\n        (Over.homMk (c.π.app (op j)) (c.w (homOfLE hij).op))).map (rhs k)) :\n    ∃ (j' : I) (hjj' : j ≤ j'),\n      ∀ k : Fin n,\n        (Scheme.Modules.moduleBaseChange f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjj')))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).map (lhs k) =\n        (Scheme.Modules.moduleBaseChange f\n          (T := Over.mk (Spec.map (R.map (homOfLE hij))))\n          (T' := Over.mk (Spec.map (R.map (homOfLE (hij.trans hjj')))))\n          (Over.homMk (Spec.map (R.map (homOfLE hjj')))\n            (by dsimp; rw [← Spec.map_comp, ← R.map_comp]; rfl))).map (rhs k)",
   "branch": "sheaf-dag",
-  "by": "J1",
-  "date": "2026-10-11",
-  "existing": false,
-  "fixed_by": "R-frd1306"
+  "by": "B6",
+  "date": "2026-10-20",
+  "existing": true,
+  "fixed_by": "R-frd1306",
+  "note": "Retired the unused Sheaf duplicate. The adopted source declaration has the same conclusion and all the same hypotheses except that it does not require Noetherian stage rings; applying it directly proves the former Sheaf signature. No source declaration was changed."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -151,13 +152,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P2",
+  "reviewer": "C-b4ba2",
+  "group": "B6",
   "result": "pass",
-  "landing": "20261013T100048-L-2474554",
+  "landing": "20261020T135351-L-1814591",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: removed Sheaf finiteRelation_module_map_descent (with Noetherian hyp) vs retained proved WeilConjectures.AlgebraicGeometry.FiniteRelationDescent decl (same statement minus Noetherian, identical proof); node lean.statement verbatim in that file; 0 importers of the Sheaf module; compile exit 0; axioms clean"
  }
 }
