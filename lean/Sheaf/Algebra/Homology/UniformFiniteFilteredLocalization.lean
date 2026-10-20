@@ -5,7 +5,7 @@ Authors: SHEAF group Q49
 -/
 module
 
-public import Sheaf.CategoryTheory.FiniteFiltrationInduction
+public import WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension
 public import Mathlib.Algebra.Homology.HomologicalComplexAbelian
 public import Mathlib.Algebra.Homology.CochainComplexPlus
 public import WeilConjectures.FromJoel.Algebra.Homology.CochainComplexMinus

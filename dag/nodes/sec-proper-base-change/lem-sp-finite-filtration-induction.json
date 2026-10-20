@@ -194,21 +194,21 @@
   "result": "pass"
  },
  "lean": {
-  "module": "Sheaf.CategoryTheory.FiniteFiltrationInduction",
+  "module": "WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension",
   "declaration": "CategoryTheory.FilteredObject.finite_filtration_induction_steps",
-  "file": "lean/Sheaf/CategoryTheory/FiniteFiltrationInduction.lean",
+  "file": "lean/WeilConjectures/CategoryTheory/FiniteFiltrationInductionExtension.lean",
   "statement": "theorem finite_filtration_induction_steps (A B : FilteredObject C) (f : Hom A B) (hA : A.filtration.IsFinite) (hB : B.filtration.IsFinite) (hgraded : ∀ p : ℤ, IsIso (gradedMapSteps f p)) : IsIso f.hom ∧ ∀ p : ℤ, IsIso (restrictionSteps f p)",
   "branch": "sheaf-dag",
   "by": "M1",
   "date": "2026-10-11",
-  "existing": false,
+  "existing": true,
   "declarations": [
    "CategoryTheory.FilteredObject.restrictionSteps",
    "CategoryTheory.FilteredObject.exists_gradedMap_steps",
    "CategoryTheory.FilteredObject.gradedMapSteps",
    "CategoryTheory.FilteredObject.finite_filtration_induction_steps"
   ],
-  "note": " 2026-10-20 X3: after retiring Sheaf.CategoryTheory.Filtration, the filtered morphism type is the official FilteredObject.Hom; both fields are exactly the former HomPreservingSteps fields. The mathematical statement and hypotheses are unchanged."
+  "note": " 2026-10-20 X3: after retiring Sheaf.CategoryTheory.Filtration, the filtered morphism type is the official FilteredObject.Hom; both fields are exactly the former HomPreservingSteps fields. The mathematical statement and hypotheses are unchanged. 2026-10-21 S3: retire the duplicate Sheaf module in favor of the adopted FiniteFiltrationInductionExtension module, which already proves exactly the same four public declarations with identical signatures and bodies. Preserve the node, its proof dependencies, and all parent and unit routes."
  },
  "reviewed_lean": {
   "date": "2026-10-11",
@@ -221,11 +221,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-69894",
-  "group": "X3",
+  "reviewer": "C-70a15",
+  "group": "S3",
   "result": "pass",
-  "landing": "20261020T161325-L-3477155",
+  "landing": "20261020T233220-L-907056",
   "kind": "interface",
-  "note": "independent cc review: Lean/DAG files byte-identical to previously passed head 36e974bf (diff -r), compared with live (only HomPreservingSteps→FilteredObject.Hom, import, linter and stub changes); change-record Users now lists the QcoherentNormalized* modules (Scheme.IsSeparated) the landing named; 16 delivered + 27 live direct importers compile 43/43 clean"
+  "note": "independent cc review: retired Sheaf.CategoryTheory.FiniteFiltrationInduction vs WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension (identical declaration section); 12 adapted modules vs live (one import line each); node lean record vs replacement; 14 delivered + 15 direct importers compiled clean; axioms clean; files identical to the PASSed head 487962863523"
  }
 }

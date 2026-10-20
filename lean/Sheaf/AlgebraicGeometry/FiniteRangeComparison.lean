@@ -10,7 +10,7 @@ public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 import all WeilConjectures.CategoryTheory.DerivedCoupleFunctoriality
 import Sheaf.CategoryTheory.ExactFunctorHalfPlane
-import Sheaf.CategoryTheory.FiniteFiltrationInduction
+import WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension
 import Sheaf.AlgebraicGeometry.TruncationExchangeAbutment
 import Sheaf.AlgebraicGeometry.DerivedGeometricStalkConservative
 

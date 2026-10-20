@@ -5,7 +5,7 @@ Authors: SHEAF group Q03
 -/
 module
 
-public import Sheaf.CategoryTheory.FiniteFiltrationInduction
+public import WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension
 public import Mathlib.CategoryTheory.Subobject.Limits
 import Mathlib.CategoryTheory.Abelian.Refinements
 

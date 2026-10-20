@@ -6,7 +6,7 @@ Authors: SHEAF group S3
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Sheaf.CategoryTheory.FiniteFiltrationInduction
+public import WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 

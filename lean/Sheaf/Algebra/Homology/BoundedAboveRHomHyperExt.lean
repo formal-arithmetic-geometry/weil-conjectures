@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-public import Sheaf.CategoryTheory.FiniteFiltrationInduction
+public import WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension
 public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal

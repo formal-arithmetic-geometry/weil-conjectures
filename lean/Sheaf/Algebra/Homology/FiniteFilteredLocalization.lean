@@ -5,7 +5,7 @@ Authors: SHEAF group Q03
 -/
 module
 
-public import Sheaf.CategoryTheory.FiniteFiltrationInduction
+public import WeilConjectures.CategoryTheory.FiniteFiltrationInductionExtension
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.CategoryTheory.Localization.Triangulated
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
