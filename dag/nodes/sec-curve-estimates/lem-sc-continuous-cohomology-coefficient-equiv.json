@@ -15,7 +15,7 @@
    "elementary": true
   },
   {
-   "text": "For the short complexes at degree q, restrict the middle linear equivalence to the kernels, using the commuting outgoing map and injectivity of the next equivalence. The commuting incoming map and surjectivity of the preceding equivalence identify the boundary ranges. Apply Submodule.Quotient.equiv to obtain inverse equivalences of kernel modulo image, including across universes. TopModuleCat.isLimitKer and isColimitCoker give concrete left homology data; their homologyIso identifies the categorical homology with these quotients. Compose the underlying equivalences. This is implemented by concreteData and shortComplexEquiv, entirely in Mathlib.",
+   "text": "For the short complexes at degree q, restrict the middle linear equivalence to the kernels, using the commuting outgoing map and injectivity of the next equivalence. The commuting incoming map and surjectivity of the preceding equivalence identify the boundary ranges. Apply Submodule.Quotient.equiv to obtain inverse equivalences of kernel modulo image, including across universes. TopModuleCat.isLimitKer and isColimitCoker give concrete left homology data; their homologyIso identifies the categorical homology with these quotients. Compose the underlying equivalences. This is implemented by concreteData and shortComplexEquiv, entirely in Mathlib. The upstream construction preserves addition; forgetting its additive structure gives the type equivalence required here.",
    "uses": [],
    "elementary": true
   }
@@ -24,7 +24,7 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "parent comparison, step 3: transport homogeneous complexes through the equivariant coefficient equivalence e, including between universes"
+  "place": "Section 0DVG; upstream continuousCohomologyAddEquivOfCoefficients constructs the additive equivalence; its toEquiv realizes this node. H2 retires the local duplicate."
  },
  "mathlib_searches": [
   {
@@ -86,14 +86,14 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.RepresentationTheory.ContinuousCohomologyCoefficientEquiv",
-  "file": "lean/Sheaf/RepresentationTheory/ContinuousCohomologyCoefficientEquiv.lean",
-  "declaration": "Rep.nonempty_equiv_continuousCohomology_coefficients",
-  "statement": "theorem nonempty_equiv_continuousCohomology_coefficients (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] (M : TopRep.{max u s} ℤ G) (N : TopRep.{max u t} ℤ G) [DiscreteTopology M.V] [DiscreteTopology N.V] (e : M.V ≃ₗ[ℤ] N.V) (he : ∀ (g : G) (x : M.V), e (M.ρ g x) = N.ρ g (e x)) (q : ℕ) : Nonempty (continuousCohomology q M ≃ continuousCohomology q N)",
+  "existing": true,
+  "module": "WeilConjectures.RepresentationTheory.ContinuousCohomologyCoefficientEquiv",
+  "file": "lean/WeilConjectures/RepresentationTheory/ContinuousCohomologyCoefficientEquiv.lean",
+  "declaration": "Rep.continuousCohomologyAddEquivOfCoefficients",
+  "statement": "noncomputable def continuousCohomologyAddEquivOfCoefficients (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] (M : TopRep.{max u s} ℤ G) (N : TopRep.{max u t} ℤ G) [DiscreteTopology M.V] [DiscreteTopology N.V] (e : M.V ≃ₗ[ℤ] N.V) (he : ∀ (g : G) (x : M.V), e (M.ρ g x) = N.ρ g (e x)) (q : ℕ) : continuousCohomology q M ≃+ continuousCohomology q N",
   "branch": "sheaf-dag",
-  "by": "P3",
-  "date": "2026-10-13"
+  "by": "H2",
+  "date": "2026-10-20"
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -106,13 +106,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "P3",
+  "reviewer": "C-677d6",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261012T184330-L-4014645",
+  "landing": "20261020T135410-L-1819265",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Rep.nonempty_equiv_continuousCohomology_coefficients against upstream WeilConjectures Rep.continuousCohomologyAddEquivOfCoefficients (same binders, ≃+ ⇒ .toEquiv); sole consumer DiscreteInvariantsContinuousComparison (unclaimed) 2-line forced adaptation compiles; node lean reattached existing:true, statement unchanged; axioms clean"
  }
 }
