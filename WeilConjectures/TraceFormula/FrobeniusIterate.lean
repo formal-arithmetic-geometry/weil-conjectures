@@ -35,7 +35,8 @@ fixed-point isomorphism for the first iterate is imposed.
 - `CategoryTheory.Iso.powSucc`: the power `e^{n+1}` of an automorphism.
 - `CategoryTheory.Iso.powSuccStr`: the iterated structure isomorphism `(P e^{n+1}) a ≅ a` for a
   family of endofunctors `P` contravariant in endomorphisms up to composition isomorphisms.
-- `ProEtale.CondensedRing.WeilSheaf.powSucc`: a Weil sheaf for `e` as a Weil sheaf for `e^{n+1}`.
+- `ProEtale.CondensedRing.WeilSheaf.powSucc`: a Weil sheaf for `e` as a Weil sheaf for `e^{n+1}`,
+  functorially in `ProEtale.CondensedRing.WeilSheaf.powSuccFunctor`.
 
 ## Implementation notes
 
@@ -101,7 +102,51 @@ noncomputable def powSuccStr {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D
     (comp (e.powSucc n).hom e.hom).app a ≪≫ (P (e.powSucc n).hom).mapIso φ ≪≫
       powSuccStr P comp φ n
 
+/-- The iterated structure isomorphisms are natural: a morphism `u : a ⟶ b` compatible with
+`φ : P e a ≅ a` and `ψ : P e b ≅ b` is compatible with their iterates. -/
+lemma powSuccStr_hom_naturality {D : Type*} [Category D] (P : (X ⟶ X) → D ⥤ D)
+    (comp : ∀ f g : X ⟶ X, P (f ≫ g) ≅ P g ⋙ P f) {a b : D} {φ : (P e.hom).obj a ≅ a}
+    {ψ : (P e.hom).obj b ≅ b} (u : a ⟶ b) (hu : (P e.hom).map u ≫ ψ.hom = φ.hom ≫ u) (n : ℕ) :
+    (P (e.powSucc n).hom).map u ≫ (e.powSuccStr P comp ψ n).hom =
+      (e.powSuccStr P comp φ n).hom ≫ u := by
+  induction n with
+  | zero => exact hu
+  | succ n ih =>
+    change (P ((e.powSucc n).hom ≫ e.hom)).map u ≫ (comp _ _).hom.app b ≫
+        (P (e.powSucc n).hom).map ψ.hom ≫ (e.powSuccStr P comp ψ n).hom =
+      ((comp _ _).hom.app a ≫ (P (e.powSucc n).hom).map φ.hom ≫
+        (e.powSuccStr P comp φ n).hom) ≫ u
+    rw [(comp _ _).hom.naturality_assoc, Functor.comp_map, ← Functor.map_comp_assoc, hu,
+      Functor.map_comp_assoc, ih, Category.assoc, Category.assoc]
+
 end CategoryTheory.Iso
+
+namespace CategoryTheory.Endofunctor.IsoAlgebra
+
+variable {C : Type u} [Category.{v} C] {F : C ⥤ C}
+
+/-- A morphism `IsoAlgebra.mk a Φ ⟶ IsoAlgebra.mk b Ψ`, given by a morphism `u : a ⟶ b` commuting
+with the structure isomorphisms. -/
+def mkHom {a b : C} {Φ : F.obj a ≅ a} {Ψ : F.obj b ≅ b} (u : a ⟶ b)
+    (h : F.map u ≫ Ψ.hom = Φ.hom ≫ u) : mk a Φ ⟶ mk b Ψ :=
+  ObjectProperty.homMk { f := u, h := h }
+
+@[simp]
+lemma mkHom_hom_f {a b : C} {Φ : F.obj a ≅ a} {Ψ : F.obj b ≅ b} (u : a ⟶ b)
+    (h : F.map u ≫ Ψ.hom = Φ.hom ≫ u) : (mkHom u h).hom.f = u :=
+  rfl
+
+lemma mkHom_id {a : C} {Φ : F.obj a ≅ a} (h : F.map (𝟙 a) ≫ Φ.hom = Φ.hom ≫ 𝟙 a) :
+    mkHom (𝟙 a) h = 𝟙 (mk a Φ) :=
+  rfl
+
+lemma mkHom_comp {a b c : C} {Φ : F.obj a ≅ a} {Ψ : F.obj b ≅ b} {Θ : F.obj c ≅ c} (u : a ⟶ b)
+    (v : b ⟶ c) (hu : F.map u ≫ Ψ.hom = Φ.hom ≫ u) (hv : F.map v ≫ Θ.hom = Ψ.hom ≫ v)
+    (huv : F.map (u ≫ v) ≫ Θ.hom = Φ.hom ≫ u ≫ v) :
+    mkHom (u ≫ v) huv = mkHom u hu ≫ mkHom v hv :=
+  rfl
+
+end CategoryTheory.Endofunctor.IsoAlgebra
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -117,5 +162,27 @@ noncomputable def WeilSheaf.powSucc (F : WeilSheaf ℓ e) (n : ℕ) : WeilSheaf 
   IsoAlgebra.mk F.carrier
     (e.powSuccStr (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
       (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left) F.str n)
+
+variable (e) in
+/-- A Weil sheaf for `e` as a Weil sheaf for `e^{n+1}` (`WeilSheaf.powSucc`), as a functor: a
+morphism of Weil sheaves for `e` is compatible with the iterated structure isomorphisms. -/
+noncomputable def WeilSheaf.powSuccFunctor (n : ℕ) : WeilSheaf ℓ e ⥤ WeilSheaf ℓ (e.powSucc n) where
+  obj F := WeilSheaf.powSucc ℓ F n
+  map {F G} φ := IsoAlgebra.mkHom φ.hom.f
+    (e.powSuccStr_hom_naturality (fun g ↦ (g.left)^*⟦Profinite.padicAlgClRingObj ℓ⟧)
+      (fun f g ↦ upperStarComp (Profinite.padicAlgClRingObj ℓ) f.left g.left) (φ := F.str)
+      (ψ := G.str) φ.hom.f φ.hom.h n)
+  map_id _ := IsoAlgebra.mkHom_id _
+  map_comp _ _ := IsoAlgebra.mkHom_comp _ _ _ _ _
+
+@[simp]
+lemma WeilSheaf.powSuccFunctor_obj (n : ℕ) (F : WeilSheaf ℓ e) :
+    (WeilSheaf.powSuccFunctor ℓ e n).obj F = WeilSheaf.powSucc ℓ F n :=
+  rfl
+
+@[simp]
+lemma WeilSheaf.powSuccFunctor_obj_carrier (n : ℕ) (F : WeilSheaf ℓ e) :
+    ((WeilSheaf.powSuccFunctor ℓ e n).obj F).carrier = F.carrier := by
+  rw [powSuccFunctor_obj, WeilSheaf.powSucc, IsoAlgebra.mk_carrier]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

@@ -64,8 +64,18 @@ automorphism `σ` in place of `Spec k` and the identity.
 - `ProEtale.CondensedRing.weilPointCount`: the point count `L_{n+1}(X, ℚ̲̄_ℓ) = #X(𝔽_{q^{n+1}})`
   for the canonical Weil unit, deduced from the trace formula and the normalization of the local
   trace of the unit.
-- `ProEtale.CondensedRing.weilGlobalSupertrace_basePoint_weilUnit`: the normalization test N1, the
+- `ProEtale.CondensedRing.weilGlobalSupertrace_point_unit`: the normalization test N1, the
   global trace of the unit of the base is `1`.
+
+`WeilConjectures.TraceFormula.Main` states the trace formula in the model-Frobenius setting of the
+blueprint (`ProEtale.CondensedRing.trace_globalOperator_eq_sum_trace_stalkFrobenius`,
+`ProEtale.CondensedRing.trace_globalOperator_unit_eq_card`), for an endomorphism `Φ` of `X` and
+its iterates `ProEtale.CondensedRing.frobeniusIterate Φ m`, with the iterated Weil structures
+`ProEtale.CondensedRing.WeilBoundedConstructible.iterateStr`. The statements here are the variants
+for the Frobenius of `Spec k̄` twisted by an automorphism `e` of `X`, with the powers
+`CategoryTheory.Iso.powSucc e n` and the iterated Weil structures
+`ProEtale.CondensedRing.WeilSheaf.powSucc` on homology sheaves. Relating the two settings is not
+done here.
 
 -/
 
@@ -93,7 +103,10 @@ t_{n+1}(Rf_!^Weil K; ȳ) = ∑_{x̄ ↦ ȳ} t_{n+1}(K; x̄),
 ```
 the sum running over the points `x̄` of `X` of degree `n + 1` with `x̄ ≫ f = ȳ`. By compactly
 supported base change of the Weil lower shriek to `ȳ`, this is the trace formula for the fiber of
-`f` over `ȳ`. -/
+`f` over `ȳ`.
+
+This is the relative, twisted variant of blueprint `thm-trf-grothendieck-lefschetz-finite-ring`,
+which is stated for the model Frobenius. -/
 theorem weilShriekTraceFunction {X Y : Over (Spec (.of k))}
     [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
     [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
@@ -115,13 +128,14 @@ finite type over `𝔽_q`, an automorphism `e` of `X` over `𝔽_q` of finite or
 ∑ᵢ (-1)ⁱ Tr(Fr_{c,n+1} | Hⁱ_c(X_k̄, K))
   = ∑_{x̄ ∈ X(𝔽_{q^{n+1}})} ∑ⱼ (-1)ʲ Tr(Fr_{x̄,n+1} | Hʲ(K)_x̄).
 ```
-It is the case `Y = Spec k` of `weilShriekTraceFunction`. -/
+It is the case `Y = Spec k` of `weilShriekTraceFunction`. This is a variant of blueprint
+`thm-trf-grothendieck-lefschetz-finite-ring` for the Frobenius twisted by `e`. -/
 theorem weilTraceFormula (he : ∃ m : ℕ, e.powSucc m = Iso.refl X)
     (K : WeilBoundedConstructible ℓ e.hom) (n : ℕ) :
     weilGlobalSupertrace ℓ e K n =
       ∑ᶠ x : frobeniusFixedPoints e n, weilStalkSupertrace ℓ n x.1 x.2.2 K := by
-  refine (weilShriekTraceFunction ℓ e (Iso.refl (basePoint k)) (hom_comp_toBasePoint e) he K n
-    (basePointFixedPoint n)).trans ?_
+  refine (weilShriekTraceFunction ℓ e (Iso.refl (point k)) (f := toPoint X) (toPoint_ext _ _) he K n
+    (pointFixedPoint n)).trans ?_
   exact finsum_comp_equiv (Equiv.subtypeUnivEquiv fun x ↦ x.2.1)
     (f := fun x : frobeniusFixedPoints e n ↦ weilStalkSupertrace ℓ n x.1 x.2.2 K)
 
@@ -130,11 +144,12 @@ the number of points of degree `n + 1`, that is `#X(𝔽_{q^{n+1}})` for `e = �
 ```
 ∑ᵢ (-1)ⁱ Tr(Fr_{c,n+1} | Hⁱ_c(X_k̄, ℚ̄_ℓ)) = #X(𝔽_{q^{n+1}}).
 ```
--/
+This is a variant of blueprint `cor-trf-point-counting` for the Frobenius twisted by `e`. -/
 theorem weilPointCount (he : ∃ m : ℕ, e.powSucc m = Iso.refl X) (n : ℕ) :
-    weilGlobalSupertrace ℓ e (weilUnit ℓ e) n = (Nat.card (frobeniusFixedPoints e n) : _) := by
+    weilGlobalSupertrace ℓ e (WeilBoundedConstructible.unit ℓ e.hom) n =
+      (Nat.card (frobeniusFixedPoints e n) : _) := by
   rw [weilTraceFormula ℓ e he]
-  simp only [weilStalkSupertrace_weilUnit]
+  simp only [weilStalkSupertrace_unit]
   have := finite_frobeniusFixedPoints e n
   let := Fintype.ofFinite (frobeniusFixedPoints e n)
   rw [finsum_eq_sum_of_fintype, Finset.sum_const, Finset.card_univ, Nat.card_eq_fintype_card,
@@ -142,9 +157,9 @@ theorem weilPointCount (he : ∃ m : ℕ, e.powSucc m = Iso.refl X) (n : ℕ) :
 
 /-- The normalization test N1: the canonical Weil unit of the base `Spec 𝔽_q` has global trace
 `1` in every degree. -/
-theorem weilGlobalSupertrace_basePoint_weilUnit (n : ℕ) :
-    weilGlobalSupertrace ℓ (Iso.refl (basePoint k)) (weilUnit ℓ (Iso.refl (basePoint k))) n =
-      1 := by
-  rw [weilPointCount ℓ (Iso.refl (basePoint k)) ⟨0, rfl⟩, Nat.card_unique, Nat.cast_one]
+theorem weilGlobalSupertrace_point_unit (n : ℕ) :
+    weilGlobalSupertrace ℓ (Iso.refl (point k))
+      (WeilBoundedConstructible.unit ℓ (Iso.refl (point k)).hom) n = 1 := by
+  rw [weilPointCount ℓ (Iso.refl (point k)) ⟨0, rfl⟩, Nat.card_unique, Nat.cast_one]
 
 end AlgebraicGeometry.ProEtale.CondensedRing
