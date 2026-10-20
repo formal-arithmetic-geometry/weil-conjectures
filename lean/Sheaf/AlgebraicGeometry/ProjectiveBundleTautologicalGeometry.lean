@@ -1,5 +1,10 @@
+/-
+Copyright (c) 2026. All rights reserved.
+Released under Apache 2.0 license as described in the file LICENSE.
+-/
 module
 
+public import Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalData
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.Basic
 public import WeilConjectures.AlgebraicGeometry.RelativeProj.BaseChange
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
@@ -16,30 +21,14 @@ public import WeilConjectures.AlgebraicGeometry.EffectiveCartier
 public import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeRank
 public import Sheaf.AlgebraicGeometry.RelativeProjectiveSpace
 public import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebra
-import WeilConjectures.LinearAlgebra.SymmetricAlgebra.Graded
-import Sheaf.AlgebraicGeometry.NagataAffineProjScalarExtension
-import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
-import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
-import Sheaf.CategoryTheory.SiteModuleSheafGluing
-import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
-import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
-import WeilConjectures.AlgebraicGeometry.RelativeProj.Functoriality
-import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Invertible
-import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
+import Sheaf.AlgebraicGeometry.ProjectiveBundleBaseChangeCoherence
+import Sheaf.AlgebraicGeometry.ProjectiveBundleCoordinateGeometry
+import Sheaf.AlgebraicGeometry.ProjectiveBundleRankZero
 
 /-! # Finite locally free projective bundles and tautological geometry
 
-Source: Stacks Project, Tags 01OB, 01O3 and 01OE (blueprint:
-`lem-pur-projective-bundle-tautological-geometry`).  The proof is postponed to stage 3.
-
-Main definitions: `ProjectiveBundleRealization`, `ProjectiveBundleFrameChart`,
-`ProjectiveBundleBaseChangeDatum`, `ProjectiveBundleCoordinateGeometry`, and
-`ProjectiveBundleTautologicalSystem`.
-Main statement: `exists_projectiveBundleTautologicalGeometry`.
+Source: Stacks Project, Tags 01OB, 01O3, 01OE
+(blueprint: lem-pur-projective-bundle-tautological-geometry).
 -/
 
 @[expose] public section
@@ -54,329 +43,9 @@ open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry
 
 attribute [local irreducible] Scheme.Modules.tensorPullback
-
-/-- The unit-normalized comparison from the stipulated tensor pullback to Mathlib's
-adjoint implementation. Uniqueness of left adjoints determines this comparison; thus all
-pullback equations below also specify equations for tensor pullback, without choosing maps.
-Source: Stacks, Tags 0095, 0096
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-noncomputable def projectiveBundleTensorPullbackIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
-    Scheme.Modules.tensorPullback g ≅ Scheme.Modules.pullback g :=
-  (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)).leftAdjointUniq
-    (Scheme.Modules.pullbackPushforwardAdjunction g)
-
-/-- Tensor-pullback identity, transported by the unit-normalized adjoint comparison.
-Source: Stacks, Tags 0095, 0096 (blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-noncomputable def projectiveBundlePullbackId (X : Scheme.{u}) :
-    Scheme.Modules.tensorPullback (𝟙 X) ≅ 𝟭 X.Modules :=
-  projectiveBundleTensorPullbackIso (𝟙 X) ≪≫ Scheme.Modules.pullbackId X
-
-/-- Tensor-pullback composition, using the canonical adjoint comparison.
-Source: Stacks, Tags 0095, 0096 (blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-noncomputable def projectiveBundlePullbackComp {X Y Z : Scheme.{u}}
-    (f : X ⟶ Y) (g : Y ⟶ Z) :
-    Scheme.Modules.tensorPullback g ⋙ Scheme.Modules.tensorPullback f ≅
-      Scheme.Modules.tensorPullback (f ≫ g) :=
-  Functor.isoWhiskerRight (projectiveBundleTensorPullbackIso g) (Scheme.Modules.tensorPullback f) ≪≫
-    Functor.isoWhiskerLeft (Scheme.Modules.pullback g) (projectiveBundleTensorPullbackIso f) ≪≫
-    Scheme.Modules.pullbackComp f g ≪≫ (projectiveBundleTensorPullbackIso (f ≫ g)).symm
-
-/-- Transport of tensor pullback along equality of the underlying scheme maps.
-Source: Stacks, Tags 0095, 0096 (blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-noncomputable def projectiveBundlePullbackCongr {X Y : Scheme.{u}} {f g : X ⟶ Y}
-    (h : f = g) : Scheme.Modules.tensorPullback f ≅ Scheme.Modules.tensorPullback g :=
-  eqToIso (congrArg Scheme.Modules.tensorPullback h)
-
-/-- The specified tensor-pullback adjunction; its universal property fixes the unit.
-Source: Stacks, Tags 0095, 0096 (blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-noncomputable def projectiveBundlePullbackAdjunction {X Y : Scheme.{u}} (g : X ⟶ Y) :
-    Scheme.Modules.tensorPullback g ⊣ Scheme.Modules.pushforward g :=
-  Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction g)
-
-/-- Pulling back the unit module by tensor product gives the unit module.
-Source: Stacks, Tags 0095, 0096 (blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-noncomputable def projectiveBundlePullbackUnitIso {X Y : Scheme.{u}} (g : X ⟶ Y) :
-    (Scheme.Modules.tensorPullback g).obj (Scheme.Modules.unit Y) ≅ Scheme.Modules.unit X :=
-  (projectiveBundleTensorPullbackIso g).app (Scheme.Modules.unit Y) ≪≫
-    Scheme.Modules.pullbackObjUnitIso g
-
-/-- The actual pullback of a section, defined by the tensor-pullback adjunction unit.
-Source: Stacks, Tags 0095, 0096 (blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-noncomputable def projectiveBundlePullbackSection {X Y : Scheme.{u}} (g : X ⟶ Y)
-    {M : Y.Modules} {U : Y.Opens} (m : Γ(M, U)) :
-    Γ((Scheme.Modules.tensorPullback g).obj M, g ⁻¹ᵁ U) :=
-  ((projectiveBundlePullbackAdjunction g).unit.app M).app U m
-
-attribute [local irreducible] projectiveBundleTensorPullbackIso
-  projectiveBundlePullbackId projectiveBundlePullbackComp projectiveBundlePullbackCongr
-  projectiveBundlePullbackAdjunction projectiveBundlePullbackUnitIso
+  projectiveBundleTensorPullbackIso projectiveBundlePullbackId projectiveBundlePullbackComp
+  projectiveBundlePullbackCongr projectiveBundlePullbackAdjunction projectiveBundlePullbackUnitIso
   projectiveBundlePullbackSection
-
-namespace Scheme
-
-/-- The symmetric-degree submodule: products of exactly `d` degree-one generators.
-Source: Stacks, Tag 01OB
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-def symmetricDegree (R M : Type u) [CommRing R] [AddCommGroup M] [Module R M]
-    (d : ℕ) : Submodule R (SymmetricAlgebra R M) :=
-  Submodule.span R {x | ∃ v : Fin d → M,
-    x = ∏ i, SymmetricAlgebra.ι R M (v i)}
-
-/-- An actual frame, rather than merely the proposition that one exists.
-Source: Stacks, Tag 01OB
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-def ModuleFrame (B : Scheme.{u}) (F : B.Modules) (U : B.Opens) (r : ℕ) : Type u :=
-  (Modules.tensorPullback U.ι).obj F ≅
-    SheafOfModules.free (R := U.toScheme.ringCatSheaf) (ULift.{u} (Fin r))
-
-set_option genInjectivity false in
-set_option genSizeOfSpec false in
-/-- The symmetric algebra presented on the affine basis, with its actual symmetric grading,
-algebra structure and canonical restriction maps.
-Source: Stacks, Tag 01OB
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-structure SymmetricGradedAlgebraData (B : Scheme.{u}) (F : B.Modules) where
-  data : B.GradedAlgebraData
-  sectionEquiv : ∀ U : B.affineOpens,
-    SymmetricAlgebra (B.presheaf.obj (op U.1)) (F.val.obj (op U.1)) ≃ₐ[
-      B.presheaf.obj (op U.1)] data.obj U
-  sectionEquiv_grade : ∀ (U : B.affineOpens) (d : ℕ) (x : SymmetricAlgebra
-      (B.presheaf.obj (op U.1)) (F.val.obj (op U.1))),
-    x ∈ symmetricDegree (B.presheaf.obj (op U.1)) (F.val.obj (op U.1)) d ↔
-      sectionEquiv U x ∈ data.grading U d
-  sectionEquiv_restriction : ∀ {U V : B.affineOpens} (h : U ≤ V) (x :
-      SymmetricAlgebra (B.presheaf.obj (op V.1)) (F.val.obj (op V.1))),
-    data.res h (sectionEquiv V x) =
-      sectionEquiv U (SymmetricAlgebraSheaf.restriction F (homOfLE h).op x)
-
-end Scheme
-
-/-- Transport of the restriction of a global module across nested affine Proj charts.
-Source: Stacks, Tag 01NR
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-noncomputable def tautologicalTransport
-    (B : Scheme.{u}) (A : B.GradedAlgebraData) (L : A.relProj.Modules)
-    {U V : B.affineOpens} (h : U ≤ V) :
-    (Scheme.Modules.tensorPullback (A.relProjFunctor.map (homOfLE h))).obj
-        ((Scheme.Modules.tensorPullback (A.relProjι V)).obj L) ≅
-      (Scheme.Modules.tensorPullback (A.relProjι U)).obj L :=
-  (projectiveBundlePullbackComp (A.relProjFunctor.map (homOfLE h))
-    (A.relProjι V)).app L ≪≫
-    (projectiveBundlePullbackCongr (A.relProjFunctor_map_relProjι (homOfLE h))).app L
-
-set_option genInjectivity false in
-set_option genSizeOfSpec false in
-/-- Compatible affine twist charts. The restriction isomorphisms are normalized on every
-homogeneous degree-one section, so they are the homogeneous-localization maps.
-Source: Stacks, Tags 01NR, 01MN
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-structure TautologicalTwistData (B : Scheme.{u}) (A : B.GradedAlgebraData)
-    (L : A.relProj.Modules) where
-  chart : ∀ U : B.affineOpens,
-    (Scheme.Modules.tensorPullback (A.relProjι U)).obj L ≅ Proj.twist (A.grading U) 1
-  twistRestriction : ∀ {U V : B.affineOpens} (h : U ≤ V),
-    (Scheme.Modules.tensorPullback (A.relProjFunctor.map (homOfLE h))).obj
-        (Proj.twist (A.grading V) 1) ≅ Proj.twist (A.grading U) 1
-  restriction_generator : ∀ {U V : B.affineOpens} (h : U ≤ V)
-      (x : A.obj V) (hx : x ∈ A.grading V 1),
-    (twistRestriction h).hom.app
-        ((A.relProjFunctor.map (homOfLE h)) ⁻¹ᵁ ⊤)
-        (projectiveBundlePullbackSection (A.relProjFunctor.map (homOfLE h))
-          (Scheme.Modules.Hom.app (Proj.unitToTwist hx) ⊤ (1 : Γ(Proj (A.grading V), ⊤)))) =
-      Scheme.Modules.Hom.app (Proj.unitToTwist ((A.res h).map_mem hx))
-        ((A.relProjFunctor.map (homOfLE h)) ⁻¹ᵁ ⊤)
-        (1 : Γ(Proj (A.grading U), (A.relProjFunctor.map (homOfLE h)) ⁻¹ᵁ ⊤))
-  chart_overlap : ∀ {U V : B.affineOpens} (h : U ≤ V),
-    tautologicalTransport B A L h ≪≫ chart U =
-      (Scheme.Modules.tensorPullback (A.relProjFunctor.map (homOfLE h))).mapIso
-        (chart V) ≪≫ twistRestriction h
-
-set_option genInjectivity false in
-set_option genSizeOfSpec false in
-/-- A projectivization of the actual symmetric algebra with its normalized tautological
-quotient and compatible degree-one twist charts.
-Source: Stacks, Tags 01OB, 01NR
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-structure ProjectiveBundleRealization (B : Scheme.{u}) (F : B.Modules) where
-  A : B.SymmetricGradedAlgebraData F
-  L : A.data.relProj.Modules
-  quotient : (Scheme.Modules.tensorPullback A.data.relProjHom).obj F ⟶ L
-  twists : TautologicalTwistData B A.data L
-  quotient_generator : ∀ (U : B.affineOpens) (x : F.val.obj (op U.1))
-      (hx : A.sectionEquiv U (SymmetricAlgebra.ι _ _ x) ∈ A.data.grading U 1),
-    (twists.chart U).hom.app
-        (A.data.relProjι U ⁻¹ᵁ (A.data.relProjHom ⁻¹ᵁ U.1))
-        (projectiveBundlePullbackSection (A.data.relProjι U)
-          (((projectiveBundlePullbackAdjunction A.data.relProjHom).homEquiv
-            F L quotient).app U.1 x)) =
-      Scheme.Modules.Hom.app (Proj.unitToTwist hx)
-        (A.data.relProjι U ⁻¹ᵁ (A.data.relProjHom ⁻¹ᵁ U.1))
-        (1 : Γ(Proj (A.data.grading U),
-          A.data.relProjι U ⁻¹ᵁ (A.data.relProjHom ⁻¹ᵁ U.1)))
-
-/-- The quotient section associated to the `i`th vector of a specified frame, on `p⁻¹U`.
-Source: Stacks, Tag 01OB
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-noncomputable def projectiveBundleFrameSection
-    {B : Scheme.{u}} {F : B.Modules} (D : ProjectiveBundleRealization B F)
-    (n : ℕ) (U : B.Opens) (e : B.ModuleFrame F U (n + 1)) (i : ULift.{u} (Fin (n + 1))) :
-    Scheme.Modules.unit (D.A.data.relProjHom ⁻¹ᵁ U).toScheme ⟶
-      (Scheme.Modules.tensorPullback (D.A.data.relProjHom ⁻¹ᵁ U).ι).obj D.L :=
-  (projectiveBundlePullbackUnitIso (D.A.data.relProjHom ∣_ U)).inv ≫
-    (Scheme.Modules.tensorPullback (D.A.data.relProjHom ∣_ U)).map
-      (SheafOfModules.ιFree i ≫ e.inv) ≫
-    ((projectiveBundlePullbackComp (D.A.data.relProjHom ∣_ U) U.ι).app F).hom ≫
-    (projectiveBundlePullbackCongr (morphismRestrict_ι _ _)).hom.app F ≫
-    ((projectiveBundlePullbackComp (D.A.data.relProjHom ⁻¹ᵁ U).ι
-      D.A.data.relProjHom).app F).inv ≫
-    (Scheme.Modules.tensorPullback (D.A.data.relProjHom ⁻¹ᵁ U).ι).map D.quotient
-
-set_option genInjectivity false in
-set_option genSizeOfSpec false in
-/-- The frame determines a chart over `U`, its comparison with the polynomial projective
-space, and the twist isomorphism carrying the ordered homogeneous coordinates to that frame.
-Source: Stacks, Tags 01OB, 01OE
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-structure ProjectiveBundleFrameChart {B : Scheme.{u}} {F : B.Modules}
-    (D : ProjectiveBundleRealization B F) (n : ℕ) (U : B.Opens)
-    (e : B.ModuleFrame F U (n + 1)) where
-  relativeChart : (D.A.data.relProjHom ⁻¹ᵁ U).toScheme ≅
-    RelativeProjectiveSpace.scheme U.toScheme n
-  relativeChart_over : relativeChart.hom ≫ RelativeProjectiveSpace.π U.toScheme n =
-    D.A.data.relProjHom ∣_ U
-  polynomialChart : RelativeProjectiveSpace.scheme U.toScheme n ≅
-    ℙ(ULift.{u} (Fin (n + 1)); U.toScheme)
-  polynomialChart_over : polynomialChart.hom ≫
-    (ℙ(ULift.{u} (Fin (n + 1)); U.toScheme) ↘ U.toScheme) =
-      RelativeProjectiveSpace.π U.toScheme n
-  twist : (Scheme.Modules.tensorPullback (relativeChart.hom ≫ polynomialChart.hom)).obj
-      (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) U.toScheme 1) ≅
-    (Scheme.Modules.tensorPullback (D.A.data.relProjHom ⁻¹ᵁ U).ι).obj D.L
-  coordinate : ∀ i : ULift.{u} (Fin (n + 1)),
-    (projectiveBundlePullbackUnitIso (relativeChart.hom ≫ polynomialChart.hom)).inv ≫
-      (Scheme.Modules.tensorPullback (relativeChart.hom ≫ polynomialChart.hom)).map
-        (ProjectiveSpace.coordinateSection (ULift.{u} (Fin (n + 1))) U.toScheme i) ≫
-      twist.hom = projectiveBundleFrameSection D n U e i
-
-  generator : ∀ i : ULift.{u} (Fin (n + 1)),
-    let φ := relativeChart.hom ≫ polynomialChart.hom
-    let M := (Scheme.Modules.tensorPullback (D.A.data.relProjHom ⁻¹ᵁ U).ι).obj D.L
-    let W := φ ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) U.toScheme i
-    Scheme.Modules.IsFreeGenerator
-      (M.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op
-        (Scheme.Modules.Hom.app (projectiveBundleFrameSection D n U e i) ⊤
-          (1 : Γ((D.A.data.relProjHom ⁻¹ᵁ U).toScheme, ⊤))))
-  transition : ∀ i j : ULift.{u} (Fin (n + 1)),
-    let φ := relativeChart.hom ≫ polynomialChart.hom
-    let M := (Scheme.Modules.tensorPullback (D.A.data.relProjHom ⁻¹ᵁ U).ι).obj D.L
-    let W := φ ⁻¹ᵁ ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) U.toScheme j
-    M.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op
-        (Scheme.Modules.Hom.app (projectiveBundleFrameSection D n U e i) ⊤
-          (1 : Γ((D.A.data.relProjHom ⁻¹ᵁ U).toScheme, ⊤))) =
-      φ.app (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) U.toScheme j)
-          (ProjectiveSpace.coordRatio (ULift.{u} (Fin (n + 1))) U.toScheme j i) •
-        M.presheaf.map (homOfLE (le_top : W ≤ ⊤)).op
-          (Scheme.Modules.Hom.app (projectiveBundleFrameSection D n U e j) ⊤
-            (1 : Γ((D.A.data.relProjHom ⁻¹ᵁ U).toScheme, ⊤)))
-
-/-- The universal quotient square defining the degree-one Stacks base-change theta.
-Naming this equation prevents repeated expansion in the dependent record projections.
-Source: Stacks, Tag 01O3
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-def projectiveBundleThetaQuotientLaw
-    {B B' : Scheme.{u}} {F : B.Modules} {F' : B'.Modules}
-    (D : ProjectiveBundleRealization B F) (D' : ProjectiveBundleRealization B' F')
-    (g : B' ⟶ B) (e : F' ≅ (Scheme.Modules.tensorPullback g).obj F)
-    (r : D'.A.data.relProj ⟶ D.A.data.relProj)
-    (h : r ≫ D.A.data.relProjHom = D'.A.data.relProjHom ≫ g)
-    (θ : (Scheme.Modules.tensorPullback r).obj D.L ≅ D'.L) : Prop :=
-  (Scheme.Modules.tensorPullback r).map D.quotient ≫ θ.hom =
-    ((projectiveBundlePullbackComp r D.A.data.relProjHom).app F).hom ≫
-    (projectiveBundlePullbackCongr h).hom.app F ≫
-    ((projectiveBundlePullbackComp D'.A.data.relProjHom g).app F).inv ≫
-    (Scheme.Modules.tensorPullback D'.A.data.relProjHom).map e.inv ≫ D'.quotient
-
-set_option genInjectivity false in
-set_option genSizeOfSpec false in
-/-- The canonical base-change comparison. Its coefficient maps are fixed on degree-one
-vectors, and its actual theta is fixed by the universal quotient square (the degree-one
-part of Stacks 01O3). No arbitrary invertible module is introduced.
-Source: Stacks, Tag 01O3
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-structure ProjectiveBundleBaseChangeDatum
-    {B B' : Scheme.{u}} {F : B.Modules} {F' : B'.Modules}
-    (D : ProjectiveBundleRealization B F) (D' : ProjectiveBundleRealization B' F')
-    (g : B' ⟶ B) (e : F' ≅ (Scheme.Modules.tensorPullback g).obj F) where
-  comparison : Scheme.GradedAlgebraData.PullbackData g D.A.data D'.A.data
-  generator : ∀ {U : B.affineOpens} {U' : B'.affineOpens}
-      (h : U'.1 ≤ g ⁻¹ᵁ U.1) (x : F.val.obj (op U.1)),
-    comparison.map h (D.A.sectionEquiv U (SymmetricAlgebra.ι _ _ x)) =
-      D'.A.sectionEquiv U' (SymmetricAlgebra.ι _ _ (e.inv.app U'.1
-        (((Scheme.Modules.tensorPullback g).obj F).presheaf.map (homOfLE h).op
-          (projectiveBundlePullbackSection g x))))
-  map : D'.A.data.relProj ⟶ D.A.data.relProj
-  map_eq : map = comparison.relProjComparison
-  over : map ≫ D.A.data.relProjHom = D'.A.data.relProjHom ≫ g
-  theta : (Scheme.Modules.tensorPullback map).obj D.L ≅ D'.L
-  theta_quotient : projectiveBundleThetaQuotientLaw D D' g e map over theta
-
-set_option genInjectivity false in
-set_option genSizeOfSpec false in
-/-- Coordinate geometry over a field: the coordinate hyperplane, its affine complement
-with the stated ratios, all divisor line bundles, and the scheme-theoretic reduced point.
-Source: blueprint sk-prop-an, proof Step 1; Stacks, Tags 01NG and 01MS
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-structure ProjectiveBundleCoordinateGeometry (K : Type u) [Field K] (n : ℕ) where
-  hyperplane : ∀ hn : 1 ≤ n,
-    (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩)).subscheme ≅
-        RelativeProjectiveSpace.scheme (Spec (.of K)) (n - 1)
-  hyperplane_over : ∀ hn : 1 ≤ n,
-    (hyperplane hn).hom ≫ RelativeProjectiveSpace.π (Spec (.of K)) (n - 1) =
-      (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-        (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩)).subschemeι ≫
-          (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of K)) ↘ Spec (.of K))
-  affine : AffineSpace (ULift.{u} (Fin n)) (Spec (.of K)) ≅
-    (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩).toScheme
-  affine_over : affine.hom ≫
-      (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩).ι ≫
-      (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of K)) ↘ Spec (.of K)) =
-    (AffineSpace (ULift.{u} (Fin n)) (Spec (.of K)) ↘ Spec (.of K))
-  ratios : ∀ i : Fin n,
-    (affine.hom ≫ (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1)))
-      (Spec (.of K)) ⟨0⟩).ι).appLE
-        (ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩)
-        ⊤ (by simp) (ProjectiveSpace.coordRatio (ULift.{u} (Fin (n + 1)))
-          (Spec (.of K)) ⟨0⟩ ⟨i.succ⟩) = AffineSpace.coord _ ⟨i⟩
-  divisor : ∀ i : ULift.{u} (Fin (n + 1)),
-    (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) i)).IsInvertible
-  divisorLineBundle : ∀ i : ULift.{u} (Fin (n + 1)),
-    (Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) i)).toModules.dual ≅
-        ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (Spec (.of K)) 1
-  point : (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subscheme ≅ Spec (.of K)
-  point_over : point.hom =
-    (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subschemeι ≫
-        (ℙ(ULift.{u} (Fin (n + 1)); Spec (.of K)) ↘ Spec (.of K))
-  point_reduced : IsReduced
-    (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subscheme
-  point_in_chart : ∀ x : (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus
-      (ProjectiveSpace.coordinateSection (ULift.{u} (Fin (n + 1)))
-        (Spec (.of K)) ⟨i.succ⟩)).subscheme,
-    (⨆ i : Fin n, Scheme.Modules.Hom.zeroLocus (ProjectiveSpace.coordinateSection
-      (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨i.succ⟩)).subschemeι x ∈
-      ProjectiveSpace.standardOpen (ULift.{u} (Fin (n + 1))) (Spec (.of K)) ⟨0⟩
-
-/-- The existing fixed-rank predicate, with the base explicit to avoid re-inferring the
-site and its sheafification instances at every dependent occurrence. This is only an alias.
-Source: Stacks, Tag 01C5
-(blueprint: lem-pur-projective-bundle-tautological-geometry). -/
-def projectiveBundleRank (B : Scheme.{u}) (n : ℕ) (F : B.Modules) : Prop :=
-  F.IsFiniteLocallyFreeOfRank (n + 1)
 
 set_option genInjectivity false in
 set_option genSizeOfSpec false in
@@ -449,6 +118,71 @@ structure ProjectiveBundleTautologicalGeometry (B : Scheme.{u}) (n : ℕ) (F : B
   system : ProjectiveBundleTautologicalSystem.{u} n
   realization : ProjectiveBundleRealization B F
   selected : realization = system.bundle B F hF
+
+private theorem projectiveBundle_pullback_rank
+    (B B' : Scheme.{u}) (n : ℕ) (F : B.Modules)
+    (hF : projectiveBundleRank B n F) (g : B' ⟶ B) :
+    projectiveBundleRank B' n ((Scheme.Modules.tensorPullback g).obj F) := by
+  let : F.IsFiniteLocallyFreeOfRank (n + 1) := hF
+  exact SheafOfModules.IsFiniteLocallyFreeOfRank.of_iso
+    ((projectiveBundleTensorPullbackIso g).app F).symm
+
+private theorem projectiveBundle_proper_of_frame
+    {B : Scheme.{u}} {n : ℕ} {F : B.Modules}
+    [F.IsFiniteLocallyFreeOfRank (n + 1)] (D : ProjectiveBundleRealization B F)
+    (frame : ∀ (U : B.Opens) (e : B.ModuleFrame F U (n + 1)),
+      ProjectiveBundleFrameChart D n U e) : IsProper D.A.data.relProjHom := by
+  obtain ⟨I, U, hU, e⟩ :=
+    Scheme.Modules.IsFiniteLocallyFreeOfRank.exists_restrict_iso_free F (r := n + 1)
+  apply IsZariskiLocalAtTarget.of_iSup_eq_top (P := @IsProper) U hU
+  intro i
+  let e' : B.ModuleFrame F (U i) (n + 1) :=
+    (projectiveBundleTensorPullbackIso (U i).ι).app F ≪≫
+      ((Scheme.Modules.restrictFunctorIsoPullback (U i).ι).app F).symm ≪≫ (e i).some
+  let C := frame (U i) e'
+  rw [← C.relativeChart_over, ← C.polynomialChart_over]
+  infer_instance
+
+private theorem projectiveBundle_invertible_of_frame
+    {B : Scheme.{u}} {n : ℕ} {F : B.Modules}
+    [F.IsFiniteLocallyFreeOfRank (n + 1)] (D : ProjectiveBundleRealization B F)
+    (frame : ∀ (U : B.Opens) (e : B.ModuleFrame F U (n + 1)),
+      ProjectiveBundleFrameChart D n U e) : D.L.IsInvertible := by
+  obtain ⟨I, U, hU, e⟩ :=
+    Scheme.Modules.IsFiniteLocallyFreeOfRank.exists_restrict_iso_free F (r := n + 1)
+  have hlocal (i : I) :
+      ((Scheme.Modules.pullback
+        (D.A.data.relProjHom ⁻¹ᵁ U i).ι).obj D.L).IsFiniteLocallyFreeOfRank 1 := by
+    let e' : B.ModuleFrame F (U i) (n + 1) :=
+      (projectiveBundleTensorPullbackIso (U i).ι).app F ≪≫
+        ((Scheme.Modules.restrictFunctorIsoPullback (U i).ι).app F).symm ≪≫ (e i).some
+    let C := frame (U i) e'
+    have ht : ((Scheme.Modules.tensorPullback
+        (C.relativeChart.hom ≫ C.polynomialChart.hom)).obj
+        (ProjectiveSpace.twist (ULift.{u} (Fin (n + 1))) (U i).toScheme 1)).IsInvertible :=
+      Scheme.Modules.IsInvertible.of_iso
+        ((projectiveBundleTensorPullbackIso _).app _).symm
+    have hi : ((Scheme.Modules.tensorPullback
+        (D.A.data.relProjHom ⁻¹ᵁ U i).ι).obj D.L).IsInvertible :=
+      Scheme.Modules.IsInvertible.of_iso C.twist
+    have hi' : ((Scheme.Modules.pullback
+        (D.A.data.relProjHom ⁻¹ᵁ U i).ι).obj D.L).IsInvertible :=
+      Scheme.Modules.IsInvertible.of_iso ((projectiveBundleTensorPullbackIso _).app _)
+    let : ((Scheme.Modules.pullback (D.A.data.relProjHom ⁻¹ᵁ U i).ι).obj D.L).IsInvertible := hi'
+    have := Scheme.Modules.IsInvertible.sheafOfModules_isInvertible
+      ((Scheme.Modules.pullback (D.A.data.relProjHom ⁻¹ᵁ U i).ι).obj D.L)
+    exact (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one
+      ((Scheme.Modules.pullback (D.A.data.relProjHom ⁻¹ᵁ U i).ι).obj D.L)).mp inferInstance
+  have : D.L.IsFiniteLocallyFreeOfRank 1 :=
+    Scheme.Modules.isFiniteLocallyFreeOfRank_of_isOpenImmersion D.L
+      (fun i ↦ (D.A.data.relProjHom ⁻¹ᵁ U i).ι)
+      (by
+        simp only [Scheme.Opens.opensRange_ι]
+        rw [← Scheme.Hom.preimage_iSup, hU]
+        rfl) hlocal
+  have := (SheafOfModules.isInvertible_iff_isFiniteLocallyFreeOfRank_one D.L).mpr
+    (inferInstance : D.L.IsFiniteLocallyFreeOfRank 1)
+  exact Scheme.Modules.IsInvertible.of_sheafOfModules D.L
 
 /-- Finite locally free projective bundles and their tautological geometry.
 Source: Stacks, Tags 01OB, 01O3, 01OE
@@ -613,6 +347,34 @@ theorem exists_projectiveBundleTautologicalGeometry
     (B : Scheme.{u}) (n : ℕ) (F : B.Modules)
     [F.IsFiniteLocallyFreeOfRank (n + 1)] :
     Nonempty (ProjectiveBundleTautologicalGeometry B n F) := by
-  sorry
+  classical
+  obtain ⟨M⟩ := exists_projectiveBundleFrameModels.{u} n
+  obtain ⟨C⟩ := exists_projectiveBundleBaseChangeCoherence M
+  let system : ProjectiveBundleTautologicalSystem.{u} n :=
+    { bundle := M.bundle
+      invertible := fun B F hF ↦ by
+        let : F.IsFiniteLocallyFreeOfRank (n + 1) := hF
+        exact projectiveBundle_invertible_of_frame (M.bundle B F hF) (M.frame B F hF)
+      proper := fun B F hF ↦ by
+        let : F.IsFiniteLocallyFreeOfRank (n + 1) := hF
+        exact projectiveBundle_proper_of_frame (M.bundle B F hF) (M.frame B F hF)
+      frame := M.frame
+      pullback_rank := fun B B' F hF g ↦ projectiveBundle_pullback_rank B B' n F hF g
+      baseChange := C.baseChange
+      baseChange_id := C.baseChange_id
+      baseChange_theta_id := C.baseChange_theta_id
+      baseChange_comp := C.baseChange_comp
+      baseChange_theta_comp := C.baseChange_theta_comp
+      coordinate := fun K _ ↦ Classical.choice (exists_projectiveBundleCoordinateGeometry K n)
+      rank_zero := fun B F hF hn ↦ by
+        subst n
+        let : F.IsFiniteLocallyFreeOfRank (0 + 1) := hF
+        obtain ⟨qiso, hqiso⟩ := exists_projectiveBundleRankZero
+          (M.bundle B F hF) (M.frame B F hF)
+        exact ⟨qiso, hqiso⟩ }
+  have hF : projectiveBundleRank B n F := by
+    change F.IsFiniteLocallyFreeOfRank (n + 1)
+    infer_instance
+  exact ⟨{ system := system, realization := system.bundle B F hF, selected := rfl }⟩
 
 end AlgebraicGeometry

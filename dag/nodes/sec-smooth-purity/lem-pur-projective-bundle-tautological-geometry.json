@@ -26,227 +26,58 @@
  ],
  "proof": [
   {
-   "text": "Choose a Zariski cover trivializing $F$ and refine it by affine opens $V=\\operatorname{Spec}R$, using [def-amb-finite-locally-free-module]. In a chosen frame $v_0,\\ldots,v_n$, [lem-weil-pbc-quasi-coherent-symmetric-algebra] identifies the affine sections of $\\operatorname{Sym}F$ with $\\operatorname{Sym}_R(R^{n+1})$. By [lem-weil-pbc-symmetric-algebra-free-module-polynomial], the map sending $v_i$ to $T_i$ is an algebra isomorphism with $R[T_0,\\ldots,T_n]$. It is graded: [lem-weil-pbc-symmetric-algebra-graded] describes degree $d$ as the span of products of $d$ degree-one generators, and the map and its inverse send each such product to a product of the same length. The same construction works for a frame on any open $U$, since its affine restrictions agree on their degree-one generators and hence agree as maps of symmetric algebra sheaves.",
+   "text": "Choose the family of normalized frame models from [lem-pur-projective-bundle-frame-models]. Use [lem-pur-projective-bundle-base-change-coherence] for the identity- and composition-compatible coefficient and degree-one twist comparisons. These are separate parts of the original chart construction.",
+   "uses": [
+    "lem-pur-projective-bundle-frame-models",
+    "lem-pur-projective-bundle-base-change-coherence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a trivializing open cover of F. On each inverse-image open its twist is the pullback of the invertible polynomial twist, so it is invertible globally by locality of finite local freeness of rank one. Each restricted structural morphism is a composition of two chart isomorphisms and the proper projective-space projection, so properness descends by target locality. Finite local freeness of the same rank is preserved by tensor pullback, using the canonical comparison to adjoint pullback.",
    "uses": [
     "def-amb-finite-locally-free-module",
-    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-    "lem-weil-pbc-symmetric-algebra-graded"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01OB, definition-projective-bundle; Tag 01OE, lemma-projective-space-bundle, polynomial symmetric algebra"
-   }
-  },
-  {
-   "text": "Apply the graded-equivalence clause of [prop-nagata-relative-proj-functoriality] to the frame isomorphism in step 1. Relative Proj and its affine restriction data [def-nagata-relative-proj] then identify $P|_U$ with $\\operatorname{Proj}_U\\operatorname{Sym}(\\mathcal O_U^{n+1})=\\mathbf P^n_U$ [def-nagata-relative-projective-space]. On an affine base piece, $D_+(T_i)$ has structure ring $H_i=(R[T_0,\\ldots,T_n])_{(T_i),0}$, and these opens cover, by [prop-nagata-proj-standard-open], since the variables generate the positive-degree ideal. This proves the scheme part of the assertion about every frame, not just about the frames in the initial covering.",
-   "uses": [
-    "prop-nagata-relative-proj-functoriality",
-    "def-nagata-relative-proj",
-    "def-nagata-relative-projective-space",
-    "prop-nagata-proj-standard-open"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01OB and 01OE; Tag 01NG, lemma-standard-covering-projective-space"
-   }
-  },
-  {
-   "text": "Here is the compatibility needed to glue the affine twists. For a degree-preserving algebra isomorphism $\\alpha:A\\to C$, the map on the degree-one localization modules is $a/f^m\\mapsto\\alpha(a)/\\alpha(f)^m$, with $\\deg a=m\\deg f+1$; its inverse is the same formula for $\\alpha^{-1}$. The fraction relation is preserved by a ring map, and the formula commutes with the localization restriction maps in [def-weil-pbc-proj-twisting-sheaf]. For restriction on the base, use that same formula with the coefficient restriction map on a principal affine refinement, as in the overlap data of [def-nagata-relative-proj]. For a principal base restriction $R\\to R_s$, on a frame chart both restrictions are the free module $H_i[1/s]T_i$: multiplication by $T_i$ identifies the degree-one fractions with the degree-zero ring, with inverse division by $T_i$. Thus restrictions and frame changes induce compatible isomorphisms of the local twisting modules. The identity and triple-overlap equations follow by applying the composite algebra map to the numerator and denominator. Apply [lem-weil-pbc-site-module-sheaf-gluing] on the Zariski open site of $P$ to these overlap isomorphisms to obtain the global module $L$. Its affine identifications are precisely $\\widetilde{(\\operatorname{Sym}F)(1)}$; thus $L$ is the twisting module $\\mathcal O_P(1)$ specified in the statement. No intersection of affine base opens is assumed affine: the formulas are checked on principal refinements inside affine pieces, and then on an affine covering of each overlap.",
-   "uses": [
-    "def-weil-pbc-proj-twisting-sheaf",
-    "def-nagata-relative-proj",
-    "lem-weil-pbc-site-module-sheaf-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NR, lemma-glue-relative-proj-twists (explicit localization cocycle); Tag 01MN, definition-twist; Tag 04TR, sites-lemma-glue-sheaves"
-   }
-  },
-  {
-   "text": "On a frame chart $D_+(T_i)$, the definition of the shift in [def-weil-pbc-proj-twisting-sheaf] gives $L=(A_{T_i})_1$, where $A=R[T_0,\\ldots,T_n]$. Multiplication by $T_i$ gives an $H_i$-linear isomorphism $H_i\\to(A_{T_i})_1$, with inverse $a/T_i^m\\mapsto a/T_i^{m+1}$; the two composites are the identity by multiplication of fractions. On an overlap the generators satisfy $T_i=(T_i/T_j)T_j$. Hence $L$ is locally free of rank one, so invertible by [def-sc-invertible-module], and these trivializations identify it with [def-pc-projective-space-twist] by $e_i\\mapsto T_i$. The maps agree on overlaps by the displayed identity; they and their inverses glue by applying the sheaf axiom to local sections. Together with step 2 this proves the asserted identification of pairs in every frame.",
-   "uses": [
-    "def-weil-pbc-proj-twisting-sheaf",
     "def-sc-invertible-module",
-    "def-pc-projective-space-twist"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01MS, lemma-when-invertible, proof with d=1; Tag 01OB"
-   }
-  },
-  {
-   "text": "To use properness for the precise projective-space interface, apply [lemma-nagata-relative-proj-base-change-arbitrary] to $\\mathcal O_{\\operatorname{Spec}\\mathbf Z}[T_0,\\ldots,T_n]$ and $U\\to\\operatorname{Spec}\\mathbf Z$. The pullback algebra is $\\mathcal O_U[T_0,\\ldots,T_n]$: on each affine piece this is [lem-weil-pbc-symmetric-algebra-base-change] applied to the free module, with the polynomial identification of step 1. Thus $\\mathbf P^n_U$ of step 2 is canonically $\\mathbf P(\\{0,\\ldots,n\\};U)$ of [def-nagata-projective-space-base-change], over $U$. This latter structural morphism is proper by [lemma-nagata-projective-space-base-change-proper]. Therefore $p$ is proper over every member of the frame cover, and [lemma-nagata-projective-target-local] gives properness over $B$. These results require no Noetherian, finite-type-base, or separated-base hypothesis.",
-   "uses": [
-    "lemma-nagata-relative-proj-base-change-arbitrary",
-    "lem-weil-pbc-symmetric-algebra-base-change",
+    "def-pc-projective-space-twist",
     "def-nagata-projective-space-base-change",
     "lemma-nagata-projective-space-base-change-proper",
     "lemma-nagata-projective-target-local"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01OE, lemma-projective-space-bundle; Tag 01O3, lemma-relative-proj-base-change; Tag 01NH, lemma-projective-space-separated; properness and its target locality are the cited existing nodes (Morphisms Tag 01W2, lemma-proper-local-on-the-base)"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $g:B'\\to B$ be arbitrary. The pullback of $F$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent], and its affine sections on $W=\\operatorname{Spec}S\\subseteq g^{-1}(\\operatorname{Spec}R)$ are $S\\otimes_R F(\\operatorname{Spec}R)$ by [lem-weil-pbc-module-pullback-affine-sections] (interchanging the tensor factors). Apply [lem-weil-pbc-symmetric-algebra-base-change] to obtain an isomorphism\n$$S\\otimes_R\\operatorname{Sym}_R F(\\operatorname{Spec}R)\\xrightarrow{\\sim}\\operatorname{Sym}_S(S\\otimes_R F(\\operatorname{Spec}R)).$$\nIt sends $s\\otimes\\iota(v)$ to $s\\iota(1\\otimes v)$. It and its inverse preserve degree, since the homogeneous pieces are the spans of products of degree-one generators [lem-weil-pbc-symmetric-algebra-graded]. These maps agree under restriction: both restriction composites agree on coefficients and on every $\\iota(v)$, hence on all products and sums. By the sheaf axiom they give a canonical graded algebra isomorphism $g^*\\operatorname{Sym}F\\cong\\operatorname{Sym}(g^*F)$. The affine-section identifications here are those of [lem-weil-pbc-quasi-coherent-symmetric-algebra].",
+   "text": "For n=0 each chart structural morphism is an isomorphism by [lem-weil-pbc-projective-space-zero-isomorphism]; target locality gives an isomorphism globally. On each frame chart the sole free-basis inclusion is an isomorphism. The normalized frame quotient is a free generator on the whole one-coordinate standard chart, hence an isomorphism. Cancel the source trivialization to see that the restricted universal quotient is an isomorphism. Reflect isomorphisms along the jointly surjective flat family of open immersions using [lem-sc-flat-cover-module-isomorphism-reflection]. Its inverse identifies L with p^*F.",
    "uses": [
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "lem-weil-pbc-symmetric-algebra-base-change",
-    "lem-weil-pbc-symmetric-algebra-graded",
-    "lem-weil-pbc-quasi-coherent-symmetric-algebra"
+    "lem-pur-projective-bundle-rank-zero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01O3, lemma-relative-proj-base-change, applied to Sym F; Algebra Tag 0C6F, lemma-tensor-algebra-localization (general scalar extension by the symmetric universal property); Schemes Tag 01I9, lemma-widetilde-pullback"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lemma-nagata-relative-proj-base-change-arbitrary] to $\\operatorname{Sym}F$ and the graded-equivalence clause of [prop-nagata-relative-proj-functoriality] to step 6. This constructs the asserted isomorphism $\\mathbf P_{B'}(g^*F)\\cong B'\\times_B P$. To fix its map, use [lem-nagata-affine-proj-scalar-extension] on the affine pieces in step 6. If $\\beta$ is that graded scalar-extension isomorphism and $\\psi(a)=\\beta(1\\otimes a)$, the map to $P$ has inverse image $D_+(\\psi(f))$ of $D_+(f)$ and ring map $a/f^m\\mapsto\\psi(a)/\\psi(f)^m$. These formulas determine the map uniquely on the covering by the pulled-back frame charts; in particular this is the canonical coefficient-pullback comparison, with no flatness condition on $g$.",
+   "text": "Use [lem-pur-projective-bundle-coordinate-geometry] for the independent polynomial field-coordinate assertions. Assemble the frame models, the proved properness and invertibility, the coherent comparisons, pullback ranks, coordinate geometry and proved rank-zero assertions into the required system. Select its realization at B,F; the selection equation is reflexivity. No geometric clause is dropped.",
    "uses": [
-    "lemma-nagata-relative-proj-base-change-arbitrary",
-    "prop-nagata-relative-proj-functoriality",
-    "lem-nagata-affine-proj-scalar-extension"
+    "lem-pur-projective-bundle-coordinate-geometry",
+    "def-pur-projective-bundle-tautological-data"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01O3, lemma-relative-proj-base-change, r; Tag 01N2, lemma-base-change-map-proj"
-   }
-  },
-  {
-   "text": "Let $r:\\mathbf P_{B'}(g^*F)\\to P$ be the projection just constructed. On a pulled-back frame chart the modules in $r^*L\\to L'$ are free of rank one by step 4; define the map by $r^*T_i\\mapsto T'_i=\\psi(T_i)$. In affine module coordinates this is an isomorphism: pullback of $H_iT_i$ is $H'_i\\otimes_{H_i}H_iT_i\\cong H'_iT'_i$, by [lem-weil-pbc-module-pullback-affine-sections]. The ring map of step 7 sends $T_i/T_j$ to $T'_i/T'_j$, so these maps agree on overlaps of standard charts. Across changes of base frame, they too agree: on a degree-one fraction both formulas send $a/f^m$ to $\\psi(a)/\\psi(f)^m$, using step 3 and the map on generators in step 6. Thus maps and inverses glue by the sheaf axiom. This proves the canonical isomorphism $r^*\\mathcal O_P(1)\\cong\\mathcal O_{\\mathbf P_{B'}(g^*F)}(1)$; it gives exactly the degree-one part of the twist comparison, rather than assuming that part from the scheme-only base-change node. The meaning of pullback is [def-pc-module-pullback], and the fraction description is [def-weil-pbc-proj-twisting-sheaf].",
-   "uses": [
-    "lem-weil-pbc-module-pullback-affine-sections",
-    "def-pc-module-pullback",
-    "def-weil-pbc-proj-twisting-sheaf"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01O3, lemma-relative-proj-base-change, theta; Tag 01N2, lemma-base-change-map-proj, twist comparison made explicit in rank-one frame charts"
-   }
-  },
-  {
-   "text": "For the identity base map the maps in steps 6--8 fix coefficients, degree-one generators, and all fractions. For $B''\\xrightarrow{h}B'\\xrightarrow{g}B$, identify the iterated module pullbacks by [def-pc-module-pullback]. On affine pieces with coefficient maps $R\\to S\\to T$, both symmetric-algebra maps send $t\\otimes(s\\otimes\\iota(v))$ to $t\\,\\overline{s}\\,\\iota(1\\otimes v)$; the corresponding maps on every Proj chart send $a/f^m$ to its image over $T$. By the uniqueness of the chart-described morphism in [lem-nagata-affine-proj-scalar-extension] and [lem-weil-pbc-scheme-morphism-gluing], the comparison scheme maps coincide. Their maps into the fibre products coincide by the two projections [def-pc-fibre-product]. On the line modules both composites carry the pulled-back generator $T_i$ to the same generator over $T$, so they coincide as well. This proves identity and composition compatibility for both the scheme and twist isomorphisms.",
-   "uses": [
-    "def-pc-module-pullback",
-    "lem-nagata-affine-proj-scalar-extension",
-    "lem-weil-pbc-scheme-morphism-gluing",
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01O3 and Tag 01N2, coefficient maps on homogeneous fractions; composition checked explicitly"
-   }
-  },
-  {
-   "text": "Now let $K$ be any field and $n\\geq1$. The quotient $K[T_0,\\ldots,T_n]\\twoheadrightarrow K[T_1,\\ldots,T_n]$, setting $T_0=0$, is graded and surjective. The closed-immersion clause of [prop-nagata-relative-proj-functoriality] gives $\\mathbf P^{n-1}_K\\hookrightarrow\\mathbf P^n_K$, using [def-nagata-relative-projective-space] over the affine base. On $D_+(T_j)$ for $j\\ne0$, the map on dehomogenized rings sets $T_0/T_j$ equal to zero and fixes all other coordinates [lem-weil-pbc-dehomogenization-polynomial-ring]. Its kernel is $(T_0/T_j)$: expand a polynomial in that one variable as its constant term plus that variable times a polynomial. The source has no $D_+(T_0)$ chart. Thus this immersion is scheme-theoretically the subscheme $T_0=0$, not just a bijection on points. Its twist restricts to the lower-dimensional twist, since the local generators $T_j$ and ratios $T_j/T_k$ restrict to the identically named ones, as in step 4.",
-   "uses": [
-    "prop-nagata-relative-proj-functoriality",
-    "def-nagata-relative-projective-space",
-    "lem-weil-pbc-dehomogenization-polynomial-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01OE and Tag 01NG; coordinate quotient with the closed-immersion property of Proj"
-   }
-  },
-  {
-   "text": "The complement of $T_0=0$ is $D_+(T_0)$: in its local trivialization the section $T_0$ vanishes exactly where its coefficient is in the point's maximal ideal. By [lem-weil-pbc-projective-space-standard-charts], its non-vanishing locus is the standard open, and that chart has coordinate algebra $K[t_1,\\ldots,t_n]$, $t_i=T_i/T_0$. By [def-sbc-affine-space], this chart is $\\mathbf A^n_K$. The base-change model used by that chart theorem is the same one identified with relative Proj in step 5, with the same generators by steps 4 and 8.",
-   "uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
-    "def-sbc-affine-space"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NG, lemma-standard-covering-projective-space, chart i=0"
-   }
-  },
-  {
-   "text": "For any $i$, the equation of $D_i=\\{T_i=0\\}$ on $U_j=D_+(T_j)$ is $q_j=T_i/T_j$, by [lem-weil-pbc-projective-space-standard-charts]. For $j=i$ this is $1$; for $j\\ne i$ it is one polynomial variable, a nonzerodivisor because multiplying by it shifts the monomial coefficients injectively. Hence the ideal is an effective Cartier ideal [def-nagata-effective-cartier-ideal]. Its associated line bundle is the dual ideal [def-pc-divisor-line-bundle]. Let $h_j$ be the dual generator with $h_j(q_j)=1$. On $U_j\\cap U_k$ one has $q_k=(T_j/T_k)q_j$, hence $h_j=(T_j/T_k)h_k$. These are exactly the transitions for $\\mathcal O(1)$ in [def-pc-projective-space-twist], so $e_j\\mapsto h_j$ glues to $\\mathcal O(1)\\cong\\mathcal O(D_i)$. This also checks the sign of the twist: it is $+1$.",
-   "uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
-    "def-nagata-effective-cartier-ideal",
-    "def-pc-divisor-line-bundle",
-    "def-pc-projective-space-twist"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "Tag 01WR, definition-effective-Cartier-divisor; Tag 01WX, definition-invertible-sheaf-effective-Cartier-divisor; coordinate charts from Constructions Tag 01NG, lemma-standard-covering-projective-space"
-   }
-  },
-  {
-   "text": "The scheme-theoretic intersection $T_1=\\cdots=T_n=0$ has empty intersection with $D_+(T_i)$ for $i\\geq1$, because there the defining ideal contains $T_i/T_i=1$. By the covering and coordinate-ring clauses of [lem-weil-pbc-projective-space-standard-charts], it is therefore entirely in $D_+(T_0)=\\mathbf A^n_K$, where its coordinate ring is $K[t_1,\\ldots,t_n]/(t_1,\\ldots,t_n)\\cong K$ (evaluation at zero, with inverse the constants). This is a reduced point, with coordinates $t_1=\\cdots=t_n=0$, hence the homogeneous point $[1:0:\\cdots:0]$. In particular no nilpotent thickening is hidden in the assertion about the intersection.",
-   "uses": [
-    "lem-weil-pbc-projective-space-standard-charts"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tag 01NG, standard affine coordinates, explicit quotient ideal computation"
-   }
-  },
-  {
-   "text": "Finally take $n=0$. Over any framed affine base open, the positive-degree ideal of $R[T]$ is generated by $T$, so its entire Proj is $D_+(T)$ by [prop-nagata-proj-standard-open]. By [lem-weil-pbc-dehomogenization-polynomial-ring] its degree-zero localization is the polynomial ring on zero variables, namely $R$, with structure map the identity. Thus $p$ is locally an isomorphism to the base; the local inverses agree because each is an inverse to $p$ on its open, and glue by [lem-weil-pbc-scheme-morphism-gluing]. Moreover, step 4 identifies the twist with the free module generated by $T$. The local isomorphism $F\\to L$ over this base identification sends the frame $v$ to $T$. If $v'=uv$ for a unit $u$, then $T'=uT$ by the degree-one symmetric algebra map, so this isomorphism is independent of the frame and glues. Hence $\\mathcal O_P(1)$ corresponds to $F$, including when $F$ is a nontrivial line bundle. All covering arguments also apply to the empty base.",
-   "uses": [
-    "prop-nagata-proj-standard-open",
-    "lem-weil-pbc-dehomogenization-polynomial-ring",
-    "lem-weil-pbc-scheme-morphism-gluing"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/constructions.tex",
-    "place": "Tags 01OB and 01NG; rank-one polynomial chart and its degree-one generator"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "lem-pur-projective-bundle-frame-models",
+  "lem-pur-projective-bundle-base-change-coherence",
   "def-amb-finite-locally-free-module",
-  "def-nagata-effective-cartier-ideal",
-  "def-nagata-projective-space-base-change",
-  "def-nagata-relative-proj",
-  "def-nagata-relative-projective-space",
-  "def-pc-divisor-line-bundle",
-  "def-pc-fibre-product",
-  "def-pc-module-pullback",
-  "def-pc-projective-space-twist",
-  "def-sbc-affine-space",
   "def-sc-invertible-module",
-  "def-weil-pbc-proj-twisting-sheaf",
-  "lem-nagata-affine-proj-scalar-extension",
-  "lem-weil-pbc-dehomogenization-polynomial-ring",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-projective-space-standard-charts",
-  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-  "lem-weil-pbc-scheme-morphism-gluing",
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "lem-weil-pbc-symmetric-algebra-base-change",
-  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
-  "lem-weil-pbc-symmetric-algebra-graded",
+  "def-pc-projective-space-twist",
+  "def-nagata-projective-space-base-change",
   "lemma-nagata-projective-space-base-change-proper",
   "lemma-nagata-projective-target-local",
-  "lemma-nagata-relative-proj-base-change-arbitrary",
-  "prop-nagata-proj-standard-open",
-  "prop-nagata-relative-proj-functoriality"
+  "lem-pur-projective-bundle-rank-zero",
+  "lem-pur-projective-bundle-coordinate-geometry",
+  "def-pur-projective-bundle-tautological-data"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/constructions.tex",
-  "place": "Expanded chart proof of Tags 01OB, 01OE, 01O3 and 01N2; explicit gluing, coordinate-ideal and rank-one calculations following Tags 01MS and 01NG"
+  "place": "Tags 01OB, 01O3, 01OE; frame-chart reduction with derived properness, invertibility and rank-zero quotient; original steps partitioned into three construction lemmas."
  },
  "mathlib_searches": [
   {
@@ -455,29 +286,11 @@
   ]
  },
  "tool_uses": [
-  "def-nagata-effective-cartier-ideal",
   "def-nagata-projective-space-base-change",
-  "def-nagata-relative-proj",
-  "def-nagata-relative-projective-space",
-  "def-pc-divisor-line-bundle",
-  "def-pc-module-pullback",
   "def-pc-projective-space-twist",
   "def-sc-invertible-module",
-  "def-weil-pbc-proj-twisting-sheaf",
-  "lem-nagata-affine-proj-scalar-extension",
-  "lem-weil-pbc-dehomogenization-polynomial-ring",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-projective-space-standard-charts",
-  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
-  "lem-weil-pbc-site-module-sheaf-gluing",
-  "lem-weil-pbc-symmetric-algebra-base-change",
-  "lem-weil-pbc-symmetric-algebra-graded",
   "lemma-nagata-projective-space-base-change-proper",
-  "lemma-nagata-projective-target-local",
-  "lemma-nagata-relative-proj-base-change-arbitrary",
-  "prop-nagata-proj-standard-open",
-  "prop-nagata-relative-proj-functoriality"
+  "lemma-nagata-projective-target-local"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -491,25 +304,6 @@
   "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry",
   "declaration": "AlgebraicGeometry.exists_projectiveBundleTautologicalGeometry",
   "declarations": [
-   "AlgebraicGeometry.projectiveBundleTensorPullbackIso",
-   "AlgebraicGeometry.projectiveBundlePullbackId",
-   "AlgebraicGeometry.projectiveBundlePullbackComp",
-   "AlgebraicGeometry.projectiveBundlePullbackCongr",
-   "AlgebraicGeometry.projectiveBundlePullbackAdjunction",
-   "AlgebraicGeometry.projectiveBundlePullbackUnitIso",
-   "AlgebraicGeometry.projectiveBundlePullbackSection",
-   "AlgebraicGeometry.Scheme.symmetricDegree",
-   "AlgebraicGeometry.Scheme.ModuleFrame",
-   "AlgebraicGeometry.Scheme.SymmetricGradedAlgebraData",
-   "AlgebraicGeometry.tautologicalTransport",
-   "AlgebraicGeometry.TautologicalTwistData",
-   "AlgebraicGeometry.ProjectiveBundleRealization",
-   "AlgebraicGeometry.projectiveBundleFrameSection",
-   "AlgebraicGeometry.ProjectiveBundleFrameChart",
-   "AlgebraicGeometry.projectiveBundleThetaQuotientLaw",
-   "AlgebraicGeometry.ProjectiveBundleBaseChangeDatum",
-   "AlgebraicGeometry.ProjectiveBundleCoordinateGeometry",
-   "AlgebraicGeometry.projectiveBundleRank",
    "AlgebraicGeometry.ProjectiveBundleTautologicalSystem",
    "AlgebraicGeometry.ProjectiveBundleTautologicalGeometry",
    "AlgebraicGeometry.exists_projectiveBundleTautologicalGeometry"
@@ -520,7 +314,7 @@
   "date": "2026-10-17",
   "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleTautologicalGeometry.lean",
   "existing": false,
-  "note": "Repair of returned delivery: original mathematical statement and all dependency citations restored unchanged. Actual graded algebra equivalences, normalized twist/quotient and frame maps, tensor pullbacks, canonical base-change maps and theta with identity/composition equations, and coordinate subschemes replace the underspecified interface."
+  "note": "Data interfaces extracted to ProjectiveBundleTautologicalData; the frame-section composite is factored through a named frame vector with proved equations and IsIso API. Existing signatures and the main statement are unchanged. The main proof assembles two strictly partial construction lemmas, proved coordinate geometry, and the local-to-global consequences."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -529,5 +323,15 @@
   "group": "Q103",
   "result": "pass",
   "note": "Re-delivery repairs every point of the prior RETURN. Node statement, proof and source unchanged, statement_change withdrawn; stmt_deps only gains the landed lem-pc-module-pullback-adjunction. lean.statement is verbatim and all 22 declarations exist. P/p are relProj/relProjHom of graded data pinned to Sym F on affines (algebra equivalences, degree spans, SymmetricAlgebraSheaf.restriction). L is the glued Proj.twist 1 fixed on degree-one generators and on overlaps; the quotient is fixed by quotient_generator. invertible and IsProper are stated with no extra hypotheses. Frame charts are over U with T_i -> e_i, local bases and transitions e_i=(T_i/T_j)e_j (coordRatio direction checked upstream). Base change uses upstream PullbackData with proved isPullback/relProjIsoPullback, generator-pinned coefficients, map_eq, and theta fixed by the quotient square; id/comp laws for maps and theta. Field clauses: zero locus of T_0 iso P^{n-1}_K, A^n_K iso D_+(T_0) with ratios, Cartier V(T_i) with dual iso O(1), iSup ideal point iso Spec K, reduced, in chart. rank_zero gives an actual iso and IsIso p. n=0, empty base and universes OK; no hollow defs (Classical.choose from a proved unit-pinned adjunction); only the main theorem is sorry; docstrings with 14 steps. nt_compile --json on the snapshot: clean, exit 0, 31.7 s/37.2 s. Minor non-blocking notes in review.md."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a34b7",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T131130-L-1245318",
+  "kind": "interface",
+  "note": "independent cc review: Old item vs the new Data module (moved declarations identical apart from the declared frame-section change); 7 delivered modules + 8 direct importers compiled clean; #print axioms checked; two residual sorry statements checked against node steps 1-4/6-9"
  }
 }

@@ -1,0 +1,177 @@
+{
+ "id": "lem-pur-projective-bundle-base-change-coherence",
+ "kind": "statement",
+ "title": "Coherence of projective-bundle coefficient base change",
+ "statement": "Fix $n\\geq0$ and any family of normalized frame models [lem-pur-projective-bundle-frame-models]. For every scheme map $g:B^{\\prime}\\to B$ and every isomorphism $F^{\\prime}\\simeq g^*F$ between modules of rank $n+1$, the two fixed models admit the generator-normalized coefficientwise graded base-change comparison and its degree-one twist isomorphism [def-pur-projective-bundle-tautological-data]. The induced maps and twist isomorphisms satisfy the identity and composition equations, with the canonical tensor-pullback identity and composition comparisons. No flatness assumption is made, and neither properness nor field-coordinate geometry is asserted.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01O3, lemma-relative-proj-base-change including theta; parent proof steps 6--9"
+ },
+ "stmt_deps": [
+  "lem-pur-projective-bundle-frame-models",
+  "def-pur-projective-bundle-tautological-data",
+  "def-pc-module-pullback"
+ ],
+ "proof": [
+  {
+   "text": "Let $g:B'\\to B$ be arbitrary. The pullback of $F$ is quasi-coherent by [lem-weil-pbc-module-pullback-quasi-coherent], and its affine sections on $W=\\operatorname{Spec}S\\subseteq g^{-1}(\\operatorname{Spec}R)$ are $S\\otimes_R F(\\operatorname{Spec}R)$ by [lem-weil-pbc-module-pullback-affine-sections] (interchanging the tensor factors). Apply [lem-weil-pbc-symmetric-algebra-base-change] to obtain an isomorphism\n$$S\\otimes_R\\operatorname{Sym}_R F(\\operatorname{Spec}R)\\xrightarrow{\\sim}\\operatorname{Sym}_S(S\\otimes_R F(\\operatorname{Spec}R)).$$\nIt sends $s\\otimes\\iota(v)$ to $s\\iota(1\\otimes v)$. It and its inverse preserve degree, since the homogeneous pieces are the spans of products of degree-one generators [lem-weil-pbc-symmetric-algebra-graded]. These maps agree under restriction: both restriction composites agree on coefficients and on every $\\iota(v)$, hence on all products and sums. By the sheaf axiom they give a canonical graded algebra isomorphism $g^*\\operatorname{Sym}F\\cong\\operatorname{Sym}(g^*F)$. The affine-section identifications here are those of [lem-weil-pbc-quasi-coherent-symmetric-algebra].",
+   "uses": [
+    "lem-weil-pbc-module-pullback-quasi-coherent",
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "lem-weil-pbc-symmetric-algebra-base-change",
+    "lem-weil-pbc-symmetric-algebra-graded",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O3, lemma-relative-proj-base-change, applied to Sym F; Algebra Tag 0C6F, lemma-tensor-algebra-localization (general scalar extension by the symmetric universal property); Schemes Tag 01I9, lemma-widetilde-pullback"
+   }
+  },
+  {
+   "text": "Apply [lemma-nagata-relative-proj-base-change-arbitrary] to $\\operatorname{Sym}F$ and the graded-equivalence clause of [prop-nagata-relative-proj-functoriality] to step 6. This constructs the asserted isomorphism $\\mathbf P_{B'}(g^*F)\\cong B'\\times_B P$. To fix its map, use [lem-nagata-affine-proj-scalar-extension] on the affine pieces in step 6. If $\\beta$ is that graded scalar-extension isomorphism and $\\psi(a)=\\beta(1\\otimes a)$, the map to $P$ has inverse image $D_+(\\psi(f))$ of $D_+(f)$ and ring map $a/f^m\\mapsto\\psi(a)/\\psi(f)^m$. These formulas determine the map uniquely on the covering by the pulled-back frame charts; in particular this is the canonical coefficient-pullback comparison, with no flatness condition on $g$.",
+   "uses": [
+    "lemma-nagata-relative-proj-base-change-arbitrary",
+    "prop-nagata-relative-proj-functoriality",
+    "lem-nagata-affine-proj-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O3, lemma-relative-proj-base-change, r; Tag 01N2, lemma-base-change-map-proj"
+   }
+  },
+  {
+   "text": "Let $r:\\mathbf P_{B'}(g^*F)\\to P$ be the projection just constructed. On a pulled-back frame chart the modules in $r^*L\\to L'$ are free of rank one by step 4; define the map by $r^*T_i\\mapsto T'_i=\\psi(T_i)$. In affine module coordinates this is an isomorphism: pullback of $H_iT_i$ is $H'_i\\otimes_{H_i}H_iT_i\\cong H'_iT'_i$, by [lem-weil-pbc-module-pullback-affine-sections]. The ring map of step 7 sends $T_i/T_j$ to $T'_i/T'_j$, so these maps agree on overlaps of standard charts. Across changes of base frame, they too agree: on a degree-one fraction both formulas send $a/f^m$ to $\\psi(a)/\\psi(f)^m$, using step 3 and the map on generators in step 6. Thus maps and inverses glue by the sheaf axiom. This proves the canonical isomorphism $r^*\\mathcal O_P(1)\\cong\\mathcal O_{\\mathbf P_{B'}(g^*F)}(1)$; it gives exactly the degree-one part of the twist comparison, rather than assuming that part from the scheme-only base-change node. The meaning of pullback is [def-pc-module-pullback], and the fraction description is [def-weil-pbc-proj-twisting-sheaf].",
+   "uses": [
+    "lem-weil-pbc-module-pullback-affine-sections",
+    "def-pc-module-pullback",
+    "def-weil-pbc-proj-twisting-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O3, lemma-relative-proj-base-change, theta; Tag 01N2, lemma-base-change-map-proj, twist comparison made explicit in rank-one frame charts"
+   }
+  },
+  {
+   "text": "For the identity base map the maps in steps 6--8 fix coefficients, degree-one generators, and all fractions. For $B''\\xrightarrow{h}B'\\xrightarrow{g}B$, identify the iterated module pullbacks by [def-pc-module-pullback]. On affine pieces with coefficient maps $R\\to S\\to T$, both symmetric-algebra maps send $t\\otimes(s\\otimes\\iota(v))$ to $t\\,\\overline{s}\\,\\iota(1\\otimes v)$; the corresponding maps on every Proj chart send $a/f^m$ to its image over $T$. By the uniqueness of the chart-described morphism in [lem-nagata-affine-proj-scalar-extension] and [lem-weil-pbc-scheme-morphism-gluing], the comparison scheme maps coincide. Their maps into the fibre products coincide by the two projections [def-pc-fibre-product]. On the line modules both composites carry the pulled-back generator $T_i$ to the same generator over $T$, so they coincide as well. This proves identity and composition compatibility for both the scheme and twist isomorphisms.",
+   "uses": [
+    "def-pc-module-pullback",
+    "lem-nagata-affine-proj-scalar-extension",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01O3 and Tag 01N2, coefficient maps on homogeneous fractions; composition checked explicitly"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-quasi-coherent",
+  "lem-weil-pbc-module-pullback-affine-sections",
+  "lem-weil-pbc-symmetric-algebra-base-change",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lemma-nagata-relative-proj-base-change-arbitrary",
+  "prop-nagata-relative-proj-functoriality",
+  "lem-nagata-affine-proj-scalar-extension",
+  "def-pc-module-pullback",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01O3, lemma-relative-proj-base-change including theta; parent proof steps 6--9"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projectivization of a finite locally free sheaf has frame charts compatible with its tautological invertible quotient and arbitrary base change",
+   "results": "Projectivization; Projectivization.map_comp; Projectivization.finite_iff_of_finite; Projectivization.mk''; Projectivization.mk; Projectivization.Independent.rec; Projectivization.finite_of_finite; Projectivization.Independent.mk",
+   "date": "2026-10-19",
+   "verdict": "No match for scheme-theoretic normalized frame models, coherent theta maps, or coordinate subschemes. Existing algebraic and chart tools used below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An effective Cartier divisor cut out by a regular section of an invertible sheaf has associated line bundle isomorphic to that sheaf",
+   "results": "AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen; AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso; AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self; AlgebraicGeometry.IsAffineOpen.appBasicOpenIsoAwayMap; AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away; AlgebraicGeometry.StructureSheaf.basicOpenIso; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-19",
+   "verdict": "No match for scheme-theoretic normalized frame models, coherent theta maps, or coordinate subschemes. Existing algebraic and chart tools used below."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveBundle|Tautological|zeroLocus.*coordinate|standardOpenIso",
+   "results": "Mathlib/Dynamics/SymbolicDynamics/Basic.lean; Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean; Mathlib/Algebra/Algebra/RestrictScalars.lean; Mathlib/Algebra/Algebra/Equiv.lean; Mathlib/Algebra/Ring/Action/End.lean; Mathlib/Algebra/Ring/Action/Basic.lean; Mathlib/Algebra/Ring/CentroidHom.lean; Mathlib/Algebra/Order/Group/Action/End.lean",
+   "date": "2026-10-19",
+   "verdict": "No match for scheme-theoretic normalized frame models, coherent theta maps, or coordinate subschemes. Existing algebraic and chart tools used below."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry",
+  "date": "2026-10-19",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-projective-bundle-formula",
+   "place": "Tag 01O3, lemma-relative-proj-base-change including theta; parent proof steps 6--9",
+   "via": [
+    "lem-pur-projective-bundle-tautological-geometry"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleBaseChangeCoherence",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleBaseChangeCoherence.lean",
+  "declaration": "AlgebraicGeometry.exists_projectiveBundleBaseChangeCoherence",
+  "declarations": [
+   "AlgebraicGeometry.exists_projectiveBundleBaseChangeCoherence",
+   "AlgebraicGeometry.ProjectiveBundleBaseChangeCoherence"
+  ],
+  "statement": "theorem exists_projectiveBundleBaseChangeCoherence {n : ℕ}\n    (M : ProjectiveBundleFrameModels.{u} n) :\n    Nonempty (ProjectiveBundleBaseChangeCoherence M)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a34b7",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T131130-L-1245318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a34b7",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T131130-L-1245318",
+  "kind": "interface",
+  "note": "independent cc review: Old item vs the new Data module (moved declarations identical apart from the declared frame-section change); 7 delivered modules + 8 direct importers compiled clean; #print axioms checked; two residual sorry statements checked against node steps 1-4/6-9"
+ }
+}

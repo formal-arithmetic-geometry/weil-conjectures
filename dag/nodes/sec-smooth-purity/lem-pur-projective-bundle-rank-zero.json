@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-projective-bundle-rank-zero",
+ "kind": "statement",
+ "title": "Rank-zero projective bundle quotient",
+ "statement": "For a normalized projective bundle realization of a rank-one module, the quotient is an isomorphism and the one-coordinate structural morphism is an isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01OE, rank-zero projective space"
+ },
+ "stmt_deps": [
+  "def-pur-projective-bundle-tautological-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Zariski frame cover of the rank-one module. The one-coordinate projective chart is all of the projective space, by the standard-open cover indexed by a unique type. Its normalized quotient section is therefore a global free generator and is an isomorphism on sections. The sole free-basis inclusion is the inverse of freeUniqueIso, so cancellation of the source trivialization proves that the universal quotient restricts to an isomorphism. Transport tensor pullback to the adjoint pullback and reflect isomorphisms along the jointly surjective open cover. The inverse quotient supplies the stated line-module isomorphism. On each base frame open the structural morphism is the composite of the frame isomorphisms and the one-coordinate projective-space structural isomorphism. Target locality of isomorphisms proves the global structural assertion. The argument also covers the empty base.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "lem-weil-pbc-projective-space-zero-isomorphism",
+    "lem-sc-flat-cover-module-isomorphism-reflection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "lem-weil-pbc-projective-space-zero-isomorphism",
+  "lem-sc-flat-cover-module-isomorphism-reflection"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tag 01OE, rank-one module case, proved using normalized frame charts and locality"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projective space on a singleton index is isomorphic to the base scheme and its tautological quotient is an isomorphism",
+   "results": "AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty (Mathlib.AlgebraicGeometry.AffineSpace); AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat (Mathlib.AlgebraicGeometry.Limits); Projectivization.isEmpty_of_subsingleton (Mathlib.LinearAlgebra.Projectivization.Cardinality); Projectivization.submodule_mk'' (Mathlib.LinearAlgebra.Projectivization.Basic); LinearAlgebra.Projectivization.termℙ (Mathlib.LinearAlgebra.Projectivization.Basic); AlgebraicGeometry.Scheme.topIso (Mathlib.AlgebraicGeometry.Restrict); AlgebraicGeometry.Proj.basicOpenIsoSpec (Mathlib.AlgebraicGeometry.ProjectiveSpectrum.Basic); Projectivization (Mathlib.LinearAlgebra.Projectivization.Basic)",
+   "date": "2026-10-20",
+   "verdict": "No exact packaging theorem. Use the proved projective-zero-space API in the library and prove quotient invertibility by the frame-cover argument."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "One-coordinate projective space is its base and its normalized rank-one quotient is an isomorphism",
+   "results": "Existing source module ProjectiveSpace.Zero proves the structural isomorphism; the quotient follows from the normalized frame generator. No full Mathlib statement.",
+   "date": "2026-10-19",
+   "verdict": "source library route used"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Proj\", \"baseChange\"",
+   "results": "No rank-one quotient match; projective-space source and module free-generator API used.",
+   "date": "2026-10-19",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "projectiveSpaceOverAffineIsoSpec|freeUniqueIso|isIso_of_isIso_pullback_map",
+   "results": "WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Zero; Mathlib sheaf free modules; WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk",
+   "date": "2026-10-19",
+   "verdict": "reused"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry",
+  "date": "2026-10-19",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-projective-bundle-formula",
+   "place": "rank-zero clause",
+   "via": [
+    "lem-pur-projective-bundle-tautological-geometry"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleRankZero",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleRankZero.lean",
+  "declaration": "AlgebraicGeometry.exists_projectiveBundleRankZero",
+  "statement": "theorem exists_projectiveBundleRankZero\n    {B : Scheme.{u}} {F : B.Modules} [F.IsFiniteLocallyFreeOfRank (0 + 1)]\n    (D : ProjectiveBundleRealization B F)\n    (frame : ∀ (U : B.Opens) (e : B.ModuleFrame F U (0 + 1)),\n      ProjectiveBundleFrameChart D 0 U e) :\n    ∃ _qiso : D.L ≅ (Scheme.Modules.tensorPullback D.A.data.relProjHom).obj F,\n      IsIso D.A.data.relProjHom",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a34b7",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T131130-L-1245318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a34b7",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T131130-L-1245318",
+  "kind": "interface",
+  "note": "independent cc review: Old item vs the new Data module (moved declarations identical apart from the declared frame-section change); 7 delivered modules + 8 direct importers compiled clean; #print axioms checked; two residual sorry statements checked against node steps 1-4/6-9"
+ }
+}

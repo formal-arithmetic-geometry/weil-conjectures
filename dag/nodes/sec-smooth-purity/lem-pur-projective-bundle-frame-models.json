@@ -1,0 +1,175 @@
+{
+ "id": "lem-pur-projective-bundle-frame-models",
+ "kind": "statement",
+ "title": "Frame models for finite locally free projective bundles",
+ "statement": "For every integer $n\\geq0$ there is a family, indexed by schemes $B$ and finite locally free $\\mathcal O_B$-modules $F$ of constant rank $n+1$ [def-amb-finite-locally-free-module], of normalized symmetric-algebra projective-bundle realizations [def-pur-projective-bundle-tautological-data], with a chart for every frame of $F$ on every open $U$. Each chart identifies the quotient sections with ordered polynomial homogeneous coordinates, and records their free-generator and coordinate-ratio transition equations. This asserts the realizations and their frame charts only, not properness, arbitrary base-change coherence, or field-coordinate subschemes.",
+ "source": {
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OB, 01OE, 01NR, 01MN, 01MS; parent proof steps 1--4"
+ },
+ "stmt_deps": [
+  "def-pur-projective-bundle-tautological-data",
+  "def-amb-finite-locally-free-module"
+ ],
+ "proof": [
+  {
+   "text": "Choose a Zariski cover trivializing $F$ and refine it by affine opens $V=\\operatorname{Spec}R$, using [def-amb-finite-locally-free-module]. In a chosen frame $v_0,\\ldots,v_n$, [lem-weil-pbc-quasi-coherent-symmetric-algebra] identifies the affine sections of $\\operatorname{Sym}F$ with $\\operatorname{Sym}_R(R^{n+1})$. By [lem-weil-pbc-symmetric-algebra-free-module-polynomial], the map sending $v_i$ to $T_i$ is an algebra isomorphism with $R[T_0,\\ldots,T_n]$. It is graded: [lem-weil-pbc-symmetric-algebra-graded] describes degree $d$ as the span of products of $d$ degree-one generators, and the map and its inverse send each such product to a product of the same length. The same construction works for a frame on any open $U$, since its affine restrictions agree on their degree-one generators and hence agree as maps of symmetric algebra sheaves.",
+   "uses": [
+    "def-amb-finite-locally-free-module",
+    "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+    "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+    "lem-weil-pbc-symmetric-algebra-graded"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01OB, definition-projective-bundle; Tag 01OE, lemma-projective-space-bundle, polynomial symmetric algebra"
+   }
+  },
+  {
+   "text": "Apply the graded-equivalence clause of [prop-nagata-relative-proj-functoriality] to the frame isomorphism in step 1. Relative Proj and its affine restriction data [def-nagata-relative-proj] then identify $P|_U$ with $\\operatorname{Proj}_U\\operatorname{Sym}(\\mathcal O_U^{n+1})=\\mathbf P^n_U$ [def-nagata-relative-projective-space]. On an affine base piece, $D_+(T_i)$ has structure ring $H_i=(R[T_0,\\ldots,T_n])_{(T_i),0}$, and these opens cover, by [prop-nagata-proj-standard-open], since the variables generate the positive-degree ideal. This proves the scheme part of the assertion about every frame, not just about the frames in the initial covering.",
+   "uses": [
+    "prop-nagata-relative-proj-functoriality",
+    "def-nagata-relative-proj",
+    "def-nagata-relative-projective-space",
+    "prop-nagata-proj-standard-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tags 01OB and 01OE; Tag 01NG, lemma-standard-covering-projective-space"
+   }
+  },
+  {
+   "text": "Here is the compatibility needed to glue the affine twists. For a degree-preserving algebra isomorphism $\\alpha:A\\to C$, the map on the degree-one localization modules is $a/f^m\\mapsto\\alpha(a)/\\alpha(f)^m$, with $\\deg a=m\\deg f+1$; its inverse is the same formula for $\\alpha^{-1}$. The fraction relation is preserved by a ring map, and the formula commutes with the localization restriction maps in [def-weil-pbc-proj-twisting-sheaf]. For restriction on the base, use that same formula with the coefficient restriction map on a principal affine refinement, as in the overlap data of [def-nagata-relative-proj]. For a principal base restriction $R\\to R_s$, on a frame chart both restrictions are the free module $H_i[1/s]T_i$: multiplication by $T_i$ identifies the degree-one fractions with the degree-zero ring, with inverse division by $T_i$. Thus restrictions and frame changes induce compatible isomorphisms of the local twisting modules. The identity and triple-overlap equations follow by applying the composite algebra map to the numerator and denominator. Apply [lem-weil-pbc-site-module-sheaf-gluing] on the Zariski open site of $P$ to these overlap isomorphisms to obtain the global module $L$. Its affine identifications are precisely $\\widetilde{(\\operatorname{Sym}F)(1)}$; thus $L$ is the twisting module $\\mathcal O_P(1)$ specified in the statement. No intersection of affine base opens is assumed affine: the formulas are checked on principal refinements inside affine pieces, and then on an affine covering of each overlap.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-nagata-relative-proj",
+    "lem-weil-pbc-site-module-sheaf-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01NR, lemma-glue-relative-proj-twists (explicit localization cocycle); Tag 01MN, definition-twist; Tag 04TR, sites-lemma-glue-sheaves"
+   }
+  },
+  {
+   "text": "On a frame chart $D_+(T_i)$, the definition of the shift in [def-weil-pbc-proj-twisting-sheaf] gives $L=(A_{T_i})_1$, where $A=R[T_0,\\ldots,T_n]$. Multiplication by $T_i$ gives an $H_i$-linear isomorphism $H_i\\to(A_{T_i})_1$, with inverse $a/T_i^m\\mapsto a/T_i^{m+1}$; the two composites are the identity by multiplication of fractions. On an overlap the generators satisfy $T_i=(T_i/T_j)T_j$. Hence $L$ is locally free of rank one, so invertible by [def-sc-invertible-module], and these trivializations identify it with [def-pc-projective-space-twist] by $e_i\\mapsto T_i$. The maps agree on overlaps by the displayed identity; they and their inverses glue by applying the sheaf axiom to local sections. Together with step 2 this proves the asserted identification of pairs in every frame.",
+   "uses": [
+    "def-weil-pbc-proj-twisting-sheaf",
+    "def-sc-invertible-module",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/constructions.tex",
+    "place": "Tag 01MS, lemma-when-invertible, proof with d=1; Tag 01OB"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-finite-locally-free-module",
+  "lem-weil-pbc-quasi-coherent-symmetric-algebra",
+  "lem-weil-pbc-symmetric-algebra-free-module-polynomial",
+  "lem-weil-pbc-symmetric-algebra-graded",
+  "prop-nagata-relative-proj-functoriality",
+  "def-nagata-relative-proj",
+  "def-nagata-relative-projective-space",
+  "prop-nagata-proj-standard-open",
+  "def-weil-pbc-proj-twisting-sheaf",
+  "lem-weil-pbc-site-module-sheaf-gluing",
+  "def-sc-invertible-module",
+  "def-pc-projective-space-twist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/constructions.tex",
+  "place": "Tags 01OB, 01OE, 01NR, 01MN, 01MS; parent proof steps 1--4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The projectivization of a finite locally free sheaf has frame charts compatible with its tautological invertible quotient and arbitrary base change",
+   "results": "Projectivization; Projectivization.map_comp; Projectivization.finite_iff_of_finite; Projectivization.mk''; Projectivization.mk; Projectivization.Independent.rec; Projectivization.finite_of_finite; Projectivization.Independent.mk",
+   "date": "2026-10-19",
+   "verdict": "No match for scheme-theoretic normalized frame models, coherent theta maps, or coordinate subschemes. Existing algebraic and chart tools used below."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An effective Cartier divisor cut out by a regular section of an invertible sheaf has associated line bundle isomorphic to that sheaf",
+   "results": "AlgebraicGeometry.StructureSheaf.isIso_toBasicOpen; AlgebraicGeometry.Scheme.IdealSheafData.subschemeObjIso; AlgebraicGeometry.IsAffineOpen.basicOpenSectionsToAffine_isIso; AlgebraicGeometry.StructureSheaf.isUnit_to_basicOpen_self; AlgebraicGeometry.IsAffineOpen.appBasicOpenIsoAwayMap; AlgebraicGeometry.Scheme.IdealSheafData.isLocalization_away; AlgebraicGeometry.StructureSheaf.basicOpenIso; AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen",
+   "date": "2026-10-19",
+   "verdict": "No match for scheme-theoretic normalized frame models, coherent theta maps, or coordinate subschemes. Existing algebraic and chart tools used below."
+  },
+  {
+   "tool": "grep",
+   "query": "ProjectiveBundle|Tautological|zeroLocus.*coordinate|standardOpenIso",
+   "results": "Mathlib/Dynamics/SymbolicDynamics/Basic.lean; Mathlib/Topology/Algebra/Module/ContinuousLinearMap/Basic.lean; Mathlib/Algebra/Algebra/RestrictScalars.lean; Mathlib/Algebra/Algebra/Equiv.lean; Mathlib/Algebra/Ring/Action/End.lean; Mathlib/Algebra/Ring/Action/Basic.lean; Mathlib/Algebra/Ring/CentroidHom.lean; Mathlib/Algebra/Order/Group/Action/End.lean",
+   "date": "2026-10-19",
+   "verdict": "No match for scheme-theoretic normalized frame models, coherent theta maps, or coordinate subschemes. Existing algebraic and chart tools used below."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ProjectiveBundleTautologicalGeometry",
+  "date": "2026-10-19",
+  "group": "K4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-projective-bundle-formula",
+   "place": "Tags 01OB, 01OE, 01NR, 01MN, 01MS; parent proof steps 1--4",
+   "via": [
+    "lem-pur-projective-bundle-tautological-geometry"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-an",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProjectiveBundleFrameModels",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProjectiveBundleFrameModels.lean",
+  "declaration": "AlgebraicGeometry.exists_projectiveBundleFrameModels",
+  "declarations": [
+   "AlgebraicGeometry.exists_projectiveBundleFrameModels",
+   "AlgebraicGeometry.ProjectiveBundleFrameModels"
+  ],
+  "statement": "theorem exists_projectiveBundleFrameModels (n : ℕ) :\n    Nonempty (ProjectiveBundleFrameModels.{u} n)",
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a34b7",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T131130-L-1245318",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a34b7",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261020T131130-L-1245318",
+  "kind": "interface",
+  "note": "independent cc review: Old item vs the new Data module (moved declarations identical apart from the declared frame-section change); 7 delivered modules + 8 direct importers compiled clean; #print axioms checked; two residual sorry statements checked against node steps 1-4/6-9"
+ }
+}
