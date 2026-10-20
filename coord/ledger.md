@@ -17694,3 +17694,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:39 L: merged deliver/NG/sk-rem-sf-pf-done (stage 2; reviewer PASS; parallel immutable checks)
 - 01:42 L: returned deliver/K4/Sheaf.AlgebraicGeometry.FiniteAffineProetaleRefinement (reviewer RETURN: (reviewer C-be70f, head be70f32eb) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Fi)
 - 01:45 L: returned deliver/R3/Sheaf.Paper.FiniteWindowBounded (reviewer RETURN: (reviewer C-f43cc, head f43ccaba1) Point 2 (hypothesis added to make the proof possible; brief-stage3 §4 'do not prove a)
+- 02:22 L: merged deliver/NP/lem-pur-finite-adjoint-mate-compatibility (stage 2; reviewer PASS; parallel immutable checks)

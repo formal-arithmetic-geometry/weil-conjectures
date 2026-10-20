@@ -15,7 +15,12 @@
   "def-exchange-projection",
   "def-weil-exceptional-inverse-image",
   "def-weil-pbc-adjunction-mate",
-  "def-weil-pbc-composite-adjunction"
+  "def-weil-pbc-composite-adjunction",
+  "def-pur-finite-reduction-root-charts",
+  "def-pur-finite-exceptional-composition",
+  "def-per-exceptional-coefficient-maps",
+  "def-pur-exceptional-coefficient-tensor-maps",
+  "def-pur-etale-scalar-pullback-iso"
  ],
  "proof": [
   {
@@ -276,5 +281,33 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NU-4ae1d67dc (reviewer sub-agent of L); spot-checked: Read the complete item, seven proof steps, unit/chapter route, report, cited DAG statements, current blueprint proof, Stacks Tags 0F7J/0GL6, and Mathlib mate source. All hypotheses, coefficient categories, morphism directions, finite-Tor domains, unit/counit equations, projection/composition/base-change mates, edge cases, searches, and duplicate/cycle checks pass. No new nodes or repairs are required."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FiniteAdjointMateCompatibility",
+  "declaration": "WeilConjectures.PurityFiniteSetting.finite_adjoint_mate_tensor",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.finiteAdjointMateTensorClause",
+   "WeilConjectures.PurityFiniteSetting.finiteAdjointMateCompositionClause",
+   "WeilConjectures.PurityFiniteSetting.finiteAdjointMateBaseChangeClause",
+   "WeilConjectures.PurityFiniteSetting.finite_adjoint_mate_tensor",
+   "WeilConjectures.PurityFiniteSetting.finite_adjoint_mate_composition",
+   "WeilConjectures.PurityFiniteSetting.finite_adjoint_mate_baseChange",
+   "WeilConjectures.FiniteExceptional.finite_adjoint_mate_transpose"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteAdjointMateCompatibility.lean",
+  "statement": "theorem finite_adjoint_mate_tensor (d : ℕ) [SmoothOfRelativeDimension d f] (K : Etale.DerivedCategoryModule P.Coefficient Y) (hK : Etale.DerivedCategory.boundedConstructibleFiniteTor P.Coefficient Y K) : P.finiteAdjointMateTensorClause m hmn f K",
+  "branch": "sheaf-dag",
+  "by": "NP",
+  "date": "2026-10-20",
+  "existing": false,
+  "note": "Four theorem declarations state the four compatibility clauses. The first three use the canonical etale-origin coordinates already used by def-pur-co-smoothness; the fourth uses the recorded intrinsic pro-etale finite-Tor adjunction directly. The finite coefficient ring map is the existing canonical `PurityFiniteSetting.finiteReductionRingHom`, lifted with `RingHom.ulift`; its definition is recorded by def-pur-finite-reduction-root-charts. Helpers only name the displayed equality propositions; no new operation or arbitrary comparison is chosen."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ff91edd97",
+  "group": "NP",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN 281b10d7; Lean byte-identical (sha 6551105d). Item stmt_deps swap theorem lem-pur-exceptional-coefficient-comparison for def-per-exceptional-coefficient-maps + new existing:true def nodes def-pur-exceptional-coefficient-tensor-maps (TensorNormalization(Aux)/UnitNormalization(Aux)/tensorIso(+siteTensorIso_existsUnique, tensorIso_existsUnique)/unitIso(+∃!)/tensorDomainMap/TensorCompatibility on unchanged ExceptionalCoefficientComparison) and def-pur-etale-scalar-pullback-iso (scalarPullbackIso + ∃! + representative helpers on unchanged PurEtaleScalarMateProjection). All used owner-module decls covered; decls exist; statements verbatim; no prior def owner; no cycles; not in dropped lists; dep records JSON-equal to live; no theorem stmt_dep added. New-node TeX matches Lean term for term (normalization equations, tensorDomainMap composite, TensorCompatibility, K-flat scalar/pullback normalization); θ = def-pur-co-smoothness clause-2 composite. Four item clauses re-checked (directions, arbitrary Cartesian v, m=n/m=1/d=0, universes). nt_compile 60 s timeout at load 390; lcompile 560 s clean in 188.5 s. Advisory only: smoothTensorDualityMap owned by theorem thm-asd-smooth-tensor; scalarExtension etc. lack def owners; new nodes cite some theorem nodes as construction prerequisites (same as landed def-per-exceptional-coefficient-maps)."
  }
 }
