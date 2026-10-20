@@ -98,14 +98,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafMapExists",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafMapExists.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafMapExists",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafMapExists.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_map_exists",
-  "statement": "theorem exteriorSheaf_map_exists {X : Scheme.{v}} {M N : X.Modules}\n    (f : M ⟶ N) (n : ℕ) :\n    ∃ e : exteriorSheaf M n ⟶ exteriorSheaf N n,\n      ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U)),\n        e.val.app (op U) (exteriorSheafSection M n U a) =\n          exteriorSheafSection N n U (fun i ↦ f.val.app (op U) (a i))",
+  "statement": "theorem exteriorSheaf_map_exists {X : Scheme.{v}} {M N : X.Modules}\n    (f : M ⟶ N) (n : ℕ) :\n    ∃ e : exteriorPower M n ⟶ exteriorPower N n,\n      ∀ (U : X.Opens) (a : Fin n → M.val.obj (op U)),\n        e.val.app (op U) (wedge (M := M) (r := n) (U := U) a) =\n          wedge (M := N) (r := n) (U := U) (fun i ↦ f.val.app (op U) (a i))",
   "branch": "sheaf-dag",
-  "by": "H2",
-  "date": "2026-10-13"
+  "by": "K8",
+  "date": "2026-10-20",
+  "note": "Retired the Sheaf copy in favor of the upstream exteriorPower/wedge theorem. The remaining Sheaf consumer identifies its exteriorSheafPresheaf with the upstream presheaf by the identity on section modules, using uniqueness of exterior restrictions, and sheafifies this explicit isomorphism. Naturality of the unit proves that both directions preserve wedge sections."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -118,14 +119,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H2",
+  "reviewer": "C-278cf",
+  "group": "K8",
   "result": "pass",
-  "landing": "20261013T004024-L-2491292",
+  "landing": "20261020T144253-L-2260279",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Retirement of the Sheaf copy: delivered LocalAt and its importer DeterminantWedgeMorphismLocal compiled clean, axioms clean, no twin clash, nodes matched to upstream WeilConjectures exteriorSheaf_map_exists and the conjugation helpers"
  },
  "lean_audit": {
   "master": {
