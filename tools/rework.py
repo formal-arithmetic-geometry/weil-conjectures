@@ -208,6 +208,19 @@ RETIRE = ROOT / "coord" / "retire-items.tsv"
 # is gone from lean/; done when the copy is deleted (verified when refs/heads/sheaf-verified no longer has it).
 
 
+def _present(m: str) -> bool:
+    """the module is in lean/ and not a withdrawn stub (deliver3.py withdraws a module by emptying it; 2026-10-20: a
+    retirement that had landed as the stub kept its retire item open and was dispatched again and again)"""
+    f = ROOT / opath(m)
+    if not f.is_file():
+        return False
+    try:
+        t = f.read_text(errors="ignore")
+    except OSError:
+        return True
+    return not (len(t) < 200 and "Withdrawn: no declarations remain." in t)
+
+
 def retire_rows(open_only: bool = True) -> dict[str, dict]:
     out = {}
     try:
@@ -221,9 +234,9 @@ def retire_rows(open_only: bool = True) -> dict[str, dict]:
         r += [""] * 10
         copy = r[2]
         after = [x for x in r[6].split() if x and x != "-"]
-        if not (ROOT / opath(copy)).is_file():
+        if not _present(copy):
             continue
-        if open_only and any((ROOT / opath(x)).is_file() for x in after):
+        if open_only and any(_present(x) for x in after):
             continue
         out[copy] = {"module": copy, "twin": r[3], "class": r[4], "depth": r[5], "after": after,
                      "consumers": [x for x in r[7].split() if x and x != "-"], "nodes": r[8], "api": r[9]}

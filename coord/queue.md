@@ -1,6 +1,6 @@
 # Work queue
 
-194 items; claim with `tools/claim.py next <group> [--stage N]`.
+174 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (51 clusters, 2492 modules)
 
@@ -62,16 +62,13 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 31, stage 3 134 items.
 
-## Stage 1: nodes to split (1)
+## Stage 1: nodes to split (0)
 
-| node | distance to a target | Lean state on the done branch |
-|---|---|---|
-| `lem-sfb-braided-sheaf-tensor-generators` | - | none |
 
 ## Stage 2: nodes to state (0)
 
 
-Not open yet: 301 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up), 1 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 301 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
 ## Stage 3: modules to prove (12)
 
