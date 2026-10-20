@@ -1,0 +1,119 @@
+{
+ "id": "lem-asd-normalized-signed-tensor-family",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "title": "Normalized signed tensor powers of an invertible object",
+ "statement": "In a monoidal closed category, normalize the integer tensor family of an invertible object L so that degree zero is literally the tensor unit, positive degrees are left-associated powers with singleton L, and negative degrees are internal duals. The resulting multiplication has the specified unitors, the positive successor product is the identity, and the opposite-degree product is internal evaluation.",
+ "stmt_deps": [
+  "def-pur-sheaf-hom"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK; finite Tate line and tensor powers. Categorical coherence is proved from the existing source integer tensor family and pullback adjunction APIs."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-etale-finite-twist-pullback-base",
+   "place": "Construction of the root cover, scalar extension and signed tensor comparisons",
+   "via": []
+  }
+ },
+ "proof": [
+  {
+   "text": "Construct isomorphisms from the normalized positive powers to the existing TensorInverse.zpow by natural-number recursion. Pair a positive power with the negative zpow using integer multiplication and the unit comparison.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The pairing induces an isomorphism to the internal dual: tensor-left by the positive invertible power is an equivalence and its right adjoint is internal Hom, so the transposed perfect pairing is invertible. Use its inverse for the normalized negative comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transport TensorInverse.intTensorFamily along the explicit signedPowerIso using monoidal-functor transport. Its coherence is that of the transported functor. Positive successors cancel adjacent multiplication isomorphisms. The negative comparison is the transpose of dualPowerPairing, so uncurry_curry gives exactly the evaluation equation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom"
+ ],
+ "proof_origin": {
+  "by": "J3 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK and the proved construction in Sheaf.CategoryTheory.NormalizedSignedTensorPowers",
+  "note": "All declarations in this new module are proved in this delivery; no split-off sorry."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherent signed tensor powers of locally free rank one sheaf pullback Tate twist",
+   "results": "SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"zpow\"",
+   "results": "LinearEquiv.lTensor_zpow; LinearEquiv.rTensor_zpow; TensorProduct.congr_zpow; TensorProduct.congrL_zpow",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "grep",
+   "query": "signed.*tensor|finiteEtaleTate.*Iso|upperStarRootsOfUnitySheaf",
+   "results": "No matching declaration.",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "leansearch",
+   "query": "multiplicative comparison integer tensor powers determined by degree one",
+   "results": "LinearEquiv.lTensor_zpow, LinearEquiv.rTensor_zpow, TensorPower.galgebra, TensorPower.gmonoid, zpowersMulHom, TensorPower, TensorPower.gMul, TensorPower.mulEquiv. These concern module powers and support the integer idea, but do not state coherent categorical signed-family comparisons or scalar-extension sheaf pullback.",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-20"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackBase",
+  "date": "2026-10-20",
+  "group": "J3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.NormalizedSignedTensorPowers",
+  "file": "lean/Sheaf/CategoryTheory/NormalizedSignedTensorPowers.lean",
+  "declaration": "CategoryTheory.MonoidalCategory.NormalizedSignedPowers.signedFamily_evaluation",
+  "statement": "lemma signedFamily_evaluation\n    (P : ℕ → C) (h0 : P 0 = 𝟙_ C)\n    (hs : ∀ n, P (n + 2) = P (n + 1) ⊗ P 1) (e : TensorInverse (P 1)) (n : ℕ) :\n    ((signedFamily P h0 hs e).addIso (.ofNat (n + 1)) (.negSucc n)).hom ≫\n      eqToHom (congrArg (signedPower P) (add_neg_cancel (Int.ofNat (n + 1)))) =\n        (ihom.ev (P (n + 1))).app (P 0)",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261020T132014-L-1401226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261020T132014-L-1401226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

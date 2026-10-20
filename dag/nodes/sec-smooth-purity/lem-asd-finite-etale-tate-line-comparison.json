@@ -1,0 +1,119 @@
+{
+ "id": "lem-asd-finite-etale-tate-line-comparison",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "title": "Canonical coefficient-line pullback and composition",
+ "statement": "The canonical roots-of-unity inverse-image comparison induces an isomorphism on the coefficient line, with its pure-generator adjunction equation. These isomorphisms satisfy the canonical identity and composition equations.",
+ "stmt_deps": [
+  "def-asd-finite-etale-tate-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK; finite Tate line and tensor powers. Categorical coherence is proved from the existing source integer tensor family and pullback adjunction APIs."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-etale-finite-twist-pullback-base",
+   "place": "Construction of the root cover, scalar extension and signed tensor comparisons",
+   "via": []
+  }
+ },
+ "proof": [
+  {
+   "text": "Compose the sheafification Hom equivalence with the scalar-extension adjunction. Identify additive maps between ZMod modules with linear maps to obtain lineHomEquiv. Compute the equivalence on pure generators and prove its compatibility with postcomposition.",
+   "uses": [
+    "def-asd-finite-etale-tate-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Combine the two pullback adjunctions with the identity comparison between forgetting modules and direct image. The inverse of this Hom equivalence defines the line pullback map from the given roots comparison. Its postcomposition maps are bijective, so Yoneda gives its invertibility. The same equivalence yields the generator equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Transpose the composite using the unit form of upperStarComp. Naturality of lineHomEquiv and the existing roots composition equation identify the transposes. Injectivity gives composition. The composition equation for two identities and naturality of upperStarId then give the identity equation by cancellation.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-asd-finite-etale-tate-sheaf"
+ ],
+ "proof_origin": {
+  "by": "J3 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK and the proved construction in Sheaf.AlgebraicGeometry.FiniteEtaleTateLinePullback",
+  "note": "All declarations in this new module are proved in this delivery; no split-off sorry."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherent signed tensor powers of locally free rank one sheaf pullback Tate twist",
+   "results": "SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"zpow\"",
+   "results": "LinearEquiv.lTensor_zpow; LinearEquiv.rTensor_zpow; TensorProduct.congr_zpow; TensorProduct.congrL_zpow",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "grep",
+   "query": "signed.*tensor|finiteEtaleTate.*Iso|upperStarRootsOfUnitySheaf",
+   "results": "No matching declaration.",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "leansearch",
+   "query": "multiplicative comparison integer tensor powers determined by degree one",
+   "results": "LinearEquiv.lTensor_zpow, LinearEquiv.rTensor_zpow, TensorPower.galgebra, TensorPower.gmonoid, zpowersMulHom, TensorPower, TensorPower.gMul, TensorPower.mulEquiv. These concern module powers and support the integer idea, but do not state coherent categorical signed-family comparisons or scalar-extension sheaf pullback.",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-20"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackBase",
+  "date": "2026-10-20",
+  "group": "J3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTateLinePullback",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTateLinePullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtaleTateLine_pullback_normalized",
+  "statement": "theorem finiteEtaleTateLine_pullback_normalized\n    (A : Type (u + 1)) [CommRing A] (m : ℕ) (hm : 0 < m) (hA : (m : A) = 0) :\n    ∃ c : ∀ {T T' : Scheme.{u}} (v : T' ⟶ T), IsUnit (m : Γ(T, ⊤)) →\n        ((Etale.upperStar (ModuleCat.{u + 1} A) v).obj (finiteEtaleTateLine T m A hA) ≅\n          finiteEtaleTateLine T' m A hA),\n      (∀ {T T' : Scheme.{u}} (v : T' ⟶ T) (hT : IsUnit (m : Γ(T, ⊤)))\n          (W : T.Etaleᵒᵖ) (a : A) (z : (T.rootsOfUnitySheaf m).obj.obj W),\n        ((Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) v).homEquiv _ _\n          (c v hT).hom).hom.app W (finiteEtaleTateOneGenerator A m T hA W a z) =\n        finiteEtaleTateOneGenerator A m T' hA\n          ((MorphismProperty.Over.pullback @Etale ⊤ v).op.obj W) a\n          (((Etale.upperStarLowerStarAdjunction AddCommGrpCat.{u + 1} v).homEquiv _ _\n            (upperStarRootsOfUnitySheafToRootsOfUnitySheaf m v)).hom.app W z)) ∧\n      (∀ (T : Scheme.{u}) (hT : IsUnit (m : Γ(T, ⊤))), c (𝟙 T) hT =\n        (Etale.upperStarId (ModuleCat.{u + 1} A) T).app (finiteEtaleTateLine T m A hA)) ∧\n      (∀ {T T' T'' : Scheme.{u}} (v : T' ⟶ T) (w : T'' ⟶ T')\n          (hT : IsUnit (m : Γ(T, ⊤))) (hT' : IsUnit (m : Γ(T', ⊤))),\n        c (w ≫ v) hT = (Etale.upperStarComp (ModuleCat.{u + 1} A) w v).app _ ≪≫\n          (Etale.upperStar (ModuleCat.{u + 1} A) w).mapIso (c v hT) ≪≫ c w hT')",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261020T132014-L-1401226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261020T132014-L-1401226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

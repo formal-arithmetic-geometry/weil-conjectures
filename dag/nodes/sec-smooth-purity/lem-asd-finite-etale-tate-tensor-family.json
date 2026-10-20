@@ -1,0 +1,128 @@
+{
+ "id": "lem-asd-finite-etale-tate-tensor-family",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "title": "Coherent tensor family on the published signed Tate sheaves",
+ "statement": "For N positive and invertible on T and A annihilated by N, construct an integer tensor family whose objects are exactly finiteEtaleTateSheaf A N T hA a. Its product has the stated unitors, positive successor identity, evaluation and symmetry. All integer degrees trivialize on the same primitive-root etale cover.",
+ "stmt_deps": [
+  "lem-asd-finite-etale-tate-local-line",
+  "lem-asd-normalized-signed-tensor-family",
+  "lem-asd-int-tensor-family-comparison",
+  "def-asd-finite-etale-tate-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK; finite Tate line and tensor powers. Categorical coherence is proved from the existing source integer tensor family and pullback adjunction APIs."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-etale-finite-twist-pullback-base",
+   "place": "Construction of the root cover, scalar extension and signed tensor comparisons",
+   "via": []
+  }
+ },
+ "proof": [
+  {
+   "text": "Use the local line trivialization and the existing tensorInverseOfUpperStarIso construction to obtain the internal dual as a genuine tensor inverse. Form its normalized signed family.",
+   "uses": [
+    "lem-asd-finite-etale-tate-local-line",
+    "lem-asd-normalized-signed-tensor-family",
+    "lem-asd-int-tensor-family-comparison",
+    "def-asd-finite-etale-tate-sheaf"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the published positive twists directly as the natural-number family in the normalized construction. Its signed objects are definitionally the published finiteEtaleTateSheaf, so the zero, positive-successor and evaluation equations apply directly.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "On the same root cover compare the mapped family with the constant unit family using the degree-one trivialization. Transport through overSheafEquiv to obtain the precise localized-site trivializations. For symmetry use the single surjective etale trivialization; its pullback is faithful and braided, so the general tensor-family commutativity lemma applies.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-asd-finite-etale-tate-local-line",
+  "lem-asd-normalized-signed-tensor-family",
+  "lem-asd-int-tensor-family-comparison",
+  "def-asd-finite-etale-tate-sheaf"
+ ],
+ "proof_origin": {
+  "by": "J3 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK and the explicit constructions in Sheaf.AlgebraicGeometry.FiniteEtaleTateTensorFamily",
+  "note": "All declarations in this new module are proved in this delivery; no split-off sorry."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherent signed tensor powers of locally free rank one sheaf pullback Tate twist",
+   "results": "SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"zpow\"",
+   "results": "LinearEquiv.lTensor_zpow; LinearEquiv.rTensor_zpow; TensorProduct.congr_zpow; TensorProduct.congrL_zpow",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "grep",
+   "query": "signed.*tensor|finiteEtaleTate.*Iso|upperStarRootsOfUnitySheaf",
+   "results": "No matching declaration.",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "leansearch",
+   "query": "multiplicative comparison integer tensor powers determined by degree one",
+   "results": "LinearEquiv.lTensor_zpow, LinearEquiv.rTensor_zpow, TensorPower.galgebra, TensorPower.gmonoid, zpowersMulHom, TensorPower, TensorPower.gMul, TensorPower.mulEquiv. These concern module powers and support the integer idea, but do not state coherent categorical signed-family comparisons or scalar-extension sheaf pullback.",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-20"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackBase",
+  "date": "2026-10-20",
+  "group": "J3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTateTensorFamily",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTateTensorFamily.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtaleTateTensorFamily_comm",
+  "statement": "theorem finiteEtaleTateTensorFamily_comm (a b : ℤ) :\n    (β_ (finiteEtaleTateSheaf A m T hA a) (finiteEtaleTateSheaf A m T hA b)).hom ≫\n      ((finiteEtaleTateTensorFamily T m hm A hA hT).addIso b a).hom ≫\n      eqToHom (congrArg (finiteEtaleTateSheaf A m T hA) (add_comm b a)) =\n        ((finiteEtaleTateTensorFamily T m hm A hA hT).addIso a b).hom",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261020T132014-L-1401226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261020T132014-L-1401226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

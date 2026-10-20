@@ -50,27 +50,47 @@
  ],
  "proof": [
   {
-   "text": "Construct the canonical local root, scalar-extension, tensor and dual comparisons as described in the corresponding proof steps of lem-asd-etale-finite-twist-pullback. The declaration is left as a named intermediate theorem for the unresolved construction.",
+   "text": "Take the canonical roots pullback map and its existing isomorphism theorem when N is invertible. Its kernel inclusion equation is already proved in RootsOfUnityPullback.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Construct the finite Tate tensor family on the exact published objects, obtaining the common trivializing cover, tensor products, unitors, associativity, symmetry and evaluation.",
    "uses": [
-    "lem-asd-finite-etale-twist-line",
-    "def-pur-sheaf-tensor-product",
-    "def-pur-sheaf-hom",
-    "lem-weil-pbc-etale-cover-detects-iso"
+    "lem-asd-finite-etale-tate-tensor-family"
    ],
-   "elementary": false
+   "elementary": true
+  },
+  {
+   "text": "Use the scalar-extension Hom equivalence to pull back degree one along the roots comparison. Its explicit generator equation gives the required adjunction normalization; its composition equation follows on generators.",
+   "uses": [
+    "lem-asd-finite-etale-tate-line-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Extend the degree-one comparison multiplicatively to all integer degrees. The mapped family and its unique comparison give the zero, positive-successor, evaluation and tensor-compatibility equations. The monoidal upperStarComp equation and uniqueness extend degree-one composition to every degree.",
+   "uses": [
+    "lem-asd-int-tensor-family-comparison"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Specialize composition to two identity morphisms with an explicit chosen composite. Substitute upperStarComp_id_left and use naturality of upperStarId inverse. Cancel the invertible comparison to obtain the identity equation. Assemble the constructed data and all fifteen equations.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-asd-finite-etale-twist-line",
-  "def-pur-sheaf-tensor-product",
-  "def-pur-sheaf-hom",
-  "lem-weil-pbc-etale-cover-detects-iso"
+  "lem-asd-finite-etale-tate-tensor-family",
+  "lem-asd-finite-etale-tate-line-comparison",
+  "lem-asd-int-tensor-family-comparison"
  ],
  "proof_origin": {
-  "by": "D3 stage 3",
+  "by": "J3 stage 3",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03PK and 03Q1; local trivializations, root comparison and positive tensor coherence",
-  "note": "Strict decomposition of the parent proof; the target combines this package with the other named package."
+  "place": "Tag 03PK: scalar extension of roots, local line trivializations and signed tensor powers",
+  "note": "Complete constructive Lean proof. Existing tensor-inverse and integer tensor-family APIs replace repeated local checks in each degree. All five new supporting modules are proved, with zero new sorry."
  },
  "created": {
   "by": "worker",
@@ -99,12 +119,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "D3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261018T103142-L-4174771",
+  "landing": "20261020T132014-L-1401226",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

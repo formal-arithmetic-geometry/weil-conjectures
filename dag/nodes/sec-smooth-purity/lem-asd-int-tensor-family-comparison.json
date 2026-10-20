@@ -1,0 +1,113 @@
+{
+ "id": "lem-asd-int-tensor-family-comparison",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "title": "Coherent comparisons of integer tensor families",
+ "statement": "For integer tensor families P and Q in monoidal categories, a strong monoidal functor F and an isomorphism F(P(1)) ≅ Q(1), construct isomorphisms F(P(a)) ≅ Q(a) for every integer a. They preserve addition and the unit and are uniquely determined by multiplication and degree one. Compatible comparisons compose, and a faithful braided pullback to a trivial line detects commutativity.",
+ "stmt_deps": [],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK; finite Tate line and tensor powers. Categorical coherence is proved from the existing source integer tensor family and pullback adjunction APIs."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-etale-finite-twist-pullback-base",
+   "place": "Construction of the root cover, scalar extension and signed tensor comparisons",
+   "via": []
+  }
+ },
+ "proof": [
+  {
+   "text": "Construct positive comparisons by recursion using multiplication by degree one. For negative degrees use the fully faithful tensor-left functor of the tensor inverse to solve the same successor equation backwards. This constructs actual isomorphisms, without an existence choice.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Prove the successor equation and extend it to arbitrary multiplication by integer induction and the associativity axiom. Cancellation by the invertible degree-one object proves uniqueness. Recover degree zero from the equation in degrees one and zero, so multiplicativity and degree one alone suffice.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply this to the mapped family, whose product is the inverse monoidal comparison followed by the mapped product. Naturality of an oplax-compatible composition isomorphism proves the composite multiplication equation. Compare with the constant unit family and use braiding naturality to prove commutativity after a faithful braided functor.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "J3 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK and the explicit constructions in Sheaf.CategoryTheory.IntTensorFamilyIso",
+  "note": "All declarations in this new module are proved in this delivery; no split-off sorry."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherent signed tensor powers of locally free rank one sheaf pullback Tate twist",
+   "results": "SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"zpow\"",
+   "results": "LinearEquiv.lTensor_zpow; LinearEquiv.rTensor_zpow; TensorProduct.congr_zpow; TensorProduct.congrL_zpow",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "grep",
+   "query": "signed.*tensor|finiteEtaleTate.*Iso|upperStarRootsOfUnitySheaf",
+   "results": "No matching declaration.",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "leansearch",
+   "query": "multiplicative comparison integer tensor powers determined by degree one",
+   "results": "LinearEquiv.lTensor_zpow, LinearEquiv.rTensor_zpow, TensorPower.galgebra, TensorPower.gmonoid, zpowersMulHom, TensorPower, TensorPower.gMul, TensorPower.mulEquiv. These concern module powers and support the integer idea, but do not state coherent categorical signed-family comparisons or scalar-extension sheaf pullback.",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-20"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackBase",
+  "date": "2026-10-20",
+  "group": "J3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.IntTensorFamilyIso",
+  "file": "lean/Sheaf/CategoryTheory/IntTensorFamilyIso.lean",
+  "declaration": "CategoryTheory.MonoidalCategory.IntTensorFamily.map_iso_mul",
+  "statement": "theorem map_iso_mul (F : C ⥤ D) [F.Monoidal] (Q : IntTensorFamily D)\n    (h : F.obj (P.obj 1) ≅ Q.obj 1) (a b : ℤ) :\n    F.map (P.addIso a b).hom ≫ (iso (P.map F) Q h (a + b)).hom =\n      Functor.OplaxMonoidal.δ F (P.obj a) (P.obj b) ≫\n        tensorHom (iso (P.map F) Q h a).hom (iso (P.map F) Q h b).hom ≫\n          (Q.addIso a b).hom",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261020T132014-L-1401226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261020T132014-L-1401226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

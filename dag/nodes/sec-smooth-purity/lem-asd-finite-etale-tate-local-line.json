@@ -1,0 +1,122 @@
+{
+ "id": "lem-asd-finite-etale-tate-local-line",
+ "kind": "statement",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "status": "split",
+ "title": "A surjective primitive-root trivialization of the coefficient line",
+ "statement": "For a scheme T, a positive integer N invertible in all local rings, and a commutative ring A annihilated by N, there is a surjective etale morphism q:V→T whose pullback of the finite coefficient Tate line is the tensor unit. The singleton cover gives the corresponding local trivialization.",
+ "stmt_deps": [
+  "def-asd-finite-etale-tate-twist",
+  "lem-sc-primitive-root"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK; finite Tate line and tensor powers. Categorical coherence is proved from the existing source integer tensor family and pullback adjunction APIs."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-asd-etale-finite-twist-pullback-base",
+   "place": "Construction of the root cover, scalar extension and signed tensor comparisons",
+   "via": []
+  }
+ },
+ "proof": [
+  {
+   "text": "An additive map between ZMod N modules is automatically linear. The two scalar-extension adjunctions therefore give a natural isomorphism between extending the roots module and extending its underlying abelian sheaf; sheafify it to obtain finiteEtaleLineAbIso.",
+   "uses": [
+    "def-asd-finite-etale-tate-twist",
+    "lem-sc-primitive-root"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Invertibility at all stalks implies global invertibility. Pull the primitive-roots algebra cover of the global section ring back along T.toSpecΓ. Its etaleness and surjectivity survive pullback. The universal root has Nth power one and distinct powers with invertible differences.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The existing roots-of-unity constant-sheaf theorem identifies the roots sheaf on V with the constant cyclic sheaf. Pullback commutes with roots and extension of scalars; the scalar extension of the constant cyclic sheaf is the constant A-sheaf. Compose these isomorphisms and package q as a singleton etale cover.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-asd-finite-etale-tate-twist",
+  "lem-sc-primitive-root"
+ ],
+ "proof_origin": {
+  "by": "J3 stage 3",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 03PK and the explicit constructions in Sheaf.AlgebraicGeometry.FiniteEtaleTateLocalLine",
+  "note": "All declarations in this new module are proved in this delivery; no split-off sorry."
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "coherent signed tensor powers of locally free rank one sheaf pullback Tate twist",
+   "results": "SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.conjugateEquiv_pullbackComp_inv",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"zpow\"",
+   "results": "LinearEquiv.lTensor_zpow; LinearEquiv.rTensor_zpow; TensorProduct.congr_zpow; TensorProduct.congrL_zpow",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "grep",
+   "query": "signed.*tensor|finiteEtaleTate.*Iso|upperStarRootsOfUnitySheaf",
+   "results": "No matching declaration.",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-19"
+  },
+  {
+   "tool": "leansearch",
+   "query": "multiplicative comparison integer tensor powers determined by degree one",
+   "results": "LinearEquiv.lTensor_zpow, LinearEquiv.rTensor_zpow, TensorPower.galgebra, TensorPower.gmonoid, zpowersMulHom, TensorPower, TensorPower.gMul, TensorPower.mulEquiv. These concern module powers and support the integer idea, but do not state coherent categorical signed-family comparisons or scalar-extension sheaf pullback.",
+   "verdict": "Supporting results only; no exact statement.",
+   "date": "2026-10-20"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.EtaleFiniteTwistPullbackBase",
+  "date": "2026-10-20",
+  "group": "J3"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.FiniteEtaleTateLocalLine",
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteEtaleTateLocalLine.lean",
+  "declaration": "AlgebraicGeometry.Scheme.finiteEtaleTateLine_surjectiveTrivialization",
+  "statement": "theorem finiteEtaleTateLine_surjectiveTrivialization\n    (T : Scheme.{u}) (N : ℕ) (hN : 0 < N)\n    (hInvertible : ∀ t : T, IsUnit (N : T.presheaf.stalk t))\n    (A : Type (u + 1)) [CommRing A] (hA : (N : A) = 0) :\n    ∃ (V : Scheme.{u}) (q : V ⟶ T), Etale q ∧ Function.Surjective q.base ∧\n      Nonempty ((AlgebraicGeometry.Etale.upperStar (ModuleCat.{u + 1} A) q).obj\n        (finiteEtaleTateLine T N A hA) ≅\n          MonoidalCategoryStruct.tensorUnit\n            (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)))",
+  "branch": "sheaf-dag",
+  "by": "J3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261020T132014-L-1401226",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J3",
+  "result": "pass",
+  "landing": "20261020T132014-L-1401226",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
