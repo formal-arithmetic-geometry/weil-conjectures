@@ -8,7 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafComparison
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTrivialTopIso
 
 /-!
@@ -58,7 +59,11 @@ theorem exteriorSheaf_top_isInvertible {X : Scheme.{v}} (M : X.Modules) (r : ℕ
   let c := (asIso (PresheafOfModules.sheafificationAdjunction.{v}
     (𝟙 (U i).toScheme.ringCatSheaf.obj)).counit).app
       (SheafOfModules.unit.{v} (U i).toScheme.ringCatSheaf)
+  have hrestrict := exteriorSheaf_restrict_iso M r (U i)
+  rw [← exteriorSheaf_eq_exteriorPower M r,
+    ← exteriorSheaf_eq_exteriorPower (M.restrict (U i).ι) r] at hrestrict
+  obtain ⟨eRestrict⟩ := hrestrict
   exact ⟨U i, hi, ⟨((restrictFunctorIsoPullback (U i).ι).app _).symm ≪≫
-    (exteriorSheaf_restrict_iso M r (U i)).some ≪≫ s ≪≫ c⟩⟩
+    eRestrict ≪≫ s ≪≫ c⟩⟩
 
 end AlgebraicGeometry.Scheme.Modules

@@ -3,7 +3,8 @@ public import WeilConjectures.AlgebraicGeometry.SelfTorAffineSection
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafQuasicoherent
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafComparison
 import WeilConjectures.AlgebraicGeometry.Modules.AffineHom
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -188,7 +189,10 @@ theorem exists_selfTor_conormal_wedge_chart_from_sections
     (SheafOfModules.isQuasicoherent Z.ringCatSheaf).prop_of_iso
       (c.app i.ker.toModules).symm (by infer_instance)
   have : IsAffine V.1.toScheme := V.2
-  obtain ⟨r⟩ := Scheme.Modules.exteriorSheaf_restrict_iso N n V.1
+  have hrestrict := Scheme.Modules.exteriorSheaf_restrict_iso N n V.1
+  rw [← Scheme.Modules.exteriorSheaf_eq_exteriorPower N n,
+    ← Scheme.Modules.exteriorSheaf_eq_exteriorPower (N.restrict V.1.ι) n] at hrestrict
+  obtain ⟨r⟩ := hrestrict
   have : (E.restrict V.1.ι).IsQuasicoherent :=
     (SheafOfModules.isQuasicoherent V.1.toScheme.ringCatSheaf).prop_of_iso r.symm
       (by

@@ -23,7 +23,8 @@ import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingLocal
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
 import WeilConjectures.RingTheory.KoszulConormalBasis
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafComparison
 import Mathlib.RingTheory.FiniteType
 
 /-! # Self Ext as the dual of the exterior conormal
@@ -132,7 +133,12 @@ theorem koszulRegularImmersion_self_ext_dual_exterior_conormal
       koszulRegularImmersion_self_ext_stalk_bases i V n z U hzU m f hf hreg
     let C := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
     obtain ⟨p, hp⟩ := exterior_dual_pairing_exists Z C n
-    obtain ⟨a⟩ := Scheme.Modules.exteriorSheaf_restrict_iso (Scheme.Modules.dual C) n V
+    have hrestrict :=
+      Scheme.Modules.exteriorSheaf_restrict_iso (Scheme.Modules.dual C) n V
+    rw [← Scheme.Modules.exteriorSheaf_eq_exteriorPower (Scheme.Modules.dual C) n,
+      ← Scheme.Modules.exteriorSheaf_eq_exteriorPower
+        ((Scheme.Modules.dual C).restrict V.ι) n] at hrestrict
+    obtain ⟨a⟩ := hrestrict
     let q := a.inv ≫ (Scheme.Modules.restrictFunctor V.ι).map p
     obtain ⟨c, hc⟩ := ExteriorAlgebra.exists_koszul_conormal_basis
       Γ(Y, U.1) (i.ker.ideal U) m f hreg hf

@@ -21,7 +21,8 @@ import Sheaf.AlgebraicGeometry.DeterminantDualPairing
 import WeilConjectures.AlgebraicGeometry.DeterminantDualPairingLocal
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 import WeilConjectures.AlgebraicGeometry.AffineConormalFrame
-import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafComparison
 import WeilConjectures.RingTheory.KoszulConormalBasis
 
 /-! # Surjectivity of the exterior Yoneda comparison
@@ -121,7 +122,12 @@ theorem koszulRegularImmersion_self_ext_yoneda_surjection
   dsimp only
   let C := (Scheme.Modules.tensorPullback i).obj i.ker.toModules
   obtain ⟨p, hp⟩ := exterior_dual_pairing_exists Z C n
-  obtain ⟨a⟩ := Scheme.Modules.exteriorSheaf_restrict_iso (Scheme.Modules.dual C) n V
+  have hrestrict :=
+    Scheme.Modules.exteriorSheaf_restrict_iso (Scheme.Modules.dual C) n V
+  rw [← Scheme.Modules.exteriorSheaf_eq_exteriorPower (Scheme.Modules.dual C) n,
+    ← Scheme.Modules.exteriorSheaf_eq_exteriorPower
+      ((Scheme.Modules.dual C).restrict V.ι) n] at hrestrict
+  obtain ⟨a⟩ := hrestrict
   obtain ⟨b⟩ := koszulRegularImmersion_self_ext_dual_exterior_conormal i V n hregular
   let q := (Scheme.Modules.restrictFunctor V.ι).map p
   let φ := a.inv ≫ q ≫ b.hom

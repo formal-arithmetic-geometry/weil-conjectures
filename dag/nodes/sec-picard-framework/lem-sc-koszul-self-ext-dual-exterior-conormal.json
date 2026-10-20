@@ -27,14 +27,14 @@
    "elementary": false
   },
   {
-   "text": "At a point choose one regular chart. The regular conormal basis and affine frame make the determinant pairing from the exterior of the conormal dual to the dual exterior conormal surjective on every subopen of that chart. Represent stalk elements by sections on smaller neighborhoods to obtain stalk surjectivity, and transport through open restriction and exteriorSheaf_restrict_iso. This produces a surjective stalk map q from the exterior of the restricted conormal dual to the dual exterior conormal. To apply the official local pairing theorem, conjugate the legacy determinant morphism by exteriorSheafPowerIso on its source and the dual of the inverse comparison on its target. The inverse-wedge formula gives its determinant hypothesis. Bijectivity of the comparison sections cancels from the composite, giving exactly the required bijectivity of the original morphism.",
+   "text": "At a point choose one regular chart. The regular conormal basis and affine frame make the determinant pairing from the exterior of the conormal dual to the dual exterior conormal surjective on every subopen of that chart. Represent stalk elements by sections on smaller neighborhoods to obtain stalk surjectivity, and transport through open restriction and exteriorSheaf_restrict_iso. This produces a surjective stalk map q from the exterior of the restricted conormal dual to the dual exterior conormal. For the upstream restriction theorem, rewrite exteriorPower as exteriorSheaf at the module and its restriction using [lem-sc-exterior-sheaf-upstream-comparison]; this preserves exactly the legacy objects used by the rest of the argument.",
    "uses": [
     "lem-sc-koszul-conormal-basis",
     "lem-sc-affine-conormal-frame",
     "lem-sc-exterior-dual-pairing-construction",
     "lem-sc-exterior-dual-pairing-local-bijective",
     "lem-sc-exterior-sheaf-restrict-iso",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-exterior-sheaf-upstream-comparison"
    ],
    "elementary": false
   },
@@ -56,7 +56,7 @@
   "lem-sc-exterior-sheaf-restrict-iso",
   "lem-sc-koszul-self-ext-stalk-bases",
   "lem-weil-pbc-module-iso-on-stalks",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "lem-sc-exterior-sheaf-upstream-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -66,8 +66,7 @@
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
   },
-  "note": "Decomposition: construction and spanning are split off; injectivity is proved using the existing independent stalk bases, the determinant pairing and Mathlib OrzechProperty. No target, existing signature, chapter or unit route is changed.",
-  "place": " B8 retirement, 2026-10-21: transport through the canonical exterior-power comparisons to the official pairing theorem; no change of mathematical route."
+  "note": "Decomposition: construction and spanning are split off; injectivity is proved using the existing independent stalk bases, the determinant pairing and Mathlib OrzechProperty. No target, existing signature, chapter or unit route is changed. K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved."
  },
  "mathlib_searches": [
   {
@@ -145,12 +144,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-5683b",
-  "group": "B8",
+  "reviewer": "C-a6756",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261020T211636-L-3481975",
+  "landing": "20261020T221234-L-4162476",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf exterior_dual_pairing_app_bijective vs WeilConjectures twin (node lean.statement byte-identical); 3 adapted direct importers vs live (only plain import + proof changes), all compile (560 s limit under load 260; orig 182 s vs delivered 79 s); axioms clean"
+  "note": "independent cc review: retire-items row 749 + twin WeilConjectures…exteriorSheaf_restrict_iso (signature verbatim in node lean record) with the 5 adapted consumers vs live clone; exteriorSheaf_eq_exteriorPower (lem-sc-exterior-sheaf-upstream-comparison) bridges exteriorSheaf/exteriorPower"
  },
  "lean_audit": {
   "master": {

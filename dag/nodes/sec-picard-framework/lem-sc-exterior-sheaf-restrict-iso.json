@@ -14,12 +14,11 @@
  ],
  "proof": [
   {
-   "text": "The old exteriorSheafPresheaf and upstream PresheafOfModules.exteriorPower agree: their objects are definitionally equal and their restriction maps agree by uniqueness on pure wedges. Sheafification carries this equality to exteriorSheaf M n = exteriorPower M n. Rewrite the two-sided morphism data from [lem-sc-exterior-sheaf-restrict-hom-data] using this equality at M and at its restriction, then package the mutually inverse morphisms as an isomorphism.",
+   "text": "Obtain the mutually inverse morphisms of [lem-sc-exterior-sheaf-restrict-hom-data] for the upstream exteriorPower construction. Package their two inverse equations as the hom_inv_id and inv_hom_id fields of a categorical isomorphism. The legacy consumers use the proved exteriorSheaf_eq_exteriorPower comparison to rewrite this theorem at M and M.restrict U.ι; the duplicate Sheaf module and its two private equality helpers are retired.",
    "uses": [
-    "lem-sc-exterior-sheaf-restrict-hom-data",
-    "def-sc-sheaf-exterior-power"
+    "lem-sc-exterior-sheaf-restrict-hom-data"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
     "place": "Proof of (*), determinant paragraph"
@@ -27,14 +26,13 @@
   }
  ],
  "proof_deps": [
-  "lem-sc-exterior-sheaf-restrict-hom-data",
-  "def-sc-sheaf-exterior-power"
+  "lem-sc-exterior-sheaf-restrict-hom-data"
  ],
  "proof_origin": {
-  "by": "F1",
+  "by": "K4",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph",
-  "note": "Retirement adaptation: use the upstream hom-data theorem via proved equalities of the exterior constructions, preserving the consumer signature and public imports."
+  "note": "Retire the duplicate under coord/retire-items.tsv and the human hand-off. Attach the already-proved upstream theorem; every direct consumer rewrites its result through the existing proved exterior-sheaf equality. No new proof obligation or unit-route change."
  },
  "mathlib_searches": [
   {
@@ -94,14 +92,15 @@
   }
  },
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/ExteriorSheafRestrictIso.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafRestrictIso",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafRestrictIso.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.exteriorSheaf_restrict_iso",
-  "statement": "theorem exteriorSheaf_restrict_iso {X : Scheme.{v}} (M : X.Modules) (n : ℕ) (U : X.Opens) : Nonempty ((exteriorSheaf M n).restrict U.ι ≅ exteriorSheaf (M.restrict U.ι) n)",
+  "statement": "theorem exteriorSheaf_restrict_iso {X : Scheme.{v}} (M : X.Modules) (n : ℕ)\n    (U : X.Opens) :\n    Nonempty ((exteriorPower M n).restrict U.ι ≅ exteriorPower (M.restrict U.ι) n)",
   "branch": "sheaf-dag",
-  "by": "T3",
-  "date": "2026-10-12",
-  "existing": false
+  "by": "K4",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf twin; the two constructions are equal by exteriorSheaf_eq_exteriorPower. All five direct consumers transport the upstream restriction isomorphism through this equality without changing their public statements."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -116,11 +115,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-cfdcd",
-  "group": "F1",
+  "reviewer": "C-a6756",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261020T162911-L-3673822",
+  "landing": "20261020T221234-L-4162476",
   "kind": "interface",
-  "note": "independent cc review: delivered stub + adapted ExteriorSheafRestrictIso vs live clone and the WeilConjectures twin (signature verbatim in node lean record); retire-items row 532 and hand-off note; row-275 precedent; lcompile --all exit 0; axioms clean"
+  "note": "independent cc review: retire-items row 749 + twin WeilConjectures…exteriorSheaf_restrict_iso (signature verbatim in node lean record) with the 5 adapted consumers vs live clone; exteriorSheaf_eq_exteriorPower (lem-sc-exterior-sheaf-upstream-comparison) bridges exteriorSheaf/exteriorPower"
  }
 }

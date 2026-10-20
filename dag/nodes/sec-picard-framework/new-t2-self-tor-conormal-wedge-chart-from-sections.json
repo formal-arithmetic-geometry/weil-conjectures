@@ -30,11 +30,12 @@
    "elementary": false
   },
   {
-   "text": "Restrict the conormal module to the affine open scheme V. Identify exteriorSheafPresheaf with the canonical PresheafOfModules.exteriorPower: their object modules coincide, and uniqueness of restriction on pure wedges identifies all maps using exteriorPower_map_ιMulti. Applying sheafification gives exteriorSheaf = Scheme.Modules.exteriorPower. Rewrite by this equality and apply the upstream isQuasicoherent_exteriorSheaf_of_isAffine there. Transport quasi-coherence back through exteriorSheaf_restrict_iso to obtain quasi-coherence of E.restrict V.ι. Both equality helpers are proved privately; no unfinished prerequisite is added.",
+   "text": "Restrict the conormal module to the affine open scheme V. Identify exteriorSheafPresheaf with the canonical PresheafOfModules.exteriorPower: their object modules coincide, and uniqueness of restriction on pure wedges identifies all maps using exteriorPower_map_ιMulti. Applying sheafification gives exteriorSheaf = Scheme.Modules.exteriorPower. Rewrite by this equality and apply the upstream isQuasicoherent_exteriorSheaf_of_isAffine there. Transport quasi-coherence back through exteriorSheaf_restrict_iso to obtain quasi-coherence of E.restrict V.ι. Both equality helpers are proved privately; no unfinished prerequisite is added. For the upstream restriction theorem, rewrite exteriorPower as exteriorSheaf at the module and its restriction using [lem-sc-exterior-sheaf-upstream-comparison]; this preserves exactly the legacy objects used by the rest of the argument.",
    "uses": [
     "lem-weil-pbc-module-restriction-open-immersion-colimits",
     "lem-sc-exterior-sheaf-restrict-iso",
-    "new-q1-exterior-sheaf-quasicoherent"
+    "new-q1-exterior-sheaf-quasicoherent",
+    "lem-sc-exterior-sheaf-upstream-comparison"
    ],
    "elementary": false
   },
@@ -65,14 +66,16 @@
   "lem-weil-pbc-module-pullback-quasi-coherent",
   "lem-weil-pbc-module-restriction-open-immersion-colimits",
   "lem-weil-pbc-quasi-coherent-module-kernel",
-  "new-q1-exterior-sheaf-quasicoherent"
+  "new-q1-exterior-sheaf-quasicoherent",
+  "lem-sc-exterior-sheaf-upstream-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "group": "K4",
   "date": "2026-10-20",
   "document": "lean/WeilConjectures/AlgebraicGeometry/Modules/ExteriorSheafQuasicoherent.lean",
-  "place": "The original affine-conormal argument is preserved; its exterior quasi-coherence step now transports the upstream theorem through proved presheaf and sheafification equalities."
+  "place": "The original affine-conormal argument is preserved; its exterior quasi-coherence step now transports the upstream theorem through proved presheaf and sheafification equalities.",
+  "note": " K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved."
  },
  "mathlib_searches": [
   {
@@ -175,12 +178,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a806b",
+  "reviewer": "C-a6756",
   "group": "K4",
   "result": "pass",
-  "landing": "20261020T162313-L-3588413",
+  "landing": "20261020T221234-L-4162476",
   "kind": "interface",
-  "note": "independent cc review: Withdrawn Sheaf copy vs upstream twin WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafQuasicoherent (node lean.statement verbatim upstream, existing:true); the one consumer (unclaimed), adapted only where forced (original fails: unknown constant at 177:7), compiles, as does its importer SelfTorConormalWedgeChart; axioms clean"
+  "note": "independent cc review: retire-items row 749 + twin WeilConjectures…exteriorSheaf_restrict_iso (signature verbatim in node lean record) with the 5 adapted consumers vs live clone; exteriorSheaf_eq_exteriorPower (lem-sc-exterior-sheaf-upstream-comparison) bridges exteriorSheaf/exteriorPower"
  },
  "lean_audit": {
   "master": {

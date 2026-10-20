@@ -28,20 +28,20 @@
    "elementary": false
   },
   {
-   "text": "Construct the existing determinant-evaluation morphism exteriorSheaf(C dual,n)→dual(exteriorSheaf C n). Each supplied regular chart gives a conormal basis, hence a finite free conormal frame; the determinant pairing is bijective on sections of every subopen of that chart. Represent a target germ on such a subopen and lift it through the section map to prove stalk surjectivity. To apply the official local pairing theorem, conjugate the legacy determinant morphism by exteriorSheafPowerIso on its source and the dual of the inverse comparison on its target. The inverse-wedge formula gives its determinant hypothesis. Bijectivity of the comparison sections cancels from the composite, giving exactly the required bijectivity of the original morphism.",
+   "text": "Construct the existing determinant-evaluation morphism exteriorSheaf(C dual,n)→dual(exteriorSheaf C n). Each supplied regular chart gives a conormal basis, hence a finite free conormal frame; the determinant pairing is bijective on sections of every subopen of that chart. Represent a target germ on such a subopen and lift it through the section map to prove stalk surjectivity.",
    "uses": [
     "lem-sc-exterior-dual-pairing-construction",
     "lem-sc-koszul-conormal-basis",
     "lem-sc-affine-conormal-frame",
-    "lem-sc-exterior-dual-pairing-local-bijective",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-exterior-dual-pairing-local-bijective"
    ],
    "elementary": false
   },
   {
-   "text": "Open restriction of exterior powers gives E≅(exteriorSheaf(C dual,n))|V. Naturality of the restriction-stalk isomorphism transfers surjectivity of the determinant morphism to V. Compose the inverse exterior-restriction isomorphism, that restricted determinant morphism, and the Koszul comparison isomorphism. On stalks the two isomorphisms are surjective; lifting an element successively through the three maps proves the composite is surjective.",
+   "text": "Open restriction of exterior powers gives E≅(exteriorSheaf(C dual,n))|V. Naturality of the restriction-stalk isomorphism transfers surjectivity of the determinant morphism to V. Compose the inverse exterior-restriction isomorphism, that restricted determinant morphism, and the Koszul comparison isomorphism. On stalks the two isomorphisms are surjective; lifting an element successively through the three maps proves the composite is surjective. For the upstream restriction theorem, rewrite exteriorPower as exteriorSheaf at the module and its restriction using [lem-sc-exterior-sheaf-upstream-comparison]; this preserves exactly the legacy objects used by the rest of the argument.",
    "uses": [
-    "lem-sc-exterior-sheaf-restrict-iso"
+    "lem-sc-exterior-sheaf-restrict-iso",
+    "lem-sc-exterior-sheaf-upstream-comparison"
    ],
    "elementary": true
   }
@@ -53,7 +53,7 @@
   "lem-sc-affine-conormal-frame",
   "lem-sc-exterior-dual-pairing-local-bijective",
   "lem-sc-exterior-sheaf-restrict-iso",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "lem-sc-exterior-sheaf-upstream-comparison"
  ],
  "proof_origin": {
   "by": "agent",
@@ -63,8 +63,7 @@
    "document": "https://stacks.math.columbia.edu/tag/0BQY",
    "place": "duality.tex, lemma-regular-ideal-ext: Hom of the Koszul resolution into the quotient, its zero differential, and changes of generators; Tag 062I for I/I²"
   },
-  "note": "Separates the zero-differential Koszul Hom calculation from exterior duality. The latter is proved using the existing determinant pairing and finite conormal frames; the only remaining new hole is the former.",
-  "place": " B8 retirement, 2026-10-21: transport through the canonical exterior-power comparisons to the official pairing theorem; no change of mathematical route."
+  "note": "Separates the zero-differential Koszul Hom calculation from exterior duality. The latter is proved using the existing determinant pairing and finite conormal frames; the only remaining new hole is the former. K4 retirement adaptation 2026-10-21: use the upstream restriction theorem through the proved comparison of the exterior sheaves; all original argument steps are preserved."
  },
  "mathlib_searches": [
   {
@@ -148,12 +147,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-5683b",
-  "group": "B8",
+  "reviewer": "C-a6756",
+  "group": "K4",
   "result": "pass",
-  "landing": "20261020T211636-L-3481975",
+  "landing": "20261020T221234-L-4162476",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf exterior_dual_pairing_app_bijective vs WeilConjectures twin (node lean.statement byte-identical); 3 adapted direct importers vs live (only plain import + proof changes), all compile (560 s limit under load 260; orig 182 s vs delivered 79 s); axioms clean"
+  "note": "independent cc review: retire-items row 749 + twin WeilConjectures…exteriorSheaf_restrict_iso (signature verbatim in node lean record) with the 5 adapted consumers vs live clone; exteriorSheaf_eq_exteriorPower (lem-sc-exterior-sheaf-upstream-comparison) bridges exteriorSheaf/exteriorPower"
  },
  "lean_audit": {
   "master": {
