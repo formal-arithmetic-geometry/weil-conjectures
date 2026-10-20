@@ -32,6 +32,8 @@ open CategoryTheory CategoryTheory.Limits MonoidalCategory
 open scoped CategoryTheory.Functor
 namespace AlgebraicGeometry.Etale
 
+attribute [local irreducible] Functor.mapDerivedCategory
+
 /-- Additivity of the existing sheafified sectionwise scalar extension.
 Source: Stacks 03EK (blueprint: lem-pur-derived-change-of-rings).
 Proof: its adjunction to additive restriction implies additivity. -/
@@ -124,6 +126,53 @@ def scalarSheafTensorTransformation
   app := scalarSheafTensorMap φ T
   naturality _ _ a := scalarSheafTensorMap_naturality φ T a
 
+/-- The scalar adjunction unit on complex representatives before transposition.
+Source: Stacks 06YY (blueprint: lem-pur-derived-change-of-rings). -/
+def scalarDerivedRepresentativeUnit
+    {D E : Type*} [Category D] [Category E] [Abelian D] [Abelian E]
+    [HasDerivedCategory D] [HasDerivedCategory E]
+    {F : D ⥤ E} {U : E ⥤ D} [F.Additive] [U.Additive]
+    [PreservesFiniteLimits U] [PreservesFiniteColimits U] (adj : F ⊣ U) :
+    _root_.DerivedCategory.Q (C := D) ⟶
+      F.mapHomologicalComplex (.up ℤ) ⋙ _root_.DerivedCategory.Q (C := E) ⋙
+        U.mapDerivedCategory :=
+  Functor.whiskerRight
+      ((Functor.mapHomologicalComplexIdIso _ (.up ℤ)).inv ≫
+        NatTrans.mapHomologicalComplex adj.unit (.up ℤ) ≫
+        (Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ U)) (.up ℤ)).inv)
+      _root_.DerivedCategory.Q ≫
+    Functor.whiskerLeft (F.mapHomologicalComplex (.up ℤ)) U.mapDerivedCategoryFactors.inv
+
+/-- Transposition packages all representative maps into one natural transformation.
+Source: Stacks 06YY (blueprint: lem-pur-derived-change-of-rings). -/
+def scalarDerivedRepresentativeTransformation
+    {D E : Type*} [Category D] [Category E] [Abelian D] [Abelian E]
+    [HasDerivedCategory D] [HasDerivedCategory E]
+    {F : D ⥤ E} {U : E ⥤ D} [F.Additive] [U.Additive]
+    [PreservesFiniteLimits U] [PreservesFiniteColimits U] (adj : F ⊣ U)
+    {L : _root_.DerivedCategory D ⥤ _root_.DerivedCategory E}
+    (ad : L ⊣ U.mapDerivedCategory) :
+    _root_.DerivedCategory.Q ⋙ L ⟶
+      F.mapHomologicalComplex (.up ℤ) ⋙ _root_.DerivedCategory.Q where
+  app P := (ad.homEquiv _ _).symm ((scalarDerivedRepresentativeUnit adj).app P)
+  naturality C C' h := ad.homEquiv_naturality_right_square
+    (_root_.DerivedCategory.Q.map h) ((scalarDerivedRepresentativeUnit adj).app C')
+    ((scalarDerivedRepresentativeUnit adj).app C)
+    (_root_.DerivedCategory.Q.map ((F.mapHomologicalComplex (.up ℤ)).map h))
+    ((scalarDerivedRepresentativeUnit adj).naturality h)
+
+/-- The canonical scalar representative transformation with concrete sheaf complex functors.
+Source: Stacks 06YY (blueprint: lem-pur-derived-change-of-rings). -/
+def scalarExtensionRepresentativeTransformation
+    {A B : Type (u + 1)} [CommRing A] [CommRing B]
+    (φ : A →+* B) (T : Scheme.{u}) :
+    _root_.DerivedCategory.Q ⋙ scalarExtension φ T ⟶
+      (ProEtale.etaleSheafExtendScalars φ T).mapHomologicalComplex (.up ℤ) ⋙
+        _root_.DerivedCategory.Q :=
+  scalarDerivedRepresentativeTransformation
+      (ProEtale.etaleSheafExtendScalarsAdjunction φ T)
+      (Adjunction.ofIsRightAdjoint (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ))
+
 /-- The derived-extension counit on a cochain representative, including the quotient factor.
 Source: Stacks 06YY (blueprint: lem-pur-derived-change-of-rings). -/
 def scalarExtensionRepresentative
@@ -133,17 +182,7 @@ def scalarExtensionRepresentative
     (scalarExtension φ T).obj (_root_.DerivedCategory.Q.obj P) ⟶
       _root_.DerivedCategory.Q.obj
         (((ProEtale.etaleSheafExtendScalars φ T).mapHomologicalComplex (.up ℤ)).obj P) :=
-  ((Adjunction.ofIsRightAdjoint
-      (Sheaf.derivedRestrictScalars T.smallEtaleTopology φ)).homEquiv _ _).symm
-    (_root_.DerivedCategory.Q.map
-        ((Functor.mapHomologicalComplexIdIso _ (.up ℤ)).inv.app P ≫
-          (NatTrans.mapHomologicalComplex
-            (ProEtale.etaleSheafExtendScalarsAdjunction φ T).unit (.up ℤ)).app P ≫
-          (Functor.mapHomologicalComplexCompIso
-            (Iso.refl (ProEtale.etaleSheafExtendScalars φ T ⋙
-              Sheaf.restrictScalars T.smallEtaleTopology φ)) (.up ℤ)).inv.app P) ≫
-      (Sheaf.restrictScalars T.smallEtaleTopology φ).mapDerivedCategoryFactors.inv.app
-        (((ProEtale.etaleSheafExtendScalars φ T).mapHomologicalComplex (.up ℤ)).obj P))
+  (scalarExtensionRepresentativeTransformation φ T).app P
 
 /-- Exact restriction of the scalar-extension representative map.
 Source: Stacks 06YY (blueprint: lem-pur-derived-change-of-rings). -/
