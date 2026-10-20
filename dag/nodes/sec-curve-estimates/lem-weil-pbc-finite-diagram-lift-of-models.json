@@ -20,7 +20,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/limits.tex",
-  "place": "Tag 01ZM (2),(3); finite-generator and finite-relation argument, with the canonical pullback comparisons checked in Lean; source checked at https://stacks.math.columbia.edu/tag/01ZM"
+  "place": "Tag 01ZM (2),(3); finite-generator and finite-relation argument, with the canonical pullback comparisons checked in Lean; source checked at https://stacks.math.columbia.edu/tag/01ZM; D6 2026-10-20: retained proof now supplied by the upstream module; unused Sheaf duplicate withdrawn"
  },
  "mathlib_searches": [
   {
@@ -60,7 +60,7 @@
  ],
  "proof": [
   {
-   "text": "The private finite_generators_lift lemma conjugates each generator by alpha, composes with the target pullback first projection, and applies Scheme.exists_pullback_hom_of_isLimit. IsCofiltered.wideCospan provides a common refinement for the finite type of generators. Compose each lifted scheme map with the pullback.map to its individual stage; check the structure and limit equations on the two projections. Form the Over morphisms with pullback.lift. The private pullbackComp_inv_fst and comparison_fst lemmas compute the canonical comparison via conjugateEquiv_counit, and the generator compatibility is checked by pullback.hom_ext.",
+   "text": "The private finite_generators_lift lemma conjugates each generator by alpha, composes with the target pullback first projection, and applies Scheme.exists_pullback_hom_of_isLimit. IsCofiltered.wideCospan provides a common refinement for the finite type of generators. Compose each lifted scheme map with the pullback.map to its individual stage; check the structure and limit equations on the two projections. Form the Over morphisms with pullback.lift. The local hK calculation computes the canonical comparison via conjugateEquiv_counit, and the generator compatibility is checked by pullback.hom_ext.",
    "uses": [
     "thm-pd-spreading-out",
     "def-pc-fibre-product"
@@ -93,14 +93,15 @@
   "def-pc-fibre-product"
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FiniteDiagramLiftOfModels",
-  "file": "lean/Sheaf/AlgebraicGeometry/FiniteDiagramLiftOfModels.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FiniteDiagramLiftOfModels",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FiniteDiagramLiftOfModels.lean",
   "declaration": "AlgebraicGeometry.finite_diagram_lift_of_models",
-  "statement": "theorem finite_diagram_lift_of_models {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] (c : Cone D) (hc : IsLimit c) (A : Type v) [Finite A] [Quiver.{v} A] [Finite (Σ a b : A, Quiver.Hom a b)] (R : Type v) [Finite R] (s t : R → Paths A) (p q : ∀ r, s r ⟶ t r) (F : Paths A ⥤ Over c.pt) (i : Iᵒᵖ) (V : A → Over (D.obj i)) (hV : ∀ a, LocallyOfFinitePresentation (V a).hom ∧ QuasiCompact (V a).hom ∧ QuasiSeparated (V a).hom) (α : ∀ a, (Over.pullback (c.π.app i)).obj (V a) ≅ F.obj a) (hR : ∀ r, F.map (p r) = F.map (q r)) : ∃ (j : Iᵒᵖ) (h : j ⟶ i) (G : Paths A ⥤ Over (D.obj j)) (β : G ⋙ Over.pullback (c.π.app j) ≅ F), (∀ a, G.obj a = (Over.pullback (D.map h)).obj (V a)) ∧ (∀ r, G.map (p r) = G.map (q r))",
+  "statement": "theorem finite_diagram_lift_of_models {I : Type u} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Scheme.{u}) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f)] [∀ i : Iᵒᵖ, CompactSpace (D.obj i)] [∀ i : Iᵒᵖ, QuasiSeparatedSpace (D.obj i)] (c : Cone D) (hc : IsLimit c) (A : Type v) [Finite A] [Quiver.{v} A] [Finite (Σ a b : A, Quiver.Hom a b)] (R : Type v) [Finite R] (s t : R → Paths A) (p q : ∀ r, s r ⟶ t r) (F : Paths A ⥤ Over c.pt) (i : Iᵒᵖ) (V : A → Over (D.obj i)) (hV : ∀ a, LocallyOfFinitePresentation (V a).hom ∧ QuasiCompact (V a).hom ∧ QuasiSeparated (V a).hom) (α : ∀ a, (Over.pullback (c.π.app i)).obj (V a) ≅ F.obj a) (hR : ∀ r, F.map (p r) = F.map (q r)) : ∃ (j : Iᵒᵖ) (h : j ⟶ i) (G : Paths A ⥤ Over (D.obj j)), Nonempty (G ⋙ Over.pullback (c.π.app j) ≅ F) ∧ (∀ a, G.obj a = (Over.pullback (D.map h)).obj (V a)) ∧ (∀ r, G.map (p r) = G.map (q r))",
   "branch": "sheaf-dag",
-  "by": "M3",
-  "date": "2026-10-13"
+  "by": "D6",
+  "date": "2026-10-20",
+  "note": "The proved upstream theorem has the same hypotheses and conclusion, packaging the comparison isomorphism as Nonempty. Eliminating Nonempty recovers the exact former existential statement. The unused Sheaf duplicate is withdrawn."
  },
  "mathlib_match": null,
  "merged_into": null,
@@ -127,13 +128,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M1",
+  "reviewer": "C-af300",
+  "group": "D6",
   "result": "pass",
-  "landing": "20261012T232141-L-1993060",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T131948-L-1395407",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn Sheaf finite_diagram_lift_of_models vs upstream WeilConjectures.AlgebraicGeometry.FiniteDiagramLiftOfModels (same hypotheses, iso packaged as Nonempty, axioms clean); node lean rebind, step-1 text matches upstream hK; no importers of the Sheaf module"
  }
 }
