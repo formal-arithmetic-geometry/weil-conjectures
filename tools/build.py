@@ -286,7 +286,7 @@ def run_probe(mods: list[str]) -> dict[str, dict]:
     f = d / "BatchProbe.lean"
     # 2026-10-14: the probe imports Lean.Elab.Command itself (a batch of withdrawn, emptied modules imports nothing)
     f.write_text("import Lean.Elab.Command\n" + "".join(f"import {m}\n" for m in mods) + BATCH_PROBE % ",\n    ".join("`" + m for m in mods))
-    r = run(["nice", "-n", "19", "timeout", "600", "lake", "env", "lean", str(f)], cwd=CLONE,
+    r = run(["nice", "-n", "0", "timeout", "600", "lake", "env", "lean", str(f)], cwd=CLONE,
             env=dict(os.environ, LEAN_NUM_THREADS=THREADS))
     out = r.stdout + r.stderr
     res = {}
@@ -463,7 +463,7 @@ def main() -> int:
               f"{sum(r['kind'] == 'interface' for r in included)} of them interface", flush=True)
         t0 = time.time()
         with open(LOG, "w") as log:
-            proc = subprocess.Popen(["nice", "-n", "19", "lake", "build"], cwd=CLONE, stdout=log, stderr=subprocess.STDOUT,
+            proc = subprocess.Popen(["nice", "-n", "0", "lake", "build"], cwd=CLONE, stdout=log, stderr=subprocess.STDOUT,
                                     env=dict(os.environ, LEAN_NUM_THREADS=THREADS), start_new_session=True)
             restart = False
             while proc.poll() is None:
