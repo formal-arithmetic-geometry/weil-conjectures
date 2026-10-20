@@ -49,10 +49,9 @@
    }
   },
   {
-   "text": "For clause (1), choose the representative $\\alpha_1:Q(M)\\cong P_1$, and use $\\alpha_2=w\\alpha_1$ as representative isomorphism for $P_2$. Its dual is $\\alpha_2^\\vee=\\alpha_1^\\vee w^\\vee$. Substitution into the two transport composites of [def-trf-categorical-trace] gives $\\operatorname{coev}_2=(w\\otimes(w^\\vee)^{-1})\\operatorname{coev}_1$ and $\\operatorname{ev}_2((w^\\vee)^{-1}\\otimes w)=\\operatorname{ev}_1$. The signed symmetry commutes with degree-zero maps, since on $x\\otimes\\varphi$ both orders give $(-1)^{|x||\\varphi|}(w^\\vee)^{-1}\\varphi\\otimes wx$. Insert these identities and $v_2w=wv_1$ into the trace composite and cancel $w,w^{-1}$ and $w^\\vee,(w^\\vee)^{-1}$. This gives the asserted equality; changing the representative choice is allowed by [lem-trf-chain-supertrace].",
+   "text": "For clause (1), use the canonical Koszul braiding and the canonical right duals supplied by def-trf-categorical-trace for the two perfect objects. Unfold the finite-coefficient specialization and perfectCategoricalTrace. The existing source-library theorem CategoryTheory.MonoidalCategory.trace_eq_of_iso applies to w and the symmetry of the given intertwining equation. Its proof transports the right-dual pairing, uses cyclicity of the coevaluation--braiding--evaluation composite, and cancels w.hom and w.inv. Apply the same perfectTraceScalar function to the resulting equality of endomorphisms of the tensor unit. No chain model or supertrace assertion is needed for this clause.",
    "uses": [
-    "def-trf-categorical-trace",
-    "lem-trf-chain-supertrace"
+    "def-trf-categorical-trace"
    ],
    "elementary": true,
    "source": {
@@ -173,7 +172,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/prop-trf-trace-formal-laws.proof.md",
-  "place": "Clauses (1)--(4), with explicit model and coefficient corrections recorded in report.md"
+  "place": "Original clauses (2)--(4) retained as plans; clause (1) implemented using WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided.trace_eq_of_iso, which proves the same categorical duality cancellation."
  },
  "mathlib_searches": [
   {
@@ -399,5 +398,15 @@
   "by": "Q12",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261020T174920-L-821091",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
