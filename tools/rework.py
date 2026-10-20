@@ -33,6 +33,8 @@ Rules (the human, 2026-10-20):
 Usage:
   tools/rework.py status              the rows, which are open, which wait for deeper rework, and what they block
   tools/rework.py reconcile           drop the rows verified green (refs/heads/sheaf-verified has the original file)
+  tools/rework.py release-held [--dry-run]  release the claims on held items (quarantined non-items, rule-4 blocked),
+                                      write coord/rework-hold.txt for the dispatcher
   tools/rework.py autorestore         compile each new root (its quarantined imports are back) as it is; restore those
                                       that compile in one landing, give the others their own error (separate items)
 """
@@ -465,6 +467,77 @@ def reconcile(commit: bool = True) -> int:
     return len(done)
 
 
+HOLD = ROOT / "coord" / "rework-hold.txt"
+
+
+def hold_set(rows=None) -> tuple[set[str], dict[str, str], set[str]]:
+    """(items that are no work while the rework runs, why: item -> the rework module it waits for, the open rework
+    items). Held: every quarantined module that is not the item of an open cluster (one worker restores a whole
+    cluster through its item; a member or a root held for a retire item has no compiled imports to work against),
+    and every node/module blocked by rework (rule 4)."""
+    rows = load() if rows is None else rows
+    if not rows:
+        return set(), {}, set()
+    _, held_roots = priority_retire(rows)
+    items = {c["item"] for c in clusters(rows, held_roots)
+             if (rows[c["item"]].get("cause") or "").startswith("error:")}
+    nodes, mods, why = blocked(None, None, rows)
+    hold = (set(m for m in rows if not landed(m)) | nodes | mods) - items
+    for m in rows:
+        why.setdefault(m, m)
+    return hold, why, items
+
+
+def release_held(apply: bool = True) -> int:
+    """2026-10-20 (BLOCKED storm after the quarantine): claims taken before the sync on items that are now held
+    (hold_set) kept being dispatched; their workers cannot compile (a quarantined import has no olean in the published
+    build) and answered BLOCKED, then were restarted as repairs, in a loop. Release every such claim: drop its return
+    entries, archive its delivery branch at refs/superseded/<group>/<item>/<head> (the item is not abandoned: it comes
+    back to the queue when its rework lands), delete the claim. Writes coord/rework-hold.txt (item TAB rework module it
+    waits for), which the dispatcher reads to start no worker on a held item. Returns the number released."""
+    import claim
+    rows = load()
+    hold, why, _ = hold_set(rows)
+    tmp = HOLD.with_suffix(".tmp")
+    tmp.write_text("# items held while their rework runs (tools/rework.py release-held): item<TAB>quarantined module\n"
+                   + "".join(f"{m}\t{why.get(m, '')}\n" for m in sorted(hold)))
+    tmp.replace(HOLD)
+    out, touched = [], set()
+    for lk in sorted(claim.C.glob("*.lock")):
+        m = lk.stem.replace("__", "/")
+        if m not in hold:
+            continue
+        r = claim.read(m)
+        if not r:
+            continue
+        who = r.get("who", "")
+        if who in ("L", "ORCHESTRA"):
+            continue
+        ref = f"refs/heads/deliver/{who}/{m}"
+        h = subprocess.run(["git", "rev-parse", "-q", "--verify", ref], cwd=ROOT, capture_output=True, text=True)
+        rp = claim.RETURNS / f"{who}.md"
+        returned = rp.is_file() and f"\n## {m} (" in "\n" + rp.read_text()
+        if h.returncode == 0 and not returned:
+            continue      # delivered and not returned: no worker runs on it; the lander judges the delivery
+        out.append((who, m))
+        if not apply:
+            continue
+        if claim.drop_return_entries(who, m):
+            touched.add(claim.RETURNS / f"{who}.md")
+        if h.returncode == 0:
+            head = h.stdout.strip()
+            git("update-ref", f"refs/superseded/{who}/{m}/{head}", head)
+            git("update-ref", "-d", ref, head)
+        lk.unlink(missing_ok=True)
+        claim.log(f"{who} released {m}: held by rework (waits for {why.get(m, '?')}); released by tools/rework.py release-held"
+                  + (f", delivery archived at refs/superseded/{who}/{m}/{head}" if h.returncode == 0 else ""))
+    if touched:
+        claim.commit_bookkeeping(sorted(touched), f"rework: return entries of {len(out)} held item(s) dropped (tools/rework.py release-held)")
+    print(f"rework hold: {len(hold)} items held; claims {'released' if apply else 'to release'}: {len(out)}"
+          + ("" if not out else " (" + ", ".join(f"{w} {m}" for w, m in out[:12]) + (" ..." if len(out) > 12 else "") + ")"))
+    return len(out)
+
+
 TRIED = ROOT / "local" / "rework-tried.json"   # module -> blob of the quarantined text autorestore compiled without success
 
 
@@ -562,6 +635,8 @@ def main() -> int:
         autorestore(workers=int(a[a.index("--workers") + 1]) if "--workers" in a else 4,
                     limit=int(a[a.index("--limit") + 1]) if "--limit" in a else 60,
                     recheck="--recheck-unlocated" in a); return 0
+    if cmd == "release-held":
+        release_held(apply="--dry-run" not in a); return 0
     if cmd == "status":
         t = time.time()
         rows = load()
