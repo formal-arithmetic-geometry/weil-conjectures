@@ -1,0 +1,290 @@
+{
+ "id": "lem-asd-ordinary-finite-p1-kummer-maps",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof paragraphs 2--3: ordinary-etale projective-line input; The twisted form of the two-component decomposition and its base-change assertion, parent steps 1--4",
+   "via": [
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertibility and base change of the Kummer-normalized two-component maps",
+ "statement": "Under the hypotheses and coefficient conventions of [def-asd-ordinary-finite-p1-data], fix a normalized twist transport and a family of projective-line Chern arrows satisfying the actual Kummer specification [def-asd-ordinary-finite-p1-kummer-class]. The map with components the shifted twisted unit and the adjoint Chern arrow is an isomorphism for every Noetherian base. For every map of such bases its square with the canonical exchange [def-kun-unbounded-exchange], normalized shifted-line comparison and ordered sum comparison commutes. This statement asserts neither a trace adjunction nor its triangular identities.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "The twisted form of the two-component decomposition and its base-change assertion, parent steps 1--4"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-data",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-kun-unbounded-exchange"
+ ],
+ "proof": [
+  {
+   "text": "Put $R=\\mathbf Z/N$. The general standard-chart statement [lem-weil-pbc-projective-space-standard-charts](a),(c), specialized to the two coordinates, supplies the covering charts $\\operatorname{Spec}B[t]$ and $\\operatorname{Spec}B[s]$ over every affine open $\\operatorname{Spec}B\\subseteq S$, with $t=x_1/x_0$, $s=x_0/x_1$. Their product charts are $\\operatorname{Spec}B[t,u]$ by [lem-weil-pbc-fibre-product-affine-spectra]: $B[t]\\otimes_B B[u]\\cong B[t,u]$ by multiplication of monomials. The same chart statement applies to either $p_a$ over base $P$. The maps $q,p_a$ are proper by [lemma-nagata-projective-space-base-change-proper], hence finite type and quasi-compact; [pqf-lem-locnoeth-lft] makes their sources locally Noetherian, and quasi-compactness gives Noetherian sources. Properness makes $q$ separated, so its diagonal is closed and therefore proper of finite type by [lem-weil-pbc-closed-immersion-proper]. Thus [lem-amb-proper-coproducts-projection] applies to $q,p_a,\\Delta$ with either finite ring $R$ or $A$, on the entire derived categories. Use throughout its specified ordered, symmetry-conjugated projection map. All proper exchanges are isomorphisms by [lem-kun-proper-base-change-torsion-ring]. The twists are flat rank-one sheaves by [lem-asd-finite-etale-twist-line], with canonical pullbacks by [lem-asd-etale-finite-twist-pullback].",
+   "uses": [
+    "lem-weil-pbc-projective-space-standard-charts",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lemma-nagata-projective-space-base-change-proper",
+    "pqf-lem-locnoeth-lft",
+    "lem-weil-pbc-closed-immersion-proper",
+    "lem-amb-proper-coproducts-projection",
+    "lem-kun-proper-base-change-torsion-ring",
+    "lem-asd-finite-etale-twist-line",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
+    "place": "Hypotheses for the diagonal construction and proper exchange"
+   }
+  },
+  {
+   "text": "For the geometric fibre over an algebraically closed field, apply the genus-zero projective-line theorem and proper-curve cohomology. A primitive root transports the constant Z/N computation to mu_N. The genus is zero, so H1 is the zero function group on Fin 0; H0 and H2 are Z/N and all higher groups vanish. This part is proved in ordinaryFiniteP1_geometric_cohomology. To normalize the actual arrow, use the existing adopted-library degree trace sheafHTwoTrace: the second Kummer boundary has kernel N Pic and is onto, and divisibility of Pic0 makes this trace bijective. It sends a line bundle's boundary to its degree modulo N. The two-chart coherent cohomology of O(d), d>=0, gives h0=d+1 and h1=0; the dimension-vanishing theorem gives chi=d+1. Since the unit is O(0), the definition of degree gives deg O(1)=2-1=1. Thus the trace sends its actual Kummer boundary to one, as proved in ordinaryFiniteP1_geometric_kummer_normalization. The shifted twisted unit is the identity on H0. Use proper exchange to identify geometric stalks of the relative pushforward with these fibre groups. Exact conservative geometric stalks and the unbounded cohomology criterion then show that the specified two-component map is invertible over Z/N.",
+   "uses": [
+    "lem-asd-projective-line-genus-zero",
+    "lem-sc-primitive-root",
+    "thm-sc-proper-cohomology",
+    "lem-sc-second-kummer-divisors",
+    "lem-sc-pic-proper-decomposition",
+    "lem-sc-pic-proper-ntorsion",
+    "def-sc-pic0",
+    "lem-kun-proper-base-change-torsion-ring",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology",
+    "def-pc-divisor-line-bundle",
+    "lem-sc-p1-monomial",
+    "def-pc-degree-line-bundle",
+    "lem-pc-vanishing-above-dim",
+    "prop-pc-xk-integral"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-decomposition.md",
+    "place": "Projective-line decomposition, geometric-fibre calculation"
+   }
+  },
+  {
+   "text": "Apply $e_S^*=A_S\\otimes_R^L-$ to $b_{q,R}$. Use [lem-asd-proper-finite-coefficient-extension] at $f=q$, $R=\\mathbf Z/N\\to A$, and $L=\\mu_{N,P}[2]$. Its $A$-linear isomorphism identifies the resulting target with $Rq_{*,A}e_P^*(\\mu_{N,P}[2])$. By [lem-asd-finite-etale-twist-line], $\\mu_N$ is $R$-flat, so this is $Rq_{*,A}A_P(1)[2]$, even for nonflat $A$. The source is $A_S(1)[2]\\oplus A_S$. The second component is $h$ by its scalar-extension definition. For the first component, transpose under $q_A^{-1}\\dashv Rq_{*,A}$: the normalization of the comparison gives scalar extension of $\\varepsilon_R q_R^{-1}(\\text{unit}_R)=1$, so the component is the shifted twisted $A$-unit. Thus the resulting arrow is exactly $b_q$. Derived scalar extension preserves the isomorphism $b_{q,R}$, and the comparison is an isomorphism; hence $b_q$ is an isomorphism.",
+   "uses": [
+    "lem-asd-proper-finite-coefficient-extension",
+    "lem-asd-finite-etale-twist-line"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-decomposition.md",
+    "place": "Projective-line decomposition, final scalar-extension paragraph"
+   }
+  },
+  {
+   "text": "Under any change of Noetherian base, the infinity divisor remains Cartier: its chart equation is a polynomial variable. Its dual ideal pulls back to O(1). Apply [lem-asd-ordinary-supported-kummer] and [lem-amb-kummer-any-base] to identify the pulled-back Kummer class. The comparison [lem-asd-ordinary-finite-class-comparison] identifies its derived representative. The unit/exchange equation follows by expanding the mate [def-kun-unbounded-exchange] and cancelling the adjunction triangle. The normalized twist transport and [lem-weil-pbc-ringed-exchange-tensor-coherence] identify the two ordered components. Their biproduct desc therefore gives the stated commuting square.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-amb-kummer-any-base",
+    "lem-asd-ordinary-finite-class-comparison",
+    "def-kun-unbounded-exchange",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "Naturality of unit and Kummer components, parent step 4"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-unbounded-exchange",
+  "def-pc-degree-line-bundle",
+  "def-pc-divisor-line-bundle",
+  "def-sc-pic0",
+  "lem-amb-kummer-any-base",
+  "lem-amb-proper-coproducts-projection",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-finite-etale-twist-line",
+  "lem-asd-ordinary-finite-class-comparison",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-asd-projective-line-genus-zero",
+  "lem-asd-proper-finite-coefficient-extension",
+  "lem-kun-proper-base-change-torsion-ring",
+  "lem-pc-vanishing-above-dim",
+  "lem-sc-p1-monomial",
+  "lem-sc-pic-proper-decomposition",
+  "lem-sc-pic-proper-ntorsion",
+  "lem-sc-primitive-root",
+  "lem-sc-second-kummer-divisors",
+  "lem-weil-pbc-closed-immersion-proper",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-projective-space-standard-charts",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lemma-nagata-projective-space-base-change-proper",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "pqf-lem-locnoeth-lft",
+  "prop-pc-xk-integral",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "thm-sc-proper-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "The twisted form of the two-component decomposition and its base-change assertion, parent steps 1--4"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A projective line Kummer hyperplane class and the unit split derived direct image for torsion coefficient rings",
+   "results": "Only Weierstrass/projectivization results; no etale cohomology decomposition.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.mkOfUnitCounit",
+   "results": "mkOfUnitCounit and its unit/counit equations. This is the formal constructor only.",
+   "date": "2026-10-21",
+   "verdict": "formal constructor, not the geometric input"
+  },
+  {
+   "tool": "grep",
+   "query": "projective.*kummer.*decomposition|diagonal.*triangle",
+   "results": "Two unrelated Mathlib comments in light condensed sequences and graph triangles.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "projective line Kummer class trace diagonal adjunction triangle identities",
+   "results": "Generic adjunction triangle identities and constructors, no geometric result.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafHTwoTrace|picDegreeMod|twist.*degree|degree.*twist",
+   "results": "Adopted Curve.RootsOfUnityTop provides a bijective normalized trace. Cohomology.ProjectiveLine gives two-chart cohomology, which computes degree O(1) from the definition of degree.",
+   "date": "2026-10-21",
+   "verdict": "adopted-library matches used for the geometric normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction",
+  "date": "2026-10-21",
+  "group": "B2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1KummerMaps",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteP1KummerMaps.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteP1_kummer_maps",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1_isUnit",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1_geometric_cohomology",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1_geometric_kummer_normalization",
+   "AlgebraicGeometry.Etale.ordinaryFiniteP1_kummer_maps"
+  ],
+  "statement": "theorem ordinaryFiniteP1_kummer_maps (N : ℕ) (hN : 0 < N) (A : Type (u + 1)) [CommRing A] [Finite A] (hA : (N : A) = 0) (t : OrdinaryFiniteTwistTransport A N hA) (c : OrdinaryFiniteP1ChernFamily A N hA) (hc : OrdinaryFiniteP1ChernFamilySpec A N hA c) : (∀ (S : Scheme.{u}) [IsNoetherian S] (hS : IsUnit (N : Γ(S, ⊤))), IsIso (ordinaryFiniteP1KummerMap A N hA t c S hS)) ∧ OrdinaryFiniteP1KummerMapBaseChange A N hA t c",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-asd-ordinary-finite-p1-kummer-maps",
+  "worker": "stage3 B2",
+  "summary": "Extracted the indicated source component from the existing item; its Lean interface and proof in words preserve the coefficient and canonical-map normalizations.",
+  "blueprint": "Proof paragraphs 2--3: ordinary-etale projective-line input; The twisted form of the two-component decomposition and its base-change assertion, parent steps 1--4",
+  "tool_uses": [
+   {
+    "node": "lem-kun-proper-base-change-torsion-ring",
+    "why": "Use Unbounded proper base change over a torsion coefficient ring as the generic tool already used by the original ordinary-finite projective-line proof; the unit route and its cohomology/diagonal argument are retained."
+   },
+   {
+    "node": "lem-sc-pic-proper-decomposition",
+    "why": "Use Structure of the Picard group of a proper curve as the generic tool already used by the original ordinary-finite projective-line proof; the unit route and its cohomology/diagonal argument are retained."
+   },
+   {
+    "node": "lem-sc-pic-proper-ntorsion",
+    "why": "Use Pic of a proper curve: divisibility, n-torsion, cokernel as the generic tool already used by the original ordinary-finite projective-line proof; the unit route and its cohomology/diagonal argument are retained."
+   },
+   {
+    "node": "lem-sc-primitive-root",
+    "why": "Use Primitive roots of unity as the generic tool already used by the original ordinary-finite projective-line proof; the unit route and its cohomology/diagonal argument are retained."
+   },
+   {
+    "node": "lem-sc-second-kummer-divisors",
+    "why": "Use Second Kummer cohomology of a curve as the generic tool already used by the original ordinary-finite projective-line proof; the unit route and its cohomology/diagonal argument are retained."
+   },
+   {
+    "node": "lem-weil-pbc-projective-space-standard-charts",
+    "why": "Use Standard charts and coordinate sections of projective space over a scheme as the generic tool already used by the original ordinary-finite projective-line proof; the unit route and its cohomology/diagonal argument are retained."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Use Projection-formula coherence for a square of ringed topoi as the generic tool already used by the original ordinary-finite projective-line proof; the unit route and its cohomology/diagonal argument are retained."
+   },
+   {
+    "node": "lemma-nagata-projective-space-base-change-proper",
+    "why": "Use Projective space is proper over its base as the generic tool already used by the original ordinary-finite projective-line proof; the unit route and its cohomology/diagonal argument are retained."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Use Conservativity of geometric stalks as the generic tool already used by the original ordinary-finite projective-line proof; the unit route and its cohomology/diagonal argument are retained."
+   },
+   {
+    "node": "thm-sc-proper-cohomology",
+    "why": "Use Kummer computation on a proper curve as the generic tool already used by the original ordinary-finite projective-line proof; the unit route and its cohomology/diagonal argument are retained."
+   },
+   {
+    "node": "lem-sc-p1-monomial",
+    "why": "Generic coherent cohomology of projective-line twists and vanishing above dimension compute the degree of the actual O(1) in the normalized geometric-fibre Kummer calculation; the diagonal-kernel unit route is unchanged."
+   },
+   {
+    "node": "lem-pc-vanishing-above-dim",
+    "why": "Generic coherent cohomology of projective-line twists and vanishing above dimension compute the degree of the actual O(1) in the normalized geometric-fibre Kummer calculation; the diagonal-kernel unit route is unchanged."
+   },
+   {
+    "node": "prop-pc-xk-integral",
+    "why": "Smooth connected projective line over an algebraically closed field is geometrically integral, as required by the existing bijective degree trace."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261020T211629-L-3480845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261020T211629-L-3480845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

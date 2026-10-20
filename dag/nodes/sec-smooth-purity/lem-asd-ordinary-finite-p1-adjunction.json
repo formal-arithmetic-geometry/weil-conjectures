@@ -34,179 +34,56 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\mathbf Z/N$. The general standard-chart statement [lem-weil-pbc-projective-space-standard-charts](a),(c), specialized to the two coordinates, supplies the covering charts $\\operatorname{Spec}B[t]$ and $\\operatorname{Spec}B[s]$ over every affine open $\\operatorname{Spec}B\\subseteq S$, with $t=x_1/x_0$, $s=x_0/x_1$. Their product charts are $\\operatorname{Spec}B[t,u]$ by [lem-weil-pbc-fibre-product-affine-spectra]: $B[t]\\otimes_B B[u]\\cong B[t,u]$ by multiplication of monomials. The same chart statement applies to either $p_a$ over base $P$. The maps $q,p_a$ are proper by [lemma-nagata-projective-space-base-change-proper], hence finite type and quasi-compact; [pqf-lem-locnoeth-lft] makes their sources locally Noetherian, and quasi-compactness gives Noetherian sources. Properness makes $q$ separated, so its diagonal is closed and therefore proper of finite type by [lem-weil-pbc-closed-immersion-proper]. Thus [lem-amb-proper-coproducts-projection] applies to $q,p_a,\\Delta$ with either finite ring $R$ or $A$, on the entire derived categories. Use throughout its specified ordered, symmetry-conjugated projection map. All proper exchanges are isomorphisms by [lem-kun-proper-base-change-torsion-ring]. The twists are flat rank-one sheaves by [lem-asd-finite-etale-twist-line], with canonical pullbacks by [lem-asd-etale-finite-twist-pullback].",
+   "text": "Obtain the roots and pure-tensor normalized twist transport from [lem-asd-etale-finite-twist-pullback]. Proper projective space and [pqf-lem-locnoeth-lft] make every projective line over a Noetherian base quasi-compact and quasi-separated. Apply [lem-asd-ordinary-finite-class-comparison] to obtain the unique Chern representative of its specified scalar-extended Kummer class.",
    "uses": [
-    "lem-weil-pbc-projective-space-standard-charts",
-    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-asd-etale-finite-twist-pullback",
     "lemma-nagata-projective-space-base-change-proper",
     "pqf-lem-locnoeth-lft",
-    "lem-weil-pbc-closed-immersion-proper",
-    "lem-amb-proper-coproducts-projection",
-    "lem-kun-proper-base-change-torsion-ring",
-    "lem-asd-finite-etale-twist-line",
-    "lem-asd-etale-finite-twist-pullback"
+    "lem-asd-ordinary-finite-class-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Hypotheses for the diagonal construction and proper exchange"
-   }
+   "elementary": false
   },
   {
-   "text": "First prove the decomposition over $R$. At a geometric point $\\bar s=\\operatorname{Spec}k\\to S$, with $k$ algebraically closed, the fibre is $\\mathbf P^1_k$. By [lem-asd-projective-line-genus-zero] it is a smooth proper connected curve of genus zero. Choose a primitive $N$th root using [lem-sc-primitive-root]. Apply [thm-sc-proper-cohomology] with $g=0$: the constant $R$-cohomology is $R$ in degrees $0,2$ and zero otherwise. The primitive root identifies $\\mu_N$ with that constant sheaf, so the same vanishing holds for $\\mu_N$, with $H^0=\\mu_N(k)$. To check the degree-two component rather than just its rank, [lem-sc-second-kummer-divisors] identifies $H^2(P_k,\\mu_N)$ with $\\operatorname{Pic}(P_k)/N$ by the actual Kummer boundary. The split degree sequence [lem-sc-pic-proper-decomposition] and $N$-divisibility of $\\operatorname{Pic}^0$ from [lem-sc-pic-proper-ntorsion] identify this quotient with $\\mathbf Z/N$ by degree. The divisor $x_1=0$ is one $k$-rational point. Its ideal generators on $D(x_0)$ and $D(x_1)$ are $t=x_1/x_0$ and $1$; their dual generators satisfy $g_0=t^{-1}g_1$, so its line bundle is the specified $\\mathcal O(1)$. Its degree is one by [def-sc-pic0]. Thus $h_R$ induces the isomorphism $R\\to H^2(P_k,\\mu_N)$ taking $1$ to degree one. The twisted shifted unit induces the identity on $H^0(P_k,\\mu_N)$. Proper exchange [lem-kun-proper-base-change-torsion-ring] gives these computations on the geometric stalks of the cohomology of $b_{q,R}$. Exactness of stalks [prop-weil-pbc-geometric-stalks-exact] and [lemma-weil-pbc-geometric-stalk-conservative] make every cohomology map invertible. The unbounded cohomology criterion [lem-weil-pbc-unbounded-derived-iso-cohomology] proves $b_{q,R}$ invertible.",
+   "text": "Apply [lem-asd-ordinary-finite-p1-kummer-maps]. Give each specified two-component map its unique inverse via asIso; its hom is exactly that map. This supplies the decomposition family and its base-change square.",
    "uses": [
-    "lem-asd-projective-line-genus-zero",
-    "lem-sc-primitive-root",
-    "thm-sc-proper-cohomology",
-    "lem-sc-second-kummer-divisors",
-    "lem-sc-pic-proper-decomposition",
-    "lem-sc-pic-proper-ntorsion",
-    "def-sc-pic0",
-    "lem-kun-proper-base-change-torsion-ring",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-unbounded-derived-iso-cohomology",
-    "def-pc-divisor-line-bundle"
+    "lem-asd-ordinary-finite-p1-kummer-maps"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-decomposition.md",
-    "place": "Projective-line decomposition, geometric-fibre calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply $e_S^*=A_S\\otimes_R^L-$ to $b_{q,R}$. Use [lem-asd-proper-finite-coefficient-extension] at $f=q$, $R=\\mathbf Z/N\\to A$, and $L=\\mu_{N,P}[2]$. Its $A$-linear isomorphism identifies the resulting target with $Rq_{*,A}e_P^*(\\mu_{N,P}[2])$. By [lem-asd-finite-etale-twist-line], $\\mu_N$ is $R$-flat, so this is $Rq_{*,A}A_P(1)[2]$, even for nonflat $A$. The source is $A_S(1)[2]\\oplus A_S$. The second component is $h$ by its scalar-extension definition. For the first component, transpose under $q_A^{-1}\\dashv Rq_{*,A}$: the normalization of the comparison gives scalar extension of $\\varepsilon_R q_R^{-1}(\\text{unit}_R)=1$, so the component is the shifted twisted $A$-unit. Thus the resulting arrow is exactly $b_q$. Derived scalar extension preserves the isomorphism $b_{q,R}$, and the comparison is an isomorphism; hence $b_q$ is an isomorphism.",
+   "text": "Form the actual inverse-projection counit [def-asd-ordinary-finite-trace-counit]. Apply [lem-asd-ordinary-finite-p1-diagonal-unit] to get a natural unit and both component triangle identities. Adjunction.mkOfUnitCounit gives the adjunction with this actual counit. The proved projection equation is precisely the counit normalization field. The component triangles define an adjunction with that exact counit. Adjunction.ext_counit shows that two units satisfying them coincide, so the unit is uniquely determined before choosing it.",
    "uses": [
-    "lem-asd-proper-finite-coefficient-extension",
-    "lem-asd-finite-etale-twist-line"
+    "def-asd-ordinary-finite-trace-counit",
+    "lem-asd-ordinary-finite-p1-diagonal-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-decomposition.md",
-    "place": "Projective-line decomposition, final scalar-extension paragraph"
-   }
+   "elementary": false
   },
   {
-   "text": "Define $t_q=\\operatorname{pr}_2b_q^{-1}$. Since $h=b_q\\operatorname{in}_2$, $t_qh=1$ by cancellation. Under any change of Noetherian base $S'\\to S$, the projective line and the line bundle with its displayed transition functions pull back to those over $S'$. Pullback of the equation $z^N=1$ identifies the twists, and the Kummer connecting homomorphism pulls back the class of the pulled-back line bundle, using [lem-amb-kummer-any-base]. The unit components correspond because exchange [def-kun-unbounded-exchange] is the mate of the inverse-image composition comparison: substituting its unit/counit formula on the unit of $q$ cancels the adjacent counit/unit by their triangle identity. The tensor comparison commutes with exchange by [lem-weil-pbc-ringed-exchange-tensor-coherence]. Consequently the square with $b_q$, $b_{q'}$ and the canonical proper exchange commutes. Inverting this square and composing with the second projection proves that $t_{q'}$ is the pullback of $t_q$. For arbitrary $K$ define $\\epsilon_K$ by the displayed inverse projection formula followed by $1\\otimes t_q$ and the tensor unit [lem-kun-tensor-unit]. Naturality gives a natural transformation $FG\\to1$, where $F=Rq_*$, $G=q^{-1}(-)\\otimes_A^LA_P(1)[2]$. The same tensor/exchange equality shows that these actual maps $\\epsilon_K$, not merely their isomorphism classes, commute with base change.",
-   "uses": [
-    "lem-amb-kummer-any-base",
-    "def-kun-unbounded-exchange",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-amb-proper-coproducts-projection",
-    "lem-kun-tensor-unit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/def-amb-p1-trace.md",
-    "place": "Trace definition and base-change compatibility"
-   }
+   "text": "The Chern component equals the second injection followed by the decomposition hom. Cancel the decomposition against its inverse and use biprod.inr_snd to obtain trace_chern. Package these constructions into OrdinaryFiniteP1Datum.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Let $W=P\\times_SP$ and $\\Delta:P\\to W$ be the diagonal. On the finite-finite chart its equation is $u-t$; on the infinity-infinity chart it is again a difference of coordinates; on a mixed chart it is $1-tu$. A monic difference is a non-zero-divisor over any base ring, and multiplication by $1-tu$ is injective by comparing the lowest total degree in a nonzero polynomial. Thus $\\Delta$ is an effective Cartier divisor, and remains one after every base change here. Apply [lem-asd-ordinary-supported-kummer] to obtain $\\delta:R\\Delta_*A_P\\to A_W(1)[2]$. Since $p_a\\Delta=1_P$, derived pushforward composition [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] gives $R(p_a)_*R\\Delta_*A_P=A_P$. We claim $t_{p_a}R(p_a)_*\\delta=1$ for both $a$. This is an endomorphism of the degree-zero sheaf $A_P$, so its equality with identity is an equality of sheaf morphisms. Subtract identity and take the image sheaf. By exactness of stalks [prop-weil-pbc-geometric-stalks-exact], if the difference is zero on every stalk its image has zero stalks. [lemma-weil-pbc-geometric-stalk-conservative] applied to $0\\to\\operatorname{im}(f-1)$ then makes the image zero, hence $f=1$. Proper exchange [lem-kun-proper-base-change-torsion-ring], supported Kummer base change and step 4 identify its geometric stalk with the integral of the supported class of one rational point of $\\mathbf P^1_k$. Forgetting support gives that point's Kummer Chern class by the supported lemma. By [def-sc-pic0] its degree is one. The degree/Kummer identification in step 2 therefore sends it to $1\\in R$; scalar extension in step 3 sends it to $1\\in A$, and projection onto the degree-two summand is exactly $t_{p_a}$. This proves both identities, including over disconnected or nonreduced bases. Only morphisms of degree-zero sheaves, not arbitrary derived morphisms, were tested for equality on stalks.",
+   "text": "The decomposition square is the first required base-change equation. For the trace equation precompose both sides with the inverse-image of the decomposition hom. Cancel its inverse and use biprod.lift_snd to identify the two sides. Cancel the isomorphism to obtain the trace square. The actual-counit square is supplied by [lem-asd-ordinary-finite-p1-diagonal-unit].",
    "uses": [
-    "lem-asd-ordinary-supported-kummer",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-kun-proper-base-change-torsion-ring",
-    "def-sc-pic0",
-    "prop-weil-pbc-geometric-stalks-exact"
+    "lem-asd-ordinary-finite-p1-diagonal-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/lem-amb-p1-diagonal-integrals.md",
-    "place": "Proof of diagonal integrals, with the ordinary finite-ring supported class"
-   }
-  },
-  {
-   "text": "For $M\\in D(P_{\\mathrm{et}},A)$, projection for the proper closed immersion $\\Delta$ identifies $R\\Delta_*A_P\\otimes_A^Lp_1^{-1}M$ with $R\\Delta_*M$, because $\\Delta^{-1}p_1^{-1}M=M$. Define\n$$\\eta_M:M\\cong R(p_2)_*R\\Delta_*M\\longrightarrow R(p_2)_*(p_1^{-1}M\\otimes_A^LA_W(1)[2])\\cong q^{-1}Rq_*M\\otimes_A^LA_P(1)[2].$$\nThe middle arrow uses $\\delta\\otimes1_M$ followed by the canonical tensor symmetry $A_W(1)[2]\\otimes p_1^{-1}M\\to p_1^{-1}M\\otimes A_W(1)[2]$, using the preceding projection identification. This is the symmetry-conjugated ordered projection convention of step 1; the degree-two shift contributes sign $(-1)^{2i}=1$ on degree $i$ of $M$. For the last isomorphism, write $A_W(1)=p_2^{-1}A_P(1)$, apply the inverse projection formula for $p_2$, and then invert the canonical proper exchange $q^{-1}Rq_*M\\to R(p_2)_*p_1^{-1}M$. These are isomorphisms on all complexes by [lem-amb-proper-coproducts-projection] and [lem-kun-proper-base-change-torsion-ring], not just on $D^+$. Pullback tensor comparisons are [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], and the identity $R(p_2)_*R\\Delta_*=1$ is the composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Every arrow is natural in $M$, so this defines $\\eta:1\\to GF$.",
-   "uses": [
-    "lem-amb-proper-coproducts-projection",
-    "lem-kun-proper-base-change-torsion-ring",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Proof, construction of the unit"
-   }
-  },
-  {
-   "text": "Check the first triangle $\\epsilon_{FM}F\\eta_M$. Use $qp_1=qp_2$, the direct-image composition comparison [lem-weil-pbc-ringed-topoi-derived-pushforward-composition], and the tensor/exchange equality [lem-weil-pbc-ringed-exchange-tensor-coherence]. They identify this composite with\n$$Rq_*M=R(qp_1)_*R\\Delta_*M\\xrightarrow{R(qp_1)_*(\\delta\\otimes1)}R(qp_1)_*(p_1^{-1}M\\otimes A_W(1)[2])\\cong Rq_*(M\\otimes R(p_1)_*A_W(1)[2])\\xrightarrow{Rq_*(1_M\\otimes t_{p_1})}Rq_*M.$$\nHere the trace on $p_1$ is the base change of $t_q$ by step 4. For the compatibility of these particular arrows, take the projection map to be the adjunct of the pullback tensor comparison followed by counit tensor identity, and exchange to be the adjunct of the square comparison followed by the pulled-back counit, as in [def-kun-unbounded-exchange]. In the two possible orders (exchange then projection, projection then exchange), their transposes are equal by the cited tensor/exchange coherence. For a composite pushforward the evaluation is $\\varepsilon_{p_1}\\circ p_1^{-1}\\varepsilon_q$ after pullback composition: substituting this into the projection mate gives the iterated projection, since naturality moves $\\varepsilon_q$ past the intervening tensor comparison. This also explains the interchange of $qp_2$ and $qp_1$: both evaluate the same two coordinate pullbacks through their composite, with the square comparison inserted once. Naturality of the $p_1$ projection with respect to $\\delta$ makes the middle map, after the first projection identification, $1_M\\otimes R(p_1)_*\\delta$. Thus the entire composite is $Rq_*(1_M\\otimes(t_{p_1}R(p_1)_*\\delta))$, which is $1_{FM}$ by step 5. This is an equality of derived morphisms proved by mates, not by stalkwise detection.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "def-kun-unbounded-exchange",
-    "lem-amb-proper-coproducts-projection"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Proof, first triangle and canonical-mate interchange"
-   }
-  },
-  {
-   "text": "For the second triangle substitute $M=GK$ in step 6. The equality $p_1^{-1}q^{-1}K=p_2^{-1}q^{-1}K$ lets the $p_2$ projection formula take the common coefficient $q^{-1}K$ out of the pushforward. The canonical pullback tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] also identifies $p_1^{-1}A_P(1)$ and $p_2^{-1}A_P(1)$ with the one twist from $S$. Under these identifications, $\\eta_{GK}$ is identity on $q^{-1}K\\otimes A_P(1)[2]$ tensored with the arrow $R(p_2)_*\\delta:A_P\\to R(p_2)_*A_W(1)[2]$. The arrow $G\\epsilon_K$ is identity on the same coefficient tensored with $t_{p_2}$: step 4 identifies this trace with $q^{-1}t_q$, and the tensor/exchange coherence [lem-weil-pbc-ringed-exchange-tensor-coherence] identifies its inverse projection with the one used in step 6. Cancelling these canonical inverse projection and exchange maps yields\n$$G\\epsilon_K\\,\\eta_{GK}=1_{q^{-1}K\\otimes A_P(1)[2]}\\otimes(t_{p_2}R(p_2)_*\\delta)=1_{GK}.$$\nThe last equality is step 5. The interchange of the two copies of the unshifted twist is also identity: by [lem-asd-finite-etale-twist-line] it is locally free of rank one, and on a trivializing etale cover $ae\\otimes be\\mapsto be\\otimes ae=ab(e\\otimes e)$ by commutativity of $A$. Equality of these sheaf maps can be checked on that cover. Only shifts by $2$ are interchanged with tensor factors, so the Koszul factor is $(-1)^{2i}=1$ in every degree $i$ of $K$. With both triangles proved, the Hom bijections are explicitly $a:FM\\to K\\mapsto G(a)\\eta_M$ and $b:M\\to GK\\mapsto\\epsilon_KF(b)$. Naturality and the two triangles show that their composites are identities. This constructs $F\\dashv G$ with precisely the stated counit, for arbitrary unbounded $M,K$.",
-   "uses": [
-    "lem-amb-proper-coproducts-projection",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "lem-asd-finite-etale-twist-line"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Proof, second triangle and adjunction"
-   }
-  },
-  {
-   "text": "Finally the unit in step 6 commutes with a base change $S'\\to S$: the diagonal equation pulls back to the diagonal equation; its supported Kummer class pulls back by [lem-asd-ordinary-supported-kummer]; the tensor/projection comparison commutes with exchange by [lem-weil-pbc-ringed-exchange-tensor-coherence]. The remaining proper exchanges paste canonically. To see this on maps, expand each exchange as the mate in [def-kun-unbounded-exchange]. In two successive squares substitute the composite evaluation $\\varepsilon_v\\circ v^{-1}\\varepsilon_u$; naturality commutes the intermediate inverse-image comparison past $\\varepsilon_u$, and the adjacent unit/evaluation cancels by the original pullback/direct-image triangle. The remaining transpose is exactly the outer square comparison followed by its pulled-back counit. The adjunction bijection therefore identifies the pasted exchange with the outer exchange, including for unbounded arguments. Thus the unit and the counit of step 4 pull back to the very unit and counit constructed over $S'$. Along with step 4 this proves compatibility of the decomposition, trace and normalized adjunction. When $N=1$, $A=0$ and all derived categories are zero, so all constructions give the unique adjunction and the assertions still hold; the empty base is equally harmless.",
-   "uses": [
-    "lem-asd-ordinary-supported-kummer",
-    "lem-weil-pbc-ringed-exchange-tensor-coherence",
-    "def-kun-unbounded-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-    "place": "Base change of the diagonal-kernel construction and normalization"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-kun-unbounded-exchange",
-  "def-pc-divisor-line-bundle",
-  "def-sc-pic0",
-  "lem-amb-kummer-any-base",
-  "lem-amb-proper-coproducts-projection",
+  "def-asd-ordinary-finite-trace-counit",
   "lem-asd-etale-finite-twist-pullback",
-  "lem-asd-finite-etale-twist-line",
-  "lem-asd-ordinary-supported-kummer",
-  "lem-asd-projective-line-genus-zero",
-  "lem-asd-proper-finite-coefficient-extension",
-  "lem-kun-proper-base-change-torsion-ring",
-  "lem-kun-tensor-unit",
-  "lem-sc-pic-proper-decomposition",
-  "lem-sc-pic-proper-ntorsion",
-  "lem-sc-primitive-root",
-  "lem-sc-second-kummer-divisors",
-  "lem-weil-pbc-closed-immersion-proper",
-  "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-projective-space-standard-charts",
-  "lem-weil-pbc-ringed-exchange-tensor-coherence",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-asd-ordinary-finite-class-comparison",
+  "lem-asd-ordinary-finite-p1-diagonal-unit",
+  "lem-asd-ordinary-finite-p1-kummer-maps",
   "lemma-nagata-projective-space-base-change-proper",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "pqf-lem-locnoeth-lft",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "thm-sc-proper-cohomology"
+  "pqf-lem-locnoeth-lft"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-p1-adjunction.md",
-  "place": "Diagonal-kernel proof expanded for arbitrary finite ordinary etale coefficients; decomposition and trace follow the adjacent blueprint nodes; Stacks 03PL, 03RQ, 0F0C"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/thm-amb-p1-adjunction.proof.md",
+  "place": "B2 Lean assembly: canonical Chern comparison, cohomological decomposition, supported diagonal triangles, and formal trace square; source route retained"
  },
  "mathlib_searches": [
   {
@@ -424,5 +301,15 @@
   "date": "2026-10-15",
   "existing": false,
   "note": "The existence statement packages the canonical normalized arrows and all three base-change equations. The counit equation after precomposition with the ordered projection is equivalent to the displayed inverse-projection formula, by the recorded proper projection theorem."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261020T211629-L-3480845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

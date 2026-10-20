@@ -1,0 +1,141 @@
+{
+ "id": "lem-asd-ordinary-finite-class-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-asd-smooth-tensor",
+   "place": "Proof paragraphs 2--3: ordinary-etale projective-line input; bijective_extToSheafHOf and constants adjunction; supplies the canonical Chern representatives in parent step 2",
+   "via": [
+    "lem-asd-ordinary-finite-p1-adjunction"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "The normalized constant-module class comparison is bijective",
+ "statement": "Let A be a commutative ring and T a quasi-compact quasi-separated scheme. For every sheaf F of A-modules and n≥0, the class map of [def-asd-ordinary-finite-p1-kummer-class] from Hom_D(A_T,F[n]) to H^n(T,F underlying abelian sheaf), obtained by the forgetful Ext comparison and precomposition with the specified integral generator, is bijective. In particular the specified scalar Kummer class of O(1) has a unique derived module representative whenever the projective line is quasi-compact and quasi-separated.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "The Kummer Chern representative, using the already proved bijective_extToSheafHOf in lean/WeilConjectures/EtaleCohomology/Purity/Smooth/KummerBoundaryComparison.lean"
+ },
+ "stmt_deps": [
+  "def-asd-ordinary-finite-p1-kummer-class"
+ ],
+ "proof": [
+  {
+   "text": "The constant-sheaf/global-sections adjunction identifies maps A_T→F with A-linear maps A→Γ(T,F). Evaluation at 1 is a bijection, with inverse a↦a x. Likewise integral constant-sheaf maps correspond to sections by evaluation at the integer 1. Expanding the specified integral generator makes these two evaluations equal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "The Kummer Chern representative, using the already proved bijective_extToSheafHOf in lean/WeilConjectures/EtaleCohomology/Purity/Smooth/KummerBoundaryComparison.lean"
+   }
+  },
+  {
+   "text": "Apply the already proved adopted-library theorem AlgebraicGeometry.Etale.bijective_extToSheafHOf with this generator and the preceding degree-zero bijection. Its universal delta-functor comparison applies on a quasi-compact quasi-separated scheme in every degree. The displayed formula is exactly ordinaryFiniteClass after Ext.homEquiv.symm. Composition with this equivalence proves the claim. Surjectivity gives a representative of the fixed Kummer class; injectivity proves uniqueness of any representative satisfying the specified Chern predicate.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+    "place": "The Kummer Chern representative, using the already proved bijective_extToSheafHOf in lean/WeilConjectures/EtaleCohomology/Purity/Smooth/KummerBoundaryComparison.lean"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition.proof.md",
+  "place": "The Kummer Chern representative, using the already proved bijective_extToSheafHOf in lean/WeilConjectures/EtaleCohomology/Purity/Smooth/KummerBoundaryComparison.lean"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived Hom from the constant ring module sheaf to a module sheaf shifted n equals nth sheaf cohomology via the integral generator",
+   "results": "Sheaf.H and related cohomology definitions, plus generic Ext/cohomology equivalences. The required normalized module-forgetting comparison is instead the proved adopted-library bijective_extToSheafHOf.",
+   "date": "2026-10-21",
+   "verdict": "adopted-library match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.constantSheafAdj",
+   "results": "constantSheafAdj, its counit formula and related constant-sheaf criteria. Used the adjunction together with evaluation at one.",
+   "date": "2026-10-21",
+   "verdict": "used for the degree-zero comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Ext.*sheaf.*cohomology|homEquiv.*constantSheaf",
+   "results": "No Mathlib hits. Local source search found KummerBoundaryComparison.bijective_extToSheafHOf.",
+   "date": "2026-10-21",
+   "verdict": "adopted-library theorem used"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived morphisms from the constant module sheaf to a shifted sheaf equal sheaf cohomology via the integral generator",
+   "results": "Sheaf.H, Sheaf.ΓHomEquiv, constantSheaf, and generic derived cohomology classes. No normalized module-forgetting comparison; the adopted-library comparison is used.",
+   "date": "2026-10-21",
+   "verdict": "no direct match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Adjunction",
+  "date": "2026-10-21",
+  "group": "B2"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteClassComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/OrdinaryFiniteClassComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.ordinaryFiniteClass_bijective",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ordinaryFiniteClass_bijective",
+   "AlgebraicGeometry.Etale.existsUnique_ordinaryFiniteP1Chern"
+  ],
+  "statement": "theorem ordinaryFiniteClass_bijective (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) [CompactSpace T] [QuasiSeparatedSpace T] (F : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) (n : ℕ) : Function.Bijective (ordinaryFiniteClass A T F n)",
+  "branch": "sheaf-dag",
+  "by": "B2",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-asd-ordinary-finite-class-comparison",
+  "worker": "stage3 B2",
+  "summary": "Extracted the indicated source component from the existing item; its Lean interface and proof in words preserve the coefficient and canonical-map normalizations.",
+  "blueprint": "Proof paragraphs 2--3: ordinary-etale projective-line input; bijective_extToSheafHOf and constants adjunction; supplies the canonical Chern representatives in parent step 2",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261020T211629-L-3480845",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B2",
+  "result": "pass",
+  "landing": "20261020T211629-L-3480845",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
