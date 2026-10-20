@@ -23,7 +23,7 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationTraitDivisorCharts
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootProductChartStalkLocalization
-import Sheaf.AlgebraicGeometry.Morphisms.TraitDivisorChartSectionGenericFactor
+import WeilConjectures.AlgebraicGeometry.Morphisms.TraitDivisorChartSectionGenericFactor
 
 /-!
 # Localized tame root chart and its transverse generic factor
@@ -154,9 +154,17 @@ theorem GaloisCover.stalk_normalization_trait_section_localized_root_chart {S C 
   dsimp only at hlocal
   obtain ⟨k, R₀, hR₀, f₀, hf₀, P, hP, β, hβ, hflat, hJ⟩ := hlocal
   have hgeneric := GaloisCover.trait_divisor_chart_section_generic_factor
-    hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ
-    s hs hmin hdvr hn x hx R φ y ρ ϖ₀ hφ hy hϖ₀ hρ m e he α hα k
-  exact ⟨R₀, hR₀, f₀, e k, he k, hf₀, P, hP, β, hβ, hflat, hJ, hgeneric⟩
+    (G := G) c σ hσ j sη hsj Z U jU PA ψ hjU hψ s
+  dsimp only at hgeneric
+  have hgeneric2 := hgeneric x hx R φ y ρ ϖ₀ hφ hy hϖ₀ hρ m e α hα k
+  obtain ⟨A, hAd, hAdvr, δ, ι, hδ, hAmax, hcoeff, hcomm, ε, _, g, hg, hgπ⟩ := hgeneric2
+  have hϖ : algebraMap A (FractionRing A) (δ ϖ₀) ≠ 0 := by
+    refine (map_ne_zero_iff _ (IsFractionRing.injective A (FractionRing A))).mpr fun h0 ↦ ?_
+    exact IsDiscreteValuationRing.not_a_field' (R := A)
+      (by rw [hAmax, h0, Ideal.span_singleton_eq_bot])
+  exact ⟨R₀, hR₀, f₀, e k, he k, hf₀, P, hP, β, hβ, hflat, hJ, A, hAd, hAdvr,
+    FractionRing A, inferInstance, inferInstance, inferInstance, δ ϖ₀,
+    Units.mk0 _ hϖ, Spec.map (CommRingCat.ofHom ε), hAmax, rfl, g, hg, hgπ⟩
 
 
 end AlgebraicGeometry.Scheme
