@@ -195,6 +195,20 @@ def retire_delivery(who, m):
     log(f"delivery branch of {who} for {m} archived at refs/superseded/{who}/{m}/{head} (item abandoned)")
     return head
 
+_RETIRE = {}
+
+
+def retire_items() -> set[str]:
+    """the Sheaf copies of coord/retire-items.tsv (items of kind `retire`, tools/rework.py)"""
+    if "s" not in _RETIRE:
+        try:
+            _RETIRE["s"] = {l.split("\t")[2] for l in (WORK / "retire-items.tsv").read_text().splitlines()
+                            if l.strip() and not l.startswith("#") and len(l.split("\t")) > 2}
+        except OSError:
+            _RETIRE["s"] = set()
+    return _RETIRE["s"]
+
+
 def take(who, m, quiet=False, stage=None) -> bool:
     """`stage`: the stage the caller will work the item in (take-many --with-stage). 2026-10-19 (stale dispatch): the
     dispatcher claimed from its copy of coord/queue.tsv, a merge rewrote the queue meanwhile (stage 1 -> 2), and the
@@ -206,7 +220,8 @@ def take(who, m, quiet=False, stage=None) -> bool:
             print(f"{m} is already completed for stage {stage} (live node); nothing to claim for that stage")
         return False
     if li.file_of(m).is_file() and sorries(m) == 0 and repair_note(m).get('state') != 'released' \
-            and not any(l.split()[:1] == [m] for l in (WORK / 'repairs.txt').read_text().splitlines()):
+            and not any(l.split()[:1] == [m] for l in (WORK / 'repairs.txt').read_text().splitlines()) \
+            and m not in retire_items():   # 2026-10-20: a `retire` item (coord/retire-items.tsv) has no sorry to prove
         # launcher, 2026-10-16: a module proved on the main branch is not claimable even while the queue still lists it
         # (between a landing and the next queue refresh groups claimed just-proved modules and ended BLOCKED)
         if not quiet:
@@ -470,7 +485,7 @@ def main() -> int:
                 break
             if m in skip:
                 continue
-            if sorries(m) == 0 and m not in repair_items and m not in listed_repairs:  # finished since the queue was written
+            if sorries(m) == 0 and m not in repair_items and m not in listed_repairs and m not in retire_items():  # finished since the queue was written
                 # (an item of coord/repairs.txt is a repair even without a `sorry`: a false statement, a duplicate,
                 # undetermined data; 2026-10-14 all 25 queued repairs were skipped here and nobody could claim them)
                 continue

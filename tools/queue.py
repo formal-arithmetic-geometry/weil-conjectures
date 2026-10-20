@@ -242,6 +242,13 @@ def main() -> int:
         except OSError: return ""
     rows = [(c["item"], 3, "-", sum(qsorry(m) or 0 for m in c["members"]), "rework", f"cluster {len(c['members'])}")
             for c in rw_clusters]
+    # retire items (the human, 2026-10-20; coord/retire-items.tsv): after the rework items, before every other queue
+    rt_rows = rework.retire_rows()                       # open ones: every `after` copy gone
+    rt_all = rework.retire_rows(open_only=False)
+    rt_items = [m for m in sorted(rt_rows) if m not in blocked_m and m not in rw_rows]
+    rt_items.sort(key=lambda m: (int(rt_rows[m]["depth"]) if rt_rows[m]["depth"].isdigit() else 99, m))
+    rows += [(m, 3, rt_rows[m]["depth"] or "-", "", "retire", f"consumers {len(rt_rows[m]['consumers'])}") for m in rt_items]
+    items3 = [x for x in items3 if x[2] not in rt_all]   # a copy being retired is no proof item
     rows += [(i, 1, d if d < 10**6 else "-", "", dag_queue.audit_state(g.live[i]), "") for d, i in s1]
     rows += [(i, 2, h, "", "target-statement" if pri == 0 else "state", nb) for pri, h, i, nb in s2]
     rows += [(m, 3, _d(d), n, k, "route" if rd == 0 else rd) for _, d, m, n, k, rd in items3]

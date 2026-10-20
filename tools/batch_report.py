@@ -111,10 +111,13 @@ def live_batches(m):
         else: ok = m in own[b] or m in reach3.get(b, ()) or (b in t and not onown)   # own route; below its route sorries; a new sorry no own route knows yet
         if ok: out.add(b)
     return out
+retire_open = []
 rework_open = []   # 2026-10-20 (the human): rework items (tools/rework.py) are no batch's work; their own row below
 for r in rows(LIVE / "coord/queue.tsv"):
     if r[1] == "3" and len(r) > 4 and r[4] == "rework":
         rework_open.append(r[0]); continue
+    if r[1] == "3" and len(r) > 4 and r[4] == "retire":   # coord/retire-items.tsv: no batch's proof work
+        retire_open.append(r[0]); continue
     if r[1] == "3":
         try: n = int(r[3])
         except (IndexError, ValueError): n = 0
@@ -213,6 +216,10 @@ try:   # rework (the human, 2026-10-20): modules the scheduled upstream sync qua
         print(f"rework   total {len(_rows):>15}   = open {len(rework_open)} + waiting for deeper rework "
               f"{len(_rows) - len(rework_open) - len(_landed)} + fix landed, not yet verified {len(_landed)}; blocked by rework: "
               f"{len(_bn)} DAG nodes, {len(_bm)} modules (not in any queue until fixed)")
+    _rt = _rw.retire_rows(open_only=False)
+    if _rt:
+        print(f"retire   total {len(_rt):>15}   = open {len(retire_open)} + waiting for their `after` copies {len(_rt) - len(retire_open)} "
+              "(coord/retire-items.tsv: Sheaf copies switched to their twins and deleted)")
 except Exception as _e:   # the report never fails on the rework row
     print("rework: not available:", repr(_e)[:200])
 print("legend: open = claimable queue items now; waiting = certain own work of that stage not in the queue yet (stage 1: "

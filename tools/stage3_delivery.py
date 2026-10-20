@@ -311,6 +311,12 @@ def rework_quarantine(git, base: str, item: str) -> str | None:
     return None
 
 
+def retire_at(git, base: str) -> set[str]:
+    """the Sheaf copies coord/retire-items.tsv lists at `base` (items of kind `retire`)"""
+    return {l.split("\t")[2] for l in (git.show(base, "coord/retire-items.tsv") or "").splitlines()
+            if l.strip() and not l.startswith("#") and len(l.split("\t")) > 2}
+
+
 def rework_rows_at(git, base: str) -> dict[str, str]:
     """module -> quarantine path of every row of coord/rework.tsv at `base`"""
     out = {}
@@ -365,8 +371,14 @@ def read_delivery(git: s2.Git, ref: str, base: str, group: str, item: str, overr
     seen_item = False
     rw = rework_quarantine(git, base, item)   # the human, 2026-10-20: a module the upstream sync quarantined
     rw_all = rework_rows_at(git, base) if rw else {}   # a cluster delivery may restore other quarantined modules too
+    retire = item in retire_at(git, base)   # the human, 2026-10-20: a `retire` item deletes its own module
     for st in status:
         code, p = st[0], st[-1]
+        if code[0] == "D" and retire and p == item_file:
+            old = git.show(base, p)
+            D["modules"].append({"file": p, "module": item, "role": "deleted", "old": old, "text": None})
+            seen_item = True
+            continue
         if code[0] in "DR":
             f("a", f"{p}: the delivery deletes or renames a file (a module that leaves the reach is pruned by the "
                    "maintainer's queue, never deleted by a delivery)"); continue
@@ -457,6 +469,13 @@ def route_pivot_fails(D: dict) -> list[tuple[str, str]]:
 
 def check_lean(D, f, dmap):
     for m in D["modules"]:
+        if m["role"] == "deleted":   # a retired Sheaf copy: nothing may still import it
+            users = [u for u in importers(m["module"]) if u not in {x["module"] for x in D["modules"]}
+                     or next(x for x in D["modules"] if x["module"] == u)["text"] and m["module"] in s2.imports(
+                         next(x for x in D["modules"] if x["module"] == u)["text"])]
+            if users:
+                f("c", f"{m['file']}: deleted, but still imported by {', '.join(users[:6])} (switch them to the twin in this delivery)")
+            continue
         text, d, where = m["text"] or "", m["diff"], m["file"]
         if not s2.is_module(text):
             f("c", f"{where}: not a file of Lean's module system (the first command is `module`; a new module is written "

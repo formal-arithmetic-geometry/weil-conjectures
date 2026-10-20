@@ -371,6 +371,8 @@ def check(c: dict, classify: bool = True) -> dict:
     # stage3_delivery already refuses ordinary definition holes and new forbidden
     # keyword kinds. Supplement only its admit, quoted-name and data-field gaps.
     for module in D["modules"]:
+        if module["text"] is None:
+            continue
         missing = sl.missing_gate(module["old"], module["text"])
         if missing:
             raise Refuse(module["file"] + ": " + "; ".join(missing[:6]))
@@ -625,7 +627,10 @@ def land_one(plan: dict, batch_id: str) -> dict:
     try:
         for m in mods:
             if m["file"] in plan["write"]:
-                p = ROOT / m["file"]; p.parent.mkdir(parents=True, exist_ok=True); p.write_text(m["text"])
+                p = ROOT / m["file"]
+                if m["text"] is None:      # a retired Sheaf copy (coord/retire-items.tsv)
+                    p.unlink(missing_ok=True); continue
+                p.parent.mkdir(parents=True, exist_ok=True); p.write_text(m["text"])
         for rel, text in roots_add.items():
             (li.LEAN / rel).write_text(text)
         r = subprocess.run([sys.executable, "tools/landing.py", "finish", landing] + (["--set"] if is_set else []),
