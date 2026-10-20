@@ -124,7 +124,7 @@ theorem isFiniteSheaf_etaleSheafExtendScalars_obj
     rw [← ConcreteCategory.isFinitelyGenerated_iff_of_iso
       (((pointSmallEtale s).uliftSheafFiberIso.{u + 1} _).app F),
       ModuleCat.isFinitelyGenerated_iff] at h
-    have := ModuleCat.finite_extendScalars_obj φ (Φ.sheafFiber.obj F)
+    have := ModuleCat.finite_extendScalars_obj' φ (Φ.sheafFiber.obj F)
     exact ((ModuleCat.isFinitelyGenerated_iff _).2 this).of_iso
       (((etaleSheafExtendScalarsCompSheafFiberIso φ X Φ).app F).symm ≪≫
         ((pointSmallEtale s).uliftSheafFiberIso.{u + 1} _).app _)
