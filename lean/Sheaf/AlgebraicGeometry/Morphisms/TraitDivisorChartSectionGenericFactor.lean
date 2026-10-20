@@ -19,7 +19,7 @@ public import Mathlib.RingTheory.AdjoinRoot
 
 import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTraitSectionLift
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootProductChartBaseChangeFactor
-import Sheaf.AlgebraicGeometry.Morphisms.TraitNormalizationGenericSectionComparison
+import WeilConjectures.AlgebraicGeometry.Morphisms.TraitNormalizationGenericSectionComparison
 
 /-! Generic section factors of a supplied trait-divisor chart. 
 Source: Stacks Project, Tags 0EYH, 0EYI and 0EYJ.
@@ -32,6 +32,7 @@ universe u
 open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
 
+set_option linter.unusedVariables false in
 /-- Each supplied trait-divisor root factor restricts along the section to a
 root of a uniformizer over an unramified trait extension.
 
@@ -142,10 +143,10 @@ theorem GaloisCover.trait_divisor_chart_section_generic_factor {S C : Scheme.{u}
   have hθ : θ (ρ ϖ₀) = (π : K) := by
     change algebraMap A K (ι (ρ ϖ₀)) = algebraMap A K (δ ϖ₀)
     rw [hcoeff]
-  obtain ⟨b, β, hβ⟩ :=
+  obtain ⟨ε, _, β, hβ⟩ :=
     GaloisCover.trait_normalization_generic_section_comparison
-      hS c σ hσ G hG q j hCη sη hsq hsj Z U hηU jU PA ψ hjU hψ
-      s hs hmin hdvr A hAd K inferInstance inferInstance inferInstance δ hδ
+      c σ hσ j sη hsj Z U jU PA ψ hjU hψ s A K δ hδ
+  let b := Spec.map (CommRingCat.ofHom ε)
   have hbase : Spec.map (CommRingCat.ofHom θ) ≫ φ =
       Spec.map (CommRingCat.ofHom ((algebraMap A K).comp δ)) ≫ τ := by
     rw [show Spec.map (CommRingCat.ofHom θ) =
