@@ -60,7 +60,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean:104:0: error: Unexpected name `Unbounded` after `end`: The current section |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Coherence.lean:116:0: error: Unexpected name `Eta` after `end`: |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 32, stage 3 156 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 2, stage 2 31, stage 3 156 items.
 
 ## Stage 1: nodes to split (1)
 
@@ -71,7 +71,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 ## Stage 2: nodes to state (0)
 
 
-Not open yet: 300 nodes that below a finished node, not needed, 85 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 301 nodes that below a finished node, not needed, 85 nodes that wait for a statement dependency (bottom-up).
 
 ## Stage 3: modules to prove (30)
 
