@@ -143,14 +143,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageCoefficientComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageCoefficientComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.HigherDirectImageCoefficientComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/HigherDirectImageCoefficientComparison.lean",
   "declaration": "AlgebraicGeometry.higherDirectImage_coefficient_comparison",
-  "statement": "theorem higherDirectImage_coefficient_comparison\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (p : ℕ) :\n    ∃ c : ∀ V : Y.Opens,\n      Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι ⋙\n        RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p ⋙\n          forget₂ (ModuleCat.{u}\n            ((moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))\n              AddCommGrpCat.{u} ⟶\n      (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p ⋙\n        RingedSpace.openModuleSections Y.toRingedSpace V,\n      ∀ (N : X.Modules) (I : InjectiveResolution\n        (show SheafOfModules (moduleRings X.toRingedSpace) from N)) (V : Y.Opens),\n        let K := ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj I.cocomplex\n        ∃ e :\n          ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι ⋙\n            RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p ⋙\n              forget₂ (ModuleCat.{u}\n                ((moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))\n                  AddCommGrpCat.{u}).obj N) ≅\n            (Scheme.Modules.sectionCohomologyPresheaf K p).presheaf.obj (Opposite.op V),\n          (c V).app N = e.hom ≫\n            ((PresheafOfModules.toPresheaf (moduleRings Y.toRingedSpace).obj).map\n              (Scheme.Modules.sectionCohomologyTheta K p ≫\n                (SheafOfModules.forget (moduleRings Y.toRingedSpace)).map\n                  (I.isoRightDerivedObj\n                    (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) p).inv)).app\n                      (Opposite.op V)",
+  "statement": "theorem higherDirectImage_coefficient_comparison\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (p : ℕ) :\n    ∃ c : ∀ V : Y.Opens,\n      Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι ⋙\n        RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p ⋙\n          forget₂ (ModuleCat.{u}\n            ((moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))\n              AddCommGrpCat.{u} ⟶\n      (RingedSpace.moduleDirectImage f.toLRSHom.toShHom).rightDerived p ⋙\n        RingedSpace.openModuleSections Y.toRingedSpace V,\n      ∀ (N : X.Modules) (I : InjectiveResolution\n        (show SheafOfModules.{u} (moduleRings X.toRingedSpace) from N)) (V : Y.Opens),\n        let K := ((RingedSpace.moduleDirectImage f.toLRSHom.toShHom).mapHomologicalComplex\n          (ComplexShape.up ℕ)).obj I.cocomplex\n        ∃ e :\n          ((Scheme.Modules.restrictFunctor (f ⁻¹ᵁ V).ι ⋙\n            RingedSpace.moduleCohomology (f ⁻¹ᵁ V).toScheme.toRingedSpace p ⋙\n              forget₂ (ModuleCat.{u}\n                ((moduleRings (f ⁻¹ᵁ V).toScheme.toRingedSpace).obj.obj (Opposite.op ⊤)))\n                  AddCommGrpCat.{u}).obj N) ≅\n            (Scheme.Modules.sectionCohomologyPresheaf K p).presheaf.obj (Opposite.op V),\n          (c V).app N = e.hom ≫\n            ((PresheafOfModules.toPresheaf (moduleRings Y.toRingedSpace).obj).map\n              (Scheme.Modules.sectionCohomologyTheta K p ≫\n                (SheafOfModules.forget (moduleRings Y.toRingedSpace)).map\n                  (I.isoRightDerivedObj\n                    (RingedSpace.moduleDirectImage f.toLRSHom.toShHom) p).inv)).app\n                      (Opposite.op V)",
   "branch": "sheaf-dag",
-  "by": "A2",
-  "date": "2026-10-13"
+  "by": "M9",
+  "date": "2026-10-21",
+  "note": "Retired the Sheaf copy in favor of its adopted source-library twin. A compiler check applied the source theorem to the full original type, including arbitrary degree, inverse-image opens and resolutions. The elaborated statement is unchanged; the source spells out SheafOfModules.{u} where the copy inferred that same universe."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -163,13 +164,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Y3",
+  "reviewer": "C-3a754",
+  "group": "M9",
   "result": "pass",
-  "landing": "20261013T060432-L-586812",
+  "landing": "20261020T221257-L-4168206",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Old Sheaf type of higherDirectImage_coefficient_comparison proved by the WeilConjectures twin (shared constants confirmed by importing Sheaf.Paper.HigherDirectImagePresheaf with the twin, axioms clean); node lean record = verbatim twin statement; no importers of the retired module"
  }
 }
