@@ -17,11 +17,12 @@
  ],
  "proof": [
   {
-   "text": "Put $G_m=J^m/J^{m+1}$ for $m\\geq0$. Let $S_m$ be the finite set of tuples $\\alpha\\in\\mathbf N^b$ with $|\\alpha|=m$: each coordinate lies between $0$ and $m$, so this is a subset of $\\{0,\\ldots,m\\}^b$. The assumed graded isomorphism restricts in degree $m$ to the $C$-linear isomorphism $C^{S_m}\\xrightarrow{\\sim}G_m$ sending the coordinate vector $e_\\alpha$ to $[f^\\alpha]$. This follows from the monomial description in [def-weil-pbc-mv-polynomial-ring] and the homogeneous components in [def-weil-pbc-associated-graded-ring]. Hence $G_m$ is flat over $R$ by [lem-weil-pbc-finite-product-flat-modules], since $C$ is flat. Flatness passes across this isomorphism: the induced tensor maps are inverse on pure tensors, so injectivity is unchanged. The empty set $S_m$ gives the zero module, which is covered by the finite-product lemma.",
+   "text": "Put C=A/J. The polynomial ring C[T] is free over C, hence flat over C, and is flat over R by transitivity [lem-weil-pbc-flat-ring-map-comp]. Regard the assumed graded polynomial bijection as an R-linear equivalence: the quotient-algebra scalar action agrees with the natural action on each representative. Flatness passes across the equivalence. Each homogeneous summand of the associated graded ring is a direct summand and hence flat (Module.Flat.directSum_iff). This proves flatness of every J^n/J^(n+1) without enumerating the finite degree-n monomials.",
    "uses": [
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-flat-ring-map-comp",
     "def-weil-pbc-mv-polynomial-ring",
-    "def-weil-pbc-associated-graded-ring",
-    "lem-weil-pbc-finite-product-flat-modules"
+    "def-weil-pbc-associated-graded-ring"
    ],
    "elementary": false,
    "source": {
@@ -30,9 +31,36 @@
    }
   },
   {
-   "text": "For $m\\geq1$ put $Q_m=A/J^m$. We prove by induction on $m\\geq1$ that $Q_m$ is flat over $R$. The base case is $Q_1=C$, flat by hypothesis. At the induction step the quotient maps give $0\\to G_m\\xrightarrow{i}Q_{m+1}\\xrightarrow{q}Q_m\\to0$: a class of $a\\in A$ maps to zero in $Q_m$ exactly when $a\\in J^m$, and its class in $Q_{m+1}$ depends on $a$ modulo $J^{m+1}$. Thus the kernel is precisely $G_m$, with the indicated injection. These identifications use [def-weil-pbc-algebra-hom-quotient] and [def-weil-pbc-associated-graded-ring]. Step 1 supplies flatness of $G_m$; the induction hypothesis supplies flatness of $Q_m$.",
+   "text": "Every A/J^m is R-flat. For m=0 the quotient is zero; for m=1 this is the hypothesis. For n>=1 use the exact sequence 0 -> J^n/J^(n+1) -> A/J^(n+1) -> A/J^n -> 0. The first map takes the class of x to the class of its value; its kernel is zero, and a class dies under the last map precisely when its representative belongs to J^n. Extensions of flat modules are flat: tensor an arbitrary injection with this sequence, use right exactness and flat-quotient tensor injectivity, and chase an element using flatness of the outer terms. This chase is already proved as Module.Flat.of_exact_of_flat_of_flat in WeilConjectures.Mathlib.RingTheory.Flat.Equalizer.",
    "uses": [
     "def-weil-pbc-algebra-hom-quotient",
+    "def-weil-pbc-associated-graded-ring",
+    "def-weil-pbc-flat-ring-map",
+    "lem-weil-pbc-tensor-right-exact",
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CEP, lemma-relative-regular-immersion-algebra, proof of part (1), lines 8004-8012; notation R,A,R' here corresponds to A,B,A' there."
+   }
+  },
+  {
+   "text": "Let B=A tensor_R R' and K=(f_j tensor 1). Extension sends J to K and J^n to K^n. The image of u_n:J^n tensor R' -> B is K^n (Ideal.map_includeLeft_eq and Ideal.map_pow); the tensor inclusion is injective because A/J^n is R-flat, by lem-weil-pbc-flat-quotient-tensor-injective. The maps u_(n+1) and u_n commute with the inclusion of ideal powers, as is checked on pure tensors.",
+   "uses": [
+    "def-weil-pbc-module-tensor-product",
+    "lem-weil-pbc-flat-quotient-tensor-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0CEP, lemma-relative-regular-immersion-algebra, proof of part (1), lines 8004-8012; notation R,A,R' here corresponds to A,B,A' there."
+   }
+  },
+  {
+   "text": "For each monomial index d compose J^n -> J^n/J^(n+1) -> gr_J(A) with the inverse of the assumed polynomial bijection and with coefficient projection. This gives an R-linear map c_d:J^n -> C which kills J^(n+1). If |e|=n, then c_d(a*f^e) is [a] for e=d and zero otherwise, since the original polynomial map sends [a]*T^e to the class of a*f^e in degree n. All maps here are explicitly constructed from the given bijection.",
+   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-associated-graded-ring"
    ],
    "elementary": true,
@@ -42,49 +70,12 @@
    }
   },
   {
-   "text": "Fix this induction step and any injection $u:X\\hookrightarrow Y$ of $R$-modules. Tensor the short exact sequence of Step 2 on the left with $X$ and $Y$. By [lem-weil-pbc-flat-quotient-tensor-injective] both rows are short exact because their last term $Q_m$ is flat. If $z\\in X\\otimes_RQ_{m+1}$ dies in $Y\\otimes_RQ_{m+1}$, its image in $X\\otimes_RQ_m$ vanishes by flatness of $Q_m$. Exactness lifts $z$ to $w\\in X\\otimes_RG_m$. The image of $w$ in $Y\\otimes_RG_m$ is zero, since its image in the middle of the bottom row is zero and that row starts with an injection. Flatness of $G_m$ now gives $w=0$, hence $z=0$. Commutativity of these squares is the equality on pure tensors $x\\otimes v\\mapsto u(x)\\otimes i(v)$ or $u(x)\\otimes q(v)$, using [def-weil-pbc-module-tensor-product]. By [def-weil-pbc-flat-ring-map] this proves $Q_{m+1}$ flat, completing the induction. This is the explicit flat-extension chase behind Algebra Tag 00HM, lemma-flat-ses, first assertion; it uses only the cited flat-quotient exactness and the definition of flatness.",
+   "text": "Take a homogeneous degree-n polynomial p over B whose evaluation lies in K^(n+1). Its finite monomial expansion lifts to x=sum_e (multiplication by f^e tensor R')(coefficient_e(p)) in J^n tensor R'. The evaluation also lifts to y in J^(n+1) tensor R'. Since u_n is injective, x equals the inclusion of y. Applying c_d tensor R' makes the latter zero and makes the former the image of coefficient_d(p) under (A -> C) tensor R', by the delta formula of the preceding step. Thus this tensor image is zero. The canonical quotient tensor equivalence C tensor R' = B/K, sending [a] tensor s to [a tensor s], now gives coefficient_d(p) in K. Its formula is checked on pure tensors (Algebra.TensorProduct.quotientTensorEquiv_apply_tmul).",
    "uses": [
-    "lem-weil-pbc-flat-quotient-tensor-injective",
-    "def-weil-pbc-flat-ring-map",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0CEP, lemma-relative-regular-immersion-algebra, proof of part (1), lines 8004-8012; notation R,A,R' here corresponds to A,B,A' there."
-   }
-  },
-  {
-   "text": "For every $m\\geq0$ let $u_m:J^m\\otimes_RR'\\to A'$ send $x\\otimes s$ to $x\\otimes s$ in $A'$. Its image is an ideal: multiplication by $a\\otimes t$ sends $x\\otimes s$ to $ax\\otimes ts$, and arbitrary elements are finite sums of pure tensors. For $m\\geq1$, the definition of ideal multiplication in [def-weil-pbc-algebra-hom-quotient] implies that $J^m$ is generated by the $f^\\alpha$ with $|\\alpha|=m$, by expanding a product of $m$ elements of the generated ideal. Every $x\\otimes s$ in the image is consequently a finite sum of $(a\\otimes s)(f^\\alpha\\otimes1)$; conversely $f^\\alpha\\otimes1$ lies in the image. Therefore $\\operatorname{im}u_m=J'^m$. For $m=0$, $u_0:A\\otimes_RR'\\to A'$ is the identity and its image is $A'=J'^0$. This uses only the tensor generators of [def-weil-pbc-module-tensor-product] and the multiplication specified in the item.",
-   "uses": [
+    "def-weil-pbc-module-tensor-product",
     "def-weil-pbc-algebra-hom-quotient",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0CEP, lemma-relative-regular-immersion-algebra, proof of part (1), lines 8004-8012; notation R,A,R' here corresponds to A,B,A' there."
-   }
-  },
-  {
-   "text": "For $m\\geq1$, apply [lem-weil-pbc-flat-quotient-tensor-injective] to $0\\to J^m\\to A\\to Q_m\\to0$, tensoring with $R'$. Its last term is flat by Steps 2-3. The tensor order can be reversed by $s\\otimes x\\mapsto x\\otimes s$, whose inverse is the same formula in the other direction, well defined by the balanced relations of [def-weil-pbc-module-tensor-product]. It follows that $u_m$ is injective. Combined with Step 4, $u_m$ identifies $J^m\\otimes_RR'$ with the actual submodule $J'^m\\subseteq A'$. The case $m=0$ is the identity. In particular the case $m=1$ identifies $C\\otimes_RR'$ with $C'=A'/J'$ via $\\bar a\\otimes s\\mapsto\\overline{a\\otimes s}$. The map is a ring isomorphism: it is bijective by exactness, and respects products and the unit on pure tensors by the multiplication specified in the item and the quotient operations of [def-weil-pbc-algebra-hom-quotient].",
-   "uses": [
-    "lem-weil-pbc-flat-quotient-tensor-injective",
-    "def-weil-pbc-module-tensor-product",
-    "def-weil-pbc-algebra-hom-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0CEP, lemma-relative-regular-immersion-algebra, proof of part (1), lines 8004-8012; notation R,A,R' here corresponds to A,B,A' there."
-   }
-  },
-  {
-   "text": "Tensor $J^{m+1}\\to J^m\\to G_m\\to0$ with $R'$ for each $m\\geq0$. By [lem-weil-pbc-tensor-right-exact], its last term is the cokernel of the first arrow. Under the injections of Step 5 the first arrow is exactly the inclusion $J'^{m+1}\\to J'^m$: on a generator $x\\otimes s$ both composites into $A'$ give $x\\otimes s$. Thus the cokernel identification gives a bijective linear map $\\beta_m:G_m\\otimes_RR'\\xrightarrow{\\sim}J'^m/J'^{m+1}$ with $\\beta_m([x]\\otimes s)=[x\\otimes s]$. This formula is balanced and respects the quotient, since a representative from $J^{m+1}$ maps into $J'^{m+1}$. It is $C'$-linear under $C'=C\\otimes_RR'$ from Step 5: on pure coefficient tensors, both orders of multiplication send $(\\bar a\\otimes t)([x]\\otimes s)$ to $[ax\\otimes ts]$, using [def-weil-pbc-associated-graded-ring].",
-   "uses": [
     "lem-weil-pbc-tensor-right-exact",
-    "def-weil-pbc-associated-graded-ring",
-    "def-weil-pbc-module-tensor-product"
+    "def-weil-pbc-mv-polynomial-ring"
    ],
    "elementary": false,
    "source": {
@@ -93,22 +84,11 @@
    }
   },
   {
-   "text": "Tensor the isomorphism $C^{S_m}\\xrightarrow{\\sim}G_m$ of Step 1 with $R'$. It stays invertible without a flatness hypothesis: tensor its inverse and use compatibility with composition from [def-weil-pbc-module-tensor-product]. There is a direct coordinate isomorphism $(C^{S_m})\\otimes_RR'\\xrightarrow{\\sim}(C\\otimes_RR')^{S_m}$, taking $v\\otimes s$ to $(v_\\alpha\\otimes s)_\\alpha$. Its inverse includes each coordinate into the tensor by $(c\\otimes s)_\\alpha\\mapsto(ce_\\alpha)\\otimes s$ and sums over the finite set $S_m$. The two composites are identities on pure tensors and coordinate vectors. Using Step 5 and composing with $\\beta_m$, this gives a $C'$-linear bijection $C'^{S_m}\\xrightarrow{\\sim}J'^m/J'^{m+1}$ which sends $e_\\alpha$ to $[f'^\\alpha]$; indeed $f^\\alpha\\otimes1=f'^\\alpha$ by the multiplication of $A'$. Its scalar extension to arbitrary coordinate coefficients uses the $C'$-linearity checked in Step 6. By [def-weil-pbc-mv-polynomial-ring], this is precisely the degree-$m$ part of the canonical polynomial homomorphism in the conclusion.",
+   "text": "The resulting homogeneous relation criterion implies bijectivity of the canonical polynomial map over B/K. For injectivity, lift coefficients of a homogeneous polynomial over B/K to B with the same support. Vanishing of its graded image means that its evaluation belongs to the next ideal power. The criterion says every lifted coefficient belongs to K, hence the original homogeneous polynomial is zero. Apply this to each homogeneous component. For surjectivity, each representative in K^n is the evaluation of a homogeneous degree-n polynomial by Ideal.mem_span_pow_iff_exists_isHomogeneous; reduce coefficients modulo K and sum the finitely many graded components. This proves the given canonical algebra map bijective, also when b=0 or the quotient ring is zero.",
    "uses": [
-    "def-weil-pbc-module-tensor-product",
-    "def-weil-pbc-mv-polynomial-ring"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0CEP, lemma-relative-regular-immersion-algebra, proof of part (1), lines 8004-8012; notation R,A,R' here corresponds to A,B,A' there."
-   }
-  },
-  {
-   "text": "The canonical homomorphism is graded and its degree-$m$ part is bijective by Step 7. It is therefore bijective on the whole ring: a polynomial in its kernel has each homogeneous part zero by injectivity in that degree, while an element of the target is a finite sum of homogeneous components by [def-weil-pbc-associated-graded-ring], and choosing preimages of these finitely many components gives a polynomial preimage. The inverse of this bijective algebra homomorphism is an algebra homomorphism, since applying the injective original map verifies addition, multiplication, scalar multiplication and the unit. Hence it is the required canonical graded $C'$-algebra isomorphism. This also covers $b=0$ (only the degree-zero monomial remains) and $C'=0$ (every coefficient and homogeneous piece is zero).",
-   "uses": [
+    "def-weil-pbc-mv-polynomial-ring",
     "def-weil-pbc-associated-graded-ring",
-    "def-weil-pbc-mv-polynomial-ring"
+    "def-weil-pbc-algebra-hom-quotient"
    ],
    "elementary": true,
    "source": {
@@ -118,19 +98,20 @@
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-flat-ring-map",
+  "lem-weil-pbc-flat-ring-map-comp",
   "def-weil-pbc-mv-polynomial-ring",
   "def-weil-pbc-associated-graded-ring",
-  "lem-weil-pbc-finite-product-flat-modules",
   "def-weil-pbc-algebra-hom-quotient",
+  "lem-weil-pbc-tensor-right-exact",
   "lem-weil-pbc-flat-quotient-tensor-injective",
-  "def-weil-pbc-flat-ring-map",
-  "def-weil-pbc-module-tensor-product",
-  "lem-weil-pbc-tensor-right-exact"
+  "def-weil-pbc-module-tensor-product"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0CEP, lemma-relative-regular-immersion-algebra, proof of part (1), lines 8004-8012; notation R,A,R' here corresponds to A,B,A' there."
+  "place": "Tag 0CEP, lemma-relative-regular-immersion-algebra, proof of part (1), lines 8004-8012; notation R,A,R' here corresponds to A,B,A' there.",
+  "note": "K1 stage 3: the ideal-power flatness and tensor-injectivity argument of 0CEP, implemented using coefficient maps from the inverse graded polynomial bijection rather than a separate graded base-change equivalence. All steps are proved in Lean; no new open statement."
  },
  "mathlib_searches": [
   {
@@ -287,5 +268,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "Uses the already landed canonical polynomial map, which accepts every finite sequence without a regularity hypothesis. Bijectivity of this fixed degree-preserving algebra homomorphism is the canonical graded-algebra isomorphism condition."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K1",
+  "result": "pass",
+  "landing": "20261020T051436-L-1682894",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
