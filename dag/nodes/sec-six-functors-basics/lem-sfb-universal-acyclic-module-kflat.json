@@ -15,19 +15,18 @@
  ],
  "proof": [
   {
-   "text": "We first record explicitly how filtered colimits preserve acyclicity. Let $(C_i^\\bullet)$ be a diagram of acyclic module complexes indexed by a small nonempty directed set, and form its degreewise module colimit $C^\\bullet$ with differential induced by the $d_{C_i}$. By [lem-weil-pbc-filtered-colimit-modules-elementwise], a cycle $z\\in C^r$ has a representative $x\\in C_i^r$. The equality $dz=0$ means that the image of $d x$ is zero at some later stage $j\\ge i$. Thus the image $x_j$ is a cycle in $C_j^r$, hence $x_j=d y_j$ for some $y_j\\in C_j^{r-1}$. The image of $y_j$ is a primitive for $z$. Every cycle is therefore a boundary, in every integer degree; no boundedness is used.",
+   "text": "Filtered colimits of acyclic module complexes are acyclic. The private proved helper acyclic_of_filtered_colimit forms the short complex of functors in degrees r-1,r,r+1, proves its exactness by evaluating at every stage, and applies Mathlib colim.exact_mapShortComplex. ModuleCat.AB supplies exact filtered colimits; AB5OfSize_shrink also supplies the integer-indexed case. This replaces the elementwise cycle calculation by the existing exact-colimit API.",
    "uses": [
-    "lem-weil-pbc-filtered-colimit-modules-elementwise",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0E8F, filtered-colimit reductions; elementary cycle proof of Tag 00DB using Tags 00D6 and 00D7"
+    "place": "Tag 0E8F, filtered-colimit reductions; exactness of filtered colimits (Algebra Tag 00DB)."
    }
   },
   {
-   "text": "For the rest of the proof write $T(N^\\bullet)=\\operatorname{Tot}(N^\\bullet\\otimes_A E^\\bullet)$, with the direct sums and differential of [def-pc-tensor-complex-sheaves]. This functor commutes with degreewise colimits over any small directed set. Indeed [lem-weil-pbc-tensor-commutes-with-colimits] gives the comparison in each bidegree $(p,q)$. Direct sums commute with colimits: giving a map from either iterated colimit to a module $B$ is exactly giving maps $N_i^p\\otimes_A E^q\\to B$ compatible in $i$, one for each $p+q=r$. This proves the comparison isomorphism in total degree $r$. On a pure tensor $x\\otimes e$ it sends the class to $[x]\\otimes e$, so the two differential terms are sent to $[d x]\\otimes e+(-1)^p[x]\\otimes d e$. Thus these degreewise isomorphisms are isomorphisms of complexes, natural in the diagram.",
+   "text": "For fixed E, use Functor.map₂HomologicalComplex with curriedTensor and its flip. The existing BifunctorColimits instances show that each resulting total-tensor functor preserves colimits because tensoring modules preserves colimits. The single-degree embedding also preserves colimits. All comparisons are isomorphisms of complexes, so the signed differentials are included.",
    "uses": [
     "def-pc-tensor-complex-sheaves",
     "lem-weil-pbc-tensor-commutes-with-colimits"
@@ -35,58 +34,23 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0E8F, repeated tensor-colimit comparisons; Tag 00DD, lemma-tensor-products-commute-with-limits"
+    "place": "Tag 0E8F and Algebra Tag 00DD."
    }
   },
   {
-   "text": "Let $M$ be any $A$-module. Apply [lem-trf-module-finitely-presented-directed-colimit] with $R=A$ to write $M=\\varinjlim_i M_i$ over a small nonempty directed partially ordered set, with all $M_i$ finitely presented. The hypothesis says that $\\operatorname{Tot}(E^\\bullet\\otimes_A M_i[0])$ is acyclic. The ordinary module interchange $m\\otimes e\\mapsto e\\otimes m$ identifies $T(M_i[0])$ with that complex: the degree of $m$ is zero, so both differentials are $m\\otimes e\\mapsto m\\otimes d e$. Step 2 gives $T(M[0])=\\varinjlim_i T(M_i[0])$, and step 1 makes this acyclic. In particular the tensor test now holds for every module, without requiring that the modules themselves be flat.",
+   "text": "For every module M, apply Module.exists_directed_colimit_finitePresentation [lem-trf-module-finitely-presented-directed-colimit]. Map its colimit cocone through the single-degree embedding and left tensor by E; every stage is acyclic by the hypothesis. Step 1 proves the colimit is acyclic. The cocone vertex is ULift M, and the real isomorphism ULift.moduleEquiv transports the result to M. The private acyclic_of_iso helper transports zero homology along any isomorphism.",
    "uses": [
     "lem-trf-module-finitely-presented-directed-colimit",
     "def-pc-tensor-complex-sheaves"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0E8F, first paragraph, using Tag 00HA, lemma-module-colimit-fp"
-   }
-  },
-  {
-   "text": "We prove the stronger intermediate claim that $T(N^\\bullet)$ is acyclic for every bounded complex $N^\\bullet$, whether or not $N^\\bullet$ is acyclic. For a complex supported only in degree $a$, write its unique module as $M$ (the notation is $M[-a]$). Its total tensor with $E$ has degree-$r$ term $M\\otimes_A E^{r-a}$ and differential $(-1)^a(1\\otimes d_E)$. Multiplication of a differential by the unit $(-1)^a$ changes neither its kernel nor its image. Its cohomology therefore vanishes by step 3. The zero complex has zero total tensor as well. These give the zero-term and one-term base cases for induction on the number of degrees in a supporting interval $[a,b]$.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-abstract-derived-category"
-   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0E8F, bounded-complex induction, base cases made explicit"
+    "place": "Tag 0E8F, first paragraph; Algebra Tag 00HA."
    }
   },
   {
-   "text": "For the induction step let $N^r=0$ outside $[a,b]$, where $a<b$, and put $N_{>a}^r=N^r$ for $r>a$ and zero otherwise, with inherited differentials. The inclusion and the projection onto $N^a[-a]$ are chain maps and give $0\\to N_{>a}\\to N\\to N^a[-a]\\to0$, split in each degree. Tensoring its degree-$p$ row with $E^q$ preserves the splitting: the row is the inclusion/projection sequence for a direct sum, and the inverse direct-sum maps on tensors follow from bilinearity. Taking the direct sum over $p+q=r$ gives a split exact row in every total degree $r$. The tensor differential commutes with the inclusion and projection by the formula in [def-pc-tensor-complex-sheaves]. Apply [lem-weil-pbc-complex-ses-homology-long-exact] to this short exact sequence of total complexes. Induction makes $T(N_{>a})$ acyclic, and step 4 makes $T(N^a[-a])$ acyclic. Exactness of $0=H^rT(N_{>a})\\to H^rT(N)\\to H^rT(N^a[-a])=0$ gives $H^rT(N)=0$. This proves the bounded-complex claim for every finite supporting interval.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-complex-ses-homology-long-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0E8F, final induction using the degreewise split truncation sequence; homology.tex Tag 0117"
-   }
-  },
-  {
-   "text": "Now let $L^\\bullet$ be bounded above, with $L^r=0$ for $r>b$. For $n\\in\\mathbf N$ define $B_n^r=L^r$ when $r\\ge b-n$ and $B_n^r=0$ otherwise, with the inherited differentials. These are subcomplexes with chain inclusions $B_n\\to B_{n+1}\\to L$, and each is supported in $[b-n,b]$. For fixed $r$, the diagram of terms is eventually the constant module $L^r$ with identity transition maps. Its colimit is $L^r$: compatible maps out of the terms are uniquely determined by that eventual value. The differentials also become those of $L$, so $L=\\varinjlim_{n\\in\\mathbf N} B_n$ degreewise. Step 5 gives acyclicity of every $T(B_n)$, step 2 identifies their colimit with $T(L)$, and step 1 proves that $T(L)$ is acyclic. No acyclicity of the brutal truncations $B_n$ was assumed.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0E8F, second reduction to bounded complexes; homology.tex Tag 0118, stupid truncations"
-   }
-  },
-  {
-   "text": "Finally let $F^\\bullet$ be arbitrary. For $n\\in\\mathbf N$, define $U_n^r=F^r$ for $r<n$, $U_n^n=\\ker(d_F^n)$, and $U_n^r=0$ for $r>n$. The differential into degree $n$ lands in this kernel because $d_F^n d_F^{n-1}=0$; the differential out of it is zero. Inclusions $U_n\\to U_{n+1}\\to F$ are chain maps, by that same kernel equation. Each $U_n$ is bounded above. At any fixed degree $r$, once $n>r$ the term and differential agree with those of $F$ and the transition maps are identities. The same eventual-value universal-property argument as in step 6 gives $F=\\varinjlim_{n\\in\\mathbf N}U_n$ degreewise. Step 6 makes each $T(U_n)$ acyclic. Steps 2 and 1 now make $T(F)$ acyclic. This establishes the stronger conclusion for every complex $F$, including every acyclic test complex.",
+   "text": "The private proved helper acyclic_all_of_single works for a colimit-preserving cochain functor induced by a triangulated functor on the homotopy category. Take the inverse image of subcategoryAcyclic under that functor. It is a triangulated subcategory. HomotopyCategory.mem_subcategory_of_strictly_bounded proves membership for every bounded complex once it holds for its terms in degree zero. The existing source proof performs exactly the shift and degreewise-split brutal-truncation induction of Stacks. Transport membership through the quotient comparison to obtain acyclicity of the image complex. Thus the zero and single-term cases and finite-length induction are supplied by an already proved source declaration, without a separate homology-long-exact-sequence dependency.",
    "uses": [
     "def-weil-abstract-derived-category",
     "def-pc-tensor-complex-sheaves"
@@ -94,18 +58,42 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0E8F, canonical upper-truncation reduction; homology.tex Tag 0118, canonical cochain truncations"
+    "place": "Tag 0E8F, bounded-complex induction using the split brutal-truncation sequence."
    }
   },
   {
-   "text": "For every acyclic complex $F$ of $A$-modules, step 7 proves that $\\operatorname{Tot}(F\\otimes_A E)$ is acyclic. This is precisely the defining test for K-flatness in [def-pc-module-kflat-complex]. Thus $E$ is K-flat, with no restriction on its bounds or on the flatness of its individual terms.",
+   "text": "For a bounded-above L, use L.coconeStupidFiltrationGE and L.isColimitCoconeStupidFiltrationGE, reindexed along Int.opEquivalence.symm. Every stage is a bounded brutal lower truncation, hence its image is acyclic by step 4. Preservation of this colimit and step 1 prove acyclicity of the image of L. No acyclicity of the brutal truncations is required.",
    "uses": [
-    "def-pc-module-kflat-complex"
+    "def-pc-tensor-complex-sheaves"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/more-algebra.tex",
-    "place": "Tag 0E8F, conclusion via Tag 06XZ, definition-K-flat"
+    "place": "Tag 0E8F, reduction from bounded-above to bounded complexes; Homology Tag 0118."
+   }
+  },
+  {
+   "text": "For arbitrary K, use the existing good upper-truncation diagram K.filtrationLE and its colimit cocone K.isColimitFiltrationLECocone. Every truncation K.truncLE j is bounded above, so steps 5, 2 and 1 prove that its image under the functor is acyclic. This proves the stronger assertion that the image of every complex is acyclic.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E8F, reduction by canonical upper truncations; Homology Tag 0118."
+   }
+  },
+  {
+   "text": "Apply steps 4-6 first to left tensor by E. For right tensor, obtain the all-module degree-zero hypothesis from step 3 using mapBifunctorSingle₂Iso, the ordinary module braiding (mapped to complexes), and the inverse of mapBifunctorSingle₁Iso. Then apply the same helper to right tensor. Both functors descend to triangulated functors on homotopy categories via bifunctorMapHomotopyCategory. HomotopyCategory.preservesQuasiIso_iff_preserves_acyclic converts their acyclic-image assertions into preservation of quasi-isomorphisms, and Functor.preservesQuasiIso_iff_of_factors transports this to cochain complexes. The conjunction is definitionally quasiIso.kFlat E [def-pc-module-kflat-complex].",
+   "uses": [
+    "def-pc-module-kflat-complex",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0E8F, conclusion via the K-flat definition (Tag 06XZ) and tensor symmetry."
    }
   }
  ],
@@ -114,14 +102,12 @@
   "def-pc-tensor-complex-sheaves",
   "def-weil-abstract-derived-category",
   "lem-trf-module-finitely-presented-directed-colimit",
-  "lem-weil-pbc-complex-ses-homology-long-exact",
-  "lem-weil-pbc-filtered-colimit-modules-elementwise",
   "lem-weil-pbc-tensor-commutes-with-colimits"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0E8F, lemma-universally-acyclic-K-flat; filtered-colimit and bounded-complex arguments expanded using algebra.tex Tags 00HA, 00DD, 00D6, 00D7 and homology.tex Tags 0117, 0118."
+  "place": "Tag 0E8F, lemma-universally-acyclic-K-flat. Lean follows its filtered-colimit, bounded-complex, brutal-truncation and canonical-truncation reductions, using the already proved categorical devissage and colimit APIs. Exactness of filtered colimits replaces the elementwise proof; bounded devissage replaces the separate homology-long-exact-sequence call."
  },
  "mathlib_searches": [
   {
@@ -266,5 +252,15 @@
   "by": "Q25",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H1",
+  "result": "pass",
+  "landing": "20261020T161734-L-3529580",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
