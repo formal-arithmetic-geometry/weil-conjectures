@@ -1,0 +1,189 @@
+{
+ "id": "lem-pur-etale-near-regular-coordinate-fibre",
+ "kind": "statement",
+ "title": "Etaleness near a regular coordinate fibre",
+ "statement": "Let p:X→S be smooth [def-sbc-smooth-morphisms] and i:Y→X a closed immersion [def-weil-closed-immersion] of schemes [def-pc-scheme]. Let a,b≥0, h:X→A^(a+b)_S over S, and v:Y→A^a_S etale [def-sbc-affine-space, def-weil-etale-morphism]. Assume the square formed by v,i,h and the inclusion setting the last b coordinates to zero is cartesian [def-pc-base-change]. Assume on every affine open of X the pullbacks of those b coordinates are weakly regular [def-weil-pbc-regular-sequence]. Then for each y∈Y there is an open neighbourhood T of i(y) such that h restricted to T is etale. This is a criterion for a specified map h; no coordinates are constructed.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0FUE, lemma-etale-local-structure, last two proof paragraphs: finite presentation, fibre dimension comparison, miracle flatness, fibre criterion and etale criterion"
+ },
+ "stmt_deps": [
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-pc-scheme",
+  "def-sbc-affine-space",
+  "def-weil-etale-morphism",
+  "def-pc-base-change",
+  "def-weil-pbc-regular-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Work on affine base and source neighbourhoods of the images of y. Write the base as Spec R and X as Spec A, and put f_j=h*(t_(a+j)). Finite-presentation permanence makes h finitely presented since p is smooth and affine-space projection is finitely presented. The cartesian hypothesis identifies Y with A/(f); etaleness of v makes this quotient smooth, flat and finitely presented over R. The weak regularity hypothesis becomes regularity after localizing at y, since the quotient has that point. Put k=κ(s) for the base point s. Apply [lem-pur-relative-regular-equations-base-change] to these flat algebras; the f_j form a regular sequence in L=O_(X_s),y, and its quotient is D=O_(Y_s),y. By [lem-weil-pbc-smooth-fibre-regular-local], L is regular local. The local ring T of affine (a+b)-space over k at h(y) is regular by [lem-weil-pbc-polynomial-ring-smooth] and [lem-weil-pbc-smooth-over-field-regular-local]. A minimal generating system of the maximal ideal of L is regular by [lem-weil-pbc-regular-local-generators-regular-sequence], hence L is Cohen--Macaulay.",
+   "uses": [
+    "lem-weil-pbc-smooth-fibre-regular-local",
+    "lem-weil-pbc-polynomial-ring-smooth",
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-weil-pbc-regular-local-generators-regular-sequence",
+    "lem-pur-relative-regular-equations-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, local rings on the fibre; divisors.tex Tag 0FUD, algebra.tex Tags 00TT and 00NQ"
+   }
+  },
+  {
+   "text": "Let Q be the local ring of affine a-space over k at v(y). The last b variables in T form a regular sequence, since multiplication by the next variable is injective on each polynomial quotient and remains injective after localization; their quotient is Q. Repeatedly apply [lem-weil-pbc-dimension-quotient-nonzerodivisor] to get dim L=b+dim D and dim T=b+dim Q. Base change preserves etaleness [lem-weil-pbc-etale-scheme-base-change]; its affine comparison [lem-weil-pbc-etale-ring-map-iff-etale-affine] and [lem-sc-etale-local-dimension] give dim D=dim Q. Thus dim L=dim T, also when b=0.",
+   "uses": [
+    "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-sc-etale-local-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, dimension comparison; more-algebra.tex Tag 07QP; algebra.tex Tag 00KW"
+   }
+  },
+  {
+   "text": "The closed fibre of T→L is also the closed fibre of Q→D, since all last variables are in the maximal ideal of T and their images are f. It is the local ring of a fibre of the etale map v_s. By [lem-weil-pbc-etale-fibre-discrete-separable-points] it is a finite separable field extension, so has dimension zero. Now [lem-weil-pbc-miracle-flatness] applies: T is regular, L is Cohen--Macaulay and dim L=dim T+0. Therefore T→L is flat.",
+   "uses": [
+    "lem-weil-pbc-etale-fibre-discrete-separable-points",
+    "lem-weil-pbc-miracle-flatness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, finite local fibre and miracle flatness; algebra.tex Tag 00R4; morphisms.tex Tag 02GL"
+   }
+  },
+  {
+   "text": "Put R₀=O_(S,s), T₀=O_(A^(a+b)_S,h(y)), L₀=O_(X,i(y)). Apply [lem-weil-pbc-criterion-flatness-fibre] to R₀→T₀→L₀ and the module L₀. Both algebras are essentially finitely presented: they are prime localizations of the affine-space polynomial algebra and the finitely presented ambient algebra. L₀ is a nonzero free rank-one L₀-module, and is flat over R₀ by [lem-pc-smooth-flat]. Reduction modulo the maximal ideal of R₀ is the flat map T→L just proved; quotient and localization identify the reductions with the displayed local rings of the fibre. The criterion yields flatness of T₀→L₀.",
+   "uses": [
+    "lem-weil-pbc-criterion-flatness-fibre",
+    "lem-pc-smooth-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, fibre criterion; Tag 039C, theorem-criterion-flatness-fibre, algebraic input Tag 00R7"
+   }
+  },
+  {
+   "text": "On affine charts let P be the polynomial algebra of the target. The localized module N=(Ω_(A/P))_y is finite, since h is finitely presented [def-weil-pbc-kahler-differentials]. Differential base change [lem-weil-pbc-kahler-differentials-base-change], followed by localization, identifies its residue fibre with differentials of the local fibre of h. Localization follows from the universal derivation formula d(u/v)=v⁻¹du−uv⁻²dv. By the cartesian hypothesis that fibre is the corresponding fibre of v, which is etale by [lem-weil-pbc-etale-scheme-base-change]. The affine etale comparison [lem-weil-pbc-etale-ring-map-iff-etale-affine] makes its differential module zero. Hence N modulo the maximal ideal of L₀ is zero. Nakayama [lem-weil-pbc-nakayama-local-generators], applied to the empty generating family, gives N=0. Finite presentation, flatness of T₀→L₀, and [lem-sc-etale-at-prime-flat-unramified-criterion] give a principal open T containing i(y) on which this specified h is etale.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+    "lem-weil-pbc-nakayama-local-generators",
+    "lem-sc-etale-at-prime-flat-unramified-criterion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, application of morphisms.tex Tag 02GU; algebra.tex Tags 00RV, 00DV and 00U6 spell out the pointwise criterion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-fibre-regular-local",
+  "lem-weil-pbc-polynomial-ring-smooth",
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-weil-pbc-regular-local-generators-regular-sequence",
+  "lem-pur-relative-regular-equations-base-change",
+  "lem-weil-pbc-dimension-quotient-nonzerodivisor",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-weil-pbc-etale-ring-map-iff-etale-affine",
+  "lem-sc-etale-local-dimension",
+  "lem-weil-pbc-etale-fibre-discrete-separable-points",
+  "lem-weil-pbc-miracle-flatness",
+  "lem-weil-pbc-criterion-flatness-fibre",
+  "lem-pc-smooth-flat",
+  "def-weil-pbc-kahler-differentials",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-weil-pbc-nakayama-local-generators",
+  "lem-sc-etale-at-prime-flat-unramified-criterion"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0FUE, last two proof paragraphs: finite presentation, fibre dimension comparison, miracle flatness, fibre criterion and etale criterion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A given morphism from a smooth scheme to affine space with an etale regular coordinate fibre is etale near that fibre",
+   "results": "{\"t\": \"2026-10-19T21:27:38Z\", \"tool\": \"leansearch\", \"query\": \"A given morphism from a smooth scheme to affine space with an etale regular coordinate fibre is etale near that fibre\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsSmooth.casesOn\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.instLocallyOfFinitePresentationOfIsSmooth\", \"RingHom.Etale.propertyIsLocal\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmooth.recOn\"], \"digest\": \"9b8246583cb16b33\"}",
+   "digest": "9b8246583cb16b33",
+   "date": "2026-10-19",
+   "verdict": "no exact match; general smooth charts and etale-local properties do not give the prescribed closed coordinate square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth morphism with an etale coordinate fibre is etale in a neighbourhood",
+   "results": "{\"t\": \"2026-10-19T21:27:40Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth morphism with an etale coordinate fibre is etale in a neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"Algebra.instEtaleOfIsStandardSmoothOfRelativeDimensionOfNatNat\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.exists_etale_of_isEtaleAt\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"Algebra.etaleLocus\", \"Algebra.mem_etaleLocus_iff\", \"Algebra.etaleLocus_eq_univ_iff_etale\"], \"digest\": \"05b890dcc88bf064\"}",
+   "digest": "05b890dcc88bf064",
+   "date": "2026-10-19",
+   "verdict": "no exact match; general smooth charts and etale-local properties do not give the prescribed closed coordinate square"
+  },
+  {
+   "tool": "grep",
+   "query": "miracle.*flat|etale.*fibre|flat.*fibre.*criterion",
+   "results": "{\"t\": \"2026-10-19T21:27:37Z\", \"tool\": \"grep\", \"query\": \"miracle.*flat|etale.*fibre|flat.*fibre.*criterion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "digest": "4f53cda18c2baa0c",
+   "date": "2026-10-19",
+   "verdict": "no exact match; general smooth charts and etale-local properties do not give the prescribed closed coordinate square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothPairLocalCoordinates",
+  "date": "2026-10-20",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-smooth-pair-local-coordinates",
+   "place": "last two proof paragraphs: finite presentation, fibre dimension comparison, miracle flatness, fibre criterion and etale criterion",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleNearRegularCoordinateFibre",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleNearRegularCoordinateFibre.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_etale_open_of_regular_coordinate_fibre",
+  "statement": "theorem Scheme.Hom.exists_etale_open_of_regular_coordinate_fibre\n    {S X Y : Scheme.{u}} (p : X ⟶ S) [Smooth p] (i : Y ⟶ X)\n    [IsClosedImmersion i] (a b : ℕ)\n    (h : X ⟶ AffineSpace (ULift.{u} (Fin (a + b))) S)\n    (v : Y ⟶ AffineSpace (ULift.{u} (Fin a)) S) [Etale v]\n    (hh : h ≫ (AffineSpace (ULift.{u} (Fin (a + b))) S ↘ S) = p)\n    (H : IsPullback v i\n      (AffineSpace.homOfVector (AffineSpace (ULift.{u} (Fin a)) S ↘ S)\n        (fun j ↦ Fin.addCases (fun k ↦ AffineSpace.coord S (ULift.up k))\n          (fun _ ↦ 0) j.down)) h)\n    (hreg : ∀ W : X.affineOpens,\n      RingTheory.Sequence.IsWeaklyRegular Γ(X, W)\n        (List.ofFn (fun j : Fin b ↦\n          X.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op\n            (h.appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j)))))))\n    (y : Y) :\n    ∃ T : X.Opens, i y ∈ T ∧ Etale (T.ι ≫ h)",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261020T051045-L-1546210",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261020T051045-L-1546210",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

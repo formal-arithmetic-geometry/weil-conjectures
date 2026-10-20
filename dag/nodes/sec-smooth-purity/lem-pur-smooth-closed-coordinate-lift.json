@@ -1,0 +1,143 @@
+{
+ "id": "lem-pur-smooth-closed-coordinate-lift",
+ "kind": "statement",
+ "title": "Lifting coordinates from a smooth closed subscheme",
+ "statement": "Let S,X,Y be schemes [def-pc-scheme], p:X→S and q:Y→S with q smooth [def-sbc-smooth-morphisms], and i:Y→X a closed immersion [def-weil-closed-immersion] with i p=q. Fix y∈Y and an affine open U₀∋i(y), an isomorphism U₀≅Spec A, and a finite A-regular sequence f [def-weil-pbc-regular-sequence] identifying Y×_X U₀ with Spec(A/(f)) over U₀. There exist a≥0 and an open U⊆U₀ containing i(y), together with S-morphisms h:U→A^(a+length f)_S and v:Y×_X U→A^a_S [def-sbc-affine-space, def-pc-base-change], such that v is etale [def-weil-etale-morphism], the square with the inclusion setting the last length f coordinates to zero is cartesian, and on every affine open W⊆U the kernel ideal of Y×_X U→U [def-sbc-closed-immersion-ideal-sheaf] is spanned by the last coordinate pullbacks, which are weakly regular. No smoothness of p and no etaleness of h is assumed or asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0FUE, lemma-etale-local-structure, first two proof paragraphs: choose and lift the closed chart, form its graph with the regular equations"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sbc-smooth-morphisms",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-regular-sequence",
+  "def-sbc-affine-space",
+  "def-pc-base-change",
+  "def-weil-etale-morphism",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "Apply [sbc-thm-etale-local-normal-form] to the smooth closed subscheme at y. Restrict the base to its affine chart and choose an ambient principal affine neighbourhood inside U₀ whose closed preimage lies in the etale chart, using the subspace topology of a closed immersion. Localizing preserves the given regular sequence, since localization is flat and the retained point keeps the final quotient nonzero. Restricting the chart and composing with the affine-space map induced by the base open preserves etaleness [lem-weil-pbc-etale-composition-cancellation].",
+   "uses": [
+    "sbc-thm-etale-local-normal-form",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, choice and lifting of the etale coordinates; morphisms.tex Tag 054L"
+   }
+  },
+  {
+   "text": "The new ambient and closed subscheme are affine and the closed morphism gives a surjection on global sections. Lift the first a coordinate functions, append the localized prescribed f, and use [def-sbc-affine-space] to form h. The quotient by the last coordinate pullbacks is exactly the closed subscheme: the tensor product with the polynomial quotient by those variables equals A/(f), by u tensor p-bar mapping to u p(g,f) mod (f), with inverse u-bar mapping to u tensor 1. Thus the square is cartesian.",
+   "uses": [
+    "def-sbc-affine-space"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, displayed coordinate map and finite-presentation permanence; explicit finite presentation and fibre-product computation"
+   }
+  },
+  {
+   "text": "The equations generate the kernel ideal after restricting to any affine open, by localization of the quasi-coherent ideal sheaf. Such sections are flat over the ambient affine coordinate ring; tensoring each successive multiplication injection preserves weak regularity. The final quotient is allowed to be zero on an affine open missing the closed subscheme. Composition with the affine-space open immersion over the base open keeps the square cartesian and v etale.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "lem-weil-pbc-etale-composition-cancellation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-morphisms.tex",
+    "place": "Tag 0FUE, conclusion and coordinate-subspace square; morphisms.tex Tags 02GO, 02GP and 02GN"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sbc-thm-etale-local-normal-form",
+  "lem-weil-pbc-etale-composition-cancellation",
+  "def-sbc-affine-space",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-morphisms.tex",
+  "place": "Tag 0FUE, first two proof paragraphs: choose and lift the closed chart, form its graph with the regular equations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale coordinates on a smooth closed subscheme lift to ambient coordinates after shrinking an affine neighbourhood",
+   "results": "{\"t\": \"2026-10-19T21:27:38Z\", \"tool\": \"leansearch\", \"query\": \"Etale coordinates on a smooth closed subscheme lift to ambient coordinates after shrinking an affine neighbourhood\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale\", \"Algebra.isOpen_etaleLocus\", \"RingHom.Etale.propertyIsLocal\", \"Algebra.Etale.formallyEtale\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"RingHom.IsStandardSmooth.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale\", \"Algebra.exists_etale_of_isEtaleAt\"], \"digest\": \"7ba13bb29b3a57bf\"}",
+   "digest": "7ba13bb29b3a57bf",
+   "date": "2026-10-19",
+   "verdict": "no exact match; general smooth charts and etale-local properties do not give the prescribed closed coordinate square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A smooth closed immersion admits local affine equations and an etale coordinate lift",
+   "results": "{\"t\": \"2026-10-19T21:27:39Z\", \"tool\": \"leanfinder\", \"query\": \"A smooth closed immersion admits local affine equations and an etale coordinate lift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.IsSmooth.exists_isStandardSmooth\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsSmoothOfRelativeDimension.exists_isStandardSmoothOfRelativeDimension\", \"AlgebraicGeometry.IsSmooth\", \"AlgebraicGeometry.isSmooth_iff\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_iff\"], \"digest\": \"c175b710a0348221\"}",
+   "digest": "c175b710a0348221",
+   "date": "2026-10-19",
+   "verdict": "no exact match; general smooth charts and etale-local properties do not give the prescribed closed coordinate square"
+  },
+  {
+   "tool": "grep",
+   "query": "coordinate.*lift|closed.*equation|regular.*coordinate",
+   "results": "{\"t\": \"2026-10-19T21:27:37Z\", \"tool\": \"grep\", \"query\": \"coordinate.*lift|closed.*equation|regular.*coordinate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/EllipticCurve/Jacobian/Point.lean\", \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point.lean\"], \"digest\": \"aba0893436e47ea1\"}",
+   "digest": "aba0893436e47ea1",
+   "date": "2026-10-19",
+   "verdict": "no exact match; general smooth charts and etale-local properties do not give the prescribed closed coordinate square"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.SmoothPairLocalCoordinates",
+  "date": "2026-10-20",
+  "group": "C3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-smooth-pair-local-coordinates",
+   "place": "first two proof paragraphs: choose and lift the closed chart, form its graph with the regular equations",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.SmoothClosedCoordinateLift",
+  "file": "lean/Sheaf/AlgebraicGeometry/SmoothClosedCoordinateLift.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.exists_coordinate_lift_of_regular_equations",
+  "statement": "theorem Scheme.Hom.exists_coordinate_lift_of_regular_equations\n    {S X Y : Scheme.{u}} (p : X ⟶ S) (q : Y ⟶ S) (i : Y ⟶ X)\n    [Smooth q] [IsClosedImmersion i] (hi : i ≫ p = q) (y : Y)\n    (U₀ : X.Opens) (hy₀ : i y ∈ U₀) (A : CommRingCat.{u})\n    (eA : U₀.toScheme ≅ Spec A) (f : List A)\n    (hf : RingTheory.Sequence.IsRegular A f)\n    (eY : pullback i U₀.ι ≅ Spec (CommRingCat.of (A ⧸ Ideal.ofList f)))\n    (heY : eY.hom ≫ Spec.map (CommRingCat.ofHom (Ideal.Quotient.mk (Ideal.ofList f))) =\n      pullback.snd i U₀.ι ≫ eA.hom) :\n    ∃ (a : ℕ) (U : X.Opens) (_ : U ≤ U₀) (_ : i y ∈ U)\n      (h : U.toScheme ⟶ AffineSpace (ULift.{u} (Fin (a + f.length))) S)\n      (v : pullback i U.ι ⟶ AffineSpace (ULift.{u} (Fin a)) S),\n      h ≫ (AffineSpace (ULift.{u} (Fin (a + f.length))) S ↘ S) = U.ι ≫ p ∧\n      IsPullback v (pullback.snd i U.ι)\n        (AffineSpace.homOfVector (AffineSpace (ULift.{u} (Fin a)) S ↘ S)\n          (fun j ↦ Fin.addCases (fun k ↦ AffineSpace.coord S (ULift.up k))\n            (fun _ ↦ 0) j.down)) h ∧\n      Etale v ∧\n      ∀ W : U.toScheme.affineOpens,\n        (pullback.snd i U.ι).ker.ideal W = Ideal.span (Set.range (fun j : Fin f.length ↦\n          U.toScheme.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op\n            (h.appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j)))))) ∧\n        RingTheory.Sequence.IsWeaklyRegular Γ(U.toScheme, W)\n          (List.ofFn (fun j : Fin f.length ↦\n            U.toScheme.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op\n              (h.appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j))))))",
+  "branch": "sheaf-dag",
+  "by": "C3",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261020T051045-L-1546210",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261020T051045-L-1546210",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
