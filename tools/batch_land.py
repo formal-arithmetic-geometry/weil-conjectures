@@ -90,6 +90,11 @@ POOL = int(os.environ.get("SHEAF_BATCH_POOL", "4"))
 QUIET = float(os.environ.get("SHEAF_BATCH_QUIET", "30"))
 MAX_WAIT = float(os.environ.get("SHEAF_BATCH_MAX_WAIT", "900"))
 BATCH_MAX = int(os.environ.get("SHEAF_BATCH_MAX", "150"))
+# the human, 2026-10-20: landing is always batched, never one delivery at a time. A batch lands when at least
+# SHEAF_BATCH_MIN deliveries passed their checks, or when the first of them has waited SHEAF_BATCH_MIN_WAIT seconds
+# (meanwhile the checked results stay in the pool and the next steps add the deliveries that arrive).
+BATCH_MIN = int(os.environ.get("SHEAF_BATCH_MIN", "20"))
+MIN_WAIT = float(os.environ.get("SHEAF_BATCH_MIN_WAIT", "900"))
 INDEX_SAVE = BD / "library-index.pkl"      # the library index of the prune check, kept across restarts (tip + index)
 TRIAGE_WAIT = float(os.environ.get("SHEAF_TRIAGE_WAIT", "1500"))     # seconds for the Codex agent's verdict
 NOTE_AUTO = ("AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the "
@@ -742,6 +747,12 @@ def land_batch(cache: dict, log) -> dict | None:
         c['_import_graph_file'] = str(pre.graph_file)
         c['_library_index_file'] = str(pre.index_file) if pre.index_file else None
     pairs = pre.results(cands)
+    ok_n = sum(1 for _, (st, _x) in pairs if st == "ok")
+    if 0 < ok_n < BATCH_MIN:
+        first = cache.setdefault("_first_ok", time.time())
+        if time.time() - first < MIN_WAIT:
+            return None      # accumulate: the checked deliveries wait in the pool for more (or for MIN_WAIT)
+    cache.pop("_first_ok", None)
     pre.snapshot()
     base_modules = cycles.source_modules(ROOT, pre.graph_tip)
     package_roots = cycles.source_roots(li.LEAN)
