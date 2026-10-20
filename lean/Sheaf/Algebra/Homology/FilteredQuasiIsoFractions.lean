@@ -8,9 +8,9 @@ module
 public import Sheaf.Algebra.Homology.FiniteFilteredModuleHomotopy
 public import Mathlib.CategoryTheory.Localization.CalculusOfFractions
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import WeilConjectures.CategoryTheory.Abelian.Filtration
+import Sheaf.Algebra.Homology.FilteredQuasiIsoTwoOutOfThree
+import Sheaf.Algebra.Homology.FilteredQuasiIsoRightOre
+import Sheaf.Algebra.Homology.FilteredQuasiIsoRightCancellation
 
 /-!
 # Right fractions for finite filtered module complexes
@@ -70,6 +70,17 @@ Proof (the seven steps of the DAG node):
 theorem finiteFilteredModuleQuasiIso_fractions (R : Type u) [CommRing R] :
     (finiteFilteredModuleQuasiIso R).HasRightCalculusOfFractions ∧
       (finiteFilteredModuleQuasiIso R).HasTwoOutOfThreeProperty := by
-  sorry
+  have htwo := finiteFilteredModuleQuasiIso_twoOutOfThree R
+  let : (finiteFilteredModuleQuasiIso R).HasTwoOutOfThreeProperty := htwo
+  have hmult : (finiteFilteredModuleQuasiIso R).IsMultiplicative :=
+    { id_mem := finiteFilteredModuleQuasiIso_id R }
+  let : (finiteFilteredModuleQuasiIso R).IsMultiplicative := hmult
+  refine ⟨{ exists_rightFraction := ?_, ext := ?_ }, htwo⟩
+  · intro X Y φ
+    obtain ⟨T, t, g, ht, h⟩ := finiteFilteredModuleQuasiIso_rightOre R φ.f φ.s φ.hs
+    exact ⟨MorphismProperty.RightFraction.mk t ht g, h⟩
+  · intro X Y Z f₁ f₂ s hs h
+    obtain ⟨T, t, ht, h⟩ := finiteFilteredModuleQuasiIso_rightCancellation R f₁ f₂ s hs h
+    exact ⟨T, t, ht, h⟩
 
 end CochainComplex

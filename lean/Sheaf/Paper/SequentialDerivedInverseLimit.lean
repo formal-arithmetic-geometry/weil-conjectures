@@ -72,7 +72,15 @@ invertible. This includes every transition map of the inverse system. -/
 theorem adicComplexTowerEvaluation_inverts :
     (HomologicalComplex.quasiIso (Scheme.CompletedAdicTowers T d) (ComplexShape.up ℤ)).IsInvertedBy
       (adicComplexTowerEvaluation T d) := by
-  sorry
+  intro K L f hf
+  have : QuasiIso f := hf
+  apply (NatTrans.isIso_iff_isIso_app _).mpr
+  intro n
+  change IsIso (DerivedCategory.Q.map
+    ((((evaluation ℕᵒᵖ (Scheme.CompletedAdicModules T d)).obj n).mapHomologicalComplex
+      (ComplexShape.up ℤ)).map f))
+  have := (HomologicalComplex.quasiIso_iff_evaluation f).mp hf n
+  infer_instance
 
 /-- Derived evaluation of the full strict tower, constructed by the localization lift.
 Source: blueprint def-weil-pbc-derived-inverse-limit; Stacks Tag 08TC

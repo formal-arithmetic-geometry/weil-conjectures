@@ -5,20 +5,17 @@ module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleExtensionZeroComparison
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
+public import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
+public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
+public import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
 public import Sheaf.AlgebraicGeometry.Etale.OpenImmersionLowerShriekCoherence
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.CoherenceLegacy
 public import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-public import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChange
-public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
 public import Sheaf.AlgebraicGeometry.OpenComparisonUnitNormalization
-public import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
 public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-import Sheaf.AlgebraicGeometry.Etale.DerivedExtensionZeroBaseChangeUnderivedCompatibility
-import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
-import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
-import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
+import Sheaf.AlgebraicGeometry.FixSiteOpenExchangeSheaf
+import Sheaf.CategoryTheory.DerivedExactCube
 
 /-!
 # Site comparison respects the normalized open base-change map
@@ -27,12 +24,14 @@ Source: Stacks Project, Tag 03S6 (`lemma-shriek-base-change`), with the normaliz
 comparison of Tag 09AF and pullback coherence of Tag 099R (blueprint:
 `lem-fix-site-open-exchange`).  The theorem below states the ordinary derived
 comparison equation for every bounded-below etale complex and arbitrary bottom
-map `g`; its proof is postponed at stage 2.
+map `g`. The proof lifts the ordinary sheaf equation through exact-functor localization.
 -/
 
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.defeqAttrib.useBackward true
 
 universe u
 
@@ -75,6 +74,51 @@ noncomputable def fixSitePullbackComparison (Λ : Type (u + 1)) [CommRing Λ] [F
       (comparisonUpperStarCompUpperStarIso (ModuleCat.{u + 1} Λ) u) ≪≫
     Functor.mapDerivedCategoryCompIso _ _
 
+section Localization
+
+variable {C D E F : Type*} [Category C] [Category D] [Category E] [Category F]
+  [Abelian C] [Abelian D] [Abelian E] [Abelian F]
+  [HasDerivedCategory C] [HasDerivedCategory D]
+  [HasDerivedCategory E] [HasDerivedCategory F]
+  (R : C ⥤ D) (G : D ⥤ F) (L : C ⥤ E) (S : E ⥤ F)
+  [R.Additive] [G.Additive] [L.Additive] [S.Additive]
+  [PreservesFiniteLimits R] [PreservesFiniteColimits R]
+  [PreservesFiniteLimits G] [PreservesFiniteColimits G]
+  [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+  [PreservesFiniteLimits S] [PreservesFiniteColimits S]
+
+attribute [local instance] comp_preservesFiniteLimits comp_preservesFiniteColimits
+
+private noncomputable def derivedFace (e : R ⋙ G ≅ L ⋙ S) :
+    R.mapDerivedCategory ⋙ G.mapDerivedCategory ≅
+      L.mapDerivedCategory ⋙ S.mapDerivedCategory :=
+  (Functor.mapDerivedCategoryCompIso R G).symm ≪≫
+    Functor.mapDerivedCategoryNatIso e ≪≫ Functor.mapDerivedCategoryCompIso L S
+
+private theorem derivedPlusFace (e : R ⋙ G ≅ L ⋙ S)
+    (K : DerivedCategory.Plus C) :
+    DerivedCategory.Plus.ι.map
+      (((Functor.mapDerivedCategoryPlusCompIso R G).symm ≪≫
+        Functor.mapDerivedCategoryPlusNatIso e ≪≫
+        Functor.mapDerivedCategoryPlusCompIso L S).hom.app K) =
+      (derivedFace R G L S e).hom.app (DerivedCategory.Plus.ι.obj K) := by
+  have hi : DerivedCategory.Plus.ι.map
+      ((Functor.mapDerivedCategoryPlusCompIso R G).inv.app K) =
+      (Functor.mapDerivedCategoryCompIso R G).inv.app
+        (DerivedCategory.Plus.ι.obj K) := by
+    apply (cancel_mono ((Functor.mapDerivedCategoryCompIso R G).hom.app
+      (DerivedCategory.Plus.ι.obj K))).mp
+    rw [← Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app R G K]
+    rw [← Functor.map_comp]
+    rw [Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
+    simp
+    rfl
+  simp only [derivedFace, Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
+    Functor.map_comp, hi, Functor.ι_map_mapDerivedCategoryPlusNatIso_hom_app,
+    Functor.ι_map_mapDerivedCategoryPlusCompIso_hom_app]
+
+end Localization
+
 /-- The normalized site-comparison/open-exchange equation.
 Source: Stacks Tag 03S6 (`lemma-shriek-base-change`), Tags 09AF and 099R
 (blueprint: lem-fix-site-open-exchange).
@@ -87,27 +131,20 @@ inverse-unit normalization of `c_j` asserted by the node is the published statem
 `openComparison_unit_normalization` (lem-sf-open-comparison-unit-normalization) about
 the same sheaf comparison `openImmersionLowerShriekComparisonUpperStarIso`.
 
-Proof plan (the node's steps):
-1. `c_j`, `c_{j'}` are the degreewise extensions of the natural sheaf comparison
-   (lem-cbc-proetale-extension-zero-comparison), exact functors by
-   lem-weil-pbc-extension-by-zero-exact and lem-cbc-proetale-extension-zero; `rho_u`
-   is the inverse of the canonical comparison of lem-weil-pbc-comparison-pullback.
-2. Every arrow is the image of a degreewise map of complexes, so it suffices to treat
-   one etale module sheaf `F`.  The inverse of `e_j^et` is the `j'_! ⊣ j'⁻¹` transpose of
-   `s_g ∘ h⁻¹(eta^et_j)` (lem-cbc-derived-extension-zero-base-change-underived-compatibility);
-   the inverse of `e_j^proet` is the transpose of `sigma ∘ h⁻¹(eta^proet_j)`
-   (lem-cbc-finite-open-exchange-scalars with `B = C = Λ`, `a = id`).
-3. The unit normalization (lem-sf-open-comparison-unit-normalization) gives the transpose
-   of `c_j⁻¹` as `rho_j⁻¹ ∘ N_U(eta^et_j)`, and likewise for `j'`.
-4. Compute the `j'_!`-transposes of the inverses of both sides:
-   `[sigma ∘ h⁻¹(a_j) ∘ a_h] ∘ N_{U'}h⁻¹(eta^et_j)` and
-   `[j'⁻¹(a_g) ∘ a_{j'} ∘ N_{U'}(s_g)] ∘ N_{U'}h⁻¹(eta^et_j)` (def-weil-pbc-adjunction-mate).
-5. The two brackets agree by the composite and cartesian-square compatibility of the
-   canonical comparison (lem-weil-pbc-comparison-pullback, def-weil-pbc-cartesian-square);
-   so the inverses, hence both sides, are equal degreewise and in the derived category,
-   naturally in `K`.
-6. The identity square, an empty open, the zero complex and the zero ring are included;
-   no hypothesis on `g` is used beyond the open-immersion square. -/
+Proof:
+1. The ordinary equation is `fixSiteOpenExchangeSheaf`: the inverse open exchanges
+   satisfy their unit formulas; comparison-unit normalization and cartesian-square
+   coherence identify the two inverse transposes under the open adjunction.
+2. Apply `Functor.mapDerivedCategory_exactCube` to this equation and the six specified
+   ordinary isomorphisms. Exactness permits degreewise passage to complexes and
+   localization. The localization factors identify these maps with the stated derived
+   comparisons, without any faithfulness assumption on localization.
+3. Evaluate at the image of `K` under the bounded-below inclusion. The composition and
+   natural-isomorphism compatibility formulas identify the etale bounded-below exchange
+   with the corresponding unbounded derived face. For the inverse composition map,
+   cancel its forward isomorphism and use functoriality.
+4. All calculations include identity squares, empty opens, zero complexes and the zero
+   coefficient ring. No additional hypothesis on `g` is used. -/
 theorem fixSiteOpenExchange (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
     {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
     {j : U ⟶ X} {g : X' ⟶ X} [IsOpenImmersion j] [IsOpenImmersion j']
@@ -135,6 +172,32 @@ theorem fixSiteOpenExchange (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
       (fixSiteOpenComparison Λ j').hom.app
         ((Etale.upperStar (ModuleCat.{u + 1} Λ) gU).mapDerivedCategory.obj
           (DerivedCategory.Plus.ι.obj K)) := by
-  sorry
+  let A := ModuleCat.{u + 1} Λ
+  let hp := IsPullback.of_iso_pullback sq.toCommSq sq.isoPullback sq.hom_fst sq.hom_snd
+  let q1 := openImmersionLowerShriekComparisonUpperStarIso A j
+  let q2 := fixSiteOpenSheafExchangeIso Λ gU j' j g hp
+  let q3 := comparisonUpperStarCompUpperStarIso A gU
+  let q4 := comparisonUpperStarCompUpperStarIso A g
+  let q5 := (@asIso _ _ _ _ _ (Etale.isIso_openImmersionLowerShriekBaseChangeMap
+    A hp)).symm
+  let q6 := openImmersionLowerShriekComparisonUpperStarIso A j'
+  have hc := Functor.mapDerivedCategory_exactCube
+    (Etale.openImmersionLowerShriek A j) (comparisonUpperStar A X) (upperStar A g)
+    (comparisonUpperStar A U) (openImmersionLowerShriek A j) (upperStar A gU)
+    (openImmersionLowerShriek A j') (Etale.upperStar A gU) (comparisonUpperStar A U')
+    (Etale.upperStar A g) (comparisonUpperStar A X') (Etale.openImmersionLowerShriek A j')
+    q1 q2 q3 q4 q5 q6 (fixSiteOpenExchangeSheaf Λ sq)
+  have he := derivedPlusFace
+    (Etale.openImmersionLowerShriek A j) (Etale.upperStar A g)
+    (Etale.upperStar A gU) (Etale.openImmersionLowerShriek A j') q5 K
+  have hx := NatTrans.congr_app hc (DerivedCategory.Plus.ι.obj K)
+  dsimp only [Functor.whiskerRight_app, Functor.whiskerLeft_app, NatTrans.comp_app] at hx
+  change _ = _ at hx
+  rw [show DerivedCategory.Plus.ι.map
+      ((Etale.extensionZeroBaseChangeDerivedPlusIso Λ hp).hom.app K) =
+      (derivedFace (Etale.openImmersionLowerShriek A j) (Etale.upperStar A g)
+        (Etale.upperStar A gU) (Etale.openImmersionLowerShriek A j') q5).hom.app
+          (DerivedCategory.Plus.ι.obj K) from he]
+  exact hx
 
 end AlgebraicGeometry.ProEtale

@@ -14,6 +14,7 @@ public import Sheaf.Paper.ProjectionFormulaIdentityCompactification
 public import Sheaf.Paper.StrictPerfectPackageOnSite
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.CategoryTheory.ObjectProperty.Retract
+import all Sheaf.Algebra.Homology.KFlatResolutionGeneral
 import Sheaf.Paper.ProjectionMateExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
@@ -789,16 +790,219 @@ def ordinaryUnit := (ordinaryUnit_existsUnique d f).exists.choose
 /-- The ordinary right unit constraint of the existing sheaf tensor structure.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
 def ordinaryRightUnit (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
-    (M : proEtaleRingModules T R) :=
+    (M : proEtaleRingModules T R) :
+    ((proEtaleOrdinaryTensor T R).obj M).obj
+      (SheafOfModules.unit ((adicLisseForget T).obj R)) ≅ M :=
   letI := SheafOfModules.monoidalCategory R
-  ρ_ M
+  let S := PresheafOfModules.sheafification.{u + 1}
+    (𝟙 ((adicLisseForget T).obj R).obj)
+  let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (𝟙 ((adicLisseForget T).obj R).obj)
+  SheafOfModules.tensorObjIsoSheafification M
+      (SheafOfModules.unit ((adicLisseForget T).obj R)) ≪≫
+    S.mapIso (ρ_ M.val) ≪≫ (asIso adj.counit).app M
 
 /-- The tensor of two module maps in the existing ordinary sheaf tensor structure.
 Source: blueprint order 1275 (blueprint: lemma-weil-pbc-perfect-projection-formula). -/
 def ordinaryTensorHom (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
-    {M N P Q : proEtaleRingModules T R} (v : M ⟶ N) (w : P ⟶ Q) :=
+    {M N P Q : proEtaleRingModules T R} (v : M ⟶ N) (w : P ⟶ Q) :
+    ((proEtaleOrdinaryTensor T R).obj M).obj P ⟶
+      ((proEtaleOrdinaryTensor T R).obj N).obj Q :=
   letI := SheafOfModules.monoidalCategory R
   v ⊗ₘ w
+
+section UnitHelpers
+
+attribute [local irreducible] proEtaleRingModulePullback proEtaleRingModuleAdjunction
+
+variable (T : Scheme.{u}) (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1})
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem unit_test (M : proEtaleRingModules T R) :
+    let := SheafOfModules.monoidalCategory R
+    (SheafOfModules.tensorObjIsoSheafification M
+      (SheafOfModules.unit ((adicLisseForget T).obj R))).inv ≫ (ordinaryRightUnit T R M).hom =
+    (PresheafOfModules.sheafification.{u + 1}
+      (𝟙 ((adicLisseForget T).obj R).obj)).map (ρ_ M.val).hom ≫
+      (PresheafOfModules.sheafificationAdjunction.{u + 1}
+        (𝟙 ((adicLisseForget T).obj R).obj)).counit.app M := by
+  simp only [ordinaryRightUnit, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.app_hom, asIso_hom, Iso.inv_hom_id_assoc]
+
+private theorem oplax_unit_map
+    {C D : Type*} [Category* C] [Category* D]
+    [MonoidalCategory C] [MonoidalCategory D]
+    (F : C ⥤ D) [F.OplaxMonoidal] (M : C) (N : D) (v : F.obj M ⟶ N) :
+    Functor.OplaxMonoidal.δ F M (𝟙_ C) ≫
+        (v ⊗ₘ Functor.OplaxMonoidal.η F) ≫ (ρ_ N).hom = F.map (ρ_ M).hom ≫ v := by
+  rw [tensorHom_def', Category.assoc, rightUnitor_naturality]
+  simp only [Functor.OplaxMonoidal.right_unitality_hom_assoc]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem canonicalRightUnit_sheafification (M : proEtaleRingModules T R) :
+    let := SheafOfModules.monoidalCategory R
+    (SheafOfModules.tensorObjIsoSheafification M
+      (SheafOfModules.unit ((adicLisseForget T).obj R))).inv ≫ (ρ_ M).hom =
+    (PresheafOfModules.sheafification.{u + 1}
+      (𝟙 ((adicLisseForget T).obj R).obj)).map (ρ_ M.val).hom ≫
+      (PresheafOfModules.sheafificationAdjunction.{u + 1}
+        (𝟙 ((adicLisseForget T).obj R).obj)).counit.app M := by
+  let := SheafOfModules.monoidalCategory R
+  let S := PresheafOfModules.sheafification.{u + 1}
+    (𝟙 ((adicLisseForget T).obj R).obj)
+  let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (𝟙 ((adicLisseForget T).obj R).obj)
+  simp only [SheafOfModules.tensorObjIsoSheafification, Iso.trans_inv, Iso.symm_inv,
+    tensorIso_hom, Iso.app_hom, Functor.Monoidal.μIso_inv, asIso_hom]
+  have hη : adj.counit.app
+      (SheafOfModules.unit ((adicLisseForget T).obj R)) = Functor.OplaxMonoidal.η S := rfl
+  rw [hη]
+  exact oplax_unit_map S M.val M (adj.counit.app M)
+
+set_option backward.isDefEq.respectTransparency false in
+/-- The explicit sheafification construction is the existing monoidal right unitor.
+Source: Stacks 03EL (blueprint: lemma-weil-pbc-perfect-projection-formula).
+Proof: precompose with the tensor/sheafification isomorphism. Both maps become
+sheafification of the presheaf unitor followed by the sheafification counit,
+by oplax monoidal unitality. -/
+theorem ordinaryRightUnit_eq (M : proEtaleRingModules T R) :
+    let := SheafOfModules.monoidalCategory R
+    ordinaryRightUnit T R M = ρ_ M := by
+  let := SheafOfModules.monoidalCategory R
+  apply Iso.ext
+  apply (cancel_epi (SheafOfModules.tensorObjIsoSheafification M
+    (SheafOfModules.unit ((adicLisseForget T).obj R))).inv).mp
+  rw [unit_test, canonicalRightUnit_sheafification]
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem rightUnit_pair (M : proEtaleRingModules T R) (U : T.ProEtᵒᵖ)
+    (m : M.val.obj U) (r : R.obj.obj U) :
+    let := SheafOfModules.monoidalCategory R
+    (ordinaryRightUnit T R M).hom.val.app U
+      (proEtaleTensorPair T R M (SheafOfModules.unit ((adicLisseForget T).obj R)) U m r) =
+        r • m := by
+  let := SheafOfModules.monoidalCategory R
+  let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (𝟙 ((adicLisseForget T).obj R).obj)
+  have he : adj.homEquiv _ M
+      ((SheafOfModules.tensorObjIsoSheafification M
+        (SheafOfModules.unit ((adicLisseForget T).obj R))).inv ≫ (ordinaryRightUnit T R M).hom) =
+      (ρ_ M.val).hom := by
+    rw [unit_test]
+    have h := (adj.homEquiv (M.val ⊗ (SheafOfModules.unit
+      ((adicLisseForget T).obj R)).val) M).apply_symm_apply ((ρ_ M.val).hom)
+    rw [Adjunction.homEquiv_counit] at h
+    exact h
+  exact congrArg (fun z ↦ z.app U (m ⊗ₜ[R.obj.obj U] r)) he
+
+private theorem tensor_hom_ext (M N P : proEtaleRingModules T R)
+    (v w : ((proEtaleOrdinaryTensor T R).obj M).obj N ⟶ P)
+    (h : ∀ U m n, v.val.app U (proEtaleTensorPair T R M N U m n) =
+      w.val.app U (proEtaleTensorPair T R M N U m n)) : v = w := by
+  let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (𝟙 ((adicLisseForget T).obj R).obj)
+  apply (cancel_epi (SheafOfModules.tensorObjIsoSheafification M N).inv).mp
+  apply (adj.homEquiv (M.val ⊗ N.val) P).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  apply PresheafOfModules.hom_ext
+  intro U
+  apply ModuleCat.MonoidalCategory.tensor_ext
+  intro m n
+  exact h U m n
+
+private theorem pair_natural {M N N' : proEtaleRingModules T R}
+    (w : N ⟶ N') (U : T.ProEtᵒᵖ) (m : M.val.obj U) (n : N.val.obj U) :
+    let := SheafOfModules.monoidalCategory R
+    (M ◁ w).val.app U (proEtaleTensorPair T R M N U m n) =
+      proEtaleTensorPair T R M N' U m (w.val.app U n) := by
+  let := SheafOfModules.monoidalCategory R
+  let S := PresheafOfModules.sheafification.{u + 1}
+    (𝟙 ((adicLisseForget T).obj R).obj)
+  let adj := PresheafOfModules.sheafificationAdjunction.{u + 1}
+    (𝟙 ((adicLisseForget T).obj R).obj)
+  have hn := SheafOfModules.whiskerLeft_tensorObjIsoSheafification_hom_kfg
+    (R := R) M w
+  have hi : (SheafOfModules.tensorObjIsoSheafification (R := R) M N).inv ≫ (M ◁ w) =
+      S.map (M.val ◁ w.val) ≫
+        (SheafOfModules.tensorObjIsoSheafification (R := R) M N').inv := by
+    rw [Iso.inv_comp_eq, ← Category.assoc, ← hn, Category.assoc,
+      Iso.hom_inv_id, Category.comp_id]
+  have he := congrArg (fun z ↦ adj.homEquiv _ _ z) hi
+  rw [Adjunction.homEquiv_naturality_left] at he
+  exact congrArg (fun z ↦ z.app U (m ⊗ₜ[R.obj.obj U] n)) he
+
+attribute [local irreducible] SheafOfModules.monoidalCategory
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem moduleUnit_tensor_coherence
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage f CommRingCat.{u + 1}).obj R ≅ S)
+    (j : (proEtaleRingModulePullback f R S c).obj
+      (SheafOfModules.unit ((adicLisseForget Y).obj R)) ≅
+        SheafOfModules.unit ((adicLisseForget X).obj S))
+    (hj : ∀ (U : Y.ProEtᵒᵖ) (r : R.obj.obj U),
+      ((proEtaleRingModuleAdjunction f R S c).homEquiv _ _ j.hom).val.app U r =
+        (proEtaleRingDirectImageMap f R S c).hom.app U r)
+    (M : proEtaleRingModules Y R) :
+    (proEtaleOrdinaryTensorPullback f R S c M
+      (SheafOfModules.unit ((adicLisseForget Y).obj R))).hom ≫
+      ordinaryTensorHom X S
+        (𝟙 ((proEtaleRingModulePullback f R S c).obj M))
+        j.hom ≫
+      (ordinaryRightUnit X S
+        ((proEtaleRingModulePullback f R S c).obj M)).hom =
+    (proEtaleRingModulePullback f R S c).map
+      (ordinaryRightUnit Y R M).hom := by
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.monoidalCategory S
+  let adj := proEtaleRingModuleAdjunction f R S c
+  let L := proEtaleRingModulePullback f R S c
+  have hr : adj.homEquiv
+      (((proEtaleOrdinaryTensor Y R).obj M).obj
+        (SheafOfModules.unit ((adicLisseForget Y).obj R)))
+      (L.obj M) (L.map (ordinaryRightUnit Y R M).hom) =
+      (ordinaryRightUnit Y R M).hom ≫ adj.unit.app M := by
+    rw [← Category.comp_id (L.map _), adj.homEquiv_naturality_left, adj.homEquiv_id]
+  apply (adj.homEquiv _ _).injective
+  rw [hr, adj.homEquiv_naturality_right, Functor.map_comp]
+  apply tensor_hom_ext Y R
+  intro U m r
+  change (ordinaryRightUnit X S _).hom.val.app
+      (op ((proEtaleBaseChange f).obj U.unop))
+      ((ordinaryTensorHom X S (𝟙 _) j.hom).val.app _
+        ((adj.homEquiv _ _ (proEtaleOrdinaryTensorPullback f R S c M
+          (SheafOfModules.unit ((adicLisseForget Y).obj R))).hom).val.app U
+            (proEtaleTensorPair Y R _ _ U m r))) =
+    (adj.unit.app M).val.app U
+      ((ordinaryRightUnit Y R M).hom.val.app U
+        (proEtaleTensorPair Y R _ _ U m r))
+  erw [((proEtaleOrdinaryTensorPullback_existsUnique f R S
+    c).exists.choose_spec).2 M _ U.unop m r]
+  let W := op ((proEtaleBaseChange f).obj U.unop)
+  let x : (L.obj M).val.obj W := (adj.unit.app M).val.app U m
+  let y : (L.obj (SheafOfModules.unit ((adicLisseForget Y).obj R))).val.obj W :=
+    (adj.unit.app (SheafOfModules.unit ((adicLisseForget Y).obj R))).val.app U r
+  have hp := pair_natural X S j.hom W x y
+  have hs := congrArg (fun z ↦ (ordinaryRightUnit X S (L.obj M)).hom.val.app W z) hp
+  simp only [ordinaryTensorHom, id_tensorHom]
+  refine hs.trans ?_
+  have hu := rightUnit_pair X S (L.obj M) W x (j.hom.val.app W y)
+  have hv := rightUnit_pair Y R M U m r
+  have hj' := hj U r
+  rw [Adjunction.homEquiv_unit] at hj'
+  change j.hom.val.app W y = _ at hj'
+  calc
+    _ = (show S.obj.obj W from j.hom.val.app W y) • x := hu
+    _ = (show S.obj.obj W from (proEtaleRingDirectImageMap f R S c).hom.app U r) • x :=
+      congrArg (fun z ↦ z • x) hj'
+    _ = (adj.unit.app M).val.app U (r • m) := by
+      rw [map_smul]
+      rfl
+    _ = _ := congrArg ((adj.unit.app M).val.app U) hv.symm
+
+end UnitHelpers
 
 /-- Compatibility of the ordinary tensor comparison with the actual tensor unit.
 Source: blueprint order 1275, proof step 2; Stacks 03EL
@@ -815,7 +1019,9 @@ theorem ordinaryUnit_coherence (M : modules d Y) :
       (ordinaryRightUnit X (ring d X)
         ((proEtaleRingModulePullback f (ring d Y) (ring d X) (coefficients d f)).obj M)).hom =
     (proEtaleRingModulePullback f (ring d Y) (ring d X) (coefficients d f)).map
-      (ordinaryRightUnit Y (ring d Y) M).hom := sorry
+      (ordinaryRightUnit Y (ring d Y) M).hom := by
+  exact moduleUnit_tensor_coherence f (ring d Y) (ring d X) (coefficients d f)
+    (ordinaryUnit d f) (ordinaryUnit_existsUnique d f).exists.choose_spec M
 
 
 variable {n : ℕ} (r : Resolution d (X := X) (Y := Y) K n)
@@ -852,7 +1058,10 @@ def Resolution.totalInverse :=
     (proEtaleOrdinaryTensorPullback f (ring d Y) (ring d X) (coefficients d f))
     (fun {_ _ _ _} v z ↦ proEtaleOrdinaryTensorPullback_naturality
       f (ring d Y) (ring d X) (coefficients d f) _ _ _ _ v z)
-    (ordinaryUnit d f) (ordinaryUnit_coherence d f)
+    (ordinaryUnit d f) (fun M ↦ by
+      have h := ordinaryUnit_coherence d f M
+      rw [ordinaryRightUnit_eq, ordinaryRightUnit_eq] at h
+      exact h)
     r.injective r.coefficient r.bounded r.package.N r.package.i r.package.p r.package.splitting
 
 /-- The coefficient model and its ordinary pullback are flat K-flat representatives.

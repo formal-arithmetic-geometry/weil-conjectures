@@ -7,30 +7,8 @@ module
 public import Sheaf.Paper.SemilinearDerivedCalculus
 public import Sheaf.Paper.SemilinearSystemModels
 public import Sheaf.Paper.SemilinearGeometryOps
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
-import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.CategoryTheory.RingedSliceExtensionTensor
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.CategoryTheory.SiteCoveringAxioms
-import Sheaf.Paper.KFlatRingedToposPullback
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import Sheaf.SixFunctors.RingedDerivedMonoidalComparisons
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+import Sheaf.Paper.SemilinearSystemsExistence
+import Sheaf.Paper.SemilinearOperationsExistence
 
 /-! # Ordinary derived semilinear sections
 
@@ -98,53 +76,6 @@ structure SemilinearDerivedSectionsData where
   /-- Exact open-localization operations with the actual normalized level adjunctions. -/
   localization : ∀ U : C, OpenSystems.{c, v, r} J B τ U
 
-/-- Ordinary derived semilinear sections and their coefficient-linear operations.
-Source: Zheng, Construction 4.1, Lemma 4.10 and Proposition 4.17; Stacks 079P, 06YS, 06YY, 07A4,
-07A6, 08J7--08JB (blueprint: lem-coef-semilinear-derived-sections).
-Proof: the vertical sequence site identifies module sheaves with strict semilinear
-systems. Kernels and sheafified cokernels are componentwise; Grothendieck abelianness
-and K-injective resolutions apply to this small ringed site. Termwise exact evaluation
-therefore descends to the ordinary localization, with componentwise cones proving
-joint conservativity. Transpose the actual horizontal restrictions by the normalized
-K-flat scalar-extension adjunctions to obtain the reductions; tensor reassociation
-and the strict tower cocycle prove their composition formula.
-Apply inverse image and direct image to the strict systems. Their ordinary adjunction
-is componentwise. Resolve on the system site to derive direct image. Finite left
-extension adjoints to evaluation, computed by coefficient extension below the given
-index and zero above it, identify evaluation of derived direct image by Yoneda; no
-preservation of K-injectives by evaluation is required. Choose the ordinary
-component realizations with the identity on section carriers. On K-injective
-targets the derived Hom equivalence is the localization of the ordinary one,
-using the actual right-derived comparison isomorphism. This fixes the derived
-adjunction before evaluation. The restriction coefficient comparison is the
-identity on underlying sheaves; its scalar-adjunction transpose fixes coefficient
-pullback. Transposing the coefficient
-pullback comparison gives exactly coefficientMate and the displayed transition
-formula. The unit and counit formulas follow from the same Hom correspondence.
-For localization, take the levelwise direct-sum extension presheaves and sheafify;
-their summand Hom correspondence gives the normalized adjunction. Exactness gives
-the termwise derived pair. A compatible ring-system map gives the sectionwise ring
-map systemMap, so the recorded change-of-rings universal pair on the sequence site
-is its scalar extension. The restriction evaluation identity gives its level tensor
-comparison by adjunction. K-flat resolutions and total tensor on the sequence site
-likewise give tensorEvaluation. For geometric tensor pullback, first use the
-inverse-image formula on generalized pure tensors. On each total summand use
-exactly its inverse ordinary map; the signed differential gives the chain map.
-Localize on K-flat representatives with flat terms on the system category itself. This fixes
-tensorPullback without any inference from evaluations of derived morphisms.
-Tensor-Hom adjunction and the finite left extensions
-to evaluation give homEvaluation precisely when the first input is cartesian. Its
-evaluation normalization forces its transition to be homReductionTranspose, by
-adjunction and the inverse cartesian reduction. Finally transpose tensor pullback
-followed by counit tensor identity: this is tensorProjection. The unit/counit and
-tensor evaluation equations give ProjectionEvaluation. Naturality, exchange and
-composition of these actual transformations are the ordinary mate words; their
-evaluation compatibility is evaluation_mate below and their pasting laws are the
-recorded mateEquiv_vcomp and mateEquiv_hcomp. No conservativity assertion is used
-to infer equality of arbitrary derived morphisms. -/
-theorem semilinearDerivedSections :
-    Nonempty (SemilinearDerivedSectionsData.{c, v, r} J B τ) := by
-  sorry
 
 end WeilConjectures.SemilinearSections
 
@@ -232,5 +163,243 @@ theorem evaluation_mate
   rw [← h.map_comp, A₁.counit]
   rw [← h.map_comp, Iso.hom_inv_id_app_assoc]
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem evaluation_transpose
+    {E : X ⥤ x} {F : Y ⥤ y} {L : X ⥤ Y} {R : Y ⥤ X}
+    {l : x ⥤ y} {r : y ⥤ x} (adj : L ⊣ R) (level : l ⊣ r)
+    (A : AdjunctionEvaluation E F adj level) {P : X} {Q : Y} (f : L.obj P ⟶ Q) :
+    E.map ((adj.homEquiv _ _) f) ≫ A.right.hom.app Q =
+      (level.homEquiv _ _) (A.left.inv.app P ≫ F.map f) := by
+  rw [adj.homEquiv_unit, level.homEquiv_unit]
+  simp only [Functor.map_comp, Category.assoc]
+  have hr := A.right.hom.naturality f
+  dsimp only [Functor.comp_map] at hr
+  rw [hr]
+  have hu' : E.map (adj.unit.app P) ≫ A.right.hom.app (L.obj P) =
+      level.unit.app (E.obj P) ≫ r.map (A.left.inv.app P) := by
+    rw [← A.unit P]
+    have hi := (r.mapIso (A.left.app P)).hom_inv_id
+    change r.map (A.left.hom.app P) ≫ r.map (A.left.inv.app P) = 𝟙 _ at hi
+    simp only [Category.assoc, hi]
+    erw [Category.comp_id]
+  rw [← Category.assoc, hu', Category.assoc]
+
 end CategoricalEvaluation
+end WeilConjectures.SemilinearSections
+
+namespace WeilConjectures.SemilinearSections
+
+variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
+  [ambientSmall : EssentiallySmall.{max c v r} C]
+  (B : ℕ → Sheaf J CommRingCat.{max c v r})
+  (τ : ∀ n : ℕ, B (n + 1) ⟶ B n)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem reduction_naturality {m n : ℕ} (h : n ≤ m)
+    (S : ScalarData.{c, v, max c v r} (coefficientMap.{c, v, max c v r} J B τ h))
+    {M N : DS.{c, v, max c v r} J B τ} (f : M ⟶ N) :
+    S.T.map ((e.{c, v, max c v r} J B τ m).map f) ≫
+        reduction.{c, v, max c v r} J B τ h S N =
+      reduction.{c, v, max c v r} J B τ h S M ≫
+        (e.{c, v, max c v r} J B τ n).map f := by
+  apply (S.adjunction.homEquiv _ _).injective
+  rw [S.adjunction.homEquiv_naturality_left,
+    S.adjunction.homEquiv_naturality_right]
+  simp only [reduction, Equiv.apply_symm_apply]
+  exact (derivedTransition.{c, v, max c v r} J B τ h).naturality f
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem push_transition_of_pull (A : Data.{c, v, r} J B τ)
+    {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
+    (J' : GrothendieckTopology C')
+    (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))
+    (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
+    (adjSet : uInv ⊣ uPush)
+    (G : Geometry.{c, v, r} J B τ A J' uInv uPush adjSet)
+    (hp : G.PullTransitionFormula J B τ A J' uInv uPush adjSet) :
+    G.TransitionFormula J B τ A J' uInv uPush adjSet := by
+  intro m n h N
+  let V := derivedExact.{c, v, max c v r, c, v} J J' (B n)
+    (G.coefficients n) (G.inverseImage n).modules
+  let S := (G.target.scalar h).T
+  let P := G.push.rightDerivedFunctor.obj N
+  have hr :
+      V.map (reduction.{c, v, max c v r} J B τ h (A.scalar h) P) ≫
+          (G.pullEvaluation n).inv.app P =
+        (G.coefficientPullback h).hom.app ((e.{c, v, max c v r} J B τ m).obj P) ≫
+          S.map ((G.pullEvaluation m).inv.app P) ≫
+            reduction.{c, v, max c v r} J' G.coefficients G.coefficientTransition h
+              (G.target.scalar h)
+              (G.pull.mapDerivedCategory.obj P) := by
+    apply (cancel_epi
+      (S.map ((G.pullEvaluation m).hom.app P) ≫
+        (G.coefficientPullback h).inv.app ((e.{c, v, max c v r} J B τ m).obj P))).1
+    simp only [Category.assoc]
+    rw [← reassoc_of% (hp h P)]
+    simp only [Iso.inv_hom_id_app_assoc]
+    have hi := (S.mapIso ((G.pullEvaluation m).app P)).hom_inv_id
+    change S.map ((G.pullEvaluation m).hom.app P) ≫
+      S.map ((G.pullEvaluation m).inv.app P) = 𝟙 _ at hi
+    simp only [← Category.assoc, hi, Category.id_comp]
+    simp only [Category.assoc, Iso.hom_inv_id_app]
+    erw [Category.comp_id]
+  apply ((G.derivedLevelAdjunction n).homEquiv _ _).symm.injective
+  change V.map _ ≫ (G.derivedLevelAdjunction n).counit.app _ =
+    V.map _ ≫ (G.derivedLevelAdjunction n).counit.app _
+  simp only [Functor.map_comp, Category.assoc]
+  dsimp only [V]
+  rw [G.counit_evaluation n N]
+  rw [reassoc_of% hr]
+  have hn := reduction_naturality.{c, v, r} J' G.coefficients G.coefficientTransition
+    h (G.target.scalar h) (G.adjunction.counit.app N)
+  dsimp only [Functor.comp_obj] at hn
+  dsimp only [P]
+  erw [← hn]
+  rw [← S.map_comp_assoc, ← G.counit_evaluation m N, S.map_comp]
+  have hq := (G.coefficientPullback h).hom.naturality
+    ((G.pushEvaluation m).hom.app N)
+  dsimp only [Functor.comp_map] at hq
+  simp only [Category.assoc]
+  rw [← reassoc_of% hq]
+  have hc := (G.derivedLevelAdjunction n).counit.naturality
+    (reduction.{c, v, max c v r} J' G.coefficients G.coefficientTransition h (G.target.scalar h) N)
+  dsimp only [Functor.comp_map, Functor.id_map] at hc
+  rw [hc]
+  dsimp only [Geometry.coefficientMate]
+  rw [reassoc_of% (mateEquiv_counit (G.derivedLevelAdjunction m)
+    (G.derivedLevelAdjunction n) (TwoSquare.mk _ _ _ _ (G.coefficientPullback h).hom)
+      ((e.{c, v, max c v r} J' G.coefficients G.coefficientTransition m).obj N))]
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.defeqAttrib.useBackward true in
+private theorem projection_evaluation (A : Data.{c, v, r} J B τ)
+    {C' : Type c} [Category.{v} C'] [EssentiallySmall.{max c v r} C']
+    (J' : GrothendieckTopology C')
+    (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf J' (Type (max c v r)))
+    (uPush : Sheaf J' (Type (max c v r)) ⥤ Sheaf J (Type (max c v r)))
+    (adjSet : uInv ⊣ uPush)
+    (G : Geometry.{c, v, r} J B τ A J' uInv uPush adjSet) :
+    G.ProjectionEvaluation J B τ A J' uInv uPush adjSet := by
+  intro n N P
+  let V := derivedExact.{c, v, max c v r, c, v} J J' (B n)
+    (G.coefficients n) (G.inverseImage n).modules
+  let s := (G.target.levelClosed n).tensor
+  let E := e.{c, v, max c v r} J B τ n
+  let F := e.{c, v, max c v r} J' G.coefficients G.coefficientTransition n
+  let ev : AdjunctionEvaluation E F G.adjunction (G.derivedLevelAdjunction n) :=
+    { left := G.pullEvaluation n
+      right := G.pushEvaluation n
+      unit := G.unit_evaluation n
+      counit := G.counit_evaluation n }
+  rw [Geometry.tensorProjection]
+  rw [reassoc_of% (evaluation_transpose G.adjunction (G.derivedLevelAdjunction n) ev _)]
+  rw [← (G.derivedLevelAdjunction n).homEquiv_naturality_right]
+  simp only [Geometry.levelTensorProjection, ← Category.assoc]
+  erw [← (G.derivedLevelAdjunction n).homEquiv_naturality_left
+    ((A.tensorEvaluation n).hom.app (G.push.rightDerivedFunctor.obj N, P) ≫
+      (A.levelClosed n).tensor.map
+        (Prod.mkHom ((G.pushEvaluation n).hom.app N) (𝟙 ((e J B τ n).obj P))))]
+  congr 1
+  simp only [Functor.map_comp, Category.assoc]
+  have hn := (G.target.tensorEvaluation n).hom.naturality
+    (Prod.mkHom (G.adjunction.counit.app N) (𝟙 (G.pull.mapDerivedCategory.obj P)))
+  dsimp only [Functor.comp_map, Functor.prod_map] at hn
+  rw [reassoc_of% hn]
+  have hc : F.map (G.adjunction.counit.app N) =
+      (G.pullEvaluation n).hom.app (G.push.rightDerivedFunctor.obj N) ≫
+        V.map ((G.pushEvaluation n).hom.app N) ≫
+          (G.derivedLevelAdjunction n).counit.app (F.obj N) := by
+    dsimp only [F, V]
+    rw [G.counit_evaluation n N]
+    simp only [Iso.hom_inv_id_app_assoc]
+  have hm :
+      s.map (Prod.mkHom (F.map (G.adjunction.counit.app N))
+          (F.map (𝟙 (G.pull.mapDerivedCategory.obj P)))) ≫
+        s.map (Prod.mkHom (𝟙 (F.obj N)) ((G.pullEvaluation n).hom.app P)) =
+      s.map (Prod.mkHom
+          ((G.pullEvaluation n).hom.app (G.push.rightDerivedFunctor.obj N))
+          ((G.pullEvaluation n).hom.app P)) ≫
+        s.map (Prod.mkHom (V.map ((G.pushEvaluation n).hom.app N)) (𝟙 _)) ≫
+          s.map (Prod.mkHom
+            ((G.derivedLevelAdjunction n).counit.app (F.obj N)) (𝟙 _)) := by
+    simp only [← s.map_comp]
+    congr 1
+    ext <;> simp [hc]
+  dsimp only [F, s, V] at hm
+  rw [hm]
+  rw [reassoc_of% (G.tensorPullback_evaluation n (G.push.rightDerivedFunctor.obj N) P)]
+  dsimp only [ev]
+  simp only [Iso.inv_hom_id_app_assoc]
+  have hl := (G.levelTensorPullback n).hom.naturality
+    (Prod.mkHom ((G.pushEvaluation n).hom.app N) (𝟙 ((e J B τ n).obj P)))
+  dsimp only [Functor.comp_map, Functor.prod_map] at hl
+  rw [reassoc_of% hl]
+  simp only [CategoryTheory.Functor.map_id]
+  rfl
+
+/-- Ordinary derived semilinear sections and their coefficient-linear operations.
+Source: Zheng, Construction 4.1, Lemma 4.10 and Proposition 4.17; Stacks 079P, 06YS, 06YY, 07A4,
+07A6, 08J7--08JB (blueprint: lem-coef-semilinear-derived-sections).
+Proof: the vertical sequence site identifies module sheaves with strict semilinear
+systems. Kernels and sheafified cokernels are componentwise; Grothendieck abelianness
+and K-injective resolutions apply to this small ringed site. Termwise exact evaluation
+therefore descends to the ordinary localization, with componentwise cones proving
+joint conservativity. Transpose the actual horizontal restrictions by the normalized
+K-flat scalar-extension adjunctions to obtain the reductions; tensor reassociation
+and the strict tower cocycle prove their composition formula.
+Apply inverse image and direct image to the strict systems. Their ordinary adjunction
+is componentwise. Resolve on the system site to derive direct image. Finite left
+extension adjoints to evaluation, computed by coefficient extension below the given
+index and zero above it, identify evaluation of derived direct image by Yoneda; no
+preservation of K-injectives by evaluation is required. Choose the ordinary
+component realizations with the identity on section carriers. On K-injective
+targets the derived Hom equivalence is the localization of the ordinary one,
+using the actual right-derived comparison isomorphism. This fixes the derived
+adjunction before evaluation. The restriction coefficient comparison is the
+identity on underlying sheaves; its scalar-adjunction transpose fixes coefficient
+pullback. Transposing the coefficient
+pullback comparison gives exactly coefficientMate and the displayed transition
+formula. The unit and counit formulas follow from the same Hom correspondence.
+For localization, take the levelwise direct-sum extension presheaves and sheafify;
+their summand Hom correspondence gives the normalized adjunction. Exactness gives
+the termwise derived pair. A compatible ring-system map gives the sectionwise ring
+map systemMap, so the recorded change-of-rings universal pair on the sequence site
+is its scalar extension. The restriction evaluation identity gives its level tensor
+comparison by adjunction. K-flat resolutions and total tensor on the sequence site
+likewise give tensorEvaluation. For geometric tensor pullback, first use the
+inverse-image formula on generalized pure tensors. On each total summand use
+exactly its inverse ordinary map; the signed differential gives the chain map.
+Localize on K-flat representatives with flat terms on the system category itself. This fixes
+tensorPullback without any inference from evaluations of derived morphisms.
+Tensor-Hom adjunction and the finite left extensions
+to evaluation give homEvaluation precisely when the first input is cartesian. Its
+evaluation normalization forces its transition to be homReductionTranspose, by
+adjunction and the inverse cartesian reduction. Finally transpose tensor pullback
+followed by counit tensor identity: this is tensorProjection. The unit/counit and
+tensor evaluation equations give ProjectionEvaluation. Naturality, exchange and
+composition of these actual transformations are the ordinary mate words; their
+evaluation compatibility is evaluation_mate below and their pasting laws are the
+recorded mateEquiv_vcomp and mateEquiv_hcomp. No conservativity assertion is used
+to infer equality of arbitrary derived morphisms. -/
+theorem semilinearDerivedSections :
+    Nonempty (SemilinearDerivedSectionsData.{c, v, r} J B τ) := by
+  let S := (semilinearSystemData.{c, v, r} J B τ).some
+  let O := (semilinearOperationsData.{c, v, r} J B τ S.systems).some
+  exact ⟨{
+    systems := S.systems
+    homTransition := S.homTransition
+    geometric := by
+      intro C' cat small J' uInv uPush adjSet hlim
+      obtain ⟨G, hG⟩ := O.geometric J' uInv uPush adjSet
+      exact ⟨G, push_transition_of_pull J B τ S.systems J' uInv uPush adjSet G hG,
+        hG, projection_evaluation J B τ S.systems J' uInv uPush adjSet G⟩
+    coefficientExtension := O.coefficientExtension
+    localization := O.localization
+  }⟩
+
+
 end WeilConjectures.SemilinearSections

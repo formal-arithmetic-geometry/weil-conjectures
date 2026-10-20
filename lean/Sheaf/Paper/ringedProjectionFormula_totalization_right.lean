@@ -7,26 +7,8 @@ module
 
 
 public import Sheaf.Paper.ProjectionFormulaArrows
-import Sheaf.Paper.StrictPerfectCoefficientPackage
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
-import Sheaf.Algebra.Homology.SplitPerfectTensorKInjective
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Mathlib.Algebra.Homology.BifunctorShift
-import Sheaf.Algebra.Homology.KFlatResolutionGeneral
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.KFlatCoefficientUniverse
-import Sheaf.Paper.ProjectionFormulaProjectiveSummand
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-import Sheaf.CategoryTheory.ModulePullbackTensorIso
-import Sheaf.Paper.RingedTopoiDerivedPullback
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import Sheaf.Paper.ProEtaleProjectionFormulaArrows
+import Sheaf.Paper.ringedProjectionFormula_totalization_left
 
 /-! Auxiliary split for totalization proof. -/
 
@@ -155,7 +137,30 @@ theorem ringedProjectionFormula_totalization_right
       (ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon hLF
       PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
       E K hK repE F P hbounded).1 =
-        𝟙 (RF.obj (TS.obj (E, LF.obj (DerivedCategory.Q.obj F)))) := by sorry
+        𝟙 (RF.obj (TS.obj (E, LF.obj (DerivedCategory.Q.obj F)))) := by
+  -- The specified finite-total inverse is invertible, so the first equation suffices.
+  let arrows := ringedProjectionFormulaArrows uInv uPush adj I c uStar hobj hmap LF epsilon
+    hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
+    E K hK repE F P hbounded
+  have : IsIso arrows.2 := by
+    let := monoidalCategory R
+    let := monoidalCategory S
+    let := ringedTensorPreadditive R
+    let := ringedTensorPreadditive S
+    let unitData := canonicalRingedTensorComparison_unit R S RI uInv I c uStar hobj hmap k
+    let j := Classical.choose unitData.exists
+    have hj := Classical.choose_spec unitData.exists
+    have : IsIso (tensorAdjunctionTotal uStar V am k.mu k.naturality K F) :=
+      tensorAdjunctionTotal_isIso uStar V am k.mu k.naturality j hj K F
+        hbounded P.N P.i P.p P.splitting
+    dsimp only [arrows, ringedProjectionFormulaArrows, tensorAdjunctionTotalInverse]
+    infer_instance
+  have hleft : arrows.1 ≫ arrows.2 = 𝟙 _ :=
+    ringedProjectionFormula_totalization_left uInv uPush adj I c uStar hobj hmap LF epsilon
+      hLF PR PS hPR hPS TR TS rR rS k V am RF eta hRF computeR computeL adjD canonicalAdj
+      E K hK repE F P hbounded
+  change arrows.2 ≫ arrows.1 = 𝟙 _
+  rw [(comp_hom_eq_id arrows.2).mp hleft, IsIso.hom_inv_id]
 
 
 end SheafOfModules

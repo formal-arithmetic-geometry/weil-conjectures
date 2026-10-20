@@ -6,15 +6,11 @@ Authors: SHEAF group Q03
 module
 
 public import Sheaf.Algebra.Homology.FiniteFilteredLocalization
-import Sheaf.CategoryTheory.DoubleComplexTotal
-import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
-import Mathlib.Algebra.Homology.HomologySequence
-import Mathlib.Algebra.Homology.HomologySequenceLemmas
-import Sheaf.Algebra.Homology.FilteredComplexSubquotients
-import Sheaf.Algebra.Homology.FilteredConeLocalization
-import Sheaf.CategoryTheory.EnoughStrictFilteredInjectives
-import Sheaf.Paper.FiniteFilteredGradedExactness
-import WeilConjectures.CategoryTheory.Abelian.Filtration
+import Sheaf.Algebra.Homology.FilteredInjectiveResolution
+import Sheaf.Algebra.Homology.FilteredAcyclicInjectiveVanishing
+import Sheaf.CategoryTheory.InjectiveGradedFiltrationSplits
+import Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
+import Mathlib.CategoryTheory.ObjectProperty.Local
 
 /-!
 # Filtered injectives compute bounded-below filtered localization
@@ -46,56 +42,26 @@ comparison equivalence, compatibly with forgetting and every graded-piece functo
 `p = none` denotes forgetting and `p = some n` denotes the `n`-th graded piece.
 
 Source: Stacks, Derived Categories, Tags 05TW, 05TY and 015Q.
-Proof (the twelve steps of the DAG node):
-1. Use `def-sp-filtration` and `def-sp-filtered-complex-subquotients` for subobject
-   and quotient filtrations. Graded exactness gives strict exactness by
-   `lem-trf-finite-filtered-graded-exactness`; use the cone triangulation of
-   `lem-trf-filtered-cone-localization`. Shift the lower cochain bound to zero.
-2. Repeatedly embed each successive quotient strictly into a filtered injective,
-   using `lem-trf-enough-strict-filtered-injectives`. The quotient-inclusion
-   composites define a resolution of a single object (05TT).
-3. Lift a map between single-object resolutions one cochain degree at a time.
-   The extension property of filtered injectives extends across strict image
-   inclusions; graded exactness identifies the required coimages (05TU).
-4. For a strict short exact sequence, extend the augmentation and construct the
-   off-diagonal maps in a horseshoe resolution. Its terms are the two outside
-   terms' direct sums. The equation on off-diagonal maps makes the differential
-   square zero. The homology long exact sequence and its naturality
-   (`lem-weil-pbc-complex-ses-homology-long-exact` and
-   `lem-weil-pbc-complex-ses-long-exact-naturality`) prove the middle augmentation
-   is a graded quasi-isomorphism (05TV).
-5. Resolve the kernels and coimages of the original differentials. Lift the maps
-   from coimages to the next kernels and insert them between the horseshoe
-   projections and inclusions. Their successive composites vanish. This gives
-   the first-quadrant double complex of `def-sp-double-complex-total` (05TW).
-6. Totalize with the standard signs. Every diagonal is finite, so its terms are
-   filtered injective. Grading commutes with these finite sums. Apply
-   `lem-sc-first-quadrant-column-augmentation` to the flipped double complex;
-   multiplication by `(-1)^(i*r)` identifies the two total sign conventions and
-   is the identity on the augmentation. Shift back to obtain the resolution.
-7. A map from a graded-acyclic complex into a bounded-below filtered-injective
-   complex is null-homotopic. Inductively factor its residual through the strict
-   image of the source differential and extend using filtered injectivity
-   (`lem-trf-finite-filtered-graded-exactness`,
-   `lem-trf-enough-strict-filtered-injectives`; 05TX).
-8. Apply step 7 to the cone and shifted cone of a graded quasi-isomorphism.
-   The cone formulas give bijectivity of precomposition on Hom into an injective
-   complex (`lem-trf-filtered-cone-localization`; 05TY(1)).
-9. Descend the contravariant Hom functor through localization. Evaluation of its
-   action on a localized arrow at the identity gives the inverse of the
-   localization Hom map; naturality proves both inverse equations (05TY(2)).
-10. The comparison is fully faithful by step 9 and essentially surjective by
-   step 6. Inclusion and localization preserve cone triangles and shifts, so
-   this is an exact equivalence (`lem-trf-filtered-cone-localization`; 015Q).
-11. Split the successive filtration sequences of a filtered injective, starting
-   at the final nonzero step. Its underlying object is a finite sum of injective
-   graded objects and therefore injective. Grading inverts filtered
-   quasi-isomorphisms by definition; forgetting does so by graded exactness.
-   The termwise squares descend canonically through localization (015Q).
-12. Every embedding, quotient, kernel, finite sum and extension above retains a
-   prescribed filtration interval. Thus the same assertions and comparison
-   squares hold for each fixed interval, including a single graded piece and
-   the zero object (05TS, 05TW, 05TX, 05TY and 015Q).
+Proof:
+1. Apply `filteredInjectiveResolution`, the separate Tag 05TW construction.
+2. By `filteredAcyclic_injective_vanishing` (Tag 05TX), every graded-acyclic complex
+   has only the zero map to a bounded-below complex of filtered injectives. Apply
+   exactness of Hom to a distinguished triangle of a graded quasi-isomorphism and
+   its inverse rotation. The graded cones are acyclic by the ordinary abelian cone
+   criterion. Thus precomposition by the quasi-isomorphism is bijective.
+3. In a left fraction ending at I, extend the identity of I across its denominator.
+   This gives a retraction, so the fraction is the image of an ordinary morphism.
+   The same retraction cancels the denominator witnessing equality of two images.
+4. Full faithfulness of the inclusion and step 3 imply full faithfulness of the
+   comparison. Step 1 and essential surjectivity of localization give essential
+   surjectivity. The standard inclusion and localization instances give exactness.
+5. Split a term's finite filtration using `injective_graded_filtration_splits`.
+   Its underlying object is isomorphic to a finite sum of injectives, hence is
+   injective; its graded pieces are injective by definition.
+6. Evaluation commutes with inclusion termwise. The factorization isomorphism for
+   the localization lift and the composition isomorphism for homotopy functors
+   give the displayed natural comparison isomorphisms.
+All arguments use the same B, including unrestricted and prescribed intervals.
 (blueprint: lem-trf-filtered-localization-injective-model). -/
 theorem filteredLocalization_injectiveModel (B : Option (ℤ × ℤ)) :
     (∀ K : CochainComplex.Plus (FiniteFilteredObjects C B false),
@@ -116,6 +82,120 @@ theorem filteredLocalization_injectiveModel (B : Option (ℤ × ℤ)) :
       (filteredInjectiveComparison C B ⋙ finiteFilteredDerivedEvaluation C B p ≅
         (filteredEvaluation C B true p).mapHomotopyCategoryPlus ⋙
           DerivedCategory.Plus.Qh)) := by
-  sorry
+  have hres := filteredInjectiveResolution C B
+  have hzero := filteredAcyclic_injective_vanishing C B
+  have hlocal (I : FiniteFilteredHomotopyPlus C B false)
+      (hi : ∀ n p : ℤ, Injective ((I.obj.as.X n).obj.filtration.gradedPiece p)) :
+      (finiteFilteredQuasiIso C B).isLocal I := by
+    let E (p : ℤ) := (filteredEvaluation C B false (some p)).mapHomotopyCategoryPlus ⋙
+      HomotopyCategory.Plus.ι C
+    let P (p : ℤ) := (HomotopyCategory.subcategoryAcyclic C).inverseImage (E p)
+    have hz (A : FiniteFilteredHomotopyPlus C B false) (ha : ∀ p, P p A) (f : A ⟶ I) :
+        f = 0 :=
+      hzero A I (fun p ↦ (HomotopyCategory.mem_subcategoryAcyclic_iff _).1 (ha p)) hi f
+    intro X Y f hf
+    obtain ⟨Z, g, h, hT⟩ := Pretriangulated.distinguished_cocone_triangle f
+    let T := Pretriangulated.Triangle.mk f g h
+    have ha (p : ℤ) : P p Z := by
+      have hp := hf p
+      change HomotopyCategory.quasiIso C (.up ℤ) ((E p).map f) at hp
+      rw [HomotopyCategory.quasiIso_eq_trW_subcategoryAcyclic] at hp
+      exact ((HomotopyCategory.subcategoryAcyclic C).trW_iff_of_distinguished
+        ((E p).mapTriangle.obj T) ((E p).map_distinguished T hT)).1 hp
+    constructor
+    · suffices ∀ (α : Y ⟶ I), f ≫ α = 0 → α = 0 from fun α β hα ↦ by
+        simpa only [sub_eq_zero] using this (α - β) (by simpa [sub_eq_zero] using hα)
+      intro α hα
+      obtain ⟨β, rfl⟩ := Pretriangulated.Triangle.yoneda_exact₂ T hT α hα
+      simp [hz Z ha β]
+    · intro α
+      obtain ⟨β, hβ⟩ := Pretriangulated.Triangle.yoneda_exact₂ T.invRotate
+        (Pretriangulated.inv_rot_of_distTriang T hT)
+        α (hz _ (fun p ↦ (P p).le_shift (-1) Z (ha p)) _)
+      exact ⟨β, hβ.symm⟩
+  have hhom (K I : FiniteFilteredHomotopyPlus C B false)
+      (hi : ∀ n p : ℤ, Injective ((I.obj.as.X n).obj.filtration.gradedPiece p)) :
+      Function.Bijective ((finiteFilteredQh C B).map : (K ⟶ I) → _) := by
+    let Q := finiteFilteredQh C B
+    let W := finiteFilteredQuasiIso C B
+    constructor
+    · intro f g h
+      obtain ⟨Z, s, hs, heq⟩ := (MorphismProperty.map_eq_iff_postcomp Q W f g).1 h
+      obtain ⟨r, hr⟩ := (hlocal I hi s hs).2 (𝟙 I)
+      calc
+        f = (f ≫ s) ≫ r := by simp [Category.assoc, hr]
+        _ = (g ≫ s) ≫ r := by rw [heq]
+        _ = g := by simp [Category.assoc, hr]
+    · intro f
+      obtain ⟨φ, hφ⟩ := Localization.exists_leftFraction Q W f
+      obtain ⟨r, hr⟩ := (hlocal I hi φ.s φ.hs).2 (𝟙 I)
+      change φ.s ≫ r = 𝟙 I at hr
+      refine ⟨φ.f ≫ r, ?_⟩
+      have hr' : Q.map r = inv (Q.map φ.s) := by
+        rw [← cancel_epi (Q.map φ.s), ← Q.map_comp, hr, Q.map_id]
+        simp
+      rw [Q.map_comp, hr', hφ]
+      rfl
+  have hequiv : (filteredInjectiveComparison C B).IsEquivalence := by
+    let A := (filteredInjectiveInclusion C B).mapHomotopyCategoryPlus
+    let Q := finiteFilteredQh C B
+    let F :=
+      filteredInjectiveComparison C B
+    let : (filteredInjectiveInclusion C B).Full := by
+      dsimp only [filteredInjectiveInclusion]
+      infer_instance
+    let : (filteredInjectiveInclusion C B).Faithful := by
+      dsimp only [filteredInjectiveInclusion]
+      infer_instance
+    have hb (K I : FiniteFilteredHomotopyPlus C B true) :
+        Function.Bijective (F.map : (K ⟶ I) → _) := by
+      exact (hhom (A.obj K) (A.obj I)
+        (fun n p ↦ (I.obj.as.X n).property.2.2 p rfl)).comp
+          ⟨A.map_injective, A.map_surjective⟩
+    let : F.Full := ⟨fun {K I} ↦ (hb K I).2⟩
+    let : F.Faithful := ⟨fun {K I} ↦ (hb K I).1⟩
+    let : Q.EssSurj := Localization.essSurj Q (finiteFilteredQuasiIso C B)
+    let : F.EssSurj := ⟨fun Y ↦ by
+      let e := Q.objObjPreimageIso Y
+      obtain ⟨K, hK⟩ := HomotopyCategory.Plus.quotient_obj_surjective (Q.objPreimage Y)
+      obtain ⟨I, f, hf⟩ := hres K
+      refine ⟨(HomotopyCategory.Plus.quotient (FiniteFilteredObjects C B true)).obj I, ?_⟩
+      exact ⟨(Localization.isoOfHom Q (finiteFilteredQuasiIso C B) _ hf).symm ≪≫
+        Q.mapIso (eqToIso hK) ≪≫ e⟩⟩
+    exact {}
+  refine ⟨hres, hhom, hequiv, ?_⟩
+  constructor
+  · dsimp only [filteredInjectiveComparison]
+    infer_instance
+  constructor
+  · intro I n p
+    cases p with
+    | none =>
+      simpa [filteredEvaluation] using
+        (show Injective (I.obj.as.X n).obj.obj from by
+          obtain ⟨a, b, ha, hb⟩ := (I.obj.as.X n).property.1
+          let c := max a b
+          have hc : (I.obj.as.X n).obj.filtration.F (c + 1) = ⊥ := by
+            apply le_antisymm _ bot_le
+            rw [← hb]
+            exact (I.obj.as.X n).obj.filtration.antitone (by dsimp [c]; omega)
+          obtain ⟨J, hJ, _, θ, _⟩ :=
+            FilteredObject.injective_graded_filtration_splits (I.obj.as.X n).obj a c
+              (le_max_left _ _) ha hc (fun p ↦ (I.obj.as.X n).property.2.2 p rfl)
+          let := hJ
+          exact Injective.of_iso θ.symm inferInstance)
+    | some p =>
+      exact (I.obj.as.X n).property.2.2 p rfl
+  · intro p
+    have e : filteredInjectiveInclusion C B ⋙ filteredEvaluation C B false p =
+        filteredEvaluation C B true p := by
+      cases p <;> rfl
+    let A := (filteredInjectiveInclusion C B).mapHomotopyCategoryPlus
+    let E := (filteredEvaluation C B false p).mapHomotopyCategoryPlus
+    let Q := DerivedCategory.Plus.Qh (C := C)
+    refine ⟨Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft A
+      (eqToIso (Localization.Construction.fac _ _)) ≪≫
+      (Functor.associator A E Q).symm ≪≫
+      Functor.isoWhiskerRight (Functor.mapHomotopyCategoryPlusCompIso (eqToIso e)) Q⟩
 
 end CategoryTheory

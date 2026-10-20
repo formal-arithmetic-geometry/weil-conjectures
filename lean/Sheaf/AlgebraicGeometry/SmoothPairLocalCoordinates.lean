@@ -13,21 +13,9 @@ public import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
 public import Mathlib.RingTheory.Regular.RegularSequence
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 
-import Mathlib.RingTheory.Smooth.Flat
-import Mathlib.RingTheory.KrullDimension.Regular
-import Mathlib.RingTheory.Kaehler.TensorProduct
-import Mathlib.RingTheory.LocalRing.Module
-import Sheaf.AlgebraicGeometry.EtaleLocalNormalForm
-import WeilConjectures.RingTheory.SmoothFibreRegularLocal
-import Sheaf.RingTheory.SmoothOverFieldRegularLocal
-import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
-import WeilConjectures.RingTheory.Etale.LocalDimension
-import WeilConjectures.AlgebraicGeometry.EtaleFibreDiscreteSeparablePoints
-import WeilConjectures.RingTheory.MiracleFlatness
-import WeilConjectures.RingTheory.FlatOfFlatClosedFiber
-import Sheaf.AlgebraicGeometry.EtaleAtPrimeFlatUnramifiedCriterion
 import Sheaf.AlgebraicGeometry.SmoothPairRegularEquations
-import Sheaf.RingTheory.RelativeRegularEquationsBaseChange
+import Sheaf.AlgebraicGeometry.SmoothClosedCoordinateLift
+import Sheaf.AlgebraicGeometry.EtaleNearRegularCoordinateFibre
 
 /-!
 # Simultaneous étale coordinates for a smooth closed pair
@@ -184,7 +172,90 @@ theorem Scheme.Hom.exists_etale_smooth_pair_coordinates
           (List.ofFn (fun j : Fin b ↦
             U.toScheme.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op
               (h.appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j)))))) := by
-  sorry
+  obtain ⟨U₀, hy₀, A, eA, f, hf, eY, heY⟩ :=
+    exists_regular_equations_of_smooth_closedImmersion p q i hi y
+  obtain ⟨a, U, _hU, hy, h, v, hh, hpull, hev, hdata⟩ :=
+    Scheme.Hom.exists_coordinate_lift_of_regular_equations p q i hi y U₀ hy₀ A eA f hf eY heY
+  have : Etale v := hev
+  obtain ⟨y', _hy', hyU⟩ := Scheme.exists_preimage_of_isPullback
+    (IsPullback.of_hasPullback i U.ι) y ⟨i y, hy⟩ rfl
+  obtain ⟨T, hTy, hEt⟩ :=
+    Scheme.Hom.exists_etale_open_of_regular_coordinate_fibre (U.ι ≫ p)
+      (pullback.snd i U.ι) a f.length h v hh hpull (fun W ↦ (hdata W).2) y'
+  let V : X.Opens := U.ι ''ᵁ T
+  let k : V.toScheme ⟶ U.toScheme := X.homOfLE (U.ι_image_le T)
+  have hk : k = (U.ι.isoImage T).inv ≫ T.ι := by
+    simp [k]
+  have : Etale (k ≫ h) := by
+    rw [hk, Category.assoc]
+    have : Etale (T.ι ≫ h) := hEt
+    infer_instance
+  let j : pullback i V.ι ⟶ pullback i U.ι :=
+    pullback.lift (pullback.fst i V.ι) (pullback.snd i V.ι ≫ k)
+      (by simp [k, pullback.condition])
+  have Hsmall : IsPullback j (pullback.snd i V.ι) (pullback.snd i U.ι) k := by
+    apply IsPullback.flip
+    apply IsPullback.of_bot (t := (IsPullback.of_hasPullback i U.ι).flip)
+    · simpa [j, k] using (IsPullback.of_hasPullback i V.ι).flip
+    · simp [j]
+  have Hp := Hsmall.paste_horiz hpull
+  have : Etale (j ≫ v) := MorphismProperty.of_isPullback Hp.flip ‹Etale (k ≫ h)›
+  refine ⟨a, f.length, V, ?_, k ≫ h, j ≫ v, ‹_›, ?_, ?_, ‹_›, ?_⟩
+  · exact ⟨⟨i y, hy⟩, by simpa [hyU] using hTy, rfl⟩
+  · simp [Category.assoc, hh, k]
+  · exact Hp
+  · intro W
+    have hW : IsAffineOpen W.1 := W.2
+    let W' : U.toScheme.affineOpens := ⟨k ''ᵁ W.1, hW.image_of_isOpenImmersion k⟩
+    let e : Γ(U.toScheme, W') ≃+* Γ(V.toScheme, W) :=
+      (k.appIso W).commRingCatIsoToRingEquiv
+    let c (j : Fin f.length) : Γ(U.toScheme, W') :=
+      U.toScheme.presheaf.map (homOfLE (le_top : W'.1 ≤ ⊤)).op
+        (h.appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j))))
+    have hc (j : Fin f.length) :
+        V.toScheme.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op
+          ((k ≫ h).appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j)))) =
+        e (c j) := by
+      have he := k.appLE_appIso_inv (U := ⊤) (V := W.1) (by simp)
+      have he' : k.appTop ≫ V.toScheme.presheaf.map (homOfLE le_top).op =
+          U.toScheme.presheaf.map (homOfLE le_top).op ≫ (k.appIso W).hom := by
+        rw [← Iso.comp_inv_eq]
+        simpa [Scheme.Hom.appLE, Scheme.Hom.appTop, Category.assoc] using he
+      rw [Scheme.Hom.comp_appTop, CommRingCat.comp_apply]
+      exact congrArg (fun z : Γ(U.toScheme, ⊤) ⟶ Γ(V.toScheme, W) ↦
+        z (h.appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j))))) he'
+    constructor
+    · rw [Scheme.ker_ideal_of_isPullback_of_isOpenImmersion
+        (pullback.snd i U.ι) (pullback.snd i V.ι) j k Hsmall.flip W]
+      rw [(hdata W').1]
+      have heq : (k.appIso W).inv.hom = e.symm.toRingHom := rfl
+      rw [heq]
+      change (Ideal.span (Set.range c)).comap e.symm.toRingHom = _
+      calc
+        _ = (Ideal.span (Set.range c)).map e.toRingHom := by
+          exact Ideal.comap_symm (I := Ideal.span (Set.range c)) e
+        _ = Ideal.span (Set.range (fun j ↦ e (c j))) := by
+          rw [Ideal.map_span]
+          congr 1
+          ext z
+          constructor
+          · rintro ⟨x, ⟨j, rfl⟩, rfl⟩
+            exact ⟨j, rfl⟩
+          · rintro ⟨j, rfl⟩
+            exact ⟨c j, ⟨j, rfl⟩, rfl⟩
+        _ = _ := by simp_rw [hc]
+    · have hr : RingTheory.Sequence.IsWeaklyRegular Γ(V.toScheme, W)
+          ((List.ofFn c).map e) :=
+        (e.toAddEquiv.isWeaklyRegular_congr (List.forall₂_map_right_iff.mpr
+          (List.forall₂_same.mpr (fun r _ x ↦ e.map_mul r x)))).mp (hdata W').2
+      have hr' : RingTheory.Sequence.IsWeaklyRegular Γ(V.toScheme, W)
+          (List.ofFn (fun j ↦ e (c j))) := by
+        simpa only [List.ofFn_comp'] using hr
+      change RingTheory.Sequence.IsWeaklyRegular Γ(V.toScheme, W)
+        (List.ofFn (fun j ↦
+          V.toScheme.presheaf.map (homOfLE (le_top : W.1 ≤ ⊤)).op
+            ((k ≫ h).appTop (AffineSpace.coord S (ULift.up (Fin.natAdd a j))))))
+      simpa only [hc] using hr' 
 
 end
 

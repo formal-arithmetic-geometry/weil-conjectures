@@ -22,7 +22,7 @@ namespace AlgebraicGeometry.Scheme
 
 private theorem field_section_germ_ext (K Ω : Type u) [Field K] [Field Ω]
     [Algebra K Ω] [IsAlgClosed Ω]
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
     (U : (Spec (.of K)).Etale) (a b : F.obj.obj (op U))
     (h : ∀ x : (pointSmallEtale
       (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).fiber.obj U,
@@ -84,11 +84,11 @@ theorem galoisStalkActionFunctor_full
     let S := Spec (.of K); let J := S.smallEtaleTopology
     let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω)); let p := pointSmallEtale s
     let G := Gal(Ks/K); let V := ObjectProperty.ι (ContAction.IsDiscrete
-      (V := Type (max (u + 1) v)) (G := G)) ⋙ ObjectProperty.ι (Action.IsContinuous
-      (V := Type (max (u + 1) v)) (G := G))
-    ∀ (T : Sheaf J (Type (max (u + 1) v)) ⥤ DiscreteContAction (Type (max (u + 1) v)) G)
-      (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber),
-      (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G) (τ : Ω ≃ₐ[K] Ω)
+      (V := Type (max u v)) (G := G)) ⋙ ObjectProperty.ι (Action.IsContinuous
+      (V := Type (max u v)) (G := G))
+    ∀ (T : Sheaf J (Type (max u v)) ⥤ DiscreteContAction (Type (max u v)) G)
+      (j : T ⋙ V ⋙ Action.forget (Type (max u v)) G ≅ p.sheafFiber),
+      (∀ (F : Sheaf J (Type (max u v))) (g : G) (τ : Ω ≃ₐ[K] Ω)
           (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω))
           (X : S.Etale) (x x' : p.fiber.obj X)
           (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)
@@ -136,7 +136,7 @@ theorem galoisStalkActionFunctor_full
         h₂.symm)
   }⟩
   refine ⟨φ, ?_⟩
-  apply (V ⋙ Action.forget (Type (max (u + 1) v)) G).map_injective
+  apply (V ⋙ Action.forget (Type (max u v)) G).map_injective
   have hp : p.sheafFiber.map φ = ↾q := by
     apply p.presheafFiber_hom_ext
     intro X x
