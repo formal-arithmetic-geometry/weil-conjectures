@@ -18,69 +18,39 @@
  ],
  "proof": [
   {
-   "text": "Every $N\\in D(T_{\\mathrm{proet}},A)$ has a K-flat resolution $P\\to N$ with flat terms [lem-pc-kflat-resolution]. By [lem-pur-derived-change-of-rings], $S_TN$ is represented by the termwise tensor $P\\otimes_{A_T}B_T$, canonically independent of $P$; this complex is again K-flat with flat terms over $B_T$. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], for $u:T\\to V$ the inverse image $u^{-1}P$ is again K-flat with flat terms, so $S_Tu_A^{-1}N$ is represented by $u^{-1}P\\otimes B_T$, and by the item's normalization $\\lambda_{u,N}$ is the class of the termwise sheaf isomorphism $u^{-1}(P\\otimes B_V)\\to u^{-1}P\\otimes B_T$, $u^{-1}(x\\otimes b)\\mapsto u^{-1}x\\otimes b$. By [lem-weil-pbc-proetale-derived-pullback-composition] the composition isomorphisms $c$, hence the square isomorphisms $\\theta^A_\\square,\\theta^B_\\square$ built from them in [def-weil-pbc-ambient-ringed-exchange], are on such complexes the classes of the termwise canonical isomorphisms of inverse images. Hence for every $N\\in D(Y_{\\mathrm{proet}},A)$, represented by $Q$, the two composites $f'^{-1}_Bg_B^{-1}S_YN\\to S_{X'}h_A^{-1}f_A^{-1}N$,\n$$(\\lambda_hf_A^{-1})\\circ(h_B^{-1}\\lambda_f)\\circ(\\theta^BS_Y)\\quad\\text{and}\\quad(S_{X'}\\theta^A)\\circ(\\lambda_{f'}g_A^{-1})\\circ(f'^{-1}_B\\lambda_g),$$\nare classes of termwise maps of sheaf complexes that both send the inverse image of $q\\otimes b$ to $h^{-1}f^{-1}q\\otimes b$ under the canonical identification $f'^{-1}g^{-1}\\cong h^{-1}f^{-1}$; since such local sections generate, the two maps of complexes coincide. This cube identity is an equality of natural transformations of functors $D(Y_{\\mathrm{proet}},A)\\to D(X'_{\\mathrm{proet}},B)$, before taking any mates.",
+   "text": "Apply the canonical constant-ring pullback cube to φ and sq. It is an equality of natural transformations before taking any geometric direct-image mates.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-proetale-derived-pullback-composition",
-    "lem-pc-kflat-resolution",
-    "def-weil-pbc-ambient-ringed-exchange"
+    "lem-sp-constant-scalar-pullback-cube"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47, coefficient inverse-image comparison on K-flat representatives"
-   }
+   "elementary": false
   },
   {
-   "text": "For R=A and R=B, the ambient exchange Ex^R is defined as the mate of the pullback composition isomorphism theta_square^R for the cartesian square. For every scheme map u, chi_u is by definition the mate of lambda_u under the two inverse-image/direct-image adjunctions. Thus the left composite in the claimed equality is the mate obtained by first taking the coefficient square for f and then the geometric exchange square, while the right composite is obtained by first taking the coefficient square for g and then the geometric exchange square. Their underlying left-adjoint composites are the two routes around the coefficient/pullback cube from Step 1.",
+   "text": "For four adjunctions, prove the scalar/geometric cube-to-mates identity by applying injectivity of the final Hom equivalence. The mate-counit equations for all four faces and naturality reduce both sides to the component cube. This is the private generic scalar_exchange_of_cube.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The specified chi and ambient Ex are definitionally the mates of lambda and the canonical pullback-square comparison. Specialize the generic pointwise identity to the four actual geometric adjunctions, using the canonical adjunction wrapper with its explicit constant-coefficient functors. Evaluate the pullback cube at each input and apply the generic identity at M.",
    "uses": [
     "def-weil-pbc-ambient-ringed-exchange",
     "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47, remark-base-change and the definition of the base-change map as an adjoint"
-   }
-  },
-  {
-   "text": "Apply clause 1 (pasting along $G,H$) of [lem-weil-pbc-mate-pasting] with $L_1=f_A^{-1}$, $L_2=f_B^{-1}$, $L_3=f'^{-1}_B$, $G=S_Y$, $H=S_X$, $G_2=g_B^{-1}$, $H_2=h_B^{-1}$, $\\alpha=\\lambda_f$, $\\beta=\\theta^B$: the square $(h_B^{-1}\\lambda_f)\\circ(\\theta^BS_Y)$ has mate $(\\operatorname{Ex}^BS_X)\\circ(g_B^{-1}\\chi_f)$. Apply the same clause with $L_1=f_A^{-1}$, $L_2=f'^{-1}_A$, $L_3=f'^{-1}_B$, $G=g_A^{-1}$, $H=h_A^{-1}$, $G_2=S_{Y'}$, $H_2=S_{X'}$, $\\alpha=\\theta^A$, $\\beta=\\lambda_{f'}$: the square $(S_{X'}\\theta^A)\\circ(\\lambda_{f'}g_A^{-1})$ has mate $(\\chi_{f'}h_A^{-1})\\circ(S_{Y'}\\operatorname{Ex}^A)$. Both computations are with respect to the adjunctions $f_A^{-1}\\dashv Rf_*^A$ and $f'^{-1}_B\\dashv Rf'^B_*$. Finally, from the component formula of [def-weil-pbc-adjunction-mate] and naturality of $\\eta_2,\\varepsilon_1$: for a square $\\alpha:L_2G\\to HL_1$ and transformations $\\sigma:H\\to H'$, $\\tau:G'\\to G$, the square $(\\sigma L_1)\\circ\\alpha\\circ(L_2\\tau)$ has mate $(R_2\\sigma)\\circ\\alpha^\\flat\\circ(\\tau R_1)$. With $\\sigma=\\lambda_h$ this gives: the mate of the first composite of Step 1 is $Rf'^B_*(\\lambda_h)\\circ(\\operatorname{Ex}^BS_X)\\circ(g_B^{-1}\\chi_f)$, the left side of the claim. With $\\tau=\\lambda_g$: the mate of the second composite of Step 1 is $(\\chi_{f'}h_A^{-1})\\circ(S_{Y'}\\operatorname{Ex}^A)\\circ(\\lambda_gRf_*^A)$, the right side.",
-   "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47 (remark-compose-base-change-horizontal): the omitted verification, carried out by mate pasting (Mathlib CategoryTheory/Adjunction/Mates.lean, mateEquiv_vcomp, via lem-weil-pbc-mate-pasting)"
-   }
-  },
-  {
-   "text": "By Step 1 the two squares $f'^{-1}_Bg_B^{-1}S_Y\\to S_{X'}h_A^{-1}f_A^{-1}$ are equal, and the mate of [def-weil-pbc-adjunction-mate] is a function of the square (for the same functors $G=g_B^{-1}S_Y$, $H=S_{X'}h_A^{-1}$ and adjunctions), so by Step 3 their mates, the two sides of the claim evaluated at $M$, are equal. They are components of natural transformations, so the equality is natural in $M$. Only the K-flat computation of scalar extension, exactness of inverse images and the adjunction formalism were used; no properness, boundedness, constructibility, Tor-amplitude or flatness assumption on $A\\to B$ enters.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47, final mate argument and naturality"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-ambient-ringed-exchange",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-sp-constant-scalar-pullback-cube",
+  "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0E47 (remark-compose-base-change-horizontal), with the mate identities of Mathlib/CategoryTheory/Adjunction/Mates.lean"
+  "place": "Tag 0E47; coefficient/pullback cube followed by mate-counit equations and naturality"
  },
  "mathlib_searches": [
   {
@@ -168,11 +138,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-pc-kflat-resolution"
+  "lem-weil-pbc-mate-pasting"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -188,10 +154,9 @@
   "file": "lean/Sheaf/SecSmoothPurity/DirectImageScalarExchange.lean",
   "declaration": "AlgebraicGeometry.ProEtale.directImageScalarExchange",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.directImageScalarExtension",
-   "AlgebraicGeometry.ProEtale.directImageConstantPush",
-   "AlgebraicGeometry.ProEtale.directImageScalarPullbackIso",
+   "AlgebraicGeometry.ProEtale.directImageConstantAdjunction",
    "AlgebraicGeometry.ProEtale.directImageScalarComparison",
+   "AlgebraicGeometry.ProEtale.directImageConstantPullbackIso",
    "AlgebraicGeometry.ProEtale.directImageConstantExchange",
    "AlgebraicGeometry.ProEtale.directImageScalarExchange"
   ],
@@ -199,7 +164,7 @@
   "branch": "newtargets-dag",
   "by": "Q34",
   "date": "2026-10-17",
-  "note": "Repair of returned head 17ef11a3b244: removes every arbitrary functor, adjunction and comparison binder. The constant ring map comes from φ; scalar extension is the existing universal derived ring-sheaf extension; lambda is the canonical reduction/pullback isomorphism with its tensor-unit normalization; chi is its canonical geometric-adjunction mate; Ex is the existing ambient ringed exchange applied to sq and the canonical constant coefficient identifications. Only the main theorem is postponed. Helpers are real specializations of published constructions, listed in declarations, and have source/blueprint docstrings. The theorem docstring carries all four proof steps."
+  "note": "Repair of returned head 17ef11a3b244: removes every arbitrary functor, adjunction and comparison binder. The constant ring map comes from φ; scalar extension is the existing universal derived ring-sheaf extension; lambda is the canonical reduction/pullback isomorphism with its tensor-unit normalization; chi is its canonical geometric-adjunction mate; Ex is the existing ambient ringed exchange applied to sq and the canonical constant coefficient identifications. Only the main theorem is postponed. Helpers are real specializations of published constructions, listed in declarations, and have source/blueprint docstrings. The theorem docstring carries all four proof steps. X7: supporting constructors are publicly re-exported from DirectImageScalarOperations; the new pullback-square helper factors exactly the original ambient exchange definition. The theorem signature is unchanged. The explicit directImageConstantAdjunction wrapper is the original actual adjunction, with normalized functor types; chi and Ex are definitionally unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-17",
@@ -208,5 +173,15 @@
   "group": "Q34",
   "result": "pass",
   "note": "Statement, dependencies, canonical constructions, docstrings, edge cases, and report sections checked; per-file scompile passed cleanly."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-96f14",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261020T230848-L-622494",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules (all compiled rc 0, no warnings) and nodes vs live sheaf-dag; byte-identical to the PASSed head 44557e8d5de9 except the report's repair paragraph; node diffs vs live limited to proof/proof_deps/proof_origin/tool_uses/lean"
  }
 }

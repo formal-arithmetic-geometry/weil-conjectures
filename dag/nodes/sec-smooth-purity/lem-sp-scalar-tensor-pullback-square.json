@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-scalar-tensor-pullback-square",
+ "kind": "statement",
+ "title": "Scalar tensor comparisons respect arbitrary pullback squares",
+ "statement": "For an arbitrary homomorphism φ:A→B of commutative rings and a chosen Cartesian square (h,f′,f,g), let S be canonical derived scalar extension [def-sp-constant-scalar-pullback-comparison], let λ be the specified tensor/inverse-image comparisons [def-weil-pbc-four-corners], and let c_R be the exact localization of the normalized ordinary square compositor moduleSquareG for the ring R [lem-fix-constant-square-compositor-specification]. For each N∈D(Y,A), the inverse-comparison equality is S_X′(c_A.inv_N) followed by λ_f′.inv_(g_A*N) and f′_B*(λ_g.inv_N), equals λ_h.inv_(f_A*N) followed by h_B*(λ_f.inv_N) and c_B.inv_(S_Y N). Thus the scalar comparisons respect c. No open-immersion, finiteness or flatness hypotheses are needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 0E47; the ordinary tensor/restriction calculation of the coefficient/pullback cube"
+ },
+ "stmt_deps": [
+  "def-sp-constant-scalar-pullback-comparison",
+  "def-weil-pbc-four-corners",
+  "lem-fix-constant-square-compositor-specification"
+ ],
+ "proof": [
+  {
+   "text": "Restriction/direct-image comparison is identity on sections, and moduleRComp is restriction along Over.pullbackComp. These section formulas give the direct-image composition square. Conjugation, mate pasting and equality transport give its ordinary restriction/pullback form for the two paths of sq.w.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-fix-constant-square-compositor-specification",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The generic exact-derived composition associativity and whiskering identities identify the localization of the two ordinary cube pastings. Cancel the common triple-composition comparison, then evaluate at an arbitrary derived object. This transports the ordinary restriction cube without geometric assumptions.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use the four scalar extension/restriction adjunctions. Injectivity of the final Hom equivalence, the mate-unit equations and naturality turn the derived restriction cube into the left-mate cube. The definition of proEtaleReductionPullbackIso identifies these mates with the required inverse scalar comparisons.",
+   "uses": [
+    "def-weil-pbc-four-corners",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-cbc-strict-constant-tower-operations",
+  "def-weil-pbc-four-corners",
+  "lem-fix-constant-square-compositor-specification",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D and 0E47; the ordinary tensor/restriction calculation of the coefficient/pullback cube"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived pullback compositor is the localization of the conjugate of the normalized ordinary pushforward compositor",
+   "results": "8 hits, including PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv and Scheme.Modules.conjugateEquiv_pullbackComp_inv. No normalized pro-etale derived coefficient cube or comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing project constructions and proved localization/mate helpers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits, including mateEquiv_counit, mateEquiv_hcomp, mateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp and iterated_mateEquiv_conjugateEquiv.",
+   "date": "2026-10-21",
+   "verdict": "Generic mate calculus is available, but the specified coefficient comparisons must be identified separately."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|proEtaleReductionPullbackIso|moduleSquareG",
+   "results": "0 Mathlib hits. Local library search found the proved generic private helpers in ProEtaleDerivedPullbackCoherence, OrdinaryRestrictionPullbackSquare and TensorPullbackSquare.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the proved private helpers in proof imports; the new arbitrary-square results are not already stated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars tensor pullback comparison commutes around a commutative square of ringed sites",
+   "results": "8 hits, including ModuleCat.extendScalarsComp_hom_app_one_tmul, extendScalars, ExtendScalars.map_tmul (Mathlib.Algebra.Category.ModuleCat.ChangeOfRings), PresheafOfModules.pullback (Mathlib.Algebra.Category.ModuleCat.Presheaf.Pullback), and SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree). No derived ringed-site scalar square compatibility result.",
+   "date": "2026-10-21",
+   "verdict": "no match: use the project constructions and the proved localization and mate calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.DirectImageScalarExchange",
+  "date": "2026-10-21",
+  "group": "X7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-direct-image-scalar-exchange",
+   "place": "Proof step 1: the canonical scalar/pullback cube before direct-image mates",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SecSmoothPurity.ConstantScalarPullbackSquare",
+  "file": "lean/Sheaf/SecSmoothPurity/ConstantScalarPullbackSquare.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.DirectScalar.scalarTensorPullbackSquare",
+  "statement": "theorem scalarTensorPullbackSquare {A B : Type u} [CommRing A] [CommRing B]\n    (φ : A →+* B)\n    {U' U X' X : Scheme.{u}}\n    (gU : U' ⟶ U) (j' : U' ⟶ X') (j : U ⟶ X) (g : X' ⟶ X)\n    (sq : ChosenCartesianSquare gU j' j g)\n    (N : DerivedCategory (Scheme.proEtaleRingModules X (CR X A))) :\n    let S (T : Scheme.{u}) := directImageScalarExtension φ T\n    let c (R : Type u) [CommRing R] := Functor.mapDerivedCategorySquareIso\n      (StrictTower.moduleSquareG (ULift.{u + 1, u} R) gU j' j g sq.toCommSq.w)\n    let lam {V W : Scheme.{u}} (f : V ⟶ W) := directImageScalarPullbackIso φ f\n    (S U').map ((c A).inv.app N) ≫\n      (lam j').inv.app ((PB A g).obj N) ≫ (PB B j').map ((lam g).inv.app N) =\n    (lam gU).inv.app ((PB A j).obj N) ≫\n      (PB B gU).map ((lam j).inv.app N) ≫ (c B).inv.app ((S X).obj N)",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-96f14",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261020T230848-L-622494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-96f14",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261020T230848-L-622494",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules (all compiled rc 0, no warnings) and nodes vs live sheaf-dag; byte-identical to the PASSed head 44557e8d5de9 except the report's repair paragraph; node diffs vs live limited to proof/proof_deps/proof_origin/tool_uses/lean"
+ }
+}

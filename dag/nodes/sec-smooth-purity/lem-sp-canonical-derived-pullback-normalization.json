@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-canonical-derived-pullback-normalization",
+ "kind": "statement",
+ "title": "Canonical derived composition is localized normalized ordinary composition",
+ "statement": "Let h:Z→W and k:W→V be scheme maps with arbitrary commutative ring sheaves RV,RW,RZ and specified inverse-image coefficient isomorphisms ck,ch,c. Suppose c equals their canonical composite coefficient identification [lem-weil-pbc-proetale-derived-pullback-composition]. Let d:R_h⋙R_k≅R_(h≫k) be an ordinary module direct-image compositor whose map on each section is restriction along Over.pullbackComp.hom. Use the actual unit-normalized module adjunctions. The canonical derived pullback composition, transported from the composite coefficient identification to c, equals the localization of the inverse leftAdjointCompIso conjugate of d followed by the exact derived-functor composition isomorphism. The canonical ambient comparison is the construction of [def-weil-pbc-ambient-ringed-exchange]; localization uses the natural exact-derived factorization isomorphisms. No finiteness hypothesis on the coefficient sheaves is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; unit-normalized ordinary composition and its termwise localization"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "The actual ordinary module adjunction satisfies the stated unit-section normalization: transpose the identity, use its normalized Hom-equivalence characterization, and evaluate the unit on sections. Two normalized adjunctions coincide by equality of their units.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extract the normalized witnesses carried by the ambient canonical comparison. The preceding unit uniqueness fixes the three adjunctions, and the section formula fixes d. Injectivity of conjugation fixes the ordinary inverse-image compositor to the inverse leftAdjointCompIso of the actual adjunctions and d.",
+   "uses": [
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Reuse the proved private comparison-witness and exact-localization helpers of ProEtaleDerivedPullbackCoherence through a private import-all. The degree formula identifies the complex comparison with the mapped ordinary comparison; localization factorization and composition coherence identify the specified derived compositor. Transport along the coefficient equality finishes.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-trf-derived-pullback-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-trf-derived-pullback-coherence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; unit-normalized ordinary composition and its termwise localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The derived pullback compositor is the localization of the conjugate of the normalized ordinary pushforward compositor",
+   "results": "8 hits, including PresheafOfModules.pullbackComp, SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv and Scheme.Modules.conjugateEquiv_pullbackComp_inv. No normalized pro-etale derived coefficient cube or comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "Use the existing project constructions and proved localization/mate helpers."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\"",
+   "results": "12 hits, including mateEquiv_counit, mateEquiv_hcomp, mateEquiv_vcomp, conjugateEquiv_mateEquiv_vcomp and iterated_mateEquiv_conjugateEquiv.",
+   "date": "2026-10-21",
+   "verdict": "Generic mate calculus is available, but the specified coefficient comparisons must be identified separately."
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategorySquareIso|proEtaleReductionPullbackIso|moduleSquareG",
+   "results": "0 Mathlib hits. Local library search found the proved generic private helpers in ProEtaleDerivedPullbackCoherence, OrdinaryRestrictionPullbackSquare and TensorPullbackSquare.",
+   "date": "2026-10-21",
+   "verdict": "Reuse the proved private helpers in proof imports; the new arbitrary-square results are not already stated."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived pullback composition is the localization of the conjugate of the normalized ordinary pushforward composition",
+   "results": "8 hits, including SheafOfModules.conjugateEquiv_pullbackComp_inv and pullbackComp (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous), SheafOfModules.pushforwardComp (Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous), and Scheme.Modules.conjugateEquiv_pullbackComp_inv (Mathlib.AlgebraicGeometry.Modules.Sheaf). These are ordinary pullback compositors; none identifies the specified pro-etale derived canonical comparison with its localization.",
+   "date": "2026-10-21",
+   "verdict": "no match: use the project constructions and the proved localization and mate calculations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SecSmoothPurity.DirectImageScalarExchange",
+  "date": "2026-10-21",
+  "group": "X7"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-trace-perfectness",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-fix-direct-image-scalar-exchange",
+   "place": "Proof step 1: the canonical scalar/pullback cube before direct-image mates",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleCanonicalDerivedPullbackNormalization",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleCanonicalDerivedPullbackNormalization.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleCanonicalDerivedPullback_normalization",
+  "statement": "theorem proEtaleCanonicalDerivedPullback_normalization\n    {V W Z : Scheme.{u}} (h : Z ⟶ W) (k : W ⟶ V)\n    (RV : Sheaf (ProEt.topology V) CommRingCat.{u + 1})\n    (RW : Sheaf (ProEt.topology W) CommRingCat.{u + 1})\n    (RZ : Sheaf (ProEt.topology Z) CommRingCat.{u + 1})\n    (ck : (proEtaleSheafInverseImage k CommRingCat.{u + 1}).obj RV ≅ RW)\n    (ch : (proEtaleSheafInverseImage h CommRingCat.{u + 1}).obj RW ≅ RZ)\n    (c : (proEtaleSheafInverseImage (h ≫ k) CommRingCat.{u + 1}).obj RV ≅ RZ)\n    (hc : proEtaleRingCompositeCoefficients h k RV RW RZ ck ch = c)\n    (d : proEtaleRingModuleDirectImage h RW RZ ch ⋙\n      proEtaleRingModuleDirectImage k RV RW ck ≅\n        proEtaleRingModuleDirectImage (h ≫ k) RV RZ c)\n    (hd : ∀ (N : proEtaleRingModules Z RZ) (U : V.ProEt)\n      (m : ((proEtaleRingModuleDirectImage h RW RZ ch ⋙\n        proEtaleRingModuleDirectImage k RV RW ck).obj N).val.obj (Opposite.op U)),\n      (d.hom.app N).val.app (Opposite.op U) m =\n        N.val.map ((MorphismProperty.Over.pullbackComp\n          (P := @WeaklyEtale) (Q := ⊤) h k).hom.app U).op m) :\n    eqToIso (congrArg (proEtaleRingDerivedPullback (h ≫ k) RV RZ) hc.symm) ≪≫\n        proEtaleCanonicalDerivedPullbackComparison h k RV RW RZ ck ch =\n      Functor.mapDerivedCategoryNatIso\n        (Adjunction.leftAdjointCompIso (proEtaleRingModuleAdjunction k RV RW ck)\n          (proEtaleRingModuleAdjunction h RW RZ ch)\n          (proEtaleRingModuleAdjunction (h ≫ k) RV RZ c) d).symm ≪≫\n        Functor.mapDerivedCategoryCompIso (proEtaleRingModulePullback k RV RW ck)\n          (proEtaleRingModulePullback h RW RZ ch)",
+  "branch": "sheaf-dag",
+  "by": "X7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-96f14",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261020T230848-L-622494",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-96f14",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261020T230848-L-622494",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules (all compiled rc 0, no warnings) and nodes vs live sheaf-dag; byte-identical to the PASSed head 44557e8d5de9 except the report's repair paragraph; node diffs vs live limited to proof/proof_deps/proof_origin/tool_uses/lean"
+ }
+}

@@ -81,7 +81,7 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-lem-sp-reduction",
  "lean": {
-  "module": "Sheaf.SecSmoothPurity.DirectImageScalarExchange",
+  "module": "Sheaf.SecSmoothPurity.DirectImageScalarOperations",
   "declaration": "AlgebraicGeometry.ProEtale.directImageScalarPullbackIso",
   "declarations": [
    "AlgebraicGeometry.ProEtale.directImageConstantPush",
@@ -93,7 +93,8 @@
   "by": "NW",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Definition ownership for exactly the three plain constant-coefficient constructors requested by return 1f522a9a7776. Scalar extension and direct image are abbreviations; the pullback isomorphism is a direct specialization of Scheme.proEtaleReductionPullbackIso from def-weil-pbc-four-corners. No use of theorem directImageScalarExchange, no Finite hypotheses, and no duplicate module."
+  "note": "Definition ownership for exactly the three plain constant-coefficient constructors requested by return 1f522a9a7776. Scalar extension and direct image are abbreviations; the pullback isomorphism is a direct specialization of Scheme.proEtaleReductionPullbackIso from def-weil-pbc-four-corners. No use of theorem directImageScalarExchange, no Finite hypotheses, and no duplicate module. X7: moved verbatim to DirectImageScalarOperations to let the pullback cube use the constructions without a cycle; DirectImageScalarExchange publicly re-exports it.",
+  "file": "lean/Sheaf/SecSmoothPurity/DirectImageScalarOperations.lean"
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -110,5 +111,15 @@
   "group": "NW",
   "result": "pass",
   "note": "Re-delivery after lead return of PASSed head 249843638e94 (review_split route lock: def-sp-etale-compact-support-normalization source cited SGA 4). diff -rq vs that snapshot: only that node's source.place (now Stacks 03S3/03S5/03S6/0F4L with roles, labels verified in etale-cohomology.tex) and the report changed; the Lean module is byte-identical to the PASSed module, and all dependency records are identical to live. The route-lock regex finds no hit on the item or its 4 new def nodes. Statement re-read clause by clause (smooth of rel. dim d, fixed compactification, finite l-power A,B of Type u, any phi, Dctf, actual reductionDirectImageComparison, exists-unique natural c with counit identity, isIso, chart equation pinned by rightAdjointUniq and origin equation). Edge cases d=0, zero ring, non-flat phi, empty schemes are OK. Mechanical finding: tensorIso, openSquarePullbackModel, sfRealizationRestriction and scalarPullbackIso are each .choose of their theorem's own existsUnique, so the theorem stmt_deps are genuine; PASS on that point. nt_compile --json: 18.1 s, rc 0, no error or non-sorry warning. 5 sorry, all in theorems; no line over 100 characters; docstrings carry the 13 steps. Advisory: the published EtaleCompactSupportNormalization.lean docstrings still cite SGA 4; the module of sfRealizationRestriction (Paper.SfCompactSupportRestrictionOfScalars) is no longer named by the live lem-sf-compact-support-restriction-of-scalars record."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-96f14",
+  "group": "X7",
+  "result": "pass",
+  "landing": "20261020T230848-L-622494",
+  "kind": "interface",
+  "note": "independent cc review: 5 delivered modules (all compiled rc 0, no warnings) and nodes vs live sheaf-dag; byte-identical to the PASSed head 44557e8d5de9 except the report's repair paragraph; node diffs vs live limited to proof/proof_deps/proof_origin/tool_uses/lean"
  }
 }
