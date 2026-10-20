@@ -17690,3 +17690,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 00:30 L: merged deliver/NC/lem-coef-finite-adjunction-diagram-realization (stage 2; reviewer PASS; parallel immutable checks)
 
 - 08:30 L: batch 20261019T231019 dependency take-out
+- 00:34 L: returned deliver/Q04/lem-pur-weil-basechange-semilinear-pasting (reviewer RETURN: L: independent stage-2 immutable head 38c8449bd007: H3 (finite): FiniteClause equates StrictTower.ev n of strictLeft/str)
