@@ -18764,3 +18764,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:48 L: merged deliver/J9/Sheaf.Paper.KFlatMapFactorization (stage 3; reviewer PASS; first push; landing 20261020T174809-L-798891 (proof); batch 20261020T174710; modules 1; new nodes 0)
 - 17:48 L: merged deliver/K1/Sheaf.Paper.SitePointReconstructionSets (stage 3; reviewer PASS; first push; landing 20261020T174812-L-799705 (interface); batch 20261020T174710; modules 2; new nodes 1; change records: coord/changes/site-point-reconstruction-proof-scope.md)
 - 17:48 L: merged deliver/K6/Sheaf.Algebra.Homology.FilteredFreeKProjective (stage 3; reviewer PASS; first push; landing 20261020T174815-L-800769 (proof); batch 20261020T174710; modules 1; new nodes 0)
+- 17:48 L: merged deliver/K8/Sheaf.AlgebraicGeometry.OpenExchangeSeparableClosureReduction (stage 3; reviewer PASS; first push; landing 20261020T174818-L-801478 (proof); batch 20261020T174710; modules 1; new nodes 0)
