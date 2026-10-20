@@ -6,7 +6,7 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.AlgebraicGeometry.KoszulCechComparisonConstruction
-import WeilConjectures.AlgebraicGeometry.AffineKProjectiveHomComplex
+import Sheaf.AlgebraicGeometry.AffineKProjectiveHomComplex
 import Sheaf.AlgebraicGeometry.KoszulChainRestrictionFormula
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import Mathlib.Algebra.Category.ModuleCat.Projective

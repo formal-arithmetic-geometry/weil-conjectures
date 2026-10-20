@@ -1,11 +1,10 @@
 module
 public import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitPresentation
-import WeilConjectures.AlgebraicGeometry.FlatSheafStalk
+import Sheaf.AlgebraicGeometry.FlatSheafStalk
 import Sheaf.AlgebraicGeometry.StandardSingleFlatCounitLocalizationPair
 import Mathlib.RingTheory.RingHom.Flat
 import Sheaf.AlgebraicGeometry.StandardSingleOpenStalkArrow
 import Sheaf.AlgebraicGeometry.OpenFlatComplexStalkCounit
-import Sheaf.Paper.DerivedHomMayerVietoris
 @[expose] public section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false

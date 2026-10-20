@@ -8,7 +8,7 @@ public import WeilConjectures.RingTheory.Depth
 
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.AlgebraicGeometry.Morphisms.RegularLocalPuncturedEtalePurity
-import WeilConjectures.AlgebraicGeometry.Morphisms.LocalPurityDepthTwoFiniteFlatStalk
+import Sheaf.AlgebraicGeometry.Morphisms.LocalPurityDepthTwoFiniteFlatStalk
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtension
 import WeilConjectures.AlgebraicGeometry.Morphisms.FlatDepthTwoFiniteFormallyUnramified
 

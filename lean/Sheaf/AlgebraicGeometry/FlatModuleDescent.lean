@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.AffineFlatModuleDescent
-import WeilConjectures.AlgebraicGeometry.FlatModuleDescentAffineCharts
+import Sheaf.AlgebraicGeometry.FlatModuleDescentAffineCharts
 
 /-!
 # Eventual descent of flatness for finitely presented scheme modules

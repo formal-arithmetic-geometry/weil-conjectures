@@ -5,14 +5,14 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedGlobalScalar
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Data.Nat.Choose.Basic
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
-import WeilConjectures.AlgebraicGeometry.ScalarConeStalkVanishing
-import WeilConjectures.AlgebraicGeometry.RestrictedScalarConeSplit
-import WeilConjectures.AlgebraicGeometry.BinomialShiftBiproduct
+import Sheaf.AlgebraicGeometry.ScalarConeStalkVanishing
+import Sheaf.AlgebraicGeometry.RestrictedScalarConeSplit
+import Sheaf.AlgebraicGeometry.BinomialShiftBiproduct
 
 /-! # Affine support from successive cones
 

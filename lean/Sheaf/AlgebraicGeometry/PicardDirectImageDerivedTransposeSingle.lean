@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PicardDirectImageDerivedTranspose
 import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleAdjunctionTranspose
-import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
+import Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 
 /-! # The single-module description of the derived transpose
 

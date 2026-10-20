@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.GlobalDerivedHom
-public import WeilConjectures.Algebra.Homology.RingedSiteZerothHypercohomology
+public import Sheaf.Algebra.Homology.RingedSiteZerothHypercohomology
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB

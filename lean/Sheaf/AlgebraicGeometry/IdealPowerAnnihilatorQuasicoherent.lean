@@ -5,13 +5,13 @@ Authors: SHEAF group F3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.Submodule
 import Mathlib.Topology.Sheaves.SheafCondition.UniqueGluing
 import WeilConjectures.AlgebraicGeometry.AnnihilatorQuasicoherent
-import all WeilConjectures.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
-import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import all Sheaf.AlgebraicGeometry.CoherentSupportVanishingIdealNilpotence
+import all Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 
 /-! # The canonical annihilator of an ideal power
 

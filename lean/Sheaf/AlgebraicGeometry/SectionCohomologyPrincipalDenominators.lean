@@ -5,12 +5,12 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
+public import Sheaf.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.InvertSCOhomology
-import WeilConjectures.AlgebraicGeometry.SectionCohomologyUnitComparisons
+import Sheaf.AlgebraicGeometry.SectionCohomologyUnitComparisons
 
 /-! # Denominators for raw section cohomology
 

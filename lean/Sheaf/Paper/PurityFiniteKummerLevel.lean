@@ -25,7 +25,7 @@ import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Paper.KFlatConeComparison
 import Mathlib.AlgebraicGeometry.Scheme
 public import Sheaf.AlgebraicGeometry.ProEtaleRootsOfUnitySheaf
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 public import Mathlib.AlgebraicGeometry.Sites.Proetale
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback

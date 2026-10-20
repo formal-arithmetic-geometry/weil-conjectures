@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
+public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 import Sheaf.AlgebraicGeometry.CompactFlatGeneratorCover
 import Sheaf.Algebra.Homology.RelativeBiprodConeExtension
 import Sheaf.Algebra.Homology.CyclePullbackResolution

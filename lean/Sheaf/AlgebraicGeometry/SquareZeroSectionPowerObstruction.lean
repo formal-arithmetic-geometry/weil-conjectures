@@ -6,7 +6,7 @@ Authors: SHEAF group T1
 module
 
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

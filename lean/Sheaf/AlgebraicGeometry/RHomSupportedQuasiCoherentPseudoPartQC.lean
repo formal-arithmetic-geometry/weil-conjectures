@@ -1,7 +1,7 @@
 module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.AlgebraicGeometry.RHomSupportedQuasiCoherentPseudoPartQCCohomology
 

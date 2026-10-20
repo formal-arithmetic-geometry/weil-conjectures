@@ -5,7 +5,7 @@ Authors: SHEAF group V3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finite
 public import Mathlib.AlgebraicGeometry.ResidueField
@@ -15,9 +15,9 @@ public import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 import WeilConjectures.AlgebraicGeometry.ChowRelativeAmple
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.AlgebraicGeometry.ChowLemma
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 import Sheaf.AlgebraicGeometry.ChowTwistFiniteCohomology

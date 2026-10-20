@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.AlgebraicGeometry.AffineScheme
-import WeilConjectures.AlgebraicGeometry.AffineModuleComplexRepresentative
+import Sheaf.AlgebraicGeometry.AffineModuleComplexRepresentative
 import Sheaf.AlgebraicGeometry.AffineDerivedTensorChartComparison
 import all Sheaf.AlgebraicGeometry.TorAmplitudeOpenLocal
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde

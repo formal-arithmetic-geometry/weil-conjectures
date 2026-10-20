@@ -5,13 +5,13 @@ Authors: SHEAF group P1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SectionBoundaryExact
+public import Sheaf.AlgebraicGeometry.SectionBoundaryExact
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import WeilConjectures.AlgebraicGeometry.Modules.Dual

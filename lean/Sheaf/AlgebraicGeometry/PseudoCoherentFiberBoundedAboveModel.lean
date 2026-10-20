@@ -5,7 +5,7 @@ Authors: SHEAF groups H4 and K1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings

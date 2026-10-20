@@ -26,7 +26,7 @@ import Sheaf.RingTheory.IsExcellentFiniteTypeLocalization
 import Sheaf.RingTheory.IntegersExcellent
 import Sheaf.RingTheory.CompleteLocalGRing
 import WeilConjectures.RingTheory.GRingCompletionRegular
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.RingTheory.LocalizationRegular
 import Sheaf.RingTheory.PopescuSmoothing
 import WeilConjectures.RingTheory.RegularComposition

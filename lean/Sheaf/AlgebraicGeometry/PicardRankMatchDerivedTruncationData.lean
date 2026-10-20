@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatch
 public import WeilConjectures.AlgebraicGeometry.ModuleBaseChangeMapOpenRestriction
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
@@ -15,9 +15,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.PicardRankMatchOrdinaryRanks
 import Sheaf.AlgebraicGeometry.Picard.TensorDegreeZeroMateSquare
-import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
+import Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
 import Sheaf.AlgebraicGeometry.CanonicalModuleBaseChangeAffineLocality
 import Sheaf.AlgebraicGeometry.AffineRelativelyFlatCanonicalModuleBaseChange
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine

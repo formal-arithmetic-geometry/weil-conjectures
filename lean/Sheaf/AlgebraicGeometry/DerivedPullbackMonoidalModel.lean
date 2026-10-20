@@ -5,9 +5,9 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullbackTensorProduct
-import WeilConjectures.AlgebraicGeometry.ModulePullbackTensorCoherence
+import Sheaf.AlgebraicGeometry.ModulePullbackTensorCoherence
 public import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent
 
 /-! # The canonical monoidal model of derived pullback

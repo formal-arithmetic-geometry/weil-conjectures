@@ -5,10 +5,10 @@ Authors: SHEAF group S1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Adjunction.Basic
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.AlgebraicGeometry.DerivedQCohCompactGeneration

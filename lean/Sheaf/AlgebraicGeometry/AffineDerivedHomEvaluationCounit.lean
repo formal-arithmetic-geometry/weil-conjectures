@@ -5,11 +5,11 @@ Authors: SHEAF group H2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 import Sheaf.AlgebraicGeometry.FiniteSheafHomAffineAdjoint
 import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 import Sheaf.AlgebraicGeometry.DerivedInternalHomUnitIso

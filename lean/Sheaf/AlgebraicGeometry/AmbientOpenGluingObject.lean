@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Sheaf.AlgebraicGeometry.RelativeOpenDifferenceDiagram
-import all WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects
+import all Sheaf.AlgebraicGeometry.DerivedOpenGluingObjects
 
 /-! # Extending a two-open derived gluing datum to the ambient scheme
 

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
 import all Sheaf.AlgebraicGeometry.FormalKernelBilinearActionAssociative
 import Sheaf.AlgebraicGeometry.FormalKernelRepresentativeProduct
 import Sheaf.AlgebraicGeometry.CoherentFormalModule
-import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 
 /-! # A product section determined by local representatives
 

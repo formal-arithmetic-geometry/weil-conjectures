@@ -5,9 +5,9 @@ Authors: SHEAF group B3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonSystem
+public import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystem
 import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonSystemExistence
-import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonInverseImageCompatibility
+import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImageCompatibility
 
 /-! # Inverse-image naturality before affine degeneration
 

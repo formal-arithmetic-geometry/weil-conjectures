@@ -5,7 +5,7 @@ Authors: SHEAF group J2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
+public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 
 import Sheaf.AlgebraicGeometry.FlatTelescopeArrowDiagram
 import Sheaf.Algebra.Homology.FlatTruncationTelescopeComparison

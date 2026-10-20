@@ -5,14 +5,14 @@ Authors: SHEAF group P3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.AffinePerfectMapLift
 import Sheaf.AlgebraicGeometry.SupportedOverlapPerfectExtension
 import Sheaf.AlgebraicGeometry.LocalPerfectSupportedStabilization
-import WeilConjectures.AlgebraicGeometry.CompactOverlapRestrictionModel
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import Sheaf.AlgebraicGeometry.CompactOverlapRestrictionModel
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 
 /-! # Supported affine overlap data
 

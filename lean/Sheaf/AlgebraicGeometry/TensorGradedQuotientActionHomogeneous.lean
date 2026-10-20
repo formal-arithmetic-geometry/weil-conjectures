@@ -6,7 +6,7 @@ Authors: SHEAF group N4
 module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Mathlib.Topology.Sheaves.LocallySurjective
 
 /-! # Degree support of the quotient action

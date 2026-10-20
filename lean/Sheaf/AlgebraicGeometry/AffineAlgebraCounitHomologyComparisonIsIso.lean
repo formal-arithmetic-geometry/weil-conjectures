@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility
+public import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility
 import Sheaf.AlgebraicGeometry.AffineAlgebraCanonicalComparisonIdentification
 
 /-! # Invertibility of the canonical affine direct-image homology comparison

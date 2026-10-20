@@ -6,12 +6,13 @@ Authors: SHEAF group E1
 module
 
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage
 import Sheaf.AlgebraicGeometry.BaseChangeMapCech
 import Sheaf.AlgebraicGeometry.CechResolution
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 
 /-! # Derived base change for a relatively flat module

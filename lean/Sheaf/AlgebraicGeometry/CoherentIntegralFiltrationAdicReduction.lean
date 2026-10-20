@@ -5,17 +5,17 @@ Authors: SHEAF group N1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltration
+public import Sheaf.AlgebraicGeometry.CoherentIntegralFiltration
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.CoherentIntegralFiltrationExtension
+import Sheaf.AlgebraicGeometry.CoherentIntegralFiltrationExtension
 import Sheaf.AlgebraicGeometry.CoherentSupportPowerIdealKills
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.Algebra.Homology.ModuleStalkExact
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.HilbertPolynomial
 
 /-! # Reducing an integral-support filtration to generic residue-field modules

@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
@@ -18,7 +18,7 @@ public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.LinearAlgebra.Dimension.Finrank
 import Sheaf.AlgebraicGeometry.ClosedImmersionExtIdealAction
 import Sheaf.AlgebraicGeometry.KoszulRegularImmersionExtPullback
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitKernel
 
 @[expose] public section
 

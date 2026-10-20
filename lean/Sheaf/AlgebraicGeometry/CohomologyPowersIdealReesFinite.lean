@@ -6,13 +6,13 @@ Authors: SHEAF group J1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.ReesAlgebra
 public import Mathlib.Algebra.DirectSum.Basic
 import Sheaf.AlgebraicGeometry.IdealPowersReesGradedData
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
+import Sheaf.AlgebraicGeometry.ModuleCohomologyScalarEndomorphism
 import Sheaf.Paper.GradedFinitenessCohomology
 import WeilConjectures.Blowup.Affine.ReesGrading
 

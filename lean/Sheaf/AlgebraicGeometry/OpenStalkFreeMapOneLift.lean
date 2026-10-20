@@ -5,12 +5,11 @@ Authors: SHEAF group T3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.AlgebraicGeometry.OpenStalkUnitMapOneLift
 import Sheaf.AlgebraicGeometry.OpenStalkRestrictionTransport
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # One finite-free open-site stalk map lifts on one neighbourhood
 

@@ -12,7 +12,7 @@ public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import Sheaf.AlgebraicGeometry.SupportedDerivedGeneratedPerfect
 import Sheaf.AlgebraicGeometry.RightAdjointOpenUnitConeTest
 import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction

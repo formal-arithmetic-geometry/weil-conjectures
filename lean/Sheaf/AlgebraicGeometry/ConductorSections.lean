@@ -13,7 +13,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import Sheaf.AlgebraicGeometry.ConductorSectionsRestriction
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionIdealTensorSections
+import Sheaf.AlgebraicGeometry.ClosedImmersionIdealTensorSections
 import WeilConjectures.AlgebraicGeometry.NonvanishingTensorPullback
 import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 import WeilConjectures.AlgebraicGeometry.Modules.Dual

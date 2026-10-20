@@ -1,7 +1,7 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian

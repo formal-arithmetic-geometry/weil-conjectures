@@ -4,7 +4,7 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
-public import WeilConjectures.Topology.OpenModuleCohomology
+public import Sheaf.Topology.OpenModuleCohomology
 import Sheaf.AlgebraicGeometry.ModuleCechResolutionColumnZero
 import Sheaf.AlgebraicGeometry.ModuleCechResolutionColumnPositive
 

@@ -5,11 +5,11 @@ Authors: SHEAF group H1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.FiniteTorDimension
 import Sheaf.AlgebraicGeometry.AffineSheafificationTorAmplitude
-import WeilConjectures.AlgebraicGeometry.AffineLocalizedDerivedSheafification
+import Sheaf.AlgebraicGeometry.AffineLocalizedDerivedSheafification
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.RingTheory.Finiteness.Projective
 import WeilConjectures.CategoryTheory.DerivedCategory.RingPseudoCoherentFiniteTorPerfect

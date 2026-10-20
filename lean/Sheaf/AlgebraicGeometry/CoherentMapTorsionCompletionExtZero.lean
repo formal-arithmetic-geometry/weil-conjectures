@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 import Sheaf.AlgebraicGeometry.CoherentArtinRees
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # A torsion kernel embeds in a sufficiently deep ideal quotient
 

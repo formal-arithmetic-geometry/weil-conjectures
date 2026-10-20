@@ -5,13 +5,16 @@ Authors: SHEAF group P1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.SheafExt
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.AffineRHomQuasiCoherent
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.Paper.DerivedInternalHomRestrictOpen
+import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import Sheaf.Paper.DerivedInternalHomRestrictOpen
 import Sheaf.AlgebraicGeometry.CoherentFiniteType
 
 /-! # Coherence of sheaf Ext

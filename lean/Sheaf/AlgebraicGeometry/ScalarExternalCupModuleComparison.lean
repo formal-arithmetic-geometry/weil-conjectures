@@ -6,7 +6,7 @@ Authors: SHEAF group A4
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import Sheaf.Paper.ModuleCupResolutionData
 import Sheaf.AlgebraicGeometry.ScalarCupModuleCupCompatibility
 import Sheaf.AlgebraicGeometry.ScalarModuleCohomologyPullbackComparison

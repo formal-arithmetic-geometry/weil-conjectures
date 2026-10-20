@@ -7,10 +7,10 @@ public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 import Sheaf.AlgebraicGeometry.RelativeMVHomotopyPullback
 import Sheaf.AlgebraicGeometry.RelativeMVDirectImageRowRoof
 public import Sheaf.AlgebraicGeometry.MayerVietorisImageChainData
-import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
-import WeilConjectures.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisUnderivedOpenCounitSquare
+import Sheaf.AlgebraicGeometry.KInjectiveMayerVietorisPresentation
 import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-! # Resolved relative rows before the overlap mate -/
 

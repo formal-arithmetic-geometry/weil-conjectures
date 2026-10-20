@@ -1,6 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
-public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSplitTriangle
+public import Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle
 import Sheaf.AlgebraicGeometry.MayerVietorisDirectImageChainSquares
 @[expose] public section
 universe u w

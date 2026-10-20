@@ -5,17 +5,17 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.CategoryTheory.CompactlyGenerated
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Topology.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import Sheaf.AlgebraicGeometry.PerfectComplexRepresentatives
 import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 import Sheaf.AlgebraicGeometry.SupportedPerfectGenerator
-import WeilConjectures.AlgebraicGeometry.DerivedQCohCompactGenerationCore
+import Sheaf.AlgebraicGeometry.DerivedQCohCompactGenerationCore
 
 /-! # Compact generation of the quasi-coherent derived category
 

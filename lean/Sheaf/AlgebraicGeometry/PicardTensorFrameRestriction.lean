@@ -6,7 +6,7 @@ Authors: SHEAF group F4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardTensorFrameCoordinates
-public import WeilConjectures.AlgebraicGeometry.PicardOrdinaryModelCycles
+public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
 import Sheaf.AlgebraicGeometry.PicardTensorFrameRestrictionNormalized
 import Sheaf.AlgebraicGeometry.PicardTensorFrameRestrictionEvaluation

@@ -5,10 +5,10 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-import WeilConjectures.AlgebraicGeometry.OpenUnionImageComplexExact
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.OpenUnionImageComplexExact
 import Sheaf.AlgebraicGeometry.LocalizedOpenImageComplexComparisons
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 
 /-! # Short exact presentation on an arbitrary open union

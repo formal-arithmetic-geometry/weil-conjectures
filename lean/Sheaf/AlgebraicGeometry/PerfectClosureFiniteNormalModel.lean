@@ -14,11 +14,11 @@ public import Mathlib.FieldTheory.IntermediateField.Basic
 public import Mathlib.FieldTheory.Perfect
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import Sheaf.AlgebraicGeometry.ReducedAlgebraicNormalizationFieldChange
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
 import WeilConjectures.AlgebraicGeometry.DescendFinite
-import WeilConjectures.AlgebraicGeometry.DescendClosedImmersion
+import Sheaf.AlgebraicGeometry.DescendClosedImmersion
 import WeilConjectures.AlgebraicGeometry.HomeomorphPurelyInseparableBaseChange
 import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 

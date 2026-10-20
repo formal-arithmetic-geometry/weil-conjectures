@@ -1,9 +1,9 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

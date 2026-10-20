@@ -5,11 +5,11 @@ Authors: SHEAF group Q4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 import WeilConjectures.CategoryTheory.Abelian.DerivedBottomUnitNormalization
 import Sheaf.AlgebraicGeometry.QCohAcyclicDerivedPushforwardCohomology
-import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
+import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian

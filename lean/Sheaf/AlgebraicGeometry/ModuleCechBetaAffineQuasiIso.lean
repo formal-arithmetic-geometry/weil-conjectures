@@ -6,10 +6,9 @@ Authors: SHEAF group K2
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
-import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.ModuleCechResolutionColumns
 import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
-import Sheaf.Paper.PQFCohomology
 
 /-! # Affine acyclicity makes the beta augmentation a quasi-isomorphism
 

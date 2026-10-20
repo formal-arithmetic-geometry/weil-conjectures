@@ -6,7 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.Paper.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.LerayEdgeCocycleData
+import Sheaf.AlgebraicGeometry.LerayEdgeCocycleData
 import Sheaf.AlgebraicGeometry.LerayEdgeVanishingIso
 
 /-!

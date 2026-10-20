@@ -5,9 +5,8 @@ Authors: SHEAF group T3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Transport of open-site stalk comparisons through further restriction
 

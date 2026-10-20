@@ -7,7 +7,7 @@ import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.AlgebraicGeometry.InverseImageTensorPullbackComparison
-import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 import Sheaf.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated

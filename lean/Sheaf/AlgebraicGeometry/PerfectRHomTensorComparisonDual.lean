@@ -5,13 +5,13 @@ Authors: SHEAF group D2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import WeilConjectures.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
+import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
 import Sheaf.AlgebraicGeometry.FiniteFreeDerivedDualModel
-import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
+import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
 
 /-! The quasi-coherent perfect dual underlying the tensor-Hom comparison. -/
 

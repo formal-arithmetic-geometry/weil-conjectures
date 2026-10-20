@@ -4,7 +4,7 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedSectionPresheaf
+public import Sheaf.AlgebraicGeometry.DerivedSectionPresheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 
@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.Paper.QCohAcyclicDerivedSectionsTruncationIso
 import Sheaf.Paper.DerivedSectionsLeftExactBottom
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
-import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
+import Sheaf.Topology.RingedSpaceModuleEnoughInjectives
 
 @[expose] public section
 

@@ -18,7 +18,7 @@ public import WeilConjectures.RingTheory.Depth
 
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalBoundaryDepths
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationFormalPuncturedSplit
 import Mathlib.RingTheory.MvPowerSeries.Equiv

@@ -5,14 +5,14 @@ Authors: SHEAF group A2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import Mathlib.RingTheory.TensorProduct.Finite

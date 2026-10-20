@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunc
 import Sheaf.Paper.RingedTopoiTensorSections
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
-import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated

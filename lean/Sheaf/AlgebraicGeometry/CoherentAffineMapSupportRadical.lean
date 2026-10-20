@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentAffineSectionsFinite
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentAffineSectionsFinite
 import Mathlib.RingTheory.Support
 
 /-! # Support of a coherent affine map invertible off a closed set

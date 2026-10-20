@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
-public import WeilConjectures.AlgebraicGeometry.DerivedDirectImageSplitTriangle
-public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
+public import Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle
+public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
 
 /-! # Explicit restriction-induced comparison maps
 

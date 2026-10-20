@@ -5,15 +5,15 @@ Authors: SHEAF group U3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ResolutionSectionClassOpenRestriction
+public import Sheaf.AlgebraicGeometry.ResolutionSectionClassOpenRestriction
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 import Sheaf.AlgebraicGeometry.AffineResolutionSectionBijective
-import WeilConjectures.AlgebraicGeometry.ResolutionSectionScalarMap
-import WeilConjectures.AlgebraicGeometry.RestrictedResolutionSectionsExist
+import Sheaf.AlgebraicGeometry.ResolutionSectionScalarMap
+import Sheaf.AlgebraicGeometry.RestrictedResolutionSectionsExist
 
 /-! # Normalized Leray edge on a smaller target open
 

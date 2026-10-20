@@ -5,15 +5,15 @@ Authors: SHEAF group Q3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.CategoryTheory.Abelian.Projective.Resolution
-import WeilConjectures.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel
+import Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel
 import Sheaf.Algebra.Homology.BoundedProjectiveNonpositiveModel
 import Mathlib.Algebra.Homology.Embedding.RestrictionHomology
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 
 /-! # Bounded projective resolutions of closed-pushforward stalks

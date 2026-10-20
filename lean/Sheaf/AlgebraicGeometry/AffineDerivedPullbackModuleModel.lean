@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 public import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
-import WeilConjectures.AlgebraicGeometry.AffineModuleComplexRepresentative
+import Sheaf.AlgebraicGeometry.AffineModuleComplexRepresentative
 import Sheaf.AlgebraicGeometry.AffineKFlatPullbackChartComparison
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 

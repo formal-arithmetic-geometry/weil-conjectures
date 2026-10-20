@@ -14,7 +14,7 @@ public import WeilConjectures.RingTheory.Depth
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesFiniteEtaleExtension
-import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
 
 /-!
 # Flatness of a finite depth-two extension on a power-series spectrum

@@ -6,7 +6,7 @@ Authors: SHEAF group H3
 module
 
 public import Sheaf.AlgebraicGeometry.ScalarGlobalSectionsComparison
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorAffine
 import Sheaf.AlgebraicGeometry.ExternalGlobalSectionsTensorFiniteCoverLeft

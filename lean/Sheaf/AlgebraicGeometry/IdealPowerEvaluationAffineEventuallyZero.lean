@@ -5,8 +5,8 @@ Authors: SHEAF group Q3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 import Sheaf.AlgebraicGeometry.FormalPolynomialPowerLifts
 import all WeilConjectures.AlgebraicGeometry.AffineSectionCoverTwistGeneration
 import all Sheaf.AlgebraicGeometry.CoherentAffineMapSupportRadical

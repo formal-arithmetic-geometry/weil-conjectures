@@ -5,8 +5,8 @@ Authors: SHEAF group K2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 import Sheaf.AlgebraicGeometry.ClosedImmersionAlgebraDirectImagePreservesEpimorphisms
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 

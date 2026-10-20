@@ -5,9 +5,9 @@ Authors: SHEAF group J4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import all Sheaf.AlgebraicGeometry.PerfectRestrictionClassesSmall
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additive
 import Mathlib.Topology.Sheaves.Abelian

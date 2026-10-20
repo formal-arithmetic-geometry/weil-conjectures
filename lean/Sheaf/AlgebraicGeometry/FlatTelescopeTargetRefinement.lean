@@ -5,7 +5,7 @@ Authors: SHEAF group V4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
+public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 import Sheaf.AlgebraicGeometry.CompactFlatGeneratorTowerResolution
 import Sheaf.AlgebraicGeometry.CompactFlatTelescopeBarEnlargement
 import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact

@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.FormalFunctionsFiniteSheafQuotientCore
 
 /-! # Sheaf quotients on the finite fibres

@@ -6,7 +6,7 @@ Authors: SHEAF group U3
 module
 
 public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyComparison
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 import Sheaf.AlgebraicGeometry.ModuleCohomologyExtResolutionEdge
 
 /-! # Module/Ext comparisons compatible with the direct-image edge map

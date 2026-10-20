@@ -12,7 +12,7 @@ import Sheaf.CategoryTheory.RingedToposKFlatPullback
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
-import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import all Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
 import Mathlib.CategoryTheory.Functor.Derived.Adjunction
 

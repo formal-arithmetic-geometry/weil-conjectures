@@ -1,7 +1,7 @@
 module
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
-import WeilConjectures.AlgebraicGeometry.KoszulBasicOpenExact
+import Sheaf.AlgebraicGeometry.KoszulBasicOpenExact
 import Sheaf.AlgebraicGeometry.OpenCoverRestrictionExact
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex

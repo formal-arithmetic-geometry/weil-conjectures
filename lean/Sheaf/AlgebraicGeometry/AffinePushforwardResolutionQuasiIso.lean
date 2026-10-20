@@ -5,11 +5,11 @@ Authors: SHEAF group U2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.AlgebraicGeometry.AffineOpenSectionsResolutionQuasiIso
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
 import Mathlib.Topology.Sheaves.Abelian
 import Mathlib.Algebra.Homology.Functor

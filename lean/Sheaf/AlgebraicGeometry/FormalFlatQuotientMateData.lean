@@ -15,7 +15,7 @@ import Sheaf.AlgebraicGeometry.FormalCompletionPullbackNormalized
 import Sheaf.AlgebraicGeometry.OrdinaryFlatExchangePrescribedAdjunction
 import WeilConjectures.AlgebraicGeometry.FormalSystemExchangeMateCompatibility
 import WeilConjectures.Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Ordinary flat quotient comparisons and adjunction mates
 

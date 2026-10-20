@@ -4,8 +4,8 @@ Authors: SHEAF group U3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory

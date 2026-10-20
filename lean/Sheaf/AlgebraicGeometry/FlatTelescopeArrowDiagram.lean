@@ -5,7 +5,7 @@ Authors: SHEAF group A2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
+public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.AlgebraicGeometry.FlatTelescopeArrowCocycles
 

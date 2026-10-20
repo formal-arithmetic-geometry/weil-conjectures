@@ -5,11 +5,11 @@ Authors: SHEAF group J1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Sheaf.AlgebraicGeometry.LocallyFiniteTorDimension
 import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
-import WeilConjectures.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
+import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic

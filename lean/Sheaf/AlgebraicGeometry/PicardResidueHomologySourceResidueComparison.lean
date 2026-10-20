@@ -1,8 +1,8 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineResidueCycleHomology
+public import Sheaf.AlgebraicGeometry.AffineResidueCycleHomology
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PicardResidueSourceModelHomology
 import Sheaf.AlgebraicGeometry.PicardResidueQuotientModelHomology
 
@@ -16,13 +16,12 @@ public import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.PicardResidueHomologySourceFibreComparison
 import Sheaf.AlgebraicGeometry.PicardResidueHomologyGeometricNaturalityFixedPerIndex
-import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
+import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
 import Sheaf.AlgebraicGeometry.AffineResidueModelNaturality
 import Sheaf.AlgebraicGeometry.PicardDerivedFibreNaturality
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # A strictly perfect affine model computes residue cycle homology
 

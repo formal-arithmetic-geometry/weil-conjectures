@@ -6,12 +6,12 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
-public import WeilConjectures.AlgebraicGeometry.PseudoCoherentComplex
+public import Sheaf.AlgebraicGeometry.PseudoCoherentComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentPseudoCoherent
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentPseudoCoherent
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.PseudoCoherentRHomQuasiCoherent
 

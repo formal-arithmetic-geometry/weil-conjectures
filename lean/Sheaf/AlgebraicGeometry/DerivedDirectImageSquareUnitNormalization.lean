@@ -5,7 +5,7 @@ Authors: SHEAF group J1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
+public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisOpenCounitModel
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageCompositionUnit
 
 /-! # A single derived unit across a commutative direct-image square

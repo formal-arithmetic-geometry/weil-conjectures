@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
-import WeilConjectures.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
+import Sheaf.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
 
 /-! # Canonical affine model comparisons
 

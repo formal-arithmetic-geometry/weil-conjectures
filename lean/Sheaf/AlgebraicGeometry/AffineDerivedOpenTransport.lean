@@ -5,10 +5,10 @@ Authors: SHEAF group X2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
-import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedLocalizations
-import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedOpenAdjunction
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedOpenAdjunction
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor

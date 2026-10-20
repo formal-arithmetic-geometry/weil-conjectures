@@ -5,11 +5,11 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentThickeningSystem
+public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.AlgebraicGeometry.ThickeningSystemPushforward
+import Sheaf.AlgebraicGeometry.ThickeningSystemPushforward
 import Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardAdic
 import Sheaf.AlgebraicGeometry.ThickeningSystemPushforwardLifting
 import WeilConjectures.AlgebraicGeometry.TensorPullback

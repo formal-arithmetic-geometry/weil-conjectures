@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 
 import Sheaf.AlgebraicGeometry.ChowFiniteCohomologyWitness
-import WeilConjectures.AlgebraicGeometry.IntegralIdealComparisonFiltrations
+import Sheaf.AlgebraicGeometry.IntegralIdealComparisonFiltrations
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact
 
 /-! # Proper cohomology for integral-ideal filtration factors

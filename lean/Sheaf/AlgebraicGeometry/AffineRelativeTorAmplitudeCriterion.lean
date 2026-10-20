@@ -6,14 +6,14 @@ Authors: SHEAF group Q102
 module
 
 public import Sheaf.Algebra.Homology.SheafComplexDerivedTensorVanishes
-public import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
+public import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 public import Sheaf.AlgebraicGeometry.AffineModelCoherentObjectComparisons
 public import Sheaf.AlgebraicGeometry.FiniteTorDimensionOver
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.InverseImageStructureStalkIso
-import WeilConjectures.AlgebraicGeometry.RelativeInverseImageStalkRestriction
+import Sheaf.AlgebraicGeometry.RelativeInverseImageStalkRestriction
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
 import Sheaf.Algebra.Homology.StalkKFlatTensorHomology
 import WeilConjectures.Topology.RingedModuleSkyscraper

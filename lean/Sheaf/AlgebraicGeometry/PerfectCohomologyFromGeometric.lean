@@ -11,9 +11,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import Mathlib.RingTheory.Finiteness.Projective
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 
-import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.AlgebraicGeometry.Modules.LocallyFreeAffine
 import Mathlib.RingTheory.Flat.Stability
 import Mathlib.CategoryTheory.Preadditive.LeftExact
@@ -23,7 +23,7 @@ import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import Sheaf.AlgebraicGeometry.AffineHigherDirectImageCohomologyVanishing
 import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
-import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 
 /-! # Finite projective complex models for cohomology over an affine base
 

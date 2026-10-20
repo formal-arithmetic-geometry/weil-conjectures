@@ -4,7 +4,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.ProperFlatRightAdjointBaseChangeChart
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
 @[expose] public section
 set_option autoImplicit false
 universe u w

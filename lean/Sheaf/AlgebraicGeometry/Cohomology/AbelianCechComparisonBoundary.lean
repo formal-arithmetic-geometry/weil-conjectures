@@ -5,10 +5,10 @@ Authors: SHEAF group K3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstruction
+public import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechComparisonConstruction
 import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAlphaQuasiIso
-import WeilConjectures.AlgebraicGeometry.Cohomology.AbelianCechAugmentationBoundarySquares
+import Sheaf.AlgebraicGeometry.Cohomology.AbelianCechAugmentationBoundarySquares
 
 /-! # Boundary compatibility of the augmentation quotient
 

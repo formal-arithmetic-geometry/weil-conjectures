@@ -5,18 +5,18 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.ModuleStalkExact
 import Sheaf.AlgebraicGeometry.CoherentIdealPatchingGenericEmbedding
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.Topology.Sheaves.Abelian

@@ -5,12 +5,12 @@ Authors: SHEAF group R3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 
-import all WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import all Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ProjShiftedFreeTwist
 import Sheaf.AlgebraicGeometry.ProjectiveSpace.ProjTwistInverseTransport
 import WeilConjectures.AlgebraicGeometry.Cohomology.Serre

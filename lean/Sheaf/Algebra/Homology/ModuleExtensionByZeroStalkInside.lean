@@ -1,10 +1,10 @@
 module
 
-public import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
+public import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.Topology.Sheaves.Module
-import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkMorphism
-import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroStalkMorphism
+import Sheaf.Algebra.Homology.ModuleExtensionByZeroUnitIsIso
 import Mathlib.Geometry.RingedSpace.Stalks
 
 @[expose] public section

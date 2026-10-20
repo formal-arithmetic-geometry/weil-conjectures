@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 

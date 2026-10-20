@@ -5,8 +5,8 @@ Authors: SHEAF group S4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 import WeilConjectures.AlgebraicGeometry.SchemeClopenIdempotent

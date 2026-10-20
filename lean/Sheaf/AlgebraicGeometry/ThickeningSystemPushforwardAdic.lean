@@ -5,14 +5,14 @@ Authors: SHEAF groups Y2 and S1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ThickeningSystemPushforward
+public import Sheaf.AlgebraicGeometry.ThickeningSystemPushforward
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import WeilConjectures.AlgebraicGeometry.IdealDataRecursivePowerComparison
+import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardIdealPowers
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.Modules.TensorSection

@@ -5,22 +5,22 @@ Authors: SHEAF group S1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 import Sheaf.AlgebraicGeometry.DerivedQCohPerfectGeneration
 import Sheaf.AlgebraicGeometry.ProperPerfectRightAdjointCoproducts
 import Sheaf.AlgebraicGeometry.SmoothProperTensorPerfectCase
 import Sheaf.AlgebraicGeometry.PerfectImmersionStalkwiseTorBounds
 import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonNatural
-import WeilConjectures.AlgebraicGeometry.DerivedTensorRightCoproducts
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
-import WeilConjectures.AlgebraicGeometry.PerfectLocalizingIsoLocus
+import Sheaf.AlgebraicGeometry.DerivedTensorRightCoproducts
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.PerfectLocalizingIsoLocus
 import Sheaf.AlgebraicGeometry.DerivedExactStructures
 import Mathlib.CategoryTheory.Adjunction.Limits
 

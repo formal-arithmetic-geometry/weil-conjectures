@@ -5,12 +5,12 @@ Authors: SHEAF group K1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology
-import WeilConjectures.AlgebraicGeometry.PerfectGenerationAffineBase
+import Sheaf.AlgebraicGeometry.PerfectGenerationAffineBase
 import Sheaf.AlgebraicGeometry.KoszulSupportedAugmentationVanishing
 import Mathlib.CategoryTheory.Localization.HomEquiv
 

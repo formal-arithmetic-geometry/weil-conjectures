@@ -5,7 +5,7 @@ Authors: SHEAF group G2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
+public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 import Sheaf.AlgebraicGeometry.FlatTelescopeStageMapRefinement
 
 /-! # Naturality from flat telescope stage maps

@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplexTrunc
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 import Sheaf.Algebra.Homology.TelescopeColimit
-import WeilConjectures.CategoryTheory.RingedSiteGrothendieckAbelian
+import Sheaf.CategoryTheory.RingedSiteGrothendieckAbelian
 
 /-!
 # Homotopy colimit of good truncations

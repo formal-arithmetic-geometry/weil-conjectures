@@ -6,14 +6,14 @@ Authors: SHEAF groups P1 and M2
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ScalarExtensionHom
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-public import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+public import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.AffineBaseChangeModelComparisonIsos
 import Sheaf.AlgebraicGeometry.AffineModelHomTransportAssembly
 import Mathlib.RingTheory.TensorProduct.Finite

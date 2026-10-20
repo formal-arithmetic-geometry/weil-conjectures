@@ -6,13 +6,13 @@ Authors: SHEAF group T1
 module
 
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import all WeilConjectures.AlgebraicGeometry.TorsionControlledFormalRestriction
 import all WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # The affine restriction dictionary for formal functions
 

@@ -5,7 +5,7 @@ Authors: SHEAF group T1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.AlgebraicGeometry.QCqsDerivedDirectImageRightAdjoint

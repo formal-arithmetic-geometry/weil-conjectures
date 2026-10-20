@@ -5,11 +5,10 @@ Authors: SHEAF group M4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.FiniteProjectiveOpenStalkMapsLift
 import Mathlib.Data.Int.Interval
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Lifting reverse-degree stalk components
 

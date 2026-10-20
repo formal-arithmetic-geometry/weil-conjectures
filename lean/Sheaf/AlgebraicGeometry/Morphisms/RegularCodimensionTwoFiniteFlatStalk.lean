@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.RingTheory.Depth
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
 import Sheaf.AlgebraicGeometry.Morphisms.RegularCodimensionTwoFiniteEtaleModel
 
 /-!

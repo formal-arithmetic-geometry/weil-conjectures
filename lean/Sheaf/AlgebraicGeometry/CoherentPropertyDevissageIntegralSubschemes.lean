@@ -5,18 +5,18 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.IdealModuleProductStalk
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.CategoryTheory.Preadditive.Biproducts
 import Sheaf.AlgebraicGeometry.CoherentPropertyIntegralIdealsOfSmallSupport
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.AlgebraicGeometry.ClosedPushforwardStalks
 import Sheaf.AlgebraicGeometry.CoherentFiltrationIntegralSubschemes
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
 
 /-!

@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.PerfectLocalModelsStageGluing
 import Sheaf.AlgebraicGeometry.PerfectOpenGluingDataOfGlobalModel
 import Sheaf.AlgebraicGeometry.PerfectOfOpenPullbacks
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionDetectsIso
 
 /-! # Eventual compatibility of two prescribed local perfect models
 

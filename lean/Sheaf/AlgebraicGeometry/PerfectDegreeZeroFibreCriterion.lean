@@ -5,12 +5,12 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Sheaf.AlgebraicGeometry.TorAmplitudeQCohTest
 public import Mathlib.AlgebraicGeometry.ResidueField
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
-import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
+import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
 import all Sheaf.AlgebraicGeometry.ConnectiveRankOneModelStalk
 import Sheaf.AlgebraicGeometry.RankOneResidueStalkComponent
 import Sheaf.AlgebraicGeometry.DerivedResidueUnitBetti

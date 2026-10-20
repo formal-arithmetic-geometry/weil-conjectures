@@ -5,13 +5,13 @@ Authors: SHEAF group V3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
-import WeilConjectures.AlgebraicGeometry.QcqsCohomologyDirectSum
+import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
 import Sheaf.AlgebraicGeometry.HigherDirectImageAffineCohomologyPresentation
 import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 

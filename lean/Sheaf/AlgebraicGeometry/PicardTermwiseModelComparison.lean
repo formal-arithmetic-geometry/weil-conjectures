@@ -6,8 +6,8 @@ Authors: SHEAF group M3
 module
 
 public import Sheaf.AlgebraicGeometry.PicardTermwiseModels
-public import WeilConjectures.AlgebraicGeometry.PicardOrdinaryModelCycles
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
 import Sheaf.AlgebraicGeometry.PicardTermwiseSourceCoherence
 import Sheaf.AlgebraicGeometry.PicardTermwiseTargetCoherence

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
@@ -15,7 +15,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.LinearAlgebra.ExteriorPower.Basis
 
 import Sheaf.AlgebraicGeometry.KoszulSelfExtQuotientFrame
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionQuotientFramePullback
+import Sheaf.AlgebraicGeometry.ClosedImmersionQuotientFramePullback
 
 /-! # A finite free chart for self Ext after tensor pullback
 

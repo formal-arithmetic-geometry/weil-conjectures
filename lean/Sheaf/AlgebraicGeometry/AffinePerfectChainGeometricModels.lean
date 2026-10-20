@@ -6,18 +6,18 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ScalarExtensionHom
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Sheaf.AlgebraicGeometry.AffineSpecifiedModelChainComparison
-import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
-import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedLocalizations
-import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 
 /-! # Affine perfect models and geometric chain-map comparison
 

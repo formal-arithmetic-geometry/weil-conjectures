@@ -6,16 +6,16 @@ Authors: SHEAF group Q2
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullbackAcrossUniverses
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula
 import Sheaf.AlgebraicGeometry.DerivedLocalizationTensorComparison
 import Sheaf.AlgebraicGeometry.DerivedQCohStandardAdjunction
-import WeilConjectures.AlgebraicGeometry.PerfectImmersionStandardPerfection
+import Sheaf.AlgebraicGeometry.PerfectImmersionStandardPerfection
 
 /-! # The perfect immersion tensor formula in independent derived universes
 

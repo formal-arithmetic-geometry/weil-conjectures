@@ -7,17 +7,17 @@ module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
-import WeilConjectures.AlgebraicGeometry.AffineRestrictedTwistVanishing
+import Sheaf.AlgebraicGeometry.AffineRestrictedTwistVanishing
 import Sheaf.AlgebraicGeometry.HigherDirectImageOpenRestriction
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Sections
-import WeilConjectures.AlgebraicGeometry.LocalUniformHigherDirectImageBound
+import Sheaf.AlgebraicGeometry.LocalUniformHigherDirectImageBound
 import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 
 /-! # Vanishing of twists over one affine open
 

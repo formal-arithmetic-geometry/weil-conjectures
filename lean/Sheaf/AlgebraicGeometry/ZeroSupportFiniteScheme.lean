@@ -10,17 +10,19 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import Mathlib.Topology.KrullDimension
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.FiniteSchemeCohomologyTensor
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import Sheaf.AlgebraicGeometry.ZeroDimensionalClosedSubschemeFinite
 import Sheaf.Paper.SchemeTheoreticSupport
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 import WeilConjectures.Mathlib.Topology.KrullDimension
+import WeilConjectures.AlgebraicGeometry.Coherent
+import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.AlgebraicGeometry.SchemeTheoreticSupport
 import Sheaf.AlgebraicGeometry.CoherentFiniteType
 

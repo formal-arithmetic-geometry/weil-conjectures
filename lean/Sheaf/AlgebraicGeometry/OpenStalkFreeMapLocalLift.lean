@@ -5,11 +5,10 @@ Authors: SHEAF group D4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
+public import Sheaf.AlgebraicGeometry.OpenModuleStalkFunctor
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.AlgebraicGeometry.OpenStalkFreeMapOneLift
 import Sheaf.AlgebraicGeometry.OpenStalkRestrictionTransport
-public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Local lifting from a finite free open-site stalk
 

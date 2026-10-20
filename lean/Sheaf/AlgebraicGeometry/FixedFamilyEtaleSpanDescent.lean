@@ -19,7 +19,7 @@ import Mathlib.RingTheory.LocalRing.ResidueField.Ideal
 import WeilConjectures.AlgebraicGeometry.DescendAffine
 import WeilConjectures.AlgebraicGeometry.EtaleInverseLimitDescent
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 
 /-!
 # Pointed étale span descent with fixed target families

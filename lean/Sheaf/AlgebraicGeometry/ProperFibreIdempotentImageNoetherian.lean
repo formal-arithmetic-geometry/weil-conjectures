@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.FormalFunctionsStalk
-import WeilConjectures.AlgebraicGeometry.FormalFibreIdempotentLimit
+import Sheaf.AlgebraicGeometry.FormalFibreIdempotentLimit
 import Mathlib.RingTheory.AdicCompletion.Completeness
 
 /-! # The locally Noetherian part of proper-fibre idempotent lifting

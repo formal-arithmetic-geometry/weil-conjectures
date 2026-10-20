@@ -1,12 +1,11 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.LerayEdgeCocycleData
+public import Sheaf.AlgebraicGeometry.LerayEdgeCocycleData
 import Sheaf.CategoryTheory.GrothendieckEdgeCocycle
 import Sheaf.AlgebraicGeometry.LerayEdgeGrothendieckComparison
-import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
-public import Sheaf.Paper.PQFCohomology
 
 @[expose] public section
 universe u

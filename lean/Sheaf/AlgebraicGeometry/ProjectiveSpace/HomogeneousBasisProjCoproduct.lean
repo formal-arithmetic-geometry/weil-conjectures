@@ -7,7 +7,7 @@ module
 
 public import Mathlib.LinearAlgebra.Basis.Defs
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
-public import WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafExists
+public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist.Modules
 
 import Sheaf.AlgebraicGeometry.ProjFiniteTwistCoproductFractions

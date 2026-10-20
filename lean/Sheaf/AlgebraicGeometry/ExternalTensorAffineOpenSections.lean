@@ -6,8 +6,8 @@ Authors: SHEAF group G2
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.PullbackCarrier
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import Mathlib.RingTheory.IsTensorProduct

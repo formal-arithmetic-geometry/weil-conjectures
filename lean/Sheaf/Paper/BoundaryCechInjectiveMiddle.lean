@@ -6,8 +6,8 @@ Authors: SHEAF group Z2
 module
 
 public import Sheaf.AlgebraicGeometry.ModuleCechComparison
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyBoundary
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import WeilConjectures.CategoryTheory.Abelian.HorseshoeResolutions
 import Sheaf.Paper.BoundaryHorseshoeRepresentative

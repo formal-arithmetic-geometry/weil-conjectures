@@ -8,7 +8,7 @@ module
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.DerivedDirectImageTruncatedCoproduct
 import Sheaf.AlgebraicGeometry.DerivedDirectImageCoproductAffineTruncation
 import Mathlib.Topology.Sheaves.SheafCondition.Sites

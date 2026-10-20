@@ -5,9 +5,9 @@ Authors: SHEAF group V2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.ClosedImmersionAlgebraDirectImageExact
 import Sheaf.AlgebraicGeometry.ClopenRankStrataFormality

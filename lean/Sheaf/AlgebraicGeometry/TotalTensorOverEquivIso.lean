@@ -6,7 +6,7 @@ Authors: SHEAF group U4
 module
 
 public import Sheaf.AlgebraicGeometry.OrdinaryEvaluationData
-import WeilConjectures.AlgebraicGeometry.LocalizedOpenTensorEquivalence
+import Sheaf.AlgebraicGeometry.LocalizedOpenTensorEquivalence
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
 
 /-! # Total tensor comparison for the open-site equivalence

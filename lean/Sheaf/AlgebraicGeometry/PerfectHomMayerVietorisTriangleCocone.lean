@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Category.Grp.Colimits
 public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
-public import WeilConjectures.AlgebraicGeometry.PerfectHomTriangleRow
+public import Sheaf.AlgebraicGeometry.PerfectHomTriangleRow
 import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisColumns
 import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
 

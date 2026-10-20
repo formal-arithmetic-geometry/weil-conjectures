@@ -6,7 +6,7 @@ Authors: SHEAF group V4
 module
 
 public import Sheaf.AlgebraicGeometry.KoszulOpenHomChainRepresentatives
-import all WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
+import all Sheaf.AlgebraicGeometry.KoszulOpenSystem
 import Sheaf.AlgebraicGeometry.KoszulOpenHomChainClassNaturality
 
 /-! # The augmented Koszul identity class is independent of the exponent

@@ -4,13 +4,13 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
-import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
+import Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 import Sheaf.AlgebraicGeometry.FlatDerivedStructureUnitProperties
 
 /-! # The derived structure unit and its degree-zero and fibre comparisons

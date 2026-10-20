@@ -11,8 +11,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import WeilConjectures.RingTheory.Depth
 import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoPushforwardCoherence
 import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteStructureAlgebraDepth
-import WeilConjectures.AlgebraicGeometry.RelativeSpectrumAffineRealization
-import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
+import Sheaf.AlgebraicGeometry.RelativeSpectrumAffineRealization
+import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 
 /-!
 # Finite extension with depth two along the boundary

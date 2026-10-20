@@ -5,7 +5,7 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
+public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import Mathlib.AlgebraicGeometry.Pullbacks

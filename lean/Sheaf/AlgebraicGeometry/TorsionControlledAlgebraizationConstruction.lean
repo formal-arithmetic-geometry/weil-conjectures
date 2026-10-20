@@ -4,7 +4,7 @@ import Sheaf.AlgebraicGeometry.TorsionControlledEasyAlgebraizationBridge
 import Sheaf.AlgebraicGeometry.CoherentFormalModuleAnnihilated
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.Algebra.Category.ModuleCat.Limits
-import WeilConjectures.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.Coherent
 
 /-! # Construction of a torsion-controlled algebraization
 

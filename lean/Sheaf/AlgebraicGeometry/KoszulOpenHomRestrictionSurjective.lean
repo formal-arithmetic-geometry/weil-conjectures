@@ -5,8 +5,8 @@ Authors: SHEAF group J2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
-import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
+public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.AffineKoszulCechDerivedComparison
 import Sheaf.AlgebraicGeometry.KoszulOpenHomComparisonSquare
 import WeilConjectures.Algebra.Homology.SequentialColimitDerivedHomologyRepresentative

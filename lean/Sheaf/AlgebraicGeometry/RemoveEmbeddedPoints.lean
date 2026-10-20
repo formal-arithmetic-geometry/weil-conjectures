@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
 public import Mathlib.Topology.GDelta.Basic

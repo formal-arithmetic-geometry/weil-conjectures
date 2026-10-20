@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
+public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 
 @[expose] public section
 set_option autoImplicit false

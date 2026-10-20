@@ -4,7 +4,7 @@ Authors: SHEAF group Q2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.AffineMorphism
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives

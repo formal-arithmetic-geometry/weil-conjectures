@@ -5,12 +5,12 @@ Authors: SHEAF group U3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitHomologyFactorization
-import WeilConjectures.AlgebraicGeometry.AffineAlgebraModuleAdjunctionCounitIso
+import Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionCounitIso
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 
 /-! # The canonical exact-derived affine algebra counit

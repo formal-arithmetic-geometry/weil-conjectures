@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.AffineScheme
@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.CartesianFlatSingleTermwiseComparison
 import Mathlib.Algebra.Homology.DerivedCategory.FullyFaithful
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.CategoryTheory.Adjunction.Additive
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 /-! # A Noetherian comparison before choosing a finite-free resolution

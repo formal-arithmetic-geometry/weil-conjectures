@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.FormalComparisonCompletedAffineAdjunctionModel
 import WeilConjectures.AlgebraicGeometry.TensorPullbackUnitRestrictionIso
 import Sheaf.AlgebraicGeometry.CompletedAffineCoherentIsoLift
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # The completed affine comparison is invertible off the exceptional ideal
 

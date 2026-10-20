@@ -5,13 +5,13 @@ Authors: SHEAF group S4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Algebra.Module.Projective
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.AlgebraicGeometry.AffineSectionsComplexCounit
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
-import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
 
 /-! # Bounded projective models of ordinary affine sections

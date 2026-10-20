@@ -5,12 +5,12 @@ Authors: SHEAF group Y2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
-import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
 
 /-! # Finite-term presentations on arbitrary affine schemes

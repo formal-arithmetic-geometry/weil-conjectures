@@ -5,11 +5,11 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforwardPerfectComponent
 import Sheaf.AlgebraicGeometry.SupportedOpenPushforwardLocalComparisons
-import WeilConjectures.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover
+import Sheaf.AlgebraicGeometry.DerivedRestrictionIsIsoOpenCover
 
 /-! # Perfect pushforward and canonical maps for supported open inclusions
 

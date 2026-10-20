@@ -5,13 +5,13 @@ Authors: SHEAF group E3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 public import WeilConjectures.FromJoel.Algebra.Homology.PreservesQuasiIso
 import Sheaf.AlgebraicGeometry.AffineAlgebraCounitHomologyComparisonIsIso
-import WeilConjectures.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility
+import Sheaf.AlgebraicGeometry.AffineAlgebraKInjectiveCounitCompatibility
 
 /-! # The affine algebra counit on K-injective cohomology
 

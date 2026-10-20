@@ -5,7 +5,7 @@ Authors: SHEAF group X2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PrincipalOpenSectionTransport
+public import Sheaf.AlgebraicGeometry.PrincipalOpenSectionTransport
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
 import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionBijective
 import Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetInsertionDifferential

@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
+public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnit
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomologyCore

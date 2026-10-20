@@ -5,14 +5,14 @@ Authors: SHEAF group X2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhood
+import Sheaf.AlgebraicGeometry.CoherentIntegralGenericFreeNeighbourhood
 import Sheaf.AlgebraicGeometry.CoherentIntegralGenericLatticeExtension
-import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericIdealSigma
+import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealSigma
 
 /-! Generic coherent ideal lattices. Source: Stacks Project, Tag 01YE. -/
 

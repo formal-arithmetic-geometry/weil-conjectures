@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 import Sheaf.AlgebraicGeometry.FlatComplexDerivedPullback
 import Sheaf.AlgebraicGeometry.LocalZeroBottomTruncation
 import Sheaf.AlgebraicGeometry.ZeroBottomArrowPullbackLocal
-import WeilConjectures.Topology.SheafIsomorphismLocalOpenCover
+import Sheaf.Topology.SheafIsomorphismLocalOpenCover
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 

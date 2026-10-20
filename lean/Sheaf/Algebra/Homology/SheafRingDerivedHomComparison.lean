@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
 
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived

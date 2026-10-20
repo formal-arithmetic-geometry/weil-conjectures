@@ -6,10 +6,10 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.PrincipalOpenCechTotal
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
+import Sheaf.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 
 /-! # Ordinary representatives for the open-sections comparison

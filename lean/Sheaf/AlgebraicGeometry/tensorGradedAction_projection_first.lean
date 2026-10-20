@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedProductProjection
 import Sheaf.AlgebraicGeometry.TensorGradedCoefficientSheafAction
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Projection of homogeneous quotient actions
 

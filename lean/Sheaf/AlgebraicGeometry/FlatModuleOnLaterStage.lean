@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
 import Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent
-import WeilConjectures.AlgebraicGeometry.FlatModuleDescentAffineCharts
+import Sheaf.AlgebraicGeometry.FlatModuleDescentAffineCharts
 import Sheaf.AlgebraicGeometry.AffineFlatModuleDescent
 import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 

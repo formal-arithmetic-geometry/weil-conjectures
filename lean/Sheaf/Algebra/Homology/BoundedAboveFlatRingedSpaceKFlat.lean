@@ -11,7 +11,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.Geometry.RingedSpace.Basic
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.KFlatStalkCriterion
-import WeilConjectures.AlgebraicGeometry.FlatSheafStalk
+import Sheaf.AlgebraicGeometry.FlatSheafStalk
 
 /-!
 # Bounded-above flat complexes on a ringed space are K-flat

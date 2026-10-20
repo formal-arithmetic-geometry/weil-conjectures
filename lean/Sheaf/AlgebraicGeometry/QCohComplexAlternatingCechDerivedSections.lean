@@ -6,9 +6,9 @@ Authors: SHEAF group Z2
 module
 
 public import Sheaf.AlgebraicGeometry.AlternatingCechTotalComplex
-public import WeilConjectures.AlgebraicGeometry.Coherent
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 import Sheaf.AlgebraicGeometry.QCohAlternatingCechResolutionQuasiIso
 import Sheaf.AlgebraicGeometry.KInjectiveAlternatingCechAugmentationQuasiIso
 

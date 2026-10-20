@@ -7,8 +7,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackModuleModel
-import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
-import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalenceCore
+import Sheaf.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import Sheaf.AlgebraicGeometry.DerivedPullbackOpenRestrictionUniverses
 
 /-! # Affine-local cohomology of derived pullback

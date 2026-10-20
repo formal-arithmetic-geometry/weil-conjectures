@@ -11,10 +11,11 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.AlgebraicGeometry.LimitContainedInConstructible
 import Sheaf.TraceFormula.GeometricReducedFibreLocusBaseChange
 import Sheaf.TraceFormula.GeometricReducedFibreLocusConstructible
+import WeilConjectures.AlgebraicGeometry.LimitContainedInConstructible
 
 /-!
 # Geometrically reduced fibres descend along affine inverse limits

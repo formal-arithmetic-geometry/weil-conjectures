@@ -5,13 +5,13 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentThickeningSystem
+public import Sheaf.AlgebraicGeometry.CoherentThickeningSystem
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.CategoryTheory.Adjunction.Unique
 import Sheaf.AlgebraicGeometry.CompletionFromRestriction
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.TensorPullback

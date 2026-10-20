@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.RingTheory.ProEtale.IndEtale
 
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitFactorFiniteEtale
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitFactorFiniteEtale
 import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorStrictLocalLimit
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitStrictLocalOrbits
 

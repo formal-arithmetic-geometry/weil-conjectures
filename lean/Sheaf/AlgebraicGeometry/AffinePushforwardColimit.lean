@@ -6,13 +6,16 @@ Authors: SHEAF group M1
 module
 
 public import Mathlib.AlgebraicGeometry.AffineTransitionLimit
-public import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
+public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentAlgebraColimit
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentModuleColimitAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
+import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 
 /-! # Affine pushforward and tensor modules commute with directed limits

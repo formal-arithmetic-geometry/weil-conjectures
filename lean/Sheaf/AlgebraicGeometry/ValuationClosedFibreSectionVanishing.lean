@@ -11,7 +11,7 @@ public import Mathlib.RingTheory.Valuation.ValuationRing
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
+import Sheaf.AlgebraicGeometry.ClosedImmersionUnitQuotient
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 

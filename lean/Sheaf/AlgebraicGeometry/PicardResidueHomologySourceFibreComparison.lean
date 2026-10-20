@@ -3,7 +3,7 @@ module
 public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import WeilConjectures.AlgebraicGeometry.StructureSheafCohomologyPullback
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat

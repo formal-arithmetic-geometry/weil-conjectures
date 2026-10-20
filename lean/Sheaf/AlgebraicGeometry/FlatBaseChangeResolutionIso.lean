@@ -5,11 +5,11 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
+public import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsDefs
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologySeparated
-import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyGluing
+import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyGluing
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionAffineSections
 

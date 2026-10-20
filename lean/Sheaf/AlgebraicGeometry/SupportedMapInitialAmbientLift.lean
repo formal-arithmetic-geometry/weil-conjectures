@@ -5,10 +5,10 @@ Authors: SHEAF group S4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.Algebra.Homology.OpenExtensionRestrictionIso
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
+import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport
 
 /-! # Initial ambient representative of a supported perfect map
 

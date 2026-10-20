@@ -8,7 +8,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 import Sheaf.Paper.AlgebraizeFiniteStructureAlgebra
 import Sheaf.AlgebraicGeometry.CoherentAlgebraAffineFiniteProper
 import WeilConjectures.AlgebraicGeometry.AffineAlgebraReductionsCartesian
-import WeilConjectures.AlgebraicGeometry.RelativeSpectrumAffineRealization
+import Sheaf.AlgebraicGeometry.RelativeSpectrumAffineRealization
 
 /-!
 # Algebraization of finite schemes over thickenings of a proper scheme

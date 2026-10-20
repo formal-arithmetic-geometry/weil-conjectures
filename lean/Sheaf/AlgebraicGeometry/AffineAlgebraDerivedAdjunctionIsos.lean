@@ -5,15 +5,15 @@ Authors: SHEAF group U3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.AffineAlgebraModuleAdjunctionIsos
 import Sheaf.AlgebraicGeometry.AffineAlgebraDerivedUnitHomologyFactorization
 import Sheaf.AlgebraicGeometry.AffineAlgebraDerivedCounitHomologyFactorization
 import Sheaf.AlgebraicGeometry.AffineAlgebraDerivedAdjunctionQCoh
 import Sheaf.AlgebraicGeometry.AffineDerivedCohomology
-import WeilConjectures.AlgebraicGeometry.AffineModuleCorrespondence
+import Sheaf.AlgebraicGeometry.AffineModuleCorrespondence
 import Sheaf.AlgebraicGeometry.RingedSpaceDerivedAdjunctionGeneral
 
 /-! # Unit and counit of the affine algebra derived adjunction

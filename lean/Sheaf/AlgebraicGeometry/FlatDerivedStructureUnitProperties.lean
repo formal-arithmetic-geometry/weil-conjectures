@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
+public import Sheaf.AlgebraicGeometry.Picard.CanonicalSingleDirectImageComparison
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
@@ -8,7 +8,7 @@ public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 import Sheaf.AlgebraicGeometry.Picard.FlatInvertibleCanonicalDerivedBaseChange
 import Sheaf.AlgebraicGeometry.CanonicalStructureMapBaseChange
-import WeilConjectures.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
+import Sheaf.AlgebraicGeometry.Picard.CanonicalDirectImageH0Unit
 
 /-! # Derived fibres of the canonical structure map
 

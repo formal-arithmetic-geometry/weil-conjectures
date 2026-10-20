@@ -5,13 +5,13 @@ Authors: SHEAF group S3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
-import WeilConjectures.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductMono
+import Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductMono
 import Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductEpi
 
 /-! # The second-page coproduct comparison for lower-truncated direct image

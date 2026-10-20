@@ -5,7 +5,7 @@ Authors: SHEAF group A3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic

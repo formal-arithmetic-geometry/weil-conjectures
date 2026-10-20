@@ -5,24 +5,24 @@ Authors: SHEAF group N3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.CoherentStalkMapExtends
-import WeilConjectures.AlgebraicGeometry.CoherentLocalIsomorphism
+import Sheaf.AlgebraicGeometry.CoherentStalkMapExtends
+import Sheaf.AlgebraicGeometry.CoherentLocalIsomorphism
 import Sheaf.AlgebraicGeometry.CoherentHomsOverOpen
 import WeilConjectures.AlgebraicGeometry.ReducedInducedClosedSubscheme
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.AlgebraicGeometry.IntegralIdealGenericStalk
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.ModuleStalkExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealConstruction
-import WeilConjectures.AlgebraicGeometry.CoherentIntegralGenericIdealMono
+import Sheaf.AlgebraicGeometry.CoherentIntegralGenericIdealMono
 
 /-! # An ideal-sum lattice in a coherent module on an integral scheme
 

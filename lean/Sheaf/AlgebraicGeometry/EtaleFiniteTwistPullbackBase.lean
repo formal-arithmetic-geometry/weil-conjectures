@@ -21,7 +21,7 @@ import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.Algebra.Homology.BifunctorShift
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
 import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import Sheaf.CategoryTheory.SiteInverseImageTensor

@@ -13,7 +13,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent
 public import WeilConjectures.AlgebraicGeometry.RelativeFlatModuleStalk
 public import WeilConjectures.AlgebraicGeometry.RelativeFlatOfStalks
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorPullbackStalk
-public import WeilConjectures.AlgebraicGeometry.AffineFlatModuleTensorFlat
+public import Sheaf.AlgebraicGeometry.AffineFlatModuleTensorFlat
 public import Sheaf.Algebra.Homology.BoundedAboveFlatRingedSpaceKFlat
 public import Sheaf.AlgebraicGeometry.TensorPullbackKFlatQuasiIso
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed

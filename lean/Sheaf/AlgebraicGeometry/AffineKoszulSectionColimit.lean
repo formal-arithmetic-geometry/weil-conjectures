@@ -5,14 +5,14 @@ Authors: SHEAF group U2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedTensorAugmentation
 public import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.CategoryTheory.Limits.Types.Colimits
 import Mathlib.CategoryTheory.HomCongr
 import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology
-import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedLocalizations
-import all WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import Sheaf.AlgebraicGeometry.SchemeIsoDerivedLocalizations
+import all Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SpectrumStructureRestrictionComparison
 import Sheaf.AlgebraicGeometry.SchemeIsoDerivedQCoh
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport

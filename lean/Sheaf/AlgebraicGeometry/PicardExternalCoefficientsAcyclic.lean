@@ -6,16 +6,16 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.PicardExternalCoefficientsDirectImages
-import WeilConjectures.AlgebraicGeometry.QcqsCohomologyDirectSum
+import Sheaf.AlgebraicGeometry.QcqsCohomologyDirectSum
 import Sheaf.AlgebraicGeometry.LerayDegenerateSections
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.RightDerived
 import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.ModuleCechComparisonIsoAffine
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
 import Sheaf.Paper.HigherDirectImagePresheaf
 
 /-! # Acyclicity of external tensor coefficients

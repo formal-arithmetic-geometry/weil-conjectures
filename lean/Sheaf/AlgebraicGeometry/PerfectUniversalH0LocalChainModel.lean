@@ -5,12 +5,12 @@ Authors: SHEAF group F3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 import Sheaf.AlgebraicGeometry.PerfectUniversalH0BottomModel
-import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
+import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Local chain models for the lowest truncation arrow

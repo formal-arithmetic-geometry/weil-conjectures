@@ -5,9 +5,9 @@ Authors: SHEAF group H2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.BoundedFreeStalkComplexLift
+import Sheaf.AlgebraicGeometry.BoundedFreeStalkComplexLift
 import Sheaf.AlgebraicGeometry.PerfectStalkDerivedIsoSpread
 
 /-! # Spreading a prescribed bounded free stalk model

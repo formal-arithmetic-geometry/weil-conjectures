@@ -5,12 +5,12 @@ Authors: SHEAF groups U1 and H3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
+public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 public import Sheaf.CategoryTheory.CompactObject
 public import WeilConjectures.CategoryTheory.WeakTriangulatedGenerator
 public import Mathlib.CategoryTheory.Triangulated.Subcategory
-import WeilConjectures.AlgebraicGeometry.DerivedAmbientDirectSums
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.DerivedAmbientDirectSums
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import WeilConjectures.CategoryTheory.TriangulatedEquivalenceTransfer

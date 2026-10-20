@@ -13,7 +13,7 @@ public import WeilConjectures.RingTheory.Depth
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 import Mathlib.RingTheory.AdicCompletion.AsTensorProduct
 import WeilConjectures.RingTheory.FlatLocalDepthFormula
-import WeilConjectures.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
+import Sheaf.AlgebraicGeometry.Morphisms.DepthTwoFiniteExtensionUniqueness
 import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedFiniteModel
 /-!
 # Descent of the finite depth-two power-series extension as a finite scheme

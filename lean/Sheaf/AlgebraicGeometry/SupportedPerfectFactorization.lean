@@ -5,9 +5,9 @@ Authors: SHEAF group S1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Mathlib.Topology.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import all Sheaf.CategoryTheory.CompactGeneratorAmbientThick
 import all Sheaf.AlgebraicGeometry.DerivedQCohCompactRepresentatives
 import all Sheaf.AlgebraicGeometry.SupportedKoszulRelativeDetector

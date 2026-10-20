@@ -6,19 +6,19 @@ Authors: SHEAF group G1
 module
 
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.AlgebraicGeometry.ThickeningSystemsDictionary
 import Sheaf.AlgebraicGeometry.FormalSystemsProperSupportSerre
-import WeilConjectures.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
+import Sheaf.AlgebraicGeometry.NoetherianQuasicoherentSubmodules
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceChowComparison
 import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
 import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # Proper closed support for a coherent thickening system
 

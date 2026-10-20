@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
 
 /-! # Adjacent-level naturality of the finite quotient comparison
 

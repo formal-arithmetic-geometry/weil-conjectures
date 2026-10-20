@@ -5,7 +5,7 @@ Authors: SHEAF group NE, SHEAF group Q4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
 public import Sheaf.AlgebraicGeometry.CanonicalCoherentEtaleComparison
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 import Sheaf.AlgebraicGeometry.CoherentPowerComparison

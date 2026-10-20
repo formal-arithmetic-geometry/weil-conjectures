@@ -5,18 +5,18 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FormalFibreCohomology
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.FormalFibreCohomology
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Mathlib.RingTheory.AdicCompletion.Functoriality
 import Sheaf.AlgebraicGeometry.FormalFunctionsLocalDictionary
 import Sheaf.AlgebraicGeometry.TheoremFormalFunctions
-import WeilConjectures.AlgebraicGeometry.FormalFunctionsDegreeZeroDictionary
+import Sheaf.AlgebraicGeometry.FormalFunctionsDegreeZeroDictionary
 import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
 /-! # The theorem on formal functions at a point of the base
 

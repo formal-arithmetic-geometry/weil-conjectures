@@ -6,8 +6,8 @@ Authors: SHEAF group H1
 module
 
 public import Sheaf.AlgebraicGeometry.OpenSectionsCohomologyModel
-public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
-public import WeilConjectures.AlgebraicGeometry.DerivedStructureEvaluationOne
+public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import Sheaf.AlgebraicGeometry.DerivedStructureEvaluationOne
 public import Mathlib.Algebra.Homology.Embedding.ExtendHomology
 import Sheaf.AlgebraicGeometry.OpenSectionsOrdinaryStructureClass
 

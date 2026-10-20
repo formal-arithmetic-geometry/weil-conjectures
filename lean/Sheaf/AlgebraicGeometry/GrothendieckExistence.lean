@@ -6,12 +6,12 @@ Authors: SHEAF group Q1
 module
 
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBase
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ModuleSupportProperOverBase
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceSupportedHom
 import Sheaf.AlgebraicGeometry.GrothendieckExistenceSystemSupport

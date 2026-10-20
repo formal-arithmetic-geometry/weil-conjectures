@@ -6,10 +6,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.CanonicalDerivedTensorHom
 public import Sheaf.AlgebraicGeometry.MixedHomTensorPullbackIso
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
 import all Sheaf.AlgebraicGeometry.PerfectInternalHomPullbackIsIso
-import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
+import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.CanonicalPullbackTensorMonoidalRealization
 
 /-! # Perfect internal-Hom pullback with no module localization choice

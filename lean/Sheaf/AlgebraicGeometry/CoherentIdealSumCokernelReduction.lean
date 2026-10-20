@@ -5,13 +5,13 @@ Authors: SHEAF group R1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelSum
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelSum
 import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
-import WeilConjectures.Algebra.Homology.ModuleStalkExact
+import Sheaf.Algebra.Homology.ModuleStalkExact
 import Mathlib.CategoryTheory.NatIso
 
 /-! # The smaller-support cokernel of an ideal-sum inclusion

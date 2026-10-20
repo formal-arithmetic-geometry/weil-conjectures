@@ -10,7 +10,7 @@ public import Sheaf.Paper.UniformConstructibleExtTorsion
 import Sheaf.Paper.FormalClosedSupport
 import Sheaf.Paper.FormalClosedSupportII
 import Sheaf.CategoryTheory.Sites.RGammaDerivedLimit
-import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
+import Sheaf.CategoryTheory.Triangulated.MilnorSequence
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients
 import Sheaf.SixFunctors.ProEtale.DerivedCompletion
 import Sheaf.Paper.IntegralModels

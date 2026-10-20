@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteAffineCechCoefficientComparisonMap
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import WeilConjectures.AlgebraicGeometry.FiniteAffineCechIntersectionBaseChange
 
 /-! # Affine coefficient generators

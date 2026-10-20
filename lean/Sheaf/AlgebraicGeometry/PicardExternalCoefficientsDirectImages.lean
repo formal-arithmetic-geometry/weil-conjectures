@@ -6,7 +6,7 @@ Authors: SHEAF group K2
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 

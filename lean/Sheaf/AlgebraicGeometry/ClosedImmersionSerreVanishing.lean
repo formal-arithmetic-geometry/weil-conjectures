@@ -10,7 +10,7 @@ public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 public import Sheaf.Paper.PQFCohomology
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison
+import Sheaf.AlgebraicGeometry.ModuleCohomologySourceComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Serre
 
 /-! # Serre vanishing for the restricted projective-space twists

@@ -19,7 +19,7 @@ import WeilConjectures.RingTheory.ColimitFlatRingMap
 import Mathlib.AlgebraicGeometry.Pullbacks
 import WeilConjectures.AlgebraicGeometry.RadicialPreparationFibreComparison
 import Mathlib.AlgebraicGeometry.Properties
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.AlgebraicGeometry.LimitContainedInConstructible
 import Sheaf.AlgebraicGeometry.GeometricallyReducedFibreLocus
 import Sheaf.TraceFormula.GeometricallyIrreducibleFibreLocus

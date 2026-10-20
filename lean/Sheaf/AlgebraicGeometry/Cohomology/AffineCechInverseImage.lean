@@ -5,8 +5,8 @@ Authors: SHEAF group T2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
-import WeilConjectures.AlgebraicGeometry.Cohomology.CechComparisonAffine
+public import Sheaf.AlgebraicGeometry.Cohomology.FlatCohomologyCechBaseChange
+import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonAffine
 import Sheaf.AlgebraicGeometry.Cohomology.CechComparisonInverseImage
 
 /-! # Inverse image on affine Čech cocycles

@@ -1,12 +1,12 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
 public import Sheaf.Algebra.Homology.HomComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 import Sheaf.AlgebraicGeometry.HomComplexSingleNaturality
-import WeilConjectures.AlgebraicGeometry.UnderivedAffineHomCounit
+import Sheaf.AlgebraicGeometry.UnderivedAffineHomCounit
 
 @[expose] public section
 universe u

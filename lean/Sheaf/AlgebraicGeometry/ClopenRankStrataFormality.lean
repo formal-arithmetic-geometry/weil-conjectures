@@ -5,14 +5,14 @@ Authors: SHEAF group K2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex
 import Sheaf.AlgebraicGeometry.ClopenRankStrataHomologyLift
 import WeilConjectures.AlgebraicGeometry.FiniteZeroDifferentialAssembly
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-import WeilConjectures.AlgebraicGeometry.DerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedCategory
 
 /-! # Formality of modules on disjoint clopen rank strata
 

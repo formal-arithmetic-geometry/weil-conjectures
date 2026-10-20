@@ -5,14 +5,14 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
+public import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.CategoryTheory.DerivedCategory.TorAmplitude
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import Mathlib.RingTheory.Flat.CategoryTheory
 import WeilConjectures.Algebra.Homology.TorAmplitudeFlatModel
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import WeilConjectures.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
+import Sheaf.AlgebraicGeometry.AffineDerivedTildeHomologyComparison
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import Sheaf.AlgebraicGeometry.Modules.IsKFlatTilde

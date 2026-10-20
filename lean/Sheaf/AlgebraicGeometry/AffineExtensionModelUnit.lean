@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import WeilConjectures.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
+import Sheaf.AlgebraicGeometry.AffineTildeDerivedSectionsUnitIsIso
 import WeilConjectures.CategoryTheory.DerivedCategory.Adjunction
 import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution

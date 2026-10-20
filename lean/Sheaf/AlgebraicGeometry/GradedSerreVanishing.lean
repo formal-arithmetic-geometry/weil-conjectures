@@ -10,14 +10,14 @@ public import Mathlib.Algebra.DirectSum.Module
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.RingTheory.Noetherian.Defs
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Sheaf.Paper.PQFCohomology
 import Mathlib.Algebra.Category.Grp.Zero
 import Sheaf.AlgebraicGeometry.GradedModuleAffineBaseChange
 import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 import WeilConjectures.AlgebraicGeometry.AmplePullback
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.CoherentSerreVanishing
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 

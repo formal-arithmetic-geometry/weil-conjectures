@@ -5,14 +5,14 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Mathlib.AlgebraicGeometry.Morphisms.OpenImmersion
 import Sheaf.AlgebraicGeometry.KoszulAffineDetection
 import Sheaf.AlgebraicGeometry.DerivedOpenUnitCone
-import WeilConjectures.AlgebraicGeometry.KoszulPowersOrthogonality
+import Sheaf.AlgebraicGeometry.KoszulPowersOrthogonality
 import Sheaf.AlgebraicGeometry.KoszulRestrictionZero
 
 /-! # Koszul orthogonality detects extension from an open

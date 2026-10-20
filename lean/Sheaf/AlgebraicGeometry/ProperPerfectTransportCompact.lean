@@ -4,18 +4,18 @@ Released under Apache 2.0 license as described in the file LICENSE.
 Authors: SHEAF group V2
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
-public import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSums
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.DerivedQCohDirectSums
 public import Sheaf.AlgebraicGeometry.PerfectObjectCompact
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Monoidal.Tor
 import Sheaf.AlgebraicGeometry.BoundedCoherentFiniteTorDirectImagePerfect
-import WeilConjectures.AlgebraicGeometry.PerfectNoetherianCohomology
+import Sheaf.AlgebraicGeometry.PerfectNoetherianCohomology
 import Sheaf.AlgebraicGeometry.PerfectRelativeFiniteTor
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportClosed
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportClosed
 import WeilConjectures.Algebra.Category.ModuleCat.TorSymmetry
 
 /-! # Compactness after comparison with proper perfect direct image

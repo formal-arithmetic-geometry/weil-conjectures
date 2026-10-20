@@ -4,15 +4,15 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.RingTheory.RingPseudoCoherent
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Mathlib.CategoryTheory.Localization.Equivalence
 import Sheaf.AlgebraicGeometry.QuasiCompactFiniteTorDimension
-import WeilConjectures.AlgebraicGeometry.AffinePseudoCoherentCriterion
+import Sheaf.AlgebraicGeometry.AffinePseudoCoherentCriterion
 import Sheaf.AlgebraicGeometry.AffineTorAmplitudeCriterion
 import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
 

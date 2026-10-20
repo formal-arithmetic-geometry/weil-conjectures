@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree

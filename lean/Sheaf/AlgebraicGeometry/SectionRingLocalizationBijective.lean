@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.InvertibleSectionRing
 public import WeilConjectures.AlgebraicGeometry.Ample
 public import Mathlib.RingTheory.GradedAlgebra.HomogeneousLocalization
 import WeilConjectures.AlgebraicGeometry.InvertibleSectionLocalization
-import WeilConjectures.AlgebraicGeometry.SectionRingVeroneseFractions
+import Sheaf.AlgebraicGeometry.SectionRingVeroneseFractions
 import Sheaf.Paper.NonvanishingSectionTrivializes
 
 /-! # The section-ring localization comparison

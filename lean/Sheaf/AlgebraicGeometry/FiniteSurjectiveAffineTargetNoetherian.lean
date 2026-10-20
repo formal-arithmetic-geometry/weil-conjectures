@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.UnderlyingMap
 public import Mathlib.AlgebraicGeometry.Noetherian
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.Modules.ClosedImmersion
 import Sheaf.AlgebraicGeometry.FiniteAffinePushforwardIdealDevissage

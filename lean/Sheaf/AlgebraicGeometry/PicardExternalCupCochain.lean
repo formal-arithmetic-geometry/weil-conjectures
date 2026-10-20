@@ -6,7 +6,7 @@ Authors: SHEAF group F4
 module
 
 public import Sheaf.AlgebraicGeometry.PicardKunnethResolutionModel
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.Algebra.Homology.Bifunctor
 
 import WeilConjectures.Algebra.Homology.TensorKunnethNat

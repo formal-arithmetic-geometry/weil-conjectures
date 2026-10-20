@@ -6,7 +6,7 @@ Authors: SHEAF group H2
 module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHom
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.RingTheory.KoszulRegularSequence
 public import WeilConjectures.RingTheory.KoszulDualComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -14,7 +14,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Sheaf.RingTheory.KoszulRegularSequenceDualComplex
 import Sheaf.AlgebraicGeometry.LocalFiniteFreeScalarHomology
-import WeilConjectures.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
+import Sheaf.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
 import Sheaf.AlgebraicGeometry.AffineKoszulHomCoordinates
 
 /-! # Affine scalar Ext and dual Koszul cohomology

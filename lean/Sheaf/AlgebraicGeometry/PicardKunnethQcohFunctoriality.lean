@@ -6,7 +6,7 @@ Authors: SHEAF group X3
 module
 
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.DirectSum.Module
 import Sheaf.AlgebraicGeometry.ScalarCupPullbackCoefficientNaturality

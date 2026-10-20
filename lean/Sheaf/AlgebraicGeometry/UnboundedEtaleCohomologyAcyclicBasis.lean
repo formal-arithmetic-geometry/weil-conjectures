@@ -25,7 +25,7 @@ import Sheaf.CategoryTheory.Filtration
 import WeilConjectures.CategoryTheory.TruncationCouple
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import WeilConjectures.CategoryTheory.Triangulated.MilnorSequence
+import Sheaf.CategoryTheory.Triangulated.MilnorSequence
 import WeilConjectures.CategoryTheory.DerivedLimitRoosAbelianGroups
 import Sheaf.CategoryTheory.SiteTruncationDerivedLimit
 import Sheaf.CategoryTheory.Sites.RGammaDerivedLimit

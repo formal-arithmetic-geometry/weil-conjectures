@@ -5,14 +5,14 @@ Authors: SHEAF group V1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.AlgebraicGeometry.RingedSpaceDerivedDirectImage
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
-import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.RingedSpaceDerivedDirectImage
+public import Sheaf.Topology.RingedSpaceModuleCohomology
+import Sheaf.AlgebraicGeometry.AffineQCohDerivedEquivalence
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesDirectSums
 import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.AlgebraicGeometry.DerivedGlobalSectionsAffinizationComparison
-import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
+import Sheaf.AlgebraicGeometry.DerivedQCohDirectSumsAux
 
 /-! # Derived global sections preserves quasi-coherent coproducts. -/
 

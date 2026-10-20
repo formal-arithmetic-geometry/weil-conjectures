@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
+public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 
 public import Mathlib.CategoryTheory.Filtered.Basic
 

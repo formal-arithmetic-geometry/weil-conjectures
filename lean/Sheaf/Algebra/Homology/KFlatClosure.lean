@@ -12,7 +12,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorColimits
 import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
 import Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree
-import WeilConjectures.CategoryTheory.RingedSiteKInjectiveResolutions
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!
 # Closure of K-flat complexes under countable sums and cones

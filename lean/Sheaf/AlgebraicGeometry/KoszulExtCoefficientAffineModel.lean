@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.RingTheory.KoszulQuotientCoefficientComplex
 public import WeilConjectures.RingTheory.KoszulRegularSequence
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
@@ -15,10 +15,9 @@ public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
 import WeilConjectures.RingTheory.KoszulProjectiveResolution
 import Mathlib.Algebra.Homology.Embedding.ExtendHomology
-import WeilConjectures.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
+import Sheaf.AlgebraicGeometry.AffineKoszulFiniteFreeResolution
 import Sheaf.AlgebraicGeometry.LocalFiniteFreeHomologyNatural
 import Sheaf.AlgebraicGeometry.AffineKoszulCoefficientHomCoordinates
-import Sheaf.Paper.DerivedHomMayerVietoris
 /-! # Affine sheaf model of the Koszul Ext coefficient morphism
 
 Source: Stacks Project, Tag 0BQZ, affine computation of regular immersion Ext. -/

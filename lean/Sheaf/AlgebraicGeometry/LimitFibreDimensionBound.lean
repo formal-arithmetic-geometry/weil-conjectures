@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Topology.KrullDimension
-public import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+public import Sheaf.AlgebraicGeometry.LimitAffineTransition
 
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Pullbacks
