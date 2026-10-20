@@ -25,44 +25,48 @@
  ],
  "proof": [
   {
-   "text": "Because $X$ is proper over the field $k$, it is of finite type over $k$ [def-weil-proper-morphism]. The support of a coherent module is closed, and its dimension is at most zero by hypothesis; therefore [lem-sc-dim0-finite] shows that $\\operatorname{Supp}(\\mathcal F)$ is a finite set of closed points.",
+   "text": "Properness gives the finite-type hypotheses of [lem-pc-zero-support-finite-scheme]. For each invertible N apply that lemma to obtain a finite-dimensional k-algebra A, a closed immersion i over k, a coherent G on Spec A, F ≅ i_*G, F tensor N ≅ i_*(G tensor tensorPullback(i,N)), coherence of F tensor N, equality of supports, and the module-cohomology comparison.",
    "uses": [
     "def-weil-proper-morphism",
-    "pqf-def-coherent",
-    "lem-sc-dim0-finite"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYT, proof of parts (3)--(5): a coherent module with zero-dimensional support has finite support"
-   }
-  },
-  {
-   "text": "Apply [lem-pc-zero-support-finite-scheme] to obtain $A$, $i:\\operatorname{Spec}(A)\\hookrightarrow X$, and $\\mathcal G$. The displayed cohomology identifications there reduce both $\\mathcal F$ and $\\mathcal F\\otimes\\mathcal N$ to coherent modules on the affine finite scheme $\\operatorname{Spec}(A)$, with $\\mathcal F\\otimes\\mathcal N$ coherent and having the same support as $\\mathcal F$.",
-   "uses": [
     "lem-pc-zero-support-finite-scheme"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYT, proof: replace the sheaf by its module on the finite closed subscheme cut out by its annihilator"
+    "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), parts (3), (4) and (5) with $\\mathcal E$ invertible ($n=1$)"
    }
   },
   {
-   "text": "The algebra $A$ is finite-dimensional over $k$, so [lem-pc-finite-scheme-cohomology-tensor] gives vanishing of all positive-degree cohomology, finite-dimensional global sections, and equality of the dimensions of the global sections before and after tensoring by $i^*\\mathcal N$. Transporting these facts through the cohomology identifications of the previous step gives $H^q(X,\\mathcal F)=0$ for $q>0$ and $H^q(X,\\mathcal F\\otimes\\mathcal N)=0$ for $q>0$.",
+   "text": "Set L = tensorPullback(i,N). The adjunction of [lem-pc-module-pullback-adjunction] and uniqueness of left adjoints identify tensorPullback with ordinary pullback, so L is invertible. The finite-dimensional algebra A is Noetherian; [pqf-lem-coherent-ft-locnoeth] makes G quasi-coherent, and tensoring by L preserves quasi-coherence. Apply [lem-pc-finite-scheme-cohomology-tensor] to G and L.",
+   "uses": [
+    "lem-pc-module-pullback-adjunction",
+    "def-sc-invertible-module",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-finite-scheme-cohomology-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), parts (3), (4) and (5) with $\\mathcal E$ invertible ($n=1$)"
+   }
+  },
+  {
+   "text": "For q > 0, the module-derived cohomology of G vanishes by [lem-pc-finite-scheme-cohomology-tensor]. Restriction of scalars preserves its zero object. The comparison isomorphism of [lem-pc-zero-support-finite-scheme] therefore makes the module-derived cohomology of F zero. The additive equivalence of [lem-sc-module-cohomology-source-comparison] transfers this to Subsingleton (F.H q). Apply this with N the tensor unit to obtain vanishing for F.",
    "uses": [
     "lem-pc-finite-scheme-cohomology-tensor",
-    "lem-pc-zero-support-finite-scheme"
+    "lem-pc-zero-support-finite-scheme",
+    "lem-sc-module-cohomology-source-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYT, parts (3) and (4): higher cohomology vanishes on the finite support and the tensor remains coherent"
+    "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), parts (3), (4) and (5) with $\\mathcal E$ invertible ($n=1$)"
    }
   },
   {
-   "text": "By the definition of Euler characteristic [def-pc-euler-characteristic], the vanishing in the preceding step gives $\\chi(X,\\mathcal F)=\\dim_kH^0(X,\\mathcal F)$ and $\\chi(X,\\mathcal F\\otimes\\mathcal N)=\\dim_kH^0(X,\\mathcal F\\otimes\\mathcal N)$. The global-section identifications in [lem-pc-zero-support-finite-scheme] and the dimension equality in [lem-pc-finite-scheme-cohomology-tensor] identify these two dimensions, so $\\chi(X,\\mathcal F\\otimes\\mathcal N)=\\chi(X,\\mathcal F)$.",
+   "text": "The affine-pushforward comparison of [lem-pc-closed-immersion-coherent-cohomology] preserves every k-linear cohomological dimension and hence the Euler characteristic of [def-pc-euler-characteristic]. Transport along the two module isomorphisms from [lem-pc-zero-support-finite-scheme] and use the Euler equality of [lem-pc-finite-scheme-cohomology-tensor] to obtain chi(F tensor N) = chi(F). Vanishing reduces the finite Euler sum for F to degree zero. The canonical H.zeroLinearEquiv, restricted along globalSectionsRingHom k, identifies its finrank with that of global sections.",
    "uses": [
+    "lem-pc-closed-immersion-coherent-cohomology",
     "def-pc-euler-characteristic",
     "lem-pc-zero-support-finite-scheme",
     "lem-pc-finite-scheme-cohomology-tensor"
@@ -70,16 +74,19 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0AYT, parts (3)--(5): the Euler characteristic equals the dimension of global sections and is unchanged by tensoring with an invertible sheaf"
+    "place": "Tag 0AYT (varieties-lemma-chi-tensor-finite), parts (3), (4) and (5) with $\\mathcal E$ invertible ($n=1$)"
    }
   }
  ],
  "proof_deps": [
   "def-weil-proper-morphism",
-  "pqf-def-coherent",
-  "lem-sc-dim0-finite",
   "lem-pc-zero-support-finite-scheme",
+  "lem-pc-module-pullback-adjunction",
+  "def-sc-invertible-module",
+  "pqf-lem-coherent-ft-locnoeth",
   "lem-pc-finite-scheme-cohomology-tensor",
+  "lem-sc-module-cohomology-source-comparison",
+  "lem-pc-closed-immersion-coherent-cohomology",
   "def-pc-euler-characteristic"
  ],
  "proof_origin": {
@@ -165,5 +172,15 @@
   "group": "J1",
   "result": "fix",
   "note": "k field, X over Spec k with IsProper instance, F coherent (RingedSpace.IsCoherent), dim Supp<=0 via topologicalKrullDim of nonzero-stalk set; clause 1 IsZero (F.H i) lives in Type u and is refutable (proved ¬IsZero (F.H i) in sandbox) -> Subsingleton (F.H i) as upstream Grothendieck vanishing; let H0/letI H0 (duplicate of moduleHOfField)/let T removed, Gamma k-structure explicit compHom along globalSectionsRingHom; chi=dim H0=dim Gamma; tensor with invertible N: coherent, same support, same chi; H = Scheme.Modules.H as used by eulerChar (def-pc-euler-characteristic), so added unused stmt_dep def-sc-ringed-space-module-cohomology reverted; reverted the delivery's statement correction of the item (stmt_deps kept as on sheaf-dag; --revert-statement)"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261020T154934-L-3174110",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
