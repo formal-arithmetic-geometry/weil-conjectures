@@ -1,0 +1,180 @@
+{
+ "id": "new-e5-algebraic-fibre-path-construction",
+ "kind": "statement",
+ "title": "Descent of rational paths to algebraic coefficient fibres",
+ "statement": "For an IntegralFibrePathTransport, the rational paths extend to a linear path family on the actual algebraic fibre functor. On every displayed finite coefficient model its value is scalar extension of the rational path, through the exact recorded fibre object equalities. It satisfies identity, composition, conjugation and change of path. Definitions and hypotheses are those of [new-e5-integral-fibre-path-construction], [new-e5-rational-fibre-path-construction], [def-pod-lisse-adic-fibre-functors].",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d), pp.146-147; explicit part of the fibre transport argument"
+ },
+ "stmt_deps": [
+  "new-e5-integral-fibre-path-construction",
+  "new-e5-rational-fibre-path-construction",
+  "def-pod-lisse-adic-fibre-functors"
+ ],
+ "proof": [
+  {
+   "text": "Whisker each rational path by the recorded category-value transport and scalar extension to Q. The rational scalar square and transport naturality prove compatibility with the raw coefficient comparisons, in particular those from the least field.",
+   "uses": [
+    "new-e5-rational-fibre-path-scalar-square",
+    "new-e5-coefficient-fibre-comparison-naturality"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalization preserves the squares; thus the model components give a natural isomorphism of the concrete coefficient-pair functors. Descend it through localization. The component formula is exactly the scalar extension of the rational component.",
+   "uses": [
+    "new-e5-normalized-fibre-comparisons",
+    "new-e5-localized-fibre-path-transport"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Check all four path laws on localized pairs using the rational laws and functoriality of scalar extension. For a displayed rational model, cancel the two category-value transports; naturality along that object equality and the pure-tensor scalar map give the prescribed algebraic evaluation formula.",
+   "uses": [
+    "new-e5-rational-fibre-path-construction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "new-e5-rational-fibre-path-scalar-square",
+  "new-e5-coefficient-fibre-comparison-naturality",
+  "new-e5-normalized-fibre-comparisons",
+  "new-e5-localized-fibre-path-transport",
+  "new-e5-rational-fibre-path-construction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "agent": "E5",
+  "date": "2026-10-21",
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Weil II (1.1.1) b)-d); complete Lean construction for lem-wf-fibre-functor-basepoint-transport"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism of two fibre functors on a Galois category",
+   "results": "8 hits: CategoryTheory.PreGaloisCategory.autIsoFibers, CategoryTheory.PreGaloisCategory.FibreFunctor.end_isIso, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_symm_fiber, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois_apply, CategoryTheory.PreGaloisCategory.evaluationEquivOfIsGalois, CategoryTheory.PreGaloisCategory.autIsoFibers_inv_app, CategoryTheory.PreGaloisCategory.instFiberFunctorGetFiberFunctor, CategoryTheory.PreGaloisCategory.FiberFunctor.comp_right",
+   "date": "2026-10-20",
+   "verdict": "Generic categorical, tensor and localization APIs reused; no specialized adic path theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Iso.conjAut",
+   "results": "9 hits: CategoryTheory.Iso.conjAut, CategoryTheory.Iso.conjAut_apply, CategoryTheory.Iso.conjAut_zpow, CategoryTheory.Iso.conjAut_pow, CategoryTheory.Iso.trans_conjAut, CategoryTheory.Iso.conjAut_trans, CategoryTheory.Iso.conjAut_mul, CategoryTheory.Iso.conjAut_hom",
+   "date": "2026-10-20",
+   "verdict": "Generic categorical, tensor and localization APIs reused; no specialized adic path theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "nonempty_iso_of_fiberFunctor|conjAut",
+   "results": "8 hits: Mathlib/CategoryTheory/HomCongr.lean, Mathlib/CategoryTheory/HomCongr.lean, Mathlib/CategoryTheory/Conj.lean, Mathlib/CategoryTheory/Conj.lean, Mathlib/CategoryTheory/Conj.lean, Mathlib/CategoryTheory/Conj.lean, Mathlib/CategoryTheory/Conj.lean, Mathlib/GroupTheory/Commensurable.lean",
+   "date": "2026-10-20",
+   "verdict": "Generic categorical, tensor and localization APIs reused; no specialized adic path theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "adic.*[Ff]iber|[Ff]iber.*adic|[Pp]ath.*[Ll]isse|[Ll]isse.*[Pp]ath",
+   "results": "0 hits: ",
+   "date": "2026-10-20",
+   "verdict": "Generic categorical, tensor and localization APIs reused; no specialized adic path theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural isomorphism of finite locally constant set fibre functors induces linear paths on lisse modules, inverse limits and adic coefficient extensions",
+   "results": "8 hits: CategoryTheory.Limits.HasLimit.isoOfNatIso, CondensedMod.LocallyConstant.functorIsoDiscrete, LocallyConstant.congrRightₗ, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, LightCondensed.locallyConstantIsoFinYoneda, CompHausLike.LocallyConstant.functorToPresheavesIso, LightCondensed.isoLocallyConstantOfIsColimit, CategoryTheory.Limits.Types.limNatIsoSectionsFunctor",
+   "date": "2026-10-20",
+   "verdict": "Generic categorical, tensor and localization APIs reused; no specialized adic path theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend paths between geometric fibre functors from finite locally constant modules to inverse limits and rational and algebraic l-adic coefficients",
+   "results": "8 hits: LightCondMod.LocallyConstant.functorToPresheaves, CompHausLike.LocallyConstantModule.functor, LightCondMod.LocallyConstant.functor, CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor_obj_val, CompHausLike.LocallyConstantModule.functor_map_val, Profinite.exists_locallyConstant_finite_aux, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂",
+   "date": "2026-10-20",
+   "verdict": "Generic categorical, tensor and localization APIs reused; no specialized adic path theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A compatible family of natural isomorphisms of fiber functors descends through coefficient localization and respects scalar extension",
+   "results": "8 hits: CategoryTheory.Localization.functor_linear_iff, IsLocalizedModule.mapExtendScalars_apply_apply, LinearEquiv.extendScalarsOfIsLocalizationEquiv, LinearMap.extendScalarsOfIsLocalizationEquiv, LinearEquiv.extendScalarsOfIsLocalization, LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply, IsLocalizedModule.lift_iso, CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp",
+   "date": "2026-10-20",
+   "verdict": "Generic categorical, tensor and localization APIs reused; no specialized adic path theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.Construction.natTransExtension",
+   "results": "4 hits: CategoryTheory.Localization.Construction.natTransExtension, CategoryTheory.Localization.Construction.natTransExtension_app, CategoryTheory.Localization.Construction.whiskerLeft_natTransExtension, CategoryTheory.Localization.Construction.natTransExtension_hcomp",
+   "date": "2026-10-20",
+   "verdict": "Generic categorical, tensor and localization APIs reused; no specialized adic path theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "normalizedFiberComparisons|unit_leftAdjointUniq_hom_app|natTransExtension|isoWhiskerLeft",
+   "results": "25 hits: Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/Modules/Tilde.lean, Mathlib/AlgebraicGeometry/AffineTransitionLimit.lean, Mathlib/AlgebraicGeometry/ColimitsOver.lean",
+   "date": "2026-10-20",
+   "verdict": "Generic categorical, tensor and localization APIs reused; no specialized adic path theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FibreFunctorBasepointTransport",
+  "date": "2026-10-21",
+  "group": "E5"
+ },
+ "chapter": "sec-algebraic-groups-lie-algebras",
+ "unit": "sk-d-geometry",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-wf-fundamental-representation",
+   "place": "Finite and adic fibre path transport; Descent of rational paths to algebraic coefficient fibres",
+   "via": [
+    "lem-wf-fibre-functor-basepoint-transport"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AlgebraicFibrePathConstruction",
+  "file": "lean/Sheaf/Paper/AlgebraicFibrePathConstruction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.algebraicFibrePathFamily_evaluation",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.coefficientModelFibrePathIso",
+   "AlgebraicGeometry.Scheme.canonicalRawCoefficientPath",
+   "AlgebraicGeometry.Scheme.canonicalCoefficientFibrePathIso",
+   "AlgebraicGeometry.Scheme.algebraicFibrePathIso",
+   "AlgebraicGeometry.Scheme.algebraicFibrePathIso_component",
+   "AlgebraicGeometry.Scheme.algebraicFibrePathIso_inv_component",
+   "AlgebraicGeometry.Scheme.algebraicFibrePathFamily",
+   "AlgebraicGeometry.Scheme.algebraicFibrePathFamily_evaluation"
+  ],
+  "statement": "theorem algebraicFibrePathFamily_evaluation (E : Padic.FiniteCoefficientFields l Q)\n    (F : LisseRationalSheaf l E.val Y) (a : Q)\n    (x : (lisseRationalFiberFunctor l E.val Y y).obj F) :\n    eqToHom (lisseAlgebraicFiber_ofModel l Y z Q E F)\n      (eqToHom (lisseAlgebraicFiberFunctor_obj l Y z Q (lisseAlgebraicOfModel l Y Q E F))\n        (((algebraicFibrePathFamily l Y Q i).map y z t).hom.app\n          (lisseAlgebraicOfModel l Y Q E F)\n          (eqToHom (lisseAlgebraicFiberFunctor_obj l Y y Q\n              (lisseAlgebraicOfModel l Y Q E F)).symm\n            (eqToHom (lisseAlgebraicFiber_ofModel l Y y Q E F).symm\n              (a ⊗ₜ[E.val]\n                (eqToHom (lisseRationalFiberFunctor_obj l E.val Y y F) x)))))) =\n      a ⊗ₜ[E.val]\n        (eqToHom (lisseRationalFiberFunctor_obj l E.val Y z F)\n          (((rationalFibrePathFamily l E.val Y (i.linear E)).map y z t).hom.app F x))",
+  "branch": "sheaf-dag",
+  "by": "E5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-f075f",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261020T230733-L-606316",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-f075f",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261020T230733-L-606316",
+  "kind": "interface",
+  "note": "independent cc review: lem-wf-fibre-functor-basepoint-transport statement and Lean signature (unchanged) against the proved theorem; the 16 moved interfaces against the live module (verbatim apart from irreducibility attributes); the canonical lisseAlgebraicFiberFunctor against def-pod-lisse-adic-fibre-functors; 15 delivered modules and 6 direct importers compiled clean; axioms show only the upstream endomorphism-bijectivity hole"
+ }
+}

@@ -32,6 +32,8 @@ open scoped TensorProduct
 
 namespace AlgebraicGeometry.Scheme
 
+attribute [local irreducible] lisseRationalFiberFunctor
+
 /-- The invertible linear action of a representation. Source: Stacks 0DV5 (3),
 Weil II (1.1.6) (blueprint: def-pod-galois-correspondence-data-e4). -/
 noncomputable def galoisRepLinearAction (R : Type (u + 1)) [CommRing R]
@@ -276,6 +278,11 @@ def galoisFiniteScalarExtension
     + 1} f _ a z))))))) = ((toSheafification Y.smallEtaleTopology (ModuleCat.{u + 1} T)).app
     (F.obj.obj ⋙ ModuleCat.ringExtendScalars.{u + 1, u + 1} (g.comp f))).app (op U)
     (ModuleCat.ringExtensionTmul.{u + 1, u + 1} (g.comp f) _ (b * g a) z)
+
+attribute [local irreducible] galoisYonedaComparison
+  galoisFiniteEtaleAction galoisFiniteAbelian galoisFiniteKernels galoisFiniteCokernels
+  galoisFiniteLimits galoisFiniteColimits galoisFiniteUnit galoisFiniteEvaluationAction
+  galoisFiniteTensor galoisFiniteScalarExtension
 
 set_option genSizeOfSpec false in
 set_option genInjectivity false in
@@ -707,6 +714,16 @@ def galoisRationalScalarExtension
     L.val (((d.eR E).functor.map f).hom.hom.toLinearMap) z) = ((d.eR L).functor.map
     ((lisseRationalScalarExtension l E.val Y L.val (IntermediateField.inclusion h)).map f)).hom.hom
     (c F z)
+
+attribute [local irreducible] galoisRationalSheavesAbelian
+  galoisRationalRepresentationsAbelian galoisRationalFiniteLimits galoisRationalFiniteColimits
+  galoisAlgebraicSheavesAbelian galoisAlgebraicRepresentationsAbelian
+  galoisAlgebraicFiniteLimits galoisAlgebraicFiniteColimits galoisIntegralEvaluationAction
+  galoisRationalEvaluationAction galoisIntegralMonoidal galoisRationalMonoidal
+  galoisAlgebraicMonoidal galoisIntegralTensor galoisIntegralUnit galoisRationalTensor
+  galoisRationalUnit galoisAlgebraicTensor galoisAlgebraicUnit
+  galoisAlgebraicModelScalarExtension galoisIntegralScalarExtension
+  galoisRationalScalarExtension
 
 set_option genSizeOfSpec false in
 set_option genInjectivity false in

@@ -6,8 +6,10 @@ Authors: SHEAF group Q1
 module
 
 public import Sheaf.Paper.LisseAdicSheaves
+public import Sheaf.Paper.LisseCoefficientFiberComparisons
+public import Sheaf.Paper.LisseCoefficientFiberEndomorphisms
+public import Sheaf.Paper.NormalizedFibreComparisons
 import WeilConjectures.CategoryTheory.Sites.Point.Linear
-import Sheaf.Paper.LisseCoefficientFiberComparisons
 
 /-!
 # The fibre functors of lisse adic sheaves
@@ -155,6 +157,15 @@ theorem lisseRationalFiberFunctor_obj (F : LisseRationalSheaf l E Y) :
     (lisseRationalFiberFunctor l E Y y).obj F = lisseRationalFiber l E Y y F := by
   exact (lisseRationalFiberFunctor_exists l E Y y).choose_spec.choose F
 
+/-- The rational fibre functor has its prescribed action on integral pure tensors.
+Source: Weil II (1.1.1) c), p.147.
+(blueprint: def-pod-lisse-adic-fibre-functors).
+Proof: this is the morphism specification in its defining existence theorem. -/
+theorem lisseRationalFiberFunctor_map_spec :
+    IsLisseRationalFiberFunctor Y y l E (lisseRationalFiberFunctor l E Y y)
+      (lisseRationalFiberFunctor_obj l E Y y) :=
+  (lisseRationalFiberFunctor_exists l E Y y).choose_spec.choose_spec
+
 private def grothendieckFiberInclusion {B : Type*} [Category B]
     (P : Pseudofunctor (LocallyDiscrete B) Cat.{d + 1, d + 2}) (b : B) :
     P.obj ⟨b⟩ ⥤ Pseudofunctor.Grothendieck P where
@@ -167,62 +178,6 @@ private def grothendieckFiberInclusion {B : Type*} [Category B]
     refine Pseudofunctor.Grothendieck.Hom.ext _ _ (by simp) ?_
     simp [P.mapComp_id_left_hom_app, Bicategory.Strict.leftUnitor_eqToIso,
       PrelaxFunctor.map₂_eqToHom]
-
-private def grothendieckFiberFunctor {B : Type*} [Category B]
-    (P : Pseudofunctor (LocallyDiscrete B) Cat.{d + 1, d + 2})
-    {C : Type*} [Category C] (J : ∀ b : B, P.obj ⟨b⟩ ⥤ C)
-    (e : ∀ {b c : B} (f : b ⟶ c), J b ≅ (P.map f.toLoc).toFunctor ⋙ J c)
-    (hid : ∀ (b : B) (X : P.obj ⟨b⟩),
-      (e (𝟙 b)).hom.app X ≫ (J b).map ((P.mapId ⟨b⟩).hom.toNatTrans.app X) = 𝟙 _)
-    (hcomp : ∀ {a b c : B} (f : a ⟶ b) (g : b ⟶ c) (X : P.obj ⟨a⟩),
-      (e (f ≫ g)).hom.app X ≫
-          (J c).map ((P.mapComp f.toLoc g.toLoc).hom.toNatTrans.app X) =
-        (e f).hom.app X ≫ (e g).hom.app ((P.map f.toLoc).toFunctor.obj X)) :
-    Pseudofunctor.Grothendieck P ⥤ C where
-  obj X := (J X.base).obj X.fiber
-  map {X Y} f := (e f.base).hom.app X.fiber ≫ (J Y.base).map f.fiber
-  map_id X := hid X.base X.fiber
-  map_comp {X Y Z} f g := by
-    simp only [Pseudofunctor.Grothendieck.categoryStruct_comp_base,
-      Pseudofunctor.Grothendieck.categoryStruct_comp_fiber]
-    rw [Functor.map_comp, Functor.map_comp, ← Category.assoc, hcomp]
-    simp only [Category.assoc]
-    simpa only [Functor.comp_map, Category.assoc] using
-      congrArg (fun k ↦ (e f.base).hom.app X.fiber ≫ k ≫ (J Z.base).map g.fiber)
-        ((e g.base).hom.naturality f.fiber).symm
-
-private lemma grothendieckFiberFunctor_inverts {B : Type*} [Category B]
-    (P : Pseudofunctor (LocallyDiscrete B) Cat.{d + 1, d + 2})
-    {C : Type*} [Category C] (J : ∀ b : B, P.obj ⟨b⟩ ⥤ C)
-    (e : ∀ {b c : B} (f : b ⟶ c), J b ≅ (P.map f.toLoc).toFunctor ⋙ J c)
-    (hid : ∀ (b : B) (X : P.obj ⟨b⟩),
-      (e (𝟙 b)).hom.app X ≫ (J b).map ((P.mapId ⟨b⟩).hom.toNatTrans.app X) = 𝟙 _)
-    (hcomp : ∀ {a b c : B} (f : a ⟶ b) (g : b ⟶ c) (X : P.obj ⟨a⟩),
-      (e (f ≫ g)).hom.app X ≫
-          (J c).map ((P.mapComp f.toLoc g.toLoc).hom.toNatTrans.app X) =
-        (e f).hom.app X ≫ (e g).hom.app ((P.map f.toLoc).toFunctor.obj X))
-    {X Y : Pseudofunctor.Grothendieck P} (f : X ⟶ Y) [IsIso f.fiber] :
-    IsIso ((grothendieckFiberFunctor P J e hid hcomp).map f) := by
-  dsimp [grothendieckFiberFunctor]
-  infer_instance
-
-private def grothendieckFiberFunctor_restrict {B : Type*} [Category B]
-    (P : Pseudofunctor (LocallyDiscrete B) Cat.{d + 1, d + 2})
-    {C : Type*} [Category C] (J : ∀ b : B, P.obj ⟨b⟩ ⥤ C)
-    (e : ∀ {b c : B} (f : b ⟶ c), J b ≅ (P.map f.toLoc).toFunctor ⋙ J c)
-    (hid : ∀ (b : B) (X : P.obj ⟨b⟩),
-      (e (𝟙 b)).hom.app X ≫ (J b).map ((P.mapId ⟨b⟩).hom.toNatTrans.app X) = 𝟙 _)
-    (hcomp : ∀ {a b c : B} (f : a ⟶ b) (g : b ⟶ c) (X : P.obj ⟨a⟩),
-      (e (f ≫ g)).hom.app X ≫
-          (J c).map ((P.mapComp f.toLoc g.toLoc).hom.toNatTrans.app X) =
-        (e f).hom.app X ≫ (e g).hom.app ((P.map f.toLoc).toFunctor.obj X))
-    (b : B) :
-    grothendieckFiberInclusion P b ⋙ grothendieckFiberFunctor P J e hid hcomp ≅ J b :=
-  NatIso.ofComponents (fun _ ↦ Iso.refl _) (by
-    intro X Y f
-    dsimp [grothendieckFiberFunctor, grothendieckFiberInclusion]
-    rw [Functor.map_comp, ← Category.assoc, hid]
-    simp)
 
 private def catTransportCancel (C D : Cat.{d + 1, d + 2}) (h : C = D) :
     (eqToHom h.symm).toFunctor ⋙ (eqToHom h).toFunctor ≅ 𝟭 D := by
@@ -311,6 +266,123 @@ theorem lisseAlgebraicFiber_ofModel (E₀ : Padic.FiniteCoefficientFields l K)
     (cancel _ (Cat.of (LisseRationalSheaf l E₀.val Y))
       ((lisseCoefficientDiagramData l Y K).obj_eq E₀) F)
 
+/-- Fibre on one coefficient category, transported through its recorded category equality.
+Source: Weil II (1.1.1) d), pp.146-147.
+(blueprint: def-pod-lisse-adic-fibre-functors). -/
+noncomputable def lisseCanonicalCoefficientModelFiberFunctor
+    (E₀ : Padic.FiniteCoefficientFields l K) :
+    (lisseCoefficientDiagramData l Y K).diagram.obj ⟨E₀⟩ ⥤ ModuleCat.{d + 1} K :=
+  (eqToHom ((lisseCoefficientDiagramData l Y K).obj_eq E₀)).toFunctor ⋙
+    lisseRationalFiberFunctor l E₀.val Y y ⋙ ModuleCat.extendScalars (algebraMap E₀.val K)
+
+section Canonical
+
+attribute [local irreducible] lisseRationalFiberFunctor lisseIntegralFiberFunctor
+  lisseIntegralFiber
+
+/-- The explicit rational scalar comparison on the recorded coefficient categories.
+Source: Weil II (1.1.1) d), pp.146-147.
+(blueprint: def-pod-lisse-adic-fibre-functors). -/
+noncomputable def lisseCanonicalRawCoefficientComparison
+    {E₀ L₀ : Padic.FiniteCoefficientFields l K} (f : E₀ ⟶ L₀) :
+    lisseCanonicalCoefficientModelFiberFunctor l Y y K E₀ ≅
+      ((lisseCoefficientDiagramData l Y K).diagram.map f.toLoc).toFunctor ⋙
+        lisseCanonicalCoefficientModelFiberFunctor l Y y K L₀ :=
+  lisseCoefficientFiberRawComparison l Y K
+    (fun E₀ ↦ lisseRationalFiberFunctor l E₀.val Y y) E₀ L₀ f
+    (lisseRationalFiberComparisonNatIso Y y l E₀.val L₀.val
+      (IntermediateField.inclusion (leOfHom f)) K
+      (algebraMap E₀.val K) (algebraMap L₀.val K) (by ext z; rfl)
+      _ _ (lisseRationalFiberFunctor_obj l E₀.val Y y)
+      (lisseRationalFiberFunctor_obj l L₀.val Y y)
+      (lisseRationalFiberFunctor_map_spec l E₀.val Y y)
+      (lisseRationalFiberFunctor_map_spec l L₀.val Y y))
+
+/-- Restriction from the least coefficient field detects natural endomorphisms.
+Source: Weil II (1.1.1) d), pp.146-147.
+(blueprint: def-pod-lisse-adic-fibre-functors).
+Proof: apply the existing finite coefficient restriction theorem to the concrete
+rational fibre functors and their pure tensor formula. -/
+theorem lisseCanonicalCoefficientEndomorphisms (E₀ : Padic.FiniteCoefficientFields l K) :
+    Function.Bijective (fun u : lisseCanonicalCoefficientModelFiberFunctor l Y y K E₀ ⟶
+        lisseCanonicalCoefficientModelFiberFunctor l Y y K E₀ ↦
+      Functor.whiskerLeft ((lisseCoefficientDiagramData l Y K).diagram.map
+        (homOfLE (show Padic.finiteCoefficientBase l K ≤ E₀ from
+          show (⊥ : IntermediateField ℚ_[l] K) ≤ E₀.val from bot_le)).toLoc).toFunctor u) :=
+  lisseCoefficientFiberEndomorphisms_whisker_bijective l Y y K
+    (fun E₀ ↦ lisseRationalFiberFunctor l E₀.val Y y)
+    (fun E₀ ↦ lisseRationalFiberFunctor_obj l E₀.val Y y)
+    (fun E₀ ↦ lisseRationalFiberFunctor_map_spec l E₀.val Y y) E₀
+
+/-- The coefficient-pair fibre functor constructed from uniquely normalized comparisons.
+Source: Weil II (1.1.1) d), pp.146-147.
+(blueprint: def-pod-lisse-adic-fibre-functors). -/
+@[irreducible]
+noncomputable def lisseCanonicalCoefficientFiberFunctor :
+    Pseudofunctor.Grothendieck (lisseCoefficientDiagramData l Y K).diagram ⥤
+      ModuleCat.{d + 1} K :=
+  Pseudofunctor.normalizedGrothendieckFiberFunctor (Padic.finiteCoefficientBase l K)
+    (fun E₀ ↦ show (⊥ : IntermediateField ℚ_[l] K) ≤ E₀.val from bot_le)
+    (lisseCoefficientDiagramData l Y K).diagram
+    (lisseCanonicalCoefficientModelFiberFunctor l Y y K)
+    (fun {_ _} f ↦ lisseCanonicalRawCoefficientComparison l Y y K f)
+    (lisseCanonicalCoefficientEndomorphisms l Y y K)
+
+/-- The concrete coefficient functor inverts the cocartesian coefficient arrows.
+Source: Weil II (1.1.1) d), pp.146-147.
+(blueprint: def-pod-lisse-adic-fibre-functors).
+Proof: a cocartesian arrow has invertible fibre part. The comparison is an isomorphism,
+and the rational fibre functor preserves isomorphisms, so their composite is invertible. -/
+theorem lisseCanonicalCoefficientFiberFunctor_inverts :
+    (lisseCoefficientCocartesian l Y K).IsInvertedBy
+      (lisseCanonicalCoefficientFiberFunctor l Y y K) := by
+  intro X Z f hf
+  have : IsIso f.fiber := hf
+  unfold lisseCanonicalCoefficientFiberFunctor
+    Pseudofunctor.normalizedGrothendieckFiberFunctor
+  dsimp only
+  infer_instance
+
+/-- The algebraic fibre induced by the concrete normalized coefficient construction.
+Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors). -/
+@[irreducible]
+noncomputable def lisseAlgebraicFiberFunctor :
+    LisseAlgebraicSheaf l Y K ⥤ ModuleCat.{d + 1} K :=
+  Localization.Construction.lift (lisseCanonicalCoefficientFiberFunctor l Y y K)
+    (lisseCanonicalCoefficientFiberFunctor_inverts l Y y K)
+
+/-- Its object value is the recorded algebraic fibre.
+Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors).
+Proof: localization keeps objects; use the rational fibre object formula. -/
+theorem lisseAlgebraicFiberFunctor_obj (F : LisseAlgebraicSheaf l Y K) :
+    (lisseAlgebraicFiberFunctor l Y y K).obj F = lisseAlgebraicFiber l Y K y F := by
+  unfold lisseAlgebraicFiberFunctor lisseCanonicalCoefficientFiberFunctor
+    Pseudofunctor.normalizedGrothendieckFiberFunctor
+    lisseCanonicalCoefficientModelFiberFunctor
+  change ModuleCat.of K (TensorProduct (lisseAlgebraicPair l Y K F).base.val K
+    ((lisseRationalFiberFunctor l (lisseAlgebraicPair l Y K F).base.val Y y).obj
+      (lisseCoefficientPairModel l Y K (lisseAlgebraicPair l Y K F)))) = _
+  exact congrArg (fun V : ModuleCat.{d + 1} (lisseAlgebraicPair l Y K F).base.val ↦
+    ModuleCat.of K (TensorProduct (lisseAlgebraicPair l Y K F).base.val K V))
+      (lisseRationalFiberFunctor_obj l (lisseAlgebraicPair l Y K F).base.val Y y _)
+
+private noncomputable def canonicalCoefficientFunctor_restrict
+    (E₀ : Padic.FiniteCoefficientFields l K) :
+    grothendieckFiberInclusion (lisseCoefficientDiagramData l Y K).diagram E₀ ⋙
+        lisseCanonicalCoefficientFiberFunctor l Y y K ≅
+      lisseCanonicalCoefficientModelFiberFunctor l Y y K E₀ := by
+  unfold lisseCanonicalCoefficientFiberFunctor
+  exact Pseudofunctor.normalizedGrothendieckFiberFunctor_restrict
+    (Padic.finiteCoefficientBase l K)
+    (fun E₀ ↦ show (⊥ : IntermediateField ℚ_[l] K) ≤ E₀.val from bot_le)
+    (lisseCoefficientDiagramData l Y K).diagram
+    (lisseCanonicalCoefficientModelFiberFunctor l Y y K)
+    (fun {_ _} f ↦ lisseCanonicalRawCoefficientComparison l Y y K f)
+    (lisseCanonicalCoefficientEndomorphisms l Y y K) E₀
+
+attribute [local semireducible] lisseCanonicalCoefficientFiberFunctor
+  Pseudofunctor.normalizedGrothendieckFiberFunctor
+
 /-- The fibre extends to the coefficient localization with the prescribed object values
 and with scalar extension on each rational model.
 Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors).
@@ -339,33 +411,16 @@ theorem lisseAlgebraicFiberFunctor_exists :
     lisseRationalFiberFunctor l E₀.val Y y
   let hS := fun (E₀ : Padic.FiniteCoefficientFields l K)
     (F : LisseRationalSheaf l E₀.val Y) ↦ lisseRationalFiberFunctor_obj l E₀.val Y y F
-  have hmap (E₀ : Padic.FiniteCoefficientFields l K) :
-      IsLisseRationalFiberFunctor Y y l E₀.val (S E₀) (hS E₀) :=
-    (lisseRationalFiberFunctor_exists l E₀.val Y y).choose_spec.choose_spec
-  obtain ⟨e, hid, hcomp⟩ := lisseCoefficientFiberComparisons_exists l Y y K S hS hmap
-    (fun E₀ L₀ f ↦ lisseCoefficientFiberRawComparison l Y K S E₀ L₀ f
-      (lisseRationalFiberComparisonNatIso Y y l E₀.val L₀.val
-      (IntermediateField.inclusion (leOfHom f)) K
-      (algebraMap E₀.val K) (algebraMap L₀.val K) (by ext a; rfl)
-      (S E₀) (S L₀) (hS E₀) (hS L₀) (hmap E₀) (hmap L₀)))
   let P := (lisseCoefficientDiagramData l Y K).diagram
-  let J := fun E₀ : Padic.FiniteCoefficientFields l K ↦
-    (eqToHom ((lisseCoefficientDiagramData l Y K).obj_eq E₀)).toFunctor ⋙
-      S E₀ ⋙ ModuleCat.extendScalars (algebraMap E₀.val K)
-  let G := grothendieckFiberFunctor P J e hid hcomp
-  have hG : (lisseCoefficientCocartesian l Y K).IsInvertedBy G := by
-    intro X Z f hf
-    have : IsIso f.fiber := hf
-    exact grothendieckFiberFunctor_inverts P J e hid hcomp f
+  let J := lisseCanonicalCoefficientModelFiberFunctor l Y y K
+  let G := lisseCanonicalCoefficientFiberFunctor l Y y K
+  have hG : (lisseCoefficientCocartesian l Y K).IsInvertedBy G :=
+    lisseCanonicalCoefficientFiberFunctor_inverts l Y y K
   let T := Localization.Construction.lift G hG
   have hT : ∀ F, T.obj F = lisseAlgebraicFiber l Y K y F := by
     intro F
-    change ModuleCat.of K (TensorProduct (lisseAlgebraicPair l Y K F).base.val K
-      ((S (lisseAlgebraicPair l Y K F).base).obj
-        (lisseCoefficientPairModel l Y K (lisseAlgebraicPair l Y K F)))) = _
-    exact congrArg (fun V : ModuleCat.{d + 1}
-        (lisseAlgebraicPair l Y K F).base.val ↦ ModuleCat.of K
-      (TensorProduct (lisseAlgebraicPair l Y K F).base.val K V)) (hS _ _)
+    simpa only [lisseAlgebraicFiberFunctor] using
+      lisseAlgebraicFiberFunctor_obj l Y y K F
   refine ⟨T, hT, ?_⟩
   intro E₀
   let R := S E₀ ⋙ ModuleCat.extendScalars (algebraMap E₀.val K)
@@ -379,7 +434,7 @@ theorem lisseAlgebraicFiberFunctor_exists :
     Functor.isoWhiskerLeft (ti ⋙ grothendieckFiberInclusion P E₀)
       (eqToIso (Localization.Construction.fac G hG)) ≪≫
     Functor.associator ti (grothendieckFiberInclusion P E₀) G ≪≫
-    Functor.isoWhiskerLeft ti (grothendieckFiberFunctor_restrict P J e hid hcomp E₀) ≪≫
+    Functor.isoWhiskerLeft ti (canonicalCoefficientFunctor_restrict l Y y K E₀) ≪≫
     (Functor.associator ti t R).symm ≪≫
     Functor.isoWhiskerRight hcancel R ≪≫ Functor.leftUnitor R
   refine ⟨τ, ?_⟩
@@ -390,8 +445,8 @@ theorem lisseAlgebraicFiberFunctor_exists :
     simp only [τ, Iso.trans_inv, NatTrans.comp_app, Functor.isoWhiskerLeft_inv,
       Functor.isoWhiskerRight_inv, Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Functor.associator_hom_app, Functor.associator_inv_app, Functor.leftUnitor_inv_app,
-      Iso.symm_inv, grothendieckFiberFunctor_restrict, NatIso.ofComponents_inv_app,
-      Iso.refl_inv, eqToIso.inv, eqToHom_refl,
+      Iso.symm_inv, canonicalCoefficientFunctor_restrict,
+      Pseudofunctor.normalizedGrothendieckFiberFunctor_restrict, eqToIso.inv, eqToHom_refl,
       Category.comp_id, Category.id_comp]
     rw [catTransportCancel_inv_app _ _ _ _ hX, eqToHom_map]
     simp only [NatTrans.id_app]
@@ -411,18 +466,7 @@ theorem lisseAlgebraicFiberFunctor_exists :
   simpa only [← ConcreteCategory.comp_apply, eqToHom_trans, eqToHom_refl,
     ConcreteCategory.id_apply] using hv
 
-/-- The algebraic fibre functor induced on the coefficient localization.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors). -/
-noncomputable def lisseAlgebraicFiberFunctor :
-    LisseAlgebraicSheaf l Y K ⥤ ModuleCat.{d + 1} K :=
-  (lisseAlgebraicFiberFunctor_exists l Y y K).choose
-
-/-- Its object value is the recorded algebraic fibre.
-Source: Weil II (1.1.1) d) (blueprint: def-pod-lisse-adic-fibre-functors).
-Proof: the object specification is the first clause of the selected existence theorem. -/
-theorem lisseAlgebraicFiberFunctor_obj (F : LisseAlgebraicSheaf l Y K) :
-    (lisseAlgebraicFiberFunctor l Y y K).obj F = lisseAlgebraicFiber l Y K y F := by
-  exact (lisseAlgebraicFiberFunctor_exists l Y y K).choose_spec.choose F
+end Canonical
 
 end Algebraic
 end AlgebraicGeometry.Scheme

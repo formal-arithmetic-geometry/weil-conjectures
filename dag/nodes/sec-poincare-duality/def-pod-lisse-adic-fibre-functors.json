@@ -28,35 +28,43 @@
    "elementary": false
   },
   {
-   "text": "Transport these comparisons to the coefficient diagram and normalize them coherently using its least coefficient field and detection of natural endomorphisms. Both laws refer to the actual diagram constraints.",
+   "text": "Transport the explicit rational scalar comparisons to the recorded coefficient categories. Normalize them from the least finite coefficient field using the unique family characterized by its restriction formula and detection of natural endomorphisms. This fixes the comparisons, rather than choosing an arbitrary coherent family from mere existence.",
    "uses": [
-    "lem-pod-lisse-coefficient-fiber-comparisons"
+    "lem-pod-lisse-coefficient-fiber-comparisons",
+    "lem-pod-lisse-coefficient-fiber-endomorphisms",
+    "new-e5-normalized-fibre-comparisons"
    ],
    "elementary": false
   },
   {
-   "text": "Define the functor on the Grothendieck construction on arrows by the base comparison followed by the fibre map. Its identity and composition laws are exactly the comparison coherence laws. Cocartesian arrows have invertible fibre parts and hence invertible images. Lift through the explicit localization; it keeps the prescribed object values.",
-   "uses": [],
-   "elementary": true
+   "text": "Construct the actual functor on the Grothendieck category from this uniquely normalized family. Coherence proves its functor laws. A cocartesian arrow has invertible fibre part, hence invertible image. Define the actual algebraic fibre functor as its explicit localization lift; localization keeps its object values.",
+   "uses": [
+    "new-e5-normalized-fibre-comparisons"
+   ],
+   "elementary": false
   },
   {
    "text": "Restrict to each rational model and cancel the category transports. The resulting natural isomorphism has inverse the object-equality transport; evaluation on a pure tensor gives the exact required formula.",
-   "uses": [],
-   "elementary": true
+   "uses": [
+    "new-e5-normalized-fibre-comparisons"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pod-lisse-l-adic-sheaves",
   "def-weil-pbc-geometric-stalks",
   "lem-pod-lisse-rational-scalar-fiber-comparison",
-  "lem-pod-lisse-coefficient-fiber-comparisons"
+  "lem-pod-lisse-coefficient-fiber-comparisons",
+  "lem-pod-lisse-coefficient-fiber-endomorphisms",
+  "new-e5-normalized-fibre-comparisons"
  ],
  "proof_origin": {
   "by": "agent",
-  "agent": "F3",
-  "date": "2026-10-18",
+  "agent": "E5",
+  "date": "2026-10-21",
   "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-  "place": "Weil II (1.1.1) b)-d), pp. 146-147; extends the existing J1 proofs by explicit scalar comparison, coherence normalization and localization descent"
+  "place": "Weil II (1.1.1) b)-d), pp.146-147; explicit uniquely normalized coefficient functor and localization lift; integral and rational constructions retained"
  },
  "mathlib_searches": [
   {
@@ -120,14 +128,20 @@
    "AlgebraicGeometry.Scheme.lisseRationalFiberFunctor_exists",
    "AlgebraicGeometry.Scheme.lisseRationalFiberFunctor",
    "AlgebraicGeometry.Scheme.lisseRationalFiberFunctor_obj",
+   "AlgebraicGeometry.Scheme.lisseRationalFiberFunctor_map_spec",
    "AlgebraicGeometry.Scheme.lisseAlgebraicModelMap",
    "AlgebraicGeometry.Scheme.lisseAlgebraicModelMap_id",
    "AlgebraicGeometry.Scheme.lisseAlgebraicModelMap_comp",
    "AlgebraicGeometry.Scheme.lisseAlgebraicModelFunctor",
    "AlgebraicGeometry.Scheme.lisseAlgebraicFiber_ofModel",
-   "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_exists",
+   "AlgebraicGeometry.Scheme.lisseCanonicalCoefficientModelFiberFunctor",
+   "AlgebraicGeometry.Scheme.lisseCanonicalRawCoefficientComparison",
+   "AlgebraicGeometry.Scheme.lisseCanonicalCoefficientEndomorphisms",
+   "AlgebraicGeometry.Scheme.lisseCanonicalCoefficientFiberFunctor",
+   "AlgebraicGeometry.Scheme.lisseCanonicalCoefficientFiberFunctor_inverts",
    "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor",
-   "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_obj"
+   "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_obj",
+   "AlgebraicGeometry.Scheme.lisseAlgebraicFiberFunctor_exists"
   ],
   "statement": "def lisseIntegralFiberFunctor :\n    LisseIntegralSheaf l E Y ⥤ ModuleCat.{d + 1} (Padic.coefficientExtensionIntegers l E)",
   "branch": "sheaf-dag",
@@ -152,13 +166,13 @@
   "note": "independent Codex review: Matched all finite and adic hypotheses, evaluation actions, equivalences, abelianity/exactness, tensor/unit and scalar-extension clauses to the corrected node; shared witnesses survive the refactor, the new node records the landed fibre functors, packet compilation is clean, and scratch serialization succeeded in 58.66 s."
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "F3",
+  "reviewer": "C-f075f",
+  "group": "E5",
   "result": "pass",
-  "landing": "20261018T091401-L-3254458",
+  "landing": "20261020T230733-L-606316",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: lem-wf-fibre-functor-basepoint-transport statement and Lean signature (unchanged) against the proved theorem; the 16 moved interfaces against the live module (verbatim apart from irreducibility attributes); the canonical lisseAlgebraicFiberFunctor against def-pod-lisse-adic-fibre-functors; 15 delivered modules and 6 direct importers compiled clean; axioms show only the upstream endomorphism-bijectivity hole"
  }
 }

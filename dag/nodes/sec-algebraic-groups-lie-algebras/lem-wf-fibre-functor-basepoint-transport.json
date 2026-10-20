@@ -19,142 +19,46 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=\\mathrm{FLC}(Y)$. By [thm-galois-fundamental], evaluation at $\\bar y$ is an equivalence $B:\\mathcal C\\simeq\\mathcal C_{\\pi_y}$ whose underlying-set functor is $F_{\\bar y}$. Choose a quasi-inverse $Q$ with counit $\\epsilon:QB\\xrightarrow{\\sim}\\mathrm{id}_{\\mathcal C}$. The functor $F_{\\bar z}$ is finite-valued and exact: [lem-fet-galois-category] says this on finite etale covers by the axioms of [def-galois-category], and [thm-galois-lc-etale] identifies that fibre functor with the one on $\\mathcal C$. Equivalences, including $Q$, preserve finite limits and colimits by [lem-galois-equivalence-preserves-limits]. Thus $H=F_{\\bar z}Q:\\mathcal C_{\\pi_y}\\to\\mathbf{Sets}$ is exact and finite-valued.",
+   "text": "Transfer the existing FEt(Y) Galois category and its geometric fibre functors to finite locally constant sheaves. Apply the library nonempty_iso_of_fiberFunctor theorem directly to obtain a finite-set path. This avoids reconstructing the exact finite-group-set forgetful functor argument.",
    "uses": [
-    "thm-galois-fundamental",
     "lem-fet-galois-category",
-    "def-galois-category",
     "thm-galois-lc-etale",
-    "lem-galois-equivalence-preserves-limits"
+    "lem-wf-fibre-functor-uniqueness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Theorem 0BND (1); Lemma 0BN5, reduction to finite group sets"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-wf-exact-finite-gsets-forgetful] with $G=\\pi_y$ to obtain $s:U\\xrightarrow{\\sim}H$. Define\n$$t_{\\mathcal S}=F_{\\bar z}(\\epsilon_{\\mathcal S})\\circ s_{B\\mathcal S}:F_{\\bar y}(\\mathcal S)\\xrightarrow{\\sim}F_{\\bar z}(\\mathcal S).$$\nThe identification $UB=F_{\\bar y}$ is that in [thm-galois-fundamental]. Naturality of $s$ and $\\epsilon$ proves naturality of $t$, and both factors are bijective. This proves existence without choosing points separately in the different stalks.",
-   "uses": [
-    "lem-wf-exact-finite-gsets-forgetful",
-    "thm-galois-fundamental"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Lemma 0BN5, first sentence of proof, using Lemma 0BMV; Theorem 0BND (2)"
-   }
-  },
-  {
-   "text": "Now fix any natural isomorphism $t$. Composition gives a natural automorphism $c_t(g)=tgt^{-1}$ of $F_{\\bar z}$. It preserves products in the group, and $c_{t^{-1}}$ is its inverse. To check continuity use the topology in [def-galois-fibre-functor] on a common small skeleton of $\\mathcal C$. At an object $\\mathcal S$ the target evaluation is\n$$g\\longmapsto t_{\\mathcal S}g_{\\mathcal S}t_{\\mathcal S}^{-1}.$$\nIt factors through source evaluation into a finite discrete permutation group, followed by conjugation between finite discrete permutation groups. It is continuous, so the map into the product and its induced-subspace factor $c_t$ are continuous. The same calculation with $t^{-1}$ proves continuity of its inverse. Also $a=t't^{-1}$ is a natural automorphism of $F_{\\bar z}$ and\n$$t'gt'^{-1}=(t't^{-1})(tgt^{-1})(tt'^{-1})=a\\,c_t(g)\\,a^{-1}.$$\nThis proves the asserted topological isomorphism and change-of-path formula.",
+   "text": "Use t.conjAut for the group equivalence. On each finite sheaf its evaluation is conjugation by the component equivalence, a map between finite discrete permutation groups. The initial product evaluation topology therefore makes it continuous; repeat with t inverse. Iso cancellation proves the inner change-of-path formula.",
    "uses": [
     "def-galois-fibre-functor"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Lemma 0BN5, transport of structure and inner-conjugation assertions, with topology calculation written out"
-   }
+   "elementary": true
   },
   {
-   "text": "Let $\\mathcal F$ be a lisse finite $A$-module sheaf. Its underlying sheaf and its square are finite locally constant. Naturality of $t$ with respect to the two projections forces $t_{\\mathcal F\\times\\mathcal F}=(t_{\\mathcal F},t_{\\mathcal F})$ under the stalk product identifications. Applying naturality to addition and to each set-sheaf map $x\\mapsto ax$ gives\n$$t_{\\mathcal F}(x+x')=t_{\\mathcal F}(x)+t_{\\mathcal F}(x'),\\qquad t_{\\mathcal F}(ax)=a\\,t_{\\mathcal F}(x).$$\nThus $t_{\\mathcal F}$ is an $A$-linear bijection; naturality for module maps follows from naturality for their underlying set maps. The same construction applies to $t^{-1}$. By [cor-galois-lisse-representations](1), evaluating a loop $g$ on this underlying sheaf is precisely its stipulated stalk action. Evaluating an identity or a composite of paths gives the identity or composite linear map, component by component.",
+   "text": "Use the finite-ring linear path construction and scalar square to get FiniteFibrePathTransport. Under the additional adic hypotheses build the integral inverse-limit paths, then assemble their rational and algebraic extensions with their scalar normalization and compatibility fields.",
    "uses": [
-    "cor-galois-lisse-representations"
+    "new-e5-linear-fibre-path-transport",
+    "new-e5-integral-fibre-path-construction",
+    "new-e5-adic-fibre-path-extension"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Theorem 0BND (2), extension to module structures by naturality"
-   }
-  },
-  {
-   "text": "For a finite-ring homomorphism $A\\to A'$ put $\\mathcal F'=A'\\otimes_A\\mathcal F$. The lissity and stalk identifications, including their pure-tensor formulas, are [lem-pod-lisse-tensor-and-scalar-extension](3). For each $b\\in A'$ the map of underlying set sheaves $i_b:\\mathcal F\\to\\mathcal F'$, $x\\mapsto b\\otimes x$, is available to naturality of $t$; it need not be $A$-linear. Hence\n$$t_{\\mathcal F'}(b\\otimes x)=b\\otimes t_{\\mathcal F}(x).$$\nAdditivity extends this equality to sums of pure tensors, which generate scalar extension. This is the asserted coefficient compatibility, including noncommutative finite rings. For two successive coefficient maps both composites send $c\\otimes(b\\otimes x)$ to $cb\\otimes t_{\\mathcal F}(x)$, so the coefficient comparisons are coherent. Identity and composite paths satisfy the same equality.",
-   "uses": [
-    "lem-pod-lisse-tensor-and-scalar-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Finite scalar extension: naturality and the stalk scalar-extension formula; Stacks sites-modules lemma-tensor-product-pullback"
-   }
-  },
-  {
-   "text": "Assume now the additional Noetherian, separated and invertibility hypotheses, exactly as in [def-pod-lisse-l-adic-sheaves]. For an integral lisse system $\\mathcal F=(\\mathcal F_n)$ put\n$$T_{\\mathcal F}((x_n)_n)=(t_{\\mathcal F_n}(x_n))_n.$$\nThe transition maps are maps of underlying finite locally constant set sheaves, even though their coefficient rings vary. Naturality of $t$ therefore makes the displayed family compatible. The same construction using $t^{-1}$ is inverse to it. Scalar multiplication by $b\\in\\mathcal O_E$ reduces to multiplication by its image in each $A_{E,n}$, so the finite-level linearity proves $\\mathcal O_E$-linearity. For a compatible family $u_n$, naturality is the equality $t_{\\mathcal G_n}(u_nx_n)=u_n(t_{\\mathcal F_n}x_n)$ at every $n$. The integral fibre and its maps are precisely the inverse-limit functor of [def-pod-lisse-adic-fibre-functors](1). Identities and composition of paths hold at every coordinate, hence on the inverse limit.",
-   "uses": [
-    "def-pod-lisse-l-adic-sheaves",
-    "def-pod-lisse-adic-fibre-functors"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "Weil II (1.1.1) b), p.146: compatible finite-level systems and their fibres"
-   }
-  },
-  {
-   "text": "For $E\\subset L$ use the scalar extension prescribed in [def-pod-lisse-l-adic-sheaves](3). Its level $m$ is $\\mathcal F_n\\otimes_{A_{E,n}}A_{L,m}$, with $n=\\lceil m/e\\rceil$ and $e$ the ramification index. The finite scalar formula proved above identifies its path map with $1\\otimes t_{\\mathcal F_n}$. The fibre scalar comparisons at both geometric points are the ones supplied by [cor-galois-lisse-representations](2). To check their compatibility with path maps, project the extended integral fibre to its level $m$: on a pure tensor $b\\otimes(x_j)_j$ both routes give $b\\otimes t_{\\mathcal F_n}(x_n)$. Additivity gives equality on the whole scalar-extended module, and equality of every inverse-limit coordinate proves equality of the maps. For successive extensions this calculation again gives the same iterated pure tensor, independently of the reindexing. Thus the integral path maps commute with scalar extension, including ramified extensions.",
-   "uses": [
-    "def-pod-lisse-l-adic-sheaves",
-    "cor-galois-lisse-representations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "Weil II (1.1.1) b), d), pp.146-147: finite-level coefficient extensions"
-   }
-  },
-  {
-   "text": "For a lisse $E$-sheaf represented by $\\mathcal F\\otimes E$, define its path map to be $T_{\\mathcal F}\\otimes1_E$. A rational morphism is a finite sum of tensors $a\\otimes u$ in the Hom module of [def-pod-lisse-l-adic-sheaves](2). The fibre functor sends this to the same linear combination of the integral fibre maps by [def-pod-lisse-adic-fibre-functors](2). Integral naturality therefore implies naturality for every rational morphism, including rational isomorphisms between different integral models. This makes the construction independent of any presentation up to its canonical isomorphism. It is an $E$-linear isomorphism, its inverse is the rationalized map for $t^{-1}$, and identities, composition of paths and scalar extension follow by tensoring the already proved equalities.",
-   "uses": [
-    "def-pod-lisse-l-adic-sheaves",
-    "def-pod-lisse-adic-fibre-functors"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "Weil II (1.1.1) c), p.147: rationalized Hom spaces"
-   }
-  },
-  {
-   "text": "For a model $(E,\\mathcal F)$ of a lisse $\\overline{\\mathbf Q}_\\ell$-sheaf, define\n$$t_{(E,\\mathcal F)}=t_{\\mathcal F}\\otimes1_{\\overline{\\mathbf Q}_\\ell}.$$\nBy [def-pod-lisse-l-adic-sheaves](4), a morphism of models is represented over a common finite extension $L$; the algebraic fibre functor is scalar extension of the rational one by [def-pod-lisse-adic-fibre-functors](3). The finite-extension compatibility just proved identifies the two model path maps with their extensions to $L$. Rational naturality over $L$ gives the required square. Passing to a larger common field preserves that equality, so it descends to the colimit Hom space. The same argument proves compatibility with scalar extension and composition, and the inverse is induced by $t^{-1}$. This proves all the asserted functorialities at the algebraic coefficient level.",
-   "uses": [
-    "def-pod-lisse-l-adic-sheaves",
-    "def-pod-lisse-adic-fibre-functors"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-    "place": "Weil II (1.1.1) d), p.147: coefficient 2-colimit"
-   }
-  },
-  {
-   "text": "For a finite lisse module sheaf evaluate the equality $c_t(g)=tgt^{-1}$ at its underlying set sheaf. By the evaluation-action description in [cor-galois-lisse-representations](1) this gives\n$$t_{\\mathcal F}\\rho_{\\bar y}(g)t_{\\mathcal F}^{-1}=\\rho_{\\bar z}(c_t(g)).$$\nLikewise $t'=a t$ evaluates to $(t')_{\\mathcal F}=\\rho_{\\bar z}(a)t_{\\mathcal F}$. Part (2) of that node specifies the integral actions by the finite-level actions and the rational and algebraic actions by their coefficient extensions. Apply these finite equalities at every level, then to the inverse-limit tuples, and then tensor with $E$ and $\\overline{\\mathbf Q}_\\ell$. Each operation preserves equality of maps and their composites. The resulting identities are exactly the two displayed adic identities of the statement, with the conjugating element in $\\pi_z$.",
-   "uses": [
-    "cor-galois-lisse-representations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/pione.tex",
-    "place": "Theorem 0BND (2); Weil II (1.1.1) b)-d) and the stipulated stalk actions"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-galois-fundamental",
   "lem-fet-galois-category",
-  "def-galois-category",
   "thm-galois-lc-etale",
-  "lem-galois-equivalence-preserves-limits",
-  "lem-wf-exact-finite-gsets-forgetful",
+  "lem-wf-fibre-functor-uniqueness",
   "def-galois-fibre-functor",
-  "cor-galois-lisse-representations",
-  "lem-pod-lisse-tensor-and-scalar-extension",
-  "def-pod-lisse-l-adic-sheaves",
-  "def-pod-lisse-adic-fibre-functors"
+  "new-e5-linear-fibre-path-transport",
+  "new-e5-integral-fibre-path-construction",
+  "new-e5-adic-fibre-path-extension"
  ],
  "proof_origin": {
   "by": "agent",
+  "agent": "E5",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/pione.tex",
-  "place": "Theorem 0BND (2) via Lemmas 0BN5 and 0BMV; explicit module and adic extension following Weil II (1.1.1) b)-d), pp.146-147"
+  "place": "Tag 0BND (2), 0BN5, using the existing Galois-category fibre isomorphism theorem; Weil II (1.1.1) b)-d) by linear, inverse-limit, tensor and localization constructions"
  },
  "mathlib_searches": [
   {
@@ -312,7 +216,6 @@
   ]
  },
  "tool_uses": [
-  "thm-galois-fundamental",
   "lem-fet-galois-category",
   "thm-galois-lc-etale",
   "cor-galois-lisse-representations",
@@ -330,22 +233,6 @@
   "module": "Sheaf.Paper.FibreFunctorBasepointTransport",
   "declaration": "AlgebraicGeometry.Scheme.fibre_functor_basepoint_transport",
   "declarations": [
-   "AlgebraicGeometry.Scheme.pathModuleFiber",
-   "AlgebraicGeometry.Scheme.pathUnderlyingStalk",
-   "AlgebraicGeometry.Scheme.pathScalarStalk",
-   "AlgebraicGeometry.Scheme.LinearFibrePathFamily",
-   "AlgebraicGeometry.Scheme.pathIntegralScalarLevelIso",
-   "AlgebraicGeometry.Scheme.FiniteFibrePathTransport",
-   "AlgebraicGeometry.Scheme.AdicFibrePathData",
-   "AlgebraicGeometry.Scheme.adicIntegralPathEvaluation",
-   "AlgebraicGeometry.Scheme.adicRationalPathEvaluation",
-   "AlgebraicGeometry.Scheme.adicAlgebraicPathEvaluation",
-   "AlgebraicGeometry.Scheme.AdicFibreScalarData",
-   "AlgebraicGeometry.Scheme.adicIntegralScalarGerm",
-   "AlgebraicGeometry.Scheme.adicIntegralScalarPath",
-   "AlgebraicGeometry.Scheme.adicRationalScalarTensor",
-   "AlgebraicGeometry.Scheme.adicRationalScalarPath",
-   "AlgebraicGeometry.Scheme.AdicFibrePathTransport",
    "AlgebraicGeometry.Scheme.fibre_functor_basepoint_transport"
   ],
   "file": "lean/Sheaf/Paper/FibreFunctorBasepointTransport.lean",
@@ -362,5 +249,15 @@
   "group": "Q01",
   "result": "pass",
   "note": "Every clause of the node matches the Lean: the composition order of c_t and of Int(a)c_t was checked, the topology is the existing SetFunctorAut evaluation topology, the finite transport is pinned by evaluation on the underlying FLC sheaf, the scalar square uses the canonical pathScalarStalk, and the adic maps are pinned levelwise and by tensor formulas, with the scalar comparisons fixed by germ and tensor formulas. The adic hypotheses apply only to the adic conjunct, and the coefficient universes match cor-galois-lisse-representations and def-pod-lisse-adic-fibre-functors. The flcFiber §1(B) repair of def-galois-fibre-functor is justified because the node defines the fibre on FLC, not FEt; it is the expression already used by FiberEquivalence, and only lean changes. No hollow definitions, only the item theorem is sorry, docstrings and verbatim statements are in place, and the report sections are present. nt_compile.py on both files: rc 0, no errors or warnings (2.3 s and 19.0 s). Minor: the report's statement that lem-wf-exact-finite-gsets-forgetful has no record is stale (Q37 has recorded it); this is harmless."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-f075f",
+  "group": "E5",
+  "result": "pass",
+  "landing": "20261020T230733-L-606316",
+  "kind": "interface",
+  "note": "independent cc review: lem-wf-fibre-functor-basepoint-transport statement and Lean signature (unchanged) against the proved theorem; the 16 moved interfaces against the live module (verbatim apart from irreducibility attributes); the canonical lisseAlgebraicFiberFunctor against def-pod-lisse-adic-fibre-functors; 15 delivered modules and 6 direct importers compiled clean; axioms show only the upstream endomorphism-bijectivity hole"
  }
 }
