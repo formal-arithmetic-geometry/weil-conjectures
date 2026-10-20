@@ -109,14 +109,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenRestrictedCounitFactorizationAux",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenRestrictedCounitFactorizationAux.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitFactorizationAux",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenRestrictedCounitFactorizationAux.lean",
   "declaration": "AlgebraicGeometry.SingleComplexBaseChange.openRestricted_counit_compatibility_aux",
   "statement": "theorem openRestricted_counit_compatibility_aux [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] {X X' : Scheme.{u}} (g' : X' ⟶ X) (U : X.Opens) (P : CochainComplex (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ) : (derivedPullback (pullback.snd g' U.ι)).map (openRestrictionRepresentativeIso U.ι P).hom ≫ openRestrictedCompositionMap g' U (DerivedCategory.Q.obj P) ≫ (derivedPullback (pullback.fst g' U.ι)).map ((counit g').app ((HomotopyCategory.quotient _ (.up ℤ)).obj P)) = (counit (pullback.snd g' U.ι)).app ((HomotopyCategory.quotient _ (.up ℤ)).obj (((Scheme.Modules.restrictFunctor U.ι).mapHomologicalComplex (.up ℤ)).obj P)) ≫ (openRestrictedTensorDerivedIso g' U P).inv",
   "branch": "sheaf-dag",
-  "by": "C3",
-  "date": "2026-10-14"
+  "by": "Q9",
+  "date": "2026-10-20",
+  "note": "Retired the quarantined Sheaf twin in favor of the existing official source declaration. The repaired quarantine text, removing only the redundant local irreducible command for derivedPullback, is identical to the official module after its copyright header. The official consumer already imports the official auxiliary; no Lean source imports the Sheaf copy. The mathematical statement, proof, dependencies, and unit route are preserved."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -129,14 +130,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-9b36b",
-  "group": "T3",
+  "reviewer": "C-235d6",
+  "group": "Q9",
   "result": "pass",
-  "landing": "20261013T234523-L-2167870",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered proof matches the unchanged node statement; module and sole direct importer compile, axioms are only propext/Classical.choice/Quot.sound, and interface changes are documented."
+  "landing": "20261020T151228-L-2650465",
+  "kind": "proof",
+  "note": "independent cc review: node lean attachment → official WeilConjectures.AlgebraicGeometry.OpenRestrictedCounitFactorizationAux (signature equal to lean.statement; quarantine copy differs only by header and redundant local irreducible line); no importers of the Sheaf module; empty withdrawn module compiles; axioms propext/Classical.choice/Quot.sound"
  },
  "lean_audit": {
   "master": {
