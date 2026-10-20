@@ -279,16 +279,20 @@ run_cmd do
 """
 
 
-def run_probe(mods: list[str]) -> dict[str, dict]:
+def run_probe(mods: list[str], name: str = "BatchProbe", threads: str | None = None) -> dict[str, dict]:
     """module -> {ran, axioms: [(decl, axiom)], sorry: [constant], out}; one Lean run that imports `mods`."""
     d = CLONE / ".sandbox"
     d.mkdir(exist_ok=True)
-    f = d / "BatchProbe.lean"
+    f = d / f"{name}.lean"
     # 2026-10-14: the probe imports Lean.Elab.Command itself (a batch of withdrawn, emptied modules imports nothing)
     f.write_text("import Lean.Elab.Command\n" + "".join(f"import {m}\n" for m in mods) + BATCH_PROBE % ",\n    ".join("`" + m for m in mods))
     r = run(["nice", "-n", "0", "timeout", "600", "lake", "env", "lean", str(f)], cwd=CLONE,
-            env=dict(os.environ, LEAN_NUM_THREADS=THREADS))
+            env=dict(os.environ, LEAN_NUM_THREADS=threads or THREADS))
     out = r.stdout + r.stderr
+    try:
+        if name != "BatchProbe": f.unlink()
+    except OSError:
+        pass
     res = {}
     for m in mods:
         res[m] = {"ran": bool(re.search(r"SHEAF-PROBED " + re.escape(m) + r" \d+", out)), "out": out[-1500:],
@@ -325,8 +329,16 @@ def batch_checks(included: list[dict], log: str) -> list[dict]:
                                        "cause is a definition the file uses; find it and change it."})
     todo = sorted(m for m in mods if m not in {c["module"] for c in out})
     res = run_probe(todo) if todo else {}
-    for m in [m for m in todo if not res[m]["ran"]] if len(todo) > 1 else []:
-        res[m] = run_probe([m])[m]      # one module of the set stopped the common run: each of the others alone
+    alone = [m for m in todo if not res[m]["ran"]] if len(todo) > 1 else []
+    if alone:
+        # one module of the set stopped the common run: each of the others alone, 16 at a time (2026-10-20: one by one,
+        # up to 600 s each, they added tens of minutes to a build of ~120 landings)
+        import concurrent.futures
+        t0 = time.time()
+        with concurrent.futures.ThreadPoolExecutor(max_workers=int(CFG.get("SHEAF_PROBE_PARALLEL", "16"))) as ex:
+            for m, r1 in zip(alone, ex.map(lambda x: run_probe([x], "BatchProbe_" + x.replace(".", "_"), "2")[x], alone)):
+                res[m] = r1
+        print(f"batch probe: {len(alone)} module(s) probed alone in parallel in {time.time() - t0:.0f} s", flush=True)
     for m in todo:
         r, (rec, path) = res[m], mods[m]
         if not r["ran"] and ("environment already contains" in r["out"] or re.search(r"BatchProbe\.lean:\d+:\d+: error: unknown (namespace|identifier|constant)", r["out"])):
