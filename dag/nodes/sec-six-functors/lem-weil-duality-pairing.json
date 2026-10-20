@@ -21,151 +21,61 @@
  ],
  "proof": [
   {
-   "text": "First work on any small ringed site $(\\mathcal C,R)$ with a sheaf of commutative rings, and put $H(L,M)=R\\mathcal Hom_R(L,M)$. The site may be chosen small in the universe of its module sheaves; on the pro-etale site this is the skeleton convention of [def-weil-pbc-proetale-site]. We fix the adjunction bijection on models. For $U,V,W\\in D(R)$ choose K-flat flat-term representatives $P_U,P_V$ [lem-pc-kflat-resolution] and a K-injective $I$ representing $W$ [prop-pur-kinjective-resolutions-exist]. By [def-pur-derived-internal-hom] and [lem-pur-hom-kflat-into-kinjective], $\\mathcal Hom^\\bullet(P_V,I)$ is a K-injective representative of $H(V,W)$, and [lem-weil-pbc-site-derived-tensor-descent] identifies $Q\\operatorname{Tot}(P_U\\otimes P_V)$ with $U\\otimes_R^LV$. By [lem-weil-pbc-kinjective-hom-derived] both $\\operatorname{Hom}(U,H(V,W))$ and $\\operatorname{Hom}(U\\otimes_R^LV,W)$ are homotopy classes of chain maps. The chain currying isomorphism $c$ of [lem-sc-derived-hom-tensor-total], $c(g)(x\\otimes y)=g(x)(y)$ (its differential is checked in step 4), carries chain maps (degree-zero global cocycles of the Hom complex [def-pur-hom-complex]) and null-homotopic maps (coboundaries) to the same, as in [lem-pur-hom-complex-global-homotopy]; this is the bijection $\\operatorname{Hom}(U,H(V,W))\\cong\\operatorname{Hom}(U\\otimes_R^LV,W)$. It is natural in homotopy classes of maps of $P_U,P_V,I$ because $c$ is, so quasi-isomorphisms of models act compatibly, and the descent clause of [lem-weil-pbc-site-derived-tensor-descent] makes it natural in $U,V$; maps of K-injectives are homotopy classes, giving naturality in $W$.",
+   "text": "Use the source-library parametrized tensor-Hom adjunction on each ambient derived category. Present its tensor as the raw localized tensor using etaleTensorRaw (etale) and the abstract nativeTensorRaw identity (pro-etale). The raw derived braiding gives a natural isomorphism b whose components are exactly the specified Koszul braiding. No new tensor descent or chain currying is required.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "lem-pc-kflat-resolution",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-sc-derived-hom-tensor-total",
-    "def-pur-hom-complex",
-    "lem-pur-hom-complex-global-homotopy",
-    "def-pc-tensor-complex-sheaves"
+    "lem-weil-duality-pairing-etale-tensor-raw"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 (lemma-internal-hom), 08JA (lemma-section-RHom-over-U), 06YU (definition-derived-tor), 0FPT (lemma-symmetric-monoidal-derived); explicit symmetry check"
+    "place": "Tag 08JC (lemma-RHom-triangulated); native internal-Hom model in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/ClosedTriangulated.lean"
    }
   },
   {
-   "text": "We also need tensor symmetry. On total tensor complexes it is $x_p\\otimes y_q\\mapsto(-1)^{pq}y_q\\otimes x_p$: the differential of [def-pc-tensor-complex-sheaves] gives the same coefficients $(-1)^{pq+q}$ and $(-1)^{pq}$ after interchanging the two differential summands, and the square of this map is the identity. By the resolving-class equivalence and natural-transformation descent of [lem-weil-pbc-site-derived-tensor-descent], this natural chain isomorphism descends to $U\\otimes_R^L V\\cong V\\otimes_R^L U$. Thus the adjunction and symmetry used below are available for arbitrary ambient objects on either site. Fix an arbitrary $W\\in D(R)$ and write $D=H(-,W)$. Under the bijection of step 1 the identity of $DK$ corresponds to $e_K:DK\\otimes_R^L K\\to W$. Define $\\delta_K:K\\to H(DK,W)=D^2K$ to correspond to $e_K\\circ\\sigma_{K,DK}:K\\otimes_R^L DK\\to W$. This is precisely the evaluation pairing followed by transposition, not an assertion that evaluation or $\\delta_K$ is an isomorphism. For $u:K\\to L$, naturality of the adjunction gives $e_K\\circ(Du\\otimes1_K)=e_L\\circ(1_{DL}\\otimes u)$ as maps $DL\\otimes_R^L K\\to W$. Transpose this equality after tensor symmetry; it becomes $D^2u\\circ\\delta_K=\\delta_L\\circ u$. This proves the asserted naturality (the displayed identity is the precise variance convention for naturality of evaluation). Both uses of adjunction are the model bijection of step 1, built from [lem-sc-derived-hom-tensor-total] and [lem-weil-pbc-site-derived-tensor-descent], in the ambient derived category.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 and equation (equation-internal-hom); evaluation as the adjunct of the identity"
-   }
-  },
-  {
-   "text": "Choose a K-injective representative $I$ of $W$ by [prop-pur-kinjective-resolutions-exist] and write $T(C)=\\mathcal Hom_R^\\bullet(C,I)$ [def-pur-hom-complex]. By [def-pur-derived-internal-hom], $T(C)$ and $T^2(C)$ represent $DC$ and $D^2C$; only the second variable $I$ needs to be K-injective. Both applications invert quasi-isomorphisms by [lem-pur-rhom-well-defined]. Define $b_C:C\\to T^2(C)$ on homogeneous local sections by $b_C(x)(f)=(-1)^{pq}f(x)$ for $x\\in C^p$, $f\\in T(C)^q$. The Hom differential gives $(db_C(x))(f)=(-1)^{pq}d_I(f(x))-(-1)^{pq}(d_I(f(x))-(-1)^qf(d_Cx))=(-1)^{(p+1)q}f(d_Cx)=b_C(d_Cx)(f)$. Thus $b_C$ is a chain map. For a chain map $v:C\\to C'$, both $T^2(v)b_C(x)$ and $b_{C'}v(x)$ evaluate on $f$ to $(-1)^{pq}f(v(x))$, proving naturality.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-hom-complex",
-    "def-pur-derived-internal-hom",
-    "lem-pur-rhom-well-defined"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A8X (section-hom-complexes), 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 08J9 (lemma-internal-hom); explicit representative calculation"
-   }
-  },
-  {
-   "text": "To identify $b$ with the transpose in step 2, take K-flat flat-term resolutions $P\\to C$ and $r:Q\\to T(P)$ by [lem-pc-kflat-resolution]. Then $Q$ and $P$ are admissible models for $U=DP$ and $V=P$ in step 1, and $T(P),T(Q)$ are K-injective by [lem-pur-hom-kflat-into-kinjective]; by [lem-weil-pbc-kinjective-hom-derived] the identity of $DP$ is the homotopy class of $r$, whose localization is the representative comparison $Q\\cong T(P)$. In components the currying $c$ of step 1 is $g\\mapsto(x\\otimes q\\mapsto g(x)(q))$, and for $\\deg(g)=n$, $\\deg(x)=p$ both differentials are $d_Ig(x)(q)-(-1)^ng(d_Px)(q)-(-1)^{n+p}g(x)(d_Qq)$ [def-pur-hom-complex, def-pc-tensor-complex-sheaves], so $c$ is the chain isomorphism used there [lem-sc-derived-hom-tensor-total]. By the definition of the bijection in step 1, $e_P$ is the class of $c(r):q\\otimes x\\mapsto r(q)(x)$. After the chain-level symmetry of step 2 this is $x\\otimes q\\mapsto(-1)^{p\\deg(q)}r(q)(x)$, whose curry is exactly $T(r)b_P$: indeed $(T(r)b_P(x))(q)=b_P(x)(r(q))=(-1)^{p\\deg(q)}r(q)(x)$. By [lem-pur-rhom-well-defined], $T(r):T^2(P)\\to T(Q)$ is a quasi-isomorphism, the comparison of the two representatives of $D^2P$, so localization identifies $b_P$ with $\\delta_P$. Naturality from step 3 and the quasi-isomorphism $P\\to C$ give the same identification for $b_C$.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-pur-rhom-well-defined"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A8X (section-hom-complexes), 0A90 (lemma-compose), 0A95 (lemma-RHom-well-defined), 0A96 (lemma-RHom-from-K-flat-into-K-injective), 08J9 (lemma-internal-hom); explicit representative calculation"
-   }
-  },
-  {
-   "text": "Apply [lem-sf-double-hom-cone-comparison] to the fixed complex $I$. It supplies the chain isomorphism $s_{C,m}:T(C[m])\\to T(C)[-m]$, its induced comparison $\\chi_C:T^2(C[1])\\to T^2(C)[1]$, and $\\theta_u:T^2(\\operatorname{Cone}(u))\\to\\operatorname{Cone}(T^2u)$. In particular its two arrow equations identify $T^2(i)$ with the cone inclusion and $\\chi_A T^2(-\\pi)$ with the negative cone projection. The first arrow is $T^2u$ by construction. Since cone triangles end in the negative projection in [def-weil-abstract-derived-category], the $T^2$-image cone triangle with comparison $\\chi$ is isomorphic to the cone triangle of $T^2u$. Step 3 shows that $T^2$ descends through quasi-isomorphisms. The definition of distinguished triangles in [def-weil-abstract-derived-category] then proves that its localization $D^2$, with the localized $\\chi$, takes every distinguished triangle to a distinguished triangle. No choice of sign is inferred from exactness alone.",
-   "uses": [
-    "lem-sf-double-hom-cone-comparison",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E (definition-cone), with sites-cohomology.tex Tag 08JC (lemma-RHom-triangulated), whose omitted cone comparison is made explicit here; agent calculation with the Hom differential of def-pur-hom-complex."
-   }
-  },
-  {
-   "text": "For $x\\in C[1]^p=C^{p+1}$ and $\\psi\\in T(C)^t$, read $\\psi$ as an element of $T(C[1])^{t+1}$ without an extra sign. The formula for $\\chi$ in [lem-sf-double-hom-cone-comparison] gives\n$$ (\\chi_C b_{C[1]}(x))(\\psi)=(-1)^{p+t+p(t+1)}\\psi(x)=(-1)^{(p+1)t}\\psi(x)=(b_C[1](x))(\\psi). $$\nThus $\\chi_Cb_{C[1]}=b_C[1]$. The identification of step 4 gives $\\chi_K\\delta_{K[1]}=\\delta_K[1]$ in the derived category. Iterating this identity gives the positive shifts, the inverse identity gives negative shifts, and shift zero is the identity. Taking the iterated comparisons fixes their coherence under adding integers; at every stage the equality is the shifted equality for $[1]$ (or its inverse).",
-   "uses": [
-    "lem-sf-double-hom-cone-comparison",
-    "def-pur-hom-complex"
-   ],
+   "text": "In an arbitrary braided monoidal category with a parametrized tensor-Hom adjunction a, put D(K)=H(K,W), ev_K=a_K^(-1)(id_DK), and e_K=beta_(K,DK)^(-1) followed by ev_K. Then a_K(beta_(K,DK) e_K)=id. Parametrized homEquiv naturality in the first and second variables and braiding naturality prove dinaturality of e. Build the self-adjunction D.rightOp ⊣ D using the reverse braiding: its hom bijection uncarries, interchanges factors, and curries. Its unit is exactly delta_K=a_DK(e_K), so unit naturality proves naturality of delta.",
+   "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014E (definition-cone), with sites-cohomology.tex Tag 08JC (lemma-RHom-triangulated), whose omitted cone comparison is made explicit here; agent calculation with the Hom differential of def-pur-hom-complex."
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08JC (lemma-RHom-triangulated); native internal-Hom model in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/ClosedTriangulated.lean"
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-commshift-nattrans-triangle-morphism] to $F_1=\\mathrm{id}$, $F_2=D^2$, and $\\tau=\\delta$. Naturality is step 2, and the required equation with the shift comparisons is established in step 6. Hence for every distinguished triangle $K'\\to K\\to K''\\to K'[1]$, the three components $(\\delta_{K'},\\delta_K,\\delta_{K''})$ form a morphism to its $D^2$-image triangle, which is distinguished by step 5. This supplies in particular the last square involving the connecting arrow; it is not inferred merely from exactness of the two functors.",
+   "text": "Apply coherent contravariant exactness [lem-weil-native-internal-hom-contravariant-exact] to native Hom(-,W). Uniqueness of right adjoints gives its natural isomorphism with H(-,W); the parametrized counit identity proves naturality in the source. Transport shifts and exactness along this proved isomorphism to D. Give the left adjoint D.rightOp the shift structure adjoint to that of D. Mathlib Adjunction.isTriangulated_leftAdjoint makes it exact. Their composite D² is exact; Mathlib NatTrans.shift_app_comm for the unit proves the required integral shift identity. For each distinguished triangle build the morphism with components delta. Its first two squares are unit naturality. The third is naturality on the connecting arrow followed by the shift identity at 1.",
    "uses": [
-    "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-    "lem-sf-double-hom-cone-comparison"
+    "lem-weil-native-internal-hom-contravariant-exact"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC; for the formal triangle-morphism step, literature/stacks-project/derived.tex, Definitions 0144 and 014V"
+    "place": "Tag 08JC (lemma-RHom-triangulated); native internal-Hom model in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/ClosedTriangulated.lean"
    }
   },
   {
-   "text": "The field spectrum is Noetherian (its only ideals are $0$ and the field). Apply [sk-thm-nagata-sketch-noetherian] to $a_X$ and use the compactification data of [def-nagata-compactification]. Its proper map is finite type, so [lem-weil-pbc-finite-type-over-noetherian] makes both $X$ and $\\overline X$ Noetherian. Thus [thm-amb-etale-exceptional-adjoint] supplies the stated $\\omega_X$. Specialize the preceding argument to the small etale ringed site $(X_{\\mathrm{et}},A_X)$ of [def-weil-pbc-derived-categories], replaced by a small skeleton as in [def-weil-size-convention], and $W=\\omega_X$ already specified in the statement using [thm-amb-etale-exceptional-adjoint]. This gives exactly $e_K:\\!D_XK\\otimes_A^LK\\to\\omega_X$ and its transpose $\\delta_K$ with all the asserted compatibilities. Instantiate steps 1–7 instead with $\\mathcal C=X_{\\mathrm{proet}}$ as in [def-weil-pbc-proetale-site], $R=A_X$, and the specified ambient object $W=\\omega_X$: step 2 gives its evaluation and double-dual arrow, step 6 gives the shift equation, and step 7 gives the triangle morphism. This proves the pro-etale clause. The arguments above used arbitrary objects of $D(R)$ throughout; no assertion about $D_XK$ being constructible, and no comparison equivalence between the two sites, is used.",
+   "text": "Specialize to the small etale sheaf category and the stated dualizing object, and to the pro-etale sheaf category with arbitrary W. Pass the recorded localization instances explicitly, so checking the proof does not expand the monoidal closed construction. This proves both clauses without reconstructing the already specified ambient dualizing object. The standalone etaleKoszulSymmetry proof is retained verbatim.",
    "uses": [
-    "thm-amb-etale-exceptional-adjoint",
-    "def-weil-pbc-proetale-site",
-    "sk-thm-nagata-sketch-noetherian",
-    "def-nagata-compactification",
-    "lem-weil-pbc-finite-type-over-noetherian",
     "def-weil-pbc-derived-categories",
-    "def-weil-size-convention"
+    "def-weil-pbc-proetale-site",
+    "thm-amb-etale-exceptional-adjoint"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J9 and 08JC, specialization of ringed-site formalism; blueprint order 2122, final two sentences; Noetherian Nagata compactification and morphisms.tex Tag 01T6 (lemma-finite-type-noetherian)"
+    "place": "Tag 08JC (lemma-RHom-triangulated); native internal-Hom model in lean/WeilConjectures/CategoryTheory/DerivedCategory/Monoidal/ClosedTriangulated.lean"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "lem-pc-kflat-resolution",
-  "prop-pur-kinjective-resolutions-exist",
-  "def-pur-derived-internal-hom",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sc-derived-hom-tensor-total",
-  "def-pur-hom-complex",
-  "lem-pur-hom-complex-global-homotopy",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pur-rhom-well-defined",
-  "lem-sf-double-hom-cone-comparison",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "thm-amb-etale-exceptional-adjoint",
-  "sk-thm-nagata-sketch-noetherian",
-  "def-nagata-compactification",
-  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-duality-pairing-etale-tensor-raw",
+  "lem-weil-native-internal-hom-contravariant-exact",
   "def-weil-pbc-derived-categories",
-  "def-weil-size-convention"
+  "def-weil-pbc-proetale-site",
+  "thm-amb-etale-exceptional-adjoint"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "S1 stage 3",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08J9, 08JA and 08JC; explicit evaluation, naturality and double-dual shift-sign computations following blueprint order 2122"
+  "place": "Tags 08J9 and 08JC; parametrized adjunction and its unit, Mathlib triangulated adjunction, native contravariant exactness"
  },
  "mathlib_searches": [
   {
@@ -326,21 +236,7 @@
   ],
   "group": "Q28"
  },
- "tool_uses": [
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-pur-rhom-global-sections",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-rhom-well-defined",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-commshift-nattrans-triangle-morphism",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-pur-hom-complex-global-homotopy",
-  "lem-sc-derived-hom-tensor-total",
-  "sk-thm-nagata-sketch-noetherian",
-  "lem-weil-pbc-finite-type-over-noetherian"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -383,17 +279,10 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "F4",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261020T211707-L-3489436",
+  "landing": "20261020T230831-L-618552",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Etale.ambient_duality_pairing",
-   "AlgebraicGeometry.Etale.etaleKoszulSymmetry"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Etale.ambient_duality_pairing"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
