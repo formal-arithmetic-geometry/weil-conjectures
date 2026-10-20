@@ -51,7 +51,7 @@ COLS = ("module", "original", "quarantine", "sync", "time", "cause", "nodes", "r
 HEADER = ("# module\toriginal path\tquarantine path\tsync\tquarantined (UTC)\tcause\tDAG nodes\troots   "
           "(tools/rework.py; written by ~/cc1/upsync-quick.py, rows removed by `tools/rework.py reconcile`)\n")
 # never moved out or changed: the six target statements; a failure it imports aborts the sync
-ROOTS_KEPT = ("Challenge",)
+ROOTS_KEPT = ("Challenge", "Weil.Solution", "Weil.Challenge", "Weil.Definitions")   # + the comparator files
 # root files that only list imports: a quarantined module's import line is removed from them (and put back on restore)
 IMPORT_ROOTS = ("WeilConjectures", "TargetsCheck")
 SOURCE_ROOT = "WeilConjectures"
@@ -182,6 +182,36 @@ def clusters(rows=None) -> list[dict]:
         mem = set().union(*(member_of[r] for r in rs))
         out.append({"item": rs[0], "roots": rs, "members": rs + sorted(mem - set(rs))})
     return sorted(out, key=lambda c: (-len(c["members"]), c["item"]))
+
+
+RETIRE = ROOT / "coord" / "retire-items.tsv"
+# coord/retire-items.tsv (the human, 2026-10-20; hand-off of the twin-retirement agent, coord/changes/
+# retire-sheaf-twins-20261020.md "Hand-off"): one Sheaf copy to retire per row, columns item, kind (`retire`), copy, twin,
+# class, depth, after (copies to retire first, space-separated), consumers, DAG nodes, API difference. The queue item is
+# the copy's module name (kind `retire`, after the rework items, before every other queue). Open when every `after` copy
+# is gone from lean/; done when the copy is deleted (verified when refs/heads/sheaf-verified no longer has it).
+
+
+def retire_rows(open_only: bool = True) -> dict[str, dict]:
+    out = {}
+    try:
+        lines = RETIRE.read_text().splitlines()
+    except OSError:
+        return out
+    for l in lines:
+        r = l.split("\t")
+        if not l.strip() or l.startswith("#") or len(r) < 4:
+            continue
+        r += [""] * 10
+        copy = r[2]
+        after = [x for x in r[6].split() if x and x != "-"]
+        if not (ROOT / opath(copy)).is_file():
+            continue
+        if open_only and any((ROOT / opath(x)).is_file() for x in after):
+            continue
+        out[copy] = {"module": copy, "twin": r[3], "class": r[4], "depth": r[5], "after": after,
+                     "consumers": [x for x in r[7].split() if x and x != "-"], "nodes": r[8], "api": r[9]}
+    return out
 
 
 def blocked(g=None, imports=None, rows=None) -> tuple[set[str], set[str], dict[str, str]]:
