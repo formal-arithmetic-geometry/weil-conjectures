@@ -110,14 +110,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/DerivedProjectionMateOpenRestrictionComparison.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.DerivedProjectionMateOpenRestrictionComparison",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/DerivedProjectionMateOpenRestrictionComparison.lean",
   "declaration": "AlgebraicGeometry.exists_derivedProjectionMate_openRestriction_comparison",
   "statement": "theorem exists_derivedProjectionMate_openRestriction_comparison\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings X.toRingedSpace))]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (p : derivedPullback f ⊣ schemeDerivedDirectImage f)\n    (t : tensor (schemeDerivedCategory Y) ⋙ derivedPullback f ≅\n      (derivedPullback f).prod (derivedPullback f) ⋙ tensor (schemeDerivedCategory X))\n    (M : schemeDerivedQCohCategory Y) (L : schemeDerivedQCohCategory X)\n    (U : Y.Opens)\n    (Z : Scheme.{u}) (g : Z ⟶ U.toScheme)\n    (hZ : Z = (f ⁻¹ᵁ U).toScheme) (hg : HEq g (f ∣_ U)) :\n    letI : HasDerivedCategory.{u}\n      (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) :=\n        inferInstance\n    letI : HasDerivedCategory.{u}\n      (SheafOfModules.{u} (moduleRings Z.toRingedSpace)) := inferInstance\n    ∃ (q : derivedPullback g ⊣ schemeDerivedDirectImage g)\n        (s : tensor (schemeDerivedCategory U.toScheme) ⋙ derivedPullback g ≅\n          (derivedPullback g).prod (derivedPullback g) ⋙ tensor (schemeDerivedCategory Z))\n        (N : schemeDerivedQCohCategory U.toScheme) (E : schemeDerivedQCohCategory Z),\n        Nonempty (Arrow.mk ((schemeOpenRestriction Y U).mapDerivedCategory.map\n          (p.homEquiv (M.obj ⊗ (schemeDerivedDirectImage f).obj L.obj)\n            ((derivedPullback f).obj M.obj ⊗ L.obj)\n              (t.hom.app (M.obj, (schemeDerivedDirectImage f).obj L.obj) ≫\n                (𝟙 ((derivedPullback f).obj M.obj) ⊗ₘ p.counit.app L.obj)))) ≅\n          Arrow.mk (q.homEquiv (N.obj ⊗ (schemeDerivedDirectImage g).obj E.obj)\n            ((derivedPullback g).obj N.obj ⊗ E.obj)\n              (s.hom.app (N.obj, (schemeDerivedDirectImage g).obj E.obj) ≫\n                (𝟙 ((derivedPullback g).obj N.obj) ⊗ₘ q.counit.app E.obj))))",
   "branch": "sheaf-dag",
-  "by": "J2",
-  "date": "2026-10-13"
+  "by": "A6",
+  "date": "2026-10-21",
+  "note": "Quarantine repair: canonical upstream declaration has the exact archived statement and proof. The restored Sheaf module publicly re-exports it; all proof dependencies and the unit route are preserved."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -130,14 +131,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-77c27",
-  "group": "F2",
+  "reviewer": "C-d9191",
+  "group": "A6",
   "result": "pass",
-  "landing": "20261013T142855-L-497118",
-  "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements and proofs with node records, dependencies, change record and report; all four modules and sole direct importer compile cleanly; axioms are standard, with sorryAx only for the documented tensor-descent dependency."
+  "landing": "20261020T211620-L-3479048",
+  "kind": "proof",
+  "note": "independent cc review: the delivered Sheaf re-export module and the node's existing:true lean record against the upstream WeilConjectures theorem (signature identical to the node's lean.statement, axioms standard); node fields other than lean identical to live; no importers of the quarantined path"
  },
  "lean_audit": {
   "master": {
