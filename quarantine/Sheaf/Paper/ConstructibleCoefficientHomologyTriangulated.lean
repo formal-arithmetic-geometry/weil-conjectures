@@ -58,7 +58,7 @@ private theorem coefficientConstructible_of_isZero
     (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A] [Finite A]
     (F : pbcModules T (adicLisseConstantRing T A)) (hF : Limits.IsZero F) :
     IsConstructibleProEtaleCoefficientModuleSheaf T A F := by
-  let S : LocallyClosedStratification T :=
+  let S : Stratification T :=
     { n := 1
       stratum := fun _ ↦ Set.univ
       isLocallyClosed_stratum := fun _ ↦ IsOpen.isLocallyClosed isOpen_univ

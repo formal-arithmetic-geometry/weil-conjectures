@@ -682,7 +682,7 @@ theorem pbc_levelwise_truncations_constructible [IsNoetherian T]
     (_hN : PbcIsLevelwiseTruncation T (pbcIntegralDatum l E) N)
     (_hTor : PbcLevelwiseTorVanishing T (pbcIntegralDatum l E)
       (pbcReductionAdicTower T (pbcIntegralDatum l E) K) m)
-    (_hmodels : d₀ ≤ d₁ ∧ ∃ S : LocallyClosedStratification T,
+    (_hmodels : d₀ ≤ d₁ ∧ ∃ S : Stratification T,
       ∀ α : Fin S.n, ∃ V : Sieve (⊤_ (S.domain α).ProEt),
         V ∈ ProEt.topology (S.domain α) (⊤_ (S.domain α).ProEt) ∧
         ∀ (U : (S.domain α).ProEt) (f : U ⟶ ⊤_ (S.domain α).ProEt), V f →

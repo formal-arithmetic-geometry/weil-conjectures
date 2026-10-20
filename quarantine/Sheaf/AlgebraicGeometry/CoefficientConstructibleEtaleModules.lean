@@ -108,7 +108,7 @@ def IsCoefficientConstructibleEtaleModule (X : Scheme.{u})
       (CategoryTheory.ConstantCompletion.constant (smallModelComparisonEtaleTopology.{u, v} X)
         A)) : Prop :=
   ∀ U : X.Opens, IsAffineOpen U →
-    ∃ S : LocallyClosedStratification U.toScheme,
+    ∃ S : Stratification U.toScheme,
       (∀ i : Fin S.n, Topology.IsConstructible (S.stratum i)) ∧
       ∀ i : Fin S.n, IsCoefficientModelLocallyConstantFinite
         (smallModelComparisonEtaleTopology.{u, v} (S.domain i)) A
