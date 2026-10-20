@@ -97,14 +97,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-f-representable",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounitEquation",
-  "file": "lean/Sheaf/AlgebraicGeometry/IsomorphicSingleTensorCounitEquation.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.IsomorphicSingleTensorCounitEquation",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/IsomorphicSingleTensorCounitEquation.lean",
   "declaration": "AlgebraicGeometry.isomorphic_single_tensor_counit_transport_equation",
   "statement": "theorem isomorphic_single_tensor_counit_transport_equation\n    [∀ Y : Scheme.{u}, HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    [∀ {Y Z : Scheme.{u}} (k : Y ⟶ Z), (Scheme.Modules.tensorPullback k).Additive]\n    {X P Z : Scheme.{u}} (p : P ⟶ X) (e : Z ≅ P) :\n    let c := @Classical.choose _ _ (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition.{u, w})))\n    let a := fun {A B : Scheme.{u}} (s : A ⟶ B) ↦\n      Classical.choose (exists_schemeDerivedAdjunction s\n        (hAdd := (Classical.choose exists_derivedPullbackComposition) s)\n        ((Classical.choose (Classical.choose_spec exists_derivedPullbackComposition)) s)\n        ((Classical.choose (Classical.choose_spec\n          (Classical.choose_spec exists_derivedPullbackComposition))) s))\n    let t := Classical.choose (exists_isomorphic_single_tensor_counit_transport p e)\n    ∀ M : X.Modules,\n      let K := (DerivedCategory.singleFunctor\n        (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj M\n      (a e.hom).unit.app ((derivedPullback p).obj K) ≫\n          (schemeDerivedDirectImage e.hom).map\n            ((c e.hom p).hom.app K ≫ pinnedSingleTensorCounit (e.hom ≫ p) 0 M) ≫\n          t.hom.app M = pinnedSingleTensorCounit p 0 M",
   "branch": "sheaf-dag",
-  "by": "T2",
-  "date": "2026-10-14"
+  "by": "Q7",
+  "date": "2026-10-20",
+  "note": "The adopted source already proves the exact theorem with the same proof and imports. The former Sheaf module re-exports this declaration, avoiding a duplicate declaration and the obsolete local reducibility assignment."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -117,14 +118,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-0237c",
-  "group": "F2",
+  "reviewer": "C-e357c",
+  "group": "Q7",
   "result": "pass",
-  "landing": "20261013T215604-L-897801",
-  "kind": "interface",
-  "note": "independent Codex review: Delivered module, node metadata, report, and change record match the stated target; scratch compilation and direct importer compilation succeed, with only the recorded dependency sorryAx."
+  "landing": "20261020T150703-L-2573627",
+  "kind": "proof",
+  "note": "independent cc review: Sheaf re-export module + node lean record (existing:true) against upstream WeilConjectures.AlgebraicGeometry.IsomorphicSingleTensorCounitEquation (identical signature/proof to quarantined copy, axioms clean, compiles, no importers)"
  },
  "lean_audit": {
   "master": {
