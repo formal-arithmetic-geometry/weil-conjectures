@@ -13,87 +13,51 @@
  ],
  "proof": [
   {
-   "text": "First work with arbitrary complexes $U,V$ of sheaves of modules over a commutative ring sheaf. Set $S_r(U,V):\\operatorname{Tot}(U\\otimes V[r])\\to\\operatorname{Tot}(U\\otimes V)[r]$ to multiply the summand $U^i\\otimes V^{j+r}$, where $i+j=k$, by $(-1)^{ri}$. By [def-pc-tensor-complex-sheaves], the source differential has components $d_U\\otimes1$ and $(-1)^{i+r}1\\otimes d_V$, while the target differential is $(-1)^r(d_U\\otimes1+(-1)^i1\\otimes d_V)$. For the first component, $S_rd$ has coefficient $(-1)^{r(i+1)}=(-1)^{ri+r}$, equal to that of $dS_r$. For the second, both coefficients are $(-1)^{ri+i+r}$. These equations on each direct-sum inclusion prove the chain-map identity. The same sign gives its inverse. Every degree-zero map preserves $i$, so these maps are natural in $U,V$.",
+   "text": "Apply [lem-sf-completed-tensor-finite-shift] to obtain a natural isomorphism beta of tower-valued functors. For each pair of complexes its component alpha has the required finite generator formula and already commutes with the strict transitions.",
    "uses": [
-    "def-pc-tensor-complex-sheaves"
+    "lem-sf-completed-tensor-finite-shift"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tags 011G (homology-definition-shift-cochain) and 012Z (homology-definition-associated-simple-complex); explicit signed calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "Choose flat-term K-flat resolutions $P\\to M$ and $Q\\to N$ by [lem-pc-kflat-resolution] on the ringed site $(W_{\\mathrm{proet}},B)$ of [def-pur-integral-derived-operations]. The complex $Q[r]$ still has flat terms, and is K-flat: for any acyclic $F$, step 1 identifies $\\operatorname{Tot}(F\\otimes Q[r])$ with $\\operatorname{Tot}(F\\otimes Q)[r]$, which is acyclic by [def-pc-kflat-complex] since shifting only reindexes kernels and images and multiplies differentials by a unit. The shifted augmentation $Q[r]\\to N[r]$ is a quasi-isomorphism by the same cohomology calculation. Hence $P,Q[r]$ are permissible models for the completed tensor on the left.",
+   "text": "Products commute with cochain shifts. Product projections and naturality of alpha identify the two endomorphisms 1-s. Apply the mapping-cone functor to this square and compose with the inverse of Mathlib mappingCone.shiftIso. Its inr component has coefficient 1 and its inl component has coefficient (-1)^r. Both component formulas are proved from the cone injection formulas. They also prove naturality in squares of towers. Shift by -1 and use shiftFunctorComm to obtain a natural Roos comparison, with exactly the specified cone formula.",
    "uses": [
-    "lem-pc-kflat-resolution",
     "def-pur-integral-derived-operations",
-    "def-pc-kflat-complex"
+    "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tags 011G (homology-definition-shift-cochain) and 012Z (homology-definition-associated-simple-complex); explicit signed calculation"
-   }
+   "elementary": true
   },
   {
-   "text": "Reduction is termwise tensor with $(A_n)_W$, so $(Q[r])_n=Q_n[r]$ with its signed differential. Write $C_n=\\operatorname{Res}_n\\operatorname{Tot}(P_n\\otimes Q_n)$ and $D_n=\\operatorname{Res}_n\\operatorname{Tot}(P_n\\otimes Q_n[r])$ as in [def-pur-integral-derived-operations]. Step 1 gives $\\alpha_n:D_n\\xrightarrow{\\sim}C_n[r]$. The transition map is induced by the quotient maps on $P_n,Q_n$; each is degree zero, so it preserves $i$ and commutes with $(-1)^{ri}$. Thus $\\alpha_n t^D_n=t^C_n[r]\\alpha_{n+1}$. This is an actual isomorphism of towers of $B$-module complexes, before passing to the derived category.",
+   "text": "Good complexes are stable under right shifts: termwise flatness just reindexes the terms; K-flatness follows from mapBifunctorShift2Iso and the homology shift isomorphism. Independent-coefficient tensor additivity supplies that bifunctor comparison. No new resolutions are chosen.",
    "uses": [
-    "def-pur-integral-derived-operations"
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tags 011G (homology-definition-shift-cochain) and 012Z (homology-definition-associated-simple-complex); explicit signed calculation"
-   }
+   "elementary": false
   },
   {
-   "text": "For any tower $C_\\bullet$, put $X=\\prod_n C_n$ and $f=1-s:X\\to X$. The degreewise identification $\\prod_n(C_n[r])\\cong X[r]$ commutes with differentials, since both use $(-1)^rd$, and identifies $1-s$ with $f[r]$. Use the cone convention stated in [def-weil-abstract-derived-category], $d_{\\operatorname{Cone}(f)}(b,a)=(db+f(a),-da)$. The map $h_r:\\operatorname{Cone}(f[r])\\to\\operatorname{Cone}(f)[r]$, $(b,a)\\mapsto(b,(-1)^ra)$, is a chain isomorphism: both $h_rd$ and $dh_r$ give $((-1)^r db+f(a),-da)$, with inverse the same diagonal sign. These equations are natural in commuting squares of chain maps. Shifting $h_r$ by $[-1]$ and identifying $[r][-1]=[-1][r]$ gives $\\operatorname{Rlim}^{\\mathrm c}(C_\\bullet[r])\\cong\\operatorname{Rlim}^{\\mathrm c}(C_\\bullet)[r]$ for the functorial mapping-fiber construction in [def-pur-integral-derived-operations].",
+   "text": "Let epsilon be integralCompletedTensorComparison and kappa the restriction of Q.commShiftIso to good representatives in the second slot. Localize the natural Roos comparison and compose with Q.commShiftIso to obtain tau. The desired restricted isomorphism theta is kappa inverse, epsilon on shifted representatives, tau, and shifted epsilon inverse. Postcompose theta with the inverse of the output shift and compose with its unit inverse and epsilon. This makes a second descent of the same good-model functor. The uniqueness property in lem-pur-integral-operations-well-defined supplies a compatible isomorphism from the chosen descent to this one. Postcomposition with the inverse shift is fully faithful; lift the compatible isomorphism and shift unit through it. Cancellation of the descent comparisons proves that its restriction is theta, and cancellation of kappa and epsilon proves the displayed normalization on every good pair. Choose alpha from beta and the constructed cone iso as witnesses.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-pur-integral-derived-operations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 014E (derived-definition-cone) and 08TC (derived-definition-derived-limit); explicit product and cone calculation"
-   }
-  },
-  {
-   "text": "Apply the product and cone functors to the commuting tower isomorphism $\\alpha$ of step 3, obtaining $\\operatorname{Rlim}^{\\mathrm c}(D_\\bullet)\\xrightarrow{\\sim}\\operatorname{Rlim}^{\\mathrm c}(C_\\bullet[r])$. Compose with step 4. By [def-pur-integral-derived-operations], the source computes $M\\widehat\\otimes_R^L(N[r])$ and the final target computes $(M\\widehat\\otimes_R^L N)[r]$. This composite is the asserted $\\sigma^r$ on the chosen resolutions, with exactly the finite-level formula, reduction-transition compatibility, product identification, and cone comparison in the statement. All component maps are chain isomorphisms, so the composite is an isomorphism.",
-   "uses": [
-    "def-pur-integral-derived-operations"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 014E (derived-definition-cone) and 08TC (derived-definition-derived-limit); explicit product and cone calculation"
-   }
-  },
-  {
-   "text": "The chain formulas in steps 1–5 commute with every map of flat-term K-flat representatives. By [lem-pur-integral-operations-well-defined](1), their completed tensor constructions send quasi-isomorphisms between such representatives to quasi-isomorphisms; by (2) they descend to functors on $D(B)^2$ with natural comparison isomorphisms on K-flat representatives. A commuting naturality square with a quasi-isomorphism remains commuting after inverting that map. Hence the same squares commute for all composites and inverses that define the localized functors of (2). They therefore give a natural isomorphism on $D(B)^2$. The unique comparison isomorphisms of functors in (2) commute with this isomorphism, since their components are induced by these same localized comparisons. This proves independence of the resolution choices in the comparison-compatible sense of that node, as well as naturality in arbitrary derived morphisms of $M,N$.",
-   "uses": [
+    "def-pur-integral-derived-operations",
     "lem-pur-integral-operations-well-defined"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (sites-cohomology-lemma-K-flat-resolution) and 06YT (sites-cohomology-lemma-derived-tor-quasi-isomorphism-other-side); descent applied using lem-pur-integral-operations-well-defined(1),(2)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-resolution",
-  "def-pur-integral-derived-operations",
   "def-pc-kflat-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-integral-derived-operations",
   "def-weil-abstract-derived-category",
-  "lem-pur-integral-operations-well-defined"
+  "lem-pur-integral-operations-well-defined",
+  "lem-sf-completed-tensor-finite-shift",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-lem-sf-twist-interchange/lem-sf-twist-interchange.proof.md",
-  "place": "Last sentence, together with the shift of the second variable; explicit chain calculations for the prescribed completed tensor model, using Stacks Tags 011G, 012Z, 014E, 08TC and the existing well-definedness node"
+  "by": "worker",
+  "document": "lean/Sheaf/SixFunctors/CompletedTensorShiftRight.lean",
+  "place": "J8: explicit product/cone and Roos comparison, stability of good models, and comparison-compatible universal descent; finite tower comparison isolated in lem-sf-completed-tensor-finite-shift"
  },
  "mathlib_searches": [
   {
@@ -231,7 +195,6 @@
  },
  "tool_uses": [
   "def-pur-integral-derived-operations",
-  "lem-pc-kflat-resolution",
   "def-pc-kflat-complex",
   "def-pc-tensor-complex-sheaves",
   "lem-pur-integral-operations-well-defined"
@@ -271,5 +234,15 @@
   "by": "NN",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0f71b",
+  "group": "J8",
+  "result": "fix",
+  "landing": "20261020T230756-L-611403",
+  "kind": "interface",
+  "note": "independent cc review: delivered files (identical to the earlier 87d0f FIX'd head whose landing was refused for change-record status closed) against the live clone and node lem-sf-completed-tensor-shift-right; delivered and corrected sets compiled, 22 direct importers of CompletedIntegralCoefficients/IntegralDerivedOperations compiled rc=0, #print axioms (sorryAx only from upstream IntegralOperationsWellDefined statements)"
  }
 }

@@ -194,7 +194,7 @@ noncomputable abbrev completedIntegralCoefficientCommRingUnrestricted
 
 /-- The completed coefficient presheaf, retaining its commutative structure.
 Source: Bhatt--Scholze, Section 6.5 (blueprint: def-weil-completed-integral-coefficients). -/
-noncomputable def completedIntegralCommRingPresheafUnrestricted :
+noncomputable abbrev completedIntegralCommRingPresheafUnrestricted :
     (AlgebraicGeometry.Scheme.ProEt Y)ᵒᵖ ⥤ CommRingCat.{max u (t + 1)} where
   obj U := @CommRingCat.of ((completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj U)
     (completedIntegralCoefficientCommRingUnrestricted l E Y U)

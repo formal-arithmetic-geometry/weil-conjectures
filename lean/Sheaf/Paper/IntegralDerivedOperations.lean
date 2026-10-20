@@ -72,6 +72,40 @@ noncomputable def integralDerivedPullbackComparison {X Y : AlgebraicGeometry.Sch
       integralOperationsPullbackOnGood l E f :=
   (integralOperationsWellDefined l E f X).2.2.choose_spec.choose
 
+/-- A completed tensor descent, its model comparison, and its universal property.
+The record keeps the data together so consumers do not unfold nested existence proofs.
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4)
+(blueprint: def-pur-integral-derived-operations). -/
+structure IntegralCompletedTensorDescent (W : AlgebraicGeometry.Scheme.{t}) where
+  functor : (DerivedCategory (integralTowerModules l E W)) ×
+    (DerivedCategory (integralTowerModules l E W)) ⥤
+      DerivedCategory (integralTowerModules l E W)
+  comparison : ((integralOperationsGoodLocalization l E W).prod
+    (integralOperationsGoodLocalization l E W)) ⋙ functor ≅
+      integralOperationsTensorOnGood l E W
+  universal : ∀ (G' : (DerivedCategory (integralTowerModules l E W)) ×
+      (DerivedCategory (integralTowerModules l E W)) ⥤
+        DerivedCategory (integralTowerModules l E W))
+    (d' : ((integralOperationsGoodLocalization l E W).prod
+      (integralOperationsGoodLocalization l E W)) ⋙ G' ≅
+        integralOperationsTensorOnGood l E W),
+    ∃! ι : functor ≅ G', Functor.isoWhiskerLeft
+      ((integralOperationsGoodLocalization l E W).prod
+        (integralOperationsGoodLocalization l E W)) ι ≪≫ d' = comparison
+
+/-- The existing normalized descent, packaged without making a new choice.
+Source: Bhatt--Scholze, Definition 3.4.10 and Lemma 3.4.12(4)
+(blueprint: def-pur-integral-derived-operations). -/
+noncomputable def integralCompletedTensorDescent (W : AlgebraicGeometry.Scheme.{t}) :
+    IntegralCompletedTensorDescent l E W where
+  functor :=
+    (integralOperationsWellDefined l E (𝟙 W) W).2.2.choose_spec.choose_spec.choose
+  comparison :=
+    (integralOperationsWellDefined l E (𝟙 W) W).2.2.choose_spec.choose_spec.choose_spec.choose
+  universal :=
+    (integralOperationsWellDefined l E (𝟙 W) W).2.2.choose_spec.choose_spec
+      |>.choose_spec.choose_spec.2.1
+
 /-- The completed tensor product is the normalized descent of the Roos complex
 of Res_n(P_n ⊗ Q_n), with the direct-sum total tensor differential and the
 pure-tensor reduction transitions specified in IntegralOperationsWellDefined.
@@ -81,7 +115,7 @@ noncomputable def integralCompletedTensor (W : AlgebraicGeometry.Scheme.{t}) :
     (DerivedCategory (integralTowerModules.{t, u} l E W)) ×
       (DerivedCategory (integralTowerModules.{t, u} l E W)) ⥤
         DerivedCategory (integralTowerModules.{t, u} l E W) :=
-  (integralOperationsWellDefined l E (𝟙 W) W).2.2.choose_spec.choose_spec.choose
+  (integralCompletedTensorDescent l E W).functor
 
 /-- The defining natural comparison with the finite-tensor Roos construction on
 pairs of K-flat complexes with flat terms. The descent with this comparison
@@ -92,7 +126,7 @@ noncomputable def integralCompletedTensorComparison (W : AlgebraicGeometry.Schem
     ((integralOperationsGoodLocalization l E W).prod
       (integralOperationsGoodLocalization l E W)) ⋙ integralCompletedTensor l E W ≅
         integralOperationsTensorOnGood l E W :=
-  (integralOperationsWellDefined l E (𝟙 W) W).2.2.choose_spec.choose_spec.choose_spec.choose
+  (integralCompletedTensorDescent l E W).comparison
 
 /-- Integral internal Hom is the ambient derived sheaf Hom over the actual
 completed ring sheaf, computed by a K-injective resolution of its second argument

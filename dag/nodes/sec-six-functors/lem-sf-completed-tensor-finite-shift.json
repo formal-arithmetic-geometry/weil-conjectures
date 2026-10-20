@@ -1,0 +1,141 @@
+{
+ "id": "lem-sf-completed-tensor-finite-shift",
+ "kind": "statement",
+ "title": "Signed right shifts of the strict finite tensor tower",
+ "statement": "Fix a prime l and a finite extension E of Q_l. For any scheme W let B be the completed integral coefficient sheaf, let A_n be the positive finite coefficient sheaves, and let T(P,Q) be the strict tower of restricted direct-sum total tensors of the two ordinary finite reductions, with the quotient transitions specified by [lem-pur-integral-operations-well-defined]. For every integer r there is an isomorphism, natural in both arbitrary B-module cochain complexes P,Q, T(P,Q[r]) ≅ T(P,Q)[r], where shift on the right is applied levelwise to the tower. At finite level n its (i,j)-summand sends the sheafified pure tensor x tensor y to (-1)^(ri) times the corresponding generator in total degree i+(j+r), transported to degree i+j of the shifted complex. This is an isomorphism of strict towers, hence commutes with every quotient transition. The total tensor convention is [def-pc-tensor-complex-sheaves]; the coefficient reductions and restrictions are those of [def-pur-integral-derived-operations]. The ordinary finite reduction tower is [def-weil-integral-reduction-tower].",
+ "stmt_deps": [
+  "def-pur-integral-derived-operations",
+  "def-pc-tensor-complex-sheaves",
+  "lem-pur-integral-operations-well-defined",
+  "def-weil-integral-reduction-tower"
+ ],
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 011G and 012Z; steps 1 and 3 of lem-sf-completed-tensor-shift-right, with sheaf tensor generators as in Tag 03EK"
+ },
+ "proof": [
+  {
+   "text": "Reduction and restriction of scalars are additive functors applied termwise to complexes, so their canonical cochain shift comparisons are identities on the reindexed terms. Between them apply the right total-bifunctor shift isomorphism. On the (i,j)-summand its coefficient is (-1)^(ri); the two differential terms verify the chain-map equation separately, and the inverse has the same signs. The comparison is natural in each complex. For naturality in the first variable, reuse the proved additivity of tensorRight from the independent-coefficient tensor transport module; the quasi-isomorphism theorem of that module is not used.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-integral-derived-operations",
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The tensor transition is uniquely characterized on every sheafified total-tensor generator. Ordinary reduction transitions are termwise, so their components on Q[r] are the components on Q in degree j+r. Integer multiplication commutes with reduction. Consequently conjugating a transition by the finite shift comparisons gives the same generator formula; uniqueness gives the transition square. The comparisons and inverses therefore assemble into an isomorphism of tower-valued functors.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "def-weil-integral-reduction-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the total-bifunctor injection formula to a sheafified pure tensor and then evaluate on an arbitrary object of the site. This is exactly the generator equation of the statement, the body of the predicate integralCompletedTensorFiniteShiftFormula of lem-sf-completed-tensor-shift-right. For zero complexes or the empty site the same equations hold; r=0 gives the identity signs, and the argument uses only integer addition so also covers negative r.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-integral-derived-operations",
+  "lem-pur-integral-operations-well-defined",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-weil-integral-reduction-tower"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "dag/nodes/sec-six-functors/lem-sf-completed-tensor-shift-right.json",
+  "place": "Steps 1 and 3; isolate the finite tower comparison before products, cones and localization"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The finite reduction tensor tower of sheaf cochain complexes commutes with right shifts, with Koszul sign and compatible quotient transitions",
+   "results": "Eight HomComplex shift and unshift identities; no strict coefficient tower comparison.",
+   "date": "2026-10-21",
+   "verdict": "No exact match. The strict quotient transitions still require compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ι_mapBifunctorShift₂Iso_hom_f\"",
+   "results": "CochainComplex.ι_mapBifunctorShift₂Iso_hom_f and its reassociated form, in Mathlib.Algebra.Homology.BifunctorShift.",
+   "date": "2026-10-21",
+   "verdict": "Provides the finite total-tensor summand formula, but not the coefficient transitions."
+  },
+  {
+   "tool": "grep",
+   "query": "unrestrictedIntegralTransition|integralOperationsTensorTransition",
+   "results": "Mathlib search has no hit. Local rg finds the chosen, generator-characterized tensor transition in IntegralOperationsWellDefined and the termwise reduction transition in IntegralReductionTowerUnrestricted.",
+   "date": "2026-10-21",
+   "verdict": "These existing interfaces are sufficient ingredients, but neither states their compatibility with the right tensor shift."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite reduction tensor tower of cochain complexes of sheaves commutes with shifting the second variable, naturally and compatibly with quotient reduction transitions",
+   "results": "Eight hits, including CochainComplex.mapBifunctorShift₂Iso, CategoryTheory.Functor.commShiftIso_map₂CochainComplex_hom_app, CategoryTheory.Functor.commShiftMapCochainComplex and the first-variable NatTrans.CommShift instance, in Mathlib.Algebra.Homology.BifunctorShift and HomotopyCategory.Shift. These are precisely the generic finite comparisons used in the proof; none states compatibility with the specified quotient reduction transitions.",
+   "date": "2026-10-21",
+   "verdict": "No exact match for the strict reduction tower. Generic total-tensor and additive-functor shift comparisons are already used."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CompletedTensorShiftRight",
+  "date": "2026-10-21",
+  "group": "J8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-twist-interchange",
+   "place": "Finite signed comparison and strict transition compatibility, steps 1 and 3",
+   "via": [
+    "lem-sf-completed-tensor-shift-right"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-twist-interchange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.CompletedTensorFiniteShift",
+  "file": "lean/Sheaf/SixFunctors/CompletedTensorFiniteShift.lean",
+  "declaration": "WeilConjectures.integralCompletedTensorFiniteShift",
+  "declarations": [
+   "WeilConjectures.integralCompletedTensorFiniteShift"
+  ],
+  "statement": "theorem integralCompletedTensorFiniteShift (W : AlgebraicGeometry.Scheme.{t}) (r : ℤ) :\n    ∃ β : ((𝟭 (CochainComplex (integralTowerModules l E W) ℤ)).prod\n        (shiftFunctor (CochainComplex (integralTowerModules l E W) ℤ) r)) ⋙\n        integralOperationsTensorTowerFunctor l E W ≅\n      integralOperationsTensorTowerFunctor l E W ⋙\n        (whiskeringRight ℕᵒᵖ (CochainComplex (integralTowerModules l E W) ℤ)\n          (CochainComplex (integralTowerModules l E W) ℤ)).obj\n            (shiftFunctor (CochainComplex (integralTowerModules l E W) ℤ) r),\n      ∀ (P Q : CochainComplex (integralTowerModules l E W) ℤ) (n : ℕ) (i j : ℤ)\n        (U : W.ProEtᵒᵖ)\n        (x : (((unrestrictedIntegralFiniteComplex l E W n).obj P).X i).val.obj U)\n        (y : (((unrestrictedIntegralFiniteComplex l E W n).obj Q).X (j + r)).val.obj U),\n        ((((β.app (P, Q)).hom.app (op n)).f (i + j)).val.app U)\n          (integralOperationsTotalTensorSection l E W n P (Q⟦r⟧) i j U x y) =\n        ((CochainComplex.shiftFunctorObjXIso\n          ((integralOperationsTensorLevel l E W n).obj (P, Q))\n            r (i + j) (i + (j + r)) (by omega)).inv.val.app U)\n          ((r * i).negOnePow •\n            integralOperationsTotalTensorSection l E W n P Q i (j + r) U x y)",
+  "branch": "sheaf-dag",
+  "by": "J8",
+  "date": "2026-10-21"
+ },
+ "merged_into": null,
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0f71b",
+  "group": "J8",
+  "result": "fix",
+  "landing": "20261020T230756-L-611403",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0f71b",
+  "group": "J8",
+  "result": "fix",
+  "landing": "20261020T230756-L-611403",
+  "kind": "interface",
+  "note": "independent cc review: delivered files (identical to the earlier 87d0f FIX'd head whose landing was refused for change-record status closed) against the live clone and node lem-sf-completed-tensor-shift-right; delivered and corrected sets compiled, 22 direct importers of CompletedIntegralCoefficients/IntegralDerivedOperations compiled rc=0, #print axioms (sorryAx only from upstream IntegralOperationsWellDefined statements)"
+ }
+}
