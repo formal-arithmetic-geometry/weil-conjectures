@@ -40,7 +40,7 @@
    "elementary": false
   },
   {
-   "text": "Apply bounded flat epicification to g, using hcover and the bound m for its target. It gives bounded-above flat F-prime, a quasi-isomorphism s:F -> F-prime and a termwise epic g-prime:F-prime -> truncLE(m)G, with s followed by g-prime equals g. Since s and s followed by g-prime are quasi-isomorphisms, two-out-of-three makes g-prime a quasi-isomorphism. Use t followed by s as the new transition. Reassociate the composites, substitute both strict equalities, and use the equality for j to obtain the original assertion. This all-degree disk variant does not use hquasi or hepi of the original augmentation; their hypotheses and the declaration signature are retained unchanged.",
+   "text": "Apply bounded flat epicification to g, using its internal functorial flat covers and the bound m for its target. It gives bounded-above flat F-prime, a quasi-isomorphism s:F -> F-prime and a termwise epic g-prime:F-prime -> truncLE(m)G, with s followed by g-prime equals g. Since s and s followed by g-prime are quasi-isomorphisms, two-out-of-three makes g-prime a quasi-isomorphism. Use t followed by s as the new transition. Reassociate the composites, substitute both strict equalities, and use the equality for j to obtain the original assertion. This all-degree disk variant does not use hquasi or hepi of the original augmentation. The upstream theorem supplies flat covers internally and omits all three redundant hypotheses; the original conditional statement follows by specialization.",
    "uses": [
     "lem-pc-flat-augmentation-epicification"
    ],
@@ -54,10 +54,10 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "V2",
-  "date": "2026-10-12",
+  "group": "W3",
+  "date": "2026-10-20",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; https://stacks.math.columbia.edu/tag/06XX; explicit cone replacement and strict composition, with all-degree identity disks instead of just the two potentially deficient degrees"
+  "place": "Lemma 06XX (derived-lemma-special-direct-system), induction step; specialization to flat module sheaves as in Cohomology on Sites, Lemma 077J; retire the duplicate module in favor of the existing upstream proof, preserving the cone-extension and epicification argument"
  },
  "mathlib_searches": [
   {
@@ -101,14 +101,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.FlatTruncationSuccessor",
-  "file": "lean/Sheaf/Algebra/Homology/FlatTruncationSuccessor.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.FlatTruncationSuccessor",
+  "file": "lean/WeilConjectures/Algebra/Homology/FlatTruncationSuccessor.lean",
   "declaration": "CochainComplex.exists_flat_truncation_successor",
-  "statement": "theorem exists_flat_truncation_successor\n    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}\n    {R : Sheaf J CommRingCat.{u}}\n    (hcover : ∀ M : SheafOfModules.{u}\n      ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R),\n      ∃ (P : SheafOfModules.{u}\n        ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) (p : P ⟶ M),\n        SheafOfModules.IsFlat P ∧ Epi p)\n    (G : CochainComplex\n      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (n : ℕ)\n    (E : CochainComplex\n      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (q : E ⟶ G.truncLE (n : ℤ))\n    (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i))\n    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (E.X i))\n    (hquasi : QuasiIso q) (hepi : ∀ i : ℤ, Epi (q.f i)) :\n    ∃ (E' : CochainComplex\n      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n      (t : E ⟶ E') (q' : E' ⟶ G.truncLE ((n + 1 : ℕ) : ℤ)),\n      (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E'.X i)) ∧\n      (∀ i : ℤ, SheafOfModules.IsFlat (E'.X i)) ∧ QuasiIso q' ∧\n      (∀ i : ℤ, Epi (q'.f i)) ∧\n      t ≫ q' ≫ G.ιTruncLE ((n + 1 : ℕ) : ℤ) = q ≫ G.ιTruncLE (n : ℤ)",
+  "statement": "theorem exists_flat_truncation_successor\n    {C : Type u} [Category.{u} C] {J : GrothendieckTopology C}\n    {R : Sheaf J CommRingCat.{u}}\n    (G : CochainComplex\n      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (n : ℕ)\n    (E : CochainComplex\n      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n    (q : E ⟶ G.truncLE (n : ℤ))\n    (hbounded : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E.X i))\n    (hflat : ∀ i : ℤ, SheafOfModules.IsFlat (E.X i)) :\n    ∃ (E' : CochainComplex\n      (SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj R)) ℤ)\n      (t : E ⟶ E') (q' : E' ⟶ G.truncLE ((n + 1 : ℕ) : ℤ)),\n      (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (E'.X i)) ∧\n      (∀ i : ℤ, SheafOfModules.IsFlat (E'.X i)) ∧ QuasiIso q' ∧\n      (∀ i : ℤ, Epi (q'.f i)) ∧\n      t ≫ q' ≫ G.ιTruncLE ((n + 1 : ℕ) : ℤ) = q ≫ G.ιTruncLE (n : ℤ)",
   "branch": "sheaf-dag",
   "by": "U1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-20 (W3): retired Sheaf twin in favor of the proved upstream theorem. It has exactly the same conclusion without the redundant hcover, hquasi and hepi hypotheses. The conditional node statement specializes this stronger theorem. Its tower consumer already imports and applies the upstream signature."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -121,14 +122,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "V2",
+  "reviewer": "C-b8299",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261012T110323-L-623448",
+  "landing": "20261020T154940-L-3175803",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Withdrawn stub + node lem-pc-flat-truncation-successor (existing:true) matched with upstream WeilConjectures.Algebra.Homology.FlatTruncationSuccessor: verbatim signature, axioms clean, old Sheaf signature follows by direct application; no importers of the Sheaf copy"
  },
  "lean_audit": {
   "master": {
