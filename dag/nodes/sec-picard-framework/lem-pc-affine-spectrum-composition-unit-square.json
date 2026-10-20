@@ -94,13 +94,14 @@
  "unit": "sk-thm-picard-semicon",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.AffineSpectrumCompositionUnitSquare",
-  "file": "lean/Sheaf/AlgebraicGeometry/AffineSpectrumCompositionUnitSquare.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.AffineSpectrumCompositionUnitSquare",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/AffineSpectrumCompositionUnitSquare.lean",
   "declaration": "AlgebraicGeometry.affineSpectrum_composition_unit_square",
   "statement": "theorem affineSpectrum_composition_unit_square\n    {X X' : Scheme.{u}} [IsAffine X] [IsAffine X']\n    (g' : X' ⟶ X) (K : schemeDerivedCategory X) :\n  let c : ∀ {P Q Z : Scheme.{u}} (k : P ⟶ Q) (l : Q ⟶ Z),\n      derivedPullback l ⋙ derivedPullback k ≅ derivedPullback (k ≫ l) :=\n    fun k l ↦ (Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec exists_derivedPullbackComposition)))) k l\n  let i : ∀ Y : Scheme.{u}, derivedPullback (𝟙 Y) ≅ 𝟭 _ :=\n    Classical.choose (Classical.choose_spec (Classical.choose_spec\n      (Classical.choose_spec (Classical.choose_spec exists_derivedPullbackComposition)))).2\n  (affineSpectrumForwardPullbackIso g').hom.app ((derivedPullback X.isoSpec.inv).obj K) ≫\n      (derivedPullback X'.toSpecΓ).map\n        ((affineSpectrumDerivedPullbackIso g').hom.app K) ≫\n      (c X'.isoSpec.hom X'.isoSpec.inv ≪≫\n      eqToIso (congrArg (fun k : X' ⟶ X' ↦ derivedPullback k) X'.isoSpec.hom_inv_id) ≪≫\n      i X').hom.app ((derivedPullback g').obj K) =\n    (derivedPullback g').map\n      ((c X.isoSpec.hom X.isoSpec.inv ≪≫\n      eqToIso (congrArg (fun k : X ⟶ X ↦ derivedPullback k) X.isoSpec.hom_inv_id) ≪≫\n      i X).hom.app K)",
   "branch": "sheaf-dag",
   "by": "K1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "M7 rework: the identical public statement and its complete proof are provided by the upstream module; the former Sheaf path is a compatibility re-export."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -113,14 +114,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-0ba6b",
-  "group": "C3",
+  "reviewer": "C-aafeb",
+  "group": "M7",
   "result": "pass",
-  "landing": "20261013T215557-L-894959",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem signature and selected comparisons with the node; checked coherence proof, node-only proof edits, report, and local attributes. Delivery and sole direct importer compile cleanly; all added declarations use only propext, Classical.choice, and Quot.sound."
+  "landing": "20261020T154938-L-3174869",
+  "kind": "proof",
+  "note": "independent cc review: upstream WeilConjectures affineSpectrum_composition_unit_square statement vs node lean.statement (byte-identical), node diff vs live (only lean.module/file/note), compat module compile + #print axioms (propext, Classical.choice, Quot.sound)"
  },
  "lean_audit": {
   "master": {
