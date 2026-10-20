@@ -1,0 +1,119 @@
+{
+ "id": "lem-pur-ideal-tensor-pullback-comparison",
+ "kind": "statement",
+ "title": "Tensor pullback maps onto the extended ideal",
+ "statement": "For a scheme morphism g:X→Y and an ideal sheaf J on Y, there is a unique module morphism g*(J)→J O_X whose composite with the inclusion is the pulled-back inclusion followed by the canonical structure-module comparison. It is epi, and it is an isomorphism when g is flat. The module pullback and ideal-sheaf notions are those of [def-pc-module-pullback, def-sbc-closed-immersion-ideal-sheaf].",
+ "stmt_deps": [
+  "def-pc-module-pullback",
+  "def-sbc-closed-immersion-ideal-sheaf"
+ ],
+ "source": {
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules Tag 01AJ; Schemes Tag 01JU"
+ },
+ "proof": [
+  {
+   "text": "Apply the ideal-product pullback image theorem to the unit module and transport the image along the structure-module isomorphism. Its image is exactly the extended ideal.",
+   "uses": [
+    "lem-weil-pbc-module-pullback-ideal-product-image",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Factor through the image. This factor is epi, and the monic ideal inclusion makes it unique. Under flat pullback the original inclusion remains mono, hence the factor is both mono and epi and therefore an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-module-pullback-ideal-product-image",
+  "lem-weil-pbc-module-pullback-structure-sheaf",
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/modules.tex",
+  "place": "Modules Tag 01AJ; Schemes Tag 01JU; categorical or affine expansion written by F8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pullback of an ideal sheaf maps surjectively onto its extended ideal, and is an isomorphism under a flat morphism",
+   "results": "Found IdealSheafData.comapIso and subschemeι_app_surjective, but no module-map comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.induction_on",
+   "results": "Mathlib.Algebra.DirectSum.Basic: DirectSum.induction_on reduces to zero, homogeneous inclusions and addition.",
+   "date": "2026-10-21",
+   "verdict": "Useful component, not the conormal presentation result."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|associatedGraded",
+   "results": "Only cotangent references in Mathlib/RingTheory/Extension/Cotangent/Basic.lean. No conormal graded sheaf map theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The pullback of an ideal sheaf maps onto its extended ideal, and is isomorphic to it for flat pullback",
+   "results": "AlgebraicGeometry.Scheme.Modules.pullback (Mathlib.AlgebraicGeometry.Modules.Sheaf), SheafOfModules.pullbackObjFreeIso (Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree), and faithfully-flat ideal comap lemmas; no exact module-to-extended-ideal comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match: related definitions and generic operations only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConormalAlgebraFlatBaseChange",
+  "date": "2026-10-21",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-conormal-algebra-flat-base-change",
+   "place": "Proof: Tensor pullback maps onto the extended ideal",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.IdealTensorPullbackComparison",
+  "file": "lean/Sheaf/AlgebraicGeometry/IdealTensorPullbackComparison.lean",
+  "declaration": "AlgebraicGeometry.existsUnique_idealTensorPullbackComparison",
+  "statement": "theorem existsUnique_idealTensorPullbackComparison {X Y : Scheme.{u}} (g : X ⟶ Y)\n    (J : Y.IdealSheafData) :\n    ∃! d : (Scheme.Modules.tensorPullback g).obj J.toModules ⟶ (J.comap g).toModules,\n      d ≫ (J.comap g).toModulesι =\n        (Scheme.Modules.tensorPullback g).map J.toModulesι ≫\n          Scheme.Modules.tensorPullbackObjUnitToUnit g ∧\n      Epi d ∧ (Flat g → IsIso d)",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261020T211711-L-3490244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261020T211711-L-3490244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

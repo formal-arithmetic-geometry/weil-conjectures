@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-conormal-algebra-homogeneous-ring-map",
+ "kind": "statement",
+ "title": "Ring laws from homogeneous conormal representatives",
+ "statement": "For conormal presentations A,A′ of closed immersions [lem-pur-conormal-graded-algebra], ambient affine opens U,U′, a ring homomorphism φ:O(U′)→O(U), and an additive map F:A′(i′⁻¹U′)→A(i⁻¹U), suppose every homogeneous ideal-power representative a is mapped to a homogeneous representative b with inclusion(b)=φ(inclusion(a)). Then F preserves one and multiplication.",
+ "stmt_deps": [
+  "lem-pur-conormal-graded-algebra"
+ ],
+ "source": {
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Divisors Tag 0634"
+ },
+ "proof": [
+  {
+   "text": "The degree-zero class of one is one by the constants formula. Its image representative has inclusion one, so its class is one as well.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For two homogeneous classes, lift the product of their included ideal-power sections to the corresponding power module using affine ideal sections. The representative formula and multiplication fields of the two presentations show F preserves their product. Extend additively in both variables by affine homogeneous induction.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-pur-conormal-algebra-affine-generators"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-conormal-graded-algebra",
+  "lem-pur-conormal-algebra-affine-generators"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Divisors Tag 0634; categorical or affine expansion written by F8."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A pullback of an ideal sheaf maps surjectively onto its extended ideal, and is an isomorphism under a flat morphism",
+   "results": "Found IdealSheafData.comapIso and subschemeι_app_surjective, but no module-map comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "DirectSum.induction_on",
+   "results": "Mathlib.Algebra.DirectSum.Basic: DirectSum.induction_on reduces to zero, homogeneous inclusions and addition.",
+   "date": "2026-10-21",
+   "verdict": "Useful component, not the conormal presentation result."
+  },
+  {
+   "tool": "grep",
+   "query": "conormal|associatedGraded",
+   "results": "Only cotangent references in Mathlib/RingTheory/Extension/Cotangent/Basic.lean. No conormal graded sheaf map theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An additive map of associated graded ideal algebras preserving all ideal power representative classes preserves one and multiplication",
+   "results": "DirectSum.gMulLHom and DirectSum.GAlgebra.map_mul (Mathlib.Algebra.DirectSum.Algebra), GradedTensorProduct.mulHom (Mathlib.LinearAlgebra.TensorProduct.Graded.Internal); no exact criterion for conormal presentation maps.",
+   "date": "2026-10-21",
+   "verdict": "no match: related definitions and generic operations only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.ConormalAlgebraFlatBaseChange",
+  "date": "2026-10-21",
+  "group": "F8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-conormal-algebra-flat-base-change",
+   "place": "Proof: Ring laws from homogeneous conormal representatives",
+   "via": []
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-orientation",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.ConormalAlgebraHomogeneousRingMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/ConormalAlgebraHomogeneousRingMap.lean",
+  "declaration": "AlgebraicGeometry.ConormalGradedAlgebra.homogeneous_preserves_ringOperations",
+  "statement": "theorem homogeneous_preserves_ringOperations {X Z X' Z' : Scheme.{u}}\n    (i : Z ⟶ X) (i' : Z' ⟶ X') [IsClosedImmersion i] [IsClosedImmersion i']\n    (A : Presentation i) (A' : Presentation i') (U : X.affineOpens) (U' : X'.affineOpens)\n    (φ : Γ(X', U'.1) →+* Γ(X, U.1))\n    (F : A'.algebra.right.obj.obj (op (i' ⁻¹ᵁ U'.1)) →+\n      A.algebra.right.obj.obj (op (i ⁻¹ᵁ U.1)))\n    (hF : ∀ (n : ℕ) (a : (power i' n).val.obj (op U'.1)),\n      ∃ b : (power i n).val.obj (op U.1),\n        (powerInclusion i n).app U.1 b = φ ((powerInclusion i' n).app U'.1 a) ∧\n        F (homogeneousClass i' A'.algebra A'.inclusion n U'.1 a) =\n          homogeneousClass i A.algebra A.inclusion n U.1 b) :\n    F 1 = 1 ∧ ∀ a b, F (a * b) = F a * F b",
+  "branch": "sheaf-dag",
+  "by": "F8",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261020T211711-L-3490244",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261020T211711-L-3490244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -26,142 +26,88 @@
  ],
  "proof": [
   {
-   "text": "Compatible affine charts cover. For $x\\in X$ and any neighbourhood $H$ of $x$, choose an affine $U'\\subseteq X'$ containing $g(x)$ and then an affine $U\\subseteq H\\cap g^{-1}U'$ containing $x$. Since $i$ is a closed immersion, its inverse images $W=i^{-1}U$ form an affine basis of $Z$, with $W=\\operatorname{Spec}(R/I)$ and $W'=i'^{-1}U'=\\operatorname{Spec}(R'/I')$ by [lem-pur-conormal-graded-algebra]. The Cartesian hypothesis and [lem-pc-closed-subscheme-base-change-ideal-image] identify $\\mathcal I$ with the image of $g^*\\mathcal I'\\to\\mathcal O_X$. Clause (1) of [lem-weil-pbc-module-pullback-ideal-quotient] therefore gives $I=I'R$ on these charts. No affineness of intersections or Noetherian hypothesis is used.",
+   "text": "The Cartesian square gives ker(i)=comap(g,ker(i′)) by the kernel formula for a closed-immersion pullback. The affine comap formula gives the asserted ideal equality on every compatible affine pair.",
    "uses": [
-    "lem-pur-conormal-graded-algebra",
-    "lem-pc-closed-subscheme-base-change-ideal-image",
-    "lem-weil-pbc-module-pullback-ideal-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "0634–0635: compatible affine neighbourhoods and the ideal of a Cartesian closed immersion; Schemes 01JU"
-   }
-  },
-  {
-   "text": "Fix a compatible pair and write $A=R'$, $B=R$, $J=I'$, $K=I=JB$, and $\\phi=g^\\sharp:A\\to B$. The graded pieces on $W'$ and $W$ are the modules $M_n=J^n/J^{n+1}$ and $N_n=K^n/K^{n+1}$ by [lem-pur-conormal-graded-algebra]. Pullback preserves quasi-coherence by [lem-weil-pbc-module-pullback-quasi-coherent]. Apply [lem-weil-pbc-module-pullback-affine-sections] to $f|_W:W\\to W'$: the source degree-$n$ sections are $M_n\\otimes_{A/J}(B/K)$. They are canonically $M_n\\otimes_A B$: the map $m\\otimes b\\mapsto m\\otimes\\bar b$ has inverse $m\\otimes\\bar b\\mapsto m\\otimes b$. A change of lift by $\\sum\\phi(j_l)b_l\\in K$ gives $\\sum j_lm\\otimes b_l=0$, since $JM_n=0$; tensor balancing verifies the two inverses. This fixes the source identification and its normalization on pulled-back sections.",
-   "uses": [
-    "lem-pur-conormal-graded-algebra",
-    "lem-weil-pbc-module-pullback-quasi-coherent",
-    "lem-weil-pbc-module-pullback-affine-sections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "0634: affine formula for the pulled-back graded pieces; Schemes 01I9"
-   }
-  },
-  {
-   "text": "Define $c_n$ on each such chart by $[a]\\otimes b\\mapsto[\\phi(a)b]$. The identity $K^n=J^nB$ follows by expanding products of generators of $K=JB$; conversely $\\phi(a_1\\cdots a_n)b$ is a product of $n$ elements of $K$ times $b$. For $n=0$ both ideals are the whole ring. Thus the formula lands in $N_n$. Changing $a$ by $u\\in J^{n+1}$ changes its value by $\\phi(u)b\\in K^{n+1}$, and $\\phi(ra)b=\\phi(a)\\phi(r)b$ proves balancing over $A$. Additivity in $a,b$ gives a well-defined $B/K$-linear map on the tensor quotient. These verifications are direct computations with ideals and tensor products.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "0634–0635: explicit affine map and its well-definedness"
-   }
-  },
-  {
-   "text": "Convert each linear map in step 3 into a morphism of quasi-coherent sheaves on $W$ by the affine tilde adjunction [lem-weil-pbc-affine-tilde-gamma-adjunction], using the quasi-coherence and identifications of step 2. These local sheaf maps agree on overlaps. Here is the restriction check: on a principal target refinement, a quotient section has the form $[a]/s^r$ by [lem-weil-pbc-spec-module-tilde-sections]. On a source refinement where $\\phi(s)$ is invertible, its pullback times $b$ is sent by either recipe to $[\\phi(a)b]/\\phi(s)^r$. Source restriction applies the ring restriction to $b$ and to $\\phi(a)$, which commutes with $g^\\sharp$ and with taking quotient classes. Principal opens form a basis on each affine target. For two target charts, refine their intersection by affine opens, and within each original chart by principal opens; refine their inverse images by affine source opens. On these refinements the displayed fraction calculation proves equality on the pulled-back local generators, which generate the tensor pullback by [def-pc-module-pullback]. It proves equality of the two sheaf maps on an open cover of each overlap, without assuming the overlap affine. Apply [lem-pur-sheaf-hom-cover-gluing] in each degree to obtain $c_n:f^*\\mathcal G'_n\\to\\mathcal G_n$. The same argument shows that it satisfies step 3 on every compatible affine pair, not only a selected cover.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-weil-pbc-spec-module-tilde-sections",
-    "def-pc-module-pullback",
-    "lem-pur-sheaf-hom-cover-gluing"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "0634: construction from the affine formula, expanding its omitted restriction and gluing check"
-   }
-  },
-  {
-   "text": "The maps $c_n$ preserve multiplication and unit. On local tensor representatives, using the multiplication specified in [lem-pur-conormal-graded-algebra], both $c_{m+n}(([a]\\otimes b)([a']\\otimes b'))$ and $c_m([a]\\otimes b)c_n([a']\\otimes b')$ equal $[\\phi(aa')bb']$. The degree-zero unit goes to $[1]$. Bilinearity extends these equalities to sums of pure tensors; they then hold as sheaf identities since pure tensors locally generate the tensor sheaf [def-pc-module-pullback]. The definition [def-weil-pbc-graded-sheaf-structures] extends the homogeneous maps to the direct-sum sheaves and gives a graded algebra morphism $c$. Pullback commutes with this direct sum because it is a left adjoint [def-pc-module-pullback]: maps from the pullback of the sum to any module are, by adjunction and the coproduct property, families of maps from the pullbacks of its summands. This identifies its homogeneous pieces with those used above. Finally, two graded morphisms satisfying the required affine formula agree degreewise on this cover, so the uniqueness in [lem-pur-sheaf-hom-cover-gluing] proves uniqueness of $c$.",
-   "uses": [
-    "lem-pur-conormal-graded-algebra",
-    "def-pc-module-pullback",
-    "def-weil-pbc-graded-sheaf-structures",
-    "lem-pur-sheaf-hom-cover-gluing"
+    "lem-pur-conormal-graded-algebra"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "0634: graded algebra laws and characterization by affine formula"
+    "place": "Tags 0634–0635; categorical proof using ideal powers before taking conormal quotients."
    }
   },
   {
-   "text": "In degree zero the formula is $(A/J)\\otimes_A B\\to B/K$, $[a]\\otimes b\\mapsto[\\phi(a)b]$. Under the isomorphism $f^*\\mathcal O_{Z'}\\simeq\\mathcal O_Z$ of [lem-weil-pbc-module-pullback-structure-sheaf] this is the identity: $1\\otimes\\bar b$ maps to $\\bar b$. In degree one, [lem-pur-conormal-graded-algebra] identifies the pieces with the conormal sheaves, and the characterization in [lem-weil-pbc-closed-immersion-conormal-functorial] gives the same formula on every $[a]\\otimes b$. Local generation and uniqueness from step 4 therefore identify $c_1$ with that canonical conormal map.",
+   "text": "Apply the canonical ideal tensor-pullback comparison to every power of ker(i′), using comap of powers and the presentation power-identification isomorphisms. This gives γ_n:g*(I′^n)→I^n, epi for any g and an isomorphism for flat g.",
+   "uses": [
+    "lem-pur-ideal-tensor-pullback-comparison",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0634–0635; categorical proof using ideal powers before taking conormal quotients."
+   }
+  },
+  {
+   "text": "Identify f*i′* with i*g* by uniqueness of left adjoints to the common pushforward. Applying i* to γ_n produces homogeneous comparisons d_n. Their adjoint formulas follow from the adjunction units, and naturality gives the stated affine formula including arbitrary scalar factors. Left adjoints preserve epis; functors preserve isomorphisms.",
+   "uses": [
+    "lem-pur-conormal-graded-algebra",
+    "lem-weil-pbc-module-pullback-structure-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0634–0635; categorical proof using ideal powers before taking conormal quotients."
+   }
+  },
+  {
+   "text": "Use the coproduct universal properties and preservation of coproducts by f* to assemble d_n into c. The affine homogeneous representative formulas imply that its module adjoint preserves products and one: apply the affine homogeneous ring-map lemma and check the laws on a compatible affine cover. Its module linearity proves compatibility with structure-sheaf scalars, giving the ring-sheaf adjoint ρ.",
+   "uses": [
+    "lem-pur-conormal-algebra-ring-adjoint",
+    "lem-pur-conormal-graded-algebra"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tags 0634–0635; categorical proof using ideal powers before taking conormal quotients."
+   }
+  },
+  {
+   "text": "In degree zero the power comparison is the structure-module comparison; the two composed adjunctions and the commutative square identify its normalization. In degree one the existing canonical conormal map has exactly the same representative formula. Monicity of the ideal-power inclusion and affine sheaf locality give uniqueness of every d_n from that formula. Coproduct uniqueness then gives uniqueness of c.",
    "uses": [
     "lem-weil-pbc-module-pullback-structure-sheaf",
-    "lem-pur-conormal-graded-algebra",
-    "lem-weil-pbc-closed-immersion-conormal-functorial"
+    "lem-weil-pbc-closed-immersion-conormal-functorial",
+    "lem-pur-conormal-graded-algebra"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "0634 and 0630–0633: degree-zero and degree-one normalizations; Morphisms 01R4"
+    "place": "Tags 0634–0635; categorical proof using ideal powers before taking conormal quotients."
    }
   },
   {
-   "text": "Each $c_n$ is surjective on sections over every compatible affine $W$. Indeed, since $K^n=J^nB$, write a representative of a class in $N_n$ as $\\sum_l\\phi(a_l)b_l$ with $a_l\\in J^n$; its preimage is $\\sum_l[a_l]\\otimes b_l$. This includes $n=0$. For an arbitrary section of $\\mathcal G$ near a point, the direct-sum sheaf convention [def-weil-pbc-graded-sheaf-structures] expresses it locally as a finite sum of homogeneous sections. Refine further to a compatible affine $W$ and lift those finitely many homogeneous sections by the preceding formula. Thus every section locally lifts, proving that $c$ is surjective as a sheaf morphism (equivalently on all stalks by [lem-weil-pbc-locally-surjective-iff-stalks]). This does not assert surjectivity on sections over every non-affine open.",
+   "text": "If all d_n are epi, cancellation on each summand and the target coproduct property show c is epi. If g is flat, assemble the inverses of d_n through the target coproduct; both composites are identities by the coproduct hom-extensionality principle. Uniqueness transfers these properties to every base-change map.",
    "uses": [
-    "def-weil-pbc-graded-sheaf-structures",
-    "lem-weil-pbc-locally-surjective-iff-stalks"
+    "lem-pur-conormal-graded-algebra"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/divisors.tex",
-    "place": "0635: surjectivity, with the affine ideal-generator argument and sheaf locality"
-   }
-  },
-  {
-   "text": "Now suppose $g$ is flat. By [lem-weil-pbc-flat-morphism-affine-criterion], $B$ is flat as an $A$-module on every compatible affine pair. For each $n$, the inclusion $j_n:J^n/J^{n+1}\\hookrightarrow A/J^{n+1}$ is injective: its kernel consists of classes represented by elements of $J^{n+1}$. Apply [lem-weil-pbc-flat-tensor-exact] to this injection; hence $j_n\\otimes_A B$ is injective. Apply [lem-weil-pbc-tensor-quotient-base-change] to the ideal $J^{n+1}$ and use $J^{n+1}B=K^{n+1}$ from step 3 to identify its target with $B/K^{n+1}$. The resulting injective map sends $[a]\\otimes b$ to $[\\phi(a)b]\\in B/K^{n+1}$. It factors as $c_n$ followed by the inclusion $K^n/K^{n+1}\\hookrightarrow B/K^{n+1}$. Therefore $c_n$ is injective. Combined with step 7 it is bijective for every $n$, including $n=0$. This proves the all-degrees assertion using flatness, not by extrapolating the degree-one conormal theorem.",
-   "uses": [
-    "lem-weil-pbc-flat-morphism-affine-criterion",
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-weil-pbc-tensor-quotient-base-change"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "0635: flat affine calculation; Algebra 00HD and tensor-quotient comparison"
-   }
-  },
-  {
-   "text": "By the affine tilde equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction], the bijective chart maps of step 8 induce isomorphisms on each $W$. Their inverses agree on overlaps: both invert the same restricted $c_n$, and the inverse of a fixed map is unique. The gluing theorem [lem-pur-sheaf-hom-cover-gluing] gives a global inverse for every $c_n$. Extend these inverses to the graded direct sums using [def-weil-pbc-graded-sheaf-structures]. They respect multiplication and unit because applying the injective $c$ reduces each required equality to the multiplication and unit equalities of step 5. Hence the inverse is a graded algebra morphism, proving that $c$ is an isomorphism of graded $\\mathcal O_Z$-algebras.",
-   "uses": [
-    "lem-weil-pbc-affine-tilde-gamma-adjunction",
-    "lem-pur-sheaf-hom-cover-gluing",
-    "def-weil-pbc-graded-sheaf-structures"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/divisors.tex",
-    "place": "0635: passage from affine isomorphisms to a graded algebra sheaf isomorphism"
+    "place": "Tags 0634–0635; categorical proof using ideal powers before taking conormal quotients."
    }
   }
  ],
  "proof_deps": [
   "lem-pur-conormal-graded-algebra",
-  "lem-pc-closed-subscheme-base-change-ideal-image",
-  "lem-weil-pbc-module-pullback-ideal-quotient",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "def-pc-module-pullback",
-  "lem-pur-sheaf-hom-cover-gluing",
-  "def-weil-pbc-graded-sheaf-structures",
+  "lem-pur-ideal-tensor-pullback-comparison",
   "lem-weil-pbc-module-pullback-structure-sheaf",
-  "lem-weil-pbc-closed-immersion-conormal-functorial",
-  "lem-weil-pbc-locally-surjective-iff-stalks",
-  "lem-weil-pbc-flat-morphism-affine-criterion",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-weil-pbc-tensor-quotient-base-change"
+  "lem-pur-conormal-algebra-ring-adjoint",
+  "lem-weil-pbc-closed-immersion-conormal-functorial"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/divisors.tex",
-  "place": "Tags 0634 (lemma-conormal-algebra-functorial) and 0635 (lemma-conormal-algebra-functorial-flat), expanding the affine restriction checks and the flat injectivity argument using 00HD and tensor-quotient base change."
+  "place": "Tags 0634–0635. F8 uses the shorter ideal-power pullback construction and left-adjoint comparison, then the presentation coproduct, in place of affine quotient tensor calculations and explicit gluing."
  },
  "mathlib_searches": [
   {
@@ -286,13 +232,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-closed-subscheme-base-change-ideal-image",
-  "lem-weil-pbc-module-pullback-ideal-quotient",
-  "lem-weil-pbc-module-pullback-quasi-coherent",
-  "lem-weil-pbc-module-pullback-affine-sections",
-  "lem-weil-pbc-affine-tilde-gamma-adjunction",
-  "lem-weil-pbc-spec-module-tilde-sections",
-  "lem-pur-sheaf-hom-cover-gluing",
   "lem-weil-pbc-module-pullback-structure-sheaf",
   "lem-weil-pbc-closed-immersion-conormal-functorial"
  ],
@@ -326,5 +265,15 @@
   "group": "Q131",
   "result": "pass",
   "note": "Checked node, dependencies, Stacks Tags 0634–0635, Lean declarations, docstrings, edge cases, and compiler evidence; no findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F8",
+  "result": "pass",
+  "landing": "20261020T211711-L-3490244",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
