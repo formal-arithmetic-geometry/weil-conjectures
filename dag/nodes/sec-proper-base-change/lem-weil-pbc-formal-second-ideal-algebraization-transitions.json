@@ -112,14 +112,15 @@
   }
  },
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.FormalSecondIdealAlgebraizationTransitions",
-  "file": "lean/Sheaf/AlgebraicGeometry/FormalSecondIdealAlgebraizationTransitions.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.FormalSecondIdealAlgebraizationTransitions",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/FormalSecondIdealAlgebraizationTransitions.lean",
   "declaration": "AlgebraicGeometry.formalSecondIdealAlgebraization_transitions",
   "statement": "theorem formalSecondIdealAlgebraization_transitions {X : Scheme.{u}} [IsNoetherian X] (I K : X.IdealSheafData) (M : CoherentFormalModule X I) (hthick : ∀ (e : ℕ), 1 ≤ e → ∀ (hZ : IsNoetherian (K ^ e).subscheme), Functor.IsEquivalence (@completion ((K ^ e).subscheme) hZ (I.comap (K ^ e).subschemeι))) (G : ∀ e : ℕ, CoherentModules (K ^ (e + 1)).subscheme) (β : ∀ e : ℕ, formalCompletionSystem I ((Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj) ≅ (M.obj ⋙ formalCompletionFunctor K).flip.obj (op e)) : ∀ e : ℕ, IsZero (Scheme.idealModuleProduct (Scheme.idealSheafPower K.toModulesι (e + 1)).2 ((Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj)) ∧ ∃ t : (Scheme.Modules.pushforward (K ^ (e + 2)).subschemeι).obj (G (e + 1)).obj ⟶ (Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj, (∃ q : formalModuleQuotient K (e + 1) ((Scheme.Modules.pushforward (K ^ (e + 2)).subschemeι).obj (G (e + 1)).obj) ≅ (Scheme.Modules.pushforward (K ^ (e + 1)).subschemeι).obj (G e).obj, formalModuleQuotientπ K (e + 1) _ ≫ q.hom = t) ∧ formalCompletionMap I t ≫ (β e).hom = (β (e + 1)).hom ≫ (M.obj ⋙ formalCompletionFunctor K).flip.map (homOfLE (Nat.le_succ e)).op",
   "branch": "sheaf-dag",
-  "by": "W4",
-  "date": "2026-10-13"
+  "by": "E8",
+  "date": "2026-10-20",
+  "note": "Retired the quarantined Sheaf copy in favor of the official upstream twin. The public transition theorem has the same signature; its sole consumer does not use the old private powerSupported_iff helper."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -132,13 +133,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "C-00702",
+  "group": "E8",
   "result": "pass",
-  "landing": "20261017T003414-L-3312510",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T153001-L-2858680",
+  "kind": "interface",
+  "note": "independent cc review: twin WeilConjectures formalSecondIdealAlgebraization_transitions signature = quarantined Sheaf copy (normalized); restored LiftData = quarantine text + one import swap; node diff = lean field only; compile --all exit 0, axioms clean"
  }
 }
