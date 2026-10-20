@@ -16,131 +16,83 @@
  ],
  "proof": [
   {
-   "text": "Let $I$ be the set of finite intermediate fields of $L/K$, ordered by inclusion, with $K$ as its least element. Use the finite-subextension filtered-colimit presentation of [lem-kun-algebraic-separable-smooth]: the stages are the finite separable subextensions inside $L$. Thus $I$ is nonempty and directed and the inclusions give $L=\\varinjlim_{E\\in I}E$. The indexing collection is a set, being a subset of the power set of the underlying set of $L$; no large category is involved.",
+   "text": "Use the existing proved FiniteIntermediateField construction and isLimitSpecCone in WeilConjectures.AlgebraicGeometry.IntermediateFieldLimit. The indices are exactly the finite-dimensional intermediate fields, with bottom and compositum supplying nonemptiness and directedness. Algebra.IsSeparable supplies algebraicity. Its explicit ring colimit, followed by preservation of limits by Spec, identifies Spec L with the limit of their spectra.",
    "uses": [
-    "lem-kun-algebraic-separable-smooth"
+    "lem-weil-pbc-spec-small-colimit-limit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-algebraic-separable-smooth.md",
-    "place": "Statement and proof: finite separable subextensions and their filtered union"
-   }
+   "elementary": true
   },
   {
-   "text": "For $E\\in I$, [lem-pod-separated-finite-type-base-change] makes $X_E$ separated and of finite type over $E$; [lem-weil-pbc-qcqs-over-affine] then makes $X_E$ quasi-compact and quasi-separated. The same assertions hold for $X_L$. For $E\\subseteq E'$, the map $\\operatorname{Spec}E'\\to\\operatorname{Spec}E$ is affine: the target spectrum of a field has only the empty open and the whole space, and their inverse images are affine. Its base change $X_{E'}\\to X_E$ is affine by [lem-weil-pbc-affine-morphism-permanence].",
+   "text": "Define fieldDiagram with object X_E and transition fieldExtensionBaseMap of the inclusion, and fieldCone with vertex X_L and the specified projections. Check diagram and cone equations on both pullback projections. The transitions are pullbacks of the corresponding affine spectrum maps, so are affine. Base change of the separated quasi-compact structure map to an affine field spectrum makes each stage quasi-compact and quasi-separated.",
    "uses": [
+    "def-pc-fibre-product",
     "lem-pod-separated-finite-type-base-change",
     "lem-weil-pbc-qcqs-over-affine",
     "lem-weil-pbc-affine-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tags 01T4 (lemma-base-change-finite-type), 01SD (lemma-base-change-affine); schemes.tex Tag 01KU (lemma-separated-permanence) and Tag 01K4"
-   }
+   "elementary": false
   },
   {
-   "text": "By [lem-weil-pbc-spec-small-colimit-limit], the inclusions $E\\to L$ exhibit $\\operatorname{Spec}L=\\varprojlim_E\\operatorname{Spec}E$. We check directly that $X_L$ with its canonical projections is the limit of the $X_E$. A compatible family $T\\to X_E$ has one common component $T\\to X_0$ (use the least stage $E=K$) and a compatible family $T\\to\\operatorname{Spec}E$, hence a unique component $T\\to\\operatorname{Spec}L$. The two components agree over $\\operatorname{Spec}K$. The universal property of [def-pc-fibre-product] gives exactly one $T\\to X_L$ inducing the family. This proves the required limiting-cone assertion, including its specified projections.",
+   "text": "Apply Mathlib isLimitOfIsPullbackOfIsConnected to the natural transformation from fieldDiagram to the spectrum diagram given by the second pullback projections. The finite-field indexing category is connected because it is cofiltered (IsCofiltered.isConnected). The cone morphism is the second projection from X_L to Spec L; its compatibility follows from fieldMap_snd. At each index the induced square is cartesian by isPullback_pullback_map. The already proved isLimitSpecCone therefore makes fieldCone limiting, with exactly the prescribed vertex and projections.",
    "uses": [
-    "lem-weil-pbc-spec-small-colimit-limit",
-    "def-pc-fibre-product"
+    "def-pc-fibre-product",
+    "lem-weil-pbc-spec-small-colimit-limit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01YW, lemma-directed-inverse-system-affine-schemes-has-limit; Tag 01YZ, lemma-scheme-over-limit: verification by the fibre-product universal property"
-   }
+   "elementary": true
   },
   {
-   "text": "Every finite etale cover $R\\to Y$ used here, with $Y=X_E$ or $X_L$, is locally of finite presentation by [def-weil-etale-morphism]. Since it is also finite, [lem-trf-finite-morphism-finite-presentation] makes it of finite presentation. In particular the spreading-out theorem applies both to the cover $P\\to X_L$ in (1) and to the two covers $P_E,Q_E\\to X_E$ in (2) and (3).",
+   "text": "Finite etale covers have local finite presentation, quasi-compactness and quasi-separatedness by the Mathlib instances for etale and finite morphisms. Apply Scheme.exists_isPullback_of_finitePresentation to a cover P, obtaining a finitely presented model p:Y to X_E. Its source is qcqs by the morphism-permanence lemmas. Transport finiteness and etaleness of P to the limit pullback of p through the cartesian-square isomorphism.",
    "uses": [
     "def-weil-etale-morphism",
-    "lem-trf-finite-morphism-finite-presentation"
+    "lem-weil-pbc-qcqs-morphism-permanence",
+    "thm-pd-spreading-out"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/morphisms.tex",
-    "place": "Tag 02GI, definition-etale; Tag 01S7, lemma-affine-separated; Tag 01TP, definition-finite-presentation"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the object clause of [thm-pd-spreading-out] to $P\\to X_L$ and the system of steps 1--3. It gives $E_0\\in I$, a finite-presentation morphism $p_0:R_0\\to X_{E_0}$ and an isomorphism $R_0\\times_{X_{E_0}}X_L\\cong P$ over $X_L$. The source $R_0$ is quasi-compact and quasi-separated by part (2) of [lem-weil-pbc-qcqs-morphism-permanence], since $p_0$ is quasi-compact and quasi-separated and $X_{E_0}$ is qcqs. These are the absolute qcqs hypotheses required by the property-descent lemmas, not an assertion that $R_0$ is already finite or etale.",
-   "uses": [
-    "thm-pd-spreading-out",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01ZM, lemma-descend-finite-presentation (1), followed by Situation 081D, situation-descent-property"
-   }
-  },
-  {
-   "text": "Restrict the directed system to $E\\supseteq E_0$, still with limit $X_L$: the universal-property argument of step 3 works on this tail because every element of $L$ is in a finite subextension containing $E_0$. Apply [lem-weil-pbc-descend-finite] with base system $S_E=X_E$, source $R_0$, target $X_{E_0}$ and morphism $p_0$. Its limit morphism is isomorphic to the finite morphism $P\\to X_L$. The stage morphism is locally of finite type, since it is locally of finite presentation (a finitely presented algebra has finitely many generators). Hence some $E_1\\supseteq E_0$ makes $p_1:R_1=R_0\\times_{X_{E_0}}X_{E_1}\\to X_{E_1}$ finite. Its finite presentation persists by part (3) of [lem-weil-pbc-qcqs-morphism-permanence], and its source is qcqs by part (2).",
+   "text": "Regard p as a morphism from Over.mk p to the identity object over X_E. Its pullback map is p base changed, followed by the inverse of the canonical identity-pullback isomorphism; cancelling that isomorphism identifies the finite and etale predicates. Apply exists_isFinite_baseChange_stage and Etale.exists_stage_of_inverseLimit independently. Choose a common upper bound of their two finite intermediate fields; finiteness and etaleness persist there by base change. Package this base-changed model as a finite etale cover. Pullback pasting and the original model comparison give its isomorphism with P over X_L. This proves clause (1).",
    "uses": [
     "lem-weil-pbc-descend-finite",
-    "lem-weil-pbc-qcqs-morphism-permanence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01ZO, lemma-descend-finite-finite-presentation, in Situation 081D; morphisms.tex Tag 01TS, lemma-base-change-finite-presentation"
-   }
-  },
-  {
-   "text": "On the tail $E\\supseteq E_1$, apply [lem-weil-pbc-descend-etale] to $p_1$: the stage base, source and target are qcqs, the stage morphism is locally of finite presentation, and its limit morphism is $P\\to X_L$, which is etale. It gives $E_2\\supseteq E_1$ for which $p_2:R_2=R_1\\times_{X_{E_1}}X_{E_2}\\to X_{E_2}$ is etale. It remains finite by [lem-weil-pbc-finite-morphism-permanence] (a), applied to $p_1$. Consequently $P_{E_2}=R_2$ is a finite etale cover. The successive fibre-product universal properties identify its pullback to $X_L$ with $R_0\\times_{X_{E_0}}X_L$, and the isomorphism of step 5 identifies this with $P$. This proves (1).",
-   "uses": [
     "lem-weil-pbc-descend-etale",
-    "lem-weil-pbc-finite-morphism-permanence"
+    "lem-weil-pbc-finite-morphism-permanence",
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 07RP, lemma-descend-etale, in Situation 081D; morphisms.tex Tag 01WL, lemma-base-change-finite"
-   }
+   "elementary": false
   },
   {
-   "text": "For (2), apply the morphism clause of [thm-pd-spreading-out] at the specified index $E$, with $V_E=P_E$, $W_E=Q_E$ and $\\psi=f$. These two schemes are of finite presentation over $X_E$ by step 4. We obtain $E'\\supseteq E$ in $I$ and an $X_{E'}$-morphism between their pullbacks whose pullback to $X_L$ is $f$. The associativity identifications here are the unique ones preserving both fibre-product projections, so the domain and codomain are exactly the two covers specified in (2).",
+   "text": "For clause (2), compose the given cover morphism with the first projection to Q and apply Scheme.exists_pullback_hom_of_isLimit. Lift the resulting stage morphism and its structure map into the pullback of Q. Use the cartesian-square pasting isomorphisms for the two covers, with their first-projection equations. A private general pullback naturality lemma proves the comparison equation by cancelling the domain isomorphism and checking both projections: the first is the equation supplied by spreading out, and the second is the structure-map equation for cover morphisms.",
    "uses": [
-    "thm-pd-spreading-out"
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01ZM, lemma-descend-finite-presentation (2)"
-   }
+   "elementary": false
   },
   {
-   "text": "For (3), the covers $P_E,Q_E$ again have finite presentation by step 4. Apply the equality clause of [thm-pd-spreading-out] to the two given $X_E$-morphisms $f_E,h_E$ and their assumed equal pullbacks to $X_L$. It gives an index $E'\\supseteq E$ at which their pullbacks agree. Since indices are precisely finite intermediate fields of $L/K$, this is exactly the assertion of (3).",
+   "text": "For clause (3), project the assumed equality of base-changed morphisms to Q, and apply Scheme.exists_pullback_fst_comp_eq_of_isLimit. At the resulting finite field, pullback extensionality proves equality of the cover maps: their first projections agree by spreading out, and their second projections agree because both are over the base.",
    "uses": [
-    "thm-pd-spreading-out"
+    "thm-pd-spreading-out",
+    "def-pc-fibre-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/limits.tex",
-    "place": "Tag 01ZM, lemma-descend-finite-presentation (3)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-kun-algebraic-separable-smooth",
+  "lem-weil-pbc-spec-small-colimit-limit",
+  "def-pc-fibre-product",
   "lem-pod-separated-finite-type-base-change",
   "lem-weil-pbc-qcqs-over-affine",
   "lem-weil-pbc-affine-morphism-permanence",
-  "lem-weil-pbc-spec-small-colimit-limit",
-  "def-pc-fibre-product",
   "def-weil-etale-morphism",
-  "lem-trf-finite-morphism-finite-presentation",
-  "thm-pd-spreading-out",
   "lem-weil-pbc-qcqs-morphism-permanence",
+  "thm-pd-spreading-out",
   "lem-weil-pbc-descend-finite",
   "lem-weil-pbc-descend-etale",
   "lem-weil-pbc-finite-morphism-permanence"
  ],
  "proof_origin": {
   "by": "document",
-  "document": "literature/stacks-project/pione.tex",
-  "place": "Tag 0BTV, lemma-limit, first assertion and its proof via Limits Tags 01ZM, 01ZO and 07RP; field-system specialization made explicit"
+  "document": "literature/stacks-project/pione.tex; literature/stacks-project/limits.tex",
+  "place": "Tag 0BTV, lemma-limit, via Tag 01ZM (all three clauses), Tag 01ZO and Tag 07RP. The finite-field specialization uses the existing proved IntermediateFieldLimit library construction. T9 stage 3."
  },
  "mathlib_searches": [
   {
@@ -275,8 +227,6 @@
   ]
  },
  "tool_uses": [
-  "lem-kun-algebraic-separable-smooth",
-  "lem-trf-finite-morphism-finite-presentation",
   "lem-weil-pbc-descend-finite",
   "lem-weil-pbc-descend-etale"
  ],
@@ -311,5 +261,15 @@
   "group": "Q150",
   "result": "pass",
   "note": "Read node, 5 stmt_deps, Stacks 0BTV, the module, report and the upstream Scheme.FiniteEtale / FiniteEtale.pullback / Scheme.Etale (morphism property ⊤). All hypotheses match with nothing stronger: Field K, L, Algebra, Algebra.IsSeparable, X₀ over Spec K with IsSeparated, LocallyOfFiniteType and QuasiCompact. Clauses (1)-(3) match quantifier by quantifier. In (2) eP/eQ are pinned by the first-projection equations and by being isos over X_L to the canonical associativity isomorphisms, so (2) is exactly 'base change of f' is f'. The common universe u is forced by the scheme fibre products. Edge cases: empty X₀, L=K, E=⊥, E'=E. Helpers fieldExtensionBase and fieldExtensionBaseMap are real pullback constructions; the theorem body is the single sorry; docstrings carry source, blueprint and all 9 proof steps. Statement field matches the file verbatim; the node copy changes only lean. No duplicate in Mathlib or side (IntermediateFieldLimit and FieldExtensionLimit are Spec-level only). nt_compile.py --json clean in 3.1 s; a control run with an injected error is reported, so the clean result is meaningful. Minor: the second-reading section is an author self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261020T131153-L-1252967",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
