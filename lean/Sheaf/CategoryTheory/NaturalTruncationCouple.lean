@@ -6,7 +6,7 @@ Authors: SHEAF group P3
 module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
+public import WeilConjectures.CategoryTheory.DerivedCoupleFunctoriality
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Defs
 

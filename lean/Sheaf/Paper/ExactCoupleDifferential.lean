@@ -6,7 +6,7 @@ Authors: SHEAF group R1
 module
 
 public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
-import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
+import WeilConjectures.CategoryTheory.DerivedCoupleFunctoriality
 
 /-! # Compatibility of the exact-couple differential
 

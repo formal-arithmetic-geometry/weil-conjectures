@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
 public import Sheaf.CategoryTheory.ExactCoupleMorphism
 public import WeilConjectures.CategoryTheory.CanonicalFiltration
-import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
+import WeilConjectures.CategoryTheory.DerivedCoupleFunctoriality
 import WeilConjectures.CategoryTheory.HalfPlaneConvergence
 import WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage
 

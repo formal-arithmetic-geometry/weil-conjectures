@@ -6,7 +6,7 @@ Authors: SHEAF group C1
 module
 
 public import WeilConjectures.CategoryTheory.HalfPlaneConvergence
-import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
+import WeilConjectures.CategoryTheory.DerivedCoupleFunctoriality
 
 /-!
 # Morphisms of exact couples and their abutments
