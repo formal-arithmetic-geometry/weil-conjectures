@@ -175,3 +175,18 @@ Importers taken out with them (2312): `Sheaf.Algebra.Homology.AffineBaseChangeSo
 ## Prefer upstream, round 2
 
 The upstream module(s) `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization`, `WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization`, `WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic`, `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility`, `WeilConjectures.WeilSheaf.GrothendieckLefschetz`, `WeilConjectures.WeilSheaf.PoincareDuality` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.CategoryTheory.ModuleObjects.EllAdicRationalization`, `WeilConjectures.SixFunctors.Etale.Derived.EtaleLocalization`, `WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic`, `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility`, `WeilConjectures.SixFunctors.ProEtale.ModuleObject.LowerShriek.Defs`, `WeilConjectures.WeilSheaf.GrothendieckLefschetz`, `WeilConjectures.WeilSheaf.PoincareDuality`.
+
+## Quarantine, round 2 (2026-10-20T10:48:39Z)
+
+The global build of 11895cef78 failed in 8 module(s); they and their importers, 17 module(s), were moved to quarantine/ (tools/rework.py, coord/rework.tsv):
+
+- `Sheaf.AlgebraicGeometry.BoundedConstructibleDevissage`: error: failed in the global build (no message located) (nodes lem-sfb-dc-module-devissage)
+- `Sheaf.AlgebraicGeometry.ProEtalePullbackInternalHom`: error: failed in the global build (no message located) (nodes lem-proetale-pullback-internal-hom)
+- `Sheaf.Paper.CondensedInternalHomSections`: error: failed in the global build (no message located) (nodes lem-weil-pbc-condensed-internal-hom-sections)
+- `Sheaf.PoincareDuality.ConstructibleShiftSingle`: error: failed in the global build (no message located) (nodes lem-poincare-constructible-shift-single)
+- `Sheaf.UpstreamExtra.WeilConjectures.DeligneLaumon.Reduction.QuasiFiniteVanishing`: error: failed in the global build (no message located)
+- `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek`: error: failed in the global build (no message located) (nodes lem-etale-upper-shriek-bounded-below-from-amplitude,lem-etale-upper-shriek-quasicompact-bounded-below,lem-etale-upper-shrieks-bounded-below-from-amplitude)
+- `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients`: error: failed in the global build (no message located)
+- `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal`: error: failed in the global build (no message located) (nodes new-proetale-derived-module-pullback-monoidal)
+
+Importers taken out with them (9): `Sheaf.AlgebraicGeometry.BoundedConstructibleTensorPreservation`, `Sheaf.AlgebraicGeometry.ClosedSupportStratumHom`, `Sheaf.AlgebraicGeometry.ProEtaleFiniteProjectiveDualizable`, `Sheaf.Paper.CondensedFiniteFreeDerivedHom`, `Sheaf.Paper.CondensedFiniteFreeHomContinuity`, `Sheaf.Paper.CondensedFiniteFreeHomEvaluation`, `Sheaf.Paper.CondensedLfpHomContinuity`, `Sheaf.Paper.IntegralLfpHomContinuity`, `Sheaf.Paper.OpenPullbackGenerators`
