@@ -13,9 +13,9 @@
  ],
  "proof": [
   {
-   "text": "For the forward implication apply strictHenselizationStructuralMap_fiber_eq_closedPoint_compat: the canonical small-to-full colimit comparison commutes with the structural maps, so the upstream full-model forward theorem applies to the given affine presentation composed with Spec of the inverse comparison.",
+   "text": "For the forward implication apply the unchanged official strictHenselizationStructuralMap_fiber_eq_closedPoint_of_eq to the given fibre equality in the full strictLocalization presentation. Small-model callers use the separately proved canonical comparison, as recorded on their own proof dependencies.",
    "uses": [
-    "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison"
+    "lem-weil-pbc-strict-henselization-closed-fiber-forward"
    ],
    "elementary": false
   },
@@ -28,14 +28,14 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-strict-henselization-small-closed-fiber-comparison",
+  "lem-weil-pbc-strict-henselization-closed-fiber-forward",
   "lem-weil-pbc-strict-henselization-closed-fiber-backward"
  ],
  "proof_origin": {
   "kind": "agent",
-  "by": "C5",
+  "by": "D5",
   "date": "2026-10-21",
-  "note": "Retain the equivalence statement and its backward proof. Its forward implication now uses the proved small-to-full comparison and the unchanged official theorem, allowing retirement of the duplicated forward module."
+  "note": "Retirement: the official upstream strict-localization declaration supplies the same singleton distinguished-fibre result. The small-model structural-map compatibility theorem transports it where consumers require the small presentation; the duplicate Sheaf module is withdrawn."
  },
  "mathlib_searches": [
   {
@@ -91,14 +91,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiber",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationClosedFiber.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictHenselizationClosedFiber",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationClosedFiber.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap_fiber_eq_closedPoint",
-  "statement": "theorem strictHenselizationStructuralMap_fiber_eq_closedPoint\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [IsLocalRing A]\n    (s : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictHenselizationScheme s)\n    (x : Spec (.of A)) :\n    (e.hom ≫ strictHenselizationStructuralMap s) x = s (IsLocalRing.closedPoint Ω) ↔\n      x = IsLocalRing.closedPoint A",
+  "statement": "theorem strictHenselizationStructuralMap_fiber_eq_closedPoint\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [IsLocalRing A]\n    (s : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictLocalization s)\n    (x : Spec (.of A)) :\n    (e.hom ≫ strictLocalizationToBase s) x = s (IsLocalRing.closedPoint Ω) ↔\n      x = IsLocalRing.closedPoint A",
   "branch": "sheaf-dag",
-  "by": "P1",
-  "date": "2026-10-12"
+  "by": "D5",
+  "date": "2026-10-21",
+  "note": "Retirement: the upstream full affine-colimit theorem is the official singleton-fibre result. The canonical smallStrictHenselizationColimitIso and smallStrictHenselizationColimitIso_toBase transport it to the retained small-model consumer API; no source-library declaration changes."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -113,12 +114,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-4bc22",
-  "group": "C5",
+  "reviewer": "C-3a343",
+  "group": "D5",
   "result": "pass",
-  "landing": "20261020T221106-L-4142787",
+  "landing": "20261020T233117-L-894569",
   "kind": "interface",
-  "note": "independent cc review: WeilConjectures twin of fiber_eq_closedPoint_of_eq vs the forward node's new lean record; comparison/_compat proofs vs the old small_toBase and the consumer's unchanged signatures; consumer and both transitive importers compiled against the delivery; axioms clean"
+  "note": "independent cc review: withdrawn Sheaf StrictHenselizationClosedFiber vs retire-items row and upstream WeilConjectures twin; node lean records vs upstream signatures; two adapted consumers vs live (import + forward call to _compat) compiled with the comparison module in a sandbox, axioms clean"
  },
  "lean_audit": {
   "master": {

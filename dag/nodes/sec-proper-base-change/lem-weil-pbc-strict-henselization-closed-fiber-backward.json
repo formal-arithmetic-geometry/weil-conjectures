@@ -10,9 +10,9 @@
  ],
  "proof_origin": {
   "kind": "agent",
-  "by": "H3",
-  "date": "2026-10-12",
-  "note": "Second reading: proved from existing strictHenselizationResidue and uniqueness of the closed point under an isomorphism."
+  "by": "D5",
+  "date": "2026-10-21",
+  "note": "Retirement: the official upstream strict-localization declaration supplies the same singleton distinguished-fibre result. The small-model structural-map compatibility theorem transports it where consumers require the small presentation; the duplicate Sheaf module is withdrawn."
  },
  "mathlib_searches": [
   {
@@ -74,7 +74,7 @@
  "statement": "Let S be a scheme, Ω an algebraically closed field, s : Spec Ω → S a geometric point, A a commutative local ring, and e : Spec A ≅ S_(s), where S_(s) is [def-weil-pbc-strict-henselization-limit] and its structural map ρ_s is [def-weil-pbc-strict-henselization-structural-map]. Then ρ_s(e(closedPoint A)) = s(closedPoint Ω).",
  "proof": [
   {
-   "text": "Equip Ω with the algebra structure given by the geometric-point residue map; the required compatibility is reflexivity. Apply AlgebraicGeometry.strictHenselizationResidue, the residue clause of the existing functoriality node, to get a local-ring structure on C and the structural-image equation for closedPoint C.",
+   "text": "Equip Ω with the algebra structure given by the geometric-point residue map; the required compatibility is reflexivity. Apply the unchanged upstream AlgebraicGeometry.strictHenselizationResidue, the residue clause of the functoriality node in the full strict-localization presentation, to obtain a local-ring structure on C = strictHenselization s and the structural-image equation for closedPoint C.",
    "uses": [
     "lem-weil-pbc-strict-henselization-functoriality"
    ],
@@ -90,14 +90,15 @@
   "lem-weil-pbc-strict-henselization-functoriality"
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiber",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictHenselizationClosedFiber.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.StrictHenselizationClosedFiberBackward",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictHenselizationClosedFiberBackward.lean",
   "declaration": "AlgebraicGeometry.Scheme.strictHenselizationStructuralMap_closedPoint_eq",
-  "statement": "theorem strictHenselizationStructuralMap_closedPoint_eq\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [IsLocalRing A]\n    (s : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictHenselizationScheme s) :\n    (e.hom ≫ strictHenselizationStructuralMap s) (IsLocalRing.closedPoint A) =\n      s (IsLocalRing.closedPoint Ω)",
+  "statement": "theorem strictHenselizationStructuralMap_closedPoint_eq\n    {S : Scheme.{u}} {Ω A : Type u} [Field Ω] [IsAlgClosed Ω]\n    [CommRing A] [IsLocalRing A]\n    (s : Spec (.of Ω) ⟶ S) (e : Spec (.of A) ≅ strictLocalization s) :\n    (e.hom ≫ strictLocalizationToBase s) (IsLocalRing.closedPoint A) =\n      s (IsLocalRing.closedPoint Ω)",
   "branch": "sheaf-dag",
-  "by": "J4",
-  "date": "2026-10-20"
+  "by": "D5",
+  "date": "2026-10-21",
+  "note": "Retirement: the official upstream backward closed-point theorem is used for the strict-localization presentation. Small-model forward consumers use the separately proved comparison compatibility theorem; the duplicate Sheaf declaration is withdrawn."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -112,12 +113,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-a80e7",
-  "group": "J4",
+  "reviewer": "C-3a343",
+  "group": "D5",
   "result": "pass",
-  "landing": "20261020T162310-L-3588055",
+  "landing": "20261020T233117-L-894569",
   "kind": "interface",
-  "note": "independent cc review: moved theorem strictHenselizationStructuralMap_closedPoint_eq (byte-identical signature and proof) in StrictHenselizationClosedFiber vs the withdrawn module in the live clone and node lem-weil-pbc-strict-henselization-closed-fiber-backward; upstream twin uses strictLocalization (different interface); delivered modules plus 3 consumer importers compiled; axioms clean"
+  "note": "independent cc review: withdrawn Sheaf StrictHenselizationClosedFiber vs retire-items row and upstream WeilConjectures twin; node lean records vs upstream signatures; two adapted consumers vs live (import + forward call to _compat) compiled with the comparison module in a sandbox, axioms clean"
  },
  "lean_audit": {
   "master": {

@@ -5,7 +5,7 @@ public import Sheaf.AlgebraicGeometry.QcqsStrictLocalModuleComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.Integral
 import Sheaf.AlgebraicGeometry.StrictHenselizationCompatibility
 import Sheaf.Paper.StrictHenselizationPointedMap
-import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiber
+import Sheaf.AlgebraicGeometry.StrictHenselizationClosedFiberComparison
 import Sheaf.AlgebraicGeometry.StrictLocalFibreRestrictionCompatibility
 import WeilConjectures.AlgebraicGeometry.IntegralStrictHenselianGeometricFibreSections
 import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension
@@ -96,9 +96,9 @@ theorem exists_integralStrictLocalFibreComparison
   set_option backward.isDefEq.respectTransparency false in
   have hclosed : t (IsLocalRing.closedPoint Ω) =
       IsLocalRing.closedPoint (strictHenselizationRing s) := by
-    apply (strictHenselizationStructuralMap_fiber_eq_closedPoint
+    apply strictHenselizationStructuralMap_fiber_eq_closedPoint_compat
       (A := strictHenselizationRing s) s (Iso.refl _)
-      (t (IsLocalRing.closedPoint Ω))).mp
+      (t (IsLocalRing.closedPoint Ω))
     change (t ≫ strictHenselizationStructuralMap s) (IsLocalRing.closedPoint Ω) = _
     rw [ht]
   let i : X' ⟶ pullback f (strictHenselizationStructuralMap s) :=
