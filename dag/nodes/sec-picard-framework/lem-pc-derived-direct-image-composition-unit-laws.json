@@ -14,12 +14,36 @@
  ],
  "proof": [
   {
-   "text": "underived direct image for an identity is canonically the identity functor, with the sectionwise identity as its unitor. Derive this identification. Since the identity functor is exact, its derived functor is the identity on the localization; uniqueness of right derived functors gives i X, characterized by the derived-unit equation with this underived unitor. The hypothesis hc transports the right-derived universal property of the composite morphism to the composite derived functors, with the pasted unit. For c (id X) f, substitute the defining equation of i X into that pasted unit and use naturality of the derived unit of f. The result is the derived unit of f composed with the underived left unitor. For c f (id Y), substitute the equation for i Y; the result is the same with the right unitor. In both cases the other side of the claimed law has exactly this factorization. Uniqueness of morphisms out of the right derived functor therefore equates the natural transformations. Evaluating at E gives the displayed equalities, with eqToHom accounting for id_comp and comp_id.",
+   "text": "Identify the underived pushforward along the identity with the identity functor (definitionally in the sectionwise construction). Exhibit the identity functor on the derived category as right derived using the invertible identity localization unit, and apply rightDerivedUnique. Apply rightDerivedFunctorNatIso to the underived identification and compose with this canonical identity comparison. These are actual constructions; the private identity comparison is irreducible and is used through its proved identity factorization law.",
    "uses": [
     "def-pc-derived-direct-image",
     "def-pc-derived-category"
    ],
    "elementary": false
+  },
+  {
+   "text": "For an additive functor F and U equal to the identity, consider a: RU composed with RF is isomorphic to RF satisfying the pasted unit equation. After substituting U = Id, compose a.inv with RF of the canonical identity comparison. Precomposition with the unit of RF gives its own unit, by functoriality and the identity factorization equation. Mathlib rightDerived_ext gives a.inv followed by the proposed unitor equal to the identity. Cancel a.inv using its inverse to identify a.hom with the proposed left unitor.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the right unit use a: RF composed with RU is isomorphic to RF. After U = Id, compose a.inv with the identity comparison evaluated after RF. Naturality of the identity comparison moves it past RId applied to the unit of F; the identity factorization cancels the remaining identity-derived unit. Apply rightDerived_ext to obtain a.inv followed by the proposed unitor equal to the identity, and cancel a.inv.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-pc-derived-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport each of the two abstract component equations along the equality of the composite morphism with f, using substitution of an abstract morphism parameter. Specialize the resulting lemmas to module direct image, the identity pushforward, c(id_X,f), c(f,id_Y), and hc. The equality transports are exactly the displayed eqToHom terms for id_comp and comp_id. Use the constructed identity comparisons for the existential witness.",
+   "uses": [
+    "def-pc-derived-direct-image",
+    "def-pc-derived-category"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -28,9 +52,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "A3",
-  "date": "2026-10-12",
-  "note": "Expansion of the implicit coherence of Tag 0D5T by uniqueness of right-derived functors (Mathlib Functor.rightDerived_ext and rightDerivedUnique)."
+  "group": "Q2",
+  "date": "2026-10-20",
+  "note": "Complete Lean proof by the right-derived universal property; two proved private abstract unit-law lemmas and equality transport. The identity comparison is constructed through rightDerivedFunctorNatIso and rightDerivedUnique, avoiding reduction of a transport of a whole derived functor."
  },
  "mathlib_searches": [
   {
@@ -105,13 +129,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A3",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261012T070526-L-3465684",
-  "kind": "interface",
+  "landing": "20261020T153019-L-2863809",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
