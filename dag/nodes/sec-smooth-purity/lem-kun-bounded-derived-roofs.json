@@ -60,9 +60,8 @@
    }
   },
   {
-   "text": "Put $T=\\tau_{\\le b}Z$ and $P=\\tau_{\\ge a}T$, with canonical maps $j:T\\to Z$ and $q:T\\to P$; the direction is the zigzag $Z\\xleftarrow{j}T\\xrightarrow{q}P$. By [def-kun-truncations], upper truncation retains cohomology in degrees $n\\le b$ and kills it above, while lower truncation retains cohomology in degrees $n\\ge a$ and kills it below. On the retained degrees the canonical maps induce these identifications (at the cutoffs these are the kernel inclusion and cokernel projection). The vanishing from Step 4 therefore makes both $j$ and $q$ quasi-isomorphisms. The same formulas show that $P$ is supported in $[a,b]$.",
+   "text": "Use the existing canonical cochain-complex truncations in Mathlib directly. Put T = tau_LE_b Z, j:T→Z, c=a−1, P=tau_GE_c T and q:T→P. Since t_1 is a quasi-isomorphism and M_1 is strictly supported in [a,b], isSupported_iff_of_quasiIso gives Z.IsLE b and T.IsGE a. The standard quasiIso_ιTruncLE and quasiIso_πTruncGE instances make j and q quasi-isomorphisms. Truncation support instances give P strictly supported in [c,b]. This implements Stacks homology Tag 0118 without importing the composite definition module about truncations, sheaf colimits and sequential homotopy colimits.",
    "uses": [
-    "def-kun-truncations",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
@@ -72,9 +71,8 @@
    }
   },
   {
-   "text": "Write $r_i=t_i\\circ j:T\\to M_i$. It factors through a chain map $v_i:P\\to M_i$ with $v_iq=r_i$: above $a$ use $r_i^n$, below $a$ use zero, and in degree $a$ use the map from $T^a/\\operatorname{im}d_T^{a-1}$ induced by $r_i^a$. It exists because $r_i^a d_T^{a-1}=d_{M_i}^{a-1}r_i^{a-1}=0$, as $M_i^{a-1}=0$. These formulas commute with the differentials, including the differential out of degree $a$. Since $r_i=t_ij$ is a quasi-isomorphism, $H^n(v_i)=H^n(r_i)H^n(q)^{-1}$ is invertible for every $n$. Thus $v_1,v_2$ are quasi-isomorphisms.",
+   "text": "For r_i=j≫t_i, let v_i=truncGEMap(r_i,c)≫inv(M_i.πTruncGE c). The inverse exists since each M_i is strictly ≥a and hence strictly ≥c. Naturality of πTruncGE gives q≫v_i=r_i. Since q and r_i are quasi-isomorphisms, quasiIso_of_comp_left shows that v_i is a quasi-isomorphism. These are the canonical cokernel-induced factorizations from Stacks homology Tag 0118.",
    "uses": [
-    "def-kun-truncations",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
@@ -84,9 +82,8 @@
    }
   },
   {
-   "text": "Choose the homotopy between $s_1t_1$ and $s_2t_2$ from Step 3. Restrict its components along $j$ to get $h^n:T^n\\to K^{n-1}$. At degree $b$ the homotopy equation still holds because $d_Z^b$ vanishes on $\\ker d_Z^b=T^b$; above $b$ the source is zero. This homotopy descends along $q$: its degree-$a$ component has target $K^{a-1}=0$ and so factors through $P^a$, its components below $a$ are zero, and above $a$ keep $h^n$. The homotopy equation in degree $a$ follows by precomposing with the surjection $q^a$; the equations above $a$ are unchanged and those below are zero. This gives $s_1v_1\\simeq s_2v_2$. Apply the same construction with target $L$ to the other homotopy to obtain $g_1v_1\\simeq g_2v_2$. This is the required bounded refinement in $K(R)$. Homotopic maps have the same class there, so localization gives the same fraction. For other representative isomorphisms, transport the endpoints as in Step 2; the equality criterion just proved applies to all roof choices for that transported morphism.",
+   "text": "Precompose each chain homotopy from the fraction criterion with j. Descend it along q componentwise: for a target N equal to K or L, define H(i,j)=inv(q.f i)≫h(i,j) if c<i, and zero otherwise. Above c, q.f i is invertible by the nonboundary formula for the canonical lower truncation. At i≤c the only possibly nonzero h(i,j) has j+1=i, so N.X j is zero because N is strictly ≥a=c+1. Thus q.f i≫H(i,j)=h(i,j) in all degrees. Each q.f i is epi; cancel it to verify the shape and homotopy equations, using the chain-map equation for q. This gives the two required homotopies for v_1 and v_2. The private helper homotopy_descend_epi proves this calculation in Lean. Transport of arbitrary endpoint isomorphisms is already performed in Step 2.",
    "uses": [
-    "def-kun-truncations",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
@@ -97,7 +94,6 @@
   }
  ],
  "proof_deps": [
-  "def-kun-truncations",
   "def-weil-abstract-derived-category",
   "def-weil-pbc-bounded-derived-subcategories",
   "lem-kun-derived-bounded-roof-factorization",
@@ -108,7 +104,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 05RT, 05RU, 05RV, 05RW and homology.tex Tag 0118; explicit bounded-refinement and homotopy-descent argument using the Mathlib right-fraction criterion."
+  "place": "Tags 05RT, 05RU, 05RV, 05RW and homology.tex Tag 0118; complete Lean proof from Mathlib representatives, bounded fractions, right-fraction equality, and canonical cochain truncations. Lower cutoff c=a−1 ensures that homotopy components at and below the cutoff have zero targets."
  },
  "mathlib_searches": [
   {
@@ -226,5 +222,15 @@
   "group": "Q112",
   "result": "fix",
   "note": "Statement correct: conjuncts 1-4 match the node (quotientCompQhIso; exists_iso_Q_obj_of_isGE_of_isLE; right_fac_of_isStrictlyLE_of_isStrictlyGE with M in the common [a,b], as in the node's Step 2; homotopy-commutative bounded refinement, Steps 3-7 rechecked and true). No extra hypotheses or universe restriction. Node diff touches lean only; statement verbatim; report sections present; citer lem-kun-derived-canonical-filtration fits. Finding H8: the theorem docstring lacked the node's proof step by step. fixes/BoundedDerivedRoofs.lean is the complete replacement with an identical statement and Steps 1-7 with their uses and source places. Delivered and fixed files compile clean via nt_compile.py --json (4.4 s / 4.0 s). Maintainer note: node source.place still names 05S6."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C3",
+  "result": "pass",
+  "landing": "20261020T051041-L-1543344",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
