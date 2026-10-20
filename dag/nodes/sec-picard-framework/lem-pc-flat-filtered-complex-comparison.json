@@ -27,58 +27,66 @@
  ],
  "proof": [
   {
-   "text": "Apply the functorial filtered-complex spectral-sequence construction [thm-sp-spectral-object-yields] to the filtered complexes C and C\\otimes_A B; the filtration F^pC\\otimes_A B is a filtration of C\\otimes_A B by subcomplexes because tensoring with the flat A-module B preserves the injections F^{p+1}C\\to F^pC\\to C [lem-weil-pbc-flat-tensor-exact], and it is again finite. By right exactness of the tensor product, gr^p(C\\otimes_A B)=(gr^pC)\\otimes_A B. The canonical map H^{p+q}(gr^pC)\\otimes_A B\\to H^{p+q}((gr^pC)\\otimes_A B) is an isomorphism by [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$); it is compatible with the boundary maps d_1 by naturality. Thus the E_1-page of C\\otimes_A B is canonically E_1(C)\\otimes_A B, compatibly with d_1.",
+   "text": "The scalar-extension functor preserves finite limits by flatness. Thus each mapped filtration inclusion is monic and its factorization through its image is an isomorphism, giving s with its inclusion equation. Preservation of cokernels gives g with its quotient-projection equation.",
    "uses": [
-    "thm-sp-spectral-object-yields",
-    "lem-weil-pbc-flat-tensor-exact",
-    "lem-pc-flat-tensor-complex-cohom"
+    "def-pc-flat-filtered-scalar-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0BDU, definition-spectral-sequence, and the filtered-complex construction; flat tensor exactness in the proof of Tag 02KH"
+    "place": "Tag 0BDU, definition-spectral-sequence, and lemma-spectral-sequence-filtered-complex-functorial; applied in Cohomology of Schemes, Tag 02KH, quasi-separated case"
    }
   },
   {
-   "text": "Induct on r. Suppose the canonical map E_r(C)\\otimes_A B\\to E_r(C\\otimes_A B) is an isomorphism and commutes with d_r. By [thm-sp-spectral-object-yields] (a), E_{r+1} is naturally the cohomology of the page complex (E_r,d_r). Since the filtration is finite, each page complex through a given bidegree has only finitely many nonzero terms, and [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$) gives E_{r+1}(C)\\otimes_A B\\cong H(E_r(C)\\otimes_A B,d_r\\otimes1)\\cong E_{r+1}(C\\otimes_A B), compatibly with the page identifications. This proves the asserted canonical identification on every page. The filtered map u gives a morphism of these spectral sequences by the functoriality clause (c) of [thm-sp-spectral-object-yields]. Its E_2 map is an isomorphism by hypothesis, so by [lem-sp-page-induction] it is an isomorphism on every page E_r, r\\geq2, and on E_\\infty (for the finite filtration the pages stabilize, and E_\\infty is the one of [def-sp-convergence] appearing in clause (b) of [thm-sp-spectral-object-yields]).",
+   "text": "The canonical flat homology comparison is natural in maps of quotient complexes. Combine it with g and use the quotient-projection equations to obtain a commuting square for the two model quotient maps. Preservation of images gives the page object isomorphisms e0, with the required image-inclusion equation.",
    "uses": [
-    "thm-sp-spectral-object-yields",
-    "lem-pc-flat-tensor-complex-cohom",
-    "lem-sp-page-induction",
-    "def-sp-convergence"
+    "def-pc-flat-filtered-scalar-extension",
+    "def-sp-filtered-page-two-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Lemma-spectral-sequence-filtered-complex-functorial and the page-by-page comparison argument following Tag 0BDU"
+    "place": "Tag 0BDU, definition-spectral-sequence, and lemma-spectral-sequence-filtered-complex-functorial; applied in Cohomology of Schemes, Tag 02KH, quasi-separated case"
    }
   },
   {
-   "text": "For each total degree n, the convergence clause (b) of [thm-sp-spectral-object-yields] identifies E_\\infty^{p,n-p} with the graded piece of the finite induced filtration on H^n(C\\otimes_A B) and on H^n(D), and H^n(u):H^n(C\\otimes_A B)\\to H^n(D) is a filtered map on these abutments inducing the E_\\infty map. Step 2 gives an isomorphism on every graded piece. Apply [lem-sp-finite-filtration-induction] to this filtered map; its finite-filtration hypothesis holds by clause (b). Hence H^n(C\\otimes_A B)\\to H^n(D) is an isomorphism. Composing with the canonical isomorphism H^n(C)\\otimes_A B\\cong H^n(C\\otimes_A B) of [lem-pc-flat-tensor-complex-cohom] (an elementary remark: $H^i$ of a complex depends only on its terms in degrees $i-1,i,i+1$, so one applies the cited lemma to the bounded stupid truncation $0\\to K^{i-1}\\to K^i\\to K^{i+1}\\to0$, which has the same $H^i$ and commutes with $-\\otimes_A B$), H^n(u):H^n(C)\\otimes_A B\\to H^n(D) is an isomorphism for every n.",
+   "text": "Cycle representatives cover the source page epimorphically. Transport their cycle, differential and target-cycle lifts using s, g, and the canonical flat comparison on cycles. A map satisfying the representative equations factors through the prescribed representative subobject, so the target model differential equation holds for it. Cancel the representative epimorphism and the target image monomorphism. Thus e0 commutes with each differential and assembles to e as an isomorphism of page complexes.",
    "uses": [
-    "thm-sp-spectral-object-yields",
-    "lem-sp-finite-filtration-induction",
-    "lem-pc-flat-tensor-complex-cohom"
+    "lem-sp-filtered-complex-representative-epis",
+    "def-sp-filtered-page-two-model",
+    "def-pc-flat-filtered-scalar-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0BDU convergence of a filtered complex and Lemma 0127 (finite-filtration induction)"
+    "place": "Tag 0BDU, definition-spectral-sequence, and lemma-spectral-sequence-filtered-complex-functorial; applied in Cohomology of Schemes, Tag 02KH, quasi-separated case"
+   }
+  },
+  {
+   "text": "Cancel the invertible component e2 from the second-page hypothesis. The scalar-extended filtration is finite. Apply the finite filtered page-two comparison to f to obtain isomorphisms on all cohomology objects, and compose with the canonical flat homology isomorphism.",
+   "uses": [
+    "lem-sp-filtered-page-two-comparison",
+    "def-pc-flat-filtered-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0BDU, definition-spectral-sequence, and lemma-spectral-sequence-filtered-complex-functorial; applied in Cohomology of Schemes, Tag 02KH, quasi-separated case"
    }
   }
  ],
  "proof_deps": [
-  "thm-sp-spectral-object-yields",
-  "lem-weil-pbc-flat-tensor-exact",
-  "lem-pc-flat-tensor-complex-cohom",
-  "lem-sp-page-induction",
-  "lem-sp-finite-filtration-induction",
-  "def-sp-convergence"
+  "def-pc-flat-filtered-scalar-extension",
+  "def-sp-filtered-page-two-model",
+  "lem-sp-filtered-complex-representative-epis",
+  "lem-sp-filtered-page-two-comparison"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 0BDU filtered-complex spectral sequence and functoriality, with finite-filtration comparison as in Lemma 0127; applied in Cohomology Tag 02KH"
+  "place": "Tags 012K, 012Q, 012W and 015K: exact functors preserve quotient homology images and representative differentials; stationary representative comparison and finite filtration induction",
+  "group": "G9",
+  "date": "2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -148,11 +156,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sp-page-induction",
-  "thm-sp-spectral-object-yields",
-  "lem-sp-finite-filtration-induction"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
@@ -199,16 +203,10 @@
   "date": "2026-10-20",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "H1",
+  "group": "G9",
   "result": "pass",
-  "landing": "20261020T174759-L-796003",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.flatFilteredComplex_comparison"
-  ],
-  "sorry_after": [
-   "CategoryTheory.flatFilteredComplex_comparison"
-  ]
+  "landing": "20261020T211724-L-3493439",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

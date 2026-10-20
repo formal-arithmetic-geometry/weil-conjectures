@@ -1,0 +1,144 @@
+{
+ "id": "lem-sp-filtered-page-two-comparison",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pc-flat-base-change-cohom",
+   "place": "Step 2: flatness passes the Cech spectral-sequence page comparison to the abutment",
+   "via": [
+    "lem-pc-flat-filtered-complex-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-picard-framework",
+ "unit": "sk-thm-picard-semicon",
+ "kind": "statement",
+ "title": "Comparison for finite filtered page-two models",
+ "statement": "Let $\\mathcal A$ be an abelian category [def-sp-abelian], let $M$ be a functorial filtered-complex page-two model in $\\mathcal A$ [def-sp-filtered-page-two-model], and let $f:U\\to W$ be a morphism of filtered integer-indexed cochain complexes [def-sp-filtration]. Assume that both decreasing filtrations are finite. If every component of the induced map $E_2^{p,q}(f)$ is an isomorphism for all integers $p,q$, then $H^n(f)$ is an isomorphism for every integer $n$. No bound on the complex degrees is needed.",
+ "source": {
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012K, 012Q, 012W and 015K: filtered-complex functoriality and finite-filtration convergence, together with Lemma 0127"
+ },
+ "stmt_deps": [
+  "def-sp-abelian",
+  "def-sp-filtration",
+  "def-sp-filtered-page-two-model"
+ ],
+ "proof": [
+  {
+   "text": "Propagate the page-two isomorphism to every page by integer induction. A componentwise page isomorphism is an isomorphism of complexes and induces homology isomorphisms; the spectral-sequence transition equation identifies the next-page map with their conjugate.",
+   "uses": [
+    "def-sp-filtered-page-two-model"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The quotient projection equation identifies the model quotient map with the actual canonical cokernel descent. Use the normalized canonical quotient-image isomorphism to compare the model page with the cycle/boundary cokernel. Extend its representative normalization from the representative subobject to actual cycles by factorization through that subobject and cancellation of cycle inclusions.",
+   "uses": [
+    "lem-sp-filtered-complex-canonical-model",
+    "lem-sp-filtered-complex-representative-epis"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For fixed p and total degree n choose r beyond the common finite filtration bounds. The stationary cycle comparison identifies both page cokernels with the graded pieces of their cohomology-image filtrations and gives epimorphisms from actual cycles, normalized by their cohomology classes. The model naturality equation, homology functoriality, and the quotient-projection equations show that these actual-cycle epimorphisms intertwine the page map and the map on step cycles. Cancellation then identifies the graded cohomology map with the conjugate of the page isomorphism.",
+   "uses": [
+    "lem-weil-pbc-stationary-cycle-comparison",
+    "def-sp-filtered-page-two-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The cohomology-image filtrations are finite, since the original finite bounds also bound all degree steps. Apply finite-filtration induction to the filtered cohomology map, whose graded maps are the isomorphisms from the previous step. Its underlying map is H^n(f), as required. Zero objects, zero graded pieces, and any choices of finite bounds obey the same epi/mono cancellation arguments.",
+   "uses": [
+    "lem-sp-filtered-cohomology-image-finite",
+    "lem-sp-finite-filtration-induction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tags 012K, 012Q, 012W and 015K and Lemma 0127; canonical stationary comparisons checked on actual cycles",
+  "group": "G9",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A morphism of finitely filtered cochain complexes which induces isomorphisms on the second spectral sequence page is a quasi-isomorphism",
+   "results": "Eight hits on quasi-isomorphisms and truncations; no finite filtered page-two comparison theorem.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.homologyMap",
+   "results": "Found homologyMap functoriality, its isomorphism instance, and homology projection naturality; used these in the proof. No filtered comparison result.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "filteredPageTwoModel_comparison|isIso.*[Pp]age.*homology|[Cc]omparison.*[Ss]pectral[Ss]equence",
+   "results": "Zero Mathlib hits. Local library search found the normalized stationary cycle comparison and cohomology image finiteness, which this proof uses.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A map of finite filtered cochain complexes that is an isomorphism on the second page of the spectral sequence induces isomorphisms on all cohomology objects",
+   "results": "Eight hits: quasiIso_of_isIso, ShortComplex.QuasiIso.isIso, truncGE and quasiIsoAt results. No finite filtered spectral-sequence comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatFilteredComplexComparison",
+  "date": "2026-10-21",
+  "group": "G9"
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FilteredPageTwoComparison",
+  "file": "lean/Sheaf/CategoryTheory/FilteredPageTwoComparison.lean",
+  "declaration": "CategoryTheory.filteredPageTwoModel_comparison",
+  "statement": "theorem filteredPageTwoModel_comparison (M : FilteredPageTwoModel V)\n    {U W : FilteredObject (CochainComplex V ℤ)} (f : U ⟶ W)\n    (hU : U.filtration.IsFinite) (hW : W.filtration.IsFinite)\n    (h₂ : ∀ p q : ℤ, IsIso (((M.S.map f).hom 2).f (p, q))) :\n    ∀ n : ℤ, IsIso (HomologicalComplex.homologyMap f.hom n)",
+  "branch": "sheaf-dag",
+  "by": "G9",
+  "date": "2026-10-21"
+ },
+ "proof_deps": [
+  "def-sp-filtered-page-two-model",
+  "lem-sp-filtered-complex-canonical-model",
+  "lem-sp-filtered-complex-representative-epis",
+  "lem-weil-pbc-stationary-cycle-comparison",
+  "lem-sp-filtered-cohomology-image-finite",
+  "lem-sp-finite-filtration-induction"
+ ],
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261020T211724-L-3493439",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G9",
+  "result": "pass",
+  "landing": "20261020T211724-L-3493439",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
