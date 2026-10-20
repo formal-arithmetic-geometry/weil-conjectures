@@ -39,7 +39,9 @@ private theorem ext_map_comp_smul
     (x : Abelian.Ext A B n) (r : k) :
     (α.comp ((r • x).mapExactFunctor T) (zero_add n)).comp β (add_zero n) =
       r • (α.comp (x.mapExactFunctor T) (zero_add n)).comp β (add_zero n) := by
-  rw [Functor.mapExactFunctor_smul, Abelian.Ext.comp_smul, Abelian.Ext.smul_comp]
+  rw [Functor.mapExactFunctor_smul]
+  rw [Abelian.Ext.comp_smul]
+  rw [Abelian.Ext.smul_comp]
 
 private theorem ext_tensor_balance
     {C : Type*} [Category C] [Abelian C] [Linear k C] [HasExt C]
