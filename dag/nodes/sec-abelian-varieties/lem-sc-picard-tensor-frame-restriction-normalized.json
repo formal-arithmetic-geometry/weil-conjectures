@@ -156,14 +156,15 @@
   }
  ],
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PicardTensorFrameRestrictionNormalized",
-  "file": "lean/Sheaf/AlgebraicGeometry/PicardTensorFrameRestrictionNormalized.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PicardTensorFrameRestrictionNormalized",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PicardTensorFrameRestrictionNormalized.lean",
   "declaration": "AlgebraicGeometry.Scheme.picardTensorFrame_restriction_normalized",
   "statement": "theorem picardTensorFrame_restriction_normalized (W : Scheme.{v}) (w : W) (U : W.Opens) (hwU :\n    w ∈ U)\n    (K : CochainComplex (SheafOfModules.{v} ((moduleRings W.toRingedSpace).over U)) ℤ) (q :\n    (Modules.overEquiv U).functor.obj (K.X 0) ≅ Modules.unit U.toScheme) (V : W.Opens) (hwV : w\n    ∈ V) (hVU : V ≤ U) (hs : picardResidueLift W w V hwV ≫ W.homOfLE hVU = picardResidueLift W\n    w U hwU) (f : (Modules.tensorPullback V.ι).obj (Modules.unit W) ⟶ (Modules.tensorPullback\n    (W.homOfLE hVU)).obj ((Modules.overEquiv U).functor.obj (K.X 0))) :\n    Modules.picardTensorScalarCoordinate (W.fromSpecResidueField w) (picardResidueLift W w U\n    hwU) q (picardOrdinaryModelRestriction W U K (picardResidueLift W w V hwV) V.ι\n    (W.fromSpecResidueField w) (W.homOfLE hVU) (picardResidueLift W w U hwU)\n    (picardResidueLift_comp W w V hwV) hs f) = (picardResidueLift W w V hwV).appTop\n    (Modules.picardTensorScalarCoordinate V.ι (W.homOfLE hVU) q f)",
   "branch": "sheaf-dag",
-  "by": "S4",
-  "date": "2026-10-13"
+  "by": "U6",
+  "date": "2026-10-20",
+  "note": "Retired the duplicate Sheaf implementation. The adopted source proof and statement agree verbatim after renaming the definitionally equal picardTensorUnitIsoFrame to picardTensorFrameUnitIso."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -176,14 +177,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "S4",
+  "reviewer": "C-3f75c",
+  "group": "U6",
   "result": "pass",
-  "landing": "20261013T142904-L-500701",
+  "landing": "20261020T144307-L-2263053",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Withdrawn Sheaf PicardTensorFrameCoordinates and the re-exported unclaimed PicardTensorFrameRestrictionNormalized matched against their WeilConjectures twins (diff: header, import root and the picardTensorUnitIsoFrame→picardTensorFrameUnitIso rename only); node lean records reattached with identical statements; both compile; twin axioms clean"
  },
  "lean_audit": {
   "master": {
