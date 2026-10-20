@@ -23,20 +23,43 @@
  ],
  "proof": [
   {
-   "text": "Use the bounded filtered-complex spectral-sequence construction and its Z_r/B_r representative description. For r ≥ 2, the degree −1 filtration shift puts the homotopy term in the r-boundary filtration, so the difference of the induced maps is zero on every page. Naturality of the page-two model identifies these equalities with equality of the functorial spectral-sequence maps.",
+   "text": "Use the model naturality data to identify each page map with the map on the image of H(F^p/F^(p+r)) → H(F^(p-r+1)/F^(p+1)). No construction or convergence theorem is needed because the model supplies these identifications.",
    "uses": [
-    "thm-sp-spectral-object-yields"
+    "def-sp-filtered-page-two-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Convert the degreewise-image factorizations of the homotopy into maps from the actual filtration steps F^p to G^(p-1). Include G^(p-1) into G^(p-r+1), valid for r ≥ 2. Cancel the monic step inclusions in the ambient homotopy identity to obtain a homotopy between the two step maps F^p → G^(p-r+1).",
+   "uses": [
+    "def-sp-filtered-complex-subquotients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On F^(p+r), this homotopy factors through G^(p+r-1) and hence G^(p+1). It vanishes after the target quotient. Evaluation preserves cokernels, so the componentwise cokernel universal property descends the homotopy to F^p/F^(p+r) → G^(p-r+1)/G^(p+1). Naturality and the quotient projection equations identify its endpoints with φ followed by the two induced quotient maps.",
+   "uses": [
+    "def-sp-filtered-complex-subquotients",
+    "def-sp-filtered-page-two-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply Mathlib Homotopy.homologyMap_eq to the descended homotopy. Cancel the epimorphism onto the homology image, then use page naturality and cancel the monic image inclusion and page isomorphism. Extensionality over bidegrees and pages gives equality of spectral-sequence morphisms.",
+   "uses": [
+    "def-sp-filtered-page-two-model"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "thm-sp-spectral-object-yields"
+  "def-sp-filtered-page-two-model",
+  "def-sp-filtered-complex-subquotients"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Lemma 012O, filtered homotopy calculation"
+  "place": "Lemma 012O and the quotient-complex image description of Section 012K; homotopy descended through degreewise cokernels (C3)."
  },
  "mathlib_searches": [
   {
@@ -101,7 +124,7 @@
   "module": "Sheaf.CategoryTheory.FilteredHomotopySpectralSequence",
   "file": "lean/Sheaf/CategoryTheory/FilteredHomotopySpectralSequence.lean",
   "declaration": "CategoryTheory.filteredHomotopy_page_map_eq",
-  "statement": "theorem filteredHomotopy_page_map_eq\n    (K L : CochainComplex C ℤ)\n    (F : DecreasingFiltration K) (G : DecreasingFiltration L)\n    (hKF : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ,\n      F.complexStep pmin n = ⊤ ∧ F.complexStep pmax n = ⊥)\n    (hLG : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ,\n      G.complexStep pmin n = ⊤ ∧ G.complexStep pmax n = ⊥)\n    (a b : FilteredObject.HomPreservingSteps ⟨K, F⟩ ⟨L, G⟩)\n    (H : Homotopy a.hom b.hom)\n    (hshift : ∀ (p n : ℤ), ∃ ℓ :\n      (F.complexStep p n : C) ⟶ (G.complexStep (p - 1) (n - 1) : C),\n      ℓ ≫ (G.complexStep (p - 1) (n - 1)).arrow =\n        (F.complexStep p n).arrow ≫ H.hom n (n - 1)) :\n    ∀ (M : FilteredPageTwoModel C), M.S.map a = M.S.map b",
+  "statement": "theorem filteredHomotopy_page_map_eq\n    (K L : CochainComplex C ℤ)\n    (F : DecreasingFiltration K) (G : DecreasingFiltration L)\n    (hKF : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ,\n      F.complexStep pmin n = ⊤ ∧ F.complexStep pmax n = ⊥)\n    (hLG : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ,\n      G.complexStep pmin n = ⊤ ∧ G.complexStep pmax n = ⊥)\n    (a b : FilteredObject.Hom ⟨K, F⟩ ⟨L, G⟩)\n    (H : Homotopy a.hom b.hom)\n    (hshift : ∀ (p n : ℤ), ∃ ℓ :\n      (F.complexStep p n : C) ⟶ (G.complexStep (p - 1) (n - 1) : C),\n      ℓ ≫ (G.complexStep (p - 1) (n - 1)).arrow =\n        (F.complexStep p n).arrow ≫ H.hom n (n - 1)) :\n    ∀ (M : FilteredPageTwoModel C), M.S.map a = M.S.map b",
   "branch": "sheaf-dag",
   "by": "Q1",
   "date": "2026-10-16"
@@ -127,13 +150,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q1",
+  "reviewer": "C-935dd",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261015T220146-L-2452575",
+  "landing": "20261020T221104-L-4142321",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered FilteredHomotopySpectralSequence.lean vs quarantine archive (only HomPreservingSteps→FilteredObject.Hom rename, import pruning, page-map sorry proved); node lean.statements vs file text (verbatim); FilteredPageTwoModel naturality fields vs page-map proof; #print axioms clean; compiled rc 0 in 49 s at load 257"
  }
 }

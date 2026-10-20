@@ -108,7 +108,7 @@
   "module": "Sheaf.CategoryTheory.FilteredHomotopySpectralSequence",
   "declaration": "CategoryTheory.filteredHomotopy_spectralSequence_map_eq",
   "file": "lean/Sheaf/CategoryTheory/FilteredHomotopySpectralSequence.lean",
-  "statement": "theorem filteredHomotopy_spectralSequence_map_eq (K L : CochainComplex C ℤ) (F : DecreasingFiltration K) (G : DecreasingFiltration L) (hKF : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ, F.complexStep pmin n = ⊤ ∧ F.complexStep pmax n = ⊥) (hLG : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ, G.complexStep pmin n = ⊤ ∧ G.complexStep pmax n = ⊥) (a b : FilteredObject.HomPreservingSteps ⟨K, F⟩ ⟨L, G⟩) (H : Homotopy a.hom b.hom) (hshift : ∀ (p n : ℤ), ∃ ℓ : (F.complexStep p n : C) ⟶ (G.complexStep (p - 1) (n - 1) : C), ℓ ≫ (G.complexStep (p - 1) (n - 1)).arrow = (F.complexStep p n).arrow ≫ H.hom n (n - 1)) : (∀ (M : FilteredPageTwoModel C), M.S.map a = M.S.map b) ∧ (∀ (n : ℤ) (AF : DecreasingFiltration (K.homology n)) (BF : DecreasingFiltration (L.homology n)), (∀ p : ℤ, AF.step p = imageSubobject (HomologicalComplex.homologyMap (F.step p).arrow n)) → (∀ p : ℤ, BF.step p = imageSubobject (HomologicalComplex.homologyMap (G.step p).arrow n)) → ∃ t : FilteredObject.HomPreservingSteps ⟨K.homology n, AF⟩ ⟨L.homology n, BF⟩, t.hom = HomologicalComplex.homologyMap a.hom n ∧ t.hom = HomologicalComplex.homologyMap b.hom n ∧ ∀ p : ℤ, ∃ g : AF.gradedPiece p ⟶ BF.gradedPiece p, cokernel.π (Subobject.ofLE (AF.step (p + 1)) (AF.step p) (AF.antitone_step (by omega))) ≫ g = Classical.choose (t.preserves p) ≫ cokernel.π (Subobject.ofLE (BF.step (p + 1)) (BF.step p) (BF.antitone_step (by omega))))",
+  "statement": "theorem filteredHomotopy_spectralSequence_map_eq\n    (K L : CochainComplex C ℤ)\n    (F : DecreasingFiltration K) (G : DecreasingFiltration L)\n    (hKF : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ,\n      F.complexStep pmin n = ⊤ ∧ F.complexStep pmax n = ⊥)\n    (hLG : ∀ n : ℤ, ∃ pmin : ℤ, ∃ pmax : ℤ,\n      G.complexStep pmin n = ⊤ ∧ G.complexStep pmax n = ⊥)\n    (a b : FilteredObject.Hom ⟨K, F⟩ ⟨L, G⟩)\n    (H : Homotopy a.hom b.hom)\n    (hshift : ∀ (p n : ℤ), ∃ ℓ :\n      (F.complexStep p n : C) ⟶ (G.complexStep (p - 1) (n - 1) : C),\n      ℓ ≫ (G.complexStep (p - 1) (n - 1)).arrow =\n        (F.complexStep p n).arrow ≫ H.hom n (n - 1)) :\n    (∀ (M : FilteredPageTwoModel C), M.S.map a = M.S.map b) ∧\n    (∀ (n : ℤ) (AF : DecreasingFiltration (K.homology n))\n      (BF : DecreasingFiltration (L.homology n)),\n      (∀ p : ℤ, AF.step p = imageSubobject\n        (HomologicalComplex.homologyMap (F.step p).arrow n)) →\n      (∀ p : ℤ, BF.step p = imageSubobject\n        (HomologicalComplex.homologyMap (G.step p).arrow n)) →\n      ∃ t : FilteredObject.Hom ⟨K.homology n, AF⟩ ⟨L.homology n, BF⟩,\n        t.hom = HomologicalComplex.homologyMap a.hom n ∧\n        t.hom = HomologicalComplex.homologyMap b.hom n ∧\n        ∀ p : ℤ, ∃ g : AF.gradedPiece p ⟶ BF.gradedPiece p,\n          cokernel.π (Subobject.ofLE (AF.step (p + 1)) (AF.step p)\n            (AF.antitone_step (by omega))) ≫ g =\n          Classical.choose (t.preserves p) ≫\n            cokernel.π (Subobject.ofLE (BF.step (p + 1)) (BF.step p)\n              (BF.antitone_step (by omega))))",
   "branch": "sheaf-dag",
   "by": "E1",
   "date": "2026-10-11",
@@ -135,13 +135,13 @@
   }
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q1",
+  "reviewer": "C-935dd",
+  "group": "C3",
   "result": "pass",
-  "landing": "20261015T220146-L-2452575",
+  "landing": "20261020T221104-L-4142321",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered FilteredHomotopySpectralSequence.lean vs quarantine archive (only HomPreservingSteps→FilteredObject.Hom rename, import pruning, page-map sorry proved); node lean.statements vs file text (verbatim); FilteredPageTwoModel naturality fields vs page-map proof; #print axioms clean; compiled rc 0 in 49 s at load 257"
  }
 }
