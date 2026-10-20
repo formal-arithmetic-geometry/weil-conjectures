@@ -1,8 +1,8 @@
 # Work queue
 
-184 items; claim with `tools/claim.py next <group> [--stage N]`.
+171 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (96 clusters, 2492 modules)
+## Rework: quarantined by the upstream sync (105 clusters, 2492 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -21,9 +21,12 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.LisseFiniteHomLift` | 1 |  | error: Sheaf/Paper/LisseFiniteHomLift.lean:73:5: error: overloaded, errors | Unknown constant `Mod.relativeTensorRightIso` | | Unknown constant `CategoryTheory. |
 | `Sheaf.AlgebraicGeometry.StrictLocalMateContinuityPresentation` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalMateContinuityPresentation.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.StrictHenselizationExtension fail |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.ChangeOfCoefficients` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/ModuleObject/ChangeOfCoefficients.lean:97:0: error: Unexpected name `CoefficientMap` after `end` |
+| `Sheaf.CategoryTheory.DerivedModuleCompactGeneration` | 1 |  | error: Sheaf/CategoryTheory/DerivedModuleCompactGeneration.lean:5:0: error: import Sheaf.CategoryTheory.CompactObject failed, environment already contains 'Cate |
 | `Sheaf.Paper.ContinuousAlgClConstructibleTor` | 1 |  | error: Sheaf/Paper/ContinuousAlgClConstructibleTor.lean:109:29: error: overloaded, errors | Unknown constant `Mod.relativeTensorRightIso` | | Unknown constant ` |
 | `Sheaf.AlgebraicGeometry.VectorBundleZeroSection` | 1 |  | error: Sheaf/AlgebraicGeometry/VectorBundleZeroSection.lean:55:3: error(lean.unknownIdentifier): Unknown identifier `affine_morphism_relative_spec` | | Note: A  |
 | `Sheaf.AlgebraicGeometry.KFlatStalkResidueCohomology` | 1 |  | error: Sheaf/AlgebraicGeometry/KFlatStalkResidueCohomology.lean:62:10: error(lean.unknownIdentifier): Unknown constant `CochainComplex.IsAcyclicTensorKFlat` | C |
+| `Sheaf.CategoryTheory.BrownTelescopeAssembly` | 1 |  | error: Sheaf/CategoryTheory/BrownTelescopeAssembly.lean:5:0: error: import WeilConjectures.CategoryTheory.CompactObject failed, environment already contains 'Ca |
+| `Sheaf.CategoryTheory.CohomologicalGeneratorDetection` | 1 |  | error: Sheaf/CategoryTheory/CohomologicalGeneratorDetection.lean:5:0: error: import WeilConjectures.CategoryTheory.CompactObject failed, environment already con |
 | `Sheaf.AlgebraicGeometry.RelativeMVDirectImageSquareLocalization` | 1 |  | error: Sheaf/AlgebraicGeometry/RelativeMVDirectImageSquareLocalization.lean:37:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[ |
 | `Sheaf.AlgebraicGeometry.KFlatPullbackAdjunctionComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/KFlatPullbackAdjunctionComparison.lean:29:10: error(lean.unknownIdentifier): Unknown constant `CochainComplex.IsAcyclicTensorKFla |
 | `Sheaf.SixFunctors.ProEtale.BaseChange.ComparisonSquareEtalePathNormalization` | 1 |  | error: Sheaf/SixFunctors/ProEtale/BaseChange/ComparisonSquareEtalePathNormalization.lean:239:6: error(lean.unknownIdentifier): Unknown constant `AlgebraicGeomet |
@@ -44,11 +47,14 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.ModuleCupResolutionFMap` | 1 |  | error: Sheaf/Paper/ModuleCupResolutionFMap.lean:205:19: error(lean.unknownIdentifier): Unknown identifier `moduleCohomologyFMap` | | Note: A public declaration  |
 | `Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIsIso` | 1 |  | error: Sheaf/AlgebraicGeometry/StalkDerivedExtensionComparisonIsIso.lean:65:17: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The environment  |
 | `Sheaf.AlgebraicGeometry.StalkDerivedExtensionComparisonIsoCore` | 1 |  | error: Sheaf/AlgebraicGeometry/StalkDerivedExtensionComparisonIsoCore.lean:115:16: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The environme |
+| `Sheaf.RingTheory.BoundedProjectiveResolutionDimension` | 1 |  | error: Sheaf/RingTheory/BoundedProjectiveResolutionDimension.lean:6:0: error: import WeilConjectures.RingTheory.GlobalDimension failed, environment already cont |
+| `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonHelpers` | 1 |  | error: Sheaf/Algebra/Homology/AffineTildeTensorSourceComparisonHelpers.lean:6:0: error: import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModel failed, e |
 | `Sheaf.AlgebraicGeometry.SelfTorConormalDualChartIso` | 1 |  | error: Sheaf/AlgebraicGeometry/SelfTorConormalDualChartIso.lean:109:82: error: Application type mismatch: The argument | φ | has type | (U : ↑Y.affineOpens) → |
 | `Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAffineCechComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAffineCechComparison.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomol |
 | `Sheaf.AlgebraicGeometry.SchemeOrdinaryEvaluationLocalization` | 1 |  | error: Sheaf/AlgebraicGeometry/SchemeOrdinaryEvaluationLocalization.lean:40:27: error: failed to solve universe constraint | ?u.43 + 1 =?= u | while trying to u |
 | `Sheaf.Paper.HypercoverInjectiveModuleRow` | 1 |  | error: Sheaf/Paper/HypercoverInjectiveModuleRow.lean:114:11: error(lean.synthInstanceFailed): failed to synthesize instance of type class | CommRing R | | Hint: |
 | `Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarExtCupInverseImage.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.FieldLinearModuleCohomologyOperations failed,  |
+| `Sheaf.AlgebraicGeometry.SmoothDiagonalDualizingDeterminant` | 1 |  | error: Sheaf/AlgebraicGeometry/SmoothDiagonalDualizingDeterminant.lean:6:0: error: import Sheaf.AlgebraicGeometry.LocallyRankedExteriorComplex failed, environme |
 | `Sheaf.Algebra.Homology.AffineTildePushforwardHomologyFactorization` | 1 |  | error: Sheaf/Algebra/Homology/AffineTildePushforwardHomologyFactorization.lean:30:25: error(lean.synthInstanceFailed): failed to synthesize instance of type cla |
 | `Sheaf.Algebra.Homology.DerivedTensorLocalizationCohomology` | 1 |  | error: Sheaf/Algebra/Homology/DerivedTensorLocalizationCohomology.lean:5:0: error: import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel fail |
 | `Sheaf.Algebra.Homology.PrescribedTensorCohomologyModelRealization` | 1 |  | error: Sheaf/Algebra/Homology/PrescribedTensorCohomologyModelRealization.lean:5:0: error: import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyMod |
@@ -79,10 +85,12 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.OpenPinnedSourceCounitTriangle` | 1 |  | error: Sheaf/AlgebraicGeometry/OpenPinnedSourceCounitTriangle.lean:56:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irreducib |
 | `Sheaf.AlgebraicGeometry.RegularCurveTorsionfreeFree` | 1 |  | error: Sheaf/AlgebraicGeometry/RegularCurveTorsionfreeFree.lean:60:17: error(lean.unknownIdentifier): Unknown constant `AlgebraicGeometry.RingedSpace.IsCoherent |
 | `Sheaf.CategoryTheory.LerayFiveTerm` | 1 |  | error: Sheaf/CategoryTheory/LerayFiveTerm.lean:40:25: error(lean.unknownIdentifier): Unknown identifier `BigradedExactCouple` | | Note: A public declaration `Bi |
+| `Sheaf.RingTheory.ResidueFieldProjectiveDimensionDepth` | 1 |  | error: Sheaf/RingTheory/ResidueFieldProjectiveDimensionDepth.lean:1:0: error: import WeilConjectures.RingTheory.GlobalDimension failed, environment already cont |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.MorphismDefs` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/Etale/BaseChangeTheorems/MorphismDefs.lean:119:0: error: Unexpected name `BaseChangeTransformation` after |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumCompositionUnitSquare` | 1 |  | error: Sheaf/AlgebraicGeometry/AffineSpectrumCompositionUnitSquare.lean:189:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irr |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumCounitCompatibility` | 1 |  | error: Sheaf/AlgebraicGeometry/AffineSpectrumCounitCompatibility.lean:28:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irredu |
 | `Sheaf.AlgebraicGeometry.AffineSpectrumUnitNormalization` | 1 |  | error: Sheaf/AlgebraicGeometry/AffineSpectrumUnitNormalization.lean:29:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irreduci |
+| `Sheaf.AlgebraicGeometry.CompactObjectPerfectWitness` | 1 |  | error: Sheaf/AlgebraicGeometry/CompactObjectPerfectWitness.lean:1:0: error: import WeilConjectures.CategoryTheory.CompactObject failed, environment already cont |
 | `Sheaf.AlgebraicGeometry.DerivedSquareIsoPasting` | 1 |  | error: Sheaf/AlgebraicGeometry/DerivedSquareIsoPasting.lean:167:8: error: (kernel) deterministic timeout | Compiled in 45.6 s |
 | `Sheaf.AlgebraicGeometry.FieldFibreHomology` | 1 |  | error: Sheaf/AlgebraicGeometry/FieldFibreHomology.lean:41:6: error: Application type mismatch: The argument | (derivedPullback g).obj (DerivedCategory.Q.obj K)  |
 | `Sheaf.AlgebraicGeometry.IsomorphicSingleTensorCounitEquation` | 1 |  | error: Sheaf/AlgebraicGeometry/IsomorphicSingleTensorCounitEquation.lean:18:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently `[irr |
@@ -94,6 +102,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenUnitSquareFactorization` | 1 |  | error: Sheaf/AlgebraicGeometry/SingleComplexOpenUnitSquareFactorization.lean:40:17: error: failed to set `[local irreducible]`, `derivedPullback` is currently ` |
 | `Sheaf.AlgebraicGeometry.TorIndependentPerfectPullbackComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/TorIndependentPerfectPullbackComparison.lean:6:0: error: import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModel |
 | `Sheaf.CategoryTheory.EdgeCollapse` | 1 |  | error: Sheaf/CategoryTheory/EdgeCollapse.lean:44:11: error(lean.invalidField): Invalid field `LimitSubobjects`: The environment does not contain `CategoryTheory |
+| `Sheaf.RingTheory.ProjectiveDimensionSESKernel` | 1 |  | error: Sheaf/RingTheory/ProjectiveDimensionSESKernel.lean:1:0: error: import WeilConjectures.RingTheory.GlobalDimension failed, environment already contains 'Ri |
 | `Sheaf.UpstreamExtra.WeilConjectures.AlgebraicGeometry.Cohomology.Serre` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/AlgebraicGeometry/Cohomology/Serre.lean:146:0: error: Unexpected name `AlgebraicGeometry` after `end`: The current se |
 | `Sheaf.UpstreamExtra.WeilConjectures.AlgebraicGeometry.EtaleFiniteDataDescent` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/AlgebraicGeometry/EtaleFiniteDataDescent.lean:52:0: error: Unexpected name `AlgebraicGeometry` after `end`: The curre |
 | `Sheaf.UpstreamExtra.WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Charts` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/AlgebraicGeometry/ProjectiveSpace/Charts.lean:67:12: error: redundant binder annotation update | Sheaf/UpstreamExtra/ |
@@ -105,7 +114,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.Etale.Derived.UpperShriek` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/Etale/Derived/UpperShriek.lean:104:0: error: Unexpected name `Unbounded` after `end`: The current section |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Coherence` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/Coherence.lean:116:0: error: Unexpected name `Eta` after `end`: |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 1, stage 2 32, stage 3 134 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 1, stage 2 32, stage 3 133 items.
 
 ## Stage 1: nodes to split (0)
 
@@ -115,7 +124,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 302 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
-## Stage 3: modules to prove (10)
+## Stage 3: modules to prove (8)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -128,8 +137,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.LocalizationInverseImageCoherence` | - | 2 | proof | 2 |
 | `Sheaf.CategoryTheory.ConstantLeftModuleInverseImage` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.Sites.GeometricInverseImageExact` | - | 1 | proof | 3 |
-| `Sheaf.Paper.InvertibleTensorScalarExtension` | - | 1 | proof | 4 |
-| `Sheaf.Algebra.Homology.RingedSiteRestrictionKFlat` | - | 1 | proof | 5 |
 | `Sheaf.Paper.FiniteFieldDerivedTensorSummand` | - | 1 | proof | 6 |
 
 ## Stage 3: held for an open upstream PR (22)
