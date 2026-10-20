@@ -25,9 +25,9 @@
  "proof_deps": [],
  "proof_origin": {
   "by": "worker",
-  "document": "WeilConjectures/FromJoel/Algebra/Homology/Embedding/ExtendMap.lean; Mathlib/Algebra/Homology/Embedding/ExtendHomology.lean",
-  "place": "HomologicalComplex.mapExtendIso (45); HomologicalComplex.extendHomologyIso (325).",
-  "note": "The duplicate component and complex isomorphisms remain removed. mapExtendHomologyIso directly composes upstream mapExtendIso mapped by homology with extendHomologyIso. The unchanged existence statement packages this canonical construction; no choice of a witness and no remaining holes."
+  "document": "WeilConjectures/CategoryTheory/MapExtendHomology.lean; WeilConjectures/CategoryTheory/MapExtendHomologyExtension.lean",
+  "place": "CochainComplex.mapExtendHomologyIso; mapExtendHomology_nonempty_iso",
+  "note": "The retained upstream construction maps mapExtendIso by homology and composes with extendHomologyIso, including degree zero. Its Nonempty wrapper is proved in MapExtendHomologyExtension. The duplicate Sheaf module has no consumers and is withdrawn. No mathematical statement or unit route changes."
  },
  "mathlib_searches": [
   {
@@ -81,18 +81,18 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.CategoryTheory.MapExtendHomology",
-  "file": "lean/Sheaf/CategoryTheory/MapExtendHomology.lean",
-  "declaration": "mapExtendHomology_nonempty_iso",
-  "statement": "theorem mapExtendHomology_nonempty_iso\n    {D : Type u} [Category.{v} D] [Abelian D]\n    {B : Type u'} [Category.{v'} B] [Abelian B]\n    (E : D ⥤ B) [E.Additive] (K : CochainComplex D ℕ) (q : ℕ) :\n    Nonempty\n      (((E.mapHomologicalComplex (.up ℤ)).obj\n          (K.extend ComplexShape.embeddingUpNat)).homology (q : ℤ) ≅\n        ((E.mapHomologicalComplex (.up ℕ)).obj K).homology q)",
+  "existing": true,
+  "module": "WeilConjectures.CategoryTheory.MapExtendHomology",
+  "file": "lean/WeilConjectures/CategoryTheory/MapExtendHomology.lean",
+  "declaration": "CochainComplex.mapExtendHomologyIso",
+  "statement": "def mapExtendHomologyIso\n    {D : Type u} [Category.{v} D] [Abelian D]\n    {B : Type u'} [Category.{v'} B] [Abelian B]\n    (E : D ⥤ B) [E.Additive] (K : CochainComplex D ℕ) (q : ℕ) :\n    ((E.mapHomologicalComplex (.up ℤ)).obj\n        (K.extend ComplexShape.embeddingUpNat)).homology (q : ℤ) ≅\n      ((E.mapHomologicalComplex (.up ℕ)).obj K).homology q",
   "branch": "sheaf-dag",
-  "by": "R2",
-  "date": "2026-10-13",
+  "by": "A3",
+  "date": "2026-10-20",
   "declarations": [
-   "mapExtendHomologyIso",
-   "mapExtendHomology_nonempty_iso"
-  ]
+   "CochainComplex.mapExtendHomologyIso"
+  ],
+  "note": "Retired the unused Sheaf copy in favour of the canonical upstream construction. Its data is definitionally the same composite. The original Nonempty statement is also proved upstream as mapExtendHomology_nonempty_iso in WeilConjectures.CategoryTheory.MapExtendHomologyExtension. No remaining module imports the Sheaf copy; FreeRepresentableHomotopyHomology uses the upstream iso."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -105,16 +105,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "H2",
+  "reviewer": "C-7e957",
+  "group": "A3",
   "result": "pass",
-  "landing": "20261014T054051-L-2106801",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "landing": "20261020T135346-L-1813529",
+  "kind": "interface",
+  "note": "independent cc review: retired Sheaf.CategoryTheory.MapExtendHomology vs upstream WeilConjectures.CategoryTheory.MapExtendHomology(+Extension): rfl-identical def, same Nonempty wrapper, zero importers; node lean record re-pointed existing:true with verbatim upstream signature"
  },
  "lean_audit": {
   "master": {
