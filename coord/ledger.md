@@ -18105,3 +18105,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:17 L: returned deliver/X2/Sheaf.Paper.IntegralConstructibleBoundedBelowCompactness (reviewer RETURN: (the landing tools, head 8cb992be2) the delivery did not land: lean/Sheaf/Paper/IntegralConstructibleBoundedBelowCompact)
 - 13:17 L: returned deliver/X3/Sheaf.AlgebraicGeometry.KunnethSupported (reviewer RETURN: (the landing tools, head 58bc69a54) the delivery did not land: lean/Sheaf/AlgebraicGeometry/KunnethSupported.lean change)
 - 13:17 L: returned deliver/X3/Sheaf.Paper.FrobeniusCoefficientReductionCoherence (reviewer RETURN: (the landing tools, head 327c915dc) the delivery did not land: lean/Sheaf/Paper/FrobeniusCoefficientReductionCoherence.l)
+- 13:17 L: returned deliver/X3/Sheaf.Paper.IntegralCriterionReductions (reviewer RETURN: (the landing tools, head b987d18d4) the delivery did not land: lean/Sheaf/Paper/IntegralCriterionReductions.lean changed)
