@@ -140,6 +140,29 @@ noncomputable def supportedFirstLocalizationComponent₃ (A : Type (u + 1)) [Com
       ((upperStar (ModuleCat.{u + 1} A) c.openComplement.ι).mapDerivedCategory.obj K) L ≫
     (supportedFirstLocalizationThirdIso A f g b c d K L).inv
 
+/-- The component maps extend to a triangle morphism in the first variable.
+Source: Tags 09XP and 0F1E (blueprint: lem-pur-supported-product-localization).
+This is the component-extension part of the localization theorem; the distinguishedness
+of the source and target triangles is handled by `normalizedSupportTriangle_distinguished`.
+(blueprint: lem-pur-supported-product-localization-first-map). -/
+theorem supportedProductLocalizationFirst_map (k : Type u) [Field k] [IsAlgClosed k]
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y B C D : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
+    [LocallyOfFiniteType g] [QuasiCompact g] [IsSeparated g]
+    (b : B ⟶ X) (c : C ⟶ X) (d : D ⟶ Y)
+    [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d]
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (_hF : ∃ n : ℤ,
+      (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj).IsGE n) :
+    ∃ m : supportedFirstLocalizationSource A f g b c d K.obj L.obj ⟶
+        supportedFirstLocalizationTarget A f g b c d K.obj L.obj,
+      m.hom₁ = supportedFirstLocalizationComponent₁ A f g b c d K.obj L.obj ∧
+        m.hom₂ = supportedFirstLocalizationComponent₂ A f g b c d K.obj L.obj ∧
+        m.hom₃ = supportedFirstLocalizationComponent₃ A f g b c d K.obj L.obj := by
+  sorry
+
 /-- The three specified supported exterior products form a morphism of distinguished
 localization triangles in the first variable. The third morphism equation in
 `TriangleMorphism` includes the connecting maps and the canonical tensor shift iso.
@@ -190,7 +213,17 @@ theorem supportedProductLocalizationFirst (k : Type u) [Field k] [IsAlgClosed k]
         m.hom₁ = supportedFirstLocalizationComponent₁ A f g b c d K.obj L.obj ∧
         m.hom₂ = supportedFirstLocalizationComponent₂ A f g b c d K.obj L.obj ∧
         m.hom₃ = supportedFirstLocalizationComponent₃ A f g b c d K.obj L.obj := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · exact (tensorRight ((supportedSectionsDerived A d).obj L.obj)).map_distinguished _
+      (normalizedSupportTriangle_distinguished A b c K)
+  · obtain ⟨n, hn⟩ := _hF
+    let Fplus : DerivedCategory.Plus
+        (Sheaf (pullback f g).smallEtaleTopology (ModuleCat.{u + 1} A)) :=
+      ⟨externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj, ⟨n, hn⟩⟩
+    exact normalizedSupportTriangle_distinguished A
+      (supportedProductImmersion f g b d)
+      (supportedProductImmersion f g c (𝟙 Y)) Fplus
+  · exact supportedProductLocalizationFirst_map k A f g b c d K L _hF
 
 /-- The support triangle tensored in the second variable, using the canonical
 exact tensor functor and its signed shift comparison.
@@ -258,6 +291,29 @@ noncomputable def supportedSecondLocalizationComponent₃ (A : Type (u + 1)) [Co
       ((upperStar (ModuleCat.{u + 1} A) c.openComplement.ι).mapDerivedCategory.obj L) ≫
     (supportedSecondLocalizationThirdIso A f g b c d K L).inv
 
+/-- The component maps extend to a triangle morphism in the second variable.
+Source: Tags 09XP and 0F1E (blueprint: lem-pur-supported-product-localization).
+This is the component-extension part of the localization theorem; the distinguishedness
+of the source and target triangles is handled by `normalizedSupportTriangle_distinguished`.
+(blueprint: lem-pur-supported-product-localization-second-map). -/
+theorem supportedProductLocalizationSecond_map (k : Type u) [Field k] [IsAlgClosed k]
+    (A : Type (u + 1)) [CommRing A] [Finite A]
+    {X Y B C D : Scheme.{u}} (f : X ⟶ Spec (.of k)) (g : Y ⟶ Spec (.of k))
+    [LocallyOfFiniteType f] [QuasiCompact f] [IsSeparated f]
+    [LocallyOfFiniteType g] [QuasiCompact g] [IsSeparated g]
+    (b : B ⟶ X) (c : C ⟶ Y) (d : D ⟶ Y)
+    [IsClosedImmersion b] [IsClosedImmersion c] [IsClosedImmersion d]
+    (K : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (L : DerivedCategory.Plus (Sheaf Y.smallEtaleTopology (ModuleCat.{u + 1} A)))
+    (_hF : ∃ n : ℤ,
+      (externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj).IsGE n) :
+    ∃ m : supportedSecondLocalizationSource A f g b c d K.obj L.obj ⟶
+        supportedSecondLocalizationTarget A f g b c d K.obj L.obj,
+      m.hom₁ = supportedSecondLocalizationComponent₁ A f g b c d K.obj L.obj ∧
+        m.hom₂ = supportedSecondLocalizationComponent₂ A f g b c d K.obj L.obj ∧
+        m.hom₃ = supportedSecondLocalizationComponent₃ A f g b c d K.obj L.obj := by
+  sorry
+
 /-- The three specified supported exterior products form a morphism of distinguished
 localization triangles in the second variable. The third morphism equation in
 `TriangleMorphism` includes the connecting maps and the canonical tensor shift iso.
@@ -308,7 +364,17 @@ theorem supportedProductLocalizationSecond (k : Type u) [Field k] [IsAlgClosed k
         m.hom₁ = supportedSecondLocalizationComponent₁ A f g b c d K.obj L.obj ∧
         m.hom₂ = supportedSecondLocalizationComponent₂ A f g b c d K.obj L.obj ∧
         m.hom₃ = supportedSecondLocalizationComponent₃ A f g b c d K.obj L.obj := by
-  sorry
+  refine ⟨?_, ?_, ?_⟩
+  · exact (tensorLeft ((supportedSectionsDerived A b).obj K.obj)).map_distinguished _
+      (normalizedSupportTriangle_distinguished A d c L)
+  · obtain ⟨n, hn⟩ := _hF
+    let Fplus : DerivedCategory.Plus
+        (Sheaf (pullback f g).smallEtaleTopology (ModuleCat.{u + 1} A)) :=
+      ⟨externalProduct (ModuleCat.{u + 1} A) f g K.obj L.obj, ⟨n, hn⟩⟩
+    exact normalizedSupportTriangle_distinguished A
+      (supportedProductImmersion f g b d)
+      (supportedProductImmersion f g (𝟙 X) c) Fplus
+  · exact supportedProductLocalizationSecond_map k A f g b c d K L _hF
 
 /-- Map the derived external product in both coefficient objects using its bifunctor.
 Source: Tag 0F1E (blueprint: lem-pur-supported-product-localization). -/
