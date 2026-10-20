@@ -2,7 +2,7 @@
  "id": "lem-exc-galois-stalk-finite-action-realization",
  "kind": "statement",
  "title": "Finite discrete G-action realization",
- "statement": "Let K, Ks, and Omega be fields in Type u, with compatible algebra structures K → Ks → Omega, Ks a separable closure of K, and Omega algebraically closed. Set S = Spec K, J = its small etale topology, p = the point Spec Omega → S, G = Gal(Ks/K), and w = max(u+1,v). Let T : Sheaf J (Type w) → DiscreteContAction (Type w) G be a functor and j : U ∘ T ≅ p.sheafFiber a natural isomorphism, where U forgets the action. Assume the canonical germ formula of lem-exc-galois-stalk-action-functor: for each g, each extending K-automorphism tau of Omega, x' = Spec(tau) ≫ x, and section z, j(g • j⁻¹(germ_x z)) = germ_x' z. Then every M whose underlying set is finite is in T.essImage, namely there exists a sheaf F and an equivariant isomorphism T(F) ≅ M. This includes the empty finite set and arbitrary finite sets in Type w.",
+ "statement": "Let K, Ks, and Omega be fields in Type u, with compatible algebra structures K → Ks → Omega, Ks a separable closure of K, and Omega algebraically closed. Set S = Spec K, J = its small etale topology, p = the point Spec Omega → S, G = Gal(Ks/K), and w = max(u,v). Let T : Sheaf J (Type w) → DiscreteContAction (Type w) G be a functor and j : U ∘ T ≅ p.sheafFiber a natural isomorphism, where U forgets the action. Assume the canonical germ formula of lem-exc-galois-stalk-action-functor: for each g, each extending K-automorphism tau of Omega, x' = Spec(tau) ≫ x, and section z, j(g • j⁻¹(germ_x z)) = germ_x' z. Then every M whose underlying set is finite is in T.essImage, namely there exists a sheaf F and an equivariant isomorphism T(F) ≅ M. This includes the empty finite set and arbitrary finite sets in Type w.",
  "source": {
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 03QT, proof of theorem-equivalence-sheaves-point"
@@ -125,7 +125,7 @@
   "module": "Sheaf.AlgebraicGeometry.GaloisStalkFiniteActionRealization",
   "file": "lean/Sheaf/AlgebraicGeometry/GaloisStalkFiniteActionRealization.lean",
   "declaration": "AlgebraicGeometry.Scheme.galoisStalkActionFunctor_finite_mem_essImage",
-  "statement": "theorem galoisStalkActionFunctor_finite_mem_essImage\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω] :\n    let S := Spec (.of K)\n    let J := S.smallEtaleTopology\n    let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω))\n    let p := pointSmallEtale s\n    let G := Gal(Ks/K)\n    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G))\n      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))\n    ∀ (T : Sheaf J (Type (max (u + 1) v)) ⥤\n        DiscreteContAction (Type (max (u + 1) v)) G)\n      (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber),\n      (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G)\n          (τ : Ω ≃ₐ[K] Ω)\n          (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n            τ.toRingHom.comp (algebraMap Ks Ω))\n          (X : S.Etale) (x x' : p.fiber.obj X)\n          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n          (z : F.obj.obj (op X)),\n        (j.hom.app F) ((T.obj F).obj.obj.ρ g\n          ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =\n            p.toPresheafFiber X x' F.obj z) →\n      ∀ (M : DiscreteContAction (Type (max (u + 1) v)) G),\n        Finite M.obj.obj.V → T.essImage M",
+  "statement": "theorem galoisStalkActionFunctor_finite_mem_essImage (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] : let S := Spec (.of K) let J := S.smallEtaleTopology let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω)) let p := pointSmallEtale s let G := Gal(Ks/K) let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max u v)) (G := G)) ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max u v)) (G := G)) ∀ (T : Sheaf J (Type (max u v)) ⥤ DiscreteContAction (Type (max u v)) G) (j : T ⋙ V ⋙ Action.forget (Type (max u v)) G ≅ p.sheafFiber), (∀ (F : Sheaf J (Type (max u v))) (g : G) (τ : Ω ≃ₐ[K] Ω) (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : S.Etale) (x x' : p.fiber.obj X) (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), (j.hom.app F) ((T.obj F).obj.obj.ρ g ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) = p.toPresheafFiber X x' F.obj z) → ∀ (M : DiscreteContAction (Type (max u v)) G), Finite M.obj.obj.V → T.essImage M",
   "branch": "sheaf-dag",
   "by": "C1",
   "date": "2026-10-12"
@@ -141,14 +141,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-0b7b6",
-  "group": "T2",
+  "reviewer": "C-a97e8",
+  "group": "D5",
   "result": "pass",
-  "landing": "20261012T135318-L-1693206",
+  "landing": "20261020T051137-L-1575484",
   "kind": "interface",
-  "note": "independent Codex review: Matched the unchanged theorem signature and delivered proofs with the DAG statements, dependencies, source results, and repaired report; both modules and direct importer Sheaf.AlgebraicGeometry.GaloisStalkActionEssSurj compile cleanly, and axiom checks show only standard axioms plus sorryAx from recorded unfinished dependencies."
+  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
  },
  "lean_audit": {
   "master": {
@@ -161,5 +161,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-19",
+  "by": "D5 stage 2",
+  "old_statement": "Let K, Ks, and Omega be fields in Type u, with compatible algebra structures K → Ks → Omega, Ks a separable closure of K, and Omega algebraically closed. Set S = Spec K, J = its small etale topology, p = the point Spec Omega → S, G = Gal(Ks/K), and w = max(u+1,v). Let T : Sheaf J (Type w) → DiscreteContAction (Type w) G be a functor and j : U ∘ T ≅ p.sheafFiber a natural isomorphism, where U forgets the action. Assume the canonical germ formula of lem-exc-galois-stalk-action-functor: for each g, each extending K-automorphism tau of Omega, x' = Spec(tau) ≫ x, and section z, j(g • j⁻¹(germ_x z)) = germ_x' z. Then every M whose underlying set is finite is in T.essImage, namely there exists a sheaf F and an equivariant isomorphism T(F) ≅ M. This includes the empty finite set and arbitrary finite sets in Type w.",
+  "what": "Generalize the coefficient universe from max(u+1,v) to max(u,v), matching the proved Lean interface needed by etaleSheavesGsetsPoint. Existing callers at max(u+1,v) specialize v to max(u+1,v). No field or geometric hypothesis changes.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tag 03QT, proof of theorem-equivalence-sheaves-point"
+  },
+  "citers": [
+   {
+    "id": "lem-exc-galois-stalk-action-essentially-surjective",
+    "holds": true,
+    "note": "The generalized universe includes the former bound by specialization; the mathematical conclusion and all existing applications remain valid."
+   }
+  ]
  }
 }

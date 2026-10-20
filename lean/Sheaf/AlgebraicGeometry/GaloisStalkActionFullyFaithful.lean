@@ -65,12 +65,12 @@ theorem galoisStalkActionFunctor_full_faithful
     let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω))
     let p := pointSmallEtale s
     let G := Gal(Ks/K)
-    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G))
-      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))
-    ∀ (T : Sheaf J (Type (max (u + 1) v)) ⥤
-        DiscreteContAction (Type (max (u + 1) v)) G)
-      (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber),
-      (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G)
+    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max u v)) (G := G))
+      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max u v)) (G := G))
+    ∀ (T : Sheaf J (Type (max u v)) ⥤
+        DiscreteContAction (Type (max u v)) G)
+      (j : T ⋙ V ⋙ Action.forget (Type (max u v)) G ≅ p.sheafFiber),
+      (∀ (F : Sheaf J (Type (max u v))) (g : G)
           (τ : Ω ≃ₐ[K] Ω)
           (hτ : (algebraMap Ks Ω).comp g.toRingHom =
             τ.toRingHom.comp (algebraMap Ks Ω))

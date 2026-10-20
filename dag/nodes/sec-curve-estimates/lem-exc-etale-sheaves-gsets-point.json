@@ -17,69 +17,44 @@
  },
  "proof": [
   {
-   "text": "Represent an element of $F_{\\bar s}$ by a triple $(U,\\bar u,t)$ as in [def-weil-pbc-geometric-stalks]. For $\\sigma\\in G$, change the lift to $\\bar u\\circ\\operatorname{Spec}(\\tilde\\sigma)$, where $\\tilde\\sigma\\in\\operatorname{Aut}(\\Omega/K)$ extends $\\sigma$. This is independent of the extension: each point of the etale $K$-scheme $U$ has finite separable residue field by [lem-weil-pbc-etale-fibre-discrete-separable-points], so an automorphism fixing $K^{\\rm sep}$ fixes every such lift. The action is functorial on triples; the stabilizer of this element contains $\\operatorname{Gal}(K^{\\rm sep}/L)$ for the finite separable image $L\\subseteq K^{\\rm sep}$ of its residue field, hence is open.",
+   "text": "Use exists_galoisStalkActionFunctor at coefficient universe max u (v+1), supplying the Ksep-algebra structure on Omega induced by i. This gives a functor T with underlying stalk functor and the canonical formula on germs. Apply galoisStalkActionFunctor_full_faithful and galoisStalkActionFunctor_essSurj to T, then form T.asEquivalence. The given natural isomorphism and germ formula give clause (i).",
    "uses": [
-    "def-weil-pbc-geometric-stalks",
-    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+    "lem-exc-galois-stalk-action-functor",
+    "lem-exc-galois-stalk-action-fully-faithful",
+    "lem-exc-galois-stalk-action-essentially-surjective"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QW, section-galois-action-stalks, action formula and paragraph before Tag 03QT"
-   }
+   "elementary": false
   },
   {
-   "text": "For each etale $K$-scheme $X$, [lem-weil-pbc-small-etale-representable-presheaf-sheaf] makes $h_X$ a sheaf. By [lem-galois-stalk-representable], evaluation on a pointed neighbourhood identifies its stalk with $\\operatorname{Hom}_K(\\operatorname{Spec}\\Omega,X)$. By [lem-weil-pbc-etale-fibre-discrete-separable-points], $X$ is a disjoint union of spectra of finite separable extensions of $K$; every $K$-embedding of any such extension in $\\Omega$ lands in $K^{\\rm sep}$. Thus restriction gives a natural bijection with $\\operatorname{Hom}_K(\\operatorname{Spec}K^{\\rm sep},X)$, compatible with the action from step 1. This proves (ii).",
+   "text": "For every etale X, identify lifts Spec Omega -> X with the stalk of the uliftYoneda sheaf by sending a lift to the germ of id_X. Construct its inverse using the universal property of the stalk colimit, evaluating a representative morphism on its pointed lift. The colimit transition relations prove the two inverse laws. This is the representable-stalk calculation of lem-galois-stalk-representable with an explicit ULift.",
    "uses": [
-    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-    "lem-galois-stalk-representable",
-    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+    "lem-galois-stalk-representable"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof, the stalk of the representable sheaf (details omitted)"
-   }
+   "elementary": true
   },
   {
-   "text": "Write $M=F_{\\bar s}$. For each finite separable $K\\subseteq L\\subseteq K^{\\rm sep}$, [lem-exc-field-sections-stalk-invariants] identifies $F(\\operatorname{Spec}L)$ with $M^{H_L}$, where $H_L=\\operatorname{Gal}(K^{\\rm sep}/L)$; its compatibility with every $K$-embedding $j:L\\to L'$ identifies restriction with the action of an extension $\\sigma\\in G$ of $j$. Every etale $K$-scheme is a disjoint union of such spectra by [lem-weil-pbc-etale-fibre-discrete-separable-points]; the sheaf property for the covering by components identifies its sections with the product of their section sets. A $G$-equivariant map $M\\to N$ therefore gives, on every etale $K$-scheme, a natural map of sections of the corresponding sheaves. Conversely a sheaf morphism yields its equivariant stalk map, and the section formula makes these constructions inverse. Hence the stalk functor is fully faithful.",
+   "text": "Precomposition with Spec i bijects Ksep-points and Omega-points of X: surjectivity is the etale lifting property over a separably closed field, and injectivity is unramified uniqueness. Compose its inverse with the representable-stalk identification. Extend g to an automorphism tau of Omega. The relation tau o i = i o g and the formula on germs show equivariance. For naturality, apply the stalk colimit transition identity to f:X->Y and id_Y. Apply injectivity of both component equivalences to conclude the required equalities of points.",
    "uses": [
-    "lem-exc-field-sections-stalk-invariants",
-    "lem-weil-pbc-etale-fibre-discrete-separable-points"
+    "lem-exc-etale-lift-separably-closed-factorization",
+    "lem-exc-field-point-precomposition-injective",
+    "lem-exc-galois-automorphism-extension"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof, inverse and omitted full-faithfulness details; Tag 04JM, lemma-global-sections-point, direct proof"
-   }
-  },
-  {
-   "text": "Given any discrete continuous $G$-set $M$, [lem-exc-etale-field-gsets] supplies an etale $K$-scheme $X$ whose Galois fibre $\\operatorname{Hom}_K(\\operatorname{Spec}K^{\\rm sep},X)$ is $M$. By step 2, $h_X$ has stalk $M$. Thus the stalk functor is essentially surjective; combined with step 3 it is an equivalence, completing (i).",
-   "uses": [
-    "lem-exc-etale-field-gsets",
-    "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-    "lem-galois-stalk-representable",
-    "lem-weil-pbc-etale-fibre-discrete-separable-points"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QT, theorem-equivalence-sheaves-point, proof, construction of inverse using Tag 03QR"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points",
-  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
+  "lem-exc-galois-stalk-action-functor",
+  "lem-exc-galois-stalk-action-fully-faithful",
+  "lem-exc-galois-stalk-action-essentially-surjective",
   "lem-galois-stalk-representable",
-  "lem-exc-field-sections-stalk-invariants",
-  "lem-exc-etale-field-gsets"
+  "lem-exc-etale-lift-separably-closed-factorization",
+  "lem-exc-field-point-precomposition-injective",
+  "lem-exc-galois-automorphism-extension"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "agent D5",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03QW, 03QT and 04JM, with the details omitted at 03QT supplied here"
+  "place": "Tags 03QW and 03QT, using the existing Galois stalk functor, full faithfulness and essential surjectivity; explicit representable-stalk colimit calculation"
  },
  "mathlib_searches": [
   {
@@ -145,12 +120,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-etale-fibre-discrete-separable-points",
-  "lem-weil-pbc-small-etale-representable-presheaf-sheaf",
-  "lem-weil-pbc-etale-fibre-discrete-separable-points",
-  "lem-weil-pbc-small-etale-representable-presheaf-sheaf"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-10",
   "by": "L",
@@ -177,5 +147,15 @@
   "group": "G1",
   "result": "fix",
   "note": "K field; Ksep IsSepClosure; Omega IsAlgClosure + embedding i; geometric point Spec(algebraMap K Omega); smallEtaleTopology sheaves of sets; (i) equivalence to DiscreteContAction (Krull, F1 form) with eta: underlying functor = sheafFiber, action = lift change by tau extending g (M1 form); (ii) uliftYoneda stalk = K-maps Spec Ksep -> X, Galois-equivariant and natural in X"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-a97e8",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261020T051137-L-1575484",
+  "kind": "interface",
+  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
  }
 }

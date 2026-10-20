@@ -103,7 +103,7 @@ theorem nonempty_iso_etaleModuleSections_invariants
       (CategoryTheory.forget AddCommGrpCat.{max (u + 1) v})
   let γ := p.sheafFiberCompIso (CategoryTheory.forget (ModuleCat.{max (u + 1) v} A))
   obtain ⟨lift, act, _, hact, _⟩ :=
-    fieldSections_stalkInvariants.{u, v} K Ks Ω
+    fieldSections_stalkInvariants.{u, max (u + 1) v} K Ks Ω
       (Spec.map (CommRingCat.ofHom (algebraMap K Ω))) rfl
   obtain ⟨ρ, hρ, _⟩ := exists_galoisPointAction K Ks Ω
   have hγ (F : Sheaf S.smallEtaleTopology (ModuleCat.{max (u + 1) v} A))

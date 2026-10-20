@@ -9,6 +9,7 @@ public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
 import WeilConjectures.AlgebraicGeometry.EtaleFiniteRefinement.GeometricLifts
 import WeilConjectures.FieldTheory.GaloisAutomorphismExtension
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 
 /-!
@@ -24,6 +25,16 @@ universe u v
 open CategoryTheory Opposite
 
 namespace AlgebraicGeometry.Scheme
+
+private noncomputable instance smallEtaleHasSheafify (S : Scheme.{u}) :
+    HasSheafify S.smallEtaleTopology (Type (max u v)) := by
+  have : HasSheafify (AffineEtale.topology S) (Type (max u v)) :=
+    hasSheafifyEssentiallySmallSite.{u} _ _
+  have : ((AffineEtale.Spec S).sheafPushforwardContinuous (Type (max u v))
+      (AffineEtale.topology S) S.smallEtaleTopology).IsEquivalence :=
+    Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _
+  exact Functor.IsDenseSubsite.hasSheafify_of_isEquivalence
+    (AffineEtale.topology S) S.smallEtaleTopology (AffineEtale.Spec S)
 
 set_option backward.isDefEq.respectTransparency false in
 set_option linter.unusedVariables false in
@@ -58,12 +69,12 @@ private theorem galoisStalkActionFunctor_representable_comparison
     let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω))
     let p := pointSmallEtale s
     let G := Gal(Ks/K)
-    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G))
-      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))
-    ∀ (T : Sheaf J (Type (max (u + 1) v)) ⥤
-        DiscreteContAction (Type (max (u + 1) v)) G)
-      (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber),
-      (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G)
+    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max u v)) (G := G))
+      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max u v)) (G := G))
+    ∀ (T : Sheaf J (Type (max u v)) ⥤
+        DiscreteContAction (Type (max u v)) G)
+      (j : T ⋙ V ⋙ Action.forget (Type (max u v)) G ≅ p.sheafFiber),
+      (∀ (F : Sheaf J (Type (max u v))) (g : G)
           (τ : Ω ≃ₐ[K] Ω)
           (hτ : (algebraMap Ks Ω).comp g.toRingHom =
             τ.toRingHom.comp (algebraMap Ks Ω))
@@ -74,8 +85,8 @@ private theorem galoisStalkActionFunctor_representable_comparison
           ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =
             p.toPresheafFiber X x' F.obj z) →
       ∀ (X : S.Etale),
-        let F := (presheafToSheaf J (Type (max (u + 1) v))).obj
-          (yoneda.obj X ⋙ uliftFunctor.{max (u + 1) v, u})
+        let F := (presheafToSheaf J (Type (max u v))).obj
+          (yoneda.obj X ⋙ uliftFunctor.{max u v, u})
         ∃ e : (T.obj F).obj.obj.V ≃
             ((Over.mk (Spec.map (CommRingCat.ofHom (algebraMap K Ks)))) ⟶
               (Etale.forget S).obj X),
@@ -89,8 +100,8 @@ private theorem galoisStalkActionFunctor_representable_comparison
   let J := S.smallEtaleTopology
   let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω))
   let p := pointSmallEtale s
-  let W := Type (max (u + 1) v)
-  let P := yoneda.obj X ⋙ uliftFunctor.{max (u + 1) v, u}
+  let W := Type (max u v)
+  let P := yoneda.obj X ⋙ uliftFunctor.{max u v, u}
   let F := (presheafToSheaf J W).obj P
   let unit := CategoryTheory.toSheafify J P
   let zid := unit.app (op X) (ULift.up (𝟙 X))
@@ -99,7 +110,7 @@ private theorem galoisStalkActionFunctor_representable_comparison
   have hη : Function.Bijective η := by
     let η₀ (x : p.fiber.obj X) := p.toPresheafFiber X x P (ULift.up (𝟙 X))
     let φ (Y : S.Etale) (y : p.fiber.obj Y) :
-        P.obj (op Y) ⟶ ULift.{max (u + 1) v} (p.fiber.obj X) :=
+        P.obj (op Y) ⟶ ULift.{max u v} (p.fiber.obj X) :=
       ↾fun z ↦ ULift.up (p.fiber.map z.down y)
     have hφ : ∀ ⦃Y Z : S.Etale⦄ (f : Y ⟶ Z) (y : p.fiber.obj Y),
         P.map f.op ≫ φ Y y = φ Z (p.fiber.map f y) := by
@@ -205,7 +216,7 @@ Proof: Replace the finite underlying set of M by Fin n in Type u and transport i
 continuous action along a bijection. Apply etaleFieldGsets to obtain an etale
 K-scheme X with this small G-set of Ks-points. The representable presheaf of X
 is a sheaf by smallEtaleRepresentablePresheaf_isSheaf; lift its values to
-Type (max (u + 1) v). The representable-stalk isomorphism identifies its stalk
+Type (max u v). The representable-stalk isomorphism identifies its stalk
 with the Omega-points of X. Every such point factors uniquely through Ks:
 its residue field is finite separable over K, so its embedding into Omega lands
 in the image of the separable closure. These factorizations identify Omega-points
@@ -223,12 +234,12 @@ theorem galoisStalkActionFunctor_finite_mem_essImage
     let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω))
     let p := pointSmallEtale s
     let G := Gal(Ks/K)
-    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G))
-      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))
-    ∀ (T : Sheaf J (Type (max (u + 1) v)) ⥤
-        DiscreteContAction (Type (max (u + 1) v)) G)
-      (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber),
-      (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G)
+    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max u v)) (G := G))
+      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max u v)) (G := G))
+    ∀ (T : Sheaf J (Type (max u v)) ⥤
+        DiscreteContAction (Type (max u v)) G)
+      (j : T ⋙ V ⋙ Action.forget (Type (max u v)) G ≅ p.sheafFiber),
+      (∀ (F : Sheaf J (Type (max u v))) (g : G)
           (τ : Ω ≃ₐ[K] Ω)
           (hτ : (algebraMap Ks Ω).comp g.toRingHom =
             τ.toRingHom.comp (algebraMap Ks Ω))
@@ -238,13 +249,13 @@ theorem galoisStalkActionFunctor_finite_mem_essImage
         (j.hom.app F) ((T.obj F).obj.obj.ρ g
           ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =
             p.toPresheafFiber X x' F.obj z) →
-      ∀ (M : DiscreteContAction (Type (max (u + 1) v)) G),
+      ∀ (M : DiscreteContAction (Type (max u v)) G),
         Finite M.obj.obj.V → T.essImage M := by
   classical
   dsimp only
   intro T j hj M hfinite
   let G := Gal(Ks/K)
-  let W := Type (max (u + 1) v)
+  let W := Type (max u v)
   let X₀ := (forget₂ (Action W G) TopCat).obj M.obj.obj
   let _ : MulAction G X₀ :=
     inferInstanceAs (MulAction G ((forget₂ (Action W G) TopCat).obj M.obj.obj))
@@ -283,7 +294,7 @@ theorem galoisStalkActionFunctor_finite_mem_essImage
     ((ObjectProperty.ι _ ⋙ ObjectProperty.ι _ ⋙
       Action.forget (Type u) G).mapIso c).toEquiv
   let F := (presheafToSheaf (Spec (.of K)).smallEtaleTopology W).obj
-    (yoneda.obj X ⋙ uliftFunctor.{max (u + 1) v, u})
+    (yoneda.obj X ⋙ uliftFunctor.{max u v, u})
   obtain ⟨e, he⟩ := galoisStalkActionFunctor_representable_comparison K Ks Ω T j hj X
   let f : (T.obj F).obj.obj.V ≃ M.obj.obj.V :=
     e.trans ((points X).symm.trans (d.trans b))

@@ -50,7 +50,7 @@ theorem exists_fieldSection_of_finiteGalois_invariant_representative
     [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω]
     (s : Spec (.of Ω) ⟶ Spec (.of K))
     (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
     (action : MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F))
     (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
       (hτ : (algebraMap Ks Ω).comp g.toRingHom =
@@ -116,8 +116,8 @@ theorem exists_fieldSection_of_finiteGalois_invariant_representative
   let c := MorphismProperty.Over.map ⊤ hp
   have hc : c.IsContinuous (Spec (.of L)).smallEtaleTopology
       (Spec (.of K)).smallEtaleTopology := isContinuous_overMap hp le_rfl
-  let P : (Spec (.of L)).Etaleᵒᵖ ⥤ Type (max (u + 1) v) := c.op ⋙ F.obj
-  let G : Sheaf (Spec (.of L)).smallEtaleTopology (Type (max (u + 1) v)) :=
+  let P : (Spec (.of L)).Etaleᵒᵖ ⥤ Type (max u v) := c.op ⋙ F.obj
+  let G : Sheaf (Spec (.of L)).smallEtaleTopology (Type (max u v)) :=
     ⟨P, c.op_comp_isSheaf _ _ F⟩
   let eE : c.obj (etaleSpec L E) ≅ etaleSpec K E :=
     MorphismProperty.Over.isoMk (Iso.refl (Spec (.of E))) (by

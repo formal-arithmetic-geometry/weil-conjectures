@@ -14,7 +14,7 @@
  "unit": "sk-prop-h2",
  "id": "lem-exc-galois-stalk-action-full",
  "title": "Full of canonical Galois stalk functor",
- "statement": "Let $K,K_s,\\Omega$ be fields in $\\mathrm{Type}\\,u$, with compatible algebra structures $K\\to K_s\\to\\Omega$, $K_s$ a separable closure of $K$ [def-pd-separable-closure], and $\\Omega$ algebraically closed. Let $J$ be the small etale topology on $\\operatorname{Spec}K$ [def-weil-pbc-etale-sheaves], let $p$ be the point defined by $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$, and let $p^*$ be its set-valued geometric stalk functor [def-weil-pbc-geometric-stalks]. Put $G=\\operatorname{Gal}(K_s/K)$ with the Krull topology and $w=\\max(u+1,v)$. Let $U$ be the forgetful functor from discrete continuous $G$-sets in $\\mathrm{Type}\\,w$ to sets. Let $T:\\operatorname{Sh}(J,\\mathrm{Type}\\,w)\\to\\operatorname{DiscreteContAction}(\\mathrm{Type}\\,w,G)$ be a functor, and $j:T\\circ U\\cong p^*$ a natural isomorphism satisfying the canonical germ formula. The canonical germ formula is: for a sheaf $F$, $g\\in G$, a $K$-automorphism $\\tau$ of $\\Omega$ with $\\tau\\circ i=i\\circ g$ for the embedding $i:K_s\\to\\Omega$, an etale $K$-scheme $X$, lifts $x,x^{\\prime}:\\operatorname{Spec}\\Omega\\to X$ over $K$ with $x^{\\prime}=x\\circ\\operatorname{Spec}\\tau$, and $z\\in F(X)$, $j_F(g\\cdot j_F^{-1}(\\operatorname{germ}_x z))=\\operatorname{germ}_{x^{\\prime}}z$. Then $T$ is full.",
+ "statement": "Let $K,K_s,\\Omega$ be fields in $\\mathrm{Type}\\,u$, with compatible algebra structures $K\\to K_s\\to\\Omega$, $K_s$ a separable closure of $K$ [def-pd-separable-closure], and $\\Omega$ algebraically closed. Let $J$ be the small etale topology on $\\operatorname{Spec}K$ [def-weil-pbc-etale-sheaves], let $p$ be the point defined by $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$, and let $p^*$ be its set-valued geometric stalk functor [def-weil-pbc-geometric-stalks]. Put $G=\\operatorname{Gal}(K_s/K)$ with the Krull topology and $w=\\max(u,v)$. Let $U$ be the forgetful functor from discrete continuous $G$-sets in $\\mathrm{Type}\\,w$ to sets. Let $T:\\operatorname{Sh}(J,\\mathrm{Type}\\,w)\\to\\operatorname{DiscreteContAction}(\\mathrm{Type}\\,w,G)$ be a functor, and $j:T\\circ U\\cong p^*$ a natural isomorphism satisfying the canonical germ formula. The canonical germ formula is: for a sheaf $F$, $g\\in G$, a $K$-automorphism $\\tau$ of $\\Omega$ with $\\tau\\circ i=i\\circ g$ for the embedding $i:K_s\\to\\Omega$, an etale $K$-scheme $X$, lifts $x,x^{\\prime}:\\operatorname{Spec}\\Omega\\to X$ over $K$ with $x^{\\prime}=x\\circ\\operatorname{Spec}\\tau$, and $z\\in F(X)$, $j_F(g\\cdot j_F^{-1}(\\operatorname{germ}_x z))=\\operatorname{germ}_{x^{\\prime}}z$. Then $T$ is full.",
  "proof": [
   {
    "text": "Given a morphism a:T(F)->T(F'), transport its underlying function through j to q:p^*F->p^*F'. For every etale object X and section z of F(X), the family x |-> q(germ_x z) satisfies the covariance hypothesis of [lem-exc-field-equivariant-germ-family-section], by the canonical germ formula for F and F' and equivariance of a. Apply that lemma to obtain a section of F'(X) with precisely these germs.",
@@ -101,7 +101,7 @@
   "module": "Sheaf.AlgebraicGeometry.GaloisStalkActionFull",
   "file": "lean/Sheaf/AlgebraicGeometry/GaloisStalkActionFull.lean",
   "declaration": "AlgebraicGeometry.Scheme.galoisStalkActionFunctor_full",
-  "statement": "theorem galoisStalkActionFunctor_full\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω] :\n    let S := Spec (.of K); let J := S.smallEtaleTopology\n    let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω)); let p := pointSmallEtale s\n    let G := Gal(Ks/K); let V := ObjectProperty.ι (ContAction.IsDiscrete\n      (V := Type (max (u + 1) v)) (G := G)) ⋙ ObjectProperty.ι (Action.IsContinuous\n      (V := Type (max (u + 1) v)) (G := G))\n    ∀ (T : Sheaf J (Type (max (u + 1) v)) ⥤ DiscreteContAction (Type (max (u + 1) v)) G)\n      (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber),\n      (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G) (τ : Ω ≃ₐ[K] Ω)\n          (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω))\n          (X : S.Etale) (x x' : p.fiber.obj X)\n          (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n          (z : F.obj.obj (op X)),\n        (j.hom.app F) ((T.obj F).obj.obj.ρ g ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =\n          p.toPresheafFiber X x' F.obj z) → T.Full",
+  "statement": "theorem galoisStalkActionFunctor_full (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] : let S := Spec (.of K); let J := S.smallEtaleTopology let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω)); let p := pointSmallEtale s let G := Gal(Ks/K); let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max u v)) (G := G)) ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max u v)) (G := G)) ∀ (T : Sheaf J (Type (max u v)) ⥤ DiscreteContAction (Type (max u v)) G) (j : T ⋙ V ⋙ Action.forget (Type (max u v)) G ≅ p.sheafFiber), (∀ (F : Sheaf J (Type (max u v))) (g : G) (τ : Ω ≃ₐ[K] Ω) (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : S.Etale) (x x' : p.fiber.obj X) (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), (j.hom.app F) ((T.obj F).obj.obj.ρ g ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) = p.toPresheafFiber X x' F.obj z) → T.Full",
   "branch": "sheaf-dag",
   "by": "E1",
   "date": "2026-10-12"
@@ -117,14 +117,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-887fd",
-  "group": "F2",
+  "reviewer": "C-a97e8",
+  "group": "D5",
   "result": "pass",
-  "landing": "20261012T112837-L-766871",
+  "landing": "20261020T051137-L-1575484",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched the packet and node statements; both delivered modules and the direct importer compiled cleanly, with only permitted sorryAx from the documented helper."
+  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
  },
  "lean_audit": {
   "master": {
@@ -137,5 +137,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-19",
+  "by": "D5 stage 2",
+  "old_statement": "Let $K,K_s,\\Omega$ be fields in $\\mathrm{Type}\\,u$, with compatible algebra structures $K\\to K_s\\to\\Omega$, $K_s$ a separable closure of $K$ [def-pd-separable-closure], and $\\Omega$ algebraically closed. Let $J$ be the small etale topology on $\\operatorname{Spec}K$ [def-weil-pbc-etale-sheaves], let $p$ be the point defined by $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$, and let $p^*$ be its set-valued geometric stalk functor [def-weil-pbc-geometric-stalks]. Put $G=\\operatorname{Gal}(K_s/K)$ with the Krull topology and $w=\\max(u+1,v)$. Let $U$ be the forgetful functor from discrete continuous $G$-sets in $\\mathrm{Type}\\,w$ to sets. Let $T:\\operatorname{Sh}(J,\\mathrm{Type}\\,w)\\to\\operatorname{DiscreteContAction}(\\mathrm{Type}\\,w,G)$ be a functor, and $j:T\\circ U\\cong p^*$ a natural isomorphism satisfying the canonical germ formula. The canonical germ formula is: for a sheaf $F$, $g\\in G$, a $K$-automorphism $\\tau$ of $\\Omega$ with $\\tau\\circ i=i\\circ g$ for the embedding $i:K_s\\to\\Omega$, an etale $K$-scheme $X$, lifts $x,x^{\\prime}:\\operatorname{Spec}\\Omega\\to X$ over $K$ with $x^{\\prime}=x\\circ\\operatorname{Spec}\\tau$, and $z\\in F(X)$, $j_F(g\\cdot j_F^{-1}(\\operatorname{germ}_x z))=\\operatorname{germ}_{x^{\\prime}}z$. Then $T$ is full.",
+  "what": "Generalize the coefficient universe from max(u+1,v) to max(u,v), matching the proved Lean interface needed by etaleSheavesGsetsPoint. Existing callers at max(u+1,v) specialize v to max(u+1,v). No field or geometric hypothesis changes.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tags 03QT and 04JM, theorem-equivalence-sheaves-point and direct proof of lemma-global-sections-point"
+  },
+  "citers": [
+   {
+    "id": "lem-exc-galois-stalk-action-fully-faithful",
+    "holds": true,
+    "note": "The generalized universe includes the former bound by specialization; the mathematical conclusion and all existing applications remain valid."
+   }
+  ]
  }
 }

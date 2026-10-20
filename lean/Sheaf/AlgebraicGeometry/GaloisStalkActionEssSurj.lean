@@ -7,11 +7,12 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import Sheaf.AlgebraicGeometry.EtaleFieldGsets
+import Mathlib.AlgebraicGeometry.Sites.AffineEtale
 import Mathlib.CategoryTheory.Sites.Point.Skyscraper
 import Mathlib.CategoryTheory.Sites.LeftExact
 import Mathlib.FieldTheory.Galois.Profinite
 import Sheaf.AlgebraicGeometry.GaloisStalkFiniteActionRealization
-import Sheaf.CategoryTheory.DiscreteContActionFiniteOrbitCoproduct
+import WeilConjectures.CategoryTheory.DiscreteContActionFiniteOrbitCoproduct
 
 /-!
 # Essential surjectivity of the canonical Galois stalk functor
@@ -35,7 +36,7 @@ Tag 03QR, the etale-scheme/Galois-set equivalence used there.
 
 Any lift of the stalk functor with the canonical formula realizes every discrete G-set.
 
-Proof: Fix a discrete continuous G-set M in Type w, where w = max (u + 1) v.
+Proof: Fix a discrete continuous G-set M in Type w, where w = max u v.
 Its orbits are finite: an open stabilizer has finite index in the compact absolute
 Galois group. Each orbit can therefore be represented by a finite set in Type u,
 with its continuous G-action transported along a bijection. Apply etaleFieldGsets
@@ -63,12 +64,12 @@ theorem galoisStalkActionFunctor_essSurj
     let s := Spec.map (CommRingCat.ofHom (algebraMap K Ω))
     let p := pointSmallEtale s
     let G := Gal(Ks/K)
-    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := G))
-      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max (u + 1) v)) (G := G))
-    ∀ (T : Sheaf J (Type (max (u + 1) v)) ⥤
-        DiscreteContAction (Type (max (u + 1) v)) G)
-      (j : T ⋙ V ⋙ Action.forget (Type (max (u + 1) v)) G ≅ p.sheafFiber),
-      (∀ (F : Sheaf J (Type (max (u + 1) v))) (g : G)
+    let V := ObjectProperty.ι (ContAction.IsDiscrete (V := Type (max u v)) (G := G))
+      ⋙ ObjectProperty.ι (Action.IsContinuous (V := Type (max u v)) (G := G))
+    ∀ (T : Sheaf J (Type (max u v)) ⥤
+        DiscreteContAction (Type (max u v)) G)
+      (j : T ⋙ V ⋙ Action.forget (Type (max u v)) G ≅ p.sheafFiber),
+      (∀ (F : Sheaf J (Type (max u v))) (g : G)
           (τ : Ω ≃ₐ[K] Ω)
           (hτ : (algebraMap Ks Ω).comp g.toRingHom =
             τ.toRingHom.comp (algebraMap Ks Ω))
@@ -83,10 +84,10 @@ theorem galoisStalkActionFunctor_essSurj
   dsimp only
   intro T j hj
   let U := ObjectProperty.ι
-      (ContAction.IsDiscrete (V := Type (max (u + 1) v)) (G := Gal(Ks/K)))
+      (ContAction.IsDiscrete (V := Type (max u v)) (G := Gal(Ks/K)))
     ⋙ ObjectProperty.ι
-      (Action.IsContinuous (V := Type (max (u + 1) v)) (G := Gal(Ks/K)))
-    ⋙ Action.forget (Type (max (u + 1) v)) (Gal(Ks/K))
+      (Action.IsContinuous (V := Type (max u v)) (G := Gal(Ks/K)))
+    ⋙ Action.forget (Type (max u v)) (Gal(Ks/K))
   refine ⟨fun M ↦ ?_⟩
   obtain ⟨I, A, f, hfinite, ⟨hc⟩, ⟨hu⟩⟩ :=
     discreteContAction_finite_orbit_coproduct (Gal(Ks/K)) M
@@ -94,11 +95,19 @@ theorem galoisStalkActionFunctor_essSurj
     galoisStalkActionFunctor_finite_mem_essImage K Ks Ω T j hj (A i) (hfinite i)
   choose F he using hreal
   let e (i : I) : T.obj (F i) ≅ A i := (he i).some
-  have : HasSheafify (Spec (.of K)).smallEtaleTopology
-      (Type (max (u + 1) v)) := inferInstance
-  have : Limits.HasColimitsOfShape (Discrete I) (Type (max (u + 1) v)) := inferInstance
+  have : HasSheafify (AffineEtale.topology (Spec (.of K)))
+      (Type (max u v)) := hasSheafifyEssentiallySmallSite.{u} _ _
+  have : ((AffineEtale.Spec (Spec (.of K))).sheafPushforwardContinuous
+      (Type (max u v)) (AffineEtale.topology (Spec (.of K)))
+      (Spec (.of K)).smallEtaleTopology).IsEquivalence :=
+    Functor.isEquivalence_of_isOneHypercoverDense _ _ _ _
+  have : HasSheafify (Spec (.of K)).smallEtaleTopology (Type (max u v)) :=
+    Functor.IsDenseSubsite.hasSheafify_of_isEquivalence
+      (AffineEtale.topology (Spec (.of K))) (Spec (.of K)).smallEtaleTopology
+      (AffineEtale.Spec (Spec (.of K)))
+  have : Limits.HasColimitsOfShape (Discrete I) (Type (max u v)) := inferInstance
   have : Limits.HasColimitsOfShape (Discrete I)
-      (Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v))) :=
+      (Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v))) :=
     Sheaf.instHasColimitsOfShape
   let D := Discrete.functor F
   let c := Limits.colimit.cocone D

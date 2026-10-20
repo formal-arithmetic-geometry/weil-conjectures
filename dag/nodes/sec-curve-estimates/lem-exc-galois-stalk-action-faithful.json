@@ -12,7 +12,7 @@
  "unit": "sk-prop-h2",
  "id": "lem-exc-galois-stalk-action-faithful",
  "title": "Faithfulness of the geometric stalk functor over a field",
- "statement": "For any field K and algebraically closed K-extension Omega, the geometric stalk functor on Type max(u+1,v)-valued etale sheaves is faithful.",
+ "statement": "For any field K and algebraically closed K-extension Omega, the geometric stalk functor on Type max(u,v)-valued etale sheaves is faithful.",
  "proof": [
   {
    "text": "For each point of an etale object lift it to Omega with exists_fac_of_etale_of_isSepClosed. Equality of stalk maps gives equal germs. Point.toPresheafFiber_eq_iff' supplies a pointed refinement with equal restricted sections. Factor that refinement through an arrow of the equalizer sieve written as ofArrows. Its image contains the original point, so ofArrows_mem_smallEtaleTopology_iff makes this sieve covering. Sheaf.isSeparated gives equality of the section values; hom extensionality proves equality of morphisms.",
@@ -86,7 +86,7 @@
   "module": "Sheaf.AlgebraicGeometry.GaloisStalkActionFaithful",
   "file": "lean/Sheaf/AlgebraicGeometry/GaloisStalkActionFaithful.lean",
   "declaration": "AlgebraicGeometry.Scheme.field_sheafFiber_faithful",
-  "statement": "theorem field_sheafFiber_faithful (K Ω : Type u) [Field K] [Field Ω]\n    [Algebra K Ω] [IsAlgClosed Ω] :\n    ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber\n      (A := Type (max (u + 1) v))).Faithful",
+  "statement": "theorem field_sheafFiber_faithful (K Ω : Type u) [Field K] [Field Ω] [Algebra K Ω] [IsAlgClosed Ω] : ((pointSmallEtale (Spec.map (CommRingCat.ofHom (algebraMap K Ω)))).sheafFiber (A := Type (max u v))).Faithful",
   "branch": "sheaf-dag",
   "by": "E1",
   "date": "2026-10-12"
@@ -102,14 +102,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E1",
+  "reviewer": "C-a97e8",
+  "group": "D5",
   "result": "pass",
-  "landing": "20261012T095857-L-314664",
+  "landing": "20261020T051137-L-1575484",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
  },
  "lean_audit": {
   "master": {
@@ -122,5 +122,22 @@
    "decls": [],
    "missing": []
   }
+ },
+ "statement_change": {
+  "date": "2026-10-19",
+  "by": "D5 stage 2",
+  "old_statement": "For any field K and algebraically closed K-extension Omega, the geometric stalk functor on Type max(u+1,v)-valued etale sheaves is faithful.",
+  "what": "Generalize the coefficient universe from max(u+1,v) to max(u,v), matching the proved Lean interface needed by etaleSheavesGsetsPoint. Existing callers at max(u+1,v) specialize v to max(u+1,v). No field or geometric hypothesis changes.",
+  "source": {
+   "document": "literature/stacks-project/etale-cohomology.tex",
+   "place": "Tags 03QT and 04JM, theorem-equivalence-sheaves-point and direct proof of lemma-global-sections-point"
+  },
+  "citers": [
+   {
+    "id": "lem-exc-galois-stalk-action-fully-faithful",
+    "holds": true,
+    "note": "The generalized universe includes the former bound by specialization; the mathematical conclusion and all existing applications remain valid."
+   }
+  ]
  }
 }

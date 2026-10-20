@@ -82,7 +82,7 @@ private noncomputable def changeGerm
     (s : Spec (.of Ω) ⟶ Spec (.of K))
     (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     (τ : Ω ≃ₐ[K] Ω)
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v))) :
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v))) :
     (pointSmallEtale s).sheafFiber.obj F → (pointSmallEtale s).sheafFiber.obj F :=
   (pointSmallEtale s).presheafFiberDesc
     (fun X x ↦ (pointSmallEtale s).toPresheafFiber X
@@ -133,7 +133,7 @@ private theorem changeGerm_germ
     (s : Spec (.of Ω) ⟶ Spec (.of K))
     (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
     (τ : Ω ≃ₐ[K] Ω)
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
     (X : (Spec (.of K)).Etale) (x : (pointSmallEtale s).fiber.obj X)
     (z : F.obj.obj (op X)) :
     changeGerm K Ks Ω s hs τ F ((pointSmallEtale s).toPresheafFiber X x F.obj z) =
@@ -154,7 +154,7 @@ private noncomputable def stalkAction
     [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω]
     (s : Spec (.of Ω) ⟶ Spec (.of K))
     (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v))) :
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v))) :
     MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F) where
   smul g := changeGerm K Ks Ω s hs (closureAut K Ks Ω g) F
   one_smul m := by
@@ -190,7 +190,7 @@ private theorem fieldGerm_injective
     (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]
     [Algebra K Ks] [IsAlgClosed Ω]
     (s : Spec (.of Ω) ⟶ Spec (.of K))
-    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
+    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
     (L : IntermediateField K Ks) [FiniteDimensional K L] [Algebra.IsSeparable K L]
     (x : (pointSmallEtale s).fiber.obj (etaleSpec K L)) :
     Function.Injective ((pointSmallEtale s).toPresheafFiber (etaleSpec K L) x F.obj) := by
@@ -251,13 +251,13 @@ theorem fieldSections_stalkInvariants
     ∃ (lift : ∀ (L : IntermediateField K Ks)
         [FiniteDimensional K L] [Algebra.IsSeparable K L],
           (pointSmallEtale s).fiber.obj (etaleSpec K L))
-      (action : ∀ F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)),
+      (action : ∀ F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)),
         MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F)),
       (∀ (L : IntermediateField K Ks) [FiniteDimensional K L]
         [Algebra.IsSeparable K L],
         (lift L).left = Spec.map
           (CommRingCat.ofHom ((algebraMap Ks Ω).comp L.subtype))) ∧
-      (∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v))),
+      (∀ (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v))),
         (∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
           (hτ : (algebraMap Ks Ω).comp g.toRingHom =
             τ.toRingHom.comp (algebraMap Ks Ω))
@@ -294,7 +294,7 @@ theorem fieldSections_stalkInvariants
           (∀ h ∈ L'.fixingSubgroup,
             (action F).smul h ((action F).smul g m) = (action F).smul g m) ∧
           (action F).smul g m = (action F).smul g' m)) ∧
-      (∀ (F F' : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
+      (∀ (F F' : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
         (φ : F ⟶ F'),
         (∀ (L : IntermediateField K Ks) [FiniteDimensional K L]
           [Algebra.IsSeparable K L] (z : F.obj.obj (op (etaleSpec K L))),
@@ -320,7 +320,7 @@ theorem fieldSections_stalkInvariants
       [Algebra.IsSeparable K L] : (lift L).left = Spec.map
         (CommRingCat.ofHom ((algebraMap Ks Ω).comp L.subtype)) := rfl
   have haction
-      (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
+      (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
       (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)
       (hτ : (algebraMap Ks Ω).comp g.toRingHom =
         τ.toRingHom.comp (algebraMap Ks Ω))
@@ -337,7 +337,7 @@ theorem fieldSections_stalkInvariants
       Over.OverMorphism.ext hx.symm
     rw [hx']
   have hbij
-      (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
+      (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
       (L : IntermediateField K Ks) [FiniteDimensional K L]
       [Algebra.IsSeparable K L] :
       Set.BijOn ((pointSmallEtale s).toPresheafFiber (etaleSpec K L) (lift L) F.obj)
@@ -361,7 +361,7 @@ theorem fieldSections_stalkInvariants
         (action F) (haction F) L (lift L) (hlift L) m hm
       exact ⟨z, Set.mem_univ _, hz⟩
   have hemb
-      (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))
+      (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v)))
       (L L' : IntermediateField K Ks) [FiniteDimensional K L]
       [FiniteDimensional K L'] [Algebra.IsSeparable K L] [Algebra.IsSeparable K L']
       (j : L →ₐ[K] L') (g : Gal(Ks/K))

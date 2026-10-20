@@ -123,7 +123,7 @@
   "module": "Sheaf.AlgebraicGeometry.Sites.FiniteGaloisInvariantGermDescent",
   "file": "lean/Sheaf/AlgebraicGeometry/Sites/FiniteGaloisInvariantGermDescent.lean",
   "declaration": "AlgebraicGeometry.Scheme.exists_fieldSection_of_finiteGalois_invariant_representative",
-  "statement": "theorem exists_fieldSection_of_finiteGalois_invariant_representative\n    (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω]\n    [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω]\n    [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω]\n    (s : Spec (.of Ω) ⟶ Spec (.of K))\n    (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω)))\n    (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max (u + 1) v)))\n    (action : MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F))\n    (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω)\n      (hτ : (algebraMap Ks Ω).comp g.toRingHom =\n        τ.toRingHom.comp (algebraMap Ks Ω))\n      (X : (Spec (.of K)).Etale) (x x' : (pointSmallEtale s).fiber.obj X)\n      (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left)\n      (z : F.obj.obj (op X)),\n      action.smul g ((pointSmallEtale s).toPresheafFiber X x F.obj z) =\n        (pointSmallEtale s).toPresheafFiber X x' F.obj z)\n    (L : IntermediateField K Ks) [FiniteDimensional K L] [Algebra.IsSeparable K L]\n    (x : (pointSmallEtale s).fiber.obj (etaleSpec K L))\n    (hx : x.left = Spec.map\n      (CommRingCat.ofHom ((algebraMap Ks Ω).comp L.subtype)))\n    (E : FiniteGaloisIntermediateField K Ks) (hLE : L ≤ E.toIntermediateField)\n    (y : (pointSmallEtale s).fiber.obj (etaleSpec K E))\n    (hy : y.left = Spec.map\n      (CommRingCat.ofHom ((algebraMap Ks Ω).comp E.toIntermediateField.subtype)))\n    (z : F.obj.obj (op (etaleSpec K E)))\n    (hinj : Function.Injective\n      ((pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj))\n    (hz : ∀ g ∈ L.fixingSubgroup,\n      action.smul g ((pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z) =\n        (pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z) :\n    ∃ w : F.obj.obj (op (etaleSpec K L)),\n      (pointSmallEtale s).toPresheafFiber (etaleSpec K L) x F.obj w =\n        (pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z",
+  "statement": "theorem exists_fieldSection_of_finiteGalois_invariant_representative (K Ks Ω : Type u) [Field K] [Field Ks] [Field Ω] [Algebra K Ks] [IsSepClosure K Ks] [Algebra Ks Ω] [Algebra K Ω] [IsScalarTower K Ks Ω] [IsAlgClosed Ω] [Algebra.IsAlgebraic K Ω] (s : Spec (.of Ω) ⟶ Spec (.of K)) (hs : s = Spec.map (CommRingCat.ofHom (algebraMap K Ω))) (F : Sheaf (Spec (.of K)).smallEtaleTopology (Type (max u v))) (action : MulAction Gal(Ks/K) ((pointSmallEtale s).sheafFiber.obj F)) (haction : ∀ (g : Gal(Ks/K)) (τ : Ω ≃ₐ[K] Ω) (hτ : (algebraMap Ks Ω).comp g.toRingHom = τ.toRingHom.comp (algebraMap Ks Ω)) (X : (Spec (.of K)).Etale) (x x' : (pointSmallEtale s).fiber.obj X) (hx : x'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ x.left) (z : F.obj.obj (op X)), action.smul g ((pointSmallEtale s).toPresheafFiber X x F.obj z) = (pointSmallEtale s).toPresheafFiber X x' F.obj z) (L : IntermediateField K Ks) [FiniteDimensional K L] [Algebra.IsSeparable K L] (x : (pointSmallEtale s).fiber.obj (etaleSpec K L)) (hx : x.left = Spec.map (CommRingCat.ofHom ((algebraMap Ks Ω).comp L.subtype))) (E : FiniteGaloisIntermediateField K Ks) (hLE : L ≤ E.toIntermediateField) (y : (pointSmallEtale s).fiber.obj (etaleSpec K E)) (hy : y.left = Spec.map (CommRingCat.ofHom ((algebraMap Ks Ω).comp E.toIntermediateField.subtype))) (z : F.obj.obj (op (etaleSpec K E))) (hinj : Function.Injective ((pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj)) (hz : ∀ g ∈ L.fixingSubgroup, action.smul g ((pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z) = (pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z) : ∃ w : F.obj.obj (op (etaleSpec K L)), (pointSmallEtale s).toPresheafFiber (etaleSpec K L) x F.obj w = (pointSmallEtale s).toPresheafFiber (etaleSpec K E) y F.obj z",
   "branch": "sheaf-dag",
   "by": "G3",
   "date": "2026-10-13"
@@ -139,14 +139,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "Q1",
+  "reviewer": "C-a97e8",
+  "group": "D5",
   "result": "pass",
-  "landing": "20261013T015606-L-3024672",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T051137-L-1575484",
+  "kind": "interface",
+  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
  },
  "lean_audit": {
   "master": {

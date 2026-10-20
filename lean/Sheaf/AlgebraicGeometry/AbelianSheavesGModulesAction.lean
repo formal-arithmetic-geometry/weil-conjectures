@@ -79,11 +79,12 @@ theorem abelianSheaves_equiv_discreteGModules_action
         (j.hom.app F) ((Eset.functor.obj F).obj.obj.ρ g
           ((j.inv.app F) (p.toPresheafFiber X x F.obj z))) =
             p.toPresheafFiber X x' F.obj z) := by
-  obtain ⟨T, j, hj⟩ := exists_galoisStalkActionFunctor.{u, v} K Ks Ω
-  obtain ⟨hfull, hfaithful⟩ := galoisStalkActionFunctor_full_faithful.{u, v} K Ks Ω T j hj
+  obtain ⟨T, j, hj⟩ := exists_galoisStalkActionFunctor.{u, max (u + 1) v} K Ks Ω
+  obtain ⟨hfull, hfaithful⟩ :=
+    galoisStalkActionFunctor_full_faithful.{u, max (u + 1) v} K Ks Ω T j hj
   have : T.Full := hfull
   have : T.Faithful := hfaithful
-  have : T.EssSurj := galoisStalkActionFunctor_essSurj.{u, v} K Ks Ω T j hj
+  have : T.EssSurj := galoisStalkActionFunctor_essSurj.{u, max (u + 1) v} K Ks Ω T j hj
   have : T.IsEquivalence := ⟨inferInstance, inferInstance, inferInstance⟩
   refine ⟨T.asEquivalence, j, ?_⟩
   intro F g τ hτ X x x' hx z
