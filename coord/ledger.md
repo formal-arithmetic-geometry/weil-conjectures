@@ -17960,3 +17960,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:22 L: returned deliver/X2/Sheaf.AlgebraicGeometry.CommutativeExchangeChart (reviewer RETURN: (reviewer C-93105, head 93105e9eb) D1 (brief point 4, relabelling): CommutativeExchangeChartIdentity.lean `commutativeEx)
 - 12:22 L: returned deliver/R3/Sheaf.Paper.PointFibreEquivalence (reviewer RETURN: (reviewer C-9af42, head 9af42eb28) H10: lean/Sheaf/Paper/PointFibreEquivalence.lean does not compile against the current)
 - 12:22 L: returned deliver/D5/Sheaf.AlgebraicGeometry.ProEtaleAffineContinuity (reviewer RETURN: (reviewer C-9b914, head 9b9148ac6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pr)
+- 12:23 L: returned deliver/H2/Sheaf.Paper.PurReductionLimitShiftAdjunction (reviewer RETURN: (reviewer C-bda31, head bda31f5c0) H9 (stage-3 point 5, unused import): (1) lean/Sheaf/Paper/PurReductionLimitShiftAdjun)
