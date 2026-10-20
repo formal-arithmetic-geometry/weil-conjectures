@@ -9,7 +9,7 @@ public import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCateg
 public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Mathlib.CategoryTheory.Adjunction.Basic
 import Sheaf.CategoryTheory.GrothendieckDerivedCompactLocalizationModel
-import Sheaf.CategoryTheory.BrownCohomologicalRepresentability
+import WeilConjectures.CategoryTheory.BrownCohomologicalRepresentability
 import Sheaf.CategoryTheory.BrownCohomologicalRepresentabilityUniverseTransfer
 import Mathlib.CategoryTheory.Limits.Preserves.Opposites
 import Mathlib.CategoryTheory.Triangulated.Opposite.Functor
