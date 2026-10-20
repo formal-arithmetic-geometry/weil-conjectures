@@ -1,0 +1,159 @@
+{
+ "id": "lem-sf-integral-hom-comparison-is-iso",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Invertibility of the specified finite comparison",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix universes $d,t,u$, a prime $\\ell$, a field $E$ finite-dimensional over $\\mathbf Q_\\ell$, a scheme $Y$ in universe $t$, a finite-field datum $D$ of characteristic $p$ in universe $d$, and $\\ell\\ne p$. On the small pro-etale site of $Y$ [def-weil-pbc-proetale-site], let $B=\\widehat{\\mathcal O}_{E,Y}$ and $B_n=(\\mathcal O_E/\\varpi_E^{n+1})_Y$ be the coefficient sheaves [def-weil-completed-integral-coefficients]. Work in the ordinary unbounded derived categories $D(B)$ and $D(B_n)$ of module sheaves at coefficient universe $\\max(u,t+1)$. Write $H_B,H_{B_n}$ for the recorded derived internal Hom [def-pur-derived-internal-hom], $F_n:D(B)\\to D(B_n)$ for derived reduction [def-weil-integral-derived-reduction], and $Q$ for complex localization. For every tensor presentation $a$ of $B$, every $n\\ge0$, every reduction presentation $m$ from $a$ at level $n$ [def-sf-integral-hom-reduction-models], and arbitrary $K,L\\in D(B)$, the specified transpose $c_{n,K,L}:F_nH_B(K,L)\\to H_{B_n}(F_nK,F_nL)$ is invertible. No completeness or boundedness condition is imposed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-derived-internal-hom",
+  "def-weil-integral-derived-reduction",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof": [
+  {
+   "text": "The coefficient ring is a DVR and hence Noetherian. The standard quotient resolution and completed-constant-sheaf comparison identify U_n B_n with [B --varpi^(n+1)--> B]. This bounded free complex is K-flat.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
+   }
+  },
+  {
+   "text": "The scalar adjunction and tensor-Hom adjunction identify restricted finite Hom with H_B(K,U_n N), naturally in N. Take a K-flat source P and K-injective target I; tensoring I with the two-term split-free quotient model remains K-injective.",
+   "uses": [
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-split-perfect-tensor-kinjective",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
+   }
+  },
+  {
+   "text": "The restricted comparison is represented by f tensor z mapping x to (-1)^(degree(z)*degree(x)) f(x) tensor z. The three differential terms have matching signs bp, a+1+bp and a+bp+p. In each total degree only the two coefficient degrees commute with the product over p, so this chain map is invertible for unbounded P. The presentation normalizations identify it with the specified comparison. Conservative scalar restriction reflects its invertibility.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-sf-integral-hom-reduction-models",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-standard-quotients-perfect",
+  "lem-weil-pbc-completed-constant-sheaf-reduction",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-split-perfect-tensor-kinjective",
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraphs 1-2: finite-free quotient construction and coefficient adjunction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison and adjunction on K-flat complexes representing unbounded derived internal Hom",
+   "results": "8 hits including CategoryTheory.ihom.adjunction and CategoryTheory.MonoidalClosed.internalHomAdjunction₂ in Mathlib.CategoryTheory.Monoidal.Closed.Basic; no normalized ringed-site representative statement.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.counit",
+   "results": "12 hits including CategoryTheory.Adjunction.homEquiv_counit and CategoryTheory.Adjunction.homEquiv_symm_apply; general adjunction calculus only.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientTensorModels|TensorPresentation|ReductionPresentation",
+   "results": "0 hits in Mathlib. The named presentation records belong to this project.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReduction",
+  "date": "2026-10-19",
+  "group": "M4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomComparisonIsIso",
+  "file": "lean/Sheaf/Paper/IntegralHomComparisonIsIso.lean",
+  "declaration": "WeilConjectures.IntegralHom.comparison_isIso",
+  "statement": "theorem comparison_isIso (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)) (n : ℕ) (m : ReductionPresentation l E Y D hl a n) (K L : completedIntegralDerivedCategory l E Y D hl) : IsIso (comparison l E Y D hl m K L)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-79bab",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261020T230810-L-613944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-79bab",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261020T230810-L-613944",
+  "kind": "interface",
+  "note": "independent cc review: files identical to PASSed head 1e5bfa41a6 (landing failed on a missing file outside the delivery); re-verified vs live: 7 modules + importer PointDerivedHomEvaluation compile, integralHomReduction statement byte-identical to live, homModelMap old=new by rfl, axioms clean (sorryAx only via models_exist, comparison_isIso, reductionTower_components)"
+ }
+}

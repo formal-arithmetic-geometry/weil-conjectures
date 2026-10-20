@@ -1,0 +1,152 @@
+{
+ "id": "lem-sf-integral-hom-models-exist",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraph 2: tensor-Hom adjunction on slices and coefficient extension",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Existence of normalized tensor-Hom models",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix universes $d,t,u$, a prime $\\ell$, a field $E$ finite-dimensional over $\\mathbf Q_\\ell$, a scheme $Y$ in universe $t$, a finite-field datum $D$ of characteristic $p$ in universe $d$, and $\\ell\\ne p$. On the small pro-etale site of $Y$ [def-weil-pbc-proetale-site], let $B=\\widehat{\\mathcal O}_{E,Y}$ and $B_n=(\\mathcal O_E/\\varpi_E^{n+1})_Y$ be the coefficient sheaves [def-weil-completed-integral-coefficients]. Work in the ordinary unbounded derived categories $D(B)$ and $D(B_n)$ of module sheaves at coefficient universe $\\max(u,t+1)$. Write $H_B,H_{B_n}$ for the recorded derived internal Hom [def-pur-derived-internal-hom], $F_n:D(B)\\to D(B_n)$ for derived reduction [def-weil-integral-derived-reduction], and $Q$ for complex localization. There exists a tensor presentation $a$ for $B$ [def-sf-integral-hom-reduction-models] such that for every $n\\ge0$ there is a reduction presentation from $a$ at level $n$. This is the existence of the ordinary uncompleted tensor, its evaluation-normalized adjunction, and the normalized coefficient tensor comparison; it asserts no Hom comparison invertibility and no completeness preservation.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2: tensor-Hom adjunction on slices and coefficient extension"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-derived-internal-hom",
+  "def-weil-integral-derived-reduction",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof": [
+  {
+   "text": "Choose flat-term K-flat resolutions and descend the signed total tensor in both variables. The cone criterion makes the localized bifunctor independent of the resolutions.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 2: tensor-Hom adjunction on slices and coefficient extension"
+   }
+  },
+  {
+   "text": "Use the normalized closed symmetric monoidal derived structure. On representatives its symmetry swaps degrees i,j with sign (-1)^(ij); currying and RHom global sections give the tensor-left adjunction and its actual evaluation normalization.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 2: tensor-Hom adjunction on slices and coefficient extension"
+   }
+  },
+  {
+   "text": "Ordinary scalar extension and restriction form the normalized adjunction with unit x maps to 1 tensor x. The strong tensor comparison sends s tensor (x tensor y) to (s tensor x) tensor (1 tensor y); its inverse multiplies scalar factors. The scalar tensor comparison and derived universal property give exactly the normalization square for every K-flat pair, with the same source tensor for every n.",
+   "uses": [
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 2: tensor-Hom adjunction on slices and coefficient extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pur-rhom-global-sections",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 2: tensor-Hom adjunction on slices and coefficient extension"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison and adjunction on K-flat complexes representing unbounded derived internal Hom",
+   "results": "8 hits including CategoryTheory.ihom.adjunction and CategoryTheory.MonoidalClosed.internalHomAdjunction₂ in Mathlib.CategoryTheory.Monoidal.Closed.Basic; no normalized ringed-site representative statement.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.counit",
+   "results": "12 hits including CategoryTheory.Adjunction.homEquiv_counit and CategoryTheory.Adjunction.homEquiv_symm_apply; general adjunction calculus only.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientTensorModels|TensorPresentation|ReductionPresentation",
+   "results": "0 hits in Mathlib. The named presentation records belong to this project.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReduction",
+  "date": "2026-10-19",
+  "group": "M4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomModelsExist",
+  "file": "lean/Sheaf/Paper/IntegralHomModelsExist.lean",
+  "declaration": "WeilConjectures.IntegralHom.models_exist",
+  "statement": "theorem models_exist : ∃ a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl), ∀ n : ℕ, Nonempty (ReductionPresentation l E Y D hl a n)",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-79bab",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261020T230810-L-613944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-79bab",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261020T230810-L-613944",
+  "kind": "interface",
+  "note": "independent cc review: files identical to PASSed head 1e5bfa41a6 (landing failed on a missing file outside the delivery); re-verified vs live: 7 modules + importer PointDerivedHomEvaluation compile, integralHomReduction statement byte-identical to live, homModelMap old=new by rfl, axioms clean (sorryAx only via models_exist, comparison_isIso, reductionTower_components)"
+ }
+}

@@ -1,0 +1,150 @@
+{
+ "id": "lem-sf-integral-hom-roos-transport",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraph 3: internal Hom preserves derived limits and hence completeness",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Roos transport for integral internal Hom",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix universes $d,t,u$, a prime $\\ell$, a field $E$ finite-dimensional over $\\mathbf Q_\\ell$, a scheme $Y$ in universe $t$, a finite-field datum $D$ of characteristic $p$ in universe $d$, and $\\ell\\ne p$. On the small pro-etale site of $Y$ [def-weil-pbc-proetale-site], let $B=\\widehat{\\mathcal O}_{E,Y}$ and $B_n=(\\mathcal O_E/\\varpi_E^{n+1})_Y$ be the coefficient sheaves [def-weil-completed-integral-coefficients]. Work in the ordinary unbounded derived categories $D(B)$ and $D(B_n)$ of module sheaves at coefficient universe $\\max(u,t+1)$. Write $H_B,H_{B_n}$ for the recorded derived internal Hom [def-pur-derived-internal-hom], $F_n:D(B)\\to D(B_n)$ for derived reduction [def-weil-integral-derived-reduction], and $Q$ for complex localization. Given a tensor presentation $a$ of $B$ [def-sf-integral-hom-reduction-models], if $K,L\\in D(B)$ are arbitrary and $L$ is derived complete [def-weil-derived-complete], then $H_B(K,L)$ is derived complete. Completeness means that the canonical augmented quotient tower has a distinguished Roos triangle $L\\to\\prod_n T_n\\xrightarrow{1-s}\\prod_nT_n\\to L[1]$. No completeness or boundedness assumption is imposed on $K$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 3: internal Hom preserves derived limits and hence completeness"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-derived-internal-hom",
+  "def-weil-integral-derived-reduction",
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-derived-complete"
+ ],
+ "proof": [
+  {
+   "text": "The supplied tensor presentation makes H_B(K,-) a right adjoint, hence it preserves countable products. The recorded shift comparison and triangulated structure make it exact.",
+   "uses": [
+    "def-sf-integral-hom-reduction-models",
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 3: internal Hom preserves derived limits and hence completeness"
+   }
+  },
+  {
+   "text": "Convert the given Roos triangle to an IsHomotopyLimit cone. The product projections identify the Fan shift with the canonical towerProductShift. Apply IsHomotopyLimit.map and transport along the augmented tower comparison. Its unit equation identifies every transported cone leg with the canonical leg.",
+   "uses": [
+    "lem-pc-homotopy-limit-map",
+    "lem-sf-integral-hom-augmented-tower-comparison",
+    "def-weil-derived-complete"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 3: internal Hom preserves derived limits and hence completeness"
+   }
+  },
+  {
+   "text": "Use the transported limiting Fan to supply the target countable product. The unique product isomorphism conjugates the shift endomorphism and hence 1-s. Transport the distinguished triangle along the two product isomorphisms and the identity at H_B(K,L). Its last map and the chosen representatives give precisely the existential witnesses of completeness.",
+   "uses": [
+    "def-weil-derived-complete"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 3: internal Hom preserves derived limits and hence completeness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sf-integral-hom-reduction-models",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-pc-homotopy-limit-map",
+  "lem-sf-integral-hom-augmented-tower-comparison",
+  "def-weil-derived-complete"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 3: internal Hom preserves derived limits and hence completeness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison and adjunction on K-flat complexes representing unbounded derived internal Hom",
+   "results": "8 hits including CategoryTheory.ihom.adjunction and CategoryTheory.MonoidalClosed.internalHomAdjunction₂ in Mathlib.CategoryTheory.Monoidal.Closed.Basic; no normalized ringed-site representative statement.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.counit",
+   "results": "12 hits including CategoryTheory.Adjunction.homEquiv_counit and CategoryTheory.Adjunction.homEquiv_symm_apply; general adjunction calculus only.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientTensorModels|TensorPresentation|ReductionPresentation",
+   "results": "0 hits in Mathlib. The named presentation records belong to this project.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReduction",
+  "date": "2026-10-19",
+  "group": "M4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomRoosTransport",
+  "file": "lean/Sheaf/Paper/IntegralHomRoosTransport.lean",
+  "declaration": "WeilConjectures.IntegralHom.hom_roosTransport",
+  "statement": "theorem hom_roosTransport (a : TensorPresentation.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)) (K L : completedIntegralDerivedCategory l E Y D hl) (hL : IsDerivedComplete l E Y D hl L) : IsDerivedComplete l E Y D hl ((hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj (op K, L))",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-79bab",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261020T230810-L-613944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-79bab",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261020T230810-L-613944",
+  "kind": "interface",
+  "note": "independent cc review: files identical to PASSed head 1e5bfa41a6 (landing failed on a missing file outside the delivery); re-verified vs live: 7 modules + importer PointDerivedHomEvaluation compile, integralHomReduction statement byte-identical to live, homModelMap old=new by rfl, axioms clean (sorryAx only via models_exist, comparison_isIso, reductionTower_components)"
+ }
+}

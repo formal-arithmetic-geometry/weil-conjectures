@@ -1,0 +1,144 @@
+{
+ "id": "lem-sf-integral-hom-tower-components",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-integral-hom-reduction",
+   "place": "paragraph 3: identifying the quotient completion, with maps and augmentation retained",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite Hom comparison and augmented tower maps",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "statement": "Fix universes $d,t,u$, a prime $\\ell$, a field $E$ finite-dimensional over $\\mathbf Q_\\ell$, a scheme $Y$ in universe $t$, a finite-field datum $D$ of characteristic $p$ in universe $d$, and $\\ell\\ne p$. On the small pro-etale site of $Y$ [def-weil-pbc-proetale-site], let $B=\\widehat{\\mathcal O}_{E,Y}$ and $B_n=(\\mathcal O_E/\\varpi_E^{n+1})_Y$ be the coefficient sheaves [def-weil-completed-integral-coefficients]. Work in the ordinary unbounded derived categories $D(B)$ and $D(B_n)$ of module sheaves at coefficient universe $\\max(u,t+1)$. Write $H_B,H_{B_n}$ for the recorded derived internal Hom [def-pur-derived-internal-hom], $F_n:D(B)\\to D(B_n)$ for derived reduction [def-weil-integral-derived-reduction], and $Q$ for complex localization. Fix $K\\in D(B)$, complexes $P,G,P\\prime,G\\prime$, K-flat resolutions $q:P\\to G$ and $q\\prime:P\\prime\\to G\\prime$, and an isomorphism $e:QG\\prime\\simeq H_B(K,QG)$. Let $T(P)$ be the recorded quotient tower [def-weil-integral-reduction-tower] and $\\gamma_{q,n}:QG\\to T(P)_n$ its canonical augmentation [lem-weil-integral-reduction-tower-well-defined]. Put $H=H_B(K,-)$ and write $r_n:T(P)_{n+1}\\to T(P)_n$ and $r\\prime_n:T(P\\prime)_{n+1}\\to T(P\\prime)_n$ for consecutive transitions. There are isomorphisms $\\theta_n:H(T(P)_n)\\simeq T(P\\prime)_n$ satisfying $H(r_n)\\theta_n=\\theta_{n+1}r\\prime_n$ and $e^{-1}\\gamma_{q\\prime,n}=H(\\gamma_{q,n})\\theta_n$ for every $n\\ge0$. Neither product existence nor completeness is assumed; the resolutions and $e$ are fixed, not chosen in the conclusion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 3: identifying the quotient completion, with maps and augmentation retained"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-pur-derived-internal-hom",
+  "def-weil-integral-derived-reduction",
+  "def-sf-integral-hom-reduction-models",
+  "def-weil-integral-reduction-tower",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "Use normalized tensor presentations, finite comparison invertibility and the scalar internal-Hom adjunction. Compose their isomorphisms with the canonical computation of reductions on q and q-prime and with e to obtain theta_n.",
+   "uses": [
+    "lem-sf-integral-hom-models-exist",
+    "lem-sf-integral-hom-comparison-is-iso",
+    "lem-sfb-dc-hom-scalar-adjunction",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 3: identifying the quotient completion, with maps and augmentation retained"
+   }
+  },
+  {
+   "text": "On representatives the comparison sends f tensor z to x maps to (-1)^(degree(z)*degree(x)) f(x) tensor z. Its naturality for the quotient chain map (varpi,1) gives the consecutive-transition square. Naturality for the degree-zero quotient unit gives the augmentation square. The scalar-unit normalization and the counit squares identify these maps with the actual recorded quotient maps, and resolution independence gives the equations for the fixed q,q-prime,e.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-sf-integral-hom-reduction-models",
+    "lem-weil-integral-reduction-tower-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+    "place": "paragraph 3: identifying the quotient completion, with maps and augmentation retained"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-integral-hom-models-exist",
+  "lem-sf-integral-hom-comparison-is-iso",
+  "lem-sfb-dc-hom-scalar-adjunction",
+  "lem-weil-integral-reduction-tower-well-defined",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves",
+  "def-sf-integral-hom-reduction-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-coef-integral-hom-reduction.proof.md",
+  "place": "paragraph 3: identifying the quotient completion, with maps and augmentation retained"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A natural tensor comparison and adjunction on K-flat complexes representing unbounded derived internal Hom",
+   "results": "8 hits including CategoryTheory.ihom.adjunction and CategoryTheory.MonoidalClosed.internalHomAdjunction₂ in Mathlib.CategoryTheory.Monoidal.Closed.Basic; no normalized ringed-site representative statement.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.counit",
+   "results": "12 hits including CategoryTheory.Adjunction.homEquiv_counit and CategoryTheory.Adjunction.homEquiv_symm_apply; general adjunction calculus only.",
+   "date": "2026-10-18",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "CoefficientTensorModels|TensorPresentation|ReductionPresentation",
+   "results": "0 hits in Mathlib. The named presentation records belong to this project.",
+   "date": "2026-10-19",
+   "verdict": "no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralHomReduction",
+  "date": "2026-10-19",
+  "group": "M4"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralHomReductionTowerComponents",
+  "file": "lean/Sheaf/Paper/IntegralHomReductionTowerComponents.lean",
+  "declaration": "WeilConjectures.IntegralHom.reductionTower_components",
+  "statement": "theorem reductionTower_components (K : completedIntegralDerivedCategory l E Y D hl) (P G P' G' : CochainComplex (completedIntegralModuleSheaves l E Y D hl) ℤ) (q : P ⟶ G) (q' : P' ⟶ G') (hq : CochainComplex.IsKFlatResolutionIndependentCoefficients (J := AlgebraicGeometry.Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheaf l E Y D hl) q) (hq' : CochainComplex.IsKFlatResolutionIndependentCoefficients (J := AlgebraicGeometry.Scheme.ProEt.topology Y) (R := completedIntegralCommRingSheaf l E Y D hl) q') (e : DerivedCategory.Q.obj G' ≅ (hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl)).obj (op K, DerivedCategory.Q.obj G)) : let H := (Functor.curry.obj (hom.{t, u} Y (completedIntegralCommRingSheaf l E Y D hl))).obj (op K) ∃ θ : ∀ n : ℕ, H.obj ((integralReductionTower l E Y D hl P).obj (op n)) ≅ (integralReductionTower l E Y D hl P').obj (op n), (∀ n : ℕ, H.map ((integralReductionTower l E Y D hl P).map (homOfLE n.le_succ).op) ≫ (θ n).hom = (θ (n + 1)).hom ≫ (integralReductionTower l E Y D hl P').map (homOfLE n.le_succ).op) ∧ ∀ n : ℕ, e.inv ≫ (integralReductionTowerCone l E Y D hl q' hq').π.app (op n) = H.map ((integralReductionTowerCone l E Y D hl q hq).π.app (op n)) ≫ (θ n).hom",
+  "branch": "sheaf-dag",
+  "by": "M4",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-79bab",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261020T230810-L-613944",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-79bab",
+  "group": "M4",
+  "result": "pass",
+  "landing": "20261020T230810-L-613944",
+  "kind": "interface",
+  "note": "independent cc review: files identical to PASSed head 1e5bfa41a6 (landing failed on a missing file outside the delivery); re-verified vs live: 7 modules + importer PointDerivedHomEvaluation compile, integralHomReduction statement byte-identical to live, homModelMap old=new by rfl, axioms clean (sorryAx only via models_exist, comparison_isIso, reductionTower_components)"
+ }
+}
