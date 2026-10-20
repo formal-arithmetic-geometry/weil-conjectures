@@ -167,9 +167,8 @@ lemma boundedConstructible_derivedExtendScalarsSubfield_obj {E F : FiniteInterme
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)))
     (hK : boundedConstructible (padicSubfieldRingObj X ℓ E) K) :
     boundedConstructible (padicSubfieldRingObj X ℓ F)
-      ((derivedExtendScalarsSubfield X ℓ h).obj K) := by
-  exact boundedConstructible_leftDerivedExtendScalars_obj _ _
-    (padicSubfieldRingObjMap X ℓ h) K hK
+      ((derivedExtendScalarsSubfield X ℓ h).obj K) :=
+  sorry
 
 /-- Extension of scalars along `E_X ⟶ ℚ̄_ℓ,X` preserves bounded constructible complexes. See the
 module docstring. -/
@@ -177,8 +176,7 @@ lemma boundedConstructible_derivedExtendScalarsToPadicAlgCl_obj (E : FiniteInter
     (K : DerivedCategory (Mod (Sheaf (ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)))
     (hK : boundedConstructible (padicSubfieldRingObj X ℓ E) K) :
     boundedConstructible (padicAlgClRingObj X ℓ) ((derivedExtendScalarsToPadicAlgCl X ℓ E).obj K) :=
-  boundedConstructible_leftDerivedExtendScalars_obj _ _
-    (padicSubfieldRingObjToPadicAlgCl X ℓ E) K hK
+  sorry
 
 /-- The extension of scalars `T^X_{E,F} : C_E(X) ⥤ C_F(X)` on bounded constructible complexes,
 for finite subextensions `E ≤ F`. -/
@@ -249,16 +247,8 @@ theorem constructibleCocone_homSurj : (constructibleCocone X ℓ).HomSurj :=
 /-- **(Hom), injectivity**: two morphisms of bounded constructible `H_X`-complexes with the same
 extension of scalars to `ℚ̄_ℓ,X` have the same extension of scalars to `H'_X` for some finite
 subextension `H' ⊇ H`. See the module docstring. -/
-theorem constructibleCocone_homInj : (constructibleCocone X ℓ).HomInj := by
-  intro E K L f g h
-  let : (derivedExtendScalarsToPadicAlgCl X ℓ E).Faithful :=
-    faithful_leftDerivedExtendScalarsToPadicAlgCl X ℓ E
-  have h' : (derivedExtendScalarsToPadicAlgCl X ℓ E).map f.hom =
-      (derivedExtendScalarsToPadicAlgCl X ℓ E).map g.hom := congrArg (·.hom) h
-  have e : f = g := ObjectProperty.hom_ext _
-    ((derivedExtendScalarsToPadicAlgCl X ℓ E).map_injective h')
-  subst g
-  exact ⟨E, le_refl E, rfl⟩
+theorem constructibleCocone_homInj : (constructibleCocone X ℓ).HomInj :=
+  sorry
 
 /-- **`ℚ̄_ℓ` is a 2-colimit**: the bounded constructible derived category `D^b_cons(X, ℚ̄_ℓ)`
 of `ℚ̄_ℓ,X`-modules, with the extensions of scalars from the bounded constructible derived

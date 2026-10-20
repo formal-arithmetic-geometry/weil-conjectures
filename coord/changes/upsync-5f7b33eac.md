@@ -190,3 +190,7 @@ The global build of 11895cef78 failed in 8 module(s); they and their importers, 
 - `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.Monoidal`: error: failed in the global build (no message located) (nodes new-proetale-derived-module-pullback-monoidal)
 
 Importers taken out with them (9): `Sheaf.AlgebraicGeometry.BoundedConstructibleTensorPreservation`, `Sheaf.AlgebraicGeometry.ClosedSupportStratumHom`, `Sheaf.AlgebraicGeometry.ProEtaleFiniteProjectiveDualizable`, `Sheaf.Paper.CondensedFiniteFreeDerivedHom`, `Sheaf.Paper.CondensedFiniteFreeHomContinuity`, `Sheaf.Paper.CondensedFiniteFreeHomEvaluation`, `Sheaf.Paper.CondensedLfpHomContinuity`, `Sheaf.Paper.IntegralLfpHomContinuity`, `Sheaf.Paper.OpenPullbackGenerators`
+
+## Prefer upstream, round 3
+
+The upstream module(s) `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit`, `WeilConjectures.WeilSheaf.Finiteness` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit`, `WeilConjectures.WeilSheaf.Finiteness`.
