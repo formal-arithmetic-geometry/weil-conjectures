@@ -131,14 +131,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-coherence",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CohomologyFiniteExtension",
-  "file": "lean/Sheaf/AlgebraicGeometry/CohomologyFiniteExtension.lean",
-  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_H_of_shortExact_middle",
-  "statement": "theorem finite_H_of_shortExact_middle {X : Scheme.{u}} (R : Type v) [CommRing R]\n    [IsNoetherianRing R] (σ : R →+* Γ(X, ⊤))\n    (S : ShortComplex X.Modules) (hS : S.ShortExact) (q : ℕ) :\n    letI : Module R (S.X₁.H q) := Module.compHom _ σ\n    letI : Module R (S.X₂.H q) := Module.compHom _ σ\n    letI : Module R (S.X₃.H q) := Module.compHom _ σ\n    Module.Finite R (S.X₁.H q) → Module.Finite R (S.X₃.H q) →\n      Module.Finite R (S.X₂.H q)",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.CohomologyFiniteExtension",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CohomologyFiniteExtension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.finite_H_of_shortExact_extension",
+  "statement": "theorem finite_H_of_shortExact_extension {X : Scheme.{u}} (R : Type v) [CommRing R]\n    [IsNoetherianRing R] (σ : R →+* Γ(X, ⊤))\n    (S : ShortComplex X.Modules) (hS : S.ShortExact) (q : ℕ) :\n    letI : Module R (S.X₁.H q) := Module.compHom _ σ\n    letI : Module R (S.X₂.H q) := Module.compHom _ σ\n    letI : Module R (S.X₃.H q) := Module.compHom _ σ\n    Module.Finite R (S.X₁.H q) → Module.Finite R (S.X₃.H q) →\n      Module.Finite R (S.X₂.H q)",
   "branch": "sheaf-dag",
   "by": "E2",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "2026-10-21 (H2): retired Sheaf twin; upstream WeilConjectures module provides the identical theorem (statement record renamed to the upstream declaration and existing:true by the reviewer)."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -153,14 +154,12 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "C6",
-  "result": "pass",
-  "landing": "20261020T174727-L-785661",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [],
-  "sorry_after": []
+  "reviewer": "C-f4d04",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261020T221208-L-4155778",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn Sheaf finite_H_of_shortExact_middle vs upstream WeilConjectures finite_H_of_shortExact_extension (identical signature up to name, same proof); node lean record vs upstream declaration"
  },
  "lean_audit": {
   "master": {
