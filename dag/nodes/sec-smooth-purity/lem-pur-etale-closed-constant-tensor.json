@@ -25,160 +25,93 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-weil-pbc-constant-module-locally-constant] to identify $A_C(C\\times_XT)$ with locally constant $A$-valued functions on $C\\times_XT$, naturally in $T$, with pointwise module operations. Thus $P_C(T)$ has exactly this model. Restriction $A_X\\to P_C$ is restriction of functions. Precomposition along $C'\\times_{X'}(X'\\times_XT)\\to C\\times_XT$ defines an $A_X$-linear map $h_{v,C}:P_C\\to v_*P_{C'}$: both its restriction compatibility and its linearity follow from $(a s)\\circ q=(a\\circ q)(s\\circ q)$. By [prop-weil-pbc-inverse-image-modules-exact] its adjoint $b_{v,C}$ exists and satisfies $v_*b_{v,C}\\circ\\eta_{v,P_C}=h_{v,C}$. The base-changed supports are closed immersions by [lem-weil-pbc-closed-immersion-base-change]. Their intersections are closed immersions into $X$ or $X'$ by that node and [lem-weil-pbc-closed-immersion-comp].",
+   "text": "Normalize the constant-module transition map on the tensor unit, and identify the section A_X → i_*A_C with the lax unit comparison of i_*. The open-closed short exact sequence makes this section an epimorphism. These are the specified maps, not replacement choices.",
    "uses": [
-    "lem-weil-pbc-constant-module-locally-constant",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-closed-immersion-base-change",
-    "lem-weil-pbc-closed-immersion-comp"
+    "lem-weil-pbc-open-closed-short-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03P5, remark-constant-locally-constant-maps; Tag 03Q1, lemma-stalk-pullback; agent construction of the specified adjoint."
-   }
+   "elementary": false
   },
   {
-   "text": "For a geometric point $\\bar x$ of $X$ whose image belongs to $C$, it factors uniquely through $C$: on an affine chart $C=\\operatorname{Spec}(R/J)$, the map $R\\to\\Omega$ kills $J$, since $J$ is contained in the point's prime kernel [def-weil-closed-immersion]. Apply [lemma-openclosed-stalk-lowerstar] and [lem-weil-pbc-constant-sheaf-geometric-stalk], using [lem-weil-pbc-constant-module-sheaf-underlying] to forget coefficients. The resulting identification $(P_C)_{\\bar x}=A$ sends the germ of a locally constant function to its value at $\\bar x$: the first comparison is induced by the neighbourhood base-change functor, and the second sends a constant germ $a$ to $a$. These are $A$-linear, since restrictions and the constant-section maps are $A$-linear. If $\\bar x$ is outside $C$, restrict to the open complement $U=X\\setminus C$. Every etale $T\\to U$ has $C\\times_XT=\\varnothing$, hence $P_C(T)=0$. Refining any pointed neighbourhood by its inverse image of $U$ shows $(P_C)_{\\bar x}=0$ by [def-weil-pbc-geometric-stalks]. This argument applies to all the closed supports in step 1.",
+   "text": "Restricting the section to C gives the adjunction-unit isomorphism. The inverse-image/stalk comparison therefore makes the section an isomorphism at each geometric point factoring through C. Outside C, factor through the open complement and use open-closed vanishing; the stalk is zero. Closed immersions remain closed under the fiber products and compositions used for intersections.",
    "uses": [
-    "def-weil-closed-immersion",
-    "lemma-openclosed-stalk-lowerstar",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-constant-module-sheaf-underlying",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lemma-openclosed-vanishing-lowerstar",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-comp",
     "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 04FX, lemma-stalk-pushforward-closed-immersion; Tag 03P5; the outside-support case is the empty-complement argument of 04FX."
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $\\bar x'$ of $X'$ and put $\\bar x=v\\bar x'$. By [lem-weil-pbc-inverse-image-stalk-germ] and the underlying-module compatibility of [prop-weil-pbc-inverse-image-modules-exact], the source stalk of $b_{v,C}$ identifies with $(P_C)_{\\bar x}$. Its adjunction equation from step 1 sends a represented germ $s$ to the germ of the pulled-back function $s\\circ q$. If $\\bar x\\in C$, equivalently $\\bar x'\\in C'$ by the fibre-product universal property, evaluation in step 2 gives $(s\\circ q)(\\bar x')=s(\\bar x)$; the stalk map is $\\mathrm{id}_A$. Otherwise both stalks are zero. Thus $b_{v,C}$ is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative] on underlying abelian sheaves; its inverse is automatically linear. For $A_X\\to P_C$ the same equation gives $a\\mapsto a$ on $C'$ and zero outside it. Equivalently, pulling back a function on $T$ and then restricting to $C'$ equals first restricting to $C$ and then pulling back. This proves compatibility with the specified canonical comparison $v^{-1}A_X\\cong A_{X'}$ in [prop-weil-pbc-inverse-image-modules-exact].",
+   "text": "Identify the canonical pullback adjoint on the tensor unit with the finite base-change mate. Its mate is monoidal: prove this by expanding adjunction units and naturality. Since a closed immersion is finite, its base-change map is invertible. Cancel the epimorphic section to identify this invertible mate with the specified pullback adjoint; the same unit computation proves its restriction compatibility.",
    "uses": [
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lemma-weil-pbc-finite-exchange"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q1 (3), including the germ formula; Tag 03PU, theorem-exactness-stalks; agent calculation of the specified map."
-   }
+   "elementary": false
   },
   {
-   "text": "For $w:X''\\to X'$, precomposition of functions gives $h_{v\\circ w,C}=v_*h_{w,C'}\\circ h_{v,C}$ after the canonical direct-image composition identification. Indeed both sides send $s$ to $s\\circ q_v\\circ q_w$. The unit equation of [lem-weil-pbc-inverse-image-composition], transported to modules using the identical underlying units of [prop-weil-pbc-inverse-image-modules-exact], says that the adjunct of $b_{w,C'}\\circ w^{-1}b_{v,C}$ is precisely that composite. Uniqueness of adjuncts therefore identifies it with $b_{v\\circ w,C}$ under the canonical inverse-image composition isomorphism. For the identity map, $h_{\\mathrm{id},C}$ is identity precomposition, and the identity unit equation in [lem-weil-pbc-inverse-image-composition] gives $b_{\\mathrm{id},C}=1$ under its canonical comparison. These calculations prove the requested identity and composition laws for these particular maps.",
+   "text": "For identity and composition, cancel the corresponding epimorphic constant section after inverse image. The canonical inverse-image composition and identity unit equations, and monoidal unit naturality, identify both composites. The support-change maps are normalized by the constant transition-unit calculation.",
    "uses": [
-    "lem-weil-pbc-inverse-image-composition",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-weil-pbc-inverse-image-composition"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03Q1 and direct-image fibre products; canonical composition comparison and its unit equations; agent precomposition calculation."
-   }
+   "elementary": false
   },
   {
-   "text": "For $I=C\\times_XD$, the pairing $(s,t)\\mapsto(s|_I)(t|_I)$ is $A_X(T)$-balanced, additive in each variable, and compatible with restriction in $T$. The universal properties of tensor and sheafification [def-pur-sheaf-tensor-product] therefore give the displayed $\\mu_{C,D}$. By [lem-pod-etale-stalk-tensor-scalar] its stalk sends $s_{\\bar x}\\otimes t_{\\bar x}$ to the product of their values on $I$. This node's tensor over constant scalars agrees with the $A_X$-module tensor here: locally a scalar in $A_X(T)$ is a constant $a\\in A$ by [lem-weil-pbc-constant-module-locally-constant], so after sheafification the $A$-balancing relations already impose all $A_X(T)$-balancing relations, and conversely. At $\\bar x\\in I$, step 2 identifies the map with $A\\otimes_AA\\to A$, $a\\otimes b\\mapsto ab$, with inverse $a\\mapsto a\\otimes1$. If $\\bar x\\notin I$, at least one source factor and the target are zero. All stalks are isomorphisms, so [lemma-weil-pbc-geometric-stalk-conservative] gives the claimed sheaf isomorphism.",
+   "text": "The tensor of two epimorphic sections is epimorphic since each sheaf tensor functor is a left adjoint. Multiplication composed with this tensor is the unit multiplication followed by the intersection section. At a point on both supports all three section maps are invertible, so multiplication is invertible. Otherwise a source tensor factor and the target are zero. Geometric-stalk conservativity proves invertibility.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "lem-weil-pbc-constant-module-locally-constant",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03P5 and 03PU; stalk tensor comparison via the etale point construction; agent product calculation."
-   }
-  },
-  {
-   "text": "Apply the existing stalkwise flatness criterion [lem-sfb-etale-flat-geometric-fibers] to P_C. Compare universe-lifted and ordinary stalks by the canonical uliftSheafFiberIso. If the geometric point lies on C, factor its field-valued morphism through the closed immersion, as in [lem-weil-pbc-geometric-point-open-or-closed]. The closed-direct-image stalk comparison [lemma-openclosed-stalk-lowerstar], the universe-lift comparison on C, and the constant-sheaf stalk comparison identify this stalk with A. The free rank-one A-module is flat (ModuleCat.flat_iff_flat and Module.Flat A A). Otherwise the geometric point factors through the open complement of C. The two supports have disjoint ranges, so [lemma-openclosed-vanishing-lowerstar] makes the inverse image of P_C on that complement zero. Apply the stalk functor, and transport by the inverse-image stalk comparison, to obtain a zero stalk. A zero object is flat. Thus every geometric stalk is flat, and the criterion concludes flatness. This includes the zero ring, empty supports, and empty X.",
-   "uses": [
-    "lem-sfb-etale-flat-geometric-fibers",
-    "lem-weil-pbc-geometric-point-open-or-closed",
-    "lemma-openclosed-stalk-lowerstar",
-    "lemma-openclosed-vanishing-lowerstar",
-    "lem-weil-pbc-constant-sheaf-geometric-stalk",
-    "lem-weil-pbc-inverse-image-stalk-germ"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 04FX and 03PU; existing source-library stalkwise flatness criterion in WeilConjectures/SixFunctors/Etale/UpperLowerStar/FlatModuleCat.lean; identity-or-zero stalk calculation."
-   }
-  },
-  {
-   "text": "For three closed supports, evaluate both parenthesized products on section tensors $(s\\otimes t)\\otimes u$. Restriction to $C\\times_XD\\times_XE$ gives respectively $(s|_I\\,t|_I)|_{I\\cap E}\\,u|_{I\\cap E}$ and $s|_{C\\cap(D\\cap E)}\\,(t|_{D\\cap E}\\,u|_{D\\cap E})$. They agree because iterated restriction is restriction to the triple fibre product and $(ab)c=a(bc)$ in $A$. For interchange, the braiding sends $s\\otimes t$ to $t\\otimes s$, whose product is unchanged because $ab=ba$. The tensor associator and braiding have exactly these pure-tensor formulas, and a map out of a sheafified tensor is determined on section tensors by [def-pur-sheaf-tensor-product]. Hence the two sheaf-map equalities hold, with the canonical support identifications. This proves associativity and symmetry of the specific $\\mu$ of step 5.",
-   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Agent calculation of pointwise multiplication and tensor universal properties, in the locally constant model of Tag 03P5."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-canonical-ringed-tensor-comparison-construction] to the etale geometric morphism, the constant rings and the module pullback of [prop-weil-pbc-inverse-image-modules-exact]. Its comparison has the normalization of [def-weil-pbc-canonical-ringed-tensor-comparison]: on unit images of sections it takes the pullback of $s\\otimes t$ to the tensor of the pullbacks of $s$ and $t$. On a stalk $\\bar x'$ the inverse-image germ comparison [lem-weil-pbc-inverse-image-stalk-germ] therefore identifies this with the identity comparison of the tensor factors at $v\\bar x'$. At points over $I$, the two maps in the asserted square are $a\\otimes b\\mapsto ab$ by steps 3 and 5; at all other points their source or target is zero. Equality on stalks implies equality of these maps: the image of their difference has zero stalks by [prop-weil-pbc-geometric-stalks-exact], and hence is zero by [lemma-weil-pbc-geometric-stalk-conservative]. This proves the displayed pullback square for the canonical tensor comparison, including its normalization on the specified $b$ and $\\mu$.",
+   "text": "Use the existing stalkwise flatness criterion. On the support the epimorphic constant section is an isomorphism on stalks, by step 2; the stalk of its source is flat because a monoidal stalk functor sends the tensor unit to the free rank-one A-module. Off the support the stalk is zero by step 2, and zero is flat. Thus every geometric stalk is flat.",
    "uses": [
-    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "def-weil-pbc-canonical-ringed-tensor-comparison",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
+    "lem-sfb-etale-flat-geometric-fibers",
+    "def-weil-pbc-geometric-stalks"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL, lemma-tensor-product-pullback, normalized pure-tensor construction; also literature/stacks-project/etale-cohomology.tex, Tags 03Q1 (3) and 03PU."
-   }
+   "elementary": false
   },
   {
-   "text": "Each $P_C[0]$ is a bounded-above complex of flat sheaves by step 6, hence K-flat by [lem-pc-bounded-above-flat-kflat-site]. The canonical computation isomorphism of [lem-weil-pbc-site-derived-tensor-descent] computes its derived tensor with $P_D[0]$ by the total tensor of these very degree-zero complexes. By [def-pc-tensor-complex-sheaves] this total complex is $(P_C\\otimes_{A_X}P_D)[0]$, with zero differential, and the map of step 5 therefore gives the required derived isomorphism. The product is again $P_I[0]$, a flat K-flat model, so the two iterated products can use these same models. The associator is reassociation of the sole degree-zero tensor summand; the symmetry sign is $(-1)^{0\\cdot0}=1$. The equalities of step 7 thus remain equal after localization. For pullback, [prop-weil-pbc-inverse-image-modules-exact] makes the derived inverse image termwise on these complexes; steps 3 and 6 identify their pulled-back terms with flat $P_{C'}$. Its canonical derived tensor comparison on these K-flat models is the localization of the ordinary comparison of step 8, so that square also remains equal after localization. Naturality of the model computation in [lem-weil-pbc-site-derived-tensor-descent] ensures these are the displayed derived maps, rather than new chosen isomorphisms.",
+   "text": "Cancel the epimorphic tensor of three sections to verify associativity, and two sections to verify symmetry. Naturality of the associator and braiding and their coherence on the tensor unit reduce both to the normalized support-transition maps.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Cancel the inverse image of the epimorphic tensor of sections. Oplax tensor naturality, the unit axiom, and the computed compatibility of the pullback adjoints and support changes with sections prove the ordinary pullback square.",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pc-tensor-complex-sheaves",
     "prop-weil-pbc-inverse-image-modules-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat (the cited DAG node has the right statement but misprints 06YS); derived tensor construction in Section 06YL; agent degree-zero computation."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Apply the generic canonical flat degree-zero pairing compatibility lemma to the ordinary associativity, symmetry and inverse-image squares of steps 7 and 8, using flatness from step 6 for the left factors. The derived multiplication is invertible because its canonical flat-model comparison and the ordinary multiplication are invertible. These are exactly the displayed derived maps by the explicit singleFunctorFlatPairing interface.",
+   "uses": [
+    "lem-pur-etale-single-functor-monoidal-compatibility",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-constant-module-locally-constant",
-  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-openclosed-vanishing-lowerstar",
   "lem-weil-pbc-closed-immersion-base-change",
   "lem-weil-pbc-closed-immersion-comp",
-  "def-weil-closed-immersion",
-  "lemma-openclosed-stalk-lowerstar",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-constant-module-sheaf-underlying",
   "def-weil-pbc-geometric-stalks",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lemma-weil-pbc-finite-exchange",
   "lem-weil-pbc-inverse-image-composition",
   "def-pur-sheaf-tensor-product",
-  "lem-pod-etale-stalk-tensor-scalar",
   "lem-sfb-etale-flat-geometric-fibers",
-  "lem-weil-pbc-geometric-point-open-or-closed",
-  "lemma-openclosed-vanishing-lowerstar",
-  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-  "def-weil-pbc-canonical-ringed-tensor-comparison",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "def-pc-tensor-complex-sheaves"
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pur-etale-single-functor-monoidal-compatibility",
+  "def-kun-derived-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "The original nine-step plan is retained, with step 6 implemented by D7 using the proved source-library stalkwise flatness criterion, closed-support stalk comparison, and open-complement vanishing. The remaining bundled theorem is unchanged and still sorry."
+  "place": "U4 stage-3 reduction: unit-section epimorphisms, finite base change, unit/zero stalks and categorical coherence; the separate source result about canonical flat degree-zero pairings supplies step 9. Flatness reuses the unit/zero stalk computations of the proof. Target statement and the unit route are unchanged."
  },
  "mathlib_searches": [
   {
@@ -312,15 +245,7 @@
   ]
  },
  "tool_uses": [
-  "lemma-openclosed-stalk-lowerstar",
-  "lem-weil-pbc-constant-sheaf-geometric-stalk",
-  "lem-weil-pbc-constant-module-sheaf-underlying",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-weil-pbc-inverse-image-composition",
-  "lem-pod-etale-stalk-tensor-scalar",
-  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-weil-pbc-inverse-image-composition"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -379,16 +304,16 @@
   "by": "N3",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Repair R1-R4: all support coherences use equalities after named canonical support-change maps, never HEq. Derived multiplication is singleFunctorObjTensorIso with closedConstantModule_flat followed by singleFunctor.map of the ordinary multiplication; derived associativity, symmetry and the canonical derived pullback square are stated. The noncanonical constantRingedModel and its IsFlatOnSite conjuncts were removed as authorized by R3. The global GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall is the published wrapper of Sheaf.monoidalCategory (its equality lemma is rfl); this specializes the sheafified sectionwise tensor to fixed ModuleCat A coefficients: locally every scalar in the constant ring sheaf is represented by an element of A, so after sheafification A-balancing and constant-ring-sheaf balancing agree. Its tensor functors therefore encode exactly the site tensor and exact tensoring recorded by def-pur-sheaf-tensor-product and def-pc-flat-sheaf-modules, in the accepted fixed-coefficient encoding; no alternative tensor construction is introduced."
+  "note": "Repair R1-R4: all support coherences use equalities after named canonical support-change maps, never HEq. Derived multiplication is singleFunctorObjTensorIso with closedConstantModule_flat followed by singleFunctor.map of the ordinary multiplication; derived associativity, symmetry and the canonical derived pullback square are stated. The noncanonical constantRingedModel and its IsFlatOnSite conjuncts were removed as authorized by R3. The global GrothendieckTopology.monoidalCategory_sheaf_of_essentiallySmall is the published wrapper of Sheaf.monoidalCategory (its equality lemma is rfl); this specializes the sheafified sectionwise tensor to fixed ModuleCat A coefficients: locally every scalar in the constant ring sheaf is represented by an element of A, so after sheafification A-balancing and constant-ring-sheaf balancing agree. Its tensor functors therefore encode exactly the site tensor and exact tensoring recorded by def-pur-sheaf-tensor-product and def-pc-flat-sheaf-modules, in the accepted fixed-coefficient encoding; no alternative tensor construction is introduced. U4 preserves all statement signatures. The constant module is exposed as the same tensor unit; flat pairings, derived pullback arrows and derived pair maps use generic canonical constructors with explicit derivedTensor types. Their bodies contain no choices and are definitionally the previous composites. Five change records document the interfaces."
  },
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "D7",
+  "reviewer": "C-6f105",
+  "group": "U4",
   "result": "pass",
-  "landing": "20261020T211655-L-3487271",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T233227-L-908718",
+  "kind": "interface",
+  "note": "independent cc review: delivered PurEtaleClosedConstantTensor + new EtaleSingleFunctorMonoidalCompatibility vs live clone, node records, change records; rfl defeq of constantModuleSheaf; axioms; importers SupportedCup/PurityFramePrincipalBoundary/PurityFrameClass compiled against the delivery"
  }
 }

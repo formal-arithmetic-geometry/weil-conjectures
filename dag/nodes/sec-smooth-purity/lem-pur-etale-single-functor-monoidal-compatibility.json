@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-etale-single-functor-monoidal-compatibility",
+ "kind": "statement",
+ "title": "Canonical flat degree-zero tensor pairings and exact inverse image",
+ "statement": "Let B be a symmetric closed monoidal Grothendieck abelian coefficient category with functorial flat resolutions, and v : X′ → X a scheme morphism. Assume exact inverse image v* preserves flat objects [prop-weil-pbc-inverse-image-modules-exact, def-pc-flat-sheaf-modules]. Write S and S′ for the degree-zero functors on B-valued small étale sheaves [def-weil-pbc-etale-sheaves, def-weil-abstract-derived-category]. For a flat L and an ordinary pairing f : L ⊗ M → N, define P(f) as singleFunctorObjTensorIso(L,M).hom followed by S(f), using the specified derived tensor [def-kun-derived-tensor]. These canonical pairings preserve every ordinary associativity diagram whose left factors L,M,P are flat, and every symmetry diagram whose two factors L,M are flat, with the specified derived associator and symmetry [lem-kun-tensor-sym]. They also preserve every ordinary inverse-image pairing square: if v*(f);d = δ(v*);(b ⊗ c);g and the left factors of f and g are flat, then Lv*(P(f));γ(N);S′(d) = δ(Lv*);((γ(L);S′(b)) ⊗ (γ(M);S′(c)));P(g), where γ is precisely singleFunctorCompLeftDerivedUpperStarIso.hom. The complete quantifiers and equalities are the three fields of EtaleFlatSingleTensorCompatibility in the attached Lean module; there are no support, multiplication, or invertibility assumptions on f or g.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ and 06YU: K-flat models and the tensor localization; the naturality on exact inverse image is the canonical tensor/counit comparison, as constructed in WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison and Unit."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-kun-derived-tensor",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-pc-flat-sheaf-modules",
+  "lem-kun-tensor-sym"
+ ],
+ "proof": [
+  {
+   "text": "On cochain complexes the functor concentrated in degree zero has tensorator the single/total-tensor isomorphism and identity unit comparison. Check naturality, associativity, both units and braiding on the unique nonzero degree-(0,0) or degree-(0,0,0) summand. All other summands have a zero factor. The Koszul sign is one in degree zero.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Compose with the strong braided homotopy quotient and the lax braided Qh localization. The canonical single/quotient comparison identifies this with the degree-zero derived functor. A flat left sheaf has K-flat degree-zero complex, so expanding this tensorator gives exactly singleFunctorObjTensorIso.hom. Functoriality and the lax associativity and braiding axioms carry arbitrary ordinary pairing diagrams to the first two displayed equations.",
+   "uses": [
+    "def-kun-derived-tensor",
+    "def-weil-abstract-derived-category",
+    "def-pc-flat-sheaf-modules",
+    "lem-kun-tensor-sym"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The single/termwise-exact-functor comparison preserves the same degree-zero tensor summands and the unit. The derived counit is monoidal: its tensor axiom is leftDerivedUpperStarTensorComparison_app_app_comp after canceling the invertible oplax tensorators; its unit axiom is leftDerivedUpperStarUnitIso_hom_comp_ε after canceling the invertible unit comparison. Whisker and compose these monoidal transformations. Expanding the exact single comparison, using the leftDerivedFunctorIsoMapDerivedCategory counit factorization and naturality of the single/quotient comparison, identifies their composite with singleFunctorCompLeftDerivedUpperStarIso.hom. These arguments are uniform for zero objects and empty schemes. Apply the tensor equation of this transformation, naturality and the given ordinary pairing square to get the third displayed equation.",
+   "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-kun-derived-tensor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-weil-abstract-derived-category",
+  "def-pc-flat-sheaf-modules",
+  "lem-kun-tensor-sym",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Canonical degree-zero specialization of the tensor localization and the exact-functor tensor/counit equations. This is the separate categorical result used in step 9 of lem-pur-etale-closed-constant-tensor, without any closed supports, supported multiplications or support maps."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "single.*[Mm]onoidal",
+   "results": "25 hits: Mathlib/RepresentationTheory/Action.lean, Mathlib/RepresentationTheory/Rep/Iso.lean, Mathlib/RepresentationTheory/Maschke.lean, Mathlib/RepresentationTheory/Basic.lean, Mathlib/RepresentationTheory/Homological/Resolution.lean, Mathlib/CategoryTheory/Bicategory/SingleObj.lean, Mathlib/CategoryTheory/Bicategory/SingleObj.lean, Mathlib/CategoryTheory/Monoidal/Cartesian/Basic.lean. No result states the canonical degree-zero lax braided tensor structure and its exact-pullback compatibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The functor placing an object in degree zero in a derived category is lax braided monoidal and commutes monoidally with exact pullback",
+   "results": "8 hits: HomologicalComplex.Monoidal.inducingFunctorData, CategoryTheory.Tor', CategoryTheory.Localization.Monoidal.instBraidedLocalizedMonoidalToMonoidalCategory, CategoryTheory.Tor, CategoryTheory.Localization.Monoidal.instBraidedCategoryLocalizedMonoidal, CategoryTheory.Functor.instLaxBraidedMonMapMon, CategoryTheory.Localization.Monoidal.braidingNatIso, CategoryTheory.Tor_obj. No result states the canonical degree-zero lax braided tensor structure and its exact-pullback compatibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"singleFunctor\"",
+   "results": "12 hits: CategoryTheory.SingleFunctors, CategoryTheory.SingleFunctors.instCategory, CategoryTheory.SingleFunctors.functor, CategoryTheory.SingleFunctors.Hom, CategoryTheory.SingleFunctors.Hom.id, CategoryTheory.SingleFunctors.evaluation, CategoryTheory.SingleFunctors.postcomp, CategoryTheory.SingleFunctors.Hom.comp. No result states the canonical degree-zero lax braided tensor structure and its exact-pullback compatibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The functor placing an object in degree zero in a derived category is lax braided monoidal and commutes monoidally with exact pullback",
+   "results": "8 hits: CategoryTheory.shiftFunctorZero (Mathlib.CategoryTheory.Shift.Basic), CategoryTheory.LaxBraidedFunctor.of (Mathlib.CategoryTheory.Monoidal.Braided.Basic), ChainComplex.single₀ (Mathlib.Algebra.Homology.Single), CategoryTheory.instIsIsoFunctorFromLeftDerivedZero (Mathlib.CategoryTheory.Abelian.LeftDerived), CategoryTheory.Functor.leftDerivedZeroIsoSelf.congr_simp (Mathlib.CategoryTheory.Abelian.LeftDerived), CategoryTheory.HasShift.Induced.zero (Mathlib.CategoryTheory.Shift.Induced), CategoryTheory.LaxBraidedFunctor.toFunctor (Mathlib.CategoryTheory.Monoidal.Braided.Basic), CategoryTheory.shiftFunctorZero' (Mathlib.CategoryTheory.Shift.Basic). LaxBraidedFunctor.of only bundles an already given structure; shiftFunctorZero is the zero-shift comparison. Neither constructs the canonical single-functor tensor compatibility. No match.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.PurEtaleClosedConstantTensor",
+  "date": "2026-10-21",
+  "group": "U4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-etale-closed-constant-tensor",
+   "place": "Proof step 9: canonical degree-zero derived tensor coherence."
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleSingleFunctorMonoidalCompatibility",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSingleFunctorMonoidalCompatibility.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleSingleFunctor_monoidalCompatibility",
+  "statement": "theorem etaleSingleFunctor_monoidalCompatibility\n    (B : Type uB) [Category.{u + 1} B] [Abelian B]\n    [IsGrothendieckAbelian.{u + 1} B] [MonoidalCategory B] [MonoidalPreadditive B]\n    [SymmetricCategory B] [MonoidalClosed B] [Abelian.HasFunctorialFlatResolution B]\n    {X X' : AlgebraicGeometry.Scheme.{u}} (v : X' ⟶ X)\n    [(upperStar B v).PreservesFlat] :\n    EtaleFlatSingleTensorCompatibility (B := B) v",
+  "branch": "sheaf-dag",
+  "by": "U4",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Etale.singleFunctorFlatPairing",
+   "AlgebraicGeometry.Etale.EtaleFlatSingleTensorCompatibility",
+   "AlgebraicGeometry.Etale.etaleSingleFunctor_monoidalCompatibility",
+   "AlgebraicGeometry.Etale.derivedTensorPairMap",
+   "AlgebraicGeometry.Etale.singleFunctorPullbackMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6f105",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261020T233227-L-908718",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-6f105",
+  "group": "U4",
+  "result": "pass",
+  "landing": "20261020T233227-L-908718",
+  "kind": "interface",
+  "note": "independent cc review: delivered PurEtaleClosedConstantTensor + new EtaleSingleFunctorMonoidalCompatibility vs live clone, node records, change records; rfl defeq of constantModuleSheaf; axioms; importers SupportedCup/PurityFramePrincipalBoundary/PurityFrameClass compiled against the delivery"
+ }
+}
