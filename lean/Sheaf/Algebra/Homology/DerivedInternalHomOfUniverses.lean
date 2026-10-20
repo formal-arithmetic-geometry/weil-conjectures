@@ -5,7 +5,7 @@ Authors: SHEAF group Q05
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Sheaf.Algebra.Homology.QuasiIsoHomComplexMapOfUniverses

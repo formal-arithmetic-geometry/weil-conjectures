@@ -17,7 +17,7 @@ public import Sheaf.Paper.EtaleOriginDerivedCategory
 import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 
 import Sheaf.AlgebraicGeometry.CompactifiableOverField
-import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import Sheaf.AlgebraicGeometry.DerivedCategories
 import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
 import Sheaf.AlgebraicGeometry.CompactifiableCompatibleTower
 import Sheaf.AlgebraicGeometry.ComparisonDirectImage

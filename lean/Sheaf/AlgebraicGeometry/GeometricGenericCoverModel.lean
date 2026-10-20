@@ -11,7 +11,7 @@ import WeilConjectures.AlgebraicGeometry.GenericFibreClosedAvoidance
 import WeilConjectures.Mathlib.CategoryTheory.Limits.Shapes.Pullback.IsPullback.Basic
 import WeilConjectures.AlgebraicGeometry.GenericFibreClosedCoverSpread
 import WeilConjectures.AlgebraicGeometry.CompatibleEtaleGenericFibreModel
-import WeilConjectures.AlgebraicGeometry.ClosedFamilyGeometricFibreShrink
+import Sheaf.AlgebraicGeometry.ClosedFamilyGeometricFibreShrink
 
 /-! # A closed geometric cover on an étale model
 

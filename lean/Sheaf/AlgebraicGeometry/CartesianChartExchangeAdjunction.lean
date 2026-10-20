@@ -1,5 +1,5 @@
 module
-public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
+public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeCoefficients
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeCore
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeSource

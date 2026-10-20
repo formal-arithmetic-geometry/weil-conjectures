@@ -7,7 +7,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.CartesianHigherImageTransitions
 import WeilConjectures.AlgebraicGeometry.Sites.CohomologyColimit
 import all Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
-import WeilConjectures.AlgebraicGeometry.CartesianHigherImageFiniteRawClassVanishing
+import Sheaf.AlgebraicGeometry.CartesianHigherImageFiniteRawClassVanishing
 
 /-! # Local affine-cover glue for cartesian higher-image sections
 

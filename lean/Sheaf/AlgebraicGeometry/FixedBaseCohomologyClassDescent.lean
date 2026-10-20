@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvari
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import WeilConjectures.AlgebraicGeometry.CompatiblePullbackSheafSystem
 import WeilConjectures.AlgebraicGeometry.EtaleLimitCanonicalCohomologyDiagram
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
 import Mathlib.CategoryTheory.Filtered.Final
 import Mathlib.CategoryTheory.Filtered.Connected
 import Mathlib.CategoryTheory.Limits.Connected

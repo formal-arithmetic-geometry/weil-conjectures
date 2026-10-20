@@ -7,8 +7,8 @@ module
 
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.Flat
 public import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.Algebra.Homology.BoundedAboveFlatTensorAcyclic
-import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
+import Sheaf.Algebra.Homology.BoundedAboveFlatTensorAcyclic
+import Sheaf.Algebra.Homology.FilteredColimitsTensor
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.CochainComplexTrunc
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim
 import Mathlib.Algebra.Homology.ShortComplex.FunctorEquivalence

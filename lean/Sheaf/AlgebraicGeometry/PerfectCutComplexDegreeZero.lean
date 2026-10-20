@@ -5,11 +5,11 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DegreeZeroFibreSurjective
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 import Sheaf.Algebra.Homology.AffinePerfectCutDegreeZero
-import WeilConjectures.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
+import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
 import Sheaf.AlgebraicGeometry.AffinePerfectFibreSurjectivity
 import Sheaf.AlgebraicGeometry.AffinePerfectCutSheafRealization
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed

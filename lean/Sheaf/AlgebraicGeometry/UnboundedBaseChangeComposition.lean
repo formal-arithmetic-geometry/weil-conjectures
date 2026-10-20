@@ -6,7 +6,7 @@ Authors: SHEAF group NL
 module
 
 public import Sheaf.AlgebraicGeometry.BaseChangeInverseImageIso
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompCoherence
 

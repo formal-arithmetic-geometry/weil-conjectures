@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.HomotopyCategory.MappingCone
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorColimits
 import WeilConjectures.Mathlib.Algebra.Homology.GrothendieckAbelian
-import WeilConjectures.Algebra.Homology.KFlatTensorConeTwoOutOfThree
+import Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
 
 /-!

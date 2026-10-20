@@ -6,7 +6,7 @@ Authors: SHEAF group Q40
 module
 
 public import Sheaf.RingTheory.ExcellentRing
-import WeilConjectures.RingTheory.CompleteLocalGRing
+import Sheaf.RingTheory.CompleteLocalGRing
 import Sheaf.RingTheory.JTwoResidueFieldCriterion
 import Sheaf.RingTheory.RegularRingUniversallyCatenary
 

@@ -6,7 +6,7 @@ public import Sheaf.Paper.EtaleDerivedScalarTensor
 public import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
 public import Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
+public import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import Mathlib.Algebra.Ring.Defs

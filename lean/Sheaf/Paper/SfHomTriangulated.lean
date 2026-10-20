@@ -6,6 +6,7 @@ Authors: SHEAF group N2
 module
 
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

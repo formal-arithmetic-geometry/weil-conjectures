@@ -5,10 +5,10 @@ Authors: SHEAF group NP
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
-import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import Sheaf.AlgebraicGeometry.FiniteCohomologicalDimensionDirectImageCoproducts
 import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 import Sheaf.AlgebraicGeometry.ProperTorsionDirectImageBound

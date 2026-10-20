@@ -35,6 +35,12 @@ public import WeilConjectures.Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.PointCount
 public import WeilConjectures.AlgebraicGeometry.FieldExtensionLimit
 public import WeilConjectures.Mathlib.CategoryTheory.Types.Basic
+import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
+import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
+import WeilConjectures.AlgebraicGeometry.AbelianVariety.Projective
+import WeilConjectures.CategoryTheory.Comma.Over.DescentDatum
+import WeilConjectures.Mathlib.AlgebraicGeometry.AffineTransitionLimit
+import WeilConjectures.Mathlib.FieldTheory.IsSepClosed
 
 /-!
 # The Jacobian of a smooth projective curve

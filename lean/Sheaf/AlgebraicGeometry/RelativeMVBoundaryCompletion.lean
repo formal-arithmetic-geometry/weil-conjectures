@@ -5,7 +5,7 @@ Authors: SHEAF group N2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated

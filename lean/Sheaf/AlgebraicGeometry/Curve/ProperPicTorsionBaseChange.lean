@@ -10,9 +10,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import WeilConjectures.AlgebraicGeometry.Picard.Group
 
-import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
-import WeilConjectures.AlgebraicGeometry.Curve.PicardDecomposition
-import WeilConjectures.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.Curve.PicardDecomposition
+import Sheaf.AlgebraicGeometry.Curve.PicZeroTorsionBaseChange
 
 /-!
 # Proper Picard torsion under algebraically closed extension

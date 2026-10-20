@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import Mathlib.Topology.KrullDimension
 
-import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.AlgebraicGeometry.Curve.TorsionCohomologicalDimension
 import WeilConjectures.AlgebraicGeometry.EtaleSheafHExtDerivedComparison
 

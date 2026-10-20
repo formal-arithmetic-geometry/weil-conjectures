@@ -1,5 +1,5 @@
 module
-public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionPositiveTail
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionPositiveTail
 
 @[expose] public section
 universe u

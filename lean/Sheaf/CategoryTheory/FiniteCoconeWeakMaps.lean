@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
 
 import WeilConjectures.Mathlib.CategoryTheory.Abelian.Subobject
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits

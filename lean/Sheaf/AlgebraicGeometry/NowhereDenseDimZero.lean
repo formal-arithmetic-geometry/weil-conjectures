@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Topology.GDelta.Basic
-public import WeilConjectures.AlgebraicGeometry.Dimension
+public import Sheaf.AlgebraicGeometry.Dimension
 import WeilConjectures.Mathlib.Topology.KrullDimension
 import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop
 

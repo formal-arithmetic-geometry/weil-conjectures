@@ -11,6 +11,7 @@ public import WeilConjectures.Mathlib.CategoryTheory.Linear.LinearFunctor
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekBoundedBelow
+import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
 
 /-!
 
@@ -168,13 +169,104 @@ lemma plus_rightDerivedUpperShriek_obj [HasBoundedBelowUpperShriek A f]
     DerivedCategory.TStructure.t.plus ((R(f)^![A]).obj K) :=
   HasBoundedBelowUpperShriek.plus_rightDerivedUpperShriek_obj K hK
 
+/-- For finite coefficients and a uniform global upper-amplitude bound `N` for `Rf_!`,
+the exceptional inverse image preserves bounded below objects.
+
+Source: SGA 4, Exp. XVIII, 3.1.7; the adjunction and t-structure orthogonality argument.
+(blueprint: lem-etale-upper-shriek-bounded-below-from-amplitude)
+
+Proof: if `K` is bounded below by `n` and `L` is bounded above by `n - N - 1`, the
+amplitude hypothesis bounds `Rf_! L` above by `n - 1`. Every morphism from `Rf_! L`
+to `K` is zero by t-structure orthogonality. The adjunction identifies these morphisms
+with those from `L` to `Rf^! K`, so orthogonality bounds `Rf^! K` below by `n - N`.
+The bound must be global: finite coefficients alone do not supply a uniform `N`
+when the fibre dimensions of the compactification are unbounded. -/
+theorem hasBoundedBelowUpperShriek_of_amplitude (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (N : ℤ)
+    (hN : ∀ (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+      (n : ℤ), DerivedCategory.TStructure.t.IsLE L n →
+        DerivedCategory.TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj L) (n + N)) :
+    HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f := by
+  refine { plus_rightDerivedUpperShriek_obj := ?_ }
+  intro K hK
+  obtain ⟨n, hn⟩ := hK
+  refine ⟨n - N, ?_⟩
+  change DerivedCategory.TStructure.t.IsGE ((R(f)^![ModuleCat.{u + 1} Λ]).obj K) (n - N)
+  rw [DerivedCategory.TStructure.t.isGE_iff_orthogonal (n - N - 1) (n - N) (by omega)]
+  intro L φ hL
+  have := hn
+  have : DerivedCategory.TStructure.t.IsLE
+      ((R(f)_![ModuleCat.{u + 1} Λ]).obj L) (n - 1) := by
+    convert hN L (n - N - 1) hL using 1
+    omega
+  let adj := rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) f
+  apply (adj.homEquiv L K).symm.injective
+  rw [adj.homAddEquiv_symm_zero]
+  exact DerivedCategory.TStructure.t.zero _ (n - 1) n (by omega)
+
+
+private theorem exists_uniform_proper_dimension_bound
+    {S T : Scheme.{u}} (p : S ⟶ T) [IsProper p] [CompactSpace T]
+    (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] :
+    ∃ d : ℕ, ∀ (G : Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ), d < q →
+      IsZero ((((p)_*[ModuleCat.{u + 1} Λ]).rightDerived q).obj G) := by
+  obtain ⟨d, hd⟩ := exists_fibre_dimension_bound p
+  refine ⟨2 * d, fun G q hq ↦ ?_⟩
+  apply Etale.isZero_of_forall_isZero_upperStar_algClosurePoint Λ
+  intro t
+  let x := T.algClosurePoint t
+  let sq := IsPullback.of_hasPullback p x
+  have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ isAddTorsion_of_finite sq
+  rw [Etale.baseChange_eq_derivedBaseChangeMapPlus] at this
+  have hdim : topologicalKrullDim (pullback p x : Scheme.{u}) ≤ (d : WithBot ℕ∞) := by
+    let a : Spec (.of (AlgebraicClosure (T.residueField t))) ⟶ Spec (T.residueField t) :=
+      Spec.map (CommRingCat.ofHom (algebraMap (T.residueField t) _))
+    have hx : x = a ≫ T.fromSpecResidueField t := rfl
+    have : LocallyOfFiniteType (p.fiberToSpecResidueField t) := by
+      dsimp [Scheme.Hom.fiberToSpecResidueField]
+      infer_instance
+    rw [hx]
+    calc
+      _ = topologicalKrullDim
+          (pullback (p.fiberToSpecResidueField t) a : Scheme.{u}) := by
+        let e := pullbackLeftPullbackSndIso p (T.fromSpecResidueField t) a
+        exact (IsHomeomorph.topologicalKrullDim_eq _ e.hom.homeomorph.isHomeomorph).symm
+      _ ≤ topologicalKrullDim (p.fiber t) :=
+        topologicalKrullDim_pullback_le_of_field (p.fiberToSpecResidueField t) a
+      _ ≤ (d : WithBot ℕ∞) := hd t
+  have hvan := Etale.isZero_higherDirectImage_of_two_mul_lt isAddTorsion_of_finite
+    (pullback.snd p x) (pullback.snd p x) (𝟙 _) (Category.comp_id _) d hdim
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) (pullback.fst p x)).obj G) q (by omega)
+  let K := (DerivedCategory.Plus.singleFunctor _ 0).obj G
+  refine IsZero.of_iso hvan
+    ((Etale.upperStar (ModuleCat.{u + 1} Λ) x).mapIso
+        ((p)_*[ModuleCat.{u + 1} Λ].homologyRightDerivedFunctorPlusObjSingleFunctorIso G q).symm ≪≫
+      ((Etale.upperStar (ModuleCat.{u + 1} Λ) x).mapDerivedCategoryPlusHomologyFunctorIso q).app
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) p).rightDerivedFunctorPlus.obj K) ≪≫
+      (DerivedCategory.Plus.homologyFunctor _ q).mapIso
+        (asIso ((Etale.derivedBaseChangeMapPlus (ModuleCat.{u + 1} Λ) sq.toCommSq).app K)) ≪≫
+      (DerivedCategory.Plus.homologyFunctor _ q).mapIso
+        ((Etale.lowerStar (ModuleCat.{u + 1} Λ) (pullback.snd p x)).rightDerivedFunctorPlus.mapIso
+          (((Etale.upperStar (ModuleCat.{u + 1} Λ)
+            (pullback.fst p x)).mapDerivedCategoryPlusSingleFunctor 0).app G)))
+
 /-- For torsion coefficients and a quasi-compact target `Y`, `Rf_!` is a left adjoint
 (`AlgebraicGeometry.Etale.isLeftAdjoint_rightDerivedLowerShriek`) and `Rf^!` preserves bounded
 below objects. The second half holds because `Rf_!` has finite cohomological amplitude, bounded
 by twice the fibre dimension of the compactification, which is bounded as `Y` is
 quasi-compact: if `Rf_!` sends `D^{≤ 0}` into `D^{≤ N}` then `Rf^!` sends `D^{≥ 0}` into
 `D^{≥ -N}`, by adjunction [SGA 4, Exp. XVIII, 3.1.7]. Without quasi-compactness of `Y` this
-fails: for `Y = ⊔ₙ Spec k` and `X = ⊔ₙ ℙⁿ_k`, `Rf^! Λ` restricts to `Λ(n)[2n]` on `ℙⁿ_k`. -/
+fails: for `Y = ⊔ₙ Spec k` and `X = ⊔ₙ ℙⁿ_k`, `Rf^! Λ` restricts to `Λ(n)[2n]` on `ℙⁿ_k`.
+
+Source: Stacks Project, Tags 0A3V, 095U, and 07K7 (4)(c); SGA 4, Exp. XVIII, 3.1.7.
+(blueprint: lem-etale-upper-shriek-quasicompact-bounded-below)
+
+Proof: the proper part of the chosen compactification has uniformly bounded fibre dimension
+because its target is quasi-compact. Proper base change and the torsion vanishing bound on
+geometric fibres give a uniform classical cohomological-dimension bound. Dimension shifting
+on a K-injective complex with injective components gives the same upper amplitude on the
+unbounded derived category. Extension by zero is exact, hence preserves the input upper
+bound. Apply `hasBoundedBelowUpperShriek_of_amplitude` to the composite. -/
 instance hasBoundedBelowUpperShriek [CompactSpace Y] (Λ : Type (u + 1)) [CommRing Λ]
     [Finite Λ] : HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f where
   plus_rightDerivedUpperShriek_obj :=
@@ -201,6 +293,37 @@ instance hasBoundedBelowUpperShrieks (Λ : Type (u + 1)) [CommRing Λ] [Finite �
     HasBoundedBelowUpperShrieks (ModuleCat.{u + 1} Λ) where
   isLeftAdjoint _ _ := inferInstance
   hasBoundedBelowUpperShriek _ _ _ := inferInstance
+
+/-- If every compactifiable morphism has a uniform upper-amplitude bound for `Rf_!`,
+finite coefficients have exceptional inverse images preserving bounded below objects.
+The amplitude bound is an explicit hypothesis, rather than a consequence of finiteness.
+
+Source: `hasBoundedBelowUpperShriek_of_amplitude` and `HasBoundedBelowUpperShrieks`.
+(blueprint: lem-etale-upper-shrieks-bounded-below-from-amplitude)
+
+Proof: for each compactifiable morphism f, take its amplitude bound N and apply
+`hasBoundedBelowUpperShriek_of_amplitude f Λ N` to the given bound. Return the resulting
+bound for all morphisms, including non-quasi-compact targets, and build the upstream global
+class from it. Only proofs of propositions are constructed. -/
+theorem hasBoundedBelowUpperShrieks_of_amplitude (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+    (h : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f],
+      ∃ N : ℤ, ∀ (L : DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} Λ)))
+        (n : ℤ), DerivedCategory.TStructure.t.IsLE L n →
+          DerivedCategory.TStructure.t.IsLE ((R(f)_![ModuleCat.{u + 1} Λ]).obj L) (n + N)) :
+    HasBoundedBelowUpperShrieks (ModuleCat.{u + 1} Λ) ∧
+      ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f],
+        HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f := by
+  have hall : ∀ {X Y : Scheme.{u}} (f : X ⟶ Y) [HasCompactification f],
+      HasBoundedBelowUpperShriek (ModuleCat.{u + 1} Λ) f := by
+    intro X Y f hf
+    obtain ⟨N, hN⟩ := h f
+    simpa only using hasBoundedBelowUpperShriek_of_amplitude f Λ N hN
+  refine ⟨?_, hall⟩
+  constructor
+  · intro X Y f hf
+    infer_instance
+  · intro X Y f hf hcompact
+    exact hall f
 
 end BoundedBelow
 

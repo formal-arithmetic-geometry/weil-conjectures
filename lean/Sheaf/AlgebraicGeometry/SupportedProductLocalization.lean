@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.SupportedLocalizationComparisons
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure

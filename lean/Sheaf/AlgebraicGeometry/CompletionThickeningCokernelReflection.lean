@@ -1,15 +1,15 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import all WeilConjectures.AlgebraicGeometry.CoherentMapReductionTorsionCoker
+import all Sheaf.AlgebraicGeometry.CoherentMapReductionTorsionCoker
 import Sheaf.AlgebraicGeometry.IdealModuleProductExactCalculus
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
-import WeilConjectures.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionPowerQuotient
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.ClosedImmersionPowerQuotient
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitKernel
 
 /-! # Reflection of cokernel torsion on a closed thickening

@@ -9,6 +9,7 @@ public import Sheaf.AlgebraicGeometry.ProjectiveSpaceHomOfGeneratingSections
 public import WeilConjectures.AlgebraicGeometry.Cohomology.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.LinearAlgebra.LinearIndependent.Defs
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceFunctorOfPoints
 import Sheaf.AlgebraicGeometry.ProjectiveSpaceStandardCharts
 import Sheaf.Paper.EulerCharacteristicWellDefined

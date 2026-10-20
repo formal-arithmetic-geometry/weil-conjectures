@@ -1,5 +1,5 @@
 module
-public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 public import Sheaf.AlgebraicGeometry.DerivedDirectImageSplitTriangle
 import Sheaf.AlgebraicGeometry.MayerVietorisDirectImageChainSquares
 @[expose] public section

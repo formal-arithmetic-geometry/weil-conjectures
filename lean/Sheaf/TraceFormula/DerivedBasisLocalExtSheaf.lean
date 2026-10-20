@@ -14,7 +14,7 @@ import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 import Sheaf.CategoryTheory.RightDerivedFunctorOfQuasiIsoResolutions
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Mathlib.CategoryTheory.Sites.Sheafification
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import WeilConjectures.Topology.RingedSpaceModuleEnoughInjectives
 import Sheaf.Algebra.Homology.RingedDerivedClosedSymmetricMonoidal
 import Sheaf.Algebra.Homology.DerivedInternalHomSectionsModel

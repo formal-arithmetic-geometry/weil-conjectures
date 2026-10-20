@@ -9,11 +9,11 @@ public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
-import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
 import Sheaf.AlgebraicGeometry.Curve.ConstantKummerNaturality
 import WeilConjectures.AlgebraicGeometry.Curve.Kummer
 import WeilConjectures.AlgebraicGeometry.Curve.Picard
-import WeilConjectures.AlgebraicGeometry.Curve.PicProperNTorsionDiv
+import Sheaf.AlgebraicGeometry.Curve.PicProperNTorsionDiv
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.AffineMorphism
 
 /-!

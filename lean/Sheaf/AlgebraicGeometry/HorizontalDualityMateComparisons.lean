@@ -5,7 +5,7 @@ Authors: SHEAF group V4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DualityEquationBaseChangeMap
+public import Sheaf.AlgebraicGeometry.DualityEquationBaseChangeMap
 
 /-! # Fixed endpoint comparisons for horizontal duality mates
 

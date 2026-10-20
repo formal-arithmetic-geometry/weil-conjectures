@@ -14,7 +14,7 @@ public import Mathlib.RingTheory.AdicCompletion.Algebra
 public import WeilConjectures.RingTheory.CompletionMapForLocalHom
 public import WeilConjectures.RingTheory.GRing
 
-import WeilConjectures.RingTheory.FiniteTypeGRing
+import Sheaf.RingTheory.FiniteTypeGRing
 import Sheaf.TraceFormula.ArtinApproximationEtaleLocalMap
 
 /-!

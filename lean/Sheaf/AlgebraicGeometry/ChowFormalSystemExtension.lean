@@ -5,16 +5,16 @@ Authors: SHEAF group S1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import WeilConjectures.AlgebraicGeometry.FormalSystemsPullback
-import WeilConjectures.AlgebraicGeometry.FormalModuleSupportConstant
-import WeilConjectures.AlgebraicGeometry.FiniteTypeModuleSupportPullback
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FormalSystemsPullback
+import Sheaf.AlgebraicGeometry.FormalModuleSupportConstant
+import Sheaf.AlgebraicGeometry.FiniteTypeModuleSupportPullback
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseUnionPreimage
 import WeilConjectures.AlgebraicGeometry.ClosedSubsetProperOverBaseProperties
-import WeilConjectures.AlgebraicGeometry.FormalSystemClosedSupportPushforward
+import Sheaf.AlgebraicGeometry.FormalSystemClosedSupportPushforward
 
 /-! # Extension of pulled formal systems across a proper compactification
 

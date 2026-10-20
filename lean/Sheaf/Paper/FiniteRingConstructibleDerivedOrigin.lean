@@ -6,8 +6,8 @@ Authors: SHEAF group Q36
 module
 
 public import Sheaf.AlgebraicGeometry.ProEtaleFiniteModuleIntrinsicComparison
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf

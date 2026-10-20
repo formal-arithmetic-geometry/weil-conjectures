@@ -8,7 +8,7 @@ public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import WeilConjectures.AlgebraicGeometry.AffineConormalSections
+import Sheaf.AlgebraicGeometry.AffineConormalSections
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 
 /-! # Local generation of conormal wedges by affine ideal sections

@@ -5,11 +5,11 @@ Authors: SHEAF group D3
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.HomComplexProjections
+public import Sheaf.Algebra.Homology.HomComplexProjections
 
 public import Sheaf.CategoryTheory.Sites.RGammaDerivedLimit
 
-public import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
+public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift
 import Sheaf.Algebra.Homology.HomComplexSectionsCochainsOfUniverses
 import Sheaf.Algebra.Homology.HomComplexSectionsCochainsCommOfUniverses

@@ -268,4 +268,30 @@ noncomputable def rightDerivedFunctorCompMapDerivedCategoryIso :
 
 end CompositionExactRight
 
+section RetainedComparison
+
+variable {E : Type uE} [Category.{vE} E] [Abelian E]
+ [HasDerivedCategory.{wE} E]
+ [HasKInjectiveResolutions C] [HasKInjectiveResolutions D]
+
+/-- The retained exact-composition comparison agrees with the upstream direct one. -/
+lemma rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived_eq
+ (F : C ⥤ D) (G : D ⥤ E) [F.Additive] [G.Additive]
+ [PreservesFiniteLimits G] [PreservesFiniteColimits G] :
+ rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived F G =
+ rightDerivedFunctorCompMapDerivedCategoryIso F G := by
+ apply Iso.ext
+ apply (F ⋙ G).rightDerivedFunctor.rightDerived_ext
+   (F ⋙ G).rightDerivedFunctorUnit (HomotopyCategory.quasiIso C (.up ℤ))
+ ext J
+ simp [rightDerivedFunctorCompMapDerivedCategoryIsoViaRightDerived,
+   rightDerivedFunctorCompMapDerivedCategoryIso, rightDerivedFunctorCompUnit,
+   rightDerivedFunctorCompMapDerivedCategoryUnit, Category.assoc]
+ have h := NatTrans.congr_app G.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
+   ((F.mapHomotopyCategory (.up ℤ)).obj J)
+ dsimp only [NatTrans.comp_app, whiskerLeft_app] at h
+ rw [← Category.assoc (G.rightDerivedFunctorUnit.app _) _ _, h]
+
+end RetainedComparison
+
 end CategoryTheory.Functor

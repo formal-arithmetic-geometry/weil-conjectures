@@ -20,8 +20,8 @@ import Mathlib.CategoryTheory.Limits.ConcreteCategory.Basic
 import Sheaf.TraceFormula.ComponentQuotientIndEtale
 import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.TraceFormula.EtaleNormalDomainFiniteFactors
-import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain
-import WeilConjectures.RingTheory.EtaleNormalRing
+import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
+import Sheaf.RingTheory.EtaleNormalRing
 import WeilConjectures.RingTheory.FilteredColimitNormalRing
 import Sheaf.RingTheory.IndEtaleStability
 import Mathlib.CategoryTheory.Limits.Constructions.Over.Connected

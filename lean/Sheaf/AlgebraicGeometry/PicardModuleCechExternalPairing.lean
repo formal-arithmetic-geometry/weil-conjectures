@@ -5,12 +5,12 @@ Authors: SHEAF group A4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PicardExternalRightCechModels
+public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
 public import Sheaf.Paper.CechCupProductCore
 public import Sheaf.Paper.ModuleCupResolutionData
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
-public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 import Sheaf.AlgebraicGeometry.PicardExternalCechModuleRepresentatives
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import Sheaf.Paper.CechComparisonMapNaturality

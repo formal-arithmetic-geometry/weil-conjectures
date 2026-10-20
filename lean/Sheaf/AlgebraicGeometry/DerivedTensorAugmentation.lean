@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.Algebra.Homology.Monoidal

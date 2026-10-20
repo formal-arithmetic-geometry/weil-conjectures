@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Restrict
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
-import WeilConjectures.AlgebraicGeometry.PrincipalOpenCohomologyJointKernel
+import Sheaf.AlgebraicGeometry.PrincipalOpenCohomologyJointKernel
 import WeilConjectures.AlgebraicGeometry.EtaleCohomologyPullbackFunctorial
 
 /-! # GabberPrincipalVanishingIdeal

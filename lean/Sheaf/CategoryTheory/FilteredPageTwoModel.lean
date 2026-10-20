@@ -5,7 +5,7 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 
 /-! # The functorial second page of a filtered complex

@@ -12,7 +12,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
 import Sheaf.AlgebraicGeometry.AbsoluteFrobeniusUniversalHomeomorphism
-public import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismInvariance
+public import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 import Sheaf.SixFunctors.FrobeniusSquareCartesian
 import Mathlib.AlgebraicGeometry.Pullbacks
 import Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations

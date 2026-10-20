@@ -5,7 +5,7 @@ Authors: SHEAF group M3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseLift
 import Sheaf.AlgebraicGeometry.PerfectOpenStalkDegreewiseShrink

@@ -5,7 +5,7 @@ Authors: SHEAF group H4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedFiberBetti
+public import Sheaf.AlgebraicGeometry.DerivedFiberBetti
 
 /-! # Functorial derived residue-field cohomology
 

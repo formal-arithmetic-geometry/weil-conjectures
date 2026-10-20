@@ -5,13 +5,13 @@ Authors: SHEAF group T1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 public import Mathlib.RingTheory.AdicCompletion.Basic
 
-import WeilConjectures.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
-import WeilConjectures.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
-import WeilConjectures.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
+import Sheaf.AlgebraicGeometry.QuasiCoherentTensorProductAffineSections
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import WeilConjectures.Algebra.Module.AdicCompletionStableRanges
 
 /-! # Affine sections of a module completion

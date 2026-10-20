@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.FieldTheory.IsAlgClosed.Basic
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 public import Sheaf.TraceFormula.LocalCompleteIntersectionScheme
 import WeilConjectures.AlgebraicGeometry.AffineChartTensorComparison
 import Sheaf.RingTheory.SyntomicRingFilteredColimitDescent

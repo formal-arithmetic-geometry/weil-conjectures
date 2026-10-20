@@ -159,6 +159,8 @@ theorem isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_cover
     IsIso ((openImmersionRestrictionLowerStarAdjunction (WeilCoefficients.{u} l) j).unit.app
       G) := by
   refine isIso_of_isIso_localizationRestriction _ _ g hg fun i ↦ ?_
+  change IsIso ((localizationRestriction (WeilCoefficients.{u} l) (g i) inferInstance).map
+    ((openImmersionRestrictionLowerStarAdjunction (WeilCoefficients.{u} l) j).unit.app G))
   obtain ⟨n, ⟨e⟩⟩ := hG i
   let ι' := pullback.fst (g i) j
   have hι' := isIso_openImmersionRestrictionLowerStarAdjunction_unit_app_of_iso_biproduct

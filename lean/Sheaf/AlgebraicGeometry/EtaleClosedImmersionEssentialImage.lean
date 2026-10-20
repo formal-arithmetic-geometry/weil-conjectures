@@ -6,7 +6,7 @@ Authors: SHEAF group F1
 module
 
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-public import WeilConjectures.AlgebraicGeometry.EtaleSupport
+public import Sheaf.AlgebraicGeometry.EtaleSupport
 public import Mathlib.CategoryTheory.EssentialImage
 import WeilConjectures.SixFunctors.OpenClosed.ClosedImmersion
 import WeilConjectures.SixFunctors.OpenClosed.Conservative

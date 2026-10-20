@@ -9,11 +9,11 @@ public import Mathlib.Algebra.Category.ModuleCat.Projective
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.CategoryTheory.Monoidal.Tor
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 
-public import WeilConjectures.AlgebraicGeometry.SelfTorAffineSection
+public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 
-import WeilConjectures.AlgebraicGeometry.SelfTorAmbientResolutionCharts
+import Sheaf.AlgebraicGeometry.SelfTorAmbientResolutionCharts
 import WeilConjectures.AlgebraicGeometry.TensorPullbackOverIsoUnit
 
 /-! # Affine derived-Tor charts from chosen resolution comparisons

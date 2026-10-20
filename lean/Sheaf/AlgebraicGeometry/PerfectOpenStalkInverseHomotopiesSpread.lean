@@ -5,9 +5,9 @@ Authors: SHEAF group M3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
-import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkHomotopySpread
+import Sheaf.AlgebraicGeometry.PerfectOpenStalkHomotopySpread
 import Sheaf.AlgebraicGeometry.StalkInternalHomFinitePresentation
 public import Sheaf.Paper.DerivedHomMayerVietoris
 

@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.StrictConstantTowerOperations
 public import Sheaf.Paper.CompleteCoefficientDatum
 public import Sheaf.Paper.CompletedRlimFunctor
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Mathlib.Algebra.Homology.Functor
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification

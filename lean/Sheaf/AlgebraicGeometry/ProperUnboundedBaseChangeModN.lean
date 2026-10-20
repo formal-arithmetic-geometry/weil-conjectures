@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.Data.ZMod.Basic
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
 import Sheaf.AlgebraicGeometry.TorsionAssembly
-import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
 import WeilConjectures.SixFunctors.BaseChange.DerivedUnboundedFac
 import WeilConjectures.SixFunctors.BaseChange.DerivedRestrictScalars

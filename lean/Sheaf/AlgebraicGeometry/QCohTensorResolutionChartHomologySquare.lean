@@ -1,6 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartTensorSquare
-public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionHomologyNaturality
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionHomologyNaturality
 
 @[expose] public section
 universe u

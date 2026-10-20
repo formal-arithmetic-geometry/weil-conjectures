@@ -5,10 +5,10 @@ Authors: SHEAF group P1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
+public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 import Sheaf.AlgebraicGeometry.CompactFlatGeneratorCover
 import Sheaf.Algebra.Homology.RelativeBiprodConeExtension
-import WeilConjectures.Algebra.Homology.CyclePullbackResolution
+import Sheaf.Algebra.Homology.CyclePullbackResolution
 import Mathlib.Algebra.Homology.Refinements
 
 /-! # One relative compact flat generator resolution step

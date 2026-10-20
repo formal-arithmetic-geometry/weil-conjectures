@@ -5,7 +5,7 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated

@@ -3,7 +3,7 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under the Apache 2.0 license as described in the LICENSE file.
 -/
 module
-public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 
 /-! # Additive biproduct comparisons for localized row roofs -/
 

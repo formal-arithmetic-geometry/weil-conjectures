@@ -10,7 +10,7 @@ import Sheaf.AlgebraicGeometry.ConstructibleCurveSubPart
 import Sheaf.AlgebraicGeometry.ConstructibleCurveQuotPart
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import WeilConjectures.AlgebraicGeometry.ConstantSheafGeometricStalk
-import WeilConjectures.AlgebraicGeometry.ConstructibleSubsheafNoetherian
+import Sheaf.AlgebraicGeometry.ConstructibleSubsheafNoetherian
 import Sheaf.AlgebraicGeometry.ConstructibleTorsionModulesAgree
 import Sheaf.AlgebraicGeometry.CurveCoefficientPair
 import WeilConjectures.AlgebraicGeometry.EtaleSheaves

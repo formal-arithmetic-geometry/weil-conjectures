@@ -15,7 +15,7 @@ public import Mathlib.Topology.Irreducible
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 import WeilConjectures.AlgebraicGeometry.NoetherianComponents
 import Mathlib.AlgebraicGeometry.Limits
-import WeilConjectures.RingTheory.RegularRingNormal
+import Sheaf.RingTheory.RegularRingNormal
 
 /-!
 # Regular schemes and the normal decomposition

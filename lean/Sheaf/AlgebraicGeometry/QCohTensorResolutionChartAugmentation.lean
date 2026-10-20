@@ -1,6 +1,6 @@
 module
-public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionChartRestriction
-public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionExtendHomology
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartRestriction
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionExtendHomology
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionSingleTensor
 
 @[expose] public section

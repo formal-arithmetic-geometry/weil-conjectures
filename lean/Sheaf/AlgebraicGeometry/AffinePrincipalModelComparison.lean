@@ -5,7 +5,7 @@ Authors: SHEAF group C9
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
+public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.RingTheory.Localization.Away.Basic
 import WeilConjectures.AlgebraicGeometry.TildePreservesFiniteLimits

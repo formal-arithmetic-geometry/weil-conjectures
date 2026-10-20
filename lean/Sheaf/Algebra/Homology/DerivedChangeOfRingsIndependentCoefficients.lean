@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlatQuasiIso
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import Sheaf.Algebra.Homology.KFlat

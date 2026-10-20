@@ -19,7 +19,7 @@ import Sheaf.RingTheory.FormalMonoidRingDimension
 import WeilConjectures.RingTheory.CompletionRegularLocal
 import WeilConjectures.RingTheory.LocalCompletionQuotient
 import WeilConjectures.RingTheory.PowerSeriesFieldCohenRegularComplete
-import WeilConjectures.RingTheory.RegularLocalLocalization
+import Sheaf.RingTheory.RegularLocalLocalization
 import WeilConjectures.RingTheory.RegularLocalQuotientKernelParameters
 import WeilConjectures.RingTheory.AdicCompletionNoetherian
 import Sheaf.TraceFormula.FsFaceSharpening

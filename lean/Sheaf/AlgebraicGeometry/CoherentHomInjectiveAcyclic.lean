@@ -6,7 +6,7 @@ Authors: SHEAF group V1
 module
 
 public import Sheaf.AlgebraicGeometry.IsFlasqueHomObjOfInjective
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 import WeilConjectures.AlgebraicGeometry.ModuleAbelianZariskiCohomology
 import WeilConjectures.Topology.FlasqueZariskiAcyclic
 import Sheaf.Paper.ZariskiModuleAbelianCohomologyNatural

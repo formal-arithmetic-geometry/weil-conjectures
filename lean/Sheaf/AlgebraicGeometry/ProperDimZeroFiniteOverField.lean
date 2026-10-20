@@ -7,7 +7,7 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
-public import WeilConjectures.AlgebraicGeometry.Dimension
+public import Sheaf.AlgebraicGeometry.Dimension
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 import Sheaf.AlgebraicGeometry.DimZeroFiniteOverField
 import WeilConjectures.AlgebraicGeometry.ProperBasic

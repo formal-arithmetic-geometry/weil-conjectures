@@ -9,9 +9,9 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.RingTheory.Noetherian.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.AlgebraicGeometry.FinitePresentationModuleMapDescent
-import WeilConjectures.AlgebraicGeometry.FlatModuleDescentAffineCharts
-import WeilConjectures.AlgebraicGeometry.AffineFlatModuleDescent
+import Sheaf.AlgebraicGeometry.FinitePresentationModuleMapDescent
+import Sheaf.AlgebraicGeometry.FlatModuleDescentAffineCharts
+import Sheaf.AlgebraicGeometry.AffineFlatModuleDescent
 import WeilConjectures.AlgebraicGeometry.TensorPullbackFinitePresentation
 
 /-! # A flat module on a fixed affine-limit model descends to a later stage

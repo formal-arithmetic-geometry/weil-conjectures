@@ -3,7 +3,7 @@ module
 public import Mathlib.AlgebraicGeometry.FunctionField
 public import WeilConjectures.ConstructibleSheaf.Defs
 import Sheaf.AlgebraicGeometry.ConstantStrictFibreStalkComparison
-import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain
+import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.AlgebraicGeometry.StrictHenselizationChartMaximalIdeal
 import Sheaf.AlgebraicGeometry.StrictHenselizationAffineChartIndEtale
 import WeilConjectures.Mathlib.AlgebraicGeometry.FunctionField

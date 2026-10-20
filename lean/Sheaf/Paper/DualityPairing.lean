@@ -6,6 +6,7 @@ Authors: SHEAF group Q29
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriekLeftAdjoint
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -17,7 +18,7 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Compactification.NagataCompactification
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import WeilConjectures.Algebra.Homology.RhomGlobalSections
+import Sheaf.Algebra.Homology.RhomGlobalSections
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescent
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
@@ -25,15 +26,15 @@ import WeilConjectures.Algebra.Homology.HomComplex
 import Mathlib.Algebra.Homology.BifunctorShift
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.ModuleDerivedCategory
 
 import Mathlib.Algebra.Category.ModuleCat.AB
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.HasDerivedCategory
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Sheaf
-import WeilConjectures.Algebra.Homology.HomComplexGlobalHomotopy
-import WeilConjectures.Algebra.Homology.HomTensorTotal
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopy
+import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.SignedDoubleHomCone
 import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
 import WeilConjectures.AlgebraicGeometry.DerivedCategories

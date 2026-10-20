@@ -6,7 +6,7 @@ Authors: SHEAF group NO
 module
 
 public import Sheaf.CategoryTheory.LocalCoefficientLocalization
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
 import Sheaf.Algebra.Homology.LocalCoefficientTelescopeDual
 import Sheaf.CategoryTheory.SequentialTelescopeMono

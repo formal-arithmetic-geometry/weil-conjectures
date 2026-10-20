@@ -14,7 +14,7 @@ public import Mathlib.CategoryTheory.Functor.ReflectsIso.Jointly
 public import Mathlib.Algebra.Homology.Additive
 import Mathlib.Algebra.Homology.DerivedCategory.Basic
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.Algebra.Homology.KFlatTensorConeTwoOutOfThree
+import Sheaf.Algebra.Homology.KFlatTensorConeTwoOutOfThree
 import Sheaf.Algebra.Homology.AcyclicKFlatTensor
 import Sheaf.SecSmoothPurity.CochainPullbackTensorCoherence
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic

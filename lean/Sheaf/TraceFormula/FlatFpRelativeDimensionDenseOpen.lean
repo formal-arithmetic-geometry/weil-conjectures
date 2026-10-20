@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import WeilConjectures.Mathlib.Topology.KrullDimension
 
 import Sheaf.AlgebraicGeometry.DimensionExtension
-import WeilConjectures.AlgebraicGeometry.FlatFibreDimensionStrataCore
+import Sheaf.AlgebraicGeometry.FlatFibreDimensionStrataCore
 import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 
 /-! # Dense-open fibre-dimension bounds for flat finitely presented morphisms

@@ -5,10 +5,10 @@ Authors: SHEAF group W3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison
+public import Sheaf.AlgebraicGeometry.RestrictedDerivedSectionZeroComparison
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.AdjunctionShift
 import WeilConjectures.CategoryTheory.DerivedCategory.Shift.ExactFunctor
-import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
+import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyComparisonMap
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 

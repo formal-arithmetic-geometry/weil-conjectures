@@ -17,7 +17,7 @@ public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import WeilConjectures.Mathlib.AlgebraicGeometry.Geometrically.Reduced
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
+import Sheaf.AlgebraicGeometry.Morphisms.SmoothConnectedGenericGeometryCore
 import Sheaf.AlgebraicGeometry.Morphisms.GeometricallyConnectedFibreNeighbourhood
 
 /-!

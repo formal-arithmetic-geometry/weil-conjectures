@@ -265,4 +265,18 @@ theorem finiteCoverLowerShriek_coefficient_compatibility {k : Type u}
         ((Scheme.pointSmallEtale s).sheafFiber.map_isZero hzK)
       exact ⟨0, Subsingleton.elim _ _⟩
 
+theorem finiteCoverLowerShriek_constructible_pending {k : Type u}
+    [Field k] [IsAlgClosed k] {X U V : Scheme.{u}}
+    (f : X ⟶ Spec (.of k)) [IsCurve f] [IsReduced X]
+    (j : U ⟶ X) [IsOpenImmersion j] (r : ℕ) [Fact r.Prime]
+    (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))))
+    [Scheme.IsFiniteLocallyConstantSheaf G] (v : V ⟶ U) [IsFinite v] [Etale v] :
+    Scheme.IsConstructibleSheaf
+      ((Etale.openImmersionLowerShriek
+          (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) j).obj
+        ((Etale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj
+          ((Etale.upperStar (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod r))) v).obj G))) := by
+  exact finiteCoverLowerShriek_constructible f j r G v
+
+
 end AlgebraicGeometry.IsCurve

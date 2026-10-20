@@ -6,7 +6,7 @@ Authors: SHEAF group D4
 module
 
 public import Sheaf.Paper.CechRefinementCochainMap
-public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 import Sheaf.Paper.CechRefinementResolutionDiagram
 
 /-! # The refinement comparison square

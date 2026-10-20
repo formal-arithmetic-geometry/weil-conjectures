@@ -13,7 +13,7 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 import Sheaf.Algebra.Homology.KFlatResolution
 import WeilConjectures.Algebra.Homology.LocalizedModuleRestrictionQuasiIso
 import Sheaf.Algebra.Homology.OpenRestrictionKFlat
-import WeilConjectures.Algebra.Homology.OpenRestrictionTensorHomology
+import Sheaf.Algebra.Homology.OpenRestrictionTensorHomology
 import Mathlib.Algebra.Homology.BifunctorFlip
 import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 import WeilConjectures.FromJoel.Algebra.Homology.BifunctorMappingCone

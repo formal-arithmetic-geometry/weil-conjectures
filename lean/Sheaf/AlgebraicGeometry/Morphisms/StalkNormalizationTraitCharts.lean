@@ -18,7 +18,7 @@ public import Mathlib.RingTheory.DiscreteValuationRing.Basic
 public import Mathlib.RingTheory.AdjoinRoot
 
 import Sheaf.AlgebraicGeometry.Morphisms.StalkNormalizationGenericComparison
-import WeilConjectures.AlgebraicGeometry.Morphisms.TraitGenericNormalizationCharts
+import Sheaf.AlgebraicGeometry.Morphisms.TraitGenericNormalizationCharts
 
 /-!
 # Standard tame charts for normalization over a local trait

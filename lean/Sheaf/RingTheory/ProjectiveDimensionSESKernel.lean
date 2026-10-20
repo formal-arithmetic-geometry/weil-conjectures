@@ -1,0 +1,59 @@
+module
+
+public import Sheaf.RingTheory.GlobalDimension
+public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
+import Mathlib.CategoryTheory.Abelian.Projective.Dimension
+import Sheaf.RingTheory.ProjectiveResolutionExtCharacterization
+
+@[expose] public section
+
+universe u v
+
+open CategoryTheory CategoryTheory.Limits
+
+namespace Ring
+
+/-! # Projective dimension in a short exact sequence
+
+Source: literature/stacks-project/algebra.tex, Algebra, Lemma Tag 065S, part (1)
+(blueprint: lem-weil-pbc-projective-dimension-ses-kernel).
+-/
+
+/-- In a short exact sequence `0 → M' → M → M'' → 0` of `R`-modules, if `M` has a
+projective resolution of length at most `m` and `M''` one of length at most `m + 1`,
+then `M'` has a projective resolution of length at most `m`. Source: Stacks Project,
+Algebra, Lemma Tag 065S, part (1)
+(blueprint: lem-weil-pbc-projective-dimension-ses-kernel).
+
+Proof: fix an arbitrary module `N` and set `i = m + 1` (so `i ≥ 1`). By
+`lem-weil-pbc-projective-dimension-ext-characterization` (065R) the resolution of `M`
+gives `Ext^i(M, N) = 0` and the resolution of `M''` gives `Ext^(i+1)(M'', N) = 0`.
+The contravariant long exact Ext sequence of the short exact sequence
+(`lem-weil-pbc-ext-long-exact-first-variable`, 065P) gives the exact segment
+`Ext^i(M, N) → Ext^i(M', N) → Ext^(i+1)(M'', N)`, whose outer terms vanish, so
+`Ext^(m+1)(M', N) = 0`. As `N` is arbitrary, 065R in its Ext-vanishing-to-resolution
+direction gives a resolution of `M'` of length at most `m`. The module universe
+`max u v` is the one of 065R. -/
+theorem projectiveDimensionLE_of_shortExact
+    {R : Type u} [CommRing R] (m : ℕ)
+    (S : ShortComplex (ModuleCat.{max u v} R)) (hS : S.ShortExact)
+    (h₂ : ModuleCat.HasProjectiveResolutionLE S.X₂ m)
+    (h₃ : ModuleCat.HasProjectiveResolutionLE S.X₃ (m + 1)) :
+    ModuleCat.HasProjectiveResolutionLE S.X₁ m := by
+  have := HasExt.standard (ModuleCat.{max u v} R)
+  have h₂van := (ModuleCat.hasProjectiveResolutionLE_iff_ext_vanishing S.X₂ m).2.1 h₂
+  have h₃van := (ModuleCat.hasProjectiveResolutionLE_iff_ext_vanishing S.X₃ (m + 1)).2.1 h₃
+  have h₂pd : HasProjectiveDimensionLT S.X₂ (m + 1) :=
+    HasProjectiveDimensionLT.mk (fun i hi Y e ↦
+      (h₂van Y i hi).elim e 0)
+  have h₃pd : HasProjectiveDimensionLT S.X₃ (m + 2) :=
+    HasProjectiveDimensionLT.mk (fun i hi Y e ↦
+      (h₃van Y i hi).elim e 0)
+  have h₁pd : HasProjectiveDimensionLT S.X₁ (m + 1) :=
+    hS.hasProjectiveDimensionLT_X₁ (m + 1) (by infer_instance) (by infer_instance)
+  exact (ModuleCat.hasProjectiveResolutionLE_iff_ext_vanishing S.X₁ m).1.2
+    (by
+      intro Y
+      exact HasProjectiveDimensionLT.subsingleton S.X₁ (m + 1) (m + 1) (by rfl) Y)
+
+end Ring

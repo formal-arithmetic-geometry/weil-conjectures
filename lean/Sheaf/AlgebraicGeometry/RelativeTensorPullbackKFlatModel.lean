@@ -6,9 +6,9 @@ Authors: SHEAF group B4
 module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import WeilConjectures.AlgebraicGeometry.InverseImageModuleFunctor
-import WeilConjectures.AlgebraicGeometry.RelativeTensorPullbackComplexComparison
+import Sheaf.AlgebraicGeometry.RelativeTensorPullbackComplexComparison
 import Sheaf.AlgebraicGeometry.KFlatDerivedTensorComparison
 import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 

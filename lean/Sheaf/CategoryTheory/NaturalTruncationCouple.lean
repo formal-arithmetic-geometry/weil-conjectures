@@ -13,7 +13,7 @@ public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import WeilConjectures.CategoryTheory.TruncationRawExact
 import WeilConjectures.CategoryTheory.TruncationQuadrantVanishing
-import WeilConjectures.CategoryTheory.TruncationAbutmentCocone
+import Sheaf.CategoryTheory.TruncationAbutmentCocone
 import Sheaf.CategoryTheory.TruncationCoupleNaturality
 
 /-! # Individual natural truncation couples

@@ -7,7 +7,7 @@ module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
-public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
+public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
 
 /-! # Representative compatibility of quotient spectral sequences
 

@@ -6,9 +6,9 @@ Authors: SHEAF group NA
 module
 
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.KInjectiveResolutions
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 
 /-!
 # Coefficient conventions for smooth base change

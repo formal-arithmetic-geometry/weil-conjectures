@@ -1,12 +1,12 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.FormalFunctionsFinitePullback
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.FormalFunctionsFinitePullback
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import WeilConjectures.AlgebraicGeometry.QuotientBaseChangeIdeal
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionUnitQuotient
-import WeilConjectures.AlgebraicGeometry.IdealDataRecursivePowerComparison
+import Sheaf.AlgebraicGeometry.IdealDataRecursivePowerComparison
 
 @[expose] public section
 universe u

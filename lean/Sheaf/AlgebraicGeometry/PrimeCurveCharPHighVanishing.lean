@@ -12,7 +12,7 @@ public import Mathlib.Topology.KrullDimension
 public import Mathlib.Data.ZMod.Basic
 public import Mathlib.Algebra.Field.ULift
 public import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Defs
-import WeilConjectures.AlgebraicGeometry.Curve.ArtinSchreierDimension
+import Sheaf.AlgebraicGeometry.Curve.ArtinSchreierDimension
 import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedDirectImageComparison
 import Sheaf.AlgebraicGeometry.GeometricFiberFinite
 import WeilConjectures.AlgebraicGeometry.EtaleModuleCohomologyForget

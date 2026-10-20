@@ -6,7 +6,7 @@ module
 
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageClassCompatibility
-public import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyClass
+public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyClass
 
 import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 import Mathlib.CategoryTheory.Adjunction.Mates

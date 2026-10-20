@@ -6,7 +6,7 @@ Authors: SHEAF group ND
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.EtaleShriekQcqsComposition
 import Sheaf.AlgebraicGeometry.EtaleOpenCoverShriekTriangle

@@ -8,7 +8,7 @@ module
 public import Sheaf.TraceFormula.SiteAugmentationAcyclicCech
 public import Sheaf.CategoryTheory.DoubleComplexTotal
 
-import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
+import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
 import Sheaf.CategoryTheory.KInjectiveComputes
 import Sheaf.TraceFormula.TotalSiteComponentRestriction
 import Sheaf.CategoryTheory.RingedSiteModulesGrothendieckOfUniverses

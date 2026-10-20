@@ -27,7 +27,7 @@ open CategoryTheory Functor
 
 namespace AlgebraicGeometry.Scheme
 
-variable (Y : Scheme.{u}) (Λ : Type (u + 1)) [CommRing Λ]
+variable (Y : Scheme.{u}) (Λ : Type (u + 1)) [Ring Λ]
 
 /-- The sheafification of the constant ring presheaf. 
 (blueprint: lem-weil-pbc-etale-constant-ring-module-equivalence)

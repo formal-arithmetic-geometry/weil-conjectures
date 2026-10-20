@@ -21,7 +21,7 @@ import Mathlib.RingTheory.FiniteType
 import Mathlib.RingTheory.Spectrum.Prime.Topology
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Regular.RegularSequence
-import WeilConjectures.RingTheory.OpenFlatLocus
+import Sheaf.RingTheory.OpenFlatLocus
 import WeilConjectures.RingTheory.FlatFinitePresentationModel
 import WeilConjectures.RingTheory.RegularSequenceFlatClosedFiber
 

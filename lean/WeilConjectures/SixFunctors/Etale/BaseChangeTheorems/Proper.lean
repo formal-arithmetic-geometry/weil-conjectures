@@ -10,6 +10,7 @@ public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.AbTorsionShea
 public import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 public import WeilConjectures.SixFunctors.BaseChange.DerivedForget
 public import WeilConjectures.SixFunctors.BaseChange.DerivedUnbounded
+public import Sheaf.AlgebraicGeometry.ProperUnboundedBaseChange
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.ProjectiveLine
 public import WeilConjectures.SixFunctors.Etale.Derived.DirectImageVanishingTorsion
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusSingle
@@ -220,7 +221,7 @@ theorem Etale.exists_isZero_upperStar_rightDerived_lowerStar_of_isProper (hΛ : 
   let sq := IsPullback.of_hasPullback p x
   have := Etale.isIso_baseChange_of_isProper_of_isAddTorsion_ring Λ hΛ sq
   rw [Etale.baseChange_eq_derivedBaseChangeMapPlus] at this
-  have : IsProper (pullback.snd p x) := MorphismProperty.pullback_snd _ _ inferInstance
+  have : IsProper (pullback.snd p x) := IsProper.pullback_snd p x
   obtain ⟨d, hd⟩ := exists_topologicalKrullDim_le (pullback.snd p x)
   refine ⟨2 * d, fun G q hq ↦ ?_⟩
   have hvan := Etale.isZero_higherDirectImage_of_two_mul_lt hΛ (pullback.snd p x)

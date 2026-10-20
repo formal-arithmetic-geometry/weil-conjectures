@@ -9,7 +9,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Comp
 public import Sheaf.AlgebraicGeometry.OpenImmersionSquare
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 import Sheaf.CategoryTheory.DerivedExactSquare
 import WeilConjectures.SixFunctors.BaseChange.Pasting
 

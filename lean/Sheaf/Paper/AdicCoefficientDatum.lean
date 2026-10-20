@@ -22,7 +22,7 @@ import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafificatio
 import Mathlib.CategoryTheory.Sites.PreservesSheafification
 import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 
 /-!
 # The completed coefficient ring and its strict derived reduction tower

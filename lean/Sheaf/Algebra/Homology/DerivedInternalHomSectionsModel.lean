@@ -19,7 +19,7 @@ import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import Sheaf.Algebra.Homology.HomComplexGlobalHomotopyOfUniverses
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 /-! # K-injective models for internal Hom and its derived global sections

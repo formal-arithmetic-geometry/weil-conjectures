@@ -68,7 +68,7 @@ variable (l : ℕ) [Fact l.Prime] (E : Type w) [Field E] [Algebra E (PadicAlgCl 
 
 /-- The small étale site of a scheme is essentially small. Instance search does not find this
 in the presence of the imports of this file. -/
-local instance localInstance_Transport_1 (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+local instance Transport_essentiallySmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _

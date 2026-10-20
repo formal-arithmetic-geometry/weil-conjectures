@@ -1,8 +1,8 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.KoszulOpenSystem
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-import WeilConjectures.AlgebraicGeometry.KoszulOpenConeComparison
+public import Sheaf.AlgebraicGeometry.KoszulOpenSystem
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+import Sheaf.AlgebraicGeometry.KoszulOpenConeComparison
 import Sheaf.Paper.AffinePerfectKoszulPrincipalUnit
 
 @[expose] public section

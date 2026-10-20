@@ -5,11 +5,11 @@ Authors: SHEAF group K1
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
 
 import Mathlib.CategoryTheory.Abelian.Refinements
-import WeilConjectures.CategoryTheory.DerivedCoupleExact
-import WeilConjectures.CategoryTheory.FiniteCycleDerivedComparison
+import Sheaf.CategoryTheory.DerivedCoupleExact
+import Sheaf.CategoryTheory.FiniteCycleDerivedComparison
 import Sheaf.CategoryTheory.FiniteCycleFormula
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 

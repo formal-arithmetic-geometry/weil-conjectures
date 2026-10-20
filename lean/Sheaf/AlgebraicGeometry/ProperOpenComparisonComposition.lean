@@ -6,7 +6,7 @@ Authors: SHEAF group NN
 module
 
 public import Sheaf.AlgebraicGeometry.ProperOpenComparison
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
 import Sheaf.AlgebraicGeometry.ProperOpenIdentificationNormalization
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc

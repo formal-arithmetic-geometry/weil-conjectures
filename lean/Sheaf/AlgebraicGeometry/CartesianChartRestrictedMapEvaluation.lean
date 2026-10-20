@@ -5,8 +5,8 @@ Authors: SHEAF group T3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
-public import WeilConjectures.AlgebraicGeometry.RawRestrictedCohomologyClass
+public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
+public import Sheaf.AlgebraicGeometry.RawRestrictedCohomologyClass
 import all Sheaf.AlgebraicGeometry.CartesianChartExchangeEvaluation
 import Sheaf.AlgebraicGeometry.CartesianChartExchangeChartMap
 

@@ -21,7 +21,7 @@ import Sheaf.Paper.ConstantCoefficientLisseTriangle
 import Sheaf.Paper.ConstantCoefficientLisseRestriction
 import Sheaf.Algebra.Homology.KFlatResolution
 import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
+import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import Sheaf.Algebra.Homology.ChangeOfRingsTensorCancellation

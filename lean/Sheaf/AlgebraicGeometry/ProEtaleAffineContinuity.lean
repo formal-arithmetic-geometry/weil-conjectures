@@ -17,7 +17,7 @@ import Sheaf.AlgebraicGeometry.AbelianEtaleProEtaleCohomologyComparison
 import Sheaf.AlgebraicGeometry.ProEtaleComparisonPullbackSections
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.CategoryTheory.Sites.CohomologyOverObjectLocalization
-import WeilConjectures.AlgebraicGeometry.DerivedEtaleCohomologyLimit
+import Sheaf.AlgebraicGeometry.DerivedEtaleCohomologyLimit
 import Mathlib.Algebra.Homology.DerivedCategory.DerivabilityStructureInjectives
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Mathlib.Algebra.Category.Grp.AB

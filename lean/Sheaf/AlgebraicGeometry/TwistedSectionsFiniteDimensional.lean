@@ -5,15 +5,15 @@ Authors: SHEAF group V2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 public import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine
 import WeilConjectures.AlgebraicGeometry.ProjectiveLinePolynomialProjectionChartIso
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
-import WeilConjectures.AlgebraicGeometry.FinitePushforwardCoherent
-import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.FinitePushforwardCoherent
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 /-! # Finiteness of twisted sections for the canonical base-field action
 
 Source: Stacks Project, Lemma 01YS(3).

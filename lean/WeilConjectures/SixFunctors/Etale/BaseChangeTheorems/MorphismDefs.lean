@@ -6,6 +6,10 @@ Authors: Edison Xie, Nailin Guan
 module
 
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStar
+public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
+public import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
 public import WeilConjectures.Mathlib.CategoryTheory.Functor.SquareTransport
 
 /-!
@@ -104,10 +108,19 @@ square `g' ≫ f = f' ≫ g` of schemes on the bounded below derived categories,
 from the composition isomorphisms of `Etale.upperStarPlusComp` and the commutativity of
 the square. This comparison is the only square-specific categorical ingredient in the
 construction of the base-change morphism. -/
+@[no_expose]
 noncomputable def Etale.pullbackSquareComparison (sq : CommSq g' f' f g) :
     D+((g)^*[A]) ⋙ D+((f')^*[A]) ≅ D+((f)^*[A]) ⋙ D+((g')^*[A]) :=
   (Etale.upperStarPlusComp A f' g).symm ≪≫
     eqToIso (by rw [← sq.w]) ≪≫ Etale.upperStarPlusComp A g' f
+
+/-- Equation for the pullback square behind its cached interface. -/
+lemma Etale.pullbackSquareComparison_def (sq : CommSq g' f' f g) :
+    Etale.pullbackSquareComparison A sq =
+      (Etale.upperStarPlusComp A f' g).symm ≪≫
+        eqToIso (by rw [← sq.w]) ≪≫ Etale.upperStarPlusComp A g' f := by
+  unfold Etale.pullbackSquareComparison
+  rfl
 
 /-- The *square transport* step `s_sq` of the base-change morphism on the bounded
 below derived categories: the natural transformation obtained by transporting along the

@@ -7,10 +7,10 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.CommAlgebraSheaf
 public import WeilConjectures.CategoryTheory.CommAlgebraSheafModule
-public import WeilConjectures.AlgebraicGeometry.CechH1MapNatural
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyBoundary
+public import Sheaf.AlgebraicGeometry.CechH1MapNatural
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyBoundary
 public import Sheaf.Paper.PQFCohomology
-import WeilConjectures.AlgebraicGeometry.CechH1Injective
+import Sheaf.AlgebraicGeometry.CechH1Injective
 import Sheaf.Paper.BoundaryCechCompatibility
 
 /-! # Boundary classes represented by differences of local lifts

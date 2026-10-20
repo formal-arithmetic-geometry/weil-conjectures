@@ -6,7 +6,7 @@ Authors: SHEAF group NB
 module
 
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 import WeilConjectures.SixFunctors.BaseChange.EtaleDerived
 

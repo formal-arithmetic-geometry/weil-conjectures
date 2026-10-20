@@ -11,7 +11,7 @@ import WeilConjectures.Mathlib.CategoryTheory.Limits.FunctorCategory.Shapes.Prod
 import Sheaf.Paper.ZeroDimensionalEtaleCohomologyIso
 import WeilConjectures.AlgebraicGeometry.ReductionUniversalHomeomorphism
 import WeilConjectures.AlgebraicGeometry.StrictlyHenselianSectionsStalk
-import WeilConjectures.AlgebraicGeometry.UniversalHomeomorphismInvariance
+import Sheaf.AlgebraicGeometry.UniversalHomeomorphismInvariance
 
 @[expose] public section
 

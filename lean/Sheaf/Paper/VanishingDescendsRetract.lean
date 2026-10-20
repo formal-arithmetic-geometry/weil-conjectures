@@ -7,6 +7,7 @@ module
 
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.AB
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
+import Sheaf.AlgebraicGeometry.DerivedCategories
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 import Sheaf.CategoryTheory.RingedSiteModules
 import WeilConjectures.AlgebraicGeometry.DerivedCategories

@@ -5,7 +5,7 @@ Authors: SHEAF group U4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PicardConstantSectionsTensor
+public import Sheaf.AlgebraicGeometry.PicardConstantSectionsTensor
 import Sheaf.AlgebraicGeometry.PicardConstantScalarExtensionSections
 
 /-! # Balanced sections of scalar-extended constant tensor coefficients

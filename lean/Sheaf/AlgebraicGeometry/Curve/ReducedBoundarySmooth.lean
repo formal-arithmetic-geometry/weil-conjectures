@@ -22,7 +22,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Artinian
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Limits
-import WeilConjectures.AlgebraicGeometry.Dimension
+import Sheaf.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.NowhereDenseDimZero
 
 /-!

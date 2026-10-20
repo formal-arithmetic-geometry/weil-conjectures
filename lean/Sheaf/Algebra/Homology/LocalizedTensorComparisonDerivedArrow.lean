@@ -5,11 +5,11 @@ Authors: SHEAF group M1
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
+public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.CategoryTheory.Comma.Arrow
 public import Mathlib.RingTheory.Flat.Basic
 import Sheaf.Algebra.Homology.KFlatLocalizedTensorComparisonNatural
-import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelIndependence
+import Sheaf.Algebra.Homology.BaseDerivedTensorCohomologyModelIndependence
 import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
 

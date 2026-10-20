@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.BaseChangeStalkTransition
+public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
 import WeilConjectures.SixFunctors.Finite.BaseChange
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusExact
 import WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion

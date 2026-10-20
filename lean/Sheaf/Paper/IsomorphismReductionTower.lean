@@ -16,7 +16,7 @@ import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.Paper.IntegralReductionTowerWellDefinedUnrestricted
 import Sheaf.Paper.KFlatRingedToposPullback

@@ -3,7 +3,7 @@ module
 public import WeilConjectures.Algebra.Homology.ConeHorizontalProjection
 import WeilConjectures.Algebra.Homology.ConeHorizontalProjectionGenerator
 public import WeilConjectures.Algebra.Homology.ConeHorizontalStepStable
-public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 
 @[expose] public section
 

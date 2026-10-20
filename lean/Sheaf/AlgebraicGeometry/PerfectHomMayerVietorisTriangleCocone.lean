@@ -6,10 +6,10 @@ Authors: SHEAF group Q4
 module
 
 public import Mathlib.Algebra.Category.Grp.Colimits
-public import WeilConjectures.AlgebraicGeometry.PerfectHomLocalComparison
-public import WeilConjectures.AlgebraicGeometry.PerfectHomTriangleRow
-import WeilConjectures.AlgebraicGeometry.PerfectHomMayerVietorisColumns
-import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisFunctorial
+public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
+public import Sheaf.AlgebraicGeometry.PerfectHomTriangleRow
+import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisColumns
+import Sheaf.AlgebraicGeometry.DerivedMayerVietorisFunctorial
 
 /-! # Coherent Mayer--Vietoris triangle cocones before forming Hom rows
 

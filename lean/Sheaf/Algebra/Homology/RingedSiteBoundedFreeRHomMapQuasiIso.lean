@@ -10,13 +10,13 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
 public import Mathlib.Algebra.Category.Grp.FilteredColimits
 public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Sheaf.AlgebraicGeometry.StrictlyPerfectDerivedInternalHom
-import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
+import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import WeilConjectures.Algebra.Homology.KInjectiveResolution
-import WeilConjectures.Algebra.Homology.HomComplexProjections
+import Sheaf.Algebra.Homology.HomComplexProjections
 import WeilConjectures.FromJoel.Algebra.Homology.Embedding.StupidTrunc
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 

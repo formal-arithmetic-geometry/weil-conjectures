@@ -5,7 +5,7 @@ Authors: SHEAF group K1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafExists
+public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Sheaf.AlgebraicGeometry.SerreSectionModuleCharts
 import Sheaf.AlgebraicGeometry.SerreSectionModuleFinite

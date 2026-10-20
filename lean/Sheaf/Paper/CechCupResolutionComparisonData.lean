@@ -6,7 +6,7 @@ Authors: SHEAF group N3
 module
 
 public import Sheaf.Paper.ModuleCupResolutionData
-public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 
 /-! # Cech comparison data for acyclic module resolutions
 

@@ -10,6 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import Mathlib.FieldTheory.Finite.Basic
 public import Mathlib.LinearAlgebra.Lagrange
 public import Mathlib.Data.ZMod.QuotientRing
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 
 /-!
 # The Artin–Schreier sequence and the `p`-cohomological dimension of affine schemes

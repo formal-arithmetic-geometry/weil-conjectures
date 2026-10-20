@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
 import Sheaf.AlgebraicGeometry.CompositeFibreLocalModels
-import WeilConjectures.AlgebraicGeometry.FibreCohenMacaulayLocus
+import Sheaf.AlgebraicGeometry.FibreCohenMacaulayLocus
 import Sheaf.AlgebraicGeometry.Morphisms.CohenMacaulayClosedPointSlice
 import Sheaf.TraceFormula.FlatLFPCMLocusFibreDense
 

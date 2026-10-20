@@ -17,7 +17,7 @@ import Sheaf.CategoryTheory.SiteCoveringAxioms
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
-import WeilConjectures.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.RingedSpaceDirectImageKInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.RingedSpaceSheafificationCohomology
 
 /-!

@@ -5,10 +5,10 @@ Authors: SHEAF group E1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.CohomologyFractionPresentation
+public import Sheaf.AlgebraicGeometry.CohomologyFractionPresentation
 public import WeilConjectures.AlgebraicGeometry.Ample
 import WeilConjectures.AlgebraicGeometry.AffineCapSectionOpen
-import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
 import Sheaf.AlgebraicGeometry.AffineCohomologyLocalizationZero
 
 /-! # Localization of cohomology on an affine scheme

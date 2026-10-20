@@ -1,6 +1,6 @@
 module
-public import WeilConjectures.AlgebraicGeometry.CartesianChartClassPullback
-import all WeilConjectures.AlgebraicGeometry.AbelianRawPullbackComposition
+public import Sheaf.AlgebraicGeometry.CartesianChartClassPullback
+import all Sheaf.AlgebraicGeometry.AbelianRawPullbackComposition
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
 import WeilConjectures.SixFunctors.Etale.Derived.UpperStarCompAssoc
 @[expose] public section

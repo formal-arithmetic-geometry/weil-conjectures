@@ -23,6 +23,23 @@ public import WeilConjectures.SixFunctors.Etale.Derived.Shift
 public import WeilConjectures.SixFunctors.Etale.Derived.Triangulated
 public import WeilConjectures.SixFunctors.Etale.Derived.Invertible
 public import WeilConjectures.SixFunctors.Etale.Derived.Hom
+import Sheaf.Algebra.Homology.ComplexColimitHomotopyColimit
+import Sheaf.AlgebraicGeometry.EtaleDerivedTensorDirectSums
+import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
+import Sheaf.AlgebraicGeometry.ExactUnboundedExchange
+import Sheaf.AlgebraicGeometry.Sites.FiniteTorsionEtaleCohomologicalDimension
+import Sheaf.CategoryTheory.FunctorPreservesSequentialHomotopyColimit
+import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import WeilConjectures.AlgebraicGeometry.DerivedCategories
+import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
+import WeilConjectures.CategoryTheory.DerivedCategory.FlatModel
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Triangulated
+import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
+import WeilConjectures.SixFunctors.Etale.Derived.Tensor
+import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+import Sheaf.AlgebraicGeometry.FiniteCohomologicalDimensionDirectSums
+import Sheaf.AlgebraicGeometry.TruncationHomotopyColimit
+import Sheaf.Paper.BoundedFlatReplacement
 
 /-!
 # The Künneth map in ordinary étale cohomology

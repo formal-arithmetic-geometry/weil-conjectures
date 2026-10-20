@@ -7,7 +7,7 @@ module
 
 public import Sheaf.CategoryTheory.Sites.RGammaDerivedLimit
 
-public import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
+public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
 import Sheaf.Algebra.Homology.KInjectiveRestrictLocalizedOfUniverses
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective
 import Sheaf.Algebra.Homology.HomComplexSectionsHomotopyNaturalityOfUniverses

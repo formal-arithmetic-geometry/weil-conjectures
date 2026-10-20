@@ -22,7 +22,7 @@ import Mathlib.AlgebraicGeometry.Morphisms.UniversallyOpen
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Algebra
 import Mathlib.RingTheory.Flat.FaithfullyFlat.Basic
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import WeilConjectures.AlgebraicGeometry.SteinFactorizationAffine
+import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
 import Sheaf.AlgebraicGeometry.GeometricComponentCountBaseChange
 import Sheaf.AlgebraicGeometry.IntegralFibreEtaleSplitting
 import Sheaf.AlgebraicGeometry.SteinFiniteFibresResidueFields

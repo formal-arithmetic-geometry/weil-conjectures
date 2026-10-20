@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.PicardH1ProductSpanningBypass
 import WeilConjectures.AlgebraicGeometry.ProperBasic
 
-import WeilConjectures.AlgebraicGeometry.PicardExternalCupScalarComparison
+import Sheaf.AlgebraicGeometry.PicardExternalCupScalarComparison
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
 /-!

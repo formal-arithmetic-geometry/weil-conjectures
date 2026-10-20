@@ -5,7 +5,7 @@ Authors: SHEAF group C2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectHomContinuityOn
+public import Sheaf.AlgebraicGeometry.PerfectHomContinuityOn
 import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisComparison
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.Four
 import Mathlib.CategoryTheory.Limits.Types.Filtered

@@ -17,6 +17,7 @@ import Mathlib.FieldTheory.IsAlgClosed.Basic
 import Sheaf.AlgebraicGeometry.FibreDimensionAfterBaseChange
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 import WeilConjectures.AlgebraicGeometry.InverseImageStalkGerm
+import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
 import Mathlib.AlgebraicGeometry.Sites.Etale
 import Mathlib.CategoryTheory.Sites.Sheaf
 import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek

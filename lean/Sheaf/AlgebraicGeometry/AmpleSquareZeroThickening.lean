@@ -6,7 +6,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.InvertiblePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian
+import Sheaf.AlgebraicGeometry.FiniteSurjectiveAffineTargetNoetherian
 import Sheaf.AlgebraicGeometry.SquareZeroSectionPowerLocus
 import Sheaf.Paper.NonvanishingSectionTrivializes
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula

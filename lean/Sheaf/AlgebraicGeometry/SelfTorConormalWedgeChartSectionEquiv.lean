@@ -1,10 +1,10 @@
 module
-public import WeilConjectures.AlgebraicGeometry.SelfTorAffineSection
+public import Sheaf.AlgebraicGeometry.SelfTorAffineSection
 public import Sheaf.AlgebraicGeometry.Modules.ExteriorSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.AlgebraicGeometry.AffineConormalSections
+import Sheaf.AlgebraicGeometry.AffineConormalSections
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafAffineUnit
-import WeilConjectures.AlgebraicGeometry.SelfTorConormalExteriorSectionModel
+import Sheaf.AlgebraicGeometry.SelfTorConormalExteriorSectionModel
 @[expose] public section
 set_option autoImplicit false
 universe u

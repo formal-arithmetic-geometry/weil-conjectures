@@ -17,7 +17,7 @@ import Mathlib.CategoryTheory.Limits.HasLimits
 import WeilConjectures.RingTheory.FilteredColimitNormalRing
 import WeilConjectures.FieldTheory.GeometricallyReducedExtensionSeparable
 import WeilConjectures.FieldTheory.SeparableExtension
-import WeilConjectures.RingTheory.SmoothNormalRing
+import Sheaf.RingTheory.SmoothNormalRing
 import Mathlib.RingTheory.Ideal.MinimalPrime.Noetherian
 import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 import Mathlib.RingTheory.Localization.BaseChange

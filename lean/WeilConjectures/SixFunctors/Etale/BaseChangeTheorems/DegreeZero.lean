@@ -13,6 +13,9 @@ public import WeilConjectures.SixFunctors.BaseChange.GlobalSections
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Forget
 public import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.HenselianPairSections
 
+import WeilConjectures.AlgebraicGeometry.HenselianConnectedness
+import Mathlib.AlgebraicGeometry.PullbackCarrier
+
 /-!
 # Sections of étale sheaves on proper schemes over a henselian base
 

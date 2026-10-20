@@ -14,7 +14,7 @@ import Sheaf.RingTheory.IntegralComponentHenselianPermanence
 import Sheaf.TraceFormula.HenselizationPrimeIndEtale
 import Sheaf.RingTheory.IndEtaleUniverseTransport
 import Sheaf.RingTheory.Etale.QuasiFiniteAtPrime
-import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain
+import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Mathlib.RingTheory.ZariskisMainTheorem
 import Mathlib.RingTheory.Etale.Field
 import Mathlib.Algebra.Category.Ring.FilteredColimits

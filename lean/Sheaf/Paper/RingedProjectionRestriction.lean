@@ -26,7 +26,7 @@ import Mathlib.Algebra.Category.Grp.AB
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits
 import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.Basic
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullback
 import Mathlib.Algebra.Homology.BifunctorShift

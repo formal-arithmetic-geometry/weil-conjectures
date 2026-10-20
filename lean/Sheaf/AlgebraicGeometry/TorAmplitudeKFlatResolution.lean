@@ -13,7 +13,7 @@ import Mathlib.Algebra.Homology.Additive
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatQuotientTensorSES
 import Sheaf.Paper.EtaleKFlatCriteria
-import WeilConjectures.Algebra.Homology.FilteredColimitsTensor
+import Sheaf.Algebra.Homology.FilteredColimitsTensor
 import Sheaf.AlgebraicGeometry.EtaleTensorCokernelFlat
 import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 

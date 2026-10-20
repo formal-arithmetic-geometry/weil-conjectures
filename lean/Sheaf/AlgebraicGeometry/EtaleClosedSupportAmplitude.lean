@@ -6,12 +6,12 @@ Authors: SHEAF group NL
 module
 
 public import Sheaf.AlgebraicGeometry.EtaleClosedAmbientAdjoint
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.SixFunctors.Etale.Derived.Coefficients
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
 public import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 import Sheaf.AlgebraicGeometry.EtaleClosedSupportTriangle

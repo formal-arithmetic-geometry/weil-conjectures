@@ -17,7 +17,7 @@ public import Mathlib.RingTheory.Finiteness.Defs
 
 import WeilConjectures.RingTheory.NagataRing
 import WeilConjectures.RingTheory.JapaneseDomain
-import WeilConjectures.RingTheory.PolynomialNagata
+import Sheaf.RingTheory.PolynomialNagata
 import WeilConjectures.RingTheory.FiniteOverNagata
 import WeilConjectures.RingTheory.NagataLocalization
 import WeilConjectures.RingTheory.ReducedNoetherianTotalRingFractions

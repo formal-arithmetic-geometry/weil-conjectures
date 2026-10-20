@@ -6,8 +6,8 @@ Authors: SHEAF group Q04
 module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-public import WeilConjectures.AlgebraicGeometry.FormalKernelGradedPieces
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.FormalKernelGradedPieces
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction
 import Sheaf.AlgebraicGeometry.QuasiCoherentSymmetricAlgebraCore
 public import WeilConjectures.RingTheory.AssociatedGradedRing
@@ -18,6 +18,7 @@ public import Mathlib.Geometry.RingedSpace.Basic
 public import Mathlib.RingTheory.Ideal.Cotangent
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.AlgebraicGeometry.IdealSheaf.Basic
+import Sheaf.AlgebraicGeometry.Modules.QuasiCoherentCokernelImage
 import Mathlib.CategoryTheory.Abelian.Images
 import Mathlib.LinearAlgebra.Quotient.Basic
 import Mathlib.AlgebraicGeometry.Modules.Tilde
@@ -30,10 +31,13 @@ import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 import WeilConjectures.Topology.InverseImageModule
 import Mathlib.Algebra.Category.Ring.Colimits
 import Mathlib.Topology.Sheaves.Functors
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
+import Sheaf.AlgebraicGeometry.ModulePullbackAffineSections
 import Mathlib.LinearAlgebra.TensorProduct.Map
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
+import Sheaf.AlgebraicGeometry.AffineConormalSections
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
 import Mathlib.AlgebraicGeometry.StructureSheaf
@@ -45,9 +49,11 @@ import Mathlib.LinearAlgebra.SymmetricAlgebra.Basic
 import WeilConjectures.RingTheory.SymmetricAlgebraBaseChange
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.RingTheory.Noetherian.Basic
+import Sheaf.AlgebraicGeometry.QuasicoherentFiniteTypeAffine
 import Mathlib.Algebra.Module.FinitePresentation
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 
-import WeilConjectures.AlgebraicGeometry.Coherent
+import Sheaf.AlgebraicGeometry.Coherent
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 import Sheaf.AlgebraicGeometry.TensorPullbackSectionAdjunction
 import WeilConjectures.AlgebraicGeometry.AffineConormalSections

@@ -9,8 +9,8 @@ public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.GmPicardPullback
-import WeilConjectures.AlgebraicGeometry.Curve.AffinePicardTorsionBaseChange
-import WeilConjectures.AlgebraicGeometry.BaseChangeCurve
+import Sheaf.AlgebraicGeometry.Curve.AffinePicardTorsionBaseChange
+import Sheaf.AlgebraicGeometry.BaseChangeCurve
 import WeilConjectures.AlgebraicGeometry.PullbackCohomologyLongExactLadder
 
 /-!

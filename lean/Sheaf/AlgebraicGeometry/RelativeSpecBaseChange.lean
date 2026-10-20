@@ -5,13 +5,13 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffineMorphismRelativeSpec
+public import Sheaf.AlgebraicGeometry.AffineMorphismRelativeSpec
 public import WeilConjectures.AlgebraicGeometry.ModulePullbackTensor
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackStructureSheaf
 public import Mathlib.AlgebraicGeometry.Pullbacks
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
-import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
+import Sheaf.AlgebraicGeometry.AffinePushforwardBaseChange
 import Sheaf.AlgebraicGeometry.StructureAlgebraPullbackTransport
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 

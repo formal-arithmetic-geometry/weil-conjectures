@@ -8,7 +8,7 @@ module
 public import Sheaf.RingTheory.ExcellentRing
 public import Mathlib.RingTheory.FiniteType
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
-import WeilConjectures.RingTheory.FiniteTypeGRing
+import Sheaf.RingTheory.FiniteTypeGRing
 import Sheaf.RingTheory.ExcellentOfWeaklyEtale
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.Finiteness.Small

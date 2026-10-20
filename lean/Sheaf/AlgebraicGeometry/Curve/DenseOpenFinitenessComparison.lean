@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Category.Grp.ZModuleEquivalence
 public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRings
 public import Mathlib.Algebra.Ring.ULift
 
-import WeilConjectures.AlgebraicGeometry.ConstructibleIntegralCoefficients
+import Sheaf.AlgebraicGeometry.ConstructibleIntegralCoefficients
 import WeilConjectures.AlgebraicGeometry.Curve.IntegralOpenExtensionComparison
 import Sheaf.AlgebraicGeometry.Curve.DenseOpenIntegralCohomologyFiniteness
 import WeilConjectures.ConstructibleSheaf.OpenClosed

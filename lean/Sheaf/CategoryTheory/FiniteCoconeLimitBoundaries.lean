@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+public import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.FiniteBoundaryAlphaKernel
 
 /-! # Finite-tail limiting subobjects

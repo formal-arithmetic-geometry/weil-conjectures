@@ -20,7 +20,7 @@ import Mathlib.RingTheory.Noetherian.Basic
 import WeilConjectures.RingTheory.FiniteOverNagata
 import WeilConjectures.Mathlib.RingTheory.Etale.Weakly
 import WeilConjectures.RingTheory.NagataLocalization
-import WeilConjectures.RingTheory.PolynomialNagata
+import Sheaf.RingTheory.PolynomialNagata
 import Sheaf.RingTheory.NagataOfWeaklyEtale
 import Sheaf.RingTheory.WeaklyEtaleLocalComponentDimension
 

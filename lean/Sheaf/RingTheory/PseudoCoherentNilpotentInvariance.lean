@@ -22,7 +22,7 @@ import Mathlib.LinearAlgebra.FreeModule.Finite.Basic
 import Mathlib.RingTheory.TensorProduct.Finite
 import Mathlib.RingTheory.Ideal.Quotient.Nilpotent
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
+import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
 import Mathlib.Algebra.Ring.ULift
 
 /-!

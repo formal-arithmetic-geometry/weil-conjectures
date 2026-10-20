@@ -1,5 +1,5 @@
 module
-public import WeilConjectures.Topology.RingedSpaceModuleCohomology
+public import Sheaf.Topology.RingedSpaceModuleCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import Mathlib.Algebra.Homology.ConcreteCategory

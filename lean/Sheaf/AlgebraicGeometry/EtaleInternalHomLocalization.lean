@@ -24,7 +24,7 @@ import Sheaf.Paper.SfHomTriangulated
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.CategoryTheory.KInjectiveTotalDerived
 import Sheaf.AlgebraicGeometry.EtaleClosedSheafInternalAdjunction

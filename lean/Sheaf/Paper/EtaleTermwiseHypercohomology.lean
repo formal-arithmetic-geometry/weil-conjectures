@@ -5,7 +5,7 @@ Authors: SHEAF group S1
 -/
 module
 
-public import WeilConjectures.CategoryTheory.HypercohomologyFirstPage
+public import Sheaf.CategoryTheory.HypercohomologyFirstPage
 public import WeilConjectures.SixFunctors.Etale.Derived.GlobalSections
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
 

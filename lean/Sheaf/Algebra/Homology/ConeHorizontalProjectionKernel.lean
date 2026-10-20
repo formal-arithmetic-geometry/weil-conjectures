@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.ConeHorizontalProjection
 public import WeilConjectures.Algebra.Homology.ConeHorizontalStepStable
-public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 
 /-! # Kernel of the signed horizontal column projection
 

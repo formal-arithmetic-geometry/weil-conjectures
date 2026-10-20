@@ -22,7 +22,7 @@ import Mathlib.AlgebraicGeometry.ResidueField
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 import Mathlib.RingTheory.Kaehler.TensorProduct
 import WeilConjectures.RingTheory.SmoothAtPrimeOfDifferentialsDimensionBound
-import WeilConjectures.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
+import Sheaf.AlgebraicGeometry.FlatSmoothFibreSmoothAtPrime
 import WeilConjectures.RingTheory.SingularIdeal
 import Mathlib.AlgebraicGeometry.OpenImmersion
 import Mathlib.AlgebraicGeometry.Morphisms.RingHomProperties

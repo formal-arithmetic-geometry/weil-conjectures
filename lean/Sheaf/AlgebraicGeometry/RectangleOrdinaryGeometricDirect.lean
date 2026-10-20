@@ -5,7 +5,7 @@ Authors: SHEAF group F2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.QCohInverseBaseChangeMate
+public import Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
 import Sheaf.AlgebraicGeometry.RectangleQCohComparisonLifts
 import Sheaf.AlgebraicGeometry.RectangleQCohOrdinaryCompatibility
 

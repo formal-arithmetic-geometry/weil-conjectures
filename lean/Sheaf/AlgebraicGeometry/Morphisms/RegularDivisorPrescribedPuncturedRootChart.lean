@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleTorsor
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
-import WeilConjectures.AlgebraicGeometry.Morphisms.RegularDivisorGaloisRootSplitting
+import Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorGaloisRootSplitting
 import Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverPrescribedCyclicCharts
 
 /-! # Punctured Kummer charts retaining a prescribed divisor equation

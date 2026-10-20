@@ -17,7 +17,7 @@ import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import Mathlib.AlgebraicGeometry.Morphisms.Etale
 import Mathlib.AlgebraicGeometry.Morphisms.Flat
 import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
-import WeilConjectures.AlgebraicGeometry.StalkFlatTensorPullbackKernels
+import Sheaf.AlgebraicGeometry.StalkFlatTensorPullbackKernels
 import Sheaf.AlgebraicGeometry.GlobalSectionsLeftExact
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
 

@@ -5,10 +5,10 @@ Authors: SHEAF group G1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import WeilConjectures.AlgebraicGeometry.AffineDerivedPushforwardTExact
-import WeilConjectures.AlgebraicGeometry.AffineDerivedCohomology
+import Sheaf.AlgebraicGeometry.AffineDerivedPushforwardTExact
+import Sheaf.AlgebraicGeometry.AffineDerivedCohomology
 
 /-!
 # Affine pushforward detects degree-zero concentration

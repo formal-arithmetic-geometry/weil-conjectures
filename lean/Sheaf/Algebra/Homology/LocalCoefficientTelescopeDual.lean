@@ -6,11 +6,11 @@ Authors: SHEAF group C1
 module
 
 public import Sheaf.CategoryTheory.LocalCoefficientLocalization
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.CategoryTheory.Limits.TowerTransitionEndomorphism
-import WeilConjectures.Algebra.Homology.HomComplexProjections
-import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationIsIso
-import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationComm
+import Sheaf.Algebra.Homology.HomComplexProjections
+import Sheaf.Algebra.Homology.HomComplexUnitEvaluationIsIso
+import Sheaf.Algebra.Homology.HomComplexUnitEvaluationComm
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
 import Sheaf.Algebra.Homology.KInjectiveProductsTermwise
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction

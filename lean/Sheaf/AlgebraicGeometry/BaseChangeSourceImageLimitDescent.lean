@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 import WeilConjectures.AlgebraicGeometry.HigherDirectImageOverCoherence
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageAffineContinuity
+import Sheaf.AlgebraicGeometry.HigherDirectImageAffineContinuity
 import WeilConjectures.AlgebraicGeometry.SmallEtaleAffineColimitDetection
 
 public import Sheaf.AlgebraicGeometry.BaseChangeSourceImageCoherence

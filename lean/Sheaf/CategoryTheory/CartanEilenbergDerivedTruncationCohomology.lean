@@ -5,12 +5,12 @@ Authors: SHEAF group J4
 -/
 module
 
-public import WeilConjectures.CategoryTheory.CartanEilenbergPresentation
+public import Sheaf.CategoryTheory.CartanEilenbergPresentation
 public import Mathlib.Algebra.Homology.DerivedCategory.RightDerivedFunctorPlus
 public import Mathlib.Algebra.Homology.DerivedCategory.Plus
 public import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.CategoryTheory.CartanEilenbergTruncationResolution
-import WeilConjectures.CategoryTheory.CartanEilenbergMappedTotal
+import Sheaf.CategoryTheory.CartanEilenbergMappedTotal
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 import Mathlib.Algebra.Homology.TotalComplexSymmetry
 /-! # Computing derived cohomology of CE upper truncations

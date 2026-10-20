@@ -5,7 +5,7 @@ Authors: SHEAF group NC
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
+public import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
 import Mathlib.Algebra.Homology.DerivedCategory.Plus
 

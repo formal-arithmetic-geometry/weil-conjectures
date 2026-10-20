@@ -9,7 +9,7 @@ public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import WeilConjectures.Algebra.Homology.HomComplex
 public import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.KInjective
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 
 /-! # Canonical Hom representative evaluation on a ringed site
 

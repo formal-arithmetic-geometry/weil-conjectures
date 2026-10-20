@@ -10,8 +10,8 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 public import Mathlib.AlgebraicGeometry.ResidueField
-import WeilConjectures.AlgebraicGeometry.FlatBaseChangeResolutionIso
-import WeilConjectures.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
+import Sheaf.AlgebraicGeometry.FlatBaseChangeResolutionIso
+import Sheaf.AlgebraicGeometry.FlatBaseChangeMapSectionsLift
 import all WeilConjectures.AlgebraicGeometry.PicardPullbackLocalRanks
 import all WeilConjectures.AlgebraicGeometry.PicardUniversalRankMatchFiniteRanks
 import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeStalkFinrank

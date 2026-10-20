@@ -5,7 +5,7 @@ Authors: SHEAF group A4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.RelativeMVMaps
+public import Sheaf.AlgebraicGeometry.RelativeMVMaps
 
 /-! # The counit for base change of a composite morphism
 

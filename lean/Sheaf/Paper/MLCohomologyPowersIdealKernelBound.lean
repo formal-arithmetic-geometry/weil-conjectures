@@ -7,10 +7,10 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.Ideal.Operations
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.Paper.PQFCohomology
 import WeilConjectures.AlgebraicGeometry.CohomologyPowersIdealTransitionMaps
-import WeilConjectures.AlgebraicGeometry.CohomologyPowersIdealImageBound
+import Sheaf.AlgebraicGeometry.CohomologyPowersIdealImageBound
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
 import Mathlib.CategoryTheory.Abelian.Exact
 

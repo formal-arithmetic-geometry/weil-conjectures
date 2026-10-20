@@ -4,9 +4,9 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.BaseChangeStalkTransition
+public import Sheaf.AlgebraicGeometry.BaseChangeStalkTransition
 import WeilConjectures.AlgebraicGeometry.HigherDirectImageOverCoherence
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageAffineContinuity
+import Sheaf.AlgebraicGeometry.HigherDirectImageAffineContinuity
 import WeilConjectures.AlgebraicGeometry.SmallEtaleAffineColimitDetection
 
 public import Sheaf.AlgebraicGeometry.BaseChangeSourceImageSheafCoherence

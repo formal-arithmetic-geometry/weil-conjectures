@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 import WeilConjectures.Algebra.Homology.DerivedOpenShriekAdjunction
 
 /-! Derived extension adjunction transported across the over-site equivalence.

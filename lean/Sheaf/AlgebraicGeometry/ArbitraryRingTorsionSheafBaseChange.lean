@@ -8,7 +8,7 @@ module
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Sheaf.AlgebraicGeometry.TorsionEtaleSheaf
 import WeilConjectures.SixFunctors.Etale.BaseChangeTheorems.Coefficients
-import WeilConjectures.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
+import Sheaf.AlgebraicGeometry.ModuleAbelianDerivedExchangeCompatibility
 import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
 
 /-!

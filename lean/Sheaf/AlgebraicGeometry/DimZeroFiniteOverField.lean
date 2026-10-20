@@ -5,7 +5,7 @@ Authors: SHEAF group H1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Dimension
+public import Sheaf.AlgebraicGeometry.Dimension
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import Mathlib.AlgebraicGeometry.Artinian
 import Mathlib.RingTheory.Jacobson.Artinian

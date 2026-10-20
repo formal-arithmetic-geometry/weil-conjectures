@@ -18,7 +18,7 @@ import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Mathlib.RingTheory.FinitePresentation
 import Mathlib.RingTheory.FiniteStability
-import WeilConjectures.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType
+import Sheaf.AlgebraicGeometry.FinitePresentationKernelSurjectionFiniteType
 import WeilConjectures.Mathlib.AlgebraicGeometry.AffineSpace
 import WeilConjectures.AlgebraicGeometry.Coherent
 import WeilConjectures.Compactification.StrictTransformBlowup

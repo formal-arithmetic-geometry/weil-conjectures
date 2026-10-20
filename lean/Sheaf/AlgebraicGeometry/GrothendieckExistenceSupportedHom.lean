@@ -7,17 +7,17 @@ module
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.RingTheory.AdicCompletion.Basic
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 public import WeilConjectures.Mathlib.AlgebraicGeometry.IdealSheaf.Module
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
+import Sheaf.AlgebraicGeometry.ClosedImmersionPushforwardAnnihilated
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Sheaf.AlgebraicGeometry.ThickeningCompletionHomDictionary
-import WeilConjectures.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
-import WeilConjectures.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
-import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.ClosedImmersionCoherentEquivalence
+import Sheaf.AlgebraicGeometry.FormalCompletionFullyFaithfulProper
+import Sheaf.AlgebraicGeometry.CoherentFormalModule
 
 /-! # Restriction of morphisms on a common proper closed support
 

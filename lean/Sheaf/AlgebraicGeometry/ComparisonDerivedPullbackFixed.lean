@@ -6,7 +6,7 @@ Authors: SHEAF group Q18
 module
 
 public import Sheaf.Paper.ComparisonDerivedPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure

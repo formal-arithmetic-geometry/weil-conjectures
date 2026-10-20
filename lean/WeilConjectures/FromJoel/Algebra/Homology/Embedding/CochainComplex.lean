@@ -31,7 +31,7 @@ open HomologicalComplex
 variable [HasZeroMorphisms C] (K : CochainComplex C ℤ)
   [HasZeroObject C] [∀ i, K.HasHomology i]
 
-instance (n : ℤ) : Mono (K.ιTruncLE n) := by
+instance CochainComplex_mono (n : ℤ) : Mono (K.ιTruncLE n) := by
   dsimp only [ιTruncLE]
   infer_instance
 

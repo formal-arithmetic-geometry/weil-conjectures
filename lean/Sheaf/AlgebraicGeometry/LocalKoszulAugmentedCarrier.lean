@@ -5,7 +5,7 @@ Authors: SHEAF group S1
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.HomologyEvaluationDefinitions
+public import Sheaf.Algebra.Homology.HomologyEvaluationDefinitions
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion

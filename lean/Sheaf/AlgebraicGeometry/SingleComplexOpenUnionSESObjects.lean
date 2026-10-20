@@ -1,6 +1,6 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenComparison
+public import Sheaf.AlgebraicGeometry.SingleComplexOpenComparison
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.SingleComplexOpenUnionSESCore
 import WeilConjectures.CategoryTheory.DerivedCategory.ConeDiagramSESPresentation

@@ -13,10 +13,10 @@ public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Topology.Connected.Clopen
 public import Sheaf.RingTheory.StrictHenselizationPresentationIn
-import WeilConjectures.RingTheory.EtaleNormalRing
+import Sheaf.RingTheory.EtaleNormalRing
 import WeilConjectures.RingTheory.PointedEtaleSmallFiltered
 import WeilConjectures.RingTheory.StrictHenselizationLocalMaximalIdeal
-import WeilConjectures.RingTheory.EtaleColimitNormalLocalDomain
+import Sheaf.RingTheory.EtaleColimitNormalLocalDomain
 import Sheaf.AlgebraicGeometry.RegularNormalDecomposition
 import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 import Mathlib.AlgebraicGeometry.Morphisms.FiniteType

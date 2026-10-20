@@ -5,12 +5,12 @@ Authors: SHEAF group B4
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeCoordinates
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.Algebra.Homology.AffineBaseChangeTildeCoordinates
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.PullbackTilde
-public import WeilConjectures.Algebra.Homology.AffinePushforwardComparisonCoordinates
-import WeilConjectures.Algebra.Homology.AffinePushforwardCohomologyEdgeExists
-import WeilConjectures.Algebra.Homology.AffinePushforwardCohomologyEdgeIsIso
+public import Sheaf.Algebra.Homology.AffinePushforwardComparisonCoordinates
+import Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeExists
+import Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIsIso
 
 /-! # Normalized affine pushforward cohomology
 

@@ -6,7 +6,7 @@ Authors: SHEAF group P2
 module
 
 public import Sheaf.CategoryTheory.FilteredCohomologyImage
-import WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
+import Sheaf.CategoryTheory.FilteredNormalizedQuotientPresentation
 import Sheaf.CategoryTheory.FilteredCohomologyImageNormalized
 
 /-! # A cycle presentation of the graded cohomology image

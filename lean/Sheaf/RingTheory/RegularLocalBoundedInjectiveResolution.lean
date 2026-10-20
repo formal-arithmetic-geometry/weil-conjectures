@@ -9,8 +9,8 @@ public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Category.ModuleCat.Abelian
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Preadditive.Injective.Basic
-import WeilConjectures.RingTheory.RegularLocalFiniteGlobalDimension
-import WeilConjectures.RingTheory.ProjectiveResolutionExtCharacterization
+import Sheaf.RingTheory.RegularLocalFiniteGlobalDimension
+import Sheaf.RingTheory.ProjectiveResolutionExtCharacterization
 import Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic
 import Mathlib.Algebra.Category.ModuleCat.EnoughInjectives
 import Mathlib.CategoryTheory.Abelian.RightDerived

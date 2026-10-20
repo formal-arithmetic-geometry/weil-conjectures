@@ -1,9 +1,9 @@
 /- Copyright (c) 2026 The SHEAF contributors. -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutions
-import WeilConjectures.AlgebraicGeometry.DerivedOpenLocalization
+import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolutionInjective
 import Mathlib.CategoryTheory.Localization.LocallySmall

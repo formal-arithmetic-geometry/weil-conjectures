@@ -5,9 +5,9 @@ Authors: SHEAF group K4
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.QCohInverseBaseChangeMate
-import WeilConjectures.AlgebraicGeometry.DerivedBaseChangePasting
-import WeilConjectures.AlgebraicGeometry.DerivedBaseChangeHorizontalPasting
+public import Sheaf.AlgebraicGeometry.QCohInverseBaseChangeMate
+import Sheaf.AlgebraicGeometry.DerivedBaseChangePasting
+import Sheaf.AlgebraicGeometry.DerivedBaseChangeHorizontalPasting
 
 /-! # Ordinary compatibility of the rectangle comparison lifts -/
 

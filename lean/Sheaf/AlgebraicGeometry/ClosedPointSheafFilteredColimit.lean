@@ -7,7 +7,7 @@ module
 public import Sheaf.AlgebraicGeometry.FinitelyGeneratedEtaleSubsheaf
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.CategoryTheory.Filtered.Basic
-public import WeilConjectures.AlgebraicGeometry.EtaleSupport
+public import Sheaf.AlgebraicGeometry.EtaleSupport
 import Mathlib.Algebra.Category.Grp.Adjunctions
 import Mathlib.CategoryTheory.Subobject.Limits
 import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Colim

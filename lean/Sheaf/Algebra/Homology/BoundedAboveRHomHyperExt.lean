@@ -15,8 +15,8 @@ public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Sheaf.CategoryTheory.FiniteFiltrationInduction
 public import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
-import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
-import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftRight
+import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
+import Sheaf.Algebra.Homology.DerivedInternalHomShiftRight
 import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
 import Sheaf.CategoryTheory.ExactCoupleMorphism
 import WeilConjectures.CategoryTheory.DerivedCoupleExact

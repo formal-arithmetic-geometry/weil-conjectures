@@ -8,14 +8,16 @@ module
 public import Mathlib.Algebra.Group.Subgroup.Finsupp
 public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Final
 public import WeilConjectures.AlgebraicGeometry.Curve.Jacobian
+public import Mathlib.GroupTheory.QuotientGroup.Basic
+public import WeilConjectures.AlgebraicGeometry.AbelianVariety.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve.Compactification
 public import WeilConjectures.AlgebraicGeometry.Curve.Kummer
-public import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
-public import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
+import WeilConjectures.AlgebraicGeometry.Curve.SerreDuality
+import WeilConjectures.AlgebraicGeometry.GlobalSectionsBijective
 public import WeilConjectures.AlgebraicGeometry.Picard.Jacobian
-public import WeilConjectures.AlgebraicGeometry.Regular
-public import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
-public import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
+import WeilConjectures.AlgebraicGeometry.Regular
+import WeilConjectures.AlgebraicGeometry.Sites.ArtinSchreier
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 public import WeilConjectures.Mathlib.Algebra.Module.Torsion.Basic
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Normalization
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs

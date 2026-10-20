@@ -7,9 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.GroupScheme.Lie.Basic
 import WeilConjectures.AlgebraicGeometry.FieldBaseChangeAffineCovers
-import WeilConjectures.AlgebraicGeometry.DimensionAffineOpenCover
-import WeilConjectures.AlgebraicGeometry.RationalPointLocalDimensionBaseChange
-import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
+import Sheaf.AlgebraicGeometry.DimensionAffineOpenCover
+import Sheaf.AlgebraicGeometry.RationalPointLocalDimensionBaseChange
+import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import WeilConjectures.AlgebraicGeometry.GroupScheme.Basic
 
 /-!

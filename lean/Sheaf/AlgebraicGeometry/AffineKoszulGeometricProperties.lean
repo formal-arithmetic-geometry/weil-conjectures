@@ -5,12 +5,12 @@ Authors: SHEAF group X2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Mathlib.LinearAlgebra.ExteriorPower.Basis
-import WeilConjectures.AlgebraicGeometry.KoszulRestrictionZero
+import Sheaf.AlgebraicGeometry.KoszulRestrictionZero
 
 /-! # Geometric properties of the explicit affine Koszul complex
 Source: Stacks Project, Tags 0A9A and 0663.

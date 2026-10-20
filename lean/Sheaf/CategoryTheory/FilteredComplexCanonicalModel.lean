@@ -9,7 +9,7 @@ public import Sheaf.CategoryTheory.FilteredComplexCanonicalSequence
 public import Sheaf.CategoryTheory.FilteredPageTwoModel
 import Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison
 import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
-import all WeilConjectures.CategoryTheory.FilteredQuotientPageMaps
+import all Sheaf.CategoryTheory.FilteredQuotientPageMaps
 import all Sheaf.CategoryTheory.FilteredQuotientComparisons
 import all Sheaf.CategoryTheory.FilteredQuotientMapRestrictions
 

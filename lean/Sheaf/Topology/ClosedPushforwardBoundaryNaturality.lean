@@ -11,7 +11,7 @@ public import Sheaf.Topology.AbelianCohomologyDeltaFunctor
 import WeilConjectures.CategoryTheory.DeltaFunctor
 import WeilConjectures.CategoryTheory.EffaceableDeltaFunctorUniversal
 import WeilConjectures.CategoryTheory.RightDerivedUniversalDeltaFunctor
-import WeilConjectures.Topology.ClosedImmersionPushforwardCohomology
+import Sheaf.Topology.ClosedImmersionPushforwardCohomology
 import WeilConjectures.Topology.ClosedImmersionPushforwardExact
 
 /-!

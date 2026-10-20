@@ -1,7 +1,7 @@
 module
-public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionChartRestriction
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartRestriction
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionTensorNaturality
-public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionHomologyComposition
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionHomologyComposition
 
 @[expose] public section
 universe u

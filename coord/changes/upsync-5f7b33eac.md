@@ -211,3 +211,18 @@ Importers taken out with them (20): `Sheaf.AlgebraicGeometry.BoundedConstructibl
 ## Prefer upstream, round 4
 
 The upstream module(s) `WeilConjectures.ZetaFunction.TraceFormula` failed here while identical to the tip: the upstream files of their environment that this sync had merged with changes of ours take the tip's file: `WeilConjectures.WeilSheaf.LowerShriekFunctoriality`, `WeilConjectures.ZetaFunction.TraceFormula`.
+
+## Aborted (2026-10-20T10:27:04Z)
+
+build 5 did not run (exit 1): ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "/usr/lib/python3.14/concurrent/futures/thread.py", line 190, in __init__
+    self._work_queue = queue.SimpleQueue()
+                       ^^^^^^^^^^^^^^^^^
+AttributeError: module 'queue' has no attribute 'SimpleQueue' (consider renaming '/home/ubuntu/weil-conjectures-sheaf/tools/queue.py' since it has the same name as the standard library module named 'queue' and prevents importing that standard library module)
+
+
+Every landing of the run was dropped; the library is the one from before the sync.
+
+## Status
+
+reverted

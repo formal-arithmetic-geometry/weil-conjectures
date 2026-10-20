@@ -5,7 +5,7 @@ Authors: SHEAF group NZ
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.Additive
 
 /-!

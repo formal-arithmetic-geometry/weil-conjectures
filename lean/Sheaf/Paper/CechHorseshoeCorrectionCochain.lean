@@ -5,7 +5,7 @@ Authors: SHEAF group Y3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 import WeilConjectures.Topology.Sheaves.CechComparison
 
 /-! # A correction cochain from local horseshoe lifts

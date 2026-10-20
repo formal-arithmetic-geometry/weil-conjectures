@@ -5,12 +5,12 @@ Authors: SHEAF group X2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.Cohomology.DirectImage.Basic
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import WeilConjectures.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
-import WeilConjectures.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
+import Sheaf.AlgebraicGeometry.RelativelyFlatCanonicalModuleBaseChange
+import Sheaf.AlgebraicGeometry.FlatModuleCanonicalDerivedPullback
 
 /-! # Canonical derived base change for a flat family and a line bundle
 

@@ -450,28 +450,6 @@ lemma transIso_hom_app {i j : I} (h : i ≤ j) (x : C i) :
 lemma transIso_inv_app {i j : I} (h : i ≤ j) (x : C i) :
     (S.transIso h).inv.app x = (S.isoToStage ⟨i, x⟩ h).hom := rfl
 
-lemma transIso_hom_app_eq {i j : I} (h : i ≤ j) (x : C i) :
-    (S.transIso h).hom.app x =
-      mkHom (X := ⟨j, (S.T h).obj x⟩) (Y := ⟨i, x⟩) j le_rfl h ((S.assoc h le_rfl).hom.app x) :=
-  rfl
-
-lemma eqToHom_mk {i : I} {x y : C i} (h : (⟨i, x⟩ : S.PairCategory) = ⟨i, y⟩) :
-    eqToHom h = (S.ι i).map (eqToHom (eq_of_heq (PairCategory.mk.inj h).2)) := by
-  obtain rfl := eq_of_heq (PairCategory.mk.inj h).2
-  simp only [eqToHom_refl, Functor.map_id]; rfl
-
-/-- A morphism `j_n x ⟶ j_n y` represented at a stage `p ≥ n`, transported along the
-identifications `j_n ≅ j_p ∘ T`, is the image of its representative. -/
-lemma transIso_hom_app_mkHom_transIso_inv_app {n p : I} (h : n ≤ p) {x y : C n}
-    (hX : ((S.ι n).obj x).stage ≤ p) (hY : ((S.ι n).obj y).stage ≤ p)
-    (u : (S.T h).obj x ⟶ (S.T h).obj y) :
-    (S.transIso h).hom.app x ≫ mkHom (X := (S.ι n).obj x) (Y := (S.ι n).obj y) p hX hY u ≫
-      (S.transIso h).inv.app y = (S.ι p).map u := by
-  rw [mkHom_eq_isoToStage, transIso_hom_app, transIso_inv_app]
-  simp only [Category.assoc]
-  erw [Iso.inv_hom_id_assoc, Iso.inv_hom_id]
-  exact Category.comp_id _
-
 variable (S) in
 /-- Blueprint `sk-prop-trace-adic` (iii), the stage `ℚ̄_ℓ`: in the filtered 2-colimit of a stage
 system (in the application, `Dᵇc(X, ℚ̄_ℓ)` as the colimit of the categories `Dᵇc(X, E)` over the

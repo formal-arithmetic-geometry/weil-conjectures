@@ -6,7 +6,7 @@ public import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import WeilConjectures.AlgebraicGeometry.Curve.FiniteCoverLowerShriekCoefficientCompatibility
 import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 import Sheaf.AlgebraicGeometry.Curve.RetractAssertions
-import WeilConjectures.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
+import Sheaf.AlgebraicGeometry.FinitePushforwardConstructibleNoetherian
 
 @[expose] public section
 universe u

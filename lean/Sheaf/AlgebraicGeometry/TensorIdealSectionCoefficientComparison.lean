@@ -6,9 +6,9 @@ Authors: SHEAF groups P3 and E4
 module
 
 public import Sheaf.AlgebraicGeometry.TensorHomogeneousKernelAction
-import WeilConjectures.AlgebraicGeometry.TensorPullbackPowerAppend
-import all WeilConjectures.AlgebraicGeometry.SectionRingVeroneseNumeratorTransition
-import all WeilConjectures.AlgebraicGeometry.BoundaryCoefficientDegreeSplit
+import Sheaf.AlgebraicGeometry.TensorPullbackPowerAppend
+import all Sheaf.AlgebraicGeometry.SectionRingVeroneseNumeratorTransition
+import all Sheaf.AlgebraicGeometry.BoundaryCoefficientDegreeSplit
 
 /-! # Coefficient coordinates for homogeneous ideal multiplication
 

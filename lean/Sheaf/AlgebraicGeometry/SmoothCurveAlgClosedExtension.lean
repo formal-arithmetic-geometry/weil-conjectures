@@ -10,7 +10,7 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 import Sheaf.AlgebraicGeometry.Curve.ConstantInvariance
-import WeilConjectures.AlgebraicGeometry.CurveCohomologyConnectedReduction
+import Sheaf.AlgebraicGeometry.CurveCohomologyConnectedReduction
 
 /-! # Constant-coefficient invariance for smooth curves
 

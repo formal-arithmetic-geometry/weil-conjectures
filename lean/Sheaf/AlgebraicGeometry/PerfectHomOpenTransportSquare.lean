@@ -6,7 +6,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 import all Sheaf.AlgebraicGeometry.PerfectHomTransport
-public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 
 /-! # The cartesian open square commutes with pullback Hom transport
 

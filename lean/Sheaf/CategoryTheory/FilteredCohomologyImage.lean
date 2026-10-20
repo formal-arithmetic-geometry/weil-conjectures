@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 import Mathlib.Algebra.Homology.QuasiIso
 

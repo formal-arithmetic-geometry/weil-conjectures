@@ -5,11 +5,11 @@ Authors: SHEAF group P3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PicardExternalRightCechModels
+public import Sheaf.AlgebraicGeometry.PicardExternalRightCechModels
 public import Sheaf.Paper.CechCupProductCore
 public import Sheaf.Paper.ModuleCupResolutionData
-public import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMap
-public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
+public import Sheaf.AlgebraicGeometry.ModuleCohomologyFMap
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
 import Sheaf.AlgebraicGeometry.PicardModuleCechExternalPairing
 
 /-! # Module comparison of an external Cech cup cocycle

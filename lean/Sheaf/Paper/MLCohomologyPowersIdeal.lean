@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.CategoryTheory.CofilteredSystem
 public import Mathlib.RingTheory.Ideal.Operations
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Sheaf.Paper.PQFCohomology
 import Sheaf.Paper.MLCohomologyPowersIdealKernelBound
 import Sheaf.Paper.MLCohomologyPowersIdealImageStabilization

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.TruncationExchangeCouple
 public import Sheaf.CategoryTheory.ExactCoupleMorphism
 public import Sheaf.CategoryTheory.Filtration
 import Sheaf.CategoryTheory.DerivedCoupleFunctoriality
-import WeilConjectures.CategoryTheory.HalfPlaneConvergence
+import Sheaf.CategoryTheory.HalfPlaneConvergence
 import WeilConjectures.CategoryTheory.DerivedCategory.PlusDevissage
 
 /-!

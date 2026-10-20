@@ -5,10 +5,10 @@ Authors: SHEAF group K1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
-import WeilConjectures.Algebra.Homology.BoundedExactTermHomQuasiIso
+import Sheaf.Algebra.Homology.BoundedExactTermHomQuasiIso
 import Mathlib.CategoryTheory.MorphismProperty.Retract
 
 /-! # Internal Hom from a strictly perfect complex

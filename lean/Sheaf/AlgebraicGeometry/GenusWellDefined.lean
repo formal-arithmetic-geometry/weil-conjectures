@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Curve.SmoothProjective
 public import Sheaf.AlgebraicGeometry.FieldLinearModuleCohomologyOperations
 public import Mathlib.LinearAlgebra.FiniteDimensional.Basic
 import WeilConjectures.AlgebraicGeometry.BaseChangeConventions
-import WeilConjectures.AlgebraicGeometry.DimensionBaseChange
+import Sheaf.AlgebraicGeometry.DimensionBaseChange
 import Sheaf.AlgebraicGeometry.Morphisms.ProjectiveBaseChange
 import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 import WeilConjectures.AlgebraicGeometry.Cohomology.ProjectiveLine

@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.LocallyClosedStratification
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.Topology.Constructible
-import WeilConjectures.AlgebraicGeometry.EtaleAffineCoverStratification
+import Sheaf.AlgebraicGeometry.EtaleAffineCoverStratification
 import Sheaf.AlgebraicGeometry.EtaleSeparatedStratifiedFinite
 import WeilConjectures.AlgebraicGeometry.EtaleStratificationLocalGluing
 import Mathlib.AlgebraicGeometry.Cover.Open

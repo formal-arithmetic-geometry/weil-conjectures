@@ -12,7 +12,7 @@ public import Sheaf.Algebra.Homology.KFlat
 public import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SliceRestrictionFlat
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.MonoidalFree
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorClosed
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous

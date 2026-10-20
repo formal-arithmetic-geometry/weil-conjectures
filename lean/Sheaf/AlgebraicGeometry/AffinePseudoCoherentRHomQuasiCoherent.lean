@@ -4,15 +4,15 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.Algebra.Homology.HomotopyCategory.HomComplex
-import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModel
+import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.AlgebraicGeometry.AffineFiniteProjectiveHomModel
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHomFree
-import WeilConjectures.Topology.RingedSpaceModuleCohomology
+import Sheaf.Topology.RingedSpaceModuleCohomology
 
 /-! # Affine RHom of a pseudo-coherent complex is quasi-coherent
 

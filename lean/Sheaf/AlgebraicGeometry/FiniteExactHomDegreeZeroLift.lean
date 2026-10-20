@@ -4,18 +4,18 @@ Authors: SHEAF group N3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
-import WeilConjectures.AlgebraicGeometry.DerivedRHomAlgebraModule
+public import Sheaf.AlgebraicGeometry.DirectImageAlgebraDerivedCategory
+import Sheaf.AlgebraicGeometry.DerivedRHomAlgebraModule
 
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.AlgebraicGeometry.FiniteExactHomDerivedMate
-import WeilConjectures.AlgebraicGeometry.FiniteExactHomSingleCounitTransport
+import Sheaf.AlgebraicGeometry.FiniteExactHomSingleCounitTransport
 
 /-! # Lifting the exact affine right adjoint to degree zero
 Source: Stacks Project, Tags 0AX2, 0AX3 and 0AVW

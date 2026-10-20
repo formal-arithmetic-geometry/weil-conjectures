@@ -6,9 +6,9 @@ Authors: SHEAF group P1
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
-public import WeilConjectures.Topology.OpenModuleDerivedSections
+public import Sheaf.Topology.OpenModuleDerivedSections
 import Mathlib.Algebra.Category.ModuleCat.AB
-import WeilConjectures.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
+import Sheaf.AlgebraicGeometry.DirectImageGlobalSectionsKInjectiveAcyclic
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
 
 /-! # Derived sections of a derived direct image

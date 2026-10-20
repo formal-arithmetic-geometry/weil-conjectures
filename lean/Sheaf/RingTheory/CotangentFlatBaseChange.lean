@@ -15,7 +15,7 @@ import Mathlib.RingTheory.Kaehler.Polynomial
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
-import WeilConjectures.Algebra.Homology.KFlatScalarExtensionCounit
+import Sheaf.Algebra.Homology.KFlatScalarExtensionCounit
 import Sheaf.RingTheory.TorIndependentCotangentBaseChange
 import Sheaf.TraceFormula.OnePointDerivedRingIdentification
 

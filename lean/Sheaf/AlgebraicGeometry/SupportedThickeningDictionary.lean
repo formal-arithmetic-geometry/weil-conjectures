@@ -7,11 +7,11 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
-import WeilConjectures.AlgebraicGeometry.ThickeningSystemsDictionary
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
+import Sheaf.AlgebraicGeometry.ThickeningSystemsDictionary
 import WeilConjectures.AlgebraicGeometry.ClosedImmersionPushforwardFullyFaithful
-import WeilConjectures.AlgebraicGeometry.IdealPowerProductZeroAffineCover
-import WeilConjectures.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.IdealPowerProductZeroAffineCover
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
 import Mathlib.CategoryTheory.Whiskering
 
 /-! # Supported thickening systems and completion isomorphisms

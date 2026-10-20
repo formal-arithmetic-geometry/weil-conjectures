@@ -6,7 +6,7 @@ Authors: SHEAF group P1
 module
 
 public import Sheaf.CategoryTheory.FilteredCohomologyImage
-import WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
+import Sheaf.CategoryTheory.FilteredNormalizedQuotientPresentation
 import Sheaf.CategoryTheory.FilteredCohomologyImagePresentation
 import WeilConjectures.Mathlib.CategoryTheory.Subobject.Limits
 

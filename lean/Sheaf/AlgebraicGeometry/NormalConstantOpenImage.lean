@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.NormalScheme
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.ConstructibleSheaf.Defs
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import WeilConjectures.AlgebraicGeometry.NormalConstantOpenUnit
+import Sheaf.AlgebraicGeometry.NormalConstantOpenUnit
 
 /-!
 # A constant module sheaf across a nonempty normal open

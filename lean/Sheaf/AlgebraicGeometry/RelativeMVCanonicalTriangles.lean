@@ -5,13 +5,13 @@ Authors: SHEAF group N3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
+public import Sheaf.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
 public import Mathlib.CategoryTheory.Limits.Shapes.BinaryBiproducts
 import Sheaf.AlgebraicGeometry.RelativeMVBoundaryCompletion
-import WeilConjectures.AlgebraicGeometry.RelativeMVRestrictionSquares
+import Sheaf.AlgebraicGeometry.RelativeMVRestrictionSquares
 
 /-! # Canonically identified relative Mayer--Vietoris triangles
 

@@ -3,7 +3,7 @@ Copyright (c) 2026 The SHEAF contributors.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedModuleBaseChangeMap
+public import Sheaf.AlgebraicGeometry.DerivedModuleBaseChangeMap
 public import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 
 @[expose] public section

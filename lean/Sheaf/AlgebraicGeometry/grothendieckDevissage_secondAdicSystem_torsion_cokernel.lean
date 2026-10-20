@@ -1,9 +1,9 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.CoherentFormalModule
+public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.CategoryTheory.Functor.Currying
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
-import WeilConjectures.AlgebraicGeometry.CoherentMapReductionTorsionCoker
+import Sheaf.AlgebraicGeometry.CoherentMapReductionTorsionCoker
 import Sheaf.AlgebraicGeometry.CompletionThickeningCokernelReflection
 
 @[expose] public section

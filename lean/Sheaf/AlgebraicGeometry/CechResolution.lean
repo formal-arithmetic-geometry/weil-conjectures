@@ -5,12 +5,12 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Cech
 public import Mathlib.Algebra.Homology.Embedding.Extend
 public import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusHomology
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
 import Sheaf.AlgebraicGeometry.CechSheafResolution
-import WeilConjectures.AlgebraicGeometry.AffineOpenPushforwardAcyclic
+import Sheaf.AlgebraicGeometry.AffineOpenPushforwardAcyclic
 
 /-!
 # Čech resolution and derived direct image

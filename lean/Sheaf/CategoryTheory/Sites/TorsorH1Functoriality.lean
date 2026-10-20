@@ -2,7 +2,7 @@ module
 
 public import Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
 public import WeilConjectures.CategoryTheory.Sites.Torsor
-public import WeilConjectures.Topology.ClosedImmersionPushforwardCohomology
+public import Sheaf.Topology.ClosedImmersionPushforwardCohomology
 import Sheaf.CategoryTheory.Sites.TorsorH1FunctorialityParts
 
 /-! # Functoriality of the torsor description of H¹

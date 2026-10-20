@@ -18,7 +18,7 @@ import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import Sheaf.Paper.KFlatRingedToposPullback
 import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel

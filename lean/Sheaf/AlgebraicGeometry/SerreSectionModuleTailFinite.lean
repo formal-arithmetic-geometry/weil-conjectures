@@ -5,13 +5,13 @@ Authors: SHEAF group P3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpectrum.Twist
 public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 public import Mathlib.RingTheory.Finiteness.Defs
 
 import Sheaf.AlgebraicGeometry.SerreSectionModuleComponentFinite
-import WeilConjectures.AlgebraicGeometry.SerreSectionCoordinateSurjective
+import Sheaf.AlgebraicGeometry.SerreSectionCoordinateSurjective
 
 /-! # SerreSectionModuleTailFinite
 

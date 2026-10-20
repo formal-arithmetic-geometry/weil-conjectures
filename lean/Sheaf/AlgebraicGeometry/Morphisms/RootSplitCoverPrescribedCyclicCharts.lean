@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.RingTheory.RegularLocalRing.Defs
 public import Mathlib.Algebra.Regular.SMul
-import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitCoverCyclicChartModel
+import Sheaf.AlgebraicGeometry.Morphisms.RootSplitCoverCyclicChartModel
 import WeilConjectures.AlgebraicGeometry.Morphisms.EtaleRegularDivisorBaseChange
 
 /-!

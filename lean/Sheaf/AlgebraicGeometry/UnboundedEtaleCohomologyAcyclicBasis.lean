@@ -5,7 +5,7 @@ Authors: SHEAF group NJ
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -15,11 +15,12 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 import Mathlib.CategoryTheory.Sites.ConstantSheaf
 import Sheaf.CategoryTheory.RingedSiteModules
 import Sheaf.Paper.SiteRestrictionInjectives
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtaleOver
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
+import Sheaf.CategoryTheory.TruncationHypercohomology
 import Mathlib.CategoryTheory.Abelian.GrothendieckCategory.EnoughInjectives
-import WeilConjectures.CategoryTheory.ExactCoupleConvergence
+import Sheaf.CategoryTheory.ExactCoupleConvergence
 import Sheaf.CategoryTheory.Filtration
 import WeilConjectures.CategoryTheory.TruncationCouple
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility

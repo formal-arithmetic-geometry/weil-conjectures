@@ -12,6 +12,8 @@ public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import WeilConjectures.SixFunctors.Etale.Derived.OpenImmersionLowerShriek
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtaleFlat
 
+import WeilConjectures.SixFunctors.Etale.LowerShriek.Proper
+
 /-!
 # The derived comparison from extension by zero to pushforward
 

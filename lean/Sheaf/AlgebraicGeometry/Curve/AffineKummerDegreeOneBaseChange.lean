@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.Sites.RootsOfUnity
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.TopologicalInvariance
 
 import Sheaf.AlgebraicGeometry.Curve.KummerBaseChangeCompatibility
-import WeilConjectures.AlgebraicGeometry.Curve.UnitsQuotientBaseChange
+import Sheaf.AlgebraicGeometry.Curve.UnitsQuotientBaseChange
 import Mathlib.GroupTheory.QuotientGroup.Basic
 
 /-!

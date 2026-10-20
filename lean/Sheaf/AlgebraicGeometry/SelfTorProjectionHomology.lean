@@ -2,9 +2,9 @@ module
 
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
-import WeilConjectures.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
+import Sheaf.AlgebraicGeometry.QCqsDerivedProjectionIsoUniverses
 import Sheaf.AlgebraicGeometry.SelfTorProjectionHomologyTermwise
 import WeilConjectures.Topology.ClosedImmersionPushforwardExact
 

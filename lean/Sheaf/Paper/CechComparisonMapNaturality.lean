@@ -5,8 +5,8 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.ModuleCechComparison
-import WeilConjectures.AlgebraicGeometry.ModuleCechLiftSquares
+public import Sheaf.AlgebraicGeometry.ModuleCechComparison
+import Sheaf.AlgebraicGeometry.ModuleCechLiftSquares
 
 /-!
 # Naturality of the canonical Cech-to-cohomology comparison map

@@ -8,7 +8,7 @@ module
 public import Sheaf.Paper.RingedDerivedSliceData
 import Sheaf.Paper.RingedSliceDerivedMate
 import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 
 /-!
 # Derived slice proof obligations

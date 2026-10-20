@@ -2,7 +2,7 @@ module
 
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.RingTheory.Ideal.AssociatedPrime.Basic
-import WeilConjectures.RingTheory.FractionalPrincipalQuotientAssociatedPrimesHeight
+import Sheaf.RingTheory.FractionalPrincipalQuotientAssociatedPrimesHeight
 
 /-!
 # Minimality of associated primes of a fractional principal quotient

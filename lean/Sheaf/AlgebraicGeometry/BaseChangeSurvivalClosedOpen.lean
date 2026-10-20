@@ -14,7 +14,7 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.EpiMono
 
 import WeilConjectures.SixFunctors.Etale.SmoothBaseChange.Injectivity.CriticalMap
 import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
-import WeilConjectures.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero
+import Sheaf.AlgebraicGeometry.BaseChangeOpenInjectiveCoefficientZero
 
 /-!
 # Survival of a cokernel element under base change

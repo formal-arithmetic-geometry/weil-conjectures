@@ -12,7 +12,7 @@ public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.KFlat
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 public import WeilConjectures.CategoryTheory.DerivedCategory.HasMonoidalDerivedCategory
 import Sheaf.CategoryTheory.TruncationsAndHomotopyColimits
-import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
+import Sheaf.Algebra.Homology.BoundedFlatReplacement
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
 import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence

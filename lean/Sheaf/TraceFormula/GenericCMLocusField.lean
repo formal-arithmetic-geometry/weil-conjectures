@@ -6,7 +6,7 @@ public import Mathlib.RingTheory.KrullDimension.Basic
 public import Mathlib.AlgebraicGeometry.Scheme
 public import WeilConjectures.RingTheory.Depth
 
-import WeilConjectures.AlgebraicGeometry.FibreCohenMacaulayLocus
+import Sheaf.AlgebraicGeometry.FibreCohenMacaulayLocus
 import WeilConjectures.RingTheory.DepthLeDimAssociatedPrime
 import Sheaf.TraceFormula.MinimalPrimesDenseSpectrum
 

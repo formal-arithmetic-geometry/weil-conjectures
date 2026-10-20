@@ -4,8 +4,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.LocalizedResidueHomology
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.LocalizedResidueHomology
+public import Sheaf.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
 public import Mathlib.CategoryTheory.Adjunction.Additive
 import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFreeProjective
@@ -13,7 +13,7 @@ import Sheaf.Algebra.Homology.KFlatStalkCriterion
 import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
 import Mathlib.RingTheory.Flat.Basic
 import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
-import WeilConjectures.Topology.PointModuleEvaluationEquivalence
+import Sheaf.Topology.PointModuleEvaluationEquivalence
 import WeilConjectures.AlgebraicGeometry.ResiduePullbackGlobalSections
 import Sheaf.Paper.DerivedHomMayerVietoris
 

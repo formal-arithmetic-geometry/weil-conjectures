@@ -16,6 +16,7 @@ import Sheaf.AlgebraicGeometry.OpenDegreeZeroConstructible
 import WeilConjectures.ConstructibleSheaf.Pullback
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.Topology.Constructible
+import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 import WeilConjectures.ConstructibleSheaf.Defs
 
 /-!

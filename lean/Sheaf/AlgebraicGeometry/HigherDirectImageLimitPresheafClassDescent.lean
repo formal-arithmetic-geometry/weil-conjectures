@@ -9,7 +9,7 @@ public import Mathlib.Algebra.Category.Grp.Adjunctions
 
 public import WeilConjectures.AlgebraicGeometry.AbelianHigherDirectImageMap
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Coherence
-import WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitAffineClassRep
+import Sheaf.AlgebraicGeometry.HigherDirectImageLimitAffineClassRep
 
 /-! # Descent of higher direct image cohomology-presheaf classes
 

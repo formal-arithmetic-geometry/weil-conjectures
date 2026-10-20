@@ -6,6 +6,7 @@ Authors: SHEAF group NK
 module
 
 public import Sheaf.AlgebraicGeometry.ChosenCartesianSquare
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.AlgebraicGeometry.EtaleSheaves
 public import WeilConjectures.SixFunctors.BaseChange.Derived
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper

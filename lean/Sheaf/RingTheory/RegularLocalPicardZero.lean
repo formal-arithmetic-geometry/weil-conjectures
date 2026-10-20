@@ -11,8 +11,8 @@ public import Mathlib.RingTheory.Localization.AtPrime.Basic
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.Algebra.Module.Projective
 import Sheaf.RingTheory.LocalizedFiniteModuleSpread
-import WeilConjectures.RingTheory.RegularLocalFiniteModuleResolution
-import WeilConjectures.RingTheory.BoundedFiniteFreeResolution
+import Sheaf.RingTheory.RegularLocalFiniteModuleResolution
+import Sheaf.RingTheory.BoundedFiniteFreeResolution
 import Sheaf.AlgebraicGeometry.IsRegularScheme
 import Sheaf.RingTheory.K0ClassTrivialInvertible
 import Sheaf.TraceFormula.InvertibleModuleK0Class

@@ -9,7 +9,7 @@ public import WeilConjectures.Mathlib.AlgebraicGeometry.GammaSpecAdjunction
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import Mathlib.RingTheory.Finiteness.Defs
-import WeilConjectures.AlgebraicGeometry.SteinFactorizationAffine
+import Sheaf.AlgebraicGeometry.SteinFactorizationAffine
 import Mathlib.AlgebraicGeometry.Fiber
 import Mathlib.AlgebraicGeometry.Noetherian
 import Mathlib.AlgebraicGeometry.Properties

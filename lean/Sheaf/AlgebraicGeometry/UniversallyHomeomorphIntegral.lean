@@ -5,7 +5,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import WeilConjectures.AlgebraicGeometry.Morphisms.UniversalHomeomorphism
-import WeilConjectures.AlgebraicGeometry.SurjectiveUniversallyClosedAffineTarget
+import Sheaf.AlgebraicGeometry.SurjectiveUniversallyClosedAffineTarget
 import Mathlib.AlgebraicGeometry.Restrict
 
 /-! Comparison of the two formulations of universal homeomorphisms. -/

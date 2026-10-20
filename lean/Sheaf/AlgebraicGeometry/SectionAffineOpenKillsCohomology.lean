@@ -6,12 +6,12 @@ Authors: SHEAF group H1
 module
 
 public import WeilConjectures.AlgebraicGeometry.Ample
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.Paper.PQFCohomology
 public import WeilConjectures.AlgebraicGeometry.Modules.ClearDenominators
-import WeilConjectures.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
-import WeilConjectures.AlgebraicGeometry.InvertSCOhomology
-import WeilConjectures.AlgebraicGeometry.FractionZeroTensorPower
+import Sheaf.AlgebraicGeometry.AffineOpenModuleCohomologyVanishing
+import Sheaf.AlgebraicGeometry.InvertSCOhomology
+import Sheaf.AlgebraicGeometry.FractionZeroTensorPower
 
 /-!
 # A power of a section kills a positive cohomology class

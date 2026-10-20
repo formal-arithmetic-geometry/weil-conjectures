@@ -5,10 +5,10 @@ Authors: SHEAF group H1
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Paper.DerivedHomMayerVietoris
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictOpen
-import WeilConjectures.Algebra.Homology.HomComplexRestrictOpen
+import Sheaf.Algebra.Homology.HomComplexRestrictOpen
 
 /-!
 # Derived internal Hom commutes with restriction to opens

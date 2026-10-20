@@ -5,10 +5,10 @@ Authors: SHEAF group F1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.FlatTelescopeStageMap
+public import Sheaf.AlgebraicGeometry.FlatTelescopeStageMap
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.AlgebraicGeometry.FlatTelescopeTargetRefinement
-import WeilConjectures.Algebra.Homology.FlatTruncationTower
+import Sheaf.Algebra.Homology.FlatTruncationTower
 
 /-! # Strict augmentation data from finite-piece bar diagrams
 

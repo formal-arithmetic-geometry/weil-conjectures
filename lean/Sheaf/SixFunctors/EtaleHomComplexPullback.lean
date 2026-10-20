@@ -5,7 +5,7 @@ Authors: SHEAF group Q43
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.HomComplexProjections
+public import Sheaf.Algebra.Homology.HomComplexProjections
 public import Mathlib.Algebra.Homology.HomotopyCategory.Shift
 public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
 public import WeilConjectures.AlgebraicGeometry.EtaleConstantRingInverseImageComparison

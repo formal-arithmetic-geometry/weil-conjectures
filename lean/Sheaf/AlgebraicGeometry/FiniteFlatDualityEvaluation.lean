@@ -4,18 +4,18 @@ Authors: SHEAF group T1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 public import WeilConjectures.AlgebraicGeometry.Modules.Invertible
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.AffineDerivedConcentration
-import WeilConjectures.AlgebraicGeometry.FiniteDualityDerivedHom
-import WeilConjectures.AlgebraicGeometry.FiniteRestrictionDerivedRightAdjoint
-import WeilConjectures.AlgebraicGeometry.AffineSinglePushforwardUnitIso
+import Sheaf.AlgebraicGeometry.FiniteDualityDerivedHom
+import Sheaf.AlgebraicGeometry.FiniteRestrictionDerivedRightAdjoint
+import Sheaf.AlgebraicGeometry.AffineSinglePushforwardUnitIso
 import Sheaf.AlgebraicGeometry.FiniteDualityDegreeZeroCounitAction
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeDerivedHom
-import WeilConjectures.AlgebraicGeometry.FinitePushforwardLocallyFree
+import Sheaf.AlgebraicGeometry.FiniteLocallyFreeDerivedHom
+import Sheaf.AlgebraicGeometry.FinitePushforwardLocallyFree
 
 /-! # Finite flat duality with an invertible target
 

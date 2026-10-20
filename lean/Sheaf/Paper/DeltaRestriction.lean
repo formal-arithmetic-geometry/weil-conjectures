@@ -30,7 +30,7 @@ public import WeilConjectures.CategoryTheory.Sites.PullbackFlat
 public import WeilConjectures.Mathlib.CategoryTheory.Limits.MorphismProperty
 import Sheaf.AlgebraicGeometry.IsIsoIffOfJointlySurjectiveEtaleFamily
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
 import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
@@ -47,6 +47,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

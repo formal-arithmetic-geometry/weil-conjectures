@@ -8,8 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import WeilConjectures.AlgebraicGeometry.EtaleSetInverseImageCompositionUnits
-import WeilConjectures.AlgebraicGeometry.CofilteredEtaleLimitSections
-import WeilConjectures.AlgebraicGeometry.StrictHenselizationBaseChangeCone
+import Sheaf.AlgebraicGeometry.CofilteredEtaleLimitSections
+import Sheaf.AlgebraicGeometry.StrictHenselizationBaseChangeCone
 
 /-! # Stalk of a direct image over the strict henselization
 

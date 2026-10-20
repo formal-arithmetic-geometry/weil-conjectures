@@ -14,7 +14,7 @@ public import Mathlib.Algebra.Homology.Embedding.StupidTrunc
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
 import WeilConjectures.Algebra.Homology.MixedTensorKFlatQuasiIso
-import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 import WeilConjectures.Mathlib.CategoryTheory.Triangulated.Functor
 
 /-!

@@ -9,9 +9,9 @@ public import Sheaf.AlgebraicGeometry.ConstructibleTorsionCurveSheaf
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import Mathlib.AlgebraicGeometry.Morphisms.Finite
 import WeilConjectures.AlgebraicGeometry.Sites.TorsionSheaf
-import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleSetPullback
+import Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullback
 import Sheaf.AlgebraicGeometry.ConstructibleCurveSubQuotient
-import WeilConjectures.AlgebraicGeometry.TorsionSheafCharacterizations
+import Sheaf.AlgebraicGeometry.TorsionSheafCharacterizations
 import WeilConjectures.SixFunctors.Finite.Stalk
 
 /-!

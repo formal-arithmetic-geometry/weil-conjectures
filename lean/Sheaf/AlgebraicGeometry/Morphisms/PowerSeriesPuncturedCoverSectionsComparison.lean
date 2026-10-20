@@ -8,8 +8,8 @@ module
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiniteEtaleAdicUniqueLift
 public import Mathlib.RingTheory.MvPowerSeries.Basic
 public import WeilConjectures.RingTheory.Depth
-import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedGlobalSections
-import WeilConjectures.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningSections
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedGlobalSections
+import Sheaf.AlgebraicGeometry.Morphisms.PowerSeriesPuncturedThickeningSections
 import Mathlib.RingTheory.MvPowerSeries.Equiv
 
 /-!

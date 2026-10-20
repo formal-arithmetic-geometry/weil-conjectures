@@ -6,7 +6,7 @@ Authors: SHEAF group NH
 module
 
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
+public import Sheaf.Algebra.Homology.RhomIntoKInjectiveLocal
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 
 /-!

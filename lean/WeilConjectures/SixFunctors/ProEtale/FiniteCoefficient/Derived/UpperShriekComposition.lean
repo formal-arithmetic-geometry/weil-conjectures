@@ -134,7 +134,8 @@ end EtaleOrigin
 
 section Composition
 
-variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y)
+variable (Λ : Type (u + 1)) [CommRing Λ] [Finite Λ]
+  {X Y Z : Scheme.{u}} (f : X ⟶ Y)
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
 
 /-- Blueprint `sk-thm-sf-comp-composition`, on the pro-étale site: the composition law
@@ -266,7 +267,8 @@ end LowerShriek
 
 section BoundedBelow
 
-variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] {X Y Z : Scheme.{u}} (f : X ⟶ Y)
+variable {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ]
+  {X Y Z : Scheme.{u}} (f : X ⟶ Y)
   (g : Y ⟶ Z) [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
   [CompactSpace Y] [CompactSpace Z]
 
@@ -487,6 +489,7 @@ in `K` bounded below of étale origin. It is the composite of the adjunction bij
 pasted adjunction `Rf_! ⋙ Rg_! ⊣ Rg^× ⋙ Rf^×`. -/
 theorem HasAmbientExceptionalRightAdjoint.nonempty_iso_comp_yoneda_comp_whiskeringLeft
     {Λ : Type (u + 1)} [CommRing Λ] [Finite Λ] (f : X ⟶ Y) (g : Y ⟶ Z)
+    [Etale.HasBoundedBelowUpperShrieks (ModuleCat.{u + 1} Λ)]
     [HasCompactification f] [HasCompactification g] [HasCompactification (f ≫ g)]
     [QuasiCompact (f ≫ g)]
     (hf : HasAmbientExceptionalRightAdjoint (ModuleCat.{u + 1} Λ) f)

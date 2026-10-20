@@ -5,8 +5,8 @@ Released under Apache 2.0 license as described in the file LICENSE.
 module
 
 public import Sheaf.CategoryTheory.FilteredCohomologyImage
-import all WeilConjectures.CategoryTheory.FilteredNormalizedQuotientPresentation
-import all WeilConjectures.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
+import all Sheaf.CategoryTheory.FilteredNormalizedQuotientPresentation
+import all Sheaf.Algebra.Homology.FilteredComplexFirstPageCyclesBoundaries
 
 /-! # Images and inverse images of filtered cycles in cohomology
 

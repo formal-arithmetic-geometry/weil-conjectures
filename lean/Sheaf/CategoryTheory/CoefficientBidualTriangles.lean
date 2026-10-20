@@ -16,11 +16,11 @@ public import Mathlib.CategoryTheory.Triangulated.Subcategory
 public import Mathlib.Algebra.Homology.DerivedCategory.Linear
 import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import WeilConjectures.Algebra.Homology.HomComplexGlobalHomotopy
+import Sheaf.Algebra.Homology.HomComplexGlobalHomotopy
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.CategoryTheory.LocalizedModuleExactIndependent
-import WeilConjectures.Algebra.Homology.HomTensorTotal
+import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import Mathlib.Algebra.Homology.DerivedCategory.KInjective

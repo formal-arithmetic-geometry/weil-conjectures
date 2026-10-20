@@ -1,16 +1,16 @@
 module
 
 public import Mathlib.AlgebraicGeometry.Noetherian
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.Algebra.Homology.ModuleStalkFunctor
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 public import Sheaf.Algebra.Homology.KFlatTensorQuasiIso
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Category.ModuleCat.Presheaf.ColimitFunctor
-import WeilConjectures.Algebra.Homology.DerivedHomFiniteFreeModel
+import Sheaf.Algebra.Homology.DerivedHomFiniteFreeModel
 import Sheaf.Algebra.Homology.DerivedHomProjectiveResolution
 import WeilConjectures.Algebra.Homology.ModuleStalkExact
-import WeilConjectures.AlgebraicGeometry.CoherentAffineFreeResolution
+import Sheaf.AlgebraicGeometry.CoherentAffineFreeResolution
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
 
 @[expose] public section

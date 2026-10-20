@@ -5,7 +5,7 @@ Authors: SHEAF group Q3
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import Sheaf.AlgebraicGeometry.SymmetricAlgebraSheafConstruction
 import Sheaf.AlgebraicGeometry.SymmetricAlgebraAffineComparisonStalks
 

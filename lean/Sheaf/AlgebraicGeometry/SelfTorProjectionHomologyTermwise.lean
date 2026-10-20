@@ -2,10 +2,10 @@ module
 
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
+public import Sheaf.AlgebraicGeometry.DerivedTensorStructure
 public import Mathlib.AlgebraicGeometry.Morphisms.ClosedImmersion
 import Sheaf.AlgebraicGeometry.KFlatSingleTensorRepresentative
-import WeilConjectures.AlgebraicGeometry.ClosedStructureTensorComplexProjection
+import Sheaf.AlgebraicGeometry.ClosedStructureTensorComplexProjection
 import WeilConjectures.AlgebraicGeometry.ClosedModulePushforwardHomology
 
 @[expose] public section

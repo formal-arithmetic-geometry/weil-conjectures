@@ -6,7 +6,7 @@ Authors: SHEAF group NJ
 module
 
 public import WeilConjectures.AlgebraicGeometry.QuasiFiniteMorphism
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic
@@ -18,7 +18,7 @@ public import WeilConjectures.Compactification.NagataCompactification
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
 public import WeilConjectures.SixFunctors.BaseChange.Square
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FiniteEtale
-public import WeilConjectures.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
+public import Sheaf.AlgebraicGeometry.EtaleRestrictScalarsFunctorComparisons
 public import Mathlib.RingTheory.Length
 public import Mathlib.Algebra.BigOperators.Finsupp.Basic
 

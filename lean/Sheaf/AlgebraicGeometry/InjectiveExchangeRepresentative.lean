@@ -5,10 +5,10 @@ Authors: SHEAF group K1
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
+public import Sheaf.AlgebraicGeometry.StrictLocalInjectiveSourceComparison
 public import WeilConjectures.SixFunctors.BaseChange.Square
 import WeilConjectures.SixFunctors.BaseChange.DerivedComparison
-import WeilConjectures.AlgebraicGeometry.InjectiveExchangeSourceTransport
+import Sheaf.AlgebraicGeometry.InjectiveExchangeSourceTransport
 import Sheaf.AlgebraicGeometry.InjectiveExchangeTargetTransport
 
 /-! # Injective representative computation of the derived exchange

@@ -25,7 +25,7 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackFiniteType
 import WeilConjectures.AlgebraicGeometry.AffinePushforwardBaseChange
 import Mathlib.RingTheory.Smooth.Basic
 import Mathlib.RingTheory.FiniteStability
-import WeilConjectures.AlgebraicGeometry.FinitePushforwardFiniteType
+import Sheaf.AlgebraicGeometry.FinitePushforwardFiniteType
 import Mathlib.AlgebraicGeometry.Morphisms.Smooth
 import Sheaf.TraceFormula.LocalGenericBasisUniversalInjective
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteDescent

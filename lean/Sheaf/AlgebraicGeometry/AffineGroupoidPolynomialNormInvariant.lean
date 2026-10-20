@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Pullbacks
 public import Mathlib.Algebra.Polynomial.Eval.Defs
 public import Mathlib.CategoryTheory.Groupoid
 public import WeilConjectures.AlgebraicGeometry.Morphisms.FiberDegree
-public import WeilConjectures.AlgebraicGeometry.FiniteLocallyFreeNormCharts
+public import Sheaf.AlgebraicGeometry.FiniteLocallyFreeNormCharts
 import Sheaf.AlgebraicGeometry.AffineGroupoidInvariantNorm
 
 /-!

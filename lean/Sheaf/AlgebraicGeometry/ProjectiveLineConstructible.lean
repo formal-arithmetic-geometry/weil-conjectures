@@ -6,7 +6,7 @@ Authors: SHEAF group NP
 module
 
 public import Sheaf.AlgebraicGeometry.SmoothBaseChangeCoefficients
-public import WeilConjectures.AlgebraicGeometry.BoundedConstructibleComplexes
+public import Sheaf.AlgebraicGeometry.BoundedConstructibleComplexes
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
 public import WeilConjectures.SixFunctors.Etale.Derived.UpperLowerStarCoherence
@@ -19,7 +19,7 @@ import Sheaf.AlgebraicGeometry.ProjectiveCurveFiniteGroup
 import Sheaf.AlgebraicGeometry.FiniteOverProjective
 import Sheaf.AlgebraicGeometry.FiniteLocalAbelianForget
 import Sheaf.AlgebraicGeometry.ConstructibleModuleOfFiniteCoefficientSets
-import WeilConjectures.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
+import Sheaf.AlgebraicGeometry.SmoothBaseChange.HigherDirectImageForgetComparison
 import Sheaf.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
 import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Curve
 import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Integral

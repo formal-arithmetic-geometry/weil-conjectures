@@ -5,12 +5,12 @@ Authors: SHEAF group D2
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
+public import Sheaf.AlgebraicGeometry.DerivedCategory
 public import WeilConjectures.Algebra.Homology.HomComplex
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import WeilConjectures.AlgebraicGeometry.SingleSupportedFiniteFreeHomQC
+import Sheaf.AlgebraicGeometry.SingleSupportedFiniteFreeHomQC
 import Sheaf.AlgebraicGeometry.LocalizedComplexQCHomologyExtension
-import WeilConjectures.Algebra.Homology.StupidTailHomShortExact
+import Sheaf.Algebra.Homology.StupidTailHomShortExact
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.FiniteFreeInternalHomExact
 import WeilConjectures.AlgebraicGeometry.Cohomology.QuasicoherentExtension
 import Sheaf.AlgebraicGeometry.Modules.QuasicoherentExtension

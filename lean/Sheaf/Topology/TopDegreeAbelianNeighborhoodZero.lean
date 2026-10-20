@@ -7,7 +7,7 @@ module
 public import Sheaf.Topology.PuncturedNeighborhoodCohomologyColimit
 public import Mathlib.Topology.NoetherianSpace
 public import Mathlib.Topology.KrullDimension
-import WeilConjectures.Topology.NoetherianTopologicalCohomologyVanishing
+import Sheaf.Topology.NoetherianTopologicalCohomologyVanishing
 import WeilConjectures.Topology.EmptySpaceCohomologyVanishing
 import Mathlib.CategoryTheory.Sites.SheafCohomology.MayerVietoris
 import Mathlib.Topology.Sheaves.MayerVietoris

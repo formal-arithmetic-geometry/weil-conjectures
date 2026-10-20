@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.DerivedInverseImageComposition
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusAdjunction
 import WeilConjectures.AlgebraicGeometry.EtaleInverseImageExact
-import WeilConjectures.AlgebraicGeometry.LimitAffineTransition
+import Sheaf.AlgebraicGeometry.LimitAffineTransition
 import WeilConjectures.SixFunctors.Etale.LowerShriek.OpenImmersion.Defs
 import Sheaf.AlgebraicGeometry.AbelianHigherDirectImagePresheaf
 import WeilConjectures.AlgebraicGeometry.SiteSheafificationSectionsLocal
@@ -26,7 +26,7 @@ import Sheaf.CategoryTheory.CohomologyColimitSites
 import WeilConjectures.CategoryTheory.ColimitSites
 import WeilConjectures.CategoryTheory.FilteredColimitCategories
 import Sheaf.CategoryTheory.SiteCoveringAxioms
-import WeilConjectures.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
+import Sheaf.AlgebraicGeometry.EtaleCohomologyLimitOfSchemes
 
 /-!
 # Relative higher-direct-image continuity with varying base

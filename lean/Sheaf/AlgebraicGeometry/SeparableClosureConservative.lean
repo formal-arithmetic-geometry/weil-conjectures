@@ -19,7 +19,7 @@ public import WeilConjectures.Topology.InverseImageModule
 public import Mathlib.Algebra.Category.Ring.Colimits
 public import Mathlib.Topology.Sheaves.Functors
 public import WeilConjectures.AlgebraicGeometry.Picard.Defs
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import WeilConjectures.Mathlib.CategoryTheory.Sites.SheafCohomology.Basic

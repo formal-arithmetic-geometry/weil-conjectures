@@ -5,7 +5,7 @@ Authors: SHEAF group Q123
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.HomComplexProjections
+public import Sheaf.Algebra.Homology.HomComplexProjections
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated

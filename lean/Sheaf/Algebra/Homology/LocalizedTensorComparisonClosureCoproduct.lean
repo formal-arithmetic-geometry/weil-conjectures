@@ -5,10 +5,10 @@ Authors: SHEAF group C1
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
+public import Sheaf.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.RingTheory.Flat.Basic
 import Sheaf.Algebra.Homology.LocalizedTensorComparisonDirectSumSquare
-import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonRepresentativeSquare
+import Sheaf.Algebra.Homology.LocalizedTensorComparisonRepresentativeSquare
 import WeilConjectures.CategoryTheory.DerivedModuleDirectSums
 import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.FlatResolution
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat

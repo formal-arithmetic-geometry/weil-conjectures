@@ -11,6 +11,29 @@ public import WeilConjectures.EtaleCohomology.PoincareDuality.PointPerfect
 public import WeilConjectures.SixFunctors.Etale.Derived.CoextendScalars
 public import WeilConjectures.SixFunctors.Etale.Derived.Dualizing
 public import WeilConjectures.SixFunctors.Etale.Derived.ReductionConservative
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import WeilConjectures.Compactification.NagataCompactification
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.FiniteType
+import WeilConjectures.SixFunctors.Etale.Derived.TensorHom
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
+import Sheaf.AlgebraicGeometry.CanonicalCompactSupportSiteComparison
+import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.CoefDerivedSystemEvaluationCalculus
+import Sheaf.Paper.ConstructibleExceptionalAdjunctionCoefficients
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.IntegralCompactSupportPrescribedReductions
+import Sheaf.Paper.IntegralDerivedOperationsOnSlices
+import Sheaf.Paper.IntegralOperationsPreserveConstructible
+import Sheaf.Paper.NormalizedDVREffectivity
+import Sheaf.Paper.ProEtaleConstructibleOrigin
+import Sheaf.Paper.PullbackTorAmplitude
+import Sheaf.Paper.SfIntegralConstructible
+import Sheaf.Paper.SfIntegralConstructibleTriangulated
+import Sheaf.SixFunctors.IntegralDualizing
+import Sheaf.SixFunctors.IntegralVerdier
 
 /-!
 # Integral coefficients: internal hom, exceptional adjoint and normalized towers
@@ -66,7 +89,7 @@ local notation "𝐃(" X ", " Λ ")" =>
 
 /-- The small étale site of a scheme is essentially small. Instance search does not find this
 in the presence of the imports of this file. -/
-local instance (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
+local instance IntegralCoefficients_essentiallySmall (X : Scheme.{u}) : EssentiallySmall.{u + 1} X.Etale :=
   have : LocallySmall.{u + 1} X.Etale :=
     @locallySmall_of_univLE X.Etale _ (@univLE_of_max.{u, u + 1} UnivLE.self)
   essentiallySmall_of_small_of_locallySmall _

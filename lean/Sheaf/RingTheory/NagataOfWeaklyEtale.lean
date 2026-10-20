@@ -13,7 +13,7 @@ import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 import WeilConjectures.AlgebraicGeometry.AffineChartBaseChangeIso
 import Mathlib.RingTheory.IntegralClosure.Algebra.Basic
 import Mathlib.RingTheory.Noetherian.Basic
-import WeilConjectures.RingTheory.NormalOfFlatNormalFibers
+import Sheaf.RingTheory.NormalOfFlatNormalFibers
 import Mathlib.RingTheory.Localization.Integral
 import Mathlib.RingTheory.Localization.Submodule
 import Mathlib.RingTheory.KrullDimension.Zero

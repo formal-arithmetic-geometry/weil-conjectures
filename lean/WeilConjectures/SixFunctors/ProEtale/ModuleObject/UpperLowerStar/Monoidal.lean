@@ -5,8 +5,9 @@ Authors: Nailin Guan
 -/
 module
 
+import WeilConjectures.CategoryTheory.Sites.PushforwardMonoidal
+
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
-public import WeilConjectures.CategoryTheory.ModuleObjects.MapMod
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.Monoidal
 
 /-!
@@ -121,7 +122,15 @@ variable {X Y Z : Scheme.{u}} (f : X ⟶ Y) (g : Y ⟶ Z)
 a monoidal natural isomorphism, for the composite lax monoidal structure on `f_* ⋙ g_*`. See
 the module docstring. -/
 instance ProEtale.isMonoidal_lowerStarComp :
-    NatTrans.IsMonoidal (ProEtale.lowerStarComp A f g).hom := sorry
+    NatTrans.IsMonoidal (ProEtale.lowerStarComp A f g).hom := by
+  let := Scheme.ProEt.isContinuous_overPullback g
+  let := Scheme.ProEt.isContinuous_overPullback f
+  let := Scheme.ProEt.isContinuous_overPullback (f ≫ g)
+  change NatTrans.IsMonoidal
+    (Functor.sheafPushforwardContinuousComp'
+      (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤) f g).symm
+      A (Scheme.ProEt.topology Z) (Scheme.ProEt.topology Y) (Scheme.ProEt.topology X)).hom
+  infer_instance
 
 end LowerStarComp
 

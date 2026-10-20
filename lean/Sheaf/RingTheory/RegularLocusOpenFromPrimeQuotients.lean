@@ -18,7 +18,7 @@ import Mathlib.RingTheory.Ideal.Maps
 import Mathlib.RingTheory.Localization.Basic
 import Mathlib.RingTheory.Localization.Submodule
 import WeilConjectures.Mathlib.RingTheory.Spectrum.Prime.Noetherian
-import WeilConjectures.RingTheory.RegularLocalLocalization
+import Sheaf.RingTheory.RegularLocalLocalization
 import WeilConjectures.RingTheory.RegularLocalGeneratorsRegularSequence
 import Sheaf.RingTheory.RegularLocalLiftRegularSequenceQuotient
 import Sheaf.RingTheory.RegularSequencePrincipalNeighbourhood

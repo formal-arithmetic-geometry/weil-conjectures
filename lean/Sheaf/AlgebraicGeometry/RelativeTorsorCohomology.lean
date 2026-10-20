@@ -8,7 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RelativeEtaleCohomology
 public import Sheaf.CategoryTheory.Sites.TorsorWithSection
 public import WeilConjectures.CategoryTheory.Sites.ContractedProductPresentation
-public import WeilConjectures.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
+public import Sheaf.AlgebraicGeometry.EtaleResolutionSectionCanonicalComparison
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 
 import Sheaf.AlgebraicGeometry.RelativeTorsorClassNaturality

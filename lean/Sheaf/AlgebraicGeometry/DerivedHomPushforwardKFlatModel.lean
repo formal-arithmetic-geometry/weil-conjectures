@@ -7,9 +7,9 @@ module
 
 public import Sheaf.Algebra.Homology.KFlat
 public import WeilConjectures.AlgebraicGeometry.TensorPullback
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
-import WeilConjectures.AlgebraicGeometry.DerivedInternalHomPullbackAdjunction
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Homology.DerivedInternalHom
+import Sheaf.AlgebraicGeometry.DerivedInternalHomPullbackAdjunction
 import Sheaf.Algebra.Homology.KFlatPullback
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 

@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-public import WeilConjectures.AlgebraicGeometry.Dimension
+public import Sheaf.AlgebraicGeometry.Dimension
 import WeilConjectures.AlgebraicGeometry.AmpleImmersionAffineBase
 import Sheaf.AlgebraicGeometry.ExistsAmpleOfDimLEOne
 

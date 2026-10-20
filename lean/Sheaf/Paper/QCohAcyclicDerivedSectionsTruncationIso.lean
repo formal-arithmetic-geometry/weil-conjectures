@@ -4,14 +4,14 @@ Released under the Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedSectionPresheaf
+public import Sheaf.AlgebraicGeometry.DerivedSectionPresheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
 
 import Sheaf.Paper.QCohInverseAffineOpenVanishing
-import WeilConjectures.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
+import Sheaf.AlgebraicGeometry.UnboundedDerivedFunctorCohomologicalBound
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory

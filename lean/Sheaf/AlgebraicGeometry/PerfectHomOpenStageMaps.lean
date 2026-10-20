@@ -1,9 +1,9 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectHomPushPullCocone
-public import WeilConjectures.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
-import WeilConjectures.AlgebraicGeometry.PerfectHomOpenRestrictedData
-import WeilConjectures.AlgebraicGeometry.DerivedAdjoint
+public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
+public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
+import Sheaf.AlgebraicGeometry.PerfectHomOpenRestrictedData
+import Sheaf.AlgebraicGeometry.DerivedAdjoint
 
 @[expose] public section
 universe u w

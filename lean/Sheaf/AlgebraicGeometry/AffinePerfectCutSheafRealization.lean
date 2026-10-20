@@ -5,7 +5,7 @@ Authors: SHEAF group C9
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
+public import Sheaf.AlgebraicGeometry.AffinePerfectModuleModel
 public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import WeilConjectures.Algebra.Homology.RingTensorCohomology
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure

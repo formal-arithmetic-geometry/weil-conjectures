@@ -16,15 +16,15 @@ public import WeilConjectures.CategoryTheory.Monoidal.Instances.DerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteDualityMaps
 public import Mathlib.CategoryTheory.Triangulated.Functor
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftLeft
-import WeilConjectures.Algebra.Homology.DerivedInternalHomShiftRight
+import Sheaf.Algebra.Homology.DerivedInternalHomShiftLeft
+import Sheaf.Algebra.Homology.DerivedInternalHomShiftRight
 import WeilConjectures.Algebra.Homology.HomComplex
-import WeilConjectures.Algebra.Homology.HomComplexMappingCone
-import WeilConjectures.Algebra.Homology.HomTensorTotal
+import Sheaf.Algebra.Homology.HomComplexMappingCone
+import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
-import WeilConjectures.Algebra.Homology.QuasiIsoHomComplexMap
+import Sheaf.Algebra.Homology.KInjectiveRestrictLocalized
+import Sheaf.Algebra.Homology.QuasiIsoHomComplexMap
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.InternalHom
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients

@@ -8,8 +8,8 @@ module
 public import Sheaf.CategoryTheory.RingedKoszulSystem
 import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
 import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
-import WeilConjectures.Algebra.Homology.HomComplexUnitEvaluationNaturality
-import WeilConjectures.Algebra.Homology.HomTensorTotal
+import Sheaf.Algebra.Homology.HomComplexUnitEvaluationNaturality
+import Sheaf.Algebra.Homology.HomTensorTotal
 import Sheaf.Algebra.Homology.KInjectiveHomComplex
 import Sheaf.CategoryTheory.RingedExtendedCech
 import Sheaf.Paper.RingedLocalizationRHomCalculus

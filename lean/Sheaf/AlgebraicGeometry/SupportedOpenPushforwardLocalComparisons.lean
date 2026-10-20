@@ -1,10 +1,10 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.PerfectComplex
-public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
+public import Sheaf.AlgebraicGeometry.PerfectComplex
+public import Sheaf.AlgebraicGeometry.SchemeDerivedDirectImage
 import WeilConjectures.Algebra.Homology.OpenRestrictionAdjunctionExact
 import WeilConjectures.Algebra.Homology.ModuleExtensionByZeroStalkOutside
-import WeilConjectures.AlgebraicGeometry.SupportedDerivedRestrictionZero
+import Sheaf.AlgebraicGeometry.SupportedDerivedRestrictionZero
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionMaps
 import Mathlib.CategoryTheory.Adjunction.Triple
 import Mathlib.Algebra.Category.Grp.Zero
@@ -13,7 +13,7 @@ import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Additi
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.FullyFaithful
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.MapDerivedCategory
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageOpenRestriction
+import Sheaf.AlgebraicGeometry.DerivedDirectImageOpenRestriction
 
 @[expose] public section
 set_option autoImplicit false

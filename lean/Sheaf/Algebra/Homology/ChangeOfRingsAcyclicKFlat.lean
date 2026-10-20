@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
 public import Sheaf.Algebra.Homology.KFlat
 import Sheaf.Algebra.Homology.AcyclicKFlatTensor
-import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorAcyclic
+import Sheaf.Algebra.Homology.ChangeOfRingsTensorAcyclic
 
 /-!
 # Extension of scalars of acyclic K-flat complexes

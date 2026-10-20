@@ -7,6 +7,7 @@ Authors: Bin Wu
 module
 
 public import Mathlib.AlgebraicGeometry.Limits
+import Mathlib.AlgebraicGeometry.PullbackCarrier
 
 /-!
 # Constant group schemes and their points
@@ -82,7 +83,75 @@ theorem exists_constantGroupSchemeMultiplication :
             (constantGroupSchemeIncl T E ij.2 ≫ constantGroupSchemeProjection T E) ≫
             constantGroupSchemeIncl T E (ij.1 + ij.2)) ∧
       m ≫ constantGroupSchemeProjection T E = constantGroupSchemeSquareProjection T E :=
-  sorry
+  by
+    classical
+    let C := Scheme.Pullback.openCoverOfLeftRight
+      (sigmaOpenCover (fun _ : E => T)) (sigmaOpenCover (fun _ : E => T))
+      (constantGroupSchemeProjection T E) (constantGroupSchemeProjection T E)
+    have hVdisj (e d : E) (h : e ≠ d) :
+        Disjoint (constantGroupSchemeComponent T E e)
+          (constantGroupSchemeComponent T E d) := by
+      rw [Set.disjoint_left]
+      rintro x ⟨a, ha⟩ ⟨b, hb⟩
+      have he := (sigmaι_eq_iff (fun _ : E => T) e d a b).mp (ha.trans hb.symm)
+      exact h (congrArg Sigma.fst he)
+    have hWdisj (ij ij' : E × E) (h : ij ≠ ij') :
+        Disjoint (constantGroupSchemePairComponent T E ij.1 ij.2)
+          (constantGroupSchemePairComponent T E ij'.1 ij'.2) := by
+      rw [Set.disjoint_left]
+      intro x hx hy
+      by_cases h1 : ij.1 = ij'.1
+      · have h2 : ij.2 ≠ ij'.2 := fun h2 ↦ h (Prod.ext h1 h2)
+        exact Set.disjoint_left.mp (hVdisj _ _ h2) hx.2 hy.2
+      · exact Set.disjoint_left.mp (hVdisj _ _ h1) hx.1 hy.1
+    have hRange (ij : E × E) :
+        Set.range (C.f ij) = constantGroupSchemePairComponent T E ij.1 ij.2 := by
+      dsimp only [C]
+      rw [Scheme.Pullback.openCoverOfLeftRight_f]
+      refine (Scheme.Pullback.range_map
+        (f := (sigmaOpenCover (fun _ : E => T)).f ij.1 ≫
+          constantGroupSchemeProjection T E)
+        (g := (sigmaOpenCover (fun _ : E => T)).f ij.2 ≫
+          constantGroupSchemeProjection T E)
+        (constantGroupSchemeProjection T E) (constantGroupSchemeProjection T E)
+        ((sigmaOpenCover (fun _ : E => T)).f ij.1)
+        ((sigmaOpenCover (fun _ : E => T)).f ij.2) (𝟙 T)
+        (Category.comp_id _) (Category.comp_id _)).trans ?_
+      rfl
+    let f := fun ij : E × E ↦ C.f ij ≫ constantGroupSchemeSquareProjection T E ≫
+      constantGroupSchemeIncl T E (ij.1 + ij.2)
+    have hf : ∀ ij ij', pullback.fst (C.f ij) (C.f ij') ≫ f ij =
+        pullback.snd (C.f ij) (C.f ij') ≫ f ij' := by
+      intro ij ij'
+      by_cases h : ij = ij'
+      · subst ij'
+        dsimp [f]
+        simp only [← Category.assoc, pullback.condition]
+      · have : IsEmpty ↥(pullback (C.f ij) (C.f ij')) :=
+          Scheme.isEmpty_pullback (C.f ij) (C.f ij')
+            (by rw [hRange ij, hRange ij']; exact hWdisj _ _ h)
+        exact (isInitialOfIsEmpty).hom_ext _ _
+    let m := C.glueMorphisms f hf
+    have hm (ij : E × E) : C.f ij ≫ m = f ij := C.ι_glueMorphisms f hf ij
+    have hC (ij : E × E) :
+        C.f ij ≫ constantGroupSchemeSquareProjection T E =
+          pullback.fst (constantGroupSchemeIncl T E ij.1 ≫
+            constantGroupSchemeProjection T E)
+            (constantGroupSchemeIncl T E ij.2 ≫
+              constantGroupSchemeProjection T E) := by
+      simp [C, constantGroupSchemeSquareProjection,
+        Scheme.Pullback.openCoverOfLeftRight_f, constantGroupSchemeIncl,
+        constantGroupSchemeProjection]
+      rfl
+    refine ⟨m, ?_, ?_⟩
+    · intro ij
+      rw [hm]
+      dsimp [f]
+      rw [← Category.assoc, hC]
+    · apply C.hom_ext
+      intro ij
+      rw [← Category.assoc, hm]
+      simp [f, constantGroupSchemeIncl, constantGroupSchemeProjection]
 
 /-- (blueprint: def-weil-pbc-constant-group-scheme) Multiplication maps the pair component
 indexed by `(e,e')` to the component indexed by `e + e'` (Stacks, Tag 03YW). -/

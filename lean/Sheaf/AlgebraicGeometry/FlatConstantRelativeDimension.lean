@@ -10,7 +10,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Flat
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.Fiber
 public import WeilConjectures.Mathlib.Topology.KrullDimension
-import WeilConjectures.AlgebraicGeometry.Dimension
+import Sheaf.AlgebraicGeometry.Dimension
 import Sheaf.AlgebraicGeometry.FibreStalkQuotient
 import WeilConjectures.Topology.DimensionSupremumLocalDimensions
 import Mathlib.RingTheory.Ideal.KrullsHeightTheorem

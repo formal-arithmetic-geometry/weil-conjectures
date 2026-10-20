@@ -5,12 +5,12 @@ Authors: SHEAF group G3
 -/
 module
 
-public import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+public import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 public import Mathlib.Algebra.Homology.ShortComplex.HomologicalComplex
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Sheaf.Algebra.Homology.FilteredComplexQuotientImageComparison
 import Sheaf.Algebra.Homology.FilteredComplexRepresentativeEpis
-import WeilConjectures.CategoryTheory.FilteredComplexBoundariesLECycles
+import Sheaf.CategoryTheory.FilteredComplexBoundariesLECycles
 import Sheaf.CategoryTheory.FilteredQuotientMapRestrictions
 
 /-!

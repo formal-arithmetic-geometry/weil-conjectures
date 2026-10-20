@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedPresentation
 import Sheaf.AlgebraicGeometry.SquareZeroTensorGradedQuotientMultiply
-import WeilConjectures.AlgebraicGeometry.SquareZeroTensorSectionProductComparison
+import Sheaf.AlgebraicGeometry.SquareZeroTensorSectionProductComparison
 
 /-! # Homogeneous sections and their product in a graded presentation
 

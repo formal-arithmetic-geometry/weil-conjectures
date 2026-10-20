@@ -9,7 +9,7 @@ public import Sheaf.Paper.DerivedHomMayerVietoris
 public import Mathlib.AlgebraicGeometry.Modules.Sheaf
 public import WeilConjectures.Topology.InverseImageModule
 public import Sheaf.Algebra.Homology.KFlat
-import WeilConjectures.AlgebraicGeometry.InverseImageTensorPullbackComparison
+import Sheaf.AlgebraicGeometry.InverseImageTensorPullbackComparison
 
 /-! # Exact inverse image and K-flat resolutions
 

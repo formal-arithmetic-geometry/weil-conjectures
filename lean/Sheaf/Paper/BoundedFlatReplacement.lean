@@ -12,7 +12,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 public import Mathlib.Data.ZMod.Basic
-import WeilConjectures.Algebra.Homology.CyclePullbackResolution
+import Sheaf.Algebra.Homology.CyclePullbackResolution
 import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
 import WeilConjectures.CategoryTheory.Abelian.Flat.Basic
 import Mathlib.Algebra.Category.ModuleCat.Presheaf.Free

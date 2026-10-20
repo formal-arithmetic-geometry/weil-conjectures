@@ -5,7 +5,7 @@ Authors: SHEAF group NA
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
+public import Sheaf.AlgebraicGeometry.DerivedCategories
 public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
 public import Mathlib.CategoryTheory.Limits.Preserves.Shapes.Products
 import WeilConjectures.SixFunctors.Etale.Derived.Hom

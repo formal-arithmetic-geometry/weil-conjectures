@@ -6,8 +6,8 @@ Authors: SHEAF group C3
 module
 
 public import Sheaf.Paper.EtaleCETotalSections
-public import WeilConjectures.CategoryTheory.SecondFiltrationRowCycleComparison
-import WeilConjectures.CategoryTheory.SecondFiltrationRowGradedCycles
+public import Sheaf.CategoryTheory.SecondFiltrationRowCycleComparison
+import Sheaf.CategoryTheory.SecondFiltrationRowGradedCycles
 
 /-! # Canonical comparisons for the cycles of CE rows
 

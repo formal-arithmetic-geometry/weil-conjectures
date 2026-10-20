@@ -7,9 +7,9 @@ module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
-public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
-import WeilConjectures.CategoryTheory.FilteredQuotientPageMaps
-import WeilConjectures.CategoryTheory.FilteredComplexNormalizedHomology
+public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
+import Sheaf.CategoryTheory.FilteredQuotientPageMaps
+import Sheaf.CategoryTheory.FilteredComplexNormalizedHomology
 import Sheaf.CategoryTheory.FilteredQuotientHomologyNaturality
 
 /-!

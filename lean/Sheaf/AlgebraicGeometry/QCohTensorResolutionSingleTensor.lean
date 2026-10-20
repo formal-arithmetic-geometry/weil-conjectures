@@ -1,5 +1,5 @@
 module
-public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionRestrictionTensor
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionRestrictionTensor
 
 @[expose] public section
 universe u

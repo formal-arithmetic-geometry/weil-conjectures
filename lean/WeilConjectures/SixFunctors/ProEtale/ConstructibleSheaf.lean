@@ -11,6 +11,9 @@ public import WeilConjectures.Mathlib.CategoryTheory.Sites.ConstantSheaf
 public import WeilConjectures.SixFunctors.ProEtale.Comparison
 public import WeilConjectures.SixFunctors.ProEtale.Comparison.LowerStarAcyclic
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
+public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.GlobalSections
+import Sheaf.Paper.ProEtaleFiniteLocalConstancyReflection
+import Sheaf.Paper.ProEtaleStratifiedCounit
 
 /-!
 
@@ -182,8 +185,23 @@ theorem isConstructible_iff_exists_isConstructibleSheaf_iso_comparisonUpperStar_
     IsConstructible Λ F ↔
       ∃ G : Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} Λ), Scheme.IsConstructibleSheaf G ∧
         Nonempty ((ν^*(T)[ModuleCat.{u + 1} Λ]).obj G ≅ F) := by
-  refine ⟨fun _ ↦ sorry, fun ⟨G, hG, ⟨e⟩⟩ ↦ ?_⟩
-  exact isConstructible_of_iso e (isConstructible_comparisonUpperStar_obj G)
+  constructor
+  · rintro ⟨S, hS⟩
+    have hε := isIso_comparison_counit_of_finite_stratification Λ S F hS
+    let G := (ν_*(T)[ModuleCat.{u + 1} Λ]).obj F
+    let e : (ν^*(T)[ModuleCat.{u + 1} Λ]).obj G ≅ F :=
+      asIso ((comparisonAdjunction (ModuleCat.{u + 1} Λ) T).counit.app F)
+    have hG : Scheme.IsConstructibleSheaf G := by
+      constructor
+      refine ⟨S, fun i ↦ ?_⟩
+      let eS := ((comparisonUpperStarCompUpperStarIso
+        (ModuleCat.{u + 1} Λ) (S.immersion i)).app G).symm ≪≫
+          ((S.immersion i)^*[ModuleCat.{u + 1} Λ]).mapIso e
+      exact isFiniteLocallyConstantSheaf_of_comparison_finite_models Λ _
+        (isFiniteLocallyConstant_of_iso eS.symm (hS i))
+    exact ⟨G, hG, ⟨e⟩⟩
+  · rintro ⟨G, hG, ⟨e⟩⟩
+    exact isConstructible_of_iso e (isConstructible_comparisonUpperStar_obj G)
 
 variable (Λ) in
 /-- A constructible pro-étale sheaf is `ν^*` of a constructible étale sheaf

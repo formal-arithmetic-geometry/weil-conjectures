@@ -8,10 +8,13 @@ module
 public import Sheaf.AlgebraicGeometry.MeromorphicDenominatorIdeal
 public import WeilConjectures.AlgebraicGeometry.Modules.Dual
 public import Mathlib.RingTheory.Lasker
-public import WeilConjectures.AlgebraicGeometry.Coherent
+public import Sheaf.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.Cohomology.EulerChar
 public import WeilConjectures.AlgebraicGeometry.IdealModuleProductStalk
+import Sheaf.AlgebraicGeometry.CoherentFiniteTypeLocallyNoetherian
+import Sheaf.AlgebraicGeometry.CoherentKernelCokernelLocallyNoetherian
 import WeilConjectures.AlgebraicGeometry.Modules.FiniteLocallyFreeTensorExact
+import Sheaf.AlgebraicGeometry.Modules.IdealTimesQuasiCoherentAffineSections
 import Sheaf.AlgebraicGeometry.NowhereDenseDimensionDrop
 import Sheaf.RingTheory.HilbertAffineDenominatorModule
 import WeilConjectures.AlgebraicGeometry.Cohomology.LongExact

@@ -1,7 +1,7 @@
 module
 
-public import WeilConjectures.AlgebraicGeometry.DerivedCategory
-public import WeilConjectures.Algebra.Homology.DerivedInternalHom
+public import Sheaf.AlgebraicGeometry.DerivedCategory
+public import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
 
 

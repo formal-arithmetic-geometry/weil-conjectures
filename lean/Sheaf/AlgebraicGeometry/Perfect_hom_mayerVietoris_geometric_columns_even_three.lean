@@ -6,13 +6,13 @@ Authors: SHEAF group A4
 module
 
 public import Mathlib.Algebra.Category.Grp.Colimits
-public import WeilConjectures.AlgebraicGeometry.PerfectHomPushPullCocone
-public import WeilConjectures.AlgebraicGeometry.PerfectHomMayerVietorisDiagram
-public import WeilConjectures.AlgebraicGeometry.PerfectHomLocalComparison
-public import WeilConjectures.AlgebraicGeometry.PerfectHomTriangleRow
+public import Sheaf.AlgebraicGeometry.PerfectHomPushPullCocone
+public import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisDiagram
+public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
+public import Sheaf.AlgebraicGeometry.PerfectHomTriangleRow
 import Mathlib.Algebra.Category.Grp.FilteredColimits
 import Mathlib.CategoryTheory.Limits.Types.Filtered
-import WeilConjectures.AlgebraicGeometry.PerfectHomOpenColimitLocalComparison
+import Sheaf.AlgebraicGeometry.PerfectHomOpenColimitLocalComparison
 
 /-! # Local comparisons for the outer columns of geometric triangle diagrams
 

@@ -87,7 +87,7 @@ open Scheme
 
 /-- A morphism smooth of relative dimension `1` is smooth, hence flat and locally of finite
 presentation, as `AlgebraicGeometry.picardFunctorInvertibleDirectImage` requires. -/
-local instance {X Y : Scheme.{u}} (f : X ⟶ Y) [SmoothOfRelativeDimension 1 f] : Smooth f :=
+local instance Representability_smoothOfSmoothOfRelativeDimension {X Y : Scheme.{u}} (f : X ⟶ Y) [SmoothOfRelativeDimension 1 f] : Smooth f :=
   SmoothOfRelativeDimension.smooth 1 f
 
 variable {k : Type u} [Field k] {X : Scheme.{u}}

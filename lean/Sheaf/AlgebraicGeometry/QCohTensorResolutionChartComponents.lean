@@ -1,7 +1,7 @@
 module
 public import Sheaf.AlgebraicGeometry.QCohTensorResolutionChartModel
-public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionAugmentationComponents
-public import WeilConjectures.AlgebraicGeometry.QCohTensorResolutionSemilinearTensor
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionAugmentationComponents
+public import Sheaf.AlgebraicGeometry.QCohTensorResolutionSemilinearTensor
 
 @[expose] public section
 universe u

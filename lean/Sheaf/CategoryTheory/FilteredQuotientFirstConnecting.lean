@@ -6,11 +6,11 @@ Authors: SHEAF group C3
 module
 
 public import Mathlib.Algebra.Homology.HomologySequence
-public import WeilConjectures.CategoryTheory.FilteredComplexPageDifferential
+public import Sheaf.CategoryTheory.FilteredComplexPageDifferential
 public import Mathlib.CategoryTheory.ObjectProperty.FullSubcategory
 import Mathlib.CategoryTheory.Abelian.DiagramLemmas.KernelCokernelComp
-import WeilConjectures.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
-import WeilConjectures.Algebra.Homology.FilteredComplexSubquotients
+import Sheaf.CategoryTheory.FilteredComplexDifferentialRepresentativesCover
+import Sheaf.Algebra.Homology.FilteredComplexSubquotients
 /-!
 # The first quotient-page differential as a connecting map
 

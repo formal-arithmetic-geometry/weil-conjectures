@@ -7,7 +7,7 @@ public import WeilConjectures.AlgebraicGeometry.HypercoverCohomologyColimit
 public import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
 public import Mathlib.CategoryTheory.Abelian.Injective.Resolution
 public import WeilConjectures.Mathlib.Algebra.Homology.TotalComplex
-import WeilConjectures.Algebra.Homology.FirstQuadrantAugmentation
+import Sheaf.Algebra.Homology.FirstQuadrantAugmentation
 
 /-! # An explicit injective-resolution comparison for hypercover sections
 

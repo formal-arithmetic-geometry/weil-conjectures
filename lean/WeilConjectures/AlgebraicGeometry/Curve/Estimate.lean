@@ -11,6 +11,9 @@ public import Mathlib.FieldTheory.IsAlgClosed.Basic
 public import WeilConjectures.AlgebraicGeometry.Curve
 public import WeilConjectures.AlgebraicGeometry.Curve.CohomologicalDimension
 public import WeilConjectures.AlgebraicGeometry.Curve.RiemannRoch
+public import WeilConjectures.AlgebraicGeometry.Sites.Kummer
+import WeilConjectures.AlgebraicGeometry.Curve.Kummer
+import WeilConjectures.AlgebraicGeometry.Sites.GmPicard
 
 /-!
 # The curve estimate
