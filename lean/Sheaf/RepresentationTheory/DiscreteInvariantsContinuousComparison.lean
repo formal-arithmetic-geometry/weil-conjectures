@@ -9,7 +9,7 @@ public import Mathlib.RepresentationTheory.Invariants
 public import Mathlib.RepresentationTheory.Homological.ContCohomology.Basic
 public import Mathlib.CategoryTheory.Abelian.RightDerived
 public import Mathlib.Algebra.Category.Grp.AB
-import Sheaf.RepresentationTheory.DiscreteResolutionContinuousCohomology
+import WeilConjectures.RepresentationTheory.DiscreteResolutionContinuousCohomology
 import WeilConjectures.RepresentationTheory.ContinuousCohomologyCoefficientEquiv
 
 /-!
@@ -91,8 +91,8 @@ theorem nonempty_equiv_rightDerived_continuousCohomology
             (E.functor.obj F).obj.ρ g ((E.functor.obj F).obj.ρ h x)
           simp [map_mul] }
   let M : TopRep.{max u s} ℤ G := TopRep.of ρ
-  obtain ⟨a⟩ := nonempty_equiv_invariantResolution_continuousCohomology
-    G A E F I M (LinearEquiv.refl ℤ _) (fun _ _ ↦ rfl) q
+  let a := (invariantResolutionHomologyAddEquivContinuousCohomology
+    G A E F I M (LinearEquiv.refl ℤ _) (fun _ _ ↦ rfl) q).toEquiv
   let b := (continuousCohomologyAddEquivOfCoefficients G M N e he q).toEquiv
   let c := (I.isoRightDerivedObj Γ q) ≪≫
     (HomologicalComplex.homologyFunctor AddCommGrpCat (ComplexShape.up ℕ) q).mapIso
