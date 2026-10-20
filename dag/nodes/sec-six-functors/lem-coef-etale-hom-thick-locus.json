@@ -15,128 +15,36 @@
  ],
  "proof": [
   {
-   "text": "Work on the small étale site, in a universe containing its objects and module sheaves; write $A,B$ also for the constant ring sheaves. By [lem-pur-derived-change-of-rings], $F=-\\otimes_A^L B$ exists on the ordinary unbounded derived categories. Give it the counit-compatible shift $\\sigma$ of [lem-sbc-derived-scalar-extension-counit-shift]; that result makes $(F,\\sigma)$ exact and identifies $\\sigma$ with the degreewise identity on termwise scalar extension of K-flat models. The identity geometric morphism with ring map $A\\to B$ satisfies the hypotheses of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Its tensor comparison, inverted, gives $\\mu_{U,V}:FU\\otimes_B^L FV\\xrightarrow{\\sim}F(U\\otimes_A^L V)$. On flat-term K-flat models its formula is $(x\\otimes b)\\otimes(y\\otimes c)\\mapsto(x\\otimes y)\\otimes bc$. Scalar coefficients have degree zero; this formula preserves both tensor degrees and every sign in the total differential. Hence it commutes with the tensor shift maps, including the simultaneous-shift cancellation used in Step 4. These statements concern derived scalar extension and require no flatness of $B$ over $A$.",
+   "text": "Use the unique canonical tensor comparison of [lem-coef-etale-tensor-model-comparison]. Define the Hom comparison by transposing F of evaluation after that comparison. Naturality of the parametrized tensor-Hom adjunction counit and binary tensor comparison proves naturality in both K and M, by injectivity of the Hom bijection.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-sbc-derived-scalar-extension-counit-shift",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pc-tensor-complex-sheaves"
+    "lem-coef-etale-tensor-model-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY (lemma-derived-base-change), 07A4 (lemma-pullback-tensor-product); derived.tex Tags 05SU and 05SE for the counit-compatible exact shift"
-   }
+   "elementary": false
   },
   {
-   "text": "For either coefficient sheaf $R=A,B$, the internal-Hom calculus [lem-weil-pbc-ringed-internal-hom-exact-restriction] and [lem-pur-rhom-global-sections] give natural bijections\n$$\\operatorname{Hom}(T,H_R(K,N))=H^0 H_R(T,H_R(K,N))=H^0 H_R(T\\otimes_R^L K,N)=\\operatorname{Hom}(T\\otimes_R^L K,N).$$\nHere $H^0$ means global hypercohomology. Their representative normalization is the chain currying of [lem-sc-derived-hom-tensor-total]: if $P$ represents $K$, $I$ is K-injective representing $N$, and $h:T\\to\\mathcal Hom^\\bullet(P,I)$ with $T,P$ flat-term K-flat, uncurrying is $t\\otimes p\\mapsto h(t)(p)$. The Hom into $I$ computes the specified derived Hom [def-pur-derived-internal-hom]. This fixes evaluation $e_{R,K,N}$ as the transpose of its identity. With $H=H_A(K,M)$, define $v_K=v_{K,M}$ by\n$$e_{B,FK,FM}(v_K\\otimes1)=F(e_{A,K,M})\\mu_{H,K}.$$\nThis is exactly the map in the item. The Hom calculus also says $H_R(-,N)$ is contravariantly exact, with its signed shift comparisons. Thus $\\Phi(K)=FH_A(K,M)$ and $\\Psi(K)=H_B(FK,FM)$ are additive contravariant exact functors, using the exact $F$ of Step 1.",
+   "text": "Apply [lem-coef-etale-hom-transpose-exact] to the constructed transformation and its evaluation equation. This supplies the normalized reversed exactness structures and compatibility with their shifts.",
    "uses": [
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-pur-rhom-global-sections",
-    "lem-sc-derived-hom-tensor-total",
-    "def-pur-derived-internal-hom"
+    "lem-coef-etale-hom-transpose-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JA (lemma-section-RHom-over-U), 08J9 (lemma-internal-hom), 08JC (lemma-RHom-triangulated); chain currying is lemma-compose"
-   }
+   "elementary": false
   },
   {
-   "text": "Let $f:K'\\to K$. The two maps $v_{K'}F(H_A(f,1))$ and $H_B(Ff,1)v_K$ from $FH_A(K,M)$ to $H_B(FK',FM)$ have the same transpose: after $\\mu$, both are $F(e_{A,K,M}\\circ(1\\otimes f))$. This follows by inserting the defining evaluation identity from Step 2 and the naturality of $\\mu$. The bijection of Step 2 therefore makes these maps equal. Thus $v:\\Phi\\to\\Psi$ is natural on every derived morphism in $K$. The same argument for $g:M\\to M'$ gives transpose $F(g\\circ e_{A,K,M})$ on both sides and proves naturality in $M$ as well. This uses adjunction bijections in the full derived categories, not representatives of arbitrary derived arrows by chain maps.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 1 (specified evaluation transpose) and final paragraph (uniqueness of transpose) expanded"
-   }
-  },
-  {
-   "text": "Here is the evaluation shift sign, for $R=A$ or $B$. Choose a flat-term K-flat $P$ representing $K$ by [lem-pc-kflat-resolution], and a K-injective $I$ representing $N$ by [prop-pur-kinjective-resolutions-exist]. Put $D=\\mathcal Hom^\\bullet(P,I)$, representing $H_R(K,N)$ by [def-pur-derived-internal-hom]. Substitution in $d(f)=d_I f-(-1)^a f d_P$ [def-pur-hom-complex] shows that\n$$s_R:H_R(K[1],N)\\longrightarrow H_R(K,N)[-1]$$\nis represented by $f\\mapsto(-1)^a f$ in Hom degree $a$ (with source indices reindexed). The coefficients of the postcomposition and precomposition terms are respectively $(-1)^{a+1}$ and $-1$ on both sides of the chain-map equation. Define the natural cancellation $\\tau_{U,V}:U[-1]\\otimes^L V[1]\\to U\\otimes^L V$ by $u\\otimes v\\mapsto(-1)^a u\\otimes v$ when $u$ has degree $a$ in $U[-1]$. The total tensor differential [def-pc-tensor-complex-sheaves] verifies this chain isomorphism: both sides give coefficients $(-1)^a$ on $d_Uu\\otimes v$ and $-1$ on $u\\otimes d_Vv$. To check evaluation, resolve $D$ by a flat-term K-flat $T\\xrightarrow{h}D$. The model $T[-1]\\to\\mathcal Hom^\\bullet(P[1],I)$ is $s_R^{-1}h[-1]$. Its evaluation on $t\\otimes p$ has sign $(-1)^a$, exactly the sign from $\\tau$ followed by the original evaluation. Using the normalized currying of Step 2 gives\n$$e_{R,K[1],N}=e_{R,K,N}\\,\\tau_{H_R(K,N),K}(s_R\\otimes1).$$\nThis is an equality of maps in $D(R)$; the tensor models descend by [lem-weil-pbc-site-derived-tensor-descent].",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A8X (section-hom-complexes), Hom differential; Tags 08J9 and 08JC, explicit evaluation/shift calculation; Tag 06YL (flat resolutions)"
-   }
-  },
-  {
-   "text": "Write $s_A=s_{A,K,M}$, and give $\\Phi$ the shift comparison $\\chi_\\Phi:\\Phi(K[1])\\to\\Phi(K)[-1]$ obtained by $F(s_A)$ then $\\sigma$ for shift $-1$. Give $\\Psi$ the comparison $\\chi_\\Psi:\\Psi(K[1])\\to\\Psi(K)[-1]$ obtained by precomposition with $\\sigma_K^{-1}:FK[1]\\to F(K[1])$ and then $s_{B,FK,FM}$. We prove\n$$\\chi_\\Psi v_{K[1]}=v_K[-1]\\chi_\\Phi.$$\nPut $T=\\Phi(K[1])$, $H=H_A(K,M)$. Compose either proposed map $T\\to H_B(FK,FM)[-1]$ with $s_B^{-1}$ and transpose; injectivity of Step 2 reduces equality to maps $T\\otimes_B^L FK[1]\\to FM$. For the left side its transpose is\n$$F(e_{A,K[1],M})\\mu_{H_A(K[1],M),K[1]}(1\\otimes\\sigma_K^{-1}).$$\nFor the right side Step 4, naturality of $\\tau$, and the defining equation for $v_K$ give\n$$F(e_{A,K,M})\\mu_{H,K}\\tau_{FH,FK}(\\chi_\\Phi\\otimes1).$$\nThese expressions coincide: substitute Step 4's equality for $e_{A,K[1],M}$ into the first, and use the degree-preserving tensor/shift equality proved in Step 1. Thus the shift square commutes for this actual comparison. Iterating it gives positive shifts; applying its inverse at $K[-1]$ gives negative shifts, and induction gives all integers. The canonical iterated shift identifications therefore preserve this equality.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC, the evaluation-normalized shift square expanded by tensor–Hom transposition"
-   }
-  },
-  {
-   "text": "For a distinguished triangle $K_1\\xrightarrow u K_2\\xrightarrow v K_3\\xrightarrow w K_1[1]$, Step 2 gives the two reversed distinguished triangles. Naturality from Step 3 supplies their squares for $u$ and $v$. To see the last square explicitly, put $a=w[-1]:K_3[-1]\\to K_1$. Write $\\chi_{\\Phi,-1}$ and $\\chi_{\\Psi,-1}$ for the Step-5 comparisons on $K_3[-1]$. The last arrows are $d_\\Phi=\\epsilon\\chi_{\\Phi,-1}\\Phi(a)$ and $d_\\Psi=\\epsilon\\chi_{\\Psi,-1}\\Psi(a)$, where $\\epsilon$ is the common reversal sign fixed by the contravariant distinguished-triangle convention. Additivity, naturality for $a$, and the shift square give\n$$d_\\Psi v_{K_1}=\\epsilon\\chi_{\\Psi,-1}v_{K_3[-1]}\\Phi(a)=v_{K_3}[1]\\,\\epsilon\\chi_{\\Phi,-1}\\Phi(a)=v_{K_3}[1]d_\\Phi.$$\nThus all three squares, with their specified signs, commute. This is the required morphism of reversed distinguished triangles in the sense of [def-weil-triangulated-category]. Both exact functors here use the same Hom/shift convention; the equation retains its reversal sign rather than discarding it.",
-   "uses": [
-    "def-weil-triangulated-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated); derived.tex Tag 0145, last square in a triangle morphism"
-   }
-  },
-  {
-   "text": "Fix $M$ and let $\\mathcal S_M=\\{K:v_K\\text{ is invertible}\\}$. Exact additive functors take zero to zero, so $v_0$ is invertible. If $f:K\\xrightarrow{\\sim}L$, naturality says $\\Psi(f)v_L=v_K\\Phi(f)$; both functorial images of $f$ are invertible, so membership in $\\mathcal S_M$ is invariant under isomorphisms. Step 5 conjugates $v_{K[n]}$ to $v_K[-n]$ by invertible shift comparisons. Hence $K\\in\\mathcal S_M$ if and only if $K[n]\\in\\mathcal S_M$, for all $n\\in\\mathbf Z$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 2, localization reduction: zero, isomorphism and shift closure expanded"
-   }
-  },
-  {
-   "text": "Apply [lem-sf-triangle-morphism-iso] to the morphism of distinguished triangles of Step 6. If two of $v_{K_3},v_{K_2},v_{K_1}$ are invertible, so is the third. Consequently any two vertices of a distinguished triangle in $\\mathcal S_M$ force the third into $\\mathcal S_M$. In particular the cone of every morphism between its objects lies in it. No finite-Tor, constructibility or boundedness condition has been used.",
+   "text": "An exact functor preserves zero, hence its comparison is invertible at zero. Naturality conjugates components along isomorphisms. The shift square conjugates shifted components by the invertible shift comparisons. Apply the triangle two-out-of-three theorem to the induced morphism of distinguished triangles. Finally a retract diagram of objects yields a retract diagram of the corresponding arrows; an arrow retract of an isomorphism is invertible. These are all five clauses of the stated thick isomorphism locus.",
    "uses": [
     "lem-sf-triangle-morphism-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 014A, lemma-third-isomorphism-triangle"
-   }
-  },
-  {
-   "text": "Let $i:K\\to L$ and $r:L\\to K$ satisfy $ri=1_K$, and suppose $v_L$ is invertible. Define\n$$b_K=\\Phi(i)\\,v_L^{-1}\\Psi(r):\\Psi(K)\\to\\Phi(K).$$\nContravariant naturality gives $\\Psi(r)v_K=v_L\\Phi(r)$ and $v_K\\Phi(i)=\\Psi(i)v_L$. Thus\n$$b_Kv_K=\\Phi(i)\\Phi(r)=\\Phi(ri)=1,\\qquad v_Kb_K=\\Psi(i)\\Psi(r)=\\Psi(ri)=1.$$\nSo the locus is closed under retracts and hence under direct summands. Additivity and naturality for biproduct inclusions and projections identify $v_{K\\oplus L}$ with the diagonal matrix $(v_K,v_L)$, with inverse the corresponding diagonal inverses; hence it is also closed under finite sums. Together with Steps 7 and 8 these are exactly the stated thick-subcategory closure properties. Only existing retract maps are used, so no idempotent-completeness assumption is required.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-    "place": "Proof paragraph 2, localization reduction: explicit inverse on retracts and finite biproducts"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-weil-triangulated-category",
-  "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-rhom-global-sections",
-  "lem-sbc-derived-scalar-extension-counit-shift",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-sf-triangle-morphism-iso",
-  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-coef-etale-hom-transpose-exact",
+  "lem-coef-etale-tensor-model-comparison",
+  "lem-sf-triangle-morphism-iso"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/thm-coef-finite-hom.md",
-  "place": "Proof paragraph 2: expansion of the sentence “Exactness in the first argument now proves it for K”, using Stacks 06YY, 07A4, 08JA, 08J9, 08JC and 014A; signed shift/evaluation calculation supplied here."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JC and 014A; actual parametrized tensor-Hom adjunction and Mathlib triangulated/retract API"
  },
  "mathlib_searches": [
   {
@@ -298,20 +206,6 @@
   "module": "Sheaf.SixFunctors.EtaleHomThickLocus",
   "declaration": "AlgebraicGeometry.Etale.etaleHomComparison_thickLocus",
   "declarations": [
-   "AlgebraicGeometry.Etale.EtaleHomLeft",
-   "AlgebraicGeometry.Etale.EtaleHomRight",
-   "AlgebraicGeometry.Etale.EtaleHomTensorComparison",
-   "AlgebraicGeometry.Etale.EtaleHomTensorModelNormalization",
-   "AlgebraicGeometry.Etale.IsEtaleHomTensorCanonical",
-   "AlgebraicGeometry.Etale.etaleHomTensorComparison_existsUnique",
-   "AlgebraicGeometry.Etale.etaleHomTensorComparison",
-   "AlgebraicGeometry.Etale.IsEtaleHomTranspose",
-   "AlgebraicGeometry.Etale.IsEtaleHomNaturalInM",
-   "AlgebraicGeometry.Etale.etaleHomTensorShiftCancellation",
-   "AlgebraicGeometry.Etale.EtaleHomShiftNormalization",
-   "AlgebraicGeometry.Etale.etaleHomScalarCommShift",
-   "AlgebraicGeometry.Etale.IsEtaleHomReversedExact",
-   "AlgebraicGeometry.Etale.IsEtaleHomThickIsoLocus",
    "AlgebraicGeometry.Etale.etaleHomComparison_thickLocus"
   ],
   "file": "lean/Sheaf/SixFunctors/EtaleHomThickLocus.lean",
@@ -320,7 +214,17 @@
   "by": "NC",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Repair of 7371b3deb8b2: the comparison uses the uniquely chosen etaleHomTensorComparison, natural in both variables and fixed by the flat-term K-flat counit equation for the ordinary adjunction-mate tensorator. The scalar shift is the canonical mate of exact restriction. The Hom shifts are normalized by evaluation and the signed derived tensor cancellation, with the explicit factor ((n * (n + 1)) / 2).negOnePow for both coefficient Hom functors (reviewer fix: the delivered multiplicative n.negOnePow is right at n = 1, as the opposite triangulated cone convention requires, but violates the CommShift addition axiom because the tensor cancellations satisfy c(a+b) = (-1)^(a*b) c(a) c(b); the quadratic factor is Mathlib's Cochain.leftShift sign by -n and satisfies both). The chosen chiPhi and chiPsi are constrained to the stated composites of these shifts; with those same structures both functors are IsTriangulated and v has NatTrans.CommShift. The general internal-Hom dependency record is restored unchanged, and the item imports the published Etale.derivedHom directly. All helper declarations belong to this node construction, are listed, and have source/blueprint docstrings.",
+  "note": "Interface declarations moved verbatim to EtaleHomComparisonModels and publicly reexported. The transpose Hom-object spelling is changed only by definitional equality. The main proof constructs the natural comparison and proves its thick locus, using the separate normalized reversed-exactness lemma.",
   "fixed_by": "NT-stage2-cc-6ce2b6e27"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b84be",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261020T230801-L-612184",
+  "kind": "interface",
+  "note": "independent cc review: Delivered modules and 2 direct importers compiled clean; 14 moved decls + item theorem type hashes published vs delivered all equal; old/new EtaleHomTensorModelNormalization proved Iff.rfl; etaleHomTensorShiftCancellation raw Expr equal modulo hygienic/aux-proof names; axioms clean except sorryAx via the one new sorry etaleHomComparison_reversedExact (= item's exactness conjunct, v pinned by transpose)"
  }
 }

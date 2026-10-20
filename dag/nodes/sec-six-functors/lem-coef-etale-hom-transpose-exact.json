@@ -1,0 +1,140 @@
+{
+ "id": "lem-coef-etale-hom-transpose-exact",
+ "kind": "statement",
+ "title": "Reversed exactness of the specified étale Hom transpose",
+ "statement": "Let X,A→B,F and the canonical binary tensor comparison be as in [lem-coef-etale-tensor-model-comparison]. For any M in D(X_et,A), let v:F RHom_A(-,M)→RHom_B(F(-),FM) be a natural transformation satisfying the evaluation-transpose equation IsEtaleHomTranspose. Then v satisfies IsEtaleHomReversedExact: both contravariant Hom functors have coherent evaluation-normalized shifts with factor (-1)^(n(n+1)/2), the composite source and target shifts are precisely the specified scalar/Hom shifts, both functors are triangulated with these structures, and v commutes with those shifts. This concerns only exactness of an already given v, not its construction or its thick isomorphism locus.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JA, 08J9 and 08JC: Hom model, evaluation and contravariant exactness"
+ },
+ "stmt_deps": [
+  "lem-coef-etale-tensor-model-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Use a K-injective model I of M and flat-term K-flat representatives P of K. For the Hom differential d(f)=d_I f-(-1)^j f d_P, source reindexing by -n with factor (-1)^(n*j+n*(n+1)/2) in degree j is a chain isomorphism. Its evaluation transpose is the specified signed tensor-shift cancellation. The identity epsilon(a+b)=(-1)^(a*b)epsilon(a)epsilon(b) cancels tensor-shift interchange, giving coherent CommShift structures for both coefficient Hom functors.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-hom-complex",
+    "def-pur-derived-internal-hom",
+    "lem-sc-derived-hom-tensor-total"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Hom of a cone is the reversed cone, with the negative connecting projection; therefore the same normalized shifts are triangulated. The published internal Hom is identified with this Hom model by the normalized tensor-Hom adjunction. Derived scalar extension is triangulated with the adjoint-mate scalar shift. Compose these structures; their components are the two formulas for chiPhi and chiPsi in IsEtaleHomReversedExact.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sbc-derived-scalar-extension-counit-shift",
+    "lem-pur-rhom-global-sections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose the shift square for v using its given evaluation equation. Both transposes are evaluation after ordinary scalar balancing; the normalized binary comparison identifies them on flat-term K-flat models, with coefficients in degree zero and no new sign. Naturality and localization extend equality to every derived object. Injectivity of the tensor-Hom bijection proves the shift square, including the reversed connecting arrow.",
+   "uses": [
+    "lem-coef-etale-tensor-model-comparison",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-derived-internal-hom",
+  "def-pur-hom-complex",
+  "lem-coef-etale-tensor-model-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-pur-rhom-global-sections",
+  "lem-sbc-derived-scalar-extension-counit-shift",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JA, 08J9 and 08JC: Hom model, evaluation and contravariant exactness"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Evaluation-defined scalar extension comparison of derived internal Hom commutes with opposite triangulated shifts with signed tensor cancellation",
+   "results": "Mathlib.CategoryTheory.Shift.ShiftedHomOpposite and Triangulated.Opposite provide opposite-shift and shifted-Hom formulas; none supplies the normalized first-variable derived internal Hom or the signed scalar comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation-defined scalar extension comparison of derived internal Hom commutes with opposite triangulated shifts with signed tensor cancellation",
+   "results": "Generic shifted adjunctions and mapping cones, but no normalized contravariant internal Hom comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ParametrizedAdjunction\", \"CommShift\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom.*(exact|[Tt]riangulated)|internalHom.*[Cc]ommShift",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleHomThickLocus",
+  "date": "2026-10-21",
+  "group": "K2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraph 2: “Exactness in the first argument now proves it for K”, signed exactness part",
+   "via": [
+    "lem-coef-etale-hom-thick-locus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleHomTransposeExact",
+  "file": "lean/Sheaf/SixFunctors/EtaleHomTransposeExact.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleHomComparison_reversedExact",
+  "statement": "theorem etaleHomComparison_reversedExact\n    {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    (X : Scheme.{u}) (φ : A →+* B) (M : DerivedCategoryModule A X)\n    (v : EtaleHomLeft X φ M ⟶ EtaleHomRight X φ M)\n    (hv : IsEtaleHomTranspose X φ M v) : IsEtaleHomReversedExact X φ M v",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b84be",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261020T230801-L-612184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b84be",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261020T230801-L-612184",
+  "kind": "interface",
+  "note": "independent cc review: Delivered modules and 2 direct importers compiled clean; 14 moved decls + item theorem type hashes published vs delivered all equal; old/new EtaleHomTensorModelNormalization proved Iff.rfl; etaleHomTensorShiftCancellation raw Expr equal modulo hygienic/aux-proof names; axioms clean except sorryAx via the one new sorry etaleHomComparison_reversedExact (= item's exactness conjunct, v pinned by transpose)"
+ }
+}

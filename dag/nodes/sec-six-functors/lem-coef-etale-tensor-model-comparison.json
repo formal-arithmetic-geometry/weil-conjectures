@@ -1,0 +1,143 @@
+{
+ "id": "lem-coef-etale-tensor-model-comparison",
+ "kind": "statement",
+ "title": "Unique flat-model normalization of the étale scalar tensor comparison",
+ "statement": "Let X be a scheme, A→B any map of commutative rings, E the sheafified ordinary extension of constant coefficients on the small étale site, and F the published chosen left adjoint to exact derived restriction. The ordinary oplax structure of E is the adjoint mate of the fixed lax restriction structure. Let rP be the fixed scalarExtensionRepresentative counit. There exists a unique natural family μ(K,L):FK tensor_B^L FL≅F(K tensor_A^L L) whose inverse satisfies the cochain counit equation of EtaleHomTensorModelNormalization on every pair of flat-term K-flat complexes. No flatness of B over A is required. The accompanying interface definitions fix the evaluation transpose, naturality, signed Hom shifts and exactness predicates used by the parent statement.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4: scalar adjunction, scalar tensor compatibility and K-flat models"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-pur-derived-internal-hom",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-triangulated-category",
+  "lem-derived-right-exact-tensor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Ordinary scalar extension preserves flat objects: test at geometric stalks, commute stalks with extension, and use flat base change of modules. It preserves K-flat quasi-isomorphisms: after faithful exact restriction it is tensoring with the coefficient sheaf, which sends acyclic K-flat complexes to acyclic complexes.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Give E the ordinary adjoint-mate oplax structure. Sheafified strong monoidal extension supplies the compatible strong monoidal structure. Identify the chosen F with LE by uniqueness of left adjoints to exact restriction. The cochain counit formula identifies its transported derived counit with the fixed rP.",
+   "uses": [
+    "lem-derived-adjoint-cochain-counit"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the general right exact normalized binary comparison theorem to E, F and this isomorphism. Its naturality equations and flat-model normalization are definitionally the three clauses of IsEtaleHomTensorCanonical.",
+   "uses": [
+    "lem-derived-right-exact-tensor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-derived-adjoint-cochain-counit",
+  "lem-derived-right-exact-tensor-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4: scalar adjunction, scalar tensor compatibility and K-flat models"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For any map of commutative rings, derived extension of scalars of etale sheaves has a unique binary tensor isomorphism normalized on flat term K-flat cochain complexes by the ordinary scalar balancing map",
+   "results": "TensorProduct.AlgebraTensorModule.distribBaseChange in Mathlib.LinearAlgebra.TensorProduct.Tower and ordinary ModuleCat extension/restriction adjunctions. No derived sheaf comparison or K-flat counit normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived extension of scalars along an arbitrary coefficient ring map has a unique binary tensor comparison normalized on K-flat resolutions",
+   "results": "Flat base change and module tensor lemmas, but no such chosen derived scalar comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerivedTensorComparison\"",
+   "results": "No Mathlib hits; the adopted source exact-functor construction needs the generalization above.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedTensorComparison|tensorComparisonDescent",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleHomThickLocus",
+  "date": "2026-10-21",
+  "group": "K2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraph 2: ordinary derived extension and tensor balancing used in the evaluation transpose",
+   "via": [
+    "lem-coef-etale-hom-thick-locus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleHomComparisonModels",
+  "file": "lean/Sheaf/SixFunctors/EtaleHomComparisonModels.lean",
+  "declaration": "AlgebraicGeometry.Etale.etaleHomTensorComparison_existsUnique",
+  "statement": "theorem etaleHomTensorComparison_existsUnique (X : Scheme.{u}) (φ : A →+* B) :\n    ∃! μ : EtaleHomTensorComparison X φ, IsEtaleHomTensorCanonical X φ μ",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Etale.EtaleHomLeft",
+   "AlgebraicGeometry.Etale.EtaleHomRight",
+   "AlgebraicGeometry.Etale.EtaleHomTensorComparison",
+   "AlgebraicGeometry.Etale.EtaleHomTensorModelNormalization",
+   "AlgebraicGeometry.Etale.IsEtaleHomTensorCanonical",
+   "AlgebraicGeometry.Etale.etaleHomTensorComparison_existsUnique",
+   "AlgebraicGeometry.Etale.etaleHomTensorComparison",
+   "AlgebraicGeometry.Etale.IsEtaleHomTranspose",
+   "AlgebraicGeometry.Etale.IsEtaleHomNaturalInM",
+   "AlgebraicGeometry.Etale.etaleHomTensorShiftCancellation",
+   "AlgebraicGeometry.Etale.EtaleHomShiftNormalization",
+   "AlgebraicGeometry.Etale.etaleHomScalarCommShift",
+   "AlgebraicGeometry.Etale.IsEtaleHomReversedExact",
+   "AlgebraicGeometry.Etale.IsEtaleHomThickIsoLocus"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b84be",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261020T230801-L-612184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b84be",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261020T230801-L-612184",
+  "kind": "interface",
+  "note": "independent cc review: Delivered modules and 2 direct importers compiled clean; 14 moved decls + item theorem type hashes published vs delivered all equal; old/new EtaleHomTensorModelNormalization proved Iff.rfl; etaleHomTensorShiftCancellation raw Expr equal modulo hygienic/aux-proof names; axioms clean except sorryAx via the one new sorry etaleHomComparison_reversedExact (= item's exactness conjunct, v pinned by transpose)"
+ }
+}

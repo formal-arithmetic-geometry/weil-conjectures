@@ -1,0 +1,114 @@
+{
+ "id": "lem-derived-adjoint-cochain-counit",
+ "kind": "statement",
+ "title": "The chosen derived-adjunction counit on cochain representatives",
+ "statement": "Let C and D be Grothendieck abelian categories in the chosen common successor hom universe. Assume C is braided closed monoidal with additive tensor and functorial flat resolutions. Let E:C→D and U:D→C be additive adjoint functors, with U exact and E preserving quasi-isomorphisms between K-flat complexes. Write LE for the total left derived functor, b:LE⊣D(U) for the derived adjunction identified with exact restriction, and ad:L⊣D(U) for any chosen left adjoint. Let e:L≅LE be the uniqueness isomorphism. On a cochain complex P put dP=LE(qP inverse) followed by the left-derived counit and then q(EP), where q is the quotient-to-homotopy comparison. Then e at QP followed by dP is the transpose under ad of Q applied to the ordinary cochain unit followed by the inverse exact-functor localization comparison. Thus the chosen left adjoint has the same cochain counit.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, derived scalar adjunction; formal localization and adjunction unit/counit identities"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Apply the homotopy derived-unit identity derivedη_fac_app and identify the right derived functor with the levelwise exact U. The resulting identity says that the derived unit followed by U of the homotopy counit is the ordinary homotopy unit followed by the exact localization comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Use naturality of q for the ordinary unit and of the derived unit for qP. Cancel the isomorphisms qP and the exact-functor comparison. This gives the same unit identity for dP on cochains, with both q factors explicitly retained.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply ad.homEquiv. The unit identity defining the uniqueness isomorphism e replaces the unit of ad by that of b, so the cochain identity just proved identifies both transposes. Injectivity of homEquiv proves the displayed counit formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, derived scalar adjunction; formal localization and adjunction unit/counit identities"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The counit of a total left derived functor transported to a chosen left adjoint agrees on cochain representatives with the transpose of the ordinary unit",
+   "results": "Mathlib.CategoryTheory.Functor.Derived.LeftDerived.totalLeftDerivedCounit and Mathlib.CategoryTheory.Functor.Derived.Adjunction derived_unit/derived_counit give the abstract counit and unit; none states the chosen-adjunction cochain equation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The counit of a total left derived functor transported to a chosen left adjoint agrees on cochain representatives with the transpose of the ordinary unit",
+   "results": "derived_counit, derived_unit, derivedη_fac_app and totalLeftDerivedCounit are available; none states the chosen-adjunction cochain equation.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"derivedη_fac_app\"",
+   "results": "derivedη_fac_app and its reassociated form concern homotopy representatives; the proof uses them and passes to cochains.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftAdjointUniq.*[Cc]ounit|derived.*[Cc]ochain.*[Cc]ounit",
+   "results": "Only general left-adjoint uniqueness counit identities; no cochain normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleHomThickLocus",
+  "date": "2026-10-21",
+  "group": "K2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraph 2: scalar extension and its fixed adjunction on representatives",
+   "via": [
+    "lem-coef-etale-hom-thick-locus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedAdjointCochainCounit",
+  "file": "lean/Sheaf/CategoryTheory/DerivedAdjointCochainCounit.lean",
+  "declaration": "CategoryTheory.Adjunction.leftDerivedCochainCounit",
+  "statement": "theorem Adjunction.leftDerivedCochainCounit {L : DerivedCategory C ⥤ DerivedCategory D}\n    (adj : E ⊣ U) (ad : L ⊣ U.mapDerivedCategory) (X : CochainComplex C ℤ) :\n    let b := adj.derivedAdjunction.ofNatIsoRight U.rightDerivedFunctorIsoMapDerivedCategory\n    let e := ad.leftAdjointUniq b\n    let q₀ := (DerivedCategory.quotientCompQhIso C).app X\n    let q₁ := (DerivedCategory.quotientCompQhIso D).app\n      ((E.mapHomologicalComplex (.up ℤ)).obj X)\n    let ε := E.leftDerivedFunctorCounit.app ((HomotopyCategory.quotient _ (.up ℤ)).obj X)\n    e.hom.app (DerivedCategory.Q.obj X) ≫\n        E.leftDerivedFunctor.map q₀.inv ≫ ε ≫ q₁.hom =\n      (ad.homEquiv _ _).symm\n        (DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app X) ≫\n          U.mapDerivedCategoryFactors.inv.app ((E.mapHomologicalComplex (.up ℤ)).obj X))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b84be",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261020T230801-L-612184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b84be",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261020T230801-L-612184",
+  "kind": "interface",
+  "note": "independent cc review: Delivered modules and 2 direct importers compiled clean; 14 moved decls + item theorem type hashes published vs delivered all equal; old/new EtaleHomTensorModelNormalization proved Iff.rfl; etaleHomTensorShiftCancellation raw Expr equal modulo hygienic/aux-proof names; axioms clean except sorryAx via the one new sorry etaleHomComparison_reversedExact (= item's exactness conjunct, v pinned by transpose)"
+ }
+}

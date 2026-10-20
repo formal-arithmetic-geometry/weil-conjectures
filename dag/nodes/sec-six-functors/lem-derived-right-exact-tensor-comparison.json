@@ -1,0 +1,124 @@
+{
+ "id": "lem-derived-right-exact-tensor-comparison",
+ "kind": "statement",
+ "title": "Normalized tensor comparison for a right exact strong monoidal functor",
+ "statement": "Let C,D be braided closed monoidal Grothendieck abelian categories with additive tensor and functorial flat resolutions. Let E:C→D be additive, strong monoidal, left adjoint, preserving flat objects and quasi-isomorphisms between K-flat complexes. Let LE:D(C)→D(D) be its total left derived functor. Given G≅LE, transport the left-derived cochain counit dP along this isomorphism to rP. There exists a unique family μ(K,L):GK tensor GL≅G(K tensor L), natural in each variable, for which G(μ_Q(P,Q)) followed by r(P tensor Q) and Q of the ordinary oplax tensorator equals μ(QP,QQ) inverse followed by rP tensor rQ and the target μ_Q, whenever P,Q are flat-term K-flat cochain complexes. Here μ_Q is the fixed localization tensorator; no exactness of E is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; formal two-variable derived universal property and flat models"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Choose the class of homotopy complexes that are both K-flat and whose E-image is K-flat. A functorial flat resolution is in this class because E preserves flat objects and is a left adjoint, hence preserves the colimits in its construction. These models give a left derivability structure.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Derive the two bifunctors E(P tensor Q) and EP tensor EQ on pairs of these models. Their counits are respectively LE of the source localization tensorator followed by the E counit, and the two E counits followed by the target tensorator. K-flatness makes both invertible there. Derive the ordinary oplax tensorator using leftDerived₂NatTrans. Since E is strong monoidal its derived comparison is an isomorphism, with the required homotopy counit equation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Express the cochain localization tensorator as the homotopy tensorator conjugated by qP,qQ,q(P tensor Q). Naturality of q for the ordinary oplax tensorator and naturality of the derived comparison convert the homotopy equation into the cochain equation. Conjugate the comparison along G≅LE to obtain μ.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Every derived object has a flat-term K-flat representative with K-flat E-image by the same flat resolution. On two such representatives rP,rQ and the target tensorator are invertible, so the counit equation determines μ inverse by cancellation. Naturality transports the equality along isomorphisms from these representatives to arbitrary objects, proving uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY and 07A4; formal two-variable derived universal property and flat models"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A strong monoidal left adjoint preserving flat objects has a uniquely normalized tensor comparison on its total left derived functor computed on K-flat cochain representatives",
+   "results": "Mathlib.CategoryTheory.Monoidal.Multifunctor Monoidal.ofBifunctor, Monoidal.commTensorLeft, and frobeniusMorphism concern ordinary monoidal functors. No unbounded derived binary comparison or flat-model normalization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A strong monoidal left adjoint preserving flat objects has a uniquely normalized tensor comparison on its total left derived functor computed on K-flat cochain representatives",
+   "results": "Tor, Tor prime and exact derived-category factorization lemmas; no unbounded binary normalized comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLeftDerivedFunctor₂\", \"IsIso\"",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerived.*[Tt]ensor.*[Cc]omparison|[Tt]ensor.*[Cc]omparison.*[Cc]ounit",
+   "results": "No hits in Mathlib. The adopted source comparison assumes the ordinary functor exact; the proof generalizes its derivability argument.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.EtaleHomThickLocus",
+  "date": "2026-10-21",
+  "group": "K2"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-coef-finite-hom",
+   "place": "Proof paragraph 2: the scalar/tensor comparison needed to define the Hom transpose",
+   "via": [
+    "lem-coef-etale-hom-thick-locus"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.DerivedTensorRightExact",
+  "file": "lean/Sheaf/CategoryTheory/DerivedTensorRightExact.lean",
+  "declaration": "CategoryTheory.Functor.rightExact_tensorComparison_existsUnique",
+  "statement": "theorem rightExact_tensorComparison_existsUnique\n    (F : C ⥤ D) [F.Additive] [F.PreservesKFlatQuasiIso]\n    [F.PreservesFlat] [F.IsLeftAdjoint] [F.Monoidal]\n    (G : DerivedCategory C ⥤ DerivedCategory D) (e : G ≅ F.leftDerivedFunctor)\n    (r : ∀ P : CochainComplex C ℤ,\n      G.obj ((DerivedCategory.Q (C := C)).obj P) ⟶\n        (DerivedCategory.Q (C := D)).obj ((F.mapHomologicalComplex (.up ℤ)).obj P))\n    (hr : ∀ P, r P = e.hom.app (DerivedCategory.Q.obj P) ≫ F.rightExact_cochainCounit P) :\n    ∃! μ : ∀ K L : DerivedCategory C,\n      ((curriedTensor (DerivedCategory D)).obj (G.obj K)).obj (G.obj L) ≅\n        G.obj (((curriedTensor (DerivedCategory C)).obj K).obj L),\n      (∀ {K K'} (f : K ⟶ K') L,\n        ((curriedTensor (DerivedCategory D)).map (G.map f)).app (G.obj L) ≫ (μ K' L).hom =\n          (μ K L).hom ≫ G.map (((curriedTensor (DerivedCategory C)).map f).app L)) ∧\n      (∀ K {L L'} (f : L ⟶ L'),\n        ((curriedTensor (DerivedCategory D)).obj (G.obj K)).map (G.map f) ≫ (μ K L').hom =\n          (μ K L).hom ≫ G.map (((curriedTensor (DerivedCategory C)).obj K).map f)) ∧\n      rightExactTensorModelNormalization F G r μ",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.Functor.rightExact_cochainCounit",
+   "CategoryTheory.Functor.rightExactTensorModelNormalization",
+   "CategoryTheory.Functor.rightExact_tensorComparison_existsUnique"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b84be",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261020T230801-L-612184",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-b84be",
+  "group": "K2",
+  "result": "fix",
+  "landing": "20261020T230801-L-612184",
+  "kind": "interface",
+  "note": "independent cc review: Delivered modules and 2 direct importers compiled clean; 14 moved decls + item theorem type hashes published vs delivered all equal; old/new EtaleHomTensorModelNormalization proved Iff.rfl; etaleHomTensorShiftCancellation raw Expr equal modulo hygienic/aux-proof names; axioms clean except sorryAx via the one new sorry etaleHomComparison_reversedExact (= item's exactness conjunct, v pinned by transpose)"
+ }
+}
