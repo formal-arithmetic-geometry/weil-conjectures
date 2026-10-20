@@ -1,8 +1,8 @@
 # Work queue
 
-88 items; claim with `tools/claim.py next <group> [--stage N]`.
+85 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (25 clusters, 2112 modules)
+## Rework: quarantined by the upstream sync (24 clusters, 2111 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -20,17 +20,16 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.StrictLocalDerivedExchangeLeray` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalDerivedExchangeLeray.lean:6:0: error: import Sheaf.AlgebraicGeometry.StrictHenselization failed, environment already c |
 | `Sheaf.AlgebraicGeometry.PicardExternalCoefficientsAcyclic` | 1 |  | error: Sheaf/AlgebraicGeometry/PicardExternalCoefficientsAcyclic.lean:62:15: error(lean.unknownIdentifier): Unknown constant `AlgebraicGeometry.RingedSpace.modu |
 | `Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsoluteAux` | 1 |  | error: Sheaf/AlgebraicGeometry/RingedSpaceTensorPullbackAbsoluteAux.lean:1:0: error: import WeilConjectures.Algebra.Homology.KFlatPullback failed, environment a |
-| `Sheaf.AlgebraicGeometry.KoszulSelfExtConormalComparisonSurjection` | 1 |  | error: Sheaf/AlgebraicGeometry/KoszulSelfExtConormalComparisonSurjection.lean:66:23: error(lean.unknownIdentifier): Unknown constant `SheafOfModules.existsUniqu |
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationFinite` | 1 |  | error: Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationFinite.lean:190:28: error(lean.unknownIdentifier): Unknown identifier `strictHenselization |
 | `Sheaf.AlgebraicGeometry.Morphisms.StrictHenselRootNormalizationGenericEtale` | 1 |  | error: Sheaf/AlgebraicGeometry/Morphisms/StrictHenselRootNormalizationGenericEtale.lean:136:4: error(lean.unknownIdentifier): Unknown identifier `strictHenseliz |
 | `Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarExtCupInverseImage.lean:26:23: error(lean.unknownIdentifier): Unknown identifier `Field` | | Note: A public declaration `Fi |
-| `Sheaf.Algebra.Homology.AffineTildeCoefficientPushforwardHomologyCoordinates` | 1 |  | error: Sheaf/Algebra/Homology/AffineTildeCoefficientPushforwardHomologyCoordinates.lean:31:25: error(lean.synthInstanceFailed): failed to synthesize instance of |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryDescentRepresentative` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryDescentRepresentative.lean:51:10: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange` | 1 |  | error: Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison fail |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarHomCompositeFormula` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarHomCompositeFormula.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors fa |
 | `Sheaf.Algebra.Homology.AffinePushforwardCohomologyEdgeIdentity` | 1 |  | error: Sheaf/Algebra/Homology/AffinePushforwardCohomologyEdgeIdentity.lean:5:0: error: import Sheaf.AlgebraicGeometry.AffineDerivedCohomologyPresentation failed |
+| `Sheaf.AlgebraicGeometry.AffinePerfectTensorRoof` | 1 |  | error: Sheaf/AlgebraicGeometry/AffinePerfectTensorRoof.lean:146:10: error(lean.unknownIdentifier): Unknown constant `CochainComplex.IsAcyclicTensorKFlat` | | No |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors faile |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/BaseChange/SmoothBaseChange.lean:1:0: error: import Sheaf.SixFunctors.ProEtale.BaseChange.Smooth |
 
