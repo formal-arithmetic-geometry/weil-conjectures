@@ -25,7 +25,7 @@
    }
   },
   {
-   "text": "Index by every object $U$ of the chosen small skeleton of $\\mathcal A$ [def-weil-pbc-proetale-site]. Put $h_U=(\\operatorname{Hom}_{\\mathcal A}(-,U))^\\#$ using [def-weil-pbc-sheafification]. The canonical map $e:\\coprod_U h_U\\to1$ is epic: if $a,b:1\\to F$ agree after $e$, they agree after every $h_U\\to1$ and hence after the unit $\\operatorname{Hom}(-,U)\\to h_U$. Evaluating those equal composites at $\\operatorname{id}_U$ gives $a_U(*)=b_U(*)$. This holds for every $U$, so $a=b$ as natural transformations [def-weil-pbc-sites-and-cohomology]. This proves the required representable-cover assertion directly, without subcanonicity or a cover of a non-affine terminal scheme.",
+   "text": "Index by all affine weakly etale objects using a universe lift. The coproduct of their sheafified representables maps epimorphically to the terminal sheaf. Indeed, for parallel maps a,b from the terminal sheaf agreeing after that map, precompose with each coproduct injection. For a section x of the terminal presheaf at U, the Yoneda bijection and the sheafification adjunction give a map h_U to the terminal sheaf corresponding to x. Uniqueness of maps to the terminal sheaf identifies this map with the restriction of the coproduct map. Applying the adjunction and Yoneda bijections to its equal composites with a,b shows a_U(x)=b_U(x). Thus a=b. No subcanonicity is needed.",
    "uses": [
     "def-weil-pbc-proetale-site",
     "def-weil-pbc-sheafification",
@@ -38,14 +38,13 @@
    }
   },
   {
-   "text": "Fix $U\\in\\mathcal A$. For a cospan $V\\to T\\leftarrow W$ in $\\mathcal A/U$, form $P=V\\times_TW$ as a scheme [def-pc-fibre-product]. Since $V,T,W$ are affine [def-pc-scheme], choose spectrum presentations; their arrows correspond to ring homomorphisms by [def-weil-affine-spectrum]. The formula in [lem-weil-pbc-fibre-product-affine-spectra] identifies $P$ with the spectrum of the corresponding tensor product, so $P$ is affine. The $X$-morphism $V\\to T$ is weakly etale by [lem-trf-weakly-etale-between-objects], since $V\\to X$ and $T\\to X$ are weakly etale. Its base change $P\\to W$ and then its composite $P\\to X$ are weakly etale by [lem-weil-pbc-ind-etale-stability]. Thus $P\\to X$ belongs to $\\mathcal A$; its map to $U$ makes it an object of $\\mathcal A/U$. The scheme universal property gives a unique map from every cone in this full slice category, so it is its pullback. This verifies affine-slice closure itself; no identification with a qcqs slice is used.",
+   "text": "Mathlib already gives finite limits on the small weakly etale category and preservation by its forgetful functor to schemes over X. For any pullback cone whose three diagram objects have affine source, map the cone to schemes and identify its point with the scheme pullback. The latter is affine by the affine fibre-product result [lem-weil-pbc-fibre-product-affine-spectra]; affineness is invariant under this isomorphism. Consequently the full affine subcategory is closed under pullbacks, and its inclusion creates and preserves them. The weakly-etale-between-objects and weakly-etale stability facts are already implemented in the native small-site limit instances, so no separate ring-level stability theorem is needed.",
    "uses": [
     "def-pc-fibre-product",
     "def-pc-scheme",
     "def-weil-affine-spectrum",
     "lem-weil-pbc-fibre-product-affine-spectra",
-    "lem-trf-weakly-etale-between-objects",
-    "lem-weil-pbc-ind-etale-stability"
+    "lem-trf-weakly-etale-between-objects"
    ],
    "elementary": false,
    "source": {
@@ -54,7 +53,7 @@
    }
   },
   {
-   "text": "The identity $U\\to U$ is terminal in $\\mathcal A/U$. Step 3 supplies all pullbacks there. Apply [lem-weil-pbc-finite-limits-from-terminal-pullbacks](1) to obtain finite limits. By [lem-sfb-proetale-affine-subsite-equivalence], the chosen coverings of $\\mathcal A$ are standard finite affine coverings; a covering in the slice has the same underlying family and is therefore finite itself. Taking this family as its own refinement verifies the finite-cover-refinement hypothesis, including the empty covering of the empty scheme. This argument requires only that the objects of $\\mathcal A$ be affine, with no quasi-compactness or separatedness assumption on $X$.",
+   "text": "Pull back the native small pro-etale precoverage to the affine full subcategory, convert it to a pretopology using its base-change and composition instances, and intersect with the finite pretopology. Its underlying precoverage is definitionally the prescribed standard affine precoverage. The pretopology gives isomorphism covers, bind composition and covering pullbacks. Every slice has terminal identity and pullbacks, hence finite limits by [lem-weil-pbc-finite-limits-from-terminal-pullbacks]. For a covering presentation in a slice, its image presieve in the affine category has finite support by definition. Index by this finite support and select one original index for each supported arrow. The selected family has exactly the same image presieve, so is covering, and refines the original family by identities. This handles repeated indices and empty supports without assumptions on X.",
    "uses": [
     "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
     "lem-sfb-proetale-affine-subsite-equivalence"
@@ -91,13 +90,14 @@
   "lem-sfb-site-finitary-slice-enough-points",
   "lem-trf-weakly-etale-between-objects",
   "lem-weil-pbc-fibre-product-affine-spectra",
-  "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
-  "lem-weil-pbc-ind-etale-stability"
+  "lem-weil-pbc-finite-limits-from-terminal-pullbacks"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "G4",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 0992, lemma-points-proetale and proof via Tags 098N, 098W, 00YN and 00YQ"
+  "place": "Tag 0992, lemma-points-proetale, via Tag 098W and Sites criterion-points; Lean implementation uses native Mathlib small-site limits and finite pretopologies."
  },
  "mathlib_searches": [
   {
@@ -277,7 +277,6 @@
   "def-weil-affine-spectrum",
   "lem-weil-pbc-fibre-product-affine-spectra",
   "lem-trf-weakly-etale-between-objects",
-  "lem-weil-pbc-ind-etale-stability",
   "lem-weil-pbc-finite-limits-from-terminal-pullbacks",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-sites-and-cohomology",
@@ -309,5 +308,15 @@
   "by": "Q13",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G4",
+  "result": "pass",
+  "landing": "20261020T162305-L-3587202",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
