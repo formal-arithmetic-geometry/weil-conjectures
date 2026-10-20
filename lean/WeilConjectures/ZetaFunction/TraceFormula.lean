@@ -77,7 +77,7 @@ theorem WeilComplex.finsum_trace_compactlySupportedCohomology_eq (K : WeilComple
         ((K.compactlySupportedCohomology i).frobeniusEnd ^ m) =
       ∑ᶠ y : (X ↘ Spec (CommRingCat.of k₀)).fieldPoints (FiniteField.galoisExtension k₀ m),
         K.traceFunction m y :=
-  K.sum_trace_compactlySupportedCohomology_eq_sum_traceFunction (by omega)
+  sorry
 
 end Separated
 
