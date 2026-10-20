@@ -1,8 +1,8 @@
 # Work queue
 
-96 items; claim with `tools/claim.py next <group> [--stage N]`.
+100 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (36 clusters, 2096 modules)
+## Rework: quarantined by the upstream sync (39 clusters, 2096 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -29,6 +29,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.TraceFormula.SimplicialDerivedImageSpectralSequence` | 1 |  | error: Sheaf/TraceFormula/SimplicialDerivedImageSpectralSequence.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment  |
 | `Sheaf.AlgebraicGeometry.StrictLocalDerivedExchangeLeray` | 1 |  | error: Sheaf/AlgebraicGeometry/StrictLocalDerivedExchangeLeray.lean:6:0: error: import Sheaf.AlgebraicGeometry.StrictHenselization failed, environment already c |
 | `Sheaf.Algebra.Homology.FirstQuadrantVerticalConeFiltration` | 1 |  | error: Sheaf/Algebra/Homology/FirstQuadrantVerticalConeFiltration.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains ' |
+| `Sheaf.AlgebraicGeometry.TorsionExchangeFilteredPassage` | 1 |  | error: Sheaf/AlgebraicGeometry/TorsionExchangeFilteredPassage.lean:58:13: error(lean.unknownIdentifier): Unknown constant `AlgebraicGeometry.Scheme.PositiveNat` |
 | `Sheaf.AlgebraicGeometry.RingedSpaceTensorPullbackAbsolute` | 1 |  | error: Sheaf/AlgebraicGeometry/RingedSpaceTensorPullbackAbsolute.lean:56:16: error(lean.unknownIdentifier): Unknown constant `SheafOfModules.changeOfRings` | |  |
 | `Sheaf.AlgebraicGeometry.ScalarExtCupInverseImage` | 1 |  | error: Sheaf/AlgebraicGeometry/ScalarExtCupInverseImage.lean:26:23: error(lean.unknownIdentifier): Unknown identifier `Field` | | Note: A public declaration `Fi |
 | `Sheaf.Algebra.Homology.FilteredHomComplexInvariance` | 1 |  | error: Sheaf/Algebra/Homology/FilteredHomComplexInvariance.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alread |
@@ -40,12 +41,14 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.CoherentFrobeniusPullback` | 1 |  | error: Sheaf/AlgebraicGeometry/CoherentFrobeniusPullback.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleCohomologyExtResolutionNaturality faile |
 | `Sheaf.AlgebraicGeometry.EtaleGenericDirectImageExchange` | 1 |  | error: Sheaf/AlgebraicGeometry/EtaleGenericDirectImageExchange.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.ModuleAbelianCoefficientComparison fail |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarHomCompositeFormula` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarHomCompositeFormula.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors fa |
+| `Sheaf.CategoryTheory.FilteredHomotopySpectralSequence` | 1 |  | error: Sheaf/CategoryTheory/FilteredHomotopySpectralSequence.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alre |
 | `Sheaf.CategoryTheory.SecondFiltrationTwoColumnImage` | 1 |  | error: Sheaf/CategoryTheory/SecondFiltrationTwoColumnImage.lean:6:0: error: import WeilConjectures.CategoryTheory.CanonicalFiltration failed, environment alread |
 | `Sheaf.AlgebraicGeometry.AffinePerfectTensorRoof` | 1 |  | error: Sheaf/AlgebraicGeometry/AffinePerfectTensorRoof.lean:146:10: error(lean.unknownIdentifier): Unknown constant `CochainComplex.IsAcyclicTensorKFlat` | | No |
 | `Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas` | 1 |  | error: Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean:6:0: error: import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors faile |
+| `Sheaf.Paper.FlatFilteredComplexComparison` | 1 |  | error: Sheaf/Paper/FlatFilteredComplexComparison.lean:6:0: error: import Sheaf.CategoryTheory.Filtration failed, environment already contains 'CategoryTheory.De |
 | `Sheaf.UpstreamExtra.WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | 1 |  | error: Sheaf/UpstreamExtra/WeilConjectures/SixFunctors/ProEtale/BaseChange/SmoothBaseChange.lean:1:0: error: import Sheaf.SixFunctors.ProEtale.BaseChange.Smooth |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 152 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 32, stage 3 153 items.
 
 ## Stage 1: nodes to split (0)
 
