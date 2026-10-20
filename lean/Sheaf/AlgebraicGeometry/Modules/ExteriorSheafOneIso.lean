@@ -44,11 +44,9 @@ theorem exteriorSheaf_one_iso {X : Scheme.{u}} (M : X.Modules) :
           M.val.map f
             (exteriorPower.oneEquiv (X.presheaf.obj U) (M.val.obj U)
               (exteriorPower.ιMulti (X.presheaf.obj U) 1 a))
+        erw [(Classical.choose_spec (exteriorSheafRestriction_existsUnique M 1 f)).1 a]
         rw [exteriorPower.oneEquiv_ιMulti]
-        have h := (Classical.choose_spec
-          (exteriorSheafRestriction_existsUnique M 1 f)).1 a
-        exact (congrArg (exteriorPower.oneEquiv (X.presheaf.obj V) (M.val.obj V)) h).trans
-          (exteriorPower.oneEquiv_ιMulti _))
+        exact exteriorPower.oneEquiv_ιMulti _)
   exact ⟨(PresheafOfModules.sheafification (𝟙 X.ringCatSheaf.obj)).mapIso e ≪≫
     asIso (C := SheafOfModules.{u} X.ringCatSheaf)
       ((PresheafOfModules.sheafificationAdjunction (𝟙 X.ringCatSheaf.obj)).counit.app M)⟩
