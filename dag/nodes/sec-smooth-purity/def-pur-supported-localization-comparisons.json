@@ -14,9 +14,50 @@
   "document": "literature/stacks-project/etale-cohomology.tex",
   "place": "Tag 09XP (section-cohomology-support), supported injective restriction construction, and Tag 0F1E (remark-define-kunneth-map); the specified coefficient and product comparisons expand the constructions in lem-pur-supported-product-localization."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Unfold the existing external product to obtain its displayed derived-tensor formula by reflexivity. All canonical tensor and projection-composition comparisons remain the recorded constructions.",
+   "uses": [
+    "def-kun-derived-tensor"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For either restricted factor, the two projection equations are pullback.map_fst and pullback.map_snd. Mathlib Scheme.pullback_map_isOpenImmersion supplies open immersions. Compute the product-support complement using Scheme.Pullback.range_map and complements of intersections of sets.",
+   "uses": [
+    "def-pur-supported-exterior-product"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The complement of the closed intersection is the union of the complements, by Scheme.Pullback.range_fst_comp. Combine this with the product-support formula and inverse images preserving unions to prove both product-intersection identities. For restriction to an open use supportOnOpen_complement and the two projection equations.",
+   "uses": [
+    "lem-pur-support-restriction-triangle"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The open-product inclusion and the inclusion of the cut complement have equal ranges by Scheme.Pullback.range_map. Apply IsOpenImmersion.isoOfRangeEq to construct the isomorphism over the product. Cancel the monic open inclusion to prove uniqueness. The chosen isomorphism satisfies the over equation by its existence specification. Its support identity follows from supportOnOpen_complement, composition of inverse images, and the over equation.",
+   "uses": [
+    "def-pur-supported-exterior-product",
+    "lem-pur-support-restriction-triangle"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For the map between cut complements, transport of an inclusion along an equality of opens followed by morphismRestrict_ι gives the over equation; both factors are open immersions. Restricted intersections follow from the union formula and the supplied complement equalities. Restricted-cut supports follow from supportOnOpen_complement and the over equation. The existing supported-section transports and pullback comparison isomorphisms then give the declared restriction maps and third-term comparisons.",
+   "uses": [
+    "lem-pur-support-restriction-triangle"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-kun-derived-tensor",
+  "def-pur-supported-exterior-product",
+  "lem-pur-support-restriction-triangle"
+ ],
+ "proof_origin": "V2, 2026-10-20: Lean proof from Mathlib pullback ranges and open-immersion uniqueness; elementary set-complement calculations replace the planned affine-chart calculations. Canonical derived comparisons unchanged.",
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -155,5 +196,15 @@
   "group": "Q06",
   "result": "pass",
   "note": "Wrote review.md. Checked immutable statements, dependencies, sources, canonical constructions, boundary signs, universes, edge cases, docstrings and declaration records. All three modules passed per-file scompile.py reproduction without warnings or errors. No repairs or branch changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261020T131204-L-1256044",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
