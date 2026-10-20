@@ -16,102 +16,77 @@
  ],
  "proof": [
   {
-   "text": "First identify the finite coefficient sheaves used by the two constructions. By [lem-weil-l-adic-extension-integers-dvr], $\\mathcal O_E$ is a principal ideal domain, hence Noetherian since every ideal has one generator. Apply [lem-weil-pbc-completed-constant-sheaf-reduction] with $A=\\mathcal O_E$, $I=(\\varpi)$ and $T=X$. It gives the canonical isomorphism $R\\otimes^L_{(\\mathcal O_E)_X}(\\mathcal O_E/\\varpi^n)_X\\cong(\\mathcal O_E/\\varpi^n)_X$. Taking degree-zero cohomology identifies the ordinary tensor, which is the cokernel of multiplication by $\\varpi^n$ on $R$, with $(\\mathcal O_E/\\varpi^n)_X$. Thus $R_n:=R/\\varpi^nR=(\\mathcal O_E/\\varpi^n)_X$, with the actual quotient maps and their transitions. All subsequent tensors of sheaves are over $R$ or $R_n$, not over the discrete constant integral sheaf.",
+   "text": "Choose a good representative P of C by the independent-coefficient K-flat resolution. Transport its exact tensor-right flatness across siteSheafTensorRightIso to obtain the flat-on-site condition in Good.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-completed-constant-sheaf-reduction"
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M, lemma-completion-flat, applied to powers of the uniformizer"
-   }
-  },
-  {
-   "text": "The functor $F_T:M\\mapsto M\\otimes_R T$ on module sheaves is exact: on a cover trivializing $T$ it is identified with the identity, so the kernels and images of the tensored sequence agree locally. Restriction to a slice is exact by [lem-pur-site-restriction-module-adjunction-exact], and a sheaf vanishing on a covering family vanishes. For any countable family $(M_i)$, let $b:(\\prod_iM_i)\\otimes_R T\\to\\prod_i(M_i\\otimes_R T)$ have components $\\mathrm{pr}_i\\otimes1$. Products are sectionwise by [lem-weil-proetale-countable-products-exact], so restricting a product to each trivializing slice gives the product of the restrictions. On that slice, if $e$ generates $T$, the map sends $(m_i)_i\\otimes ae$ to $(am_i\\otimes e)_i$; its inverse sends $(m_i\\otimes e)_i$ to $(m_i)_i\\otimes e$. Thus $b$ is an isomorphism. These are statements about the displayed canonical map, so they do not depend on a generator. The same arguments apply to $T_n$ over $R_n$. In particular $T[0]$ and $T_n[0]$ are K-flat: tensoring any acyclic complex by either sheaf preserves its zero cohomology.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-proetale-countable-products-exact",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10; elementary local rank-one tensor calculation, using sectionwise products"
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1 and Definition 3.5.2; specialization to a locally free rank-one completed coefficient sheaf, as required by thm-sf-dual-perfect.proof.md Step 4"
    }
   },
   {
-   "text": "Choose $P\\to C$ K-flat with flat terms by [lem-pc-kflat-resolution]. Put $P_n=P\\otimes_RR_n$. By [lem-pur-kflat-change-of-rings], $P_n$ is K-flat with flat terms over $R_n$; it represents $C_n$ by [lem-pur-derived-change-of-rings]. Step 2 shows that $T$ and $T_n$ themselves can be used as their K-flat resolutions in [def-pur-integral-derived-operations]. Hence the ordinary tensor is represented by $P\\otimes_RT$, and the completed tensor is represented by $\\operatorname{Cone}(1-s:\\prod_n(P_n\\otimes_{R_n}T_n)\\to\\prod_n(P_n\\otimes_{R_n}T_n))[-1]$. The termwise isomorphism\n$$(P\\otimes_RT)\\otimes_RR_n\\longrightarrow P_n\\otimes_{R_n}T_n,\\qquad (p\\otimes t)\\otimes a\\longmapsto(p\\otimes a)\\otimes(t\\otimes1)$$\nhas inverse $(p\\otimes a)\\otimes(t\\otimes b)\\mapsto(p\\otimes t)\\otimes ab$. Balancing proves that these are inverse, and both commute with differentials and quotient transitions. The same formulas identify the augmentation from $P\\otimes T$ with reduction in each level.",
+   "text": "The specified completion unit is invertible on C by the normalized unit criterion. Naturality along Q(P) isomorphic to C and completionComparison make Q(roosUnit(P)) invertible. The localization quasi-isomorphism criterion makes roosUnit(P) a quasi-isomorphism.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
+    "lem-sf-integral-completion-unit-criterion",
     "def-pur-integral-derived-operations"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 0G7E and 06YY; tensor-balancing formulas for the quotient maps"
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1 and Definition 3.5.2; specialization to a locally free rank-one completed coefficient sheaf, as required by thm-sf-dual-perfect.proof.md Step 4"
    }
   },
   {
-   "text": "Apply [lem-weil-finite-free-completed-scalar-comparison] to the identity extension $E\\subset E$ on $X$ and the given derived-complete $C$. Its last sentence gives that the specific augmentation\n$$\\alpha_P:P\\longrightarrow\\operatorname{Cone}(1-s:\\prod_nP_n\\to\\prod_nP_n)[-1]$$\nwith product component $(P\\to P_n)_n$ and zero shifted-product component is an isomorphism in $D(R)$. The coefficient identification in step 1 identifies its tower with this one. This application uses neither boundedness nor constructibility nor quasi-compactness of $X$. In particular it uses the statement about the canonical map in that cited node, rather than choosing an unspecified lift into a triangulated derived limit.",
+   "text": "Exact line tensor preserves that quasi-isomorphism and the unit-preserving Roos isomorphism identifies its composite with roosUnit(P tensor T[0]). Thus its localization is invertible. Naturality of the completion unit along integralLineRepresentativeIso conjugates this to the asserted ordinary/completed comparison.",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison"
+    "lem-sf-integral-line-roos-tensor",
+    "def-pur-integral-derived-operations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 3.4.12(4), Proposition 3.5.1 and Definition 3.5.2; canonical completion comparison, identity-extension specialization"
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1 and Definition 3.5.2; specialization to a locally free rank-one completed coefficient sheaf, as required by thm-sf-dual-perfect.proof.md Step 4"
    }
   },
   {
-   "text": "Apply the exact functor $F_T$ of step 2 termwise to $\\alpha_P$. It preserves quasi-isomorphisms because it preserves the kernels and images computing cohomology; thus $F_T(\\alpha_P)$ is an isomorphism in $D(R)$. The isomorphism $b$ of step 2 in every cochain degree commutes with $1-s$: its $n$th component is projection followed by tensoring the transition with $1_T$ on either side. Tensoring with $T[0]$ also commutes with the shifted cone, directly from its finite direct sums and the same signed differential. Consequently $F_T$ identifies the target of $F_T(\\alpha_P)$ with $\\operatorname{Cone}(1-s:\\prod_n(P_n\\otimes_RT)\\to\\prod_n(P_n\\otimes_RT))[-1]$. Balancing identifies $P_n\\otimes_RT$ with $P_n\\otimes_{R_n}T_n$ as in step 3. Under this composite, the product component of $F_T(\\alpha_P)$ is precisely the tensor/reduction augmentation and its shifted-product component remains zero. This is exactly the comparison specified in the item, and proves it is an isomorphism. The well-definedness assertion of [lem-pur-integral-operations-well-defined] identifies this cone with the specified completed tensor, independently of resolutions.",
+   "text": "Naturality of the displayed comparison is its natural-transformation naturality. For every good representative, conjugate completionUnit by integralLineRepresentativeIso and apply the defining completionUnit normalization. This proves the precise representative equation.",
    "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "lem-pur-integral-operations-well-defined"
+    "def-pur-integral-derived-operations"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 3.4.10 and Lemma 3.4.12(4); explicit tensor of the functorial reduction-tower cone"
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1 and Definition 3.5.2; specialization to a locally free rank-one completed coefficient sheaf, as required by thm-sf-dual-perfect.proof.md Step 4"
    }
   },
   {
-   "text": "All displayed formulas commute with chain maps of $P$ and with sheaf isomorphisms $T\\to T'$, and the product and cone constructions are functorial in these strictly commuting maps. For a quasi-isomorphism between K-flat resolutions, its cone is acyclic and K-flat; [lem-pur-acyclic-kflat-tensor-arbitrary] shows that ordinary tensor carries it to a quasi-isomorphism. The completed side and its comparison on resolutions descend by [lem-pur-integral-operations-well-defined]. This proves the claimed naturality in $D(R)$. Finally, projecting the cone comparison to level $n$ after the comparison gives exactly $P\\otimes_RT\\to P_n\\otimes_{R_n}T_n$, by its product component. By [lem-pur-sheaf-ring-derived-coefficient-adjunction], its adjoint after derived scalar extension to $R_n$ is represented by $x\\otimes a\\mapsto a\\,\\overline{x}$; this is the isomorphism of step 3. Since the comparison itself is an isomorphism, the adjoint of the tower projection from its target is also an isomorphism, and reducing the comparison gives precisely the ordinary tensor/reduction identification. This verifies the finite-reduction clause with the actual projection maps.",
+   "text": "Apply the general finite total-tensor scalar comparison to P and T[0], obtaining beta with the exact generator formula. The cocone lift-fst equation followed by the product projection gives roosUnit followed by the actual nth Roos projection equal to the recorded augmentation. Compose the representative normalization with the restricted beta and cancel the representative isomorphism. This proves the projection equation without an extra adjunct-identification hypothesis.",
    "uses": [
-    "lem-pur-acyclic-kflat-tensor-arbitrary",
-    "lem-pur-integral-operations-well-defined",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+    "lem-sf-integral-finite-tensor-comparison",
+    "def-pur-integral-derived-operations"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YT and 06YY; Tag 07A6 (lemma-adjoint), specialized to the identity topos and R -> R_n, with derived.tex Tags 0FND and 09T5; finite-reduction augmentation square for the strict cone construction"
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1 and Definition 3.5.2; specialization to a locally free rank-one completed coefficient sheaf, as required by thm-sf-dual-perfect.proof.md Step 4"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-weil-proetale-countable-products-exact",
-  "def-pc-kflat-complex",
   "lem-pc-kflat-resolution",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-sf-integral-completion-unit-criterion",
   "def-pur-integral-derived-operations",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pur-integral-operations-well-defined",
-  "lem-pur-acyclic-kflat-tensor-arbitrary",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+  "lem-sf-integral-line-roos-tensor",
+  "lem-sf-integral-finite-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 3.4.10 and Lemma 3.4.12(4), with Proposition 3.5.1 and Definition 3.5.2; local rank-one tensor argument expanded using existing DAG tools"
+  "place": "Definition 3.4.10, Lemma 3.4.12(4), Proposition 3.5.1 and Definition 3.5.2; compiled H7 reduction into the separate completion-unit, strict line/Roos and finite scalar-tensor results, with categorical normalization and projection proofs."
  },
  "mathlib_searches": [
   {
@@ -315,5 +290,15 @@
   "group": "Q135",
   "result": "pass",
   "note": "Read the node, all 5 statement dependencies and the dependency Lean (IntegralDerivedOperationsOnSlices in full, the IsFiniteLocallyFreeOfRank definition). Every clause matches: completed ring R, derived complete C (IsComplete), T locally free of rank 1 in degree 0, ordinary tensor through the recorded duality model and coefficientTotalTensor, the recorded completedTensor. The comparison is the fixed whiskered completionUnit, with IsIso asserted; naturality in C and in line isomorphisms is stated; the representative clause equals Q.map roosUnit (c,0) for every good P and every e; the finite clause has beta pinned down on generators and uses the actual cone projection. No stronger assumptions; universes t and u independent (checked with pp.universes); edge cases covered. Ten helpers built from existing constructions, one sorry, docstrings with source and blueprint. lean.statement matches the file exactly; only the node's lean field changed. nt_compile: clean in 19.5 s on the rerun (the first run timed out on a dependency under load around 130); axioms propext, sorryAx, Classical.choice, Quot.sound. The second-reading section is the 2026-10-17 placeholder, accepted as in earlier reviews. No findings that block landing."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H7",
+  "result": "pass",
+  "landing": "20261020T211732-L-3495151",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
