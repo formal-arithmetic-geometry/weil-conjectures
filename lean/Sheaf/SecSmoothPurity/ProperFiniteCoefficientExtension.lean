@@ -4,25 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.Paper.PurEtaleScalarMateProjection
-public import Sheaf.AlgebraicGeometry.ProperProjectionFormula
-public import Mathlib.Topology.Defs.Filter
-public import WeilConjectures.AlgebraicGeometry.DerivedCategories
-public import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-public import WeilConjectures.SixFunctors.Etale.Derived.Tensor
-public import Mathlib.AlgebraicGeometry.Noetherian
-public import Mathlib.AlgebraicGeometry.Morphisms.Proper
-public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
-import WeilConjectures.Algebra.Homology.ChangeOfRingsTensorComparison
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.SixFunctors.TensorProjectionAdjunct
-import WeilConjectures.SixFunctors.Etale.Derived.LowerStarProjection
-import WeilConjectures.SixFunctors.Etale.Derived.UpperStarMonoidal.Comparison
+public import Sheaf.SecSmoothPurity.ProperFiniteCoefficientExtensionCore
 
 /-! # Proper finite coefficient extension
 
@@ -103,6 +85,19 @@ theorem properFiniteCoefficientExtension
             (scalarExtension φ X).map
               ((derivedUpperStarLowerStarAdjunction
                 (ModuleCat.{u + 1} R) f).counit.app L))) := by
-  sorry
+  obtain ⟨h₁, h₂⟩ := properFiniteCoefficientExtensionCore φ f
+  refine ⟨h₁, h₂, ?_⟩
+  intro L
+  unfold scalarMate
+  let adjR := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} R) f
+  let adjA := derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f
+  change ((mateEquiv adjR adjA
+    (TwoSquare.mk _ _ _ _ (scalarPullbackIso φ f).hom)).app L) = _
+  apply (adjA.homEquiv
+    ((scalarExtension φ Y).obj (R((f)_*[ModuleCat.{u + 1} R]).obj L))
+    ((scalarExtension φ X).obj L)).symm.injective
+  rw [adjA.homEquiv_counit, Equiv.symm_apply_apply]
+  exact mateEquiv_counit adjR adjA
+    (TwoSquare.mk _ _ _ _ (scalarPullbackIso φ f).hom) L
 
 end AlgebraicGeometry.Etale
