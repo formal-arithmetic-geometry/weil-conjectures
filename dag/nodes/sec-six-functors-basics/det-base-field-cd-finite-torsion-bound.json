@@ -1,0 +1,141 @@
+{
+ "id": "det-base-field-cd-finite-torsion-bound",
+ "kind": "statement",
+ "title": "Finite base field torsion cohomological dimension bound",
+ "statement": "Let $K$ be a finite field. Every torsion abelian sheaf on the small étale site of $\\operatorname{Spec}K$ has vanishing ordinary derived global-section cohomology in every degree greater than one. Equivalently, the torsion étale cohomological dimension of $\\operatorname{Spec}K$ is at most one.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+  "place": "finite-field torsion bound, paragraphs Reduction to finite modules through Consequences"
+ },
+ "stmt_deps": [
+  "def-sc-etale-torsion-cd",
+  "def-weil-pbc-etale-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "Use the geometric-stalk equivalence with discrete absolute Galois modules and the section/invariants comparison. For finite $K$, the absolute Galois group is the profinite completion of the integers.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules",
+    "lem-exc-field-sections-stalk-invariants",
+    "det-base-field-cd-galois-group"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every torsion discrete module for the profinite integers is the directed union of finite stable submodules. Continuous cohomology commutes with this directed union and with the colimit over finite cyclic quotients.",
+   "uses": [
+    "det-base-field-cd-cochains"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite stable module, choose an exponent annihilating it and factor the action through a finite cyclic quotient. Inflation along the quotient map from a cyclic group of order $n$ to one of order $en$ is zero in every degree at least two when the module is killed by $e$. Hence the cyclic quotient colimit vanishes in those degrees.",
+   "uses": [
+    "det-base-field-cd-inflation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transfer the vanishing from continuous Galois cohomology to étale cohomology of every torsion sheaf, then unfold HasTorsionEtaleCohomologicalDimensionLE.",
+   "uses": [
+    "det-base-field-cd-cochains",
+    "def-sc-etale-torsion-cd"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-exc-abelian-sheaves-gmodules",
+  "lem-exc-field-sections-stalk-invariants",
+  "det-base-field-cd-galois-group",
+  "det-base-field-cd-cochains",
+  "det-base-field-cd-inflation",
+  "def-sc-etale-torsion-cd"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-base-field-cd/sk-lem-base-field-cd-finite-field.proof.md",
+  "place": "finite-field torsion bound, paragraphs Reduction to finite modules through Consequences",
+  "note": "The existing recorded finite-field theorem is in a module that imports the item, creating a cycle; this module states the prerequisite independently for the item proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "torsion etale cohomological dimension of a finite field is at most one",
+   "results": "No exact match; unrelated finite-field and group-cohomology declarations.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "HasTorsionEtaleCohomologicalDimensionLE",
+   "results": "No match; project declaration is not in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite field torsion etale cohomology vanishes above degree one",
+   "results": "No exact match; unrelated finite-field and group-cohomology declarations.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasTorsionEtaleCohomologicalDimensionLE.*finite",
+   "results": "No Mathlib hits.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BaseFieldCohomologicalDimension",
+  "date": "2026-10-21",
+  "group": "C2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-base-field-cd",
+   "place": "finite-field proof, torsion bound",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-base-field-cd",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.BaseFieldFiniteTorsionCohomologicalDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/BaseFieldFiniteTorsionCohomologicalDimension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.hasTorsionEtaleCohomologicalDimensionLE_one_of_finite_baseField",
+  "statement": "theorem hasTorsionEtaleCohomologicalDimensionLE_one_of_finite_baseField\n    (K : Type u) [Field K] [Finite K] :\n    HasTorsionEtaleCohomologicalDimensionLE (Spec (.of K)) 1",
+  "branch": "sheaf-dag",
+  "by": "C2",
+  "date": "2026-10-21",
+  "note": "The existing recorded finite-field theorem is unusable here because its module imports this item; this module isolates the prerequisite without that import cycle."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261020T230723-L-604969",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C2",
+  "result": "pass",
+  "landing": "20261020T230723-L-604969",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
