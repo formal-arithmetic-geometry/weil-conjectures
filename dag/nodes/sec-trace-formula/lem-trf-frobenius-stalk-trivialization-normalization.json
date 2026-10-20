@@ -27,12 +27,10 @@
    }
   },
   {
-   "text": "First work with a sheaf $M$ on a characteristic-$p$ scheme $T$. Put $P=(F_T^b)^*$, $Q=(F_T^b)_*$ and $B(V)=V\\times_{T,F_T^b}T$. By [lem-pur-frobenius-trivialization-pullback], $R_V=(F_V^b,h):V\\to B(V)$ is the specified natural isomorphism for each weakly etale $h:V\\to T$. Thus the specified direct-image trivialization is $d_M:QM\\to M$, with $d_M(V)=M(R_V)$. Let $\\eta:M\\to QPM$ be the unit of the module adjunction [def-weil-pbc-proetale-operations]. Apply [lem-weil-pbc-conjugate-iso-unit-equation] with $(L_1,R_1)=(P,Q)$, $(L_2,R_2)=(\\mathrm{id},\\mathrm{id})$, and right-adjoint comparison $d^{-1}$. The adjoint trivialization in the statement is characterized by $Q(\\tau_M)\\eta_M=d_M^{-1}$. Evaluated at $V$, this says that the pullback-unit section $\\eta_{M,V}(a)\\in PM(B(V))$ is sent by $\\tau_M$ to $M(R_V^{-1})(a)\\in M(B(V))$. The coefficient identification preserves constant sections by [prop-weil-pbc-proetale-constant-ring-map], so these are $A$-linear section maps with no scalar factor.",
+   "text": "Use the site isomorphisms r, their Frobenius projection formulas, the module isomorphisms tau, and their sectionwise adjunction-unit equation supplied together by [lem-pur-frobenius-trivialization-pullback]. In particular the composite of the unit and pushforward of tau sends a section a on V to M(r_V inverse)(a). The operations are those of [def-weil-pbc-proetale-operations]; their explicit pushforward formula identifies this composite with tau on the pullback-unit section. No further mate construction or coefficient identification is required here.",
    "uses": [
     "lem-pur-frobenius-trivialization-pullback",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
-    "prop-weil-pbc-proetale-constant-ring-map"
+    "def-weil-pbc-proetale-operations"
    ],
    "elementary": false,
    "source": {
@@ -41,10 +39,9 @@
    }
   },
   {
-   "text": "Take a geometric point $u:s\\to T$ and a germ $[V,v,a]\\in M_{F_T^bu}$, so $hv=F_T^bu=u\\delta$. By the inverse formula in [lem-trf-proetale-pullback-stalk-coherence], $c_{F_T^b,u,M}^{-1}$ represents this germ by the pullback-unit section of $PM$ on $B(V)$ at the lift $w=(v,u)$. We use the order $V\\times_TT$ here; swapping the factors in the cited comparison keeps these two projections. Step 1 gives $h(v\\delta^{-1})=u$ and $F_V^b(v\\delta^{-1})=v$, hence $R_V(v\\delta^{-1})=(v,u)=w$. The fibre-product universal property [def-pc-fibre-product] and invertibility of $R_V$ give $R_V^{-1}w=v\\delta^{-1}$. Step 2 therefore sends the germ to $[B(V),w,M(R_V^{-1})(a)]$. The pointed morphism $R_V^{-1}:(B(V),w)\\to(V,v\\delta^{-1})$ identifies this with $[V,v\\delta^{-1},a]$ by the defining germ relation in [def-weil-proetale-geometric-stalk].",
+   "text": "For a germ [V,v,a] at u delta, put vprime = Spec(delta inverse) followed by v. Naturality from step 1 gives that vprime lies over u and that r_V followed by the first pullback projection sends vprime to v. Define the pointed lift l directly as vprime followed by r_V; its second projection is u since r_V is an Over morphism. The inverse representative formula for the specified comparison of [lem-trf-proetale-pullback-stalk-coherence] represents its image by the pullback-unit section at l. Stalk functoriality and the sectionwise unit equation of step 2 give the germ of M(r_V inverse)(a). The isomorphism relation r_V followed by r_V inverse = identity makes r_V inverse a pointed arrow from l to (V,vprime). The colimit relation of [def-weil-proetale-geometric-stalk] therefore identifies the result with [V,vprime,a].",
    "uses": [
     "lem-trf-proetale-pullback-stalk-coherence",
-    "def-pc-fibre-product",
     "def-weil-proetale-geometric-stalk"
    ],
    "elementary": true,
@@ -54,8 +51,9 @@
    }
   },
   {
-   "text": "For any scheme automorphism $\\beta$ of $s$, precomposition sends a pointed neighbourhood $(V,v)$ of $u$ to $(V,v\\beta)$ of $u\\beta$, leaving site arrows and sections unchanged. A relation $[V',v',a']=[V,v,M(e)(a')]$ with $ev=v'$ remains a relation because $e(v\\beta)=v'\\beta$. Thus [def-weil-proetale-geometric-stalk] defines $r_{u,\\beta,M}$ on the quotient, with inverse $r_{u\\beta,\\beta^{-1},M}$. The maps preserve sums and $A$-multiplication: the same pointed common refinement and the same section operations can be precomposed with $\\beta$. For a sheaf map $f:M\\to M'$, both orders send $[V,v,a]$ to $[V,v\\beta,f_V(a)]$, so $r$ is natural. In Step 3 the resulting map is exactly $r_{u\\delta,\\delta^{-1},M}$.",
+   "text": "Use the representative formula defining the unique reparametrization in [lem-trf-proetale-pullback-stalk-coherence]. It sends [V,v,a] to [V,Spec(beta) followed by v,a]. Transport along an equality of point maps preserves the section and the lift, by equality induction. Applying this with beta = delta inverse identifies the result of step 3 with the specified inverse reparametrization, including the displayed equality transports.",
    "uses": [
+    "lem-trf-proetale-pullback-stalk-coherence",
     "def-weil-proetale-geometric-stalk"
    ],
    "elementary": true,
@@ -90,7 +88,7 @@
    }
   },
   {
-   "text": "Apply Steps 2--6 in every degree of a bounded complex. All section maps commute with the differentials by their naturality, so the displayed germ equations are equalities of chain maps. The module pullbacks are exact and their derived pullbacks are the termwise functors by [def-weil-pbc-proetale-operations]. The cited Frobenius trivialization is the termwise one by [lem-pur-frobenius-trivialization-pullback], and [lem-trf-proetale-pullback-stalk-coherence] supplies the stalk comparisons, composition equalities and reparametrizations after localization. Consequently these chain maps give the specified maps in the ordinary derived categories. Parts (2) and (3) of [lem-weil-pbc-localization-universal-property] carry their naturality and equalities to the localization. No resolution choice changes the formula. For $b=0$, $R_V$, $\\delta$, and both germ reparametrizations are identities, consistent with $\\tau^{(0)}=1$.",
+   "text": "Promote the module-map equality of step 5 to an equality of natural isomorphisms, using componentwise extensionality. For arbitrary exact additive functors P,S,T, the equality c inverse followed by whiskering tau and the left unitor = e descends to the corresponding equality of derived maps. Prove this with the mapDerivedCategory API for composition of natural isomorphisms, inverse, whiskering and the identity compositor; these are the localization compatibilities of [lem-weil-pbc-localization-universal-property]. Equality transports descend by equality induction on the point parameters. Specialize to the exact stalk and pullback functors from [def-weil-pbc-proetale-operations] and [lem-trf-proetale-pullback-stalk-coherence]. The named derived comparisons and reparametrizations are precisely these derived natural isomorphisms. Finally take the derived reparametrization compatibility and the normalized composition comparison and pullback naturality from [lem-trf-proetale-pullback-stalk-coherence] and [lem-pur-frobenius-trivialization-pullback]. The argument proves the derived formulas on every complex, hence in particular the bounded complexes in the statement.",
    "uses": [
     "def-weil-pbc-proetale-operations",
     "lem-pur-frobenius-trivialization-pullback",
@@ -108,17 +106,14 @@
   "def-weil-absolute-frobenius-scheme",
   "lem-pur-frobenius-trivialization-pullback",
   "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "prop-weil-pbc-proetale-constant-ring-map",
   "lem-trf-proetale-pullback-stalk-coherence",
-  "def-pc-fibre-product",
   "def-weil-proetale-geometric-stalk",
   "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 0F6W, lemma-relative-frobenius-weakly-etale; agent deduction of the specified adjoint trivialization on represented germs"
+  "place": "Tag 0F6W; W7 Lean proof: specified unit equation, explicit inverse pointed lift, colimit germ relation, and functorial derived localization."
  },
  "mathlib_match": null,
  "status": "split",
@@ -232,8 +227,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pur-frobenius-trivialization-pullback",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "lem-pur-frobenius-trivialization-pullback"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -261,5 +255,15 @@
   "group": "Q146",
   "result": "fix",
   "note": "Statement correct against node and Stacks 0F6W: hypotheses exact (p prime, alg-closed k with hs, char-p X, z, finite comm A, all b); δ unique p^b-power automorphism with Spec.map δ = F_s^b and zδ = F_X^b z; rS/rX pinned by projection F_V^b (Over-morphism forces h), tauS/tauX pinned by the unit equation Q(τ)η = M(R_V^{-1}), comp pinned by the conjugate/pullbackComp formula, exactly as in lem-pur; germ and map clauses for (τ_s)_id∘c^{-1} and (τ_X)_z∘c^{-1}_{F_X^b,z} = r_{zδ,δ^{-1}} with correct directions, using the uniquely-specified proEtaleStalkReparam; pullback-along-z compatibility via the c/r reparametrization equation and the lem-pur derived identity; derived clauses for bounded H. Edge cases b=0, empty X, X=Spec k, A=0, nonreduced X, universes OK. Shape: 3 files, only the lean field changed, statement verbatim. Delivered file compiles clean via nt_compile --json (16.7 s and 18.5 s, exit 0). Only finding H8: the theorem docstring had 7 one-line labels, not the node proof step by step, and they did not follow the node's step order. fixes/FrobeniusStalkTrivializationNormalization.lean is a complete replacement with the full 7-step proof in the docstring and is otherwise byte-identical; it compiles clean (13.0 s); no record change needed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W7",
+  "result": "pass",
+  "landing": "20261020T131225-L-1262738",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
