@@ -15,7 +15,6 @@ import WeilConjectures.AlgebraicGeometry.ModulePullbackIdealQuotient
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.ModulePullbackAffineSections
 import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.HomCoverGluing
 import WeilConjectures.AlgebraicGeometry.GradedSheafStructures
 import Mathlib.Topology.Sheaves.LocallySurjective
 import Mathlib.RingTheory.Flat.Basic
