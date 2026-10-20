@@ -5,9 +5,10 @@ Authors: SHEAF group A3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
-import Sheaf.AlgebraicGeometry.OpenImmersionTensorVanishing
+import WeilConjectures.AlgebraicGeometry.OpenImmersionTensorVanishingTest
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Sheaf.AlgebraicGeometry.PrincipalLocalizationRestrictionModel
 
 /-! # Sheaf Tor bounds on principal localizations
@@ -99,8 +100,14 @@ theorem principal_localization_sheaf_tor_bounds
   let := hLim
   let := hCol
   intro G i hi
-  have h := openImmersion_tensor_vanishing j R eR _ i (fun H ↦ hamp H i hi) G
+  have h := openImmersion_tensor_vanishing_test j _ G i
+    (hamp ((Scheme.Modules.pushforward j).obj G) i hi)
   obtain ⟨K, hK, ⟨eK⟩, hz⟩ := h
-  exact ⟨K, hK, ⟨eK ≪≫ e⟩, hz⟩
+  obtain ⟨c⟩ := eR
+  let S := Scheme.Modules.restrictFunctor j
+  let : S.Additive := ⟨by intros; rfl⟩
+  let : PreservesFiniteLimits S := preservesFiniteLimits_of_natIso c
+  let : S.IsLeftAdjoint := (Scheme.Modules.restrictAdjunction j).isLeftAdjoint
+  exact ⟨K, hK, ⟨eK ≪≫ (Functor.mapDerivedCategoryNatIso c).symm.app _ ≪≫ e⟩, hz⟩
 
 end AlgebraicGeometry

@@ -5,7 +5,7 @@ Authors: SHEAF group S2
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.DerivedTensorCohomologyVanishes
+public import WeilConjectures.AlgebraicGeometry.DerivedTensorCohomologyVanishes
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel
 import WeilConjectures.AlgebraicGeometry.TensorPullbackTilde
