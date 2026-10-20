@@ -18657,3 +18657,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 
 - 00:15 L: batch 20261020T161318 dependency take-out
 - 16:16 L: returned deliver/V2/Sheaf.AlgebraicGeometry.Modules.ExteriorSheafRankWedgeZero (reviewer RETURN: (reviewer C-a64b1, head a64b195c8) H2: dag/nodes/sec-picard-framework/new-j1-exterior-sheaf-rank-wedge-zero.json lean.st)
+- 16:17 L: merged deliver/A4/Sheaf.CategoryTheory.RingedCechKoszulDualLimit (stage 3; reviewer PASS; first push; landing 20261020T161729-L-3528690 (proof); batch 20261020T161727; modules 1; new nodes 0; change records: coord/changes/A4-ringed-cech-koszul-dual-limit-restoration.md)

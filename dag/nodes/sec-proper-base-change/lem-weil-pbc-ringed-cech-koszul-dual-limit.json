@@ -238,24 +238,21 @@
    "CategoryTheory.ringed_cech_koszul_dual_limit"
   ],
   "file": "lean/Sheaf/CategoryTheory/RingedCechKoszulDualLimit.lean",
-  "statement": "theorem ringed_cech_koszul_dual_limit : (∃ alpha : colimit (ringedKoszulDiagram O r b) ≅ (ringedExtendedCech O r b).1, alpha.hom ≫ (ringedExtendedCech O r b).2 = colimit.desc _ (ringedKoszulAugmentationCocone O r b) ∧ ∃ t : CochainComplex.mappingCone (CochainComplex.telescopeShiftColimit O (ringedKoszulDiagram O r b)) ⟶ (ringedExtendedCech O r b).1, CochainComplex.mappingCone.inr _ ≫ t = CochainComplex.telescopeToColimit O (ringedKoszulDiagram O r b) ≫ alpha.hom ∧ QuasiIso t) ∧ (∀ m : ℕ, CochainComplex.IsAcyclicTensorKFlat ((ringedKoszulDualTower O r b).obj (op m))) ∧ Nonempty (RingedKoszulCechComparison O r b)",
+  "statement": "theorem ringed_cech_koszul_dual_limit : (∃ alpha : colimit (ringedKoszulDiagram O r b) ≅ (ringedExtendedCech O r b).1, alpha.hom ≫ (ringedExtendedCech O r b).2 = colimit.desc _ (ringedKoszulAugmentationCocone O r b) ∧ ∃ t : CochainComplex.mappingCone (CochainComplex.telescopeColimitShift O (ringedKoszulDiagram O r b)) ⟶ (ringedExtendedCech O r b).1, CochainComplex.mappingCone.inr _ ≫ t = CochainComplex.telescopeToColimit O (ringedKoszulDiagram O r b) ≫ alpha.hom ∧ QuasiIso t) ∧ (∀ m : ℕ, CochainComplex.IsAcyclicTensorKFlat ((ringedKoszulDualTower O r b).obj (op m))) ∧ Nonempty (RingedKoszulCechComparison O r b)",
   "branch": "newtargets-dag",
   "by": "NN",
   "date": "2026-10-15",
-  "existing": false
+  "existing": false,
+  "note": "Restored from quarantine for A4 rework (2026-10-20): use WeilConjectures.Algebra.Homology.TelescopeColimit directly and its canonical telescopeColimitShift name. The retired telescopeShiftColimit abbreviation expanded definitionally to that same expression. All declarations, mathematical dependencies, proof steps, units and normalization clauses are preserved."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "C1",
+  "reviewer": "C-9b095",
+  "group": "A4",
   "result": "pass",
-  "landing": "20261019T005258-L-2747351",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.exists_ringed_koszul_cech_comparison"
-  ],
-  "sorry_after": []
+  "landing": "20261020T161729-L-3528690",
+  "kind": "proof",
+  "note": "independent cc review: delivered module vs quarantine archive (2-line diff = the substitutions prescribed in retire-telescope-colimit-a2.md); node lean.statement vs Lean; compile and #print axioms (sorryAx only via cited open deps)"
  }
 }
