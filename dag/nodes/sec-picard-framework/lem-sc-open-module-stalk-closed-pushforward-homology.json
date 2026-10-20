@@ -104,13 +104,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenModuleStalkClosedPushforwardHomology",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenModuleStalkClosedPushforwardHomology.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.OpenModuleStalkClosedPushforwardHomology",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenModuleStalkClosedPushforwardHomology.lean",
   "declaration": "AlgebraicGeometry.openModuleStalk_closedPushforward_homology",
   "statement": "theorem openModuleStalk_closedPushforward_homology\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (x : Z) (U : Y.Opens) (hx : i x ∈ U)\n    (K : CochainComplex\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U)) ℤ)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings Y.toRingedSpace) U).mapDerivedCategory.obj\n        ((DerivedCategory.singleFunctor _ 0).obj\n          ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))) ≅\n      DerivedCategory.Q.obj K) :\n    let L := ((openModuleStalkFunctor Y U ⟨i x, hx⟩).mapHomologicalComplex (.up ℤ)).obj K\n    Nonempty (L.homology 0 ≅\n      ((ModuleCat.restrictScalars (i.stalkMap x).hom).obj\n        (ModuleCat.of (Z.presheaf.stalk x) (Z.presheaf.stalk x)))) ∧\n      (∀ j : ℤ, j ≠ 0 → IsZero (L.homology j))",
   "branch": "sheaf-dag",
   "by": "T1",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.OpenModuleStalkClosedPushforwardHomology; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-13",

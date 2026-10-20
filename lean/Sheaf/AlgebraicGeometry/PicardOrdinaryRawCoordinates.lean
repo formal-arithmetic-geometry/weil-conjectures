@@ -5,10 +5,10 @@ Authors: SHEAF group C1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
+public import WeilConjectures.AlgebraicGeometry.PicardOrdinaryModelCycles
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
-import Sheaf.AlgebraicGeometry.PicardOrdinaryAffineDifferentialFrames
+import WeilConjectures.AlgebraicGeometry.PicardOrdinaryAffineDifferentialFrames
 import Sheaf.AlgebraicGeometry.PicardTensorFrameRestriction
 import WeilConjectures.Mathlib.AlgebraicGeometry.Restrict
 

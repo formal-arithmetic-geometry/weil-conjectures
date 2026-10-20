@@ -9,7 +9,7 @@ public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap
 public import Sheaf.AlgebraicGeometry.PullbackStalkTensorComparison
 import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeFactorization
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.TorIndependentPerfectTensorBaseChange
 
 /-!

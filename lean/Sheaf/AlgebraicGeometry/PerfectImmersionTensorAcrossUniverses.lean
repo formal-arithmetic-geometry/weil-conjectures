@@ -15,7 +15,7 @@ public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.SmoothProperDiagonalTensorFormula
 import Sheaf.AlgebraicGeometry.DerivedLocalizationTensorComparison
 import Sheaf.AlgebraicGeometry.DerivedQCohStandardAdjunction
-import Sheaf.AlgebraicGeometry.PerfectImmersionStandardPerfection
+import WeilConjectures.AlgebraicGeometry.PerfectImmersionStandardPerfection
 
 /-! # The perfect immersion tensor formula in independent derived universes
 

@@ -7,7 +7,7 @@ public import WeilConjectures.AlgebraicGeometry.AffinePerfectModuleModel
 import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Mathlib.CategoryTheory.Localization.LocallySmall

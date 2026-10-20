@@ -6,7 +6,7 @@ Authors: SHEAF group V3
 module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
-import Sheaf.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso
+import WeilConjectures.AlgebraicGeometry.OpenExtensionDerivedUnitIsIso
 import all Sheaf.AlgebraicGeometry.DerivedOpenTensorHomBijective
 
 /-! # Open extension counit on a derived tensor

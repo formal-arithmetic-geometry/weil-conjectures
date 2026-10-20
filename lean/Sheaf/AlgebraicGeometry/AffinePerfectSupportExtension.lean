@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.AffinePerfectPlusShift
 import Sheaf.AlgebraicGeometry.AffineSupportIteratedCones
 import Sheaf.AlgebraicGeometry.AffineSupportPoweredGenerators
 import WeilConjectures.AlgebraicGeometry.AffineBinomialProjectorCone
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
 import Sheaf.AlgebraicGeometry.SupportedQCohTriangulated
 

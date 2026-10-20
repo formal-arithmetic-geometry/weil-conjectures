@@ -15,7 +15,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.Single
 public import Mathlib.Topology.Sheaves.Abelian
 import Sheaf.AlgebraicGeometry.RelativeTensorStalkGlobalHomology
-import Sheaf.AlgebraicGeometry.RelativeTensorGlobalLocalStalkDerivedIso
+import WeilConjectures.AlgebraicGeometry.RelativeTensorGlobalLocalStalkDerivedIso
 public import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Relative tensor homology compared with a local stalk model

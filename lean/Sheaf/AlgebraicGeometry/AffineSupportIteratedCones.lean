@@ -10,8 +10,8 @@ public import WeilConjectures.AlgebraicGeometry.DerivedGlobalScalar
 public import Mathlib.AlgebraicGeometry.AffineScheme
 public import Mathlib.Data.Nat.Choose.Basic
 import Sheaf.AlgebraicGeometry.PerfectTwoOutOfThree
-import Sheaf.AlgebraicGeometry.ScalarConeStalkVanishing
-import Sheaf.AlgebraicGeometry.RestrictedScalarConeSplit
+import WeilConjectures.AlgebraicGeometry.ScalarConeStalkVanishing
+import WeilConjectures.AlgebraicGeometry.RestrictedScalarConeSplit
 import WeilConjectures.AlgebraicGeometry.BinomialShiftBiproduct
 
 /-! # Affine support from successive cones

@@ -12,7 +12,7 @@ public import WeilConjectures.AlgebraicGeometry.Coherent
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedDirectImage
 public import Mathlib.AlgebraicGeometry.Noetherian
 import Sheaf.AlgebraicGeometry.DirectImageBoundedCoherent
-import Sheaf.AlgebraicGeometry.NoetherianBoundedCoherentPseudoCoherent
+import WeilConjectures.AlgebraicGeometry.NoetherianBoundedCoherentPseudoCoherent
 import Sheaf.AlgebraicGeometry.PerfectOfPseudoCoherentFiniteTorDimension
 import Sheaf.AlgebraicGeometry.ProperDirectImageFiniteTor
 

@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Cohomology.FlatCohomologyCompari
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffineResolutionSectionBijective
-import Sheaf.AlgebraicGeometry.ResolutionSectionScalarMap
+import WeilConjectures.AlgebraicGeometry.ResolutionSectionScalarMap
 
 /-! # Affine cohomology and higher-image sections
 

@@ -11,7 +11,7 @@ public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import WeilConjectures.AlgebraicGeometry.AffineSectionsComplexCounit
 import Sheaf.AlgebraicGeometry.PerfectAffineBoundedProjective
 import WeilConjectures.AlgebraicGeometry.AffineQCohDerivedEquivalence
-import Sheaf.AlgebraicGeometry.SchemeIsoDerivedEquivalence
+import WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedEquivalence
 import Sheaf.AlgebraicGeometry.SchemeIsoPerfectTransport
 
 /-! # Bounded projective models of ordinary affine sections

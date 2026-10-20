@@ -10,7 +10,7 @@ public import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedPointwiseKanBridge
 import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedExactOfLocalization
-import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 
 /-!
 # Left derived functors computed by a resolving class

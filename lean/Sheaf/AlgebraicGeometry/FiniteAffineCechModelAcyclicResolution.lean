@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Separated
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 
 import Sheaf.AlgebraicGeometry.AffineAlternatingCechAugmentedConstruction
-import Sheaf.AlgebraicGeometry.OpenPushforwardDerivedComparison
+import WeilConjectures.AlgebraicGeometry.OpenPushforwardDerivedComparison
 import WeilConjectures.AlgebraicGeometry.Cohomology.Affine.CechAcyclic
 import WeilConjectures.AlgebraicGeometry.Cohomology.Exact
 import WeilConjectures.AlgebraicGeometry.Cohomology.InjectiveFlasque

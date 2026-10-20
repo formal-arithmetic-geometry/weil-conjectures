@@ -5,7 +5,7 @@ Authors: SHEAF groups Y2 and S1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.ThickeningSystemPushforward
+public import WeilConjectures.AlgebraicGeometry.ThickeningSystemPushforward
 public import Sheaf.AlgebraicGeometry.CoherentFormalModule
 public import Mathlib.AlgebraicGeometry.IdealSheaf.Functorial
 import WeilConjectures.AlgebraicGeometry.IdealDataRecursivePowerComparison

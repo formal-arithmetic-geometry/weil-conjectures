@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.InvertSCOhomology
 import WeilConjectures.AlgebraicGeometry.CohomologyFractionEventuallyZero
-import Sheaf.AlgebraicGeometry.ResolutionUnitTwistComparison
+import WeilConjectures.AlgebraicGeometry.ResolutionUnitTwistComparison
 
 /-! # Kernel torsion for raw section cohomology
 

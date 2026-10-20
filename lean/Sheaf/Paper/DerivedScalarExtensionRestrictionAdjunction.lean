@@ -20,7 +20,7 @@ import WeilConjectures.Mathlib.Algebra.Homology.Localization
 import Mathlib.CategoryTheory.Functor.Derived.PointwiseRightDerived
 import Sheaf.CategoryTheory.DerivedCategory.DerivedAdjunctionCompatibility
 import Mathlib.CategoryTheory.Limits.Constructions.EventuallyConstant
-import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-! # Derived reduction and restriction of scalars

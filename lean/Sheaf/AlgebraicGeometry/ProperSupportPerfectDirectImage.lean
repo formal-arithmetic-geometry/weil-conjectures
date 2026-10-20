@@ -14,7 +14,7 @@ public import Sheaf.AlgebraicGeometry.SingleComplexBaseChangeStalkCondition
 import Sheaf.AlgebraicGeometry.RelativelyFlatTensorBaseChangeIso
 import Sheaf.AlgebraicGeometry.ProperSupportLocalNoetherianModel
 import Sheaf.AlgebraicGeometry.PerfectOfOpenPullbacks
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
 
 /-! # Perfect direct image with proper support

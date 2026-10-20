@@ -6,7 +6,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree
 
 import Sheaf.AlgebraicGeometry.HomComplexSingleNaturality
-import Sheaf.AlgebraicGeometry.UnderivedAffineHomCounit
+import WeilConjectures.AlgebraicGeometry.UnderivedAffineHomCounit
 
 @[expose] public section
 universe u

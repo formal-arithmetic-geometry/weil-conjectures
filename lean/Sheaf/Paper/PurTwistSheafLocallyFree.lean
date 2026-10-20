@@ -17,7 +17,7 @@ public import Mathlib.Algebra.Category.Ring.Colimits
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 import Sheaf.AlgebraicGeometry.FiniteEtaleTwistLine
-import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
+import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayCoverEtale
 import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
 import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 import Sheaf.CategoryTheory.RingedSiteModules

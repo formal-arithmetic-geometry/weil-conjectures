@@ -8,7 +8,7 @@ module
 public import Mathlib.AlgebraicGeometry.Fiber
 public import Mathlib.AlgebraicGeometry.Morphisms.Proper
 import Sheaf.AlgebraicGeometry.ProperFibreIdempotentImageNoetherian
-import Sheaf.AlgebraicGeometry.ProperFibreIdempotentDescent
+import WeilConjectures.AlgebraicGeometry.ProperFibreIdempotentDescent
 
 /-!
 # Idempotents on a proper fibre come from a neighbourhood

@@ -99,13 +99,14 @@
  "unit": "sk-thm-picard-duality",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel",
-  "file": "lean/Sheaf/AlgebraicGeometry/StrictPerfectClosedPushforwardStalkModel.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/StrictPerfectClosedPushforwardStalkModel.lean",
   "declaration": "AlgebraicGeometry.strictPerfectClosedPushforward_stalkModel",
   "statement": "theorem strictPerfectClosedPushforward_stalkModel\n    {Z Y : Scheme.{u}} (i : Z ⟶ Y) [IsClosedImmersion i]\n    [HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    (x : Z) (U : Y.Opens) (hx : i x ∈ U)\n    (K : CochainComplex\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U)) ℤ)\n    [HasDerivedCategory.{w}\n      (SheafOfModules.{u} ((moduleRings Y.toRingedSpace).over U))]\n    (hK : Y.IsStrictlyPerfect U K)\n    (e : (SheafOfModules.overFunctor.{u}\n      (moduleRings Y.toRingedSpace) U).mapDerivedCategory.obj\n        ((DerivedCategory.singleFunctor _ 0).obj\n          ((Scheme.Modules.pushforward i).obj (SheafOfModules.unit Z.ringCatSheaf))) ≅\n      DerivedCategory.Q.obj K) :\n    ∃ L : CochainComplex (ModuleCat.{u} (Y.presheaf.stalk (i x))) ℤ,\n      (∃ a b : ℤ, ∀ j : ℤ, j < a ∨ b < j → IsZero (L.X j)) ∧\n      (∀ j : ℤ, Projective (L.X j)) ∧\n      Nonempty (L.homology 0 ≅\n        ((ModuleCat.restrictScalars (i.stalkMap x).hom).obj\n          (ModuleCat.of (Z.presheaf.stalk x) (Z.presheaf.stalk x)))) ∧\n      (∀ j : ℤ, j ≠ 0 → IsZero (L.homology j))",
   "branch": "sheaf-dag",
   "by": "T3",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "2026-10-20 (U): retired Sheaf twin Sheaf.AlgebraicGeometry.StrictPerfectClosedPushforwardStalkModel; points at its upstream twin."
  },
  "reviewed": {
   "date": "2026-10-12",

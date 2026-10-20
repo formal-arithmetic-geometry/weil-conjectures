@@ -11,7 +11,7 @@ public import WeilConjectures.AlgebraicGeometry.DerivedTensorStructure
 import Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalModel
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.AffineDerivedPullbackTensorTilde
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 

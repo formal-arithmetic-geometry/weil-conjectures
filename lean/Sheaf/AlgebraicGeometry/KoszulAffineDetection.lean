@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.KoszulComplex
 public import Mathlib.AlgebraicGeometry.Modules.Tilde
 public import Mathlib.Algebra.Homology.Embedding.CochainComplex
 import Sheaf.AlgebraicGeometry.AffinePerfectOpenRepresentCohomology
-import Sheaf.AlgebraicGeometry.PerfectGenerationAffineBase
+import WeilConjectures.AlgebraicGeometry.PerfectGenerationAffineBase
 import Sheaf.AlgebraicGeometry.KoszulSupportedAugmentationVanishing
 import Mathlib.CategoryTheory.Localization.HomEquiv
 

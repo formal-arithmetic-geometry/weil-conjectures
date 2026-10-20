@@ -10,7 +10,7 @@ public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 
 import Sheaf.AlgebraicGeometry.PerfectUniversalH0BottomModel
-import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
+import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Local chain models for the lowest truncation arrow

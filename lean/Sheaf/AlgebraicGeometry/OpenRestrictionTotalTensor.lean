@@ -7,8 +7,9 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.DerivedCategory
 public import Sheaf.Algebra.Homology.KFlat
-import Sheaf.AlgebraicGeometry.OpenRestrictionTensorNaturality
+import WeilConjectures.AlgebraicGeometry.OpenRestrictionTensorNaturality
 import WeilConjectures.FromJoel.Algebra.Homology.TotalComplexMap
+import Sheaf.Paper.DerivedHomMayerVietoris
 
 /-! # Open restriction of total tensor complexes
 

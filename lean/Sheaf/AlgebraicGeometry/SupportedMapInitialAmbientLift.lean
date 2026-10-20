@@ -8,7 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import Sheaf.Algebra.Homology.OpenExtensionRestrictionIso
 import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport
+import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
 
 /-! # Initial ambient representative of a supported perfect map
 

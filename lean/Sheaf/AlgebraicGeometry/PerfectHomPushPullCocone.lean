@@ -11,7 +11,7 @@ import Sheaf.AlgebraicGeometry.DerivedDirectImagePreservesQCoh
 import Sheaf.AlgebraicGeometry.DerivedAdjoint
 import Sheaf.AlgebraicGeometry.PerfectHomStageColimit
 import Sheaf.AlgebraicGeometry.DerivedPullbackTensorQCoh
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 
 /-! # Representing the stage pullback Hom functors on the original scheme
 

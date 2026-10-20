@@ -10,7 +10,7 @@ public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import Sheaf.AlgebraicGeometry.InvertSCOhomology
-import Sheaf.AlgebraicGeometry.SectionCohomologyUnitComparisons
+import WeilConjectures.AlgebraicGeometry.SectionCohomologyUnitComparisons
 
 /-! # Denominators for raw section cohomology
 

@@ -9,9 +9,9 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedInternalHomAdjunction
 
 import Sheaf.Paper.DerivedInternalHomRestrictOpen
-import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
+import WeilConjectures.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
 import Sheaf.AlgebraicGeometry.FiniteFreeDerivedDualModel
-import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
+import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
 
 /-! The quasi-coherent perfect dual underlying the tensor-Hom comparison. -/
 

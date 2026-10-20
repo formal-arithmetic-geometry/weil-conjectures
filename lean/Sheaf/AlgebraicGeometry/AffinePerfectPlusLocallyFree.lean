@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.AffineScheme
 import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 import Sheaf.AlgebraicGeometry.AffinePseudoCoherentLift
-import Sheaf.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
+import WeilConjectures.AlgebraicGeometry.StrictlyPerfectFiniteFreeRefinement
 import Sheaf.AlgebraicGeometry.PerfectHomGap
 import Sheaf.AlgebraicGeometry.AffinePerfectTruncationTriangle
 

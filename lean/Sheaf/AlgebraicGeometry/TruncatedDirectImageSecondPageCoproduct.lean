@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Mathlib.CategoryTheory.Limits.Shapes.Products
 
-import Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductMono
+import WeilConjectures.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductMono
 import Sheaf.AlgebraicGeometry.TruncatedDirectImageSecondPageCoproductEpi
 
 /-! # The second-page coproduct comparison for lower-truncated direct image

@@ -9,7 +9,7 @@ public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 
-import Sheaf.AlgebraicGeometry.SectionCohomologyThetaAcyclic
+import WeilConjectures.AlgebraicGeometry.SectionCohomologyThetaAcyclic
 import WeilConjectures.AlgebraicGeometry.ModulePushforwardInjectiveAcyclic
 import Sheaf.AlgebraicGeometry.OrdinaryHigherImageQuasiCoherent
 import WeilConjectures.AlgebraicGeometry.ModuleCohomologySourceComparison

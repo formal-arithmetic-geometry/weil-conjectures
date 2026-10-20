@@ -6,7 +6,7 @@ Authors: SHEAF group U1
 module
 
 public import Mathlib.LinearAlgebra.Basis.Defs
-public import Sheaf.AlgebraicGeometry.ProjGradedModuleSheafExists
+public import WeilConjectures.AlgebraicGeometry.ProjGradedModuleSheafExists
 public import WeilConjectures.AlgebraicGeometry.ProjectiveLineProjChartIsomorphism
 public import WeilConjectures.AlgebraicGeometry.ProjectiveSpace.Twist
 

@@ -7,7 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
+import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import WeilConjectures.Mathlib.AlgebraicGeometry.Modules.Sheaf
 import WeilConjectures.AlgebraicGeometry.Modules.QuasicoherentKernel

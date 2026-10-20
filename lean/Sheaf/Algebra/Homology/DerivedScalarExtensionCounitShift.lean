@@ -12,7 +12,7 @@ import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 import WeilConjectures.CategoryTheory.RightKanExtensionCoherentShift
 import WeilConjectures.Algebra.Homology.QuasiIsoSaturatedTriangulated
-import Sheaf.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
+import WeilConjectures.CategoryTheory.DerivedCategory.ResolvingClassEssentialConstancy
 import WeilConjectures.CategoryTheory.LeftDerivedKanSourceTriangles
 import Mathlib.CategoryTheory.Localization.Triangulated
 

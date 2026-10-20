@@ -9,7 +9,7 @@ public import Mathlib.AlgebraicGeometry.Limits
 public import Mathlib.AlgebraicGeometry.Morphisms.Etale
 public import Mathlib.RingTheory.AdjoinRoot
 public import Mathlib.Algebra.Algebra.Pi
-import Sheaf.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationPoint
+import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayLocalizationPoint
 import WeilConjectures.AlgebraicGeometry.Morphisms.RootSplitAwayTransportChart
 
 /-!

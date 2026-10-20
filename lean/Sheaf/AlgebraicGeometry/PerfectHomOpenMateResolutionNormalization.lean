@@ -4,7 +4,7 @@ Released under Apache 2.0 license as described in the file LICENSE.
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectHomOpenModuleMate
+public import WeilConjectures.AlgebraicGeometry.PerfectHomOpenModuleMate
 public import Sheaf.AlgebraicGeometry.PerfectHomTransport
 public import Sheaf.AlgebraicGeometry.DerivedMayerVietorisCanonicalData
 public import Sheaf.AlgebraicGeometry.AffineGlobalHomBaseChangeMap

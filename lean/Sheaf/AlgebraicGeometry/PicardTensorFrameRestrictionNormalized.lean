@@ -1,6 +1,6 @@
 module
 public import Sheaf.AlgebraicGeometry.PicardTensorFrameCoordinates
-public import Sheaf.AlgebraicGeometry.PicardOrdinaryModelCycles
+public import WeilConjectures.AlgebraicGeometry.PicardOrdinaryModelCycles
 public import Sheaf.AlgebraicGeometry.PicardDerivedModelSections
 @[expose] public section
 set_option autoImplicit false

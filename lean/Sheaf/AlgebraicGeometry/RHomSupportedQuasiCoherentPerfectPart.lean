@@ -3,7 +3,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.Algebra.Homology.DerivedInternalHom
 import Sheaf.AlgebraicGeometry.DerivedTensorQCohClosure
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.PerfectRHomTensorComparison
 
 /-! # PerfectPart of derived internal Hom

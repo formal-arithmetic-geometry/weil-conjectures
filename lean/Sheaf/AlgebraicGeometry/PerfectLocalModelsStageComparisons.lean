@@ -13,7 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
 
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
 import WeilConjectures.AlgebraicGeometry.DerivedOpenGluingObjects
-import Sheaf.AlgebraicGeometry.OpenPerfectModelTransport
+import WeilConjectures.AlgebraicGeometry.OpenPerfectModelTransport
 import Sheaf.AlgebraicGeometry.PerfectLocalModelsDescendedTransition
 
 /-! # Stage object with compatible local limit comparisons

@@ -7,7 +7,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import WeilConjectures.AlgebraicGeometry.OpenModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.PerfectOpenStalkRetractHomEquality
+import WeilConjectures.AlgebraicGeometry.PerfectOpenStalkRetractHomEquality
 import Sheaf.AlgebraicGeometry.OpenModuleStalkRestrictionComparison
 import Mathlib.Data.Int.Interval
 import Mathlib.AlgebraicGeometry.AffineScheme

@@ -20,7 +20,7 @@ import Sheaf.AlgebraicGeometry.PerfectImmersionStalkwiseTorBounds
 import Sheaf.AlgebraicGeometry.RightAdjointTensorComparisonNatural
 import WeilConjectures.AlgebraicGeometry.DerivedTensorRightCoproducts
 import WeilConjectures.AlgebraicGeometry.DerivedQCohDirectSumsAux
-import Sheaf.AlgebraicGeometry.PerfectLocalizingIsoLocus
+import WeilConjectures.AlgebraicGeometry.PerfectLocalizingIsoLocus
 import Sheaf.AlgebraicGeometry.DerivedExactStructures
 import Mathlib.CategoryTheory.Adjunction.Limits
 

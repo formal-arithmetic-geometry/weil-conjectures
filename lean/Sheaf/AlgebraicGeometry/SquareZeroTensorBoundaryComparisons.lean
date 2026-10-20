@@ -5,7 +5,7 @@ Authors: SHEAF group P1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.SectionBoundaryExact
+public import WeilConjectures.AlgebraicGeometry.SectionBoundaryExact
 public import WeilConjectures.AlgebraicGeometry.TensorPullbackAdjunction
 public import Sheaf.AlgebraicGeometry.AffineMorphismCohomologyEdge
 public import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula

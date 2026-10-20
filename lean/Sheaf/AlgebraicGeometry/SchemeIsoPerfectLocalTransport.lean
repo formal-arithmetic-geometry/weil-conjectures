@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 import all Sheaf.AlgebraicGeometry.DerivedPullbackPerfect
-import all Sheaf.AlgebraicGeometry.SchemeIsoDerivedRestrictionSquare
+import all WeilConjectures.AlgebraicGeometry.SchemeIsoDerivedRestrictionSquare
 
 @[expose] public section
 

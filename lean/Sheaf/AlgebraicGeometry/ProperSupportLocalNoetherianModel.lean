@@ -16,7 +16,7 @@ import Sheaf.AlgebraicGeometry.NoetherianApproximationData
 import WeilConjectures.Mathlib.Algebra.Category.Ring.FilteredColimits
 import Sheaf.AlgebraicGeometry.ProperSupportAffineTensorRestriction
 import Sheaf.AlgebraicGeometry.CartesianTensorDataComparison
-import Sheaf.AlgebraicGeometry.PerfectImpliesQCoh
+import WeilConjectures.AlgebraicGeometry.PerfectImpliesQCoh
 import Sheaf.AlgebraicGeometry.DerivedPullbackComposition
 /-! # Local Noetherian models for proper-support direct images
 

@@ -11,7 +11,7 @@ public import Mathlib.CategoryTheory.Triangulated.Yoneda
 public import Mathlib.Algebra.Category.Grp.Ulift
 public import Sheaf.AlgebraicGeometry.PerfectHomLocalComparison
 import Sheaf.AlgebraicGeometry.PerfectHomMayerVietorisTriangleCocone
-import Sheaf.AlgebraicGeometry.PerfectHomTriangleRow
+import WeilConjectures.AlgebraicGeometry.PerfectHomTriangleRow
 
 /-! # The geometric diagram before taking the exact filtered colimit
 

@@ -5,7 +5,7 @@ public import Mathlib.Topology.QuasiSeparated
 import Sheaf.AlgebraicGeometry.PerfectSupportedMapLift
 import Sheaf.AlgebraicGeometry.OpenDerivedRestrictionComparison
 import Sheaf.AlgebraicGeometry.PerfectPseudoCoherentLocallyFiniteTor
-import Sheaf.AlgebraicGeometry.PseudoCoherentQCoh
+import WeilConjectures.AlgebraicGeometry.PseudoCoherentQCoh
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Quasicoherent
 /-! # The detector on the localized smaller open
 

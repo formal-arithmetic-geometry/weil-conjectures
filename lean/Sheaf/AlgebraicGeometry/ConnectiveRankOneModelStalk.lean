@@ -8,7 +8,7 @@ public import WeilConjectures.AlgebraicGeometry.PerfectComplex
 public import Sheaf.AlgebraicGeometry.DerivedPullback
 public import Mathlib.AlgebraicGeometry.ResidueField
 public import WeilConjectures.AlgebraicGeometry.Modules.FlatPullbackStalk
-import Sheaf.AlgebraicGeometry.PerfectAffineMapRepresentative
+import WeilConjectures.AlgebraicGeometry.PerfectAffineMapRepresentative
 import Sheaf.AlgebraicGeometry.RankOneResidueStalkComponent
 import Mathlib.Algebra.Category.Grp.EpiMono
 

@@ -5,7 +5,7 @@ Authors: SHEAF group Q3
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.PerfectGluingEndpointProperties
+public import WeilConjectures.AlgebraicGeometry.PerfectGluingEndpointProperties
 import Sheaf.AlgebraicGeometry.DerivedOpenLocalization
 import WeilConjectures.AlgebraicGeometry.DerivedOpenRestrictionQCoh
 import Sheaf.AlgebraicGeometry.DerivedPullbackPerfect

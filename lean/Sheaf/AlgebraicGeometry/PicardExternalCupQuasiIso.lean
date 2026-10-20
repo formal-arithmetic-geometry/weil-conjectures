@@ -11,7 +11,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.Affine
 import Sheaf.AlgebraicGeometry.PicardExternalCupAcyclic
 import Sheaf.AlgebraicGeometry.PicardExternalCupShiftLeft
 import Sheaf.AlgebraicGeometry.PicardExternalCupShiftRight
-import Sheaf.AlgebraicGeometry.QuasicoherentFiniteCohomologicalDimension
+import WeilConjectures.AlgebraicGeometry.QuasicoherentFiniteCohomologicalDimension
 
 /-! # Geometric invertibility of the normalized external cup comparison
 
