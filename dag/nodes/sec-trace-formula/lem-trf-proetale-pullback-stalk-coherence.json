@@ -16,13 +16,14 @@
  ],
  "proof": [
   {
-   "text": "For the underlying abelian sheaf of an $A_S$-module $M$, [lem-pur-proetale-inverse-image-stalk] supplies the natural additive comparison $(t^{-1}M)_u\\cong M_{tu}$ with no extra hypothesis on $t$. To check its normalization, write $P=u_{t,p}M$ for the presheaf colimit in [def-weil-proetale-inverse-image]. By [lem-cbc-proetale-sheafification-geometric-stalk], $P_u\\to(P^\\#)_u=(t^{-1}M)_u$ is an isomorphism, so representatives may be computed before sheafification. The double-colimit calculation of Tag 0F4F sends $(U,u',V,\\theta,a)$ to $(V,\\operatorname{pr}_V\\theta u',a)$. It respects both restriction relations: restriction in $U$ precomposes $u'$, and restriction along $b:V\\to V'$ replaces the section by $M(b)(a')$ and the lift by $bw$. The reverse sends $(V,w,a)$ to $(T\\times_SV,(u,w),V,\\mathrm{id},a)$. The first composite is the identity; for the other composite, $\\theta:(U,u')\\to(T\\times_SV,(u,\\operatorname{pr}_V\\theta u'))$ is a pointed morphism and gives exactly the required colimit relation. These are the maps of the canonical comparison in Tag 05V1. Applying the same formulas to the module action preserves constant scalar sections. By [prop-weil-pbc-proetale-constant-ring-map] extension along the coefficient identification transports the action without changing the underlying sheaf, so the comparison for $t^*M$ is $A$-linear.",
+   "text": "For the underlying abelian sheaf of an $A_S$-module $M$, [lem-pur-proetale-inverse-image-stalk] supplies the natural additive comparison $(t^{-1}M)_u\\cong M_{tu}$ with no extra hypothesis on $t$. To check its normalization, write $P=u_{t,p}M$ for the presheaf colimit in [def-weil-proetale-inverse-image]. By [lem-cbc-proetale-sheafification-geometric-stalk], $P_u\\to(P^\\#)_u=(t^{-1}M)_u$ is an isomorphism, so representatives may be computed before sheafification. The double-colimit calculation of Tag 0F4F sends $(U,u',V,\\theta,a)$ to $(V,\\operatorname{pr}_V\\theta u',a)$. It respects both restriction relations: restriction in $U$ precomposes $u'$, and restriction along $b:V\\to V'$ replaces the section by $M(b)(a')$ and the lift by $bw$. The reverse sends $(V,w,a)$ to $(T\\times_SV,(u,w),V,\\mathrm{id},a)$. The first composite is the identity; for the other composite, $\\theta:(U,u')\\to(T\\times_SV,(u,\\operatorname{pr}_V\\theta u'))$ is a pointed morphism and gives exactly the required colimit relation. These are the maps of the canonical comparison in Tag 05V1. Applying the same formulas to the module action preserves constant scalar sections. By [prop-weil-pbc-proetale-constant-ring-map] extension along the coefficient identification transports the action without changing the underlying sheaf, so the comparison for $t^*M$ is $A$-linear. In Lean, first identify the underlying mate of the supplied module adjunction unit. Use the proved ringUnitComparison of [lem-weil-pbc-ring-sheaf-change-adjunction], which combines canonical module inverse image with uniqueness of left adjoints and the coefficient scalar equivalence, to show that mate is invertible. Transport the abelian stalk comparison through that mate. The inverse germ formula follows from compatibility of the adjunction units; the forward formula follows by restriction along the represented pointed arrow. Filtered-colimit representatives and the constant-section coefficient map prove A-linearity, and the inverse germ formula proves uniqueness.",
    "uses": [
     "def-weil-proetale-geometric-stalk",
     "def-weil-proetale-inverse-image",
     "prop-weil-pbc-proetale-constant-ring-map",
     "lem-pur-proetale-inverse-image-stalk",
-    "lem-cbc-proetale-sheafification-geometric-stalk"
+    "lem-cbc-proetale-sheafification-geometric-stalk",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -90,12 +91,13 @@
   "lem-pur-proetale-inverse-image-stalk",
   "lem-weil-pbc-localization-universal-property",
   "lem-weil-pbc-proetale-derived-pullback-composition",
-  "prop-weil-pbc-proetale-constant-ring-map"
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 05V1 and 0F4F, with proetale.tex Tag 0993 for the classical point description"
+  "place": "Tags 05V1 and 0F4F; reuse ringUnitComparison in ProEtaleRingSheafChangeAdjunction for the underlying mate and module-colimit representatives for linearity. Steps 3 and 5 remain in the original combined coherence theorem."
  },
  "mathlib_match": null,
  "status": "split",
@@ -233,5 +235,15 @@
   "group": "Q67",
   "result": "pass",
   "note": "Read the node, all 8 dependency records and the exact side declarations (base change = Over.pullback so pullback.fst is pr_V; neighbourhoods = StructuredArrow; derived pullback = mapDerivedCategory). Each clause matches: Finite A; unrestricted h, f, t; the recorded ProEt and universes; both germ normalizations; composition in D via proEtaleConstantRingPullbackComposition.inv (the canonical chi transported, correct direction); unit-normalized identity at module and D level; field reparametrization by StructuredArrow.map with the commuting square at module and D level; bounded H. c, r and e come from true, fully determining ∃! theorems (allowed by AGENTS §5). 5 sorry, all in theorems; docstrings and blueprint tags present; only the lean field changed; statement verbatim; no duplicate. nt_compile --json: clean in 17.7 s; a control with a false example confirmed elaboration. Observation only: the chi helper is owned by pur713-def-pullback-comparison, which is not in stmt_deps; same usage as the landed lem-trf-derived-pullback-coherence."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V1",
+  "result": "pass",
+  "landing": "20261020T131202-L-1255335",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
