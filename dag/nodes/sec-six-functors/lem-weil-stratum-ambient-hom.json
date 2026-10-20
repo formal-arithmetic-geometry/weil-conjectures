@@ -1,185 +1,70 @@
 {
-  "id": "lem-weil-stratum-ambient-hom",
-  "blueprint": {
-    "is": "lem-weil-stratum-ambient-hom",
-    "from": null,
-    "same_as": []
-  },
-  "kind": "statement",
-  "title": "Internal Hom from extension along a stratum",
-  "statement": "Let $A$ be a finite commutative ring and let $s:S\\hookrightarrow X$ be an immersion, that is, a closed immersion followed by an open immersion [def-weil-closed-immersion]. Choose $\\tau=\\mathrm{et}$ or $\\mathrm{proet}$, using the small sites and their size conventions [def-weil-pbc-etale-site, def-weil-pbc-proetale-site]. In the pro-etale case assume $X$ is Noetherian (quasi-compact and locally Noetherian [def-weil-finite-type-morphism, pqf-def-locnoeth]); this includes the finite-type schemes over a field in the enclosing unit. Write $D_\\tau(T,A)=D(\\operatorname{Mod}(T_\\tau,A_T))$ for the ordinary unbounded derived category of modules over the constant ring sheaf $A_T$ [def-weil-pbc-derived-categories, def-weil-pbc-proetale-site].\n\nFix a factorization $S\\xrightarrow{i}U\\xrightarrow{j}X$ with $i$ closed and $j$ open. In these ambient categories let $Rs_!=j_!Ri_*$, where $j_!$ is exact extension by zero [def-weil-pbc-extension-by-zero, def-weil-extension-by-zero], and put $Rs^!=Ri^!j^{-1}$, using the ambient right adjoint $Ri^!$ to the closed direct image [lem-exc-closed-ambient, lem-exc-proetale-closed-support]. Let $Rs_*$ be ordinary derived direct image, computed by a K-injective resolution, and use derived tensor and internal Hom on the ringed sites [lem-weil-pbc-site-derived-tensor-descent, def-pur-derived-internal-hom]. Then for all $P\\in D_\\tau(S,A)$ and $M\\in D_\\tau(X,A)$ there is an isomorphism\n$$\n R\\mathcal Hom_{A_X}(Rs_!P,M)\\ \\cong\\ Rs_*R\\mathcal Hom_{A_S}(P,Rs^!M),\n$$\nnatural contravariantly in $P$ and covariantly in $M$. No boundedness, constructibility, finite Tor amplitude, constructible-preservation, or biduality hypothesis on the complexes is imposed. The assertion applies to either choice of factorization with these properties.",
-  "source": {
+ "id": "lem-weil-stratum-ambient-hom",
+ "blueprint": {
+  "is": "lem-weil-stratum-ambient-hom",
+  "from": null,
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Internal Hom from extension along a stratum",
+ "statement": "Let $A$ be a finite commutative ring and let $s:S\\hookrightarrow X$ be an immersion, that is, a closed immersion followed by an open immersion [def-weil-closed-immersion]. Choose $\\tau=\\mathrm{et}$ or $\\mathrm{proet}$, using the small sites and their size conventions [def-weil-pbc-etale-site, def-weil-pbc-proetale-site]. In the pro-etale case assume $X$ is Noetherian (quasi-compact and locally Noetherian [def-weil-finite-type-morphism, pqf-def-locnoeth]); this includes the finite-type schemes over a field in the enclosing unit. Write $D_\\tau(T,A)=D(\\operatorname{Mod}(T_\\tau,A_T))$ for the ordinary unbounded derived category of modules over the constant ring sheaf $A_T$ [def-weil-pbc-derived-categories, def-weil-pbc-proetale-site].\n\nFix a factorization $S\\xrightarrow{i}U\\xrightarrow{j}X$ with $i$ closed and $j$ open. In these ambient categories let $Rs_!=j_!Ri_*$, where $j_!$ is exact extension by zero [def-weil-pbc-extension-by-zero, def-weil-extension-by-zero], and put $Rs^!=Ri^!j^{-1}$, using the ambient right adjoint $Ri^!$ to the closed direct image [lem-exc-closed-ambient, lem-exc-proetale-closed-support]. Let $Rs_*$ be ordinary derived direct image, computed by a K-injective resolution, and use derived tensor and internal Hom on the ringed sites [lem-weil-pbc-site-derived-tensor-descent, def-pur-derived-internal-hom]. Then for all $P\\in D_\\tau(S,A)$ and $M\\in D_\\tau(X,A)$ there is an isomorphism\n$$\n R\\mathcal Hom_{A_X}(Rs_!P,M)\\ \\cong\\ Rs_*R\\mathcal Hom_{A_S}(P,Rs^!M),\n$$\nnatural contravariantly in $P$ and covariantly in $M$. No boundedness, constructibility, finite Tor amplitude, constructible-preservation, or biduality hypothesis on the complexes is imposed. The assertion applies to either choice of factorization with these properties.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
+  "place": "node lem-weil-stratum-ambient-hom, order 2069"
+ },
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-site",
+  "def-weil-pbc-proetale-site",
+  "def-weil-finite-type-morphism",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-extension-by-zero",
+  "lem-exc-closed-ambient",
+  "lem-exc-proetale-closed-support",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-direct-image",
+  "def-weil-proetale-inverse-image",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-exc-proetale-sections-with-support",
+  "lem-weil-extension-by-zero-exact"
+ ],
+ "proof": [
+  {
+   "text": "For the etale clause, take the natural isomorphism supplied by [lem-sf-etale-generic-stratum-mate] and forget its evaluation-normalization property. Its immersionLowerShriek and immersionUpperShriek are, by definition, the stipulated closed-then-open shriek functors. This proves precisely the ambient bifunctor identity, including both naturality variables. The remaining steps record the still-unproved pro-etale clause; their etale alternatives are no longer required for that clause. For the pending pro-etale proof, proceed as follows. Use the chosen closed-then-open factorization $s=ji$. In the pro-etale case, $U$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Apply the same statement to the open complement $V=U\\setminus i(S)$ and to its intersections with affine opens of $U$: all are quasi-compact. Thus $v:V\\hookrightarrow U$ is a quasi-compact morphism. This verifies the hypotheses of the pro-etale closed-localization and closed-support statements used below. No such hypothesis is needed on the etale side. The Noetherian assumption restores the scheme context of the enclosing unit; the imported standalone node did not state it.",
+   "uses": [
+    "lem-sf-etale-generic-stratum-mate",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
-    "place": "node lem-weil-stratum-ambient-hom, order 2069"
+    "place": "Proof, first sentence; enclosing unit statement and proof (ii); missing pro-etale hypothesis made explicit"
+   }
   },
-  "stmt_deps": [
-    "def-pc-kflat-complex",
-    "def-weil-closed-immersion",
-    "def-weil-pbc-etale-site",
-    "def-weil-pbc-proetale-site",
-    "def-weil-finite-type-morphism",
-    "pqf-def-locnoeth",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-extension-by-zero",
-    "def-weil-extension-by-zero",
-    "lem-exc-closed-ambient",
-    "lem-exc-proetale-closed-support",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pur-derived-internal-hom",
-    "def-weil-pbc-direct-image",
-    "def-weil-proetale-inverse-image",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-kinjective-total-derived",
-    "def-exc-proetale-sections-with-support",
-    "lem-weil-extension-by-zero-exact"
-  ],
-  "proof": [
-    {
-      "text": "Use the chosen closed-then-open factorization $s=ji$. In the pro-etale case, $U$ is Noetherian by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Apply the same statement to the open complement $V=U\\setminus i(S)$ and to its intersections with affine opens of $U$: all are quasi-compact. Thus $v:V\\hookrightarrow U$ is a quasi-compact morphism. This verifies the hypotheses of the pro-etale closed-localization and closed-support statements used below. No such hypothesis is needed on the etale side. The Noetherian assumption restores the scheme context of the enclosing unit; the imported standalone node did not state it.",
-      "uses": [
-        "lem-weil-pbc-noetherian-open-subscheme-noetherian"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
-        "place": "Proof, first sentence; enclosing unit statement and proof (ii); missing pro-etale hypothesis made explicit"
-      }
-    },
-    {
-      "text": "The etale closed direct image $i_*$ is exact: at points of $i(S)$ its stalk is the corresponding stalk on $S$ by [lemma-openclosed-stalk-lowerstar]; outside $i(S)$ it is zero, since a neighbourhood disjoint from $i(S)$ has empty pullback. Exactness of geometric stalks and their conservativity therefore check exactness of $i_*$ on every short exact sequence. The same assertions hold for constant-coefficient modules by forgetting the module action. Its inverse-image counit is an isomorphism by [lem-kun-04ca]. In the pro-etale case [lem-weil-pbc-proetale-ringed-open-closed], applied on $U$ with the quasi-compact complement from step 1, directly gives exactness, the closed counit isomorphism, and $v^{-1}i_*=0$. Consequently $Ri_*=i_*$, computed termwise, in both cases. Moreover $i^{-1}$ and $v^{-1}$ detect zero sheaves: in the etale case a sheaf zero on $V$ is supported on $i(S)$ and [lem-kun-04ca] identifies it with $i_*G$, so its inverse image on $S$ is $G$; in the pro-etale case the short exact localization sequence of [lem-weil-pbc-proetale-ringed-open-closed] proves this directly. Since both inverse images are exact, they also jointly detect acyclic complexes, by applying this argument to each cohomology sheaf.",
-      "uses": [
-        "lemma-openclosed-stalk-lowerstar",
-        "prop-weil-pbc-geometric-stalks-exact",
-        "lemma-weil-pbc-geometric-stalk-conservative",
-        "lem-kun-04ca",
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "lem-weil-pbc-site-pullback-abelian-exact"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/proetale.tex",
-        "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); etale comparison: Tag 04CA"
-      }
-    },
-    {
-      "text": "For any of the scheme maps in this argument, inverse image with constant coefficients is exact: its underlying abelian functor is the exact site inverse image, and the inverse image of the constant ring is the same constant ring. The module adjunction is [lem-weil-pbc-ringed-topoi-module-adjunction]. It derives on the whole unbounded categories as follows. Choose a K-injective resolution $N\\to I$ on the source site using [prop-pur-kinjective-resolutions-exist]. The direct image of $I$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], since inverse image is exact. The homotopy-category adjunction [lem-weil-pbc-termwise-adjunction-homotopy] and [lem-weil-pbc-kinjective-hom-derived] then give\n$$\\operatorname{Hom}(t^{-1}Q,N)=\\operatorname{Hom}_{K}(t^{-1}Q,I)=\\operatorname{Hom}_{K}(Q,t_*I)=\\operatorname{Hom}(Q,Rt_*N).$$\nHere any representative of $Q$ can be used. Thus $t^{-1}\\dashv Rt_*$. The total derived functor used here exists by [lem-weil-pbc-kinjective-total-derived]. The same K-injective calculation derives $j_!\\dashv j^{-1}$ from the etale sheaf adjunction and exactness [lem-weil-pbc-extension-by-zero-adjunction, lem-weil-pbc-extension-by-zero-exact], or from the pro-etale exact adjunction [lem-cbc-proetale-extension-zero]; for this calculation $j^{-1}I$ is K-injective because $j_!$ is exact. All these bijections are natural. Composing this open adjunction with the ambient closed adjunction of [lem-exc-closed-ambient] or [lem-exc-proetale-closed-support] gives $Rs_!=j_!i_*\\dashv Ri^!j^{-1}=Rs^!$.",
-      "uses": [
-        "lem-weil-pbc-site-pullback-abelian-exact",
-        "lem-weil-pbc-ringed-topoi-module-adjunction",
-        "prop-pur-kinjective-resolutions-exist",
-        "lem-weil-pbc-right-adjoint-preserves-kinjective",
-        "lem-weil-pbc-termwise-adjunction-homotopy",
-        "lem-weil-pbc-kinjective-hom-derived",
-        "lem-weil-pbc-kinjective-total-derived",
-        "lem-weil-pbc-extension-by-zero-adjunction",
-        "lem-weil-pbc-extension-by-zero-exact",
-        "lem-cbc-proetale-extension-zero",
-        "lem-exc-closed-ambient",
-        "lem-exc-proetale-closed-support"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08FJ (lemma-adjoint-lower-shriek-restrict), K-injective proof; blueprint Proof, first two sentences"
-      }
-    },
-    {
-      "text": "Inverse image on each of these constant-coefficient ringed sites has a canonical derived tensor comparison\n$$t^{-1}(Q\\otimes_A^LQ')\\cong t^{-1}Q\\otimes_A^Lt^{-1}Q'$$\nby [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The same cited statement says that pullback of a K-flat complex with flat terms is K-flat with flat terms. We will use both assertions for $i$, $j$, and the complementary $v$. The constant-coefficient pullback is termwise inverse image because it is exact; no finite Tor-amplitude condition on $Q,Q'$ occurs in this result. We will also use the following direct consequence of K-flatness [def-pc-kflat-complex]: if one tensor factor is K-flat, the other may be represented by an arbitrary complex. Indeed, replace that other complex by a K-flat resolution; the cone of its resolution map is acyclic, and tensoring this cone with the fixed K-flat factor is acyclic by the definition. Thus the induced map of total tensor complexes is a quasi-isomorphism. This justifies the arbitrary first-factor representatives in steps 5 and 8.",
-      "uses": [
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "def-pc-kflat-complex"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat)"
-      }
-    },
-    {
-      "text": "First establish the open projection formula on both sites. An open immersion is an etale site object by [lem-weil-pbc-open-immersion-etale], and inverse image there is restriction by [lem-weil-pbc-etale-inverse-image-restriction]. For the pro-etale site use the localization identification [lem-weil-proetale-weakly-etale-localization]. The ringed-slice formula [lem-weil-pbc-ringed-slice-extension-tensor] therefore gives, for module sheaves, $j_!(F\\otimes j^{-1}G)\\cong j_!F\\otimes G$. Choose a K-flat resolution with flat terms $Q_0\\to Q$ on $X$ using [lem-pc-kflat-resolution]. By step 4, $j^{-1}Q_0$ is K-flat. Use any complex representing $P'$ on $U$. In each total degree the sheaf formula identifies the summands of $j_!(P'\\otimes j^{-1}Q_0)$ with those of $j_!P'\\otimes Q_0$, and it commutes with both differentials by naturality. Extension by zero commutes with their direct sums: the coproduct comparison follows directly from its adjunction, since maps from either candidate to $N$ are families of maps from the summands to $j^{-1}N$. Hence it identifies the total complexes. Exactness of $j_!$ from step 3 and the derived tensor construction [lem-weil-pbc-site-derived-tensor-descent] give a natural isomorphism\n$$j_!P'\\otimes_A^L Q\\cong j_!(P'\\otimes_A^Lj^{-1}Q).$$\nThe pro-etale assertion is also exactly [lem-cbc-extension-zero-projection-formula].",
-      "uses": [
-        "lem-weil-pbc-open-immersion-etale",
-        "lem-weil-pbc-etale-inverse-image-restriction",
-        "lem-weil-proetale-weakly-etale-localization",
-        "lem-weil-pbc-ringed-slice-extension-tensor",
-        "lem-pc-kflat-resolution",
-        "lem-weil-pbc-site-derived-tensor-descent",
-        "lem-cbc-extension-zero-projection-formula"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), expanding the omitted total-complex details; sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
-      }
-    },
-    {
-      "text": "Next establish the closed projection formula without using geometric stalks on the pro-etale site. Form\n$$c:i_*P\\otimes_A^LQ'\\longrightarrow i_*(P\\otimes_A^Li^{-1}Q')$$\nas the adjoint under $i^{-1}\\dashv Ri_*=i_*$ of\n$$i^{-1}(i_*P\\otimes_A^LQ')\\cong i^{-1}i_*P\\otimes_A^Li^{-1}Q'\\xrightarrow{\\varepsilon_P\\otimes1}P\\otimes_A^Li^{-1}Q'.$$\nThe comparison in step 4 and the closed counit isomorphism in step 2 identify $i^{-1}c$ with an isomorphism. Both sides have zero restriction to $V$: for the source use $v^{-1}i_*P=0$ and the tensor comparison, and for the target use $v^{-1}i_*=0$. The cone of $c$ therefore has zero inverse images on $S$ and $V$, so it is acyclic by the joint detection on complexes proved in step 2. Thus $c$ is an isomorphism. This proves $i_*P\\otimes_A^LQ'\\cong i_*(P\\otimes_A^Li^{-1}Q')$, naturally in the two arbitrary complexes. The exactness and counit facts are precisely those of [lem-kun-04ca] in the etale case and [lem-weil-pbc-proetale-ringed-open-closed] in the pro-etale case; the tensor assertion is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback].",
-      "uses": [
-        "lem-kun-04ca",
-        "lem-weil-pbc-proetale-ringed-open-closed",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
-        "place": "Proof, projection formula sentence, replacing the unsupported pro-etale stalk argument by open-closed detection"
-      }
-    },
-    {
-      "text": "Compose the open and closed formulas of steps 5 and 6, with $P'=i_*P$ and $Q'=j^{-1}Q$, to obtain\n$$Rs_!P\\otimes_A^LQ=j_!i_*P\\otimes_A^LQ\\cong j_!(i_*P\\otimes_A^Lj^{-1}Q)\\cong j_!i_*(P\\otimes_A^Li^{-1}j^{-1}Q)=Rs_!(P\\otimes_A^Ls^{-1}Q).$$\nHere $s^{-1}=i^{-1}j^{-1}$: the composite is left adjoint to the composite sheaf direct image $j_*i_*=s_*$, so identifies with inverse image, including its unit and counit. On K-injectives, $Ri_*=i_*$ preserves K-injectives by the exact inverse-image adjunction and [lem-weil-pbc-right-adjoint-preserves-kinjective]. Thus $Rj_*Ri_*=Rs_*$ as well: on a K-injective $I$ the two constructions both give $j_*i_*I=s_*I$. All comparisons in the displayed projection formula are natural.",
-      "uses": [
-        "lem-weil-pbc-right-adjoint-preserves-kinjective"
-      ],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
-        "place": "Proof, equation preceding the test-complex calculation; composition of the two immersion cases"
-      }
-    },
-    {
-      "text": "Derive the tensor-internal-Hom bijection on either ringed site, rather than taking it from a definition of the operations. For arbitrary $K,L,N$, choose a K-flat representative $L_0$ of $L$ and a K-injective representative $I$ of $N$. The Hom complex $\\mathcal Hom^\\bullet(L_0,I)$ is K-injective by [lem-pur-hom-kflat-into-kinjective]. For any representative $K_0$, [lem-sc-derived-hom-tensor-total] gives\n$$\\mathcal Hom^\\bullet(K_0,\\mathcal Hom^\\bullet(L_0,I))\\cong\\mathcal Hom^\\bullet(\\operatorname{Tot}(K_0\\otimes L_0),I).$$\nThe two sides represent $R\\mathcal Hom(K,R\\mathcal Hom(L,N))$ and $R\\mathcal Hom(K\\otimes_A^LL,N)$. Taking $H^0$ of derived global sections and using [lem-pur-rhom-global-sections] on each side gives\n$$\\operatorname{Hom}(K,R\\mathcal Hom(L,N))\\cong\\operatorname{Hom}(K\\otimes_A^LL,N),$$\nnatural in all three derived objects. Existence of $L_0$ and $I$ is [lem-pc-kflat-resolution, prop-pur-kinjective-resolutions-exist]; the models and their descent are [def-pur-derived-internal-hom, lem-weil-pbc-site-derived-tensor-descent]. Symmetry used to resolve the second tensor variable is induced by the symmetric sheaf tensor [lem-pc-sheaf-modules-tensor-closed]; swapping the degree-$p,q$ summands with sign $(-1)^{pq}$ commutes with the total differential and squares to the identity, hence gives the corresponding derived symmetry.",
-      "uses": [
-        "lem-pur-hom-kflat-into-kinjective",
-        "lem-sc-derived-hom-tensor-total",
-        "lem-pur-rhom-global-sections",
-        "lem-pc-kflat-resolution",
-        "prop-pur-kinjective-resolutions-exist",
-        "def-pur-derived-internal-hom",
-        "lem-weil-pbc-site-derived-tensor-descent",
-        "lem-pc-sheaf-modules-tensor-closed"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/sites-cohomology.tex",
-        "place": "Tag 08J9 (lemma-internal-hom), equation-internal-hom, with Tag 08JA (lemma-section-RHom-over-U) and Tag 0A90 (lemma-compose)"
-      }
-    },
-    {
-      "text": "For every $Q\\in D_\\tau(X,A)$, apply step 8, the projection formula of step 7 (with tensor symmetry), the shriek adjunction of step 3, step 8 on $S$, and the star adjunction of step 3, in that order:\n$$\\begin{aligned}\n\\operatorname{Hom}_X(Q,R\\mathcal Hom_X(Rs_!P,M))\n&\\cong\\operatorname{Hom}_X(Q\\otimes_A^LRs_!P,M)\\\\\n&\\cong\\operatorname{Hom}_X(Rs_!(s^{-1}Q\\otimes_A^LP),M)\\\\\n&\\cong\\operatorname{Hom}_S(s^{-1}Q\\otimes_A^LP,Rs^!M)\\\\\n&\\cong\\operatorname{Hom}_S(s^{-1}Q,R\\mathcal Hom_S(P,Rs^!M))\\\\\n&\\cong\\operatorname{Hom}_X(Q,Rs_*R\\mathcal Hom_S(P,Rs^!M)).\n\\end{aligned}$$\nEvery object here belongs to its ordinary ambient derived category, by the constructions already checked; none of the bijections requires a constructible or perfect input. Their composite is natural in $Q$, contravariantly in $P$, and covariantly in $M$.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
-        "place": "Proof, displayed test-complex calculation, with both tensor-Hom bijections made explicit"
-      }
-    },
-    {
-      "text": "Write $B=R\\mathcal Hom_X(Rs_!P,M)$, $C=Rs_*R\\mathcal Hom_S(P,Rs^!M)$, and $\\theta_Q:\\operatorname{Hom}(Q,B)\\cong\\operatorname{Hom}(Q,C)$ for step 9. Set $\\alpha=\\theta_B(1_B):B\\to C$ and $\\beta=\\theta_C^{-1}(1_C):C\\to B$. Naturality in $Q$ gives $\\theta_Q(f)=\\alpha f$ and $\\theta_Q^{-1}(g)=\\beta g$; evaluating their inverse composites at the identities gives $\\beta\\alpha=1_B$ and $\\alpha\\beta=1_C$. Thus $\\alpha$ is the desired isomorphism. Naturality of $\\theta$ in $P,M$ gives naturality of $\\alpha$. This writes out the required representable-functor argument directly, without applying the scheme-specific Yoneda node to a derived category.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
-        "place": "Proof, final Yoneda sentence"
-      }
-    }
-  ],
-  "proof_deps": [
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  {
+   "text": "The etale closed direct image $i_*$ is exact: at points of $i(S)$ its stalk is the corresponding stalk on $S$ by [lemma-openclosed-stalk-lowerstar]; outside $i(S)$ it is zero, since a neighbourhood disjoint from $i(S)$ has empty pullback. Exactness of geometric stalks and their conservativity therefore check exactness of $i_*$ on every short exact sequence. The same assertions hold for constant-coefficient modules by forgetting the module action. Its inverse-image counit is an isomorphism by [lem-kun-04ca]. In the pro-etale case [lem-weil-pbc-proetale-ringed-open-closed], applied on $U$ with the quasi-compact complement from step 1, directly gives exactness, the closed counit isomorphism, and $v^{-1}i_*=0$. Consequently $Ri_*=i_*$, computed termwise, in both cases. Moreover $i^{-1}$ and $v^{-1}$ detect zero sheaves: in the etale case a sheaf zero on $V$ is supported on $i(S)$ and [lem-kun-04ca] identifies it with $i_*G$, so its inverse image on $S$ is $G$; in the pro-etale case the short exact localization sequence of [lem-weil-pbc-proetale-ringed-open-closed] proves this directly. Since both inverse images are exact, they also jointly detect acyclic complexes, by applying this argument to each cohomology sheaf.",
+   "uses": [
     "lemma-openclosed-stalk-lowerstar",
     "prop-weil-pbc-geometric-stalks-exact",
     "lemma-weil-pbc-geometric-stalk-conservative",
     "lem-kun-04ca",
     "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-site-pullback-abelian-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open); etale comparison: Tag 04CA"
+   }
+  },
+  {
+   "text": "For any of the scheme maps in this argument, inverse image with constant coefficients is exact: its underlying abelian functor is the exact site inverse image, and the inverse image of the constant ring is the same constant ring. The module adjunction is [lem-weil-pbc-ringed-topoi-module-adjunction]. It derives on the whole unbounded categories as follows. Choose a K-injective resolution $N\\to I$ on the source site using [prop-pur-kinjective-resolutions-exist]. The direct image of $I$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective], since inverse image is exact. The homotopy-category adjunction [lem-weil-pbc-termwise-adjunction-homotopy] and [lem-weil-pbc-kinjective-hom-derived] then give\n$$\\operatorname{Hom}(t^{-1}Q,N)=\\operatorname{Hom}_{K}(t^{-1}Q,I)=\\operatorname{Hom}_{K}(Q,t_*I)=\\operatorname{Hom}(Q,Rt_*N).$$\nHere any representative of $Q$ can be used. Thus $t^{-1}\\dashv Rt_*$. The total derived functor used here exists by [lem-weil-pbc-kinjective-total-derived]. The same K-injective calculation derives $j_!\\dashv j^{-1}$ from the etale sheaf adjunction and exactness [lem-weil-pbc-extension-by-zero-adjunction, lem-weil-pbc-extension-by-zero-exact], or from the pro-etale exact adjunction [lem-cbc-proetale-extension-zero]; for this calculation $j^{-1}I$ is K-injective because $j_!$ is exact. All these bijections are natural. Composing this open adjunction with the ambient closed adjunction of [lem-exc-closed-ambient] or [lem-exc-proetale-closed-support] gives $Rs_!=j_!i_*\\dashv Ri^!j^{-1}=Rs^!$.",
+   "uses": [
     "lem-weil-pbc-site-pullback-abelian-exact",
     "lem-weil-pbc-ringed-topoi-module-adjunction",
     "prop-pur-kinjective-resolutions-exist",
@@ -191,303 +76,430 @@
     "lem-weil-pbc-extension-by-zero-exact",
     "lem-cbc-proetale-extension-zero",
     "lem-exc-closed-ambient",
-    "lem-exc-proetale-closed-support",
+    "lem-exc-proetale-closed-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FJ (lemma-adjoint-lower-shriek-restrict), K-injective proof; blueprint Proof, first two sentences"
+   }
+  },
+  {
+   "text": "Inverse image on each of these constant-coefficient ringed sites has a canonical derived tensor comparison\n$$t^{-1}(Q\\otimes_A^LQ')\\cong t^{-1}Q\\otimes_A^Lt^{-1}Q'$$\nby [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The same cited statement says that pullback of a K-flat complex with flat terms is K-flat with flat terms. We will use both assertions for $i$, $j$, and the complementary $v$. The constant-coefficient pullback is termwise inverse image because it is exact; no finite Tor-amplitude condition on $Q,Q'$ occurs in this result. We will also use the following direct consequence of K-flatness [def-pc-kflat-complex]: if one tensor factor is K-flat, the other may be represented by an arbitrary complex. Indeed, replace that other complex by a K-flat resolution; the cone of its resolution map is acyclic, and tensoring this cone with the fixed K-flat factor is acyclic by the definition. Thus the induced map of total tensor complexes is a quasi-isomorphism. This justifies the arbitrary first-factor representatives in steps 5 and 8.",
+   "uses": [
     "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-pc-kflat-complex",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0G7E (lemma-pullback-K-flat)"
+   }
+  },
+  {
+   "text": "First establish the open projection formula on both sites. An open immersion is an etale site object by [lem-weil-pbc-open-immersion-etale], and inverse image there is restriction by [lem-weil-pbc-etale-inverse-image-restriction]. For the pro-etale site use the localization identification [lem-weil-proetale-weakly-etale-localization]. The ringed-slice formula [lem-weil-pbc-ringed-slice-extension-tensor] therefore gives, for module sheaves, $j_!(F\\otimes j^{-1}G)\\cong j_!F\\otimes G$. Choose a K-flat resolution with flat terms $Q_0\\to Q$ on $X$ using [lem-pc-kflat-resolution]. By step 4, $j^{-1}Q_0$ is K-flat. Use any complex representing $P'$ on $U$. In each total degree the sheaf formula identifies the summands of $j_!(P'\\otimes j^{-1}Q_0)$ with those of $j_!P'\\otimes Q_0$, and it commutes with both differentials by naturality. Extension by zero commutes with their direct sums: the coproduct comparison follows directly from its adjunction, since maps from either candidate to $N$ are families of maps from the summands to $j^{-1}N$. Hence it identifies the total complexes. Exactness of $j_!$ from step 3 and the derived tensor construction [lem-weil-pbc-site-derived-tensor-descent] give a natural isomorphism\n$$j_!P'\\otimes_A^L Q\\cong j_!(P'\\otimes_A^Lj^{-1}Q).$$\nThe pro-etale assertion is also exactly [lem-cbc-extension-zero-projection-formula].",
+   "uses": [
     "lem-weil-pbc-open-immersion-etale",
     "lem-weil-pbc-etale-inverse-image-restriction",
     "lem-weil-proetale-weakly-etale-localization",
     "lem-weil-pbc-ringed-slice-extension-tensor",
     "lem-pc-kflat-resolution",
     "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-cbc-extension-zero-projection-formula",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-pur-rhom-global-sections",
-    "def-pur-derived-internal-hom",
-    "lem-pc-sheaf-modules-tensor-closed"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
-    "place": "Proof, expanded using the cited ringed-site Stacks statements; correction of missing pro-etale scheme hypothesis and replacement of geometric-stalk detection"
+    "lem-cbc-extension-zero-projection-formula"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), expanding the omitted total-complex details; sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "grep",
-      "query": "internalHom.*[sS]hriek|[hH]om.*[eE]xtension[Bb]y[Zz]ero|projectionFormula",
-      "results": "No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match: no declaration supplies the two ambient site-specific immersion assertions; the adjunction and monoidal hits are ingredients only"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived internal Hom from extension by zero along a locally closed immersion equals derived pushforward of internal Hom into exceptional inverse image",
-      "results": "8 hits; top results: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardSections_unitHomEquiv, CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj, CategoryTheory.ExponentiableMorphism.ev",
-      "date": "2026-10-16",
-      "verdict": "no match: no declaration supplies the two ambient site-specific immersion assertions; the adjunction and monoidal hits are ingredients only"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalClosed",
-      "results": "12 hits; top results: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae",
-      "date": "2026-10-16",
-      "verdict": "no match: no declaration supplies the two ambient site-specific immersion assertions; the adjunction and monoidal hits are ingredients only"
-    },
-    {
-      "tool": "leansearch",
-      "query": "Derived internal Hom of extension by zero for locally closed immersion",
-      "results": "service unavailable: Internal Server Error",
-      "date": "2026-10-16",
-      "verdict": "unavailable"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "In closed monoidal derived categories a projection formula and the two adjunctions imply internal Hom of lower shriek equals pushforward internal Hom of upper shriek",
-      "results": "8 hits; top results: CategoryTheory.ExponentiableMorphism.pushforwardCurry, CategoryTheory.ExponentiableMorphism.pushforwardUncurry, CategoryTheory.ExponentiableMorphism.ev, CategoryTheory.ExponentiableMorphism.homEquiv_apply_eq, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.coev, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.ExponentiableMorphism.coev_ev",
-      "date": "2026-10-16",
-      "verdict": "no match: no declaration supplies the two ambient site-specific immersion assertions; the adjunction and monoidal hits are ingredients only"
-    },
-    {
-      "tool": "grep",
-      "query": "derivedHom|upperShriek|lowerShriek|extensionByZero",
-      "results": "No hits.",
-      "date": "2026-10-16",
-      "verdict": "no match: no declaration supplies the two ambient site-specific immersion assertions; the adjunction and monoidal hits are ingredients only"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "merged_into": null,
-  "import_flags": [],
-  "blueprint_kind": "lemma",
-  "blueprint_order": 2069,
-  "blueprint_uses": [
-    "def-weil-derived-pullback-tensor-hom",
-    "def-weil-open-closed-recollement",
-    "lem-exc-closed-ambient"
-  ],
-  "proof_split_by": "paragraphs",
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
-  },
-  "chapter": "sec-six-functors",
-  "unit": "sk-prop-sf-rf-shriek-preservation",
-  "split_report": {
-    "date": "2026-10-16",
-    "item": "lem-weil-stratum-ambient-hom",
-    "worker": "stage1",
-    "summary": "Read the original node and enclosing unit in the full local literature archive, audited all cited statements, and expanded the one-paragraph sketch into ten steps. Corrected the standalone statement by naming the finite commutative coefficients and the complexes and restoring the Noetherian target context for the pro-etale clause. Replaced non-conservative pro-etale geometric stalks by the existing ringed open-closed sequence. Derived the adjunctions and tensor-Hom formula on unbounded ringed-site categories, proved the closed projection formula by restriction, and reused existing nodes throughout. No new nodes.",
-    "blueprint": "Steps 1-3 realize the factorization and ambient-adjoint sentences; steps 4-7 realize the immersion projection formula; step 8 supplies the tensor-Hom adjunction hidden by the definitions citation; steps 9-10 realize the displayed Hom calculation and Yoneda conclusion. The unit route is unchanged: this is the formal immersion calculation supporting its closed-support/stratum argument.",
-    "tool_uses": [
-      {
-        "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-        "why": "Supplies the quasi-compact open-complement hypothesis for the closed immersion inside U. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lemma-openclosed-stalk-lowerstar",
-        "why": "Supplies closed pushforward stalks on the etale site, only for the etale part of exactness. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "prop-weil-pbc-geometric-stalks-exact",
-        "why": "Checks exactness of etale closed pushforward on stalks. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lemma-weil-pbc-geometric-stalk-conservative",
-        "why": "Detects exactness on etale geometric stalks; never used for pro-etale modules. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-kun-04ca",
-        "why": "Supplies etale closed full faithfulness, the inverse-image counit, and the support essential-image description. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-proetale-ringed-open-closed",
-        "why": "Supplies pro-etale exact closed pushforward, counit, disjoint-support vanishing, and joint detection via its actual localization sequence. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-site-pullback-abelian-exact",
-        "why": "Supplies exact inverse images on both sites, hence their compatibility with cohomology. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
-        "why": "Supplies the module inverse-image/direct-image adjunction for constant-coefficient ringed topoi. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "Supplies K-injective resolutions on both small ringed sites for arbitrary unbounded complexes. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
-        "why": "Supplies K-injective preservation by a right adjoint with exact left adjoint. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-termwise-adjunction-homotopy",
-        "why": "Supplies the natural Hom bijection on homotopy categories used in deriving the site adjunctions. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-kinjective-hom-derived",
-        "why": "Computes derived-category morphisms into K-injective complexes. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-kinjective-total-derived",
-        "why": "Supplies total right derived functors on the unbounded categories. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-extension-by-zero-adjunction",
-        "why": "Supplies the etale module extension-by-zero adjunction. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-extension-by-zero-exact",
-        "why": "Supplies exactness of etale extension by zero on unbounded complexes. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-cbc-proetale-extension-zero",
-        "why": "Supplies exactness and the extension-by-zero adjunction on pro-etale module sheaves. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-exc-closed-ambient",
-        "why": "Supplies the ambient closed right adjoint on the etale site, without constructibility. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-exc-proetale-closed-support",
-        "why": "Supplies the ambient closed right adjoint on the pro-etale site with the verified Noetherian hypothesis. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "why": "Supplies strong monoidality of derived pullback and K-flat preservation for arbitrary ringed topoi. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-open-immersion-etale",
-        "why": "Allows the open immersion to be used as an object of the etale site. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-etale-inverse-image-restriction",
-        "why": "Identifies etale inverse image with the actual localized restriction. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-proetale-weakly-etale-localization",
-        "why": "Identifies the pro-etale open site with the ringed slice. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-slice-extension-tensor",
-        "why": "Supplies the underived projection formula on a ringed slice, used to prove the open formula. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-pc-kflat-resolution",
-        "why": "Supplies K-flat resolutions with flat terms for the unbounded tensor calculation. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-weil-pbc-site-derived-tensor-descent",
-        "why": "Supplies the unbounded derived tensor and descent/naturality of the chosen tensor models. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-cbc-extension-zero-projection-formula",
-        "why": "Supplies an existing exact statement of the arbitrary-complex pro-etale open projection formula. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-pur-hom-kflat-into-kinjective",
-        "why": "Supplies K-injectivity of the Hom-complex model for the nested internal Hom. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-sc-derived-hom-tensor-total",
-        "why": "Supplies the actual Hom-complex currying isomorphism on arbitrary ringed sites. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-pur-rhom-global-sections",
-        "why": "Identifies H^0 of derived internal Hom with derived Hom on arbitrary small ringed sites. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      },
-      {
-        "node": "lem-pc-sheaf-modules-tensor-closed",
-        "why": "Supplies tensor symmetry on module sheaves, extended explicitly with the usual sign to complexes. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
-      }
-    ]
-  },
-  "tool_uses": [
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lemma-openclosed-stalk-lowerstar",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
+  {
+   "text": "Next establish the closed projection formula without using geometric stalks on the pro-etale site. Form\n$$c:i_*P\\otimes_A^LQ'\\longrightarrow i_*(P\\otimes_A^Li^{-1}Q')$$\nas the adjoint under $i^{-1}\\dashv Ri_*=i_*$ of\n$$i^{-1}(i_*P\\otimes_A^LQ')\\cong i^{-1}i_*P\\otimes_A^Li^{-1}Q'\\xrightarrow{\\varepsilon_P\\otimes1}P\\otimes_A^Li^{-1}Q'.$$\nThe comparison in step 4 and the closed counit isomorphism in step 2 identify $i^{-1}c$ with an isomorphism. Both sides have zero restriction to $V$: for the source use $v^{-1}i_*P=0$ and the tensor comparison, and for the target use $v^{-1}i_*=0$. The cone of $c$ therefore has zero inverse images on $S$ and $V$, so it is acyclic by the joint detection on complexes proved in step 2. Thus $c$ is an isomorphism. This proves $i_*P\\otimes_A^LQ'\\cong i_*(P\\otimes_A^Li^{-1}Q')$, naturally in the two arbitrary complexes. The exactness and counit facts are precisely those of [lem-kun-04ca] in the etale case and [lem-weil-pbc-proetale-ringed-open-closed] in the pro-etale case; the tensor assertion is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback].",
+   "uses": [
     "lem-kun-04ca",
     "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "lem-weil-pbc-ringed-topoi-module-adjunction",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-cbc-proetale-extension-zero",
-    "lem-exc-closed-ambient",
-    "lem-exc-proetale-closed-support",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-open-immersion-etale",
-    "lem-weil-pbc-etale-inverse-image-restriction",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-cbc-extension-zero-projection-formula",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
+    "place": "Proof, projection formula sentence, replacing the unsupported pro-etale stalk argument by open-closed detection"
+   }
+  },
+  {
+   "text": "Compose the open and closed formulas of steps 5 and 6, with $P'=i_*P$ and $Q'=j^{-1}Q$, to obtain\n$$Rs_!P\\otimes_A^LQ=j_!i_*P\\otimes_A^LQ\\cong j_!(i_*P\\otimes_A^Lj^{-1}Q)\\cong j_!i_*(P\\otimes_A^Li^{-1}j^{-1}Q)=Rs_!(P\\otimes_A^Ls^{-1}Q).$$\nHere $s^{-1}=i^{-1}j^{-1}$: the composite is left adjoint to the composite sheaf direct image $j_*i_*=s_*$, so identifies with inverse image, including its unit and counit. On K-injectives, $Ri_*=i_*$ preserves K-injectives by the exact inverse-image adjunction and [lem-weil-pbc-right-adjoint-preserves-kinjective]. Thus $Rj_*Ri_*=Rs_*$ as well: on a K-injective $I$ the two constructions both give $j_*i_*I=s_*I$. All comparisons in the displayed projection formula are natural.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
+    "place": "Proof, equation preceding the test-complex calculation; composition of the two immersion cases"
+   }
+  },
+  {
+   "text": "Derive the tensor-internal-Hom bijection on either ringed site, rather than taking it from a definition of the operations. For arbitrary $K,L,N$, choose a K-flat representative $L_0$ of $L$ and a K-injective representative $I$ of $N$. The Hom complex $\\mathcal Hom^\\bullet(L_0,I)$ is K-injective by [lem-pur-hom-kflat-into-kinjective]. For any representative $K_0$, [lem-sc-derived-hom-tensor-total] gives\n$$\\mathcal Hom^\\bullet(K_0,\\mathcal Hom^\\bullet(L_0,I))\\cong\\mathcal Hom^\\bullet(\\operatorname{Tot}(K_0\\otimes L_0),I).$$\nThe two sides represent $R\\mathcal Hom(K,R\\mathcal Hom(L,N))$ and $R\\mathcal Hom(K\\otimes_A^LL,N)$. Taking $H^0$ of derived global sections and using [lem-pur-rhom-global-sections] on each side gives\n$$\\operatorname{Hom}(K,R\\mathcal Hom(L,N))\\cong\\operatorname{Hom}(K\\otimes_A^LL,N),$$\nnatural in all three derived objects. Existence of $L_0$ and $I$ is [lem-pc-kflat-resolution, prop-pur-kinjective-resolutions-exist]; the models and their descent are [def-pur-derived-internal-hom, lem-weil-pbc-site-derived-tensor-descent]. Symmetry used to resolve the second tensor variable is induced by the symmetric sheaf tensor [lem-pc-sheaf-modules-tensor-closed]; swapping the degree-$p,q$ summands with sign $(-1)^{pq}$ commutes with the total differential and squares to the identity, hence gives the corresponding derived symmetry.",
+   "uses": [
     "lem-pur-hom-kflat-into-kinjective",
     "lem-sc-derived-hom-tensor-total",
     "lem-pur-rhom-global-sections",
+    "lem-pc-kflat-resolution",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-derived-internal-hom",
+    "lem-weil-pbc-site-derived-tensor-descent",
     "lem-pc-sheaf-modules-tensor-closed"
-  ],
-  "reviewed": {
-    "date": "2026-10-15",
-    "by": "L",
-    "reviewer": "NT-Codex-NI-1473c7227",
-    "group": "NI",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-1473c7227 (reviewer sub-agent of L); spot-checked: Read the full item, report, 42 cited statements, source locations, and unit/chapter route. All ten proof steps check; pro-etale localization avoids geometric-stalk conservativity, and the Noetherian scope covers existing applications. No new nodes, cycles, or repairs. Condensed target coefficients remain distinct. Detailed checks and accepted tool uses are in review.md."
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), equation-internal-hom, with Tag 08JA (lemma-section-RHom-over-U) and Tag 0A90 (lemma-compose)"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-16",
-    "by": "L",
-    "reviewer": "NT-stage2-Codex-3a6834de9",
-    "group": "Q29",
-    "result": "pass",
-    "note": "Wrote review.md. Checked immutable statements, all 19 statement dependencies, source alignment, canonical constructions, universes, edge cases, docstrings, reports, and verbatim signatures. All three modules compile cleanly through scompile.py. No fixes required; no project or branch changes made."
+  {
+   "text": "For every $Q\\in D_\\tau(X,A)$, apply step 8, the projection formula of step 7 (with tensor symmetry), the shriek adjunction of step 3, step 8 on $S$, and the star adjunction of step 3, in that order:\n$$\\begin{aligned}\n\\operatorname{Hom}_X(Q,R\\mathcal Hom_X(Rs_!P,M))\n&\\cong\\operatorname{Hom}_X(Q\\otimes_A^LRs_!P,M)\\\\\n&\\cong\\operatorname{Hom}_X(Rs_!(s^{-1}Q\\otimes_A^LP),M)\\\\\n&\\cong\\operatorname{Hom}_S(s^{-1}Q\\otimes_A^LP,Rs^!M)\\\\\n&\\cong\\operatorname{Hom}_S(s^{-1}Q,R\\mathcal Hom_S(P,Rs^!M))\\\\\n&\\cong\\operatorname{Hom}_X(Q,Rs_*R\\mathcal Hom_S(P,Rs^!M)).\n\\end{aligned}$$\nEvery object here belongs to its ordinary ambient derived category, by the constructions already checked; none of the bijections requires a constructible or perfect input. Their composite is natural in $Q$, contravariantly in $P$, and covariantly in $M$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
+    "place": "Proof, displayed test-complex calculation, with both tensor-Hom bijections made explicit"
+   }
   },
-  "lean": {
-    "module": "Sheaf.Paper.StratumAmbientHom",
-    "declaration": "AlgebraicGeometry.Etale.nonempty_stratumAmbientHomIso",
-    "declarations": [
-      "AlgebraicGeometry.Etale.nonempty_stratumAmbientHomIso",
-      "AlgebraicGeometry.ProEtale.nonempty_stratumAmbientHomIso"
-    ],
-    "file": "lean/Sheaf/Paper/StratumAmbientHom.lean",
-    "statement": "theorem Etale.nonempty_stratumAmbientHomIso (A : Type (u + 1)) [CommRing A] [Finite A] {S U X : Scheme.{u}} (i : S ⟶ U) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] : Nonempty ((((Etale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor ⋙ (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory).op.prod (𝟭 (Etale.DerivedCategoryModule A X))) ⋙ Functor.uncurry.obj (Etale.derivedHom (ModuleCat.{u + 1} A) X) ≅ ((𝟭 (Etale.DerivedCategoryModule A S)ᵒᵖ).prod ((Etale.upperStar (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙ (Etale.lowerStar (ModuleCat.{u + 1} A) i).rightDerivedFunctor.rightAdjoint)) ⋙ Functor.uncurry.obj (Etale.derivedHom (ModuleCat.{u + 1} A) S) ⋙ (Etale.lowerStar (ModuleCat.{u + 1} A) (i ≫ j)).rightDerivedFunctor)",
-    "branch": "newtargets-dag",
-    "by": "Q29",
-    "date": "2026-10-16",
-    "existing": false,
-    "note": "States both choices of site as natural isomorphisms of bifunctors on the whole ordinary unbounded derived categories. The pro-etale formula uses the recorded intrinsic constant-ring category and canonical coefficient maps. Imports the published intrinsic extension-by-zero exactness module and reuses its instances; no extension-by-zero replacement module is delivered."
-  },
-  "blueprint_update": {
-    "snapshot": "main-20261015",
-    "statement": "Let $s:S\\hookrightarrow X$ be a locally closed immersion. On either\nof the two finite-coefficient sites, and on the ambient derived\ncategories, there is a natural isomorphism\n\n$$\nR\\mathcal Hom_X(Rs_!P,M)\n\\cong Rs_*R\\mathcal Hom_S(P,Rs^!M).\n$$",
-    "proof": [
-      {
-        "text": "Factor $s$ into an open and a closed immersion. The adjunctions of\n[def-weil-open-closed-recollement], [lem-exc-closed-ambient] construct\n$Rs^!$ as their composite. Extension by zero for an open or closed\nimmersion is exact, and its stalkwise description gives, for all\ncomplexes, $Q\\otimes^LRs_!P=Rs_!(s^*Q\\otimes^LP)$; use flat\nresolutions to derive the tensor product. For every test complex\n$Q$ on $X$, the adjunctions and the internal Hom of\n[def-weil-derived-pullback-tensor-hom] give\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}_X(Q,R\\mathcal Hom_X(Rs_!P,M))\n&=\\operatorname{Hom}_X(Rs_!(s^*Q\\otimes^LP),M)\\\\\n&=\\operatorname{Hom}_S(s^*Q\\otimes^LP,Rs^!M)\\\\\n&=\\operatorname{Hom}_X(Q,Rs_*R\\mathcal Hom_S(P,Rs^!M)).\n\\end{aligned}\n$$\n\nYoneda proves the assertion. The maps are defined by evaluation and\nthe adjunction counits, so the identity is compatible with both.",
-        "uses": [
-          "def-weil-open-closed-recollement",
-          "lem-exc-closed-ambient",
-          "def-weil-derived-pullback-tensor-hom"
-        ],
-        "elementary": false
-      }
-    ],
-    "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+  {
+   "text": "Write $B=R\\mathcal Hom_X(Rs_!P,M)$, $C=Rs_*R\\mathcal Hom_S(P,Rs^!M)$, and $\\theta_Q:\\operatorname{Hom}(Q,B)\\cong\\operatorname{Hom}(Q,C)$ for step 9. Set $\\alpha=\\theta_B(1_B):B\\to C$ and $\\beta=\\theta_C^{-1}(1_C):C\\to B$. Naturality in $Q$ gives $\\theta_Q(f)=\\alpha f$ and $\\theta_Q^{-1}(g)=\\beta g$; evaluating their inverse composites at the identities gives $\\beta\\alpha=1_B$ and $\\alpha\\beta=1_C$. Thus $\\alpha$ is the desired isomorphism. Naturality of $\\theta$ in $P,M$ gives naturality of $\\alpha$. This writes out the required representable-functor argument directly, without applying the scheme-specific Yoneda node to a derived category.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/lem-weil-stratum-ambient-hom.md",
+    "place": "Proof, final Yoneda sentence"
+   }
   }
+ ],
+ "proof_deps": [
+  "def-pc-kflat-complex",
+  "def-pur-derived-internal-hom",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero",
+  "lem-exc-closed-ambient",
+  "lem-exc-proetale-closed-support",
+  "lem-kun-04ca",
+  "lem-pc-kflat-resolution",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-rhom-global-sections",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-sf-etale-generic-stratum-mate",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lemma-openclosed-stalk-lowerstar",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-pur-kinjective-resolutions-exist",
+  "prop-weil-pbc-geometric-stalks-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/_section.md",
+  "place": "Ambient immersion Hom calculation. Etale clause reuses the evaluation-normalized isomorphism already proved in EtaleGenericStratumMate; the pro-etale proof plan remains pending."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "internalHom.*[sS]hriek|[hH]om.*[eE]xtension[Bb]y[Zz]ero|projectionFormula",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration supplies the two ambient site-specific immersion assertions; the adjunction and monoidal hits are ingredients only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from extension by zero along a locally closed immersion equals derived pushforward of internal Hom into exceptional inverse image",
+   "results": "8 hits; top results: AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pushforwardSections_unitHomEquiv, CategoryTheory.ExponentiableMorphism.pullbackPushforwardAdj, CategoryTheory.ExponentiableMorphism.ev",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration supplies the two ambient site-specific immersion assertions; the adjunction and monoidal hits are ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalClosed",
+   "results": "12 hits; top results: CategoryTheory.MonoidalClosed.ofEquiv, CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj, CategoryTheory.MonoidalClosed.ofEquiv_curry_def, CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def, CategoryTheory.Monoidal.Reflective.monoidalClosed, CategoryTheory.Monoidal.Reflective.closed, CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom, CategoryTheory.Monoidal.Reflective.isIso_tfae",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration supplies the two ambient site-specific immersion assertions; the adjunction and monoidal hits are ingredients only"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of extension by zero for locally closed immersion",
+   "results": "service unavailable: Internal Server Error",
+   "date": "2026-10-16",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In closed monoidal derived categories a projection formula and the two adjunctions imply internal Hom of lower shriek equals pushforward internal Hom of upper shriek",
+   "results": "8 hits; top results: CategoryTheory.ExponentiableMorphism.pushforwardCurry, CategoryTheory.ExponentiableMorphism.pushforwardUncurry, CategoryTheory.ExponentiableMorphism.ev, CategoryTheory.ExponentiableMorphism.homEquiv_apply_eq, CategoryTheory.ExponentiableMorphism.coev_naturality, CategoryTheory.ExponentiableMorphism.coev, CategoryTheory.ExponentiableMorphism.coev_ev_assoc, CategoryTheory.ExponentiableMorphism.coev_ev",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration supplies the two ambient site-specific immersion assertions; the adjunction and monoidal hits are ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedHom|upperShriek|lowerShriek|extensionByZero",
+   "results": "No hits.",
+   "date": "2026-10-16",
+   "verdict": "no match: no declaration supplies the two ambient site-specific immersion assertions; the adjunction and monoidal hits are ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "import_flags": [],
+ "blueprint_kind": "lemma",
+ "blueprint_order": 2069,
+ "blueprint_uses": [
+  "def-weil-derived-pullback-tensor-hom",
+  "def-weil-open-closed-recollement",
+  "lem-exc-closed-ambient"
+ ],
+ "proof_split_by": "paragraphs",
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "split_report": {
+  "date": "2026-10-16",
+  "item": "lem-weil-stratum-ambient-hom",
+  "worker": "stage1",
+  "summary": "Read the original node and enclosing unit in the full local literature archive, audited all cited statements, and expanded the one-paragraph sketch into ten steps. Corrected the standalone statement by naming the finite commutative coefficients and the complexes and restoring the Noetherian target context for the pro-etale clause. Replaced non-conservative pro-etale geometric stalks by the existing ringed open-closed sequence. Derived the adjunctions and tensor-Hom formula on unbounded ringed-site categories, proved the closed projection formula by restriction, and reused existing nodes throughout. No new nodes.",
+  "blueprint": "Steps 1-3 realize the factorization and ambient-adjoint sentences; steps 4-7 realize the immersion projection formula; step 8 supplies the tensor-Hom adjunction hidden by the definitions citation; steps 9-10 realize the displayed Hom calculation and Yoneda conclusion. The unit route is unchanged: this is the formal immersion calculation supporting its closed-support/stratum argument.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Supplies the quasi-compact open-complement hypothesis for the closed immersion inside U. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Supplies closed pushforward stalks on the etale site, only for the etale part of exactness. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "prop-weil-pbc-geometric-stalks-exact",
+    "why": "Checks exactness of etale closed pushforward on stalks. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Detects exactness on etale geometric stalks; never used for pro-etale modules. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-kun-04ca",
+    "why": "Supplies etale closed full faithfulness, the inverse-image counit, and the support essential-image description. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Supplies pro-etale exact closed pushforward, counit, disjoint-support vanishing, and joint detection via its actual localization sequence. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-site-pullback-abelian-exact",
+    "why": "Supplies exact inverse images on both sites, hence their compatibility with cohomology. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Supplies the module inverse-image/direct-image adjunction for constant-coefficient ringed topoi. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Supplies K-injective resolutions on both small ringed sites for arbitrary unbounded complexes. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Supplies K-injective preservation by a right adjoint with exact left adjoint. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-termwise-adjunction-homotopy",
+    "why": "Supplies the natural Hom bijection on homotopy categories used in deriving the site adjunctions. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Computes derived-category morphisms into K-injective complexes. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-total-derived",
+    "why": "Supplies total right derived functors on the unbounded categories. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Supplies the etale module extension-by-zero adjunction. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Supplies exactness of etale extension by zero on unbounded complexes. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Supplies exactness and the extension-by-zero adjunction on pro-etale module sheaves. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-exc-closed-ambient",
+    "why": "Supplies the ambient closed right adjoint on the etale site, without constructibility. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-exc-proetale-closed-support",
+    "why": "Supplies the ambient closed right adjoint on the pro-etale site with the verified Noetherian hypothesis. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Supplies strong monoidality of derived pullback and K-flat preservation for arbitrary ringed topoi. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-open-immersion-etale",
+    "why": "Allows the open immersion to be used as an object of the etale site. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-restriction",
+    "why": "Identifies etale inverse image with the actual localized restriction. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the pro-etale open site with the ringed slice. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Supplies the underived projection formula on a ringed slice, used to prove the open formula. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies K-flat resolutions with flat terms for the unbounded tensor calculation. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Supplies the unbounded derived tensor and descent/naturality of the chosen tensor models. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Supplies an existing exact statement of the arbitrary-complex pro-etale open projection formula. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Supplies K-injectivity of the Hom-complex model for the nested internal Hom. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-sc-derived-hom-tensor-total",
+    "why": "Supplies the actual Hom-complex currying isomorphism on arbitrary ringed sites. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-pur-rhom-global-sections",
+    "why": "Identifies H^0 of derived internal Hom with derived Hom on arbitrary small ringed sites. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Supplies tensor symmetry on module sheaves, extended explicitly with the usual sign to complexes. This is a generic tool for the formal immersion calculation; no node in this unit states this foundational result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lemma-openclosed-stalk-lowerstar",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-kun-04ca",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-site-pullback-abelian-exact",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-termwise-adjunction-homotopy",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-exc-closed-ambient",
+  "lem-exc-proetale-closed-support",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-open-immersion-etale",
+  "lem-weil-pbc-etale-inverse-image-restriction",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sc-derived-hom-tensor-total",
+  "lem-pur-rhom-global-sections",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-15",
+  "by": "L",
+  "reviewer": "NT-Codex-NI-1473c7227",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-NI-1473c7227 (reviewer sub-agent of L); spot-checked: Read the full item, report, 42 cited statements, source locations, and unit/chapter route. All ten proof steps check; pro-etale localization avoids geometric-stalk conservativity, and the Noetherian scope covers existing applications. No new nodes, cycles, or repairs. Condensed target coefficients remain distinct. Detailed checks and accepted tool uses are in review.md."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-16",
+  "by": "L",
+  "reviewer": "NT-stage2-Codex-3a6834de9",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Wrote review.md. Checked immutable statements, all 19 statement dependencies, source alignment, canonical constructions, universes, edge cases, docstrings, reports, and verbatim signatures. All three modules compile cleanly through scompile.py. No fixes required; no project or branch changes made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratumAmbientHom",
+  "declaration": "AlgebraicGeometry.Etale.nonempty_stratumAmbientHomIso",
+  "declarations": [
+   "AlgebraicGeometry.Etale.nonempty_stratumAmbientHomIso",
+   "AlgebraicGeometry.ProEtale.nonempty_stratumAmbientHomIso"
+  ],
+  "file": "lean/Sheaf/Paper/StratumAmbientHom.lean",
+  "statement": "theorem Etale.nonempty_stratumAmbientHomIso (A : Type (u + 1)) [CommRing A] [Finite A] {S U X : Scheme.{u}} (i : S ⟶ U) [IsClosedImmersion i] (j : U ⟶ X) [IsOpenImmersion j] : Nonempty ((immersionLowerShriek A i j).op.prod (𝟭 (DerivedCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)))) ⋙ Functor.uncurry.obj (derivedHom (ModuleCat.{u + 1} A) X) ≅ (𝟭 (DerivedCategory (Sheaf S.smallEtaleTopology (ModuleCat.{u + 1} A)))ᵒᵖ).prod (immersionUpperShriek A i j) ⋙ Functor.uncurry.obj (derivedHom (ModuleCat.{u + 1} A) S) ⋙ R((i ≫ j)_*[ModuleCat.{u + 1} A]))",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-16",
+  "existing": false,
+  "note": "States both choices of site as natural isomorphisms of bifunctors on the whole ordinary unbounded derived categories. The pro-etale formula uses the recorded intrinsic constant-ring category and canonical coefficient maps. Imports the published intrinsic extension-by-zero exactness module and reuses its instances; no extension-by-zero replacement module is delivered. J2: the etale statement spells its two shriek functors with their existing names and expands DerivedCategoryModule; these are definitionally the same operations. Its proof forgets the evaluation normalization of immersionInternalHomIso. The pro-etale clause remains sorry."
+ },
+ "blueprint_update": {
+  "snapshot": "main-20261015",
+  "statement": "Let $s:S\\hookrightarrow X$ be a locally closed immersion. On either\nof the two finite-coefficient sites, and on the ambient derived\ncategories, there is a natural isomorphism\n\n$$\nR\\mathcal Hom_X(Rs_!P,M)\n\\cong Rs_*R\\mathcal Hom_S(P,Rs^!M).\n$$",
+  "proof": [
+   {
+    "text": "Factor $s$ into an open and a closed immersion. The adjunctions of\n[def-weil-open-closed-recollement], [lem-exc-closed-ambient] construct\n$Rs^!$ as their composite. Extension by zero for an open or closed\nimmersion is exact, and its stalkwise description gives, for all\ncomplexes, $Q\\otimes^LRs_!P=Rs_!(s^*Q\\otimes^LP)$; use flat\nresolutions to derive the tensor product. For every test complex\n$Q$ on $X$, the adjunctions and the internal Hom of\n[def-weil-derived-pullback-tensor-hom] give\n\n$$\n\\begin{aligned}\n\\operatorname{Hom}_X(Q,R\\mathcal Hom_X(Rs_!P,M))\n&=\\operatorname{Hom}_X(Rs_!(s^*Q\\otimes^LP),M)\\\\\n&=\\operatorname{Hom}_S(s^*Q\\otimes^LP,Rs^!M)\\\\\n&=\\operatorname{Hom}_X(Q,Rs_*R\\mathcal Hom_S(P,Rs^!M)).\n\\end{aligned}\n$$\n\nYoneda proves the assertion. The maps are defined by evaluation and\nthe adjunction counits, so the identity is compatible with both.",
+    "uses": [
+     "def-weil-open-closed-recollement",
+     "lem-exc-closed-ambient",
+     "def-weil-derived-pullback-tensor-hom"
+    ],
+    "elementary": false
+   }
+  ],
+  "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0d1b6",
+  "group": "J2",
+  "result": "pass",
+  "landing": "20261020T221219-L-4158566",
+  "kind": "interface",
+  "note": "independent cc review: new étale statement vs old (rfl piecewise: DerivedCategoryModule, immersionLowerShriek, immersionUpperShriek, R((i≫j)_*)); proof vs immersionInternalHomIso (lem-sf-etale-generic-stratum-mate); 6 direct importers compiled against delivered module"
+ }
 }
