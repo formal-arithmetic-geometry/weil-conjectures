@@ -1,0 +1,140 @@
+{
+ "id": "lem-pur-finite-reduction-system-coherence",
+ "kind": "statement",
+ "title": "Normalized coefficient comparisons commute with the derived associators",
+ "statement": "Let $T$ be a scheme, $\\ell$ prime, and $S$ any System of [def-pur-finite-reduction-system]. For natural numbers $r\\ge m\\ge n$ and every $K\\in D(T_{\\mathrm{Et}},A_r)$, the comparison-associator square S.CoherentAt(r,m,n,K) commutes. This conclusion uses only the universal functors and the representative normalizations in System. In particular it assumes neither constructibility nor finite Tor amplitude of $K$ and includes exponent zero.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+  "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
+ },
+ "stmt_deps": [
+  "def-pur-finite-reduction-system"
+ ],
+ "proof": [
+  {
+   "text": "Conjugate ordinaryComparison and the inverse ordinaryAssociator through their adjunctions. The conjugates are respectively the identity and the restriction-of-scalars composition comparison. Apply the proved CategoryTheory.conjugateEquiv_paste; the right-adjoint square is the identity on sections. Cancel the inverse associators to obtain the ordinary square.",
+   "uses": [
+    "def-pur-finite-reduction-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+    "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
+   }
+  },
+  {
+   "text": "On a flat K-flat resolution Q, postcompose the desired square by the exact comparison factorization and the direct-extension counit. These are invertible. Naturality and the three normalization equations reduce the equality to the ordinary square degreewise.",
+   "uses": [
+    "def-pur-finite-reduction-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+    "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
+   }
+  },
+  {
+   "text": "Use [lem-pur-finite-reduction-flat-extension] and preservation of flat resolutions by comparison to justify each computation. Obtain termwise flatness of the resolution from exact filtered colimits of flat objects, and K-flatness from the proved flat-resolution API. Transport the equality from the resolution to K by naturality.",
+   "uses": [
+    "lem-pur-finite-reduction-flat-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+    "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-reduction-system",
+  "lem-pur-finite-reduction-flat-extension"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+  "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafified extension of scalars has a left derived functor computed on K-flat resolutions, preserves flatness under a surjective coefficient map and bounded constructibility at finite Tor amplitude, and its comparison and associators are coherent",
+   "results": "8 hits: PresheafOfModules sheafification, its adjunction and exactness, and CategoryTheory.plusPlusAdjunction. No statement of derived scalar extension, flat reduction, constructibility, or normalized coefficient coherence was returned.",
+   "verdict": "Use the proved source K-flat resolution, tensor constructibility and adjunction-pasting APIs; no direct Mathlib match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars preserves flat sheaves and constructible complexes of finite Tor amplitude, with universal derived extension and coherent associators",
+   "results": "8 hits, including ModuleCat.preservesFiniteLimits_extendScalars_of_flat and Module.Flat.of_flat_tensorProduct. These concern ordinary modules, or require the coefficient map to be flat. No exact statement of the required sheaf comparison was returned.",
+   "verdict": "Use the existing sheaf reduction, flat resolution, derived tensor and adjunction APIs; no direct match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\", \"tensor\"",
+   "results": "0 hits",
+   "verdict": "No exact match. The library contains Functor.leftDerivedUnique and the K-flat derivability API.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|castHom_surjective|flat_quotSMulTop",
+   "results": "5 hits including Functor.leftDerivedUnique and ZMod.castHom_surjective. Further local reads found Sheaf.flat_quotSMulTop_obj, Etale.boundedConstructible_tensor and CategoryTheory.conjugateEquiv_paste.",
+   "verdict": "Reuse these proved declarations.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionConstructibility",
+  "date": "2026-10-21",
+  "group": "R1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": null,
+   "place": "First paragraph: scalar extension on flat models and successive coefficient reductions",
+   "via": [
+    "lem-pur-finite-reduction-constructibility",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionSystemCoherence",
+  "file": "lean/Sheaf/Paper/FiniteReductionSystemCoherence.lean",
+  "declaration": "AlgebraicGeometry.FiniteReduction.System.coherentAt",
+  "statement": "theorem System.coherentAt (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (S : System T l) (r m n : ℕ) (hmr : m ≤ r) (hnm : n ≤ m) (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u} l r)))) : S.CoherentAt r m n hmr hnm K",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-dbfe0",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261020T221318-L-4172674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-dbfe0",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261020T221318-L-4172674",
+  "kind": "interface",
+  "note": "independent cc review: 8 delivered modules + item node and 7 new nodes against live FiniteReductionConstructibility, its 14 moved decls, change record, and the declarations used vs their owning DAG nodes; compiled all 8 modules + direct importer ExceptionalCoefficientComparison (all rc 0) and #print axioms"
+ }
+}

@@ -73,7 +73,7 @@
  "chapter": "sec-deligne-laumon-a1",
  "unit": "sk-p-dl-a1-perverse",
  "lean": {
-  "module": "Sheaf.Paper.FiniteReductionConstructibility",
+  "module": "Sheaf.Paper.FiniteReductionSystem",
   "declaration": "AlgebraicGeometry.FiniteReduction.quotient",
   "declarations": [
    "AlgebraicGeometry.FiniteReduction.Ring",
@@ -85,7 +85,7 @@
   "by": "NR",
   "date": "2026-10-18",
   "existing": true,
-  "note": "Definition-only ownership of the unchanged published Ring and Coeff abbreviations and the concrete twice-lifted ZMod.castHom quotient. These are not choices from finiteReduction_constructibility; no theorem or new construction is introduced."
+  "note": "The same unchanged Ring, Coeff and quotient declarations now live in FiniteReductionSystem, publicly re-exported by the original module. Their definitions and signatures are unchanged; no witness is chosen from an existence theorem."
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -102,5 +102,15 @@
   "group": "NR",
   "result": "pass",
   "note": "Re-delivery of 42936c8367b4 (returned only for H2/H12). The item Lean is byte-identical (sha256 fd933b07), so the earlier clause-by-clause verification stands; re-read and agreed. Fix verified: stmt_deps now cites the new def node def-per-finite-reduction-coefficients (existing:true on the unchanged Sheaf.Paper.FiniteReductionConstructibility; Ring/Coeff/quotient; statement verbatim in the live module; prose matches the ULift/ZMod.castHom bodies with m≤r; source BS 6.7.20; no duplicate owner live or in runs/2) instead of lem-pur-finite-reduction-constructibility. Item record differs from live only in stmt_deps and lean; the other 12 dependency records are cmp-identical to live. Mechanical finding: lem-pur-exceptional-coefficient-comparison is justified because unitIso = (unitIso_existsUnique φ T).choose is used via dualizingReduction; PASS on that point. nt_compile --json 34.9 s rc 0, clean. Advisory: helper docstrings still cite the old theorem node's blueprint; the second reading is a self-reread."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-dbfe0",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261020T221318-L-4172674",
+  "kind": "interface",
+  "note": "independent cc review: 8 delivered modules + item node and 7 new nodes against live FiniteReductionConstructibility, its 14 moved decls, change record, and the declarations used vs their owning DAG nodes; compiled all 8 modules + direct importer ExceptionalCoefficientComparison (all rc 0) and #print axioms"
  }
 }

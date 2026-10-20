@@ -5,31 +5,12 @@ Authors: SHEAF group N2
 -/
 module
 
-public import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-public import Sheaf.AlgebraicGeometry.ProEtaleTorAmplitude
-public import WeilConjectures.SixFunctors.Etale.Derived.Finiteness.FlatModel
-public import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.RestrictScalars
-public import Mathlib.CategoryTheory.Adjunction.Unique
-public import Mathlib.Data.ZMod.Basic
-import Sheaf.AlgebraicGeometry.EtaleTorAmplitude
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.ComparisonTorInterval
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import Sheaf.Paper.ComparisonPullbackExact
-import Sheaf.CategoryTheory.SiteInverseImageTensor
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparison
-import Sheaf.Paper.PbcActualScalarPullback
-import WeilConjectures.ConstructibleSheaf.Refinement
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Sheaf.Paper.LocallyConstantTensor
-import WeilConjectures.AlgebraicGeometry.FiniteLocallyConstantModuleValues
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+public import Sheaf.Paper.FiniteReductionSystem
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.HomComparison
+import Sheaf.AlgebraicGeometry.IntrinsicTorAmplitudeTransport
+import Sheaf.Paper.FiniteReductionSystemExistence
+import Sheaf.Paper.FiniteReductionFlatExtension
+import Sheaf.Paper.FiniteReductionEtaleConstructibility
 
 /-!
 # Finite reduction and constructibility
@@ -57,202 +38,6 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.FiniteReduction
 
-/-- Size lift of the actual quotient ring. Source: blueprint sk-lem-sp-reduction,
-finite coefficients (blueprint: lem-pur-finite-reduction-constructibility). -/
-abbrev Ring (l r : ℕ) := ULift.{u} (ZMod (l ^ r))
-
-/-- Module-size lift of the same coefficient ring. Source: blueprint sk-lem-sp-reduction,
-finite coefficients (blueprint: lem-pur-finite-reduction-constructibility). -/
-abbrev Coeff (l r : ℕ) := ULift.{u + 1} (Ring.{u} l r)
-
-/-- The actual quotient map, lifted to the module universe. Source: blueprint
-sk-lem-sp-reduction (blueprint: lem-pur-finite-reduction-constructibility). -/
-def quotient (l : ℕ) {r m : ℕ} (h : m ≤ r) : Coeff.{u} l r →+* Coeff.{u} l m :=
-  ((ZMod.castHom (pow_dvd_pow l h) (ZMod (l ^ m))).ulift).ulift
-
-section Site
-variable {C : Type (u + 1)} [Category.{u} C] [EssentiallySmall.{u + 1} C]
-  (J : GrothendieckTopology C)
-  {A B : Type (u + 1)} [CommRing A] [CommRing B] (f : A →+* B)
-
-/-- Scalar extension is sheafification of sectionwise scalar extension; it does not
-assume the quotient is flat. Source: Stacks 06YY
-(blueprint: lem-pur-finite-reduction-constructibility). -/
-def extend : Sheaf J (ModuleCat.{u + 1} A) ⥤ Sheaf J (ModuleCat.{u + 1} B) :=
-  Sheaf.composeAndSheafify J (ModuleCat.extendScalars.{u + 1, u + 1, u + 1} f)
-
-/-- The standard tensor/restriction adjunction, fixing all tensor units. Source: Stacks
-06YY (blueprint: lem-pur-finite-reduction-constructibility). -/
-def extendAdjunction : extend J f ⊣ Sheaf.restrictScalars J f :=
-  Sheaf.adjunction J (ModuleCat.extendRestrictScalarsAdj.{u + 1} f)
-
-/-- Additivity comes from the tensor/restriction adjunction. Source: Stacks 06YY
-(blueprint: lem-pur-finite-reduction-constructibility). -/
-instance extend_additive : (extend J f).Additive :=
-  (extendAdjunction J f).left_adjoint_additive
-
-set_option genSizeOf false in
-set_option genInjectivity false in
-/-- A universal derived tensor extension, including its canonical K-flat computation.
-This records the universal pair, rather than an unspecified functor or isomorphism.
-Source: Stacks 06YT and 06YY
-(blueprint: lem-pur-finite-reduction-constructibility). -/
-structure DerivedExtension where
-  functor : DerivedCategory (Sheaf J (ModuleCat.{u + 1} A)) ⥤
-    DerivedCategory (Sheaf J (ModuleCat.{u + 1} B))
-  counit : DerivedCategory.Q ⋙ functor ⟶
-    (extend J f).mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q
-  universal : functor.IsLeftDerivedFunctor counit
-    (HomologicalComplex.quasiIso (Sheaf J (ModuleCat.{u + 1} A)) (.up ℤ))
-  computation : ∀ P : CochainComplex (Sheaf J (ModuleCat.{u + 1} A)) ℤ,
-    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P → IsIso (counit.app P)
-
-end Site
-
-/-- Canonical ordinary comparison: both sides are left adjoint to the same restriction
-functor. Its normalization is the identity on that right adjoint, hence on local pure
-tensors. Source: Stacks 03EL
-(blueprint: lem-pur-finite-reduction-constructibility). -/
-def ordinaryComparison (T : Scheme.{u}) {A B : Type (u + 1)}
-    [CommRing A] [CommRing B] (f : A →+* B) :
-    extend T.smallEtaleTopology f ⋙ ProEtale.comparisonUpperStar (ModuleCat.{u + 1} B) T ≅
-      ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) T ⋙ extend (Scheme.ProEt.topology T) f :=
-  Adjunction.leftAdjointUniq
-    ((extendAdjunction T.smallEtaleTopology f).comp (ProEtale.comparisonAdjunction _ T))
-    ((ProEtale.comparisonAdjunction _ T).comp
-      (extendAdjunction (Scheme.ProEt.topology T) f))
-
-/-- The ordinary tensor associator, fixed by the identity on scalar restriction.
-On local tensors it sends c tensor (b tensor q) to (bc) tensor q, equivalently
-(q tensor b) tensor c to q tensor bc in the right-tensor convention of the source.
-Source: blueprint sk-lem-sp-reduction, associativity
-(blueprint: lem-pur-finite-reduction-constructibility). -/
-def ordinaryAssociator {C : Type (u + 1)} [Category.{u} C]
-    [EssentiallySmall.{u + 1} C] (J : GrothendieckTopology C)
-    (l : ℕ) {r m n : ℕ} (hmr : m ≤ r) (hnm : n ≤ m) :
-    extend J (quotient.{u} l hmr) ⋙ extend J (quotient l hnm) ≅
-      extend J (quotient l (hnm.trans hmr)) :=
-  Adjunction.leftAdjointUniq
-    (((extendAdjunction J (quotient l hmr)).comp
-      (extendAdjunction J (quotient l hnm))).ofNatIsoRight
-        (Sheaf.restrictScalarsCompIso J (quotient l hmr) (quotient l hnm)
-          (quotient l (hnm.trans hmr))
-          (RingHom.ext (fun x ↦
-            congrArg (fun y : ZMod (l ^ n) ↦ (⟨⟨y⟩⟩ : Coeff.{u} l n))
-              (DFunLike.congr_fun
-                (Subsingleton.elim
-                  (ZMod.castHom (pow_dvd_pow l (hnm.trans hmr)) (ZMod (l ^ n)))
-                  ((ZMod.castHom (pow_dvd_pow l hnm) (ZMod (l ^ n))).comp
-                    (ZMod.castHom (pow_dvd_pow l hmr) (ZMod (l ^ m))))) x.down.down)))))
-    (extendAdjunction J (quotient l (hnm.trans hmr)))
-
-/-- The actual termwise comparison on complexes. Source: Stacks 03EL
-(blueprint: lem-pur-finite-reduction-constructibility). -/
-abbrev ordinaryComparisonComplex (T : Scheme.{u}) {A B : Type (u + 1)}
-    [CommRing A] [CommRing B] (f : A →+* B) :=
-  NatIso.mapHomologicalComplex (ordinaryComparison T f) (.up ℤ)
-
-set_option genSizeOf false in
-set_option genInjectivity false in
-/-- Canonical coefficient extension on the two sites, including representative
-normalizations of its comparison and its associators. All functors are universal derived
-functors of the concrete scalar extensions above. The normalizations remove arbitrary
-choices of natural isomorphisms. Source: Stacks 06YT, 06YY and 03EL; blueprint
-sk-lem-sp-reduction (blueprint: lem-pur-finite-reduction-constructibility). -/
-structure System (T : Scheme.{u}) (l : ℕ) where
-  etale : ∀ (r m : ℕ) (h : m ≤ r),
-    DerivedExtension T.smallEtaleTopology (quotient.{u} l h)
-  proetale : ∀ (r m : ℕ) (h : m ≤ r),
-    DerivedExtension (Scheme.ProEt.topology T) (quotient.{u} l h)
-  comparison : ∀ (r m : ℕ) (h : m ≤ r),
-    (etale r m h).functor ⋙
-      (ProEtale.comparisonUpperStar
-          (ModuleCat.{u + 1} (Coeff.{u} l m)) T).mapDerivedCategory ≅
-    (ProEtale.comparisonUpperStar
-          (ModuleCat.{u + 1} (Coeff.{u} l r)) T).mapDerivedCategory ⋙
-      (proetale r m h).functor
-  comparison_model : ∀ (r m : ℕ) (h : m ≤ r)
-    (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u} l r))) ℤ),
-    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P →
-    (∀ i : ℤ, ObjectProperty.flat (P.X i)) →
-    (comparison r m h).hom.app (DerivedCategory.Q.obj P) ≫
-      (proetale r m h).functor.map
-        ((ProEtale.comparisonUpperStar
-          (ModuleCat.{u + 1} (Coeff.{u} l r)) T).mapDerivedCategoryFactors.hom.app P) ≫
-      (proetale r m h).counit.app
-        (((ProEtale.comparisonUpperStar
-          (ModuleCat.{u + 1} (Coeff.{u} l r)) T).mapHomologicalComplex (.up ℤ)).obj P) =
-    (ProEtale.comparisonUpperStar
-          (ModuleCat.{u + 1} (Coeff.{u} l m)) T).mapDerivedCategory.map
-      ((etale r m h).counit.app P) ≫
-    (ProEtale.comparisonUpperStar
-          (ModuleCat.{u + 1} (Coeff.{u} l m)) T).mapDerivedCategoryFactors.hom.app
-        (((extend T.smallEtaleTopology (quotient l h)).mapHomologicalComplex (.up ℤ)).obj P) ≫
-    DerivedCategory.Q.map ((ordinaryComparisonComplex T (quotient l h)).hom.app P)
-  etaleAssociator : ∀ (r m n : ℕ) (hmr : m ≤ r) (hnm : n ≤ m),
-    (etale r m hmr).functor ⋙ (etale m n hnm).functor ≅
-      (etale r n (hnm.trans hmr)).functor
-  proetaleAssociator : ∀ (r m n : ℕ) (hmr : m ≤ r) (hnm : n ≤ m),
-    (proetale r m hmr).functor ⋙ (proetale m n hnm).functor ≅
-      (proetale r n (hnm.trans hmr)).functor
-  etaleAssociator_model : ∀ (r m n : ℕ) (hmr : m ≤ r) (hnm : n ≤ m)
-    (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u} l r))) ℤ),
-    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P →
-    (∀ i : ℤ, ObjectProperty.flat (P.X i)) →
-    (etaleAssociator r m n hmr hnm).hom.app (DerivedCategory.Q.obj P) ≫
-      (etale r n (hnm.trans hmr)).counit.app P =
-    (etale m n hnm).functor.map ((etale r m hmr).counit.app P) ≫
-      (etale m n hnm).counit.app
-        (((extend T.smallEtaleTopology (quotient l hmr)).mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex
-          (ordinaryAssociator T.smallEtaleTopology l hmr hnm) (.up ℤ)).hom.app P)
-  proetaleAssociator_model : ∀ (r m n : ℕ) (hmr : m ≤ r) (hnm : n ≤ m)
-    (P : CochainComplex
-      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (Coeff.{u} l r))) ℤ),
-    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat P →
-    (∀ i : ℤ, ObjectProperty.flat (P.X i)) →
-    (proetaleAssociator r m n hmr hnm).hom.app (DerivedCategory.Q.obj P) ≫
-      (proetale r n (hnm.trans hmr)).counit.app P =
-    (proetale m n hnm).functor.map ((proetale r m hmr).counit.app P) ≫
-      (proetale m n hnm).counit.app
-        (((extend (Scheme.ProEt.topology T) (quotient l hmr)).mapHomologicalComplex
-          (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map
-        ((NatIso.mapHomologicalComplex
-          (ordinaryAssociator (Scheme.ProEt.topology T) l hmr hnm) (.up ℤ)).hom.app P)
-
-/-- The associator square at a given etale object. Source: blueprint
-sk-lem-sp-reduction, final sentence of the first paragraph
-(blueprint: lem-pur-finite-reduction-constructibility). -/
-def System.CoherentAt {T : Scheme.{u}} {l : ℕ} (S : System T l)
-    (r m n : ℕ) (hmr : m ≤ r) (hnm : n ≤ m)
-    (K : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u} l r)))) : Prop :=
-    (S.comparison m n hnm).hom.app ((S.etale r m hmr).functor.obj K) ≫
-      (S.proetale m n hnm).functor.map ((S.comparison r m hmr).hom.app K) ≫
-      (S.proetaleAssociator r m n hmr hnm).hom.app
-        ((ProEtale.comparisonUpperStar
-          (ModuleCat.{u + 1} (Coeff.{u} l r)) T).mapDerivedCategory.obj K) =
-    (ProEtale.comparisonUpperStar
-          (ModuleCat.{u + 1} (Coeff.{u} l n)) T).mapDerivedCategory.map
-      ((S.etaleAssociator r m n hmr hnm).hom.app K) ≫
-      (S.comparison r n (hnm.trans hmr)).hom.app K
-
-/-- Finiteness of the actual coefficients, derived from primality, not an extra
-hypothesis. Source: blueprint sk-lem-sp-reduction
-(blueprint: lem-pur-finite-reduction-constructibility). -/
-instance ringFinite (l : ℕ) [h : Fact l.Prime] (r : ℕ) : Finite (Ring.{u} l r) := by
-  let : NeZero l := ⟨h.out.ne_zero⟩
-  infer_instance
-
-/-- The canonical realization in the intrinsic constant-ring presentation, used solely
-to apply the recorded intrinsic constructibility and Tor predicates. Source: Stacks 00YV
-and 09AL (blueprint: lem-pur-finite-reduction-constructibility). -/
-def realize (T : Scheme.{u}) (l : ℕ) [Fact l.Prime] (r : ℕ) :
-    DerivedCategory (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (Coeff.{u} l r))) ⥤
-      Scheme.proEtaleDerivedCategory T (Ring.{u} l r) :=
-  (ProEtale.finiteCoefficientIntrinsicRealization.{u} T (Ring.{u} l r)).mapDerivedCategory
-
 /-- The origin comparison for the specified isomorphism, with no new choice of map.
 Source: blueprint sk-lem-sp-reduction, first paragraph
 (blueprint: lem-pur-finite-reduction-constructibility). -/
@@ -265,7 +50,43 @@ def System.originComparison {T : Scheme.{u}} {l : ℕ} (S : System T l)
     (ProEtale.comparisonUpperStar
           (ModuleCat.{u + 1} (Coeff.{u} l m)) T).mapDerivedCategory.obj
       ((S.etale r m h).functor.obj K₀) ≅ (S.proetale r m h).functor.obj K :=
-  (S.comparison r m h).app K₀ ≪≫ (S.proetale r m h).functor.mapIso e
+by
+  let i := (S.comparison r m h).app K₀
+  let j := (S.proetale r m h).functor.mapIso e
+  exact { hom := i.hom ≫ j.hom
+          inv := j.inv ≫ i.inv
+          hom_inv_id := by simp
+          inv_hom_id := by simp }
+
+
+private theorem reflect_tor (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
+    (r : ℕ) (a b : ℤ) (hab : a ≤ b)
+    (K : DerivedCategory
+      (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (Coeff.{u} l r))))
+    (htor : Scheme.HasProEtaleTorAmplitude T (Ring.{u} l r)
+      ((realize T l r).obj K) a b)
+    (K₀ : DerivedCategory (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u} l r))))
+    (e : (ProEtale.comparisonUpperStar
+      (ModuleCat.{u + 1} (Coeff.{u} l r)) T).mapDerivedCategory.obj K₀ ≅ K) :
+    Etale.DerivedCategory.hasTorAmplitudeIn (Coeff.{u} l r) T a b K₀ := by
+  have h := (ProEtale.intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
+    (Ring.{u} l r) T a b hab K).mp htor
+  have h' := (DerivedCategory.torAmplitudeIn
+    (Sheaf (Scheme.ProEt.topology T) (ModuleCat.{u + 1} (Coeff.{u} l r))) a b).prop_of_iso
+      e.symm h
+  exact (Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn
+    (Λ := Coeff.{u} l r) (K := K₀)).mpr
+    ((ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff
+      (Λ := Coeff.{u} l r) a b K₀).mp h')
+
+private theorem bounded_flat_kflat {T : Scheme.{u}} {A : Type (u + 1)} [CommRing A]
+    {a b : ℤ} (Q : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ)
+    (hQ : Etale.IsBoundedFlatComplex A a b Q) :
+    (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat Q := by
+  obtain ⟨hge, hle, hflat⟩ := Etale.isBoundedFlatComplex_iff.mp hQ
+  let := hge
+  let := hle
+  exact CochainComplex.kFlat_of_bounded_of_flat Q a b hflat
 
 /-- Finite quotient reduction preserves bounded intrinsic constructibility and the exact
 Tor interval, with bounded flat etale representatives and the canonical coherent origin
@@ -277,45 +98,21 @@ Source: main-20261015 blueprint, sec-smooth-purity/sk-lem-sp-reduction,
 first paragraph; Stacks 08G1, 06YQ, 094H and 09AL
 (blueprint: lem-pur-finite-reduction-constructibility).
 
-Proof (the node's ten steps):
-1. Reflect Tor amplitude from K to its specified bounded etale origin by
-lem-exc-comparison-tor-interval; the canonical realization changes only presentation.
-2. Apply lem-sf-etale-flat-model to the ordered interval. The model Q is zero outside
-[a,b], with flat terms; no constructibility of its terms or Noetherian base is needed.
-Apply lem-pc-bounded-above-flat-kflat-site to obtain K-flatness.
-3. Apply lem-pur-kflat-change-of-rings to the constant quotient ring map. The ordinary
-extension Q_m has flat terms and is K-flat. By lem-pur-derived-change-of-rings its
-image represents the derived extension of K_0. It remains zero outside [a,b].
-4. Tensor Q_m with each arbitrary degree-zero A_m-module sheaf. The tensor is zero
-outside [a,b], giving etale Tor amplitude and boundedness of the reduction.
-5. Exact comparison commutes with the constant ring maps, sheaf tensor products and
-coequalizers by lem-sf-comparison-pullback-exact and
-lem-weil-pbc-left-exact-site-inverse-image-tensor. This is ordinaryComparison: its
-adjunction conjugate fixes the local tensor generators. Apply it degreewise to Q.
-Pullback preserves flat K-flat models by lem-weil-pbc-ringed-topoi-derived-tensor-pullback;
-canonical derived computation yields comparison_model, independently of Q.
-6. Apply the forward implication of lem-exc-comparison-tor-interval to Q_m's bounded
-etale derived object. This gives Tor amplitude against all pro-etale test sheaves.
-7. Refine the finitely many constructible stratifications of the cohomology of K_0
-using lem-weil-pbc-constructible-stratification-intersection and
-lemma-constructible-of-refines. Exact inverse image commutes with cohomology, so each
-restriction is bounded with finite locally constant cohomology.
-8. On each stratum use lem-weil-pbc-locally-constant-tensor (Stacks 094H). A_r is finite,
-hence Noetherian, and A_m is finite over A_r. The resulting cohomology is finite locally
-constant over A_r. Its A_m-action and the surjection A_r to A_m make the same local
-trivializations A_m-linear; use lem-weil-pbc-finite-locally-constant-module-values.
-9. The common stratification proves etale constructibility of every reduced cohomology
-sheaf. The finite-ring constructible-derived-origin equivalence, for A_m, makes its
-comparison bounded and intrinsically constructible; originComparison identifies it
-with the reduction of K through the specified e.
-10. Successive extension is represented by (Q tensor A_m) tensor A_n. The two ordinary
-adjunctions identify its associator with (q tensor b) tensor c mapping to q tensor bc,
-with inverse q tensor c mapping to (q tensor 1) tensor c. Balancing gives well-defined
-inverse maps and differentials act on q alone. Both routes through comparison send a
-pure tensor to the image of q tensored with bc; sheafification and localization preserve
-that equality. This proves the two representative normalizations and coherence in System.
-Existence of K-flat resolutions supplies the universal derived extensions in that system;
-no flatness of A_m over A_r is used. -/
+Proof:
+1. Construct the universal reduction system with its representative normalizations and
+coherence using exists_coherent_system. Reflect the given intrinsic Tor interval through
+realization and the specified origin isomorphism using the proved comparison Tor
+equivalence.
+2. The generic Tor-amplitude criterion gives a bounded flat model Q in the same interval.
+Its scalar extension is flat by flat_extend_of_surjective and remains zero outside that
+interval. Both complexes are K-flat, so the universal counit computes reduction on Q.
+3. boundedConstructible_extend proves constructibility over the quotient ring by the
+proved bounded-constructible tensor theorem and exact scalar restriction. The specified
+originComparison and finiteRing_constructibleDerived_origin transfer constructibility
+and boundedness to intrinsic pro-etale modules.
+4. The extended bounded flat complex has the same Tor interval. Transport this predicate
+through its computation isomorphism, exact site comparison, and intrinsic realization.
+Finally specialize the already proved coherence of the chosen system. -/
 theorem finiteReduction_constructibility (T : Scheme.{u}) (l : ℕ) [Fact l.Prime]
     (_hinvert : ∀ x : T, IsUnit (l : T.presheaf.stalk x)) :
     ∃ S : System T l,
@@ -365,6 +162,68 @@ theorem finiteReduction_constructibility (T : Scheme.{u}) (l : ℕ) [Fact l.Prim
       Scheme.HasProEtaleTorAmplitude T (Ring.{u} l m)
         ((realize T l m).obj ((S.proetale r m hmr).functor.obj K)) a b ∧
       ∀ (n : ℕ) (_hn : 1 ≤ n) (hnm : n ≤ m), S.CoherentAt r m n hmr hnm K₀ := by
-  sorry
+  obtain ⟨S, hcoh⟩ := exists_coherent_system T l
+  refine ⟨S, ?_⟩
+  intro r m hm hmr a b hab K hc hb ht K₀ hK₀ e
+  have ht₀ := reflect_tor T l r a b hab K ht K₀ e
+  refine ⟨ht₀, ?_⟩
+  obtain ⟨Q, hge, hle, hflat, ⟨eQ⟩⟩ :=
+    (DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat a b K₀).mp
+      ((Etale.DerivedCategory.hasTorAmplitudeIn_iff_torAmplitudeIn
+        (Λ := Coeff.{u} l r) (K := K₀)).mp ht₀)
+  let := hge
+  let := hle
+  have hQ : Etale.IsBoundedFlatComplex (Coeff.{u} l r) a b Q :=
+    Etale.isBoundedFlatComplex_iff.mpr ⟨hge, hle, hflat⟩
+  have hq : Function.Surjective (quotient.{u} l hmr) := by
+    intro y
+    obtain ⟨x, hx⟩ := ZMod.castHom_surjective (pow_dvd_pow l hmr) y.down.down
+    exact ⟨⟨⟨x⟩⟩, congrArg (fun z ↦ (⟨⟨z⟩⟩ : Coeff.{u} l m)) hx⟩
+  let Qm := ((extend T.smallEtaleTopology (quotient l hmr)).mapHomologicalComplex
+    (.up ℤ)).obj Q
+  have hQm : Etale.IsBoundedFlatComplex (Coeff.{u} l m) a b Qm := by
+    refine ⟨fun q hi ↦ (extend T.smallEtaleTopology (quotient l hmr)).map_isZero
+      (hQ.1 q hi), fun q ↦ ?_⟩
+    exact flat_extend_of_surjective T.smallEtaleTopology (quotient l hmr) hq (hflat q)
+  have hkQ := bounded_flat_kflat Q hQ
+  have hkQm := bounded_flat_kflat Qm hQm
+  let E := S.etale r m hmr
+  have : IsIso (E.counit.app Q) := E.computation Q hkQ
+  let em : E.functor.obj K₀ ≅ DerivedCategory.Q.obj Qm :=
+    E.functor.mapIso eQ.symm ≪≫ asIso (E.counit.app Q)
+  have hcm := boundedConstructible_extend T (quotient l hmr) E K₀ hK₀ a b hab ht₀
+  let origin := S.originComparison hmr e
+  have hfin := (Scheme.finiteRing_constructibleDerived_origin T (Ring.{u} l m)).2.2.1
+    ((realize T l m).obj ((S.proetale r m hmr).functor.obj K))
+  have hess : (ObjectProperty.ι
+      (Etale.DerivedCategory.isBoundedConstructible (Coeff.{u} l m) T) ⋙
+      ProEtale.finiteCoefficientIntrinsicDerivedComparison T (Ring.{u} l m)).essImage
+        ((realize T l m).obj ((S.proetale r m hmr).functor.obj K)) := by
+    refine ⟨⟨E.functor.obj K₀, hcm⟩, ⟨?_⟩⟩
+    exact (Functor.mapDerivedCategoryCompIso
+      (ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (Coeff.{u} l m)) T)
+      (ProEtale.finiteCoefficientIntrinsicRealization T (Ring.{u} l m))).app
+        (E.functor.obj K₀) ≪≫ (realize T l m).mapIso origin
+  obtain ⟨hconstructible, hbounded⟩ := hfin.mp hess
+  have htm : DerivedCategory.torAmplitudeIn
+      (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} (Coeff.{u} l m))) a b
+      (E.functor.obj K₀) := by
+    obtain ⟨hgem, hlem, hflatm⟩ := Etale.isBoundedFlatComplex_iff.mp hQm
+    let := hgem
+    let := hlem
+    exact (DerivedCategory.torAmplitudeIn _ a b).prop_of_iso em.symm
+      (DerivedCategory.torAmplitudeIn_Q_obj_of_flat Qm a b hflatm)
+  have htp : ProEtale.DerivedCategory.torAmplitudeIn
+      (ModuleCat.{u + 1} (Coeff.{u} l m)) T a b
+      ((S.proetale r m hmr).functor.obj K) := by
+    exact (DerivedCategory.torAmplitudeIn _ a b).prop_of_iso origin
+      ((ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff
+        (Λ := Coeff.{u} l m) a b (E.functor.obj K₀)).mpr htm)
+  refine ⟨Q, hQ, hkQ, ⟨eQ.symm⟩, hQm, hkQm, ⟨em⟩, hcm,
+    ⟨origin, rfl⟩, hconstructible, hbounded, ?_, ?_⟩
+  · exact (ProEtale.intrinsic_hasProEtaleTorAmplitude_iff_torAmplitudeIn
+      (Ring.{u} l m) T a b hab _).mpr htp
+  · intro n hn hnm
+    exact hcoh r m n hmr hnm K₀
 
 end AlgebraicGeometry.FiniteReduction

@@ -1,0 +1,117 @@
+{
+ "id": "lem-pur-finite-reduction-restrict-tensor",
+ "kind": "statement",
+ "title": "Restriction of sheaf scalar extension is tensor by the target ring",
+ "statement": "On an essentially small site $J$, let $A,B$ be commutative rings in the module universe, and $f:A\\to B$ a ring map. With scalar extension $E_f$ from [def-pur-finite-reduction-system] and exact scalar restriction $U_f$, there is a natural isomorphism $E_f U_f\\cong -\\otimes_A\\underline{U_f B}$, where the composition means first extension and then restriction, and $\\underline{U_f B}$ is the constant sheaf associated to the $A$-module $B$. No flatness or surjectivity of $f$ is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+  "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
+ },
+ "stmt_deps": [
+  "def-pur-finite-reduction-system"
+ ],
+ "proof": [
+  {
+   "text": "Use ModuleCat.extendScalarsCompRestrictScalarsIso on presheaves. Restriction has a right adjoint (coextension), so preserves sheafification. The whiskering tensor comparison and the sheafification counit identify the sheafified constant coefficient with the stated constant sheaf; compose these natural isomorphisms.",
+   "uses": [
+    "def-pur-finite-reduction-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+    "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-finite-reduction-system"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+  "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Sheafified extension of scalars has a left derived functor computed on K-flat resolutions, preserves flatness under a surjective coefficient map and bounded constructibility at finite Tor amplitude, and its comparison and associators are coherent",
+   "results": "8 hits: PresheafOfModules sheafification, its adjunction and exactness, and CategoryTheory.plusPlusAdjunction. No statement of derived scalar extension, flat reduction, constructibility, or normalized coefficient coherence was returned.",
+   "verdict": "Use the proved source K-flat resolution, tensor constructibility and adjunction-pasting APIs; no direct Mathlib match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars preserves flat sheaves and constructible complexes of finite Tor amplitude, with universal derived extension and coherent associators",
+   "results": "8 hits, including ModuleCat.preservesFiniteLimits_extendScalars_of_flat and Module.Flat.of_flat_tensorProduct. These concern ordinary modules, or require the coefficient map to be flat. No exact statement of the required sheaf comparison was returned.",
+   "verdict": "Use the existing sheaf reduction, flat resolution, derived tensor and adjunction APIs; no direct match.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftDerived\", \"tensor\"",
+   "results": "0 hits",
+   "verdict": "No exact match. The library contains Functor.leftDerivedUnique and the K-flat derivability API.",
+   "date": "2026-10-21"
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedUnique|castHom_surjective|flat_quotSMulTop",
+   "results": "5 hits including Functor.leftDerivedUnique and ZMod.castHom_surjective. Further local reads found Sheaf.flat_quotSMulTop_obj, Etale.boundedConstructible_tensor and CategoryTheory.conjugateEquiv_paste.",
+   "verdict": "Reuse these proved declarations.",
+   "date": "2026-10-21"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FiniteReductionConstructibility",
+  "date": "2026-10-21",
+  "group": "R1"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-purity-transport",
+ "blueprint": {
+  "is": null,
+  "same_as": [],
+  "from": {
+   "node": null,
+   "place": "First paragraph: scalar extension on flat models and successive coefficient reductions",
+   "via": [
+    "lem-pur-finite-reduction-constructibility",
+    "lem-pur-finite-smooth-adjunction-general-base",
+    "nt-target-smooth-purity-qbar"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteReductionRestrictTensor",
+  "file": "lean/Sheaf/Paper/FiniteReductionRestrictTensor.lean",
+  "declaration": "AlgebraicGeometry.FiniteReduction.extend_restrict_tensor",
+  "statement": "def extend_restrict_tensor (f : A →+* B) : extend J f ⋙ Sheaf.restrictScalars J f ≅ tensorRight ((constantSheaf J (ModuleCat.{u + 1} A)).obj ((ModuleCat.restrictScalars f).obj (ModuleCat.of B B)))",
+  "branch": "sheaf-dag",
+  "by": "R1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-dbfe0",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261020T221318-L-4172674",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-dbfe0",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261020T221318-L-4172674",
+  "kind": "interface",
+  "note": "independent cc review: 8 delivered modules + item node and 7 new nodes against live FiniteReductionConstructibility, its 14 moved decls, change record, and the declarations used vs their owning DAG nodes; compiled all 8 modules + direct importer ExceptionalCoefficientComparison (all rc 0) and #print axioms"
+ }
+}

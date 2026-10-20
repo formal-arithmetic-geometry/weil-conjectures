@@ -19,160 +19,66 @@
  ],
  "proof": [
   {
-   "text": "Write $C_r$ and $C_m$ for the comparison functors with the indicated coefficients. The given $K_0$ is bounded, hence belongs to $D^+(T_{\\mathrm{Et}},A_r)$. Apply [lem-exc-comparison-tor-interval] with the finite commutative ring $A_r$. Its reverse implication and the specified isomorphism $C_rK_0\\cong K$ give Tor amplitude $[a,b]$ for $K_0$. This tests all ordinary-etale module sheaves, exactly as required; no hypothesis about a finite-type base field is introduced.",
+   "text": "Choose the normalized coherent universal system using [lem-pur-finite-reduction-system-existence]. Translate the intrinsic Tor predicate with [lem-exc-intrinsic-tor-amplitude-transport], transport along the specified origin isomorphism, and use the proved source ProEtale.DerivedCategory.torAmplitudeIn_mapDerivedCategory_iff to reflect the exact interval to the etale origin.",
    "uses": [
-    "lem-exc-comparison-tor-interval"
+    "lem-pur-finite-reduction-system-existence",
+    "lem-exc-intrinsic-tor-amplitude-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
-    "place": "First paragraph: bounded flat models; Tor amplitude reflected to the etale origin"
+    "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
    }
   },
   {
-   "text": "Apply [lem-sf-etale-flat-model] to $K_0$, using its given bounded constructibility and $a\\leq b$. Obtain a complex $Q$ of flat etale $A_r$-module sheaves, zero outside $[a,b]$, with $Q\\cong K_0$ in the derived category. Since $Q$ is bounded above, [lem-pc-bounded-above-flat-kflat-site] makes it K-flat. Only flat terms are claimed: the theorem used here imposes no Noetherian hypothesis on $T$, and we do not require the terms of $Q$ to be constructible.",
+   "text": "Apply the proved generic DerivedCategory.torAmplitudeIn_iff_exists_iso_Q_obj_flat, and CochainComplex.kFlat_of_bounded_of_flat, to obtain Q. The quotient map is surjective by ZMod.castHom_surjective. [lem-pur-finite-reduction-flat-extension] gives flat terms after extension, and zero terms are preserved by the additive functor. Its bounded flatness again gives K-flatness, and the chosen universal counit computes the derived extension.",
    "uses": [
-    "lem-sf-etale-flat-model",
-    "lem-pc-bounded-above-flat-kflat-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08G1, lemma-tor-amplitude; Tag 06YQ, lemma-bounded-flat-K-flat"
-   }
-  },
-  {
-   "text": "Set $Q_m=Q\\otimes_{A_r}A_m$ termwise, on the etale site. Apply [lem-pur-kflat-change-of-rings] to the map of constant ring sheaves $(A_r)_T\\to(A_m)_T$: $Q_m$ has flat $A_m$-terms and is K-flat over $A_m$. By [lem-pur-derived-change-of-rings] it represents $L_m=K_0\\otimes^{\\mathbf L}_{A_r}A_m$ in the derived category of $A_m$-modules. The term in degree $i$ is $Q^i\\otimes_{A_r}A_m$, hence is zero for $i\\notin[a,b]$. These results require no flatness of $A_m$ as an $A_r$-module.",
-   "uses": [
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E, lemma-pullback-K-flat, applied to identity of topoi with coefficient map; Tags 06YT and 06YV, derived change of rings"
-   }
-  },
-  {
-   "text": "For every etale $A_m$-module sheaf $N$, K-flatness computes $L_m\\otimes^{\\mathbf L}_{A_m}N$ by $Q_m\\otimes_{A_m}N$, which has zero terms outside $[a,b]$. Thus $L_m$ has Tor amplitude $[a,b]$. Taking $N=(A_m)_T$ also shows that $L_m$ has cohomology only in $[a,b]$. This is the definition [def-kun-tor-amplitude] and the computation in [lem-pur-derived-change-of-rings], applied now to $A_m$ and the identity coefficient map.",
-   "uses": [
-    "def-kun-tor-amplitude",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FZ, definition-tor-amplitude; Tag 08G1, lemma-tor-amplitude, direction (2) implies (1)"
-   }
-  },
-  {
-   "text": "Write $C_r,C_m$ as in Step 1. Part (1) of [lem-sf-comparison-pullback-exact] identifies $\\nu_T^{-1}(A_r)_T$ and $\\nu_T^{-1}(A_m)_T$ with the pro-etale constant rings, compatibly with $A_r\\to A_m$, and the module inverse image with $\\nu_T^{-1}$; by parts (2)-(3) $C_r,C_m$ are termwise exact, so $C_mL_m$ is represented by $C_m(Q\\otimes_{A_r}A_m)$. By [lem-weil-pbc-left-exact-site-inverse-image-tensor], applied to the inclusion of [def-weil-pbc-site-comparison-morphism] (it preserves finite limits and coverings), $\\nu_T^{-1}$ preserves all colimits and $\\otimes_{\\mathbf Z}$. Since $Q^i\\otimes_{A_r}A_m$ is the coequalizer of the two action maps $Q^i\\otimes_{\\mathbf Z}A_r\\otimes_{\\mathbf Z}A_m\\rightrightarrows Q^i\\otimes_{\\mathbf Z}A_m$, this gives a termwise isomorphism of complexes $C_m(Q\\otimes_{A_r}A_m)\\cong C_rQ\\otimes_{A_r}A_m$, sending $\\nu^{-1}(q\\otimes b)$ to $\\nu^{-1}q\\otimes b$ on local sections and commuting with the differentials, which act on $q$ only. It is $A_r$-linear, hence $A_m$-linear, because local sections of $A_m$ lift through the surjection $A_r\\twoheadrightarrow A_m$. On the other side, $C_rQ\\cong C_rK_0\\cong K$ in $D(T_{\\mathrm{proet}},A_r)$, and [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] (with $u=\\nu_T$, $R=S=A_r$) makes $C_rQ$ K-flat with flat terms. Hence [lem-pur-derived-change-of-rings] on the pro-etale site says that $C_rQ\\otimes_{A_r}A_m$ represents $K\\otimes^{\\mathbf L}_{A_r}A_m$. Composing,\n$$C_mL_m\\cong C_rQ\\otimes_{A_r}A_m\\cong K\\otimes^{\\mathbf L}_{A_r}A_m$$\nin $D(T_{\\mathrm{proet}},A_m)$, not just after forgetting to $A_r$. The termwise map is natural in chain maps, and the canonicity clause of [lem-pur-derived-change-of-rings] makes the comparison independent of the flat model. All sites are small skeletons in the common larger module universe.",
-   "uses": [
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL (lemma-tensor-product-pullback), via its integer-sheaf form; sites-cohomology.tex Tags 0G7E (lemma-pullback-K-flat) and 06YT; blueprint first paragraph, extension of coefficients"
-   }
-  },
-  {
-   "text": "The complex $L_m$ is bounded by Step 4, so apply the forward implication of [lem-exc-comparison-tor-interval] with ring $A_m$. Together with Step 5 this proves Tor amplitude $[a,b]$ over $A_m$ for $K\\otimes^{\\mathbf L}_{A_r}A_m$. In particular the pro-etale test sheaves in this assertion are arbitrary $A_m$-module sheaves, not only ones of etale origin.",
-   "uses": [
-    "lem-exc-comparison-tor-interval"
+    "lem-pur-finite-reduction-flat-extension"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
-    "place": "First paragraph: the finite-Tor condition after extension of coefficients"
+    "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
    }
   },
   {
-   "text": "There are only finitely many nonzero cohomology sheaves of $K_0$. For each, choose the finite constructible locally closed stratification in [def-weil-pbc-etale-constructible-sheaf]. Repeatedly apply [lem-weil-pbc-constructible-stratification-intersection] to obtain one finite stratification $i:S\\to T$ refining all of them, using the fibre-product schemes as strata. By [lemma-constructible-of-refines] the restrictions of all these sheaves are finite locally constant. For every stratum, [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-exact-functor-complex-cohomology] identify these restrictions with the cohomology of $i^*K_0$. The same exactness shows $i^*K_0$ is bounded.",
+   "text": "Apply [lem-pur-finite-reduction-etale-constructibility] to the reduced etale object. The comparison supplied by System and the specified origin isomorphism give exactly System.originComparison. Apply [lem-weil-pbc-finite-ring-constructible-derived-origin] to this bounded constructible origin, obtaining intrinsic constructibility and boundedness of the pro-etale reduction.",
    "uses": [
-    "def-weil-pbc-etale-constructible-sheaf",
-    "lem-weil-pbc-constructible-stratification-intersection",
-    "lemma-constructible-of-refines",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 095E and 03RZ, finite common stratification; sites-modules.tex Tag 04JC; homology.tex Tag 010N"
-   }
-  },
-  {
-   "text": "On such a stratum, the derived tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], with the constant-ring and exactness identification of [prop-weil-pbc-inverse-image-modules-exact], gives\n$$i^*L_m\\cong i^*K_0\\otimes^{\\mathbf L}_{A_r}(A_m)_S.$$\nUse [lem-weil-pbc-locally-constant-tensor] on $S_{\\mathrm{Et}}$, with coefficient ring $A_r$. This ring is Noetherian: it is finite, so an increasing chain of ideals stabilizes. Both inputs are bounded above with locally constant finite-type cohomology by Step 7 and because $A_m$ is a finite $A_r$-module in degree zero. Hence every cohomology sheaf of $i^*L_m$ is locally constant of finite type over $A_r$, equivalently finite locally constant by [lem-weil-pbc-finite-locally-constant-module-values]. Each local constant value is killed by $\\ell^m$, because $i^*L_m$ is an $A_m$-complex. Thus it is an $A_m$-module, and its $A_r$-linear trivialization is automatically $A_m$-linear: lift each scalar through $A_r\\twoheadrightarrow A_m$. The same trivializations therefore give finite locally constant $A_m$-values.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-locally-constant-tensor",
-    "lem-weil-pbc-finite-locally-constant-module-values"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 094H, lemma-locally-constant-tensor-product; etale-cohomology.tex Tags 03RU and 03RW; coefficient quotient action written explicitly"
-   }
-  },
-  {
-   "text": "Exact pullback commutes with cohomology by [prop-weil-pbc-inverse-image-modules-exact] and [lem-weil-pbc-exact-functor-complex-cohomology]. Consequently Step 8 proves that every $\\mathcal H^j(L_m)$ restricts to finite locally constant $A_m$-modules on the finite constructible stratification of Step 7. This is [def-weil-pbc-etale-constructible-sheaf], so $L_m$ is bounded constructible. The finite-ring equivalence [lem-weil-pbc-finite-ring-constructible-derived-origin], applied to $A_m$, makes $C_mL_m$ bounded with intrinsically constructible cohomology, and identifies $L_m$ as its bounded constructible ordinary-etale origin. Step 5 is the specified canonical comparison with the reduction of $K$.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-pbc-etale-constructible-sheaf",
+    "lem-pur-finite-reduction-etale-constructibility",
     "lem-weil-pbc-finite-ring-constructible-derived-origin"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AL, lemma-compare-constructible-derived; global finite-stratification criterion for the etale origin"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
+    "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
    }
   },
   {
-   "text": "For $r\\geq m\\geq n$, apply [lem-pur-kflat-change-of-rings] again to $Q_m$ and $A_m\\to A_n$. The derived change-of-rings computation [lem-pur-derived-change-of-rings] represents the successive reduction by $(Q\\otimes_{A_r}A_m)\\otimes_{A_m}A_n$. The sheaf tensor definition [def-pur-sheaf-tensor-product] gives an isomorphism of complexes\n$$(q\\otimes b)\\otimes c\\longmapsto q\\otimes bc,$$\nwith inverse $q\\otimes c\\longmapsto(q\\otimes1)\\otimes c$; $bc$ means the image of $b$ in $A_n$ times $c$. The balancing relations prove the two formulas are well-defined inverse maps, and the differential acts only on $q$, so these are chain maps. These are the derived tensor associators on these K-flat representatives. The coefficient comparisons of Step 5 are induced by inverse image of the tensor maps. Both paths around their associator square send a local pure tensor $(q\\otimes b)\\otimes c$ to the image of $q$ tensored with $bc$. Equality on pure tensors implies equality on tensor presheaves and on their sheafifications, and hence in the derived category. The comparison and associator are natural in chain maps; the canonical K-flat computation of [lem-pur-derived-change-of-rings] makes them independent of the representative. This proves the required coherence without replacing a derived quotient by an underived quotient of $K_0$.",
+   "text": "The reduced bounded flat complex has the same generic Tor interval by [lem-kun-flat-bounded-tor-amplitude] (DerivedCategory.torAmplitudeIn_Q_obj_of_flat). Transport through its computation isomorphism, the proved source comparison Tor equivalence, and [lem-exc-intrinsic-tor-amplitude-transport]. Finally specialize the coherence already supplied by [lem-pur-finite-reduction-system-existence].",
    "uses": [
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-derived-change-of-rings",
-    "def-pur-sheaf-tensor-product"
+    "lem-kun-flat-bounded-tor-amplitude",
+    "lem-pur-finite-reduction-system-existence",
+    "lem-exc-intrinsic-tor-amplitude-transport"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
-    "place": "First paragraph, final sentence: associativity for a second coefficient map; explicit calculation on bounded flat representatives"
+    "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
    }
   }
  ],
  "proof_deps": [
-  "lem-exc-comparison-tor-interval",
-  "lem-sf-etale-flat-model",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-derived-change-of-rings",
-  "def-kun-tor-amplitude",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "def-weil-pbc-etale-constructible-sheaf",
-  "lem-weil-pbc-constructible-stratification-intersection",
-  "lemma-constructible-of-refines",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-locally-constant-tensor",
-  "lem-weil-pbc-finite-locally-constant-module-values",
+  "lem-pur-finite-reduction-system-existence",
+  "lem-exc-intrinsic-tor-amplitude-transport",
+  "lem-pur-finite-reduction-flat-extension",
+  "lem-pur-finite-reduction-etale-constructibility",
   "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "def-pur-sheaf-tensor-product"
+  "lem-kun-flat-bounded-tor-amplitude"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction.proof.md",
-  "place": "First paragraph, bounded flat coefficient extension and associativity; constructibility supplied by Stacks 094H and finite-ring origin"
+  "place": "First paragraph: scalar extension on flat models and successive coefficient reductions"
  },
  "mathlib_searches": [
   {
@@ -307,15 +213,7 @@
   ]
  },
  "tool_uses": [
-  "lem-exc-comparison-tor-interval",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-derived-change-of-rings",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-locally-constant-tensor",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+  "lem-weil-pbc-finite-ring-constructible-derived-origin"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -337,20 +235,6 @@
   "module": "Sheaf.Paper.FiniteReductionConstructibility",
   "declaration": "AlgebraicGeometry.FiniteReduction.finiteReduction_constructibility",
   "declarations": [
-   "AlgebraicGeometry.FiniteReduction.Ring",
-   "AlgebraicGeometry.FiniteReduction.Coeff",
-   "AlgebraicGeometry.FiniteReduction.quotient",
-   "AlgebraicGeometry.FiniteReduction.extend",
-   "AlgebraicGeometry.FiniteReduction.extendAdjunction",
-   "AlgebraicGeometry.FiniteReduction.extend_additive",
-   "AlgebraicGeometry.FiniteReduction.DerivedExtension",
-   "AlgebraicGeometry.FiniteReduction.ordinaryComparison",
-   "AlgebraicGeometry.FiniteReduction.ordinaryAssociator",
-   "AlgebraicGeometry.FiniteReduction.ordinaryComparisonComplex",
-   "AlgebraicGeometry.FiniteReduction.System",
-   "AlgebraicGeometry.FiniteReduction.System.CoherentAt",
-   "AlgebraicGeometry.FiniteReduction.ringFinite",
-   "AlgebraicGeometry.FiniteReduction.realize",
    "AlgebraicGeometry.FiniteReduction.System.originComparison",
    "AlgebraicGeometry.FiniteReduction.finiteReduction_constructibility"
   ],
@@ -360,6 +244,16 @@
   "by": "N2",
   "date": "2026-10-17",
   "existing": false,
-  "note": "Uses the fixed-module presentation and the recorded canonical intrinsic coefficient realization. The same module supplies the concrete quotient scalar extensions, their universal derived-pair interface, and the canonical comparison and associator normalizations as owning-node helpers. System is existentially returned by the theorem; no definition chooses data from a mere existence theorem. Intrinsic constructibility and Tor amplitude use the publicly retained original predicates from the recorded dependency modules."
+  "note": "Original theorem signature unchanged. The concrete interface is publicly re-exported from FiniteReductionSystem to permit independent proof modules without cycles. Every mathematical assertion is proved from the stated universal-system, flat-extension, constructibility and intrinsic-transport interfaces, using the generic proved source Tor API."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-dbfe0",
+  "group": "R1",
+  "result": "fix",
+  "landing": "20261020T221318-L-4172674",
+  "kind": "interface",
+  "note": "independent cc review: 8 delivered modules + item node and 7 new nodes against live FiniteReductionConstructibility, its 14 moved decls, change record, and the declarations used vs their owning DAG nodes; compiled all 8 modules + direct importer ExceptionalCoefficientComparison (all rc 0) and #print axioms"
  }
 }
