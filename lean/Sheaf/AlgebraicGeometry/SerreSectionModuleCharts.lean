@@ -12,7 +12,7 @@ public import WeilConjectures.Mathlib.RingTheory.MvPolynomial.Homogeneous
 import Sheaf.AlgebraicGeometry.SerreSectionModuleComparison
 import Sheaf.AlgebraicGeometry.SerreSectionModuleChartAdditive
 import WeilConjectures.AlgebraicGeometry.SerreSectionModuleChartScalar
-import Sheaf.AlgebraicGeometry.SerreSectionModuleChartRestriction
+import WeilConjectures.AlgebraicGeometry.SerreSectionModuleChartRestriction
 
 /-!
 # Localization charts for the truncated graded section module
@@ -152,8 +152,8 @@ theorem serreSectionModuleCharts
       apply (hnorm f d hd hf n z s).mpr
       simpa only [z, AddEquiv.apply_symm_apply] using ht
     have hres := serreSectionModuleChartRestriction k G M 𝓜 hsmul φ hφ
-      f g d b hd hb hf hg (alpha f d hd hf) (alpha g b hb hg)
-      (hnorm f d hd hf) (hnorm g b hb hg) inc e c a he ha hrel n z s hz
+      f g d b hf hg (alpha f d hd hf) (alpha g b hb hg)
+      (hnorm f d hd hf) (hnorm g b hb hg) inc e c a ha hrel n z s hz
     refine hres.trans ?_
     exact fractionChange_eq f g a e n m hrel (z : M) y (hz.symm.trans hs)
 
