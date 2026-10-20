@@ -59,13 +59,14 @@
  "unit": "sk-thm-p1",
  "lean": {
   "existing": false,
-  "module": "Sheaf.ConstructibleSheaf.LocallyConstantRetraction",
-  "file": "lean/Sheaf/ConstructibleSheaf/LocallyConstantRetraction.lean",
-  "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction_sheaf",
-  "statement": "theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction_sheaf {U V : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime] (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) [IsFiniteLocallyConstantSheaf G] (v : V ⟶ U) [IsFinite v] [Etale v] [ConnectedSpace V] (d : ℕ) (hd : ¬ ℓ ∣ d) (hdeg : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ U), Nat.card (v.GeometricFiber s) = d) : ∃ r : (v)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj ((v)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G) ⟶ G, (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) v).unit.app G ≫ r = 𝟙 G",
+  "module": "WeilConjectures.ConstructibleSheaf.LocallyConstantRetraction",
+  "file": "lean/WeilConjectures/ConstructibleSheaf/LocallyConstantRetraction.lean",
+  "declaration": "AlgebraicGeometry.Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction",
+  "statement": "theorem Scheme.IsFiniteLocallyConstantSheaf.exists_finite_etale_retraction {U V : Scheme.{u}} [IrreducibleSpace U] (ℓ : ℕ) [Fact ℓ.Prime] (G : Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ)))) [IsFiniteLocallyConstantSheaf G] (v : V ⟶ U) [IsFinite v] [Etale v] [ConnectedSpace V] (d : ℕ) (hd : ¬ ℓ ∣ d) (hdeg : ∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (s : Spec (.of Ω) ⟶ U), Nat.card (v.GeometricFiber s) = d) : ∃ r : (v)_*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj ((v)^*[ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))].obj G) ⟶ G, (Etale.upperStarLowerStarAdjunction (ModuleCat.{u + 1} (ULift.{u + 1} (ZMod ℓ))) v).unit.app G ≫ r = 𝟙 G",
   "branch": "sheaf-dag",
   "by": "V1",
-  "date": "2026-10-12"
+  "date": "2026-10-12",
+  "note": "J8 retirement: the upstream theorem has the identical statement; only the unused local name had the suffix _sheaf. The parent already imports and applies the upstream theorem. Its trace-degree proof and every DAG dependency are preserved."
  },
  "created": {
   "by": "worker",
@@ -141,14 +142,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B2",
+  "reviewer": "C-4b841",
+  "group": "J8",
   "result": "pass",
-  "landing": "20261012T035539-L-1594250",
+  "landing": "20261020T211747-L-3497696",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed after the tool's own checks (compiles, no new sorry without its node, no axiom, statements of existing declarations unchanged); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired copy Sheaf.ConstructibleSheaf.LocallyConstantRetraction (exists_finite_etale_retraction_sheaf) vs twin WeilConjectures.ConstructibleSheaf.LocallyConstantRetraction.exists_finite_etale_retraction: same statement apart from the name suffix, identical proof; node lean record repointed per retire-sheaf-twins-20261020; no importers or name users in live lean/"
  },
  "lean_audit": {
   "master": {
