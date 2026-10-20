@@ -24,110 +24,97 @@
  ],
  "proof": [
   {
-   "text": "Finite dual frames exist without assuming freeness. Choose a finite generating family of a term $M$ using [def-weil-finitely-generated-module]; it gives a surjection $\\pi:A^N\\to M$. Apply the lifting characterization in [def-weil-pbc-projective-module] to $1_M$ to obtain $\\iota:M\\to A^N$ with $\\pi\\iota=1_M$. For the standard coordinate vectors $u_a$, set $e_a=\\pi(u_a)$ and $\\epsilon_a=\\operatorname{pr}_a\\iota$. Then $\\sum_a e_a\\epsilon_a(x)=\\pi\\iota(x)=x$. Use $N=0$ for zero terms. The dual module has inclusion $\\pi^*:M^*\\to(A^N)^*$ and retraction $\\iota^*$, whose composite is $(\\pi\\iota)^*=1$, so it is a direct summand of $(A^N)^*\\cong A^N$. For a second splitting $L\\xrightarrow{j}A^T\\xrightarrow{q}L$, the tensor inclusion $\\iota\\otimes j$ and retraction $\\pi\\otimes q$ compose to $1_{M\\otimes L}$ in $A^N\\otimes A^T\\cong A^{NT}$. The dual and tensor are projective by the cited direct-summand characterization, and finite because the retractions send finitely many coordinate vectors to generators. A finite direct sum of these retracts is a retract of the finite direct sum of their finite free modules, using the block-diagonal inclusions and retractions. Thus duals and the finite total tensors stay in the stated category. This is the explicit two-line splitting argument of Stacks Tag 00NX, algebra.tex, lemma-finite-projective, (2) implies (3), using the cited definitions rather than invoking an extra theorem.",
+   "text": "For every finite projective term use Module.Finite.exists_comp_eq_id_of_projective to split a finite free module. Its columns and coordinate functionals give the finite dual frame. Choose the zero-dimensional splitting on a zero term. Applying the splitting equality to a vector proves the frame identity.",
    "uses": [
     "def-weil-finitely-generated-module",
     "def-weil-pbc-projective-module"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Opening and unit proof: choose finite dual frames by splitting a finite free module; Stacks Tag 00NX, lemma-finite-projective, (2) implies (3)"
+    "place": "Steps 1–5 and the derived-model paragraph; realized using existing categorical duality APIs"
    }
   },
   {
-   "text": "The coevaluation tensor is independent of frames. For any two frames $(e_a,\\epsilon_a)$ and $(q_b,\\mu_b)$ of $M$, the frame identities give $e_a=\\sum_b q_b\\mu_b(e_a)$ and $\\mu_b=\\sum_a\\mu_b(e_a)\\epsilon_a$. Bilinearity therefore gives $\\sum_a e_a\\otimes\\epsilon_a=\\sum_b q_b\\otimes\\mu_b$. Apply this degreewise; boundedness and the empty frames on zero terms make the total sum finite. This argument also proves independence of the splitting in step 1.",
+   "text": "Expand a vector using a second finite frame. Applying the first frame functional and exchanging finite sums proves rectangular cyclicity of the frame trace. Taking one map to be the identity proves frame independence. The expansion in a basis gives the diagonal sum and LinearMap.trace; on the identity it gives the basis cardinality.",
    "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 5, independence of the chosen bases, corrected to finite dual frames"
+    "place": "Steps 1–5 and the derived-model paragraph; realized using existing categorical duality APIs"
    }
   },
   {
-   "text": "The projective trace and its cyclicity follow by finite expansion, with no free-module trace theorem required. For frames $(e_a,\\epsilon_a)$ on $M$ and $(q_b,\\mu_b)$ on $N$ and maps $f:M\\to N$, $g:N\\to M$, expand $f(e_a)$ in the second frame to get\n$$\\sum_a\\epsilon_a(gf(e_a))=\\sum_{a,b}\\mu_b(f(e_a))\\epsilon_a(g(q_b))=\\sum_b\\mu_b(fg(q_b)).$$\nFor $N=M$, $f=t$, $g=1$, and two choices of frame, this proves frame independence of $\\operatorname{Tr}_A(t)$. For arbitrary $M,N$ it gives $\\operatorname{Tr}_M(gf)=\\operatorname{Tr}_N(fg)$. Linearity follows from the finite-sum formula. With a genuine basis and its coordinate functionals the formula is precisely the diagonal matrix sum; in particular the identity on $A^r$ has trace $r\\cdot1_A$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 4, ordinary trace interpretation; Step 5, cyclicity used for homotopy invariance"
-   }
-  },
-  {
-   "text": "The signed conventions actually give complexes and chain maps for the symmetry. The dual differential is the differential of [def-sc-module-total-hom-complex] with target $A[0]$; explicitly $(d^\\vee)^2\\varphi(x)=(-1)^{j+2}(-1)^{j+1}\\varphi(d^2x)=0$. For the total tensor of [def-pc-tensor-complex-sheaves], the mixed terms of $d^2(p\\otimes q)$ have signs $(-1)^{i+1}$ and $(-1)^i$ and cancel. If $|p|=i,|q|=j$, both $cd(p\\otimes q)$ and $dc(p\\otimes q)$ equal $(-1)^{ij}dq\\otimes p+(-1)^{ij+j}q\\otimes dp$, so the symmetry is a chain map. Its square is $1$. The canonical reassociation map sends $(p\\otimes q)\\otimes r$ to $p\\otimes(q\\otimes r)$; in either parenthesization its three differential terms have coefficients $1,(-1)^i,(-1)^{i+j}$. The unit maps send $a\\otimes p$ and $p\\otimes a$ to $ap$ and commute with the differential since $a$ has degree zero. Both pentagon paths send a fourfold pure tensor to the same final parenthesization; the unit triangle sends $(p\\otimes a)\\otimes q$ to $p\\otimes aq=ap\\otimes q$. The hexagon sign equality is $(-1)^{i(j+k)}=(-1)^{ij}(-1)^{ik}$. These checks extend from pure tensors by linearity. For degree-zero maps $f,g$, the two sides of $c(f\\otimes g)=(g\\otimes f)c$ send $p\\otimes q$ to $(-1)^{ij}g(q)\\otimes f(p)$, proving the naturality used below. Thus suppressing these canonical maps is legitimate, without claiming that tensor parentheses are literal equalities.",
+   "text": "Construct the termwise contraction pairing from the chosen frame: evaluation is contraction, coevaluation sends one to the finite sum of frame tensors. The frame identity and its dual give the two triangle identities. Identify the recorded total-Hom dual with the termwise right dual by evaluation at the opposite degree; the inverse places a functional in that single degree. Checking the signed differentials uses the mate-evaluation equation and HomComplex.delta_v. Transport CochainComplex.exactPairingRightDual across this isomorphism. This constructs actual chain maps and proves both triangles.",
    "uses": [
     "def-sc-module-total-hom-complex",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Explicit conventions and Step 1, square of the dual differential"
-   }
-  },
-  {
-   "text": "Evaluation has degree zero by its stated zero extension. Its chain-map identity only needs checking on input of total degree $-1$, since only there can evaluation of its differential be nonzero. For $\\varphi\\in(P^\\vee)^j$ and $p\\in P^{-j-1}$, it is\n$$\\operatorname{ev}(d(\\varphi\\otimes p))=(-1)^{j+1}\\varphi(dp)+(-1)^j\\varphi(dp)=0.$$\nIn every other input degree both sides vanish by degree. The target $A[0]$ has zero differential, proving (a) for evaluation.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 1, evaluation is a degree-zero chain map"
-   }
-  },
-  {
-   "text": "Coevaluation is closed, by cancellation with the actual frames. In the summand $P^{i+1}\\otimes(P^i)^*$, the differential of its value at $1$ is\n$$\\sum_a d^ie_{i,a}\\otimes\\epsilon_{i,a}-\\sum_b e_{i+1,b}\\otimes(\\epsilon_{i+1,b}\\circ d^i).$$\nIndeed the sign in the second part is $(-1)^{i+1}(-1)^{-(i+1)+1}=-1$. Expand $d^ie_{i,a}=\\sum_b e_{i+1,b}\\epsilon_{i+1,b}(d^ie_{i,a})$ and $\\epsilon_{i+1,b}\\circ d^i=\\sum_a\\epsilon_{i+1,b}(d^ie_{i,a})\\epsilon_{i,a}$. These are identical finite double sums with opposite signs. This proves the degree-zero coevaluation is a chain map, completing (a).",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 2, coevaluation is a chain map, with corrected dual-frame indices"
-   }
-  },
-  {
-   "text": "For $p\\in P^i$, the second triangle composite is $\\sum_a e_{i,a}\\epsilon_{i,a}(p)=p$. For $\\psi\\in(P^i)^*$, the first is $\\sum_a\\psi(e_{i,a})\\epsilon_{i,a}=\\psi$, as follows by applying $\\psi$ to the frame identity for each $x\\in P^i$. Evaluation annihilates every other degree. Canonical associators and unit maps only reparenthesize these tensors, so this proves both triangle identities (b). No symmetry is used in these two composites.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 3, the two triangle identities"
-   }
-  },
-  {
-   "text": "Use exactly the trace composite in [sk-d-trace]. On $1$ its successive values are $\\sum_{i,a}e_{i,a}\\otimes\\epsilon_{i,a}$, then $\\sum_{i,a}v^ie_{i,a}\\otimes\\epsilon_{i,a}$, then $\\sum_{i,a}(-1)^{i(-i)}\\epsilon_{i,a}\\otimes v^ie_{i,a}$, and finally $\\sum_{i,a}(-1)^i\\epsilon_{i,a}(v^ie_{i,a})$. Here $v$ has degree zero and $-i^2\\equiv i\\pmod2$, including negative $i$. By the trace definition and step 3 this is the asserted alternating sum of ordinary projective traces. For $v=1$, it is the stated Euler characteristic scalar, with the usual $r_i\\cdot1_A$ interpretation for a free term. This proves (c).",
-   "uses": [
-    "sk-d-trace"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 4, trace of the composite; unit proof, the dual factor has degree -i"
-   }
-  },
-  {
-   "text": "If $v-v'=ds+sd$ with $s^i:P^i\\to P^{i-1}$, linearity and the rectangular cyclicity proved in step 3 give\n$$\\sum_i(-1)^i\\operatorname{Tr}_{P^i}(d^{i-1}s^i)+\\sum_i(-1)^i\\operatorname{Tr}_{P^i}(s^{i+1}d^i)\n=\\sum_i(-1)^i\\operatorname{Tr}_{P^{i-1}}(s^id^{i-1})+\\sum_j(-1)^j\\operatorname{Tr}_{P^j}(s^{j+1}d^j)=0,$$\nwhere in the first sum put $j=i-1$. All sums are finite. Thus the scalar descends to homotopy classes, rather than simply identifying homotopy classes with derived morphisms without justification.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 5, invariance under homotopy, with the index shift written out"
-   }
-  },
-  {
-   "text": "The chain tensor calculation computes the derived tensor calculation. Every term of $P$ and $P^\\vee$ is projective by step 1, hence flat by [lem-weil-pbc-projective-module-flat]. They are bounded above, so [lem-pc-module-bounded-flat-kflat] makes both complexes K-flat. Apply [lem-pc-derived-tensor-second-factor-functor] with the identity map $A\\to A$: the identity K-flat resolutions compute all tensor products of these representatives and their morphisms in $D(A)$. Consequently the evaluation, coevaluation and Koszul symmetry just checked represent their derived maps. For the unit scalar use [lem-weil-pbc-derived-single-fully-faithful]: $\\operatorname{End}_{D(A)}(A[0])\\cong\\operatorname{End}_A(A)\\cong A$, the last map sending $h$ to $h(1)$ with inverse multiplication by that scalar. Thus the scalar computed in step 8 is also the derived categorical trace.",
-   "uses": [
-    "lem-weil-pbc-projective-module-flat",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-pc-derived-tensor-second-factor-functor",
-    "lem-weil-pbc-derived-single-fully-faithful"
+    "def-pc-tensor-complex-sheaves",
+    "lem-trf-exact-pairing-iso-transport"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Opening paragraph, derived tensors computed by projective models and End_D(A)(A[0]) = A"
+    "place": "Steps 1–5 and the derived-model paragraph; realized using existing categorical duality APIs"
    }
   },
   {
-   "text": "For a bounded projective $P$, [lem-pc-ring-derived-map-representative] says exactly that $\\operatorname{Hom}_{K(A)}(P,E)\\to\\operatorname{Hom}_{D(A)}(Q(P),Q(E))$ is bijective for every $E$. With $E=P$, every derived endomorphism therefore has a chain representative unique up to homotopy; step 9 defines the required function on all of $\\operatorname{End}_{D(A)}(Q(P))$. For another bounded projective representative $R$ and a derived isomorphism $w:Q(P)\\to Q(R)$, the same bijection applied in both directions gives chain maps $f:P\\to R$, $g:R\\to P$ representing $w,w^{-1}$, with $gf\\simeq1_P$ and $fg\\simeq1_R$. If $v_R$ corresponds to $v_P$ under $w$, injectivity gives $v_R\\simeq fv_Pg$. Then step 9 and degreewise cyclicity give $\\operatorname{str}(v_R)=\\operatorname{str}(fv_Pg)=\\operatorname{str}(v_Pgf)=\\operatorname{str}(v_P)$; the last equality uses $v_Pgf\\simeq v_P$. In particular a quasi-isomorphism between the representatives gives precisely such a $w$ by [def-weil-abstract-derived-category]. This supplies the missing implication from homotopy invariance to derived invariance.",
+   "text": "The tensor-summand formulas for the constructed pairing give unsigned evaluation and the displayed unsigned finite-frame coevaluation. Evaluation is zero away from degree zero because its target is the degree-zero unit. Evaluation is independent of the frame by tensor and single-complex extensionality. With evaluation fixed, coevaluation is unique by the triangle identities, proving its frame independence.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
+    "place": "Steps 1–5 and the derived-model paragraph; realized using existing categorical duality APIs"
+   }
+  },
+  {
+   "text": "Compute categorical trace with the transported exact pairing. Apply the existing CochainComplex.trace_f_zero_eq, whose Koszul braiding gives the sign (-1)^i. For each term, contraction of the finite-frame coevaluation after the endomorphism is exactly the frame trace. This gives the chain supertrace formula and its identity specialization.",
+   "uses": [
+    "sk-d-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
+    "place": "Steps 1–5 and the derived-model paragraph; realized using existing categorical duality APIs"
+   }
+  },
+  {
+   "text": "The frame trace is additive and rectangular cyclicity was proved above. Apply Homotopy.sum_negOnePow_smul_eq: the two differential-homotopy contributions cancel after shifting the finite sum. Thus chain supertrace is invariant under homotopy.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
+    "place": "Steps 1–5 and the derived-model paragraph; realized using existing categorical duality APIs"
+   }
+  },
+  {
+   "text": "The framed terms are dualizable and hence categorically flat. Their termwise right duals are dualizable by the swapped pairing, and are bounded with opposite bounds. CochainComplex.kFlat_of_bounded_of_flat makes the model and its dual K-flat; transport this property across the explicit total-Hom comparison. Map the chain pairing into the homotopy category, lift it through the fully faithful inclusion of K-flat objects, and map it by the monoidal kFlatQh functor. Transport along quotientCompQhIso. Expanding the evaluation and coevaluation of these standard pairing constructions gives precisely the two K-flat tensor comparisons and chainTraceUnitIso. Uniqueness of right duals compares this pairing with perfectTraceHasRightDual and gives the required single derived-dual isomorphism.",
+   "uses": [
+    "lem-pc-module-bounded-flat-kflat",
+    "def-weil-abstract-derived-category",
+    "lem-trf-exact-pairing-iso-transport",
+    "def-trf-categorical-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
+    "place": "Steps 1–5 and the derived-model paragraph; realized using existing categorical duality APIs"
+   }
+  },
+  {
+   "text": "Apply trace_Qh_map_quotient_map and trace invariance under quotientCompQhIso. Substitute the chain supertrace formula. The scalar lemma epsilon_Qh_comp_map_single_map_algebraMap_comp_inv identifies the resulting unit endomorphism with multiplication by that scalar. Full faithfulness and linearity of the degree-zero single functor show that perfectTraceScalar evaluates it to the same element of A. This proves the derived trace formula, including the identity.",
+   "uses": [
+    "sk-d-trace",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-trf-categorical-trace"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
+    "place": "Steps 1–5 and the derived-model paragraph; realized using existing categorical duality APIs"
+   }
+  },
+  {
+   "text": "A bounded-above complex of projective modules is K-projective. Use CochainComplex.IsKProjective.Qh_map_bijective and fullness of the homotopy quotient to represent every derived endomorphism by a chain map. Naturality and cancellation of quotientCompQhIso give the specified image equality. Apply the already proved derived supertrace formula to that representative.",
    "uses": [
     "lem-pc-ring-derived-map-representative",
     "def-weil-abstract-derived-category"
@@ -135,63 +122,20 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 5, independence of the representative and passage from homotopy to derived morphisms"
+    "place": "Steps 1–5 and the derived-model paragraph; realized using existing categorical duality APIs"
    }
   },
   {
-   "text": "Apply [lem-trf-frame-dual-mate] to $f:P\\to R$ from step 11. Steps 5–7 supply its chain-map and triangle hypotheses for both bounded projective models. It identifies precomposition $f^\\vee$ with the dual mate and gives\n$$(f\\otimes1)\\operatorname{coev}_P=(1\\otimes f^\\vee)\\operatorname{coev}_R,\\qquad \\operatorname{ev}_R(1\\otimes f)=\\operatorname{ev}_P(f^\\vee\\otimes1).$$",
+   "text": "For an arbitrary derived isomorphism, the internal-Hom evaluation counit and braiding naturality give the stated evaluation transport. Transport the canonical pairing along the object isomorphism and its dual, using exactPairingCongr. Its evaluation is the canonical evaluation by the preceding equation, so uniqueness of coevaluation gives the stated coevaluation transport. Finally trace_eq_of_iso gives invariance under conjugacy. This keeps the unit proof route through triangles and duality transport without constructing chain-level homotopy inverses of the model isomorphism.",
    "uses": [
-    "lem-trf-frame-dual-mate"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 5 and unit proof, evaluation composite unchanged when duality is transported along an isomorphism"
-   }
-  },
-  {
-   "text": "By [lem-trf-hom-dual-preserves-homotopies], applied with target $A[0]$, the homotopy inverse maps $f,g$ of step 11 dualize to homotopy inverses $f^\\vee,g^\\vee$. Homotopic maps have equal images in $D(A)$ by [def-weil-abstract-derived-category]. Thus, writing $U=Q(P)$, $V=Q(R)$ and $w=Q(f)$, the map $z=Q(f^\\vee):V^\\vee\\to U^\\vee$ is an isomorphism with inverse $Q(g^\\vee)$. This supplies the inverse dual map used in transport.",
-   "uses": [
-    "lem-trf-hom-dual-preserves-homotopies",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 5 and unit proof, evaluation composite unchanged when duality is transported along an isomorphism"
-   }
-  },
-  {
-   "text": "Take the two identities of step 12 into $D(A)$ using the tensor comparison of step 10. Compose the coevaluation identity with $1_V\\otimes z^{-1}$ and the evaluation identity with $1_{V^\\vee}\\otimes w^{-1}$. The inverse identities give\n$$\\operatorname{coev}_V=(w\\otimes z^{-1})\\operatorname{coev}_U,\\qquad \\operatorname{ev}_V=\\operatorname{ev}_U(z\\otimes w^{-1}).$$\nApply [lem-trf-exact-pairing-iso-transport] to the dual pair of step 7: these transported maps satisfy both triangles on $V,V^\\vee$. The same lemma transports the duality to any perfect object isomorphic to $U$, without requiring a chosen chain model for that object.",
-   "uses": [
-    "lem-trf-exact-pairing-iso-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 5 and unit proof, evaluation composite unchanged when duality is transported along an isomorphism"
-   }
-  },
-  {
-   "text": "For $v:U\\to U$ put $v_V=wvw^{-1}$. Substitute the transport formulas of step 14 into the defining trace composite of [sk-d-trace]. The symmetry naturality checked in step 4 gives\n$$\\begin{aligned}\n\\operatorname{ev}_V c_{V,V^\\vee}(v_V\\otimes1)\\operatorname{coev}_V\n&=\\operatorname{ev}_U(z\\otimes w^{-1})(z^{-1}\\otimes w)c_{U,U^\\vee}(v\\otimes1)\\operatorname{coev}_U\\\\\n&=\\operatorname{ev}_U c_{U,U^\\vee}(v\\otimes1)\\operatorname{coev}_U.\n\\end{aligned}$$\nThe second equality cancels $zz^{-1}=1$ and $w^{-1}w=1$ in the two tensor factors. This calculation also applies to any isomorphic perfect object with its transported duality.",
-   "uses": [
-    "sk-d-trace"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 5 and unit proof, evaluation composite unchanged when duality is transported along an isomorphism"
-   }
-  },
-  {
-   "text": "For $A=A_{E,n}$, [def-trf-categorical-trace] defines the maps by precisely the finite frames of steps 1–7, the transport formulas of step 14, and the unit-Hom bijection of step 10. Therefore the trace composite of step 15 is its specified trace, with the same scalar identification. Step 11 proves independence of the projective representative; steps 12–15 verify that this independence identifies the transported duality maps as well. No finite-coefficient hypothesis was needed in the preceding calculations.",
-   "uses": [
+    "sk-d-trace",
+    "lem-trf-exact-pairing-iso-transport",
     "def-trf-categorical-trace"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-    "place": "Step 5 and unit proof, evaluation composite unchanged when duality is transported along an isomorphism"
+    "place": "Steps 1–5 and the derived-model paragraph; realized using existing categorical duality APIs"
    }
   }
  ],
@@ -200,22 +144,18 @@
   "def-weil-pbc-projective-module",
   "def-sc-module-total-hom-complex",
   "def-pc-tensor-complex-sheaves",
-  "sk-d-trace",
-  "lem-weil-pbc-projective-module-flat",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-derived-tensor-second-factor-functor",
-  "lem-weil-pbc-derived-single-fully-faithful",
-  "lem-pc-ring-derived-map-representative",
-  "def-weil-abstract-derived-category",
-  "lem-trf-frame-dual-mate",
-  "lem-trf-hom-dual-preserves-homotopies",
   "lem-trf-exact-pairing-iso-transport",
-  "def-trf-categorical-trace"
+  "sk-d-trace",
+  "lem-pc-module-bounded-flat-kflat",
+  "def-weil-abstract-derived-category",
+  "def-trf-categorical-trace",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-pc-ring-derived-map-representative"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "J5",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-p-trace/lem-trf-chain-supertrace.proof.md",
-  "place": "Steps 1–5, corrected and expanded using the finite-dual-frame argument of sk-p-trace.proof.md"
+  "place": "Finite-frame proof and derived-model paragraph, realized using the existing signed chain-duality, supertrace, K-flat monoidal comparison, and trace transport APIs; no split-off holes."
  },
  "mathlib_searches": [
   {
@@ -362,8 +302,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pc-derived-tensor-second-factor-functor"
+  "lem-pc-module-bounded-flat-kflat"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -399,5 +338,15 @@
   "by": "Q61",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J5",
+  "result": "pass",
+  "landing": "20261020T132017-L-1401820",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
