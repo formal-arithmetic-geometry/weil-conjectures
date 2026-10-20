@@ -11,100 +11,85 @@
  ],
  "proof": [
   {
-   "text": "Put $T(i,j)=t_i\\cdots t_{j-1}:K_j\\to K_i$ for $j\\ge i$, with $T(i,i)=1$, and $P=\\prod_{i\\ge1}K_i$, $P_e=\\prod_{n\\ge1}K_{en}$, $D=1-s$ and $D_e=1-s_e$. In the reordered, signed coordinates $(x,y)=(x_{\\rm cone},-y_{\\rm cone})$, the stipulated shifted cone has terms $P^q\\oplus P^{q-1}$ and differential $d_R(x,y)=(dx,Dx-dy)$ [def-weil-abstract-derived-category]. The identity $T(i,j)T(j,k)=T(i,k)$ is the tower composition law [def-weil-inverse-system]. Hence finite cancellation gives\n$$ (b_eDx)_n=\\sum_{i=en}^{e(n+1)-1}\\bigl(T(en,i)x_i-T(en,i+1)x_{i+1}\\bigr)=x_{en}-T(en,e(n+1))x_{e(n+1)}=(D_ea_ex)_n. $$\nBoth $a_e$ and $b_e$ commute with internal differentials, since every $T(i,j)$ does. Thus $r_e(x,y)=(a_ex,b_ey)$ is precisely the induced chain map of the two cones.",
+   "text": "For a strict tower complex X, construct rho as strictRoosMapOfSquare applied to selection and block. The finite telescoping identity strictRoosBlock_comm supplies the commuting square. The coordinate theorem for this cone map gives precisely the two required coordinates.",
    "uses": [
     "def-weil-inverse-system",
-    "def-weil-abstract-derived-category"
+    "lem-pur-roos-additive-comparison"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos-cone context; explicit block calculations by the worker (not a claim that this tag states cofinality)"
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; agent auxiliary: explicit cofinal block map and finite-free scalar comparison extracted from item proof step 5.",
+    "note": "The block-map theorem is agent-formulated, not asserted to be the literal statement of Tag 0941; its argument is retained in report.md."
    }
   },
   {
-   "text": "Construct a section of this particular map. For each $i\\ge1$, let $m(i)$ be the least positive multiple of $e$ with $m(i)\\ge i$. Define $\\alpha:P_e\\to P$ by $(\\alpha u)_i=T(i,m(i))u_{m(i)/e}$, and $\\beta:P_e\\to P$ by $(\\beta v)_{en}=v_n$, with all other coordinates zero. These are maps of internal complexes. Directly $a_e\\alpha=1$ and $b_e\\beta=1$. If $i$ is not a multiple of $e$, $m(i)=m(i+1)$, so $(D\\alpha u)_i=0$. At $i=en$ it equals $u_n-T(en,e(n+1))u_{n+1}$. Therefore $D\\alpha=\\beta D_e$, and $j(u,v)=(\\alpha u,\\beta v)$ is a chain map with $r_ej=1$. This also treats the initial indices $1\\le i<e$: they are extended backward from $e$, rather than discarded.",
+   "text": "Use ringedStrictTowerHomotopyLimitOfUniverses to choose a K-injective tower resolution j:X→I. Arithmetic restriction preserves K-injectives by its exact left adjoint and preserves quasi-isomorphisms. Apply strictRoosDerivedLimitComparison to j and its restriction. Its two comparison maps have the stipulated product coordinates and are quasi-isomorphisms. The arithmetic index functor is initial: its right adjoint sends i to floor(i/e), and the adjunction follows from i/e≤n iff i≤e(n+1)-1. Hence ordinary limit restriction is an isomorphism. Projection extensionality identifies the square between the two limit inclusions and rho(I), while product naturality identifies the square between the two resolution comparisons and rho(X). Two-out-of-three in the first square proves rho(I) a quasi-isomorphism, and two-out-of-three in the second proves rho(X) a quasi-isomorphism. This replaces the explicit kernel contraction of the original plan without changing the map.",
    "uses": [
-    "def-weil-inverse-system"
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-sp-strict-tower-arithmetic-restriction-resolution",
+    "lem-sf-strict-roos-derived-limit-comparison"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos-cone context; explicit block calculations by the worker (not a claim that this tag states cofinality)"
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; agent auxiliary: explicit cofinal block map and finite-free scalar comparison extracted from item proof step 5.",
+    "note": "The block-map theorem is agent-formulated, not asserted to be the literal statement of Tag 0941; its argument is retained in report.md."
    }
   },
   {
-   "text": "Let $U=\\ker a_e\\subset P$ and $V=\\ker b_e\\subset P$, computed sectionwise [def-weil-sheaf-of-modules-category]. The square from Step 1 restricts $D$ to $D_U:U\\to V$. For $y\\in V$, define $c(y)_{en}=0$. At a nonretained index $i$, let $m=m(i)>i$ and put\n$$ c(y)_i=\\sum_{k=i}^{m-1}T(i,k)y_k. $$\nThese are finite sums of sheaf morphisms and define a map $c:V\\to U$ of internal complexes. At a nonretained index, cancellation gives $(Dc(y))_i=y_i$. At $en$, the equation $(b_ey)_n=0$ gives $y_{en}=-\\sum_{k=en+1}^{e(n+1)-1}T(en,k)y_k=-t_{en}c(y)_{en+1}$, so the same equality holds there. Conversely, telescoping $\\sum_{k=i}^{m-1}T(i,k)(Dx)_k=x_i-T(i,m)x_m=x_i$ for $x\\in U$ gives $cD_U=1$; retained coordinates are zero on both sides. Thus $D_Uc=1$ and $cD_U=1$. No surjectivity of any transition is used.",
+   "text": "Product projections and naturality of a strict tower map show naturality of selection and block. Apply functoriality of shifted cone maps to obtain the naturality square. Restriction by 1 equals identity, and its selection and one-term block maps are identities; functoriality gives HEq rho_1 id. The arithmetic identity e*(f*(n+1)-1+1)-1=e*f*(n+1)-1 identifies successive restrictions. Iterated selection has that index. For blocks, compose transitions and use the finite-sum identity sum_{k<f} sum_{l<e} g(e*k+l)=sum_{i<e*f} g(i). The cone-map composition law, transported along the equality of restricted complexes, proves the required heterogeneous equality.",
    "uses": [
     "def-weil-inverse-system",
-    "def-weil-sheaf-of-modules-category"
+    "lem-pur-roos-additive-comparison"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos-cone context; explicit block calculations by the worker (not a claim that this tag states cofinality)"
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; agent auxiliary: explicit cofinal block map and finite-free scalar comparison extracted from item proof step 5.",
+    "note": "The block-map theorem is agent-formulated, not asserted to be the literal statement of Tag 0941; its argument is retained in report.md."
    }
   },
   {
-   "text": "In the coordinates of Step 1 the kernel $E=\\ker r_e$ is $E^q=U^q\\oplus V^{q-1}$ with differential $(u,v)\\mapsto(du,D_Uu-dv)$. The degree $-1$ map $h(u,v)=(cv,0)$ satisfies\n$$ d_Eh(u,v)+hd_E(u,v)=(dcv,v)+(u-cdv,0)=(u,v). $$\nThe equality uses $dc=cd$ from Step 3. Since $r_ej=1$, the chain map $L=1-jr_e$ takes values in $E$. With $\\iota:E\\to R$ its inclusion, the degree $-1$ map $H=\\iota hL$ therefore satisfies $d_RH+Hd_R=1-jr_e$. On a cycle $z$, this says $z-jr_ez=d_RHz$, a boundary. Thus $jr_e$ induces the identity on $\\ker d/\\operatorname{im}d$, and $r_ej=1$ does as well on the other complex. Consequently every $H^q(r_e)$ has inverse $H^q(j)$, proving the required quasi-isomorphism by the definition in [def-weil-abstract-derived-category]. All formulas are identities of sheaf morphisms; no passage from presheaf cohomology to sheaf cohomology is used.",
+   "text": "The explicit Roos augmentation of a compatible family gamma has coordinates (0,Pi.lift gamma). Extend adjacent compatibility to all transition composites. The restricted family is therefore compatible too. Compose the augmentation with rho, use its two coordinates, and test the second coordinate against all product projections. It equals the restricted augmentation, while the first coordinate is zero.",
    "uses": [
-    "def-weil-abstract-derived-category"
+    "def-weil-strict-roos-model",
+    "lem-pur-roos-additive-comparison"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos-cone context; explicit block calculations by the worker (not a claim that this tag states cofinality)"
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; agent auxiliary: explicit cofinal block map and finite-free scalar comparison extracted from item proof step 5.",
+    "note": "The block-map theorem is agent-formulated, not asserted to be the literal statement of Tag 0941; its argument is retained in report.md."
    }
   },
   {
-   "text": "For a tower map $f_i:K_i\\to K'_i$, induction on $j-i$ in the transition equation gives $f_iT(i,j)=T'(i,j)f_j$. Substitution into the formulas for $a_e,b_e$ proves naturality of $r_e$. For successive restrictions by $e$ and $f$, the first-coordinate map is $a_fa_e=a_{ef}$. On the second coordinate, the block sum for the restricted tower is\n$$ \\sum_{n=fk}^{f(k+1)-1}T(efk,en)\\sum_{i=en}^{e(n+1)-1}T(en,i)y_i=\\sum_{i=efk}^{ef(k+1)-1}T(efk,i)y_i. $$\nThus $b_f^{(e)}b_e=b_{ef}$ and the actual cone maps compose strictly, with $r_1=1$. For a strictly compatible augmentation $\\gamma:P_0\\to K_\\bullet$, $D(\\gamma_i)_i=0$, so its cone map is $p\\mapsto((\\gamma_i p)_i,0)$. Applying $r_e$ gives $p\\mapsto((\\gamma_{en}p)_n,0)$, exactly the restricted augmentation.",
+   "text": "Construct the scalar extension functor with the specified sectionwise object and map formulas. Its functor laws and additivity follow from extendScalars and additive module sheafification. Use constantFiniteFree_preservesCountableProducts, lift preservation to complexes degreewise, and apply strictRoosAdditiveComparison. For an augmentation b take F(b) followed by theta as bB. Its first coordinate is zero by additivity; its second is map_lift_piComparison evaluated in degree p+1. This proves the normalized augmentation equation. The other conclusions are the coordinate, naturality and arithmetic-restriction clauses of strictRoosAdditiveComparison.",
    "uses": [
-    "def-weil-inverse-system"
+    "lem-pur-constant-finite-free-products",
+    "lem-pur-roos-additive-comparison"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos-cone context; explicit block calculations by the worker (not a claim that this tag states cofinality)"
-   }
-  },
-  {
-   "text": "Here and below $-\\otimes_AB$ means $-\\otimes_{\\underline A}\\underline B$ for the constant sheaves [def-weil-pbc-constant-sheaf, def-pur-sheaf-tensor-product]. Choose a finite $A$-basis $b_1,\\ldots,b_r$ of $B$, with dual maps $\\lambda_a:B\\to A$. For any module sheaf $M$, the mutually inverse maps\n$$ M\\otimes_AB\\longrightarrow M^r,\\quad m\\otimes b\\longmapsto(\\lambda_a(b)m)_a,\\qquad (m_a)_a\\longmapsto\\sum_a m_a\\otimes b_a $$\nare defined using the sectionwise tensor universal property [def-weil-pbc-module-tensor-product] and then sheafification [def-pur-sheaf-tensor-product]. The identities follow from $b=\\sum_a\\lambda_a(b)b_a$; on arbitrary sections of $\\underline B$ this identity follows by sheafifying the corresponding identity on the constant presheaf. For any family $M_i$, the canonical map\n$$ \\gamma:(\\prod_iM_i)\\otimes_AB\\to\\prod_i(M_i\\otimes_AB) $$\nthen becomes the rearrangement $(\\prod_iM_i)^r\\to\\prod_i M_i^r$, $(m_{i,a})\\mapsto(m_{i,a})$. Its inverse sends a family with basis coordinates $m_{i,a}$ to $\\sum_{a=1}^r(m_{i,a})_i\\otimes b_a$. This is a finite sum, so it defines a sheaf morphism for any countable family and on any site. The canonical map $\\gamma$ is consequently an isomorphism; the basis proves invertibility without entering its definition.",
-   "uses": [
-    "def-weil-pbc-constant-sheaf",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; finite-basis calculation using algebra.tex Tag 00CX, lemma-tensor-product"
-   }
-  },
-  {
-   "text": "The map $\\gamma$ is natural and $B$-linear: on local tensor generators it is $(m_i)_i\\otimes b\\mapsto(m_i\\otimes b)_i$, so $\\gamma(zb')=\\gamma(z)b'$ and it commutes with every componentwise module map. The same finite-basis rearrangement identifies $(M\\oplus N)\\otimes_AB$ with $(M\\otimes_AB)\\oplus(N\\otimes_AB)$ and commutes with negatives. Applied in every degree, these maps therefore give a chain isomorphism\n$$ \\theta:\\mathsf R(K_\\bullet)\\otimes_AB\\xrightarrow{\\sim}\\mathsf R(K_\\bullet\\otimes_AB). $$\nIndeed $\\gamma(sx\\otimes b)=(t_ix_{i+1}\\otimes b)_i=s_B\\gamma(x\\otimes b)$, and the internal differential and the signed cone differential are preserved term by term. Finally $a_e(x)_n=x_{en}$ is preserved by tensoring, and\n$$ \\Bigl(\\sum_{i=en}^{e(n+1)-1}T(en,i)y_i\\Bigr)\\otimes b=\\sum_{i=en}^{e(n+1)-1}(T(en,i)\\otimes1)(y_i\\otimes b). $$\nThus $\\theta$ commutes with $r_e$ on both cone coordinates. On an augmentation $(\\gamma_i p,0)$ it gives $(\\gamma_i p\\otimes b,0)$, its scalar extension. These equalities on local tensor generators give sheaf morphism equalities by the defining sheafification; they also prove naturality of $\\theta$.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-module-tensor-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; finite-basis calculation using algebra.tex Tag 00CX, lemma-tensor-product"
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), Roos model; agent auxiliary: explicit cofinal block map and finite-free scalar comparison extracted from item proof step 5.",
+    "note": "The block-map theorem is agent-formulated, not asserted to be the literal statement of Tag 0941; its argument is retained in report.md."
    }
   }
  ],
  "proof_deps": [
   "def-weil-inverse-system",
-  "def-weil-abstract-derived-category",
-  "def-weil-sheaf-of-modules-category",
-  "def-weil-pbc-constant-sheaf",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-module-tensor-product"
+  "lem-pur-roos-additive-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-sp-strict-tower-arithmetic-restriction-resolution",
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "def-weil-strict-roos-model",
+  "lem-pur-constant-finite-free-products"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0941, lemma-derived-limit-is-ok, provides the Roos context only; explicit chain section, finite-block contraction and tensor comparisons proved here; tensor definitions from sites-modules.tex Tag 03EK and algebra.tex Tag 00CX"
+  "place": "Tag 0941, Roos context. Explicit finite-block identities and augmentation; quasi-isomorphism via the recorded arbitrary-K-injective comparison and initial arithmetic restriction. Finite-free scalar comparison uses the finite-basis construction from sites-modules.tex Tag 03EK and algebra.tex Tag 00CX."
  },
  "mathlib_match": null,
  "status": "split",
@@ -321,5 +306,15 @@
   "group": "NJ",
   "result": "pass",
   "note": "Read node, report (Worker report + Second reading by NJ), module, all 7 stmt deps, the recorded strictRoos*/block/selection/index/complexRestriction declarations, changeOfRingsOfUniverses (def-pur-sheaf-tensor-product) and Stacks 0941. All clauses match: canonical single family rho, QuasiIso, block on target/selection on source coordinates (cone convention checked against Mathlib mappingCone), naturality, HEq identity/composition (types propositionally equal via index f ⋙ index e = index (ef) for f>=1), augmentation with gamma(e(n+1)-1); finite-free theorem fixes F to the recorded sheafified change of rings, theta by biprodComparison/piComparison, B-linear, natural, compatible with r_e and augmentations. Independent universes; exact-countable-products hypothesis only. Edge cases e=1, initial levels, zero rings, all degrees ok. lean.statement verbatim; only lean and stmt_deps changed; added deps are landed nodes, no cycle (167/160-node closures). No hollow defs, proofs sorry, docstrings and conventions ok. nt_compile.py --json: clean in 35.6 s, sanity check with a broken proof gave errors. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261020T122113-L-477514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

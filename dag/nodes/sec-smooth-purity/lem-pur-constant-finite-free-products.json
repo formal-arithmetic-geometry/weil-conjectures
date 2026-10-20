@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-constant-finite-free-products",
+ "kind": "statement",
+ "title": "Countable products and finite-free constant scalar extension",
+ "statement": "Let C be a site and A to B a homomorphism of commutative rings with B finite free over A. Let F between module sheaves over the constant ring sheaves be the recorded sheafified sectionwise scalar extension, with the specified object and morphism formulas. Then F preserves countable products. No exactness of countable products is assumed.\n\ntheorem constantFiniteFree_preservesCountableProducts\n    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)\n    [HasSheafify J CommRingCat.{max uC vC r}]\n    [J.HasSheafCompose (forget₂ CommRingCat.{max uC vC r} RingCat.{max uC vC r})]\n    [HasSheafify J AddCommGrpCat.{max uC vC r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}]\n    (A B : CommRingCat.{max uC vC r}) [Algebra A B] [Module.Free A B]\n    [Module.Finite A B]\n    (F : SheafOfModules.{max uC vC r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n          ((constantSheaf J CommRingCat).obj A)) ⥤\n      SheafOfModules.{max uC vC r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n          ((constantSheaf J CommRingCat).obj B)))\n    (hobj : ∀ M, F.obj M = SheafOfModules.changeOfRingsOfUniverses\n      ((constantSheaf J CommRingCat).map (CommRingCat.ofHom (algebraMap A B))) M)\n    (hmap : ∀ M N (f : M ⟶ N), HEq (F.map f)\n      (SheafOfModules.changeOfRingsHomOfUniverses\n        ((constantSheaf J CommRingCat).map (CommRingCat.ofHom (algebraMap A B))) M f)) :\n    PreservesLimitsOfShape (Discrete ℕ) F",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Section 03EK; finite-basis calculation of parent proof step 6"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-module-tensor-product"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the finite-basis natural isomorphism of underlying abelian presheaf functors. The underlying-presheaf functor preserves countable limits and reflects isomorphisms, hence reflects countable limits. A finite-power functor is the constant-diagram functor followed by the limit functor, both of which preserve limits. Transport preservation through the natural isomorphism and reflect it back to the target module sheaf category. This entire categorical deduction is proved in Lean.",
+   "uses": [
+    "lem-pur-constant-finite-free-power-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK; finite-basis calculation of parent proof step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-constant-finite-free-power-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Finite-basis step isolated in lem-pur-constant-finite-free-power-iso; complete categorical proof using preservation of limits by constant diagrams and right-adjoint lim, followed by reflection of limits."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Finite free constant sheaf extension of scalars preserves products of module sheaves",
+   "results": "SheafOfModules.free; PresheafOfModules.free; SheafOfModules.ιFree; CategoryTheory.Presheaf.isSheaf_iff_preservesFiniteProducts; SheafOfModules.mapFree; SheafOfModules.freeFunctor; SheafOfModules.map_ιFree_mapFree_hom; SheafOfModules.ιFree_mapFree_inv",
+   "date": "2026-10-19",
+   "verdict": "No exact statement: cone comparison and product universal-property lemmas do not include the finite-free sheaf or arithmetic restriction calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free constant scalar extension of sheaves of modules preserves countable products",
+   "results": "SheafOfModules.mapFree; LightCondensed.instCountableAB4StarLightCondMod; Condensed.free; CompHausLike.LocallyConstantModule.functor; LightCondensed.free; Condensed.instPreservesFiniteProductsOppositeProfiniteVal; CondensedMod.ofSheafCompHaus; CondensedMod.ofSheafStonean",
+   "date": "2026-10-19",
+   "verdict": "No exact statement: cone comparison and product universal-property lemmas do not include the finite-free sheaf or arithmetic restriction calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\"",
+   "results": "CategoryTheory.Limits.piComparison; CategoryTheory.Limits.piComparison_comp_π; CategoryTheory.Limits.map_lift_piComparison; CategoryTheory.Limits.piComparison_comp_π_assoc; CategoryTheory.Limits.map_lift_piComparison_assoc; CategoryTheory.Limits.piComparison_comp_π_apply; CategoryTheory.Limits.instIsIsoPiComparison; CategoryTheory.Limits.inv_piComparison_comp_map_π",
+   "date": "2026-10-19",
+   "verdict": "No exact statement: cone comparison and product universal-property lemmas do not include the finite-free sheaf or arithmetic restriction calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyCofiber.map|mappingCone.map",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact statement: cone comparison and product universal-property lemmas do not include the finite-free sheaf or arithmetic restriction calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexIso, preserves.*Product, extendScalars in Mathlib algebraic homology and module sheaves",
+   "results": "mappingCone.mapHomologicalComplexIso; ModuleCat.extendScalars; no combined sheaf or strict Roos statement",
+   "date": "2026-10-19",
+   "verdict": "No exact match. The generic cone comparison is an ingredient, not the full normalized statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CompactSupportRoosCofinality",
+  "date": "2026-10-19",
+  "group": "M8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Section 03EK; finite-basis calculation of parent proof step 6",
+   "via": [
+    "lem-pur-compact-support-roos-cofinality",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ConstantFiniteFreeProducts",
+  "file": "lean/Sheaf/CategoryTheory/ConstantFiniteFreeProducts.lean",
+  "declaration": "CategoryTheory.constantFiniteFree_preservesCountableProducts",
+  "statement": "theorem constantFiniteFree_preservesCountableProducts\n    {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C)\n    [HasSheafify J CommRingCat.{max uC vC r}]\n    [J.HasSheafCompose (forget₂ CommRingCat.{max uC vC r} RingCat.{max uC vC r})]\n    [HasSheafify J AddCommGrpCat.{max uC vC r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}]\n    (A B : CommRingCat.{max uC vC r}) [Algebra A B] [Module.Free A B]\n    [Module.Finite A B]\n    (F : SheafOfModules.{max uC vC r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n          ((constantSheaf J CommRingCat).obj A)) ⥤\n      SheafOfModules.{max uC vC r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj\n          ((constantSheaf J CommRingCat).obj B)))\n    (hobj : ∀ M, F.obj M = SheafOfModules.changeOfRingsOfUniverses\n      ((constantSheaf J CommRingCat).map (CommRingCat.ofHom (algebraMap A B))) M)\n    (hmap : ∀ M N (f : M ⟶ N), HEq (F.map f)\n      (SheafOfModules.changeOfRingsHomOfUniverses\n        ((constantSheaf J CommRingCat).map (CommRingCat.ofHom (algebraMap A B))) M f)) :\n    PreservesLimitsOfShape (Discrete ℕ) F",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261020T122113-L-477514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261020T122113-L-477514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

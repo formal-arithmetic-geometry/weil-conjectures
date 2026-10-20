@@ -1,0 +1,128 @@
+{
+ "id": "lem-pur-roos-additive-comparison",
+ "kind": "statement",
+ "title": "Additive comparison for the strict Roos cone",
+ "statement": "Let A and B be abelian categories with countable products and F : A to B an additive functor. Suppose the canonical product comparison is invertible for every strict tower complex. Then F commutes with the actual shifted Roos mapping cones by an isomorphism with the stated canonical biproduct/product coordinates, natural for strict tower maps and commuting with positive arithmetic restriction maps given by block and selection. No scalar-extension assertion or quasi-isomorphism assertion is included.\n\ntheorem strictRoosAdditiveComparison\n    {A : Type u} {B : Type v} [Category.{vA} A] [Category.{vB} B]\n    [Abelian A] [Abelian B] [HasCountableProducts A] [HasCountableProducts B]\n    (F : A ⥤ B) [F.Additive]\n    (hprod : ∀ X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ,\n      IsIso (piComparison (F.mapHomologicalComplex (ComplexShape.up ℤ))\n        (fun n : ℕ ↦ X.asFunctor.obj (op n)))) :\n      ∃ θ : ∀ X : CochainComplex\n          (ℕᵒᵖ ⥤ A) ℤ,\n          (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (strictRoosComplex X) ≅\n            strictRoosComplex\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X),\n        (∀ X (p : ℤ), (θ X).hom.f (p + 1) ≫\n            (strictRoosCoordinates\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X) p).hom =\n          F.map (strictRoosCoordinates X p).hom ≫\n            F.biprodComparison ((strictRoosProduct X).X p)\n              ((strictRoosProduct X).X (p + 1)) ≫\n            biprod.map ((piComparison (F.mapHomologicalComplex (ComplexShape.up ℤ))\n              (fun n : ℕ ↦ X.asFunctor.obj (op n))).f p)\n              ((piComparison (F.mapHomologicalComplex (ComplexShape.up ℤ))\n              (fun n : ℕ ↦ X.asFunctor.obj (op n))).f (p + 1))) ∧\n        (∀ X Y (f : X ⟶ Y),\n          ∃ (μ : strictRoosComplex X ⟶ strictRoosComplex Y)\n            (ν : strictRoosComplex\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X) ⟶\n              strictRoosComplex\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj Y)),\n          (∀ p : ℤ, μ.f (p + 1) ≫ (strictRoosCoordinates Y p).hom =\n            (strictRoosCoordinates X p).hom ≫\n              biprod.map ((strictRoosProductMap f).f p)\n                ((strictRoosProductMap f).f (p + 1))) ∧\n          (∀ p : ℤ, ν.f (p + 1) ≫\n              (strictRoosCoordinates\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj Y) p).hom =\n            (strictRoosCoordinates\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X) p).hom ≫\n              biprod.map ((strictRoosProductMap\n                  ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).map f)).f p)\n                ((strictRoosProductMap\n                  ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).map f)).f (p + 1))) ∧\n          (F.mapHomologicalComplex (ComplexShape.up ℤ)).map μ ≫ (θ Y).hom = (θ X).hom ≫ ν) ∧\n        (∀ X (e : ℕ) (_he : 1 ≤ e),\n          ∃ (ρ : strictRoosComplex X ⟶ strictRoosComplex\n              ((complexRestriction (A) e).obj X))\n            (ρB : strictRoosComplex\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X) ⟶\n              strictRoosComplex\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj\n                ((complexRestriction (A) e).obj X))),\n          (∀ p : ℤ, ρ.f (p + 1) ≫ (strictRoosCoordinates\n              ((complexRestriction (A) e).obj X) p).hom =\n            (strictRoosCoordinates X p).hom ≫\n              biprod.map ((block e X.asFunctor).f p)\n                ((selection e X.asFunctor).f (p + 1))) ∧\n          (∀ p : ℤ, ρB.f (p + 1) ≫ (strictRoosCoordinates\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj\n              ((complexRestriction (A) e).obj X)) p).hom =\n            (strictRoosCoordinates\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X) p).hom ≫\n              biprod.map ((block e ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X).asFunctor).f p)\n                ((selection e ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X).asFunctor).f (p + 1))) ∧\n          (F.mapHomologicalComplex (ComplexShape.up ℤ)).map ρ ≫\n              (θ ((complexRestriction (A) e).obj X)).hom =\n            (θ X).hom ≫ ρB)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941, cone context; explicit additive cone and finite-block calculations of parent proof step 7"
+ },
+ "stmt_deps": [
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-sp-strict-tower-arithmetic-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Construct the product comparison and show by each product projection that it intertwines 1-s. Apply the additive cone isomorphism, the isomorphism of product arrows and the shift comparison to construct theta. Compute the two coordinates using XIsoOfEq naturality, the cone coordinate formula and biproduct projections. A general square of product arrows gives a square of these cone maps, checked coordinatewise. For strict maps, product naturality supplies that square. For arithmetic restriction, sum_range_sub telescopes the block differential; selection and the finite block sums commute with the canonical product comparison by projection extensionality and additivity. Apply the same cone-map square. All assertions, including theta naturality and the arithmetic square, are proved in Lean without new holes.",
+   "uses": [
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-sp-strict-tower-arithmetic-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, cone context; explicit additive cone and finite-block calculations of parent proof step 7"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-strict-roos-derived-limit-comparison",
+  "lem-sp-strict-tower-arithmetic-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Complete Lean proof using Mathlib homotopyCofiber.mapHomologicalComplexObjIso, mapArrowIso, shift commutation and product/biproduct universal properties; finite-block telescoping from sum_range_sub."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive functor commutes with the mapping cone of one minus shift and arithmetic block restriction of a tower",
+   "results": "CochainComplex.mappingCone.map_δ; CochainComplex.mappingCone.mapHomologicalComplexIso; CochainComplex.mappingCone.mapHomologicalComplexXIso; CochainComplex.mappingCone.mapHomologicalComplexXIso'.congr_simp; CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom; CochainComplex.mappingCone.mapHomologicalComplexXIso'; CochainComplex.mappingCone.mapTriangleIso; CochainComplex.mappingCone.mapTrianglehIso",
+   "date": "2026-10-19",
+   "verdict": "No exact statement: cone comparison and product universal-property lemmas do not include the finite-free sheaf or arithmetic restriction calculation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite free constant scalar extension of sheaves of modules preserves countable products",
+   "results": "SheafOfModules.mapFree; LightCondensed.instCountableAB4StarLightCondMod; Condensed.free; CompHausLike.LocallyConstantModule.functor; LightCondensed.free; Condensed.instPreservesFiniteProductsOppositeProfiniteVal; CondensedMod.ofSheafCompHaus; CondensedMod.ofSheafStonean",
+   "date": "2026-10-19",
+   "verdict": "No exact statement: cone comparison and product universal-property lemmas do not include the finite-free sheaf or arithmetic restriction calculation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"piComparison\"",
+   "results": "CategoryTheory.Limits.piComparison; CategoryTheory.Limits.piComparison_comp_π; CategoryTheory.Limits.map_lift_piComparison; CategoryTheory.Limits.piComparison_comp_π_assoc; CategoryTheory.Limits.map_lift_piComparison_assoc; CategoryTheory.Limits.piComparison_comp_π_apply; CategoryTheory.Limits.instIsIsoPiComparison; CategoryTheory.Limits.inv_piComparison_comp_map_π",
+   "date": "2026-10-19",
+   "verdict": "No exact statement: cone comparison and product universal-property lemmas do not include the finite-free sheaf or arithmetic restriction calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "homotopyCofiber.map|mappingCone.map",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean; Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/HomotopyCofiber.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact statement: cone comparison and product universal-property lemmas do not include the finite-free sheaf or arithmetic restriction calculation."
+  },
+  {
+   "tool": "grep",
+   "query": "mapHomologicalComplexIso, preserves.*Product, extendScalars in Mathlib algebraic homology and module sheaves",
+   "results": "mappingCone.mapHomologicalComplexIso; ModuleCat.extendScalars; no combined sheaf or strict Roos statement",
+   "date": "2026-10-19",
+   "verdict": "No exact match. The generic cone comparison is an ingredient, not the full normalized statement."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.CompactSupportRoosCofinality",
+  "date": "2026-10-19",
+  "group": "M8"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-pur-rational-and-qbar-purity",
+   "place": "Tag 0941, cone context; explicit additive cone and finite-block calculations of parent proof step 7",
+   "via": [
+    "lem-pur-compact-support-roos-cofinality",
+    "lem-pur-compact-support-integral-coefficient-comparison",
+    "lem-pur-adic-purity-scalar-naturality"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.StrictRoosAdditiveComparison",
+  "file": "lean/Sheaf/CategoryTheory/StrictRoosAdditiveComparison.lean",
+  "declaration": "CategoryTheory.strictRoosAdditiveComparison",
+  "statement": "theorem strictRoosAdditiveComparison\n    {A : Type u} {B : Type v} [Category.{vA} A] [Category.{vB} B]\n    [Abelian A] [Abelian B] [HasCountableProducts A] [HasCountableProducts B]\n    (F : A ⥤ B) [F.Additive]\n    (hprod : ∀ X : CochainComplex (ℕᵒᵖ ⥤ A) ℤ,\n      IsIso (piComparison (F.mapHomologicalComplex (ComplexShape.up ℤ))\n        (fun n : ℕ ↦ X.asFunctor.obj (op n)))) :\n      ∃ θ : ∀ X : CochainComplex\n          (ℕᵒᵖ ⥤ A) ℤ,\n          (F.mapHomologicalComplex (ComplexShape.up ℤ)).obj (strictRoosComplex X) ≅\n            strictRoosComplex\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X),\n        (∀ X (p : ℤ), (θ X).hom.f (p + 1) ≫\n            (strictRoosCoordinates\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X) p).hom =\n          F.map (strictRoosCoordinates X p).hom ≫\n            F.biprodComparison ((strictRoosProduct X).X p)\n              ((strictRoosProduct X).X (p + 1)) ≫\n            biprod.map ((piComparison (F.mapHomologicalComplex (ComplexShape.up ℤ))\n              (fun n : ℕ ↦ X.asFunctor.obj (op n))).f p)\n              ((piComparison (F.mapHomologicalComplex (ComplexShape.up ℤ))\n              (fun n : ℕ ↦ X.asFunctor.obj (op n))).f (p + 1))) ∧\n        (∀ X Y (f : X ⟶ Y),\n          ∃ (μ : strictRoosComplex X ⟶ strictRoosComplex Y)\n            (ν : strictRoosComplex\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X) ⟶\n              strictRoosComplex\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj Y)),\n          (∀ p : ℤ, μ.f (p + 1) ≫ (strictRoosCoordinates Y p).hom =\n            (strictRoosCoordinates X p).hom ≫\n              biprod.map ((strictRoosProductMap f).f p)\n                ((strictRoosProductMap f).f (p + 1))) ∧\n          (∀ p : ℤ, ν.f (p + 1) ≫\n              (strictRoosCoordinates\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj Y) p).hom =\n            (strictRoosCoordinates\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X) p).hom ≫\n              biprod.map ((strictRoosProductMap\n                  ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).map f)).f p)\n                ((strictRoosProductMap\n                  ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).map f)).f (p + 1))) ∧\n          (F.mapHomologicalComplex (ComplexShape.up ℤ)).map μ ≫ (θ Y).hom = (θ X).hom ≫ ν) ∧\n        (∀ X (e : ℕ) (_he : 1 ≤ e),\n          ∃ (ρ : strictRoosComplex X ⟶ strictRoosComplex\n              ((complexRestriction (A) e).obj X))\n            (ρB : strictRoosComplex\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X) ⟶\n              strictRoosComplex\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj\n                ((complexRestriction (A) e).obj X))),\n          (∀ p : ℤ, ρ.f (p + 1) ≫ (strictRoosCoordinates\n              ((complexRestriction (A) e).obj X) p).hom =\n            (strictRoosCoordinates X p).hom ≫\n              biprod.map ((block e X.asFunctor).f p)\n                ((selection e X.asFunctor).f (p + 1))) ∧\n          (∀ p : ℤ, ρB.f (p + 1) ≫ (strictRoosCoordinates\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj\n              ((complexRestriction (A) e).obj X)) p).hom =\n            (strictRoosCoordinates\n              ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X) p).hom ≫\n              biprod.map ((block e ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X).asFunctor).f p)\n                ((selection e ((((Functor.whiskeringRight ℕᵒᵖ A B).obj F).mapHomologicalComplex\n            (ComplexShape.up ℤ)).obj X).asFunctor).f (p + 1))) ∧\n          (F.mapHomologicalComplex (ComplexShape.up ℤ)).map ρ ≫\n              (θ ((complexRestriction (A) e).obj X)).hom =\n            (θ X).hom ≫ ρB)",
+  "branch": "sheaf-dag",
+  "by": "M8",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261020T122113-L-477514",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M8",
+  "result": "pass",
+  "landing": "20261020T122113-L-477514",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
