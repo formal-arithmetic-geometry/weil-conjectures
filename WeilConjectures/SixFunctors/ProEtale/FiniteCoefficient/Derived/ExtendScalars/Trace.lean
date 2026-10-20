@@ -15,11 +15,11 @@ public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Sca
 /-!
 # Derived scalar extension preserves traces
 
-Let `S` be a flat algebra over a commutative ring `R` and `Ψ = L(S ⊗_R -) : D(X_proét, R) ⥤
-D(X_proét, S)` derived extension of scalars of pro-étale sheaves, assumed to preserve flat
-sheaves (for instance when `S` is finite free over a Noetherian ring `R`,
-`AlgebraicGeometry.ProEtale.preservesFlat_sheafExtendScalars`). Then `Ψ` is a braided monoidal
-functor for the Koszul braidings `DerivedCategory.braidedCategory'`, its comonoidal structure
+Let `S` be an algebra over a commutative ring `R`, not necessarily flat, and
+`Ψ = L(S ⊗_R -) : D(X_proét, R) ⥤ D(X_proét, S)` derived extension of scalars of pro-étale
+sheaves, assumed to preserve flat sheaves (for instance when `S` is finite free over a
+Noetherian ring `R`, `AlgebraicGeometry.ProEtale.preservesFlat_sheafExtendScalars`). Then `Ψ` is
+a braided monoidal functor for the Koszul braidings `DerivedCategory.braidedCategory'`, its comonoidal structure
 being the tensor comparison `Functor.leftDerivedTensorComparison`. Hence `Ψ` preserves categorical
 traces, and the induced map on the endomorphisms of the unit sends `a • 𝟙` to
 `algebraMap R S a • 𝟙`: the trace over `S` of `Ψ v` is the image of the trace of `v` over `R`
@@ -90,10 +90,10 @@ lemma sheafExtendScalars_map_smul_id
 end Sheaf
 
 variable {R S : Type (u + 1)} [CommRing R] [CommRing S] [Algebra R S] (X : Scheme.{u})
-  [Module.Flat R S] [(sheafExtendScalars (algebraMap R S) X).PreservesFlat]
+  [(sheafExtendScalars (algebraMap R S) X).PreservesFlat]
 
-/-- Derived scalar extension `Ψ = L(S ⊗_R -) : D(X_proét, R) ⥤ D(X_proét, S)` along a flat
-algebra as a monoidal functor, with comonoidal structure the tensor comparison
+/-- Derived scalar extension `Ψ = L(S ⊗_R -) : D(X_proét, R) ⥤ D(X_proét, S)` as a monoidal
+functor, with comonoidal structure the tensor comparison
 `Functor.leftDerivedTensorComparison`. -/
 @[instance_reducible]
 noncomputable def leftDerivedSheafExtendScalarsMonoidal :
