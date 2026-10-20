@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Propagate vanishing by induction on $r\\geq2$. At page two all entries with $p<0$, $q<0$, or $0\\leq q<m$ vanish by hypothesis. If an entry is zero on page $r$, its cycles are a subobject of zero, hence zero (a monomorphism to zero forces the identity of its source to vanish). Its homology, a quotient of these cycles, is therefore zero. The page comparison in [def-sp-spectral-sequence] gives the same vanishing on page $r+1$. This proves the stated vanishing on every page.",
+   "text": "For each natural r, propagate the vanishing of entries with p<0 or q<m from page 2 to page r+2. At page 2, negative coordinates use hfirst; otherwise write p and q as natural numbers and apply hrow. At a successor use ShortComplex.isZero_homology_of_isZero_X₂ and E.iso. This proves precisely the page vanishings needed below.",
    "uses": [
     "def-sp-abelian",
     "def-sp-spectral-sequence"
@@ -27,9 +27,10 @@
    }
   },
   {
-   "text": "For every $r\\geq2$, the incoming differential at $(0,m)$ has source $(-r,m+r-1)$, which is zero by Step 1. Its outgoing target is $(r,m-r+1)$: if $m-r+1<0$ it is zero by the first-quadrant vanishing, and otherwise $0\\leq m-r+1<m$, so it is zero by the lower-row vanishing. Both differentials are consequently zero. In the recursive subobjects of [def-sp-convergence], start with $Z_2^{0,m}=E_2^{0,m}$ and $B_2^{0,m}=0$. The kernel of each outgoing zero map is the whole current page and the incoming image is zero; their inverse images therefore leave $Z_r^{0,m}=E_2^{0,m}$ and $B_r^{0,m}=0$ unchanged. Thus $Z_\\infty^{0,m}=E_2^{0,m}$, $B_\\infty^{0,m}=0$. The quotient by zero gives the canonical isomorphism $s:E_\\infty^{0,m}\\xrightarrow{\\sim}E_2^{0,m}$.",
+   "text": "At (0,m), on page r+2 the outgoing target is (r+2,m-(r+2)+1), whose second coordinate is less than m; the incoming source is (-(r+2),m+(r+2)-1), whose first coordinate is negative. Step 1 makes both differentials zero. Compute the next and previous indices of the complex shape explicitly. Mathlib HomologicalComplex.iCyclesIso and isoHomologyπ then identify the entry with its cycles and its homology by the canonical inclusion and projection. Let s r be the composite of the inverse cycle inclusion, homology projection and E.iso. Define a 0 as the identity and a (r+1) as a r followed by s r, and define b r as (a r).hom followed by the inverse cycle inclusion. The recursion and the canonical isomorphism equations give both required compatibility identities. This implements the stationary cycle/boundary comparison directly on the pages of [def-sp-spectral-sequence].",
    "uses": [
-    "def-sp-convergence"
+    "def-sp-abelian",
+    "def-sp-spectral-sequence"
    ],
    "elementary": true,
    "source": {
@@ -38,9 +39,9 @@
    }
   },
   {
-   "text": "For each $1\\leq p\\leq m$, the entry $(p,m-p)$ has $0\\leq m-p<m$, so it is zero on every page by Step 1. Its cycle and boundary subobjects inside the zero initial entry are zero; hence $E_\\infty^{p,m-p}=0$ by [def-sp-convergence]. The convergence identifications assumed in the item now give $F^pH^m/F^{p+1}H^m=0$ for $1\\leq p\\leq m$, using the meaning of graded pieces in [def-sp-filtration].",
+   "text": "For 1≤p≤m, Step 1 makes the page m+2 entry (p,m-p) zero, because m-p<m. Transport this zero object through the supplied convergence isomorphism conv m p (m-p). By [def-sp-filtration], this is exactly the cokernel defining the graded piece (F m).gr p.",
    "uses": [
-    "def-sp-convergence",
+    "def-sp-spectral-sequence",
     "def-sp-filtration"
    ],
    "elementary": true,
@@ -50,7 +51,7 @@
    }
   },
   {
-   "text": "Descend from the given $F^{m+1}H^m=0$. For $p=m,m-1,\\ldots,1$, put $U=F^{p+1}H^m$ and $V=F^pH^m$. Step 3 says that the inclusion $i:U\\hookrightarrow V$ has zero cokernel. Here is the elementary kernel/cokernel argument for equality of these subobjects: by [def-sp-abelian], $i$ is a kernel of some $g:V\\to W$; since $gi=0$, $g$ factors through the zero cokernel of $i$, so $g=0$. The kernel universal property applied to $1_V$ gives $h:V\\to U$ with $ih=1_V$, and monicity gives $hi=1_U$. Thus $U=V$ as subobjects of $H^m$. The finite descent yields $F^1H^m=0$. When $m=0$ there is no descent: $F^1H^0=0$ is already the given terminal filtration condition.",
+   "text": "For 1≤p≤m, the inclusion F^(p+1)→F^p is monic. Its cokernel is zero by Step 3, so Preadditive.epi_of_isZero_cokernel makes it epic. Since the category is abelian [def-sp-abelian], it is an isomorphism, hence the two subobjects are equal by Subobject.eq_of_comm. Induct on k≤m starting at F^(m+1)=0 to obtain F^(m+1-k)=0. Taking k=m gives F^1=0. The same induction covers m=0 using only the terminal hypothesis.",
    "uses": [
     "def-sp-abelian",
     "def-sp-filtration"
@@ -62,10 +63,11 @@
    }
   },
   {
-   "text": "Let $c:F^0H^m/F^1H^m\\xrightarrow{\\sim}E_\\infty^{0,m}$ be the supplied convergence identification. Since $F^0H^m=H^m$, the left edge is the composite $H^m\\xrightarrow{q}H^m/F^1H^m\\xrightarrow{c}E_\\infty^{0,m}\\xrightarrow{s}E_2^{0,m}$, with $s$ from Step 2. By Step 4, $q$ is quotient by zero and is an isomorphism: the identity of $H^m$ factors uniquely through this quotient, giving its inverse. The other two arrows are isomorphisms, so their composite is an isomorphism. All arrows use the given quotient maps, convergence comparison and recursive cycle/boundary comparison, so this is precisely the canonical left edge relative to the given convergence data.",
+   "text": "Put f=Subobject.ofLE(F^1≤F^0). Since F^1=0 by Step 4, its arrow into H m is zero; cancellation against the monic arrow of F^0 shows f=0. Thus cokernel.π f is an isomorphism by cokernel.π_of_zero. The arrow F^0→H m is an isomorphism because F^0=top. Define edge as the inverse of that arrow, followed by cokernel.π f, followed by the supplied conv m 0 m, followed by the inverse of a m from Step 2. Every factor is an isomorphism. Cancelling the inverse pairs proves exactly the displayed quotient square, hence gives the asserted canonical edge and IsIso edge.",
    "uses": [
+    "def-sp-abelian",
     "def-sp-filtration",
-    "def-sp-convergence"
+    "def-sp-spectral-sequence"
    ],
    "elementary": true,
    "source": {
@@ -77,13 +79,12 @@
  "proof_deps": [
   "def-sp-abelian",
   "def-sp-spectral-sequence",
-  "def-sp-convergence",
   "def-sp-filtration"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Elementary lowest-row consequence of Tags 011N (definition-spectral-sequence), 011O (definition-limit-spectral-sequence and preceding recursive subobjects), and 0121 (definition-filtered), with the finite abutment filtration and its comparisons assumed as in the statement; 0132 is background only."
+  "place": "Elementary lowest-row consequence of Tags 011N, 011O and 0121, with the finite abutment filtration and its comparisons assumed. S4 implements canonical survival directly using Mathlib iCyclesIso and isoHomologyπ, finite reverse induction on the filtration, and the explicit quotient-square edge composite; the exact-couple convergence API is not needed."
  },
  "mathlib_searches": [
   {
@@ -218,5 +219,15 @@
   "date": "2026-10-17",
   "existing": false,
   "note": "The recursive E-infinity subquotient is represented by its canonically identified stationary page n+2 in total degree n. The cycles/homology recursion specifies survival on every page; the quotient square specifies the canonical left edge. No exact-couple hypothesis is imposed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S4",
+  "result": "pass",
+  "landing": "20261020T122134-L-484056",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

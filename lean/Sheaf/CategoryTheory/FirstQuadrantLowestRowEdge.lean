@@ -7,7 +7,6 @@ module
 
 public import Mathlib.Algebra.Homology.SpectralSequence.Basic
 public import WeilConjectures.CategoryTheory.Abelian.Filtration
-import WeilConjectures.CategoryTheory.ExactCoupleConvergence
 
 /-!
 # The lowest-row edge of a first-quadrant spectral sequence
@@ -81,6 +80,100 @@ theorem first_quadrant_lowest_row_edge
         ((F m).F 0).arrow ≫ edge ≫ (a m).hom =
           cokernel.π (Subobject.ofLE _ _ ((F m).F_succ_le 0)) ≫
             (conv m 0 m (by omega)).hom ∧ IsIso edge := by
-  sorry
+  -- Every term to the left of column zero or below row m stays zero.
+  have hzero (r : ℕ) (p q : ℤ) (h : p < 0 ∨ q < (m : ℤ)) :
+      IsZero ((E.page ((r : ℤ) + 2)).X (p, q)) := by
+    have hz : IsZero ((E.page 2).X (p, q)) := by
+      rcases h with hp | hq
+      · exact hfirst p q (Or.inl hp)
+      · by_cases hp : p < 0
+        · exact hfirst p q (Or.inl hp)
+        by_cases hq' : q < 0
+        · exact hfirst p q (Or.inr hq')
+        have hp' : (p.toNat : ℤ) = p := Int.toNat_of_nonneg (by omega)
+        have hq'' : (q.toNat : ℤ) = q := Int.toNat_of_nonneg (by omega)
+        simpa only [hp', hq''] using hrow p.toNat q.toNat (by omega)
+    induction r with
+    | zero => exact hz
+    | succ r ih =>
+      exact (E.iso ((r : ℤ) + 2) (((r + 1 : ℕ) : ℤ) + 2) (p, q)).isZero_iff.mp
+        (((E.page ((r : ℤ) + 2)).sc (p, q)).isZero_homology_of_isZero_X₂ ih)
+  have hout (r : ℕ) :
+      (E.page ((r : ℤ) + 2)).d (0, m) ((r : ℤ) + 2, (m : ℤ) - (r + 2) + 1) = 0 :=
+    (hzero r _ _ (Or.inr (by omega))).eq_of_tgt _ _
+  have hin (r : ℕ) :
+      (E.page ((r : ℤ) + 2)).d (-((r : ℤ) + 2), (m : ℤ) + (r + 2) - 1) (0, m) =
+        0 :=
+    (hzero r _ _ (Or.inl (by omega))).eq_of_src _ _
+  have hnext (r : ℕ) :
+      (ComplexShape.up' (((r : ℤ) + 2, 1 - (r + 2)) : ℤ × ℤ)).next (0, m) =
+        ((r : ℤ) + 2, (m : ℤ) - (r + 2) + 1) := by
+    apply ComplexShape.next_eq'
+    change ((0, (m : ℤ)) : ℤ × ℤ) +
+      (((r : ℤ) + 2, 1 - ((r : ℤ) + 2)) : ℤ × ℤ) = _
+    ext <;> dsimp <;> omega
+  have hprev (r : ℕ) :
+      (ComplexShape.up' (((r : ℤ) + 2, 1 - (r + 2)) : ℤ × ℤ)).prev (0, m) =
+        (-((r : ℤ) + 2), (m : ℤ) + (r + 2) - 1) := by
+    apply ComplexShape.prev_eq'
+    change (-((r : ℤ) + 2), (m : ℤ) + (r + 2) - 1) +
+      (((r : ℤ) + 2, 1 - ((r : ℤ) + 2)) : ℤ × ℤ) = (0, (m : ℤ))
+    ext <;> dsimp <;> omega
+  -- Use the canonical inclusion and projection to construct the survival maps.
+  let i (r : ℕ) := (E.page ((r : ℤ) + 2)).iCyclesIso (0, m) _ (hnext r) (hout r)
+  let j (r : ℕ) := (E.page ((r : ℤ) + 2)).isoHomologyπ _ (0, m) (hprev r) (hin r)
+  let s (r : ℕ) := (i r).symm ≪≫ j r ≪≫
+    E.iso ((r : ℤ) + 2) (((r + 1 : ℕ) : ℤ) + 2) (0, m)
+  let a : ∀ r : ℕ, (E.page 2).X (0, m) ≅
+      (E.page ((r : ℤ) + 2)).X (0, m) := by
+    intro r
+    induction r with
+    | zero => exact Iso.refl _
+    | succ r ar => exact ar ≪≫ s r
+  let b (r : ℕ) := (a r).hom ≫ (i r).inv
+  have ha (r : ℕ) : a (r + 1) = a r ≪≫ s r := rfl
+  -- The other graded pieces in total degree m vanish; descend from the last step.
+  have hgr (p : ℕ) (hp : 0 < p) (hpm : p ≤ m) : IsZero ((F m).gr p) := by
+    exact (conv m p (m - p) (by omega)).isZero_iff.mpr
+      (hzero m p ((m - p : ℕ) : ℤ) (Or.inr (by omega)))
+  have heq (p : ℕ) (hp : 0 < p) (hpm : p ≤ m) :
+      (F m).F ((p : ℤ) + 1) = (F m).F p := by
+    let f := Subobject.ofLE _ _ ((F m).F_succ_le p)
+    have : Epi f := Preadditive.epi_of_isZero_cokernel f (hgr p hp hpm)
+    have : IsIso f := isIso_of_mono_of_epi f
+    exact Subobject.eq_of_comm (asIso f) (Subobject.ofLE_arrow _)
+  have hF : (F m).F 1 = ⊥ := by
+    have hd (k : ℕ) (hk : k ≤ m) : (F m).F ((m : ℤ) + 1 - k) = ⊥ := by
+      induction k with
+      | zero => simpa using hbottom m
+      | succ k ih =>
+        have hp : 0 < m - k := by omega
+        have hcast : ((m - k : ℕ) : ℤ) = (m : ℤ) - k := by omega
+        rw [show (m : ℤ) + 1 - (k + 1 : ℕ) = (m - k : ℕ) by omega,
+          ← heq (m - k) hp (by omega), hcast]
+        convert ih (by omega) using 1
+        congr 1
+        omega
+    simpa using hd m le_rfl
+  -- The edge is the quotient map transported through the two specified comparisons.
+  let f := Subobject.ofLE _ _ ((F m).F_succ_le 0)
+  have hf : f = 0 := by
+    apply (cancel_mono ((F m).F 0).arrow).mp
+    simp only [f, Subobject.ofLE_arrow, zero_comp]
+    exact (Subobject.mk_eq_bot_iff_zero (f := ((F m).F 1).arrow)).mp
+      (by simpa only [Subobject.mk_arrow] using hF)
+  have : IsIso (cokernel.π f) := cokernel.π_of_zero hf
+  have : IsIso ((F m).F 0).arrow := by rw [htop m]; infer_instance
+  let edge := inv ((F m).F 0).arrow ≫ cokernel.π f ≫
+    (conv m 0 m (by omega)).hom ≫ (a m).inv
+  refine ⟨a, b, rfl, ?_, hF, edge, ?_, inferInstance⟩
+  · intro r
+    constructor
+    · simp [b, i]
+    · rw [ha]
+      simp [b, s, j, Category.assoc]
+      rfl
+  · simp [edge, Category.assoc]
+    rfl
 
 end CategoryTheory
