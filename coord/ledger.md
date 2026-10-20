@@ -17992,3 +17992,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:26 L: returned deliver/U9/Sheaf.SecSmoothPurity.IntrinsicCompactSupportRestriction (reviewer RETURN: (the landing tools, head db71b22cf) the delivery did not land: lean/Sheaf/SecSmoothPurity/IntrinsicCompactSupportRestric)
 - 12:26 L: returned deliver/V1/Sheaf.Algebra.Homology.PerfectRingHomTensorPostcomposition (reviewer RETURN: (the landing tools, head 41bd1e59b) the delivery did not land: missing import source modules: Sheaf.Algebra.Homology.Per)
 - 12:26 L: returned deliver/V1/Sheaf.Paper.FiniteFreeHomComparison (reviewer RETURN: (the landing tools, head c8ae73530) the delivery did not land: lean/Sheaf/Paper/FiniteFreeHomComparison.lean changed on )
+- 12:26 L: returned deliver/V1/Sheaf.SixFunctors.BoundaryDualityDischarge (reviewer RETURN: (the landing tools, head 3d0aab8c3) the delivery did not land: lean/Sheaf/SixFunctors/BoundaryDualityDischarge.lean chan)
