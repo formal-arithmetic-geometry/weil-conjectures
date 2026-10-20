@@ -17,7 +17,7 @@
 | `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
 | `lem-pur-adic-purity-scalar-naturality` | 1 | state | 33 |
 | `det-sp-tower-gluing` | 1 | state | 15 |
-| `sk-rem-sf-pf-done` | 2 | state | 13 |
+| `sk-thm-sf-kunneth-relative` | 1 | state | 12 |
 | `sk-thm-sf-tensor-hom` | 1 | state | 4 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 3 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
@@ -41,7 +41,7 @@
 | `lem-zl-compact-support-realization-factor-normalization` | 2 | state | 0 |
 | `nt-target-poincare-isiso` | 2 | state | 0 |
 
-Not open yet: 304 nodes that below a finished node, not needed, 85 nodes that wait for a statement dependency (bottom-up).
+Not open yet: 304 nodes that below a finished node, not needed, 84 nodes that wait for a statement dependency (bottom-up).
 
 ## Stage 3: modules to prove (741)
 
