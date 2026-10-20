@@ -3,119 +3,89 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "We first verify the unit for the quotient identification, rather than infer it from naturality alone. Put $Z=\\mathbf Z_{\\mathcal C}$ and $L_q=-\\otimes_Z^{\\mathbf L}R_q$. For $q=m,n$, take a flat-term K-flat resolution $P\\to F[0]$ using [lem-pc-kflat-resolution]. Locally on the site, $0\\to Z\\xrightarrow{q}Z\\to R_q\\to0$ is the usual exact integer sequence. Flatness of each $P^j$ [def-pc-flat-sheaf-modules] gives a degreewise short exact sequence $0\\to P\\xrightarrow{q}P\\to P\\otimes_ZR_q\\to0$, since locally tensoring with $R_q$ is quotienting by $q$. Its triangle [lem-weil-pbc-complex-ses-triangle] and cohomology sequence [lem-sf-derived-homology-long-exact] give\n$$F\\xrightarrow{q}F\\xrightarrow{H^0(j)}H^0(P\\otimes_ZR_q)\\longrightarrow H^1(P)=0.$$\nThe K-flat computation [lem-pur-derived-change-of-rings] and normalized unit formula [lem-pur-sheaf-ring-derived-coefficient-adjunction] identify $j:P\\to P\\otimes_ZR_q$, $x\\mapsto x\\otimes1$, with the unit. Therefore the cokernel identification $H^0(L_qF)=F/qF$ sends that unit to the quotient $\\pi_q$. This is precisely the quotient identification used in the statement: it is the single-cohomology identification induced by this cokernel, and equality of the resulting maps $F[0]\\to(F/qF)[0]$ follows from [lem-weil-pbc-derived-single-fully-faithful].",
+   "text": "Use the recorded normalized ordinary and derived scalar adjunctions and the normalized single-exponent identifications. The quotient unit and Kummer unit are fields of these identifications; they do not need to be reproved by a new resolution. On exact restriction functors, prove the compatibility of the composition comparison with the degree-zero single comparison directly through the localization factorization, degree by degree. Its shifted version follows from the existing exact-functor shift coherence.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-complex-ses-triangle",
-    "lem-sf-derived-homology-long-exact",
-    "lem-pur-derived-change-of-rings",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-weil-pbc-derived-single-fully-faithful"
+    "lem-sfb-divisible-extension-derived-reduction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YY (lemma-derived-base-change), 07A6 (lemma-adjoint); derived.tex Tag 0152 (lemma-derived-canonical-delta-functor). Agent three-arrow cohomology calculation of the quotient unit."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $Z=\\mathbf Z_{\\mathcal C}$, $L_q=-\\otimes_Z^{\\mathbf L}R_q$ and $E=-\\otimes_{R_m}^{\\mathbf L}R_n$. Denote their units by $\\eta^q$ and $\\epsilon$. For $K=F,B_0$ write $\\alpha_{q,K}:L_qK\\xrightarrow{\\sim}T_{q,K}$ for the identifications of [lem-sfb-divisible-extension-derived-reduction], where $T_{q,F}=\\bar F_q[0]$ and $T_{q,B_0}=H_q[1]$. To apply that lemma, use the split extension $0\\to B_0\\to B_0\\oplus F\\to F\\to0$; its extra extension hypothesis is thereby satisfied. By Step 1, $(\\operatorname{Res}\\alpha_{q,F})\\eta^q_F$ is $\\pi_q:F\\to F/qF$; the stated torsion normalization gives $(\\operatorname{Res}\\alpha_{q,B_0})\\eta^q_{B_0}=\\kappa_q$. Set $c_K=\\alpha_{n,K}\\,a_K\\,E(\\alpha_{m,K}^{-1}):E(T_{m,K})\\to T_{n,K}$. By the composite-unit identity of [lem-sfb-successive-derived-quotient-normalization] and naturality of the units of [lem-pur-sheaf-ring-derived-coefficient-adjunction],\n$$(\\operatorname{Res}c_K)(\\operatorname{Res}\\epsilon_{T_{m,K}})(\\operatorname{Res}\\alpha_{m,K})\\eta^m_K=(\\operatorname{Res}\\alpha_{n,K})\\eta^n_K.$$\nAll terms in this equality are restricted to $D(Z)$; before that restriction, $c_K$ is a morphism in $D(R_n)$ and $\\epsilon$ is a morphism in $D(R_m)$.",
+   "text": "The degree-zero complexes of Q_m and H_m are bounded above with flat terms (the other terms are zero). Apply the existing bounded-flat criterion at independent site and coefficient universes. Therefore the model counit ordinarySingle is invertible on each. The normalized derived adjunction unit, composed with ordinarySingle and the restriction/single comparison, is the image of the ordinary tensor unit. Evaluating the latter gives x ↦ 1 tensor x in the actual sheafified tensor product.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-divisible-extension-derived-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The transitivity comparison is the uniqueness isomorphism between the composite normalized left adjoint and the direct normalized left adjoint, as in the recorded successive-quotient normalization. The unit identity for uniqueness of left adjoints shows that the two successive adjuncts of its composite with any morphism equal the direct adjunct, after the actual restriction-composition comparison. Transport this identity through each single-exponent identification.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-sfb-divisible-extension-derived-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Conjugate transitivity by the normalized identifications to obtain isomorphisms c_F and c_B. Divide c_F by the invertible ordinarySingle on Q_m; full faithfulness of the degree-zero single functor recovers an ordinary isomorphism e_F. Divide c_B by the shift comparison followed by the shifted ordinarySingle on H_m; full faithfulness of the shifted single functor recovers e_H. These constructions give both required derived comparison equations. No separate local surjectivity or tensor-quotient identification is required to prove invertibility.",
    "uses": [
     "lem-sfb-divisible-extension-derived-reduction",
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0D6D and 07A6, applied to Z → R_m → R_n; normalized one-exponent identifications from the cited existing node. Agent notation and composite-unit calculation."
-   }
-  },
-  {
-   "text": "The one-term complexes $\\bar F_m[0]$ and $H_m[0]$ are bounded above with flat terms by hypothesis, hence K-flat by [lem-pc-bounded-above-flat-kflat-site]. The K-flat computation of [lem-pur-derived-change-of-rings] therefore identifies $E(\\bar F_m[0])$ with $(\\bar F_m\\otimes_{R_m}R_n)[0]$, and $E(H_m[1])$ with $(H_m\\otimes_{R_m}R_n)[1]$. The unit and transpose formulas of [lem-pur-sheaf-ring-derived-coefficient-adjunction] apply to these actual flat-term complexes: the unit is $x\\mapsto x\\otimes1$, and the transpose of a map $g$ is $x\\otimes b\\mapsto b\\,g(x)$. These formulas also hold after shifting: termwise scalar extension commutes with shift, and both shifted differentials have the same minus sign.",
-   "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
     "lem-pur-derived-change-of-rings",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+    "lem-weil-pbc-derived-single-fully-faithful"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat (the cited node has a stale source tag 06YS); Tag 06YY, lemma-derived-base-change; Tag 07A6, lemma-adjoint with the cited normalized formulas."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\rho:\\bar F_m\\to\\bar F_n$ send $f\\bmod mF$ to $f\\bmod nF$. It is defined since $mF\\subset nF$, and $\\rho\\pi_m=\\pi_n$. Put $v_F=(\\operatorname{Res}_{m,n}c_F)\\epsilon_{\\bar F_m}$ in $D(R_m)$. Step 2 says that the maps $v_F\\alpha_{m,F}$ and $\\rho\\alpha_{m,F}$ from $L_mF$ to $\\operatorname{Res}_{m,n}\\bar F_n$ have the same adjunct $\\pi_n$ in $D(Z)$. The first adjunction ($Z\\to R_m$) of [lem-pur-sheaf-ring-derived-coefficient-adjunction] is a bijection on these Hom sets, so $v_F\\alpha_{m,F}=\\rho\\alpha_{m,F}$, hence $v_F=\\rho$ since $\\alpha_{m,F}$ is invertible. The second adjunction ($R_m\\to R_n$), computed as in Step 3, now gives\n$$c_F(\\bar f\\otimes\\bar b)=b f\\bmod nF.$$\nThus this is the map induced by $a_F$, rather than merely an abstract isomorphism of its source and target.",
+   "text": "Let beta_Q be the ordinary adjunct of e_F, using the model object equality. The normalized unit computation in Step 2 identifies its image under the single functor with the derived adjunct of c_F. Combine Step 3, the exact-restriction single comparison, naturality, and the two quotient-unit fields. The result is p_m followed by restriction of beta_Q and the ordinary restriction comparison equals the endpoint equality followed by p_n. Faithfulness descends this equation to ordinary sheaves. On sections, the ordinary unit is 1 tensor x; tensor balancing and linearity extend the formula to b tensor x, proving the quotient formula.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+    "lem-sfb-divisible-extension-derived-reduction",
+    "lem-weil-pbc-derived-single-fully-faithful",
+    "def-pur-sheaf-tensor-product"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, lemma-adjoint; agent application of the two normalized adjunction bijections and composite-unit equality of Step 2."
-   }
+   "elementary": false
   },
   {
-   "text": "Put $d=m/n$ and define $\\beta:H_m\\to H_n$ by $\\beta(h)=dh$. This is well defined because $n d h=m h=0$, and is $R_m$-linear after restriction of $H_n$. Consider the two short exact sequences $S_q:0\\to H_q\\to B_0\\xrightarrow{q}B_0\\to0$. The triple $(\\beta,d\\operatorname{id}_{B_0},\\operatorname{id}_{B_0})$ is a morphism $S_m\\to S_n$: the inclusion square says $d h=\\beta(h)$ and the multiplication square says $n d=m$. The naturality clause of [lem-weil-pbc-complex-ses-triangle], applied to these sequences in degree zero, gives the precise boundary equation\n$$\\beta[1]\\,\\kappa_m=\\kappa_n$$\nin $D(Z)$. Both boundaries are the canonical short-exact-sequence boundaries used in the normalization in the item, so the same cone convention is used on both rows.",
+   "text": "Let beta be the ordinary adjunct of e_H. The scalar adjunction commutes with shifts by its induced left-adjoint shift structure. Shift Step 2 and combine it with Step 3 and the shifted exact-restriction comparison. The Kummer-unit fields then give delta_m followed by the shifted single image of the underlying integral map b_int equals the endpoint equality followed by delta_n. This is a boundary compatibility equation, not a cancellation of a Kummer boundary.",
+   "uses": [
+    "lem-sfb-divisible-extension-derived-reduction",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Put d=m/n. Since n*d=m and i_m followed by multiplication by m is zero, d times the composite of i_m with the endpoint equality factors uniquely through the kernel i_n. Call this factor b_0. The triple (b_0, d times the endpoint equality, the endpoint equality) is a morphism of the two Kummer short exact complexes. Naturality of the canonical short-exact-sequence triangle gives delta_m followed by the shifted single image of b_0 equals the endpoint equality followed by delta_n.",
    "uses": [
     "lem-weil-pbc-complex-ses-triangle"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0152, lemma-derived-canonical-delta-functor, naturality for the displayed morphism of short exact sequences. Agent explicit comparison of the two moduli."
-   }
+   "elementary": false
   },
   {
-   "text": "Put $v_B=(\\operatorname{Res}_{m,n}c_{B_0})\\epsilon_{H_m[1]}:H_m[1]\\to\\operatorname{Res}_{m,n}H_n[1]$ in $D(R_m)$. By Step 2, the adjunct of $v_B\\alpha_{m,B_0}$ under $L_m\\dashv\\operatorname{Res}$ is $\\kappa_n$. By Step 5, the adjunct of $\\beta[1]\\alpha_{m,B_0}$ is also $\\beta[1]\\kappa_m=\\kappa_n$. The first adjunction bijection of [lem-pur-sheaf-ring-derived-coefficient-adjunction] gives $v_B\\alpha_{m,B_0}=\\beta[1]\\alpha_{m,B_0}$, and invertibility of $\\alpha_{m,B_0}$ gives $v_B=\\beta[1]$. We have cancelled an isomorphism after using an adjunction bijection, not cancelled $\\kappa_m$. Transposing under the second adjunction and using Step 3 shows that $c_{B_0}$ is the shift of\n$$H_m\\otimes_{R_m}R_n\\longrightarrow H_n,\\qquad h\\otimes\\bar b\\longmapsto b d h.$$\nThis identifies the actual transitivity comparison and its sign. The map on $h\\otimes1$ is $dh$, or $h^{m/n}$ in multiplicative notation.",
+   "text": "Multiplication by n annihilates the restricted H_n since i_n is mono; therefore multiplication by m annihilates it. Any map from B_m to that sheaf is zero, because multiplication by m on B_m is epi. Apply the exact Hom sequence of the rotated Kummer triangle: this vanishing makes precomposition with delta_m injective on maps between the relevant shifted single objects. Steps 6 and 7 therefore identify b_int and b_0 by full faithfulness of the single functor and the shift. Evaluating b_0 followed by i_n gives the required d=m/n formula with its fixed sign. The ordinary-adjunction unit and tensor balancing give the remaining formula for e_H on pure tensors.",
    "uses": [
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6, lemma-adjoint; agent two-adjunction proof using the boundary equation of Step 5, not a claim about a two-term resolution over R_m."
-   }
-  },
-  {
-   "text": "For any $R_m$-module sheaf $M$, the maps $M\\otimes_{R_m}R_n\\to M/nM$, $x\\otimes\\bar b\\mapsto bx\\bmod nM$, and $M/nM\\to M\\otimes_{R_m}R_n$, $x\\bmod nM\\mapsto x\\otimes1$, are inverse: balancing gives $nx\\otimes1=x\\otimes\\bar n=0$, and $(bx)\\otimes1=x\\otimes\\bar b$. Scalars of $R_n$ lift locally to integers, so these formulas define morphisms on the presheaf tensor and descend through the sheafification of [def-pur-sheaf-tensor-product]. Quotients here are sheaf cokernels, so representatives and lifts are local. With $M=F/mF$, its quotient by $nM$ is $F/nF$ because $mF\\subset nF$. This proves directly that the formula in Step 4 is an isomorphism, with inverse $f\\bmod nF\\mapsto(f\\bmod mF)\\otimes1$.",
-   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-weil-pbc-derived-single-fully-faithful",
     "def-pur-sheaf-tensor-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK, section-tensor-product; elementary local balanced-tensor calculation and sheafification."
-   }
-  },
-  {
-   "text": "The map $\\beta$ of Step 5 is locally surjective: for $t\\in H_n$, surjectivity of $m:B_0\\to B_0$ gives locally $z$ with $mz=t$; then $h=nz$ satisfies $dh=t$ and $mh=n t=0$. Its kernel is exactly $nH_m$: one inclusion follows from $d(ny)=my=0$ for $y\\in H_m$; conversely if $h\\in H_m$ and $dh=0$, surjectivity of $n$ gives locally $y$ with $ny=h$, and $my=dh=0$, so $y\\in H_m$. Therefore $H_m/nH_m\\xrightarrow{\\beta}H_n$ is an isomorphism of sheaves. Step 7 identifies its source with $H_m\\otimes_{R_m}R_n$, so this is precisely the map in Step 6. This argument uses no points of the site and no global surjectivity on sections. When $m=n$ it is the identity; when $n=1$ both quotients and both target sheaves vanish. The same formulas cover zero sheaves.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Elementary local lifting and kernel calculation for the explicitly given epimorphisms n and m; no derived tensor over Z is used here."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-pc-flat-sheaf-modules",
   "def-pur-sheaf-tensor-product",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sf-derived-homology-long-exact",
   "lem-sfb-divisible-extension-derived-reduction",
   "lem-sfb-successive-derived-quotient-normalization",
   "lem-weil-pbc-complex-ses-triangle",
-  "lem-weil-pbc-derived-single-fully-faithful"
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Agent consequence of Tag 0D6D (lemma-derived-pullback-composition), Tag 07A6 (lemma-adjoint), and derived.tex Tag 0152 (lemma-derived-canonical-delta-functor). These supply the general tools, not a verbatim exponent-independence theorem. This auxiliary calculation supplies the coefficient-compatibility check added in parent DAG node sk-lem-geo-cartier proof step 5, extending the single-exponent construction in blueprint unit proof paragraph 4."
+  "place": "Agent consequence of Tag 0D6D (lemma-derived-pullback-composition), Tag 07A6 (lemma-adjoint), and derived.tex Tag 0152 (lemma-derived-canonical-delta-functor). These supply the general tools, not a verbatim exponent-independence theorem. This auxiliary calculation supplies the coefficient-compatibility check added in parent DAG node sk-lem-geo-cartier proof step 5, extending the single-exponent construction in blueprint unit proof paragraph 4. Lean proof by Y3: use the already stated quotient and Kummer unit normalizations, recover the ordinary isomorphisms by full faithfulness from flat single-object computations, and prove the exponent formula by a kernel lift and the exact Hom sequence of the rotated Kummer triangle. All coherence and cancellation glue is proved in private lemmas in the item module; no new obligations are introduced."
  },
  "mathlib_match": null,
  "status": "split",
@@ -267,11 +237,7 @@
  },
  "tool_uses": [
   "lem-sfb-successive-derived-quotient-normalization",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-kflat-resolution",
-  "lem-sf-derived-homology-long-exact"
+  "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
   "date": "2026-10-17",
@@ -311,20 +277,13 @@
   "note": "Read the node, all 9 statement dependencies (DivisibleReduction Presentation/identifications/sheafScalarDerivedAdjunction, DerivedChangeOfRingsCochainModel, SuccessiveDerivedQuotient Normalization.unit_comp, IsFlatOnSite) and the module. Hypotheses match exactly: Pm/Pn presentations with hB/hF give m,n epi on B and mono on F with their kernels/cokernels; the split extension makes S harmless; flatness only of H_m and F_m over R_m. Conclusion: eF/eH with sheaf section formulas, beta fixed by monic Pn.i, and the derived equations identifying the conjugated transitivity with ordinarySingle followed by eF[0], resp. the shift with the canonical commShift. transitivity = leftAdjointUniq of the normalized adjunctions (the unit_comp characterization), not arbitrary; residueProjection/restrictionComp/ordinarySingle carry real data. Edge cases m=n, n=1, zero sheaves and universes checked. lean.statement verbatim; only the lean field changed; docstrings and 8 proof steps present; only sorry. nt_compile --json on the snapshot: clean in 3.4 s (error reporting verified). The Second-reading placeholder is standard practice since 2026-10-17. No findings."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "Y9",
+  "reviewer": "COMPILER",
+  "group": "Y3",
   "result": "pass",
-  "landing": "20261019T034407-L-428565",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "SheafOfModules.GeoCartierExponent.geoCartier_exponent_independence",
-   "SheafOfModules.GeoCartierExponent.projection_comp"
-  ],
-  "sorry_after": [
-   "SheafOfModules.GeoCartierExponent.geoCartier_exponent_independence"
-  ]
+  "landing": "20261020T211901-L-3514574",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
