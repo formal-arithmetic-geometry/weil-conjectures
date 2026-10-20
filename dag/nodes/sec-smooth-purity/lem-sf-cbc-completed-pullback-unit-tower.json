@@ -25,6 +25,18 @@
  ],
  "proof": [
   {
+   "text": "Construct the geometric algebraic lift on the published small models. Base change and the two AsSmall equivalences preserve finite limits, so the small-category sheaf pullback is left exact. For arbitrary small sites, compare the abstract algebraic inverse image to the constructed Kan-extension/sheafification inverse image using leftAdjointUniq. The forgetful comparison and its unit equation [lem-weil-pbc-sheaf-pullback-forget-comparison] give a ring unit presentation. A unit presentation makes its adjoint map invertible. Apply [lem-weil-pbc-module-inverse-image-action-adjunction] to obtain the module presentation with the actual module adjunction unit; forgetting abelian groups and using the same presentation argument makes the set-adjoint of this unit invertible. Adjoint injectivity and naturality of the units prove naturality of both comparisons. Test ring and module operation graphs on unit sections by the set adjunction; the ring and module units preserve their operations, giving every field of AlgebraicInverseImage. Compare the two constant-sheaf adjunctions at a terminal site object by leftAdjointUniq; its hom-equivalence equation identifies the resulting constant comparison with the sheafified constant-section adjunct. Assemble these explicit data into InverseImageData. For uniqueness substitute the specified ring functor and module functors, use injectivity of the set adjunction to identify each inverse underlying module comparison, and use the specified ring and constant components. Extensionality and proof irrelevance identify the remaining fields. This proves inverse_finiteLimits and canonicalInverseImageData_existsUnique without altering the tower argument below.",
+   "uses": [
+    "lem-weil-pbc-sheaf-pullback-forget-comparison",
+    "lem-weil-pbc-module-inverse-image-action-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 00YV, 03D2 and 03D3; constant objects as in Tag 0H7J; Mathlib small-category sheaf inverse image and adjunction uniqueness."
+   }
+  },
+  {
    "text": "Model of $\\mathcal R_W$. Let $Q\\to N$ be a flat-term K-flat resolution [lem-pc-kflat-resolution]. By [lem-weil-pbc-diagram-site-realization] module sheaves on the diagram site are towers; every covering family of that site lies in a single level, so sections, sheafification and hence the sheaf tensor product over $\\Delta\\underline A_W$ are computed levelwise, and by [lem-weil-tower-category-levelwise-abelian] kernels, cokernels and cohomology of tower complexes are levelwise. Hence $\\Delta Q\\to\\Delta N$ is a quasi-isomorphism, every $\\Delta Q^i$ is flat, and $\\Delta Q$ is K-flat [def-pc-kflat-complex]: for an acyclic tower complex $F$, level $n$ of $\\operatorname{Tot}(F\\otimes\\Delta Q)$ is $\\operatorname{Tot}(F_n\\otimes_{\\underline A_W}Q)$, acyclic because $F_n$ is acyclic and $Q$ is K-flat. By [lem-pur-derived-change-of-rings] (2) for the ring map $\\Delta\\underline A_W\\to(\\underline{P_n}_W)_n$ of the diagram site, $\\mathcal R_W(N)$ is represented by $\\Delta Q\\otimes_{\\Delta\\underline A_W}(\\underline{P_n}_W)_n=(Q\\otimes_A\\underline{P_n}_W)_n$ with transitions $1_Q\\otimes\\rho_n$. A morphism $N\\to N'$ is a roof of chain maps between such resolutions (resolve its apex again by [lem-pc-kflat-resolution]) and goes to the levelwise tensored roof. Thus evaluation at $n$ of $\\mathcal R_W$ is naturally $F_n=-\\otimes^L_A\\underline{P_n}_W$, regarded over $\\underline A_W$ by restriction of scalars, as asserted in the statement.",
    "uses": [
     "lem-pc-kflat-resolution",
@@ -123,8 +135,10 @@
   "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
   "lem-weil-pbc-constant-completion-equivalence",
   "lem-weil-pbc-diagram-site-realization",
+  "lem-weil-pbc-module-inverse-image-action-adjunction",
   "lem-weil-pbc-ringed-pullback-preserves-kflat",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-sheaf-pullback-forget-comparison",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-tower-category-levelwise-abelian",
   "lemma-weil-pbc-adic-completion-reduction"
@@ -132,7 +146,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
-  "place": "Proof Steps 2 and 5; strict-tower completed-pullback refinement, using Stacks Tags 099M, 099N, 03EL, 06YS, 0G7E and existing finite-reduction lemma"
+  "place": "Proof Steps 2 and 5; strict-tower completed-pullback refinement, using Stacks Tags 099M, 099N, 03EL, 06YS, 0G7E and existing finite-reduction lemma; D8 proves the small-site left exactness and unit-normalized algebraic-lift prerequisites using the forgetful and module-adjunction comparisons."
  },
  "mathlib_searches": [
   {
@@ -473,5 +487,15 @@
    "lemma-weil-pbc-adic-completion-reduction",
    "lemma-weil-pbc-completed-pullback-reduction"
   ]
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D8",
+  "result": "pass",
+  "landing": "20261020T211657-L-3487604",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
