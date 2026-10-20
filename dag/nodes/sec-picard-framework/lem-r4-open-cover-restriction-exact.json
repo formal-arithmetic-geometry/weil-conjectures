@@ -13,7 +13,7 @@
  },
  "proof": [
   {
-   "text": "Set S = K.sc n, the short complex of consecutive differentials. Open restriction is additive and preserves finite limits and finite colimits, by the already proved moduleOverFunctor instances exported by Sheaf.Paper.DerivedHomMayerVietoris. Mathlib ShortComplex.LeftHomologyData.exact_map_iff therefore identifies exactness of S restricted to any open W with vanishing of the restriction of S.leftHomologyData.H. The short complex of the termwise restricted complex is definitionally S.map of the restriction functor.",
+   "text": "Set S = K.sc n, the short complex of consecutive differentials. Open restriction is additive and preserves finite limits and finite colimits, by the already proved moduleOverFunctor instances exported by WeilConjectures.AlgebraicGeometry.DerivedHomMayerVietoris. Mathlib ShortComplex.LeftHomologyData.exact_map_iff therefore identifies exactness of S restricted to any open W with vanishing of the restriction of S.leftHomologyData.H. The short complex of the termwise restricted complex is definitionally S.map of the restriction functor.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pc-scheme"
@@ -43,9 +43,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "A2",
-  "date": "2026-10-13",
-  "note": "Complete Lean proof: reduce to vanishing of left homology using Mathlib exact_map_iff, then use sheaf separation on intersections with the covering opens. No stalk theory or new sorry is used."
+  "group": "R9",
+  "date": "2026-10-20",
+  "note": "The complete existing proof is retained verbatim in the adopted source module WeilConjectures.AlgebraicGeometry.OpenCoverRestrictionExact. It reduces to vanishing of left homology and applies sheaf separation on the intersections with the covering opens. No proof dependency or unit route changes. The unused Sheaf duplicate is withdrawn; the source theorem has only propext, Classical.choice and Quot.sound as axioms."
  },
  "mathlib_searches": [
   {
@@ -95,14 +95,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.OpenCoverRestrictionExact",
-  "file": "lean/Sheaf/AlgebraicGeometry/OpenCoverRestrictionExact.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.OpenCoverRestrictionExact",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/OpenCoverRestrictionExact.lean",
   "declaration": "AlgebraicGeometry.exactAt_over_of_open_cover",
   "statement": "theorem exactAt_over_of_open_cover\n    (X : Scheme.{u}) (K : CochainComplex\n      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) ℤ)\n    (ι : Type v) (V : ι → X.Opens) (U : X.Opens) (hU : U = ⨆ i, V i)\n    (n : ℤ)\n    (h : ∀ i, (((SheafOfModules.overFunctor.{u}\n      (moduleRings X.toRingedSpace) (V i)).mapHomologicalComplex\n        (ComplexShape.up ℤ)).obj K).ExactAt n) :\n    (((SheafOfModules.overFunctor.{u} (moduleRings X.toRingedSpace) U).mapHomologicalComplex\n      (ComplexShape.up ℤ)).obj K).ExactAt n",
   "branch": "sheaf-dag",
-  "by": "R4",
-  "date": "2026-10-13"
+  "by": "R9",
+  "date": "2026-10-20",
+  "note": "The adopted source library already proves the same declaration with only standard axioms. Withdraw the unimported Sheaf duplicate under worker brief step 8d; no source-library declaration, signature, attribute, public import or proof is changed."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -115,14 +116,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "A2",
+  "reviewer": "C-c1d2a",
+  "group": "R9",
   "result": "pass",
-  "landing": "20261013T015542-L-3016126",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261020T145537-L-2409585",
+  "kind": "interface",
+  "note": "independent cc review: withdrawn Sheaf.AlgebraicGeometry.OpenCoverRestrictionExact (no importers) vs WeilConjectures.AlgebraicGeometry.OpenCoverRestrictionExact: identical exactAt_over_of_open_cover signature, standard axioms only; node lean repointed existing:true, statement fields unchanged"
  },
  "lean_audit": {
   "master": {
