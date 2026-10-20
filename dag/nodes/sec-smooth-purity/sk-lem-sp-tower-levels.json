@@ -21,140 +21,45 @@
  ],
  "proof": [
   {
-   "text": "Work in the compatible small pro-étale sites and larger module universe of [def-weil-pbc-proetale-site]. Put $R_{T,n}=(\\mathcal O_E/\\ell^n)_T$ and $R_{S,n}=(\\mathcal O_E/\\ell^n)_S$, with the quotient maps and semilinear transitions of [sk-def-sp-coefficient-towers]. By [det-sp-coefficient-towers-abelian], the tower categories are Grothendieck abelian, their kernels and cokernels are levelwise, and evaluation is exact, including on derived categories. By [lem-pur-ringed-site-grothendieck-abelian] the finite-level module categories are also Grothendieck abelian: the sites are small in the chosen universe and the $R_{T,n},R_{S,n}$ are commutative ring sheaves in it. Apply [lem-sp-grothendieck-enough-injectives] to all these categories. Thus the categories used below are abelian with enough injectives, without identifying the varying-coefficient tower category with a functor category of modules over one fixed ring.",
+   "text": "Use the recorded Grothendieck abelian structure of coefficient towers. The product-site direct image preserves arbitrary limits: the underlying presheaf functor computes them sectionwise, restriction of scalars preserves limits, and the full subcategory of levelwise sheaves is closed under limits. The Grothendieck adjoint functor theorem supplies its left adjoint.",
    "uses": [
-    "def-weil-pbc-proetale-site",
-    "sk-def-sp-coefficient-towers",
     "det-sp-coefficient-towers-abelian",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-sp-grothendieck-enough-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DA (lemma-abelian), 03DB (lemma-limits-colimits), 03EW (lemma-module-quotient-flat); injectives.tex Tag 079H (theorem-injective-embedding-grothendieck); blueprint proof, setup for all three paragraphs"
-   }
-  },
-  {
-   "text": "Use the canonical coefficient identification $g^{-1}R_{S,n}\\simeq R_{T,n}$ recorded in [det-sp-tower-injective-components]. The ordinary module functors are those of [def-weil-pbc-proetale-operations]. On underlying abelian sheaves $g^*$ is the exact inverse image of [lem-weil-pbc-site-pullback-abelian-exact]; extension along the coefficient isomorphism merely transports the action. Exactness can be tested on the underlying abelian sheaves by [def-weil-sheaf-of-modules-category]. Apply these inverse images to the levels and transitions; the canonical identifications are compatible with quotient maps because their structural maps send a constant coefficient to the same constant coefficient after base change. This defines $g_\\bullet^*$ and it is exact, since exactness of towers is levelwise by [det-sp-coefficient-towers-abelian]. Define $(g_{*,\\bullet}M)_n=g_{*,R_n}M_n$, with transitions obtained by applying the underlying sheaf direct image to the transitions of $M$. The scalar actions are through $R_{S,n}\\to g_*R_{T,n}$, so these transitions are semilinear and satisfy the tower identities. This additive functor is left exact: kernels of module sheaves are sectionwise, and $(g_*M)(V)=M(T\\times_S V)$, so direct image preserves zero objects and kernels; finite products are preserved by the same section formula. Levelwise kernels and finite products give the assertion on towers.",
-   "uses": [
-    "det-sp-tower-injective-components",
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-site-pullback-abelian-exact",
-    "def-weil-sheaf-of-modules-category",
-    "det-sp-coefficient-towers-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04JC (lemma-flat-pullback-exact), Tag 03DC (lemma-exactness-pushforward-pullback); sites.tex Example 0H7J (example-constant-sheaf); preliminary exactness clause of the blueprint statement"
-   }
-  },
-  {
-   "text": "For each $n$, use [det-sp-tower-evaluation-adjoint]: $(r_nJ)_r=0$ if $r<n$ and $(r_nJ)_r=J$ if $r\\geq n$, with restriction of scalars along $R_{T,r}\\to R_{T,n}$, identity transitions at and above $n$, and zero transitions below. The adjunction is explicit: $a:C_n\\to J$ gives component $a\\,t_{r,n}:C_r\\to J$ for $r\\geq n$ and the zero map for $r<n$; conversely take the component at $n$. Commutation with the tower transitions proves that the two operations are inverse. Restriction of scalars changes no underlying abelian sheaf, so $r_n$ is exact; the cited lemma also states that $r_n$ preserves injectives and supplies embeddings of every tower into $\\prod_{n\\geq1}r_nJ_n$ with injective $J_n\\supset C_n$.",
-   "uses": [
-    "det-sp-tower-evaluation-adjoint"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels.proof.md",
-    "place": "Proof, first paragraph; detailed companion sk-lem-sp-tower-levels-adjoint.md"
-   }
-  },
-  {
-   "text": "Apply the embedding in [det-sp-tower-evaluation-adjoint] to an injective tower $I_\\bullet$. At level $r$ its component is $x\\mapsto(j_n t_{r,n}(x))_{1\\leq n\\leq r}$; the coordinate $n=r$ is the monomorphism $j_r:I_r\\hookrightarrow J_r$. The product tower is formed by $P_r=\\prod_{n\\leq r}J_n$ over $R_{T,r}$, with transition $P_{r+1}\\to P_r$ forgetting its last coordinate and restricting scalars on the other coordinates. The universal property of the finite products at each level gives the product of the towers $r_nJ_n$: a family of tower maps gives these coordinates, and their transition equations give the map to $P$. Thus the embedding is monic. By the lifting definition of injectivity in [def-sp-injective-resolutions], its identity extends across this monomorphism to $p:P\\to I_\\bullet$ with $p j=1$. Evaluating gives $p_rj_r^{\\mathrm{tower}}=1$, so $I_r$ is a retract of $\\prod_{n\\leq r}J_n$. The factors here are injective over $R_{T,n}$ and are regarded as $R_{T,r}$-modules by restriction along $R_{T,r}\\to R_{T,n}$.",
-   "uses": [
-    "det-sp-tower-evaluation-adjoint",
-    "def-sp-injective-resolutions"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels.proof.md",
-    "place": "Proof, second paragraph: explicit product, monomorphism and splitting calculation"
-   }
-  },
-  {
-   "text": "The intermediate acyclicity assertion of [det-sp-tower-injective-components] now applies to every injective tower $I_\\bullet$ and every $r$: $I_r$ is acyclic for sections over every object of $T_{\\mathrm{proet}}$ and is $g_{*,R_r}$-acyclic for every morphism $g:T\\to S$. Its hypotheses are exactly our coefficient towers, the chosen small sites, the canonical coefficient identification of step 2, and injectivity of $I_\\bullet$. We use this acyclicity assertion only, not the derived comparison appended to that node. It accounts for restriction of scalars, finite products and retracts in step 4; in particular we make no claim that the restricted $J_n$ or the component $I_r$ is injective over $R_{T,r}$.",
-   "uses": [
     "det-sp-tower-injective-components"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels-acyclic.proof.md",
-    "place": "Proof, second paragraph; cohomology of modules sites-cohomology.tex Tag 03FD (lemma-cohomology-modules-abelian-agree), and higher direct images Tag 072W (lemma-higher-direct-images)"
-   }
+   "elementary": false
   },
   {
-   "text": "The functor $g_{*,\\bullet}$ is additive between abelian categories with enough injectives by steps 1–2. Hence [lem-weil-pbc-right-derived-plus-injective] supplies $Rg_{*,\\bullet}$ on $D^+$ and its natural comparison $\\alpha_\\bullet:Q g_{*,\\bullet}\\to Rg_{*,\\bullet}Q$, which is invertible on bounded below complexes of injective towers. Use the cohomological boundedness definition [def-weil-pbc-bounded-derived-subcategories] and the cohomology/localization definitions [def-weil-abstract-derived-category]. Choose a bounded below complex $K_\\bullet$ representing $C_\\bullet$. Concretely, if an initial representative has $H^j=0$ for $j<a$, replace it by the good truncation with zero terms below $a$, term $\\operatorname{coker}(d^{a-1})$ in degree $a$ and the original terms above $a$; the projection induces the identity on cohomology in degrees at least $a$ and an isomorphism between zero objects below $a$. Apply [lem-weil-pbc-complex-injective-resolution-mono] in the tower category to obtain a quasi-isomorphism $s:K_\\bullet\\to I_\\bullet^\\cdot$ with $I_\\bullet^\\cdot$ bounded below and termwise injective. Consequently $Rg_{*,\\bullet}C_\\bullet$ is represented by $g_{*,\\bullet}I_\\bullet^\\cdot$. By exact evaluation [det-sp-coefficient-towers-abelian], $s_n:K_n\\to I_n^\\cdot$ is a quasi-isomorphism of bounded below $R_{T,n}$-complexes, and by step 5 every term of $I_n^\\cdot$ is $g_{*,R_n}$-acyclic.",
+   "text": "For each level use the exact evaluation right adjoints. The ordinary right-extension/pushforward comparison of lem-sp-tower-push-right-extension identifies the two composite right adjoints; uniqueness of left adjoints gives the level comparison for tower inverse image. Finite-level inverse image preserves finite limits by lem-sp-level-pullback-exact. Exact, jointly faithful evaluations reflect isomorphisms and finite limits, so the tower inverse image preserves finite limits. It preserves colimits as a left adjoint.",
    "uses": [
-    "lem-weil-pbc-right-derived-plus-injective",
-    "lem-weil-pbc-complex-injective-resolution-mono",
+    "det-sp-tower-evaluation-adjoint",
     "det-sp-coefficient-towers-abelian",
-    "def-weil-pbc-bounded-derived-subcategories",
-    "def-weil-abstract-derived-category"
+    "lem-sp-tower-push-right-extension",
+    "lem-sp-level-pullback-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 013K (lemma-injective-resolutions-exist), Tag 05TI (lemma-enough-injectives-right-derived), Tag 05TH (lemma-injective-acyclic); blueprint proof, last sentence"
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $n$ and write $G_n=g_{*,R_n}$. Applying [src-right-derived-functor-plus-acyclic-unit] to the bounded below complex $I_n^\\cdot$ shows that its natural comparison $\\alpha_{n,I_n}:Q(G_n I_n^\\cdot)\\to RG_n(Q I_n^\\cdot)$ is invertible: $G_n$ is additive and left exact by step 2, the source category has enough injectives by step 1, and termwise acyclicity was proved in step 5. Exact evaluation [det-sp-coefficient-towers-abelian] identifies $\\operatorname{ev}_n Q(g_{*,\\bullet}I_\\bullet^\\cdot)$ with $Q(G_nI_n^\\cdot)$: their terms are $G_n(I_n^j)$ and their differentials are $G_n(d_{I_n}^j)$ by the definition of the levelwise direct image. Write $A_n=\\operatorname{ev}_n(\\alpha_{\\bullet,I})$, which is invertible by [lem-weil-pbc-right-derived-plus-injective]. The desired isomorphism is the following explicit composite, with the middle objects identified by the preceding equality of complexes:\n$$\n\\operatorname{ev}_n Rg_{*,\\bullet}(QK)\n\\xrightarrow{\\operatorname{ev}_n Rg_{*,\\bullet}(Qs)}\n\\operatorname{ev}_n Rg_{*,\\bullet}(QI)\n\\xrightarrow{A_n^{-1}}\nQ(G_nI_n)\n\\xrightarrow{\\alpha_{n,I_n}}\nRG_n(QI_n)\n\\xrightarrow{(RG_n(Qs_n))^{-1}}\nRG_n(QK_n).\n$$\nThe first and last arrows are invertible because $s,s_n$ are quasi-isomorphisms and $Q$ inverts these, as in [def-weil-abstract-derived-category]. Thus every arrow is invertible in $D^+(S_{\\mathrm{proet}},R_{S,n})$, proving the assertion for $C_\\bullet=QK_\\bullet$. Here is the model-independence and naturality calculation. On an injective tower complex $I$, put $B_I=\\alpha_{n,I_n}A_I^{-1}$. For a chain map $h:I\\to I'$ between bounded below injective tower complexes, the two unit naturality identities are\n$$\nA_{I'}\\,QG_n(h_n)=\\operatorname{ev}_n Rg_{*,\\bullet}(Qh)\\,A_I,\n\\qquad\n\\alpha_{n,I'_n}\\,QG_n(h_n)=RG_n(Qh_n)\\,\\alpha_{n,I_n}.\n$$\nMultiplying the first identity by the inverse $A_I$ and substituting in the second gives\n$$\nB_{I'}\\,\\operatorname{ev}_n Rg_{*,\\bullet}(Qh)=RG_n(Qh_n)\\,B_I.\n$$\nBy [lem-weil-pbc-bounded-below-injectives-kinjective] these tower complexes are K-injective, and [lem-weil-pbc-kinjective-hom-derived] represents every derived morphism between them by a unique homotopy class of chain maps. All functors in the displayed identities are additive termwise functors or derived functors, so the identities depend only on that homotopy class. Thus they prove naturality for every derived morphism between the models. In particular, the unique class representing the identity on $C_\\bullet$ compares any two models and gives equality of the transported composites above. This proves independence from the resolution as well as naturality in $C_\\bullet$. The uniqueness clause of [lem-weil-pbc-right-derived-plus-injective] identifies any alternative bounded below derived-functor choices with these units.",
+   "text": "Apply the existing natural theorem sp_tower_derived_direct_image_evaluation from det-sp-tower-injective-components, which implements the unit proof: exact right extensions yield injective-product embeddings, injective towers are retracts of those products, their levels are acyclic, and evaluated bounded-below injective resolutions compute finite-level derived direct image. Thus the unit statement and all three resolution steps remain in the dependency proof. Convert the right-derived evaluations to mapDerivedCategoryPlus using exact-functor comparison isomorphisms and evaluate the resulting natural isomorphism at C.",
    "uses": [
-    "src-right-derived-functor-plus-acyclic-unit",
+    "det-sp-tower-injective-components",
     "det-sp-coefficient-towers-abelian",
-    "lem-weil-pbc-right-derived-plus-injective",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived"
+    "src-sbc-exact-functor-plus-unit"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015E (lemma-leray-acyclicity); blueprint proof, final paragraph, evaluated injective-resolution comparison"
-   }
-  },
-  {
-   "text": "Identify the finite-level bounded below derived functor $RG_n$ of step 7 with the ordinary unbounded direct image $Rg_{*,R_n}$ fixed by [def-weil-pbc-proetale-operations]. For a bounded below level complex $L$, choose $q:L\\to J$ with $J$ bounded below and injective termwise by [lem-weil-pbc-complex-injective-resolution-mono]. It is K-injective by [lem-weil-pbc-bounded-below-injectives-kinjective]. Write $i:L\\to H(L)$ for the functorial K-injective resolution used in the ordinary unbounded construction, so that its direct image is $QG_nH(L)$. By [lem-weil-pbc-kinjective-hom-derived], the derived morphism $Qq\\,(Qi)^{-1}:QH(L)\\to QJ$ has a unique representative $h:H(L)\\to J$ in the homotopy category. Its image under $Q$ is invertible, hence $h$ is a quasi-isomorphism; since both complexes are K-injective, the same cited node says that $h$ is a homotopy equivalence. Applying the additive $G_n$ preserves its homotopy inverse and yields $QG_nH(L)\\simeq QG_nJ$. On the other hand, the injective-unit assertion of [lem-weil-pbc-right-derived-plus-injective], together with $Qq$, identifies $RG_n(QL)$ with $QG_nJ$. This also proves that the unbounded direct image of $QL$ lies in $D^+$, since $G_nJ$ is bounded below. For a map $L\\to L'$, the maps between the two choices of K-injective models are the unique homotopy classes representing its derived map; the two composites through these classes agree by the injectivity of the Hom-to-derived bijection. Applying $G_n$ and using naturality of the bounded below derived unit therefore makes these identifications natural. Consequently the right-hand side of step 7 is precisely the ordinary $Rg_{*,\\mathcal O_E/\\ell^n}C_n$ appearing in the statement.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-weil-pbc-complex-injective-resolution-mono",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-right-derived-plus-injective"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 013K (lemma-injective-resolutions-exist), Tag 070I (lemma-K-injective), lemma-bounded-below-injectives-K-injective; comparison with the K-injective construction in def-weil-pbc-proetale-operations"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "sk-def-sp-coefficient-towers",
   "det-sp-coefficient-towers-abelian",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sp-grothendieck-enough-injectives",
   "det-sp-tower-injective-components",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "def-weil-sheaf-of-modules-category",
   "det-sp-tower-evaluation-adjoint",
-  "def-sp-injective-resolutions",
-  "lem-weil-pbc-right-derived-plus-injective",
-  "lem-weil-pbc-complex-injective-resolution-mono",
-  "def-weil-pbc-bounded-derived-subcategories",
-  "def-weil-abstract-derived-category",
-  "src-right-derived-functor-plus-acyclic-unit",
-  "lem-weil-pbc-bounded-below-injectives-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived"
+  "lem-sp-tower-push-right-extension",
+  "lem-sp-level-pullback-exact",
+  "src-sbc-exact-functor-plus-unit"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/sk-lem-sp-tower-levels.proof.md",
-  "place": "All three paragraphs, using the existing exact-evaluation, evaluation-adjoint and component-acyclicity nodes; explicit bounded-below derived-unit comparison; explicit naturality on injective models and agreement with ordinary unbounded direct image restricted to D^+"
+  "by": "worker",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower-levels/_section.md",
+  "place": "preliminary operations via exact finite-level inverse image and evaluation adjunctions; unit resolution proof supplied by the existing natural derived-evaluation theorem; J4"
  },
  "mathlib_searches": [
   {
@@ -320,12 +225,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-pbc-complex-injective-resolution-mono",
-  "src-right-derived-functor-plus-acyclic-unit"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-17",
   "by": "L",
@@ -377,5 +277,15 @@
   "by": "Q107",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261020T051416-L-1670911",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
