@@ -1,0 +1,150 @@
+{
+ "id": "lem-sfb-ringed-projection-tensor-compatibility",
+ "kind": "statement",
+ "title": "Tensor constraints and compatibility of normalized comparisons",
+ "statement": "Tensor constraints and compatibility of normalized comparisons. In the notation of [def-sfb-ringed-projection-coherence-data], the assertion is theorem ringedProjectionTensorCompatibility : Nonempty (TensorCompatibility.{u, w}). The structure is:\n\nstructure TensorCompatibility where\n  constraints : ∀ (X : RingedTensorCorner.{u, w}) (a : RingedTensorModel X),\n    TensorConstraints X a\n  associativity : ∀ {X Y : RingedTensorCorner.{u, w}} (f : RingedTensorEdge Y X)\n    (a : RingedTensorModel X) (b : RingedTensorModel Y) (E Q N : Y.mateDerived),\n    f.left.map ((constraints Y b).associator E Q N).inv ≫\n        (f.tensorComparison b a).hom.app (Y.tensor.obj (E, Q), N) ≫\n        X.tensor.map (Prod.mkHom ((f.tensorComparison b a).hom.app (E, Q))\n          (𝟙 (f.left.obj N))) =\n      (f.tensorComparison b a).hom.app (E, Y.tensor.obj (Q, N)) ≫\n        X.tensor.map (Prod.mkHom (𝟙 (f.left.obj E))\n          ((f.tensorComparison b a).hom.app (Q, N))) ≫\n        ((constraints X a).associator (f.left.obj E) (f.left.obj Q) (f.left.obj N)).inv\n  identity : ∀ {X : RingedTensorCorner.{u, w}} (h : RingedTensorEdge X X)\n    (a : RingedTensorModel X) (s : Identity h) (l : h.left ≅ 𝟭 X.mateDerived),\n    s.Normalized l → ∀ E Q : X.mateDerived,\n        (h.tensorComparison a a).hom.app (E, Q) ≫\n          X.tensor.map (Prod.mkHom (l.hom.app E) (l.hom.app Q)) =\n        l.hom.app (X.tensor.obj (E, Q))\n  composition : ∀ {X Y Z : RingedTensorCorner.{u, w}}\n    (f : RingedTensorEdge Y X) (g : RingedTensorEdge Z Y) (h : RingedTensorEdge Z X)\n    (a : RingedTensorModel X) (b : RingedTensorModel Y) (c : RingedTensorModel Z)\n    (s : Composition f g h) (l : h.left ≅ g.left ⋙ f.left),\n    s.Normalized l → ∀ E Q : Z.mateDerived,\n        l.hom.app (Z.tensor.obj (E, Q)) ≫\n            f.left.map ((g.tensorComparison c b).hom.app (E, Q)) ≫\n            (f.tensorComparison b a).hom.app (g.left.obj E, g.left.obj Q) =\n          (h.tensorComparison c a).hom.app (E, Q) ≫\n            X.tensor.map (Prod.mkHom (l.hom.app E) (l.hom.app Q))\n  sectionComparison : ∀ {X W : RingedTensorCorner.{u, w}}\n    (i : RingedTensorEdge W X) (p : RingedTensorEdge X W)\n    (a : RingedTensorModel X) (b : RingedTensorModel W) (s : Section i p)\n    (l : p.left ⋙ i.left ≅ 𝟭 X.mateDerived),\n    s.Normalized l → ∀ E Q : X.mateDerived,\n        i.left.map ((p.tensorComparison a b).hom.app (E, Q)) ≫\n            (i.tensorComparison b a).hom.app (p.left.obj E, p.left.obj Q) ≫\n            X.tensor.map (Prod.mkHom (l.hom.app E) (l.hom.app Q)) =\n          l.hom.app (X.tensor.obj (E, Q))\n",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU, 07A4, 0D6D and 0FPI; flat K-flat computation and canonical tensor comparisons"
+ },
+ "stmt_deps": [
+  "def-sfb-ringed-projection-coherence-data"
+ ],
+ "proof": [
+  {
+   "text": "restrict the signed total tensor to flat-term K-flat complexes. This class\nis closed under total tensor by the K-flat total tensor theorem. The homotopy\nquotient is full and essentially surjective, and its localization is the derived\ncategory by tensor descent. Descend the ordinary total associator and Koszul\nsymmetry, conjugated by each supplied representative tensor isomorphism. Their\nnaturality descends as well; the restriction formulas are exactly TensorConstraints.\nFor an edge, pullback preserves flat K-flat complexes and the canonical derived\ntensor comparison is fixed by its representative square. Apply ordinary cochain\npullback tensor coherence to a triple of representatives. Conjugating this\nidentity by the representative isomorphisms and the invertible pullback comparison\nmaps gives associativity. Resolve all three variables to obtain it for arbitrary\nobjects. For identity, composition and section, use the given normalization of l\non representatives. The insertion equations identify the ordinary module maps\nwith scalar association, or scalar contraction for identity and section. On\nhomogeneous pure tensors the two tensor paths insert the same units and multiply\nthe same scalars. The ordinary tensor universal property proves equality of these\nmaps; apply the total-complex functor and the derived quotient. The representative\nsquare for each tensor comparison then gives the displayed tensor equations on\npairs of flat K-flat complexes. Resolve both variables and use naturality to get\nthe equations everywhere. This argument constructs no derived comparison and uses\nno projection map or adjunction counit.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pur-cochain-pullback-tensor-coherence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-pur-cochain-pullback-tensor-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Flat K-flat localization and ordinary tensor coherence; structural part of lem-sfb-ringed-projection-tensor-composition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical derived pullback composition comparison isomorphism characterized on K-flat representatives",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+     "CategoryTheory.Functor.mapDerivedCategoryFactors",
+     "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app",
+     "CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac",
+     "CategoryTheory.Functor.mapDerivedCategorySingleFunctor",
+     "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app"
+    ],
+    "note": "Localization.liftNatIso and liftNatTrans_app supply generic descent; no exact recorded-presentation tensor-coherence theorem was returned."
+   },
+   "date": "2026-10-20",
+   "verdict": "No exact match. Use the generic localization API and the declared representative computations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturally isomorphic functors on a localization descend from an isomorphism on flat K-flat complexes",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Functor.IsLocalization.of_iso",
+     "CategoryTheory.Functor.leftDerivedNatIso",
+     "DerivedCategory.instIsIsoMapCochainComplexIntQ",
+     "CategoryTheory.Functor.rightDerivedNatIso",
+     "CategoryTheory.Localization.isoUniqFunctor",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc",
+     "CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh.congr_simp"
+    ],
+    "note": "Localization.liftNatIso and liftNatTrans_app supply generic descent; no exact recorded-presentation tensor-coherence theorem was returned."
+   },
+   "date": "2026-10-20",
+   "verdict": "No exact match. Use the generic localization API and the declared representative computations."
+  },
+  {
+   "tool": "grep",
+   "query": "leftDerivedNatIso|liftNatIso|quotientCompQhIso",
+   "results": {
+    "hits": 25,
+    "top": [
+     "Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean",
+     "Mathlib/CategoryTheory/Shift/Localization.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/CofibrantObjectHomotopy.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean",
+     "Mathlib/AlgebraicTopology/ModelCategory/FibrantObjectHomotopy.lean",
+     "Mathlib/Algebra/Homology/Localization.lean",
+     "Mathlib/Algebra/Homology/Localization.lean"
+    ],
+    "note": "Localization.liftNatIso and liftNatTrans_app supply generic descent; no exact recorded-presentation tensor-coherence theorem was returned."
+   },
+   "date": "2026-10-20",
+   "verdict": "No exact match. Use the generic localization API and the declared representative computations."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionTensorComposition",
+  "date": "2026-10-20",
+  "group": "V2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-ringed-projection-tensor-structure",
+   "place": "Tensor constraints and compatibility of normalized comparisons",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionTensorCompatibility",
+  "file": "lean/Sheaf/Paper/RingedProjectionTensorCompatibility.lean",
+  "declaration": "SheafOfModules.ProjectionCoherence.ringedProjectionTensorCompatibility",
+  "declarations": [
+   "SheafOfModules.ProjectionCoherence.TensorCompatibility",
+   "SheafOfModules.ProjectionCoherence.ringedProjectionTensorCompatibility"
+  ],
+  "statement": "theorem ringedProjectionTensorCompatibility : Nonempty (TensorCompatibility.{u, w})",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0d4be",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261020T131207-L-1256991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0d4be",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261020T131207-L-1256991",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to live; 17 defs moved verbatim into publicly re-exported RingedProjectionCoherenceData; 8 modules + 5 direct importers compile clean; sole new sorry TensorCompatibility checked true and used; axioms only pre-existing sorryAx (tensorComparison, wf_site_derived_tensor_descent) plus the new sorry'd node; nodes changed only proof/proof_deps/proof_origin/lean"
+ }
+}

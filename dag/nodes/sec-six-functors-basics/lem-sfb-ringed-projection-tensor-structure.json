@@ -1,0 +1,156 @@
+{
+ "id": "lem-sfb-ringed-projection-tensor-structure",
+ "kind": "statement",
+ "title": "Canonical tensor structure in arbitrary recorded presentations",
+ "statement": "For each recorded tensor presentation, the canonical signed constraints exist and the pullback tensor comparison respects associativity and the normalized identity, composition and section comparisons. The assertion is Nonempty TensorStructure, for the following structure:\n\nstructure TensorStructure where\n  constraints : ∀ (X : RingedTensorCorner.{u, w}) (a : RingedTensorModel X),\n    TensorConstraints X a\n  associativity : ∀ {X Y : RingedTensorCorner.{u, w}} (f : RingedTensorEdge Y X)\n    (a : RingedTensorModel X) (b : RingedTensorModel Y) (E Q N : Y.mateDerived),\n    f.left.map ((constraints Y b).associator E Q N).inv ≫\n        (f.tensorComparison b a).hom.app (Y.tensor.obj (E, Q), N) ≫\n        X.tensor.map (Prod.mkHom ((f.tensorComparison b a).hom.app (E, Q))\n          (𝟙 (f.left.obj N))) =\n      (f.tensorComparison b a).hom.app (E, Y.tensor.obj (Q, N)) ≫\n        X.tensor.map (Prod.mkHom (𝟙 (f.left.obj E))\n          ((f.tensorComparison b a).hom.app (Q, N))) ≫\n        ((constraints X a).associator (f.left.obj E) (f.left.obj Q) (f.left.obj N)).inv\n  identity : ∀ {X : RingedTensorCorner.{u, w}} (h : RingedTensorEdge X X)\n    (a : RingedTensorModel X) (s : Identity h),\n    ∃ l : h.left ≅ 𝟭 X.mateDerived, s.Normalized l ∧\n      ∀ E Q : X.mateDerived,\n        (h.tensorComparison a a).hom.app (E, Q) ≫\n          X.tensor.map (Prod.mkHom (l.hom.app E) (l.hom.app Q)) =\n        l.hom.app (X.tensor.obj (E, Q))\n  composition : ∀ {X Y Z : RingedTensorCorner.{u, w}}\n    (f : RingedTensorEdge Y X) (g : RingedTensorEdge Z Y) (h : RingedTensorEdge Z X)\n    (a : RingedTensorModel X) (b : RingedTensorModel Y) (c : RingedTensorModel Z)\n    (s : Composition f g h),\n    ∃ l : h.left ≅ g.left ⋙ f.left, s.Normalized l ∧\n      ∀ E Q : Z.mateDerived,\n        l.hom.app (Z.tensor.obj (E, Q)) ≫\n            f.left.map ((g.tensorComparison c b).hom.app (E, Q)) ≫\n            (f.tensorComparison b a).hom.app (g.left.obj E, g.left.obj Q) =\n          (h.tensorComparison c a).hom.app (E, Q) ≫\n            X.tensor.map (Prod.mkHom (l.hom.app E) (l.hom.app Q))\n  sectionComparison : ∀ {X W : RingedTensorCorner.{u, w}}\n    (i : RingedTensorEdge W X) (p : RingedTensorEdge X W)\n    (a : RingedTensorModel X) (b : RingedTensorModel W) (s : Section i p),\n    ∃ l : p.left ⋙ i.left ≅ 𝟭 X.mateDerived, s.Normalized l ∧\n      ∀ E Q : X.mateDerived,\n        i.left.map ((p.tensorComparison a b).hom.app (E, Q)) ≫\n            (i.tensorComparison b a).hom.app (p.left.obj E, p.left.obj Q) ≫\n            X.tensor.map (Prod.mkHom (l.hom.app E) (l.hom.app Q)) =\n          l.hom.app (X.tensor.obj (E, Q))\n",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU, 07A4, 0D6D and 0FPI; normalized tensor comparisons and descent through flat K-flat representatives"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-sfb-ringed-projection-coherence-data"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the tensor-compatibility structure and the independently constructed normalized pullback-comparison structure. Keep the former constraints and associativity. For each identity, composite and section, choose the comparison supplied by the latter, retain its normalization, and apply the corresponding tensor-compatibility equation to this normalized comparison. These constructor steps prove Nonempty TensorStructure.",
+   "uses": [
+    "lem-sfb-ringed-projection-pullback-comparisons",
+    "lem-sfb-ringed-projection-tensor-compatibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For tensorConstraints_involutive, prove involutivity of the signed total symmetry summand by summand: the two Koszul signs multiply to one and ordinary symmetry cancels. Apply the derived quotient functor. For flat K-flat representatives cancel the representative tensor isomorphism and use the two symmetry_representative equations. For arbitrary derived objects take flat-term K-flat resolutions of preimages under Q and transport the representative equation through the tensor of the resolution isomorphisms using symmetry_naturality.",
+   "uses": [
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-projection-pullback-comparisons",
+  "lem-sfb-ringed-projection-tensor-compatibility",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU, 07A4, 0D6D and 0FPI; combination of separately normalized pullback comparisons and tensor coherence"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projection formula map compatibility with composition of adjunctions naturality and associativity",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompNatTrans_app",
+     "CategoryTheory.Adjunction.Triple.map_rightToLeft_app"
+    ],
+    "note": "The returned adjunction-composition identities do not construct the normalized derived tensor constraints."
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact match; formal adjunction operations are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"projection\"",
+   "results": {
+    "hits": 0,
+    "top": []
+   },
+   "date": "2026-10-18",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap_comp|projection.*associat",
+   "results": {
+    "hits": 5,
+    "top": [
+     "Mathlib/Tactic/Simps/Basic.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Projections.lean"
+    ],
+    "note": "Also searched local WeilConjectures and Sheaf sources. ProjectionMapCompat has the abstract composition identity, but no normalized ringed derived constraints."
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula morphism is natural and compatible with composition, tensor associativity, and the identity adjunction",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Abelian.LeftResolution.π_naturality",
+     "CategoryTheory.Abelian.LeftResolution.π_naturality_assoc",
+     "CategoryTheory.SmallObject.πObj_naturality",
+     "CategoryTheory.SmallObject.πObj_naturality_assoc",
+     "CategoryTheory.Limits.Types.pi_map_π_apply",
+     "CategoryTheory.FreeMonoidalCategory.instMonoidalProject",
+     "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc",
+     "CategoryTheory.ShortComplex.leftHomologyπ_naturality'_assoc"
+    ]
+   },
+   "date": "2026-10-19",
+   "verdict": "Returned resolution and product-projection naturality lemmas, not the normalized derived projection coherence statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionTensorComposition",
+  "date": "2026-10-19",
+  "group": "V2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-ringed-projection-tensor-composition",
+   "place": "Canonical tensor constraints and normalized pullback comparisons, before taking mates",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionTensorStructure",
+  "file": "lean/Sheaf/Paper/RingedProjectionTensorStructure.lean",
+  "declaration": "SheafOfModules.ProjectionCoherence.ringedProjectionTensorStructure",
+  "declarations": [
+   "SheafOfModules.ProjectionCoherence.TensorStructure",
+   "SheafOfModules.ProjectionCoherence.ringedProjectionTensorStructure",
+   "SheafOfModules.ProjectionCoherence.tensorConstraints_involutive"
+  ],
+  "statement": "theorem ringedProjectionTensorStructure : Nonempty (TensorStructure.{u, w})",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0d4be",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261020T131207-L-1256991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0d4be",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261020T131207-L-1256991",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to live; 17 defs moved verbatim into publicly re-exported RingedProjectionCoherenceData; 8 modules + 5 direct importers compile clean; sole new sorry TensorCompatibility checked true and used; axioms only pre-existing sorryAx (tensorComparison, wf_site_derived_tensor_descent) plus the new sorry'd node; nodes changed only proof/proof_deps/proof_origin/lean"
+ }
+}

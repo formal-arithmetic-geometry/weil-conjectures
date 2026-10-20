@@ -1,0 +1,154 @@
+{
+ "id": "def-sfb-ringed-projection-coherence-data",
+ "kind": "definition",
+ "title": "Recorded data for tensor projection coherence",
+ "statement": "For a ringed tensor corner A as in [lem-weil-pbc-ringed-projection-mate-exact], let total(A,P,Q) be the signed direct-sum total complex of P tensor Q; its associator is reassociation without a sign and its symmetry on bidegree (p,q) is the swap with coefficient (-1)^(pq). For a representative tensor model a, TensorConstraints(A,a) consists of natural associator and symmetry isomorphisms for A.tensor whose components on flat-term K-flat representatives are induced by these total-complex maps via a.representative. For ringed tensor edges, Composition, Identity and Section record ordinary inverse-image and module-pullback comparison isomorphisms compatible with scalar insertion; their Normalized predicates specify the induced derived comparison on every flat-term K-flat complex, using the canonical derived pullback comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The right-adjoint comparisons are adjunction conjugates of the inverse left comparisons, using [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Define compositeProjection by transposing the composite tensor comparison followed by the composite counit, identityProjection by transposing the identity, leftProjection by conjugating the projection of [lem-weil-pbc-ringed-projection-mate-exact] with tensor symmetry, and sectionComposite by the successive leftProjection maps with the section comparisons inserted. These are the explicit constructions in the parent projection-coherence statement; no projection equality is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YU, 07A4, 0D6D and 0FPI; normalized tensor comparisons and descent through flat K-flat representatives"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projection formula map compatibility with composition of adjunctions naturality and associativity",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompNatTrans_app",
+     "CategoryTheory.Adjunction.Triple.map_rightToLeft_app"
+    ],
+    "note": "The returned adjunction-composition identities do not construct the normalized derived tensor constraints."
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact match; formal adjunction operations are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"projection\"",
+   "results": {
+    "hits": 0,
+    "top": []
+   },
+   "date": "2026-10-18",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap_comp|projection.*associat",
+   "results": {
+    "hits": 5,
+    "top": [
+     "Mathlib/Tactic/Simps/Basic.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Projections.lean"
+    ],
+    "note": "Also searched local WeilConjectures and Sheaf sources. ProjectionMapCompat has the abstract composition identity, but no normalized ringed derived constraints."
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula morphism is natural and compatible with composition, tensor associativity, and the identity adjunction",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Abelian.LeftResolution.π_naturality",
+     "CategoryTheory.Abelian.LeftResolution.π_naturality_assoc",
+     "CategoryTheory.SmallObject.πObj_naturality",
+     "CategoryTheory.SmallObject.πObj_naturality_assoc",
+     "CategoryTheory.Limits.Types.pi_map_π_apply",
+     "CategoryTheory.FreeMonoidalCategory.instMonoidalProject",
+     "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc",
+     "CategoryTheory.ShortComplex.leftHomologyπ_naturality'_assoc"
+    ]
+   },
+   "date": "2026-10-19",
+   "verdict": "Returned resolution and product-projection naturality lemmas, not the normalized derived projection coherence statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionTensorComposition",
+  "date": "2026-10-19",
+  "group": "V2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-ringed-projection-tensor-composition",
+   "place": "Unchanged statement data and explicit total tensor constructions",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionCoherenceData",
+  "file": "lean/Sheaf/Paper/RingedProjectionCoherenceData.lean",
+  "declaration": "SheafOfModules.ProjectionCoherence.total",
+  "statement": "abbrev total (A : RingedTensorCorner.{u, w}) (P Q : CochainComplex A.mateModules ℤ)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-19",
+  "declarations": [
+   "SheafOfModules.ProjectionCoherence.total",
+   "SheafOfModules.ProjectionCoherence.totalAssociator",
+   "SheafOfModules.ProjectionCoherence.totalSymmetry",
+   "SheafOfModules.ProjectionCoherence.TensorConstraints",
+   "SheafOfModules.ProjectionCoherence.compositeProjection",
+   "SheafOfModules.ProjectionCoherence.identityProjection",
+   "SheafOfModules.ProjectionCoherence.Section",
+   "SheafOfModules.ProjectionCoherence.Section.Normalized",
+   "SheafOfModules.ProjectionCoherence.sectionRight",
+   "SheafOfModules.ProjectionCoherence.leftProjection",
+   "SheafOfModules.ProjectionCoherence.sectionComposite",
+   "SheafOfModules.ProjectionCoherence.Composition",
+   "SheafOfModules.ProjectionCoherence.Composition.Normalized",
+   "SheafOfModules.ProjectionCoherence.compositionRight",
+   "SheafOfModules.ProjectionCoherence.Identity",
+   "SheafOfModules.ProjectionCoherence.Identity.Normalized",
+   "SheafOfModules.ProjectionCoherence.identityRight"
+  ]
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0d4be",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261020T131207-L-1256991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0d4be",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261020T131207-L-1256991",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to live; 17 defs moved verbatim into publicly re-exported RingedProjectionCoherenceData; 8 modules + 5 direct importers compile clean; sole new sorry TensorCompatibility checked true and used; axioms only pre-existing sorryAx (tensorComparison, wf_site_derived_tensor_descent) plus the new sorry'd node; nodes changed only proof/proof_deps/proof_origin/lean"
+ }
+}

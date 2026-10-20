@@ -1,0 +1,143 @@
+{
+ "id": "lem-sfb-ringed-projection-tensor-associativity",
+ "kind": "statement",
+ "title": "Canonical tensor constraints and associativity for one projection mate",
+ "statement": "Canonical tensor constraints and associativity for one projection mate. In the existing RingedTensorCorner, RingedTensorModel and RingedTensorEdge interfaces, with TensorConstraints and the normalized comparison predicates of lem-sfb-ringed-projection-tensor-composition, assert exactly the following independent part of its coherence calculation:\n\ntheorem ringedProjectionTensorAssociativity\n    {X Y : RingedTensorCorner.{u, w}} (f : RingedTensorEdge Y X)\n    (a : RingedTensorModel X) (b : RingedTensorModel Y) :\n    ∃ (tx : TensorConstraints X a) (ty : TensorConstraints Y b),\n      (∀ (E : X.mateDerived) (Q T : Y.mateDerived),\n        f.projection b a E (Y.tensor.obj (Q, T)) ≫\n            f.right.map (X.tensor.map\n              (Prod.mkHom (𝟙 E) ((f.tensorComparison b a).hom.app (Q, T)))) ≫\n            f.right.map (tx.associator E (f.left.obj Q) (f.left.obj T)).inv =\n          (ty.associator (f.right.obj E) Q T).inv ≫\n            Y.tensor.map (Prod.mkHom (f.projection b a E Q) (𝟙 T)) ≫\n            f.projection b a (X.tensor.obj (E, f.left.obj Q)) T)",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0B56 (equation-projection-formula-map), 0DV0 (categories.tex, lemma-compose-counits); formal tensor-associativity and section specialization of the canonical projection mate"
+ },
+ "stmt_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-sfb-ringed-projection-coherence-data"
+ ],
+ "proof": [
+  {
+   "text": "Choose the canonical constraints from ringedProjectionTensorStructure. Transpose the two paths through the given adjunction. The two counit equations and tensorator naturality reduce the right path to the tensor of the counit and two identities. Use associator naturality to move the counit, then the structural associativity equation identifies the paths. Injectivity of the Hom equivalence completes the argument.",
+   "uses": [
+    "lem-sfb-ringed-projection-tensor-structure",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-ringed-projection-tensor-structure",
+  "lem-weil-pbc-adjunct-counit-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0B56 and categories.tex Tag 0DV0; V2 formal mate and symmetry calculations"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "projection formula map compatibility with composition of adjunctions naturality and associativity",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Adjunction.leftAdjointCompNatTrans_app",
+     "CategoryTheory.Adjunction.Triple.map_rightToLeft_app"
+    ],
+    "note": "The returned adjunction-composition identities do not construct the normalized derived tensor constraints."
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact match; formal adjunction operations are used in the parent proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"projection\"",
+   "results": {
+    "hits": 0,
+    "top": []
+   },
+   "date": "2026-10-18",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap_comp|projection.*associat",
+   "results": {
+    "hits": 5,
+    "top": [
+     "Mathlib/Tactic/Simps/Basic.lean",
+     "Mathlib/AlgebraicTopology/DoldKan/Projections.lean"
+    ],
+    "note": "Also searched local WeilConjectures and Sheaf sources. ProjectionMapCompat has the abstract composition identity, but no normalized ringed derived constraints."
+   },
+   "date": "2026-10-18",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula morphism is natural and compatible with composition, tensor associativity, and the identity adjunction",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.Abelian.LeftResolution.π_naturality",
+     "CategoryTheory.Abelian.LeftResolution.π_naturality_assoc",
+     "CategoryTheory.SmallObject.πObj_naturality",
+     "CategoryTheory.SmallObject.πObj_naturality_assoc",
+     "CategoryTheory.Limits.Types.pi_map_π_apply",
+     "CategoryTheory.FreeMonoidalCategory.instMonoidalProject",
+     "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc",
+     "CategoryTheory.ShortComplex.leftHomologyπ_naturality'_assoc"
+    ]
+   },
+   "date": "2026-10-19",
+   "verdict": "Returned resolution and product-projection naturality lemmas, not the normalized derived projection coherence statements."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RingedProjectionTensorComposition",
+  "date": "2026-10-18",
+  "group": "V2"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-p1-adjunction-rational",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-ringed-projection-tensor-composition",
+   "place": "Canonical tensor constraints and associativity for one projection mate",
+   "via": []
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RingedProjectionTensorAssociativity",
+  "file": "lean/Sheaf/Paper/RingedProjectionTensorAssociativity.lean",
+  "declaration": "SheafOfModules.ProjectionCoherence.ringedProjectionTensorAssociativity",
+  "statement": "theorem ringedProjectionTensorAssociativity\n    {X Y : RingedTensorCorner.{u, w}} (f : RingedTensorEdge Y X)\n    (a : RingedTensorModel X) (b : RingedTensorModel Y) :\n    ∃ (tx : TensorConstraints X a) (ty : TensorConstraints Y b),\n      (∀ (E : X.mateDerived) (Q T : Y.mateDerived),\n        f.projection b a E (Y.tensor.obj (Q, T)) ≫\n            f.right.map (X.tensor.map\n              (Prod.mkHom (𝟙 E) ((f.tensorComparison b a).hom.app (Q, T)))) ≫\n            f.right.map (tx.associator E (f.left.obj Q) (f.left.obj T)).inv =\n          (ty.associator (f.right.obj E) Q T).inv ≫\n            Y.tensor.map (Prod.mkHom (f.projection b a E Q) (𝟙 T)) ≫\n            f.projection b a (X.tensor.obj (E, f.left.obj Q)) T)",
+  "branch": "sheaf-dag",
+  "by": "V2",
+  "date": "2026-10-18"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0d4be",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261020T131207-L-1256991",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0d4be",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261020T131207-L-1256991",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to live; 17 defs moved verbatim into publicly re-exported RingedProjectionCoherenceData; 8 modules + 5 direct importers compile clean; sole new sorry TensorCompatibility checked true and used; axioms only pre-existing sorryAx (tensorComparison, wf_site_derived_tensor_descent) plus the new sorry'd node; nodes changed only proof/proof_deps/proof_origin/lean"
+ }
+}

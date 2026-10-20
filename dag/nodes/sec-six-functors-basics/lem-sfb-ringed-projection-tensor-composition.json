@@ -20,75 +20,32 @@
  ],
  "proof": [
   {
-   "text": "Put $P_h=Lh^*$, $R_h=Rh_*$, $t_h:P_h(A\\otimes B)\\cong P_hA\\otimes P_hB$, suppressing the superscript $L$ on tensors. Use [lem-sfb-ringed-derived-monoidal-comparisons] for its associator, symmetry, identity and adjunction-compatible composition comparisons. Let $b_h(A,E)$ denote the adjunction bijection $\\operatorname{Hom}(A,R_hE)\\cong\\operatorname{Hom}(P_hA,E)$. By [lem-weil-pbc-adjunct-counit-identity], the defining property of $\\pi$ is the equation\n$$\\varepsilon_{h,E\\otimes P_hQ}\\circ P_h(\\pi_{h,E,Q})=(\\varepsilon_{h,E}\\otimes1)\\circ t_{h;R_hE,Q}.\\tag{*}$$\nThe bijection makes this equation a uniqueness criterion for $\\pi$. These constructions apply to arbitrary unbounded $E,Q$.",
+   "text": "Use the single-edge tensor associativity theorem to obtain tx and ty and the tensor equation. Use the canonical normalization theorem for identity and composition and the section-specialization theorem for the last clause. Prove naturality for every edge by transposing both paths: tensor-comparison naturality and counit naturality identify their transposes. Prove composition by transposing through g then f, applying tensor-comparison naturality, and expanding the composite counit. Composite naturality follows by the two edge naturality identities and functoriality. The identity adjunction acts by the identity Hom equivalence. Assemble the nine clauses without changing any signature.",
    "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-adjunct-counit-identity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map); canonical adjunction and tensor comparisons"
-   }
-  },
-  {
-   "text": "For $a:E\\to E'$ and $b:Q\\to Q'$, transpose the two naturality composites. Naturality of the counit gives $a\\varepsilon_{h,E}=\\varepsilon_{h,E'}P_hR_h(a)$, and naturality of $t_h$ gives $t_hP_h(R_h(a)\\otimes b)=(P_hR_h(a)\\otimes P_h(b))t_h$. Hence both transposes are $(a\\varepsilon_{h,E}\\otimes P_h(b))t_h$. Injectivity of $b_h$ proves naturality in both variables. For $h=\\mathrm{id}$ the comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] identify $P_h,R_h,t_h,\\varepsilon_h$ with identities. Equation (*) then has right side $1$, and its unique adjunct is $1$.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-adjunct-counit-identity"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map): naturality and identity by the defining adjunction"
-   }
-  },
-  {
-   "text": "Fix $f$, and abbreviate $P=P_f$, $R=R_f$, $t=t_f$, $\\varepsilon=\\varepsilon_f$. Identify parenthesizations by the associators. Set $B=E\\otimes PQ$ and $C=B\\otimes PT$. The transpose of the right side of the tensor identity is\n$$\\varepsilon_C P(\\pi_{f,B,T})P(\\pi_{f,E,Q}\\otimes1_T)\n=(\\varepsilon_B\\otimes1_{PT})t_{RB,T}P(\\pi_{f,E,Q}\\otimes1_T)\n=((\\varepsilon_B P\\pi_{f,E,Q})\\otimes1_{PT})t_{RE\\otimes Q,T}\n=(\\varepsilon_E\\otimes1_{PQ}\\otimes1_{PT})(t_{RE,Q}\\otimes1_{PT})t_{RE\\otimes Q,T}.$$\nThe first and third equalities are (*); the second is naturality of $t$. The associativity coherence in [lem-sfb-ringed-derived-monoidal-comparisons] identifies the last expression with\n$$(1_E\\otimes t_{Q,T})(\\varepsilon_E\\otimes1_{P(Q\\otimes T)})t_{RE,Q\\otimes T}.$$\nThis is the transpose of $R(1_E\\otimes t_{Q,T})\\pi_{f,E,Q\\otimes T}$, by (*) and counit naturality. Injectivity of $b_f$ gives exactly the first identity, including the target comparison $R(1_E\\otimes t_{Q,T})$.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-weil-pbc-adjunct-counit-identity"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map): explicit tensor associativity calculation"
-   }
-  },
-  {
-   "text": "For composition use the comparisons of [lem-sfb-ringed-derived-monoidal-comparisons] to write $P_{gf}=P_fP_g$, $R_{gf}=R_gR_f$, $t_{gf}=t_f\\circ P_f(t_g)$ and $\\varepsilon_{gf}=\\varepsilon_f\\circ P_f(\\varepsilon_g)$. Put $V=E\\otimes P_fP_gQ$. Transpose the proposed composite $R_g(\\pi_{f,E,P_gQ})\\pi_{g,R_fE,Q}$ first through $P_g\\dashv R_g$. By counit naturality and (*) its transpose is\n$$\\pi_{f,E,P_gQ}\\circ(\\varepsilon_{g,R_fE}\\otimes1_{P_gQ})\\circ t_{g;R_gR_fE,Q}.$$\nTranspose this through $P_f\\dashv R_f$. By (*) and naturality of $t_f$, the result is\n$$(\\varepsilon_{f,E}\\otimes1)\\,t_{f;R_fE,P_gQ}\\,P_f(\\varepsilon_{g,R_fE}\\otimes1)\\,P_f(t_{g;R_gR_fE,Q})\n=(\\varepsilon_{f,E}P_f\\varepsilon_{g,R_fE}\\otimes1)\\,t_{f;P_gR_gR_fE,P_gQ}\\,P_f(t_{g;R_gR_fE,Q}).$$\nThe normalized counit and monoidal comparison equations identify this with $(\\varepsilon_{gf,E}\\otimes1)t_{gf;R_{gf}E,Q}$. It is the transpose of $\\pi_{gf,E,Q}$ by (*). The composite Hom bijection in [def-weil-pbc-composite-adjunction] is injective, proving the second identity for the specified canonical comparisons.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sfb-ringed-projection-tensor-associativity",
+    "lem-sfb-ringed-projection-canonical-normalization",
+    "lem-sfb-ringed-projection-section-specialization",
     "lem-weil-pbc-adjunct-counit-identity",
     "def-weil-pbc-composite-adjunction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0B56 (equation-projection-formula-map), 0D6D/0D6E; Categories Tag 0DV0 (lemma-compose-counits): successive transposition"
-   }
-  },
-  {
-   "text": "For $i:X\\to W$, $p:W\\to X$, first use the order $V\\otimes M$ for the source. Apply the composition identity just proved with $f=i$, $g=p$, $E=V$, $Q=M$:\n$$R_p(\\pi_{i,V,P_pM})\\circ\\pi_{p,R_iV,M}=\\pi_{pi,V,M}.$$\nThe specified ringed isomorphism $pi\\cong\\mathrm{id}_X$ induces the monoidal and adjunction-compatible comparisons of [lem-sfb-ringed-derived-monoidal-comparisons]. Substitution in (*) therefore identifies $\\pi_{pi,V,M}$ with $\\pi_{\\mathrm{id},V,M}=1_{V\\otimes M}$. To return to the displayed order in the statement, let $\\beta$ denote tensor symmetry. The left-ordered projection is, by definition,\n$$\\widetilde\\pi_{h,A,B}=R_h(\\beta_{B,P_hA})\\circ\\pi_{h,B,A}\\circ\\beta_{A,R_hB}.$$\nThe displayed composite is thus $\\beta_{V,M}\\circ\\pi_{pi,V,M}\\circ\\beta_{M,V}$. Naturality moves the inner symmetries across $R_p$ and $R_i$, and the two adjacent symmetries on $R_iV\\otimes P_pM$ cancel; the final symmetry under $R_pR_i$ becomes $\\beta_{V,M}$ under the comparisons. Since $\\beta_{V,M}\\beta_{M,V}=1$, this composite is $1_{M\\otimes V}$. Only the proved identities and symmetry were used; no projection map was inverted.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map): section specialization, with tensor symmetry"
+    "place": "Tags 0B56 (equation-projection-formula-map), 0DV0 (categories.tex, lemma-compose-counits); formal tensor-associativity and section specialization of the canonical projection mate"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-ringed-projection-tensor-associativity",
+  "lem-sfb-ringed-projection-canonical-normalization",
+  "lem-sfb-ringed-projection-section-specialization",
   "lem-weil-pbc-adjunct-counit-identity",
   "def-weil-pbc-composite-adjunction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0B56: formal coherence calculation from the canonical projection mate, with categories.tex Tag 0DV0 for composite counits"
+  "place": "Tag 0B56 and categories.tex Tag 0DV0; V2: formal naturality and composite-mate calculations, with three independent canonical-coherence subarguments"
  },
  "mathlib_searches": [
   {
@@ -312,24 +269,7 @@
   "module": "Sheaf.Paper.RingedProjectionTensorComposition",
   "declaration": "SheafOfModules.ProjectionCoherence.ringedProjectionTensorComposition",
   "declarations": [
-   "SheafOfModules.ProjectionCoherence.total",
-   "SheafOfModules.ProjectionCoherence.totalAssociator",
-   "SheafOfModules.ProjectionCoherence.totalSymmetry",
-   "SheafOfModules.ProjectionCoherence.TensorConstraints",
-   "SheafOfModules.ProjectionCoherence.compositeProjection",
-   "SheafOfModules.ProjectionCoherence.identityProjection",
-   "SheafOfModules.ProjectionCoherence.Section",
-   "SheafOfModules.ProjectionCoherence.Section.Normalized",
-   "SheafOfModules.ProjectionCoherence.sectionRight",
-   "SheafOfModules.ProjectionCoherence.leftProjection",
-   "SheafOfModules.ProjectionCoherence.sectionComposite",
-   "SheafOfModules.ProjectionCoherence.ringedProjectionTensorComposition",
-   "SheafOfModules.ProjectionCoherence.Composition",
-   "SheafOfModules.ProjectionCoherence.Composition.Normalized",
-   "SheafOfModules.ProjectionCoherence.compositionRight",
-   "SheafOfModules.ProjectionCoherence.Identity",
-   "SheafOfModules.ProjectionCoherence.Identity.Normalized",
-   "SheafOfModules.ProjectionCoherence.identityRight"
+   "SheafOfModules.ProjectionCoherence.ringedProjectionTensorComposition"
   ],
   "file": "lean/Sheaf/Paper/RingedProjectionTensorComposition.lean",
   "statement": "theorem ringedProjectionTensorComposition {X Y Z : RingedTensorCorner.{u, w}} (f : RingedTensorEdge Y X) (g : RingedTensorEdge Z Y) (a : RingedTensorModel X) (b : RingedTensorModel Y) (c : RingedTensorModel Z) : ∃ (tx : TensorConstraints X a) (ty : TensorConstraints Y b), (∀ (E E' : X.mateDerived) (Q Q' : Y.mateDerived) (v : E ⟶ E') (z : Q ⟶ Q'), Y.tensor.map (Prod.mkHom (f.right.map v) z) ≫ f.projection b a E' Q' = f.projection b a E Q ≫ f.right.map (X.tensor.map (Prod.mkHom v (f.left.map z)))) ∧ (∀ (E E' : Y.mateDerived) (Q Q' : Z.mateDerived) (v : E ⟶ E') (z : Q ⟶ Q'), Z.tensor.map (Prod.mkHom (g.right.map v) z) ≫ g.projection c b E' Q' = g.projection c b E Q ≫ g.right.map (Y.tensor.map (Prod.mkHom v (g.left.map z)))) ∧ (∀ (E E' : X.mateDerived) (Q Q' : Z.mateDerived) (v : E ⟶ E') (z : Q ⟶ Q'), Z.tensor.map (Prod.mkHom (g.right.map (f.right.map v)) z) ≫ compositeProjection f g a b c E' Q' = compositeProjection f g a b c E Q ≫ g.right.map (f.right.map (X.tensor.map (Prod.mkHom v (f.left.map (g.left.map z)))))) ∧ (∀ (E Q : X.mateDerived), identityProjection X E Q = 𝟙 (X.tensor.obj (E, Q))) ∧ (∀ (h : RingedTensorEdge X X) (s : Identity h), ∃ l : h.left ≅ 𝟭 X.mateDerived, s.Normalized l ∧ ∀ (E Q : X.mateDerived), h.projection a a E Q ≫ (identityRight h l).hom.app (X.tensor.obj (E, h.left.obj Q)) ≫ X.tensor.map (Prod.mkHom (𝟙 E) (l.hom.app Q)) = X.tensor.map (Prod.mkHom ((identityRight h l).hom.app E) (𝟙 Q))) ∧ (∀ (E : X.mateDerived) (Q T : Y.mateDerived), f.projection b a E (Y.tensor.obj (Q, T)) ≫ f.right.map (X.tensor.map (Prod.mkHom (𝟙 E) ((f.tensorComparison b a).hom.app (Q, T)))) ≫ f.right.map (tx.associator E (f.left.obj Q) (f.left.obj T)).inv = (ty.associator (f.right.obj E) Q T).inv ≫ Y.tensor.map (Prod.mkHom (f.projection b a E Q) (𝟙 T)) ≫ f.projection b a (X.tensor.obj (E, f.left.obj Q)) T) ∧ (∀ (E : X.mateDerived) (Q : Z.mateDerived), compositeProjection f g a b c E Q = g.projection c b (f.right.obj E) Q ≫ g.right.map (f.projection b a E (g.left.obj Q))) ∧ (∀ (h : RingedTensorEdge Z X) (s : Composition f g h), ∃ l : h.left ≅ g.left ⋙ f.left, s.Normalized l ∧ (∀ (E E' : X.mateDerived) (Q Q' : Z.mateDerived) (v : E ⟶ E') (z : Q ⟶ Q'), Z.tensor.map (Prod.mkHom (h.right.map v) z) ≫ h.projection c a E' Q' = h.projection c a E Q ≫ h.right.map (X.tensor.map (Prod.mkHom v (h.left.map z)))) ∧ (∀ (E : X.mateDerived) (Q : Z.mateDerived), h.projection c a E Q ≫ (compositionRight f g h l).hom.app (X.tensor.obj (E, h.left.obj Q)) ≫ g.right.map (f.right.map (X.tensor.map (Prod.mkHom (𝟙 E) (l.hom.app Q)))) = Z.tensor.map (Prod.mkHom ((compositionRight f g h l).hom.app E) (𝟙 Q)) ≫ g.projection c b (f.right.obj E) Q ≫ g.right.map (f.projection b a E (g.left.obj Q)))) ∧ (∀ (W : RingedTensorCorner.{u, w}) (i : RingedTensorEdge W X) (p : RingedTensorEdge X W) (d : RingedTensorModel W) (s : Section i p), ∃ (tw : TensorConstraints W d) (l : p.left ⋙ i.left ≅ 𝟭 X.mateDerived), s.Normalized l ∧ ∀ M V : X.mateDerived, sectionComposite i p a d tx tw l M V = 𝟙 (X.tensor.obj (M, V)))",
@@ -347,5 +287,15 @@
   "group": "Q48",
   "result": "fix",
   "note": "Every clause of the node matches the Lean (naturality for f, g and gf; the identity case for any actual identity morphism; tensor identity; composition identity in normal form and for an actual composite h; section composite with symmetries); I checked the types of each arrow. RingedTensorEdge.projection is the Stacks 0B56 map; statement field verbatim; one sorry; no hollow definitions, no extra hypotheses, universes u,w bound; no duplicate associator or symmetry in the project. Finding (repaired): TensorConstraints.associator and .symmetry had no naturality, so outside literal flat K-flat representative objects (e.g. Rf E in the tensor identity) they were arbitrary isos chosen by the existential, which weakened the tensor and section clauses relative to the canonical associators. fixes/RingedProjectionTensorComposition.lean adds associator_naturality and symmetry_naturality and corrects the docstring (Stacks 06YS); the theorem signature and node record are unchanged. Compiles clean through nt_compile.py: delivered module 38.5 s, fixed module 55.0/52.8/46.9 s, under load 150-230 with some 60 s timeouts."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "C-0d4be",
+  "group": "V2",
+  "result": "pass",
+  "landing": "20261020T131207-L-1256991",
+  "kind": "interface",
+  "note": "independent cc review: item theorem byte-identical to live; 17 defs moved verbatim into publicly re-exported RingedProjectionCoherenceData; 8 modules + 5 direct importers compile clean; sole new sorry TensorCompatibility checked true and used; axioms only pre-existing sorryAx (tensorComparison, wf_site_derived_tensor_descent) plus the new sorry'd node; nodes changed only proof/proof_deps/proof_origin/lean"
  }
 }
