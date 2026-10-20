@@ -14,20 +14,7 @@
  ],
  "proof": [
   {
-   "text": "For a pro-etale object V over Y and a set sheaf G over X, adjunction and Yoneda identify Hom(f^*hV,G) with G(V times_Y X). These identifications are natural in both V and G, so representable maps pull back to their base changes.",
-   "uses": [
-    "det-pe-topos-functoriality-site",
-    "det-pe-topos-functoriality-inverse-image",
-    "lem-galois-yoneda-hom-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
-    "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)"
-   }
-  },
-  {
-   "text": "Associativity of fibre products identifies the base change of Y[S] with X[S], naturally in the profinite set S. For finite labels the representable identification agrees with the canonical constant-sheaf identification. Both agree on constant labels: naturality in a singleton-to-label map sends a label to its summand inclusion, and the singleton test object is terminal. Sheafification extends equality on these constants. Forgetting the additive structure uses the canonical constant/forgetful comparison, which preserves the sheafification unit.",
+   "text": "The constant-sheaf pullback comparison preserves the sheafification unit: apply uniqueness of left adjoints to the constant/global-sections adjunction, and evaluate its global-sections comparison at the terminal object. The constant-ring/underlying-abelian-group comparisons also preserve this unit. Naturality of each finite-label representation for a singleton-to-label map identifies a constant label with its summand inclusion; the singleton relative test object is terminal because the test-object functor and scheme base change preserve finite limits.",
    "uses": [
     "sk-def-sfb-pullback-from-point",
     "det-prop-sfb-qlbar-colimit-x-integral-limit"
@@ -39,13 +26,25 @@
    }
   },
   {
-   "text": "The inverse-image compositor is the adjunction mate of the direct-image compositor. The latter is restriction along fibre-product associativity. Hence alpha_f carries the unit section indexed by g on Y[S] to that indexed by g on X[S]. Applying the two assumed mate identities makes the finite represented values equal to X[g followed by q]. Cancel the finite representation. Extensionality on every profinite S and every continuous g proves equality of mates; injectivity of the point adjunction proves the required equality of sheaf maps. Empty test objects and an empty base cause no exception.",
+   "text": "Compare the adjunction mate of the finite coefficient pullback isomorphism with base change of represented finite labels. They agree on constant labels by the preceding unit calculation and naturality of fibre-product associativity. The map from the constant presheaf into its sheafification is locally surjective, and the target represented presheaf is a sheaf. Separatedness therefore extends this equality to every section. This avoids constructing an inverse-image isomorphism for arbitrary representables.",
    "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
+    "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)"
+   }
+  },
+  {
+   "text": "Use the existing unit_comp_lowerStar_map_unit_comp_upperStarComp identity for the morphisms to Spec Z. Evaluate at a profinite test object and use the component formula for the direct-image compositor: the mate of upperStarFromPointComp is the point-adjunction unit followed by restriction along fibre-product associativity. Take mates of the required equality under the composite point and f adjunctions. On each continuous section g, apply the finite-label equality from Step 2, the two assumed formulas, and naturality of the same fibre-product comparison for g followed by q. Injectivity of the finite representation and of the composite adjunction finishes. Empty profinite objects and empty schemes need no special cases.",
+   "uses": [
+    "sk-def-sfb-pullback-from-point",
+    "det-prop-sfb-qlbar-colimit-x-integral-limit",
     "sk-def-sfb-pullback-from-point-comp",
     "def-sfb-finite-upper-star-comp",
-    "def-sfb-finite-lower-star-comp",
-    "sk-def-sfb-pullback-from-point",
-    "lem-galois-yoneda-hom-bijection"
+    "def-sfb-finite-lower-star-comp"
    ],
    "elementary": false,
    "source": {
@@ -58,7 +57,7 @@
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-qlbar-colimit-x/sk-prop-sfb-qlbar-colimit-x-pullback.proof.md",
   "place": "second paragraph, finite quotient maps and the adjunction-mate check (parent proof Steps 1--2)",
-  "note": "E6: isolate the genuinely finite-level mate calculation from the integral-limit conjugation and cone transport. No choice of integral comparison or limiting cone occurs in this statement."
+  "note": "T4: proved by constant-unit compatibility, local surjectivity of sheafification, and the existing point/compositor coherence identity. No auxiliary sorry statements and no arbitrary-representable inverse-image construction."
  },
  "mathlib_searches": [
   {
@@ -124,9 +123,6 @@
   "date": "2026-10-19"
  },
  "proof_deps": [
-  "det-pe-topos-functoriality-site",
-  "det-pe-topos-functoriality-inverse-image",
-  "lem-galois-yoneda-hom-bijection",
   "sk-def-sfb-pullback-from-point",
   "det-prop-sfb-qlbar-colimit-x-integral-limit",
   "sk-def-sfb-pullback-from-point-comp",
@@ -146,11 +142,11 @@
  "reviewed_proof": {
   "date": "2026-10-20",
   "by": "L",
-  "reviewer": "C-90615",
-  "group": "E6",
+  "reviewer": "COMPILER",
+  "group": "T4",
   "result": "pass",
-  "landing": "20261020T051219-L-1596947",
+  "landing": "20261020T211830-L-3508553",
   "kind": "interface",
-  "note": "independent cc review: delivered item proof + new finite-level sorry lemma vs node det-prop-sfb-qlbar-colimit-x-pullback / new node lem-sfb-finite-reduction-pullback, verbatim relocation vs change record, 3 direct importers compiled"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
