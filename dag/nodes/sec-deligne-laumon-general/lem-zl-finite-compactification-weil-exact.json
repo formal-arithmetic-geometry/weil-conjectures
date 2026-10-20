@@ -1,0 +1,160 @@
+{
+ "id": "lem-zl-finite-compactification-weil-exact",
+ "kind": "statement",
+ "title": "Exact Weil compact support for a finite compactification",
+ "statement": "Let D be a finite-field datum [def-weil-finite-field-fiber], l a prime distinct from its characteristic, and Ω any algebraic closure of Q_l. Let f₀:X₀→Y₀ be a morphism between finite-type D.k₀-schemes, with Y₀ quasi-separated. Supply a compactification c=(j,p) [def-zl-weil-compact-support-cohomology] whose proper part p is finite. In the actual common-stage constructible Weil hearts [def-weil-weil-sheaf-complex], every positive higher image Rⁿp_*j!F is zero. There is an additive functor T between these hearts which preserves finite limits and finite colimits and whose value on each F is isomorphic to the specified R⁰p_*j!F. No absolute separatedness or complex embedding is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "clause (1), exact extension by zero followed by exact finite direct image; parent DAG Steps 2--6"
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-weil-sheaf-complex",
+  "def-zl-weil-compact-support-cohomology",
+  "def-weil-finite-integral-morphism"
+ ],
+ "proof": [
+  {
+   "text": "The normalized Yoneda ind embedding of the actual constructible Weil heart is exact. The small-presentation functor is essentially surjective by transporting a carrier and its invertible Weil arrow through AsSmall. Its full faithfulness follows by cancelling the faithful Yoneda fixed-pair functor from the already fully faithful recorded embedding. Hence it is an equivalence. The ind Frobenius functor is exact; its Yoneda-unit comparison and reflection of finite limits and colimits give exactness of the small Frobenius functor. Exactness of Yoneda and the fixed-pair transport now give exactness of the recorded embedding.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply finite direct-image exactness on equivariant ind-sheaves to the proper part p of the supplied finite compactification. Its left exactness follows from its specified right-adjoint construction. Open extension is exact by def-zl-weil-ind-sheaf-category, so composing the source embedding, open extension and p_* gives an exact functor T to the target ambient ind-category.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-zl-finite-weil-ind-push-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The right-derived degree-zero isomorphism identifies T(F) with R^0 p_* j! F. The specified representability theorem in def-zl-weil-compact-support-cohomology puts this value in the essential image of the target embedding. Lift T to that image by full faithfulness. The lift composed with the embedding is naturally isomorphic to T, so reflection of finite limits and colimits makes the lift exact and additive. The representation comparison gives the required isomorphisms with each specified higher image in degree zero.",
+   "uses": [
+    "def-zl-weil-compact-support-cohomology",
+    "def-zl-weil-ind-sheaf-category"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For i>0, compute R^i p_* on an injective resolution. Exactness of p_* identifies the cohomology of its image with its image of cohomology, which is zero in positive degrees. The recorded representation isomorphism and faithfulness of the target embedding detect the vanishing of the specified higher compact-support image.",
+   "uses": [
+    "def-zl-weil-compact-support-cohomology",
+    "def-zl-weil-ind-sheaf-category",
+    "lem-zl-finite-weil-ind-push-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-zl-weil-compact-support-cohomology",
+  "def-zl-weil-ind-sheaf-category",
+  "lem-zl-finite-weil-ind-push-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "Clause (1): exact open extension followed by exact finite direct image; the Lean proof carries out the categorical ind-representability and derived-vanishing argument."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated quasi finite morphism has vanishing positive compact support direct images and preserves upper weights for common stage Weil sheaves",
+   "results": "8 results; AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsZero, rightDerived",
+   "results": "loogle: unknown identifier 'IsZero'",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "sfQuasiFinite|SfIsMixedOfWeightsAtMost|zlFiniteAdicDirectImage",
+   "results": "0 results; ",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor maps a finite filtration with pure quotients to a finite filtration with the images of those quotients",
+   "results": "8 results; CategoryTheory.ExactFunctor.of, CategoryTheory.exactFunctor, CategoryTheory.leftExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.ExactFunctor, CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor, CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf, CategoryTheory.Functor.exact_tfae",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*eigenvalue|eigenvalue.*Frobenius|finite.*compact.*support",
+   "results": "2 results; Mathlib/Analysis/Calculus/BumpFunction/Basic.lean, Mathlib/Geometry/Manifold/PartitionOfUnity.lean",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite compactification gives exact compact support and positive higher image vanishing for constructible adic Weil sheaves",
+   "results": "8 results; HasCompactSupport.comp_isClosedEmbedding, HasCompactSupport.of_compactSpace, exists_compact_iff_hasCompactSupport, hasCompactSupport_def, HasCompactSupport, HasCompactSupport.is_zero_at_infty, HasCompactSupport.intro, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every eigenvalue beta of Frobenius on a finite direct image has a positive power beta^e which is a local Frobenius eigenvalue, with residue cardinalities related by q_x=q_y^e",
+   "results": "8 results; IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant, arithFrobAt, FiniteField.frobeniusAlgHom_apply, FiniteField.bijective_frobeniusAlgHom_pow, AlgHom.IsArithFrobAt.apply_of_pow_eq_one, FiniteField.coe_frobeniusAlgHom, FiniteField.orderOf_frobeniusAlgHom",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuasiFiniteCompactSupportWeights",
+  "date": "2026-10-19",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-l-dl-general-quasifinite",
+   "place": "clause (1), exact extension by zero followed by exact finite direct image; parent DAG Steps 2--6",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-quasifinite",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteCompactificationWeilExact",
+  "file": "lean/Sheaf/Paper/FiniteCompactificationWeilExact.lean",
+  "declaration": "WeilConjectures.sfFiniteCompactificationWeilExact",
+  "statement": "theorem sfFiniteCompactificationWeilExact\n    [QuasiSeparated Y₀.hom] (f₀ : X₀ ⟶ Y₀) (c : Compactification f₀.left)\n    [IsFinite c.g] :\n    ∃ H : sfCommonStageWeilSheaf D l hl X₀ Ω ⥤ sfCommonStageWeilSheaf D l hl Y₀ Ω,\n      H.Additive ∧ PreservesFiniteLimits H ∧ PreservesFiniteColimits H ∧\n        (∀ F, Nonempty (H.obj F ≅ zlWeilHigherShriek D l hl Ω f₀ c 0 F)) ∧\n        ∀ (F : sfCommonStageWeilSheaf D l hl X₀ Ω) (i : ℕ),\n          0 < i → IsZero (zlWeilHigherShriek D l hl Ω f₀ c i F)",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261020T051507-L-1696332",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261020T051507-L-1696332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

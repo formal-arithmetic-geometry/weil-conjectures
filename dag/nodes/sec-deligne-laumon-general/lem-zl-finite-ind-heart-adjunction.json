@@ -1,0 +1,183 @@
+{
+ "id": "lem-zl-finite-ind-heart-adjunction",
+ "kind": "statement",
+ "title": "Exact finite ordinary direct image on underlying ind hearts",
+ "statement": "Fix D,l,Ω and a finite morphism f₀:X₀→Y₀ of finite-type k₀-schemes. Ind extension of the prescribed pullback of the underlying small constructible common-stage hearts has a right adjoint R, and R preserves finite colimits. No category of Frobenius pairs is used. Absolute separatedness of X₀ and Y₀ is not assumed. The conclusion includes the underlying ordinary inverse-image adjunction, before any Weil structure is added.",
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-zl-weil-ind-sheaf-category",
+  "def-weil-finite-integral-morphism"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "Clause (1), exact finite direct image; Stacks 09A8 and Bhatt--Scholze 6.8.14--6.8.15 supply the underlying finite-image exactness."
+ },
+ "proof": [
+  {
+   "text": "Cover Y₀ by affine opens. Finite base change makes the source of each chart finite over an affine scheme and hence affine, so the separated-scheme finite-adic direct-image theorem applies to the geometric chart. Its rational adjunction identifies the exact heart direct image as the right adjoint to the specified heart inverse image; the normalized counit fixes this identification.",
+   "uses": [
+    "lem-zl-finite-adic-direct-image",
+    "lem-weil-pbc-affine-opens-basis",
+    "lem-weil-pbc-finite-morphism-permanence",
+    "lem-weil-pbc-affine-source-morphism-separated"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Extend the chart heart adjunction to ind-categories. Compute Hom from a representable into a filtered presentation using the heart adjunction. Every ind-object is a filtered colimit of representables, so the ind extension of heart direct image is right adjoint to ind inverse image. Exactness of the heart functor and exact filtered colimits make this extension exact. On overlaps the specified adjunctions identify these comparisons by uniqueness; the conservative open-cover criterion detects the resulting global exactness.",
+   "uses": [
+    "def-zl-weil-ind-sheaf-category",
+    "lem-dl-a1-constructible-fibres-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-l-dl-general-quasifinite/lem-zl-quasi-finite.proof.md",
+  "place": "Underlying ordinary finite image in clause (1); the equivariant mate lift is proved separately."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A separated quasi finite morphism has vanishing positive compact support direct images and preserves upper weights for common stage Weil sheaves",
+   "results": "8 results; AlgebraicGeometry.exists_of_res_zero_of_qcqs, AlgebraicGeometry.instHasOfPostcompPropertySchemeQuasiCompactQuasiSeparated, AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux, AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated, AlgebraicGeometry.exists_of_res_eq_of_qcqs, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsZero, rightDerived",
+   "results": "loogle: unknown identifier 'IsZero'",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "sfQuasiFinite|SfIsMixedOfWeightsAtMost|zlFiniteAdicDirectImage",
+   "results": "0 results; ",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact functor maps a finite filtration with pure quotients to a finite filtration with the images of those quotients",
+   "results": "8 results; CategoryTheory.ExactFunctor.of, CategoryTheory.exactFunctor, CategoryTheory.leftExactFunctor, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.ExactFunctor, CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor, CategoryTheory.ShortComplex.Exact.map_of_preservesRightHomologyOf, CategoryTheory.Functor.exact_tfae",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "Frobenius.*eigenvalue|eigenvalue.*Frobenius|finite.*compact.*support",
+   "results": "2 results; Mathlib/Analysis/Calculus/BumpFunction/Basic.lean, Mathlib/Geometry/Manifold/PartitionOfUnity.lean",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite compactification gives exact compact support and positive higher image vanishing for constructible adic Weil sheaves",
+   "results": "8 results; HasCompactSupport.comp_isClosedEmbedding, HasCompactSupport.of_compactSpace, exists_compact_iff_hasCompactSupport, hasCompactSupport_def, HasCompactSupport, HasCompactSupport.is_zero_at_infty, HasCompactSupport.intro, instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every eigenvalue beta of Frobenius on a finite direct image has a positive power beta^e which is a local Frobenius eigenvalue, with residue cardinalities related by q_x=q_y^e",
+   "results": "8 results; IsArithFrobAt.arithFrobAt, IsArithFrobAt.exists_of_isInvariant, arithFrobAt, FiniteField.frobeniusAlgHom_apply, FiniteField.bijective_frobeniusAlgHom_pow, AlgHom.IsArithFrobAt.apply_of_pow_eq_one, FiniteField.coe_frobeniusAlgHom, FiniteField.orderOf_frobeniusAlgHom",
+   "date": "2026-10-19",
+   "verdict": "no match for the common-stage Weil-heart assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ind extension of an exact right adjoint between small abelian categories preserves finite colimits and is right adjoint to ind extension of its left adjoint",
+   "results": "8 results; CategoryTheory.Adjunction.hasExactColimitsOfShape, CategoryTheory.Limits.isGrothendieckAbelian_ind, CategoryTheory.Ind.leftExactFunctorEquivalence, CategoryTheory.Adjunction.hasExactLimitsOfShape, CategoryTheory.instAbelianInd, CategoryTheory.abelianOfAdjunction, CategoryTheory.Limits.instHasExactColimitsOfShapeIndOfHasFiniteLimits, CategoryTheory.IsGrothendieckAbelian.instIsRightAdjointModuleCatMulOppositeEndPreadditiveCoyonedaObj",
+   "date": "2026-10-19",
+   "verdict": "No exact match for finite direct image on the specified Weil ind-category; generic ind exactness infrastructure only."
+  },
+  {
+   "tool": "grep",
+   "query": "Ind.*[Aa]djunction|[Aa]djunction.*Ind|PreservesFiniteColimits.*ind",
+   "results": "25 results; Mathlib/Topology/Category/TopCat/OpenNhds.lean, Mathlib/Topology/Category/TopCat/OpenNhds.lean, Mathlib/Topology/Category/TopCat/OpenNhds.lean, Mathlib/Topology/Category/TopCat/OpenNhds.lean, Mathlib/Topology/Category/TopCat/OpenNhds.lean, Mathlib/Topology/Category/TopCat/Opens.lean, Mathlib/Topology/Category/TopCat/Opens.lean, Mathlib/Topology/Category/TopCat/Opens.lean",
+   "date": "2026-10-19",
+   "verdict": "No exact match for finite direct image on the specified Weil ind-category; generic ind exactness infrastructure only."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.Ind",
+   "results": "0 results; ",
+   "date": "2026-10-19",
+   "verdict": "No exact match for finite direct image on the specified Weil ind-category; generic ind exactness infrastructure only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor between small abelian categories extends to an exact functor on ind categories, preserving finite colimits",
+   "results": "8 hits; CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor, CategoryTheory.Limits.isGrothendieckAbelian_ind, CategoryTheory.RightExactFunctor.ofExact, CategoryTheory.RightExactFunctor.ofExact_obj, CategoryTheory.instAbelianInd, CategoryTheory.Limits.instHasExactColimitsOfShapeIndOfHasFiniteLimits, CategoryTheory.ExactFunctor.of, CategoryTheory.Functor.preservesFiniteColimits_tfae",
+   "date": "2026-10-19",
+   "verdict": "No exact extension/adjunction theorem: the colimit hit concerns Yoneda; the Grothendieck and exact-functor hits do not extend a specified functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.PreservesFiniteColimits, CategoryTheory.Ind",
+   "results": "1 hits; CategoryTheory.instPreservesFiniteColimitsIndYoneda",
+   "date": "2026-10-19",
+   "verdict": "No exact extension/adjunction theorem: the colimit hit concerns Yoneda; the Grothendieck and exact-functor hits do not extend a specified functor."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuasiFiniteCompactSupportWeights",
+  "date": "2026-10-19",
+  "group": "K7"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-finite-weil-ind-push-exact",
+   "place": "The underlying ordinary finite-image adjunction and exactness, before equivariant lifting.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-l-dl-general-quasifinite",
+ "proof_deps": [
+  "def-zl-weil-ind-sheaf-category",
+  "lem-dl-a1-constructible-fibres-exact",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-affine-source-morphism-separated",
+  "lem-weil-pbc-finite-morphism-permanence",
+  "lem-zl-finite-adic-direct-image"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FiniteIndHeartAdjunction",
+  "file": "lean/Sheaf/Paper/FiniteIndHeartAdjunction.lean",
+  "declaration": "WeilConjectures.sfFiniteIndHeartAdjunction",
+  "statement": "theorem sfFiniteIndHeartAdjunction\n    (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p)\n    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]\n    {X₀ Y₀ : Over (Spec (.of D.k₀))}\n    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]\n    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom]\n    (f₀ : X₀ ⟶ Y₀) [IsFinite f₀.left] :\n    ∃ R : Ind (zlSmallHeart D l Ω hl X₀) ⥤ Ind (zlSmallHeart D l Ω hl Y₀),\n      Nonempty (zlIndMap (zlSmallPull D l hl Ω f₀) ⊣ R) ∧\n        PreservesFiniteColimits R",
+  "branch": "sheaf-dag",
+  "by": "K7",
+  "date": "2026-10-19"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261020T051507-L-1696332",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K7",
+  "result": "pass",
+  "landing": "20261020T051507-L-1696332",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

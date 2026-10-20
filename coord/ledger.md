@@ -17831,3 +17831,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 05:14 L: merged deliver/K6/Sheaf.Paper.PurityFrameClass (stage 3; reviewer PASS; first push; landing 20261020T051458-L-1693305 (interface); batch 20261020T050952; modules 1; new nodes 0; change records: coord/changes/K6-purity-frame-class-elaboration-scheduling.md)
 - 05:15 L: merged deliver/K6/Sheaf.Paper.PuritySectionInvariantIntrinsic (stage 3; reviewer PASS; first push; landing 20261020T051500-L-1694148 (proof); batch 20261020T050952; modules 1; new nodes 0)
 - 05:15 L: merged deliver/K7/Sheaf.Paper.AdicTorFlatCohomology (stage 3; reviewer PASS; first push; landing 20261020T051503-L-1695358 (interface); batch 20261020T050952; modules 4; new nodes 3)
+- 05:15 L: merged deliver/K7/Sheaf.Paper.QuasiFiniteCompactSupportWeights (stage 3; reviewer PASS; first push; landing 20261020T051507-L-1696332 (interface); batch 20261020T050952; modules 6; new nodes 5)
