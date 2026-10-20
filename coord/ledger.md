@@ -18806,3 +18806,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: returned deliver/NA/lem-weil-pbc-residue-perfect-finite-quotient-models (reviewer RETURN: L: independent stage-2 immutable head 868f3d2a7112: R1 (A6/A7 regression): 868f3d2a is the 9th NA head; whole snapshot b)
 - 18:49 L: returned deliver/NB/det-sp-p1-trace (reviewer RETURN: L: independent stage-2 immutable head c93f38353dfc: H2: the delivery adds theorem stmt_deps sk-lem-geo-p1-cohomology, th)
 - 19:22 L: returned deliver/K3/Sheaf.CategoryTheory.PointSystemRefineAll (reviewer RETURN: (reviewer C-801af, head 801afbb24) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Point)
+- 19:36 L: merged deliver/NB/det-sp-p1-trace (stage 2; reviewer PASS; parallel immutable checks)

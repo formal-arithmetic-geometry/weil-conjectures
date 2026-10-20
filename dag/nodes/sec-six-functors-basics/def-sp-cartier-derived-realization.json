@@ -1,0 +1,108 @@
+{
+ "id": "def-sp-cartier-derived-realization",
+ "kind": "definition",
+ "title": "Exact derived realization of a Cartier class with canonical source and target comparisons",
+ "status": "split",
+ "statement": "Let $C,D$ be abelian categories with specified derived categories, let $C$ have K-injective resolutions, and let $F:C\\to D$ be additive and preserve finite limits and finite colimits. Use the degree-zero embedding $[-][0]$ and degree-two Ext realization in the derived category [def-weil-abstract-derived-category]. For $X\\in C$, $Y\\in D$, $Z\\in D(C)$, $W\\in D(D)$, specified isomorphisms $s:Z\\cong X[0]$, $t:W\\cong Y[0][2]$, and $c\\in\\operatorname{Ext}^2_D(FX,Y)$, define compatibility of an arrow $\\delta:RF(Z)\\to W$ with $c$ to mean $\\delta=RF(s)\\,;\\epsilon_{F,X}\\,;c\\,;t^{-1}$. Here $\\epsilon_{F,X}:RF(X[0])\\cong(FX)[0]$ is the canonical exact-direct-image/single-object comparison, and $\\epsilon_{F,X};c$ is exactly the existing supported exact derived realization [def-asd-ordinary-supported-kummer-system]. The interface may express this as heterogeneous equality to avoid re-elaborating identical endpoints; applied to the displayed Hom type this is ordinary equality. For a commutative ring $A$ in universe $u+1$ and a scheme $T$ in universe $u$, use the ordinary pro-etale coefficient objects of [def-sp-p1-comparison-arrows], and define the canonical constant-source comparison $\\nu_T^*(A_{T,et}[0])\\cong A_{T,proet}[0]$ to be comparison with the degree-zero embedding followed by the constant-sheaf comparison of [sk-lem-geo-cartier]. Also define, for any exact additive $G:C\\to D$ and $L\\in C$, the isomorphism $D(G)(L[0][2])\\cong G(L)[0][2]$ to be canonical shift commutation followed by the degree-zero comparison. For any $N\\in\\mathbf N$ with $NA=0$, applying this last construction to $G=\\nu_T^*$ and the actual finite Tate line [def-asd-finite-etale-tate-sheaf] gives the target comparison. No class, arrow, or unspecified source or target isomorphism is chosen, and no existence theorem is asserted.",
+ "stmt_deps": [
+  "def-weil-abstract-derived-category",
+  "def-asd-ordinary-supported-kummer-system",
+  "def-sp-p1-comparison-arrows",
+  "sk-lem-geo-cartier",
+  "def-asd-finite-etale-tate-sheaf"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.md",
+  "place": "Clause 3: delta is precisely c_Delta under canonical exact closed direct-image identification"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "exact derived direct image realization Cartier Ext class canonical source target comparison",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Map\", \"type\": \"[HasDerivedCategory.{t} C] [HasDerivedCategory.{t'} D] [HasExt.{w} C] [HasExt.{w'} D] {X Y : C} {n : ℕ}\\n  (e : Ext X Y n) :\\n  (e.mapExactFunctor F).hom =\\n    (F.mapDerivedCategorySingleFunctor 0).inv.app X ≫\\n      e.hom.map F.mapDerivedCategory ≫ ((F.mapDerivedCategorySingleFunctor 0).hom.app Y)⟦(n \", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"HasDerivedCategory.standard\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Basic\", \"type\": \": HasDerivedCategory.{max u v} C\", \"doc\": \"For an abelian category $\\\\mathcal{C}$, the derived category is the localization of the category of chain complexes (with integer-indexed shapes) at the class of quasi-isomorphisms, which are morphisms\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor.congr_simp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, applying $ F $ to the $ n $-shifted cochain complexes of $ X $ and $ Y $ induce\"}\n  {\"name\": \"CategoryTheory.ProjectiveResolution.extMk.congr_simp\", \"module\": \"Mathlib.CategoryTheory.Abelian.Projective.Ext\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {X Y : C} (R : CategoryTheory.ProjectiveResolution X) {n : ℕ}\\n  (f f_1 : R.complex.X n ⟶ Y) (e_f : f = f_1) (m m_1 : ℕ) (e_m : m = m_1) (hm : n + 1 = m)\\n  (hf : CategoryT\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group $ \\\\operatorname{Ext}^n(X, Y) $ is defined as the hom-set in the derived category between the $ n $-shifted single-term\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(f : X ⟶ Y) : Ext X Y 0\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Map\", \"type\": \"[HasExt.{w} C] [HasExt.{w'} D] {X Y : C} {n : ℕ} (f : Ext.{w} X Y n) : Ext.{w'} (F.obj X) (F.obj Y) n\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.extClass_hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass\", \"type\": \"[HasDerivedCategory.{w'} C] : hS.extClass.hom = hS.singleδ\", \"doc\": \"For a short exact sequence $0 \\to X_1 \\to X_2 \\to X_3 \\to 0$ in an abelian category $\\\\mathcal{C}$, the homomorphism component of the $\\\\operatorname{Ext}^1(X_3, X_1)$ class in the derived category coincide\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀_hom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"[HasDerivedCategory.{w'} C] (f : X ⟶ Y) : (mk₀ f).hom = ShiftedHom.mk₀ _ (by simp) ((singleFunctor C 0).map f)\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the function maps a morphism $ f : X \\\\to Y $ to the hom-set in the derived category between the $ a $-shifted single-term cochain co\"}\n",
+   "date": "2026-10-20",
+   "verdict": "The generic Ext realization and its exact-functor naturality exist and are reused. No declaration packages this transported-arrow predicate with the canonical pro-etale constant and shifted single-object comparisons."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "exact derived direct image realization Cartier Ext class canonical source target comparison",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and an element $ e \\\\in \\\\text{Ext}^n(X, Y) $, the induced map $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}^n(F(X), F(Y)) $ corr\"}\n  {\"name\": \"localCohomology.diagram\", \"module\": \"Mathlib/Algebra/Homology/LocalCohomology\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    {D : Type v} →\\n      [inst_1 : CategoryTheory.SmallCategory D] →\\n        CategoryTheory.Functor D (Ideal R) →\\n          ℕ → CategoryTheory.Functor Dᵒᵖ (CategoryTheory.Functor (ModuleCat R) (ModuleCat R))\", \"doc\": \"For a commutative ring $ R $, a small category $ \\\\mathcal{D} $, and a functor $ I : \\\\mathcal{D} \\\\to \\\\text{Ideal}(R) $, this constructs a functor from $ \\\\mathcal{D}^{\\\\text{op}} $ to the category of $ R\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      {D : Type u'} →\\n        [inst_2 : CategoryTheory.Category.{v', u'} D] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            (F : CategoryTheory.Functor C D) →\\n              [F.Additiv\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"CategoryTheory.Functor.mapExtLinearMap_coe\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between $ R $-linear abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced map $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\operatorname{Ext}\"}\n  {\"name\": \"Ext\", \"module\": \"Mathlib/CategoryTheory/Abelian/Ext\", \"type\": \"(R : Type u_1) →\\n  [inst : Ring R] →\\n    (C : Type u_2) →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_2} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [CategoryTheory.Linear R C] →\\n            [CategoryTheory.EnoughProjectives C] →\\n              ℕ → CategoryTheory.Functor Cᵒᵖ (Cat\", \"doc\": \"For a ring $ R $ and an abelian $ R $-linear category $ \\\\mathcal{C} $ with enough projectives, the $ n $-th extension functor $ \\\\text{Ext}^n $ is a bifunctor $ \\\\mathcal{C}^{\\\\text{op}} \\\\times \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] [inst_3 : HasDerivedCategory C] {X Y Z : C} (f : X ⟶ Y) {n : ℕ}\\n  (x : CategoryTheory.Abelian.Ext Y Z n),\\n  CategoryTheory.CategoryStruct.comp ((DerivedCategory.singleFun\", \"doc\": \"For objects $X, Y, Z$ in an abelian category $\\\\mathcal{C}$, a morphism $f : X \\\\to Y$, and an element $x \\\\in \\\\mathrm{Ext}^a(Y, Z)$, the composition of the single-term complex functor applied to $f$ wit\"}\n  {\"name\": \"CategoryTheory.Functor.mapExactFunctor_smul\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, the induced map $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\operatorname{Ext}^n(F(X), F(Y)\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.covariant_sequence_exact₁\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] (X : C) {S : CategoryTheory.ShortComplex C} (hS : S.ShortExact) {n₁ : ℕ}\\n  (x₁ : CategoryTheory.Abelian.Ext X S.X₁ n₁),\\n  x₁.comp (CategoryTheory.Abelian.Ext.mk₀ S.f) ⋯ =\", \"doc\": \"In an abelian category $ \\\\mathcal{C} $, for a short exact sequence $ S $, if an element $ x_1 \\\\in \\\\operatorname{Ext}^{n_1}(X, S.X_1) $ satisfies $ x_1 \\\\circ \\\\mathrm{mk}_0(S.f) = 0 $ and $ n_0 + 1 = n_\"}\n",
+   "date": "2026-10-20",
+   "verdict": "The generic Ext realization and its exact-functor naturality exist and are reused. No declaration packages this transported-arrow predicate with the canonical pro-etale constant and shifted single-object comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "CartierDerivedCompatibility|cartierUnitSingleIso|cartierTwistSingleIso",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-20",
+   "verdict": "The generic Ext realization and its exact-functor naturality exist and are reused. No declaration packages this transported-arrow predicate with the canonical pro-etale constant and shifted single-object comparisons."
+  },
+  {
+   "tool": "rg dag/nodes, lean/Sheaf, lean/WeilConjectures; blueprint_refs.py search",
+   "query": "CartierDerivedCompatibility|cartierUnitSingleIso|cartierTwistSingleIso; Cartier.*derived.*realization|exact.*Cartier.*comparison",
+   "results": "No source or DAG matches. 0 blueprint nodes match 'Cartier.*derived.*realization|exact.*Cartier.*comparison'. The existing supportedExactDerivedMap in OrdinarySupportedKummerSystem supplies the exact derived realization itself and is reused.",
+   "date": "2026-10-20",
+   "verdict": "A new interface for identifying an independently specified derived arrow with the same Ext class is needed; no realization is redefined."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sp-p1-trace",
+  "date": "2026-10-20",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-p1-trace",
+   "place": "Canonical exact derived realization of the Cartier class in clause 3",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-geo-p1-adjunction",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CartierDerivedRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.CartierDerivedCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CartierDerivedCompatibility",
+   "AlgebraicGeometry.ProEtale.cartierUnitSingleIso",
+   "AlgebraicGeometry.ProEtale.cartierShiftSingleIso"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/CartierDerivedRealization.lean",
+  "statement": "def CartierDerivedCompatibility {C : Type uC} [Category.{vC} C] [Abelian C] [HasDerivedCategory.{wC} C] [HasKInjectiveResolutions C] {D : Type uD} [Category.{vD} D] [Abelian D] [HasDerivedCategory.{wD} D] [HasExt.{wD} D] (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [hF : PreservesFiniteColimits F] (X : C) (Y : D) {Z : DerivedCategory C} {W : DerivedCategory D} (s : Z ≅ (DerivedCategory.singleFunctor C 0).obj X) (t : W ≅ ((DerivedCategory.singleFunctor D 0).obj Y)⟦(2 : ℤ)⟧) (c : Ext (F.obj X) Y 2) {δType : Type wD} (δ : δType) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b7612616",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b7612616",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after c93f H2 RETURN. Theorem stmt_deps sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition/lem-amb-p1-diagonal-integrals replaced in item and def-sp-p1-proetale-trace-system by existing:true def nodes def-sp-p1-comparison-arrows (15 plain GeoP1Cohomology defs), def-sp-p1-decomposition-arrows, def-sp-p1-diagonal-charts; ownership scan: every geoP1*/p1Decomposition*/projectiveLineDiagonal* identifier now resolves to a cited def node; statements verbatim, no rival owners, DAG acyclic; item statement/proof/proof_deps byte-identical to live. Advisory resolved: new def-sp-cartier-derived-realization pins delta = R(Delta_*)(s) ; exact single comparison ; cDelta ; t^-1 (exactness witness is a conjunct); free deltaType HEq verified sound: scratch rfl proves the Hom types equal (finiteEtaleTateSheaf 1 reduces to finiteEtaleTateLine), 11.3 s clean. Clauses 1-2, edge cases, docstrings, single sorry unchanged/OK; trace-system module byte-identical to c93f. Advisory: GeoCartierClass helpers owned only by base stmt_dep sk-lem-geo-cartier; finiteEtaleTateLine/ProjectiveLine/derivedUpperStarLowerStarAdjunction owners outside stmt_deps. Compile at load 133-172: CartierDerivedRealization 23.9-59.9 s clean, TraceSystem 31-58 s clean, item module timeout 60 s x3; item prefix through SpP1DiagonalIntegrals clean 49.2 s (kernel 40.5 s), delivery recorded 29.5/27.8/47.1 s. Maintainer: land item at lower load."
+ }
+}

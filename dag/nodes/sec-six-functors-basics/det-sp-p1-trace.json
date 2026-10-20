@@ -26,7 +26,17 @@
   "def-weil-derived-tensor",
   "def-pc-divisor-line-bundle",
   "sk-lem-geo-cartier",
-  "lem-weil-pbc-proetale-ringed-open-closed"
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "def-sp-p1-comparison-arrows",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-asd-ordinary-supported-kummer-system",
+  "def-asd-ordinary-supported-kummer-boundary",
+  "def-sp-p1-decomposition-arrows",
+  "def-sp-p1-diagonal-charts",
+  "def-amb-p1-trace",
+  "def-sp-p1-proetale-trace-system",
+  "def-sp-cartier-derived-realization"
  ],
  "proof": [
   {
@@ -412,5 +422,30 @@
    "decls": [],
    "missing": []
   }
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleProjectiveLineTrace",
+  "declaration": "AlgebraicGeometry.ProEtale.proEtale_projectiveLine_trace",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpP1CartierCompatibility",
+   "AlgebraicGeometry.ProEtale.SpP1DiagonalIntegrals",
+   "AlgebraicGeometry.ProEtale.SpP1TraceStatement",
+   "AlgebraicGeometry.ProEtale.proEtale_projectiveLine_trace"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleProjectiveLineTrace.lean",
+  "statement": "theorem proEtale_projectiveLine_trace (ℓ : ℕ) (hℓ : ℓ.Prime) (n : ℕ) (_hn : 0 < n) : @SpP1TraceStatement (ULift.{u + 1} (ZMod (ℓ ^ n))) inferInstance (Finite.of_equiv (ZMod (ℓ ^ n)) (h := @Finite.of_fintype _ (@ZMod.fintype (ℓ ^ n) ⟨ne_of_gt (pow_pos hℓ.pos n)⟩)) Equiv.ulift.symm) (ℓ ^ n) (pow_pos hℓ.pos n) (CharP.cast_eq_zero (ULift.{u + 1} (ZMod (ℓ ^ n))) (ℓ ^ n))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-20",
+  "existing": false,
+  "note": "The ordinary small-pro-etale fixed-ring statement, with all maps fixed by their canonical formulas. Noetherianity occurs only in the diagonal clause; clauses 1–2 and their base-change squares cover arbitrary schemes. The diagonal uses the actual Cartier class, specified by its literal Ext comparison with the unique supported Kummer boundary. HEq compares terms of the same fixed Hom/cohomology types and is equivalent to ordinary equality. ULift only places ZMod in the existing module universe; finiteness is supplied explicitly from positivity. The derived diagonal arrow is additionally equated directly to the exact pro-etale derived realization of the same cΔ, using only canonical constant/single/shift transports."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b7612616",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after c93f H2 RETURN. Theorem stmt_deps sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition/lem-amb-p1-diagonal-integrals replaced in item and def-sp-p1-proetale-trace-system by existing:true def nodes def-sp-p1-comparison-arrows (15 plain GeoP1Cohomology defs), def-sp-p1-decomposition-arrows, def-sp-p1-diagonal-charts; ownership scan: every geoP1*/p1Decomposition*/projectiveLineDiagonal* identifier now resolves to a cited def node; statements verbatim, no rival owners, DAG acyclic; item statement/proof/proof_deps byte-identical to live. Advisory resolved: new def-sp-cartier-derived-realization pins delta = R(Delta_*)(s) ; exact single comparison ; cDelta ; t^-1 (exactness witness is a conjunct); free deltaType HEq verified sound: scratch rfl proves the Hom types equal (finiteEtaleTateSheaf 1 reduces to finiteEtaleTateLine), 11.3 s clean. Clauses 1-2, edge cases, docstrings, single sorry unchanged/OK; trace-system module byte-identical to c93f. Advisory: GeoCartierClass helpers owned only by base stmt_dep sk-lem-geo-cartier; finiteEtaleTateLine/ProjectiveLine/derivedUpperStarLowerStarAdjunction owners outside stmt_deps. Compile at load 133-172: CartierDerivedRealization 23.9-59.9 s clean, TraceSystem 31-58 s clean, item module timeout 60 s x3; item prefix through SpP1DiagonalIntegrals clean 49.2 s (kernel 40.5 s), delivery recorded 29.5/27.8/47.1 s. Maintainer: land item at lower load."
  }
 }

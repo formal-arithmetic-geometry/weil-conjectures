@@ -1,0 +1,116 @@
+{
+ "id": "def-sp-p1-proetale-trace-system",
+ "kind": "definition",
+ "title": "Canonical pro-etale projective-line decomposition and trace systems",
+ "status": "split",
+ "statement": "Let $A$ be a finite commutative ring in universe $u+1$, let $N>0$ annihilate $A$, and use schemes in universe $u$. Use the ordinary constant-module small-pro-etale derived objects, comparison functor, canonical source/exchange maps and trace $\\operatorname{pr}_2b^{-1}$ of [def-sp-p1-comparison-arrows]. Put $q_S:P_S=\\mathbf P^1_S\\to S$ [def-nagata-projective-space-base-change], $U_S=A_S$ and $L_S=A_S(1)$. A Chern family consists of etale arrows $c_S:A_{P_S,et}\\to A_{P_S,et}(1)[2]$ for every $S$ with $N$ invertible. A twisted family consists of isomorphisms $b_S:L_S[2]\\oplus U_S\\cong Rq_{S,*}L_{P_S}[2]$, and a decomposition family consists of arrows $d_S:U_S\\oplus A_S(-1)[-2]\\to Rq_{S,*}U_{P_S}$. Define the predicate on these three families by the following conditions, without asserting their existence. For every such $S$, the abelian realization of $c_S$ is the actual scalar Kummer class of $\\mathcal O(1)$ of [def-asd-ordinary-finite-p1-kummer-class]; $d_S$ is invertible and is exactly the comparison transport of the unit-and-evaluation map of [def-sp-p1-decomposition-arrows], using $c_S$. The two components of $b_S$ are exactly the comparison transports of the normalized shifted unit and Chern adjunct of [def-asd-ordinary-finite-p1-arrows], using the roots-normalized transport of [def-amb-p1-trace] and that same $c_S$. For every morphism $g:S'\\to S$ between schemes with $N$ invertible, require the canonical exchange to carry $g^*d_S$ to $d_{S'}$, with the source comparison; also require $g^*\\operatorname{Tr}_{q_S}$ to equal $\\operatorname{Tr}_{q_{S'}}$ after the twisted exchange and constant pullback identification. These are the source, unit exchange and twist exchange maps of [def-sp-p1-comparison-arrows], using the normalized twist pullback of [lem-asd-etale-finite-twist-pullback]. Require the second component of $b_S$ followed by its trace to be $\\operatorname{id}_{U_S}$. Finally, for every algebraically closed field $\\Omega$ of universe $u$, with $N$ invertible, and every $\\Omega$-rational section $x:\\operatorname{Spec}\\Omega\\to\\mathbf P^1_\\Omega$, require the ideal of $x$ to be invertible and the abelian realization of $c_{\\operatorname{Spec}\\Omega}$ to equal the concrete Kummer Chern class of the dual ideal of $x$, as defined in [def-asd-ordinary-supported-kummer-boundary]. The base schemes and the morphisms in these conditions are arbitrary; no Noetherianity or flatness is required.",
+ "stmt_deps": [
+  "def-sp-p1-comparison-arrows",
+  "def-nagata-projective-space-base-change",
+  "def-asd-ordinary-finite-p1-kummer-class",
+  "def-sp-p1-decomposition-arrows",
+  "def-asd-ordinary-finite-p1-arrows",
+  "def-amb-p1-trace",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-asd-ordinary-supported-kummer-boundary"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.md",
+  "place": "Clauses 1--2 and the final arbitrary-base consequence: canonical-arrow and normalization interface"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "normalized projective line Kummer decomposition trace system arbitrary base change",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_add\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Point\", \"type\": \"[Algebra R S] [Algebra R F] [Algebra S F] [IsScalarTower R S F] [Algebra R K] [Algebra S K] [IsScalarTower R S K]\\n  (f : F →ₐ[S] K) {P Q : Fin 3 → F} (hP : (W'.baseChange F).toProjective.Nonsingular P)\\n  (hQ : (W'.baseChange F).toProjective.Nonsingular Q) :\\n  (W'.baseChange K).toProjective.add (f ∘ \", \"doc\": \"For a projective Weierstrass curve over a ring $ R $, given an algebra homomorphism $ f : F \\\\to K $ satisfying the scalar tower condition over $ R $, and nonsingular points $ P, Q $ on the base-change\"}\n  {\"name\": \"Algebra.normalizedTrace\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \": K →ₗ[F] F\", \"doc\": \"The normalized trace is an $ F $-linear map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ defined by $ \\\\operatorname{Tr}_{\\\\text{norm}}(a) = \\\\frac{1}{[F(a):F]} \\\\cdot \\\\operatorname{Tr}_{F(a)/F}(a) $, wh\"}\n  {\"name\": \"Algebra.normalizedTrace.congr_simp\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \"∀ (F : Type u_1) (K : Type u_2) [inst : Field F] [inst_1 : Field K] [inst_2 : Algebra F K] [inst_3 : CharZero F]\\n  [inst_4 : Algebra.IsIntegral F K], Algebra.normalizedTrace F K = Algebra.normalizedTrace F K\", \"doc\": \"For any fields $F$ and $K$ with $K$ an $F$-algebra, characteristic zero on $F$, and integral elements, the normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F$ is equal to itself.\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_addXYZ\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Formula\", \"type\": \": (W'.baseChange B).toProjective.addXYZ (f ∘ P) (f ∘ Q) = f ∘ (W'.baseChange A).toProjective.addXYZ P Q\", \"doc\": \"For a projective Weierstrass curve $ W' $ over a ring $ R $, its base change to an $ R $-algebra $ A $, and algebra homomorphism $ f : R → A $, the addition formula $ \\\\text{addXYZ} $ for points on the\"}\n  {\"name\": \"Algebra.normalizedTrace_ne_zero\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \": normalizedTrace F K ≠ 0\", \"doc\": \"For a field extension $ K $ over $ F $, the normalized trace map $ \\\\operatorname{Tr}_{\\\\text{norm}} : K \\\\to F $ is not the zero map.\"}\n  {\"name\": \"KummerDedekind.normalizedFactorsMapEquivNormalizedFactorsMinPolyMk.congr_simp\", \"module\": \"Mathlib.NumberTheory.KummerDedekind\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Algebra R S] {x : S} {I : Ideal R}\\n  [inst_3 : IsDomain R] [inst_4 : IsIntegrallyClosed R] [inst_5 : IsDedekindDomain S]\\n  [inst_6 : Module.IsTorsionFree R S] (hI : I.IsMaximal) (hI' : I ≠ ⊥)\\n  (hx : Ideal.comap (alg\", \"doc\": \"For a maximal ideal $ I $ in an integrally closed domain $ R $, an integral element $ x $ in a Dedekind domain $ S $, and under conditions that the conductor ideal of $ x $ combined with $ I $ generat\"}\n  {\"name\": \"Algebra.normalizedTrace_map\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \"{E : Type*} [Field E] [Algebra F E] [Algebra.IsIntegral F E] (f : E →ₐ[F] K) (a : E) :\\n  normalizedTrace F K (f a) = normalizedTrace F E a\", \"doc\": \"For any $ F $-algebra homomorphism $ f : E \\\\to K $ and element $ a \\\\in E $, the normalized trace of $ f(a) $ from $ K $ to $ F $ equals the normalized trace of $ a $ from $ E $ to $ F $, i.e., $ \\\\oper\"}\n  {\"name\": \"Algebra.normalizedTrace_algebraMap\", \"module\": \"Mathlib.FieldTheory.NormalizedTrace\", \"type\": \": normalizedTrace F K ∘ₗ Algebra.linearMap E K = normalizedTrace F E\", \"doc\": \"For field extensions $F \\\\subseteq E \\\\subseteq K$, the composition of the normalized trace map $\\\\operatorname{Tr}_{\\\\text{norm}}: K \\\\to F$ with the canonical $F$-linear inclusion map $E \\\\to K$ equals th\"}\n",
+   "date": "2026-10-20",
+   "verdict": "No existing declaration defines this complete pro-etale family predicate; the existing ordinary-etale and Noetherian pro-etale constructions are reused."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "canonical projective line decomposition and trace family with base change and rational point normalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"Type r → Type r\", \"doc\": \"The type of projective Weierstrass curves over a ring $ R $, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:Y:Z]$.\"}\n  {\"name\": \"WeierstrassCurve.toProjective\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve R → WeierstrassCurve.Projective R\", \"doc\": \"The function that maps a Weierstrass curve $ W $ over a ring $ R $ to its projective counterpart, defined by the homogeneous cubic equation $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ in projective coordinates $[X:\"}\n  {\"name\": \"WeierstrassCurve.Projective.PointClass\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"(R : Type r) → [CommRing R] → Type r\", \"doc\": \"The quotient of the type of triples $(x_0, x_1, x_2)$ in $R^3$ by the equivalence relation identifying triples that are scalar multiples of each other under the action of the multiplicative group of u\"}\n  {\"name\": \"WeierstrassCurve.Projective.baseChange_add\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"∀ {R : Type r} {S : Type s} {F : Type u} {K : Type v} [inst : CommRing R] [inst_1 : CommRing S] [inst_2 : Field F]\\n  [inst_3 : Field K] {W' : WeierstrassCurve.Projective R} [inst_4 : Algebra R S] [inst_5 : Algebra R F]\\n  [inst_6 : Algebra S F] [IsScalarTower R S F] [inst_8 : Algebra R K] [inst_9 : A\", \"doc\": \"For a projective Weierstrass curve over a ring $ R $, given an algebra homomorphism $ f : F \\\\to K $ satisfying the scalar tower condition over $ R $, and nonsingular points $ P, Q $ on the base-change\"}\n  {\"name\": \"WeierstrassCurve.Projective.NonsingularLift\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → [inst : CommRing R] → WeierstrassCurve.Projective R → WeierstrassCurve.Projective.PointClass R → Prop\", \"doc\": \"A property of a projective point $[X:Y:Z]$ on a Weierstrass curve over a commutative ring $R$, asserting that the point satisfies the curve's homogeneous cubic equation and at least one partial deriva\"}\n  {\"name\": \"WeierstrassCurve.Projective.toAffine\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Basic\", \"type\": \"{R : Type r} → WeierstrassCurve.Projective R → WeierstrassCurve.Affine R\", \"doc\": \"The function maps a projective Weierstrass curve defined by $ Y^2Z = X^3 + aXZ^2 + bZ^3 $ to its affine counterpart $ Y^2 = X^3 + aX + b $ by dehomogenizing with respect to the $ Z $-coordinate.\"}\n  {\"name\": \"WeierstrassCurve.Projective.Point\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Projective/Point\", \"type\": \"{R : Type r} → [CommRing R] → WeierstrassCurve.Projective R → Type r\", \"doc\": \"The type of points on a projective Weierstrass curve over a commutative ring $ R $.\"}\n  {\"name\": \"WeierstrassCurve.Affine.Point.baseChange\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/Affine/Point\", \"type\": \"{R : Type r} →\\n  (F : Type u) →\\n    (K : Type v) →\\n      [inst : CommRing R] →\\n        [inst_1 : Field F] →\\n          [inst_2 : Field K] →\\n            {W' : WeierstrassCurve.Affine R} →\\n              [inst_3 : DecidableEq F] →\\n                [inst_4 : DecidableEq K] →\\n                  [inst_5 : Al\", \"doc\": \"Given fields $F$ and $K$ equipped with an $R$-algebra structure and satisfying the scalar tower compatibility condition $R \\to F \\to K$, this function defines a group homomorphism from the set of points\"}\n",
+   "date": "2026-10-20",
+   "verdict": "No existing declaration defines this complete pro-etale family predicate; the existing ordinary-etale and Noetherian pro-etale constructions are reused."
+  },
+  {
+   "tool": "grep Mathlib AlgebraicGeometry",
+   "query": "projective.*trace.*system|normalized.*[Pp]rojective|SpP1",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-20",
+   "verdict": "No existing declaration defines this complete pro-etale family predicate; the existing ordinary-etale and Noetherian pro-etale constructions are reused."
+  },
+  {
+   "tool": "grep dag/nodes, lean/Sheaf and lean/WeilConjectures; blueprint_refs.py search",
+   "query": "SpP1|normalized projective.line.*trace|canonical.*projective.line.*system; projective.line.*trace|normalized.*decomposition",
+   "results": "blueprint_refs.py: 0 blueprint nodes match. Project source finds GeoP1Cohomology (Noetherian bases and base changes) and OrdinaryFiniteP1Arrows (etale interface), no all-base pro-etale trace-system predicate. No SpP1 declaration in Mathlib, WeilConjectures, or Sheaf.",
+   "date": "2026-10-20",
+   "verdict": "New predicate combines only existing objects and canonical maps; it is distinct from both existing interfaces."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sp-p1-trace",
+  "date": "2026-10-20",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-p1-trace",
+   "place": "Canonical unit/Kummer decomposition and trace equations in clauses 1--2",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-geo-p1-adjunction",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleProjectiveLineTraceSystem",
+  "declaration": "AlgebraicGeometry.ProEtale.SpP1BaseTraceConditions",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SpP1ChernFamily",
+   "AlgebraicGeometry.ProEtale.SpP1TwistedFamily",
+   "AlgebraicGeometry.ProEtale.SpP1DecompositionFamily",
+   "AlgebraicGeometry.ProEtale.SpP1NormalizedDecompositions",
+   "AlgebraicGeometry.ProEtale.SpP1BaseChange",
+   "AlgebraicGeometry.ProEtale.SpP1TraceChern",
+   "AlgebraicGeometry.ProEtale.SpP1RationalPointChern",
+   "AlgebraicGeometry.ProEtale.SpP1BaseTraceConditions"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleProjectiveLineTraceSystem.lean",
+  "statement": "def SpP1BaseTraceConditions (A : Type (u + 1)) [CommRing A] [Finite A] (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0) (c : SpP1ChernFamily A N hA) (b : SpP1TwistedFamily A N hA) (d : SpP1DecompositionFamily A N hA) : Prop",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-20",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b7612616",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b7612616",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after c93f H2 RETURN. Theorem stmt_deps sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition/lem-amb-p1-diagonal-integrals replaced in item and def-sp-p1-proetale-trace-system by existing:true def nodes def-sp-p1-comparison-arrows (15 plain GeoP1Cohomology defs), def-sp-p1-decomposition-arrows, def-sp-p1-diagonal-charts; ownership scan: every geoP1*/p1Decomposition*/projectiveLineDiagonal* identifier now resolves to a cited def node; statements verbatim, no rival owners, DAG acyclic; item statement/proof/proof_deps byte-identical to live. Advisory resolved: new def-sp-cartier-derived-realization pins delta = R(Delta_*)(s) ; exact single comparison ; cDelta ; t^-1 (exactness witness is a conjunct); free deltaType HEq verified sound: scratch rfl proves the Hom types equal (finiteEtaleTateSheaf 1 reduces to finiteEtaleTateLine), 11.3 s clean. Clauses 1-2, edge cases, docstrings, single sorry unchanged/OK; trace-system module byte-identical to c93f. Advisory: GeoCartierClass helpers owned only by base stmt_dep sk-lem-geo-cartier; finiteEtaleTateLine/ProjectiveLine/derivedUpperStarLowerStarAdjunction owners outside stmt_deps. Compile at load 133-172: CartierDerivedRealization 23.9-59.9 s clean, TraceSystem 31-58 s clean, item module timeout 60 s x3; item prefix through SpP1DiagonalIntegrals clean 49.2 s (kernel 40.5 s), delivery recorded 29.5/27.8/47.1 s. Maintainer: land item at lower load."
+ }
+}

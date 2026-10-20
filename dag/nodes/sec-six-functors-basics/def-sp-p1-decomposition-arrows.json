@@ -1,0 +1,108 @@
+{
+ "id": "def-sp-p1-decomposition-arrows",
+ "kind": "definition",
+ "title": "Canonical ordinary etale signed twists and unit-Chern decomposition map",
+ "status": "split",
+ "statement": "Let $A$ be a commutative ring in universe $u+1$, $N\\in\\mathbf N$ with $NA=0$, and $T$ a scheme in universe $u$. Use the ordinary small etale module derived categories [def-weil-pbc-derived-categories] and finite signed Tate sheaves [def-asd-finite-etale-tate-sheaf]. Define $A_T(a)[b]$ to be the degree-zero embedding of the signed Tate sheaf $A_T(a)$ followed by shift $b$, for all integers $a,b$. For the following map assume $N>0$ and $N$ invertible on a scheme $S$, and put $q:P=\\mathbf P^1_S\\to S$ [def-nagata-projective-space-base-change]. For any arrow $c:A_P\\to A_P(1)[2]$, define $d(c):A_S\\oplus A_S(-1)[-2]\\to Rq_*A_P$ as the ordered coproduct of the ordinary adjunction unit and the adjunct of the composite $q^*(A_S(-1)[-2])\\cong q^*(A_S(-1)[-2])\\otimes_A^L A_P\\xrightarrow{1\\otimes c}q^*(A_S(-1)[-2])\\otimes_A^L A_P(1)[2]\\to A_P$. Here the last arrow is the canonical roots-normalized negative-twist pullback, cancellation of the shifts, tensor symmetry, and the internal-Hom evaluation of the dual Tate line against the positive line [lem-asd-etale-finite-twist-pullback], [def-kun-derived-tensor], [def-asd-ordinary-finite-p1-arrows]. This defines the map for the supplied $c$ and asserts neither Kummer normalization nor invertibility, and assumes no Noetherianity.",
+ "stmt_deps": [
+  "def-weil-pbc-derived-categories",
+  "def-asd-finite-etale-tate-sheaf",
+  "def-nagata-projective-space-base-change",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-kun-derived-tensor",
+  "def-asd-ordinary-finite-p1-arrows"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-geo-p1-adjunction/det-sp-p1-trace.md",
+  "place": "Clause 1: the specified unit-and-Chern map (1,h)"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "projective line Kummer decomposition canonical unit evaluation Chern map",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"WeierstrassCurve.Projective.smul_eq\", \"module\": \"Mathlib.AlgebraicGeometry.EllipticCurve.Projective.Basic\", \"type\": \"(P : Fin 3 → R) {u : R} (hu : IsUnit u) : (⟦u • P⟧ : PointClass R) = ⟦P⟧\", \"doc\": \"For any projective point $ P $ over a commutative ring $ R $ and any unit $ u \\\\in R $, the scalar multiplication $ u \\\\cdot P $ yields an equivalent projective point, i.e., $[u \\\\cdot P] = [P]$.\"}\n  {\"name\": \"MulChar.coe_equivToUnitHom\", \"module\": \"Mathlib.NumberTheory.MulChar.Basic\", \"type\": \"(χ : MulChar R R') (a : Rˣ) : ↑(equivToUnitHom χ a) = χ a\", \"doc\": \"For any multiplicative character $\\\\chi : R \\\\to R'$ and any invertible element $a \\\\in R^\\\\times$, the evaluation of the corresponding unit group homomorphism $\\\\text{equivToUnitHom}(\\\\chi)$ at $a$ equals \"}\n  {\"name\": \"NumberField.Units.coe_injective\", \"module\": \"Mathlib.NumberTheory.NumberField.Units.Basic\", \"type\": \": Function.Injective ((↑) : (𝓞 K)ˣ → K)\", \"doc\": \"The canonical map from the group of units $(\\\\mathcal{O}_K)^\\\\times$ of the ring of integers $\\\\mathcal{O}_K$ of a number field $K$ to $K$ is injective.\"}\n  {\"name\": \"Projectivization.rep\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \"(v : ℙ K V) : V\", \"doc\": \"The function maps each element of the projectivization of a module $ V $ over a division ring $ K $ to a representative non-zero vector in $ V $, selected via the quotient construction that identifies\"}\n  {\"name\": \"Combinatorics.Line.toSubspaceUnit_apply\", \"module\": \"Mathlib.Combinatorics.HalesJewett\", \"type\": \"(l : Line α ι) (a) : ⇑l.toSubspaceUnit a = l (a ())\", \"doc\": \"For any combinatorial line $ l $ and function $ a $, applying the unit subspace constructed from $ l $ to $ a $ yields the same result as evaluating $ l $ at $ a(()) $, where $ () $ denotes the unique\"}\n  {\"name\": \"Projectivization.mk\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \"(v : V) (hv : v ≠ 0) : ℙ K V\", \"doc\": \"The function maps a non-zero vector $ v $ in a module $ V $ over a division ring $ K $ to its equivalence class in the projectivization $ \\\\mathbb{P} K V $, where two vectors are identified if they are\"}\n  {\"name\": \"Projectivization.lift_mk\", \"module\": \"Mathlib.LinearAlgebra.Projectivization.Basic\", \"type\": \"{α : Type*} (f : { v : V // v ≠ 0 } → α) (hf : ∀ (a b : { v : V // v ≠ 0 }) (t : K), a = t • (b : V) → f a = f b)\\n  (v : V) (hv : v ≠ 0) : Projectivization.lift f hf (mk K v hv) = f ⟨v, hv⟩\", \"doc\": \"For a function $ f $ defined on non-zero vectors of a module $ V $ over a division ring $ K $, if $ f $ is invariant under scalar multiplication by elements of $ K^\\times $, then the lift of $ f $ to t\"}\n  {\"name\": \"MvPolynomial.evalₗ\", \"module\": \"Mathlib.FieldTheory.Finite.Polynomial\", \"type\": \"[CommSemiring K] : MvPolynomial σ K →ₗ[K] (σ → K) → K\", \"doc\": \"The $ K $-linear map from the multivariate polynomial ring $ K[\\\\sigma] $ to the space of functions $ (\\\\sigma \\\\to K) \\\\to K $, which sends each polynomial $ p $ to the function evaluating $ p $ at assig\"}\n",
+   "date": "2026-10-20",
+   "verdict": "Existing project definitions are the exact match; record their unchanged declarations, without a new Lean module."
+  },
+  {
+   "tool": "LeanFinder",
+   "query": "projective line Kummer decomposition canonical unit evaluation Chern map",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnit\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      {K : Type v} →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] → [inst_4 : IsFractionRing R K] → {n : ℕ} → Rˣ →* ↥IsDedekindDomain.selmerGroup\", \"doc\": \"The function maps the group of units $ R^\\times $ of a Dedekind domain $ R $ into the Selmer group $ K^\\times/(K^\\times)^n $ of its fraction field $ K $, where the Selmer group consists of elements with \"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.fromUnitLift\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      {K : Type v} →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              {n : ℕ} → [Fact (0 < n)] → Rˣ ⧸ (powMonoidHom n).range →* ↥IsDedekindDomain.selmer\", \"doc\": \"A group homomorphism from the quotient group $ R^\\times/(R^\\times)^n $ to the Selmer group $ K^\\times/(K^\\times)^n $, constructed by lifting through the kernel of the valuation map and using the canonical\"}\n  {\"name\": \"groupCohomology.Hilbert90.aux\", \"module\": \"Mathlib/RepresentationTheory/Homological/GroupCohomology/Hilbert90\", \"type\": \"{K : Type u_1} →\\n  {L : Type u_2} →\\n    [inst : Field K] → [inst_1 : Field L] → [inst_2 : Algebra K L] → [FiniteDimensional K L] → (Gal(L/K) → Lˣ) → L → L\", \"doc\": \"Given a function $ f $ from the Galois group $ \\\\text{Gal}(L/K) $ to the multiplicative group $ L^\\times $, this function constructs a linear map from $ L $ to $ L $ by taking the finite-support linear \"}\n  {\"name\": \"IsDedekindDomain.selmerGroup.valuation\", \"module\": \"Mathlib/RingTheory/DedekindDomain/SelmerGroup\", \"type\": \"{R : Type u} →\\n  [inst : CommRing R] →\\n    [inst_1 : IsDedekindDomain R] →\\n      {K : Type v} →\\n        [inst_2 : Field K] →\\n          [inst_3 : Algebra R K] →\\n            [inst_4 : IsFractionRing R K] →\\n              {S : Set (IsDedekindDomain.HeightOneSpectrum R)} →\\n                {n : ℕ} → ↥IsDe\", \"doc\": \"A group homomorphism from the Selmer group $ K^\\\\times/(K^\\\\times)^n $ to the product of multiplicative groups $ \\\\mathbb{Z}/n\\\\mathbb{Z}^\\\\times $ over the set $ S $, defined by mapping each element to it\"}\n  {\"name\": \"WeierstrassCurve.VariableChange.u\", \"module\": \"Mathlib/AlgebraicGeometry/EllipticCurve/VariableChange\", \"type\": \"{R : Type u} → [inst : CommRing R] → WeierstrassCurve.VariableChange R → Rˣ\", \"doc\": \"The function returns the invertible element $ u \\\\in R^\\\\times $ associated with a variable change of a Weierstrass curve over a commutative ring $ R $, where $ R^\\\\times $ denotes the group of units of \"}\n  {\"name\": \"Projectivization.nonZeroEquivProjectivizationProdUnits\", \"module\": \"Mathlib/LinearAlgebra/Projectivization/Cardinality\", \"type\": \"(k : Type u_1) →\\n  (V : Type u_2) →\\n    [inst : DivisionRing k] →\\n      [inst_1 : AddCommGroup V] → [inst_2 : Module k V] → { v // v ≠ 0 } ≃ Projectivization k V × kˣ\", \"doc\": \"The type of non-zero vectors in a module $ V $ over a division ring $ K $ is equivalent to the product of the projectivization $ ℙ K V $ (the space of lines through the origin) with the multiplicative\"}\n  {\"name\": \"circleEquivGen\", \"module\": \"Mathlib/NumberTheory/PythagoreanTriples\", \"type\": \"{K : Type u_1} → [inst : Field K] → (∀ (x : K), 1 + x ^ 2 ≠ 0) → K ≃ { p // p.1 ^ 2 + p.2 ^ 2 = 1 ∧ p.2 ≠ -1 }\", \"doc\": \"Let $K$ be a field such that for all $x \\\\in K$, $1 + x^2 \\\\neq 0$. This definition establishes an equivalence (a bijection) between the field $K$ and the set of points $(a, b)$ on the unit circle $a^2 \"}\n  {\"name\": \"circleEquivGen_apply\", \"module\": \"Mathlib/NumberTheory/PythagoreanTriples\", \"type\": \"∀ {K : Type u_1} [inst : Field K] (hk : ∀ (x : K), 1 + x ^ 2 ≠ 0) (x : K),\\n  ↑((circleEquivGen hk) x) = (2 * x / (1 + x ^ 2), (1 - x ^ 2) / (1 + x ^ 2))\", \"doc\": \"For any element $x$ in a field $K$ satisfying $1 + x^2 \\neq 0$, the function $\\\\text{circleEquivGen}$ maps $x$ to the pair $\\\\left(\\\\frac{2x}{1 + x^2}, \\\\frac{1 - x^2}{1 + x^2}\\\\right)$ in $K \\times K$. This\"}\n",
+   "date": "2026-10-20",
+   "verdict": "Existing project definitions are the exact match; record their unchanged declarations, without a new Lean module."
+  },
+  {
+   "tool": "grep",
+   "query": "p1DecompositionMap|p1DecompositionTwist",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-20",
+   "verdict": "Existing project definitions are the exact match; record their unchanged declarations, without a new Lean module."
+  },
+  {
+   "tool": "rg dag/nodes, lean/WeilConjectures, lean/Sheaf; blueprint_refs.py search",
+   "query": "geoP1Comparison|p1DecompositionMap|projectiveLineDiagonalProjection; projective.line.*(comparison|decomposition|diagonal)",
+   "results": "DAG references occur only in the theorem records sk-lem-geo-p1-cohomology, thm-amb-p1-decomposition, lem-amb-p1-diagonal-integrals and the consumer lem-sp-tower-p1-arbitrary-base-integrals. No definition node owns these helpers. No matching declaration in WeilConjectures. The unchanged Sheaf modules GeoP1Cohomology, OrdinaryFiniteP1Decomposition and ProjectiveLineDiagonalIntegrals contain the exact definitions. blueprint_refs.py: 0 blueprint nodes match.",
+   "date": "2026-10-20",
+   "verdict": "Add definition ownership records as required by the immutable-head review; reuse every existing declaration."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-sp-p1-trace",
+  "date": "2026-10-20",
+  "group": "NB"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-p1-trace",
+   "place": "Unit-and-evaluation definition of the decomposition map in clause 1",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-geo-p1-adjunction",
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.OrdinaryFiniteP1Decomposition",
+  "declaration": "AlgebraicGeometry.Etale.p1DecompositionMap",
+  "declarations": [
+   "AlgebraicGeometry.Etale.p1DecompositionTwist",
+   "AlgebraicGeometry.Etale.p1DecompositionMap"
+  ],
+  "statement": "def p1DecompositionMap (A : Type (u + 1)) [CommRing A]\n    (N : ℕ) (hN : 0 < N) (hA : (N : A) = 0)\n    (S : Scheme.{u}) (hS : IsUnit (N : Γ(S, ⊤)))\n    (c : ordinaryFiniteUnit A (ProjectiveLine S) ⟶\n      (ordinaryFiniteLine A N hA (ProjectiveLine S))⟦(2 : ℤ)⟧) :\n    (ordinaryFiniteUnit A S ⊞ p1DecompositionTwist A N hA S (-1) (-2)) ⟶\n      (ordinaryFinitePushforward A (ProjectiveLine S ↘ S)).obj\n        (ordinaryFiniteUnit A (ProjectiveLine S))",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-20",
+  "existing": true,
+  "note": "Definition ownership for the existing canonical helpers, separated from the theorem in this unchanged module. No declaration is copied or newly introduced."
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b7612616",
+  "group": "NB",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5b7612616",
+  "group": "NB",
+  "result": "pass",
+  "note": "Re-delivery after c93f H2 RETURN. Theorem stmt_deps sk-lem-geo-p1-cohomology/thm-amb-p1-decomposition/lem-amb-p1-diagonal-integrals replaced in item and def-sp-p1-proetale-trace-system by existing:true def nodes def-sp-p1-comparison-arrows (15 plain GeoP1Cohomology defs), def-sp-p1-decomposition-arrows, def-sp-p1-diagonal-charts; ownership scan: every geoP1*/p1Decomposition*/projectiveLineDiagonal* identifier now resolves to a cited def node; statements verbatim, no rival owners, DAG acyclic; item statement/proof/proof_deps byte-identical to live. Advisory resolved: new def-sp-cartier-derived-realization pins delta = R(Delta_*)(s) ; exact single comparison ; cDelta ; t^-1 (exactness witness is a conjunct); free deltaType HEq verified sound: scratch rfl proves the Hom types equal (finiteEtaleTateSheaf 1 reduces to finiteEtaleTateLine), 11.3 s clean. Clauses 1-2, edge cases, docstrings, single sorry unchanged/OK; trace-system module byte-identical to c93f. Advisory: GeoCartierClass helpers owned only by base stmt_dep sk-lem-geo-cartier; finiteEtaleTateLine/ProjectiveLine/derivedUpperStarLowerStarAdjunction owners outside stmt_deps. Compile at load 133-172: CartierDerivedRealization 23.9-59.9 s clean, TraceSystem 31-58 s clean, item module timeout 60 s x3; item prefix through SpP1DiagonalIntegrals clean 49.2 s (kernel 40.5 s), delivery recorded 29.5/27.8/47.1 s. Maintainer: land item at lower load."
+ }
+}
