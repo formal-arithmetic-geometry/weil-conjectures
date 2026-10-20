@@ -798,4 +798,34 @@ theorem sheafSubcategory_comparison {C : Type u} [SmallCategory C]
       Functor.associator F e.functor e.inverse ≪≫
       Functor.isoWhiskerLeft F e.unitIso.symm ≪≫ Functor.rightUnitor F⟩
 
+
+/-- A full pullback-closed generating subcategory presents a sieve sheaf category.
+
+Source: Stacks Project, Sites, Tag 03A1, with arbitrary sieve topologies as in
+`lem-trf-sieve-sheaves-covering-site`
+(blueprint: lem-trf-sieve-sheaf-subcategory-presentation).
+
+Proof: Declare a presieve covering when its image under F is jointly epimorphic.
+The sectionwise local lifting criterion proves the site axioms, using the given
+ambient pullbacks. Descent of matching maps makes the restricted Yoneda nerve a
+sheaf. The sheafification adjunction identifies its restriction to the sheafified
+representables with the original sheaf. Local representation and local equality
+of sheafification make that representable lift a dense subsite; restriction along
+it is an equivalence. The nerve, whose composite with restriction is the identity,
+is consequently an equivalence too. The existing internal comparison proof uses
+only the sieve topology J, and does not require covering pullbacks in C. -/
+theorem sheafSubcategory_sievePresentation {C : Type u} [SmallCategory C]
+    (J : GrothendieckTopology C) {E : Type u} [SmallCategory E]
+    (F : E ⥤ Sheaf J (Type u)) [F.Full] [F.Faithful]
+    (hrep : ∀ U : C, ∃ A : E,
+      Nonempty (F.obj A ≅ (presheafToSheaf J (Type u)).obj (yoneda.obj U)))
+    (hpb : ∀ (A B T : E) (f : A ⟶ T) (g : B ⟶ T),
+      ∃ (P : E) (p : P ⟶ A) (q : P ⟶ B),
+        IsPullback (F.map p) (F.map q) (F.map f) (F.map g)) :
+    ∃ K : Precoverage E, K.IsSiteForCoverings ∧
+      Nonempty (Sheaf J (Type u) ≌ Sheaf K.toGrothendieck (Type u)) := by
+  let := nerveToSheaf_isEquivalence F hrep hpb
+  exact ⟨epiPrecoverage F, epiPrecoverage_site F hpb,
+    ⟨(nerveToSheaf F hpb).asEquivalence⟩⟩
+
 end CategoryTheory

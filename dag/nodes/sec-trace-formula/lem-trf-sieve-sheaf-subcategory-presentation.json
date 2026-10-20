@@ -1,0 +1,183 @@
+{
+ "id": "lem-trf-sieve-sheaf-subcategory-presentation",
+ "kind": "statement",
+ "title": "A pullback-closed generating subcategory presents arbitrary sieve sheaves",
+ "statement": "Fix a universe $u$. Let $C,E$ be $u$-small categories, let $J$ be an arbitrary Grothendieck topology of covering sieves on $C$ [def-weil-pbc-topos], and let $F:E\\to\\operatorname{Sh}(C,J;\\operatorname{Type}_u)$ be fully faithful. Suppose for every $U\\in C$ some $F(A)$ is isomorphic to the sheafification of the representable at $U$ [lem-trf-sieve-set-sheafification-exists]. Suppose also that for every cospan $A\\to T\\leftarrow B$ in $E$ there exist $P\\in E$ and arrows $P\\to A$, $P\\to B$ whose image under $F$ is a pullback square. Then there is a precoverage $K$ on $E$ satisfying the covering-family site axioms [def-weil-pbc-sites-and-cohomology] and an equivalence $\\operatorname{Sh}(C,J;\\operatorname{Type}_u)\\simeq\\operatorname{Sh}(E,K^{\\mathrm{Groth}};\\operatorname{Type}_u)$. No pullbacks in $C$ are assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03A1 (lemma-special-equivalence), site axioms and restricted-Yoneda comparison, extended to arbitrary sieve topologies by local representation and local equality as in the parent node."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-topos",
+  "lem-trf-sieve-set-sheafification-exists",
+  "def-weil-pbc-sites-and-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Define K to consist of presieves whose images under F jointly right-cancel maps to every sheaf. For an indexed family, form the sectionwise union of the images. Its sheaf closure includes into F(A). Joint right cancellation makes this inclusion epi; it is mono, hence an isomorphism. Conversely, local lifts and separatedness give joint right cancellation. Thus covering means that every section locally lifts along a member of the family. This works also for the empty family.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A1 (lemma-special-equivalence), site axioms and restricted-Yoneda comparison, extended to arbitrary sieve topologies by local representation and local equality as in the parent node."
+   }
+  },
+  {
+   "text": "Singleton isomorphisms and composites satisfy joint cancellation directly. For base change, choose the hypothesized ambient pullbacks for each covering arrow. Evaluation preserves these pullbacks, so a section and a local lift of its image determine a section of the pullback. The local-lifting criterion shows the pulled-back family covers. Faithfulness reflects the ambient pullback squares to E. This proves K.IsSiteForCoverings, including bind composition and actual covering-member pullbacks.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A1 (lemma-special-equivalence), site axioms and restricted-Yoneda comparison, extended to arbitrary sieve topologies by local representation and local equality as in the parent node."
+   }
+  },
+  {
+   "text": "The restricted nerve N(B)(A)=Hom(F(A),B) is a K-sheaf. A matching family of maps from a jointly epimorphic family gives matching sections on the covering sieve of local lifts of each section. Their values agree by the pairwise ambient pullbacks; glue in B. Uniqueness proves naturality and recovers a unique sheaf map F(A) to B. Pullbacks of generated sieves are covering by the same local-lifting test, so this proves the sheaf condition for K.toGrothendieck.",
+   "uses": [
+    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A1 (lemma-special-equivalence), site axioms and restricted-Yoneda comparison, extended to arbitrary sieve topologies by local representation and local equality as in the parent node."
+   }
+  },
+  {
+   "text": "Choose representatives of the sheafified representables using hrep, and transport arrows through the full faithful F to get v:C to E. The sheafification adjunction and Yoneda give natural bijections Hom(F(v(U)),B)=B(U). These identify restriction of N(B) along v with B.",
+   "uses": [
+    "lem-trf-sieve-set-sheafification-exists",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A1 (lemma-special-equivalence), site axioms and restricted-Yoneda comparison, extended to arbitrary sieve topologies by local representation and local equality as in the parent node."
+   }
+  },
+  {
+   "text": "The section formula proves that v takes covering sieves to K-covering sieves. The maps from all sheafified representables to any F(A) form an epimorphic family, proving cover density. Local representation of sheafification sections proves local fullness; local equality proves local faithfulness.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A1 (lemma-special-equivalence), site axioms and restricted-Yoneda comparison, extended to arbitrary sieve topologies by local representation and local equality as in the parent node."
+   }
+  },
+  {
+   "text": "Let Jprime be the topology induced from K along v. Cover preservation gives J <= Jprime. The nerve is a K-sheaf and restricts naturally to any J-sheaf B, so every such B is a Jprime-sheaf. In particular the sheaf of J-closed sieves is a Jprime-sheaf; the closed-sieve classifier topology test gives Jprime <= J. Hence v is a dense subsite for J and K. Dense-subsite comparison makes restriction W an equivalence. Since N followed by W is naturally the identity, N is an equivalence. Choose K and the equivalence associated to N.",
+   "uses": [
+    "lem-trf-sieve-dense-subsite-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03A1 (lemma-special-equivalence), site axioms and restricted-Yoneda comparison, extended to arbitrary sieve topologies by local representation and local equality as in the parent node."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-cbc-set-presheaf-sheafification-local-bijection",
+  "lem-galois-yoneda-hom-bijection",
+  "lem-trf-sieve-dense-subsite-comparison",
+  "lem-trf-sieve-set-sheafification-exists",
+  "lem-weil-pbc-site-sheaf-sets-epi-locally-surjective",
+  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "K2",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Exposes the already proved internal arbitrary-sieve comparison in SheafSubcategoryComparison; the older public theorem unnecessarily required a covering-family presentation. Site axioms, descent, density and local full faithfulness are shared complete Lean proofs."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A full pullback closed subcategory of sheaves containing all sheafified representables presents the category of sheaves for a Grothendieck topology",
+   "results": "{\"t\": \"2026-10-20T16:03:47Z\", \"tool\": \"leansearch\", \"query\": \"A full pullback closed subcategory of sheaves containing all sheafified representables presents the category of sheaves for a Grothendieck topology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isSheaf_of_isRepresentable\", \"CategoryTheory.GrothendieckTopology.instFullSheafTypeYoneda\", \"CategoryTheory.GrothendieckTopology.Subcanonical.of_isSheaf_yoneda_obj\", \"CategoryTheory.GrothendieckTopology.Subcanonical.isSheaf_of_isRepresentable\", \"CategoryTheory.Sheaf.canonicalTopology\", \"CategoryTheory.topologyOfClosureOperator\", \"CategoryTheory.GrothendieckTopology.isClosed_pullback\", \"CategoryTheory.Subpresheaf.sheafify\"], \"digest\": \"246c5fe8950d5fb5\"}",
+   "date": "2026-10-20",
+   "verdict": "No direct subcategory presentation theorem. Mathlib supplies dense-subsite comparison and sheafification; the existing project module already proves the required site, local fullness/faithfulness and nerve equivalence internally."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsDenseSubsite\"",
+   "results": "{\"t\": \"2026-10-20T16:03:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsDenseSubsite\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsDenseSubsite\", \"CategoryTheory.Functor.IsDenseSubsite.isCoverDense\", \"CategoryTheory.Functor.IsDenseSubsite.isCoverDense'\", \"CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful\", \"CategoryTheory.Functor.IsDenseSubsite.isLocallyFaithful'\", \"CategoryTheory.Functor.IsDenseSubsite.isLocallyFull\", \"CategoryTheory.Functor.IsDenseSubsite.isLocallyFull'\", \"CategoryTheory.Functor.IsDenseSubsite.coverPreserving\"], \"digest\": \"612d22669f472b0c\"}",
+   "date": "2026-10-20",
+   "verdict": "No direct subcategory presentation theorem. Mathlib supplies dense-subsite comparison and sheafification; the existing project module already proves the required site, local fullness/faithfulness and nerve equivalence internally."
+  },
+  {
+   "tool": "grep",
+   "query": "IsDenseSubsite|epiPrecoverage|sheafSubcategory",
+   "results": "{\"t\": \"2026-10-20T16:03:48Z\", \"tool\": \"grep\", \"query\": \"IsDenseSubsite|epiPrecoverage|sheafSubcategory\", \"sub\": \"CategoryTheory/Sites\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\", \"Mathlib/CategoryTheory/Sites/Over.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\", \"Mathlib/CategoryTheory/Sites/ConstantSheaf.lean\"], \"digest\": \"ff8c364dc48e494b\"}",
+   "date": "2026-10-20",
+   "verdict": "No direct subcategory presentation theorem. Mathlib supplies dense-subsite comparison and sheafification; the existing project module already proves the required site, local fullness/faithfulness and nerve equivalence internally."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.SieveSheavesCoveringSite",
+  "date": "2026-10-21",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Generic source-localization input in the normal-cone specialization branch: replace the arbitrary small sieve-site presentation of a Grothendieck topos by a covering-family site before applying the good-site construction (Stacks 03CI). Subcategory comparison after the finite-limit closure.",
+   "via": [
+    "lem-trf-sieve-sheaves-covering-site",
+    "lem-trf-topos-localization-site-presentation",
+    "lem-trf-topos-complement-module-stalks",
+    "lem-trf-oriented-source-localization",
+    "lem-trf-psi-proper-surjective-constructibility",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SheafSubcategoryComparison",
+  "file": "lean/Sheaf/CategoryTheory/SheafSubcategoryComparison.lean",
+  "declaration": "CategoryTheory.sheafSubcategory_sievePresentation",
+  "statement": "theorem sheafSubcategory_sievePresentation {C : Type u} [SmallCategory C]\n    (J : GrothendieckTopology C) {E : Type u} [SmallCategory E]\n    (F : E ⥤ Sheaf J (Type u)) [F.Full] [F.Faithful]\n    (hrep : ∀ U : C, ∃ A : E,\n      Nonempty (F.obj A ≅ (presheafToSheaf J (Type u)).obj (yoneda.obj U)))\n    (hpb : ∀ (A B T : E) (f : A ⟶ T) (g : B ⟶ T),\n      ∃ (P : E) (p : P ⟶ A) (q : P ⟶ B),\n        IsPullback (F.map p) (F.map q) (F.map f) (F.map g)) :\n    ∃ K : Precoverage E, K.IsSiteForCoverings ∧\n      Nonempty (Sheaf J (Type u) ≌ Sheaf K.toGrothendieck (Type u))",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261020T162312-L-3588273",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-20",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261020T162312-L-3588273",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
