@@ -9,6 +9,17 @@ public import Mathlib.AlgebraicGeometry.Geometrically.Irreducible
 public import Mathlib.RingTheory.AlgebraicIndependent.Basic
 public import Mathlib.RingTheory.Localization.FractionRing
 public import Mathlib.FieldTheory.IntermediateField.Adjoin.Basic
+import Mathlib.FieldTheory.PrimitiveElement
+import Mathlib.Data.Fintype.Pigeonhole
+import Mathlib.Tactic.ByContra
+import Mathlib.Tactic.FieldSimp
+import Mathlib.Tactic.FinCases
+import Mathlib.Tactic.LinearCombination
+import Mathlib.Tactic.Push
+import Mathlib.Tactic.Ring
+import Mathlib.Tactic.Tauto
+import Mathlib.RingTheory.AlgebraicIndependent.AlgebraicClosure
+import Mathlib.FieldTheory.IntermediateField.Adjoin.Algebra
 import Sheaf.AlgebraicGeometry.GeometricIrreducibilitySubextension
 import Sheaf.FieldTheory.FiniteSeparableClosure
 import Sheaf.FieldTheory.GeometricIrreducibilityAddTranscendental
@@ -70,6 +81,527 @@ noncomputable def bertiniBaseField (k K : Type u) [Field k] [Field K] [Algebra k
   IntermediateField.adjoin k <| Set.range <|
     Fin.lastCases (bertiniXi k K n g) (fun i ↦ bertiniCoordinate K n i)
 
+private theorem adjoin_pair_linear_change
+    {F E : Type u} [Field F] [Field E] [Algebra F E]
+    (x d : E) (a b : F) (hab : a ≠ b) :
+    IntermediateField.adjoin F ({x + algebraMap F E a * d,
+      x + algebraMap F E b * d} : Set E) = IntermediateField.adjoin F ({x, d} : Set E) := by
+  apply le_antisymm
+  · apply IntermediateField.adjoin_le_iff.mpr
+    intro y hy
+    rcases Set.mem_insert_iff.mp hy with rfl | hy
+    · exact IntermediateField.add_mem _
+        (IntermediateField.subset_adjoin F _ (Set.mem_insert _ _))
+        (IntermediateField.mul_mem _ (IntermediateField.algebraMap_mem _ a)
+          (IntermediateField.subset_adjoin F _ (Set.mem_insert_of_mem _ rfl)))
+    · rcases Set.mem_singleton_iff.mp hy with rfl
+      exact IntermediateField.add_mem _
+        (IntermediateField.subset_adjoin F _ (Set.mem_insert _ _))
+        (IntermediateField.mul_mem _ (IntermediateField.algebraMap_mem _ b)
+          (IntermediateField.subset_adjoin F _ (Set.mem_insert_of_mem _ rfl)))
+  · let L := IntermediateField.adjoin F
+      ({x + algebraMap F E a * d, x + algebraMap F E b * d} : Set E)
+    have h₁ : x + algebraMap F E a * d ∈ L :=
+      IntermediateField.subset_adjoin F _ (Set.mem_insert _ _)
+    have h₂ : x + algebraMap F E b * d ∈ L :=
+      IntermediateField.subset_adjoin F _ (Set.mem_insert_of_mem _ rfl)
+    have hd : d ∈ L := by
+      have heq : (x + algebraMap F E a * d - (x + algebraMap F E b * d)) /
+          algebraMap F E (a - b) = d := by
+        have hn : algebraMap F E (a - b) ≠ 0 :=
+          (map_ne_zero (algebraMap F E)).mpr (sub_ne_zero.mpr hab)
+        apply (div_eq_iff hn).mpr
+        rw [map_sub]
+        ring
+      rw [← heq]
+      exact L.div_mem (L.sub_mem h₁ h₂) (L.algebraMap_mem (a - b))
+    apply IntermediateField.adjoin_le_iff.mpr
+    intro y hy
+    change y ∈ L
+    rcases Set.mem_insert_iff.mp hy with hy | hy
+    · rw [hy]
+      have hx : x = x + algebraMap F E a * d - algebraMap F E a * d := by ring
+      rw [hx]
+      exact L.sub_mem h₁ (L.mul_mem (L.algebraMap_mem a) hd)
+    · rw [Set.mem_singleton_iff.mp hy]
+      exact hd
+
+private theorem exists_separable_adjoin_collision
+    {F E : Type u} {I : Type} [Field F] [Field E] [Algebra F E] [Infinite I]
+    (hfg : (⊤ : IntermediateField F E).FG) (t : I → E)
+    (ht : ∀ i, IsSeparable F (t i)) :
+    ∃ i j, i ≠ j ∧ IntermediateField.adjoin F ({t i} : Set E) =
+      IntermediateField.adjoin F ({t j} : Set E) := by
+  let S := separableClosure F E
+  have : FiniteDimensional F S := (finite_separable_closure hfg).2
+  have : Finite (IntermediateField F S) :=
+    Field.finite_intermediateField_of_exists_primitive_element F S
+      (Field.exists_primitive_element F S)
+  let f : I → IntermediateField F S :=
+    fun i ↦ IntermediateField.adjoin F ({⟨t i, ht i⟩} : Set S)
+  obtain ⟨i, j, hij, heq⟩ := Finite.exists_ne_map_eq_of_infinite f
+  refine ⟨i, j, hij, ?_⟩
+  have := congrArg IntermediateField.lift heq
+  simpa only [f, IntermediateField.lift_adjoin_simple] using this
+
+private theorem algebraicIndependent_pair_linear_change
+    {F E : Type u} [Field F] [Field E] [Algebra F E]
+    (x d : E) (h : AlgebraicIndependent F ![x, d])
+    (a b : F) (hab : a ≠ b) :
+    AlgebraicIndependent F ![x + algebraMap F E a * d, x + algebraMap F E b * d] := by
+  set_option backward.isDefEq.respectTransparency false in
+    let f : MvPolynomial (Fin 2) F →ₐ[F] MvPolynomial (Fin 2) F :=
+      MvPolynomial.aeval ![MvPolynomial.X 0 + MvPolynomial.C a * MvPolynomial.X 1,
+        MvPolynomial.X 0 + MvPolynomial.C b * MvPolynomial.X 1]
+    let g : MvPolynomial (Fin 2) F →ₐ[F] MvPolynomial (Fin 2) F :=
+      MvPolynomial.aeval
+        ![MvPolynomial.C b * MvPolynomial.C ((b - a)⁻¹) * MvPolynomial.X 0 -
+            MvPolynomial.C a * MvPolynomial.C ((b - a)⁻¹) * MvPolynomial.X 1,
+          MvPolynomial.C ((b - a)⁻¹) * (MvPolynomial.X 1 - MvPolynomial.X 0)]
+    have hz : (MvPolynomial.C b - MvPolynomial.C a) * MvPolynomial.C ((b - a)⁻¹) =
+        (1 : MvPolynomial (Fin 2) F) := by
+      rw [← map_sub, ← map_mul, mul_inv_cancel₀ (sub_ne_zero.mpr hab.symm), map_one]
+    have hg : g.comp f = AlgHom.id F _ := by
+      ext1 i
+      fin_cases i <;> simp [f, g]
+      · linear_combination (MvPolynomial.X (0 : Fin 2) : MvPolynomial (Fin 2) F) * hz
+      · linear_combination (MvPolynomial.X (1 : Fin 2) : MvPolynomial (Fin 2) F) * hz
+    have hf : Function.Injective f := by
+      intro p q hpq
+      have := congrArg g hpq
+      simpa only [← AlgHom.comp_apply, hg, AlgHom.id_apply] using this
+    have heq : MvPolynomial.aeval ![x + algebraMap F E a * d,
+          x + algebraMap F E b * d] = (MvPolynomial.aeval ![x, d]).comp f := by
+      ext i
+      fin_cases i <;> simp [f]
+    rw [algebraicIndependent_iff_injective_aeval, heq]
+    exact (algebraicIndependent_iff_injective_aeval.mp h).comp hf
+
+private theorem separable_collision_mem
+    {F E : Type u} [Field F] [Field E] [Algebra F E]
+    (hgeom : GeometricallyIrreducible
+      (Spec.map (CommRingCat.ofHom (algebraMap F E))))
+    (x y θ η : E)
+    (hy : Transcendental (IntermediateField.adjoin F {x}) y)
+    (hθ : IsSeparable (IntermediateField.adjoin F {x}) θ)
+    (hη : IsSeparable (IntermediateField.adjoin F {y}) η)
+    (hmem : η ∈ IntermediateField.adjoin F ({x, θ, y} : Set E)) :
+    η ∈ IntermediateField.adjoin F {y} := by
+  set_option backward.isDefEq.respectTransparency false in
+    let L := IntermediateField.adjoin F ({x} : Set E)
+    let A := IntermediateField.adjoin L ({θ} : Set E)
+    let B := IntermediateField.adjoin F ({y} : Set E)
+    let C := IntermediateField.adjoin A ({y} : Set E)
+    have : IsScalarTower F A E := .of_algebraMap_eq (fun z ↦ rfl)
+    have : IsScalarTower F C E := .of_algebraMap_eq (fun z ↦ rfl)
+    have : Algebra.IsAlgebraic L A := IntermediateField.isAlgebraic_adjoin_simple hθ.isIntegral
+    have hyA : Transcendental A y := hy.extendScalars A
+    have hA := geometricallyIrreducible_spec_of_field_subextension F A E hgeom
+    have hC := geometricallyIrreducible_adjoin_transcendental hA y hyA
+    have hBC : B ≤ C.restrictScalars F :=
+      IntermediateField.adjoin_le_iff.mpr (by
+        intro z hz
+        rcases Set.mem_singleton_iff.mp hz with rfl
+        exact IntermediateField.subset_adjoin A _ rfl)
+    let : Algebra B C := (IntermediateField.inclusion hBC).toAlgebra
+    have : IsScalarTower B C E := .of_algebraMap_eq (fun z ↦ rfl)
+    have hc : η ∈ C := by
+      have hAf : A.restrictScalars F = IntermediateField.adjoin F ({x, θ} : Set E) :=
+        IntermediateField.adjoin_adjoin_left F {x} {θ}
+      have heq : C.restrictScalars F =
+          IntermediateField.adjoin F ({x, θ, y} : Set E) := by
+        change (IntermediateField.adjoin (A.restrictScalars F) {y}).restrictScalars F = _
+        rw [hAf, IntermediateField.adjoin_adjoin_left]
+        congr 1
+        ext z
+        simp only [Set.mem_union, Set.mem_singleton_iff, Set.mem_insert_iff]
+        tauto
+      change η ∈ C.restrictScalars F
+      rw [heq]
+      exact hmem
+    have hηC : IsSeparable B (⟨η, hc⟩ : C) :=
+      IsSeparable.tower_bot (F := B) (K := C) (E := E) (x := ⟨η, hc⟩) hη
+    have hstd : GeometricallyIrreducible
+        (Spec.map (CommRingCat.ofHom (algebraMap B C))) := hC
+    obtain ⟨b, hb⟩ :=
+      (geometricallyIrreducible_iff_separableElements_mem B C).mp hstd ⟨η, hc⟩ hηC
+    have heq : (b : E) = η := congrArg Subtype.val hb
+    exact heq ▸ b.property
+
+private theorem map_adjoin_stable
+    {k E : Type u} [Field k] [Field E] [Algebra k E]
+    (F : IntermediateField k E) (σ : E ≃ₐ[k] E)
+    (hF : F.map σ.toAlgHom = F) (S : Set E) :
+    ((IntermediateField.adjoin F S).restrictScalars k).map σ.toAlgHom =
+      (IntermediateField.adjoin F (σ '' S)).restrictScalars k := by
+  rw [IntermediateField.restrictScalars_adjoin_eq_sup, IntermediateField.map_sup,
+    IntermediateField.adjoin_map, hF, IntermediateField.restrictScalars_adjoin_eq_sup]
+  rfl
+
+private theorem separable_map_of_stable
+    {k E : Type u} [Field k] [Field E] [Algebra k E]
+    (F : IntermediateField k E) (σ : E ≃ₐ[k] E)
+    (hF : F.map σ.toAlgHom = F) (x θ : E)
+    (hθ : IsSeparable (IntermediateField.adjoin F {x}) θ) :
+    IsSeparable (IntermediateField.adjoin F {σ x}) (σ θ) := by
+  set_option backward.isDefEq.respectTransparency false in
+    let A := (IntermediateField.adjoin F ({x} : Set E)).restrictScalars k
+    let B := (IntermediateField.adjoin F ({σ x} : Set E)).restrictScalars k
+    have heq : A.map σ.toAlgHom = B := by
+      simpa only [Set.image_singleton] using map_adjoin_stable F σ hF {x}
+    let e : A ≃ₐ[k] B :=
+      (IntermediateField.equivMap A σ.toAlgHom).trans (IntermediateField.equivOfEq heq)
+    have he (z : A) : (e z : E) = σ z := by
+      rfl
+    exact IsSeparable.of_equiv_equiv e.toRingEquiv σ.toRingEquiv
+      (by ext z; exact (he z).symm) hθ
+
+private theorem mem_adjoin_map_of_stable
+    {k E : Type u} [Field k] [Field E] [Algebra k E]
+    (F : IntermediateField k E) (σ : E ≃ₐ[k] E)
+    (hF : F.map σ.toAlgHom = F) (x θ : E)
+    (hθ : σ θ ∈ IntermediateField.adjoin F ({σ x} : Set E)) :
+    θ ∈ IntermediateField.adjoin F ({x} : Set E) := by
+  have heq := map_adjoin_stable F σ hF ({x} : Set E)
+  rw [Set.image_singleton] at heq
+  have hm : σ θ ∈ ((IntermediateField.adjoin F {x}).restrictScalars k).map σ.toAlgHom := by
+    rw [heq]
+    exact hθ
+  exact (IntermediateField.map_mem_map _ σ.toAlgHom).mp hm
+
+private theorem pair_transcendental
+    {F E : Type u} [Field F] [Field E] [Algebra F E]
+    {x y : E} (h : AlgebraicIndependent F ![x, y]) :
+    Transcendental (IntermediateField.adjoin F {x}) y := by
+  rw [IntermediateField.transcendental_adjoin_iff]
+  have he : (![x, y] : Fin 2 → E) '' ({0} : Set (Fin 2)) = {x} := by
+    ext z
+    simp
+  have hh := h.transcendental_adjoin (s := {0}) (i := 1) (by decide)
+  rw [he] at hh
+  exact hh
+
+private theorem separable_of_adjoin_le
+    {F E : Type u} [Field F] [Field E] [Algebra F E]
+    (x θ : E) (C : IntermediateField F E)
+    (hx : x ∈ C) (hθ : IsSeparable (IntermediateField.adjoin F {x}) θ) :
+    IsSeparable C θ := by
+  set_option backward.isDefEq.respectTransparency false in
+    have hle : IntermediateField.adjoin F {x} ≤ C :=
+      IntermediateField.adjoin_le_iff.mpr (by simpa)
+    let : Algebra (IntermediateField.adjoin F {x}) C :=
+      (IntermediateField.inclusion hle).toAlgebra
+    have : IsScalarTower (IntermediateField.adjoin F {x}) C E :=
+      .of_algebraMap_eq (fun z ↦ rfl)
+    exact hθ.tower_top (L := C)
+
+private theorem separable_mem_of_translations
+    {k E : Type u} {I : Type} [Field k] [Field E] [Algebra k E] [Infinite I]
+    (F : IntermediateField k E)
+    (hgeom : GeometricallyIrreducible
+      (Spec.map (CommRingCat.ofHom (algebraMap F E))))
+    (hfg : (⊤ : IntermediateField F E).FG)
+    (x d : E) (hxd : AlgebraicIndependent F ![x, d])
+    (σ : I → E ≃ₐ[k] E) (a : I → F) (ha : Function.Injective a)
+    (hF : ∀ i, F.map (σ i).toAlgHom = F)
+    (hx : ∀ i, σ i x = x + algebraMap F E (a i) * d)
+    (θ : E) (hθ : IsSeparable (IntermediateField.adjoin F {x}) θ) :
+    θ ∈ IntermediateField.adjoin F {x} := by
+  set_option backward.isDefEq.respectTransparency false in
+    let C := IntermediateField.adjoin F ({x, d} : Set E)
+    have hfgC : (⊤ : IntermediateField C E).FG := by
+      exact IntermediateField.FG.of_restrictScalars (K := F) (by simpa using hfg)
+    have hsep (i : I) : IsSeparable C (σ i θ) := by
+      apply separable_of_adjoin_le (σ i x) _ C
+      · rw [hx]
+        exact C.add_mem (IntermediateField.subset_adjoin F _ (Set.mem_insert _ _))
+          (C.mul_mem (C.algebraMap_mem _) (IntermediateField.subset_adjoin F _
+            (Set.mem_insert_of_mem _ rfl)))
+      · exact separable_map_of_stable F (σ i) (hF i) x θ hθ
+    obtain ⟨i, j, hij, heq⟩ := exists_separable_adjoin_collision hfgC (fun i ↦ σ i θ) hsep
+    have hab : a i ≠ a j := fun h ↦ hij (ha h)
+    have hpair : AlgebraicIndependent F ![σ i x, σ j x] := by
+      rw [hx i, hx j]
+      exact algebraicIndependent_pair_linear_change x d hxd (a i) (a j) hab
+    have hC : C = IntermediateField.adjoin F ({σ i x, σ j x} : Set E) := by
+      rw [hx i, hx j]
+      exact (adjoin_pair_linear_change x d (a i) (a j) hab).symm
+    have hmem : σ j θ ∈ IntermediateField.adjoin F ({σ i x, σ i θ, σ j x} : Set E) := by
+      have hm : σ j θ ∈ IntermediateField.adjoin C ({σ i θ} : Set E) := by
+        rw [heq]
+        exact IntermediateField.subset_adjoin C _ rfl
+      change σ j θ ∈ (IntermediateField.adjoin C {σ i θ}).restrictScalars F at hm
+      rw [hC, IntermediateField.adjoin_adjoin_left] at hm
+      convert hm using 2
+      ext z
+      simp only [Set.mem_union, Set.mem_insert_iff, Set.mem_singleton_iff]
+      tauto
+    apply mem_adjoin_map_of_stable F (σ j) (hF j) x θ
+    exact separable_collision_mem hgeom (σ i x) (σ j x) (σ i θ) (σ j θ)
+      (pair_transcendental hpair)
+      (separable_map_of_stable F (σ i) (hF i) x θ hθ)
+      (separable_map_of_stable F (σ j) (hF j) x θ hθ) hmem
+
+private theorem independent_lastCases_pair
+    {F E : Type u} [Field F] [Field E] [Algebra F E]
+    {n : ℕ} {v : Fin n → E} {x y : E}
+    (h : AlgebraicIndependent F (Fin.lastCases y (Fin.lastCases x v))) :
+    AlgebraicIndependent (IntermediateField.adjoin F (Set.range v)) ![x, y] := by
+  let f : Fin 2 ⊕ Fin n → Fin (n + 2) :=
+    fun z ↦ finSumFinEquiv (z.swap)
+  have hh := h.comp f (finSumFinEquiv.injective.comp (Equiv.sumComm _ _).injective)
+  have he : (Fin.lastCases y (Fin.lastCases x v) ∘ f) = Sum.elim ![x, y] v := by
+    funext i
+    cases i with
+    | inl i =>
+      fin_cases i
+      · change Fin.lastCases y (Fin.lastCases x v) (Fin.last n).castSucc = x
+        simp
+      · change Fin.lastCases y (Fin.lastCases x v) (Fin.last (n + 1)) = y
+        simp
+    | inr i =>
+      change Fin.lastCases y (Fin.lastCases x v) i.castSucc.castSucc = v i
+      simp
+  rw [he, AlgebraicIndependent.sumElim_iff] at hh
+  exact IntermediateField.algebraicIndependent_adjoin_iff.mpr hh.2
+
+private theorem coordinates_independent (K : Type u) [Field K] (n : ℕ) :
+    AlgebraicIndependent K (bertiniCoordinate K n) := by
+  exact (MvPolynomial.algebraicIndependent_X (Fin n) K).map'
+    (f := IsScalarTower.toAlgHom K (MvPolynomial (Fin n) K) (bertiniOmega K n))
+    (IsFractionRing.injective _ _)
+
+private theorem adjoin_coordinates_top (K : Type u) [Field K] (n : ℕ) :
+    IntermediateField.adjoin K (Set.range (bertiniCoordinate K n)) = ⊤ := by
+  let F := IntermediateField.adjoin K (Set.range (bertiniCoordinate K n))
+  have hp (p : MvPolynomial (Fin n) K) :
+      algebraMap (MvPolynomial (Fin n) K) (bertiniOmega K n) p ∈ F := by
+    induction p using MvPolynomial.induction_on with
+    | C a =>
+      change algebraMap (MvPolynomial (Fin n) K) (bertiniOmega K n)
+        (algebraMap K (MvPolynomial (Fin n) K) a) ∈ F
+      rw [← IsScalarTower.algebraMap_apply]
+      exact F.algebraMap_mem a
+    | add p q hp hq => simpa using F.add_mem hp hq
+    | mul_X p i hp =>
+      rw [map_mul]
+      exact F.mul_mem hp (IntermediateField.subset_adjoin K _ ⟨i, rfl⟩)
+  apply top_le_iff.mp
+  intro z _
+  obtain ⟨p, q, _, rfl⟩ := IsFractionRing.div_surjective (MvPolynomial (Fin n) K) z
+  exact F.div_mem (hp p) (hp q)
+
+private theorem geometric_coordinates
+    (k K : Type u) [Field k] [Field K] [Algebra k K] (n : ℕ)
+    (hgeom : GeometricallyIrreducible
+      (Spec.map (CommRingCat.ofHom (algebraMap k K)))) :
+    GeometricallyIrreducible (Spec.map (CommRingCat.ofHom
+      (algebraMap (IntermediateField.adjoin k (Set.range (bertiniCoordinate K n)))
+        (bertiniOmega K n)))) := by
+  set_option backward.isDefEq.respectTransparency false in
+    let F := IntermediateField.adjoin k (Set.range (bertiniCoordinate K n))
+    let A := (IntermediateField.adjoin K (Set.range (bertiniCoordinate K n))).restrictScalars k
+    have hA : ∀ z : bertiniOmega K n, z ∈ A := by
+      intro z
+      change z ∈ IntermediateField.adjoin K (Set.range (bertiniCoordinate K n))
+      rw [adjoin_coordinates_top]
+      trivial
+    have hFA : F ≤ A := IntermediateField.adjoin_le_iff.mpr (IntermediateField.subset_adjoin K _)
+    let : Algebra F A := (IntermediateField.inclusion hFA).toAlgebra
+    have : IsScalarTower F A (bertiniOmega K n) := .of_algebraMap_eq (fun z ↦ rfl)
+    have hh : GeometricallyIrreducible (Spec.map (CommRingCat.ofHom (algebraMap F A))) :=
+      geometricallyIrreducible_transcendental_extension.1 hgeom _ n
+        (bertiniCoordinate K n) (coordinates_independent K n)
+    apply (geometricallyIrreducible_iff_separableElements_mem F (bertiniOmega K n)).mpr
+    intro z hz
+    have hzA : IsSeparable F (⟨z, hA z⟩ : A) :=
+      IsSeparable.tower_bot (F := F) (K := A) (E := bertiniOmega K n) (x := ⟨z, hA z⟩) hz
+    obtain ⟨w, hw⟩ := (geometricallyIrreducible_iff_separableElements_mem F A).mp hh _ hzA
+    exact ⟨w, congrArg Subtype.val hw⟩
+
+private theorem omega_fg
+    (k K : Type u) [Field k] [Field K] [Algebra k K]
+    (hfg : (⊤ : IntermediateField k K).FG) (n : ℕ) :
+    (⊤ : IntermediateField k (bertiniOmega K n)).FG := by
+  have : Algebra.EssFiniteType k K := IntermediateField.fg_top_iff.mp hfg
+  have : Algebra.EssFiniteType K (bertiniOmega K n) :=
+    .comp K (MvPolynomial (Fin n) K) _
+  have : Algebra.EssFiniteType k (bertiniOmega K n) := .comp k K _
+  exact IntermediateField.fg_top k _
+
+private noncomputable def invariantPolynomial
+    (K : Type u) [Field K] (n : ℕ) (c : Fin n → K) (j l : Fin n) :
+    MvPolynomial (Fin n) K :=
+  MvPolynomial.C (c j) * MvPolynomial.X l - MvPolynomial.C (c l) * MvPolynomial.X j
+
+@[irreducible] private noncomputable def shearPolynomial
+    (K : Type u) [Field K] (n : ℕ) (c : Fin n → K) (j l : Fin n) (m : ℕ) :
+    MvPolynomial (Fin n) K ≃ₐ[K] MvPolynomial (Fin n) K := by
+  let P := invariantPolynomial K n c j l
+  let f : MvPolynomial (Fin n) K →ₐ[K] MvPolynomial (Fin n) K :=
+    MvPolynomial.aeval (fun i ↦ MvPolynomial.X i + MvPolynomial.C (c i) * P ^ m)
+  let g : MvPolynomial (Fin n) K →ₐ[K] MvPolynomial (Fin n) K :=
+    MvPolynomial.aeval (fun i ↦ MvPolynomial.X i - MvPolynomial.C (c i) * P ^ m)
+  have hf : f P = P := by simp [f, P, invariantPolynomial]; ring
+  have hg : g P = P := by simp [g, P, invariantPolynomial]; ring
+  exact AlgEquiv.ofAlgHom f g
+    (by ext1 i; simp only [AlgHom.comp_apply, g, MvPolynomial.aeval_X, map_sub,
+      map_mul, map_pow, hf]; simp [f])
+    (by ext1 i; simp only [AlgHom.comp_apply, f, MvPolynomial.aeval_X, map_add,
+      map_mul, map_pow, hg]; simp [g])
+
+@[irreducible] private noncomputable def shearOmega
+    (K : Type u) [Field K] (n : ℕ) (c : Fin n → K) (j l : Fin n) (m : ℕ) :
+    bertiniOmega K n ≃ₐ[K] bertiniOmega K n :=
+  IsFractionRing.algEquivOfAlgEquiv (shearPolynomial K n c j l m)
+
+private theorem shearOmega_coordinate
+    (K : Type u) [Field K] (n : ℕ) (c : Fin n → K) (j l i : Fin n) (m : ℕ) :
+    shearOmega K n c j l m (bertiniCoordinate K n i) =
+      bertiniCoordinate K n i + algebraMap K (bertiniOmega K n) (c i) *
+        (algebraMap K (bertiniOmega K n) (c j) * bertiniCoordinate K n l -
+          algebraMap K (bertiniOmega K n) (c l) * bertiniCoordinate K n j) ^ m := by
+  rw [shearOmega, bertiniCoordinate, IsFractionRing.algEquivOfAlgEquiv_algebraMap]
+  have hpoly : shearPolynomial K n c j l m (MvPolynomial.X i) =
+      MvPolynomial.X i + MvPolynomial.C (c i) * invariantPolynomial K n c j l ^ m := by
+    unfold shearPolynomial
+    exact MvPolynomial.aeval_X _ _
+  rw [hpoly]
+  simp only [map_add, map_mul, map_pow, invariantPolynomial, map_sub]
+  rfl
+
+private theorem shearOmega_coordinate_symm
+    (K : Type u) [Field K] (n : ℕ) (c : Fin n → K) (j l i : Fin n) (m : ℕ) :
+    (shearOmega K n c j l m).symm (bertiniCoordinate K n i) =
+      bertiniCoordinate K n i - algebraMap K (bertiniOmega K n) (c i) *
+        (algebraMap K (bertiniOmega K n) (c j) * bertiniCoordinate K n l -
+          algebraMap K (bertiniOmega K n) (c l) * bertiniCoordinate K n j) ^ m := by
+  rw [shearOmega, IsFractionRing.algEquivOfAlgEquiv_symm, bertiniCoordinate,
+    IsFractionRing.algEquivOfAlgEquiv_algebraMap]
+  have hpoly : (shearPolynomial K n c j l m).symm (MvPolynomial.X i) =
+      MvPolynomial.X i - MvPolynomial.C (c i) * invariantPolynomial K n c j l ^ m := by
+    unfold shearPolynomial
+    exact MvPolynomial.aeval_X _ _
+  rw [hpoly]
+  simp only [map_sub, map_mul, map_pow, invariantPolynomial]
+  rfl
+
+private theorem adjoin_map_eq_self
+    {k E : Type u} {I : Type} [Field k] [Field E] [Algebra k E]
+    (v : I → E) (σ : E ≃ₐ[k] E)
+    (hf : ∀ i, σ (v i) ∈ IntermediateField.adjoin k (Set.range v))
+    (hg : ∀ i, σ.symm (v i) ∈ IntermediateField.adjoin k (Set.range v)) :
+    (IntermediateField.adjoin k (Set.range v)).map σ.toAlgHom =
+      IntermediateField.adjoin k (Set.range v) := by
+  apply le_antisymm
+  · rw [IntermediateField.adjoin_map]
+    apply IntermediateField.adjoin_le_iff.mpr
+    rintro z ⟨_, ⟨i, rfl⟩, rfl⟩
+    exact hf i
+  · apply IntermediateField.adjoin_le_iff.mpr
+    rintro z ⟨i, rfl⟩
+    exact (IntermediateField.mem_map _).mpr ⟨σ.symm (v i), hg i, σ.apply_symm_apply _⟩
+
+private theorem independent_no_scalar_relation
+    {F E : Type u} [Field F] [Field E] [Algebra F E]
+    {x y : E} (h : AlgebraicIndependent F ![x, y])
+    (a b : F) (heq : algebraMap F E a * x + algebraMap F E b * y = 0) : a = 0 := by
+  have hh := Fintype.linearIndependent_iff.mp h.linearIndependent ![a, b]
+  exact hh (by simpa [Fin.sum_univ_two, Algebra.smul_def] using heq) 0
+
+private theorem invariant_transcendental
+    {k E : Type u} [Field k] [Field E] [Algebra k E]
+    {n : ℕ} (v : Fin n → E) (hv : AlgebraicIndependent k v)
+    (c : Fin n → k) (j l : Fin n) (hc : c j ≠ 0) (hjl : j ≠ l) :
+    Transcendental k (algebraMap k E (c j) * v l - algebraMap k E (c l) * v j) := by
+  set_option backward.isDefEq.respectTransparency false in
+    let L := IntermediateField.adjoin k ({v j} : Set E)
+    have hpair : AlgebraicIndependent k ![v j, v l] := by
+      have he : (![v j, v l] : Fin 2 → E) = v ∘ ![j, l] := by
+        ext i
+        fin_cases i <;> rfl
+      rw [he]
+      apply hv.comp
+      intro a b hab
+      fin_cases a <;> fin_cases b <;> simp_all
+    have hl : Transcendental L (v l) := pair_transcendental hpair
+    intro ht
+    have htL : IsAlgebraic L (algebraMap k E (c j) * v l -
+        algebraMap k E (c l) * v j) := ht.extendScalars (algebraMap k L).injective
+    have hjL : IsAlgebraic L (v j) :=
+      isAlgebraic_algebraMap (⟨v j, IntermediateField.subset_adjoin k _ rfl⟩ : L)
+    have ha (z : k) : IsAlgebraic L (algebraMap k E z) := by
+      rw [IsScalarTower.algebraMap_apply k L E]
+      exact isAlgebraic_algebraMap (algebraMap k L z)
+    have heq : (algebraMap k E (c j) * v l - algebraMap k E (c l) * v j +
+        algebraMap k E (c l) * v j) * (algebraMap k E (c j))⁻¹ = v l := by
+      have hcE : algebraMap k E (c j) ≠ 0 := (map_ne_zero _).mpr hc
+      field_simp [hcE]
+      ring
+    apply hl
+    rw [← heq]
+    exact (htL.add ((ha _).mul hjL)).mul (ha _).inv
+
+private theorem transcendental_powers_injective
+    {k E : Type u} [Field k] [Field E] [Algebra k E]
+    {t : E} (ht : Transcendental k t) : Function.Injective (fun m : ℕ ↦ t ^ m) := by
+  intro m r hmr
+  have he : (Polynomial.X ^ m : Polynomial k) = Polynomial.X ^ r :=
+    (transcendental_iff_injective.mp ht) (by simpa using hmr)
+  have hd := congrArg Polynomial.natDegree he
+  simpa using hd
+
+private theorem range_lastCases {n : ℕ} {E : Type u} (x : E) (v : Fin n → E) :
+    Set.range (Fin.lastCases x v) = Set.range v ∪ {x} := by
+  ext z
+  constructor
+  · rintro ⟨i, rfl⟩
+    refine Fin.lastCases ?_ (fun i ↦ ?_) i
+    · exact Or.inr (by simp)
+    · exact Or.inl ⟨i, by simp⟩
+  · rintro (⟨i, rfl⟩ | rfl)
+    · exact ⟨i.castSucc, by simp⟩
+    · exact ⟨Fin.last n, by simp⟩
+
+private theorem bertini_exists_direction
+    (k K : Type u) [Field k] [Field K] [Algebra k K]
+    (n : ℕ) (g : Fin n → K) (c : Fin n → k)
+    (hc : AlgebraicIndependent k (bertiniFamily k K n g c)) :
+    ∃ j l : Fin n, c j ≠ 0 ∧ j ≠ l := by
+  set_option backward.isDefEq.respectTransparency false in
+    classical
+    let F := IntermediateField.adjoin k (Set.range (bertiniCoordinate K n))
+    have hpair : AlgebraicIndependent F ![bertiniXi k K n g, bertiniDelta k K n g c] :=
+      independent_lastCases_pair hc
+    have hd : bertiniDelta k K n g c ≠ 0 := hpair.ne_zero 1
+    have hj : ∃ j, c j ≠ 0 := by
+      by_contra! hh
+      apply hd
+      simp [bertiniDelta, hh]
+    obtain ⟨j, hj⟩ := hj
+    refine ⟨j, ?_⟩
+    by_contra! hh
+    have hi : ∀ i : Fin n, i = j := fun i ↦ by
+      by_contra hij
+      exact hij (hh i hj).symm
+    have hξ : bertiniXi k K n g = algebraMap K (bertiniOmega K n) (g j) *
+        bertiniCoordinate K n j := by
+      unfold bertiniXi
+      exact Finset.sum_eq_single j (fun i _ hij ↦ (hij (hi i)).elim) (by simp)
+    have hδ : bertiniDelta k K n g c = algebraMap k (bertiniOmega K n) (c j) *
+        algebraMap K (bertiniOmega K n) (g j) := by
+      unfold bertiniDelta
+      exact Finset.sum_eq_single j (fun i _ hij ↦ (hij (hi i)).elim) (by simp)
+    have hx : bertiniCoordinate K n j ∈ F := IntermediateField.subset_adjoin k _ ⟨j, rfl⟩
+    have hz := independent_no_scalar_relation hpair (algebraMap k F (c j))
+      (-⟨bertiniCoordinate K n j, hx⟩)
+      (by
+        change algebraMap k (bertiniOmega K n) (c j) * bertiniXi k K n g +
+          -bertiniCoordinate K n j * bertiniDelta k K n g c = 0
+        rw [hξ, hδ]
+        ring)
+    exact hj ((algebraMap k F).injective (by simpa using hz))
+
 /-- If `K/k` is finitely generated and geometrically irreducible, a generic linear
 combination yields a geometrically irreducible extension.
 Source: Stacks Project, More on Morphisms, Tag 0G4D, lemma-amazing-bertini-lemma
@@ -116,6 +648,81 @@ theorem bertini_field_extension
     GeometricallyIrreducible
       (Spec.map (CommRingCat.ofHom
         (algebraMap (bertiniBaseField k K n g) (bertiniOmega K n)))) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+    classical
+    have _hn := hn
+    obtain ⟨c, hc⟩ := hc
+    let E := bertiniOmega K n
+    let v := bertiniCoordinate K n
+    let F := IntermediateField.adjoin k (Set.range v)
+    let x := bertiniXi k K n g
+    let d := bertiniDelta k K n g c
+    have hxd : AlgebraicIndependent F ![x, d] := independent_lastCases_pair hc
+    obtain ⟨j, l, hcj, hjl⟩ := bertini_exists_direction k K n g c hc
+    -- The invariant shear supplies infinitely many parameters even when k is finite.
+    let T : E := algebraMap k E (c j) * v l - algebraMap k E (c l) * v j
+    have hT : T ∈ F := F.sub_mem
+      (F.mul_mem (F.algebraMap_mem _) (IntermediateField.subset_adjoin k _ ⟨l, rfl⟩))
+      (F.mul_mem (F.algebraMap_mem _) (IntermediateField.subset_adjoin k _ ⟨j, rfl⟩))
+    let t : F := ⟨T, hT⟩
+    have hv : AlgebraicIndependent k v :=
+      (coordinates_independent K n).restrictScalars (algebraMap k K).injective
+    have ht : Transcendental k T := invariant_transcendental v hv c j l hcj hjl
+    have hinj : Function.Injective (fun m : ℕ ↦ t ^ m) := by
+      intro a b hab
+      exact transcendental_powers_injective ht (congrArg (fun z : F ↦ (z : E)) hab)
+    let cK : Fin n → K := fun i ↦ algebraMap k K (c i)
+    let σ : ℕ → E ≃ₐ[k] E := fun m ↦ (shearOmega K n cK j l m).restrictScalars k
+    have hσ (m : ℕ) (i : Fin n) : σ m (v i) = v i + algebraMap k E (c i) * T ^ m := by
+      simpa only [σ, cK, v, T, E, AlgEquiv.restrictScalars_apply,
+        ← IsScalarTower.algebraMap_apply k K (bertiniOmega K n)] using
+        shearOmega_coordinate K n cK j l i m
+    have hσs (m : ℕ) (i : Fin n) :
+        (σ m).symm (v i) = v i - algebraMap k E (c i) * T ^ m := by
+      simpa only [σ, cK, v, T, E, AlgEquiv.symm_restrictScalars,
+        AlgEquiv.restrictScalars_apply, ← IsScalarTower.algebraMap_apply k K
+          (bertiniOmega K n)] using shearOmega_coordinate_symm K n cK j l i m
+    have hF (m : ℕ) : F.map (σ m).toAlgHom = F := by
+      change (IntermediateField.adjoin k (Set.range v)).map (σ m).toAlgHom = _
+      refine adjoin_map_eq_self (k := k) (E := E) v (σ m) ?_ ?_
+      · intro i
+        rw [hσ]
+        exact F.add_mem (IntermediateField.subset_adjoin k _ ⟨i, rfl⟩)
+          (F.mul_mem (F.algebraMap_mem _) (F.pow_mem hT m))
+      · intro i
+        rw [hσs]
+        exact F.sub_mem (IntermediateField.subset_adjoin k _ ⟨i, rfl⟩)
+          (F.mul_mem (F.algebraMap_mem _) (F.pow_mem hT m))
+    have hσK (m : ℕ) (a : K) : σ m (algebraMap K E a) = algebraMap K E a := by
+      change shearOmega K n cK j l m (algebraMap K E a) = algebraMap K E a
+      exact (shearOmega K n cK j l m).commutes a
+    have hx (m : ℕ) : σ m x = x + algebraMap F E (t ^ m) * d := by
+      simp only [x, bertiniXi, map_sum, map_mul]
+      change (∑ i, σ m (algebraMap K E (g i)) * σ m (v i)) = _
+      simp only [hσK, hσ, mul_add, Finset.sum_add_distrib, map_pow]
+      congr 1
+      change (∑ i, algebraMap K E (g i) * (algebraMap k E (c i) * T ^ m)) =
+        T ^ m * ∑ i, algebraMap k E (c i) * algebraMap K E (g i)
+      rw [Finset.mul_sum]
+      apply Finset.sum_congr rfl
+      intro i _
+      ring
+    have hfgF : (⊤ : IntermediateField F E).FG :=
+      IntermediateField.FG.of_restrictScalars (K := k) (by simpa using omega_fg k K hfg n)
+    have heq : bertiniBaseField k K n g =
+        (IntermediateField.adjoin F ({x} : Set E)).restrictScalars k := by
+      rw [IntermediateField.adjoin_adjoin_left]
+      exact congrArg (IntermediateField.adjoin k) (range_lastCases _ _)
+    apply (geometricallyIrreducible_iff_separableElements_mem _ _).mpr
+    intro θ hθ
+    have hθ' : IsSeparable (IntermediateField.adjoin F {x}) θ := by
+      rw [heq] at hθ
+      exact hθ
+    have hm := separable_mem_of_translations F (geometric_coordinates k K n hgeom)
+      hfgF x d hxd σ (fun m ↦ t ^ m) hinj hF hx θ hθ'
+    have hm' : θ ∈ bertiniBaseField k K n g := by
+      rw [heq]
+      exact hm
+    exact ⟨⟨θ, hm'⟩, rfl⟩
 
 end FieldTheory
