@@ -8,7 +8,7 @@ module
 public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.CategoryTheory.Comma.Arrow
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.KFlatLocalizedTensorComparisonNatural
+import WeilConjectures.Algebra.Homology.KFlatLocalizedTensorComparisonNatural
 import WeilConjectures.Algebra.Homology.BaseDerivedTensorCohomologyModelIndependence
 import all WeilConjectures.Algebra.Homology.KFlatScalarExtensionDerivedIso
 import WeilConjectures.Algebra.Homology.KFlatModuleBaseChange
@@ -126,7 +126,8 @@ theorem exists_localizedTensorComparison_derived_arrow
   let T := CochainComplex.ιKFlat (ModuleCat.{u} A) ⋙ F ⋙ tensorRight N ⋙
     HomologicalComplex.homologyFunctor (ModuleCat.{u} C) (.up ℤ) i
   obtain ⟨S, η, hS, he⟩ :=
-    exists_kFlatLocalizedTensorComparison_natural R A B C Q N t hC hQ i
+    (fun (_ : Module.Flat (A ⊗[R] B) C) ↦
+      exists_kFlatLocalizedTensorComparison_natural R A B C Q N t hQ i) hC
   change S ⟶ T at η
   have hT : W.WKFlat.IsInvertedBy T := by
     intro U V a ha

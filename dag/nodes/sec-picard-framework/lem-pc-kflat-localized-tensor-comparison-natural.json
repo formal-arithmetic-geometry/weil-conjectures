@@ -57,7 +57,7 @@
   "date": "2026-10-14",
   "document": "literature/stacks-project/more-algebra.tex",
   "place": "Tag 06Y6, lemma-derived-base-change; Tag 0BYJ, functorial associativity.",
-  "note": "Proof written from existing model-map and universal-counit declarations; official Stacks pages read online because this clone has no literature sources."
+  "note": "Proof written from existing model-map and universal-counit declarations; official Stacks pages read online because this clone has no literature sources. B9, 2026-10-21: retired the Sheaf duplicate under the listed retire item and attached this node to the existing upstream theorem, which implements the same argument with no flatness or A-derived-category hypothesis. The node statement is its specialization; the sole direct consumer now applies upstream without hC."
  },
  "mathlib_searches": [
   {
@@ -107,14 +107,14 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.KFlatLocalizedTensorComparisonNatural",
-  "file": "lean/Sheaf/Algebra/Homology/KFlatLocalizedTensorComparisonNatural.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.KFlatLocalizedTensorComparisonNatural",
+  "file": "lean/WeilConjectures/Algebra/Homology/KFlatLocalizedTensorComparisonNatural.lean",
   "declaration": "ModuleCat.exists_kFlatLocalizedTensorComparison_natural",
-  "statement": "theorem exists_kFlatLocalizedTensorComparison_natural (hC : Module.Flat (A ⊗[R] B) C) (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic → (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic) (i : ℤ) : let m := fun U : CochainComplex.KFlat (ModuleCat.{u} A) ↦ baseDerivedTensorCohomologyModel R A B (U.obj ⊗ Q) C let F := (extendScalars.{u, u, u} ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ) let T := CochainComplex.ιKFlat (ModuleCat.{u} A) ⋙ F ⋙ tensorRight N ⋙ HomologicalComplex.homologyFunctor (ModuleCat.{u} C) (.up ℤ) i ∃ (S : CochainComplex.KFlat (ModuleCat.{u} A) ⥤ ModuleCat.{u} C) (η : S ⟶ T), (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).WKFlat.IsInvertedBy S ∧ ∀ U : CochainComplex.KFlat (ModuleCat.{u} A), ∃ e : (extendScalars (algebraMap (A ⊗[R] B) C)).obj ((m U).cohomology i) ≅ S.obj U, e.hom ≫ η.app U = (m U).localizedComparison i ≫ HomologicalComplex.homologyMap ((Functor.Monoidal.μIso F U.obj Q).inv ≫ (F.obj U.obj ◁ t)) i",
+  "statement": "theorem exists_kFlatLocalizedTensorComparison_natural\n    (hQ : ∀ V : CochainComplex (ModuleCat.{u} A) ℤ, V.Acyclic →\n      (CochainComplex.mapBifunctor V Q (curriedTensor _)).Acyclic)\n    (i : ℤ) :\n    let m := fun U : CochainComplex.KFlat (ModuleCat.{u} A) ↦\n      baseDerivedTensorCohomologyModel R A B (U.obj ⊗ Q) C\n    let F := (extendScalars.{u, u, u}\n      ((algebraMap (A ⊗[R] B) C).comp (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex\n        (.up ℤ)\n    let T := CochainComplex.ιKFlat (ModuleCat.{u} A) ⋙ F ⋙ tensorRight N ⋙\n      HomologicalComplex.homologyFunctor (ModuleCat.{u} C) (.up ℤ) i\n    ∃ (S : CochainComplex.KFlat (ModuleCat.{u} A) ⥤ ModuleCat.{u} C)\n      (η : S ⟶ T),\n      (HomologicalComplex.quasiIso (ModuleCat.{u} A) (.up ℤ)).WKFlat.IsInvertedBy S ∧\n      ∀ U : CochainComplex.KFlat (ModuleCat.{u} A),\n        ∃ e : (extendScalars (algebraMap (A ⊗[R] B) C)).obj ((m U).cohomology i) ≅\n          S.obj U,\n          e.hom ≫ η.app U = (m U).localizedComparison i ≫\n            HomologicalComplex.homologyMap\n              ((Functor.Monoidal.μIso F U.obj Q).inv ≫ (F.obj U.obj ◁ t)) i",
   "branch": "sheaf-dag",
-  "by": "Y3",
-  "date": "2026-10-14"
+  "by": "B9",
+  "date": "2026-10-21"
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -127,14 +127,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-20",
   "by": "L",
-  "reviewer": "X-b1969",
-  "group": "U2",
+  "reviewer": "C-f7d15",
+  "group": "B9",
   "result": "pass",
-  "landing": "20261013T211117-L-396248",
+  "landing": "20261020T233058-L-891579",
   "kind": "interface",
-  "note": "independent Codex review: Matched delivered Lean statements and proofs with both node records, unchanged existing signature, dependencies, change record, and report; both modules and the direct importer compile cleanly, and all four proved declarations use only the three permitted axioms."
+  "note": "independent cc review: Retired Sheaf item vs upstream WeilConjectures.Algebra.Homology.KFlatLocalizedTensorComparisonNatural (same conclusion, hC and HasDerivedCategory A dropped); node lean record vs upstream signature (identical); adapted consumer LocalizedTensorComparisonDerivedArrow vs live (only import plus application changed); delivered files and transitive importer ClosureRetractCore compile, axioms clean"
  },
  "lean_audit": {
   "master": {
