@@ -23184,3 +23184,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:24 L: merged deliver/NP/lem-sfb-indfinite-contractible-base-wstrict (reviewer PASS; first push; new nodes: 1)
 - 17:24 L: merged deliver/N5/lem-sfb-integral-quotient-projection-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 17:25 L: returned deliver/NB/lem-sfb-integral-lisse-closed-base-change (reviewer RETURN: C5 (twice), with D-type consequences. I read the item, all three new nodes, every cited statement and Stacks 09BL in ful)
+- 17:26 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
