@@ -21,9 +21,121 @@
   "lem-asd-etale-finite-twist-pullback",
   "def-pur-support-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $B=\\operatorname{Spec}R$. Then $P=\\operatorname{Spec}R[v_1,\\ldots,v_b]$ by [def-sbc-affine-space], and $z$ is the quotient by $(v_1,\\ldots,v_b)$. Thus $z$ is closed, $P$ is finite type over $k$, and its complement is the finite union of the affine basic opens $D(v_i)$, hence quasi-compact (empty if $b=0$). Both $B$ and $P$ are separated over $k$: the diagonal of an affine $k$-scheme $\\operatorname{Spec}S$ is the closed immersion defined by the surjection $S\\otimes_kS\\to S$. These checks put the schemes and closed immersion in the domains of the comparison theorems used below.",
+   "uses": [
+    "def-sbc-affine-space",
+    "def-weil-finite-type-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "The affine-space projection and zero section in the first paragraph; elementary verification of the finite-type and separated domains."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-etale-injective-support-sequence] to $z$ with the finite commutative ring $A$. Its sheaf-level assertion identifies $Q_z(F)$ with $z_*z^!_0F$ and its inclusion with the counit, in the module categories themselves. The abelian support adjunction of [lem-pur-etale-supported-kernel-adjunction] also makes the exactness of closed pushforward explicit; the same exactness holds for modules since kernels and cokernels are computed on underlying abelian sheaves. For a bounded-below injective resolution $F\\to I$, $Q_z(I)=z_*z^!_0(I)$ and $z^!_0(I)$ computes the ordinary closed right adjoint, by the module support-sequence assertion. Therefore $RQ_zF=z_*Rz^!_0F$. Moreover $z^!_0$ carries injectives to injectives: an extension across a monomorphism on $B$ is equivalent by its adjunction to an extension across its exact $z_*$-image. Consequently the equality $\\Gamma_{z(B)}(P,I)=\\Gamma(B,z^!_0I)$ computes both derived functors, giving $R\\Gamma_{z(B)}(P,F)=R\\Gamma(B,Rz^!_0F)$. These module-sheaf derived functors are the abelian ones of [def-pur-support-cohomology]. By [det-pbc-conventions-module-cohomology] the underlying abelian sheaf of an injective module sheaf $I$ has no higher cohomology on $P$, on $U=P\\setminus z(B)$ or on $B$. As $z_*$ has the exact left adjoint $z^{-1}$, $z_*z^!_0I$ is again injective, so the support sequence of [lem-pur-etale-injective-support-sequence] stays exact on global sections: $I(P)\\to I(U)$ is onto. The long exact sequence of [thm-pur-with-support-exactness] for the underlying torsion sheaf of $I$ then gives $H^q_{z(B)}(P,I)=0$ for $q>0$. Hence module injective resolutions compute the abelian $R\\Gamma_{z(B)}(P,-)$ and $R\\Gamma(B,-)$. All the maps are induced by the original kernel inclusion, so their counits agree.",
+   "uses": [
+    "lem-pur-etale-injective-support-sequence",
+    "lem-pur-etale-supported-kernel-adjunction",
+    "det-pbc-conventions-module-cohomology",
+    "thm-pur-with-support-exactness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 09XP (section-cohomology-support), 09XQ (lemma-sections-with-support-acyclic); module version of the same injective-resolution argument."
+   }
+  },
+  {
+   "text": "Put $D=Rz^!_0(A_P(b))[2b]$. This is bounded below. The finite Tate-site descent [lem-amb-finite-tate-site-descent] identifies $\\nu_P^*A_P(b)$ with the specified finite pro-etale twist, for every $n\\geq1$. The counit-preserving comparison [lem-pur-closed-finite-adjoint-counit-transport] identifies $\\nu_B^*D$ with $Rz^!A_P^{\\mathrm{pro}}(b)[2b]$. Now apply the already existing normalized zero-section theorem [cor-pur-affine-space-zero-section-purity] with $c=b$: it supplies an isomorphism $A_B^{\\mathrm{pro}}\\to\\nu_B^*D$. Full faithfulness of $\\nu_B^*$ on $D^+$ in [thm-weil-pbc-site-comparison] gives a unique lift $\\theta_b:A_B\\to D$. Lift its inverse as well; faithfulness makes both composites identities. Thus $\\theta_b$ is an ordinary etale isomorphism, and Step 2 gives $RQ_zA_P(b)\\cong z_*A_B[-2b]$. This is descent of an existing theorem, not a new purity hypothesis for the support kernel.",
+   "uses": [
+    "lem-amb-finite-tate-site-descent",
+    "lem-pur-closed-finite-adjoint-counit-transport",
+    "cor-pur-affine-space-zero-section-purity",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "The normalized zero-section isomorphism and finite etale-origin comparison; Stacks proetale.tex Tag 09B1 (lemma-compare-derived) supplies bounded-below full faithfulness."
+   }
+  },
+  {
+   "text": "The counit transpose of $\\theta_b$ is the ordinary supported class $c_b:z_*A_B\\to A_P(b)[2b]$. Indeed, [lem-pur-closed-finite-adjoint-counit-transport] identifies its image with the transpose of the pro-etale zero-section orientation. The normalization clause of [cor-pur-affine-space-zero-section-purity] says this transpose is the ordered product of the $b$ coordinate Cartier-Kummer classes, or the unit for $b=0$. Each factor is the image of its ordinary etale witness by [lem-amb-cartier-kummer-map]; that statement includes arbitrary $n$ and independence of the annihilating exponent. The comparison of supported cup operations in [lem-pur-supported-cup-functoriality] identifies the image of the ordinary ordered product with that pro-etale product. Faithfulness in [thm-weil-pbc-site-comparison], now on $P$, makes these actual etale morphisms equal. Thus $\\theta_b(1)=\\partial\\kappa(v_1)\\cup\\cdots\\cup\\partial\\kappa(v_b)$ with the prescribed boundary sign, including the empty product. In particular the inverse isomorphism of Step 3 has precisely the requested generator normalization.",
+   "uses": [
+    "lem-pur-closed-finite-adjoint-counit-transport",
+    "cor-pur-affine-space-zero-section-purity",
+    "lem-amb-cartier-kummer-map",
+    "lem-pur-supported-cup-functoriality",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Rank-one Cartier normalization, ordered iteration, and the exact monoidal finite site comparison."
+   }
+  },
+  {
+   "text": "For $r\\in\\mathbf Z$ put $L=L_{r-b}=A_k(r-b)(k)$. By [lem-asd-etale-finite-twist-pullback], the twists on $P$ and $B$ are pulled back from $k$, are invertible lines, and their tensor/evaluation comparisons include negative powers. Since $k$ is algebraically closed, its roots of unity are constant: $\\mu_{\\ell^N,k}$ is the constant cyclic group of order $\\ell^N$. Thus $L$ is free of rank one over $A$ and $A_P(r)=A_P(b)\\otimes_A\\underline L$. Tensor with $\\underline L$ is an exact autoequivalence, with inverse tensor with $\\underline{L^\\vee}$, so it preserves injectives. On sheaves, the natural comparison $Q_z(F)\\otimes_A\\underline L\\to Q_z(F\\otimes_A\\underline L)$ is an isomorphism: after choosing any generator of $L$ it is the identity on the defining restriction kernels. Applying this to injective resolutions proves the same comparison for $RQ_z$. Also $z_*G\\otimes_A\\underline L=z_*(G\\otimes_A\\underline L)$. Tensor the isomorphism in Step 3 with $L$ to obtain $RQ_zA_P(r)\\cong z_*A_B(r-b)[-2b]$. Changing a generator of $L$ multiplies both sides by the same unit of $A$; all the maps are $A$-linear, so the comparison and orientation are independent of that choice. The tensor and evaluation identifications in the cited twist lemma show that this construction respects $A(r)=A(b)\\otimes_AA(r-b)$ for all integers $r$.",
+   "uses": [
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "The sentence that twists and shifts add; explicit constant-line tensor argument for the ordinary support kernel."
+   }
+  },
+  {
+   "text": "Let $g:B'\\to B$ be any morphism between the affine finite-type bases, and let $h:P'\\to P$ be its affine-space base change. The coordinate divisors remain Cartier, since multiplication by each $v_i$ is injective in a polynomial ring over any base ring. By [lem-amb-cartier-kummer-map] their ordinary supported morphisms pull back to those for $P'$, independently of $N$. By [lem-pur-supported-cup-functoriality] their ordered product pulls back to $c_b'$; for $b=0$ the unit does also. The support-Hom naturality statement [lem-asd-supported-kummer-support-hom-naturality] identifies this pullback with $h^{-1}c_b$ precomposed by the inverse of the canonical isomorphism $h^{-1}z_*A_B\\cong z'_*A_{B'}$. By the closed adjunction of Step 2, the canonical supported pullback $h^{-1}RQ_zA_P(b)\\to RQ_{z'}A_{P'}(b)$ therefore carries the isomorphism induced by $\\theta_b$ to the one induced by $\\theta_b'$. This proves the required commuting square and invertibility for that specified pullback, rather than just existence of some comparison. For $r\\ne b$, tensor this square with the constant line $L_{r-b}$; the pullback, tensor and exponent compatibilities in [lem-asd-etale-finite-twist-pullback] give the same square for $r$. This also proves independence of $N$ for every twist: two annihilating powers compare through their maximum, and all the factors and line identifications agree under those transition maps.",
+   "uses": [
+    "lem-amb-cartier-kummer-map",
+    "lem-pur-supported-cup-functoriality",
+    "lem-asd-supported-kummer-support-hom-naturality",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+    "place": "Final base-change paragraph, with the ordinary supported-Hom pullback spelled out."
+   }
+  },
+  {
+   "text": "Finally take $B=\\operatorname{Spec}k$. The equivalence in [lem-exc-abelian-sheaves-gmodules] has trivial Galois group because $k$ is algebraically closed. It identifies global sections with evaluation in abelian groups. Transporting the $A$-action along the same equivalence gives the equivalence with $A$-modules, so global sections on this point are exact and evaluate the constant line $A_k(r-b)$ to $L_{r-b}$. Apply derived global sections to the isomorphism of Step 5 and use the support/global identity of Step 2. This gives $R\\Gamma_{\\{0\\}}(\\mathbf A^b_k,A(r))\\cong L_{r-b}[-2b]$. Since it is obtained from the same $\\theta_b$ by tensor and evaluation, it has the same Kummer product normalization, not a separately chosen scalar.",
+   "uses": [
+    "lem-exc-abelian-sheaves-gmodules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 04JQ (lemma-equivalence-abelian-sheaves-point), for the algebraically closed field; support identity from Tags 09XP--09XQ."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sbc-affine-space",
+  "def-weil-finite-type-morphism",
+  "lem-pur-etale-injective-support-sequence",
+  "lem-pur-etale-supported-kernel-adjunction",
+  "det-pbc-conventions-module-cohomology",
+  "thm-pur-with-support-exactness",
+  "lem-amb-finite-tate-site-descent",
+  "lem-pur-closed-finite-adjoint-counit-transport",
+  "cor-pur-affine-space-zero-section-purity",
+  "thm-weil-pbc-site-comparison",
+  "lem-amb-cartier-kummer-map",
+  "lem-pur-supported-cup-functoriality",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-supported-kummer-support-hom-naturality",
+  "lem-exc-abelian-sheaves-gmodules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/cor-pur-affine-space-zero-section-purity.proof.md",
+  "place": "Ordinary etale descent of the existing normalized zero-section theorem, with the explicit support-kernel and constant-line arguments of Steps 1--7."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +171,52 @@
    "results": "{\"t\": \"2026-10-21T06:19:03Z\", \"tool\": \"grep\", \"query\": \"sectionsWithSupport|cohomologyWithSupport|zeroSection.*purity|purity.*zeroSection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: returned general algebraic-geometry, sheaf or homological declarations do not state the complete supported-coordinate assertion; inspected the returned signatures."
+  },
+  {
+   "tool": "grep",
+   "query": "sectionsWithSupport|cohomologyWithSupport|zeroSection.*purity|purity.*zeroSection",
+   "results": "{\"t\": \"2026-10-21T08:22:38Z\", \"tool\": \"grep\", \"query\": \"sectionsWithSupport|cohomologyWithSupport|zeroSection.*purity|purity.*zeroSection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; only affine-space scheme identities, cotangent/etale-locus statements, immersion formulas, or unrelated number-theoretic Kummer results; none states the normalized supported-cohomology assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Ordinary etale cohomological purity zero section affine space Kummer orientation finite coefficients",
+   "results": "{\"t\": \"2026-10-21T08:22:39Z\", \"tool\": \"leansearch\", \"query\": \"Ordinary etale cohomological purity zero section affine space Kummer orientation finite coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.instIsIsoSchemeOverInferInstanceOverClassOfIsEmpty\", \"AlgebraicGeometry.Scheme.zero_of_zero_cover\", \"AffineMap.instZero\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"AlgebraicGeometry.LocallyRingedSpace.basicOpen_zero\", \"AlgebraicGeometry.RingedSpace.res_zero\", \"AlgebraicGeometry.Proj.zero_apply\", \"AffineMap.coe_zero\"], \"digest\": \"c244eb7b28ba87bf\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; only affine-space scheme identities, cotangent/etale-locus statements, immersion formulas, or unrelated number-theoretic Kummer results; none states the normalized supported-cohomology assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sheaf\", \"rightDerived\"",
+   "results": "{\"t\": \"2026-10-21T08:22:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Sheaf\\\", \\\"rightDerived\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; only affine-space scheme identities, cotangent/etale-locus statements, immersion formulas, or unrelated number-theoretic Kummer results; none states the normalized supported-cohomology assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Etale cohomology with support in the zero section of affine space is a Tate twist shifted by twice the rank with normalized Kummer product",
+   "results": "{\"t\": \"2026-10-21T08:22:40Z\", \"tool\": \"leanfinder\", \"query\": \"Etale cohomology with support in the zero section of affine space is a Tate twist shifted by twice the rank with normalized Kummer product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_appTop_coord\", \"Algebra.H1Cotangent\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"Algebra.etaleLocus_eq_compl_support\", \"Algebra.FormallyEtale.subsingleton_h1Cotangent\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isAffine_of_isLimit\", \"AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale\"], \"digest\": \"bcad18a04f5efe5a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; only affine-space scheme identities, cotangent/etale-locus statements, immersion formulas, or unrelated number-theoretic Kummer results; none states the normalized supported-cohomology assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|TateTwist|supportedClass|rightDerivedUpperShriek",
+   "results": "{\"t\": \"2026-10-21T08:24:05Z\", \"tool\": \"grep\", \"query\": \"Kummer|TateTwist|supportedClass|rightDerivedUpperShriek\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/KummerDedekind.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\", \"Mathlib/NumberTheory/Padics/PadicVal/Basic.lean\"], \"digest\": \"3cbf83c5e3254ca8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; only affine-space scheme identities, cotangent/etale-locus statements, immersion formulas, or unrelated number-theoretic Kummer results; none states the normalized supported-cohomology assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Closed immersion exceptional inverse image of a constant sheaf on affine space is concentrated in twice the codimension generated by a cup product of Kummer boundary classes",
+   "results": "{\"t\": \"2026-10-21T08:24:08Z\", \"tool\": \"leanfinder\", \"query\": \"Closed immersion exceptional inverse image of a constant sheaf on affine space is concentrated in twice the codimension generated by a cup product of Kummer boundary classes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.liftCoborder_app\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.Scheme.Hom.toImage_app\", \"AlgebraicGeometry.Scheme.Hom.liftCoborder_preimage\", \"AlgebraicGeometry.Scheme.IdealSheafData.isOpenImmersion_glueDataObjMap\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_morphismRestrict\", \"AlgebraicGeometry.Proj.fromOfGlobalSections_resLE\", \"AlgebraicGeometry.Scheme.ideal_ker_le_ker_ΓSpecIso_inv_comp\"], \"digest\": \"4a4cd59a7f2fd975\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; only affine-space scheme identities, cotangent/etale-locus statements, immersion formulas, or unrelated number-theoretic Kummer results; none states the normalized supported-cohomology assertion."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-relative-support-coordinate-model",
@@ -82,5 +236,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-finite-type-coordinate-support-orientation",
+  "worker": "stage1",
+  "summary": "Verified the ordinary support model, descended the existing all-finite-level normalized zero-section theorem through the counit-preserving comparison and bounded-below full faithfulness, then proved the arbitrary-twist, supported-base-change and field clauses explicitly. No new nodes and no statement changes.",
+  "blueprint": "lem-pur-frame-independence proof first two sentences: supported cohomology is sheaf-theoretic and can be checked etale-locally; the coordinate-model input is supplied using the current cor-pur-affine-space-zero-section-purity proof in the same sk-prop-an unit.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-etale-injective-support-sequence",
+    "why": "Generic ordinary support sequence for constant-A module sheaves: the kernel is the closed pushforward of the right adjoint with the counit as inclusion, computed on K-injective representatives; no unit-specific calculation is replaced."
+   },
+   {
+    "node": "lem-amb-finite-tate-site-descent",
+    "why": "Generic identification of the specified finite Tate sheaf with its ordinary etale witness, including every ramified coefficient index."
+   },
+   {
+    "node": "lem-pur-closed-finite-adjoint-counit-transport",
+    "why": "Identifies finite transported closed exceptional image with the ordinary support right adjoint, preserving the actual counit."
+   },
+   {
+    "node": "cor-pur-affine-space-zero-section-purity",
+    "why": "Existing normalized zero-section theorem used to identify the ordinary coordinate-support model; this follows the current sk-prop-an ancestor route and does not reprove purity by a different route."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic bounded-below full faithfulness, used to descend the normalized isomorphism and its inverse."
+   },
+   {
+    "node": "lem-amb-cartier-kummer-map",
+    "why": "Generic ordinary Cartier witness, normalized independently of the annihilating exponent and natural under the relevant pullbacks."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Generic all-integer twist and exponent compatibilities, used for the constant-line tensor extension."
+   },
+   {
+    "node": "lem-asd-supported-kummer-support-hom-naturality",
+    "why": "Generic identification of the canonical ordinary supported pullback with pullback of its actual derived morphism."
+   },
+   {
+    "node": "lem-exc-abelian-sheaves-gmodules",
+    "why": "Generic exact evaluation on the etale site of an algebraically closed field."
+   },
+   {
+    "node": "det-pbc-conventions-module-cohomology",
+    "why": "Generic acyclicity of injective module sheaves for abelian cohomology, used to identify the module-derived support functors with the abelian ones of def-pur-support-cohomology."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-etale-injective-support-sequence",
+  "lem-amb-finite-tate-site-descent",
+  "lem-pur-closed-finite-adjoint-counit-transport",
+  "cor-pur-affine-space-zero-section-purity",
+  "thm-weil-pbc-site-comparison",
+  "lem-amb-cartier-kummer-map",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-asd-supported-kummer-support-hom-naturality",
+  "lem-exc-abelian-sheaves-gmodules",
+  "det-pbc-conventions-module-cohomology"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-12536ff1d",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-12536ff1d (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit with zero new nodes, item statement byte-identical to the live node, no repair note (an ordinary split, not a 10-21 re-split), nothing dropped by the route pivot, no SGA, and no cycle. Sources: blueprint main-20261015 cor-pur-affine-space-zero-section-purity.proof.md and the first two sentences of lem-pur-frame-independence.proof.md; Stacks 09XP/09XQ (the support functor H_Z preserves injectives by its adjunction); 09B1 and 04JQ through their DAG nodes. The route works. Step 3 descends the normalized pro-etale th_b to the etale site: tate-site-descent (every n, no condition on the ramification index), the counit-preserving closed-adjoint transport on D^+, and the corollary for affine finite-type B; full faithfulness of nu^* on D^+ lifts both the map and its inverse. Step 4 identifies the normalization through the counit transpose, the etale witness of the Cartier map, the site comparison in supported-cup-functoriality (k-schemes, which is the case here) and faithfulness on P. Step 5 (constant free line over k = F_q-bar) is genuinely elementary. Step 6: coordinates stay nonzerodivisors after base change, and support-hom-naturality plus the adjunction give the square for the specified supported pullback. Step 7 uses the trivial Galois group. Small cases checked: b=0, b=1, empty B, nonreduced or disconnected B, r<b, and n not divisible by e. Duplicate search found nothing that states the ordinary support-kernel form; def-pur-finite-affine-orientation-comparison is b=1 only, and the Q86 siblings use this item. FIX 1 (C1/C4): Step 2 computed R Gamma_Z with injective A-module sheaves, but the statement fixes def-pur-support-cohomology, which is derived in abelian sheaves. I added the bridge: det-pbc-conventions-module-cohomology (injective module sheaves have no higher abelian cohomology on P, U and B); z_*z^!_0 I is injective, so I(P)->I(U) is onto; the long exact sequence of thm-pur-with-support-exactness then gives H^q_Z = 0. The step is now 1779 characters and proof_deps is recomputed. Both added nodes already lie in the item's dependency closure, so no new batch-5 reach. FIX 2: the tool_uses 'why' for lem-pur-etale-injective-support-sequence was copied from the cup-product entry; I corrected it and declared det-pbc-conventions-module-cohomology. Batch 5: both flagged citations (cor-pur-affine-space-zero-section-purity and lem-pur-supported-cup-functoriality) reach lem-pod-etale-stalk-tensor-scalar. That node is the generic fact that stalks commute with sheaf tensor and scalar extension; it is no step of the trace formula or Poincare duality, so I accepted both. The other trf/pod nodes newly reached are generic foundations. All declared off-unit tool_uses are accepted. Fixed node: fixes/dag/nodes/sec-smooth-purity/lem-pur-finite-type-coordinate-support-orientation.json.; 1 file(s) fixed by the reviewer"
  }
 }
