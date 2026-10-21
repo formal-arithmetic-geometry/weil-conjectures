@@ -14,9 +14,66 @@
   "def-sfb-strong-monoidal-functor",
   "lem-pur-derived-tensor-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the comparison on complexes, without localizing. Write $b_{P,Q}=\\beta^{\\rm Ch}_{P,Q}$ and suppress the subscript ${\\rm Ch}$ on $F$. For $p+q=n$ let $i_{p,q}:P^p\\otimes Q^q\\to(P\\otimes Q)^n$ and $j_{q,p}:Q^q\\otimes P^p\\to(Q\\otimes P)^n$ be the coproduct inclusions of [def-sfb-preserves-kflat-quasi-iso]. Since $F$ is a left adjoint, [lem-weil-pbc-left-adjoint-preserves-colimits] says that the $F(i_{p,q})$ are a coproduct cocone. They therefore determine maps out of $F((P\\otimes Q)^n)$ by the uniqueness clause of [def-weil-pbc-category-colimit]. On precomposing with $F(i_{p,q})$, the maps $\\tau_{Q,P}F(b_{P,Q})$ and $b_{FP,FQ}\\tau_{P,Q}$ respectively become\n$$j'_{q,p}(-1)^{pq}c_{Q^q,P^p}F(\\beta^{\\mathcal C}_{P^p,Q^q}),\\qquad j'_{q,p}(-1)^{pq}\\beta^{\\mathcal D}_{FP^p,FQ^q}c_{P^p,Q^q},$$\nwhere $j'$ is the target total-tensor inclusion. Additivity of $F$ moves the sign outside $F$. These expressions are equal by the ordinary braiding hypothesis in the statement. Coproduct uniqueness in every degree proves the equality of cochain maps\n$$\\tau_{Q,P}\\circ F(b_{P,Q})=b_{FP,FQ}\\circ\\tau_{P,Q}.\\tag{*}$$\nOnly the given bidegree descriptions of $b$ and $\\tau$ are used; no new braiding is chosen.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes) and 0FPT (lemma-symmetric-monoidal-derived); agent-written cross-functor calculation for the prescribed native normalizations."
+   }
+  },
+  {
+   "text": "Now let $P,Q$ be K-flat and put $X=Q_{\\mathcal C}P$, $Y=Q_{\\mathcal C}Q$. By the preservation hypothesis $FP,FQ$ are K-flat too, so all the native model comparisons occurring below are isomorphisms. Abbreviate $m^C_{P,Q}=m_{\\mathcal C;P,Q}$, $m^D_{FP,FQ}=m_{\\mathcal D;FP,FQ}$, $b=b_{P,Q}$ and $k_{P\\otimes Q}=\\kappa_{P\\otimes Q}$. Precompose the desired equality at $(X,Y)$ with $E(m^C_{P,Q})$ and postcompose with $\\kappa_Q\\otimes\\kappa_P$. For its left side the source native-braiding normalization and then the normalization of $t$ for the reversed pair give\n$$\\begin{aligned}\n&(\\kappa_Q\\otimes\\kappa_P)t_{Y,X}E(\\beta^C_{X,Y})E(m^C_{P,Q})\\\\\n&=(\\kappa_Q\\otimes\\kappa_P)t_{Y,X}E(m^C_{Q,P})E(Q_{\\mathcal C}(b))\\\\\n&=m^D_{FQ,FP}Q_{\\mathcal D}(\\tau_{Q,P})\\kappa_{Q\\otimes P}E(Q_{\\mathcal C}(b))\\\\\n&=m^D_{FQ,FP}Q_{\\mathcal D}(\\tau_{Q,P}\\circ F(b))\\kappa_{P\\otimes Q}.\n\\end{aligned}$$\nThe last line is exactly naturality of the canonical factorization $\\kappa$ at the cochain map $b$, followed by functoriality of $Q_{\\mathcal D}$. Here $\\beta^C$ denotes the given derived braiding, not the ordinary symmetry.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes) and 0FPT (lemma-symmetric-monoidal-derived); agent-written cross-functor calculation for the prescribed native normalizations."
+   }
+  },
+  {
+   "text": "For the right side of the same conjugated equality, naturality of the given target derived braiding, normalization of $t$, and then its native model formula give\n$$\\begin{aligned}\n&(\\kappa_Q\\otimes\\kappa_P)\\beta^D_{EX,EY}t_{X,Y}E(m^C_{P,Q})\\\\\n&=\\beta^D_{Q_{\\mathcal D}FP,Q_{\\mathcal D}FQ}(\\kappa_P\\otimes\\kappa_Q)t_{X,Y}E(m^C_{P,Q})\\\\\n&=\\beta^D_{Q_{\\mathcal D}FP,Q_{\\mathcal D}FQ}m^D_{FP,FQ}Q_{\\mathcal D}(\\tau_{P,Q})\\kappa_{P\\otimes Q}\\\\\n&=m^D_{FQ,FP}Q_{\\mathcal D}(b_{FP,FQ}\\circ\\tau_{P,Q})\\kappa_{P\\otimes Q}.\n\\end{aligned}$$\nEquation $(*)$ of Step 1 identifies this with the last line of Step 2. Both the precomposing map $E(m^C_{P,Q})$ and the postcomposing map $\\kappa_Q\\otimes\\kappa_P$ are isomorphisms, with inverses obtained by applying the functor and tensor bifunctor to their inverses. Cancelling them proves the required braiding equation at every pair $(Q_{\\mathcal C}P,Q_{\\mathcal C}Q)$ of K-flat models. This cancellation does not assume that $t$ has already been proved invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes) and 0FPT (lemma-symmetric-monoidal-derived); agent-written cross-functor calculation for the prescribed native normalizations."
+   }
+  },
+  {
+   "text": "Finally regard the two sides as natural transformations from the bifunctor $H(K,L)=E(K\\otimes^{\\mathbf L}L)$ to $J(K,L)=EL\\otimes^{\\mathbf L}EK$. They are natural because $t$ is natural by hypothesis and the prescribed braidings are natural. Closedness and symmetry make each fixed-factor tensor functor on $\\mathcal C$ a left adjoint; [lem-weil-pbc-left-adjoint-preserves-colimits] supplies its preservation of all small colimits. All the other hypotheses of [lem-sfb-kflat-derivability] are precisely the given Grothendieck, additive tensor and functorial flat-resolution assumptions. Thus the full subcategory of K-flat complexes in $K(\\mathcal C)$ is a left derivability structure for quasi-isomorphisms. Apply the last assertion of [lem-sfb-multivariable-derived-calculus] with $n=2$, both categories $K(\\mathcal C)$, both localizations $Q^h_{\\mathcal C}:K(\\mathcal C)\\to D(\\mathcal C)$ and both subcategories the K-flat complexes. It says that natural transformations between $H$ and $J$ are determined by their components at pairs of localized K-flat objects. The complexes-localization $Q_{\\mathcal C}P$ and homotopy-localization $Q^h_{\\mathcal C}P$ are canonically identified by the equivalent descriptions in [def-weil-abstract-derived-category]; naturality identifies their components. Step 3 proves equality at all such pairs, so the two transformations are equal on every pair $K,L$, including unbounded ones.",
+   "uses": [
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-kflat-derivability",
+    "lem-sfb-multivariable-derived-calculus",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes) and 0FPT (lemma-symmetric-monoidal-derived); agent-written cross-functor calculation for the prescribed native normalizations."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-weil-pbc-category-colimit",
+  "lem-sfb-kflat-derivability",
+  "lem-sfb-multivariable-derived-calculus",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0FPQ (lemma-symmetric-monoidal-cat-complexes) and 0FPT (lemma-symmetric-monoidal-derived); agent-written cross-functor calculation for the prescribed native normalizations."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +109,59 @@
    "results": "{\"t\": \"2026-10-21T03:24:09Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation between left derived tensor bifunctors preserves symmetry when its representative map commutes with Koszul exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Tor_map\", \"CategoryTheory.Tor'_obj_map\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'_obj_obj\", \"CategoryTheory.Localization.Monoidal.tensorBifunctorIso\", \"CategoryTheory.Localization.Monoidal.curriedTensorPreIsoPost\"], \"digest\": \"ebce55e6acebe3b9\"}",
    "date": "2026-10-21",
    "verdict": "no match: map_braiding assumes an already braided functor; braidingNatIso_hom_app concerns one monoidal localization, not the cross-functor square for the normalized K-flat derived comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(derived.*[Bb]raid|[Bb]raid.*[Dd]erived|braidingNatIso_hom_app)",
+   "results": "{\"t\": \"2026-10-21T06:09:30Z\", \"tool\": \"grep\", \"query\": \"(derived.*[Bb]raid|[Bb]raid.*[Dd]erived|braidingNatIso_hom_app)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\", \"Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean\"], \"digest\": \"b9e09ed1277028c4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: braidingNatIso_hom_app at Mathlib/CategoryTheory/Localization/Monoidal/Braided.lean:57 concerns a monoidal localization, not the cross-functor K-flat comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compatibility of a derived tensor comparison with the Koszul symmetry for an exact braided monoidal functor",
+   "results": "{\"t\": \"2026-10-21T06:09:30Z\", \"tool\": \"leansearch\", \"query\": \"Compatibility of a derived tensor comparison with the Koszul symmetry for an exact braided monoidal functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.tensorMonoidal\", \"CategoryTheory.Functor.Monoidal.commTensorRight\", \"CategoryTheory.BraidedCategory.curriedBraidingNatIso\", \"CategoryTheory.BraidedCategory.tensorLeftIsoTensorRight\", \"CategoryTheory.LaxBraidedFunctor.isoOfComponents\", \"CategoryTheory.Functor.instBraidedMonMapMon\", \"CategoryTheory.Functor.Braided.toMonoidal\", \"CategoryTheory.Functor.LaxBraided.toLaxMonoidal\"], \"digest\": \"1df00926e4d4a394\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary braided and monoidal functor structures do not establish the K-flat normalized cross-functor square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_braiding, CategoryTheory.DerivedCategory",
+   "results": "{\"t\": \"2026-10-21T06:09:30Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.map_braiding, CategoryTheory.DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.DerivedCategory'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "invalid query: loogle: unknown identifier 'CategoryTheory.DerivedCategory'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact symmetric monoidal functor induces a functor on unbounded derived categories preserving the Koszul braiding through its normalized tensor comparison",
+   "results": "{\"t\": \"2026-10-21T06:09:32Z\", \"tool\": \"leanfinder\", \"query\": \"An exact symmetric monoidal functor induces a functor on unbounded derived categories preserving the Koszul braiding through its normalized tensor comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\"], \"digest\": \"c1a79923f4405657\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary braided and monoidal functor structures do not establish the K-flat normalized cross-functor square"
+  },
+  {
+   "tool": "grep",
+   "query": "(map_braiding|class Braided|class LaxBraided)",
+   "results": "{\"t\": \"2026-10-21T06:10:04Z\", \"tool\": \"grep\", \"query\": \"(map_braiding|class Braided|class LaxBraided)\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Braided/Transport.lean\"], \"digest\": \"54c510f6ef3c5850\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: map_braiding at Mathlib/CategoryTheory/Monoidal/Braided/Basic.lean:535 requires an already braided functor; it does not establish the normalized derived comparison equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_braiding",
+   "results": "{\"t\": \"2026-10-21T06:10:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.map_braiding\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.map_braiding\"], \"digest\": \"f814075dd1685ba1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: map_braiding assumes the braided structure whose compatibility is the present goal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural transformation between derived tensor bifunctors commutes with symmetry if its maps on K-flat complexes commute with the signed exchange",
+   "results": "{\"t\": \"2026-10-21T06:10:13Z\", \"tool\": \"leanfinder\", \"query\": \"A natural transformation between derived tensor bifunctors commutes with symmetry if its maps on K-flat complexes commute with the signed exchange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.mapBifunctorFlipIso_hom_naturality\", \"HomologicalComplex.mapBifunctorFlipIso_hom_naturality_assoc\", \"HomologicalComplex.hasMapBifunctor_flip_iff\", \"HomologicalComplex.mapBifunctorFlipIso_flip\", \"HomologicalComplex.ι_mapBifunctorFlipIso_hom\", \"HomologicalComplex.ι_mapBifunctorFlipIso_inv\", \"HomologicalComplex.mapBifunctorFlipIso\", \"HomologicalComplex.ι_mapBifunctorFlipIso_hom_assoc\"], \"digest\": \"a5da329b2bd043dd\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: BifunctorFlip gives the signed flip and its naturality for cochain maps, not a comparison under a functor between coefficient categories followed by derivation"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-module-object-ringed-site-derived-comparison",
@@ -75,5 +181,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-exact-tensor-functor-derived-braiding",
+  "worker": "stage1",
+  "summary": "N7: retained the statement and its independent native braidings; wrote the signed coproduct calculation, the two normalized conjugation calculations, and the existing K-flat derivability/determination argument. No new nodes or Mathlib leaves. Read current sources and checked the hypotheses and signs.",
+  "blueprint": "The coefficient/model identification before the first paragraph of lem-sfb-dc-hom-preserves (reduction of internal RHom modulo the uniformizer), through Steps 2-4 of lem-sfb-module-object-ringed-site-derived-comparison. Steps 1-3 here check that changing coefficients respects the prescribed signed exchange; Step 4 extends from K-flat models using the derived-tensor unit already cited by sk-def-sfb-dc-restricted-functors."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N7-d1680f27d",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-d1680f27d (reviewer sub-agent of L); spot-checked: I read all four steps against the statements of their cited nodes and found no fault. Step 1: I recomputed the (p,q)-summand composites. Both sides give j'_{q,p}(-1)^{pq} times the ordinary symmetry square, so they agree by the item's hypothesis. The coproduct cocone is preserved by lem-weil-pbc-left-adjoint-preserves-colimits, and maps out of it are unique by def-weil-pbc-category-colimit. Steps 2 and 3 are elementary uses of the stated normalizations of the source braiding, of t at (Q,P) and (P,Q), and of the target braiding at (FP,FQ), which are K-flat by the preservation hypothesis. They also use naturality of kappa and of beta^D. The cancellation is only by isomorphisms (E(m^C) and kappa tensor kappa), so invertibility of t is not assumed. Step 4: the hypotheses of lem-sfb-kflat-derivability hold, since closed plus symmetric makes each one-sided tensor a left adjoint. The last clause of lem-sfb-multivariable-derived-calculus (n=2, Q^h a localization by def-weil-abstract-derived-category) is applied correctly. Small cases checked: degrees (0,0), (1,1) sign -1, (1,2) sign +1, characteristic 2, and unbounded objects. Source: Stacks 0FPQ/0FPT (sites-cohomology.tex lines 12936 and 13136) have omitted proofs, and the node honestly records an agent-written proof; no SGA is used. No new nodes. A whole-DAG search found no duplicate: the sibling derived-normalization node covers only the associator and unit, and the other candidates (right-exact-tensor-comparison, integral-residue route-fac, kun-exact-monoidal-equivalence) state other things. Route: kflat-derivability and multivariable-calculus belong to unit sk-def-sfb-derived-tensor-hom, which is in the item unit's uses, so no tool_uses are needed. Batch-5 flag: lem-trf-localization-essentially-surjective is a Mathlib-kind general fact (a localization functor is essentially surjective), not a step of the trace formula or of Poincare duality, and the item's base stmt_deps already reach it, so I accept the citation. The item was created by N9 on 2026-10-21, so it is neither on the dropped list nor under a re-split note."
  }
 }
