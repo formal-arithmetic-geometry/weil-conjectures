@@ -23733,3 +23733,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:49 L: merged deliver/NA/lem-sfb-norm-algcl-bar-augmentation (stage 2; reviewer PASS; parallel immutable checks)
 - 20:49 L: merged deliver/NC/lem-sfb-lisse-lattice-potential-kummer-tameness (stage 2; reviewer PASS; parallel immutable checks)
 - 20:51 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 20:52 L: returned deliver/NI/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F + C5/B9 + G4. Live item. It is not on the drop list, its citer lem-sfb-nested-open-regular-alteration is live, and )
