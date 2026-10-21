@@ -24,7 +24,7 @@
  ],
  "proof": [
   {
-   "text": "Put $Z^jK=\\ker d_K^j$. For an integer $n\\le a+1$, the induction data consist of objects $P^j\\in\\mathcal P$, maps $\\alpha^j:P^j\\twoheadrightarrow K^j$ and differentials $d_P^j$ for $j\\ge n$, with $P^j=0$ for $j>a$, $d_P^{j+1}d_P^j=0$ and $\\alpha^{j+1}d_P^j=d_K^j\\alpha^j$. Require also that the induced cycle map $u_n:Z^nP\\to Z^nK$ is epic, and that the induced maps $Z^jP/\\operatorname{im}d_P^{j-1}\\to H^j(K)$ are isomorphisms for $j>n$. These quotients involve only the already specified degrees. At $n=a+1$, choose in every degree above $a$ the zero object belonging to $\\mathcal P$, with zero maps. All corresponding terms of $K$, cycles and cohomology in the required degrees vanish, so the requirements hold.",
+   "text": "Choose the supplied zero object Z in P, and for each object X choose a covering epimorphism pi_X:T(X) to X from hcover. These choices use only the hypotheses, not an unproved existence theorem. A stage stores its degree n, current and next objects, current differential d and augmentation e to K^n. The initial stage in degree a+1 uses Z for both objects and zero maps.",
    "uses": [
     "def-sp-abelian",
     "def-weil-abstract-derived-category"
@@ -32,11 +32,11 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, proof of (1), descending induction"
+    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, part (1)"
    }
   },
   {
-   "text": "Assume the data at $n$ have been chosen. Form $T_n=K^{n-1}\\times_{Z^nK}Z^nP$, where the first map is the factorization of $d_K^{n-1}$ through $Z^nK$, and the second is $u_n$. Explicitly, $T_n$ is the kernel of $(\\overline d_K^{n-1},-u_n):K^{n-1}\\oplus Z^nP\\to Z^nK$, so it exists using kernels and a finite biproduct. Write its projections as $s:T_n\\to K^{n-1}$ and $t:T_n\\to Z^nP$. The quotient-generating hypothesis supplies $Q\\in\\mathcal P$ and an epimorphism $q:Q\\twoheadrightarrow T_n$. Set $P^{n-1}=Q$, $\\alpha^{n-1}=sq$, and $d_P^{n-1}=\\iota_n tq$, with $\\iota_n:Z^nP\\to P^n$ the kernel inclusion. The kernel equation gives $\\alpha^nd_P^{n-1}=d_K^{n-1}\\alpha^{n-1}$, and $d_P^nd_P^{n-1}=0$ follows from $d_P^n\\iota_n=0$. No previously chosen data are changed.",
+   "text": "Given a stage in degree n, form W=K^{n-1} times_{K^n} kernel(d), with right map the kernel inclusion followed by e. The next current object is T(W); its differential is pi_W followed by the second projection and kernel inclusion, and its augmentation is pi_W followed by the first projection. The kernel equation proves square-zero, and the pullback equation proves compatibility with K. Iterate this explicit construction over the natural numbers, starting in degree a+1. For integer i at most a use stage depth (a-i).toNat+1; above a use the chosen Z. The equality of adjacent stage terms transports both equations to integer degrees, so CochainComplex.of and ofHom give L and f. All terms satisfy P by the choice of covers, or by P Z above a.",
    "uses": [
     "def-sp-abelian",
     "def-weil-abstract-derived-category"
@@ -44,11 +44,22 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, proof of (1), descending induction"
+    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, part (1)"
    }
   },
   {
-   "text": "The new component $\\alpha^{n-1}$ is epic. Indeed take any morphism $x:V\\to K^{n-1}$. Since $u_n$ is epic, [lem-sp-abelian-refinements](a) gives an epimorphism $\\rho:V'\\twoheadrightarrow V$ and $z:V'\\to Z^nP$ with $u_nz=\\overline d_K^{n-1}x\\rho$. The pair $(x\\rho,z)$ defines a morphism $V'\\to T_n$ by the kernel universal property. Apply the same criterion to $q$ to lift this morphism to $p:V''\\to P^{n-1}$ after another epimorphism $\\sigma:V''\\twoheadrightarrow V'$. Then $\\alpha^{n-1}p=x\\rho\\sigma$. Composites of epimorphisms are epimorphisms by right cancellation, so criterion (a) proves the claim.",
+   "text": "For i at most a, identify the assembled term L^i with T(K^i times_{K^{i+1}} kernel(d_L^{i+1})). The comparison to this pullback is epic, and its two projections are f^i and d_L^i by the step equations. Apply [lem-pc-functorial-cycle-pullback-lifting-stage3]: a cycle x:B to L^{i+1} and a compatible y:B to K^i admit, after an epimorphic refinement p:B prime to B, a simultaneous lift z:B prime to L^i with z f^i=p y and z d_L^i=p x. Above a both x and y are zero, so the same conclusion holds with p the identity and z zero. No functorial cover assumption is used.",
+   "uses": [
+    "lem-pc-functorial-cycle-pullback-lifting-stage3"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, part (1)"
+   }
+  },
+  {
+   "text": "Apply the mono and epi homology-map refinement criteria of [lem-sp-abelian-refinements], exposed for complexes by Mathlib Algebra.Homology.Refinements. For injectivity in degree i, a cycle x in L^i mapping to the boundary of y in K^{i-1} is handled by the simultaneous lifting property in degree i-1; the lift exhibits x as a boundary after refinement. For surjectivity, apply that property in degree i to x=0 and a cycle y in K^i; the resulting z is a cycle lifting y after refinement, with zero boundary correction. Thus every homology map is monic and epic, hence an isomorphism in the abelian category, and f is a quasi-isomorphism.",
    "uses": [
     "def-sp-abelian",
     "lem-sp-abelian-refinements"
@@ -56,70 +67,31 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, proof of (1), descending induction"
+    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, part (1)"
    }
   },
   {
-   "text": "The new cycle map $u_{n-1}:Z^{n-1}P\\to Z^{n-1}K$ is epic. For any $x:V\\to Z^{n-1}K$, the pair $(\\iota_Kx,0)$ defines a morphism $V\\to T_n$, because $d_K^{n-1}\\iota_K=0$. By [lem-sp-abelian-refinements](a) for $q$, after an epimorphism $\\rho:V'\\twoheadrightarrow V$ this pair lifts to $p:V'\\to P^{n-1}$. Its second component is zero, hence $d_P^{n-1}p=0$ and $p$ factors through $Z^{n-1}P$. Its first component gives $u_{n-1}\\overline p=x\\rho$, after cancelling the monic cycle inclusion. Criterion (a) now proves the assertion.",
+   "text": "To prove f^i epic, take y:B to K^i. Apply the simultaneous lifting property in degree i+1 to the pair (0,y d_K^i), obtaining a cycle x in L^{i+1} after refinement p1. Apply the property in degree i to the compatible pair (x,p1 y). Its augmentation is p2 p1 y. The composite refinement is epic, so [lem-sp-abelian-refinements](a) gives Epi f^i. Together with the term property, the preserved upper bound and the quasi-isomorphism this is the conclusion.",
    "uses": [
-    "def-sp-abelian",
-    "def-weil-abstract-derived-category",
     "lem-sp-abelian-refinements"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, proof of (1), descending induction"
-   }
-  },
-  {
-   "text": "Write $h_n:H^n(P)\\to H^n(K)$ for the map now defined by adjoining degree $n-1$. It is epic. The quotient $\\pi_K:Z^nK\\twoheadrightarrow H^n(K)$ is a cokernel, hence an epimorphism in an abelian category. Given $y:V\\to H^n(K)$, [lem-sp-abelian-refinements](a) first lifts $y$ through $\\pi_K$ after an epimorphic refinement, and then lifts the resulting cycle through the epic map $u_n$ after a second refinement. If $z:V'\\to Z^nP$ is the final lift and $\\rho:V'\\twoheadrightarrow V$ the composite refinement, functoriality of the cohomology quotient gives $h_n\\pi_Pz=y\\rho$. Criterion (a) applied to $h_n$ proves epimorphy.",
-   "uses": [
-    "def-sp-abelian",
-    "def-weil-abstract-derived-category",
-    "lem-sp-abelian-refinements"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, proof of (1), descending induction"
-   }
-  },
-  {
-   "text": "The map $h_n$ is also monic. Take $y:V\\to H^n(P)$ with $h_ny=0$. Lift $y$ through the cokernel $\\pi_P:Z^nP\\twoheadrightarrow H^n(P)$ using [lem-sp-abelian-refinements](a): $\\pi_Pz=y\\rho$ for an epimorphism $\\rho:V'\\twoheadrightarrow V$. Then $\\pi_Ku_nz=0$. Criterion (c), applied to the cokernel of $\\overline d_K^{n-1}:K^{n-1}\\to Z^nK$, gives an epimorphism $\\sigma:V''\\twoheadrightarrow V'$ and $b:V''\\to K^{n-1}$ with $\\overline d_K^{n-1}b=u_nz\\sigma$. Thus $(b,z\\sigma)$ maps to $T_n$. Lift it through $q$ after an epimorphism $\\tau:V'''\\twoheadrightarrow V''$, obtaining $p$ with $tqp=z\\sigma\\tau$. Consequently $z\\sigma\\tau$ is a boundary in $P$, so $y\\rho\\sigma\\tau=\\pi_Pz\\sigma\\tau=0$. Cancel these epimorphisms to get $y=0$. For two morphisms with equal composites with $h_n$, apply this to their difference; thus $h_n$ is monic. By step 5 and the abelian-category definition, $h_n$ is a cokernel of some morphism $v$. Since $h_nv=0$ and $h_n$ is monic, $v=0$. A cokernel of zero is an isomorphism by its universal property, so $h_n$ is an isomorphism.",
-   "uses": [
-    "def-sp-abelian",
-    "def-weil-abstract-derived-category",
-    "lem-sp-abelian-refinements"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, proof of (1), descending induction"
-   }
-  },
-  {
-   "text": "Steps 2--6 establish the induction data at $n-1$: they give the new component epimorphism, new cycle epimorphism and the required cohomology isomorphism in degree $n$. For $j>n$, neither $P^{j-1}$, $P^j$, $P^{j+1}$ nor their maps were changed, so their quotient cohomology maps remain the previous isomorphisms. Recurse on $k\\in\\mathbf N$ with $n=a+1-k$, choosing one covering epimorphism at each step. Every integer degree is reached; once a term, differential or component is assigned it is retained. Hence these data define an actual cochain complex and a morphism $\\alpha:P\\to K$, with terms in $\\mathcal P$, with every component epic, and with zero terms above $a$. For any fixed $j\\le a$, the stage with lower endpoint $j-1$ establishes that $H^j(\\alpha)$ is an isomorphism, and later stages leave it unchanged. For $j>a$ both cohomology objects vanish. Thus $\\alpha$ is a quasi-isomorphism by definition.",
-   "uses": [
-    "def-sp-abelian",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, proof of (1), descending induction"
+    "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, part (1)"
    }
   }
  ],
  "proof_deps": [
   "def-sp-abelian",
   "def-weil-abstract-derived-category",
+  "lem-pc-functorial-cycle-pullback-lifting-stage3",
   "lem-sp-abelian-refinements"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tag 05T7, derived-lemma-subcategory-left-resolution, proof of (1), descending induction"
+  "place": "Tag 05T7 (1), explicit descending cycle-pullback construction; homology and component epimorphisms checked by simultaneous lifting and Mathlib refinements. Objectwise tower bookkeeping specializes the proved CyclePullbackTower, CyclePullbackLaws and CyclePullbackTowerComparison constructions without assuming functorial covers."
  },
  "mathlib_searches": [
   {
@@ -426,5 +398,15 @@
   "by": "NQ",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261021T130246-L-2664556",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
