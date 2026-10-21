@@ -19,13 +19,9 @@
  ],
  "proof": [
   {
-   "text": "Work in the ambient unbounded derived categories, abbreviating $\\otimes_A^L$ to $\\otimes$, $C_T$ to $C$, and $i_e^*M$ to $L$. The comparison morphism $\\nu_W$ is a morphism of ringed topoi with its constant-$A$ structural map; its module pullback is exact, so its total left derived pullback is the termwise functor $C_W$ specified in the statement. Apply the canonical ringed-topos tensor comparison to $\\nu_W$. Its naturality and its compatibility with the signed symmetry give, for arrows $f:U\\to U'$ and $g:V\\to V'$,\n$$c_{W;U',V'}C_W(f\\otimes g)=(C_Wf\\otimes C_Wg)c_{W;U,V},\\qquad c_{W;V,U}C_W(\\sigma_{U,V})=\\sigma_{C_WU,C_WV}c_{W;U,V}.$$\nThe signed symmetries on both sites are natural in both variables. These are statements of the three cited nodes, applied to the small site representatives in a universe containing the module sheaves. No special property of $i$, $B$ or $M$ is needed for them. All subsequent tensor products and comparisons are in these ambient categories; bounded-below inputs need not have bounded-below derived tensor products.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
-   "elementary": false,
+   "text": "Use the existing constant-coefficient comparison functor and its native leftDerivedTensorComparison. Its counit characterization computes it on K-flat pairs. The source and target derived braidings satisfy the native braiding_hom_mu_Qh formula. Cancel the target tensor counit (invertible when one factor is K-flat), apply the sheaf pullback braiding identity from doctrinal adjunction, and obtain braiding compatibility on K-flat representatives. Every derived object is isomorphic to such a representative by the existing kFlatMap left derivability structure; naturality extends the equality to arbitrary objects. Conjugate by leftDerivedFunctorIsoMapDerivedCategory to obtain both tensor naturality and signed-braiding compatibility for the exact comparison used in the statement. These are proved as private helpers from the native library API, rather than transported from a different ringed-module presentation.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
     "place": "Comparison paragraph; agent-written expansion of the given projection square, using Stacks Tags 07A4 (lemma-pullback-tensor-product) and 0FPT (lemma-symmetric-monoidal-derived)."
@@ -33,10 +29,7 @@
   },
   {
    "text": "Put $D=L\\otimes B$, $E=B\\otimes L$, $L'=i_p^*CM$, and write $\\sigma_e=\\sigma_{L,B}$ and $\\sigma_p=\\sigma_{L',B'}$. The definitions of $r,s$ and the symmetry equation of step 1, followed by naturality of the pro-etale symmetry for $\\rho_M^{-1}:C_ZL\\to L'$ and $v:C_ZB\\to B'$, give\n$$r\\,C_Z(\\sigma_e)=(v\\otimes\\rho_M^{-1})\\sigma_{C_ZL,C_ZB}c_{Z;L,B}=\\sigma_p(\\rho_M^{-1}\\otimes v)c_{Z;L,B}=\\sigma_p s.$$\nSet $H=\\eta_E F_p(r^{-1})$. Applying $F_p$, cancelling $F_p(r^{-1})F_p(r)$, and using naturality of the given $\\eta$ at $\\sigma_e:D\\to E$, yields the input identity\n$$H F_p(\\sigma_p)F_p(s)=\\eta_E F_p(C_Z\\sigma_e)=C(F_e\\sigma_e)\\eta_D.$$\nThus the two different tensor orders in $r$ and $s$ have been accounted for explicitly.",
-   "uses": [
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
@@ -54,11 +47,7 @@
   },
   {
    "text": "Put $g_e=(1_M\\otimes a_e)\\sigma_{F_eB,M}$ and $g_p=(1_{CM}\\otimes a_p)\\sigma_{F_pB',CM}$. The hypothesis on the final arrows, after composition with $V^{-1}$, says $a_p=C(a_e)d$. Naturality of the tensor comparison for $(1_M,a_e)$ and its symmetry equation give\n$$c_{T;M,Y}C(g_e)=(1_{CM}\\otimes C(a_e))\\sigma_{C(F_eB),CM}\\,k.$$\nNaturality of the signed pro-etale symmetry at $d:F_pB'\\to C(F_eB)$ gives\n$$(1_{CM}\\otimes C(a_e))\\sigma_{C(F_eB),CM}(d\\otimes1)=(1_{CM}\\otimes C(a_e)d)\\sigma_{F_pB',CM}=g_p.$$\nSince $d$ is invertible, these two equations yield the output identity\n$$c_{T;M,Y}C(g_e)=g_p(d^{-1}\\otimes1)k.$$\nThis uses the given arrow compatibility, rather than assuming that an arbitrary final arrow is preserved by comparison.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
+   "uses": [],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
@@ -75,15 +64,11 @@
    }
   }
  ],
- "proof_deps": [
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal"
- ],
+ "proof_deps": [],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-pf-proetale/thm-sf-pf-proetale.proof.md",
-  "place": "Comparison paragraph; agent-written expansion of the given projection square, using Stacks Tags 07A4 (lemma-pullback-tensor-product) and 0FPT (lemma-symmetric-monoidal-derived)."
+  "place": "Comparison paragraph; the existing five-step inverse-projection calculation, with tensor naturality and signed symmetry proved directly from the native constant-coefficient derived-functor API."
  },
  "mathlib_searches": [
   {
@@ -206,11 +191,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -244,5 +225,15 @@
   "group": "Q96",
   "result": "pass",
   "note": "All clauses match the node with left-to-right composition: arrow compatibility, s and r (both tensor orders kept), the projection square, t_e, t_p and the conclusion. rho = pullbackSquare.symm, eta : C_Z⋙F_p ≅ F_e⋙C_T, both in the right direction; eta on unbounded D is needed for L⊗B. c is the canonical K-flat comparison of strong monoidal ν^*; σ is the Koszul β_ of DerivedCategory.braidedCategory (negOnePow sign); both projection maps are rightAdjointProjectionMap of the derived adjunction (def-kun record). IsIso only on π_e and π_p; no constructibility or Tor hypothesis. A : Type (u+1) matches the dependency records and the ULift citer. Statement verbatim; only the main theorem has sorry; helpers are real; source/blueprint docstrings and the five proof steps are present. Added stmt_dep def-weil-boundary-exceptional-comparison-data (landed, PASSed definition node) owns comparison/etaleImage/proetaleImage/pullbackSquare and does not reach the item (no cycle). No duplicate found. Advisory H9: two proof-only non-public imports. Nothing compiled (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q7",
+  "result": "pass",
+  "landing": "20261021T154048-L-2781595",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
