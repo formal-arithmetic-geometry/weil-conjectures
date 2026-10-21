@@ -23379,3 +23379,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:45 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 18:45 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 18:46 L: merged deliver/N5/sk-thm-acyclicity (stage 2; reviewer PASS; parallel immutable checks)
+- 18:46 L: returned deliver/Q16/lem-sfb-acyclic-hypercover-pullback-normalization (reviewer RETURN: L: independent stage-2 immutable head a0d47048ff73: H2/H13 theorem-stmt_dep rule: stmt_deps lem-weil-pbc-site-hypercover)
