@@ -1,193 +1,187 @@
 {
- "id": "def-weil-frobenius-coefficient-twists",
- "blueprint": {
-  "is": "def-weil-frobenius-coefficient-twists",
-  "from": null,
-  "same_as": null
- },
- "kind": "definition",
- "title": "Frobenius on coefficient twists",
- "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, where $q=p^a$, a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, and a finite extension $E/\\Ql$ contained in $\\Qlb$, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$ and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($n\\geq1$). Let $Y_0$ be a finite-type [def-weil-scheme-morphism-properties] $k_0$-scheme (the case used most is $Y_0=\\Spec k_0$, $Y=\\Spec k$), $Y=Y_0\\times_{k_0}k$, and $g=g_Y:Y\\to Y$ the geometric-Frobenius automorphism [def-weil-frobenius-detailed], an isomorphism of schemes; $\\ell$ is invertible on $Y$. For $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$ let $\\Lambda_Y$ be the coefficient object and $\\Lambda(m)_Y$, $m\\in\\mathbf Z$, the Tate twists of [def-coefficient-twists-detailed], built from $\\Zl(1)_Y=\\varprojlim_r\\mu_{\\ell^r,Y}$ [def-pur-roots-of-unity-sheaf] by tensor products [def-pur-sheaf-tensor-product], sheaf Hom [def-pur-sheaf-hom] and inverse limits [def-pur-sheaf-inverse-limit] on the small pro-etale site [def-weil-pbc-proetale-site]. The *canonical Weil structure* (Frobenius) on the twists is defined as follows.\n\n1. *Coefficient rings.* For $\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}$ let $c_\\Lambda:g^{-1}\\Lambda_Y\\xrightarrow{\\sim}\\Lambda_Y$ be the structure isomorphism of the inverse image [def-weil-proetale-inverse-image, lem-weil-proetale-isomorphism-inverse-image] (for $\\mathcal O_E$ the composite through $g^{-1}\\varprojlim\\cong\\varprojlim g^{-1}$, as in [def-weil-constant-weil-structure] 2); likewise $c_{\\Zl}$, $c_{\\mathcal O_E}^{\\mathrm{const}}$ for the constant sheaves $(\\Zl)_Y$, $(\\mathcal O_E)_Y$. Through $c_\\Lambda$, inverse images $g^{-1}\\mathcal M$ of $\\Lambda_Y$-modules are regarded as $\\Lambda_Y$-modules.\n\n2. *The Tate line.* For $r\\geq1$ let $c_{\\mu_{\\ell^r}}=c^{g}_{\\mu_{\\ell^r}}:g^{-1}\\mu_{\\ell^r,Y}\\xrightarrow{\\sim}\\mu_{\\ell^r,Y}$ be the inverse-image comparison map of roots of unity [def-pur-roots-of-unity-inverse-image], an isomorphism compatible with the transition maps $u\\mapsto u^\\ell$ and semilinear over $c_{\\mathbf Z/\\ell^r}$ [lem-pur-roots-of-unity-inverse-image-iso]. Put\n$$\n \\tau_{\\Zl(1)}:g^{-1}\\Zl(1)_Y\\xrightarrow{\\sim}\\varprojlim_rg^{-1}\\mu_{\\ell^r,Y}\\xrightarrow{\\varprojlim_rc_{\\mu_{\\ell^r}}}\\Zl(1)_Y,\n$$\nthe first arrow being the canonical isomorphism of [lem-weil-proetale-isomorphism-inverse-image] 2, and\n$$\n \\tau^{\\mathcal O_E}_1:g^{-1}\\mathcal O_E(1)_Y\\xrightarrow{\\sigma}g^{-1}\\Zl(1)_Y\\otimes_{g^{-1}(\\Zl)_Y}g^{-1}(\\mathcal O_E)_Y\\xrightarrow{\\tau_{\\Zl(1)}\\otimes c^{\\mathrm{const}}_{\\mathcal O_E}}\\mathcal O_E(1)_Y,\\qquad\n \\tau^{A_{E,n}}_1=\\tau^{\\mathcal O_E}_1\\otimes c_{A_{E,n}}:g^{-1}A_{E,n}(1)_Y\\xrightarrow{\\sim}A_{E,n}(1)_Y,\n$$\nwhere $\\sigma$ (and below every identification of $g^{-1}$ of a tensor product or sheaf Hom) is the isomorphism of [lem-pur-isomorphism-inverse-image-tensor-hom]. Each $\\tau^\\Lambda_1$ is a $\\Lambda_Y$-linear isomorphism.\n\n3. *All twists, sheaf level.* For $\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}$ put $\\tau^\\Lambda_0=c_\\Lambda$; for $m\\geq1$ let $\\tau^\\Lambda_m:g^{-1}\\Lambda(m)_Y\\cong(g^{-1}\\Lambda(1)_Y)^{\\otimes m}\\xrightarrow{(\\tau^\\Lambda_1)^{\\otimes m}}\\Lambda(m)_Y$; and for $m<0$ let $\\tau^\\Lambda_m:g^{-1}\\mathcal Hom_{\\Lambda_Y}(\\Lambda(-m)_Y,\\Lambda_Y)\\cong\\mathcal Hom(g^{-1}\\Lambda(-m)_Y,g^{-1}\\Lambda_Y)\\to\\mathcal Hom_{\\Lambda_Y}(\\Lambda(-m)_Y,\\Lambda_Y)$, $\\varphi\\mapsto c_\\Lambda\\circ\\varphi\\circ(\\tau^\\Lambda_{-m})^{-1}$. Each $\\tau^\\Lambda_m$ is a $\\Lambda_Y$-linear isomorphism of sheaves.\n\n4. *Derived level.* $\\Lambda(m)_Y$, placed in degree $0$, lies in $D^b_c(Y,\\Lambda)$ [def-weil-finite-torsion-constructibility, def-weil-derived-complete-integral-detailed, prop-weil-twist-preserves, lem-weil-constant-coefficient-objects-constructible]. With the isomorphism $\\lambda:Lg^*\\Lambda(m)_Y\\xrightarrow{\\sim}g^{-1}\\Lambda(m)_Y$ identifying the derived pullback [def-weil-derived-pullback-tensor-hom] along the isomorphism $g$ with the inverse image [lem-weil-isomorphism-derived-pullback], put\n$$\n \\theta^\\Lambda_m=\\tau^\\Lambda_m\\circ\\lambda:Lg^*\\Lambda(m)_Y\\xrightarrow{\\ \\sim\\ }\\Lambda(m)_Y\\quad\\text{in }D^b_c(Y,\\Lambda)\\qquad(\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}).\n$$\nFor $\\Lambda=E$, $E(m)_Y$ is the image of $\\mathcal O_E(m)_Y$ in $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-rationalization-karoubi] and $\\theta^E_m=\\theta^{\\mathcal O_E}_m\\otimes1$, its image; $E(m)_Y$ lies in the constructible heart [def-weil-constructible-heart], so $(E(m)_Y,\\theta^E_m)$ is a constructible $E$-Weil sheaf, an object of $D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex]. For $\\Lambda=\\Qlb$, the canonical Weil structure on $\\Qlb(m)_Y$ is the object $(E,(E(m)_Y,\\theta^E_m))$ of $D^b_{c,\\mathrm W}(Y,\\Qlb)$ [def-weil-weil-sheaf-complex, def-weil-algebraically-closed-coefficients], whose image under $\\operatorname{For}$ is $(E,E(m)_Y)=\\Qlb(m)_Y$. For $m=0$, $\\theta^\\Lambda_0$ is the canonical Weil structure of the constant coefficient object [def-weil-constant-weil-structure].\n\n5. *Twist of a Weil complex.* For $\\Lambda\\in\\{E,\\Qlb\\}$ and a $\\Lambda$-Weil complex $(K,\\theta_K)\\in D^b_{c,\\mathrm W}(Y,\\Lambda)$, its twist is $(K,\\theta_K)(m)=(K(m),\\theta_{K(m)})$, where $K(m)=K\\otimes^L_{\\Lambda_Y}\\Lambda(m)_Y$ [def-coefficient-twists-detailed], which lies in $D^b_c(Y,\\Lambda)$ [prop-weil-twist-preserves], and\n$$\n \\theta_{K(m)}:Lg^*(K\\otimes^L\\Lambda(m)_Y)\\xrightarrow{\\ \\mu_{g;K,\\Lambda(m)_Y}\\ }Lg^*K\\otimes^LLg^*\\Lambda(m)_Y\\xrightarrow{\\ \\theta_K\\otimes^L\\theta^\\Lambda_m\\ }K\\otimes^L\\Lambda(m)_Y,\n$$\nwith $\\mu$ the isomorphism of derived pullback with derived tensor product [lem-pur-derived-pullback-tensor-iso]; it is an isomorphism, so $(K,\\theta_K)(m)$ is an object of $D^b_{c,\\mathrm W}(Y,\\Lambda)$ [def-weil-weil-sheaf-complex]. A morphism $u$ of Weil complexes gives the morphism $u\\otimes^L\\mathrm{id}$ of their twists.\n\nThe pairs $(\\Lambda(m)_Y,\\theta^\\Lambda_m)$ are the twists with their natural Weil isomorphisms induced by the geometric-Frobenius convention. (That the resulting geometric Frobenius acts on $\\Lambda(m)$ over $\\Spec k_0$ by $q^{-m}$, compatibly with finite reduction and scalar extension, is a statement about this definition, lem-pur-twist-frobenius-scalar; it is not part of the definition.)",
- "source": {
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-  "place": "node def-weil-frobenius-coefficient-twists, order 1888"
- },
- "stmt_deps": [
-  "def-weil-finite-field-fiber",
-  "def-weil-scheme-morphism-properties",
-  "def-weil-frobenius-detailed",
-  "def-coefficient-twists-detailed",
-  "def-pur-roots-of-unity-sheaf",
-  "def-pur-sheaf-tensor-product",
-  "def-pur-sheaf-hom",
-  "def-pur-sheaf-inverse-limit",
-  "def-weil-pbc-proetale-site",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "def-weil-constant-weil-structure",
-  "def-pur-roots-of-unity-inverse-image",
-  "lem-pur-roots-of-unity-inverse-image-iso",
-  "lem-pur-isomorphism-inverse-image-tensor-hom",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-derived-complete-integral-detailed",
-  "prop-weil-twist-preserves",
-  "lem-weil-constant-coefficient-objects-constructible",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-weil-isomorphism-derived-pullback",
-  "def-weil-rationalization-karoubi",
-  "def-weil-constructible-heart",
-  "def-weil-weil-sheaf-complex",
-  "def-weil-algebraically-closed-coefficients",
-  "lem-pur-derived-pullback-tensor-iso"
- ],
- "proof": [
-  {
-   "text": "For each negative exponent apply the canonical internal-Hom comparison to the positive-power map and the degree-zero coefficient map. Conjugate by these maps. Check the evaluation formula and prove uniqueness after taking the adjunction mate; the unit is invertible along a scheme isomorphism.",
-   "uses": [
-    "lem-pur-inverse-image-hom-comparison",
+  "id": "def-weil-frobenius-coefficient-twists",
+  "blueprint": {
+    "is": "def-weil-frobenius-coefficient-twists",
+    "from": null,
+    "same_as": null
+  },
+  "kind": "definition",
+  "title": "Frobenius on coefficient twists",
+  "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, where $q=p^a$, a prime $\\ell\\neq p$, an algebraic closure $\\Qlb$ of $\\Ql=\\mathbf Q_\\ell$, and a finite extension $E/\\Ql$ contained in $\\Qlb$, with valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$ and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ ($n\\geq1$). Let $Y_0$ be a finite-type [def-weil-scheme-morphism-properties] $k_0$-scheme (the case used most is $Y_0=\\Spec k_0$, $Y=\\Spec k$), $Y=Y_0\\times_{k_0}k$, and $g=g_Y:Y\\to Y$ the geometric-Frobenius automorphism [def-weil-frobenius-detailed], an isomorphism of schemes; $\\ell$ is invertible on $Y$. For $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$ let $\\Lambda_Y$ be the coefficient object and $\\Lambda(m)_Y$, $m\\in\\mathbf Z$, the Tate twists of [def-coefficient-twists-detailed], built from $\\Zl(1)_Y=\\varprojlim_r\\mu_{\\ell^r,Y}$ [def-pur-roots-of-unity-sheaf] by tensor products [def-pur-sheaf-tensor-product], sheaf Hom [def-pur-sheaf-hom] and inverse limits [def-pur-sheaf-inverse-limit] on the small pro-etale site [def-weil-pbc-proetale-site]. The *canonical Weil structure* (Frobenius) on the twists is defined as follows.\n\n1. *Coefficient rings.* For $\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}$ let $c_\\Lambda:g^{-1}\\Lambda_Y\\xrightarrow{\\sim}\\Lambda_Y$ be the structure isomorphism of the inverse image [def-weil-proetale-inverse-image, lem-weil-proetale-isomorphism-inverse-image] (for $\\mathcal O_E$ the composite through $g^{-1}\\varprojlim\\cong\\varprojlim g^{-1}$, as in [def-weil-constant-weil-structure] 2); likewise $c_{\\Zl}$, $c_{\\mathcal O_E}^{\\mathrm{const}}$ for the constant sheaves $(\\Zl)_Y$, $(\\mathcal O_E)_Y$. Through $c_\\Lambda$, inverse images $g^{-1}\\mathcal M$ of $\\Lambda_Y$-modules are regarded as $\\Lambda_Y$-modules.\n\n2. *The Tate line.* For $r\\geq1$ let $c_{\\mu_{\\ell^r}}=c^{g}_{\\mu_{\\ell^r}}:g^{-1}\\mu_{\\ell^r,Y}\\xrightarrow{\\sim}\\mu_{\\ell^r,Y}$ be the inverse-image comparison map of roots of unity [def-pur-roots-of-unity-inverse-image], an isomorphism compatible with the transition maps $u\\mapsto u^\\ell$ and semilinear over $c_{\\mathbf Z/\\ell^r}$ [lem-pur-roots-of-unity-inverse-image-iso]. Put\n$$\n \\tau_{\\Zl(1)}:g^{-1}\\Zl(1)_Y\\xrightarrow{\\sim}\\varprojlim_rg^{-1}\\mu_{\\ell^r,Y}\\xrightarrow{\\varprojlim_rc_{\\mu_{\\ell^r}}}\\Zl(1)_Y,\n$$\nthe first arrow being the canonical isomorphism of [lem-weil-proetale-isomorphism-inverse-image] 2, and\n$$\n \\tau^{\\mathcal O_E}_1:g^{-1}\\mathcal O_E(1)_Y\\xrightarrow{\\sigma}g^{-1}\\Zl(1)_Y\\otimes_{g^{-1}(\\Zl)_Y}g^{-1}(\\mathcal O_E)_Y\\xrightarrow{\\tau_{\\Zl(1)}\\otimes c^{\\mathrm{const}}_{\\mathcal O_E}}\\mathcal O_E(1)_Y,\\qquad\n \\tau^{A_{E,n}}_1=\\tau^{\\mathcal O_E}_1\\otimes c_{A_{E,n}}:g^{-1}A_{E,n}(1)_Y\\xrightarrow{\\sim}A_{E,n}(1)_Y,\n$$\nwhere $\\sigma$ (and below every identification of $g^{-1}$ of a tensor product or sheaf Hom) is the isomorphism of [lem-pur-isomorphism-inverse-image-tensor-hom]. Each $\\tau^\\Lambda_1$ is a $\\Lambda_Y$-linear isomorphism.\n\n3. *All twists, sheaf level.* For $\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}$ put $\\tau^\\Lambda_0=c_\\Lambda$; for $m\\geq1$ let $\\tau^\\Lambda_m:g^{-1}\\Lambda(m)_Y\\cong(g^{-1}\\Lambda(1)_Y)^{\\otimes m}\\xrightarrow{(\\tau^\\Lambda_1)^{\\otimes m}}\\Lambda(m)_Y$; and for $m<0$ let $\\tau^\\Lambda_m:g^{-1}\\mathcal Hom_{\\Lambda_Y}(\\Lambda(-m)_Y,\\Lambda_Y)\\cong\\mathcal Hom(g^{-1}\\Lambda(-m)_Y,g^{-1}\\Lambda_Y)\\to\\mathcal Hom_{\\Lambda_Y}(\\Lambda(-m)_Y,\\Lambda_Y)$, $\\varphi\\mapsto c_\\Lambda\\circ\\varphi\\circ(\\tau^\\Lambda_{-m})^{-1}$. Each $\\tau^\\Lambda_m$ is a $\\Lambda_Y$-linear isomorphism of sheaves.\n\n4. *Derived level.* $\\Lambda(m)_Y$, placed in degree $0$, lies in $D^b_c(Y,\\Lambda)$ [def-weil-finite-torsion-constructibility, def-weil-derived-complete-integral-detailed, prop-weil-twist-preserves, lem-weil-constant-coefficient-objects-constructible]. With the isomorphism $\\lambda:Lg^*\\Lambda(m)_Y\\xrightarrow{\\sim}g^{-1}\\Lambda(m)_Y$ identifying the derived pullback [def-weil-derived-pullback-tensor-hom] along the isomorphism $g$ with the inverse image [lem-weil-isomorphism-derived-pullback], put\n$$\n \\theta^\\Lambda_m=\\tau^\\Lambda_m\\circ\\lambda:Lg^*\\Lambda(m)_Y\\xrightarrow{\\ \\sim\\ }\\Lambda(m)_Y\\quad\\text{in }D^b_c(Y,\\Lambda)\\qquad(\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}).\n$$\nFor $\\Lambda=E$, $E(m)_Y$ is the image of $\\mathcal O_E(m)_Y$ in $D^b_c(Y,E)=D^b_c(Y,\\mathcal O_E)[1/\\varpi_E]$ [def-weil-rationalization-karoubi] and $\\theta^E_m=\\theta^{\\mathcal O_E}_m\\otimes1$, its image; $E(m)_Y$ lies in the constructible heart [def-weil-constructible-heart], so $(E(m)_Y,\\theta^E_m)$ is a constructible $E$-Weil sheaf, an object of $D^b_{c,\\mathrm W}(Y,E)$ [def-weil-weil-sheaf-complex]. For $\\Lambda=\\Qlb$, the canonical Weil structure on $\\Qlb(m)_Y$ is the object $(E,(E(m)_Y,\\theta^E_m))$ of $D^b_{c,\\mathrm W}(Y,\\Qlb)$ [def-weil-weil-sheaf-complex, def-weil-algebraically-closed-coefficients], whose image under $\\operatorname{For}$ is $(E,E(m)_Y)=\\Qlb(m)_Y$. For $m=0$, $\\theta^\\Lambda_0$ is the canonical Weil structure of the constant coefficient object [def-weil-constant-weil-structure].\n\n5. *Twist of a Weil complex.* For $\\Lambda\\in\\{E,\\Qlb\\}$ and a $\\Lambda$-Weil complex $(K,\\theta_K)\\in D^b_{c,\\mathrm W}(Y,\\Lambda)$, its twist is $(K,\\theta_K)(m)=(K(m),\\theta_{K(m)})$, where $K(m)=K\\otimes^L_{\\Lambda_Y}\\Lambda(m)_Y$ [def-coefficient-twists-detailed], which lies in $D^b_c(Y,\\Lambda)$ [prop-weil-twist-preserves], and\n$$\n \\theta_{K(m)}:Lg^*(K\\otimes^L\\Lambda(m)_Y)\\xrightarrow{\\ \\mu_{g;K,\\Lambda(m)_Y}\\ }Lg^*K\\otimes^LLg^*\\Lambda(m)_Y\\xrightarrow{\\ \\theta_K\\otimes^L\\theta^\\Lambda_m\\ }K\\otimes^L\\Lambda(m)_Y,\n$$\nwith $\\mu$ the isomorphism of derived pullback with derived tensor product [lem-pur-derived-pullback-tensor-iso]; it is an isomorphism, so $(K,\\theta_K)(m)$ is an object of $D^b_{c,\\mathrm W}(Y,\\Lambda)$ [def-weil-weil-sheaf-complex]. A morphism $u$ of Weil complexes gives the morphism $u\\otimes^L\\mathrm{id}$ of their twists.\n\nThe pairs $(\\Lambda(m)_Y,\\theta^\\Lambda_m)$ are the twists with their natural Weil isomorphisms induced by the geometric-Frobenius convention. (That the resulting geometric Frobenius acts on $\\Lambda(m)$ over $\\Spec k_0$ by $q^{-m}$, compatibly with finite reduction and scalar extension, is a statement about this definition, lem-pur-twist-frobenius-scalar; it is not part of the definition.)",
+  "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+    "place": "node def-weil-frobenius-coefficient-twists, order 1888"
+  },
+  "stmt_deps": [
+    "def-weil-finite-field-fiber",
+    "def-weil-scheme-morphism-properties",
+    "def-weil-frobenius-detailed",
+    "def-coefficient-twists-detailed",
+    "def-pur-roots-of-unity-sheaf",
+    "def-pur-sheaf-tensor-product",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-inverse-limit",
+    "def-weil-pbc-proetale-site",
+    "def-weil-proetale-inverse-image",
     "lem-weil-proetale-isomorphism-inverse-image",
-    "lem-weil-pbc-ring-sheaf-change-adjunction"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Descend the strict augmentation through the localization of good complexes, composing with the normalized derived pullback comparison. On the full constructible subcategory its components are invertible by pullbackAugmentation_isIso. Invert this natural transformation. The representative normalization follows by cancelling the comparison factors, and essential surjectivity proves uniqueness.",
-   "uses": [
-    "lem-pur-integral-operations-well-defined",
-    "lem-weil-integral-constructible-triangulated"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "lem-pur-inverse-image-hom-comparison",
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "lem-pur-integral-operations-well-defined",
-  "lem-weil-integral-constructible-triangulated"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
-  "place": "Definition clauses 3–4 and the existing declaration proof docstrings; normalized internal Hom and localization descent (B3). The positive-power maps and the two strict augmentation statements retain their original unfinished proofs."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -rln 'Tate twist\\|TateTwist\\|tateTwist\\|WeilSheaf\\|Weil structure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "none",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rln 'proetale\\|ProEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
-   "results": "AlgebraicGeometry/Sites/Proetale.lean (the pro-etale site and topology) and AlgebraicGeometry/Sites/ElladicCohomology.lean (ellAdicSheaf, EllAdicCohomology with constant coefficients); no roots-of-unity sheaf, twist or Frobenius pullback",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "import_flags": [],
- "blueprint_kind": "definition",
- "blueprint_order": 1888,
- "blueprint_uses": [
-  "def-coefficient-twists-detailed",
-  "def-weil-finite-field-fiber",
-  "def-weil-frobenius-detailed",
-  "def-weil-scheme-morphism-properties"
- ],
- "lean_audit": {},
- "split_report": {
-  "date": "2026-10-09",
-  "item": "def-weil-frobenius-coefficient-twists",
-  "worker": "stage1",
-  "summary": "Checked against Deligne, Weil II (1.1.7) pp. 150-151 (F = phi^{-1}), (1.1.14) p. 153, (1.2.5)(iv) p. 154 and (1.2.7) pp. 154-155, and Weil I (2.2) pp. 280-281 (Z_l(1) = lim mu_{l^n}, phi acts by q). The imported statement named no construction of the Weil isomorphism on Lambda(m) ('induced by the geometric Frobenius convention') and asserted, inside a definition, the statement that Frobenius acts by q^{-m}. Rewritten as the definition of the canonical Weil structure theta_m on Lambda(m)_Y for every finite-type Y_0 and every Lambda in {A_{E,n}, O_E, E, Qlbar}: from the roots-of-unity comparison map (new def-pur-roots-of-unity-inverse-image, with new lem-pur-roots-of-unity-inverse-image-iso), the limit/tensor/Hom compatibilities of g^{-1} along an isomorphism (lem-weil-proetale-isomorphism-inverse-image, new lem-pur-isomorphism-inverse-image-tensor-hom), and the derived identification lem-weil-isomorphism-derived-pullback, in parallel with def-weil-constant-weil-structure; plus the twist of a Weil complex, (theta_K tensor theta_m) after the new lem-pur-derived-pullback-tensor-iso (prop-weil-operations, whose tensor lift would give the same, is not cited: its proof uses thm-pur-weil-equivariance-of-purity-and-trace, which uses this node, a cycle). The scalar claim (q^{-m}, compatibility with reduction and scalar extension) moved to the new statement lem-pur-twist-frobenius-scalar, which depends on this node; the roots-of-unity fact behind it is the new statement lem-pur-frobenius-roots-of-unity-power. def-weil-scheme-morphism-properties kept (finite type)."
- },
- "reviewed": {
-  "date": "2026-10-09",
-  "by": "L",
-  "result": "pass"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-def-purity-conv",
- "lean": {
-  "module": "Sheaf.Paper.FrobeniusCoefficientTwistsCanonical",
-  "declaration": "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilTwistingFunctor",
-  "declarations": [
-   "WeilConjectures.FrobeniusCoefficientTwists.positiveLine",
-   "WeilConjectures.FrobeniusCoefficientTwists.generator",
-   "WeilConjectures.FrobeniusCoefficientTwists.rootTowerMap",
-   "WeilConjectures.FrobeniusCoefficientTwists.rootLineMap",
-   "WeilConjectures.FrobeniusCoefficientTwists.rootSection",
-   "WeilConjectures.FrobeniusCoefficientTwists.modulePull",
-   "WeilConjectures.FrobeniusCoefficientTwists.moduleSection",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_positiveLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.positiveLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.line",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_signedLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.signedLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.finiteModulePull",
-   "WeilConjectures.FrobeniusCoefficientTwists.finiteModuleSection",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finitePositiveLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.finitePositiveLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finiteSignedLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.finiteSignedLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_pullbackAugmentation",
-   "WeilConjectures.FrobeniusCoefficientTwists.pullbackAugmentation",
-   "WeilConjectures.FrobeniusCoefficientTwists.pullbackAugmentation_isIso",
-   "WeilConjectures.FrobeniusCoefficientTwists.completedToOrdinaryOnGood",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_completedToOrdinary",
-   "WeilConjectures.FrobeniusCoefficientTwists.completedToOrdinary",
-   "WeilConjectures.FrobeniusCoefficientTwists.ordinaryDerivedLineMap",
-   "WeilConjectures.FrobeniusCoefficientTwists.integralDerivedLineMap",
-   "WeilConjectures.FrobeniusCoefficientTwists.finiteDerivedLineMap",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalLine",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalDerivedLineMap",
-   "WeilConjectures.FrobeniusCoefficientTwists.commonDerivedLineMap",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalTwistStructure",
-   "WeilConjectures.FrobeniusCoefficientTwists.commonTwistStructure",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalTwistCommutationComponent",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalTwistCommutation_naturality",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalTwistCommutation",
-   "WeilConjectures.FrobeniusCoefficientTwists.commonTwistCommutationComponent",
-   "WeilConjectures.FrobeniusCoefficientTwists.commonTwistCommutation_naturality",
-   "WeilConjectures.FrobeniusCoefficientTwists.commonTwistCommutation",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilLine",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilTwistingFunctor",
-   "WeilConjectures.FrobeniusCoefficientTwists.commonWeilLine",
-   "WeilConjectures.FrobeniusCoefficientTwists.commonWeilTwistingFunctor",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilLine_heart",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilSheaf",
-   "WeilConjectures.FrobeniusCoefficientTwists.commonWeilLine_heart",
-   "WeilConjectures.FrobeniusCoefficientTwists.commonWeilSheaf"
+    "def-weil-constant-weil-structure",
+    "def-pur-roots-of-unity-inverse-image",
+    "lem-pur-roots-of-unity-inverse-image-iso",
+    "lem-pur-isomorphism-inverse-image-tensor-hom",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-derived-complete-integral-detailed",
+    "prop-weil-twist-preserves",
+    "lem-weil-constant-coefficient-objects-constructible",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-rationalization-karoubi",
+    "def-weil-constructible-heart",
+    "def-weil-weil-sheaf-complex",
+    "def-weil-algebraically-closed-coefficients",
+    "lem-pur-derived-pullback-tensor-iso"
   ],
-  "file": "lean/Sheaf/Paper/FrobeniusCoefficientTwistsCanonical.lean",
-  "statement": "def rationalWeilTwistingFunctor (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m : ℤ) : sfWeilComplex D l hl Y₀ E ⥤ sfWeilComplex D l hl Y₀ E",
-  "branch": "newtargets-dag",
-  "by": "NA",
-  "date": "2026-10-18",
-  "existing": false,
-  "note": "Dependency interface repair under brief-stage2 section 1(B): the old TateTwistCohomology declaration is a cohomology equivalence, not the canonical signed coefficient-line Frobenius structures or Weil twisting functors. This module uses the existing intrinsic coefficient lines, fixes the sheaf maps on root/scalar generators (negative powers by evaluation), fixes completed-to-ordinary pullback on strict Roos representatives, and defines finite, integral, rational and common-stage maps and Weil twists. Repair L H13: removed every purity-source helper; this module now contains only coefficient-twist clauses 1-5."
- },
- "reviewed_lean": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-64ae08ccc",
-  "group": "NA",
-  "result": "pass",
-  "note": "Re-delivery of 7d346b RETURN (H2). Only change: item Lean l.554/556/558 `.rational (AdicSmoothDualizing.fieldStage P)` -> `.rational ⟨P.extension⟩` (fieldStage is an abbrev for exactly that, same F/G/adjunction; compile confirms defeq with rationalWeilPurityGamma's type); other 3 modules byte-identical to the reviewed head. Item stmt_deps drop cor-pur-adic-and-rational-smooth-dualizing-complexes and thm-pur-adic-reconstruction, add new def node def-pur-canonical-purity-source-transports (owns rationalSource/commonSource/commonShiftedLine used by H and b); no added theorem stmt_deps remain. lean.statement verbatim for item, both new nodes and the twist (B) record. Dep records identical to live except the accepted twist (B) lean record; the derived-pullback record differs from the old snapshot only by live drift (NQ landing). No live collisions. Substance (clauses, edge cases, F1-F3 repairs, gates) unchanged from the prior review. nt_compile --json rc=0 clean: 14.9/29.7/23.8/18.8 s. Advisory: the realization def node still cites three theorem nodes for plain defs; second reading is a self-check; def-zl-weil-ind-sheaf-category is uncited (gap predates this delivery)."
- },
- "reviewed_proof": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
-  "result": "pass",
-  "landing": "20261021T214736-L-1845252",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof": [],
+  "proof_deps": [],
+  "proof_origin": null,
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -rln 'Tate twist\\|TateTwist\\|tateTwist\\|WeilSheaf\\|Weil structure' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+      "results": "none",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rln 'proetale\\|ProEtale' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/",
+      "results": "AlgebraicGeometry/Sites/Proetale.lean (the pro-etale site and topology) and AlgebraicGeometry/Sites/ElladicCohomology.lean (ellAdicSheaf, EllAdicCohomology with constant coefficients); no roots-of-unity sheaf, twist or Frobenius pullback",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "import_flags": [],
+  "blueprint_kind": "definition",
+  "blueprint_order": 1888,
+  "blueprint_uses": [
+    "def-coefficient-twists-detailed",
+    "def-weil-finite-field-fiber",
+    "def-weil-frobenius-detailed",
+    "def-weil-scheme-morphism-properties"
+  ],
+  "lean_audit": {},
+  "split_report": {
+    "date": "2026-10-09",
+    "item": "def-weil-frobenius-coefficient-twists",
+    "worker": "stage1",
+    "summary": "Checked against Deligne, Weil II (1.1.7) pp. 150-151 (F = phi^{-1}), (1.1.14) p. 153, (1.2.5)(iv) p. 154 and (1.2.7) pp. 154-155, and Weil I (2.2) pp. 280-281 (Z_l(1) = lim mu_{l^n}, phi acts by q). The imported statement named no construction of the Weil isomorphism on Lambda(m) ('induced by the geometric Frobenius convention') and asserted, inside a definition, the statement that Frobenius acts by q^{-m}. Rewritten as the definition of the canonical Weil structure theta_m on Lambda(m)_Y for every finite-type Y_0 and every Lambda in {A_{E,n}, O_E, E, Qlbar}: from the roots-of-unity comparison map (new def-pur-roots-of-unity-inverse-image, with new lem-pur-roots-of-unity-inverse-image-iso), the limit/tensor/Hom compatibilities of g^{-1} along an isomorphism (lem-weil-proetale-isomorphism-inverse-image, new lem-pur-isomorphism-inverse-image-tensor-hom), and the derived identification lem-weil-isomorphism-derived-pullback, in parallel with def-weil-constant-weil-structure; plus the twist of a Weil complex, (theta_K tensor theta_m) after the new lem-pur-derived-pullback-tensor-iso (prop-weil-operations, whose tensor lift would give the same, is not cited: its proof uses thm-pur-weil-equivariance-of-purity-and-trace, which uses this node, a cycle). The scalar claim (q^{-m}, compatibility with reduction and scalar extension) moved to the new statement lem-pur-twist-frobenius-scalar, which depends on this node; the roots-of-unity fact behind it is the new statement lem-pur-frobenius-roots-of-unity-power. def-weil-scheme-morphism-properties kept (finite type)."
+  },
+  "reviewed": {
+    "date": "2026-10-09",
+    "by": "L",
+    "result": "pass"
+  },
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-def-purity-conv",
+  "lean": {
+    "module": "Sheaf.Paper.FrobeniusCoefficientTwistsCanonical",
+    "declaration": "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilTwistingFunctor",
+    "declarations": [
+      "WeilConjectures.FrobeniusCoefficientTwists.positiveLine",
+      "WeilConjectures.FrobeniusCoefficientTwists.generator",
+      "WeilConjectures.FrobeniusCoefficientTwists.rootTowerMap",
+      "WeilConjectures.FrobeniusCoefficientTwists.rootLineMap",
+      "WeilConjectures.FrobeniusCoefficientTwists.rootSection",
+      "WeilConjectures.FrobeniusCoefficientTwists.modulePull",
+      "WeilConjectures.FrobeniusCoefficientTwists.moduleSection",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_positiveLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.positiveLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.line",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_signedLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.signedLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.finiteModulePull",
+      "WeilConjectures.FrobeniusCoefficientTwists.finiteModuleSection",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finitePositiveLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.finitePositiveLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finiteSignedLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.finiteSignedLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_pullbackAugmentation",
+      "WeilConjectures.FrobeniusCoefficientTwists.pullbackAugmentation",
+      "WeilConjectures.FrobeniusCoefficientTwists.pullbackAugmentation_isIso",
+      "WeilConjectures.FrobeniusCoefficientTwists.completedToOrdinaryOnGood",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_completedToOrdinary",
+      "WeilConjectures.FrobeniusCoefficientTwists.completedToOrdinary",
+      "WeilConjectures.FrobeniusCoefficientTwists.ordinaryDerivedLineMap",
+      "WeilConjectures.FrobeniusCoefficientTwists.integralDerivedLineMap",
+      "WeilConjectures.FrobeniusCoefficientTwists.finiteDerivedLineMap",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalLine",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalDerivedLineMap",
+      "WeilConjectures.FrobeniusCoefficientTwists.commonDerivedLineMap",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalTwistStructure",
+      "WeilConjectures.FrobeniusCoefficientTwists.commonTwistStructure",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalTwistCommutationComponent",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalTwistCommutation_naturality",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalTwistCommutation",
+      "WeilConjectures.FrobeniusCoefficientTwists.commonTwistCommutationComponent",
+      "WeilConjectures.FrobeniusCoefficientTwists.commonTwistCommutation_naturality",
+      "WeilConjectures.FrobeniusCoefficientTwists.commonTwistCommutation",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilLine",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilTwistingFunctor",
+      "WeilConjectures.FrobeniusCoefficientTwists.commonWeilLine",
+      "WeilConjectures.FrobeniusCoefficientTwists.commonWeilTwistingFunctor",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilLine_heart",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilSheaf",
+      "WeilConjectures.FrobeniusCoefficientTwists.commonWeilLine_heart",
+      "WeilConjectures.FrobeniusCoefficientTwists.commonWeilSheaf"
+    ],
+    "file": "lean/Sheaf/Paper/FrobeniusCoefficientTwistsCanonical.lean",
+    "statement": "def rationalWeilTwistingFunctor (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (Y₀ : Over (Spec (.of D.k₀))) [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (m : ℤ) : sfWeilComplex D l hl Y₀ E ⥤ sfWeilComplex D l hl Y₀ E",
+    "branch": "newtargets-dag",
+    "by": "NA",
+    "date": "2026-10-18",
+    "existing": false,
+    "note": "Dependency interface repair under brief-stage2 section 1(B): the old TateTwistCohomology declaration is a cohomology equivalence, not the canonical signed coefficient-line Frobenius structures or Weil twisting functors. This module uses the existing intrinsic coefficient lines, fixes the sheaf maps on root/scalar generators (negative powers by evaluation), fixes completed-to-ordinary pullback on strict Roos representatives, and defines finite, integral, rational and common-stage maps and Weil twists. Repair L H13: removed every purity-source helper; this module now contains only coefficient-twist clauses 1-5."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-64ae08ccc",
+    "group": "NA",
+    "result": "pass",
+    "note": "Re-delivery of 7d346b RETURN (H2). Only change: item Lean l.554/556/558 `.rational (AdicSmoothDualizing.fieldStage P)` -> `.rational ⟨P.extension⟩` (fieldStage is an abbrev for exactly that, same F/G/adjunction; compile confirms defeq with rationalWeilPurityGamma's type); other 3 modules byte-identical to the reviewed head. Item stmt_deps drop cor-pur-adic-and-rational-smooth-dualizing-complexes and thm-pur-adic-reconstruction, add new def node def-pur-canonical-purity-source-transports (owns rationalSource/commonSource/commonShiftedLine used by H and b); no added theorem stmt_deps remain. lean.statement verbatim for item, both new nodes and the twist (B) record. Dep records identical to live except the accepted twist (B) lean record; the derived-pullback record differs from the old snapshot only by live drift (NQ landing). No live collisions. Substance (clauses, edge cases, F1-F3 repairs, gates) unchanged from the prior review. nt_compile --json rc=0 clean: 14.9/29.7/23.8/18.8 s. Advisory: the realization def node still cites three theorem nodes for plain defs; second reading is a self-check; def-zl-weil-ind-sheaf-category is uncited (gap predates this delivery)."
+  },
+  "reviewed_proof": {
+    "date": "2026-10-19",
+    "by": "L",
+    "reviewer": "AUTO",
+    "group": "R3",
+    "result": "pass",
+    "landing": "20261019T005411-L-2764497",
+    "kind": "proof",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+    "sorry_before": [
+      "WeilConjectures.FrobeniusCoefficientTwists.commonTwistCommutation_naturality",
+      "WeilConjectures.FrobeniusCoefficientTwists.commonWeilLine_heart",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_completedToOrdinary",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finitePositiveLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finiteSignedLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_positiveLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_pullbackAugmentation",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_signedLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.pullbackAugmentation_isIso",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalTwistCommutation_naturality",
+      "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilLine_heart"
+    ],
+    "sorry_after": [
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_completedToOrdinary",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finitePositiveLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finiteSignedLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_positiveLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_pullbackAugmentation",
+      "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_signedLineMaps",
+      "WeilConjectures.FrobeniusCoefficientTwists.pullbackAugmentation_isIso"
+    ]
+  }
 }

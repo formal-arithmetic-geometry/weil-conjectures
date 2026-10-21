@@ -1,257 +1,252 @@
 {
- "id": "lem-sp-proetale-direct-image-scalar-cocycle",
- "kind": "statement",
- "title": "Coefficient cocycle for the ambient proper-comparison mate",
- "statement": "Fix a prime $\\ell$ and unital maps $A\\xrightarrow{\\varphi}B\\xrightarrow{\\psi}C$ of finite commutative rings annihilated by powers of $\\ell$. Use the ordinary uncompleted constant-ring module derived categories [def-weil-pbc-proetale-modules], the geometric derived adjunctions [def-weil-pbc-proetale-operations], and write $T_T^{A,B}=(-)\\otimes^L_{A_T}B_T$ and $\\alpha_{T,E}:T_T^{B,C}T_T^{A,B}E\\xrightarrow{\\sim}T_T^{A,C}E$ for scalar extension and associativity [det-sp-scalar-extension-functor]. Let $q:Z\\to Y$ be any scheme morphism. Let $\\gamma_{q,E}^{A,B}:T_Y^{A,B}Rq_{*,A}E\\to Rq_{*,B}T_Z^{A,B}E$ be precisely the counit mate of [def-sp-reduction-direct-image-comparison]. For every $E\\in D(Z_{\\mathrm{proét}},A)$,\n$$\\gamma_{q,E}^{A,C}\\circ\\alpha_{Y,Rq_{*,A}E}\n=Rq_{*,C}(\\alpha_{Z,E})\\circ\\gamma_{q,T_Z^{A,B}E}^{B,C}\\circ T_Y^{B,C}(\\gamma_{q,E}^{A,B}).$$\nThis equality is natural in $E$. Neither properness of $q$, boundedness of $E$, nor flatness or finite projective dimension of the coefficient maps is required.",
- "source": {
-  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
-  "place": "Step 4: projection maps compose because their counit transposes compose; returned Step 10"
- },
- "stmt_deps": [
-  "def-weil-pbc-proetale-modules",
-  "def-weil-pbc-proetale-operations",
-  "det-sp-scalar-extension-functor",
-  "def-sp-reduction-direct-image-comparison"
- ],
- "proof": [
-  {
-   "text": "Normalize the scalar associator using the actual scalar-extension presentation and its tensor-unit normalized ordinary adjunction. The derived Hom comparison identifies its derived adjunction with the specified one by uniqueness of unit normalization on K-flat complexes. The representative formula for successive derived quotients then identifies the adjunction composition isomorphism with scalarExtensionFunctor_composition: both send (x tensor r) tensor s to x tensor b(r)s. This requires no coefficient flatness.",
-   "uses": [
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-pur-sheaf-ring-derived-hom-comparison",
-    "def-weil-pbc-bounded-constructible-tower",
-    "def-weil-pbc-adic-coefficient-datum",
-    "det-sp-scalar-extension-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YY and 0D6D: scalar adjunction and derived composition normalization."
-   }
+  "id": "lem-sp-proetale-direct-image-scalar-cocycle",
+  "kind": "statement",
+  "title": "Coefficient cocycle for the ambient proper-comparison mate",
+  "statement": "Fix a prime $\\ell$ and unital maps $A\\xrightarrow{\\varphi}B\\xrightarrow{\\psi}C$ of finite commutative rings annihilated by powers of $\\ell$. Use the ordinary uncompleted constant-ring module derived categories [def-weil-pbc-proetale-modules], the geometric derived adjunctions [def-weil-pbc-proetale-operations], and write $T_T^{A,B}=(-)\\otimes^L_{A_T}B_T$ and $\\alpha_{T,E}:T_T^{B,C}T_T^{A,B}E\\xrightarrow{\\sim}T_T^{A,C}E$ for scalar extension and associativity [det-sp-scalar-extension-functor]. Let $q:Z\\to Y$ be any scheme morphism. Let $\\gamma_{q,E}^{A,B}:T_Y^{A,B}Rq_{*,A}E\\to Rq_{*,B}T_Z^{A,B}E$ be precisely the counit mate of [def-sp-reduction-direct-image-comparison]. For every $E\\in D(Z_{\\mathrm{proét}},A)$,\n$$\\gamma_{q,E}^{A,C}\\circ\\alpha_{Y,Rq_{*,A}E}\n=Rq_{*,C}(\\alpha_{Z,E})\\circ\\gamma_{q,T_Z^{A,B}E}^{B,C}\\circ T_Y^{B,C}(\\gamma_{q,E}^{A,B}).$$\nThis equality is natural in $E$. Neither properness of $q$, boundedness of $E$, nor flatness or finite projective dimension of the coefficient maps is required.",
+  "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 4: projection maps compose because their counit transposes compose; returned Step 10"
   },
-  {
-   "text": "Prove coherence of ordinary restriction/pullback squares for the coefficient tower. Transpose through the geometric adjunctions. The resulting restriction/direct-image comparisons and the restriction associators act identically on underlying sections, so sectionwise extensionality proves the identity. Injectivity of the mate correspondence returns the pullback identity. Naturality of the canonical constant-ring inverse-image comparisons supplies the coefficient squares.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "def-weil-proetale-inverse-image",
-    "lem-sp-scalar-tensor-pullback-square",
-    "lem-pur-proetale-constant-coefficient-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 and 07A7: restriction, pullback and their counit mates."
-   }
-  },
-  {
-   "text": "Transport the ordinary identity to derived categories using the proved exact-functor square-pasting lemma CategoryTheory.Functor.mapDerivedCategorySquareIso_hom_app_comp in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars. Its triangle comparison is pbcDerivedRestrictComp. Horizontal and vertical composition of mates for the scalar adjunctions gives the scalar-extension/pullback identity. Substitute the normalized associators from step 1 and the actual inverse-mate definition of directImageScalarPullbackIso.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "def-weil-pbc-bounded-constructible-tower",
+  "stmt_deps": [
+    "def-weil-pbc-proetale-modules",
+    "def-weil-pbc-proetale-operations",
     "det-sp-scalar-extension-functor",
     "def-sp-reduction-direct-image-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47: pasting comparison squares and their mates."
-   }
-  },
-  {
-   "text": "Transpose the claimed direct-image equation through the target geometric adjunction. The counit formula for mateEquiv replaces each directImageScalarComparison by its specified scalar/pullback comparison followed by scalar extension of the source counit. Naturality of the pullback comparison and scalar associator reduces the two composites to the identity of step 3. Injectivity of the Hom equivalence proves the equation for every unbounded E. No properness, boundedness or coefficient flatness is used.",
-   "uses": [
-    "def-sp-reduction-direct-image-comparison",
+  ],
+  "proof": [
+    {
+      "text": "Put $\\mathscr Y=\\operatorname{Sh}(Y_{\\mathrm{proet}})$, $\\mathscr X=\\operatorname{Sh}(Z_{\\mathrm{proet}})$ and $u=q_{\\mathrm{proet}}$. These are the small-site geometric operations of [def-weil-pbc-proetale-operations]. For $R=A,B,C$, [lem-pur-proetale-constant-coefficient-comparison] gives the specified isomorphism $c_R:u^{-1}R_Y\\xrightarrow{\\sim}R_Z$. Its definition in [def-weil-proetale-inverse-image] shows that $c_B\\circ u^{-1}(\\varphi_Y)=\\varphi_Z\\circ c_A$, and likewise for $\\psi$: the adjoints send each constant section $a$ to the same constant section $\\varphi(a)$ on the base change. The maps on locally constant sections follow by restriction and gluing, and then by sheafification. Thus the coefficient sheaves and both coefficient maps on $Z$ are precisely the inverse images of those on $Y$, identified through the specified $c_R$. Transporting module actions through these ring isomorphisms is the identified-coefficient convention already built into the prescribed operations; it introduces no new choice of adjunction.",
+      "uses": [
+        "def-weil-pbc-proetale-operations",
+        "lem-pur-proetale-constant-coefficient-comparison",
+        "def-weil-proetale-inverse-image"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 07A6 (lemma-adjoint), 07A7 (remark-base-change); sites.tex Tag 0H7J (example-constant-sheaf) for the canonical constant-coefficient specialization"
+      }
+    },
+    {
+      "text": "Identify the scalar associators before using the general cocycle. On either site choose a flat-term K-flat representative $P\\to N$ by [lem-pc-kflat-resolution]. The comparison $\\tau_T$ of [lem-sfb-successive-derived-quotient-normalization] is represented by\n$$(P\\otimes_{A_T}B_T)\\otimes_{B_T}C_T\\longrightarrow P\\otimes_{A_T}C_T,\\qquad (x\\otimes b)\\otimes c\\longmapsto x\\otimes\\psi(b)c.$$\nIts inverse inserts $1_B$. This is exactly the canonical tensor associativity used for $\\alpha_{T,N}$ in [det-sp-scalar-extension-functor], whose scalar extension is computed by the same K-flat model, including the action through the right factor. Hence $\\tau_T=\\alpha_T$, with the direction from iterated extension to direct extension. This verification applies to every $N$ by the representative isomorphism and naturality. The normalization theorem already supplies the validity of the iterated K-flat computation for arbitrary ring maps; no flatness of $B$ over $A$ or $C$ over $B$ is inferred.",
+      "uses": [
+        "lem-pc-kflat-resolution",
+        "lem-sfb-successive-derived-quotient-normalization",
+        "det-sp-scalar-extension-functor"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition); blueprint scalar-extension proof paragraph (4)"
+      }
+    },
+    {
+      "text": "Write $P_R=q_R^*$, $G_R=Rq_{*,R}$ and $\\lambda^{R,S}:P_ST_Y^{R,S}\\xrightarrow{\\sim}T_Z^{R,S}P_R$. In [def-sp-reduction-direct-image-comparison], $\\lambda$ is the balanced K-flat tensor/pullback map, so under the coefficient identifications of step 1 it is the canonical inverse-image/tensor comparison in [lem-pur-ringed-coefficient-projection-cocycle]. Both send the inverse image of $x\\otimes s$ to the inverse image of $x$ tensor $s$, and use the same normalized geometric adjunction [def-weil-pbc-proetale-operations]. For $R\\to S$ equal to any of $A\\to B$, $B\\to C$ or $A\\to C$, the specified mate is consequently characterized by\n$$\\varepsilon^S_{T_Z^{R,S}E}\\circ P_S(\\gamma^{R,S}_{q,E})=T_Z^{R,S}(\\varepsilon^R_E)\\circ\\lambda^{R,S}_{G_RE}.$$\nThe adjunct-counit equivalence [lem-weil-pbc-adjunct-counit-identity] makes this characterization unique. It is exactly the defining transpose of $\\chi$ in the cited general cocycle, so $\\chi_\\varphi=\\gamma^{A,B}_q$, $\\chi_\\psi=\\gamma^{B,C}_q$ and $\\chi_{\\psi\\varphi}=\\gamma^{A,C}_q$. This checks equality of the specified maps, not only existence of some comparison.",
+      "uses": [
+        "def-sp-reduction-direct-image-comparison",
+        "lem-pur-ringed-coefficient-projection-cocycle",
+        "def-weil-pbc-proetale-operations",
+        "lem-weil-pbc-adjunct-counit-identity"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 07A7 (remark-base-change), 07A6 (lemma-adjoint); categories.tex Tag 0037 (definition-adjoint), the equivalent counit description of the adjunct"
+      }
+    },
+    {
+      "text": "Apply [lem-pur-ringed-coefficient-projection-cocycle] to $u$ and the three ring sheaves $A_Y\\to B_Y\\to C_Y$. Step 1 checks its inverse-image coefficient hypothesis; the derived categories are ordinary unbounded module categories as required. Its identity is\n$$\\chi_{\\psi\\varphi,E}\\circ\\tau_{Y,G_AE}=G_C(\\tau_{Z,E})\\circ\\chi_{\\psi,T_Z^{A,B}E}\\circ T_Y^{B,C}(\\chi_{\\varphi,E}).$$\nSubstitute $\\tau=\\alpha$ from step 2 and $\\chi=\\gamma$ from step 3. With $G_R=Rq_{*,R}$ this is exactly the required displayed equality, as an equality in $D(Y_{\\mathrm{proet}},C)$. Its common source is $T_Y^{B,C}T_Y^{A,B}G_AE$, and its common target is $G_CT_Z^{A,C}E$.",
+      "uses": [
+        "lem-pur-ringed-coefficient-projection-cocycle"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tag 0E47 (remark-compose-base-change-horizontal), coefficient-change specialization; the general normalized coefficient cocycle node supplies the verification omitted in the Stacks remark"
+      }
+    },
+    {
+      "text": "The equation supplied by [lem-pur-ringed-coefficient-projection-cocycle] is an identity of natural transformations, so evaluating it gives the asserted equality for every $E$ and its naturality in every morphism $E\\to E'$. That node works with arbitrary unbounded objects and arbitrary sheaf ring maps, and explicitly assumes neither flatness nor invertibility of the comparison. Its geometric morphism is arbitrary. Thus the specialization uses no properness of $q$, boundedness of $E$, or flatness or finite projective dimension of either coefficient map. The finite $\\ell$-power coefficient hypotheses in the item merely restrict the allowed rings.",
+      "uses": [
+        "lem-pur-ringed-coefficient-projection-cocycle"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/stacks-project/sites-cohomology.tex",
+        "place": "Tags 07A7 (remark-base-change) and 0E47 (remark-compose-base-change-horizontal), natural transformations on the unbounded derived categories"
+      }
+    }
+  ],
+  "proof_deps": [
     "def-weil-pbc-proetale-operations",
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "def-weil-proetale-inverse-image",
+    "lem-pc-kflat-resolution",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "det-sp-scalar-extension-functor",
+    "def-sp-reduction-direct-image-comparison",
+    "lem-pur-ringed-coefficient-projection-cocycle",
     "lem-weil-pbc-adjunct-counit-identity"
-   ],
-   "elementary": false,
-   "source": {
+  ],
+  "proof_origin": {
+    "by": "agent",
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A7 and 0E47; blueprint direct-image proof Step 4: composition of counit transposes."
-   }
-  }
- ],
- "proof_deps": [
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-pur-sheaf-ring-derived-hom-comparison",
-  "def-weil-pbc-bounded-constructible-tower",
-  "def-weil-pbc-adic-coefficient-datum",
-  "det-sp-scalar-extension-functor",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "def-weil-proetale-inverse-image",
-  "lem-sp-scalar-tensor-pullback-square",
-  "lem-pur-proetale-constant-coefficient-comparison",
-  "def-sp-reduction-direct-image-comparison",
-  "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-adjunct-counit-identity"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "E2: normalized scalar associators, sectionwise restriction-square coherence, exact derived square pasting, and composition of counit mates; realizes the existing unit associativity step directly."
- },
- "mathlib_searches": [
-  {
-   "tool": "leanfinder",
-   "query": "The derived direct image coefficient comparison defined by the counit mate is compatible with successive extension of scalars",
-   "results": "OK: 8 hits; ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.extendScalars_id_comp_assoc",
-   "date": "2026-10-21",
-   "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
+    "place": "Explicit constant-coefficient specialization of lem-pur-ringed-coefficient-projection-cocycle (Stacks 07A7 and 0E47), checking the balanced associator and counit-mate normalizations; realizes blueprint direct-image proof Step 4."
   },
-  {
-   "tool": "leanfinder",
-   "query": "Mates of pullback tensor coefficient associativity give the cocycle for derived pushforward scalar extension",
-   "results": "OK: 8 hits; PresheafOfModules.pullback_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, PresheafOfModules.pullbackComp",
-   "date": "2026-10-21",
-   "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
+  "mathlib_searches": [
+    {
+      "tool": "leanfinder",
+      "query": "The derived direct image coefficient comparison defined by the counit mate is compatible with successive extension of scalars",
+      "results": "OK: 8 hits; ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.extendScalars_id_comp_assoc",
+      "date": "2026-10-21",
+      "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Mates of pullback tensor coefficient associativity give the cocycle for derived pushforward scalar extension",
+      "results": "OK: 8 hits; PresheafOfModules.pullback_assoc, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.pseudofunctor_associativity, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, PresheafOfModules.pullbackComp",
+      "date": "2026-10-21",
+      "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Counit mate for derived direct image and extension of scalars satisfies coefficient composition",
+      "results": "OK: 8 hits; CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.Functor.totalLeftDerivedCounit, ModuleCat.ExtendRestrictScalarsAdj.counit_app, CategoryTheory.Functor.rightKanExtensionCounit, CategoryTheory.Adjunction.derived_counit",
+      "date": "2026-10-21",
+      "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.Adjunction, \"mate\"",
+      "results": "OK: 12 hits; CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
+      "date": "2026-10-21",
+      "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
+    },
+    {
+      "tool": "grep",
+      "query": "directImageScalar.*(comp|assoc|cocycle)|pushforward.*scalar.*comp|mate.*comp",
+      "results": "OK: 25 hits; Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/Analysis/SpecialFunctions/Complex/LogBounds.lean, Mathlib/CategoryTheory/Sites/Precoverage/Subsheaf.lean, Mathlib/Analysis/SpecialFunctions/CompareExp.lean",
+      "date": "2026-10-21",
+      "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
+    },
+    {
+      "tool": "grep",
+      "query": "conjugate.*(comp|trans)|mateEquiv",
+      "results": "OK: 25 hits; Mathlib/NumberTheory/NumberField/Completion/Ramification.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean",
+      "date": "2026-10-21",
+      "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
+    },
+    {
+      "tool": "grep",
+      "query": "directImageScalar|scalar.*cocycle|mateEquiv_vcomp",
+      "results": "OK: 11 hits; Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
+      "date": "2026-10-21",
+      "verdict": "no match: the hits supply general mate composition or underived module tensor associativity, not the specified unbounded derived constant-coefficient maps with their normalization."
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.mateEquiv_vcomp",
+      "results": "OK: 1 hits; CategoryTheory.mateEquiv_vcomp",
+      "date": "2026-10-21",
+      "verdict": "no match: the hits supply general mate composition or underived module tensor associativity, not the specified unbounded derived constant-coefficient maps with their normalization."
+    },
+    {
+      "tool": "leansearch",
+      "query": "Derived direct image extension of scalars coefficient composition counit mate",
+      "results": "OK: 8 hits; ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.ExtendScalars.map'_comp, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, CategoryTheory.mateEquiv_counit",
+      "date": "2026-10-21",
+      "verdict": "no match: the hits supply general mate composition or underived module tensor associativity, not the specified unbounded derived constant-coefficient maps with their normalization."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "The counit mate of derived direct image and extension of coefficients is compatible with a tower of coefficient ring maps",
+      "results": "OK: 8 hits; ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_assoc', ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit",
+      "date": "2026-10-21",
+      "verdict": "no match: the hits supply general mate composition or underived module tensor associativity, not the specified unbounded derived constant-coefficient maps with their normalization."
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Pullback of a derived extension of scalars is coherent with composition of coefficient ring homomorphisms",
+      "results": "OK: 8 hits; IsBaseChange.of_comp, ModuleCat.extendScalarsComp, ModuleCat.extendScalars_assoc', IsBaseChange.comp, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, IsBaseChange.comp_iff, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange",
+      "date": "2026-10-21",
+      "verdict": "no match: the hits supply general mate composition or underived module tensor associativity, not the specified unbounded derived constant-coefficient maps with their normalization."
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "created": {
+    "by": "worker",
+    "item": "det-sp-reduction-direct-image",
+    "date": "2026-10-21",
+    "group": "Q35"
   },
-  {
-   "tool": "leansearch",
-   "query": "Counit mate for derived direct image and extension of scalars satisfies coefficient composition",
-   "results": "OK: 8 hits; CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.counit, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.CoreUnitCounit.counit, CategoryTheory.Functor.totalLeftDerivedCounit, ModuleCat.ExtendRestrictScalarsAdj.counit_app, CategoryTheory.Functor.rightKanExtensionCounit, CategoryTheory.Adjunction.derived_counit",
-   "date": "2026-10-21",
-   "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
+  "chapter": "sec-smooth-purity",
+  "unit": "sk-lem-sp-reduction",
+  "blueprint": {
+    "from": {
+      "node": "det-sp-reduction-direct-image",
+      "place": "Step 4: projection maps compose because their counit transposes compose; returned Step 10",
+      "via": []
+    },
+    "same_as": [],
+    "is": null
   },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.Adjunction, \"mate\"",
-   "results": "OK: 12 hits; CategoryTheory.mateEquiv, CategoryTheory.mateEquiv_counit, CategoryTheory.mateEquiv_counit_symm, CategoryTheory.unit_mateEquiv, CategoryTheory.unit_mateEquiv_symm, CategoryTheory.conjugateEquiv_mateEquiv_vcomp, CategoryTheory.mateEquiv_conjugateEquiv_vcomp, CategoryTheory.mateEquiv_vcomp",
-   "date": "2026-10-21",
-   "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
+  "split_report": {
+    "date": "2026-10-21",
+    "item": "lem-sp-proetale-direct-image-scalar-cocycle",
+    "worker": "stage1",
+    "summary": "Reused the existing general ringed-topos coefficient projection cocycle rather than creating a duplicate. Checked the canonical constant-ring maps, the balanced K-flat associator in the target coefficient category, and the exact counit transpose of each gamma before specializing the general identity. No statement change, new nodes, Lean attachment or Mathlib match.",
+    "blueprint": "det-sp-reduction-direct-image, proof Step 4 (naturality and composition): the projection maps compose under scalar associativity because their counit transposes compose. This item supplies its ambient direct-image coefficient-cocycle assertion.",
+    "tool_uses": [
+      {
+        "node": "lem-pur-proetale-constant-coefficient-comparison",
+        "why": "Canonical constant-ring inverse-image isomorphism for arbitrary scheme maps; a generic coefficient tool needed to specialize the ringed-topos cocycle."
+      },
+      {
+        "node": "lem-pc-kflat-resolution",
+        "why": "Flat-term K-flat representatives on either site check the scalar associator normalization without boundedness assumptions; generic resolution theorem."
+      },
+      {
+        "node": "lem-sfb-successive-derived-quotient-normalization",
+        "why": "Explicit balanced associator for arbitrary sheaf ring maps, including its target-ring action; the coefficient-comparison unit does not give its representative formula."
+      },
+      {
+        "node": "lem-pur-ringed-coefficient-projection-cocycle",
+        "why": "General ringed-topos theorem for the identical normalized counit mates and balanced associators; applied as a generic tool, after explicitly identifying the constant-coefficient maps. It realizes rather than changes the unit composition route."
+      }
+    ]
   },
-  {
-   "tool": "grep",
-   "query": "directImageScalar.*(comp|assoc|cocycle)|pushforward.*scalar.*comp|mate.*comp",
-   "results": "OK: 25 hits; Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/Analysis/SpecialFunctions/Complex/LogBounds.lean, Mathlib/CategoryTheory/Sites/Precoverage/Subsheaf.lean, Mathlib/Analysis/SpecialFunctions/CompareExp.lean",
-   "date": "2026-10-21",
-   "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
-  },
-  {
-   "tool": "grep",
-   "query": "conjugate.*(comp|trans)|mateEquiv",
-   "results": "OK: 25 hits; Mathlib/NumberTheory/NumberField/Completion/Ramification.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/Completion/InfinitePlace.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean, Mathlib/NumberTheory/NumberField/InfinitePlace/Embeddings.lean",
-   "date": "2026-10-21",
-   "verdict": "no match: generic mates composition and underived module/presheaf comparisons do not supply the coefficient-tower tensor normalization for these derived morphisms."
-  },
-  {
-   "tool": "grep",
-   "query": "directImageScalar|scalar.*cocycle|mateEquiv_vcomp",
-   "results": "OK: 11 hits; Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean",
-   "date": "2026-10-21",
-   "verdict": "no match: the hits supply general mate composition or underived module tensor associativity, not the specified unbounded derived constant-coefficient maps with their normalization."
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.mateEquiv_vcomp",
-   "results": "OK: 1 hits; CategoryTheory.mateEquiv_vcomp",
-   "date": "2026-10-21",
-   "verdict": "no match: the hits supply general mate composition or underived module tensor associativity, not the specified unbounded derived constant-coefficient maps with their normalization."
-  },
-  {
-   "tool": "leansearch",
-   "query": "Derived direct image extension of scalars coefficient composition counit mate",
-   "results": "OK: 8 hits; ModuleCat.RestrictionCoextensionAdj.counit', ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.ExtendScalars.map'_comp, ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, CategoryTheory.mateEquiv_counit",
-   "date": "2026-10-21",
-   "verdict": "no match: the hits supply general mate composition or underived module tensor associativity, not the specified unbounded derived constant-coefficient maps with their normalization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "The counit mate of derived direct image and extension of coefficients is compatible with a tower of coefficient ring maps",
-   "results": "OK: 8 hits; ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_assoc', ModuleCat.ExtendRestrictScalarsAdj.counit_app, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit",
-   "date": "2026-10-21",
-   "verdict": "no match: the hits supply general mate composition or underived module tensor associativity, not the specified unbounded derived constant-coefficient maps with their normalization."
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Pullback of a derived extension of scalars is coherent with composition of coefficient ring homomorphisms",
-   "results": "OK: 8 hits; IsBaseChange.of_comp, ModuleCat.extendScalarsComp, ModuleCat.extendScalars_assoc', IsBaseChange.comp, ModuleCat.extendScalars_assoc, ModuleCat.extendScalars_assoc_assoc, IsBaseChange.comp_iff, Algebra.Generators.H1Cotangent.map_comp_cotangentComplex_baseChange",
-   "date": "2026-10-21",
-   "verdict": "no match: the hits supply general mate composition or underived module tensor associativity, not the specified unbounded derived constant-coefficient maps with their normalization."
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "created": {
-  "by": "worker",
-  "item": "det-sp-reduction-direct-image",
-  "date": "2026-10-21",
-  "group": "Q35"
- },
- "chapter": "sec-smooth-purity",
- "unit": "sk-lem-sp-reduction",
- "blueprint": {
-  "from": {
-   "node": "det-sp-reduction-direct-image",
-   "place": "Step 4: projection maps compose because their counit transposes compose; returned Step 10",
-   "via": []
-  },
-  "same_as": [],
-  "is": null
- },
- "split_report": {
-  "date": "2026-10-21",
-  "item": "lem-sp-proetale-direct-image-scalar-cocycle",
-  "worker": "stage1",
-  "summary": "Reused the existing general ringed-topos coefficient projection cocycle rather than creating a duplicate. Checked the canonical constant-ring maps, the balanced K-flat associator in the target coefficient category, and the exact counit transpose of each gamma before specializing the general identity. No statement change, new nodes, Lean attachment or Mathlib match.",
-  "blueprint": "det-sp-reduction-direct-image, proof Step 4 (naturality and composition): the projection maps compose under scalar associativity because their counit transposes compose. This item supplies its ambient direct-image coefficient-cocycle assertion.",
   "tool_uses": [
-   {
-    "node": "lem-pur-proetale-constant-coefficient-comparison",
-    "why": "Canonical constant-ring inverse-image isomorphism for arbitrary scheme maps; a generic coefficient tool needed to specialize the ringed-topos cocycle."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Flat-term K-flat representatives on either site check the scalar associator normalization without boundedness assumptions; generic resolution theorem."
-   },
-   {
-    "node": "lem-sfb-successive-derived-quotient-normalization",
-    "why": "Explicit balanced associator for arbitrary sheaf ring maps, including its target-ring action; the coefficient-comparison unit does not give its representative formula."
-   },
-   {
-    "node": "lem-pur-ringed-coefficient-projection-cocycle",
-    "why": "General ringed-topos theorem for the identical normalized counit mates and balanced associators; applied as a generic tool, after explicitly identifying the constant-coefficient maps. It realizes rather than changes the unit composition route."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-pur-proetale-constant-coefficient-comparison",
-  "lem-sfb-successive-derived-quotient-normalization"
- ],
- "reviewed": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-cc-Q58-ac35b4a9c",
-  "group": "Q58",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-ac35b4a9c (reviewer sub-agent of L); spot-checked: The item states the cocycle for the direct-image coefficient mate γ (blueprint det-sp-reduction-direct-image Step 4; unit sk-lem-sp-reduction step 1: 'Associativity gives compatibility'). Statement unchanged and true; both sides go from T^{B,C}T^{A,B}Rq_*E to Rq_{*,C}T^{A,C}E. Edge cases checked: E=0, identity q, identity ring maps, C=0, the non-flat tower Z/ℓ²→Z/ℓ→Z/ℓ. No new nodes. Step 1: lem-pur-proetale-constant-coefficient-comparison gives c_R iso; def-weil-proetale-inverse-image (c=ε∘f^{-1}ρ, ρ sends constants to constants) gives c_B∘u^{-1}φ=φ_Z∘c_A; def-weil-pbc-proetale-operations explicitly identifies u^{-1}F⊗_c R_U with the c-transported u^{-1}F, so the transport is part of a cited statement, not an E5 gap. Step 2: lem-sfb-successive-derived-quotient-normalization formula (x⊗s)⊗t↦x⊗b(s)t on flat-term K-flat representatives (lem-pc-kflat-resolution); det-sp-scalar-extension-functor's own proof defines α by that lemma, so τ=α with the right direction. Step 3: γ in def-sp-reduction-direct-image-comparison and χ in the general node are both the adjunct of T(ε)∘(balanced tensor/pullback iso); uniqueness of the adjunct from Mathlib leaf lem-weil-pbc-adjunct-counit-identity. The general node only says 'canonical' rather than printing the formula; accepted. Step 4: lem-pur-ringed-coefficient-projection-cocycle (NG, split) hypotheses all hold: small-site topos morphism, composable ring sheaves A_Y→B_Y→C_Y, inverse-image rings via step 1, ordinary unbounded derived categories; substitution gives the display exactly. Step 5: that node is an identity of natural transformations with no flatness, invertibility or boundedness hypotheses, giving naturality in E and the stated absence of extra hypotheses. Accepted tool_uses (all generic, none replaces a geometric step of the unit's route): lem-pur-proetale-constant-coefficient-comparison, lem-pc-kflat-resolution, lem-sfb-successive-derived-quotient-normalization, lem-pur-ringed-coefficient-projection-cocycle. Transitive closure of every stmt_dep and proof_dep checked: no cycle; only citer is det-sp-reduction-direct-image. No SGA cited; Stacks tags 07A6/07A7/0E47/0H7J/06YS/0G7E/0D6D/0037 exist with the given labels. All three kinds of Mathlib search recorded. Not a re-split item and not dropped. Maintainer note: the item (Q35, 2026-10-21) is a constant-coefficient special case of the earlier general node (NG, 2026-10-18) and could later be folded into it; the split correctly cites it rather than cloning it."
- },
- "lean_audit": {},
- "lean": {
-  "module": "Sheaf.SecSmoothPurity.ProEtaleDirectImageScalarCocycle",
-  "declaration": "AlgebraicGeometry.ProEtale.proEtaleDirectImageScalarCocycle",
-  "file": "lean/Sheaf/SecSmoothPurity/ProEtaleDirectImageScalarCocycle.lean",
-  "statement": "theorem proEtaleDirectImageScalarCocycle (ℓ : ℕ) [Fact ℓ.Prime] {A B C : Type u} [CommRing A] [CommRing B] [CommRing C] [Finite A] [Finite B] [Finite C] (_hA : ∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) (_hB : ∃ n : ℕ, ∀ b : B, (ℓ ^ n) • b = 0) (_hC : ∃ n : ℕ, ∀ c : C, (ℓ ^ n) • c = 0) (φ : A →+* B) (ψ : B →+* C) {Z Y : Scheme.{u}} (q : Z ⟶ Y) (E : Scheme.proEtaleDerivedCategory Z A) : (scalarExtensionFunctor_composition φ ψ Y).hom.app ((directImageConstantPush A q).obj E) ≫ (directImageScalarComparison (ψ.comp φ) q).app E = (scalarExtensionFunctor ψ Y).map ((directImageScalarComparison φ q).app E) ≫ (directImageScalarComparison ψ q).app ((scalarExtensionFunctor φ Z).obj E) ≫ (directImageConstantPush C q).map ((scalarExtensionFunctor_composition φ ψ Z).hom.app E)",
-  "branch": "newtargets-dag",
-  "by": "Q04",
-  "date": "2026-10-21",
-  "existing": false
- },
- "reviewed_lean": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-4c8e87132",
-  "group": "Q04",
-  "result": "pass",
-  "note": "Node unchanged except its lean record; statement verbatim, lines <=91 chars. Clause-by-clause check: prime ℓ, finite comm rings A,B,C each with an ℓ^n annihilation hypothesis, no Nontrivial; φ, ψ, ψ.comp φ; arbitrary q : Z ⟶ Y and unbounded E : proEtaleDerivedCategory Z A; T = scalarExtensionFunctor, definitionally scalarExtension = directImageScalarExtension; α = scalarExtensionFunctor_composition.hom in the successive→direct direction; Rq_* = directImageConstantPush; γ = directImageScalarComparison (mateEquiv of the normalized adjunctions and directImageScalarPullbackIso), re-exported by the def-sp-reduction-direct-image-comparison module. The equation is the node's display in reverse (≫) order with matching source and target; naturality follows from the natural transformations; no extra hypotheses. Edge cases (zero rings, identity and non-flat maps, empty schemes, E=0, Type u rings as in all dep interfaces) OK. H4: no existing cocycle among the directImageScalarComparison users; ringedCoefficientProjectionCocycle is the general proof-only node. Docstrings carry the source place, blueprint tag and five proof steps. Advisory only: private proof-plan imports unused under sorry; the Second reading section is the dispatcher-policy placeholder. No compile (per the 2026-10-21 instruction); the worker reports clean scompile runs."
- },
- "reviewed_proof": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "E2",
-  "result": "pass",
-  "landing": "20261021T214746-L-1848167",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "lem-pc-kflat-resolution",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-ringed-coefficient-projection-cocycle"
+  ],
+  "reviewed": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-cc-Q58-ac35b4a9c",
+    "group": "Q58",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-ac35b4a9c (reviewer sub-agent of L); spot-checked: The item states the cocycle for the direct-image coefficient mate γ (blueprint det-sp-reduction-direct-image Step 4; unit sk-lem-sp-reduction step 1: 'Associativity gives compatibility'). Statement unchanged and true; both sides go from T^{B,C}T^{A,B}Rq_*E to Rq_{*,C}T^{A,C}E. Edge cases checked: E=0, identity q, identity ring maps, C=0, the non-flat tower Z/ℓ²→Z/ℓ→Z/ℓ. No new nodes. Step 1: lem-pur-proetale-constant-coefficient-comparison gives c_R iso; def-weil-proetale-inverse-image (c=ε∘f^{-1}ρ, ρ sends constants to constants) gives c_B∘u^{-1}φ=φ_Z∘c_A; def-weil-pbc-proetale-operations explicitly identifies u^{-1}F⊗_c R_U with the c-transported u^{-1}F, so the transport is part of a cited statement, not an E5 gap. Step 2: lem-sfb-successive-derived-quotient-normalization formula (x⊗s)⊗t↦x⊗b(s)t on flat-term K-flat representatives (lem-pc-kflat-resolution); det-sp-scalar-extension-functor's own proof defines α by that lemma, so τ=α with the right direction. Step 3: γ in def-sp-reduction-direct-image-comparison and χ in the general node are both the adjunct of T(ε)∘(balanced tensor/pullback iso); uniqueness of the adjunct from Mathlib leaf lem-weil-pbc-adjunct-counit-identity. The general node only says 'canonical' rather than printing the formula; accepted. Step 4: lem-pur-ringed-coefficient-projection-cocycle (NG, split) hypotheses all hold: small-site topos morphism, composable ring sheaves A_Y→B_Y→C_Y, inverse-image rings via step 1, ordinary unbounded derived categories; substitution gives the display exactly. Step 5: that node is an identity of natural transformations with no flatness, invertibility or boundedness hypotheses, giving naturality in E and the stated absence of extra hypotheses. Accepted tool_uses (all generic, none replaces a geometric step of the unit's route): lem-pur-proetale-constant-coefficient-comparison, lem-pc-kflat-resolution, lem-sfb-successive-derived-quotient-normalization, lem-pur-ringed-coefficient-projection-cocycle. Transitive closure of every stmt_dep and proof_dep checked: no cycle; only citer is det-sp-reduction-direct-image. No SGA cited; Stacks tags 07A6/07A7/0E47/0H7J/06YS/0G7E/0D6D/0037 exist with the given labels. All three kinds of Mathlib search recorded. Not a re-split item and not dropped. Maintainer note: the item (Q35, 2026-10-21) is a constant-coefficient special case of the earlier general node (NG, 2026-10-18) and could later be folded into it; the split correctly cites it rather than cloning it."
+  },
+  "lean_audit": {},
+  "lean": {
+    "module": "Sheaf.SecSmoothPurity.ProEtaleDirectImageScalarCocycle",
+    "declaration": "AlgebraicGeometry.ProEtale.proEtaleDirectImageScalarCocycle",
+    "file": "lean/Sheaf/SecSmoothPurity/ProEtaleDirectImageScalarCocycle.lean",
+    "statement": "theorem proEtaleDirectImageScalarCocycle (ℓ : ℕ) [Fact ℓ.Prime] {A B C : Type u} [CommRing A] [CommRing B] [CommRing C] [Finite A] [Finite B] [Finite C] (_hA : ∃ n : ℕ, ∀ a : A, (ℓ ^ n) • a = 0) (_hB : ∃ n : ℕ, ∀ b : B, (ℓ ^ n) • b = 0) (_hC : ∃ n : ℕ, ∀ c : C, (ℓ ^ n) • c = 0) (φ : A →+* B) (ψ : B →+* C) {Z Y : Scheme.{u}} (q : Z ⟶ Y) (E : Scheme.proEtaleDerivedCategory Z A) : (scalarExtensionFunctor_composition φ ψ Y).hom.app ((directImageConstantPush A q).obj E) ≫ (directImageScalarComparison (ψ.comp φ) q).app E = (scalarExtensionFunctor ψ Y).map ((directImageScalarComparison φ q).app E) ≫ (directImageScalarComparison ψ q).app ((scalarExtensionFunctor φ Z).obj E) ≫ (directImageConstantPush C q).map ((scalarExtensionFunctor_composition φ ψ Z).hom.app E)",
+    "branch": "newtargets-dag",
+    "by": "Q04",
+    "date": "2026-10-21",
+    "existing": false
+  },
+  "reviewed_lean": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-4c8e87132",
+    "group": "Q04",
+    "result": "pass",
+    "note": "Node unchanged except its lean record; statement verbatim, lines <=91 chars. Clause-by-clause check: prime ℓ, finite comm rings A,B,C each with an ℓ^n annihilation hypothesis, no Nontrivial; φ, ψ, ψ.comp φ; arbitrary q : Z ⟶ Y and unbounded E : proEtaleDerivedCategory Z A; T = scalarExtensionFunctor, definitionally scalarExtension = directImageScalarExtension; α = scalarExtensionFunctor_composition.hom in the successive→direct direction; Rq_* = directImageConstantPush; γ = directImageScalarComparison (mateEquiv of the normalized adjunctions and directImageScalarPullbackIso), re-exported by the def-sp-reduction-direct-image-comparison module. The equation is the node's display in reverse (≫) order with matching source and target; naturality follows from the natural transformations; no extra hypotheses. Edge cases (zero rings, identity and non-flat maps, empty schemes, E=0, Type u rings as in all dep interfaces) OK. H4: no existing cocycle among the directImageScalarComparison users; ringedCoefficientProjectionCocycle is the general proof-only node. Docstrings carry the source place, blueprint tag and five proof steps. Advisory only: private proof-plan imports unused under sorry; the Second reading section is the dispatcher-policy placeholder. No compile (per the 2026-10-21 instruction); the worker reports clean scompile runs."
+  }
 }

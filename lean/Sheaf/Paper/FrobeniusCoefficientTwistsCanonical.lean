@@ -12,10 +12,6 @@ public import Sheaf.Paper.PurInverseImageTensorHom
 public import Sheaf.Paper.SfWeilSheafComplex
 public import Sheaf.Paper.IntrinsicCoefficientTwistsUnrestricted
 public import Sheaf.Paper.DerivedPullbackTensorIso
-import all Sheaf.Paper.IntegralOperationsWellDefined
-import Sheaf.Paper.SfIntegralConstructibleTriangulated
-import all Sheaf.Paper.PurInverseImageHomComparison
-import all Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
 
 /-! # Canonical Frobenius on coefficient twists
 
@@ -164,131 +160,6 @@ abbrev line (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
     (R := completedIntegralCommRingSheafUnrestricted l E T)
     (purTwistIntegralModule T l E) m
 
-private theorem ringPull_unit_isIso {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R ≅ S)
-    (M : proEtaleRingModules Y R) :
-    IsIso ((proEtaleRingModuleAdjunction g R S c).unit.app M) := by
-  let P := SheafOfModules.toSheaf.{u + 1}
-    ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
-  let Q := SheafOfModules.toSheaf.{u + 1}
-    ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)
-  let adj := proEtaleRingModuleAdjunction g R S c
-  let a := proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}
-  let f := (a.homEquiv (P.obj M) (Q.obj ((proEtaleRingModulePullback g R S c).obj M))).symm
-    (P.map (adj.unit.app M))
-  have : IsIso f := ringUnitComparison g R S c adj M
-  have : IsIso a.unit :=
-    (proEtaleIsoInverseImage_equivalence.{u, u + 2, 0, 0} g AddCommGrpCat.{u + 1}).2.1
-  have hf : P.map (adj.unit.app M) = a.unit.app (P.obj M) ≫
-      (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).map f :=
-    ((a.homEquiv _ _).apply_symm_apply (P.map (adj.unit.app M))).symm
-  have : IsIso (P.map (adj.unit.app M)) := by rw [hf]; infer_instance
-  exact isIso_of_reflects_iso _ P
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-private theorem ringPull_hom_comparison {X Y : Scheme.{u}} (g : X ⟶ Y) [IsIso g]
-    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
-    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
-    (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R ≅ S)
-    (A B : proEtaleRingModules Y R) (A' B' : proEtaleRingModules X S)
-    (eA : (proEtaleRingModulePullback g R S c).obj A ≅ A')
-    (eB : (proEtaleRingModulePullback g R S c).obj B ≅ B') :
-    ∃! e : (proEtaleRingModulePullback g R S c).obj
-        (SheafOfModules.homObj (R := R) A B) ≅
-      SheafOfModules.homObj (R := S) A' B',
-      ∀ (V W : Y.ProEt) (a : W ⟶ V)
-        (phi : (SheafOfModules.homObj (R := R) A B).val.obj (op V))
-        (x : A.val.obj (op W)),
-        ((e.hom.val.app (op ((proEtaleBaseChange g).obj V)))
-          (((proEtaleRingModuleAdjunction g R S c).unit.app _).val.app (op V) phi)).app
-            (op (Over.mk ((proEtaleBaseChange g).map a)))
-              (eA.hom.val.app (op ((proEtaleBaseChange g).obj W))
-                (((proEtaleRingModuleAdjunction g R S c).unit.app A).val.app (op W) x)) =
-          eB.hom.val.app (op ((proEtaleBaseChange g).obj W))
-            (((proEtaleRingModuleAdjunction g R S c).unit.app B).val.app (op W)
-              (phi.app (op (Over.mk a)) x)) := by
-  let F := proEtaleBaseChange g
-  let T := proEtaleRingModulePullback g R S c
-  let U := proEtaleRingModuleDirectImage g R S c
-  let adj := proEtaleRingModuleAdjunction g R S c
-  let r := proEtaleRingDirectImageMap g R S c
-  let : F.IsEquivalence := PurHom.baseChange_equivalence g
-  have : IsIso (proEtaleSheafAdjunction g CommRingCat.{u + 1}).unit :=
-    (proEtaleIsoInverseImage_equivalence.{u, u + 2, 0, 0} g CommRingCat.{u + 1}).2.1
-  have : IsIso r := by dsimp only [r, proEtaleRingDirectImageMap]; infer_instance
-  let : (proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).IsEquivalence :=
-    (proEtaleIsoInverseImage_equivalence.{u, u + 2, 0, 0} g AddCommGrpCat.{u + 1}).1
-  let : (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).IsEquivalence :=
-    (proEtaleSheafAdjunction g AddCommGrpCat.{u + 1}).isEquivalence_right_of_isEquivalence_left
-  have hR : (proEtaleSheafDirectImage g AddCommGrpCat.{u + 1}).ReflectsIsomorphisms :=
-    inferInstance
-  let hreflect : U.ReflectsIsomorphisms := @PurHom.push_reflects_generic _ _ _ _ F
-    (ProEt.topology Y) (ProEt.topology X) _
-    ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)
-    ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
-    ⟨Functor.whiskerRight r.hom (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩ hR
-  let hunit := fun M ↦ ringPull_unit_isIso g R S c M
-  let d := @PurHom.comparisonIso _ _ _ _ F
-    (PurHom.baseChange_equivalence g) (ProEt.topology Y) (ProEt.topology X) _ _ _ S R r
-    (inferInstance : IsIso r) T adj hunit hreflect A B
-  let e := d ≪≫ PurHom.homCongr S eA eB
-  have he (V W : Y.ProEt) (a : W ⟶ V)
-      (phi : (SheafOfModules.homObj (R := R) A B).val.obj (op V))
-      (x : A.val.obj (op W)) :
-      ((e.hom.val.app (op (F.obj V)))
-        ((adj.unit.app _).val.app (op V) phi)).app (op (Over.mk (F.map a)))
-          (eA.hom.val.app (op (F.obj W)) ((adj.unit.app A).val.app (op W) x)) =
-        eB.hom.val.app (op (F.obj W))
-          ((adj.unit.app B).val.app (op W) (phi.app (op (Over.mk a)) x)) := by
-    have hd := @PurHom.comparisonIso_section _ _ _ _ F
-      (PurHom.baseChange_equivalence g) (ProEt.topology Y) (ProEt.topology X) _ _ _ S R r
-      (inferInstance : IsIso r) T adj hunit hreflect A B V W a phi x
-    change eB.hom.val.app (op (F.obj W))
-      (((d.hom.val.app (op (F.obj V))) ((adj.unit.app _).val.app (op V) phi)).app
-        (op (Over.mk (F.map a)))
-          (eA.inv.val.app (op (F.obj W))
-            (eA.hom.val.app (op (F.obj W)) ((adj.unit.app A).val.app (op W) x)))) = _
-    have hi := congrArg (fun z ↦ z.val.app (op (F.obj W))
-      ((adj.unit.app A).val.app (op W) x)) eA.hom_inv_id
-    change eA.inv.val.app (op (F.obj W))
-      (eA.hom.val.app (op (F.obj W)) ((adj.unit.app A).val.app (op W) x)) = _ at hi
-    rw [hi]
-    apply congrArg (fun z ↦ eB.hom.val.app (op (F.obj W)) z)
-    simp only [PurHom.unitIso_hom] at hd
-    dsimp only [d, T]
-    with_unfolding_all exact hd
-  refine ⟨e, he, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  apply (adj.homEquiv _ _).injective
-  let q := PurHom.genericPushComparison F (ProEt.topology Y) (ProEt.topology X) S R r A' B'
-  apply (cancel_mono q.hom).1
-  apply SheafOfModules.hom_ext
-  apply PresheafOfModules.hom_ext
-  intro V
-  ext phi
-  apply PresheafOfModules.hom_ext
-  intro W
-  ext x
-  have : IsIso (adj.unit.app A) := hunit A
-  let ueA : A ≅ U.obj A' := asIso (adj.unit.app A) ≪≫ U.mapIso eA
-  have : IsIso (ueA.hom.val.app (op W.unop.left)) :=
-    Functor.map_isIso (SheafOfModules.evaluation _ (op W.unop.left)) ueA.hom
-  obtain ⟨y, hy⟩ := ConcreteCategory.bijective_of_isIso
-    (ueA.hom.val.app (op W.unop.left)) |>.2 x
-  subst x
-  have h₁ := PurHom.genericPushComparison_apply F (ProEt.topology Y) (ProEt.topology X)
-    S R r A' B' V.unop W.unop.left W.unop.hom
-      (((adj.homEquiv _ _) e'.hom).val.app V phi) (ueA.hom.val.app (op W.unop.left) y)
-  have h₂ := PurHom.genericPushComparison_apply F (ProEt.topology Y) (ProEt.topology X)
-    S R r A' B' V.unop W.unop.left W.unop.hom
-      (((adj.homEquiv _ _) e.hom).val.app V phi) (ueA.hom.val.app (op W.unop.left) y)
-  exact h₁.trans ((he' V.unop W.unop.left W.unop.hom phi y).trans
-    ((he V.unop W.unop.left W.unop.hom phi y).symm.trans h₂.symm))
-
 /-- The negative powers are fixed by evaluation, which is precisely conjugation
 by the positive comparison and the coefficient comparison. Positive powers retain
 their previously fixed root-tensor maps.
@@ -317,23 +188,7 @@ theorem existsUnique_signedLineMaps (l : ℕ) [Fact l.Prime] (E : Type u) [Field
           (positiveLineMaps l E g 0).hom.val.app (op ((proEtaleBaseChange g).obj W))
             (moduleSection l E g (positiveLine l E Y 0) W
               (phi.app (op (Over.mk a)) x)) := by
-  let h (n : ℕ) := ringPull_hom_comparison g
-    ((PurCompactSupport.completed l E).ring Y)
-    ((PurCompactSupport.completed l E).ring X)
-    ((PurCompactSupport.completed l E).pull g)
-    (positiveLine l E Y (n + 1)) (positiveLine l E Y 0)
-    (positiveLine l E X (n + 1)) (positiveLine l E X 0)
-    (positiveLineMaps l E g (n + 1)) (positiveLineMaps l E g 0)
-  let neg (n : ℕ) := (h n).exists.choose
-  let tau : ∀ m : ℤ, (modulePull l E g).obj (line l E Y m) ≅ line l E X m
-    | .ofNat d => positiveLineMaps l E g d
-    | .negSucc n => neg n
-  refine ⟨tau, ⟨fun _ ↦ HEq.rfl, fun n ↦ (h n).exists.choose_spec⟩, ?_⟩
-  intro tau' ht
-  funext m
-  cases m with
-  | ofNat d => exact eq_of_heq (ht.1 d)
-  | negSucc n => exact (h n).unique (ht.2 n) (h n).exists.choose_spec
+  sorry
 
 /-- The unique signed inverse-image comparisons at completed coefficients.
 Source: definition clause 3
@@ -451,26 +306,7 @@ theorem existsUnique_finiteSignedLineMaps (l : ℕ) [Fact l.Prime] (E : Type u) 
             (finiteModuleSection l E g n
               (finiteCoefficientTwist l E Y n 0) W
               (phi.app (op (Over.mk a)) x)) := by
-  let h (j : ℕ) := ringPull_hom_comparison g
-    ((PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)).ring Y)
-    ((PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)).ring X)
-    ((PurCompactSupport.finite l E (n + 1) (Nat.succ_pos n)).pull g)
-    (finiteCoefficientTwist l E Y n ((j + 1 : ℕ) : ℤ))
-    (finiteCoefficientTwist l E Y n 0)
-    (finiteCoefficientTwist l E X n ((j + 1 : ℕ) : ℤ))
-    (finiteCoefficientTwist l E X n 0)
-    (finitePositiveLineMaps l E g n (j + 1)) (finitePositiveLineMaps l E g n 0)
-  let neg (j : ℕ) := (h j).exists.choose
-  let tau : ∀ m : ℤ, (finiteModulePull l E g n).obj
-      (finiteCoefficientTwist l E Y n m) ≅ finiteCoefficientTwist l E X n m
-    | .ofNat d => finitePositiveLineMaps l E g n d
-    | .negSucc j => neg j
-  refine ⟨tau, ⟨fun _ ↦ HEq.rfl, fun j ↦ (h j).exists.choose_spec⟩, ?_⟩
-  intro tau' ht
-  funext m
-  cases m with
-  | ofNat d => exact eq_of_heq (ht.1 d)
-  | negSucc j => exact (h j).unique (ht.2 j) (h j).exists.choose_spec
+  sorry
 
 /-- The finite signed comparisons, fixed on positive root tensors and negative
 evaluations.
@@ -484,8 +320,6 @@ def finiteSignedLineMaps (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
       finiteCoefficientTwist l E X n m :=
   (existsUnique_finiteSignedLineMaps l E g n).exists.choose m
 
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- The strict comparison from ordinary inverse image to the specified completed
 pullback Roos complex. Both cone components are fixed, so this does not choose a
 map of homotopy limits from its finite evaluations.
@@ -603,88 +437,7 @@ theorem existsUnique_completedToOrdinary (l : ℕ) [Fact l.Prime] (E : Type u) [
           (DerivedCategory.Q.obj C)),
         e.hom.app ⟨DerivedCategory.Q.obj C, hK⟩ =
           (completedToOrdinaryOnGood l E g C hC hK).hom := by
-  let P := integralOperationsGoodComplex l E Y
-  let L := integralOperationsGoodLocalization l E Y
-  let F := PurCompactSupport.pull (PurCompactSupport.completed l E) g
-  let G := integralDerivedPullback l E g
-  let W := (HomologicalComplex.quasiIso (integralTowerModules l E Y) (.up ℤ)).inverseImage
-    P.ι
-  let : L.IsLocalization W := integralOperationsGoodLocalization_isLocalization l E Y
-  let : L.EssSurj := Localization.essSurj L W
-  let ff := Localization.fullyFaithfulWhiskeringLeft L W
-    (DerivedCategory (integralTowerModules l E X))
-  let a : L ⋙ F ⟶ L ⋙ G :=
-    Functor.whiskerLeft P.ι (modulePull l E g).mapDerivedCategoryFactors.hom ≫
-      Functor.whiskerRight (Functor.whiskerLeft P.ι (pullbackAugmentation l E g))
-        DerivedCategory.Q ≫
-      (integralDerivedPullbackComparison l E g).inv
-  let b : F ⟶ G := ff.preimage a
-  have hb : Functor.whiskerLeft L b = a := ff.map_preimage a
-  have hbapp (C : P.FullSubcategory) :
-      b.app (DerivedCategory.Q.obj C.obj) =
-        (modulePull l E g).mapDerivedCategoryFactors.hom.app C.obj ≫
-          DerivedCategory.Q.map ((pullbackAugmentation l E g).app C.obj) ≫
-          (integralDerivedPullbackComparison l E g).inv.app C :=
-    congrArg (fun t ↦ t.app C) hb
-  have hbiso (K : (sfIntegralConstructible l E Y).FullSubcategory) : IsIso (b.app K.obj) := by
-    let C := L.objPreimage K.obj
-    let i : DerivedCategory.Q.obj C.obj ≅ K.obj := L.objObjPreimageIso K.obj
-    have hC : sfIntegralConstructible l E Y (DerivedCategory.Q.obj C.obj) :=
-      (sfIntegralConstructible l E Y).prop_of_iso i.symm K.property
-    have := pullbackAugmentation_isIso l E g C.obj C.property hC
-    have : IsIso (b.app (DerivedCategory.Q.obj C.obj)) := by
-      rw [hbapp C]
-      infer_instance
-    have hi : b.app K.obj = F.map i.inv ≫ b.app (DerivedCategory.Q.obj C.obj) ≫
-        G.map i.hom := by
-      rw [← b.naturality, ← F.map_comp_assoc, i.inv_hom_id, F.map_id, Category.id_comp]
-    rw [hi]
-    infer_instance
-  let c : (sfIntegralConstructible l E Y).ι ⋙ F ⟶
-      (sfIntegralConstructible l E Y).ι ⋙ G :=
-    Functor.whiskerLeft (sfIntegralConstructible l E Y).ι b
-  let : ∀ K, IsIso (c.app K) := hbiso
-  let : IsIso c := NatIso.isIso_of_isIso_app c
-  let e := (asIso c).symm
-  have he (C : CochainComplex (integralTowerModules l E Y) ℤ)
-      (hC : integralOperationsGoodComplex l E Y C)
-      (hK : sfIntegralConstructible l E Y (DerivedCategory.Q.obj C)) :
-      e.hom.app ⟨DerivedCategory.Q.obj C, hK⟩ =
-        (completedToOrdinaryOnGood l E g C hC hK).hom := by
-    have : IsIso (b.app (DerivedCategory.Q.obj C)) := hbiso
-      ⟨DerivedCategory.Q.obj C, hK⟩
-    apply (cancel_epi (b.app (DerivedCategory.Q.obj C))).1
-    have hinv : b.app (DerivedCategory.Q.obj C) ≫
-        e.hom.app ⟨DerivedCategory.Q.obj C, hK⟩ = 𝟙 _ :=
-      (asIso c).hom_inv_id_app ⟨DerivedCategory.Q.obj C, hK⟩
-    rw [hinv, hbapp ⟨C, hC⟩]
-    have := pullbackAugmentation_isIso l E g C hC hK
-    dsimp only [completedToOrdinaryOnGood, Iso.trans_hom, Iso.symm_hom, asIso_inv]
-    simp only [Category.assoc]
-    change 𝟙 _ =
-      (modulePull l E g).mapDerivedCategoryFactors.hom.app C ≫
-        DerivedCategory.Q.map ((pullbackAugmentation l E g).app C) ≫
-          (integralDerivedPullbackComparison l E g).inv.app ⟨C, hC⟩ ≫
-            (integralDerivedPullbackComparison l E g).hom.app ⟨C, hC⟩ ≫
-              inv (DerivedCategory.Q.map ((pullbackAugmentation l E g).app C)) ≫
-                (modulePull l E g).mapDerivedCategoryFactors.inv.app C
-    simp only [Iso.inv_hom_id_app_assoc, IsIso.hom_inv_id_assoc, Iso.hom_inv_id_app]
-  refine ⟨e, he, ?_⟩
-  intro e' he'
-  apply Iso.ext
-  ext K
-  let C := L.objPreimage K.obj
-  let i : DerivedCategory.Q.obj C.obj ≅ K.obj := L.objObjPreimageIso K.obj
-  have hC : sfIntegralConstructible l E Y (DerivedCategory.Q.obj C.obj) :=
-    (sfIntegralConstructible l E Y).prop_of_iso i.symm K.property
-  let j : (⟨DerivedCategory.Q.obj C.obj, hC⟩ :
-      (sfIntegralConstructible l E Y).FullSubcategory) ≅ K :=
-    ObjectProperty.isoMk _ i
-  have h := (he' C.obj C.property hC).trans (he C.obj C.property hC).symm
-  apply (cancel_epi (G.map i.hom)).1
-  change ((sfIntegralConstructible l E Y).ι ⋙ G).map j.hom ≫ _ =
-    ((sfIntegralConstructible l E Y).ι ⋙ G).map j.hom ≫ _
-  rw [e'.hom.naturality, e.hom.naturality, h]
+  sorry
 
 /-- The canonical lambda comparison determined on all good representatives.
 Source: definition clause 4

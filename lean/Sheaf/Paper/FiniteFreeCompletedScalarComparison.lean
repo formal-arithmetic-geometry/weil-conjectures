@@ -8,10 +8,36 @@ public import Sheaf.Paper.DerivedCompleteUnrestricted
 public import Sheaf.Paper.IntegralScalarExtensionUniverses
 public import Sheaf.Paper.CompletedIntegralCoefficients
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-import all Sheaf.Paper.QuotientScalarComparisonDescent
-import all Sheaf.Paper.IntegralOperationsWellDefined
-import all Sheaf.Paper.IntegralScalarExtensionWellDefined
-import Sheaf.Algebra.Homology.SignedMappingCoconeShift
+import Mathlib.Analysis.Normed.Unbundled.SpectralNorm
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Mathlib.Topology.Algebra.Valued.LocallyCompact
+import WeilConjectures.RingTheory.FiniteOverCompleteRing
+import Mathlib.LinearAlgebra.FreeModule.PID
+import Mathlib.CategoryTheory.Sites.ConstantSheaf
+import Sheaf.Paper.ConstantCompletionEquivalence
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
+import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
+import Sheaf.CategoryTheory.RingedSiteModules
+import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.Paper.DerivedComplete
+import WeilConjectures.CategoryTheory.Triangulated.DerivedLimitExistence
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
+import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
+import Sheaf.Algebra.Homology.KFlat
+import Sheaf.Paper.ExtendedCechCompletionModel
+import Sheaf.Paper.IntegralScalarExtensionWellDefined
+import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
+import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
+import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
+import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
+import Sheaf.Paper.IntegralReductionTowerCanonical
+import Sheaf.Paper.WeilCompletedTensorReflector
+import WeilConjectures.Algebra.Homology.RoosComplex
+import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
+import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 
 /-!
 # Finite free completed scalar comparison
@@ -40,18 +66,11 @@ Source: Bhatt--Scholze, Lemma 6.8.2(1), Definition 3.4.10 and Lemma 3.4.12
 set_option autoImplicit false
 set_option synthInstance.maxSize 1024
 set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
-attribute [-instance] WeilConjectures.integralOperationsAbSheafify
-attribute [-instance] WeilConjectures.integralOperationsAbLocallyBijective
-attribute [-instance] WeilConjectures.integralOperationsSiteSmall
-attribute [-instance] WeilConjectures.integralOperationsCommHasDerivedCategory
 
-attribute [local irreducible] HasDerivedCategory.standard
+universe t u
 
-universe t u a b
-
-open CategoryTheory CategoryTheory.Limits CategoryTheory.Preadditive Opposite
+open CategoryTheory CategoryTheory.Limits Opposite
 open scoped ChangeOfRings
 
 namespace WeilConjectures
@@ -135,26 +154,6 @@ noncomputable def completedCoefficientMap :
       completedIntegralCommRingSheafUnrestricted l L Y :=
   (completedCoefficientMap_existsUnique l E L ι Y).exists.choose
 
-attribute [local irreducible] limit
-
-private theorem completedCoefficientMap_id :
-    completedCoefficientMap l E E (AlgHom.id ℚ_[l] E) Y = 𝟙 _ := by
-  apply (completedCoefficientMap_existsUnique l E E (AlgHom.id ℚ_[l] E) Y).unique
-  · exact (completedCoefficientMap_existsUnique l E E (AlgHom.id ℚ_[l] E) Y).exists.choose_spec
-  · intro n
-    have hring : integralScalarQuotientMap l E E (AlgHom.id ℚ_[l] E) n =
-        RingHom.id _ := by
-      ext x
-      rfl
-    have hq : integralScalarQuotientSheafMap l E E (AlgHom.id ℚ_[l] E) Y n = 𝟙 _ := by
-      unfold integralScalarQuotientSheafMap
-      rw [hring]
-      convert (constantSheaf (AlgebraicGeometry.Scheme.ProEt.topology Y)
-        CommRingCat.{max u (t + 1)}).map_id
-          (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionRing l E (n + 1))))
-        using 1 <;> rfl
-    simp only [hq, Category.id_comp, Category.comp_id]
-
 set_option linter.defProp false in
 /-- The existing universal derived-change-of-rings witness, with standard localizations.
 Source: Stacks Tag 06YY (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
@@ -219,276 +218,6 @@ noncomputable def completedScalarRoosEndomorphism
     (K := fun n ↦ ((integralScalarTowerFunctor l E L ι Y).obj P).obj (op n))
     (integralOperationsTowerStep ((integralScalarTowerFunctor l E L ι Y).obj P))
 
-attribute [local irreducible] completedScalarChangeData integralScalarReductionWitness
-
-private theorem completedScalarResidue (n : ℕ) :
-    completedCoefficientMap l E L ι Y ≫
-      completedIntegralCommRingProjectionUnrestricted l L Y n =
-        integralScalarRho l E L ι Y n :=
-  (completedCoefficientMap_existsUnique l E L ι Y).exists.choose_spec n
-
-private noncomputable def completedScalarModuleLevel (n : ℕ) :=
-  integralScalarReduction l E L ι Y n ⋙
-    SheafOfModules.restrictScalars
-      ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
-        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
-          (completedIntegralCommRingProjectionUnrestricted l L Y n))
-
-private noncomputable def completedScalarModuleArrow
-    (M : integralTowerModules l E Y) (n : ℕ) :
-    (completedOrdinaryScalarExtension l E L ι Y).obj M ⟶
-      (completedScalarModuleLevel l E L ι Y n).obj M :=
-  eqToHom ((completedScalarChangeData l E L ι Y).choose_spec.choose M) ≫
-    SheafOfModules.ScalarComparisonProof.sheafMap (completedCoefficientMap l E L ι Y)
-      (integralScalarRho l E L ι Y n)
-      (completedIntegralCommRingProjectionUnrestricted l L Y n)
-      (completedScalarResidue l E L ι Y n) M ≫
-    (SheafOfModules.restrictScalars
-      ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
-        (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map
-          (completedIntegralCommRingProjectionUnrestricted l L Y n))).map
-      ((integralScalarReductionIso l E L ι Y n).inv.app M)
-
-private theorem completedScalarModuleArrow_tensor
-    (M : integralTowerModules l E Y) (n : ℕ) (U : Y.ProEtᵒᵖ)
-    (s : (completedIntegralCommRingSheafUnrestricted l L Y).obj.obj U)
-    (x : M.val.obj U) :
-    (completedScalarModuleArrow l E L ι Y M n).val.app U
-      (completedScalarTensorSection l E L ι Y M U s x) =
-        integralScalarTensorSection l E L ι Y n M U
-          ((completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app U s) x := by
-  let e := eqToIso ((completedScalarChangeData l E L ι Y).choose_spec.choose M)
-  let q := completedIntegralCommRingProjectionUnrestricted l L Y n
-  let r := SheafOfModules.restrictScalars
-    ((sheafCompose (AlgebraicGeometry.Scheme.ProEt.topology Y)
-      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).map q)
-  let z := (integralScalarReductionIso l E L ι Y n).inv.app M
-  have hc : e.inv ≫ completedScalarModuleArrow l E L ι Y M n =
-      SheafOfModules.ScalarComparisonProof.sheafMap (completedCoefficientMap l E L ι Y)
-        (integralScalarRho l E L ι Y n) q (completedScalarResidue l E L ι Y n) M ≫
-          r.map z := by
-    simp only [completedScalarModuleArrow, e, eqToIso.inv, eqToHom_trans_assoc,
-      eqToHom_refl, Category.id_comp, q, r, z]
-  change ((e.inv ≫ completedScalarModuleArrow l E L ι Y M n).val.app U) _ = _
-  rw [hc]
-  change z.val.app U
-    ((SheafOfModules.ScalarComparisonProof.sheafMap (completedCoefficientMap l E L ι Y)
-      (integralScalarRho l E L ι Y n) q (completedScalarResidue l E L ι Y n) M).val.app U
-        (SheafOfModules.ScalarComparisonProof.tensorSection
-          (completedCoefficientMap l E L ι Y) M U s x)) = _
-  exact congrArg (z.val.app U)
-    (SheafOfModules.ScalarComparisonProof.sheafMap_tmul _ _ _ _ M U s x)
-
-private theorem completedScalar_tensor_ext
-    (M : integralTowerModules l E Y) (N : integralTowerModules l L Y)
-    (f g : (completedOrdinaryScalarExtension l E L ι Y).obj M ⟶ N)
-    (h : ∀ U s x, f.val.app U (completedScalarTensorSection l E L ι Y M U s x) =
-      g.val.app U (completedScalarTensorSection l E L ι Y M U s x)) : f = g := by
-  apply (cancel_epi
-    (eqToIso ((completedScalarChangeData l E L ι Y).choose_spec.choose M)).inv).1
-  apply SheafOfModules.tensor_generator_ext (completedCoefficientMap l E L ι Y)
-  intro U x s
-  exact h U s x
-
-private theorem witnessTensor_naturality
-    {C : Type a} [Category.{b} C] {J : GrothendieckTopology C}
-    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}]
-    {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S)
-    (G : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⥤
-      SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))
-    (hobj : ∀ M, G.obj M = SheafOfModules.changeOfRings φ M)
-    (hmap : ∀ {M N} (f : M ⟶ N), G.map f = eqToHom (hobj M) ≫
-      SheafOfModules.changeOfRingsHom φ M f ≫ eqToHom (hobj N).symm)
-    {M N : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)}
-    (f : M ⟶ N) (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) :
-    (G.map f).val.app U ((eqToHom (hobj M).symm).val.app U
-      (SheafOfModules.ScalarComparisonProof.tensorSection φ M U s x)) =
-    (eqToHom (hobj N).symm).val.app U
-      (SheafOfModules.ScalarComparisonProof.tensorSection φ N U s (f.val.app U x)) := by
-  rw [hmap]
-  change ((eqToHom (hobj M).symm ≫ eqToHom (hobj M) ≫
-    SheafOfModules.changeOfRingsHom φ M f ≫ eqToHom (hobj N).symm).val.app U) _ = _
-  simp only [eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
-  exact congrArg ((eqToHom (hobj N).symm).val.app U)
-    (SheafOfModules.ScalarComparisonProof.map_tensorSection φ M f U s x)
-
-private theorem completedScalarTensorSection_naturality
-    {M N : integralTowerModules l E Y} (f : M ⟶ N) (U : Y.ProEtᵒᵖ)
-    (s : (completedIntegralCommRingSheafUnrestricted l L Y).obj.obj U)
-    (x : M.val.obj U) :
-    ((completedOrdinaryScalarExtension l E L ι Y).map f).val.app U
-      (completedScalarTensorSection l E L ι Y M U s x) =
-        completedScalarTensorSection l E L ι Y N U s (f.val.app U x) := by
-  exact witnessTensor_naturality (completedCoefficientMap l E L ι Y)
-    (completedOrdinaryScalarExtension l E L ι Y)
-    (completedScalarChangeData l E L ι Y).choose_spec.choose
-    (completedScalarChangeData l E L ι Y).choose_spec.choose_spec.choose f U s x
-
-private theorem integralScalarTensorSection_naturality
-    {M N : integralTowerModules l E Y} (f : M ⟶ N) (n : ℕ) (U : Y.ProEtᵒᵖ)
-    (s : (integralCoefficientCommRingSheaf l L Y n).obj.obj U) (x : M.val.obj U) :
-    ((integralScalarReduction l E L ι Y n).map f).val.app U
-      (integralScalarTensorSection l E L ι Y n M U s x) =
-        integralScalarTensorSection l E L ι Y n N U s (f.val.app U x) := by
-  exact integralScalarReduction_map_tmul l E L ι Y n f U s x
-
-private theorem completedScalarModuleArrow_naturality
-    {M N : integralTowerModules l E Y} (f : M ⟶ N) (n : ℕ) :
-    (completedOrdinaryScalarExtension l E L ι Y).map f ≫
-        completedScalarModuleArrow l E L ι Y N n =
-      completedScalarModuleArrow l E L ι Y M n ≫
-        (completedScalarModuleLevel l E L ι Y n).map f := by
-  apply completedScalar_tensor_ext l E L ι Y
-  intro U s x
-  change (completedScalarModuleArrow l E L ι Y N n).val.app U
-    (((completedOrdinaryScalarExtension l E L ι Y).map f).val.app U _) =
-      ((integralScalarReduction l E L ι Y n).map f).val.app U
-        ((completedScalarModuleArrow l E L ι Y M n).val.app U _)
-  rw [completedScalarTensorSection_naturality, completedScalarModuleArrow_tensor,
-    completedScalarModuleArrow_tensor, integralScalarTensorSection_naturality]
-
-private noncomputable def completedScalarLevelArrow (n : ℕ) :
-    completedOrdinaryScalarComplex l E L ι Y ⟶ integralScalarLevel l E L ι Y n where
-  app P :=
-    { f := fun i ↦ completedScalarModuleArrow l E L ι Y (P.X i) n
-      comm' := fun i j _ ↦ (completedScalarModuleArrow_naturality l E L ι Y (P.d i j) n).symm }
-  naturality := by
-    intro P Q f
-    ext i : 1
-    exact completedScalarModuleArrow_naturality l E L ι Y (f.f i) n
-
-private theorem completedScalarLevelArrow_transition
-    (P : CochainComplex (integralTowerModules l E Y) ℤ) (n : ℕ) :
-    (completedScalarLevelArrow l E L ι Y (n + 1)).app P ≫
-        (integralScalarTransition l E L ι Y n).app P =
-      (completedScalarLevelArrow l E L ι Y n).app P := by
-  ext i : 1
-  apply completedScalar_tensor_ext l E L ι Y
-  intro U s x
-  change (((integralScalarTransition l E L ι Y n).app P).f i).val.app U
-    ((completedScalarModuleArrow l E L ι Y (P.X i) (n + 1)).val.app U _) =
-      (completedScalarModuleArrow l E L ι Y (P.X i) n).val.app U _
-  rw [completedScalarModuleArrow_tensor, completedScalarModuleArrow_tensor]
-  have ht := (integralScalarTransition_existsUnique l E L ι Y n).exists.choose_spec
-    P i U ((completedIntegralCommRingProjectionUnrestricted l L Y (n + 1)).hom.app U s) x
-  erw [ht]
-  congr 1
-  change ((limit.π (integralCoefficientSheafSystem l L Y) (op (n + 1))).hom.app U ≫
-    (integralCoefficientSheafTransition l L Y n).hom.app U) s =
-      (limit.π (integralCoefficientSheafSystem l L Y) (op n)).hom.app U s
-  have hp := limit.w (integralCoefficientSheafSystem l L Y)
-    (homOfLE (Nat.le_succ n)).op
-  simp only [integralCoefficientSheafSystem,
-    Functor.ofOpSequence_map_homOfLE_succ] at hp
-  have hp' := congrArg (fun f ↦ f.hom.app U) hp
-  exact ConcreteCategory.congr_hom hp' s
-
-attribute [local semireducible] limit
-
-private theorem complexProduct_hom_ext
-    {D : Type*} [Category* D] [Preadditive D] [HasCountableProducts D]
-    (X : ℕ → CochainComplex D ℤ) (i : ℤ) {M : D}
-    (f g : M ⟶ (∏ᶜ X).X i)
-    (h : ∀ n, f ≫ (Pi.π X n).f i = g ≫ (Pi.π X n).f i) : f = g := by
-  apply (isLimitOfPreserves (HomologicalComplex.eval D (.up ℤ) i)
-    (limit.isLimit (Discrete.functor X))).hom_ext
-  intro n
-  exact h n.as
-
-attribute [local irreducible] limit
-
-private theorem cocone_degree_ext
-    {D : Type*} [Category* D] [Preadditive D] [HasBinaryBiproducts D]
-    {P K L₀ : CochainComplex D ℤ} (φ : K ⟶ L₀)
-    (f g : P ⟶ CochainComplex.mappingCocone φ) (i : ℤ)
-    (hf : f.f i ≫ (CochainComplex.mappingCocone.fst φ).f i =
-      g.f i ≫ (CochainComplex.mappingCocone.fst φ).f i)
-    (hs : f.f i ≫ (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega) =
-      g.f i ≫ (CochainComplex.mappingCocone.snd φ).v i (i - 1) (by omega)) :
-    f.f i = g.f i := by
-  have hi := CochainComplex.mappingCocone.id_X φ i (i - 1) (by omega)
-  calc
-    f.f i = f.f i ≫ 𝟙 _ := (Category.comp_id _).symm
-    _ = f.f i ≫ _ := congrArg (f.f i ≫ ·) hi.symm
-    _ = g.f i ≫ _ := by rw [comp_add, comp_add, reassoc_of% hf, reassoc_of% hs]
-    _ = g.f i := by rw [hi, Category.comp_id]
-
-private theorem zeroCoconeLift_f
-    {D : Type*} [Category* D] [Preadditive D] [HasBinaryBiproducts D]
-    {P K L₀ : CochainComplex D ℤ} (φ : K ⟶ L₀) (α : P ⟶ K)
-    (h : α ≫ φ = 0) (i : ℤ) :
-    (CochainComplex.mappingCocone.lift φ α 0 (by simp [h])).f i =
-      α.f i ≫ (CochainComplex.mappingCocone.inl φ).v i i (by omega) := by
-  let β := CochainComplex.mappingCocone.lift φ α 0 (by simp [h])
-  rw [← Category.comp_id (β.f i),
-    ← CochainComplex.mappingCocone.id_X φ i (i - 1) (by omega)]
-  simp only [comp_add, ← Category.assoc, β,
-    CochainComplex.mappingCocone.lift_f_fst_f,
-    CochainComplex.mappingCocone.lift_f_snd_v,
-    CochainComplex.HomComplex.Cochain.zero_v, zero_comp, add_zero]
-
-set_option backward.isDefEq.respectTransparency true in
-set_option backward.isDefEq.respectTransparency.types true in
-private theorem towerZeroLift_exists
-    {D Z : Type*} [Category* D] [Abelian D] [HasCountableProducts D] [Category* Z]
-    (F : Z ⥤ CochainComplex D ℤ) (G : Z ⥤ ℕᵒᵖ ⥤ CochainComplex D ℤ)
-    (a : ∀ n : ℕ, F ⟶ G ⋙ (evaluation ℕᵒᵖ (CochainComplex D ℤ)).obj (op n))
-    (ha : ∀ P n, (a (n + 1)).app P ≫ (G.obj P).map
-      (homOfLE (Nat.le_succ n)).op = (a n).app P) :
-    ∃ b : F ⟶ G ⋙ integralOperationsRoosFunctor,
-      (∀ P : Z, b.app P ≫ (CochainComplex.mappingCocone.fst
-        (towerTransitionEndomorphism (K := fun n ↦ (G.obj P).obj (op n))
-        (integralOperationsTowerStep (G.obj P)))) =
-          Pi.lift (fun n ↦ (a n).app P)) ∧
-      ∀ (P : Z) (i : ℤ), (b.app P).f i ≫ (CochainComplex.mappingCocone.snd
-        (towerTransitionEndomorphism (K := fun n ↦ (G.obj P).obj (op n))
-        (integralOperationsTowerStep (G.obj P)))).v
-          i (i - 1) (by omega) = 0 := by
-  let α (P : Z) : F.obj P ⟶ ∏ᶜ fun n ↦ (G.obj P).obj (op n) :=
-    Pi.lift (fun n ↦ (a n).app P)
-  let φ P := towerTransitionEndomorphism (K := fun n ↦ (G.obj P).obj (op n))
-        (integralOperationsTowerStep (G.obj P))
-  have hα P : α P ≫ φ P = 0 := by
-    apply Pi.hom_ext
-    intro n
-    simp only [α, φ, towerTransitionEndomorphism, towerProductShift, comp_sub,
-      Category.comp_id, Category.assoc, Pi.lift_π, sub_comp, zero_comp]
-    rw [← Category.assoc, Pi.lift_π]
-    exact sub_eq_zero.mpr (ha P n).symm
-  let β P := CochainComplex.mappingCocone.lift (φ P) (α P) 0 (by simp [hα])
-  have hβ P i : (β P).f i =
-      (α P).f i ≫ (CochainComplex.mappingCocone.inl (φ P)).v i i (by omega) :=
-    zeroCoconeLift_f _ _ (hα P) i
-  let b : F ⟶ G ⋙ integralOperationsRoosFunctor :=
-    { app := β
-      naturality := by
-        intro P Q f
-        have hn : F.map f ≫ α Q = α P ≫
-            Limits.Pi.map (fun n ↦ (G.map f).app (op n)) := by
-          apply Pi.hom_ext
-          intro n
-          simp only [α, Category.assoc, Pi.lift_π, Pi.map_π, Pi.lift_π_assoc]
-          exact (a n).naturality f
-        ext i : 1
-        change (F.map f).f i ≫ (β Q).f i =
-          (β P).f i ≫ (integralOperationsRoosMap (G.map f)).f i
-        rw [hβ, hβ]
-        rw [← Category.assoc, ← HomologicalComplex.comp_f, hn,
-          HomologicalComplex.comp_f, Category.assoc]
-        exact (congrArg ((α P).f i ≫ ·)
-          (SignedCoconeShift.coconeMap_inl (φ P) (φ Q)
-            (Arrow.homMk (Limits.Pi.map (fun n ↦ (G.map f).app (op n)))
-              (Limits.Pi.map (fun n ↦ (G.map f).app (op n)))
-                (integralOperationsRoos_square (G.map f)).symm) i).symm).trans
-          (Category.assoc _ _ _).symm }
-  refine ⟨b, ?_, ?_⟩
-  · intro P
-    exact CochainComplex.mappingCocone.lift_fst (φ P) (α P) 0 (by simp [hα])
-  · intro P i
-    exact CochainComplex.mappingCocone.lift_f_snd_v (φ P) (α P) 0
-      (by simp [hα]) i (i - 1) (by omega)
-
 /-- The uniquely specified chain comparison to the strict product cone.
 Source: Bhatt--Scholze, Definition 3.4.10, Proposition 3.5.1
 (blueprint: lem-weil-finite-free-completed-scalar-comparison).
@@ -516,61 +245,7 @@ theorem completedScalarChainComparison_existsUnique :
         (b.app P).f i ≫
           (CochainComplex.mappingCocone.snd
             (completedScalarRoosEndomorphism l E L ι Y P)).v i (i - 1) (by omega) = 0) := by
-  let G := integralScalarTowerFunctor l E L ι Y
-  let a (n : ℕ) : completedOrdinaryScalarComplex l E L ι Y ⟶
-      G ⋙ (evaluation ℕᵒᵖ (CochainComplex (integralTowerModules l L Y) ℤ)).obj (op n) :=
-    completedScalarLevelArrow l E L ι Y n
-  have ha P n : (a (n + 1)).app P ≫ (G.obj P).map
-      (homOfLE (Nat.le_succ n)).op = (a n).app P := by
-    simpa only [G, integralScalarTowerFunctor, Functor.flip_obj_map,
-      Functor.ofOpSequence_map_homOfLE_succ] using
-        completedScalarLevelArrow_transition l E L ι Y P n
-  obtain ⟨b, hf, hs⟩ := towerZeroLift_exists
-    (completedOrdinaryScalarComplex l E L ι Y) G a ha
-  have hb :
-      (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ)
-        (n : ℕ) (U : Y.ProEtᵒᵖ)
-        (s : (completedIntegralCommRingSheafUnrestricted l L Y).obj.obj U)
-        (x : (P.X i).val.obj U),
-        (((b.app P).f i ≫
-          (CochainComplex.mappingCocone.fst
-            (completedScalarRoosEndomorphism l E L ι Y P)).f i ≫
-          (Pi.π
-            (fun n ↦ ((integralScalarTowerFunctor l E L ι Y).obj P).obj (op n)) n).f i).val.app U)
-            (completedScalarTensorSection l E L ι Y (P.X i) U s x) =
-          integralScalarTensorSection l E L ι Y n (P.X i) U
-            ((completedIntegralCommRingProjectionUnrestricted l L Y n).hom.app U s) x) ∧
-      (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ),
-        (b.app P).f i ≫
-          (CochainComplex.mappingCocone.snd
-            (completedScalarRoosEndomorphism l E L ι Y P)).v i (i - 1) (by omega) = 0) := by
-    constructor
-    · intro P i n U s x
-      have hh := congrArg (fun f ↦ f.f i) (hf P)
-      change (b.app P).f i ≫
-        (CochainComplex.mappingCocone.fst
-          (completedScalarRoosEndomorphism l E L ι Y P)).f i = _ at hh
-      rw [← Category.assoc, hh]
-      have hp := congrArg (fun f ↦ (f.f i).val.app U)
-        (Pi.lift_π (fun n ↦ (a n).app P) n)
-      exact (ConcreteCategory.congr_hom hp _).trans
-        (completedScalarModuleArrow_tensor l E L ι Y (P.X i) n U s x)
-    · exact hs
-  refine ⟨b, hb, ?_⟩
-  intro b' hb'
-  apply NatTrans.ext
-  funext P
-  ext i : 1
-  let φ := completedScalarRoosEndomorphism l E L ι Y P
-  have hf : (b'.app P).f i ≫ (CochainComplex.mappingCocone.fst φ).f i =
-      (b.app P).f i ≫ (CochainComplex.mappingCocone.fst φ).f i := by
-    apply complexProduct_hom_ext
-    intro n
-    apply completedScalar_tensor_ext l E L ι Y
-    intro U s x
-    exact (hb'.1 P i n U s x).trans (hb.1 P i n U s x).symm
-  have hs := (hb'.2 P i).trans (hb.2 P i).symm
-  exact cocone_degree_ext φ (b'.app P) (b.app P) i hf hs
+  sorry
 
 /-- The canonical chain comparison, with both cone components fixed by the theorem.
 Source: Bhatt--Scholze, Proposition 3.5.1
@@ -578,14 +253,6 @@ Source: Bhatt--Scholze, Proposition 3.5.1
 noncomputable def completedScalarChainComparison :
     completedOrdinaryScalarComplex l E L ι Y ⟶ integralScalarComplexFunctor l E L ι Y :=
   (completedScalarChainComparison_existsUnique l E L ι Y).exists.choose
-
-
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
-set_option synthInstance.maxSize 1024
-
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
 
 /-- Descent of the specific chain comparison, not an arbitrary map to a derived limit.
 Source: Bhatt--Scholze, Definition 3.4.10 and Proposition 3.5.1
@@ -605,9 +272,6 @@ theorem completedScalarComparison_existsUnique :
             DerivedCategory.Q.map ((completedScalarChainComparison l E L ι Y).app P.obj) := by
   sorry
 
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
-
 /-- The canonical completion map χ, natural on the entire derived category.
 Source: Bhatt--Scholze, Proposition 3.5.1
 (blueprint: lem-weil-finite-free-completed-scalar-comparison). -/
@@ -621,56 +285,6 @@ Source: Bhatt--Scholze, Lemma 6.8.2(1)
 noncomputable def completedScalarRelativeDegree : ℕ :=
   letI := ι.toAlgebra
   Module.finrank E L
-
-
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
-
-private theorem scalarMultiplication_existsUnique
-    {C : Type a} [Category.{b} C] {J : GrothendieckTopology C}
-    [J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u})]
-    [J.WEqualsLocallyBijective AddCommGrpCat.{u}] [HasSheafify J AddCommGrpCat.{u}]
-    (R : Sheaf J CommRingCat.{u}) (φ : R ⟶ R)
-    (G : SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) ⥤
-      SheafOfModules.{u} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))
-    [G.Additive]
-    (hobj : ∀ M, G.obj M = SheafOfModules.changeOfRings φ M)
-    (hmap : ∀ {M N} (f : M ⟶ N), G.map f = eqToHom (hobj M) ≫
-      SheafOfModules.changeOfRingsHom φ M f ≫ eqToHom (hobj N).symm)
-    (hid : φ = 𝟙 R) :
-    ∃! μ : G.mapHomologicalComplex (.up ℤ) ≅ 𝟭 _,
-      ∀ P i (U : Cᵒᵖ) (s : R.obj.obj U) (x : (P.X i).val.obj U),
-        ((μ.hom.app P).f i).val.app U
-          ((eqToHom (hobj (P.X i)).symm).val.app U
-            (SheafOfModules.ScalarComparisonProof.tensorSection φ (P.X i) U s x)) = s • x := by
-  subst φ
-  let e M : G.obj M ≅ M := eqToIso (hobj M) ≪≫ SheafOfModules.scalarIdIso M
-  have he {M N} (f : M ⟶ N) : G.map f ≫ (e N).hom = (e M).hom ≫ f := by
-    simp only [e, Iso.trans_hom, eqToIso.hom, hmap, Category.assoc,
-      eqToHom_trans_assoc, eqToHom_refl, Category.id_comp]
-    exact congrArg (eqToHom (hobj M) ≫ ·) (SheafOfModules.scalarIdIso_naturality f)
-  let μ : G.mapHomologicalComplex (.up ℤ) ≅ 𝟭 _ :=
-    NatIso.ofComponents
-      (fun P ↦ HomologicalComplex.Hom.isoOfComponents (fun i ↦ e (P.X i))
-        (fun i j _ ↦ (he (P.d i j)).symm))
-      (by intro P Q f; ext i : 1; exact he (f.f i))
-  have hμ P i (U : Cᵒᵖ) (s : R.obj.obj U) (x : (P.X i).val.obj U) :
-      ((μ.hom.app P).f i).val.app U
-        ((eqToHom (hobj (P.X i)).symm).val.app U
-          (SheafOfModules.ScalarComparisonProof.tensorSection (𝟙 R) (P.X i) U s x)) = s • x := by
-    change (((eqToIso (hobj (P.X i))).inv ≫ (e (P.X i)).hom).val.app U) _ = _
-    simp only [e, Iso.trans_hom, Iso.inv_hom_id_assoc]
-    exact SheafOfModules.scalarIdIso_tmul _ _ _ _
-  refine ⟨μ, hμ, ?_⟩
-  intro ν hν
-  apply Iso.ext
-  apply NatTrans.ext
-  funext P
-  ext i : 1
-  apply (cancel_epi (eqToIso (hobj (P.X i))).inv).1
-  apply SheafOfModules.tensor_generator_ext (𝟙 R)
-  intro U x s
-  exact (hν P i U s x).trans (hμ P i U s x).symm
 
 /-- Multiplication identifies ordinary scalar extension along the identity with P.
 Source: Bhatt--Scholze, Definition 3.4.10
@@ -688,13 +302,7 @@ theorem completedScalarIdentityMultiplication_existsUnique :
         ((μ.hom.app P).f i).val.app U
           (completedScalarTensorSection l E E (AlgHom.id ℚ_[l] E) Y (P.X i) U s x) =
             s • x := by
-  exact scalarMultiplication_existsUnique
-    (completedIntegralCommRingSheafUnrestricted l E Y)
-    (completedCoefficientMap l E E (AlgHom.id ℚ_[l] E) Y)
-    (completedOrdinaryScalarExtension l E E (AlgHom.id ℚ_[l] E) Y)
-    ((completedScalarChangeData l E E (AlgHom.id ℚ_[l] E) Y).choose_spec.choose)
-    ((completedScalarChangeData l E E (AlgHom.id ℚ_[l] E) Y).choose_spec.choose_spec.choose)
-    (completedCoefficientMap_id l E Y)
+  sorry
 
 /-- The actual multiplication isomorphism, fixed on every pure tensor.
 Source: Bhatt--Scholze, Definition 3.4.10
@@ -704,11 +312,6 @@ noncomputable def completedScalarIdentityMultiplication :
       𝟭 (CochainComplex (integralTowerModules l E Y) ℤ) :=
   (completedScalarIdentityMultiplication_existsUnique l E Y).exists.choose
 
-set_option backward.isDefEq.respectTransparency true
-set_option backward.isDefEq.respectTransparency.types true
-
-set_option maxHeartbeats 600000 in
--- Concrete sheaf transports and evaluated cone identities require additional elaboration.
 /-- The completeness unit directly from the reductions of P and zero shifted component.
 Source: Bhatt--Scholze, Definition 3.5.2 and Proposition 3.5.1
 (blueprint: lem-weil-finite-free-completed-scalar-comparison).
@@ -733,85 +336,7 @@ theorem completedScalarIdentityUnit_existsUnique :
           (CochainComplex.mappingCocone.snd
             (completedScalarRoosEndomorphism l E E (AlgHom.id ℚ_[l] E) Y P)).v
               i (i - 1) (by omega) = 0) := by
-  let μ := completedScalarIdentityMultiplication l E Y
-  let β := completedScalarChainComparison l E E (AlgHom.id ℚ_[l] E) Y
-  let η : 𝟭 (CochainComplex (integralTowerModules l E Y) ℤ) ⟶
-      integralScalarComplexFunctor l E E (AlgHom.id ℚ_[l] E) Y := μ.inv ≫ β
-  have hinv (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ)
-      (U : Y.ProEtᵒᵖ) (x : (P.X i).val.obj U) :
-      ((μ.inv.app P).f i).val.app U x =
-        completedScalarTensorSection l E E (AlgHom.id ℚ_[l] E) Y (P.X i) U 1 x := by
-    have h := (completedScalarIdentityMultiplication_existsUnique l E Y).exists.choose_spec
-      P i U 1 x
-    rw [one_smul] at h
-    have hh := congrArg (fun x ↦ ((μ.inv.app P).f i).val.app U x) h
-    have he := ConcreteCategory.congr_hom
-      (congrArg (fun f ↦ (f.f i).val.app U) (μ.app P).hom_inv_id)
-      (completedScalarTensorSection l E E (AlgHom.id ℚ_[l] E) Y (P.X i) U 1 x)
-    exact hh.symm.trans he
-  have hβ := (completedScalarChainComparison_existsUnique l E E (AlgHom.id ℚ_[l] E)
-    Y).exists.choose_spec
-  have hη :
-      (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ) (n : ℕ)
-        (U : Y.ProEtᵒᵖ) (x : (P.X i).val.obj U),
-        (((η.app P).f i ≫
-          (CochainComplex.mappingCocone.fst
-            (completedScalarRoosEndomorphism l E E (AlgHom.id ℚ_[l] E) Y P)).f i ≫
-          (Pi.π
-            (fun n ↦ ((integralScalarTowerFunctor l E E (AlgHom.id ℚ_[l] E) Y).obj P).obj
-              (op n)) n).f i).val.app U) x =
-          integralScalarTensorSection l E E (AlgHom.id ℚ_[l] E) Y n (P.X i) U 1 x) ∧
-      (∀ (P : CochainComplex (integralTowerModules l E Y) ℤ) (i : ℤ),
-        (η.app P).f i ≫
-          (CochainComplex.mappingCocone.snd
-            (completedScalarRoosEndomorphism l E E (AlgHom.id ℚ_[l] E) Y P)).v
-              i (i - 1) (by omega) = 0) := by
-    constructor
-    · intro P i n U x
-      simp only [η, NatTrans.comp_app, HomologicalComplex.comp_f, Category.assoc,
-        SheafOfModules.comp_val, PresheafOfModules.comp_app, ModuleCat.comp_apply]
-      trans (((β.app P).f i ≫
-        (CochainComplex.mappingCocone.fst
-          (completedScalarRoosEndomorphism l E E (AlgHom.id ℚ_[l] E) Y P)).f i ≫
-        (Pi.π (fun n ↦ ((integralScalarTowerFunctor l E E (AlgHom.id ℚ_[l] E) Y).obj P).obj
-          (op n)) n).f i).val.app U)
-            (completedScalarTensorSection l E E (AlgHom.id ℚ_[l] E) Y (P.X i) U 1 x)
-      · exact congrArg
-          (fun z ↦ (((β.app P).f i ≫
-            (CochainComplex.mappingCocone.fst
-              (completedScalarRoosEndomorphism l E E (AlgHom.id ℚ_[l] E) Y P)).f i ≫
-            (Pi.π (fun n ↦
-              ((integralScalarTowerFunctor l E E (AlgHom.id ℚ_[l] E) Y).obj P).obj
-                (op n)) n).f i).val.app U) z) (hinv P i U x)
-      · have hh := hβ.1 P i n U 1 x
-        have h1 :=
-          (((completedIntegralCommRingProjectionUnrestricted l E Y n).hom.app U).hom).map_one
-        have hz := congrArg
-          (fun s ↦ integralScalarTensorSection l E E (AlgHom.id ℚ_[l] E) Y n (P.X i) U s x)
-            h1
-        exact hh.trans hz
-    · intro P i
-      dsimp only [η, NatTrans.comp_app, HomologicalComplex.comp_f]
-      exact (Category.assoc _ _ _).trans
-        ((congrArg ((μ.inv.app P).f i ≫ ·) (hβ.2 P i)).trans comp_zero)
-  refine ⟨η, hη, ?_⟩
-  intro η' hη'
-  apply NatTrans.ext
-  funext P
-  ext i : 1
-  let φ := completedScalarRoosEndomorphism l E E (AlgHom.id ℚ_[l] E) Y P
-  have hf : (η'.app P).f i ≫ (CochainComplex.mappingCocone.fst φ).f i =
-      (η.app P).f i ≫ (CochainComplex.mappingCocone.fst φ).f i := by
-    apply complexProduct_hom_ext
-    intro n
-    ext U x
-    exact (hη'.1 P i n U x).trans (hη.1 P i n U x).symm
-  have hs : (η'.app P).f i ≫ (CochainComplex.mappingCocone.snd φ).v
-      i (i - 1) (by omega) =
-      (η.app P).f i ≫ (CochainComplex.mappingCocone.snd φ).v
-        i (i - 1) (by omega) :=
-    (hη'.2 P i).trans (hη.2 P i).symm
-  exact cocone_degree_ext φ (η'.app P) (η.app P) i hf hs
+  sorry
 
 /-- The specified completeness unit before localization, constructed independently of χ.
 Source: Bhatt--Scholze, Definition 3.5.2

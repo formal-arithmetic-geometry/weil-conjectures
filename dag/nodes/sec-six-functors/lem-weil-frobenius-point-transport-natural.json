@@ -1,259 +1,271 @@
 {
- "id": "lem-weil-frobenius-point-transport-natural",
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "def-weil-global-geometric-frobenius",
-   "place": "The first cohomology-transport arrow in both composites, expanded through def-weil-frobenius-cohomology-transport and its point-transport component: functoriality on complexes and through coefficient passage.",
-   "via": [
-    "def-weil-frobenius-point-transport",
-    "def-weil-frobenius-cohomology-transport"
-   ]
+  "id": "lem-weil-frobenius-point-transport-natural",
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "def-weil-global-geometric-frobenius",
+      "place": "The first cohomology-transport arrow in both composites, expanded through def-weil-frobenius-cohomology-transport and its point-transport component: functoriality on complexes and through coefficient passage.",
+      "via": [
+        "def-weil-frobenius-point-transport",
+        "def-weil-frobenius-cohomology-transport"
+      ]
+    },
+    "same_as": []
   },
-  "same_as": []
- },
- "kind": "statement",
- "title": "The point transport along Frobenius is linear and natural",
- "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ contained in $\\Qlb$, $n\\geq1$, $s=\\Spec k$ and $g_s=\\Spec(\\operatorname{Frob}_q):s\\to s$ [def-weil-frobenius-detailed]. Let $\\sigma_N$ and $\\iota_N$ be the maps of the point transport [def-weil-frobenius-point-transport], $\\kappa_N$ and $c_\\Lambda$ the comparison morphism and structure isomorphism of [def-weil-inverse-image-pullback-comparison] for $g=g_s$, $Lg_s^*$ the derived pullback [def-weil-derived-pullback-tensor-hom] and $\\operatorname{Fib}_s$ the point fiber functor [def-weil-finite-coefficient-point]. Then:\n\n1. For $\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}$ and every complex $N$ of $\\Lambda_s$-modules on $s_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], $\\sigma_N:\\Gamma(s,N)\\to\\Gamma(s,g_s^{-1}N)$ is $\\Lambda$-linear, $\\Lambda$ acting on $\\Gamma(s,N)$ through $\\Lambda\\to\\Gamma(s,\\Lambda_s)$ and on $\\Gamma(s,g_s^{-1}N)$ through $\\Lambda\\to\\Gamma(s,\\Lambda_s)$ and $c_\\Lambda^{-1}$; $\\sigma_N$ is natural in morphisms of complexes $N\\to N'$; hence, $\\Gamma(s,-)$ [lem-weil-point-proetale-sections-exact] and $g_s^{-1}$ [def-weil-proetale-inverse-image] being exact, the $\\sigma_N$ define a natural transformation $\\Gamma(s,-)\\to\\Gamma(s,g_s^{-1}(-))$ of functors $D(s_{\\mathrm{proet}},\\Lambda)\\to D(\\Lambda)$.\n\n2. For each $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$ the morphisms $\\iota_N$, $N\\in D^b_c(s,\\Lambda)$ [def-weil-finite-torsion-constructibility, def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients], form a natural transformation $\\iota:\\operatorname{Fib}_s\\to\\operatorname{Fib}_s\\circ Lg_s^*$ of functors on $D^b_c(s,\\Lambda)$: for every morphism $u:N\\to N'$ of $D^b_c(s,\\Lambda)$, $\\operatorname{Fib}_s(Lg_s^*u)\\circ\\iota_N=\\iota_{N'}\\circ\\operatorname{Fib}_s(u)$. For $\\Lambda=\\Qlb$ this includes the compatibility of $\\iota^{E'}$ with the scalar extensions $E'\\subset L$, under the isomorphisms $\\operatorname{Fib}_s(K\\otimes_{E'}L)\\cong\\operatorname{Fib}_s(K)\\otimes_{E'}L$ of [lem-weil-point-sections-scalar-extension] and $(Lg_{s,E'}^*K)\\otimes_{E'}L\\cong Lg_{s,L}^*(K\\otimes_{E'}L)$ of [lem-pur-integral-operations-scalar-extension].",
- "source": {
-  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-  "place": "Deligne, La conjecture de Weil II, (1.1.7), pp. 150-151 (the action of Gal(k-bar/k) on the fibre by transport of structure, used as functorial); the statement for the explicit point transport of def-weil-frobenius-point-transport is written by an agent (split off from that definition, which asserted it without proof)"
- },
- "stmt_deps": [
-  "def-weil-finite-field-fiber",
-  "def-weil-frobenius-detailed",
-  "def-weil-frobenius-point-transport",
-  "def-weil-inverse-image-pullback-comparison",
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-finite-coefficient-point",
-  "def-weil-pbc-proetale-site",
-  "lem-weil-point-proetale-sections-exact",
-  "def-weil-proetale-inverse-image",
-  "def-weil-finite-torsion-constructibility",
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-rationalization-karoubi",
-  "def-weil-algebraically-closed-coefficients",
-  "lem-weil-point-sections-scalar-extension",
-  "lem-pur-integral-operations-scalar-extension"
- ],
- "proof": [
-  {
-   "text": "Derive the three canonical object equalities from the object clauses of rationalDerivedPullback_existsUnique, commonStageDerivedPullback_existsUnique and pointQbarFibre_existsUnique.",
-   "uses": [
+  "kind": "statement",
+  "title": "The point transport along Frobenius is linear and natural",
+  "statement": "Fix the finite-field datum [def-weil-finite-field-fiber] $p,a,q,k_0,k$, a prime $\\ell\\neq p$, a finite extension $E/\\Ql$ contained in $\\Qlb$, $n\\geq1$, $s=\\Spec k$ and $g_s=\\Spec(\\operatorname{Frob}_q):s\\to s$ [def-weil-frobenius-detailed]. Let $\\sigma_N$ and $\\iota_N$ be the maps of the point transport [def-weil-frobenius-point-transport], $\\kappa_N$ and $c_\\Lambda$ the comparison morphism and structure isomorphism of [def-weil-inverse-image-pullback-comparison] for $g=g_s$, $Lg_s^*$ the derived pullback [def-weil-derived-pullback-tensor-hom] and $\\operatorname{Fib}_s$ the point fiber functor [def-weil-finite-coefficient-point]. Then:\n\n1. For $\\Lambda\\in\\{A_{E,n},\\mathcal O_E\\}$ and every complex $N$ of $\\Lambda_s$-modules on $s_{\\mathrm{proet}}$ [def-weil-pbc-proetale-site], $\\sigma_N:\\Gamma(s,N)\\to\\Gamma(s,g_s^{-1}N)$ is $\\Lambda$-linear, $\\Lambda$ acting on $\\Gamma(s,N)$ through $\\Lambda\\to\\Gamma(s,\\Lambda_s)$ and on $\\Gamma(s,g_s^{-1}N)$ through $\\Lambda\\to\\Gamma(s,\\Lambda_s)$ and $c_\\Lambda^{-1}$; $\\sigma_N$ is natural in morphisms of complexes $N\\to N'$; hence, $\\Gamma(s,-)$ [lem-weil-point-proetale-sections-exact] and $g_s^{-1}$ [def-weil-proetale-inverse-image] being exact, the $\\sigma_N$ define a natural transformation $\\Gamma(s,-)\\to\\Gamma(s,g_s^{-1}(-))$ of functors $D(s_{\\mathrm{proet}},\\Lambda)\\to D(\\Lambda)$.\n\n2. For each $\\Lambda\\in\\{A_{E,n},\\mathcal O_E,E,\\Qlb\\}$ the morphisms $\\iota_N$, $N\\in D^b_c(s,\\Lambda)$ [def-weil-finite-torsion-constructibility, def-weil-derived-complete-integral-detailed, def-weil-rationalization-karoubi, def-weil-algebraically-closed-coefficients], form a natural transformation $\\iota:\\operatorname{Fib}_s\\to\\operatorname{Fib}_s\\circ Lg_s^*$ of functors on $D^b_c(s,\\Lambda)$: for every morphism $u:N\\to N'$ of $D^b_c(s,\\Lambda)$, $\\operatorname{Fib}_s(Lg_s^*u)\\circ\\iota_N=\\iota_{N'}\\circ\\operatorname{Fib}_s(u)$. For $\\Lambda=\\Qlb$ this includes the compatibility of $\\iota^{E'}$ with the scalar extensions $E'\\subset L$, under the isomorphisms $\\operatorname{Fib}_s(K\\otimes_{E'}L)\\cong\\operatorname{Fib}_s(K)\\otimes_{E'}L$ of [lem-weil-point-sections-scalar-extension] and $(Lg_{s,E'}^*K)\\otimes_{E'}L\\cong Lg_{s,L}^*(K\\otimes_{E'}L)$ of [lem-pur-integral-operations-scalar-extension].",
+  "source": {
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Deligne, La conjecture de Weil II, (1.1.7), pp. 150-151 (the action of Gal(k-bar/k) on the fibre by transport of structure, used as functorial); the statement for the explicit point transport of def-weil-frobenius-point-transport is written by an agent (split off from that definition, which asserted it without proof)"
+  },
+  "stmt_deps": [
+    "def-weil-finite-field-fiber",
+    "def-weil-frobenius-detailed",
+    "def-weil-frobenius-point-transport",
+    "def-weil-inverse-image-pullback-comparison",
     "def-weil-derived-pullback-tensor-hom",
     "def-weil-finite-coefficient-point",
-    "def-weil-frobenius-point-transport"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Linearity follows from the ModuleCat morphism structure of sigma. For chain naturality, use the section-value clause of each sigma uniqueness theorem and PresheafOfModules.naturality_apply at the Frobenius restriction arrow. Applying Q gives the localized chain equations.",
-   "uses": [
-    "def-weil-frobenius-point-transport",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Use fully faithful whiskering by the quasi-isomorphism localization to descend the chain transformation. Conjugating its component by any representing isomorphism gives precisely the finite and integral SigmaDerived formulas, hence naturality for all derived arrows.",
-   "uses": [
-    "def-weil-frobenius-point-transport",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Compose the descended sigma with kappa from [lem-weil-isomorphism-comparison-natural]; at finite level also compose the derived intrinsic pullback comparison. Their complex normalization formulas identify components with the explicit finite transport and, by its uniqueness theorem, the integral transport. Restrict to the constructible subcategories.",
-   "uses": [
-    "lem-weil-isomorphism-comparison-natural",
-    "def-weil-frobenius-point-transport",
-    "def-weil-finite-coefficient-point"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For rational naturality, first establish the integral-arrow square using the rational fibre object-identification formula on 1 tensor f and the just-proved integral naturality. For an arbitrary localized arrow, use IsLocalizedModule.surj to write it as a fraction. Multiplication by the denominator times the identity becomes invertible after localization; cancel its image under the source functor and use the integral-arrow square. Conjugate by the rational fibre object isomorphisms.",
-   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-proetale-inverse-image",
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-derived-complete-integral-detailed",
     "def-weil-rationalization-karoubi",
-    "def-weil-finite-coefficient-point",
-    "def-weil-frobenius-point-transport",
-    "def-weil-derived-pullback-tensor-hom"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Apply [lem-weil-frobenius-point-coefficient-passage] with the three object equalities from Step 1. Its two conclusions supply the algebraically closed and scalar-extension clauses. Combine these with Steps 2-5 into the unchanged thirteen-clause theorem.",
-   "uses": [
-    "lem-weil-frobenius-point-coefficient-passage"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-derived-pullback-tensor-hom",
-  "def-weil-finite-coefficient-point",
-  "def-weil-frobenius-point-transport",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-point-proetale-sections-exact",
-  "lem-weil-isomorphism-comparison-natural",
-  "def-weil-rationalization-karoubi",
-  "lem-weil-frobenius-point-coefficient-passage"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
-  "place": "M5 Lean proof: section naturality, localization descent and cancellation of scalar-localization denominators; coefficient passage isolated in lem-weil-frobenius-point-coefficient-passage. Source context Deligne Weil II (1.1.3), (1.1.7), pp. 150-151."
- },
- "mathlib_searches": [
-  {
-   "tool": "grep",
-   "query": "grep -n -E 'def (comap|sheafFiberComapIso)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/Comap.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/",
-   "results": "Point/Comap.lean:41 Point.comap (a point of (C,J) from a point of (D,K) and a continuous functor) and :69 sheafFiberComapIso : (Phi.comap F).sheafFiber = F.sheafPullback >> Phi.sheafFiber, a natural isomorphism of underived fibre functors of sheaves on abstract sites; nothing on derived categories of modules, linearity over a coefficient ring, or derived pullback",
-   "date": "2026-10-09",
-   "verdict": "no match (sheafFiberComapIso is an underived abstract analogue, not the statement for the pro-etale site of Spec k and the derived pullback)"
-  },
-  {
-   "tool": "grep",
-   "query": "grep -rli -E 'transport of structure|geometric point|proetale|ProEt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
-   "results": "AlgebraicGeometry/Sites/Proetale.lean, ElladicCohomology.lean, EtalePoint.lean (Scheme.pointSmallEtale, etale site only); no inverse image along automorphisms of a scheme, no derived pullback",
-   "date": "2026-10-09",
-   "verdict": "no match"
-  },
-  {
-   "tool": "grep",
-   "query": "frobenius.*(transport|natural)|sheafFiberComapIso|proetale",
-   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
-   "date": "2026-10-18",
-   "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
-  },
-  {
-   "tool": "leansearch",
-   "query": "Pro etale Frobenius point transport natural transformation compatible with extension of scalars",
-   "results": "LinearMap.frobenius, SheafOfModules.pushforwardNatTrans_app_val_app, ModuleCat.RestrictionCoextensionAdj.unit', SheafOfModules.pushforwardNatTrans, CategoryTheory.Localization.Construction.natTransExtension, CategoryTheory.Grothendieck.transport, CategoryTheory.PreGaloisCategory.natTrans_ext_of_isGalois, CategoryTheory.Grothendieck.toTransport",
-   "date": "2026-10-18",
-   "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
-  },
-  {
-   "tool": "loogle",
-   "query": "CategoryTheory.NatTrans, CategoryTheory.Localization",
-   "results": "loogle: unknown identifier 'CategoryTheory.Localization'",
-   "date": "2026-10-18",
-   "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Frobenius transport on geometric point fibers of pro-etale derived sheaves is linear natural and compatible with extension of l-adic coefficients",
-   "results": "WittVector.IsocrystalHom.frob_equivariant, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.Isocrystal.toModule, WittVector.instModuleFractionRingStandardOneDimIsocrystal",
-   "date": "2026-10-18",
-   "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"sheafFiberComapIso\"",
-   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app",
-   "date": "2026-10-18",
-   "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Restriction of sections along a scheme automorphism commutes with inverse image of module sheaves and extension of scalars on derived categories",
-   "results": "AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp",
-   "date": "2026-10-18",
-   "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
-  }
- ],
- "mathlib_match": null,
- "status": "split",
- "merged_into": null,
- "created": {
-  "by": "worker",
-  "item": "def-weil-frobenius-point-transport",
-  "date": "2026-10-09"
- },
- "lean_audit": {},
- "import_flags": [
-  "unreachable"
- ],
- "chapter": "sec-six-functors",
- "unit": "sk-prop-sf-rf-shriek-preservation",
- "split_report": {
-  "date": "2026-10-21",
-  "item": "lem-weil-frobenius-point-transport-natural",
-  "worker": "stage1",
-  "summary": "G1/D repair: all nine original arguments are assigned to four comparable statement-only tasks. Retain the two accepted restriction and scalar-extension tasks; add specified-kappa naturality for arbitrary scheme isomorphisms (old steps 3-5) and normalized rational/common-stage descent of arbitrary supplied point-section transformations (old steps 6 and 9). The item only assembles their conclusions; statement, statement dependencies, Lean record and inherited tool approvals unchanged.",
-  "blueprint": "def-weil-global-geometric-frobenius, first arrow of the ordinary and compact-support composites: via def-weil-frobenius-cohomology-transport and def-weil-frobenius-point-transport. The inherited f! unit is not altered.",
-  "tool_uses": [
-   {
-    "node": "lem-weil-isomorphism-derived-pullback",
-    "why": "Generic constructibility or coefficient-comparison tool for the point-transport factor of the ancestor cohomology arrow; the inherited f! preservation unit supplies no such result."
-   },
-   {
-    "node": "lem-weil-point-sections-scalar-extension",
-    "why": "Generic constructibility or coefficient-comparison tool for the point-transport factor of the ancestor cohomology arrow; the inherited f! preservation unit supplies no such result."
-   },
-   {
-    "node": "lem-pur-integral-operations-scalar-extension",
-    "why": "Generic constructibility or coefficient-comparison tool for the point-transport factor of the ancestor cohomology arrow; the inherited f! preservation unit supplies no such result."
-   }
-  ]
- },
- "tool_uses": [
-  "lem-weil-proetale-isomorphism-inverse-image",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-point-proetale-sections-exact",
-  "def-weil-abstract-derived-category",
-  "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-  "lem-weil-isomorphism-derived-pullback",
-  "def-weil-finite-coefficient-point",
-  "def-weil-rationalization-karoubi",
-  "def-weil-derived-pullback-tensor-hom",
-  "lem-weil-point-sections-scalar-extension",
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-pur-integral-operations-scalar-extension",
-  "def-weil-algebraically-closed-coefficients"
- ],
- "reviewed": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "NT-cc-Q97-b557d6fc3",
-  "group": "Q97",
-  "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-b557d6fc3 (reviewer sub-agent of L); spot-checked: This delivery fulfils the re-split note. The previous Q97 head 473e43d1 was RETURNed (G1/D) because old steps 3–5 and 6/9 stayed inline. This head adds two new statement-only nodes for exactly those arguments and keeps the two earlier nodes byte-identical; the earlier review judged both true, and I agree. Compared with live, the statement, stmt_deps and Lean record are unchanged and no parallel group has superseded the item. The proof is 4 steps, 1809 characters; the four nodes are 2318, 2382, 2743 and 3387 characters, none restating the item. Every old step maps to a node: 1–2 restriction, 3–5 κ-naturality, 7–8 scalar square, 6 and 9 descent. (1) lem-weil-isomorphism-comparison-natural is true. The finite κ is the class of x↦x⊗1 (def-weil-inverse-image-pullback-comparison (a)), natural on chain maps and on inverted quasi-isomorphisms. For the integral κ, the normalization node gives a natural θ with θκ = G(u), so P(v)κ_N = θ'^{-1}G(v̂)G(u_N) = κ_{N'}G(v); this also holds for incomplete N, and no invertibility is claimed (g = id gives the completion unit). The ρ-composition clause is formal. No existing node states naturality of the specified κ: I read the grep hits for def-weil-inverse-image-pullback-comparison, including trf tower-unit, resolution-matching, reduction-counit and pod canonical-coefficient. (2) lem-weil-point-transformation-coefficient-descent is true. Rational sums follow from Fib(f⊗λ) = λ(Γf⊗E) and Lf^*(u⊗c) = Lf^*u⊗c. The Q̄ action formulas match def-weil-finite-coefficient-point item 4 (conjugation by φ̄) and def-weil-derived-pullback-tensor-hom (conjugation by θ^{f*} = ᾱ), so b = φ̄F(ᾱ)^{-1}. The rationalized hypothesis puts the components at a common stage, and equality in the Hom colimit (def-weil-point-fd-qlbar-category) gives representative independence. Components match def-weil-frobenius-point-transport (ι^E = ι^{O_E}⊗E, Q̄ represented at E'). Assembly: step 1 is the restriction node at g_s (same coprojection). Step 2 takes S = H = Γ and ρ = σ, then restricts via lem-weil-isomorphism-derived-pullback. In step 3 the scalar node's t-equation is literally the descent hypothesis, and its rational form is the scalar clause of (2). Step 4 applies descent. stmt_deps match the statement citations exactly, and proof_deps equal the union of the steps' uses. Dropped proof_deps are still cited by other nodes, so none is orphaned. Batch-5 flags accepted: both route to lem-weil-isomorphism-derived-pullback-comparison-normalization. It is a coefficient-foundation identification (specified inverse-image map = completion unit), not the trace formula, Poincaré duality or a step of their proofs. The base item already cited it, so the batch-5 closure gains nothing. No SGA citation. No fixes."
- },
- "reviewed_lean": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-2dba04a07",
-  "group": "NI",
-  "result": "fix",
-  "note": "Delivered frobeniusPointFiniteSigmaDerived/IntegralSigmaDerived were aliases of frobeniusPointTransportFinite/Integral (iota = Gamma(kappa) sigma, target Gamma(Lg^*N)), so clause (1)'s derived natural transformation Gamma(s,-) => Gamma(s, g^{-1}(-)) was not stated (earlier F2 unmet; duplicate notion, H3/H4). Fix replaces them with the genuine localization descent of chain-level sigma into the recorded inverseImageFiniteDerived/inverseImageIntegralDerived (stmt_dep def-weil-inverse-image-pullback-comparison), states naturality for every derived morphism, adds source/blueprint docstrings, moves the 9 proof steps into the theorem docstring, and appends a maintainer section to the report. Other conjuncts checked against node and dependencies: linearity, chain naturality, finite/integral/rational/Qbar ι squares, typed E'⊂L scalar-extension equation; helper object equalities true by recorded existsUnique object clauses; n=0, universes and hypotheses OK. nt_compile.py: delivered file 6.4 s and fixed file 7.3 s, both exit 0 with no diagnostics."
- },
- "lean": {
-  "module": "Sheaf.SixFunctors.FrobeniusPointTransportNatural",
-  "declaration": "WeilConjectures.frobeniusPointTransport_natural",
-  "declarations": [
-   "WeilConjectures.frobeniusPointRationalPullbackEq",
-   "WeilConjectures.frobeniusPointQbarPullbackEq",
-   "WeilConjectures.frobeniusPointQbarFibreObjEq",
-   "WeilConjectures.frobeniusPointFiniteSigmaDerived",
-   "WeilConjectures.frobeniusPointIntegralSigmaDerived"
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension"
   ],
-  "statement": "theorem frobeniusPointTransport_natural (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : (∀ (n : ℕ) (K : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) (i : ℤ) (a : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (x : ModuleCat.carrier ((((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).obj K).X i)), (ConcreteCategory.hom ((frobeniusPointFiniteSigma D l E n K).f i)) (a • x) = a • (ConcreteCategory.hom ((frobeniusPointFiniteSigma D l E n K).f i)) x) ∧ (∀ (n : ℕ) (K K' : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) (f : K ⟶ K'), ((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).map f ≫ frobeniusPointFiniteSigma D l E n K' = frobeniusPointFiniteSigma D l E n K ≫ ((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).map (((inverseImageFiniteModules l E (frobeniusPointIso D).hom n).mapHomologicalComplex (.up ℤ)).map f)) ∧ (∀ (n : ℕ) (K K' : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) (f : K ⟶ K'), DerivedCategory.Q.map (((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).map f ≫ frobeniusPointFiniteSigma D l E n K') = DerivedCategory.Q.map (frobeniusPointFiniteSigma D l E n K ≫ ((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).map (((inverseImageFiniteModules l E (frobeniusPointIso D).hom n).mapHomologicalComplex (.up ℤ)).map f))) ∧ (∀ (n : ℕ) (N M : proEtaleDerivedCategory (Spec (.of D.k)) (Padic.coefficientExtensionRing l E (n + 1))) (f : N ⟶ M), (pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.map f ≫ frobeniusPointFiniteSigmaDerived D l E n M = frobeniusPointFiniteSigmaDerived D l E n N ≫ (pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.map ((inverseImageFiniteDerived l E (frobeniusPointIso D).hom n).map f)) ∧ (∀ (K : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (i : ℤ) (a : ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E)) (x : ModuleCat.carrier ((((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).obj K).X i)), (ConcreteCategory.hom ((frobeniusPointIntegralSigma D l E K).f i)) (a • x) = a • (ConcreteCategory.hom ((frobeniusPointIntegralSigma D l E K).f i)) x) ∧ (∀ (K K' : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (f : K ⟶ K'), ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map f ≫ frobeniusPointIntegralSigma D l E K' = frobeniusPointIntegralSigma D l E K ≫ ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map (((inverseImageIntegralModules l E (frobeniusPointIso D).hom).mapHomologicalComplex (.up ℤ)).map f)) ∧ (∀ (K K' : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (f : K ⟶ K'), DerivedCategory.Q.map (((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map f ≫ frobeniusPointIntegralSigma D l E K') = DerivedCategory.Q.map (frobeniusPointIntegralSigma D l E K ≫ ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map (((inverseImageIntegralModules l E (frobeniusPointIso D).hom).mapHomologicalComplex (.up ℤ)).map f))) ∧ (∀ (N M : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))) (f : N ⟶ M), (pointFibreIntegralAmbient D l E).map f ≫ frobeniusPointIntegralSigmaDerived D l E M = frobeniusPointIntegralSigmaDerived D l E N ≫ (pointFibreIntegralAmbient D l E).map ((inverseImageIntegralDerived l E (frobeniusPointIso D).hom).map f)) ∧ (∀ (n : ℕ) (N M : (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k))).FullSubcategory) (u : N ⟶ M), (pointFiniteFibre D l hl E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))).map u ≫ frobeniusPointTransportFiniteConstructible D l hl E n M = frobeniusPointTransportFiniteConstructible D l hl E n N ≫ (pointFiniteFibre D l hl E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))).map ((frobeniusPointFinitePullback D l hl E n).map u)) ∧ (∀ (N M : sfIntegralConstructibleCategory l E (Spec (.of D.k))) (u : N ⟶ M), (pointIntegralFibre D l hl E).map u ≫ frobeniusPointTransportIntegralConstructible D l hl E M = frobeniusPointTransportIntegralConstructible D l hl E N ≫ (pointIntegralFibre D l hl E).map ((frobeniusPointIntegralPullback D l hl E).map u)) ∧ (∀ (N M : sfRationalConstructibleCategory l E (Spec (.of D.k))) (u : N ⟶ M), letI : ∀ x : Spec (.of D.k), Invertible (l : (Spec (.of D.k)).residueField x) := fun x => frobeniusPointPrimeInvertible D l hl x (pointRationalFibre D l hl E).map u ≫ frobeniusPointTransportRational D l hl E M = frobeniusPointTransportRational D l hl E N ≫ (pointRationalFibre D l hl E).map (eqToHom (frobeniusPointRationalPullbackEq D l hl E N).symm ≫ (rationalDerivedPullback l E (frobeniusPointIso D).hom).map u ≫ eqToHom (frobeniusPointRationalPullbackEq D l hl E M))) ∧ (∀ (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (A B : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) (u : A ⟶ B), letI : ∀ x : Spec (.of D.k), Invertible (l : (Spec (.of D.k)).residueField x) := fun x => frobeniusPointPrimeInvertible D l hl x (eqToHom (frobeniusPointQbarFibreObjEq D l hl Ω A).symm ≫ (pointQbarFibre D l hl Ω).map u ≫ eqToHom (frobeniusPointQbarFibreObjEq D l hl Ω B)) ≫ frobeniusPointTransportQbar D l hl Ω B = frobeniusPointTransportQbar D l hl Ω A ≫ (eqToHom (congrArg (pointQbarFibreObj D l hl Ω) (frobeniusPointQbarPullbackEq D l hl Ω A).symm) ≫ eqToHom (frobeniusPointQbarFibreObjEq D l hl Ω ((commonStageDerivedPullback l Ω (frobeniusPointIso D).hom).obj A)).symm ≫ (pointQbarFibre D l hl Ω).map ((commonStageDerivedPullback l Ω (frobeniusPointIso D).hom).map u) ≫ eqToHom (frobeniusPointQbarFibreObjEq D l hl Ω ((commonStageDerivedPullback l Ω (frobeniusPointIso D).hom).obj B)) ≫ eqToHom (congrArg (pointQbarFibreObj D l hl Ω) (frobeniusPointQbarPullbackEq D l hl Ω B)))) ∧ (∀ (E' L : Type u) [Field E'] [Algebra ℚ_[l] E'] [FiniteDimensional ℚ_[l] E'] [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E' →ₐ[ℚ_[l]] L) (K : sfRationalConstructibleCategory l E' (Spec (.of D.k))), letI : ∀ x : Spec (.of D.k), Invertible (l : (Spec (.of D.k)).residueField x) := fun x => frobeniusPointPrimeInvertible D l hl x (pointRationalFibreScalarIso D l hl E' L ι).inv.app K ≫ frobeniusPointTransportRational D l hl L ((sfRationalScalarExtension l E' (Spec (.of D.k)) 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj K) ≫ (pointRationalFibre D l hl L).map (eqToHom (frobeniusPointRationalPullbackEq D l hl L ((sfRationalScalarExtension l E' (Spec (.of D.k)) 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj K)).symm) ≫ (pointRationalFibre D l hl L).map ((rationalPullbackScalarComparison l E' L ι (frobeniusPointIso D).hom).inv.app K) ≫ (pointRationalFibreScalarIso D l hl E' L ι).hom.app ((rationalDerivedPullback l E' (frobeniusPointIso D).hom).obj K) = (DerivedCategory.pointFdScalarExtension ι.toRingHom).map (frobeniusPointTransportRational D l hl E' K) ≫ (DerivedCategory.pointFdScalarExtension ι.toRingHom).map ((pointRationalFibre D l hl E').map (eqToHom (frobeniusPointRationalPullbackEq D l hl E' K).symm)))",
-  "branch": "newtargets-dag",
-  "by": "NI",
-  "date": "2026-10-18",
-  "existing": false,
-  "file": "lean/Sheaf/SixFunctors/FrobeniusPointTransportNatural.lean",
-  "fixed_by": "NT-stage2-cc-2dba04a07"
- },
- "reviewed_proof": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "M5",
-  "result": "pass",
-  "landing": "20261021T214839-L-1868477",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "proof": [
+    {
+      "text": "Apply [lem-weil-point-automorphism-restriction-natural] with $g=g_s$. Its restriction/coprojection is exactly $\\sigma$ of [def-weil-frobenius-point-transport]; hence it gives clause (1), including all ambient derived morphisms.",
+      "uses": [
+        "lem-weil-point-automorphism-restriction-natural",
+        "def-weil-frobenius-point-transport"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+        "place": "Deligne, Weil II, (1.1.3), p. 150 and (1.1.7), pp. 150-151; explicit pro-etale/completed-coefficient argument extracted by Q97 from original steps 3-6 and 9 of lem-weil-frobenius-point-transport-natural. The normalized comparison and common-stage realization assertions are agent-written, not theorems asserted by Deligne."
+      }
+    },
+    {
+      "text": "Apply [lem-weil-isomorphism-comparison-natural] to $g_s$: this is a scheme isomorphism and $\\ell\\ne p$ is invertible on $s$. Its composition assertion, with $S=H=\\Gamma(s,-)$ and $\\rho=\\sigma$ from Step 1, makes $\\Gamma(\\kappa)\\sigma$ natural. By [lem-weil-isomorphism-derived-pullback] restrict to the finite and completed integral constructible categories. Since the fiber functors there are sections [def-weil-finite-coefficient-point] and $\\iota=\\Gamma(\\kappa)\\sigma$ [def-weil-frobenius-point-transport], this is clause (2) at these stages.",
+      "uses": [
+        "lem-weil-isomorphism-comparison-natural",
+        "lem-weil-isomorphism-derived-pullback",
+        "def-weil-finite-coefficient-point",
+        "def-weil-frobenius-point-transport"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+        "place": "Deligne, Weil II, (1.1.3), p. 150 and (1.1.7), pp. 150-151; explicit pro-etale/completed-coefficient argument extracted by Q97 from original steps 3-6 and 9 of lem-weil-frobenius-point-transport-natural. The normalized comparison and common-stage realization assertions are agent-written, not theorems asserted by Deligne."
+      }
+    },
+    {
+      "text": "Apply [lem-weil-point-automorphism-transport-scalar-extension] with $g=g_s$. Its $t^E=\\Gamma(\\kappa^E)\\sigma^{g,E}$ equals the integral $\\iota$ [def-weil-frobenius-point-transport]. It supplies exactly the scalar-compatibility hypothesis of [lem-weil-point-transformation-coefficient-descent] for this family. Its rational equation also gives the scalar-extension clause of (2), with the specified sections comparison [lem-weil-point-sections-scalar-extension] and pullback comparison [lem-pur-integral-operations-scalar-extension].",
+      "uses": [
+        "lem-weil-point-automorphism-transport-scalar-extension",
+        "def-weil-frobenius-point-transport",
+        "lem-weil-point-transformation-coefficient-descent",
+        "lem-weil-point-sections-scalar-extension",
+        "lem-pur-integral-operations-scalar-extension"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+        "place": "Deligne, Weil II, (1.1.3), p. 150 and (1.1.7), pp. 150-151; explicit pro-etale/completed-coefficient argument extracted by Q97 from original steps 3-6 and 9 of lem-weil-frobenius-point-transport-natural. The normalized comparison and common-stage realization assertions are agent-written, not theorems asserted by Deligne."
+      }
+    },
+    {
+      "text": "Use [lem-weil-point-transformation-coefficient-descent] with $\\eta^E=\\iota^{\\mathcal O_E}$ for every finite coefficient field $E$: Step 2 gives its integral naturality and Step 3 its coefficient compatibility. Its two conclusions give naturality for every rational morphism and every common-stage morphism. The components are precisely the tensor-extended and stage-represented components specified by [def-weil-frobenius-point-transport]. This finishes clause (2) for $E$ and $\\overline{\\mathbf Q}_\\ell$.",
+      "uses": [
+        "lem-weil-point-transformation-coefficient-descent",
+        "def-weil-frobenius-point-transport"
+      ],
+      "elementary": false,
+      "source": {
+        "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+        "place": "Deligne, Weil II, (1.1.3), p. 150 and (1.1.7), pp. 150-151; explicit pro-etale/completed-coefficient argument extracted by Q97 from original steps 3-6 and 9 of lem-weil-frobenius-point-transport-natural. The normalized comparison and common-stage realization assertions are agent-written, not theorems asserted by Deligne."
+      }
+    }
+  ],
+  "proof_deps": [
+    "lem-weil-point-automorphism-restriction-natural",
+    "def-weil-frobenius-point-transport",
+    "lem-weil-isomorphism-comparison-natural",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-point-automorphism-transport-scalar-extension",
+    "lem-weil-point-transformation-coefficient-descent",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+    "place": "Deligne, Weil II, (1.1.3), p. 150 and (1.1.7), pp. 150-151; explicit pro-etale/completed-coefficient argument extracted by Q97 from original steps 3-6 and 9 of lem-weil-frobenius-point-transport-natural. The normalized comparison and common-stage realization assertions are agent-written, not theorems asserted by Deligne."
+  },
+  "mathlib_searches": [
+    {
+      "tool": "grep",
+      "query": "grep -n -E 'def (comap|sheafFiberComapIso)' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/Comap.lean; ls ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites/Point/",
+      "results": "Point/Comap.lean:41 Point.comap (a point of (C,J) from a point of (D,K) and a continuous functor) and :69 sheafFiberComapIso : (Phi.comap F).sheafFiber = F.sheafPullback >> Phi.sheafFiber, a natural isomorphism of underived fibre functors of sheaves on abstract sites; nothing on derived categories of modules, linearity over a coefficient ring, or derived pullback",
+      "date": "2026-10-09",
+      "verdict": "no match (sheafFiberComapIso is an underived abstract analogue, not the statement for the pro-etale site of Spec k and the derived pullback)"
+    },
+    {
+      "tool": "grep",
+      "query": "grep -rli -E 'transport of structure|geometric point|proetale|ProEt' ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/AlgebraicGeometry ~/weil-conjectures-slopmaster2/.lake/packages/mathlib/Mathlib/CategoryTheory/Sites",
+      "results": "AlgebraicGeometry/Sites/Proetale.lean, ElladicCohomology.lean, EtalePoint.lean (Scheme.pointSmallEtale, etale site only); no inverse image along automorphisms of a scheme, no derived pullback",
+      "date": "2026-10-09",
+      "verdict": "no match"
+    },
+    {
+      "tool": "grep",
+      "query": "frobenius.*(transport|natural)|sheafFiberComapIso|proetale",
+      "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean",
+      "date": "2026-10-18",
+      "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
+    },
+    {
+      "tool": "leansearch",
+      "query": "Pro etale Frobenius point transport natural transformation compatible with extension of scalars",
+      "results": "LinearMap.frobenius, SheafOfModules.pushforwardNatTrans_app_val_app, ModuleCat.RestrictionCoextensionAdj.unit', SheafOfModules.pushforwardNatTrans, CategoryTheory.Localization.Construction.natTransExtension, CategoryTheory.Grothendieck.transport, CategoryTheory.PreGaloisCategory.natTrans_ext_of_isGalois, CategoryTheory.Grothendieck.toTransport",
+      "date": "2026-10-18",
+      "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
+    },
+    {
+      "tool": "loogle",
+      "query": "CategoryTheory.NatTrans, CategoryTheory.Localization",
+      "results": "loogle: unknown identifier 'CategoryTheory.Localization'",
+      "date": "2026-10-18",
+      "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Frobenius transport on geometric point fibers of pro-etale derived sheaves is linear natural and compatible with extension of l-adic coefficients",
+      "results": "WittVector.IsocrystalHom.frob_equivariant, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.Isocrystal.toModule, WittVector.instModuleFractionRingStandardOneDimIsocrystal",
+      "date": "2026-10-18",
+      "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"sheafFiberComapIso\"",
+      "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app, CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app",
+      "date": "2026-10-18",
+      "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Restriction of sections along a scheme automorphism commutes with inverse image of module sheaves and extension of scalars on derived categories",
+      "results": "AlgebraicGeometry.Scheme.Modules.inv_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorId_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorCongr_inv_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoAbApp",
+      "date": "2026-10-18",
+      "verdict": "no match: returned declarations do not compare the specified pro-etale inverse-image/completed-pullback map across coefficient extensions"
+    }
+  ],
+  "mathlib_match": null,
+  "status": "split",
+  "merged_into": null,
+  "created": {
+    "by": "worker",
+    "item": "def-weil-frobenius-point-transport",
+    "date": "2026-10-09"
+  },
+  "lean_audit": {},
+  "import_flags": [
+    "unreachable"
+  ],
+  "chapter": "sec-six-functors",
+  "unit": "sk-prop-sf-rf-shriek-preservation",
+  "split_report": {
+    "date": "2026-10-21",
+    "item": "lem-weil-frobenius-point-transport-natural",
+    "worker": "stage1",
+    "summary": "G1/D repair: all nine original arguments are assigned to four comparable statement-only tasks. Retain the two accepted restriction and scalar-extension tasks; add specified-kappa naturality for arbitrary scheme isomorphisms (old steps 3-5) and normalized rational/common-stage descent of arbitrary supplied point-section transformations (old steps 6 and 9). The item only assembles their conclusions; statement, statement dependencies, Lean record and inherited tool approvals unchanged.",
+    "blueprint": "def-weil-global-geometric-frobenius, first arrow of the ordinary and compact-support composites: via def-weil-frobenius-cohomology-transport and def-weil-frobenius-point-transport. The inherited f! unit is not altered.",
+    "tool_uses": [
+      {
+        "node": "lem-weil-isomorphism-derived-pullback",
+        "why": "Generic constructibility or coefficient-comparison tool for the point-transport factor of the ancestor cohomology arrow; the inherited f! preservation unit supplies no such result."
+      },
+      {
+        "node": "lem-weil-point-sections-scalar-extension",
+        "why": "Generic constructibility or coefficient-comparison tool for the point-transport factor of the ancestor cohomology arrow; the inherited f! preservation unit supplies no such result."
+      },
+      {
+        "node": "lem-pur-integral-operations-scalar-extension",
+        "why": "Generic constructibility or coefficient-comparison tool for the point-transport factor of the ancestor cohomology arrow; the inherited f! preservation unit supplies no such result."
+      }
+    ]
+  },
+  "tool_uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-abstract-derived-category",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-finite-coefficient-point",
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-integral-operations-scalar-extension",
+    "def-weil-algebraically-closed-coefficients"
+  ],
+  "reviewed": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "NT-cc-Q97-b557d6fc3",
+    "group": "Q97",
+    "result": "pass",
+    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q97-b557d6fc3 (reviewer sub-agent of L); spot-checked: This delivery fulfils the re-split note. The previous Q97 head 473e43d1 was RETURNed (G1/D) because old steps 3–5 and 6/9 stayed inline. This head adds two new statement-only nodes for exactly those arguments and keeps the two earlier nodes byte-identical; the earlier review judged both true, and I agree. Compared with live, the statement, stmt_deps and Lean record are unchanged and no parallel group has superseded the item. The proof is 4 steps, 1809 characters; the four nodes are 2318, 2382, 2743 and 3387 characters, none restating the item. Every old step maps to a node: 1–2 restriction, 3–5 κ-naturality, 7–8 scalar square, 6 and 9 descent. (1) lem-weil-isomorphism-comparison-natural is true. The finite κ is the class of x↦x⊗1 (def-weil-inverse-image-pullback-comparison (a)), natural on chain maps and on inverted quasi-isomorphisms. For the integral κ, the normalization node gives a natural θ with θκ = G(u), so P(v)κ_N = θ'^{-1}G(v̂)G(u_N) = κ_{N'}G(v); this also holds for incomplete N, and no invertibility is claimed (g = id gives the completion unit). The ρ-composition clause is formal. No existing node states naturality of the specified κ: I read the grep hits for def-weil-inverse-image-pullback-comparison, including trf tower-unit, resolution-matching, reduction-counit and pod canonical-coefficient. (2) lem-weil-point-transformation-coefficient-descent is true. Rational sums follow from Fib(f⊗λ) = λ(Γf⊗E) and Lf^*(u⊗c) = Lf^*u⊗c. The Q̄ action formulas match def-weil-finite-coefficient-point item 4 (conjugation by φ̄) and def-weil-derived-pullback-tensor-hom (conjugation by θ^{f*} = ᾱ), so b = φ̄F(ᾱ)^{-1}. The rationalized hypothesis puts the components at a common stage, and equality in the Hom colimit (def-weil-point-fd-qlbar-category) gives representative independence. Components match def-weil-frobenius-point-transport (ι^E = ι^{O_E}⊗E, Q̄ represented at E'). Assembly: step 1 is the restriction node at g_s (same coprojection). Step 2 takes S = H = Γ and ρ = σ, then restricts via lem-weil-isomorphism-derived-pullback. In step 3 the scalar node's t-equation is literally the descent hypothesis, and its rational form is the scalar clause of (2). Step 4 applies descent. stmt_deps match the statement citations exactly, and proof_deps equal the union of the steps' uses. Dropped proof_deps are still cited by other nodes, so none is orphaned. Batch-5 flags accepted: both route to lem-weil-isomorphism-derived-pullback-comparison-normalization. It is a coefficient-foundation identification (specified inverse-image map = completion unit), not the trace formula, Poincaré duality or a step of their proofs. The base item already cited it, so the batch-5 closure gains nothing. No SGA citation. No fixes."
+  },
+  "reviewed_lean": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-2dba04a07",
+    "group": "NI",
+    "result": "fix",
+    "note": "Delivered frobeniusPointFiniteSigmaDerived/IntegralSigmaDerived were aliases of frobeniusPointTransportFinite/Integral (iota = Gamma(kappa) sigma, target Gamma(Lg^*N)), so clause (1)'s derived natural transformation Gamma(s,-) => Gamma(s, g^{-1}(-)) was not stated (earlier F2 unmet; duplicate notion, H3/H4). Fix replaces them with the genuine localization descent of chain-level sigma into the recorded inverseImageFiniteDerived/inverseImageIntegralDerived (stmt_dep def-weil-inverse-image-pullback-comparison), states naturality for every derived morphism, adds source/blueprint docstrings, moves the 9 proof steps into the theorem docstring, and appends a maintainer section to the report. Other conjuncts checked against node and dependencies: linearity, chain naturality, finite/integral/rational/Qbar ι squares, typed E'⊂L scalar-extension equation; helper object equalities true by recorded existsUnique object clauses; n=0, universes and hypotheses OK. nt_compile.py: delivered file 6.4 s and fixed file 7.3 s, both exit 0 with no diagnostics."
+  },
+  "lean": {
+    "module": "Sheaf.SixFunctors.FrobeniusPointTransportNatural",
+    "declaration": "WeilConjectures.frobeniusPointTransport_natural",
+    "declarations": [
+      "WeilConjectures.frobeniusPointRationalPullbackEq",
+      "WeilConjectures.frobeniusPointQbarPullbackEq",
+      "WeilConjectures.frobeniusPointQbarFibreObjEq",
+      "WeilConjectures.frobeniusPointFiniteSigmaDerived",
+      "WeilConjectures.frobeniusPointIntegralSigmaDerived"
+    ],
+    "statement": "theorem frobeniusPointTransport_natural (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (hl : l ≠ D.p) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] : (∀ (n : ℕ) (K : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) (i : ℤ) (a : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E (n + 1))) (x : ModuleCat.carrier ((((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).obj K).X i)), (ConcreteCategory.hom ((frobeniusPointFiniteSigma D l E n K).f i)) (a • x) = a • (ConcreteCategory.hom ((frobeniusPointFiniteSigma D l E n K).f i)) x) ∧ (∀ (n : ℕ) (K K' : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) (f : K ⟶ K'), ((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).map f ≫ frobeniusPointFiniteSigma D l E n K' = frobeniusPointFiniteSigma D l E n K ≫ ((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).map (((inverseImageFiniteModules l E (frobeniusPointIso D).hom n).mapHomologicalComplex (.up ℤ)).map f)) ∧ (∀ (n : ℕ) (K K' : CochainComplex (integralOperationsFiniteModules l E (Spec (.of D.k)) n) ℤ) (f : K ⟶ K'), DerivedCategory.Q.map (((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).map f ≫ frobeniusPointFiniteSigma D l E n K') = DerivedCategory.Q.map (frobeniusPointFiniteSigma D l E n K ≫ ((pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapHomologicalComplex (.up ℤ)).map (((inverseImageFiniteModules l E (frobeniusPointIso D).hom n).mapHomologicalComplex (.up ℤ)).map f))) ∧ (∀ (n : ℕ) (N M : proEtaleDerivedCategory (Spec (.of D.k)) (Padic.coefficientExtensionRing l E (n + 1))) (f : N ⟶ M), (pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.map f ≫ frobeniusPointFiniteSigmaDerived D l E n M = frobeniusPointFiniteSigmaDerived D l E n N ≫ (pointFiniteSections D.k (Padic.coefficientExtensionRing l E (n + 1))).mapDerivedCategory.map ((inverseImageFiniteDerived l E (frobeniusPointIso D).hom n).map f)) ∧ (∀ (K : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (i : ℤ) (a : ULift.{u + 1, u} (Padic.coefficientExtensionIntegers l E)) (x : ModuleCat.carrier ((((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).obj K).X i)), (ConcreteCategory.hom ((frobeniusPointIntegralSigma D l E K).f i)) (a • x) = a • (ConcreteCategory.hom ((frobeniusPointIntegralSigma D l E K).f i)) x) ∧ (∀ (K K' : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (f : K ⟶ K'), ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map f ≫ frobeniusPointIntegralSigma D l E K' = frobeniusPointIntegralSigma D l E K ≫ ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map (((inverseImageIntegralModules l E (frobeniusPointIso D).hom).mapHomologicalComplex (.up ℤ)).map f)) ∧ (∀ (K K' : CochainComplex (integralTowerModules l E (Spec (.of D.k))) ℤ) (f : K ⟶ K'), DerivedCategory.Q.map (((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map f ≫ frobeniusPointIntegralSigma D l E K') = DerivedCategory.Q.map (frobeniusPointIntegralSigma D l E K ≫ ((pointIntegralSections l E D.k).mapHomologicalComplex (.up ℤ)).map (((inverseImageIntegralModules l E (frobeniusPointIso D).hom).mapHomologicalComplex (.up ℤ)).map f))) ∧ (∀ (N M : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))) (f : N ⟶ M), (pointFibreIntegralAmbient D l E).map f ≫ frobeniusPointIntegralSigmaDerived D l E M = frobeniusPointIntegralSigmaDerived D l E N ≫ (pointFibreIntegralAmbient D l E).map ((inverseImageIntegralDerived l E (frobeniusPointIso D).hom).map f)) ∧ (∀ (n : ℕ) (N M : (intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) (Spec (.of D.k))).FullSubcategory) (u : N ⟶ M), (pointFiniteFibre D l hl E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))).map u ≫ frobeniusPointTransportFiniteConstructible D l hl E n M = frobeniusPointTransportFiniteConstructible D l hl E n N ≫ (pointFiniteFibre D l hl E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))).map ((frobeniusPointFinitePullback D l hl E n).map u)) ∧ (∀ (N M : sfIntegralConstructibleCategory l E (Spec (.of D.k))) (u : N ⟶ M), (pointIntegralFibre D l hl E).map u ≫ frobeniusPointTransportIntegralConstructible D l hl E M = frobeniusPointTransportIntegralConstructible D l hl E N ≫ (pointIntegralFibre D l hl E).map ((frobeniusPointIntegralPullback D l hl E).map u)) ∧ (∀ (N M : sfRationalConstructibleCategory l E (Spec (.of D.k))) (u : N ⟶ M), letI : ∀ x : Spec (.of D.k), Invertible (l : (Spec (.of D.k)).residueField x) := fun x => frobeniusPointPrimeInvertible D l hl x (pointRationalFibre D l hl E).map u ≫ frobeniusPointTransportRational D l hl E M = frobeniusPointTransportRational D l hl E N ≫ (pointRationalFibre D l hl E).map (eqToHom (frobeniusPointRationalPullbackEq D l hl E N).symm ≫ (rationalDerivedPullback l E (frobeniusPointIso D).hom).map u ≫ eqToHom (frobeniusPointRationalPullbackEq D l hl E M))) ∧ (∀ (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (A B : generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k))) (u : A ⟶ B), letI : ∀ x : Spec (.of D.k), Invertible (l : (Spec (.of D.k)).residueField x) := fun x => frobeniusPointPrimeInvertible D l hl x (eqToHom (frobeniusPointQbarFibreObjEq D l hl Ω A).symm ≫ (pointQbarFibre D l hl Ω).map u ≫ eqToHom (frobeniusPointQbarFibreObjEq D l hl Ω B)) ≫ frobeniusPointTransportQbar D l hl Ω B = frobeniusPointTransportQbar D l hl Ω A ≫ (eqToHom (congrArg (pointQbarFibreObj D l hl Ω) (frobeniusPointQbarPullbackEq D l hl Ω A).symm) ≫ eqToHom (frobeniusPointQbarFibreObjEq D l hl Ω ((commonStageDerivedPullback l Ω (frobeniusPointIso D).hom).obj A)).symm ≫ (pointQbarFibre D l hl Ω).map ((commonStageDerivedPullback l Ω (frobeniusPointIso D).hom).map u) ≫ eqToHom (frobeniusPointQbarFibreObjEq D l hl Ω ((commonStageDerivedPullback l Ω (frobeniusPointIso D).hom).obj B)) ≫ eqToHom (congrArg (pointQbarFibreObj D l hl Ω) (frobeniusPointQbarPullbackEq D l hl Ω B)))) ∧ (∀ (E' L : Type u) [Field E'] [Algebra ℚ_[l] E'] [FiniteDimensional ℚ_[l] E'] [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L] (ι : E' →ₐ[ℚ_[l]] L) (K : sfRationalConstructibleCategory l E' (Spec (.of D.k))), letI : ∀ x : Spec (.of D.k), Invertible (l : (Spec (.of D.k)).residueField x) := fun x => frobeniusPointPrimeInvertible D l hl x (pointRationalFibreScalarIso D l hl E' L ι).inv.app K ≫ frobeniusPointTransportRational D l hl L ((sfRationalScalarExtension l E' (Spec (.of D.k)) 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj K) ≫ (pointRationalFibre D l hl L).map (eqToHom (frobeniusPointRationalPullbackEq D l hl L ((sfRationalScalarExtension l E' (Spec (.of D.k)) 0 (Nat.Prime.ne_zero (Fact.out : l.Prime)) L ι).obj K)).symm) ≫ (pointRationalFibre D l hl L).map ((rationalPullbackScalarComparison l E' L ι (frobeniusPointIso D).hom).inv.app K) ≫ (pointRationalFibreScalarIso D l hl E' L ι).hom.app ((rationalDerivedPullback l E' (frobeniusPointIso D).hom).obj K) = (DerivedCategory.pointFdScalarExtension ι.toRingHom).map (frobeniusPointTransportRational D l hl E' K) ≫ (DerivedCategory.pointFdScalarExtension ι.toRingHom).map ((pointRationalFibre D l hl E').map (eqToHom (frobeniusPointRationalPullbackEq D l hl E' K).symm)))",
+    "branch": "newtargets-dag",
+    "by": "NI",
+    "date": "2026-10-18",
+    "existing": false,
+    "file": "lean/Sheaf/SixFunctors/FrobeniusPointTransportNatural.lean",
+    "fixed_by": "NT-stage2-cc-2dba04a07"
+  },
+  "reviewed_proof": {
+    "date": "2026-10-21",
+    "by": "L",
+    "reviewer": "AUTO",
+    "group": "H5",
+    "result": "pass",
+    "landing": "20261021T101133-L-15749",
+    "kind": "proof",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+    "sorry_before": [
+      "WeilConjectures.frobeniusPointQbarFibreObjEq",
+      "WeilConjectures.frobeniusPointQbarPullbackEq",
+      "WeilConjectures.frobeniusPointRationalPullbackEq",
+      "WeilConjectures.frobeniusPointTransport_natural"
+    ],
+    "sorry_after": [
+      "WeilConjectures.frobeniusPointTransport_natural"
+    ]
+  }
 }

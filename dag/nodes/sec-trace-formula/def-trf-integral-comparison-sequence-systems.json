@@ -1,235 +1,201 @@
 {
- "id": "def-trf-integral-comparison-sequence-systems",
- "kind": "definition",
- "title": "Canonical pullback and scalar change of whole quotient systems",
- "status": "split",
- "statement": "Fix a prime $\\ell$, finite extensions $E,L/\\mathbf Q_\\ell$ and an embedding $\\iota:E\\to L$ [def-weil-l-adic-coefficient-extension]. For the small pro-etale site of every scheme $X$ [def-weil-pbc-proetale-site], use the ringed sequence site with its actual positive quotient rings and quotient-linear transitions [lem-coef-derived-system-evaluation-calculus]. Define the direct image of quotient systems by sectionwise base change and the canonical constant coefficient ring map. Define inverse image as its left adjoint and its exact derived functor. Define scalar change by the universal cochain-normalized derived change of rings for the map of quotient coefficient sheaves [lem-pur-derived-change-of-rings], [def-weil-integral-scalar-extension]. Define the composition comparison by the mate of the fibre-product-pasting map on direct images [lem-weil-pbc-proetale-derived-pullback-composition], the identity comparison by the inverse-image unit formula, and the scalar/pullback and scalar-composition comparisons by their tensor-generator formulas on the entire quotient diagram, before taking a limit. More explicitly, write $\\gamma_f(x)$ for the ordinary inverse-image adjunction unit on a section at $(n,U)$. The scalar/pullback map sends $1\\otimes\\gamma_f(x)$ to $\\gamma_f(1\\otimes x)$. For $E\\xrightarrow{\\iota}L\\xrightarrow{j}M$ the scalar associator sends $c\\otimes(b\\otimes x)$ to $c\\,j(b)\\otimes x$, and identity scalar change sends $s\\otimes x$ to $sx$. The composition map is the inverse-image mate of the direct-image map induced by canonical fibre-product pasting. These formulas are natural in vertical site restrictions and horizontal quotient maps; derived comparisons are their localizations on K-flat complexes, using the universal cochain change-of-rings counits.",
- "stmt_deps": [
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-proetale-site",
-  "lem-coef-derived-system-evaluation-calculus",
-  "lem-pur-derived-change-of-rings",
-  "def-weil-integral-scalar-extension",
-  "lem-weil-pbc-proetale-derived-pullback-composition"
- ],
- "source": {
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), completed pullback and quotient realization; with Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition. The simultaneous integral scalar/composition coherence is an extracted construction, not a verbatim assertion of either tag; blueprint prop-trf-karoubi-independence.proof.md, last sentence."
- },
- "proof": [
-  {
-   "text": "For integralComparisonSequenceBaseChange_continuous, the structured-arrow category of the product base-change functor is equivalent to the product of the two structured-arrow categories. The identity and pro-etale base change are representably flat, so the product is representably flat. A covering of the sequence site is detected by its vertical slice. Pro-etale base change preserves that covering, and its image is contained in the vertical slice of the pushed-forward sieve. Cover preservation and representable flatness imply continuity. This step is proved in Lean.",
-   "uses": [
+  "id": "def-trf-integral-comparison-sequence-systems",
+  "kind": "definition",
+  "title": "Canonical pullback and scalar change of whole quotient systems",
+  "status": "split",
+  "statement": "Fix a prime $\\ell$, finite extensions $E,L/\\mathbf Q_\\ell$ and an embedding $\\iota:E\\to L$ [def-weil-l-adic-coefficient-extension]. For the small pro-etale site of every scheme $X$ [def-weil-pbc-proetale-site], use the ringed sequence site with its actual positive quotient rings and quotient-linear transitions [lem-coef-derived-system-evaluation-calculus]. Define the direct image of quotient systems by sectionwise base change and the canonical constant coefficient ring map. Define inverse image as its left adjoint and its exact derived functor. Define scalar change by the universal cochain-normalized derived change of rings for the map of quotient coefficient sheaves [lem-pur-derived-change-of-rings], [def-weil-integral-scalar-extension]. Define the composition comparison by the mate of the fibre-product-pasting map on direct images [lem-weil-pbc-proetale-derived-pullback-composition], the identity comparison by the inverse-image unit formula, and the scalar/pullback and scalar-composition comparisons by their tensor-generator formulas on the entire quotient diagram, before taking a limit. More explicitly, write $\\gamma_f(x)$ for the ordinary inverse-image adjunction unit on a section at $(n,U)$. The scalar/pullback map sends $1\\otimes\\gamma_f(x)$ to $\\gamma_f(1\\otimes x)$. For $E\\xrightarrow{\\iota}L\\xrightarrow{j}M$ the scalar associator sends $c\\otimes(b\\otimes x)$ to $c\\,j(b)\\otimes x$, and identity scalar change sends $s\\otimes x$ to $sx$. The composition map is the inverse-image mate of the direct-image map induced by canonical fibre-product pasting. These formulas are natural in vertical site restrictions and horizontal quotient maps; derived comparisons are their localizations on K-flat complexes, using the universal cochain change-of-rings counits.",
+  "stmt_deps": [
+    "def-weil-l-adic-coefficient-extension",
     "def-weil-pbc-proetale-site",
-    "def-coef-ringed-sequence-site"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For integralComparisonSequenceRing_naturality, first compose the constant-section coefficient map with the sheafification unit. The sheafification adjunction identifies the composite with the constant section on the base-changed object. Apply the adjunction injectively and use naturality of the two sheafification units to prove naturality in the coefficient ring. NatTrans.ofOpSequence then assembles the quotient-level maps. Uncurrying and precomposition with the product-opposite equivalence give naturality on the whole sequence site. This step is proved in Lean.",
-   "uses": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For integralComparisonSequenceScalar_naturality, apply functorial constant sheafification to integralScalarQuotientMap_transition from [lem-weil-integral-scalar-extension-well-defined]. NatTrans.ofOpSequence assembles the scalar inclusions into a natural transformation of coefficient sequences. Uncurrying and the product-opposite equivalence give the required equality for every sequence-site arrow. This step is proved in Lean.",
-   "uses": [
-    "lem-weil-integral-scalar-extension-well-defined"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For integralComparisonSequenceDirectImage_isRightAdjoint, [lem-weil-pbc-ring-sheaves-grothendieck] gives the Grothendieck abelian structure on the source module-sheaf category in max(u,t+1). Mathlib supplies a coseparator and well-poweredness. To prove limit preservation, forget to module presheaves and evaluate on each sequence-site object. The resulting cone is obtained by evaluating the original cone on the base-changed object and restricting scalars, both limit-preserving operations. Evaluations jointly reflect limits, and the sheaf forgetful functor reflects limits. Apply Mathlib isRightAdjoint_of_preservesLimits_of_isCoseparating. This step is proved in Lean and replaces the direct Kan-extension construction for adjoint existence.",
-   "uses": [
-    "lem-weil-pbc-ring-sheaves-grothendieck"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Evaluate pullback at n. Construct the section-normalized direct-image square, and use the right coextension of vertical evaluation to show its inverse mate invertible. Constant-coefficient pro-etale pullback is exact at n. Since evaluations jointly detect monomorphisms, sequence pullback preserves monomorphisms; its left adjunction preserves cokernels. Additivity and these facts give exactness.",
-   "uses": [
-    "lem-trf-vertical-evaluation-inverse-mate",
-    "lem-pur-coefficient-pullback-exact",
-    "def-coef-ringed-sequence-site"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Construct the direct-image composition and identity comparisons from fibre-product pasting and constant-section maps. Constant-sheaf adjunction injectivity proves their coefficient compatibilities. Take inverse-image mates. Their bijectivity gives exactly the required unique normalized compositors and units.",
-   "uses": [
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Package the prescribed scalar functor with its tensor/restriction adjunction and cochain normalization. The scalar/pullback right-adjoint square is identity on sections by naturality of constant coefficient maps. Conjugate adjoint uniqueness gives the ordinary square, and the units give its tensor-generator formula. For scalar composition and identity use the proved coherent scalar-model comparisons; the normalized units and tensor Hom extensionality give uniqueness. Quotient induction proves the scalar map composition and identity equations.",
-   "uses": [
-    "lem-pur-system-scalar-coherence",
-    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-    "lem-weil-derived-scalar-extension-restriction-adjunction",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Resolve each cochain complex by a K-flat complex with flat terms. Continuous module pullback preserves its K-flatness. Both scalar counits are therefore invertible on these representatives. Apply the resolving scalar square theorem and the ordinary comparison. It supplies the required formula on all representatives; cancellation and fully faithful restriction give uniqueness from the stated K-flat formula.",
-   "uses": [
-    "lem-trf-continuous-module-pullback-kflat",
-    "lem-trf-resolving-scalar-square",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "lem-pc-kflat-resolution"
-   ],
-   "elementary": false
-  }
- ],
- "proof_deps": [
-  "def-weil-pbc-proetale-site",
-  "def-coef-ringed-sequence-site",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-integral-scalar-extension-well-defined",
-  "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-trf-vertical-evaluation-inverse-mate",
-  "lem-pur-coefficient-pullback-exact",
-  "lem-pur-system-scalar-coherence",
-  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-  "lem-weil-derived-scalar-extension-restriction-adjunction",
-  "lem-pur-derived-change-of-rings",
-  "lem-trf-continuous-module-pullback-kflat",
-  "lem-trf-resolving-scalar-square",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-pc-kflat-resolution"
- ],
- "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), completed pullback and quotient realization; with Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition. The simultaneous integral scalar/composition coherence is an extracted construction, not a verbatim assertion of either tag; blueprint prop-trf-karoubi-independence.proof.md, last sentence.; K5: all seven remaining obligations implemented using evaluation coextension, adjoint mates, scalar generators and resolving cochains, 2026-10-22."
- },
- "mathlib_match": null,
- "mathlib_searches": [
-  {
-   "tool": "leansearch",
-   "query": "strict quotient systems inverse image scalar change derived limit counit realization",
-   "results": "{\"t\": \"2026-10-18T01:18:40Z\", \"tool\": \"leansearch\", \"query\": \"strict quotient systems inverse image scalar change derived limit counit realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomRel.FactorsThroughLocalization.strictUniversalPropertyFixedTarget\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"Submodule.Quotient.restrictScalarsEquiv_symm_mk\", \"HomRel.FactorsThroughLocalization.strictUniversalPropertyFixedTarget'\", \"Module.DirectLimit.congr_symm_apply_of\", \"SMulCon.Quotient\", \"CategoryTheory.Quotient.natIsoLift_inv\", \"AddCommGroup.DirectLimit.congr_symm_apply_of\"], \"digest\": \"da9e16c940f3fbf3\"}",
-   "date": "2026-10-18",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "leanfinder",
-   "query": "Canonical inverse image and scalar tensor associator on the ringed sequence site of finite coefficient quotients",
-   "results": "{\"t\": \"2026-10-18T00:22:57Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical inverse image and scalar tensor associator on the ringed sequence site of finite coefficient quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"localCohomology.diagram\", \"PresheafOfModules.Monoidal.tensorObj\", \"PresheafOfModules.monoidalCategoryStruct\"], \"digest\": \"c68a6a00d0e498dd\"}",
-   "date": "2026-10-18",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "loogle",
-   "query": "\"pullback\", \"tensor\"",
-   "results": "{\"t\": \"2026-10-18T00:22:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\"], \"digest\": \"240d9e61f86fe5dd\"}",
-   "date": "2026-10-18",
-   "verdict": "no exact match"
-  },
-  {
-   "tool": "grep",
-   "query": "sequence.*(pullback|scalar)|tower.*counit",
-   "results": "{\"t\": \"2026-10-18T00:22:56Z\", \"tool\": \"grep\", \"query\": \"sequence.*(pullback|scalar)|tower.*counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-   "date": "2026-10-18",
-   "verdict": "no exact match"
-  }
- ],
- "created": {
-  "by": "worker",
-  "item": "lem-trf-integral-pullback-comparison-realization",
-  "date": "2026-10-18",
-  "group": "N2"
- },
- "blueprint": {
-  "is": null,
-  "from": {
-   "node": "prop-trf-karoubi-independence",
-   "place": "Canonical pullback and scalar change of whole quotient systems in the integral common-stage transport construction",
-   "via": [
-    "lem-trf-integral-pullback-comparison-realization",
-    "lem-trf-local-frobenius-transport-normalization"
-   ]
-  },
-  "same_as": []
- },
- "lean_audit": {},
- "chapter": "sec-trace-formula",
- "unit": "sk-thm-trace-transport",
- "lean": {
-  "module": "Sheaf.Paper.IntegralComparisonSequenceSystems",
-  "declaration": "WeilConjectures.integralComparisonDerivedSequencePullback",
-  "declarations": [
-   "WeilConjectures.integralComparisonSequenceBaseChange",
-   "WeilConjectures.integralComparisonSequenceBaseChange_continuous",
-   "WeilConjectures.integralComparisonSequenceBaseChangeContinuous",
-   "WeilConjectures.integralComparisonSequenceRingComponent",
-   "WeilConjectures.integralComparisonSequenceRing_naturality",
-   "WeilConjectures.integralComparisonSequenceRingMap",
-   "WeilConjectures.integralComparisonSequenceDirectImage",
-   "WeilConjectures.integralComparisonSequenceDirectImage_isRightAdjoint",
-   "WeilConjectures.integralComparisonSequenceRightAdjoint",
-   "WeilConjectures.integralComparisonSequencePullback",
-   "WeilConjectures.integralComparisonSequencePullback_exact",
-   "WeilConjectures.integralComparisonSequencePullbackAdditive",
-   "WeilConjectures.integralComparisonSequencePullbackLimits",
-   "WeilConjectures.integralComparisonSequencePullbackColimits",
-   "WeilConjectures.integralComparisonDerivedSequencePullback",
-   "WeilConjectures.integralComparisonSequenceScalarComponent",
-   "WeilConjectures.integralComparisonSequenceScalar_naturality",
-   "WeilConjectures.integralComparisonSequenceScalarMap",
-   "WeilConjectures.integralComparisonSequenceScalarModel",
-   "WeilConjectures.integralComparisonDerivedSequenceScalar",
-   "WeilConjectures.integralComparisonSequenceGenerator",
-   "WeilConjectures.integralComparisonSequenceComposition_existsUnique",
-   "WeilConjectures.integralComparisonSequenceComposition",
-   "WeilConjectures.integralComparisonSystemComposition",
-   "WeilConjectures.integralComparisonSequenceTensorSection",
-   "WeilConjectures.integralComparisonSequenceScalarPullback_existsUnique",
-   "WeilConjectures.integralComparisonSequenceScalarPullback",
-   "WeilConjectures.integralComparisonSystemScalarPullback_existsUnique",
-   "WeilConjectures.integralComparisonSystemScalarPullback",
-   "WeilConjectures.integralComparisonSequenceUnit_existsUnique",
-   "WeilConjectures.integralComparisonSystemUnit",
-   "WeilConjectures.integralComparisonSequenceScalarComposition_existsUnique",
-   "WeilConjectures.integralComparisonSequenceScalarComposition",
-   "WeilConjectures.integralComparisonSequenceUnit",
-   "WeilConjectures.integralComparisonSequenceScalarUnit_existsUnique",
-   "WeilConjectures.integralComparisonSequenceScalarUnit"
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-derived-change-of-rings",
+    "def-weil-integral-scalar-extension",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
   ],
-  "file": "lean/Sheaf/Paper/IntegralComparisonSequenceSystems.lean",
-  "statement": "def integralComparisonDerivedSequencePullback {X Y : Scheme.{t}} (f : X ⟶ Y) : coefficientSequenceDerived l E Y ⥤ coefficientSequenceDerived l E X",
-  "branch": "newtargets-dag",
-  "by": "N2",
-  "date": "2026-10-18",
-  "existing": false
- },
- "reviewed": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-00a3d7a2b",
-  "group": "N2",
-  "result": "pass",
-  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
- },
- "reviewed_lean": {
-  "date": "2026-10-18",
-  "by": "L",
-  "reviewer": "NT-stage2-cc-00a3d7a2b",
-  "group": "N2",
-  "result": "pass",
-  "note": "Read the item node, the 3 delivered modules, the 2 new definition nodes, the report and the key dependency declarations in the side clone. The node changes only in lean and in stmt_deps (+2 new nodes, per 1(A)); lean.statement is verbatim and the declarations lists match the files. Clause by clause the Lean matches the node: l prime, E,L finite over Q_l with iota, quotient levels n+1; l invertible via residue-field Invertible binders, same as constructibleIntegralPullback; recorded objects (integralDerivedPullback, integralScalarExtension, sfIntegralConstructibleCategory); eta/lambda/mu built from the derived const-lim counit with the K-injective normalization and the reduction-counit formula; c^E = eta^-1 o Rlim(c) after the realization; a = mu^-1 o lambda; displayed scalar/composition equation with correct order; associativity, both units, eqToHom transport for every finite F; E=L identity via chi and the ordinary unit; associator = chi-conjugate of the ordinary associator; system-level equations before realization; raw rationalized equation; no Tor-amplitude hypothesis. The existential D is not free: realizations are fixed by normalizations over every flat-term K-flat representative, and presentations exist by CoefficientReductionModels; Roos comparison fixed on K-injectives; Classical.choice of DerivedChangeOfRingsCochainModel is unique up to unique iso (same landed pattern). No hollow data; 17 sorries, all named theorems with source and proof docstrings. Common universe u inherited from sfIntegralConstructible; helpers keep t,u separate; the p=l+1 argument is unused. New nodes have the 5 fields and 4 searches and are cited. Line widths, docstrings and blueprint tags OK. nt_compile.py --json on all 3 modules, two runs: rc=0, no errors or warnings, 10.5/15.3/28.1 s within 60 s, reproducing the recorded times. Minor: the Second reading section is a thin self-check, compensated by the full worker mapping and this review."
- },
- "reviewed_proof": {
-  "date": "2026-10-21",
-  "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K5",
-  "result": "pass",
-  "landing": "20261021T214821-L-1860875",
-  "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
- }
+  "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), completed pullback and quotient realization; with Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition. The simultaneous integral scalar/composition coherence is an extracted construction, not a verbatim assertion of either tag; blueprint prop-trf-karoubi-independence.proof.md, last sentence."
+  },
+  "proof": [
+    {
+      "text": "For integralComparisonSequenceBaseChange_continuous, the structured-arrow category of the product base-change functor is equivalent to the product of the two structured-arrow categories. The identity and pro-etale base change are representably flat, so the product is representably flat. A covering of the sequence site is detected by its vertical slice. Pro-etale base change preserves that covering, and its image is contained in the vertical slice of the pushed-forward sieve. Cover preservation and representable flatness imply continuity. This step is proved in Lean.",
+      "uses": [
+        "def-weil-pbc-proetale-site",
+        "def-coef-ringed-sequence-site"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For integralComparisonSequenceRing_naturality, first compose the constant-section coefficient map with the sheafification unit. The sheafification adjunction identifies the composite with the constant section on the base-changed object. Apply the adjunction injectively and use naturality of the two sheafification units to prove naturality in the coefficient ring. NatTrans.ofOpSequence then assembles the quotient-level maps. Uncurrying and precomposition with the product-opposite equivalence give naturality on the whole sequence site. This step is proved in Lean.",
+      "uses": [
+        "def-weil-pbc-proetale-site",
+        "def-weil-proetale-inverse-image"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For integralComparisonSequenceScalar_naturality, apply functorial constant sheafification to integralScalarQuotientMap_transition from [lem-weil-integral-scalar-extension-well-defined]. NatTrans.ofOpSequence assembles the scalar inclusions into a natural transformation of coefficient sequences. Uncurrying and the product-opposite equivalence give the required equality for every sequence-site arrow. This step is proved in Lean.",
+      "uses": [
+        "lem-weil-integral-scalar-extension-well-defined"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "For integralComparisonSequenceDirectImage_isRightAdjoint, [lem-weil-pbc-ring-sheaves-grothendieck] gives the Grothendieck abelian structure on the source module-sheaf category in max(u,t+1). Mathlib supplies a coseparator and well-poweredness. To prove limit preservation, forget to module presheaves and evaluate on each sequence-site object. The resulting cone is obtained by evaluating the original cone on the base-changed object and restricting scalars, both limit-preserving operations. Evaluations jointly reflect limits, and the sheaf forgetful functor reflects limits. Apply Mathlib isRightAdjoint_of_preservesLimits_of_isCoseparating. This step is proved in Lean and replaces the direct Kan-extension construction for adjoint existence.",
+      "uses": [
+        "lem-weil-pbc-ring-sheaves-grothendieck"
+      ],
+      "elementary": false
+    },
+    {
+      "text": "The seven remaining named obligations retain their original docstring arguments: prove exactness by the constant-coefficient inverse image and levelwise exactness; construct composition and unit maps by fibre-product pasting and adjunction mates; construct scalar associators and unit maps on balanced tensor generators and sheafify; localize the scalar/pullback associator on K-flat complexes using the universal cochain scalar counits. These obligations remain sorry in this partial delivery, not asserted proved.",
+      "uses": [
+        "lem-coef-derived-system-evaluation-calculus",
+        "lem-pur-derived-change-of-rings",
+        "lem-weil-pbc-proetale-derived-pullback-composition"
+      ],
+      "elementary": false
+    }
+  ],
+  "proof_deps": [
+    "def-weil-pbc-proetale-site",
+    "def-coef-ringed-sequence-site",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+  ],
+  "proof_origin": {
+    "by": "agent",
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), completed pullback and quotient realization; with Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition. The simultaneous integral scalar/composition coherence is an extracted construction, not a verbatim assertion of either tag; blueprint prop-trf-karoubi-independence.proof.md, last sentence.; R7 partial proof implementation, 2026-10-19: four completed obligations, with adjoint existence shortened using the Mathlib special adjoint functor theorem; seven original obligations remain."
+  },
+  "mathlib_match": null,
+  "mathlib_searches": [
+    {
+      "tool": "leansearch",
+      "query": "strict quotient systems inverse image scalar change derived limit counit realization",
+      "results": "{\"t\": \"2026-10-18T01:18:40Z\", \"tool\": \"leansearch\", \"query\": \"strict quotient systems inverse image scalar change derived limit counit realization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomRel.FactorsThroughLocalization.strictUniversalPropertyFixedTarget\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"Submodule.Quotient.restrictScalarsEquiv_symm_mk\", \"HomRel.FactorsThroughLocalization.strictUniversalPropertyFixedTarget'\", \"Module.DirectLimit.congr_symm_apply_of\", \"SMulCon.Quotient\", \"CategoryTheory.Quotient.natIsoLift_inv\", \"AddCommGroup.DirectLimit.congr_symm_apply_of\"], \"digest\": \"da9e16c940f3fbf3\"}",
+      "date": "2026-10-18",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "leanfinder",
+      "query": "Canonical inverse image and scalar tensor associator on the ringed sequence site of finite coefficient quotients",
+      "results": "{\"t\": \"2026-10-18T00:22:57Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical inverse image and scalar tensor associator on the ringed sequence site of finite coefficient quotients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"LightCondensed.instMonoidalCategoryLightCondMod\", \"LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"localCohomology.diagram\", \"PresheafOfModules.Monoidal.tensorObj\", \"PresheafOfModules.monoidalCategoryStruct\"], \"digest\": \"c68a6a00d0e498dd\"}",
+      "date": "2026-10-18",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "loogle",
+      "query": "\"pullback\", \"tensor\"",
+      "results": "{\"t\": \"2026-10-18T00:22:48Z\", \"tool\": \"loogle\", \"query\": \"\\\"pullback\\\", \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Pullback.Triplet.tensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.instNontrivialCarrierTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInl\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorInr\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.SpecTensorTo\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr\", \"AlgebraicGeometry.Scheme.Pullback.ofPointTensor\", \"AlgebraicGeometry.Scheme.Pullback.Triplet.tensorCongr_symm\"], \"digest\": \"240d9e61f86fe5dd\"}",
+      "date": "2026-10-18",
+      "verdict": "no exact match"
+    },
+    {
+      "tool": "grep",
+      "query": "sequence.*(pullback|scalar)|tower.*counit",
+      "results": "{\"t\": \"2026-10-18T00:22:56Z\", \"tool\": \"grep\", \"query\": \"sequence.*(pullback|scalar)|tower.*counit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+      "date": "2026-10-18",
+      "verdict": "no exact match"
+    }
+  ],
+  "created": {
+    "by": "worker",
+    "item": "lem-trf-integral-pullback-comparison-realization",
+    "date": "2026-10-18",
+    "group": "N2"
+  },
+  "blueprint": {
+    "is": null,
+    "from": {
+      "node": "prop-trf-karoubi-independence",
+      "place": "Canonical pullback and scalar change of whole quotient systems in the integral common-stage transport construction",
+      "via": [
+        "lem-trf-integral-pullback-comparison-realization",
+        "lem-trf-local-frobenius-transport-normalization"
+      ]
+    },
+    "same_as": []
+  },
+  "lean_audit": {},
+  "chapter": "sec-trace-formula",
+  "unit": "sk-thm-trace-transport",
+  "lean": {
+    "module": "Sheaf.Paper.IntegralComparisonSequenceSystems",
+    "declaration": "WeilConjectures.integralComparisonDerivedSequencePullback",
+    "declarations": [
+      "WeilConjectures.integralComparisonSequenceBaseChange",
+      "WeilConjectures.integralComparisonSequenceBaseChange_continuous",
+      "WeilConjectures.integralComparisonSequenceBaseChangeContinuous",
+      "WeilConjectures.integralComparisonSequenceRingComponent",
+      "WeilConjectures.integralComparisonSequenceRing_naturality",
+      "WeilConjectures.integralComparisonSequenceRingMap",
+      "WeilConjectures.integralComparisonSequenceDirectImage",
+      "WeilConjectures.integralComparisonSequenceDirectImage_isRightAdjoint",
+      "WeilConjectures.integralComparisonSequenceRightAdjoint",
+      "WeilConjectures.integralComparisonSequencePullback",
+      "WeilConjectures.integralComparisonSequencePullback_exact",
+      "WeilConjectures.integralComparisonSequencePullbackAdditive",
+      "WeilConjectures.integralComparisonSequencePullbackLimits",
+      "WeilConjectures.integralComparisonSequencePullbackColimits",
+      "WeilConjectures.integralComparisonDerivedSequencePullback",
+      "WeilConjectures.integralComparisonSequenceScalarComponent",
+      "WeilConjectures.integralComparisonSequenceScalar_naturality",
+      "WeilConjectures.integralComparisonSequenceScalarMap",
+      "WeilConjectures.integralComparisonSequenceScalarModel",
+      "WeilConjectures.integralComparisonDerivedSequenceScalar",
+      "WeilConjectures.integralComparisonSequenceGenerator",
+      "WeilConjectures.integralComparisonSequenceComposition_existsUnique",
+      "WeilConjectures.integralComparisonSequenceComposition",
+      "WeilConjectures.integralComparisonSystemComposition",
+      "WeilConjectures.integralComparisonSequenceTensorSection",
+      "WeilConjectures.integralComparisonSequenceScalarPullback_existsUnique",
+      "WeilConjectures.integralComparisonSequenceScalarPullback",
+      "WeilConjectures.integralComparisonSystemScalarPullback_existsUnique",
+      "WeilConjectures.integralComparisonSystemScalarPullback",
+      "WeilConjectures.integralComparisonSequenceUnit_existsUnique",
+      "WeilConjectures.integralComparisonSystemUnit",
+      "WeilConjectures.integralComparisonSequenceScalarComposition_existsUnique",
+      "WeilConjectures.integralComparisonSequenceScalarComposition",
+      "WeilConjectures.integralComparisonSequenceUnit",
+      "WeilConjectures.integralComparisonSequenceScalarUnit_existsUnique",
+      "WeilConjectures.integralComparisonSequenceScalarUnit"
+    ],
+    "file": "lean/Sheaf/Paper/IntegralComparisonSequenceSystems.lean",
+    "statement": "def integralComparisonDerivedSequencePullback {X Y : Scheme.{t}} (f : X ⟶ Y) : coefficientSequenceDerived l E Y ⥤ coefficientSequenceDerived l E X",
+    "branch": "newtargets-dag",
+    "by": "N2",
+    "date": "2026-10-18",
+    "existing": false
+  },
+  "reviewed": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-00a3d7a2b",
+    "group": "N2",
+    "result": "pass",
+    "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+  },
+  "reviewed_lean": {
+    "date": "2026-10-18",
+    "by": "L",
+    "reviewer": "NT-stage2-cc-00a3d7a2b",
+    "group": "N2",
+    "result": "pass",
+    "note": "Read the item node, the 3 delivered modules, the 2 new definition nodes, the report and the key dependency declarations in the side clone. The node changes only in lean and in stmt_deps (+2 new nodes, per 1(A)); lean.statement is verbatim and the declarations lists match the files. Clause by clause the Lean matches the node: l prime, E,L finite over Q_l with iota, quotient levels n+1; l invertible via residue-field Invertible binders, same as constructibleIntegralPullback; recorded objects (integralDerivedPullback, integralScalarExtension, sfIntegralConstructibleCategory); eta/lambda/mu built from the derived const-lim counit with the K-injective normalization and the reduction-counit formula; c^E = eta^-1 o Rlim(c) after the realization; a = mu^-1 o lambda; displayed scalar/composition equation with correct order; associativity, both units, eqToHom transport for every finite F; E=L identity via chi and the ordinary unit; associator = chi-conjugate of the ordinary associator; system-level equations before realization; raw rationalized equation; no Tor-amplitude hypothesis. The existential D is not free: realizations are fixed by normalizations over every flat-term K-flat representative, and presentations exist by CoefficientReductionModels; Roos comparison fixed on K-injectives; Classical.choice of DerivedChangeOfRingsCochainModel is unique up to unique iso (same landed pattern). No hollow data; 17 sorries, all named theorems with source and proof docstrings. Common universe u inherited from sfIntegralConstructible; helpers keep t,u separate; the p=l+1 argument is unused. New nodes have the 5 fields and 4 searches and are cited. Line widths, docstrings and blueprint tags OK. nt_compile.py --json on all 3 modules, two runs: rc=0, no errors or warnings, 10.5/15.3/28.1 s within 60 s, reproducing the recorded times. Minor: the Second reading section is a thin self-check, compensated by the full worker mapping and this review."
+  },
+  "reviewed_proof": {
+    "date": "2026-10-19",
+    "by": "L",
+    "reviewer": "COMPILER",
+    "group": "R7",
+    "result": "pass",
+    "landing": "20261019T005416-L-2765567",
+    "kind": "proof",
+    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  }
 }
