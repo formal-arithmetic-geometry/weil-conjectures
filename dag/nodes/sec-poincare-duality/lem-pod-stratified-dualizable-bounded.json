@@ -20,9 +20,119 @@
   "def-weil-constructible-subset",
   "def-sfb-monoidal-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-fix-constructible-open-closed-refinement] to the given finite constructible partition of $Y$. This gives a finite rooted binary tree, with root $Y$, every vertex qcqs, and each internal vertex split into a quasi-compact open subscheme and its closed complement. Each nonempty leaf $T$ has an actual morphism to one original stratum, compatible with its map to $Y$. By [lem-zl-condensed-lisse-proetale-locality], pullback along that morphism preserves the given dual pair. Thus $K_T$ is dualizable on each nonempty leaf. The restriction identifications use the inverse-image coefficient isomorphisms, not an extension of scalars to a different coefficient ring. Empty leaves have the zero module category and may be discarded.",
+   "uses": [
+    "lem-fix-constructible-open-closed-refinement",
+    "lem-zl-condensed-lisse-proetale-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Definition 3.3 and Corollary 4.11: finite-stratum reduction, made into a scheme-theoretic open/closed refinement tree"
+   }
+  },
+  {
+   "text": "Fix a nonempty leaf $T$. It is quasi-compact, so [det-pe-hypercover-single-cover], applied to the final object of $T_{\\mathrm{proet}}$, supplies one covering map $u:W=\\operatorname{Spec}D\\to T$ with $D$ w-contractible. By [lem-zl-condensed-lisse-proetale-locality], $K_W=u^*K_T$ is dualizable. Put $A=\\Gamma(W,B_W)$. Apply the equivalence of [lem-zl-condensed-wcontractible-lisse-evaluation]: there is a bounded complex $P^\\bullet$ of finitely generated projective $A$-modules and an isomorphism $K_W\\simeq F_W(P^\\bullet)$, where $F_W(Q)=B_W\\otimes^L_{\\underline A}\\underline Q$ is its exact symmetric monoidal scalar realization. Choose integers $a_T\\le b_T$ outside which $P^\\bullet$ vanishes (use $[0,0]$ for a zero model).",
+   "uses": [
+    "det-pe-hypercover-single-cover",
+    "lem-zl-condensed-lisse-proetale-locality",
+    "lem-zl-condensed-wcontractible-lisse-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.10 proof, reduction to a w-contractible qcqs scheme; Lemma 4.1(2)"
+   }
+  },
+  {
+   "text": "For a term $P^r$, finite generation [def-weil-finitely-generated-module] gives a surjection $A^{m_r}\\twoheadrightarrow P^r$. Projectivity [def-weil-pbc-projective-module] lifts $\\mathrm{id}_{P^r}$ through this surjection, so $P^r[0]$ is a retract of $A^{m_r}[0]$. The exact symmetric monoidal $F_W$ of [lem-zl-condensed-wcontractible-lisse-evaluation] is additive, preserves this retraction and sends $A[0]$ to $B_W[0]$. Hence $F_W(P^r[0])$ is a retract of $B_W^{m_r}[0]$. Applying the cohomology functor [def-weil-abstract-derived-category] to its two splitting maps makes its cohomology in degree $q\\ne0$ a retract of zero; its identity is therefore zero. Thus each realized term is concentrated in degree zero.",
+   "uses": [
+    "def-weil-finitely-generated-module",
+    "def-weil-pbc-projective-module",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.10 proof, bounded finite-projective model; elementary explanation for its realized terms"
+   }
+  },
+  {
+   "text": "Write $P_{\\ge r}$ for the brutal tail retaining the terms of $P$ in degrees at least $r$. For $a_T\\le r\\le b_T$ there is a degreewise split short exact sequence of complexes\n$$0\\to P_{\\ge r+1}\\to P_{\\ge r}\\to P^r[0][-r]\\to0.$$\nBy [lem-weil-pbc-complex-ses-triangle] it gives a distinguished triangle. The exact functor $F_W$ of [lem-zl-condensed-wcontractible-lisse-evaluation] preserves this triangle and its shifts. Descending induction on $r$ now proves that $F_W(P_{\\ge r})$ has cohomology in $[r,b_T]$: the starting tail $P_{\\ge b_T+1}$ is zero, the realized quotient is concentrated in degree $r$ by Step 3, and for $q<r$ or $q>b_T$ the two outer terms in\n$$H^q(F_W(P_{\\ge r+1}))\\to H^q(F_W(P_{\\ge r}))\\to H^q(F_W(P^r[0])[-r])$$\nvanish. Exactness is [lem-sf-derived-homology-long-exact]. At $r=a_T$ this proves $H^q(K_W)=0$ outside $[a_T,b_T]$. This uses preservation of triangles and finite free retracts; it does not assert t-exactness of scalar realization on arbitrary complexes.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "lem-sf-derived-homology-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.10 proof, bounded-projective amplitude argument, with the finite-tail induction written explicitly"
+   }
+  },
+  {
+   "text": "For any scheme morphism $f:S\\to T$, [sk-def-sfb-coefficient-morphisms] identifies $f^{-1}B_T$ with $B_S$. Thus its module inverse image is geometric inverse image with transported scalars, which is exact by [lem-trf-geometric-inverse-image-exact]. Applying it termwise computes derived restriction, and [lem-weil-pbc-exact-functor-complex-cohomology] gives $f^*H^q(L)\\cong H^q(f^*L)$ for every complex $L$. In particular, for the singleton cover $u:W\\to T$ in Step 2, $u^*H^q(K_T)=0$ outside $[a_T,b_T]$. Apply [lem-zl-condensed-cover-restriction-conservative] to the degree-zero derived object $H^q(K_T)[0]$: its restriction is zero, hence it is zero. Therefore $H^q(K_T)=0$ outside that interval on every nonempty leaf.",
+   "uses": [
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-zl-condensed-cover-restriction-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Lemma 4.10 proof: pro-etale restriction preserves the t-structure and is conservative; Stacks Tags 04JC and 010N for the exact-functor calculation"
+   }
+  },
+  {
+   "text": "If there are nonempty leaves, set $a=\\min_T a_T$ and $b=\\max_T b_T$; finiteness of the tree gives integers $a\\le b$. If there are none, put $a=b=0$. Fix $q<a$ or $q>b$. On every leaf the restriction of $H^q(K)$ is zero, by Step 5 and its cohomology/restriction identification (and trivially on an empty leaf). Induct upward through the finite tree. At an internal vertex $V$ with closed child $i:Z\\hookrightarrow V$ and quasi-compact open child $j:U\\hookrightarrow V$, the sheaf $H^q(K_V)$ has inverse images $H^q(K_Z)=0$ and $H^q(K_U)=0$. All the hypotheses of [lem-exc-open-closed-detection] hold by Step 1, so $H^q(K_V)=0$. At the root this gives $H^q(K)=0$. The empty-root case is also covered. This proves the asserted uniform two-sided cohomological boundedness.",
+   "uses": [
+    "lem-exc-open-closed-detection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.11 proof, conservativity of open and closed restriction; finite-tree induction makes the finite-stratum induction explicit"
+   }
+  },
+  {
+   "text": "Take any cochain representative $E^\\bullet$ of $K$ [def-weil-abstract-derived-category]. Define $C^q=0$ for $q<a$, $C^a=\\operatorname{coker}(d_E^{a-1})$, and $C^q=E^q$ for $q>a$, with the differential out of degree $a$ induced by $d_E^a$. This is the good lower truncation [def-kun-truncations]. The quotient map $E\\to C$ is a chain map. Above $a$ it preserves cohomology, in degree $a$ its cohomology is $\\ker(d_E^a)/\\operatorname{im}(d_E^{a-1})$, and below $a$ both cohomologies vanish by Step 6. It is therefore a quasi-isomorphism and represents an isomorphism in $D(B)$. The resulting representative $C^\\bullet$ is zero in every degree below $a$, as required.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-kun-truncations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Corollary 4.11, bounded-below representative consequence by good truncation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-zl-condensed-lisse-proetale-locality",
+  "det-pe-hypercover-single-cover",
+  "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "def-weil-finitely-generated-module",
+  "def-weil-pbc-projective-module",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "lem-exc-open-closed-detection",
+  "def-kun-truncations"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Definition 3.3, Lemma 4.1(2), Lemma 4.10 and Corollary 4.11; finite refinement, bounded-tail induction and good truncation written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -110,10 +220,100 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: hits concern underived condensed modules, existence/exactness of colimits, abstract finite presentability, or definitions of derived cohomological bounds; none asserts this geometric stratified-dualizability theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex of condensed sheaves dualizable on finitely many constructible strata of a quasi compact quasi separated scheme has bounded cohomology",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "LightCondensed.instIsGrothendieckAbelianLightCondMod",
+     "CondensedMod.ofSheafCompHaus",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.isLE_iff",
+     "DerivedCategory.isGE_iff",
+     "DerivedCategory.isLE_Q_obj_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived bounds or condensed module constructions; no stratified-dualizability boundedness theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex dualizable on a finite constructible stratification of a quasi compact scheme has bounded cohomology",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "ContinuousCohomology.MultiInd.complex",
+     "CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat",
+     "instHasFiniteColimitsCondensedOfHasWeakSheafifyCompHausCoherentTopology",
+     "Module.dual_finite",
+     "HomologicalComplex.instHasFiniteLimits",
+     "AlgebraicGeometry.Scheme.quasiCompactCover",
+     "CochainComplex.HomComplex.CohomologyClass.mk"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived bounds or condensed module constructions; no stratified-dualizability boundedness theorem. The bounded-representative hit assumes bounds already established, and supplies only the elementary final consequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.IsGE, DerivedCategory.IsLE",
+   "results": {
+    "ok": true,
+    "n_hits": 2,
+    "top": [
+     "DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived bounds or condensed module constructions; no stratified-dualizability boundedness theorem. The bounded-representative hit assumes bounds already established, and supplies only the elementary final consequence."
+  },
+  {
+   "tool": "grep",
+   "query": "dualiz.*[Bb]ounded|[Bb]ounded.*dualiz|stratif.*dualiz",
+   "results": {
+    "ok": true,
+    "n_hits": 0,
+    "top": [],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived bounds or condensed module constructions; no stratified-dualizability boundedness theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Dualizable objects in the derived category of sheaves over a condensed coefficient ring are cohomologically bounded on a quasi compact scheme",
+   "results": {
+    "ok": true,
+    "n_hits": 8,
+    "top": [
+     "DerivedCategory.IsGE",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.isLE_Q_obj_iff",
+     "DerivedCategory.IsLE",
+     "DerivedCategory.isLE_iff",
+     "DerivedCategory.isGE_iff"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived bounds or condensed module constructions; no stratified-dualizability boundedness theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pod-condensed-localization-hom",
@@ -132,5 +332,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pod-stratified-dualizable-bounded",
+  "worker": "stage1",
+  "summary": "Read HRS Definition 3.3, Lemma 4.1, Lemma 4.10 and Corollary 4.11. Reused existing general condensed local evaluation, singleton cover, finite open/closed refinement, exact inverse image and zero-detection nodes; wrote the finite-projective-retract and bounded-tail argument explicitly. The original statement and hypotheses are unchanged. No new nodes, no Lean edits or compilation.",
+  "blueprint": "Serves sk-def-perfect, main-20261015 _section.md final equivalence on local finite-projective models, through lem-pod-condensed-localization-hom: this is the cohomological boundedness input for HRS Lemma 5.3. There is no unit proof step to replace. The item is not the unit key node.",
+  "tool_uses": [
+   {
+    "node": "lem-fix-constructible-open-closed-refinement",
+    "why": "Generic qcqs scheme-theoretic refinement of a finite constructible partition; gives actual factorization maps and qcqs leaves without a Noetherian hypothesis."
+   },
+   {
+    "node": "lem-zl-condensed-lisse-proetale-locality",
+    "why": "Generic preservation of dual pairs under pullback for arbitrary condensed coefficients, used on refinement leaves and the singleton cover."
+   },
+   {
+    "node": "det-pe-hypercover-single-cover",
+    "why": "Generic single w-contractible affine covering of a quasi-compact pro-etale site object; no hypercover theorem is used."
+   },
+   {
+    "node": "lem-zl-condensed-wcontractible-lisse-evaluation",
+    "why": "HRS Lemma 4.1 equivalence of dualizable sheaves and perfect complexes over the actual section ring, valid on arbitrary w-contractible affines; no purity theorem is used."
+   },
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic exactness of inverse image with unchanged transported coefficient ring, needed to commute restriction with cohomology."
+   },
+   {
+    "node": "lem-zl-condensed-cover-restriction-conservative",
+    "why": "Generic sheaf-descent zero detection on a covering, applied only to degree-zero cohomology sheaves."
+   },
+   {
+    "node": "lem-exc-open-closed-detection",
+    "why": "Generic pro-etale module-sheaf zero detection on a closed subset and its quasi-compact open complement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-fix-constructible-open-closed-refinement",
+  "lem-zl-condensed-lisse-proetale-locality",
+  "det-pe-hypercover-single-cover",
+  "lem-zl-condensed-wcontractible-lisse-evaluation",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "lem-exc-open-closed-detection"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-83cca4ab1",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-83cca4ab1 (reviewer sub-agent of L); spot-checked: I read the item, all 7 steps and every cited statement in full; there are no new nodes. The statement is unchanged and matches HRS Cor. 4.11 under Def. 3.3 (qcqs scheme, arbitrary commutative condensed Λ, a finite constructible locally closed stratification with dualizable restrictions); the representative clause follows by good truncation (def-kun-truncations, Step 7). Step 1: lem-fix-constructible-open-closed-refinement gives the binary tree with qc open and closed children, qcqs vertices and actual leaf→stratum maps; lisse-proetale-locality preserves dual pairs under any pullback. Step 2: det-pe-hypercover-single-cover gives one w-contractible Spec D cover of the qc leaf; wcontractible-lisse-evaluation gives Perf(A)≃D_lis via the exact F_W. Steps 3–4 bound the amplitude through finite projective retracts and brutal-tail triangles (complex-ses-triangle, derived-homology-long-exact), with the correct orientation. This avoids the non-t-exactness of HRS Ex. 4.2. Step 5: the coefficient iso α plus exactness of the inverse image (trf-geometric-inverse-image-exact) commute restriction with H^q; cover-restriction-conservative is applied to H^q[0], and its hypotheses hold. Step 6: finite upward tree induction with lem-exc-open-closed-detection, whose hypotheses all hold; it silently uses the composite-pullback isomorphism, which I accept as elementary pseudo-functoriality. Other checks: no cycle (closure of 1191 nodes); no SGA; not superseded (unsplit on live and side-live); no repair note; not in the dropped list; no duplicate found by rg -L for HRS 4.10/4.11 or dualizable+bounded. The 7 declared tool_uses are generic and accepted. Edge cases checked: Y empty, zero ring, K=0, one stratum, single-term models."
  }
 }
