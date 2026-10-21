@@ -1573,7 +1573,7 @@ def conflict_fallback(b, active, suspects, chosen, per, messages, repair_jobs, c
     log(f"batch {b['id']}: conflict fallback done in {time.time() - t0:.1f} s; the next build verifies")
 
 
-def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool = True) -> bool:
+def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool = True, own_only: bool = False) -> bool:
     """Merge queue: a failure no delivery of the batch explains, while landings of other writers (U, PI, PR, the
     maintainer, stage 2) that the build names as possible causes were in it: drop those from the candidate (hard
     restore, one commit) and let the next build verify. True when something was dropped."""
@@ -1582,7 +1582,7 @@ def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool =
     # only a change that can break the failing module: one of its own modules fails, or it changed an interface
     ids = sorted({s['id'] for s in last.get('suspects') or [] if s['id'] in open_ids and s['id'] not in batch_ids
                   and set(s.get('fails') or []) & set(failures)
-                  and (s.get('kind') == 'interface' or set(s.get('fails') or []) & set(s.get('modules') or []))})
+                  and ((not own_only and s.get('kind') == 'interface') or set(s.get('fails') or []) & set(s.get('modules') or []))})
     if not ids:
         return False
     # 2026-10-21 (the human): the importers of a dropped module go out with it. Lake does not attempt the importers of a
@@ -1878,6 +1878,12 @@ def step(cache: dict, log) -> str:
         log(f"batch {b['id']}: RED build during the upstream sync: left to the sync's quarantine (local/UPSYNC_RUNNING)")
         return "waiting"
     log(f"batch {b['id']}: RED build (round {b['round'] + 1}); failing {' '.join((last.get('failing') or [])[:8])}")
+    # 2026-10-21 (the human): a landing of another writer whose OWN module fails (a restore from quarantine, a
+    # maintainer landing) goes out at once, with the importers of its removed files; it was handed to the triage agent
+    # as one of "several possible causes" and never taken out (the batch's execute() only returns batch deliveries), so
+    # the same module failed build after build (ConstructibleExtContinuityStratum, SheafExtCoherent, 20:11-20:34).
+    if ld.merge_queue() and drop_other_writers(b, last, list(last.get('failing') or []), log, persist=False, own_only=True):
+        return "returned"
     b["handled"].append(last.get("time"))
     if last.get("source_fingerprint"):
         b.setdefault("handled_sources", []).append(last["source_fingerprint"])
