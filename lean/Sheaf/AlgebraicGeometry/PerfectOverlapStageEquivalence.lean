@@ -8,6 +8,7 @@ module
 public import WeilConjectures.AlgebraicGeometry.PerfectOverlapStageEquivalence
 public import WeilConjectures.AlgebraicGeometry.SingleComplexOpenRestrictionData
 import all WeilConjectures.AlgebraicGeometry.OpenPinnedSourceCounitTriangle
+import all WeilConjectures.AlgebraicGeometry.PerfectHomTransport
 
 /-! # Compatibility API for the canonical overlap equivalences
 
@@ -26,6 +27,7 @@ namespace AlgebraicGeometry
 -- Reuse the source library's cached canonical abelian structures.
 attribute [local instance 2000] openComparisonModuleAbelian
   openComparisonOverModuleAbelian
+attribute [local instance 3000] Abelian.toPreadditive
 attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
 attribute [local implicit_reducible] DerivedCategory
   Functor.mapHomologicalComplex HomotopyCategory Functor.mapHomotopyCategory
@@ -157,7 +159,8 @@ private theorem overRestrictionIso_comp (X : Scheme.{u})
     sections_overFunctorMap, sections_restrictFunctor_map,
     sections_overFunctorEquiv, sections_restrictFunctorComp_inv,
     sections_restrictFunctorCongr_hom]
-  simp only [Scheme.Modules.overMapCompOverEquiv, SheafOfModules.pushforwardCongr₂,
+  unfold Scheme.Modules.overMapCompOverEquiv
+  simp only [SheafOfModules.pushforwardCongr₂,
     Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app,
     SheafOfModules.pushforwardNatIso_hom, sections_map_comp,
     sections_pushforwardComp_hom, sections_pushforwardComp_inv,
@@ -175,8 +178,23 @@ private theorem overRestrictionIso_comp (X : Scheme.{u})
     PresheafOfModules.restrictScalarsObj, PresheafOfModules.presheaf,
     ModuleCat.restrictScalars, ModuleCat.RestrictScalars.obj',
     ModuleCat.hasForgetToAddCommGroup, CategoryTheory.evaluation]
-  exact identityTransportCycle (C := Ab.{u}) _ _ _
+  -- The normalized goal has three equality transports. Supply their proofs directly,
+  -- avoiding repeated inference of the intervening sheaf-section objects.
+  run_tac Lean.Elab.Tactic.withMainContext do
+    let goal ← Lean.Elab.Tactic.getMainGoal
+    let lhs := (← Lean.instantiateMVars (← goal.getType)).getAppArgs[1]!
+    let left (e : Lean.Expr) := e.consumeMData.appFn!.appArg!
+    let right (e : Lean.Expr) := e.consumeMData.appArg!
+    let h₁ := (right (left lhs)).appArg!
+    let h₂ := (left (right (right lhs))).appArg!
+    let h₃ := (right (right (right lhs))).appArg!
+    goal.assign (← Lean.Meta.mkAppM ``identityTransportCycle #[h₁, h₂, h₃])
+    Lean.Elab.Tactic.replaceMainGoal []
 end
+
+-- Subsequent coherence arguments use the isomorphisms through their categorical API.
+attribute [local irreducible] Scheme.Modules.overEquiv
+  Scheme.Modules.overMapCompOverEquiv Scheme.Modules.overFunctorEquiv
 
 @[simp] private theorem restrict_map_app {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsOpenImmersion f] {M N : Y.Modules} (a : M ⟶ N) (V : X.Opens) :
@@ -207,6 +225,8 @@ private noncomputable def tensorRestrictIso {X Y : Scheme.{u}} (f : X ⟶ Y)
       Scheme.Modules.restrictFunctor f :=
   (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
     (Scheme.Modules.restrictAdjunction f)
+
+attribute [local irreducible] tensorRestrictIso
 
 private theorem tensorRestrictIso_conjugate {X Y : Scheme.{u}} (f : X ⟶ Y)
     [IsOpenImmersion f] :
@@ -252,6 +272,7 @@ private theorem tensorRestrictIso_original {X Y : Scheme.{u}} (f : X ⟶ Y)
     (Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction f)).leftAdjointUniq
       (Scheme.Modules.pullbackPushforwardAdjunction f) ≪≫
         (Scheme.Modules.restrictFunctorIsoPullback f).symm = tensorRestrictIso f := by
+  unfold tensorRestrictIso
   apply Iso.ext
   exact Adjunction.leftAdjointUniq_trans _ _ _
 
@@ -309,6 +330,8 @@ private noncomputable def nestedRestrictionIso (X : Scheme.{u})
     Functor.isoWhiskerRight (Scheme.Modules.overEquiv U).counitIso _ ≪≫
     Functor.leftUnitor _
 
+attribute [local irreducible] nestedRestrictionIso
+
 private theorem nestedComparisonAlgebra {C : Type*} [Category* C]
     {A B D E F G H : C} (a : A ⟶ B) (b : B ⟶ D) (c : D ⟶ E)
     (d : E ⟶ F) (l : A ⟶ G) (m : G ⟶ D) (n : G ⟶ H) (o : H ⟶ F)
@@ -325,6 +348,7 @@ private theorem nestedRestrictionIso_comp (X : Scheme.{u})
       (Scheme.Modules.restrictFunctorComp (X.homOfLE (leOfHom i)) U.ι).symm ≪≫
       Scheme.Modules.restrictFunctorCongr (Scheme.homOfLE_ι X (leOfHom i)) =
     schemeOpenRestrictionCompIso X i ≪≫ Scheme.Modules.overFunctorEquiv W := by
+  dsimp only [Scheme.Modules, Scheme.Modules.instCategory, Scheme.ringCatSheaf] at *
   apply Iso.ext
   apply NatTrans.ext
   funext M
@@ -367,6 +391,8 @@ private noncomputable def nestedTensorOpenIso (X : Scheme.{u})
         (Scheme.Modules.restrictFunctorIsoPullback f).symm
   exact (nestedRestrictionIso X i ≪≫ η.symm).symm
 
+attribute [local irreducible] nestedTensorOpenIso
+
 private theorem isoRearrange {C : Type*} [Category* C]
     {A B D E F : C} (a : A ≅ B) (b : B ≅ D) (c : D ≅ E)
     (e : A ≅ F) (d : F ≅ E) (h : a ≪≫ b ≪≫ c = e ≪≫ d) :
@@ -404,7 +430,7 @@ private theorem nestedTensorCompatibility (X : Scheme.{u}) {W U : X.Opens} (i : 
     rw [← Iso.trans_assoc, tensorRestrictIso_original]
   have hj : nestedTensorOpenIso X i = tensorRestrictIso j ≪≫
       (nestedRestrictionIso X i).symm := by
-    dsimp only [nestedTensorOpenIso]
+    unfold nestedTensorOpenIso
     rw [Iso.trans_symm, Iso.symm_symm_eq, tensorRestrictIso_original]
   rw [← hu, ← hw, ← hj] at hh
   exact isoRearrange (Functor.isoWhiskerRight (openPinnedTensorOpenIso X U) _)
@@ -437,7 +463,7 @@ private theorem homotopyNestedComparison
       (Functor.mapHomotopyCategoryCompIso d (.up ℤ)).hom.app P ≫
         (NatTrans.mapHomotopyCategory b.hom (.up ℤ)).app P =
       (Functor.mapHomotopyCategoryCompIso a (.up ℤ)).hom.app P := by
-  obtain ⟨L, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+  let L := P.as
   change (HomotopyCategory.quotient E (.up ℤ)).map
       ((NatTrans.mapHomologicalComplex e.hom (.up ℤ)).app
         ((R.mapHomologicalComplex (.up ℤ)).obj L)) ≫
@@ -475,7 +501,7 @@ private theorem derivedCompositionFactor
   have ht : (Functor.mapHomotopyCategoryCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app P ≫
       (NatTrans.mapHomotopyCategory s.hom (.up ℤ)).app P =
       (Functor.mapHomotopyCategoryCompIso s (.up ℤ)).hom.app P := by
-    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective P
+    let K := P.as
     change (HomotopyCategory.quotient E (.up ℤ)).map
         ((Functor.mapHomologicalComplexCompIso (Iso.refl (F ⋙ G)) (.up ℤ)).hom.app K) ≫
       (HomotopyCategory.quotient E (.up ℤ)).map
@@ -485,8 +511,11 @@ private theorem derivedCompositionFactor
     rw [← Functor.map_comp]
     congr 1
     ext n
-    simp [Functor.mapHomologicalComplexCompIso, NatIso.mapHomologicalComplex,
-      NatTrans.mapHomologicalComplex]
+    simp only [HomologicalComplex.comp_f,
+      Functor.mapHomologicalComplexCompIso_hom_app_f,
+      NatTrans.mapHomologicalComplex_app_f, Functor.mapHomologicalComplex_obj_X,
+      Iso.refl_hom, NatTrans.id_app]
+    exact Category.id_comp _
   have hc := Functor.mapDerivedCategoryCompIso_fach F G P
   have hn := Functor.mapDerivedCategoryNatIso_fach s P
   simp only [Iso.trans_hom, Iso.symm_hom, NatTrans.comp_app, Category.assoc]
@@ -644,8 +673,17 @@ private theorem triangleRewrite {C : Type*} [Category* C]
   rw [← hb, ← hd]
   exact h
 
+private theorem isoTransport_trans_assoc {C : Type*} [Category* C]
+    {A B D E : C} (p : A = B) (q : B = D) (t : D ≅ E) :
+    eqToIso p ≪≫ eqToIso q ≪≫ t = eqToIso (p.trans q) ≪≫ t := by
+  rw [← Iso.trans_assoc, eqToIso_trans]
+
 variable [∀ Z : Scheme.{u},
   HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Z.toRingedSpace))]
+
+attribute [local irreducible] Functor.mapHomotopyCategory DerivedCategory.Qh
+  HomologicalComplexUpToQuasiIso.Qh Functor.mapDerivedCategory
+  schemeDerivedOpenRestrictionCompIso
 
 private theorem nestedDerivedCompositionFactor (X : Scheme.{u})
     {W U : X.Opens} (i : W ⟶ U)
@@ -660,6 +698,7 @@ private theorem nestedDerivedCompositionFactor (X : Scheme.{u})
       DerivedCategory.Qh.{w}.map
         ((Functor.mapHomotopyCategoryCompIso (schemeOpenRestrictionCompIso X i)
           (.up ℤ)).hom.app P) := by
+  unfold schemeDerivedOpenRestrictionCompIso
   exact derivedCompositionFactor (schemeOpenRestriction X U)
     (schemeOpenOverlapRestriction X i) (schemeOpenRestriction X W)
       (schemeOpenRestrictionCompIso X i) P
@@ -674,13 +713,30 @@ attribute [local instance 2000] schemeOpenRestriction_additive
   schemeOpenRestriction_preservesFiniteLimits schemeOpenRestriction_preservesFiniteColimits
   schemeOpenOverlapRestriction_additive schemeOpenOverlapRestriction_preservesFiniteLimits
   schemeOpenOverlapRestriction_preservesFiniteColimits
+private noncomputable def comparisonCounit {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    DerivedCategory.Qh.{w} ⋙ derivedPullback.{u,w} f ⟶
+      (Scheme.Modules.tensorPullback f :
+        SheafOfModules.{u} (moduleRings Y.toRingedSpace) ⥤
+          SheafOfModules.{u} (moduleRings X.toRingedSpace)).mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh.{w} :=
+  pinnedPullbackCounit.{u,w} f
+
+private theorem comparisonCounit_isLeftDerived {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (derivedPullback.{u,w} f).IsLeftDerivedFunctor (comparisonCounit f)
+      (HomotopyCategory.quasiIso
+        (SheafOfModules.{u} (moduleRings Y.toRingedSpace)) (.up ℤ)) := by
+  exact (Classical.choose (Classical.choose_spec
+    (Classical.choose_spec exists_derivedPullbackComposition.{u,w}))) f
+
+attribute [local irreducible] comparisonCounit
+
 set_option maxHeartbeats 400000 in
 -- Comparing the selected tensor and localization data requires extra heartbeats.
 private theorem nestedCounit (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U)
     (P : HomotopyCategory (SheafOfModules.{u}
       (moduleRings U.toScheme.toRingedSpace)) (.up ℤ)) :
     (overlapOpenInclusionPullbackIso X i).inv.app (DerivedCategory.Qh.obj P) ≫
-        (pinnedPullbackCounit.{u,w} (X.homOfLE (leOfHom i))).app P =
+        (comparisonCounit.{u,w} (X.homOfLE (leOfHom i))).app P =
       (schemeOpenOverlapRestriction X i).mapDerivedCategoryFactorsh.hom.app P ≫
         DerivedCategory.Qh.map
           ((NatTrans.mapHomotopyCategory (nestedTensorOpenIso X i).inv (.up ℤ)).app P) := by
@@ -696,22 +752,21 @@ private theorem nestedCounit (X : Scheme.{u}) {W U : X.Opens} (i : W ⟶ U)
   let e : schemeOpenOverlapRestriction X i ≅ T := (nestedTensorOpenIso X i).symm
   have : PreservesFiniteLimits T := preservesFiniteLimits_of_natIso e
   have : PreservesFiniteColimits T := preservesFiniteColimits_of_natIso e
-  have hL := (Classical.choose (Classical.choose_spec
-    (Classical.choose_spec exists_derivedPullbackComposition.{u,w}))) f
-  have := hL
+  have := comparisonCounit_isLeftDerived f
   have hα : overlapOpenInclusionPullbackIso X i =
       Functor.leftDerivedUnique T.mapDerivedCategory (derivedPullback f)
-        (pinnedPullbackCounit.{u,w} f) T.mapDerivedCategoryFactorsh.hom
+        (comparisonCounit.{u,w} f) T.mapDerivedCategoryFactorsh.hom
         (HomotopyCategory.quasiIso
           (SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)) (.up ℤ)) ≪≫
         (Functor.mapDerivedCategoryNatIso e).symm := by
+    unfold comparisonCounit
+    unfold e nestedTensorOpenIso nestedRestrictionIso
     rfl
   exact exactDerivedComparisonCounit T (schemeOpenOverlapRestriction X i)
-    (derivedPullback f) (pinnedPullbackCounit.{u,w} f) e
+    (derivedPullback f) (comparisonCounit.{u,w} f) e
     (overlapOpenInclusionPullbackIso X i) hα P
 
-attribute [local irreducible] nestedRestrictionIso nestedTensorOpenIso
-  overlapOpenInclusionPullbackIso perfectHomComposition
+attribute [local irreducible] overlapOpenInclusionPullbackIso perfectHomComposition
   singleComplexOpenPullbackIso openPinnedTensorOpenIso
 attribute [local instance 2000] schemeOpenRestriction_additive
   schemeOpenRestriction_preservesFiniteLimits schemeOpenRestriction_preservesFiniteColimits
@@ -746,7 +801,7 @@ private theorem nestedSourceTriangle
       (perfectHomComposition j U.ι ≪≫ eqToIso
         (congrArg (fun l ↦ derivedPullback.{u,w} l) h)).hom.app
           (DerivedCategory.Qh.{w}.obj P) ≫
-      (pinnedPullbackCounit.{u,w} k).app P ≫
+      (comparisonCounit.{u,w} k).app P ≫
       (DerivedCategory.Qh.{w}
         (C := SheafOfModules.{u} (moduleRings Y.toRingedSpace))).map
         ((Functor.mapHomotopyCategoryCompIso
@@ -757,10 +812,11 @@ private theorem nestedSourceTriangle
           (Scheme.Modules.tensorPullbackCompositionIso j U.ι k h).symm)
         (.up ℤ)).inv.app P) =
     (derivedPullback j).map ((schemeOpenRestriction X U).mapDerivedCategoryFactorsh.hom.app P) ≫
-      (pinnedPullbackCounit.{u,w} j).app
+      (comparisonCounit.{u,w} j).app
         ((schemeOpenRestriction X U).mapHomotopyCategory (.up ℤ) |>.obj P) := by
+  unfold comparisonCounit
   cases h
-  simp only [eqToIso_refl, Iso.trans_refl]
+  simp only [Iso.trans_hom, eqToIso.hom, eqToHom_refl, Category.comp_id]
   have hc := open_pinned_source_counit_triangle U j P
   have hcomp := congrArg (fun e ↦ e.hom.app (DerivedCategory.Qh.{w}.obj P))
     (pinnedComposition_eq j U.ι)
@@ -789,13 +845,26 @@ private theorem nestedDerivedCompatibility (X : Scheme.{u}) {W U : X.Opens} (i :
   have : (schemeOpenRestriction X W).Additive := schemeOpenRestriction_additive X W
   have : (schemeOpenOverlapRestriction X i).Additive :=
     schemeOpenOverlapRestriction_additive X i
-  have hL := (Classical.choose (Classical.choose_spec
-    (Classical.choose_spec exists_derivedPullbackComposition.{u,w}))) W.ι
-  have := hL
+  have := comparisonCounit_isLeftDerived W.ι
   exact leftDerivedTriangleCoherence
+    (q₀ := DerivedCategory.Qh.{w}
+      (C := SheafOfModules.{u} (moduleRings X.toRingedSpace)))
+    (q₁ := DerivedCategory.Qh.{w}
+      (C := SheafOfModules.{u} (moduleRings U.toScheme.toRingedSpace)))
+    (q₂ := DerivedCategory.Qh.{w}
+      (C := SheafOfModules.{u} (moduleRings W.toScheme.toRingedSpace)))
+    (R := (schemeOpenRestriction X U).mapHomotopyCategory (.up ℤ))
+    (S := (schemeOpenOverlapRestriction X i).mapHomotopyCategory (.up ℤ))
+    (T := (Scheme.Modules.tensorPullback j).mapHomotopyCategory (.up ℤ))
+    (H := (schemeOpenRestriction X W).mapHomotopyCategory (.up ℤ))
+    (K := (Scheme.Modules.tensorPullback W.ι).mapHomotopyCategory (.up ℤ))
+    (r := (schemeOpenRestriction X U).mapDerivedCategory)
+    (s := (schemeOpenOverlapRestriction X i).mapDerivedCategory)
+    (l := derivedPullback j) (h := (schemeOpenRestriction X W).mapDerivedCategory)
+    (k := derivedPullback W.ι) (u := derivedPullback U.ι)
     (W := HomotopyCategory.quasiIso
       (SheafOfModules.{u} (moduleRings X.toRingedSpace)) (.up ℤ))
-    (pinnedPullbackCounit W.ι) (pinnedPullbackCounit j)
+    (comparisonCounit W.ι) (comparisonCounit j)
     (schemeOpenRestriction X U).mapDerivedCategoryFactorsh
     (schemeOpenOverlapRestriction X i).mapDerivedCategoryFactorsh
     (schemeOpenRestriction X W).mapDerivedCategoryFactorsh
@@ -810,7 +879,10 @@ private theorem nestedDerivedCompatibility (X : Scheme.{u}) {W U : X.Opens} (i :
     (singleComplexOpenPullbackIso X W) (singleComplexOpenPullbackIso X U)
     (perfectHomComposition j U.ι ≪≫ eqToIso
       (congrArg (fun k ↦ derivedPullback.{u,w} k) (Scheme.homOfLE_ι X (leOfHom i))))
-    (nestedDerivedCompositionFactor X i) (openCounit X W) (nestedCounit X i)
+    (nestedDerivedCompositionFactor X i)
+    (by
+      unfold comparisonCounit homotopyNatIso
+      exact openCounit X W) (nestedCounit X i)
     (homotopyNestedComparison (nestedTensorOpenIso X i)
       (schemeOpenRestrictionCompIso X i) (openPinnedTensorOpenIso X W).symm _ ht)
     (nestedSourceTriangle X U j W.ι (Scheme.homOfLE_ι X (leOfHom i)))
@@ -820,7 +892,14 @@ end
 -- Keep the canonical isomorphisms abstract while checking their public equations.
 attribute [local irreducible] overlapOpenInclusionPullbackIso
   singleComplexOpenPullbackIso openPinnedTensorOpenIso perfectHomComposition
-  schemeDerivedOpenRestrictionCompIso
+  perfectOverlapStageObjectIso
+  IsPullback.isoPullback Scheme.Opens.toScheme
+attribute [local implicit_reducible] TopologicalSpace.Opens.map OrderHomClass.toOrderHom
+  Monotone.functor TopCat.Hom.frameHom TopologicalSpace.Opens.instCompleteLattice
+  TopologicalSpace.Opens.instFrame CompleteLattice.toConditionallyCompleteLattice
+  ConditionallyCompleteLattice.toLattice Lattice.toSemilatticeInf SemilatticeInf.toMin
+  min SemilatticeInf.inf Lattice.inf Set.inter perfectOverlapStageEquivalence
+  overlapSchemeIsoDerivedEquivalence CategoryTheory.Equivalence.mk
 
 /-- The chosen inclusion comparison is pinned to the exact nested-open
 restriction after precomposition with global restriction. -/
@@ -902,10 +981,7 @@ private theorem overlapComposition_assoc {W X Y Z : Scheme.{u}}
         Functor.isoWhiskerLeft (derivedPullback g) (perfectHomComposition h f) ≪≫
           perfectHomComposition (h ≫ f) g ≪≫
           eqToIso (congrArg (fun k : W ⟶ Z ↦ derivedPullback k) (Category.assoc h f g)) := by
-  unfold perfectHomComposition
-  exact (Classical.choose_spec (Classical.choose_spec (Classical.choose_spec
-    (Classical.choose_spec (Classical.choose_spec
-      exists_derivedPullbackComposition)))).2).2.2 h f g
+  exact cc_assoc h f g
 
 /-- Component equation for the pinned stage comparison, with the cartesian
 factor associated in the order used by the pullback prism. -/
@@ -941,18 +1017,18 @@ theorem perfectOverlapStageObjectIso_hom_app
         (perfectHomComposition (pullback.fst ((U ⊓ V).ι ≫ p) q)
           (Y.homOfLE hWL)).symm).app A).hom := by
   intro hW' e fac
-  have hc := congrArg (fun t ↦ NatTrans.app t A)
-    (congrArg Iso.hom (overlapComposition_assoc e.inv (X.homOfLE hW') (g ∣_ L)))
-  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
-    Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom, Functor.whiskerLeft_app,
-    Functor.associator_hom_app, Category.id_comp] at hc
-  dsimp only [perfectOverlapStageObjectIso]
-  simp only [id, Iso.app_hom, Iso.trans_hom, NatTrans.comp_app,
-    Functor.isoWhiskerRight_hom, Functor.whiskerRight_app, Functor.isoWhiskerLeft_hom,
-    Functor.whiskerLeft_app, Functor.associator_hom_app, Category.id_comp,
-    Category.assoc, Functor.map_comp]
-  rw [reassoc_of% hc]
-  simp only [eqToIso.hom, eqToHom_app, eqToHom_trans_assoc]
-  rfl
+  have hc := overlapComposition_assoc e.inv (X.homOfLE hW') (g ∣_ L)
+  apply congrArg (fun t : _ ≅ _ ↦ (t.app A).hom)
+  unfold perfectOverlapStageObjectIso
+  simpa only [id, Functor.isoWhiskerRight_trans, Iso.trans_assoc,
+    isoTransport_trans_assoc] using
+    (congrArg (fun t ↦
+      Functor.isoWhiskerRight
+          (Functor.isoWhiskerLeft (derivedPullback (g ∣_ L))
+            (overlapOpenInclusionPullbackIso X (homOfLE hW')).symm)
+          (derivedPullback e.inv) ≪≫
+        t ≪≫ eqToIso (congrArg (fun f ↦ derivedPullback f) fac) ≪≫
+          (perfectHomComposition (pullback.fst ((U ⊓ V).ι ≫ p) q)
+            (Y.homOfLE hWL)).symm) hc).symm
 
 end AlgebraicGeometry
