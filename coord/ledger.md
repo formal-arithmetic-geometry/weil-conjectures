@@ -20305,3 +20305,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:07 L: merged deliver/Q41/lem-sp-finite-compact-site-coherence (stage 2; reviewer PASS; parallel immutable checks)
 - 06:07 L: returned deliver/NF/lem-pe-comparison-etale-slice-abelian-pullback (reviewer RETURN: L: independent stage-2 immutable head aee04b74d8e3: H2/stmt_deps (theorem-node stmt_deps supplying plain definitions). L)
 - 06:09 L: returned deliver/A3/Sheaf.Paper.CondensedClosedCostalkInjectiveContinuity (reviewer RETURN: (the landing tools, head f8a02b422) the delivery did not land: every module of the delivery is in the library already, w)
+- 06:09 L: returned deliver/A4/Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison (reviewer RETURN: (the landing tools, head 3bf9f80b4) the delivery did not land: missing import source modules: Sheaf.AlgebraicGeometry.Lo)
