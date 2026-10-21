@@ -17,124 +17,45 @@
  ],
  "proof": [
   {
-   "text": "Write $B=C(r:R[0]\\to R[0])$, so $B^{-1}=R$, $B^0=R$ and $d_B^{-1}=r$. The assumed short exact sequence, placed in degree zero, and [lem-pc-cone-short-exact-quasi-iso] give a quasi-isomorphism $b:B\\to\\operatorname{Res}_\\varphi S[0]$ which is $\\varphi$ in degree zero and zero in degree $-1$. This uses exactness as module sheaves, not surjectivity on all sections. In particular it applies on a site without points.",
+   "text": "Use the normalized ordinary coefficient adjunction to construct its termwise unit. Its zero scalar composite gives the strict cone augmentation. The chain lemma fixes all components and the inclusion equality; the flat-term exact sequence and resolution argument make the augmentation a quasi-isomorphism on every K-flat.",
    "uses": [
-    "lem-pc-cone-short-exact-quasi-iso"
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-cbc-regular-quotient-cone-chain",
+    "lem-cbc-regular-quotient-cone-quasi-iso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism), principal-resolution input; cone projection: derived.tex Tag 0152 (lemma-derived-canonical-delta-functor)."
-   }
+   "elementary": false
   },
   {
-   "text": "For any complex $P$, tensor the cone defining $B$ on the right with $P$. The right-tensor cone comparison of [lem-weil-pbc-total-tensor-homotopy-cone-signs], followed by $R\\otimes_RP\\cong P$, identifies $\\operatorname{Tot}(B\\otimes_RP)$ with $C_r(P)$. Explicitly the $B^0\\otimes P^q$ component is $y$ and the $B^{-1}\\otimes P^{q+1}$ component is $x$; the total differential is $(dy+rx,-dx)$. The tensor unit maps are $a\\otimes p\\mapsto ap$, with inverse $p\\mapsto1\\otimes p$. In $\\operatorname{Tot}(\\operatorname{Res}_\\varphi S[0]\\otimes_RP)$ the same cited tensor symmetry has sign $1$, giving the isomorphism to $T(P)=\\operatorname{Res}_\\varphi(P\\otimes_RS)$ by $s\\otimes p\\mapsto p\\otimes s$. Therefore $b\\otimes1_P$ is exactly $a_P(y,x)=y\\otimes1$ in these coordinates. If $P$ is K-flat, the arbitrary-endpoint quasi-isomorphism assertion of the cited tensor lemma makes $b\\otimes1_P$, and hence $a_P$, a quasi-isomorphism. No termwise flatness of $P$ or flatness of $S$ is used.",
+   "text": "The generic cochain derived adjunction gives the actual derived unit normalized with the supplied universal counit, allowing independent localization universes. The generic augmentation-descent theorem localizes the cone and its inclusion and gives the required natural isomorphism with all-complex component equation.",
    "uses": [
-    "lem-weil-pbc-total-tensor-homotopy-cone-signs"
+    "lem-cbc-cochain-derived-adjunction",
+    "lem-cbc-cochain-augmentation-descent",
+    "lem-pc-kflat-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YM (lemma-derived-tor-exact) and 06YP (lemma-K-flat-quasi-isomorphism); derived.tex remark-double-complex-as-tensor-product-of, right-tensor cone comparison."
-   }
+   "elementary": false
   },
   {
-   "text": "The formula for $a_P$ is balanced and $R$-linear. It is a chain map since $a_Pd(y,x)=(dy+rx)\\otimes1=dy\\otimes1=d\\,a_P(y,x)$, using $rx\\otimes1=x\\otimes\\varphi(r)=0$. For an $R$-linear chain map $h$, $hr=rh$, so the displayed diagonal formula defines $C_r(h)$. Both composites in $T(h)a_P=a_{P\\prime}C_r(h)$ send $(y,x)$ to $h(y)\\otimes1$. Both $a_Pi_P$ and $\\rho_P$ send $y$ to $y\\otimes1$. These are identities of balanced presheaf tensor maps and therefore of their sheafifications; they hold for all complexes.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Principal quotient formulas; total tensor convention of Tag 06YM (lemma-derived-tor-exact)."
-   }
-  },
-  {
-   "text": "The complex $B$ is K-flat. Indeed for any acyclic $E$, the left-tensor cone comparison of [lem-weil-pbc-total-tensor-homotopy-cone-signs] identifies $\\operatorname{Tot}(E\\otimes_RB)$ with $C_r(E)$ (the shifted summand has sign $(-1)^p$ in degree $p$ of $E$). The map $r:E\\to E$ is a quasi-isomorphism because its cohomology maps are the unique maps $0\\to0$. By [lem-pur-quasi-iso-cone-acyclic] its cone is acyclic; this is exactly the K-flat criterion [def-pc-kflat-complex] for $B$. Consequently tensoring on the right with $B$ preserves every quasi-isomorphism by the cited tensor lemma. The same cone comparison identifies this functor naturally with $C_r$, so $C_r$ preserves every quasi-isomorphism, including those between K-flat complexes. The tensor homotopy assertion also shows that $C_r$ induces a functor on $K(R)$.",
-   "uses": [
-    "lem-weil-pbc-total-tensor-homotopy-cone-signs",
-    "lem-pur-quasi-iso-cone-acyclic",
-    "def-pc-kflat-complex"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YN (definition-K-flat), 06YM (lemma-derived-tor-exact), 06YP (lemma-K-flat-quasi-isomorphism); derived.tex Tag 05RT (lemma-acyclic)."
-   }
-  },
-  {
-   "text": "By clause (1) of [lem-pur-derived-change-of-rings], termwise scalar extension preserves quasi-isomorphisms between K-flat complexes. Exact restriction of scalars, as asserted in [lem-pur-sheaf-ring-derived-coefficient-adjunction], preserves cohomology and therefore quasi-isomorphisms. Thus $T$ preserves the required quasi-isomorphisms. Being additive and termwise, scalar extension and restriction also preserve cochain homotopies: applying them to $f-g=dh+hd$ gives the same equation. Hence $T$ is defined on the K-flat part of $K(R)$.",
+   "text": "On a K-flat complex cancel the invertible restricted universal counit and use the strict inclusion/augmentation equality to identify the inclusion followed by the derived comparison with the adjunction unit. Naturality along a K-flat resolution extends the equality to every localized complex, and essential surjectivity extends it to every derived object. Naturality of the resulting isomorphism supplies all resolution comparisons and their cocycle. Exact restriction and the supplied derived coefficient model prove restricted tensor invariance.",
    "uses": [
     "lem-pur-derived-change-of-rings",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+    "lem-pc-kflat-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side); Tag 06YY (lemma-derived-base-change); Tag 07A6 (lemma-adjoint), identity-topos scalar change."
-   }
-  },
-  {
-   "text": "First localize $QC_r$ on all complexes using [lem-weil-pbc-localization-universal-property] and Step 4; call the resulting functor $C_r^D$. Let $\\mathcal P_R\\subset K(R)$ be the K-flat complexes with flat terms. By [lem-weil-pbc-site-derived-tensor-descent], $W_R^{-1}\\mathcal P_R\\to D(R)$ is an equivalence. On $\\mathcal P_R$, $Q(a_P)$ is a natural isomorphism from $QC_r$ to $QT$ by Steps 2 and 3. Apply the natural-transformation clause of the localization universal property on $\\mathcal P_R$ and transport across this equivalence. This gives a natural isomorphism $A:C_r^D\\to\\operatorname{Res}_\\varphi L\\varphi^*$: the identification of the second functor is the canonical K-flat computation in [lem-pur-derived-change-of-rings]. The cone comparison respects homotopies by Step 4 and $T$ does so by Step 5; thus this localization uses actual functors on the homotopy category, as required by the cited equivalence. The descended transformation is natural for every morphism of $D(R)$, not just localized chain maps.",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), and 06YU (definition-derived-tor), construction preceding that definition; Tag 06YY (lemma-derived-base-change)."
-   }
-  },
-  {
-   "text": "It remains to verify the specified component on an arbitrary K-flat complex $P$, whose terms need not be flat. Choose $s:F\\to P$ a K-flat resolution with flat terms by [lem-pc-kflat-resolution]. Let $c_P:\\operatorname{Res}_\\varphi L\\varphi^*(Q_RP)\\xrightarrow{\\sim}Q_RT(P)$ be the canonical computation isomorphism of [lem-pur-derived-change-of-rings]. Its naturality gives $c_P(\\operatorname{Res}_\\varphi L\\varphi^*)(Q_Rs)=Q_RT(s)c_F$. Naturality of $A$ and Step 3 now give\n$$c_PA_{Q_RP}\\,Q_RC_r(s)=Q_RT(s)c_FA_{Q_RF}=Q_RT(s)Q_R(a_F)=Q_R(a_P)Q_RC_r(s).$$\nCancel the invertible $Q_RC_r(s)$ (Step 4). Thus $c_PA_{Q_RP}=Q_R(a_P)$, with precisely the augmentation and precisely the canonical comparison requested.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-derived-change-of-rings"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change), K-flat computation and its natural counit."
-   }
-  },
-  {
-   "text": "The inclusions $i_P$ are natural on all complexes and so descend to $i^D$ by [lem-weil-pbc-localization-universal-property]. On flat-term K-flat $P$, [lem-pur-sheaf-ring-derived-coefficient-adjunction], unit normalization (1), identifies the derived adjunction unit with $Q_R(\\rho_P)$ under $c_P$. Step 3 therefore says $c_PA_{Q_RP}i^D_{Q_RP}=Q_R(a_P)Q_R(i_P)=Q_R(\\rho_P)$. The equivalence $W_R^{-1}\\mathcal P_R\\simeq D(R)$ of [lem-weil-pbc-site-derived-tensor-descent], together with the uniqueness clause for natural transformations under localization, extends this identity to all of $D(R)$. It is the asserted identity $A\\circ i^D=\\rho^D$ with the actual scalar-extension unit.",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 07A6 (lemma-adjoint); derived.tex Tags 0FND (lemma-pre-derived-adjoint-functors) and 09T5 (lemma-derived-adjoint-functors), normalization on K-flat representatives."
-   }
-  },
-  {
-   "text": "For two K-flat resolutions $s:P\\to X$ and $t:P\\prime\\to X$, set $v=(Q_Rt)^{-1}Q_Rs$. Naturality already proved on $D(R)$ says $A_{Q_RP\\prime}C_r^D(v)=(\\operatorname{Res}_\\varphi L\\varphi^*)(v)A_{Q_RP}$. In the computation coordinates of Step 7 this is exactly agreement under the canonical resolution comparisons. For a third resolution $u:P\\prime\\prime\\to X$, the equation $((Q_Ru)^{-1}Q_Rt)((Q_Rt)^{-1}Q_Rs)=(Q_Ru)^{-1}Q_Rs$ proves the cocycle after applying either functor. The same naturality equation for arbitrary $v$ gives the last clause. No comparison chain map between two chosen resolutions is assumed.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Construction preceding Tag 06YU (definition-derived-tor): canonical comparison of K-flat resolutions; explicit cancellation argument."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-cone-short-exact-quasi-iso",
-  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "def-pc-kflat-complex",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pc-kflat-resolution"
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-cbc-regular-quotient-cone-chain",
+  "lem-cbc-regular-quotient-cone-quasi-iso",
+  "lem-cbc-cochain-derived-adjunction",
+  "lem-cbc-cochain-augmentation-descent",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 06YM/06YP/06YS/06YT/06YU/06YY and 07A6; agent-written normalized principal-quotient argument and descent realizing the finite-level amplitude comparison in thm-cbc-finite-extension."
+  "place": "Tags 06YP, 06YS and 06YY, flat-term tensor exactness followed by K-flat comparison; derived.tex Tags 0FND, 09T5, 06XN and 05SU for normalized adjunction and direct Kan descent."
  },
  "mathlib_searches": [
   {
@@ -285,13 +206,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-cone-short-exact-quasi-iso",
-  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
-  "lem-pur-quasi-iso-cone-acyclic",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-localization-universal-property",
   "lem-pc-kflat-resolution"
  ],
  "reviewed": {
@@ -306,13 +221,6 @@
   "module": "Sheaf.Algebra.Homology.RegularQuotientConeAugmentation",
   "declaration": "SheafOfModules.RegularQuotientCone.nonempty_augmentation",
   "declarations": [
-   "SheafOfModules.RegularQuotientCone.Modules",
-   "SheafOfModules.RegularQuotientCone.restriction",
-   "SheafOfModules.RegularQuotientCone.scalar",
-   "SheafOfModules.RegularQuotientCone.ringMap",
-   "SheafOfModules.RegularQuotientCone.complexScalar",
-   "SheafOfModules.RegularQuotientCone.cone",
-   "SheafOfModules.RegularQuotientCone.inclusion",
    "SheafOfModules.RegularQuotientCone.Augmentation",
    "SheafOfModules.RegularQuotientCone.nonempty_augmentation"
   ],
@@ -331,5 +239,15 @@
   "group": "Q49",
   "result": "pass",
   "note": "Node copy differs from live only in lean; statement verbatim. Clauses checked against the node, DerivedChangeOfRingsCochainModel, changeOfRingsPresheaf/changeOfRings and Mathlib mappingCone (d_fst_v/d_snd_v match the node's cone convention, inr = y↦(y,0)). Hypotheses match: EssentiallySmall.{r}, independent universes u v r wR wS, t a unit-module section with lsmul action, ht ⇔ φ(t)=0, categorical ShortExact. Augmentation fields all pinned: ρ by sectionwise sheafified 1⊗x, a = snd≫ρ, V/D are localization lifts, A and the adjunction unit fixed on K-flat P where d.computes makes ε invertible, so the Nonempty is not hollow. A_components, unit_identity and unit_normalization checked true; cocycle/resolution independence via naturality of A. Only sorry is the main theorem; docstrings with source and blueprint; no extra assumptions; no duplicate (also checked lem-pur-regular-quotient-completion-unit and def-pur-principal-quotient-completion-model). No recompile (no change). Advisory: plain import DerivedCategory.ExactFunctor is not a recorded proof-dep module; the second reading was done in the worker's own session."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-62fdf",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261021T173349-L-3592564",
+  "kind": "interface",
+  "note": "independent cc review: moved defs in RegularQuotientConeBasic vs clones/live item block (line-for-line identical); item statement vs live (byte-identical); sandbox build of all 8 delivered modules + #print axioms (no sorryAx); node proof_deps vs Lean"
  }
 }

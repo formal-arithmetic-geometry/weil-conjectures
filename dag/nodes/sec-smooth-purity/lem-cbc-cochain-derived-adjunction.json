@@ -1,0 +1,122 @@
+{
+ "id": "lem-cbc-cochain-derived-adjunction",
+ "kind": "statement",
+ "title": "Normalized derived adjunction for a specified cochain left derived pair",
+ "statement": "Let E:A→B and V:B→A be an additive adjunction E⊣V between abelian categories, with V exact. Choose independent derived categories and a universal cochain left derived pair (F,ε) for E. Suppose a class P resolves every complex by a quasi-isomorphism and ε is invertible on P. Then F is left adjoint to the exact derived V, and at every complex K the derived unit followed by V^D(ε_K) and the exact comparison equals Q of the termwise ordinary unit.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0FND, 09T5, 06XN and 05SU; derived adjunction and universal cochain counit."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Precompose the homotopy universal problem with the full homotopy quotient, using the quotient/localization comparisons; fullness and faithfulness reflect the universal property, yielding the counit on homotopy categories. The images of P form a resolving class on which that counit is invertible. Naturality shows E followed by localization inverts quasi-isomorphisms between its members. Resolving-class essential constancy supplies the left denominator diagrams. Exact V inverts all quasi-isomorphisms; inverse images of denominators give constant right denominator diagrams. Apply the proved derived-adjunction compatibility theorem. Evaluate its representative formula at the identity to get the homotopy unit equation. The quotient/localization and exact-functor comparisons transport this equation to the specified cochain unit formula.",
+   "uses": [
+    "new-derived-adjunction-compatibility",
+    "lem-pur-resolving-class-essential-constancy",
+    "lem-pur-quasi-isos-saturated-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0FND, 09T5, 06XN and 05SU; derived adjunction and universal cochain counit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "new-derived-adjunction-compatibility",
+  "lem-pur-resolving-class-essential-constancy",
+  "lem-pur-quasi-isos-saturated-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0FND, 09T5, 06XN and 05SU; derived adjunction and universal cochain counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactorsh_hom_app|liftOfIsRightKanExtension_fac_app|inr_desc|regularTensorIso_inv_apply",
+   "results": "Found generic Kan lifting and cone projection APIs; local library has the normalized comparison only with coincident universes.",
+   "date": "2026-10-21",
+   "verdict": "Use the generic APIs; no exact normalized independent-universe result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightKanExtension",
+   "results": "12 hits including liftOfIsRightKanExtension and rightKanExtensionUnique; cone search also found quasiIso_descShortComplex.",
+   "date": "2026-10-21",
+   "verdict": "Generic universal-property and cone tools used in the proof, rather than an exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive adjunction with exact right adjoint induces an adjunction of unbounded derived categories, whose unit agrees with the cochain unit and the specified universal left derived counit.",
+   "results": "8 hits, including Adjunction.derived, derivedη, derived_unit and related APIs in Mathlib.CategoryTheory.Functor.Derived.Adjunction.",
+   "date": "2026-10-21",
+   "verdict": "Use derived-adjunction compatibility, which packages these APIs; cochain normalization and resolving hypotheses still require the argument here."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone of multiplication by a section identifies with restricted derived scalar extension along a regular principal quotient, and its inclusion is the derived adjunction unit.",
+   "results": "8 hits: CochainComplex.mappingCone and ModuleCat.ExtendRestrictScalarsAdj.unit, including extendRestrictScalarsAdj_unit_app_apply. No normalized independent-universe sheaf augmentation or derived descent match.",
+   "date": "2026-10-22",
+   "verdict": "Use the cone and ordinary unit APIs; the normalized comparison requires the argument here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RegularQuotientConeAugmentation",
+  "date": "2026-10-21",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-extension",
+   "place": "Proof, sole paragraph: integral constructible functors and the finite-level amplitude condition; old lem-cbc-finite-extension-reduction-cone-bound steps 2 and 3, quotient augmentation comparison and naturality through K-flat localization.",
+   "via": [
+    "lem-cbc-regular-quotient-cone-augmentation",
+    "lem-cbc-finite-extension-reduction-cone-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.CochainDerivedAdjunction",
+  "file": "lean/Sheaf/Algebra/Homology/CochainDerivedAdjunction.lean",
+  "declaration": "CategoryTheory.Functor.exists_cochainDerivedAdjunction",
+  "declarations": [
+   "CategoryTheory.Functor.exists_cochainDerivedAdjunction"
+  ],
+  "statement": "theorem exists_cochainDerivedAdjunction\n    {A : Type u} [Category.{v} A] [Abelian A]\n    {B : Type u'} [Category.{v'} B] [Abelian B]\n    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w'} B]\n    (E : A ⥤ B) [E.Additive] (V : B ⥤ A) [V.Additive]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V] (adj : E ⊣ V)\n    (F : DerivedCategory A ⥤ DerivedCategory B)\n    (ε : DerivedCategory.Q ⋙ F ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    [F.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso A (.up ℤ))]\n    (P : ObjectProperty (CochainComplex A ℤ))\n    (hres : ∀ K, ∃ (L : CochainComplex A ℤ) (p : L ⟶ K), P L ∧ QuasiIso p)\n    (hε : ∀ K, P K → IsIso (ε.app K)) :\n    ∃ d : F ⊣ V.mapDerivedCategory,\n      ∀ K : CochainComplex A ℤ,\n        d.unit.app (DerivedCategory.Q.obj K) ≫ V.mapDerivedCategory.map (ε.app K) ≫\n          V.mapDerivedCategoryFactors.hom.app ((E.mapHomologicalComplex (.up ℤ)).obj K) =\n        DerivedCategory.Q.map ((adj.mapHomologicalComplex (.up ℤ)).unit.app K)",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-62fdf",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261021T173349-L-3592564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-62fdf",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261021T173349-L-3592564",
+  "kind": "interface",
+  "note": "independent cc review: moved defs in RegularQuotientConeBasic vs clones/live item block (line-for-line identical); item statement vs live (byte-identical); sandbox build of all 8 delivered modules + #print axioms (no sorryAx); node proof_deps vs Lean"
+ }
+}

@@ -1,0 +1,118 @@
+{
+ "id": "lem-cbc-cochain-augmentation-descent",
+ "kind": "statement",
+ "title": "Descent of an augmentation through its universal cochain counit",
+ "statement": "Let A,B be abelian categories with independently chosen derived categories, E:A→B additive, V:B→A additive exact, and F a pointwise left derived functor of E with specified universal cochain counit ε. Suppose V^D is a right adjoint. Let P be a resolving class on which ε is invertible. For H:Ch(A)→Ch(A) preserving quasi-isomorphisms, j:Id→H, and a:H→E^Ch V^Ch a quasi-isomorphism on P, there exist a localized H^D, localized j, and a natural isomorphism H^D≅F V^D whose component followed by V^D(ε) and the exact-restriction factor is precisely the localization of a.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0FND, 09T5, 06XN and 05SU; derived adjunction and universal cochain counit."
+ },
+ "stmt_deps": [
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [
+  {
+   "text": "Localize HQ and j using the localization universal property. Since V^D is a right adjoint, it preserves limits, so it preserves the pointwise right Kan extension defining the left derived functor. Compose its counit with the exact-functor comparison. The universal property lifts the localized a to H^D→F V^D, with the asserted component equation. On P its two counits are invertible, so the lifted component is invertible. Resolve each complex and use naturality to propagate invertibility to its localization. Essential surjectivity of Q gives invertibility on every derived object.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0FND, 09T5, 06XN and 05SU; derived adjunction and universal cochain counit."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 0FND, 09T5, 06XN and 05SU; derived adjunction and universal cochain counit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactorsh_hom_app|liftOfIsRightKanExtension_fac_app|inr_desc|regularTensorIso_inv_apply",
+   "results": "Found generic Kan lifting and cone projection APIs; local library has the normalized comparison only with coincident universes.",
+   "date": "2026-10-21",
+   "verdict": "Use the generic APIs; no exact normalized independent-universe result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightKanExtension",
+   "results": "12 hits including liftOfIsRightKanExtension and rightKanExtensionUnique; cone search also found quasiIso_descShortComplex.",
+   "date": "2026-10-21",
+   "verdict": "Generic universal-property and cone tools used in the proof, rather than an exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized scalar cone quotient augmentation and derived adjunction on module sheaves with independent localization universes",
+   "results": "No exact match in the original cone search; separate derived-adjunction and tensor-comparison searches recorded for this delivery.",
+   "date": "2026-10-21",
+   "verdict": "Not a one-line specialization of a Mathlib theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone of multiplication by a section identifies with restricted derived scalar extension along a regular principal quotient, and its inclusion is the derived adjunction unit.",
+   "results": "8 hits: CochainComplex.mappingCone and ModuleCat.ExtendRestrictScalarsAdj.unit, including extendRestrictScalarsAdj_unit_app_apply. No normalized independent-universe sheaf augmentation or derived descent match.",
+   "date": "2026-10-22",
+   "verdict": "Use the cone and ordinary unit APIs; the normalized comparison requires the argument here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RegularQuotientConeAugmentation",
+  "date": "2026-10-21",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-extension",
+   "place": "Proof, sole paragraph: integral constructible functors and the finite-level amplitude condition; old lem-cbc-finite-extension-reduction-cone-bound steps 2 and 3, quotient augmentation comparison and naturality through K-flat localization.",
+   "via": [
+    "lem-cbc-regular-quotient-cone-augmentation",
+    "lem-cbc-finite-extension-reduction-cone-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.CochainAugmentationDescent",
+  "file": "lean/Sheaf/Algebra/Homology/CochainAugmentationDescent.lean",
+  "declaration": "CategoryTheory.Functor.exists_cochainAugmentationDescent",
+  "declarations": [
+   "CategoryTheory.Functor.exists_cochainAugmentationDescent"
+  ],
+  "statement": "theorem exists_cochainAugmentationDescent\n    {A : Type u} [Category.{v} A] [Abelian A]\n    {B : Type u'} [Category.{v'} B] [Abelian B]\n    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w'} B]\n    (E : A ⥤ B) [E.Additive] (V : B ⥤ A) [V.Additive]\n    [PreservesFiniteLimits V] [PreservesFiniteColimits V]\n    (F : DerivedCategory A ⥤ DerivedCategory B)\n    (ε : DerivedCategory.Q ⋙ F ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)\n    [F.IsLeftDerivedFunctor ε (HomologicalComplex.quasiIso A (.up ℤ))]\n    [(E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q).HasPointwiseLeftDerivedFunctor\n      (HomologicalComplex.quasiIso A (.up ℤ))]\n    [V.mapDerivedCategory.IsRightAdjoint]\n    (P : ObjectProperty (CochainComplex A ℤ))\n    (hres : ∀ K, ∃ (L : CochainComplex A ℤ) (p : L ⟶ K), P L ∧ QuasiIso p)\n    (hε : ∀ K, P K → IsIso (ε.app K))\n    (H : CochainComplex A ℤ ⥤ CochainComplex A ℤ)\n    (j : 𝟭 (CochainComplex A ℤ) ⟶ H)\n    (hH : ∀ {K L : CochainComplex A ℤ} (f : K ⟶ L), QuasiIso f → QuasiIso (H.map f))\n    (a : H ⟶ E.mapHomologicalComplex (.up ℤ) ⋙ V.mapHomologicalComplex (.up ℤ))\n    (ha : ∀ K, P K → QuasiIso (a.app K)) :\n    ∃ (D : DerivedCategory A ⥤ DerivedCategory A)\n      (e : DerivedCategory.Q ⋙ D ≅ H ⋙ DerivedCategory.Q)\n      (i : 𝟭 (DerivedCategory A) ⟶ D),\n      (∀ K, i.app (DerivedCategory.Q.obj K) ≫ e.hom.app K =\n        DerivedCategory.Q.map (j.app K)) ∧\n      ∃ c : D ≅ F ⋙ V.mapDerivedCategory,\n        ∀ K : CochainComplex A ℤ,\n          c.hom.app (DerivedCategory.Q.obj K) ≫ V.mapDerivedCategory.map (ε.app K) ≫\n            V.mapDerivedCategoryFactors.hom.app ((E.mapHomologicalComplex (.up ℤ)).obj K) =\n          e.hom.app K ≫ DerivedCategory.Q.map (a.app K)",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-62fdf",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261021T173349-L-3592564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-62fdf",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261021T173349-L-3592564",
+  "kind": "interface",
+  "note": "independent cc review: moved defs in RegularQuotientConeBasic vs clones/live item block (line-for-line identical); item statement vs live (byte-identical); sandbox build of all 8 delivered modules + #print axioms (no sorryAx); node proof_deps vs Lean"
+ }
+}

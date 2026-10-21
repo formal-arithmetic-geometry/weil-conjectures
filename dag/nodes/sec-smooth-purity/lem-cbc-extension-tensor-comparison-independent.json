@@ -1,0 +1,121 @@
+{
+ "id": "lem-cbc-extension-tensor-comparison-independent",
+ "kind": "statement",
+ "title": "Normalized scalar-extension tensor comparison in independent universes",
+ "statement": "Let C be a site essentially small in coefficient universe r, with the module-sheaf tensor and sheafification. For commutative ring sheaves R,S and φ:R→S, the tensor (Res S)⊗_R M is naturally isomorphic to Res(changeOfRings φ M), with the comparison sending the sheafified local tensor s⊗m to the sheafification of the same scalar-extension tensor. The regular tensor isomorphism R⊗M≅M has inverse x↦1⊗x. Tensor sheafification units commute with maps in the first factor. The site universes need not equal r.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YP, 06YS, 06YY and Modules on Sites, Tag 03EK; normalized principal quotient construction."
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "The section modules of restricted scalar extension and the tensor presheaf are identical, and the identity on pure tensors commutes with restrictions. Sheafify this presheaf isomorphism over R. The map from sheafification of a restricted presheaf to restriction of its S-sheafification is induced by the unit; after forgetting to abelian sheaves it is the identity, hence an isomorphism. Compose these maps with tensorObjIsoSheafification. Naturality of the sheafification unit gives the pure-tensor equation. For the regular tensor use the presheaf unitor and the sheafification counit; its inverse formula follows from the right triangle identity. Naturality of the counit and monoidal tensorator proves the first-variable tensor-unit formula.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP, 06YS, 06YY and Modules on Sites, Tag 03EK; normalized principal quotient construction."
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YP, 06YS, 06YY and Modules on Sites, Tag 03EK; normalized principal quotient construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactorsh_hom_app|liftOfIsRightKanExtension_fac_app|inr_desc|regularTensorIso_inv_apply",
+   "results": "Found generic Kan lifting and cone projection APIs; local library has the normalized comparison only with coincident universes.",
+   "date": "2026-10-21",
+   "verdict": "Use the generic APIs; no exact normalized independent-universe result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightKanExtension",
+   "results": "12 hits including liftOfIsRightKanExtension and rightKanExtensionUnique; cone search also found quasiIso_descShortComplex.",
+   "date": "2026-10-21",
+   "verdict": "Generic universal-property and cone tools used in the proof, rather than an exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restricted extension of scalars for sheaves of modules is the tensor product with the restricted coefficient ring, normalized by the sheafification of pure tensors, allowing independent site and coefficient universes.",
+   "results": "8 hits: SheafOfModules.restrictScalars, its object/map equations and additivity, PresheafOfModules.restrictScalars and sheafification scalar structure.",
+   "date": "2026-10-21",
+   "verdict": "No normalized tensor comparison. Generalize the proved library construction from ExtensionTensorComparison to independent universes."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone of multiplication by a section identifies with restricted derived scalar extension along a regular principal quotient, and its inclusion is the derived adjunction unit.",
+   "results": "8 hits: CochainComplex.mappingCone and ModuleCat.ExtendRestrictScalarsAdj.unit, including extendRestrictScalarsAdj_unit_app_apply. No normalized independent-universe sheaf augmentation or derived descent match.",
+   "date": "2026-10-22",
+   "verdict": "Use the cone and ordinary unit APIs; the normalized comparison requires the argument here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RegularQuotientConeAugmentation",
+  "date": "2026-10-21",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-extension",
+   "place": "Proof, sole paragraph: integral constructible functors and the finite-level amplitude condition; old lem-cbc-finite-extension-reduction-cone-bound steps 2 and 3, quotient augmentation comparison and naturality through K-flat localization.",
+   "via": [
+    "lem-cbc-regular-quotient-cone-augmentation",
+    "lem-cbc-finite-extension-reduction-cone-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.ExtensionTensorComparisonIndependent",
+  "file": "lean/Sheaf/Algebra/Homology/ExtensionTensorComparisonIndependent.lean",
+  "declaration": "SheafOfModules.IndependentExtensionTensor.exists_extensionTensorComparison",
+  "declarations": [
+   "SheafOfModules.IndependentExtensionTensor.tensorPresheafUnit",
+   "SheafOfModules.IndependentExtensionTensor.exists_extensionTensorComparison",
+   "SheafOfModules.IndependentExtensionTensor.regularTensorIso",
+   "SheafOfModules.IndependentExtensionTensor.tensorPresheafUnit_naturality",
+   "SheafOfModules.IndependentExtensionTensor.regularTensorIso_inv_apply",
+   "SheafOfModules.IndependentExtensionTensor.tensorPresheafUnit_whiskerRight_apply"
+  ],
+  "statement": "theorem exists_extensionTensorComparison (φ : R ⟶ S)\n    (M : SheafOfModules.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) :\n    ∃ e : (monoidalCategory R).tensorObj\n        ((restrictScalars.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))) M ≅\n        (restrictScalars.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n          (changeOfRings φ M),\n      ∀ (V : Cᵒᵖ) (s : S.obj.obj V) (m : M.val.obj V),\n        e.hom.val.app V\n          ((tensorPresheafUnit\n            ((restrictScalars.{r} ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n              (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))) M).app V\n            ((show ((restrictScalars.{r}\n                ((sheafCompose J (forget₂ CommRingCat RingCat)).map φ)).obj\n                  (unit ((sheafCompose J (forget₂ CommRingCat RingCat)).obj S))).val.obj V\n              from s) ⊗ₜ[R.obj.obj V] m)) =\n        (toSheafify J (changeOfRingsPresheaf φ M).presheaf).app V\n          (s ⊗ₜ[R.obj.obj V, (φ.hom.app V).hom] m)",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-62fdf",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261021T173349-L-3592564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-62fdf",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261021T173349-L-3592564",
+  "kind": "interface",
+  "note": "independent cc review: moved defs in RegularQuotientConeBasic vs clones/live item block (line-for-line identical); item statement vs live (byte-identical); sandbox build of all 8 delivered modules + #print axioms (no sorryAx); node proof_deps vs Lean"
+ }
+}

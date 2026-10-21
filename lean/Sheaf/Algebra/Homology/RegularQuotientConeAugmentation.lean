@@ -5,120 +5,35 @@ Authors: SHEAF group Q49
 -/
 module
 
-public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.Algebra.Homology.BifunctorShift
-public import Mathlib.Algebra.Homology.HomotopyCategory.Pretriangulated
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.Algebra.Homology.HomotopyCategory.ShortExact
-import WeilConjectures.Mathlib.Algebra.Homology.HomotopyCategory.Acyclic
-import Sheaf.Algebra.Homology.SheafRingDerivedCoefficientAdjunction
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+public import Sheaf.Algebra.Homology.RegularQuotientConeBasic
+import Sheaf.Algebra.Homology.RegularQuotientConeQuasiIso
+import Sheaf.Algebra.Homology.CochainDerivedAdjunction
+import Sheaf.Algebra.Homology.CochainAugmentationDescent
 import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Mathlib.CategoryTheory.Localization.Predicate
+import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Algebra.Homology.SheafRingCoefficientOrdinaryAdjunction
 
 /-! # Normalized principal-quotient cone augmentation
 
-Source: Stacks Project, sites-cohomology.tex, Tags 06YP, 06YS, 06YT, 06YY and 07A6.
+Source: Stacks Project, Tags 06YP, 06YY and 07A6.
 (blueprint: lem-cbc-regular-quotient-cone-augmentation).
-
-The cone is Mathlib's cone, with unshifted summand second in its biproduct API.
-The ordinary extension is the existing sheafified tensor, whose pure tensors have
-scalar first. All computation maps below use the universal derived counit.
 -/
 
 @[expose] public section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
 
 universe u v r wR wS
 open CategoryTheory CategoryTheory.Limits
+
+open scoped ChangeOfRings
 
 namespace SheafOfModules.RegularQuotientCone
 
 variable {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}
   [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
-
-/-- The recorded module category, as a transparent abbreviation.
-Source: Stacks 06YY (blueprint: lem-cbc-regular-quotient-cone-augmentation). -/
-abbrev Modules (R : Sheaf J CommRingCat.{r}) :=
-  ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)
-
-/-- The recorded restriction functor, as a transparent abbreviation.
-Source: Stacks 03D7 (blueprint: lem-cbc-regular-quotient-cone-augmentation). -/
-noncomputable abbrev restriction {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S) :
-    Modules S ⥤ Modules R :=
-  restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map φ)
-
-/-- Multiplication by the compatible family of local scalars defining a global section.
-Source: Stacks 06YP, principal-resolution construction
-(blueprint: lem-cbc-regular-quotient-cone-augmentation). -/
-noncomputable def scalar (R : Sheaf J CommRingCat.{r})
-    (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections) :
-    𝟭 (Modules R) ⟶ 𝟭 (Modules R) where
-  app M := { val := {
-    app := fun U ↦ ModuleCat.ofHom (LinearMap.lsmul (R.obj.obj U) (M.val.obj U) (t.val U))
-    naturality := by
-      intro U V f
-      ext x
-      change t.val V • M.val.map f x = M.val.map f (t.val U • x)
-      rw [M.val.map_smul]
-      congr 1
-      exact (t.property f).symm } }
-  naturality {M N} f := by
-    ext U x
-    change t.val U • f.val.app U x = f.val.app U (t.val U • x)
-    exact ((f.val.app U).hom.map_smul (t.val U) x).symm
-
-/-- The map of unit modules induced by the ring-sheaf map.
-Source: Stacks 06YP, principal-resolution construction
-(blueprint: lem-cbc-regular-quotient-cone-augmentation). -/
-noncomputable def ringMap {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S) :
-    unit (derivedChangeRingIndependentCoefficients J R) ⟶
-      (restriction φ).obj (unit (derivedChangeRingIndependentCoefficients J S)) :=
-  ((restriction φ).obj (unit (derivedChangeRingIndependentCoefficients J S))).unitHomEquiv.symm
-    (PresheafOfModules.sectionsMk (fun U ↦ (1 : S.obj.obj U))
-      (fun {_ _} f ↦ map_one (S.obj.map f).hom))
-
-/-- Multiplication by the global section on an unbounded cochain complex.
-Source: Stacks 06YP, principal-resolution construction
-(blueprint: lem-cbc-regular-quotient-cone-augmentation). -/
-noncomputable def complexScalar (R : Sheaf J CommRingCat.{r})
-    (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections) :
-    𝟭 (CochainComplex (Modules R) ℤ) ⟶ 𝟭 (CochainComplex (Modules R) ℤ) where
-  app P := {
-    f := fun n ↦ (scalar R t).app (P.X n)
-    comm' := fun i j _ ↦ ((scalar R t).naturality (P.d i j)).symm }
-  naturality {_P _Q} f := by
-    ext n : 1
-    exact (scalar R t).naturality (f.f n)
-
-variable [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
   [HasSheafify J AddCommGrpCat.{r}]
-
-/-- The strict cone functor, with diagonal action on chain maps.
-Source: Stacks 06YP, principal quotient construction
-(blueprint: lem-cbc-regular-quotient-cone-augmentation). -/
-noncomputable def cone (R : Sheaf J CommRingCat.{r})
-    (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections) :
-    CochainComplex (Modules R) ℤ ⥤ CochainComplex (Modules R) ℤ where
-  obj P := CochainComplex.mappingCone ((complexScalar R t).app P)
-  map {_P _Q} h := CochainComplex.mappingCone.map _ _ h h
-    ((complexScalar R t).naturality h).symm
-  map_id _P := CochainComplex.mappingCone.map_id _
-  map_comp _f _g := CochainComplex.mappingCone.map_comp _ _ _ _ _ _ _ _ _
-
-/-- The canonical inclusion into the unshifted summand of the cone.
-Source: Stacks 06YP (blueprint: lem-cbc-regular-quotient-cone-augmentation). -/
-noncomputable def inclusion (R : Sheaf J CommRingCat.{r})
-    (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections) :
-    𝟭 (CochainComplex (Modules R) ℤ) ⟶ cone R t where
-  app P := CochainComplex.mappingCone.inr ((complexScalar R t).app P)
-  naturality {P Q} h := by
-    ext n : 1
-    simp [cone, CochainComplex.mappingCone.map]
 
 variable [EssentiallySmall.{r} C]
   {R S : Sheaf J CommRingCat.{r}} (φ : R ⟶ S)
@@ -149,7 +64,7 @@ structure Augmentation
   /-- The chain augmentation, natural for chain maps (in particular K-flat ones). -/
   a : cone R t ⟶
     d.E.mapHomologicalComplex (.up ℤ) ⋙ (restriction φ).mapHomologicalComplex (.up ℤ)
-  /-- In coordinates `(y,x)` it is `y ⊗ 1`; the shifted component is zero. -/
+  /-- In coordinates `(y,x)` it is `1 ⊗ y`; the shifted component is zero. -/
   a_components : ∀ (P : CochainComplex (Modules R) ℤ) (n : ℤ),
     (a.app P).f n =
       (CochainComplex.mappingCone.snd ((complexScalar R t).app P)).v n n (add_zero n) ≫
@@ -212,34 +127,32 @@ Source: Stacks Project, sites-cohomology.tex, Tags 06YP, 06YS, 06YT, 06YY and 07
 (blueprint: lem-cbc-regular-quotient-cone-augmentation).
 
 Proof:
-1. The exact principal quotient sequence gives a quasi-isomorphism from the two-term
-cone `B = C(t : R[0] → R[0])` to the restricted `S[0]`, by
-lem-pc-cone-short-exact-quasi-iso.
-2. Right tensoring with P identifies `B ⊗ P` with `C(t id_P)` by
-lem-weil-pbc-total-tensor-homotopy-cone-signs: its differential is `(dy+tx,-dx)`.
-The unit and symmetry identify the tensor of the degree-zero quotient with restricted
-ordinary scalar extension, and the tensor map is exactly `(y,x) ↦ 1 ⊗ y`.
-Tag 06YP makes it a quasi-isomorphism for arbitrary K-flat P.
-3. The balanced sectionwise formulas give the chain map, its naturality for every h,
-and `a i = ρ`. They descend through sheafification; no sectionwise epimorphism is used.
-4. B is K-flat: tensoring an acyclic complex with B gives the scalar cone of that
-acyclic complex, which is acyclic by lem-pur-quasi-iso-cone-acyclic. Thus the tensor-cone
-comparison proves cone invariance. Derived change of rings and exact restriction
-(lem-pur-derived-change-of-rings, lem-pur-sheaf-ring-derived-coefficient-adjunction)
-prove restricted scalar-extension invariance; both constructions respect homotopies.
-5. Localize the cone and its inclusion using lem-weil-pbc-localization-universal-property.
-On flat-term K-flat complexes the augmentation gives a natural isomorphism. Descend it
-using lem-weil-pbc-site-derived-tensor-descent, obtaining A on the whole derived category.
-6. For arbitrary K-flat P choose a flat-term K-flat resolution F → P using
-lem-pc-kflat-resolution. Naturality of A and of the universal computation counit,
-and chain naturality of a, identify their two expressions after the invertible cone
-image of F → P. Cancel that image to obtain A_components for P.
-7. The normalized derived coefficient adjunction identifies its unit on flat-term
-K-flat models with Q(ρ). The equality `a i = ρ` and uniqueness under localization
-therefore give unit_identity on every derived object.
-8. For resolutions s : P → X and t : P' → X, apply naturality of A to
-`Q(s) ≫ inv Q(t)`. For a third resolution the two adjacent factors cancel, giving
-the cocycle. The same naturality applies to every derived morphism. -/
+1. Use the normalized ordinary coefficient adjunction to define its unit termwise.
+The zero coefficient composite implies that the scalar annihilates restricted modules;
+naturality of the scalar therefore says that this unit kills multiplication by t.
+The mapping-cone descent construction gives the strict augmentation with zero shifted
+component, its naturality and its composite with the unshifted inclusion.
+2. For flat-term complexes, tensor the given coefficient short exact sequence degreewise.
+The regular tensor unitor and normalized scalar-extension comparison identify its maps
+with the scalar and the coefficient unit. The short-exact-sequence cone projection is
+therefore the augmentation and is a quasi-isomorphism. Resolve an arbitrary K-flat
+complex by a flat-term K-flat complex. Cone invariance, preservation by the specified
+ordinary extension model, exact restriction and naturality give the result for it too.
+Cone invariance itself follows from the two-isomorphisms property of cone triangles.
+3. Transfer the specified universal cochain left-derived pair to homotopy categories.
+Apply derived-adjunction compatibility using the resolving K-flat class and exact
+restriction. Its representative formula at the identity, transported through the canonical
+quotient/localization comparisons, gives the normalized cochain unit equation.
+4. Localize the scalar cone and its inclusion. Postcomposing the universal cochain
+counit with the derived right adjoint preserves its Kan extension property. Thus the
+strict augmentation factors uniquely through this counit. The factor is invertible
+on K-flats, hence on all complexes by resolutions and naturality, and on every derived
+object by essential surjectivity. This constructs A with the prescribed components.
+5. On K-flats, cancel the invertible universal counit and use the strict inclusion
+identity to identify i followed by A with the derived unit. Resolve arbitrary complexes
+to extend the equality by naturality, then use essential surjectivity of localization.
+The result is a natural isomorphism on the whole derived category, so its naturality
+also includes every resolution-comparison roof and its cocycle identities. -/
 theorem nonempty_augmentation
     (t : (unit (derivedChangeRingIndependentCoefficients J R)).sections)
     (ht : (scalar R t).app (unit (derivedChangeRingIndependentCoefficients J R)) ≫
@@ -249,6 +162,119 @@ theorem nonempty_augmentation
       (ringMap φ) ht).ShortExact)
     (d : DerivedChangeOfRingsCochainModel.{u, v, r, wR, wS} φ) :
     Nonempty (Augmentation φ t d) := by
-  sorry
+  classical
+  obtain ⟨hlim, hcol, ho⟩ := sheafRingCoefficientOrdinaryAdjunction φ
+  obtain ⟨adj, ha⟩ := ho d.E d.obj_eq d.map_eq
+  have : PreservesFiniteLimits (restriction φ) := hlim
+  have : PreservesFiniteColimits (restriction φ) := hcol
+  have := d.universal
+  have := d.pointwise
+  let ρ := coefficientUnit φ d.E adj
+  have hsections (M : Modules R) (U : Cᵒᵖ) (x : M.val.obj U) :
+      (eqToHom (d.obj_eq M)).val.app U ((adj.unit.app M).val.app U x) =
+        (toSheafify J (changeOfRingsPresheaf φ M).presheaf).app U
+          ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U,(φ.hom.app U).hom] x) := by
+    have h := ha M (changeOfRings φ M) (𝟙 _) U x
+    simp only [Category.comp_id, Adjunction.homEquiv_unit] at h
+    change (eqToHom (d.obj_eq M)).val.app U ((adj.unit.app M).val.app U x) =
+      (toSheafify J (changeOfRingsPresheaf φ M).presheaf).app U
+        ((1 : S.obj.obj U) ⊗ₜ[R.obj.obj U,(φ.hom.app U).hom] x) at h
+    exact h
+  have hρ : ∀ (P : CochainComplex (Modules R) ℤ) (n : ℤ) (U : Cᵒᵖ)
+      (x : (P.X n).val.obj U),
+      (eqToHom (d.obj_eq (P.X n))).val.app U (((ρ.app P).f n).val.app U x) =
+        (((PresheafOfModules.sheafificationAdjunction.{r}
+          (J := J) (R := derivedChangeRingIndependentCoefficients J S)
+          (𝟙 (derivedChangeRingIndependentCoefficients J S).obj)).unit.app
+          (changeOfRingsPresheaf φ (P.X n))).app U
+          ((ModuleCat.extendRestrictScalarsAdj (φ.hom.app U).hom).unit.app
+            ((P.X n).val.obj U) x)) := by
+    intro P n U x
+    exact hsections (P.X n) U x
+  let a := chainAugmentation t _ ρ (coefficientUnit_zero t φ d.E adj ht)
+  have haQ (P : CochainComplex (Modules R) ℤ)
+      (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) :
+      QuasiIso (a.app P) := chainAugmentation_quasiIso φ t ht _hexact d adj hsections P hP
+  let good : ObjectProperty (CochainComplex (Modules R) ℤ) :=
+    fun P ↦ CochainComplex.IsKFlatIndependentCoefficients (R := R) P
+  have hres : ∀ P : CochainComplex (Modules R) ℤ,
+      ∃ (F : CochainComplex (Modules R) ℤ) (p : F ⟶ P), good F ∧ QuasiIso p := by
+    intro P
+    obtain ⟨F, p, hF, _, hp, _⟩ :=
+      CochainComplex.exists_isKFlatResolutionIndependentCoefficients (R := R) P
+    exact ⟨F, p, hF, hp⟩
+  obtain ⟨dadj, hnorm⟩ := Functor.exists_cochainDerivedAdjunction
+    d.E (restriction φ) adj d.T d.ε good hres d.computes
+  have : (restriction φ).mapDerivedCategory.IsRightAdjoint := ⟨_, ⟨dadj⟩⟩
+  obtain ⟨D, e, i, hi, A, hA⟩ := Functor.exists_cochainAugmentationDescent
+    d.E (restriction φ) d.T d.ε good hres d.computes
+    (cone R t) (inclusion R t) (fun f hf ↦ cone_quasiIso t f hf) a haQ
+  have hn (P : CochainComplex (Modules R) ℤ) :
+      dadj.unit.app (DerivedCategory.Q.obj P) ≫
+          (restriction φ).mapDerivedCategory.map (d.ε.app P) ≫
+          (restriction φ).mapDerivedCategoryFactors.hom.app
+            ((d.E.mapHomologicalComplex (.up ℤ)).obj P) =
+        DerivedCategory.Q.map (ρ.app P) := by
+    exact hnorm P
+  have hiA : i ≫ A.hom = dadj.unit := by
+    have hgood (P : CochainComplex (Modules R) ℤ) (hP : good P) :
+        (i ≫ A.hom).app (DerivedCategory.Q.obj P) =
+          dadj.unit.app (DerivedCategory.Q.obj P) := by
+      have := d.computes P hP
+      apply (cancel_mono
+        ((restriction φ).mapDerivedCategory.map (d.ε.app P) ≫
+          (restriction φ).mapDerivedCategoryFactors.hom.app
+            ((d.E.mapHomologicalComplex (.up ℤ)).obj P))).1
+      simp only [NatTrans.comp_app, Category.assoc]
+      rw [hA, ← Category.assoc, hi, ← DerivedCategory.Q.map_comp, hn]
+      apply DerivedCategory.Q.congr_map
+      exact congrArg (fun f ↦ f.app P)
+        (inclusion_chainAugmentation t _ ρ (coefficientUnit_zero t φ d.E adj ht))
+    have hall (P : CochainComplex (Modules R) ℤ) :
+        (i ≫ A.hom).app (DerivedCategory.Q.obj P) =
+          dadj.unit.app (DerivedCategory.Q.obj P) := by
+      obtain ⟨F, p, hF, hp⟩ := hres P
+      have : IsIso (DerivedCategory.Q.map p) :=
+        Localization.inverts DerivedCategory.Q
+          (HomologicalComplex.quasiIso (Modules R) (.up ℤ)) p hp
+      apply (cancel_epi (DerivedCategory.Q.map p)).1
+      have hl := (i ≫ A.hom).naturality (DerivedCategory.Q.map p)
+      have hr := dadj.unit.naturality (DerivedCategory.Q.map p)
+      simp only [Functor.id_map] at hl hr
+      exact hl.trans ((congrArg
+        (fun f ↦ f ≫ (d.T ⋙ (restriction φ).mapDerivedCategory).map
+          (DerivedCategory.Q.map p)) (hgood F hF)).trans hr.symm)
+    apply NatTrans.ext
+    funext X
+    let Q := DerivedCategory.Q (C := Modules R)
+    let eX := Q.objObjPreimageIso X
+    apply (cancel_epi eX.hom).1
+    simpa only [Functor.id_map] using
+      ((i ≫ A.hom).naturality eX.hom).trans
+        ((congrArg (fun f ↦ f ≫ (d.T ⋙ (restriction φ).mapDerivedCategory).map eX.hom)
+          (hall (Q.objPreimage X))).trans (dadj.unit.naturality eX.hom).symm)
+  exact ⟨{
+    ρ := ρ
+    ρ_sections := hρ
+    a := a
+    a_components := chainAugmentation_components t _ ρ _
+    quasiIso := haQ
+    augmentation_inclusion := inclusion_chainAugmentation t _ ρ _
+    cone_preserves := fun f _ _ hf ↦ cone_quasiIso t f hf
+    tensor_preserves := by
+      intro P Q f hP hQ hf
+      have := d.preserves f hP hQ hf
+      exact HomologicalComplex.quasiIso_map_of_preservesHomology _ (restriction φ)
+    V := (restriction φ).mapDerivedCategory
+    restriction_factor := (restriction φ).mapDerivedCategoryFactors
+    adjunction := dadj
+    unit_normalization := fun P _ ↦ hn P
+    D := D
+    cone_factor := e
+    i := i
+    inclusion_components := hi
+    A := A
+    A_components := fun P _ ↦ hA P
+    unit_identity := hiA }⟩
 
 end SheafOfModules.RegularQuotientCone

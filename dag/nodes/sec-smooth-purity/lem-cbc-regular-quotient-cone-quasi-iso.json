@@ -1,0 +1,125 @@
+{
+ "id": "lem-cbc-regular-quotient-cone-quasi-iso",
+ "kind": "statement",
+ "title": "Principal quotient cone quasi-isomorphism for every K-flat",
+ "statement": "Let R,S,φ,t satisfy the exact principal quotient sequence, and let E be the ordinary extension in a derived coefficient model with its normalized ordinary adjunction. The strict cone map C_t(P)→Res E(P), having zero shifted component and termwise adjunction unit as unshifted component, is a quasi-isomorphism for every K-flat complex P. Only exactness of restriction and the model preservation of quasi-isomorphisms between K-flats are needed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YP, 06YS, 06YY and Modules on Sites, Tag 03EK; normalized principal quotient construction."
+ },
+ "stmt_deps": [
+  "lem-cbc-regular-quotient-cone-chain",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "For flat terms the preceding flat-sequence result gives a degreewise short exact sequence. It is therefore a short exact sequence of complexes. Its mapping-cone projection is the strict augmentation, so Mathlib quasiIso_descShortComplex proves the assertion. Resolve any K-flat P by a flat-term K-flat K→P. The cone map is a quasi-isomorphism, as is the restricted coefficient map by preservation for K-flats and exactness of restriction. Naturality identifies their composites with the augmentations. Cancel the first quasi-isomorphism in this identity to deduce the assertion on P.",
+   "uses": [
+    "lem-cbc-regular-quotient-flat-sequence",
+    "lem-cbc-regular-quotient-cone-chain",
+    "lem-pc-kflat-resolution",
+    "lem-pc-cone-short-exact-quasi-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP, 06YS, 06YY and Modules on Sites, Tag 03EK; normalized principal quotient construction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-regular-quotient-flat-sequence",
+  "lem-cbc-regular-quotient-cone-chain",
+  "lem-pc-kflat-resolution",
+  "lem-pc-cone-short-exact-quasi-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YP, 06YS, 06YY and Modules on Sites, Tag 03EK; normalized principal quotient construction."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryFactorsh_hom_app|liftOfIsRightKanExtension_fac_app|inr_desc|regularTensorIso_inv_apply",
+   "results": "Found generic Kan lifting and cone projection APIs; local library has the normalized comparison only with coincident universes.",
+   "date": "2026-10-21",
+   "verdict": "Use the generic APIs; no exact normalized independent-universe result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightKanExtension",
+   "results": "12 hits including liftOfIsRightKanExtension and rightKanExtensionUnique; cone search also found quasiIso_descShortComplex.",
+   "date": "2026-10-21",
+   "verdict": "Generic universal-property and cone tools used in the proof, rather than an exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized scalar cone quotient augmentation and derived adjunction on module sheaves with independent localization universes",
+   "results": "No exact match in the original cone search; separate derived-adjunction and tensor-comparison searches recorded for this delivery.",
+   "date": "2026-10-21",
+   "verdict": "Not a one-line specialization of a Mathlib theorem."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The mapping cone of multiplication by a section identifies with restricted derived scalar extension along a regular principal quotient, and its inclusion is the derived adjunction unit.",
+   "results": "8 hits: CochainComplex.mappingCone and ModuleCat.ExtendRestrictScalarsAdj.unit, including extendRestrictScalarsAdj_unit_app_apply. No normalized independent-universe sheaf augmentation or derived descent match.",
+   "date": "2026-10-22",
+   "verdict": "Use the cone and ordinary unit APIs; the normalized comparison requires the argument here."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.RegularQuotientConeAugmentation",
+  "date": "2026-10-21",
+  "group": "V9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-cbc-finite-extension",
+   "place": "Proof, sole paragraph: integral constructible functors and the finite-level amplitude condition; old lem-cbc-finite-extension-reduction-cone-bound steps 2 and 3, quotient augmentation comparison and naturality through K-flat localization.",
+   "via": [
+    "lem-cbc-regular-quotient-cone-augmentation",
+    "lem-cbc-finite-extension-reduction-cone-bound"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RegularQuotientConeQuasiIso",
+  "file": "lean/Sheaf/Algebra/Homology/RegularQuotientConeQuasiIso.lean",
+  "declaration": "SheafOfModules.RegularQuotientCone.chainAugmentation_quasiIso",
+  "declarations": [
+   "SheafOfModules.RegularQuotientCone.chainAugmentation_quasiIso"
+  ],
+  "statement": "theorem chainAugmentation_quasiIso\n    [PreservesFiniteLimits (restriction φ)] [PreservesFiniteColimits (restriction φ)]\n    (P : CochainComplex (Modules R) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P) :\n    QuasiIso ((chainAugmentation t _ (coefficientUnit φ d.E adj)\n      (coefficientUnit_zero t φ d.E adj ht)).app P)",
+  "branch": "sheaf-dag",
+  "by": "V9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-62fdf",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261021T173349-L-3592564",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-62fdf",
+  "group": "V9",
+  "result": "pass",
+  "landing": "20261021T173349-L-3592564",
+  "kind": "interface",
+  "note": "independent cc review: moved defs in RegularQuotientConeBasic vs clones/live item block (line-for-line identical); item statement vs live (byte-identical); sandbox build of all 8 delivered modules + #print axioms (no sorryAx); node proof_deps vs Lean"
+ }
+}
