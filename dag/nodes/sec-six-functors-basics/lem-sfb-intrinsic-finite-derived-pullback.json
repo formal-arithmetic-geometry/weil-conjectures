@@ -19,11 +19,9 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-pur-proetale-constant-coefficient-comparison] to $h$ and $A$: the specified constant-section map $c_A^h:h^{-1}A_T\\to A_S$ is an isomorphism, carrying each constant scalar to itself. The geometric morphism on these small sites is the one in [def-weil-proetale-inverse-image]. The exact fixed-ring inverse image of [lem-pe-constant-left-module-inverse-image], with $\\Lambda=A$, therefore agrees with the module pullback in the statement. Indeed, if $N=h^{-1}F$ is regarded as an $A_S$-module through $(c_A^h)^{-1}$, the comparison $N\\otimes_{h^{-1}A_T}A_S\\to N$ sends $n\\otimes a$ to $an$, with inverse $n\\mapsto n\\otimes1$. These formulas are balanced and inverse locally and hence on sheaves, naturally in $F$. The transported scalar action is the same action, since both act by the given constant scalars and extend by sheafification. Thus $h^*$ is additive and exact.",
+   "text": "Use the additive, finite-limit-preserving and finite-colimit-preserving instances already established for the literal constant-coefficient module pullback functor in [lem-pur-proetale-constant-module-pullback-homology]. These instances apply to arbitrary commutative rings, hence to the finite field in the statement.",
    "uses": [
-    "lem-pur-proetale-constant-coefficient-comparison",
-    "def-weil-proetale-inverse-image",
-    "lem-pe-constant-left-module-inverse-image"
+    "lem-pur-proetale-constant-module-pullback-homology"
    ],
    "elementary": false,
    "source": {
@@ -80,11 +78,13 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-localize-ringed-site-morphism] to the base-change site functor for $h_a$, with source object $U_{a,b}$ and target object $V_{a,b}=u_{h_a}(U_{a,b})$. It gives $(h_a^*G_a)|_{V_{a,b}}\\cong(h_{a,b})^*(G_a|_{U_{a,b}})$ on the localized ringed sites. By [lem-weil-proetale-weakly-etale-localization], these localized sites and restricted constant coefficient rings are the small pro-étale sites and constant rings of $U_{a,b}$ and $V_{a,b}$. In these identifications the localized functor is base change by $h_{a,b}:V_{a,b}\\to U_{a,b}$: both send $W\\to U_{a,b}$ to $S_a\\times_{T_a}W\\cong V_{a,b}\\times_{U_{a,b}}W$. The coefficient maps agree on constant sections. If $G_a|_{U_{a,b}}\\cong\\underline{M_{a,b}}$, [lem-sfb-geometric-inverse-image-constant-module] now identifies its inverse image with $\\underline{M_{a,b}}$ on $V_{a,b}$. Combining this with step 4 proves the asserted trivialization of $i_a'^*h^*F$ with exactly the same model $M_{a,b}$. The argument works for all module models, and in particular for the finite models specified in the statement.",
+   "text": "Transport module sheaves and their slice restrictions along the equivalence with the universe-compatible AsSmall site. The actual canonical module pullback agrees with the small-site ringed-module pullback: both are left adjoint to the same direct-image functor, after the canonical coefficient-direct-image normalization from [lem-pur-proetale-finite-local-constancy-pullback]. Apply [lem-weil-pbc-localize-ringed-site-morphism] on these small sites. A constant module presheaf is left adjoint to evaluation at a terminal object, and its sheafification is left adjoint to sections with scalars restricted along the constant-ring unit. The localized coefficient map fixes constant sections. Hence module direct image commutes with these section functors at the slice terminal objects. Uniqueness of left adjoints identifies pullback of the sheafified constant module with the sheafified constant module with exactly the same model. Apply the same adjunction argument to transport constant models along the slice-site equivalence, then compose the resulting isomorphisms and the restriction-composition isomorphism of step 4. This proves triviality on the actual specified base-changed covering, with the original model M, without invoking the comparison of slice sites with sites of covering schemes.",
    "uses": [
+    "def-weil-pbc-proetale-operations",
     "lem-weil-pbc-localize-ringed-site-morphism",
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-sfb-geometric-inverse-image-constant-module"
+    "lem-pur-proetale-finite-local-constancy-pullback",
+    "lem-pur-proetale-constant-coefficient-comparison",
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
@@ -93,10 +93,11 @@
    }
   },
   {
-   "text": "For a geometric point $\\bar s$ of $S_a$, put $\\bar t=h_a\\bar s$. By [lem-pe-constant-left-module-inverse-image] and the identification in step 1, forgetting the scalars of $h_a^*G_a$ gives the abelian inverse image of $G_a$. Thus [lem-pur-proetale-inverse-image-stalk] gives an additive isomorphism $(h_a^*G_a)_{\\bar s}\\cong(G_a)_{\\bar t}$. It is $A$-linear: naturality for the endomorphism multiplication by each $a\\in A$ says exactly that the isomorphism commutes with that scalar, and the coefficient comparison fixes constant scalars. The right-hand stalk is finite by the witnessing constructibility of $F$. Consequently the left-hand stalk is finite, hence finite-dimensional over the field $A$. Together with the local trivializations of step 6, this verifies every condition of [def-weil-proetale-constructible-sheaf] on the stratification of step 3. When $S=\\varnothing$, every object of its site is empty; the sheaf condition for the empty covering makes all its module sections zero. Its unique module sheaf is therefore the constant zero sheaf, and the retained single empty stratum witnesses constructibility.",
+   "text": "Apply [lem-pur-proetale-finite-local-constancy-pullback] to G_a and h_a. It gives local constancy and finite intrinsic geometric stalks of h_a^*G_a. Transport both across the restriction-composition isomorphism from step 4, using the proved isomorphism-invariance helpers in [lem-weil-proetale-dbc-triangulated]. The intrinsic and fixed-module stalk finiteness equivalence in [lem-weil-pbc-proetale-constant-module-constructibility] gives finite fixed-module stalks. A module with finite underlying type is finitely generated, giving the required Module.Finite condition. Keeping all pullback strata retains the positive number of strata, including over the empty scheme; all covering and stalk arguments also hold for empty objects.",
    "uses": [
-    "lem-pe-constant-left-module-inverse-image",
-    "lem-pur-proetale-inverse-image-stalk",
+    "lem-pur-proetale-finite-local-constancy-pullback",
+    "lem-weil-proetale-dbc-triangulated",
+    "lem-weil-pbc-proetale-constant-module-constructibility",
     "def-weil-proetale-constructible-sheaf"
    ],
    "elementary": false,
@@ -107,8 +108,10 @@
   },
   {
    "text": "Finally let $K\\in\\mathcal B_A(T)$ and let $[a,b]$ be any finite interval outside which its cohomology vanishes. The isomorphism of step 2 identifies each cohomology sheaf of $D(h^*)K$ with the pullback of the corresponding cohomology sheaf of $K$. Steps 3–7 make this pullback constructible. For $q\\notin[a,b]$ it is $h^*(0)=0$, since an additive functor preserves zero objects. Hence $D(h^*)K\\in\\mathcal B_A(S)$ with the same vanishing interval. All arguments used arbitrary scheme maps and ordinary constant-ring module sheaves; none required characteristic restrictions, Noetherianity or a cohomological-dimension bound.",
-   "uses": [],
-   "elementary": true,
+   "uses": [
+    "lem-weil-proetale-dbc-triangulated"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Tag 015F (lemma-right-derived-exact-functor), and the definitions of the classes in the item"
@@ -116,27 +119,28 @@
   }
  ],
  "proof_deps": [
+  "def-weil-pbc-proetale-operations",
   "def-weil-pbc-proetale-site",
   "def-weil-proetale-constructible-sheaf",
   "def-weil-proetale-inverse-image",
   "lem-galois-fpqc-covering-base-change",
-  "lem-pe-constant-left-module-inverse-image",
   "lem-pur-proetale-constant-coefficient-comparison",
   "lem-pur-proetale-constant-module-pullback-composition",
-  "lem-pur-proetale-inverse-image-stalk",
+  "lem-pur-proetale-constant-module-pullback-homology",
+  "lem-pur-proetale-finite-local-constancy-pullback",
   "lem-pur-scheme-constructible-preimage",
-  "lem-sfb-geometric-inverse-image-constant-module",
   "lem-weil-pbc-exact-functor-bounded-below",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-localize-ringed-site-morphism",
+  "lem-weil-pbc-proetale-constant-module-constructibility",
   "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-proetale-dbc-triangulated",
   "lemma-constructible-pullback-stratification"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Agent-written intrinsic global-stratification proof extending the finite-discrete motivation of Lemmas 6.5.8(2), 6.5.9(5) to arbitrary schemes, via the cited Stacks results. No comparison with completed or classical categories is assumed."
+  "place": "F5: Lean proof using the existing exact pullback instances and finite-local-constancy theorem; the specified same-model covering is proved by localization on the AsSmall site and uniqueness of left adjoints to terminal-section functors. Original source and unit route retained."
  },
  "mathlib_searches": [
   {
@@ -323,15 +327,11 @@
   "def-weil-proetale-constructible-sheaf",
   "def-weil-proetale-inverse-image",
   "lem-galois-fpqc-covering-base-change",
-  "lem-pe-constant-left-module-inverse-image",
   "lem-pur-proetale-constant-coefficient-comparison",
   "lem-pur-proetale-constant-module-pullback-composition",
-  "lem-pur-proetale-inverse-image-stalk",
-  "lem-sfb-geometric-inverse-image-constant-module",
   "lem-weil-pbc-exact-functor-bounded-below",
   "lem-weil-pbc-localize-ringed-site-morphism",
   "lem-weil-pbc-weakly-etale-composition-base-change",
-  "lem-weil-proetale-weakly-etale-localization",
   "lemma-constructible-pullback-stratification"
  ],
  "reviewed": {
@@ -367,5 +367,15 @@
   "group": "O2",
   "result": "pass",
   "note": "Only the item lean field changed; deps byte-equal to live; statement verbatim; 5 decls all sorry; imports exist. Clauses: exactness (Additive/finite limits/colimits), termwise derived factorization plus natural H^q iso over all unbounded D (node says 'there is', Nonempty OK), constructibility preserved via the recorded IsConstructibleProEtaleModuleSheaf, s.pullback h strata (fst=h_a, snd=i'_a), restriction iso, same cover/same models M_j (∃ b unique since ProEt is full in Over), finite plus Module.Finite stalks, bounded class with the same [a,b]. Functor objects are definitionally proEtaleConstantModulePullback (asIso of the canonical c_A^h). No qcqs/Noetherian/char assumption; edge cases empty S, empty covers, F=0, a=b covered; universes as in the dependency. Advisory: functor, Stratification.pullback, proEtaleModuleRestriction and fixed stalk owners not in stmt_deps; unused proof-plan imports. No recompile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261021T143854-L-14755",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
