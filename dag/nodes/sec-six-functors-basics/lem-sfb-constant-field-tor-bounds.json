@@ -25,87 +25,77 @@
  ],
  "proof": [
   {
-   "text": "Work on the chosen small pro-étale site, and write $R=\\kappa_X$. Apply [lem-exc-constant-field-module-flat] to this topology and to the field $\\kappa$: every sheaf of $R$-modules is flat for the ordinary sheafified tensor product. Its size and sheafification hypotheses are satisfied on the small representative in the enclosing coefficient universe; these are the usual ring and abelian-group sheafifications and their locally bijective equivalences, not an enough-points assumption. In particular every term of any complex of $R$-modules is flat.",
+   "text": "On the coefficient-sized small pro-etale site put R = kappa_X and A = Mod(R). Every module sheaf M is flat by lem-exc-constant-field-module-flat. Via the natural comparison siteSheafTensorRightIso, the monoidal functor tensorRight M is exact. Hence it preserves cohomology by lem-weil-pbc-exact-functor-complex-cohomology.",
    "uses": [
-    "lem-exc-constant-field-module-flat"
+    "lem-exc-constant-field-module-flat",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03ER (definition-flat) and 08FC (lemma-flat-eq), specialized by the existing constant-field flatness node."
+    "place": "Definition 03ER (definition-flat); exact functors: homology.tex, Lemma 010N (lemma-exact-functor)."
    }
   },
   {
-   "text": "Assume $H^i(B)=0$ outside $[a,b]$. The abelian-category bounded representative theorem [lem-sfb-bounded-representative] gives a cochain complex $P^\\bullet$ and an isomorphism $B\\cong Q(P^\\bullet)$ with $P^i=0$ for $i<a$ and $i>b$. Now let $N$ be any $R$-module sheaf and regard $N[0]$ as a complex: its only possibly nonzero term is $N$ in degree $0$, flat by step 1, and its zero terms are flat because tensoring with $0$ gives $0$. Apply [lem-weil-pbc-independent-bounded-flat-kflat] with upper bound $0$: $N[0]$ is K-flat on this ringed site. The lemma applies to sites and independent coefficient universes; it does not require a topological-space presentation or stalks.",
+   "text": "Assume H^i(B) vanishes outside [a,b]. Take any K-flat P with Q(P) isomorphic to B and any module sheaf M. The localization cohomology comparison homologyFunctorFactors identifies H^i(P) with H^i(B). CochainComplex.mapBifunctorSingle₂Iso identifies the total tensor P tensor M[0] with the complex obtained by applying tensorRight M termwise. Exactness from step 1 identifies its degree-i cohomology with H^i(P) tensor M, which is zero outside [a,b]. This verifies every representative and every module in HasCoefficientModelTorAmplitude, with the original endpoints. K-flatness of P is not needed in this implication.",
    "uses": [
-    "lem-sfb-bounded-representative",
-    "lem-weil-pbc-independent-bounded-flat-kflat"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; bounded representatives: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean:180–186."
-   }
-  },
-  {
-   "text": "Fix $N$ as in step 2 and write $T_N(X)=\\operatorname{Tot}(X\\otimes_R N[0])$ [def-pc-tensor-complex-sheaves]. Since $N[0]$ is K-flat, [lem-pur-kflat-tensor-quasiiso-independent] says that $T_N$ sends every quasi-isomorphism to a quasi-isomorphism. Hence $Q\\circ T_N$ inverts quasi-isomorphisms and factors through the localization [def-weil-abstract-derived-category] as $\\overline T_N:D\\to D$ with $\\overline T_N\\circ Q\\cong Q\\circ T_N$. Let $C^\\bullet$ represent $B$ and let $q:P'\\to C^\\bullet$ be the K-flat resolution used in [def-weil-derived-tensor], so that $B\\otimes_R^{\\mathbf L}N=Q\\,T_N(P')$. Then $Q\\,T_N(P')\\cong Q\\,T_N(C^\\bullet)$ via $T_N(q)$, and $Q\\,T_N(C^\\bullet)\\cong\\overline T_N(QC^\\bullet)\\cong\\overline T_N(QP^\\bullet)\\cong Q\\,T_N(P^\\bullet)$ via $QC^\\bullet=B\\cong QP^\\bullet$ from step 2. In the total-complex formula for $T_N(P^\\bullet)$, only the summand with second degree zero contributes, so degree $i$ is $P^i\\otimes_R N$ and the differential is $d_P^i\\otimes 1$. These terms are zero for $i\\notin[a,b]$. Their kernels modulo images are therefore zero there, and by invariance of cohomology sheaves under isomorphisms in $D$ [def-weil-derived-cohomology-sheaves], $H^i(B\\otimes^{\\mathbf L}_RN)=0$ for $i\\notin[a,b]$. Since $N$ was arbitrary, this proves the forward implication with the same endpoints.",
-   "uses": [
-    "lem-pur-kflat-tensor-quasiiso-independent",
     "def-weil-abstract-derived-category",
-    "def-weil-derived-tensor",
+    "def-weil-derived-cohomology-sheaves",
     "def-pc-tensor-complex-sheaves",
-    "def-weil-derived-cohomology-sheaves"
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-proetale-tor-amplitude"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism (tensor with a K-flat complex preserves quasi-isomorphisms), and the paragraph before definition-derived-tor (independence of the K-flat representative)."
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Lemma 010N (lemma-exact-functor), applied degreewise; sites-cohomology.tex, Definition 08FZ (definition-tor-amplitude)."
    }
   },
   {
-   "text": "Conversely, assume the tensor vanishing for every $N$. Represent the arbitrary object $B$ by a complex $C^\\bullet$ and choose a K-flat quasi-isomorphism $P^\\bullet\\to C^\\bullet$ by [lem-pc-kflat-resolution]; no bound on $B$ is used here. Set $N=R$, in degree zero. By [def-weil-derived-tensor] and [def-pc-tensor-complex-sheaves], $B\\otimes_R^{\\mathbf L}R$ is represented by the complex with terms $P^i\\otimes_R R$ and differential $d_P^i\\otimes1$. Sectionwise the mutually inverse maps $p\\otimes r\\mapsto rp$ and $p\\mapsto p\\otimes1$ commute with restrictions and differentials. They give an isomorphism after sheafification [def-pur-sheaf-tensor-product], hence an isomorphism of this total complex with $P^\\bullet$. Thus $B\\otimes_R^{\\mathbf L}R\\cong B$. Cohomology is invariant under these derived isomorphisms [def-weil-derived-cohomology-sheaves], so the assumed vanishing for this particular $N$ gives $H^i(B)=0$ for $i\\notin[a,b]$.",
+   "text": "Conversely choose an arbitrary representing complex L for B using essential surjectivity of Q, and a K-flat quasi-isomorphism P -> L by lem-pc-kflat-resolution. Then Q(P) is isomorphic to B. Test the Tor predicate with this representative and the coefficient module R. The canonical ringedKoszulRightUnitIso identifies the total tensor P tensor R[0] with P. Applying cohomology to this unit isomorphism and the derived cohomology comparison gives the required vanishing of H^i(B). No boundedness assumption is used to choose the resolution.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "def-weil-derived-tensor",
     "def-pc-tensor-complex-sheaves",
     "def-pur-sheaf-tensor-product",
-    "def-weil-derived-cohomology-sheaves"
+    "def-weil-abstract-derived-category",
+    "def-weil-derived-cohomology-sheaves",
+    "def-weil-proetale-tor-amplitude"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 08FZ, definition-tor-amplitude and the following paragraph testing with the coefficient sheaf."
+    "place": "Tag 06YS (lemma-K-flat-resolution); paragraph following Definition 08FZ (definition-tor-amplitude), testing with the coefficient module."
    }
   },
   {
-   "text": "The second condition is exactly Tor amplitude in $[a,b]$ by [def-weil-proetale-tor-amplitude]. Taking existence of an ordered integer interval in the two implications identifies finite Tor amplitude with bounded cohomology. The zero object is covered by any ordered interval, including $[0,0]$. No constructibility or geometric finiteness condition entered any step.",
+   "text": "Take existence of the same ordered integer endpoints in the two implications to obtain finite Tor amplitude if and only if bounded cohomology. In the reverse direction of this finite equivalence use the supplied inequality a <= b; in the forward direction it is part of the Tor predicate. Zero objects, singleton intervals and the empty site need no separate cases.",
    "uses": [
     "def-weil-proetale-tor-amplitude"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FZ, definition-tor-amplitude, clauses (1) and (2)."
+    "place": "Definition 08FZ (definition-tor-amplitude), clauses (1)-(2)."
    }
   }
  ],
  "proof_deps": [
   "lem-exc-constant-field-module-flat",
-  "lem-sfb-bounded-representative",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-pur-kflat-tensor-quasiiso-independent",
-  "def-weil-abstract-derived-category",
-  "def-weil-derived-tensor",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-derived-cohomology-sheaves",
-  "lem-pc-kflat-resolution",
   "def-pur-sheaf-tensor-product",
-  "def-weil-proetale-tor-amplitude"
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-proetale-tor-amplitude",
+  "lem-pc-kflat-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models.proof.md",
-  "place": "First paragraph, sentence beginning “Since the residue ring is a field”; expanded using existing flatness, bounded representative and K-flat resolution nodes."
+  "place": "First paragraph, residue-field Tor bounds; shortened by exactness of tensoring with any constant-field module and the degree-zero tensor comparison. Exactness and unit test are from Stacks 03ER, 010N and 08FZ."
  },
  "mathlib_searches": [
   {
@@ -274,9 +264,7 @@
  },
  "tool_uses": [
   "lem-exc-constant-field-module-flat",
-  "lem-weil-pbc-independent-bounded-flat-kflat",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-tensor-quasiiso-independent"
+  "lem-pc-kflat-resolution"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -308,5 +296,15 @@
   "group": "Q10",
   "result": "pass",
   "note": "Re-delivery of a014f19ddb11 (returned for H13/H4 F1/F2). All 8 stmt_dep records identical to side-live; only the item lean record is new. Module changed only by dropping the unused IntrinsicDerivedTensorOfUniverses import. Every clause matches the node: Scheme.{u} X, Field κ : Type (max v (u+1)), coefficientProEtaleModelTopology = AsSmall ProEt with induced topology, constantSheaf of κ, ringedSiteModules, standard DerivedCategory, coefficientModelCohomology = homologyFunctor with both endpoints, HasCoefficientProEtaleTorAmplitude tests every M[0] on every K-flat representative (they exist). Finite variant uses one common interval. Statement is true (flatness forward, unit test backward). Edge cases B=0, a=b, empty scheme, any char, unbounded B, independent universes covered. Proofs exactly sorry; source/blueprint docstrings present; lean.statement verbatim; no new defs; no name clash. nt_compile --json 15.9 s clean, broken control errors. Advisories: cohomology record bound to SF-specific decls, item uses general homologyFunctor via the Tor dep module; derived-tensor record unused, Tor predicate uses ringedKoszulTensor; proof-only imports not needed for the statement."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P5",
+  "result": "pass",
+  "landing": "20261021T111418-L-116082",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
