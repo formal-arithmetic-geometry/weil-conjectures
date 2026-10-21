@@ -2,7 +2,7 @@
  "id": "lem-sfb-normed-scalar-profinite-hom-acyclic",
  "kind": "statement",
  "title": "Underived continuous functions compute derived internal functions of profinite parameters",
- "statement": "Fix a prime $\\ell$, an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended norm topology, and a finite intermediate field $E$. For $F=E$ or $\\Omega$ put $A_F(S)=C(S,F)$ with all continuous functions [def-sfb-continuous-map-condensed-ring]. Use the small coherent profinite site in [def-weil-size-convention], its ordinary internal $A_F$-modules [sk-def-sfb-module-objects], and ordinary derived categories [sk-def-sfb-derived-categories]. For a profinite set $P$ in these universes, let $A_F[P]$ be the free internal $A_F$-module on $\\underline P(S)=C(S,P)$; this is the left adjoint to forgetting modules to condensed sets. Let $\\mathcal C_F(P)$ be the internal module whose sections on $S$ are $C(S\\times P,F)$, with $A_F(S)$ acting through the $S$-coordinate. Evaluation identifies it with $\\underline{\\operatorname{Hom}}_{A_F}(A_F[P],A_F)$, where internal module Hom is the right adjoint of internal tensor. Derive this Hom in its second variable by nonnegative injective resolutions. The canonical resolution comparison is an isomorphism\n$$\\mathcal C_F(P)[0]\\longrightarrow R\\underline{\\operatorname{Hom}}_{A_F}(A_F[P],A_F[0])$$\nin $D(\\operatorname{Mod}_{A_F})$. It is natural contravariantly in every continuous map of profinite parameter sets and its degree-zero map is the evaluation identification just specified. No completeness hypothesis on $\\Omega$, completion of $F$, or restriction to locally constant functions is imposed.",
+ "statement": "Fix a prime $\\ell$ and a finite extension $E/\\mathbf Q_\\ell$ with its extending norm topology. Put $F=E$ and $A_F(S)=C(S,F)$ with all continuous functions [def-sfb-continuous-map-condensed-ring]. Use the small coherent profinite site in [def-weil-size-convention], its ordinary internal $A_F$-modules [sk-def-sfb-module-objects], and ordinary derived categories [sk-def-sfb-derived-categories]. For a profinite set $P$ in these universes, let $A_F[P]$ be the free internal $A_F$-module on $\\underline P(S)=C(S,P)$; this is the left adjoint to forgetting modules to condensed sets. Let $\\mathcal C_F(P)$ be the internal module whose sections on $S$ are $C(S\\times P,F)$, with $A_F(S)$ acting through the $S$-coordinate. Evaluation identifies it with $\\underline{\\operatorname{Hom}}_{A_F}(A_F[P],A_F)$, where internal module Hom is the right adjoint of internal tensor. Derive this Hom in its second variable by nonnegative injective resolutions. The canonical resolution comparison is an isomorphism\n$$\\mathcal C_F(P)[0]\\longrightarrow R\\underline{\\operatorname{Hom}}_{A_F}(A_F[P],A_F[0])$$\nin $D(\\operatorname{Mod}_{A_F})$. It is natural contravariantly in every continuous map of profinite parameter sets and its degree-zero map is the evaluation identification just specified. The coefficient field $F=E$ is complete. All continuous functions are retained; no restriction to locally constant functions is imposed.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), open-direct-image input, below the trivial scalar prime-to-ell acyclicity input: profinite-parameter column computation before totalizing the internal group nerve. Agent-formulated analytic input; an exact reference for ordinary condensed modules and noncomplete norm-topological Omega is WANTED."
@@ -13,9 +13,94 @@
   "sk-def-sfb-module-objects",
   "sk-def-sfb-derived-categories"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=A_F$. Use the internal-to-sectionwise equivalence in [def-weil-pbc-internal-abelian-sheaf-module-equivalence] on the small coherent profinite site. Its hypotheses hold for the sheafified abelian tensor of [sk-def-sfb-sheaf-tensor]. It leaves sections, restrictions and the regular coefficient module unchanged. By [lem-pe-internal-section-tensor-comparison] it is exact and preserves tensor, hence identifies right adjoints by their adjunction bijections. The sectionwise tensor right adjoint is exactly the slice sheaf Hom of [def-pur-sheaf-hom], by [lem-pc-sheaf-modules-tensor-closed]; thus this is the transported internal Hom. The abelian sheaf category is Grothendieck, with additive closed tensor, by [lem-weil-pbc-sheaf-tensor-closed] applied to $\\mathcal A=\\operatorname{Ab}$. The internal module category is consequently Grothendieck by [lem-sfb-modobj-grothendieck], so [lem-sp-grothendieck-enough-injectives] supplies a nonnegative injective resolution $A\\to I^\\bullet$. An exact equivalence preserves injectivity, since its inverse carries monomorphisms to monomorphisms and its Hom bijections carry the injective lifting property to the same property. We may therefore compute in sectionwise $A$-modules.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-modobj-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J7 and 03FD (injective module resolutions), and sites-modules.tex Tag 03EO (lemma-internal-hom-adjoint-tensor), for the sheaf-Hom identification"
+   }
+  },
+  {
+   "text": "For an $A$-module $N$ and a profinite $S$, the definition [def-pur-sheaf-hom] gives $\\mathcal Hom_A(A[P],N)(S)=\\operatorname{Hom}_{A|_S}(A[P]|_S,N|_S)$. A map on the right is specified by the image of the universal generator: it is a section $x\\in N(S\\times P)$. Explicitly a generator over $U\\to S$ given by $p:U\\to P$ is sent to $(U\\to S\\times P)^*x$, and a linear combination $\\sum_i a_i[p_i]$ is sent to $\\sum_i a_i(U\\to S\\times P)^*_ix$. Conversely evaluating on the tautological $P$-coordinate of $S\\times P$ recovers $x$. These operations are inverse, natural in $N,S,P$, and respect sheafification by the defining universal property of the free internal module $A[P]$. Thus the complex $J^\\bullet=\\mathcal Hom_A(A[P],I^\\bullet)$ has $J^n(S)=I^n(S\\times P)$, with the same differentials. At $N=A$ this gives $C(S\\times P,F)$, and scalar multiplication uses the $S$-coordinate. By derivation in the second variable using the chosen nonnegative injective resolution, $J^\\bullet$ represents the required derived Hom. The comparison map on $S$ is $A(S\\times P)[0]\\to I^\\bullet(S\\times P)$ induced by the resolution augmentation.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, definition of derived sheaf Hom and the free-module evaluation identification"
+   }
+  },
+  {
+   "text": "Let $\\mathcal F$ be the underlying abelian sheaf of $A$, so $\\mathcal F(V)=C(V,F)$. For a finite jointly surjective cover $\\{T_i\\to V\\}$, form the continuous surjection $q:T=\\coprod_iT_i\\to V$. Apply [lem-sfb-normed-scalar-profinite-cech-exact] to $q$. Each fibre power $T_V^{n+1}$ is the finite disjoint union of $(T_{i_0}\\times_V\\cdots\\times_VT_{i_n})$ over tuples of indices. A function on this disjoint union is continuous exactly when its restrictions are continuous. Therefore its function group is the product of the groups in degree $n$ of [def-weil-pbc-site-cech-complex]. Omitting coordinates has the corresponding tuple-of-indices restrictions, so the differential is precisely the alternating Cech differential. The cited analytic exactness says that every positive Cech cocycle for this cover is a coboundary, hence its positive Cech cohomology vanishes.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "lem-sfb-normed-scalar-profinite-cech-exact",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(2)–(4), finite complete E case; agent passage from the analytic Cech lemma to finite covering families"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-site-cech-vanishing-criterion] to this coherent profinite site with $\\mathcal B$ all its objects and $\\mathrm{Cov}$ all its defining finite jointly surjective covering families. Every iterated fibre product is profinite, so lies in $\\mathcal B$. These families are the coverings in the defining pretopology, hence cofinal as required; equivalently any generated covering sieve contains such a family. Step 3 verifies the positive Cech-vanishing hypothesis for every member of $\\mathrm{Cov}$. We obtain $H^q(V,\\mathcal F)=0$ for all profinite $V$ and $q>0$. Now [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison], for the actual ring sheaf $A$, identifies $H^q(I^\\bullet(V))$ with these abelian-sheaf groups and identifies degree zero with $A(V)$. Its smallness and enough-injectives hypotheses were checked in Step 1; it imposes no constant-ring condition; completeness of E is used only in the analytic input of Step 3. In particular $A(S\\times P)[0]\\to I^\\bullet(S\\times P)$ is a quasi-isomorphism of abelian-group complexes for every $S$.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9 (lemma-cech-vanish-collection) followed by Tag 03FD (lemma-cohomology-modules-abelian-agree)"
+   }
+  },
+  {
+   "text": "By Steps 2 and 4 the augmentation $\\mathcal C_F(P)[0]\\to J^\\bullet$ is exact on section complexes on every profinite test object. For each positive degree, the presheaf kernel equals the presheaf image; at degree zero its kernel is the image of $\\mathcal C_F(P)$. Thus these presheaf images are already the corresponding kernel sheaves, so the same equality holds for sheaf images. This proves that the augmentation is a quasi-isomorphism of module sheaves, hence an isomorphism after derived localization [sk-def-sfb-derived-categories]. For a continuous $v:P'\\to P$, the map between section complexes is restriction along $1_S\\times v$. It commutes with $I^\\bullet$'s differentials and augmentation by naturality of the resolution maps as sheaf maps. The free-generator description in Step 2 identifies this map with precomposition by $A[P']\\to A[P]$. Consequently the square of comparison chain maps commutes before localization and therefore afterwards. In degree zero it sends $f(s,p)$ to $f(s,v(p'))$, exactly the prescribed evaluation identification and its parameter naturality. All arguments used $C(-,F)$ itself.",
+   "uses": [
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, the fixed augmentation and functoriality of restriction in the Hom-complex model"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-site-cech-complex",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sfb-normed-scalar-profinite-cech-exact",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), finite E branch: agent expansion with Stacks 03EO, 03F9 and 03FD. Positive continuous Cech exactness is a separate statement-only input, supported for finite complete E by Bhatt–Scholze Lemma 4.3.9(2)–(4). The former norm-topological Omega branch is refuted in the repair report."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -51,10 +136,265 @@
    "results": "8 hits: Condensed.profiniteFree, CondensedMod.ofSheafProfinite, AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace, continuousCohomology, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, LightCondAb.ofSheafLightProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, LightCondMod.ofSheafLightProfinite",
    "date": "2026-10-22",
    "verdict": "no match: the hits do not state this comparison for ordinary internal modules over all-continuous norm-topological scalar rings"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from free condensed modules on profinite sets to a normed nonarchimedean field is concentrated in degree zero",
+   "results": "8 hits: LightCondensed.ihomPoints, LightCondensed.ihomPoints_apply, Condensed.profiniteFree, Condensed.profiniteSolid, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.ihomPoints_symm_comp, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.ihomPoints_symm_apply",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not prove continuous Cech exactness for norm-topological ell-adic scalars, including noncomplete Omega; singular homology, locally constant Nobeling sequences and complete algebraic adic modules have different objects or hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "(acyclic|internallyProjective|derived|Ext)",
+   "results": "25 hits: Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/TopComparison.lean, Mathlib/Condensed/EffectiveEpi.lean, Mathlib/Condensed/Equivalence.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not prove continuous Cech exactness for norm-topological ell-adic scalars, including noncomplete Omega; singular homology, locally constant Nobeling sequences and complete algebraic adic modules have different objects or hypotheses"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A topological normed field as a condensed module has no higher cohomology on profinite sets",
+   "results": "8 hits: CondensedMod.isDiscrete_tfae, CondensedMod.IsSolid.mk, CondensedMod.ofSheafProfinite, NormedField.instCompletableTopField, LightCondensed, instAbelianCondensedMod, Condensed.isSheafProfinite, Condensed.profiniteSolidIsPointwiseRightKanExtension",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not prove continuous Cech exactness for norm-topological ell-adic scalars, including noncomplete Omega; singular homology, locally constant Nobeling sequences and complete algebraic adic modules have different objects or hypotheses"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Ext\"",
+   "results": "12 hits: Condensed.hom_ext, Condensed.hom_ext_iff, LightCondensed.hom_ext, LightCondensed.hom_ext_iff, Condensed.lanPresheafExt, LightCondensed.lanPresheafExt, Condensed.lanPresheafExt_hom, Condensed.lanPresheafExt_inv",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not prove continuous Cech exactness for norm-topological ell-adic scalars, including noncomplete Omega; singular homology, locally constant Nobeling sequences and complete algebraic adic modules have different objects or hypotheses"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher sheaf cohomology of profinite sets with coefficients in arbitrary ultrametric topological abelian groups vanishes",
+   "results": "8 hits: LightCondensed.IsDiscrete, Condensed.isSheafProfinite, LightCondAb.ofSheafLightProfinite, LightProfinite.hasSheafify_type, CondensedMod.ofSheafProfinite, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, Condensed.lanSheafProfinite, Condensed.ofSheafForgetProfinite",
+   "date": "2026-10-22",
+   "verdict": "no match: the hits do not prove continuous Cech exactness for norm-topological ell-adic scalars, including noncomplete Omega; singular homology, locally constant Nobeling sequences and complete algebraic adic modules have different objects or hypotheses"
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|Cech.*(exact|acyclic)|ContinuousMap.*(Cech|cocycle)",
+   "results": {
+    "t": "2026-10-21T18:14:24Z",
+    "tool": "grep",
+    "query": "cechComplexFunctor|Cech.*(exact|acyclic)|ContinuousMap.*(Cech|cocycle)",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean"
+    ],
+    "digest": "7f32ed786627d148"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed modules and Cech complexes, conditional light internal-projectivity criteria, locally constant integer sequences, singular homology or completeness of a field do not state positive continuous Cech exactness or this derived comparison for the variable sheaf C(-,E)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplexFunctor\"",
+   "results": {
+    "t": "2026-10-21T18:14:24Z",
+    "tool": "loogle",
+    "query": "\"cechComplexFunctor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.cechComplexFunctor"
+    ],
+    "digest": "4596b05316f088d8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed modules and Cech complexes, conditional light internal-projectivity criteria, locally constant integer sequences, singular homology or completeness of a field do not state positive continuous Cech exactness or this derived comparison for the variable sheaf C(-,E)"
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|Profinite).*(acyclic|derived|internallyProjective)|(acyclic|derived).*(Condensed|Profinite)",
+   "results": {
+    "t": "2026-10-21T18:45:41Z",
+    "tool": "grep",
+    "query": "(Condensed|Profinite).*(acyclic|derived|internallyProjective)|(acyclic|derived).*(Condensed|Profinite)",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/InternallyProjective.lean",
+     "Mathlib/Condensed/Light/Sequence.lean",
+     "Mathlib/Condensed/Light/Sequence.lean",
+     "Mathlib/Condensed/Light/Sequence.lean"
+    ],
+    "digest": "e795baee27e465e2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed modules and Cech complexes, conditional light internal-projectivity criteria, locally constant integer sequences, singular homology or completeness of a field do not state positive continuous Cech exactness or this derived comparison for the variable sheaf C(-,E)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Higher cohomology of a profinite set with coefficients in a complete nonarchimedean normed field vanishes",
+   "results": {
+    "t": "2026-10-21T18:45:41Z",
+    "tool": "leansearch",
+    "query": "Higher cohomology of a profinite set with coefficients in a complete nonarchimedean normed field vanishes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.instEnoughProjectives",
+     "IsNonarchimedeanLocalField.instCompleteSpace",
+     "Profinite.lim",
+     "Profinite",
+     "Profinite.asLimit",
+     "Profinite.isoAsLimitConeLift",
+     "Profinite.hasColimits",
+     "Profinite.projective_of_extrDisc"
+    ],
+    "digest": "7f9cacf241596417"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed modules and Cech complexes, conditional light internal-projectivity criteria, locally constant integer sequences, singular homology or completeness of a field do not state positive continuous Cech exactness or this derived comparison for the variable sheaf C(-,E)"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"internallyProjective\"",
+   "results": {
+    "t": "2026-10-21T18:45:42Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"internallyProjective\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.internallyProjective_iff_tensor_condition",
+     "LightCondensed.internallyProjective_iff_tensor_condition'",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition",
+     "LightCondensed.free_internallyProjective_iff_tensor_condition'",
+     "LightCondensed.internallyProjective_free_natUnionInfty"
+    ],
+    "digest": "f8a6cd167b380a49"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed modules and Cech complexes, conditional light internal-projectivity criteria, locally constant integer sequences, singular homology or completeness of a field do not state positive continuous Cech exactness or this derived comparison for the variable sheaf C(-,E)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite extension E of the ell adic rationals and a profinite set P derived internal Hom from the free condensed E module on P to E is continuous functions in degree zero",
+   "results": {
+    "t": "2026-10-21T18:45:42Z",
+    "tool": "leanfinder",
+    "query": "For a finite extension E of the ell adic rationals and a profinite set P derived internal Hom from the free condensed E module on P to E is continuous functions in degree zero",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.profiniteFree",
+     "Condensed.profiniteSolid",
+     "LightCondensed.ihomPoints",
+     "LightCondensed.ihomPoints_apply",
+     "Condensed.finFree",
+     "LightCondensed.ihomPoints_symm_apply",
+     "LightCondensed.ihomPoints_symm_comp",
+     "LocallyConstant.freeOfProfinite"
+    ],
+    "digest": "2f84cb3f87ee6e73"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed modules and Cech complexes, conditional light internal-projectivity criteria, locally constant integer sequences, singular homology or completeness of a field do not state positive continuous Cech exactness or this derived comparison for the variable sheaf C(-,E)"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous Cech cocycles for a profinite surjection with values in a complete ultrametric field are coboundaries",
+   "results": {
+    "t": "2026-10-21T18:46:39Z",
+    "tool": "leansearch",
+    "query": "Continuous Cech cocycles for a profinite surjection with values in a complete ultrametric field are coboundaries",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "Condensed.lanSheafProfinite",
+     "Condensed.isSheafProfinite",
+     "Profinite.NobelingProof.CC_exact",
+     "Profinite.asLimit",
+     "Profinite.lim",
+     "Profinite.asLimitConeIso",
+     "Profinite.hasColimits"
+    ],
+    "digest": "1a1a71ca2dad2219"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed modules and Cech complexes, conditional light internal-projectivity criteria, locally constant integer sequences, singular homology or completeness of a field do not state positive continuous Cech exactness or this derived comparison for the variable sheaf C(-,E)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete nonarchimedean Banach coefficients are acyclic for continuous descent on compact totally disconnected spaces",
+   "results": {
+    "t": "2026-10-21T18:46:40Z",
+    "tool": "leanfinder",
+    "query": "Complete nonarchimedean Banach coefficients are acyclic for continuous descent on compact totally disconnected spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+     "AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace",
+     "AlgebraicTopology.singularHomologyFunctorZeroOfTotallyDisconnectedSpace",
+     "Condensed.isSheafProfinite",
+     "CondensedSet.mem_locallyConstant_essImage_of_isColimit_mapCocone",
+     "LightProfinite.instTotallyDisconnectedSpaceCarrierToTopTruePtCompHausLimitConeCompLightProfiniteToCompHaus",
+     "LightCondensed",
+     "CondensedMod.ofSheafProfinite"
+    ],
+    "digest": "af659f49e295c10e"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed modules and Cech complexes, conditional light internal-projectivity criteria, locally constant integer sequences, singular homology or completeness of a field do not state positive continuous Cech exactness or this derived comparison for the variable sheaf C(-,E)"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The continuous Cech cochain complex of a surjection of profinite sets with coefficients in a finite extension of Q ell is exact in positive degrees",
+   "results": {
+    "t": "2026-10-21T18:46:41Z",
+    "tool": "leanfinder",
+    "query": "The continuous Cech cochain complex of a surjection of profinite sets with coefficients in a finite extension of Q ell is exact in positive degrees",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.succ_exact",
+     "Profinite.NobelingProof.CC_exact",
+     "AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+     "ChainComplex.alternatingConst_exactAt",
+     "CochainComplex.isGE_iff",
+     "CochainComplex.exactAt_of_isGE",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+     "CochainComplex.exactAt_of_isLE"
+    ],
+    "digest": "8f9ba282ca8f1b85"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: constructors of condensed modules and Cech complexes, conditional light internal-projectivity criteria, locally constant integer sequences, singular homology or completeness of a field do not state positive continuous Cech exactness or this derived comparison for the variable sheaf C(-,E)"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-prime-to-ell-condensed-acyclicity",
@@ -79,5 +419,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normed-scalar-profinite-hom-acyclic",
+  "worker": "stage1",
+  "summary": "Repair of E2: corrected the false all-continuous norm-topological Omega case by restricting this item and its analytic Cech input to finite complete E. Retained the five-step derived argument, its free-generator formula, specified augmentation and parameter naturality. Added the sheaf-module tensor/Hom adjunction citation and the missing module-Grothendieck tool declaration. Report records the Cantor-set counterexample, source-topology distinction, and parent/polynomial-sibling audit. One new statement-only analytic node, no Mathlib leaves.",
+  "blueprint": "Paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md: the finite E open-coefficient branch only. The paragraph delegates to sk-prop-open-coefficients and makes no all-continuous norm-topological Omega acyclicity claim. The imported Qlb coefficient is the finite-subextension sheaf; the rejected Omega addition was an agent expansion. Inherited blueprint ancestor is None, with the existing via chain retained. Chapter and unit records are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic exact monoidal internal/sectionwise equivalence; used to compare internal Hom, not to replace a geometric unit step."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Generic injective-resolution existence in a Grothendieck abelian category."
+   },
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "Generic all-site Cech criterion converts analytic Cech exactness to abelian derived-evaluation vanishing."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic arbitrary-ring comparison computes the section complex of a module injective resolution from abelian-sheaf cohomology."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic Grothendieck and additive closed tensor structure for sheaves of abelian groups on a small site; needed to check the module-Grothendieck theorem hypotheses."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic Grothendieck-category theorem for modules over a commutative monoid, applied after checking additive closed tensor; the open-direct-image unit does not supply this categorical existence input."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tensor–sheaf-Hom adjunction identifies the transported internal right adjoint with the slice sheaf Hom used in Step 2; it supplies no geometric direct-image argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-modobj-grothendieck",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NY-6160a3934",
+  "group": "NY",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-6160a3934 (reviewer sub-agent of L); spot-checked: I read the delivery in full. It answers the E2 RETURN of 6f0dfe97, and every point of that RETURN is repaired. (1) Statement: both nodes now take F=E, any finite extension of Q_ell, with the report section 'Source error'. I verified the Omega counterexample myself: on the Cantor set, with T=beta(S_disc) and an alpha-orthogonal basis, f=W(y)-W(x) is an Omega-valued Cech 1-cocycle, and a primitive would give h with h-w in Omega; Baire gives a point with infinitely many nonzero coordinates. So H^1(S,C(-,Omega)) is nonzero and the old item fails at P = Cantor set. The narrowing is forced by falsity, not a weakening. main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md lines 19-25 (paragraph (3)) makes no Omega claim; the clause was an agent addition, so no unit or target changes. (2) Step 1 now cites lem-pc-sheaf-modules-tensor-closed (C1/C4). (3) lem-sfb-modobj-grothendieck is now in tool_uses. Steps: the Grothendieck chain (Step 1), Hom(A[P]|_S,N|_S)=N(S x P) by Yoneda on the slice (Step 2), the Cech identification over the disjoint union of the cover (Step 3), the general-site Cech criterion hypotheses (1)-(3) and the arbitrary-ring module/abelian comparison (Step 4), and the sectionwise quasi-isomorphism and naturality in P (Step 5) all hold. The new node lem-sfb-normed-scalar-profinite-cech-exact is true for E: Bhatt-Scholze Lemma 4.3.9(2)-(4) with G=1 and Lemma 4.3.7 give H^i(S,C(-,E))=0 for i>0, and applied to the fibre powers this gives Cech exactness. It is self-contained, statement only, and strictly smaller than the item. rg -L found no duplicate (read: lem-exc-coinduced-continuous-acyclic, lem-sc-group-coinduced-acyclic, lem-exc-cochains-derived-invariants, lem-sfb-continuous-coefficient-free-rank). No SGA is cited. Edge cases checked: P empty, P a point, empty surjection. Maintainer note: two other-group citers rely on the removed Omega case and must be reopened. One is lem-sfb-prime-to-ell-condensed-acyclicity step 2, named in the report. The other is NR's lem-sfb-profinite-algcl-derived-invariants-comparison step 2, which applies the item to B=C(-,Omega) and is missing from the report's citer audit."
  }
 }
