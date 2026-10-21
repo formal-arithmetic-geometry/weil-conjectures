@@ -16,9 +16,106 @@
   "sk-def-sfb-module-objects",
   "def-sfb-finitely-presented-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $S=\\Lambda_U$, and write $\\varphi:R_U\\to S$ for the given scalar map. Work on the small skeleton of $U_{\\mathrm{pro\\acute et}}$ in the coefficient universe specified by the site convention. Abelian sheaves there have the exact sheafification and closed sheafified tensor structure of [lem-weil-pbc-sheaf-tensor-closed]. Thus [def-weil-pbc-internal-abelian-sheaf-module-equivalence] applies to both $R_U$ and $S$. Its equivalences preserve underlying sheaves and sections. By [def-sfb-modobj-extension], $E_U(Q)$ is the coequalizer of $(\\mu_S(S\\otimes\\varphi))\\otimes Q_U$ and $(S\\otimes\\gamma_{Q_U})\\alpha$. Restrict $S$ along $\\varphi$, with action $\\gamma=\\mu_S(\\varphi\\otimes S)$. Since $S$ is commutative [sk-def-sfb-pulled-back-coefficients], naturality of the braiding gives $\\gamma\\beta_{S,R_U}=\\mu_S\\beta_{S,S}(S\\otimes\\varphi)=\\mu_S(S\\otimes\\varphi)$. Hence the two parallel pairs of [def-sfb-modobj-extension] and [def-sfb-modobj-relative-tensor] are equal, and $E_U(Q)$ is the relative tensor $S\\otimes_{R_U}Q_U$, with $S$ acting on the first factor. The pure-tensor comparison of [lem-pe-internal-section-tensor-comparison], applied over $R_U$ to this restricted $S$ and $Q_U$, identifies that internal relative tensor with the sheafified sectionwise tensor. The comparison also respects the $S$-action: both actions send $t\\cdot(s\\otimes x)$ to $(ts)\\otimes x$. Consequently we can compute $E_U$ in sectionwise module sheaves, and transfer the resulting diagrams back by these equivalences. Equivalences preserve a cokernel's factorization and uniqueness properties by their bijections on morphisms.",
+   "uses": [
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pe-internal-section-tensor-comparison",
+    "def-sfb-modobj-extension",
+    "def-sfb-modobj-relative-tensor",
+    "sk-def-sfb-pulled-back-coefficients"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 0GMW (lemma-sheafification-tensor), 03EI (lemma-sheafification-exact), 03EO (lemma-internal-hom-adjoint-tensor); internal/sectionwise comparison uses Sites Tag 00YV"
+   }
+  },
+  {
+   "text": "Let $c(Q)=Q_U$. The constant presheaf diagram $R^m\\xrightarrow{A}R^n\\xrightarrow{q}P$ is a cokernel diagram in module presheaves. Indeed a natural map from the constant $R^n$ presheaf killing $A$ factors at each object uniquely through $q$; uniqueness forces these factors to commute with restrictions. The constant presheaf of $R^r$ is likewise the finite coproduct of $r$ constant $R$ presheaves. Apply the module sheafification $b$ of [lem-cbc-sieve-module-sheafification]. Since $b$ is a left adjoint, [lem-weil-pbc-left-adjoint-preserves-colimits] preserves these finite colimits, including the zero object and the coequalizer of $(A,0)$. Hence $c(q)$ exhibits $P_U$ as the cokernel of $c(A)$ and the induced identifications $c(R^r)\\cong R_U^r$ preserve every standard basis section. On those sections $c(A)$ is still $e_j\\mapsto\\sum_i a_{ij}e_i$, with each coefficient now its constant section.",
+   "uses": [
+    "lem-cbc-sieve-module-sheafification",
+    "lem-weil-pbc-left-adjoint-preserves-colimits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), module-sheafification adjunction; Categories Tag 0038 (lemma-adjoint-exact)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-module-adjunction] to the identity geometric morphism of this topos, with ring map $\\varphi:R_U\\to S$. It states that the actual tensor functor $T=S\\otimes_{R_U}-$ is left adjoint to restriction of scalars. By [lem-weil-pbc-left-adjoint-preserves-colimits], $T$ preserves the zero object, finite coproducts, and the coequalizer expressing the cokernel in step 2. Tensoring a zero map is zero by the defining tensor map on pure tensors. Therefore $E_U(q)=T(c(q))$ is a cokernel of $E_U(A)=T(c(A))$. This applies to the specified arrow $q$, not merely to a chosen abstract object isomorphic to $P$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ (lemma-adjointness-tensor-restrict), or the identity-topos specialization of Tag 03D7 (lemma-adjoint-pullback-pushforward-modules); Categories Tag 0038"
+   }
+  },
+  {
+   "text": "Here is the normalization of the free-module identifications. After $c(R^r)\\cong R_U^r$, define $\\theta_r:S\\otimes_{R_U}R_U^r\\to S^r$ by $s\\otimes(v_i)_i\\mapsto(s\\varphi(v_i))_i$ on sections. This pairing is balanced and natural under restriction, so [lem-pc-sites-sheaf-tensor-bilinear-universal] extends it to the sheaf tensor of [def-pur-sheaf-tensor-product]. The inverse sends $(s_i)_i$ to $\\sum_i s_i\\otimes e_i$. One composite is the identity coordinatewise; the other sends $s\\otimes v$ to $\\sum_i s\\varphi(v_i)\\otimes e_i=\\sum_i s\\otimes v_i e_i=s\\otimes v$, by balancing. The tensor universal property then gives equality of the sheaf maps. These maps are $S$-linear. Thus $\\theta_r$ is the canonical isomorphism $E_U(R^r)\\cong S^r$ sending $1\\otimes e_j$ to $e_j$. For $r=0$ both maps are the unique maps between zero objects, and the same empty-sum calculation applies.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-tensor-product",
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), balanced bilinear universal property after Tag 0GMW; explicit finite-free calculation"
+   }
+  },
+  {
+   "text": "For each $j$, functoriality of the tensor construction and step 2 give\n$\\theta_n E_U(A)\\theta_m^{-1}(e_j)=\\theta_n(1\\otimes\\sum_i a_{ij}e_i)=\\sum_i\\varphi(a_{ij})e_i$.\nHere $a_{ij}$ inside the tensor denotes its constant section. By [det-def-sfb-constructible-local-model], $\\varphi(a_{ij})$ is precisely the image of the original scalar under $R\\to\\Gamma(U,\\Lambda_U)$, and its restriction on every test object is used in this formula. A map out of the finite free sheaf is determined by the standard basis sections: any local section is $\\sum_j s_j e_j$, and linearity fixes its image. Therefore $\\theta_n E_U(A)\\theta_m^{-1}=A_U$, with exactly the asserted entries and row/column convention.",
+   "uses": [
+    "det-def-sfb-constructible-local-model",
+    "def-pur-sheaf-tensor-product",
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), functorial map on pure tensors; blueprint det-def-sfb-constructible-local-model, scalar map in its opening paragraph"
+   }
+  },
+  {
+   "text": "Set $q_U=E_U(q)\\theta_n^{-1}:S^n\\to E_U(P)$. Steps 3 and 5 give $q_U A_U=0$. Given any $S$-linear $h:S^n\\to N$ with $hA_U=0$, the map $h\\theta_n:E_U(R^n)\\to N$ kills $E_U(A)$, so step 3 gives a unique $k:E_U(P)\\to N$ with $kE_U(q)=h\\theta_n$. Equivalently $kq_U=h$. This is precisely the cokernel universal property of [def-sfb-finitely-presented-module]. Thus the specified diagram is a cokernel diagram. Applying the same property to a chosen $\\operatorname{coker}(A_U)$ yields mutually inverse maps commuting with the quotient arrows; uniqueness proves the inverse identities. This gives the claimed canonical isomorphism $E_U(P)\\cong\\operatorname{coker}(A_U)$.",
+   "uses": [
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CZ and Section 03EK, conclusion by the cokernel universal property"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "def-sfb-modobj-extension",
+  "def-sfb-modobj-relative-tensor",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-cbc-sieve-module-sheafification",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-sfb-finitely-presented-module",
+  "det-def-sfb-constructible-local-model"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Explicit combination of Tags 03CY, 03CZ, 0GMW and the balanced-bilinear universal property in Section 03EK; Categories Tag 0038; realizes the specified-presentation clause of the blueprint local coefficient models."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -75,10 +172,52 @@
    "results": "Logged 8 hits: instFinitePresentationTensorProduct, Module.Presentation.cokernel, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, ModuleCat.cokernelIsColimit, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, Module.FinitePresentation.linearEquivMapExtendScalars, SheafOfModules.IsFinitePresentation.mk, PresheafOfModules.Sheafify.map_smul_eq",
    "date": "2026-10-21",
    "verdict": "no match: supporting general category/module declarations do not state the specified condensed scalar comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "presentationOfIsCokernelFree|def Presentation.map|pullbackObjFreeIso|pullback_map_ιFree",
+   "results": "Logged 9 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic presentation mapping requires proving the constant/scalar functor and its normalized matrix entries, so is not a one-line specialization of this specified diagram"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.Presentation.map",
+   "results": "Logged 5 hits: SheafOfModules.Presentation.map, SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.quasicoherentData_presentation, SheafOfModules.Presentation.map_π_eq, SheafOfModules.Presentation.map_relations_I. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic presentation mapping requires proving the constant/scalar functor and its normalized matrix entries, so is not a one-line specialization of this specified diagram"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constant sheafification and extension of scalars take a module cokernel presentation to the same matrix cokernel of module sheaves",
+   "results": "Logged 8 hits: PresheafOfModules.sheafifyMap, PresheafOfModules.sheafify, PresheafOfModules.sheafification, CategoryTheory.constantSheaf, SheafOfModules.presentationOfIsCokernelFree_generators, PresheafOfModules.toSheafify, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.isFinitePresentation. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic presentation mapping requires proving the constant/scalar functor and its normalized matrix entries, so is not a one-line specialization of this specified diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constant module sheafification followed by extension of scalars preserves a specified finite matrix cokernel presentation, with the same scalar entries",
+   "results": "Logged 8 hits: SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.presentationOfIsCokernelFree_relations, SheafOfModules.Presentation.map, SheafOfModules.Presentation.map_generators_I, SheafOfModules.Presentation.map_relations_I, SheafOfModules.presentationOfIsCokernelFree_generators, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.relationsOfIsCokernelFree. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic presentation mapping requires proving the constant/scalar functor and its normalized matrix entries, so is not a one-line specialization of this specified diagram"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Cc]okernel|[Cc]okernel.*constant|scalar.*presentation",
+   "results": "Logged 8 hits: Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/FinitePresentation.lean, Mathlib/Algebra/Module/Presentation/RestrictScalars.lean, Mathlib/RepresentationTheory/Basic.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/FinitePresentation.lean, Mathlib/RingTheory/Etale/Basic.lean. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic presentation mapping requires proving the constant/scalar functor and its normalized matrix entries, so is not a one-line specialization of this specified diagram"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left adjoint scalar extension from modules to sheaves maps a finite free presentation to a cokernel with its original matrix",
+   "results": "Logged 8 hits: SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.Presentation.map, SheafOfModules.Presentation.mapRelations, SheafOfModules.Presentation.mapGenerators, SheafOfModules.presentationOfIsCokernelFree_relations, SheafOfModules.presentationOfIsCokernelFree_generators, SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.relationsOfIsCokernelFree_s. ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic presentation mapping requires proving the constant/scalar functor and its normalized matrix entries, so is not a one-line specialization of this specified diagram"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-pullback-constant-model-constructible",
@@ -97,5 +236,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-presentation-cokernel",
+  "worker": "stage1",
+  "summary": "Kept the statement and its specified quotient arrow; split constant sheafification, scalar extension, normalized free comparison, matrix-entry calculation and the final universal property. Reused existing generic nodes throughout; no new nodes, flatness hypotheses or finiteness restrictions were introduced. Searched the live Lean source and Mathlib; the existing cover-level local-model equivalence is not an exact attachment for this diagram.",
+  "blueprint": "det-proper-base-change-unbounded-pullback, paragraph 'Constructible complexes', phrase 'via the local coefficient models on strata': the steps express each fixed scalar presentation as precisely its coefficient-sheaf matrix cokernel.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Ambient abelian-sheaf tensor and sheafification structure; generic infrastructure needed to compare the internal and sectionwise encodings, not an alternative base-change route."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Pure-tensor-normalized equivalence between internal and sectionwise relative tensors, needed to apply the sheaf scalar adjunction to the very tensor in the item."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Identity-topos specialization gives scalar extension as left adjoint without any flatness assumption; a generic tool rather than a proper-base-change theorem."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Extends and tests the explicit balanced finite-free tensor maps; generic module-sheaf tensor universal property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-85cf74954",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-85cf74954 (reviewer sub-agent of L); spot-checked: Read the item in full: statement, six steps, split_report and tool_uses. No new nodes. Read the statement of every cited node, plus def-sfb-modobj-extension, def-sfb-modobj-relative-tensor, the parent lem-sfb-pullback-constant-model-constructible and det-def-sfb-constructible-local-model (statement and proof). Sources checked: blueprint main-20261015 pullback.proof.md lines 9-13, paragraph 'Constructible complexes ... via the local coefficient models on strata'; Stacks sites-modules 03CZ (l.933), 03CY (l.815), 0GMW (l.3606) with the 03EK bilinear hint, and 03EI/0038/03D7 labels. No SGA. Statement (unchanged) is true; it uses the same coefficient category Mod_{Λ_U} and the same scalar map R_U→Λ_U as det-def-sfb-constructible-local-model, and keeps the given q and entries a_ij. Edge cases m=0, n=0, U empty, Λ=0, Z/(2) and non-flat Z→F2 all work. Not a duplicate: det-def proves this only in its proof (citing it would be C3), and lem-sfb-internal-extension-finite-presentation gives an object isomorphism without the arrow, the constant-sheaf step or the entry calculation. Steps 2-6 are correct: constant sheafification left adjoint keeps the given cocone; identity-topos 03CZ adjunction preserves the coequalizer (A,0) with no flatness; θ_r inverse identities checked on pure tensors; entries φ(a_ij), row i column j; cokernel transport by uniqueness. Accepted tool uses, all generic: sheaf-tensor-closed, pe-internal-section-tensor-comparison, ringed-topoi-module-adjunction, sheaf-tensor-bilinear-universal. FIX (C4/E5, one fault): step 1 applied the relative-tensor comparison node to E_U, which is the extension of scalars of def-sfb-modobj-extension. The two coequalizers coincide only by γβ=μ_S(S⊗φ), which needs Λ_U commutative, and the step did not say so. Step 1 now spells this out and cites def-sfb-modobj-extension, def-sfb-modobj-relative-tensor and sk-def-sfb-pulled-back-coefficients (proof_deps updated). Cycle check is clean. Live and side-live still show the item unsplit. Fixed file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-scalar-presentation-cokernel.json; 1 file(s) fixed by the reviewer"
  }
 }
