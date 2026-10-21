@@ -44,17 +44,18 @@
    }
   },
   {
-   "text": "Apply the exact-functor derived tensor comparison to $F$ and its inverse. Uniqueness applied to their composite gives inverse comparisons, hence $t:E(T(K,L))\\cong T_0(EK,EL)$. Its normalization is the prescribed total pure-tensor map. The same summand equations preserve Koszul exchange and units. Ringed functorial flat covers and K-flat resolutions transport through $F^{-1}$.",
+   "text": "The small ringed site has a functorial flat cover $C\\to1$. On internal modules its transport is $F^{-1}CF\\to F^{-1}F\\cong1$; exactness preserves epimorphisms and the tensor comparison reflects flatness. For an internal complex $K$, a flat-term K-flat resolution $P\\to FK$ gives $F^{-1}P\\to F^{-1}FK\\cong K$, again a K-flat resolution by reflection. Apply the normalized exact tensor-functor lemma to $F$, which is an exact symmetric monoidal left adjoint preserving flats and K-flat complexes. It gives $t:E(T(K,L))\\cong T_0(EK,EL)$ with the prescribed total-complex normalization and native associator/unit equations. The separate derived-braiding lemma applies because the ordinary section-action comparison respects symmetry; it gives the native Koszul equation for this same $t$.",
    "uses": [
     "lem-pe-internal-section-tensor-comparison",
-    "lem-pur-derived-tensor-comparison",
     "lem-pc-kflat-resolution",
-    "lem-pc-sites-modules-functorial-flat-cover"
+    "lem-pc-sites-modules-functorial-flat-cover",
+    "lem-sfb-exact-tensor-functor-derived-normalization",
+    "lem-sfb-exact-tensor-functor-derived-braiding"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS, 06YY, 07A4; derive the sectionwise tensor comparison"
+    "place": "Tags 06YS, 0FPQ, 0FPT; normalized derived tensor monoidal coherence and braiding separated into two statement-only nodes"
    }
   },
   {
@@ -114,11 +115,12 @@
   "lem-pc-kflat-resolution",
   "lem-pc-sites-modules-functorial-flat-cover",
   "lem-pe-internal-section-tensor-comparison",
-  "lem-pur-derived-tensor-comparison",
   "lem-pur-site-restriction-module-adjunction-exact",
   "lem-sf-ringed-derived-native-tensor",
   "lem-sf-ringed-derived-tensor-hom-adjunction",
   "lem-sfb-closed-scalar-hom-comparison",
+  "lem-sfb-exact-tensor-functor-derived-braiding",
+  "lem-sfb-exact-tensor-functor-derived-normalization",
   "lem-weil-pbc-ringed-slice-evaluation-coherence",
   "lem-weil-pbc-ringed-slice-normalized-comparisons",
   "sk-def-sfb-derived-tensor-hom"
@@ -197,7 +199,7 @@
   "date": "2026-10-21",
   "item": "lem-sfb-module-object-ringed-site-derived-comparison",
   "worker": "stage1",
-  "summary": "Q63 repair of the human re-split request: statement unchanged. Replaced the 6739-character inline proof by a short assembly of existing smaller nodes: exact derived adjunction, normalized exact-functor tensor comparison, native ringed derived tensor-Hom adjunction, the five-bijection closed scalar Hom comparison, and normalized slice comparisons/evaluation coherence. No duplicate new node was needed. The retained metadata, prior searches and blueprint route are unchanged. Maintainer reader (Q63 review): Step 6 no longer claims a successive-slice cocycle for the normalized Hom comparison d.eta, which lem-weil-pbc-ringed-internal-hom-exact-restriction states only for its own restriction isomorphism and which the statement does not require; that citation and its tool use are removed, and the stale step numbers of the tool-use reasons are corrected.",
+  "summary": "N9 repair of the explicit human re-split: retains the newer live short assembly, its unchanged statement and all current main metadata. Delivers two independent statement-only arguments of comparable scope: invertibility with associator/unit normalization for an exact strong monoidal left adjoint, and compatibility of its prescribed derived tensor comparison with the independently given native Koszul braidings. The latter was previously combined into the first node. Both have self-contained statements, source attribution, real logged searches and no proof steps. Existing smaller Hom, evaluation and slice results are reused rather than duplicated. The full flat-cover and K-flat resolution transports remain in the assembly. No successive-slice cocycle is claimed.",
   "blueprint": "Realizes the coefficient/model identification sentence in lem-sfb-dc-hom-preserves.proof.md before its sheaf-valued Hom calculation, and supplies the ringed-site comparison and slice compatibility used there.",
   "tool_uses": [
    {
@@ -207,10 +209,6 @@
    {
     "node": "def-weil-exact-derived-adjunction",
     "why": "Localizes the exact section-action equivalence and its inverse with their actual units and counits. No node of the restricted-functors unit states this generic infrastructure."
-   },
-   {
-    "node": "lem-pur-derived-tensor-comparison",
-    "why": "Generic exact-functor tensor localization with normalization on all cochain representatives; used for F and its inverse, not a change of coefficient route. No node of the restricted-functors unit states this generic infrastructure."
    },
    {
     "node": "lem-pc-kflat-resolution",
@@ -258,10 +256,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q63-274377f4b",
-  "group": "Q63",
+  "reviewer": "NT-cc-N9-7c6a1c62f",
+  "group": "N9",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-274377f4b (reviewer sub-agent of L); spot-checked: Read in full. The delivery re-splits an item that was already split live (NI 2026-10-17; S2 PASS by Q30), as the human's 2026-10-21 re-split note requests. Statement, stmt_deps and non-split fields are byte-identical to live. The proof is now 6 steps, 2306 chars, longest step 457. There are no new nodes: every former inline argument is the statement of an existing reviewed node. Closure: no cycle (DFS over 557 nodes), no dropped ids. Checks by step. S1: lem-pe gives exactness and K-flat preservation/reflection; def-weil-exact-derived-adjunction localizes the units/counits, so E is left adjoint to U with both invertible. S2: lem-pur-derived-tensor-comparison applies with G=F1=F2=F. F is exact, preserves flats and is a left adjoint. Functorial flat covers (lem-pc) transfer through F^-1. Its normalization is exactly def-sfb-internal-section-derived-tensor-comparison. t is invertible by uniqueness or on K-flat representatives; the odd-odd Koszul sign is preserved. S3: the ringed adjunction lemma gives the right-tensor closed structure; symmetry is cited from the native-tensor lemma. S4: the Lean ClosedScalarHom is generic over CoefficientClosedStructure. I checked the types of b=H_A(1,eta^-1)∘(comparison at N=EL) and theta=eps∘E(b^-1), and the evaluation equation via the triangle identities. S5: (B|_U)_sec=B_sec|_U by 03DH, and steps 1-4 are applied to the native slice structures. S6: normalized d exists, evaluation coherence holds, and r_U is the fully faithful lift. Fault (C3/C4), fixed in the item JSON: step 6 claimed a successive-slice cocycle for the normalized d.eta, citing lem-weil-pbc-ringed-internal-hom-exact-restriction. That lemma asserts compatibility only for its own existential restriction iso, and neither the statement nor SliceHomComparison needs the cocycle. The sentence was removed, the citation dropped from uses, proof_deps and split_report.tool_uses, and stale tool-use step numbers corrected. Advisory: the internal derived braiding used in S3 is not stated by a node; it is avoidable via reversed monoidal structures. Maintainer note: the stage-3 module still imports RingedInternalHomExactRestriction, and node-level tool_uses still lists it. Sources: Stacks sites-cohomology 08J8 l.8844, 08J9 l.8896, 08JB l.8934. Edge cases: zero ring, empty X, U=X, unbounded complexes.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N9-7c6a1c62f (reviewer sub-agent of L); spot-checked: I read the mathematics in full. This is the human's 2026-10-21 re-split, reopened after Q63's landing because that landing added no new node. Ledger line 19694 shows Q63 was the last merge, so the base is the live Q63 text. Compared with live, the statement, stmt_deps and steps 1 and 3-6 are unchanged. Only Step 2, proof_deps and split_report changed. The proof is 2645 characters in 6 steps (none over 783). The old 6739-character proof's arguments all reappear: the tensor comparison is now Step 2 plus the two new nodes; the adjunction and Yoneda steps are lem-sf-ringed-derived-tensor-hom-adjunction and lem-sfb-closed-scalar-hom-comparison; the slice step is def-sfb-internal-slice-derived-hom-comparison plus the two slice nodes. The base Step 2's invertibility, Koszul and unit sentences became the two new nodes, and the flat-cover transport is now written out. Step 2 checks: lem-pc-sites-modules-functorial-flat-cover applies because the site is small. F^-1CF is flat because lem-pe reflects flatness, and F^-1P is K-flat by the same reflection. lem-pe gives the other hypotheses of the new nodes: exact, strong monoidal (the c orientation), flat and K-flat preservation, and symmetry. Closedness and the Grothendieck property of the module-object category follow elementarily from the equivalence. Normalization node: all types check (normalization square, e, associator, unitors). It is true: on K-flat pairs t is a composite of isomorphisms; 1[0] is itself K-flat; the left-adjoint hypothesis lets F commute with the infinite sums of the total tensor. Tested on the identity functor, -⊗Q: Ab→Q-Vect (exact but not an equivalence) and zero categories; Z→Z/2 is excluded as non-exact. Braiding node: true, because F is additive (so it keeps the (-1)^pq signs) and τ commutes with the exchanges summand by summand; odd-degree rank-one complexes give -1 on both sides. Neither new node restates the item. The duplicate candidates are not duplicates: new-lem-kun-exact-monoidal-equivalence-derived is existential, needs an equivalence with monoidal counit, uses the étale def-kun-derived-tensor and does not name pur's t; lem-sfb-ringed-derived-tensor-lift covers only RingedTensorEdges; lem-pur-derived-tensor-comparison gives t without invertibility or coherence. Both new nodes have B1-B9 and four kinds of logged searches. A DFS over both new nodes' dependencies finds no cycle. No SGA is cited. Sources checked: Stacks sites-cohomology 0FPQ (l.12936) and 0FPT (l.13136), both with omitted proofs, so the agent-extraction label is right; blueprint main-20261015 lem-sfb-dc-hom-preserves.proof.md. Tool uses are unchanged except that pur's entry was removed because the item no longer cites it. No fixes. Advisory: the kun and pur nodes cite étale/pro-étale-specific derived-tensor definitions for abstract categories (inherited); the rewritten split_report summary dropped Q63's cocycle sentence, though its substance is kept."
  },
  "reviewed_lean": {
   "date": "2026-10-18",
