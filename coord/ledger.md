@@ -19938,3 +19938,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:44 L: merged deliver/Q114/lem-sfb-finite-field-lisse-internal-hom (reviewer FIX; first push; new nodes: 0)
 - 03:44 L: merged deliver/N6/lem-pd-section-derived-tensor-normalization (reviewer FIX; first push; new nodes: 0); claim not held by N6: not your claim
 - 03:44 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
+- 03:45 L: merged deliver/O3/lem-weil-pbc-perfect-strata-uniform-reductions (reviewer FIX; first push; new nodes: 0); claim not held by O3: not your claim
