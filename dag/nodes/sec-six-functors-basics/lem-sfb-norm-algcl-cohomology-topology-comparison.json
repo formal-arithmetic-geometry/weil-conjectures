@@ -20,9 +20,69 @@
   "sk-def-sfb-derived-extension-of-scalars",
   "def-pur-ringed-site-zeroth-hypercohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Choose a separable closure k^s/k and its profinite Galois group G. Apply the geometric finite scalar model to V. This gives the equivariant object K_A=mathcal K_A(V), bounded with cohomology underline W_q for finite-dimensional continuous E-representations W_q, together with the actual projection isomorphisms beta_C and beta_B. Their coefficient square identifies the geometric image of m_V with the scalar-inclusion map C tensor_A^L K_A -> B tensor_A^L K_A. All hypotheses hold: X is separated finite type, ell is invertible in k, and V is bounded constructible with the required finite constant local models.",
+   "uses": [
+    "lem-sfb-geometric-condensed-finite-scalar-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent reduction of the coefficient-topology obligation; exact norm-topology literature input WANTED."
+   }
+  },
+  {
+   "text": "Use the exact functors F_C,F_B and their shift-compatible natural transformation alpha from the profinite representation comparison. For every q, its heart assertion applies to W_q and says alpha_(H^q(K_A)[0]) is an isomorphism. Its exact shift compatibility gives the same assertion on H^q(K_A)[-q]. No claim of finite cohomological dimension is made here: these objects and their derived invariants remain in the ordinary unbounded target category.",
+   "uses": [
+    "lem-sfb-profinite-algcl-derived-invariants-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent reduction of the coefficient-topology obligation; exact norm-topology literature input WANTED."
+   }
+  },
+  {
+   "text": "If K_A=0 the assertion is immediate. Otherwise choose integers a<=b containing its cohomological support. The standard truncation triangles give a finite tower whose successive factors are H^q(K_A)[-q], for a<=q<=b: truncate at q and shift the standard truncation triangle by q; the quotient has only its q-th cohomology and hence is that heart object shifted by -q. Apply triangle two-out-of-three to the exact functors F_C,F_B and alpha at each of these finitely many triangles, starting with the zero truncation below a. The factors were treated in the preceding step. Induction proves alpha_(K_A) is an isomorphism. Only the boundedness of K_A is used, not convergence of an infinite Postnikov tower.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-triangle-two-out-of-three",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-geometric-condensed-finite-scalar-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent reduction of the coefficient-topology obligation; exact norm-topology literature input WANTED."
+   }
+  },
+  {
+   "text": "Apply ordinary condensed Galois descent separately to C_X tensor_A^L V and B_X tensor_A^L V. By its naturality for the coefficient morphism c and the morphism C_X tensor_A^L V -> Res_c(B_X tensor_A^L V) representing m_V, R Gamma(X,m_V) is conjugate by the two descent isomorphisms to ev_* of the composite of R Gamma_G(kappa) with the canonical invariant morphism after scalar restriction. The square Res_c(beta_B) o gamma = kappa o beta_C of step 1 holds in D(A_G(C)); applying ev_* R Gamma_G and the naturality of the scalar-restriction invariant morphism in its argument (here beta_B) identifies that composite, up to the invertible ev_* R Gamma_G(beta_C) and ev_* R Gamma_G(beta_B), with alpha_(K_A), which is defined from gamma by the same scalar restriction and invariant inclusion. Step 3 makes alpha_(K_A) invertible; composition with the invertible sides proves exactly the asserted isomorphism for the actual map m_V. This uses no sheaf-level identification of C and B.",
+   "uses": [
+    "lem-sfb-condensed-galois-global-descent",
+    "lem-sfb-geometric-condensed-finite-scalar-model",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent reduction of the coefficient-topology obligation; exact norm-topology literature input WANTED."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-geometric-condensed-finite-scalar-model",
+  "lem-sfb-profinite-algcl-derived-invariants-comparison",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-sfb-condensed-galois-global-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), geometric/arithmetic reduction; HRS 5.6 and 7.9 do not cover the all-continuous norm coefficient ring."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -157,10 +217,122 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: hits concern PadicAlgCl as a normed field, algebraic closures, ordinary condensed topological comparisons, de Rham period rings, or discrete representation cohomology; none compares these two coefficient topologies on constructible pro-etale complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|PadicAlgCl).*(cohomology|[Gg]lobal[Ss]ections)|(cohomology|[Gg]lobal[Ss]ections).*(Condensed|PadicAlgCl)",
+   "results": {
+    "t": "2026-10-21T16:31:23Z",
+    "tool": "grep",
+    "query": "(Condensed|PadicAlgCl).*(cohomology|[Gg]lobal[Ss]ections)|(cohomology|[Gg]lobal[Ss]ections).*(Condensed|PadicAlgCl)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits only define condensed sheaves, colimits, or algebraic closure fields; no constructible derived coefficient-topology comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"cohomology\"",
+   "results": {
+    "t": "2026-10-21T16:31:24Z",
+    "tool": "loogle",
+    "query": "\"Condensed\", \"cohomology\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits only define condensed sheaves, colimits, or algebraic closure fields; no constructible derived coefficient-topology comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Constructible pro etale cohomology algebraic closure norm topology versus colimit topology",
+   "results": {
+    "t": "2026-10-21T16:31:24Z",
+    "tool": "leansearch",
+    "query": "Constructible pro etale cohomology algebraic closure norm topology versus colimit topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.PresheafedSpace.colimitCocone_ι_app_c",
+     "TopCat.coinduced_of_isColimit",
+     "TopModuleCat.isColimit",
+     "AlgebraicGeometry.LocallyRingedSpace.coproductCofan",
+     "AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.desc_c_naturality",
+     "AlgebraicGeometry.PresheafedSpace.ColimitCoconeIsColimit.descCApp",
+     "AlgebraicGeometry.Scheme.smallEtaleTopology",
+     "AlgebraicGeometry.PresheafedSpace.colimitCoconeIsColimit"
+    ],
+    "digest": "ca5009e37b471197"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits only define condensed sheaves, colimits, or algebraic closure fields; no constructible derived coefficient-topology comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived global sections comparison for constructible sheaves with algebraic closure coefficients given the norm topology or the finite subextension colimit topology",
+   "results": {
+    "t": "2026-10-21T16:31:25Z",
+    "tool": "leanfinder",
+    "query": "Derived global sections comparison for constructible sheaves with algebraic closure coefficients given the norm topology or the finite subextension colimit topology",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Condensed.lanSheafProfinite",
+     "CondensedMod.ofSheafCompHaus",
+     "CompHausLike.LocallyConstant.counit_app_val",
+     "AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit",
+     "LightCondensed.lanLightCondSet",
+     "CompHausLike.LocallyConstantModule.functor",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "LightCondAb.ofSheafLightProfinite"
+    ],
+    "digest": "ef9eeb5fe4af966a"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits only define condensed sheaves, colimits, or algebraic closure fields; no constructible derived coefficient-topology comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hypercohomology invariance under changing the coefficient topology on the algebraic closure of a p adic field",
+   "results": {
+    "t": "2026-10-21T16:31:26Z",
+    "tool": "leanfinder",
+    "query": "Hypercohomology invariance under changing the coefficient topology on the algebraic closure of a p adic field",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BDeRhamPlus",
+     "PadicAlgCl",
+     "PadicComplex.coe_eq",
+     "PadicComplex",
+     "PadicComplex.instIsScalarTowerPadicPadicAlgCl",
+     "PadicAlgCl.isAlgebraic",
+     "PadicComplex.instAlgebraPadic",
+     "instCommRingBDeRhamPlus"
+    ],
+    "digest": "7252d52abeb5ec67"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits only define condensed sheaves, colimits, or algebraic closure fields; no constructible derived coefficient-topology comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-supported-finite-stage-topology-defect",
@@ -184,5 +356,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-norm-algcl-cohomology-topology-comparison",
+  "worker": "stage1",
+  "summary": "Separated geometric finite scalar cohomology, equivariant derived descent, and the finite-representation arithmetic comparison. The item is proved from these via a finite Postnikov induction, preserving the actual coefficient map and avoiding circular use of downstream norm scalar comparisons. All three new inputs remain explicitly unsplit; exact norm-topology literature references are wanted.",
+  "blueprint": "Paragraph (3), coefficient-topology obligation within direct-image stability; no change to the compactification or proper/open route of the parent unit.",
+  "tool_uses": [
+   {
+    "node": "def-sbc-standard-tstructure-derived-category",
+    "why": "Standard derived truncations build a finite Postnikov tower of the bounded equivariant geometric object; generic categorical tool."
+   },
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Generic exact-functor comparison induction on the finite Postnikov tower; no geometric route is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-triangle-two-out-of-three"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NR-7dcd383d4",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-7dcd383d4 (reviewer sub-agent of L); spot-checked: Verdict FIX: I read in full the item, the three new nodes and every cited statement. The source is main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3). That paragraph does not cover coefficient topology, so the item is an agent obligation and proof_origin=agent is correct. No SGA is cited, and the item is still unsplit in live, so the delivery is not superseded. The target statement is unchanged. The split is a genuine Hochschild-Serre-type reduction, not a relabelling (D1): a geometric finite model with beta_C/beta_B, a profinite derived-invariants comparison, Galois descent, and a finite truncation induction using the declared generic tools def-sbc-standard-tstructure-derived-category and lem-sf-triangle-two-out-of-three, which I accept. Cycle check: the full dependency closure of each new node does not reach the item; the circular downstream continuous-algcl scalar comparisons are not used. Small cases checked: empty X and V=0; X=Spec k^s; trivial G; H^0; G=Z_ell with W=E(chi); and H^1 with trivial action for any profinite G, where a Baire argument shows a compact subgroup of Omega-hat inside Omega lies in a finite extension. No duplicates: field-separable-cech-coordinates, condensed-derived-invariant-bar, normal-subgroup-comparison, procyclic-torsor descent, qlbar-direct-image-comparison, dense-lattice and prime-to-ell comparisons were all checked. Two repairable faults (E5/B2), both fixed: (1) the scalar-model node stated the beta coefficient square only after restriction to A, while step 4 needs it in D(A_G(C)), because the descent naturality and alpha are both built from C-linear maps; (2) beta_R was described through an undefined 'geometric pullback'. The fixed scalar-model node now defines beta_R as the transpose of K_A(eta_V) followed by the scalar-restriction comparison, and states Res_c(beta_B)∘gamma = kappa∘beta_C in D(A_G(C)). Step 4 of the item is rewritten to use that square. The B half of the geometric node and the arbitrary-profinite comparison remain substantive inputs, honestly marked WANTED.; 2 file(s) fixed by the reviewer"
  }
 }
