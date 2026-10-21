@@ -20,7 +20,10 @@
   "def-pc-scheme",
   "def-weil-pbc-noetherian-ring",
   "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-weil-pbc-constructible-complexes",
+  "def-weil-pbc-witness-compatibility",
+  "def-sf-categorical-proetale-tor-amplitude"
  ],
  "proof": [
   {
@@ -328,5 +331,35 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q64-9958c918a (reviewer sub-agent of L); spot-checked: Read the item, all 15 cited statements and the Stacks sources in full: 06YQ (the item's tag correction is right; 06YS is lemma-K-flat-resolution), 0G7E, 06YY, 03EL, 07A4, 0GKB, 03RZ, 08G1, 0GL6. Statement unchanged and true. Small cases checked: Z/4->Z/2 with L=A[0] gives B[0] with Tor amplitude [0,0]; B=0, the empty scheme, a=b and the identity map are also consistent. Steps 1-8 are correct. Step 7 checks the global finite-stratification convention directly through lem-weil-pbc-comparison-pullback and the constant-module lemma, so it does not rely on the affine-local Cons of sk-thm-pe-constructible-comparison. FIX (C1): Step 5 used i^*B_X ≅ B_S without a citation; it now cites lem-sfb-geometric-inverse-image-constant-module, which was already in proof_deps. Batch-5 flag on lem-pod-lisse-tensor-and-scalar-extension accepted: its 70-node closure reaches only two other generic pod nodes (lem-pod-etale-stalk-tensor-scalar, def-pod-ring-scalar-extension) and no trace-formula node, transport node or batch-4 target. The node is Stacks 093V/03EL lisse sheaf algebra, and only clause (3) is used. No duplicate: the overlaps found (det-sp-scalar-extension-functor (2), det-prop-scalar-six-ctf (3), lem-sf-etale-flat-constructible) each give only part of the item, or work in another setting. The 14 tool_uses are generic and accepted. No SGA citation. Maintainer notes: the source.place of lem-pc-bounded-above-flat-kflat-site should read 06YQ; the item statement cites det-sp-scalar-extension-functor, a pro-étale-only node, for the étale L_B (inherited, advisory).; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.FiniteCoefficientInputModels",
+  "declaration": "AlgebraicGeometry.finiteCoefficientInputModels",
+  "declarations": [
+   "AlgebraicGeometry.finiteInputProScalar_additive",
+   "AlgebraicGeometry.finiteInputEtaleScalar_additive",
+   "AlgebraicGeometry.finiteInputProScalar",
+   "AlgebraicGeometry.finiteInputEtaleExtension",
+   "AlgebraicGeometry.finiteInputComparison",
+   "AlgebraicGeometry.finiteInputProExtension",
+   "AlgebraicGeometry.finiteInputTensorComparison",
+   "AlgebraicGeometry.finiteInputDerivedTensorComparison",
+   "AlgebraicGeometry.finiteCoefficientInputModels"
+  ],
+  "file": "lean/Sheaf/Paper/FiniteCoefficientInputModels.lean",
+  "statement": "theorem finiteCoefficientInputModels (X : Scheme.{u}) [IsNoetherian X] (ℓ : ℕ) (_hℓ : ℓ.Prime) (A B : Type (u + 1)) [CommRing A] [CommRing B] [Finite A] [Finite B] (_hA : ∃ n : ℕ, ∀ x : A, (ℓ ^ n) • x = 0) (_hB : ∃ n : ℕ, ∀ x : B, (ℓ ^ n) • x = 0) (φ : A →+* B) (a b : ℤ) (_hab : a ≤ b) (L : Etale.DerivedCategoryModule A X) (_hL : Etale.DerivedCategory.isBoundedConstructible A X L) (_hTor : Etale.DerivedCategory.hasTorAmplitudeIn A X a b L) : ∃ P : CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ, (∀ q : ℤ, exactFunctor _ _ (tensorRight (P.X q))) ∧ (∀ q : ℤ, Scheme.IsConstructibleEtaleModuleSheaf (P.X q)) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero (P.X q)) ∧ @MorphismProperty.kFlat (CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) inferInstance (HomologicalComplex.monoidalCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)) (HomologicalComplex.quasiIso (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)) P ∧ Nonempty (L ≅ _root_.DerivedCategory.Q.obj P) ∧ (∀ q : ℤ, exactFunctor _ _ (tensorRight ((finiteInputEtaleExtension φ X P).X q))) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((finiteInputEtaleExtension φ X P).X q)) ∧ @MorphismProperty.kFlat (CochainComplex (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) ℤ) inferInstance (HomologicalComplex.monoidalCategory (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) (.up ℤ)) (HomologicalComplex.quasiIso (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} B)) (.up ℤ)) (finiteInputEtaleExtension φ X P) ∧ Nonempty ((ProEtale.pbcFixedScalarExtension.{u} X.smallEtaleTopology φ).obj L ≅ _root_.DerivedCategory.Q.obj (finiteInputEtaleExtension φ X P)) ∧ (∀ q : ℤ, exactFunctor _ _ (tensorRight ((finiteInputComparison A X P).X q))) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((finiteInputComparison A X P).X q)) ∧ @MorphismProperty.kFlat (CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) ℤ) inferInstance (HomologicalComplex.monoidalCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) (.up ℤ)) (HomologicalComplex.quasiIso (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) (.up ℤ)) (finiteInputComparison A X P) ∧ Nonempty (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj L ≅ _root_.DerivedCategory.Q.obj (finiteInputComparison A X P)) ∧ (∀ q : ℤ, exactFunctor _ _ (tensorRight ((finiteInputProExtension φ X (finiteInputComparison A X P)).X q))) ∧ (∀ q : ℤ, q < a ∨ b < q → IsZero ((finiteInputProExtension φ X (finiteInputComparison A X P)).X q)) ∧ @MorphismProperty.kFlat (CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) ℤ) inferInstance (HomologicalComplex.monoidalCategory (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) (.up ℤ)) (HomologicalComplex.quasiIso (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) (.up ℤ)) (finiteInputProExtension φ X (finiteInputComparison A X P)) ∧ Nonempty ((finiteInputProScalar φ X).obj (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj L) ≅ _root_.DerivedCategory.Q.obj (finiteInputProExtension φ X (finiteInputComparison A X P))) ∧ Etale.DerivedCategory.isBoundedConstructible B X ((ProEtale.pbcFixedScalarExtension.{u} X.smallEtaleTopology φ).obj L) ∧ Etale.DerivedCategory.hasTorAmplitudeIn B X a b ((ProEtale.pbcFixedScalarExtension.{u} X.smallEtaleTopology φ).obj L) ∧ (∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf X A ((_root_.DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) i).obj (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj L))) ∧ _root_.DerivedCategory.TStructure.t.{u + 1, u + 1, u + 2}.bounded (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj L) ∧ ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} A) X a b (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj L) ∧ (∀ i : ℤ, Scheme.IsConstructibleProEtaleFixedModuleSheaf X B ((_root_.DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) i).obj ((finiteInputProScalar φ X).obj (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj L)))) ∧ _root_.DerivedCategory.TStructure.t.{u + 1, u + 1, u + 2}.bounded ((finiteInputProScalar φ X).obj (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj L)) ∧ ProEtale.DerivedCategory.torAmplitudeIn (ModuleCat.{u + 1} B) X a b ((finiteInputProScalar φ X).obj (((ProEtale.comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory).obj L))",
+  "branch": "newtargets-dag",
+  "by": "Q11",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Ordinary ModuleCat-valued etale and pro-etale module sheaves, with the canonical target-ring scalar action. The companion complex comparison is the actual scalar-restriction conjugate, and its Q-image gives the derived comparison. All four models have flat terms, the same strict support interval and K-flatness against arbitrary acyclic tests. Additional landed statement dependencies give bounded constructibility, the specified derived scalar adjoint, and the existing categorical pro-etale universal Tor test. No definition or theorem is restated for a dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e023aa845",
+  "group": "Q11",
+  "result": "pass",
+  "note": "Read item, 16 stmt_dep records, report (Worker report + Second reading by Q11), the module and the exact source decls (pbcFixedScalarExtension = left adjoint of derived restriction, with the left derived scalar extension shown adjoint by scalarDerivedAdjunction; etale/sheafExtendScalars = sheafified ModuleCat.extendScalars; etaleSheafExtendScalarsCompComparisonUpperStarIso = conjugate of Iso.refl; kFlat; ProEtale torAmplitudeIn = generic DerivedCategory.torAmplitudeIn testing every sheaf; IsConstructibleProEtaleFixedModuleSheaf intrinsic). Hypotheses exact, no extra assumptions; essentiallySmallSelf witness is a Prop instance at u+1, not a hypothesis. All conclusion clauses present: flat/support/K-flat for the four models, three derived representation isos, canonical complex and derived tensor comparison, bounded constructibility and same-interval Tor amplitude for L_B, N_X L, (N_X L)_B. Records: only the item changed; 3 appended landed def stmt_deps each supply a used decl; statement verbatim; plain imports = proof_dep modules. Edge cases B=0, empty X, a=b, phi=id, Z/4->Z/2 fine. No compile (no file changed). Advisory: upstream scalar-extension decls recorded on no node; derived comparison not tied to ringedTopoiCanonicalDerivedTensorPullback (encoding mismatch, node clause still met); det-sp-scalar-extension-functor, def-weil-proetale-tor-amplitude, derived-tensor-pullback interfaces imported but unused."
+ }
 }

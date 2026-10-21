@@ -263,5 +263,29 @@
   "group": "O3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-12ce9160a (reviewer sub-agent of L); spot-checked: I read the item in full with all 17 cited statements, the main-20261015 thm-sf-ambient-adjoint-class proof (lines 5-30) and the parent's old steps 1-2. Context: the item is unsplit on live and side-live, it is not in the dropped list, it cites no SGA, it makes no cycle and the statement is unchanged. There are no new nodes. The old steps 1-2 of the parent (domain/witness, C=δ^{-1}, the four-factor chain) are all carried here. Step 1: the hypotheses check out (i proper, so qcqs; d from kundim<∞, d=0 for Z empty; P quasi-compact). Step 2: the unit is an iso by thm-weil-pbc-site-comparison, so IU_PS_PH is in D^+ and the witness (IH,α_H) runs in the right direction. Step 3: the lem-sf-class comparison is the def-sf-construction composite. At j=id, composition compatibility in lem-cbc gives e=e∘e, so e=1. The forward map is then b_{i,L}=δ_L, which gives C=δ_L^{-1}. Step 4 had one fault, C4: it said thm-sf's Hom map 'is' the h of def-weil-boundary-exceptional-comparison-data, which neither node states. I rewrote it to derive the four operations from the specification in def-weil-exceptional-inverse-image (the item's own stmt_dep: étale adjunction transported by the compact-support comparison, then full faithfulness of ν^* on D^+) and J=S_ZIU_P. Agreement with h is now only a closing remark. I added def-weil-exceptional-inverse-image to the step's uses and proof_deps. Edge cases H=0, Z empty and i=id all hold. The declared tool_uses are generic black boxes and I accept them. Advisory: the proof is 4497 characters.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ClosedIdentityOpenHomNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.closedIdentityOpenHomNormalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.closedIdentityOpenEtaleIso",
+   "AlgebraicGeometry.ProEtale.closedIdentityOpenProEtaleIso",
+   "AlgebraicGeometry.ProEtale.closedIdentityOpenHomNormalizationProperty",
+   "AlgebraicGeometry.ProEtale.closedIdentityOpenHomNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/ClosedIdentityOpenHomNormalization.lean",
+  "statement": "theorem closedIdentityOpenHomNormalization (D : WeilConjectures.FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (n : ℕ) (hn : 1 ≤ n) {Z P : Scheme.{u}} (aZ : Z ⟶ Spec (.of D.k)) (aP : P ⟶ Spec (.of D.k)) [LocallyOfFiniteType aZ] [QuasiCompact aZ] [IsSeparated aZ] [LocallyOfFiniteType aP] [QuasiCompact aP] [IsSeparated aP] (i : Z ⟶ P) [IsClosedImmersion i] (_hi : i ≫ aP = aZ) : closedIdentityOpenHomNormalizationProperty D l E n hn aZ aP i",
+  "branch": "newtargets-dag",
+  "by": "Q04",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f37d01dd",
+  "group": "Q04",
+  "result": "pass",
+  "note": "Node differs from base only in lean; lean.statement verbatim. Hypotheses: FiniteFieldDatum k, l prime ≠ p, E/Q_l finite, n≥1, ULift fixed-scalar O_E/ϖ^n (finiteness derived), separated finite-type Z,P over k, closed immersion i with i≫aP=aZ; CompactSpace P derived; nothing extra. Objects: F/Q actual étale/pro-étale R lowerStar, I=F.rightAdjoint with β, S_T/U_T/η the comparison adjunction, J=UP⋙I⋙SZ, c=ofIsProper i, e/q canonical identity-open isos via leftAdjointIdIso+upperStarId, r=rightAdjointUniq counit-compatible I_c≅I. Clauses: t.plus(IU_PS_PH), IsIso α_H, witness pinned to (IH,α_H) via W.complex equation and HEq, compactSupportSiteComparison composite = fixedDirectImageComparisonIso.inv (δ^{-1}, δ = recorded fixedComparisonDirectImageMatePlus), and specifiedExceptionalHomEquiv at the identity witness ≫ SZ(r) = SZ(β(η_FL ≫ UP(δ≫g))). Unfolding the equivalence by rightAdjointUniq/ofNatIsoLeft/η-naturality confirms this is exactly the four-factor Φ. Edge cases Z=∅, H=L=0, i=id, n=1 fine; one universe. Docstrings/source/blueprint/proof steps present; only the theorem is sorry; no pro-étale substitute. Advisory: e/q duplicate the Plus-level properCoincidenceIdentityOpenPlus pattern on the full derived category (same canonical map); used defs live in theorem-node modules but are the maps the node names, no mechanical flag. No recompile (no file changed); worker scompile clean."
  }
 }

@@ -23244,3 +23244,6 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:52 L: merged deliver/Q16/lem-sfb-acyclic-hypercover-pullback-normalization (reviewer PASS; first push; new nodes: 0)
 - 17:53 L: merged deliver/Q12/lem-wf-tate-twist-compatibility (stage 2; reviewer PASS; parallel immutable checks)
 - 17:54 L: merged deliver/NV/lem-sfb-root-coordinate-supported-vanishing (reviewer FIX+NODE(1); first push; new nodes: 3)
+- 17:54 L: merged deliver/Q04/lem-coef-closed-identity-open-hom-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 17:54 L: merged deliver/Q11/lem-sp-finite-coefficient-input-models (stage 2; reviewer PASS; parallel immutable checks)
+- 17:54 L: merged deliver/Q22/lem-pur-closed-etale-transport-bounds (stage 2; reviewer PASS; parallel immutable checks)
