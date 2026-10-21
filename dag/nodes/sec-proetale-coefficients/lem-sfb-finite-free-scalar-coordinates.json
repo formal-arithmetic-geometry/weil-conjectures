@@ -12,9 +12,92 @@
   "sk-def-sfb-module-objects",
   "sk-def-sfb-change-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $e_i=\\theta\\iota_i:R\\to B$ and $q_i=\\pi_i\\theta^{-1}:B\\to R$. The two inverse identities for $\\theta$ give $q_i e_j=\\delta_{ij}\\operatorname{id}_R$ and $\\sum_i e_i q_i=\\operatorname{id}_B$. Since these are module maps, on every test object $U$ they say $q_i(b_j)=\\delta_{ij}$ and $s=\\sum_i\\varphi(q_i(s))b_i$ for $s\\in B(U)$, with $e_i(r)=\\varphi(r)b_i$. Here $b_i=e_i(1)$ is compatible with every restriction. Define $M^n(U)=M(U)^n$ with componentwise action; gluing tuples componentwise makes this a sheaf and an $R$-module. Its finite sums and coordinate maps are likewise componentwise.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
+   }
+  },
+  {
+   "text": "For every $i$ the rule $(s,m)\\mapsto q_i(s)m$ is additive in both variables and commutes with restrictions. The tensor universal property and sheafification of [sk-def-sfb-sheaf-tensor] therefore give a sheaf map $B\\otimes M\\to M$. It equalizes the defining arrows for relative tensor in [sk-def-sfb-change-of-scalars], because $q_i(s\\varphi(r))m=rq_i(s)m=q_i(s)(rm)$. Thus it factors uniquely through $B\\otimes_R M$. This factor is $R$-linear: $q_i(\\varphi(r)s)m=r(q_i(s)m)$, and equality as sheaf maps follows from the same universal properties. Collect these factors into $\\Phi_M:\\operatorname{Res}_\\varphi(B\\otimes_R M)\\to M^n$. This constructs the stated formula without requiring tensor sections to be sectionwise tensors.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
+   }
+  },
+  {
+   "text": "The unit sheaf map $\\mathbf1\\to R$ followed by $e_i$ gives a sheaf map $\\mathbf1\\to B$. Tensor it with $M$ using the inverse left unitor and then the coequalizer map $B\\otimes M\\to B\\otimes_R M$. The resulting map $t_i:M\\to B\\otimes_R M$ sends $m$ to $b_i\\otimes m$. It is $R$-linear because $b_i\\otimes rm=(b_i\\varphi(r))\\otimes m=\\varphi(r)(b_i\\otimes m)$ by the coequalizer relation and commutativity of $B$. Define $\\Psi_M=\\sum_i t_i\\operatorname{pr}_i$. Finite sums preserve restrictions and $R$-linearity, so this is a module-sheaf morphism with the required tuple formula.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
+   }
+  },
+  {
+   "text": "For a tuple $(m_j)_j$ of local sections, the $i$th coordinate of $\\Phi_M\\Psi_M((m_j)_j)$ is $\\sum_j q_i(b_j)m_j=\\sum_j\\delta_{ij}m_j=m_i$. Thus the composite is the identity as a sheaf map (equality holds at every object), and hence as a module map.",
+   "uses": [
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
+   }
+  },
+  {
+   "text": "Precompose the other composite with the defining map $B\\otimes M\\to B\\otimes_R M$. On an elementary tensor of local sections its value is\n$$\\Psi_M\\Phi_M(s\\otimes m)=\\sum_i b_i\\otimes(q_i(s)m)=\\sum_i(b_i\\varphi(q_i(s)))\\otimes m=s\\otimes m.$$\nThe middle equality is the balancing relation; the last uses $\\sum_i e_iq_i=\\operatorname{id}_B$. Equality on these tensors implies equality of the maps out of the objectwise abelian tensor presheaf by its bilinear universal property, hence equality out of its sheafification $B\\otimes M$. Uniqueness in the coequalizer universal property then gives $\\Psi_M\\Phi_M=\\operatorname{id}$. This is a comparison of morphisms via universal properties, with no assertion that all relative-tensor sheaf sections are elementary tensors or sums of such sections on the same object.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
+   }
+  },
+  {
+   "text": "For a module morphism $f:M\\to N$, scalar extension acts on elementary tensors by $s\\otimes m\\mapsto s\\otimes f(m)$: this is its induced coequalizer map. The $i$th coordinate on the two sides of naturality of $\\Phi$ is respectively $q_i(s)f(m)$ and $f(q_i(s)m)$, which agree by $R$-linearity of $f$. The tensor, sheafification and coequalizer uniqueness arguments of step 5 give equality of sheaf maps. Naturality of $\\Psi$ follows as well from $\\sum_i b_i\\otimes f(m_i)$ on both sides (or from the inverse identities). Consequently these mutually inverse transformations give the required natural isomorphism. The formulas also cover $n=0$: the basis identity is $\\operatorname{id}_B=0$, $M^0$ is the zero module, and the same empty-sum calculation proves both inverse identities. No nonzero-ring, nonzero-module, or positive-rank assumption is used.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "sk-def-sfb-module-objects",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+  "place": "Last sentence, first inference: the natural finite-power description of tensor with a finite free coefficient ring; explicit coordinate and balancing argument expanding the blueprint inference"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +140,52 @@
    "results": "8 hits: Module.Free.chooseBasis, Module.finBasis, dualTensorHomEquivOfBasis, Algebra.TensorProduct.basis, Module.Free.repr, Module.Basis.tensorProduct, Module.Basis.restrictScalars, Algebra.TensorProduct.basisAux",
    "date": "2026-10-21",
    "verdict": "no match: ordinary-module tensor bases and SheafOfModules.mapFreeIso do not identify restricted scalar extension over arbitrary internal ring sheaves with a finite power"
+  },
+  {
+   "tool": "grep",
+   "query": "basis|finiteFree|finite_free|powerIso",
+   "results": "0 hits: ; result digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary modules or preservation of free sheaves, not the stated natural coordinate isomorphism for arbitrary internal ring sheaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A basis of a finite free ring sheaf B over R gives a natural coordinate isomorphism from the restricted module B tensor_R M to a finite power of M",
+   "results": "8 hits: Module.Free.chooseBasis, Module.finBasis, dualTensorHomEquivOfBasis, Algebra.TensorProduct.basis, Module.Free.repr, Module.Basis.tensorProduct, Module.Basis.restrictScalars, Algebra.TensorProduct.basisAux; result digest 9abaebff02b5f0d8",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary modules or preservation of free sheaves, not the stated natural coordinate isomorphism for arbitrary internal ring sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "0 hits: ; result digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary modules or preservation of free sheaves, not the stated natural coordinate isomorphism for arbitrary internal ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite free algebra sheaf tensor any module sheaf is naturally the direct sum of finitely many copies of that module after forgetting scalars",
+   "results": "8 hits: SheafOfModules.mapFree, SheafOfModules.ιFree, SheafOfModules.ιFree_mapFree_inv, SheafOfModules.freeHomEquiv, SheafOfModules.free, SheafOfModules.freeFunctor_obj, SheafOfModules.freeFunctor, LightCondensed.instMonoidalLightCondSetLightCondModFree; result digest 17507f177ccd540d",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary modules or preservation of free sheaves, not the stated natural coordinate isomorphism for arbitrary internal ring sheaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a finite free morphism of sheaves of commutative rings R to B with a chosen basis, restriction of scalar extension B tensor_R M is naturally isomorphic to a finite power of M",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.mapFree, SheafOfModules.ιFree_mapFree_inv_assoc, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.freeHomEquiv_comp_apply, SheafOfModules.freeHomEquiv_symm_comp, SheafOfModules.freeHomEquiv_freeMap; result digest 41f1a16eac557e4f",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary modules or preservation of free sheaves, not the stated natural coordinate isomorphism for arbitrary internal ring sheaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"biproduct\"",
+   "results": "0 hits: ; result digest 4f53cda18c2baa0c",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary modules or preservation of free sheaves, not the stated natural coordinate isomorphism for arbitrary internal ring sheaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-subfield-flat",
@@ -77,5 +202,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-free-scalar-coordinates",
+  "worker": "stage1",
+  "summary": "Expanded the finite-free scalar-coordinate inference into six elementary universal-property calculations. Preserved the statement, built both morphisms before checking their inverse and naturality identities, covered rank zero, and reused the three existing definition nodes. No new nodes.",
+  "blueprint": "All six steps realize the first inference in the last sentence of lem-sfb-subfield-flat.proof.md: F_X tensor over E_X with M is naturally M^n. This is inside step 3 of sk-prop-sfb-cartesian-coefficients; no unit-route departure.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NM-1c6aff79a",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-1c6aff79a (reviewer sub-agent of L); spot-checked: I read the item, the full statements of the three cited definition nodes (sk-def-sfb-sheaf-tensor, sk-def-sfb-module-objects, sk-def-sfb-change-of-scalars) and the source, the last sentence of lem-sfb-subfield-flat.proof.md in blueprint main-20261015 ('F_X ⊗_{E_X} M ≅ M^n naturally'). The statement, stmt_deps, source and blueprint fields are unchanged from the record Q43 created; only split-owned fields changed. There are no new nodes, no repair note for this item, it is not on the route-pivot dropped list, and it cites no SGA. Step 1 gets the Kronecker identity q_i e_j=δ and s=Σφ(q_i s)b_i from θ's two inverse identities and R-linearity of e_i, q_i under the Res action. Step 2 builds Φ through the presheaf tensor, sheafification and the coequalizer. Its balancing check is correct: q_i(sφ(r))m=q_i(s)(rm) uses that B and R are commutative and the action is associative. Testing on the triple tensor is valid because sheafification is strong monoidal. Step 3 builds t_i=b_i⊗–, which is R-linear by the coequalizer relation. In step 4 the composite ΦΨ is the identity because q_i(b_j)=δ_ij. In step 5, ΨΦ(s⊗m)=s⊗m on elementary tensors, and uniqueness out of the bilinear tensor, the sheafification and the coequalizer gives ΨΦ=id. Step 6 proves naturality from the linearity of f. Every step is truly elementary from the cited statements. I tested n=0 (B=0, both sides zero), n=1 with b_1 a unit other than 1, and ordinary modules on a point. No candidate duplicates it: monoidal-finite-free-transport, det-prop-sfb-cartesian-coefficients-finite-free, scalar-model-finite-flat-resolution and sbc pullback-free-coordinates are all different statements. A cosmetic point: mathlib_searches lists the six searches twice, which does no harm. No tool_uses."
  }
 }
