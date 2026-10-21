@@ -16,11 +16,9 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$ and $E=\\operatorname{Ext}_\\varphi$. The abelianness assertion of [lem-sfb-grothendieck-sheafification], applied to the small pro-étale site with coefficients $\\Ab$, makes $\\mathcal C$ abelian. By [sk-def-sfb-sheaf-tensor], both tensor functors preserve colimits; by [lem-sfb-preserving-colimits-additive] they are additive. In particular $R\\otimes-$ and $S\\otimes-$ preserve finite colimits, so [lem-sfb-modobj-abelian] makes both module categories abelian. The hypotheses of [def-sfb-modobj-extension] hold: the category is symmetric, it has coequalizers, both tensor functors preserve colimits, and $R$ is commutative. Thus $E$ is the stated balanced-tensor functor. By [lem-sfb-modobj-extension-right-exact] it preserves finite colimits; applying [lem-sfb-preserving-colimits-additive] to these module categories also shows $E(0_{A,B})=0_{E(A),E(B)}$.",
+   "text": "Put $\\mathcal C=\\Sh(X_{\\mathrm{proét}},\\Ab)$ and $E=\\operatorname{Ext}_\\varphi$. Use the existing abelian-sheaf instance (Mathlib sheafIsAbelian); the required sheafification is already available on this site. The tensor structure and its colimit-preservation instances realize [sk-def-sfb-sheaf-tensor]. Thus [lem-sfb-modobj-abelian] supplies abelian module categories over R and S. The functor E is [def-sfb-modobj-extension]. Its existing colimit-preservation instance in ModuleObjects.ExtendScalars gives [lem-sfb-modobj-extension-right-exact], without importing ChangeOfScalarsSquare. Its existing Additive instance proves map_add directly by checking on the balanced-tensor quotient, so in particular E preserves zero morphisms. No separate application of the general colimit-preserving-implies-additive theorem is needed.",
    "uses": [
-    "lem-sfb-grothendieck-sheafification",
     "sk-def-sfb-sheaf-tensor",
-    "lem-sfb-preserving-colimits-additive",
     "lem-sfb-modobj-abelian",
     "def-sfb-modobj-extension",
     "lem-sfb-modobj-extension-right-exact"
@@ -44,7 +42,7 @@
    }
   },
   {
-   "text": "For $k\\geq0$ use the finite biproducts $R^k,S^k$ of [def-sfb-finitely-presented-module], viewed as finite coproducts. By [lem-sfb-modobj-extension-right-exact], the maps $E(\\iota_i^R):E(R)\\to E(R^k)$ exhibit $E(R^k)$ as the coproduct of $k$ copies of $E(R)$. Consequently there is a unique $e_k:E(R^k)\\to S^k$ with $e_k\\circ E(\\iota_i^R)=\\iota_i^S\\circ e_1$, and a unique $d_k:S^k\\to E(R^k)$ with $d_k\\circ\\iota_i^S=E(\\iota_i^R)\\circ e_1^{-1}$. Their composites are identities: precompose with each coproduct injection and use $e_1e_1^{-1}=1$ and $e_1^{-1}e_1=1$; uniqueness of coproduct maps gives the equalities. Thus $e_k$ is a canonical isomorphism with inverse $d_k$. For $k=0$ the same argument is the uniqueness of maps between initial objects, giving $E(0)\\cong0$.",
+   "text": "For $k\\geq0$ use the finite biproducts $R^k,S^k$ of [def-sfb-finitely-presented-module], viewed as finite coproducts. By [lem-sfb-modobj-extension-right-exact], the maps $E(\\iota_i^R):E(R)\\to E(R^k)$ exhibit $E(R^k)$ as the coproduct of $k$ copies of $E(R)$. Consequently there is a unique $e_k:E(R^k)\\to S^k$ with $e_k\\circ E(\\iota_i^R)=\\iota_i^S\\circ e_1$, and a unique $d_k:S^k\\to E(R^k)$ with $d_k\\circ\\iota_i^S=E(\\iota_i^R)\\circ e_1^{-1}$. Their composites are identities: precompose with each coproduct injection and use $e_1e_1^{-1}=1$ and $e_1^{-1}e_1=1$; uniqueness of coproduct maps gives the equalities. Thus $e_k$ is a canonical isomorphism with inverse $d_k$. For $k=0$ the same argument is the uniqueness of maps between initial objects, giving $E(0)\\cong0$. In Lean this is E.mapBiproduct followed by biproduct.mapIso with e₀ on every summand; Iso.eq_comp_inv and the injection equations prove the normalization.",
    "uses": [
     "def-sfb-finitely-presented-module",
     "lem-sfb-modobj-extension-right-exact"
@@ -56,7 +54,7 @@
    }
   },
   {
-   "text": "Fix a presentation $M\\cong Q=\\operatorname{coker}(f:R^m\\to R^n)$ as in [def-sfb-finitely-presented-module], with cokernel arrow $q_f:R^n\\to Q$. A cokernel is the coequalizer of $(f,0)$: both universal properties say that maps out of $R^n$ killing $f$ factor uniquely through $q_f$. Since $E$ preserves finite colimits [lem-sfb-modobj-extension-right-exact] and preserves zero morphisms by step 1, $E(q_f)$ is a cokernel of $E(f)$. Set $f_S=e_n\\circ E(f)\\circ e_m^{-1}$ and $q_S=E(q_f)\\circ e_n^{-1}:S^n\\to E(Q)$. Then $q_Sf_S=0$. For any $S$-linear $h:S^n\\to N$ with $hf_S=0$, the map $h e_n$ kills $E(f)$, since $e_n E(f)=f_S e_m$. There is therefore a unique $u:E(Q)\\to N$ with $u E(q_f)=h e_n$; equivalently $u q_S=h$. This proves that $q_S$ is a cokernel of $f_S$. Applying the two cokernel universal properties gives inverse maps $E(Q)\\cong\\operatorname{coker}(f_S)$ characterized by the cokernel arrows, so the comparison is canonical. Finally applying the functor $E$ to the given isomorphism $M\\cong Q$ gives $E(M)\\cong\\operatorname{coker}(f_S)$.",
+   "text": "Fix a presentation $M\\cong Q=\\operatorname{coker}(f:R^m\\to R^n)$ as in [def-sfb-finitely-presented-module], with cokernel arrow $q_f:R^n\\to Q$. A cokernel is the coequalizer of $(f,0)$: both universal properties say that maps out of $R^n$ killing $f$ factor uniquely through $q_f$. Since $E$ preserves finite colimits [lem-sfb-modobj-extension-right-exact] and preserves zero morphisms by step 1, $E(q_f)$ is a cokernel of $E(f)$. Set $f_S=e_n\\circ E(f)\\circ e_m^{-1}$ and $q_S=E(q_f)\\circ e_n^{-1}:S^n\\to E(Q)$. Then $q_Sf_S=0$. For any $S$-linear $h:S^n\\to N$ with $hf_S=0$, the map $h e_n$ kills $E(f)$, since $e_n E(f)=f_S e_m$. There is therefore a unique $u:E(Q)\\to N$ with $u E(q_f)=h e_n$; equivalently $u q_S=h$. This proves that $q_S$ is a cokernel of $f_S$. Applying the two cokernel universal properties gives inverse maps $E(Q)\\cong\\operatorname{coker}(f_S)$ characterized by the cokernel arrows, so the comparison is canonical. Finally applying the functor $E$ to the given isomorphism $M\\cong Q$ gives $E(M)\\cong\\operatorname{coker}(f_S)$. In Lean compose PreservesCokernel.iso E f with cokernel.mapIso using e(m) and e(n); the normalization follows from PreservesCokernel.π_iso_hom and cokernel.π_desc.",
    "uses": [
     "def-sfb-finitely-presented-module",
     "lem-sfb-modobj-extension-right-exact"
@@ -80,9 +78,7 @@
   }
  ],
  "proof_deps": [
-  "lem-sfb-grothendieck-sheafification",
   "sk-def-sfb-sheaf-tensor",
-  "lem-sfb-preserving-colimits-additive",
   "lem-sfb-modobj-abelian",
   "def-sfb-modobj-extension",
   "lem-sfb-modobj-extension-right-exact",
@@ -92,7 +88,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
-  "place": "Final sentence: expansion of tensoring local finite presentations into regular-module, finite-coproduct and cokernel calculations"
+  "place": "Final sentence: finite-free and cokernel calculations implemented using the mixed right unitor, mapBiproduct and cokernel.mapIso; ambient structures use existing instances."
  },
  "mathlib_searches": [
   {
@@ -235,7 +231,6 @@
   ]
  },
  "tool_uses": [
-  "lem-sfb-grothendieck-sheafification",
   "lem-sfb-modobj-abelian"
  ],
  "reviewed": {
@@ -264,5 +259,15 @@
   "result": "pass",
   "note": "Statement matches node clause by clause: X:Scheme.{u}, Sheaf (ProEt.topology X) Ab.{u+1} with global Sheaf.monoidalCategory (= sfbSheafTensorStructure.monoidal); MonObj/IsCommMonObj R,S; IsMonHom φ; preservation of Mod.IsFinitelyPresented; e₀ pinned by extendπ ≫ e₀.hom.hom = S◁φ≫μ[S] (epi); e k pinned on all biproduct injections incl. k=0; c pinned via E.map(cokernel.π f) (epi); f_S = (e m).inv≫E.map f≫(e n).hom; no flatness. No defs, sorry-only proof, docstrings with source and blueprint and 5 proof steps; lean.statement verbatim. Dep record def-sfb-finitely-presented-module existing:true → ModuleObjects.Free Mod.IsFinitelyPresented/finiteFree matches node exactly (abelian, MonoidalPreadditive, PreservesFiniteColimits tensorLeft R); only the lean field differs from live, and no other node binds it; other 4 dep nodes identical to live. nt_compile --json clean 6.8 s, exit 0; broken-copy control fails. Advisory: weaker sibling lem-sfb-internal-scalar-extension-finite-presentation (fp_extend) is the first conjunct; consolidate its citers; proof-only imports harmless."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261021T061400-L-1767226",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

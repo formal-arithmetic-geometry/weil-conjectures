@@ -10,9 +10,6 @@ public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
 public import WeilConjectures.CategoryTheory.ModuleObjects.Free
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.CategoryTheory.GrothendieckAbelian.Monoidal.TensorColimits
-import WeilConjectures.CategoryTheory.ModuleObjects.ChangeOfScalarsSquare
-import Mathlib.CategoryTheory.Monoidal.Bimod
-import Mathlib.CategoryTheory.Preadditive.AdditiveFunctor
 
 /-! # Scalar extension and finite presentations of internal sheaf modules
 
@@ -84,6 +81,44 @@ theorem internalExtension_finitePresentation (X : Scheme.{u})
                 (_p : M ≅ cokernel f),
               Nonempty ((Mod.extendScalars φ).obj M ≅
                 cokernel ((e m).inv ≫ (Mod.extendScalars φ).map f ≫ (e n).hom)) := by
-  sorry
+  classical
+  let E := Mod.extendScalars φ
+  let P := Bimod.ofMonHom φ
+  let a := Bimod.rightUnitorBimod P
+  let e₀ : E.obj (Mod.regular R) ≅ Mod.regular S :=
+    Mod.isoMk
+      { hom := a.hom.hom
+        inv := a.inv.hom
+        hom_inv_id := congrArg Bimod.Hom.hom a.hom_inv_id
+        inv_hom_id := congrArg Bimod.Hom.hom a.inv_hom_id }
+      a.hom.left_act_hom
+  have he₀ : Mod.extendπ φ (Mod.regular R) ≫ e₀.hom.hom = S ◁ φ ≫ μ[S] := by
+    exact coequalizer.π_desc _ _
+  let e (k : ℕ) : E.obj (Mod.finiteFree R k) ≅ Mod.finiteFree S k :=
+    E.mapBiproduct (fun _ : Fin k ↦ Mod.regular R) ≪≫
+      biproduct.mapIso (fun _ : Fin k ↦ e₀)
+  have he (k : ℕ) (i : Fin k) :
+      E.map (biproduct.ι (fun _ : Fin k ↦ Mod.regular R) i) ≫ (e k).hom =
+        e₀.hom ≫ biproduct.ι (fun _ : Fin k ↦ Mod.regular S) i := by
+    apply (Iso.eq_comp_inv (e k)).mp
+    simp [e]
+  have hc (m n : ℕ) (f : Mod.finiteFree R m ⟶ Mod.finiteFree R n) :
+      ∃ c : E.obj (cokernel f) ≅ cokernel ((e m).inv ≫ E.map f ≫ (e n).hom),
+        E.map (cokernel.π f) ≫ c.hom =
+          (e n).hom ≫ cokernel.π ((e m).inv ≫ E.map f ≫ (e n).hom) := by
+    let c := PreservesCokernel.iso E f ≪≫
+      cokernel.mapIso (E.map f) ((e m).inv ≫ E.map f ≫ (e n).hom)
+        (e m) (e n) (by simp)
+    refine ⟨c, ?_⟩
+    simp [c, cokernel.mapIso, cokernel.map]
+  constructor
+  · intro M hM
+    obtain ⟨n, m, f, ⟨p⟩⟩ := hM
+    obtain ⟨c, _⟩ := hc m n f
+    exact ⟨n, m, (e m).inv ≫ E.map f ≫ (e n).hom, ⟨E.mapIso p ≪≫ c⟩⟩
+  · refine ⟨e₀, he₀, e, he, ?_⟩
+    intro m n f
+    obtain ⟨c, h⟩ := hc m n f
+    exact ⟨c, h, fun M p ↦ ⟨E.mapIso p ≪≫ c⟩⟩
 
 end AlgebraicGeometry.ProEtale
