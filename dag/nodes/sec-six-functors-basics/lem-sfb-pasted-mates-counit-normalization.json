@@ -198,5 +198,23 @@
   "group": "O3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-4fd99aaea (reviewer sub-agent of L); spot-checked: The item's statement is unchanged, true and not weakened. It is a general component identity for two pasted mates with arbitrary input arrow b and output arrow t. Typing checks on both sides; small cases checked: identity adjunctions reduce it to associativity, and in Ab with α = ×2, ×3 and b, t = ×5, ×7 both sides are ×210. Step 1 (naturality of ε_2 at t) and step 3 (naturality of α_2 at β_{1,J}) are genuinely elementary. Steps 2 and 4 apply the statement of the Mathlib leaf lem-amb-mate-unit-counit to the adjunction pairs (1,2) with d = H_1J and (0,1) with d = J; checked against Mathlib Mates.lean:122-125 (mateEquiv_counit), and the directions match. The delivery adds no new nodes and creates no cycle. Source checked: main-20261015 det-prop-scalar-six-direct-image.proof.md, Formal properties sentence at lines 8-11; no SGA is used. Duplicate scan over all mate nodes: lem-weil-pbc-mate-pasting (mateEquiv_vcomp), lem-pur-adjunction-mate-transpose and lem-sfb-adjunction-transpose-square are related laws, not this statement. There is no repair note, so the re-split rule does not apply. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PastedMatesCounitNormalization",
+  "declaration": "CategoryTheory.pasted_mates_counit_normalization",
+  "file": "lean/Sheaf/CategoryTheory/PastedMatesCounitNormalization.lean",
+  "statement": "theorem pasted_mates_counit_normalization {C₀ : Type u₀} {C₁ : Type u₁} {C₂ : Type u₂} {D₀ : Type u₃} {D₁ : Type u₄} {D₂ : Type u₅} [Category.{v₀} C₀] [Category.{v₁} C₁] [Category.{v₂} C₂] [Category.{v₃} D₀] [Category.{v₄} D₁] [Category.{v₅} D₂] {L₀ : C₀ ⥤ D₀} {R₀ : D₀ ⥤ C₀} {L₁ : C₁ ⥤ D₁} {R₁ : D₁ ⥤ C₁} {L₂ : C₂ ⥤ D₂} {R₂ : D₂ ⥤ C₂} (adj₀ : L₀ ⊣ R₀) (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂) {G₁ : C₀ ⥤ C₁} {G₂ : C₁ ⥤ C₂} {H₁ : D₀ ⥤ D₁} {H₂ : D₁ ⥤ D₂} (α₁ : G₁ ⋙ L₁ ⟶ L₀ ⋙ H₁) (α₂ : G₂ ⋙ L₂ ⟶ L₁ ⋙ H₂) (J : D₀) (Q : C₂) (K : D₂) (b : Q ⟶ G₂.obj (G₁.obj (R₀.obj J))) (t : H₂.obj (H₁.obj J) ⟶ K) : L₂.map (b ≫ G₂.map ((mateEquiv adj₀ adj₁ α₁).app J) ≫ (mateEquiv adj₁ adj₂ α₂).app (H₁.obj J) ≫ R₂.map t) ≫ adj₂.counit.app K = L₂.map b ≫ α₂.app (G₁.obj (R₀.obj J)) ≫ H₂.map (α₁.app (R₀.obj J)) ≫ H₂.map (H₁.map (adj₀.counit.app J)) ≫ t",
+  "branch": "sheaf-dag",
+  "by": "Q111",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e5a729f44",
+  "group": "Q111",
+  "result": "pass",
+  "note": "Single new module Sheaf.CategoryTheory.PastedMatesCounitNormalization; node record differs from live only in the lean field; lean.statement verbatim in file. Clause-by-clause match: 6 categories with 12 independent universes, adj0..2, alpha_i : G_i⋙L_i ⟶ L_{i-1}⋙H_i, beta_i = mateEquiv (canonical, the dependency's recorded Mathlib match), q and the 5-factor normal form typed and ordered correctly; no extra hypotheses. Scratch proof via mateEquiv_counit twice + alpha2 naturality + counit_naturality closes all goals, so the statement is true as typed. No duplicate in Mathlib or lean/Sheaf. Docstrings carry source place, blueprint tag and the 4 proof steps. nt_compile --json clean (16.0 s, exit 0). Report sections present. No findings."
  }
 }

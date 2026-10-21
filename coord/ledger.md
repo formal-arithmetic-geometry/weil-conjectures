@@ -21141,3 +21141,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:28 L: merged deliver/NB/sk-thm-purity-transport (reviewer PASS; first push; new nodes: 0); claim not held by NB: not your claim
 - 08:28 L: merged deliver/NW/lemma-nagata-strict-chart-map-kernel (reviewer PASS; after a return; new nodes: 0)
 - 08:28 L: merged deliver/Q49/lem-weil-pbc-integral-model-open-closed-pieces (reviewer PASS; after a return; new nodes: 1)
+- 08:28 L: merged deliver/Q111/lem-sfb-pasted-mates-counit-normalization (stage 2; reviewer PASS; parallel immutable checks)
