@@ -14,9 +14,125 @@
   "sk-def-sfb-rationalization",
   "lem-weil-pbc-localization-universal-property"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal L=\\mathcal C[M^{-1}]$. By [sk-def-sfb-rationalization], $Q:\\mathcal C\\to\\mathcal L$ is a triangulated localization at $W_M$; in particular it is additive by [def-weil-triangulated-category]. Apply [lem-sfb-additive-localization-linear] to this additive localization. Thus $Q(rf)=rQ(f)$, and every $X\\in\\mathcal L$ admits $A\\in\\mathcal C$ and an isomorphism $QA\\cong X$. We use this canonical $R$-linear structure on $\\mathcal L$. Also every $m\\in M$ acts invertibly on $\\mathcal L$ by [sk-def-sfb-rationalization].",
+   "uses": [
+    "sk-def-sfb-rationalization",
+    "def-weil-triangulated-category",
+    "lem-sfb-additive-localization-linear"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Morphisms of the rationalization: localization, its linear structure and scalar invertibility"
+   }
+  },
+  {
+   "text": "Since $F$ inverts $W_M$, clause (1) of [lem-weil-pbc-localization-universal-property] gives $G:\\mathcal L\\to\\mathcal D$ and a natural isomorphism $\\eta:G\\circ Q\\xrightarrow{\\sim}F$. The hypotheses of [lem-sfb-linear-localization-descent] apply: $Q$ is an additive $R$-linear localization by step 1, both target categories are preadditive and $R$-linear, and $F$ is additive and $R$-linear. Hence $G(r\\alpha)=rG(\\alpha)$. This assertion needs no shift or triangles on $\\mathcal D$.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-sfb-linear-localization-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Full faithfulness: factor the functor through the rationalization"
+   }
+  },
+  {
+   "text": "For $A,B\\in\\mathcal C$ and $\\alpha:QA\\to QB$, write $T_{A,B}(\\alpha)=\\eta_B\\circ G(\\alpha)\\circ\\eta_A^{-1}:FA\\to FB$. Conjugation by these isomorphisms is a bijection of Hom sets. Naturality of $\\eta$ gives $T_{A,B}(Q(u))=F(u)$, and $R$-bilinearity of composition [def-weil-linear-category], together with step 2, gives $T_{A,B}(r\\alpha)=rT_{A,B}(\\alpha)$. These formulas keep track of the comparison isomorphisms rather than identifying $GQA$ with $FA$.",
+   "uses": [
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Full faithfulness: identify the comparison map on Hom sets"
+   }
+  },
+  {
+   "text": "To prove surjectivity of $T_{A,B}$, take $h:FA\\to FB$. Hypothesis (i) supplies $m\\in M$ and $u:A\\to B$ with $mh=F(u)$. Let $s=m\\operatorname{id}_{QB}$ and put $\\alpha=s^{-1}\\circ Q(u)$, using scalar invertibility from [sk-def-sfb-rationalization]. Bilinearity gives $m\\alpha=s\\circ\\alpha=Q(u)$. Step 3 therefore gives $mT_{A,B}(\\alpha)=F(u)=mh$. Since $m\\operatorname{id}_{FB}$ is invertible by hypothesis, composing this equality on the left with its inverse gives $T_{A,B}(\\alpha)=h$. Thus $G$ is full on the objects in the image of $Q$.",
+   "uses": [
+    "sk-def-sfb-rationalization",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Full faithfulness: denominator lifting gives surjectivity on localized Hom sets"
+   }
+  },
+  {
+   "text": "Suppose $T_{A,B}(\\alpha)=T_{A,B}(\\beta)$. Clause 1 of [lem-sfb-rationalization-scalar-fractions] supplies $m,n\\in M$ and $u,v:A\\to B$ with $m\\alpha=Q(u)$ and $n\\beta=Q(v)$. Since $Q$ preserves scalars by step 1 and $R$ is commutative, $Q(nu)=mn\\alpha$ and $Q(mv)=mn\\beta$. Applying the formulas of step 3 gives $F(nu)=mnT_{A,B}(\\alpha)=mnT_{A,B}(\\beta)=F(mv)$. Hypothesis (ii), applied to the two integral arrows $nu,mv:A\\to B$, now gives $p\\in M$ with $pnu=pmv$.",
+   "uses": [
+    "lem-sfb-rationalization-scalar-fractions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Full faithfulness: common denominators reduce equality to integral arrows"
+   }
+  },
+  {
+   "text": "Apply $Q$ to $pnu=pmv$ and use $Q(rf)=rQ(f)$ from step 1. The two fraction equations of step 5 give $pmn\\alpha=pmn\\beta$. The product $pmn$ belongs to $M$, so $pmn\\operatorname{id}_{QB}$ is invertible by [sk-def-sfb-rationalization]. Since $pmn\\alpha=(pmn\\operatorname{id}_{QB})\\circ\\alpha$ and likewise for $\\beta$, compose with the inverse to obtain $\\alpha=\\beta$. This proves injectivity of $T_{A,B}$ and hence faithfulness of $G$ on objects in the image of $Q$.",
+   "uses": [
+    "sk-def-sfb-rationalization",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Full faithfulness: cancel the product of all three denominators"
+   }
+  },
+  {
+   "text": "For arbitrary $X,Y\\in\\mathcal L$, choose $e:QA\\xrightarrow{\\sim}X$ and $d:QB\\xrightarrow{\\sim}Y$ from step 1. The bijection $\\operatorname{Hom}(X,Y)\\to\\operatorname{Hom}(QA,QB)$ sends $a$ to $d^{-1}\\circ a\\circ e$, and its inverse sends $b$ to $d\\circ b\\circ e^{-1}$. On target Hom sets use the same formulas with $G(e),G(d)$. Functoriality of $G$ makes this square commute, so the bijectivity already proved on $QA,QB$ proves that $G$ is fully faithful everywhere. For $Z\\in\\mathcal D$, essential surjectivity of $F$ gives $A$ and $FA\\cong Z$; composing with $\\eta_A:GQA\\cong FA$ gives $GQA\\cong Z$. Thus $G$ is essentially surjective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Full faithfulness and essential surjectivity: extend from image objects by explicit conjugation"
+   }
+  },
+  {
+   "text": "Apply [lem-trf-fully-faithful-ess-surj-equivalence] to $G$, which is fully faithful and essentially surjective by step 7. Working throughout in a common sufficiently large universe, we obtain a quasi-inverse $H:\\mathcal D\\to\\mathcal L$ and natural isomorphisms $H\\circ G\\cong\\operatorname{id}_{\\mathcal L}$ and $G\\circ H\\cong\\operatorname{id}_{\\mathcal D}$.",
+   "uses": [
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Conclusion: the induced functor is an equivalence"
+   }
+  },
+  {
+   "text": "For any category $\\mathcal E$, precomposition with $G$ from $\\operatorname{Fun}(\\mathcal D,\\mathcal E)$ to $\\operatorname{Fun}(\\mathcal L,\\mathcal E)$ has quasi-inverse precomposition with $H$: applying a functor to the two natural isomorphisms of step 8 gives the two required natural isomorphisms on functor categories, also on transformations by naturality. Precomposition with $Q$ is an equivalence onto the full category $\\operatorname{Fun}_{W_M}(\\mathcal C,\\mathcal E)$ of functors inverting $W_M$, by the localization property in [lem-weil-pbc-localization-universal-property]. The composite of these two equivalences is precomposition with $G\\circ Q$: its inverse is the composite of their quasi-inverses in reverse order, and its unit and counit are obtained by composing theirs. Whiskering $\\eta:G\\circ Q\\cong F$ by each functor to $\\mathcal E$ identifies this composite naturally with precomposition with $F$. Consequently precomposition with $F$ is the required equivalence for every $\\mathcal E$. Together with the assumed inversion of $W_M$, this proves exactly the asserted localization universal property.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+    "place": "Conclusion: transfer the full functor-category universal property through the equivalence"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-rationalization",
+  "def-weil-triangulated-category",
+  "lem-sfb-additive-localization-linear",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sfb-linear-localization-descent",
+  "def-weil-linear-category",
+  "lem-sfb-rationalization-scalar-fractions",
+  "lem-trf-fully-faithful-ess-surj-equivalence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/thm-sfb-extend-scalars-localization.proof.md",
+  "place": "Morphisms of the rationalization, Full faithfulness, and final paragraph; the general submonoid comparison argument is written explicitly by Q32"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +168,45 @@
    "results": "13 hits: Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean, Mathlib/CategoryTheory/Localization/Prod.lean, Mathlib/CategoryTheory/Localization/Opposite.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/Predicate.lean, Mathlib/CategoryTheory/Localization/CalculusOfFractions/OfAdjunction.lean",
    "date": "2026-10-21",
    "verdict": "no match: the hits supply only individual ingredients, not the stated comparison or criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An essentially surjective R-linear functor which inverts torsion cone morphisms is a localization if every morphism lifts after multiplying by a scalar and equality is detected after multiplying by a scalar",
+   "results": "8 hits: CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.linear, CategoryTheory.Localization.instLinearLocalization'Q', CategoryTheory.Localization.instLinearLocalization', CategoryTheory.Localization.instLinearLocalizationQ, CategoryTheory.Localization.functor_linear, CategoryTheory.Localization.instLinearLocalization, CategoryTheory.Shift.linear_of_localization",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization and linearity ingredients only; no scalar-fraction comparison criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "LocHomBijective|homBijective_lift|exists_smul_eq_map|localization_of_hom",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization and linearity ingredients only; no scalar-fraction comparison criterion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A functor from an R linear category is a localization at scalar torsion cones if morphisms and equality lift after multiplication by denominators",
+   "results": "8 hits: CategoryTheory.Localization.functor_linear_iff, CategoryTheory.Localization.lift, CategoryTheory.Functor.IsLocalization.mk, ModuleCat.localizedModule_functor, CategoryTheory.Functor.Linear.map_smul, CategoryTheory.MorphismProperty.Q', CategoryTheory.functorCategoryLinear, CategoryTheory.Functor.IsLocalization",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization and linearity ingredients only; no scalar-fraction comparison criterion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"IsEquivalence\"",
+   "results": "3 hits: CategoryTheory.Functor.IsLocalization.isEquivalence, CategoryTheory.Functor.IsLocalization.instCompOfIsEquivalence, CategoryTheory.Functor.IsLocalization.of_isEquivalence",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization and linearity ingredients only; no scalar-fraction comparison criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Full and faithful comparison from a categorical localization using a fraction representation and equality after clearing a common denominator",
+   "results": "8 hits: CategoryTheory.MorphismProperty.map_eq_iff_precomp, CategoryTheory.MorphismProperty.LeftFraction.map_eq_of_map_eq, CategoryTheory.MorphismProperty.LeftFraction.map_compatibility, CategoryTheory.MorphismProperty.LeftFraction.Localization.StrictUniversalPropertyFixedTarget.uniq, CategoryTheory.Functor.q_isLocalization, CategoryTheory.MorphismProperty.LeftFraction.Localization.Q, CategoryTheory.Localization.instFullFunctorWhiskeringLeftFunctor', CategoryTheory.MorphismProperty.LeftFraction.Localization.StrictUniversalPropertyFixedTarget.lift",
+   "date": "2026-10-21",
+   "verdict": "no match: generic localization and linearity ingredients only; no scalar-fraction comparison criterion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-sfb-extend-scalars-localization",
@@ -72,5 +223,22 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-rationalization-localization-hom-criterion",
+  "worker": "stage1",
+  "summary": "Expanded the scalar-fraction localization criterion into a factorization, scalar compatibility, explicit denominator-lifting surjectivity, common-denominator faithfulness, passage to all objects, and transport of the functor-category universal property. Reused the existing fraction node, linear localization leaves, universal-property leaf and equivalence criterion. No new nodes and no statement change. No triangulated target is used.",
+  "blueprint": "Steps 1-2 realize the factorization and Morphisms of the rationalization paragraph; steps 3-6 realize Full faithfulness by explicit scalar fractions; steps 7-9 realize essential surjectivity and the final equivalence/localization conclusion of thm-sfb-extend-scalars-localization.",
+  "new_nodes": [],
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-6eab3db46",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-6eab3db46 (reviewer sub-agent of L); spot-checked: Read the item's nine steps, all nine cited node statements and the parent thm-sfb-extend-scalars-localization (its step 5 applies the item with R=Z, M={l^n}). Also read the main-20261015 source thm-sfb-extend-scalars-localization.proof.md (the 'Morphisms of the rationalization' and 'Full faithfulness' paragraphs and the closing equivalence sentence). The statement is unchanged and true; tested on M={1}, on R=Z with M={l^n} for -⊗Q, on 0∈M, and on the converse through scalar-fractions. Step-by-step: steps 1-2 check the hypotheses of the additive-localization-linear and linear-localization-descent Mathlib leaves (only G(rα)=rG(α) is used, not additivity of G). Step 4 cancels using the assumed invertibility of m·id_FB. Steps 5-6 write out the common denominator, including the third scalar p, so there is no E5 'clear denominators' gap. Step 7 transfers full faithfulness along isomorphisms. Step 8 is the asEquivalence leaf. Step 9 transports the functor-category equivalence via η. Minor remark: the canonical R-structure on L agrees with the one in sk-def because the structure is unique for a localization; not a fault. There are no new nodes, and I found no duplicate in the DAG (checked against lem-weil-linear-scalar-localization-triangulated, lem-pur-semilinear-scalar-localization and lem-fd-rational-coefficient-category-comparison). Route is fine: same-unit nodes plus definitions and Mathlib leaves, so no tool_uses are needed. Batch-5 flag on lem-trf-fully-faithful-ess-surj-equivalence: accepted, because it is the Mathlib leaf Functor.asEquivalence, a pure category-theory fact that is neither the trace formula, Poincaré duality nor a step of their proofs. No cycle, and no SGA source is used."
  }
 }
