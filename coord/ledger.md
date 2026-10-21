@@ -21974,3 +21974,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:35 L: returned deliver/NL/lem-pur-strict-quotient-diagonal-normalization (reviewer RETURN: L: independent stage-2 immutable head 20711db3441d: H2: the delivery adds theorem nodes to stmt_deps where only plain de)
 - 09:35 L: returned deliver/NQ/sk-thm-picard-rr (reviewer RETURN: L: independent stage-2 immutable head 2b5c537b83d2: Statement maths matches the node on every clause and edge case (cano)
 - 09:38 L: merged deliver/NR/lem-weil-pbc-integral-coefficient-presentation-comparison (stage 2; reviewer FIX; parallel immutable checks)
+- 09:38 L: returned deliver/W4/Sheaf.Paper.IntegralComparisonSequenceSystems (reviewer RETURN: (reviewer C-6ca8d, head 6ca8dc27d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralCompar)
