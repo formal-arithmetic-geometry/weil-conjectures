@@ -116,6 +116,132 @@ theorem projective_top_cell_attachment
             ((ePlusLow (b - 1) (by omega)).inv ≫ Dplus.d (b - 1) b ≫ ePlusTop.hom =
               g.f (b - 1) ≫
                 (HomologicalComplex.singleObjXSelf (ComplexShape.up ℤ) (b - 1) P).hom) := by
-  sorry
+  set_option backward.isDefEq.respectTransparency false in
+    set_option backward.isDefEq.respectTransparency.types false in
+      set_option backward.defeqAttrib.useBackward true in
+        let A := ringedSiteModules.{u} R
+        let T := (singleFunctor A (b - 1)).obj P
+        let s := (((singleFunctors A).postcomp DerivedCategory.Q).shiftIso
+          1 (b - 1) b (by omega)).app P
+        let : ∀ q : ℤ, Projective (K.X q) := hproj
+        have : K.IsStrictlyLE (b - 1) :=
+          (isStrictlyLE_iff _ _).2 (fun q hq ↦ hsupp q (Or.inr hq))
+        have : K.IsKProjective := isKProjective_of_projective K (b - 1)
+        obtain ⟨gh, hgh⟩ := (IsKProjective.Qh_map_bijective K
+          ((HomotopyCategory.quotient A (.up ℤ)).obj T)).surjective
+            ((DerivedCategory.quotientCompQhIso A).hom.app K ≫ δ ≫ s.hom ≫
+              (DerivedCategory.quotientCompQhIso A).inv.app T)
+        obtain ⟨g, rfl⟩ := (HomotopyCategory.quotient A (.up ℤ)).map_surjective gh
+        have hg : DerivedCategory.Q.map g ≫ s.inv = δ := by
+          have hh : DerivedCategory.Qh.map ((HomotopyCategory.quotient A (.up ℤ)).map g) ≫
+              (DerivedCategory.quotientCompQhIso A).hom.app T =
+              (DerivedCategory.quotientCompQhIso A).hom.app K ≫ DerivedCategory.Q.map g :=
+            DerivedCategory.quotientCompQhIso_hom_naturality g
+          apply (cancel_epi ((DerivedCategory.quotientCompQhIso A).hom.app K)).mp
+          rw [← Category.assoc, ← hh, hgh]
+          simp only [Category.assoc, Iso.inv_hom_id_app_assoc, Iso.hom_inv_id,
+            Category.comp_id]
+        have hgz (q : ℤ) (hq : q ≠ b - 1) : g.f q = 0 :=
+          (HomologicalComplex.isZero_single_obj_X (.up ℤ) (b - 1) P q hq).eq_of_tgt _ _
+        refine ⟨g, hg, hgz, ?_, ?_⟩
+        · rw [← g.comm]
+          change g.f (b - 2) ≫ (0 : T.X (b - 2) ⟶ T.X (b - 1)) = 0
+          simp
+        · let D := (mappingCone g)⟦(-1 : ℤ)⟧
+          have hDM : Nonempty (DerivedCategory.Q.obj D ≅ M) := by
+            let Tc := DerivedCategory.Q.mapTriangle.obj (mappingCone.triangle g)
+            let Tr := (Triangle.mk v₁ v₂ δ).rotate.rotate
+            let e := isoTriangleOfIso₁₂ Tc Tr (DerivedCategory.mappingCone_triangle_distinguished g)
+              (rot_of_distTriang _ (rot_of_distTriang _ htri)) (Iso.refl _) s.symm (by
+                change DerivedCategory.Q.map g ≫ s.inv = 𝟙 _ ≫ δ
+                simpa only [Category.id_comp] using hg)
+            exact ⟨(DerivedCategory.Q.commShiftIso (-1)).app (mappingCone g) ≪≫
+              (CategoryTheory.shiftFunctor _ (-1)).mapIso (Triangle.π₃.mapIso e) ≪≫
+              (shiftFunctorCompIsoId _ (1 : ℤ) (-1) (by omega)).app M⟩
+          refine ⟨D, rfl, hDM, ?_, ?_⟩
+          · intro q hq
+            apply (shiftFunctorObjXIso (mappingCone g) (-1) q (q - 1) rfl).isZero_iff.mpr
+            apply (mappingCone.isZero_X_iff g (q - 1)).2
+            constructor
+            · convert hsupp q (by omega) using 1
+              congr 1
+              omega
+            · exact HomologicalComplex.isZero_single_obj_X (.up ℤ) (b - 1) P (q - 1)
+                (by omega)
+          · -- Away from the top degree, the second cone summand vanishes.
+            let eAll (q : ℤ) (hq : q ≠ b) : D.X q ≅ K.X q :=
+              shiftFunctorObjXIso (mappingCone g) (-1) q (q - 1) rfl ≪≫
+                { hom := (mappingCone.fst g).1.v (q - 1) q (by omega)
+                  inv := (mappingCone.inl g).v q (q - 1) (by omega)
+                  hom_inv_id := by
+                    apply mappingCone.ext_to g (q - 1) q (by omega)
+                    · simp
+                    · exact (HomologicalComplex.isZero_single_obj_X (.up ℤ)
+                        (b - 1) P (q - 1) (by omega)).eq_of_tgt _ _
+                  inv_hom_id := by simp }
+            let eLow (q : ℤ) (_ : q < b) : D.X q ≅ K.X q := eAll q (by omega)
+            let eTop : D.X b ≅ P :=
+              shiftFunctorObjXIso (mappingCone g) (-1) b (b - 1) rfl ≪≫
+                { hom := (mappingCone.snd g).v (b - 1) (b - 1) (add_zero _)
+                  inv := (mappingCone.inr g).f (b - 1)
+                  hom_inv_id := by
+                    apply mappingCone.ext_to g (b - 1) b (by omega)
+                    · exact (hsupp b (Or.inr (by omega))).eq_of_tgt _ _
+                    · simp
+                  inv_hom_id := by simp } ≪≫
+                HomologicalComplex.singleObjXSelf (.up ℤ) (b - 1) P
+            let π : D ⟶ K := HomComplex.Cocycle.homOf
+              ((-mappingCone.fst g).leftShift (-1) 0 (by omega))
+            have hπ (q : ℤ) (hq : q < b) : π.f q = (eLow q hq).hom := by
+              change (((-mappingCone.fst g).1).leftShift (-1) 0 (by omega)).v q q
+                (add_zero q) = _
+              rw [HomComplex.Cochain.leftShift_v _ (-1) 0 (by omega) q q (add_zero q)
+                (q - 1) (by omega)]
+              simp only [Int.reduceNeg, shiftFunctor_obj_X', shiftFunctor_obj_X, mul_zero,
+                Int.reduceSub, mul_neg, neg_mul, one_mul, neg_neg, ne_eq, OfNat.ofNat_ne_zero,
+                not_false_eq_true, Int.ediv_self, zero_add, Int.negOnePow_one,
+                shiftFunctorObjXIso, HomologicalComplex.XIsoOfEq_rfl, Iso.refl_hom,
+                HomComplex.Cocycle.coe_neg, HomComplex.Cochain.neg_v, Preadditive.comp_neg,
+                Category.id_comp, smul_neg, Units.neg_smul, one_smul]
+              exact (Category.id_comp _).symm
+            have hlow (q : ℤ) (hq : q + 1 < b) :
+                D.d q (q + 1) ≫ (eLow (q + 1) hq).hom =
+                  (eLow q (by omega)).hom ≫ K.d q (q + 1) := by
+              have hh := (π.comm q (q + 1)).symm
+              rw [hπ q (by omega), hπ (q + 1) hq] at hh
+              exact hh
+            have hlast :
+                (eLow (b - 1) (by omega)).inv ≫ D.d (b - 1) b ≫ eTop.hom =
+                  -(g.f (b - 1) ≫
+                    (HomologicalComplex.singleObjXSelf (.up ℤ) (b - 1) P).hom) := by
+              change ((mappingCone.inl g).v (b - 1) (b - 1 - 1) (by omega) ≫ 𝟙 _) ≫
+                ((-1 : ℤ).negOnePow • (mappingCone g).d (b - 1 - 1) (b - 1)) ≫
+                (𝟙 _ ≫ (mappingCone.snd g).v (b - 1) (b - 1) (add_zero _) ≫
+                  (HomologicalComplex.singleObjXSelf (.up ℤ) (b - 1) P).hom) = _
+              simp only [Category.id_comp, Category.comp_id, Int.negOnePow_neg,
+                Int.negOnePow_one, Units.neg_smul, one_smul, Preadditive.comp_neg,
+                Preadditive.neg_comp]
+              rw [mappingCone.d_snd_v'_assoc g (b - 1)]
+              simp [T, singleFunctor, Category.assoc]
+            refine ⟨eLow, eTop, ?_, ?_, hlow, hlast, ?_, ?_⟩
+            · intro q hq
+              change (eLow q hq).hom = 𝟙 _ ≫ (eLow q hq).hom
+              exact (Category.id_comp _).symm
+            · change eTop.hom = 𝟙 _ ≫ eTop.hom
+              exact (Category.id_comp _).symm
+            · rintro ⟨hP, hK⟩ q
+              by_cases hq : q = b
+              · subst q
+                obtain ⟨n, ⟨e⟩⟩ := hP
+                exact ⟨n, ⟨eTop ≪≫ e⟩⟩
+              · obtain ⟨n, ⟨e⟩⟩ := hK q
+                exact ⟨n, ⟨eAll q hq ≪≫ e⟩⟩
+            · -- Keep the complex and negate its top coordinate identification.
+              refine ⟨D, Iso.refl D, eLow, -eTop, ?_, ?_, hlow, ?_⟩
+              · intro q hq
+                simp
+              · simp
+              · simpa only [Preadditive.neg_iso_hom, Preadditive.comp_neg, neg_neg] using
+                  congrArg Neg.neg hlast
 
 end CochainComplex
