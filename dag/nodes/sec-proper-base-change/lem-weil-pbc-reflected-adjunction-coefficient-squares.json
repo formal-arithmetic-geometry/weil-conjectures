@@ -10,9 +10,131 @@
  "stmt_deps": [
   "def-weil-pbc-adjunction-mate"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use right-to-left composition throughout, and distinguish reflection units $\\eta$ from adjunction units $u_i$ and counits $e_i$. An object $X$ is local exactly when $\\eta_X$ is invertible: if $X$ is local, the reflection bijection supplies $r:\\Lambda X\\to X$ with $r\\eta_X=1_X$, and its injectivity into the local object $\\Lambda X$ gives $\\eta_Xr=1_{\\Lambda X}$; conversely an invertible $\\eta_X$ identifies $X$ with the local object $\\Lambda X$. Here local objects mean the isomorphism-closed essential image of the full reflective inclusion. For local $X$, the assumed equation $\\eta_{1,T,C_TX}=\\kappa_{T,X}C_T(\\eta_{0,T,X})$ is a composite of isomorphisms. Thus $C_TX$ is local, for both $T=A,B$. Restrictions of $C_T$ and $G_i$ to the full local subcategories therefore exist.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+    "place": "Agent reflector calculation realizing the coherent pullback/direct-image comparison in prop-weil-pbc-scalar-extension"
+   }
+  },
+  {
+   "text": "For local $X\\in\\mathcal A_i$ and $Y\\in\\mathcal B_i$, put $k_{i,X}=\\eta_{i,B,F_iX}$ and let $H_i$ be the original adjunction bijection. Define $\\widehat H_i(t)=H_i(tk_{i,X})$ for $t:\\Lambda_{i,B}F_iX\\to Y$. This is a bijection because $Y$ is local and precomposition by $k_{i,X}$ is the reflection bijection. For $a:X'\\to X$ and $b:Y\\to Y'$, naturality of $\\eta$ and $H_i$ gives\n$$\\widehat H_i(b\\,t\\,\\Lambda_{i,B}F_i(a))=G_i(b)\\widehat H_i(t)a.$$\nApply the cited natural-Hom-bijection theorem to obtain $\\widehat F_i\\dashv\\widehat G_i$ with this precise bijection. Its unit and counit are consequently\n$$\\widehat u_{i,X}=G_i(k_{i,X})u_{i,X},\\qquad \\widehat e_{i,Y}k_{i,G_iY}=e_{i,Y}.$$\nThe counit equation determines $\\widehat e$ uniquely because its target $Y$ is local. No identification of adjunctions other than this specified Hom bijection is made.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and its following paragraph; apply the existing natural-Hom-bijection node"
+   }
+  },
+  {
+   "text": "The proposed $\\widehat\\delta_X=\\kappa_{B,F_0X}^{-1}\\Lambda_{1,B}(\\delta_X)$ is a natural isomorphism between local objects when $X$ is local. Naturality of the reflection unit and the normalization of $\\kappa_B$ give the crucial equation\n$$\\widehat\\delta_Xk_{1,C_AX}=C_B(k_{0,X})\\delta_X.\\tag{*}$$\nIndeed, $\\Lambda_{1,B}(\\delta_X)\\eta_{1,B,F_1C_AX}=\\eta_{1,B,C_BF_0X}\\delta_X$, and $\\kappa_{B,F_0X}^{-1}\\eta_{1,B,C_BF_0X}=C_B(\\eta_{0,B,F_0X})$. This also proves uniqueness of $\\widehat\\delta$ subject to (*) by injectivity of the reflection bijection into the local target $C_B\\widehat F_0X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+    "place": "Agent reflector calculation realizing the coherent pullback/direct-image comparison in prop-weil-pbc-scalar-extension"
+   }
+  },
+  {
+   "text": "Fix local $Y\\in\\mathcal B_0$. By the mate definition, the reflected mate at $Y$ is the $\\widehat F_1\\dashv\\widehat G_1$ adjunct of\n$$t=C_B(\\widehat e_{0,Y})\\widehat\\delta_{G_0Y}:\\widehat F_1C_AG_0Y\\to C_BY.$$\nAll inputs are local by step 1 and the hypothesis on $G_0$. Equation (*) and step 2 imply\n$$tk_{1,C_AG_0Y}=C_B(\\widehat e_{0,Y}k_{0,G_0Y})\\delta_{G_0Y}=C_B(e_{0,Y})\\delta_{G_0Y}.$$\nIts ordinary $F_1\\dashv G_1$ adjunct is exactly $\\beta_Y$, by the same mate definition. The definition of $\\widehat H_1$ in step 2 therefore says that the reflected mate is $\\beta_Y$ itself. This uses no invertibility of $\\beta$.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A7, remark-base-change (counit-transpose construction); explicit reflection-unit calculation"
+   }
+  },
+  {
+   "text": "For ambient $M\\in\\mathcal B_0$, both sides of the claimed normalization equation are maps from $C_A\\Lambda_{0,A}G_0M$ to the local object $G_1C_B\\Lambda_{0,B}M$. Precomposition with $C_A(\\eta_{0,A,G_0M})$ is injective: under $\\kappa_{A,G_0M}$ it is precomposition with $\\eta_{1,A,C_AG_0M}$, whose target-testing bijection applies. After this precomposition, the left side becomes\n$$\\beta_{\\Lambda_{0,B}M}C_AG_0(\\eta_{0,B,M})=G_1C_B(\\eta_{0,B,M})\\beta_M$$\nby normalization of $\\gamma_0$ and naturality of the mate $\\beta$. The right side becomes\n$$G_1(\\kappa_{B,M}^{-1})\\gamma_{1,C_BM}\\Lambda_{1,A}(\\beta_M)\\eta_{1,A,C_AG_0M}\n=G_1(\\kappa_{B,M}^{-1})\\gamma_{1,C_BM}\\eta_{1,A,G_1C_BM}\\beta_M\n=G_1(\\kappa_{B,M}^{-1}\\eta_{1,B,C_BM})\\beta_M\n=G_1C_B(\\eta_{0,B,M})\\beta_M.$$\nThese equalities use, in order, normalization of $\\kappa_A$, naturality of $\\eta_{1,A}$, normalization of $\\gamma_1$, and normalization of $\\kappa_B$. Injectivity proves the displayed equation of the statement.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+    "place": "Agent reflector calculation realizing the coherent pullback/direct-image comparison in prop-weil-pbc-scalar-extension"
+   }
+  },
+  {
+   "text": "For a second coefficient square $(D_A,D_B,\\delta^D)$ from index $1$ to index $2$, use the composite data\n$$\\kappa^{DC}_{T,X}=\\kappa^D_{T,C_TX}D_T(\\kappa^C_{T,X}),\\qquad\n\\delta^{DC}_X=D_B(\\delta^C_X)\\delta^D_{C_AX}.$$\nSubstituting the two unit equations verifies $\\kappa^{DC}_{T,X}D_TC_T(\\eta_{0,T,X})=\\eta_{2,T,D_TC_TX}$. Compare the reflection of $\\delta^{DC}$ with $D_B(\\widehat\\delta^C_X)\\widehat\\delta^D_{C_AX}$. Precomposing either map with $k_{2,D_AC_AX}$ gives\n$$D_BC_B(k_{0,X})D_B(\\delta^C_X)\\delta^D_{C_AX},$$\nby applying (*) twice. Their common target is local, so the reflection bijection makes the two maps equal. Clause 1 of the cited mate-pasting node gives the right comparison $(\\beta^D C_B)\\circ(D_A\\beta^C)$ both before and after restriction (step 4). Thus coefficient-square pasting commutes with the construction.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E46/0E47, remarks on base-change pasting; use mate-pasting clause 1 and the explicit unit equation"
+   }
+  },
+  {
+   "text": "For pasting adjunctions, write a second pair as $H_i:\\mathcal B_i\\rightleftarrows\\mathcal D_i:J_i$, with reflectors $\\Lambda_{i,D}$, unit $\\eta_{i,D}$, and $J_i$ preserving local objects. For local $X$ set\n$$Q_i=\\Lambda_{i,D}H_iF_iX,\\quad P_i=\\Lambda_{i,D}H_i\\Lambda_{i,B}F_iX,\\quad\nq_{i,X}=\\Lambda_{i,D}H_i(k_{i,X}):Q_i\\to P_i.$$\nFor local $Z\\in\\mathcal D_i$, the reflection and $H_i\\dashv J_i$ bijections identify precomposition by $q_{i,X}$ with precomposition by $k_{i,X}$ from $\\operatorname{Hom}(\\Lambda_{i,B}F_iX,J_iZ)$ to $\\operatorname{Hom}(F_iX,J_iZ)$. This is bijective since $J_iZ$ is local. Taking $Z=Q_i$ gives $r:P_i\\to Q_i$ with $rq_i=1$; injectivity for $Z=P_i$ then gives $q_ir=1$ by precomposing with $q_i$. Thus $q_i$ is a natural isomorphism. Under it the two specified Hom bijections both send a map to its successive $H_i$- and $F_i$-adjunct, after the two reflection units. Hence $q_i$ is precisely the composition comparison specified in the statement, by the composite-Hom-bijection definition of composite adjunction.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0DV0, lemma-compose-counits; direct comparison of the two composite Hom bijections"
+   }
+  },
+  {
+   "text": "Retain step 7 and add $C_D$ with normalized $\\kappa_D$ and a square $\\epsilon:H_1C_B\\xrightarrow{\\sim}C_DH_0$. Write $l_{i,V}=\\eta_{i,D,H_iV}$ and $s_{i,X}=\\eta_{i,D,H_iF_iX}$, so that\n$$q_{i,X}s_{i,X}=l_{i,\\widehat F_iX}H_i(k_{i,X}).$$\nThe ambient pasted square is $\\rho_X=\\epsilon_{F_0X}H_1(\\delta_X)$. The reflected composite on the other route is\n$$P_X=\\widehat\\epsilon_{\\widehat F_0X}\\widehat H_1(\\widehat\\delta_X)q_{1,C_AX},$$\nwhere $\\widehat H_i=\\Lambda_{i,D}H_i$ here denotes the completed second left functor. Using naturality of $l$, equation (*) for both squares, and naturality of $\\epsilon$ at $k_{0,X}$ gives\n$$P_Xs_{1,C_AX}=C_D(l_{0,\\widehat F_0X})\\epsilon_{\\widehat F_0X}H_1(C_B(k_{0,X})\\delta_X)\n=C_D(l_{0,\\widehat F_0X}H_0(k_{0,X}))\\epsilon_{F_0X}H_1(\\delta_X)\n=C_D(q_{0,X})\\widehat\\rho_Xs_{1,C_AX}.$$\nThe target is local, so cancellation by the reflection bijection gives $P_X=C_D(q_{0,X})\\widehat\\rho_X$. This proves left-square compatibility for adjunction pasting without assuming that $H_i$ preserves local objects. On right adjoints, restriction of $G_iJ_i$ is the composite of their restrictions. Clause 2 of the mate-pasting node now gives exactly the same right square along both routes, since step 7 identifies the adjunctions by their Hom bijections.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0E46/0E47, remarks on pasting; mate-pasting clause 2 with the explicit reflector comparison"
+   }
+  },
+  {
+   "text": "The composite right adjoint in step 7 also has normalized completion comparison\n$$\\gamma^{GJ}_M=G(\\gamma^J_M)\\gamma^G_{JM}.$$\nIts composite with $\\eta_{A,GJM}$ is $G(\\gamma^J_M\\eta_{B,JM})=GJ(\\eta_{D,M})$, as required. Repeated coefficient pasting has $\\kappa$ equal to the iterated product from step 6; its parenthesizations agree by functoriality and associativity. Repeated adjunction pasting has the iterated Hom bijection of the composite-adjunction definition; its parenthesizations agree as compositions of functions. The reflection comparisons are therefore identical by the uniqueness tests in steps 3 and 7, and the mates agree by mate-pasting. With identity coefficient data, (*) becomes $\\widehat\\delta_Xk_{i,X}=k_{i,X}$ and forces $\\widehat\\delta=1$; clause 4 of mate-pasting forces its mate to be $1$. The identity adjunction and its reflection on local objects give the identity comparison under $\\eta_X^{-1}:\\Lambda X\\to X$. Thus the identity and iterated-pasting assertions have the required normalization.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 0037 and 0DV0, units and composite Hom bijections; mate-pasting identity clause"
+   }
+  },
+  {
+   "text": "Finally assume the given shift compatibilities. The local subcategories are stable under shifts: for local $X$, the shift comparison identifies $\\Lambda(X[a])$ with $(\\Lambda X)[a]$ and identifies $\\eta_{X[a]}$ with the invertible $\\eta_X[a]$. The closure rules for shift-compatible transformations show that $\\widehat u=G(k)u$, $\\widehat\\delta=\\kappa_B^{-1}\\Lambda_B\\delta$, and $q=\\Lambda_DH(k)$ commute with shifts. Inversion causes no problem: multiplying the commutative shift square for an isomorphism on both sides by its inverse gives the shift square for the inverse. The cited adjunction-shift theorem, clause (i), then gives shift compatibility of the reflected counits from that of their units; it also gives this for the original counits if only unit compatibility was specified. The mate formula from the mate-definition node is a composite of these units, counits and whiskered squares, so the closure rules give shift compatibility of $\\beta$ and its reflected restriction. Every product in the normalization and pasting equations is consequently shift-compatible. This proves the final assertion for all specified shifts.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker",
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Shift/Adjunction.lean",
+    "place": "compatibilityCounit_of_compatibilityUnit, line 91; Shift/CommShift.lean, lines 406-425, composition and whiskering instances; agent application to reflection units"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-scalar-extension.md",
+  "place": "Coherent pullback/direct-image and exchange assertion: full abstract proof by reflection-unit cancellation, with Stacks Tags 0037, 07A7, 0DV0, 0E46, 0E47 for the adjunction and mate conventions, and existing Mathlib leaves for the generic tools."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +177,52 @@
    "results": "; 25 hits: Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean. Read Reflective.lean:111-156, Restrict.lean:42-90, Localization/Adjunction.lean:86-132 and Mates.lean:245. These give constituent Hom bijections, restricted/localized adjunctions and ordinary mate pasting, but not this reflected coefficient square and its gamma/kappa normalization; the assembly is not a one-line specialization.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reflective subcategories inherit adjunctions and coefficient squares whose mates agree with restriction and localization units",
+   "results": "8 hits: CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.unit_obj_eq_map_unit, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.unitCompPartialBijective_symm_apply, CategoryTheory.Adjunction.Localization.η, CategoryTheory.unitCompPartialBijectiveAux_symm_apply. Read Reflective.lean:111-156, Restrict.lean:42-90, Localization/Adjunction.lean:86-132 and Mates.lean:170-245. These give constituent reflected Hom bijections, restrictions, localized adjunctions and ordinary mate pasting; none states the full normalized coefficient-square theorem in one specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*(reflect|localiz)|(reflect|localiz).*mate",
+   "results": "1 hits: Mathlib/CategoryTheory/Sites/Monoidal.lean. Read Reflective.lean:111-156, Restrict.lean:42-90, Localization/Adjunction.lean:86-132 and Mates.lean:170-245. These give constituent reflected Hom bijections, restrictions, localized adjunctions and ordinary mate pasting; none states the full normalized coefficient-square theorem in one specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An adjunction on full reflective subcategories has a coefficient change mate compatible with the reflection units",
+   "results": "8 hits: CategoryTheory.reflectorAdjunction, CategoryTheory.unit_obj_eq_map_unit, CategoryTheory.Reflective.instIsIsoAppUnitReflectorAdjunctionA, CategoryTheory.unit_mateEquiv, CategoryTheory.coreflectorAdjunction, CategoryTheory.counit_obj_eq_map_counit, CategoryTheory.Reflective.adj, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc. Read Reflective.lean:111-156, Restrict.lean:42-90, Localization/Adjunction.lean:86-132 and Mates.lean:170-245. These give constituent reflected Hom bijections, restrictions, localized adjunctions and ordinary mate pasting; none states the full normalized coefficient-square theorem in one specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Reflective, CategoryTheory.Adjunction",
+   "results": "3 hits: CategoryTheory.reflectorAdjunction, CategoryTheory.Reflective.adj, CategoryTheory.Reflective.mk. Read Reflective.lean:111-156, Restrict.lean:42-90, Localization/Adjunction.lean:86-132 and Mates.lean:170-245. These give constituent reflected Hom bijections, restrictions, localized adjunctions and ordinary mate pasting; none states the full normalized coefficient-square theorem in one specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "unitCompPartialBijective|restrictFullyFaithful|localization_counit_app",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Subobject/MonoOver.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean, Mathlib/CategoryTheory/Adjunction/Restrict.lean. Read Reflective.lean:111-156, Restrict.lean:42-90, Localization/Adjunction.lean:86-132 and Mates.lean:170-245. These give constituent reflected Hom bijections, restrictions, localized adjunctions and ordinary mate pasting; none states the full normalized coefficient-square theorem in one specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Unit normalized localization of an adjoint square restricts its right mate and respects composition of adjunctions",
+   "results": "8 hits: CategoryTheory.Adjunction.localization_unit_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.localization, CategoryTheory.unit_mateEquiv. Read Reflective.lean:111-156, Restrict.lean:42-90, Localization/Adjunction.lean:86-132 and Mates.lean:170-245. These give constituent reflected Hom bijections, restrictions, localized adjunctions and ordinary mate pasting; none states the full normalized coefficient-square theorem in one specialization.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-pbc-scalar-extension",
@@ -75,5 +239,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-reflected-adjunction-coefficient-squares",
+  "worker": "stage1",
+  "summary": "Wrote the full normalized reflector argument, including the explicit mate transpose, gamma/kappa equation, coefficient pasting, the comparison for composite adjunctions, identities and shifts. Reused all generic adjunction/mate/shift tools as existing Mathlib leaves; no new nodes, no statement change, no Lean writing or compilation. No project declaration states the complete item.",
+  "blueprint": "Realizes the coherent pullback/direct-image comparisons and scalar-exchange compatibility of prop-weil-pbc-scalar-extension, specifically its returned steps 7 and 9 recorded in this item's blueprint.from.place. All reflection and composition normalizations are explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NO-51f1380d7",
+  "group": "NO",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-51f1380d7 (reviewer sub-agent of L); spot-checked: PASS: the split is correct and complete; no fixes written. The statement is unchanged, there are no new nodes, and the item is unsplit on live and side-live, so it has not been superseded. The re-split note of 2026-10-21 belongs to the parent prop-weil-pbc-scalar-extension, which created this item as a statement-only node, so the item may now be split. I re-derived all 10 steps (9138 characters): (1) local means η invertible, and C_T preserves local objects because κ is unit-normalized; (2) Ĥ(t)=H(tk) is natural, and with mkOfHomEquiv gives û=G(k)u and êk=e; (3) (*) δ̂k₁=C_B(k₀)δ; (4) tk₁=C_B(e₀)δ, so the reflected mate is β_Y and β is never inverted; (5) the normalization holds after cancelling C_A(η₀)=κ_A⁻¹η₁ into the local target, and each of the four equalities checks; (6) the composite κ is normalized, the two reflections agree after k₂, and mate-pasting clause 1 gives the mates; (7) q=Λ_DH(k) is bijective by Hom-testing into the local J Z, and it matches the composite Hom bijections, H^F(H^H(tl)k)=H^FH^H(tqs); (8) Ps₁=C_D(q₀)ρ̂s₁ is recomputed via naturality of l and ε and (*) for both squares; the transfer of the mate along q (formally clause 3 with conjugate equal to the identity) is stated only through the Hom-bijection identification, which is acceptable; (9) γ^{GJ} is normalized, and identities follow from (*) and clause 4; (10) shifts work because Λ and η are specified shift-compatible, using the closure node and adjunction-shift clause (i). The cited Mathlib leaves (mate definition, natural-bijection adjunction, composite adjunction, mate pasting 1/2/4, CommShift closure and counit-from-unit) say what the steps take from them. Route: all cited nodes are Mathlib leaves, so no tool_uses are needed; no SGA. Sources: the main-20261015 scalar-extension 'coherent natural isomorphisms' clause, and Stacks 0037, 0DV0, 07A7 and 0E46/0E47 (whose verification Stacks omits) checked. Edge cases: identity reflectors, the singleton reflection, a non-invertible β via (−×S)⊣(−)^S with |S|=2, and a non-replete subcategory. Duplicate search: lem-sbc-reflector-adjunction-unit-formulas and lem-sbc-reflector-square-mate-factorization (sk-rem-rest) are A-linear specializations of steps 2 and 4 only. They cannot be cited for plain categories and are not duplicates of the item. Maintainer note: those two could later cite this general lemma."
  }
 }

@@ -20922,3 +20922,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/Q33/lem-sfb-monoidal-balancing-diagrams (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/NA/lem-weil-pbc-integral-stratified-perfect-characterization (reviewer FIX; after a return; new nodes: 4)
 - 08:09 L: merged deliver/Q62/lem-sfb-trace-base-change-first (reviewer FIX; after a return; new nodes: 0)
+- 08:09 L: merged deliver/NO/lem-weil-pbc-reflected-adjunction-coefficient-squares (reviewer PASS; first push; new nodes: 0)
