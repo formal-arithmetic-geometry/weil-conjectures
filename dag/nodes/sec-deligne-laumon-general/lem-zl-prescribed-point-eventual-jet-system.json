@@ -1,0 +1,281 @@
+{
+ "id": "lem-zl-prescribed-point-eventual-jet-system",
+ "kind": "statement",
+ "title": "Eventual kernel basis, complement immersion and simultaneous jets",
+ "statement": "Let k be algebraically closed, X a finite-type k-scheme, S a nonempty finite set\nof closed points, Y a reduced closed projective k-subscheme, and j:X -> Y a dense\nopen immersion identifying X with the standard affine-chart intersection. Use the\nconcrete twists and section/jet maps of [def-zl-prescribed-point-system-data].\nThere is n0 such that every O_Y(n), n>=n0, has a finite family s with the following\nproperties: residue-fibre vanishing on S is equivalent to a unique coefficient\nrepresentation in s; the restricted family generates and defines an immersion on\nX minus S; and coefficients map surjectively onto the product over S of\n(m_x/m_x^2) tensor_{O_X,x} (j^*O_Y(n))_x. No smoothness, dimension or affineness\nhypothesis is required on X. This statement supplies only interpolation and\nimmersion, without asserting anything about general smooth members.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Proof paragraph 2: generation off S and first-neighbourhood Serre vanishing",
+  "external": [
+   {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0FD5 (lemma-generate-over-complement), 0FD6 (lemma-bertini)"
+   },
+   {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5T (lemma-coherent-proper-ample), (3)-(4)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-zl-prescribed-point-system-data"
+ ],
+ "proof": [
+  {
+   "text": "The pullback of O(1) along the given closed immersion is very ample by the definition, using the isomorphism from tensorPullback to pullback. Its first tensor power is itself, hence it is ample without the affine-loci criterion. The tensor-power comparison identifies its n-th power with prescribedPointTwist c n. Projectivity gives properness and Noetherianity; invertibility gives coherence and proper coherent cohomology gives finite-dimensional sections.",
+   "uses": [
+    "lem-pc-projective-proper",
+    "lem-weil-pbc-projective-ample-invertible",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-coherent-hi"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the sections-vanishing theorem to $(Y,L,S)$. There is $a$ such that for every $n\\ge a$, $V_n$ generates $L^{\\otimes n}$ on $Y\\setminus S$ and gives an immersion there. Restricting the sections and the morphism to the open subscheme $X\\setminus S$ preserves generation, and the morphism remains an immersion by composition with the open immersion $X\\setminus S\\hookrightarrow Y\\setminus S$. This proves the first two requested clauses.",
+   "uses": [
+    "lem-zl-bertini-sections",
+    "lem-weil-pbc-proper-fp-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD5, lemma-generate-over-complement; schemes.tex Tag 02V0, lemma-composition-immersion"
+   }
+  },
+  {
+   "text": "Let $\\mathcal I$ be the ideal sheaf of $S$ in $Y$. It is quasi-coherent, and so is its square $\\mathcal I^2$, computed by squaring the ideal on each affine chart. Both are coherent, since they are quasi-coherent submodules of the coherent module $\\mathcal O_Y$ on the Noetherian scheme $Y$. The quotient $\\mathcal I/\\mathcal I^2$ is coherent as well. For every $n$, tensoring the inclusion and quotient sequence with $L^{\\otimes n}$ gives the short exact sequence $0\\to\\mathcal I^2\\otimes L^{\\otimes n}\\to\\mathcal I\\otimes L^{\\otimes n}\\to(\\mathcal I/\\mathcal I^2)\\otimes L^{\\otimes n}\\to0$: in a frame of the invertible sheaf it is the original exact sequence. The ideal-tensor-sections theorem identifies $\\Gamma(Y,\\mathcal I\\otimes L^{\\otimes n})$ with exactly $V_n$, with its given inclusion into $\\Gamma(Y,L^{\\otimes n})$.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers",
+    "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "lem-sc-closed-immersion-ideal-tensor-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 01Y1, lemma-coherent-Noetherian-quasi-coherent-sub-quotient; varieties.tex Tag 0FD5, first proof paragraph; schemes.tex Tag 01IN"
+   }
+  },
+  {
+   "text": "The sheaf $Q_n=(\\mathcal I/\\mathcal I^2)\\otimes L^{\\otimes n}$ is supported on the finite set $S$ and is annihilated by $\\mathcal I$. Its stalk at $s$ is $(\\mathfrak m_s/\\mathfrak m_s^2)\\otimes_k L_n(s)$, since $X$ is open in $Y$ and $\\kappa(s)=k$. Consequently $\\Gamma(Y,Q_n)$ is the direct sum of these stalks. Explicitly, take a representative of a germ near $s$ on an open excluding the other points of $S$; it glues with zero on $Y\\setminus\\{s\\}$, because the overlap has zero sheaf. These extensions are unique and their sum gives the asserted inverse to the stalk map. Under this identification the quotient map from the preceding exact sequence sends a section vanishing on $S$ to its first-order parts. Thus the map in the statement is exactly the map on global sections induced by that sequence.",
+   "uses": [
+    "def-sbc-closed-immersion-ideal-sheaf",
+    "def-sbc-ideal-sheaf-powers"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+    "place": "Paragraph 2, displayed jet map; explicit local ideal and finite-support calculation"
+   }
+  },
+  {
+   "text": "Apply coherent Serre vanishing on the proper scheme $Y$ with ample $L$ to the fixed coherent sheaf $\\mathcal I^2$. For all $n\\ge b$ it gives $H^1(Y,\\mathcal I^2\\otimes L^{\\otimes n})=0$. The long exact sequence for the short exact sequence of step 3 then contains $\\Gamma(Y,\\mathcal I\\otimes L^{\\otimes n})\\to\\Gamma(Y,Q_n)\\to H^1(Y,\\mathcal I^2\\otimes L^{\\otimes n})=0$. By exactness the first arrow is surjective. Step 4 identifies it with the required simultaneous first-order map from $V_n$. This is the source's infinitesimal-neighbourhood argument, using the ideal $\\mathcal I^2$ of the union of the first neighbourhoods.",
+   "uses": [
+    "lem-weil-pbc-coherent-serre-vanishing",
+    "pqf-def-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5T, lemma-coherent-proper-ample (4); Tag 02O1, lemma-kill-by-twisting; cohomology.tex definition of derived module cohomology"
+   }
+  },
+  {
+   "text": "Take the maximum of the bounds for complement immersion and ideal-square Serre vanishing. Choose a basis of the kernel at each degree beyond this bound. The kernel condition is exactly residue-fibre vanishing, because the finite subscheme is reduced with residue fields k. Restrict to X minus S, transporting generation and the classifying immersion by the tensor-pullback comparison. The quotient I/I^2 identifies the simultaneous first-order map with the concrete prescribedPointJet, and the cohomology sequence makes it surjective.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-projective-proper",
+  "lem-weil-pbc-projective-ample-invertible",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "lem-zl-bertini-sections",
+  "lem-weil-pbc-proper-fp-permanence",
+  "def-sbc-closed-immersion-ideal-sheaf",
+  "def-sbc-ideal-sheaf-powers",
+  "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+  "lem-sc-closed-immersion-ideal-tensor-sections",
+  "lem-weil-pbc-coherent-serre-vanishing",
+  "pqf-def-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Proof paragraph 2: generation off S and first-neighbourhood Serre vanishing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "High powers of an ample line bundle have sections with prescribed first order jets and smooth zero scheme through finitely many points",
+   "results": "{\"t\": \"2026-10-21T10:15:11Z\", \"tool\": \"leanfinder\", \"query\": \"High powers of an ample line bundle have sections with prescribed first order jets and smooth zero scheme through finitely many points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\"], \"digest\": \"26f5853d7f62c6b8\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, _ → _",
+   "results": "{\"t\": \"2026-10-21T10:16:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, _ → _\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Basis\", \"Module.Basis.instFunLike\", \"Module.fintypeOfFintype\", \"Module.Basis.reindex\", \"Module.Basis.instInhabitedFinsupp\", \"Module.Basis.reindex_refl\", \"Module.Basis.sumCoords\", \"Module.Basis.coord\"], \"digest\": \"f382fcf3a150f980\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "jet|cotangent.*surject|surject.*cotangent",
+   "results": "{\"t\": \"2026-10-21T10:17:56Z\", \"tool\": \"grep\", \"query\": \"jet|cotangent.*surject|surject.*cotangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Tropical/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/LinearAlgebra/BilinearForm/IsometryEquiv.lean\", \"Mathlib/LinearAlgebra/BilinearForm/IsometryEquiv.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Isometry.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Isometry.lean\"], \"digest\": \"ade7829827ac008f\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every component of an effective Cartier divisor in an integral finite type scheme of pure dimension d over a field has dimension d minus one",
+   "results": "{\"t\": \"2026-10-21T11:07:13Z\", \"tool\": \"leansearch\", \"query\": \"Every component of an effective Cartier divisor in an integral finite type scheme of pure dimension d over a field has dimension d minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\"], \"digest\": \"66e33f81f2697a2e\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPureDimension|isPureDimension|pure.*[Dd]imension|[Cc]artier.*[Dd]imension",
+   "results": "{\"t\": \"2026-10-21T11:07:40Z\", \"tool\": \"grep\", \"query\": \"IsPureDimension|isPureDimension|pure.*[Dd]imension|[Cc]artier.*[Dd]imension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\"], \"digest\": \"0b141798b5637082\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData, topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-21T11:07:41Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IdealSheafData, topologicalKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite linear system immersing the complement of its finite base locus and separating jets at the base points has a nonempty open of smooth members",
+   "results": "{\"t\": \"2026-10-21T11:15:28Z\", \"tool\": \"leansearch\", \"query\": \"A finite linear system immersing the complement of its finite base locus and separating jets at the base points has a nonempty open of smooth members\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsOpen.isImmersionAtOfComplement\", \"Manifold.IsImmersionAtOfComplement\", \"Manifold.IsImmersionOfComplement\", \"IsOpen.isImmersionAt\", \"Algebra.isOpen_smoothLocus\", \"Manifold.IsImmersionAt.complement\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\"], \"digest\": \"88f41c0a552587b3\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "High powers of an ample invertible sheaf vanishing at finitely many points separate simultaneous first order jets and immerse the complement",
+   "results": "{\"t\": \"2026-10-21T11:15:28Z\", \"tool\": \"leansearch\", \"query\": \"High powers of an ample invertible sheaf vanishing at finitely many points separate simultaneous first order jets and immerse the complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Manifold.IsImmersionOfComplement\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"CategoryTheory.Sheaf.hasSeparator\", \"Manifold.IsImmersionAt.complement\", \"Manifold.IsImmersionAtOfComplement\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\"], \"digest\": \"331d7917b4ceacc1\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniPrescribedPointSmoothSystem",
+  "date": "2026-10-21",
+  "group": "S6"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof paragraph 2: generation off S and first-neighbourhood Serre vanishing",
+   "via": [
+    "lem-zl-bertini-prescribed-point-smooth-system"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrescribedPointEventualJetSystem",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrescribedPointEventualJetSystem.lean",
+  "declaration": "AlgebraicGeometry.exists_eventual_prescribedPoint_jetSystem",
+  "statement": "theorem exists_eventual_prescribedPoint_jetSystem\n    {k : Type u} [Field k] [IsAlgClosed k]\n    (X : Scheme.{u}) [X.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    (S : Finset X) (hS : S.Nonempty) (hclosed : ∀ x ∈ S, IsClosed ({x} : Set X))\n    (N : ℕ) (Y : Scheme.{u}) [IsReduced Y]\n    (c : Y ⟶ ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k))) [IsClosedImmersion c]\n    (j : X ⟶ Y) [IsOpenImmersion j] (hdense : DenseRange j)\n    (hchart : Set.range j = c ⁻¹' (ProjectiveSpace.standardOpen\n      (ULift.{u} (Fin (N + 1))) (Spec (.of k)) ⟨0⟩ : Set _))\n    (hover : j ≫ c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k)) =\n      X ↘ Spec (.of k)) :\n    ∃ (n₀ : ℕ) (U : X.Opens),\n      (∀ x : X, x ∈ U ↔ x ∉ S) ∧\n      ∀ n : ℕ, n₀ ≤ n →\n        ∃ (I : Type u) (_ : Fintype I) (s : I → Γ(prescribedPointTwist c n, ⊤)),\n          (∀ v : Γ(prescribedPointTwist c n, ⊤),\n            prescribedPointVanishes ((tensorPullback j).obj (prescribedPointTwist c n)) S\n                (tensorSectionsUnit j (prescribedPointTwist c n) v) ↔\n              ∃! a : I → k, prescribedPointCombination\n                (c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k)))\n                (prescribedPointTwist c n) s a = v) ∧\n          (∃ ht : Epi ((((tensorPullback (U.ι ≫ j)).obj\n              (prescribedPointTwist c n)).freeHomEquiv).symm\n                (prescribedPointRestrictedFamily (prescribedPointTwist c n) j U s)),\n            IsImmersion (@ProjectiveSpace.homOfGeneratingSections I inferInstance\n              U.toScheme (Spec (.of k)) (U.ι ≫ (X ↘ Spec (.of k)))\n              ((tensorPullback (U.ι ≫ j)).obj (prescribedPointTwist c n))\n              ((@id (∀ L : Y.Modules, L.IsInvertible → _)\n                (invertible_pullback_tensor (U.ι ≫ j)).1) (prescribedPointTwist c n)\n                ((invertible_pullback_tensor c).1 (ProjectiveSpace.twist _ _ (n : ℤ))).2).2\n              (prescribedPointRestrictedFamily (prescribedPointTwist c n) j U s) ht)) ∧\n          Function.Surjective (fun a : I → k ↦ fun x : S ↦\n            @prescribedPointJet X ((tensorPullback j).obj (prescribedPointTwist c n))\n              ((@id (∀ L : Y.Modules, L.IsInvertible → _)\n                (invertible_pullback_tensor j).1) (prescribedPointTwist c n)\n                ((invertible_pullback_tensor c).1 (ProjectiveSpace.twist _ _ (n : ℤ))).2).2\n              x.val\n              (tensorSectionsUnit j (prescribedPointTwist c n)\n                (prescribedPointCombination\n                  (c ≫ (ℙ(ULift.{u} (Fin (N + 1)); Spec (.of k)) ↘ Spec (.of k)))\n                  (prescribedPointTwist c n) s a)))",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "Sheaf.AlgebraicGeometry.BertiniPrescribedPointSmoothSystem",
+  "worker": "S6",
+  "summary": "Eventual kernel basis, complement immersion and simultaneous jets. Proof paragraph 2: generation off S and first-neighbourhood Serre vanishing. The Lean statement and proof/docstring were read together.",
+  "blueprint": "lem-zl-bertini-finite-cover-curve, paragraph 2: Proof paragraph 2: generation off S and first-neighbourhood Serre vanishing",
+  "tool_uses": [
+   {
+    "node": "lem-pc-projective-proper",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-projective-ample-invertible",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-zl-bertini-sections",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-proper-fp-permanence",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "def-sbc-closed-immersion-ideal-sheaf",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "def-sbc-ideal-sheaf-powers",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-kernel-cokernel-locnoeth",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-sc-closed-immersion-ideal-tensor-sections",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-serre-vanishing",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "pqf-def-cohomology",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7b8b9",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261021T151200-L-1170451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7b8b9",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261021T151200-L-1170451",
+  "kind": "interface",
+  "note": "independent cc review: item signature (byte-identical) and moved defs vs live clone; 2 new sorry statements vs Stacks 0FD5/0FD6/0B5T and node texts; #print axioms on item, smooth-member, Cartier purity (sorryAx only via the 2 declared holes); node lean records vs signatures"
+ }
+}

@@ -1,0 +1,256 @@
+{
+ "id": "lem-zl-prescribed-point-bertini-open",
+ "kind": "statement",
+ "title": "Bertini open with nonzero first-order values at finite base points",
+ "statement": "Let k be algebraically closed and X a smooth finite-type k-scheme of pure dimension\nd>=2. Let S be a nonempty finite set of closed points and U=X minus S. Let f:Y->Spec k,\nj:X->Y over k, and M invertible on Y with invertible tensor pullback to X. Fix a finite\nfamily s of global sections of M and use the maps of [def-zl-prescribed-point-system-data].\nAssume every coefficient combination vanishes on S, the restriction to U generates\nand defines an immersion, and the simultaneous jet map onto the product over S\nof the prescribed jet modules is surjective. Then affine coefficient space has a\nnonempty open O whose k-points give smooth zero schemes on X and nonzero jets at\nevery point of S. This asserts no high-degree existence, no coefficient-basis\nproperty, and no affineness or dimension property of the members.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Proof paragraph 2: derivative open, Bertini off S, and smoothness at S",
+  "external": [
+   {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0FD5 (lemma-generate-over-complement), 0FD6 (lemma-bertini)"
+   },
+   {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5T (lemma-coherent-proper-ample), (3)-(4)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-zl-prescribed-point-system-data",
+  "def-weil-pure-dimension"
+ ],
+ "proof": [
+  {
+   "text": "At each closed point of the smooth pure-dimensional scheme, the cotangent fibre has dimension d >= 2. This can be checked on its integral regular connected component, using regularity and the dimension of nonempty opens. The invertible stalk has rank one, so each jet target is nonzero.",
+   "uses": [
+    "lem-weil-pbc-smooth-over-field-regular-local",
+    "lem-sc-regular-connected-integral",
+    "lem-weil-pbc-smooth-over-field-dimension-differentials",
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "lem-weil-pbc-maximal-ideal-differential-cotangent-dimension"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For $s\\in S$ let $j_s:V_n\\to(\\mathfrak m_s/\\mathfrak m_s^2)\\otimes_k L_n(s)$ be its first-order evaluation. Its zero fibre is a linear closed subspace of $\\mathbf A(V_n)$ (in bases, it is defined by the linear coordinate equations of $j_s$). Hence $W=\\bigcap_{s\\in S}(\\mathbf A(V_n)\\setminus\\ker j_s)$ is open. Choose a nonzero vector in every nonzero summand of the target. Surjectivity in step 5 lifts the resulting tuple to a vector of $V_n$ lying in $W(k)$. Thus $W$ is nonempty, and its $k$-points have nonzero first-order part at every prescribed point.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+    "place": "Paragraph 2, nonzero first derivative at each s is a nonempty open condition"
+   }
+  },
+  {
+   "text": "Apply Bertini smoothness to the smooth $k$-scheme $X\\setminus S$, the restriction of $L_n$, and the linear restriction map $V_n\\to\\Gamma(X\\setminus S,L_n)$. The vector space is finite-dimensional by step 1; its image generates and its associated map is an immersion by step 2. It yields a nonempty Zariski open $O\\subseteq\\mathbf A(V_n)$ on which the zero schemes restricted to $X\\setminus S$ are smooth. Notice that injectivity of this linear restriction map is not a hypothesis of the cited Bertini theorem.",
+   "uses": [
+    "lem-zl-bertini-smooth-member"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0FD6, lemma-bertini, hypotheses (1)-(3) and conclusion"
+   }
+  },
+  {
+   "text": "The coordinate ring of $\\mathbf A(V_n)$ is a polynomial ring over $k$, hence a domain. Its nilradical is zero and prime, so its spectrum is irreducible. Every nonempty open in an irreducible space is dense: otherwise it and the complement of its closure would be disjoint nonempty opens, whose complements would be two proper closed subsets covering the space. Thus the two nonempty opens $O$ and $W$ are dense, and $U_{\\rm sm}=O\\cap W$ is a nonempty open by finite intersection of dense opens.",
+   "uses": [
+    "lem-weil-pbc-polynomial-ring-domain",
+    "lem-zl-spectrum-irreducible-nilradical-prime",
+    "lem-trf-finite-dense-open-intersection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+    "place": "Paragraph 2, combining the Bertini and derivative open conditions; elementary parameter-space argument with the cited general algebraic/topological tools"
+   }
+  },
+  {
+   "text": "Let $v\\in U_{\\rm sm}(k)$. It vanishes on $S$. Its zero scheme is smooth off $S$ by step 8. At $s\\in S$, in a local frame write $v=f$ with $f\\in\\mathfrak m_s$. The map $\\mathfrak m_s/\\mathfrak m_s^2\\to\\Omega^1_{X/k}(s)$ sends $f$ to $df(s)$ and is an isomorphism: its inverse sends $da$ to $a-a(s)$ modulo $\\mathfrak m_s^2$; the identity $ab-a(s)b(s)\\equiv a(s)(b-b(s))+b(s)(a-a(s))$ verifies the derivation rule. Thus the nonzero first-order part provided by $v\\in W(k)$ gives $df(s)\\ne0$. The nonzero-relative-differential criterion makes $H_v$ smooth in a neighbourhood of $s$. These neighbourhoods and $H_v\\setminus S$ cover $H_v$, proving smoothness everywhere.",
+   "uses": [
+    "lem-zl-hypersurface-nonzero-relative-differential"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00TR, lemma-rank-omega, proof; Tag 00T7, lemma-standard-smooth; morphisms.tex Tag 01V7, lemma-smooth-locally-standard-smooth"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-smooth-over-field-regular-local",
+  "lem-sc-regular-connected-integral",
+  "lem-weil-pbc-smooth-over-field-dimension-differentials",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-weil-pbc-maximal-ideal-differential-cotangent-dimension",
+  "lem-zl-bertini-smooth-member",
+  "lem-weil-pbc-polynomial-ring-domain",
+  "lem-zl-spectrum-irreducible-nilradical-prime",
+  "lem-trf-finite-dense-open-intersection",
+  "lem-zl-hypersurface-nonzero-relative-differential"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Proof paragraph 2: derivative open, Bertini off S, and smoothness at S"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "High powers of an ample line bundle have sections with prescribed first order jets and smooth zero scheme through finitely many points",
+   "results": "{\"t\": \"2026-10-21T10:15:11Z\", \"tool\": \"leanfinder\", \"query\": \"High powers of an ample line bundle have sections with prescribed first order jets and smooth zero scheme through finitely many points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\"], \"digest\": \"26f5853d7f62c6b8\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, _ → _",
+   "results": "{\"t\": \"2026-10-21T10:16:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, _ → _\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Basis\", \"Module.Basis.instFunLike\", \"Module.fintypeOfFintype\", \"Module.Basis.reindex\", \"Module.Basis.instInhabitedFinsupp\", \"Module.Basis.reindex_refl\", \"Module.Basis.sumCoords\", \"Module.Basis.coord\"], \"digest\": \"f382fcf3a150f980\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "jet|cotangent.*surject|surject.*cotangent",
+   "results": "{\"t\": \"2026-10-21T10:17:56Z\", \"tool\": \"grep\", \"query\": \"jet|cotangent.*surject|surject.*cotangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Tropical/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/LinearAlgebra/BilinearForm/IsometryEquiv.lean\", \"Mathlib/LinearAlgebra/BilinearForm/IsometryEquiv.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Isometry.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Isometry.lean\"], \"digest\": \"ade7829827ac008f\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every component of an effective Cartier divisor in an integral finite type scheme of pure dimension d over a field has dimension d minus one",
+   "results": "{\"t\": \"2026-10-21T11:07:13Z\", \"tool\": \"leansearch\", \"query\": \"Every component of an effective Cartier divisor in an integral finite type scheme of pure dimension d over a field has dimension d minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\"], \"digest\": \"66e33f81f2697a2e\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPureDimension|isPureDimension|pure.*[Dd]imension|[Cc]artier.*[Dd]imension",
+   "results": "{\"t\": \"2026-10-21T11:07:40Z\", \"tool\": \"grep\", \"query\": \"IsPureDimension|isPureDimension|pure.*[Dd]imension|[Cc]artier.*[Dd]imension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\"], \"digest\": \"0b141798b5637082\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData, topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-21T11:07:41Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IdealSheafData, topologicalKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite linear system immersing the complement of its finite base locus and separating jets at the base points has a nonempty open of smooth members",
+   "results": "{\"t\": \"2026-10-21T11:15:28Z\", \"tool\": \"leansearch\", \"query\": \"A finite linear system immersing the complement of its finite base locus and separating jets at the base points has a nonempty open of smooth members\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsOpen.isImmersionAtOfComplement\", \"Manifold.IsImmersionAtOfComplement\", \"Manifold.IsImmersionOfComplement\", \"IsOpen.isImmersionAt\", \"Algebra.isOpen_smoothLocus\", \"Manifold.IsImmersionAt.complement\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\"], \"digest\": \"88f41c0a552587b3\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "High powers of an ample invertible sheaf vanishing at finitely many points separate simultaneous first order jets and immerse the complement",
+   "results": "{\"t\": \"2026-10-21T11:15:28Z\", \"tool\": \"leansearch\", \"query\": \"High powers of an ample invertible sheaf vanishing at finitely many points separate simultaneous first order jets and immerse the complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Manifold.IsImmersionOfComplement\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"CategoryTheory.Sheaf.hasSeparator\", \"Manifold.IsImmersionAt.complement\", \"Manifold.IsImmersionAtOfComplement\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\"], \"digest\": \"331d7917b4ceacc1\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniPrescribedPointSmoothSystem",
+  "date": "2026-10-21",
+  "group": "S6"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof paragraph 2: derivative open, Bertini off S, and smoothness at S",
+   "via": [
+    "lem-zl-bertini-prescribed-point-smooth-system"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.PrescribedPointBertiniOpen",
+  "file": "lean/Sheaf/AlgebraicGeometry/PrescribedPointBertiniOpen.lean",
+  "declaration": "AlgebraicGeometry.exists_open_prescribedPoint_bertini",
+  "statement": "theorem exists_open_prescribedPoint_bertini\n    {k : Type u} [Field k] [IsAlgClosed k]\n    (X : Scheme.{u}) [X.Over (Spec (.of k))]\n    [Smooth (X ↘ Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))]\n    [QuasiCompact (X ↘ Spec (.of k))]\n    (d : ℕ) (hd : 2 ≤ d) (hdim : X.IsPureDimension d)\n    (S : Finset X) (hS : S.Nonempty) (hclosed : ∀ x ∈ S, IsClosed ({x} : Set X))\n    {Y : Scheme.{u}} (f : Y ⟶ Spec (.of k)) (j : X ⟶ Y)\n    (hover : j ≫ f = X ↘ Spec (.of k))\n    (M : Y.Modules) [M.IsInvertible] [((tensorPullback j).obj M).IsInvertible]\n    (U : X.Opens) (hU : ∀ x : X, x ∈ U ↔ x ∉ S)\n    {I : Type u} [Fintype I] (s : I → Γ(M, ⊤))\n    (hvan : ∀ a : I → k, prescribedPointVanishes ((tensorPullback j).obj M) S\n      (tensorSectionsUnit j M (prescribedPointCombination f M s a)))\n    (hgen : ∃ ht : Epi ((((tensorPullback (U.ι ≫ j)).obj M).freeHomEquiv).symm\n        (prescribedPointRestrictedFamily M j U s)),\n      @IsImmersion U.toScheme _\n        (@ProjectiveSpace.homOfGeneratingSections I inferInstance U.toScheme\n          (Spec (.of k)) (U.ι ≫ (X ↘ Spec (.of k)))\n          ((tensorPullback (U.ι ≫ j)).obj M)\n          ((invertible_pullback_tensor (U.ι ≫ j)).1 M).2\n          (prescribedPointRestrictedFamily M j U s) ht))\n    (hjet : Function.Surjective (fun a : I → k ↦ fun x : S ↦\n      prescribedPointJet ((tensorPullback j).obj M) x.val\n        (tensorSectionsUnit j M (prescribedPointCombination f M s a)))) :\n    ∃ O : (Spec (CommRingCat.of (MvPolynomial I k))).Opens,\n      (O : Set (Spec (CommRingCat.of (MvPolynomial I k)))).Nonempty ∧\n      ∀ a : I → k, Set.range (bertiniCoefficientPoint (k := k) a) ⊆ (O : Set _) →\n        Smooth ((prescribedPointMember f j M s a).subschemeι ≫ (X ↘ Spec (.of k))) ∧\n        ∀ x ∈ S, prescribedPointJet ((tensorPullback j).obj M) x\n          (tensorSectionsUnit j M (prescribedPointCombination f M s a)) ≠ 0",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "Sheaf.AlgebraicGeometry.BertiniPrescribedPointSmoothSystem",
+  "worker": "S6",
+  "summary": "Bertini open with nonzero first-order values at finite base points. Proof paragraph 2: derivative open, Bertini off S, and smoothness at S. The Lean statement and proof/docstring were read together.",
+  "blueprint": "lem-zl-bertini-finite-cover-curve, paragraph 2: Proof paragraph 2: derivative open, Bertini off S, and smoothness at S",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-smooth-over-field-regular-local",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-sc-regular-connected-integral",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-over-field-dimension-differentials",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-maximal-ideal-differential-cotangent-dimension",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-zl-bertini-smooth-member",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-polynomial-ring-domain",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-zl-spectrum-irreducible-nilradical-prime",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-trf-finite-dense-open-intersection",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-zl-hypersurface-nonzero-relative-differential",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7b8b9",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261021T151200-L-1170451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7b8b9",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261021T151200-L-1170451",
+  "kind": "interface",
+  "note": "independent cc review: item signature (byte-identical) and moved defs vs live clone; 2 new sorry statements vs Stacks 0FD5/0FD6/0B5T and node texts; #print axioms on item, smooth-member, Cartier purity (sorryAx only via the 2 declared holes); node lean records vs signatures"
+ }
+}

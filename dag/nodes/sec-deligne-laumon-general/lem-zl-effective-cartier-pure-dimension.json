@@ -1,0 +1,206 @@
+{
+ "id": "lem-zl-effective-cartier-pure-dimension",
+ "kind": "statement",
+ "title": "Pure dimension of a Cartier divisor on an integral finite-type scheme",
+ "statement": "Let k be a field, X an integral finite-type k-scheme of pure dimension d>=1\n[def-weil-pure-dimension], and J an invertible ideal sheaf defining an effective\nCartier divisor [def-nagata-effective-cartier-ideal]. Then every irreducible\ncomponent of J.subscheme has dimension d-1, i.e. J.subscheme has pure dimension\nd-1. The empty divisor is included, with its vacuous purity condition.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Proof paragraph 2: hypersurface purity, isolating one irreducible component",
+  "external": [
+   {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 0FD5 (lemma-generate-over-complement), 0FD6 (lemma-bertini)"
+   },
+   {
+    "document": "literature/stacks-project/coherent.tex",
+    "place": "Tag 0B5T (lemma-coherent-proper-ample), (3)-(4)"
+   }
+  ]
+ },
+ "stmt_deps": [
+  "def-weil-pure-dimension",
+  "def-nagata-effective-cartier-ideal"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over a field makes X Noetherian. Its irreducibility and purity give total dimension d. The closed divisor has Noetherian underlying space.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a component Z of the divisor, remove the other finitely many components to obtain a nonempty open o of the divisor contained in Z. Since the divisor is closed embedded, o is the inverse image of an ambient open A.",
+   "uses": [
+    "lem-sc-noetherian-closed-subset-finite-components"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The open A is integral of dimension d and finite type over k. Pullback of the Cartier ideal gives a nonempty Cartier divisor E on A. Its underlying space is o and Cartier dimension drop gives dim E=d-1.",
+   "uses": [
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "lem-sc-effective-cartier-dimension-drop"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Take a generic point z of Z. The reduced subscheme C on closure{z} is integral: its closed embedding has irreducible image and a reduced vanishing-ideal quotient. The preimage W of o is a nonempty open of C. The closed embedding identifies W with o and C with Z topologically. Nonempty-open dimension invariance on C therefore identifies dim Z=dim W=dim o=dim E=d-1.",
+   "uses": [
+    "lem-sc-integral-locally-algebraic-opens-dimension",
+    "lem-weil-pbc-reduced-induced-closed-subscheme"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sc-noetherian-closed-subset-finite-components",
+  "lem-sc-integral-locally-algebraic-opens-dimension",
+  "lem-sc-effective-cartier-dimension-drop",
+  "lem-weil-pbc-reduced-induced-closed-subscheme"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-general/sk-i-dl-general-real/lem-zl-bertini-finite-cover-curve.proof.md",
+  "place": "Proof paragraph 2: hypersurface purity, isolating one irreducible component"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "High powers of an ample line bundle have sections with prescribed first order jets and smooth zero scheme through finitely many points",
+   "results": "{\"t\": \"2026-10-21T10:15:11Z\", \"tool\": \"leanfinder\", \"query\": \"High powers of an ample line bundle have sections with prescribed first order jets and smooth zero scheme through finitely many points\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact\", \"AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isAffineOpen\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isCompact_of_isQuasiSeparated\", \"AlgebraicGeometry.exists_eq_pow_mul_of_isAffineOpen\"], \"digest\": \"26f5853d7f62c6b8\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Basis, _ → _",
+   "results": "{\"t\": \"2026-10-21T10:16:03Z\", \"tool\": \"loogle\", \"query\": \"Module.Basis, _ → _\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Module.Basis\", \"Module.Basis.instFunLike\", \"Module.fintypeOfFintype\", \"Module.Basis.reindex\", \"Module.Basis.instInhabitedFinsupp\", \"Module.Basis.reindex_refl\", \"Module.Basis.sumCoords\", \"Module.Basis.coord\"], \"digest\": \"f382fcf3a150f980\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "jet|cotangent.*surject|surject.*cotangent",
+   "results": "{\"t\": \"2026-10-21T10:17:56Z\", \"tool\": \"grep\", \"query\": \"jet|cotangent.*surject|surject.*cotangent\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Tropical/Basic.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FormallyUnramified.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/RingTheory/AdicCompletion/LocalRing.lean\", \"Mathlib/LinearAlgebra/BilinearForm/IsometryEquiv.lean\", \"Mathlib/LinearAlgebra/BilinearForm/IsometryEquiv.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Isometry.lean\", \"Mathlib/LinearAlgebra/BilinearForm/Isometry.lean\"], \"digest\": \"ade7829827ac008f\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every component of an effective Cartier divisor in an integral finite type scheme of pure dimension d over a field has dimension d minus one",
+   "results": "{\"t\": \"2026-10-21T11:07:13Z\", \"tool\": \"leansearch\", \"query\": \"Every component of an effective Cartier divisor in an integral finite type scheme of pure dimension d over a field has dimension d minus one\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.finite_irreducibleComponents_of_isNoetherian\", \"AlgebraicGeometry.irreducibleSpace_of_isIntegral\", \"ringKrullDim_quotient_span_singleton_succ_eq_ringKrullDim_of_mem_nonZeroDivisors\", \"AlgebraicGeometry.isReduced_of_isIntegral\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\", \"AlgebraicGeometry.isSmoothOfRelativeDimension_comp\", \"AlgebraicGeometry.Scheme.PartialMap.instIsReducedToScheme\", \"AlgebraicGeometry.instIsIntegralToSchemeOfNonemptyCarrierCarrierCommRingCat\"], \"digest\": \"66e33f81f2697a2e\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsPureDimension|isPureDimension|pure.*[Dd]imension|[Cc]artier.*[Dd]imension",
+   "results": "{\"t\": \"2026-10-21T11:07:40Z\", \"tool\": \"grep\", \"query\": \"IsPureDimension|isPureDimension|pure.*[Dd]imension|[Cc]artier.*[Dd]imension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\", \"Mathlib/FieldTheory/PurelyInseparable/Basic.lean\"], \"digest\": \"0b141798b5637082\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme.IdealSheafData, topologicalKrullDim",
+   "results": "{\"t\": \"2026-10-21T11:07:41Z\", \"tool\": \"loogle\", \"query\": \"AlgebraicGeometry.Scheme.IdealSheafData, topologicalKrullDim\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite linear system immersing the complement of its finite base locus and separating jets at the base points has a nonempty open of smooth members",
+   "results": "{\"t\": \"2026-10-21T11:15:28Z\", \"tool\": \"leansearch\", \"query\": \"A finite linear system immersing the complement of its finite base locus and separating jets at the base points has a nonempty open of smooth members\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsOpen.isImmersionAtOfComplement\", \"Manifold.IsImmersionAtOfComplement\", \"Manifold.IsImmersionOfComplement\", \"IsOpen.isImmersionAt\", \"Algebra.isOpen_smoothLocus\", \"Manifold.IsImmersionAt.complement\", \"AlgebraicGeometry.instIsSmoothOfIsOpenImmersion\", \"AlgebraicGeometry.instIsSmoothOfRelativeDimensionOfNatNatOfIsOpenImmersion\"], \"digest\": \"88f41c0a552587b3\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "High powers of an ample invertible sheaf vanishing at finitely many points separate simultaneous first order jets and immerse the complement",
+   "results": "{\"t\": \"2026-10-21T11:15:28Z\", \"tool\": \"leansearch\", \"query\": \"High powers of an ample invertible sheaf vanishing at finitely many points separate simultaneous first order jets and immerse the complement\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Manifold.IsImmersionOfComplement\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\", \"CategoryTheory.Sheaf.hasSeparator\", \"Manifold.IsImmersionAt.complement\", \"Manifold.IsImmersionAtOfComplement\", \"AlgebraicGeometry.IsSeparated.isSeparated_eq_diagonal_isClosedImmersion\", \"AlgebraicGeometry.Proj.isSeparated\", \"AlgebraicGeometry.Scheme.IdealSheafData.vanishingIdeal\"], \"digest\": \"331d7917b4ceacc1\"} Read the returned declarations: section localization, ordinary smoothness, irreducible components and local ring dimension lemmas do not state the prescribed-point interpolation/Bertini result or componentwise Cartier purity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.BertiniPrescribedPointSmoothSystem",
+  "date": "2026-10-21",
+  "group": "S6"
+ },
+ "chapter": "sec-deligne-laumon-general",
+ "unit": "sk-i-dl-general-real",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-zl-bertini-finite-cover-curve",
+   "place": "Proof paragraph 2: hypersurface purity, isolating one irreducible component",
+   "via": [
+    "lem-zl-bertini-prescribed-point-smooth-system"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EffectiveCartierPureDimension",
+  "file": "lean/Sheaf/AlgebraicGeometry/EffectiveCartierPureDimension.lean",
+  "declaration": "AlgebraicGeometry.Scheme.IdealSheafData.isPureDimension_of_isInvertible",
+  "statement": "theorem Scheme.IdealSheafData.isPureDimension_of_isInvertible\n    {k : Type u} [Field k] {X : Scheme.{u}} [IsIntegral X]\n    (f : X ⟶ Spec (.of k)) [LocallyOfFiniteType f] [QuasiCompact f]\n    (d : ℕ) (hd : 1 ≤ d) (hX : X.IsPureDimension d)\n    (J : X.IdealSheafData) (hJ : J.IsInvertible) :\n    J.subscheme.IsPureDimension (d - 1)",
+  "branch": "sheaf-dag",
+  "by": "S6",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "Sheaf.AlgebraicGeometry.BertiniPrescribedPointSmoothSystem",
+  "worker": "S6",
+  "summary": "Pure dimension of a Cartier divisor on an integral finite-type scheme. Proof paragraph 2: hypersurface purity, isolating one irreducible component. The Lean statement and proof/docstring were read together.",
+  "blueprint": "lem-zl-bertini-finite-cover-curve, paragraph 2: Proof paragraph 2: hypersurface purity, isolating one irreducible component",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-sc-noetherian-closed-subset-finite-components",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-sc-integral-locally-algebraic-opens-dimension",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-sc-effective-cartier-dimension-drop",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Generic scheme, coherent-cohomology, local-ring or dimension tool in the prescribed-point argument; no unit route is replaced."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7b8b9",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261021T151200-L-1170451",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-7b8b9",
+  "group": "S6",
+  "result": "pass",
+  "landing": "20261021T151200-L-1170451",
+  "kind": "interface",
+  "note": "independent cc review: item signature (byte-identical) and moved defs vs live clone; 2 new sorry statements vs Stacks 0FD5/0FD6/0B5T and node texts; #print axioms on item, smooth-member, Cartier purity (sorryAx only via the 2 declared holes); node lean records vs signatures"
+ }
+}
