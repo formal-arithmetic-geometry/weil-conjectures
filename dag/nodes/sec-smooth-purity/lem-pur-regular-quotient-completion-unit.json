@@ -15,9 +15,80 @@
   "def-weil-derived-limit",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the one-generator Koszul tower $Q_n=[\\mathcal O\\xrightarrow{a^n}\\mathcal O]$ in degrees $-1,0$, with transitions $(a,1)$, and put $V_n=P\\otimes Q_n$. The degree-zero inclusions define its strict augmentation from $P$. The quotient maps $\\epsilon_n:Q_n\\to(\\mathcal O/a^n\\mathcal O)[0]$ commute with transitions: in degree zero both composites are the same quotient map, and in degree minus one both vanish. Their composite with the inclusion of $\\mathcal O[0]$ is the quotient projection. Regularity holds for all powers, since $a^n$ is a composite of injective multiplication maps. The regular Koszul reconstruction theorem therefore applies with $t=a$ and the given K-flat $P$: its first assertion gives an augmentation-compatible isomorphism $e:R\\lim V_n\\xrightarrow{\\sim}R\\lim U_n$. This uses no flatness of the individual terms of $P$.",
+   "uses": [
+    "lem-pur-derived-complete-koszul-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul, one generator, together with the regular-element quotient comparison"
+   }
+  },
+  {
+   "text": "Write $\\Lambda(P)=R\\lim V_n$ and $\\kappa_P:P\\to\\Lambda(P)$ for the degree-zero Koszul unit of the ringed-site reflector. Apply the strict Roos comparison to $U_\\bullet$. The site is small and its module category has exact countable products, exactly as that comparison requires. It gives $\\rho_U:C_a(P)\\xrightarrow{\\sim}R\\lim U_n$. Its strict-augmentation normalization says that $\\rho_U\\eta_{a,P}$ is the derived map induced by the quotient augmentation. Augmentation compatibility of $e$ in Step 1 identifies that same map with $e\\kappa_P$. Consequently $\\theta=e^{-1}\\rho_U:C_a(P)\\xrightarrow{\\sim}\\Lambda(P)$ satisfies the actual equality $\\theta\\eta_{a,P}=\\kappa_P$. The zero shifted-product coordinate is essential here: it is exactly the lift to which the cited normalization applies.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-strict-roos-comparison",
+    "lem-pur-derived-complete-koszul-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, strict Roos resolution comparison and augmentation normalization"
+   }
+  },
+  {
+   "text": "Apply the ringed-site Koszul completion reflector with the singleton list $(a)$ and $N=P$. Its conclusion is expressed using derived internal Hom on every slice and every local section of the generated ideal, so it is precisely the local condition in the item, with no replacement by completeness merely at global sections. It says that $\\Lambda(P)$ is locally derived $(a)$-complete and that $\\kappa_P$ is an isomorphism if and only if $P$ is locally derived $(a)$-complete. The isomorphism $\\theta$ of Step 2 transfers completeness to $C_a(P)$: restriction and derived internal Hom carry an isomorphism to an isomorphism, so their vanishing conditions agree. The equation $\\theta\\eta_{a,P}=\\kappa_P$ proves that the specified $\\eta_{a,P}$ is invertible exactly when $P$ is locally derived complete.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B, lemma-derived-completion, and 0A0E, lemma-derived-completion-koszul; Tag 0999, definition-derived-complete"
+   }
+  },
+  {
+   "text": "If $\\eta_{a,P}$ is an isomorphism, then $h=\\rho_U\\eta_{a,P}:P\\xrightarrow{\\sim}R\\lim U_n$ is an isomorphism. Take the natural distinguished Roos triangle for $R\\lim U_n$ supplied by the ringed strict-tower homotopy-limit theorem, with first map $p$ and connecting map $\\delta$. Replace its first vertex by $P$ along $h$, keeping the two product vertices and $1-s$ fixed and replacing the connecting map by $h[1]^{-1}\\delta$. The resulting triangle is distinguished by invariance under isomorphism. Its first map is $ph$, whose $n$-th component is $q_n$, since the strict Roos comparison preserves the projections and sends the zero-coordinate quotient lift to the canonical augmentation. Thus this triangle has exactly the prescribed first arrow, not merely some compatible map into the product.",
+   "uses": [
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-strict-roos-comparison",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941, lemma-derived-limit-is-ok, Roos triangle and its augmentation projections"
+   }
+  },
+  {
+   "text": "Conversely, assume the stated distinguished triangle with first components $q_n$ exists. Apply the second assertion of regular Koszul reconstruction to $K=P$ and this very triangle. All its hypotheses are available: multiplication by $a$ is injective, $P$ is K-flat, the tower is the quotient tower, and the triangle has the required quotient components. It supplies an isomorphism $\\phi:P\\xrightarrow{\\sim}\\Lambda(P)$. The reflector makes $\\Lambda(P)$ locally derived complete; therefore $P$ is locally derived complete as well, because slice restriction and derived internal Hom preserve isomorphisms. Step 3 now implies that the specified $\\eta_{a,P}$ is an isomorphism. There is no assertion that $\\phi$ itself equals the canonical unit: completeness of its source gives invertibility of the canonical unit separately. Together with Steps 3 and 4 this proves all three equivalences.",
+   "uses": [
+    "lem-pur-derived-complete-koszul-reconstruction",
+    "lem-weil-pbc-ringed-koszul-completion-reflector"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 0A0E and 099B; Bhatt--Scholze Lemma 3.4.12, canonical-map formulation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-derived-complete-koszul-reconstruction",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tags 099B and 0A0E, one-generator completion, with sites-cohomology.tex Tag 0941 for the normalized strict Roos model; Bhatt--Scholze Lemma 3.4.12 for the canonical-map formulation."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +124,59 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AdicCompletion.mk_zero_of\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (f : AdicCompletion.AdicCauchySequence I M),\\n  (∃ k, ∀ n ≥ k, ∃ m ≥ n, ∃ l ≥ n, ↑f m ∈ I ^ l • ⊤) → (AdicCompletion.mk I M) f = 0\", \"doc\": \"Let $R$ be a commutative ring, $I$ an ideal of $R$, and $M$ an $R$-module. Let $f$ be an $I$-adic Cauchy sequence in $M$. If there exists a natural number $k$ such that for every $n \\\\ge k$, there exis\"}\n  {\"name\": \"isUnit_iff_notMem_of_isAdicComplete_maximal\", \"module\": \"Mathlib/RingTheory/AdicCompletion/LocalRing\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (m : Ideal R) [hmax : m.IsMaximal] [IsAdicComplete m R] (r : R), IsUnit r ↔ r ∉ m\", \"doc\": \"In an adic complete commutative ring $ R $ with respect to a maximal ideal $ \\\\mathfrak{m} $, an element $ r \\\\in R $ is a unit if and only if $ r \\\\notin \\\\mathfrak{m} $.\"}\n  {\"name\": \"BDeRhamPlus\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The adic completion of the kernel of the Fontaine theta homomorphism (which inverts the prime $ p $) in the localization of Witt vectors away from $ p $.\"}\n  {\"name\": \"AdicCompletion.of_bijective\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  [IsAdicComplete I M], Function.Bijective ⇑(AdicCompletion.of I M)\", \"doc\": \"The canonical $ R $-linear map from an $ R $-module $ M $ to its $ I $-adic completion is bijective.\"}\n  {\"name\": \"AdicCompletion.of_bijective_iff\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M],\\n  Function.Bijective ⇑(AdicCompletion.of I M) ↔ IsAdicComplete I M\", \"doc\": \"For a commutative ring $ R $, an ideal $ I $ of $ R $, and an $ R $-module $ M $, the canonical $ R $-linear map from $ M $ to its $ I $-adic completion is bijective if and only if $ M $ is $ I $-adic\"}\n  {\"name\": \"BDeRham\", \"module\": \"Mathlib/RingTheory/Perfectoid/BDeRham\", \"type\": \"(R : Type u) →\\n  [inst : CommRing R] →\\n    (p : ℕ) → [Fact (Nat.Prime p)] → [Fact ¬IsUnit ↑p] → [IsAdicComplete (Ideal.span {↑p}) R] → Type u\", \"doc\": \"The ring $\\\\mathbb{B}_{\\\\mathrm{dR}}^+$ is constructed as the localization of the adic completion of the kernel of the Fontaine theta homomorphism $\\\\Theta: \\\\mathbb{W}(R^\\\\flat) \\\\to R$ (which inverts the \"}\n  {\"name\": \"AdicCompletion.val_zero_apply\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (M : Type u_4) [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  (n : ℕ), ↑0 n = 0\", \"doc\": \"For any natural number $ n $, the $ n $th component of the zero element in the adic completion of $ M $ with respect to $ I $ is the zero element of the quotient module $ M/I^nM $.\"}\n  {\"name\": \"IsAdicComplete.of_lift\", \"module\": \"Mathlib/RingTheory/AdicCompletion/Basic\", \"type\": \"∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] [inst_5 : IsAdicComplete I N]\\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ n • ⊤) (h : ∀ {m n : ℕ} (hle : m ≤ n), Submodule.factorPow\", \"doc\": \"The canonical $ R $-linear map sending each element $ m $ of an $ R $-module $ M $ to its image in the $ I $-adic completion of $ M $, defined as the inverse limit $ \\\\varprojlim M/I^nM $. This map con\"}",
    "date": "2026-10-21",
    "verdict": "no match: returned ordinary module completion, localization, tensor or category infrastructure; none states this ring-sheaf tower assertion with its specified augmentation"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.?complet|[Kk]oszul.*complet|complet.*[Kk]oszul",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match: no derived completion/Koszul completion hit; second pattern finds only Koszul connections and TODO comments"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived completion of module sheaves at a nonzerodivisor is the homotopy inverse limit of derived quotient tensors with the canonical unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"IsAdicComplete.of_lift\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian\", \"SheafOfModules.unit\", \"SheafOfModules.hasLimit\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"AdicCompletion.of_apply\", \"SheafOfModules.hasLimitsOfShape\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary AdicCompletion and sheaf module limits do not give the derived cone or the specified unit"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"DerivedCategory\", \"limit\"",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match: no DerivedCategory/limit hits; the second query returns only mapping-cone infrastructure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of module sheaves at a nonzerodivisor is the homotopy inverse limit of derived quotient tensors with the canonical unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_symm_of\", \"localCohomology.ofDiagram\", \"AdicCompletion\", \"localCohomology\", \"AdicCompletion.module\", \"AdicCompletion.ofTensorProduct\", \"AdicCompletion.ofTensorProduct_tmul\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module adic completion, local cohomology, or period rings, not the ring-sheaf derived quotient unit criterion"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|[Hh]omotopy[Ll]imit|derivedCompletion|[Kk]oszul",
+   "results": "{\"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Geometry/Manifold/VectorBundle/CovariantDerivative/Basic.lean\", \"Mathlib/RingTheory/Regular/RegularSequence.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: no derived completion/Koszul completion hit; second pattern finds only Koszul connections and TODO comments"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex\", \"mappingCone\"",
+   "results": "{\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.fst\", \"CochainComplex.mappingCone.snd\", \"CochainComplex.mappingCone.inl\", \"CochainComplex.mappingCone\", \"CochainComplex.mappingCone.descCochain\", \"CochainComplex.mappingCone.liftCochain\", \"CochainComplex.mappingCone.liftCochain_snd\", \"CochainComplex.mappingCone.inl_descCochain\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: no DerivedCategory/limit hits; the second query returns only mapping-cone infrastructure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The Koszul tower for a principal ideal computes local derived completeness of a sheaf complex and identifies the quotient augmentation unit",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"localCohomology.diagram\", \"BDeRhamPlus\", \"BDeRham\", \"localCohomology\", \"AdicCompletion\", \"IsAdicComplete\", \"AdicCompletion.eval_comp_of\", \"AdicCompletion.of_apply\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module adic completion, local cohomology, or period rings, not the ring-sheaf derived quotient unit criterion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-finite-free-completed-scalar-comparison",
@@ -76,5 +196,39 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-regular-quotient-completion-unit",
+  "worker": "stage1",
+  "summary": "Q05 retained the statement, used the existing regular Koszul reconstruction and normalized strict Roos comparison to identify the actual zero-coordinate quotient map with the Koszul unit, applied the general ringed-site reflector, and proved the Roos-triangle equivalence without identifying an arbitrary triangle comparison with that unit. No new nodes.",
+  "blueprint": "lem-weil-scalar-extension-composition, integral-representative paragraph: completion maps used in completed finite-free scalar extension. This split supplies the regular one-generator canonical quotient unit below that argument.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-derived-complete-koszul-reconstruction",
+    "why": "Generic regular-element comparison of strict Koszul and quotient towers, including comparison with a prescribed Roos triangle; the item unit has no other node with these general hypotheses."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic ringed-site local derived-completion reflector and its specified Koszul unit; needed to distinguish the canonical unit from an arbitrary fibre isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Generic existence of the strict-tower derived limit and its natural distinguished Roos triangle."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-derived-complete-koszul-reconstruction",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q05-28133c63c",
+  "group": "Q05",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-28133c63c (reviewer sub-agent of L); spot-checked: I read all five steps and they are correct. One commit; the statement is unchanged; no new nodes; not on the dropped list; no re-split note; still unsplit in live and side-live, and the six cited statements match live. Step 1 uses the regular Koszul reconstruction with t=a and K-flat P, and its hypotheses hold. Step 2: the last paragraph of the strict Roos comparison (exact countable products, small site) shows that the zero-shifted-component quotient map eta corresponds to the canonical augmentation. Step 1's augmentation compatibility then gives theta∘eta = kappa (the reflector unit). Since a is regular, (a)O(V)=a·O(V), so the item's completeness condition is literally the reflector's for J=(a). Step 3: the reflector gives completeness of Lambda(P) and of C_a(P), and kappa iso iff P complete, hence eta iso iff P complete. Step 4: transport the homotopy-limit Roos triangle along h=rho∘eta (TR1); its components are q_n because rho commutes with the projections. Advisory: that node's statement does not spell out p's components; I accept the standard meaning. Step 5: the second paragraph of Koszul reconstruction gives P ≅ Lambda(P), so P is complete and eta is an isomorphism by Step 3, with no claim that phi equals kappa. The parent lem-weil-finite-free-completed-scalar-comparison uses exactly the proved directions. Sources: I read Stacks 0A0E lemma-derived-completion-koszul, and 0941 is mapped correctly. Edge cases checked: a a unit, O=0, and O=Z, a=p, P=Z. No cycle in the 646-node dependency closure. No duplicate: the pbc actual-completed reconstruction node needs an adic datum. Accepted tool uses: Koszul reconstruction, the ringed Koszul reflector and the strict-tower homotopy limit, all generic; the unit sk-def-sf-operations has no proof route of its own. No fixes."
+ }
 }
