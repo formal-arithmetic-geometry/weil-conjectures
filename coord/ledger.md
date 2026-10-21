@@ -19666,3 +19666,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:02 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 03:04 L: merged deliver/NL/lemma-weil-pbc-completed-pullback-reduction (reviewer PASS; after a return; new nodes: 0)
 - 03:05 L: merged deliver/Q29/sk-def-sfb-module-lower-shriek (reviewer PASS; after a return; new nodes: 0)
+- 03:05 L: returned deliver/NX/lem-pe-comparison-injective-left-modules-acyclic (reviewer RETURN: A6/D, repair order unfulfilled. coord/repair-notes/lem-pe-comparison-injective-left-modules-acyclic.json records a decis)
