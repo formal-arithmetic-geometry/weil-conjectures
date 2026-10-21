@@ -13,12 +13,7 @@ public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Homology.ChangeOfRingsKFlat
-import Sheaf.Algebra.Homology.SuccessiveDerivedQuotientNormalization
+import Sheaf.Paper.CompletedLineTensorCoherence
 
 /-! # Normalized associators for strict completed scalar extension
 
@@ -33,13 +28,28 @@ any construction with the specified quotient normalization gives the same map.
 @[expose] public section
 set_option autoImplicit false
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 set_option genInjectivity false
 set_option genSizeOfSpec false
 attribute [-instance] CategoryTheory.GrothendieckTopology.hasSheafify_of_essentiallySmall
 universe t u
-open CategoryTheory CategoryTheory.Limits Opposite
+open CategoryTheory CategoryTheory.Limits CategoryTheory.Functor Opposite
 namespace WeilConjectures
+
+attribute [local irreducible] completedIntegralCoefficientSheafUnrestricted
+  completedIntegralCommRingSheafUnrestricted completedCoefficientMap
+  completedOrdinaryScalarExtension completedDerivedScalarExtension
+  completedScalarCounit completedScalarTensorSection integralScalarExtensionOfUniverses
+  completedScalarChangeData completedScalarChainComparison
+  completedScalarComparison completedScalarIdentityMultiplication completedScalarIdentityUnit
+
+private noncomputable def comparisonAlong
+    {A B D : Type*} [Category A] [Category B] [Category D]
+    (F : A ⥤ B) {G H : B ⥤ D} (χ : G ⟶ H)
+    (h : ∀ X : A, IsIso (χ.app (F.obj X))) : F ⋙ G ≅ F ⋙ H :=
+  NatIso.ofComponents (fun X ↦ @asIso _ _ _ _ (χ.app (F.obj X)) (h X))
+    (fun f ↦ χ.naturality (F.map f))
 
 /-- The normalized scalar associators, on all derived-complete inputs and arbitrary schemes.
 The ordinary associator is fixed by balanced multiplication on flat-term K-flat models;
@@ -235,6 +245,134 @@ Proof:
 theorem scalarCompletionAssociator (l : ℕ) [Fact l.Prime]
     (W : AlgebraicGeometry.Scheme.{t}) :
     Nonempty (ScalarCompletionAssociatorData.{t, u} l W) := by
-  sorry
+  classical
+  let ordinary := fun (E : Type u) [Field E] [Algebra ℚ_[l] E]
+      [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L]
+      [FiniteDimensional ℚ_[l] L] (M : Type u) [Field M] [Algebra ℚ_[l] M]
+      [FiniteDimensional ℚ_[l] M] (ι : E →ₐ[ℚ_[l]] L) (κ : L →ₐ[ℚ_[l]] M) ↦
+    (CompletedLineTensor.associatorData l E W L ι M κ).derived
+  let assoc := fun (E : Type u) [Field E] [Algebra ℚ_[l] E]
+      [FiniteDimensional ℚ_[l] E] (L : Type u) [Field L] [Algebra ℚ_[l] L]
+      [FiniteDimensional ℚ_[l] L] (M : Type u) [Field M] [Algebra ℚ_[l] M]
+      [FiniteDimensional ℚ_[l] M] (ι : E →ₐ[ℚ_[l]] L) (κ : L →ₐ[ℚ_[l]] M) ↦
+    let incl := ObjectProperty.ι (IsDerivedCompleteUnrestricted l E W)
+    let one := comparisonAlong incl (completedScalarComparison l E L ι W)
+      (fun K ↦ ((finiteFreeCompletedScalarComparison l E L ι W).2.1 K.obj K.property).1)
+    let two := comparisonAlong (incl ⋙ integralScalarExtensionOfUniverses l E L ι W)
+      (completedScalarComparison l L M κ W)
+      (fun K ↦ ((finiteFreeCompletedScalarComparison l L M κ W).2.1 _
+        (CompletedLineTensor.extension_complete l E W L ι K.obj K.property)).1)
+    let three := comparisonAlong incl (completedScalarComparison l E M (κ.comp ι) W)
+      (fun K ↦ ((finiteFreeCompletedScalarComparison l E M (κ.comp ι) W).2.1
+        K.obj K.property).1)
+    NatIso.ofComponents
+      (F := incl ⋙ integralScalarExtensionOfUniverses l E L ι W ⋙
+        integralScalarExtensionOfUniverses l L M κ W)
+      (G := incl ⋙ integralScalarExtensionOfUniverses l E M (κ.comp ι) W)
+      (fun K ↦ CompletedLineTensor.associator l E W L ι M κ K.obj K.property)
+      (fun f ↦ (two.symm ≪≫
+        isoWhiskerRight one.symm (completedDerivedScalarExtension l L M κ W) ≪≫
+        isoWhiskerLeft incl (ordinary E L M ι κ) ≪≫ three).hom.naturality f)
+  let unit := fun (E : Type u) [Field E] [Algebra ℚ_[l] E]
+      [FiniteDimensional ℚ_[l] E] ↦
+    NatIso.ofComponents
+      (F := ObjectProperty.ι (IsDerivedCompleteUnrestricted l E W) ⋙
+        integralScalarExtensionOfUniverses l E E (AlgHom.id ℚ_[l] E) W)
+      (G := ObjectProperty.ι (IsDerivedCompleteUnrestricted l E W))
+      (fun K : ObjectProperty.FullSubcategory (IsDerivedCompleteUnrestricted l E W) ↦
+        CompletedLineTensor.unit l E W K.obj K.property)
+      (by
+        intro K H f
+        exact (CompletedLineTensor.unit_normalization l E W).2
+          K.obj H.obj K.property H.property f.hom)
+  have norm (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+      (L : Type u) [Field L] [Algebra ℚ_[l] L] [FiniteDimensional ℚ_[l] L]
+      (M : Type u) [Field M] [Algebra ℚ_[l] M] [FiniteDimensional ℚ_[l] M]
+      (ι : E →ₐ[ℚ_[l]] L) (κ : L →ₐ[ℚ_[l]] M)
+      (K : ObjectProperty.FullSubcategory (IsDerivedCompleteUnrestricted l E W)) :
+      (completedScalarComparison l L M κ W).app
+          ((completedDerivedScalarExtension l E L ι W).obj K.obj) ≫
+        (integralScalarExtensionOfUniverses l L M κ W).map
+          ((completedScalarComparison l E L ι W).app K.obj) ≫
+        (assoc E L M ι κ).hom.app K =
+      (ordinary E L M ι κ).hom.app K.obj ≫
+        (completedScalarComparison l E M (κ.comp ι) W).app K.obj := by
+    change (completedScalarComparison l L M κ W).app _ ≫
+      (integralScalarExtensionOfUniverses l L M κ W).map
+        ((completedScalarComparison l E L ι W).app K.obj) ≫
+      (CompletedLineTensor.associator l E W L ι M κ K.obj K.property).hom = _
+    rw [← Category.assoc, ← (completedScalarComparison l L M κ W).naturality]
+    dsimp only [CompletedLineTensor.associator]
+    simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc]
+    simp only [CompletedLineTensor.chi, asIso_hom, asIso_inv]
+    have := ((finiteFreeCompletedScalarComparison l E L ι W).2.1 K.obj K.property).1
+    have := ((finiteFreeCompletedScalarComparison l L M κ W).2.1 _
+      (CompletedLineTensor.extension_complete l E W L ι K.obj K.property)).1
+    simp only [IsIso.hom_inv_id_assoc, ← Functor.map_comp_assoc,
+      IsIso.hom_inv_id]
+    exact (congrArg
+      (fun f ↦ f ≫ (ordinary E L M ι κ).hom.app K.obj ≫
+        (completedScalarComparison l E M (κ.comp ι) W).app K.obj)
+      ((completedDerivedScalarExtension l L M κ W).map_id
+        ((completedDerivedScalarExtension l E L ι W).obj K.obj))).trans
+      (Category.id_comp _)
+  refine ⟨{
+    preserves := fun E _ _ _ L _ _ _ ι K hK ↦
+      CompletedLineTensor.extension_complete l E W L ι K hK
+    ordinary := ordinary
+    ordinary_model := ?_
+    ordinaryUnit := fun E _ _ _ ↦ CompletedLineTensor.ordinaryUnit l E W
+    ordinaryUnit_model := ?_
+    associator := assoc
+    normalization := norm
+    independent := ?_
+    unit := unit
+    unit_normalization := ?_
+    pentagon := ?_
+    left_unit := ?_
+    right_unit := ?_
+  }⟩
+  · intro E _ _ _ L _ _ _ M _ _ _ ι κ P
+    have h := (CompletedLineTensor.associatorData_existsUnique l E W L ι M κ)
+      |>.exists.choose_spec
+    refine ⟨(CompletedLineTensor.scalarAssociatorComplex l E W L ι M κ
+      (CompletedLineTensor.associatorData l E W L ι M κ).sheaf).app P.obj, ?_, ?_⟩
+    · intro i U b c x
+      exact h.1 (P.obj.X i) U b c x
+    · exact h.2 P
+  · intro E _ _ _ P
+    exact (CompletedLineTensor.ordinaryUnit_existsUnique l E W).exists.choose_spec P
+  · intro E _ _ _ L _ _ _ M _ _ _ ι κ a ha
+    apply Iso.ext
+    apply NatTrans.ext
+    funext K
+    have h1 := (finiteFreeCompletedScalarComparison l E L ι W).2.1 K.obj K.property
+    have := h1.1
+    have := ((finiteFreeCompletedScalarComparison l L M κ W).2.1 _ h1.2).1
+    apply (cancel_epi ((integralScalarExtensionOfUniverses l L M κ W).map
+      ((completedScalarComparison l E L ι W).app K.obj))).1
+    apply (cancel_epi ((completedScalarComparison l L M κ W).app
+      ((completedDerivedScalarExtension l E L ι W).obj K.obj))).1
+    exact (ha K).trans (norm E L M ι κ K).symm
+  · intro E _ _ _ K
+    have := ((finiteFreeCompletedScalarComparison l E E (AlgHom.id ℚ_[l] E) W).2.1
+      K.obj K.property).1
+    change (completedScalarComparison l E E (AlgHom.id ℚ_[l] E) W).app K.obj ≫
+      (CompletedLineTensor.unit l E W K.obj K.property).hom = _
+    dsimp only [CompletedLineTensor.unit]
+    simp only [Iso.trans_hom, Iso.symm_hom]
+    change (completedScalarComparison l E E (AlgHom.id ℚ_[l] E) W).app K.obj ≫
+      CategoryTheory.inv
+        ((completedScalarComparison l E E (AlgHom.id ℚ_[l] E) W).app K.obj) ≫ _ = _
+    simp only [IsIso.hom_inv_id_assoc]
+    rfl
+  · intro E _ _ _ L _ _ _ M _ _ _ N _ _ _ ι κ ν K
+    exact (CompletedLineTensor.scalar_coherence l E W L ι M κ).2.2 N ν K.obj K.property
+  · intro E _ _ _ L _ _ _ ι K
+    exact (CompletedLineTensor.scalar_coherence l E W L ι L (AlgHom.id ℚ_[l] L)).1
+      K.obj K.property
+  · intro E _ _ _ L _ _ _ ι K
+    exact (CompletedLineTensor.scalar_coherence l E W L ι L (AlgHom.id ℚ_[l] L)).2.1
+      K.obj K.property
 
 end WeilConjectures

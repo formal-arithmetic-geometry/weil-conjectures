@@ -22461,3 +22461,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:59 L: merged deliver/A6/Sheaf.AlgebraicGeometry.SectionReesNoetherianGeometry (stage 3; reviewer PASS; first push; landing 20261021T125941-L-2466839 (proof); batch 20261021T125931; modules 1; new nodes 0)
 - 12:59 L: merged deliver/A7/Sheaf.Paper.SectionReesBaseChangeEtale (stage 3; reviewer PASS; first push; landing 20261021T125945-L-2469690 (proof); batch 20261021T125931; modules 1; new nodes 0)
 - 12:59 L: merged deliver/B6/Sheaf.Paper.PurTwistRootLocalModels (stage 3; reviewer PASS; first push; landing 20261021T125949-L-2471602 (proof); batch 20261021T125931; modules 1; new nodes 0)
+- 12:59 L: merged deliver/B6/Sheaf.Paper.ScalarCompletionAssociator (stage 3; reviewer PASS; first push; landing 20261021T125952-L-2472867 (interface); batch 20261021T125931; modules 1; new nodes 0; change records: coord/changes/B6-scalar-completion-proof-context.md)

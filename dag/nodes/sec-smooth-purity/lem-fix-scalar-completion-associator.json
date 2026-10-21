@@ -26,116 +26,43 @@
  ],
  "proof": [
   {
-   "text": "Put $R=R_E$, $S=R_L$, $T=R_M$. The finite-free comparison theorem gives the canonical finite-free maps $R\\to S\\to T$. They compose to the canonical map $R\\to T$: at each finite projection both maps are induced by the same valuation-ring inclusion, so the inverse-limit universal property gives equality. Absolute-value uniqueness and the DVR factorization give $t_E=u t_L^e$ and $t_L=z t_M^f$ with units $u,z$ and $e,f\\ge1$. These equalities survive in the completed sheaves. Each DVR is Noetherian because every ideal is principal; completed-constant flatness identifies $R_F/t_F^nR_F$ with $B_{F,n}$. Exact constant sheafification followed by tensoring with the flat completion preserves injective uniformizer multiplication, so the sections are regular. Countable products of modules over all three rings, and of abelian sheaves, are exact on the small pro-etale site. Thus the finite-free completion-exchange hypotheses hold for both maps and their composite.",
+   "text": "Use the existing unrestricted scalar subfamily of lem-pur-completed-line-tensor-coherence. Its associatorData_existsUnique gives the ordinary derived natural isomorphism and the balanced sheaf formula, and its normalization gives exactly the counit equation on flat-term K-flat representatives. Apply its sheaf comparison termwise to obtain ordinary_model. Its ordinaryUnit_existsUnique gives the ordinary multiplication unitor with the prescribed representative formula.",
    "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-weil-l-adic-extension-absolute-value",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-proetale-countable-products-exact"
+    "lem-pur-completed-line-tensor-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
-   }
+   "elementary": false
   },
   {
-   "text": "Write $D_F=I_{F/F}$ with quotient unit $\\eta^F$, and $C_a=C_{L/E}$, $C_b=C_{M/L}$, $C_{ba}=C_{M/E}$. On a flat-term K-flat representative $P$, change of rings preserves that resolving class. The balanced map $(P\\otimes_R S)\\otimes_S B_{L,n}\\to P\\otimes_R B_{L,n}$ sends $(p\\otimes s)\\otimes\\bar v$ to $p\\otimes\\bar s\\bar v$, with inverse $p\\otimes\\bar v\\mapsto(p\\otimes1)\\otimes\\bar v$. It commutes with quotient transitions and with the $R$-action, since the coefficient map is precisely $\\rho^{L/E}_n$. Applying the strict cone functor gives $I_{L/E}=D_L C_a$ and $\\chi_{L/E}=\\eta^L C_a$, as specified natural identifications, and likewise for the other pairs. Quotient-scalar descent and the integral-extension well-definedness theorem make these identifications independent of $P$. The ordinary successive-scalar theorem supplies $\\alpha=a^C:C_bC_a\\cong C_{ba}$, including its iterated coherence.",
+   "text": "The same lemma supplies preservation of derived completeness by integral scalar extension. The finite-free comparison makes each published chi invertible on complete inputs. Restrict chi to the full subcategory of complete objects and assemble natural isomorphisms. Compose the inverse chi for M/L evaluated at I_{L/E}, the image under C_{M/L} of inverse chi for L/E, the ordinary associator, and chi for M/E. This is precisely the objectwise associator of the existing scalar subfamily. Assemble its unit objectwise; naturality is the unit_normalization naturality clause of that subfamily.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pur-kflat-change-of-rings",
-    "lem-pur-quotient-scalar-comparison-descent",
-    "lem-weil-integral-scalar-extension-well-defined",
-    "lem-sfb-successive-derived-quotient-normalization"
+    "lem-pur-completed-line-tensor-coherence",
+    "lem-weil-finite-free-completed-scalar-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
-   }
+   "elementary": true
   },
   {
-   "text": "Apply finite-free completion exchange to $S\\to T$. It gives the specified natural isomorphism $\\epsilon:C_bD_L\\cong D_M C_b$, satisfying $\\epsilon_H C_b(\\eta^L_H)=\\eta^M_{C_bH}$. This is the canonical tensor/product map, quotient reassociation and inverse arithmetic-subsequence comparison. It therefore uses the actual cocones and both actual cone coordinates. In particular it is independent of a basis and does not require a Roos representative to be K-flat. The exchange-coherence theorem identifies its successive coefficient comparisons and their augmentations on the strict Roos coordinates; its hypotheses are exactly those verified in step 1.",
-   "uses": [
-    "lem-pur-finite-free-completion-exchange",
-    "lem-pur-finite-free-completion-exchange-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
-   }
-  },
-  {
-   "text": "For complete $K$, put $J=I_{M/E}K=D_M C_{ba}K$ and define\n$$d_K=D_M(\\alpha_K)\\,\\epsilon_{C_aK}: C_b I_{L/E}K\\longrightarrow J.$$\nThe finite-free comparison theorem makes $C_{ba}K$ and $J$ complete; its identity-extension case makes the actual unit $\\eta^M_J$ invertible. Define\n$$a^I_K=(\\eta^M_J)^{-1}D_M(d_K):D_M C_b I_{L/E}K\\longrightarrow J.$$\nIts source is exactly $I_{M/L}I_{L/E}K$ by step 2. All factors are natural and invertible: $d_K$ is a composite of the exchange isomorphism and the image of the ordinary associator. This constructs $a^I$ from the prescribed tensor/product-cone exchange and the inverse of the prescribed completeness unit; it introduces no arbitrary isomorphism between values.",
+   "text": "For normalization, naturality of chi_{M/L} rewrites chi_{M/L,C_{L/E}K} followed by I_{M/L}(chi_{L/E,K}) as C_{M/L}(chi_{L/E,K}) followed by chi_{M/L,I_{L/E}K}. Substitute the definition of the associator. Cancel chi_{M/L} with its inverse, then cancel C_{M/L}(chi_{L/E}) with its inverse. The result is the ordinary associator followed by chi_{M/E}, exactly the required equation. Both factors precomposed in normalization are isomorphisms by finite-free comparison, including its completeness-preservation clause. Thus cancel them to prove uniqueness for any normalized natural isomorphism.",
    "uses": [
     "lem-weil-finite-free-completed-scalar-comparison"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
-   }
+   "elementary": true
   },
   {
-   "text": "Naturality of $\\eta^M$ gives $a^I_K\\eta^M_{C_b I_{L/E}K}=d_K$. Also, by step 3 and naturality of $\\eta^M$,\n$$d_K C_b(\\chi_{L/E,K})=D_M(\\alpha_K)\\epsilon_{C_aK}C_b(\\eta^L_{C_aK})\n=D_M(\\alpha_K)\\eta^M_{C_bC_aK}=\\chi_{M/E,K}\\alpha_K.$$\nFinally $I_{M/L}(\\chi_{L/E,K})\\chi_{M/L,C_aK}=\\eta^M_{C_bI_{L/E}K}C_b(\\chi_{L/E,K})$. Substitution proves the displayed normalization. Every naturality here is naturality of the descended quotient unit, whose zero shifted-product component is fixed in step 2.",
+   "text": "The unit is inverse chi_{E/E} followed by the ordinary multiplication unitor, so its normalization is cancellation of chi with its inverse. The assembled associator and unit have exactly the components of lem-pur-completed-line-tensor-coherence, whose scalar_coherence supplies the pentagon and both unit equations, with its extension_complete proof providing the intermediate complete object. Proof irrelevance identifies the completeness witnesses. No representative, basis or cofinal choices are added; any alternative with the same normalization equals this family by the uniqueness just proved.",
    "uses": [
-    "lem-pur-quotient-scalar-comparison-descent"
+    "lem-pur-completed-line-tensor-coherence"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
-   }
-  },
-  {
-   "text": "The three $\\chi$ factors in step 5 are isomorphisms on complete inputs by finite-free scalar comparison; that theorem also makes $C_aK$ complete. Thus the normalization uniquely determines $a^I$. Representatives give the same $\\chi$, $\\alpha$ and $\\epsilon$ by the descent, successive-scalar and exchange statements already cited, so uniqueness proves representative independence. For cofinal exponent changes apply the cofinal Roos restriction theorem to the actual quotient towers: selection and weighted finite blocks carry their quotient units to the restricted units, with zero remaining zero. Arithmetic restriction is its $\\phi(n)=en$ case. Both subsequence choices compare to the same full quotient tower by invertible restriction maps; the comparison from one to the other is the second restriction composed with the inverse of the first, and therefore identifies their augmentations. Finite-free tensor commutes with these block maps because it commutes with products and finite sums; each projection of the two maps is the same finite sum of tensor-extended transitions. Hence the construction in steps 2-4 has the same normalization under every such comparison, and uniqueness proves the asserted cofinal-choice independence.",
-   "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-fix-cofinal-roos-restriction",
-    "lem-pur-finite-free-completion-exchange"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
-   }
-  },
-  {
-   "text": "For four fields $E\\subset L\\subset M\\subset N$, precompose both associator-pentagon routes by the threefold comparison from $C_{N/M}C_{M/L}C_{L/E}K$ to $I_{N/M}I_{M/L}I_{L/E}K$, formed by the specified $\\chi$ maps and their functorial images. It is invertible because finite-free scalar extension preserves completeness. Naturality moves each $\\chi$ past the intervening map; step 5 replaces each adjacent $I$ associator by the corresponding ordinary $C$ associator followed by the final $\\chi_{N/E}$. Both routes become $\\chi_{N/E}$ followed by the two ordinary reassociations. The successive-scalar theorem makes those equal; cancel the invertible threefold comparison. For a repeated adjacent field, the identity case of finite-free scalar comparison identifies $\\chi_{F/F}$ with the completeness unit under multiplication. The same substitution reduces both unit equations to $(p\\otimes1)\\otimes s\\mapsto p\\otimes s$ and $(p\\otimes s)\\otimes1\\mapsto p\\otimes s$. These are the ordinary multiplication unit identities.",
-   "uses": [
-    "lem-weil-finite-free-completed-scalar-comparison",
-    "lem-sfb-successive-derived-quotient-normalization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-    "place": "Paragraph 3, transport of the specified scalar maps; strict quotient-completion normalization expanded using Stacks 0941 and 099B/0A0E."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-l-adic-extension-absolute-value",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-sheafification-exact",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-quotient-scalar-comparison-descent",
-  "lem-weil-integral-scalar-extension-well-defined",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-pur-finite-free-completion-exchange",
-  "lem-pur-finite-free-completion-exchange-coherence",
-  "lem-fix-cofinal-roos-restriction"
+  "lem-pur-completed-line-tensor-coherence",
+  "lem-weil-finite-free-completed-scalar-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-pf-reduction/lem-fix-operation-reduction.proof.md",
-  "place": "Paragraph 3 expanded by normalized quotient-completion exchange; Stacks 0941 and 099B/0A0E."
+  "place": "Paragraph 3, shorter reuse of the existing normalized scalar subfamily in lem-pur-completed-line-tensor-coherence; assembly of natural isomorphisms and uniqueness by cancellation written by B6."
  },
  "mathlib_searches": [
   {
@@ -267,19 +194,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-finite-free-completed-scalar-comparison",
-  "lem-weil-l-adic-extension-absolute-value",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-sheafification-exact",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-pc-kflat-resolution",
-  "lem-pur-kflat-change-of-rings",
-  "lem-pur-quotient-scalar-comparison-descent",
-  "lem-weil-integral-scalar-extension-well-defined",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-pur-finite-free-completion-exchange",
-  "lem-pur-finite-free-completion-exchange-coherence"
+  "lem-weil-finite-free-completed-scalar-comparison"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -312,5 +227,15 @@
   "group": "NC",
   "result": "fix",
   "note": "Substance correct. a^C (ordinary) pinned by ordinary_model (on every good P, a chain iso c⊗(b⊗x)↦cκ(b)⊗x plus the counit equation); a^I pinned by normalization (node equation in diagrammatic order) plus the uniqueness field, since χ is iso on complete inputs and C K is complete. preserves follows from the finite-free comparison dependency. unit is fixed by χ_{E/E}≫unit = ordinary multiplication. Pentagon and unit equations hold; left/right unit recomputed from normalization. No extra hypotheses; t and u independent; unbounded complexes; statement verbatim; only the item's lean record changed; not dropped; first stage-2 landing. Advisory: integralOperationsGoodComplex is owned by lem-pur-integral-operations-well-defined (not a stmt_dep) but is the conjunction of the cited kflat and flat predicates and is already used by the cited finite-free dependency. FIX is mechanical: at load 210-238 the delivered module timed out twice and was clean once at 56.9 s; fixes/ScalarCompletionAssociator.lean adds only set_option genInjectivity false and genSizeOfSpec false and compiles clean in 38-44 s back to back."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B6",
+  "result": "pass",
+  "landing": "20261021T125952-L-2472867",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
