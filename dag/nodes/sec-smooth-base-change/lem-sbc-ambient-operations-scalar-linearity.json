@@ -15,31 +15,18 @@
  ],
  "proof": [
   {
-   "text": "Write $P=u^*$ and $G=u_*$ for the underived module functors of [def-weil-pbc-proetale-operations]. For an object $W$ of the site of $V$, put $W_U=U\\times_V W$. The scalar $a\\in A$ acts on $(GM)(W)=M(W_U)$ through the image of $a$ under $A\\to R_V(W)\\to R_U(W_U)$. The $A$-compatibility of $c$ identifies this image with the restriction to $W_U$ of the specified global section of $R_U$. Thus, for parallel module-sheaf maps $h,k:M\\to N$, the equalities $G(h+k)_W=h_{W_U}+k_{W_U}$ and $G(ah)_W=a h_{W_U}$ hold sectionwise. They commute with restrictions, giving equalities of sheaf maps. In each module-sheaf category the sum and scalar action on Hom are sectionwise; the module laws and bilinearity of composition are checked on sections. These are the $A$-linear category structures of [def-weil-linear-category]. Consequently $G$ is additive and $A$-linear.",
+   "text": "Apply [lem-sbc-underived-ringed-operations-linear] to the specified $u,R_U,R_V,c$ and global $A$-actions. The required sectionwise compatibility is precisely that $c$ respects these actions. It supplies the prescribed $A$-linear module-sheaf structures and additive $A$-linearity of $P=u^*$ and $G=u_*$.",
    "uses": [
-    "def-weil-pbc-proetale-operations",
-    "def-weil-linear-category"
+    "lem-sbc-underived-ringed-operations-linear"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, module adjunction and unit formula; elementary scalar refinement using dga.tex Tag 09MK, definition-functor-linear-categories."
+    "place": "Tag 03D6, definition-pushforward, clauses (1)-(2), for the module operations and restriction along the adjoint ring map; Tag 03D3, lemma-adjoint-push-pull-modules, for the module adjunction and unit formula; Tag 04TT, section-internal-hom, for multiplication of morphisms by sections. The external compatible-global-scalar linearity refinement is agent supplied. Extracted from former steps 1-2 of lem-sbc-ambient-operations-scalar-linearity."
    }
   },
   {
-   "text": "Use the underived module adjunction $P\\dashv G$ of [def-weil-pbc-proetale-operations], with unit $\\eta$. For fixed module sheaves $M,N$ on $V$, its bijection $\\Phi:\\operatorname{Hom}(PM,PN)\\to\\operatorname{Hom}(M,GPN)$ is $h\\mapsto G(h)\\circ\\eta_M$. Step 1 and bilinearity of composition [def-weil-linear-category] show directly that $\\Phi(h+k)=\\Phi(h)+\\Phi(k)$ and $\\Phi(ah)=a\\Phi(h)$. Naturality of $\\eta$ gives $\\Phi(Ps)=\\eta_N\\circ s$ for each $s:M\\to N$. Therefore $\\Phi(P(s+t))=\\eta_N\\circ(s+t)=\\Phi(Ps+Pt)$ and $\\Phi(P(as))=\\eta_N\\circ(as)=\\Phi(aPs)$. Injectivity of $\\Phi$ proves that $P$ is additive and $A$-linear. This uses only the given ordinary adjunction, without presupposing that its Hom bijection is linear.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "def-weil-linear-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03D3, lemma-adjoint-push-pull-modules, module adjunction and unit formula; elementary scalar refinement using dga.tex Tag 09MK, definition-functor-linear-categories."
-   }
-  },
-  {
-   "text": "The identified-coefficient construction [def-weil-pbc-proetale-operations] makes $P$ exact and defines $L_u=Lu^*$ by applying $P$ termwise and passing to the ordinary unbounded derived categories. In particular $P$ is additive and preserves finite limits and finite colimits; the coefficient isomorphism, rather than any flatness hypothesis on $u$ as a scheme morphism, is what supplies exactness here. The source and target have precisely the induced $A$-linear derived structures of [lem-weil-linear-abelian-derived-category]. Apply [lem-cbc-exact-linear-derived-functor] with $R=A$, $\\mathcal A=\\operatorname{Mod}(R_V)$, $\\mathcal B=\\operatorname{Mod}(R_U)$ and $F=P$, using step 2 for linearity. It gives $L_u(s+t)=L_u(s)+L_u(t)$ and $L_u(as)=aL_u(s)$ on all derived morphisms.",
+   "text": "By [def-weil-pbc-proetale-operations], the coefficient isomorphism makes $P$ exact, and $L_u$ is its termwise induced functor on ordinary unbounded derived categories. Equip both derived categories with the induced structures of [lem-weil-linear-abelian-derived-category]. Exactness supplies preservation of finite limits and finite colimits; step 1 supplies additivity and $A$-linearity. Thus all hypotheses of [lem-cbc-exact-linear-derived-functor] hold for $P$ over $A$, giving $L_u(s+t)=L_u(s)+L_u(t)$ and $L_u(as)=aL_u(s)$.",
    "uses": [
     "def-weil-pbc-proetale-operations",
     "lem-weil-linear-abelian-derived-category",
@@ -52,30 +39,31 @@
    }
   },
   {
-   "text": "Finally use the ordinary unbounded derived adjunction $L_u\\dashv D_u$ stated in [def-weil-pbc-proetale-operations], and let $\\epsilon:L_uD_u\\to\\mathrm{id}$ be its counit. For fixed $X,Y\\in D(R_U)$ its bijection $\\Psi:\\operatorname{Hom}(D_uX,D_uY)\\to\\operatorname{Hom}(L_uD_uX,Y)$ sends $h$ to $\\epsilon_Y\\circ L_u(h)$. By step 3 and bilinear composition [def-weil-linear-category], $\\Psi$ preserves addition and $A$-scalars. Counit naturality gives $\\Psi(D_u(s))=s\\circ\\epsilon_X$ for $s:X\\to Y$. Consequently $\\Psi(D_u(s+t))=(s+t)\\circ\\epsilon_X=\\Psi(D_u(s)+D_u(t))$ and $\\Psi(D_u(as))=(as)\\circ\\epsilon_X=\\Psi(aD_u(s))$. Injectivity proves both required identities for $D_u$. Together with step 3 these are exactly additive $A$-linearity [def-weil-linear-functor]. Every Hom and adjunction used is in the ordinary unbounded categories; no boundedness, completeness or constructibility has been introduced.",
+   "text": "The ordinary unbounded adjunction $L_u\\dashv D_u$ is part of [def-weil-pbc-proetale-operations]. Apply [lem-sbc-linear-right-adjoint] to this adjunction and the additive $A$-linearity of $L_u$ from step 2. It gives $D_u(s+t)=D_u(s)+D_u(t)$ and $D_u(as)=aD_u(s)$ on all derived morphisms. Together these are exactly the two functors' asserted linearity [def-weil-linear-functor], in the full ordinary unbounded categories.",
    "uses": [
     "def-weil-pbc-proetale-operations",
-    "def-weil-linear-category",
+    "lem-sbc-linear-right-adjoint",
     "def-weil-linear-functor"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/dga.tex",
-    "place": "Tag 09MK, definition-functor-linear-categories; agent-written counit calculation for the ordinary derived adjunction specified in def-weil-pbc-proetale-operations. The adjunction itself is not re-proved here."
+    "place": "Tag 09MK, definition-functor-linear-categories; agent counit refinement. Existing scalar proof: WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:27-36, CategoryTheory.Adjunction.right_adjoint_linear; additive proof: Mathlib/CategoryTheory/Adjunction/Additive.lean:38-39, CategoryTheory.Adjunction.right_adjoint_additive. Extracted from former step 4 of lem-sbc-ambient-operations-scalar-linearity."
    }
   }
  ],
  "proof_deps": [
+  "lem-sbc-underived-ringed-operations-linear",
   "def-weil-pbc-proetale-operations",
-  "def-weil-linear-category",
   "lem-weil-linear-abelian-derived-category",
   "lem-cbc-exact-linear-derived-functor",
+  "lem-sbc-linear-right-adjoint",
   "def-weil-linear-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/dga.tex",
-  "place": "Tag 09MK, definition-functor-linear-categories: agent-written linearity refinement of the module adjunction in sites-modules.tex Tag 03D3, lemma-adjoint-push-pull-modules, and the existing ordinary unbounded derived adjunction. Exact derived linearity is the existing Mathlib leaf lem-cbc-exact-linear-derived-functor. No K-injective resolution is assumed to be a linear choice."
+  "place": "Tag 09MK; short assembly of the extracted underived module adjoint-pair interface, existing exact-linear-derived Mathlib leaf, and generic linear-right-adjoint interface. The full original sectionwise, unit, exact-derived and counit arguments remain verbatim in report.md; the new nodes contain self-contained statements only."
  },
  "mathlib_searches": [
   {
@@ -167,16 +155,27 @@
   "date": "2026-10-21",
   "item": "lem-sbc-ambient-operations-scalar-linearity",
   "worker": "stage1",
-  "summary": "Preserved the full arbitrary identified-ring-sheaf unbounded statement. Proved ordinary direct-image linearity sectionwise, underived inverse-image linearity by an explicit unit calculation, derived inverse-image linearity by the existing exact-linear-derived Mathlib leaf, and derived direct-image linearity by the dual counit calculation. No new nodes and no unproved linearity assumption on a choice of resolutions. Project declarations cover fixed coefficient sheaves only, not this arbitrary ring-sheaf statement. Searches and source readings recorded in report.md.",
-  "blueprint": "The central-localization sentence of the ancestor proof requires integral operations to preserve scalars. Steps 1-2 establish the sheaf-level prerequisite, step 3 derives exact inverse image, and step 4 establishes unbounded direct-image linearity; completion and rationalization are outside this item."
+  "summary": "Deliberate stage-1 re-split under the explicit human instruction recorded in resplit_authorization, including its express override of the already split-and-reviewed live state. The exact statement, Lean binding and completed J3 proof record are preserved. Former arguments 1-2 are assigned to the statement-only underived adjoint-pair node; argument 3 uses the existing exact-linear-derived Mathlib leaf; argument 4 is assigned to the statement-only generic right-adjoint node, whose existing project/Mathlib proofs are recorded for attachment. Corrected the underived source record to include Stacks 03D6 clauses (1)-(2), separately from the module adjunction 03D3 and Hom action 04TT. All four original arguments and authentic searches are retained. The three assembly steps total 1252 characters. No Lean changes or compilation.",
+  "blueprint": "The central-localization sentence needs ordinary integral operations to preserve scalar multiplication before completion/localization. New underived pair carries former steps 1-2, existing exact-derived leaf carries former step 3, and new right-adjoint lemma carries former step 4.",
+  "resplit_authorization": {
+   "decision_date": "2026-10-21",
+   "recorded_at_utc": "2026-10-21T10:16:55Z",
+   "recorded_by": "NN",
+   "provenance": "Explicit human instruction in the user message assigning this repair, under the headings \"Why this node is back in stage 1 (the human, 2026-10-21)\" and the immediately following re-split paragraph. This is a transcript record made by the worker, not a claim that coord/HUMAN.md was edited.",
+   "instruction": "re-split (decision of the human, 2026-10-21): the proof in words is 3271 characters, far too much work for one node. The purpose of this re-split is to SPREAD THE WORK so that many workers can start on it at once: cut the proof into new nodes, each a separate argument with its own self-contained statement, delivered statement-only (status unsplit, source, three kinds of Mathlib search, no proof steps: other workers write their proofs in parallel), cited by the step that uses it.",
+   "explicit_override": "The node is already split once and stated in Lean; that the live item is already split and reviewed is exactly why it is back: this is a deliberate re-split, not a stale assignment. Deliver it as a stage-1 repair of the existing node with the new statement-only nodes.",
+   "completed_landing_acknowledged": "20261021T061336-L-1761747",
+   "completed_landing_sorry_after": [],
+   "scope": "Natural-language DAG decomposition only; preserve the item statement, existing Lean theorem, reviewed record and reviewed_proof record. No stage-2 or stage-3 work is authorized."
+  }
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NC-b4bdb665b",
-  "group": "NC",
+  "reviewer": "NT-cc-NN-7d9e2dfff",
+  "group": "NN",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-b4bdb665b (reviewer sub-agent of L); spot-checked: I read the item, all four steps and every cited statement in full. The delivery has no new nodes. The statement is byte-identical to the base (sha1 prefix bcc09fd9de), so it is not weakened. The item is neither dropped nor under a re-split note. Stacks 09MK/070I/03D3/04JC are checked in tags/tags and 09MK at dga.tex l.2887; no SGA is used. Step 1: u_* is linear sectionwise, (u_*M)(W)=M(W_U), and the A-action goes through R_V(W)->R_U(W_U), which equals a_U because c respects the A-structures; that hypothesis is genuinely used. Step 2: u^* is linear because Phi(h)=G(h)eta_M is linear by step 1, naturality gives Phi(Ps)=eta_N s, and Phi is injective; there is no circularity. Step 3: def-weil-pbc-proetale-operations explicitly states that u^* is exact and that Lu^* is the termwise derived functor. lem-cbc-exact-linear-derived-functor applies with A-linear Mod(R_W) and the derived structures of lem-weil-linear-abelian-derived-category. The two termwise constructions are the same factorization through Q_A, and linearity would transfer through a natural iso in any case. Step 4: Ru_* is linear because Psi(h)=eps_Y L_u(h) is linear, Psi(D_u s)=s eps_X, and Psi is injective; no linear choice of K-injective resolutions is assumed, and the argument holds for unbounded complexes. Edge cases u=id, A=0, a=0/1 and non-injective A->Gamma(R) all hold. Every cited node states what its step uses, and I found no duplicate. Minor: the source place still mentions 070I although the proof does not use it, which is harmless. No fixes were made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-7d9e2dfff (reviewer sub-agent of L); spot-checked: PASS, no fixes written; 7th NN push of this item. Eligibility: the six earlier returns (A6/A7/B10/G4) treated the released re-split note (mtime 05:04–06:08Z) as cancelled by the J3 stage-3 landing at 06:13Z. The 10:58 UTC maintenance withdrew that reasoning (side-live coord/reports/maintenance/NR-grothendieck-sheafification-20261021.md): commit 0629838df06 keeps a Lean-closed node open for stage 1 while its re-split note is released, and 243a4db5baf fixes the queue to match. This note is still released, so the head is judged on its merits and the G4 count should not apply. Delta vs 30919d5c: lem-sbc-linear-right-adjoint is sha-identical (19ffc367). lem-sbc-underived-ringed-operations-linear changed only source.place (now separates Stacks 03D6, 03D3 and 04TT); the item changed the same in step 1 source and gained split_report.resplit_authorization. Against clones/live the item differs only in split-owned fields; statement, stmt_deps, lean record and J3 reviewed_proof are unchanged. Re-split note fulfilled: 3271 chars become 3 steps of 1252. Old steps 1-2 (858 and 725 chars) go to the new underived node, old step 4 (907) to the new right-adjoint node, and old step 3 (781) is the existing leaf lem-cbc-exact-linear-derived-functor (ExactFunctor.lean:122). The four old texts match the live proof verbatim; no argument was dropped and no node restates a derived clause (D1/D2 fine). Maths, underived node: G is linear sectionwise because rho_W(a_V(a)|_W)=a_U(a)|_{U×_V W}; P is linear because Phi(h)=G(h)eta_M is linear, Phi(Ps)=eta_N s and Phi is injective. Step 1 correctly turns the item's A-compatible c into this rho condition, since rho=u_*(c)∘eta. Hom action is def-pur-sheaf-modules-hom-module restricted along a_T. Edge cases checked: u=id with c≠id, A=0, a=0/1, a_T not injective. Maths, right-adjoint node: true by counit injectivity, Psi(Gs)=s∘eps. It is covered exactly by CategoryTheory.Adjunction.right_adjoint_linear (lean/WeilConjectures/Mathlib/CategoryTheory/Linear/LinearFunctor.lean:34, Semiring, preadditive, linear) plus Mathlib's right_adjoint_additive (Adjunction/Additive.lean:38), correctly recorded as lean_candidates with status unsplit. Step 2: def-weil-pbc-proetale-operations states u^* is exact and defines Lu^* termwise, and lem-weil-linear-abelian-derived-category supplies the induced derived structures, so every hypothesis of the leaf holds; linearity also transfers along the natural iso between the two termwise factorizations. Step 3: the ordinary adjunction Lu^*⊣Ru_* is stated in the definition node. Duplicate search: lem-pur-ringed-derived-pushforward-linear has a similar u_* calculation only inside its proof, and its statement is derived Ru_* for central sections without the P half. lem-weil-kinjective-total-derived-linear and lem-weil-pbc-underived-exchange-module-linear differ too. No DAG node states generic adjoint linearity. Both new nodes are self-contained and statement-only, with stmt_deps complete and searches of 3+ kinds. blueprint from/via are right (sbc-thm-e central-localization sentence). Unit sk-rem-rest has no steps; off-unit citations are definitions or Mathlib leaves, so no tool_uses are needed. No SGA. Coefficient category is unchanged: ordinary unbounded D(Mod R_T). Maintainer: attach right_adjoint_linear and right_adjoint_additive to lem-sbc-linear-right-adjoint. resplit_authorization quotes launcher hand-off text, not a coord record; eligibility rests on the queue fix and the released note."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.ProEtaleAmbientOperationsScalarLinearity",
