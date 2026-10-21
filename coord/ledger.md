@@ -20753,3 +20753,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:39 L: returned deliver/Q39/lem-pur-signed-line-derived-base-change (reviewer RETURN: L: independent stage-2 immutable head 808a03a1b20c: Mechanical finding confirmed. The Lean statement uses only plain def)
 - 07:39 L: returned deliver/Q58/lem-sbc-strict-quotient-exchange-unit-equation (reviewer RETURN: L: independent stage-2 immutable head 9e7a2d8e17ee: F1 (decisive, not FIXable in S2 because it changes stmt_deps): the i)
 - 07:39 L: returned deliver/Q10/lem-sfb-constant-field-tor-bounds (reviewer RETURN: L: independent stage-2 immutable head a014f19ddb11: Item lem-sfb-constant-field-tor-bounds is correct: every clause matc)
+- 07:40 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
