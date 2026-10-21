@@ -21,11 +21,12 @@
  ],
  "proof": [
   {
-   "text": "On a module-sheaf Hom group define $(af)_U(x)=s(a)|_U f_U(x)$; restriction compatibility follows from the restriction rule in [def-weil-sheaf-of-modules-category]. Composition is bilinear by componentwise calculation. The same formulas on chain maps give an $A$-linear category of complexes. For the sheaf tensor of [def-pur-sheaf-tensor-product], $((af+bf')\\otimes g)(x\\otimes y)=s(a)f(x)\\otimes g(y)+s(b)f'(x)\\otimes g(y)$ sectionwise before sheafification; the balancing relation moves either scalar to the output. Equality passes through sheafification, and the other variable has the same formula. On each summand of the signed direct-sum totalization [def-pc-tensor-complex-sheaves] the induced chain map is $f^i\\otimes g^j$. Thus total tensor on complexes preserves sums and scalar multiplication separately: its fixed signs in the differential do not change these equalities.",
+   "text": "On a module-sheaf Hom group define $(af)_U(x)=s(a)|_U f_U(x)$; restriction compatibility follows from the restriction rule in [def-weil-sheaf-of-modules-category]. Composition is bilinear by componentwise calculation. The same formulas on chain maps give an $A$-linear category of complexes. For the sheaf tensor of [def-pur-sheaf-tensor-product], $((af+bf')\\otimes g)(x\\otimes y)=s(a)f(x)\\otimes g(y)+s(b)f'(x)\\otimes g(y)$ sectionwise before sheafification; the balancing relation moves either scalar to the output. Equality passes through sheafification, and the other variable has the same formula. On each summand of the signed direct-sum totalization [def-pc-tensor-complex-sheaves] the induced chain map is $f^i\\otimes g^j$. Thus total tensor on complexes preserves sums and scalar multiplication separately: its fixed signs in the differential do not change these equalities. In Lean, restrict the global-section action along s on presheaf Hom groups. The sheaf forgetful functor is linear by its component formula, hence its left adjoint sheafification is linear. The tensorRightPresentation comparison of [lem-weil-pbc-independent-sheaf-tensor-colimits] transfers the sectionwise tensor calculation to the specified monoidal tensor; braiding gives the other variable. The proved source-library BifunctorLinear instances carry this separate linearity to total complexes.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pur-sheaf-tensor-product",
-    "def-pc-tensor-complex-sheaves"
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": true,
    "source": {
@@ -47,12 +48,14 @@
    }
   },
   {
-   "text": "Fix a flat-term K-flat complex $P$. By [lem-weil-pbc-kflat-fixed-tensor-triangulated], the total-tensor functors with fixed factor $P$ descend to exact, hence additive, functors $G_P,H_P:D(R)\\to D(R)$ canonically identified with $T(qP,-)$ and $T(-,qP)$. Their descent comparisons identify $G_Pq$ with $q\\operatorname{Tot}(P\\otimes-)$ and $H_Pq$ with $q\\operatorname{Tot}(-\\otimes P)$. The latter functors are additive and $A$-linear by Steps 1–2. Apply [lem-sfb-linear-localization-descent] to $q$ and each comparison: $G_P$ and $H_P$ preserve scalar multiplication as well. The equivalence in [lem-weil-pbc-site-derived-tensor-descent] supplies for every derived object $M$ a flat-term K-flat $P$ and an isomorphism $e:qP\\cong M$. Bifunctoriality gives natural isomorphisms $T(e,1):T(qP,-)\\cong T(M,-)$ and $T(1,e):T(-,qP)\\cong T(-,M)$. Conjugating any sum or scalar multiple by an isomorphism preserves it, since composition is $A$-bilinear. Therefore both fixed-variable functors of $T$ are additive and $A$-linear for every $M$, independently of the chosen representative.",
+   "text": "Fix a flat-term K-flat complex $P$. By [lem-weil-pbc-kflat-fixed-tensor-triangulated], the total-tensor functors with fixed factor $P$ descend to exact, hence additive, functors $G_P,H_P:D(R)\\to D(R)$ canonically identified with $T(qP,-)$ and $T(-,qP)$. Their descent comparisons identify $G_Pq$ with $q\\operatorname{Tot}(P\\otimes-)$ and $H_Pq$ with $q\\operatorname{Tot}(-\\otimes P)$. The latter functors are additive and $A$-linear by Steps 1–2. Apply [lem-sfb-linear-localization-descent] to $q$ and each comparison: $G_P$ and $H_P$ preserve scalar multiplication as well. Choose a complex representing $M$ using essential surjectivity of q, and resolve it by [lem-pc-kflat-resolution]. Its flat terms are flat for the specified monoidal tensor by [lem-weil-pbc-independent-sheaf-tensor-colimits]. The resulting quasi-isomorphism gives $e:qP\\cong M$. Bifunctoriality gives natural isomorphisms $T(e,1):T(qP,-)\\cong T(M,-)$ and $T(1,e):T(-,qP)\\cong T(-,M)$. Conjugating any sum or scalar multiple by an isomorphism preserves it, since composition is $A$-bilinear. Therefore both fixed-variable functors of $T$ are additive and $A$-linear for every $M$, independently of the chosen representative.",
    "uses": [
     "lem-weil-pbc-kflat-fixed-tensor-triangulated",
     "def-weil-triangulated-category",
     "lem-sfb-linear-localization-descent",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
@@ -61,10 +64,9 @@
    }
   },
   {
-   "text": "The full subcategory $\\mathcal C$ inherits the Hom modules and bilinear composition of $D(R)$ [def-weil-linear-category]. For $f,f':X\\to Y$ and $a,b\\in A$, naturality of the unit gives\n$$\\bigl(aL(f)+bL(f')\\bigr)\\eta_X=\\eta_Y(af+bf')=L(af+bf')\\eta_X.$$\nHere $LY$ is complete. The bijection of [lem-weil-pbc-ringed-koszul-completion-reflector], with source $X$ and complete target $LY$, makes precomposition with $\\eta_X$ injective on $\\operatorname{Hom}(LX,LY)$. Hence $L(af+bf')=aL(f)+bL(f')$. This proves additivity and $A$-linearity of the specified reflector directly from its natural universal unit; it does not require a choice of a linear resolution functor.",
+   "text": "The full subcategory $\\mathcal C$ inherits the Hom modules and bilinear composition of $D(R)$ [def-weil-linear-category]. For $f,f':X\\to Y$ and $a,b\\in A$, naturality of the unit gives\n$$\\bigl(aL(f)+bL(f')\\bigr)\\eta_X=\\eta_Y(af+bf')=L(af+bf')\\eta_X.$$\nHere $LY$ is complete. The supplied universal-unit bijection hL, with source $X$ and complete target $LY$, makes precomposition with $\\eta_X$ injective on $\\operatorname{Hom}(LX,LY)$. Hence $L(af+bf')=aL(f)+bL(f')$. This proves additivity and $A$-linearity of the specified reflector directly from its natural universal unit; it does not require a choice of a linear resolution functor.",
    "uses": [
-    "def-weil-linear-category",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
+    "def-weil-linear-category"
    ],
    "elementary": true,
    "source": {
@@ -111,6 +113,7 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product",
   "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "def-weil-abstract-derived-category",
   "lem-sfb-derived-localization-additive",
   "lem-sfb-additive-localization-linear",
@@ -118,8 +121,8 @@
   "def-weil-triangulated-category",
   "lem-sfb-linear-localization-descent",
   "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
   "def-weil-linear-category",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
   "def-weil-module-base-change",
   "def-weil-linear-scalar-localization",
   "lem-weil-linear-scalar-localization-category"
@@ -127,7 +130,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
-  "place": "coefficient tensor model, expanding current parent proof Step 3 (wfRationalTensorHom_exists) using Stacks 06YS/06YU and 099B/0A0E and existing linear-localization and module-base-change leaves"
+  "place": "coefficient tensor model, expanding current parent proof Step 3 (wfRationalTensorHom_exists) using Stacks 06YS/06YU and 099B/0A0E and existing linear-localization and module-base-change leaves; G8 stage-3 implementation: sheafification-adjunction scalar transport, existing proved BifunctorLinear instances, K-flat-resolution representatives, universal-unit reflector proof, generic scalar-base-change construction and four tensor inductions"
  },
  "mathlib_searches": [
   {
@@ -248,7 +251,6 @@
  "tool_uses": [
   "lem-weil-pbc-kflat-fixed-tensor-triangulated",
   "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-weil-pbc-ringed-koszul-completion-reflector",
   "lem-weil-linear-scalar-localization-category"
  ],
  "reviewed": {
@@ -282,5 +284,15 @@
   "group": "NF",
   "result": "pass",
   "note": "Re-delivery meets the b92b3ac1 correction: reflector record byte-identical to live (NJ wfCompletionReflector); new def node def-sf-koszul-small-model-completed-tensor owns KoszulSmallModel ring/globalSection/Modules/modulesEquiv/derivedEquiv/complete and DerivedCompletedTensor.tensor, all real data (pushforward, pushforwardPushforwardEquivalence, mapDerivedCategory, IsLocallyDerivedRingedIdealComplete, plain composite), no sorry/choice; item only gains that node in stmt_deps; rational-naturality theorem dep and exists_reflector dropped. Item clauses checked: coefficientLinear = homLinear along s; T = siteDerivedTensorIndependentCoefficients; Mono ι + _hgen generating list; L/η/_hL reflector; L,T,B additive and A-linear in each variable; β pure/unique/id/comp (order checked vs composition_tmul)/denominator; bifunctor F with HEq. Statements verbatim; universes independent; edge cases n=0, S=0, torsion, empty site. Advisory: IsRingedIdealGeneratingList owner def-weil-pbc-ringed-ideal-generators reached only through the reflector node; proof-dep imports. No compile (no file changed); worker compiled 5.1 s / 27.4 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G8",
+  "result": "pass",
+  "landing": "20261021T163758-L-1082250",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
