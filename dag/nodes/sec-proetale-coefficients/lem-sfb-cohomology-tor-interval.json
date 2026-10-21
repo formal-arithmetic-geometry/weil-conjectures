@@ -13,9 +13,82 @@
   "def-weil-abstract-derived-category",
   "det-def-sfb-constructible-tor-amplitude"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the abelian category $\\mathcal A=\\operatorname{Mod}(\\Lambda_X)$ of [def-weil-sheaf-of-modules-category], using the small-site universe convention included there. Choose a complex $C$ representing $K$ under the localization of [def-weil-abstract-derived-category], and put $T_q=Q(\\tau_{\\leq q}C)$. By [lem-weil-pbc-truncation-descends], $H^r(T_q)=H^r(K)$ for $r\\leq q$ and is zero for $r>q$. Thus $0\\to\\tau_{\\leq a-1}C$ is a quasi-isomorphism, since all its cohomology objects vanish, and $\\tau_{\\leq b}C\\to C$ is a quasi-isomorphism, since it induces the identity on $H^r(C)$ for $r\\leq b$ and both sides have zero cohomology for $r>b$. In the localization these give $T_{a-1}\\cong0$ and $T_b\\cong K$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-truncation-descends"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical cochain truncations; derived.tex Tag 05RU (definition-derived-category), inversion of quasi-isomorphisms"
+   }
+  },
+  {
+   "text": "For each $q\\in[a,b]$ set $M_q=H^q(K)$, regarded first in degree zero. The tensor in the tensor-test definition of [det-def-sfb-constructible-tor-amplitude] is the relative derived tensor $\\otimes^{\\mathbf L}_{\\Lambda_X}$ of Layer B of [sk-def-sfb-derived-tensor-hom]: the K-flat derived functor of the relative tensor product of module objects, computed by replacing an argument by a K-flat resolution. Fix a degree-zero $\\Lambda_X$-module $N$ and a K-flat resolution $P\\to N$, and compute both $(M_q[-q])\\otimes^{\\mathbf L}_{\\Lambda_X}N$ and $M_q\\otimes^{\\mathbf L}_{\\Lambda_X}N$ with this same $P$. With the shift convention $(L[1])^r=L^{r+1}$, $d_{L[1]}=-d_L$ of [def-weil-abstract-derived-category], the complex $M_q[-q]$ is $M_q$ placed in degree $q$. So the total tensor complex $M_q[-q]\\otimes_{\\Lambda_X}P$ has degree-$r$ term $M_q\\otimes_{\\Lambda_X}P^{r-q}$ and differential $\\pm(1\\otimes d_P)$. This is the complex $(M_q\\otimes_{\\Lambda_X}P)[-q]$ up to the sign of each differential. Signs change neither kernels nor images, so $H^r\\bigl((M_q[-q])\\otimes^{\\mathbf L}_{\\Lambda_X}N\\bigr)=H^{r-q}(M_q\\otimes^{\\mathbf L}_{\\Lambda_X}N)$ for every integer $q$, negative ones included. Consequently the hypothesis on $M_q$ makes this cohomology zero unless $c\\leq r-q\\leq d$. By the tensor-test definition in [det-def-sfb-constructible-tor-amplitude], $M_q[-q]$ therefore has Tor amplitude in $[q+c,q+d]$.",
+   "uses": [
+    "sk-def-sfb-derived-tensor-hom",
+    "def-weil-abstract-derived-category",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor) and the preceding construction: derived tensor computed on a K-flat resolution of one factor; blueprint Complexes paragraph, shifted cohomology term"
+   }
+  },
+  {
+   "text": "Fix $I=[a+c,b+d]$; it is an ordered interval because $a\\leq b$ and $c\\leq d$. If $a\\leq q\\leq b$, then $a+c\\leq q+c$ and $q+d\\leq b+d$, so $[q+c,q+d]\\subseteq I$. Hence every $M_q[-q]$ above has Tor amplitude in $I$: vanishing outside the smaller interval implies vanishing outside the larger one for each test module, directly by [det-def-sfb-constructible-tor-amplitude]. The zero complex also has amplitude in $I$: computing with a K-flat resolution $P$ of a test module as in [sk-def-sfb-derived-tensor-hom], the relative tensor is additive in each variable, so $0\\otimes_{\\Lambda_X}P=0$ and every cohomology object vanishes. Isomorphism invariance from [det-def-sfb-constructible-tor-amplitude] and $T_{a-1}\\cong0$ give the base case for the truncation tower.",
+   "uses": [
+    "det-def-sfb-constructible-tor-amplitude",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Complexes paragraph: choose a common Tor interval for all the shifted cohomology terms"
+   }
+  },
+  {
+   "text": "Let $L=b-a+1$, a positive integer. Induct on the natural number $m$ from $0$ through $L$ to prove that $T_{a-1+m}$ has Tor amplitude in the fixed interval $I$. The case $m=0$ was proved in the preceding step. If $0\\leq m<L$, put $q=a+m$; then $a\\leq q\\leq b$. The successive-truncation triangle furnished by [lem-weil-pbc-truncation-triangle], applied to $C$, is $T_{q-1}\\to T_q\\to H^q(K)[-q]\\to T_{q-1}[1]$. Its first term has Tor amplitude in $I$ by the induction hypothesis, since $q-1=a-1+m$, and its third term has that same amplitude by the preceding computation. The extension clause in the statement of [det-def-sfb-constructible-tor-amplitude] therefore gives that amplitude for the middle term $T_q=T_{a-1+(m+1)}$. This completes the finite induction. At $m=L$ the index is $a-1+L=b$, so $T_b$ has Tor amplitude in $I$.",
+   "uses": [
+    "lem-weil-pbc-truncation-triangle",
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Complexes paragraph: finite truncation induction, with successive triangles as in Stacks Tag 08J5 (remark-truncation-distinguished-triangle)"
+   }
+  },
+  {
+   "text": "Transport the amplitude of $T_b$ along $T_b\\cong K$ by the isomorphism-invariance clause of [det-def-sfb-constructible-tor-amplitude]. The resulting interval is exactly $[a+c,b+d]$. The argument used only the finite cohomological window and the uniform tensor-test bound on its cohomology modules, so it applies without constructibility, quasi-compactness, or a restriction to any particular admissible coefficient ring.",
+   "uses": [
+    "det-def-sfb-constructible-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Complexes paragraph, conclusion of truncation induction with a general common cohomology Tor interval"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-weil-pbc-truncation-descends",
+  "lem-weil-pbc-truncation-triangle",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+  "place": "Complexes paragraph; finite truncation induction made explicit, with general common interval [c,d], using Stacks 0118, 08J5 and 06YU"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +124,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"DerivedCategory.TStructure.t\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : HasDerivedCategory C] → CategoryTheory.Triangulated.TStructure (DerivedCategory C)\", \"doc\": \"The T-structure on the derived category of an abelian category is defined by two families of objects: $\\\\mathcal{L}_n$ consisting of objects isomorphic to cochain complexes strictly supported in degree\"}\n  {\"name\": \"DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsLE n], (DerivedCategory.Q.obj K).IsLE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the subcategory $ \\\\mathcal{L}_n $ (objects strictly supported in degrees $ \\\\leq n $) of the T-structure, then its image under the localization fun\"}\n  {\"name\": \"DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ) [K.IsGE n], (DerivedCategory.Q.obj K).IsGE n\", \"doc\": \"If a cochain complex $ K $ with integer indices is in the family $ \\\\mathcal{G}_n $ of the T-structure defined by cohomological support, then its image under the localization functor $ Q $ to the deriv\"}\n  {\"name\": \"DerivedCategory.IsGE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, this proposition holds if $ X $ belongs to the family $ \\\\mathcal{G}_n $ of the T-structure defined\"}\n  {\"name\": \"DerivedCategory.isGE_Q_obj_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (K : CochainComplex C ℤ) (n : ℤ), (DerivedCategory.Q.obj K).IsGE n ↔ K.IsGE n\", \"doc\": \"For a cochain complex $ K $ in an abelian category and integer $ n $, the image of $ K $ under the localization functor $ Q $ to the derived category satisfies the cohomological support condition $ \\\\t\"}\n  {\"name\": \"DerivedCategory.isGE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsGE n ↔ ∀ i < n, CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and integer $ n $, $ X $ satisfies the $ \\\\text{IsGE}(n) $ condition (i.e., belongs to the $ \\\\mathcal{G}_n $ family of\"}\n  {\"name\": \"DerivedCategory.IsLE\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] → [inst_2 : HasDerivedCategory C] → DerivedCategory C → ℤ → Prop\", \"doc\": \"This proposition asserts that an object $ X $ in the derived category belongs to the subcategory $ \\\\mathcal{L}_n $, consisting of objects isomorphic to cochain complexes strictly supported in degrees \"}\n  {\"name\": \"DerivedCategory.isLE_iff\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/TStructure\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : HasDerivedCategory C] (X : DerivedCategory C) (n : ℤ),\\n  X.IsLE n ↔ ∀ (i : ℤ), n < i → CategoryTheory.Limits.IsZero ((DerivedCategory.homologyFunctor C i).obj X)\", \"doc\": \"For an object $ X $ in the derived category of an abelian category $ \\\\mathcal{C} $ and an integer $ n $, $ X $ belongs to the left subcategory $ \\\\mathcal{L}_n $ of the T-structure if and only if for e\"}",
    "date": "2026-10-21",
    "verdict": "no match: component scalar algebra, generic homological, sheaf or topological infrastructure does not state this ringed-site assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "torAmplitude|tor_amplitude|TorAmplitude",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply t-structure bounds, shifts, projective Tor vanishing, or module-category limits; none states this uniform Tor bound for cohomology modules in a sheaf derived category"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Uniform finite Tor dimension of cohomology gives a Tor amplitude bound for a bounded complex of sheaves of modules",
+   "results": "8 hits: CategoryTheory.injectiveDimension_ne_top_iff, CategoryTheory.projectiveDimension_ne_top_iff, SheafOfModules.Finite.hasFiniteLimits, CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, SheafOfModules.hasLimitsOfSize, CategoryTheory.instHasProjectiveDimensionLTBiprod, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply t-structure bounds, shifts, projective Tor vanishing, or module-category limits; none states this uniform Tor bound for cohomology modules in a sheaf derived category"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"torAmplitudeIn\", \"homology\"",
+   "results": "0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply t-structure bounds, shifts, projective Tor vanishing, or module-category limits; none states this uniform Tor bound for cohomology modules in a sheaf derived category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex whose cohomology modules have Tor amplitude c through d has Tor amplitude a+c through b+d",
+   "results": "8 hits: DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE, DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE, CochainComplex.isLE_shift, DerivedCategory.IsLE, DerivedCategory.IsGE, DerivedCategory.isGE_Q_obj_iff, CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE, DerivedCategory.isLE_Q_obj_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply t-structure bounds, shifts, projective Tor vanishing, or module-category limits; none states this uniform Tor bound for cohomology modules in a sheaf derived category"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postnikov truncation induction bounds tensor cohomology from the flat dimensions of the cohomology objects",
+   "results": "8 hits: CategoryTheory.isZero_Tor'_succ_of_projective, CategoryTheory.isZero_Tor_succ_of_projective, DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective, CochainComplex.IsKProjective, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CategoryTheory.HasProjectiveDimensionLT.mk, CategoryTheory.HasProjectiveDimensionLT.subsingleton, CochainComplex.isKProjective_of_projective",
+   "date": "2026-10-21",
+   "verdict": "no match: hits supply t-structure bounds, shifts, projective Tor vanishing, or module-category limits; none states this uniform Tor bound for cohomology modules in a sheaf derived category"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-def-localizing-closure-ctf-equals-bc",
@@ -71,5 +179,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-cohomology-tor-interval",
+  "worker": "stage1",
+  "summary": "Kept the statement and its arbitrary commutative condensed coefficients unchanged. Wrote the truncation endpoints, the integer-shift calculation, interval enlargement, a finite induction with its base and step, and final isomorphism transport. Reused existing generic nodes; no new nodes or Mathlib leaves. Searched the project for an exact attachment and searched Mathlib with two semantic phrasings, Loogle and grep; no exact match.",
+  "blueprint": "The Complexes paragraph of det-def-localizing-closure-ctf-equals-bc: truncation triangles and extension stability, generalized from the cohomology Tor bound [-1,0] to [c,d].",
+  "tool_uses": [
+   {
+    "node": "def-weil-abstract-derived-category",
+    "why": "Generic localization and cohomological-shift conventions used for representative complexes, quasi-isomorphisms and integer shifts."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic abelianness of modules over the commutative coefficient sheaf on a small site, to form its ordinary derived category; no geometric theorem is imported."
+   },
+   {
+    "node": "det-def-sfb-constructible-tor-amplitude",
+    "why": "The unit explicitly cites the coefficient-category definitions; this node also states exactly the extension and isomorphism stability used by its Complexes paragraph."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-descends",
+    "why": "Generic cohomology formula for good truncations in any abelian category; supplies the zero lower endpoint and the upper endpoint quasi-isomorphism."
+   },
+   {
+    "node": "lem-weil-pbc-truncation-triangle",
+    "why": "Generic successive-truncation distinguished triangle for any abelian category; the localizing-closure unit has no separate truncation-triangle statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-abstract-derived-category",
+  "def-weil-sheaf-of-modules-category",
+  "det-def-sfb-constructible-tor-amplitude",
+  "lem-weil-pbc-truncation-descends",
+  "lem-weil-pbc-truncation-triangle"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q01-99295d841",
+  "group": "Q01",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-99295d841 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps in full. Blueprint main-20261015 ctf-equals-bc Complexes paragraph (the item is its general-[c,d] version, same truncation and extension route). Stacks 0118, 08J5 (derived.tex:4076) and 06YU (sites-cohomology.tex:3300), checked against tags/tags. Not on the drop list, no repair note, still unsplit on live with the same statement. No new nodes, statement unchanged and true (checked K=0, a=b, a flat module in negative degree, a=2,b=3,[c,d]=[-1,0]). Steps 1, 4 and 5 are correct: the truncation-descends cohomology formula gives T_{a-1}≅0 and T_b≅K; the induction m=0..b-a+1 is set up with base and step; the extension clause needs the same interval, which the fixed I gives. One fault, C4/E6: steps 2-3 took shift compatibility and zero-preservation from the exactness sentence of off-unit lem-weil-pbc-ringed-projection-mate-exact. That node's tensor is the sectionwise ringed-site K-flat tensor, while det-def-sfb-constructible-tor-amplitude tests with the Layer-B relative derived tensor of internal module objects (sk-def-sfb-derived-tensor-hom). No node identifies the two. FIX: step 2 now cites sk-def-sfb-derived-tensor-hom and computes with a K-flat resolution P→N. The degree-r term of Tot(M[-q]⊗P) is M⊗P^{r-q}, which is (M⊗P)[-q] up to the sign of each differential, so H^r=H^{r-q} for every integer q. Step 3 gets zero-preservation from additivity, 0⊗P=0. proof_deps recomputed; ringed-projection-mate-exact and def-weil-triangulated-category removed from steps and tool_uses. Remaining tool uses accepted (generic truncation lemmas and notion nodes). No duplicates: lem-sf-source-tensor-cohomology-interval is the converse-type K⊗N cohomology bound. No SGA.; 1 file(s) fixed by the reviewer"
  }
 }
