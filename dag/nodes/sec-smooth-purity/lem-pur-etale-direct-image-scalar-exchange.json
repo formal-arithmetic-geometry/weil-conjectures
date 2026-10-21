@@ -21,11 +21,10 @@
  ],
  "proof": [
   {
-   "text": "Put $P_{u,R}=u_R^*$ and $F_{u,R}=Ru_{*,R}$, and write $\\theta_R:P_{f',R}P_{g,R}\\cong P_{h,R}P_{f,R}$ for the specified square comparison in [def-kun-unbounded-exchange]. The constant-ring identifications of [prop-weil-pbc-inverse-image-modules-exact] identify this situation with inverse images of ring sheaves in [lem-sfb-kflat-scalar-comparison-normalization]. That lemma identifies the canonical K-flat balancing comparison $\\lambda_u$ with the inverse of its scalar-adjunction mate and asserts its compatibility with composition. The tool writes scalar extension as $B\\otimes_A^{\\mathbf L}(-)$; the canonical switch $b\\otimes p\\mapsto p\\otimes b$ identifies this with $Q$. Since $b$ has degree zero, the switch introduces no sign and commutes with each inverse image and compositor. Invert its composition formula: for $v:V\\to W$, $u:W\\to T$, it gives $\\lambda_{uv}=(\\lambda_v P_{u,A})\\circ(P_{v,B}\\lambda_u)$ under the canonical inverse-image compositors. Apply this once to $fh$ and once to $gf'$. Since $fh=gf'$, both composites equal the same $\\lambda_{fh}$, with the compositors defining $\\theta_R$ inserted. Hence for every $N\\in D_A(Y)$,\n$$\\lambda_{h,P_{f,A}N}\\circ P_{h,B}(\\lambda_{f,N})\\circ\\theta_{B,Q_YN}\n=Q_{X'}(\\theta_{A,N})\\circ\\lambda_{f',P_{g,A}N}\\circ P_{f',B}(\\lambda_{g,N}).\\tag{*}$$\nBoth sides go from $P_{f',B}P_{g,B}Q_YN$ to $Q_{X'}P_{h,A}P_{f,A}N$. Thus this is the equality for the specified tensor comparisons and square, including coefficient actions.",
+   "text": "Apply the existing small-etale normalized composition law [lem-sf-scalar-pullback-composition] to the two paths h followed by f and f' followed by g, with common composite h ≫ f = f' ≫ g. These laws already use scalarPullbackIso transported to exact inverse image, namely properOpenCoefficientPullbackIso, so no general ringed-module inverse-image construction or tensor switch is required. Write c_h,R and c_g,R for their exact derived composition comparisons. By definition [def-kun-unbounded-exchange], the specified square comparison is c_g,R inverse followed by c_h,R: expand squareUpperStarIso and mapDerivedCategoryNatIso on composition and inverses. Precompose the desired cube with c_g,B, cancel its inverse, use the two composition laws, and cancel c_g,A after scalar extension. This gives, for every N, theta_B(QN) followed by h_B*(lambda_f,N) followed by lambda_h,f_A*N equals f'_B*(lambda_g,N) followed by lambda_f',g_A*N followed by Q(theta_A,N), exactly with the square comparison defining the exchange.",
    "uses": [
     "def-kun-unbounded-exchange",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-sfb-kflat-scalar-comparison-normalization"
+    "lem-sf-scalar-pullback-composition"
    ],
    "elementary": false,
    "source": {
@@ -85,15 +84,14 @@
  ],
  "proof_deps": [
   "def-kun-unbounded-exchange",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sf-scalar-pullback-composition",
   "def-kun-projection-formula-map",
   "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0E47, remark-compose-base-change-horizontal, with Tag 07A7, remark-base-change; explicit counit verification omitted by the source; Step 1 uses the existing normalized composition lemma and Steps 2–5 supply the omitted calculation"
+  "place": "Tag 0E47, remark-compose-base-change-horizontal, with Tag 07A7, remark-base-change; explicit counit verification omitted by the source. Step 1 uses the existing small-etale scalarPullback_composition twice; Steps 2–5 are the direct counit/naturality calculation, transporting the scalar-mate counit along leftDerivedUpperStarIsoMapDerivedCategory using mapDerivedUpperStarLowerStarAdjunction_eq."
  },
  "mathlib_searches": [
   {
@@ -201,9 +199,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-sfb-kflat-scalar-comparison-normalization"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -231,5 +227,15 @@
   "group": "Q31",
   "result": "fix",
   "note": "Statement matches node clause by clause: scalarMate = mateEquiv of scalarPullbackIso under derivedUpperStarLowerStarAdjunction (node chi); properOpenCoefficientPullbackIso = exactness transport of scalarPullbackIso, direction u_B^*Q_T -> Q_W u_A^* (node lambda); exactDerivedBaseChangeMap on sq.toCommSq with CommSq h f' f g (g'=h); both composites in node order; no extra hypotheses; edge cases A=B, identity square, M=0, empty schemes, zero ring, Z/4->Z/2 covered; Steps 1-5 re-derived. Only the item changed vs live (lean, stmt_deps + 2 landed def nodes). FIX (H9/H10 mechanical): dropped unused plain imports Sheaf.Paper.KFlatScalarComparisonNormalization (no published olean, 60 s per-file timeout) and Mathlib.CategoryTheory.Adjunction.Mates; fixes/EtaleDirectImageScalarExchange.lean compiles clean in 31.3 s via nt_compile --json, signature unchanged. Advisories: scalarMate owner def-pur-etale-scalar-mate not in stmt_deps (S2 cannot add); report's proof-only-imports paragraph now stale."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D6",
+  "result": "pass",
+  "landing": "20261021T130000-L-2477198",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
