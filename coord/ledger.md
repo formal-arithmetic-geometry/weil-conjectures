@@ -22332,3 +22332,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:59 L: returned deliver/Q71/lem-sfb-continuous-algcl-stratified-finite-models (reviewer RETURN: (the landing tools, head 014fddc25) the delivery did not land: (merge queue) your landing 20261021T112402-Q71-771501-312)
 - 11:59 L: returned deliver/O3/lem-pur-normalized-scalar-comparison-realization (reviewer RETURN: (the landing tools, head 27f02cd4d) the delivery did not land: (merge queue) your landing 20261021T114130-O3-1991680-317)
 - 11:59 L: returned deliver/NS/lem-sfb-cohomology-tor-interval (reviewer RETURN: A7/B10: the item is still finished on live, so this re-split is superseded. In clones/side-live the item has status spli)
+- 12:01 L: returned deliver/O4/lem-pe-profinite-sections-finite-quotient (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-profinite-sections-finite-quotient: lem-pe-prof)
