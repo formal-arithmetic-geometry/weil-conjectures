@@ -12,9 +12,81 @@
   "def-weil-abstract-derived-category",
   "pur9-def-thick"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathcal S=D^b_{\\mathcal B}(\\mathcal A)$. By [def-weil-pbc-bounded-derived-subcategories], membership in $D^b(\\mathcal A)$ means that only finitely many $H^n$ are nonzero. A finite subset of $\\mathbf Z$ is contained in an integer interval (use $[0,0]$ for the empty subset). Thus $\\mathcal S=D_{\\mathcal B}(\\mathcal A)\\cap D^b(\\mathcal A)$, with $D_{\\mathcal B}$ the full subcategory defined by the cohomology condition alone.",
+   "uses": [
+    "def-weil-pbc-bounded-derived-subcategories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory, including bounded versions; explicit kernel-universal-property expansion of its direct-summand argument."
+   }
+  },
+  {
+   "text": "Apply [lem-sbc-cohomology-in-weak-serre-subcategory] to the given $\\mathcal A$ and $\\mathcal B$: its hypotheses are precisely strict fullness, zero, kernels and cokernels between objects of $\\mathcal B$, and extensions, all assumed here. Its bounded-intersection clause makes $\\mathcal S$ a full triangulated subcategory with the inherited shifts and triangles. The unbounded cohomology-condition category is strictly full by that same statement, and $D^b(\\mathcal A)$ is strictly full by [def-weil-pbc-bounded-derived-subcategories], so their intersection is strictly full. Consequently $\\mathcal S$ contains zero and is closed under isomorphisms, all integer shifts, and two-out-of-three in distinguished triangles (rotate a triangle to put the unknown vertex in the middle, using shift closure); the inherited triangulated structure is that of [def-weil-triangulated-subcategory].",
+   "uses": [
+    "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "def-weil-pbc-bounded-derived-subcategories",
+    "def-weil-triangulated-subcategory"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory, including bounded versions; explicit kernel-universal-property expansion of its direct-summand argument."
+   }
+  },
+  {
+   "text": "For an arbitrary ambient retract $L\\xrightarrow{i}K\\xrightarrow{r}L$, $ri=1_L$, fix $n$ and write $N=H^n(L)$, $M=H^n(K)$, $I=H^n(i)$ and $R=H^n(r)$. Functoriality in [def-weil-abstract-derived-category] gives $RI=1_N$. Work in the abelian category [def-sp-abelian], whose bilinear composition and subtraction are as in [def-weil-preadditive-category]. Set $q=1_M-IR$. Then $qI=I-I(RI)=0$. For any object $T$ and morphism $u:T\\to M$ with $qu=0$, one has $u=IRu=I(Ru)$; this factorization through $I$ is unique because $Iv=u$ implies $v=RIv=Ru$. This is exactly the kernel universal property, so $I$ identifies $N$ with $\\ker(1_M-IR)$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-sp-abelian",
+    "def-weil-preadditive-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory, including bounded versions; explicit kernel-universal-property expansion of its direct-summand argument."
+   }
+  },
+  {
+   "text": "If $K\\in\\mathcal S$, then $M=H^n(K)\\in\\mathcal B$. The map $q$ in the preceding step is an endomorphism of $M$; since $\\mathcal B$ is full, it is a morphism between objects of $\\mathcal B$. The assumed kernel closure puts $\\ker q$ in $\\mathcal B$, and strict fullness together with the displayed kernel identification puts $H^n(L)$ in $\\mathcal B$. If $H^n(K)=0$, both $I:N\\to M$ and $R:M\\to N$ factor through zero, hence $1_N=RI=0$. In an abelian category [def-sp-abelian] this makes $N$ a zero object: every map into or out of $N$ equals its composition with $1_N=0$ and so is the unique zero map. Thus any interval $[a,b]$ outside which the cohomology of $K$ vanishes also bounds that of $L$. This proves $L\\in\\mathcal S$ for every ambient retract and proves the sharper bound assertion.",
+   "uses": [
+    "def-sp-abelian"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory, including bounded versions; explicit kernel-universal-property expansion of its direct-summand argument."
+   }
+  },
+  {
+   "text": "Step 2 gives zero, isomorphism, shift and triangle closure, and steps 3-4 give all ambient retracts, in particular direct summands. These are the conditions of [pur9-def-thick], so $D^b_{\\mathcal B}(\\mathcal A)$ is thick. Step 3 is the asserted cohomological kernel formula, and step 4 shows that the same interval bound works for every retract.",
+   "uses": [
+    "pur9-def-thick"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory, including bounded versions; explicit kernel-universal-property expansion of its direct-summand argument."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-sbc-cohomology-in-weak-serre-subcategory",
+  "def-weil-triangulated-subcategory",
+  "def-weil-abstract-derived-category",
+  "def-sp-abelian",
+  "def-weil-preadditive-category",
+  "pur9-def-thick"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06UQ, lemma-cohomology-in-serre-subcategory, including bounded versions; explicit kernel-universal-property expansion of its direct-summand argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +129,124 @@
    "date": "2026-10-21",
    "results": "3 hits: Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean; Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean; Mathlib/CategoryTheory/Abelian/SerreClass/MorphismProperty.lean. The derived t-structure and Serre-class results do not give the stated weak-Serre cohomology theorem, including arbitrary ambient retracts. The first grep was in Algebra/Homology/DerivedCategory; the second was over all Mathlib.",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(weakSerre|WeakSerre|homologyProperty).*(Thick|Retract)|(Thick|Retract).*(weakSerre|homologyProperty)",
+   "date": "2026-10-21",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "verdict": "no match: generic derived t-structure or stronger Serre-class APIs do not give the complete weak-Serre bounded-thick theorem, its kernel identification and preservation of each interval"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A weak Serre subcategory gives a thick subcategory of bounded cohomology objects in a derived category",
+   "date": "2026-10-21",
+   "results": {
+    "hits": 8,
+    "top": [
+     "CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderSubobjects",
+     "HasDerivedCategory.standard",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "CategoryTheory.ObjectProperty.IsSerreClass.toIsClosedUnderExtensions",
+     "CategoryTheory.ObjectProperty.IsSerreClass.rec",
+     "CategoryTheory.ObjectProperty.IsSerreClass.casesOn",
+     "CategoryTheory.ObjectProperty.IsSerreClass",
+     "CategoryTheory.ObjectProperty.IsSerreClass.recOn"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "verdict": "no match: generic derived t-structure or stronger Serre-class APIs do not give the complete weak-Serre bounded-thick theorem, its kernel identification and preservation of each interval"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.homologyFunctor, CategoryTheory.Retract",
+   "date": "2026-10-21",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "verdict": "no match: generic derived t-structure or stronger Serre-class APIs do not give the complete weak-Serre bounded-thick theorem, its kernel identification and preservation of each interval"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Bounded objects in the derived category with cohomology in a weak Serre class form a thick subcategory closed under retracts",
+   "date": "2026-10-21",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.IsLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.instIsGEObjSingleFunctor",
+     "DerivedCategory.instIsLEObjSingleFunctor"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "verdict": "no match: generic derived t-structure or stronger Serre-class APIs do not give the complete weak-Serre bounded-thick theorem, its kernel identification and preservation of each interval"
+  },
+  {
+   "tool": "grep",
+   "query": "(IsClosedUnderKernels|IsClosedUnderCokernels).*(IsStableUnderRetracts)|(IsStableUnderRetracts).*(IsClosedUnderKernels|IsClosedUnderCokernels)",
+   "date": "2026-10-21",
+   "results": {
+    "hits": 0,
+    "top": [],
+    "note": "",
+    "subdirectory": ""
+   },
+   "verdict": "no match: generic derived t-structure or stronger Serre-class APIs do not give the complete weak-Serre bounded-thick theorem, its kernel identification and preservation of each interval"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology bounded in a fixed interval and belonging to a kernel cokernel extension closed class is stable under split idempotents in the derived category",
+   "date": "2026-10-21",
+   "results": {
+    "hits": 8,
+    "top": [
+     "DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE",
+     "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE",
+     "DerivedCategory.IsGE",
+     "DerivedCategory.IsLE",
+     "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE",
+     "DerivedCategory.TStructure.t",
+     "DerivedCategory.isGE_Q_obj_iff",
+     "DerivedCategory.isLE_Q_obj_iff"
+    ],
+    "note": "",
+    "subdirectory": ""
+   },
+   "verdict": "no match: generic derived t-structure or stronger Serre-class APIs do not give the complete weak-Serre bounded-thick theorem, its kernel identification and preservation of each interval"
+  },
+  {
+   "tool": "grep",
+   "query": "class IsSerreClass|IsClosedUnderSubobjects|IsClosedUnderQuotients",
+   "date": "2026-10-21",
+   "results": {
+    "hits": 2,
+    "top": [
+     "Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean",
+     "Mathlib/CategoryTheory/Abelian/SerreClass/Basic.lean"
+    ],
+    "note": "",
+    "subdirectory": "CategoryTheory/Abelian/SerreClass"
+   },
+   "verdict": "no match: IsSerreClass assumes arbitrary subobject and quotient closure, stronger than the weak-Serre hypotheses here"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-brown-hypotheses-small",
@@ -78,5 +264,29 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-weak-serre-bounded-thick",
+  "worker": "stage1",
+  "summary": "Reused the existing generic weak-Serre triangulated and bounded-intersection theorem. Proved arbitrary ambient retract closure by the explicit kernel universal property for H^n(i), and proved preservation of the identical interval by RI=1. Preserved the statement and all maintainer fields. No new nodes or Mathlib leaves.",
+  "blueprint": "Realizes the Thick paragraph of det-brown-hypotheses-small: bounded constructible cohomology is stable under shifts, cones and direct summands; the abstract weak-Serre instance is the triangulated part and the kernel calculation supplies arbitrary ambient retracts.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-cohomology-in-weak-serre-subcategory",
+    "why": "Generic cohomological triangulated-closure theorem, including the bounded intersection, used as a black box within the Brown unit Thick paragraph; it does not assert ambient retract closure or its kernel formula. No theorem in this unit supplies this general weak-Serre argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-cohomology-in-weak-serre-subcategory"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q62-79c052150",
+  "group": "Q62",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-79c052150 (reviewer sub-agent of L); spot-checked: I read the whole item: statement byte-identical to base, five steps, no new nodes. It is not in a dropped list and there is no re-split repair note. Step 1: the finite-interval condition matches def-weil-pbc-bounded-derived-subcategories (only finitely many nonzero H^n), so S = D_B ∩ D^b. Step 2: the hypotheses of lem-sbc-cohomology-in-weak-serre-subcategory match the item's word for word (strictly full, zero, kernels and cokernels, extensions), and its D^b-intersection clause makes S triangulated. Strict fullness of D_B and of D^b supplies the closure under isomorphism that def-weil-triangulated-subcategory only gives up to iso; rotation plus shift closure gives every vertex. Checked against Stacks derived.tex:5935-5960 (Tag 06UQ, bounded versions, direct-summand argument) and homology.tex:2149 (Tag 0754). Step 3: q = 1 − IR, qI = 0, u = I(Ru), uniqueness from v = RIv; this is the full kernel universal property. Tested L = K, L = 0 and a split projection. Step 4: q is an endomorphism of M ∈ B, so kernel closure and strict fullness give H^n(L) ∈ B; M = 0 forces 1_N = 0, so the same interval bounds L. Step 5 matches pur9-def-thick (summands are retracts). The declared tool use of lem-sbc-cohomology-in-weak-serre-subcategory, a generic theorem from another unit with empty proof_deps and no cycle, is accepted. No duplicate found in the DAG (the det-pe and fp-local-models Serre nodes are specific abelian-level facts). The statement gives what the Thick step of det-brown-hypotheses-small needs. No SGA source. No changes."
+ }
 }
