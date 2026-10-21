@@ -1,8 +1,8 @@
 # Work queue
 
-153 items; claim with `tools/claim.py next <group> [--stage N]`.
+151 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (12 clusters, 711 modules)
+## Rework: quarantined by the upstream sync (11 clusters, 711 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -11,7 +11,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.FiniteCoefficientDirectImage` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ClosedSupportConstructible` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -43,13 +42,13 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-polynomial-derived-bar-comparison` | 4013 | none |
 | `lem-sfb-profinite-algcl-derived-invariants-comparison` | 4013 | none |
 | `lem-sfb-rational-polynomial-bar-contraction` | 4013 | none |
-| `lem-sfb-snc-tame-root-etale-extension` | 4013 | none |
 | `lem-sfb-wcontractible-component-derived-hom` | 4013 | none |
+| `lem-sfb-integral-closure-ind-etale-base-change` | 4014 | none |
 | `lem-sfb-acyclic-hypercover-pullback-normalization` | 4015 | none |
 | `lem-sfb-filtered-colimit-strictly-henselian-local` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (51)
+## Stage 2: nodes to state (50)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -81,13 +80,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-indfinite-contractible-base-wstrict` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-lattice-cubical-contraction` | 1 | state | 0 |
-| `lem-sfb-lattice-supported-hom-finite-comparison` | 1 | state | 0 |
 | `lem-sfb-lattice-supported-hom-reduction-tower` | 1 | state | 0 |
 | `lem-sfb-norm-algcl-cohomology-topology-comparison` | 1 | state | 0 |
 | `lem-sfb-prime-to-ell-derived-invariants-reduction` | 1 | state | 0 |
 | `lem-sfb-root-tower-coordinate-face` | 1 | state | 0 |
-| `lem-sfb-root-tower-puncture-invariance` | 1 | state | 0 |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 1 | state | 0 |
+| `lem-sfb-snc-tame-root-etale-extension` | 1 | state | 0 |
 | `lem-sfb-tame-root-tower-extension` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sfb-wstrict-lisse-component-cohomology` | 1 | state | 0 |
