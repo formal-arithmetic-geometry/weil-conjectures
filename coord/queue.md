@@ -1,6 +1,6 @@
 # Work queue
 
-200 items; claim with `tools/claim.py next <group> [--stage N]`.
+198 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (22 clusters, 955 modules)
 
@@ -17,10 +17,10 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.IntegralConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FormalClosedSupport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionEquation` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Paper.ExtensionZeroStratifiedPerfect` | 1 |  | error: Sheaf/Paper/ExtensionZeroStratifiedPerfect.lean:87:9: Unknown identifier `LocallyClosedStratification` |
 | `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCorePre` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -44,15 +44,15 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-root-tower-boundary-acyclicity` | 4011 | none |
 | `lem-sfb-supported-finite-stage-topology-defect` | 4011 | none |
 | `lem-sfb-cech-localization-unit-totalization` | 4012 | none |
-| `lem-sfb-condensed-product-bar-comparison` | 4012 | none |
 | `lem-sfb-root-tower-inner-support` | 4012 | none |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 4012 | none |
 | `lem-sfb-snc-universal-residual-charts` | 4012 | none |
+| `lem-sfb-bicosimplicial-shuffle-totalization` | 4013 | none |
 | `lem-sfb-snc-root-limit-normal-charts` | 4013 | none |
 | `lem-pe-internal-module-sectionwise-short-exact` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (25)
+## Stage 2: nodes to state (26)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -70,6 +70,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-complete-group-torsor-monodromy` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
 | `lem-sfb-condensed-internal-bar-resolution` | 1 | state | 0 |
+| `lem-sfb-condensed-product-bar-comparison` | 1 | state | 0 |
 | `lem-sfb-derived-cech-image-totalization` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
@@ -84,7 +85,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 375 nodes that below a finished node, not needed, 107 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (132)
+## Stage 3: modules to prove (129)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -164,7 +165,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.RingedSignedBidualLocalization` | - | 1 | proof | 7 |
 | `Sheaf.Paper.CompletedFiniteExchangeCoordinates` | - | 2 | proof | 7 |
 | `Sheaf.Paper.CompletedStrictOpenExchange` | - | 7 | proof | 7 |
-| `Sheaf.Paper.ConstantCoefficientScalarNormalization` | - | 2 | proof | 7 |
 | `Sheaf.Paper.DerivedFiniteQuotientCoherence` | - | 1 | proof | 7 |
 | `Sheaf.Paper.DerivedPullbackTensorHom` | - | 12 | proof | 7 |
 | `Sheaf.Paper.FiniteCoefficientPoint` | - | 9 | proof | 7 |
@@ -172,8 +172,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.SixFunctors.FrobeniusPointTransport` | - | 3 | proof | 7 |
 | `Sheaf.Paper.IntegralOperationsWellDefined` | 11 | 2 | proof | 8 |
 | `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus` | - | 11 | proof | 8 |
-| `Sheaf.Paper.ConstantScalarStrictUnit` | - | 1 | proof | 8 |
-| `Sheaf.Paper.ConstantScalarUnitQuasiIsomorphism` | - | 1 | proof | 8 |
 | `Sheaf.Paper.IntegralComparisonSequenceSystems` | - | 7 | proof | 8 |
 | `Sheaf.Paper.IntegralOperationsScalarComparisons` | - | 13 | proof | 8 |
 | `Sheaf.Paper.IntegralPullbackComparisonRealization` | - | 1 | proof | 8 |
