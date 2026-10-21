@@ -18,11 +18,12 @@
  ],
  "proof": [
   {
-   "text": "Assume $K_1=0$. Induct on $n\\ge1$. The base is the assumption. If $K_n=0$, the triangle $K_1\\to K_{n+1}\\to K_n\\to$ of [det-pe-derived-nakayama-resolution] maps to the distinguished zero triangle [def-weil-triangulated-category]. Its outer maps are isomorphisms, so [lem-sf-triangle-morphism-iso] makes its middle map an isomorphism: $K_{n+1}=0$.",
+   "text": "Compare the canonical integral-level reduction with the tensor reduction of det-pe-derived-nakayama-resolution: on a complex representative both are isomorphic to the same scalar cone, by lem-pe-principal-reduction-cone-calculus and the resolution theorem. The scalar endomorphisms agree by evaluation on every profinite section. If K_1 is zero, its restriction is zero. Transport through the comparison and induct on n using the successive coefficient triangle K_1 -> K_(n+1) -> K_n ->. Mathlib Triangle.isZero₂_of_isZero₁₃ gives the induction step.",
    "uses": [
     "det-pe-derived-nakayama-resolution",
-    "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso"
+    "lem-pe-principal-reduction-cone-calculus",
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category"
    ],
    "elementary": false,
    "source": {
@@ -31,13 +32,11 @@
    }
   },
   {
-   "text": "The product of these zero objects exists by [det-pe-products-derived] and is zero: the universal property [def-weil-category-product] gives a unique map into it from every object, and in an additive category a terminal object is zero. The Roos triangle [def-weil-derived-limit] thus has both product terms zero. Comparing with the zero triangle [def-weil-triangulated-category], [lem-sf-triangle-morphism-iso] makes $R\\varprojlim_nK_n$ zero. Completeness [sk-def-pe-derived-completion] then gives $K=0$.",
+   "text": "All integral levels are zero by step 1. The discrete diagram is therefore a zero object in the functor category. Its zero cone is limiting by IsLimit.ofIsZero, giving the required product without a general product-existence theorem. Its chosen limit is zero by IsLimit.isZero_pt. On the K-flat representative supplied by completeness, sk-def-pe-derived-completion gives roos_isDerivedLimit. Both product vertices of that distinguished triangle are zero, so Triangle.isZero₁_of_isZero₂₃ makes the Roos object zero. The specified completion map is invertible by the definition of completeness, hence K is zero. Finally each actual finite-coefficient reduction of K is zero since it is a left adjoint and preserves zero morphisms.",
    "uses": [
-    "det-pe-products-derived",
     "def-weil-category-product",
     "def-weil-derived-limit",
     "def-weil-triangulated-category",
-    "lem-sf-triangle-morphism-iso",
     "sk-def-pe-derived-completion"
    ],
    "elementary": false,
@@ -60,7 +59,7 @@
    }
   },
   {
-   "text": "Let $f:K\\to L$ have complete source and target and invertible first reduction. Complete it to a distinguished triangle with cone $C$ [def-weil-triangulated-category]. Step 3 makes $C$ complete. Exactness of the first reduction [lem-pe-principal-reduction-cone-calculus] makes $C_1$ a cone of $f_1$, hence zero by [lem-kun-distinguished-cone-zero]. Steps 1–2 give $C=0$. The same zero-cone criterion applied to the original triangle shows that $f$ is an isomorphism.",
+   "text": "Complete f to a distinguished triangle T with cone C. Step 3 makes C complete. The first integral reduction has the exact shift structure supplied by lem-pe-principal-reduction-cone-calculus, so its image of T is distinguished. The reduced f is invertible because restriction preserves isomorphisms. The zero-cone criterion gives zero first integral reduction of C. Steps 1-2, already formulated for the integral first reduction, give C=0. The same zero-cone criterion on T then gives IsIso f.",
    "uses": [
     "def-weil-triangulated-category",
     "lem-pe-principal-reduction-cone-calculus",
@@ -75,20 +74,20 @@
  ],
  "proof_deps": [
   "det-pe-derived-nakayama-resolution",
+  "lem-pe-principal-reduction-cone-calculus",
+  "def-weil-abstract-derived-category",
   "def-weil-triangulated-category",
-  "lem-sf-triangle-morphism-iso",
-  "det-pe-products-derived",
   "def-weil-category-product",
   "def-weil-derived-limit",
   "sk-def-pe-derived-completion",
   "lem-pe-completion-triangle-comparison",
-  "lem-pe-principal-reduction-cone-calculus",
+  "lem-sf-triangle-morphism-iso",
   "lem-kun-distinguished-cone-zero"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
-  "place": "Vanishing, Cones and Isomorphisms; short assembly using three extracted strict-model lemmas"
+  "place": "Vanishing, Cones and Isomorphisms; Lean assembly using scalar-cone comparison, the zero diagram product, canonical completion triangle maps, and Mathlib zero-cone criteria"
  },
  "mathlib_searches": [
   {
@@ -182,9 +181,7 @@
    }
   ]
  },
- "tool_uses": [
-  "det-pe-products-derived"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -211,5 +208,15 @@
   "by": "N4",
   "date": "2026-10-18",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R4",
+  "result": "pass",
+  "landing": "20261021T151153-L-1165057",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
