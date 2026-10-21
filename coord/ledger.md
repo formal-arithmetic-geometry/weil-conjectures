@@ -19771,3 +19771,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:22 L: returned deliver/Q23/lem-sfb-dc-lower-star-preserves (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:22 L: returned deliver/Q24/lem-sfb-dc-open-lower-shriek-preserves (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:22 L: returned deliver/N5/lem-sfb-etale-proetale-scalar-mate (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
+- 03:22 L: returned deliver/Q54/lem-sfb-finite-field-internal-hom-finiteness (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
