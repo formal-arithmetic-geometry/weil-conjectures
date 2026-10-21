@@ -22241,3 +22241,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:13 L: merged deliver/N0/lem-weil-pbc-flat-scalar-tower-exchange (stage 2; reviewer PASS; parallel immutable checks)
 - 11:13 L: merged deliver/K9/Sheaf.Algebra.Homology.BoundedProjectiveComplexDualPairing (stage 3; reviewer PASS; first push; landing 20261021T111301-L-69781 (interface); batch 20261021T110859; modules 1; new nodes 0; change records: coord/changes/K9-bounded-projective-dual-private-coordinates.md)
 - 11:13 L: merged deliver/K9/Sheaf.CategoryTheory.KInjectiveFiberTriangleComparison (stage 3; reviewer PASS; first push; landing 20261021T111304-L-70373 (proof); batch 20261021T110859; modules 1; new nodes 0)
+- 11:13 L: merged deliver/K9/Sheaf.CategoryTheory.RingedDerivedPullbackLinear (stage 3; reviewer PASS; first push; landing 20261021T111307-L-70902 (proof); batch 20261021T110859; modules 1; new nodes 0)
