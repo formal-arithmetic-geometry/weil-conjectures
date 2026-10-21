@@ -1,0 +1,78 @@
+{
+ "id": "lem-sf-derived-completed-tensor-bilinearity",
+ "kind": "statement",
+ "title": "Bilinearity of derived completed tensor and its rational Hom action",
+ "statement": "Let $\\mathcal S$ be a site small relative to a coefficient universe, $R$ a sheaf of commutative rings, $A$ a commutative ring, and $s:A\\to\\Gamma(\\mathcal S,R)$ a unital homomorphism. Give module-sheaf Hom groups and their unbounded derived category $D(R)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category, def-weil-linear-category] the induced $A$-linear structures. Let $T:D(R)\\times D(R)\\to D(R)$ be the specified derived tensor obtained by localization of signed total sheaf tensor on flat-term K-flat homotopy representatives [def-pc-tensor-complex-sheaves, lem-weil-pbc-site-derived-tensor-descent]. Fix a finite list of global sections of $R$, and let $L:D(R)\\to\\mathcal C$ be its Koszul completion reflector with natural unit $\\eta$, where $\\mathcal C$ is the full subcategory of complete objects [lem-weil-pbc-ringed-koszul-completion-reflector]. Write $B(M,N)=L(T(M,N))$ for $M,N\\in\\mathcal C$.\n\nThe functor $L$ is additive and $A$-linear; each of $T$ and $B$ is additive and $A$-linear separately in both variables. For $p\\in A$, put $S=A[1/p]$ and use raw scalar localization $Q:\\mathcal C\\to\\mathcal C[1/p]$ [def-weil-linear-scalar-localization]. For every $M,M',N,N'\\in\\mathcal C$ there is a unique $S$-bilinear map\n$$\\beta_{M,M',N,N'}:\\operatorname{Hom}_{\\mathcal C[1/p]}(M,M')\\times\\operatorname{Hom}_{\\mathcal C[1/p]}(N,N')\\to\\operatorname{Hom}_{\\mathcal C[1/p]}(B(M,N),B(M',N'))$$\nsatisfying $\\beta(x\\otimes f,y\\otimes g)=xy\\otimes B(f,g)$ for $x,y\\in S$ and integral morphisms $f,g$, writing the scalar factor first. These maps preserve identities and simultaneous composition, hence with object map $B$ define a bifunctor $\\bar B$ on $\\mathcal C[1/p]$. In particular $\\bar B(f/p^r,g/p^t)=B(f,g)/p^{r+t}$, without any torsion-freeness assumption.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+  "place": "first sentence, the coefficient tensor model; base proof Step 7 (wfRationalTensorHom_exists): sheaf and derived bilinearity, reflector linearity, and the localized Hom map; Stacks 06YS (sites-cohomology.tex, lemma-K-flat-resolution), 06YU (definition-derived-tor), 0A0E (algebraization.tex, lemma-derived-completion-koszul); agent-written linearity and localization argument"
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-linear-category",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The K-flat derived tensor bifunctor of sheaves of modules is bilinear over the coefficient ring; composing with the Koszul completion reflector gives a bilinear tensor which extends to localized Hom modules",
+   "results": "8 hits; PresheafOfModules.Monoidal.tensorObj, LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.instMonoidalClosedLightCondMod, PresheafOfModules.Monoidal.tensorObjMap, LightCondensed.instMonoidalCategoryLightCondMod, PresheafOfModules.monoidalCategory, PresheafOfModules.Monoidal.tensorObj_obj, Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary tensor, linear exact derived functors and module base change are ingredients; no hit proves bilinearity of the specified K-flat tensor followed by the Koszul reflector"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Linear\", \"tensor\"",
+   "results": "12 hits; LinearMap.lTensor, LinearMap.rTensor, LinearMap.lTensor_id, LinearMap.rTensor_id, LinearEquiv.lTensor, LinearEquiv.rTensor, LinearEquiv.lTensor_refl, LinearEquiv.rTensor_refl",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary tensor, linear exact derived functors and module base change are ingredients; no hit proves bilinearity of the specified K-flat tensor followed by the Koszul reflector"
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Bb]ilinear|[Bb]ilinear.*derived|completionLinear|rationalTensorHom",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary tensor, linear exact derived functors and module base change are ingredients; no hit proves bilinearity of the specified K-flat tensor followed by the Koszul reflector"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bilinearity of derived completed tensor on module sheaves and unique scalar extension on both localized Hom modules",
+   "results": "8 hits; TensorProduct.mapBilinear, TensorProduct.AlgebraTensorModule.mapBilinear, TensorProduct.map, LinearMap.compBilinForm, LinearMap.BilinForm.tensorDistrib_tmul, TensorProduct.AlgebraTensorModule.homTensorHomMap, Module.FinitePresentation.isLocalizedModule_mapExtendScalars, TensorProduct.mk",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary tensor, linear exact derived functors and module base change are ingredients; no hit proves bilinearity of the specified K-flat tensor followed by the Koszul reflector"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bilinear tensor functor on the derived category computed by flat K-flat resolutions remains linear after reflective completion and has a unique rational morphism action",
+   "results": "8 hits; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinear, DerivedCategory.instLinearHomotopyCategoryIntUpQh, DerivedCategory.instLinearSingleFunctor, DerivedCategory.instLinearShiftFunctorInt, CategoryTheory.Tor', CategoryTheory.Tor",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary tensor, linear exact derived functors and module base change are ingredients; no hit proves bilinearity of the specified K-flat tensor followed by the Koszul reflector"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "def-wf-tensor-product",
+  "date": "2026-10-21",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "def-wf-tensor-product",
+   "place": "first sentence, the coefficient tensor model; base proof Step 7 (wfRationalTensorHom_exists): sheaf and derived bilinearity, reflector linearity, and the localized Hom map",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

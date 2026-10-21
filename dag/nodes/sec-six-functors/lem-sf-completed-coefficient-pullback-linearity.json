@@ -1,0 +1,77 @@
+{
+ "id": "lem-sf-completed-coefficient-pullback-linearity",
+ "kind": "statement",
+ "title": "Scalar compatibility and linearity of completed coefficient automorphism pullback",
+ "statement": "Let $X$ be a scheme and $d=(A,I)$ a Noetherian adic coefficient datum with finite perfect quotients as in [def-weil-pbc-adic-coefficient-datum]. Use its chosen small pro-etale site, $A_X=\\varprojlim_{n\\geq1}(A/I^n)_X$, and the coefficient map $s_X:\\underline A_X\\to A_X$ whose $n$-th projection is the constant quotient map. Let $e:X\\xrightarrow{\\sim}X$ be an automorphism. Write $\\rho_A:\\underline A_X\\to e_*\\underline A_X$ for the map sending every constant section to itself, and $c_A:e^{-1}\\underline A_X\\to\\underline A_X$ for its adjoint [def-weil-proetale-inverse-image]. Let $c_e:e^{-1}A_X\\xrightarrow{\\sim}A_X$ be induced by the canonical inverse-image limit comparison and the analogous maps for $A/I^n$ [lem-weil-proetale-isomorphism-inverse-image]. Write $c_e^\\#:A_X\\to e_*A_X$ for the adjunct of $c_e$.\n\nThe coefficient scalar squares commute:\n$$c_A;s_X=e^{-1}(s_X);c_e,\\qquad s_X;c_e^\\#=\\rho_A;e_*(s_X).$$\nIn particular, if $s_U(b)$ denotes the scalar section induced by $b\\in A$ on a pro-etale object $U$, the sectionwise adjoint equation is $(c_e^\\#)_U(s_U(b))=s_{u_e(U)}(b)$, where $u_e$ is base change along $e$. Give module Hom groups the $A$-action through these sections [def-weil-linear-category]. The module direct image with ring action via $c_e^\\#$, its specified left adjoint $e^*$ [lem-weil-pbc-ringed-topoi-module-adjunction], and their exact induced derived functors are additive and $A$-linear. For any finite tuple generating $I$, the full subcategory of intrinsically complete objects [def-weil-pbc-intrinsic-completion] is preserved by ordinary derived pullback, and its restriction $H_{\\mathrm{comp}}$ is additive and $A$-linear: $H_{\\mathrm{comp}}(bf)=bH_{\\mathrm{comp}}(f)$ and $H_{\\mathrm{comp}}(f+g)=H_{\\mathrm{comp}}(f)+H_{\\mathrm{comp}}(g)$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+  "place": "second sentence, coefficient transport for tensor Frobenius; base proof Step 9 (wfCompletePullback_linear): actual quotient projections, adjunct scalar equation, and complete pullback linearity; Stacks 09A5 (proetale.tex, section-morphism), 0H7J (sites.tex, example-constant-sheaf), 03D7 (sites-modules.tex, lemma-adjoint-pullback-pushforward-modules); agent-written completed scalar-square argument"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-linear-category",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "def-weil-pbc-intrinsic-completion"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The pullback functor of module sheaves along a scheme automorphism with the inverse limit adic coefficient isomorphism is additive and linear over the constant coefficient ring",
+   "results": "8 hits; AlgebraicGeometry.Scheme.Modules.instAdditivePullback, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso, SheafOfModules.freeFunctorCompPullbackIso, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, AlgebraicGeometry.Scheme.Modules.pullbackId, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: module pullback additivity, ordinary module scalar formulas and adic-completion evaluations do not establish the completed sheaf scalar square or its adjoint section equation"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"Linear\"",
+   "results": "1 hits; SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatObjFunctorIsSheafPresheafOfModulesForgetEvaluationForgetLinearMapIdCarrierSections",
+   "date": "2026-10-21",
+   "verdict": "no match: module pullback additivity, ordinary module scalar formulas and adic-completion evaluations do not establish the completed sheaf scalar square or its adjoint section equation"
+  },
+  {
+   "tool": "grep",
+   "query": "pullback.*[Ll]inear|[Ll]inear.*pullback|completedScalar",
+   "results": "12 hits; Mathlib/Geometry/Manifold/VectorField/Pullback.lean, Mathlib/Topology/Algebra/Module/ModuleTopology.lean, Mathlib/Topology/VectorBundle/Constructions.lean, Mathlib/Topology/VectorBundle/Constructions.lean, Mathlib/Analysis/Normed/Module/Alternating/Basic.lean, Mathlib/Analysis/InnerProductSpace/TwoDim.lean, Mathlib/Analysis/Calculus/FDeriv/ContinuousAlternatingMap.lean, Mathlib/Analysis/Calculus/FDeriv/ContinuousAlternatingMap.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: module pullback additivity, ordinary module scalar formulas and adic-completion evaluations do not establish the completed sheaf scalar square or its adjoint section equation"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite quotient constant sheaf inverse image maps preserve scalars, so completed coefficient derived pullback and its restriction to complete objects are linear",
+   "results": "8 hits; PresheafOfModules.restrictScalarsObj, PresheafOfModules.Sheafify.map_smul_eq, CategoryTheory.Functor.sheafPullbackConstruction.preservesFiniteLimits, PresheafOfModules.map_smul, CategoryTheory.Functor.sheafPullbackConstruction.instPreservesFiniteLimitsSheafSheafPullback, LocallyConstant.comapₗ, PresheafOfModules.pullback, PresheafOfModules.restrictScalars",
+   "date": "2026-10-21",
+   "verdict": "no match: module pullback additivity, ordinary module scalar formulas and adic-completion evaluations do not establish the completed sheaf scalar square or its adjoint section equation"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adic scalar maps commute with a ringed topos automorphism on every quotient projection; the adjoint module pullback is linear over the original ring",
+   "results": "8 hits; AdicCompletion.val_smul_eq_evalₐ_smul, AdicCompletion.transitionMap_comp_reduceModIdeal, AdicCompletion.transitionMap, AdicCompletion.smul_eval, AdicCompletion.mk_smul_mk, AdicCompletion.smul_mk, AdicCompletion.map_val_apply, AdicCompletion.mk_smul_top_ofAlgEquiv_symm",
+   "date": "2026-10-21",
+   "verdict": "no match: module pullback additivity, ordinary module scalar formulas and adic-completion evaluations do not establish the completed sheaf scalar square or its adjoint section equation"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "def-wf-tensor-product",
+  "date": "2026-10-21",
+  "group": "Q20"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "def-wf-tensor-product",
+   "place": "second sentence, coefficient transport for tensor Frobenius; base proof Step 9 (wfCompletePullback_linear): actual quotient projections, adjunct scalar equation, and complete pullback linearity",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}
