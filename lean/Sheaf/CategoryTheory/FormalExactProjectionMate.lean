@@ -54,6 +54,9 @@ def formalProjectionAlpha (TC : C ⥤ C ⥤ C) (TD : D ⥤ D ⥤ D)
     (TC.obj (R.obj E)).obj P ⟶ R.obj ((TD.obj E).obj (L.obj P)) :=
   adj.unit.app _ ≫ R.map (formalProjectionBeta TC TD L R adj μ E P)
 
+-- The fixed statement includes first-input shift data, while its conclusions use only
+-- second-input shift compatibility. Keep the original hypothesis and binder name.
+set_option linter.unusedVariables false in
 /-- The projection mate from specified exact tensor, shift, adjunction and right-unit data.
 Source: Stacks Tag 0B56, equation-projection-formula-map; Derived Categories Tags 014V,
 014Y, 0A8D (blueprint: lem-weil-pbc-formal-exact-projection-mate).
@@ -143,6 +146,99 @@ theorem formalExactProjectionMate
         t.hom₃ = formalProjectionAlpha TC TD L R adj μ E T.obj₃) ∧
     (∀ E : D, formalProjectionAlpha TC TD L R adj μ E oneC ≫
       R.map ((TD.obj E).map u.hom ≫ ρD.hom.app E) = ρC.hom.app (R.obj E)) := by
-  sorry
+  have hβ (E E' : D) (P P' : C) (e : E ⟶ E') (p : P ⟶ P') :
+      L.map ((TC.map (R.map e)).app P ≫ (TC.obj (R.obj E')).map p) ≫
+          formalProjectionBeta TC TD L R adj μ E' P' =
+        formalProjectionBeta TC TD L R adj μ E P ≫
+          ((TD.map e).app (L.obj P) ≫ (TD.obj E').map (L.map p)) := by
+    dsimp [formalProjectionBeta]
+    rw [← Category.assoc, hμnat]
+    simp only [Category.assoc]
+    have hn : (TD.obj (L.obj (R.obj E'))).map (L.map p) ≫
+          (TD.map (adj.counit.app E')).app (L.obj P') =
+        (TD.map (adj.counit.app E')).app (L.obj P) ≫
+          (TD.obj E').map (L.map p) :=
+      (TD.map (adj.counit.app E')).naturality (L.map p)
+    rw [hn]
+    have hc : (TD.map (L.map (R.map e))).app (L.obj P) ≫
+          (TD.map (adj.counit.app E')).app (L.obj P) =
+        (TD.map (adj.counit.app E)).app (L.obj P) ≫
+          (TD.map e).app (L.obj P) := by
+      simpa only [Functor.comp_map, Functor.id_map, TD.map_comp, NatTrans.comp_app] using
+        congrArg (fun f ↦ (TD.map f).app (L.obj P)) (adj.counit.naturality e)
+    simpa only [Category.assoc] using congrArg
+      (fun f ↦ (μ (R.obj E) P).hom ≫ f ≫ (TD.obj E').map (L.map p)) hc
+  have hα (E E' : D) (P P' : C) (e : E ⟶ E') (p : P ⟶ P') :
+      (TC.map (R.map e)).app P ≫ (TC.obj (R.obj E')).map p ≫
+          formalProjectionAlpha TC TD L R adj μ E' P' =
+        formalProjectionAlpha TC TD L R adj μ E P ≫
+          R.map ((TD.map e).app (L.obj P) ≫ (TD.obj E').map (L.map p)) := by
+    dsimp [formalProjectionAlpha]
+    simp only [← Category.assoc]
+    rw [← adj.unit_naturality]
+    simp only [Category.assoc, ← R.map_comp]
+    rw [hβ]
+  let m (M : C) : TC.obj M ⋙ L ⟶ L ⋙ TD.obj (L.obj M) :=
+    { app := fun P ↦ (μ M P).hom
+      naturality := by
+        intro P P' p
+        simpa using hμnat M M P P' (𝟙 M) p }
+  have (M : C) : NatTrans.CommShift (m M) ℤ := ⟨fun n ↦ by
+    ext P
+    simpa [m, Functor.commShiftIso_comp_hom_app, Category.assoc] using
+      (hμshift₂ M P n).symm⟩
+  let β (E : D) : TC.obj (R.obj E) ⋙ L ⟶ L ⋙ TD.obj E :=
+    m (R.obj E) ≫ Functor.whiskerLeft L (TD.map (adj.counit.app E))
+  have (E : D) : NatTrans.CommShift (β E) ℤ := by
+    dsimp [β]
+    infer_instance
+  let α (E : D) : TC.obj (R.obj E) ⟶ (L ⋙ TD.obj E) ⋙ R :=
+    (TC.obj (R.obj E)).rightUnitor.inv ≫
+      Functor.whiskerLeft (TC.obj (R.obj E)) adj.unit ≫
+      (Functor.associator _ _ _).inv ≫ Functor.whiskerRight (β E) R
+  have (E : D) : NatTrans.CommShift (α E) ℤ := by
+    dsimp [α]
+    infer_instance
+  have hαapp (E : D) (P : C) :
+      (α E).app P = formalProjectionAlpha TC TD L R adj μ E P := by
+    simp [α, β, m, formalProjectionAlpha, formalProjectionBeta, Functor.map_comp]
+  refine ⟨fun E ↦ ⟨inferInstance, inferInstance⟩, hα, ?_, ?_, ?_⟩
+  · intro E n P
+    simpa only [hαapp] using (NatTrans.shift_app_comm (α E) n P).symm
+  · intro E T hT
+    refine ⟨Functor.map_distinguished _ T hT, Functor.map_distinguished _ T hT, ?_⟩
+    refine ⟨{ hom₁ := (α E).app T.obj₁
+              hom₂ := (α E).app T.obj₂
+              hom₃ := (α E).app T.obj₃
+              comm₁ := (α E).naturality T.mor₁
+              comm₂ := (α E).naturality T.mor₂
+              comm₃ := ?_ }, hαapp E _, hαapp E _, hαapp E _⟩
+    change ((TC.obj (R.obj E)).map T.mor₃ ≫
+        ((TC.obj (R.obj E)).commShiftIso (1 : ℤ)).hom.app T.obj₁) ≫
+          (shiftFunctor C (1 : ℤ)).map ((α E).app T.obj₁) =
+        (α E).app T.obj₃ ≫ ((L ⋙ TD.obj E) ⋙ R).map T.mor₃ ≫
+          (((L ⋙ TD.obj E) ⋙ R).commShiftIso (1 : ℤ)).hom.app T.obj₁
+    rw [Category.assoc, NatTrans.shift_app_comm, ← Category.assoc,
+      (α E).naturality T.mor₃, Category.assoc]
+  · intro E
+    have hβunit : formalProjectionBeta TC TD L R adj μ E oneC ≫
+        ((TD.obj E).map u.hom ≫ ρD.hom.app E) =
+          L.map (ρC.hom.app (R.obj E)) ≫ adj.counit.app E := by
+      dsimp [formalProjectionBeta]
+      simp only [Category.assoc]
+      have hn : (TD.map (adj.counit.app E)).app (L.obj oneC) ≫
+            (TD.obj E).map u.hom =
+          (TD.obj (L.obj (R.obj E))).map u.hom ≫
+            (TD.map (adj.counit.app E)).app oneD :=
+        ((TD.map (adj.counit.app E)).naturality u.hom).symm
+      rw [reassoc_of% hn]
+      rw [show (TD.map (adj.counit.app E)).app oneD ≫ ρD.hom.app E =
+          ρD.hom.app (L.obj (R.obj E)) ≫ adj.counit.app E from
+        ρD.hom.naturality (adj.counit.app E)]
+      simpa only [Category.assoc] using
+        congrArg (fun f ↦ f ≫ adj.counit.app E) (hunit (R.obj E))
+    rw [formalProjectionAlpha, Category.assoc, ← R.map_comp, hβunit, R.map_comp,
+      ← Category.assoc, adj.unit_naturality]
+    simp
 
 end CategoryTheory
