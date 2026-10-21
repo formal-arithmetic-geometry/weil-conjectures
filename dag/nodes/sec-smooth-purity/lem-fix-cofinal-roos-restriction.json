@@ -13,9 +13,128 @@
   "def-weil-inverse-system",
   "def-weil-strict-roos-model"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $m_n=\\phi(n)$, $P=\\prod_{i\\ge1}X_i$, $P'=\\prod_{n\\ge1}X_{m_n}$, $\\delta=1-s$ and $\\delta'=1-s_{\\phi^*X}$. Products of complexes are degreewise. Every coordinate of $a=a_\\phi$ and $b=b_\\phi$ is a projection or a finite sum of projections followed by chain transitions; hence these define sheaf-module chain maps by the product universal property. All ensuing coordinate computations mean equalities after product projections, so require no assumption that sheaf epimorphisms are sectionwise surjective. In degree $k$, the prescribed Roos coordinates are $H(X)^k=P^{k-1}\\oplus P^k$ and $D(y,z)=(-dy-\\delta z,dz)$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-strict-roos-model",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, explicit product maps and finite-block elimination; agent refinement to strict complexes"
+   }
+  },
+  {
+   "text": "For every $n$, the tower composition law telescopes the finite sum:\n$$ (b\\delta x)_n=\\sum_{i=m_n}^{m_{n+1}-1}t_{m_n,i}(x_i-t_{i,i+1}x_{i+1})=x_{m_n}-t_{m_n,m_{n+1}}x_{m_{n+1}}=(\\delta'a x)_n.$$\nThus $b\\delta=\\delta'a$. Define $C:H(X)\\to H(\\phi^*X)$ by $C(y,z)=(by,az)$. Since $a,b$ commute with $d$, we have\n$$D'C(y,z)=(-bdy-\\delta'az,adz)=(-bdy-b\\delta z,adz)=CD(y,z).$$\nThis is exactly the shifted-cone map $r_{\\phi,X}$ of the specified square.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, explicit product maps and finite-block elimination; agent refinement to strict complexes"
+   }
+  },
+  {
+   "text": "For each $i\\ge1$ let $\\nu(i)=\\min\\{n\\ge1:i\\le m_n\\}$; it exists by unboundedness. Define chain maps $E:P'\\to P$ and $J:P'\\to P$ by\n$$(Ez)_i=t_{i,m_{\\nu(i)}}z_{\\nu(i)},\\qquad (Jw)_i=\\begin{cases}w_n&i=m_n,\\\\0&i\\notin\\{m_n:n\\ge1\\}.\\end{cases}$$\nThey are defined coordinatewise with no infinite sums. We have $aE=1$ and $bJ=1$: the interval $[m_n,m_{n+1})$ contains exactly the selected index $m_n$. If $i$ is not selected, then $\\nu(i+1)=\\nu(i)$ and $(\\delta Ez)_i=0$; at $i=m_n$ it is $z_n-t_{m_n,m_{n+1}}z_{n+1}$. Consequently $\\delta E=J\\delta'$. Therefore $S(y',z')=(Jy',Ez')$ is a chain map from $H(\\phi^*X)$ to $H(X)$ by the same differential calculation as in step 2, and $CS=1$ strictly.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, explicit product maps and finite-block elimination; agent refinement to strict complexes"
+   }
+  },
+  {
+   "text": "Define a degree-zero chain map $h:P\\to P$ by the finite formula\n$$(hy)_i=\\sum_{j=i}^{m_{\\nu(i)}-1}t_{i,j}y_j,$$\nwith empty sum zero. Commutation with $d$ follows term by term. Telescoping gives\n$$(h\\delta z)_i=z_i-t_{i,m_{\\nu(i)}}z_{\\nu(i)}^{\\rm sel}=((1-Ea)z)_i,$$\nwhere $z_n^{\\rm sel}=z_{m_n}$. For $i\\ne m_n$ for every $n$, subtracting $t_{i,i+1}(hy)_{i+1}$ from $(hy)_i$ leaves $y_i$. At $i=m_n$, $(hy)_i=0$ and the same difference is\n$$-\\sum_{j=m_n+1}^{m_{n+1}-1}t_{m_n,j}y_j=y_{m_n}-(by)_n.$$\nHence $\\delta h=1-Jb$, including all indices $i<m_1$ by the nonselected case. These are identities of product maps.",
+   "uses": [
+    "def-weil-inverse-system"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, explicit product maps and finite-block elimination; agent refinement to strict complexes"
+   }
+  },
+  {
+   "text": "In degree $k$ define $K^k:H(X)^k\\to H(X)^{k-1}$ by $K(y,z)=(0,-hy)$. The signed differential of the specified Roos model gives\n$$DK(y,z)=(\\delta h y,-dh y),\\qquad KD(y,z)=(0,hdy+h\\delta z).$$\nSince $dh=hd$, steps 3-4 imply\n$$DK+KD=(\\delta h y,h\\delta z)=((1-Jb)y,(1-Ea)z)=(1-SC)(y,z).$$\nThus $SC$ is chain-homotopic to the identity with the displayed degree-minus-one homotopy (equivalently $1-SC=DK+KD$), while $CS=1$ strictly.",
+   "uses": [
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, explicit product maps and finite-block elimination; agent refinement to strict complexes"
+   }
+  },
+  {
+   "text": "The sheaf-module category is abelian by [def-weil-sheaf-of-modules-category]. Apply part (b) of [lem-weil-pbc-homotopic-maps-equal-cohomology], with the identity additive functor and the homotopy of step 5, to obtain $H^k(S)H^k(C)=1$ for every integer $k$. The strict equation $CS=1$ gives $H^k(C)H^k(S)=1$ by functoriality. Thus each $H^k(C)$ is invertible and $C=r_{\\phi,X}$ is a quasi-isomorphism by [def-weil-abstract-derived-category]. The assumption of exact countable products is retained, although this explicit homotopy argument only needs the products themselves.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-homotopic-maps-equal-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0116, lemma-map-cohomology-homotopy-cochain, part (1)"
+   }
+  },
+  {
+   "text": "Let $f:X_\\bullet\\to Y_\\bullet$ be a strict chain map of towers. Iterating its transition square gives $f_i t^X_{i,j}=t^Y_{i,j}f_j$. Selection satisfies $a_Y(\\prod_i f_i)=(\\prod_n f_{m_n})a_X$. For the block map, in coordinate $n$,\n$$\\sum_{i=m_n}^{m_{n+1}-1}t^Y_{m_n,i}f_i y_i=f_{m_n}\\sum_{i=m_n}^{m_{n+1}-1}t^X_{m_n,i}y_i.$$\nHence $b_Y(\\prod_i f_i)=(\\prod_n f_{m_n})b_X$. Taking the two diagonal components of the prescribed cone map proves strict naturality of $r_{\\phi,X}$.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, explicit product maps and finite-block elimination; agent refinement to strict complexes"
+   }
+  },
+  {
+   "text": "Put $\\ell_n=\\psi(n)$ and let $a_\\psi',b_\\psi'$ be the maps for restriction of $\\phi^*X$. Selection gives $a_\\psi'a_\\phi=a_{\\phi\\circ\\psi}$. For the other component, expand the double finite sum:\n$$ (b_\\psi'b_\\phi y)_n=\\sum_{j=\\ell_n}^{\\ell_{n+1}-1}\\sum_{i=m_j}^{m_{j+1}-1}t_{m_{\\ell_n},m_j}t_{m_j,i}y_i=\\sum_{i=m_{\\ell_n}}^{m_{\\ell_{n+1}}-1}t_{m_{\\ell_n},i}y_i.$$\nThe tower law combines the two transitions and the consecutive intervals partition the displayed finite interval. This is $b_{\\phi\\circ\\psi}y$. Diagonal cone maps compose componentwise, yielding $r_{\\psi,\\phi^*X}r_{\\phi,X}=r_{\\phi\\circ\\psi,X}$. For $\\phi=\\mathrm{id}$, selection is identity and every block is $[n,n+1)$, so $b_\\phi y=y$ and $r_{\\mathrm{id},X}=1$.",
+   "uses": [
+    "def-weil-inverse-system",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, explicit product maps and finite-block elimination; agent refinement to strict complexes"
+   }
+  },
+  {
+   "text": "For a compatible family $q_i:P_0\\to X_i$, its product map $q_{\\rm prod}$ satisfies $\\delta q_{\\rm prod}=0$ by the compatibility equation. The strict augmentation is $(0,q_{\\rm prod})$ in the coordinates of [def-weil-strict-roos-model]. Applying $r_{\\phi,X}=(b_\\phi,a_\\phi)$ gives $(b_\\phi0,a_\\phi q_{\\rm prod})=(0,(q_{\\phi(n)})_n)$, exactly the restricted augmentation. All naturality, composition, identity and augmentation equations have been proved as equalities of chain maps. The localization functor preserves these equalities and compositions, and sends the quasi-isomorphism of step 6 to an isomorphism.",
+   "uses": [
+    "def-weil-strict-roos-model",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, explicit product maps and finite-block elimination; agent refinement to strict complexes"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-strict-roos-model",
+  "lem-weil-pbc-homotopic-maps-equal-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H9K, lemma-pro-isomorphism-iso-Rlim, explicit product maps and finite-block elimination, refined here to a strict cochain homotopy inverse with the coordinates of def-weil-strict-roos-model; Tag 0116 for homotopy invariance of cohomology"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +177,52 @@
    "results": "8 hits; InverseSystem.pEquivOnLim, InverseSystem.piLTLim, InverseSystem.piLTLim_apply, InverseSystem.globalEquiv, InverseSystem.globalEquiv_compatibility, InverseSystem.invLimEquiv_apply_coe, InverseSystem.globalEquiv_naturality, InverseSystem.invLimEquiv",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module completion, ordinary inverse systems and general cochain infrastructure do not state the specified strict Roos comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|roos|subsequence.*(cone|limit)|cofinal.*(cone|limit)",
+   "results": "{\"t\": \"2026-10-21T06:38:42Z\", \"tool\": \"grep\", \"query\": \"Roos|roos|subsequence.*(cone|limit)|cofinal.*(cone|limit)\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits give cone/homotopy infrastructure, local cohomology under final reindexing, or ordinary Type-valued inverse systems, not the specified arbitrary-subsequence Roos comparison with composition and augmentation laws"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A strictly increasing unbounded reindexing of an inverse sequence of cochain complexes preserves the mapping fibre of one minus shift on the product",
+   "results": "{\"t\": \"2026-10-21T06:38:42Z\", \"tool\": \"leansearch\", \"query\": \"A strictly increasing unbounded reindexing of an inverse sequence of cochain complexes preserves the mapping fibre of one minus shift on the product\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.truncate\", \"CochainComplex.HomComplex.Cochain.shift\", \"CochainComplex.shiftFunctor\", \"CochainComplex.IsGE\", \"CochainComplex.shiftFunctor_obj_X\", \"CochainComplex.mappingCone.shiftIso\", \"CochainComplex.mapBifunctorHomologicalComplexShift₁Iso_inv_f_f\", \"CochainComplex.mapBifunctorHomologicalComplexShift₁Iso\"], \"digest\": \"1f0873640677f81f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits give cone/homotopy infrastructure, local cohomology under final reindexing, or ordinary Type-valued inverse systems, not the specified arbitrary-subsequence Roos comparison with composition and augmentation laws"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, HomotopyEquiv",
+   "results": "{\"t\": \"2026-10-21T06:38:43Z\", \"tool\": \"loogle\", \"query\": \"CochainComplex.mappingCone, HomotopyEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CochainComplex.mappingCone.rotateHomotopyEquiv\", \"CochainComplex.mappingConeCompHomotopyEquiv\", \"CochainComplex.cm5b.homotopyEquiv\"], \"digest\": \"d9165b755f7ef64d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits give cone/homotopy infrastructure, local cohomology under final reindexing, or ordinary Type-valued inverse systems, not the specified arbitrary-subsequence Roos comparison with composition and augmentation laws"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A cofinal subsequence of a strict inverse tower induces a chain homotopy equivalence of the mapping fibre of one minus shift on products, by coordinate selection and finite block sums",
+   "results": "{\"t\": \"2026-10-21T06:38:45Z\", \"tool\": \"leanfinder\", \"query\": \"A cofinal subsequence of a strict inverse tower induces a chain homotopy equivalence of the mapping fibre of one minus shift on products, by coordinate selection and finite block sums\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instQFactorsThroughHomotopyIntUp\", \"instQFactorsThroughHomotopyDown\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId_hom\", \"HomologicalComplex.homotopyCofiber.descEquiv\", \"Homotopy.map_eq_of_inverts_homotopyEquivalences\", \"HomologicalComplex.cylinder.homotopyEquiv\", \"HomologicalComplex.cylinder.πCompι₀Homotopy.inrX_nullHomotopy_f\"], \"digest\": \"6c9963aa4d8663b1\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits give cone/homotopy infrastructure, local cohomology under final reindexing, or ordinary Type-valued inverse systems, not the specified arbitrary-subsequence Roos comparison with composition and augmentation laws"
+  },
+  {
+   "tool": "grep",
+   "query": "subsequence|cofinal|homotopyLimit|homotopy_limit",
+   "results": "{\"t\": \"2026-10-21T06:39:01Z\", \"tool\": \"grep\", \"query\": \"subsequence|cofinal|homotopyLimit|homotopy_limit\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\", \"Mathlib/Algebra/Homology/LocalCohomology.lean\"], \"digest\": \"2dfc0508bf0d1276\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits give cone/homotopy infrastructure, local cohomology under final reindexing, or ordinary Type-valued inverse systems, not the specified arbitrary-subsequence Roos comparison with composition and augmentation laws"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Reindexing a countable inverse system of complexes along a strictly monotone cofinal map gives an equivalence on homotopy inverse limits and is computed by finite sums of transition maps",
+   "results": "{\"t\": \"2026-10-21T06:39:02Z\", \"tool\": \"leanfinder\", \"query\": \"Reindexing a countable inverse system of complexes along a strictly monotone cofinal map gives an equivalence on homotopy inverse limits and is computed by finite sums of transition maps\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"InverseSystem.pEquivOnLim\", \"InverseSystem.globalEquiv\", \"InverseSystem.invLimEquiv_apply_coe\", \"InverseSystem.globalEquiv_compatibility\", \"InverseSystem.globalEquiv_naturality\", \"InverseSystem.invLimEquiv\", \"InverseSystem.piLTLim\", \"InverseSystem.pEquivOnGlue\"], \"digest\": \"d33205d12ed0b0b8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits give cone/homotopy infrastructure, local cohomology under final reindexing, or ordinary Type-valued inverse systems, not the specified arbitrary-subsequence Roos comparison with composition and augmentation laws"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-scalar-completion-associator",
@@ -80,5 +241,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-cofinal-roos-restriction",
+  "worker": "stage1",
+  "summary": "Nine steps prove the specified block-square identity, construct a strict right inverse and explicit homotopy, apply the existing homotopic-maps cohomology Mathlib leaf, and verify naturality, nested-block composition, identity and augmentations. All hypotheses and all statement clauses are retained. No new nodes.",
+  "blueprint": "The inherited ancestor lem-fix-operation-reduction, current main-20261015 proof paragraph 3, transports specified maps to field stages; via lem-fix-scalar-completion-associator this split supplies independence of the chosen cofinal exponent sequence using the actual selection/block maps. Chapter and unit are unchanged.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NG-3cbe42556",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-3cbe42556 (reviewer sub-agent of L); spot-checked: This is a first split of a node created 2026-10-21 by Q09; it is unsplit on live and side-live, has no repair note and is not on the dropped list. The statement, stmt_deps and blueprint are unchanged and there are no new nodes. I read Stacks 0H9K (more-algebra.tex lemma-pro-isomorphism-iso-Rlim) in full: the selection map, the finite-block map, the nested composition and the correction b_i are exactly the item's a_phi, b_phi, composition law and h. The item lifts them to a strict chain-level homotopy inverse, so proof_origin by=agent is correct. I recomputed every step. Step 2: b(1-s)=(1-s')a by telescoping, and the cone map C(y,z)=(by,az) commutes with D(y,z)=(-dy-delta z,dz), the coordinates of def-weil-strict-roos-model (F^{p+1}=P^p+P^{p+1}). Step 3: nu exists by unboundedness and nu(m_n)=n by strict increase. aE=1 and bJ=1, and delta E=J delta' holds both at unselected indices and at i=m_n, so CS=1 strictly. Step 4: h delta=1-Ea and delta h=1-Jb, including indices i<m_1. Step 5: K(y,z)=(0,-hy) gives DK+KD=1-SC, with the sign and degree convention of lem-weil-pbc-homotopic-maps-equal-cohomology (b), a Mathlib leaf. Step 6: H^k(C) is inverse to H^k(S), so C is a quasi-isomorphism in the sense of def-weil-abstract-derived-category; product exactness is retained but unused. Steps 7-9: naturality, phi∘psi composition by partition of nested blocks, identity, and augmentation (0,q) mapping to (0,q_phi(n)) all hold. Edge cases tested: phi=n+1 on the constant Z tower, phi=id, m_1>1, phi=n^2, and the zero tower. All cited nodes are definitions or Mathlib leaves, so there is no route issue and no tool_uses; no SGA. Not a duplicate: lem-pur-compact-support-roos-cofinality (constant ring, phi=en, plus a tensor clause) is a special case of this item. lem-sp-strict-tower-arithmetic-restriction(-comparison), lem-weil-roos-comparison-maps and lem-sf-strict-roos-derived-limit-comparison state different results. The parent's step 6 uses exactly the clauses proved here. Maintainer note: the restriction clauses of lem-pur-compact-support-roos-cofinality could later cite this item."
  }
 }
