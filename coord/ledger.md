@@ -23431,3 +23431,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:09 L: merged deliver/O1/lem-sfb-snc-tame-finite-fibre-classification (stage 2; reviewer PASS; parallel immutable checks)
 - 19:09 L: merged deliver/Q32/lem-sfb-condensed-galois-global-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 19:09 L: merged deliver/NM/lem-sfb-poset-augmented-chain-prism (stage 2; reviewer PASS; parallel immutable checks)
+- 19:10 L: merged deliver/N6/lem-sfb-torsion-acyclic-norm-coefficient-test (reviewer FIX; first push; new nodes: 1)
