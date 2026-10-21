@@ -19586,3 +19586,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:19 L: merged deliver/C1/Sheaf.Paper.LocalizedTStructure (stage 3; reviewer PASS; first push; landing 20261021T021906-L-2789948 (proof); batch 20261021T021849; modules 1; new nodes 0)
 - 02:19 L: merged deliver/C2/Sheaf.Paper.CoefficientHeartClosure (stage 3; reviewer PASS; first push; landing 20261021T021908-L-2790350 (proof); batch 20261021T021849; modules 1; new nodes 0)
 - 02:19 L: merged deliver/C4/Sheaf.Paper.ContinuousEtaleLocalLattices (stage 3; reviewer PASS; first push; landing 20261021T021909-L-2790584 (proof); batch 20261021T021849; modules 1; new nodes 0; change records: coord/changes/C4-continuous-etale-local-lattices-restoration.md)
+- 02:19 L: merged deliver/D3/Sheaf.Paper.CoefficientFiniteDescentObjects (stage 3; reviewer PASS; first push; landing 20261021T021910-L-2790803 (proof); batch 20261021T021849; modules 1; new nodes 0)
