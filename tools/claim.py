@@ -227,6 +227,12 @@ def take(who, m, quiet=False, stage=None) -> bool:
     stage-blind check below then judged a just-merged, reviewed split by the stage-2 rule (no Lean yet: open) and granted
     the claim; the worker was started with the stage-1 brief and answered BLOCKED "already split and reviewed"
     (~40-100 sessions an hour). Judged for the caller's stage, such a claim is refused."""
+    claim_stage = str(stage or queue_stage(m) or
+                      ("3" if "." in m or li.file_of(m).is_file() else "1"))
+    if claim_stage in ("1", "2") and not node_published(m):
+        if not quiet:
+            print(f"{m} has no published DAG node in the live sources; nothing to claim")
+        return False
     if stage is not None and node_finished(m, stage) and repair_note(m).get('state') != 'released':
         if not quiet:
             print(f"{m} is already completed for stage {stage} (live node); nothing to claim for that stage")
@@ -344,6 +350,23 @@ def node_file(m: str):
         if hits:
             return hits[0]
     return None
+
+
+def node_published(m: str) -> bool:
+    """A DAG assignment needs a readable node committed in the repository supplying it.
+
+    A queue can briefly include new nodes from a provisional landing that is later rolled back.
+    Neither that queue row nor a file staged by the landing makes an assignment available to
+    workers reading the committed branch. Check HEAD in the node's own repository so configured
+    external DAGs still work. Stage-3 rework items can lack DAG nodes and do not use this check.
+    """
+    hit = node_file(m)
+    if hit is None:
+        return False
+    return subprocess.run(
+        ["git", "cat-file", "-e", f"HEAD:./{hit.name}"], cwd=hit.parent,
+        capture_output=True, text=True,
+    ).returncode == 0
 
 
 def node_finished(m: str, stage=None) -> bool:
