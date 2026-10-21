@@ -15,9 +15,92 @@
   "def-weil-quasi-separated-morphism",
   "def-kun-topological-krull-dimension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pqf-finite-affine-cover-qc-open] to the quasi-compact open $X\\subseteq X$. Obtain a finite affine open cover $X=\\bigcup_{i=1}^nU_i$, and choose presentations $U_i\\simeq\\operatorname{Spec}A_i$. The family may be empty when $X=\\varnothing$. Every singleton in $U_i$ is closed, since it is the intersection of $U_i$ with a singleton closed in $X$.",
+   "uses": [
+    "lem-pqf-finite-affine-cover-qc-open"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0CKV, lemma-dimension-zero, opening paragraph and final paragraph: choose an affine open covering and use quasi-compactness to make it finite."
+   }
+  },
+  {
+   "text": "For each $i$, every prime ideal $\\mathfrak p$ of $A_i$ is maximal. Indeed [lem-weil-pbc-proper-ideal-contained-in-maximal] gives a maximal ideal $\\mathfrak m\\supseteq\\mathfrak p$, which is prime. In the Zariski topology [def-weil-affine-spectrum] write the closed singleton $\\{\\mathfrak p\\}=V(S)=\\{\\mathfrak q:S\\subseteq\\mathfrak q\\}$ for some $S\\subseteq A_i$. Since $S\\subseteq\\mathfrak p\\subseteq\\mathfrak m$, we have $\\mathfrak m\\in\\{\\mathfrak p\\}$, so $\\mathfrak p=\\mathfrak m$. Thus no closed-point/maximal-ideal correspondence is being used as an unstated lemma.",
+   "uses": [
+    "lem-weil-pbc-proper-ideal-contained-in-maximal",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00E0, lemma-Zariski-topology, (2) and proof of (8), together with Tag 00E1, definition-Zariski-topology; the closed-point/maximal-ideal observation in the opening of section-ring-jacobson."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-zero-dimensional-spectrum-profinite] to each $A_i$, with its all-primes-maximal hypothesis proved in step 2. Hence each $U_i$ is Hausdorff. Each $U_i$ is also quasi-compact by [lem-weil-pbc-affine-scheme-qcqs]. Since $X$ is quasi-separated, [pqf-lem-qs-intersection-qc] implies that $U_i\\cap U_j$ is quasi-compact for all $i,j$. This is quasi-compactness in the subspace topology, in particular as a subset of $U_j$. No intersection is asserted affine at this stage.",
+   "uses": [
+    "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "pqf-lem-qs-intersection-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/properties.tex",
+    "place": "Tag 0CKV, lemma-dimension-zero, opening paragraph and (1) implies (2); underlying facts are Algebra Tag 04MG, lemma-ring-with-only-minimal-primes, and Schemes Tag 01KO, lemma-characterize-quasi-separated."
+   }
+  },
+  {
+   "text": "Fix $i,j$ and put $K=U_i\\cap U_j\\subseteq U_j$. For $y\\in U_j\\setminus K$, Hausdorffness gives, for each $z\\in K$, disjoint open neighbourhoods $V_z$ of $z$ and $W_z$ of $y$ in $U_j$. Quasi-compactness supplies $z_1,\\ldots,z_r$ with $K\\subseteq\\bigcup_aV_{z_a}$. Then $\\bigcap_aW_{z_a}$ is an open neighbourhood of $y$ disjoint from $K$. Thus $K$ is closed in $U_j$, including $K=\\varnothing$ with the empty intersection equal to $U_j$. Consequently $U_j\\setminus U_i$ is open in $U_j$, hence in $X$. Since the $U_j$ cover $X$, their union $X\\setminus U_i$ is open. Therefore every $U_i$ is closed in $X$ as well as open. This is the finite-neighbourhood proof of compact subsets being closed in a Hausdorff space, written out from the definitions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 08YB, lemma-quasi-compact-in-Hausdorff, proof of (1); applied locally as in Properties Tag 0CKV, lemma-dimension-zero."
+   }
+  },
+  {
+   "text": "For each $i$, the open inclusion $j_i:U_i\\hookrightarrow X$ is an immersion: it factors as the identity closed immersion $U_i\\to U_i$ followed by that open inclusion, using [def-weil-closed-immersion]. Its image is closed by step 4. Therefore [lem-weil-pbc-immersion-closed-image-closed-immersion] makes $j_i$ a closed immersion. These are the original affine open subschemes, now also closed subschemes; no induced reduced structure is substituted.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "lem-weil-pbc-immersion-closed-image-closed-immersion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01IQ, lemma-immersion-when-closed; applied to the affine open inclusions shown closed by the local argument of Properties Tag 0CKV."
+   }
+  },
+  {
+   "text": "The finitely many affine closed subschemes $U_i\\hookrightarrow X$ of step 5 cover $X$ set theoretically by step 1. Apply [lem-sc-closed-affine-union-affine] to this family: $X$ is affine, so there exist a commutative ring $A$ and an isomorphism $X\\simeq\\operatorname{Spec}A$. Its statement explicitly includes the empty family for $X=\\varnothing$. This uses neither a Noetherian nor a finite-type hypothesis. It completes the finite-cover argument using the existing general closed-cover affineness lemma.",
+   "uses": [
+    "lem-sc-closed-affine-union-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/limits.tex",
+    "place": "Tag 09NL, lemma-affines-glued-in-closed-affine; used after the affine charts have been proved closed by the argument of Properties Tag 0CKV, lemma-dimension-zero."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pqf-finite-affine-cover-qc-open",
+  "lem-weil-pbc-proper-ideal-contained-in-maximal",
+  "def-weil-affine-spectrum",
+  "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "pqf-lem-qs-intersection-qc",
+  "def-weil-closed-immersion",
+  "lem-weil-pbc-immersion-closed-image-closed-immersion",
+  "lem-sc-closed-affine-union-affine"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/properties.tex",
+  "place": "Tag 0CKV, lemma-dimension-zero, affine-chart argument, completed by the existing finite affine closed-cover lemma of Limits Tag 09NL rather than repeating the final clopen-partition induction."
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -136,10 +219,141 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: finite discrete affineness and locally Noetherian Artinian results need stronger hypotheses; quasi-separatedness criteria do not assert affineness."
+  },
+  {
+   "tool": "grep",
+   "query": "topologicalKrullDim.*[Ii]sAffine|[Ii]sAffine.*topologicalKrullDim|[Ii]sAffine.*T1Space|T1Space.*[Ii]sAffine",
+   "results": {
+    "t": "2026-10-21T18:49:20Z",
+    "tool": "grep",
+    "query": "topologicalKrullDim.*[Ii]sAffine|[Ii]sAffine.*topologicalKrullDim|[Ii]sAffine.*T1Space|T1Space.*[Ii]sAffine",
+    "sub": "AlgebraicGeometry",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no hits in AlgebraicGeometry."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A quasi compact quasi separated zero dimensional scheme is affine",
+   "results": {
+    "t": "2026-10-21T18:49:21Z",
+    "tool": "leansearch",
+    "query": "A quasi compact quasi separated zero dimensional scheme is affine",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.IsAffine.recOn",
+     "AlgebraicGeometry.Scheme.instIsQuasiAffineOfIsAffine",
+     "AlgebraicGeometry.AffineScheme",
+     "AlgebraicGeometry.instIsAffineOfFiniteOfDiscreteTopologyCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen",
+     "AlgebraicGeometry.instQuasiCompactOfIsAffineHom",
+     "AlgebraicGeometry.isAffine_of_isEmpty",
+     "AlgebraicGeometry.instIsAffineOfSubsingletonCarrierCarrierCommRingCat"
+    ],
+    "digest": "bbb339b892ba9142"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: finite-discrete and empty-scheme affineness require extra hypotheses or cover only special cases."
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.IsAffine, T1Space",
+   "results": {
+    "t": "2026-10-21T18:49:21Z",
+    "tool": "loogle",
+    "query": "AlgebraicGeometry.IsAffine, T1Space",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi compact quasi separated scheme whose points are closed is affine without Noetherian assumptions",
+   "results": {
+    "t": "2026-10-21T18:49:21Z",
+    "tool": "leanfinder",
+    "query": "A quasi compact quasi separated scheme whose points are closed is affine without Noetherian assumptions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_affine",
+     "AlgebraicGeometry.IsNoetherian",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen",
+     "AlgebraicGeometry.IsLocallyNoetherian",
+     "AlgebraicGeometry.Scheme.compactSpace_of_isAffine",
+     "AlgebraicGeometry.IsLocallyNoetherian.quasiSeparatedSpace"
+    ],
+    "digest": "fa531e4a826dbe21"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: returned affine/quasi-separatedness instances and quasi-affine criteria do not imply this theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "T1Space|topologicalKrullDim|DiscreteTopology",
+   "results": {
+    "t": "2026-10-21T18:51:23Z",
+    "tool": "grep",
+    "query": "T1Space|topologicalKrullDim|DiscreteTopology",
+    "sub": "AlgebraicGeometry/Limits.lean",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "700"
+    ],
+    "digest": "416c4a6ee1ebc969"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Limits.lean:700 uses both Finite X and DiscreteTopology X. A compact T1 zero-dimensional scheme need not be finite or discrete."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A quasi separated scheme with T1 topology has affine compact open subschemes",
+   "results": {
+    "t": "2026-10-21T18:51:25Z",
+    "tool": "leanfinder",
+    "query": "A quasi separated scheme with T1 topology has affine compact open subschemes",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_affine",
+     "AlgebraicGeometry.quasiSeparatedSpace_iff_forall_affineOpens",
+     "AlgebraicGeometry.IsAffineOpen.isCompact",
+     "AlgebraicGeometry.instHasAffinePropertyQuasiCompactCompactSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.of_forall_exists_mem_basicOpen",
+     "AlgebraicGeometry.instPrespectralSpaceCarrierCarrierCommRingCat",
+     "AlgebraicGeometry.Scheme.IsQuasiAffine.toCompactSpace"
+    ],
+    "digest": "9f8c806339c01f9b"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: quasi-separatedness criteria and quasi-affine sufficient conditions do not state general zero-dimensional affineness."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-field-profinite-galois-site",
@@ -149,7 +363,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Field-site presentation in Paragraph (3): reduction of a qcqs weakly etale field object to an affine scheme, before the Galois-set construction.",
+   "place": "Field-site presentation in Paragraph (3) of lem-sfb-field-profinite-galois-site: the reduction of an arbitrary qcqs weakly etale object over a field to an affine scheme. This supports the coefficient-topology comparison below det-thm-sf-ctf-stability-direct-images, ordinary direct-image clause; this item supplies only the general zero-dimensional affineness input.",
    "via": [
     "lem-sfb-field-profinite-galois-site",
     "lem-sfb-condensed-galois-global-descent",
@@ -164,5 +378,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-qcqs-zero-dimensional-affine",
+  "worker": "stage1",
+  "summary": "Kept the full non-Noetherian statement and supplied six steps: finite affine cover, maximality from closed points, Hausdorff charts and quasi-compact overlaps, local closedness by a finite-neighbourhood argument, closed immersions, and the existing general finite affine closed-cover theorem. No new nodes: all non-elementary tools are existing DAG nodes. The closed-point and compact-Hausdorff arguments are elementary steps with details. All project Lean attachment candidates require stronger hypotheses or do not state the item.",
+  "blueprint": "Realizes the qcqs-field-object affineness reduction in Paragraph (3) of lem-sfb-field-profinite-galois-site, below the ordinary-direct-image step of det-thm-sf-ctf-stability-direct-images. The ancestor command returns null because the inherited created.item chain is broken; retained its null from.node and via chain, and made from.place precise. Whole-blueprint searches for dimension-zero affineness, zero-dimensional, closed maximal, 04MG, 09NL and clopen affine found no exact imported statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+    "why": "General topology of affine spectra with all primes maximal; the coefficient unit has no replacement for this elementary geometric tool."
+   },
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "General quasi-separated-scheme intersection criterion used only to obtain compact overlaps, without changing the coefficient or direct-image route."
+   },
+   {
+    "node": "lem-sc-closed-affine-union-affine",
+    "why": "General finite affine closed-cover affineness theorem, applied after proving the charts closed; replaces only the node-level final finite-partition calculation, not any unit-level argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-zero-dimensional-spectrum-profinite",
+  "pqf-lem-qs-intersection-qc",
+  "lem-sc-closed-affine-union-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NR-125bb0b8c",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-125bb0b8c (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited statement in full; there are no new nodes and no changes. The statement matches Stacks Properties 0CKV (lemma-dimension-zero), final assertion: a qcqs scheme whose points are all closed is affine, the empty scheme is allowed, and there is no Noetherian hypothesis. The 'dim<=0' parenthetical is correct because X is quasi-compact. Step 1: the Mathlib leaf lem-pqf-finite-affine-cover-qc-open, applied with U=X, gives a finite affine cover (empty when X is empty). Step 2 is elementary: closed singleton {p}=V(S) and a maximal ideal m containing p (00E0 node) force m=p. Step 3: lem-weil-pbc-zero-dimensional-spectrum-profinite (04MG) makes each chart compact Hausdorff, lem-weil-pbc-affine-scheme-qcqs makes it quasi-compact, and pqf-lem-qs-intersection-qc makes the overlaps quasi-compact; no overlap is claimed affine, so there is no E1 fault. Step 4 is elementary and written out: a compact subset of a Hausdorff chart is closed, so each U_j minus U_i is open and each U_i is closed in X. Step 5: by def-weil-closed-immersion and 01IQ (an immersion with closed image is a closed immersion), each open inclusion is a closed immersion with the original structure sheaf. Step 6: lem-sc-closed-affine-union-affine matches Limits 09NL as stated (no extra hypotheses; read in limits.tex). Its hypotheses come from steps 1 and 5, and it does not restate the item. The route differs from 0CKV's final partition induction; it is valid and marked agent-written. The dependency closure (1023 nodes) does not return to the item. The only citer, lem-sfb-field-profinite-galois-site paragraph (3), uses the all-points-closed form. No SGA source is cited, and the item is not in route-pivot-dropped.txt. I accept the off-unit tool uses for the maintainer's tool_uses: 04MG spectrum topology, the quasi-separated intersection criterion and 09NL. Note for the maintainer: lem-sc-finite-discrete-separated-affine and lem-sc-zero-dim-noetherian-affine are special cases of this item that already existed; they could later cite it. I checked small cases: Spec 0, k[eps]/eps^2, Spec of the product of F_2 over N, an infinite disjoint union of points, and a non-quasi-separated gluing of two copies of Spec(prod F_2)."
  }
 }

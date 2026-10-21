@@ -23419,3 +23419,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:06 L: merged deliver/P8/Sheaf.TraceFormula.InvertibleModuleK0Class (stage 3; reviewer PASS; after a return; landing 20261021T190559-L-3659409 (interface); batch 20261021T185359; modules 1; new nodes 0; change records: coord/changes/p8-invertible-module-k0-warning-option.md)
 - 19:06 L: merged deliver/S8/Sheaf.Paper.RationalRealizationFiniteConeModels (stage 3; reviewer PASS; first push; landing 20261021T190641-L-3711670 (interface); batch 20261021T185359; modules 1; new nodes 0; change records: coord/changes/S8-rational-finite-cone-proof-commands.md)
 - 19:06 L: returned deliver/NU/def-per-support-condition (reviewer RETURN: I read the whole delivery: the item, the report, the base item and the main-20261015 source (order 3082). This is a defi)
+- 19:07 L: merged deliver/NR/lem-sfb-qcqs-zero-dimensional-affine (reviewer PASS; first push; new nodes: 0)
