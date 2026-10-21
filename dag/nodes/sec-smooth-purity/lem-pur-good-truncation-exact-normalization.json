@@ -13,9 +13,112 @@
   "def-kun-truncations",
   "lem-sf-exact-functor-derived-triangulated"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T_C=\\tau_{\\le0}C$ and $Z_C=\\ker d_C^0$. The map $c_C$ is the identity below zero and the kernel inclusion in degree zero. Define $p_C$ by $q_C:Z_C\\twoheadrightarrow H^0(C)$ in degree zero and zero in other degrees. This is a chain map: at degree $-1$ its chain equation is $q_Cd_C^{-1}=0$, because $q_C$ kills boundaries; all other equations are identities or zero equations. By [def-kun-truncations], $H^a(c_C)$ identifies the retained cohomology with $H^a(C)$ for $a\\le0$ and both sides vanish for $a>0$. The target of $p_C$ has zero cohomology outside zero, as does $T_C$ under the hypothesis on $C$; in degree zero $H^0(p_C)$ is the identity of $Z_C/\\operatorname{im}d_C^{-1}$. Hence both maps are quasi-isomorphisms. Localization [def-weil-abstract-derived-category] makes $e_C=Q(p_C)Q(c_C)^{-1}$ an isomorphism $QC\\to S H^0(C)$. Both $H^0(c_C)$ and $H^0(p_C)$ are the canonical identity on that quotient, so $H^0(e_C)=1$ under $H^0(QC)\\cong H^0(C)$ and $H^0(SB)\\cong B$. These latter single-complex comparisons send $H^0(Sb)$ to $b$, directly from zero differentials.",
+   "uses": [
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations, canonical cochain truncation and its cohomology; explicit cycles-to-quotient calculation at zero"
+   }
+  },
+  {
+   "text": "For $K\\in\\mathcal Z_{\\mathcal C}$ choose a representative $C$ and an isomorphism $r:QC\\xrightarrow{\\sim}K$. Transport Step 1 to $e_K=S(H^0r)e_Cr^{-1}:K\\to S H^0K$, inserting the canonical $H^0(QC)\\cong H^0(C)$ comparison. Functoriality gives $H^0(e_K)=1$. Make such choices temporarily for $K,L$. By [lem-weil-pbc-derived-single-fully-faithful], every morphism $e_L a e_K^{-1}:S H^0K\\to S H^0L$ is $S(b)$ for exactly one $b:H^0K\\to H^0L$. Applying $H^0$ and the single-complex comparison from Step 1 gives $b=H^0(a)$. Conversely $b$ is attained by $e_L^{-1}S(b)e_K$. Thus $a\\mapsto H^0(a)$ is bijective on these Hom sets, without yet assuming naturality of the chosen $e$'s.",
+   "uses": [
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS, lemma-negative-exts (2), full faithfulness of the degree-zero single embedding, followed by conjugation with the explicit roof"
+   }
+  },
+  {
+   "text": "Any two transported roofs $e_K,e'_K$ from Step 2 have the same source $K$, the same target $S H^0K$, and induce the identity on $H^0$. Both objects lie in $\\mathcal Z_{\\mathcal C}$, so injectivity from Step 2 gives $e_K=e'_K$. This proves independence of the complex, of $r$, and of the representatives chosen for kernels and quotients, under their canonical isomorphisms. Denote the result by $\\epsilon_K$. For any $a:K\\to L$, both $\\epsilon_La$ and $S(H^0a)\\epsilon_K$ induce $H^0a$; the same injectivity gives the displayed naturality equation. The calculation in Step 2 now gives the asserted Hom bijection and the equivalent unique-$b$ characterization for these specified $\\epsilon$'s. The inverse family is natural by multiplying the naturality equation by inverses.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 06XS, lemma-negative-exts (2); elementary uniqueness argument from Step 2, with Step 1 fixing the normalization"
+   }
+  },
+  {
+   "text": "For an exact $F$, [lem-weil-pbc-exact-functor-complex-cohomology] supplies $c_C^a:H^a(F C)\\cong F H^a(C)$, natural in every complex and compatible with cycle inclusions and quotient projections. Invert these comparisons. The two functors $F H^a$ and $H^a D(F)$ on derived categories, pulled back along $Q$, identify with these complex-level functors by [lem-weil-pbc-exact-functor-derived-factorization]. They invert quasi-isomorphisms. Apply [lem-weil-pbc-localization-universal-property] (2) to descend $(c_C^a)^{-1}$ to a natural isomorphism $\\chi^a_{F,K}:F H^a(K)\\to H^a(D(F)K)$. At $a=0$ this is exactly the stipulated kernel/image/quotient comparison $\\chi_{F,K}$, and its naturality is $H^0(D(F)a)\\chi_{F,K}=\\chi_{F,L}F(H^0a)$ for every derived morphism. For $a\\ne0$ and $K\\in\\mathcal Z_{\\mathcal C}$ its source is zero, since $F$ preserves the zero object. Thus $D(F)K\\in\\mathcal Z_{\\mathcal D}$. No boundedness or injective-resolution hypothesis is used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; homology.tex Tag 010N, lemma-exact-functor; categories.tex Tag 04VG and the natural-transformation localization enhancement stated in the cited node"
+   }
+  },
+  {
+   "text": "Construct $t_C:F(T_C)\\xrightarrow{\\sim}T_{F C}$ termwise: it is the identity comparison below zero, the preserved-kernel comparison $F Z_C\\cong\\ker F(d_C^0)$ in degree zero, and the canonical zero-object comparison above zero. These are isomorphisms by [lem-sp-exact-functor-preserves-homology] (a). The kernel universal property checks the chain equation at $-1$; elsewhere it is immediate. Let $s_B:F(B[0])\\cong(FB)[0]$ be the termwise single-complex comparison. The first chain-map equation is $c_{F C}t_C=F(c_C)$. The second says that $p_{F C}t_C$ is the composite $F(T_C)\\xrightarrow{F(p_C)}F(H^0C[0])\\xrightarrow{s_{H^0C}}(FH^0C)[0]\\xrightarrow{(\\chi^0_{F,QC})[0]}H^0(F C)[0]$, using the factorization comparisons. At degree zero this is precisely $q_{F C}t_C^0=\\chi^0_{F,QC}F(q_C)$, the projection compatibility in [lem-weil-pbc-exact-functor-complex-cohomology]; all other components vanish. Localize these two equations, replace $Q(c_{F C})^{-1}$ by $Q(t_C)Q(Fc_C)^{-1}$, and cancel $Q(t_C)$. Termwise derived factorization [lem-weil-pbc-exact-functor-derived-factorization] gives\n$$\\epsilon_{D(F)QC}=S_{\\mathcal D}(\\chi_{F,QC})\\,\\sigma_{F,H^0(QC)}\\,D(F)(\\epsilon_{QC}).$$",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, preserved kernels and cokernels; Tag 0118, section-truncations; explicit two chain-map equations and their localization"
+   }
+  },
+  {
+   "text": "The comparison $\\sigma_{F,B}$ is natural in $B$: termwise, a map $b:B\\to B'$ gives the same degree-zero map $F(b)$ around both sides of its square and zero maps elsewhere; apply the natural factorization [lem-weil-pbc-exact-functor-derived-factorization]. Step 4 makes $\\chi$ natural on all derived morphisms, and Step 3 makes $\\epsilon$ natural. Thus both sides of the equality in Step 5 are natural in $K\\in\\mathcal Z_{\\mathcal C}$. For any representative isomorphism $r:QC\\to K$, naturality says that each side at $K$, precomposed with $D(F)r$, equals $S(H^0(D(F)r))$ followed after that side at $QC$. Step 5 identifies the latter sides; cancel the isomorphism $D(F)r$. This proves the required exact-functor compatibility for every $K$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; naturality and isomorphism cancellation using Steps 3--5"
+   }
+  },
+  {
+   "text": "For $F=\\operatorname{id}$, the preserved-kernel comparison is the identity by uniqueness of a factorization through the kernel inclusion, and the quotient comparison is the identity by uniqueness after the epimorphism $Z_C\\twoheadrightarrow H^aC$. The termwise single comparison is also the identity. Hence $\\chi$ and $\\sigma$ are identities under $D(\\operatorname{id})\\cong\\operatorname{id}$. For composable exact functors $F,G$, the composite $G F Z_C\\to G Z_{FC}\\to Z_{GFC}$ and the direct preserved-kernel comparison have the same composite with the kernel inclusion; that inclusion is monic, so they agree. The image and quotient comparisons agree by the corresponding mono and epi cancellations [lem-sp-exact-functor-preserves-homology]. Consequently, at complexes, $\\chi_{GF,C}=\\chi_{G,FC}\\,G(\\chi_{F,C})$, and $s_{GF,B}=s_{G,FB}\\,G(s_{F,B})$ termwise. The equality $C(GF)=C(G)C(F)$ gives the canonical derived-composition isomorphism by localization uniqueness [lem-weil-pbc-localization-universal-property] (1),(2). Its part (3) descends these equalities to $\\chi_{GF,K}=\\chi_{G,D(F)K}G(\\chi_{F,K})$ and $\\sigma_{GF,B}=\\sigma_{G,FB}D(G)(\\sigma_{F,B})$ under that isomorphism. Substitution into Step 6 gives exactly the composite compatibility for $\\epsilon$ as well.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor; categories.tex Tag 04VG with the natural-transformation enhancement; uniqueness of kernel/image/quotient comparisons and localized comparisons"
+   }
+  },
+  {
+   "text": "In the zero abelian category every object is zero and every Hom set is a singleton. All displayed maps, their inverses, and their comparisons are its unique maps. The kernel, quotient, and Hom-bijection calculations above still apply, including $\\operatorname{Hom}(0,0)$, so this case requires no nonzero-object assumption.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0118, section-truncations; direct zero-category check"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-truncations",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-derived-single-fully-faithful",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sp-exact-functor-preserves-homology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/homology.tex",
+  "place": "Tag 0118, section-truncations; derived.tex Tags 06XS and 015F. Agent supplies the normalized roof, conjugation/uniqueness argument, exact comparison equations, and composition coherence."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +168,59 @@
    "results": "[loogle] OK 12 hit(s). Read hits: CochainComplex.truncLE; CochainComplex.acyclic_truncLE_iff; CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE; CochainComplex.isIso_ιTruncLE_iff; CochainComplex.truncLEXIsoCycles; CochainComplex.truncLEXIso; CochainComplex.instQuasiIsoAtIntιTruncLE; CochainComplex.ιTruncLE; CochainComplex.quasiIsoAt_ιTruncLE; CochainComplex.instQuasiIsoIntιTruncLEOfIsLE; CochainComplex.quasiIso_ιTruncLE_iff; CochainComplex.truncLEMap. Read CochainComplex.lean truncation/quasi-isomorphism interfaces, DerivedCategory/TStructure.lean existence of a single-object model, FullyFaithful.lean lines 29--66 and ExactFunctor.lean lines 112--149. They supply individual ingredients, not the specified roof plus its naturality and exact-functor/composition normalization. The rightDerivedZero hits concern derived functors on the abelian heart, not this assertion. No exact match or one-line specialization.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "truncLE.*[Hh]omology|[Hh]omology.*truncLE|mapDerivedCategorySingleFunctor",
+   "results": "OK 16 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean, Mathlib/Algebra/Homology/Embedding/TruncLEHomology.lean. Read FullyFaithful.lean:30--66, ExactFunctor.lean:35--55,112--149, CochainComplex.lean:57--71,280--288,422--424, and TStructure.lean:189. Hits provide full faithfulness, existence of a single model, individual truncation maps, or exact-single comparisons; none states the entire prescribed roof normalization with its naturality and exact-functor/composition coherence. The latter clauses require the argument in this split.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Good truncation identifies a degree zero derived object with zeroth cohomology naturally and compatibly with exact functors",
+   "results": "OK 8 hits: CategoryTheory.CosimplicialObject.truncation, CochainComplex.truncate, ChainComplex.truncate, ChainComplex.truncateTo, CategoryTheory.Functor.toRightDerivedZero, ComplexShape.Embedding.truncGEFunctor, CategoryTheory.instIsIsoAppToRightDerivedZero, CochainComplex.truncate_obj_X. Read FullyFaithful.lean:30--66, ExactFunctor.lean:35--55,112--149, CochainComplex.lean:57--71,280--288,422--424, and TStructure.lean:189. Hits provide full faithfulness, existence of a single model, individual truncation maps, or exact-single comparisons; none states the entire prescribed roof normalization with its naturality and exact-functor/composition coherence. The latter clauses require the argument in this split.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE, DerivedCategory.singleFunctor",
+   "results": "OK 0 hits: . Read FullyFaithful.lean:30--66, ExactFunctor.lean:35--55,112--149, CochainComplex.lean:57--71,280--288,422--424, and TStructure.lean:189. Hits provide full faithfulness, existence of a single model, individual truncation maps, or exact-single comparisons; none states the entire prescribed roof normalization with its naturality and exact-functor/composition coherence. The latter clauses require the argument in this split.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The good truncation roof gives a natural isomorphism from a derived object with only zeroth cohomology to its single cohomology complex compatible with exact functors",
+   "results": "OK 8 hits: DerivedCategory.singleFunctorIsoCompQ, DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE, HomologicalComplex.truncGEXIso, CochainComplex.instQuasiIsoIntιTruncLEOfIsLE, CochainComplex.instQuasiIsoIntπTruncGEOfIsGE, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, CochainComplex.instIsIsoIntπTruncGEOfIsStrictlyGE, HomologicalComplex.quasiIsoAt_πTruncGE. Read FullyFaithful.lean:30--66, ExactFunctor.lean:35--55,112--149, CochainComplex.lean:57--71,280--288,422--424, and TStructure.lean:189. Hits provide full faithfulness, existence of a single model, individual truncation maps, or exact-single comparisons; none states the entire prescribed roof normalization with its naturality and exact-functor/composition coherence. The latter clauses require the argument in this split.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompHomologyFunctorIso|exists_iso_singleFunctor_obj_of_isGE_of_isLE",
+   "results": "OK 7 hits: Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/FullyFaithful.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/TStructure.lean. Read FullyFaithful.lean:30--66, ExactFunctor.lean:35--55,112--149, CochainComplex.lean:57--71,280--288,422--424, and TStructure.lean:189. Hits provide full faithfulness, existence of a single model, individual truncation maps, or exact-single comparisons; none states the entire prescribed roof normalization with its naturality and exact-functor/composition coherence. The latter clauses require the argument in this split.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.truncLE",
+   "results": "OK 12 hits: CochainComplex.truncLE, CochainComplex.acyclic_truncLE_iff, CochainComplex.instIsIsoIntιTruncLEOfIsStrictlyLE, CochainComplex.isIso_ιTruncLE_iff, CochainComplex.truncLEXIsoCycles, CochainComplex.truncLEXIso, CochainComplex.instQuasiIsoAtIntιTruncLE, CochainComplex.ιTruncLE. Read FullyFaithful.lean:30--66, ExactFunctor.lean:35--55,112--149, CochainComplex.lean:57--71,280--288,422--424, and TStructure.lean:189. Hits provide full faithfulness, existence of a single model, individual truncation maps, or exact-single comparisons; none states the entire prescribed roof normalization with its naturality and exact-functor/composition coherence. The latter clauses require the argument in this split.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical identification of a cochain complex concentrated in cohomological degree zero with cycles modulo boundaries is natural under exact additive functors",
+   "results": "OK 8 hits: CochainComplex.isoHomologyπ₀_inv_naturality, CochainComplex.isoHomologyπ₀_inv_naturality_assoc, CochainComplex.isoHomologyπ₀, HomologicalComplex.singleObjCyclesSelfIso_hom_naturality, HomologicalComplex.singleObjCyclesSelfIso_hom_naturality_assoc, HomologicalComplex.singleObjCyclesSelfIso_inv_naturality_assoc, HomologicalComplex.singleObjCyclesSelfIso_inv_naturality, CochainComplex.isIso_liftCycles_iff. Read FullyFaithful.lean:30--66, ExactFunctor.lean:35--55,112--149, CochainComplex.lean:57--71,280--288,422--424, and TStructure.lean:189. Hits provide full faithfulness, existence of a single model, individual truncation maps, or exact-single comparisons; none states the entire prescribed roof normalization with its naturality and exact-functor/composition coherence. The latter clauses require the argument in this split.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-degree-zero-derived-map-gluing",
@@ -88,5 +240,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-good-truncation-exact-normalization",
+  "worker": "stage1",
+  "summary": "Q20: retained the statement and all inherited searches; proved the specified roof isomorphism and its normalization, derived the Hom bijection and representative independence from the existing fully faithful single embedding, descended exact cohomology comparisons through localization, and verified kernel/quotient comparison equations and composition coherence. All ingredients already have nodes; no new nodes.",
+  "blueprint": "cor-pur-dualizing-object-purity, final sentence: canonical normalization and compatibility with arbitrary base change and composition; follows the existing via chain through lem-pur-vector-integration-site-comparison and lem-pur-degree-zero-derived-map-gluing. This is the abstract normalization ingredient, with no change to the smooth-purity unit route.",
+  "tool_uses": [
+   {
+    "node": "def-kun-truncations",
+    "why": "Only the explicit good-truncation construction and retained cohomology are used as general homological-algebra tools; the smooth-purity unit does not define those complexes."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-truncations"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-ad97b2017",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-ad97b2017 (reviewer sub-agent of L); spot-checked: Q20 lem-pur-good-truncation-exact-normalization @ad97b201: PASS. I read the whole delivery, which has no new nodes. The item is not dropped (it is absent from side-live route-pivot-dropped.txt), not superseded (still unsplit on side-live) and not a re-split. The statement, stmt_deps and blueprint are unchanged from the base; the 7 inherited searches are kept verbatim and 7 new ones are appended. I read every cited statement: def-kun-truncations (an off-unit tool use, declared and accepted: only the good-truncation definition and its cohomology clause are used), def-weil-abstract-derived-category, the pbc derived-single-fully-faithful, exact-functor-complex-cohomology, exact-functor-derived-factorization and localization-universal-property (1)-(3) nodes, and lem-sp-exact-functor-preserves-homology (a)-(c), all of them Mathlib leaves. Source checks: Stacks 0118 section-truncations and 06XS lemma-negative-exts read; 010N, 015F and 04VG tag/label pairs verified. No SGA. Mathematics: Step 1's chain-map equation q_C d̄^{-1}=0 and H^0(p_C)=id are right. In Step 2, conjugating by e_K and applying H^0 gives the Hom bijection without assuming naturality. Step 3 gets representative independence and naturality from injectivity, since S H^0 K lies in Z. Step 4 descends (c^a)^{-1} via localization (2), with F(0)=0 putting D(F)K in Z. In Step 5, t_C is correct, the equations c_{FC}t_C=F(c_C) and q_{FC}t^0=(c^0)^{-1}F(q_C) both hold, and the localized formula follows. Step 6 extends by naturality and cancels D(F)r. Step 7 gets the identity and composite cases by mono/epi cancellation and localization (3). Step 8 is the zero category. Edge cases checked: B[0], acyclic K, B[n] with n≠0, F=0, the zero category. The unsplit lem-sfb-derived-degree-zero-abelian-criterion overlaps only partly, so it is not a duplicate. Advisories, no change needed: the statement's D(F) from lem-sf-exact-functor-derived-triangulated is identified with F_D implicitly, and Step 2 uses essential surjectivity of Q tacitly."
  }
 }
