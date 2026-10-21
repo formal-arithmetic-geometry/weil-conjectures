@@ -147,6 +147,19 @@ private theorem comparison_transport_isIso {A C D E : Type*}
   subst a
   exact comparison_factor_isIso J₁ J₂ R₀ R₁ R₂ H e₀ e₁ g M
 
+private theorem refinementPasting_normalized {A C D E : Type*}
+    [Category A] [Category C] [Category D] [Category E]
+    (J₁ : A ⥤ C) (J₂ : A ⥤ D) (R₀ : A ⥤ A) (R₁ : C ⥤ D) (R₂ : D ⥤ E)
+    (H : C ⥤ E) (e₀ : R₀ ≅ 𝟭 A) (e₁ : R₁ ⋙ R₂ ≅ H)
+    (g : R₀ ⋙ J₂ ⟶ J₁ ⋙ R₁) :
+    refinementPasting J₁ J₂ R₀ R₁ R₂ H e₀ e₁ g =
+      Functor.whiskerRight (Functor.whiskerRight e₀.inv J₂ ≫ g) R₂ ≫
+        Functor.whiskerLeft J₁ e₁.hom := by
+  ext M
+  simp only [refinementPasting, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.leftUnitor_inv_app, Functor.associator_hom_app,
+    Category.id_comp]
+
 private theorem refinementComparison_factor {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c₁ c₂ : Compactification f} (r : c₁.Refinement c₂) (hf : QuasiCompact f) :
     let : QuasiCompact c₁.i := c₁.quasiCompact_openImmersion hf
@@ -156,10 +169,16 @@ private theorem refinementComparison_factor {X Y : Scheme.{u}} {f : X ⟶ Y}
         (R B c₂.g) (R B c₁.g) (rId B X) (refinementR B r)
         (refinementGamma B c₁.i (𝟙 X) r.hom c₂.i
           (r.i_hom.trans (Category.id_comp c₂.i).symm)) := by
+  let : QuasiCompact c₁.i := c₁.quasiCompact_openImmersion hf
+  let : QuasiCompact c₂.i := c₂.quasiCompact_openImmersion hf
   dsimp only
-  unfold refinementComparison compositionC refinementR
+  unfold refinementComparison refinementR
   rw [refinementGamma_eq, rCompEq_eq]
-  rfl
+  exact (refinementPasting_normalized (J B c₁.i) (J B c₂.i) (R B (𝟙 X))
+    (R B r.hom) (R B c₂.g) (R B c₁.g) (rId B X)
+    (rComp B r.hom c₂.g ≪≫ eqToIso (congrArg (R B) r.hom_g))
+    (gamma B c₁.i (𝟙 X) r.hom c₂.i
+      (r.i_hom.trans (Category.id_comp c₂.i).symm))).symm
 
 /-- Invertibility of the comparison on the finite scalar etale-origin domain.
 Source: Stacks, Tag 0F7B; item proof steps 1 and 2
@@ -575,6 +594,18 @@ private theorem refinementPasting_exchange {A C₁ C₂ T A' C₁' C₂' T' : Ty
     normalized_comparison_exchange J₁ J₂ J₁' J₂' Rr Rr' P₁ P₂ P₁' P₂' L L₁ L₂ Lt
       o o' κ κ' β₁ β₂ er e₁ e₂ ho hκ M
 
+private theorem exchangePasting_normalized {A C T A' C' T' : Type*}
+    [Category A] [Category C] [Category T] [Category A'] [Category C'] [Category T']
+    (J : A ⥤ C) (P : C ⥤ T) (J' : A' ⥤ C') (P' : C' ⥤ T')
+    (L : A ⥤ A') (Lc : C ⥤ C') (Lt : T ⥤ T')
+    (β : J ⋙ Lc ⟶ L ⋙ J') (e : P ⋙ Lt ⟶ Lc ⋙ P') :
+    exchangePasting J P J' P' L Lc Lt β e =
+      Functor.whiskerLeft J e ≫ Functor.whiskerRight β P' := by
+  ext M
+  simp only [exchangePasting, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.associator_hom_app, Functor.associator_inv_app,
+    Category.id_comp, Category.comp_id]
+
 private theorem compositionE_factor {X Y X' Y' : Scheme.{u}}
     {f : X ⟶ Y} {f' : X' ⟶ Y'} (c : Compactification f) (c' : Compactification f')
     (a : X' ⟶ X) (b : Y' ⟶ Y) (s : c'.Z ⟶ c.Z)
@@ -585,7 +616,9 @@ private theorem compositionE_factor {X Y X' Y' : Scheme.{u}}
         (G B a) (G B s) (G B b) (beta B a c'.i c.i s wi si).hom
         (refinementExchange B s c'.g c.g b wp) := by
   rw [refinementExchange_eq]
-  rfl
+  exact (exchangePasting_normalized (J B c.i) (R B c.g) (J B c'.i) (R B c'.g)
+    (G B a) (G B s) (G B b) (beta B a c'.i c.i s wi si).hom
+    (exchange B s c'.g c.g b wp)).symm
 
 private theorem equation_exchange_transfer {A A' T T' : Type*}
     [Category A] [Category A'] [Category T] [Category T']

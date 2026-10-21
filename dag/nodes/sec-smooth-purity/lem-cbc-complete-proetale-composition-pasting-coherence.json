@@ -82,10 +82,11 @@
    }
   },
   {
-   "text": "Expand $C_{hf}D_2$ using (1), then (3), then (2). With composition read right to left this is\n$$\\begin{aligned}\nC_{hf}D_2\n&=R_{q_2}\\big[(R_{p_2}\\gamma_TJ_{c_1})(R_{p_2}J_{b_2}\\gamma_A)(\\gamma_{Q_2}J_{c_2})\\big]\\\\\n&=R_{q_2}\\big[(R_{p_2}\\gamma_TJ_{c_1})(\\gamma_{Q_2}R_wJ_{c_1})(J_{i_2}R_{r_2}\\gamma_A)\\big]\\\\\n&=R_{q_2}\\big[(R_u\\gamma_{Q_1}J_{c_1})(\\gamma_HR_{r_1}J_{c_1})(J_{i_2}R_{r_2}\\gamma_A)\\big]\\\\\n&=D_1(C_hF_{f,1})(F_{h,2}C_f).\n\\end{aligned}$$\nThe last line uses $R_{q_2}R_u=R_{q_1}$ and the definitions in step 3. Functoriality and associativity justify expanding and regrouping. Parenthesization independence in the calculus ensures that the same canonical identifications are used at each line.",
+   "text": "Expand $C_{hf}D_2$ using (1), then (3), then (2). With composition read right to left this is\n$$\\begin{aligned}\nC_{hf}D_2\n&=R_{q_2}\\big[(R_{p_2}\\gamma_TJ_{c_1})(R_{p_2}J_{b_2}\\gamma_A)(\\gamma_{Q_2}J_{c_2})\\big]\\\\\n&=R_{q_2}\\big[(R_{p_2}\\gamma_TJ_{c_1})(\\gamma_{Q_2}R_wJ_{c_1})(J_{i_2}R_{r_2}\\gamma_A)\\big]\\\\\n&=R_{q_2}\\big[(R_u\\gamma_{Q_1}J_{c_1})(\\gamma_HR_{r_1}J_{c_1})(J_{i_2}R_{r_2}\\gamma_A)\\big]\\\\\n&=D_1(C_hF_{f,1})(F_{h,2}C_f).\n\\end{aligned}$$\nThe last line uses $R_{q_2}R_u=R_{q_1}$ and the definitions in step 3. Functoriality and associativity justify expanding and regrouping. Parenthesization independence in the calculus ensures that the same canonical identifications are used at each line. The named direct-image compositors are those of lem-cbc-strict-tower-direct-image-coherence. Its associativity identifies the two outer proper composites; the right identity law is obtained by conjugating the existing inverse-image right-unit law.",
    "uses": [
     "lem-cbc-strict-tower-proper-open-calculus",
-    "def-cbc-strict-constant-tower-operations"
+    "def-cbc-strict-constant-tower-operations",
+    "lem-cbc-strict-tower-direct-image-coherence"
    ],
    "elementary": true,
    "source": {
@@ -94,12 +95,13 @@
    }
   },
   {
-   "text": "For base change write $t:\\overline Y'\\to\\overline Y$, $s:\\overline X'\\to\\overline X$, $d:U'\\to U$, $y=g_Y$, and $x=g_X$. The compatible-tower statement supplies the pulled-back tower and the corresponding cartesian faces. Put $r=p_Y$. In these notations let\n$$E_q:G_gR_q\\to R_{q'}G_t,\\quad E_p:G_tR_p\\to R_{p'}G_s,\\quad E_r:G_yR_r\\to R_{r'}G_d.$$\nThe proper mate for $qp$ is $(R_{q'}E_p)(E_qR_p)$: this is pasting along the proper adjunctions, clause 2 of mate-pasting, applied to the two pullback squares and the normalized inverse-image compositors. Likewise the open comparison for $a=bc$ is $(J_{b'}\\beta_c)(\\beta_bJ_c)$ by the open-composition law of the calculus. Consequently\n$$e_{hf}=(R_{q'}R_{p'}J_{b'}\\beta_c)(R_{q'}R_{p'}\\beta_bJ_c)(R_{q'}E_pJ_bJ_c)(E_qR_pJ_bJ_c). \\tag{4}$$\nThis identifies the specified proper-then-open map, with no appeal to its evaluations.",
+   "text": "For base change write $t:\\overline Y'\\to\\overline Y$, $s:\\overline X'\\to\\overline X$, $d:U'\\to U$, $y=g_Y$, and $x=g_X$. The compatible-tower statement supplies the pulled-back tower and the corresponding cartesian faces. Put $r=p_Y$. In these notations let\n$$E_q:G_gR_q\\to R_{q'}G_t,\\quad E_p:G_tR_p\\to R_{p'}G_s,\\quad E_r:G_yR_r\\to R_{r'}G_d.$$\nThe proper mate for $qp$ is $(R_{q'}E_p)(E_qR_p)$: this is pasting along the proper adjunctions, clause 2 of mate-pasting, applied to the two pullback squares and the normalized inverse-image compositors. Likewise the open comparison for $a=bc$ is $(J_{b'}\\beta_c)(\\beta_bJ_c)$ by the open-composition law of the calculus. Consequently\n$$e_{hf}=(R_{q'}R_{p'}J_{b'}\\beta_c)(R_{q'}R_{p'}\\beta_bJ_c)(R_{q'}E_pJ_bJ_c)(E_qR_pJ_bJ_c). \\tag{4}$$\nThis identifies the specified proper-then-open map, with no appeal to its evaluations. The canonical proper-mate pasting used here is strictTowerMatePasting of lem-cbc-strict-tower-direct-image-coherence, with the equality rCompEq_eq identifying its named compositor with the displayed rComp followed by equality transport.",
    "uses": [
     "lem-cbc-compactifiable-compatible-tower",
     "def-cbc-strict-constant-tower-operations",
     "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-weil-pbc-mate-pasting"
+    "lem-weil-pbc-mate-pasting",
+    "lem-cbc-strict-tower-direct-image-coherence"
    ],
    "elementary": false,
    "source": {
@@ -132,7 +134,7 @@
    }
   },
   {
-   "text": "For the refinement square with top $a_1$, bottom $a_2$, left $1_X$, right $v$, the finite-origin clause of the calculus applied to $M$ makes $C_{hf}$ invertible. Step 2 makes both $D_j$ invertible. Hence step 6 makes $H=(C_hF_{f,1})(F_{h,2}C_f)=D_1^{-1}C_{hf}D_2$ invertible, without a separate finite-origin assumption on $F_fM$.\nThe calculus cube applied to the three refinement squares gives $C'_\\bullet e_{\\bullet,2}=e_{\\bullet,1}(G C_\\bullet)$ for $f,h,hf$: the cube equation is on all inputs, even when the isomorphism assertion is restricted. Naturality of $e_h$ with $C_f$ then gives\n$$H'G_x\\,(F_{h,2}'e_{f,2})(e_{h,2}F_{f,2})=(F_{h,1}'e_{f,1})(e_{h,1}F_{f,1})(G_gH).$$\nSubstitute this equality and $C'_{hf}e_{hf,2}=e_{hf,1}G_gC_{hf}$ into step 9, together with $C_{hf}D_2=D_1H$ and its primed version; the identity is thereby identified under refinement. The compatible-tower theorem supplies a common refining tower for any two choices. For its two maps the preceding equations identify both $D$ and step 9. The refinement/exchange theorem, applied only to the compactifications of $hf$ at $M$, gives independence and the cocycle of the $C_{hf}$ comparisons. Since $H=D_1^{-1}C_{hf}D_2$, these properties also hold for the corresponding horizontal comparisons. Thus the transport is independent of the common refinement. Every equality used is before evaluation. Lean implementation note (D2): compositionRefinement_isIso factors the hf comparison through the identity-left gamma and canonical isomorphisms, then cancels D_1 using the refinement clause of compositionPastingCoherence. compositionRefinementExchange applies the declared refinement/exchange theorem to f, h and hf, and uses naturality to combine the first two squares. Its transformation equalities do not depend on the finite-origin input demanded by other conjuncts of that theorem: a genuine zero finite-origin object, constructed with the finite zero coefficient ring, supplies that input.",
+   "text": "For the refinement square with top $a_1$, bottom $a_2$, left $1_X$, right $v$, the finite-origin clause of the calculus applied to $M$ makes $C_{hf}$ invertible. Step 2 makes both $D_j$ invertible. Hence step 6 makes $H=(C_hF_{f,1})(F_{h,2}C_f)=D_1^{-1}C_{hf}D_2$ invertible, without a separate finite-origin assumption on $F_fM$.\nThe calculus cube applied to the three refinement squares gives $C'_\\bullet e_{\\bullet,2}=e_{\\bullet,1}(G C_\\bullet)$ for $f,h,hf$: the cube equation is on all inputs, even when the isomorphism assertion is restricted. Naturality of $e_h$ with $C_f$ then gives\n$$H'G_x\\,(F_{h,2}'e_{f,2})(e_{h,2}F_{f,2})=(F_{h,1}'e_{f,1})(e_{h,1}F_{f,1})(G_gH).$$\nSubstitute this equality and $C'_{hf}e_{hf,2}=e_{hf,1}G_gC_{hf}$ into step 9, together with $C_{hf}D_2=D_1H$ and its primed version; the identity is thereby identified under refinement. The compatible-tower theorem supplies a common refining tower for any two choices. For its two maps the preceding equations identify both $D$ and step 9. The refinement/exchange theorem, applied only to the compactifications of $hf$ at $M$, gives independence and the cocycle of the $C_{hf}$ comparisons. Since $H=D_1^{-1}C_{hf}D_2$, these properties also hold for the corresponding horizontal comparisons. Thus the transport is independent of the common refinement. Every equality used is before evaluation. Lean implementation note (D2): compositionRefinement_isIso factors the hf comparison through the identity-left gamma and canonical isomorphisms, then cancels D_1 using the refinement clause of compositionPastingCoherence. compositionRefinementExchange applies the declared refinement/exchange theorem to f, h and hf, and uses naturality to combine the first two squares. Its transformation equalities do not depend on the finite-origin input demanded by other conjuncts of that theorem: a genuine zero finite-origin object, constructed with the finite zero coefficient ring, supplies that input. For common-refinement independence, apply refinementExchangeCoherence to hf to identify the second comparison. The refinement square already proved identifies the first comparison uniquely after cancellation of the invertible D. Thus equality of the pair does not require an additional common-refinement existence construction.",
    "uses": [
     "lem-cbc-strict-tower-proper-open-calculus",
     "lem-cbc-complete-proetale-refinement-exchange-coherence",
@@ -156,12 +158,13 @@
   "lem-cbc-compactifiable-compatible-tower",
   "lem-weil-pbc-mate-pasting",
   "lem-cbc-complete-proetale-refinement-exchange-coherence",
-  "def-cbc-strict-tower-composition-maps"
+  "def-cbc-strict-tower-composition-maps",
+  "lem-cbc-strict-tower-direct-image-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7J (lemma-shriek-composition), 0F7C, 0F7D and 0F7F; explicit adaptation using the existing normalized strict-tower calculus. The source proves the etale case, not the strict-tower equations. D2 stage 3: the two auxiliary refinement proofs implement step 10 from its declared dependencies; the main pasting and common-refinement plans remain."
+  "place": "Tags 0F7J, 0F7C, 0F7D and 0F7F, with the explicit strict-tower adaptation in the ten steps above. W2 stage 3 proves both remaining coherence theorems. The finite-origin transport supplies invertibility. Abstract six-square and cube calculations implement refinement and base-change pasting, then whole-transformation equalities identify their factors with the existing maps. The proved strict-tower direct-image coherence supplies named proper associativity and mate pasting; conjugating the inverse-image right-unit law supplies the right unit. Common-refinement independence follows from the hf clause of refinementExchangeCoherence and cancellation. The pre-existing auxiliary refinement proofs are retained."
  },
  "mathlib_searches": [
   {
@@ -298,13 +301,13 @@
   "note": "The statement is distributed over the canonical F/D/C/E constructions and input-data packages, compositionPastingCoherence (invertibility, refinement, arbitrary-base-change interchange), compositionRefinement_isIso, compositionRefinementExchange, and compositionCommonCoherence (transport and common-refinement independence). CompositionRefinement deliberately does not use the stronger cartesian Triangle.Hom. No statement correction or dependency repair. D2: the canonical F/D/C/E constructions and refinement/base-change input packages now live verbatim in Sheaf.AlgebraicGeometry.StrictTowerCompositionMaps, publicly reexported by this module. This breaks the former Lean import cycle with Sheaf.Paper.RefinementExchangeCoherence; all mathematical signatures and data stay unchanged. The moved data are attached to def-cbc-strict-tower-composition-maps."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-4d356",
-  "group": "D2",
+  "reviewer": "COMPILER",
+  "group": "W2",
   "result": "pass",
-  "landing": "20261020T221113-L-4144504",
+  "landing": "20261021T001149-L-1378991",
   "kind": "interface",
-  "note": "independent cc review: moved 11 definitions vs live item (byte-identical except docstring tags); sibling vs live (one import line); compile of the delivered set and the importer CompleteCompactSupportProetale; #print axioms of the 2 new proofs (sorryAx only from still-open statements)"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

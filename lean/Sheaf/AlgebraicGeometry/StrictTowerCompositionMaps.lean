@@ -47,13 +47,9 @@ noncomputable def compositionD {X Y Z : Scheme.{u}} {f : X ⟶ Y} {h : Y ⟶ Z}
     (T : Compactification.Triangle f h) [QuasiCompact T.cf.i] [QuasiCompact T.cg.i]
     [QuasiCompact T.q] :
     compositionF B T.cf ⋙ compositionF B T.cg ⟶ compositionF B T.cfg :=
-  (Functor.associator (J B T.cf.i) (R B T.cf.g) (J B T.cg.i ⋙ R B T.cg.g)).hom ≫
   Functor.whiskerLeft (J B T.cf.i)
-    ((Functor.associator (R B T.cf.g) (J B T.cg.i) (R B T.cg.g)).inv ≫
-      Functor.whiskerRight (gamma B T.q T.cf.g T.p T.cg.i T.isPullback.w.symm)
-        (R B T.cg.g) ≫
-      (Functor.associator (J B T.q) (R B T.p) (R B T.cg.g)).hom) ≫
-  (Functor.associator (J B T.cf.i) (J B T.q) (R B T.p ⋙ R B T.cg.g)).inv ≫
+    (Functor.whiskerRight (gamma B T.q T.cf.g T.p T.cg.i T.isPullback.w.symm)
+      (R B T.cg.g)) ≫
   Functor.whiskerRight
     ((jComp B T.cf.i T.q).hom ≫ (jCongr B T.i_q).hom)
     (R B T.p ⋙ R B T.cg.g) ≫
@@ -67,11 +63,9 @@ noncomputable def compositionC {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} [QuasiCompact c.i] [QuasiCompact d.i]
     (r : c.Refinement d) : compositionF B d ⟶ compositionF B c :=
   Functor.whiskerRight
-    ((Functor.leftUnitor (J B d.i)).inv ≫
-      Functor.whiskerRight (rId B X).inv (J B d.i) ≫
+    (Functor.whiskerRight (rId B X).inv (J B d.i) ≫
       gamma B c.i (𝟙 X) r.hom d.i (r.i_hom.trans (Category.id_comp d.i).symm))
     (R B d.g) ≫
-  (Functor.associator (J B c.i) (R B r.hom) (R B d.g)).hom ≫
   Functor.whiskerLeft (J B c.i)
     ((rComp B r.hom d.g).hom ≫ (eqToIso (congrArg (R B) r.hom_g)).hom)
 
@@ -84,11 +78,8 @@ noncomputable def compositionE {X Y X' Y' : Scheme.{u}} {f : X ⟶ Y} {f' : X' �
     (wi : x ≫ c.i = c'.i ≫ s) (wp : s ≫ c.g = c'.g ≫ y)
     (si : IsPullback x c'.i c.i s) :
     compositionF B c ⋙ G B y ⟶ G B x ⋙ compositionF B c' :=
-  (Functor.associator (J B c.i) (R B c.g) (G B y)).hom ≫
   Functor.whiskerLeft (J B c.i) (exchange B s c'.g c.g y wp) ≫
-  (Functor.associator (J B c.i) (G B s) (R B c'.g)).inv ≫
-  Functor.whiskerRight (beta B x c'.i c.i s wi si).hom (R B c'.g) ≫
-  (Functor.associator (G B x) (J B c'.i) (R B c'.g)).hom
+  Functor.whiskerRight (beta B x c'.i c.i s wi si).hom (R B c'.g)
 
 /-- A refinement of the supplied towers consists of the three existing compactification
 refinements and the two remaining compatibility equations. No cartesian condition is imposed.
@@ -175,10 +166,7 @@ noncomputable def compositionHorizontalE {X Y Z X' Y' Z' : Scheme.{u}}
     (A : CompositionBaseChange T T' x y g) :
     (compositionF B T.cf ⋙ compositionF B T.cg) ⋙ G B g ⟶
       G B x ⋙ (compositionF B T'.cf ⋙ compositionF B T'.cg) :=
-  (Functor.associator (compositionF B T.cf) (compositionF B T.cg) (G B g)).hom ≫
   Functor.whiskerLeft (compositionF B T.cf) (compositionEh B A) ≫
-  (Functor.associator (compositionF B T.cf) (G B y) (compositionF B T'.cg)).inv ≫
-  Functor.whiskerRight (compositionEf B A) (compositionF B T'.cg) ≫
-  (Functor.associator (G B x) (compositionF B T'.cf) (compositionF B T'.cg)).hom
+  Functor.whiskerRight (compositionEf B A) (compositionF B T'.cg)
 
 end AlgebraicGeometry.ProEtale.StrictTower
