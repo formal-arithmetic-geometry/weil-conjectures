@@ -22560,3 +22560,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:33 L: returned deliver/Q111/lem-pur-sequence-adjoint-resolution-shifts (reviewer RETURN: L: independent stage-2 immutable head a15b126b3163: H13/H2: delivered record of dependency def-weil-pbc-ringed-topos-mor)
 - 13:33 L: returned deliver/Q83/lem-pur-concentrated-support-etale-transfer (reviewer RETURN: L: independent stage-2 immutable head ce037a86f6c2: H2: delivery added theorem stmt_dep lem-pur-supported-hom-pullback, )
 - 13:33 L: merged deliver/NS/lem-sfb-cohomology-tor-interval (reviewer PASS; after a return; new nodes: 1)
+- 13:33 L: returned deliver/Q31/lem-sf-cbc-localized-strict-tensor-descent (reviewer RETURN: L: independent stage-2 immutable head e4dfc93f308c: H2/H4: the delivery added theorem stmt_dep lem-pur-derived-change-of)
