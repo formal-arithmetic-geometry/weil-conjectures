@@ -22789,3 +22789,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:17 L: merged deliver/Q06/lem-sfb-normal-continuous-algcl-monodromy (stage 2; reviewer PASS; parallel immutable checks)
 - 14:17 L: merged deliver/NY/lem-weil-point-finite-free-sections-tensor (stage 2; reviewer FIX; parallel immutable checks)
 - 14:17 L: merged deliver/N7/lem-fd-integral-identity-rational-equivalence (stage 2; reviewer PASS; parallel immutable checks)
+- 14:18 L: returned deliver/Q19/lem-pod-fixed-pair-truncation-cohomology (reviewer RETURN: L: independent stage-2 immutable head 852730d93a64: H2: stmt_deps add theorem node lem-a1-integral-pullback-completed-co)
