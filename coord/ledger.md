@@ -23952,3 +23952,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:52 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 22:53 L: merged deliver/NI/lem-sfb-countable-endomorphism-module-reconstruction (stage 2; reviewer PASS; parallel immutable checks)
 - 22:53 L: returned deliver/NF/def-pur-affine-line-purity-comparison (reviewer RETURN: L: independent stage-2 immutable head faac82d4846f: No-op re-delivery of an item NI already landed (ledger 22:46 'merged)
+- 22:53 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
