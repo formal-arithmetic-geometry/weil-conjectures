@@ -143,7 +143,8 @@
   "statement": "theorem canonical_structure_map_base_change\n    [∀ Y : Scheme.{u},\n      HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))]\n    {X S X' S' : Scheme.{u}}\n    (f : X ⟶ S) (f' : X' ⟶ S') (g : S' ⟶ S) (p : X' ⟶ X)\n    (h : p ≫ f = f' ≫ g) :\n    (derivedPullback g).map\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings S.toRingedSpace)) 0).map\n            (SheafOfModules.unitToPushforwardObjUnit f.toRingCatSheafHom) ≫\n          Scheme.Modules.canonicalSingleDirectImageMap f\n            (SheafOfModules.unit X.ringCatSheaf)) ≫\n      (schemeDerivedBaseChangeMap f f' g p h\n        ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj\n            (SheafOfModules.unit X.ringCatSheaf)) ≫\n        (schemeDerivedDirectImage f').map\n          (Scheme.Modules.canonicalSinglePullbackMap p\n              (SheafOfModules.unit X.ringCatSheaf) ≫\n            (DerivedCategory.singleFunctor\n              (SheafOfModules.{u} (moduleRings X'.toRingedSpace)) 0).map\n                (SheafOfModules.pullbackObjUnitToUnit p.toRingCatSheafHom))) =\n    (Scheme.Modules.canonicalSinglePullbackMap g (SheafOfModules.unit S.ringCatSheaf) ≫\n        (DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0).map\n            (SheafOfModules.pullbackObjUnitToUnit g.toRingCatSheafHom)) ≫\n      ((DerivedCategory.singleFunctor\n          (SheafOfModules.{u} (moduleRings S'.toRingedSpace)) 0).map\n            (SheafOfModules.unitToPushforwardObjUnit f'.toRingCatSheafHom) ≫\n        Scheme.Modules.canonicalSingleDirectImageMap f'\n          (SheafOfModules.unit X'.ringCatSheaf))",
   "branch": "sheaf-dag",
   "by": "N4",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "Restored by G1 from the quarantine named in coord/rework.tsv. The public theorem statement and all dependencies are preserved verbatim. The pullback naturality proof now composes three mapped naturality squares using proved private generic category helpers, avoiding repeated localization rewrites; the complete ordinary-unit and derived-comparison argument remains unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -156,13 +157,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W3",
+  "group": "G1",
   "result": "pass",
-  "landing": "20261013T054244-L-451568",
-  "kind": "interface",
+  "landing": "20261021T002138-L-1491602",
+  "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
