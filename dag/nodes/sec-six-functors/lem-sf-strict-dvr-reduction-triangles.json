@@ -20,7 +20,11 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-sheaf-restrict-scalars",
   "lem-pur-derived-change-of-rings",
-  "def-weil-triangulated-category"
+  "def-weil-triangulated-category",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-integral-derived-reduction",
+  "def-sf-scalar-reduction-categories-restriction",
+  "def-sf-unrestricted-reduction-complex-constructions"
  ],
  "proof": [
   {
@@ -294,5 +298,32 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-10682c4cc (reviewer sub-agent of L); spot-checked: I read the item in full: the statement, 7 steps, the statements of all 16 proof_deps and 13 stmt_deps, and the source, Stacks 0942 lemma-bounded proof (1), whose triangle the item refines for C_n=(R/ϖ^n)_X without assuming C_n=B/ϖ^nB. The delivery adds no new nodes. Step 1: lem-pc-kflat-resolution applies to B=lim C_n, a sheaf of commutative rings. Step 2: the DVR kernel ϖ^n is checked by cancelling in R⊂E; tested at n=1, R=Z_ℓ (0→F_ℓ→Z/ℓ²→F_ℓ→0, non-split, and no splitting is used) and for ramified E. Step 3: the constant functor is exact by def-sfb-site-derived-constant-module-functor, read on underlying sheaves via the forgetful lemma (1), whose hypothesis holds on X_proet. Step 4: B-linearity follows from the π-coordinate identities and restriction of scalars. Step 5: the termwise SES uses only flatness of P^i, with the symmetry from tensor-closed. Step 6: the same P and e∘Q(f) are used at every n. lem-pur-derived-change-of-rings applies along the ring map π_n. The restricted-kflat identification with B→id B→π_n C_n gives α_n, and its Moreover clause with h=q_n gives the representative 1⊗q_n. Naturality of the single-tensor comparison c_{P,M} identifies Q(1⊗q_n) with 1⊗ᴸq_n. Step 7: the Mathlib leaf complex-ses-triangle (named first and second arrows), carried along the α's by TR1. Duplicates: rg -L found only lem-pe-successive-quotient-linear-triangle, which needs an injective t∈Γ(B) and quotients B/t^jB in the opposite orientation, so it is not this statement. Batch-5: lem-sf-ringed-kflat-single-tensor-comparison reaches lem-trf-site-functorial-flat-resolution, which only states that module sheaves have functorial flat resolutions. That is general homological algebra, not part of the trace-formula or Poincaré statements or their proofs, so I accept it. The 7 declared tool uses are all generic and accepted. No SGA source is used. Minor point, not a fault: the statement's 'canonical derived quotient transition' is pinned only through step 6's resolution-independent comparisons. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictDvrReductionTriangles",
+  "declaration": "WeilConjectures.strictDvrReductionTriangles",
+  "declarations": [
+   "WeilConjectures.strictDvrCoefficientModule",
+   "WeilConjectures.strictDvrConstantSection",
+   "WeilConjectures.strictDvrDerivedReduction",
+   "WeilConjectures.strictDvrReductionComparison",
+   "WeilConjectures.strictDvrDerivedQuotientTransition",
+   "WeilConjectures.strictDvrReductionTriangles"
+  ],
+  "file": "lean/Sheaf/Paper/StrictDvrReductionTriangles.lean",
+  "statement": "theorem strictDvrReductionTriangles (K : DerivedCategory (scalarReductionSource l E X)) : ∃ (P : CochainComplex (scalarReductionSource l E X) ℤ) (e : DerivedCategory.Q.obj P ≅ K) (hP : CochainComplex.IsKFlatIndependentCoefficients (J := AlgebraicGeometry.Scheme.ProEt.topology X) (R := completedIntegralCommRingSheafUnrestricted l E X) P), (∀ j : ℤ, SheafOfModules.IsFlatOnSite (J := AlgebraicGeometry.Scheme.ProEt.topology X) (R := completedIntegralCommRingSheafUnrestricted l E X) (P.X j)) ∧ ∃ (u : ∀ n : ℕ, strictDvrCoefficientModule l E X 0 ⟶ strictDvrCoefficientModule l E X (n + 1)), (∀ (n : ℕ) (U : X.ProEtᵒᵖ) (r : Padic.coefficientExtensionIntegers l E), (u n).val.app U (strictDvrConstantSection l E X 0 U r) = strictDvrConstantSection l E X (n + 1) U (Padic.coefficientExtensionUniformizer l E ^ (n + 1) * r)) ∧ ∃ (i : ∀ n : ℕ, unrestrictedTowerComplex l E X 0 P ⟶ unrestrictedTowerComplex l E X (n + 1) P), (∀ (n : ℕ) (j : ℤ) (U : X.ProEtᵒᵖ) (s : (strictDvrCoefficientModule l E X 0).val.obj U) (x : (P.X j).val.obj U), ((i n).f j).val.app U (unrestrictedTowerTensorSection l E X 0 (P.X j) U s x) = unrestrictedTowerTensorSection l E X (n + 1) (P.X j) U ((u n).val.app U s) x) ∧ ∀ n : ℕ, ∃ hz : i n ≫ unrestrictedTowerTransition l E X P n = 0, (∀ j : ℤ, ((ShortComplex.mk (i n) (unrestrictedTowerTransition l E X P n) hz).map (HomologicalComplex.eval (scalarReductionSource l E X) (.up ℤ) j)).ShortExact) ∧ ∃ δ : strictDvrDerivedReduction l E X K n ⟶ (strictDvrDerivedReduction l E X K 0)⟦(1 : ℤ)⟧, Triangle.mk ((strictDvrReductionComparison l E X P hP e 0).inv ≫ DerivedCategory.Q.map (i n) ≫ (strictDvrReductionComparison l E X P hP e (n + 1)).hom) (strictDvrDerivedQuotientTransition l E X P hP e n) δ ∈ CategoryTheory.Pretriangulated.distinguishedTriangles",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Repair L/H2/C3: cite derived reduction and two existing:true helper construction definition nodes. Both higher theorem conclusions occur in proof_deps only. Lean module and mathematical statement unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e1aeb6f6d",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Re-delivery after RETURN df60101867dc (H2/C3). The Lean module is byte-identical, and the earlier clause-by-clause pass still holds (index shift, u = ϖ^(n+1), pure-tensor-pinned i, degreewise ShortExact, single P/e/hP, canonical comparisons, actual transition as second arrow, no extra hypotheses, independent universes). Repairs (a)-(d) were done exactly: stmt_deps now cite def-weil-integral-derived-reduction and new existing:true definition nodes def-sf-scalar-reduction-categories-restriction (scalarReduction* categories, instances, restriction, derived restriction) and def-sf-unrestricted-reduction-complex-constructions (unrestrictedTower* complexes, pure-tensor section, counit resolution iso, transition = .app of the ∃!-characterized unrestrictedIntegralTransition). I read their definitions in the live modules: real constructions, independent of the theorem conclusions; record statements verbatim. Both theorems are in proof_deps only, and proof/proof_deps equal the live node. No live collisions, no supersession, report sections present, dry run OK 11066a9b4b9. Advisory: partial overlap with def-weil-integral-derived-restriction-of-scalars (ℓ≠p, no lean record); owned decls' docstrings name the theorem ids; unrestrictedIntegralTransition has no owner node. No compile: no file changed."
  }
 }

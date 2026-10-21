@@ -22513,3 +22513,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:02 L: merged deliver/Z9/Sheaf.CategoryTheory.DerivedCategory.GoodTruncationNormalization (stage 3; reviewer PASS; first push; landing 20261021T130249-L-2668388 (interface); batch 20261021T125931; modules 1; new nodes 0; change records: coord/changes/Z9-good-truncation-proof-scopes.md)
 - 13:22 L: returned deliver/NF/lem-pod-stratified-dualizable-bounded (reviewer RETURN: L: independent stage-2 immutable head d6508b749d3b: H1/H2/H11 + superseded: head d6508b74 is NF's stage-1 split re-sent )
 - 13:23 L: returned deliver/NI/lem-sfb-internal-extension-finite-presentation (reviewer RETURN: Superseded (A7/B10). The mathematics is sound and I read it in full. Timeline: the re-split note coord/repair-notes/lem-)
+- 13:24 L: merged deliver/Q10/lem-sfb-ordinary-proetale-direct-image-plus-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 13:24 L: merged deliver/Q03/lem-sf-strict-dvr-reduction-triangles (stage 2; reviewer PASS; parallel immutable checks)
