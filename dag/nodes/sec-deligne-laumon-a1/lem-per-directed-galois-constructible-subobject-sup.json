@@ -1,0 +1,227 @@
+{
+ "id": "lem-per-directed-galois-constructible-subobject-sup",
+ "kind": "statement",
+ "title": "Exhaustion by constructible subobjects in a fixed directed Galois class",
+ "statement": "Let ell be prime, X a Noetherian scheme, P a directed Galois partition, and A a commutative Noetherian ULift(F_ell)-algebra [def-per-galois-partition-modules, def-per-directed-constructible-galois-partition]. Let E belong to the weak class W_P(A), whose restrictions are filtered colimits of finite extensions of local systems trivialized by the specified covers. Suppose U is a subobject of E, and every subobject S of E whose underlying sheaf belongs to P.constructible(A) satisfies S <= U. Then U is the top subobject. Here subobjects are isomorphism classes of ambient monomorphisms into E, and <= means factorization. This is the upper-bound formulation of exhaustion by constructible subobjects of the fixed class. No directedness, size bound or colimit is included in the conclusion. It includes E=0 and X empty.",
+ "source": {
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 7.4.3 and proof of Lemma 7.4.4, p.306"
+ },
+ "stmt_deps": [
+  "def-per-galois-partition-modules",
+  "def-per-directed-constructible-galois-partition"
+ ],
+ "proof": [
+  {
+   "text": "Put $Z_i=X\\setminus(S_1\\cup\\cdots\\cup S_{i-1})$ with its reduced structure, and factor $k_i:S_i\\to X$ as its open inclusion into $Z_i$, followed by the closed inclusion into $X$. All these schemes are Noetherian: a closed affine chart has ring $R/J$, whose increasing ideal chains lift to those of $R$, and open subschemes are covered by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Open extension is exact by [lem-weil-pbc-extension-by-zero-exact]; closed direct image is exact and fully faithful by [lem-trf-oriented-closed-base-localization]. Their stalks are the original stalks on the stratum and zero off it, by [lem-weil-pbc-extension-by-zero-stalks, lemma-openclosed-stalk-lowerstar] and the closed-support description in the closed-base lemma. Consequently $k_{i!}$ preserves constructibility and membership in the fixed partition class: on $S_i$ it is the given sheaf, and on every other stratum it is zero. It also preserves small filtered colimits. For open extension this follows from its sheafified presheaf formula [def-weil-pbc-extension-by-zero]: extend the sectionwise colimit by zero and sheafify. For a closed inclusion $c$, a colimit of sheaves supported on $Z_i$ is still zero on the complement, since inverse image preserves colimits [prop-weil-pbc-inverse-image-modules-exact]. The closed-base lemma identifies it with $c_*c^{-1}$ of that colimit; applying $c^{-1}$ and its counit identifies it with the colimit on $Z_i$.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-trf-oriented-closed-base-localization",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lemma-openclosed-stalk-lowerstar",
+    "def-weil-pbc-extension-by-zero",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.4.2 and 7.4.3: the stratum extension functors"
+   }
+  },
+  {
+   "text": "On a nonempty stratum $S$ with cover $V\\to S$, choose a geometric point above one on $S$. The cover has a continuous surjection $G\\to\\operatorname{Aut}_S(V)$ with kernel $H=\\pi_1(V)$ by clause (1) of [lem-per-galois-descent-monodromy-tensor]; thus $H$ is normal and open. By [lem-per-torsion-local-system-monodromy], the sheaves defining $\\mathcal W$ are local systems and correspond exactly to discrete continuous $A$-linear modules for $G=\\pi_1(S)$ which are ind-unipotent for the normal open subgroup $H=\\pi_1(V)$. This uses the cover-descent, extension and colimit clauses of that node. The coefficient ring is killed by $\\ell$, as its hypotheses require. By [lem-per-normal-subgroup-ind-unipotence], the class is closed under submodules, and a finitely generated member is $H$-unipotent. Each finite set of elements of a discrete continuous module has a finite union of $G$-orbits: the stabilizers are open, hence have finite index. The $A$-span of those orbits is therefore a finitely generated $G$-stable submodule. These submodules form a directed union of the whole module and remain $H$-ind-unipotent. The monodromy equivalence identifies their sheaves with locally constant finite-type subobjects, hence constructible ones. Submodules and quotients of a finitely generated member remain finite over $A$ by [lem-weil-pbc-noetherian-submodule-finite]. Its finite $H$-unipotent filtration therefore has finitely generated successive quotients trivial on $H$. The same argument shows that an object of $\\mathcal W$ on any of the finitely many strata is locally constant of finite type precisely when its stalk module is finitely generated. In particular any subobject in $\\mathcal W$ of an object with finite stalk modules has finite stalk modules and is constructible on the fixed strata.",
+   "uses": [
+    "lem-per-torsion-local-system-monodromy",
+    "lem-per-normal-subgroup-ind-unipotence",
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-per-galois-descent-monodromy-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.4.3, one-stratum argument, and 7.4.5"
+   }
+  },
+  {
+   "text": "Suppose 0 -> H -> F -> G -> 0 lies in the fixed weak class, G is constructible, and H is a directed union of constructible subobjects H_a in that class. Apply lem-per-constructible-extension-finite-stage to obtain a monic comparison F_a -> F with endpoints H_a and G. Closure of P.constructible under extensions in lem-per-galois-partition-exact-refinement makes F_a constructible in the weak class. For b >= a, its sum with H_b is the pushout along H_a -> H_b and fits into 0 -> H_b -> F_a+H_b -> G -> 0. It is again constructible in the fixed class by that same extension closure. Their union contains H and surjects onto G, hence is F. Exact filtered colimits in the Grothendieck category of module sheaves identify the union with the colimit of the inclusions. This is the extension argument in the proof of ILO XVII 7.4.4.",
+   "uses": [
+    "lem-per-constructible-extension-finite-stage",
+    "lem-per-galois-partition-exact-refinement",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII proof of Lemma 7.4.4, p.306"
+   }
+  },
+  {
+   "text": "Induct on the number of strata to show every $E$ in the class is a union of constructible subobjects in it. The empty case is zero; one stratum is Step 2. For more strata, the sequence of Step 6 has kernel $H=j_!j^{-1}E$, which is such a union by Steps 1 and 2. By induction $c^{-1}E$ is a union of constructible subobjects in the remaining partition. Step 1 carries this union to the quotient $c_*c^{-1}E$. For each constructible subobject $G$ of that quotient in the class, take its inverse image $F\\subseteq E$. It fits into $0\\to H\\to F\\to G\\to0$ in the class, by its exactness and kernel closure [lem-per-galois-partition-exact-refinement]. Step 7 expresses $F$ as the required union. The union of these $F$ is $E$, by exact filtered colimits [lem-weil-pbc-module-sheaves-grothendieck-abelian]. To obtain a single directed indexing set, use all constructible subobjects of $E$ in the class, ordered by inclusion. Finite sums remain in the class and have finitely generated stalk modules; by the last assertion of Step 2 they are constructible. Thus this poset is directed and nonempty (it contains zero). It is a set in the site-and-coefficient universe: subobjects are represented by subsheaves of the fixed sheaf $E$ on a small site. Its colimit is $E$ by the union just proved. This supplies the small filtered colimit required in the statement.",
+   "uses": [
+    "lem-per-galois-partition-exact-refinement",
+    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII proof of Proposition 7.4.3, with Lemma 7.4.4 and Definition 7.4.5"
+   }
+  },
+  {
+   "text": "Let U be a subobject containing every constructible subobject of E in the fixed class. The exhaustion proved by the induction above factors the union through U. Thus E <= U as subobjects of E, and U = top. Only this universal upper-bound consequence is asserted: directedness, shrinking and a colimit presentation are proved separately in the consuming module. For X empty the sheaf is zero and the subobject poset is subsingleton.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+    "place": "XVII 7.4.3, locally Noetherian assertion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-size-convention",
+  "lem-per-constructible-extension-finite-stage",
+  "lem-per-galois-descent-monodromy-tensor",
+  "lem-per-galois-partition-exact-refinement",
+  "lem-per-normal-subgroup-ind-unipotence",
+  "lem-per-torsion-local-system-monodromy",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lemma-openclosed-stalk-lowerstar",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/illusie-laszlo-orgogozo-travaux-de-gabber_arXiv-1207.3648.pdf",
+  "place": "Expose XVII, Proposition 7.4.3 and proof of Lemma 7.4.4, p.306"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a weakly constructible module sheaf adapted to a directed Galois partition the constructible subobjects in the same class form a directed family with supremum top",
+   "results": "Eight results: SupSet declarations, submodule unions and general Grothendieck subobject colimits.",
+   "date": "2026-10-21",
+   "verdict": "no match: these do not prove constructible exhaustion inside the fixed Galois class"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible subobjects of a module sheaf in a fixed directed Galois partition are directed by inclusion and have supremum the whole sheaf",
+   "results": "Eight results about directed module colimits, submodules and abstract unions.",
+   "date": "2026-10-21",
+   "verdict": "no match: no geometric fixed-partition exhaustion"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*subobject|subobject.*constructible|filtrationClosure",
+   "results": "Zero Mathlib search-service matches. Project search found finite-ring ambient constructible presentations, without the required membership in W_P(A).",
+   "date": "2026-10-21",
+   "verdict": "no match: finite-ring ambient presentations do not specialize to arbitrary Noetherian A and the fixed weak class"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.DirectedGaloisFiniteTensorGenerators",
+  "date": "2026-10-21",
+  "group": "F1"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-per-artin-gabber-affine-curve",
+   "place": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.; coefficient comparison via ILO XVII 7.6.1, proof p. 314. Subargument: ILO XVII 7.6.10 closed/open devissage. Dependency of the localization-devissage argument: Expose XVII, Proposition 7.6.3, Proposition 7.6.5, Corollary 7.6.6 and Proposition 7.6.7, pp. 311-313; arbitrary Lambda-algebra coefficients in the application in Lemma 7.6.10. Corollary 7.6.6 concerns the closed immersion i (the word ouverte in its printed statement is a typo, as the complementary-open proof shows). Supporting the finite-simple-object devissage in ILO XVII 7.6.5: directed-partition and coefficient tensor devissage of XVII 7.4.2-7.4.6. This subargument is Expose XVII, Proposition 7.4.3 and proof of Lemma 7.4.4, p.306.",
+   "via": [
+    "lem-per-directed-galois-finite-tensor-generators",
+    "lem-per-galois-localization-uniform-bounds",
+    "lem-per-ctf-hom-localization-devissage",
+    "lem-per-ctf-hom-condition-b",
+    "lem-per-ctf-hom-coefficient-comparison",
+    "lem-per-coefficient-change-dualizing",
+    "lem-per-potential-local-duality",
+    "lem-per-finite-residue-dualizing",
+    "lem-per-qbar-arbitrary-field-duality"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "chapter": "sec-deligne-laumon-a1",
+ "unit": "sk-p-dl-a1-perverse",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.DirectedGaloisConstructibleSubobjectSup",
+  "file": "lean/Sheaf/Paper/DirectedGaloisConstructibleSubobjectSup.lean",
+  "declaration": "AlgebraicGeometry.Scheme.GaloisPartition.constructible_subobject_sup",
+  "statement": "theorem constructible_subobject_sup (ℓ : ℕ) [Fact ℓ.Prime]\n    (X : Scheme.{u}) [IsNoetherian X]\n    (P : GaloisPartition X) (hP : P.IsDirected)\n    (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A]\n    [Algebra (ULift.{u + 1} (ZMod ℓ)) A]\n    (E : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A)) (hE : P.modules A E) :\n    ∀ U : Subobject E,\n        (∀ S : Subobject E,\n          P.constructible A (S : Sheaf X.smallEtaleTopology (ModuleCat A)) → S ≤ U) →\n        U = ⊤",
+  "branch": "sheaf-dag",
+  "by": "F1",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-per-directed-galois-constructible-subobject-sup",
+  "worker": "stage3",
+  "summary": "Separate source proposition used by the proved categorical assembly of finite_tensor_generators.",
+  "blueprint": "Proof, Step 1 of lem-per-artin-gabber-affine-curve: 'Relative Verdier duality, biduality ... over the same arbitrary field $k$', through lem-per-qbar-arbitrary-field-duality, lem-per-finite-residue-dualizing and lem-per-potential-local-duality; the last node's Step 2 extends finite-field coefficients.; coefficient comparison via ILO XVII 7.6.1, proof p. 314. Subargument: ILO XVII 7.6.10 closed/open devissage. Dependency of the localization-devissage argument: Expose XVII, Proposition 7.6.3, Proposition 7.6.5, Corollary 7.6.6 and Proposition 7.6.7, pp. 311-313; arbitrary Lambda-algebra coefficients in the application in Lemma 7.6.10. Corollary 7.6.6 concerns the closed immersion i (the word ouverte in its printed statement is a typo, as the complementary-open proof shows). Supporting the finite-simple-object devissage in ILO XVII 7.6.5: directed-partition and coefficient tensor devissage of XVII 7.4.2-7.4.6. This subargument is Expose XVII, Proposition 7.4.3 and proof of Lemma 7.4.4, p.306.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-submodule-finite",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "lemma-openclosed-stalk-lowerstar",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic module-sheaf, stalk, constructibility or open/closed operation used in the ILO directed-partition argument; the perverse unit provides no replacement for this foundational tool."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261021T013814-L-2338314",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F1",
+  "result": "pass",
+  "landing": "20261021T013814-L-2338314",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
