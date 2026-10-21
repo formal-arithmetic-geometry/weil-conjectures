@@ -18,9 +18,83 @@
   "def-weil-extension-by-zero-presheaf",
   "lem-weil-pbc-module-sheaves-limits-sectionwise"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $i:Z\\hookrightarrow X$ be the reduced induced closed subscheme on $|X|\\setminus j(U)$, supplied by [lem-weil-pbc-reduced-induced-closed-subscheme]. Write $L=j_!$, $J=j^{-1}$ and $I=i^{-1}$, with coefficients $R$, $J R=R|_U$ and $I R$ respectively. The ringed recollement statement [lem-weil-pbc-proetale-ringed-open-closed] applies: its hypotheses are precisely a closed immersion, its quasi-compact open complement and an arbitrary commutative ring sheaf. In particular there is a natural isomorphism $\\theta:JL\\xrightarrow{\\sim}\\mathrm{id}$, one has $IL=0$, and every $R$-module sheaf $M$ has the short exact sequence $0\\to LJM\\to M\\to i_*IM\\to0$. These assertions require no quasi-compactness or quasi-separatedness of $X$.",
+   "uses": [
+    "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN (lemma-open-immersion), 09AG (lemma-jshriek-zero), 09AH (lemma-ses-associated-to-open); closed complement: schemes.tex Tag 01J3 (lemma-reduced-closed-subscheme)."
+   }
+  },
+  {
+   "text": "Put $Q=\\prod_s F_s$ and $P=\\prod_s LF_s$, and let $c:LQ\\to P$ be the map with components $L(\\mathrm{pr}_s)$ in the question. These products exist as sectionwise module limits by [lem-weil-pbc-module-sheaves-limits-sectionwise]. Apply [lem-weil-pbc-proetale-immersion-limit-preservation] to the open immersion $j$. It gives an isomorphism $\\beta:JP\\xrightarrow{\\sim}Q$ whose component at $s$ is $\\theta_{F_s}\\circ J(\\mathrm{pr}_s)$. Naturality of $\\theta$ gives $\\mathrm{pr}_s\\circ\\beta\\circ Jc=\\theta_{F_s}\\circ JL(\\mathrm{pr}_s)=\\mathrm{pr}_s\\circ\\theta_Q$. By the product universal property, $\\beta\\circ Jc=\\theta_Q$, so $Jc$ is an isomorphism. The natural identification $JL\\cong\\mathrm{id}$ used here is exactly the one asserted in [lem-weil-pbc-proetale-ringed-open-closed]; no identification of an unrelated adjunction unit is required.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BP (lemma-j-shriek-limits), kernel argument; open restriction as slice restriction, with module limits from sites-modules.tex Tag 03DB (lemma-limits-colimits)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-proetale-immersion-limit-preservation] to the closed immersion $i$. Its module inverse image preserves all products, hence $IP\\cong\\prod_s ILF_s=\\prod_s0=0$, using $IL=0$ from [lem-weil-pbc-proetale-ringed-open-closed]. The last equality follows sectionwise from [lem-weil-pbc-module-sheaves-limits-sectionwise]: the product of any small family of zero modules is the zero module, also when the family is empty. Likewise $ILQ=0$. Thus $Ic$ is the unique map between two zero objects and is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AA (lemma-closed-immersion), clause (1), and Tag 09AG (lemma-jshriek-zero), as used in the kernel proof of Tag 09BP."
+   }
+  },
+  {
+   "text": "The module-sheaf categories are abelian by [def-weil-sheaf-of-modules-category]. Let $K=\\ker c$ and $C=\\operatorname{coker}c$. Both $J$ and $I$ are exact by [lem-weil-pbc-proetale-immersion-limit-preservation], so Steps 2 and 3 give $JK=IK=JC=IC=0$. For either $M=K$ or $M=C$, the sequence of [lem-weil-pbc-proetale-ringed-open-closed] now has zero outer terms: $LJM=L0=0$ because $L$ is exact, and $i_*IM=i_*0=0$ because $i_*$ is exact. Hence $M=0$. Thus $c$ has zero kernel and cokernel and is an isomorphism in the abelian module category.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH (lemma-ses-associated-to-open): elementary kernel/cokernel consequence of recollement, applied to the comparison in Tag 09BP."
+   }
+  },
+  {
+   "text": "For a map of families $(a_s:F_s\\to G_s)_s$, compare the two maps from $L(\\prod_sF_s)$ to $\\prod_sLG_s$. Their $s$-th components are both $L(a_s\\circ\\mathrm{pr}_s)=L(a_s)\\circ L(\\mathrm{pr}_s)$, so they agree by the product universal property. This proves naturality of the specified comparison, and of its inverse since each component comparison is invertible. If the index set is empty, both products are terminal zero module sheaves and $L0=0$ by exactness, so the unique comparison is again an isomorphism. The cases $U=\\varnothing$, $j=\\mathrm{id}_X$, $X=\\varnothing$ and the zero coefficient ring are included by the same formulas.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BP (lemma-j-shriek-limits), product comparison; naturality and the empty family by the product universal property."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09BP (lemma-j-shriek-limits), kernel/recollement argument, using Tags 09AA, 09AG, 09AH and 09BN in their existing ringed refinements; the two restrictions detect the kernel and cokernel of the canonical product comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +137,45 @@
    "results": "8 hits: AlgebraicGeometry.IsImmersion.instIsOpenImmersionToImageOfQuasiCompact, AlgebraicGeometry.QuasiCompactCover.of_hom, AlgebraicGeometry.QuasiCompactCover.instPullback₂Scheme, AlgebraicGeometry.RingedSpace.res_zero, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, CategoryTheory.instPreservesFiniteProductsOppositeVal, AlgebraicGeometry.QuasiCompactCover.instBindScheme, Condensed.instPreservesFiniteProductsOppositeProfiniteVal",
    "date": "2026-10-21",
    "verdict": "no match: hits concern scheme open immersions, condensed constructors, or module-sheaf limit/forgetful functors; none is pro-etale open extension by zero preserving products."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a quasi-compact open immersion of schemes extension by zero for modules over any sheaf of rings on the pro-etale site preserves arbitrary small products",
+   "results": "{\"t\": \"2026-10-21T03:18:49Z\", \"tool\": \"leanfinder\", \"query\": \"For a quasi-compact open immersion of schemes extension by zero for modules over any sheaf of rings on the pro-etale site preserves arbitrary small products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.ofSheafProfinite\", \"Condensed.instPreservesFiniteProductsOppositeProfiniteVal\", \"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.ofSheafCompHaus\", \"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"CondensedMod.ofSheafStonean\", \"LightCondensed.instPreservesFiniteProductsOppositeLightProfiniteVal\", \"Condensed.profiniteSolid\"], \"digest\": \"7239f7d79da90cbe\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations concern condensed sheaf constructors, Zariski structure modules or ordinary extension of functions, not pro-etale extension by zero over an arbitrary ring sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|lowerShriek|jShriek",
+   "results": "{\"t\": \"2026-10-21T03:18:54Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|lowerShriek|jShriek\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations concern condensed sheaf constructors, Zariski structure modules or ordinary extension of functions, not pro-etale extension by zero over an arbitrary ring sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of sheaves of modules on a pro-etale site commutes with arbitrary products for a quasi-compact open immersion",
+   "results": "{\"t\": \"2026-10-21T03:18:54Z\", \"tool\": \"leansearch\", \"query\": \"Extension by zero of sheaves of modules on a pro-etale site commutes with arbitrary products for a quasi-compact open immersion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.RingedSpace.res_zero\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"AlgebraicGeometry.StructureSheaf.const_zero\", \"AlgebraicGeometry.Proj.zero_apply\", \"Function.extend_zero\", \"ContinuousLinearMap.extend_zero\", \"AlgebraicGeometry.Scheme.Modules.Hom.zero_app\", \"Condensed.instPreservesFiniteProductsOppositeProfiniteVal\"], \"digest\": \"a2b812d16ab7858f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations concern condensed sheaf constructors, Zariski structure modules or ordinary extension of functions, not pro-etale extension by zero over an arbitrary ring sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\"",
+   "results": "{\"t\": \"2026-10-21T03:18:54Z\", \"tool\": \"loogle\", \"query\": \"\\\"extensionByZero\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations concern condensed sheaf constructors, Zariski structure modules or ordinary extension of functions, not pro-etale extension by zero over an arbitrary ring sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product of sheaves of modules supported on a quasi-compact open subscheme of a pro-etale site is the extension by zero of the product on that open",
+   "results": "{\"t\": \"2026-10-21T03:18:58Z\", \"tool\": \"leanfinder\", \"query\": \"A product of sheaves of modules supported on a quasi-compact open subscheme of a pro-etale site is the extension by zero of the product on that open\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux\", \"LightCondMod.ofSheafLightProfinite\", \"CondensedMod.ofSheafProfinite\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondAb.ofSheafLightProfinite\", \"CondensedMod.ofSheafCompHaus\", \"AlgebraicGeometry.exists_of_res_zero_of_qcqs\"], \"digest\": \"304e8422e0c92009\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned declarations concern condensed sheaf constructors, Zariski structure modules or ordinary extension of functions, not pro-etale extension by zero over an arbitrary ring sheaf."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-completed-extension-zero-comparison",
@@ -83,5 +192,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-ringed-open-extension-products",
+  "worker": "stage1",
+  "summary": "Retained the arbitrary-ring-sheaf statement and no ambient qcqs assumption. Used existing ringed open-closed recollement and immersion inverse-image limit preservation, checked against their full statements and Stacks 09BP/09AA/09AH. Proved the canonical product comparison by its open and closed restrictions, then explicitly killed its kernel and cokernel. Included naturality and the empty family. No new nodes, statement changes, Lean edits or compilation.",
+  "blueprint": "Realizes the final parenthetical countable-product assertion in the main-20261015 proof of lem-cbc-completed-extension-zero-comparison, with the already imposed quasi-compact-open correction. Replaces the unsupported sectionwise-extension explanation by the ringed recollement kernel argument; proves all small products.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-reduced-induced-closed-subscheme",
+    "why": "Constructs the reduced closed complement for an arbitrary scheme; the compact-support unit has no replacement construction."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic ringed pro-etale recollement gives the open restriction identity, closed vanishing and localization short exact sequence for arbitrary ring sheaves without ambient qcqs."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic immersion inverse image preserves small limits and is exact on arbitrary ring-sheaf modules; needed for the open and closed restrictions of the product comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-reduced-induced-closed-subscheme",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-proetale-immersion-limit-preservation"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q02-b327290ea",
+  "group": "Q02",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q02-b327290ea (reviewer sub-agent of L); spot-checked: I read the item, the 5 cited statements and Stacks proetale.tex 09BP/09AA/09AG/09BN/09AH. The statement and stmt_deps are byte-identical to the live node. There are no new nodes and no repair note; the proof has 5 steps and 3275 characters, with no SGA source. The proof does not follow 09BP's own argument, which uses exactness of products after reducing to an affine X. Instead it checks the comparison c after restricting to U and to the closed complement Z, then kills ker c and coker c with the localization exact sequence. Step 1: lem-weil-pbc-proetale-ringed-open-closed needs only a closed immersion, a quasi-compact complementary open and an arbitrary ring sheaf; its qcqs clause is unused. It gives j^{-1}j_! ≅ id, i^{-1}j_! = 0, exactness of j_! and i_*, and the short exact sequence. Step 2: lem-weil-pbc-proetale-immersion-limit-preservation applies to the open immersion, and the projection equality shows that the restriction of the specified map c is invertible, not just that its endpoints are isomorphic. Step 3: the same node for the closed immersion, with i^{-1}j_! = 0, gives zero on both sides; the empty product is 0 sectionwise. Step 4: the kernel/cokernel argument is valid in the abelian module category. Step 5: naturality and the empty family check out. I tested U=∅, j=id, X=∅, the zero ring, the empty and singleton families, and a non-quasi-compact X. Duplicates: det-sf-open-closed-extension-zero-limits clause 3 is the qcqs special case of the item, which NV already created; advisory only. lem-sfb-condensed-open-extension-products is a different statement (derived categories, condensed coefficients). Accepted tool_uses: reduced-induced-closed-subscheme, proetale-ringed-open-closed and proetale-immersion-limit-preservation, all generic black-box tools; unit sk-prop-sf-cbc has an empty realized field. No fixes."
  }
 }
