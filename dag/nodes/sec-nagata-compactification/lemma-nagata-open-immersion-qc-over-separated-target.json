@@ -3,45 +3,64 @@
  "blueprint": {
   "is": "lemma-nagata-open-immersion-qc-over-separated-target",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Quasi-compactness of an open map to a separated target",
- "statement": "Let $T\\to Y\\to B$ be a commutative triangle. Assume that $T\\to B$ is\nof finite type, that $Y\\to B$ is separated, and that $T\\to Y$ is an\nopen immersion. Then $T\\to Y$ is a quasi-compact open immersion.",
+ "statement": "Let $T\\to Y\\to B$ be a commutative triangle of schemes [def-pc-scheme]. Assume that $T\\to B$ is quasi-compact [def-weil-finite-type-morphism] and that $Y\\to B$ is quasi-separated [def-weil-quasi-separated-morphism]. Then $T\\to Y$ is quasi-compact; in particular, if $T\\to Y$ is an open immersion [def-weil-open-immersion], it is a quasi-compact open immersion.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-open-immersion-qc-over-separated-target.md",
   "place": "node lemma-nagata-open-immersion-qc-over-separated-target, order 79"
  },
- "stmt_deps": [],
- "proof": [
-  {
-   "text": "By [lemma-nagata-finite-type-to-separated-target], the open immersion\nis of finite type. An open immersion is locally of finite type, and it is\nof finite type exactly when it is quasi-compact.",
-   "uses": [
-    "lemma-nagata-finite-type-to-separated-target"
-   ],
-   "elementary": false
-  }
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-finite-type-morphism",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-open-immersion"
  ],
- "proof_deps": [
-  "lemma-nagata-finite-type-to-separated-target"
- ],
+ "proof": [],
+ "proof_deps": [],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-closure/lemma-nagata-open-immersion-qc-over-separated-target.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/schemes.tex",
+  "place": "Stacks Tag 03GI, Lemma lemma-quasi-compact-permanence; exact Mathlib leaf AlgebraicGeometry.QuasiCompact.of_comp, lines 250–252"
  },
  "mathlib_searches": [
   {
-   "tool": "text search of the local Mathlib checkout (0df444a360)",
+   "tool": "leanfinder",
+   "query": "A morphism of schemes is quasi-compact if its composite with a quasi-separated morphism is quasi-compact",
+   "results": "AlgebraicGeometry.QuasiCompact.of_comp (Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated); exact hypotheses QuasiCompact (f ≫ g), QuasiSeparated g and conclusion QuasiCompact f. Other hits concern composition stability and QuasiSeparated.of_comp.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "loogle",
    "query": "AlgebraicGeometry.QuasiCompact.of_comp",
-   "results": [
-    "Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated:250 (lemma)"
-   ],
-   "date": "2026-10-08"
+   "results": "One hit: AlgebraicGeometry.QuasiCompact.of_comp, Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated; (f : X ⟶ Y) (g : Y ⟶ Z) [QuasiCompact (f ≫ g)] [QuasiSeparated g] : QuasiCompact f.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "grep",
+   "query": "lemma of_comp|QuasiCompact.of_comp",
+   "results": "AlgebraicGeometry/Morphisms/QuasiSeparated.lean:250–252 gives QuasiCompact.of_comp; line 255 starts quasiCompact_of_compactSpace. Read lines 246–252 of the local Mathlib source to confirm declaration and proof.",
+   "date": "2026-10-21",
+   "verdict": "match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "If a composite of scheme morphisms is quasi-compact and the second morphism is quasi-separated then the first is quasi-compact",
+   "results": "AlgebraicGeometry.QuasiCompact.of_comp is the first of eight hits, with exactly the required hypotheses and conclusion. Other hits include QuasiCompact, QuasiSeparated.of_comp and composition stability.",
+   "date": "2026-10-21",
+   "verdict": "match"
   }
  ],
- "mathlib_match": null,
- "status": "imported",
+ "mathlib_match": {
+  "declaration": "AlgebraicGeometry.QuasiCompact.of_comp",
+  "file": "Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean",
+  "how": "exact for the main assertion: lines 250–252, with X := T, Y := Y, Z := B, f := (T → Y), g := (Y → B), and the triangle identifies f ≫ g with T → B. The final open-immersion clause specializes in one line: pair this quasi-compactness conclusion with the given IsOpenImmersion f; no additional theorem or hypothesis is used."
+ },
+ "status": "mathlib",
  "merged_into": null,
  "import_flags": [
   "lean_not_found",
@@ -89,5 +108,20 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-open-immersion-qc-over-separated-target",
+  "worker": "stage1",
+  "summary": "Followed the current blueprint_update rather than the older finite-type/separated special case. Stacks Tag 03GI and Mathlib QuasiCompact.of_comp state the updated main assertion exactly; retaining the open-immersion hypothesis gives the final clause. Recorded four executed searches and the source lines. No project declaration states the general item. Removed the obsolete finite-type proof dependency, added the existing definition nodes for all notions, and created no nodes.",
+  "blueprint": "Current main-20261015 statement and blueprint_update proof paragraphs 1–2: factor f through its graph, use quasi-separatedness for the graph and quasi-compactness of the composite for the projection, and compose. These are already encapsulated by Mathlib QuasiCompact.of_comp, so the item is a Mathlib leaf and has no proof steps to split."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-6a38fa4d1",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-6a38fa4d1 (reviewer sub-agent of L); spot-checked: I read the item in full. The delivery creates no new nodes. It adopts the main-20261015 statement recorded in blueprint_update: T→B quasi-compact and Y→B quasi-separated imply T→Y quasi-compact, and an open immersion is then a quasi-compact open immersion. This generalizes the old statement (finite type, separated, open immersion), so no target is weakened. It agrees with Stacks 03GI (schemes.tex:4367, lemma-quasi-compact-permanence) hypothesis by hypothesis and uses no SGA source. The Mathlib leaf is exact: AlgebraicGeometry.QuasiCompact.of_comp at Mathlib/AlgebraicGeometry/Morphisms/QuasiSeparated.lean:250-252, read locally. Its hypotheses are [QuasiCompact (f ≫ g)] and [QuasiSeparated g], it has no sorry, and the open-immersion clause is a one-line specialization. All four stmt_deps were read and are correct: def-weil-finite-type-morphism defines quasi-compact explicitly, and def-weil-quasi-separated-morphism is the diagonal definition. Dropping the old finite-type proof_dep is correct for a leaf. Searches of all three kinds are recorded. The item is not superseded (live and side-live are still imported), not in route-pivot-dropped, has no repair note, and is not the unit's key node. Edge cases checked: empty T, g = id, and a non-quasi-separated Y with infinitely doubled origin, which shows the quasi-separated hypothesis is needed. The citers I read (thm-nagata-two-open, det-nagata-theorem-dense, thm-cbc-finite-level-proetale, lem-trf-compactification-cohomology and others) still apply the item. Steps that state only 'separated' now pass through lem-pc-separated-quasi-separated (advisory). Also advisory: source.document still names the master path (order 79) instead of order 87. No tool_uses."
  }
 }
