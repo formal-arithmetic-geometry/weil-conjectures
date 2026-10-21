@@ -10,11 +10,171 @@
  "stmt_deps": [
   "sk-def-sfb-condensed-ring",
   "lem-sfb-condensed-product-action-inflation",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-objects",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-sp-double-complex-total"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [lem-sfb-condensed-product-action-inflation] the three action categories are Grothendieck abelian. Choose a nonnegative injective resolution $N\\to I^\\bullet$ in $\\mathcal A_{G\\times H}(A)$, using [lem-sp-grothendieck-enough-injectives] and successive embeddings of the cokernels. By [lem-weil-pbc-bounded-below-injectives-kinjective] this is a K-injective representative of $N[0]$. The exact inflation to $G\\times H$ has right adjoint $\\Gamma_H^G$, so [lem-sp-right-adjoint-preserves-injectives] makes every $(I^q)^H$ injective in $\\mathcal A_G(A)$. Consequently $(I^\\bullet)^H$ is also K-injective there, by the same bounded-below lemma. In particular it represents $R\\Gamma_H^G(N[0])$, even though it need not resolve the degree-zero module $N^H$.",
+   "uses": [
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal product-to-successive augmented internal bar comparison; agent expansion"
+   }
+  },
+  {
+   "text": "Use [sk-def-sfb-sheaf-tensor] on the small profinite site: abelian sheafification is strong monoidal. Then [def-weil-pbc-internal-abelian-sheaf-module-equivalence] identifies internal $A$-modules with module sheaves over the same section-ring sheaf, preserving underlying sheaves and restrictions. The group actions are the same natural sectionwise families, so this also identifies the action categories. The balanced tensor and internal Hom agree under this equivalence: both balanced tensor products represent the same sectionwise bilinear maps, and their right adjoints agree by the adjunction bijections. We need ordinary injectives after forgetting actions. For a profinite $S$, $A[S]$ is the sheafification of $V\\mapsto\\bigoplus_{V\\to S}A(V)$: maps from this presheaf to a module are precisely maps from the represented condensed set $S$ to its underlying sheaf. Thus it is $j_{S!}A_S$, flat by [lem-pc-sites-modules-j-shriek-flat]. Kernels of equivariant maps inherit their actions by restriction, and cokernels inherit actions on the sheafification of the sectionwise quotient. These constructions satisfy the kernel and cokernel universal properties equivariantly; a zero underlying sheaf has only one action. Hence forgetting actions detects exactness. The left adjoint of restriction $\\mathcal A_{G\\times H}(A)\\to\\mathcal A_H(A)$ is $T\\mapsto A[G]\\otimes_A T$, with $G$ translating the first factor and $H$ acting on $T$. An equivariant map from it is uniquely $[g]\\otimes t\\mapsto g f(t)$. Flatness makes this adjoint exact. Likewise induction from ordinary modules to $P$-actions is $A[P]\\otimes_A-$ for $P=G,G\\times H$. By [lem-sp-right-adjoint-preserves-injectives], restriction of $I^q$ to $H$, the underlying $I^q$, and the underlying $(I^q)^H$ are injective. The tensor and Hom used here are the closed module operations of [lem-pc-sheaf-modules-tensor-closed].",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pc-sites-modules-j-shriek-flat",
+    "lem-sp-right-adjoint-preserves-injectives",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EV (lemma-j-shriek-flat) and 03EO (lemma-internal-hom-adjoint-tensor); explicit induction adjunction and equivariant kernel/cokernel argument"
+   }
+  },
+  {
+   "text": "Set $C^{a,b,q}=\\underline{\\operatorname{Hom}}_A(A[G^a\\times H^b],UI^q)$, with $U$ forgetting both actions. The free universal properties identify $A[P\\times Q]$ with $A[P]\\otimes_AA[Q]$: maps out of either are the same $A$-bilinear families parametrized by $(p,q)$. The closed adjunction of [lem-pc-sheaf-modules-tensor-closed] then identifies $C^{a,b,q}$ with $\\underline{\\operatorname{Hom}}_A(A[G^a],\\underline{\\operatorname{Hom}}_A(A[H^b],UI^q))$. Step 2 and [lem-sp-derived-injective-resolution-naturality] say that the $q$-complex in each bidegree computes exactly the derived internal Hom in the statement. All faces and degeneracies act on this single resolution. The two first faces commute since $(g,1)(1,h)=(1,h)(g,1)$; the other faces and degeneracies only change their own parameters. They also commute with the resolution differential because its maps are equivariant. Thus $C$ is a compatible bicosimplicial nonnegative resolution model of $B(N)$.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sp-derived-injective-resolution-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal product-to-successive augmented internal bar comparison; agent expansion"
+   }
+  },
+  {
+   "text": "Reordering $(G\\times H)^n$ into $G^n\\times H^n$ identifies the diagonal of $C$ with the single $G\\times H$ bar on $I^\\bullet$. The diagonal first face acts by $(g_1,h_1)$, because it applies the two commuting actions; an interior face multiplies both adjacent coordinates; the final face drops both final coordinates. The unit insertions agree as well. Apply [lem-sfb-condensed-derived-invariant-bar] to $G\\times H$ and $N$: its resolution comparison identifies this diagonal total with $R\\Gamma_{G\\times H}(N[0])$, normalized by the invariant inclusion. Put $J^\\bullet=(I^\\bullet)^{G\\times H}$. In this model that inclusion gives a quasi-isomorphism $j_D:J^\\bullet\\to\\operatorname{Tot}_\\Delta C$ supported in cosimplicial degree zero.",
+   "uses": [
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal product-to-successive augmented internal bar comparison; agent expansion"
+   }
+  },
+  {
+   "text": "For fixed $a,q$ we verify the successive $H$ augmentation without assuming exactness of $\\underline{\\operatorname{Hom}}_A(A[G^a],-)$. Write $P_{H,b}=A[H^{b+1}]$ with homogeneous $H$-action as in [lem-sfb-condensed-internal-bar-resolution]. Test the augmented $b$-complex on any profinite $S$. Its sections identify, by the closed adjunction, with the ordinary equivariant Hom complex\n$$\\operatorname{Hom}_{\\mathcal A_H(A)}(A[S]\\otimes_AA[G^a]\\otimes_AP_{H,\\bullet},I^q|_H).$$\nThe tensor factor $T=A[S]\\otimes_AA[G^a]$ has trivial $H$-action. The cited bar statement says $T\\otimes_AP_{H,\\bullet}\\to T$ is exact, and step 2 says $I^q|_H$ is injective. Hom into an injective takes this augmented exact complex to an exact cochain complex: each restriction to an image subobject extends across the containing object, and the kernel is the Hom from the quotient. Thus the augmented section complex is exact for every $S$, and so is the sheaf complex. In homogeneous induced coordinates an equivariant map is determined at first coordinate $1$; its other values are $h_0$ times that value. Removing the first coordinate therefore gives the $H$ action face, interior removals multiply adjacent coordinates, and the last removes the last coordinate. Its degree-zero kernel is precisely $\\underline{\\operatorname{Hom}}_A(A[G^a],(I^q)^H)$. The residual $G$ action respects the augmentation, since it commutes with $H$.",
+   "uses": [
+    "lem-sfb-condensed-internal-bar-resolution",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal product-to-successive augmented internal bar comparison; agent expansion"
+   }
+  },
+  {
+   "text": "Put $K^{a,q}=\\underline{\\operatorname{Hom}}_A(A[G^a],(I^q)^H)$. The preceding augmentations give a map $k:\\operatorname{Tot}_{a,q}K\\to\\operatorname{Tot}_{a,b,q}C$. To check it is a quasi-isomorphism, first fix $a$ and totalize in $(b,q)$: the augmented rows of step 5 are quasi-isomorphisms from $K^{a,q}$ in $b=0$. Apply [lem-sc-first-quadrant-total-column-comparison] with indices interchanged. The change between the two total conventions multiplies the $(b,q)$ summand by $(-1)^{bq}$, as substitution into $d_b+(-1)^bd_q$ verifies. Now apply the same comparison to the first-quadrant double complexes in $a$ and $b+q$. This proves the claim with the original triple differential $d_G+(-1)^ad_H+(-1)^{a+b}d_q$. Every degree involves only finitely many triples. No product exactness or unbounded convergence assertion is used.",
+   "uses": [
+    "lem-sc-first-quadrant-total-column-comparison",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0133 (lemma-double-complex-gives-resolution), twice with finite diagonals"
+   }
+  },
+  {
+   "text": "Apply the homogeneous $G$ bar of [lem-sfb-condensed-internal-bar-resolution] to each $G$-injective $(I^q)^H$. For each profinite $S$ its augmented section complex is $\\operatorname{Hom}_{\\mathcal A_G(A)}(A[S]\\otimes_AP_{G,\\bullet},(I^q)^H)$ and is exact by injectivity, exactly as the image-and-quotient argument in step 5. The induced coordinates identify its unaugmented terms with $K^{a,q}$, including the first $G$-action face. The augmentation is $(I^q)^{G\\times H}=((I^q)^H)^G$, with the literal equality of [lem-sfb-condensed-product-action-inflation]. By [lem-sc-first-quadrant-total-column-comparison], transposing indices and multiplying by $(-1)^{aq}$ when changing total conventions, these rows give a quasi-isomorphism $j_K:J^\\bullet\\to\\operatorname{Tot}_{a,q}K$. Since $(I^\\bullet)^H$ is K-injective in $\\mathcal A_G(A)$, its $G$ invariants compute $R\\Gamma_G R\\Gamma_H^G(N[0])$. Thus $k j_K$ identifies the triple total with this iterated derived object. This argument treats $(I^\\bullet)^H$ as a complex, rather than incorrectly applying a module-only bar theorem to it.",
+   "uses": [
+    "lem-sfb-condensed-internal-bar-resolution",
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-sc-first-quadrant-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal product-to-successive augmented internal bar comparison; agent expansion"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-bicosimplicial-shuffle-totalization] to $X^{a,b}=C^{a,b,\\bullet}$ in the abelian category of internal $A$-modules. It gives the natural diagonal-to-iterated shuffle comparison $S:\\operatorname{Tot}_\\Delta C\\to\\operatorname{Tot}_{a,b,q}C$ in the derived category. The inclusion $J^\\bullet\\to C^{0,0,\\bullet}=UI^\\bullet$ is killed by both alternating first coface sums, because both groups fix it. The augmentation clause of that lemma therefore gives the equality of actual chain maps $S j_D=k j_K$. This is the augmented product-nerve comparison with $H$ first and $G$ second: its target differential has the ordered signs fixed in the statement, and its restriction along either successive augmentation is the given invariant inclusion. Since $j_D$ is invertible in the derived category, the equality also uniquely determines this comparison there.",
+   "uses": [
+    "lem-sfb-bicosimplicial-shuffle-totalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal product-to-successive augmented internal bar comparison; agent expansion"
+   }
+  },
+  {
+   "text": "Use [lem-sfb-derived-composition-adjunction-normalization] with $L_a:\\mathcal A_1(A)\\to\\mathcal A_G(A)$ the trivial $G$-action inflation, $L_b:\\mathcal A_G(A)\\to\\mathcal A_{G\\times H}(A)$ inflation along projection, and $L_c=L_bL_a$. Their right adjoints are respectively $\\Gamma_G,\\Gamma_H^G,\\Gamma_{G\\times H}$ by [lem-sfb-condensed-product-action-inflation]. That node also states that the conjugate of the inflation identification is exactly $M^{G\\times H}=(M^H)^G$. Thus the normalized derived comparison is represented on $I^\\bullet$ by the identity from $J^\\bullet$ to $((I^\\bullet)^H)^G$. By step 8 the bar comparison, after the identifications of steps 4 and 7, is represented by this same identity. The asserted equality of derived arrows follows; equality of cohomology maps alone has not been substituted for it.",
+   "uses": [
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-sfb-condensed-product-action-inflation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal product-to-successive augmented internal bar comparison; agent expansion"
+   }
+  },
+  {
+   "text": "For $N\\to N'$ choose a lift between the nonnegative equivariant injective resolutions using [lem-weil-pbc-injective-resolution-lift-exists]. It gives maps of $C,K,J$ commuting with all augmentations and the shuffle. By [lem-sp-derived-injective-resolution-naturality], these maps represent the stated derived maps. Two choices of lift are homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy]. Their postcomposition homotopies commute with the group operators. Multiply the homotopy on $C^{a,b,q}$ by $(-1)^{a+b}$ (on the diagonal by $(-1)^n$); the group-differential cross terms then cancel and the total homotopy equation is the original equation in resolution degree. The same argument applied to the identity of $N$ between two resolutions proves independence of the choice. This establishes naturality of the derived objects and of the comparison arrow.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal product-to-successive augmented internal bar comparison; agent expansion"
+   }
+  },
+  {
+   "text": "If $G=1$ or $H=1$, all formulas still use the unnormalized constant group nerve in that direction; its positive alternating terms need not be zero. The bar augmentations of steps 5 and 7 and the shuffle lemma include a constant direction, so the same derived identifications and normalized comparison apply. If $N=0$, choose the zero resolution and every displayed complex and map is zero. Every parameter power is profinite in the fixed site and universe bound; all total diagonals are finite. At no point has internal Hom been replaced by sections of an underived continuous-function complex, nor has a free module on an arbitrary profinite set been assumed projective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), formal product-to-successive augmented internal bar comparison; agent expansion"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-product-action-inflation",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "lem-sfb-condensed-internal-bar-resolution",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "def-sp-double-complex-total",
+  "lem-sfb-bicosimplicial-shuffle-totalization",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), formal internal product-to-successive-bar input; explicit injective-resolution argument, using Stacks Tags 03EV, 03EO, 0133, and the general shuffle theorem requested in report.md."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -50,10 +210,38 @@
    "results": "8 hits: Rep.barComplex.isoStandardComplex, Rep.barResolution_complex, Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq, groupHomology.inhomogeneousChainsIso, Rep.standardComplex.compForgetAugmentedIso, Rep.barResolution.extIso, Rep.Tor_map, groupHomology.inhomogeneousChains.d_eq",
    "date": "2026-10-21",
    "verdict": "no match: the returned declarations do not state this ringed-topos or internal condensed-action assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A product of profinite condensed groups has a derived internal Hom bar comparison with successive invariants normalized by augmentation",
+   "results": "{\"t\": \"2026-10-21T15:33:40Z\", \"tool\": \"leanfinder\", \"query\": \"A product of profinite condensed groups has a derived internal Hom bar comparison with successive invariants normalized by augmentation\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"Rep.barComplex.isoStandardComplex\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"groupHomology.inhomogeneousChainsIso\", \"groupCohomology.infNatTrans\", \"Rep.barResolution.extIso\"], \"digest\": \"72eb700267936c7b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Rep.barResolution and group cohomology inflation concern abstract groups and ordinary modules, while LightCondensed internal-Hom declarations concern constant coefficients and do not assert the product-bar derived comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"barComplex\", \"invariants\"",
+   "results": "{\"t\": \"2026-10-21T15:33:40Z\", \"tool\": \"loogle\", \"query\": \"\\\"barComplex\\\", \\\"invariants\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Rep.barResolution and group cohomology inflation concern abstract groups and ordinary modules, while LightCondensed internal-Hom declarations concern constant coefficients and do not assert the product-bar derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed.*bar|bar.*Condensed|bicosimplicial|Eilenberg.Zilber)",
+   "results": "{\"t\": \"2026-10-21T15:33:40Z\", \"tool\": \"grep\", \"query\": \"(Condensed.*bar|bar.*Condensed|bicosimplicial|Eilenberg.Zilber)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Rep.barResolution and group cohomology inflation concern abstract groups and ordinary modules, while LightCondensed internal-Hom declarations concern constant coefficients and do not assert the product-bar derived comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived invariants of a product group are computed by the iterated internal bar complex with the canonical augmentation comparison",
+   "results": "{\"t\": \"2026-10-21T15:33:43Z\", \"tool\": \"leansearch\", \"query\": \"Derived invariants of a product group are computed by the iterated internal bar complex with the canonical augmentation comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.barComplex\", \"Rep.barComplex.d\", \"Rep.barComplex.isoStandardComplex\", \"Rep.barResolution\", \"Rep.barResolution.extIso\", \"groupHomology.inhomogeneousChainsIso\", \"Rep.barResolution_complex\", \"LeftInvariantDerivation.evalAt_mul\"], \"digest\": \"fc636b5a3d159b80\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Rep.barResolution and group cohomology inflation concern abstract groups and ordinary modules, while LightCondensed internal-Hom declarations concern constant coefficients and do not assert the product-bar derived comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-partial-kummer-boundary-unit-model",
@@ -77,5 +265,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-condensed-product-bar-comparison",
+  "worker": "stage1",
+  "summary": "Retained the entire derived statement. Constructed a single nonnegative equivariant injective-resolution model, proved the two successive augmentation quasi-isomorphisms using the existing tensor-exact homogeneous bar resolution, and identified the shuffle comparison with the normalized derived adjunction comparison. One new generic shuffle statement, with no group or condensed coefficients, remains unsplit.",
+  "blueprint": "Paragraph (3) of the direct-images proof, formal product-to-successive augmented-bar input below the open-direct-image argument; all inherited blueprint ancestry and via fields retained. The ancestor command returns None.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "General injective-resolution infrastructure in an abelian or Grothendieck abelian category; used as a categorical tool, not as a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-bounded-below-injectives-kinjective",
+    "why": "General injective-resolution infrastructure in an abelian or Grothendieck abelian category; used as a categorical tool, not as a replacement of the unit route."
+   },
+   {
+    "node": "lem-sp-right-adjoint-preserves-injectives",
+    "why": "General injective-resolution infrastructure in an abelian or Grothendieck abelian category; used as a categorical tool, not as a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-sites-modules-j-shriek-flat",
+    "why": "Flat free module on a profinite representable; needed to make induction exact without claiming projectivity."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Closed tensor-Hom adjunction for arbitrary commutative ringed sites, used for internal sections and free products."
+   },
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Normalized derived-object computation on the chosen injective resolutions; the unit has no substitute."
+   },
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Finite-diagonal homological-algebra comparison applied to the two augmented bar directions."
+   },
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "General injective-resolution infrastructure in an abelian or Grothendieck abelian category; used as a categorical tool, not as a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-injective-resolution-lift-exists",
+    "why": "General comparison lift between nonnegative injective resolutions for coefficient naturality."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "General uniqueness of injective-resolution lifts up to homotopy for resolution independence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-bounded-below-injectives-kinjective",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-pc-sites-modules-j-shriek-flat",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NP-55f8db9f0",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-55f8db9f0 (reviewer sub-agent of L); spot-checked: Read the item (statement unchanged, 11 steps), the new node lem-sfb-bicosimplicial-shuffle-totalization, the full statement of every cited node, and main-20261015 direct-images paragraph (3). That paragraph does not state the bar comparison, and the item already marks itself agent-formulated with the reference WANTED; that is inherited from N6's base node. There is no re-split note: this is the first split. Step 1: a nonnegative injective resolution in the Grothendieck category A_{G×H}. Its H-invariants are injective in A_G (inflation is exact with Γ_H^G as right adjoint), so (I^•)^H is K-injective and represents RΓ_H^G. Step 2: U I^q, I^q|_H and U(I^q)^H are injective. The left adjoints are A[P]⊗- with the Frobenius bijection [g]⊗t↦g f(t) written out. A[S]=j_{S!}A_S is flat via the internal/module-sheaf equivalence, and forgetting the action detects exactness. Step 3: one bicosimplicial model C^{a,b,q}=Hom(A[G^a×H^b],UI^q). The first faces commute because the actions commute. Step 4: the diagonal of C is the G×H inhomogeneous bar, so derived-invariant-bar applies with its invariant-inclusion augmentation. Steps 5 and 7: row exactness uses Hom_H(T⊗P_•→T, injective) with the arbitrary-T clause of internal-bar-resolution, the closed adjunction for sections over S, and the homogeneous/inhomogeneous change of coordinates. No projectivity is assumed. Step 6: the first-quadrant total comparison is applied twice, with the (-1)^{bq} convention sign. The double-complex structure (d_I=δ_G, d_II=δ_H+(-1)^b d_q) matches d_G+(-1)^a d_H+(-1)^{a+b}d_q. Step 8: S j_D=j_T=k j_K holds at the chain level, since j_T is J^q→(I^q)^H→UI^q, so the arrow is pinned by its augmentations. Step 9: derived-composition-adjunction-normalization with λ=id gives C(κ)_I, which is the identity J→((I)^H)^G by the conjugate identity of product-action-inflation. Step 10: naturality from lift existence and homotopy uniqueness, with the (-1)^{a+b} homotopy sign. Step 11: a trivial group or N=0 also works. proof_deps equals the union of uses. New node: the dual Eilenberg–Zilber codegeneracy shuffle. It is true, generic, strictly smaller than the item and not a clause of it; Weibel 8.5 is WANTED. I checked independently that S is a cochain map with exactly the stated signs (S_{a,b}=Σε(μ,ν)X(α_μ,α_ν), δ_T=δ_1+(-1)^aδ_2) on the bicosimplicial group ℤ[[a]^2×[b]^2], n=0..3: 354 basis cases, 0 failures. S_{0,0}=id gives the augmentation clause. Mathlib grep finds no Eilenberg–Zilber, shuffle or Alexander–Whitney. A whole-DAG search for duplicates found only bisimplicial-set diagonal equivalence, the chain AW diagonal on Δ^n and AW cup pairings; none is a duplicate. The null from.node is inherited from the N6 chain. I accept the declared tool_uses as generic categorical infrastructure. No SGA is cited. No changes."
  }
 }
