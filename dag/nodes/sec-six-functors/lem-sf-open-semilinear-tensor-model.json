@@ -20,9 +20,128 @@
   "lem-pc-kflat-resolution",
   "def-pc-tensor-complex-sheaves"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use [lem-weil-proetale-weakly-etale-localization] to identify the site of U with the slice at U of the site of X. Put O=\\widehat R_X and O_U=j^*O. For module sheaves G on U and H on X, let P_G be the extension presheaf [def-weil-extension-by-zero-presheaf]. On V, define a pairing P_G(V) times H(V) into j_!(G\\otimes j^*H)(V) by ([x]_f,a)\\mapsto[x\\otimes a|_{(V,f)}]_f and extend additively over the summands f:V\\to U. Balancing holds since O_U(V,f)=O(V); the formula respects restrictions because both x and a restrict along the same arrow. The bilinear sheafification extension theorem [lem-pc-sites-module-sheafification-bilinear-extension-existence] and the sheaf tensor as sheafification of the presheaf tensor [def-pur-sheaf-tensor-product], with the universal property of module sheafification [def-weil-presheaf-modules-sheafification], therefore give a map \\psi_{G,H}:j_!G\\otimes H\\to j_!(G\\otimes j^*H). It is natural in G and H: both composites for a pair of module maps send [x]_f\\otimes a to the extension summand of the tensor of their images. Uniqueness of bilinear extension [lem-pc-sites-module-sheafification-bilinear-extension-uniqueness] makes these equal as sheaf maps.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-extension-by-zero-presheaf",
+    "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), explicit forward generator map; sheafification of the extension presheaf"
+   }
+  },
+  {
+   "text": "Construct \\kappa:j_!(G\\otimes j^*H)\\to j_!G\\otimes H by the module adjunction [lem-pur-site-restriction-module-adjunction-exact]: transpose G\\otimes j^*H\\xrightarrow{\\eta_G\\otimes1}j^*j_!G\\otimes j^*H\\cong j^*(j_!G\\otimes H), using the pure-tensor restriction comparison [lem-sfb-localized-site-tensor-restriction]. Explicitly, a map \\alpha:G\\to j^*L is extended by summing \\alpha_{(V,f)} on the summands of P_G(V) and sheafifying [def-weil-extension-by-zero-presheaf]. Conversely a map j_!G\\to L restricts to each such summand; the two operations are inverse by the universal property of module sheafification [def-weil-presheaf-modules-sheafification]. For L=j_!G and its identity this gives \\eta_G(x)=[x]_f on (V,f); hence \\kappa sends [x\\otimes a]_f to [x]_f\\otimes a. Thus \\kappa\\psi fixes every [x]_f\\otimes a. Such elements determine a bilinear pairing after sheafification by [lem-pc-sites-module-sheafification-bilinear-extension-uniqueness], so \\kappa\\psi=1. For \\psi\\kappa, take the adjoint and precompose with the unit on G\\otimes j^*H. On x\\otimes a the resulting map is [x\\otimes a]_f, which is precisely that unit. Pure tensors determine a tensor map [def-pur-sheaf-tensor-product], and the adjunction is bijective; consequently \\psi\\kappa=1. This proves invertibility with the specified generator normalization rather than choosing an unspecified isomorphism.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sfb-localized-site-tensor-restriction",
+    "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor), adjunction proof and explicit two inverse identities"
+   }
+  },
+  {
+   "text": "Apply \\psi to G=Q^a and H=F^b. The adjunction and [lem-weil-pbc-left-adjoint-preserves-colimits] identify j_!(\\bigoplus_{a+b=d}Q^a\\otimes j^*F^b) with \\bigoplus_{a+b=d}j_!(Q^a\\otimes j^*F^b). Taking the sum of the \\psi_{Q^a,F^b} defines an isomorphism in total degree d. Naturality gives \\psi_{a+1,b}(j_!d_Q\\otimes1)=j_!(d_Q\\otimes1)\\psi_{a,b} and \\psi_{a,b+1}(1\\otimes d_F)=j_!(1\\otimes j^*d_F)\\psi_{a,b}. Add the second equality with coefficient (-1)^a. The total differential of [def-pc-tensor-complex-sheaves] is exactly that sum, so these equalities on each coproduct insertion prove the chain equation. Replacing the differentials by chain-map components proves naturality. Each source summand has only two differential components, so this argument works for unbounded complexes.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I, applied degreewise; homology.tex Tag 012Z (definition-associated-simple-complex)"
+   }
+  },
+  {
+   "text": "For a flat module G, the ordinary isomorphism \\psi identifies H\\mapsto j_!G\\otimes H with H\\mapsto j_!(G\\otimes j^*H). This is a composite of exact functors: j^* and j_! are exact by [lem-pur-site-restriction-module-adjunction-exact], and G\\otimes- is exact by [def-pc-flat-sheaf-modules]. Thus j_!G is flat by that same definition. Apply this to every Q^a. The generic ringed-slice theorem [lem-sf-ringed-open-total-tensor-kflat] says that j_! preserves K-flat complexes and K-flat resolutions, without a constant-ring or boundedness hypothesis. Apply it to O and Q\\to K. It follows that j_!Q is flat-term K-flat and represents j_!K. In particular none of these claims requires completeness or a quasi-compact open.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pc-flat-sheaf-modules",
+    "lem-sf-ringed-open-total-tensor-kflat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I; sites-cohomology.tex Tag 06YN (definition-K-flat), acyclic tensor test"
+   }
+  },
+  {
+   "text": "Take F=B_{n,X} in degree zero in step 3, for every n at once. This gives r_{Q,n}: (j_!Q)\\otimes B_{n,X}\\to j_!(Q\\otimes B_{n,U}), a B_{n,X}-linear chain isomorphism: multiplying the outer coefficient a by b gives [x\\otimes (ab)|_U] on both sides. Write q_{m,n}:B_{m,X}\\to B_{n,X}. The two composites in the quotient-transition square send [x]\\otimes a, respectively, to [x\\otimes q_{m,n}(a)|_U] and [x\\otimes q_{m,n}(a|_U)]; these coincide since q restricts to the quotient map on U. For a chain map v:Q\\to Q', both naturality composites send [x]\\otimes a to [v(x)\\otimes a|_U]. For the augmentations both composites send [x] to [x\\otimes1], because restriction preserves 1. Additivity, tensor balancing and uniqueness of bilinear sheafification extension [lem-pc-sites-module-sheafification-bilinear-extension-uniqueness], as in steps 1-2, extend these equalities from the displayed generators to sheaves. In the strict semilinear category of [lem-coef-semilinear-derived-sections], this is exactly the condition for the component maps to form a map of complexes of systems. Their inverses commute with transitions by multiplying each commuting square by the component inverses. Hence r_Q is an isomorphism in that category, before forgetting scalar actions.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I, coefficient naturality of the generator formula; explicit quotient and augmentation squares"
+   }
+  },
+  {
+   "text": "Localize r_Q as a system map. By [lem-coef-derived-system-evaluation-calculus], \\mathcal R_UK is computed by (Q\\otimes B_{n,U})_n; by step 4 the corresponding model for \\mathcal R_X(j_!K) is ((j_!Q)\\otimes B_{n,X})_n. Exact termwise J_j from [lem-coef-semilinear-derived-sections] computes the other side, J_j\\mathcal R_UK. The equivalence W^{-1}\\mathcal P_O\\simeq D(O) in [lem-weil-pbc-site-derived-tensor-descent] applies to flat-term K-flat representatives. The chain naturality in step 5 descends along this equivalence by [lem-weil-pbc-localization-universal-property]: the two model functors invert quasi-isomorphisms because their localized values compute the two displayed derived functors. Conjugating the localization of r_Q by their canonical computation comparisons gives r_K. Uniqueness in that localization property proves naturality for all derived morphisms and independence under every change of representative. Since r_Q is already an isomorphism, so is r_K; there is no selection of lifts from a family of evaluated arrows.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus",
+    "lem-coef-semilinear-derived-sections",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "sites-cohomology.tex Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor), 0GL1 (lemma-j-shriek-and-tensor); simultaneous strict-system localization"
+   }
+  },
+  {
+   "text": "Evaluate at n. Its inverse is the localization of \\kappa in step 2, hence the open-adjunction transpose of the unit tensored with 1. This is precisely the characterization of the inverse canonical derived open tensor map in [lem-sf-open-tensor-normalization]. Both the evaluation and the original reduction model use the same Q and j_!Q, so the equality holds under the canonical computation comparisons, not merely up to an unspecified isomorphism. The constructions of [lem-coef-semilinear-derived-sections] use the ordinary strict module-system category, exact termwise open extension and restriction, and simultaneous K-flat tensor models. Our map was constructed in that category using those functors and actual coefficient tensors, with their sheafification generators and localization comparisons. Thus its representative square is the square defining this specified comparison for the simultaneous construction itself. The quotient and scalar-insertion identities are already equalities of those strict complexes in step 5 and remain so on localization. Evaluation is used here to identify the already constructed map, never to infer equality of arbitrary system arrows. No proof step used completeness or quasi-compactness.",
+   "uses": [
+    "lem-sf-open-tensor-normalization",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "sites-cohomology.tex Tag 0GL1; sites-modules.tex Tag 0E8I, open-adjunction normalization of the tensor comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-weil-extension-by-zero-presheaf",
+  "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-flat-sheaf-modules",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "lem-coef-semilinear-derived-sections",
+  "lem-coef-derived-system-evaluation-calculus",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I (lemma-j-shriek-and-tensor), and sites-cohomology.tex Tag 0GL1. Explicit generator, total-complex and simultaneous semilinear refinement of their projection formula."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +177,45 @@
    "results": "[grep] OK 0 hit(s); ; Mathlib/CategoryTheory",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero commutes with derived scalar reduction as a strict semilinear inverse system on K flat sheaf complexes",
+   "results": "8 hits: localCohomology.diagram, SheafOfModules.Presentation.map_π_eq, IsAdicComplete.StrictMono.factorPow_comp_extend, AdicCompletion.transitionMap_comp_reduceModIdeal, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, localCohomology.ofDiagram, IsAdicComplete.StrictMono.of_comp_lift, IsAdicComplete.StrictMono.extend. No ringed-site strict semilinear reduction comparison; results concern presentations, localization of ordinary modules, presheaf tensor, functions, or indexing of complexes.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|jShriek|semilinear.*[Ss]ystem",
+   "results": "0 hits: . Directory Mathlib/CategoryTheory. No ringed-site strict semilinear reduction comparison; results concern presentations, localization of ordinary modules, presheaf tensor, functions, or indexing of complexes.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero commutes with unbounded derived coefficient reduction as a strict semilinear system",
+   "results": "8 hits: Function.ExtendByZero.linearMap, ContinuousLinearMap.extend_zero, Function.ExtendByZero.linearMap_apply, DFinsupp.lmk, HomologicalComplex.extendMap_zero, Finsupp.supportedEquivFinsupp_symm_apply_coe, CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero, AddMonoidHom.completion_zero. No ringed-site strict semilinear reduction comparison; results concern presentations, localization of ordinary modules, presheaf tensor, functions, or indexing of complexes.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app. No ringed-site strict semilinear reduction comparison; results concern presentations, localization of ordinary modules, presheaf tensor, functions, or indexing of complexes.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ringed site open extension tensor comparison on complexes is natural in quotient coefficients and scalar insertion units before localization",
+   "results": "8 hits: SheafOfModules.Presentation.mapRelations, SheafOfModules.Presentation.map_π_eq, IsLocalizedModule.map_lTensor, SheafOfModules.Presentation.mapGenerators, SheafOfModules.map_ιFree_mapFree_hom, SheafOfModules.map_ιFree_mapFree_hom_assoc, PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.Tilde.openToLocalization. No ringed-site strict semilinear reduction comparison; results concern presentations, localization of ordinary modules, presheaf tensor, functions, or indexing of complexes.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-integral-open-reduction-comparison",
@@ -81,5 +235,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-open-semilinear-tensor-model",
+  "worker": "stage1",
+  "summary": "Seven steps construct the normalized ordinary pairing and its inverse, totalize with the actual signed differential, establish flat terms and K-flatness using the existing generic theorem, verify strict quotient/augmentation/naturality squares, and descend the single system map through K-flat localization. No statement change or new nodes.",
+  "blueprint": "fix-prop-coherence, proof sentence “The maps used here are tensor reassociation, evaluation, and adjunction units and counits”: the integral open coefficient factor, via lem-sf-integral-open-reduction-comparison and lem-sf-integral-compactification-system-realization; realizes the representative tensor/reduction portion without altering the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of the pro-etale site of an open with a slice; needed to apply ringed-site tools to the stated schemes."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+    "why": "Generic extension of the explicit presheaf bilinear pairing to the sheaf tensor; no own-unit statement supplies this underived construction."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+    "why": "Generic uniqueness of bilinear sheafification extension verifies inverse and naturality equalities on original sections."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Generic pure-tensor restriction comparison for arbitrary ring sheaves, needed to write the ordinary adjunction transpose."
+   },
+   {
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic colimit preservation for the direct sums indexed by pairs of integers in total degree."
+   },
+   {
+    "node": "lem-sf-ringed-open-total-tensor-kflat",
+    "why": "Generic arbitrary-ringed-site K-flat preservation theorem; used solely for K-flat representatives, without replacing a unit-level route."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic equivalence from localization of flat-term K-flat representatives to the ambient derived category, for representative independence."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic descent and uniqueness of natural transformations under localization, needed for all derived input morphisms."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pc-sites-module-sheafification-bilinear-extension-existence",
+  "lem-pc-sites-module-sheafification-bilinear-extension-uniqueness",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sf-ringed-open-total-tensor-kflat",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NR-af8a43105",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-af8a43105 (reviewer sub-agent of L); spot-checked: I read the statement unchanged; it matches live/side-live. The item is still unsplit live, has no repair note and is not on the 2026-10-19 dropped list. The delivery creates no new nodes. Source checked: Stacks sites-modules 0E8I proves the statement through a Hom/Yoneda chain, and sites-cohomology 0GL1 says 'Details omitted'. The steps write those details out through explicit generators, marked proof_origin.by=agent. All 7 steps are mathematically correct. I recomputed: bilinearity of the pairing through O_U(V,f)=O(V); kappa∘psi=1 on generators [x]_f⊗a and psi∘kappa=1 through the adjunction unit x↦[x]_f, which is also the unit normalisation of lem-sf-open-tensor-normalization; the total-complex differential with sign (-1)^a for unbounded complexes; flatness of j_!G as a composite of exact functors, with K-flatness from the statement of lem-sf-ringed-open-total-tensor-kflat; the quotient-transition, naturality and augmentation squares on generators; descent through tensor-descent plus the localization universal property; and the evaluation at n as the gamma^{-1} adjunct characterisation. Edge cases: U empty, j=id, degree 0, odd a, n=m, m>n>r. Completeness and quasi-compactness are never used. lem-cbc-ringed-open-strict-reduction is the scalar-restricted Tow_A version, so it is not a duplicate. The only off-route citation is lem-sfb-localized-site-tensor-restriction (sk-lem-formal-closed-support-ii); it is declared in tool_uses, used as a generic tool, and accepted. FIX repairs two faults. (1) C4: steps 1 and 2 use the universal property of sheafification but cite only def-pur-sheaf-tensor-product, which does not state it; I added def-weil-presheaf-modules-sheafification. (2) C1/C2: step 5 was marked elementary but uses bilinear-extension uniqueness without citing it; I added lem-pc-sites-module-sheafification-bilinear-extension-uniqueness and set elementary=false. proof_deps is updated to match.; 1 file(s) fixed by the reviewer"
  }
 }
