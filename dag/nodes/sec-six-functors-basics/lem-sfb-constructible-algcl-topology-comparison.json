@@ -505,5 +505,30 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-47ec89e26 (reviewer sub-agent of L); spot-checked: Read all 10 steps, the new node and every cited statement; the item statement is unchanged against base cd7538c and nothing is weakened. There is no repair note, the item is not dropped, and no SGA is used. Preservation (Step 4) follows from continuous-qbar-constructible-generators, which is stated for the actual all-continuous ring B, once Step 2 sends each generator to a supported lisse B-module; Step 2 rests on the χ/θ inverse-image comparison and the open (γ) and closed projection formulas. Full faithfulness (Steps 5-6): the new node's vanishing together with the Hom-into-triangle sequence gives bijections, the normalized unit and shift compatibility identify them with J_X on morphisms, and a two-variable five-lemma induction over the generators of Step 3 extends this to all objects; Step 3 uses the two-colimit for the finite-subextension ring only. Essential surjectivity (Steps 7-10): stratified finite models, the image-containment refinement handled through W=R_t×_X S_a (a surjective closed immersion, then the condensed pullback equivalence for B), the recollement filtration, extension closure of the image and module dévissage. New node lem-sfb-supported-finite-stage-topology-defect: unsplit and statement-only, self-contained, blueprint fields set. It is equivalent to the item's full-faithfulness clause on pairs of finite-stage generators only, so it follows from the item; it is not D1/D2 because Steps 3-10 do real work. Small cases: empty support or rank 0 gives zero; at X=Spec k, n=1, compact subgroups of Ω lie in a finite extension, so the two sides agree; higher n were not settled, which is exactly the content left WANTED. Batch 5: all four flagged citations are generic tools, not parts of the trace formula or Poincaré duality, so accepted: the module/ringed-topos derived comparison is a foundational identification for any condensed ring, geometric inverse image exactness is a general topos fact, def-trf-geometric-morphism is a definition, and normal Noetherian components are general topology. tool_uses accepted as written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstructibleAlgClTopologyComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.constructible_algCl_topology_comparison",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.algClTopologyInclusionRing",
+   "AlgebraicGeometry.ProEtale.algClTopologyInclusion",
+   "AlgebraicGeometry.ProEtale.algClTopologyScalarExtension",
+   "AlgebraicGeometry.ProEtale.constructible_algCl_topology_comparison"
+  ],
+  "file": "lean/Sheaf/Paper/ConstructibleAlgClTopologyComparison.lean",
+  "statement": "theorem constructible_algCl_topology_comparison (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p] (hp : 0 < p) (hpℓ : p ≠ ℓ) (X : Over (Spec (.of k))) [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] : (constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X.left ).IsTriangulated ∧ (constantModelBoundedConstructible (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X.left).IsTriangulated ∧ ∃ h : ∀ K : ConstantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X.left, constantModelBoundedConstructible (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X.left ((algClTopologyScalarExtension ℓ X.left).obj K.obj), ((constantModelBoundedConstructible (Profinite.continuousMapRingObj (PadicAlgCl ℓ)) X.left).lift ((constantModelBoundedConstructible (Profinite.padicAlgClRingObj ℓ) X.left).ι ⋙ algClTopologyScalarExtension ℓ X.left) h).IsEquivalence ∧ ∃ s : (algClTopologyScalarExtension ℓ X.left).CommShift ℤ, @Functor.IsTriangulated _ _ _ _ _ _ (algClTopologyScalarExtension ℓ X.left) s _ _ _ _ _ _ _ _",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The existing PadicAlgCl algebraic closure is the chosen model of Omega; its norm is the extended ell-adic norm. The finite-valued and all-continuous sheaves are distinct existing coefficient constructions. The actual inclusion and its pulled-back total left derived scalar extension are defined with real data. The theorem uses ObjectProperty.lift of this functor and asserts its IsEquivalence, both inherited triangulations, and triangulatedness of the ambient scalar functor, which gives exactness of its restriction. No flatness or completeness assumption is imposed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-540a68082",
+  "group": "O4",
+  "result": "pass",
+  "note": "Clause-by-clause match: Fact ℓ.Prime; CharP k p with 0<p, p≠ℓ; X over Spec k LOFT+QC+separated as in the dc-setting record; C=padicAlgClRingObj, B=continuousMapRingObj (PadicAlgCl ℓ), the v=0 definitional form of the dep and the project-wide choice; c=algClTopologyInclusionRing, the real sectionwise subring inclusion (ULift-conjugated subtype, naturality rfl); J_X=(Mod.extendScalars (coefficientMap c X)).leftDerivedFunctor, the recorded derived-extension declaration; D^b_c=constantModelBoundedConstructible on both sides; conclusion = both IsTriangulated, ∃ preservation witness for all objects, IsEquivalence of ObjectProperty.lift, ∃ CommShift with IsTriangulated. No stronger hypotheses, no universe restriction, edge cases (empty X, zero/rank-0, acyclic) covered. lean.statement verbatim; docstrings with source and blueprint, 10 proof steps; all imports resolve; only the item lean field changed; no existing C→B inclusion found by rg. Advisory: CommShift existential, not pinned (follows the lem-pur-derived-change-of-rings ∃ CommShift convention); proof-only import ContinuousAlgClStratifiedFiniteModels omitted because unpublished; O4 second reading is a disclosed self-review; the future defect-lemma statement should reuse algClTopologyInclusion. No compile (no change)."
  }
 }
