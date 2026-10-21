@@ -19834,3 +19834,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:34 L: merged deliver/O1/lem-sfb-internal-extension-finite-presentation (reviewer PASS; first push; new nodes: 0)
 - 03:34 L: merged deliver/Q107/lem-sfb-filtered-ring-object-cocone-colimit (stage 2; reviewer PASS; parallel immutable checks)
 - 03:34 L: merged deliver/Q132/def-sfb-derived-lower-shriek-hom (stage 2; reviewer PASS; parallel immutable checks)
+- 03:35 L: merged deliver/Q12/det-lem-coefficient-heart-filtration (reviewer FIX; after a return; new nodes: 2)

@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Identify pulled-back coefficient rings with the prescribed $\\Lambda_T$ using [sk-prop-sfb-cartesian-coefficients] (1). By [lem-weil-pbc-noetherian-open-subscheme-noetherian] every open in $X$ is Noetherian and quasi-compact, and by [lem-weil-pbc-locally-noetherian-quasi-separated] it is quasi-separated. Each inclusion between these opens is quasi-compact, since its inverse image over an affine is such an open; it is quasi-separated since its diagonal is an isomorphism. Thus localization and the nested-open theorem below apply.",
+   "text": "Use [sk-prop-sfb-cartesian-coefficients] (1) for the coefficient identifications: every inverse-image coefficient ring $g^{-1}\\Lambda_X$ along an immersion $g:T\\to X$ is the prescribed $\\Lambda_T$. By [lem-weil-pbc-noetherian-open-subscheme-noetherian] every open prefix $V_k$ is Noetherian, hence quasi-compact, and by [lem-weil-pbc-locally-noetherian-quasi-separated] it is quasi-separated. Every inclusion between them is quasi-compact: an affine inverse image is an open in a Noetherian scheme, hence quasi-compact; its diagonal is an isomorphism, so it is quasi-separated.",
    "uses": [
     "sk-prop-sfb-cartesian-coefficients",
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
@@ -27,11 +27,11 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-    "place": "First paragraph: coefficient identifications and geometric hypotheses."
+    "place": "First paragraph: hypotheses for localization and the nested-open theorem."
    }
   },
   {
-   "text": "Localization [det-sf-open-closed-sequence-ring-sheaf] (3) makes every counit $F_k\\to F$ mono. Apply [lem-sfb-open-filtration-successor] to $W=V_{k-1}\\subseteq V_k=V$: its map $d_F:F_{k-1}\\to F_k$ composes with the $V_k$ counit to the $V_{k-1}$ counit. Hence $d_F$ is mono and represents $F_{k-1}\\subseteq F_k$ over $F$. The left adjoint from the zero module category on $\\varnothing$ is zero, while the identity-open adjunction is the identity. Thus $F_0=0$ and $F_m=F$.",
+   "text": "Localization [det-sf-open-closed-sequence-ring-sheaf] (3) makes each counit $\\epsilon_k:F_k\\to F$ mono. [lem-sfb-open-filtration-successor] for $W=V_{k-1}\\subseteq V_k=V$ gives $d_k:F_{k-1}\\to F_k$ with $\\epsilon_kd_k=\\epsilon_{k-1}$, hence $d_k$ is mono by cancellation. These maps give the non-strict chain over $F$. Extension from the empty open is zero; the identity-open adjunction is the identity, giving both endpoints.",
    "uses": [
     "det-sf-open-closed-sequence-ring-sheaf",
     "lem-sfb-open-filtration-successor"
@@ -39,40 +39,42 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-    "place": "First paragraph: counit subobjects, nesting and endpoints."
+    "place": "First paragraph: monic counits, nesting and endpoints."
    }
   },
   {
-   "text": "For each $k\\geq1$, the stratum immersion $c:S_k\\hookrightarrow V_k$ is closed with image $V_k\\setminus V_{k-1}$. The cokernel assertion of [lem-sfb-open-filtration-successor], evaluated at $F$, gives\n$$F_k/F_{k-1}\\cong v_{k!}c_*c^*v_k^*F=v_{k!}c_*(F|_{S_k}).$$\nThe quotient is the cokernel of the actual inclusion from step 2, because the theorem specifies its composite counit.",
+   "text": "For $k\\ge1$, let $c:S_k\\hookrightarrow V_k$ be the closed complement of $V_{k-1}$. The cokernel assertion of [lem-sfb-open-filtration-successor] gives $\\operatorname{coker}(d_k)\\cong v_{k!}c_*c^*v_k^*F=v_{k!}c_*(F|_{S_k})$, since $a_k=v_kc$ and inverse images compose. By [lem-sfb-image-subobject-of-monomorphism], the counit image subobjects are $[\\epsilon_{k-1}]$ and $[\\epsilon_k]$. Apply [lem-sfb-subobject-inclusion-cokernel] with $f=\\epsilon_{k-1}$, $g=\\epsilon_k$, $\\alpha=1$, $\\phi=d_k$. Its required equation is precisely the counit identity in step 2; thus the quotient of the specified subobjects is this cokernel.",
    "uses": [
-    "lem-sfb-open-filtration-successor"
+    "lem-sfb-open-filtration-successor",
+    "lem-sfb-image-subobject-of-monomorphism",
+    "lem-sfb-subobject-inclusion-cokernel"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-    "place": "Second paragraph: exact open extension of localization, with the specified nesting map."
+    "place": "Second paragraph: localization quotient and comparison with the actual subobject inclusion."
    }
   },
   {
-   "text": "Apply [lem-sfb-locally-closed-extension-coherence] with $R=\\Lambda_X$ and $a_k=v_kc=iu$, where $i,u$ are the closure factorization in the statement. Its normalized comparison gives $v_{k!}c_*\\cong i_*u_!=a_{k!}$. Substitution in step 3 gives the claimed quotient. Step 1 identifies its inverse-image rings with the coefficient rings used here.",
+   "text": "For $a_k=v_kc=iu$ with the given closure factorization, [lem-sfb-locally-closed-extension-coherence] with $R=\\Lambda_X$ gives $v_{k!}c_*\\cong i_*u_!=a_{k!}$; step 1 identifies its inverse-image rings $a_k^{-1}\\Lambda_X$, $c^{-1}\\Lambda_{V_k}$ with the prescribed coefficient rings. Applying this to the restriction in step 3 proves the desired quotient formula.",
    "uses": [
     "lem-sfb-locally-closed-extension-coherence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-    "place": "Second paragraph: independence of the two locally closed factorizations."
+    "place": "Second paragraph: comparison of the two locally closed factorizations."
    }
   },
   {
-   "text": "By adaptedness and the final characterization of [det-lem-coefficient-heart-closure], each $F|_{S_k}$ is lisse. The filtration inclusions are non-strict; for example all are equal when $F=0$.",
+   "text": "Adaptedness and the finite-constant-local-model characterization in [det-lem-coefficient-heart-closure] make each $F|_{S_k}$ lisse. No step requires a strict inclusion.",
    "uses": [
     "det-lem-coefficient-heart-closure"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-    "place": "Final sentence: lisseness on the given adapted strata."
+    "place": "Final sentence: lisseness on the adapted strata."
    }
   }
  ],
@@ -82,13 +84,15 @@
   "lem-weil-pbc-locally-noetherian-quasi-separated",
   "det-sf-open-closed-sequence-ring-sheaf",
   "lem-sfb-open-filtration-successor",
+  "lem-sfb-image-subobject-of-monomorphism",
+  "lem-sfb-subobject-inclusion-cokernel",
   "lem-sfb-locally-closed-extension-coherence",
   "det-lem-coefficient-heart-closure"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-coefficient-heart/sk-lem-coefficient-heart-filtration.proof.md",
-  "place": "Short assembly of existing nested-open successor, localization, factorization coherence, and lisse-characterization statements; blueprint first and second paragraphs."
+  "place": "Short assembly of localization, the existing open successor and locally closed coherence, with explicit image-subobject and quotient-representative comparisons."
  },
  "mathlib_searches": [
   {
@@ -218,8 +222,8 @@
   "date": "2026-10-21",
   "item": "det-lem-coefficient-heart-filtration",
   "worker": "stage1",
-  "summary": "Q33 repair of the 3801-character proof: the existing lem-sfb-open-filtration-successor supplies the formerly inline counit-compatible nesting and localization quotient arguments. Reuse, rather than duplicate, this already split 952-character node. The mixed-factorization comparison remains an application of the existing coherence theorem. All remaining arguments are short direct consequences of cited statements. The auxiliary assertion that the filtration terms are constructible is not a clause of the item or its recorded Lean theorem and is omitted from its proof. Statement, sources, prior searches and maintainer metadata retained. No new nodes or Lean edits.",
-  "blueprint": "First blueprint paragraph is steps 1-2 (coefficient/geometric preparation and counit filtration). Second paragraph is steps 3-4 (existing successor quotient and existing mixed-factorization comparison). Its final lisseness sentence is step 5. Unit step (3) and the route are unchanged.",
+  "summary": "Q12 deliberate re-split: retain the Q33 repair and extract the missing generic quotient-representative comparison as a new statement-only node, with its existing sorry-free upstream declaration reported for attachment; add the exact Mathlib image-subobject-of-monomorphism leaf. The counit identity is explicitly matched to the hypotheses of this comparison. Statement, prior searches, route and maintainer metadata are unchanged. Reviewer FIX (Q12 maintainer reader): restored the explicit coefficient-ring identification (steps 1, 4), the composition c^*v_k^*F=F|_{S_k} (step 3) and the bracketed localization/successor citations (step 2) that the base carried.",
+  "blueprint": "First paragraph: geometric preparation and actual counit-image chain (steps 1-2); second paragraph: new generic subobject cokernel comparison and existing successor quotient (step 3), then existing mixed-factorization coherence (step 4); final lisseness sentence (step 5). New nodes serve these exact representative identifications, rather than restating a filtration clause.",
   "tool_uses": [
    {
     "node": "det-sf-open-closed-sequence-ring-sheaf",
@@ -258,10 +262,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q33-24d39d441",
-  "group": "Q33",
+  "reviewer": "NT-cc-Q12-2a50ed007",
+  "group": "Q12",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-24d39d441 (reviewer sub-agent of L); spot-checked: The re-split repair is sound. Statement and stmt_deps are unchanged against live; only the proof fields changed. The proof went from 3801 to 1914 characters (steps of 532/470/378/343/191). The long nesting and localization-quotient arguments are now a citation of the existing lem-sfb-open-filtration-successor, which is split and reviewed, and its Lean (OpenFiltrationSuccessor.exists_openFiltrationSuccessor) has 0 sorry. Hypotheses checked step by step. Step 1: the Noetherian leaves give V_k qcqs, and inclusions between opens are qc (affine preimage) and qs (monomorphism); this matches the successor and localization hypotheses. cartesian-coefficients (1) needs no invertible ell. Step 2: localization (3) makes the counit mono; the successor's d ≫ counit_V = counit_W, so d is mono by cancellation. The two j_! are identified by uniqueness of left adjoints. F_0=0 and F_m=F. Step 3: the stratum is closed in V_k with range V_k minus V_{k-1}. The successor's cokernel V_!t_*t^*V^* matches its Lean form. Step 4: the coherence node (X Noetherian, R=Lambda_X commutative) explicitly gives v_!c_* ≅ i_*u_! for a given closure factorization. Step 5: the closure node's final sentence says a finite constant local model over the field Lambda(*) is finite free, hence lisse. The constructibility argument for F_k was dropped correctly: it is not a clause of the item or of its Lean theorem. Route matches the main-20261015 proof paragraphs and unit sk-lem-coefficient-heart (3). Off-unit tool uses are declared and accepted. No cycle: the dependency closures (821 nodes for the successor) do not reach the item. Edge cases checked: F=0, X empty, k=1 with W empty, nonreduced strata, m=1. MAINTAINER NOTE: the human's 2026-10-21 repair note says a delivery with no new node does not answer it. Here the non-elementary content already existed as an exact node, so a new node would be a C5 duplicate. I judge the note's purpose met; please mark it resolved or override."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-2a50ed007 (reviewer sub-agent of L); spot-checked: Re-split delivery on the landed Q33 base. I compared it with the old 3801-character proof argument by argument. The nested counit composite and the localization quotient are carried by the existing reviewed node lem-sfb-open-filtration-successor; its statement gives d with counit_V∘d=counit_W and coker d≅V_!t_*t^*V^*. The factorization comparison is carried by lem-sfb-locally-closed-extension-coherence, which says verbatim 'same normalized identification a_!≅i_*u_!'. Lisseness comes from the final sentence of the closure node. The constructibility of F_k is not a clause of the item; Q33 dropped it and that was accepted. The representative-change argument of the old step 2 ('its cokernel is precisely the subsheaf quotient') is now the new node lem-sfb-subobject-inclusion-cokernel. I proved it true: cancelling g gives e_g ι=φ(α e_f), so the cokernels are isomorphic. I checked it on zero objects, f=g and φ an isomorphism. The DAG has no duplicate (searched for Subobject.ofLE, cokernelOfLEMkIso and imageSubobject_mono). The sorry-free Subobject.cokernelOfLEMkIso (Devissage.lean:56) states it exactly and can be attached. The new Mathlib leaf lem-sfb-image-subobject-of-monomorphism matches imageSubobject_mono at Subobject/Limits.lean:425, with mono_hasImage at Images.lean:335. In step 3, f=ε_{k-1}, g=ε_k, α=1, φ=d_k is exactly the counit identity. Hypotheses (qcqs prefixes, quasi-compact inclusions, untwisted cartesian-coefficients (1), Noetherian X and commutative R for coherence) are checked; so are F=0, X empty, m=1, W empty and nonreduced strata. One fault, fixed: against its base the delivery blurred three one-line identifications (inverse-image coefficient rings = Λ_T in steps 1 and 4, c^*v_k^*F=F|_{S_k} in step 3) and lost the bracketed citations in step 2. I restored them in fixes/dag/nodes/sec-six-functors-basics/det-lem-coefficient-heart-filtration.json; the proof is now 2157 characters and uses and proof_deps are unchanged. Tool uses are unchanged and accepted. Maintainer: please mark the re-split repair note resolved.; 1 file(s) fixed by the reviewer"
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-coefficient-heart",
