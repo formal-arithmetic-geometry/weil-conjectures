@@ -26,7 +26,7 @@ import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
 import WeilConjectures.AlgebraicGeometry.Sites.InverseImageRepresentable
 import WeilConjectures.ConstructibleSheaf.Defs
 import WeilConjectures.ConstructibleSheaf.Pullback
-import all Sheaf.AlgebraicGeometry.PullbackFiniteLocallyConstant
+import all WeilConjectures.AlgebraicGeometry.PullbackFiniteLocallyConstant
 import WeilConjectures.Mathlib.CategoryTheory.Sites.Point.ConstantSheaf
 import Mathlib.CategoryTheory.Sites.EpiMono
 import Sheaf.AlgebraicGeometry.FrobeniusVectorBundleLocalLifts
