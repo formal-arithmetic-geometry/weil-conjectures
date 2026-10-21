@@ -19551,3 +19551,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:05 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
 
 - 10:08 L: batch 20261021T020043 dependency take-out
+- 02:09 L: merged deliver/A2/Sheaf.Paper.IntegralTStructure (stage 3; reviewer PASS; first push; landing 20261021T020956-L-2685354 (proof); batch 20261021T020952; modules 1; new nodes 0)
