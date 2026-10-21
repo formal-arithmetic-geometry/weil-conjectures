@@ -13,9 +13,73 @@
   "def-weil-pbc-projective-module",
   "def-weil-matrix"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-weil-pbc-projective-module], for each $i$ choose split maps $j:P^i\\to F$ and $s:F\\to P^i$ with $sj=1$ and $F=\\bigoplus_I R$ free. If $0\\ne r\\in R$ and $rx=0$, then $rj(x)=0$. The domain condition in [def-sc-discrete-valuation-ring] forces every coordinate of $j(x)$ to vanish, so $x=sj(x)=0$. Thus every $P^i$ is torsion-free.",
+   "uses": [
+    "def-weil-pbc-projective-module",
+    "def-sc-discrete-valuation-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 05CF, lemma-characterize-projective, (1) implies (2); coordinatewise torsion-freeness over a domain"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-dvr-fg-torsionfree-free] to $P^i$: the ring is the given DVR, finite generation is assumed, and step 1 gives torsion-freeness. Choose a finite basis, in the sense of [def-weil-pbc-free-module], and enumerate it to obtain $e_i:R^{n_i}\\xrightarrow{\\sim}P^i$ for each $i\\in[a,b]$. Outside this finite interval take $n_i=0$ and the unique linear isomorphism $R^0\\cong P^i=0$.",
+   "uses": [
+    "lem-sc-dvr-fg-torsionfree-free",
+    "def-weil-pbc-free-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0AUW, lemma-dedekind-torsion-free-flat, part (3), applied to the DVR; finite basis choices"
+   }
+  },
+  {
+   "text": "Let $u_j$ be the standard coordinate vectors of $R^{n_i}$. Define the matrix [def-weil-matrix] by $D_i(k,j)=(e_{i+1}^{-1}d^i e_i(u_j))_k$. For $v=\\sum_jv_j u_j$, linearity gives $e_{i+1}^{-1}d^i e_i(v)=\\sum_jv_j(e_{i+1}^{-1}d^i e_i(u_j))=D_i v$. Hence $d^i e_i=e_{i+1}D_i$. Empty index sets give the same equality because the sums are zero.",
+   "uses": [
+    "def-weil-matrix"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+    "place": "Clause (1), explicit column-coordinate formula for differentials on the finite free scalar models"
+   }
+  },
+  {
+   "text": "For every coordinate vector $v\\in R^{n_i}$, step 3 gives $e_{i+2}(D_{i+1}D_i v)=d^{i+1}e_{i+1}(D_i v)=d^{i+1}d^i e_i(v)=0$. Injectivity of $e_{i+2}$ shows $D_{i+1}D_i v=0$. Apply this to each standard vector $u_j$: its $k$-th coordinate is the $(k,j)$ entry of the matrix product, so every entry of $D_{i+1}D_i$ is zero, including empty rectangular cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+    "place": "Clause (1), square-zero relation after the explicit change of coordinates"
+   }
+  },
+  {
+   "text": "Put $M^i=R^{n_i}$ and $d_M^i(v)=D_i v$. Step 4 makes this a cochain complex. Step 3 is exactly the chain-map equation for $(e_i):M^\\bullet\\to P^\\bullet$. Multiplying that equation by the inverse isomorphisms gives $D_i e_i^{-1}=e_{i+1}^{-1}d^i$, so $(e_i^{-1})$ is an inverse chain map; both composites are the identity in every degree. The chosen $n_i=0$ outside $[a,b]$ gives both support bounds, with finite free terms over the original ring $R$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+    "place": "Clause (1), strict complex isomorphism and unchanged finite support interval"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-projective-module",
+  "def-sc-discrete-valuation-ring",
+  "lem-sc-dvr-fg-torsionfree-free",
+  "def-weil-pbc-free-module",
+  "def-weil-matrix"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-local-model.proof.md",
+  "place": "Clause (1), finite projective to finite free scalar model; freeness uses Stacks Tags 05CF and 0AUW(3), and the coordinate formulas and strict inverse are written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +129,59 @@
    "results": "{\"t\": \"2026-10-21T07:46:48Z\", \"tool\": \"leanfinder\", \"query\": \"Choose finite bases simultaneously in a bounded projective complex over a local principal ideal domain and transport differentials to matrices with consecutive product zero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.x_projective\", \"CategoryTheory.ProjectiveResolution.complex_d_succ_comp\", \"ChainComplex.mk'_d\", \"ChainComplex.of\", \"CategoryTheory.ProjectiveResolution.ofComplex\", \"ChainComplex.mkAux_eq_shortComplex_mk_d_comp_d\", \"CategoryTheory.ProjectiveResolution.ofComplex_d_1_0\", \"CategoryTheory.ProjectiveResolution.complex\"], \"digest\": \"2764ba6f8552dcca\"}",
    "date": "2026-10-21",
    "verdict": "no match: finite projective splitting and generic complex constructors are ingredients; none gives simultaneous finite coordinate bases, matrix differentials and a strict complex isomorphism with both support bounds over a DVR"
+  },
+  {
+   "tool": "grep",
+   "query": "toMatrix|ofIso|isoOfComponents|free_of_finite_type_torsion_free",
+   "results": "{\"t\": \"2026-10-21T08:33:11Z\", \"tool\": \"grep\", \"query\": \"toMatrix|ofIso|isoOfComponents|free_of_finite_type_torsion_free\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Cyclotomic/Discriminant.lean\", \"Mathlib/NumberTheory/Cyclotomic/Discriminant.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Different.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"Mathlib/NumberTheory/NumberField/CanonicalEmbedding/NormLeOne.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\", \"Mathlib/NumberTheory/NumberField/Discriminant/Basic.lean\"], \"digest\": \"92c345ae2eb200c6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give finite projective splittings, generic complex constructors, componentwise isomorphisms or matrices of already chosen linear maps; none states the full same-support DVR coordinate model. Read the relevant source candidates; the coordinate calculation is supplied in the split."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Projective, Module.Free, HomologicalComplex",
+   "results": "{\"t\": \"2026-10-21T08:33:11Z\", \"tool\": \"loogle\", \"query\": \"Module.Projective, Module.Free, HomologicalComplex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give finite projective splittings, generic complex constructors, componentwise isomorphisms or matrices of already chosen linear maps; none states the full same-support DVR coordinate model. Read the relevant source candidates; the coordinate calculation is supplied in the split."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every bounded finite projective cochain complex over a discrete valuation ring admits finite bases with matrix differentials and a strict isomorphism of complexes",
+   "results": "{\"t\": \"2026-10-21T08:33:12Z\", \"tool\": \"leansearch\", \"query\": \"Every bounded finite projective cochain complex over a discrete valuation ring admits finite bases with matrix differentials and a strict isomorphism of complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.of\", \"CategoryTheory.ProjectiveResolution.instProjectiveXIntCochainComplex\", \"Projectivization.finite_of_finite\", \"DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE\", \"CochainComplex.isKProjective_iff_of_iso\", \"CategoryTheory.ProjectiveResolution.cochainComplexXIso\", \"CochainComplex.isKProjective_of_iso\", \"CategoryTheory.ProjectiveResolution.cochainComplex_d_assoc\"], \"digest\": \"20670a9d183027b3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give finite projective splittings, generic complex constructors, componentwise isomorphisms or matrices of already chosen linear maps; none states the full same-support DVR coordinate model. Read the relevant source candidates; the coordinate calculation is supplied in the split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A bounded complex of finite projective modules over a discrete valuation ring is isomorphic to a complex of finite coordinate free modules with matrix differentials and the same support interval",
+   "results": "{\"t\": \"2026-10-21T08:33:12Z\", \"tool\": \"leanfinder\", \"query\": \"A bounded complex of finite projective modules over a discrete valuation ring is isomorphic to a complex of finite coordinate free modules with matrix differentials and the same support interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Finite.exists_comp_eq_id_of_projective\", \"ChainComplex.mkXIso\", \"Module.finitePresentation_of_projective\", \"Rep.standardComplex.x_projective\", \"Rep.standardComplex.forget₂ToModuleCat\", \"CochainComplex.isKProjective_of_iso\", \"CochainComplex.isKProjective_of_projective\", \"Module.finitePresentation_of_projective_of_exact\"], \"digest\": \"2aa17beae2c6a60c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give finite projective splittings, generic complex constructors, componentwise isomorphisms or matrices of already chosen linear maps; none states the full same-support DVR coordinate model. Read the relevant source candidates; the coordinate calculation is supplied in the split."
+  },
+  {
+   "tool": "grep",
+   "query": "isoOfComponents|def ofIso|def mkIso|ofLinearEquiv",
+   "results": "{\"t\": \"2026-10-21T08:33:35Z\", \"tool\": \"grep\", \"query\": \"isoOfComponents|def ofIso|def mkIso|ofLinearEquiv\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/SingleFunctors.lean\", \"Mathlib/Algebra/Homology/HomologicalComplex.lean\", \"Mathlib/Algebra/Homology/HomologicalComplex.lean\", \"Mathlib/Algebra/Homology/HomologicalComplex.lean\", \"Mathlib/Algebra/Homology/HomologicalComplex.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/TotalComplexShift.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/Shift.lean\"], \"digest\": \"15130c5e887ab1b4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give finite projective splittings, generic complex constructors, componentwise isomorphisms or matrices of already chosen linear maps; none states the full same-support DVR coordinate model. Read the relevant source candidates; the coordinate calculation is supplied in the split."
+  },
+  {
+   "tool": "grep",
+   "query": "free_of_finite_type_torsion_free|toMatrix_comp|toMatrix_mulVec_repr|toMatrix_apply",
+   "results": "{\"t\": \"2026-10-21T08:33:35Z\", \"tool\": \"grep\", \"query\": \"free_of_finite_type_torsion_free|toMatrix_comp|toMatrix_mulVec_repr|toMatrix_apply\", \"sub\": \"LinearAlgebra\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/Contraction.lean\", \"Mathlib/LinearAlgebra/PerfectPairing/Restrict.lean\", \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/SpecialLinearGroup.lean\", \"Mathlib/LinearAlgebra/Matrix/SesquilinearForm.lean\", \"Mathlib/LinearAlgebra/Matrix/BilinearForm.lean\", \"Mathlib/LinearAlgebra/Matrix/BilinearForm.lean\"], \"digest\": \"269382f2930603cc\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give finite projective splittings, generic complex constructors, componentwise isomorphisms or matrices of already chosen linear maps; none states the full same-support DVR coordinate model. Read the relevant source candidates; the coordinate calculation is supplied in the split."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Choose finite bases in each term of a cochain complex of finite torsion-free modules over a principal ideal domain and express all differentials as matrices",
+   "results": "{\"t\": \"2026-10-21T08:33:37Z\", \"tool\": \"leanfinder\", \"query\": \"Choose finite bases in each term of a cochain complex of finite torsion-free modules over a principal ideal domain and express all differentials as matrices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.ConnectData\", \"CochainComplex.ConnectData.cochainComplex\", \"CochainComplex.ConnectData.cochainComplex_d\", \"CochainComplex.of\", \"CochainComplex\", \"CochainComplex.cm5b.I_d\", \"CochainComplex.ConnectData.d\", \"CochainComplex.ConnectData.cochainComplex_X\"], \"digest\": \"c0f44654b25cc6d9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits give finite projective splittings, generic complex constructors, componentwise isomorphisms or matrices of already chosen linear maps; none states the full same-support DVR coordinate model. Read the relevant source candidates; the coordinate calculation is supplied in the split."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-int-integral-heart-local-model",
@@ -85,5 +198,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-dvr-projective-complex-matrix-model",
+  "worker": "stage1",
+  "summary": "Q72 read the unit and ancestor, Stacks 05CF and 0AUW(3), all cited node statements, and the project Lean candidates. Kept the statement and stmt_deps unchanged. Split into split-injection torsion-freeness, the existing DVR finite-free Mathlib leaf, explicit matrix columns, the entrywise zero-product check, and the strict inverse chain map preserving both support bounds. No new nodes were needed. Retained the inherited Q71 search records and appended all Q72 wrapper searches.",
+  "blueprint": "Realizes det-lem-int-integral-heart-local-model, proof clause (1), the finite-free matrix models on each stratum (unit sk-lem-int-integral-heart, step 2). It supplies the finite projective-to-finite free coordinate replacement used in step 3 of that ancestor’s current split. No chapter or unit route changes."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q72-648aae436",
+  "group": "Q72",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-648aae436 (reviewer sub-agent of L); spot-checked: PASS with no changes, no new nodes and no tool_uses. Shape: one commit with the item and its report. The statement and stmt_deps are identical to the item as Q71 efb90aa7 created it, nothing is weakened, and no SGA is cited. There is no repair note, so the re-split rule does not apply. Sources read: blueprint main-20261015 sk-lem-int-integral-heart-local-model clause (1), Stacks 05CF, and Stacks 0AUW(3) at more-algebra.tex:4954, which says a finite torsion-free module over a PID is finite free. Step 1: the split i/s from def-weil-pbc-projective-module (whose statement includes 05CF) plus the domain property of the DVR give torsion-freeness; this is elementary and correct. Step 2: lem-sc-dvr-fg-torsionfree-free is a Mathlib leaf (Module.free_of_finite_type_torsion_free', PID) from another unit; a Mathlib leaf needs no tool_use, and it has no proof_deps, so there is no cycle. Its hypotheses are checked, and n_i=0 outside [a,b]. Steps 3-5: the matrix entries are coordinates of e^{-1}de(u_j), linearity gives de=eD, injectivity of e_{i+2} gives D_{i+1}D_i=0, and the e_i^{-1} form an inverse chain map; all correct with the column convention and empty matrices. Edge cases tested: P=0, a=b, the two-term complex R--π^m-->R, R/π excluded as non-projective, and a non-complete DVR. Duplicate search with rg -L: nilpotent-marked-free-complex-lift, stage3-b4-bounded-finite-free-resolution and the other hits are different statements. The Lean candidate gives only a quasi-isomorphism, so it is rightly not attached."
  }
 }
