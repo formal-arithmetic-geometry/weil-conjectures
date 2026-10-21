@@ -1,0 +1,135 @@
+{
+ "id": "lem-trf-etale-closed-base-change-density",
+ "kind": "statement",
+ "title": "Closed-immersion base change is cover-dense and locally fully faithful",
+ "statement": "Let $i:Z\\to X$ be a closed immersion of schemes [def-pc-scheme, def-weil-closed-immersion]. Write $b:X_{\\mathrm{Et}}\\to Z_{\\mathrm{Et}}$ for base change on the small etale sites [def-weil-pbc-etale-site]. Then: (1) every object of $Z_{\\mathrm{Et}}$ is covered by arrows from objects $b(V)$; (2) for every arrow $h:b(V)\\to b(V\\prime)$, the sieve on $V$ of arrows $a:W\\to V$ for which $h\\circ b(a)=b(c)$ for some $c:W\\to V\\prime$ has covering image on $b(V)$; (3) for any parallel $a,a\\prime:V\\to V\\prime$ with $b(a)=b(a\\prime)$, the sieve of arrows $c:W\\to V$ with $a\\circ c=a\\prime\\circ c$ has covering image on $b(V)$. Thus $b$ is cover-dense, locally full and locally faithful with respect to the small etale topology on $Z$. Locality here is measured on $Z$, without asserting density for the original topology on $X$.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Lemmas lemma-closed-immersion-almost-essentially-surjective and lemma-closed-immersion-almost-full; the third assertion is the open agreement locus. Existing proofs: lean/WeilConjectures/SixFunctors/Etale/UpperLowerStar/ClosedImmersion.lean, Scheme.Hom.isCoverDense_etale_of_isClosedImmersion, Scheme.Hom.isLocallyFull_etale_of_isClosedImmersion and Scheme.Hom.isLocallyFaithful_etale_of_isClosedImmersion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "For an etale $Z$-scheme $W$ and $w\\in W$, apply [lemma-openclosed-etale-lifts-locally]: an open neighbourhood of $w$ is the base change of an etale $X$-scheme. These opens give the covering in (1).",
+   "uses": [
+    "lemma-openclosed-etale-lifts-locally"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For (2), put $P=V\\times_XV\\prime$. The graph of $h$ is an open subscheme of $P_Z$, since it is a section of an etale projection. The closed immersion $P_Z\\to P$ is inducing on spaces, so this graph is the trace of an open $W\\subseteq P$. The two projections of $W$ are $a:W\\to V$ and $c:W\\to V\\prime$. The graph gives a section of $a_Z$, so $a_Z$ is surjective; by construction $h a_Z=c_Z$. This single arrow lies in the lifting sieve and its image covers $V_Z$. These are exactly the graph and projection constructions in the existing isLocallyFull proof.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For (3), the agreement locus of the two $X$-morphisms $a,a\\prime$ into the etale $X$-scheme $V\\prime$ is open in $V$: it is the inverse image of the open diagonal. The projection $V_Z\\to V$ factors through it because $a_Z=a\\prime_Z$. Therefore its base change to $Z$ has a section onto $V_Z$, and the image of the equalizer sieve covers. This is the construction in the existing isLocallyFaithful proof.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-closed-immersion"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lemma-openclosed-etale-lifts-locally",
+  "def-weil-closed-immersion",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Closed immersions and pushforward, with the already proved source-library site argument described in source.place."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Base change on small etale sites along a closed immersion is cover dense locally full and locally faithful",
+   "results": "{\"t\": \"2026-10-21T06:46:16Z\", \"tool\": \"leansearch\", \"query\": \"Base change on small etale sites along a closed immersion is cover dense locally full and locally faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.IsDenseSubsite.isLocallyFull\", \"CategoryTheory.Functor.IsDenseSubsite.isLocallyFull'\", \"CategoryTheory.Functor.IsDenseSubsite.mk\", \"CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"CategoryTheory.regularTopology.instIsDenseSubsite\", \"CategoryTheory.Functor.IsDenseSubsite.instIsContinuous\", \"CategoryTheory.Functor.IsDenseSubsite.faithful_sheafPushforwardContinuous\"], \"digest\": \"85f4383c27fa5aea\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. The corresponding existing WeilConjectures declaration is proved and is reused unchanged."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change along closed immersion functor of etale sites cover dense locally full locally faithful",
+   "results": "{\"t\": \"2026-10-21T06:46:17Z\", \"tool\": \"leanfinder\", \"query\": \"Base change along closed immersion functor of etale sites cover dense locally full locally faithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.IsEtale.instIsStableUnderBaseChangeScheme\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.instLocallyCoverDenseOverTopMorphismPropertyOverForgetOverGrothendieckTopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"caa42c0cad339221\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. The corresponding existing WeilConjectures declaration is proved and is reused unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "IsCoverDense|IsLocallyFull|IsLocallyFaithful",
+   "results": "{\"t\": \"2026-10-21T06:46:16Z\", \"tool\": \"grep\", \"query\": \"IsCoverDense|IsLocallyFull|IsLocallyFaithful\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Modules/Tilde.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/AffineEtale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"Mathlib/AlgebraicGeometry/Sites/Affine.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\", \"Mathlib/AlgebraicGeometry/Sites/SmallAffineZariski.lean\"], \"digest\": \"930747cf0b9d263a\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. The corresponding existing WeilConjectures declaration is proved and is reused unchanged."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.EtaleClosedComplementSets",
+  "date": "2026-10-21",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Nearby-cycle finiteness input used in the normal-cone specialization argument: open/closed source reduction before cohomology strata. Generic topos input for the proof of source localization. Reusable site calculation for the closed-complement input.",
+   "via": [
+    "lem-trf-etale-closed-complement-sets",
+    "lem-trf-oriented-source-localization",
+    "lem-trf-psi-proper-surjective-constructibility",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.Etale.UpperLowerStar.ClosedImmersion",
+  "declaration": "AlgebraicGeometry.Scheme.Hom.isCoverDense_etale_of_isClosedImmersion",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Hom.isCoverDense_etale_of_isClosedImmersion",
+   "AlgebraicGeometry.Scheme.Hom.isLocallyFull_etale_of_isClosedImmersion",
+   "AlgebraicGeometry.Scheme.Hom.isLocallyFaithful_etale_of_isClosedImmersion"
+  ],
+  "statement": "instance Scheme.Hom.isCoverDense_etale_of_isClosedImmersion : i.Etale.IsCoverDense Z.smallEtaleTopology",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-21",
+  "note": "Attachment of existing, proved source declarations; no source-library file is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T111415-L-112129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T111415-L-112129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

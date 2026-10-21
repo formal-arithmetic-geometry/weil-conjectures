@@ -1,0 +1,125 @@
+{
+ "id": "lem-trf-etale-open-closed-sieve-cover",
+ "kind": "statement",
+ "title": "An etale sieve covering on the closed side covers after adjoining the open side",
+ "statement": "Let $j:U\\to X$ be an open immersion of schemes [def-pc-scheme, def-weil-open-immersion] and $i:Z\\to X$ a morphism such that $i(Z)=X\\setminus j(U)$. Use the small etale sites [def-weil-pbc-etale-site] and base-change functor $b:X_{\\mathrm{Et}}\\to Z_{\\mathrm{Et}}$. For $W\\in X_{\\mathrm{Et}}$, let $R_j(W)$ be the sieve whose arrows $V\\to W$ have the image of $V\\to X$ contained in $j(U)$. If $S$ is a sieve on $W$ whose image sieve $b_!S$ covers $b(W)$ on $Z_{\\mathrm{Et}}$, then $S\\cup R_j(W)$ covers $W$ on $X_{\\mathrm{Et}}$. No closed-immersion hypothesis on $i$ is needed.",
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Proposition proposition-closed-immersion-pushforward, converse essential-image calculation in site form. Existing proof: lean/WeilConjectures/SixFunctors/OpenClosed/Supported.lean, Etale.sup_sieveOfRangeSubset_mem, with sieve Etale.sieveOfRangeSubset."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-open-immersion",
+  "def-weil-pbc-etale-site"
+ ],
+ "proof": [
+  {
+   "text": "Test joint surjectivity on a point $w$ of $W$. If its image in $X$ belongs to $j(U)$, the open $W\\times_XU$ contains $w$ and its inclusion into $W$ belongs to $R_j(W)$.",
+   "uses": [
+    "def-weil-pbc-etale-site",
+    "def-weil-open-immersion"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Otherwise the complement equality gives a point $z$ of $Z$ with image equal to that of $w$. Surjectivity of the map from the underlying pullback to the topological fibre product gives a point $t$ of $W\\times_XZ$ over $w,z$. Since $b_!S$ covers, $t$ lifts along an arrow in this image sieve. Such an arrow factors as an arbitrary arrow into $b(V)$ followed by $b(f)$ for some $f:V\\to W$ belonging to $S$. Project the lifting point of $b(V)$ to $V$. The pullback projection equation shows that it maps to $w$ by $f$. Hence $S\\cup R_j(W)$ covers every point. This is precisely Scheme.Pullback.exists_preimage_pullback followed by the pointwise covering criterion in the existing Lean proof. For empty $W$ the pointwise assertion is vacuous.",
+   "uses": [
+    "def-weil-pbc-etale-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-open-immersion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Closed immersions and pushforward, with the already proved source-library site argument described in source.place."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Etale covering sieve after adjoining objects over the open complement of a closed subscheme",
+   "results": "{\"t\": \"2026-10-21T06:47:09Z\", \"tool\": \"leansearch\", \"query\": \"Etale covering sieve after adjoining objects over the open complement of a closed subscheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"CategoryTheory.GrothendieckTopology.Cover\", \"TopCat.Presheaf.presieveOfCovering.mem_grothendieckTopology\", \"AlgebraicGeometry.Scheme.grothendieckTopology_cover\", \"Opens.grothendieckTopology\", \"TopCat.Presheaf.presieveOfCovering\", \"CategoryTheory.GrothendieckTopology.IsClosed\", \"AlgebraicGeometry.Scheme.mem_overGrothendieckTopology\"], \"digest\": \"c60c16032cae4a3b\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. The corresponding existing WeilConjectures declaration is proved and is reused unchanged."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sieve which covers after pullback to the closed complement together with the open immersion covers the etale site",
+   "results": "{\"t\": \"2026-10-21T06:47:11Z\", \"tool\": \"leanfinder\", \"query\": \"A sieve which covers after pullback to the closed complement together with the open immersion covers the etale site\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.jointlySurjectiveTopology\", \"AlgebraicGeometry.Scheme.exists_cover_of_mem_grothendieckTopology\", \"AlgebraicGeometry.Scheme.zariskiPrecoverage\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰S\"], \"digest\": \"3504d734c46980ca\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. The corresponding existing WeilConjectures declaration is proved and is reused unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "sieveOfRangeSubset|sup.*Sieve|Sieve.*sup",
+   "results": "{\"t\": \"2026-10-21T06:47:09Z\", \"tool\": \"grep\", \"query\": \"sieveOfRangeSubset|sup.*Sieve|Sieve.*sup\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/Point/Conservative.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/Pretopology.lean\", \"Mathlib/CategoryTheory/Sites/Closed.lean\", \"Mathlib/CategoryTheory/Sites/Closed.lean\"], \"digest\": \"ec77ceec47ed68a6\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match. The corresponding existing WeilConjectures declaration is proved and is reused unchanged."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.TraceFormula.EtaleClosedComplementSets",
+  "date": "2026-10-21",
+  "group": "P4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-local-term-locality",
+   "place": "Nearby-cycle finiteness input used in the normal-cone specialization argument: open/closed source reduction before cohomology strata. Generic topos input for the proof of source localization. Reusable site calculation for the closed-complement input.",
+   "via": [
+    "lem-trf-etale-closed-complement-sets",
+    "lem-trf-oriented-source-localization",
+    "lem-trf-psi-proper-surjective-constructibility",
+    "lem-trf-psi-good-oriented-cohomology-strata",
+    "lem-trf-nearby-cycle-sheaf-finiteness",
+    "lem-trf-nearby-cycle-finiteness-exchange",
+    "lem-trf-specialization-zero-section"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-i-curve-zero",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.OpenClosed.Supported",
+  "declaration": "AlgebraicGeometry.Etale.sup_sieveOfRangeSubset_mem",
+  "declarations": [
+   "AlgebraicGeometry.Etale.sieveOfRangeSubset",
+   "AlgebraicGeometry.Etale.sup_sieveOfRangeSubset_mem"
+  ],
+  "statement": "lemma sup_sieveOfRangeSubset_mem (hij : Set.range i.base = (Set.range j.base)ᶜ) {W : X.Etale} (S : Sieve W) (hS : S.functorPushforward i.Etale ∈ Z.smallEtaleTopology (i.Etale.obj W)) : S ⊔ sieveOfRangeSubset j W ∈ X.smallEtaleTopology W",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-21",
+  "note": "Attachment of existing, proved source declarations; no source-library file is changed."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T111415-L-112129",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T111415-L-112129",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
