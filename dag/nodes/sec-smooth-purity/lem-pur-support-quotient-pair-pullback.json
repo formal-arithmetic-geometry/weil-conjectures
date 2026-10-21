@@ -27,10 +27,9 @@
  ],
  "proof": [
   {
-   "text": "Work first on the etale sites. Write $U=T\\setminus C$, $U'=T'\\setminus C'$, and $b:j_!A_U\\to A_T$ for the defining open-inclusion arrow. The category of constant-ring module sheaves is abelian, with cokernels obtained by sheafifying sectionwise cokernels. By exactness of constant-coefficient module pullback, the sequence\n$$f_{\\mathrm{et}}^*j_!A_U\\xrightarrow{f^*b} A_{T'}\\xrightarrow{f^*r^{\\mathrm{et}}_{T,C}}f_{\\mathrm{et}}^*Q^{\\mathrm{et}}_{T,C}\\to0$$\nis a cokernel presentation, using the constant-section-preserving identification $f^*A_T\\cong A_{T'}$. In particular $f^*r^{\\mathrm{et}}_{T,C}$ is an epimorphism.",
+   "text": "The fixed-coefficient etale inverse image is the published left adjoint, so it preserves the defining cokernel cofork. Its image of the quotient map is epic. Identify the inverse image of the constant module by the published constantSheafCompUpperStarIso.",
    "uses": [
-    "def-weil-sheaf-of-modules-category",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "def-weil-pbc-inverse-image"
    ],
    "elementary": false,
    "source": {
@@ -39,12 +38,11 @@
    }
   },
   {
-   "text": "The composite $h=r^{\\mathrm{et}}_{T',C'}\\circ f^*b$ is zero. Indeed, at a geometric point $\\bar x'$ in $C'$, the image $\\bar x=f\\bar x'$ lies in $C$, by the assumed factorization of $fa'$ through $a$. The inverse-image stalk isomorphism and extension-by-zero stalk formula give\n$$(f^*j_!A_U)_{\\bar x'}\\cong(j_!A_U)_{\\bar x}=0.$$\nAt a geometric point outside $C'$ the target stalk $(Q^{\\mathrm{et}}_{T',C'})_{\\bar x'}$ is zero by the support-quotient stalk formula. Thus every stalk of $h$ is zero. For completeness, exact stalk functors carry the abelian-sheaf image of $h$ to its zero stalk image; conservativity applied to $0\\to\\operatorname{im}(h)$ makes this image zero, hence $h=0$. This argument is on underlying abelian sheaves and therefore also proves the equality of module morphisms.",
+   "text": "At a geometric point in the source support, the supplied scheme-theoretic factorization puts its image in the target support. The extension-by-zero stalk at that image is zero; the natural inverse-image stalk isomorphism therefore makes the source of the pulled-back relation zero. Off the source support, the target quotient stalk is zero. The published joint faithfulness of geometric stalks makes the ordinary sheaf morphism zero. No passage through an image object is needed.",
    "uses": [
     "lem-weil-pbc-inverse-image-stalk-germ",
     "lem-weil-pbc-extension-by-zero-stalks",
     "lem-pur-support-quotient-flat",
-    "prop-weil-pbc-geometric-stalks-exact",
     "lemma-weil-pbc-geometric-stalk-conservative"
    ],
    "elementary": false,
@@ -79,16 +77,13 @@
    }
   },
   {
-   "text": "Write $\\rho_f:\\nu_{T'}^*f_{\\mathrm{et}}^*\\xrightarrow{\\sim}f_{\\mathrm{proet}}^*\\nu_T^*$ for the natural isomorphism of lem-weil-pbc-comparison-pullback. On module sheaves all four functors are the set-sheaf functors applied to the underlying sheaf, addition, zero, negation and each scalar endomorphism, so $\\rho_f$ is natural for maps of sheaves of sets and its components are module maps. All four functors preserve the final sheaf $*$: $\\nu^*$ is a finite-limit-preserving left adjoint, and the etale and pro-etale inverse images preserve finite products. Hence $\\rho_{f,*}$ is the unique map of final sheaves. We check that $\\rho_{f,A_T}$ is the identity of $A_{T'}$ under the identifications $\\nu_{T'}^*f_{\\mathrm{et}}^*A_T\\cong A_{T'}\\cong f_{\\mathrm{proet}}^*\\nu_T^*A_T$, each adjoint to a constant-section map and so carrying the pulled-back constant section $a$ to the constant section $a$. For $a\\in A$ the constant section is a map $a:*\\to A_T$, and naturality gives $\\rho_{f,A_T}\\circ\\nu_{T'}^*f_{\\mathrm{et}}^*(a)=f_{\\mathrm{proet}}^*\\nu_T^*(a)\\circ\\rho_{f,*}$. Thus the transported $\\rho_{f,A_T}$ is an endomorphism of $A_{T'}$ fixing every constant section; as $A_{T'}$ is the sheafification of the constant presheaf, the universal property of sheafification makes it the identity. The same argument applies to every natural isomorphism between composites of these finite-product-preserving functors, in particular to the identity and composition comparisons on either site, so they respect the coefficient identifications; on the pro-etale site this is the equation of lem-pur-proetale-constant-ring-composition. Consequently naturality of $\\rho_f$ applied to $r^{\\mathrm{et}}_{T,C}$ can be used with exactly the coefficient identifications in the statement. No property of the construction of $\\rho_f$ beyond its statement is used.",
+   "text": "For any continuous functor of sites, construct the direct-image constant map by sheafification of constant sections and its inverse-image map by adjunction. The direct maps respect composition and any specified site-functor isomorphism: check on each object using naturality of toSheafify. Transposing through the composite adjunction gives the coefficient composition equation for arbitrary coefficient categories. The same calculation gives identities. Identify the published etale coefficient iso and the site-comparison coefficient map with these adjuncts using the constant-sheaf adjunction. Apply the mate Hom-equivalence formula to the etale/proetale comparison square; both direct-image paths have identical constant sections. This gives the exact coefficient square in the theorem, without a separate ring-to-module lifting argument.",
    "uses": [
     "lem-weil-pbc-comparison-pullback",
-    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-inverse-image",
     "def-weil-proetale-inverse-image",
-    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
-    "prop-weil-pbc-inverse-image-modules-exact",
     "def-weil-pbc-constant-sheaf",
-    "def-weil-pbc-sheafification",
-    "lem-pur-proetale-constant-ring-composition"
+    "def-weil-pbc-sheafification"
    ],
    "elementary": false,
    "source": {
@@ -97,11 +92,11 @@
    }
   },
   {
-   "text": "Now define the pro-etale map by the actual composite of ordinary module morphisms\n$$c^{\\mathrm{proet}}_{f;C,C'}=\\alpha_{T',C'}\\circ\\nu_{T'}^*(c^{\\mathrm{et}}_{f;C,C'})\\circ\\rho_{f,Q^{\\mathrm{et}}_{T,C}}^{-1}\\circ(f_{\\mathrm{proet}}^*\\alpha_{T,C})^{-1}.$$\nThe normalization $\\alpha\\circ\\nu^*r^{\\mathrm{et}}=r^{\\mathrm{proet}}$, naturality of $\\rho_f$ at $r^{\\mathrm{et}}$, and its coefficient normalization just checked give $c^{\\mathrm{proet}}\\circ f_{\\mathrm{proet}}^*r^{\\mathrm{proet}}=r^{\\mathrm{proet}}_{T',C'}$. Moreover $f_{\\mathrm{proet}}^*r^{\\mathrm{proet}}$ is, through these same isomorphisms, $\\nu_{T'}^*(f_{\\mathrm{et}}^*r^{\\mathrm{et}})$. The latter is an epimorphism because the module comparison functor is exact. Thus precomposition with $f_{\\mathrm{proet}}^*r^{\\mathrm{proet}}$ is injective on morphisms and proves uniqueness on the pro-etale site. Multiplying the displayed defining formula by $f_{\\mathrm{proet}}^*\\alpha_{T,C}$ on the right gives precisely the required site-comparison square under $\\rho_f$.",
+   "text": "Choose the uniquely normalized quotient comparisons supplied by supportQuotient_flat_kflat_stalk_comparison. Transport the constructed etale map through the inverse of the source comparison, the inverse of the pullback comparison, and the target comparison. Naturality at the quotient map and the coefficient square of step 5 prove the proetale quotient equation. The proetale inverse image is itself a left adjoint, so the pulled-back quotient map is epic and gives uniqueness directly. Cancelling the source comparison gives the asserted comparison square. Every other normalized quotient comparison equals the chosen one by its uniqueness clause.",
    "uses": [
     "lem-pur-support-quotient-flat",
     "lem-weil-pbc-comparison-pullback",
-    "lem-sf-comparison-pullback-exact"
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
@@ -119,10 +114,11 @@
    }
   },
   {
-   "text": "For an identity map of pairs, the identity of $Q^\\tau_{T,C}$ satisfies the defining quotient equation, so uniqueness gives the identity assertion in each topology. For $T''\\xrightarrow gT'\\xrightarrow fT$, use the canonical inverse-image composition comparison, whose coefficient normalization was checked above. Precomposing the proposed composite with $(f\\circ g)^*r^\\tau_{T,C}$ gives\n$$c^\\tau_{g;C',C''}\\circ g^*(c^\\tau_{f;C,C'}\\circ f^*r^\\tau_{T,C})=c^\\tau_{g;C',C''}\\circ g^*r^\\tau_{T',C'}=r^\\tau_{T'',C''}.$$\nThe pair condition is transitive, since the two given factorizations compose. Uniqueness for the pair $(f\\circ g;C,C'')$ proves the composition equation. These are equalities of ordinary sheaf morphisms: no derived or stalkwise equality is substituted for the asserted equalities. Quasi-compactness is used only to keep all the support quotients and their comparisons within the hypotheses of lem-pur-support-quotient-flat; no flatness of a scheme morphism or reducedness assumption was used.",
+   "text": "The identity comparison is natural at the quotient map; coefficient normalization from step 5 therefore shows it satisfies the quotient equation. Cancel the pulled-back quotient epimorphism to prove the identity clause. For a composite pair map, naturality of the composition comparison followed by the two quotient equations reduces its quotient equation to the coefficient composition equation of step 5. Cancel the quotient epimorphism to obtain the etale and proetale composition clauses as equalities of ordinary sheaf morphisms.",
    "uses": [
-    "lem-weil-pbc-comparison-pullback",
-    "lem-pur-proetale-constant-ring-composition"
+    "def-weil-pbc-inverse-image",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-comparison-pullback"
    ],
    "elementary": false,
    "source": {
@@ -133,25 +129,19 @@
  ],
  "proof_deps": [
   "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-inverse-image",
   "def-weil-pbc-sheafification",
-  "def-weil-pbc-site-comparison-morphism",
   "def-weil-proetale-inverse-image",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pur-proetale-constant-ring-composition",
   "lem-pur-support-quotient-flat",
-  "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
   "lem-weil-pbc-extension-by-zero-stalks",
   "lem-weil-pbc-inverse-image-stalk-germ",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "prop-weil-pbc-geometric-stalks-exact",
-  "prop-weil-pbc-inverse-image-modules-exact"
+  "lemma-weil-pbc-geometric-stalk-conservative"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-  "place": "Final paragraph: normalized comparison commuting with pullback; cokernel argument using Stacks Tags 03Q1, 03PT and 03PU"
+  "place": "Final comparison paragraph; Stacks Tag 03Q1. E6 formalization via cokernel descent, jointly faithful geometric stalks, and constant-section adjunction mates."
  },
  "mathlib_searches": [
   {
@@ -303,14 +293,10 @@
   ]
  },
  "tool_uses": [
-  "prop-weil-pbc-inverse-image-modules-exact",
   "lem-weil-pbc-inverse-image-stalk-germ",
   "lem-weil-pbc-extension-by-zero-stalks",
   "lemma-weil-pbc-geometric-stalk-conservative",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-sf-comparison-pullback-exact",
-  "lem-pur-proetale-constant-ring-composition",
-  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+  "lem-weil-pbc-comparison-pullback"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -348,5 +334,15 @@
   "group": "Q64",
   "result": "pass",
   "note": "Statement field matches the file signature exactly; node unchanged apart from lean. Every clause matches the node: closed pair with QuasiCompact complement, pair maps with factorization, unique cEt/cPro under the canonical coefficient maps (constantSheafCompUpperStarIso, proEtaleConstantInverseImageMap), stalk isos pinned by the dep's constant-germ normalization so the stalk-identity clause is not hollow, zero target off C', IsPullback gives isos in both topologies, identities and composites via the canonical supportSite comparison isos, and the comparison square over the dep's normalized alpha with rho = supportSiteComparisonCoefficientPullbackIso in the right direction. Objects reused from SupportQuotientFlat/ProEtaleInverseImage; helpers are real data. Edge cases (C empty or T, C' empty or strict, T empty, A=0, non-reduced) covered. Only sorry; source/blueprint docstrings and 8 proof steps present; no recompile (unchanged). Advisory: two parallel etale constant-pullback isos (vs parent's upperStarConstantSheafIso) need an equality lemma at stage 3; plain defs come from base-era theorem stmt_deps and the geometric-stalk node is not in stmt_deps (S2 cannot change stmt_deps); second reading was written by the worker itself."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E6",
+  "result": "pass",
+  "landing": "20261021T152309-L-1853157",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
