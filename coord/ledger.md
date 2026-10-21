@@ -23621,3 +23621,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T20:12:37Z L: superseded stage-1 delivery NJ/lem-a1-finite-pullback-strict-tower-comparison at 707f4fead3324dd43b525507d4579063cc7cba92; current completion retained; packet archived at refs/superseded/NJ/lem-a1-finite-pullback-strict-tower-comparison/707f4fead3324dd43b525507d4579063cc7cba92; stale return retired.
 - 20:13 L: merged deliver/NN/lem-sfb-relative-cyclic-restriction-model (reviewer PASS; first push; new nodes: 0)
 - 20:13 L: returned deliver/S1/Sheaf.Algebra.Homology.KFlatResolution (reviewer RETURN: (reviewer C-e4214, head e421463b6) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.KFl)
+- 20:14 L: merged deliver/NM/lem-sfb-profinite-invariants-filtered-continuity (reviewer PASS; first push; new nodes: 1)
