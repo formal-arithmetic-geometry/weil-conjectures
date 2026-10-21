@@ -2,7 +2,7 @@
  "id": "lem-fix-open-scalar-tensor-normalization",
  "kind": "statement",
  "title": "Open scalar comparison with unit, tensor and composition normalization",
- "statement": "Let $j:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion] and $A\\to B$ a map of finite commutative rings. On ordinary unbounded constant-ring pro-etale module derived categories [def-weil-pbc-proetale-modules], put $S_T=-\\otimes_A^LB$ [lem-pur-derived-change-of-rings], let $U_T$ be scalar restriction [def-pc-sheaf-restrict-scalars], and use the scalar adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Use exact open adjunctions $j_!^R\\dashv j_R^{-1}$ [lem-cbc-proetale-extension-zero] and the canonical $\\lambda_j:j_B^{-1}S_X\\cong S_Uj_A^{-1}$ [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The common-right-adjoint comparison defines a B-linear natural isomorphism $\\beta_j:S_Xj_!^A\\xrightarrow{\\sim}j_!^BS_U$. Its inverse is the open adjunct of $\\lambda_j^{-1}\\circ S_U(\\eta_j^A)$. Under scalar restriction and the canonical tensor identifications, beta is the open projection isomorphism at the constant module B [lem-cbc-extension-zero-projection-formula]. For $A\\to B\\to C$, these beta maps compose to beta for $A\\to C$ under balanced scalar associativity [lem-sfb-successive-derived-quotient-normalization], including identities.\n\nFor arbitrary $K\\in D(U_{\\mathrm{proet}},A)$ and $Q\\in D(X_{\\mathrm{proet}},A)$ let $\\gamma^R$ be the forward open projection isomorphism $(j_!^RM)\\otimes_R^LN\\to j_!^R(M\\otimes_R^Lj_R^{-1}N)$. The following two routes from $S_X(j_!^AK\\otimes_A^LQ)$ to $j_!^B(S_UK\\otimes_B^Lj_B^{-1}S_XQ)$ agree: (i) $S_X\\gamma^A$, then $\\beta_{j,K\\otimes j_A^{-1}Q}$, then $j_!^B$ of the scalar monoidal comparison and $\\lambda_j^{-1}$; (ii) the scalar monoidal comparison, then $\\beta_{j,K}\\otimes1$, then $\\gamma^B$. Thus beta preserves the unit-normalized open tensor map, for arbitrary Q.",
+ "statement": "Let $j:U\\hookrightarrow X$ be an open immersion [def-weil-open-immersion] and $A\\to B$ a map of finite commutative rings. On ordinary unbounded constant-ring pro-etale module derived categories [def-weil-pbc-proetale-modules], put $S_T=-\\otimes_A^LB$ [lem-pur-derived-change-of-rings], let $U_T$ be scalar restriction [def-pc-sheaf-restrict-scalars], and use the scalar adjunction [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Use exact open adjunctions $j_!^R\\dashv j_R^{-1}$ [lem-cbc-proetale-extension-zero] and the canonical $\\lambda_j:j_B^{-1}S_X\\cong S_Uj_A^{-1}$ [lem-sfb-kflat-scalar-comparison-normalization, lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. The common-right-adjoint comparison defines a B-linear natural isomorphism $\\beta_j:S_Xj_!^A\\xrightarrow{\\sim}j_!^BS_U$. Its inverse is the open adjunct of $\\lambda_j^{-1}\\circ S_U(\\eta_j^A)$. Under scalar restriction and the canonical tensor identifications, beta is the open projection isomorphism at the constant module B [lem-cbc-extension-zero-projection-formula]. For $A\\to B\\to C$, these beta maps compose to beta for $A\\to C$ under balanced scalar associativity [lem-sfb-successive-derived-quotient-normalization], including identities.\n\nFor arbitrary $K\\in D(U_{\\mathrm{proet}},A)$ and $Q\\in D(X_{\\mathrm{proet}},A)$ let $\\gamma^R$ be the forward open projection isomorphism $(j_!^RM)\\otimes_R^LN\\to j_!^R(M\\otimes_R^Lj_R^{-1}N)$. The following two routes from $S_X(j_!^AK\\otimes_A^LQ)$ to $j_!^B(S_UK\\otimes_B^Lj_B^{-1}S_XQ)$ agree: (i) $S_X\\gamma^A$, then $\\beta_{j,K\\otimes j_A^{-1}Q}$, then $j_!^B$ of the scalar monoidal comparison and $\\lambda_j^{-1}$; (ii) the scalar monoidal comparison, then $\\beta_{j,K}\\otimes1$, then $\\gamma^B$. Thus beta preserves the unit-normalized open tensor map, for arbitrary Q.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0GL1, lemma-j-shriek-and-tensor; open scalar adjunction normalization and its tensor and coefficient-composition identities"
@@ -16,11 +16,139 @@
   "lem-pur-derived-change-of-rings",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-kflat-scalar-comparison-normalization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $e_R=j_!^R$, $r_R=j_R^{-1}$, $u^R:1\\to r_Re_R$ for the open unit, and $\\nu_T:1\\to U_TS_T$ for the scalar unit. Scalar restriction commutes with $r$ by the identified-coefficient inverse-image comparison of [lem-weil-pbc-ring-sheaf-change-adjunction]. Its scalar mate is $\\lambda^{-1}:S_Ur_A\\to r_BS_X$ by [lem-sfb-kflat-scalar-comparison-normalization]. Thus, with the restriction identification understood,\n$$U_U(\\lambda_N)\\,r_A(\\nu_{X,N})=\\nu_{U,r_AN}.$$\nHere scalar units are the specified insertion $x\\mapsto x\\otimes1$ of [lem-pur-sheaf-ring-derived-coefficient-adjunction]. Apply [lem-sfb-ringed-derived-monoidal-comparisons] to the two ringed-topos factorizations from $(U,B)$ to $(X,A)$: one changes coefficients on $X$ and then restricts, the other restricts and then changes coefficients on $U$. Their structural ring maps agree. The resulting $\\lambda$ is monoidal and respects tensor units; its K-flat balanced map is the same one fixed above. Denote the scalar tensorators by $t_T:S_T(F\\otimes_A^LG)\\to S_TF\\otimes_B^LS_TG$ and the inverse-image tensorators by $a_R:r_R(F\\otimes_R^LG)\\to r_RF\\otimes_R^Lr_RG$.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "The exact open adjunctions [lem-cbc-proetale-extension-zero] and the scalar adjunctions [lem-pur-sheaf-ring-derived-coefficient-adjunction], composed using [def-weil-pbc-composite-adjunction], give, naturally in $K,H$,\n$$\\operatorname{Hom}_B(S_Xe_AK,H)\\cong\\operatorname{Hom}_A(e_AK,U_XH)\\cong\\operatorname{Hom}_A(K,r_AU_XH)$$\nand\n$$\\operatorname{Hom}_B(e_BS_UK,H)\\cong\\operatorname{Hom}_B(S_UK,r_BH)\\cong\\operatorname{Hom}_A(K,U_Ur_BH).$$\nIdentify the last objects by step 1. The common-right-adjoint uniqueness theorem [lem-weil-pbc-conjugate-iso-unit-equation] supplies the natural isomorphism $\\beta:S_Xe_A\\to e_BS_U$. All Hom sets here are in module derived categories, so its components are B-linear.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "Put $b_K=\\beta_K^{-1}$. The unit equation in [lem-weil-pbc-conjugate-iso-unit-equation], with the composite-unit formula [def-weil-pbc-composite-adjunction], says that the scalar adjunct of the open adjunct of $b_K$ is\n$$K\\xrightarrow{u^A_K}r_Ae_AK\\xrightarrow{r_A\\nu_{X,e_AK}}r_AU_XS_Xe_AK.$$\nOn the other hand the scalar adjunct of $\\lambda_{e_AK}^{-1}S_U(u^A_K)$ is\n$$U_U(\\lambda_{e_AK}^{-1})\\,U_US_U(u^A_K)\\,\\nu_{U,K}\n=U_U(\\lambda_{e_AK}^{-1})\\,\\nu_{U,r_Ae_AK}\\,u^A_K\n=r_A(\\nu_{X,e_AK})\\,u^A_K,$$\nby scalar-unit naturality and step 1. Injectivity of the scalar Hom bijection [lem-pur-sheaf-ring-derived-coefficient-adjunction] proves\n$$r_B(b_K)\\,u^B_{S_UK}=\\lambda_{e_AK}^{-1}S_U(u^A_K).\\tag{*}$$\nThe open Hom bijection, equivalently [lem-weil-pbc-adjunct-counit-identity], now gives exactly the asserted open adjunct formula for $b$.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-weil-pbc-composite-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "For clarity fix the canonical open projection normalization: put $\\delta^R_{M,N}=(\\gamma^R_{M,N})^{-1}$. The canonical map in [lem-cbc-extension-zero-projection-formula] has inverse the open adjunct of\n$$M\\otimes_R^Lr_RN\\xrightarrow{u^R_M\\otimes1}r_Re_RM\\otimes_R^Lr_RN\\xrightarrow{a_R^{-1}}r_R(e_RM\\otimes_R^LN).\\tag{**}$$\nThis describes the canonical map, rather than choosing an isomorphism of its endpoints: in the Hom calculation of sites-modules.tex Tag 0E8I it is the image of the identity, and its derived version is Tag 0GL1. The derived open adjunction used here is [lem-cbc-proetale-extension-zero]; the tensorators and unitors are those of [lem-sfb-ringed-derived-monoidal-comparisons]. We will compare morphisms by this open Hom bijection [lem-weil-pbc-adjunct-counit-identity].",
+   "uses": [
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-cbc-proetale-extension-zero",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "Restrict (*) to A-modules. Identify $U_TS_TF$ with $F\\otimes_A^LB_T$: both are computed by the same tensor of a K-flat representative in [lem-pur-derived-change-of-rings], forgetting only the target-ring action [def-pc-sheaf-restrict-scalars]. Identify $U_Xe_B$ with $e_AU_U$ by [lem-cbc-proetale-extension-zero]. The open units agree under this identification: they are the termwise extension/restriction units, identity on sections over U, and scalar restriction changes only the ring action. In these identifications the right side of (*) is\n$$K\\otimes_A^LB_U\\xrightarrow{u^A_K\\otimes1}r_Ae_AK\\otimes_A^LB_U\\xrightarrow{a_A^{-1}}r_A(e_AK\\otimes_A^LB_X).$$\nIndeed the balanced pullback comparison retains the B factor, and scalar extension sends a morphism to its tensor with $1_B$; these are the K-flat maps fixed in [lem-sfb-kflat-scalar-comparison-normalization]. By (**) and injectivity of the open Hom bijection, $U_Xb$ is $\\delta^A_{K,B_X}$. Inverting proves that the restricted $\\beta$ is exactly $\\gamma^A_{K,B_X}$.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-cbc-proetale-extension-zero",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "For $A\\to B\\to C$, write $\\alpha_T:S_T^{B,C}S_T^{A,B}\\to S_T^{A,C}$ for [lem-sfb-successive-derived-quotient-normalization]. Consider\n$$e_CS_U^{A,C}\\xrightarrow{e_C\\alpha_U^{-1}}e_CS_U^{B,C}S_U^{A,B}\\xrightarrow{b^{B,C}_{S_U^{A,B}K}}S_X^{B,C}e_BS_U^{A,B}\\xrightarrow{S_X^{B,C}b^{A,B}_K}S_X^{B,C}S_X^{A,B}e_A\\xrightarrow{\\alpha_X}S_X^{A,C}e_A.$$\nIts common-right-adjoint Hom correspondence is the two scalar Hom bijections with the open Hom bijection moved past each in turn. The coefficient-unit clause of [lem-sfb-successive-derived-quotient-normalization] identifies the two successive scalar bijections with the single one for $A\\to C$: expanding the composite units [def-weil-pbc-composite-adjunction] inserts $x\\mapsto(x\\otimes1)\\otimes1\\mapsto x\\otimes1$. Restriction changes the action by the composite ring map on both sides [def-pc-sheaf-restrict-scalars]. Thus the displayed map and $b^{A,C}$ have the same unit equation, and uniqueness [lem-weil-pbc-conjugate-iso-unit-equation] identifies them. For an identity ring map the same computation uses $x\\otimes a\\mapsto ax$ and the tensor unitor, giving identity $b$. Inverting gives the asserted coefficient cocycle and identities for $\\beta$.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "def-weil-pbc-composite-adjunction",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "To prove the mixed tensor square, it suffices to prove its inverse form. Suppress only canonical associators and write $K\\otimes r_AQ$ for $K\\otimes_A^Lr_AQ$. The required inverse equality is\n$$S_X(\\delta^A_{K,Q})\\,b_{K\\otimes r_AQ}\\,e_B\\bigl(t_U^{-1}(1\\otimes\\lambda_Q)\\bigr)\n=t_X^{-1}(b_K\\otimes1)\\,\\delta^B_{S_UK,S_XQ}.\\tag{***}$$\nBoth sides have source $e_B(S_UK\\otimes_B^Lr_BS_XQ)$ and target $S_X(e_AK\\otimes_A^LQ)$. Take the open adjunct, using [lem-weil-pbc-adjunct-counit-identity]. By (**) the adjunct of the right side is\n$$r_B(t_X^{-1})\\,a_B^{-1}\\bigl((r_Bb_K\\,u^B_{S_UK})\\otimes1\\bigr)\n=r_B(t_X^{-1})\\,a_B^{-1}\\bigl((\\lambda_{e_AK}^{-1}S_Uu^A_K)\\otimes1\\bigr),\\tag{J}$$\nwhere the first equality uses naturality of $a_B$ and the second uses (*). These are equalities of derived morphisms, not tests on ordinary geometric stalks.",
+   "uses": [
+    "lem-weil-pbc-adjunct-counit-identity",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  },
+  {
+   "text": "The adjunct of the left side of (***) is, by naturality of the open unit and (*) at $K\\otimes r_AQ$,\n$$r_BS_X(\\delta^A_{K,Q})\\,\\lambda_{e_A(K\\otimes r_AQ)}^{-1}S_U(u^A_{K\\otimes r_AQ})\\,t_U^{-1}(1\\otimes\\lambda_Q).$$\nNaturality of $\\lambda$ moves its inverse to the left. Equation (**) replaces $r_A(\\delta^A)u^A$ by $a_A^{-1}(u^A_K\\otimes1)$. The result is\n$$\\lambda_{e_AK\\otimes Q}^{-1}S_U(a_A^{-1})S_U(u^A_K\\otimes1)\\,t_U^{-1}(1\\otimes\\lambda_Q).$$\nTensorator naturality moves $S_U(u^A_K\\otimes1)$ through $t_U^{-1}$. Monoidality of $\\lambda$ from [lem-sfb-ringed-derived-monoidal-comparisons] then replaces\n$$\\lambda_{F\\otimes Q}^{-1}S_U(a_A^{-1})t_U^{-1}\n\\quad\\text{by}\\quad r_B(t_X^{-1})a_B^{-1}(\\lambda_F^{-1}\\otimes\\lambda_Q^{-1}),\\qquad F=e_AK.$$\nCancel $\\lambda_Q^{-1}\\lambda_Q$. This is exactly (J). Injectivity of the open Hom bijection [lem-weil-pbc-adjunct-counit-identity] proves (***). All maps in (***) are isomorphisms by steps 1--4; invert the equality to obtain the two forward routes in the statement for arbitrary K and Q. Unitor coherence in [lem-sfb-ringed-derived-monoidal-comparisons] includes the unit-normalized case. No boundedness, flatness of $A\\to B$, or quasi-compactness of j has entered.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-adjunct-counit-identity"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-cbc-proetale-extension-zero",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-adjunct-counit-identity",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08FJ (lemma-adjoint-lower-shriek-restrict), 0GL1 (lemma-j-shriek-and-tensor), 07A6 (lemma-adjoint), 07A4 (lemma-pullback-tensor-product), 0D6D (lemma-derived-pullback-composition); explicit adjunction calculation using sites-modules.tex Tag 0E8I (lemma-j-shriek-and-tensor)"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +184,53 @@
    "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, LightCondensed.internallyProjective_iff_tensor_condition', ModuleCat.homEquiv_extendScalarsComp, Condensed.freeForgetAdjunction, LightCondensed.freeForgetAdjunction, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply",
    "date": "2026-10-21",
    "verdict": "No match: ModuleCat.extendScalarsComp and its unit formulas are underived modules, whereas the new statement fixes the pro-etale derived open mate and its mixed projection square; other hits concern function extension by zero or condensed projectivity."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero.*tensor|scalar.*shriek|shriek.*scalar",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No match: underived ModuleCat scalar adjunction/composition or abstract adjunction uniqueness does not state the unbounded pro-etale open comparison with its normalization and mixed projection square."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived coefficient change isomorphism for extension by zero preserves the open projection formula and successive scalar extension",
+   "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale, groupCohomology.π_comp_H0Iso_hom_apply, CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom, CategoryTheory.Functor.rightDerivedZeroIsoSelf, CategoryTheory.Functor.leftDerivedZeroIsoSelf, CategoryTheory.instIsIsoFunctorToRightDerivedZero, ModuleCat.RestrictionCoextensionAdj.unit', CategoryTheory.instIsIsoFunctorFromLeftDerivedZero",
+   "date": "2026-10-21",
+   "verdict": "No match: underived ModuleCat scalar adjunction/composition or abstract adjunction uniqueness does not state the unbounded pro-etale open comparison with its normalization and mixed projection square."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No match: underived ModuleCat scalar adjunction/composition or abstract adjunction uniqueness does not state the unbounded pro-etale open comparison with its normalization and mixed projection square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension and extension by zero commute as unit normalized adjoints and preserve open projection tensor products for arbitrary complexes",
+   "results": "8 hits: ModuleCat.extendScalars_assoc', ModuleCat.homEquiv_extendScalarsComp, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.extendScalarsComp, ModuleCat.extendScalars_assoc_assoc, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_assoc",
+   "date": "2026-10-21",
+   "verdict": "No match: underived ModuleCat scalar adjunction/composition or abstract adjunction uniqueness does not state the unbounded pro-etale open comparison with its normalization and mixed projection square."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|leftAdjointUniq",
+   "results": "16 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean, Mathlib/CategoryTheory/Sites/ConstantSheaf.lean",
+   "date": "2026-10-21",
+   "verdict": "No match: underived ModuleCat scalar adjunction/composition or abstract adjunction uniqueness does not state the unbounded pro-etale open comparison with its normalization and mixed projection square.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero left adjoint commutes with derived base change of rings with monoidal projection formula compatibility",
+   "results": "8 hits: ModuleCat.instIsLeftAdjointExtendScalars, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.extendScalars_comp_id, ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "date": "2026-10-21",
+   "verdict": "No match: underived ModuleCat scalar adjunction/composition or abstract adjunction uniqueness does not state the unbounded pro-etale open comparison with its normalization and mixed projection square."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-compact-support-coefficient-change",
@@ -71,11 +242,70 @@
  "blueprint": {
   "from": {
    "node": "lem-fix-compact-support-coefficient-change",
-   "place": "First proof paragraph counit comparison and final paragraph associativity: open factor; returned step 6, open part of 7 and open part of 13",
+   "place": "Proof, first paragraph: compatibility with the projection transformation by transposing the two maps; final paragraph: associativity and counit identities for the specified tensor map. Open-immersion factor of the compactification.",
    "via": []
   },
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fix-open-scalar-tensor-normalization",
+  "worker": "stage1",
+  "summary": "Constructed beta from the two composite Hom bijections, derived its precise inverse-open-adjunct formula, identified its restricted map with the constant-B projection, and proved coefficient composition and the arbitrary-Q tensor square by explicit unit/adjunct calculations. No new nodes. Corrected only the lambda construction citation; no mathematical statement change.",
+  "blueprint": "Nearest ancestor lem-fix-compact-support-coefficient-change: first proof paragraph projection-transpose compatibility and final paragraph coefficient associativity/counit compatibility, restricted to the open factor.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Generic module-derived adjunction, open projection, or normalized tensor comparison used as a black box in the open factor; this unit supplies no such general comparison theorem."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic module-derived adjunction, open projection, or normalized tensor comparison used as a black box in the open factor; this unit supplies no such general comparison theorem."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic module-derived adjunction, open projection, or normalized tensor comparison used as a black box in the open factor; this unit supplies no such general comparison theorem."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic module-derived adjunction, open projection, or normalized tensor comparison used as a black box in the open factor; this unit supplies no such general comparison theorem."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic module-derived adjunction, open projection, or normalized tensor comparison used as a black box in the open factor; this unit supplies no such general comparison theorem."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Generic module-derived adjunction, open projection, or normalized tensor comparison used as a black box in the open factor; this unit supplies no such general comparison theorem."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic module-derived adjunction, open projection, or normalized tensor comparison used as a black box in the open factor; this unit supplies no such general comparison theorem."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Generic module-derived adjunction, open projection, or normalized tensor comparison used as a black box in the open factor; this unit supplies no such general comparison theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NR-774ae5681",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-774ae5681 (reviewer sub-agent of L); spot-checked: I read the item and all 15 cited statements in full; there are no new nodes and no fixes. Against N0's base copy, the statement changes only by adding [lem-sfb-kflat-scalar-comparison-normalization] to the λ_j citation and to stmt_deps; it is not weakened. No SGA source, no cycle (item absent from the 2929-node dep closure), and no re-split note. Steps 1–8 re-derived with all directions written out. (1) λ^{-1} is the scalar mate of r_A U_X = U_U r_B (K-flat node), so ν_U = U_U(λ) r_A ν_X; λ is monoidal as c'∘c^{-1} of the two ringed-topos factorisations of (U,B)→(X,A) (monoidal-comparisons node). (2–3) The conjugate lemma applies with L1 = S_X e_A, L2 = e_B S_U. Composite units plus scalar-unit naturality give (*): r_B(b) u^B = λ^{-1} S_U(u^A). (4) (**) matches the Yoneda chain of Stacks 0E8I (sites-modules l.4051), the projection-formula node's imported proof, and the reviewed lem-sf-open-tensor-normalization. Advisory only: the step reads which canonical map is meant from the source. (5) U_X b = δ^A_{K,B_X} follows from the restriction/extension identification and the tensorator a_A. (6) The cocycle follows by pasting conjugates, then the successive-quotient units and uniqueness; the identity case works. (7–8) (***) is exactly the inverse of routes (i)/(ii). (J) and the left-side reduction agree after using λ-monoidality as t_U S_U(a_A) λ = (λ⊗λ) a_B r_B(t_X); no symmetry is used, so no sign. Edge cases checked: U empty, j = id, A = B, Q = A, the nonflat map Z/4→Z/2. Tool uses (8 generic comparison and adjunction nodes; unit uses = []) accepted. Maintainer note: the β existence/inverse clause, which was already in N0's base statement, overlaps the reviewed lem-sf-open-tensor-normalization (g = id). That node lacks the restricted-β, cocycle and mixed-square clauses, so this delivery has no fault there. lem-sp-proetale-open-scalar-cocycle is a special case (ℓ-power rings), not a duplicate."
+ }
 }
