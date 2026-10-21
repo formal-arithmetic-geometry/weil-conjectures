@@ -33,6 +33,20 @@
  ],
  "proof": [
   {
+   "text": "Construct the completed coefficient map by the inverse-limit universal property and identify the identity map by its residues. Construct each ordinary-to-finite tensor arrow by scalar comparison, using the canonical object transport for completed extension and the explicit finite reduction isomorphism. Naturality and transition compatibility give a product arrow killed by 1-s. Its mapping-cocone lift with zero shifted component is natural; product and shifted projections prove uniqueness. For the identity inclusion, sheafified tensor multiplication and its inverse construct the reduction unit, uniquely determined by the same two cone projections. The descent theorem remains open with its original localization proof plan.",
+   "uses": [
+    "lem-pur-quotient-scalar-comparison-descent",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-scalar-extension-well-defined",
+    "lem-weil-signed-mapping-cocone-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 3.4.10 and Proposition 3.5.1; canonical scalar augmentation, localization, and identity normalization."
+   }
+  },
+  {
    "text": "Choose an integral basis of $\\mathcal O_L$ over $\\mathcal O_E$ of size $[L:E]$. Absolute-value uniqueness gives $|t|_L<1$; the DVR decomposition $t=u v^e$ thus has $e\\geq1$. The adic basis-limit lemma gives the prescribed ring map $R\\to S$ and $S\\cong R^{\\oplus[L:E]}$.",
    "uses": [
     "lem-sfb-local-field-integral-basis",
@@ -107,6 +121,10 @@
   }
  ],
  "proof_deps": [
+  "lem-pur-quotient-scalar-comparison-descent",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-scalar-extension-well-defined",
+  "lem-weil-signed-mapping-cocone-shift",
   "lem-sfb-local-field-integral-basis",
   "lem-weil-l-adic-extension-absolute-value",
   "lem-weil-l-adic-extension-integers-dvr",
@@ -123,15 +141,13 @@
   "lem-pur-finite-free-quotient-completion",
   "lem-pur-unit-power-completeness",
   "lem-pur-kflat-change-of-rings",
-  "lem-pur-quotient-scalar-comparison-descent",
-  "lem-weil-integral-scalar-extension-well-defined",
   "def-weil-integral-scalar-extension",
   "def-pur-sheaf-tensor-product"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tags 099B and 0A0E, via the existing regular Koszul reconstruction and unit-normalized strict Roos lemmas; finite-free coefficient calculation from Bhatt--Scholze 6.8.2(1)."
+  "place": "Tags 099B and 0A0E, via the existing regular Koszul reconstruction and unit-normalized strict Roos lemmas; finite-free coefficient calculation from Bhatt--Scholze 6.8.2(1). The auxiliary construction and uniqueness declarations are proved by the explicit scalar-comparison maps, zero-component mapping-cocone lift, and tensor multiplication. The normalized localization descent remains open."
  },
  "mathlib_searches": [
   {
@@ -443,28 +459,13 @@
   "lem-sfb-local-field-integral-basis"
  ],
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "N2",
+  "reviewer": "COMPILER",
+  "group": "H7",
   "result": "pass",
-  "landing": "20261019T005350-L-2758316",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.completedCoefficientMap_existsUnique",
-   "WeilConjectures.completedScalarChainComparison_existsUnique",
-   "WeilConjectures.completedScalarComparison_existsUnique",
-   "WeilConjectures.completedScalarIdentityMultiplication_existsUnique",
-   "WeilConjectures.completedScalarIdentityUnit_existsUnique",
-   "WeilConjectures.finiteFreeCompletedScalarComparison"
-  ],
-  "sorry_after": [
-   "WeilConjectures.completedScalarChainComparison_existsUnique",
-   "WeilConjectures.completedScalarComparison_existsUnique",
-   "WeilConjectures.completedScalarIdentityMultiplication_existsUnique",
-   "WeilConjectures.completedScalarIdentityUnit_existsUnique",
-   "WeilConjectures.finiteFreeCompletedScalarComparison"
-  ]
+  "landing": "20261021T214801-L-1854670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
