@@ -29,12 +29,11 @@
    }
   },
   {
-   "text": "Fix a nonempty leaf and its map $h_T:T\\to S_a$. Choose a model cover $V_\\lambda\\to S_a$ and scalar matrices $A_\\lambda$ presenting $M_a|_{V_\\lambda}$ as $\\operatorname{coker}(\\Lambda_{V_\\lambda}^{m_\\lambda}\\xrightarrow{A_\\lambda}\\Lambda_{V_\\lambda}^{n_\\lambda})$ by [det-def-sfb-constructible-local-model]. Base change gives a pro-etale cover $W_\\lambda=T\\times_{S_a}V_\\lambda\\to T$, by the covering-preserving base-change assertion of [def-weil-proetale-inverse-image]. By [sk-prop-sfb-cartesian-coefficients], pullback is exact and identifies the pulled-back coefficient ring with $\\Lambda_{W_\\lambda}$; hence it sends this cokernel to $\\operatorname{coker}(\\Lambda_{W_\\lambda}^{m_\\lambda}\\xrightarrow{A_\\lambda}\\Lambda_{W_\\lambda}^{n_\\lambda})$. The entries remain the same elements of $\\Lambda(*)$, since their actions are pulled back along the structure maps from the point. The composition comparison [def-sfb-module-upper-star-comp] identifies these modules with $(t_T^*M)|_{W_\\lambda}$. The matrix criterion therefore proves that $t_T^*M$ has a finite constant local model. This is the direct application of an exact functor to a finite presentation.",
+   "text": "At each nonempty leaf choose the actual factorization f through an original stratum supplied by the refinement. Apply new-unbounded-pullback-finite-constant-local-model to the stratum restriction of M and f. The upperStarComp isomorphism and the factorization equality identify this pullback with the leaf restriction t_v^* M. Transport the finite constant local model across this isomorphism by composing each covering model isomorphism with the pulled-back inverse. This uses the already proved cover-pullback lemma directly, without rebuilding scalar-matrix presentations.",
    "uses": [
-    "det-def-sfb-constructible-local-model",
-    "def-weil-proetale-inverse-image",
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-sfb-module-upper-star-comp"
+    "new-unbounded-pullback-finite-constant-local-model",
+    "def-sfb-module-upper-star-comp",
+    "sk-def-sfb-constructible"
    ],
    "elementary": true,
    "source": {
@@ -55,12 +54,13 @@
    }
   },
   {
-   "text": "Induct upwards on the finite tree (equivalently, on the height of the subtree below a vertex). The induction assertion at a vertex $T$ is that $M_T=t_T^*M$, in degree zero, has Tor amplitude in $[c,d]$. Step 3 proves the height-zero case. At an internal vertex let $j:U\\hookrightarrow T$ and $i:Z\\hookrightarrow T$ be its open and closed child maps. The induction hypotheses give the assertion for the two child restrictions of $M$. By [def-sfb-module-upper-star-comp] these are $j^*M_T$ and $i^*M_T$. The canonical coefficient isomorphisms and exact inverse-image description in [sk-prop-sfb-cartesian-coefficients] identify these with the restrictions over $j^{-1}\\Lambda_T$ and $i^{-1}\\Lambda_T$ required by [lem-sfb-tor-interval-local-detection](ii). Its open immersion is quasi-compact by step 1, so that lemma applies to $K=M_T[0]$ over the sheaf of rings $\\Lambda_T$, and proves the same Tor interval at $T$. Tor amplitude is invariant under the displayed isomorphisms by [det-def-sfb-constructible-tor-amplitude]. This proves the induction assertion. At the root the restricted module is $M$, which is the desired conclusion. Each use keeps $[c,d]$ unchanged; no bound grows with the number of vertices.",
+   "text": "Induct on N-v.val for vertices v of the finite refinement tree. Each child has strictly larger index, so smaller induction parameter. At a leaf apply the uniform hypothesis using steps 2 and 3. At an internal vertex, the composition and exact-functor single comparisons identify each child module in degree zero with the exact derived pullback of the vertex module. Work throughout in the original internal-module category. For any degree-zero test module A, the internal-module derived tensor comparison of def-sfb-condensed-pullback-tensor-comparison and exact-functor single comparison identify pullback of K tensor^L A[0] with pullback K tensor^L (pullback A)[0]. The child Tor bounds therefore kill the homology of both pullbacks outside [c,d]. Exact pullback commutes with homology. The internal-module specialization of lem-exc-open-closed-detection gives vanishing of the original homology object, proving the same Tor interval at the vertex. At the root, pullback along the supplied scheme isomorphism reflects zero: pull back further along its inverse and use upperStarComp and upperStarId. Apply this to the homology of each test tensor. This proves the desired interval for M without enlarging it. The private Lean helpers implement the tensor-single comparison, fixed-interval detection, isomorphism transport of local models and the empty cover; all are proved.",
    "uses": [
     "def-sfb-module-upper-star-comp",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-sfb-tor-interval-local-detection",
-    "det-def-sfb-constructible-tor-amplitude"
+    "det-def-sfb-constructible-tor-amplitude",
+    "def-sfb-condensed-pullback-tensor-comparison",
+    "lem-exc-open-closed-detection",
+    "det-prop-sfb-module-pullback-exact-main"
    ],
    "elementary": false,
    "source": {
@@ -70,20 +70,21 @@
   }
  ],
  "proof_deps": [
+  "def-sfb-condensed-pullback-tensor-comparison",
   "def-sfb-module-upper-star-comp",
   "def-weil-pbc-proetale-covering",
-  "def-weil-proetale-inverse-image",
   "det-def-sfb-constructible-local-model",
   "det-def-sfb-constructible-tor-amplitude",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-exc-open-closed-detection",
   "lem-fix-constructible-open-closed-refinement",
-  "lem-sfb-tor-interval-local-detection",
-  "sk-def-sfb-constructible",
-  "sk-prop-sfb-cartesian-coefficients"
+  "new-unbounded-pullback-finite-constant-local-model",
+  "sk-def-sfb-constructible"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-  "place": "Strata paragraph, repaired by the existing finite scheme-theoretic open-closed refinement and fixed-interval local detection"
+  "place": "Strata paragraph; finite scheme-theoretic refinement followed by reverse-index induction, using the internal-module derived tensor comparison and open-closed zero detection directly"
  },
  "mathlib_searches": [
   {
@@ -173,8 +174,7 @@
   ]
  },
  "tool_uses": [
-  "lem-fix-constructible-open-closed-refinement",
-  "sk-prop-sfb-cartesian-coefficients"
+  "lem-fix-constructible-open-closed-refinement"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -202,5 +202,15 @@
   "group": "Q03",
   "result": "pass",
   "note": "Only lean field changed; statement verbatim in file; Worker report + Second reading present (author-written, disclosed). Λ disjunction = node's six cases with fixed ℓ (finite discrete ℓ^n-torsion A, Z_ℓ, O_E=padicIntegersRingObj, Q_ℓ, E, Q̄_ℓ=padicAlgClRingObj per sk-def-sfb-qlbar-condensed), same encoding as landed IsAdmissibleCoefficient (which has ∃ℓ, so not reusable), no H4. hlocal over all S : Scheme.{u} with HasFiniteConstantLocalModel → torAmplitudeIn c d (single 0 N), recorded deps. X qcqs; hM = IsConstantModelConstructible = IsFiniteConstantStratified via Scheme.Stratification (finite, locally closed, constructible, immersed possibly nonreduced, no open-stratum condition). Conclusion same [c,d]. Edge cases (empty X/strata, c=d, zero ring, no 0∈[c,d]) fine; single universe u; docstrings carry source place, blueprint tag, all 4 proof steps; sorry only; all imports exist. No recompile per instructions. Advisory: parent may use IsLocalizingAdmissibleCoefficient with extra Q̄ branch (stage-3 concern)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T203822-L-3877416",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
