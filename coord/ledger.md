@@ -21349,3 +21349,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:51 L: merged deliver/Q71/lem-pur-expression-counit-substitution-coherence (reviewer FIX; first push; new nodes: 0)
 - 08:51 L: merged deliver/Q146/lem-fd-common-stage-comparison-descent (reviewer FIX; first push; new nodes: 0); claim not held by Q146: not your claim
 - 08:51 L: merged deliver/Q140/lem-sf-open-projection-roos-completion (reviewer FIX; first push; new nodes: 0)
+- 08:51 L: merged deliver/Q75/lem-pur-exact-pullback-signed-comparison (reviewer PASS; first push; new nodes: 0)
