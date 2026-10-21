@@ -64,6 +64,36 @@ theorem finiteConstantMap_naturality
       (Scheme.proEtaleSheafDirectImage g RingCat.{u + 1}).map
         (finiteScalarRingMap φ T') =
       finiteScalarRingMap φ T ≫ finiteCoefficientDirectImageMap g C) := by
-  sorry
+  have h : finiteScalarRingMap φ T ≫ finiteCoefficientDirectImageMap g C =
+      finiteCoefficientDirectImageMap g B ≫
+        (Scheme.proEtaleSheafDirectImage g RingCat.{u + 1}).map
+          (finiteScalarRingMap φ T') := by
+    apply ((sheafificationAdjunction (Scheme.ProEt.topology T)
+      RingCat.{u + 1}).homEquiv _ _).injective
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+    change toSheafify _ _ ≫ (finiteScalarRingMap φ T).hom ≫
+        (finiteCoefficientDirectImageMap g C).hom =
+      toSheafify _ _ ≫ (finiteCoefficientDirectImageMap g B).hom ≫ _
+    change toSheafify _ _ ≫ sheafifyMap _ (finiteScalarPresheafMap φ T) ≫ _ = _
+    rw [← Category.assoc, ← toSheafify_naturality]
+    have hunit (A : Type (u + 1)) [Ring A] [Finite A]
+        [TopologicalSpace A] [DiscreteTopology A] :
+        toSheafify (Scheme.ProEt.topology T) (finiteCoefficientPresheaf T A) ≫
+          (finiteCoefficientDirectImageMap g A).hom =
+        finiteCoefficientDirectImagePresheafMap g A := by
+      exact ((sheafificationAdjunction (Scheme.ProEt.topology T)
+        RingCat.{u + 1}).homEquiv _ _).apply_symm_apply _
+    rw [Category.assoc, hunit C, ← Category.assoc, hunit B]
+    ext W x
+    have hn := congrArg (fun t ↦ t.app ((Scheme.proEtaleBaseChange g).op.obj W))
+      (toSheafify_naturality (Scheme.ProEt.topology T') (finiteScalarPresheafMap φ T'))
+    exact RingHom.congr_fun (congrArg RingCat.Hom.hom hn)
+      (x.comp ⟨(Limits.pullback.fst W.unop.hom g).continuous.connectedComponentsMap,
+        (Limits.pullback.fst W.unop.hom g).continuous.connectedComponentsMap_continuous⟩)
+  refine ⟨?_, h.symm⟩
+  let adj := Scheme.proEtaleSheafAdjunction g RingCat.{u + 1}
+  change (adj.homEquiv _ _).symm _ ≫ _ = _ ≫ (adj.homEquiv _ _).symm _
+  rw [← adj.homEquiv_naturality_right_symm, ← adj.homEquiv_naturality_left_symm]
+  exact congrArg (adj.homEquiv _ _).symm h.symm
 
 end AlgebraicGeometry.ProEtale

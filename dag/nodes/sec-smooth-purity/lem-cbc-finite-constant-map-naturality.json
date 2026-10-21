@@ -16,44 +16,47 @@
  ],
  "proof": [
   {
-   "text": "For $W=T,T'$, put $P_{B,W}(U)=\\operatorname{Cont}(\\pi_0(|U|),B)$ and write $a_{B,W}:P_{B,W}\\to B_W$ for the sheafification unit. Postcomposition $P_{\\phi,W}(s)=\\phi\\circ s$ is continuous because $B,C$ are discrete, preserves ring operations pointwise, and commutes with restrictions since $\\phi\\circ(s\\circ h)=(\\phi\\circ s)\\circ h$. By the defining universal property of its sheafified map, $\\phi_W a_{B,W}=a_{C,W}P_{\\phi,W}$. In particular, writing $\\eta_{B,W}(b)$ for a constant section, $\\phi_W(\\eta_{B,W}(b))=\\eta_{C,W}(\\phi(b))$ on every object.",
+   "text": "Use the concrete coefficient maps of def-pur-finite-coefficient-ring-map: the presheaf map is pointwise postcomposition with phi, and its sheaf map is the image under presheafToSheaf. Naturality of toSheafify says that precomposition of the sheaf map with the source unit equals the presheaf map followed by the target unit.",
    "uses": [
+    "def-pur-finite-coefficient-ring-map",
     "def-weil-pbc-proetale-modules",
     "def-weil-pbc-sheafification"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WH, proposition-sheafification-adjoint; coefficient presheaves as specified in def-weil-pbc-proetale-modules"
+    "place": "Tag 00WH, proposition-sheafification-adjoint; naturality of its unit"
    }
   },
   {
-   "text": "Use the actual construction of $\\rho_B$ and $\\rho_C$ in prop-weil-pbc-proetale-constant-ring-map. On an object $U\\to T$ and $s\\in P_{B,T}(U)$, that construction glues the constant values $b$ over the open fibres of $s$, pulled back to $U\\times_TT'$. Applying $\\phi_{T'}$ to this glued section gives, on the fibre with value $b$, the constant section $\\phi(b)$ by Step 1. Applying $\\rho_C$ after $P_{\\phi,T}$ gives the identical constant section on each of these same pieces (a fibre of $\\phi\\circ s$ can be a union of several such pieces). Uniqueness of the gluing gives equality on $s$. Thus the two presheaf maps obtained by precomposing $g_*(\\phi_{T'})\\rho_B$ and $\\rho_C\\phi_T$ with $a_{B,T}$ agree. Their target $g_*C_{T'}$ is a sheaf by the stated direct-image functor. The uniqueness clause of sheafification therefore gives $g_*(\\phi_{T'})\\rho_B=\\rho_C\\phi_T$ as ring-sheaf morphisms.",
+   "text": "Apply injectivity of the sheafification hom equivalence to the two direct-image composites. By unit naturality from Step 1 and the defining hom-equivalence identities for rho, the equality reduces to one of presheaf maps. On an object W the concrete rho first precomposes the continuous function with the connected-components map of the fibre-product first projection, then applies the target sheafification unit. Postcomposition with phi commutes definitionally with precomposition. Evaluate target-unit naturality on this pulled-back function to finish. This directly compares the actual open-fibre-gluing map, whose concrete construction is function pullback; no further gluing theorem is needed.",
    "uses": [
     "prop-weil-pbc-proetale-constant-ring-map",
+    "def-weil-proetale-inverse-image",
+    "def-pur-finite-coefficient-ring-map",
     "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-sheafification",
-    "def-weil-proetale-inverse-image"
+    "def-weil-pbc-sheafification"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WH, proposition-sheafification-adjoint; open-fibre gluing in the statement of prop-weil-pbc-proetale-constant-ring-map"
+    "place": "Tag 00WH, proposition-sheafification-adjoint; concrete rho of prop-weil-pbc-proetale-constant-ring-map"
    }
   },
   {
-   "text": "Write $L=g^{-1}$, $R=g_*$, with counit $\\varepsilon$. The adjoint formula in def-weil-proetale-inverse-image gives $c_{g,B}=\\varepsilon_{B_{T'}}L(\\rho_B)$. Counit naturality, Step 2 and functoriality give the explicit calculation $$\\begin{aligned}\\phi_{T'}c_{g,B}&=\\varepsilon_{C_{T'}}LR(\\phi_{T'})L(\\rho_B)\\\\&=\\varepsilon_{C_{T'}}L(R(\\phi_{T'})\\rho_B)\\\\&=\\varepsilon_{C_{T'}}L(\\rho_C\\phi_T)=c_{g,C}L(\\phi_T).\\end{aligned}$$ This is elementary naturality of the counit belonging to the specified adjunction. For the stated equivalence, the adjunct of $\\phi_{T'}c_{g,B}$ is $R(\\phi_{T'})\\rho_B$, by the formula $\\alpha\\mapsto R(\\alpha)\\eta$; the adjunct of $c_{g,C}L(\\phi_T)$ is $\\rho_C\\phi_T$, by naturality of the unit $\\eta$. Since the adjunction correspondence is a bijection, equality of either pair is equivalent to equality of the other.",
+   "text": "By definition each inverse-image comparison c is homEquiv.symm applied to its rho. Rewrite the composite of c_B with phi on the target using right naturality of homEquiv.symm, and rewrite inverse image of phi followed by c_C using left naturality. Their arguments are the direct-image composites from Step 2, so applying homEquiv.symm to that equality proves the inverse-image square. Pair it with the already proved direct-image square. Bijectivity also gives the stated equivalence.",
    "uses": [
     "def-weil-proetale-inverse-image"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09A5, proetale-section-morphism (in proetale.tex); the ring-sheaf adjunction and counit formula specified in def-weil-proetale-inverse-image"
+    "place": "Tag 09A5, proetale-section-morphism; adjunction specified in def-weil-proetale-inverse-image"
    }
   }
  ],
  "proof_deps": [
+  "def-pur-finite-coefficient-ring-map",
   "def-weil-pbc-proetale-modules",
   "def-weil-pbc-sheafification",
   "prop-weil-pbc-proetale-constant-ring-map",
@@ -62,7 +65,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-  "place": "Coefficient naturality required by the completed-pullback reduction tower in the parent proof; explicit calculation from the existing coefficient-presheaf, sheafification, and inverse-image constructions (Stacks Tags 00WH and 09A5)."
+  "place": "Finite-reduction compatibility, implemented by F6 using the existing concrete function-pullback rho, naturality of the sheafification unit, and left/right naturality of the ring-sheaf adjunction. Adapted the proved private finiteScalarRingMap_directImage argument in ProEtaleFiniteScalarUnitComparison; no new mathematical dependency."
  },
  "mathlib_searches": [
   {
@@ -207,5 +210,15 @@
   "group": "NB",
   "result": "fix",
   "note": "Re-delivery after the H2 RETURN of 15d7dc1c. The Lean file is byte-identical (sha aafd5d09) and compiles clean in 11.2 s with nt_compile. The item delta is lean plus the stmt_dep def-pur-finite-coefficient-ring-map replacing the theorem. The new existing:true definition node owns finiteScalarPresheafMap/finiteScalarRingMap on the unchanged ProEtaleFiniteScalarUnitComparison; its statement matches the bodies; body owners are in its stmt_deps; check_new_node is clean; no race, duplicate or cycle. FIX: fixes/def-pur-finite-coefficient-ring-map.json trims `noncomputable` from lean.statement (check_existing note: differs from signature); it now gives no failures and no notes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F6",
+  "result": "pass",
+  "landing": "20261021T111108-L-4090733",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
