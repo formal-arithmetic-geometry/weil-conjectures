@@ -23105,3 +23105,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:58 L: merged deliver/F5/Sheaf.Paper.StratifiedDualizableBounded (stage 3; reviewer PASS; first push; landing 20261021T165817-L-2252376 (proof); batch 20261021T165743; modules 1; new nodes 1)
 - 16:58 L: merged deliver/K7/Sheaf.AlgebraicGeometry.CartierDivisorNowhereDense (stage 3; reviewer PASS; first push; landing 20261021T165822-L-2255063 (proof); batch 20261021T165743; modules 1; new nodes 1)
 - 16:58 L: merged deliver/M7/Sheaf.RingTheory.RegularLocalPicardZero (stage 3; reviewer PASS; first push; landing 20261021T165826-L-2257738 (proof); batch 20261021T165743; modules 1; new nodes 3)
+- 16:59 L: merged deliver/Q02/lem-sfb-root-tower-coordinate-face (reviewer FIX; first push; new nodes: 2)
