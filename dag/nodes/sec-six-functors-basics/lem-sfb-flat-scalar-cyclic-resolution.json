@@ -16,50 +16,84 @@
  ],
  "proof": [
   {
-   "text": "Fix $a\\ne0$. In the domain $A$, $ax=ay$ implies $a(x-y)=0$, hence $x=y$. Apply [lem-sfb-flat-constant-module-scalar-mono] to $M=R$, regarded as an $A_{\\mathcal C}$-module with the given flatness. It gives sectionwise injectivity of $a:R\\to R$. This is also an $R$-linear monomorphism: its sectionwise kernels are zero, which is the kernel criterion of [def-weil-sheaf-of-modules-category].",
+   "text": "A section of the constant ring sheaf is locally represented by an element of A, using the local surjectivity of its sheafification unit [def-weil-pbc-constant-sheaf]. If its product with a nonzero scalar a vanishes, local injectivity of that unit further refines the cover so that the product vanishes in A. Since A is a domain, the local representative vanishes. Separatedness gives that the original section vanishes, without an enough-points hypothesis.",
    "uses": [
-    "lem-sfb-flat-constant-module-scalar-mono",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 03EI, local ring-sheafification units"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-flat-local-relations-universes] to the restricted R-module sheaf and the one-entry relation ax=0. Locally write x as a finite sum b_q t_q with a b_q=0. Step 1 makes every b_q zero. Separatedness gives x=0, hence the displayed scalar map is monic.",
+   "uses": [
+    "lem-weil-pbc-flat-local-relations-universes",
+    "def-pc-flat-sheaf-modules",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EI (lemma-sheafification-exact), applied to the constant ring presheaf A, followed by Tag 03ER (definition-flat), sheaf clause (3). The constant-module tensor-unit identification is in section-tensor-product."
+    "place": "Tags 03ER and 08FC, one-entry local flat relation"
    }
   },
   {
-   "text": "Apply [lem-sfb-finite-free-mono-cokernel-kflat] with $P=Q=R$, ranks $m=n=1$, and $u=a:R\\to R$ from Step 1. Its specified cokernel is exactly $R/aR$; its complex $C_u$ is the displayed $[R\\xrightarrow{a}R]$ in degrees $-1,0$. The lemma supplies the augmentation with degree-zero component the quotient projection, proves that it is a K-flat resolution, and also gives K-flatness of $Q[0]=R[0]$.",
+   "text": "The scalar map followed by its cokernel projection is a short exact sequence. Apply the exact degree-zero single-complex functor. Mathlib CochainComplex.mappingCone.descShortComplex supplies the canonical augmentation; inr_descShortComplex identifies its restriction with the cokernel projection, and quasiIso_descShortComplex proves it is a quasi-isomorphism [def-pc-quasi-iso-modules].",
    "uses": [
-    "lem-sfb-finite-free-mono-cokernel-kflat"
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, cone augmentation of a two-term regular resolution"
+   }
+  },
+  {
+   "text": "Every term of R[0] is zero or the tensor unit. Each term of the displayed cone is a binary biproduct of such terms, so all these terms are flat [def-pc-flat-sheaf-modules, def-pur-sheaf-tensor-product]. The explicit site tensor agrees with the monoidal tensor by the comparison of [lem-weil-pbc-independent-sheaf-tensor-colimits]. Both complexes vanish above degree zero. Apply [lem-weil-pbc-independent-bounded-flat-kflat]. Together with Step 3 this gives the required K-flat resolution [def-pc-kflat-complex].",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "def-pc-kflat-complex",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YQ (lemma-bounded-flat-K-flat), specialized to finite free two-term complexes and single-term complexes; the quotient augmentation cohomology criterion is Homology Tag 0115 (definition-quasi-isomorphism-cochain)."
+    "place": "Tag 06YQ, bounded above flat complexes"
    }
   },
   {
-   "text": "For any $R$-module complex $M^\\bullet$, use the clause of [lem-weil-pbc-ringed-projection-mate-exact] that derived tensor is computed by replacing one factor by a K-flat resolution, on the identity of $(\\mathcal C,R)$. The resolution from Step 2 gives $M^\\bullet\\otimes_R^{\\mathbf L}(R/aR)\\simeq\\operatorname{Tot}(M^\\bullet\\otimes_R[R\\xrightarrow{a}R])$, proving the final assertion.",
+   "text": "The fixed-right-factor representative comparison of [lem-weil-pbc-kflat-fixed-tensor-triangulated] identifies total tensor with the displayed flat-term K-flat cone with derived tensor with its localized image, for every unbounded M. The augmentation of Step 3 becomes an isomorphism after localization. Apply derived tensor with QM to its inverse and then the inverse representative comparison. This is the required isomorphism with tensor by the actual quotient.",
    "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact"
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor) and the preceding one-factor K-flat-resolution construction."
+    "place": "Tag 06YU, fixed K-flat resolution computation"
    }
   }
  ],
  "proof_deps": [
-  "lem-sfb-flat-constant-module-scalar-mono",
+  "def-weil-pbc-constant-sheaf",
   "def-weil-sheaf-of-modules-category",
-  "lem-sfb-finite-free-mono-cokernel-kflat",
-  "lem-weil-pbc-ringed-projection-mate-exact"
+  "lem-weil-pbc-flat-local-relations-universes",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-quasi-iso-modules",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-integral-models/sk-lem-integral-models-operations.proof.md",
-  "place": "Paragraph (2), explicit local scalar-resolution calculation, assembled from the two new statement-only lemmas and the existing derived-tensor computation (Stacks 06YU)."
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ and 06YU; scalar injectivity by local sheafification representatives and the one-relation flat criterion of Modules on Sites Tags 03ER and 08FC. Proved by U1 and compiler-checked with no warnings."
  },
  "mathlib_searches": [
   {
@@ -165,10 +199,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-pbc-ringed-projection-mate-exact"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -205,5 +236,15 @@
   "result": "pass",
   "note": "Clause-by-clause match: IsFlatOnSite over constantSheaf A via restrictScalars α (03ER(3)), Mono of the real scalar map (unitHomEquiv.symm of the α(a) section), cone of a on R[0] = displayed complex (deg −1,0, d=+a), augmentation pinned by inr≫ε=π (unique since the cone's homotopy part is 0), IsKFlatResolutionIndependentCoefficients ε, R[0] K-flat, ∀ unbounded M Nonempty(M⊗^L Q(R/aR) ≅ Q(Tot(M⊗C))) with the recorded siteDerivedTensorIndependentCoefficients; monoidal instances agree (IsMonoidal is Prop). Mechanical theorem-stmt_dep finding: the tensor is .choose of site_derived_tensor_descent_independentCoefficients, a theorem-constructed object → PASS on that point. Edge cases a unit, R=0, point site, empty site, A=ℤ R=(ℤ/2) a=2 checked. No duplicate found; docstrings carry source, blueprint and 6 steps; one sorry; statement verbatim. nt_compile --json clean in 12.1 s. Advisories: projection-mate-exact module imported but not usable (single-universe abstract tensor field); object-level Nonempty suffices for the citer det-lem-integral-models-operations; explicit HasWeakSheafify harmless."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261021T120706-L-3933669",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
