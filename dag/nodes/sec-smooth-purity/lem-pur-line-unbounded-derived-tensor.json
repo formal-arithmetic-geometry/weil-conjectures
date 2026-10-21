@@ -26,9 +26,140 @@
   "def-weil-triangulated-category",
   "def-weil-linear-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On a slice where $P=Rp$, the definition of sheaf Hom identifies $P^\\vee$ with $Rp^\\vee$, where $p^\\vee(ap)=a$. Evaluation is the balanced map $e:P\\otimes_RP^\\vee\\to R$, $x\\otimes\\phi\\mapsto\\phi(x)$; it exists by the tensor definition and is locally $(ap)\\otimes(bp^\\vee)\\mapsto ab$. Its inverse there is $a\\mapsto(ap)\\otimes p^\\vee$. If $p'=up$ on an overlap, then $u$ is a unit and $(p')^\\vee=u^{-1}p^\\vee$, so $(ap')\\otimes(p')^\\vee=(ap)\\otimes p^\\vee$. Thus these inverse maps agree on overlaps and glue uniquely by the sheaf axiom. The two composites are identities locally, hence globally, since equality of sheaf sections is local. This also proves that $P^\\vee$ is locally free of rank one. No assertion about geometric stalks is used. Restriction of these tensor and Hom constructions to a slice has the stated formulas simply by their definitions: the objects over a slice object and its covering families are the same in the iterated slice.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0B8Q, lemma-invertible-is-locally-free-rank-1, first paragraph of proof; local inverse and gluing written out"
+   }
+  },
+  {
+   "text": "Write $T(M)=M\\otimes_RP$ and $S(M)=M\\otimes_RP^\\vee$. The associators and unitors, followed by $e$ or $e$ after symmetry, give natural isomorphisms $a:ST\\to1$ and $b:TS\\to1$. On a trivializing slice both send $(x\\otimes cp)\\otimes dp^\\vee$, or $(x\\otimes dp^\\vee)\\otimes cp$, to $cdx$, with inverses $x\\mapsto(x\\otimes p)\\otimes p^\\vee$ and $x\\mapsto(x\\otimes p^\\vee)\\otimes p$. Naturality follows because a module map sends $cdx$ to $cd$ times its value at $x$. With unit $a^{-1}$ and counit $b$, the first triangle sends $x\\otimes cp$ to $((x\\otimes p)\\otimes p^\\vee)\\otimes cp$ and then to $cx\\otimes p=x\\otimes cp$. The second sends $x\\otimes dp^\\vee$ to $((x\\otimes dp^\\vee)\\otimes p)\\otimes p^\\vee$ and then to $dx\\otimes p^\\vee=x\\otimes dp^\\vee$. Local pure tensors generate the sheaf tensor, so these are identities of sheaf maps. These calculations establish the specified inverse-pair identities, not just the existence of some inverse functors.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0B8N, lemma-invertible, equivalence (1)-(2) and evaluation; explicit triangle calculations"
+   }
+  },
+  {
+   "text": "Both $T$ and $S$ are additive by the sheaf tensor structure. Their inverse equivalence from Step 2 makes both exact, as the following universal-property calculation verifies. For any finite diagram $(M_j)$ and test module $N$, the equivalence gives $\\operatorname{Hom}(N,T(\\lim_j M_j))\\cong\\operatorname{Hom}(SN,\\lim_jM_j)\\cong\\lim_j\\operatorname{Hom}(SN,M_j)\\cong\\lim_j\\operatorname{Hom}(N,TM_j)$, naturally with its projections. Hence $T$ preserves finite limits. Using $\\operatorname{Hom}(T(\\operatorname{colim}_jM_j),N)\\cong\\operatorname{Hom}(\\operatorname{colim}_jM_j,SN)$ gives the dual calculation for finite colimits. Interchange $S,T$ to obtain both properties for $S$. The module-sheaf category is abelian with the site's stated size convention. Thus the flatness definition applies and proves $P$ and $P^\\vee$ flat.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0B8N, lemma-invertible (a), first sentence of proof; preservation of finite limits and colimits expanded"
+   }
+  },
+  {
+   "text": "For $L=P$ or $P^\\vee$ put $T_L(M)=M\\otimes_RL$. By the total tensor differential, $\\operatorname{Tot}(C\\otimes_RL[0])^n=C^n\\otimes_RL$ and its differential is $d_C^n\\otimes1$: only the summand with second degree zero survives. Thus this total tensor is the termwise complex $C(T_L)C$, even when $C$ is unbounded. The exact-functor cohomology isomorphism gives $H^n(C(T_L)C)\\cong T_L(H^n(C))$ naturally. If $C$ is acyclic the right side is zero, so the K-flat definition proves $L[0]$ K-flat. Its terms are flat: the only nonzero term is $L$, flat by Step 3, and the zero module is flat because tensoring with zero is the zero exact functor. Consequently $P[0]$ and $P^\\vee[0]$ satisfy both the K-flat and flat-term hypotheses of fixed-factor tensor descent.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YN (definition-K-flat), 06YU (definition-derived-tor); degree-zero calculation, with homology.tex Tag 010N"
+   }
+  },
+  {
+   "text": "Apply fixed-K-flat-factor tensor descent with $A=L[0]$ and use its right-factor version. It supplies a natural representative comparison between $F_L(QC)=QC\\otimes_R^LQ(L[0])$ and $Q\\operatorname{Tot}(C\\otimes_RL[0])$ for every complex $C$, not only for flat or K-flat $C$. Step 4 identifies the latter with $Q(C(T_L)C)$. Independently the exact-functor factorization supplies the termwise induced triangulated functor $D(T_L)$ and the natural comparison $D(T_L)(QC)\\cong Q(C(T_L)C)$. The localization universal property, applied to these two factorizations, therefore gives a natural isomorphism $F_L\\cong D(T_L)$. Its compatibility with shifts follows on representatives: the first-factor shift of $C\\otimes L[0]$ is the termwise identity, since the other factor has degree zero, and both termwise complexes have differential $(-1)^n(d_C\\otimes1)$ after shift by $n$. Fixed-factor descent and exact-functor factorization give precisely these shift comparisons. Faithfulness of precomposition with $Q$ proves the shift equation on $D(R)$. Both functors preserve distinguished triangles by the two cited descent statements, including their connecting arrows. The same construction applies to $L=P^\\vee$.",
+   "uses": [
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-localization-universal-property",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU, definition-derived-tor and preceding construction; derived.tex Tag 015F; localization of natural transformations as in categories.tex Tags 04VG/04VK"
+   }
+  },
+  {
+   "text": "Apply the maps $a_C:C(S)C(T)C\\to C$ and $b_C:C(T)C(S)C\\to C$ degreewise. They are chain isomorphisms: their naturality for the map $d_C^n$ is exactly the chain-map equation in degree $n$. After the representative comparisons of Step 5, their images under $Q$ are natural isomorphisms on complexes between the pullbacks of $F_{P^\\vee}F_P$ and $1$, and of $F_PF_{P^\\vee}$ and $1$. The localization universal property extends them and their inverses to natural isomorphisms on $D(R)$; it respects their compositions. Hence the two identities in Step 2 descend, giving the inverse equivalences with those very evaluations. For shift compatibility, $a_C,b_C$ have the same components after every shift and commute with its signed differential, so the descended transformations commute with the shifts by faithfulness. Together with Step 5's triangulated structures this makes them isomorphisms of exact functors, compatible with distinguished triangles. Their representative formulas are the specified sheaf evaluations and inverses of Step 1.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VG/04VK, localization universal property; sites-modules.tex Tag 0B8N, with degreewise evaluation"
+   }
+  },
+  {
+   "text": "For any representative $K=QC$, the exact-functor cohomology isomorphism applied to $T$ and Step 5's comparison give $H^i(F_PK)\\cong H^i(C(T)C)\\cong T(H^i(C))=H^i(K)\\otimes_RP$. These isomorphisms are natural in complex maps. Both cohomology functors invert quasi-isomorphisms, so the natural transformation and its inverse descend by the localization universal property; this proves naturality for all derived morphisms and independence of the representative. The construction works for each integer $i$ and did not impose any bound on $C$.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; homology.tex Tag 010N, lemma-exact-functor, applied to each three-term part"
+   }
+  },
+  {
+   "text": "If $R$ is a sheaf of $B$-algebras, module-sheaf Hom groups are $B$-modules by $(bf)(x)=b f(x)$, using $B\\to R$ on every slice. The balanced tensor formula gives $((bf)\\otimes1)(x\\otimes l)=b(f(x)\\otimes l)$ and similarly for sums, so $T,S$ are $B$-linear. The linear derived-category lemma supplies the induced $B$-linear structures and the linearity of $Q$. The exact-linear-derived-functor lemma makes $D(T),D(S)$ $B$-linear. Through Step 5 their naturally isomorphic functors $F_P,F_{P^\\vee}$ are also linear: conjugating $D(T)(bf)=bD(T)(f)$ by comparison components preserves the scalar, since composition in a linear category is bilinear. Evaluation and its inverse are $R$-linear sheaf maps on representatives by Step 1's formulas, and their images under the linear $Q$ are $B$-linear. The descended components are those maps after the representative comparisons, so both evaluation isomorphisms are $B$-linear as claimed.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-linear-functor",
+    "lem-weil-linear-abelian-derived-category",
+    "lem-cbc-exact-linear-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/sk-def-sp-tate-twist-locally-free.proof.md",
+    "place": "Proof (3), coefficient-line specialization; linearity by balanced tensor formulas and the existing Mathlib exact-linear-derived-functor leaf"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-proetale-site",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-abstract-derived-category",
+  "def-weil-linear-functor",
+  "lem-weil-linear-abelian-derived-category",
+  "lem-cbc-exact-linear-derived-functor"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YU (definition-derived-tor, preceding K-flat construction); sites-modules.tex Tags 0B8N/0B8Q; explicit local evaluation and triangle computations filling the omitted details"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -71,10 +202,59 @@
    "results": "Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean; Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
    "date": "2026-10-21",
    "verdict": "no match: ExactFunctor gives induced functors and linearity, PicardGroup gives ordinary modules, neither supplies this sheaf derived tensor/evaluation comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "invertible.*derived|derived.*invertible|tensor.*mapDerivedCategory|mapDerivedCategory.*tensor",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: ordinary-module, total-complex or generic exact-functor facts only; exact-functor and linearity hits are already represented by the cited Mathlib leaves"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, DerivedCategory",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: ordinary-module, total-complex or generic exact-functor facts only; exact-functor and linearity hits are already represented by the cited Mathlib leaves"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible sheaf gives an exact termwise tensor equivalence on the unbounded derived category",
+   "results": "8 hits: Module.Invertible.rTensorEquiv, Module.Invertible.instTensorProduct, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_map_val_app, CategoryTheory.Equivalence.sheafCongrPrecoherent_inverse_obj_val_obj, CategoryTheory.Equivalence.sheafCongrPrecoherent_functor_obj_val_obj, CategoryTheory.Equivalence.sheafCongr.inverse, CategoryTheory.Equivalence.sheafCongr.inverse_obj_val_map, CategoryTheory.Equivalence.sheafCongr.inverse_map_val_app",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: ordinary-module, total-complex or generic exact-functor facts only; exact-functor and linearity hits are already represented by the cited Mathlib leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring with a locally free rank one sheaf is an exact equivalence on unbounded derived categories computed termwise with inverse its sheaf dual",
+   "results": "8 hits: LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', LightCondensed.instMonoidalLightCondSetLightCondModFree, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: ordinary-module, total-complex or generic exact-functor facts only; exact-functor and linearity hits are already represented by the cited Mathlib leaves"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensoring an unbounded complex with an invertible module sheaf agrees with applying the exact tensor functor degreewise",
+   "results": "8 hits: HomologicalComplex.tensorObj, HomologicalComplex.instHasTensorTensorUnit, HomologicalComplex.HasTensor, HomologicalComplex.instHasTensorTensorUnit_1, HomologicalComplex.ιTensorObj, HomologicalComplex.instHasTensorXTensorUnit_1, HomologicalComplex.instHasTensorXTensorUnit, HomologicalComplex.HasGoodTensor₁₂",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: ordinary-module, total-complex or generic exact-functor facts only; exact-functor and linearity hits are already represented by the cited Mathlib leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategoryNatIso|instLinearDerivedCategoryMapDerivedCategory|mapDerivedCategoryCompIso",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: ordinary-module, total-complex or generic exact-functor facts only; exact-functor and linearity hits are already represented by the cited Mathlib leaves"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory",
+   "results": "10 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: ordinary-module, total-complex or generic exact-functor facts only; exact-functor and linearity hits are already represented by the cited Mathlib leaves"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-def-sp-tate-twist-locally-free",
@@ -92,5 +272,29 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-line-unbounded-derived-tensor",
+  "worker": "stage1",
+  "summary": "Expanded the generic invertible-line argument into local sheaf evaluation, inverse-pair identities, exactness, K-flatness, unbounded fixed-factor descent, specified evaluation descent, cohomology and coefficient linearity. Reused all needed generic facts from existing nodes; no new nodes and no statement change.",
+  "blueprint": "Realizes det-def-sp-tate-twist-locally-free, proof (3), last two sentences: invertible implies flat, derived tensor is termwise on arbitrary unbounded complexes, and opposite twists cancel.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "why": "Generic ringed-site fixed-K-flat-factor descent supplies natural termwise comparisons, exactness and shifts for arbitrary unbounded inputs; the purity unit has no replacement for this homological-algebra tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-3b9353abd",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-3b9353abd (reviewer sub-agent of L); spot-checked: I read the item and all eight steps in full. There are no new nodes, and the statement and stmt_deps are unchanged. The item was created by Q03 on 2026-10-21 and is unsplit in clones/live and clones/side-live, so it is neither superseded nor a re-split. Source: the blueprint main-20261015 Tate-twist proof (3), last two sentences, and Stacks 0B8Q/0B8N/06YN/06YU/015F/010N; I checked each label, and no SGA is cited. Step 1: the local dual is Rp^∨, and a change of basis p'=up gives (p')^∨=u^{-1}p^∨, so the inverse of evaluation glues. Step 2: I checked both triangle identities on pure tensors, with unit a^{-1} and counit b. Step 3: an equivalence is exact, which gives flatness; Mod(R) is abelian by the size convention of the pro-étale site. Step 4: Tot(C⊗L[0]) is the termwise complex with no sign, the exact-functor cohomology lemma makes L[0] K-flat, and its terms are flat. Step 5: the fixed-factor theorem (K-flat with flat terms, all complexes) plus the exact-functor factorization and localization (2) give F_L≅D(T_L). Its shift comparison is unsigned on the first factor, matching the identity τ. Steps 6-8: the evaluations, the cohomology isomorphism and B-linearity descend by localization (2)/(3) and conjugation. Edge cases checked: R=0, P=R, nontrivial basis change, unbounded K. All statement dependencies lie on the unit closure of sk-prop-an. The declared tool_use lem-weil-pbc-kflat-fixed-tensor-triangulated is already on-route, and I accept it. The graph stays acyclic. The duplicate candidates (signed-line-tensor-equivalence, integral-line-tensor-comparison-representative, integral-line-reduction-restriction, twist-preserves) are narrower or different statements."
+ }
 }
