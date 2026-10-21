@@ -1,0 +1,191 @@
+{
+ "id": "lem-weil-pbc-ordinary-common-quotient-tower",
+ "kind": "statement",
+ "title": "Ordinary common-quotient tensor maps and quotient units",
+ "statement": "Let $C$ be a site, $R,B$ commutative ring sheaves and $\\varphi:R\\to B$. Let $D$ be a common-quotient tower presentation [def-weil-pbc-common-quotient-tower-presentation]: $S_n$ is a tower with compatible locally surjective maps $q_n:R\\to S_n$ and maps $b_n:B\\to S_n$ such that $(\\varphi,q_n,b_n,1)$ is a pushout. Write $I_n=\\ker q_n$. Use the module sheaves [def-weil-sheaf-of-modules-category], restriction [def-pc-sheaf-restrict-scalars], and the ordinary sheafified scalar-extension functors $E^R_n,E^B_n$ in the cochain models [lem-pur-derived-change-of-rings]. There is a natural $S_n$-linear isomorphism $\\operatorname{Res}_{\\varphi}(-)E^R_n\\cong E^B_n$ carrying the canonical sheafification-unit image of $s\\otimes m$ to that of $s\\otimes m$. There are natural $R$-linear transitions $E^R_{n+1}\\operatorname{Res}_{q_{n+1}}\\to E^R_n\\operatorname{Res}_{q_n}$ carrying $s\\otimes x$ to $t_n(s)\\otimes x$, and natural quotient units $\\eta_n:1\\to E^R_n\\operatorname{Res}_{q_n}$ carrying $x$ to $1\\otimes x$. The units commute with transitions. For every $R$-module sheaf $M$, $\\eta_n(M)$ is epi and its sectionwise kernel is precisely local membership in the span of products $jx$, $j\\in I_n$, as defined in the common-quotient presentation. No flatness hypothesis or complexes occur in this assertion.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK, section-tensor-product; elementary tensor and quotient calculation in the proof of the finite coefficient comparison of proetale.tex Tag 099L."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-common-quotient-tower-presentation",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof": [
+  {
+   "text": "For a locally surjective q:R→S, form the sectionwise quotient presheaf R/ker(q) as an R-module presheaf. Its map to Res_q(S) is pointwise injective and locally surjective. Tensoring this map with M becomes an isomorphism after sheafification, hence the tensor map is locally injective. The underlying ordinary change-of-rings tensor is identified with this tensor by its explicit tensor comparison. If 1 tensor x vanishes after sheafification, local injectivity implies it vanishes locally in (R/I) tensor_R M. Mathlib quotTensorEquivQuotSMul sends 1 tensor x to [x], so x is locally in I M. The product I M is the span of products jx, j∈I. Conversely any R-linear map to an S-module kills these products; naturality and sheaf separatedness imply it kills local ideal products. This proves the full unit-kernel formula in Lean without assuming it in OrdinaryCommonQuotientTower.",
+   "uses": [
+    "def-weil-pbc-common-quotient-tower-presentation",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-tensor-local-bijection-universes",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; elementary tensor and quotient calculation in the proof of the finite coefficient comparison of proetale.tex Tag 099L."
+   }
+  },
+  {
+   "text": "Prove unit epimorphy in Lean by induction on presheaf tensor sections. A pure scalar locally lifts along q, so s tensor x is locally 1 tensor (r x). Sums lift on the intersection covering sieve. Compose this locally surjective presheaf unit with the locally surjective sheafification unit, and reflect epimorphy from abelian sheaves. Transport along each ordinary model object equality.",
+   "uses": [
+    "def-weil-pbc-common-quotient-tower-presentation",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; elementary tensor and quotient calculation in the proof of the finite coefficient comparison of proetale.tex Tag 099L."
+   }
+  },
+  {
+   "text": "Let T be the quotient sheaf B/(I B). The map R→T kills I. Since q:R→S is locally surjective with kernel I, local lifts define a unique ring map S→T, independent of lifts and compatible with gluing, addition and multiplication. The maps B→T and S→T agree on R, so the stipulated pushout gives a map from its last corner S to T. Conversely b kills I B and gives T→S. Both composites are identities by quotient and pushout uniqueness. Thus S=B/(I B). For a B-module M, (I B)M=IM because (φ(j)b)x=φ(j)(bx); the reverse inclusion uses b=1. The two sheaf tensor quotients give inverse S-linear maps sending the image of s tensor x to that same pure section. These formulas commute with module maps. Local scalar lifts show the two quotient S-actions agree. Transport along the prescribed ordinary object equalities to obtain the normalized natural isomorphism.",
+   "uses": [
+    "def-weil-pbc-common-quotient-tower-presentation",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; elementary tensor and quotient calculation in the proof of the finite coefficient comparison of proetale.tex Tag 099L."
+   }
+  },
+  {
+   "text": "For an adjacent scalar transition t:S_(n+1)→S_n, sheafify the balanced map s tensor x↦t(s) tensor x. Compatibility of q with t gives R-linearity, the presheaf restriction formula gives naturality on the site, and module maps give naturality in M. Define each unit by x↦1 tensor x. The transition of this section is again 1 tensor x, proving the natural-transformation equation. The quotient calculation in step 1 gives the epi and kernel assertions. The compatibility of units with transitions is proved in Lean from their formulas: a transition preserves the scalar 1, and morphisms are determined on sections. Epimorphy and kernels are already proved independently in steps 1 and 2; they are not retained as fields in the holed existence statement. The units are now explicitly constructed in Lean from the sectionwise extension unit composed with the module-sheafification adjunction unit; naturality is sheafification-unit naturality, transported along the prescribed object equalities using the prescribed map equalities. They are not chosen fields of the retained existence statement.",
+   "uses": [
+    "def-weil-pbc-common-quotient-tower-presentation",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; elementary tensor and quotient calculation in the proof of the finite coefficient comparison of proetale.tex Tag 099L."
+   }
+  },
+  {
+   "text": "The section normalizations uniquely determine all retained data. Units agree sectionwise. Restrict a pair of comparison maps to R, and precompose with the epic quotient unit on the restricted B-module. Their formulas at 1 tensor x agree, hence the composites agree on all sections; cancel the unit. The restriction functor does not change underlying functions, so the original S-linear maps are equal. The same cancellation with the unit at level n+1 proves uniqueness of a transition. Proof irrelevance yields equality of the full OrdinaryCommonQuotientTower records. This is proved in Lean to verify uniqueness of the data chosen from the remaining existence theorem.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-pbc-common-quotient-tower-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; elementary tensor and quotient calculation in the proof of the finite coefficient comparison of proetale.tex Tag 099L."
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "T5 extracted the underived quotient calculation (original item proof steps 2–3 and the underived part of step 5); sources as above. T5 proved quotient-unit epimorphy, the full local ideal-product kernel calculation via local tensor bijectivity and quotient tensors, and transition compatibility. The retained existence theorem supplies normalized ordinary maps only. Uniqueness of every retained map is also formally proved by cancellation of the epic quotient units. The quotient units and their naturality are explicit constructions; only the ordinary comparison and coefficient transitions remain in the existence statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars sheaf modules along a locally surjective quotient is the quotient by the kernel ideal",
+   "results": "8 hits: sheaf presentation and sheafification results; no sheaf tensor quotient theorem with the pure-section normalization.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"changeOfRings\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "quotient.*[Tt]ensor|[Tt]ensor.*quotient|restrictScalars",
+   "results": "25 hits, mostly ordinary tensor products and restriction of scalars; no local quotient tensor calculation for sheaves.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The sheaf tensor product with a quotient ring is the quotient by the ideal times the module, naturally and with quotient units",
+   "results": "8 hits including TensorProduct.quotTensorEquivQuotSMul and tensorQuotientEquiv. These concern ordinary modules and do not handle locally surjective ring sheaves.",
+   "date": "2026-10-21",
+   "verdict": "Ordinary algebra ingredients only."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.FlatCommonQuotientReductionTower",
+  "date": "2026-10-21",
+  "group": "T5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-pbc-completed-pullback",
+   "place": "Finite-reduction coefficient comparison, quotient transitions and quotient units in the completed pullback construction.",
+   "via": [
+    "lem-weil-pbc-flat-common-quotient-reduction-tower"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.OrdinaryCommonQuotientTower",
+  "file": "lean/Sheaf/Paper/OrdinaryCommonQuotientTower.lean",
+  "declaration": "SheafOfModules.nonempty_ordinaryCommonQuotientTower",
+  "statement": "theorem nonempty_ordinaryCommonQuotientTower :\n    Nonempty (OrdinaryCommonQuotientTower D a b)",
+  "branch": "sheaf-dag",
+  "by": "T5",
+  "date": "2026-10-21",
+  "declarations": [
+   "SheafOfModules.OrdinaryCommonQuotientTower",
+   "SheafOfModules.nonempty_ordinaryCommonQuotientTower",
+   "SheafOfModules.OrdinaryCommonQuotientTower.unit_kernel",
+   "SheafOfModules.OrdinaryCommonQuotientTower.unit_transition",
+   "SheafOfModules.OrdinaryCommonQuotientTower.unit_epi",
+   "SheafOfModules.OrdinaryCommonQuotientTower.unique",
+   "SheafOfModules.commonQuotientPresheafUnit",
+   "SheafOfModules.commonQuotientUnit",
+   "SheafOfModules.commonQuotientUnit_sections",
+   "SheafOfModules.commonQuotientUnit_naturality",
+   "SheafOfModules.commonQuotientModelUnit",
+   "SheafOfModules.OrdinaryCommonQuotientTower.unit",
+   "SheafOfModules.OrdinaryCommonQuotientTower.unit_sections"
+  ]
+ },
+ "proof_deps": [
+  "def-weil-pbc-common-quotient-tower-presentation",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-tensor-local-bijection-universes",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261021T120555-L-3913330",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261021T120555-L-3913330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

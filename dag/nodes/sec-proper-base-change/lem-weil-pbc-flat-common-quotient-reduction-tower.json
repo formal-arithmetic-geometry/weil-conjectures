@@ -22,72 +22,62 @@
  ],
  "proof": [
   {
-   "text": "Choose one flat-term K-flat resolution $P\\to G$ of a representative of $M$ by [lem-pc-kflat-resolution]. Flat restriction [lem-weil-pbc-flat-scalar-restriction-kflat] makes $\\operatorname{Res}P$ K-flat with flat $R$-terms. Restriction keeps underlying abelian sheaves [def-pc-sheaf-restrict-scalars]; sectionwise kernels and sheafified cokernels [def-weil-sheaf-of-modules-category] are unchanged, so it preserves this quasi-isomorphism. This single $P$ works for every $n$.",
+   "text": "Obtain the ordinary normalized scalar comparison, transitions and quotient units from [lem-weil-pbc-ordinary-common-quotient-tower]. Lift the ordinary natural isomorphisms termwise with Functor.mapHomologicalComplexCompIso.",
+   "uses": [
+    "lem-weil-pbc-ordinary-common-quotient-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Restriction preserves finite limits and colimits by the existing exact restriction lemma in [lem-pur-kflat-change-of-rings-independent]. Tensor comparison identifies the underlying scalar extension with tensoring by Res B. Flatness therefore makes extension exact. For a K-flat B-complex P and an acyclic R-complex F, extension of F is acyclic. Apply braiding to the ordinary tensor cancellation on both sides, obtaining Res(extension(F) tensor_B P)≅F tensor_R Res(P) in each bidegree. Naturality in the two variables identifies both bicomplex differentials. Exact restriction commutes with the total complex, so the total comparison gives the acyclicity required for K-flatness of Res(P), without constructing a signed total-complex symmetry. This K-flat claim is proved privately in Lean rather than imported from the absent flat-restriction module.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-change-of-rings-tensor-cancellation-independent",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pur-kflat-change-of-rings-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a representative G of M in D(B) and a flat-term K-flat resolution P→G. Its localization gives Q(P)≅M. Transport monoidal flatness through the site tensor comparison to obtain exactly IsFlatOnSite of each term.",
    "uses": [
     "lem-pc-kflat-resolution",
-    "lem-weil-pbc-flat-scalar-restriction-kflat",
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-sheaf-of-modules-category"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution) and 06YY (lemma-derived-base-change), flat scalar restriction"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-sheaf-tensor-ideal-quotient] to $F=P^i$ over $R,J_n$ and over $B,J_nB$. Locally $(\\varphi(j)b)p=\\varphi(j)(bp)$ and the reverse inclusion takes $b=1$, so $(J_nB)F=J_nF$ as submodule sheaves. The stipulated $S_n$-identification gives the same quotient $Q_n=F/J_nF$. Set $c_n=(a^B_{J_nB,F})^{-1}a_{J_n,F}$. Both $c_n$ and its inverse send $p\\otimes s$ to $p\\otimes s$: locally lift $s$ to $R$ and use balancing. They are $S_n$-linear, carry the quotient projection to $p\\otimes1$, and are natural in $F$ by the lemma's module-map square.",
-   "uses": [
-    "lem-weil-pbc-sheaf-tensor-ideal-quotient"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), sheafification of the tensor-quotient balanced maps; the quotient identification and its two naturality squares are the agent-written extraction of the original item steps 2–5."
-   }
-  },
-  {
-   "text": "In each degree use $c_n$. The differential is $d_P\\otimes1$ [def-pc-tensor-complex-sheaves]; its square and the square for a chain map $h$ send pure tensors to $d_P(p)\\otimes s$ and $h(p)\\otimes s$. For $t_n:S_{n+1}\\to S_n$, the transition square sends them to $p\\otimes t_n(s)$; the common-quotient identifications use the same $t_n$ on both sides. Pure-section determination [def-weil-pbc-ringed-tensor-section-calculus] proves these equalities. After restriction to $R$, the adjacent squares assemble an isomorphism of strict towers [def-weil-inverse-system], including all composite transitions. The cones are chain maps $p\\mapsto p\\otimes1$, since $d(p\\otimes1)=d(p)\\otimes1$; they commute with transitions and $c_n$ because $t_n(1)=1$ and $c_n(p\\otimes1)=p\\otimes1$.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves",
-    "def-weil-pbc-ringed-tensor-section-calculus",
-    "def-weil-inverse-system"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099L (section-derived-completion-noetherian), explicit finite-reduction transitions and units"
-   }
-  },
-  {
-   "text": "By [lem-pur-derived-change-of-rings](2), the two complexes compute the asserted derived tensors in $D(S_n)$. Their comparison is natural on complexes by step 3, hence on homotopy categories. On the flat-term K-flat $B$-class both functors invert quasi-isomorphisms by step 1 and clause (1) of that node; every complex has a resolution in this class. Apply [lem-pur-left-derived-from-kflat-class] to both functors. Its universal property descends the comparison and its inverse, giving inverse natural transformations on $D(B)$, independent of the resolution. Its counit on $P$ identifies this isomorphism with $c_n$. Step 3 already gives the strict tower and cone assertions.",
+   "text": "Compose the exact-restriction localization comparison, the R-side derived counit and the ordinary cochain comparison to a natural transformation β from Q followed by Res-derived followed by a.T to b.EComplex followed by Q. The universal left-derived property of b.T gives δ with δ(QP) followed by b.ε(P)=β(P). On K-flat P both counits and the ordinary comparison are isomorphisms, so δ(QP) is iso. Every derived object has a K-flat representative, hence all components of δ are iso. This yields the desired derived comparison and the exact counit normalization, in fact at all complexes.",
    "uses": [
     "lem-pur-derived-change-of-rings",
-    "lem-pur-left-derived-from-kflat-class"
+    "lem-pc-kflat-resolution"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YY (lemma-derived-base-change); derived.tex Tag 06XN (lemma-find-existence-computes)"
-   }
+   "elementary": false
+  },
+  {
+   "text": "Restrict the ordinary cochain comparisons to R and call them e_n. Lift the ordinary transitions degreewise to tL_n, and define tR_n=e_(n+1)^(-1) tL_n e_n. Functor.ofOpSequence and NatTrans.ofOpSequence give a strict tower isomorphism. The inverse pure-section formula follows from e_n e_n^(-1)=1, proving the required formula for tR. Lift the ordinary units degreewise and use their transition equation to construct ηL; put ηR=ηL e. The ordinary formulas prove both unit formulas, epi and the exact local ideal-product kernel. Thus every field of Comparison is filled.",
+   "uses": [
+    "lem-weil-pbc-ordinary-common-quotient-tower",
+    "def-weil-inverse-system"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-flat-scalar-restriction-kflat",
+  "lem-weil-pbc-ordinary-common-quotient-tower",
   "def-pc-sheaf-restrict-scalars",
-  "def-weil-sheaf-of-modules-category",
-  "lem-weil-pbc-sheaf-tensor-ideal-quotient",
-  "def-pc-tensor-complex-sheaves",
-  "def-weil-pbc-ringed-tensor-section-calculus",
-  "def-weil-inverse-system",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class"
+  "lem-pur-change-of-rings-tensor-cancellation-independent",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-pc-kflat-resolution",
+  "def-weil-inverse-system"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099L (section-derived-completion-noetherian), common-quotient finite reductions; K-flat resolution and descent use Tags 06YS, 06YT, 06YY and 06XN. NG re-split: the sheaf tensor-quotient construction with both naturality squares is now a separate statement-only node; the remaining displayed formulas assemble complexes, strict towers and derived functors."
+  "place": "T5 Lean reduction: separate ordinary quotient calculation, prove flat restriction by tensor cancellation, descend via the existing cochain model universal property, and explicitly assemble normalized strict towers. Exact restriction reuses the existing coefficient-change API; ordinary braiding orders cancellation before totalization."
  },
  "mathlib_searches": [
   {
@@ -205,8 +195,7 @@
  },
  "tool_uses": [
   "lem-pc-kflat-resolution",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class"
+  "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -245,5 +234,15 @@
   "result": "pass",
   "note": "Statement matches the node clause by clause. Flatness is IsFlatOnSite of Res_φ B. The new CommonQuotientTowerPresentation (q_n locally surjective, IsPushout φ q_n b_n 𝟙, orientation checked) encodes R/I_n ≅ B/I_nB with compatible transitions. ordinary is fixed by pure changeOfRings sections. derived is fixed through computes and the counits, which are iso on K-flat complexes. strict fixes tL/tR/ηL/ηR by formulas, gives e = restricted ordinary and ηL≫e=ηR, and adds epi plus the locallyInIdealProduct kernel clause, which is true via sheafify(S⊗P)=sheafify(P/IP). Edge cases (I_n=R, I_n=0, empty site, universes) are covered and no stronger assumptions were added. No duplicate: RingedSiteIdeal has no quotient tower and needs SmallCategory with universe u; no live collision. No hollow defs; only the item theorem is sorry, with the 6-step docstring; source and blueprint docstrings present; statements verbatim. nt_compile --json: 3.0 s and 19.9 s, clean, exit 0. Advisories: the RingedTopoiTensorSections and CochainTensorUniverses imports can be dropped (H9); the base-era theorem stmt_dep lem-pur-derived-change-of-rings owns the plain DerivedChangeOfRingsCochainModel (not item-added, so not a fault)."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T5",
+  "result": "pass",
+  "landing": "20261021T120555-L-3913330",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
