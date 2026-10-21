@@ -18,9 +18,127 @@
   "def-coef-ringed-tensor-hom-model",
   "lem-sf-ringed-derived-closed-symmetric-monoidal"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $B=\\mathcal Hom^\\bullet(D,O)$. Define $\\beta_E^a$ as a map of sheaves, not just of sections on one object. For $x\\in E^a(U)$ its component $D^q|_U\\to O^{q+a}|_U$ is zero unless $q=-a$. In the remaining component, for every $V\\to U$ and $\\phi\\in D^{-a}(V)$ set $\\phi\\mapsto(-1)^{-a^2}\\phi^a(x|_V)$, where $\\phi^a$ denotes the product projection $D^{-a}\\to\\mathcal Hom(E^a,O)$ (the source degree of this projection is $a$). Equivalently this is $(-1)^{a q}\\phi(x|_V)$. Evaluation is linear in both arguments and commutes with restriction, so this defines a sheaf morphism into each sheaf Hom and hence into the actual product defining $B^a$. The specified components also prove uniqueness. No sum over Hom-product components is taken.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), actual product definition; Tag 0A92 (lemma-evaluate-and-more), coefficient-unit specialization."
+   }
+  },
+  {
+   "text": "Check the differential on every product projection. For $x\\in E^a(U)$ only a section $\\phi\\in D^q$, $q=-a-1$, can contribute to the degree-$(a+1)$ map into $O$. Since $d_O=0$, the Hom differential gives $d_D\\phi=-(-1)^q\\phi d_E$ and\n$$ (d_B\\beta_E(x))(\\phi)=-(-1)^a\\beta_E(x)(d_D\\phi)=(-1)^{a+1+a(q+1)+q+1}\\phi(d_Ex)=(-1)^{(a+1)q}\\phi(d_Ex)=\\beta_E(d_Ex)(\\phi). $$\nFor every other $q$ both sides land in the zero sheaf $O^{a+1+q}$. Thus $\\beta_E$ is a chain map, including for negative degrees and unbounded complexes.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), displayed differential; explicit coefficient-unit sign calculation for Tag 0A92 (lemma-evaluate-and-more)."
+   }
+  },
+  {
+   "text": "For a chain map $f:E\\to E'$ write $D(f)=\\mathcal Hom^\\bullet(f,O):D'\\to D$. For $x\\in E^a$ and $\\phi\\in(D')^q$ the two composites have the same component\n$$ \\beta_{E'}(f(x))(\\phi)=(-1)^{a q}\\phi(f(x))=\\beta_E(x)(D(f)(\\phi)). $$\nAll other components are zero. Equality on each restriction and each Hom-product projection proves $\\beta_{E'}f=\\mathcal Hom^\\bullet(D(f),O)\\beta_E$, the asserted naturality.",
+   "uses": [
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), componentwise functoriality; Tag 0A92 (lemma-evaluate-and-more), naturality specialized to the coefficient unit."
+   }
+  },
+  {
+   "text": "Now impose the two augmentation hypotheses. Put $J=I(O)$, $\\eta=\\eta_O$ and\n$$ c_E=\\mathcal Hom^\\bullet(E,\\eta):D\\to\\mathcal Hom^\\bullet(E,J),\\qquad c_D=\\mathcal Hom^\\bullet(D,\\eta):B\\to\\mathcal Hom^\\bullet(D,J). $$\nBy the fixed derived-Hom representative, the targets localize to $H(QE,O)$ and $H(QD,O)$ respectively. Both $c_E,c_D$ are quasi-isomorphisms by hypothesis, so localization makes them the isomorphisms $\\gamma_E,\\gamma_D$ in the statement. In the following calculations use these fixed identifications throughout. The well-definedness theorem for Hom into a K-injective complex gives their compatibility with replacing either first argument by a quasi-isomorphic representative.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "lem-pur-rhom-well-defined",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7 (section-internal-hom), construction with a K-injective target; Tag 0A95 (lemma-RHom-well-defined)."
+   }
+  },
+  {
+   "text": "Choose quasi-isomorphisms $p:P\\to E$ and $t:T\\to D$ with $P,T$ K-flat and having flat terms. Their localizations $Qp,Qt$ are invertible. Form actual chain maps\n$$ g=\\mathcal Hom^\\bullet(p,J)c_Et:T\\to\\mathcal Hom^\\bullet(P,J),\\quad h=\\mathcal Hom^\\bullet(t,J)c_D\\beta_Ep:P\\to\\mathcal Hom^\\bullet(T,J). $$\nFunctoriality of the fixed Hom representatives, and their quasi-isomorphism invariance into $J$, identify their localized maps as\n$$ Qg=H(Qp,O)\\gamma_EQt,\\qquad Qh=H(Qt,O)\\gamma_DQ(\\beta_E)Qp. $$\nHere $J$ is K-injective because it is the fixed replacement of $O$. The resolution theorem applies to arbitrary complexes on this small ringed site; it does not assert or require that $E$ or $D$ be K-flat.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-pur-derived-internal-hom",
+    "def-pur-hom-complex",
+    "lem-pur-rhom-well-defined",
+    "def-coef-hom-representative-evaluation",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS (lemma-K-flat-resolution); Tag 0A95 (lemma-RHom-well-defined); Tag 08J7 (section-internal-hom), fixed representative functoriality."
+   }
+  },
+  {
+   "text": "Apply the stipulated normalized tensor-Hom model to $g$ and the K-flat pair $T,P$. With the canonical tensor comparison, its derived uncurrying is $(Q\\eta)^{-1}Q(u)$, where\n$$ u:\\operatorname{Tot}(T\\otimes P)\\to J,\\qquad u(\\tau\\otimes x)=\\eta\\bigl(t(\\tau)(p(x))\\bigr). $$\nA component with $|\\tau|+|x|\\ne0$ is zero, since $g$ factors through Hom into $O$. This identifies the map without a choice of evaluation: by the counit formula for transposition and $Qg=H(Qp,O)\\gamma_EQt$, its uncurrying is also\n$$ \\epsilon_{QE,O}\\circ(\\gamma_EQt\\otimes^{\\mathbf L}Qp):QT\\otimes^{\\mathbf L}QP\\to O. $$\nThe latter equality is exactly naturality of the adjunction in its right tensor argument $P\\to E$. The two K-flat inputs are $T,P$, so every hypothesis of the given representative normalization is satisfied.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), normalized uncurrying and naturality of equation-internal-hom; coefficient-unit evaluation in Tag 0A97 (lemma-internal-hom-evaluate)."
+   }
+  },
+  {
+   "text": "Apply the same normalization to $h$ and the K-flat pair $P,T$. Its uncurrying is $(Q\\eta)^{-1}Q(v)$, where\n$$ v:\\operatorname{Tot}(P\\otimes T)\\to J,\\qquad v(x\\otimes\\tau)=\\eta\\bigl(\\beta_E(p(x))(t(\\tau))\\bigr)=(-1)^{a q}\\eta\\bigl(t(\\tau)(p(x))\\bigr) $$\nfor $x\\in P^a$, $\\tau\\in T^q$ with $a+q=0$, and is zero otherwise. The actual total-complex symmetry $s_{P,T}$ has formula $x\\otimes\\tau\\mapsto(-1)^{a q}\\tau\\otimes x$. Consequently $v=u\\circ s_{P,T}$ on every pure generator in every coproduct summand. These are equal chain maps: the sheaf tensor is the sheafification of the sectionwise tensor, so the bilinear formulas determine each summand map, and the coproduct inclusions determine the total map. The specified derived symmetry is induced by this same symmetry on K-flat representatives; hence uncurrying $Qh$ gives the uncurrying of $Qg$ composed with $\\sigma_{QP,QT}$.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A8X and 0A92 (section-hom-complexes; lemma-evaluate-and-more), explicit signs; Tag 0FPT (lemma-symmetric-monoidal-derived), symmetry on K-flat representatives; sites-modules Tag 03EK (section-tensor-product), sheafification tensor."
+   }
+  },
+  {
+   "text": "For the other side of the desired equality, naturality of transposition, the definition of $b_{QE}$ and naturality of symmetry show that the uncurrying of\n$$ H(Qt,O)H(\\gamma_E,O)b_{QE}Qp $$\nis\n$$ \\epsilon_{QE,O}\\circ(\\gamma_EQt\\otimes^{\\mathbf L}Qp)\\circ\\sigma_{QP,QT}. $$\nIndeed, first precomposing the first Hom argument by $\\gamma_EQt$ tensors the evaluation with this map; then $\\sigma_{QE,H(QE,O)}\\circ(Qp\\otimes^{\\mathbf L}\\gamma_EQt)=(\\gamma_EQt\\otimes^{\\mathbf L}Qp)\\circ\\sigma_{QP,QT}$. Steps 6 and 7 identify this with the uncurrying of $Qh=H(Qt,O)\\gamma_DQ(\\beta_E)Qp$. The adjunction bijection therefore identifies these maps $QP\\to H(QT,O)$. Cancel the isomorphisms $Qp$ and $H(Qt,O)$ to obtain\n$$ H(\\gamma_E,O)b_{QE}=\\gamma_DQ(\\beta_E). $$\nAll comparisons used only resolutions of $E,D$, their two assumed augmentation quasi-isomorphisms, and the stipulated normalized models; no boundedness or perfectness enters.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), naturality and injectivity of the adjunction bijection; Tag 0FPT (lemma-symmetric-monoidal-derived), naturality of symmetry; Tag 0A97 coefficient-unit bidual comparison."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "def-coef-hom-representative-evaluation",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X, 0A92, 0A95, 08J7, 08J9, 0A97 and 06YS; explicit coefficient-unit specialization with a two-resolution comparison using the fixed normalization. The Stacks construction omits the required derived functoriality verification; the component and comparison calculations are supplied here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +167,66 @@
    "results": "HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_apply; HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId; HomologicalComplex.evalCompCoyonedaCorepresentableByDoubleId_homEquiv_symm_apply; ChainComplex.linearYonedaObj_d; ChainComplex.linearYonedaObj; CategoryTheory.Abelian.Ext.homLinearEquiv; Ext; HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module double duality and complex evaluation functors do not give the signed sheaf Hom-product chain map with its unbounded derived normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Signed bidual morphism of unbounded complexes of sheaves of modules is compatible with localization to derived Hom under quasi-isomorphic Hom augmentations",
+   "results": "CategoryTheory.HasExt.hasSmallLocalizedShiftedHom_of_isLE_of_isGE; CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom; CochainComplex.HomComplex.CohomologyClass.toSmallShiftedHom_mk; CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat; CategoryTheory.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoObjCochainComplexCompSingleFunctorOfNatOfHasExt; CategoryTheory.InjectiveResolution.extMk_hom; CategoryTheory.Abelian.Ext.singleFunctor_map_comp_hom; CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, global Hom cochains, sheaf presentations or generic localization, not this signed sheaf-internal double Hom map and both fixed-augmentation comparisons.",
+   "directory": ""
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|toIhomIhom|evalCompCoyoneda",
+   "results": "Mathlib/CategoryTheory/Generator/HomologicalComplex.lean; Mathlib/CategoryTheory/Generator/HomologicalComplex.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, global Hom cochains, sheaf presentations or generic localization, not this signed sheaf-internal double Hom map and both fixed-augmentation comparisons.",
+   "directory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Double dual evaluation of a cochain complex has the Koszul sign and agrees with derived double dual through Hom quasi-isomorphisms",
+   "results": "Module.evalEquiv; Module.Dual.eval; Module.Dual.eval_comp_comp_evalEquiv_eq; LinearMap.IsPerfPair.dualEval; Module.Dual.eval_naturality; Module.symm_dualMap_evalEquiv; Module.erange_coe; CochainComplex.shiftEval",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, global Hom cochains, sheaf presentations or generic localization, not this signed sheaf-internal double Hom map and both fixed-augmentation comparisons.",
+   "directory": ""
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, Module.Dual",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, global Hom cochains, sheaf presentations or generic localization, not this signed sheaf-internal double Hom map and both fixed-augmentation comparisons.",
+   "directory": ""
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of the evaluation chain map to the double Hom complex of sheaves on a ringed site without a boundedness or flatness hypothesis",
+   "results": "SheafOfModules.Presentation.mapGenerators; SheafOfModules.Presentation.map_π_eq; CategoryTheory.Sheaf.H; PresheafOfModules.sheafifyHomEquiv'; PresheafOfModules.homEquivOfIsLocallyBijective; PresheafOfModules.sheafifyMap; PresheafOfModules.sheafifyHomEquiv; PresheafOfModules.homEquivOfIsLocallyBijective_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, global Hom cochains, sheaf presentations or generic localization, not this signed sheaf-internal double Hom map and both fixed-augmentation comparisons.",
+   "directory": ""
+  },
+  {
+   "tool": "grep",
+   "query": "bidual|doubleDual|toIhomIhom|Dual.eval|eval_naturality|HomComplex",
+   "results": "Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean; Mathlib/Algebra/Homology/HomotopyCategory/HomComplexShift.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, global Hom cochains, sheaf presentations or generic localization, not this signed sheaf-internal double Hom map and both fixed-augmentation comparisons.",
+   "directory": "Algebra/Homology"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual.eval_naturality",
+   "results": "Module.Dual.eval_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module duality, global Hom cochains, sheaf presentations or generic localization, not this signed sheaf-internal double Hom map and both fixed-augmentation comparisons.",
+   "directory": ""
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ringed-site-duality-maps",
@@ -72,5 +246,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ringed-signed-bidual-localization",
+  "worker": "stage1",
+  "summary": "Constructed the actual product-Hom signed chain map and proved its naturality by components. Compared both sides of the derived equation after K-flat resolutions of E and its ordinary dual, using the fixed K-injective target and normalized tensor-Hom models. The statement and all hypotheses are unchanged; no new nodes are necessary.",
+  "blueprint": "det-thm-sf-ctf-stability-internal-hom, proof paragraph 2 (The formula), final sentence: coefficient-dual evaluation and biduality underlying the identification with tensor by the perfect dual. This split supplies the ordinary bidual component normalization already requested through lem-sfb-ringed-site-perfect-duality and lem-sfb-ringed-site-duality-maps.",
+  "tool_uses": [
+   {
+    "node": "def-pur-hom-complex",
+    "why": "The fixed Hom complex of complexes of sheaves of modules model or defining construction named by the item; no alternate geometric route is used."
+   },
+   {
+    "node": "def-pur-sheaf-hom",
+    "why": "The fixed Sheaf Hom of sheaves of modules on a site model or defining construction named by the item; no alternate geometric route is used."
+   },
+   {
+    "node": "def-pur-derived-internal-hom",
+    "why": "The fixed Derived internal Hom on a ringed site model or defining construction named by the item; no alternate geometric route is used."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Invariance of the fixed Hom representative under first-variable quasi-isomorphisms into the fixed K-injective target; a foundational ringed-site tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Resolution of the two arbitrary complexes used to test the normalized adjunction; the unit has no independent resolution construction."
+   },
+   {
+    "node": "def-coef-hom-representative-evaluation",
+    "why": "The fixed Canonical evaluation on fixed Hom representatives model or defining construction named by the item; no alternate geometric route is used."
+   },
+   {
+    "node": "def-coef-ringed-tensor-hom-model",
+    "why": "The fixed Canonical closed tensor-Hom representative model on a ringed site model or defining construction named by the item; no alternate geometric route is used."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "The very closed symmetric monoidal structure fixed in the item, used for the counit, symmetry and natural transposition."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "The fixed Tensor product of sheaves of modules on a site model or defining construction named by the item; no alternate geometric route is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-pur-hom-complex",
+  "def-pur-sheaf-hom",
+  "def-pur-derived-internal-hom",
+  "lem-pur-rhom-well-defined",
+  "lem-pc-kflat-resolution",
+  "def-coef-hom-representative-evaluation",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-a589fbd90",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-a589fbd90 (reviewer sub-agent of L); spot-checked: I read the whole item: all 8 steps, the statements of the 12 cited nodes, and Stacks 0A97 (sites-cohomology l.8965, where Stacks omits the functoriality proof, so proof_origin=agent is right) and 0A60. There are 0 new nodes; the statement and stmt_deps are unchanged; there is no repair note and no SGA. Step 2: I re-derived the chain condition myself. d_Dφ=-(-1)^qφd_E, and d_Bβ(x)(φ)=(-1)^qφ(dx)=(-1)^{(a+1)q}φ(dx)=β(dx)(φ) for q=-a-1. Step 3: naturality has no sign because D(f) is degree 0. Steps 4-5: Qg=H(Qp,O)γ_EQt and Qh=H(Qt,O)γ_DQβQp follow from the functor on pairs of complexes in def-pur-derived-internal-hom. lem-pc-kflat-resolution holds for unbounded complexes. Step 6: def-coef-ringed-tensor-hom-model applies to the K-flat pair (T,P) with ψ=η(tτ(px)), and naturality in L gives ε∘(γ_EQt⊗Qp). Step 7: v=u∘s_{P,T}; σ is induced by the same Koszul swap on K-flat representatives (lem-sf-ringed-derived-closed-symmetric-monoidal), which is part of the fixed models named in the statement. Step 8: naturality of σ and of the adjunction, then cancelling the isomorphisms, gives the equation. Small cases: Z[-a] gives β=(-1)^a·ev; [Z→2Z]; Z/2 has D=0 and the augmentation hypothesis fails, so the derived clause is correctly conditional. There is no cycle (the only citer is lem-sfb-ringed-site-duality-maps), and the bidual grep found no duplicate: def-per-ringed-site-bidual-transpose has no chain-level β or γ comparison. The declared tool_uses are accepted as generic definitions, the fixed models, and black-box homological tools."
  }
 }
