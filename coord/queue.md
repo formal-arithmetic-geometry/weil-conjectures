@@ -79,7 +79,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-unit-power-completeness` | 1003 | none |
 | `lem-sf-direct-image-scalar-restriction-cocycle` | 1003 | none |
 | `lem-sf-open-extension-scalar-restriction-coherence` | 1003 | none |
-| `lem-weil-proetale-constructible-exact-closure` | 1003 | none |
 | `lem-pur-ringed-derived-composition-cocycle` | 1004 | none |
 | `lem-pur-scalar-extension-tower-coherence` | 1004 | none |
 | `lem-sf-reduction-flat-model` | 1004 | none |

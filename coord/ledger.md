@@ -20618,3 +20618,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:15 L: merged deliver/Q93/lemma-nagata-scheme-image-ideal-qc (reviewer PASS; first push; new nodes: 0)
 - 07:15 L: merged deliver/Q120/lemma-nagata-affine-finite-type-is-quasi-affine (reviewer PASS; first push; new nodes: 0)
 - 07:15 L: merged deliver/Q81/lem-pur-sequence-site-open-extension (reviewer FIX; first push; new nodes: 0)
+
+- 2026-10-21T07:15:13Z NP maintenance: resolved stale stage-1 re-split of lem-weil-proetale-constructible-exact-closure by existing E1 landing 20261021T061009-L-1683218 (8a6738c4ddcde9268f7070ca43108b7f8353b8a9); implemented L's 06:29 UTC supersession return; closed NP claim/return, removed stale queue row, archived e0185ab3cae665aab1e731cdb91f252caf186a1d at refs/superseded/NP/lem-weil-proetale-constructible-exact-closure/e0185ab3cae665aab1e731cdb91f252caf186a1d; live DAG/Lean unchanged.
