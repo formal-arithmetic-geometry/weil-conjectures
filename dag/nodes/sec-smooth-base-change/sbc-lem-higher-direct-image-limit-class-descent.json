@@ -104,14 +104,15 @@
  "chapter": "sec-smooth-base-change",
  "unit": "sk-lem-failure-field",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.HigherDirectImageLimitClassDescent",
-  "file": "lean/Sheaf/AlgebraicGeometry/HigherDirectImageLimitClassDescent.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitClassDescent",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/HigherDirectImageLimitClassDescent.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_higherDirectImage_limit_fiber_rep",
-  "statement": "theorem exists_higherDirectImage_limit_fiber_rep {S : Scheme.{v}} {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I] (D : Iᵒᵖ ⥤ Over S) [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left] [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom] [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom] (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c)) [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom] (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1}) (φ : ∀ {i j : I} (f : i ⟶ j), (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j) (hφid : ∀ i : I, HEq (φ (𝟙 i)) ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i))) (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g)) ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left (D.map f.op).left).hom.app (F i) ≫ (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g)) (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1}) (eH : ∀ i : I, H.obj i ≅ (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i)) (hH : ∀ {i j : I} (f : i ⟶ j), H.map f = (eH i).hom ≫ (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left (c.π.app (op i)).left (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫ (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv) [HasColimit H] (p : ℕ) (K : I ⥤ Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1}) (eK : ∀ i : I, K.obj i ≅ (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj (R+(((D.obj (op i)).hom)_*[AddCommGrpCat.{v + 1}]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj (F i)))) (hK : ∀ {i j : I} (f : i ⟶ j), K.map f = (eK i).hom ≫ abelianHigherDirectImageMap (D.map f.op).left (D.obj (op i)).hom (D.obj (op j)).hom (Over.w (D.map f.op)) p (F i) (F j) (φ f) ≫ (eK j).inv) [HasColimit K] (η : K ⟶ (Functor.const I).obj ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H))))) (hη : ∀ i : I, η.app i = (eK i).hom ≫ abelianHigherDirectImageMap (c.π.app (op i)).left (D.obj (op i)).hom c.pt.hom (Over.w (c.π.app (op i))) p (F i) (colimit H) ((eH i).inv ≫ colimit.ι H i)) (s : S) : ∀ x : ((S.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{v + 1})).obj ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H)))), ∃ (i : I) (y : ((S.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{v + 1})).obj (K.obj i)), (((S.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{v + 1})).map (η.app i)) y = x",
+  "statement": "theorem exists_higherDirectImage_limit_fiber_rep {S : Scheme.{v}}\n    {I : Type v} [Preorder I] [IsDirected I (· ≤ ·)] [Nonempty I]\n    (D : Iᵒᵖ ⥤ Over S)\n    [∀ {i j : Iᵒᵖ} (f : i ⟶ j), IsAffineHom (D.map f).left]\n    [∀ i : Iᵒᵖ, QuasiCompact (D.obj i).hom]\n    [∀ i : Iᵒᵖ, QuasiSeparated (D.obj i).hom]\n    (c : Cone D) (hc : IsLimit ((Over.forget S).mapCone c))\n    [QuasiCompact c.pt.hom] [QuasiSeparated c.pt.hom]\n    (F : ∀ i : I, Sheaf (D.obj (op i)).left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (φ : ∀ {i j : I} (f : i ⟶ j),\n      (((D.map f.op).left)^*[AddCommGrpCat.{v + 1}]).obj (F i) ⟶ F j)\n    (hφid : ∀ i : I, HEq (φ (𝟙 i))\n      ((upperStarId AddCommGrpCat.{v + 1} (D.obj (op i)).left).hom.app (F i)))\n    (hφcomp : ∀ {i j k : I} (f : i ⟶ j) (g : j ⟶ k), HEq (φ (f ≫ g))\n      ((upperStarComp AddCommGrpCat.{v + 1} (D.map g.op).left\n          (D.map f.op).left).hom.app (F i) ≫\n        (((D.map g.op).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ φ g))\n    (H : I ⥤ Sheaf c.pt.left.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eH : ∀ i : I, H.obj i ≅\n      (((c.π.app (op i)).left)^*[AddCommGrpCat.{v + 1}]).obj (F i))\n    (hH : ∀ {i j : I} (f : i ⟶ j), H.map f =\n      (eH i).hom ≫\n        (upperStarComp AddCommGrpCat.{v + 1} (c.π.app (op j)).left (D.map f.op).left\n          (c.π.app (op i)).left\n          (congrArg (fun t => t.left) (c.w f.op)).symm).hom.app (F i) ≫\n        (((c.π.app (op j)).left)^*[AddCommGrpCat.{v + 1}]).map (φ f) ≫ (eH j).inv)\n    [HasColimit H] (p : ℕ)\n    (K : I ⥤ Sheaf S.smallEtaleTopology AddCommGrpCat.{v + 1})\n    (eK : ∀ i : I, K.obj i ≅\n      (DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj\n        (R+(((D.obj (op i)).hom)_*[AddCommGrpCat.{v + 1}]).obj\n          ((DerivedCategory.Plus.singleFunctor _ 0).obj (F i))))\n    [HasColimit K]\n    (η : K ⟶ (Functor.const I).obj\n      ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj\n        (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj\n          ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H)))))\n    (hη : ∀ i : I, η.app i = (eK i).hom ≫\n      abelianHigherDirectImageMap (c.π.app (op i)).left (D.obj (op i)).hom c.pt.hom\n        (Over.w (c.π.app (op i))) p (F i) (colimit H)\n        ((eH i).inv ≫ colimit.ι H i)) (s : S) :\n    ∀ x : ((S.uliftPointSmallEtale s).sheafFiber (A := AddCommGrpCat.{v + 1})).obj\n      ((DerivedCategory.Plus.homologyFunctor _ (p : ℤ)).obj\n        (R+((c.pt.hom)_*[AddCommGrpCat.{v + 1}]).obj\n          ((DerivedCategory.Plus.singleFunctor _ 0).obj (colimit H)))),\n      ∃ (i : I)\n        (y : ((S.uliftPointSmallEtale s).sheafFiber\n          (A := AddCommGrpCat.{v + 1})).obj (K.obj i)),\n        (((S.uliftPointSmallEtale s).sheafFiber\n          (A := AddCommGrpCat.{v + 1})).map (η.app i)) y = x",
   "branch": "sheaf-dag",
-  "by": "U2",
-  "date": "2026-10-12",
-  "existing": false
+  "by": "U1",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Retired the duplicate Sheaf module in favor of the adopted source theorem. The source has the identical conclusion and all other binders; it omits only the unused hK hypothesis. The parent already imports this source theorem."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -124,14 +125,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "H1",
+  "reviewer": "C-b58ef",
+  "group": "U1",
   "result": "pass",
-  "landing": "20261012T070538-L-3471370",
+  "landing": "20261021T134553-L-1372516",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: node lean.statement vs source theorem signature in WeilConjectures.AlgebraicGeometry.HigherDirectImageLimitClassDescent (byte-identical); base vs delivered node (only lean record changed); importers of the withdrawn Sheaf module (none)"
  },
  "lean_audit": {}
 }
