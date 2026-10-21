@@ -17,6 +17,3 @@ L: the delivery could not be prepared for review: NOT MERGED def-weil-pbc-bounde
 
 L (re-issued by the launcher; the entry had been lost): very.py return N3 thm-cbc-finite-level-proetale E1 and 7b: the delivery adds a supplied compactification and quasi-compact open hypothesis, weakening the exact master theorem. The exact blueprint source is present but the report incorrectly says it is absent. The conditional proof checks out, but the target-level source defect must be resolved without silently weakening the target. Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## lem-weil-pbc-realization-scalar-functor (2026-10-21 04:07 UTC, branch head 2f2b6bfb4b)
-
-L: independent stage-2 immutable head 2f2b6bfb4b71: stage-2 checks: (c) lean.declarations names WeilConjectures.realizationAbSheafify, which the file does not declare and which neither Mathlib nor the source has | (c) lean.declarations names WeilConjectures.realizationAbBijective, which the file does not declare and which neither Mathlib nor the source has

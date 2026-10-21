@@ -373,5 +373,36 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-e18d721a7 (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes, statement byte-identical to the live base. I also read every cited statement and the Stacks sources 093X (sites-cohomology l.1962), 08FI (l.4314), 09XQ and its proof (etale-cohomology l.14023) and 0A45 with its proof (l.14072). Mechanical finding: Step 1 cited lem-per-etale-closed-sheaf-internal-adjunction, which is dropped (side-live route-pivot-dropped.txt line 1521, 2026-10-19 section). The delivery's note that only its exact-pushforward and support-adjunction clauses are used does not justify the citation: a reachable node may not cite a dropped id. It is a repairable citation fault, though. The item itself is not dropped, its citers (finite-coefficient-adjoint-comparisons, etale-kflat-support-comparison) are live, and it uses no Qbar_l, adic, middle t-structure, Gabber or alteration input. FIX: Step 1 is rewritten without the dropped node. Module i_* is exact by forgetting scalars (def-weil-sheaf-of-modules-category, def-weil-pbc-direct-image module clause) plus abelian exactness from lem-pur-etale-supported-kernel-adjunction. j^*i_*N=0 by direct computation of sections (N(∅)=0). Each module map i_*N→M factors uniquely through the supported kernel. Full faithfulness of abelian i_* (lem-kun-04ca, Stacks 04CA, live) plus faithfulness against μ_a then give the explicit bijection g↦ι q^{-1} i_*g. So the counit is the support inclusion, as the statement says; the original step could not get this formula from the cited abelian bijection, which states none. proof_deps is recomputed and tool_uses is updated (dropped entry removed, lem-kun-04ca added). The fixed 419-node closure contains no dropped id and no cycle. The remaining steps are correct: Step 2 uses Mod(A)-injectivity via 093X along the open monomorphism V×U→V, so rows are degreewise exact. Step 3 computes the total unbounded derived functors on K-injectives (070K). Steps 4–5 give K-injectivity by 08BJ, the derived adjunctions by the Hom chains, and the identification with lem-exc-closed-ambient's Ri^! via unique right adjoints. Step 6 is the 0152 triangle with natural δ, realizing lem-exc-closed-support-triangle. Step 7 is representative independence. Edge cases Z=∅, U=∅ and A=0 check. No duplicate: the pro-étale analogues have quasi-compact hypotheses, and the ordinary nodes are dropped or definitions only. No SGA. The generic tool_uses are accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleInjectiveSupportSequence",
+  "declaration": "AlgebraicGeometry.Etale.etale_injective_support_sequence",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleSupportInclusion",
+   "AlgebraicGeometry.Etale.etaleSupportRestriction",
+   "AlgebraicGeometry.Etale.etaleSupportSequence_zero",
+   "AlgebraicGeometry.Etale.etaleSupportSequence",
+   "AlgebraicGeometry.Etale.etaleSupportSequenceMap",
+   "AlgebraicGeometry.Etale.etaleSupportShriekComparison",
+   "AlgebraicGeometry.Etale.etaleSupportFirstComparison",
+   "AlgebraicGeometry.Etale.etaleSupportThirdComparison",
+   "AlgebraicGeometry.Etale.etale_injective_support_sequence",
+   "AlgebraicGeometry.Etale.etaleSupportSequence_boundary_naturality"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleInjectiveSupportSequence.lean",
+  "statement": "theorem etale_injective_support_sequence [Finite A] : ∃ δ : D(upperStar (ModuleCat.{u + 1} A) j) ⋙ R(lowerStar (ModuleCat.{u + 1} A) j) ⟶ ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint ⋙ R(lowerStar (ModuleCat.{u + 1} A) i)) ⋙ shiftFunctor (_root_.DerivedCategory (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A))) (1 : ℤ), (∀ L : _root_.DerivedCategory (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)), Triangle.mk ((Adjunction.ofIsLeftAdjoint (R(lowerStar (ModuleCat.{u + 1} A) i))).counit.app L) ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).unit.app L) (δ.app L) ∈ distTriang _) ∧ ∀ (I : CochainComplex (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) [I.IsKInjective] [∀ r : ℤ, Injective (I.X r)] (L : _root_.DerivedCategory (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A))) (e : _root_.DerivedCategory.Q.obj I ≅ L), ∃ (hS : (etaleSupportSequence A i j hij I).ShortExact) (hJ : CochainComplex.IsKInjective (((upperStar (ModuleCat.{u + 1} A) j).mapHomologicalComplex (.up ℤ)).obj I)) (t : _root_.DerivedCategory.triangleOfSES hS ≅ Triangle.mk ((Adjunction.ofIsLeftAdjoint (R(lowerStar (ModuleCat.{u + 1} A) i))).counit.app L) ((mapDerivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) j).unit.app L) (δ.app L)), t.hom.hom₁ = (etaleSupportFirstComparison A i j hij I).hom ≫ (R(lowerStar (ModuleCat.{u + 1} A) i)).map ((R(lowerStar (ModuleCat.{u + 1} A) i)).rightAdjoint.map e.hom) ∧ t.hom.hom₂ = e.hom ∧ t.hom.hom₃ = (etaleSupportThirdComparison A j I hJ).hom ≫ (R(lowerStar (ModuleCat.{u + 1} A) j)).map ((D(upperStar (ModuleCat.{u + 1} A) j)).map e.hom)",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Canonical module-valued support functor and both adjunctions are reused from the upstream closed-support construction. States the exact sequence, its natural SES boundary, and its counit/unit-normalized realization for every unbounded degreewise-injective K-injective representative and every representing isomorphism."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0098f2de6",
+  "group": "NM",
+  "result": "pass",
+  "note": "Clause-by-clause match. H_A = upstream closedUpperShriek; support inclusion = counit of lowerStarClosedUpperShriekAdjunction (inv closed unit ≫ kernel.ι). Module-level injectivity and K-injectivity; arbitrary L and e : Q I ≅ L. ShortExact gives degreewise exactness; etaleSupportSequenceMap and boundary naturality give chain-map naturality. Comparisons are canonical: rightDerivedFunctorObjQIso, plus rightAdjointUniq for Ri^!, plus mapDerivedCategoryFactors. Triangle iso from triangleOfSES to the counit/unit triangle of the lem-exc-closed-support-triangle dependency, with all components fixed; the squares hold by Adjunction.derived unit/counit on K-injectives. Edge cases Z, U, P empty, A = 0 and unbounded I are covered. No duplicate (pro-étale and restriction-triangle candidates differ); not on the dropped list. Statement verbatim; 10 declarations; width 98; sorry only in theorems; docstrings and imports follow the brief. nt_compile --json clean in 49.3 s (60 s limit). Advisories: compile time near limit; Second reading is a self-reread."
  }
 }

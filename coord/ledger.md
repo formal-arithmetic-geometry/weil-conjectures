@@ -20701,3 +20701,21 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T07:32:16Z L: superseded stage-1 delivery N5/def-trf-trace-class-source at 99b6ac9e643925c9cec963c233e33750c493d2af; current completion retained; packet archived at refs/superseded/N5/def-trf-trace-class-source/99b6ac9e643925c9cec963c233e33750c493d2af; stale return retired.
 - 2026-10-21T07:32:19Z L: superseded stage-1 delivery N8/lem-a1-mixed-direct-summand at d355a6659471de3c126545d2dffcd6a7801e1748; current completion retained; packet archived at refs/superseded/N8/lem-a1-mixed-direct-summand/d355a6659471de3c126545d2dffcd6a7801e1748; stale return retired.
 - 2026-10-21T07:32:23Z L: superseded stage-1 delivery Q21/def-per-perverse-subcategories at fc29ef2229e368e4a4cf67971b2d31c38df1ba0f; current completion retained; packet archived at refs/superseded/Q21/def-per-perverse-subcategories/fc29ef2229e368e4a4cf67971b2d31c38df1ba0f; stale return retired.
+- 07:32 L: merged deliver/NM/lem-pur-etale-injective-support-sequence (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/NF/lem-sfb-coherent-right-adjoint-comparisons (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/Q28/lem-sfb-shriek-coefficient-isomorphism (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/Q07/lem-sfb-coefficient-projection-square (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/NE/lem-sf-nilpotent-coefficient-direct-image-bound (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/ND/lem-coef-closed-adjunction-enriched-isomorphism (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/NH/lem-sfb-weak-serre-bounded-thick (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/Q50/lem-sfb-coextension-iso-evaluation-formula (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/NK/lem-sf-fixed-pair-adjunction-lift (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/O2/def-sfb-modobj-extend-restrict-adjunction (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/NC/lem-fix-scalar-completion-associator (stage 2; reviewer FIX; parallel immutable checks)
+- 07:32 L: merged deliver/N0/def-sfb-modobj-linearized-adjunction (stage 2; reviewer FIX; parallel immutable checks)
+- 07:32 L: merged deliver/NM/lem-sfb-exact-tensor-functor-derived-braiding (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/Q14/lem-sfb-finite-classical-localizing (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/O1/def-sfb-modobj-extension-along-iso (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/NX/lem-weil-pbc-realization-scalar-functor (stage 2; reviewer PASS; parallel immutable checks)
+- 07:32 L: merged deliver/Q35/lem-sp-etale-sum-coefficient-computation (stage 2; reviewer FIX; parallel immutable checks)
+- 07:32 L: merged deliver/Q40/lem-sfb-derived-exchange-exact-normalization (stage 2; reviewer PASS; parallel immutable checks)

@@ -314,5 +314,28 @@
   "group": "Q27",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-136e2690e (reviewer sub-agent of L); spot-checked: Zero-new-node split of the still-unsplit live item, which is not dropped, has no repair note and is not superseded. The statement and stmt_deps are byte-identical to live. I recomputed all 6 steps. (1) The transports satisfy the fixed-pair condition by naturality of e and b. (2) The unit-mate identity b_{LK}F(η_K)=R(a_K)η_{FK} follows from naturality of η and a plus the triangle identity, using the component formula of def-weil-pbc-adjunction-mate with L1=L2=L, horizontal F,G and α=e⁻¹; this matches the displayed b_M under the stated diagrammatic notation. (3) η_K is a fixed-pair map. (4) The transpose characterization ε_{GM}L(b_M)=G(ε_M)a_{RM} gives that ε_M is a fixed-pair map. (5) Naturality and triangles follow by faithfulness of the forgetful functor. (6) The natural Hom bijection is fed into the existing leaf lem-weil-pbc-adjunction-of-natural-bijection, giving carrier unit η and counit ε. All three cited nodes are Mathlib leaves and are in proof_deps. The proof agrees with the project's IsoAlgebraAdjunction.lean mapOfNatIsoAdjunction (lines 80-126). Edge cases checked: constant-singleton F,G that are not equivalences, Δ⊣× with non-invertible unit and counit, identity and empty categories. No SGA. No duplicates: the earlier Q37 and Q27 duplicate nodes are absent, and other grep hits are only Mathlib search strings. No fixes."
+ },
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction",
+  "declaration": "CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction",
+  "declarations": [
+   "CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction",
+   "CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction_unit_app_hom_f",
+   "CategoryTheory.Endofunctor.IsoAlgebra.mapOfNatIsoAdjunction_counit_app_hom_f"
+  ],
+  "statement": "def mapOfNatIsoAdjunction : mapOfNatIso eL ⊣ mapOfNatIso eR",
+  "branch": "slopmaster2",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing construction with all four category universes independent. The variables at lines 40–42 supply adj, eL, eR and the mate equality h; lines 86–105 construct the lifted adjunction, and the two listed lemmas at lines 108–115 identify its unit and counit carrier components. IsoAlgebra is definitionally the full subcategory in def-weil-endofunctor-fixed-pair-category.mathlib_match. No equivalence assumption is used (those begin only at line 150)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-76c604a55",
+  "group": "NK",
+  "result": "pass",
+  "note": "Existing attachment of IsoAlgebra.mapOfNatIsoAdjunction (+unit/counit hom_f lemmas); only lean record changed vs live. Probe compile clean (38.9 s): all 3 decls #check, axioms standard; IsoAlgebra F = dep mathlib_match full subcategory by rfl; mateEquiv component = node's b_M; transported strs = L(θ)∘e_K, R(ψ)∘b_M by rfl; unit/counit carriers literal η, ε. 4 independent universes, no equivalence/extra hypotheses; same decl already used by parent def-weil-common-stage-derived-direct-image. statement verbatim from def; branch slopmaster2 per convention (module in live olean build). Not dropped, no repair note. No findings."
  }
 }

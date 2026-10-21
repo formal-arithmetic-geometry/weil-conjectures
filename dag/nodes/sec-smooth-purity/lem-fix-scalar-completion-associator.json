@@ -288,5 +288,29 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-ba21a6bf3 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, with every cited statement. The item statement and stmt_deps are unchanged from side-live, and the item is still unsplit on live with no repair note, so this is a first split. There is no cycle, no merged or missing citation, and no SGA. Step 1: the finite-free comparison gives R->S->T; the DVR gives t_E=u t_L^e and t_L=z t_M^f; constant-completion flatness plus exact sheafification gives regularity and R/t^n=B_n; products are exact; so every hypothesis of finite-free-completion-exchange holds. Step 2: the balanced iso gives I_{L/E}=D_L C_a and chi=eta^L C_a; descent and well-definedness give representative independence. Step 3: the exchange unit equation eps C_b(eta^L)=eta^M. Steps 4-5: J is complete via chi_{M/E} and the C_{ba} completeness, and the L=E clause makes eta^M_J invertible. I recomputed a^I eta=d, d C_b(chi)=chi_{M/E} alpha and the naturality identity; the normalization is exact. Step 6: on complete inputs all three chi are invertible, so a^I is unique; the new node's augmentation clause keeps any cofinal variant of eps unit-compatible. Step 7: the pentagon and unit equations follow by cancelling the invertible threefold chi. New node lem-fix-cofinal-roos-restriction: telescoping gives b(1-s)=(1-s')a; block elimination with unitriangular blocks proves the quasi-isomorphism; composition and augmentation checked; tested on id, en, n+2 and n^2. It is a genuine generalization of the arithmetic-only lem-sp-strict-tower-arithmetic-restriction and lem-pur-compact-support-roos-cofinality and satisfies B1-B9. Off-unit tool uses (local-field DVR, constant completion, sheafification, kflat resolution, successive normalization, exchange and exchange-coherence) are generic and accepted. Advisory: exchange-coherence is cited but not needed. Maintainer note: lem-weil-integral-twist-scalar-coherence already defines a_C on D^b_c as transport by chi of tensor associativity, which overlaps the item (a pre-existing NY node); later citers should identify the two."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ScalarCompletionAssociator",
+  "declaration": "WeilConjectures.scalarCompletionAssociator",
+  "declarations": [
+   "WeilConjectures.ScalarCompletionAssociatorData",
+   "WeilConjectures.scalarCompletionAssociator"
+  ],
+  "file": "lean/Sheaf/Paper/ScalarCompletionAssociator.lean",
+  "statement": "theorem scalarCompletionAssociator (l : ℕ) [Fact l.Prime] (W : AlgebraicGeometry.Scheme.{t}) : Nonempty (ScalarCompletionAssociatorData.{t, u} l W)",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The auxiliary structure bundles this node's normalized ordinary and completed associators, representative formula, uniqueness, pentagon and units. Uses the published strict Roos functors and actual quotient-completion maps with independent site and coefficient universes; no constructibility or boundedness restriction.",
+  "fixed_by": "NT-stage2-cc-84deb687b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-84deb687b",
+  "group": "NC",
+  "result": "fix",
+  "note": "Substance correct. a^C (ordinary) pinned by ordinary_model (on every good P, a chain iso c⊗(b⊗x)↦cκ(b)⊗x plus the counit equation); a^I pinned by normalization (node equation in diagrammatic order) plus the uniqueness field, since χ is iso on complete inputs and C K is complete. preserves follows from the finite-free comparison dependency. unit is fixed by χ_{E/E}≫unit = ordinary multiplication. Pentagon and unit equations hold; left/right unit recomputed from normalization. No extra hypotheses; t and u independent; unbounded complexes; statement verbatim; only the item's lean record changed; not dropped; first stage-2 landing. Advisory: integralOperationsGoodComplex is owned by lem-pur-integral-operations-well-defined (not a stmt_dep) but is the conjunction of the cited kflat and flat predicates and is already used by the cited finite-free dependency. FIX is mechanical: at load 210-238 the delivered module timed out twice and was clean once at 56.9 s; fixes/ScalarCompletionAssociator.lean adds only set_option genInjectivity false and genSizeOfSpec false and compiles clean in 38-44 s back to back."
  }
 }

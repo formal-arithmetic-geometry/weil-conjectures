@@ -213,5 +213,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-9179cc376 (reviewer sub-agent of L); spot-checked: Read the item in full: the statement, all 5 steps, the statements of every cited node, and the blueprint main-20261015 sources (open-lower-shriek-adjunction proof, last sentence; coextension-along-iso and its proof; restrict-coextend-adjunction and its proof). Hypotheses cover restriction-equivalence (braided closed, (co)equalizers, colimit-preserving tensor, R commutative) and coextension (closed, equalizers). Coefficient categories and the orientation Coext_φ→Res_{φ^{-1}} match along-iso. The steps are correct. Step 1: the action cancellations give FH≅id with identity underlying maps. Step 2: the quasi-inverse-adjoint leaf keeps that counit. Step 3: the counit is ev∘(1⊗ι)∘(η⊗1)∘λ^{-1}. Step 4: the counit equation of the unique-right-adjoint leaf forces e_N = ε_N underneath. Step 5: the inverse Hom map at f=b_N gives v∘(1⊗δ)=β, so ι∘δ=β̂ and equalizer uniqueness gives δ=d. Small cases check: φ=id, N=0, and the swap on Z×Z where d(n)(a,b)=bn. No new nodes, no duplicate found, no cycle, no SGA. The declared tool use of def-sfb-modobj-restrict-coextend-adjunction is accepted. One fault (C3/C4 missing citation): the proof never tied its normalized adjunction and comparison to the comparison of def-sfb-modobj-coextension-along-iso that the statement names. FIX: step 2 now cites def-sfb-modobj-restriction-equivalence and along-iso (step 1's isos are the quasi-inverse data along-iso uses), step 4 cites along-iso (same adjunctions and counit equation), and proof_deps is updated.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CoextensionIsoEvaluationFormula",
+  "declaration": "CategoryTheory.Mod.coextendScalarsIsoComapInv_formula",
+  "file": "lean/Sheaf/CategoryTheory/CoextensionIsoEvaluationFormula.lean",
+  "statement": "theorem coextendScalarsIsoComapInv_formula {C : Type u} [Category.{v} C] [MonoidalCategory C] [SymmetricCategory C] [MonoidalClosed C] [HasEqualizers C] [HasCoequalizers C] [∀ X : C, PreservesColimits (tensorLeft X)] [∀ X : C, PreservesColimits (tensorRight X)] {R S : C} [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S] (φ : R ⟶ S) [IsMonHom φ] [IsIso φ] (N : Mod C R) : ((coextendScalarsIsoComapInv φ).hom.app N).hom = (λ_ (coextendScalarsObj φ N).X).inv ≫ η[S] ▷ (coextendScalarsObj φ N).X ≫ coextendEv φ N ∧ ((coextendScalarsIsoComapInv φ).inv.app N).hom ≫ coextendι φ N = MonoidalClosed.curry ((asIso φ).inv ▷ N.X ≫ γ[R,N.X]) ∧ ∀ d : N.X ⟶ (coextendScalarsObj φ N).X, d ≫ coextendι φ N = MonoidalClosed.curry ((asIso φ).inv ▷ N.X ≫ γ[R,N.X]) → d = ((coextendScalarsIsoComapInv φ).inv.app N).hom",
+  "branch": "newtargets-dag",
+  "by": "Q50",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-74d8e1f65",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Only the item's lean field differs from live; the 4 stmt_dep records are unchanged; no new nodes, no statement change; not dropped; no repair note. Lean renders every node clause: symmetric monoidal closed C, equalizers/coequalizers, PreservesColimits on both sides (u, v independent), commutative R and S, IsMonHom+IsIso phi, N : Mod C R; T_N = comap (asIso phi).inv with beta = inv ▷ N.X ≫ γ (comap_obj_smul is rfl); E_N, ι, v = S ◁ ι ≫ ev; e = the recorded canonical coextendScalarsIsoComapInv (rightAdjointUniq). Conjuncts: e = λ⁻¹ ≫ η▷E ≫ coextendEv; d ≫ ι = curry beta; uniqueness over all C-arrows d. S-linearity, inverse identities and naturality are carried by the natural iso. Statement field verbatim. Delivered file compiles clean via nt_compile --json (EXIT 0, 33.2 s). Full statement proved in a probe without sorry (EXIT 0, 51.6 s) via rightAdjointUniq_hom_app_counit, homEquiv_symm_rightAdjointUniq_hom_app, uncurry_coextendι and cancel_mono, so it is true with the right orientation. Docstrings carry source and blueprint tag plus the 5 proof steps; only sorry; no helpers; no duplicate. Advisories: the second-reading section is a self-check; the RingPresheaf import is redundant; coextend components are not in the change-of-scalars declarations list."
+ }
 }

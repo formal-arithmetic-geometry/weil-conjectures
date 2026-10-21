@@ -1,0 +1,108 @@
+{
+ "id": "def-sp-etale-kflat-realization",
+ "kind": "definition",
+ "title": "K-flatness in constant-module etale coordinates",
+ "status": "split",
+ "statement": "Let $T$ be a scheme [def-pc-scheme], $A$ a commutative ring, and $P$ a cochain complex of sheaves of $A$-modules on its small etale site [def-weil-pbc-etale-sheaves]. Let $A_T$ be the constant sheaf of rings [def-weil-pbc-constant-sheaf]. Apply degreewise the canonical constant-module realization from sheaves valued in $A$-modules to sheaves of modules over $A_T$. Define $\\operatorname{etaleKFlat}(T,A,P)$ to mean that this realized complex is K-flat in the independent-coefficient sense of [def-pc-kflat-complex]: its direct-sum total tensor with every acyclic $A_T$-module complex is acyclic. This is the existing constant-module coordinate expression of K-flatness, with no boundedness or finiteness assumption.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-etale-sheaves",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "sites-cohomology.tex Tag 06YN, definition of K-flat complexes; constant-module coordinates used in Tag 0GL6."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical proper direct image coefficient counit mate and termwise scalar extension acyclic complex comparison and open extension tensor isomorphism and K-flat realization on small etale sites",
+   "results": "{\"t\": \"2026-10-21T04:04:44Z\", \"tool\": \"leansearch\", \"query\": \"Canonical proper direct image coefficient counit mate and termwise scalar extension acyclic complex comparison and open extension tensor isomorphism and K-flat realization on small etale sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"CategoryTheory.Functor.IsDenseSubsite.instIsIsoSheafAppCounitSheafAdjunctionCocontinuous\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"CategoryTheory.Equivalence.sheafCongr.counitIso\", \"AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction\"], \"digest\": \"86031de9579b137d\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions found by source grep; Mathlib supplies only general ingredients."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Functor",
+   "results": "{\"t\": \"2026-10-21T04:04:45Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, CategoryTheory.Functor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.isTerminalTerminal\", \"CategoryTheory.sheafToPresheaf\", \"CategoryTheory.fullyFaithfulSheafToPresheaf\", \"CategoryTheory.sheafSections\", \"CategoryTheory.sheafOver_obj\", \"CategoryTheory.Sheaf.isTerminalOfEqTop\", \"CategoryTheory.Sheaf.homEquiv\", \"CategoryTheory.Sheaf.isTerminalOfBotCover\"], \"digest\": \"f1d0c7742240309d\"}",
+   "date": "2026-10-21",
+   "verdict": "Existing project definitions found by source grep; Mathlib supplies only general ingredients."
+  },
+  {
+   "tool": "grep",
+   "query": "properCoefficientMap|coefficientExtendedComplex|properAcyclicComparison|etaleKFlat|properOpenCoefficientOpenIso",
+   "results": "{\"t\": \"2026-10-21T04:04:43Z\", \"tool\": \"grep\", \"query\": \"properCoefficientMap|coefficientExtendedComplex|properAcyclicComparison|etaleKFlat|properOpenCoefficientOpenIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib declaration with these names; reuse the existing project declarations."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n properCoefficientMap|coefficientExtendedComplex|properAcyclicComparison|etaleKFlat|properOpenCoefficientOpenIso lean/WeilConjectures lean/Sheaf; grep -rl on dag/nodes; blueprint_refs.py search proper coefficient, K-flat, acyclic-complex, open tensor, coefficient model",
+   "results": "No matching names in WeilConjectures. Sheaf definitions are in AcyclicFlatProperCoefficientModel.lean:69,75,83; EtaleOpenTensorDefs.lean:77; ProperOpenCoefficientRefinement.lean:118. Existing DAG records are theorem records, not definition owners; blueprint searches have no definition of these exact coordinate constructions. def-sp-varying-ring-proper-open-arrows concerns geometric varying-ring square mates, a different construction.",
+   "date": "2026-10-21",
+   "verdict": "Existing definitions reused; no definition node owns these five constructions."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-etale-sum-coefficient-computation",
+  "date": "2026-10-21",
+  "group": "Q35"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: summation over etale fibres commutes with coefficients; canonical bounded-model constructions used by the sheetwise computation.",
+   "via": [
+    "lem-sp-etale-sum-coefficient-computation",
+    "lem-sp-et-proet-coefficient-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.SixFunctors.EtaleOpenTensorDefs",
+  "declaration": "AlgebraicGeometry.Etale.etaleKFlat",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleKFlat"
+  ],
+  "statement": "abbrev etaleKFlat (T : Scheme.{u}) (A : Type (u + 1)) [CommRing A]\n    (P : CochainComplex (Sheaf T.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership only: reuse etaleKFlat at lines 77-81, exactly IsKFlatIndependentCoefficients after Scheme.etaleSumFlatComplexRealization. No use of openScalarRestrictionMap_isIso or of the flatness-preservation theorem is needed to define this predicate."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aff79c245",
+  "group": "Q35",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aff79c245",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Re-delivery after the H2 RETURN of faee664b82df. The Lean is byte-identical (sha 311836b0) and its substance was re-checked: hypotheses, every conclusion clause, edge cases, universes and docstrings are correct. Against live, the item differs only in lean and stmt_deps. stmt_deps adds only definition nodes (def-f7 graph map plus three new existing:true nodes); the three theorem nodes are in proof_deps only. The record statement is verbatim and the file has 1 sorry. nt_compile --json: exit 0, 45.7 s at load ~200, no errors or warnings. def-sp-proper-coefficient-model-maps and def-sp-etale-kflat-realization are correct: check_existing and check_record clean, TeX matches the Lean, no cycle. F1 (H4): def-sp-open-coefficient-unit-iso re-owned and re-defined properOpenCoefficientPullbackIso and properOpenCoefficientOpenInverse, already owned by the landed definition node def-pur-open-coefficient-normalizations. FIX: whole-node fixes/def-sp-open-coefficient-unit-iso.json. It now owns only properOpenCoefficientOpenIso and the proved properOpenCoefficientOpenInverse_isIso, cites def-pur-open-coefficient-normalizations for the inverse map, and its citations equal its stmt_deps; checks clean. The item and all Lean are unchanged. Advisory: scalarMate and etaleSumFlatComplexRealization are declared only by theorem nodes (base-era)."
+ }
+}

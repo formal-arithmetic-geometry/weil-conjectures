@@ -208,5 +208,23 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-change-of-scalars",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.MapMod",
+  "declaration": "CategoryTheory.Mod.extendScalarsIsoComapInv",
+  "statement": "noncomputable def extendScalarsIsoComapInv : extendScalars φ ≅ comap (asIso φ).inv",
+  "branch": "slopmaster2",
+  "by": "O1",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream comparison, read locally and confirmed from the live server with scompile.py --source. It compares the recorded Mod.extendScalars φ with Mod.comap (asIso φ).inv, using (extendRestrictAdjunction φ).leftAdjointUniq (comapEquivalenceOfIsIso φ).symm.toAdjunction. Its type specializes to every hypothesis of the node; unused closedness and equalizers are omitted by Lean. No replacement definition, dependency repair or statement correction is needed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a51e73358",
+  "group": "O1",
+  "result": "pass",
+  "note": "existing:true attachment of def-sfb-modobj-extension-along-iso to CategoryTheory.Mod.extendScalarsIsoComapInv (MapMod.lean:175); only the item lean field changes vs live and the dep records are identical to live. Clause check: braided, HasCoequalizers, PreservesColimitsOfSize.{0,0} tensorLeft/Right (weaker than the node, same as the landed extendScalars record), closed and equalizers unused and omitted, IsCommMonObj only on R, IsMonHom+IsIso phi; source = recorded Mod.extendScalars, target = Mod.comap (asIso phi).inv = (comapEquivalenceOfIsIso phi).inverse by rfl; a genuine natural iso via leftAdjointUniq of extendRestrictAdjunction and the symm equivalence's toAdjunction, matching the node's proof; independent universes. No other node owns the declaration; not dropped. nt_compile --json probe (#check, axioms = propext/choice/Quot.sound, instantiation under all node hypotheses, rfl inverse check): EXIT 0, 10.8 s. Advisory: the Second reading section states no worker second reading took place."
+ }
 }

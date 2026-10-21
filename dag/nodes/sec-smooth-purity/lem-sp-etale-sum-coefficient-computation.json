@@ -20,7 +20,11 @@
   "def-pc-scheme",
   "def-weil-pbc-noetherian-ring",
   "def-pc-flat-sheaf-modules",
-  "def-pc-kflat-complex"
+  "def-pc-kflat-complex",
+  "def-f7-etale-compactification-graph-map",
+  "def-sp-proper-coefficient-model-maps",
+  "def-sp-etale-kflat-realization",
+  "def-sp-open-coefficient-unit-iso"
  ],
  "proof": [
   {
@@ -242,5 +246,35 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-91e779983 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and every cited statement in full. The item was unsplit with no proof, and there is no repair note. Statement and stmt_deps are unchanged, and the delivery creates no new nodes. The cited statements and their hypotheses match each use. Step 1: applying lem-asd-etale-compact-support-normalization (finite, hence torsion, A and B; u separated, etale, finite type, Noetherian) to M[0] gives the vanishing of the higher direct images and the degree-0 sheet identification. W is Noetherian by the finite-type lemma, since r is proper. Step 2: flatness comes from lem-coef-etale-open-tensor and lem-pur-etale-sum-flat-kflat through the degree-0 isomorphism. K-flatness comes from lem-pc-bounded-above-flat-kflat-site. Step 3: every hypothesis of lem-sp-acyclic-flat-proper-coefficient-model holds. The B-side acyclicity uses the ordinary projection formula with T=B_W. The model identifies the named transpose q_r itself, not an arbitrary isomorphism. Step 4: the generator computation z⊗b -> z⊗r^{-1}b -> (x_s⊗b)_s is correct, and local generation via sheafification is justified. Step 5: the differential carries no Koszul sign. I checked the cases of empty sheets, P=0, B=0, A=B, and non-flat Z/4->Z/2. Minor unstated point, not a fault: the derived q_{j,P} equals the ordinary isomorphism on K-flat models because j_! is fully faithful and both restrict to the identity on U. Sources: Stacks more-etale 0GL6 and the main-20261015 sk-lem-sp-reduction-exceptional Charts paragraph (l.20-28) both match. No SGA. No cycle (the closure DFS does not reach the item), and no duplicate in the DAG. The parent's step 4 uses exactly this formula. Accepted tool_uses: lem-asd-etale-compact-support-normalization, lem-coef-etale-open-tensor, lem-pc-bounded-above-flat-kflat-site, and lem-weil-pbc-finite-type-over-noetherian (a Mathlib leaf)."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.EtaleSumCoefficientComputation",
+  "declaration": "AlgebraicGeometry.Etale.etaleSumCoefficientComputation",
+  "declarations": [
+   "AlgebraicGeometry.Etale.compactifiedEtaleOpenComplex",
+   "AlgebraicGeometry.Etale.compactifiedEtaleDirectComplex",
+   "AlgebraicGeometry.Etale.etaleSumCompactifiedComplexMap",
+   "AlgebraicGeometry.Etale.etaleSumCompactifiedModelBoundary",
+   "AlgebraicGeometry.Etale.etaleSumScalarSheafIso",
+   "AlgebraicGeometry.Etale.etaleSumScalarComplexMap",
+   "AlgebraicGeometry.Etale.etaleSumSheetMap",
+   "AlgebraicGeometry.Etale.etaleScalarPureTensor",
+   "AlgebraicGeometry.Etale.etaleSumCoefficientComputation"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleSumCoefficientComputation.lean",
+  "statement": "theorem etaleSumCoefficientComputation {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {U V : Scheme.{u}} (e : U ⟶ V) [Etale e] [IsSeparated e] [LocallyOfFiniteType e] [QuasiCompact e] [IsNoetherian U] [IsNoetherian V] (c : Compactification e) (P : CochainComplex (Sheaf U.smallEtaleTopology (ModuleCat.{u + 1} A)) ℤ) (hbounded : ∃ a b : ℤ, ∀ n : ℤ, n < a ∨ b < n → IsZero (P.X n)) (hflat : ∀ n : ℤ, exactFunctor _ _ (MonoidalCategory.tensorRight (P.X n))) : (∀ n : ℤ, exactFunctor _ _ (MonoidalCategory.tensorRight ((compactifiedEtaleOpenComplex A c P).X n))) ∧ (∀ n : ℤ, exactFunctor _ _ (MonoidalCategory.tensorRight ((compactifiedEtaleDirectComplex A c P).X n))) ∧ etaleKFlat c.Z A (compactifiedEtaleOpenComplex A c P) ∧ etaleKFlat V A (compactifiedEtaleDirectComplex A c P) ∧ (∀ (n : ℤ) (q : ℕ), 0 < q → IsZero ((DerivedCategory.homologyFunctor (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} A)) (q : ℤ)).obj ((rightDerivedLowerStar (ModuleCat.{u + 1} A) c.g).obj ((DerivedCategory.singleFunctor (Sheaf c.Z.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj ((compactifiedEtaleOpenComplex A c P).X n))))) ∧ (∀ (n : ℤ) (q : ℕ), 0 < q → IsZero ((DerivedCategory.homologyFunctor (Sheaf V.smallEtaleTopology (ModuleCat.{u + 1} B)) (q : ℤ)).obj ((rightDerivedLowerStar (ModuleCat.{u + 1} B) c.g).obj ((DerivedCategory.singleFunctor (Sheaf c.Z.smallEtaleTopology (ModuleCat.{u + 1} B)) 0).obj ((compactifiedEtaleOpenComplex B c (coefficientExtendedComplex φ U P)).X n))))) ∧ IsIso (properAcyclicComparison A c.g (compactifiedEtaleOpenComplex A c P)) ∧ IsIso (properAcyclicComparison B c.g (compactifiedEtaleOpenComplex B c (coefficientExtendedComplex φ U P))) ∧ IsIso (etaleSumCompactifiedComplexMap A e c P) ∧ IsIso (etaleSumCompactifiedComplexMap B e c (coefficientExtendedComplex φ U P)) ∧ IsIso (scalarExtensionRepresentative φ U P) ∧ IsIso (scalarExtensionRepresentative φ V (((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapHomologicalComplex (.up ℤ)).obj P)) ∧ ((scalarExtension φ V).map (etaleSumCompactifiedModelBoundary A e c P) ≫ (properCoefficientMap φ c.g).app ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategory.obj (DerivedCategory.Q.obj P)) ≫ (rightDerivedLowerStar (ModuleCat.{u + 1} B) c.g).map (properOpenCoefficientOpenIso φ c.i (DerivedCategory.Q.obj P)).hom ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} B) c).map (scalarExtensionRepresentative φ U P) = scalarExtensionRepresentative φ V (((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).mapHomologicalComplex (.up ℤ)).obj P) ≫ DerivedCategory.Q.map (etaleSumScalarComplexMap φ e P) ≫ etaleSumCompactifiedModelBoundary B e c (coefficientExtendedComplex φ U P)) ∧ (∀ (n : ℤ) (S : U.Etale) (x : (P.X n).obj.obj (Opposite.op S)) (b : B), (((etaleSumScalarSheafIso φ e).hom.app (P.X n)).hom.app (Opposite.op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj S))).hom (etaleScalarPureTensor φ V ((etaleLowerShriek (ModuleCat.{u + 1} A) e inferInstance).obj (P.X n)) (Opposite.op ((MorphismProperty.Over.map ⊤ (inferInstance : Etale e)).obj S)) ((etaleSumSheetMap A e (P.X n) S).hom x) b) = (etaleSumSheetMap B e ((ProEtale.etaleSheafExtendScalars φ U).obj (P.X n)) S).hom (etaleScalarPureTensor φ U (P.X n) (Opposite.op S) x b))",
+  "branch": "newtargets-dag",
+  "by": "Q35",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The graph-to-compactification map, derived units and exact open localization factors specify the model boundaries. The displayed equality computes the actual proper coefficient counit mate followed by the normalized open tensor isomorphism. A separate conjunct gives the same-sheet pure-tensor rule at every degree and etale test object. All eight auxiliary declarations construct these maps or abbreviate the named models; none chooses an arbitrary map or contains sorry."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aff79c245",
+  "group": "Q35",
+  "result": "fix",
+  "note": "Re-delivery after the H2 RETURN of faee664b82df. The Lean is byte-identical (sha 311836b0) and its substance was re-checked: hypotheses, every conclusion clause, edge cases, universes and docstrings are correct. Against live, the item differs only in lean and stmt_deps. stmt_deps adds only definition nodes (def-f7 graph map plus three new existing:true nodes); the three theorem nodes are in proof_deps only. The record statement is verbatim and the file has 1 sorry. nt_compile --json: exit 0, 45.7 s at load ~200, no errors or warnings. def-sp-proper-coefficient-model-maps and def-sp-etale-kflat-realization are correct: check_existing and check_record clean, TeX matches the Lean, no cycle. F1 (H4): def-sp-open-coefficient-unit-iso re-owned and re-defined properOpenCoefficientPullbackIso and properOpenCoefficientOpenInverse, already owned by the landed definition node def-pur-open-coefficient-normalizations. FIX: whole-node fixes/def-sp-open-coefficient-unit-iso.json. It now owns only properOpenCoefficientOpenIso and the proved properOpenCoefficientOpenInverse_isIso, cites def-pur-open-coefficient-normalizations for the inverse map, and its citations equal its stmt_deps; checks clean. The item and all Lean are unchanged. Advisory: scalarMate and etaleSumFlatComplexRealization are declared only by theorem nodes (base-era)."
+ }
 }

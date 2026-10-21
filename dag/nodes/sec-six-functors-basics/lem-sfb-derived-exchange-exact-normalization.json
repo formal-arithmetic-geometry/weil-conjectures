@@ -287,5 +287,32 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-25c5df0a7 (reviewer sub-agent of L); spot-checked: I read the item in full, its empty-proof base (sha 334d9fba), its parent det-thm-sfb-proper-base-change-rational (whose steps 4 and 6 cite it), the parent's re-split note, the unit sk-thm-sfb-proper-base-change and chapter, main-20261015 rational proof paragraph (3), Stacks derived.tex 015F/014X/05SE/0DVC/09T5 (labels checked) and the statement of all 9 stmt_deps and 17 proof_deps. I also read the published UpperLowerStar.lean:205-247, read-only. Mechanical checks: the item and its cited nodes are not in the drop list, there is no SGA, no cycle, and proof_deps equals the union of uses. The closure diff against the parent adds only the generic lem-sp-canonical-right-derived-adjunction-shift. The declared tool_uses are generic derived-category tools, accepted. There are no new nodes and I found no duplicate. Statement: the only change makes explicit that the Dbc categories must be full triangulated subcategories. The previous sentence already assumed this, so nothing is weakened. The square-zero counterexample is correct, and the parent's E/Qlbar use is unaffected. Steps 3-7 are correct: theta matches theta_sq, the counit identity checks by type with the triangle identity, the composition/whiskering rules (i)-(iv) apply, the connecting square matches TR3, and step 7 is the same formula as det-def-sfb-base-change-morphism-bc under fullness. Two repairable faults, fixed in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-derived-exchange-exact-normalization.json. (1) C1/E5, step 2: lem-sp-canonical-right-derived-adjunction-shift is stated for D(u^*)⊣R(u_*), but the specified adjunction is derivedAdjunction on the K-flat Lu^*. The transfer between them was only asserted. I wrote out the argument, citing lem-sc-derived-adjunction-from-underived: from alpha^D∘cQ=alpha^P and beta invertible on K-injectives, eps^P=eps^D∘cG_u, so the specified adjunction is the transport along the shift-compatible c. (2) C1, step 1: the additivity of the pushforward is now cited to def-sfb-module-lower-star. proof_deps was recomputed (19 ids); the statement and all other fields are unchanged. Full checks are in review.md.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.DerivedExchangeExactNormalization",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedExchange_exact_normalization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedPullbackCommShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedPushforwardCommShift",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedPullbackSquareComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedExchange",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedExchange_exact_normalization",
+   "AlgebraicGeometry.ProEtale.CondensedRing.moduleObjectDerivedExchange_fullSubcategory",
+   "AlgebraicGeometry.ProEtale.CondensedRing.boundedConstructibleBaseChangeOfPreserves_app_eq_moduleObjectDerivedExchange"
+  ],
+  "file": "lean/Sheaf/Paper/DerivedExchangeExactNormalization.lean",
+  "statement": "theorem moduleObjectDerivedExchange_exact_normalization : (∀ K, (moduleObjectDerivedPullback Λ p'.left).map ((moduleObjectDerivedExchange Λ ((Over.forget _).map_commSq sq)).app K) ≫ (derivedUpperStarLowerStarAdjunction Λ p'.left).counit.app ((moduleObjectDerivedPullback Λ g'.left).obj K) = (moduleObjectDerivedPullbackSquareComparison Λ ((Over.forget _).map_commSq sq)).hom.app ((moduleObjectDerivedPushforward Λ p.left).obj K) ≫ (moduleObjectDerivedPullback Λ g'.left).map ((derivedUpperStarLowerStarAdjunction Λ p.left).counit.app K)) ∧ (moduleObjectDerivedPushforward Λ p.left ⋙ moduleObjectDerivedPullback Λ g.left).IsTriangulated ∧ (moduleObjectDerivedPullback Λ g'.left ⋙ moduleObjectDerivedPushforward Λ p'.left).IsTriangulated ∧ NatTrans.CommShift (moduleObjectDerivedExchange Λ ((Over.forget _).map_commSq sq)) ℤ ∧ (∀ T, T ∈ distTriang _ → ∃ b : (moduleObjectDerivedPushforward Λ p.left ⋙ moduleObjectDerivedPullback Λ g.left).mapTriangle.obj T ⟶ (moduleObjectDerivedPullback Λ g'.left ⋙ moduleObjectDerivedPushforward Λ p'.left).mapTriangle.obj T, b.hom₁ = (moduleObjectDerivedExchange Λ ((Over.forget _).map_commSq sq)).app T.obj₁ ∧ b.hom₂ = (moduleObjectDerivedExchange Λ ((Over.forget _).map_commSq sq)).app T.obj₂ ∧ b.hom₃ = (moduleObjectDerivedExchange Λ ((Over.forget _).map_commSq sq)).app T.obj₃)",
+  "branch": "sheaf-dag",
+  "by": "Q40",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-d99234d71",
+  "group": "Q40",
+  "result": "pass",
+  "note": "I checked every clause against the node. B is mateEquiv of θ over derivedUpperStarLowerStarAdjunction; θ = inverse compositor(p',g), then eqToIso(sq.w), then compositor(g',p); both have the right orientation. The counit identity matches exactly in Lean's left-to-right order. Both composites are IsTriangulated with the canonical shifts: the pullback's is ofIso from the termwise D(u^*), with no competing global instance, and the pushforward's is the existing K-injective instance. NatTrans.CommShift B ℤ is stated, and every distinguished triangle gets a triangle morphism whose components are B. The restriction theorem has four IsTriangulated subcategories, the six preservation hypotheses in the right directions, liftFullSubcategoryAdjunction of the ambient adjunctions, and θ pinned componentwise. The Dbc theorem ties B to boundedConstructibleBaseChangeOfPreserves; its hθ holds by construction. Setting, coefficients and universes are faithful, with no cartesian assumption. The only change to the node is lean. nt_compile --json: a 60 s timeout at load ~210, then clean in 53.5 s at load ~203. Advisory: seven unused private proof-dep imports; stale BLOCKED narrative in the report; the compile is near the 60 s limit, so retry landing at lower load if it times out."
+ }
 }

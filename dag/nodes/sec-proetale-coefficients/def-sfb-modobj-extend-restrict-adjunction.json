@@ -245,5 +245,32 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-change-of-scalars",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars",
+  "declaration": "CategoryTheory.Mod.extendRestrictAdjunction",
+  "declarations": [
+   "CategoryTheory.Mod.extendUnitHom",
+   "CategoryTheory.Mod.smul_extendUnitHom",
+   "CategoryTheory.Mod.whiskerLeft_extendUnitHom_smul",
+   "CategoryTheory.Mod.extendUnit",
+   "CategoryTheory.Mod.extendUnit_hom",
+   "CategoryTheory.Mod.extendHom",
+   "CategoryTheory.Mod.extendHomEquiv"
+  ],
+  "statement": "noncomputable def extendRestrictAdjunction : extendScalars φ ⊣ comap φ",
+  "branch": "slopmaster2",
+  "by": "O2",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream construction, read locally and confirmed with scompile.py --source in the live repository. Uses precisely Mod.extendScalars from def-sfb-modobj-extension and Mathlib Mod.comap from def-sfb-modobj-restriction. Mod.extendUnitHom is the specified inverse left unitor, tensor of the S-unit with M, and coequalizer projection; Mod.extendUnit bundles its R-linearity. Mod.extendHomEquiv has forward map g ↦ extendUnit φ M ≫ (comap φ).map g, inverse extendHom φ, and both inverse laws. extendRestrictAdjunction is Adjunction.mkOfHomEquiv of those very equivalences with both naturality laws. It therefore provides the specified unit and natural bijection, not merely an unspecified adjunction. The arbitrary object and morphism universes remain independent, only R is commutative, and no closedness or additivity hypothesis is imposed. The small-colimit preservation hypotheses are identical to those of the recorded extension functor; the node inherits those interfaces."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e908e2f2",
+  "group": "O2",
+  "result": "pass",
+  "note": "existing:true binding of def-sfb-modobj-extend-restrict-adjunction to CategoryTheory.Mod.extendRestrictAdjunction (ModuleObjects/ExtendScalars.lean); only the lean field differs from live; not dropped. Clauses match: extendUnitHom = λ⁻¹ ≫ η▷M ≫ extendπ (rfl), extendUnit is R-linear into comap φ of the extension, homEquiv = extendUnit ≫ comap.map g (proved), unit.app = extendUnit (proved), naturality via mkOfHomEquiv. Hypotheses identical to the landed extendScalars record (PreservesColimitsOfSize.{0,0} is weaker), only R commutative, independent universes. Consistent with parent sk-def-sfb-change-of-scalars; no duplicate definition. nt_compile --json probe with #check of all 8 declarations and 3 identities: EXIT 0, 39.5 s. Advisory: noncomputable prefix in lean.statement."
+ }
 }

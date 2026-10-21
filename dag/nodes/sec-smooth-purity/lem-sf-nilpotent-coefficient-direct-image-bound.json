@@ -251,5 +251,23 @@
   "group": "Q23",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-c86f33450 (reviewer sub-agent of L); spot-checked: This is a one-level split with no new nodes and no fixes. The statement and stmt_deps are unchanged from NU's creation of the node (compared with the run NU__lem-sf-integral-direct-image-constructible__3de9538c105b, where the proof was empty). There is no repair note, so the 2026-10-21 re-split rule does not apply. The statement is the standard nilpotent dévissage and is true; I tested t=1, Z/p^n with (p), k[ε], N<0 (q=0 included), the zero ring and empty X. Step 1: the annihilator subsheaves M_j are R_X-submodules with M_0=0 and M_t=M (correct). Step 2: the sheaf cokernel Q_j is killed by I through r(as)=(ra)s, so it is an (R/I)_X-module whose restriction to R is the original structure (correct). Step 3: every hypothesis of lem-sbc-coefficient-higher-direct-image-zero holds (same universe, f qcqs, S=R/I module sheaf), and its 'vanishes iff' statement is used exactly. Step 4: lem-weil-pbc-derived-functor-long-exact has its hypotheses supplied by enough-injectives and module-direct-image-left-exact; its R^n v by injective resolutions agrees with R^q f_* in the 'Module sheaves' paragraph of def-weil-pbc-direct-image. I read the source, Stacks derived.tex Tag 015B (label at line 7048). Step 5: induction at fixed q, so N is never enlarged. Bhatt–Scholze 6.5.11 (local PDF) is cited only as motivation, which is accurate. There is no proof cycle (388-node closure without the item) and no SGA. Duplicate grep over dag/nodes found no node with this statement. The four generic tool_uses are declared and accepted."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NilpotentCoefficientDirectImageBound",
+  "declaration": "AlgebraicGeometry.Etale.isZero_higherDirectImage_of_nilpotent_quotient_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/NilpotentCoefficientDirectImageBound.lean",
+  "statement": "theorem isZero_higherDirectImage_of_nilpotent_quotient_bound {X Y : Scheme.{u}} (f : X ⟶ Y) [QuasiCompact f] [QuasiSeparated f] (R : Type (u + 1)) [CommRing R] (I : Ideal R) (t : ℕ) (ht : 1 ≤ t) (hI : I ^ t = ⊥) (N : ℤ) (hN : ∀ (Q : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (R ⧸ I))) (q : ℤ), 0 ≤ q → N < q → IsZero (higherDirectImage (R ⧸ I) f q Q)) : ∀ (M : Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} R)) (q : ℤ), 0 ≤ q → N < q → IsZero (higherDirectImage R f q M)",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4a177a46e",
+  "group": "NE",
+  "result": "pass",
+  "note": "Only the lean field changed vs live; the statement is verbatim in the file. Item not on the route-pivot dropped list. Every clause matches the node: qcqs f, R : Type (u+1) CommRing, I with I^t=⊥ and 1≤t, all N : ℤ, ∀Q/∀M and ∀q≥0 with q>N, IsZero of higherDirectImage (H^q of R+ lowerStar of F[0]). The u+1 coefficient convention matches higherDirectImage, the coefficient-change proof dep and the def-weil-pbc-etale-sheaves encoding; no extra hypotheses. Edge cases t=1, N<0 (q=0), zero ring, empty X/Y covered. No definitions; proof is sorry; source and blueprint docstrings with the 5 proof steps. Imports follow the convention (public for stmt_deps, plain for proof_deps). No duplicate in side-live lean (only cyclic constant-sheaf results). nt_compile --json clean in 35.9 s, exit 0."
  }
 }

@@ -181,5 +181,28 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-def-sfb-transport",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula",
+  "declaration": "CategoryTheory.Functor.ProjectionFormula.mapModAdjunction",
+  "declarations": [
+   "CategoryTheory.Functor.ProjectionFormula.mapModAdjunction",
+   "CategoryTheory.Functor.ProjectionFormula.smul_comp_eq_iff"
+  ],
+  "statement": "def mapModAdjunction : pf.mapModLeft B ⊣ pf.mapModRight adj B",
+  "branch": "slopmaster2",
+  "by": "N0",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing upstream construction, ProjectionFormula.lean:456–487, also confirmed with scompile.py --source against the live server. The enclosing context has independent object and morphism universes for arbitrary monoidal C and D, strong monoidal S : D ⥤ C, P : C ⥤ D, pf : S.ProjectionFormula P, G : D ⥤ C, adj : P ⊣ G, and B : D with MonObj B. smul_comp_eq_iff is precisely the equivalence of the two linearity conditions; mapModAdjunction uses adj.homEquiv and its inverse on underlying maps and inherits both naturality equations. Its left and right functors are exactly the dependency declarations mapModLeft and mapModRight. No new module or statement correction. The slopmaster2 branch label follows the existing WeilConjectures-record convention for this live published module.",
+  "fixed_by": "NT-stage2-cc-94e9912dd"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-94e9912dd",
+  "group": "N0",
+  "result": "fix",
+  "note": "Existing-only delivery: item lean record → ProjectionFormula.mapModAdjunction (+smul_comp_eq_iff), WeilConjectures.CategoryTheory.ModuleObjects.ProjectionFormula:454-487. It is exactly the node: arbitrary monoidal C, D (4 independent universes), strong monoidal S, projection formula pf, adj : P ⊣ G, MonObj B; left/right functors are the recorded dep decls mapModLeft/mapModRight; the hom-bijection is adj.homEquiv restricted via smul_comp_eq_iff, with naturality from adj; no extra hypotheses, no sorry (axioms propext/choice/Quot.sound). #check compile clean in 27.6 s. No duplicate (MapMod Adjunction.mapModAdjunction is a different node). check_existing only noted the `noncomputable` in lean.statement → FIX via fixes/def-sfb-modobj-linearized-adjunction.lean-record.json trimming it; refit_record/check_existing/check_record clean."
+ }
 }

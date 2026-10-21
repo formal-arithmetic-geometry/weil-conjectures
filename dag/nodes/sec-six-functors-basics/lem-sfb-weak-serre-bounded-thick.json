@@ -288,5 +288,23 @@
   "group": "Q62",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q62-79c052150 (reviewer sub-agent of L); spot-checked: I read the whole item: statement byte-identical to base, five steps, no new nodes. It is not in a dropped list and there is no re-split repair note. Step 1: the finite-interval condition matches def-weil-pbc-bounded-derived-subcategories (only finitely many nonzero H^n), so S = D_B ∩ D^b. Step 2: the hypotheses of lem-sbc-cohomology-in-weak-serre-subcategory match the item's word for word (strictly full, zero, kernels and cokernels, extensions), and its D^b-intersection clause makes S triangulated. Strict fullness of D_B and of D^b supplies the closure under isomorphism that def-weil-triangulated-subcategory only gives up to iso; rotation plus shift closure gives every vertex. Checked against Stacks derived.tex:5935-5960 (Tag 06UQ, bounded versions, direct-summand argument) and homology.tex:2149 (Tag 0754). Step 3: q = 1 − IR, qI = 0, u = I(Ru), uniqueness from v = RIv; this is the full kernel universal property. Tested L = K, L = 0 and a split projection. Step 4: q is an endomorphism of M ∈ B, so kernel closure and strict fullness give H^n(L) ∈ B; M = 0 forces 1_N = 0, so the same interval bounds L. Step 5 matches pur9-def-thick (summands are retracts). The declared tool use of lem-sbc-cohomology-in-weak-serre-subcategory, a generic theorem from another unit with empty proof_deps and no cycle, is accepted. No duplicate found in the DAG (the det-pe and fp-local-models Serre nodes are specific abelian-level facts). The statement gives what the Thick step of det-brown-hypotheses-small needs. No SGA source. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.WeakSerreBoundedThick",
+  "declaration": "CategoryTheory.weakSerre_bounded_homology_thick",
+  "file": "lean/Sheaf/CategoryTheory/WeakSerreBoundedThick.lean",
+  "statement": "lemma weakSerre_bounded_homology_thick {A : Type u} [Category.{v} A] [Abelian A] [HasDerivedCategory.{w} A] (P : ObjectProperty A) [P.ContainsZero] [P.IsClosedUnderIsomorphisms] [P.IsClosedUnderKernels] [P.IsClosedUnderCokernels] [P.IsClosedUnderExtensions] : (DerivedCategory.homologyProperty P ⊓ DerivedCategory.TStructure.t.bounded).IsTriangulated ∧ (DerivedCategory.homologyProperty P ⊓ DerivedCategory.TStructure.t.bounded).IsStableUnderRetracts ∧ (∀ (L K : DerivedCategory A) (i : L ⟶ K) (r : K ⟶ L), i ≫ r = 𝟙 L → (DerivedCategory.homologyProperty P ⊓ DerivedCategory.TStructure.t.bounded) K → (∀ n : ℤ, ∃ e : (DerivedCategory.homologyFunctor A n).obj L ≅ kernel (𝟙 ((DerivedCategory.homologyFunctor A n).obj K) - (DerivedCategory.homologyFunctor A n).map r ≫ (DerivedCategory.homologyFunctor A n).map i), e.hom ≫ kernel.ι (𝟙 ((DerivedCategory.homologyFunctor A n).obj K) - (DerivedCategory.homologyFunctor A n).map r ≫ (DerivedCategory.homologyFunctor A n).map i) = (DerivedCategory.homologyFunctor A n).map i) ∧ (∀ a b : ℤ, (∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor A n).obj K)) → ∀ n : ℤ, n < a ∨ b < n → IsZero ((DerivedCategory.homologyFunctor A n).obj L)))",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4dd2b4c4c",
+  "group": "NH",
+  "result": "pass",
+  "note": "Item lean record only change (stmt_deps nodes byte-identical to live); statement verbatim in file. Clause check: weak-Serre hyps = ContainsZero/IsClosedUnderIsomorphisms/Kernels/Cokernels/Extensions (no Serre-class strengthening); D^b_B = homologyProperty P ⊓ t.bounded (plus ⊓ minus = finite interval); thick = IsTriangulated ∧ IsStableUnderRetracts per pur9-def-thick record; kernel clause pins e.hom ≫ kernel.ι = map i with endomorphism map r ≫ map i = IR; interval clause same a,b. Universes u,v,w free. Math true (q=1-IR kernel UP; RI=1 forces zero). No duplicate (private bounded_homology_thick in CoefficientHeartTriangulated lacks kernel/interval clauses). Docstrings with source/blueprint/5 proof steps; lines ≤96; proof-dep import is planned per add_proof_imports policy. nt_compile --json clean 18.2 s."
  }
 }

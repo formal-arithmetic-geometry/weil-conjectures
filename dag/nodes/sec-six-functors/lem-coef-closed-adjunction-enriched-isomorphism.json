@@ -278,5 +278,23 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-4a2372673 (reviewer sub-agent of L); spot-checked: Read the item in full: 5 steps, no new nodes; the statement and stmt_deps are byte-identical to the base. Live and side-live still have it unsplit, it is not in any route-pivot-dropped section, and there is no re-split repair note. Step 1: naturality of Θ in T gives Θ⁻¹(t)=ev∘(t⊗1). Step 2: Θ_C⁻¹, Ψ⁻¹, ∘μ_{T,P}, Θ_D, Ψ checked map by map with directions and junctions, using Ψ⁻¹(h)=e_N F h from lem-weil-pbc-adjunction-of-natural-bijection. Step 3: μ-naturality at (t,1_P), test-variable naturality of Θ_D and source naturality of Ψ give Φ_T=δ∘(−) with the specified δ=G(b)u_V. Step 4: explicit Yoneda two-sided inverse from surjectivity at GJ and injectivity at V, using only category laws. Step 5: the cited lem-coef-closed-adjunction-naturality (same unit, reviewed PASS by Q132 on 2026-10-17, no cycle) has the same data and its δ-square is exactly the two-variable naturality. Source: Stacks categories.tex:3344-3384, Tag 0037 definition-adjoint (unit/counit and the α/β correspondence); proof_origin is agent. Small cases (identity adjunction, Set with P=∅, terminal category, constant-terminal non-fully-faithful F) are all consistent; no associator or unit is used. Duplicate search over dag/nodes (monoidal-adjunction mates, oplax mate, enrichment-change adjunction, projection-formula and geometric internal-Hom nodes) found no duplicate. Route is fine with no tool_uses; no SGA. Minor, not fixed: an empty base lean_audit {} is omitted (not split-owned, merge keeps the base), and the report mentions a citations.json that is not committed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ClosedAdjunctionEnrichedIsomorphism",
+  "declaration": "CategoryTheory.ClosedAdjunctionComparison.enriched_isomorphism",
+  "file": "lean/Sheaf/CategoryTheory/ClosedAdjunctionEnrichedIsomorphism.lean",
+  "statement": "theorem enriched_isomorphism {C : Type u₁} [Category.{v₁} C] {D : Type u₂} [Category.{v₂} D] (tensorC : C × C ⥤ C) (tensorD : D × D ⥤ D) (HC : Cᵒᵖ × C ⥤ C) (HD : Dᵒᵖ × D ⥤ D) (θC : ∀ T X Y : C, (tensorC.obj (T, X) ⟶ Y) ≃ (T ⟶ HC.obj (op X, Y))) (θD : ∀ T X Y : D, (tensorD.obj (T, X) ⟶ Y) ≃ (T ⟶ HD.obj (op X, Y))) (F : C ⥤ D) (G : D ⥤ C) (μ : ∀ X Y : C, tensorD.obj (F.obj X, F.obj Y) ≅ F.obj (tensorC.obj (X, Y))) (adj : F ⊣ G) (hθC : ∀ (T T' X X' Y Y' : C) (k : tensorC.obj (T, X) ⟶ Y) (t : T' ⟶ T) (a : X' ⟶ X) (g : Y ⟶ Y'), θC T' X' Y' (tensorC.map (Prod.mkHom t a) ≫ k ≫ g) = t ≫ θC T X Y k ≫ HC.map (Prod.mkHom a.op g)) (hθD : ∀ (T T' X X' Y Y' : D) (k : tensorD.obj (T, X) ⟶ Y) (t : T' ⟶ T) (a : X' ⟶ X) (g : Y ⟶ Y'), θD T' X' Y' (tensorD.map (Prod.mkHom t a) ≫ k ≫ g) = t ≫ θD T X Y k ≫ HD.map (Prod.mkHom a.op g)) (hμ : ∀ (X X' Y Y' : C) (f : X ⟶ X') (g : Y ⟶ Y'), (μ X Y).hom ≫ F.map (tensorC.map (Prod.mkHom f g)) = tensorD.map (Prod.mkHom (F.map f) (F.map g)) ≫ (μ X' Y').hom) : (∀ (P : C) (N : D), IsIso (adjointComparison tensorC tensorD HC HD θC θD F G μ adj P N)) ∧ (∀ (P P' : C) (N N' : D) (a : P' ⟶ P) (v : N ⟶ N'), HC.map (Prod.mkHom a.op (G.map v)) ≫ adjointComparison tensorC tensorD HC HD θC θD F G μ adj P' N' = adjointComparison tensorC tensorD HC HD θC θD F G μ adj P N ≫ G.map (HD.map (Prod.mkHom (F.map a).op v)))",
+  "branch": "newtargets-dag",
+  "by": "ND",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4cc99276d",
+  "group": "ND",
+  "result": "pass",
+  "note": "Item node is byte-identical to live except the new lean record; stmt_deps/proof unchanged; no new nodes or dep edits. The Lean renders every clause: arbitrary tensor bifunctors, contravariant/covariant H, θC/θD with joint three-variable naturality, the normalized adjunction F ⊣ G, natural μ; δ is the landed adjointComparison = unit_V ≫ G(θD(μ_{V,P} ≫ F ev ≫ e_N)); the conclusion is IsIso for all P,N plus the two-variable naturality square with correct variances. No extra hypotheses, four free universes. The mathematics (Yoneda Hom-test, steps 1-5) checks out. lean.statement is verbatim; docstrings carry the source place, blueprint tag and the 5-step proof; sorry only. nt_compile --json clean in 15.1 s, and a broken-identifier control fails as expected. Advisory: evaluation/comparison/adjointComparison are plain defs owned by theorem node lem-coef-closed-adjunction-naturality (proof_dep only); the stage-1 stmt_deps are unchanged, so the worker could not add it, and an existing:true def node is suggested. The second reading was done by the same worker but is substantive."
  }
 }

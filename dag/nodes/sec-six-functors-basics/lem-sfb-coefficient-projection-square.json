@@ -14,7 +14,8 @@
   "sk-def-sfb-derived-tensor-hom",
   "def-sfb-derived-pull-iso",
   "def-sfb-derived-push-hom",
-  "def-sfb-module-object-projection-map"
+  "def-sfb-module-object-projection-map",
+  "def-sfb-internal-scalar-tensor-comparison"
  ],
  "proof": [
   {
@@ -237,5 +238,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-9c49b64a8 (reviewer sub-agent of L); spot-checked: Read the whole item, every cited statement, def-sfb-derived-comap-lower-star-iso's construction and blueprint main-20261015 rational PBC proof paragraph (3). Item is not superseded: live and side-live still have it unsplit. No new nodes. Steps 3-5 are correct: (2) follows from the mate formula with the composite-adjunction conjugacy counit, scalar-unit naturality and the triangle identity; I checked both transposes domain by domain against (1) and (2), and nothing uses an inverse of gamma or pi. Two repairable faults in Step 1/2, fixed. C4/C1: lem-pd-module-ringed-topos-derived-comparison fixes one coefficient ring, so it does not give scalar extension or restriction or T -| D(Res). The fix cites the existing lem-sfb-internal-section-scalar-adjunction and adds it to split_report.tool_uses as a generic tool. E5: the identification of the ringed lemma's direct-image comparison with e was only asserted. It is now written out on K-injective I through the normalization of lem-weil-pbc-ringed-topoi-derived-pushforward-composition, lem-sfb-comap-preserves-k-injectives and theta_I of def-sfb-comap-lower-star-iso, with explicit paths; theta = sigma = c^-1. Step 2 now says why mu_Z is t_{phi_Z}: both are the localization of the pure-tensor map on flat K-flat representatives. Batch 5: lem-pd-module-ringed-topos-derived-comparison is a generic comparison between internal module objects and section-ring modules. Neither assumption states it and it is not a duality or trace step. It is already in the batch-5 closure (via det-thm-sf-pf-adic-projection, earlier N6 PASS), so the closure difference is empty; accepted. The added citations are on route or declared tools, already in the batch-5 closure, and acyclic. Edge cases checked: a=id, f=id, zero inputs, S=0.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.CoefficientProjectionSquare",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.coefficientProjectionSquare",
+  "file": "lean/Sheaf/Paper/CoefficientProjectionSquare.lean",
+  "statement": "theorem coefficientProjectionSquare (ℓ : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [Fact (ringChar k).Prime] [Fact (ringChar k ≠ ℓ)] {X Y : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom] (f : X ⟶ Y) {R S : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}} [MonObj R] [IsCommMonObj R] [MonObj S] [IsCommMonObj S] (a : R ⟶ S) [IsMonHom a] [∀ Z : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap a Z))] (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X.left) Ab.{u + 1}) (condensedRingObj R X.left))) (M : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y.left) Ab.{u + 1}) (condensedRingObj R Y.left))) : ((internalScalarTensorComparison a Y.left).app ((moduleObjectDerivedPushforward R f.left).obj K)).app M ≫ ((derivedTensor S Y.left).map ((derivedPushHom a f.left).app K)).app ((internalScalarExtension a Y.left).obj M) ≫ moduleObjectProjectionMap S f.left ((internalScalarExtension a X.left).obj K) ((internalScalarExtension a Y.left).obj M) = (internalScalarExtension a Y.left).map (moduleObjectProjectionMap R f.left K M) ≫ (derivedPushHom a f.left).app (((derivedTensor R X.left).obj K).obj ((moduleObjectDerivedPullback R f.left).obj M)) ≫ (moduleObjectDerivedPushforward S f.left).map (((internalScalarTensorComparison a X.left).app K).app ((moduleObjectDerivedPullback R f.left).obj M) ≫ ((derivedTensor S X.left).obj ((internalScalarExtension a X.left).obj K)).map ((derivedPullIso a f.left).hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39b084099",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Item statement matches node clause by clause (standing-setting binders, exact-extension hypothesis identical to derivedPullIso/derivedPushHom, c_f/γ_f/π^R/π^S directions, both composites in order, no extra hypotheses); node diff vs side-live is only lean + new stmt_dep def-sfb-internal-scalar-tensor-comparison; lean.statement fields verbatim. New def node not a duplicate (Mod.monoidal_extendScalars needs IsIso; lem-sfb-scalar-(ordinary-)tensor-comparison are SheafOfModules models; residue-ordinary monoidal is geometric pullback); internalScalarMonoidal is .choose of a true ∃! pinned by the Stacks 07A4 scalar-unit normalization (δ fixed by epi tensorObjπ + generation, ε by unitality); μ = canonical leftDerivedTensorComparison; preservesFlat true. Docstrings/source/blueprint tags and 5-step proof present; only sorry. Edge cases a=id, f=id, empty schemes, S=0, unbounded ok. nt_compile --json clean: 49.1 s / 42.3 s (<60 s). Advisory: new node could also cite sk-def-sfb-derived-extension-of-scalars; helper compile near 60 s under load."
+ }
 }

@@ -1,0 +1,105 @@
+{
+ "id": "def-sfb-internal-scalar-tensor-comparison",
+ "kind": "definition",
+ "title": "Scalar-unit normalized tensor comparison for internal modules",
+ "statement": "Let $R,S$ be commutative condensed rings, $a:R\\to S$ a ring-object morphism, and $X$ any scheme. Put $E_X=\\operatorname{Ext}_{a_X}$, with its specified adjunction unit $\\eta_M:M\\to\\operatorname{Res}_{a_X}E_XM$ [sk-def-sfb-coefficient-change], [sk-def-sfb-change-of-scalars]. Use the relative tensor of internal modules and its ordinary unbounded derived tensor [sk-def-sfb-derived-tensor-hom]. Define the canonical strong monoidal structure of $E_X$ by its unique scalar-unit normalization: for every $M,N$, its comonoidal map $\\delta_{M,N}:E_X(M\\otimes_{R_X}N)\\to E_XM\\otimes_{S_X}E_XN$ satisfies $\\delta_{M,N}\\eta_{M\\otimes N}(m\\otimes n)=\\eta_M(m)\\otimes\\eta_N(n)$. This is an equality of morphisms after the balanced tensor coprojection, so it refers to generalized tensors, not enough points. The balanced universal property uniquely determines this structure, including its unit; extension preserves flat internal modules. If $E_Z$ is exact for every scheme $Z$, put $T_X=LE_X$ and define $\\mu_X:T_X(A\\otimes_{R_X}^{\\mathrm L}B)\\xrightarrow{\\sim}T_XA\\otimes_{S_X}^{\\mathrm L}T_XB$ by the canonical bifunctor-derived lift of $\\delta$. Thus on flat-term K-flat representatives its components are the localizations of the signed total of the ordinary map $s\\otimes(m\\otimes n)\\mapsto(s\\otimes m)\\otimes(1\\otimes n)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, lemma-pullback-tensor-product and proof, applied to the identity underlying topos with coefficient ring map; blueprint main-20261015 proper-base-change-rational.proof.md (3), compatibility of tensor with scalar extension."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-derived-tensor-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars of internal module objects has a unique strong monoidal structure taking the scalar adjunction unit of a tensor to the tensor of units",
+   "results": "8 hits: CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, ModuleCat.ExtendScalars.obj', ModuleCat.restrictCoextendScalarsAdj, CategoryTheory.ModObj.smul_def, CategoryTheory.ModObj.one_smul, ModuleCat.MonoidalCategory.tensorUnit_isModule, CategoryTheory.ModObj.mk.noConfusion, CategoryTheory.ModObj.smul.",
+   "date": "2026-10-21",
+   "verdict": "No internal scalar tensor structure with its scalar-unit universal property. Ordinary ModuleCat and generic monoidal-adjunction facts only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars of internal module objects is strong monoidal with tensor comparison preserving the adjunction unit",
+   "results": "8 hits: ModuleCat.extendRestrictScalarsAdj_unit_app_apply, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.unit_app, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.monoidalCategory.",
+   "date": "2026-10-21",
+   "verdict": "Ordinary module facts; no internal module-object scalar tensor comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*Monoidal|monoidal_extendScalars|extendScalarsTensor",
+   "results": "1 Mathlib hit: Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean:45, monoidal extendScalars for ordinary modules. Project rg finds WeilConjectures/CategoryTheory/ModuleObjects/MapModMonoidal.lean:623, but its declaration requires IsIso φ (lines 615–623). Sheaf/Paper/ProEtaleSectionModuleFunctors.lean treats geometric pullback along the invertible structural coefficient map, not arbitrary coefficient maps.",
+   "date": "2026-10-21",
+   "verdict": "No usable existing internal comparison for arbitrary a. DAG search finds the separate ring-sheaf ScalarHomTensor models; they do not provide an internal-module interface without additional scalar-adjunction/tensor transport. Blueprint search scalar tensor returns only cor-pur-vector-bundle-purity, not this construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-coefficient-projection-square",
+  "date": "2026-10-21",
+  "group": "Q07"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "paragraph (3), scalar extension of the projection maps: the canonical scalar tensor comparison before invertibility",
+   "via": [
+    "lem-sfb-coefficient-projection-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "lean": {
+  "module": "Sheaf.Paper.InternalScalarTensorComparison",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.internalScalarTensorComparison",
+  "file": "lean/Sheaf/Paper/InternalScalarTensorComparison.lean",
+  "statement": "def internalScalarTensorComparison : (Functor.postcompose₂.obj (internalScalarExtension a X)).obj (derivedTensor R X) ⟶ (((Functor.whiskeringLeft₂ _).obj (internalScalarExtension a X)).obj (internalScalarExtension a X)).obj (derivedTensor S X)",
+  "branch": "sheaf-dag",
+  "by": "Q07",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.InternalScalarMonoidalNormalized",
+   "AlgebraicGeometry.ProEtale.CondensedRing.internalScalarMonoidalNormalized_existsUnique",
+   "AlgebraicGeometry.ProEtale.CondensedRing.internalScalarMonoidal",
+   "AlgebraicGeometry.ProEtale.CondensedRing.internalScalar_preservesFlat",
+   "AlgebraicGeometry.ProEtale.CondensedRing.internalScalarExtension",
+   "AlgebraicGeometry.ProEtale.CondensedRing.internalScalarTensorComparison",
+   "AlgebraicGeometry.ProEtale.CondensedRing.internalScalarTensorIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39b084099",
+  "group": "Q07",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39b084099",
+  "group": "Q07",
+  "result": "pass",
+  "note": "Item statement matches node clause by clause (standing-setting binders, exact-extension hypothesis identical to derivedPullIso/derivedPushHom, c_f/γ_f/π^R/π^S directions, both composites in order, no extra hypotheses); node diff vs side-live is only lean + new stmt_dep def-sfb-internal-scalar-tensor-comparison; lean.statement fields verbatim. New def node not a duplicate (Mod.monoidal_extendScalars needs IsIso; lem-sfb-scalar-(ordinary-)tensor-comparison are SheafOfModules models; residue-ordinary monoidal is geometric pullback); internalScalarMonoidal is .choose of a true ∃! pinned by the Stacks 07A4 scalar-unit normalization (δ fixed by epi tensorObjπ + generation, ε by unitality); μ = canonical leftDerivedTensorComparison; preservesFlat true. Docstrings/source/blueprint tags and 5-step proof present; only sorry. Edge cases a=id, f=id, empty schemes, S=0, unbounded ok. nt_compile --json clean: 49.1 s / 42.3 s (<60 s). Advisory: new node could also cite sk-def-sfb-derived-extension-of-scalars; helper compile near 60 s under load."
+ }
+}
