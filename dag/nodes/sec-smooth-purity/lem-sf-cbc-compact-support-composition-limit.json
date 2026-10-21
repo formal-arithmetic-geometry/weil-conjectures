@@ -25,9 +25,8 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal T_T=\\operatorname{Fun}(\\mathbf N_{\\geq1}^{op},\\operatorname{Mod}(\\underline A_T))$ and use the diagram-site realization to regard strict towers as modules on one site. The tower category is abelian and its evaluations are exact, and the strict-tower homotopy-limit statement supplies the exact functor $\\mathcal L_T=R\\lim$. The completion adjunction identifies $C_TK$ with $\\mathcal L_T\\mathcal R_T(K)$ and supplies its unit $\\eta_K$. For the empty word take $q_{1,K}=1$ and $a_{1,K}=\\eta_K$.",
+   "text": "Realize strict towers on the diagram site. Their category is abelian with exact evaluations. Its derived limit $\\mathcal L=R\\lim$ is exact, and the completion adjunction gives $C=\\mathcal L\\mathcal R$ with unit $\\eta$.",
    "uses": [
-    "def-weil-inverse-system",
     "lem-weil-pbc-diagram-site-realization",
     "lem-weil-tower-category-levelwise-abelian",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
@@ -36,102 +35,84 @@
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 5, strict-diagram prerequisite and empty-word normalization"
+    "place": "Proof Step 5, strict-diagram setup"
    }
   },
   {
-   "text": "For a completed inverse-image letter $u_c^*=C_Uu^*$ with $u:U\\to V$ and complete $K$ on $V$, put $M=Lu^*K$. By part (i) of the completed-pullback-unit-tower lemma, $\\mathcal R_U(\\eta_M)$ is an isomorphism in the derived strict-tower category, and by part (ii) the strict pullback/tensor comparison $\\tau_{u,K}:\\mathcal R_U(M)\\xrightarrow{\\sim}G_u\\mathcal R_V(K)$ is a natural isomorphism of derived towers. Set $q_{u,K}=\\tau_{u,K}\\circ\\mathcal R_U(\\eta_M)^{-1}:\\mathcal R_U(C_Uu^*K)\\xrightarrow{\\sim}G_u\\mathcal R_V(K)$; this is exactly the one-letter map of the statement and is natural in $K$. This uses no completeness assertion for the ordinary object $u^*K$. By part (iii) of that lemma, with the constant/completed coefficient equivalence and the definition of completed pullback, its level-$n$ components are the projection-induced isomorphisms $\\alpha_n$ of the completed-pullback-reduction lemma, so $q_{u,K}$ is the tower form of the finite-reduction identifications used elsewhere. For successive inverse-image letters, the pro-etale derived-pullback-composition comparison on K-flat representatives identifies the strict composite $G_vG_u$ with the termwise pullback for the composite map.",
+   "text": "For $M=Lu^*K$, the completed-pullback-unit-tower lemma gives invertible $\\mathcal R(\\eta_M)$ and the strict pullback/tensor isomorphism $\\tau_{u,K}$. Its inverse reduced unit is adjoint to the limit projections. Thus $q_{u,K}=\\tau_{u,K}\\circ\\mathcal R(\\eta_M)^{-1}$ is the specified natural tower isomorphism, with every quotient transition. Part (iii) identifies its evaluations with the projection-induced finite maps; no completeness of ordinary $u^*K$ is used.",
    "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lemma-weil-pbc-completed-pullback-reduction",
-    "lem-sf-cbc-completed-pullback-unit-tower",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "lem-sf-cbc-completed-pullback-unit-tower"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 5, completed pullback generator"
+    "place": "Proof Step 5, completed inverse-image letter"
    }
   },
   {
-   "text": "For a derived direct-image letter $Ru_*$, with $u:U\\to V$ and complete $K$ on $U$, the constant-tower direct-image-normalization lemma gives $\\chi_{u,K}:\\Delta(Ru_*K)\\xrightarrow{\\sim}R_u^{\\mathcal T}\\Delta K$, whose evaluations are identities. Let $h_{u,K}:\\mathcal R_V(Ru_*K)\\to R_u^{\\mathcal T}\\mathcal R_U(K)$ be the diagram-site counit-tensor projection-formula map of [lem-weil-pbc-ringed-projection-mate-exact] for the object $\\Delta K$ and the coefficient tower $(\\underline{P_n}_V)_n$, with source identified through $\\chi_{u,K}$. Apply the completion-mate comparison lemma to the identity square ($g=\\mathrm{id}_V$, $g'=\\mathrm{id}_U$, $f=f'=u$, identity comparison isomorphism), which is permitted since that lemma imposes no hypothesis on the square and $K\\in D_{\\mathrm{comp}}(U,A)$. There $G_g$ and $G_{g'}$ are identity functors and the pullback/tensor identification is the identity, so its map $H$ is $h_{u,K}$; that lemma states that $H$ is invertible in the derived tower category and that its evaluation at $n$ is the canonical projection-formula isomorphism for the constant perfect coefficient complex $\\underline{P_n}$. Set $q_{u,K}=h_{u,K}$; it is natural in $K$. For successive direct-image letters, the direct-image composition comparison for ringed topoi, applied termwise and to the constant towers through $\\chi$, gives the normalized identification of $R_v^{\\mathcal T}R_u^{\\mathcal T}$ with the termwise direct image for the composite.",
+   "text": "For direct image take $q_{u,K}=h_{u,K}$ of the strict direct-image reduction-unit lemma. It is exactly the diagram-site counit-tensor projection map, using $\\chi$ to identify the constant source, and is invertible for complete $K$. Its evaluation is the canonical perfect-coefficient projection comparison.",
    "uses": [
-    "lem-sf-cbc-constant-tower-direct-image-normalization",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-sp-completion-mate-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+    "lem-sf-cbc-direct-image-reduction-unit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 5, proper/direct-image generator and composition"
+    "place": "Proof Step 5, derived direct-image letter"
    }
   },
   {
-   "text": "For a completed open-extension letter $J_j^c=C_XJ_j$, the extension-zero completion lemma supplies the normalized strict comparison $q_{j,K}:\\mathcal R_X(J_j^cK)\\xrightarrow{\\sim}J_j\\mathcal R_U(K)$, the equation $q_{j,K}\\mathcal R_X(\\eta_{J_jK})=q^{\\rm tens}_{j,K}$, and the presentation $J_j^cK\\cong R\\lim(J_j\\mathcal R_UK)$. These comparisons are natural and respect every quotient transition, so they may be composed with the comparisons for adjacent letters.",
+   "text": "For open extension take the natural strict isomorphism $q_{j,K}$ of the extension-zero completion lemma. It satisfies $q_{j,K}\\mathcal R(\\eta_{J_jK})=q^{\\rm tens}_{j,K}$ and gives $J_j^cK\\cong\\mathcal L(J_j\\mathcal R K)$, including all transitions.",
    "uses": [
     "lem-sf-cbc-extension-zero-completion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Steps 1–2, integral open factor"
+    "place": "Proof Steps 1–2, completed open letter"
    }
   },
   {
-   "text": "Proceed by induction on the length of the word. Suppose the normalized comparisons have been constructed for $W$ and let $V$ be one more letter. The strict comparison for $VW_c$ is the composite $q_{VW,K}=(\\widetilde Vq_{W,K})\\circ q_{V,W_cK}$; each factor is an isomorphism by the generator cases, and naturality makes the composite compatible with all tower transitions. Every $W_cK$ is complete: completed letters land in the complete subcategory by construction, and $Ru_*$ preserves complete objects by the completion adjunction lemma; hence $\\eta_{W_cK}$ is the unit of a reflective subcategory at one of its objects and is invertible. Applying the exact functor $\\mathcal L$ and then the completion unit gives the isomorphism $a_{W,K}=\\mathcal L(q_{W,K})\\circ\\eta_{W_cK}$. The empty-word case starts the induction. Parenthesizing a finite formal word in different ways changes only the placement of the canonical associativity maps for composition of functors and natural transformations; their coherence is the ordinary associativity and functoriality of composition. Thus the construction is independent of parenthesization and natural in $K$.",
+   "text": "Apply the categorical word lemma with index set $S$ the finitely many schemes occurring in the words considered, edges their letters, $\\mathcal D_T=D(T,A)$, the lemma's second categories $D(\\mathcal T_T)$, $\\mathcal E_T=D_{\\rm comp}(T,A)$, $R_T=\\mathcal R_T$, $L_T=\\mathcal L_T$ and the preceding one-letter maps. Completed letters preserve completeness by the reflector construction; $Ru_*$ does so by the completed adjunction lemma. Hence the unit is invertible at every intermediate object. The word lemma gives $q_{VW}=(\\widetilde Vq_W)q_{V,W_cK}$ and $a_W=\\mathcal L(q_W)\\eta_{W_cK}$, with empty maps $1$ and $\\eta$, naturality, and both parenthesization equations.",
    "uses": [
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-sf-cbc-extension-zero-completion",
+    "lem-sf-cbc-word-reconstruction-coherence",
+    "lem-sp-completed-pullback-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
+    "place": "Proof Step 5, finite words and reconstruction"
+   }
+  },
+  {
+   "text": "For successive pullbacks use the canonical K-flat pullback-composition comparison termwise; for successive direct images use the canonical ringed-topos derived-composition comparison termwise and through $\\chi$. Finally the strict direct-image reduction-unit lemma gives $\\mathcal L(h_{u,K})\\eta_{Ru_*K}=b_{u,\\mathcal R K}Ru_*(\\eta_K)$, so the constructed $a$ is the stipulated direct-image/limit map. All equalities concern actual derived towers and impose no uniform bounds.",
+   "uses": [
     "lem-weil-pbc-proetale-derived-pullback-composition",
     "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-sp-completed-pullback-adjunction"
+    "lem-sf-cbc-direct-image-reduction-unit"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 5, compatibility with the compact-support composition law"
-   }
-  },
-  {
-   "text": "For the direct-image letter, let $i_{U,F}:\\Delta F\\to\\mathcal R_U(F)$ be the strict quotient-unit map and let $h_{u,F}$ be the projection-formula map constructed above. The constant-tower direct-image-normalization lemma supplies the canonical isomorphism $\\chi_{u,F}:\\Delta(Ru_*F)\\xrightarrow{\\sim}R_u^{\\mathcal T}\\Delta F$, its evaluation compatibility, the strict equation $h_{u,F}i_{V,Ru_*F}=R_u^{\\mathcal T}(i_{U,F})\\chi_{u,F}$, and the fact that the canonical comparison $a_{u,\\Delta F}$ is the identity under the canonical constant-tower limit identifications. Let $a_{u,M}:Ru_*\\mathcal L_U(M)\\xrightarrow{\\sim}\\mathcal L_VR_u^{\\mathcal T}(M)$ be the canonical direct-image/derived-limit comparison and define $\\rho_{u,F}=a_{u,\\mathcal R_UF}^{-1}\\mathcal L_V(h_{u,F})$. Applying $\\mathcal L$ to the displayed strict equation, using naturality of $a_u$, the normalized identity for $a_{u,\\Delta F}$ (part (3) of that lemma), and $\\mathcal L(i_{U,F})=\\eta_F$ (the completion unit of the completion adjunction lemma under $\\mathcal L(\\Delta F)\\cong F$), gives the strict natural-transformation equation $$\\rho_{u,F}\\,\\eta_{Ru_*F}=Ru_*(\\eta_F).$$ This is obtained before evaluating the tower, so it does not infer equality of maps into $R\\lim$ from their projections. Consequently the resulting $a$ is exactly the stipulated direct-image/derived-limit comparison. No uniform Tor or cohomological interval, compactification, or faithfulness of evaluations is used.",
-   "uses": [
-    "lem-sf-cbc-constant-tower-direct-image-normalization",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-sp-completed-pullback-adjunction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 5, final normalization paragraph"
+    "place": "Proof Step 5, homogeneous composites and direct-image normalization"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-inverse-system",
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-tower-category-levelwise-abelian",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-sp-completed-pullback-adjunction",
-  "def-weil-pbc-completed-pullback",
-  "lemma-weil-pbc-completed-pullback-reduction",
   "lem-sf-cbc-completed-pullback-unit-tower",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-proetale-derived-pullback-composition",
-  "lem-sf-cbc-constant-tower-direct-image-normalization",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-sp-completion-mate-comparison",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sf-cbc-direct-image-reduction-unit",
   "lem-sf-cbc-extension-zero-completion",
-  "lem-weil-ringed-tower-pushforward-limit-comparison"
+  "lem-sf-cbc-word-reconstruction-coherence",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-  "place": "Proof Step 5, compatibility with the compact-support composition law; strict-diagram reconstruction argument"
+  "place": "Proof Step 5, strict-diagram reconstruction; re-split into independent direct-image normalization and categorical word-coherence arguments."
  },
  "mathlib_searches": [
   {
@@ -232,32 +213,12 @@
  "merged_into": null,
  "lean_audit": {},
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sf-cbc-compact-support-composition-limit",
   "worker": "stage1",
-  "summary": "Repaired the returned split by adding a strict-tower lemma for the completed pullback unit and a normalized constant-tower direct-image lemma. Step 2 now obtains the specified q as an actual tower morphism from the invertible reduction of the completion unit. Step 3 transfers the perfect projection formula from completed to constant coefficients through the cited coefficient equivalence and uses the constant-tower evaluation comparison. Step 6 uses the strict tensor-unit equation and the normalized constant-tower component of the direct-image/limit comparison, with no unsupported normalization inferred from projections. Parenthesization remains formal functoriality. No Lean code, compiler, Lake, or build tool was used. Maintainer-reader FIX (2026-10-18): Step 3 now takes invertibility and evaluation of the diagram projection map from lem-sp-completion-mate-comparison (identity square) instead of transporting the completed-coefficient perfect projection formula; Steps 5 and 6 cite the completion adjunction for completeness of W_cK and L(i)=eta; both new node statements were made self-contained and correctly typed.",
-  "blueprint": "Realizes fix-lem-exchanges Proof Step 5: strict-diagram prerequisite; completed pullback generator; proper/direct-image generator and composition; final direct-image normalization paragraph.",
+  "summary": "Human-requested re-split: old Steps 3 and 6 become the statement-only direct-image-reduction-unit node; old Step 5 and the empty-word normalization become the statement-only generic word-reconstruction-coherence node. The parent retains the actual geometric generator choices, completeness verification, and canonical homogeneous compositors, with under 3000 proof characters. The original proof and detailed argument allocation are preserved in report.md. Statement and Lean record unchanged. No compiler or Lean write.",
+  "blueprint": "fix-lem-exchanges Proof Step 5: composition compatibility, with strict-tower generator normalizations, finite-word coherence, and canonical direct-image/limit agreement.",
   "tool_uses": [
-   {
-    "node": "def-weil-pbc-complete-coefficient-datum",
-    "why": "The coefficient datum fixes the adic reductions used by every strict tower."
-   },
-   {
-    "node": "def-weil-pbc-proetale-site",
-    "why": "The item works on the small pro-etale sites and their constant module categories."
-   },
-   {
-    "node": "def-weil-pbc-constant-sheaf",
-    "why": "The strict towers use constant coefficient sheaves."
-   },
-   {
-    "node": "def-weil-sheaf-of-modules-category",
-    "why": "The diagram categories are towers of module sheaves."
-   },
-   {
-    "node": "def-weil-abstract-derived-category",
-    "why": "All tower and completion constructions take place in the ordinary derived categories."
-   },
    {
     "node": "lem-weil-pbc-diagram-site-realization",
     "why": "Diagram-site realization is the off-unit construction identifying strict towers with modules on one site."
@@ -265,10 +226,6 @@
    {
     "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "why": "The off-unit strict-tower result supplies exact R lim and the tower mapping-cone criterion."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "The off-unit coefficient-equivalence result identifies completion units and finite reductions."
    },
    {
     "node": "lem-weil-pbc-proetale-derived-pullback-composition",
@@ -279,20 +236,8 @@
     "why": "The off-unit direct-image-composition result supplies the normalized comparison for successive direct-image letters."
    },
    {
-    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
-    "why": "The off-unit comparison supplies the canonical a_u and its evaluation/projection compatibility; constant-tower normalization is supplied by lem-sf-cbc-constant-tower-direct-image-normalization."
-   },
-   {
-    "node": "lemma-weil-pbc-completed-pullback-reduction",
-    "why": "The off-unit completed-pullback-reduction result supplies the finite-level isomorphisms needed to define q for a complete input."
-   },
-   {
     "node": "lem-weil-tower-category-levelwise-abelian",
     "why": "The off-unit levelwise-abelian result lets levelwise isomorphisms detect an isomorphism of towers."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "The off-unit projection-mate result supplies the counit-tensor map and its tensor-unit naturality used in the direct-image normalization."
    }
   ]
  },
@@ -313,12 +258,12 @@
   "lem-weil-pbc-ringed-projection-mate-exact"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q96-614cc3e00",
-  "group": "Q96",
+  "reviewer": "NT-cc-Q49-d6516267e",
+  "group": "Q49",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-614cc3e00 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes, every cited statement, unit sk-prop-sf-cbc, fix-lem-exchanges Proof Step 5, and Stacks 099M (proetale.tex l.4305), 099N (l.4336) and 0941 (sites-cohomology.tex l.5067). The coefficient category is constant A-modules on small pro-etale sites with the local completeness condition, the 099M/099N setting; it is not a target node. The item statement is unchanged and nothing is weakened. I tested the empty word, each one-letter case, two-letter words, I=0 and A=0. Steps 1, 4 and 6 are correct; I recomputed rho*eta=Ru_*eta in Step 6. I repaired three faults in fixes/. (1) In lem-sf-cbc-completed-pullback-unit-tower, R_{T'} and the pullback/tensor comparison were never defined (B2), the claim that the level-n component of R(eta_M) is alpha_n has mismatched source and target, so it is false as written, and the statement carried a proof fragment (B1). I rewrote it self-contained: (i) R(eta_N) is invertible for every N, with its inverse given by the adjoint of the limit projection; (ii) the termwise comparison tau and q=tau∘R(eta)^{-1}; (iii) for complete K, the level-n components of q are alpha_n. (2) lem-sf-cbc-constant-tower-direct-image-normalization was stated for arbitrary ringed topoi but cited the scheme-only def-cbc-strict-constant-tower-operations, and it used R, i_M and P_n without introducing them (B2/B3). I restated it for scheme maps with constant coefficients and numbered clauses chi, ev_n chi=1, L(chi)^{-1}a_{f,ΔM}=1, and h i=R^T(i)chi; these facts are proved in the reviewed sibling lem-sp-completion-mate-comparison but not stated by any node, so the node is needed and is not a duplicate. (3) Step 3 moved the completed-coefficient perfect projection formula to constant coefficients through lem-weil-pbc-constant-completion-equivalence, which says nothing about direct images (C4/E5, the point the earlier return raised). Step 3 now cites lem-sp-completion-mate-comparison for the identity square, whose statement gives H invertible with evaluation the P_n projection isomorphism; that node is in the same unit and creates no cycle. Small citation fixes: Steps 5 and 6 now cite lem-sp-completed-pullback-adjunction (W_cK complete so eta is invertible; L(i)=eta); proof_deps were recomputed; the tool_uses entry for the perfect projection formula was removed; merged_into and lean_audit were added to both new nodes. I accept the remaining declared tool_uses as generic tower and derived-functor tools. Not repaired: the new nodes record no LeanSearch query, and the citations.json the report mentions was not delivered. No SGA source is cited.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q49-d6516267e (reviewer sub-agent of L); spot-checked: Read the repair note, the item, both new nodes, every cited statement, fix-lem-exchanges Step 5 and Stacks 099M/099N. The re-split is faithful. Old Steps 3 and 6 became lem-sf-cbc-direct-image-reduction-unit. I recomputed rho*eta=Ru_*eta from constant-tower-normalization (3)/(4), naturality of b and L(i)=eta. Invertibility of h comes from sp-completion-mate-comparison on the identity square, which needs only complete K. Old Step 5 became the generic lem-sf-cbc-word-reconstruction-coherence. I checked its recursion, the concatenation formula and both flattening equations, the a-equation via naturality of eta, and the empty, one-edge and three-edge cases. Old Steps 1, 2 and 4 remain as assembly steps citing the existing nodes that carry them. Unit-tower (iii) now gives alpha^const directly, so the dropped citations of completed-pullback-reduction and constant-completion-equivalence lose nothing. The parent is 6 steps, 2365 chars. The two new nodes are of comparable size, statement-only, self-contained, not duplicates and not restatements of the item. Statement, stmt_deps and lean record are identical to live. Batch-5: lem-pod-derived-exact-square-composition is a generic exact-functor derived pasting lemma, not part of Poincare duality, and the item already cited constant-tower-normalization on base, so the closure is unchanged; accepted. The declared tool_uses are generic sk-thm-properbasechange tools and are accepted. FIX: Step 5 applied the word lemma, stated for a set S of indices, to all schemes (a proper class). I restricted S to the finitely many schemes occurring in the words, with edges their letters and categories D(T,A), D(T_T), D_comp named explicitly.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.SfCbcCompactSupportCompositionLimit",

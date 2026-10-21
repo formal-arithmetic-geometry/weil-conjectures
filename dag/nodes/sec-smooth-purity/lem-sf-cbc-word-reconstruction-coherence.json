@@ -1,0 +1,81 @@
+{
+ "id": "lem-sf-cbc-word-reconstruction-coherence",
+ "kind": "statement",
+ "title": "Coherent word comparisons from supplied generator maps and a reconstruction unit",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "Let $S$ be a set of indices and, for each $s\\in S$, let $\\mathcal D_s,\\mathcal T_s$ be categories [def-nagata-category], with a full subcategory $\\mathcal E_s\\subseteq\\mathcal D_s$ (all morphisms between its objects are retained). Let $R_s:\\mathcal D_s\\to\\mathcal T_s$ and $L_s:\\mathcal T_s\\to\\mathcal D_s$ be functors and $\\eta_s:1_{\\mathcal D_s}\\to L_sR_s$ a natural transformation whose components on $\\mathcal E_s$ are isomorphisms. Functors preserve identities and compositions; natural transformations here are families of morphisms commuting with the functor images of every morphism.\nFor each directed generating edge $e:s\\to t$ choose functors $F_e:\\mathcal D_s\\to\\mathcal D_t$ and $G_e:\\mathcal T_s\\to\\mathcal T_t$, with $F_e(\\mathcal E_s)\\subseteq\\mathcal E_t$, and a natural transformation $q_e:R_tF_e\\to G_eR_s$ whose components on $\\mathcal E_s$ are isomorphisms. No geometric description of these generators or construction of $q_e$ is assumed.\n\nA word $W=(e_1,\\ldots,e_m):s\\to t$ is a finite composable edge sequence; set $F_W=F_{e_m}\\cdots F_{e_1}$ and $G_W=G_{e_m}\\cdots G_{e_1}$ with a fixed recursive parenthesization, and set both empty composites to the identity. There is a unique family of natural transformations $q_W:R_tF_W\\to G_WR_s$ with empty-word map $q_{1_s}=1_{R_s}$, the prescribed one-edge maps, and\n$$q_{eW}=(G_eq_W)\\circ(q_eF_W).$$\nOn $\\mathcal E_s$, every $F_W$ takes values in $\\mathcal E_t$, and both $q_W$ and\n$$a_W=L_t(q_W)\\circ(\\eta_tF_W):F_W\\longrightarrow L_tG_WR_s$$\nare natural isomorphisms. For any words $W:s\\to t$ and $V:t\\to v$, the specified maps obey\n$$q_{VW}=(G_Vq_W)\\circ(q_VF_W)$$\nafter the canonical associativity and identity isomorphisms for composition of functors. The empty-word map $a_{1_s}$ is $\\eta_s$.\n\nMore explicitly, let $E$ be any binary expression of composition with the same ordered edges as $W$, allowing empty words as identity factors. Denote its functor composites by $F_E,G_E$, and recursively define $q_{(E_2E_1)}=(G_{E_2}q_{E_1})\\circ(q_{E_2}F_{E_1})$, starting with the given edge and empty-word maps. Let $c_E:F_W\\xrightarrow{\\sim}F_E$ and $d_E:G_W\\xrightarrow{\\sim}G_E$ be the canonical flattening isomorphisms, obtained by reassociation and removal of identity factors, and put $a_E=L_t(q_E)\\circ(\\eta_tF_E)$. Then, as equalities of natural transformations on $\\mathcal D_s$,\n$$ (d_ER_s)\\circ q_W=q_E\\circ R_t(c_E),\\qquad L_t(d_ER_s)\\circ a_W=a_E\\circ c_E.$$\nConsequently these comparisons are independent of binary parenthesization and insertion of empty factors, with no faithfulness assumption on $R_s$ or $L_s$.",
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
+  "place": "fix-lem-exchanges Proof Step 5, composition compatibility; agent-stated categorical prerequisite extracted from lem-sf-cbc-compact-support-composition-limit old Steps 1 and 5 (recursive word construction, concatenation, and both parenthesization equations)."
+ },
+ "stmt_deps": [
+  "def-nagata-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "FreeCategory|path.*[Nn]at|whisker.*[Aa]ssoc",
+   "results": "25 hits: Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean; Mathlib/CategoryTheory/Localization/Adjunction.lean; Mathlib/CategoryTheory/CatCommSq.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; Mathlib/CategoryTheory/Localization/Monoidal/Functor.lean; directory Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatIso extends object-component naturality along paths in one fixed category; it does not construct indexed intertwining transformations between functor words, nor reconstruct them through a separate unit and limit functor. ComposableArrows.isoMk likewise concerns diagrams in a fixed category. No exact or one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Given reduction and reconstruction functors with invertible completion unit and generator comparison isomorphisms, construct coherent comparison isomorphisms for finite composable words",
+   "results": "8 hits: CategoryTheory.ComposableArrows.isoMk₄; CategoryTheory.ComposableArrows.isoMk; CategoryTheory.Monad.comparisonForget; CategoryTheory.Limits.prodComparisonNatIso; CategoryTheory.monoidalIsoComp; CategoryTheory.bicategoricalIsoComp; CategoryTheory.Monad.comparisonForget_hom_app; CategoryTheory.monoidalOfHasFiniteProducts.instIsIsoδ",
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatIso extends object-component naturality along paths in one fixed category; it does not construct indexed intertwining transformations between functor words, nor reconstruct them through a separate unit and limit functor. ComposableArrows.isoMk likewise concerns diagrams in a fixed category. No exact or one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Functor.associator",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatIso extends object-component naturality along paths in one fixed category; it does not construct indexed intertwining transformations between functor words, nor reconstruct them through a separate unit and limit functor. ComposableArrows.isoMk likewise concerns diagrams in a fixed category. No exact or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A family of natural isomorphisms intertwining functors extends to all finite composable words, compatible with concatenation and parenthesization; applying a reflector unit reconstructs the word",
+   "results": "8 hits: CategoryTheory.unitCompPartialBijective_symm_natural; CategoryTheory.unitCompPartialBijective_natural; CategoryTheory.Limits.reflexivePair.compRightIso; CategoryTheory.reflectsIsomorphisms_of_comp; CategoryTheory.Limits.reflexivePair.mkNatIso_hom_app; CategoryTheory.Limits.reflexivePair.mkNatIso; CategoryTheory.reflectsIsomorphisms_comp; CategoryTheory.Limits.reflexivePair.compRightIso_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatIso extends object-component naturality along paths in one fixed category; it does not construct indexed intertwining transformations between functor words, nor reconstruct them through a separate unit and limit functor. ComposableArrows.isoMk likewise concerns diagrams in a fixed category. No exact or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend generator natural isomorphisms between diagrams of categories to paths with unique coherent comparison maps, preserving a natural transformation from identity to reconstruction composed with reduction",
+   "results": "8 hits: CategoryTheory.Paths.liftNatIso; CategoryTheory.Paths.liftNatIso_hom_app; CategoryTheory.Paths.lift_unique; CategoryTheory.Quiv.pathCompositionNaturality; CategoryTheory.Paths.ext_functor; CategoryTheory.Quiv.freeMapPathsOfCompPathCompositionIso; CategoryTheory.Paths.liftNatTrans; CategoryTheory.SmallObject.SuccStruct.extendToSuccObjIso_hom_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatIso extends object-component naturality along paths in one fixed category; it does not construct indexed intertwining transformations between functor words, nor reconstruct them through a separate unit and limit functor. ComposableArrows.isoMk likewise concerns diagrams in a fixed category. No exact or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "NatTrans|associator|eval",
+   "results": "2 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean; Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean; directory Mathlib/CategoryTheory/PathCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatIso extends object-component naturality along paths in one fixed category; it does not construct indexed intertwining transformations between functor words, nor reconstruct them through a separate unit and limit functor. ComposableArrows.isoMk likewise concerns diagrams in a fixed category. No exact or one-line specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-cbc-compact-support-composition-limit",
+  "date": "2026-10-21",
+  "group": "Q49"
+ },
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Step 5, compatibility with the composition law: categorical word induction and unit-normalized reconstruction (parent old Steps 1 and 5)",
+   "via": [
+    "lem-sf-cbc-compact-support-composition-limit"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
