@@ -1,0 +1,58 @@
+# Stage-1 delivery: lem-pur-ringed-triple-resolution-formulas
+
+## Files written
+
+- `dag/nodes/sec-smooth-purity/lem-pur-ringed-triple-resolution-formulas.json`: existing statement node, split in eight steps. Its statement and statement dependencies are unchanged. No new nodes and no new Mathlib leaves.
+- `citations.json`: verbatim statement quotations for all eleven step/node citations.
+- `searches.jsonl`: five actual Q48 searches, using LeanFinder twice, LeanSearch, Loogle and the required Mathlib grep. The item's earlier search records are retained, with the Q48 records appended.
+- `report.md`: this report.
+
+## Attachments
+
+None. Searches of `lean/WeilConjectures/` by the blueprint tag, triple/ringed/composition notions and common-resolution phrases found no declaration giving all clauses of this item. I read `WeilConjectures/Algebra/Homology/KInjectiveResolution.lean`, including lift, uniqueness, rightDerivedIso and rightDerivedMap. These provide useful general resolution APIs but do not state the two triple direct-image component formulas on arbitrary ringed topoi. I did not use a sorry declaration as proof of completion.
+
+## WANTED
+
+None. All sources used are present under `literature/`.
+
+## Problems found and changes
+
+The imported item was statement-only, with an empty proof. Its statement is well-typed and correct; no STATEMENT-DISPUTED correction is needed. In particular, its warning that module direct image need not preserve K-injectives is necessary and is retained. The normalized two-functor comparison node already states the required quasi-isomorphism of g_*j, so creating an acyclicity lemma or a clause-by-clause replacement of this item would have duplicated existing content. The proof now uses that statement directly.
+
+I made the source and final-target coordinates explicit as s and d. The intermediate coordinates m and r differ between the paths. In the second path I wrote the naturality equation at a:R_f(QI) -> QJ explicitly; simply applying the normalization at J without this equation would not justify the component at R_f(QI). I removed an unnecessary homotopy-equivalence aside about u to keep its step focused on exactly the existence and uniqueness asserted in the item.
+
+## Unfinished work
+
+None for this one-level split. The cited existing lemmas keep their own statuses. No Lean was written, and no compiler, Lake or local DAG-checking tool was run. The shared repository and launcher files were read only; the prescribed delivery tools perform their own temporary-worktree operations.
+
+## Not duplicates
+
+No new nodes. I searched the whole DAG for Tag 0D6E, triple/resolution terminology and K-injective Hom comparisons. I also ran `tools/blueprint_refs.py search` for `K-injective`, `composition comparison`, `triple direct`, `common-resolution`, `derived direct image composition` and `derived map`, and ran `ancestor` for this item. The exact-source composition node and the unbounded map-computation node are reused. The parent cocycle node uses this item, so it is not cited in the proof. The current blueprint ancestor is fix-prop-adjunctions, through the two existing intermediate nodes, and this ancestry is preserved. No other blueprint statement gives precisely these common-resolution formulas; same_as remains empty.
+
+## Mathlib search review
+
+All five Q48 queries were run through the prescribed msearch.py command and their hits were read. The first semantic query found rightDerived_map_eq and composition of derived natural transformations. The second also found SheafOfModules.pushforwardComp. I read Mathlib/CategoryTheory/Abelian/RightDerived.lean:158-173: rightDerived_map_eq computes the n-th derived functor on objects by ordinary injective resolutions indexed in nonnegative degrees. It does not give this unbounded complex-level result. I read Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:133-175: pushforwardComp and pushforward_assoc describe underived continuous-site module pushforwards. They do not state the K-injective or derived comparison clauses of this item. The generic IsRightDerivedFunctor hits in Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean:50-105 and rightDerivedFunctorComparison in CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean:54-84 concern abstract localization/Kan-extension data, not the ringed-topos resolution calculation as a one-line specialization. Thus the item is not a Mathlib leaf.
+
+## Review by Q48
+
+I read the stage-1 brief, the three-level route rule in SETUP.md, GOAL.md, the item, its chapter and sk-lem-sf-mate unit, and delivery-errors B through E in full (including the repeated merged sections). The unit's ordinary-composition route is the one being realized. I read the current main-20261015 blueprint fix-prop-adjunctions statement and proof, specifically Step 1 on replacement and Step 3 on ordinary composition. I read Stacks sites-cohomology.tex:4010-4030, Tag 0D6E, label lemma-derived-pushforward-composition, and its proof via derived adjunction and uniqueness. I do not claim Stacks literally prints these triple component formulas. Their extraction is marked proof_origin.by = agent and is carried out in the item's own steps. For the resolution computations I read derived.tex:9632-9667, Tag 070I (lemma-K-injective), and :9747-9788, Tags 070Y and 070K. For existence I read sites-cohomology.tex:3921 onward, Section 07A5, and injectives.tex:1807 onward, Tag 079P, theorem-K-injective-embedding-grothendieck. I checked these tag/label correspondences in tags/tags. No SGA source is used. There are no new-node sources to audit.
+
+For step 1 I opened prop-pur-kinjective-resolutions-exist, def-weil-pbc-ringed-topos-morphism and def-sfb-right-derived-functor and read their statements. The first says every complex of modules on a small ringed site has a K-injective resolution. The second expressly supplies the additive induced module direct image. The third says the derived unit is invertible on K-injectives, which justifies each evaluation e_{x,L}. The hypotheses are met by each of the four small sites with its commutative ring sheaf. Nothing is bounded below, and no structural ring homomorphism is required to be flat.
+
+For step 2 I opened lem-weil-pbc-ringed-topoi-derived-pushforward-composition and def-weil-abstract-derived-category. The comparison statement explicitly says g_*j is a quasi-isomorphism when I is K-injective and j is a K-injective resolution of f_*I. Those are precisely the supplied I,j. It does not require f_*I to be K-injective. The definition of the derived category supplies functorial cohomology, so the composite with the given quasi-isomorphism k is a quasi-isomorphism as well. This makes w and t genuine resolutions with K-injective targets K and T.
+
+For step 3 I read lem-weil-pbc-kinjective-hom-derived. Its unbounded Hom bijection has arbitrary complex source and K-injective target. Using source T gives the unique u with its localization equation; using source B gives the homotopy ut = w. This does not infer a chain homotopy from derived equality without the K-injective target hypothesis. The last uniqueness argument cancels the invertible Q(t).
+
+For step 4 I read the displayed c_a coordinate in lem-sf-kinjective-derived-map-computation. E_t and E_k are exactly that expression for h_* with the resolutions t and k. The further a,b,v,s,m,d maps are typed compositions of already constructed isomorphisms. This step is marked elementary because it introduces notation and substitutes in that stated expression. In particular d resolves f_*I by j and then g_*J by k, matching the question rather than a different model of the final target.
+
+For step 5 I read the normalization and naturality sentences in the composition node again. The first application is (f,g,I,j); the second is (gf,h,I,t). The complex required to be K-injective in both is I, not B. Under the exact coordinates b,v and m,s those applications give Q(p) and Q(h_*t), respectively. No triple associativity is taken from that pairwise result.
+
+For step 6 the arbitrary-derived-morphism clause of lem-sf-kinjective-derived-map-computation is applied to F=h_*, N=B, N'=C, source resolution t and target resolution k. Its class equation is exactly the equation defining u. The existence-of-resolutions assumption for the module category on X_2 was verified in step 1, and h_* is additive there. Hence its formula really gives Q(h_*u). I checked the substitutions and cancellations proving d alpha s^{-1} = Q(h_*u) Q(h_*t). An additive functor preserves the displayed homotopy by applying it degreewise; it need not preserve arbitrary quasi-isomorphisms for this step.
+
+For step 7 the same composition statement is used on (f,hg,I,j) and on (g,h,J,k). In the latter application J, rather than f_*I, is K-injective. I checked the naturality equation at a and every domain and codomain. It is this equation that changes the component at QJ back to the required component at R_f(QI). The substitutions show both paths use the identical d and s. The beta factors are exactly Q(h_*k) and Q(h_*g_*j).
+
+For step 8 I read the final transition, cocycle and intertwining clauses of lem-sf-kinjective-derived-map-computation. A change of t has transition E_{t'} E_t^{-1}; the two appearances cancel in the alpha product. A change of both j and k is not treated as though k,k' resolve the same complex: I instead use the arbitrary derived morphism b' b^{-1}:QC -> QC' and resolutions k,k'. The theorem therefore supplies exactly the final-target transition d'd^{-1}. The source s is independent of j,k,t. This proves compatibility for arbitrary simultaneous changes, with the theorem supplying its canonical and cocycle properties. Every use in every step has a verbatim supporting quotation in citations.json.
+
+For the mathematical edge cases, I checked I=0 and all resolutions zero (both paths are identity maps of the zero object), f=g=h=id with j=k=t=id on a K-injective I (all factors are identities), and t=w whenever these two resolutions are chosen equal (u is the identity homotopy class). An acyclic B with t:B -> 0 is permitted even if t is not a monomorphism; the argument needs only its quasi-isomorphism and K-injective target. I also checked the one-point ringed-topos morphism induced by Z -> F_p: F_p[0] is K-injective as a complex of F_p-modules but its direct image F_p[0] over Z is not K-injective. Taking subsequent morphisms to be identities still meets every hypothesis of the proof, which demonstrates why the forbidden preservation assertion is neither needed nor silently assumed.
+
+Against B, no new statement-only nodes, unexplained notions or false Mathlib-leaf claims were introduced; the item's full original statement and definitions remain. Against C, I checked the actual statements, not proofs, of all seven distinct cited nodes and included every non-elementary input in uses; proof_deps is exactly their union. The generic off-unit composition, resolution-existence and map-computation tools are declared in split_report.tool_uses, rather than changing the unit route. The K-injective Hom node is already a Mathlib leaf. Against D, the proof carries the coordinate calculation itself and introduces no clause-restatement nodes. It never cites the parent cocycle, so there is no circular proof of coherence. Against E, I checked smallness, unboundedness, additivity, each actual K-injective target, the direction of every coordinate map, and resolution transitions. The longest step has 1099 characters; no non-elementary step exceeds 2000 characters or hides a separate comparison lemma.

@@ -17,9 +17,113 @@
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-sf-kinjective-derived-map-computation"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All four module categories have K-injective resolutions by [prop-pur-kinjective-resolutions-exist]: the sites are small and the ring sheaves are commutative, exactly as required there. The induced module direct images are additive by [def-weil-pbc-ringed-topos-morphism]. Thus the unbounded derived-map computation applies to each of them. Write $\\eta_x$ for the derived unit of $x_*$ and, for K-injective $L$ on its domain, put $e_{x,L}=\\eta_{x,L}^{-1}:R_x(Q L)\\xrightarrow{\\sim}Q(x_*L)$. The inverse exists by [def-sfb-right-derived-functor]. Put $A=f_*I$, $B=g_*A$, $C=g_*J$ and $p=g_*j:B\\to C$. No assertion that $A$ or $C$ is K-injective is used.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined) and 070K (lemma-enough-K-injectives-implies); module-sheaf existence from sites-cohomology.tex Section 07A5 and injectives.tex Tag 079P"
+   }
+  },
+  {
+   "text": "Apply the normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] to $(f,g)$, the K-injective $I$, and its supplied resolution $j:f_*I\\to J$. It says explicitly that $p=g_*j$ is a quasi-isomorphism. Since $k:C\\to K$ is a quasi-isomorphism by hypothesis, $w=k\\circ p:B\\to K$ is one too: in every degree its cohomology map is the composite of the two invertible cohomology maps, by [def-weil-abstract-derived-category]. Thus $w$ and $t$ are both K-injective resolutions of $B$, although $B$ itself need not be K-injective.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition, with its normalized comparison as stated in the cited DAG node"
+   }
+  },
+  {
+   "text": "The Hom bijection of [lem-weil-pbc-kinjective-hom-derived], with source $T$ and K-injective target $K$, lifts the derived morphism $Q_2w\\circ(Q_2t)^{-1}$ to a unique homotopy class $u:T\\to K$. Applying the same bijection with source $B$ and target $K$, the equality $Q_2(ut)=Q_2w$ implies $ut\\simeq w$. Conversely, this homotopy implies the displayed formula for $Q_2u$ after cancellation of $Q_2t$, proving the asserted uniqueness with both conditions.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I, lemma-K-injective, clauses (2),(3) and their application to the two K-injective resolutions"
+   }
+  },
+  {
+   "text": "Spell out the coordinates, writing composition right to left. Set $a=(Q_1j)e_{f,I}:R_f(Q_0I)\\xrightarrow{\\sim}Q_1J$, $v=e_{gf,I}:R_{gf}(Q_0I)\\xrightarrow{\\sim}Q_2B$, and $b=e_{g,J}R_g(a):R_gR_f(Q_0I)\\xrightarrow{\\sim}Q_2C$. Put $s=e_{hgf,I}$, $E_t=e_{h,T}R_h(Q_2t)$ and $E_k=e_{h,K}R_h(Q_2k)$. These are precisely $c_t,c_k$ for $h_*$ in [lem-sf-kinjective-derived-map-computation]. Then $m=E_tR_h(v)$ identifies $R_hR_{gf}(Q_0I)$ with $Q_3(h_*T)$, and $d=E_kR_h(b)=e_{h,K}R_h((Q_2k)b)$ identifies the final target $R_hR_gR_f(Q_0I)$ with $Q_3(h_*K)$. Thus $s$ is the source coordinate of the question and $d$ is exactly its target coordinate obtained successively from $j,k$. All these maps are isomorphisms: the $e$ maps are evaluation on K-injectives, and $j,k,t$ are quasi-isomorphisms.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, lemma-K-injective-defined; substitution in the canonical resolution formula of the cited derived-map node"
+   }
+  },
+  {
+   "text": "The $(f,g)$ normalization gives $b\\,\\kappa_{g,f,Q_0I}\\,v^{-1}=Q_2p$. For the first outer comparison use the same theorem on the pair $(gf,h)$ with K-injective $I$ and the resolution $t:B\\to T$. Its target coordinate is $e_{h,T}R_h((Q_2t)v)=m$, so it gives $m\\,\\kappa_{h,gf,Q_0I}\\,s^{-1}=Q_3(h_*t)$. Here all underived compositions are identified canonically, as required in the statement; this is a direct use of the two-functor normalization, not an assumption about associativity of three derived comparisons.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; normalized pair comparisons applied to (f,g) and (gf,h)"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-kinjective-derived-map-computation] with additive functor $h_*$, derived morphism $Q_2p:Q_2B\\to Q_2C$, and resolutions $t:B\\to T$, $k:C\\to K$. The class computing that map is exactly $u$, because its required equation is $Q_2u=(Q_2k)(Q_2p)(Q_2t)^{-1}$. Hence $E_kR_h(Q_2p)E_t^{-1}=Q_3(h_*u)$. Substituting the preceding equation for $Q_2p$ and the definitions of $d,m$ gives $d\\,R_h(\\kappa_{g,f,Q_0I})\\,m^{-1}=Q_3(h_*u)$. Multiply this by the second equation of the preceding step and cancel $m^{-1}m$. This gives $d\\,\\alpha_{Q_0I}\\,s^{-1}=Q_3(h_*u)\\circ Q_3(h_*t)$ and identifies each of its two factors exactly as claimed. Different representatives of $u$ give the same map: applying an additive functor to the chain-homotopy equation applies $h_*$ to its homotopy in each degree.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, lemma-K-injective-defined; arbitrary-derived-morphism computation, specialized to h_* with resolutions t and k"
+   }
+  },
+  {
+   "text": "Set $r=e_{hg,J}R_{hg}(a):R_{hg}R_f(Q_0I)\\xrightarrow{\\sim}Q_3(h_*C)$. Apply the pair normalization to $(f,hg)$ with $I,j$ to get $r\\,\\kappa_{hg,f,Q_0I}\\,s^{-1}=Q_3(h_*p)$. Next apply it to $(g,h)$ with K-injective $J$ and the resolution $k:g_*J\\to K$. Writing $\\kappa_{h,g,Q_1J}$ for its component, it says $E_kR_h(e_{g,J})\\,\\kappa_{h,g,Q_1J}\\,e_{hg,J}^{-1}=Q_3(h_*k)$. Naturality of $\\kappa_{h,g}$ at $a:R_f(Q_0I)\\to Q_1J$ reads $R_hR_g(a)\\,\\kappa_{h,g,R_f(Q_0I)}=\\kappa_{h,g,Q_1J}\\,R_{hg}(a)$. Substitute this equality and $d=E_kR_h(e_{g,J})R_hR_g(a)$; cancellation of $R_{hg}(a)$ proves $d\\,\\kappa_{h,g,R_f(Q_0I)}\\,r^{-1}=Q_3(h_*k)$. Multiplying the two displayed coordinate equations proves $d\\,\\beta_{Q_0I}\\,s^{-1}=Q_3(h_*k)\\circ Q_3(h_*g_*j)$. Thus the second path uses the very same source $s$ and target $d$ as the first path.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; normalization at (f,hg) and (g,h), and naturality explicitly included in the cited node"
+   }
+  },
+  {
+   "text": "The choices in the argument were arbitrary. To check the specified transitions, let $j',k',t'$ be other choices and use primes for their coordinates. A change of $t$ has intermediate transition $m'm^{-1}=E_{t'}E_t^{-1}$, exactly the canonical transition of [lem-sf-kinjective-derived-map-computation]. It appears on the left of the first factor of the alpha path and with its inverse on the right of the second factor, so cancels in their product. For a simultaneous change of $j,k$, that node applied to the derived map $b'b^{-1}:Q_2C\\to Q_2C'$ with resolutions $k,k'$ identifies $d'd^{-1}=E_{k'}R_h(b'b^{-1})E_k^{-1}$ with $Q_3(h_*z)$, where $Q_2z=(Q_2k')b'b^{-1}(Q_2k)^{-1}$ is the unique homotopy class $K\\to K'$. This is the canonical final-target transition and has the cocycle and intertwining properties stated there. Indeed each full path $P$ changes its matrix by $d'Ps^{-1}=(d'd^{-1})(dPs^{-1})$. These equations cover arbitrary simultaneous choices and prove the required compatibility. Only $I,J,K,T$ were used as K-injectives; no direct-image preservation of that property was invoked.",
+   "uses": [
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, lemma-K-injective-defined; canonical transitions and intertwining in the final clause of the cited derived-map computation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-kinjective-derived-map-computation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E (lemma-derived-pushforward-composition), together with derived.tex Tags 070I and 070Y; explicit resolution-coordinate extraction by Q48"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +159,45 @@
    "results": "[leanfinder] OK 8 hit(s)\nActual top result names/files: [\"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.NatTrans.rightDerived_comp\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\"]",
    "date": "2026-10-21",
    "verdict": "no match: n-th derived natural transformations or abstract Kan-extension comparisons do not give these common-resolution formulas for three unbounded ringed-topos direct images"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*([Cc]omp|[Aa]ssoc)|([Cc]omp|[Aa]ssoc).*rightDerived",
+   "results": "5 hits; actual logged top results: Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean, Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern n-th derived functors of objects, abstract Kan-extension comparisons, or underived pushforward composition; none states these unbounded ringed-topos triple-resolution formulas"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Compute composite total right derived functors of unbounded module sheaf direct images using a common K-injective resolution without preservation of K-injectives",
+   "results": "8 hits; actual logged top results: CategoryTheory.Functor.rightDerived, CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.Functor.totalLeftDerived, CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc, CategoryTheory.injectiveResolutions, CategoryTheory.Functor.rightDerivedToHomotopyCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern n-th derived functors of objects, abstract Kan-extension comparisons, or underived pushforward composition; none states these unbounded ringed-topos triple-resolution formulas"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.IsRightDerivedFunctor",
+   "results": "12 hits; actual logged top results: CategoryTheory.Functor.IsRightDerivedFunctor, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.HasRightDerivedFunctor.mk', CategoryTheory.Functor.IsRightDerivedFunctor.isLeftKanExtension, CategoryTheory.Functor.IsRightDerivedFunctor.mk, CategoryTheory.Functor.isRightDerivedFunctor_iff_isLeftKanExtension, CategoryTheory.Functor.rightDerivedDesc, CategoryTheory.Functor.rightDerivedUnique",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern n-th derived functors of objects, abstract Kan-extension comparisons, or underived pushforward composition; none states these unbounded ringed-topos triple-resolution formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For three morphisms of ringed topoi compute the two composite unbounded derived direct image comparisons on K-injective resolutions j k t via a homotopy class u between the resolutions",
+   "results": "8 hits; actual logged top results: CategoryTheory.Functor.rightDerived_map_eq, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality, CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern n-th derived functors of objects, abstract Kan-extension comparisons, or underived pushforward composition; none states these unbounded ringed-topos triple-resolution formulas"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-injective models for maps between resolutions compute a total right derived functor, and normalized composition comparison of ringed topos pushforwards evaluated along a triple",
+   "results": "8 hits; actual logged top results: CategoryTheory.Functor.rightDerived_map_eq, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardComp_hom_app_val_app, CategoryTheory.InjectiveResolution.rightDerived_app_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero_eq, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc, CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality, SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits concern n-th derived functors of objects, abstract Kan-extension comparisons, or underived pushforward composition; none states these unbounded ringed-topos triple-resolution formulas"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-ringed-derived-composition-cocycle",
@@ -76,5 +215,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-ringed-triple-resolution-formulas",
+  "worker": "stage1",
+  "summary": "Proved both triple-path component formulas by the existing normalized two-functor composition theorem and unbounded K-injective Hom and map computations. Kept the statement unchanged, used one common pair of source/target coordinates, checked all canonical resolution transitions, and created no nodes.",
+  "blueprint": "fix-prop-adjunctions.proof.md, current main-20261015, Step 1 K-injective replacement and Step 3 ordinary direct-image composition: supplies the resolution-level calculation used by the cocycle node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Normalized unbounded two-functor direct-image comparison for arbitrary ringed topoi; sk-lem-sf-mate uses this as a generic ordinary-composition tool."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Computes an arbitrary derived morphism and canonical resolution transitions for an additive functor; used with h_* without any preservation of K-injectives."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Small ringed-site module categories admit unbounded K-injective resolutions, supplying the hypotheses of the generic map computation."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sf-kinjective-derived-map-computation",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q48-2f3f0637e",
+  "group": "Q48",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q48-2f3f0637e (reviewer sub-agent of L); spot-checked: I read the full 8-step proof of the item; the delivery has no new nodes and leaves the statement and stmt_deps unchanged. I recomputed every step against the statements of the cited nodes and found no error. Steps 1-2: the (f,g) normalization of lem-weil-pbc-ringed-topoi-derived-pushforward-composition states that g_*j is a quasi-isomorphism, so w=k∘g_*j is one too. Step 3: the K-injective Hom bijection, used with source T and then source B, gives the unique class u with Qu=Qw(Qt)^{-1} and ut≃w. Step 4: E_t is exactly c_t of lem-sf-kinjective-derived-map-computation. Step 5: the (gf,h) normalization with resolution t has target coordinate e_{h,T}R_h(Qt·v)=m, giving mκ_{h,gf}s^{-1}=Q(h_*t). Step 6: the map computation applied to Qp with resolutions t,k gives exactly the class u, so dαs^{-1}=Q(h_*u)Q(h_*t). Step 7: the (f,hg) and (g,h) normalizations plus naturality of κ_{h,g} along a give dβs^{-1}=Q(h_*k)Q(h_*g_*j), with the same s and d as the first path. Step 8: changing t cancels in the α product, and d'd^{-1} is the canonical transition Q(h_*z) obtained from b'b^{-1}. Edge cases checked: I=0, identity morphisms, t=w, and Z→F_p, where only I,J,K,T are used as K-injective, never f_*I or g_*J. Route: the unit sk-lem-sf-mate uses sk-def-sf-operations; the composition node (sk-thm-properbasechange) is a declared generic tool, and I accept all three declared tool_uses. Sources: Stacks Tag 0D6E (sites-cohomology.tex:4010-4030) proves only Rg_*Rf_*=R(gf)_*, so the formulas are the agent's own extraction, as proof_origin says; the blueprint ancestor is fix-prop-adjunctions Step 3, which needs the composition comparison to be associative. No SGA is used. No duplicate exists in the DAG; lem-sf-normalized-derived-comparison-common-resolution and lem-weil-pbc-derived-leray-composition state different things. There is no cycle: the item's dependency closure (230 nodes) excludes the parent cocycle node. One harmless inaccuracy: the report mentions citations.json and searches.jsonl, but neither file is in the commit."
  }
 }
