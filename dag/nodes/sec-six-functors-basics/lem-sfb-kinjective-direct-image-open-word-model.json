@@ -19,10 +19,10 @@
  ],
  "proof": [
   {
-   "text": "Use the additive exact section-ring equivalences $E_T$ and the comparisons for direct images, inverse images and open adjunctions of [lem-sfb-internal-module-operations-transport]. On the stipulated small sites, [prop-pur-kinjective-resolutions-exist] gives a K-injective resolution of every sectionwise module complex. Exactness of $E_T$ and its inverse identifies acyclic complexes. Additivity transports the equation $f=dh+hd$ degree by degree, and full faithfulness identifies the maps from each acyclic complex. Hence a complex is K-injective exactly when its image under $E_T$ is, and the resolutions transfer back. The same comparisons identify the specified operations on these representatives. This proves the existence and section-ring assertion of (i); here 'same' is through the canonical comparisons, not a literal equality of the two categories.",
+   "text": "Use the already supplied Grothendieck abelian internal module category and [lem-sfb-grothendieck-k-injective] to obtain a monomorphic quasi-isomorphism N → I with I K-injective, and forget monicity. For the section-ring assertion use the additive equivalence of [lem-sfb-internal-module-operations-transport]. Both equivalence functors preserve K-injectives by the exact-adjoint criterion; the unit isomorphism reflects the property. Exactness and reflection of isomorphisms give preservation and reflection of quasi-isomorphisms. The operation comparisons are iterated by the existing sectionComparison definition.",
    "uses": [
-    "lem-sfb-internal-module-operations-transport",
-    "prop-pur-kinjective-resolutions-exist"
+    "lem-sfb-grothendieck-k-injective",
+    "lem-sfb-internal-module-operations-transport"
    ],
    "elementary": false,
    "source": {
@@ -31,10 +31,9 @@
    }
   },
   {
-   "text": "For a scheme morphism $a$, the adjunction $a^*\\dashv a_*$ is the specified one in [sk-def-sfb-module-pushforward-pullback], and its left adjoint is additive exact by [det-prop-sfb-module-pullback-exact-main]. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to obtain preservation by $a_*$. For an open $j$, [sk-def-sfb-module-lower-shriek] gives the exact left adjoint $j_!$ of $j^*$; apply the same lemma to this adjunction to obtain preservation by $j^*$. No exactness of the right adjoint $a_*$ is used.",
+   "text": "For a scheme morphism a, use the specified upperStarLowerStarAdjunction of [sk-def-sfb-module-pushforward-pullback]. The source module already supplies additivity and preservation of homology by its left adjoint (via the invertible coefficient map). Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to obtain preservation by a_*. For an open j, [sk-def-sfb-module-lower-shriek] supplies the exact left adjoint j_! of j^*, so the same criterion applies. No exactness of a_* is used.",
    "uses": [
     "sk-def-sfb-module-pushforward-pullback",
-    "det-prop-sfb-module-pullback-exact-main",
     "lem-weil-pbc-right-adjoint-preserves-kinjective",
     "sk-def-sfb-module-lower-shriek"
    ],
@@ -54,11 +53,9 @@
    }
   },
   {
-   "text": "For a letter $F=a_*$, [lem-sf-kinjective-derived-map-computation] supplies the isomorphism $\\epsilon_{F,L}:F^{\\mathrm d}(QL)\\to Q(FL)$ for K-injective $L$, namely the inverse derived unit using the identity resolution of $L$. It also supplies $\\epsilon_{F,L'}F^{\\mathrm d}(Qs)\\epsilon_{F,L}^{-1}=Q(Fs)$ for a map $s:L\\to L'$ between K-injectives. For $F=j^*$ the exact induced functor has $F^{\\mathrm d}Q=QF$ with its canonical factorization identification, so the same equation follows by its defining action on maps, and $\\epsilon_{F,L}$ is that identification. Thus both kinds of letter have the same evaluation rule.",
-   "uses": [
-    "lem-sf-kinjective-derived-map-computation"
-   ],
-   "elementary": false,
+   "text": "For a direct-image letter use the existing rightDerivedFunctorObjQIso, whose naturality is rightDerivedFunctor_map_Q_map_comp_objQIso_hom in the source library. For an exact restriction use mapDerivedCategoryFactors and its naturality. These are the canonical inverse-unit and exact-factorization evaluations stipulated in the statement.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Tag 070Y (lemma-K-injective-defined), with arbitrary-resolution map formula; exact restrictions use their induced-functor definition"
@@ -74,10 +71,9 @@
    }
   },
   {
-   "text": "By [lem-weil-pbc-kinjective-hom-derived], the derived arrow $(Qb)h(Qa)^{-1}:QI\\to QJ$ lifts to one and only one homotopy class $t:I\\to J$. Prove the formula of (ii) by induction on $w$. For the empty word it is this defining equality. For $w=Fu$, substitute the formula for $u$ into the recursive evaluations: the conjugated map becomes $\\epsilon_{F,uJ}F^{\\mathrm d}(Q(ut))\\epsilon_{F,uI}^{-1}$, which is $Q(Fut)$ by the one-letter computation of step 4. The latter is exactly the identity-resolution specialization of [lem-sf-kinjective-derived-map-computation] for a direct-image letter; for an exact restriction it is the defining map formula. This proves the assertion for arbitrary derived arrows, rather than just arrows of complexes.",
+   "text": "Apply [lem-weil-pbc-kinjective-hom-derived] to the conjugated derived arrow to get its unique homotopy-class lift. Lift that class to a chain map using fullness of the homotopy quotient. Naturality of the evaluations, proved by word induction from step 4 and the composition equation, computes the word on that chain map. Cancel Q(a) and Q(b) to get the arbitrary-resolution formula. The canonical comparison between Q and quotient followed by Qh identifies this localized chain map with kInjectiveHomotopyImage.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-sf-kinjective-derived-map-computation"
+    "lem-weil-pbc-kinjective-hom-derived"
    ],
    "elementary": false,
    "source": {
@@ -97,16 +93,18 @@
    }
   },
   {
-   "text": "For an underived natural transformation $\\theta:w\\to v$, its degreewise components on a complex form a chain map: $\\theta_{I^{n+1}}w(d^n)=v(d^n)\\theta_{I^n}$ is naturality for $d^n$. For a complex $N$ with resolution $a$, define $\\theta^{\\mathrm d}_{QN}=e_{v,a}^{-1}Q(\\theta_I)e_{w,a}$. For a change of resolution represented by $u:I\\to I'$, naturality gives $v(u)\\theta_I=\\theta_{I'}w(u)$. Substitute the transition formulas of step 7; the two choices of $a$ give the same component. This construction uses only a representative complex for each derived object, which exists by the localization definition. If a localization model uses isomorphic objects, transport the component along that isomorphism; the arbitrary-arrow naturality checked next makes this transport independent.",
-   "uses": [],
-   "elementary": true,
+   "text": "On a K-injective I define the component by conjugating Q(theta_I) with the word evaluations. For every derived map QI → QJ choose a chain representative using [lem-weil-pbc-kinjective-hom-derived] and fullness of the homotopy quotient. Evaluation naturality and degreewise naturality of theta give naturality of these components. On the full homotopy subcategory of K-injectives conjugate by quotientCompQhIso. Its localization Qh is an equivalence by existence of K-injective resolutions, so fully faithful precomposition descends this natural transformation to the derived category.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
     "place": "Tags 070I and 070Y: agent construction using the evaluation formulas and naturality of the given transformation"
    }
   },
   {
-   "text": "For $h:QN\\to QN'$ choose the homotopy class $t:I\\to J$ of step 6. The desired naturality square, conjugated by its four evaluation isomorphisms, is $Q(vt)Q(\\theta_I)=Q(\\theta_J)Q(wt)$, which follows from naturality of $\\theta$ on the chain map $t$. Changing $t$ by a homotopy changes neither side by step 3. This proves naturality for every derived arrow and independence of all homotopic choices. The evaluation formula determines every component on every object, so it determines a unique natural transformation. If $\\theta$ is invertible, applying the construction to $\\theta^{-1}$ gives its inverse by cancellation of the evaluations.",
+   "text": "Full faithfulness of precomposition computes the descended component at QI. Naturality of the descended transformation with Q(a), followed by cancellation, proves the normalization for every quasi-isomorphic K-injective resolution a. Any two normalized transformations agree on QN by cancelling their evaluations at a resolution; localization extensionality then proves equality. Descending an inverse transformation and the composition calculation below proves invertibility.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -115,7 +113,7 @@
    }
   },
   {
-   "text": "For identities and vertical composites, conjugation cancels the middle evaluation, giving respectively $Q(1_{wI})$ and $Q(\\psi_I\\theta_I)$. To check whiskering, first note the concatenation formula $e_{ux,a}=e_{u,1_{xI}}\\circ u^{\\mathrm d}(e_{x,a})$, where $xI$ is K-injective. Induction on the length of $u$ proves it directly from step 5: for $u=1$ it is $e_{x,a}$, and adding $F$ inserts $\\epsilon_{F,uxI}$ on both sides. Right whiskering $\\theta x$ therefore evaluates to $Q(\\theta_{xI})$, since $xI$ may use its identity resolution. Left whiskering $y\\theta$ evaluates to $Q(y\\theta_I)$ by step 6 applied to the map $\\theta_I:wI\\to vI$ between the K-injective word images. These are exactly the underived whiskerings evaluated on $I$. Thus both whiskerings and vertical composition are preserved with the canonical evaluation identifications.",
+   "text": "Identities and vertical composites follow by cancelling the middle evaluation. The recursive normalization gives the concatenation evaluation, and the degreewise compositor induced by Iso.refl is the identity chain map. Input whiskering follows from naturality of the descended cell along the evaluation of the input word. Output whiskering follows from evaluation naturality at the chain map theta_I between the K-injective word images.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -124,7 +122,7 @@
    }
   },
   {
-   "text": "Evaluate a finite composite-and-whiskering expression on a common $I$. Step 10 identifies its value with $Q$ of the corresponding underived expression at $I$. Equal underived expressions therefore have equal evaluated values. Cancel the source and target evaluation isomorphisms to obtain equality on each derived object, hence equality of natural transformations. Reparenthesizing inserts only the canonical functor associators: their components identify $(Fu)I$ with $F(uI)$, and the concatenation calculation of step 10 gives the same evaluation on either side. This proves the final diagram assertion, including identity letters, empty words and all canonical associators. All resolutions and map computations above are unbounded, and no support or constructibility condition has entered.",
+   "text": "Induct on the finite Expression. The cell, identity and vertical composition cases use uniqueness and the preceding component computations; both whiskerings use step 10. For associators and unitors in both directions, their degreewise components are identities; the recursive evaluation equation reduces compatibility to functoriality and associativity of composition. Thus each expression equals the normalized descent of its underived value. Equal underived values have equal descents. Descending an inverse and applying the identity/composition laws gives a two-sided inverse for every isomorphism.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -135,18 +133,16 @@
  ],
  "proof_deps": [
   "lem-sfb-internal-module-operations-transport",
-  "prop-pur-kinjective-resolutions-exist",
+  "lem-sfb-grothendieck-k-injective",
   "sk-def-sfb-module-pushforward-pullback",
-  "det-prop-sfb-module-pullback-exact-main",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "sk-def-sfb-module-lower-shriek",
-  "lem-sf-kinjective-derived-map-computation",
   "lem-weil-pbc-kinjective-hom-derived"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 08BJ, 070I and 070Y; explicit finite-word induction and natural-transformation descent from these results, with existence from sites-cohomology Section 07A5 and injectives Theorem 079P."
+  "place": "Tags 08BJ, 070I and 070Y; explicit finite-word induction and natural-transformation descent from these results, with existence from sites-cohomology Section 07A5 and injectives Theorem 079P. Resolution existence uses the existing internal-module Grothendieck instance and its native K-injective resolution instance; no sectionwise resolution transport is needed."
  },
  "mathlib_searches": [
   {
@@ -299,13 +295,10 @@
  },
  "tool_uses": [
   "lem-sfb-internal-module-operations-transport",
-  "prop-pur-kinjective-resolutions-exist",
-  "det-prop-sfb-module-pullback-exact-main",
   "sk-def-sfb-module-pushforward-pullback",
   "sk-def-sfb-module-lower-shriek",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-sf-kinjective-derived-map-computation"
+  "lem-weil-pbc-kinjective-hom-derived"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -364,5 +357,15 @@
   "group": "Q56",
   "result": "pass",
   "note": "Read the node, all 8 stmt_dep records, the module (434 lines), the report and the exact declarations used (kInjectiveResolutionHomTarget = Qb∘h∘Qa⁻¹, kInjectiveHomotopyImage, rightDerivedFunctorObjQIso = inverse derived unit, PreservesKInjectiveComplexes, InternalModuleOperations comparisons pinned by ∃!, isIso_condensedPullbackHom instance). Every clause of (i)-(iii) matches, orientations checked: the evaluation family is uniquely determined by its recursion with e_{1,a}=Qa; resolutions are arbitrary quasi-isos; IsEvaluationLift ranges over all resolutions; Expression covers cells, id, vcomp, both whiskerings, associators and unitors; the IsIso clause is present. Mathematically checked that assoc/unitor descent holds via naturality of evaluations. Universes u+1/u as recorded; α_a hypothesis is automatic; nothing stronger is assumed. rightDerivedFunctor is sanctioned by the sk-def-sfb-derived-categories note (no H4); no duplicate found. Only the item lean field changed; dep records identical to live; lean.statement verbatim; 29 declarations present; no hollow defs (choose of ∃! only); all theorems sorry; docstrings carry source, blueprint and steps. No compile rerun (worker: 36.6 s/33.6 s clean). Advisories: theorem-owned decls (InternalModuleOperations.*, kInjective map helpers) are not stmt_deps; two private imports serve proofs only; second reading is the author's own."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X5",
+  "result": "pass",
+  "landing": "20261021T174254-L-3776776",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
