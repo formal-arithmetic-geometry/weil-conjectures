@@ -23,7 +23,8 @@
   "sk-def-sfb-change-of-scalars",
   "def-sfb-continuous-map-condensed-ring-map",
   "def-weil-l-adic-numbers",
-  "def-weil-algebraic-closure"
+  "def-weil-algebraic-closure",
+  "def-sfb-norm-continuous-monodromy-data"
  ],
  "proof": [
   {
@@ -291,5 +292,23 @@
   "group": "Q54",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q54-620934561 (reviewer sub-agent of L); spot-checked: Read the item, all four new nodes, every cited statement, and Bhatt–Scholze pp. 63–71 (Prop 7.1.5, Lemmas 7.4.1/7.4.3/7.4.7/7.4.10, Remark 7.4.8). The item's statement is identical to live. It is a first split: no repair note exists and the item is unsplit in both clones. No cycle. One fault (C4/E5), repaired: Steps 5 and 7 got ισ_L = τ_L∘q, and the generic cocycle ρq of the constructed module, from 'the pointed pullback clause and the coefficient formula of the Cech node'. But the torsor node never said what its homomorphism is over Spec k in terms of the Čech descent datum, and the Cech node does not mention torsors. Fix: lem-sfb-complete-group-torsor-monodromy gets a field clause. For X = Spec k, Π_x = G_k, the fibre is P(Spec k^s), and the homomorphism is c with pr2*p = pr1*p·c in C(G_k,G), using the Cech node's convention c(gh)=c(g)c(h). It also gets two stmt_deps, def-pd-separable-closure and lem-sfb-field-separable-cech-coordinates. Steps 5 and 7 of the item now say this explicitly. Everything else checks: Step 1 (DCC ⇒ 0357 components ⇒ integral); Step 2 (generic matrix extension and rank invariance); Step 3 (Čech descent and intertwiners); Step 4 (GL_n(K̂) has an open-subgroup basis and is Raikov complete, so it is Noohi by 7.1.5); Step 6 (0BTD surjectivity and quotient-map continuity); Step 7 (compact image, profinite H); Steps 8–9 (elementary flags justified). New nodes, tested on small cases: generic-sections (étale U: π0(U) ≅ |U_η| by normality, then the ind-étale limit, then BS 2.3.4 refinement; the nodal curve shows normality is needed) is true; Čech coordinates (Spec k^s is w-contractible) are true; the torsor node is BS 7.4.7's argument for Noohi groups on normal X, true, and not a duplicate of lem-a1-normal-proetale-monodromy (finite E only); the Mathlib completion leaf's lines were all verified. Batch-5 flags are all accepted. lem-trf-normal-topologically-noetherian-components is Stacks 0357, general topology. lem-dl-a1-normal-scheme-galois-inertia-presentation reaches the trace-formula chapter only through the definition def-weil-pbc-henselization-at-prime, and only surjectivity is used. lem-wf-fibre-functor-basepoint-transport reaches cor-galois-lisse-representations only through paragraphs 2–3; Step 8 uses paragraph 1 (0BND). No SGA citation.; 2 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalContinuousAlgClMonodromy",
+  "declaration": "AlgebraicGeometry.ProEtale.normal_continuous_algCl_monodromy",
+  "file": "lean/Sheaf/Paper/NormalContinuousAlgClMonodromy.lean",
+  "statement": "theorem normal_continuous_algCl_monodromy (l : ℕ) [Fact l.Prime] (Ω : Type u) [NormedField Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (hnorm : ∀ a : ℚ_[l], ‖algebraMap ℚ_[l] Ω a‖ = ‖a‖) (X : Scheme.{u}) [ConnectedSpace X] [IsNoetherian X] [X.IsSeparated] (hinvertible : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) {Ωx : Type u} [Field Ωx] [IsAlgClosed Ωx] (x : Spec (.of Ωx) ⟶ X) : ∃ eΩ : NormContinuousMonodromy Ω X (Aut (Scheme.flcFiber x)), ∀ E : IntermediateField ℚ_[l] Ω, FiniteDimensional ℚ_[l] E → ∃ eE : NormContinuousMonodromy E X (Aut (Scheme.flcFiber x)), ∃ hE : Continuous (algebraMap E Ω), Nonempty (NormContinuousScalarComparison X (Aut (Scheme.flcFiber x)) hE eE eΩ)",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50561ad44",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read item, all 17 stmt_dep records, both delivered modules, and dep sources (continuousMapRingObjOfUniverse, IsLisseCoefficientModule/Mod.IsFree, flcFiber, Rep universes, SubfieldClass.toNormedField). Hypotheses match exactly; unique extended norm pins Ω's topology; finite E via IntermediateField with induced norm. Equivalence is additive and K-linear via actual constant scalars, regular ↦ trivial, rank 0 allowed; scalar comparison tied to actual Mod.extendScalars along the recorded postcomposition map, natural and equivariant on spanning pure tensors. Ω : Type u forced by coefficientRing Ab.{u+1}; harmless. Records: statement unchanged vs live, lean.statements verbatim, docstrings OK, sorry only, item not dropped, first delivery. Advisory: new representation category overlaps the finite-E-only notions (IsContinuousCoefficient/SfContinuousRepresentations) but is needed for Ω. No compile run (none required; no file changed)."
  }
 }

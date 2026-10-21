@@ -12,7 +12,8 @@
   "def-weil-l-adic-coefficient-extension",
   "def-weil-completed-integral-coefficients",
   "def-weil-sheaf-of-modules-category",
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "def-weil-completed-integral-scalar-data"
  ],
  "proof": [
   {
@@ -260,5 +261,35 @@
   "group": "Q141",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-3e6f1debe (reviewer sub-agent of L); spot-checked: Read the item and all eight steps against every cited statement. There are no new nodes. The statement, stmt_deps, source, chapter and unit are byte-identical to the base, so nothing is weakened. No re-split repair note exists. The item is still unsplit live. There is no cycle with its citer lem-weil-point-sections-scalar-extension. Steps: (1) lem-pur-proetale-finite-constant-sections applies at X=V=s, where |s| is one point; A_{H,n} is finite by def-weil-l-adic-coefficient-extension clause 4; the limit is sectionwise by def-pur-sheaf-inverse-limit. (2) The completeness and DVR-ball argument for O_H≅lim A_{H,n} checks line by line. (3) The hypotheses of lem-pur-adic-basis-limit hold: t=ϖ_E=u ϖ_L^e with e≥1 because the absolute value extending to L is unique; R and S are exactly R_E and R_L; the columns are the residues of β_i; the coefficient map is given by its explicit projections. (4) The presheaf tensor is F^d, already a sheaf, so the sheafification unit is an isomorphism. (5)-(6) Balancedness, O_L-linearity, the coordinate identity, naturality and basis independence all check. (7) Kernels and cokernels are formed on underlying abelian sheaves, so restriction detects exactness, and finite powers are exact. (8) The chain identity follows from naturality. Sources checked: Bhatt-Scholze Lemma 4.2.12 is on p.30; Definition 6.8.1 and Lemma 6.8.2(1) with its proof are on pp.58-59; Stacks 03EK is the section-tensor-product label; the blueprint place is the final paragraph of def-weil-finite-coefficient-point. Edge cases checked: E=L, ramified L/E, zero or torsion F. Not duplicates of lem-weil-finite-free-completed-scalar-comparison (sheaf finiteness only) or lem-sfb-finite-free-scalar-coordinates (internal-module framework). The six generic tool_uses are accepted. One fault (B5-type): the report claims the source page was corrected, but source.place still attributes pp.58-59 to Lemma 4.2.12. The fix file sets source.place to 'Lemma 4.2.12 (p. 30) and Lemma 6.8.2(1) with its proof (pp. 58-59); ...' and changes nothing else.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointFiniteFreeSectionsTensor",
+  "declaration": "WeilConjectures.point_finite_free_sections_tensor",
+  "declarations": [
+   "WeilConjectures.pointFiniteFreeFinal",
+   "WeilConjectures.pointFiniteFreeEvaluation",
+   "WeilConjectures.pointFiniteFreeModuleTensor",
+   "WeilConjectures.pointFiniteFreeModuleTensor_additive",
+   "WeilConjectures.pointFiniteFreeRingMap",
+   "WeilConjectures.pointFiniteFreeRestriction",
+   "WeilConjectures.PointFiniteFreeSectionsTensorData",
+   "WeilConjectures.point_finite_free_sections_tensor"
+  ],
+  "file": "lean/Sheaf/Paper/PointFiniteFreeSectionsTensor.lean",
+  "statement": "theorem point_finite_free_sections_tensor (D : FiniteFieldDatum.{t}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (Ω : Type u) [Field Ω] [Algebra ℚ_[l] Ω] [IsAlgClosure ℚ_[l] Ω] (E L : IntermediateField ℚ_[l] Ω) [FiniteDimensional ℚ_[l] E] [FiniteDimensional ℚ_[l] L] (h : E ≤ L) : Nonempty (PointFiniteFreeSectionsTensorData D.k l E L (IntermediateField.inclusion h))",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Return H2: def-weil-completed-integral-scalar-data owns the canonical completed map, ordinary scalar extension and tensor generators, relative degree, and integral inclusion/constants; its module Sheaf.Paper.CompletedIntegralScalarData publicly reexports the published declarations of Sheaf.Paper.FiniteFreeCompletedScalarComparison and Sheaf.Paper.IntegralScalarExtensionWellDefined. Every declaration and the theorem signature are unchanged from a12ed8e1fadd. Site and coefficient universes remain independent. Reviewer fix (2026-10-21): the owning module no longer redeclares the published constructions; the live module is present.",
+  "fixed_by": "NT-stage2-cc-652676df7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-652676df7",
+  "group": "NY",
+  "result": "fix",
+  "note": "Fourth byte-identical push (same hashes as 105846/3ce998cc/d3c85ff7). Maths re-read clause by clause (normalized coefficient equivalences, quotient/inclusion compatibility, integral and sheaf basis with shared columns, local coordinates both directions, θ_F pure-tensor/identity/inverse/unique, exactness and detection, natural unbounded complex iso; E=L, ramified, zero/torsion F): no fault. H4: delivered Sheaf.Paper.CompletedIntegralScalarData redeclares completedCoefficientMap, completedScalarChangeData, completedOrdinaryScalarExtension, completedScalarTensorSection, completedScalarRelativeDegree of the live published FiniteFreeCompletedScalarComparison (not absent). The existing:true FIX was refused 3x by the landing probe (non-module import closure contains duplicate CochainComplex.isKFlat_of_boundedAbove_flat in WeilConjectures/Sheaf BoundedAboveFlatSheafKFlat, still present), so FIX instead: CompletedIntegralScalarData.lean now only public-imports FFCSC + IntegralScalarExtensionWellDefined and adds abbrev completedIntegralScalarCoefficientMap := completedCoefficientMap; def node existing:false with the alias as primary declaration and 8 reexported names, notes and stale 'absent' search verdict corrected; item lean-record note corrected; item statement/stmt_deps/Lean file unchanged. nt_compile --json: alias module 2.9 s, item 47.9 s, rc 0; check_lean_text no failures. Maintainer: resolve the duplicate lemma or switch the probe to module+public import."
  }
 }

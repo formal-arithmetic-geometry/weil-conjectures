@@ -22785,3 +22785,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:16 L: merged deliver/Q05/lem-sfb-normal-generic-continuous-sections (reviewer PASS; first push; new nodes: 1)
 - 14:16 L: merged deliver/Q26/lem-sfb-qcqs-proper-integral-rational-scalar-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 14:17 L: merged deliver/Q04/lem-sfb-field-separable-cech-coordinates (reviewer FIX; first push; new nodes: 0)
+- 14:17 L: merged deliver/Q09/lem-weil-pbc-realization-adjoint-comparisons (stage 2; reviewer PASS; parallel immutable checks)
+- 14:17 L: merged deliver/Q06/lem-sfb-normal-continuous-algcl-monodromy (stage 2; reviewer PASS; parallel immutable checks)
+- 14:17 L: merged deliver/NY/lem-weil-point-finite-free-sections-tensor (stage 2; reviewer FIX; parallel immutable checks)
+- 14:17 L: merged deliver/N7/lem-fd-integral-identity-rational-equivalence (stage 2; reviewer PASS; parallel immutable checks)

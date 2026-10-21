@@ -1,0 +1,121 @@
+{
+ "id": "def-weil-completed-integral-scalar-data",
+ "kind": "definition",
+ "title": "Canonical completed integral scalar data and constant sections",
+ "status": "split",
+ "statement": "Let $\\ell$ be prime, let $E,L$ be finite extensions of $\\mathbf Q_\\ell$, and let $\\iota:E\\to L$ be a $\\mathbf Q_\\ell$-algebra embedding, with valuation rings $\\mathcal O_E,\\mathcal O_L$, chosen uniformizers and quotient rings $A_{H,n+1}=\\mathcal O_H/\\varpi_H^{n+1}$ for $H=E,L$ and $n\\geq0$ [def-weil-l-adic-coefficient-extension]. Let $Y$ be a scheme with its small pro-etale site [def-weil-pbc-proetale-site], constant ring sheaves [def-weil-pbc-constant-sheaf], and completed coefficient ring sheaves $R_H=\\varprojlim_{n\\geq0}(A_{H,n+1})_Y$ with projections $\\pi_{H,n}$ [def-weil-completed-integral-coefficients]. Define the following canonical scalar data. The ring homomorphism $j:\\mathcal O_E\\to\\mathcal O_L$ is the restriction of $\\iota$ to the valuation rings. It induces $j_n:A_{E,n+1}\\to A_{L,n+1}$. Define $c:R_E\\to R_L$ to be the unique morphism whose composite with $\\pi_{L,n}$ is $(j_n)_Y\\circ\\pi_{E,n}$ for every $n$. For any sheaf $M$ of $R_E$-modules [def-weil-sheaf-of-modules-category], define ordinary scalar extension $T(M)=R_L\\otimes_{R_E}M$ by sheafifying the presheaf tensor, with its canonical functor on morphisms [def-pur-sheaf-tensor-product], using the ordinary change-of-rings witness of [lem-pur-derived-change-of-rings]. For every site object $U$, $s\\in R_L(U)$ and $x\\in M(U)$, define $\\tau_{M,U}(s,x)\\in T(M)(U)$ as the image of the pure tensor $s\\otimes x$ under the sheafification unit and the canonical identification with this ordinary extension. Define $d=[L:E]$ using the $E$-algebra structure on $L$ induced by $\\iota$ [def-weil-vector-space-dimension]. For $a\\in\\mathcal O_H$, define $a_{n,U}\\in(A_{H,n+1})_Y(U)$ to be the constant section obtained by applying the sheafification unit to the residue of $a$, and define $a_U\\in R_H(U)$ as the unique section satisfying $\\pi_{H,n}(a_U)=a_{n,U}$ for every $n$. The scheme and coefficient universes are independent. These are constructions, with no finite-freeness or sections-tensor isomorphism assertion.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-vector-space-dimension",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.2(1), pp. 58-59 (completed coefficient sheaves and coefficient extension); Proposition 6.8.14(1), p. 61 (scalar extension); ordinary sheafified tensor as in Stacks Tag 03EK. The constant sections and coefficient inclusion are the inverse-limit constructions used in the explicit point sections calculation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedCoefficientMap|completedScalarTensorSection|integralScalarConstant",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "Reuse the exact published project constructions; no Mathlib definition gives this completed pro-etale coefficient interface."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical map between completed integral coefficient sheaves, ordinary extension of scalars, and constant integral sections",
+   "results": "OK 8 hit(s): CategoryTheory.constantSheafΓAdj, AdicCompletion.mkₐ, LocallyConstant.coeFnₗ, SheafOfModules.restrictScalars, AdicCompletion.of, ContinuousLinearMap.completion, AdicCompletion.mk, PresheafOfModules.toSheafify",
+   "date": "2026-10-21",
+   "verdict": "Reuse the exact published project constructions; no Mathlib definition gives this completed pro-etale coefficient interface."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, Module.finrank",
+   "results": "OK 0 hit(s): ",
+   "date": "2026-10-21",
+   "verdict": "Reuse the exact published project constructions; no Mathlib definition gives this completed pro-etale coefficient interface."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n completedCoefficientMap|completedOrdinaryScalarExtension|completedScalarTensorSection|completedScalarRelativeDegree|integralScalarIntegerInclusion|integralScalarConstant|integralScalarFiniteConstant lean/WeilConjectures lean/Sheaf; rg -l of the same pattern in dag/nodes; blueprint_refs.py search completed scalar; blueprint_refs.py search coefficient map",
+   "results": "The seven exact WeilConjectures declarations are defined in Sheaf.Paper.FiniteFreeCompletedScalarComparison and Sheaf.Paper.IntegralScalarExtensionWellDefined. DAG records list them under the two theorem nodes, but no definition node owns this interface. def-weil-pbc-finite-completed-coefficient-map uses pbcCompletedScalarMap and a different transported PBC coefficient interface; it is not this notion. Other definition-node hits are consumers or use unrelated namespaced maps. blueprint search completed scalar has one unrelated field-extension statement; coefficient map has 27 unrelated blueprint matches.",
+   "date": "2026-10-21",
+   "verdict": "Reuse all seven exact existing declarations, adding only their missing definition-node ownership; no new Lean declaration."
+  },
+  {
+   "tool": "grep",
+   "query": "scompile.py --source Sheaf.Paper.FiniteFreeCompletedScalarComparison; rg for the seven helper definitions in refreshed live sources",
+   "results": "After the passing repaired dry run, final delivery preflight reported the former module absent from new live base 049907f6ae. scompile.py --source independently returned Module source unavailable. The refreshed read clone likewise has no module or four completed-scalar definitions. IntegralScalarExtensionWellDefined and its three helpers remain available.",
+   "date": "2026-10-21",
+   "verdict": "Superseded at review (2026-10-21): the module is present and unchanged in the live sources and the published build; the absence was a transient preflight gap. The constructions are reused by public reexport, not redeclared."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-point-finite-free-sections-tensor",
+  "date": "2026-10-21",
+  "group": "NY"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-finite-coefficient-point",
+   "place": "Final paragraph: stagewise point evaluation and scalar compatibility; canonical integral coefficient maps, ordinary tensor generators, and normalized constant sections used in the finite-free sections calculation.",
+   "via": [
+    "lem-weil-point-finite-free-sections-tensor",
+    "lem-weil-point-sections-scalar-extension"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "module": "Sheaf.Paper.CompletedIntegralScalarData",
+  "declaration": "WeilConjectures.completedIntegralScalarCoefficientMap",
+  "declarations": [
+   "WeilConjectures.completedIntegralScalarCoefficientMap"
+  ],
+  "statement": "abbrev completedIntegralScalarCoefficientMap : completedIntegralCommRingSheafUnrestricted l E Y ⟶ completedIntegralCommRingSheafUnrestricted l L Y",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Return H2 ownership repair. The constructions are the published ones in Sheaf.Paper.FiniteFreeCompletedScalarComparison (completedCoefficientMap = the unique map of completedCoefficientMap_existsUnique compatible with every integralScalarQuotientSheafMap; completedScalarChangeData = the derivedChangeOfRingsIndependentCoefficients witness of lem-pur-derived-change-of-rings; completedOrdinaryScalarExtension, completedScalarTensorSection, completedScalarRelativeDegree built from them) and Sheaf.Paper.IntegralScalarExtensionWellDefined (integral inclusion, finite and completed constant sections); this module publicly reexports both and adds only the transparent abbrev completedIntegralScalarCoefficientMap := completedCoefficientMap. Reviewer fix (2026-10-21): the delivered module redeclared five names of the live, published FiniteFreeCompletedScalarComparison (which never disappeared); an existing: true record cannot pass the landing #check probe, whose non-module import of that module meets a duplicate CochainComplex.isKFlat_of_boundedAbove_flat in its full closure, so the owning module is a reexport with an alias.",
+  "file": "lean/Sheaf/Paper/CompletedIntegralScalarData.lean",
+  "fixed_by": "NT-stage2-cc-652676df7"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-652676df7",
+  "group": "NY",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-652676df7",
+  "group": "NY",
+  "result": "fix",
+  "note": "Fourth byte-identical push (same hashes as 105846/3ce998cc/d3c85ff7). Maths re-read clause by clause (normalized coefficient equivalences, quotient/inclusion compatibility, integral and sheaf basis with shared columns, local coordinates both directions, θ_F pure-tensor/identity/inverse/unique, exactness and detection, natural unbounded complex iso; E=L, ramified, zero/torsion F): no fault. H4: delivered Sheaf.Paper.CompletedIntegralScalarData redeclares completedCoefficientMap, completedScalarChangeData, completedOrdinaryScalarExtension, completedScalarTensorSection, completedScalarRelativeDegree of the live published FiniteFreeCompletedScalarComparison (not absent). The existing:true FIX was refused 3x by the landing probe (non-module import closure contains duplicate CochainComplex.isKFlat_of_boundedAbove_flat in WeilConjectures/Sheaf BoundedAboveFlatSheafKFlat, still present), so FIX instead: CompletedIntegralScalarData.lean now only public-imports FFCSC + IntegralScalarExtensionWellDefined and adds abbrev completedIntegralScalarCoefficientMap := completedCoefficientMap; def node existing:false with the alias as primary declaration and 8 reexported names, notes and stale 'absent' search verdict corrected; item lean-record note corrected; item statement/stmt_deps/Lean file unchanged. nt_compile --json: alias module 2.9 s, item 47.9 s, rc 0; check_lean_text no failures. Maintainer: resolve the duplicate lemma or switch the probe to module+public import."
+ }
+}

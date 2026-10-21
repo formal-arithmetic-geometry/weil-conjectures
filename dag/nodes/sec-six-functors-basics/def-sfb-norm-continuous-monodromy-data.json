@@ -1,0 +1,120 @@
+{
+ "id": "def-sfb-norm-continuous-monodromy-data",
+ "kind": "definition",
+ "title": "Norm-continuous representation and scalar-compatible monodromy data",
+ "status": "split",
+ "statement": "Let $K$ be a normed field and $X$ a scheme [def-pc-scheme]. Let $G$ be a topological group. Write $R_{K,X}=p_X^*C(-,K)$ using all continuous functions [def-sfb-continuous-map-condensed-ring], [sk-def-sfb-pulled-back-coefficients]. Let $\\mathrm{Lisse}_K(X)$ be the full subcategory of internal modules [sk-def-sfb-module-objects] satisfying [def-sfb-lisse-coefficient-module]. Let $\\mathrm{Rep}^{\\mathrm{cont}}_K(G)$ be the full subcategory of $K$-linear representations on vector spaces having a finite basis $b_0,\\ldots,b_{n-1}$ for which every matrix entry $g\\mapsto (\\rho(g))_{ij}$ is continuous in the norm topology of $K$; arrows are all equivariant $K$-linear maps, and $n=0$ is allowed.\n\nA norm-continuous monodromy datum is an equivalence $\\mathrm{Lisse}_K(X)\\simeq\\mathrm{Rep}^{\\mathrm{cont}}_K(G)$ which is $K$-linear and additive, and sends the regular internal module to the trivial representation on $K$. Constant scalars on internal modules mean the action of the actual constant sections, constructed on $C(-,K)$ by multiplication by the constant function and then pulled back by $p_X^*$. Thus finite direct sums, including the empty sum, are preserved.\n\nFor a continuous inclusion $E\\hookrightarrow K$ of normed fields, postcomposition and pullback give the coefficient map [def-sfb-continuous-map-condensed-ring-map]. A scalar comparison between two such monodromy data consists of a functor on lisse modules naturally identified, after the full-subcategory inclusion, with the ordinary internal extension $R_{K,X}\\otimes_{R_{E,X}}-$ [sk-def-sfb-change-of-scalars], and linear isomorphisms $K\\otimes_E\\Phi_E(L)\\cong\\Phi_K(L_K)$ [def-weil-vector-space-scalar-extension], natural in $L$ and intertwining $g(a\\otimes v)=a\\otimes\\rho(g)v$.",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-continuous-map-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-sfb-lisse-coefficient-module",
+  "def-sfb-continuous-map-condensed-ring-map",
+  "sk-def-sfb-change-of-scalars",
+  "def-weil-vector-space-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Section 7.4, Lemma 7.4.7, pp. 70–71; norm-topology strengthening and scalar comparison data explicitly specified in lem-sfb-normal-continuous-algcl-monodromy."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "LeanSearch",
+   "query": "Category of finite dimensional continuous normed field representations and scalar compatible lisse internal module monodromy",
+   "results": "8 hits: FDRep.instPreadditive; ContinuousLinearMap.finiteDimensional; FDRep; isModuleTopologyOfFiniteDimensional; Rep.instMonoidalClosed; Rep; FDRep.instLargeCategory; Rep.of",
+   "date": "2026-10-21",
+   "verdict": "Rep supplies the ambient category, but no result supplies this full continuous subcategory or its scalar-compatible internal-module monodromy data."
+  },
+  {
+   "tool": "Loogle",
+   "query": "Rep, Continuous",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "No matching category or monodromy interface."
+  },
+  {
+   "tool": "grep",
+   "query": "NormContinuousRepresentations|NormContinuousMonodromy|NormContinuousScalarComparison",
+   "results": "0 Mathlib hits (msearch); 0 hits in lean/WeilConjectures, lean/Sheaf and dag/lean_names_upstream.json. blueprint_refs.py search \"continuous normed field representation\": 0 blueprint nodes. DAG search for continuous matrix entries finds theorem consumers, not an owning definition. Representation.IsLAdic requires finite-subfield descent; IsContinuousCoefficient is finite-extension-only.",
+   "date": "2026-10-21",
+   "verdict": "No existing node or declaration supplies the specified norm-topology representation and simultaneous scalar-comparison interface."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-normal-continuous-algcl-monodromy",
+  "date": "2026-10-21",
+  "group": "Q06"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "det-thm-sf-ctf-stability-direct-images proof paragraph (3), the all-continuous compatibility obligation: finite coefficient models on source strata before open-image finiteness; monodromy on the reduced normal refinements, before the compact-matrix finite-field argument",
+   "via": [
+    "lem-sfb-normal-continuous-algcl-monodromy",
+    "lem-sfb-continuous-algcl-stratified-finite-models",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.Paper.NormContinuousMonodromyData",
+  "declaration": "AlgebraicGeometry.ProEtale.NormContinuousMonodromy",
+  "file": "lean/Sheaf/Paper/NormContinuousMonodromyData.lean",
+  "statement": "structure NormContinuousMonodromy (K : Type u) [NormedField K] (X : Scheme.{u}) (G : Type v) [Group G] [TopologicalSpace G]",
+  "branch": "sheaf-dag",
+  "by": "Q06",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.normContinuousRing",
+   "AlgebraicGeometry.ProEtale.normContinuousRing_comm",
+   "AlgebraicGeometry.ProEtale.NormContinuousLisse",
+   "AlgebraicGeometry.ProEtale.NormContinuousRepresentations",
+   "AlgebraicGeometry.ProEtale.normContinuousCoefficientMap",
+   "AlgebraicGeometry.ProEtale.normContinuousCoefficientMap_mon",
+   "AlgebraicGeometry.ProEtale.normContinuousCoefficient_comm",
+   "AlgebraicGeometry.ProEtale.normContinuousExtension",
+   "AlgebraicGeometry.ProEtale.normContinuousMultiply",
+   "AlgebraicGeometry.ProEtale.normContinuousConstant",
+   "AlgebraicGeometry.ProEtale.normContinuousScalar",
+   "AlgebraicGeometry.ProEtale.NormContinuousMonodromy",
+   "AlgebraicGeometry.ProEtale.NormContinuousScalarComparison"
+  ],
+  "note": "Real constructions on the recorded all-continuous ring, recorded pullback and recorded internal extension. The representation full subcategory uses continuous matrix entries in a finite basis and all equivariant linear maps; no finite-subfield descent condition. Linearity uses canonical constant scalars on internal modules. Scalar comparison is a natural linear equivalence with the specified action on pure tensors."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50561ad44",
+  "group": "Q06",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-50561ad44",
+  "group": "Q06",
+  "result": "pass",
+  "note": "Read item, all 17 stmt_dep records, both delivered modules, and dep sources (continuousMapRingObjOfUniverse, IsLisseCoefficientModule/Mod.IsFree, flcFiber, Rep universes, SubfieldClass.toNormedField). Hypotheses match exactly; unique extended norm pins Ω's topology; finite E via IntermediateField with induced norm. Equivalence is additive and K-linear via actual constant scalars, regular ↦ trivial, rank 0 allowed; scalar comparison tied to actual Mod.extendScalars along the recorded postcomposition map, natural and equivariant on spanning pure tensors. Ω : Type u forced by coefficientRing Ab.{u+1}; harmless. Records: statement unchanged vs live, lean.statements verbatim, docstrings OK, sorry only, item not dropped, first delivery. Advisory: new representation category overlaps the finite-E-only notions (IsContinuousCoefficient/SfContinuousRepresentations) but is needed for Ω. No compile run (none required; no file changed)."
+ }
+}
