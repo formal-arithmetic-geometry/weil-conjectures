@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-mg-common-positive-central-element",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "A common positive-degree central element",
@@ -15,46 +15,137 @@
  "stmt_deps": [
   "def-wf-semisimple-module",
   "lem-mg-normal-restriction-semisimple",
+  "def-wf-fundamental-representation",
+  "def-wf-monodromy-data",
+  "def-wf-arithmetic-monodromy-extension",
+  "def-wf-degree-components",
   "lem-mg-degree-component-functoriality"
  ],
  "proof": [
   {
-   "text": "The direct sum $\\rho$ of semisimple Weil representations is a\nsemisimple Weil representation, so its monodromy data form a semisimple\nrepresented degree datum in the sense of [d-monodromy], with\n$H=H_{\\mathrm{geom}}$ and $F=\\rho(s)$ for the chosen degree-one $s$.\nBy [p-central] there is a positive central pair ([d-central]), i.e. $N>0$ and\n\n$$\nz_{\\mathrm{mat}}=hF^N\\in Z(G_{\\mathrm{Zar}}),\\qquad h\\in H_{\\mathrm{geom}}.\n$$",
+   "text": "Put $K=\\overline{\\mathbf Q}_\\ell$ and let $V_i$ be the stalk representation of $\\mathcal F^{(i)}_0$ as in [def-wf-fundamental-representation]. All representations act through the same Weil group. Write each semisimple $V_i$ as a direct sum $\\bigoplus_{j\\in J_i}S_{ij}$ of simple Weil modules, using [def-wf-semisimple-module]. Then $V=\\bigoplus_iV_i=\\bigoplus_{(i,j)}S_{ij}$ is itself semisimple: the action is componentwise and the displayed summands are the same simple modules. The empty family gives the zero module, the empty direct sum, so it is included. Choose a basis of the finite-dimensional $V$. The degree datum and this matrix representation are the represented datum of [d-monodromy], with $F=\\rho(s)$ and $H=H_{\\mathrm{geom}}$. In particular $H\\subseteq G_{\\mathrm{Zar}}$ and $F\\in G_{\\mathrm{Zar}}$. The coefficient field $K$ is algebraically closed of characteristic zero, so the coefficient hypotheses needed in the next step hold.",
    "uses": [
-    "d-monodromy",
-    "p-central",
-    "d-central"
+    "def-wf-fundamental-representation",
+    "def-wf-semisimple-module",
+    "d-monodromy"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-central/lem-mg-common-positive-central-element.proof.md",
+    "place": "first paragraph: the direct sum is a semisimple represented degree datum"
+   }
   },
   {
-   "text": "Put $m=N$ and $z=(h,m)\\in G^{[m]}$ in the notation of\n[def-wf-degree-components]. The matrix map\n$(h',n)\\mapsto h'\\rho(s)^n$ of\n[def-wf-arithmetic-monodromy-extension] is a group homomorphism with\nvalues in $G_{\\mathrm{Zar}}$ ([lem-wf-degree-component-image]), and it\nsends $z$ to $z_{\\mathrm{mat}}$. For $x\\in H_{\\mathrm{geom}}$, the\ncommutator of $z$ with $(x,0)$ has degree $0$ and matrix\n$z_{\\mathrm{mat}}xz_{\\mathrm{mat}}^{-1}x^{-1}=1$; the commutator of $z$\nwith $s=(1,1)$ has degree $0$ and matrix\n$z_{\\mathrm{mat}}Fz_{\\mathrm{mat}}^{-1}F^{-1}=1$. On the degree-zero\ncomponent the matrix map $(h',0)\\mapsto h'$ is injective, so both\ncommutators are trivial. Since $G_{\\mathrm{arith}}(\\rho)$ is generated\nby $H_{\\mathrm{geom}}\\times\\{0\\}$ and $s$, the element $z$ is central.\nIts image on every subquotient has the same\ndegree and remains central by the functoriality of\n[lem-mg-degree-component-functoriality].",
+   "text": "Apply [p-central] to this semisimple represented degree datum over $K$. In the notation of [d-central], obtain $N>0$ and $z_{\\mathrm{mat}}\\in Z(G_{\\mathrm{Zar}})(K)\\cap H(K)F^N$. Unpack membership in the translate to choose $h\\in H(K)$ with $z_{\\mathrm{mat}}=hF^N$. Set $m=N$ and $z=(h,N)$. By [def-wf-degree-components] this is an element of $G^{[N]}$ in the arithmetic extension of [def-wf-arithmetic-monodromy-extension].",
    "uses": [
+    "p-central",
+    "d-central",
     "def-wf-degree-components",
-    "def-wf-arithmetic-monodromy-extension",
-    "lem-wf-degree-component-image",
-    "lem-mg-degree-component-functoriality"
+    "def-wf-arithmetic-monodromy-extension"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-central/lem-mg-common-positive-central-element.proof.md",
+    "place": "first paragraph: apply p-central; second paragraph: put m=N and z=(h,m)"
+   }
+  },
+  {
+   "text": "Use the multiplication in [def-wf-arithmetic-monodromy-extension], with $\\alpha(x)=FxF^{-1}$. Since $F\\in G_{\\mathrm{Zar}}$, centrality of $hF^N$ gives $hF^NF=FhF^N$. Commute the two powers of $F$ and cancel $F^N$ on the right to obtain $hF=Fh$. Thus $F^nhF^{-n}=h$ for every $n\\in\\mathbf Z$ (including negative $n$, by taking inverses in the commutation equality). For any $x\\in H(K)\\subseteq G_{\\mathrm{Zar}}(K)$, centrality also gives $hF^Nx=xhF^N$, hence $hF^NxF^{-N}=xh$. Therefore, for every $(x,n)$ in the extension,\n$$z(x,n)=(hF^NxF^{-N},N+n)=(xh,N+n),$$\n$$ (x,n)z=(xF^nhF^{-n},n+N)=(xh,n+N).$$\nThe coordinates agree since $N+n=n+N$. Thus $z$ commutes with every element and lies in $Z(G_{\\mathrm{arith}}(\\rho))$. This calculation uses no injectivity of the matrix map across different degrees.",
+   "uses": [
+    "def-wf-arithmetic-monodromy-extension",
+    "d-monodromy"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-central/lem-mg-common-positive-central-element.proof.md",
+    "place": "second paragraph: lift centrality from the matrix to the degree-graded extension"
+   }
+  },
+  {
+   "text": "The parenthetical geometric semisimplicity of each given sheaf follows directly from [lem-mg-normal-restriction-semisimple], applied to its finite-dimensional semisimple Weil representation and the normal geometric subgroup, which is the kernel of the degree map in [d-monodromy]. For any Weil-stable subquotient $Q$ of a $V_i$, the inclusion of the direct summand $V_i\\subseteq V$ exhibits $Q$ as a Weil-stable subquotient of $V$ as well. Apply [lem-mg-degree-component-functoriality] to this $Q$ and the monodromy data of [def-wf-monodromy-data]. Its homomorphism $\\Phi_Q$ preserves degree and sends central elements to central elements; consequently $\\Phi_Q(z)$ is central of the same positive degree $N$. The single $z$ chosen before $Q$ therefore works simultaneously for every such subquotient.",
+   "uses": [
+    "lem-mg-normal-restriction-semisimple",
+    "d-monodromy",
+    "lem-mg-degree-component-functoriality",
+    "def-wf-monodromy-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-central/lem-mg-common-positive-central-element.proof.md",
+    "place": "last sentence: the same positive degree central element measures every subquotient"
+   }
   }
  ],
  "proof_deps": [
+  "def-wf-fundamental-representation",
+  "def-wf-semisimple-module",
   "d-monodromy",
   "p-central",
   "d-central",
   "def-wf-degree-components",
   "def-wf-arithmetic-monodromy-extension",
-  "lem-wf-degree-component-image",
-  "lem-mg-degree-component-functoriality"
+  "lem-mg-normal-restriction-semisimple",
+  "lem-mg-degree-component-functoriality",
+  "def-wf-monodromy-data"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-central/lem-mg-common-positive-central-element.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-central/lem-mg-common-positive-central-element.proof.md",
+  "place": "Both paragraphs; semidirect-product centrality expanded by the coordinate calculation of Monodromy.lean:1062–1093."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "positive.*central|central.*degree|exists.*center.*degree",
+   "results": "Mathlib/Data/Nat/Choose/Factorization.lean, Mathlib/Data/Nat/Choose/Factorization.lean, Mathlib/Algebra/Lie/Loop.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: binomial-coefficient and loop-Lie-algebra comments do not state the monodromy theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A semisimple representation of a group mapping onto the integers has a central positive degree element in its geometric monodromy semidirect product with the integers",
+   "results": "Rep.instInjective, MonoidAlgebra.Submodule.instIsSemisimpleRingAddMonoidAlgebra, MonoidAlgebra.Submodule.instIsSemisimpleModule, FDRep.simple_iff_char_is_norm_one, Representation.asGroupHom, CharacterModule.int, Representation.irreducible_iff_isSimpleModule_asModule, Representation.asModule",
+   "date": "2026-10-21",
+   "verdict": "no match: retrieved finite-group representation, Hilbert 90 or special-linear-center facts do not assert a positive-degree central element of the arithmetic monodromy extension"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subgroup.center, SemidirectProduct",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: zero hits"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite direct sum of semisimple Weil representations admits a positive degree central element in its arithmetic monodromy semidirect product extension",
+   "results": "groupCohomology.Hilbert90.aux_ne_zero, RootPairing.isSimpleModule_weylGroupRootRep, FDRep.simple_iff_char_is_norm_one, MonoidAlgebra.Submodule.instIsSemisimpleModule, FDRep.char_orthonormal, TannakaDuality.FiniteGroup.sumSMulInv_single_id, FDRep.simple_iff_end_is_rank_one, groupCohomology.Hilbert90.aux",
+   "date": "2026-10-21",
+   "verdict": "no match: retrieved finite-group representation, Hilbert 90 or special-linear-center facts do not assert a positive-degree central element of the arithmetic monodromy extension"
+  },
+  {
+   "tool": "grep",
+   "query": "monodromy|[Ss]emisimple.*[Cc]entral|[Cc]entral.*[Ss]emisimple",
+   "results": "Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Topology/Homotopy/Lifting.lean, Mathlib/Algebra/Torsor/Defs.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: topological covering monodromy and torsor documentation concern different objects"
+  },
+  {
+   "tool": "loogle",
+   "query": "Subgroup.center",
+   "results": "Subgroup.center, Subgroup.centerCharacteristic, Subgroup.instNormalCenter, Group.commGroupOfCenterEqTop, CommGroup.center_eq_top, Subgroup.center_le_normalizer, Subgroup.center_toSubmonoid, Subgroup.normal_of_le_center",
+   "date": "2026-10-21",
+   "verdict": "no match: the center definition and generic properties provide no positive-degree existence theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Existence of a central element in a positive integer component of an algebraic monodromy group of a semisimple representation",
+   "results": "SpecialLinearGroup.mem_center_iff, SpecialLinearGroup.centerEquivRootsOfUnity_apply, SpecialLinearGroup.centerEquivRootsOfUnity_invFun, SpecialLinearGroup.centerEquivRootsOfUnity_symm_apply, SpecialLinearGroup.centerEquivRootsOfUnity_apply_apply, SpecialLinearGroup.centerEquivRootsOfUnity_apply_of_finrank_le_one, SpecialLinearGroup.centerCongr_toLin_equiv_trans_centerEquivRootsOfUnity_eq, SpecialLinearGroup.centerEquivRootsOfUnity",
+   "date": "2026-10-21",
+   "verdict": "no match: retrieved finite-group representation, Hilbert 90 or special-linear-center facts do not assert a positive-degree central element of the arithmetic monodromy extension"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -73,5 +164,20 @@
  "proof_split_by": "paragraphs",
  "lean_audit": {},
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-p-central"
+ "unit": "sk-p-central",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-mg-common-positive-central-element",
+  "worker": "stage1",
+  "summary": "Kept the statement and followed the current blueprint. Expanded semisimplicity of the finite direct sum, verified the algebraically closed characteristic-zero hypothesis of the updated p-central, and proved centrality in the arithmetic extension by its explicit multiplication law. Reused existing nodes only; added no new nodes. Per the direct brief, did not repeat the rejected attachment outcome, while reporting the declaration now visible in the live source.",
+  "blueprint": "Steps 1–2 realize the first paragraph; Step 3 realizes the lifting argument in the second paragraph; Step 4 realizes its functorial last sentence and the statement’s parenthetical geometric semisimplicity."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-b89df6d02",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-b89df6d02 (reviewer sub-agent of L); spot-checked: I read in full the item (no new nodes) against the main-20261015/master proof (two paragraphs, identical in both snapshots) and against the exact statements of p-central (blueprint_update: algebraically closed char-0 k, which Q̄_ℓ satisfies), d-central (blueprint_update), d-monodromy (blueprint_update), def-wf-arithmetic-monodromy-extension, degree-components, monodromy-data, fundamental-representation, semisimple-module, normal-restriction-semisimple and degree-component-functoriality. Step 1: a direct sum of simples is semisimple, and a basis choice gives the represented datum with F in G_Zar and H in G_Zar. Step 2: an exact application of p-central, then choosing h with z_mat=hF^N and setting z=(h,N) in G^[N]. Step 3: I checked by hand with (h,m)(h',n)=(h α^m(h'),m+n). Centrality gives hF=Fh and hF^N x F^{-N}=xh, so z(x,n)=(xh,N+n)=(x,n)z for every (x,n). This keeps the integer coordinate, so it is valid when F has finite order or F=1. It replaces the blueprint's injectivity/generation shorthand with a complete check, which is why lem-wf-degree-component-image is correctly no longer cited. Step 4: the in-particular clause of normal-restriction, and functoriality applied to a subquotient of the summand V_i of V; z is chosen before Q, so it works for every Q at once. Edge case: an empty family or V=0 is fine. The statement is verbatim, and the added stmt_deps are the notions it names. No duplicate turned up in an rg -L search; the item is not on route-pivot-dropped.txt; live and side-live still have it imported, with no re-split note; no SGA source; no tool_uses needed. Batch-5 finding: def-wf-fundamental-representation and def-wf-monodromy-data reach only def-pod-lisse-l-adic-sheaves, a general definition of lisse ℓ-adic sheaves and not a step of the Poincaré-duality or trace-formula proofs, so I accept both. No changes made."
+ }
 }
