@@ -22976,3 +22976,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:47 L: merged deliver/Z5/Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionTriangles (stage 3; reviewer PASS; first push; landing 20261021T154757-L-3173378 (proof); batch 20261021T154743; modules 1; new nodes 0; change records: coord/changes/Z5-standard-single-union-triangles-upstream-proof-imports.md)
 - 15:48 L: merged deliver/Q10/sk-d-real-weights (stage 2; reviewer PASS; parallel immutable checks)
 - 15:49 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 15:49 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
