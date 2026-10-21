@@ -37,15 +37,9 @@
  ],
  "proof": [
   {
-   "text": "Give $E$ its induced norm. The actual coefficient inclusion and $L=\\operatorname{integralScalarExtension}$ of [def-weil-pbc-continuous-integral-coefficients] identify with [def-sfb-integers-to-subfield]. Let $F$ be [def-sfb-bounded-constructible-extend-scalars]. Its stated compatibility identifies $F$ with $L$ under the full inclusions. The integral source is triangulated by [lem-weil-pbc-padic-integers-bounded-triangulated]. By [det-prop-sfb-qlbar-colimit-x-invert-ell], $E_X$ is a flat $\\cO_{E,X}$-module, so $\\operatorname{Ext}_\\varphi=E_X\\otimes_{\\cO_{E,X}}-$ preserves short exact sequences of module objects. The exact-functor clause of [sk-def-sfb-derived-categories] identifies $L$ with the termwise functor $D(\\operatorname{Ext}_\\varphi)$, and [lem-sf-exact-functor-derived-triangulated] makes it additive and triangulated.",
+   "text": "Let $F$ be the stated restricted functor and $L$ its ambient derived extension. By [lem-sfb-integral-derived-extension-comparison], the actual coefficients agree with the continuous integral coefficients, the integral source is triangulated, $L$ is additive and triangulated, and $F$ is its additive restriction under the specified full inclusions.",
    "uses": [
-    "def-weil-pbc-continuous-integral-coefficients",
-    "def-sfb-integers-to-subfield",
-    "def-sfb-bounded-constructible-extend-scalars",
-    "lem-weil-pbc-padic-integers-bounded-triangulated",
-    "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "sk-def-sfb-derived-categories",
-    "lem-sf-exact-functor-derived-triangulated"
+    "lem-sfb-integral-derived-extension-comparison"
    ],
    "elementary": false,
    "source": {
@@ -105,28 +99,22 @@
   }
  ],
  "proof_deps": [
-  "def-sfb-bounded-constructible-extend-scalars",
-  "def-sfb-integers-to-subfield",
-  "def-weil-pbc-continuous-integral-coefficients",
   "def-weil-pbc-integral-localization-telescope",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
   "lem-kun-distinguished-cone-zero",
-  "lem-sf-exact-functor-derived-triangulated",
+  "lem-sfb-integral-derived-extension-comparison",
   "lem-sfb-integral-localization-hom-colimit",
   "lem-sfb-rational-derived-scalar-invertible",
   "lem-sfb-rationalization-localization-hom-criterion",
   "lem-sfb-scalar-unit-equality-detection",
   "lem-weil-pbc-continuous-constructible-integral-denominators",
   "lem-weil-pbc-continuous-constructible-integral-model",
-  "lem-weil-pbc-padic-integers-bounded-triangulated",
-  "sk-def-sfb-derived-categories",
   "sk-def-sfb-derived-extension-of-scalars",
   "sk-def-sfb-rationalization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Q59 finer repair, 2026-10-21: Lemma 6.8.12, Proposition 6.8.14(2); scalar telescope continuity, finite-stage equality, inverse rational scalars and abstract localization criterion separated into short proved nodes."
+  "place": "Q98 re-split, 2026-10-21: Proposition 6.8.14(2), using Lemma 6.8.12; retain the current live scalar-Hom route and extract the remaining coefficient/termwise-triangulated comparison as a statement-only node."
  },
  "mathlib_searches": [
   {
@@ -224,23 +212,15 @@
   "date": "2026-10-21",
   "item": "thm-sfb-extend-scalars-localization",
   "worker": "stage1",
-  "summary": "Kept the statement byte-for-byte. Replaced the 5043-character proof by a short five-step assembly. Four new proved nodes expose canonical shifted Hom continuity, scalar-unit equality detection, invertibility of rational scalars, and the abstract scalar-fraction localization criterion. One Mathlib leaf records scalar preservation by localization lifts. Corrected uses of supporting private proofs as if they were cited statements. Existing denominator, model, scalar-fraction and triangulation nodes are reused.",
-  "blueprint": "Unit sk-thm-sfb-rationalization-comparison step 2; blueprint proof: F inverts W (steps 1–2), full faithfulness (steps 3–4 and the generic criterion), essential surjectivity (step 3), conclusion (step 5).",
+  "summary": "Continued the newer live Q59 repair rather than the superseded 5043-character version. Kept the item statement byte-for-byte and all four existing scalar/Hom/criterion nodes. Extracted the complete remaining step-1 coefficient identification, exactness, termwise derived comparison and triangulated restriction into one self-contained statement-only unsplit node. The assembly has 2200 characters; the report preserves the extracted argument and maps every previous argument to its carrier.",
+  "blueprint": "Unit sk-thm-sfb-rationalization-comparison step 2: new integral-derived-extension-comparison carries the preparatory coefficient and triangulation argument; existing scalar-invertibility, denominator/model, Hom-colimit/equality and localization-criterion nodes continue to carry inversion, Hom comparison, essential surjectivity and localization.",
   "tool_uses": [
-   {
-    "node": "det-prop-sfb-qlbar-colimit-x-invert-ell",
-    "why": "Unit step 1 cites this node of the cited unit sk-prop-sfb-qlbar-colimit-x: its statement gives flatness of E_X over O_{E,X}, hence exactness of Ext_phi on the same internal module objects; no node of this unit states it."
-   },
    {
     "node": "lem-weil-pbc-continuous-constructible-integral-denominators",
     "why": "Existing generic or integral-coefficient tool: its full statement supplies the precise comparison, triangle, exactness or model cited here; it does not replace the unit rationalization route."
    },
    {
     "node": "lem-weil-pbc-continuous-constructible-integral-model",
-    "why": "Existing generic or integral-coefficient tool: its full statement supplies the precise comparison, triangle, exactness or model cited here; it does not replace the unit rationalization route."
-   },
-   {
-    "node": "lem-weil-pbc-padic-integers-bounded-triangulated",
     "why": "Existing generic or integral-coefficient tool: its full statement supplies the precise comparison, triangle, exactness or model cited here; it does not replace the unit rationalization route."
    }
   ]
@@ -255,10 +235,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q59-f5a126ed3",
-  "group": "Q59",
+  "reviewer": "NT-cc-Q98-40b7a5297",
+  "group": "Q98",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q59-f5a126ed3 (reviewer sub-agent of L); spot-checked: FIX for one repaired fault (C4/E6, which also clears the batch-5 flag); everything else checks out. I read the full item, the five new nodes, the report's child proofs and every cited statement. I also read the unit sk-thm-sfb-rationalization-comparison, the main-20261015 blueprint statement and proof, Bhatt–Scholze 6.8.2, 6.8.12, 6.8.13 and 6.8.14(2) with its proof, the Lean reference EllAdicRationalization.lean:94–240, and Mathlib Localization/Linear.lean:79. Statement: byte-identical to the base and matches the Lean IsLocalization instance (Noetherian X, W = powers of ℓ). Both coefficient categories use the stratified local-finite-presentation predicate, the same as pbc integralConstructible and BoundedConstructible. φ is literally pbc's continuous inclusion once E has the norm induced from Q̄_ℓ. Steps 2–5 are correct: (2) ℓ^n·id is invertible, the cone becomes zero, and cone-zero gives an inverse inside the full subcategory; (3) the pbc denominator and model statements have exactly these hypotheses; (4) the zeroth telescope leg is the adjunction unit, so the new Hom-colimit lemma feeds equality detection with a=ℓ; (5) every hypothesis of the criterion is checked and it matches rationalization_localization_of_hom. New nodes: all are true and none duplicates an existing node. The Hom-colimit lemma is B–S 6.8.12 applied to the bounded-below ℓ-telescope; sequential-hom, sheaf-hom and scalar-localization-derived-hom differ from it. Equality detection is adjunct naturality plus filtered-colimit equality; I tested a=0 and a=1. Rational scalar invertibility follows from the constant ℓ^{-n}. The generic criterion is checked by fractions; I tested 0∈M, M={1} and empty C. The linear-descent leaf is exact: functor_linear_iff, forward direction, line 79. No new node restates a clause of the item. Fault, step 1: exactness of Ext_φ was taken from lem-sfb-integral-rationalization-exact, a SheafOfModules statement over the lisse-lattice rings A_T, E_T. It was never transported to the item's internal module objects. Batch-5 check: that node's closure enters sec-poincare-duality through def-pod-l-adic-representations (a general definition) and lem-pod-lisse-* lemmas. These are not steps of Poincaré duality, but the citation is the wrong-category one above. Repair: step 1 now cites det-prop-sfb-qlbar-colimit-x-invert-ell. This is the unit step-1 route and the previously reviewed citation: E_X is flat, so Ext_φ is exact, so L ≅ D(Ext_φ) is triangulated. Its closure (742 nodes) contains no trace-formula, Poincaré, nt-target or trace-transport node. I also recomputed proof_deps and replaced the tool_use entry. Accepted tool uses: det-prop, integral-denominators, integral-model, padic-integers-bounded-triangulated. No SGA source is cited.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q98-40b7a5297 (reviewer sub-agent of L); spot-checked: Q98 builds on the live Q59 split of this item, which is already reviewed. The statement and steps 2–5 are byte-identical to that split; I field-diffed the item against Q59's fixed item. The only change is the old 7-citation step 1, which moves whole into the new statement-only node lem-sfb-integral-derived-extension-comparison. Its statement carries every clause of the old step: T=Ext_φ exact (E_X flat by det-prop-sfb-qlbar-colimit-x-invert-ell); L≅D(T) (exact-functor bullet of sk-def-sfb-derived-categories); L additive and triangulated (lem-sf-exact-functor-derived-triangulated); φ and L equal to the pbc continuous inclusion and integralScalarExtension (E has the norm induced from Q̄_ℓ, so O_E is the unit ball); D_cons(O_E) triangulated (lem-weil-pbc-padic-integers-bounded-triangulated, same Noetherian and finite-E hypotheses); F additive, with the identity-component compatibility F⋙j≅i⋙L preserving triangles (def-sfb-bounded-constructible-extend-scalars). Each clause is true. I tested X empty, the zero complex, the unit and E=Q_ℓ. The node is self-contained, stmt_deps match its citations, it records grep, LeanSearch, Loogle and LeanFinder searches, and its blueprint.from is correct. It restates no clause of the item. No existing node states it: I checked pbc continuous-integral-scalar-exact (finite limits only), integral-derived-unit, realization-scalar-functor, the O_E→O_L integral-scalar-extension nodes, rationalization-equivalence and extend-scalars-bounded-constructible. Steps 2–5 still get from step 1 exactly what they use: additivity, the compatibility and the triangulated source. I rechecked steps 2–5: cone zero, denominators and model, the zeroth telescope leg is the unit, and the hypotheses of the localization criterion with R=ℤ, M=ℓ^ℕ. The proof is 2200 chars, under the 3000 cap, and proof_deps equals the union of the step uses. Nothing from the old proof is shortened, so the re-split note is met. The route fits unit sk-thm-sfb-rationalization-comparison step 2. Bhatt–Scholze Prop 6.8.14(2) proof was read; the triangulated-comparison part is the agent's expansion, as the report says. No SGA. Accepted tool uses: pbc integral-denominators and integral-model. Maintainer notes: (1) Q59 had already answered the note; this delivery is a correct refinement, not a conflicting split. (2) The live node-level tool_uses still list det-prop-sfb-qlbar-colimit-x-invert-ell, lem-weil-pbc-padic-integers-bounded-triangulated and lem-weil-pbc-integral-constructible-sheaf-hom, which the item no longer cites. The first two now belong to the new node's future split. (3) The future worker on the new node should cite det-prop flatness, not the SheafOfModules node lem-sfb-integral-rationalization-exact (the Q59 C4/E6 fault). (4) In the new node, 'Fj≅iL' is in diagrammatic order."
  },
  "lean_audit": {
   "master": {
