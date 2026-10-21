@@ -42,11 +42,11 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "G3",
-  "date": "2026-10-14",
+  "group": "J3",
+  "date": "2026-10-22",
   "document": "https://stacks.math.columbia.edu/tag/06Z0; https://stacks.math.columbia.edu/tag/0AVW",
   "place": "Exact functor homology comparison and affine pushforward cohomology coordinates; parent proof step 2.",
-  "note": "Recovers the reviewed D4 proof, adapts its raw-arrow equation to H2, and uses one shared composite homology API. All generic naturality helpers remain proved and private in the parent. Both supporting modules are proved. No hole is added."
+  "note": "The complete reviewed calculation now exists in the adopted WeilConjectures module under the identical fully qualified name and byte-identical theorem signature. Restore the quarantined Sheaf import path as a public compatibility import, and attach this node to the adopted proof. All existing proof steps, proof dependencies and statement dependencies are retained; no new lemma or hole is introduced."
  },
  "mathlib_searches": [
   {
@@ -101,17 +101,18 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates",
-  "file": "lean/Sheaf/Algebra/Homology/AffineTildeDerivedTensorHomologyCoordinates.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates",
+  "file": "lean/WeilConjectures/Algebra/Homology/AffineTildeDerivedTensorHomologyCoordinates.lean",
   "declaration": "AlgebraicGeometry.affineTildeDerivedTensorToPushforward_homology",
   "declarations": [
    "AlgebraicGeometry.affineTildeDerivedTensorToPushforward_homology"
   ],
   "statement": "theorem affineTildeDerivedTensorToPushforward_homology\n    (R A B D : Type u) [CommRing R] [CommRing A] [CommRing B] [CommRing D]\n    [Algebra R A] [Algebra R B] [Algebra (A ⊗[R] B) D]\n    [HasDerivedCategory.{wM} (ModuleCat.{u} R)]\n    [HasDerivedCategory.{wM} (ModuleCat.{u} B)]\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (m : ModuleCat.BaseDerivedTensorCohomologyModel R A B M D)\n    (φ : A →+* D) (ψ : B →+* D)\n    (hφ : (algebraMap (A ⊗[R] B) D).comp (algebraMap A (A ⊗[R] B)) = φ)\n    (hψ : (algebraMap (A ⊗[R] B) D).comp\n      Algebra.TensorProduct.includeRight.toRingHom = ψ) (i : ℤ) :\n    let α := algebraMap (A ⊗[R] B) D\n    let j : B →+* A ⊗[R] B := Algebra.TensorProduct.includeRight.toRingHom\n    let T := tilde.functor (.of B)\n    let H := DerivedCategory.homologyFunctor\n      (SheafOfModules.{u} (moduleRings (Spec (.of B)).toRingedSpace)) i\n    let C := (((ModuleCat.extendScalars (α.comp\n      (algebraMap A (A ⊗[R] B)))).mapHomologicalComplex (.up ℤ)).obj M)\n    let Cg := ((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M\n    let cE := m.comparison i ≫ HomologicalComplex.homologyMap m.ordinaryToLocalized i ≫\n      ((C.sc i).mapHomologyIso (ModuleCat.restrictScalars α)).hom\n    let ρ := ModuleCat.restrictScalarsComp' j α ψ hψ.symm\n    let s := (ModuleCat.restrictScalars j).map cE ≫ ρ.inv.app (C.homology i)\n    let z₀ := (HomologicalComplex.homologyFunctor (ModuleCat.{u} D) (.up ℤ) i).map\n      (eqToHom (by dsimp only [C, α]; rw [hφ] : C = Cg))\n    (affineTildeDerivedTensorSourceIso R A B D M m i).hom ≫\n        H.map (affineTildeDerivedTensorToPushforward R A B D M m φ ψ hφ hψ) =\n      T.map s ≫ T.map ((ModuleCat.restrictScalars ψ).map z₀) ≫\n        affineTildePushforwardCohomologyMap D B ψ Cg i",
   "branch": "sheaf-dag",
-  "by": "N4",
-  "date": "2026-10-14"
+  "by": "J3",
+  "date": "2026-10-22",
+  "note": "The archived declaration has been adopted verbatim by the source library, with a complete proof. The restored Sheaf compatibility module publicly imports that implementation, preserving the same declaration, exact statement and mathematical dependencies."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -124,14 +125,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-2d9a0",
-  "group": "G3",
+  "reviewer": "C-417a3",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261014T141504-L-226067",
+  "landing": "20261021T203622-L-3844398",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files, DAG records, report, and change record matched the stated item; all four modules and direct importers compiled successfully with no mechanical, proof, interface, or forced-adaptation violations."
+  "note": "independent cc review: Sheaf item shim re-export vs WC.AffineTildeDerivedTensorHomologyCoordinates (same name, identical signature, abbrev-only diff); original consumer vs new item (fails as reported) and adapted consumer (compiles); node lean record vs WC signature"
  },
  "lean_audit": {}
 }

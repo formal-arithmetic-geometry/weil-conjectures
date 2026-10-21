@@ -5,7 +5,8 @@ Authors: SHEAF group B4
 -/
 module
 
-public import Sheaf.Algebra.Homology.AffineBaseChangeTildeRepresentative
+public import Sheaf.Algebra.Homology.AffineTildePushforwardCohomologyNormalization
+public import WeilConjectures.Algebra.Homology.AffineBaseChangeTildeRepresentative
 public import WeilConjectures.AlgebraicGeometry.SchemeDerivedBaseChangeMap
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
 import Sheaf.Algebra.Homology.AffineTildeDerivedTensorHomologyCoordinates
