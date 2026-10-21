@@ -3,41 +3,166 @@
  "blueprint": {
   "is": "lem-wf-internal-hom-weil",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Internal Hom of Weil complexes",
- "statement": "The construction of [def-wf-internal-hom] restricts to an exact\nbifunctor\n\n$$\nR\\operatorname{Hom}_E(-,-):\\mathrm{WeilD}(X_0,E)^{\\mathrm{op}}\\times\n\\mathrm{WeilD}(X_0,E)\\to\\mathrm{WeilD}(X_0,E),\n$$\n\nthe displayed conjugation being an isomorphism for every pair of Weil\ncomplexes.",
+ "statement": "Fix the finite-field, coefficient and scheme data of [def-wf-weil-category]: $k_0=\\mathbf F_q$, $k=\\overline{\\mathbf F}_q$, $\\ell\\ne\\operatorname{char}(k_0)$, a finite intermediate extension $E/\\mathbf Q_\\ell$ in the chosen algebraic closure, a separated finite-type $k_0$-scheme $X_0$, and $X=X_0\\times_{k_0}k$. Write $\\mathcal C_E=D^b_c(X,E)$ for that definition's raw rationalization of the completed integral pro-etale coefficient category, $P=\\Phi_X^*$ for geometric-Frobenius pullback, and $H=R\\mathcal Hom_E$ for [def-wf-internal-hom].\n\nFor every two Weil pairs $(K,\\varphi_K),(L,\\varphi_L)$, the underlying object $H(K,L)$ belongs to $\\mathcal C_E$, and the specified conjugation\n$$\\beta_{K,L}=H(\\varphi_K^{-1},\\varphi_L)\\circ\\alpha_{K,L}:PH(K,L)\\xrightarrow{\\sim}H(K,L)$$\nis an isomorphism. On a pair of commuting Weil morphisms $u:K'\\to K$, $v:L\\to L'$, the underlying map is $H(u,v)$. These data define a bifunctor\n$$H:\\mathrm{WeilD}(X_0,E)^{\\mathrm{op}}\\times\\mathrm{WeilD}(X_0,E)\\longrightarrow\\mathrm{WeilD}(X_0,E).$$\n\nIts separate-variable exactness has the following precise meaning for these categories of fixed pairs. Equip a shifted pair with the datum $P(K[r])\\cong(PK)[r]\\xrightarrow{\\varphi_K[r]}K[r]$. Consider diagrams of Weil morphisms $A\\to B\\to C\\to A[1]$ whose underlying triangle is distinguished in $\\mathcal C_E$ [def-weil-triangulated-category]. With the canonical derived-Hom shift identifications, $H(K,-)$ sends every such diagram to one of the same kind, and $H(-,L)$ sends it contravariantly to\n$$H(C,L)\\longrightarrow H(B,L)\\longrightarrow H(A,L)\\longrightarrow H(C,L)[1]$$\nof the same kind. In particular $H(K[r],L[s])\\cong H(K,L)[s - r]$ is an isomorphism of Weil pairs, and the functor is additive and $E$-linear in each variable. This specifies preservation of underlying distinguished triangles; it does not equip the fixed-pair category with Verdier axioms.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-internal-hom-weil.md",
   "place": "node lem-wf-internal-hom-weil, order 2571"
  },
  "stmt_deps": [
   "def-wf-internal-hom",
-  "def-wf-weil-category"
+  "def-wf-weil-category",
+  "def-weil-triangulated-category"
  ],
  "proof": [
   {
-   "text": "The pullback compatibility of [def-wf-internal-hom]\n$\\Phi_X^*R\\mathcal Hom_E(K,L)\\cong R\\mathcal Hom_E(\\Phi_X^*K,\\Phi_X^*L)$ is the naturality of the\nderived internal Hom in both variables (exactness of\n$\\Phi_X^*$), and the composite with\n$R\\mathcal Hom_E(\\varphi_K^{-1},\\varphi_L)$ is an isomorphism: the\ntwo Frobenius isomorphisms make the composite a Weil datum, and the\ncocycle condition follows as in\n[lem-wf-tensor-weil].",
+   "text": "Use the completed ring $B=\\varprojlim_n(\\mathcal O_E/\\varpi^n)_X$ of [def-wf-internal-hom]. The coefficient ring in [cor-coef-integral-internal-hom] is this same inverse limit, not the discrete constant sheaf. The finite-type geometry lemma [lem-cbc-compactification-geometry-fibre-bound], applied to $X\\to\\operatorname{Spec}k$, makes $X$ Noetherian and finite dimensional; the field has a single Noetherian affine chart of dimension zero. It also propagates invertibility of $\\ell$ from $k$ to $X$. The scheme $X$ is separated finite type over $k=\\overline{\\mathbf F}_q$ and $\\ell\\ne\\operatorname{char}k$, as required there. By [lem-weil-pbc-integral-stratified-perfect-characterization], the integral category underlying [def-wf-weil-category], including its compatible etale-origin witnesses, is exactly the full completed integral category used in that corollary. Choose its integral objects $M,N$ representing $K,L$; raw rationalization changes morphisms, not objects. The corollary gives $H_B(M,N)$ in that integral category, and the characterization puts it back in the PBC category. By the definition of $H_E$ on objects in [def-wf-internal-hom], this is the required closure $H_E(K,L)\\in\\mathcal C_E$. No Frobenius-stable integral lattice is required.",
    "uses": [
     "def-wf-internal-hom",
-    "lem-wf-tensor-weil"
+    "def-wf-weil-category",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "cor-coef-integral-internal-hom",
+    "lem-cbc-compactification-geometry-fibre-bound"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-internal-hom-weil.proof.md",
+    "place": "Entire proof; completed-coefficient construction and separate-variable exactness expanded"
+   }
+  },
+  {
+   "text": "The ambient ringed-site functor $H_B$ carries distinguished triangles to distinguished triangles in both variables, reversing the first, and has the normalized shift comparisons, by [lem-weil-pbc-ringed-internal-hom-exact-restriction]. The characterization [lem-weil-pbc-integral-stratified-perfect-characterization] makes our common full integral subcategory closed under shifts and cones. Together with Step 1, this restricts the ambient separate-variable exactness to it. Its $\\mathcal O_E$-linear triangulated structure and linear shifts are those of [def-weil-rationalization-karoubi], applied to that common integral category. By [lem-weil-linear-scalar-localization-triangulated], every distinguished rational triangle is isomorphic to the image of an integral distinguished triangle. For fixed integral $M$ or $N$, apply $H_B(M,-)$ or $H_B(-,N)$ to such a triangle and then localize. The fraction rule $H_E(a/\\varpi^r,b/\\varpi^s)=H_B(a,b)/\\varpi^{r+s}$ of [def-wf-internal-hom] identifies the result with $H_E$ of the rational triangle; isomorphic triangles have isomorphic images by functoriality. Thus $H_E$ is separately exact on $\\mathcal C_E$. The same fraction rule gives additivity and $E$-linearity in each variable.",
+   "uses": [
+    "def-wf-internal-hom",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-rationalization-karoubi",
+    "lem-weil-linear-scalar-localization-triangulated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-internal-hom-weil.proof.md",
+    "place": "Entire proof; completed-coefficient construction and separate-variable exactness expanded"
+   }
+  },
+  {
+   "text": "Put $P=\\Phi_X^*$. The comparison $\\alpha_{K,L}:PH(K,L)\\cong H(PK,PL)$ is the specified ringed-equivalence comparison in [def-wf-internal-hom]. Consequently $\\beta_{K,L}=H(\\varphi_K^{-1},\\varphi_L)\\alpha_{K,L}$ is invertible: its inverse is $\\alpha_{K,L}^{-1}H(\\varphi_K,\\varphi_L^{-1})$, as follows by composing the two formulas and applying the bifunctor laws. Step 1 supplies its object in $\\mathcal C_E$, so it is a Weil pair by [def-wf-weil-category]. A Weil pair requires one isomorphism, with no separate continuity or finite-order condition. If its positive iterates are written $\\beta^{(n)}=\\beta\\,P\\beta\\cdots P^{n-1}\\beta$, then $\\beta^{(m+n)}=\\beta^{(m)}P^m(\\beta^{(n)})$ simply groups the factors; inverse factors define negative iterates. Thus the cyclic-action cocycle mentioned in the blueprint requires no use of the tensor lemma.",
+   "uses": [
+    "def-wf-internal-hom",
+    "def-wf-weil-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-internal-hom-weil.proof.md",
+    "place": "Entire proof; completed-coefficient construction and separate-variable exactness expanded"
+   }
+  },
+  {
+   "text": "Let $u:K'\\to K$ and $v:L\\to L'$ be morphisms of Weil pairs. Their commuting equations from [def-wf-weil-category] give\n$$\\varphi_K^{-1}u=P(u)\\varphi_{K'}^{-1},\\qquad v\\varphi_L=\\varphi_{L'}P(v).$$\nThe comparison of [def-wf-internal-hom] is natural: on the displayed Hom complexes it sends a local map to its transport, so precomposition by $u$ and postcomposition by $v$ are sent to precomposition by $P(u)$ and postcomposition by $P(v)$. This equality descends to derived morphisms and is bilinear for the localized fraction rule. In symbols,\n$$H(Pu,Pv)\\alpha_{K,L}=\\alpha_{K',L'}P(H(u,v)).$$\nUsing the two preceding commuting equations and contravariance in the first slot, the bifunctor laws now give\n$$H(u,v)\\beta_{K,L}\n=H(\\varphi_K^{-1}u,v\\varphi_L)\\alpha_{K,L}\n=H(\\varphi_{K'}^{-1},\\varphi_{L'})H(Pu,Pv)\\alpha_{K,L}\n=\\beta_{K',L'}P(H(u,v)).$$\nThis is exactly the morphism equation for the output Weil pairs.",
+   "uses": [
+    "def-wf-internal-hom",
+    "def-wf-weil-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-internal-hom-weil.proof.md",
+    "place": "Entire proof; completed-coefficient construction and separate-variable exactness expanded"
+   }
+  },
+  {
+   "text": "Define the map of pairs by the underlying $H(u,v)$, which is admissible by Step 4. For $u':K''\\to K'$ and $v':L'\\to L''$, the ambient bifunctor laws in [def-wf-internal-hom] give $H(u',v')\\circ H(u,v)=H(u\\circ u',v'\\circ v)$ and $H(1_K,1_L)=1_{H(K,L)}$. Morphisms of [def-wf-weil-category] are the underlying commuting morphisms, so these equalities also hold in the fixed-pair category. This proves the bifunctor assertion, including its variance. Addition and scalar multiplication preserve the commuting equation, and Step 2's linearity therefore holds on its Weil Hom groups.",
+   "uses": [
+    "def-wf-internal-hom",
+    "def-wf-weil-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-internal-hom-weil.proof.md",
+    "place": "Entire proof; completed-coefficient construction and separate-variable exactness expanded"
+   }
+  },
+  {
+   "text": "The normalized isomorphisms $H(K[r],L[s])\\cong H(K,L)[s - r]$ are those of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. They intertwine the specified $\\alpha$ with transport: on the Hom complex in [def-wf-internal-hom], transport acts on every local map and preserves its degree; reindexing the source or target and multiplying by the integer signs in the Hom differential commute with that transport. Exact transport preserves K-injective complexes by [lem-weil-pbc-ringed-presentation-transport], so this calculation computes the derived comparison as well. It also commutes with the precomposition by $\\varphi_K^{-1}$ and postcomposition by $\\varphi_L$, by naturality of the shift identifications. Rationalization preserves these equations. Hence these are isomorphisms of Weil pairs with the shifted datum specified in the statement. Now take an equivariant triangle diagram with underlying distinguished triangle. Every output arrow, including the connecting arrow after the shift identification, is a Weil morphism by Step 4 and this shift calculation. Step 2 says the underlying output triangle is distinguished, with the usual contravariant order in the first variable. This is precisely the asserted separate-variable exactness for fixed pairs.",
+   "uses": [
+    "def-wf-internal-hom",
+    "def-wf-weil-category",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-weil-pbc-ringed-presentation-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-internal-hom-weil.proof.md",
+    "place": "Entire proof; completed-coefficient construction and separate-variable exactness expanded"
+   }
   }
  ],
  "proof_deps": [
   "def-wf-internal-hom",
-  "lem-wf-tensor-weil"
+  "def-wf-weil-category",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "cor-coef-integral-internal-hom",
+  "lem-cbc-compactification-geometry-fibre-bound",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-weil-rationalization-karoubi",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-ringed-presentation-transport"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-internal-hom-weil.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-algebraic-groups-lie-algebras/sk-p-cyclotomic/lem-wf-internal-hom-weil.proof.md",
+  "place": "Entire proof; completed-coefficient construction and separate-variable exactness expanded"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom restricts to an exact bifunctor on Weil complexes with conjugation Frobenius",
+   "results": "{\"t\": \"2026-10-21T04:20:05Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal Hom restricts to an exact bifunctor on Weil complexes with conjugation Frobenius\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Ext\", \"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Tor\", \"CategoryTheory.Tor'\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"LightCondensed.instMonoidalClosedLightCondMod\"], \"digest\": \"d3092de520eb4501\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: The hits are general categorical internal Hom, Ext, and ordinary groupoid functor categories, not the completed rationalized coefficient category with Frobenius pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "WeilComplex|WeilD|internalHomFrobenius",
+   "results": "{\"t\": \"2026-10-21T04:20:21Z\", \"tool\": \"grep\", \"query\": \"WeilComplex|WeilD|internalHomFrobenius\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: No matching Weil declaration in Mathlib.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom preserves constructible complexes and Frobenius equivariance",
+   "results": "{\"t\": \"2026-10-21T04:20:22Z\", \"tool\": \"leansearch\", \"query\": \"Derived internal Hom preserves constructible complexes and Frobenius equivariance\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.ShortComplex.quasiIso_map_of_preservesLeftHomology\", \"Rep.ihom\", \"CategoryTheory.Functor.PreservesHomology.preservesRightHomologyOf\", \"CategoryTheory.ShortComplex.RightHomologyData.isPreservedBy_of_preservesHomology\", \"CategoryTheory.ShortComplex.LeftHomologyData.isPreservedBy_of_preservesHomology\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.ShortComplex.hasLeftHomology_of_preserves\", \"CategoryTheory.Functor.PreservesHomology.preservesLeftHomologyOf\"], \"digest\": \"56b1018dd4218d7d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Rep.ihom is ordinary group representations; preservation of homology and exact derived functors do not state this completed Weil bifunctor."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalClosed, CategoryTheory.Functor.IsTriangulated",
+   "results": "{\"t\": \"2026-10-21T04:20:22Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalClosed, CategoryTheory.Functor.IsTriangulated\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: The combined category-theoretic query has no hits."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal Hom functor on fixed pairs for an exact autoequivalence with conjugation on the source and target automorphisms",
+   "results": "{\"t\": \"2026-10-21T04:20:24Z\", \"tool\": \"leanfinder\", \"query\": \"Internal Hom functor on fixed pairs for an exact autoequivalence with conjugation on the source and target automorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.closedIhom\", \"CategoryTheory.Functor.ihom_map\", \"CategoryTheory.Functor.closedIhom_obj_obj\", \"CategoryTheory.Functor.closedIhom_obj_map\", \"CategoryTheory.expComparison\", \"CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso\", \"CategoryTheory.frobeniusMorphism_mate\", \"CategoryTheory.MonoidalClosed.pre\"], \"digest\": \"b6cf8a29825241ff\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: The hits are general categorical internal Hom, Ext, and ordinary groupoid functor categories, not the completed rationalized coefficient category with Frobenius pullback."
+  },
+  {
+   "tool": "grep",
+   "query": "closedIhom|ihom_obj_ρ_apply|def ihom",
+   "results": "{\"t\": \"2026-10-21T04:22:11Z\", \"tool\": \"grep\", \"query\": \"closedIhom|ihom_obj_ρ_apply|def ihom\", \"sub\": \"CategoryTheory/Monoidal/Closed\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/InternalCurrying.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Basic.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/FunctorCategory/Groupoid.lean\"], \"digest\": \"8cfebe68411c06ee\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Read Groupoid.lean:39-68 and Basic.lean:76. These require pointwise functor categories or an existing closed structure; they do not construct twisted Frobenius pairs or the completed coefficient derived operations.",
+   "subdirectory": "CategoryTheory/Monoidal/Closed"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -53,5 +178,54 @@
  "proof_split_by": "paragraphs",
  "lean_audit": {},
  "chapter": "sec-algebraic-groups-lie-algebras",
- "unit": "sk-p-cyclotomic"
+ "unit": "sk-p-cyclotomic",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-wf-internal-hom-weil",
+  "worker": "stage1",
+  "summary": "Expanded the blueprint into closure at the exact completed coefficient model, separate-variable exactness after raw rationalization, invertibility of the specified conjugation, explicit morphism equivariance, bifunctor laws and shift-compatible preservation of triangle diagrams. No new nodes. Corrected the unqualified word exact: the current definition gives fixed pairs without a Verdier triangulation; the precise relative triangle-preservation meaning is stated and the source dispute and unipotent counterexample are in report.md. The finite-etale tagged Lean construction is not an attachment. Reused all actual logged Mathlib searches, with no full match.",
+  "blueprint": "Realizes main-20261015 lem-wf-internal-hom-weil statement and its proof: pullback compatibility, conjugation isomorphism, and cyclic cocycle. Makes explicit the omitted constructible-closure, morphism, and exactness arguments. This is not the cyclotomic unit key statement, so unit realization fields are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the PBC integral objects with the same completed integral category used by the Hom-closure theorem; the cyclotomic unit supplies no coefficient-category comparison."
+   },
+   {
+    "node": "cor-coef-integral-internal-hom",
+    "why": "Supplies closure of completed integral constructible objects under ambient derived internal Hom, needed before assigning any Weil datum; no node of this unit states that finiteness input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Supplies generic ringed-site separate-variable exactness and normalized shifts; this is an input to the Weil lifting, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-linear-scalar-localization-triangulated",
+    "why": "Supplies the distinguished-triangle structure and source-triangle description for raw rationalization, so integral exactness extends to rational morphisms."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-presentation-transport",
+    "why": "Supplies preservation of K-injectives by the ringed-equivalence transport, ensuring the explicit shift calculation computes the same derived comparison."
+   },
+   {
+    "node": "lem-cbc-compactification-geometry-fibre-bound",
+    "why": "Checks the Noetherian, finite-dimensional and invertibility hypotheses of the integral-category characterization for the finite-type geometric fibre; the cyclotomic unit gives no such generic geometry input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "cor-coef-integral-internal-hom",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-linear-scalar-localization-triangulated",
+  "lem-weil-pbc-ringed-presentation-transport",
+  "lem-cbc-compactification-geometry-fibre-bound"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q06-a0f42185f",
+  "group": "Q06",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-a0f42185f (reviewer sub-agent of L); spot-checked: Read the delivered item (6 steps, no new nodes), the report, the blueprint text in main-20261015 and master (orders 2915/2571), unit sk-p-cyclotomic and all 10 cited statements in full. Statement: 'exact bifunctor' is made precise as preservation of equivariant triangle diagrams whose underlying triangle is distinguished, separately in each variable, with shift isomorphisms of Weil pairs. This is because def-wf-weil-category explicitly gives fixed pairs with no triangulation. Nothing is dropped. I checked the unipotent counterexample to a Verdier triangulation (a zero connecting map would force an equivariant section, but J(e2+a e1)-(e2+a e1)=e1). The only citer, lem-wf-tate-twist-compatibility, is unaffected. Step 1: the geometry lemma gives Noetherian, finite-dimensional, ell invertible. The characterization identifies the PBC integral category with def-weil-derived-complete-integral-detailed. cor-coef-integral-internal-hom gives Hom closure for all integral constructible inputs (no site-perfect hypothesis). Advisory: the Ô_{E,X} vs A_T sheaf identification rests on the characterization's stipulated-identical-coefficient clause, a DAG-wide convention. Step 2: ringed-site exactness plus closure under shifts and cones, then the scalar-localization triangle description and the fraction rule. Step 3: I verified the inverse of beta. Dropping lem-wf-tensor-weil is justified because a Weil pair needs one isomorphism and no cocycle. Step 4: I re-derived H(u,v)β = β' P(H(u,v)) with all types. Step 5: bifunctor laws. Step 6: shifts and connecting maps via presentation-transport K-injectivity. Tests: scalar point case gives mu/lambda; zero object, empty scheme, shifts of both signs. The six tool_uses are accepted as generic black boxes. prop-weil-operations is a different framework (ctf, site-perfect first argument), not a duplicate. No cycle, no SGA, not dropped or superseded, no repair note. No fixes."
+ }
 }
