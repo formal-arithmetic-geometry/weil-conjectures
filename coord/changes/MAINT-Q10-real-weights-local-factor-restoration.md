@@ -60,4 +60,21 @@ absence and staged content under local/builds/ for transactional rollback.
 
 ## Status
 
-landed 20261021T152919-MAINTQ10-2083369; pending the normal global verification.
+Verified landing 20261021T152919-MAINTQ10-2083369 at 2026-10-21T15:39:42Z.
+The existing build loop published GREEN commit
+01daf4b3aedd509b1bf9d351f6cd749dbf1c3678 (120 s); all three .oleans exist in the
+published library. Normal rework reconciliation then closed the local-factor and
+model-conjugacy rows. The source restoration commit is 4d673ebf4c4.
+
+The worker wrapper scompile.py passes (sandbox 6.3 s, library 7.6 s).
+The prescribed deliver2.py Q10 sk-d-real-weights --no-push passes at commit
+1c28a6cb7dd, containing exactly the item module, item node and Q10 report. The
+active worker independently obtained a passing dry run too and continued its
+repair. Maintenance did not publish the item delivery or edit its mathematics.
+
+The historical dispatch mismatch remains worth fixing in launcher-owned code:
+the return requires waiting for restoration but the normal dependency graph lacks
+the direct def-wf-iota-real interface edge used by RealWeights. Record that actual
+interface dependency when the worker delivers. The dispatcher return lane also
+omits the statement-readiness check used in its claimed-item lane; maintenance
+leaves dispatcher code untouched and documents this in REPORT.md.
