@@ -34,7 +34,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 87, stage 3 5 items.
 
-## Stage 1: nodes to split (15)
+## Stage 1: nodes to split (14)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -48,13 +48,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-cech-localization-unit-totalization` | 4012 | none |
 | `lem-sfb-condensed-internal-bar-resolution` | 4012 | none |
 | `lem-sfb-condensed-product-bar-comparison` | 4012 | none |
-| `lem-sfb-internal-action-site-presentation` | 4012 | none |
 | `lem-sfb-root-tower-inner-support` | 4012 | none |
 | `lem-sfb-root-tower-lisse-morphism-extension` | 4012 | none |
 | `lem-pe-internal-module-sectionwise-short-exact` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (25)
+## Stage 2: nodes to state (26)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -64,7 +63,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-condensed-product-action-inflation` | 1 | state | 2 |
 | `lem-sfb-integral-quotient-direct-image-comparison` | 1 | state | 2 |
 | `lem-per-adic-stratified-pullback-texact` | 1 | state | 1 |
-| `lem-sfb-field-separable-cech-coordinates` | 1 | state | 1 |
 | `det-lem-stratified-lattice-scheme` | 1 | state | 0 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-fd-whole-tower-integral-pullback-comparison` | 1 | state | 0 |
@@ -73,10 +71,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sf-cbc-localized-strict-tensor-descent` | 1 | state | 0 |
 | `lem-sf-open-exchange-roos-restriction` | 1 | state | 0 |
 | `lem-sfb-complete-group-forgetful-automorphisms` | 1 | state | 0 |
+| `lem-sfb-complete-group-torsor-monodromy` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
 | `lem-sfb-derived-cech-image-totalization` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
+| `lem-sfb-internal-action-site-presentation` | 1 | state | 0 |
 | `lem-sfb-pointed-finite-etale-limit-cover` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
@@ -84,7 +84,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sp-supported-etale-tensor-origin` | 1 | state | 0 |
 | `lem-weil-point-derived-tensor-tower-coherence` | 1 | state | 0 |
 
-Not open yet: 375 nodes that below a finished node, not needed, 110 nodes that wait for a statement dependency (bottom-up), 14 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 375 nodes that below a finished node, not needed, 109 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (139)
 
