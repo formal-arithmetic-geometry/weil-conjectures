@@ -19997,3 +19997,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:49 L: merged deliver/Q61/lem-sf-etale-stalk-tor-test (stage 2; reviewer PASS; parallel immutable checks)
 - 03:49 L: merged deliver/Q59/lem-sfb-finite-proper-geometric-cd-bound (stage 2; reviewer PASS; parallel immutable checks)
 - 03:49 L: merged deliver/Q52/lem-sfb-scalar-matrix-inverse-image (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T03:50:01Z L: superseded stage-1 delivery Q52/lem-sfb-dc-hom-filtered-colimit at 3199d7ddbe2c568efc44458fc85bbe3e800c39a9; current completion retained; packet archived at refs/superseded/Q52/lem-sfb-dc-hom-filtered-colimit/3199d7ddbe2c568efc44458fc85bbe3e800c39a9; stale return retired.
