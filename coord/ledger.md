@@ -22860,3 +22860,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:53 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 14:53 L: merged deliver/NL/lem-sfb-spectral-clopen-component-homeomorphism (stage 2; reviewer PASS; parallel immutable checks)
 - 14:54 L: returned deliver/NH/lem-a1-finite-pullback-strict-tower-comparison (reviewer RETURN: L: independent stage-2 immutable head 7de42038356b: H2 (mechanical finding upheld): stmt_dep theorem lem-pur-integral-op)
+- 14:55 L: returned deliver/NA/lem-fd-common-stage-comparison-descent (reviewer RETURN: L: independent stage-2 immutable head e2c33c5ffe28: H13: the delivered def-weil-pbc-qbar-category record rebinds NM's la)
