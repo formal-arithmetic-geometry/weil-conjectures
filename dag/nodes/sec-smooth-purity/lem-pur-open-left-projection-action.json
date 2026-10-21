@@ -1,0 +1,76 @@
+{
+ "id": "lem-pur-open-left-projection-action",
+ "kind": "statement",
+ "title": "Left-coefficient action laws from normalized open restriction",
+ "statement": "Use monoidal categories [def-sfb-monoidal-category] with associator $\\alpha:(U\\otimes V)\\otimes W\\to U\\otimes(V\\otimes W)$ and left unitor $\\lambda$. A strong monoidal functor has the structure of [def-sfb-strong-monoidal-functor]; write $\\delta^H_{U,V}:H(U\\otimes V)\\xrightarrow{\\sim}HU\\otimes HV$ and $e_H:H\\mathbf1\\xrightarrow{\\sim}\\mathbf1$ for its inverse structure maps. Set $h^H_N=\\lambda_N\\circ(e_H\\otimes1_N)$ and $a^H_{B,B',N}=\\alpha_{HB,HB',N}\\circ(\\delta^H_{B,B'}\\otimes1_N)$. Composition is right to left.\nA symmetry $\\beta_{U,V}:U\\otimes V\\xrightarrow{\\sim}V\\otimes U$ means natural involutive tensor swaps satisfying the hexagon identities with $\\alpha$; a symmetric strong monoidal functor preserves these swaps under $\\delta$.\nLet $\\mathcal C,\\mathcal D$ be symmetric monoidal categories, $Q:\\mathcal C\\to\\mathcal D$ a symmetric strong monoidal functor, and $J:\\mathcal D\\to\\mathcal C$ a fully faithful left adjoint to $Q$. Here fully faithful means that $J$ induces bijections on all Hom sets. Let $u:1_{\\mathcal D}\\xrightarrow{\\sim}QJ$ be the adjunction unit, using the convention of [lem-weil-pbc-adjunction-of-natural-bijection]. Suppose given natural isomorphisms $\\gamma_{M,C}:JM\\otimes C\\xrightarrow{\\sim}J(M\\otimes QC)$ for all $M\\in\\mathcal D$, $C\\in\\mathcal C$, with the specified restriction normalization\n$$u_{M\\otimes QC}^{-1}\\circ Q(\\gamma_{M,C})=(u_M^{-1}\\otimes1_{QC})\\circ\\delta^Q_{JM,C}.$$\nDefine $v_{C,M}=J(\\beta_{M,QC})\\circ\\gamma_{M,C}\\circ\\beta_{C,JM}:C\\otimes JM\\xrightarrow{\\sim}J(QC\\otimes M)$. Then $v$ is natural, has the left-coefficient normalization\n$$u_{QC\\otimes M}^{-1}\\circ Q(v_{C,M})=(1_{QC}\\otimes u_M^{-1})\\circ\\delta^Q_{C,JM},$$\nand satisfies, for every $C,C'\\in\\mathcal C$, $M\\in\\mathcal D$,\n$$J(h^Q_M)\\circ v_{\\mathbf1,M}=\\lambda_{JM},$$\n$$J(a^Q_{C,C',M})\\circ v_{C\\otimes C',M}=v_{C,QC'\\otimes M}\\circ(1_C\\otimes v_{C',M})\\circ\\alpha_{C,C',JM}.$$\nThese are equalities in $\\mathcal C$ for the specified $\\gamma$, not assertions that arbitrary isomorphisms with these sources and targets satisfy the laws.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent-formulated categorical lemma for Stacks Tag 0GL1 (sites-cohomology.tex, lemma-j-shriek-and-tensor) and Tag 0E8I (sites-modules.tex, lemma-j-shriek-and-tensor): deriving the two left-coefficient constraints from the normalized restriction. Parent old proof Steps 2 (open part) and 5."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(shriek|extensionByZero).*(associat|unit|tensor)|(associat|unit).*extensionByZero",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: open restriction/pushforward and monoidal-reflection facts do not give the normalized extension action laws"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"shriek\", \"tensor\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: open restriction/pushforward and monoidal-reflection facts do not give the normalized extension action laws"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The open immersion extension by zero tensor comparison obeys unit and associativity coherence",
+   "results": "8 hits: CategoryTheory.Functor.OplaxMonoidal.δ_comp_tensorHom_η_assoc, CategoryTheory.InjectiveResolution.ι'_f_zero_assoc, CategoryTheory.MonoidalCoherence.left, CategoryTheory.MonoidalCategory.tensor_η, CategoryTheory.MonoidalCoherence.left', AlgebraicGeometry.IsOpenImmersion.map_ΓIso_inv_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp_assoc, Coalgebra.TensorProduct.assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: open restriction/pushforward and monoidal-reflection facts do not give the normalized extension action laws"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along an open immersion, with fully faithful left adjoint and monoidal restriction, has tensor projection maps satisfying unit and two coefficient associativity",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, LightCondensed.internallyProjective_iff_tensor_condition, LightCondensed.internallyProjective_iff_tensor_condition', AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: open restriction/pushforward and monoidal-reflection facts do not give the normalized extension action laws"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If J is fully faithful left adjoint to strong symmetric monoidal restriction Q and v:C tensor J M iso J(Q C tensor M) restricts to identity, then v obeys unit and coefficient associativity",
+   "results": "8 hits: CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ, CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.Adjunction.map_restrictFullyFaithful_counit_app_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: open restriction/pushforward and monoidal-reflection facts do not give the normalized extension action laws"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-projection-formula-coefficient-coherence",
+  "date": "2026-10-21",
+  "group": "Q38"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-cohsm",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-cohomological-smoothness",
+   "place": "Current main-20261015 sk-prop-cohsm.proof.md, (G13), first arrow “the projection formula”: Agent-formulated categorical lemma for Stacks Tag 0GL1 (sites-cohomology.tex, lemma-j-shriek-and-tensor) and Tag 0E8I (sites-modules.tex, lemma-j-shriek-and-tensor): deriving the two left-coefficient constraints from the normalized restriction. Parent old proof Steps 2 (open part) and 5.",
+   "via": [
+    "lem-pur-projection-formula-coefficient-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -26,96 +26,36 @@
  ],
  "proof": [
   {
-   "text": "Work first in the ambient ordinary constant-$A$ derived categories. Put $F=Lr^*$, $R=Rr_*$, $Q=Lj^*$ and $J=j_!$, so $P=RJ$ and $S=QF$ under the canonical composition comparison. [lem-pur-derived-pullback-tensor-iso] supplies the natural tensor comparisons for $F,Q,S$, including their unit, signed symmetry and composition coherence. Use the derived symmetric monoidal structures of [lem-sf-ringed-derived-closed-symmetric-monoidal]. Suppression of parentheses below always means the unique associator/unitor composite of [lem-coef-monoidal-structural-coherence], without permuting letters. Write $\\delta^F,\\delta^Q$ for the inverse tensor structure maps and $e_F,e_Q$ for the maps from the pulled-back units. Thus $\\delta^S=\\delta^Q\\circ Q\\delta^F$ and $e_S=e_Q\\circ Qe_F$. For any such pullback $H$ set\n$$h^H_N=\\lambda_N(e_H\\otimes1_N),\\qquad a^H_{B,B',N}=\\alpha_{HB,HB',N}(\\delta^H_{B,B'}\\otimes1_N).$$\nAll calculations below concern these fixed comparisons, in the ambient categories, before assuming any projection component invertible.",
+   "text": "In the ambient derived categories put $F=Lr^*$, $R=Rr_*$, $Q=Lj^*$, $J=j_!$, $P=RJ$, $S=QF$. The canonical symmetric monoidal comparisons satisfy $\\delta^S=\\delta^Q Q\\delta^F$ and $e_S=e_Q Qe_F$ [lem-pur-derived-pullback-tensor-iso, lem-sf-ringed-derived-closed-symmetric-monoidal]. Apply [lem-pur-adjoint-left-projection-action] to $F\\dashv R$ and its specified counit projection $\\rho$, obtaining $t$ and both forward laws. Apply [lem-pur-open-left-projection-action] to the open unit and normalized $\\gamma$ of [lem-sf-open-tensor-normalization], obtaining $v$ and both forward laws. Neither application requires a projection inverse.",
    "uses": [
     "lem-pur-derived-pullback-tensor-iso",
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-coef-monoidal-structural-coherence"
+    "lem-pur-adjoint-left-projection-action",
+    "lem-pur-open-left-projection-action",
+    "lem-sf-open-tensor-normalization",
+    "def-exchange-projection"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0FPT (lemma-symmetric-monoidal-derived); canonical comparison normalizations"
+    "place": "Tags 0B56 (equation-projection-formula-map), 0GL1 (lemma-j-shriek-and-tensor); fixed compactification, coefficient constraints supporting blueprint (G13)"
    }
   },
   {
-   "text": "Let $\\rho_{N,B}:RN\\otimes B\\to R(N\\otimes FB)$ and $\\gamma_{M,C}:JM\\otimes C\\to J(M\\otimes QC)$ be exactly the proper and open maps in [def-exchange-projection]. Define their left-coefficient versions\n$$t_{B,N}=R(\\beta_{N,FB})\\rho_{N,B}\\beta_{B,RN},\\qquad v_{C,M}=J(\\beta_{M,QC})\\gamma_{M,C}\\beta_{C,JM}.$$\nThe adjunction $F\\dashv R$ and the counit definition of $\\rho$ give, by [lem-weil-pbc-adjunction-of-natural-bijection],\n$$\\varepsilon_{FB\\otimes N}F(t_{B,N})=(1_{FB}\\otimes\\varepsilon_N)\\delta^F_{B,RN}.\\tag{1}$$\nIndeed transpose the displayed expression for $t$: naturality of $\\varepsilon$ moves $R\\beta$ outside the counit; naturality of symmetry moves $\\varepsilon_N$ past $\\beta$, and compatibility of $F$ with signed symmetry moves $F\\beta$ past $\\delta^F$. The adjacent symmetries cancel. For\n$$T_{B,M}=P(\\beta_{M,SB})\\operatorname{PF}^c_{M,B}\\beta_{B,PM},$$\nsubstitution of the two definitions cancels $\\beta_{FB,JM}\\beta_{JM,FB}$ and gives\n$$T_{B,M}=R(v_{FB,M})t_{B,JM}.$$\nHere and below the target uses $QF\\cong S$. This proves that the composite being studied is the specified PF map, conjugated by symmetry, rather than some other isomorphism.",
+   "text": "Define $T_{B,M}=P(\\beta_{M,SB})\\operatorname{PF}^c_{M,B}\\beta_{B,PM}$. Substitution of the exact composite in [def-exchange-projection] cancels the adjacent symmetries at $FB,JM$, giving $T_{B,M}=R(v_{FB,M})t_{B,JM}$. Apply [lem-pur-composite-left-projection-action] to obtain $P(h^S_M)T_{\\mathbf1,M}=\\lambda_{PM}$ and $P(a^S_{B,B',M})T_{B\\otimes B',M}=T_{B,SB'\\otimes M}(1_B\\otimes T_{B',M})\\alpha_{B,B',PM}$, where $h^S_M=\\lambda_M(e_S\\otimes1)$ and $a^S=\\alpha(\\delta^S\\otimes1)$.",
    "uses": [
     "def-exchange-projection",
-    "lem-weil-pbc-adjunction-of-natural-bijection",
-    "lem-pur-derived-pullback-tensor-iso",
+    "lem-pur-composite-left-projection-action",
     "lem-sf-ringed-derived-closed-symmetric-monoidal"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map): symmetry conjugation and its counit transpose"
+    "place": "Tags 0B56 (equation-projection-formula-map), 0GL1 (lemma-j-shriek-and-tensor); fixed compactification, coefficient constraints supporting blueprint (G13)"
    }
   },
   {
-   "text": "The proper unit equation is\n$$R(h^F_N)t_{\\mathbf1,N}=\\lambda_{RN}.\\tag{2}$$\nTo check it, transpose under $F\\dashv R$. Naturality of the counit and (1) make the transpose of the left side\n$$h^F_N(1_{F\\mathbf1}\\otimes\\varepsilon_N)\\delta^F_{\\mathbf1,RN}\n=\\varepsilon_N\\lambda_{FRN}(e_F\\otimes1)\\delta^F_{\\mathbf1,RN}\n=\\varepsilon_N F(\\lambda_{RN}).$$\nThe middle equality is unitor naturality; the last is the unit identity for $F$ from [lem-pur-derived-pullback-tensor-iso]. The final expression is exactly the transpose of the right side. Injectivity of the adjunction bijection [lem-weil-pbc-adjunction-of-natural-bijection] proves (2). Nothing about $t$ being invertible is used.",
-   "uses": [
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56: one-factor unit calculation for its counit-defined map"
-   }
-  },
-  {
-   "text": "The proper coefficient-associativity equation is\n$$R(a^F_{B,B',N})t_{B\\otimes B',N}\n=t_{B,FB'\\otimes N}(1_B\\otimes t_{B',N})\\alpha_{B,B',RN}.\\tag{3}$$\nTranspose the right side. Formula (1) at $FB'\\otimes N$, followed by naturality of $\\delta^F$, gives\n$$(1_{FB}\\otimes[\\varepsilon_{FB'\\otimes N}F(t_{B',N})])\\delta^F_{B,B'\\otimes RN}F(\\alpha_{B,B',RN}).$$\nInsert (1) once more; this becomes\n$$(1_{FB}\\otimes[(1_{FB'}\\otimes\\varepsilon_N)\\delta^F_{B',RN}])\\delta^F_{B,B'\\otimes RN}F(\\alpha_{B,B',RN}).$$\nBy associativity coherence of the canonical pullback comparison [lem-pur-derived-pullback-tensor-iso], this equals\n$$a^F_{B,B',N}(1_{F(B\\otimes B')}\\otimes\\varepsilon_N)\\delta^F_{B\\otimes B',RN},$$\nwhich is the transpose of the left side by counit naturality and (1). The bijection [lem-weil-pbc-adjunction-of-natural-bijection] proves (3). This is two substitutions of a defining counit equation, not an appeal to a new coherence theorem.",
-   "uses": [
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-weil-pbc-adjunction-of-natural-bijection"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56: explicit two-factor transpose calculation"
-   }
-  },
-  {
-   "text": "For the open factor, [lem-sf-open-tensor-normalization] gives fully faithful $J$ and the invertible unit $M\\to QJM$. Its canonical $\\gamma$ restricts to the identity under that unit and the tensor comparisons. Consequently the same is true of its symmetry-conjugate $v_{C,M}$: naturality of symmetry and $\\beta^2=1$ cancel the two swaps after applying $Q$. Thus\n$$J(h^Q_M)v_{\\mathbf1,M}=\\lambda_{JM},\\tag{4}$$\n$$J(a^Q_{C,C',M})v_{C\\otimes C',M}\n=v_{C,QC'\\otimes M}(1_C\\otimes v_{C',M})\\alpha_{C,C',JM}.\\tag{5}$$\nHere is the equality test, rather than a stalkwise argument: the source of (4) is isomorphic via $v$ to an object of $\\operatorname{im}J$; the source of (5) is also, via $v_{C\\otimes C',M}$; both targets are in $\\operatorname{im}J$. On these sources and targets $Q$ is faithful, since $J$ is fully faithful and $QJ\\cong1$. Applying $Q$ to (4) gives the unit constraint for $Q$ on $M$. Applying it to (5) gives the associativity constraint for $Q$ on $C,C',JM$; these hold by [lem-pur-derived-pullback-tensor-iso]. This proves both equalities of actual derived morphisms. No separation of the ambient schemes is required.",
-   "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-pur-derived-pullback-tensor-iso",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0GL1 (lemma-j-shriek-and-tensor), sites-modules.tex Tag 0E8I: open restriction normalization and two elementary constraint checks"
-   }
-  },
-  {
-   "text": "Paste the unit equations. Since $e_S=e_Q\\circ Qe_F$, naturality of $v$ in its coefficient gives\n$$\\begin{aligned}\nP(h^S_M)T_{\\mathbf1,M}\n&=R\\bigl(J(h^Q_M)J(Qe_F\\otimes1)v_{F\\mathbf1,M}\\bigr)t_{\\mathbf1,JM}\\\\\n&=R\\bigl(J(h^Q_M)v_{\\mathbf1,M}(e_F\\otimes1)\\bigr)t_{\\mathbf1,JM}\\\\\n&=R(h^F_{JM})t_{\\mathbf1,JM}=\\lambda_{PM}.\n\\end{aligned}\\tag{6}$$\nThe third equality is (4), and the last is (2). Naturality of $v$ follows from the specified natural $\\gamma$ in [lem-sf-open-tensor-normalization] and tensor symmetry. The equation for $e_S$ and the identifications with $S=Lf^*$ are the composition/unit coherence of [lem-pur-derived-pullback-tensor-iso]. These are functorial substitutions inside the fixed compactification.",
-   "uses": [
-    "lem-sf-open-tensor-normalization",
-    "lem-pur-derived-pullback-tensor-iso"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0B56 and 0GL1: elementary pasting of the two unit equations"
-   }
-  },
-  {
-   "text": "Paste the coefficient equations. In the following display put $M'=SB'\\otimes M$, and suppress only the comparisons fixed in Step 1. Expanding $T=R(v)t$ and using naturality of $t$ in $N$ at $v_{FB',M}$ yields\n$$\\begin{aligned}\n&T_{B,M'}(1_B\\otimes T_{B',M})\\alpha_{B,B',PM}\\\\\n&=R\\bigl(v_{FB,M'}(1_{FB}\\otimes v_{FB',M})\\bigr)\n t_{B,FB'\\otimes JM}(1_B\\otimes t_{B',JM})\\alpha_{B,B',RJM}\\\\\n&=R\\bigl(v_{FB,M'}(1_{FB}\\otimes v_{FB',M})a^F_{B,B',JM}\\bigr)t_{B\\otimes B',JM}\\\\\n&=P(a^S_{B,B',M})R(v_{F(B\\otimes B'),M})t_{B\\otimes B',JM}\\\\\n&=P(a^S_{B,B',M})T_{B\\otimes B',M}.\n\\end{aligned}\\tag{7}$$\nThe second equality is (3). For the third, apply (5) to $C=FB,C'=FB'$ and then use naturality of $v$ at $\\delta^F_{B,B'}:F(B\\otimes B')\\to FB\\otimes FB'$. The resulting target map is $J(a^S_{B,B',M})$, since $\\delta^S=\\delta^Q\\circ Q\\delta^F$ by [lem-pur-derived-pullback-tensor-iso]. Naturality of $t$ is immediate from its counit-adjoint definition [def-exchange-projection]. This proves (7) without any right adjoint of $P$ or any change of compactification.",
-   "uses": [
-    "def-exchange-projection",
-    "lem-sf-open-tensor-normalization",
-    "lem-pur-derived-pullback-tensor-iso"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0B56 and 0GL1: three-line expansion of the fixed compactification tensor-action equation"
-   }
-  },
-  {
-   "text": "Now impose precisely the invertibility hypotheses in the item. By the definition in Step 2 and $\\beta_{V,U}\\beta_{U,V}=1$,\n$$T_{B,M}^{-1}=\\beta_{PM,B}(\\operatorname{PF}^c_{M,B})^{-1}P(\\beta_{SB,M})=\\pi_{B,M}.$$\nRight-compose (6) with $\\pi_{\\mathbf1,M}$ to obtain\n$$\\lambda_{PM}\\pi_{\\mathbf1,M}=P(h^S_M).$$\nIn (7), right-compose with $\\pi_{B\\otimes B',M}$ and left-compose first with $\\pi_{B,SB'\\otimes M}$ and then with $1_B\\otimes\\pi_{B',M}$. Cancellation gives\n$$\\alpha_{B,B',PM}\\pi_{B\\otimes B',M}\n=(1_B\\otimes\\pi_{B',M})\\pi_{B,SB'\\otimes M}P(a^S_{B,B',M}).$$\nSubstitution of $h^S$ and $a^S$ from Step 1 is exactly the two equations of [def-sfb-projection-formula] displayed in the item. Only the components assumed invertible in those expressions were inverted; this proves no new invertibility assertion.",
+   "text": "For exactly the assumed invertible components, symmetry squared is identity, hence $T_{B,M}^{-1}=\\beta_{PM,B}(\\operatorname{PF}^c_{M,B})^{-1}P(\\beta_{SB,M})=\\pi_{B,M}$. Right-compose the unit law with $\\pi_{\\mathbf1,M}$. Right-compose the coefficient law with $\\pi_{B\\otimes B',M}$, then left-compose with $\\pi_{B,SB'\\otimes M}$ and $1_B\\otimes\\pi_{B',M}$. Cancellation gives precisely the two displayed equations, with the constraints of [def-sfb-projection-formula].",
    "uses": [
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
     "def-sfb-projection-formula"
@@ -123,11 +63,11 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Equations (6)-(7): elementary cancellation; def-sfb-projection-formula unit and associativity equations"
+    "place": "Tags 0B56 (equation-projection-formula-map), 0GL1 (lemma-j-shriek-and-tensor); fixed compactification, coefficient constraints supporting blueprint (G13)"
    }
   },
   {
-   "text": "Finally check the bounded constructible inputs. [lem-sf-pullback-tor-amplitude] applies to the given separated finite-type $f$ and puts $SB,SB'$ in $D^b_{ctf}(X,A)$. [lem-sf-tensor-ctf](ii) puts $B\\otimes B'$ in $D^b_{ctf}(Y,A)$; clause (i) puts $SB'\\otimes M$ and then $SB\\otimes(SB'\\otimes M)$ in $D^b_c(X,A)$, without finite Tor amplitude for $M$. The same applies to $S(B\\otimes B')\\otimes M$. [prop-finite-compact-support-constructibility] puts $PM$ and the compact-support images of these bounded constructible tensors in $D^b_c(Y,A)$ for this compactification. Its hypotheses are finite-type schemes over the field $k$, a separated finite-type $f$, and $\\ell$ invertible, exactly our setting; it does not require that $X,Y$ be separated over $k$. Clause (i) of the tensor lemma now puts $B\\otimes PM$, $B'\\otimes PM$ and their iterated products in $D^b_c$. The unit $A_T[0]$ is constructible and flat with Tor interval $[0,0]$, since tensoring by it is the identity. Thus the ambient equations restrict to every input claimed in the statement. Empty schemes, zero inputs and a unit coefficient are included in the same adjunction and tensor equations.",
+   "text": "[lem-sf-pullback-tor-amplitude] makes $SB,SB',S(B\\otimes B')$ finite Tor. [lem-sf-tensor-ctf](ii) makes $B\\otimes B'$ and $SB\\otimes SB'$ finite Tor; (i) makes every tensor with $M$ bounded constructible, regardless of Tor amplitude of $M$. [prop-finite-compact-support-constructibility] makes their $P$-images bounded constructible at the chosen compactification, and (i) again handles all coefficient tensors with those images. These lemmas require finite-type schemes over $k$ and separated finite-type $f$, not absolute separatedness. The unit $A_T[0]$ is constructible and flat with Tor interval $[0,0]$: tensoring with it is the identity. Thus every displayed input lies in its stated domain, including empty schemes, zero objects and unit coefficients.",
    "uses": [
     "lem-sf-pullback-tor-amplitude",
     "lem-sf-tensor-ctf",
@@ -136,20 +76,21 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Finite constructible domains: pullback/Tor preservation and more-etale.tex Tag 0GL0 (theorem-constructible-shriek)"
+    "place": "Tags 0B56 (equation-projection-formula-map), 0GL1 (lemma-j-shriek-and-tensor); fixed compactification, coefficient constraints supporting blueprint (G13)"
    }
   }
  ],
  "proof_deps": [
   "def-exchange-projection",
   "def-sfb-projection-formula",
-  "lem-coef-monoidal-structural-coherence",
+  "lem-pur-adjoint-left-projection-action",
+  "lem-pur-composite-left-projection-action",
   "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-open-left-projection-action",
   "lem-sf-open-tensor-normalization",
   "lem-sf-pullback-tor-amplitude",
   "lem-sf-ringed-derived-closed-symmetric-monoidal",
   "lem-sf-tensor-ctf",
-  "lem-weil-pbc-adjunction-of-natural-bijection",
   "prop-finite-compact-support-constructibility"
  ],
  "proof_origin": {
@@ -249,11 +190,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-projection-formula-coefficient-coherence",
   "worker": "stage1",
-  "summary": "Kept the statement and all hypotheses, wrote nine proof steps for the actual compactification map, proved the proper equations by transposes, open equations by fully faithful restriction, pasted them, and inverted only the assumed components. Reused existing generic interfaces; no new nodes or Mathlib leaves. Avoided the extra absolute separatedness hypothesis of lem-pur-finite-projection-action-laws.",
-  "blueprint": "The coefficient-action coherence obligation in thm-pur-cohomological-smoothness, second tensor-transformation paragraph: Steps 1-7 establish the forward unit and two-coefficient equations, Step 8 gives precisely the inverse equations, Step 9 verifies the constructible domains. In current main-20261015 sk-prop-cohsm.proof.md this supports (G13) and the comparison of its transposes.",
+  "summary": "Human-requested re-split: unchanged statement and Lean record; three independent statement-only categorical lemmas carry the proper transpose/constraints, normalized open constraints, and composite pasting. Four assembly steps retain identification of the actual PF, cancellation and constructible-domain checks. Every original argument is preserved verbatim in report.md and allocated to its new work item.",
+  "blueprint": "Current main-20261015 sk-prop-cohsm.proof.md (G13), projection-formula arrow and its coefficient constraints; parent old Steps 2-4 to adjoint-left-projection-action, Step 5 to open-left-projection-action, Steps 6-7 to composite-left-projection-action, old Steps 1,8,9 to short assembly.",
   "tool_uses": [
    {
     "node": "lem-pur-derived-pullback-tensor-iso",
@@ -290,12 +231,12 @@
   "prop-finite-compact-support-constructibility"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q93-f3dd5f2eb",
-  "group": "Q93",
+  "reviewer": "NT-cc-Q38-dbc6019a6",
+  "group": "Q38",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q93-f3dd5f2eb (reviewer sub-agent of L); spot-checked: Read the complete mathematics and cited statements; checked all nine steps against Stacks and the current blueprint, coefficient categories, edge cases, duplicates, dependency cycles, and batch-5 restrictions. No repairs needed. Accepted six generic tool uses; detailed findings are in review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-dbc6019a6 (reviewer sub-agent of L); spot-checked: Re-split meets the human note of 2026-10-21. Statement, stmt_deps, Lean record, blueprint and tool_uses are unchanged from the reviewed base; only proof, proof_deps and split_report differ. A script confirmed that all nine base step texts appear verbatim in the report, and I traced where each one went. The three new statement-only nodes are 1842, 2061 and 1817 chars and the four-step assembly is 2347 chars. No argument was shortened. (1) lem-pur-adjoint-left-projection-action (base Steps 2-proper, 3, 4) is true. Here ρ is the adjunct of (ε⊗1)δ, which is exactly π_p in def-exchange-projection and Stacks 0B56. The transpose (1⊗ε)δ follows from counit naturality, F symmetric and β²=1. The unit law follows from the unit axiom of def-sfb-strong-monoidal-functor. Associativity follows from (1) used twice plus the associativity axiom. No invertibility is used. (2) lem-pur-open-left-projection-action (base Steps 2-open, 5) is true. On Hom(JX,Y), f↦Q(f)u is the adjunction bijection, so Q is injective on maps out of objects isomorphic to ones in im J. Both sources qualify, through λ and through v (an isomorphism). I wrote out both reductions, via the normalization and Q's monoidal axioms. Its hypotheses match the statement of lem-sf-open-tensor-normalization: invertible unit, fully faithful j_!, and j^*γ equal to the identity after the unit and μ_j; for constant A its γ is the map that def-exchange-projection uses. (3) lem-pur-composite-left-projection-action (base Steps 6, 7) is true. It uses naturality of t at v, the t-law, the v-law at (FB,FB'), naturality of v at δ^F, and a^Q(Qδ^F⊗1)=a^S; the unit case is the same with e_F. Assembly Step 2: T = R(v)t after one cancellation of a β-pair, written out against the PF^c composite. Step 3's inversion order matches def-sfb-projection-formula. Step 4's hypotheses were checked against lem-sf-pullback-tor-amplitude, lem-sf-tensor-ctf (i)/(ii) and prop-finite-compact-support-constructibility, and M never needs finite Tor. Possible duplicates checked: lem-pur-finite-projection-action-laws is the geometric right-coefficient identity in another unit and has no unit law or detection argument. lem-sfb-ringed-projection-tensor-associativity, lem-sfb-ringed-projection-canonical-normalization, lem-sfb-monoidal-adjunction-unit-counit, lem-amb-compactification-projection-composition and lem-asd-adjunction-projection-map-mate state other things. Mathlib grep found no match. No SGA is cited. The six accepted generic tool uses are unchanged, and the new nodes cite no statement from another unit. Edge cases checked: identity functors, unit inputs, and a rescaled γ, which the normalization hypothesis excludes. No fixes."
  },
  "reviewed_lean": {
   "date": "2026-10-18",

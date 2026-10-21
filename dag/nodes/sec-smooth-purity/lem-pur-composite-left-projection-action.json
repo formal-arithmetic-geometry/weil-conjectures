@@ -1,0 +1,82 @@
+{
+ "id": "lem-pur-composite-left-projection-action",
+ "kind": "statement",
+ "title": "Pasting two forward left-coefficient tensor actions",
+ "statement": "Use monoidal categories [def-sfb-monoidal-category] with associator $\\alpha:(U\\otimes V)\\otimes W\\to U\\otimes(V\\otimes W)$ and left unitor $\\lambda$. A strong monoidal functor has the structure of [def-sfb-strong-monoidal-functor]; write $\\delta^H_{U,V}:H(U\\otimes V)\\xrightarrow{\\sim}HU\\otimes HV$ and $e_H:H\\mathbf1\\xrightarrow{\\sim}\\mathbf1$ for its inverse structure maps. Set $h^H_N=\\lambda_N\\circ(e_H\\otimes1_N)$ and $a^H_{B,B',N}=\\alpha_{HB,HB',N}\\circ(\\delta^H_{B,B'}\\otimes1_N)$. Composition is right to left.\nLet $\\mathcal C_0,\\mathcal C_1,\\mathcal C_2$ be monoidal categories. Let $F:\\mathcal C_0\\to\\mathcal C_1$ and $Q:\\mathcal C_1\\to\\mathcal C_2$ be strong monoidal, and let $R:\\mathcal C_1\\to\\mathcal C_0$, $J:\\mathcal C_2\\to\\mathcal C_1$ be arbitrary functors. Set $S=QF$, $P=RJ$, with the composite inverse comparisons\n$$\\delta^S_{B,B'}=\\delta^Q_{FB,FB'}\\circ Q(\\delta^F_{B,B'}),\\qquad e_S=e_Q\\circ Q(e_F).$$\nSuppose given natural transformations\n$$t_{B,N}:B\\otimes RN\\to R(FB\\otimes N),\\qquad v_{C,M}:C\\otimes JM\\to J(QC\\otimes M)$$\nfor $B\\in\\mathcal C_0$, $N,C\\in\\mathcal C_1$, $M\\in\\mathcal C_2$. Require that for each pair $(H,K,w)=(F,R,t)$ and $(Q,J,v)$, and all appropriately typed $D,D',L$, the following two equations hold:\n$$K(h^H_L)\\circ w_{\\mathbf1,L}=\\lambda_{KL},$$\n$$K(a^H_{D,D',L})\\circ w_{D\\otimes D',L}=w_{D,HD'\\otimes L}\\circ(1_D\\otimes w_{D',L})\\circ\\alpha_{D,D',KL}.$$\nDefine the specified composite\n$$T_{B,M}=R(v_{FB,M})\\circ t_{B,JM}:B\\otimes PM\\longrightarrow P(SB\\otimes M).$$\nThen $T$ is natural in both variables and satisfies\n$$P(h^S_M)\\circ T_{\\mathbf1,M}=\\lambda_{PM},$$\n$$P(a^S_{B,B',M})\\circ T_{B\\otimes B',M}=T_{B,SB'\\otimes M}\\circ(1_B\\otimes T_{B',M})\\circ\\alpha_{B,B',PM}.$$\nNo adjunction, symmetry, invertibility of $t,v,T$, or geometric composition law is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent-formulated categorical pasting lemma for the composite of the maps of Stacks Tags 0B56 (equation-projection-formula-map) and 0GL1 (lemma-j-shriek-and-tensor), sites-cohomology.tex. Parent old proof Steps 6 and 7, with the fixed-composite identification in Step 2."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "compProjectionMap|[Mm]odule[Ff]unctor|[Pp]rojection.*[Aa]ssociativ",
+   "results": "16 hits: Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Category/ModuleCat/Localization.lean, Mathlib/Algebra/Module/CharacterModule.lean, Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean, Mathlib/RingTheory/LocalProperties/InjectiveDimension.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal natural-transformation composition and module homomorphisms are not composition of these relative tensor action maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"comp\", \"projection\"",
+   "results": "12 hits: Simps.getCompositeOfProjections, Simps.getCompositeOfProjectionsAux, Submodule.IsCompl.projection, Submodule.IsCompl.projection_isIdempotentElem, Submodule.IsCompl.projection_ker, Submodule.IsCompl.projection_range, LinearMap.IsIdempotentElem.eq_isCompl_projection, Submodule.IsCompl.projection_apply_mem",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal natural-transformation composition and module homomorphisms are not composition of these relative tensor action maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pasting two natural tensor action transformations for composable monoidal functors preserves coefficient associativity and the tensor unit",
+   "results": "8 hits: CategoryTheory.NatTrans.IsMonoidal.comp, CategoryTheory.NatTrans.tensor_naturality_assoc, CategoryTheory.Functor.Monoidal.map_tensor_assoc, CategoryTheory.Functor.Monoidal.instComp, CategoryTheory.NatTrans.IsMonoidal.tensor_assoc, CategoryTheory.Monoidal.FunctorCategory.tensorHom, CategoryTheory.NatTrans.IsMonoidal.mk, CategoryTheory.Monoidal.FunctorCategory.tensorHom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal natural-transformation composition and module homomorphisms are not composition of these relative tensor action maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of two module functor action maps relative to composable strong monoidal functors preserves unit and associativity laws",
+   "results": "8 hits: CategoryTheory.Mod_.comp, CategoryTheory.Mod_.comp_hom', CategoryTheory.Mod_.comp_hom, CategoryTheory.instIsMod_HomComp, CategoryTheory.Mod_.instCategory, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.Mod_.Hom, CategoryTheory.Mod_.comap",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal natural-transformation composition and module homomorphisms are not composition of these relative tensor action maps"
+  },
+  {
+   "tool": "grep",
+   "query": "IsMonoidal.comp|instComp|def comp",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal natural-transformation composition and module homomorphisms are not composition of these relative tensor action maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The composite action T(B,M)=R(v(F B,M)) t(B,J M) satisfies the unit and associativity identities when t and v do",
+   "results": "8 hits: ContinuousCohomology.I, Rep.instMonoidalActionTypeLinearization, CategoryTheory.Mod_.scalarRestriction, Bimod.TensorBimod.actLeft, Action.instMonoidalLinear, ModuleCat.CoextendScalars.mulAction, CategoryTheory.ModObj.smul, CategoryTheory.ModObj.mul_smul",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal natural-transformation composition and module homomorphisms are not composition of these relative tensor action maps"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-projection-formula-coefficient-coherence",
+  "date": "2026-10-21",
+  "group": "Q38"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-cohsm",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-cohomological-smoothness",
+   "place": "Current main-20261015 sk-prop-cohsm.proof.md, (G13), first arrow “the projection formula”: Agent-formulated categorical pasting lemma for the composite of the maps of Stacks Tags 0B56 (equation-projection-formula-map) and 0GL1 (lemma-j-shriek-and-tensor), sites-cohomology.tex. Parent old proof Steps 6 and 7, with the fixed-composite identification in Step 2.",
+   "via": [
+    "lem-pur-projection-formula-coefficient-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

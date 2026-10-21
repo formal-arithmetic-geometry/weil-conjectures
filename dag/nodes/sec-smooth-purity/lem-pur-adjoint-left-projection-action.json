@@ -1,0 +1,83 @@
+{
+ "id": "lem-pur-adjoint-left-projection-action",
+ "kind": "statement",
+ "title": "Left-coefficient counit projection: transpose, unit and associativity",
+ "statement": "Use monoidal categories [def-sfb-monoidal-category] with associator $\\alpha:(U\\otimes V)\\otimes W\\to U\\otimes(V\\otimes W)$ and left unitor $\\lambda$. A strong monoidal functor has the structure of [def-sfb-strong-monoidal-functor]; write $\\delta^H_{U,V}:H(U\\otimes V)\\xrightarrow{\\sim}HU\\otimes HV$ and $e_H:H\\mathbf1\\xrightarrow{\\sim}\\mathbf1$ for its inverse structure maps. Set $h^H_N=\\lambda_N\\circ(e_H\\otimes1_N)$ and $a^H_{B,B',N}=\\alpha_{HB,HB',N}\\circ(\\delta^H_{B,B'}\\otimes1_N)$. Composition is right to left.\nA symmetry $\\beta_{U,V}:U\\otimes V\\xrightarrow{\\sim}V\\otimes U$ means natural involutive tensor swaps satisfying the hexagon identities with $\\alpha$; a symmetric strong monoidal functor preserves these swaps under $\\delta$.\nLet $\\mathcal C,\\mathcal D$ be symmetric monoidal categories and $F:\\mathcal C\\to\\mathcal D$ a symmetric strong monoidal functor. Let $R:\\mathcal D\\to\\mathcal C$ be right adjoint to $F$, with natural Hom bijections $\\operatorname{Hom}(FU,V)\\cong\\operatorname{Hom}(U,RV)$ and counit $\\varepsilon_V:FRV\\to V$ in the convention of [lem-weil-pbc-adjunction-of-natural-bijection]. For arbitrary $N\\in\\mathcal D$ and $B\\in\\mathcal C$, define $\\rho_{N,B}:RN\\otimes B\\to R(N\\otimes FB)$ as the adjunct of $(\\varepsilon_N\\otimes1_{FB})\\circ\\delta^F_{RN,B}$, and define\n$$t_{B,N}=R(\\beta_{N,FB})\\circ\\rho_{N,B}\\circ\\beta_{B,RN}:B\\otimes RN\\longrightarrow R(FB\\otimes N).$$\nThen $t$ is natural in both arguments, its transpose is exactly\n$$\\varepsilon_{FB\\otimes N}\\circ F(t_{B,N})=(1_{FB}\\otimes\\varepsilon_N)\\circ\\delta^F_{B,RN},$$\nand for all $B,B'\\in\\mathcal C$ and $N\\in\\mathcal D$ it satisfies\n$$R(h^F_N)\\circ t_{\\mathbf1,N}=\\lambda_{RN},$$\n$$R(a^F_{B,B',N})\\circ t_{B\\otimes B',N}=t_{B,FB'\\otimes N}\\circ(1_B\\otimes t_{B',N})\\circ\\alpha_{B,B',RN}.$$\nNo component of $\\rho$ or $t$ is assumed invertible.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Agent-formulated categorical lemma for Stacks Tag 0B56 (sites-cohomology.tex, equation-projection-formula-map): symmetry-conjugated counit transpose and the two coefficient constraints. Parent old proof Steps 2 (proper part), 3 and 4."
+ },
+ "stmt_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor",
+  "lem-weil-pbc-adjunction-of-natural-bijection"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a strong symmetric monoidal pullback F left adjoint to R, the symmetry-conjugated counit projection B tensor R N to R(F B tensor N) satisfies left unit and coefficient associativity laws",
+   "results": "8 hits: CategoryTheory.frobeniusMorphism, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc, CategoryTheory.Adjunction.map_ε_comp_counit_app_unit, CategoryTheory.ChosenPullbacksAlong.cartesianMonoidalCategoryToUnit_mapPullbackAdj_counit_app, CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal-adjunction counit identities are not the left-coefficient projection transpose and its two action laws"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointProjectionMap|projectionMap_associativity|projectionMap.*[Uu]nit",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal-adjunction counit identities are not the left-coefficient projection transpose and its two action laws"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"projection\", \"assoc\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal-adjunction counit identities are not the left-coefficient projection transpose and its two action laws"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A symmetric monoidal left adjoint has a counit projection map with left tensor coefficient unit and associativity equations",
+   "results": "8 hits: CategoryTheory.ComonObj.comul_counit_assoc, CategoryTheory.Adjunction.mapMon_counit, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.leftAdjointMate, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit, CategoryTheory.ihom.coev, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalCounit",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal-adjunction counit identities are not the left-coefficient projection transpose and its two action laws"
+  },
+  {
+   "tool": "grep",
+   "query": "map_μ_comp_counit_app_tensor|map_ε_comp_counit_app_unit",
+   "results": "7 hits: Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/Functor.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal-adjunction counit identities are not the left-coefficient projection transpose and its two action laws"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a symmetric strong monoidal F adjoint to R the left coefficient projection is the transpose of (identity tensor counit) delta and obeys the tensor unit and associativity",
+   "results": "8 hits: CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_μ, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor, CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε, CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc, CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor_assoc, CategoryTheory.Adjunction.ε_comp_map_ε_assoc, CategoryTheory.Adjunction.IsMonoidal.instIsMonoidalUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: monoidal-adjunction counit identities are not the left-coefficient projection transpose and its two action laws"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-projection-formula-coefficient-coherence",
+  "date": "2026-10-21",
+  "group": "Q38"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-cohsm",
+ "blueprint": {
+  "from": {
+   "node": "thm-pur-cohomological-smoothness",
+   "place": "Current main-20261015 sk-prop-cohsm.proof.md, (G13), first arrow “the projection formula”: Agent-formulated categorical lemma for Stacks Tag 0B56 (sites-cohomology.tex, equation-projection-formula-map): symmetry-conjugated counit transpose and the two coefficient constraints. Parent old proof Steps 2 (proper part), 3 and 4.",
+   "via": [
+    "lem-pur-projection-formula-coefficient-coherence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
