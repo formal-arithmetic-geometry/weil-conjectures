@@ -11,9 +11,80 @@
   "def-weil-linear-category",
   "def-weil-linear-scalar-localization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use diagrammatic composition $a;b=b\\circ a$. The unit equation gives $H(\\eta_X)=\\eta_{HX};c_X^{-1}$. If $Y\\in\\mathcal C$ and $a,b:H(LX)\\to Y$ satisfy $H(\\eta_X);a=H(\\eta_X);b$, then $\\eta_{HX};c_X^{-1};a=\\eta_{HX};c_X^{-1};b$. Both $c_X^{-1};a$ and $c_X^{-1};b$ have source $L(HX)$ and target $Y$, so the assumed Hom bijection for $HX,Y$ gives their equality. Composing on the left with $c_X$ gives $a=b$. This is cancellation only against targets in $\\mathcal C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: tensor Frobenius; extracted completed comparison and its rationalization"
+   }
+  },
+  {
+   "text": "For $f:X\\to X'$, put $a=H(Lf);c_{X'}$ and $b=c_X;L(Hf)$, arrows $H(LX)\\to L(HX')$. Naturality of $\\eta$ and the two unit equations give\n$$H(\\eta_X);a=H(\\eta_X;Lf);c_{X'}=H(f);H(\\eta_{X'});c_{X'}=H(f);\\eta_{HX'},$$\n$$H(\\eta_X);b=\\eta_{HX};L(Hf)=H(f);\\eta_{HX'}.$$\nSince $L(HX')\\in\\mathcal C$, Step 1 gives $H(Lf);c_{X'}=c_X;L(Hf)$. This proves naturality of the given $c$, without having assumed it.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: tensor Frobenius; extracted completed comparison and its rationalization"
+   }
+  },
+  {
+   "text": "For $f:M\\to M'$ and $g:N\\to N'$ in $\\mathcal C$, abbreviate $U=T(M,N)$, $U'=T(M',N')$, $h=T(f,g)$ and $k=T(Hf,Hg)$. The components $c_U$ and $L(\\tau_{M,N})$ are isomorphisms between objects of $\\mathcal C$: $H$ preserves $\\mathcal C$, $L$ takes values there, and fullness lets us regard these arrows and inverses as arrows of $\\mathcal C$. By Step 2 and the given naturality equation $H(h);\\tau_{M',N'}=\\tau_{M,N};k$,\n$$P(B(f,g));d_{M',N'}=H(Lh);c_{U'};L(\\tau_{M',N'})=c_U;L(Hh;\\tau_{M',N'})=d_{M,N};L(k)=d_{M,N};B(Pf,Pg).$$\nHere only preservation of composition by $L$ is used in the middle equality. This is simultaneous naturality of $d$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: tensor Frobenius; extracted completed comparison and its rationalization"
+   }
+  },
+  {
+   "text": "For each $M,M'\\in\\mathcal C$, apply [lem-weil-pbc-localization-module-tensor] to the $A$-module $V=\\operatorname{Hom}_{\\mathcal C}(M,M')$ and $p\\in A$. Together with [def-weil-pbc-module-localization-away], it identifies the raw Hom module $V\\otimes_A A[1/p]$ with fractions $f/p^r$, and every arrow has such a representative. No injectivity of $V\\to V[1/p]$ is asserted: equality of $f/p^r$ and $f'/p^{r'}$ means $p^k(p^{r'}f-p^rf')=0$ for some $k\\geq0$. From the composition rule in [def-weil-linear-scalar-localization], composition of fractions is $(f/p^r);(g/p^s)=(f;g)/p^{r+s}$: represent the two arrows by $f\\otimes p^{-r}$ and $g\\otimes p^{-s}$ and multiply their coefficients.",
+   "uses": [
+    "lem-weil-pbc-localization-module-tensor",
+    "def-weil-pbc-module-localization-away",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tags 00DK (lemma-tensor-localization), 07JZ (definition-localization-module); specialization to each Hom module and raw bilinear composition"
+   }
+  },
+  {
+   "text": "Define $\\bar\\mu_{M,N}=Q(d_{M,N})$. Every localized object is an object of $\\mathcal C$, so this defines every component with the required source and target. For arbitrary localized arrows $u:M\\to M'$ and $v:N\\to N'$, choose $u=f/p^r$, $v=g/p^s$ using Step 4. The stipulated formulas for $\\bar P,\\bar B$ and localized composition [def-weil-linear-scalar-localization] give\n$$\\bar P(\\bar B(u,v));Q(d_{M',N'})=\\frac{P(B(f,g));d_{M',N'}}{p^{r+s}}=\\frac{d_{M,N};B(Pf,Pg)}{p^{r+s}}=Q(d_{M,N});\\bar B(\\bar P(u),\\bar P(v)).$$\nThe middle equality is Step 3, mapped into the localized Hom module. Thus the family is natural on all pairs of localized arrows. The calculation starts with arbitrary chosen representatives of existing arrows and proves equality in the localization; it never cancels a power of $p$ in an integral Hom module.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: tensor Frobenius; extracted completed comparison and its rationalization"
+   }
+  },
+  {
+   "text": "Since $Q$ is a functor [def-weil-linear-scalar-localization], the arrows $Q(d_{M,N})$ and $Q(d_{M,N}^{-1})$ compose in either order to the corresponding identity. The inverse family is natural: multiply the naturality equation of Step 5 on the left by $Q(d_{M,N}^{-1})$ and on the right by $Q(d_{M',N'}^{-1})$ and use those two identity equations. The two families therefore form a natural isomorphism with the stated inverse. Any competing natural isomorphism satisfying the component formula has the same forward arrow at every object pair, because raw scalar localization adds no objects; hence it is equal to this one. All calculations remain valid for torsion Hom modules.",
+   "uses": [
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+    "place": "Second sentence: tensor Frobenius; extracted completed comparison and its rationalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-module-tensor",
+  "def-weil-pbc-module-localization-away",
+  "def-weil-linear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-rem-sf-pf-done/def-wf-tensor-product.md",
+  "place": "Second sentence (tensor Frobenius), the abstract naturality and scalar-localization argument extracted by Q20; Steps 1–3 and 5–6 are explicit categorical calculations, Step 4 uses Stacks 00DK and 07JZ."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +134,59 @@
    "results": "8 hits; CategoryTheory.Localization.Monoidal.tensor_comp, CategoryTheory.Localization.Monoidal.tensorBifunctorIso, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPost_iso, CategoryTheory.Localization.Monoidal.μ_natural_right, CategoryTheory.Localization.Monoidal.μ_natural_left, CategoryTheory.Localization.Monoidal.lifting₂CurriedTensorPre_iso, CategoryTheory.Localization.Monoidal.μ, CategoryTheory.Localization.Monoidal.tensorBifunctor",
    "date": "2026-10-21",
    "verdict": "no match: generic monoidal localization and lifting of transformations require an already natural integral comparison; they do not prove reflector-unit naturality and its compatibility with completed tensor"
+  },
+  {
+   "tool": "grep",
+   "query": "Reflective|lift₂NatTrans|natTransExtension",
+   "results": "{\"t\": \"2026-10-21T08:11:35Z\", \"tool\": \"grep\", \"query\": \"Reflective|lift₂NatTrans|natTransExtension\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Adhesive/Basic.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Construction.lean\", \"Mathlib/CategoryTheory/Localization/Bifunctor.lean\"], \"digest\": \"297826f5210e9c9c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: reflector Hom-bijection naturality and generic categorical localization are ingredients; they do not state this unit-normalized completed comparison and its raw scalar-localized bifunctor conclusion in one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Reflective, CategoryTheory.NatIso",
+   "results": "{\"t\": \"2026-10-21T08:11:35Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Reflective, CategoryTheory.NatIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.NatIso'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "unavailable: query rejected with loogle: unknown identifier 'CategoryTheory.NatIso'; corrected search with \"unitCompPartialBijective\" was subsequently run"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of an isomorphism commuting with a reflector unit, extended to a bilinear functor after inverting a scalar",
+   "results": "{\"t\": \"2026-10-21T08:11:35Z\", \"tool\": \"leansearch\", \"query\": \"Naturality of an isomorphism commuting with a reflector unit, extended to a bilinear functor after inverting a scalar\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.unitCompPartialBijective_natural\", \"CategoryTheory.Reflective.instIsIsoAppUnitReflectorAdjunctionA\", \"CategoryTheory.Free.ext\", \"CategoryTheory.unitCompPartialBijective_symm_natural\", \"CategoryTheory.CatCommSq.iso_inv_naturality_assoc\", \"CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit\", \"CategoryTheory.CatCommSq.iso_inv_naturality\", \"ModuleCat.restrictScalarsId'App_inv_naturality_assoc\"], \"digest\": \"04612071575ec3c8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: reflector Hom-bijection naturality and generic categorical localization are ingredients; they do not state this unit-normalized completed comparison and its raw scalar-localized bifunctor conclusion in one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A reflector unit comparison H L X isomorphic to L H X is natural if it carries H eta X to eta H X, and its tensor comparison extends to scalar localized Hom modules",
+   "results": "{\"t\": \"2026-10-21T08:11:39Z\", \"tool\": \"leanfinder\", \"query\": \"A reflector unit comparison H L X isomorphic to L H X is natural if it carries H eta X to eta H X, and its tensor comparison extends to scalar localized Hom modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Monoidal.Reflective.instIsIsoMapTensorHomAppUnit\", \"CategoryTheory.bijection_natural\", \"CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom\", \"CategoryTheory.Adjunction.localization_unit_app\", \"CategoryTheory.Monoidal.Reflective.isIso_tfae\", \"CategoryTheory.unitCompPartialBijective_symm_natural\", \"CategoryTheory.Adjunction.Localization.η_app\", \"CategoryTheory.Adjunction.Localization.ε_app\"], \"digest\": \"116d88b7a5df7772\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: reflector Hom-bijection naturality and generic categorical localization are ingredients; they do not state this unit-normalized completed comparison and its raw scalar-localized bifunctor conclusion in one-line specialization"
+  },
+  {
+   "tool": "grep",
+   "query": "unitCompPartialBijective|lift₂NatIso|NatIso.ofComponents",
+   "results": "{\"t\": \"2026-10-21T08:11:59Z\", \"tool\": \"grep\", \"query\": \"unitCompPartialBijective|lift₂NatIso|NatIso.ofComponents\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/ShrinkYoneda.lean\", \"Mathlib/CategoryTheory/FintypeCat.lean\", \"Mathlib/CategoryTheory/FintypeCat.lean\", \"Mathlib/CategoryTheory/PathCategory/Basic.lean\"], \"digest\": \"f26aa3a6787a7d82\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: reflector Hom-bijection naturality and generic categorical localization are ingredients; they do not state this unit-normalized completed comparison and its raw scalar-localized bifunctor conclusion in one-line specialization"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"unitCompPartialBijective\"",
+   "results": "{\"t\": \"2026-10-21T08:12:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"unitCompPartialBijective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.unitCompPartialBijective\", \"CategoryTheory.unitCompPartialBijectiveAux\", \"CategoryTheory.unitCompPartialBijective_symm_apply\", \"CategoryTheory.unitCompPartialBijectiveAux_symm_apply\", \"CategoryTheory.unitCompPartialBijective_natural\", \"CategoryTheory.unitCompPartialBijective_symm_natural\"], \"digest\": \"c1b704fef355aec8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: reflector Hom-bijection naturality and generic categorical localization are ingredients; they do not state this unit-normalized completed comparison and its raw scalar-localized bifunctor conclusion in one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If two composites through a reflector agree after its unit they are equal; a bilinear natural comparison remains natural on fractions f divided by p power r and g divided by p power s",
+   "results": "{\"t\": \"2026-10-21T08:12:07Z\", \"tool\": \"leanfinder\", \"query\": \"If two composites through a reflector agree after its unit they are equal; a bilinear natural comparison remains natural on fractions f divided by p power r and g divided by p power s\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.unitCompPartialBijective_natural\", \"CategoryTheory.unitCompPartialBijective_symm_natural\", \"CategoryTheory.bijection_natural\", \"CategoryTheory.MorphismProperty.LeftFraction.map_comp_map_eq_map\", \"CategoryTheory.MorphismProperty.LeftFraction.map_compatibility\", \"CategoryTheory.MorphismProperty.LeftFraction.map_eq_of_map_eq\", \"CategoryTheory.AreEqualizedByLocalization.mk\", \"CategoryTheory.AreEqualizedByLocalization.map_eq\"], \"digest\": \"e9bb27bc5a705da4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: reflector Hom-bijection naturality and generic categorical localization are ingredients; they do not state this unit-normalized completed comparison and its raw scalar-localized bifunctor conclusion in one-line specialization"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-wf-tensor-product",
@@ -83,5 +203,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-completed-tensor-rational-naturality",
+  "worker": "stage1",
+  "summary": "Kept the statement and wrote six complete steps: unit-based cancellation, naturality of c, simultaneous naturality of d, fraction representation using existing module-localization nodes, explicit naturality on arbitrary fraction pairs, and inverses/uniqueness. No new nodes. No faithful-localization or torsion-freeness assumption. Searched project Lean and the whole blueprint; generic Mathlib reflector and bifunctor-localization hits are ingredients, not a match for the whole statement.",
+  "blueprint": "Realizes the second sentence of def-wf-tensor-product (tensor Frobenius), specifically old live proof Step 1 (wfRationalTensorPullback_exists), now invoked by parent Step 8. No chapter or unit route change."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-a8e73a555",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-a8e73a555 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement and stmt_deps are byte-identical to the live node, which is still unsplit, so the delivery is not superseded. There is no repair note and the item is not in the dropped list. The delivery creates no new nodes and cites no SGA. Unit sk-rem-sf-pf-done has uses [] and the item is not its key node. Steps 1-3: I recomputed the reflector cancellation, which works because c_X^{-1};a has source L(HX) and target Y in C. I recomputed the naturality of c from the η-naturality and unit equations, and the simultaneous naturality of d, H(Lh);c_U';L(τ')=c_U;L(τ;k)=d;B(Pf,Pg). All three are correct. Step 4 cites lem-weil-pbc-localization-module-tensor (Mathlib leaf), def-weil-pbc-module-localization-away and def-weil-linear-scalar-localization, and each says what the step takes from it. Every element of V⊗A[1/p] is a pure tensor f⊗p^{-R}. Stacks 00DK (algebra.tex:2088) and 07JZ (algebra.tex:1159) match their tags. Step 5: the fraction naturality with denominator p^{r+s} on both sides is correct, and no power of p is cancelled. Step 6: the inverse is Q(d^{-1}), and uniqueness holds because the objects of C[1/p] are those of C. Edge cases tested: p=1, p nilpotent or 0, Hom=Z/2 with p=2 (Q not faithful), L=H=id, empty C. Duplicate search: lem-pur-semilinear-scalar-localization covers one-variable extension of natural transformations and overlaps Steps 5-6 only partly (advisory). It does not cover the bifunctor formula or the reflector part, so the item is not a duplicate. Every cited node is a definition or a Mathlib leaf, so there is no route issue and no tool_use. No fixes."
  }
 }

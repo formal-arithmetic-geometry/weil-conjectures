@@ -21168,3 +21168,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:34 L: merged deliver/Q28/lem-sfb-scalar-perfect-dual-realization (reviewer PASS; first push; new nodes: 0)
 - 08:34 L: merged deliver/NV/lem-sf-immersion-completed-pullback-comparison (reviewer PASS; after a return; new nodes: 2)
 - 08:34 L: merged deliver/NX/lem-sfb-derived-degree-zero-abelian-criterion (reviewer PASS; first push; new nodes: 0)
+- 08:34 L: merged deliver/Q35/lem-sf-completed-tensor-rational-naturality (reviewer PASS; first push; new nodes: 0)
