@@ -102,6 +102,18 @@ def closedScalarMap
       (Functor.associator IA QA TZ).inv ≫ Functor.whiskerRight bA.counit TZ ≫
         (Functor.leftUnitor TZ).hom)
 
+private theorem closedScalarMap_app
+    {AX : Type uX} {AZ : Type uZ} {BX : Type uU} {BZ : Type vX}
+    [Category.{vU} AX] [Category.{vZ} AZ] [Category.{wX} BX] [Category.{wU} BZ]
+    {QA : AX ⥤ AZ} {IA : AZ ⥤ AX} {QB : BX ⥤ BZ} {IB : BZ ⥤ BX}
+    (bA : QA ⊣ IA) (bB : QB ⊣ IB) (TX : AX ⥤ BX) (TZ : AZ ⥤ BZ)
+    (θ : QA ⋙ TZ ≅ TX ⋙ QB) (M : AZ) :
+    (closedScalarMap bA bB TX TZ θ).app M =
+      bB.unit.app (TX.obj (IA.obj M)) ≫
+        IB.map (θ.inv.app (IA.obj M)) ≫ IB.map (TZ.map (bA.counit.app M)) := by
+  dsimp [closedScalarMap, Adjunction.homEquiv]
+  simp [Functor.map_comp]
+
 section Scheme
 
 variable {X Z U : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
@@ -169,6 +181,7 @@ variable {X Z U : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i]
   [thetaJ : IsIso (θ_h jA jB hj inferInstance dX dU)]
 
 include i j hij adji adjj normX normZ normU hj thetaI thetaJ in
+set_option linter.unusedSectionVars false in
 /-- The canonical new-coefficient-linear supported closed comparison is invertible,
 has zero open restriction, and is uniquely characterized by its closed normalization.
 The component equation writes the supported-unit formula with Lean's composition order.
@@ -223,7 +236,45 @@ theorem closed_supported_scalar_comparison :
             mZ.T.map (calA.closedAdjunction.counit.app M) →
         f = (closedScalarMap calA.closedAdjunction calB.closedAdjunction mX.T mZ.T
           (asIso (θ_h iA iB hi inferInstance dX dZ))).app M := by
-  sorry
+  let δ := closedScalarMap calA.closedAdjunction calB.closedAdjunction mX.T mZ.T
+    (asIso (θ_h iA iB hi inferInstance dX dZ))
+  have formula (M : DerivedCategory (Modules AZ)) :
+      δ.app M = calB.closedAdjunction.unit.app (mX.T.obj (IA.mapDerivedCategory.obj M)) ≫
+        IB.mapDerivedCategory.map
+          (inv ((θ_h iA iB hi inferInstance dX dZ).app (IA.mapDerivedCategory.obj M))) ≫
+        IB.mapDerivedCategory.map (mZ.T.map (calA.closedAdjunction.counit.app M)) := by
+    simpa [δ] using closedScalarMap_app calA.closedAdjunction calB.closedAdjunction
+      mX.T mZ.T (asIso (θ_h iA iB hi inferInstance dX dZ)) M
+  let := dU.isLeftAdjoint
+  have support (M : DerivedCategory (Modules AZ)) :
+      IsZero ((inverseModules jB).mapDerivedCategory.obj
+        (mX.T.obj (IA.mapDerivedCategory.obj M))) := by
+    exact (mU.T.map_isZero (calA.openClosedZero M)).of_iso
+      ((asIso (θ_h jA jB hj inferInstance dX dU)).app
+        (IA.mapDerivedCategory.obj M)).symm
+  let := calA.closedCounitIso
+  let componentIso (M : DerivedCategory (Modules AZ)) : IsIso (δ.app M) := by
+    rw [formula]
+    let := calB.supportedUnit _ (support M)
+    infer_instance
+  refine ⟨NatIso.isIso_of_isIso_app δ, ?_⟩
+  intro M
+  let α : (inverseModules iB).mapDerivedCategory.obj
+      (mX.T.obj (IA.mapDerivedCategory.obj M)) ⟶ mZ.T.obj M :=
+    inv ((θ_h iA iB hi inferInstance dX dZ).app (IA.mapDerivedCategory.obj M)) ≫
+      mZ.T.map (calA.closedAdjunction.counit.app M)
+  have adjunct : δ.app M = (calB.closedAdjunction.homEquiv _ _) α := by
+    simp only [Adjunction.homEquiv_apply, Functor.map_comp, α, formula]
+  have normalized : (inverseModules iB).mapDerivedCategory.map (δ.app M) ≫
+      calB.closedAdjunction.counit.app (mZ.T.obj M) = α := by
+    change (calB.closedAdjunction.homEquiv _ _).symm (δ.app M) = α
+    rw [adjunct]
+    exact (calB.closedAdjunction.homEquiv _ _).symm_apply_apply α
+  refine ⟨formula M, support M, calB.openClosedZero _, ?_, normalized, ?_⟩
+  · exact (support M).eq_of_src _ _
+  · intro f hf
+    apply (calB.closedAdjunction.homEquiv _ _).symm.injective
+    exact hf.trans normalized.symm
 
 end Scheme
 end SheafOfModules.ScalarPullback
