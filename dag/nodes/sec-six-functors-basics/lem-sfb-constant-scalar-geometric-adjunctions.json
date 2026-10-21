@@ -16,9 +16,91 @@
   "def-sfb-constant-ring-module-restriction",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a $B$-scalar $a$, let $a_C:1\\to R_C$ and $a_D:1\\to R_D$ be its constant sections, and let $\\lambda_a^N:N\\to N$ be multiplication by $a_D$. The normalization hypothesis on $\\gamma$ says $\\gamma a_C=u_*(a_D)$, with the canonical terminal-object identification understood. By the definition of the induced ringed direct image, its action restricted to $a$ is therefore $u_*(\\lambda_a^N)$: insert $\\gamma a_C$ in the scalar input of $u_*$ of the action of $N$. This is exactly the scalar endomorphism defining the fixed-$B$ direct image. Addition and underlying sheaves already agree. Thus the identity of $u_*N$ is a $B$-linear isomorphism $\\beta_N:C_Cu_{*,R}N\\to u_{*,B}C_DN$. Both functors send a module map to the same underlying additive map, so these identities are natural.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-sfb-constant-ring-module-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, case (6), fixed-ring actions by endomorphisms; agent-written comparison with ringed module actions."
+   }
+  },
+  {
+   "text": "Write $E_C,E_D$ for the inverse equivalences of the statement, which extend the fixed-$B$ action along $\\iota$ to the unique constant-ring action on the same underlying abelian sheaf; by [lem-cbc-constant-ring-module-sheaves] these are quasi-inverse equivalences to $C_C,C_D$ on every site, with no nonzero-ring or nonempty-site hypothesis, so the equivalences are proved rather than assumed. Their evaluation isomorphisms $E_CC_C\\cong1$, $C_CE_C\\cong1$, and their $D$ analogues retain every underlying additive map. In particular restriction gives bijections on Hom sets, not merely injections. Put $P=u_B^*$ and $Q=u_{*,B}$, and put $\\widetilde L=C_Du_R^*E_C$. For arbitrary fixed-$B$ module sheaves $A,H$, the supplied equivalences, the ringed module adjunction, and step 1 give natural bijections\n$$\\operatorname{Hom}_B(\\widetilde L A,H)\\cong\\operatorname{Hom}_{R_D}(u_R^*E_CA,E_DH)\\cong\\operatorname{Hom}_{R_C}(E_CA,u_{*,R}E_DH)\\cong\\operatorname{Hom}_B(A,QH).$$\nIn the last bijection apply $C_C$, then $\\beta_{E_DH}$, then $Q(C_DE_DH\\cong H)$. Thus this explicitly defines an adjunction $\\widetilde L\\dashv Q$. Its units and counits are the images of identity arrows under these bijections and their inverses.",
+   "uses": [
+    "def-sfb-constant-ring-module-restriction",
+    "lem-cbc-constant-ring-module-sheaves",
+    "lem-weil-pbc-ringed-topoi-module-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, case (6), fixed-ring actions by endomorphisms; agent-written comparison with ringed module actions."
+   }
+  },
+  {
+   "text": "Apply the unit-compatible uniqueness lemma to $\\widetilde L\\dashv Q$ and the specified $P\\dashv Q$, with the identity comparison of their common right adjoint. It gives a natural isomorphism $\\widetilde L\\cong P$. Evaluate it at $A=C_CM$ and use the supplied evaluation $E_CC_CM\\cong M$ to obtain $\\alpha_M:C_Du_R^*M\\cong PC_CM$. More explicitly, writing $\\eta_R,\\eta_B$ for the specified units, the uniqueness equation is\n$$Q(\\alpha_M)\\circ\\beta_{u_R^*M}\\circ C_C(\\eta_{R,M})=\\eta_{B,C_CM}.$$\nThis specifies the comparison for the given adjunctions, so it is the adjunction mate of $\\beta$, rather than an independently chosen isomorphism of pullbacks.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; agent-written application of the unit-compatible uniqueness of left adjoints."
+   }
+  },
+  {
+   "text": "Let $\\Phi_R,\\Phi_B$ denote the Hom adjunction bijections. For $f:u_R^*M\\to N$, expand $\\Phi$ as right adjoint applied to the arrow followed by the unit. Naturality of $\\beta$ and the unit equation of step 3 give\n$$\\Phi_B\\bigl(C_D(f)\\circ\\alpha_M^{-1}\\bigr)=\\beta_N\\circ C_C\\bigl(\\Phi_R(f)\\bigr).$$\nThis is agreement of the Hom bijections. For the counit take $M=u_{*,R}N$ and $f=\\varepsilon_{R,N}$; its ringed adjunct is the identity. The fixed-$B$ adjunct of $\\varepsilon_{B,C_DN}\\circ P(\\beta_N)$ is $\\beta_N$, so injectivity of $\\Phi_B$ gives\n$$C_D(\\varepsilon_{R,N})=\\varepsilon_{B,C_DN}\\circ P(\\beta_N)\\circ\\alpha_{u_{*,R}N}.$$\nTogether with the already displayed unit equation this proves both requested compatibilities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; agent-written application of the unit-compatible uniqueness of left adjoints."
+   }
+  },
+  {
+   "text": "For the specified open localization $j$, use its pullback comparison $\\alpha^j:C_Dj_R^*\\cong j_B^*C_C$ from steps 1--4. For a fixed-$B$ sheaf $H$ on the localized topos and $A$ on the ambient topos, the given open adjunctions and equivalences give\n$$\\operatorname{Hom}_B(C_Cj_{!,R}E_DH,A)\\cong\\operatorname{Hom}_{R_C}(j_{!,R}E_DH,E_CA)\\cong\\operatorname{Hom}_{R_D}(E_DH,j_R^*E_CA)\\cong\\operatorname{Hom}_B(H,j_B^*A).$$\nThe last bijection applies restriction, $\\alpha^j_{E_CA}$, and $j_B^*(C_CE_CA\\cong A)$. Therefore $C_Cj_{!,R}E_D\\dashv j_B^*$. Apply the same unit-compatible uniqueness lemma to this adjunction and the specified $j_{!,B}\\dashv j_B^*$, and then evaluate at $H=C_DN$. This gives $\\kappa_N:C_Cj_{!,R}N\\cong j_{!,B}C_DN$. If $\\Psi_R,\\Psi_B$ are the open Hom bijections, its defining equation, extended from units by naturality, is\n$$\\Psi_B\\bigl(C_C(f)\\circ\\kappa_N^{-1}\\bigr)=\\alpha^j_M\\circ C_D\\bigl(\\Psi_R(f)\\bigr),\\qquad f:j_{!,R}N\\to M.$$\nThis equation holds because $\\kappa$ is the unit-compatible comparison: for $g:j_{!,B}C_DN\\to C_CM$ one has $\\Psi_B(g)=j_B^*(g)\\circ\\eta^{j}_{B}=\\widehat\\Psi(g\\circ\\kappa_N)$, where $\\widehat\\Psi$ is the Hom chain just displayed, and $\\widehat\\Psi(C_C(f))=\\alpha^j_M\\circ C_D(\\Psi_R(f))$ by its construction. For the units take $M=j_{!,R}N$ and $f=\\mathrm{id}$: $\\Psi_B(\\kappa_N^{-1})=\\alpha^j_{j_{!,R}N}\\circ C_D(\\eta^j_{R,N})$, the agreement of the open units. For the counits take $N=j_R^*M$ and $f=\\varepsilon^j_{R,M}$, whose ringed adjunct is the identity: the displayed equation gives $\\Psi_B(C_C(\\varepsilon^j_{R,M})\\circ\\kappa^{-1}_{j_R^*M})=\\alpha^j_M$, while $\\Psi_B(\\varepsilon^j_{B,C_CM}\\circ j_{!,B}(\\alpha^j_M))=j_B^*(\\varepsilon^j_B)\\circ\\eta^j_{B,j_B^*C_CM}\\circ\\alpha^j_M=\\alpha^j_M$ by naturality of the unit and the triangle identity. Injectivity of $\\Psi_B$ gives $C_C(\\varepsilon^j_{R,M})=\\varepsilon^j_{B,C_CM}\\circ j_{!,B}(\\alpha^j_M)\\circ\\kappa_{j_R^*M}$, the agreement of the open counits.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; agent-written application of the unit-compatible uniqueness of left adjoints."
+   }
+  },
+  {
+   "text": "For the localization $\\mathcal C/U$, restriction evaluates on $(V\\to U)$ as evaluation on $V$. The ring of the localized site is $R_C|_U$; by [lem-weil-pbc-site-constant-restriction] (with $M=B$) the constant sheaf $\\underline B_{\\mathcal C/U}$ is canonically $R_C|_U$, and its sheafification unit at $V/U$ is the restriction of $\\iota_C$, i.e. $\\iota_{V/U}(a)=\\iota_V(a)$. This identification is multiplicative, since both units are ring maps and are locally surjective. So $C_{\\mathcal C/U}$ is the constant-scalar restriction of [def-sfb-constant-ring-module-restriction] for this ring. Consequently restricting the constant action $\\iota_V(a)m$ before or after $C_C$ is the same action and the same map on each section. This gives the pullback comparison for localization directly, also after relocalization. The open-left-adjoint argument of step 5 only used this pullback comparison and the specified left adjoints, so applies to localized sites whenever those adjoints are supplied, without needing the localization to be open. None of the arguments uses points, a scheme, a finite coefficient ring, a nonzero coefficient ring, or a terminal object in the presented site.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "def-sfb-constant-ring-module-restriction",
+    "lem-weil-pbc-site-constant-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 00YV, proposition-functoriality-algebraic-structures-topoi, case (6), fixed-ring actions by endomorphisms; agent-written comparison with ringed module actions."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-sfb-constant-ring-module-restriction",
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-site-constant-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 00YV, case (6), and categories.tex Tag 0B65; explicit constant-scalar calculation and Hom-chain transport supplied by Q18."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +143,52 @@
    "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module/presheaf machinery does not assert the specified normalized comparison, its naturality and coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Ss]calar.*[Aa]djunction|restrictScalars.*pushforward",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary continuous/site or scheme module pushforwards, not the normalized constant-scalar comparison for an arbitrary geometric morphism and its open adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "constant ring sheaf modules geometric morphism direct image inverse image comparison adjunction",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pushforwardPushforwardAdj; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; PresheafOfModules.sheafificationAdjunction; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.unitToPushforwardObjUnit",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary continuous/site or scheme module pushforwards, not the normalized constant-scalar comparison for an arbitrary geometric morphism and its open adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"pushforward\"",
+   "results": "SheafOfModules.pushforwardId; SheafOfModules.overMapPushforwardAdj; SheafOfModules.pushforward; SheafOfModules.instIsLeftAdjointOverOverRingCatPushforwardIdSheafOver; SheafOfModules.overPushforwardOverAdj; SheafOfModules.isLeftAdjoint_pushforward_of_isIso; SheafOfModules.pushforwardCongr; SheafOfModules.pushforwardNatIso",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary continuous/site or scheme module pushforwards, not the normalized constant-scalar comparison for an arbitrary geometric morphism and its open adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction to constant scalar modules commutes with geometric direct image and inverse image adjunction on sheaves",
+   "results": "AlgebraicGeometry.Scheme.Modules.restrictAdjunction; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app; AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; AlgebraicGeometry.Scheme.Modules.restrict_map",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary continuous/site or scheme module pushforwards, not the normalized constant-scalar comparison for an arbitrary geometric morphism and its open adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "pushforward_obj_val|def pushforward|def pullbackPushforwardAdjunction",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary continuous/site or scheme module pushforwards, not the normalized constant-scalar comparison for an arbitrary geometric morphism and its open adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "equivalence of constant ring module sheaves with module valued sheaves identifies pullback by uniqueness of left adjoints and extension by zero",
+   "results": "SheafOfModules.pullbackObjFreeIso; SheafOfModules.pullbackObjUnitToUnit; SheafOfModules.unitHomEquiv; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.freeFunctorCompPullbackIso; SheafOfModules.PullbackConstruction.adjunction; SheafOfModules.pullbackIso; SheafOfModules.instIsLeftAdjointPullback",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary continuous/site or scheme module pushforwards, not the normalized constant-scalar comparison for an arbitrary geometric morphism and its open adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-module-object-ordinary-coefficient-equivalence",
@@ -83,5 +207,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-constant-scalar-geometric-adjunctions",
+  "worker": "stage1",
+  "summary": "Compared the actual constant-scalar direct image actions using the normalized structural map; transported the supplied adjunctions by explicit Hom chains and existing unit-compatible left-adjoint uniqueness, deriving the Hom, unit and counit formulas. Reused all needed nodes; no new nodes or finiteness assumptions.",
+  "blueprint": "Auxiliary constant-coefficient comparison in parent lem-sf-module-object-ordinary-coefficient-equivalence, original steps 8 and 11, serving the closed-support and open-locality arguments of sk-prop-sf-rf-shriek-preservation.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-adjunction",
+    "why": "Generic ringed-topos module Hom adjunction, already assumed by the item; this unit has no replacement for that categorical tool."
+   },
+   {
+    "node": "lem-cbc-constant-ring-module-sheaves",
+    "why": "Generic coefficient-category fact: constant-scalar restriction is an equivalence with action-extension quasi-inverse on any site; step 2 uses its statement as a black box, and unit sk-prop-sf-rf-shriek-preservation has no node stating it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-module-adjunction",
+  "lem-cbc-constant-ring-module-sheaves"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-a647d8041",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-a647d8041 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement is unchanged from base, there are no new nodes, and the item is still unsplit on live. I also read Stacks 00YV case (6) and 0B65, and every cited statement. Step 1: under the normalization γ(a)=a, the ringed direct-image action restricted to B is u_*(λ_a), the fixed-B action, so β is the identity. Steps 2-4: I rechecked the Hom chain for C_D u^* E_C ⊣ Q. The uniqueness lemma's R1(c)η1=η2 has the right orientation and makes α the inverse of the mate of β. I recomputed the Hom-bijection and counit identities. Step 5: the open Hom chain works for any natural α^j and the supplied adjoints. Three repairs in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-constant-scalar-geometric-adjunctions.json: (1) C1: step 2 treated the inverse equivalences E_C, E_D as supplied data. It now cites lem-cbc-constant-ring-module-sheaves (reviewed: restriction along ι is an equivalence whose quasi-inverse extends the action, on any site), and I added this off-route generic node to split_report.tool_uses. (2) C1: step 6 identified R_C|_U with the constant ring sheaf of C/U, with ι_{V/U}(a)=ι_V(a), without a citation. It now cites the Mathlib leaf lem-weil-pbc-site-constant-restriction. (3) E5: step 5's 'exactly as in step 4' for the open unit and counit is now written out (C_C(ε^j_R)=ε^j_B∘j_!(α^j)∘κ). proof_deps is the union of all step uses. Neither new citation creates a cycle. Edge cases checked: B=0, an empty site, the identity morphism, and C/U for an object U that is not subterminal. No duplicate node found. No SGA. Advisory: the fixed-B geometric adjunction has no definition node in stmt_deps (inherited from the item's creation by Q74).; 1 file(s) fixed by the reviewer"
  }
 }
