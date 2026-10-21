@@ -21,11 +21,142 @@
   "lem-weil-pbc-complex-ses-triangle",
   "lem-sfb-scalar-adjunction-unit-coefficient-normalization",
   "def-sfb-scalar-reduction-presentation",
-  "lem-pur-torsion-sheaf-constant-module"
+  "lem-pur-torsion-sheaf-constant-module",
+  "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The constant presheaf sequence $0\\to\\mathbf Z\\xrightarrow{n}\\mathbf Z\\to\\mathbf Z/n\\mathbf Z\\to0$ is sectionwise exact: $n\\geq1$ makes multiplication injective and the residue map has kernel $n\\mathbf Z$. Sheafification is exact by [lem-weil-pbc-sheafification-exact]. Applying it to this sequence gives $0\\to Z\\xrightarrow{n}Z\\to R\\to0$, since these constant sheaves are precisely the sheafifications of the constant presheaves [def-weil-pbc-constant-sheaf]. This is also exact in $Z$-modules, whose kernels and cokernels have the underlying abelian-sheaf kernels and cokernels [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "lem-weil-pbc-sheafification-exact",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093J (lemma-constant-exact), proof by exact sheafification; Tag 03CN (lemma-abelian-abelian)."
+   }
+  },
+  {
+   "text": "Apply [lem-pur-torsion-sheaf-constant-module] with $N=n$: every sheaf killed by $n$ has the unique stated residue action and every additive map between two such sheaves is residue-linear. Every $R$-module is killed by $n$ because $n\\bar1=0$. Thus restriction is full, since an integral-linear map between restricted residue modules is additive and hence residue-linear. It is faithful because restriction leaves the underlying maps unchanged [def-pc-sheaf-restrict-scalars].",
+   "uses": [
+    "lem-pur-torsion-sheaf-constant-module",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY (lemma-sheafification-presheaf-modules), applied to the residue actions as in the cited torsion-module lemma."
+   }
+  },
+  {
+   "text": "Let $\\pi:A\\to T=\\operatorname{coker}(n:A\\to A)$. Since $(n_T)\\pi=\\pi n_A=0$ and $\\pi$ is epic, $n_T=0$; give $T$ its unique residue action by [lem-pur-torsion-sheaf-constant-module]. Write $u_A:A\\to\\operatorname{Res}E(A)$ for the ordinary unit, $a\\mapsto a\\otimes\\bar1$, using the ordinary adjunction formulas of [lem-sfb-scalar-adjunction-unit-coefficient-normalization]. Balancing gives $u_A(na)=a\\otimes n\\bar1=0$. The cokernel property gives $v:T\\to\\operatorname{Res}E(A)$ with $v\\pi=u_A$; this map is residue-linear by the torsion-module lemma. The adjunct of $\\pi$ is $f:E(A)\\to T$ with $(\\operatorname{Res}f)u_A=\\pi$. Hence $fv\\pi=\\pi$, so $fv=1_T$; also $(vf)u_A=u_A$, so injectivity of the adjunction bijection gives $vf=1_{E(A)}$. These are inverse isomorphisms. The adjunction formula gives $f(a\\otimes\\bar k)=k\\pi(a)$; local representatives suffice for arbitrary sections of the constant residue sheaf. The equality $fu_A=\\pi$ identifies the unit, and uniqueness of cokernel factorizations proves naturality in $A$. Thus $E(A)\\simeq A/nA$ is the asserted natural isomorphism, in the residue-module category, with the specified quotient unit.",
+   "uses": [
+    "lem-pur-torsion-sheaf-constant-module",
+    "lem-sfb-scalar-adjunction-unit-coefficient-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D7 (lemma-adjoint-pullback-pushforward-modules), specialized to the identity topos and Z to R; the displayed inverse Hom formulas and the cokernel universal property."
+   }
+  },
+  {
+   "text": "For any other ordinary adjunction $E'\\dashv\\operatorname{Res}$, apply [lem-weil-pbc-conjugate-iso-unit-equation] with $L_1=E$, $L_2=E'$ and both right adjoints equal to restriction. It gives an isomorphism $c:E\\simeq E'$ satisfying $(\\operatorname{Res}c_A)u_A=u'_A$. Step 3 says that $u_A$ is a cokernel of $n_A$. Postcomposing a cokernel with an isomorphism is a cokernel: a map killing $n_A$ factors uniquely through $u_A$ and then through $(\\operatorname{Res}c_A)^{-1}$. This proves the assertion for the actual unit of every such adjunction.",
+   "uses": [
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints), unit-compatible uniqueness of adjoints."
+   }
+  },
+  {
+   "text": "Let $M$ be any flat $Z$-module sheaf. By [def-pc-flat-sheaf-modules], the functor $-\\otimes_Z M$ is exact; apply it to the coefficient sequence proved in step 1. The resulting sequence is $0\\to M\\xrightarrow{n}M\\to R\\otimes_Z M\\to0$: the identification $Z\\otimes_Z M\\simeq M$ is $z\\otimes m\\mapsto zm$ with inverse $m\\mapsto1\\otimes m$. Switching the two factors is $r\\otimes m\\mapsto m\\otimes r$, inverse to the same switch; these balanced maps induce maps of sheafifications by [def-pur-sheaf-tensor-product]. The last map is consequently $m\\mapsto m\\otimes\\bar1$, identified with the quotient in step 3. Thus $n:M\\to M$ is monic. Apply this argument independently to every term of any flat-term complex: it uses no hypothesis on its cohomology or boundedness.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER (definition-flat), item (3); explicit tensor unit and switch maps."
+   }
+  },
+  {
+   "text": "For the given resolution $p:P\\to A[0]$, apply [lem-pur-derived-change-of-rings] with $\\mathcal O=Z$, $\\mathcal O'=R$. Its K-flat computation gives the comparison $c_A:Lq(A)\\simeq E(P)$. The natural quotient identification in step 3 applied termwise identifies this genuine $R$-complex with $Q_A=P/nP$; naturality makes its quotient maps commute with the differentials. Step 5 applied in every degree now gives the degreewise short exact sequence $0\\to P\\xrightarrow{n}P\\xrightarrow{j}\\operatorname{Res}Q_A\\to0$. In particular the residue action is on an actual complex, not merely on its cohomology.",
+   "uses": [
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), with the K-flat construction before Tag 06YU (definition-derived-tor)."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-complex-ses-triangle] to the short exact sequence of complexes from step 6 in the abelian category of $Z$-module sheaves. It gives the distinguished triangle $P\\xrightarrow{n}P\\xrightarrow{j}\\operatorname{Res}Q_A\\xrightarrow{\\partial_P}P[1]$. Use its canonical short-exact-sequence boundary, with the sign fixed by the cited delta-functor construction (Stacks Tag 0152), throughout.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0152 (lemma-derived-canonical-delta-functor), with boundary -p composed with the inverse cone-to-quotient comparison."
+   }
+  },
+  {
+   "text": "Write $p$ also for its image in the derived category; it is invertible by [def-weil-abstract-derived-category]. Let $c_P:Lq(P)\\simeq E(P)$ be the K-flat comparison. The resolution comparisons in [lem-pur-derived-change-of-rings] satisfy $c_A Lq(p)=c_P$: $c_A$ is the comparison obtained by inverting the map induced by this resolution. The normalized unit formula of [lem-sfb-scalar-adjunction-unit-coefficient-normalization] is $(\\operatorname{Res}c_P)\\eta_P=j$. Naturality gives $\\eta_Ap=\\operatorname{Res}(Lq(p))\\eta_P$, hence $(\\operatorname{Res}c_A)\\eta_Ap=j$. Transport the triangle of step 7 by the isomorphisms $(p,p,(\\operatorname{Res}c_A)^{-1})$. Its second arrow is $(\\operatorname{Res}c_A)^{-1}jp^{-1}=\\eta_A$ and its last arrow is $p[1]\\partial_P\\operatorname{Res}(c_A)$. Its first arrow remains $n$, because $pn=np$. These equations verify each square of the triangle isomorphism, including the shifted final square. Distinguished triangles are closed under isomorphism by [def-weil-triangulated-category]. This proves exactly the triangle and boundary formula in the statement.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pur-derived-change-of-rings",
+    "lem-sfb-scalar-adjunction-unit-coefficient-normalization",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "K-flat derived pullback construction, Tag 06YY (lemma-derived-base-change), combined with Tag 0152 (derived.tex) and the stated unit normalization."
+   }
+  },
+  {
+   "text": "Finally let $0\\to B\\to M\\to F\\to0$ be any extension with $n:B\\to B$ epic and $n:F\\to F$ monic. Put $H=\\ker(n:B\\to B)$ and $T=\\operatorname{coker}(n:F\\to F)$. Multiplication by $n$ kills $H$ by its kernel inclusion and kills $T$ by its epic quotient, so [lem-pur-torsion-sheaf-constant-module] supplies their unique residue structures. The sequences $0\\to\\operatorname{Res}H\\to B\\xrightarrow{n}B\\to0$ and $0\\to F\\xrightarrow{n}F\\to\\operatorname{Res}T\\to0$ are short exact: their middle exactness is the kernel/cokernel property, and the endpoint conditions are precisely the assumed epimorphy and monicity [def-weil-pbc-exact-sequence]. The composites with multiplication vanish by those same properties. Taking these maps and residue objects together with the given extension supplies every datum of [def-sfb-scalar-reduction-presentation].",
+   "uses": [
+    "lem-pur-torsion-sheaf-constant-module",
+    "def-weil-pbc-exact-sequence",
+    "def-sfb-scalar-reduction-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+    "place": "Paragraph 4, residue kernel and quotient presentation for the integral-to-residue reduction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-sheafification-exact",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-torsion-sheaf-constant-module",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-sfb-scalar-adjunction-unit-coefficient-normalization",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-pbc-complex-ses-triangle",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-pbc-exact-sequence",
+  "def-sfb-scalar-reduction-presentation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/sk-lem-geo-cartier.proof.md",
+  "place": "Paragraph 4, expanded into the ordinary cokernel argument and the flat-term K-flat resolution triangle, using the Stacks sources recorded on the steps."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -103,10 +234,59 @@
    "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"TensorProduct.tensorQuotientEquiv_apply_mk_tmul\", \"TensorProduct.tensorQuotientEquiv\", \"QuotSMulTop.tensorQuotSMulTopEquivQuotSMulTop\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Tor\", \"TensorProduct.quotTensorEquivQuotSMul\", \"TensorProduct.tensorQuotEquivQuotSMul_comp_mk\", \"TensorProduct.tensorQuotMapSMulEquivTensorQuot\"]}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|extendScalars|ZMod|triangleOfSES",
+   "results": "{\"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars, CategoryTheory.Adjunction",
+   "results": "{\"n_hits\": 0, \"note\": \"\", \"top\": []}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar reduction of sheaves modulo n has quotient adjunction unit and multiplication by n exact triangle",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.smulShortComplex_g\", \"ModuleCat.smulShortComplex\", \"CompHausLike.LocallyConstant.adjunction\", \"PresheafOfModules.sheafificationAdjunction\", \"CategoryTheory.ShortComplex.ShortExact.singleTriangle\", \"DerivedCategory.triangleOfSES_mor₁\", \"CategoryTheory.ShortComplex.ShortExact.singleδ.congr_simp\", \"DerivedCategory.triangleOfSESδ.congr_simp\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of abelian groups derived reduction modulo n is computed by the quotient of a flat K-flat resolution and the unit fits into the multiplication by n distinguished triangle",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CategoryTheory.Sheaf.instAddCommGroupH\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"Ext\", \"SheafOfModules.instAbelian\", \"localCohomology.diagram\", \"CategoryTheory.Functor.rightDerived\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def restrictScalars|extendScalars|tensorQuotientEquiv|smulShortComplex|derivedη",
+   "results": "{\"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Algebra/Algebra/RestrictScalars.lean\", \"Mathlib/Algebra/Algebra/Subalgebra/Tower.lean\", \"Mathlib/Algebra/Module/SpanRankOperations.lean\", \"Mathlib/Algebra/Algebra/NonUnitalHom.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars from integers to ZMod n on module sheaves is the cokernel of multiplication by n and flat complexes compute its derived triangle",
+   "results": "{\"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"localCohomology.diagram\", \"Ext\", \"CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply\", \"CategoryTheory.Abelian.Ext.instModule\", \"CategoryTheory.Functor.mapExactFunctor_smul\", \"Rep.Tor_obj\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|extendScalars|ZMod|tensorQuotientEquiv",
+   "results": "{\"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-divisible-extension-derived-reduction",
@@ -125,5 +305,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-reduction-unit-triangle",
+  "worker": "stage1",
+  "summary": "NB: nine-step split with no new nodes. Checked ordinary quotient/unit by inverse universal maps, arbitrary left-adjoint units by unit-compatible uniqueness, flat-term monicity directly from the exact-functor definition of flatness, and all three squares transporting the canonical short-exact-sequence triangle. Reused existing torsion, scalar-normalization, K-flat change-of-rings and triangle nodes. Statement unchanged.",
+  "blueprint": "sk-lem-geo-cartier proof paragraph 4: the integral-to-residue derived reduction and its actual residue-complex and multiplication-triangle data (live V2 steps 2–3).",
+  "tool_uses": [
+   {
+    "node": "lem-pur-torsion-sheaf-constant-module",
+    "why": "Generic equivalence between n-killed abelian sheaves and modules over the constant residue ring, used for morphisms, kernels and cokernels; the Cartier unit supplies no separate such statement."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of derived extension of scalars and its canonical resolution comparisons, used without replacing the Cartier unit integral-to-residue route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-torsion-sheaf-constant-module",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NB-fda83a6d3",
+  "group": "NB",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NB-fda83a6d3 (reviewer sub-agent of L); spot-checked: I read the full nine-step split and every cited statement, and found no faults. Statement unchanged vs live/side-live (still unsplit there). The only stmt_deps change is the added def-weil-triangulated-category. No repair note, no new nodes, no SGA; the Stacks tags 093J/03D7/0B65/03ER/06YY/0152 match their labels. Step 3 inverse maps check out: fvπ=π gives fv=1, and vf has the same adjunct as 1. Step 4 uses the conjugate-iso unit equation. Step 5 is flatness as exactness of G↦G⊗M, so n is monic on every flat term. Step 7: ∂_P is pinned by the Mathlib leaf triangleOfSESδ, whose -fst cocycle sign matches the -p convention of Stacks 0152 and def-weil-abstract-derived-category. Step 8: c_A Lq(p)=c_P, (Res c_P)η_P=j and naturality give all three squares of the (p,p,(Res c_A)^{-1}) triangle iso and δ_A=p[1]∂_P Res(c_A). Step 9 fills every field of def-sfb-scalar-reduction-presentation. Edge cases: n=1 (R=0, triangle A→A→0) and non-flat A=Z/n are consistent. No duplicate found in the snapshot DAG and no cycle. I accept both declared tool_uses (lem-pur-torsion-sheaf-constant-module, lem-pur-derived-change-of-rings) as generic tools for unit paragraph 4. Side note: the normalization node's statement cites a placeholder [new-derived-adjunction-compatibility]."
  }
 }
