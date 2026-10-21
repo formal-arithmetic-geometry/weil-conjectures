@@ -36,11 +36,11 @@
  ],
  "proof": [
   {
-   "text": "The coefficient isomorphism and quotient equations of [lem-weil-pbc-profinite-coefficient-inverse-image] make $f$ a morphism of the indicated ringed topoi with exact module pullback [def-weil-pbc-proetale-operations]. Apply [lem-weil-ringed-tower-pushforward-limit-comparison]: it supplies $Rf_*^{\\rm Tow}$, all normalized evaluation comparisons and the specified natural isomorphism $a_M:Rf_*R\\lim M\\cong R\\lim Rf_*^{\\rm Tow}M$.",
+   "text": "Use the exact termwise module adjunction for tower direct image. Uniqueness on K-injective representatives identifies its evaluation comparison with the derived mate of the identity evaluation/pullback square. The normalized tower-evaluation theorem then supplies naturality for every transition.",
    "uses": [
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
     "def-weil-pbc-proetale-operations",
-    "lem-weil-ringed-tower-pushforward-limit-comparison"
+    "lem-weil-pbc-tower-derived-evaluation-normalization",
+    "lem-sf-cbc-constant-tower-direct-image-normalization"
    ],
    "elementary": false,
    "source": {
@@ -49,10 +49,11 @@
    }
   },
   {
-   "text": "Countable products of modules over $A_X,A_Y$ are exact by [lem-weil-proetale-countable-products-exact]. Hence [lem-weil-pbc-direct-image-roos-normalization] applies: its product isomorphisms commute with $1-s$ and give $a_M$ on both canonical Roos triangles, including their connecting maps.",
+   "text": "Direct image preserves products as a right adjoint. Its product comparison commutes with one minus shift by the preceding evaluation-transition identity. Identify each canonical derived-limit projection with evaluated counit of the constant/limit adjunction, using its K-injective unit normalization. The iterated-mate identity then shows that directImageRlimIso commutes with these projections. Transport the source distinguished Roos triangle through the exact direct-image functor and the product and limit isomorphisms; define the target boundary by this transport, retaining the shifted comparison.",
    "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-pbc-direct-image-roos-normalization"
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-pbc-direct-image-roos-normalization",
+    "lem-sf-cbc-constant-tower-direct-image-normalization"
    ],
    "elementary": false,
    "source": {
@@ -61,25 +62,23 @@
    }
   },
   {
-   "text": "Set $Q_{T,\\bullet}=((P_n)_T)_n$. The coefficient equations identify its pullback with $Q_{X,\\bullet}$. Use the normalized reduction/pullback comparison [lem-weil-pbc-reduction-pullback-derived-tower] and the augmented diagram mate [lem-weil-pbc-augmented-diagram-projection-mate] to obtain $h_K:(Rf_*K)_\\bullet\\to Rf_*^{\\rm Tow}K_\\bullet$. Its evaluations are precisely $\\pi_n$, invertible and quotient-compatible by [lemma-weil-pbc-perfect-projection-formula]. Since tower cohomology is levelwise [lem-weil-tower-category-levelwise-abelian], the cone of $h_K$ is acyclic at every level and hence acyclic as a tower; therefore $h_K$ is an isomorphism.",
+   "text": "The ordinary reduction/pullback comparison sends the quotient unit to the quotient unit, by the tensor-unit formula. Uniqueness identifies it with the normalized strict stratum comparison. Their K-flat representative formulas agree, so the derived comparison also agrees. Its evaluation equation and strict augmentation equation give the finite projection formula and tower augmentation formula. Adjunction transposition proves naturality and identifies the completion-unit composite.",
    "uses": [
-    "lem-weil-pbc-reduction-pullback-derived-tower",
-    "lem-weil-pbc-augmented-diagram-projection-mate",
+    "lem-weil-pbc-stratum-completion-unit-restriction",
+    "lem-sf-cbc-constant-tower-direct-image-normalization",
+    "def-weil-pbc-projection-formula-map"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
+    "place": "Whole proof: short assembly after the human finer-split return of 2026-10-21"
+   }
+  },
+  {
+   "text": "Perfectness makes each finite projection invertible. Derived evaluation reflects tower isomorphisms, by exact levelwise cohomology. Thus the strict tower projection is invertible. The completion-unit equality, the limit comparison, and invertibility of the input completion unit show that direct image is tower complete.",
+   "uses": [
     "lemma-weil-pbc-perfect-projection-formula",
-    "lem-weil-tower-category-levelwise-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "Whole proof: short assembly after the human finer-split return of 2026-10-21"
-   }
-  },
-  {
-   "text": "The strict augmentation identity of [lem-weil-pbc-augmented-diagram-projection-mate] and the constant normalization [lem-weil-pbc-constant-tower-pushforward-normalization], after applying $R\\lim$ and naturality of $a$ from step 1, give\n$$R\\lim(h_K)\\,\\operatorname{comp}_{Rf_*K}=a_{K_\\bullet}\\,Rf_*(\\operatorname{comp}_K).$$\nBy [prop-weil-pbc-koszul-reconstruction], $\\operatorname{comp}_K=c_K\\kappa_K$ with $c_K$ invertible. If $K$ is complete, the right side is invertible; $R\\lim(h_K)$ is invertible by step 3, so $\\operatorname{comp}_{Rf_*K}$ and then $\\kappa_{Rf_*K}$ are invertible. This is derived completeness [def-weil-pbc-intrinsic-completion]. The displayed equality also identifies the claimed completion composite.",
-   "uses": [
-    "lem-weil-pbc-augmented-diagram-projection-mate",
-    "lem-weil-pbc-constant-tower-pushforward-normalization",
-    "prop-weil-pbc-koszul-reconstruction",
+    "lem-weil-tower-category-levelwise-abelian",
     "def-weil-pbc-intrinsic-completion"
    ],
    "elementary": false,
@@ -92,21 +91,19 @@
  "proof_deps": [
   "def-weil-pbc-intrinsic-completion",
   "def-weil-pbc-proetale-operations",
-  "lem-weil-pbc-augmented-diagram-projection-mate",
-  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "def-weil-pbc-projection-formula-map",
+  "lem-sf-cbc-constant-tower-direct-image-normalization",
   "lem-weil-pbc-direct-image-roos-normalization",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-reduction-pullback-derived-tower",
-  "lem-weil-proetale-countable-products-exact",
-  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-stratum-completion-unit-restriction",
+  "lem-weil-pbc-tower-derived-evaluation-normalization",
   "lem-weil-tower-category-levelwise-abelian",
-  "lemma-weil-pbc-perfect-projection-formula",
-  "prop-weil-pbc-koszul-reconstruction"
+  "lemma-weil-pbc-perfect-projection-formula"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-  "place": "Whole proof; 2026-10-21 finer split using independent strict-tower normalization lemmas and existing ringed-topos limit comparison (Stacks 0A07)"
+  "place": "U2: normalized evaluation mates, counit projections, transport of Roos triangles, and uniqueness of the strict quotient-unit-normalized reduction comparison; 2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -289,16 +286,15 @@
   "lem-weil-pbc-kinjective-functorial-existence",
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-weil-ringed-tower-pushforward-limit-comparison"
+  "lem-sp-grothendieck-enough-injectives"
  ],
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "P5",
+  "group": "U2",
   "result": "pass",
-  "landing": "20261021T012421-L-2187815",
+  "landing": "20261021T204033-L-3924438",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
