@@ -18,98 +18,88 @@
  ],
  "proof": [
   {
-   "text": "Put $k=\\mathbf Q_\\ell$ and choose an $E$-basis $b_1,\\ldots,b_n$ of $F$. Such a finite basis exists directly from the finite-extension hypotheses: a finite $k$-spanning list of $F$ also spans over $E$; a maximal $E$-linearly independent sublist spans, since any omitted vector outside its span would enlarge it. Write $c:F\\xrightarrow{\\sim}E^n$ for the $E$-linear coordinate map, so $c^{-1}(a_i)=\\sum_i a_i b_i$. Regard $c$ as a $k$-linear equivalence. Both spaces are Hausdorff topological $k$-vector spaces for their norm topologies, addition and scalar multiplication being continuous by the absolute-value inequalities; $F$ is finite-dimensional over $k$. The field $k$ is complete by [def-weil-l-adic-numbers] and nontrivially normed since $|\\ell|_\\ell=\\ell^{-1}\\ne1$. Thus [lem-weil-pbc-finite-dimensional-linear-homeomorphism] makes $c$ and $c^{-1}$ continuous. In particular every coordinate $q_i:F\\to E$ is continuous. This argument uses completeness of $k$, and does not assume completeness of $\\Qlb$.",
+   "text": "Choose a finite $E$-basis of $F$: a finite $\\mathbf Q_\\ell$-spanning list also spans over $E$, and a maximal independent sublist is a basis. By [lem-sfb-condensed-subfield-basis] it gives $\\underline E^{\\,n}\\cong\\underline F$ as internal $\\underline E$-modules, with coordinate morphisms.",
    "uses": [
-    "def-weil-l-adic-numbers",
-    "lem-weil-pbc-finite-dimensional-linear-homeomorphism"
+    "lem-sfb-condensed-subfield-basis"
    ],
    "elementary": false,
    "source": {
-    "document": "Mathlib/Topology/Algebra/Module/FiniteDimension.lean",
-    "place": "LinearEquiv.toContinuousLinearEquiv, lines 367-372; realizes the blueprint proof sentence about continuous coordinate functions"
-   }
-  },
-  {
-   "text": "By [sk-def-sfb-condensed-ring], on each profinite set $S$ the maps\n$$\\beta_S:C(S,E)^n\\longrightarrow C(S,F),\\quad (h_i)\\longmapsto\\sum_i b_i h_i,\\qquad c_S(h)=(q_i\\circ h)_i$$\nare defined on continuous functions. They are inverse, commute with restriction by precomposition, and are $C(S,E)$-linear. Consequently they define inverse morphisms of condensed $\\underline E$-modules, $\\underline E^{\\,n}\\cong\\underline F$. The module-morphism equations of [sk-def-sfb-module-objects] hold because both sides are the same pointwise bilinear multiplication maps; the sheaf tensor product in [sk-def-sfb-sheaf-tensor] is the sheafification of the sectionwise tensor, so equality on these bilinear maps is equality of the internal action maps.",
-   "uses": [
-    "sk-def-sfb-condensed-ring",
-    "sk-def-sfb-module-objects",
-    "sk-def-sfb-sheaf-tensor"
-   ],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "first two sentences: the basis isomorphism on the point"
+    "place": "Assembly of the finite-basis proof"
    }
   },
   {
-   "text": "Let $P=p_X^*$. The left adjoint and strong monoidal properties in [sk-def-sfb-pullback-from-point] transport the preceding isomorphism to an $E_X$-module isomorphism $E_X^{\\,n}\\cong F_X$. Here is the finite-sum justification: for its right adjoint $Q$, the adjunction identifies $\\operatorname{Hom}(P(A^{\\oplus n}),B)$ with $\\operatorname{Hom}(A^{\\oplus n},Q(B))=\\prod_i\\operatorname{Hom}(P(A),B)$, and likewise $P(0)=0$. Hence $P$ preserves the finite coproduct and its zero morphisms. The projections characterized by $\\pi_i\\iota_j=\\delta_{ij}$ are therefore preserved too; the diagonal and codiagonal defining addition show that $P$ is additive. Strong monoidality transports each equation expressing $\\underline E$-linearity to the corresponding equation over $P(\\underline E)$. The ring actions and the inclusion are exactly the transported ones by [sk-def-sfb-pulled-back-coefficients] and [def-sfb-subfield-coefficient-map]. Write $b_i^X$ and $q_i^X:F_X\\to E_X$ for the resulting basis sections and coordinate morphisms; they satisfy $q_i^X(b_j^X)=\\delta_{ij}$ and $s=\\sum_i b_i^X q_i^X(s)$.",
+   "text": "Put $P=p_X^*$. It is a strong monoidal left adjoint by [sk-def-sfb-pullback-from-point]. The left-adjoint colimit theorem [lem-weil-pbc-left-adjoint-preserves-colimits] and [lem-sfb-preserving-colimits-additive] make $P$ additive. Both sheaf categories are abelian, so they have finite biproducts, and by [sk-def-sfb-sheaf-tensor] each functor $A\\otimes-$, $-\\otimes A$ preserves colimits, hence is additive by [lem-sfb-preserving-colimits-additive]; these are the hypotheses of [lem-sfb-monoidal-finite-free-transport], which we apply to the preceding basis. The transported rings and scalar map are precisely $E_X\\to F_X$ by [sk-def-sfb-pulled-back-coefficients] and [def-sfb-subfield-coefficient-map]. Thus $F_X\\cong E_X^{\\,n}$ as $E_X$-modules.",
    "uses": [
     "sk-def-sfb-pullback-from-point",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-preserving-colimits-additive",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-monoidal-finite-free-transport",
     "sk-def-sfb-pulled-back-coefficients",
     "def-sfb-subfield-coefficient-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "third sentence: transport by the additive monoidal inverse image from the point"
+    "place": "Assembly of the finite-basis proof"
    }
   },
   {
-   "text": "Set $R=E_X$ and $B=F_X$. Internal modules in [sk-def-sfb-module-objects] are the ordinary sheaves of modules over these ring sheaves as defined in [def-weil-sheaf-of-modules-category]: an internal action $R\\otimes M\\to M$, with tensor as in [sk-def-sfb-sheaf-tensor], is precisely a family of bilinear sectionwise maps $R(U)\\times M(U)\\to M(U)$ compatible with restrictions, and the internal unit and associativity equations are precisely the sectionwise module laws. This follows by the tensor and sheafification universal properties and applies to both $R$ and $B$. We may therefore use [lem-weil-pbc-module-sheaves-limits-sectionwise]: small limits of these modules exist and their underlying groups and actions are computed sectionwise. In particular restriction from $B$ to $R$ takes a limit to the same sectionwise limit with restricted action.",
+   "text": "The equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence] applies to the sheafified tensor of [sk-def-sfb-sheaf-tensor] on the chosen small pro-etale site. It preserves the underlying sheaf and section groups identically. Hence [lem-weil-pbc-module-sheaves-limits-sectionwise] supplies limits of internal $E_X$- and $F_X$-modules with sectionwise underlying groups. Restriction of scalars preserves these limits by [sk-def-sfb-change-of-scalars].",
    "uses": [
-    "sk-def-sfb-module-objects",
-    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
     "sk-def-sfb-sheaf-tensor",
-    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "sk-def-sfb-change-of-scalars"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DB, lemma-limits-colimits, limits paragraph; the internal-module identification uses the sheafified tensor definition"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Assembly of the finite-basis proof"
    }
   },
   {
-   "text": "Use the coequalizer defining $\\operatorname{Ext}(M)=B\\otimes_R M$ in [sk-def-sfb-change-of-scalars]. After restriction to $R$, define natural inverse maps\n$$\\Phi_M(s\\otimes m)=(q_i^X(s)m)_i,\\qquad \\Psi_M((m_i)_i)=\\sum_i b_i^X\\otimes m_i.$$\nThe first formula is $R$-balanced because each $q_i^X$ is $R$-linear, so it factors through the displayed coequalizer; both formulas are morphisms of sheaves by [sk-def-sfb-sheaf-tensor]. Their composites are identities: $q_i^X(b_j^X)=\\delta_{ij}$ gives $\\Phi_M\\Psi_M=1$, and balancing gives\n$$\\Psi_M\\Phi_M(s\\otimes m)=\\sum_i b_i^X\\otimes q_i^X(s)m=\\Bigl(\\sum_i b_i^Xq_i^X(s)\\Bigr)\\otimes m=s\\otimes m.$$\nThese equalities on elementary tensors extend by bilinearity and sheafification. For a module morphism $f$, the formula $f(q_i^X(s)m)=q_i^X(s)f(m)$ proves naturality. Thus $\\operatorname{Res}\\operatorname{Ext}(M)\\cong M^n$ naturally as $R$-modules; no $B$-linear structure is asserted on a tuple without transporting the $B$-action.",
+   "text": "Write $R=E_X$, $B=F_X$. Apply [lem-sfb-finite-free-scalar-coordinates] to the basis of step 2. It gives $\\operatorname{Res}(B\\otimes_R M)\\cong M^n$, naturally in $M$, with the stated inverse tensor coordinate maps.",
    "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "sk-def-sfb-sheaf-tensor"
+    "lem-sfb-finite-free-scalar-coordinates"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
+    "place": "Assembly of the finite-basis proof"
+   }
+  },
+  {
+   "text": "For a finite diagram $D:J\\to\\operatorname{Mod}_R$ with limit $L$, steps 3-4 identify the restricted canonical limit comparison with $L^n\\to\\lim_j(D_j^n)$. By [lem-weil-pbc-module-sheaves-limits-sectionwise], on sections its inverse just reorders the indices of a compatible family $(x_{i,j})$; each arrow imposes the same coordinate equations. This includes the empty diagram, whose limit is zero. The comparison $a$ is $B$-linear and bijective on sections. Its inverse is $B$-linear since $a(b\\,a^{-1}y)=b\\,y=a(a^{-1}(by))$ and $a$ is injective. The sectionwise inverse commutes with restrictions by uniqueness. Thus $a$ is an isomorphism of internal $B$-modules under the equivalence of step 3, proving preservation of finite limits.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-    "place": "last sentence: the explicit natural tensor-with-a-basis isomorphism"
-   }
-  },
-  {
-   "text": "Let $D:J\\to\\operatorname{Mod}_R$ be a finite diagram and $L=\\lim_jD_j$. By [lem-weil-pbc-module-sheaves-limits-sectionwise] and the natural isomorphism in the preceding step, the underlying $R$-module of the canonical comparison\n$$\\operatorname{Ext}(L)\\longrightarrow\\lim_j\\operatorname{Ext}(D_j)$$\nis the comparison $L^n\\to\\lim_j(D_j^n)$. On sections this is an isomorphism: an $n$-tuple of compatible families $(x_{i,j})_j$ is the same family of $n$-tuples $(x_{i,j})_i$, with the same compatibility equations for every arrow of $J$. The comparison is $B$-linear. Its inverse as an $R$-linear sheaf morphism is also $B$-linear: for the comparison $a$, injectivity of $a$ and $a(b\\,a^{-1}(y))=b\\,y=a(a^{-1}(b\\,y))$ give the required equation. Hence the comparison is an isomorphism in $\\operatorname{Mod}_B$. For the empty diagram, both underlying limits are the zero sheaf, which also confirms the terminal-object case. Therefore extension of scalars preserves every finite limit, as claimed.",
-   "uses": [
-    "lem-weil-pbc-module-sheaves-limits-sectionwise"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DB, lemma-limits-colimits, limits paragraph; explicit finite-coordinate limit comparison completes the blueprint proof"
+    "place": "Assembly of the finite-basis proof"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-l-adic-numbers",
-  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
-  "sk-def-sfb-condensed-ring",
-  "sk-def-sfb-module-objects",
-  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-condensed-subfield-basis",
   "sk-def-sfb-pullback-from-point",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-preserving-colimits-additive",
+  "lem-sfb-monoidal-finite-free-transport",
   "sk-def-sfb-pulled-back-coefficients",
   "def-sfb-subfield-coefficient-map",
-  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-sheaf-tensor",
   "lem-weil-pbc-module-sheaves-limits-sectionwise",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-finite-free-scalar-coordinates"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/lem-sfb-subfield-flat.proof.md",
-  "place": "entire basis proof, expanded using the existing finite-dimensional linear homeomorphism and sectionwise module-limit leaves"
+  "place": "Original finite-basis route; short assembly through condensed basis, additive monoidal transport, internal/sectionwise equivalence, and natural tensor coordinates"
  },
  "mathlib_searches": [
   {
@@ -184,20 +174,25 @@
  "proof_split_by": "paragraphs",
  "blueprint_snapshot": "main-20261015",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "lem-sfb-subfield-flat",
   "worker": "stage1",
-  "summary": "Expanded the original finite-basis proof into six steps. Reused the existing Mathlib leaf for finite-dimensional linear homeomorphisms, applied over Q_ell to avoid assuming that the algebraic closure is complete, and the existing Mathlib leaf for sectionwise module-sheaf limits. Wrote out condensed coordinates, additive monoidal transport, the internal-to-sectionwise module identification, inverse tensor maps, naturality, and the finite-limit comparison including reflection of isomorphisms. No new nodes, no statement correction, and no Lean work. The imported finite-free sibling depends on this item and was not cited.",
-  "blueprint": "Realizes every sentence of lem-sfb-subfield-flat.proof.md: finite basis and continuous coordinates (steps 1-2), additive monoidal pullback (step 3), tensor power and exactness (steps 4-6). Retains the finite-free coefficient route of sk-prop-sfb-cartesian-coefficients, clause 2; does not cite its circular finite-free sibling.",
-  "tool_uses": []
+  "summary": "Repair of the 2026-10-21 coarse-split return. Statement and Lean record unchanged. Extracted three strictly smaller arguments: condensed finite-field basis, additive monoidal finite-free transport, and natural tensor coordinates. Replaced the inline internal/sectionwise module identification by the existing equivalence node. Retained the explicit elementary comparison of finite-coordinate limits. New nodes are statement-only unsplit nodes as required by stage-1 delivery; complete short proofs in words are supplied in report.md.",
+  "blueprint": "First two sentences are realized by lem-sfb-condensed-subfield-basis; the third by lem-sfb-monoidal-finite-free-transport; the tensor assertion in the last sentence by lem-sfb-finite-free-scalar-coordinates; the last finite-limit inference is the explicit coordinate comparison in step 5. The unit finite-free route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic equivalence between internal modules in tensor abelian sheaves and sectionwise module sheaves, needed to use sectionwise limits; no node of this unit states this equivalence."
+   }
+  ]
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q58-8533e905f",
-  "group": "Q58",
+  "reviewer": "NT-cc-Q43-d6e99aca1",
+  "group": "Q43",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q58-8533e905f (reviewer sub-agent of L); spot-checked: Read the full delivery, instructions, report, item, proof, cited DAG nodes, blueprint sources, and finite-free route. Verified all six proof steps, coefficient morphism/category, Mathlib hypotheses, finite-limit comparison, dependency acyclicity, duplicate checks, and edge cases including E=F, Q_l, zero, empty/equalizer diagrams, and X empty. No new nodes or repairs; review.md records the checks. No SGA, Lean, compiler, Lake, git, ssh, or live project use."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-d6e99aca1 (reviewer sub-agent of L); spot-checked: I read the whole delivery against the blueprint main-20261015 lem-sfb-subfield-flat .md/.proof.md and the unit sk-prop-sfb-cartesian-coefficients step (2). This is a legitimate re-split: the human's repair note of 2026-10-21 released the reviewed 6-step, 5664-character proof for a finer split. The item is not in route-pivot-dropped, and no parallel node exists on live or side. Only split-owned fields changed. The statement, stmt_deps, lean and blueprint fields are unchanged. Steps: (1) basis existence plus the new condensed-basis node; (2) p_X^* is a strong monoidal left adjoint, additive via the Mathlib leaves 0038 and rightExactFunctor_le_additiveFunctor, and the transported ring and module are exactly Res_{ι_X} F_X over E_X; (3) the internal-to-sectionwise equivalence, whose site-smallness and monoidal-sheafification hypotheses come from sk-def-sfb-sheaf-tensor, plus the sectionwise-limits leaf, and Res preserves limits; (4) the new tensor-coordinates node with R=E_X, B=F_X; (5) an elementary reorder of the coordinate limits with a B-linear inverse. All three new nodes are true, strictly smaller than the item, not duplicates (checked against det-prop-sfb-cartesian-coefficients-finite-free, which would be circular, lem-pur-constant-finite-free-power-iso, lem-weil-pbc-condensed-finite-free-tensor-exact, condensed-flat-coefficient-calculus and def-sfb-modobj-transport), statement-only, and searched three ways. They were tested on E=F, E=Q_ℓ, n=0, the zero module, X empty and the empty diagram. The coordinate homeomorphism uses completeness of Q_ℓ only. The closure is acyclic. FIX: step 2 applied lem-sfb-monoidal-finite-free-transport without checking its finite-biproduct and tensor-additive-in-each-variable hypotheses. I added that both sheaf categories are abelian and that A⊗− and −⊗A preserve colimits by sk-def-sfb-sheaf-tensor 2, hence are additive by lem-sfb-preserving-colimits-additive; sk-def-sfb-sheaf-tensor is added to the step's uses. Accepted tool use: def-weil-pbc-internal-abelian-sheaf-module-equivalence. No SGA.; 1 file(s) fixed by the reviewer"
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-cartesian-coefficients",
@@ -236,5 +231,8 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.preservesFiniteLimits_extendScalars_padicSubfieldRingObjMap"
   ],
   "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:07 UTC (L, propagation 2026-10-18), live declaration proved in WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility: the blueprint item lem-sfb-subfield-flat's upstream Lean declarations, proved in live (sweep of the propagation)"
- }
+ },
+ "tool_uses": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+ ]
 }
