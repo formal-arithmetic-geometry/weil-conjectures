@@ -15,9 +15,128 @@
   "def-weil-pbc-ringed-koszul-system",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $[r]=\\{1,\\ldots,r\\}$ and let $e_S$ denote the tensor basis element in $Q_m(O)^{- |S|}$ indexed by $S\\subseteq[r]$. The tensor unit maps identify each degree of either tower with $\\bigoplus_{S\\subseteq[r]}\\operatorname{Res}C^{n+|S|}$: on a summand use $c\\otimes b\\mapsto bc$ over $B$ and $c\\otimes x\\mapsto\\varphi(x)c$ over $R$, with inverses $c\\mapsto c\\otimes1$. These balanced maps and their inverses commute with restriction to objects of the site, hence define maps of sheaves. Define $h_{C,m}$ to be the identity between these coordinates. For $c\\in C^p$ the differential on either side is\n$$d(c e_S)=(d_Cc)e_S+\\sum_{j\\in S}(-1)^{p+\\#\\{i\\in S:i<j\\}}\\varphi(a_j)^m c\\,e_{S\\setminus\\{j\\}}.$$\nIndeed this is the ordered tensor differential, and $a_j^m$ acts on $\\operatorname{Res}C$ by $\\varphi(a_j)^m$. Thus $h_{C,m}$ and its inverse are chain maps. All the sums in each degree have only $2^r$ summands even when $C$ is unbounded.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E (lemma-derived-completion-koszul), finite free Koszul model; explicit ordered-tensor calculation by the worker."
+   }
+  },
+  {
+   "text": "In these coordinates the transition from $m+1$ to $m$ on the $S$-summand is multiplication by $\\prod_{j\\in S}\\varphi(a_j)$ on both sides: a factor contributes $a_j$ precisely when its degree is $-1$. The map from $\\operatorname{Res}C$ is its inclusion in the $S=\\varnothing$ summand, since each factor uses its degree-zero copy of the ring. Therefore $h_{C,m}$ commutes with transitions and those maps. A chain map $C\\to C'$ acts by that same map on every summand, so the $h_{C,m}$ give a natural isomorphism $h_C:\\operatorname{Res}^{\\rm Tow}T_B(C)\\simeq T_R(\\operatorname{Res}C)$ of strict coaugmented tower complexes.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0913 (lemma-extended-alternating-Cech-is-colimit-koszul), dual transitions and degree-zero maps, as fixed in def-weil-pbc-ringed-koszul-system."
+   }
+  },
+  {
+   "text": "Each term of $Q_m(O)$ is a finite sum of copies of $O$. Tensoring with such a term is a finite sum of the identity functor, hence exact. Thus $Q_m(O)$ has flat terms and is bounded above by $0$, so it is K-flat by [lem-pc-bounded-above-flat-kflat-site]. Apply [lem-weil-pbc-kflat-fixed-tensor-triangulated] with fixed argument $Q_m(O)$: $T_O(-)_m$ preserves every quasi-isomorphism, without a bound on the varying complex. Exactness in the tower category is levelwise [lem-weil-tower-category-levelwise-abelian], so kernels, images and cohomology of a complex of towers are evaluated levelwise; consequently $T_O$ preserves quasi-isomorphisms as a functor to complexes of towers. The localization universal property [def-weil-abstract-derived-category] therefore gives $T_O:D(O)\\to D(\\operatorname{Tow}(O))$. Restriction is exact by [lem-weil-pbc-flat-ringed-diagram-restriction], applied to the identity geometric morphism with both coefficient maps equal to $\\varphi$, both structural isomorphisms identities, and diagram shape either a point or $\\mathbf N_{\\ge1}^{op}$. It too preserves quasi-isomorphisms, since an exact additive functor preserves the kernels and cokernels computing cohomology. Hence $h$ and the coaugmentations from step 2 descend naturally through localization.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 06YP (lemma-K-flat-quasi-isomorphism); homology.tex Tag 02MZ (lemma-inverse-systems-abelian)."
+   }
+  },
+  {
+   "text": "Use the same specialization of [lem-weil-pbc-flat-ringed-diagram-restriction] to conclude that restriction preserves K-injective complexes of modules and of strict towers. Here flatness is exactly the given exactness of $B\\otimes_R-$, and both diagram shapes are small. Also restriction preserves ordinary inverse limits by [lem-weil-pbc-restriction-derived-products]. Concretely a section of either $\\operatorname{Res}(\\lim_B J)$ or $\\lim_R(\\operatorname{Res}^{\\rm Tow}J)$ is the same compatible family of sections of $J_m$, with the same $R$-action. Thus the canonical comparison is the identity on compatible families; it commutes with every ordinary-limit projection. This applies degree by degree to tower complexes.",
+   "uses": [
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-weil-pbc-restriction-derived-products"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), identity underlying topos and structural map R to B; flat restriction supplies a common K-injective model."
+   }
+  },
+  {
+   "text": "Let $X=T_B(C)$ and $Y=T_R(\\operatorname{Res}C)$. Apply [lem-weil-ringed-tower-pushforward-limit-comparison] to the identity underlying topos with source ring $B$, target ring $R$, and structural map $\\varphi$. Its direct image is restriction of scalars. Because restriction is exact (step 3), its total derived direct image, also on towers, is represented termwise. The theorem gives a natural isomorphism $a_X:\\operatorname{Res}R\\lim_B X\\simeq R\\lim_R\\operatorname{Res}^{\\rm Tow}X$. Define\n$$\\gamma_C=R\\lim_R(h_C)\\circ a_X.$$\nFor the normalization, choose a K-injective tower resolution $i:X\\to J$. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit] and step 4, $\\operatorname{Res}^{\\rm Tow}i$ is a K-injective resolution of $\\operatorname{Res}^{\\rm Tow}X$. Thus $a_X$ is represented by the equality $\\operatorname{Res}(\\lim_B J)=\\lim_R(\\operatorname{Res}^{\\rm Tow}J)$ of step 4, exactly the underived-composite normalization in the cited comparison theorem. This constructs a natural derived comparison before any evaluation and, using step 3, independently of the representative $C$.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), diagram-topos proof; Tag 0941 (lemma-derived-limit-is-ok), K-injective strict-tower computation."
+   }
+  },
+  {
+   "text": "Write $z_B:\\Delta C\\to X$ for the strict degree-zero map and $v_B:C\\to\\lim_BX$ for its ordinary-limit map; the corresponding maps for $Y$ are $z_R,v_R$. By [def-weil-pbc-ringed-koszul-system], the unit $\\eta_B$ is represented on the resolution $i$ of step 5 by $C\\xrightarrow{v_B}\\lim_BX\\xrightarrow{\\lim_Bi}\\lim_BJ$. Before applying $h_C$, the restricted unit is therefore the map\n$$\\operatorname{Res}C\\longrightarrow\\lim_R\\operatorname{Res}^{\\rm Tow}X\\xrightarrow{\\lim_R(\\operatorname{Res}^{\\rm Tow}i)}\\lim_R\\operatorname{Res}^{\\rm Tow}J.$$\nIts first arrow is the ordinary-limit map of $\\operatorname{Res}^{\\rm Tow}z_B$, since both are the same compatible family. Step 2 says $h_C\\operatorname{Res}^{\\rm Tow}z_B=z_R$. Naturality of the derived-limit comparison with respect to this strict map now gives $\\gamma_C\\operatorname{Res}(\\eta_B)=\\eta_R$. This is equality of the specified derived arrows: both are induced by that same strict coaugmentation followed by the derived-functor comparison, rather than equality inferred only from their evaluations.",
+   "uses": [
+    "def-weil-pbc-ringed-koszul-system",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), equality of the underived composite direct images; unit convention in def-weil-pbc-ringed-koszul-system."
+   }
+  },
+  {
+   "text": "The comparison $a_X$ commutes with every derived tower projection by [lem-weil-ringed-tower-pushforward-limit-comparison]. Functoriality of total derived inverse limit applied to the strict map $h_C$ then gives, for every $m$,\n$$\\operatorname{ev}_{R,m}\\circ\\gamma_C=h_{C,m}\\circ\\operatorname{Res}(\\operatorname{ev}_{B,m}),$$\nwith the canonical localization and evaluation identifications. Equivalently, in the common resolution of step 5, both projections are induced by the same map $\\lim J\\to J_m$. This proves the claimed evaluation normalization without asserting that projections determine arbitrary derived arrows.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), evaluation in the diagram-topos proof."
+   }
+  },
+  {
+   "text": "If $r=0$, there is only $S=\\varnothing$, so $Q_m(O)=O[0]$, $T_O(C)=\\Delta C$, $h_C=1$, and the coaugmentation is the identity constant tower. To verify the constant-tower identification, take a K-injective resolution $C\\to I$ in module sheaves [prop-pur-kinjective-resolutions-exist]. Evaluation at $1$ on towers is exact [lem-weil-tower-category-levelwise-abelian] and is left adjoint to $\\Delta$: a map $V\\to\\Delta M$ is uniquely its first component $V_1\\to M$, the other components being composed with $V_n\\to V_1$. Hence $\\Delta I$ is K-injective by [lem-weil-pbc-right-adjoint-preserves-kinjective]. Its ordinary inverse limit is $I$, with all projections identity. The total derived limit model [lem-weil-pbc-ringed-strict-tower-homotopy-limit] therefore identifies $\\eta_O$ with $C\\to I$, an isomorphism in $D(O)$. Under $R\\lim\\Delta C\\cong C$, the unit is identity. The unit equation in step 6 forces $\\gamma_C$ to be identity under these identifications, as required.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), constant strict tower; injectives.tex Tag 079P (theorem-K-injective-embedding-grothendieck)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-koszul-system",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+  "lem-weil-pbc-restriction-derived-products",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-tower-category-levelwise-abelian",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), specialized to the identity underlying topos with flat structural ring map; explicit finite Koszul coordinates and coaugmentation normalization augment algebraization.tex Tag 0A0E (lemma-derived-completion-koszul)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +172,45 @@
    "results": "8 hits: KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.tensorKaehlerEquiv, Algebra.kerTensorProductMapIdToAlgHomEquiv, Module.Flat.ker_lTensor_eq, KaehlerDifferential.moduleBaseChange', KaehlerDifferential.cotangentComplexBaseChange_tmul, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, KaehlerDifferential.cotangentComplexBaseChange",
    "date": "2026-10-21",
    "verdict": "no match: ordinary scalar restriction, underived module tensor base change and module adic completion do not state the strict sheaf Koszul tower and unit comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Rr]estrict|[Rr]estrict.*Koszul|[Rr]estrict.*[Hh]omotopy[Ll]imit",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary algebra, specialized condensed monoidal structures or tensor totalization; none gives the strict ring-sheaf Koszul tower, derived inverse limit and normalized unit comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Change of scalars commutes with Koszul tensor complexes and derived inverse limit completion units",
+   "results": "8 hits: AdicCompletion.instModuleOfIsScalarTower, KaehlerDifferential.instSMulCommClassTensorProduct_1, KaehlerDifferential.cotangentComplexBaseChange_tmul, KaehlerDifferential.mapBaseChange.congr_simp, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale.congr_simp, IsBaseChange.directSumPow, IsBaseChange.of_comp",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary algebra, specialized condensed monoidal structures or tensor totalization; none gives the strict ring-sheaf Koszul tower, derived inverse limit and normalized unit comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Koszul\", \"restrictScalars\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary algebra, specialized condensed monoidal structures or tensor totalization; none gives the strict ring-sheaf Koszul tower, derived inverse limit and normalized unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along a flat map of ring sheaves identifies finite free Koszul tensor towers and their derived inverse limits including units",
+   "results": "8 hits: Algebra.kerTensorProductMapIdToAlgHomEquiv, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Algebra.FormallyUnramified.flat_of_restrictScalars, KaehlerDifferential.tensorKaehlerEquivBase, Algebra.Extension.tensorH1Cotangent, KaehlerDifferential.tensorKaehlerEquiv_left_inv, Algebra.kerTensorProductMapIdToAlgHomEquiv_symm_apply, Algebra.Extension.tensorCotangent",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary algebra, specialized condensed monoidal structures or tensor totalization; none gives the strict ring-sheaf Koszul tower, derived inverse limit and normalized unit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a complex of algebra module sheaves, tensor with a bounded finite free complex before or after restricting scalars gives a natural isomorphism of inverse systems",
+   "results": "8 hits: LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalLightCondSetLightCondModFree, PresheafOfModules.Monoidal.tensorObj, HomologicalComplex.HasGoodTensor₁₂, LightCondensed.free_internallyProjective_iff_tensor_condition, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary algebra, specialized condensed monoidal structures or tensor totalization; none gives the strict ring-sheaf Koszul tower, derived inverse limit and normalized unit comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lemma-weil-pbc-completed-pullback-reduction",
@@ -74,5 +228,39 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-flat-scalar-koszul-tower-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Gave eight steps: signed finite coordinates, strict transitions and coaugmentation, quasi-isomorphism descent, flat restriction on K-injectives, canonical total-limit comparison, actual unit equation, evaluations, and the empty-list identity. Reused existing general nodes, with no new nodes. Searched project Lean, the whole DAG and blueprint, and Mathlib with recorded commands.",
+  "blueprint": "Realizes the completeness/completed-coefficient comparison input of lemma-weil-pbc-completed-pullback-reduction (current main-20261015, order 1330), specifically its derived-completeness assertion: scalar restriction identifies the defining Koszul unit, not just the objects. This blueprint node has no proof paragraph in the current snapshot; the inherited paragraph-1 locator refers to its DAG proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic bounded-above flat sheaf-complex criterion for Q_m; no node in the unit states this general sheaf criterion in words."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic ringed-topos derived inverse-limit comparison, including projections and the underived-composite normalization; applied to the identity topos with structural map R to B."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic K-injective resolution existence for module sheaves, used only for the constant-tower check."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NN-09dc4a12a",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-09dc4a12a (reviewer sub-agent of L); spot-checked: Read the whole 8-step split and all 13 cited statements. Statement is byte-identical to base (sha1 d22c651f, same as 393 earlier snapshots); no new nodes; no repair note, so this is a first split. Sources checked: Stacks 0A07 lemma-Rf-commutes-with-Rlim (sites-cohomology.tex 5150ff), 0A0E lemma-derived-completion-koszul (algebraization.tex 1091ff), and the tags file confirms 06YQ = sites-cohomology-lemma-bounded-flat-K-flat. Step 1: I recomputed the Koszul and Tot sign (-1)^{p+#{i<j}}, and the a^m action is phi(a)^m on Res C. Step 2: the transition is the product of phi(a_j) over j in S on both sides, and the coaugmentation lands in the e_empty summand. Step 3: Q_m has flat terms and is bounded above, so it is K-flat; the fixed-tensor lemma needs no bound on C. The diagram-restriction specialization holds: id topos, a_U=a_V=phi, c=id, J a point or N^op. Step 4: the K-injective and limit-preservation clauses are taken from the statements as written. Step 5: f=(id,phi) gives f_*=Res, and a_X is represented by Res lim J = lim Res J, which matches the stated underived normalization. Step 6: I checked gamma∘Res(eta_B)=eta_R via the homotopy-unique g with g∘Res i = j∘h, so the equality holds for derived arrows, not just evaluations. Step 7 follows from the projection clause. Step 8: ev_1 ⊣ Δ, so ΔI is K-injective and gamma is the identity. Edge cases checked: r=0,1,2, zero, unit and repeated generators, zero ring; no regularity or boundedness is used. No cycle: the 391-node dependency closure does not contain the item. No duplicate found among the Koszul + restriction-of-scalars candidates. The off-unit generic tools are declared in split_report.tool_uses; accepted. Maintainer note: the existing node lem-pc-bounded-above-flat-kflat-site gives tag 06YS, but its statement is Stacks 06YQ."
+ }
 }
