@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "def-nagata-flat-pullback-rees-map",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Flat pullback map for Rees algebras",
@@ -14,14 +14,63 @@
  },
  "stmt_deps": [
   "def-nagata-extended-ideal",
-  "def-nagata-sheaf-rees-algebra"
+  "def-nagata-sheaf-rees-algebra",
+  "def-pc-module-pullback",
+  "def-weil-flat-morphism",
+  "lemma-nagata-flat-pullback-ideal-pow",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-sbc-closed-immersion-ideal-sheaf"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat scheme morphism g and a quasi-coherent ideal sheaf I, define the graded algebra map from the pullback of the sheaf Rees algebra of I to the Rees algebra of the extended ideal.",
+   "results": "Eight hits: IdealSheafData.glueDataObjHom and absolute Proj maps (fromOfGlobalSections and pullbackAwayιIso variants). These concern quotient subschemes or absolute Proj, not a map of sheaf Rees algebras.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "reesAlgebra, Ideal.map",
+   "results": "mem_map_algebraMap_reesAlgebra_iff and isNoetherianRing_reesAlgebra_quotient, both in Mathlib.RingTheory.ReesAlgebra. These describe the extended ideal inside an ordinary ring Rees algebra, not sheaf algebra pullback.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reesAlgebra|rees.*[Pp]ullback|[Pp]ullback.*[Rr]ees",
+   "results": "Zero hits in AlgebraicGeometry. Search subdirectory: AlgebraicGeometry.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "pullback of Rees algebra of a quasi coherent ideal sheaf along a flat morphism of schemes",
+   "results": "Eight hits: reesAlgebra, Scheme.Modules.pullback, Scheme.Pullback.affine_hasPullback, pullbackSpecIso, Scheme.Modules.pullbackPushforwardAdjunction, Scheme.Modules.instAdditivePullback, Flat.instSndScheme, Scheme.canonicallyOverPullback. These supply the separate ring Rees algebra, module pullback, and scheme fibre products, not the graded sheaf Rees comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "reesAlgebra|reesGrading",
+   "results": "Five reported hits in RingTheory/ReesAlgebra.lean: documentation at lines 21-23, reesAlgebra at line 39 and mem_reesAlgebra_iff at line 64. Source read confirms an ordinary subalgebra of R[X], with no sheaf Rees pullback map. Search subdirectory: RingTheory/ReesAlgebra.lean.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A ring homomorphism maps coefficients of a Rees algebra and induces in each degree the linear map B tensor_A I^n to (I B)^n, compatible with multiplication and restriction on schemes.",
+   "results": "Eight hits: Ideal.Filtration.submoduleInfHom, reesAlgebra, Ideal.Filtration.submodule, adjoin_monomial_eq_reesAlgebra, AlgebraicGeometry.specTargetImageRingHom, Ideal.mapCotangent, localCohomology.idealPowersDiagram, AdicCompletion.transitionMapₐ. None states a graded sheaf Rees comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -51,5 +100,20 @@
   "statement": "For a quasi-coherent ideal $\\mathcal I\\subseteq\\mathcal O_X$ and flat\n$g\\colon Y\\to X$, define $\\beta_g$ degreewise by the canonical\nmaps\n\n$$\ng^*(\\mathcal I^n)\\longrightarrow\n(\\mathcal I\\mathcal O_Y)^n.\n$$\n\nThus\n\n$$\n\\beta_g\\colon g^*\\mathcal R_X(\\mathcal I)\\longrightarrow\n\\mathcal R_Y(\\mathcal I\\mathcal O_Y).\n$$",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-flat-pullback-rees-map",
+  "worker": "stage1",
+  "summary": "Q138 repair of the reader-approved delivery returned at ec201c91edc. Re-read all six current dependency statements and retained the source statement verbatim. The extended ideal J = I O_Y is now defined by def-nagata-extended-ideal as the kernel of the base-changed closed immersion. The construction uses lemma-nagata-flat-pullback-ideal-pow, not the definition, for the image equality im(c_n) = J^n, where c_n is g^*(I^n) -> g^*O_X -> O_Y. Define beta_n as its unique corestriction to this image. On local tensor generators it sends b tensor a to b g-sharp(a); balancing, multiplication, unit and restriction identities give the graded algebra map. The current def-pc-module-pullback supplies the tensor formula and adjunction, and the Mathlib leaf lem-weil-pbc-left-adjoint-preserves-colimits identifies the pullback of the countable direct sum with the direct sum of the pullbacks. The expanded current def-nagata-sheaf-rees-algebra supplies precisely that direct sum, its ideal-power multiplication and degree-zero unit; def-weil-flat-morphism fixes the flatness hypothesis. Corrected the stale image-definition attribution in the retained report and recorded the revalidation against the current kernel convention. No extra kernel/image comparison dependency is needed: the ideal-power lemma already gives every required image equality, including n=1. No new nodes, equivalence claim, or Lean changes. Reader fix (cc review, 2026-10-21): R_Y(I O_Y) and the powers (I O_Y)^n of def-nagata-sheaf-rees-algebra and def-sbc-ideal-sheaf-powers need I O_Y to be quasi-coherent. The kernel-defined extended ideal is the ideal sheaf of the projection p: Y x_X V(I) -> Y, which is a closed immersion by lem-weil-pbc-closed-immersion-base-change, and the ideal sheaf of a closed immersion is quasi-coherent by def-sbc-closed-immersion-ideal-sheaf; both are now stmt_deps.",
+  "blueprint": "The two displayed maps in main-20261015, def-nagata-flat-pullback-rees-map (order 122), in the Rees-algebra part of sk-lem-nagata-sketch-blowups. The degreewise maps use the existing preceding lemma-nagata-flat-pullback-ideal-pow (order 121). The item is a definition, so proof and proof_deps remain empty."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q138-3cd37dff9",
+  "group": "Q138",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q138-3cd37dff9 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is a definition-only split with no new nodes. The statement is word for word main-20261015 order 122 and equals blueprint_update. The item is not dropped, has no repair note, and is still imported live; all six dependency statements are identical in side-live. lemma-nagata-flat-pullback-ideal-pow (order 121, same hypotheses: quasi-coherent I, flat g) gives image(g^*I^n→O_Y)=(I O_Y)^n, which is what the degreewise corestriction needs. lem-weil-pbc-left-adjoint-preserves-colimits assembles the β_n over the discrete ℕ coproduct of def-nagata-sheaf-rees-algebra. The construction agrees with Stacks 0805 (divisors.tex 8368-8379), and def-pc-module-pullback agrees with Stacks 0095. There is no cycle: the closure has 158 nodes and does not contain the item. Small cases checked: n=0, I=0, I=O_X, g=id, Spec ℤ[x]→Spec ℤ with I=(p), non-flat Spec 𝔽_2→Spec ℤ, empty Y. One fault (E1/C4): R_Y(I O_Y) and (I O_Y)^n are defined only for quasi-coherent ideals, and the extended ideal is now the kernel of O_Y→p_*O_P (a Mathlib leaf that will not be split), which no cited node shows to be quasi-coherent. Fix: added the Mathlib leaves lem-weil-pbc-closed-immersion-base-change (p is a closed immersion) and def-sbc-closed-immersion-ideal-sheaf (its ideal is quasi-coherent) to stmt_deps, and amended split_report.summary. The fixed file is fixes/dag/nodes/sec-nagata-compactification/def-nagata-flat-pullback-rees-map.json. No tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
