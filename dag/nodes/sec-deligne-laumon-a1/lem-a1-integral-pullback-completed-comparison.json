@@ -34,191 +34,87 @@
  ],
  "proof": [
   {
-   "text": "Put $A=\\mathcal O_E$, $t=\\varpi_E$, $R_W=\\widehat{\\mathcal O}_{E,W}$ and $S_{W,n}=(A/t^n)_W$. The coefficient DVR lemma gives that $A$ is a PID, hence Noetherian, $t\\ne0$, and its residue field is finite. The finite-quotient lemma gives that every $A/t^n$ is finite with surjective quotient transitions; in particular $A/(t)$ is additive torsion. The two-term free resolution $[A\\xrightarrow{t^n}A]\\to A/t^n$, in degrees $[-1,0]$, is exact except at degree zero: multiplication is injective since $A$ is a subring of the field $E$, and its cokernel is the quotient. Thus each quotient is perfect. These verify every coefficient hypothesis of the adic datum in the statement. No finiteness hypothesis on either scheme is required.",
+   "text": "Write $A=\\mathcal O_E$, $t=\\varpi_E$, $R_W=\\widehat{\\mathcal O}_{E,W}$ and $S_{W,n}=(A/t^n)_W$. The principal-Koszul replacement lemma verifies the adic coefficient hypotheses and supplies one strict objectwise K-flat replacement of each quotient tower. The unit-comparison lemma makes the actual intrinsic unit invertible for our derived-complete $K$. Thus $Lg^*_{\\mathrm{comp}}K$ has the required domain.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients",
-    "def-weil-pbc-adic-coefficient-datum"
+    "lem-a1-principal-koszul-strict-replacement",
+    "lem-a1-roos-intrinsic-unit-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099L, section-derived-completion-noetherian, coefficient hypotheses; elementary two-term resolution over the coefficient DVR."
+    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
    }
   },
   {
-   "text": "On each of the two sites, sheafify the constant-presheaf exact sequence $0\\to A\\xrightarrow{t^n}A\\to A/t^n\\to0$. Exact abelian sheafification gives the same exact sequence of constant sheaves. The constant/completed coefficient lemma says that $R_W$ is flat over $\\underline A_W$ and that $R_W/t^nR_W\\cong S_{W,n}$ through the specified projection. Tensoring the constant-sheaf sequence with $R_W$ is exact by the meaning of flatness, so $0\\to R_W\\xrightarrow{t^n}R_W\\to S_{W,n}\\to0$ is exact. In particular the augmentation $Q_{W,n}=[R_W\\xrightarrow{t^n}R_W]\\to S_{W,n}$ is a quasi-isomorphism. Its transitions are multiplication by $t$ in degree $-1$ and identity in degree zero; the augmentations commute strictly with the quotient transitions.",
+   "text": "The finite-pullback tower lemma gives a natural, coefficient-linear isomorphism $b_K:VK_\\bullet\\xrightarrow{\\sim}B_g(K)$, where $V=Lg^*_{\\operatorname{Tow}}$ and $B_g(P)_n=\\operatorname{Res}_ng_n^*(P\\otimes S_{T,n})$ on a flat-term K-flat representative. Its evaluations are the specified finite comparisons, and it commutes with all integer shifts.",
    "uses": [
-    "lem-weil-pbc-sheafification-exact",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-pc-flat-sheaf-modules"
+    "lem-a1-finite-pullback-strict-tower-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M, lemma-completion-flat; apply to the powers of the principal ideal, with the canonical finite quotients."
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
    }
   },
   {
-   "text": "We first justify the domain of the completed functor, without replacing the imported Roos completeness condition by a stronger hypothesis. Apply the finite-free completed scalar comparison with $L=E$. Since $K$ is derived complete in exactly the imported sense, it says that the specified quotient-cone completion map $K\\to\\mathsf C(K_\\bullet)$ is an isomorphism, natural in $K$, with zero shifted-product component on one K-flat representative. Countable products of $R_T$-modules are exact on the pro-etale site. The normalized strict Roos comparison $\\rho:\\mathsf C(K_\\bullet)\\xrightarrow{\\sim}R\\lim K_\\bullet$ identifies that zero-component map with the strict quotient augmentation's canonical map $\\operatorname{comp}_K$. Consequently $\\operatorname{comp}_K$ is invertible. This uses the actual completion map, not an arbitrary isomorphism between two objects satisfying Roos triangles.",
+   "text": "Countable products on $T'$ are exact. The integral definition is $\\mathsf C(B_g(K))$, as a functor of $K$ by the integral well-definedness lemma; the completed definition is $R\\lim(VK_\\bullet)$. Set $\\gamma_{g,K}=(R\\lim b_K)^{-1}\\circ\\rho_{B_g(K)}$. The strict Roos comparison and functorial total limit make this an isomorphism. Naturality of $b$ and $\\rho$ proves naturality of $\\gamma$; all factors are $R_{T'}$-linear.",
    "uses": [
-    "def-weil-derived-complete",
-    "lem-weil-finite-free-completed-scalar-comparison",
     "lem-weil-proetale-countable-products-exact",
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 3.5.1 and Definition 3.5.2; canonical-map normalization supplied by the cited scalar comparison at L=E and Stacks 0941."
-   }
-  },
-  {
-   "text": "By Koszul reconstruction, $c_K:K^{\\wedge}_{\\mathrm{Kos}}\\xrightarrow{\\sim}R\\lim K_\\bullet$ satisfies $c_K\\kappa_K=\\operatorname{comp}_K$. Hence $\\kappa_K$ is invertible by Step 3. Here the reconstruction's Koszul limit and the intrinsic definition's explicit fiber model have the same canonical unit: on a representative $C$, their common strict tower is $C\\otimes Q_{T,m}$, and its degree-zero inclusions give a strict augmentation. The intrinsic coordinates have differential $(x,y)\\mapsto(dx,(1-s)x-dy)$; the cone coordinates have differential $(y,x)\\mapsto(-dy-(1-s)x,dx)$. The map $(x,y)\\mapsto(-y,x)$ is a chain isomorphism, and sends the intrinsic unit $(u_C,0)$ to the zero-shifted-component cone unit $(0,u_C)$. The strict Roos comparison identifies this unit with $\\kappa_K$. Thus the intrinsic unit is invertible and $K$ is derived $(t)$-complete as claimed.",
-   "uses": [
-    "prop-weil-pbc-koszul-reconstruction",
-    "def-weil-pbc-intrinsic-completion",
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099M, lemma-naive-completion, and the explicit Koszul completion unit; signed-model identification written out."
-   }
-  },
-  {
-   "text": "Choose a flat-term K-flat resolution $P\\to K$. Put $P_n=P\\otimes_{R_T}S_{T,n}$ and $X_n=P\\otimes_{R_T}Q_{T,n}$, with the strict transitions of Step 2. By the adic-datum construction, $P_\\bullet$ represents the entire strict reduction tower $K_\\bullet$. The maps $a_n:X_n\\to P_n$ are a strict tower quasi-isomorphism: $P$ is K-flat and the augmentation of Step 2 is a quasi-isomorphism. Explicitly, its cone is acyclic; tensoring that cone with $P$ stays acyclic by the definition of K-flatness, and the tensor-cone identity identifies it with the cone of $a_n$. Each $X_n$ is K-flat with flat terms: for an acyclic $N$, $N\\otimes X_n$ is, up to the standard tensor-cone signs, the cone of $t^n$ on the acyclic $N\\otimes P$, hence acyclic; its terms are finite sums of terms of $P$. Thus $X_\\bullet\\to P_\\bullet$ is an objectwise K-flat replacement of the strict diagram, rather than unrelated choices at each level.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-pc-kflat-complex",
-    "def-pc-flat-sheaf-modules",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, lemma-K-flat-resolution; apply the explicit principal Koszul resolution and the definition of K-flatness."
-   }
-  },
-  {
-   "text": "Write $G$ for ordinary module pullback along $c_g:g^{-1}R_T\\to R_{T'}$; this notation does not mean the integral completed operation. The resolving-class description of the strict tower pullback computes $V K_\\bullet:=Lg^*_{\\mathrm{Tow}}K_\\bullet$ by $G X_\\bullet$, using Step 5. The ringed-topos K-flat pullback lemma applies to the given morphism of small pro-etale topoi and $c_g$; hence $P'=GP$ is K-flat with flat terms over $R_{T'}$. Additivity and scalar linearity identify $GX_n$ with $P'\\otimes Q_{T',n}$, including the transition $(t,1)$. Step 2 on $T'$ and K-flatness of $P'$ therefore give a strict tower quasi-isomorphism $GX_\\bullet\\to(P'\\otimes S_{T',n})_n$. This argument never assumes that $c_g$ is an isomorphism or that completed-ring module pullback is exact.",
-   "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-pbc-diagram-kflat-replacements",
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-weil-pbc-ringed-topos-kflat-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0G7E, lemma-pullback-K-flat; strict-diagram K-flat computation specified by def-weil-pbc-completed-pullback."
-   }
-  },
-  {
-   "text": "Let $B_\\bullet=(\\operatorname{Res}_n g_n^*P_n)_n$ with its actual finite quotient transitions. There is a natural chain isomorphism $P'\\otimes_{R_{T'}}S_{T',n}\\cong\\operatorname{Res}_n g_n^*P_n$: both are $g^{-1}P\\otimes_{g^{-1}R_T}S_{T',n}$. On the left this is tensor reassociation; on the right use $g^{-1}S_{T,n}\\cong S_{T',n}$ and the module tensor construction. The scalar map on both sides is $g^{-1}R_T\\to g^{-1}S_{T,n}\\to S_{T',n}$, precisely the $n$-th component of $c_g$. The reassociation sends $(x\\otimes b)\\otimes a$ to $x\\otimes\\bar b a$, with inverse $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$. These formulas commute with differentials and with each quotient map $S_{n+1}\\to S_n$. Consequently Step 6 supplies a natural isomorphism $b_K:VK_\\bullet\\xrightarrow{\\sim}B_\\bullet$ in the derived category of strict $R_{T'}$-module towers. Finite pullback is exact by the constant-coefficient exactness proposition, so the evaluations of $B_\\bullet$ represent the specified finite derived pullbacks.",
-   "uses": [
-    "def-weil-pbc-completed-pullback",
-    "def-pur-sheaf-tensor-product",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "prop-weil-pbc-proetale-constant-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case, finite-pullback formula; explicit balanced-tensor comparison for the completed coefficient model."
-   }
-  },
-  {
-   "text": "By the integral-operation definition, the left-hand functor of the item is represented by $\\mathsf C(B_\\bullet)$. By the completed-pullback definition and Step 4 the right-hand functor is $R\\lim(VK_\\bullet)$. Define\n$$\\gamma_{g,K}=\\bigl(R\\lim(b_K)\\bigr)^{-1}\\circ\\rho_{B_\\bullet}:\\mathsf C(B_\\bullet)\\longrightarrow R\\lim(VK_\\bullet).$$\nBoth factors are isomorphisms: $b_K$ is the strict-tower isomorphism of Step 7, and $\\rho$ is the normalized strict Roos comparison, whose exact-products hypothesis holds on $T'$. Total derived inverse limit is an actual functor on the derived strict-tower category, so it sends $b_K$ to an isomorphism. All maps are morphisms of $R_{T'}$-modules and thus preserve the stated $\\mathcal O_E$-linear structures.",
-   "uses": [
     "def-pur-integral-derived-operations",
+    "lem-pur-integral-operations-well-defined",
     "def-weil-pbc-completed-pullback",
     "lem-weil-strict-roos-comparison",
-    "lem-weil-proetale-countable-products-exact",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, normalized cone versus K-injective tower limit; assemble the comparison of the two models in Stacks 099N(5)."
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
    }
   },
   {
-   "text": "The constructions in Steps 5--7 are natural for chain maps of flat-term K-flat representatives: tensoring, the Koszul augmentation and the balanced formulas commute with such maps. Resolving-class uniqueness identifies the calculation $GX_\\bullet$ with the specified total left derived tower functor. The integral well-definedness lemma identifies $\\mathsf C(B_\\bullet)$ with the specified integral functor independently of resolutions. The normalized Roos map is natural on the whole derived tower category. Therefore the formula in Step 8 is natural in $K$: its naturality square holds on K-flat representatives, and descends through localization; the square for an inverted quasi-isomorphism follows by multiplying the square for that quasi-isomorphism by its inverses. This also proves independence from all representatives used in constructing $b_K$ and $\\gamma_{g,K}$.",
+   "text": "For the $n$-th limit projection $e_n:R\\lim B_g(K)\\to B_g(K)_n$, normalized Roos comparison gives $p_n^{\\mathrm{int}}=e_n\\rho$, while the finite normalization of $b$ gives $p_n^{\\mathrm{comp}}=e_nR\\lim b_K$. Hence $p_n^{\\mathrm{comp}}\\gamma_{g,K}=p_n^{\\mathrm{int}}$, or $p_n^{\\mathrm{int}}\\gamma_{g,K}^{-1}=p_n^{\\mathrm{comp}}$. This proves the requested projection equation through the fixed finite identifications.",
    "uses": [
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-pur-integral-operations-well-defined",
     "lem-weil-strict-roos-comparison",
-    "def-weil-abstract-derived-category"
+    "lem-a1-finite-pullback-strict-tower-comparison"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XN, lemma-find-existence-computes (dual); Tag 05RU, definition-derived-category, localization descent of the explicit natural comparison."
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
    }
   },
   {
-   "text": "Denote the integral cone projection by $p_n^{\\mathrm{int}}$ and the completed limit projection, followed by the evaluation of $b_K$, by $p_n^{\\mathrm{comp}}$. This latter evaluation is exactly the coefficient comparison fixed in the completed-pullback definition: Steps 6--7 use its structure-map components and quotient augmentations. If $e_n:R\\lim B_\\bullet\\to B_n$ is the limit projection, the normalized Roos lemma gives $e_n\\rho_{B_\\bullet}=p_n^{\\mathrm{int}}$, while functoriality of limit projections gives $p_n^{\\mathrm{comp}}=e_n R\\lim(b_K)$. Substituting Step 8 yields $p_n^{\\mathrm{comp}}\\gamma_{g,K}=p_n^{\\mathrm{int}}$, equivalently $p_n^{\\mathrm{int}}\\gamma_{g,K}^{-1}=p_n^{\\mathrm{comp}}$, the requested direction. This equality follows from a strict tower comparison and the normalized Roos comparison; evaluation maps alone are not used to characterize a derived tower morphism.",
+   "text": "The normalized Roos shift lemma gives $\\sigma^{\\lim}\\rho_{B[r]}=\\rho_B[r]\\sigma^C$, with $\\sigma^C(y,x)=((-1)^ry,x)$. Combine this with the shift square for $b$ from the tower lemma in the formula for $\\gamma$. It yields $\\sigma^{\\mathrm{comp}}\\gamma_{K[r]}=\\gamma_K[r]\\sigma^{\\mathrm{int}}$. The completed shift is the specified reduction/tower-pullback/limit comparison of the triangle lemma; the integral shift is the termwise Roos shift. Thus this is exactly the asserted equality for every $r\\in\\mathbf Z$.",
    "uses": [
-    "def-pur-integral-derived-operations",
-    "def-weil-pbc-completed-pullback",
-    "lem-weil-strict-roos-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, compatible projection maps in the cone/K-injective models."
-   }
-  },
-  {
-   "text": "Finally check shifts on these models. With the cone coordinates $\\mathsf C(B)^i=(\\prod B_n)^{i-1}\\oplus(\\prod B_n)^i$ and differential $(y,x)\\mapsto(-dy-(1-s)x,dx)$, the map $\\mathsf C(B[r])\\to\\mathsf C(B)[r]$ is $(y,x)\\mapsto((-1)^r y,x)$. Substitution in the differential verifies the chain-map identity. In Step 5 use $P[r]$ for $K[r]$ and the natural shifted two-term tensor identification; Steps 6--7 commute with it, since they apply pullback, scalar multiplication and degree-zero quotient maps. For the Roos comparison choose the shifted K-injective resolution $B[r]\\to I[r]$. Shifts preserve K-injectivity by its Hom-vanishing definition, and termwise limit commutes with shifts. Its normalization $z\\mapsto(0,z)$ commutes with the displayed signed map. Thus $\\rho_{B[r]}$ is $\\rho_B[r]$ under these shift comparisons, and the same is true of $R\\lim(b_K)$. The completed pullback shift of the cited triangle lemma is precisely the composite of the reduction, tower-pullback and limit shift comparisons used here. The formula of Step 8 therefore proves the asserted equality of $\\gamma_{g,K[r]}$ and $\\gamma_{g,K}[r]$ for every integer $r$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "def-pur-kinjective-complex",
-    "lem-weil-strict-roos-comparison",
+    "lem-a1-normalized-roos-shift-comparison",
+    "lem-a1-finite-pullback-strict-tower-comparison",
     "lem-cbc-completed-pullback-triangles"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0941, lemma-derived-limit-is-ok, shifted resolution normalization; derived.tex Tag 014V exact-functor shift comparison."
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "def-weil-pbc-adic-coefficient-datum",
-  "lem-weil-pbc-sheafification-exact",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "def-pc-flat-sheaf-modules",
-  "def-weil-derived-complete",
-  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-a1-principal-koszul-strict-replacement",
+  "lem-a1-roos-intrinsic-unit-comparison",
+  "lem-a1-finite-pullback-strict-tower-comparison",
   "lem-weil-proetale-countable-products-exact",
-  "lem-weil-strict-roos-comparison",
-  "prop-weil-pbc-koszul-reconstruction",
-  "def-weil-pbc-intrinsic-completion",
-  "lem-pc-kflat-resolution",
-  "def-pc-kflat-complex",
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-completed-pullback",
-  "lem-weil-pbc-diagram-kflat-replacements",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "def-pur-sheaf-tensor-product",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "prop-weil-pbc-proetale-constant-exact",
   "def-pur-integral-derived-operations",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-pur-integral-operations-well-defined",
-  "def-pur-kinjective-complex",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-strict-roos-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-a1-normalized-roos-shift-comparison",
   "lem-cbc-completed-pullback-triangles"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; explicit principal-Koszul strict tower comparison and normalized Stacks 0941 model comparison."
+  "place": "Tag 099N(5), lemma-pushforward-Noetherian-case; strict-model assembly from the extracted lemmas."
  },
  "mathlib_searches": [
   {
@@ -284,32 +180,12 @@
  "unit": "sk-thm-dl-a1-upper",
  "lean_audit": {},
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "lem-a1-integral-pullback-completed-comparison",
   "worker": "stage1",
-  "summary": "Split into eleven steps using existing coefficient, K-flat, Koszul reconstruction and normalized strict Roos nodes. Constructed the strict tower comparison with compatible two-term principal Koszul resolutions; proved the imported completeness convention gives the intrinsic unit; checked projections and all integer shifts. No new nodes and no statement change.",
-  "blueprint": "Realizes the integral geometric-fibre restriction identification underlying the first paragraph of lem-a1-finite-map-purity (the finite-stalk formula), through the existing ancestor chain. It does not alter the weight argument or the affine-line unit route.",
+  "summary": "Human-requested re-split of the eleven-step proof into four statement-only work packages: principal strict Koszul replacements (old 1,2,5); normalized completeness units (old 3,4); finite pullback tower comparison and localization/shift naturality (old 6,7,9 and tower part of 11); normalized Roos/derived-limit shifts (remaining old 11). The five-step assembly keeps old 8 and 10. The statement and Lean record are unchanged. Original arguments are preserved by work-package statements and the report handoff.",
+  "blueprint": "First paragraph of lem-a1-finite-map-purity: identify integral geometric-fibre restriction with the completed pullback underlying the finite-stalk formula. All work packages retain this ancestor and the existing route.",
   "tool_uses": [
-   {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Verifies Noetherianity and regularity of the uniformizer and finite residue field for the adic coefficient datum. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "lem-weil-valued-dvr-finite-quotients",
-    "why": "Verifies finite quotients and quotient transitions for the stated coefficient datum. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "lem-weil-pbc-sheafification-exact",
-    "why": "Transfers the injective multiplication and quotient sequence to constant sheaves. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Supplies flatness and the projection-normalized quotients of the completed coefficient sheaves. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "lem-weil-finite-free-completed-scalar-comparison",
-    "why": "Its L=E clause upgrades the imported Roos completeness condition to invertibility of the canonical quotient-cone unit. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
    {
     "node": "lem-weil-proetale-countable-products-exact",
     "why": "Verifies exact countable products for applying the normalized strict Roos comparison on both sites. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
@@ -319,40 +195,8 @@
     "why": "Supplies the natural cone/K-injective limit comparison, including its unit and projection normalization. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
    },
    {
-    "node": "prop-weil-pbc-koszul-reconstruction",
-    "why": "Compares the Koszul and quotient units to establish the precise complete-object domain. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Provides one flat-term K-flat representative for the whole quotient diagram. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "lem-weil-pbc-diagram-kflat-replacements",
-    "why": "Allows the explicitly constructed objectwise K-flat strict tower resolution to compute the specified tower pullback. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "lem-pur-left-derived-from-kflat-class",
-    "why": "Identifies resolving-class calculations with the specified derived functors and proves descent independent of representatives. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "why": "Preserves K-flatness and flat terms for ordinary completed-ring module pullback, without assuming its structure map invertible. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-ring-map",
-    "why": "Identifies inverse images of finite constant coefficient sheaves and normalizes their structure maps. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Computes finite derived pullback by exact termwise module inverse image. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
     "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
     "why": "Provides the functorial total inverse limit on derived strict towers. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
-   },
-   {
-    "node": "lem-pur-integral-operations-well-defined",
-    "why": "Identifies the explicit quotient cone construction with the given resolution-independent integral operation. This is a generic coefficient or derived-category tool; the affine-line weight-estimate unit does not state it."
    },
    {
     "node": "lem-cbc-completed-pullback-triangles",
@@ -380,12 +224,12 @@
   "lem-cbc-completed-pullback-triangles"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q33-7ae7caafd",
-  "group": "Q33",
+  "reviewer": "NT-cc-Q73-dbaa03504",
+  "group": "Q73",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q33-7ae7caafd (reviewer sub-agent of L); spot-checked: The theorem and route are mathematically correct, with hypotheses, coefficient categories, base-change map, projections, shifts, sources, and edge cases checked. Two steps are misclassified as elementary: step 10 uses normalized Roos projection and derived-limit functoriality; step 11 uses explicit cone-sign and K-injective shift compatibility. Both are repaired by setting elementary=false in the full corrected DAG JSON at fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-integral-pullback-completed-comparison.json. Review written to review.md.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-dbaa03504 (reviewer sub-agent of L); spot-checked: Human re-split of 2026-10-21. The item's statement and stmt_deps are byte-identical to base and live. The 9601-character, 11-step proof becomes a 5-step assembly of 2044 characters (2104 after the fix) plus 4 statement-only unsplit nodes of comparable size (1.7k to 2.8k characters). None of them restates the item.\n\nOld step to node mapping: steps 1, 2 and 5 go to lem-a1-principal-koszul-strict-replacement. Steps 3 and 4 go to lem-a1-roos-intrinsic-unit-comparison. Steps 6, 7, 9 and the tower part of 11 go to lem-a1-finite-pullback-strict-tower-comparison. The rest of step 11 goes to lem-a1-normalized-roos-shift-comparison. Steps 8 and 10 stay in the item as assembly steps 3 and 4.\n\nSign checks done by hand:\n- j_P:(x,y)->(-y,x) intertwines the intrinsic differential (dx, fx-dy) of def-weil-pbc-intrinsic-completion with the Roos cone differential (-dy-(1-s)x, dx), and sends the unit (u,0) to (0,u).\n- σ^C(y,x)=((-1)^r y, x) is a chain isomorphism C(X[r]) -> C(X)[r], and the signs compose correctly.\n- The balanced isomorphism GP⊗S_{T',n} ≅ Res_n g_n^*P_n holds because g^{-1} of a constant sheaf is constant. c_g is never assumed invertible, so this node differs from lem-weil-pbc-reduction-pullback-derived-tower.\n- K-flatness of P⊗Q_n and the acyclicity of the cone hold.\n\nSources checked: Stacks 099N(5) (proetale.tex l.4351, Lf*_comp = Rlim Lf*(M⊗Λ/I^n) on completed pro-étale O_E-coefficients) and 0941. All cited tags exist. No SGA source is used, and the item is not on the dropped list.\n\nDuplicate scan, rerun on the live DAG: there are only clause overlaps with nodes landed by other groups on 10-21 (lem-sf-open-quotient-koszul-completeness O1, lem-pur-regular-quotient-completion-unit NQ, lem-weil-pbc-completed-koszul-quotient-comparison H6). This is a maintainer note, not a fault.\n\nFix: old step 9's identification of the item's left-hand functor with C(B_g(K)) through lem-pur-integral-operations-well-defined had been dropped. It is restored in item step 3 uses, its text and proof_deps (fixes/dag/nodes/sec-deligne-laumon-a1/lem-a1-integral-pullback-completed-comparison.json).\n\nAccepted tool_uses: countable products exact, strict Roos comparison, ringed strict-tower homotopy limit (all generic).\n\nTooling note: the review snapshot's dagsnap 24bda39 was garbage-collected during the review, so the remaining cited nodes were read read-only from the live DAG.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.IntegralPullbackCompletedComparison",

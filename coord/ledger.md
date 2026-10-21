@@ -21045,3 +21045,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/Q86/lem-pur-relative-support-coordinate-model (reviewer FIX; after a return; new nodes: 4)
 - 08:15 L: merged deliver/NZ/lem-weil-pbc-ordered-exchange-coefficient-comparison (reviewer FIX; after a return; new nodes: 5)
 - 08:15 L: merged deliver/O1/lem-sfb-etale-stalk-constant-complex-exactness (reviewer FIX; first push; new nodes: 0)
+- 08:15 L: merged deliver/Q73/lem-a1-integral-pullback-completed-comparison (reviewer FIX; after a return; new nodes: 4)
