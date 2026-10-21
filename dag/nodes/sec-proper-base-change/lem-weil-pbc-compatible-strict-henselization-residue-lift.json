@@ -18,21 +18,19 @@
  ],
  "proof": [
   {
-   "text": "Choose an affine open U=Spec R containing the image of σ. By hρB and hι the closed point of Spec B maps into U; all points generalize it, so the structural map factors through U, giving R→B. Identify the affine pointed-neighbourhood coordinate diagram with the etale residue-triples diagram over R, compatibly with its structural maps.",
+   "text": "Choose an affine open i:Spec R→S containing the image of σ. The closed points of Spec A and Spec B have this image by hρA, hρB and hι. Every point of a local spectrum generalizes its closed point, so both structural maps factor through i. Full faithfulness of Spec gives compatible ring maps a:R→A and b:R→B.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply strictHenselization_indEtale_of_affine_chart to eA and a to obtain that A is ind-etale over R. Compose the spectral residue diagram with the chart maps; use hρA, hρB and hι, cancel the open immersion, and reflect equality through the injective residue-field map induced by ρB. This proves residueB∘b=r∘residueA∘a.",
    "uses": [
-    "lem-weil-pbc-etale-local-ring-triples"
+    "lem-weil-pbc-strict-henselization-affine-chart-ind-etale"
    ],
    "elementary": false
   },
   {
-   "text": "The triples-colimit theorem gives a filtered colimit of etale R-algebras with local colimit and the specified separable-closure residue field, and identifies contraction of its maximal ideal to R. Transport the colimit and structural maps through eA by full faithfulness of Spec. The two factorizations and hres give base-residue compatibility of the supplied r; injectivity of κB→k′ reflects equality.",
-   "uses": [
-    "lem-weil-pbc-strict-henselization-triples"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Apply the ind-etale lifting property with source A, henselian target B, its maximal ideal and the supplied compatible r, identifying prime and local residue fields. Its prescribed residue map gives residueB∘φ=r∘residueA. R-algebra compatibility gives equality of the maps into U, then composing with U→S gives the structural square. This is precisely the lifting property used to deduce 04GU from 08HR. No residue embedding is constructed here.",
+   "text": "Choose an ind-etale colimit presentation of A. Identify the local residue fields with prime residue fields at the maximal ideals using their canonical quotient-field isomorphisms. Residue compatibility makes the contractions of the two maximal ideals equal and gives the required residue-field compatibility. Apply map_into_henselian_colimit and transport its prescribed reduction back to the local residue fields. The resulting R-algebra map φ has residueB∘φ=r∘residueA; its R-algebra compatibility gives the structural square after composing with i.",
    "uses": [
     "lem-weil-pbc-map-into-henselian-colimit"
    ],
@@ -40,13 +38,13 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-small-strict-henselization-ind-etale",
+  "lem-weil-pbc-strict-henselization-affine-chart-ind-etale",
   "lem-weil-pbc-map-into-henselian-colimit"
  ],
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/algebra.tex",
-  "place": "Tags 04HX and 04GU; algebraic residue translation plus chart ind-etale bridge G3, 2026-10-20: the small-model affine-chart call uses the proved corollary of the upstream full-colimit theorem after retirement of the old Sheaf copy."
+  "place": "Tags 04GU and 04HX, via Tag 08HR; R8, 2026-10-21: records the existing complete adopted full-model proof after retirement of its unused Sheaf twin. The incoming residue-square node already uses the upstream full-model parent. Small/full-model equivalence checked by canonical colimit transport over the base."
  },
  "mathlib_searches": [
   {
@@ -97,14 +95,15 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-p1",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.CompatibleStrictHenselizationResidueLift",
-  "file": "lean/Sheaf/AlgebraicGeometry/CompatibleStrictHenselizationResidueLift.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.CompatibleStrictHenselizationResidueLift",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CompatibleStrictHenselizationResidueLift.lean",
   "declaration": "AlgebraicGeometry.Etale.exists_compatibleStrictHenselizationResidueLift",
-  "statement": "theorem Etale.exists_compatibleStrictHenselizationResidueLift {S T : Scheme.{u}} {g : T ⟶ S} {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k'] [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B] [HenselianLocalRing A] [HenselianLocalRing B] [IsSepClosed (IsLocalRing.ResidueField A)] [IsSepClosed (IsLocalRing.ResidueField B)] (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T) (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g) (ν : Spec (.of Ω) ⟶ Spec (.of k')) (eA : Spec (.of A) ≅ strictHenselizationScheme (ν ≫ ι ≫ σ)) (eB : Spec (.of B) ≅ strictHenselizationScheme (ν ≫ τ)) (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A))) (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B))) (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫ eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = σ) (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫ eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) = τ) (r : IsLocalRing.ResidueField A →+* IsLocalRing.ResidueField B) (hres : ρB ≫ Spec.map (CommRingCat.ofHom r) = ι ≫ ρA) : ∃ (φ : A →+* B), (IsLocalRing.residue B).comp φ = r.comp (IsLocalRing.residue A) ∧ Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫ strictHenselizationStructuralMap (ν ≫ ι ≫ σ) = eB.hom ≫ strictHenselizationStructuralMap (ν ≫ τ) ≫ g",
+  "statement": "theorem Etale.exists_compatibleStrictHenselizationResidueLift\n    {S T : Scheme.{u}} {g : T ⟶ S}\n    {k k' Ω A B : Type u} [Field k] [IsSepClosed k] [Field k'] [IsSepClosed k']\n    [Field Ω] [IsAlgClosed Ω] [CommRing A] [CommRing B]\n    [HenselianLocalRing A] [HenselianLocalRing B]\n    [IsSepClosed (IsLocalRing.ResidueField A)]\n    [IsSepClosed (IsLocalRing.ResidueField B)]\n    (σ : Spec (.of k) ⟶ S) (τ : Spec (.of k') ⟶ T)\n    (ι : Spec (.of k') ⟶ Spec (.of k)) (hι : ι ≫ σ = τ ≫ g)\n    (ν : Spec (.of Ω) ⟶ Spec (.of k'))\n    (eA : Spec (.of A) ≅ strictLocalization (ν ≫ ι ≫ σ))\n    (eB : Spec (.of B) ≅ strictLocalization (ν ≫ τ))\n    (ρA : Spec (.of k) ⟶ Spec (.of (IsLocalRing.ResidueField A)))\n    (ρB : Spec (.of k') ⟶ Spec (.of (IsLocalRing.ResidueField B)))\n    (hρA : ρA ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue A)) ≫\n      eA.hom ≫ strictLocalizationToBase (ν ≫ ι ≫ σ) = σ)\n    (hρB : ρB ≫ Spec.map (CommRingCat.ofHom (IsLocalRing.residue B)) ≫\n      eB.hom ≫ strictLocalizationToBase (ν ≫ τ) = τ)\n    (r : IsLocalRing.ResidueField A →+* IsLocalRing.ResidueField B)\n    (hres : ρB ≫ Spec.map (CommRingCat.ofHom r) = ι ≫ ρA) :\n    ∃ (φ : A →+* B),\n      (IsLocalRing.residue B).comp φ = r.comp (IsLocalRing.residue A) ∧\n      Spec.map (CommRingCat.ofHom φ) ≫ eA.hom ≫\n          strictLocalizationToBase (ν ≫ ι ≫ σ) =\n        eB.hom ≫ strictLocalizationToBase (ν ≫ τ) ≫ g",
   "branch": "sheaf-dag",
-  "by": "G3",
-  "date": "2026-10-12"
+  "by": "R8",
+  "date": "2026-10-21",
+  "note": "Retire the unused Sheaf duplicate in favor of the proved adopted theorem. The upstream parent compatibleStrictHenselization_residue_square already calls this full-model declaration. The old small-model statement follows by composing eA and eB with Spec of the inverse smallStrictHenselizationColimitIso; smallStrictHenselizationColimitIso_toBase identifies their structural maps. No hypothesis, residue map or conclusion is changed by this transport."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -119,12 +118,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-13fea",
-  "group": "G3",
+  "reviewer": "C-23a6c",
+  "group": "R8",
   "result": "pass",
-  "landing": "20261021T061122-L-1709106",
+  "landing": "20261021T111559-L-344874",
   "kind": "interface",
-  "note": "independent cc review: Re-delivery 13fea562 vs PASSed heads bf31bb52/f755a769 (diff -r): only StrictHenselRootFiniteEtaleModel and StrictHenselRootPurityData import+rename adaptations with their node proof_deps, Users rows added, quarantined restorations dropped; 17 live consumers (rg) all adapted; 19 delivered modules + 2 direct importers compile clean; new theorem axioms propext/Classical.choice/Quot.sound"
+  "note": "independent cc review: Withdrawn Sheaf lift vs upstream WeilConjectures twin (node lean.statement verbatim, proof_deps = upstream calls); old small-model signature recompiled from the upstream theorem via smallStrictHenselizationColimitIso_toBase (axioms propext/choice/Quot.sound); no Lean importers, sole DAG citer already uses upstream decl; stub compiles"
  },
  "lean_audit": {}
 }
