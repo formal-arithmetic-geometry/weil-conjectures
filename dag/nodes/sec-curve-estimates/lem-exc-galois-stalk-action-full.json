@@ -17,7 +17,7 @@
  "statement": "Let $K,K_s,\\Omega$ be fields in $\\mathrm{Type}\\,u$, with compatible algebra structures $K\\to K_s\\to\\Omega$, $K_s$ a separable closure of $K$ [def-pd-separable-closure], and $\\Omega$ algebraically closed. Let $J$ be the small etale topology on $\\operatorname{Spec}K$ [def-weil-pbc-etale-sheaves], let $p$ be the point defined by $\\operatorname{Spec}\\Omega\\to\\operatorname{Spec}K$, and let $p^*$ be its set-valued geometric stalk functor [def-weil-pbc-geometric-stalks]. Put $G=\\operatorname{Gal}(K_s/K)$ with the Krull topology and $w=\\max(u,v)$. Let $U$ be the forgetful functor from discrete continuous $G$-sets in $\\mathrm{Type}\\,w$ to sets. Let $T:\\operatorname{Sh}(J,\\mathrm{Type}\\,w)\\to\\operatorname{DiscreteContAction}(\\mathrm{Type}\\,w,G)$ be a functor, and $j:T\\circ U\\cong p^*$ a natural isomorphism satisfying the canonical germ formula. The canonical germ formula is: for a sheaf $F$, $g\\in G$, a $K$-automorphism $\\tau$ of $\\Omega$ with $\\tau\\circ i=i\\circ g$ for the embedding $i:K_s\\to\\Omega$, an etale $K$-scheme $X$, lifts $x,x^{\\prime}:\\operatorname{Spec}\\Omega\\to X$ over $K$ with $x^{\\prime}=x\\circ\\operatorname{Spec}\\tau$, and $z\\in F(X)$, $j_F(g\\cdot j_F^{-1}(\\operatorname{germ}_x z))=\\operatorname{germ}_{x^{\\prime}}z$. Then $T$ is full.",
  "proof": [
   {
-   "text": "Given a morphism a:T(F)->T(F'), transport its underlying function through j to q:p^*F->p^*F'. For every etale object X and section z of F(X), the family x |-> q(germ_x z) satisfies the covariance hypothesis of [lem-exc-field-equivariant-germ-family-section], by the canonical germ formula for F and F' and equivariance of a. Apply that lemma to obtain a section of F'(X) with precisely these germs.",
+   "text": "Given a morphism a:T(F)->T(F'), transport its underlying function through j to q:p^*F->p^*F'. For every etale object X and section z of F(X), the family x |-> q(germ_x z) satisfies the covariance hypothesis of [lem-exc-field-equivariant-germ-family-section], by the canonical germ formula for F and F' and equivariance of a. Apply that lemma to obtain a section of F'(X) with precisely these germs. The adopted theorem uses coefficient universe max (u + 1) v. Compose F' with uliftFunctor and identify stalks through Point.presheafFiberCompIso followed by Equiv.ulift. Conjugate the action and apply the inverse stalk equivalence to the family. Germ comparison transports the canonical formula, and equivariance transports covariance. Apply the adopted theorem and lower its section; germ comparison gives the required original germs.",
    "uses": [
     "lem-exc-field-equivariant-germ-family-section"
    ],
@@ -45,7 +45,9 @@
  "proof_origin": {
   "by": "worker",
   "document": "literature/stacks-project/etale-cohomology.tex",
-  "place": "Tags 03QT and 04JM: F2 local reconstruction followed by proved section-germ separation, naturality, and stalk comparison"
+  "place": "Tags 03QT and 04JM: F2 local reconstruction followed by proved section-germ separation, naturality, and stalk comparison; ULift transport permits retirement of the duplicate germ-family theorem with unchanged consumer signature.",
+  "group": "T1",
+  "date": "2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -117,14 +119,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-a97e8",
-  "group": "D5",
+  "reviewer": "C-7a749",
+  "group": "T1",
   "result": "pass",
-  "landing": "20261020T051137-L-1575484",
+  "landing": "20261021T002149-L-1494216",
   "kind": "interface",
-  "note": "independent cc review: item etaleSheavesGsetsPoint proof (statement byte-identical) against node lem-exc-etale-sheaves-gsets-point; universe generalization max(u+1) v → max u v of 13 unclaimed supporting modules against the change record and the statement_change records of the nodes; all 16 delivered modules and the 5 outside direct importers compiled clean against the delivery; axioms propext/choice/Quot.sound only"
+  "note": "independent cc review: withdrawn Sheaf item stub + node lean record vs WeilConjectures.AlgebraicGeometry.FieldEquivariantGermFamilySection source (signature verbatim, 0 sorry); adapted GaloisStalkActionFull vs live (signature unchanged, import-swap-only original fails universe max(u+1) v vs max u v at 109:4, adaptation forced); importer GaloisStalkActionFullyFaithful compiles; axioms clean"
  },
  "lean_audit": {
   "master": {

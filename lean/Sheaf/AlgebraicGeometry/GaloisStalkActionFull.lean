@@ -6,7 +6,8 @@ module
 
 public import Mathlib.AlgebraicGeometry.Sites.EtalePoint
 public import WeilConjectures.AlgebraicGeometry.EtaleFieldGsets
-import Sheaf.AlgebraicGeometry.FieldEquivariantGermFamilySection
+import WeilConjectures.AlgebraicGeometry.FieldEquivariantGermFamilySection
+import Mathlib.CategoryTheory.Limits.Preserves.Ulift
 
 /-! Fullness of the canonical Galois stalk functor.
 Source: Stacks Project, Tags 03QT and 04JM (blueprint: lem-exc-galois-stalk-action-full).
@@ -106,16 +107,45 @@ theorem galoisStalkActionFunctor_full
   have local_section (X : (Spec (.of K)).Etale) (z : F.obj.obj (op X)) :
       ∃ z' : F'.obj.obj (op X), ∀ x : p.fiber.obj X,
         p.toPresheafFiber X x F'.obj z' = q (p.toPresheafFiber X x F.obj z) := by
-    apply field_equivariant_germ_family_section K Ks Ω F'
-      (fun g m ↦ (j.hom.app F') ((T.obj F').obj.obj.ρ g ((j.inv.app F') m)))
-      (hj F') X (fun x ↦ q (p.toPresheafFiber X x F.obj z))
-    intro g τ hτ x x' hx
-    dsimp [q]
-    rw [← hj F g τ hτ X x x' hx z]
-    simp only [← ConcreteCategory.comp_apply, j.hom_inv_id_app]
-    have hc := ConcreteCategory.congr_hom (a.hom.hom.comm g) ((j.inv.app F)
-      (p.toPresheafFiber X x F.obj z))
-    exact congrArg (fun m ↦ (j.hom.app F') m) hc
+    let liftFunctor := uliftFunctor.{u + 1, max u v}
+    let H := (sheafCompose (Spec (.of K)).smallEtaleTopology liftFunctor).obj F'
+    let e := ((p.presheafFiberCompIso liftFunctor).app F'.obj).toEquiv.trans Equiv.ulift
+    have he (Y : (Spec (.of K)).Etale) (y : p.fiber.obj Y)
+        (t : H.obj.obj (op Y)) :
+        e (p.toPresheafFiber Y y H.obj t) =
+          p.toPresheafFiber Y y F'.obj t.down :=
+      congrArg ULift.down (ConcreteCategory.congr_hom
+        (p.toPresheafFiber_presheafFiberCompIso_hom_app liftFunctor Y y F'.obj) t)
+    let ρ (g : G) (m : p.sheafFiber.obj F') :=
+      (j.hom.app F') ((T.obj F').obj.obj.ρ g ((j.inv.app F') m))
+    let ρ' (g : G) (m : p.sheafFiber.obj H) := e.symm (ρ g (e m))
+    have hρ' (g : G) (τ : Ω ≃ₐ[K] Ω)
+        (hτ : (algebraMap Ks Ω).comp g.toRingHom =
+          τ.toRingHom.comp (algebraMap Ks Ω))
+        (Y : (Spec (.of K)).Etale) (y y' : p.fiber.obj Y)
+        (hy : y'.left = Spec.map (CommRingCat.ofHom τ.toRingHom) ≫ y.left)
+        (t : H.obj.obj (op Y)) :
+        ρ' g (p.toPresheafFiber Y y H.obj t) =
+          p.toPresheafFiber Y y' H.obj t := by
+      apply e.injective
+      change e (e.symm (ρ g (e (p.toPresheafFiber Y y H.obj t)))) = _
+      rw [e.apply_symm_apply, he, he]
+      exact hj F' g τ hτ Y y y' hy t.down
+    obtain ⟨t, ht⟩ := field_equivariant_germ_family_section K Ks Ω H ρ' hρ' X
+      (fun x ↦ e.symm (q (p.toPresheafFiber X x F.obj z))) (by
+        intro g τ hτ x x' hx
+        change e.symm (q (p.toPresheafFiber X x' F.obj z)) =
+          e.symm (ρ g (e (e.symm (q (p.toPresheafFiber X x F.obj z)))))
+        rw [e.apply_symm_apply]
+        apply congrArg e.symm
+        dsimp [q, ρ]
+        rw [← hj F g τ hτ X x x' hx z]
+        simp only [← ConcreteCategory.comp_apply, j.hom_inv_id_app]
+        have hc := ConcreteCategory.congr_hom (a.hom.hom.comm g) ((j.inv.app F)
+          (p.toPresheafFiber X x F.obj z))
+        exact congrArg (fun m ↦ (j.hom.app F') m) hc)
+    refine ⟨t.down, fun x ↦ ?_⟩
+    exact (he X x t).symm.trans ((congrArg e (ht x)).trans (e.apply_symm_apply _))
   have unique_section (X : (Spec (.of K)).Etale) (z : F.obj.obj (op X)) :
       ∃! z' : F'.obj.obj (op X), ∀ x : p.fiber.obj X,
         p.toPresheafFiber X x F'.obj z' = q (p.toPresheafFiber X x F.obj z) := by
