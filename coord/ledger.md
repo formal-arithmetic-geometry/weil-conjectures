@@ -23476,3 +23476,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:25 L: merged deliver/Q20/lem-zl-point-weil-heart-flag (stage 2; reviewer PASS; parallel immutable checks)
 - 19:26 L: returned deliver/NE/lem-sfb-qcqs-proper-serre-heart-bound (reviewer RETURN: E7/C4: the delivery narrows the item's Q̄_ℓ coefficient again, the same fault for which Q29 93d7af was returned. On the )
 - 19:26 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (the landing tools, head 4ba4aea0e) the delivery did not land: (d) user Sheaf.Paper.CompactificationCompletedRealization)
+- 19:26 L: returned deliver/K1/Sheaf.AlgebraicGeometry.Sites.FieldHigherDirectImageStalk (reviewer RETURN: (the landing tools, head 3aa275ca4) the delivery did not land: lean/Sheaf/AlgebraicGeometry/Sites/FieldHigherDirectImage)
