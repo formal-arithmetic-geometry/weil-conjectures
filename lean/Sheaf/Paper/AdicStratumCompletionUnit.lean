@@ -10,17 +10,14 @@ public import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
 public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.CategoryTheory.StrictRoosAdditiveComparison
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
-import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
+import Sheaf.Paper.AdicStratumCoverConservativity
+import Sheaf.Paper.ExactCompletedKoszulPullback
+import Sheaf.CategoryTheory.RingedCechKoszulHomLimitComparison
+import all Sheaf.Paper.CompletedPullbackAdjunction
+import Mathlib.CategoryTheory.Functor.Derived.PointwiseLeftDerived
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
+import Sheaf.AlgebraicGeometry.ProEtaleProductsExact
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.CategoryTheory.StrictRoosComparison
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 
 /-!
 # Restriction of the actual Koszul completion unit
@@ -105,7 +102,154 @@ instance inverse_finiteLimits {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i] :
         (modelEquivalence S (Type (u + 1))).inverse))
 
 
+private theorem inverse_limits {X S : Scheme.{u}} (i : S ⟶ X) [IsImmersion i] :
+    PreservesLimitsOfSize.{0, 0} (inverse i) := by
+  have := (proEtale_immersion_inverseImage_preservesLimits i).1
+  have : PreservesLimitsOfSize.{0, 0}
+      (proEtaleSheafInverseImage i (Type (u + 1))) :=
+    preservesLimitsOfSize_shrink _
+  unfold inverse
+  infer_instance
+
 attribute [local irreducible] inverse direct adjunction
+
+private theorem moduleSiteEquivalence
+    {C : Type*} [Category C] {H : Type*} [Category H]
+    (J : GrothendieckTopology C) (K : GrothendieckTopology H)
+    (e : C ≌ H) [e.functor.IsContinuous J K] [e.inverse.IsContinuous K J]
+    (R : Sheaf J RingCat.{v}) (S : Sheaf K RingCat.{v})
+    (c : S ≅ (e.inverse.sheafPushforwardContinuous RingCat.{v} K J).obj R) :
+    ∃ q : SheafOfModules.{v} R ≌ SheafOfModules.{v} S,
+      q.functor ⋙ SheafOfModules.forget _ =
+        SheafOfModules.forget _ ⋙ PresheafOfModules.pushforward (F := e.inverse) c.hom.hom := by
+  let ψ : R ⟶ (e.functor.sheafPushforwardContinuous RingCat.{v} J K).obj S :=
+    { hom := Functor.whiskerRight e.op.unitIso.hom R.obj ≫
+        Functor.whiskerLeft e.functor.op c.inv.hom }
+  have H₁ : Functor.whiskerRight (NatTrans.op e.symm.counit) R.obj =
+      ψ.hom ≫ e.functor.op.whiskerLeft c.hom.hom := by
+    apply NatTrans.ext
+    funext U
+    change R.obj.map _ =
+      (R.obj.map _ ≫ c.inv.hom.app _) ≫ c.hom.hom.app _
+    rw [Category.assoc]
+    have hc := congrArg (fun f ↦ f.hom.app (e.functor.op.obj U)) c.inv_hom_id
+    have hc' : c.inv.hom.app (e.functor.op.obj U) ≫
+        c.hom.hom.app (e.functor.op.obj U) = 𝟙 _ := hc
+    change R.obj.map (e.unitInv.app U.unop).op =
+      R.obj.map (e.unitInv.app U.unop).op ≫
+        (c.inv.hom.app (e.functor.op.obj U) ≫ c.hom.hom.app (e.functor.op.obj U))
+    exact (Category.comp_id _).symm.trans
+      (congrArg (fun f ↦ R.obj.map (e.unitInv.app U.unop).op ≫ f) hc'.symm)
+  have H₂ : c.hom.hom ≫ e.inverse.op.whiskerLeft ψ.hom ≫
+      Functor.whiskerRight (NatTrans.op e.symm.unit) S.obj = 𝟙 S.obj := by
+    apply NatTrans.ext
+    funext U
+    change c.hom.hom.app U ≫
+      (R.obj.map (e.unitInv.app (e.inverse.obj U.unop)).op ≫
+        c.inv.hom.app (e.functor.op.obj (e.inverse.op.obj U))) ≫
+        S.obj.map (e.counitInv.app U.unop).op = 𝟙 _
+    rw [Category.assoc]
+    have hn := c.inv.hom.naturality (e.counitInv.app U.unop).op
+    change R.obj.map (e.inverse.map (e.counitInv.app U.unop)).op ≫
+      c.inv.hom.app U =
+      c.inv.hom.app (e.functor.op.obj (e.inverse.op.obj U)) ≫
+        S.obj.map (e.counitInv.app U.unop).op at hn
+    rw [← hn]
+    have hm : R.obj.map (e.unitInv.app (e.inverse.obj U.unop)).op ≫
+        R.obj.map (e.inverse.map (e.counitInv.app U.unop)).op = 𝟙 _ := by
+      rw [← Functor.map_comp, ← op_comp]
+      simp
+    rw [← Category.assoc (R.obj.map _) (R.obj.map _) _, hm]
+    change c.hom.hom.app U ≫ 𝟙 _ ≫ c.inv.hom.app U = 𝟙 _
+    have hc : c.hom.hom.app U ≫ c.inv.hom.app U = 𝟙 _ :=
+      congrArg (fun f ↦ f.hom.app U) c.hom_inv_id
+    exact (congrArg (fun f ↦ c.hom.hom.app U ≫ f)
+      (Category.id_comp (c.inv.hom.app U))).trans hc
+  have : e.symm.functor.IsContinuous K J := inferInstanceAs (e.inverse.IsContinuous K J)
+  have : e.symm.inverse.IsContinuous J K := inferInstanceAs (e.functor.IsContinuous J K)
+  refine ⟨SheafOfModules.pushforwardPushforwardEquivalence e.symm c.hom ψ H₁ H₂, rfl⟩
+
+
+private theorem smallProducts_exact (X : Scheme.{u})
+    (R : Sheaf (proEtaleModelTopology X) RingCat.{u + 1}) :
+    HasExactLimitsOfShape (Discrete ℕ) (SheafOfModules.{u + 1} R) := by
+  let e := (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).symm
+  let A := ((AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X).sheafPushforwardContinuous
+    RingCat.{u + 1} (ProEt.topology X) (proEtaleModelTopology X)).obj R
+  have : e.functor.IsContinuous (proEtaleModelTopology X) (ProEt.topology X) :=
+    inferInstanceAs (AsSmall.down.IsContinuous (proEtaleModelTopology X)
+      (ProEt.topology X))
+  have : e.inverse.IsContinuous (ProEt.topology X) (proEtaleModelTopology X) :=
+    proEtaleModelUp_isContinuous X
+  obtain ⟨q, _⟩ := moduleSiteEquivalence (proEtaleModelTopology X)
+    (ProEt.topology X) e R A (Iso.refl _)
+  have := ProEt.products_exact.{u, u + 1, 0} X A ℕ
+  exact HasExactLimitsOfShape.of_codomain_equivalence (Discrete ℕ) q.symm
+
+private theorem sliceProducts_exact (X : Scheme.{u}) (U : proEtaleSiteModel X)
+    (R : Sheaf ((proEtaleModelTopology X).over U) RingCat.{u + 1}) :
+    HasExactLimitsOfShape (Discrete ℕ) (SheafOfModules.{u + 1} R) := by
+  let e₀ := Over.postEquiv (X := U)
+    (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).symm
+  let W := (AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).obj U
+  let e := e₀.trans (ProEt.sliceEquiv X W)
+  let J := (proEtaleModelTopology X).over U
+  let K := ProEt.topology W.left
+  have : (AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X).IsDenseSubsite
+      (ProEt.topology X) (proEtaleModelTopology X) :=
+    inferInstanceAs ((AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).functor.IsDenseSubsite
+      (ProEt.topology X)
+      ((AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).inverse.inducedTopology
+        (ProEt.topology X)))
+  have : (AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).IsDenseSubsite
+      (proEtaleModelTopology X) (ProEt.topology X) :=
+    inferInstanceAs ((AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).inverse.IsDenseSubsite
+      ((AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).inverse.inducedTopology
+        (ProEt.topology X)) (ProEt.topology X))
+  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).functor.IsCocontinuous
+      (ProEt.topology X) (proEtaleModelTopology X) := by
+    change (AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X).IsCocontinuous _ _
+    infer_instance
+  have : (AsSmall.equiv.{u, u + 1, u + 1} (C := X.ProEt)).inverse.IsCocontinuous
+      (proEtaleModelTopology X) (ProEt.topology X) := by
+    change (AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt).IsCocontinuous _ _
+    infer_instance
+  have : e₀.functor.IsCocontinuous J ((ProEt.topology X).over W) := by
+    change (Over.post (X := U)
+      (AsSmall.down : proEtaleSiteModel X ⥤ X.ProEt)).IsCocontinuous _ _
+    infer_instance
+  have : e₀.inverse.IsCocontinuous ((ProEt.topology X).over W) J := by
+    change (Over.post (X := W) (AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X) ⋙
+      Over.map (𝟙 U)).IsCocontinuous _ _
+    have hp : (Over.post (X := W)
+        (AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X)).IsCocontinuous
+        ((ProEt.topology X).over W)
+        ((proEtaleModelTopology X).over (AsSmall.up.obj W)) := inferInstance
+    change (Over.post (X := W)
+      (AsSmall.up : X.ProEt ⥤ proEtaleSiteModel X)).IsCocontinuous
+      ((ProEt.topology X).over W) ((proEtaleModelTopology X).over U) at hp
+    have : (Over.map (𝟙 U)).IsCocontinuous ((proEtaleModelTopology X).over U) J :=
+      inferInstanceAs ((Over.map (𝟙 U)).IsCocontinuous
+        ((proEtaleModelTopology X).over U) ((proEtaleModelTopology X).over U))
+    exact CategoryTheory.isCocontinuous_comp _ _ ((ProEt.topology X).over W)
+      ((proEtaleModelTopology X).over U)
+  have : e₀.inverse.IsDenseSubsite ((ProEt.topology X).over W) J :=
+    e₀.isDenseSubsite_inverse_of_isCocontinuous J ((ProEt.topology X).over W)
+  have : e₀.functor.IsContinuous J ((ProEt.topology X).over W) := by infer_instance
+  have : e₀.inverse.IsContinuous ((ProEt.topology X).over W) J := by infer_instance
+  have := ProEt.sliceDense X W
+  have : (ProEt.sliceEquiv X W).functor.IsContinuous
+      ((ProEt.topology X).over W) (ProEt.topology W.left) := by infer_instance
+  have : (ProEt.sliceEquiv X W).inverse.IsContinuous
+      (ProEt.topology W.left) ((ProEt.topology X).over W) := by infer_instance
+  have : e.functor.IsContinuous J K := by
+    exact Functor.isContinuous_comp _ _ J ((ProEt.topology X).over W) K
+  have : e.inverse.IsContinuous K J := by
+    exact Functor.isContinuous_comp _ _ K ((ProEt.topology X).over W) J
+  let A := (e.inverse.sheafPushforwardContinuous RingCat.{u + 1} K J).obj R
+  obtain ⟨q, _⟩ := moduleSiteEquivalence J K e R A (Iso.refl _)
+  have := ProEt.products_exact.{u, u + 1, 0} W.left A ℕ
+  exact HasExactLimitsOfShape.of_codomain_equivalence (Discrete ℕ) q.symm
 
 section Slice
 
@@ -225,7 +369,201 @@ def UnitRestriction [IsNoetherianRing A] (r : ℕ) (a : Fin r → A) : Prop :=
       ConstantCompletion.IsComplete (ConstantCompletion.projection K A I 0)
         ((completedPull F V adj A I).obj M))
 
-attribute [local irreducible] completedPull finiteComparison
+
+private theorem rings_preserveTowers [PreservesLimitsOfShape ℕᵒᵖ L] :
+    PreservesLimitsOfShape ℕᵒᵖ F.rings := by
+  let UJ := sheafCompose J (CategoryTheory.forget CommRingCat.{v})
+  let UK := sheafCompose K (CategoryTheory.forget CommRingCat.{v})
+  let e : UJ ⋙ L ≅ F.rings ⋙ UK :=
+    NatIso.ofComponents (fun O ↦ (F.algebra O).ringUnderlying)
+      (fun f ↦ F.ring_naturality f)
+  have hU (T : GrothendieckTopology C) :
+      PreservesLimitsOfShape ℕᵒᵖ (sheafCompose T (CategoryTheory.forget CommRingCat.{v})) := by
+    let U := sheafCompose T (CategoryTheory.forget CommRingCat.{v})
+    have : PreservesLimitsOfShape ℕᵒᵖ (U ⋙ sheafToPresheaf T (Type v)) := by
+      change PreservesLimitsOfShape ℕᵒᵖ
+        (sheafToPresheaf T CommRingCat.{v} ⋙
+          (Functor.whiskeringRight Cᵒᵖ CommRingCat.{v} (Type v)).obj
+            (CategoryTheory.forget CommRingCat.{v}))
+      infer_instance
+    exact preservesLimitsOfShape_of_reflects_of_preserves U (sheafToPresheaf T (Type v))
+  have : PreservesLimitsOfShape ℕᵒᵖ UJ := hU J
+  have : PreservesLimitsOfShape ℕᵒᵖ UK := by
+    let U := sheafCompose K (CategoryTheory.forget CommRingCat.{v})
+    have : PreservesLimitsOfShape ℕᵒᵖ (U ⋙ sheafToPresheaf K (Type v)) := by
+      change PreservesLimitsOfShape ℕᵒᵖ
+        (sheafToPresheaf K CommRingCat.{v} ⋙
+          (Functor.whiskeringRight Dᵒᵖ CommRingCat.{v} (Type v)).obj
+            (CategoryTheory.forget CommRingCat.{v}))
+      infer_instance
+    exact preservesLimitsOfShape_of_reflects_of_preserves U (sheafToPresheaf K (Type v))
+  have : PreservesLimitsOfShape ℕᵒᵖ (F.rings ⋙ UK) :=
+    preservesLimitsOfShape_of_natIso e
+  have : ReflectsLimitsOfShape ℕᵒᵖ UK := reflectsLimitsOfShape_of_reflectsIsomorphisms
+  exact preservesLimitsOfShape_of_reflects_of_preserves F.rings UK
+
+attribute [local semireducible] ConstantCompletion.completed
+
+private theorem completedMap_isIso [PreservesLimitsOfShape ℕᵒᵖ L] :
+    IsIso (ConstantCompletion.completedMap F A I) := by
+  have := rings_preserveTowers F
+  let T := ConstantCompletion.finiteSystem J A I
+  let T' := ConstantCompletion.finiteSystem K A I
+  let t : T ⋙ F.rings ⟶ T' := NatTrans.ofOpSequence
+    (fun n ↦ (F.constants.app (CommRingCat.of (A ⧸ I ^ (n + 1)))).hom) (by
+      intro n
+      simpa only [T, T', ConstantCompletion.finiteSystem, Functor.comp_map,
+        Functor.ofOpSequence_map_homOfLE_succ, ConstantCompletion.transition,
+        Iso.app_hom] using
+          F.constants.hom.naturality
+            (CommRingCat.ofHom (Ideal.Quotient.factorPow I (Nat.le_succ (n + 1)))))
+  have : ∀ n, IsIso (t.app n) := fun n ↦ by
+    change IsIso ((F.constants.app (CommRingCat.of (A ⧸ I ^ (n.unop + 1)))).hom)
+    infer_instance
+  have : IsIso t := NatIso.isIso_of_isIso_app t
+  let e : T ⋙ F.rings ≅ T' := asIso t
+  let c := (Cone.postcompose e.hom).obj (F.rings.mapCone (limit.cone T))
+  have hc : IsLimit c := (IsLimit.postcomposeHomEquiv e _).symm
+    (isLimitOfPreserves F.rings (limit.isLimit T))
+  let e' := hc.conePointUniqueUpToIso (limit.isLimit T')
+  have h : e'.hom = ConstantCompletion.completedMap F A I := by
+    apply (limit.isLimit T').hom_ext
+    intro n
+    exact (hc.conePointUniqueUpToIso_hom_comp (limit.isLimit T') n).trans
+      (limit.lift_π (F := T') _ n).symm
+  rw [← h]
+  infer_instance
+
+attribute [local semireducible] HasDerivedCategory.standard
+
+private theorem finiteComparison_normalized [IsNoetherianRing A] (n : ℕ)
+    (M : ConstantCompletion.D (ConstantCompletion.completed J A I)) :
+    (ConstantCompletion.extend (ConstantCompletion.quotient K A I n)).map
+          ((ConstantCompletion.derivedPullComparison F V adj A I).app M) ≫
+        (ConstantCompletion.finiteDerivedComparison K A I n).choose.hom.app
+          ((completedPull F V adj A I).obj M) =
+      (ConstantCompletion.finitePull F V adj A I n).hom.app
+          ((ConstantCompletion.dres (ConstantCompletion.coefficientMap J A I)).obj M) ≫
+        (ConstantCompletion.derivedPull F V adj
+          (ConstantCompletion.constantMap F (A ⧸ I ^ (n + 1)))).functor.map
+            ((ConstantCompletion.finiteDerivedComparison J A I n).choose.hom.app M) ≫
+        (finiteComparison F V adj A I n).inv.app M := by
+  let eJ := (ConstantCompletion.finiteDerivedComparison J A I n).choose
+  let eK := (ConstantCompletion.finiteDerivedComparison K A I n).choose
+  let e := (ConstantCompletion.completedFinitePull_existsUnique F V adj A I n).exists.choose
+  have he := (ConstantCompletion.completedFinitePull_existsUnique F V adj A I n
+    ).exists.choose_spec M
+  dsimp only [finiteComparison, Iso.trans_inv, Iso.symm_inv,
+    Functor.isoWhiskerRight_inv, Functor.isoWhiskerLeft_inv, NatTrans.comp_app,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  simp only [Category.assoc]
+  change _ ≫ eK.hom.app _ =
+    (ConstantCompletion.finitePull F V adj A I n).hom.app _ ≫
+      (ConstantCompletion.derivedPull F V adj
+        (ConstantCompletion.constantMap F (A ⧸ I ^ (n + 1)))).functor.map
+          (eJ.hom.app M) ≫
+      (ConstantCompletion.derivedPull F V adj
+        (ConstantCompletion.constantMap F (A ⧸ I ^ (n + 1)))).functor.map
+          (eJ.inv.app M) ≫ e.inv.app M ≫ eK.hom.app _
+  let G := (ConstantCompletion.derivedPull F V adj
+    (ConstantCompletion.constantMap F (A ⧸ I ^ (n + 1)))).functor
+  have hcancel : G.map (eJ.hom.app M) ≫ G.map (eJ.inv.app M) = 𝟙 _ := by
+    rw [← G.map_comp, eJ.hom_inv_id_app]
+    exact G.map_id _
+  rw [he]
+  change _ = _ ≫ G.map (eJ.hom.app M) ≫ G.map (eJ.inv.app M) ≫ _
+  rw [← Category.assoc (G.map (eJ.hom.app M)), hcancel, Category.id_comp]
+  exact Category.assoc _ _ _
+
+private theorem derivedPull_computes {R : Sheaf J CommRingCat.{v}}
+    {S : Sheaf K CommRingCat.{v}} (c : F.rings.obj R ⟶ S) [IsIso c]
+    (P : ConstantCompletion.Cx R) :
+    IsIso ((ConstantCompletion.derivedPull F V adj c).comparison.app P) := by
+  letI := HasDerivedCategory.standard (ConstantCompletion.Mod R)
+  letI := HasDerivedCategory.standard (ConstantCompletion.Mod S)
+  have : PreservesFiniteLimits (ConstantCompletion.pull F c) :=
+    ConstantCompletion.pull_finiteLimits_of_isIso F c
+  obtain ⟨G, eG, aM, haM⟩ := ConstantCompletion.module_adjunction_exists V adj F c
+  have : PreservesFiniteColimits (ConstantCompletion.pull F c) := by
+    have := aM.leftAdjoint_preservesColimits
+    infer_instance
+  let W := HomologicalComplex.quasiIso (ConstantCompletion.Mod R) (.up ℤ)
+  let d := ConstantCompletion.derivedPull F V adj c
+  have : d.functor.IsLeftDerivedFunctor d.comparison W := d.universal
+  have hi : W.IsInvertedBy ((ConstantCompletion.pull F c).mapHomologicalComplex
+      (.up ℤ) ⋙ ConstantCompletion.Q S) := by
+    intro P P' f hf
+    have : QuasiIso f := hf
+    exact inferInstanceAs (IsIso (DerivedCategory.Q.map
+      (((ConstantCompletion.pull F c).mapHomologicalComplex (.up ℤ)).map f)))
+  have : IsIso d.comparison :=
+    Functor.isIso_of_isLeftDerivedFunctor_of_inverts d.functor d.comparison hi
+  exact NatIso.isIso_app_of_isIso d.comparison P
+
+private theorem koszul_unit_criterion [IsNoetherianRing A] (r : ℕ) (a : Fin r → A)
+    (ha : Ideal.span (Set.range a) = I)
+    (P : ConstantCompletion.KoszulPresentation J A I true r a)
+    (M : ConstantCompletion.D (ConstantCompletion.completed J A I)) :
+    IsIso (ConstantCompletion.koszulUnit J A I P M) ↔
+      ConstantCompletion.IsComplete (ConstantCompletion.projection J A I 0) M := by
+  obtain ⟨P₀, ⟨e₀, he₀⟩, _, _, hcrit⟩ :=
+    ConstantCompletion.koszul_quotient_reflector J A I true r a ha
+  letI := HasDerivedCategory.standard
+    (ConstantCompletion.Mod (ConstantCompletion.completed J A I))
+  letI := HasDerivedCategory.standard
+    (ℕᵒᵖ ⥤ ConstantCompletion.Mod (ConstantCompletion.completed J A I))
+  let O := ConstantCompletion.completed J A I
+  let b := fun j ↦ ConstantCompletion.algebraSection
+    (ConstantCompletion.baseMap J A I true) (a j)
+  obtain ⟨e, he⟩ := exists_ringed_cech_koszul_hom_limit_comparison O r b P
+  obtain ⟨e', he'⟩ := exists_ringed_cech_koszul_hom_limit_comparison O r b P₀
+  have hunit : ConstantCompletion.koszulUnit J A I P M ≫
+      (e.inv.app M ≫ e'.hom.app M ≫ e₀.hom.app M) =
+        (ConstantCompletion.completionUnit J A I true).app M := by
+    dsimp only [ConstantCompletion.koszulUnit]
+    rw [← Category.assoc, ← he M]
+    simp only [Category.assoc, Iso.hom_inv_id_app, Category.comp_id]
+    rw [← Category.assoc, he' M]
+    exact he₀ M
+  change IsIso (ConstantCompletion.koszulUnit J A I P M) ↔
+    ConstantCompletion.IsComplete (ConstantCompletion.finiteMap J A I true 0) M
+  rw [← hcrit M, ← hunit]
+  exact (isIso_comp_right_iff _ _).symm
+
+private theorem complete_of_unit_comparison [IsNoetherianRing A]
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = I)
+    (PX : ConstantCompletion.KoszulPresentation J A I true r a)
+    (PS : ConstantCompletion.KoszulPresentation K A I true r a)
+    (e : ConstantCompletion.koszulCompletion J A I PX ⋙ completedPull F V adj A I ≅
+      completedPull F V adj A I ⋙ ConstantCompletion.koszulCompletion K A I PS)
+    (he : ∀ M, (completedPull F V adj A I).map
+        (ConstantCompletion.koszulUnit J A I PX M) ≫ e.hom.app M =
+      ConstantCompletion.koszulUnit K A I PS ((completedPull F V adj A I).obj M))
+    (M : ConstantCompletion.D (ConstantCompletion.completed J A I))
+    (hM : ConstantCompletion.IsComplete (ConstantCompletion.projection J A I 0) M) :
+    ConstantCompletion.IsComplete (ConstantCompletion.projection K A I 0)
+      ((completedPull F V adj A I).obj M) := by
+  haveI := (koszul_unit_criterion A I r a ha PX M).mpr hM
+  apply (koszul_unit_criterion A I r a ha PS _).mp
+  rw [← he M]
+  infer_instance
+
+private theorem unitRestriction_of_exact [IsNoetherianRing A]
+    [PreservesLimitsOfShape ℕᵒᵖ L] [PreservesLimitsOfShape (Discrete ℕ) L]
+    [HasExactLimitsOfShape (Discrete ℕ)
+      (ConstantCompletion.Mod (ConstantCompletion.completed J A I))]
+    [HasExactLimitsOfShape (Discrete ℕ)
+      (ConstantCompletion.Mod (ConstantCompletion.completed K A I))]
+    (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = I) :
+    UnitRestriction F V adj A I r a := by
+  haveI := completedMap_isIso F A I
+  have hK := ConstantCompletion.exactCompletedKoszulPullback F V adj A I r a
+  refine ⟨inferInstance, derivedPull_computes F V adj _, hK,
+    finiteComparison_normalized F V adj A I, ?_⟩
+  obtain ⟨PX, _⟩ := ConstantCompletion.koszul_quotient_reflector J A I true r a ha
+  obtain ⟨PS, _⟩ := ConstantCompletion.koszul_quotient_reflector K A I true r a ha
+  obtain ⟨e, he⟩ := hK PX PS
+  exact complete_of_unit_comparison F V adj A I r a ha PX PS e he
 
 end Comparisons
 
@@ -305,7 +643,24 @@ theorem adicStratumCompletionUnit (X : Scheme.{u}) [IsNoetherian X]
       UnitRestriction (sliceAlgebra (proEtaleModelTopology S) U)
         (sliceDirect (proEtaleModelTopology S) U)
         (sliceAdjunction (proEtaleModelTopology S) U) A I r a) := by
-  sorry
+  constructor
+  · intro S i hi F
+    have := inverse_limits i
+    have := smallProducts_exact X
+      (siteModuleRings (ConstantCompletion.completed (proEtaleModelTopology X) A I))
+    have := smallProducts_exact S
+      (siteModuleRings (ConstantCompletion.completed (proEtaleModelTopology S) A I))
+    exact unitRestriction_of_exact F (direct i) (adjunction i) A I r a ha
+  · intro S i hi U
+    have : PreservesLimitsOfSize.{0, 0}
+        ((proEtaleModelTopology S).overPullback (Type (u + 1)) U) := by infer_instance
+    have := smallProducts_exact S
+      (siteModuleRings (ConstantCompletion.completed (proEtaleModelTopology S) A I))
+    have := sliceProducts_exact S U
+      (siteModuleRings (ConstantCompletion.completed ((proEtaleModelTopology S).over U) A I))
+    exact unitRestriction_of_exact (sliceAlgebra (proEtaleModelTopology S) U)
+      (sliceDirect (proEtaleModelTopology S) U)
+      (sliceAdjunction (proEtaleModelTopology S) U) A I r a ha
 
 /-- Finite strata with chosen pro-etale covering sieves detect local derived completeness.
 A covering family is represented by its generated covering sieve; testing its arrows
@@ -345,6 +700,62 @@ theorem adicStratumCompletionUnit_detection (X : Scheme.{u}) [IsNoetherian X]
         ConstantCompletion.IsComplete
           (ConstantCompletion.projection ((proEtaleModelTopology (s.domain α)).over U) A I 0)
           ((stratumSlicePull s F A I α U).obj M) := by
-  sorry
+  letI : ∀ α, IsImmersion (s.immersion α) := s.isImmersion
+  have h := adicStratumCompletionUnit X A I r a ha
+  have hS (α : Fin s.n) := h.1 (s.domain α) (s.immersion α) (F α)
+  have hU (α : Fin s.n) (U : proEtaleSiteModel (s.domain α)) :=
+    h.2 (s.domain α) (s.immersion α) U
+  constructor
+  · intro hM α U f hf
+    change ConstantCompletion.IsComplete _
+      ((completedPull (sliceAlgebra (proEtaleModelTopology (s.domain α)) U)
+        (sliceDirect (proEtaleModelTopology (s.domain α)) U)
+        (sliceAdjunction (proEtaleModelTopology (s.domain α)) U) A I).obj
+          ((completedPull (F α) (direct (s.immersion α))
+            (adjunction (s.immersion α)) A I).obj M))
+    exact (hU α U).2.2.2.2 _ ((hS α).2.2.2.2 M hM)
+  · intro hM
+    obtain ⟨PX, _⟩ := ConstantCompletion.koszul_quotient_reflector
+      (proEtaleModelTopology X) A I true r a ha
+    apply (koszul_unit_criterion A I r a ha PX M).mp
+    haveI : ∀ α, IsIso (ConstantCompletion.completedMap (F α) A I) :=
+      fun α ↦ (hS α).1
+    haveI : ∀ α U, IsIso (ConstantCompletion.completedMap
+        (sliceAlgebra (proEtaleModelTopology (s.domain α)) U) A I) :=
+      fun α U ↦ (hU α U).1
+    apply adicStratumCoverConservativity X A I s V hV
+      (fun α ↦ inverse (s.immersion α)) (fun α ↦ direct (s.immersion α))
+      (fun α ↦ adjunction (s.immersion α)) (fun α ↦ by
+        unfold inverse modelEquivalence
+        exact ⟨Iso.refl _⟩) F
+      (fun α U ↦ sliceAlgebra (proEtaleModelTopology (s.domain α)) U)
+      (fun α U ↦ sliceDirect (proEtaleModelTopology (s.domain α)) U)
+      (fun α U ↦ sliceAdjunction (proEtaleModelTopology (s.domain α)) U)
+      M _ (ConstantCompletion.koszulUnit (proEtaleModelTopology X) A I PX M)
+    intro α U f hf
+    obtain ⟨PS, _⟩ := ConstantCompletion.koszul_quotient_reflector
+      (proEtaleModelTopology (s.domain α)) A I true r a ha
+    obtain ⟨PU, _⟩ := ConstantCompletion.koszul_quotient_reflector
+      ((proEtaleModelTopology (s.domain α)).over U) A I true r a ha
+    obtain ⟨eS, heS⟩ := (hS α).2.2.1 PX PS
+    obtain ⟨eU, heU⟩ := (hU α U).2.2.1 PS PU
+    let T := completedPull (F α) (direct (s.immersion α))
+      (adjunction (s.immersion α)) A I
+    let W := completedPull (sliceAlgebra (proEtaleModelTopology (s.domain α)) U)
+      (sliceDirect (proEtaleModelTopology (s.domain α)) U)
+      (sliceAdjunction (proEtaleModelTopology (s.domain α)) U) A I
+    have ht : IsIso (ConstantCompletion.koszulUnit
+        ((proEtaleModelTopology (s.domain α)).over U) A I PU (W.obj (T.obj M))) :=
+      (koszul_unit_criterion A I r a ha PU _).mpr (hM α U f hf)
+    have hu : IsIso (W.map (ConstantCompletion.koszulUnit
+        (proEtaleModelTopology (s.domain α)) A I PS (T.obj M))) := by
+      apply (isIso_comp_right_iff _ (eU.hom.app (T.obj M))).mp
+      rw [heU]
+      exact ht
+    change IsIso (W.map (T.map
+      (ConstantCompletion.koszulUnit (proEtaleModelTopology X) A I PX M)))
+    apply (isIso_comp_right_iff _ (W.map (eS.hom.app M))).mp
+    rw [← W.map_comp, heS M]
+    exact hu
 
 end AlgebraicGeometry.Scheme.SfbAdicRestriction

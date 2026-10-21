@@ -23001,3 +23001,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:03 L: returned deliver/U7/Sheaf.CategoryTheory.SubterminalDerivedImageCalculus (reviewer RETURN: (reviewer C-58f40, head 58f40d74d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Subte)
 - 16:04 L: merged deliver/NM/lem-sfb-cech-localization-unit-totalization (reviewer PASS; first push; new nodes: 1)
 - 16:07 L: returned deliver/P8/Sheaf.TraceFormula.InvertibleModuleK0Class (reviewer RETURN: (the landing tools, head 33bd9a671) the delivery did not land: lean/Sheaf/TraceFormula/InvertibleModuleK0Class.lean: <un)
+- 16:07 L: merged deliver/W3/Sheaf.Paper.AdicStratumCompletionUnit (stage 3; reviewer PASS; first push; landing 20261021T160738-L-3834799 (interface); batch 20261021T160737; modules 3; new nodes 2; change records: coord/changes/W3-adic-stratum-proof-elaboration.md)

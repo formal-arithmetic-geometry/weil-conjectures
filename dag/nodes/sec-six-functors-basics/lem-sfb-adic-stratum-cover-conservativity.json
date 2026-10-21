@@ -1,0 +1,131 @@
+{
+ "id": "lem-sfb-adic-stratum-cover-conservativity",
+ "kind": "statement",
+ "title": "Algebraic inverse images on stratum covering slices jointly reflect derived isomorphisms",
+ "statement": "Let X be Noetherian [def-pc-scheme] and s a finite locally closed stratification [def-constructible-stratification]. On every stratum choose a covering sieve of the terminal object in its small pro-etale site [def-weil-pbc-proetale-site]. Let L_α be set inverse images naturally isomorphic to the transported geometric inverse images of the actual stratum immersions [def-weil-proetale-inverse-image], with left-exact left adjunctions and algebraic lifts F_α [lem-weil-pbc-constant-completion-equivalence]. Supply algebraic lifts also for the actual slice restrictions and their adjunctions. For any commutative ring A and ideal I assume all canonical completed coefficient comparisons are isomorphisms. The composite derived module pullbacks to every arrow in every chosen stratum covering sieve jointly reflect isomorphisms of unbounded complexes over the completed coefficient ring.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.5.10 and Proposition 6.6.11 reverse implication; Stacks Tags 09AH and 05RU"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-constructible-stratification",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof": [
+  {
+   "text": "Scalar extension along an isomorphism is an equivalence, so its adjunction unit and the prescribed insertion map are invertible. Underlying set sheaves commute with pure algebraic inverse image. Covering slice restrictions therefore detect zero modules: their zero objects have terminal underlying sheaves, and isIso_of_coversTop detects the map of the global underlying sheaf to the terminal one.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-constant-completion-equivalence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Identify underlying set inverse image with the underlying sheaf of abelian inverse image, by the canonical forgetful pullback comparison on the small models. Transport back to original sites. Finite quasi-compact jointly surjective stratum immersions detect zero maps by abDetectMaps. Apply this to the identity of the underlying abelian sheaf, then use faithfulness to detect zero modules.",
+   "uses": [
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "lem-weil-pbc-proetale-abelian-closed-support"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The module adjunction and finite-limit preservation give exact module inverse images. Uniqueness of left derivation identifies the prescribed derived pullbacks with termwise exact localization. Exact-functor homology comparison and the preceding module result detect zero derived objects in every degree. A distinguished cone of a morphism vanishes if all its image morphisms are invertible; zero detection gives invertibility globally.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-noetherian-stratum-detection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-proetale-abelian-closed-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Remark 6.5.10 and Proposition 6.6.11 reverse implication; Stacks Tags 09AH and 05RU; explicit transport refinement of lem-sfb-adic-stratum-completion-unit"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image along finite locally closed strata followed by a covering family jointly detects zero sheaves and isomorphisms in the unbounded derived category",
+   "results": "Eight boundedness and t-structure hits, including DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE; none gives joint conservativity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso, Functor",
+   "results": "No hits; unknown identifier IsIso.",
+   "date": "2026-10-21",
+   "verdict": "inconclusive"
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*pullback|stratum.*conserv",
+   "results": "No Mathlib hits. Project NoetherianStratumDetection has the canonical original-site version; the proof transports its underlying abelian detection argument to arbitrary algebraic lifts and covering sieves.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse images along finite locally closed strata and covering slices jointly reflect isomorphisms",
+   "results": "Eight hits concerning forgetful locally ringed spaces, dense subsites, Zariski locality of isomorphisms, and finite precoverages. No joint conservativity on unbounded derived modules for finite strata and covering slices.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicStratumCompletionUnit",
+  "date": "2026-10-21",
+  "group": "W3"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-lem-integral-models",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-adic-stratum-completion-unit",
+   "place": "Algebraic inverse images on stratum covering slices jointly reflect derived isomorphisms"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicStratumCoverConservativity",
+  "file": "lean/Sheaf/Paper/AdicStratumCoverConservativity.lean",
+  "declaration": "AlgebraicGeometry.Scheme.adicStratumCoverConservativity",
+  "statement": "theorem adicStratumCoverConservativity\n    (X : Scheme.{u}) [IsNoetherian X]\n    (A : Type (u + 1)) [CommRing A] (I : Ideal A)\n    (s : FiniteLocallyClosedStratification X)\n    (V : ∀ α : Fin s.n,\n      Sieve ((AsSmall.up : (s.domain α).ProEt ⥤ proEtaleSiteModel (s.domain α)).obj\n        (⊤_ (s.domain α).ProEt)))\n    (hV : ∀ α : Fin s.n, V α ∈ proEtaleModelTopology (s.domain α)\n      ((AsSmall.up : (s.domain α).ProEt ⥤ proEtaleSiteModel (s.domain α)).obj\n        (⊤_ (s.domain α).ProEt)))\n    (L : ∀ α : Fin s.n,\n      Sheaf (proEtaleModelTopology X) (Type (u + 1)) ⥤\n        Sheaf (proEtaleModelTopology (s.domain α)) (Type (u + 1)))\n    (R : ∀ α : Fin s.n,\n      Sheaf (proEtaleModelTopology (s.domain α)) (Type (u + 1)) ⥤\n        Sheaf (proEtaleModelTopology X) (Type (u + 1)))\n    (adj : ∀ α, L α ⊣ R α)\n    [∀ α, PreservesFiniteLimits (L α)]\n    (hL : ∀ α, Nonempty (L α ≅\n      (AsSmall.up.sheafPushforwardContinuous (Type (u + 1))\n        (ProEt.topology X) (proEtaleModelTopology X)) ⋙\n      proEtaleSheafInverseImage (s.immersion α) (Type (u + 1)) ⋙\n      (AsSmall.down.sheafPushforwardContinuous (Type (u + 1))\n        (proEtaleModelTopology (s.domain α)) (ProEt.topology (s.domain α)))))\n    (F : ∀ α, ConstantCompletion.InverseImageData (L α))\n    [∀ α, IsIso (ConstantCompletion.completedMap (F α) A I)]\n    (G : ∀ (α : Fin s.n) (U : proEtaleSiteModel (s.domain α)),\n      ConstantCompletion.InverseImageData\n        ((proEtaleModelTopology (s.domain α)).overPullback (Type (u + 1)) U))\n    (W : ∀ (α : Fin s.n) (U : proEtaleSiteModel (s.domain α)),\n      Sheaf ((proEtaleModelTopology (s.domain α)).over U) (Type (u + 1)) ⥤\n        Sheaf (proEtaleModelTopology (s.domain α)) (Type (u + 1)))\n    (adjW : ∀ α U,\n      (proEtaleModelTopology (s.domain α)).overPullback (Type (u + 1)) U ⊣ W α U)\n    [∀ α U, IsIso (ConstantCompletion.completedMap (G α U) A I)] :\n    ∀ (M N : ConstantCompletion.D\n        (ConstantCompletion.completed (proEtaleModelTopology X) A I)) (f : M ⟶ N),\n      (∀ (α : Fin s.n) (U : proEtaleSiteModel (s.domain α))\n        (g : U ⟶ (AsSmall.up : (s.domain α).ProEt ⥤\n          proEtaleSiteModel (s.domain α)).obj (⊤_ (s.domain α).ProEt)), V α g →\n        IsIso (((ConstantCompletion.derivedPull (F α) (R α) (adj α)\n            (ConstantCompletion.completedMap (F α) A I)).functor ⋙\n          (ConstantCompletion.derivedPull (G α U) (W α U) (adjW α U)\n            (ConstantCompletion.completedMap (G α U) A I)).functor).map f)) → IsIso f",
+  "branch": "sheaf-dag",
+  "by": "W3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T160738-L-3834799",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W3",
+  "result": "pass",
+  "landing": "20261021T160738-L-3834799",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
