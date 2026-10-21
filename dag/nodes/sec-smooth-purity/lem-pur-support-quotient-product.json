@@ -34,12 +34,8 @@
  ],
  "proof": [
   {
-   "text": "Work first on the etale site of $P$. The fibre product $P\\to\\operatorname{Spec}k$ is of finite type as a base change followed by a composite of finite-type morphisms [lem-sfb-finite-type-composition-base-change], and $S=Z\\times_kW\\to X\\times_kY=P$ is a closed immersion [lem-weil-pbc-closed-immersion-products], so $Q_{P,S}$ is defined. Since $\\operatorname{Spec}k$ is Noetherian, $X,Y,P$ are Noetherian schemes [lem-weil-pbc-finite-type-over-noetherian]. For $T=X,Y,P$ with support $C=Z,W,S$ and any affine open $V\\subseteq T$, the preimage $V\\setminus C$ under $j$ is an open subscheme of the Noetherian scheme $V$, hence Noetherian and in particular quasi-compact [lem-weil-pbc-noetherian-open-subscheme-noetherian]; so each open complement $j$ is quasi-compact in the sense of [def-weil-finite-type-morphism], as required by the current quotient-flat statement. Abbreviate $F=p_X^*Q^{\\mathrm{et}}_{X,Z}$, $G=p_Y^*Q^{\\mathrm{et}}_{Y,W}$ and $H=Q^{\\mathrm{et}}_{P,S}$. The coefficient-preserving exact pullbacks give quotient epimorphisms $q_X:A_P\\twoheadrightarrow F$ and $q_Y:A_P\\twoheadrightarrow G$; write $r:A_P\\twoheadrightarrow H$. Put $I=\\ker q_X$ and $J=\\ker q_Y$. For a geometric point $\\bar p$ of $P$, put $\\bar x=p_X\\bar p$ and $\\bar y=p_Y\\bar p$. The inverse-image stalk comparison and the quotient-flat lemma identify $F_{\\bar p}$ with $A$ if $\\bar x\\in Z$, and with zero otherwise; likewise $G_{\\bar p}$ is $A$ on $p_Y^{-1}W$ and zero elsewhere. These identifications send the germs of $q_X(a),q_Y(b)$ to $a,b$ on their supports. The stalk of $H$ is $A$ on $S$ and zero elsewhere, with $r(a)$ mapping to $a$. Stalk exactness identifies $I_{\\bar p},J_{\\bar p}$ with the kernels of these quotient maps. Finally $S=p_X^{-1}Z\\cap p_Y^{-1}W$: a geometric-point map to $P$ factors through $Z\\times_kW$ exactly when its two projections factor through $Z,W$, by the fibre-product universal property.",
+   "text": "Finite-type base change and composition make $P$ finite type over $k$; the product of the two closed immersions makes $S\\hookrightarrow P$ closed. Since a field is Noetherian, $X,Y,P$ are Noetherian. On any affine open $V$ of these schemes, $V\\setminus C$ is Noetherian and quasi-compact. Thus all three open-complement immersions are quasi-compact, so the quotient-flat lemma applies.",
    "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-pur-support-quotient-flat",
-    "prop-weil-pbc-geometric-stalks-exact",
     "lem-sfb-finite-type-composition-base-change",
     "lem-weil-pbc-closed-immersion-products",
     "lem-weil-pbc-finite-type-over-noetherian",
@@ -53,8 +49,9 @@
    }
   },
   {
-   "text": "The quasi-compact-complement check from step 1 applies to $X,Z$ and $Y,W$. In either topology each of the two pulled-back quotient sheaves is flat: apply the quotient-flat lemma on $X,Y$ and then flatness under ringed-topos pullback to $p_X,p_Y$. There is no extra flatness hypothesis on these projections or on $A$. Their degree-zero complexes are K-flat directly from the definition: for an acyclic complex $C$, the short exact sequences $0\\to Z^nC\\to C^n\\to Z^{n+1}C\\to0$ stay exact after tensoring with a flat sheaf $B$, so $C\\otimes B[0]$ is acyclic. Thus the very degree-zero complexes $F[0],G[0]$ (and their pro-etale counterparts) can be used as K-flat representatives.",
+   "text": "Write $F=p_X^*Q^{\\mathrm{et}}_{X,Z}$, $G=p_Y^*Q^{\\mathrm{et}}_{Y,W}$, $H=Q^{\\mathrm{et}}_{P,S}$. Exact pullback gives quotient epis $q,s:A_P\\twoheadrightarrow F,G$ and $r:A_P\\twoheadrightarrow H$. Pullback of quotient-flat gives flat factors in either topology. Flatness makes their degree-zero complexes K-flat: tensor the short exact cycles sequences of an acyclic complex to retain exactness.",
    "uses": [
+    "prop-weil-pbc-inverse-image-modules-exact",
     "lem-pur-support-quotient-flat",
     "lem-weil-pbc-ringed-topos-flat-module-pullback",
     "def-pc-flat-sheaf-modules",
@@ -67,39 +64,11 @@
    }
   },
   {
-   "text": "The composite $I\\hookrightarrow A_P\\xrightarrow r H$ is zero. Indeed at $\\bar p\\in S$ its source is zero because $(q_X)_{\\bar p}:A\\to A$ is the identity, and at $\\bar p\\notin S$ its target is zero. To justify detection of a zero morphism here and below, take its image sheaf: exactness of stalks makes every image stalk zero, and stalk conservativity applied to $0\\to\\operatorname{im}$ makes that image sheaf zero. Consequently the cokernel property of $q_X$ gives a unique $A_P$-linear map $t:F\\to H$ satisfying $tq_X=r$.",
+   "text": "Normalized quotient stalks and the inverse-image germ comparison give $F_{\\bar p}=A$ on $p_X^{-1}Z$ and zero elsewhere, similarly for $G$, and $H_{\\bar p}=A$ on $S$. Their quotient maps are identities there. The fibre-product property gives $S=p_X^{-1}Z\\cap p_Y^{-1}W$ on geometric points. Apply the quotient-tensor stalk criterion to obtain the unique $e_{\\mathrm{et}}$ and its epic generator $m$ with $e_{\\mathrm{et}}m=r$.",
    "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03PT (lemma-stalk-exact) and Theorem 03PU (theorem-exactness-stalks); cokernel factorization"
-   }
-  },
-  {
-   "text": "Use the action unitor $F\\otimes_{A_P}A_P\\cong F$, $x\\otimes a\\mapsto ax$, and compose with $t$. The unitor and its inverse $x\\mapsto x\\otimes1$ follow immediately from the balanced-tensor relations and sheafification in the definition of sheaf tensor. The composite $F\\otimes J\\to F\\otimes A_P\\to H$ vanishes: on $S$, $J_{\\bar p}=0$ by step 1, so its source stalk is zero by the etale tensor-stalk lemma; off $S$, its target stalk is zero. Step 3's image argument detects its vanishing. The sheaf tensor here is over $A_P$, while the etale tensor-stalk lemma tensors over the ring $A$; these agree: by [lem-weil-pbc-constant-module-locally-constant] a section of $A_P$ over $U$ is a locally constant function $|U|\\to A$, so locally it is a constant $a\\in A$, and after sheafification the $A$-balancing relations already impose all $A_P(U)$-balancing relations, and conversely. Hence the stalk formula of that lemma applies to $\\otimes_{A_P}$ and is used in this form here and in step 5. Since $F$ is flat, tensoring $0\\to J\\to A_P\\xrightarrow{q_Y}G\\to0$ gives an exact sequence ending in $F\\otimes A_P\\twoheadrightarrow F\\otimes G$. Cokernel factorization therefore gives $e_{\\mathrm{et}}:F\\otimes G\\to H$. Its defining equation is $e_{\\mathrm{et}}(q_X(a)\\otimes q_Y(b))=r(ab)$. This also uniquely characterizes it: $A_P\\otimes A_P\\to F\\otimes A_P\\to F\\otimes G$ is epic, the first map being $q_X$ under the action unitors and the second epic by flatness of $F$.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pc-flat-sheaf-modules",
-    "lem-pod-etale-stalk-tensor-scalar",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-constant-module-locally-constant"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Definition 03ER (definition-flat); tensor definition and etale geometric tensor stalk comparison (Tags 008B, 03EL)"
-   }
-  },
-  {
-   "text": "The etale tensor-stalk comparison, applied to $\\otimes_{A_P}$ through the constant-scalar identification of step 4 [lem-weil-pbc-constant-module-locally-constant], identifies $(F\\otimes G)_{\\bar p}$ with $F_{\\bar p}\\otimes_A G_{\\bar p}$ and carries the germs of pure tensors to tensors of germs. At a point of $S$, the morphism constructed in step 4 is $A\\otimes_A A\\to A$, $a\\otimes b\\mapsto ab$. Its inverse is $c\\mapsto c\\otimes1$, since $a\\otimes b=ab\\otimes1$. At a point outside $S$, at least one of $F_{\\bar p},G_{\\bar p}$ is zero, and $H_{\\bar p}=0$, so the morphism is the unique isomorphism $0\\to0$. Conservativity of etale geometric stalks now proves that $e_{\\mathrm{et}}$ is an isomorphism.",
-   "uses": [
-    "lem-pod-etale-stalk-tensor-scalar",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-constant-module-locally-constant"
+    "lem-pur-support-quotient-flat",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-pur-etale-quotient-tensor-stalk-criterion"
    ],
    "elementary": false,
    "source": {
@@ -108,7 +77,7 @@
    }
   },
   {
-   "text": "Apply $\\nu_P^*$ to $e_{\\mathrm{et}}$. The exact comparison pullback identifies the constant ring with $A_P$ on the pro-etale site. The normalized comparisons in the quotient-flat lemma identify $\\nu_T^*Q^{\\mathrm{et}}_{T,C}$ with $Q^{\\mathrm{proet}}_{T,C}$, carrying the quotient maps to the quotient maps, for $T=X,Y,P$. The comparison-pullback lemma for $p_X,p_Y$ identifies $\\nu_P^*F,\\nu_P^*G$ with the two required pro-etale pullbacks. Use the ringed-topos cochain tensor comparison in degree zero to identify $\\nu_P^*(F\\otimes G)$ with $\\nu_P^*F\\otimes\\nu_P^*G$. Its explicit pure-tensor formula and compatibility with the action unitors show that the transported map sends $\\overline a\\otimes\\overline b$ to $\\overline{ab}$. Call this map $e_{\\mathrm{proet}}$; it is an isomorphism because it is obtained from an isomorphism by a functor and isomorphism conjugations. Its normalization determines it uniquely: exactness of $\\nu_P^*$ preserves the epic generator map in step 4, and all the displayed comparisons carry that map to the pro-etale generator map. No detection of pro-etale isomorphisms by ordinary geometric stalks is used.",
+   "text": "Apply $\\nu_P^*$ to $e_{\\mathrm{et}}$. Normalized quotient comparisons and comparison with projection pullbacks identify its factors and target with the pro-etale quotients. The degree-zero tensor comparison gives $e_{\\mathrm{proet}}$ and sends $q(a)\\otimes s(b)$ to the same generators, so its formula is $r(ab)$. Exactness preserves the epic generator, hence uniqueness. This uses functorial transport of an isomorphism, with no pro-etale stalk test.",
    "uses": [
     "lem-sf-comparison-pullback-exact",
     "lem-pur-support-quotient-flat",
@@ -122,7 +91,23 @@
    }
   },
   {
-   "text": "By step 2, in either topology the factors of the source are flat and their complexes concentrated in degree zero are K-flat. The K-flat derived-tensor construction therefore identifies their derived tensor with their ordinary tensor in degree zero. Under that identification use $e_\\tau[0]$. This is the same multiplication map, and is an isomorphism in the unbounded derived category. The natural comparisons of the K-flat construction ensure that the identification used here is natural; there is no Tor-amplitude or boundedness assumption left to establish for these degree-zero K-flat representatives.",
+   "text": "For $f:X'\\to X$, $g:Y'\\to Y$ carrying $Z',W'$ into $Z,W$, put $h=f\\times g$. The pair-pullback lemma supplies the generator-preserving quotient maps, their composition laws and their site-comparison square. Insert the inverse-image composition and tensor comparisons. Both sides of the multiplication square send $a\\otimes b$ to $\\overline{ab}$, so the pulled-back epic generator proves equality on the etale site. Apply $\\nu^*$; the pair-comparison square, the composition compatibility of the comparison-pullback isomorphisms for $p_X h=f p_{X'}$ and $p_Y h=g p_{Y'}$ [lem-weil-pbc-comparison-pullback], and tensor composition coherence give the pro-etale equality.",
+   "uses": [
+    "lem-pur-support-quotient-pair-pullback",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "lem-weil-pbc-inverse-image-composition-module-linear",
+    "lem-pur-cochain-pullback-tensor-coherence",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-comparison-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D8 (lemma-push-pull-composition-modules) and 03EL; quotient naturality by cokernel uniqueness"
+   }
+  },
+  {
+   "text": "The K-flat derived-tensor comparison computes both factors using their actual degree-zero complexes. It identifies derived multiplication with $e_\\tau[0]$, an isomorphism. Its naturality identifies the derived naturality squares with the same chain-map equalities just proved; no boundedness or Tor assumption is added.",
    "uses": [
     "lem-weil-pbc-site-derived-tensor-descent",
     "def-kun-derived-tensor",
@@ -133,55 +118,34 @@
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tags 06YT and 06YU (definition-derived-tor); computation on K-flat representatives"
    }
-  },
-  {
-   "text": "For naturality, let $f:X'\\to X$, $g:Y'\\to Y$ carry closed supports $Z'\\subseteq X'$, $W'\\subseteq Y'$ into $Z,W$ and put $h=f\\times g$. In the etale topology the canonical maps $f^*Q_{X,Z}\\to Q_{X',Z'}$, and likewise for $g,h$, are induced by the quotient maps of $A$: the kernel of $A\\twoheadrightarrow f^*Q_{X,Z}$ maps to zero in $Q_{X',Z'}$. On $Z'$ the kernel stalk is zero because its image is in $Z$, and off $Z'$ the target stalk is zero; exact pullback, the quotient stalk formula and step 3 justify the factorization. For Cartesian supports these maps are isomorphisms by the same stalk test. Insert the inverse-image composition identifications and the tensor pullback comparison. Both composites in the naturality square for $e_{\\mathrm{et}}$ send the generator $a\\otimes b$ to the quotient class of $ab$: the tensor comparison respects action unitors, and the quotient maps preserve the images of $a,b$. The epic generator map of step 4, preserved by exact etale pullback, proves equality of the two composites. For pro-etale sheaves apply $\\nu^*$ to this equality and use comparison-pullback naturality, the normalized quotient comparisons and the cochain tensor comparison with its composition coherence. This gives the identical square for $e_{\\mathrm{proet}}$. Finally step 7 realizes the derived maps on these degree-zero complexes, so their naturality is the same equality of chain maps.",
-   "uses": [
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lem-weil-pbc-inverse-image-stalk-germ",
-    "lem-pur-support-quotient-flat",
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lemma-weil-pbc-geometric-stalk-conservative",
-    "lem-weil-pbc-inverse-image-composition-module-linear",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-pur-cochain-pullback-tensor-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03D8 (lemma-push-pull-composition-modules) and 03EL; quotient naturality by cokernel uniqueness"
-   }
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "lem-weil-pbc-inverse-image-stalk-germ",
-  "lem-pur-support-quotient-flat",
-  "prop-weil-pbc-geometric-stalks-exact",
   "lem-sfb-finite-type-composition-base-change",
   "lem-weil-pbc-closed-immersion-products",
   "lem-weil-pbc-finite-type-over-noetherian",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "def-weil-finite-type-morphism",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-pur-support-quotient-flat",
   "lem-weil-pbc-ringed-topos-flat-module-pullback",
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex",
-  "lemma-weil-pbc-geometric-stalk-conservative",
-  "def-pur-sheaf-tensor-product",
-  "lem-pod-etale-stalk-tensor-scalar",
-  "lem-weil-pbc-constant-module-locally-constant",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-pur-etale-quotient-tensor-stalk-criterion",
   "lem-sf-comparison-pullback-exact",
   "lem-weil-pbc-comparison-pullback",
   "lem-pur-cochain-pullback-tensor-coherence",
+  "lem-pur-support-quotient-pair-pullback",
+  "lem-weil-pbc-inverse-image-composition-module-linear",
   "lem-weil-pbc-site-derived-tensor-descent",
   "def-kun-derived-tensor",
-  "def-weil-derived-tensor",
-  "lem-weil-pbc-inverse-image-composition-module-linear"
+  "def-weil-derived-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
-  "place": "Final paragraph, expanded using Stacks Tags 03Q1, 03PT, 03PU, 03EL, 05VD and 06YU; the blueprint does not itself supply the quotient argument."
+  "place": "Normalized support-quotient refinement of final paragraph; assembly of the two Q57 statement-only sublemmas and the retained flatness and tensor-comparison inputs."
  },
  "mathlib_searches": [
   {
@@ -275,7 +239,7 @@
  "blueprint": {
   "from": {
    "node": "lem-pur-kunneth-supported",
-   "place": "Proof paragraph 4: multiplication of quotient generators identifies the product support quotient, with the etale and pro-etale normalizations.",
+   "place": "Final paragraph of lem-pur-kunneth-supported.proof.md: \"the exact comparison functor ... commutes with pullback\" and \"Tensor and the two counits are transported as well\"; normalized support-quotient refinement.",
    "via": [
     "lem-pur-support-site-comparison"
    ]
@@ -284,11 +248,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-support-quotient-product",
   "worker": "stage1",
-  "summary": "Rebased the retained eight-step quotient multiplication proof onto the current DAG. Synchronized the source place, statement dependencies and blueprint ancestry; re-read the changed quotient-flat and cochain-comparison statements; added the quasi-compact-open check for the finite-type supports; and refreshed all affected citation quotations verbatim. No new nodes. Maintainer reader (FIX): cited the finite-type/Noetherian/closed-immersion facts behind the quasi-compact-complement check in step 1, and the constant-scalar identification of the A_P tensor with the A tensor in steps 4-5.",
-  "blueprint": "Realizes proof paragraph 4 of lem-pur-kunneth-supported.proof.md: multiplication of quotient generators identifies the product support quotient, with etale/pro-etale normalization and derived/naturality consequences.",
+  "summary": "Human-requested re-split of the eight-step proof: separate the two-kernel tensor descent and normalized stalk isomorphism into lem-pur-etale-quotient-tensor-stalk-criterion, and the closed-pair quotient-map construction, Cartesian test and site-comparison coherence into lem-pur-support-quotient-pair-pullback. Both are independent statement-only unsplit tasks. Preserve the statement and all Lean and maintainer metadata. The remaining short assembly checks quasi-compact complements, flat/K-flat projection factors, etale normalization, pro-etale transport and derived/naturality comparisons. The report preserves all eight received arguments and maps them to the new interfaces.",
+  "blueprint": "Final paragraph of lem-pur-kunneth-supported.proof.md (main-20261015), in particular comparison commuting with pullback and transport of tensor and the counits, via lem-pur-support-site-comparison. The received quotient-product refinement has no literal quotient paragraph in the current blueprint.",
   "tool_uses": [
    {
     "node": "prop-weil-pbc-inverse-image-modules-exact",
@@ -365,12 +329,12 @@
   "lem-weil-pbc-closed-immersion-products"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q56-35c8a4cfa",
-  "group": "Q56",
+  "reviewer": "NT-cc-Q57-1a4c74b77",
+  "group": "Q57",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-35c8a4cfa (reviewer sub-agent of L); spot-checked: I read the item in full (statement and all 8 steps), the statement of every cited node, the blueprint lem-pur-kunneth-supported (main-20261015) proof, and the siblings: quotient-flat, supported-product-quotient-model, etale-closed-constant-tensor and the parent support-site-comparison. The statement is true; I tested it on the point, Z=∅, full supports, A=0 and nonreduced supports. It is not a duplicate and does not restate a parent clause. Batch-5 check: lem-pod-etale-stalk-tensor-scalar is Stacks 008B/007K/03EL, the stalk of a sheaf tensor product. It was created for the lisse-sheaf/Galois dictionary and is not a step of Poincaré duality or the trace formula, and neither assumption states it. Its 65-node closure contains no sec-poincare-duality node besides itself, no sec-trace-formula node and no nt-assume leaf. In the item's whole 634-node closure it is the only node from either chapter. I kept the citation. Two repairs (C1/C4): (1) step 1 asserted that finite type over k gives Noetherian and hence quasi-compact complements, that P has finite type, and that S→P is a closed immersion, all without nodes. I now cite lem-sfb-finite-type-composition-base-change, lem-weil-pbc-closed-immersion-products, lem-weil-pbc-finite-type-over-noetherian, lem-weil-pbc-noetherian-open-subscheme-noetherian and def-weil-finite-type-morphism. (2) Steps 4–5 applied the Λ-tensor stalk lemma to the tensor over A_P. I added lem-weil-pbc-constant-module-locally-constant with the balancing argument, the one the merged sibling lem-pur-etale-closed-constant-tensor uses. proof_deps is recomputed and two tool_uses are added. The other steps check out: the K-flat argument, zero detection via image plus conservativity, uniqueness via the epic generator map, pro-etale transport without pro-etale stalk conservativity, K-flat derived descent, and naturality. Not changed: the stmt_deps still lists two lemmas the statement text does not use (harmless), and the unit is sk-prop-a1-kummer while the ancestry runs through sk-prop-an (maintainer metadata, as the report notes).; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-1a4c74b77 (reviewer sub-agent of L); spot-checked: Re-split meets the human note of 2026-10-21. The item statement is unchanged. Two new statement-only unsplit nodes of comparable size take over the main work: lem-pur-etale-quotient-tensor-stalk-criterion takes old steps 3-5 (two-kernel descent, epic generator, A vs A_T tensor stalks, conservativity via Stacks 03PU), and lem-pur-support-quotient-pair-pullback takes the old step-8 construction (cokernel factorization, Cartesian iso, identity/composition, pro-etale square via quotient-flat alpha and comparison-pullback; stalk input Stacks 03Q1). The assembly is 6 steps, about 2.6k characters. I checked old step 6 against new step 4 and lost no content. Both new statements are true; I tested A=0, empty or disjoint subsets, full supports, empty C' and nonreduced C. Neither restates a parent clause. Neither duplicates lem-pur-etale-closed-constant-tensor, which covers i_*A_C with Cartesian b_{v,C} on the etale site only, or lem-pod-etale-stalk-tensor-scalar. stmt_deps and searches are in order and no SGA source is cited. Fixes: (1) the delivery dropped 5 stmt_deps as 'old normalization'. Two of them are used by the item's reviewed Lean statement: etaleSupportQuotient/Map belong to lem-pur-support-quotient-flat and Etale.supportedProductImmersion to def-pur-supported-exterior-product. I restored all five to the base list. (2) C1: step 5's pro-etale naturality needs comparison-pullback compatibility with p_X h = f p_X' and p_Y h = g p_Y', but the lem-weil-pbc-comparison-pullback citation from old step 8 was dropped. I re-added the citation and one clause.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.SupportQuotientProduct",

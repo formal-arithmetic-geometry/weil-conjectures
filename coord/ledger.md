@@ -20869,3 +20869,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/Q48/lem-sfb-divisible-extension-derived-reduction (reviewer FIX; after a return; new nodes: 3)
 - 08:07 L: merged deliver/NU/lem-weil-pbc-sectionwise-flat-presheaf-tensor (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q20/lem-sfb-internal-abelian-finite-limit-creation (reviewer PASS; first push; new nodes: 0)
+- 08:07 L: merged deliver/Q57/lem-pur-support-quotient-product (reviewer FIX; after a return; new nodes: 2)
