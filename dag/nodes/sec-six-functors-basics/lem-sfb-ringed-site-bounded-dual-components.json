@@ -15,10 +15,11 @@
  ],
  "proof": [
   {
-   "text": "For each object $U$ and integer $q$, [def-pur-hom-complex] identifies $D^q(U)$ with the families $(f^p)_p$ of maps $E^p|_U\\to O^{p+q}|_U$. If $p\\ne -q$, the target is zero, so that component has exactly one value, the zero map. Projection to $p=-q$ is therefore inverse to insertion of a map $E^{-q}|_U\\to R|_U$ with all other components zero. Both operations are $R(U)$-linear and commute with restriction. By [def-pur-sheaf-hom] these are inverse morphisms of module sheaves $D^q\\cong(E^{-q})^\\vee$.",
+   "text": "Use homComplexIsLimit and homComplexπ from [lem-sc-hom-complex-projections]. For degree q, insert into the factor p with p+q=0 using the product lift, and put zero in every other factor. Internal Hom into a zero coefficient term is zero, as follows by applying homObjMap to the zero identity. Product extensionality proves the two inverse identities. Postcompose with singleObjXSelf at degree zero to obtain α, whose hom is the specified component.",
    "uses": [
     "def-pur-hom-complex",
-    "def-pur-sheaf-hom"
+    "def-pur-sheaf-hom",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true,
    "source": {
@@ -38,21 +39,11 @@
    }
   },
   {
-   "text": "The differential of $O=R[0]$ is zero. In the component $p=-q-1$, the defining differential in [def-pur-hom-complex] consequently reads $(d_D^q f)^{-q-1}=-(-1)^q f^{-q}d_E^{-q-1}$. Under the projection of step 1 this is exactly $d_D^q(\\phi)=(-1)^{q+1}\\phi d_E^{-q-1}$. All other components have zero target.",
-   "uses": [
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A8X, section-hom-complexes, product and differential formulas; Tag 08JJ, lemma-dual-perfect-complex, second proof paragraph, ordinary dual terms and evaluation up to sign."
-   }
-  },
-  {
-   "text": "Apply the insertion/projection construction of step 1 with source $D$ and degree $i$: $(D')^i\\cong(D^{-i})^\\vee\\cong((E^i)^\\vee)^\\vee$. In these identifications a local $\\Psi\\in(D')^i$ is a map $(E^i)^\\vee\\to R$. For a local $\\chi\\in(E^{i+1})^\\vee$, the differential formula of [def-pur-hom-complex], followed by step 3 at $q=-i-1$, gives\n$$ (d_{D'}^i\\Psi)(\\chi)=(-1)^{i+1}\\Psi(d_D^{-i-1}\\chi)=(-1)^{i+1}(-1)^{-i}\\Psi(\\chi d_E^i)=-\\Psi(\\chi d_E^i). $$\nHere linearity pulls the sign through $\\Psi$. The double dual of $d_E^i$ is, by precomposition twice, precisely $\\Psi\\mapsto(\\chi\\mapsto\\Psi(\\chi d_E^i))$, proving the claimed minus sign.",
+   "text": "Apply homComplex_d_π of [lem-sc-hom-complex-projections] with arbitrary adjacent n,m and surviving source indices p,p′. The target differential of R[0] is zero, so only negative (-1)^n times precomposition survives. Postcomposition with singleObjXSelf commutes with precomposition by homObjMap_comp_homObjMap. Since m=n+1 this is (-1)^m times precomposition, giving the stated differential equation.",
    "uses": [
     "def-pur-hom-complex",
-    "def-pur-sheaf-hom"
+    "def-pur-sheaf-hom",
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true,
    "source": {
@@ -61,10 +52,11 @@
    }
   },
   {
-   "text": "For any module sheaf $T$ and $t\\in T(U)$, define $\\delta_T(t)$ over the slice at $U$ by sending, for every $V\\to U$, a local map $\\phi:T|_V\\to R|_V$ to $\\phi_V(t|_V)$. The rule in [def-pur-sheaf-hom] shows directly that this is a map of sheaves $(T^\\vee)|_U\\to R|_U$: evaluation commutes with restriction and is linear in $\\phi$. It is also linear in $t$ and compatible with varying $U$. Thus $\\delta_T:T\\to T^{\\vee\\vee}$ is defined without a reflexivity assumption. If $x$ has degree $i$ and $\\phi$ has degree $q$ in $D$, then $\\phi(x)$ lies in $O^{i+q}$ and is zero unless $q=-i$. In that unique possibly nonzero degree, $(-1)^{iq}=(-1)^{-i^2}=(-1)^i$, since $i^2-i$ is even. Hence the homogeneous formula in the statement defines degreewise sheaf morphisms $\\beta^i=(-1)^i\\delta_{E^i}$ under step 4.",
+   "text": "Construct γ as α for the dual complex followed by contravariant internal Hom of the inverse of α for E. Functoriality and the inverse identities give the required projection square. Apply the first differential formula both to E and its dual. Transport the formula for the dual differential through α inverse. Internal Hom is additive in its source, so its precomposition map carries integer unit scalars to the same scalars. The product of the two signs is (-1)^(i+1)(-1)^i=-1. Contravariant composition gives the negative double transpose.",
    "uses": [
+    "def-pur-hom-complex",
     "def-pur-sheaf-hom",
-    "def-pur-hom-complex"
+    "lem-sc-hom-complex-projections"
    ],
    "elementary": true,
    "source": {
@@ -73,10 +65,25 @@
    }
   },
   {
-   "text": "It remains to check the chain-map equation. For $x\\in E^i(U)$ and every $\\chi\\in(E^{i+1})^\\vee(V)$ on every $V\\to U$, steps 4 and 5 give\n$$ (d_{D'}^i\\beta^i(x))_V(\\chi)=-(-1)^i\\chi_V(d_E^i(x)|_V)=(-1)^{i+1}\\chi_V(d_E^i(x)|_V)=(\\beta^{i+1}(d_E^i x))_V(\\chi). $$\nThese equalities for all $V$ and $\\chi$ are equality of the sheaf maps of [def-pur-sheaf-hom]; thus $d_{D'}^i\\beta^i=\\beta^{i+1}d_E^i$ in every degree. This is the definition of a chain map in [def-pur-hom-complex]. Every calculation used only the Hom definitions and the stated bound, so no exactness or finite-free retract hypothesis has entered.",
+   "text": "The size convention makes C essentially small in max(c,v,r). Use coefficientSheafification from [lem-pur-ringed-site-module-pullback-exists-universes] and the standard derived-category instance to instantiate the already proved ringedSiteOrdinaryBidual_existsUnique from [lem-sfb-ringed-site-duality-maps]. Its β is an actual chain map with the signed slice evaluation formula in coefficient degree zero. Define δ^i=(-1)^i β^i γ_i. To check ordinary evaluation, evaluate this composite on a functional transported by α inverse. The product of signs (-1)^i(-1)^(i*(-i)) is one, and α inverse followed by α cancels, leaving φ(x restricted to the slice). This proves the required section formula for δ without any reflexivity assumption.",
    "uses": [
     "def-pur-sheaf-hom",
-    "def-pur-hom-complex"
+    "def-pur-hom-complex",
+    "lem-pur-ringed-site-module-pullback-exists-universes",
+    "lem-sfb-ringed-site-duality-maps"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X, section-hom-complexes, product and differential formulas; Tag 08JJ, lemma-dual-perfect-complex, second proof paragraph, ordinary dual terms and evaluation up to sign."
+   }
+  },
+  {
+   "text": "The β obtained in step 5 is already a chain map. Its defining RingedSiteBidualFormula gives the homogeneous formula when t=0. When t≠0, the coefficient term of R[0] is zero; evaluating its zero identity shows every section is zero, so both sides of the formula belong to a subsingleton section module and are equal. Finally (-1)^i δ^i=β^i γ_i since the square of an integer unit is one. Assemble these equations with steps 1–4 and the support bound from step 2.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-pur-hom-complex",
+    "lem-sfb-ringed-site-duality-maps"
    ],
    "elementary": true,
    "source": {
@@ -87,12 +94,17 @@
  ],
  "proof_deps": [
   "def-pur-hom-complex",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "lem-pur-ringed-site-module-pullback-exists-universes",
+  "lem-sc-hom-complex-projections",
+  "lem-sfb-ringed-site-duality-maps"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "B3",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A8X, section-hom-complexes, product and differential formulas; Tag 08JJ, lemma-dual-perfect-complex, second proof paragraph, ordinary dual terms and evaluation up to sign."
+  "place": "Tags 0A8X and 08JJ; product projections, two Hom differential calculations, and reuse of the existing signed ordinary bidual chain map."
  },
  "mathlib_searches": [
   {
@@ -231,5 +243,15 @@
   "group": "NH",
   "result": "pass",
   "note": "Delivery changes only the item's lean record and adds landed theorem lem-sc-hom-complex-projections to stmt_deps (allowed), plus one new module. On the mechanical finding: homComplexπ is Classical.choose of homComplex_projections_exists (HomComplexComponents.lean:38-43); α, γ and β's formula are pinned to these projections, so the theorem dependency is genuine, PASS on that point. All clauses checked against the node and Stacks 0A8X/08JJ: α = actual projection; γ fixed uniquely by the projection square; differential signs recomputed from homComplex_d_π ((-1)^{q+1} for D, -1 for D'); support bound; δ fixed by sectionwise evaluation; β chain map fixed on every component, including nonzero target degree; clause 8 consistent with clause 7. Edge cases a>b, char 2, non-reflexive terms and c≠v are covered; module universe max c v r is needed, not a silent restriction. No duplicate definition (HomComplexToSingle and Sheaf.Bidual are single-universe). No hollow definitions, docstrings present, statement verbatim. nt_compile --json on the snapshot: 19.2 s, exit 0, no errors or warnings. Notes: the second reading is a self-review (dispatcher forbids agents), for the coordinator; stage-3 advisory to bridge β to ringedSiteBidual."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B3",
+  "result": "pass",
+  "landing": "20261021T172354-L-3358153",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
