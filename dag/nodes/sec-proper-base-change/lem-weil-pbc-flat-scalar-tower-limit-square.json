@@ -13,11 +13,126 @@
   "def-weil-pbc-ringed-topos-morphism",
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+ ],
+ "proof": [
+  {
+   "text": "Write $F_B=u_{*,B}$ and $F_B^J$ for ordinary direct image, $B=R,S$, and $Q$ for localization. For every strict $S_T$-tower $C$, construct $\\rho_{T,C}:r_T\\lim_{S_T}C\\to\\lim_{R_T}r_TC$ as follows. On each site object its map sends $(x_n)_n$ to $(x_n)_n$, with the $R_T$-action through $a_T$ on every component. Compatible families form a sheaf: matching families glue uniquely component by component, and the transition equations persist by uniqueness. The same formula in reverse is linear and commutes with restrictions, so $\\rho$ is a natural isomorphism, also degreewise for complexes. With these sectionwise limit choices it is an identity. The flat diagram-restriction lemma gives exactness and K-injective preservation of $r_T$, for $J$ and for the one-object category, and the ordinary identity comparison $\\delta_C:r_VF_S^JC\\to F_R^Jr_UC$, including its analogue on single modules. We use those specified comparisons throughout.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CV (definition-sheaf-modules), Tag 03DA (lemma-abelian); ordinary scalar comparison as specified in the cited flat diagram lemma"
+   }
+  },
+  {
+   "text": "All four tower module categories have enough K-injectives. Indeed the diagram-site realization identifies each with modules on a small ringed site; the ring sheaf is commutative because its sections are the given commutative ring sections. Apply the ringed-site K-injective existence theorem there and transport through the exact additive equivalence. This transport preserves acyclicity and the equation defining chain homotopy, hence preserves K-injectivity. Consequently every derived tower object is isomorphic to $QI$ for a K-injective tower complex $I$. The same existence assertion applies to the four module categories themselves. In particular the total derived functors under discussion exist and their universal units are invertible on K-injectives by the K-injective total-derived theorem; the specified strict derived limit is the K-injective computation in the strict-tower limit lemma.",
+   "uses": [
+    "lem-weil-pbc-diagram-site-realization",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A5 (section-unbounded), 0940 (section-derived-limits); derived.tex Tags 070K and 070Y"
+   }
+  },
+  {
+   "text": "Apply the K-injective exact-square comparison to $H'=\\lim_{S_T}$, $H=\\lim_{R_T}$, $r=r_T$ on towers and $s=r_T$ on modules. Its equality $sH'=Hr$ is the sectionwise equality of step 1; for other chosen limits use the unique identification $\\rho$. Its exactness and K-injective-preservation assumptions are step 1, and enough K-injectives is step 2. This supplies a natural isomorphism $\\lambda:r_T\\mathcal L_T^S\\to\\mathcal L_T^Rr_T$, for both $T=U,V$. If $e^B_{T,I}:Q\\lim_{B_T}I\\to\\mathcal L_T^B(QI)$ denotes the universal limit unit, its normalization is precisely\n$$\\lambda_{QI}\\,r_T(e^S_{T,I})=e^R_{T,r_TI}\\,Q(\\rho_{T,I}).$$\nHere and below the canonical exact-localization identifications are understood as in the cited comparison lemma. Thus this is the required normalization by universal units, rather than an arbitrary isomorphism between the endpoints.",
+   "uses": [
+    "lem-weil-pbc-kinjective-exact-square-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I, 070Y, 070K; existing exact-square comparison specialized to ordinary inverse limit"
+   }
+  },
+  {
+   "text": "The geometric inverse-image exactness lemma applies to $u$ on both ring sheaves. Since $u^{-1}B_V\\cong B_U$, its transported module inverse image is the module pullback $L_B$, without an additional scalar extension. It is exact. The flat diagram-restriction lemma supplies $L_B\\dashv F_B$ and the termwise adjunction. Exactness for towers is levelwise, so $L_B^J$ is exact. The exact-left-adjoint K-injective criterion now makes $F_B$ and $F_B^J$ preserve K-injectives. The same criterion makes ordinary inverse limit preserve K-injective tower complexes: the constant-tower functor $\\Delta_T$ is exact by the levelwise criterion and is left adjoint to $\\lim$, since a map $\\Delta_T M\\to C$ is exactly a compatible family $M\\to C_n$. Therefore, for a K-injective $S_U$-tower complex $I$, all of $r_UI$, $F_S^JI$, $F_R^Jr_UI$, $\\lim I$, $\\lim r_UI$ and their direct images needed below are K-injective. Restrictions of these K-injectives are K-injective by step 1. No exactness of products was used.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04JC (lemma-flat-pullback-exact); derived.tex Tag 08BJ (lemma-adjoint-preserve-K-injectives); homology.tex Tag 02MZ"
+   }
+  },
+  {
+   "text": "For any strict tower complex $C$, right-adjoint preservation of limits gives $\\beta_C^B:F_B\\lim_{B_U}C\\cong\\lim_{B_V}F_B^JC$, characterized by projection $n$ equal to $F_B(p_n)$. The following ordinary identity holds:\n$$\\lim_{R_V}(\\delta_C)\\,\\rho_{V,F_S^JC}\\,r_V(\\beta_C^S)\n=\\beta_{r_UC}^R\\,F_R(\\rho_{U,C})\\,\\delta_{\\lim_{S_U}C}.$$\nIndeed the $n$th projection of the left side is $\\delta_{C_n}\\,r_V(F_S(p_n))$. The $n$th projection of the right side is $F_R(r_U(p_n))\\,\\delta_{\\lim_{S_U}C}$. These are equal by naturality of the ordinary scalar/direct-image comparison $\\delta$ with respect to $p_n$. Projections determine a map into the ordinary limit, giving the equality degreewise; it is an equality of chain maps since all comparisons commute with differentials. This argument uses projections in the module category, not a purported universal property of a homotopy limit in a triangulated category.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-limits",
+    "lem-weil-pbc-flat-ringed-diagram-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact); sites-cohomology.tex Tag 0A07, ordinary tower-topos square"
+   }
+  },
+  {
+   "text": "We spell out the normalization of $\\kappa$ on the common model. For K-injective $I$, write $h^B_A:QF_BA\\to R_u^B(QA)$ and $g^B_I:QF_B^JI\\to\\mathscr R_u^B(QI)$ for the universal units. Set\n$$A_I^B=R_u^B(e^B_{U,I})\\,h^B_{\\lim I},\\qquad\nB_I^B=\\mathcal L_V^B(g^B_I)\\,e^B_{V,F_B^JI}.$$\nAll these maps are isomorphisms by steps 2 and 4. The direct-image/limit lemma specifies the comparison induced by the common ordinary composite; thus its composite-derived units give\n$$\\kappa_u^B(QI)\\,A_I^B=B_I^B\\,Q(\\beta_I^B).$$\nThis also holds with $B=R$ and $I$ replaced by $r_UI$. The prescribed scalar comparisons similarly satisfy\n$$d_{u,QI}\\,r_V(g^S_I)=g^R_{r_UI}\\,Q(\\delta_I),\\qquad\n\\chi_{u,QA}\\,r_V(h^S_A)=h^R_{r_UA}\\,Q(\\delta_A)$$\nfor every K-injective $A$, by their normalization in the flat diagram-restriction statement. These are formulas for the specified maps, with their universal units retained.",
+   "uses": [
+    "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "lem-weil-pbc-flat-ringed-diagram-restriction",
+    "lem-weil-pbc-kinjective-total-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), common composite; derived.tex Tags 070Y and 070K, units on K-injectives"
+   }
+  },
+  {
+   "text": "Evaluate the desired equality at $QI$ and precompose both sides with the isomorphism $r_V(A_I^S)$ of step 6. Substitute the three unit-normalization equations of steps 3 and 6. Naturality moves $d$ across $g$, $\\lambda$ across $g$, and $\\chi$ across $e$. In detail, the left composite becomes\n$$B_{r_UI}^R\\,Q\\bigl(\\lim_{R_V}(\\delta_I)\\,\\rho_{V,F_S^JI}\\,r_V(\\beta_I^S)\\bigr),$$\nwhereas the right composite becomes\n$$B_{r_UI}^R\\,Q\\bigl(\\beta_{r_UI}^R\\,F_R(\\rho_{U,I})\\,\\delta_{\\lim_{S_U}I}\\bigr).$$\nThe maps inside $Q$ are exactly the two sides of step 5. They agree, so the displayed composites agree. Cancel $r_V(A_I^S)$ to obtain exactly the requested derived square. This computation cancels specified unit isomorphisms only; it does not choose a replacement comparison with the same endpoints.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph, conjugation by direct-image/limit isomorphisms; explicit scalar unit calculation"
+   }
+  },
+  {
+   "text": "The constructed $\\lambda$ is natural by step 3; $\\kappa$, $d$ and $\\chi$ are natural by their cited statements. For arbitrary $Z$, choose an isomorphism $v:Z\\to QI$ as in step 2. If $P_Z,Q_Z$ denote the two composites in the claimed equation, their naturality gives $T(v)P_Z=P_{QI}S(v)$ and $T(v)Q_Z=Q_{QI}S(v)$, where $S=r_VR_u^S\\mathcal L_U^S$ and $T=\\mathcal L_V^R\\mathscr R_u^Rr_U$. Step 7 gives $P_{QI}=Q_{QI}$, and $T(v)$ is invertible, hence $P_Z=Q_Z$. This proves the assertion for every derived strict-tower object, with naturality for every derived morphism, not only strict maps between selected resolutions. The argument uses neither finite coefficient reduction nor completeness.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+    "place": "Second paragraph, transport of equalities through the specified isomorphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-flat-ringed-diagram-restriction",
+  "lem-weil-pbc-diagram-site-realization",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-kinjective-exact-square-comparison",
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
   "lem-weil-ringed-tower-pushforward-limit-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Second paragraph, direct-image/limit conjugation; detailed scalar square from Stacks 0A07, 08BJ, 070I, 070Y and 070K"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -60,10 +175,52 @@
    "results": "{\"t\": \"2026-10-21T06:16:59Z\", \"tool\": \"grep\", \"query\": \"restrictScalars|rightDerived.*limit\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"], \"digest\": \"4ec8d5b5a7d69875\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits give ordinary module/sheaf scalar restriction, ordinary adic completion, abstract adjunctions, or unrelated algebraic base change; none states this normalized derived strict-diagram comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(limit|derived)|derived.*restrictScalars|rightDerived.*[Ll]imit",
+   "results": "{\"t\": \"2026-10-21T08:20:37Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*(limit|derived)|derived.*restrictScalars|rightDerived.*[Ll]imit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"], \"digest\": \"4ec8d5b5a7d69875\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: only ordinary sheaf module scalar restriction and ordinary limits; no normalized derived strict-tower/direct-image square"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of scalars commutes with derived inverse limit and direct image on ringed sites",
+   "results": "{\"t\": \"2026-10-21T08:20:38Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of scalars commutes with derived inverse limit and direct image on ringed sites\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"RestrictScalars\", \"PresheafOfModules.restrictScalars\", \"ModuleCat.preservesLimit_restrictScalars\", \"ModuleCat.restrictScalars\", \"SheafOfModules.restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"AlgHom.restrictScalars\"], \"digest\": \"0f64e27ae2cc2f98\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: only ordinary sheaf module scalar restriction and ordinary limits; no normalized derived strict-tower/direct-image square"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, CategoryTheory.NatTrans",
+   "results": "{\"t\": \"2026-10-21T08:20:38Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Functor.rightDerived, CategoryTheory.NatTrans\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no hits for this combination of derived functor and natural transformation names"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Flat restriction of scalars on sheaves commutes with derived inverse limits of strict towers and the canonical derived direct image limit comparison",
+   "results": "{\"t\": \"2026-10-21T08:20:41Z\", \"tool\": \"leanfinder\", \"query\": \"Flat restriction of scalars on sheaves commutes with derived inverse limits of strict towers and the canonical derived direct image limit comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.createsLimit\", \"CategoryTheory.compatiblePreservingOfFlat\", \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"CategoryTheory.lan_flat_of_flat\", \"SheafOfModules.hasLimit\", \"PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"PresheafOfModules.instPreservesFiniteLimitsSheafAddCommGrpCatCompSheafOfModulesSheafificationToSheaf\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\"], \"digest\": \"59a671e4fdb6e9fb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: only ordinary sheaf module scalar restriction and ordinary limits; no normalized derived strict-tower/direct-image square"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformation coherence square from commuting right adjoints on K-injective complexes, restriction of scalars and derived limit",
+   "results": "{\"t\": \"2026-10-21T08:21:36Z\", \"tool\": \"leanfinder\", \"query\": \"Natural transformation coherence square from commuting right adjoints on K-injective complexes, restriction of scalars and derived limit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.derivedε_fac_app\", \"CategoryTheory.Adjunction.derivedε_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedε\", \"CategoryTheory.Adjunction.derivedη_fac_app\", \"CategoryTheory.Adjunction.derivedη_fac_app_assoc\", \"CategoryTheory.Adjunction.derivedη\", \"CategoryTheory.Adjunction.derived'_counit\", \"CategoryTheory.Adjunction.derived_counit\"], \"digest\": \"0b6e66aed20901f9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits are general derived-adjunction unit/counit normalization lemmas; none states the scalar/direct-image/derived-strict-limit square"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|createsLimit",
+   "results": "{\"t\": \"2026-10-21T08:21:36Z\", \"tool\": \"grep\", \"query\": \"restrictScalars|createsLimit\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"], \"digest\": \"aac63607293ea317\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: only ordinary sheaf module scalar restriction and ordinary limits; no normalized derived strict-tower/direct-image square"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ordered-exchange-coefficient-comparison",
@@ -82,5 +239,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-flat-scalar-tower-limit-square",
+  "worker": "stage1",
+  "summary": "N5: retained the statement, constructed the family-identity ordinary scalar/limit comparison, applied the existing K-injective exact-square comparison for its unique derived normalization, and proved the direct-image square by the explicit ordinary projection equation and cancellation of universal total-derived units. Reused existing nodes throughout; no new nodes.",
+  "blueprint": "lemma-weil-pbc-completed-exchange-coherence.proof.md, second paragraph: conjugation by the same direct-image/limit isomorphisms; flat coefficient supplement to the ordered coefficient comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-trf-geometric-inverse-image-exact",
+    "why": "Generic exactness of transported module inverse image for an arbitrary geometric morphism; the unit has only scheme-etale exactness statements, which do not cover the small-site topoi here."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic small ringed-site existence of K-injective resolutions, also on the diagram site; this is a resolution tool, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Generic projection-characterized preservation of ordinary limits by right adjoints, used for the ordinary beta comparison."
+   },
+   {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic ringed-topos statement that defines the direct-image/strict-limit comparison kappa (Stacks 0A07) by the common underived composite; step 6 reads its normalization from that statement. Unit sk-def-sf-operations is not on the route of sk-thm-properbasechange, and the unit's own prop-weil-pbc-direct-image-limits is scheme/pro-etale specific."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-trf-geometric-inverse-image-exact",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-9998766f4",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-9998766f4 (reviewer sub-agent of L); spot-checked: I read the whole split: 8 steps, 0 new nodes, statement unchanged. Every cited statement checks against what its step takes from it. Step 1: sectionwise rho = id, and the R_V-actions agree because a_U c_R = c_S u^-1 a_V. Step 2: enough K-injectives through lem-weil-pbc-diagram-site-realization plus prop-pur-kinjective-resolutions-exist. Step 3: an exact instance of lem-weil-pbc-kinjective-exact-square-comparison (H'=lim_S, H=lim_R, r,s = r_T, sH'=Hr literally); its normalization is the displayed lambda equation. Step 4: exactness of L_B from lem-trf-geometric-inverse-image-exact; with Delta -| lim exact levelwise, the 08BJ node gives that F_B, F_B^J and lim preserve K-injectives, without exact products. Step 5: I recomputed both n-th projections, and they agree by naturality of delta. Step 6: the kappa, d and chi unit equations are what the kappa node and lem-weil-pbc-flat-ringed-diagram-restriction state. Step 7: I redid the chase; both sides reduce to B^R Q(step-5 map). Step 8: reduction to QI by naturality. Stacks tags 0A07 and 08BJ check out; no SGA is used. lem-cbc-flat-scalar-direct-image-limit-coherence is a weaker special case (it assumes exact countable products), noted for the maintainer, not a fault. FIX: step 6 uses lem-weil-ringed-tower-pushforward-limit-comparison (unit sk-def-sf-operations, off route) without declaring it. I added it to split_report.tool_uses as an accepted generic 0A07 tool. I also accept the three declared tool uses. Corrected item: fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-flat-scalar-tower-limit-square.json.; 1 file(s) fixed by the reviewer"
  }
 }
