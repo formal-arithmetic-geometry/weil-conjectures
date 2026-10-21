@@ -16,9 +16,89 @@
   "def-weil-extension-by-zero-presheaf",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A_Z(F)=j_{Z!}j_Z^*F$. Use the additive adjunctions and restriction identifications of [lem-sp-subterminal-module-local-calculus]. In particular $j_U^*A_U(F)=F|_U$ and $j_U^*A_V(F)=k_{U!}(F|_W)$. Also $j_U^*A_W(F)=k_{U!}(F|_W)$: on an object $C\\to U$, the presheaf defining the left side before sheafification is $F(C)$ if $C\\to W$ exists and zero otherwise. This is exactly the presheaf defining the right side, with the same restriction maps and $R(C)$-action, by [def-weil-extension-by-zero-presheaf] and the relocalization of [def-pur-localized-ringed-site]. Restriction commutes with this sheafification by the cited local-calculus statement, so the equality of presheaves gives the canonical sheaf identification. Interchanging $U$ and $V$ gives $j_V^*A_V(F)=F|_V$ and $j_V^*A_U(F)=j_V^*A_W(F)=k_{V!}(F|_W)$.",
+   "uses": [
+    "lem-sp-subterminal-module-local-calculus",
+    "def-weil-extension-by-zero-presheaf",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU, lemma-exact-sequence-lower-shriek, proof: short exact sequence of complexes (agent generalization to subterminal slices, replacing stalks by the two local split calculations)."
+   }
+  },
+  {
+   "text": "Write $\\eta_Z$ for the unit of $j_{Z!}\\dashv j_Z^*$. By the definition of transpose, the image of $i_U$ under this adjunction for $W$ is $k_U^*\\eta_U(F|_U)$, after the sectionwise iterated-restriction identifications. Postcomposition with $\\epsilon_U(F)$ therefore gives transpose $j_W^*\\epsilon_U(F)\\circ k_U^*\\eta_U(F|_U)=k_U^*(j_U^*\\epsilon_U(F)\\circ\\eta_U(F|_U))=1_{F|_W}$, by the right triangle identity. The transpose of $\\epsilon_W(F)$ is also $1_{F|_W}$. Injectivity of the adjunction bijection proves $\\epsilon_U i_U=\\epsilon_W$. The identical computation with $V$ proves $\\epsilon_V i_V=\\epsilon_W$. Thus the proposed consecutive arrows compose to $\\epsilon_W-\\epsilon_W=0$. Only the adjunctions supplied by [lem-sp-subterminal-module-local-calculus] and their defining identities are used.",
+   "uses": [
+    "lem-sp-subterminal-module-local-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU, lemma-exact-sequence-lower-shriek, proof: short exact sequence of complexes (agent generalization to subterminal slices, replacing stalks by the two local split calculations)."
+   }
+  },
+  {
+   "text": "Let $L=k_{U!}(F|_W)$ and let $i:L\\to F|_U$ be its counit. Restrict the sequence to $U$ and use step 1. The unit identifications and their compatibility with counits and nested-open adjunction maps in [lem-sp-subterminal-module-local-calculus] send $\\epsilon_U$ to $1$, $\\epsilon_V$ to $i$, $i_U$ to $i$, and $i_V$ to $1_L$. For the last two assertions, the restricted transpose defining the nested-open map is respectively the identity of $F|_W$ under $k_{U!}\\dashv k_U^*$, and the unit transpose of the identity of $L$; hence these are precisely the counit $i$ and the identity. Consequently the restricted arrows are $(i,-1)$ and $(1,i)$. On $V$, writing $L^{\\prime}=k_{V!}(F|_W)$ and $i^{\\prime}:L^{\\prime}\\to F|_V$ for its counit, the same compatibility sends $i_U$ to $1_{L^{\\prime}}$, $i_V$ to $i^{\\prime}$, and the counits to $i^{\\prime}$ and $1$. The restricted arrows are therefore $(1,-i^{\\prime})$ and $(i^{\\prime},1)$, with exactly the signs asserted in the statement.",
+   "uses": [
+    "lem-sp-subterminal-module-local-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU, lemma-exact-sequence-lower-shriek, proof: short exact sequence of complexes (agent generalization to subterminal slices, replacing stalks by the two local split calculations)."
+   }
+  },
+  {
+   "text": "The local sequences of step 3 are split short exact by direct module calculations. On $U$ set $a(x)=(i(x),-x)$, $b(y,z)=y+i(z)$, $s(y)=(y,0)$ and $r(y,z)=-z$. Then $ba=0$, $ra=1$, $bs=1$, and $ar+sb=1$: indeed $ar(y,z)=(-i(z),z)$ and $sb(y,z)=(y+i(z),0)$. These equations show that $a$ is monic, $b$ is epic, and that every morphism $t$ killed by $b$ factors uniquely as $a(rt)$; hence $a$ is the kernel of $b$. On $V$ take $a^{\\prime}(x)=(x,-i^{\\prime}(x))$, $b^{\\prime}(y,z)=i^{\\prime}(y)+z$, $s^{\\prime}(z)=(0,z)$ and $r^{\\prime}(y,z)=y$. The same four equations hold, since $a^{\\prime}r^{\\prime}(y,z)=(y,-i^{\\prime}(y))$ and $s^{\\prime}b^{\\prime}(y,z)=(0,i^{\\prime}(y)+z)$. All formulas are module-linear sheaf maps in the abelian module categories of [def-weil-sheaf-of-modules-category]; they do not require the local counits $i,i^{\\prime}$ to be isomorphisms.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU, lemma-exact-sequence-lower-shriek, proof: short exact sequence of complexes (agent generalization to subterminal slices, replacing stalks by the two local split calculations)."
+   }
+  },
+  {
+   "text": "Apply the joint detection of exactness by $(j_U^*,j_V^*)$ in [lem-sp-subterminal-module-local-calculus] to the entire sequence with zero endpoints. Both restrictions are short exact by step 4, so the sequence on $\\mathcal E$ is exact at every term, including injectivity at $A_W(F)$ and surjectivity at $F$. The covering and small-site hypotheses are exactly those of that cited statement. No hypothesis that the topos has enough points is used.",
+   "uses": [
+    "lem-sp-subterminal-module-local-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU, lemma-exact-sequence-lower-shriek, proof: short exact sequence of complexes (agent generalization to subterminal slices, replacing stalks by the two local split calculations)."
+   }
+  },
+  {
+   "text": "For a module map $h:F\\to G$, let $A_Z(h)=j_{Z!}j_Z^*h$. Naturality of the adjunction counit gives $h\\epsilon_Z(F)=\\epsilon_Z(G)A_Z(h)$. The equality $A_U(h)i_U(F)=i_U(G)A_W(h)$ follows by taking $W$-transposes: it becomes $j_W^*A_U(h)\\,k_U^*\\eta_U(F|_U)=k_U^*\\eta_U(G|_U)\\,j_W^*h$, which is the restriction of the naturality identity for $\\eta_U$. The same argument applies to $i_V$. Thus both arrows of the sequence are natural in $F$. The additive functors in [lem-sp-subterminal-module-local-calculus] act on a cochain complex termwise. Apply these naturality equations to $h=d_K^r$ to see that $(i_U,-i_V)$ and $(\\epsilon_U,\\epsilon_V)$ commute with every differential. Functoriality sends $d_K^{r+1}d_K^r=0$ to zero, so these are complexes and maps in the sense of [def-weil-abstract-derived-category]. Step 5 applied to each $K^r$ gives degreewise short exactness. Applied to the components of a cochain map, the same equations give the asserted naturality in cochain maps.",
+   "uses": [
+    "lem-sp-subterminal-module-local-calculus",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU, lemma-exact-sequence-lower-shriek, proof: short exact sequence of complexes (agent generalization to subterminal slices, replacing stalks by the two local split calculations)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-subterminal-module-local-calculus",
+  "def-weil-extension-by-zero-presheaf",
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BU (lemma-exact-sequence-lower-shriek), proof; agent supplies the subterminal-site local split calculation using the existing local-calculus node instead of ringed-space stalks."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -54,10 +134,59 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.ShortExact\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the associated short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commutati\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), S.shortComplex.Exact\", \"doc\": \"Given a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the associated short complex in the category of sheaves on $ \\\\mathcal{C} $ with values in\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {J : CategoryTheory.GrothendieckTopology C} →\\n      [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] →\\n        [CategoryTheory.HasSheafify J AddCommGrpCat] →\\n          J.MayerVietorisSquare → CategoryTheory.ShortComplex (CategoryTh\", \"doc\": \"Given a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, this constructs a short complex in the category of sheaves on $\\\\mathcal{C}$ with values in additive commut\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₂ =\\n    ((CategoryTheory.presheafToSheaf \", \"doc\": \"In a category $\\\\mathcal{C}$ equipped with a Grothendieck topology $J$, for a Mayer-Vietoris square $S$, the second object $X_2$ of the associated Mayer-Vietoris short complex in the category of sheave\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₃ =\\n    (CategoryTheory.presheafToSheaf J\", \"doc\": \"The third object $X_3$ in the Mayer-Vietoris short complex associated to a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$ is given by sheafifying the Yoneda embed\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.X₁ =\\n    (CategoryTheory.presheafToSheaf J\", \"doc\": \"For a Mayer-Vietoris square $ S $ in a category $ \\\\mathcal{C} $ equipped with a Grothendieck topology $ J $, the first object $ X_1 $ of the associated Mayer-Vietoris short complex is given by sheafif\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare),\\n  S.shortComplex.g =\\n    CategoryTheory.Limits.biprod.desc\\n\", \"doc\": \"For a Mayer-Vietoris square $S$ in a category $\\\\mathcal{C}$ with Grothendieck topology $J$, the second differential $g$ in the associated short complex of sheaves with additive commutative group coeff\"}\n  {\"name\": \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.instEpiSheafAddCommGrpCatGShortComplex\", \"module\": \"Mathlib/CategoryTheory/Sites/MayerVietorisSquare\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {J : CategoryTheory.GrothendieckTopology C}\\n  [inst_1 : CategoryTheory.HasWeakSheafify J (Type v)] [inst_2 : CategoryTheory.HasSheafify J AddCommGrpCat]\\n  (S : J.MayerVietorisSquare), CategoryTheory.Epi S.shortComplex.g\", \"doc\": \"In the category of sheaves on a Grothendieck topology with values in additive commutative groups, the differential $ g $ from the second to third object in the Mayer-Vietoris short complex is an epimo\"}",
    "date": "2026-10-21",
    "verdict": "No match. Read CategoryTheory/Sites/MayerVietorisSquare.lean:231-265: its objects are free abelian sheaves on representables, not extensions of an arbitrary R-module F. SheafOfModules.instAbelian supplies the abelian category but not the canonical natural module sequence or its two local normal forms."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, ShortComplex.ShortExact",
+   "results": "No hits. loogle: unknown identifier 'ShortComplex.ShortExact'",
+   "date": "2026-10-21",
+   "verdict": "Inconclusive query: Loogle did not recognize the unqualified ShortComplex.ShortExact; followed by the fully qualified MayerVietorisSquare query."
+  },
+  {
+   "tool": "grep",
+   "query": "MayerVietoris|extensionByZero|lowerShriek",
+   "results": "No hits. Searched Mathlib/Algebra/Category/ModuleCat.",
+   "date": "2026-10-21",
+   "verdict": "No match: the MayerVietorisSquare declarations concern free abelian sheaves on representables (Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231-265), not the arbitrary R-module sequence and local normal forms of this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The extension by zero sequence for a binary open cover is short exact for every sheaf of modules",
+   "results": "CategoryTheory.ShortComplex.ShortExact.exact; CategoryTheory.ShortComplex.Exact.recOn; CategoryTheory.ShortComplex.Exact.casesOn; CategoryTheory.ShortComplex.ShortExact; CategoryTheory.ShortComplex.ShortExact.mk; CategoryTheory.ShortComplex.ShortExact.map_of_exact; CategoryTheory.ShortComplex.HomologyData.exact_iff; CategoryTheory.ShortComplex.HomologyData.exact_iff_i_p_zero",
+   "date": "2026-10-21",
+   "verdict": "No match: hits are general short-complex definitions and functoriality; none states the extension-by-zero sequence of arbitrary module sheaves."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For sheaves of modules on a site a covering pair of subterminal objects gives a natural short exact Mayer Vietoris sequence using extension by zero",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g",
+   "date": "2026-10-21",
+   "verdict": "No match: the MayerVietorisSquare declarations concern free abelian sheaves on representables (Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231-265), not the arbitrary R-module sequence and local normal forms of this item."
+  },
+  {
+   "tool": "grep",
+   "query": "shortComplex_shortExact|shortComplex :|def shortComplex",
+   "results": "231; 265 Searched Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean.",
+   "date": "2026-10-21",
+   "verdict": "No match: the MayerVietorisSquare declarations concern free abelian sheaves on representables (Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231-265), not the arbitrary R-module sequence and local normal forms of this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.toSquare; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.SheafCondition; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mono_f₁₃; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_of_sheaf; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.sheafCondition_iff_comp_coyoneda; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk'; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex",
+   "date": "2026-10-21",
+   "verdict": "No match: the MayerVietorisSquare declarations concern free abelian sheaves on representables (Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231-265), not the arbitrary R-module sequence and local normal forms of this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mayer Vietoris short exact sequence for arbitrary module sheaves from a binary subterminal cover of a ringed topos, extension by zero on the intersection",
+   "results": "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₂; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_g; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₁; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_X₃; CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_f",
+   "date": "2026-10-21",
+   "verdict": "No match: the MayerVietorisSquare declarations concern free abelian sheaves on representables (Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:231-265), not the arbitrary R-module sequence and local normal forms of this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-ringed-topos-binary-descent",
@@ -74,5 +203,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-subterminal-cover-module-ses",
+  "worker": "stage1",
+  "summary": "Q15: retained the statement and earlier searches, checked the general-site hypotheses against the existing subterminal local-calculus node, and supplied the adjunction counit calculation, both local normal forms, explicit split kernel identities, local-to-global exactness, and naturality on complexes. No new nodes and no Lean attachment.",
+  "blueprint": "det-sp-tower-gluing, chart-gluing assertion (1) and the unit sk-prop-sp-tower-geometric step 5 (Charts and gluing): the open-cover module sequence underlying its lower-shriek triangle, extracted via lem-sp-ringed-topos-binary-descent. The present split supplies that sequence without changing the tower-adjunction route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-2ab5db7b1",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-2ab5db7b1 (reviewer sub-agent of L); spot-checked: I read the Q15 split of lem-sp-subterminal-cover-module-ses in full. It has 0 new nodes and the statement is byte-identical to the live node. There is no repair note, the item is not on the dropped list, and nothing cites SGA. Source: Stacks cohomology.tex Tag 08BU (lemma-exact-sequence-lower-shriek), whose stalk check says 'computation omitted'. The delivery replaces it with two slice calculations plus joint detection of exactness, and proof_origin=agent is correct. Every non-elementary input comes from the stated hypotheses and adjunction/identification clauses of the unsplit same-unit node lem-sp-subterminal-module-local-calculus. Step 1: j_U^*j_{W!}=k_{U!}(F|_W) holds because U is subterminal (C→W exists iff C→V when C→U); I checked this against the special case of def-weil-extension-by-zero-presheaf. Step 2: the triangle identity gives ε_U i_U=ε_W. Step 3: I recomputed the local forms (i,−1),(1,i) on U and (1,−i'),(i',1) on V at presheaf level. Step 4: all eight split identities check. Step 5 applies joint detection to the whole sequence with zero ends. Step 6 covers naturality and complexes. Edge cases checked: U=V=1, empty overlap, F=0, characteristic 2. I found no duplicate among about 30 subterminal or open-cover nodes, and the Mathlib MayerVietoris SES is for free abelian sheaves only. The only citer is parent clause (2), with matching signs, and there is no cycle. One minor point needs no action: the A_W restriction identification is built by hand in step 1 rather than taken from the local-calculus node, but it is correct."
  }
 }

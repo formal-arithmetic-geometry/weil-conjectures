@@ -1,0 +1,47 @@
+## Worker report
+
+File written: dag/nodes/sec-smooth-purity/lem-sp-subterminal-cover-module-ses.json (statement, now split; no exact Mathlib match). Also wrote citations.json with a verbatim statement excerpt for every proof citation. The sandbox was initially empty of item, split, report and search log, so the live item was copied before editing. Its statement, statement dependencies, source, creation metadata and earlier Mathlib searches are retained.
+
+## New nodes
+
+None: 0 new nodes, 0 new Mathlib leaves. The substantive site machinery is already stated by lem-sp-subterminal-module-local-calculus in the same unit. The proof uses its statement, not its still-empty proof. The present item remains distinct from that general calculus: it constructs and verifies the specific signed binary-cover sequence and its naturality.
+
+## Attachments
+
+None. Searched all project WeilConjectures sources for the item tag, subterminal/binary-cover terminology, and extension-by-zero/Mayer–Vietoris notions. Read WeilConjectures/Algebra/Homology/OpenCoverMateModuleShortExact.lean:58 onward and the generic transpose/naturality helpers in OpenCoverMateComplexShortExact.lean:30 onward. The public short-exactness declarations concern a RingedSpace and its topological opens; they do not state the small-site/subterminal assertion here. The generic private helpers account for only the transpose identities, not this item's other clauses, so they do not attach the item.
+
+## WANTED
+
+None. All sources used are available locally. No SGA source is used.
+
+## Findings and changes
+
+The imported/extracted item had no proof. Its statement is valid as written and is unchanged. Stacks Tag 08BU (cohomology-lemma-exact-sequence-lower-shriek) proves the corresponding derived triangle on a ringed space by a module short exact sequence and omits the stalk computation. It does not itself assert the general-site statement. Accordingly proof_origin is agent: the extension from the source uses the existing local-calculus lemma and two explicit split calculations, without assuming enough points. The unit's Charts and gluing step 5 uses the open-cover cone; this item supplies its underived short exact sequence and stays within that route. No unit record is changed because this item is not its key statement.
+
+Blueprint searches with tools/blueprint_refs.py for subterminal, lower-shriek and Mayer, plus whole-DAG tag/keyword searches, found no blueprint node stating this full general-site result; same_as remains empty. The ancestor is det-sp-tower-gluing, via lem-sp-ringed-topos-binary-descent. I read the current main-20261015 gluing file, chapter and unit records. The topological nodes lem-sc-open-cover-mate-module-short-exact and its core are narrower, and the parent lem-sp-ringed-topos-binary-descent cites this item, so it must not be used to prove it.
+
+Mathlib searches were run through msearch.py with the actual queries recorded in searches.jsonl and appended to the item's existing mathlib_searches. Two LeanFinder phrasings lead to CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact. I read Mathlib/CategoryTheory/Sites/MayerVietorisSquare.lean:225-266: the objects are sheafified free abelian groups on representables, rather than arbitrary R-modules extended from opens. Loogle's first query used an unrecognized unqualified identifier and is explicitly recorded as inconclusive; the second fully qualified query succeeds and shows the same free-abelian result. LeanSearch returns abstract short-complex definitions/functoriality. The grep in Algebra/Category/ModuleCat finds no requested extension/Mayer–Vietoris declaration; the targeted grep and source read confirm the free-abelian candidate. None is an exact or one-line specialization of this item. No search is invented or recorded as unavailable when it ran.
+
+Nothing remains unfinished in this one-level split. The dependency lem-sp-subterminal-module-local-calculus is an existing unsplit item to be handled independently.
+
+## Not duplicates
+
+No nodes were created. Existing ringed-space short exactness nodes are restricted to topological opens; this item is for small subcanonical sites and subterminal slices. The parent binary-descent node is a derived gluing/triangle theorem and depends on this item, not conversely.
+
+## Review by Q15
+
+I read cohomology.tex, Tag 08BU, label lemma-exact-sequence-lower-shriek, including the omitted-computation sentence. I also read sites-modules.tex, Tag 03DI (lemma-extension-by-zero, its explicit presheaf and adjunction), Tag 03DJ (lemma-extension-by-zero-exact), and Tag 0F6Z (lemma-restrict-back); checked those tag/label correspondences in tags/tags; and opened the full statements of all six cited DAG nodes. There are no new-node sources to certify. The source's ringed-space hypothesis is not silently treated as a general-site theorem: the proof is marked as an agent generalization, using the already-stated site calculus.
+
+Step 1 uses lem-sp-subterminal-module-local-calculus for the two intersection exchanges, the identity-on-the-open identifications, and restriction/sheafification compatibility. It uses def-weil-extension-by-zero-presheaf for the value, restriction map and scalar action of the zero-or-single-summand presheaf, and def-pur-localized-ringed-site for iterated restriction. These statements explicitly supply those facts. For the left term on U, an object C mapping to U maps to W precisely when it also maps to V, so the same extension presheaf inside the U slice gives k_U!; the symmetric calculation gives the V formula. Subterminality is essential here and is in force. There is no claim that un-sheafified zero extension is already a sheaf.
+
+Step 2 uses the actual adjunction supplied by local calculus. I checked the transpose direction: i_U has source j_W!(F|W), and its transpose is the restricted U-unit with target j_W* A_U(F). Postcomposition with the U-counit is transposed to the restricted right triangle identity. Thus the result is the W-counit, not merely some map with equal restrictions. The V calculation is the same; subtraction gives zero. This is an elementary calculation from the adjunction identities, not an extra lemma extracted into a new node.
+
+Step 3 uses the local-calculus statement's explicit compatibility with units, counits and nested-open maps. Its statement, not just its source, says this compatibility. Along with step 1 this identifies the actual maps, including i_V restricted to U as the identity on L and i_U restricted to V as the identity on L'. The other nested map is the appropriate slice counit by its identity transpose. Therefore the U sequence has (i,-1),(1,i), whereas V has (1,-i'),(i',1). No coefficient change is being made: each map is linear over the corresponding restricted R.
+
+Step 4 uses only the abelian module-category structure explicitly stated by def-weil-sheaf-of-modules-category, and writes four elementary equations for each local sequence. The equations exhibit a kernel directly: if bt=0 then t=art, with uniqueness from ra=1. The section s gives epimorphy, without assuming global surjectivity of an arbitrary sheaf epimorphism. The formulas require no injectivity or invertibility of i or i'. This is a calculation with biproduct sheaf maps, so there is no hidden passage from sectionwise surjectivity to sheaf exactness.
+
+Step 5 uses exactly the sentence in lem-sp-subterminal-module-local-calculus saying the pair jointly detects exactness of module sequences. I applied it to the sequence with zero endpoints as well, so monicity and epimorphy are covered, rather than only middle exactness. Both U,V are subterminal, their pair covers 1, W exists by finite limits, and the site is small and subcanonical as that node requires. Enough points, scheme hypotheses and stalk comparisons are unnecessary.
+
+Step 6 uses the local-calculus adjunctions and additive termwise functors, together with the cochain-complex and cochain-map definitions in def-weil-abstract-derived-category. I checked both counit and transpose naturality equations explicitly. Substituting d_K in those equations gives commutation with differentials, and substituting a cochain map's components gives naturality of the short exact sequence of complexes. Functoriality and additivity preserve the differential-square-zero relation. There is no appeal to a derived gluing theorem or to the parent item.
+
+Against delivery-errors B–E: there are no new statement-only nodes or duplicate/hollow definitions; the existing statement introduces all objects and keeps its TeX and hypotheses; every non-elementary input is in the opened local-calculus statement; every step citation has its exact excerpt in citations.json. The argument supplies the actual two local split proofs rather than relabelling the conclusion or repeating the source's omitted stalk calculation. No new node restates a clause. All six proof steps are under 2000 characters and none hides an independent non-elementary comparison. Edge cases checked: F=0, U=V=1, one open equal to 1, an empty open in the ringed-space specialization, and disjoint opens. For U=V=1 the sequence is the signed diagonal followed by addition; when the overlap is empty the local L is zero; the same four equations still apply, including characteristic 2 where minus equals plus. No nonempty-overlap hypothesis is introduced. No statement dispute was found and no mathematical correction to the imported statement was needed.
