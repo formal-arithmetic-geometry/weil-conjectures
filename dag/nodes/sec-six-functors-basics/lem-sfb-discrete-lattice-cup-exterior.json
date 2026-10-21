@@ -188,5 +188,43 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-79608c406 (reviewer sub-agent of L); spot-checked: FIX: I read the item, the new node, all cited statements and the blueprint source in full. Item statement unchanged from the live/side-live text; not dropped or superseded; no repair note; no SGA. Source: blueprint main-20261015 direct-images proof paragraph (3), which assembles proper/open images and has no lattice calculation, so the agent proof_origin and the WANTED line are right. Step 1: Koszul resolution with T_i=1 has zero differential, so K_R(R;1)=E_{R,r} and lambda restricts to the unit in degree 0. Step 2: E_i matches the restriction-calculus extension j(x,y)=(x+a(j)y,y); split degreewise, not equivariantly. Step 3: I recomputed the split boundary s^0 d r^1 (diagrammatic): (T_j-1)(0,1)=(1_{j=i},0), so the Koszul boundary composed with u_empty is u_{i}[1]. With lem-sc-p1 (accepted generic tool use) and the new node's triangulated compatibility this gives delta_i=lambda u_{i} as derived maps. Step 4: with trivial action, u_A star u_C = eps(A,C) u_{A cup C}, and eps=+1 when appending a larger index; induction is fine. Step 5: biproduct universal property; r=0 and the zero ring checked. New node: statement only, self-contained, not a restatement of the item; DAG search found no duplicate. Truth: K_R = Hom_{R[D]}(Kos,-) is exact and agrees with Gamma on injectives, so the comparison is unique and triangulated. I checked by machine that the twisted pairing satisfies Leibniz and is associative and unital (r=3, B = Z-valued functions on (Z/3)^3 with translations). Change (B3/C4): added one sentence to lem-sfb-lattice-koszul-triangulated-cup-comparison saying that for B=R with trivial action cup_R is the unital derived cup of lem-sfb-condensed-derived-restriction-calculus, which item step 4 needs. Advisory: the identification R[-1]^{tensor q} = R[-q] in the inherited item statement is implicit; step 4 uses the same one on both sides.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.DiscreteLatticeCupExterior",
+  "declaration": "Profinite.DiscreteLatticeCup.discrete_lattice_cup_exterior",
+  "declarations": [
+   "Profinite.DiscreteLatticeCup.Lattice",
+   "Profinite.DiscreteLatticeCup.regular",
+   "Profinite.DiscreteLatticeCup.shiftedRegular",
+   "Profinite.DiscreteLatticeCup.coordinateCharacter_exists",
+   "Profinite.DiscreteLatticeCup.coordinateCharacter",
+   "Profinite.DiscreteLatticeCup.coordinateClass",
+   "Profinite.DiscreteLatticeCup.regularSplit",
+   "Profinite.DiscreteLatticeCup.splitShift",
+   "Profinite.DiscreteLatticeCup.orderedCup",
+   "Profinite.DiscreteLatticeCup.complexBiproducts",
+   "Profinite.DiscreteLatticeCup.exteriorSummand",
+   "Profinite.DiscreteLatticeCup.exteriorComplex",
+   "Profinite.DiscreteLatticeCup.exteriorObject",
+   "Profinite.DiscreteLatticeCup.subsetCup",
+   "Profinite.DiscreteLatticeCup.cupMap",
+   "Profinite.DiscreteLatticeCup.discrete_lattice_cup_exterior",
+   "Profinite.DiscreteLatticeCup.rankZeroInclusion",
+   "Profinite.DiscreteLatticeCup.rank_zero_identity"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/DiscreteLatticeCupExterior.lean",
+  "statement": "theorem discrete_lattice_cup_exterior (r : ℕ) : IsIso (cupMap A r)",
+  "branch": "sheaf-dag",
+  "by": "N0",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bb57363d8",
+  "group": "N0",
+  "result": "pass",
+  "note": "Item node unchanged except lean; lean.statement verbatim (line 152) and all 18 declarations recorded. Clause check: A : CondensedBar.Ring.{u} (no extra hypotheses, zero ring allowed); D = ULift.{u}(Multiplicative(Fin r→ℤ)) discrete; RΓ = dependency's cohomology A (Lattice r) on the trivial regular coefficient; δ_i = characterClass of coordinateCharacter, which is Classical.choose of a true ∃! (sectionwise n_i·1 on constant-coordinate sections, determined by clopen fibre covers plus naturality); exteriorComplex is the real finite biproduct of shifted single complexes with zero differential; orderedCup takes increasing-order cups with the empty word as the unit, via canonical shiftTensorShiftIso and regularSplit; cupMap = biproductComparison Q ≫ desc(commShiftIso ≫ subsetCup); conclusion IsIso(cupMap) is the derived form; rank_zero_identity has its iso e pinned by cupUnit≫e.hom = baseUnitIso.hom. Docstrings with source/blueprint and the 5-step proof present; imports follow rule 7 (statement deps public, proof deps plain); all proofs sorry; no lines over 100 chars. Report has Worker report and Second reading by N0. Advisory: Lattice could reuse DiscreteLattice.Group r under ULift; the R[-1]^{⊗q}≅R[-q] identification is implicit in the node and the canonical upstream iso is used. No compile run (no file changed); worker reports clean 50.9 s."
  }
 }
