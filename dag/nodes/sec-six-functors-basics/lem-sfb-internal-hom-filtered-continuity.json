@@ -15,22 +15,30 @@
  ],
  "proof": [
   {
-   "text": "Tensor preserves sheaf colimits. Each T_i is finite-free, so tensor by T_i is exact. Taking an exact filtered colimit of short exact sequences proves tensor by S is exact. It preserves eta_L; quasi-isomorphism invariance of F then proves (i). Tensor-colimit preservation in every degree proves (iii).",
+   "text": "Install the recorded independent-universe sheaf tensor and its proved colimit-preservation/additivity API. For a finite power of the unit, tensor is a finite product of the identity: use preservation of finite products by additive tensor functors, curriedTensor, and limitIsoFlipCompLim. Finite limits commute with this finite product, including the empty product. For the coefficient colimit S, identify tensorLeft S with the pointwise colimit of tensorLeft T_i by preservesColimitIso and colimitIsoFlipCompColim. Pointwise finite-limit preservation at the stages and exactness of the given I-colimit give finite-limit preservation by tensorLeft S. Tensor already preserves finite colimits, so all these tensor functors are exact.",
    "uses": [
     "lem-weil-pbc-independent-sheaf-tensor-colimits",
     "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use mapBifunctorSingle₁Iso and its naturality to identify degree-zero total tensor by a module with termwise tensorLeft. Consequently the exact stage and colimit tensor functors preserve the resolution augmentation quasi-isomorphism. The fixed K-injective resolution functor preserves quasi-isomorphisms by naturality of its augmentation and two-out-of-three. Apply the universe-general quasiIso_homComplex_mapOfUniverses with identity on P to prove homFixed(P) preserves every quasi-isomorphism. This proves the roof denominator at S. K-flatness of P is not needed in this continuity subargument; its binder is retained unchanged.",
+   "uses": [
+    "def-pur-hom-complex",
     "prop-pur-kinjective-resolutions-exist",
     "lem-pur-rhom-well-defined-universes"
    ],
    "elementary": true
   },
   {
-   "text": "The complexes T_i tensor L have common lower bound b, up to the canonical degree-zero total-tensor identification; the definition of Continuous gives the corresponding cocone map a quasi-isomorphism. The maps F(T_i tensor eta_L) are quasi-isomorphisms by exact finite-free tensor and invariance of F. Exact filtered colimits preserve their quasi-isomorphisms. Naturality gives lambda_J colim(v_i)=v_S lambda_L. The right side and colim(v_i) are quasi-isomorphisms, so two-out-of-three proves (ii). This transports continuity to J and does not apply Continuous directly to the possibly unbounded J.",
+   "text": "The degree-zero tensor identification gives the common lower bound b on M_i=T_i tensor L. Apply the supplied Continuous(P) to M. Let N_i=T_i tensor I_R(L), with augmentation natural transformation alpha:M->N. The components of alpha and their images under homFixed(P) are quasi-isomorphisms by the preceding step. Exact I-colimits preserve both families. The colimit.post naturality square reads colim(alpha mapped by H) followed by post(N,H) equals post(M,H) followed by H(colim alpha). Two-out-of-three therefore proves post(N,H) is a quasi-isomorphism, without a bound on I_R(L). Finally colimit.post_post and preservation of coefficient colimits by degree-zero total tensor identify this with the requested coefficient cocone map. The same tensor preservation proves the last IsIso conclusion for H(L), with no boundedness assumption on H(L).",
    "uses": [
-    "def-pur-hom-complex",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-rhom-well-defined-universes",
-    "def-weil-pbc-category-colimit"
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-weil-pbc-category-colimit",
+    "def-pur-sheaf-tensor-product",
+    "lem-pur-rhom-well-defined-universes"
    ],
    "elementary": true
   }
@@ -45,8 +53,10 @@
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "M1",
+  "date": "2026-10-21",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Subargument of lem-sfb-dc-hom-filtered-colimit, steps 2--9, with strict representative normalizations retained."
+  "place": "Existing ring-sheaf continuity argument, steps 2--3 and 8--9; direct Lean implementation using finite products, exact colimits and augmentation naturality. No lower truncation is needed because L is already supplied termwise bounded below."
  },
  "mathlib_searches": [
   {
@@ -125,11 +135,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-b5c9a",
-  "group": "R6",
+  "reviewer": "COMPILER",
+  "group": "M1",
   "result": "pass",
-  "landing": "20261021T005750-L-1889871",
+  "landing": "20261021T012406-L-2184948",
   "kind": "interface",
-  "note": "independent cc review: moved Modules..Continuous block byte-identical to live (modulo blueprint tags, same file options); filteredColimit_comparison signature unchanged, proof complete from finite-free stage + filtered continuity (both checked true) + exact-colimit quasiIso stability + 2-of-3; all 4 modules compile (item 33.2 s at 560 s limit vs published 36.8 s; 60 s timeout was load ~85); axioms propext/Classical.choice/Quot.sound/sorryAx; 0 importers"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
