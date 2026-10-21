@@ -19,124 +19,69 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-proetale-weakly-etale-localization], composition with $u$ identifies $U_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/U$, including coverings. Hence the sheaf $F|_U$ of [def-pur-localized-ringed-site] has values $F(V\\to X)$ and restrictions $F(b)$ on arrows $b:V^{\\prime}\\to V$ over $U$. This applies to sets, abelian groups, rings and modules over the restricted ring; neither the equivalence nor this description requires $U$ to be noetherian.",
+   "text": "Use the actual object inverse-image/restriction comparison. The graph-mate evaluation identifies its continuous coefficient map with the canonical pullback on the same continuous functions. Naturality gives coefficient postcomposition and constant-section normalization.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09AE, definition-extension-zero, localization at a site object; sites.tex Tags 00XZ/00Y0 and sites-modules.tex Tag 04IX"
-   }
-  },
-  {
-   "text": "Compute the construction of [def-weil-proetale-inverse-image] at $s:V\\to U$. An object of $\\mathcal I_V$ is $(W\\to X,\\phi:V\\to U\\times_XW)$; write $a=\\operatorname{pr}_W\\phi$, so $\\phi=(s,a)$. By clause (1) of [lem-sfb-proetale-object-inverse-image-restriction], applied to the site object $u:U\\to X$, the object $i_0=(V\\to X,(s,\\mathrm{id}_V))$ is initial in $\\mathcal I_V$, its unique arrow to $(W,\\phi)$ being $a:V\\to W$; the coprojections at these objects give an isomorphism of presheaves $F|_U\\cong u_{u,p}F$, natural in $F$, and the sheafification unit $u_{u,p}F\\to u^{-1}F$ is an isomorphism, for sheaves of sets, abelian groups and rings. Explicitly, since $i_0$ is terminal in $\\mathcal I_V^{\\mathrm{op}}$, the inverse of the coprojection at $i_0$ sends the coprojection of $z\\in F(W)$ to $F(a)(z)$. For $b:V^{\\prime}\\to V$ over $U$, replacing $a$ by $ab$ gives $F(ab)=F(b)F(a)$, so these isomorphisms agree with the restriction maps of Step 1. By the universal property of [def-weil-pbc-sheafification] the identification $u^{-1}F\\cong F|_U$ is the unique extension of this presheaf isomorphism across the sheafification unit. This proves the asserted normalization for the actual inverse image, not merely existence of an abstract isomorphism.",
-   "uses": [
-    "def-weil-proetale-inverse-image",
     "lem-sfb-proetale-object-inverse-image-restriction",
-    "def-weil-pbc-sheafification"
+    "lem-sfb-localized-ring-mate-graph-evaluation",
+    "def-sfb-continuous-coefficient-pullback-maps"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00VC, section-functoriality-PSh, equation-colim-category and presheaf inverse image; Tag 00XZ, section-localize"
-   }
+   "elementary": false
   },
   {
-   "text": "For $T=A,E$, [lem-weil-pbc-continuous-ring-functions-sheaf] supplies the sheaf $T_W(V)=C(|V|,T)$ on every scheme $W$. Its restrictions are precomposition by definition [def-weil-pbc-lisse-lattice-coefficients]. For the continuous coefficient structural map, a representative $z:|W|\\to T$ at $(W,(s,a))$ maps to $z\\circ |a|$. Indeed its direct-image adjoint first pulls $z$ back along $U\\times_XW\\to W$, and then evaluation along $(s,a)$ gives precisely this function. At $i_0$ it is $z$ itself. Thus the identification in Step 2 sends $u^{-1}T_X$ to $T_U$ identically on functions and respects pointwise operations. For every continuous coefficient homomorphism $h:T\\to T^{\\prime}$, the equality $h\\circ(z\\circ |a|)=(h\\circ z)\\circ |a|$ proves compatibility with coefficient postcomposition. It applies to $A\\to E$ and $A\\to A/\\varpi^n$. A constant function remains the same constant. For each finite discrete ring $A/\\varpi^n$, [lem-pur-proetale-finite-constant-sections] gives ring isomorphisms $\\theta_{W,V}:(A/\\varpi^n)_W(V)\\cong C(|V|,A/\\varpi^n)$ on every scheme $W$, sending constants to constants and compatible with precomposition; so the coefficient projection $A_W\\to(A/\\varpi^n)_W$ is postcomposition with $A\\to A/\\varpi^n$ followed by $\\theta^{-1}$. Under Step 2, $\\theta_{X}$ and $\\theta_U$ are both evaluated on the same $V$, so they correspond. Clause (2) of [lem-weil-proetale-weakly-etale-localization] (equivalently clause (2) of [lem-sfb-proetale-object-inverse-image-restriction]) identifies restriction of the constant sheaf with the constant sheaf on $U$ by this constant-section map. Its uniqueness proves that quotient transitions also commute. Hence the coefficient projections are preserved as sheaf maps, including their sheafification units.",
+   "text": "For each finite coefficient quotient, the canonical constant comparison is invertible by pro-etale profinite coefficient inverse image. Its naturality gives transitions; the constant-to-continuous comparison and adjunction naturality identify residue projections. The same naturality gives the integral-to-rational inclusion.",
    "uses": [
-    "lem-weil-pbc-continuous-ring-functions-sheaf",
-    "def-weil-pbc-lisse-lattice-coefficients",
-    "lem-pur-proetale-finite-constant-sections",
-    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-profinite-coefficient-inverse-image",
+    "def-sfb-continuous-coefficient-pullback-maps"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The continuous residue cone is a limit. Transport its unique comparison to the chosen finite-constant-sheaf limit across the discrete-continuous coefficient isomorphism. The localization theorem supplies the normalized rational comparison. Conjugating coefficient pullback by these comparisons gives completed pullback and its projection equations.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-completion",
+    "lem-weil-pbc-continuous-coefficient-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Literal module restriction is additive by the sectionwise formula. Its underlying presheaf functor preserves finite limits and reflects them; cocontinuity of composition with a pro-etale object gives its left-adjoint property and hence preservation of colimits. The generic graph mate and the map/pullback adjunction identify this exact restriction with the chosen module inverse image by uniqueness of left adjoints, with the canonical unit on sections. Map the comparison to complexes and derived categories; the standard derived comparison square gives the required normalization.",
+   "uses": [
+    "lem-sfb-localized-ring-mate-graph-evaluation",
     "lem-sfb-proetale-object-inverse-image-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.1 and Lemma 6.8.2, pp. 58-59; explicit evaluation of the inverse-image adjoint"
-   }
+   "elementary": false
   },
   {
-   "text": "For the noetherian $X$ of the statement, [lem-weil-pbc-continuous-coefficients-immersion-restriction] identifies $B_X$ with $A_X$ and its sheaf localization at $\\varpi$ with $E_X$. Combining these identifications with Steps 2-3 gives $u^{-1}B_X\\cong A_U$ and $u^{-1}E_X\\cong E_U$. In particular this is not an assertion that an arbitrary inverse image commutes with an infinite limit: here slice restriction is evaluation on the same $V$, so it preserves the sectionwise inverse-limit cone. The projections of the restricted cone are exactly the projections in Step 3. The localization comparison of [lem-weil-pbc-localization-inverse-image-coherence] sends $z/\\varpi^r$ to the restricted $z$ divided by the same constant $\\varpi^r$, so its rational coefficient identification agrees with Step 3. No noetherian assertion about $U$ was used.",
+   "text": "Scalar extension along a ring-sheaf isomorphism is restriction along its inverse, with the specified pure tensor formula. Transfer exactness across this isomorphism. Uniqueness of the left derived functor of an exact functor supplies its derived comparison with the canonical counit. The ordinary pullback identification and derived composition give ExactPull. For etale maps use their pro-etale site object, and for immersions use the existing continuous coefficient pullback isomorphism.",
    "uses": [
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-weil-pbc-localization-inverse-image-coherence"
+    "lem-weil-sheaf-scalar-extension-ring-iso",
+    "lem-weil-pbc-continuous-coefficient-pullback-isIso"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1),(2), pp. 58-59; sites-modules.tex Tags 03EL/03CZ, coefficient localization"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-localization-inverse-image-coherence] to the geometric morphism of Step 2 and either coefficient ring: module inverse image over its inverse-image ring is exact and its derived functor is termwise inverse image, with no bound on the complex. Since Step 3 identifies that ring with the continuous coefficient ring on $U$, module restriction is exact and is derived termwise. More explicitly, whenever a structural coefficient map $c:g^{-1}R\\xrightarrow{\\sim}S$ is an isomorphism, the scalar-extension map $S\\otimes_{g^{-1}R}g^{-1}M\\to g^{-1}M$, $b\\otimes m\\mapsto c^{-1}(b)m$, has inverse $m\\mapsto1\\otimes m$ after transporting the module action along $c$. The balancing relation proves the two identities. Consequently extension of scalars along $c$ is exact, and its derived tensor is this same inverse image on complexes. The cited comparison commutes with the specified ring identification, so all coefficient normalizations from Steps 3-4 persist on modules and derived categories.",
+   "text": "Apply the generic normalized scalar-extension/slice comparison separately to integral and rational coefficient rings. Its ordinary, section, complex, derived and counit fields give Ambient directly; this is a genuinely coefficient-independent part of the argument.",
    "uses": [
-    "lem-weil-pbc-localization-inverse-image-coherence"
+    "lem-per-proetale-scalar-slice-comparison"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EL/03CZ, tensor pullback and scalar adjunction; exact inverse image over the pulled-back ring"
-   }
-  },
-  {
-   "text": "For an etale $g:X^{\\prime}\\to X$, [def-weil-etale-morphism] says that $g$ is flat and unramified, and [def-weil-unramified-morphism] gives an open diagonal. An open immersion identifies local rings by [def-weil-open-immersion], hence is flat by [def-weil-flat-morphism] (a ring is free of rank one over itself). Thus $g$ has flat diagonal and is weakly etale by [def-weil-weakly-etale-morphism], so $X^{\\prime}\\to X$ is a site object. Apply Steps 2-5 with $U=X^{\\prime}$. Both schemes are noetherian by hypothesis, so Step 4 on each of them gives the stated isomorphisms $g^{-1}B_X\\cong B_{X^{\\prime}}$ and $g^{-1}E_X\\cong E_{X^{\\prime}}$ with the finite-quotient maps of Step 3. Step 5 then gives the displayed derived-tensor formula as exact ordinary inverse image. For a locally closed immersion $g$, use instead the isomorphisms induced by pullback of continuous functions in [lem-weil-pbc-continuous-coefficients-immersion-restriction], and apply Step 5 to its geometric inverse image. Those maps preserve constants and commute with coefficient projections because both are postcomposition of continuous functions. This proves the immersion assertion without treating a closed immersion as a pro-etale site object.",
-   "uses": [
-    "def-weil-etale-morphism",
-    "def-weil-unramified-morphism",
-    "def-weil-open-immersion",
-    "def-weil-flat-morphism",
-    "def-weil-weakly-etale-morphism",
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Remark 6.8.15, p. 62, etale and closed-immersion inverse image; paragraph before Definition 6.8.6, p. 60; weakly etale criterion by flatness and flat diagonal"
-   }
-  },
-  {
-   "text": "Finally let $f:Y\\to X$ be an ambient morphism and $j:U\\to Y$ a site object. Write $R=f^{-1}E_X$ and $H=f^{-1}$, so the ambient pullback is $E_Y\\otimes_R^L HK$. Choose a flat-term K-flat resolution $P\\to K$ by [lem-pc-kflat-resolution]. By [lem-weil-pbc-ringed-topos-kflat-pullback], applied first to $(H,\\mathrm{id}_R)$ and then to slice restriction over $R|_U$, both $HP$ and $(HP)|_U$ are K-flat with flat terms over their respective rings. The computation in [lem-weil-pbc-ringed-topoi-derived-pullback] therefore represents ambient pullback by $E_Y\\otimes_R HP$, and restricted module pullback by $E_U\\otimes_{R|_U}(HP)|_U$. Step 5 allows exact restriction of the first representative. Apply [lem-sfb-localized-site-tensor-restriction] in each degree to the two $R$-modules $E_Y$ and $HP^n$, and Step 3 to $E_Y|_U=E_U$. This gives\n$$ (E_Y\\otimes_R^L HK)|_U\\cong E_U\\otimes_{R|_U}^L(HK)|_U. $$\nThe cited tensor comparison sends the sheafification image of $b\\otimes m$ to the image of the identical tensor. Its naturality makes the degreewise maps commute with differentials and with maps of resolutions; the cited derived-pullback computation makes them independent of the resolution. This is the corresponding restricted module pullback, even when $U$ is not noetherian. The same formula with $A$ proves the integral version. Coefficient projections, coefficient inclusion and constant sections commute with these maps because the tensor representatives are unchanged and Step 3 already checked coefficient postcomposition.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-sfb-localized-site-tensor-restriction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 06YY (lemma-derived-base-change); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pur-localized-ringed-site",
-  "def-weil-etale-morphism",
-  "def-weil-flat-morphism",
-  "def-weil-open-immersion",
-  "def-weil-pbc-lisse-lattice-coefficients",
-  "def-weil-pbc-sheafification",
-  "def-weil-proetale-inverse-image",
-  "def-weil-unramified-morphism",
-  "def-weil-weakly-etale-morphism",
-  "lem-pc-kflat-resolution",
-  "lem-pur-proetale-finite-constant-sections",
-  "lem-sfb-localized-site-tensor-restriction",
   "lem-sfb-proetale-object-inverse-image-restriction",
-  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-  "lem-weil-pbc-continuous-ring-functions-sheaf",
-  "lem-weil-pbc-localization-inverse-image-coherence",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-weil-proetale-weakly-etale-localization"
+  "lem-sfb-localized-ring-mate-graph-evaluation",
+  "def-sfb-continuous-coefficient-pullback-maps",
+  "lem-weil-pbc-profinite-coefficient-inverse-image",
+  "lem-weil-pbc-continuous-coefficient-completion",
+  "lem-weil-pbc-continuous-coefficient-localization",
+  "lem-weil-sheaf-scalar-extension-ring-iso",
+  "lem-weil-pbc-continuous-coefficient-pullback-isIso",
+  "lem-per-proetale-scalar-slice-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 6.8.1, Lemma 6.8.2, paragraph before Definition 6.8.6 and Remark 6.8.15; expanded initial-object normalization and K-flat slice computation using Stacks sites.tex, sites-modules.tex and sites-cohomology.tex"
+  "place": "Original normalized slice argument; Lean implementation N4: exact module restriction by limits and adjoints, scalar isomorphism via the existing ring-isomorphism API, completion by the residue limit, ambient comparison through the separate generic scalar/slice theorem."
  },
  "mathlib_searches": [
   {
@@ -318,5 +263,15 @@
   "group": "Q63",
   "result": "pass",
   "note": "Read the item, all 8 statement dependencies, the module and the report. Item JSON differs from live only in lean; the 8 dependency records match live exactly; lean.statement verbatim; all 17 declarations listed; lines at most 95 characters; imports correct. Clause by clause: slice restriction for any U with no noetherian hypothesis, through the fully pinned object-restriction comparison and its initial index point; the identity on continuous functions pinned to continuousCoefficientPullback; finite quotients, transitions, residue projections and the A to E inclusion pinned; completion with the node's exact hypotheses, pinned by the limit projections and localization normalization; exact module restriction with termwise derived functor, pinned on unit sections, complexes and the derived square; etale or locally closed immersion corollary with pinned CompletedPull and scalar extension along an isomorphism pinned by b⊗m ↦ c⁻¹(b)m, the counit square and IsIso of the counit on all complexes; ambient restriction for integral and rational coefficients pinned sectionwise and by the counit square. Edge cases covered, no hollow definitions, every proof sorry, docstrings complete. Advisories: ExactPull.ordinary and ExactPull.derived are unpinned isomorphisms, redundant with the pinned fields; owner nodes of several used declarations are not in stmt_deps (def-sfb-continuous-coefficient-pullback-maps, def-pe-proetale-object-restriction-comparison-data, def-weil-pbc-bounded-constructible-tower, def-weil-pbc-proetale-operations, plain definitions of lem-weil-pbc-continuous-coefficient-completion and lem-weil-pbc-proetale-derived-pullback-composition); the second reading is the worker's own self-check. No recompile: no file changed."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N4",
+  "result": "pass",
+  "landing": "20261021T140847-L-2764049",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
