@@ -3,9 +3,10 @@
  "kind": "definition",
  "title": "Pure-section predicate for the tensor-complex Koszul symmetry",
  "status": "split",
- "statement": "Let $J$ be a topology on a category with object universe $c$ and morphism universe $v$, with module sheafification and locally bijective equivalences in universe $\\max(c,v,u)$, and let $R$ be a sheaf of commutative rings in that universe. Use its module sheaves [def-weil-sheaf-of-modules-category], total tensor complexes [def-pc-tensor-complex-sheaves], and actual sheafified pure-tensor summand generators $\\iota_{p,q}^n(x\\otimes y)$ [def-coef-ringed-tensor-hom-model]. Write $\\beta_{P,Q}:P\\otimes_R Q\\to Q\\otimes_R P$ for the canonical cochain-complex braiding. Define the signed-pure-section property of this braiding to be the following proposition: for every pair of unbounded module complexes $P,Q$, integers $p,q,n$ with $p+q=n$ and $q+p=n$, site object $U$, and sections $x\\in P^p(U)$, $y\\in Q^q(U)$, one has $\\beta_{P,Q}^n(\\iota_{p,q}^n(x\\otimes y))=(-1)^{pq}\\iota_{q,p}^n(y\\otimes x)$. This defines a predicate, without asserting it, and imposes no K-flatness, boundedness or characteristic condition.",
+ "statement": "Let $J$ be a topology on a category with object universe $c$ and morphism universe $v$, with module sheafification and locally bijective equivalences in universe $\\max(c,v,u)$, and let $R$ be a sheaf of commutative rings in that universe. Use its module sheaves [def-weil-sheaf-of-modules-category], total tensor complexes [def-pc-tensor-complex-sheaves], and actual sheafified pure-tensor summand generators $\\iota_{p,q}^n(x\\otimes y)$ [def-coef-ringed-tensor-hom-model]. Write $\\beta_{P,Q}:P\\otimes_R Q\\to Q\\otimes_R P$ for the canonical cochain-complex braiding, the commutativity constraint of the symmetric monoidal category of module complexes with the total tensor, induced termwise by the symmetry of the sheaf tensor product [def-pur-sheaf-tensor-product]. Define the signed-pure-section property of this braiding to be the following proposition: for every pair of unbounded module complexes $P,Q$, integers $p,q,n$ with $p+q=n$ and $q+p=n$, site object $U$, and sections $x\\in P^p(U)$, $y\\in Q^q(U)$, one has $\\beta_{P,Q}^n(\\iota_{p,q}^n(x\\otimes y))=(-1)^{pq}\\iota_{q,p}^n(y\\otimes x)$. This defines a predicate, without asserting it, and imposes no K-flatness, boundedness or characteristic condition.",
  "stmt_deps": [
   "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
   "def-pc-tensor-complex-sheaves",
   "def-coef-ringed-tensor-hom-model"
  ],
@@ -38,6 +39,55 @@
    "results": "0 hits: ",
    "date": "2026-10-21",
    "verdict": "No exact Mathlib match for this fixed ringed-site helper; use the existing project definition, with no copied construction."
+  },
+  {
+   "tool": "grep",
+   "query": "symmetryPure|coefficientTensorGenerator|ι_braiding_hom|braiding.*negOnePow",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact match: the named project-specific Prop quantifies over actual sheafified generators; these generic constructions do not define that predicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex, braiding",
+   "results": "0 hits: ; loogle: unknown identifier 'braiding'",
+   "date": "2026-10-21",
+   "verdict": "Query rejected for an unknown identifier; not evidence of absence. LeanFinder and both grep searches were used instead."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A predicate expressing the Koszul symmetry equation on homogeneous pure sections of complexes of sheaves of modules",
+   "results": "8 hits: HomologicalComplex.instQuasiIsoAtMapOppositeSymmUnopFunctorOp, HomologicalComplex.instQuasiIsoMapOppositeSymmUnopFunctorOp, HomologicalComplex.instHasHomologyOppositeObjSymmOpFunctorOp, HomologicalComplex.instHasHomologyOppositeOp, tensorKaehlerQuotKerSqEquiv_symm_tmul_D, HomologicalComplex.XIsoOfEq, CategoryTheory.ShortComplex.HomologyData.left_homologyIso_eq_right_homologyIso_trans_iso_symm, HomologicalComplex.opCounitIso",
+   "date": "2026-10-21",
+   "verdict": "No exact match: the named project-specific Prop quantifies over actual sheafified generators; these generic constructions do not define that predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A predicate saying the braiding of unbounded complexes of sheaves of modules sends each sheafified pure tensor in degrees p q to the swapped tensor times the Koszul sign",
+   "results": "8 hits: CategoryTheory.Sheaf.braidedCategory, CategoryTheory.Sheaf.instBraidedFunctorOppositePresheafToSheaf, CategoryTheory.Sheaf.symmetricCategory, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, LightCondensed.instSymmetricCategoryLightCondMod, CategoryTheory.Sheaf.monoidalCategory, HomologicalComplex.HasTensor",
+   "date": "2026-10-21",
+   "verdict": "No exact match: the named project-specific Prop quantifies over actual sheafified generators; these generic constructions do not define that predicate."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Homological complex tensor product braiding component formula on inclusion of a homogeneous bidegree summand",
+   "results": "8 hits: HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.tensorObj, HomologicalComplex.instHasTensorOfHasTensorX, HomologicalComplex.tensorHom, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.ιMapBifunctorOrZero_eq, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+   "date": "2026-10-21",
+   "verdict": "No exact match: the named project-specific Prop quantifies over actual sheafified generators; these generic constructions do not define that predicate."
+  },
+  {
+   "tool": "grep",
+   "query": "ι.*braiding|braiding.*ι|def braiding|lemma.*braiding",
+   "results": "0 hits: ; directory Algebra/Homology",
+   "date": "2026-10-21",
+   "verdict": "No exact match: the named project-specific Prop quantifies over actual sheafified generators; these generic constructions do not define that predicate."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.braiding",
+   "results": "0 hits: ; loogle: unknown identifier 'HomologicalComplex.braiding'",
+   "date": "2026-10-21",
+   "verdict": "Query rejected for an unknown identifier; not evidence of absence. LeanFinder and both grep searches were used instead."
   }
  ],
  "created": {
@@ -83,5 +133,20 @@
  },
  "import_flags": [
   "unreachable"
- ]
+ ],
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-sfb-tensor-symmetry-pure-equation",
+  "worker": "stage1",
+  "summary": "Audited this Prop-valued definition against its existing Lean body, the exact statements of its module, sheaf-tensor, total-complex and pure-generator dependencies, Stacks 06YU and the 0FPQ/0GWN sign conventions. Retained the full statement, all universes, arbitrary unbounded complexes and both degree equalities; the canonical braiding is identified as the commutativity constraint built from the sheaf tensor symmetry [def-pur-sheaf-tensor-product] (the Lean owner of the cochain symmetric structure). The tensor-constraint theorem lem-sf-ringed-tensor-complex-constraints asserts this predicate and is therefore not a statement dependency (a definition does not cite a lemma about itself). This is a definition: no equation is asserted, no proof or proof dependencies are appropriate, and no new node is needed. Preserved the existing Lean record and earlier searches, and appended the actual NP searches.",
+  "blueprint": "The definition serves the Koszul factor interchange in the one-K-flat transpose argument of lem-sfb-hom-kflat-chain-transpose (the existing blueprint.from.place), below the finite-extension descent portion of lem-sfb-dc-hom-preserves. It only names the pure-section predicate; the assertion of the formula remains the separate tensor-constraint theorem. No change to the unit or chapter route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NP-420823618",
+  "group": "NP",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-420823618 (reviewer sub-agent of L); spot-checked: Read the item, the base node (live and side-live), the report, all stmt_dep statements, the Lean body of symmetryPure (RingedTensorComplexConstraints.lean l.31-38) and the sources: Stacks 06YU (sites-cohomology l.3300), 0FPQ (l.12936) and More on Algebra section-symmetric-monoidal (l.14036), whose commutativity constraint has sign (-1)^{pq} on L^p⊗M^q. The predicate matches the source and the Lean body clause by clause. Small cases checked: p=q=0, p=q=1, p=-1 with q=1, an even degree, characteristic 2, zero complexes. No re-split note, not dropped, no new nodes. Single fault: the delivery's only substantive change adds lem-sf-ringed-tensor-complex-constraints as a stmt_dep of this definition. That lemma asserts this very formula (its Lean ComplexConstraints.symmetry : symmetryPure), so stages/1-dag.md §1 l.37 forbids it as a stmt_dep: a definition does not cite a lemma about itself, since the edge would close a cycle. The lemma also does not define the braiding (C4/B3), and the statement text never cites it. FIX: removed that stmt_dep and identified β as the commutativity constraint induced termwise by the sheaf-tensor symmetry, citing [def-pur-sheaf-tensor-product], which owns SheafOfModules.cochainModulesSymmetric (CochainTensorUniverses.lean l.100). The sign is not written into the definition of β, and the meaning, hypotheses and Lean record are unchanged. Updated the split_report summary to match. No cycle: none of the four stmt_deps reaches the item.; 1 file(s) fixed by the reviewer"
+ }
 }
