@@ -77,7 +77,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.InternalHomFilteredContinuity` | - | 1 | proof | 2 |
 | `Sheaf.Paper.InternalHomFiniteFreeStage` | - | 1 | proof | 2 |
 | `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | proof | 2 |
-| `Sheaf.Paper.ProEtaleConstantReductionTower` | - | 1 | proof | 2 |
+| `Sheaf.Paper.ProEtaleConstantReductionTower` | - | 7 | proof | 2 |
 | `Sheaf.Paper.PurTwistSheafLocallyFree` | - | 1 | proof | 2 |
 | `Sheaf.Paper.StrictTowerExchangeMateNormalization` | - | 1 | proof | 2 |
 | `Sheaf.Paper.WeilTensorProduct` | - | 4 | proof | 2 |
