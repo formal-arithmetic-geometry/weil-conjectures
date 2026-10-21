@@ -1,0 +1,82 @@
+{
+ "id": "lem-sfb-integral-general-lfp-hom-inversion",
+ "kind": "statement",
+ "title": "Internal Hom commutes with integral coefficient inversion for general-lfp inputs",
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "statement": "Let $\\ell$ be prime, let $E\\subseteq\\overline{\\mathbf Q}_\\ell$ be finite over $\\mathbf Q_\\ell$, with valuation ring $R=\\mathcal O_E$ [def-weil-l-adic-coefficient-extension], and let $X$ be a Noetherian scheme, meaning locally Noetherian and quasi-compact [pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Put $B=p_X^*\\underline R$ and $S=p_X^*\\underline E$ on the small pro-étale site [sk-def-sfb-condensed-ring, sk-def-sfb-pulled-back-coefficients]. Use the ordinary unbounded derived categories of module sheaves and ambient relative derived tensor and internal Hom [sk-def-sfb-derived-tensor-hom]. For $M\\in D(B)$ write $M_E=S\\otimes_B^L M$. Let $K\\in D(B)$ have bounded cohomology constructible in the general ring-object sense [sk-def-sfb-bounded-constructible]: each cohomology sheaf admits a finite constructible locally closed stratification on whose strata it is pro-étale locally a cokernel $B^m\\to B^n$ with arbitrary local matrix entries and finite $m,n$. Let $L\\in D(B)$ have cohomology zero in sufficiently negative degrees; no constructibility or completeness is assumed for $L$.\n\nThe canonical evaluation-transpose map\n$$S\\otimes_B^L R\\mathcal Hom_B(K,L)\\longrightarrow R\\mathcal Hom_S(K_E,L_E)$$\nis an isomorphism, natural in both inputs. With the coefficient identification $S=B[1/\\ell]$ and its repeated-$\\ell$ module telescope [sk-prop-sfb-qlbar-colimit-x], its restriction to $D(B)$ agrees with\n$$\\varinjlim_n R\\mathcal Hom_B(K,L)\\xrightarrow{\\sim}R\\mathcal Hom_B(K,\\varinjlim_n L),$$\nwhere both sequential transitions are multiplication by $\\ell$ and the colimits are exact termwise sheaf-module colimits of complex representatives [def-weil-pbc-category-colimit]. More precisely, on the $n$th telescope stage the pairing defining the comparison sends $(h,k)$ to $\\ell^{-n}(1\\otimes h(k))$. The assertion concerns this canonical map, independently of representatives, and the ordinary ambient derived category, without passing to a completed category.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 6.8.12 and Proposition 6.8.14(2), pp. 61–62, with the coefficient-specific general-lfp bridge. The internal-sheaf telescope comparison is an agent extraction; Lemma 6.8.12 itself is about global Hom and direct sums."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-bounded-constructible",
+  "sk-def-sfb-derived-tensor-hom",
+  "def-weil-l-adic-coefficient-extension",
+  "pqf-def-locnoeth",
+  "def-weil-pbc-quasi-compact-scheme",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Inverting ell commutes with derived internal Hom from a bounded constructible integral coefficient complex on the pro-etale site",
+   "results": "LightCondensed.ihomPoints_symm_comp; LightCondensed.ihomPoints_symm_apply; CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Sheaf.ΓHomEquiv_naturality_left_symm; CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality; CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_inv_naturality_assoc; PresheafOfModules.homEquivOfIsLocallyBijective_symm_apply; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality",
+   "date": "2026-10-21",
+   "verdict": "No match: hits concern ambient closed categories, underived module localization/presentations, or ordinary filtered colimits, not this coefficient-specific derived sheaf assertion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Localization of sheaf internal Hom after converting locally finitely presented integral cohomology to finite constant models",
+   "results": "CategoryTheory.Sheaf.H; SheafOfModules.isFinitePresentation; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat; SheafOfModules.Presentation.map; SheafOfModules.quasicoherentDataOfIsFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.LocalGeneratorsData.IsFiniteType; SheafOfModules.Presentation.IsFinite",
+   "date": "2026-10-21",
+   "verdict": "No match: hits concern ambient closed categories, underived module localization/presentations, or ordinary filtered colimits, not this coefficient-specific derived sheaf assertion."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"internalHom\", \"localization\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No match: hits concern ambient closed categories, underived module localization/presentations, or ordinary filtered colimits, not this coefficient-specific derived sheaf assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "(internalHom|derivedHom|rhom).*(localiz|invert)|(localiz|invert).*(internalHom|derivedHom|rhom)",
+   "results": "Mathlib/RingTheory/PicardGroup.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean; Mathlib/GroupTheory/OreLocalization/Basic.lean; Mathlib/GroupTheory/MonoidLocalization/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "No match: hits concern ambient closed categories, underived module localization/presentations, or ordinary filtered colimits, not this coefficient-specific derived sheaf assertion."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar localization comparison for derived internal Hom of integral constructible sheaves",
+   "results": "Module.FinitePresentation.isLocalizedModule_mapExtendScalars; IsLocalizedModule.mapExtendScalars; LinearEquiv.extendScalarsOfIsLocalizationEquiv; LocalizedModule.restrictScalars_map_eq; Localization.AtPrime.instIsScalarTower; IsLocalization.instIsScalarTowerAtPrimeFractionRing; instIsScalarTowerAtPrimeFractionRing_1; PresheafOfModules.restrictHomEquivOfIsLocallySurjective",
+   "date": "2026-10-21",
+   "verdict": "No match: hits concern ambient closed categories, underived module localization/presentations, or ordinary filtered colimits, not this coefficient-specific derived sheaf assertion."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-dc-hom-small-coefficients",
+  "date": "2026-10-21",
+  "group": "Q22"
+ },
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "lem-sfb-dc-hom-preserves, proof: Rational paragraph: inverting ell; integral scalar-model conversion, internal continuity and evaluation-normalized localization; live proof step 6.",
+   "via": [
+    "lem-sfb-dc-hom-small-coefficients"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
