@@ -22618,3 +22618,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:41 L: merged deliver/N0/lem-sfb-lattice-subquotient-filtration (stage 2; reviewer PASS; parallel immutable checks)
 - 13:41 L: merged deliver/Q158/lem-weil-pbc-raw-restricted-class-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 13:41 L: merged deliver/N7/lem-sfb-qlbar-direct-image-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 13:41 L: returned deliver/Q95/lem-pur-quotient-expression-kflat-normalization (reviewer RETURN: L: independent stage-2 immutable head 06e701ba3437: H2 (theorem-stmt_dep rule, new def node): def-pur-strict-quotient-ex)
