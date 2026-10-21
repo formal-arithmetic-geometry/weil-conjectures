@@ -299,5 +299,44 @@
   "group": "Q111",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q111-517916739 (reviewer sub-agent of L); spot-checked: PASS: I read the item's statement and all 8 steps in full. No new nodes; the statement is unchanged from the Q124 creation; the 3 stmt_deps it adds (constructible heart, common-stage coefficients, positive log) are all used in the statement; proof_deps equal the union of the step uses; no cycle. Source: main-20261015 thm-zl-real-mixed-by-curves.proof.md, the 'in dimension zero a Jordan filtration …' sentence, and unit step 1 of sk-i-dl-general-real. Step checks: (1) the Hom-colimit equality rule and the truncations of prop-constructible-truncations give a finite-stage heart Weil pair. (2) Point equivalence plus the t-exact δ of lem-a1-point-realization-standard-cohomology give an exact heart equivalence, with H^0 used for the preimage. (3) p-linear-triangular applies over Qlb (its unit assumes an algebraically closed field); the invariance and alpha_j≠0 arguments are correct. (4) Finitely many algebraic matrix entries give a finite E, needed for example for [[0,c],[1,0]]. (5) θ_j lifts A_j∘ι^{-1}, using clause 1 of transport-iso; g_s is a scheme automorphism, so Lg_s^* keeps the heart; θ_d=θ⊗E by faithfulness. (6) I recomputed the equivariance equation from naturality clause 2. (7) The weight calculation is correct; real weights are allowed, and the bound is the maximum. (8) V=0 and finite extensions are covered. Small cases tested: d=0, d=1, a Jordan block, an irreducible 2×2 case, a non-integral weight. Duplicate search found nothing: invariant-flag-categorical-filtration and classical-weil-filtration-heart-transport are different statements. All 6 tool_uses accepted as generic. Batch-5: p-linear-triangular is linear algebra that neither assumption gives, with no deps of its own, and it is already in the batch-5 closure (via lem-rp-upper-bound and others); the closure added by the item's deps over the base is empty. Accepted. Maintainer note: the p-linear-triangular statement omits 'algebraically closed', which only its unit states."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointWeilHeartFlag",
+  "declaration": "WeilConjectures.zl_point_weil_heart_flag",
+  "declarations": [
+   "WeilConjectures.zlPointBase",
+   "WeilConjectures.zlPointBaseLocallyOfFiniteType",
+   "WeilConjectures.zlPointBaseQuasiCompact",
+   "WeilConjectures.zlPointWeilHeartCategory",
+   "WeilConjectures.zlPointFiniteWeilHeartCategory",
+   "WeilConjectures.zlPointRawHeartCategory",
+   "WeilConjectures.zlPointFiniteRawHeartCategory",
+   "WeilConjectures.zlPointWeilFiber",
+   "WeilConjectures.zlPointWeilFrobenius",
+   "WeilConjectures.zlPointFiniteHeart",
+   "WeilConjectures.zlPointCommonHeart",
+   "WeilConjectures.zlPointFiniteFiber",
+   "WeilConjectures.zlPointFiniteFrobenius",
+   "WeilConjectures.ZlPointWeilFlagDiagram",
+   "WeilConjectures.ZlPointWeilHeartFlag",
+   "WeilConjectures.ZlPointWeilFlagFiniteDiagram",
+   "WeilConjectures.ZlPointWeilHeartFlagModel",
+   "WeilConjectures.zl_point_weil_heart_flag"
+  ],
+  "file": "lean/Sheaf/Paper/PointWeilHeartFlag.lean",
+  "statement": "theorem zl_point_weil_heart_flag (iota : Ω ≃+* ℂ) (F : sfCommonStageWeilSheaf D l hl (zlPointBase D) Ω) : ∃ H : ZlPointWeilFlagDiagram D l hl Ω F, ZlPointWeilHeartFlag D l hl Ω y ι hι iota F H ∧ ∃ T : ZlPointWeilFlagFiniteDiagram D l hl Ω F H, ZlPointWeilHeartFlagModel D l hl Ω y ι hι F H T ∧ ∃ w : ℝ, SfIsMixedOfWeightsAtMost D l hl Ω (zlPointBase D) iota.toRingHom F w",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The theorem packages the complete raw-heart filtration and a simultaneous finite coefficient-heart model, with underlying-heart short exact sequences and explicit descent equations for inclusions, projections and the original sheaf. Every Frobenius is the recorded local operator, including point transport. Data diagrams and their property predicates are owning-node statement helpers, not alternative notions of Weil sheaf, heart, fibre or purity."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a45884ff2",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Item node changed only in lean; statement verbatim; 18 declarations recorded. Every node clause matches a Lean clause on the recorded declarations: arbitrary FiniteFieldDatum, F in sfCommonStageWeilSheaf on Over.mk (𝟙 Spec k0), fibre/Frobenius = recorded localQbarStalk/localQbarClosedFrobeniusStalk with y ι hι universally quantified, flag G/step/into with heart mono, IsZero G 0, IsIso into last, ranks j, ShortExact in sfCommonStageHeart, rank-1 quotients with Ωˣ scalar, SfIsPunctuallyPureOfWeight at 2 log‖ια‖/log q, invariant flag with bijective Frobenius, ∃ w SfIsMixedOfWeightsAtMost. Finite model: one E with Weil-equivariant comparison isos to sfWeilStageObject, descent squares through inclusion, finite-stage ranks/scalars pinned by α_descends. Edge cases checked: d=0, rank 1, Jordan block, splitting after enlarging E, non-integral weight. Ω : Type u is inherited from LocalFrobeniusTrace. No hollow defs (irreducible, not opaque); single sorry; docstrings with source and blueprint id and all 8 steps; no line over 100 chars; proof imports plain; absent PointRealizationStandardCohomology module correctly not imported. Not recompiled per instructions; worker compiles clean (43.8/36.9 s). Advisories only: some declarations come from nodes outside stmt_deps via the local-Frobenius composite; lem-weil-point-fibre-equivalence is a stmt_dep not used by the Lean statement; second-reading section is thin."
  }
 }

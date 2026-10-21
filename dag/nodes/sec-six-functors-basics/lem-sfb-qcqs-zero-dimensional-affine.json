@@ -412,5 +412,23 @@
   "group": "NR",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-125bb0b8c (reviewer sub-agent of L); spot-checked: I read the item, all six steps and every cited statement in full; there are no new nodes and no changes. The statement matches Stacks Properties 0CKV (lemma-dimension-zero), final assertion: a qcqs scheme whose points are all closed is affine, the empty scheme is allowed, and there is no Noetherian hypothesis. The 'dim<=0' parenthetical is correct because X is quasi-compact. Step 1: the Mathlib leaf lem-pqf-finite-affine-cover-qc-open, applied with U=X, gives a finite affine cover (empty when X is empty). Step 2 is elementary: closed singleton {p}=V(S) and a maximal ideal m containing p (00E0 node) force m=p. Step 3: lem-weil-pbc-zero-dimensional-spectrum-profinite (04MG) makes each chart compact Hausdorff, lem-weil-pbc-affine-scheme-qcqs makes it quasi-compact, and pqf-lem-qs-intersection-qc makes the overlaps quasi-compact; no overlap is claimed affine, so there is no E1 fault. Step 4 is elementary and written out: a compact subset of a Hausdorff chart is closed, so each U_j minus U_i is open and each U_i is closed in X. Step 5: by def-weil-closed-immersion and 01IQ (an immersion with closed image is a closed immersion), each open inclusion is a closed immersion with the original structure sheaf. Step 6: lem-sc-closed-affine-union-affine matches Limits 09NL as stated (no extra hypotheses; read in limits.tex). Its hypotheses come from steps 1 and 5, and it does not restate the item. The route differs from 0CKV's final partition induction; it is valid and marked agent-written. The dependency closure (1023 nodes) does not return to the item. The only citer, lem-sfb-field-profinite-galois-site paragraph (3), uses the all-points-closed form. No SGA source is cited, and the item is not in route-pivot-dropped.txt. I accept the off-unit tool uses for the maintainer's tool_uses: 04MG spectrum topology, the quasi-separated intersection criterion and 09NL. Note for the maintainer: lem-sc-finite-discrete-separated-affine and lem-sc-zero-dim-noetherian-affine are special cases of this item that already existed; they could later cite it. I checked small cases: Spec 0, k[eps]/eps^2, Spec of the product of F_2 over N, an infinite disjoint union of points, and a non-quasi-separated gluing of two copies of Spec(prod F_2)."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.QcqsZeroDimensionalAffine",
+  "declaration": "AlgebraicGeometry.isAffine_of_qcqs_of_t1",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsZeroDimensionalAffine.lean",
+  "statement": "theorem isAffine_of_qcqs_of_t1 (X : Scheme.{u}) [CompactSpace X] [QuasiSeparated (terminal.from X)] [T1Space X] : IsAffine X",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4d9271281",
+  "group": "NB",
+  "result": "pass",
+  "note": "Only the item lean record and the new module QcqsZeroDimensionalAffine differ from side-live; the rest of the node matches the live one. isAffine_of_qcqs_of_t1 (X : Scheme.{u}) [CompactSpace X] [QuasiSeparated (terminal.from X)] [T1Space X] : IsAffine X matches Stacks 0CKV final assertion: T1Space is exactly 'every point closed', IsAffine gives X ≅ Spec Γ(X,⊤), no Nonempty/Noetherian/finite-type/discrete hypothesis, universe arbitrary, empty scheme covered. Statement field verbatim. Recorded dependency declarations used. No Mathlib match (grep T1Space/topologicalKrullDim in AlgebraicGeometry; finite-discrete instance needs more), existing:false correct. Docstrings give source and blueprint and all six proof steps; proof sorry; imported proof modules exist in side-live and use the module system; report has Worker report and Second reading by NB. No findings."
  }
 }

@@ -23472,3 +23472,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:24 L: returned deliver/O4/lem-sfb-prime-to-ell-cochain-finite-quotient-descent (reviewer RETURN: D1/D2, D5, G1. This re-delivers the split returned at 4ff896a3, which was RETURNed for D1/D2/D5, and that return is not )
 - 19:24 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 19:25 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
+- 19:25 L: merged deliver/NB/lem-sfb-qcqs-zero-dimensional-affine (stage 2; reviewer PASS; parallel immutable checks)
+- 19:25 L: merged deliver/Q20/lem-zl-point-weil-heart-flag (stage 2; reviewer PASS; parallel immutable checks)
