@@ -5,10 +5,10 @@ Authors: SHEAF group M1
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.StrictHenselizationStructuralMap
+public import WeilConjectures.AlgebraicGeometry.StrictHenselizationStructuralMap
 public import WeilConjectures.RingTheory.IsStrictHenselization
 public import Mathlib.RingTheory.Localization.AtPrime.Basic
-import Sheaf.AlgebraicGeometry.StrictHenselizationLocalPresentation
+import WeilConjectures.AlgebraicGeometry.StrictHenselizationLocalPresentation
 import WeilConjectures.RingTheory.StrictHenselizationLocalizedDivisorQuotient
 
 /-! # Algebraic presentation of a strict henselization divisor quotient
@@ -20,8 +20,47 @@ Source: Stacks Project, Tags 04HX and 05WS.
 @[expose] public section
 
 universe u
-open CategoryTheory
+open CategoryTheory CategoryTheory.Limits
 namespace AlgebraicGeometry.Scheme
+
+/-- The canonical colimit comparison identifies the structural maps.
+Source: Stacks Project, Tag 04HX, via the final-functor coprojection formula. -/
+private theorem comparison_base
+    {S : Scheme.{u}} {Ω : Type u} [Field Ω] [IsAlgClosed Ω]
+    (s : Spec (.of Ω) ⟶ S) :
+    Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      strictHenselizationStructuralMap s = strictLocalizationToBase s := by
+  classical
+  let : HasColimit (strictHenselizationDiagram s) := inferInstance
+  let := (strictHenselization_properties s).2.1
+  let j := Classical.choice (IsCofiltered.nonempty (C :=
+    SmallModel.{u} (strictHenselizationNeighbourhoods s)))
+  have hs : (strictHenselizationCone s).π.app (Opposite.op (Opposite.op j)) ≫
+      Spec.map (ΓSpecIso
+        (((equivSmallModel.{u}
+          (strictHenselizationNeighbourhoods s)).inverse.obj j).1.left.unop)).inv ≫
+      ((AffineEtale.Spec S).obj
+        (((equivSmallModel.{u}
+          (strictHenselizationNeighbourhoods s)).inverse.obj j).1)).hom =
+      strictHenselizationStructuralMap s :=
+    (exists_strictHenselizationStructuralMap s).choose_spec j
+  rw [← hs]
+  have hι : colimit.ι (strictHenselizationAffineDiagram s) (Opposite.op j) ≫
+      (smallStrictHenselizationColimitIso s).hom =
+      (smallStrictHenselizationCocone s).ι.app (Opposite.op j) := by
+    let := strictHenselizationAffineInclusion_isEquivalence s
+    exact Functor.Final.ι_colimitIso_hom
+      ((equivSmallModel.{u} (strictHenselizationNeighbourhoods s)).inverse ⋙
+        strictHenselizationAffineInclusion s).op (strictHenselizationDiagram s) (Opposite.op j)
+  have hleg : Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      (strictHenselizationCone s).π.app (Opposite.op (Opposite.op j)) =
+      (strictHenselizationAffineCone s).π.app (Opposite.op (Opposite.op j)) := by
+    change Spec.map (smallStrictHenselizationColimitIso s).hom ≫
+      Spec.map (colimit.ι (strictHenselizationAffineDiagram s) (Opposite.op j)) = _
+    rw [← Spec.map_comp, hι]
+    rfl
+  rw [← Category.assoc, hleg]
+  exact strictHenselizationStructuralMap_eq s j
 
 /-- The geometric strict henselization modulo a nonunit divisor is an algebraic strict
 henselization of a prime localization of the divisor ring. No regularity hypothesis is used.
@@ -61,8 +100,13 @@ theorem strictHenselizationRing_divisor_quotient_presentation
         (strictHenselizationRing barY ⧸ Ideal.span {b.hom f})),
       Algebra.IsStrictHenselization (Localization.AtPrime p) K
         (strictHenselizationRing barY ⧸ Ideal.span {b.hom f}) := by
+  let e : strictHenselizationRing barY ≅ strictHenselization barY :=
+    smallStrictHenselizationColimitIso barY
+  have hbe : Spec.map (b ≫ e.hom) = strictLocalizationToBase barY := by
+    rw [Spec.map_comp, hb]
+    exact comparison_base barY
   obtain ⟨q, hq, K, hK, ares, hsep, aK, htower, aH, hbase, hH⟩ :=
-    smallStrictHenselizationRing_local_presentation R barY b hb
+    strictHenselizationRing_local_presentation R barY (b ≫ e.hom) hbe
   let := hq
   let := hK
   let := ares
@@ -70,12 +114,28 @@ theorem strictHenselizationRing_divisor_quotient_presentation
   let := aK
   let := htower
   let := aH
+  let a : Algebra (Localization.AtPrime q) (strictHenselizationRing barY) :=
+    (e.inv.hom.comp (algebraMap (Localization.AtPrime q) (strictHenselization barY))).toAlgebra
+  let eAlg : strictHenselization barY ≃ₐ[Localization.AtPrime q] strictHenselizationRing barY :=
+    { toRingEquiv := e.symm.commRingCatIsoToRingEquiv
+      commutes' _ := rfl }
+  have hbaseSmall (r : R) :
+      algebraMap (Localization.AtPrime q) (strictHenselizationRing barY)
+        (algebraMap R (Localization.AtPrime q) r) = b.hom r := by
+    change e.inv.hom (algebraMap (Localization.AtPrime q) (strictHenselization barY)
+      (algebraMap R (Localization.AtPrime q) r)) = b.hom r
+    rw [hbase r]
+    exact e.commRingCatIsoToRingEquiv.symm_apply_apply (b.hom r)
+  have hSmall : Algebra.IsStrictHenselization (Localization.AtPrime q) K
+      (strictHenselizationRing barY) := by
+    obtain ⟨c, hc, ⟨i⟩⟩ := hH
+    exact ⟨c, hc, ⟨i ≪≫ CommAlgCat.isoMk eAlg⟩⟩
   have hf : f ∈ q := by
     by_contra hf
     have hu : IsUnit (algebraMap R (Localization.AtPrime q) f) :=
       IsLocalization.map_units (M := q.primeCompl) (Localization.AtPrime q) ⟨f, hf⟩
     have hu' := hu.map (algebraMap (Localization.AtPrime q) (strictHenselizationRing barY))
-    rw [hbase f] at hu'
+    rw [hbaseSmall f] at hu'
     exact hg hu'
   let J : Ideal R := Ideal.span {f}
   have hJ : J ≤ q := (Ideal.span_singleton_le_iff_mem q).2 hf
@@ -101,7 +161,7 @@ theorem strictHenselizationRing_divisor_quotient_presentation
     have hr : r ∈ q.primeCompl := fun hr ↦ hs (Ideal.mem_map_of_mem _ hr)
     have hu := (IsLocalization.map_units (Localization.AtPrime q) ⟨r, hr⟩).map
       (algebraMap (Localization.AtPrime q) (strictHenselizationRing barY))
-    rw [hbase r] at hu
+    rw [hbaseSmall r] at hu
     exact hu.map (Ideal.Quotient.mk _)
   let φ : Localization.AtPrime p →+* strictHenselizationRing barY ⧸ Ideal.span {b.hom f} :=
     IsLocalization.lift hunit
@@ -112,6 +172,7 @@ theorem strictHenselizationRing_divisor_quotient_presentation
       (algebraMap (R ⧸ J) _ (Ideal.Quotient.mk _ r)) = Ideal.Quotient.mk _ (b.hom r) :=
     fun r ↦ IsLocalization.lift_eq hunit _
   exact ⟨p, hpprime, L, inferInstance, inferInstance, inferInstance, aL, tL, aφ,
-    hH.localized_divisor_quotient R (strictHenselizationRing barY) q K b.hom hbase f p hp L hcomp⟩
+    hSmall.localized_divisor_quotient R (strictHenselizationRing barY) q K b.hom
+      hbaseSmall f p hp L hcomp⟩
 
 end AlgebraicGeometry.Scheme
