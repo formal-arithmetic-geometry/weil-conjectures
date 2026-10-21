@@ -21409,3 +21409,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:52 L: merged deliver/NR/lem-pur-normalized-tensor-constraint-transport (reviewer PASS; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q112/lem-zl-weil-generic-lissity (reviewer FIX; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q141/lem-sf-open-roos-unit-adjunction (reviewer PASS; first push; new nodes: 0)
+- 08:52 L: merged deliver/O3/lem-weil-pbc-completed-scalar-unit-adjunction (reviewer PASS; first push; new nodes: 0)
