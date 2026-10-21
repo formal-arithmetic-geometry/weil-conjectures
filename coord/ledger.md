@@ -23456,3 +23456,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:20 L: merged deliver/Q06/lem-sfb-local-norm-algcl-cocycle-descent (reviewer FIX; first push; new nodes: 3)
 - 19:20 L: merged deliver/Q11/lem-fd-local-frobenius-coefficient-extension (stage 2; reviewer PASS; parallel immutable checks)
 - 19:20 L: merged deliver/Q21/lem-zl-reduced-frontier-mixed-gluing (stage 2; reviewer PASS; parallel immutable checks)
+- 19:20 L: returned deliver/Q22/lem-zl-two-point-curve-constituent-purity (reviewer RETURN: L: independent stage-2 immutable head ad402953821d: H2: stmt_dep lem-zl-constant-extension-weil-heart-equivalence is a t)
