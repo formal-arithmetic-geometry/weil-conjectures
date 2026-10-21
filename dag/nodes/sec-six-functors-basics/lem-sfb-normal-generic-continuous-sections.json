@@ -347,5 +347,23 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-a36b02e3f (reviewer sub-agent of L); spot-checked: Read item steps 1-8, the new node and every cited statement. Sources checked: Stacks 092W (more-algebra.tex:30728) matches lem-weil-pbc-weak-etale-integral-closure exactly; BS Lemma 4.2.12 (continuous maps from qcqs U into a totally disconnected T factor through pi_0(U)); HRS Example 3.1; Stacks 0906. Statement unchanged against live; the item is not on the 10-19 drop list and has no repair note. The math is correct: flat implies torsion-free gives B -> B⊗k injective, and with 092W idempotents lift uniquely, so 00EE gives a clopen bijection on charts. Gluing over chart-basis overlaps makes no assumption that intersections of affines are affine. j is affine, so U_eta is affine and spectral. Ultrametric balls are clopen, so A is totally disconnected and E_U(f) = f-bar h^{-1} q is the inverse; both naturalities follow from injectivity. Normality is used exactly where the nodal-curve counterexample needs it. New node lem-sfb-spectral-clopen-component-homeomorphism (clopen-preimage bijection of spectral spaces implies pi_0(f) is a homeomorphism) is true by 0906 plus Stone duality, is not a clause of the item, and has no DAG or Mathlib duplicate; unsplit is correct. Batch-5 cite lem-trf-flat-module-torsionfree-domain is a dependency-free Mathlib leaf (Module.Flat.torsion_eq_bot), pure algebra outside the trace formula and Poincare duality: accepted. Declared tool uses (01HV, 030B, weakly-etale stability, 01I4, 092W, 00EE, affine permanence/qcqs/spectral, condensed realization) are generic and accepted. Maintainer note: blueprint from.node is null because it is inherited from the lem-sfb-admissible-direct-image ancestry, a base-node fault; the intended anchor det-thm-sf-ctf-stability-direct-images (3) is in from.place."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.NormalGenericContinuousSections",
+  "declaration": "AlgebraicGeometry.ProEtale.normal_generic_continuous_sections",
+  "file": "lean/Sheaf/AlgebraicGeometry/NormalGenericContinuousSections.lean",
+  "statement": "theorem normal_generic_continuous_sections (X : Scheme.{u}) [IsIntegral X] [IsLocallyNoetherian X] (hnormal : ∀ x : X, IsDomain (X.presheaf.stalk x) ∧ IsIntegrallyClosed (X.presheaf.stalk x)) (A : Type v) [NormedField A] [IsUltrametricDist A] : (∀ (U : X.ProEt), IsAffine U.left → Function.Bijective (ContinuousMap.compRightAlgHom ℤ A (pullback.fst U.hom (X.fromSpecStalk (genericPoint X))).base.hom).toRingHom) ∧ (∀ (U V : X.ProEt), IsAffine U.left → IsAffine V.left → ∀ (f : V ⟶ U) (g : C(U.left, A)), (g.comp f.left.base.hom).comp (pullback.fst V.hom (X.fromSpecStalk (genericPoint X))).base.hom = (g.comp (pullback.fst U.hom (X.fromSpecStalk (genericPoint X))).base.hom).comp (((Over.pullback (X.fromSpecStalk (genericPoint X))).map ((Scheme.ProEt.forget X).map f)).left.base.hom)) ∧ (∀ (A' : Type w) [NormedField A'] [IsUltrametricDist A'] (a : A →+* A') (ha : Continuous a) (U : X.ProEt), IsAffine U.left → ∀ g : C(U.left, A), (a.compLeftContinuous U.left ha g).comp (pullback.fst U.hom (X.fromSpecStalk (genericPoint X))).base.hom = a.compLeftContinuous ↥(pullback (C := Scheme.{u}) U.hom (X.fromSpecStalk (genericPoint X))) ha (g.comp (pullback.fst U.hom (X.fromSpecStalk (genericPoint X))).base.hom))",
+  "branch": "sheaf-dag",
+  "by": "NQ",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-acff50f93",
+  "group": "NQ",
+  "result": "pass",
+  "note": "Read node, 8 stmt_dep records, module, report, Mathlib Scheme.ProEt/compRightAlgHom/compLeftContinuous/IsUltrametricDist. H3: X IsIntegral (gives nonempty) + IsLocallyNoetherian + stalkwise IsDomain∧IsIntegrallyClosed (recorded inline normal form); A NormedField+IsUltrametricDist (trivial/incomplete norms allowed); U : X.ProEt with IsAffine U.left; U_eta = pullback U.hom (fromSpecStalk genericPoint); clause 1 Bijective of the actual restriction RingHom compRightAlgHom; clause 2 every f : V ⟶ U with f_eta = (Over.pullback j).map; clause 3 every continuous A →+* A' into an ultrametric normed field of universe w. Clauses 2/3 are elementary but are exactly the node's restriction-naturality clauses. No extra hypotheses; u,v,w independent. Edge cases: empty U/V, X = Spec field, discrete A. Only the lean field differs from live; lean.statement verbatim; lines <=100; docstrings carry source, blueprint and all 8 steps; single sorry; no defs. Citer algcl-monodromy uses this bijection and its injectivity. Advisory: 4 public imports not needed by the signature. No compile run (no file changed)."
  }
 }
