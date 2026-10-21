@@ -251,6 +251,9 @@ lemma isIso_ihomComparison_mapHomologicalComplex (P : CochainComplex C ℤ) :
     (adj.mapHomologicalComplex (.up ℤ)) P
 
 
+set_option maxHeartbeats 400000 in
+-- Checking the fields of the mapped datum unfolds the monoidal structure of
+-- `G.mapHomologicalComplex`.
 variable {G} in
 /-- The image of a `DualizabilityDatum P` under `G`: the resolutions are mapped by `G` (which
 preserves quasi-isomorphisms and, having an exact left adjoint, K-injective complexes), and the
