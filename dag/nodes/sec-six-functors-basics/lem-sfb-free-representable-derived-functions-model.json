@@ -14,11 +14,166 @@
   "def-weil-pbc-sheafification",
   "def-weil-abstract-derived-category",
   "def-sp-injective-resolutions",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All categories and slice sites below use the common universe in the statement. The category $\\operatorname{Mod}(R)$ is Grothendieck abelian by [lem-weil-pbc-ring-sheaves-grothendieck], and hence has enough injectives by [lem-sp-grothendieck-enough-injectives]. Abelian sheaves have enough injectives by [lem-weil-pbc-site-sheaves-enough-injectives]. The same theorem applied to $\\mathcal C$ with only isomorphism coverings gives enough injectives for $\\operatorname{PAb}(\\mathcal C)$: the sheaf condition for an isomorphism covering imposes no condition on a presheaf. Choose a degreewise monomorphic quasi-isomorphism $r_M:M[0]\\to I_M^\\bullet$, with injective terms and $I_M^n=0$ for $n<0$, using [lem-weil-pbc-complex-injective-resolution-mono].",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-site-sheaves-enough-injectives",
+    "lem-weil-pbc-complex-injective-resolution-mono"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D), 079H (theorem-injective-embedding-grothendieck), 01DP (theorem-sheaves-injectives); bounded-below resolution as in derived.tex Tag 013K (lemma-injective-resolutions-exist)."
+   }
+  },
+  {
+   "text": "Fix $V\\in\\mathcal C$. The forgetful functor $j_V:\\mathcal C/V\\to\\mathcal C$ is continuous and cocontinuous: coverings in the slice are exactly the underlying coverings, and a covering of an object $W$ lifts to the slice by composing every member with $W\\to V$; covering pullbacks have the same underlying objects. Apply [lem-weil-pbc-module-sheafification-restriction]. The restriction $R[P]|_V$ is the sheafification, as an $R|_V$-module, of the presheaf $W/V\\mapsto\\bigoplus_{b:W\\to P}R(W)$. For each fixed $a:W\\to V$, pairing $b$ with $a$ identifies this presheaf with the free $R|_V$-module presheaf on the representable object $(V\\times P\\to V)$ of $\\mathcal C/V$. This identification sends $e_b$ to $e_{(a,b)}$ and commutes with every restriction; the sheafification comparison preserves these generator images.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "lem-weil-pbc-module-sheafification-restriction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04IX (definition-localize-ringed-site); module sheafification Tag 03CY (lemma-sheafification-presheaf-modules), with sites.tex Tag 04B8 (lemma-almost-cocontinuous-sheafification)."
+   }
+  },
+  {
+   "text": "The definition of sheaf Hom [def-pur-sheaf-hom], the module sheafification adjunction [def-weil-presheaf-modules-sheafification], and [lem-weil-pbc-free-yoneda-presheaf-module] on $\\mathcal C/V$ now give an additive bijection\n$$\\theta_{P,M,V}:H_P(M)(V)\\xrightarrow{\\sim}M(V\\times P).$$\nExplicitly, evaluate a morphism $R[P]|_V\\to M|_V$ at $e_{\\mathrm{pr}_P}$ over $(V\\times P\\to V)$. Conversely $s\\in M(V\\times P)$ sends $e_b$ over $(W\\xrightarrow{a}V)$ to $s|_{(a,b)}$, and extends uniquely through sheafification. These formulas are inverse, preserve addition, and show that restriction along $c:V'\\to V$ corresponds to restriction along $c\\times1_P$. A module map $f:M\\to N$ acts on $s$ by $f_{V\\times P}$, and $u:P'\\to P$ acts by restriction along $1_V\\times u$. Thus $\\theta$ is an isomorphism of abelian presheaves $\\iota U H_P(M)\\cong t_P\\iota UM$, natural in both variables. Applying $a$ and its counit $a\\iota\\cong\\mathrm{id}$ gives $UH_P\\cong a t_P\\iota U$.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-weil-pbc-free-yoneda-presheaf-module",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EM (lemma-internal-hom), Tag 03CY (lemma-sheafification-presheaf-modules), and the free-generator formula following Tag 03DI (equation-map-lower-shriek-OU-into-module); its presheaf version is lem-weil-pbc-free-yoneda-presheaf-module."
+   }
+  },
+  {
+   "text": "The functor $U$ is exact by [lem-weil-pbc-module-sheaves-colimits-forgetful], and $a$ is exact while $\\iota$ is left exact by [lem-weil-pbc-sheafification-exact]. Exact evaluation of abelian presheaves [lem-weil-pbc-abelian-presheaves-evaluation-exact] shows that $t_P$ is exact: exactness of its value at $V$ is just exactness at $V\\times P$. Hence $U,a,t_P$ induce their termwise functors on derived categories by [lem-weil-pbc-exact-functor-derived-factorization]. Also $H_P$ is additive and left exact: the slice Hom description sends a kernel to a kernel, and kernels of module sheaves are sectionwise. Its right derived functor on $D^+$ is therefore computed on $I_M^\\bullet$ by [lem-weil-pbc-right-derived-plus-injective]. In particular $D(U)RH_P(M[0])$ is represented by $UH_P(I_M^\\bullet)$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pur-sheaf-hom",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DA (lemma-abelian), 03CN (lemma-abelian-abelian), 03CO (lemma-limits-colimits-abelian-sheaves); derived.tex Tags 015F (lemma-right-derived-exact-functor), 05TI (lemma-enough-injectives-right-derived)."
+   }
+  },
+  {
+   "text": "For any abelian sheaf $A$, compute $R\\iota(A[0])$ using an abelian injective resolution $A\\to J^\\bullet$ [lem-weil-pbc-right-derived-plus-injective]. Exact evaluation in presheaves gives\n$$H^q(R\\iota(A[0]))(W)=H^q(J^\\bullet(W))=H^q(W,A),$$\nthe last equality being the definition of object cohomology [def-weil-pbc-sites-and-cohomology]. Now let $I$ be an injective module sheaf. By [lem-sc-injective-module-abelian-acyclic-zariski], on this arbitrary ringed site $H^q(W,UI)=0$ for every $W$ and $q>0$. The displayed formula implies $R^q\\iota(UI)=0$ as a presheaf for every $q>0$. Thus each $UI_M^n$ is $\\iota$-acyclic. This uses acyclicity after forgetting scalars, without asserting that $UI$ is an injective abelian sheaf.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+    "def-weil-pbc-sites-and-cohomology",
+    "lem-sc-injective-module-abelian-acyclic-zariski"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FD (lemma-cohomology-modules-abelian-agree), second paragraph of its proof; Section 01FT (section-cohomology-sheaves), cohomology-object-site."
+   }
+  },
+  {
+   "text": "Exactness of $U$ makes $U(r_M):UM[0]\\to UI_M^\\bullet$ a quasi-isomorphism. Apply the bounded-below complex clause of [sk-thm-acyclicity] to $v=\\iota$ and the complex $UI_M^\\bullet$ of step 5. The canonical comparison $\\alpha_{UI_M}:\\iota UI_M^\\bullet\\to R\\iota(UI_M^\\bullet)$ is an isomorphism in $D^+(\\operatorname{PAb}(\\mathcal C))$. Compose it with the inverse of $R\\iota(U(r_M))$ to obtain\n$$c_M:\\iota UI_M^\\bullet\\xrightarrow{\\sim}R\\iota(UM[0]).$$\nThe hypotheses of the acyclicity theorem hold by steps 1, 4 and 5: both abelian categories have enough injectives, $\\iota$ is additive and left exact, the complex is nonnegative, and every term is $\\iota$-acyclic. Here $\\alpha$ is the natural comparison of [lem-weil-pbc-right-derived-plus-injective].",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "sk-thm-acyclicity",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015E (lemma-leray-acyclicity), canonical comparison for a bounded-below acyclic complex; Tag 05TI (lemma-enough-injectives-right-derived)."
+   }
+  },
+  {
+   "text": "Apply the underived isomorphism of step 3 termwise to $I_M^\\bullet$. Its naturality for each differential gives an isomorphism of complexes\n$$UH_P(I_M^\\bullet)\\cong a t_P\\iota UI_M^\\bullet.$$\nBy the exact-functor termwise comparison [lem-weil-pbc-exact-functor-derived-factorization], applying $D(a)D(t_P)$ to $c_M$ of step 6 identifies the right hand complex with $D(a)D(t_P)R\\iota(UM[0])$. The left hand complex represents $D(U)RH_P(M[0])$ by step 4. Their composite is the claimed isomorphism of derived objects, rather than merely a family of cohomology isomorphisms. All these complexes are nonnegative.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 015F (lemma-right-derived-exact-functor) and 015E (lemma-leray-acyclicity), applied to the explicit complexes above."
+   }
+  },
+  {
+   "text": "For a module morphism $f:M\\to N$, [lem-weil-pbc-lift-along-injective-quasi-iso] lifts $r_N f$ along $r_M$ to a chain map $\\widetilde f:I_M^\\bullet\\to I_N^\\bullet$. The augmentations were chosen degreewise monomorphic, so its square commutes strictly. Two such lifts are homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy]. Additive functors preserve the equation $f-g=dh+hd$, so all the functors in step 7 send these homotopies to homotopies. Naturality of the comparison $\\alpha$ in [lem-weil-pbc-right-derived-plus-injective], together with $U\\widetilde f\\,U r_M=U r_N\\,Uf$, gives\n$$c_N\\circ\\iota U\\widetilde f=R\\iota(Uf)\\circ c_M.$$\nStep 3 makes the other square commute termwise. The isomorphism of step 7 therefore carries $RH_P(f)$ to $D(a)D(t_P)R\\iota(Uf)$. Applying the same reasoning to $f=\\mathrm{id}_M$ and two choices of resolution proves independence of the choice, and hence canonicity.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-weil-pbc-right-derived-plus-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 013P (lemma-morphisms-lift) and uniqueness up to homotopy from Tag 013S (lemma-morphisms-equal-up-to-homotopy); the natural derived comparison is that of Section 05S7 (section-derived-functors)."
+   }
+  },
+  {
+   "text": "For $u:P'\\to P$ use the same $I_M^\\bullet$ for both parameters. Step 3 identifies the map $H_P(I_M^n)\\to H_{P'}(I_M^n)$ with restriction along $1_V\\times u$ in every degree and at every $V$. Since $c_M$ is a morphism of derived presheaves, this restriction commutes with $c_M$; applying $a$ gives the contravariant parameter square. In degree zero, $M=\\ker(I_M^0\\to I_M^1)$ and left exactness gives $H_P(M)=\\ker(H_P(I_M^0)\\to H_P(I_M^1))$. Exactness of $a,t_P$ identifies the right hand degree-zero object with $a t_P\\iota UM$. The comparison $c_M$ on these kernels is induced by the augmentation $Ur_M$, so the resulting identification is precisely evaluation on $e_{\\mathrm{pr}_P}$, with inverse $e_b\\mapsto s|_{(a,b)}$, as in step 3. Finally the canonical inclusions $D^+\\to D$ send this isomorphism and all its commuting squares to the same complexes and maps in the unbounded derived category. The proof used only smallness, finite products and the stated sheaf constructions, and imposed none of the extra hypotheses excluded in the statement.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "def-sp-injective-resolutions",
+    "lem-weil-pbc-sheafification-exact",
+    "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EM (lemma-internal-hom) and the free-generator adjunction following Tag 03DI; derived comparison normalized by derived.tex Tag 015E (lemma-leray-acyclicity)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-site-sheaves-enough-injectives",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-module-sheafification-restriction",
+  "def-pur-sheaf-hom",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-free-yoneda-presheaf-module",
+  "def-weil-pbc-sheafification",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-weil-pbc-sheafification-exact",
+  "lem-weil-pbc-abelian-presheaves-evaluation-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "def-weil-pbc-sites-and-cohomology",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "sk-thm-acyclicity",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "def-sp-injective-resolutions",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Derived-presheaf comparison assembled from Tag 03FD (lemma-cohomology-modules-abelian-agree), sites-modules.tex Tag 03EM (lemma-internal-hom) and derived.tex Tag 015E (lemma-leray-acyclicity)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -149,10 +304,140 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: freeYonedaHomEquiv and ihomPoints describe underived free-representable Hom and sections; sheafificationHomEquiv describes sheafification adjunctions. None states the derived isomorphism with R iota for an arbitrary ring sheaf."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*(yoneda|representable)|RHom|SheafHom",
+   "results": {
+    "t": "2026-10-21T19:22:46Z",
+    "tool": "grep",
+    "query": "derived.*(yoneda|representable)|RHom|SheafHom",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Monoidal.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Monoidal.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Monoidal.lean"
+    ],
+    "digest": "6fafe5f935a2adc7"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned freeYonedaEquiv/freeYonedaHomEquiv, module sheafification adjunctions, and LightCondensed.ihomPoints are underived results (the latter also has constant coefficients and a specialized site). They do not state this arbitrary-ring-sheaf derived-presheaf comparison. Candidates were read in Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, and Mathlib/Condensed/Light/InternallyProjective.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of the free representable module equals the derived presheaf sections on products followed by sheafification",
+   "results": {
+    "t": "2026-10-21T19:22:47Z",
+    "tool": "leansearch",
+    "query": "Derived internal Hom of the free representable module equals the derived presheaf sections on products followed by sheafification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+     "SheafOfModules.freeHomEquiv",
+     "PresheafOfModules.free",
+     "LightCondensed.ihomPoints",
+     "PresheafOfModules.freeObj",
+     "SheafOfModules.freeHomEquiv_freeMap",
+     "PresheafOfModules.freeYonedaEquiv",
+     "PresheafOfModules.freeYoneda"
+    ],
+    "digest": "26f477dcb384e9fa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned freeYonedaEquiv/freeYonedaHomEquiv, module sheafification adjunctions, and LightCondensed.ihomPoints are underived results (the latter also has constant coefficients and a specialized site). They do not state this arbitrary-ring-sheaf derived-presheaf comparison. Candidates were read in Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, and Mathlib/Condensed/Light/InternallyProjective.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"freeYoneda\"",
+   "results": {
+    "t": "2026-10-21T19:22:47Z",
+    "tool": "loogle",
+    "query": "\"freeYoneda\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "PresheafOfModules.freeYonedaCoproduct",
+     "PresheafOfModules.Elements.freeYoneda",
+     "PresheafOfModules.freeYoneda.instSmall",
+     "PresheafOfModules.freeYoneda.isDetecting",
+     "PresheafOfModules.freeYoneda.isSeparating",
+     "PresheafOfModules.freeYoneda",
+     "PresheafOfModules.instEpiFromFreeYonedaCoproduct",
+     "PresheafOfModules.fromFreeYonedaCoproduct"
+    ],
+    "digest": "2040c10b459b96da"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned freeYonedaEquiv/freeYonedaHomEquiv, module sheafification adjunctions, and LightCondensed.ihomPoints are underived results (the latter also has constant coefficients and a specialized site). They do not state this arbitrary-ring-sheaf derived-presheaf comparison. Candidates were read in Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, and Mathlib/Condensed/Light/InternallyProjective.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from the free module sheaf on a representable is sheafification of derived inclusion into abelian presheaves precomposed with product",
+   "results": {
+    "t": "2026-10-21T19:22:48Z",
+    "tool": "leanfinder",
+    "query": "Derived internal Hom from the free module sheaf on a representable is sheafification of derived inclusion into abelian presheaves precomposed with product",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.sheafifyHomEquiv",
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "PresheafOfModules.sheafificationHomEquiv",
+     "CategoryTheory.Sheaf.H",
+     "LightCondensed.ihomPoints_apply",
+     "PresheafOfModules.sheafificationAdjunction",
+     "LightCondensed.ihomPoints",
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv"
+    ],
+    "digest": "92467946b1d897ca"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned freeYonedaEquiv/freeYonedaHomEquiv, module sheafification adjunctions, and LightCondensed.ihomPoints are underived results (the latter also has constant coefficients and a specialized site). They do not state this arbitrary-ring-sheaf derived-presheaf comparison. Candidates were read in Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, and Mathlib/Condensed/Light/InternallyProjective.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a ringed site compute right derived sheaf Hom of a free representable using an injective module resolution whose underlying abelian sheaves are acyclic for evaluation",
+   "results": {
+    "t": "2026-10-21T19:23:00Z",
+    "tool": "leanfinder",
+    "query": "For a ringed site compute right derived sheaf Hom of a free representable using an injective module resolution whose underlying abelian sheaves are acyclic for evaluation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.sheafifyHomEquiv",
+     "PresheafOfModules.sheafificationHomEquiv",
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "SheafOfModules.freeHomEquiv",
+     "PresheafOfModules.sheafificationAdjunction",
+     "PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom",
+     "PresheafOfModules.toSheafify",
+     "PresheafOfModules.toPresheaf_map_sheafificationHomEquiv"
+    ],
+    "digest": "72cb19eef36307d0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: the returned freeYonedaEquiv/freeYonedaHomEquiv, module sheafification adjunctions, and LightCondensed.ihomPoints are underived results (the latter also has constant coefficients and a specialized site). They do not state this arbitrary-ring-sheaf derived-presheaf comparison. Candidates were read in Mathlib/Algebra/Category/ModuleCat/Presheaf/Generator.lean, Mathlib/CategoryTheory/Generator/Sheaf.lean, and Mathlib/Condensed/Light/InternallyProjective.lean."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-profinite-derived-functions-filtered-colimit",
@@ -179,5 +464,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-free-representable-derived-functions-model",
+  "worker": "stage1",
+  "summary": "Nine-step derived-object proof using existing nodes only: localized free-generator evaluation, underlying abelian evaluation acyclicity of module injectives, the bounded-below acyclic-complex comparison for inclusion into presheaves, exact termwise sheafification/precomposition, and explicit coefficient/parameter naturality and degree-zero normalization. Statement retained; two definition dependencies made explicit.",
+  "blueprint": "Realizes the inherited from.place: the derived-sections model needed for continuity of derived functions on profinite parameters in paragraph (3), open direct image and arithmetic coefficient comparison. The ancestor command returns None, as already recorded by the item; the existing via chain is retained. Searches for free representable, representable derived, sheafified derived, derived sections and internal Hom found no identical blueprint statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaves-grothendieck",
+    "why": "Generic enough-injectives infrastructure for an arbitrary ringed site, not a replacement of any geometric unit step."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "Generic resolution, localization or exact-functor tool for ordinary ringed-site sheaves; no geometric route step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheafification-restriction",
+    "why": "Generic resolution, localization or exact-functor tool for ordinary ringed-site sheaves; no geometric route step of the unit is replaced."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic resolution, localization or exact-functor tool for ordinary ringed-site sheaves; no geometric route step of the unit is replaced."
+   },
+   {
+    "node": "lem-sc-injective-module-abelian-acyclic-zariski",
+    "why": "Its statement covers every ringed site despite the id suffix; it supplies the underlying-abelian evaluation acyclicity needed to use the prescribed injective Hom construction."
+   },
+   {
+    "node": "sk-thm-acyclicity",
+    "why": "Generic bounded-below acyclic-complex comparison for sheaf inclusion; no node of the item unit supplies this homological tool."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic resolution, localization or exact-functor tool for ordinary ringed-site sheaves; no geometric route step of the unit is replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-weil-pbc-module-sheafification-restriction",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sc-injective-module-abelian-acyclic-zariski",
+  "sk-thm-acyclicity",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-9adfbbe15",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-9adfbbe15 (reviewer sub-agent of L); spot-checked: Read all nine steps and every cited statement. The statement, source and blueprint fields are identical to base, and the live node is still unsplit, so no other group superseded this split. The delivery creates no new nodes. Sources checked: Stacks 03FD (sites-cohomology l.1862: any site, ring sheaf and object U, with the proof reducing to H^i(U, I_ab) = 0 for module injectives). This matches lem-sc-injective-module-abelian-acyclic-zariski, which despite its id is stated for an arbitrary ringed site. Also checked 08J7 and 03EM; proof_origin is marked agent. Step 1: enough injectives for Mod(R), Ab and PAb, the last through the trivial topology (00VH axioms checked), and the mono resolution node. Step 2: the slice forgetful functor is continuous and cocontinuous by def-pur-localized-ringed-site, the restriction comparison applies, and Hom_{C/V}((W,a),(V×P,pr)) = Hom(W,P). Step 3: free-Yoneda on C/V with R|_V gives H_P(M)(V) = M(V×P), with the inverse formula taken from the cited statement. Step 4: the exactness inputs U (colimits-forgetful), a and ι (sheafification-exact), t_P (evaluation-exact) and the termwise derived functors match their nodes, and RH_P is computed on I by right-derived-plus-injective (2). Steps 5–6: 03FD gives ι-acyclicity, and the bounded-below clause of sk-thm-acyclicity applies with its hypotheses checked, so c_M exists. Step 7: assembly. Step 8: lift and homotopy uniqueness give naturality in M and independence of the resolution. Step 9: naturality in P, the degree-zero kernel normalization and the D^+→D inclusion. Edge cases checked: zero ring, terminal P, trivial topology, nonflat R (no claim that U preserves injectives). The citer filtered-colimit uses only the stated naturalities. split_report tool_uses (sk-thm-acyclicity, the sc acyclicity node and weil-pbc homological tools) are generic black boxes and I accept them. The two added stmt_deps are used by the statement. Minor point: the report mentions sandbox citations.json and searches.jsonl, which are not in the branch; this is not a fault. No SGA source is used."
  }
 }
