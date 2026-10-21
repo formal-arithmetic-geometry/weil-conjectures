@@ -1,0 +1,198 @@
+{
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Proof paragraph, normalization of the coefficient-fiber triangles and the vanishing left term; returned DAG proof steps 5, 6; Bhatt–Scholze, The pro-étale topology for schemes, §3.5, Lemmas 3.5.4–3.5.7."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedErrorTowerVanishing",
+  "date": "2026-10-21",
+  "group": "K4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Proof paragraph: the normalized coefficient-fiber triangles and the powered left transitions.",
+   "via": [
+    "lem-sp-normalized-error-tower-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor normalized coefficient complexes with Koszul fibers gives pro zero error tower and derived limit recovers finite reduction",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val",
+     "Algebra.Extension.tensorCotangent",
+     "Algebra.Extension.tensorCotangentInvFun",
+     "Algebra.Extension.tensorH1Cotangent",
+     "KaehlerDifferential.cotangentComplexBaseChange",
+     "Algebra.Extension.tensorCotangentSpace",
+     "Algebra.Extension.tensorCotangentInvFun_smul_mk",
+     "KaehlerDifferential.cotangentComplexBaseChange_tmul"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact normalized strict tensor-fiber construction found; use existing coefficient fiber and signed total-tensor comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\", \"IsIso\"",
+   "results": {
+    "subdirectory": "",
+    "count": 6,
+    "hits": [
+     "CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc",
+     "CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts",
+     "CategoryTheory.LocalizerMorphism.Derives.isIso_of_isRightDerivedFunctor",
+     "CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_of_isIso",
+     "CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_iff_isIso",
+     "CategoryTheory.Functor.isIso_natTransOfIsRightDerivedFunctorComp_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact normalized strict tensor-fiber construction found; use existing coefficient fiber and signed total-tensor comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*LaxMonoidal|tensor.*[Ss]emilinear|[Ss]emilinear.*tensor",
+   "results": {
+    "subdirectory": "",
+    "count": 3,
+    "hits": [
+     "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Map.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact normalized strict tensor-fiber construction found; use existing coefficient fiber and signed total-tensor comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived inverse limit of a strictly pro zero tower of complexes vanishes and a constant tower has the canonical diagonal isomorphism",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomologicalComplex.instHasLimit",
+     "Profinite.isIso_asLimitCone_lift",
+     "HomologicalComplex.instHasFiniteLimits",
+     "CategoryTheory.ShortComplex.limitCone",
+     "InverseSystem.invLimEquiv_apply_coe",
+     "Profinite.asLimitConeIso",
+     "Profinite.asLimit",
+     "CategoryTheory.ShortComplex.isLimitLimitCone"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact normalized strict tensor-fiber construction found; use existing coefficient fiber and signed total-tensor comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "def-sp-normalized-error-tower-data",
+ "kind": "definition",
+ "title": "Explicit normalized coefficient-tensor towers and their diagram predicate",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ with valuation ring $O$, and a scheme $T$. Put $R=\\mathcal O_{E,T}$ and $B_n=(O/\\ell^n)_T$ [sk-def-sp-coefficient-towers]. Let $Q_n$ be K-flat complexes of $B_n$-modules [def-pc-kflat-complex] with strict semilinear chain transitions $q_{n,m}:Q_n\\to Q_m$ for $1\\leq m\\leq n$, satisfying identities and the cocycle law. Assume every actual reduction map $Q_n\\otimes_{B_n}B_m\\to Q_m$, $x\\otimes b\\mapsto bq_{n,m}(x)$, is a quasi-isomorphism. No boundedness or constructibility is assumed.\n\nFix $m\\geq1$ and, for $n\\geq m$, put $K_m=[R\\xrightarrow{\\ell^m}R]$ in degrees $[-1,0]$, $P_{n,m}=B_n\\otimes_RK_m$, $F_{n,m}=\\operatorname{Cone}(P_{n,m}\\to B_m)[-1]$, and $S_n=Q_n\\otimes_{B_n}B_m$, using the coefficient augmentation and total tensor convention of [lem-sp-ell-coefficient-fiber, def-pc-tensor-complex-sheaves]. Define the reduction and coefficient-fiber tensor levels, the Koszul middle levels, the powered shifted tail, pure-tensor coordinate formulas, and the predicate recording a strict triangle, its normalized reduction, and its actual derived-limit diagonal. These are the explicit total-complex constructions of [def-pc-tensor-complex-sheaves], scalar cones of [lem-sp-ell-coefficient-fiber], and constant/limit unit of [lem-coef-derived-tower-counit-projections].",
+ "stmt_deps": [
+  "sk-def-sp-coefficient-towers",
+  "def-pc-kflat-complex",
+  "lem-sp-ell-coefficient-fiber",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-abstract-derived-category",
+  "lem-coef-derived-tower-counit-projections",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-sp-commutative-coefficient-ring-tower",
+  "def-sp-total-tensor-summand-interface"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedErrorTowerData",
+  "file": "lean/Sheaf/Paper/NormalizedErrorTowerData.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.SpNormalizedErrorDiagram",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.spErrorRestrict",
+   "AlgebraicGeometry.ProEtale.spErrorSection",
+   "AlgebraicGeometry.ProEtale.spErrorPure",
+   "AlgebraicGeometry.ProEtale.spErrorGenerator",
+   "AlgebraicGeometry.ProEtale.spErrorCoefficientAugmentation",
+   "AlgebraicGeometry.ProEtale.spErrorCoefficientFiber",
+   "AlgebraicGeometry.ProEtale.spErrorReduction",
+   "AlgebraicGeometry.ProEtale.spErrorFiberTensor",
+   "AlgebraicGeometry.ProEtale.spErrorMiddle",
+   "AlgebraicGeometry.ProEtale.spErrorReductionGenerator",
+   "AlgebraicGeometry.ProEtale.spErrorCoefficientTensor",
+   "AlgebraicGeometry.ProEtale.spErrorConeLeft",
+   "AlgebraicGeometry.ProEtale.spErrorConeRight",
+   "AlgebraicGeometry.ProEtale.spErrorKoszulScalar",
+   "AlgebraicGeometry.ProEtale.SpErrorTransitions",
+   "AlgebraicGeometry.ProEtale.spErrorTransitionValue",
+   "AlgebraicGeometry.ProEtale.SpErrorReductionFormula",
+   "AlgebraicGeometry.ProEtale.spErrorTowerComplex",
+   "AlgebraicGeometry.ProEtale.spErrorDiagonal",
+   "AlgebraicGeometry.ProEtale.spErrorModules",
+   "AlgebraicGeometry.ProEtale.spErrorTailS",
+   "AlgebraicGeometry.ProEtale.spErrorTailM",
+   "AlgebraicGeometry.ProEtale.spErrorPoweredMap",
+   "AlgebraicGeometry.ProEtale.spErrorPoweredShift",
+   "AlgebraicGeometry.ProEtale.spErrorFiberLeftElement",
+   "AlgebraicGeometry.ProEtale.spErrorFiberMiddleElement",
+   "AlgebraicGeometry.ProEtale.spErrorFiberRightElement",
+   "AlgebraicGeometry.ProEtale.spErrorFiberTensorGenerator",
+   "AlgebraicGeometry.ProEtale.SpErrorFiberTransitionFormula",
+   "AlgebraicGeometry.ProEtale.SpErrorAssociativityFormula",
+   "AlgebraicGeometry.ProEtale.spErrorLimitComparison",
+   "AlgebraicGeometry.ProEtale.SpNormalizedErrorDiagram"
+  ],
+  "statement": "def SpNormalizedErrorDiagram\n    (Q : ∀ n : ℕ,\n      CochainComplex (SheafOfModules.{max u (t + 1)} (spCoefficientRing l E T n)) ℤ)\n    (q : SpErrorTransitions l E T Q) (m : ℕ)\n    (RF : DerivedCategory.{w} (ℕᵒᵖ ⥤ spErrorModules l E T) ⥤\n      DerivedCategory.{w} (spErrorModules l E T))\n    (κ : spErrorLimitComparison l E T RF) : Prop",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-21",
+  "note": "Verbatim relocation of all existing definitions from NormalizedErrorTowerVanishing, preserving namespaces, universes, signatures and bodies; a separate data module prevents the construction lemma importing the theorem that uses it."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b20eb",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261021T172402-L-3363646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b20eb",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261021T172402-L-3363646",
+  "kind": "interface",
+  "note": "independent cc review: delivered NormalizedErrorTowerData.lean vs live item module (verbatim move of 32 decls); item theorem signature vs live; sp_normalized_strict_tensor_fiber vs item's SpNormalizedErrorDiagram (chain-level subset + true powered_chain_zero) and node lem-sp-normalized-strict-tensor-fiber"
+ }
+}

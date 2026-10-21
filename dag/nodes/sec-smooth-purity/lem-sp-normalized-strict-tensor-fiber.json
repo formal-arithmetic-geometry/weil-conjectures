@@ -1,0 +1,238 @@
+{
+ "kind": "statement",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Proof paragraph, normalization of the coefficient-fiber triangles and the vanishing left term; returned DAG proof steps 5, 6; Bhatt–Scholze, The pro-étale topology for schemes, §3.5, Lemmas 3.5.4–3.5.7."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.NormalizedErrorTowerVanishing",
+  "date": "2026-10-21",
+  "group": "K4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-tower",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-lem-sp-tower",
+   "place": "Proof paragraph: the normalized coefficient-fiber triangles and the powered left transitions.",
+   "via": [
+    "lem-sp-normalized-error-tower-vanishing"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor normalized coefficient complexes with Koszul fibers gives pro zero error tower and derived limit recovers finite reduction",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val",
+     "Algebra.Extension.tensorCotangent",
+     "Algebra.Extension.tensorCotangentInvFun",
+     "Algebra.Extension.tensorH1Cotangent",
+     "KaehlerDifferential.cotangentComplexBaseChange",
+     "Algebra.Extension.tensorCotangentSpace",
+     "Algebra.Extension.tensorCotangentInvFun_smul_mk",
+     "KaehlerDifferential.cotangentComplexBaseChange_tmul"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact normalized strict tensor-fiber construction found; use existing coefficient fiber and signed total-tensor comparisons."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsRightDerivedFunctor\", \"IsIso\"",
+   "results": {
+    "subdirectory": "",
+    "count": 6,
+    "hits": [
+     "CategoryTheory.Functor.isRightDerivedFunctor_iff_isIso_rightDerivedDesc",
+     "CategoryTheory.Functor.isIso_of_isRightDerivedFunctor_of_inverts",
+     "CategoryTheory.LocalizerMorphism.Derives.isIso_of_isRightDerivedFunctor",
+     "CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_of_isIso",
+     "CategoryTheory.LocalizerMorphism.Derives.isRightDerivedFunctor_iff_isIso",
+     "CategoryTheory.Functor.isIso_natTransOfIsRightDerivedFunctorComp_app"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact normalized strict tensor-fiber construction found; use existing coefficient fiber and signed total-tensor comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*LaxMonoidal|tensor.*[Ss]emilinear|[Ss]emilinear.*tensor",
+   "results": {
+    "subdirectory": "",
+    "count": 3,
+    "hits": [
+     "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean",
+     "Mathlib/LinearAlgebra/TensorProduct/Map.lean"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact normalized strict tensor-fiber construction found; use existing coefficient fiber and signed total-tensor comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A derived inverse limit of a strictly pro zero tower of complexes vanishes and a constant tower has the canonical diagonal isomorphism",
+   "results": {
+    "subdirectory": "",
+    "count": 8,
+    "hits": [
+     "HomologicalComplex.instHasLimit",
+     "Profinite.isIso_asLimitCone_lift",
+     "HomologicalComplex.instHasFiniteLimits",
+     "CategoryTheory.ShortComplex.limitCone",
+     "InverseSystem.invLimEquiv_apply_coe",
+     "Profinite.asLimitConeIso",
+     "Profinite.asLimit",
+     "CategoryTheory.ShortComplex.isLimitLimitCone"
+    ],
+    "note": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "No exact normalized strict tensor-fiber construction found; use existing coefficient fiber and signed total-tensor comparisons."
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "id": "lem-sp-normalized-strict-tensor-fiber",
+ "title": "Strict normalized tensor-fiber triangle before inverse limits",
+ "stmt_deps": [
+  "sk-def-sp-coefficient-towers",
+  "def-pc-kflat-complex",
+  "lem-sp-ell-coefficient-fiber",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "def-weil-abstract-derived-category",
+  "lem-coef-derived-tower-counit-projections",
+  "def-pur-principal-koszul-quotient-towers",
+  "def-sp-commutative-coefficient-ring-tower",
+  "def-sp-total-tensor-summand-interface",
+  "def-sp-normalized-error-tower-data"
+ ],
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, and a scheme $T$. Let $R$ and $B_n$ be the coefficient sheaves of [sk-def-sp-coefficient-towers], with natural index $n$ representing exponent $n+1$. Let $Q_n$ be K-flat cochain complexes of $B_n$-modules [def-pc-kflat-complex], with strict semilinear transitions satisfying the identity and cocycle equations. Assume the normalized maps $Q_n\\otimes_{B_n}B_m\\to Q_m$, $x\\otimes b\\mapsto bq_{n,m}(x)$, are quasi-isomorphisms. Fix $m$. Form the total tensors and coefficient fibers of [lem-sp-ell-coefficient-fiber] and [def-pc-tensor-complex-sheaves]. There are strict $R$-towers $A,M,S$ with levels $Q_{m+j}\\otimes_{B_{m+j}}F_{m+j,m}$, $Q_{m+j}\\otimes_RK_m$, and $Q_{m+j}\\otimes_{B_{m+j}}B_m$, and a distinguished triangle $A\\to M\\to S\\to A[1]$ in the derived category of strict towers. Its maps have the coefficient augmentation formulas; its associativity identification is $x\\otimes(b\\otimes k)\\mapsto bx\\otimes k$. The transitions are the displayed semilinear tensor transitions, reducing the first two fiber coordinates and keeping the last $B_m$ coordinate fixed. There is a strict levelwise quasi-isomorphism $S[1]_{\\mathrm{powered}}\\to A$, also a quasi-isomorphism after rearrangement into complexes of towers, where adjacent powered transitions are $\\ell$ times shifted transitions of $S$. The normalized reductions form a strict levelwise quasi-isomorphism $S\\to\\Delta Q_m$. Every level of the powered tower receives a zero transition from some later level. No derived inverse limit is asserted.",
+ "proof": [
+  {
+   "text": "Write $A_n=Q_n\\otimes_{B_n}F_{n,m}$ and $M_n=Q_n\\otimes_RK_m$. The coefficient maps of [lem-sp-ell-coefficient-fiber] and the given semilinear $q_{n',n}$ define the strict transitions on $A$, $M$ and $S$: on tensors they are $x\\otimes f\\mapsto q_{n',n}(x)\\otimes\\bar f$, $x\\otimes k\\mapsto q_{n',n}(x)\\otimes k$, and $x\\otimes b\\mapsto q_{n',n}(x)\\otimes b$, respectively. Semilinearity makes these balanced; identities and cocycles follow on these generators, hence on sheaf tensor products. The mutually inverse balanced maps $x\\otimes(b\\otimes k)\\mapsto bx\\otimes k$ and $x\\otimes k\\mapsto x\\otimes(1\\otimes k)$ identify $Q_n\\otimes_{B_n}P_{n,m}$ with $M_n$. Since $b$ has degree zero, the total differentials agree without an extra sign [def-pc-tensor-complex-sheaves]. Both maps commute with transitions, and the tensored coefficient augmentation becomes $a_n:M_n\\to S_n$, $x\\otimes k\\mapsto x\\otimes\\epsilon_m(k)$.",
+   "uses": [
+    "lem-sp-ell-coefficient-fiber",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph: coefficient-fiber triangles, normalization and vanishing left term."
+   }
+  },
+  {
+   "text": "The rotated cone triangle of $\\epsilon_{n,m}:P_{n,m}\\to B_m$ is $F_{n,m}\\to P_{n,m}\\to B_m\\to F_{n,m}[1]$ [def-weil-abstract-derived-category, def-weil-triangulated-category]. Apply the tensor-cone and shift comparisons of [lem-weil-pbc-total-tensor-homotopy-cone-signs] with fixed first factor $Q_n$. They identify its tensor image with the rotated cone triangle of $a_n$, giving $A_n\\to M_n\\xrightarrow{a_n}S_n\\to A_n[1]$. More explicitly the comparison on a $Q_n^p$ times cone-target summand is identity, and on a $Q_n^p$ times cone-source summand it is multiplication by $(-1)^p$. These formulas preserve the augmentation and connecting arrow. Every transition has degree zero, respects scalar multiplication and commutes with $\\epsilon$; thus the same summand formulas commute with the semilinear transitions, although the rings $B_n$ vary. Consequently the comparisons form chain isomorphisms of strict $R$-towers to the rotated cone triangle of the strict chain map $a:M\\to S$. This proves distinguishedness in the derived category of strict towers, using its levelwise abelian structure [lem-weil-tower-category-levelwise-abelian].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph: coefficient-fiber triangles, normalization and vanishing left term."
+   }
+  },
+  {
+   "text": "Let $\\eta_n:B_m[1]\\to F_{n,m}$ be the quasi-isomorphism in [lem-sp-ell-coefficient-fiber]. Since $Q_n$ is K-flat, [lem-weil-pbc-total-tensor-homotopy-cone-signs] says that $1\\otimes\\eta_n$ is a quasi-isomorphism without a boundedness assumption. Identify $Q_n\\otimes_{B_n}B_m[1]$ with $S_n[1]$ by sending $x\\otimes b$ for $x\\in Q_n^p$ to $(-1)^p x\\otimes b$ in the shifted total complex. Indeed the differential on $S_n[1]$ is $-d_{S_n}$, so this sign makes the identification a chain map. Put $E_n=S_n[1]$ with transition $e_{n',n}=\\ell^{n'-n}s_{n',n}[1]$, where $s$ is the usual transition on $S$. The coefficient identity $f_{n',n}\\eta_{n'}=\\eta_n\\ell^{n'-n}$ gives\n$$a^A_{n',n}(1\\otimes\\eta_{n'})=(1\\otimes\\eta_n)(\\ell^{n'-n}s_{n',n}[1]),$$\nafter the signed shift identifications; the signs agree because $q_{n',n}$ preserves $p$. Thus these maps give a strict levelwise quasi-isomorphism $E\\to A$. Evaluation is exact [lem-weil-tower-category-levelwise-abelian], so kernels, images and cohomology are levelwise: this map is a quasi-isomorphism of tower complexes and becomes an isomorphism in their derived category [def-weil-abstract-derived-category].",
+   "uses": [
+    "lem-sp-ell-coefficient-fiber",
+    "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph: coefficient-fiber triangles, normalization and vanishing left term."
+   }
+  },
+  {
+   "text": "Define $\\rho_n:S_n\\to Q_m$ by $\\rho_n(x\\otimes b)=bq_{n,m}(x)$. For $n'\\geq n\\geq m$, the cocycle law gives\n$$\\rho_n s_{n',n}(x\\otimes b)=bq_{n,m}q_{n',n}(x)=bq_{n',m}(x)=\\rho_{n'}(x\\otimes b).$$\nHence $\\rho:S\\to\\Delta Q_m$ is a strict tower map. Its components are precisely the quasi-isomorphisms assumed in the statement; at $n=m$ it is the canonical unit $Q_m\\otimes_{B_m}B_m\\cong Q_m$. Exact evaluation [lem-weil-tower-category-levelwise-abelian] makes $\\rho$ a quasi-isomorphism of tower complexes, so its image in the localized derived tower category [def-weil-abstract-derived-category] is an isomorphism. Applying the functor $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] gives an isomorphism $R\\lim S\\to R\\lim\\Delta Q_m$.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+    "place": "Proof paragraph: coefficient-fiber triangles, normalization and vanishing left term."
+   }
+  },
+  {
+   "text": "The coefficient B_m is killed by ell^(m+1), so each S level and its shift are killed by that scalar. Induction on the gap shows powered transitions are ell to the gap times shifted ordinary transitions. The gap m+1 is therefore zero.",
+   "uses": [
+    "sk-def-sp-coefficient-towers"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sp-ell-coefficient-fiber",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "lem-weil-tower-category-levelwise-abelian",
+  "sk-def-sp-coefficient-towers"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
+  "place": "Proof paragraph: explicit strict-complex and signed tensor refinement of the coefficient-fiber triangle and normalization argument; checked against Bhatt–Scholze §3.5, Lemmas 3.5.4–3.5.7, and Stacks Tags 0940, 0941, 08BJ."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedStrictTensorFiber",
+  "file": "lean/Sheaf/Paper/NormalizedStrictTensorFiber.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.sp_normalized_strict_tensor_fiber",
+  "statement": "theorem sp_normalized_strict_tensor_fiber\n    (Q : ∀ n : ℕ,\n      CochainComplex (SheafOfModules.{max u (t + 1)} (spCoefficientRing l E T n)) ℤ)\n    (q : SpErrorTransitions l E T Q)\n    (hq_id : ∀ (n : ℕ) (p : ℤ) (U : T.ProEtᵒᵖ) (x : ((Q n).X p).val.obj U),\n      spErrorTransitionValue l E T Q q n n le_rfl p U x = x)\n    (hq_comp : ∀ (n k m : ℕ) (hkn : k ≤ n) (hmk : m ≤ k)\n      (p : ℤ) (U : T.ProEtᵒᵖ) (x : ((Q n).X p).val.obj U),\n      spErrorTransitionValue l E T Q q k m hmk p U\n        (spErrorTransitionValue l E T Q q n k hkn p U x) =\n      spErrorTransitionValue l E T Q q n m (hmk.trans hkn) p U x)\n    (hflat : ∀ n : ℕ, CochainComplex.IsKFlatIndependentCoefficients\n      (R := (spCoefficientCommRings l E T).obj (op n)) (Q n))\n    (hnorm : ∀ (n m : ℕ) (h : m ≤ n),\n      ∃ ρ : spErrorReduction l E T Q n m h ⟶ (spErrorRestrict l E T m).obj (Q m),\n        SpErrorReductionFormula l E T Q q n m h ρ ∧ QuasiIso ρ)\n    (m : ℕ)\n    :\n  ∃ (A : ℕᵒᵖ ⥤ CochainComplex (spErrorModules l E T) ℤ),\n  ∃ (s : ∀ j : ℕ, spErrorReduction l E T Q (m + (j + 1)) m (by omega) ⟶\n    spErrorReduction l E T Q (m + j) m (by omega)),\n  ∃ (t : ∀ j : ℕ, spErrorMiddle l E T Q (m + (j + 1)) m ⟶\n    spErrorMiddle l E T Q (m + j) m),\n  ∃ (a : spErrorTailM l E T Q m t ⟶ spErrorTailS l E T Q m s),\n  ∃ (left : A ⟶ spErrorTailM l E T Q m t),\n  ∃ (ρ : spErrorTailS l E T Q m s ⟶\n    (Functor.const ℕᵒᵖ).obj ((spErrorRestrict l E T m).obj (Q m))),\n  ∃ (assoc : ∀ j : ℕ, spErrorCoefficientTensor l E T Q (m + j) m ≅\n    spErrorMiddle l E T Q (m + j) m),\n  ∃ (fiber : ∀ j : ℕ, spErrorFiberTensor l E T Q (m + j) m (by omega) ≅ A.obj (op j)),\n  ∃ (η : spErrorPoweredShift l E T Q m s ⟶ A),\n  /- s_formula -/\n  (∀ (j : ℕ) (p : ℤ) (U : T.ProEtᵒᵖ)\n      (x : ((Q (m + (j + 1))).X p).val.obj U)\n      (b : (spCoefficientRing l E T m).obj.obj U),\n    ((s j).f p).val.app U\n        (spErrorReductionGenerator l E T Q (m + (j + 1)) m (by omega) p U x b) =\n      spErrorReductionGenerator l E T Q (m + j) m (by omega) p U\n        (spErrorTransitionValue l E T Q q (m + (j + 1)) (m + j) (by omega) p U x) b) ∧\n  /- t_formula -/\n  (∀ (j : ℕ) (p z : ℤ) (U : T.ProEtᵒᵖ)\n      (x : ((Q (m + (j + 1))).X p).val.obj U)\n      (k : ((principalKoszul (completedIntegralCommRingSheafUnrestricted l E T)\n        (spCompletedScalar l E T l) m).X z).val.obj U),\n    ((t j).f (p + z)).val.app U\n        (spErrorGenerator (completedIntegralCommRingSheafUnrestricted l E T)\n          ((spErrorRestrict l E T (m + (j + 1))).obj (Q (m + (j + 1))))\n          (principalKoszul (completedIntegralCommRingSheafUnrestricted l E T)\n            (spCompletedScalar l E T l) m) p z U x k) =\n      spErrorGenerator (completedIntegralCommRingSheafUnrestricted l E T)\n        ((spErrorRestrict l E T (m + j)).obj (Q (m + j)))\n        (principalKoszul (completedIntegralCommRingSheafUnrestricted l E T)\n          (spCompletedScalar l E T l) m) p z U\n            (spErrorTransitionValue l E T Q q (m + (j + 1)) (m + j) (by omega) p U x) k) ∧\n  /- a_left -/\n  (∀ (j : ℕ) (p : ℤ) (U : T.ProEtᵒᵖ)\n      (x : ((Q (m + j)).X p).val.obj U),\n    (((a.app (op j)).f (p + -1)).val.app U\n      (spErrorGenerator (completedIntegralCommRingSheafUnrestricted l E T)\n        ((spErrorRestrict l E T (m + j)).obj (Q (m + j)))\n        (principalKoszul (completedIntegralCommRingSheafUnrestricted l E T)\n          (spCompletedScalar l E T l) m) p (-1) U x\n            (spErrorConeLeft (spErrorKoszulScalar l E T m) U\n              (1 : (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)))) = 0) ∧\n  /- a_right -/\n  (∀ (j : ℕ) (p : ℤ) (U : T.ProEtᵒᵖ)\n      (x : ((Q (m + j)).X p).val.obj U),\n    (((a.app (op j)).f (p + 0)).val.app U\n      (spErrorGenerator (completedIntegralCommRingSheafUnrestricted l E T)\n        ((spErrorRestrict l E T (m + j)).obj (Q (m + j)))\n        (principalKoszul (completedIntegralCommRingSheafUnrestricted l E T)\n          (spCompletedScalar l E T l) m) p 0 U x\n            (spErrorConeRight (spErrorKoszulScalar l E T m) U\n              (1 : (completedIntegralCoefficientSheafUnrestricted l E T).obj.obj U)))) =\n      spErrorGenerator ((spCoefficientCommRings l E T).obj (op (m + j))) (Q (m + j))\n        ((CochainComplex.singleFunctor _ 0).obj\n          (spRelativeCoefficient l E T (m + j) m (by omega))) p 0 U x\n        ((HomologicalComplex.singleObjXSelf (.up ℤ) 0\n          (spRelativeCoefficient l E T (m + j) m (by omega))).inv.val.app U\n            (1 : (spCoefficientRing l E T m).obj.obj U))) ∧\n  /- assoc_formula -/\n  (∀ j : ℕ, SpErrorAssociativityFormula l E T Q (m + j) m (assoc j)) ∧\n  /- fiber_transition_formula -/\n  (∀ j : ℕ,\n    SpErrorFiberTransitionFormula l E T Q q (m + (j + 1)) (m + j) m (by omega) (by omega)\n      ((fiber (j + 1)).hom ≫ A.map (homOfLE (Nat.le_succ j)).op ≫ (fiber j).inv)) ∧\n  /- distinguished -/\n  (∃ δ,\n    Triangle.mk\n      ((DerivedCategory.Q.{w} (C := ℕᵒᵖ ⥤ spErrorModules l E T)).map\n        (koszulTowerComplexMap (completedIntegralCommRingSheafUnrestricted l E T) left))\n      ((DerivedCategory.Q.{w} (C := ℕᵒᵖ ⥤ spErrorModules l E T)).map\n        (koszulTowerComplexMap (completedIntegralCommRingSheafUnrestricted l E T) a)) δ ∈\n      distTriang (DerivedCategory.{w} (ℕᵒᵖ ⥤ spErrorModules l E T))) ∧\n  /- η_quasiIso -/\n  (QuasiIso\n    (koszulTowerComplexMap (completedIntegralCommRingSheafUnrestricted l E T) η)) ∧\n  /- η_levelwise -/\n  (∀ j : ℕ, QuasiIso (η.app (op j))) ∧\n  /- reduction_formula -/\n  (∀ j : ℕ,\n    SpErrorReductionFormula l E T Q q (m + j) m (by omega) (ρ.app (op j))) ∧\n  /- reduction_quasiIso -/\n  (∀ j : ℕ, QuasiIso (ρ.app (op j))) ∧\n  /- powered_chain_zero -/\n  (∀ n : ℕ, ∃ (n' : ℕ) (h : n ≤ n'),\n    (spErrorPoweredShift l E T Q m s).map (homOfLE h).op = 0)",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "K4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b20eb",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261021T172402-L-3363646",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b20eb",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261021T172402-L-3363646",
+  "kind": "interface",
+  "note": "independent cc review: delivered NormalizedErrorTowerData.lean vs live item module (verbatim move of 32 decls); item theorem signature vs live; sp_normalized_strict_tensor_fiber vs item's SpNormalizedErrorDiagram (chain-level subset + true powered_chain_zero) and node lem-sp-normalized-strict-tensor-fiber"
+ }
+}

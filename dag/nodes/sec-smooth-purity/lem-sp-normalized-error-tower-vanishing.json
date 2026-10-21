@@ -21,116 +21,62 @@
  ],
  "proof": [
   {
-   "text": "Write $A_n=Q_n\\otimes_{B_n}F_{n,m}$ and $M_n=Q_n\\otimes_RK_m$. The coefficient maps of [lem-sp-ell-coefficient-fiber] and the given semilinear $q_{n',n}$ define the strict transitions on $A$, $M$ and $S$: on tensors they are $x\\otimes f\\mapsto q_{n',n}(x)\\otimes\\bar f$, $x\\otimes k\\mapsto q_{n',n}(x)\\otimes k$, and $x\\otimes b\\mapsto q_{n',n}(x)\\otimes b$, respectively. Semilinearity makes these balanced; identities and cocycles follow on these generators, hence on sheaf tensor products. The mutually inverse balanced maps $x\\otimes(b\\otimes k)\\mapsto bx\\otimes k$ and $x\\otimes k\\mapsto x\\otimes(1\\otimes k)$ identify $Q_n\\otimes_{B_n}P_{n,m}$ with $M_n$. Since $b$ has degree zero, the total differentials agree without an extra sign [def-pc-tensor-complex-sheaves]. Both maps commute with transitions, and the tensored coefficient augmentation becomes $a_n:M_n\\to S_n$, $x\\otimes k\\mapsto x\\otimes\\epsilon_m(k)$.",
+   "text": "Apply the normalized strict tensor-fiber theorem, obtaining the chain-level towers, maps, their formulas, distinguished triangle, powered-shift quasi-isomorphism, normalized strict reduction, and eventual zero powered transitions. Induction on the gap computes the exact powered transition formula.",
    "uses": [
-    "lem-sp-ell-coefficient-fiber",
-    "def-pc-tensor-complex-sheaves"
+    "lem-sp-normalized-strict-tensor-fiber"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Proof paragraph: coefficient-fiber triangles, normalization and vanishing left term."
-   }
+   "elementary": false
   },
   {
-   "text": "The rotated cone triangle of $\\epsilon_{n,m}:P_{n,m}\\to B_m$ is $F_{n,m}\\to P_{n,m}\\to B_m\\to F_{n,m}[1]$ [def-weil-abstract-derived-category, def-weil-triangulated-category]. Apply the tensor-cone and shift comparisons of [lem-weil-pbc-total-tensor-homotopy-cone-signs] with fixed first factor $Q_n$. They identify its tensor image with the rotated cone triangle of $a_n$, giving $A_n\\to M_n\\xrightarrow{a_n}S_n\\to A_n[1]$. More explicitly the comparison on a $Q_n^p$ times cone-target summand is identity, and on a $Q_n^p$ times cone-source summand it is multiplication by $(-1)^p$. These formulas preserve the augmentation and connecting arrow. Every transition has degree zero, respects scalar multiplication and commutes with $\\epsilon$; thus the same summand formulas commute with the semilinear transitions, although the rings $B_n$ vary. Consequently the comparisons form chain isomorphisms of strict $R$-towers to the rotated cone triangle of the strict chain map $a:M\\to S$. This proves distinguishedness in the derived category of strict towers, using its levelwise abelian structure [lem-weil-tower-category-levelwise-abelian].",
+   "text": "Apply the ringed strict-tower limit theorem and transport its K-injective computation, exact structure, and pro-zero criterion to the specified total right-derived functor by the unique derived-functor isomorphism. Naturality of the evaluation comparison transports evaluated transitions without changing them.",
    "uses": [
-    "def-weil-abstract-derived-category",
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-total-tensor-homotopy-cone-signs",
-    "lem-weil-tower-category-levelwise-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Proof paragraph: coefficient-fiber triangles, normalization and vanishing left term."
-   }
-  },
-  {
-   "text": "Let $\\eta_n:B_m[1]\\to F_{n,m}$ be the quasi-isomorphism in [lem-sp-ell-coefficient-fiber]. Since $Q_n$ is K-flat, [lem-weil-pbc-total-tensor-homotopy-cone-signs] says that $1\\otimes\\eta_n$ is a quasi-isomorphism without a boundedness assumption. Identify $Q_n\\otimes_{B_n}B_m[1]$ with $S_n[1]$ by sending $x\\otimes b$ for $x\\in Q_n^p$ to $(-1)^p x\\otimes b$ in the shifted total complex. Indeed the differential on $S_n[1]$ is $-d_{S_n}$, so this sign makes the identification a chain map. Put $E_n=S_n[1]$ with transition $e_{n',n}=\\ell^{n'-n}s_{n',n}[1]$, where $s$ is the usual transition on $S$. The coefficient identity $f_{n',n}\\eta_{n'}=\\eta_n\\ell^{n'-n}$ gives\n$$a^A_{n',n}(1\\otimes\\eta_{n'})=(1\\otimes\\eta_n)(\\ell^{n'-n}s_{n',n}[1]),$$\nafter the signed shift identifications; the signs agree because $q_{n',n}$ preserves $p$. Thus these maps give a strict levelwise quasi-isomorphism $E\\to A$. Evaluation is exact [lem-weil-tower-category-levelwise-abelian], so kernels, images and cohomology are levelwise: this map is a quasi-isomorphism of tower complexes and becomes an isomorphism in their derived category [def-weil-abstract-derived-category].",
-   "uses": [
-    "lem-sp-ell-coefficient-fiber",
-    "lem-weil-pbc-total-tensor-homotopy-cone-signs",
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Proof paragraph: coefficient-fiber triangles, normalization and vanishing left term."
-   }
-  },
-  {
-   "text": "Define $\\rho_n:S_n\\to Q_m$ by $\\rho_n(x\\otimes b)=bq_{n,m}(x)$. For $n'\\geq n\\geq m$, the cocycle law gives\n$$\\rho_n s_{n',n}(x\\otimes b)=bq_{n,m}q_{n',n}(x)=bq_{n',m}(x)=\\rho_{n'}(x\\otimes b).$$\nHence $\\rho:S\\to\\Delta Q_m$ is a strict tower map. Its components are precisely the quasi-isomorphisms assumed in the statement; at $n=m$ it is the canonical unit $Q_m\\otimes_{B_m}B_m\\cong Q_m$. Exact evaluation [lem-weil-tower-category-levelwise-abelian] makes $\\rho$ a quasi-isomorphism of tower complexes, so its image in the localized derived tower category [def-weil-abstract-derived-category] is an isomorphism. Applying the functor $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] gives an isomorphism $R\\lim S\\to R\\lim\\Delta Q_m$.",
-   "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-weil-abstract-derived-category",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Proof paragraph: coefficient-fiber triangles, normalization and vanishing left term."
-   }
+   "elementary": false
   },
   {
-   "text": "Every term of $S_n$ is a $B_m$-module, so $\\ell^mS_n=0$ as a complex. Therefore $e_{n+m,n}=\\ell^m s_{n+m,n}[1]=0$ as a chain map. The strict quasi-isomorphism $E\\to A$ of step 3 gives, at these two levels, $a^A_{n+m,n}=\\eta^Q_n e_{n+m,n}(\\eta^Q_{n+m})^{-1}=0$ in $D(R)$. The site is the small pro-etale site fixed by [sk-def-sp-coefficient-towers]; $R$ is a commutative ring sheaf. Reindexing $n\\geq m$ by $n=m+j-1$ puts these towers exactly under [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Its pro-zero conclusion applies to $A$ and gives $R\\lim A=0$. This uses a fixed gap $m$, with no cohomological bounds and no assertion about exactness of ordinary products.",
-   "uses": [
-    "sk-def-sp-coefficient-towers",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-    "place": "Proof paragraph: coefficient-fiber triangles, normalization and vanishing left term."
-   }
-  },
-  {
-   "text": "We check the specified diagonal identification for the constant tower. Choose a K-injective resolution $i:Q_m\\to I$ using [prop-pur-kinjective-resolutions-exist] on the small ringed site of [sk-def-sp-coefficient-towers]. For any complex of towers $Z$, a chain map $Z\\to\\Delta I$ is determined by its component $Z_m\\to I$: the component at $n\\geq m$ is its composite with $Z_n\\to Z_m$. The same statement holds for homotopies. If $Z$ is acyclic, $Z_m$ is acyclic by [lem-weil-tower-category-levelwise-abelian]; K-injectivity of $I$ [def-pur-kinjective-complex] therefore makes every $Z\\to\\Delta I$ null-homotopic. Thus $\\Delta I$ is K-injective, and $\\Delta i$ is a levelwise quasi-isomorphism. The resolution formula in [lem-weil-pbc-ringed-strict-tower-homotopy-limit] computes $R\\lim\\Delta Q_m$ by $\\lim\\Delta I=I$, with each projection the identity of $I$. The diagonal $d:Q_m\\to R\\lim\\Delta Q_m$ induced by the identity cone is represented by $i$, hence is invertible. Its inverse is exactly the diagonal identification used in the statement. This is a direct adjunction calculation, not an appeal to termwise products computing unbounded derived products.",
-   "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "sk-def-sp-coefficient-towers",
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-pur-kinjective-complex",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives), direct adjunction calculation; sites-cohomology.tex Tag 0940 (section-derived-limits), K-injective computation; injectives.tex Tag 079P (theorem-K-injective-embedding-grothendieck)."
-   }
-  },
-  {
-   "text": "Exactness of $R\\lim$ in [lem-weil-pbc-ringed-strict-tower-homotopy-limit] sends the strict cone triangle in step 2 to a distinguished triangle $0\\to R\\lim M\\xrightarrow{u}R\\lim S\\to0$, where $u=R\\lim(a)$. To check that this actual arrow is invertible, apply [lem-weil-pbc-hom-into-triangle-exact] and rotations from [def-weil-triangulated-category]. With $B=R\\lim S$ exactness gives $r:B\\to R\\lim M$ such that $ur=1_B$. With $W=R\\lim M$ the backwards rotated triangle shows that composition with $u$ is injective, since its preceding term is zero; hence $ru=1$. Thus $u$ is invertible. Step 4 gives the invertible $R\\lim(\\rho)$, and step 6 gives the invertible $d^{-1}$. Their composite $d^{-1}R\\lim(\\rho)R\\lim(a)$ is therefore an isomorphism $R\\lim(Q_n\\otimes_RK_m)\\to Q_m$. The maps $a$ and $\\rho$ were the actual strict augmentation and transition-induced reduction maps, and $d$ was the identity diagonal cone. Functoriality of the total derived functor therefore identifies this composite with exactly the composite in the statement.",
+   "text": "Naturality of the levelwise quasi-isomorphism from the powered shift implies its eventually zero transitions make A pro-zero after localization. Apply the transported pro-zero criterion.",
    "uses": [
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-hom-into-triangle-exact",
-    "def-weil-triangulated-category"
+    "lem-sp-normalized-strict-tensor-fiber"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0940 (section-derived-limits), 0941 (lemma-derived-limit-is-ok); derived.tex Tags 0149 (lemma-representable-homological), 0145 (definition-triangulated)."
-   }
+   "elementary": true
+  },
+  {
+   "text": "Evaluation at zero is exact and left adjoint to constants: the adjunct of f:X_0→P has component X_n→X_0→P. Constants therefore preserve K-injectives. Resolve Q_m by a K-injective complex; the ordinary constant/limit unit is invertible since constants are fully faithful. The derived comparison on the constant resolution is invertible. Naturality and the resolution quasi-isomorphism prove that the specified diagonal is invertible.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-pur-kinjective-complex",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-coef-derived-tower-counit-projections"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact evaluation detects that the normalized strict reduction is a quasi-isomorphism. Apply the exact derived limit to the strict distinguished triangle. Since its first object is zero, its second arrow is invertible by the distinguished-triangle zero-object criterion. Compose with the localized strict reduction and inverse of the actual diagonal.",
+   "uses": [
+    "lem-weil-pbc-hom-into-triangle-exact",
+    "def-weil-triangulated-category",
+    "lem-sp-normalized-strict-tensor-fiber",
+    "lem-weil-tower-category-levelwise-abelian"
+   ],
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-tensor-complex-sheaves",
   "def-pur-kinjective-complex",
-  "def-weil-abstract-derived-category",
   "def-weil-triangulated-category",
-  "lem-sp-ell-coefficient-fiber",
+  "lem-coef-derived-tower-counit-projections",
+  "lem-sp-normalized-strict-tensor-fiber",
   "lem-weil-pbc-hom-into-triangle-exact",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-total-tensor-homotopy-cone-signs",
   "lem-weil-tower-category-levelwise-abelian",
-  "prop-pur-kinjective-resolutions-exist",
-  "sk-def-sp-coefficient-towers"
+  "prop-pur-kinjective-resolutions-exist"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/sk-lem-sp-tower.proof.md",
-  "place": "Proof paragraph: explicit strict-complex and signed tensor refinement of the coefficient-fiber triangle and normalization argument; checked against Bhatt–Scholze §3.5, Lemmas 3.5.4–3.5.7, and Stacks Tags 0940, 0941, 08BJ."
+  "place": "K4 Lean proof: strict tensor-fiber construction followed by derived uniqueness, pro-zero vanishing, K-injective constant diagonal and exactness."
  },
  "mathlib_searches": [
   {
@@ -383,38 +329,6 @@
   "module": "Sheaf.Paper.NormalizedErrorTowerVanishing",
   "declaration": "AlgebraicGeometry.ProEtale.sp_normalized_error_tower_vanishing",
   "declarations": [
-   "AlgebraicGeometry.ProEtale.spErrorRestrict",
-   "AlgebraicGeometry.ProEtale.spErrorSection",
-   "AlgebraicGeometry.ProEtale.spErrorPure",
-   "AlgebraicGeometry.ProEtale.spErrorGenerator",
-   "AlgebraicGeometry.ProEtale.spErrorCoefficientAugmentation",
-   "AlgebraicGeometry.ProEtale.spErrorCoefficientFiber",
-   "AlgebraicGeometry.ProEtale.spErrorReduction",
-   "AlgebraicGeometry.ProEtale.spErrorFiberTensor",
-   "AlgebraicGeometry.ProEtale.spErrorMiddle",
-   "AlgebraicGeometry.ProEtale.spErrorReductionGenerator",
-   "AlgebraicGeometry.ProEtale.spErrorCoefficientTensor",
-   "AlgebraicGeometry.ProEtale.spErrorConeLeft",
-   "AlgebraicGeometry.ProEtale.spErrorConeRight",
-   "AlgebraicGeometry.ProEtale.spErrorKoszulScalar",
-   "AlgebraicGeometry.ProEtale.SpErrorTransitions",
-   "AlgebraicGeometry.ProEtale.spErrorTransitionValue",
-   "AlgebraicGeometry.ProEtale.SpErrorReductionFormula",
-   "AlgebraicGeometry.ProEtale.spErrorTowerComplex",
-   "AlgebraicGeometry.ProEtale.spErrorDiagonal",
-   "AlgebraicGeometry.ProEtale.spErrorModules",
-   "AlgebraicGeometry.ProEtale.spErrorTailS",
-   "AlgebraicGeometry.ProEtale.spErrorTailM",
-   "AlgebraicGeometry.ProEtale.spErrorPoweredMap",
-   "AlgebraicGeometry.ProEtale.spErrorPoweredShift",
-   "AlgebraicGeometry.ProEtale.spErrorFiberLeftElement",
-   "AlgebraicGeometry.ProEtale.spErrorFiberMiddleElement",
-   "AlgebraicGeometry.ProEtale.spErrorFiberRightElement",
-   "AlgebraicGeometry.ProEtale.spErrorFiberTensorGenerator",
-   "AlgebraicGeometry.ProEtale.SpErrorFiberTransitionFormula",
-   "AlgebraicGeometry.ProEtale.SpErrorAssociativityFormula",
-   "AlgebraicGeometry.ProEtale.spErrorLimitComparison",
-   "AlgebraicGeometry.ProEtale.SpNormalizedErrorDiagram",
    "AlgebraicGeometry.ProEtale.sp_normalized_error_tower_vanishing"
   ],
   "file": "lean/Sheaf/Paper/NormalizedErrorTowerVanishing.lean",
@@ -423,7 +337,7 @@
   "by": "NC",
   "date": "2026-10-21",
   "existing": false,
-  "note": "Natural level n denotes positive exponent n+1. SpNormalizedErrorDiagram spells out the full existential strict-tower triangle, the coordinatewise canonical transitions, normalized augmentation and tensor associativity, powered-shift quasi-isomorphism, levelwise normalized reduction, vanishing total derived limit, and the exact composite with the identity-cone diagonal. All helper definitions belong to these displayed constructions; the only postponed theorem is the item. Returned H2 repair: the commutative coefficient tower and total-tensor helper definitions are cited through their existing:true definition nodes; their host theorem nodes are not statement dependencies."
+  "note": "Natural level n denotes positive exponent n+1. SpNormalizedErrorDiagram spells out the full existential strict-tower triangle, the coordinatewise canonical transitions, normalized augmentation and tensor associativity, powered-shift quasi-isomorphism, levelwise normalized reduction, vanishing total derived limit, and the exact composite with the identity-cone diagonal. All helper definitions belong to these displayed constructions; the only postponed theorem is the item. Returned H2 repair: the commutative coefficient tower and total-tensor helper definitions are cited through their existing:true definition nodes; their host theorem nodes are not statement dependencies. K4: definitions are now owned by def-sp-normalized-error-tower-data and publicly re-exported; the theorem signature is unchanged."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -432,5 +346,15 @@
   "group": "NC",
   "result": "pass",
   "note": "Re-delivery after the 9b8687c4 H2 RETURN. Lean module byte-identical (sha256 a5e3a3c6), whose substance was already accepted; lean.statement verbatim. The theorem stmt_deps det-sp-coefficient-towers-abelian and lem-weil-pbc-total-tensor-homotopy-cone-signs are replaced by two new existing:true definition nodes: def-sp-commutative-coefficient-ring-tower (spCoefficientCommRings, real constant quotient sheaves and factorPowSucc data, cites sk-def-sp-coefficient-towers) and def-sp-total-tensor-summand-interface (TotalTensorSigns Modules/tensor/total/ι, aliases of ringedSiteModules/curriedTensor/map2CochainComplex/ιMapBifunctor, citing 3 definition nodes). Both are verbatim from source, have a source place and searches, and no duplicate owner exists in live or side-live. Mechanical finding: lem-coef-derived-tower-counit-projections supplies only the Prop instances strictTowerConstantAdditive/strictTowerLimitAdditive needed by mapHomologicalComplex in spErrorDiagonal and spErrorLimitComparison, so this is a genuine dependency (PASS on point). No compile run (no file changed); worker reports a clean compile (22.8 s / 20.3 s). Advisory: powered_transitions and assoc are redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-b20eb",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261021T172402-L-3363646",
+  "kind": "interface",
+  "note": "independent cc review: delivered NormalizedErrorTowerData.lean vs live item module (verbatim move of 32 decls); item theorem signature vs live; sp_normalized_strict_tensor_fiber vs item's SpNormalizedErrorDiagram (chain-level subset + true powered_chain_zero) and node lem-sp-normalized-strict-tensor-fiber"
  }
 }
