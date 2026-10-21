@@ -280,5 +280,37 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-91188c5d8 (reviewer sub-agent of L); spot-checked: Read in full the item's ten steps and the statements of all five cited nodes: def-sfb-condensed-action-module, lem-sfb-internal-action-site-presentation, lem-sfb-condensed-product-action-inflation, and the Mathlib leaves def-weil-presheaf-modules-sheafification and lem-weil-pbc-ringed-site-module-sheafification-exact. Also read the source: blueprint main-20261015 direct-images proof §(3), which does not state induction, so the item is correctly marked agent-written with WANTED, plus Stacks 03EI = sites-modules-lemma-sheafification-exact. Steps 1-5: the induction/restriction adjunction checks on generators. Balancing (ph)f(m)=p f(hm), equivariance of the unit, and ΨΦ(F)=F all follow from uniqueness of the sheafification extension; the P-equivariance of the extension comes from the action-site clause that identifies the two sheafifications. Steps 6-8: P_S ≅ X_S×H_S as right H_S-sets via p=(s∘qp)h_p, so A(S)[P_S] is a free right A(S)[H_S]-module and B_M(S) ≅ ⊕_{X_S} M(S). This is natural under restriction since h_{p∘t}=h_p∘t, and needs no normality. Step 9: ker B_u = B_K as presheaves, exact module sheafification on the ringed site (C,A) preserves it, and the action-site node gives the equivariant kernel. Step 10: cokernels are preserved by the written-out adjunction argument, and a short exact sequence is a kernel/cokernel pair in the abelian A_P. Small cases tested: H=P, H=1, P trivial, S=∅, A=0, P=Z_p with H=pZ_p. Route: all statement citations are in unit sk-thm-sf-ctf-stability, the rest are definitions or Mathlib leaves, and no tool_uses are needed. No cycle (closure of 271 nodes), no SGA, no new nodes, statement unchanged. The rg -L duplicate search over dag/nodes found no node stating condensed induction. The citer lem-sfb-derived-invariants-normal-subgroup-comparison uses exactly the stated exact left adjoint."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedSplitCosetInduction",
+  "declaration": "Profinite.CondensedAction.SplitCosetInduction.exists_datum",
+  "declarations": [
+   "Profinite.CondensedAction.SplitCosetInduction.scalar",
+   "Profinite.CondensedAction.SplitCosetInduction.ringSheaf",
+   "Profinite.CondensedAction.SplitCosetInduction.inclusion",
+   "Profinite.CondensedAction.SplitCosetInduction.relations",
+   "Profinite.CondensedAction.SplitCosetInduction.sectionTensor",
+   "Profinite.CondensedAction.SplitCosetInduction.tensorSymbol",
+   "Profinite.CondensedAction.SplitCosetInduction.TensorPresheaf",
+   "Profinite.CondensedAction.SplitCosetInduction.Construction",
+   "Profinite.CondensedAction.SplitCosetInduction.generator",
+   "Profinite.CondensedAction.SplitCosetInduction.Datum",
+   "Profinite.CondensedAction.SplitCosetInduction.exists_datum"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedSplitCosetInduction.lean",
+  "statement": "theorem exists_datum [CompactSpace P] [T2Space P] [TotallyDisconnectedSpace P] (hclosed : IsClosed (H : Set P)) [T2Space (P ⧸ H)] [TotallyDisconnectedSpace (P ⧸ H)] (s : C(P ⧸ H, P)) (hs : Function.RightInverse s (QuotientGroup.mk : P → P ⧸ H)) : Nonempty (Datum R P H)",
+  "branch": "sheaf-dag",
+  "by": "NM",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The finite-sum balanced quotient is the standard presentation of the displayed group-algebra tensor product. TensorPresheaf, Construction and Datum specify its restrictions, ordinary module sheafification, induced action, map formula, exactness and both adjunction transposes. The theorem asserts existence of this fully normalized datum; no induced object is chosen from an undetermined existence theorem."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2ff5c25b1",
+  "group": "NM",
+  "result": "pass",
+  "note": "I read the item node, all 4 stmt_deps (ActionModule/act/inflate source in side-live CondensedActionModule.lean; PresheafOfModules.sheafification), the source place (direct-images para 3, agent input, WANTED) and the full module. Clauses match. Hypotheses are exactly the node's: profinite P, closed H, P⧸H T2 and totally disconnected, continuous section with mk∘s=id; no finiteness or discreteness. The tensor product is the finsupp over C(S,P) divided by the [ph]⊗m−[p]⊗hm span, correctly balanced; restriction is fixed on symbols and is well-defined by naturality. The arbitrary sections/comparison isos are pinned through generator = comparison⁻¹∘toSheafify∘symbol, so the action, map, transpose and untranspose are uniquely determined and this is not an existential unnormalized comparison. Exactness is preservation of ShortExact; adjunction is to inflate(inclusion). Statement verbatim, 11 declarations complete, no name collision, live node had no prior lean. Docstrings have the source place and blueprint tag; only sorry is the theorem; no hollow defs. Edge cases H=P, H=1, infinite P/H, A=0, empty S, non-normal H. Not recompiled (no file changed). Advisories: proof-only imports; sectionRings reached only through the action-module dep."
  }
 }
