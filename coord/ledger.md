@@ -23670,3 +23670,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:31 L: merged deliver/NH/lem-sfb-procyclic-scalar-cochain-evaluation (stage 2; reviewer PASS; parallel immutable checks)
 - 20:31 L: merged deliver/N9/lem-trf-point-system-roos-transport (stage 2; reviewer PASS; parallel immutable checks)
 - 20:33 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (the landing tools, head 2b0055164) the delivery did not land: (d) user Sheaf.Paper.PerAdicNormalizedFibreComparisons (m)
+- 20:33 L: returned deliver/H3/Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso (reviewer RETURN: (the landing tools, head 27625c9ae) the delivery did not land: lean/Sheaf/AlgebraicGeometry/StrictHenselizationCohomolog)
