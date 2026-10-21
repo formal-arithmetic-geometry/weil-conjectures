@@ -1,0 +1,89 @@
+{
+ "id": "lem-sfb-condensed-localization-exact-cohomology",
+ "kind": "statement",
+ "title": "Condensed coefficient localization is exact and commutes with cohomology",
+ "statement": "Let $S$ be a scheme [def-pc-scheme] and let $u:V\\to S$ be an object of its small pro-étale site [sk-def-pe-site]. Let $\\Gamma$ be a commutative condensed ring [sk-def-sfb-condensed-ring], and put $\\Gamma_T=p_T^*\\Gamma$ for schemes $T$ [sk-def-sfb-pulled-back-coefficients]. Use sectionwise module sheaves [def-weil-sheaf-of-modules-category] and the ringed-topos module pullback\n$$u^*F=\\Gamma_V\\otimes_{u^{-1}\\Gamma_S}u^{-1}F$$\nwith the canonical coefficient isomorphism $\\alpha_u:u^{-1}\\Gamma_S\\xrightarrow{\\sim}\\Gamma_V$ [sk-def-sfb-coefficient-morphisms, sk-def-sfb-module-pushforward-pullback]. Then:\n\n(1) The forgetful functor identifies $V_{\\mathrm{proét}}$ with the localized site $S_{\\mathrm{proét}}/V$ [def-pur-localized-ringed-site], including its covering families. Under this identification $u^{-1}$ on abelian sheaves is sectionwise restriction. The map $\\alpha_u$ identifies $\\Gamma_S|_V$ with $\\Gamma_V$ as ring sheaves, compatibly with all section restriction maps and multiplication by sections. Transport of module actions along this ring isomorphism is an equivalence, and there is a natural isomorphism from $u^*$ to sectionwise localized module restriction followed by this transport. In particular, at every $W\\to V$, the underlying abelian group of $u^*F$ is canonically $F(W\\to S)$, with the action transported by $\\alpha_u(W)$. The functor $u^*$ is additive and exact, meaning that it preserves finite limits and finite colimits.\n\n(2) In the unbounded derived categories [def-weil-abstract-derived-category], let $D(u^*)$ be the functor induced by termwise $u^*$. If a cochain complex $K^\\bullet$ represents $Q\\in D(\\operatorname{Mod}(\\Gamma_S))$, then the termwise sectionwise restriction of $K^\\bullet$, with its coefficient actions transported as in (1), represents $D(u^*)Q$. For every $q\\in\\mathbf Z$ there is a natural isomorphism\n$$u^*H^q(Q)\\xrightarrow{\\sim}H^q(D(u^*)Q),$$\ninduced on a representative by the restriction identifications of kernels and images and the quotient onto cohomology. No boundedness, flatness, finite-presentation, quasi-compactness, quasi-separatedness or admissibility hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Tag 03CE, lemma-localize-given-products: the base-change site morphism is localization. Agent-formulated condensed ringed-module and unbounded-cohomology specialization; the supporting localization, exactness and derived source passages are identified and the full extracted argument is retained in report.md."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "sk-def-pe-site",
+  "sk-def-sfb-condensed-ring",
+  "sk-def-sfb-pulled-back-coefficients",
+  "def-weil-sheaf-of-modules-category",
+  "sk-def-sfb-coefficient-morphisms",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-pur-localized-ringed-site",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "overFunctor_exact|overFunctor.*mapDerived|condensedRingObj|CondensedRing.upperStar",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic restriction or derived-homology APIs do not identify the specific condensed coefficient pullback with sectionwise localization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of modules over a condensed coefficient ring to a pro-etale covering object is sectionwise and exact and commutes with derived cohomology",
+   "results": "8 hits: PresheafOfModules.restrictScalarsObj, ModuleCat.Tilde.toOpen, SheafOfModules.restrictScalars, CondensedMod, Condensed.instAB4CondensedMod, Condensed.instAB4StarCondensedMod, Condensed.free, instAbelianCondensedMod",
+   "date": "2026-10-21",
+   "verdict": "no match: generic restriction or derived-homology APIs do not identify the specific condensed coefficient pullback with sectionwise localization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.overFunctor",
+   "results": "3 hits: SheafOfModules.overFunctor, SheafOfModules.overFunctorMap, AlgebraicGeometry.Scheme.Modules.overFunctorEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: generic restriction or derived-homology APIs do not identify the specific condensed coefficient pullback with sectionwise localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a scheme and a commutative condensed coefficient ring, pullback to an object of its small pro-etale site is exact sectionwise module restriction and commutes with all cohomology of unbounded derived complexes",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointPullback, LightCondensed.instIsGrothendieckAbelianLightCondMod, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: generic restriction or derived-homology APIs do not identify the specific condensed coefficient pullback with sectionwise localization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image along localization of a ringed site, after transport of the coefficient ring by an isomorphism, is computed termwise on complexes and preserves their cohomology",
+   "results": "8 hits: CategoryTheory.Functor.isHomological_of_localization, CategoryTheory.Functor.mapHomologicalComplex_upToQuasiIso_Q_inverts_quasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh_hom_app_assoc, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoLocalizerMorphism, DerivedCategory.instIsLocalizationCochainComplexIntQQuasiIsoUp, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIso, CategoryTheory.Functor.mapHomologicalComplexUpToQuasiIsoFactorsh",
+   "date": "2026-10-21",
+   "verdict": "no match: generic restriction or derived-homology APIs do not identify the specific condensed coefficient pullback with sectionwise localization"
+  },
+  {
+   "tool": "grep",
+   "query": "def overFunctor|PreservesFiniteLimits.*overFunctor|PreservesFiniteColimits.*overFunctor|mapHomologicalComplex.*homology|homologyFunctorIso",
+   "results": "25 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean, Mathlib/Algebra/Homology/QuasiIso.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic restriction or derived-homology APIs do not identify the specific condensed coefficient pullback with sectionwise localization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-local-model-cohomology-descent",
+  "date": "2026-10-21",
+  "group": "Q116"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-scalar-six",
+ "blueprint": {
+  "from": {
+   "node": "det-prop-scalar-six-ctf",
+   "place": "Paragraph (2), Local models: the expression P|_W and the cohomology formula for a scalar local model. This child isolates the canonical condensed-coefficient module localization and derived cohomology comparison in old Steps 1-2 of lem-sfb-local-model-cohomology-descent.",
+   "via": [
+    "lem-sfb-local-model-cohomology-descent"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

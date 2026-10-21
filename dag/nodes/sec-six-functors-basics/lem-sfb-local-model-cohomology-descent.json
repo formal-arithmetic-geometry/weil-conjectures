@@ -30,36 +30,18 @@
  ],
  "proof": [
   {
-   "text": "For $u_i:V_i\\to S$, identify $S_{\\mathrm{proét}}/V_i$ with $(V_i)_{\\mathrm{proét}}$. Indeed an object $W\\to V_i$ weakly étale over $V_i$ is weakly étale over $S$ by composition; conversely a map to $V_i$ from a weakly étale $S$-scheme is weakly étale by [sk-lem-pe-weakly-etale-stability]. The arrows agree, and the covering families agree since both sites use the same fpqc covering condition [sk-def-pe-site]. By [def-pur-localized-ringed-site], localized inverse image of sheaves is sectionwise restriction. Under the identification just made, the abelian inverse image $u_{i,\\mathrm{Ab}}^*$ along $u_i$ is this localized restriction, and the canonical isomorphism $\\alpha_{u_i}:u_{i,\\mathrm{Ab}}^*\\Gamma_S\\xrightarrow{\\sim}\\Gamma_{V_i}$ of [sk-def-sfb-coefficient-morphisms] gives ring isomorphisms $\\theta_W:\\Gamma_S(W)\\cong\\Gamma(W,\\Gamma_W)$ compatible with restriction along every map $W'\\to W$ over $V_i$, and carrying multiplication by a section to multiplication by its image [lem-sfb-coefficient-sections-localization]. Hence $\\alpha_{u_i}$ identifies the restricted coefficient ring $\\Gamma_S|_{V_i}$ with $\\Gamma_{V_i}$. Renaming a module action along this ring isomorphism and along its inverse gives inverse equivalences of module categories. Thus the notation $Q|_{V_i}$ uses the exact localized restriction, with the coefficient ring renamed; at a test object $W\\to V_i$, restriction of a module sheaf $F$ has sections $F(W)$.",
+   "text": "Apply [lem-sfb-condensed-localization-exact-cohomology] to each $u_i:V_i\\to S$. It identifies the given restriction with exact sectionwise module restriction, with the canonical coefficient action, and gives $H^q(Q)|_{V_i}\\cong H^q(Q|_{V_i})$.",
    "uses": [
-    "sk-lem-pe-weakly-etale-stability",
-    "sk-def-pe-site",
-    "def-pur-localized-ringed-site",
-    "sk-def-sfb-coefficient-morphisms",
-    "lem-sfb-coefficient-sections-localization"
+    "lem-sfb-condensed-localization-exact-cohomology"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Definition big-small-proetale; Stacks Tag 092A (weakly étale stability); sites-modules.tex, Tag 03DH, definition-localize-ringed-site; blueprint coefficient morphisms, final sentence"
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CE, lemma-localize-given-products; condensed ringed-module cohomology specialization isolated in the cited child."
    }
   },
   {
-   "text": "Restriction on module sheaves is exact by [lem-pur-site-restriction-module-adjunction-exact]; the coefficient-ring renaming in Step 1 is an equivalence and hence preserves kernels and cokernels by their universal properties. Choose a complex $K^\\bullet$ representing $Q$ in the localization [def-weil-abstract-derived-category]. Apply [lem-weil-pbc-exact-functor-derived-factorization] to restriction: its termwise image represents $Q|_{V_i}$. Applying [lem-weil-pbc-exact-functor-complex-cohomology] to that same exact functor gives\n$$H^q(Q)|_{V_i}\\cong H^q(Q|_{V_i}).$$\nThe two cohomology objects here are those of the representing complexes, since the cohomology functor on the derived category factors the complex cohomology functor [def-weil-abstract-derived-category].",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-exact-functor-complex-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor, combined with homology.tex Tag 010N, lemma-exact-functor, and localized-module exactness (sites-modules.tex Tag 03DH)"
-   }
-  },
-  {
-   "text": "Put $E_i(M)=\\Gamma_{V_i}\\otimes_{R_{V_i}}M_{V_i}$, where $R_{V_i}$ and $M_{V_i}$ are the constant sheaves specified in [det-def-sfb-constructible-local-model]. This is the functor assumed exact in the item. Apply [lem-weil-pbc-exact-functor-complex-cohomology] to $E_i:R\\text{-}\\operatorname{Mod}\\to\\operatorname{Mod}(\\Gamma_{V_i})$ and the scalar complex $Q_i^\\bullet$. It yields $H^q(E_i(Q_i^\\bullet))\\cong E_i(H^q(Q_i^\\bullet))$. The given derived isomorphism $Q|_{V_i}\\simeq E_i(Q_i^\\bullet)$ induces an isomorphism on cohomology by functoriality [def-weil-abstract-derived-category]. Combining with Step 2 proves, for every $i,q$,\n$$H^q(Q)|_{V_i}\\cong\\Gamma_{V_i}\\otimes_R H^q(Q_i^\\bullet).$$\nExactness is used only for the scalar extension functor in the hypothesis; no flatness of an arbitrary condensed coefficient ring is asserted.",
+   "text": "Set $E_i(M)=\\Gamma_{V_i}\\otimes_{R_{V_i}}M_{V_i}$, with constant sheaves as in [det-def-sfb-constructible-local-model]. This is the assumed exact functor. By [lem-weil-pbc-exact-functor-complex-cohomology], $H^q(E_i(Q_i^\\bullet))\\cong E_i(H^q(Q_i^\\bullet))$. Apply the derived cohomology functor [def-weil-abstract-derived-category] to the given model isomorphism and compose with Step 1. This proves the required isomorphism on each original $V_i$, without asserting flatness of arbitrary coefficients.",
    "uses": [
     "det-def-sfb-constructible-local-model",
     "lem-weil-pbc-exact-functor-complex-cohomology",
@@ -68,22 +50,22 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor, applied to the scalar complex; the derived-category functoriality is the definition in the project node def-weil-abstract-derived-category."
+    "place": "Tag 010N, lemma-exact-functor; exact-functor cohomology and derived cohomology functoriality."
    }
   },
   {
-   "text": "If $q\\notin[r,s]$, the scalar middle term $Q_i^q$ is zero, so $H^q(Q_i^\\bullet)=\\ker d_i^q/\\operatorname{im}d_i^{q-1}=0$ by the definition of complex cohomology [def-weil-abstract-derived-category]. An exact additive functor sends the zero object to zero. Hence Step 3 gives $H^q(Q)|_{V_i}=0$ for all $i$.",
+   "text": "For $q\\notin[r,s]$, $Q_i^q=0$, hence $H^q(Q_i^\\bullet)=\\ker d_i^q/\\operatorname{im}d_i^{q-1}=0$ [def-weil-abstract-derived-category]. Exact additive $E_i$ preserves zero, so Step 2 gives $H^q(Q)|_{V_i}=0$.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor, together with the elementary kernel/image formula for complex cohomology (project node def-weil-abstract-derived-category)."
+    "place": "Elementary kernel/image computation; Tag 010N, lemma-exact-functor."
    }
   },
   {
-   "text": "Fix $q\\notin[r,s]$ and write $F=H^q(Q)$. For every object $W\\to S$ of the site, base change of the given covering is a covering $\\{W\\times_S V_i\\to W\\}_i$, by the covering axiom of [def-weil-pbc-sites-and-cohomology]. Step 4 and the sectionwise description [def-pur-localized-ringed-site] give $F(W\\times_S V_i)=0$. For any section $x\\in F(W)$, its restrictions and those of the zero section are therefore equal on this covering. The equalizer (in particular uniqueness) clause of the sheaf axiom in [def-weil-pbc-sites-and-cohomology] implies $x=0$. Thus every section module of $F$ is zero, so $F=0$. This also treats an empty covering: the sheaf axiom then makes $F(W)$ a singleton.",
+   "text": "Write $F=H^q(Q)$ for such $q$. Every test object $W$ has the base-changed cover $\\{W\\times_SV_i\\to W\\}$ [def-weil-pbc-sites-and-cohomology]. By Step 3 and sectionwise restriction [def-pur-localized-ringed-site], $F(W\\times_SV_i)=0$. Every section of $F(W)$ therefore agrees locally with zero; uniqueness in the sheaf equalizer axiom gives $F(W)=0$, hence $F=0$. For an empty covering that same axiom makes $F(W)$ a singleton.",
    "uses": [
     "def-weil-pbc-sites-and-cohomology",
     "def-pur-localized-ringed-site"
@@ -91,23 +73,23 @@
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00VH and 00VM, definition-site (base change axiom) and definition-sheaf-sets (equalizer and uniqueness)"
+    "place": "Tags 00VH, definition-site (base change), and 00VM, definition-sheaf-sets (uniqueness, including the empty cover)."
    }
   },
   {
-   "text": "For any $q$, the given modules $H^q(Q_i^\\bullet)$ are finitely presented over $R$. The isomorphisms of Step 3 and the given pro-étale covering therefore satisfy exactly the definition of a finite constant local model [det-def-sfb-constructible-local-model]. The single immersion $\\operatorname{id}_S:S\\to S$ gives a finite stratification [def-constructible-stratification]: its sole image is all of $S$, which is locally closed and constructible. Explicitly, $S$ and $\\varnothing$ are open and retrocompact, so $S=S\\cap(S\\setminus\\varnothing)$ is constructible by [def-weil-constructible-subset]. Thus $H^q(Q)$ is constructible on that stratum by clause (1) of [det-def-sfb-constructible-tor-amplitude]. For the affine-local convention on a non-qcqs scheme, use the equivalent scalar-matrix cokernel presentations in [det-def-sfb-constructible-local-model]. Restrict them to the base-changed cover of an affine open: exact restriction [lem-pur-site-restriction-module-adjunction-exact] preserves these cokernels and finite direct sums, and the entries remain the same scalar entries under the canonical coefficient restrictions of Step 1, since multiplication by a section restricts to multiplication by its restriction [lem-sfb-coefficient-sections-localization]. The same finite scalar presentations then give finite constant local models on the affine open. Step 5 confines cohomology to the finite integer interval $[r,s]$. Clause (2) of [det-def-sfb-constructible-tor-amplitude] now gives $Q\\in\\Dbc(S,\\Gamma)$.",
+   "text": "The finitely presented $H^q(Q_i^\\bullet)$ and Step 2 witness finite constant local models [det-def-sfb-constructible-local-model]. The identity immersion is a one-piece stratification [def-constructible-stratification]: $S=S\\cap(S\\setminus\\varnothing)$ is constructible since $S,\\varnothing$ are open retrocompact [def-weil-constructible-subset]. For the affine-local convention without quasi-separatedness, take the equivalent scalar-matrix cokernel presentations in the local-model node and restrict to the base-changed cover of each affine open. Exact restriction [lem-pur-site-restriction-module-adjunction-exact] preserves their cokernels and finite sums; coefficient restriction preserves multiplication and the same scalar entries [lem-sfb-coefficient-sections-localization]. These presentations give finite constant local models there too. Clause (1) of [det-def-sfb-constructible-tor-amplitude] gives constructibility. The finite interval proved in Step 4 and clause (2) give $Q\\in\\Dbc(S,\\Gamma)$.",
    "uses": [
     "det-def-sfb-constructible-local-model",
     "def-constructible-stratification",
     "def-weil-constructible-subset",
-    "det-def-sfb-constructible-tor-amplitude",
     "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-sfb-coefficient-sections-localization"
+    "lem-sfb-coefficient-sections-localization",
+    "det-def-sfb-constructible-tor-amplitude"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DH, restriction of module sheaves, combined with the finite-presentation and constructibility definitions recorded by the cited project nodes; the one-stratum and affine-local assembly is written out by the agent."
+    "place": "Tag 03DH, section-localize; the cited finite scalar presentation and constructibility definitions, with the one-stratum and affine-local assembly written out."
    }
   }
  ],
@@ -121,16 +103,13 @@
   "det-def-sfb-constructible-tor-amplitude",
   "lem-pur-site-restriction-module-adjunction-exact",
   "lem-sfb-coefficient-sections-localization",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "sk-def-pe-site",
-  "sk-def-sfb-coefficient-morphisms",
-  "sk-lem-pe-weakly-etale-stability"
+  "lem-sfb-condensed-localization-exact-cohomology",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/derived.tex",
-  "place": "Tags 010N and 015F, combined with sites.tex Tags 00VH/00VM, proetale.tex Tag 092A and sites-modules.tex Tag 03DH; complete finite-cover local-model, global-bound, and sheaf-descent argument written by Q118."
+  "document": "literature/stacks-project/sites.tex",
+  "place": "Finite-cover assembly from exact localized cohomology, exact scalar cohomology, Tags 00VH/00VM sheaf descent, and finite scalar-presentation definitions. Old Steps 1-2 are extracted to lem-sfb-condensed-localization-exact-cohomology; every old argument is retained in report.md."
  },
  "mathlib_searches": [
   {
@@ -222,28 +201,22 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-local-model-cohomology-descent",
   "worker": "stage1",
-  "summary": "Expanded the local-model cohomology argument in six proof steps, with no new nodes and no statement change. The proof is agent-written from Stacks Tags 010N, 015F, 00VH, 00VM, 092A and 03DH; the main-20261015 coefficient-extension paragraph is retained only as motivating blueprint context and is no longer claimed as the source of the descent/global-bound argument. Used the existing exact localized module restriction and exact-functor cohomology and derived-factorization nodes. Wrote out the identification of localized pro-etale sites, the scalar cohomology computation, cover-wise zero detection by sheaf uniqueness, and the single-stratum constructibility conclusion.",
-  "blueprint": "det-prop-scalar-six-ctf.proof.md (2) supplies the motivating local-model observation only. The finite-cover local cohomology identification, common-bound descent, and sheaf-uniqueness argument are an agent-written expansion grounded in Stacks Tags 010N, 015F, 00VH, 00VM, 092A and 03DH.",
-  "tool_uses": [
-   {
-    "node": "sk-lem-pe-weakly-etale-stability",
-    "why": "Its general composition and cancellation properties identify the localized small pro-etale site with the small site of a covering object in Step 1. This geometric site tool supplies no coefficient-comparison argument and is not replaced by a lemma of this unit."
-   }
-  ]
+  "summary": "Repair of the human-requested re-split: extracted the 2218-character canonical condensed module localization and derived-cohomology argument into one statement-only unsplit child. Kept the item statement and its Lean record unchanged. Parent now assembles scalar cohomology, common-bound vanishing, sheaf uniqueness, finite scalar local models and affine-local constructibility in five steps under 3000 characters; the complete old proof is preserved with its relocation map in report.md.",
+  "blueprint": "det-prop-scalar-six-ctf.proof.md paragraph (2), Local models, motivates the restriction/cohomology computation. The extracted comparison and finite-cover assembly remain agent expansions grounded in the cited Stacks passages."
  },
  "tool_uses": [
   "sk-lem-pe-weakly-etale-stability"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q118-3e7281ae5",
-  "group": "Q118",
+  "reviewer": "NT-cc-Q116-ef53e21aa",
+  "group": "Q116",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-3e7281ae5 (reviewer sub-agent of L); spot-checked: I read the whole item: statement unchanged, 6 steps, no new nodes. I also read the full statements of all 17 cited nodes, the parent det-prop-scalar-six-ctf (step 8 is the only step citing this item), its blueprint proof paragraph (2), and the unit and chapter records. I checked that Stacks tags 010N, 015F, 00VH, 00VM, 03DH and 092A map to the labels claimed and read 010N. Small cases tested: without exactness the statement fails, so that hypothesis is needed; empty S with n=0; Gamma=0; r=s; exact Q_i; unbounded Q; quasi-compact non-quasi-separated S, which is handled by the affine-local convention. Coefficient category: sectionwise Mod(Gamma_S), the same category as in det-def-sfb-constructible-tor-amplitude and in the sibling Tor-descent node. Base-change morphism: none involved, since this is not a target node. Duplicates: I grepped about 65 'finite constant local model' nodes and none states this lemma. No restated parent clause and no SGA citation. Steps 2-5 are correct as cited. Fault (C3/C4, E5): step 1 said the isomorphism u_i^{-1}Gamma_S = Gamma_{V_i} 'therefore' identifies the restricted coefficient ring, treating the Kan-extension pullback u_i^{-1} as the localized restriction without citing anything; step 6 relies on the same comparison for 'same scalar entries'. The existing, reviewed node lem-sfb-coefficient-sections-localization states exactly this comparison, including how the theta_W isomorphisms and multiplication by sections behave under restriction. It is on route (unit sk-def-sfb-constructible lies in the transitive uses of sk-prop-scalar-six) and citing it creates no cycle. I wrote the corrected item to fixes/dag/nodes/sec-six-functors-basics/lem-sfb-local-model-cohomology-descent.json: steps 1 and 6 now cite that node in their text and uses, and proof_deps is updated. citations.json was not updated because it is outside the permitted fix paths; the merge may need a quote for the new citation. The declared tool use sk-lem-pe-weakly-etale-stability is accepted; it is generic and in fact also on route.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-ef53e21aa (reviewer sub-agent of L); spot-checked: Re-split note (released 2026-10-21 14:08, at least 1 new node, parent at most 3000 chars) is fulfilled. Base: live item, 6 steps, 5568 chars, all quoted verbatim in the report. Delivery: 5 steps, 2386 chars, plus 1 new statement-only node lem-sfb-condensed-localization-exact-cohomology (2218 chars). Old steps 1-2 (slice identification, u^{-1}=restriction, alpha_u ring identification, module transport, exactness, derived factorization, H^q comparison) are now clauses (1) and (2) of the new node. Old steps 3-6 are parent steps 2-5 with every sub-argument kept: exact-functor cohomology plus the model iso; zero middle term; sheaf uniqueness on the base-changed cover, including the empty cover; finitely presented witnesses, the identity stratum, the affine-local matrix presentations under exact restriction and coefficient sections, and tor-amplitude clauses (1)/(2). The Q118 coefficient-sections FIX is kept. New node checked true: V_proet = S_proet/V (Stacks 03CE, sites.tex:6094); alpha_u is an iso (lem-sfb-alpha-iso), so u^* = Ext along an iso = restriction plus transport; it is exact, so unbounded D(u^*) exists and commutes with H^q (010N/015F). Small cases tested: identity, open immersion, non-mono cover, V empty, Gamma=0, unbounded K. Its base-change morphism is the ringed pullback of sk-def-sfb-module-pushforward-pullback, matching the item Lean's CondensedRing.upperStar; the coefficient category is sectionwise Mod(Gamma_S). Every statement citation is in stmt_deps. Not a duplicate: coefficient-sections-localization, weakly-etale-localization (constant rings), module-pullback-exact-main (exactness only) and the sibling tor-bound-descent each carry only part of it. It does not restate a parent clause, creates no cycle, cites no SGA, and neither node is on the dropped list. Item steps 1-5 verified, with edge cases n=0, Gamma=0, r=s, non-quasi-separated S, unbounded Q. Advisory: item tool_uses still lists sk-lem-pe-weakly-etale-stability, which is now uncited (stale). The report mentions a citations.json that is not on the branch. Snapshot chapter symlinks had vanished, so cited nodes and the duplicate search used clones/live."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.LocalModelCohomologyDescent",
