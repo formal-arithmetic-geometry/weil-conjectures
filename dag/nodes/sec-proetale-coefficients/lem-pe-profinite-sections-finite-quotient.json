@@ -13,9 +13,85 @@
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-module-objects"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix a profinite set $S$. Write $\\alpha_i:A\\to T_i$ for the given continuous ring maps. Addition and scalar multiplication on $C(S,T_i)$ are pointwise: $(a\\cdot u)(s)=\\alpha_i(a(s))u(s)$. These functions are continuous by continuity of $\\alpha_i$, addition and multiplication; the module axioms hold at every $s$. Define $F_S(u)=f\\circ u$ and $G_S(v)=g\\circ v$. Continuity follows by composition, and $A$-linearity pointwise gives $F_S(a\\cdot u)(s)=\\alpha_1(a(s))f(u(s))$ and $G_S(a\\cdot v)(s)=\\alpha_2(a(s))g(v(s))$. Thus both are $C(S,A)$-linear.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: the pointwise module sequence"
+   }
+  },
+  {
+   "text": "If $F_S(u)=F_S(v)$, then $f(u(s))=f(v(s))$ for every $s$, so injectivity of $f$ gives $u=v$. Moreover $g(f(t))=0$ for every $t\\in T_0$, since $\\operatorname{im}f=\\ker g$. Hence $G_SF_S=0$ and $\\operatorname{im}F_S\\subseteq\\ker G_S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: injectivity and the zero composite"
+   }
+  },
+  {
+   "text": "Let $v\\in C(S,T_1)$ satisfy $G_S(v)=0$. Its values lie in $K=\\ker g$. The map $\\bar v:S\\to K$ with the same values is continuous for the subspace topology: the inverse image of $K\\cap U$ is $v^{-1}(U)$ for every open $U\\subseteq T_1$. By hypothesis $h:T_0\\xrightarrow{\\sim}K$, $t\\mapsto f(t)$, is a homeomorphism. Therefore $u=h^{-1}\\circ\\bar v$ is continuous and $F_S(u)=v$. Combined with step 2, this proves $\\operatorname{im}F_S=\\ker G_S$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: continuous division through the topological kernel"
+   }
+  },
+  {
+   "text": "For each $b\\in T_2$ choose $t_b\\in T_1$ with $g(t_b)=b$, using surjectivity of $g$. Given $w\\in C(S,T_2)$, define $v(s)=t_{w(s)}$. For an open $U\\subseteq T_1$ one has $v^{-1}(U)=\\bigcup_{b:t_b\\in U}w^{-1}(\\{b\\})$, an open set since $T_2$ is discrete. Thus $v$ is continuous and $G_S(v)=w$. This proves surjectivity and completes the short exact sequence on sections. The choices $t_b$ need not define a linear map; only the lift of each individual section is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: lifting the finitely many values of the quotient"
+   }
+  },
+  {
+   "text": "Use [sk-def-sfb-condensed-ring] for the sheaves $\\underline A$ and $\\underline{T_i}$ on the coherent profinite site. The pointwise actions from step 1 commute with restriction, since $(a\\cdot u)\\circ q=(a\\circ q)\\cdot(u\\circ q)$; postcomposition with $f,g$ also commutes with restriction. Thus these are sheaves of modules over the section-ring sheaf $\\underline A$, with the morphisms of [def-weil-sheaf-of-modules-category]. Fix a universe of profinite sets and a larger coefficient universe so the site is essentially small as in [sk-def-sfb-sheaf-tensor]. The monoidality and existence of abelian sheafification, including stability of its local equivalences under tensor, are supplied by [lem-weil-pbc-sheaf-tensor-closed]. Apply [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to the commutative ring object $\\underline A$. It identifies these module sheaves and their sectionwise morphisms with the module objects of [sk-def-sfb-module-objects], leaving sections and restrictions unchanged.",
+   "uses": [
+    "sk-def-sfb-condensed-ring",
+    "def-weil-sheaf-of-modules-category",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "sk-def-sfb-module-objects"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: identifying continuous-function sheaves as condensed module objects"
+   }
+  },
+  {
+   "text": "In sectionwise module sheaves, [def-weil-sheaf-of-modules-category] computes kernels sectionwise and cokernels by sheafifying sectionwise cokernels. Steps 2 and 3 therefore identify the kernel of the second arrow with the first sheaf, through its specified injective arrow. Step 4 makes the sectionwise cokernel of the second arrow zero, so its sheaf cokernel is zero. This proves short exactness of the module sheaf sequence. Under [def-weil-pbc-internal-abelian-sheaf-module-equivalence] it is exactly the claimed sequence of condensed $\\underline A$-module objects: an equivalence transports the kernel and cokernel universal properties because it gives bijections on morphisms and every object is isomorphic to one in its image. Hence the transported sequence is short exact.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+    "place": "On the point: the concluding condensed-module short exactness"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-sheaf-of-modules-category",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-module-objects"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-resolution.proof.md",
+  "place": "On the point; the continuous-kernel and finite-value lifting arguments, generalized to the stated topological module sequence; expanded with the existing sheaf/module interfaces"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +134,66 @@
    "results": "8 hits: ContinuousMap.cancel_right, LightProfinite.proj_surjective, CompactT2.Projective, LocallyConstant.comap_injective, LightProfinite.surjective_transitionMap, LightProfinite.surjective_transitionMapLE, Profinite.IndexFunctor.surjective_π_app, TopologicalSpace.Fiber.sigmaIsoHom_surj. Logged digest 7fcda4ea657d478b",
    "date": "2026-10-21",
    "verdict": "no match: quotient descent, precomposition cancellation, and Nobeling-specific exactness do not assert this postcomposition exactness with a prescribed topological kernel."
+  },
+  {
+   "tool": "grep",
+   "query": "ContinuousMap.*[Ee]xact|[Ee]xact.*ContinuousMap|continuous.*[Ss]ection",
+   "results": "25 hits: Mathlib/Analysis/CStarAlgebra/GelfandDuality.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Unique.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Isometric.lean, Mathlib/Analysis/CStarAlgebra/ContinuousFunctionalCalculus/Isometric.lean. Logged digest 673232c0222d3858",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: cancellation, quotient descent, algebraic exactness and the special Nobeling sequence do not state this topological-kernel postcomposition result"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous functions to a discrete quotient lift along a surjection and a topological kernel gives an exact sequence",
+   "results": "8 hits: Continuous.quotient_liftOn', Continuous.quotient_lift, continuous_quot_lift, SeparationQuotient.continuous_lift, DiscreteQuotient.proj_continuous, SeparationQuotient.continuousOn_lift, DiscreteQuotient.map_continuous, Topology.IsQuotientMap.lift. Logged digest 92b8e059ab128748",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: cancellation, quotient descent, algebraic exactness and the special Nobeling sequence do not state this topological-kernel postcomposition result"
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousMap, Function.Surjective",
+   "results": "12 hits: ContinuousMap.cancel_right, TopCat.epi_iff_surjective, LocallyConstant.comap_injective, AlgebraicGeometry.SheafedSpace.epi_of_base_surjective_of_stalk_mono, AlgebraicGeometry.Scheme.singleton_mem_precoverage_iff, TopCat.GlueData.π_surjective, AlgebraicGeometry.Surjective.mk, AlgebraicGeometry.Surjective.surj. Logged digest 3fd9a374523d0f64",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: cancellation, quotient descent, algebraic exactness and the special Nobeling sequence do not state this topological-kernel postcomposition result"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A short exact sequence of topological modules with a homeomorphism onto the kernel and finite discrete quotient remains exact on continuous maps from profinite sets",
+   "results": "8 hits: Profinite.NobelingProof.succ_exact, Profinite.NobelingProof.CC_exact, Function.Exact.of_ladder_linearEquiv_of_exact, QuotSMulTop.map_exact, Function.Exact.iff_of_ladder_linearEquiv, AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace, CategoryTheory.ShortComplex.ShortExact.moduleCat_exact_iff_function_exact, QuotSMulTop.map_first_exact_on_four_term_exact_of_isSMulRegular_last. Logged digest 7523907d4badd10c",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: cancellation, quotient descent, algebraic exactness and the special Nobeling sequence do not state this topological-kernel postcomposition result"
+  },
+  {
+   "tool": "grep",
+   "query": "surjective|exact|postcomp",
+   "results": "25 hits: Mathlib/Topology/ContinuousMap/Ideals.lean, Mathlib/Topology/ContinuousMap/Ideals.lean, Mathlib/Topology/ContinuousMap/Ideals.lean, Mathlib/Topology/ContinuousMap/Ideals.lean, Mathlib/Topology/ContinuousMap/Ideals.lean, Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean, Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean, Mathlib/Topology/ContinuousMap/ZeroAtInfty.lean. Logged digest a6eeedd190f12701; searched Mathlib/Topology/ContinuousMap",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: cancellation, quotient descent, algebraic exactness and the special Nobeling sequence do not state this topological-kernel postcomposition result"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuous_of_discreteTopology\"",
+   "results": "1 hits: continuous_of_discreteTopology. Logged digest 78e3d43900ba80e5",
+   "date": "2026-10-21",
+   "verdict": "component only: continuity from a discrete source, used elementarily; not the full short exact condensed-module sequence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Postcomposition of continuous maps with a surjection onto a discrete space is surjective; continuous maps through a topological kernel yield a short exact sequence",
+   "results": "8 hits: ContinuousMap.cancel_right, TopCat.GlueData.π_surjective, CompHausLike.effectiveEpiStruct, Profinite.NobelingProof.CC_exact, Profinite.NobelingProof.succ_exact, CategoryTheory.ShortComplex.ShortExact.surjective_g, LocallyConstant.ker_comapₗ, LightProfinite.surjective_transitionMap. Logged digest 9dc85187466130d0",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: cancellation, quotient descent, algebraic exactness and the special Nobeling sequence do not state this topological-kernel postcomposition result"
+  },
+  {
+   "tool": "grep",
+   "query": "cancel_right|postcomp|surjective",
+   "results": "5 hits: 147, 436, 440, 447, 484. Logged digest 31578324e809ec42; searched Mathlib/Topology/ContinuousMap/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the full item: cancellation, quotient descent, algebraic exactness and the special Nobeling sequence do not state this topological-kernel postcomposition result"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-pe-derived-nakayama-resolution",
@@ -76,5 +208,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-profinite-sections-finite-quotient",
+  "worker": "stage1",
+  "summary": "Expanded the continuous-kernel and discrete-value lifting argument into four elementary sectionwise steps and two cited sheaf/module-category steps. No statement change and no new nodes. Checked the full item against project Lean and searched Mathlib in two phrasings; available results cover cancellation, quotient descent, or special Nobeling sequences only. Reused existing general sheaf/module nodes and verified every cited statement and its hypotheses.",
+  "blueprint": "Realizes det-pe-derived-nakayama-resolution, On the point: injectivity, continuous division through the topological kernel, lifting finite discrete values, and the passage to condensed-module exactness; reusable for Triangles.",
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-condensed-ring",
+    "why": "Defines the profinite site and the continuous-function sheaves used in the conclusion."
+   },
+   {
+    "node": "def-weil-sheaf-of-modules-category",
+    "why": "Generic sheaf-module kernel and cokernel formulas; no node of the Nakayama unit supplies these category foundations."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Specifies the tensor and universe convention on the profinite site, needed for the internal module comparison."
+   },
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic abelian sheafification and monoidal-local-equivalence theorem verifies the hypotheses of the internal/sectionwise comparison."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "Generic equivalence retaining section groups and restrictions identifies the module objects with the sectionwise module sheaves."
+   },
+   {
+    "node": "sk-def-sfb-module-objects",
+    "why": "Defines the module objects explicitly required by the statement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "sk-def-sfb-condensed-ring",
+  "def-weil-sheaf-of-modules-category",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "sk-def-sfb-module-objects"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N5-e0aea6a2d",
+  "group": "N5",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-e0aea6a2d (reviewer sub-agent of L); spot-checked: I read the item in full; the delivery adds no new nodes. The statement is unchanged and correctly generalizes the 'On the point' paragraph of sk-lem-pe-derived-nakayama-resolution.proof.md (lines 5-13), which 'Triangles' (lines 24-31) reuses: injectivity, continuous division through the topological kernel, and lifting the values of the finite discrete quotient. Steps 1-4 are elementary and correct. The homeomorphism onto ker g is used only in step 3, and it is necessary: discrete Z_p mapping to p-adic Z_p with T2=0 fails without it. Discreteness of T2 is used in step 4. I read the statements of all six cited nodes. Step 5 matches them: sheaves of continuous functions; lem-weil-pbc-sheaf-tensor-closed supplies the hypothesis of def-weil-pbc-internal-abelian-sheaf-module-equivalence, which preserves sections and restrictions; and with a larger coefficient universe the site is essentially small. Step 6 uses the sectionwise kernel and the sheafified cokernel from def-weil-sheaf-of-modules-category, then transports across the equivalence. Both citations in the parent det-pe-derived-nakayama-resolution meet every hypothesis: T2 is O_E/a^r with a^rA open, or the finite quotients B_m, B_{n+m}, B_n. Edge cases checked: S empty, S a point, T2=0. I found no duplicate in the DAG and no cycle. Mathlib was searched with all four tools. The six declared tool_uses are definitions or generic sheaf foundations, so I accept them. No SGA is used. No fixes."
  }
 }
