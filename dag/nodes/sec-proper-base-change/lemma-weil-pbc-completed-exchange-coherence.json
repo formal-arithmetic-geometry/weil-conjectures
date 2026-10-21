@@ -34,117 +34,83 @@
  ],
  "proof": [
   {
-   "text": "Write $F_u=Lu^*_{\\mathrm{comp}}$ and $R_u=Ru_*$, retaining the ordered formula $\\operatorname{Ex}^{\\mathrm{comp}}=c^{-1}\\operatorname{Rlim}(v'_\\bullet)s$ of [def-weil-pbc-completed-base-change-map]. Restriction of scalars is an equivalence on the full complete categories by [lem-weil-pbc-constant-completion-equivalence]. Clause (1) of [lem-weil-pbc-ordered-exchange-coefficient-comparison] supplies the actual comparisons $\\chi_u:\\operatorname{Res}R_u\\simeq R_u^0\\operatorname{Res}$ and $\\phi_u:\\operatorname{Res}F_u\\simeq F_u^0\\operatorname{Res}$, identifying the completed adjunctions with their units and counits. Here $F_u^0=C_Uu^*$ and $C_U$ is the reflector of [lem-sp-completed-pullback-adjunction]. That lemma says $R_u^0$ preserves completeness, so completed pullbacks and intermediate direct images remain complete. The equivalence reflects the equations to be proved. The ambient constant and completed module categories remain distinct.",
+   "text": "The normalized ordinary coefficient cocycle and identity module direct image fix the ordinary pullback composition and identity maps and their right-adjoint conjugates.",
+   "uses": [
+    "lem-weil-pbc-completed-ordinary-comparisons"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Naturality is the naturality equation of the composite of the tower projection natural isomorphism, strict tower exchange natural transformation, and inverse direct-image/limit comparison. This works directly on the raw ambient formula, so no compatible choice of finite witnesses is needed.",
    "uses": [
     "def-weil-pbc-completed-base-change-map",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-    "lem-sp-completed-pullback-adjunction"
+    "prop-weil-pbc-direct-image-limits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: reconstruction and completion coordinates (Stacks 099M, 099N)."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-strict-tower-exchange-mate-normalization] with the proper square and the retained witnesses of the definition. With $\\bar K_\\bullet=\\operatorname{Res}K_\\bullet$ it gives actual natural isomorphisms $b:\\operatorname{Res}B_\\bullet\\simeq G_gR_f^{\\mathcal T}\\bar K_\\bullet$ and $d:\\operatorname{Res}D_\\bullet\\simeq R_{f'}^{\\mathcal T}G_{g'}\\bar K_\\bullet$ and the equation $d\\operatorname{Res}(v'_\\bullet)=E^{\\mathcal T}_{\\bar K_\\bullet}b$ in the derived category of strict towers. Here $E^{\\mathcal T}$ is the constant-$A$ ringed mate, not the bounded-below abelian etale exchange. Apply the actual functor $\\operatorname{Rlim}$ of [prop-weil-pbc-rlim-functoriality] to this equation. It preserves composition and inverses, giving the same conjugation equation between the derived limits. This starts from equality of tower morphisms; no inference from levelwise equalities is made.",
+   "text": "The completed pullback reflection theorem makes both one-step and two-step pullback reflections of the same ordinary pullback: use the ordinary adjunction to transfer unit-precomposition bijectivity across the first pullback, with direct image preserving completeness. Extending the units in both directions gives inverse natural comparisons; unit injectivity gives uniqueness.",
    "uses": [
-    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-    "prop-weil-pbc-rlim-functoriality"
+    "lem-weil-pbc-completed-pullback-reflection",
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-completed-ordinary-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "First paragraph and start of second: coherent finite exchange lifted to a strict tower mate before taking R lim."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply [lem-weil-pbc-ordered-exchange-coefficient-comparison] (2)--(3). Its strict comparison $\\rho_K$ identifies $\\operatorname{Res}K_\\bullet$ with $\\mathcal R_X\\bar K$. With $\\lambda$ denoting restriction/limit comparison, it states\n$$\\mathcal L(\\beta)\\lambda_B\\operatorname{Res}(s)=s^0\\iota_S,\\quad\\mathcal L(\\delta)\\lambda_D\\operatorname{Res}(c)=t^0\\iota_T,\\quad\\delta\\operatorname{Res}(v')=E^{\\mathcal T}\\beta.$$\nThe maps $\\beta,\\delta$ are precisely Step 2's $b,d$ followed by $\\rho_K$. These equations include the diagram projection-formula comparison and both reconstruction identifications; no extra normalization is inferred from the description of $b,d$. Functoriality and cancellation give\n$$\\iota_T\\operatorname{Res}(c^{-1}\\operatorname{Rlim}(v')s)=(t^0)^{-1}\\mathcal L(E^{\\mathcal T})s^0\\iota_S.$$\nUse [lem-sp-completion-mate-comparison]: its hypotheses hold since $A$ is Noetherian and every $P_n$ is perfect. For its exact $s^0,t^0$, the right side is $E^c\\iota_S$. Thus the specified ordered exchange is the completed adjunction mate. The new comparison gives the same equations for the raw ordered construction on every complete input, without witnesses.",
+   "text": "For the identity completed pullback, restrict to constant coefficients. The unit-normalized scalar comparison identifies its unit with the completion unit of ordinary identity pullback. Completeness makes that unit invertible, and conservative restriction reflects invertibility. The inverse unit followed by ordinary pullback identity is the required uniquely normalized comparison.",
    "uses": [
     "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-    "lem-sp-completion-mate-comparison"
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-completed-ordinary-comparisons"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: conjugation by the specified reconstruction, projection-formula and direct-image/limit maps; missing comparison supplied by the existing general tool."
-   }
+   "elementary": false
   },
   {
-   "text": "Fix the completed composition maps precisely as in [lem-sp-completion-mate-comparison]: they are conjugate under the completed adjunctions to the canonical derived direct-image composition maps of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. These are the canonical associativity maps in the claim, not finite-level composition maps. To check their coherence, constant-coefficient inverse images are exact, so their right adjoints preserve K-injective complexes by [lem-weil-pbc-right-adjoint-preserves-kinjective]. On a K-injective $J$, each successive direct image is therefore already K-injective. All iterated direct-image composition comparisons are the section restriction identifications for the same composite map. Their associativity and unit equations hold on sections, and hence on these complexes and in the derived category. The conjugate bijection [def-weil-pbc-adjunction-conjugate], which preserves composition and identities and reverses their order, gives the corresponding coherence of completed pullbacks. Thus the pullback square for an outer rectangle is the corresponding paste of the two completed pullback squares.",
+   "text": "Precompose either identity-square equality with the ordinary-to-completed unit. Its injectivity on complete targets follows from pullback reflection and direct image preserving completeness. The exchange-unit equation reduces it to the ordinary identity-square equation. The completed identity unit equation and naturality cancel the remaining factors.",
    "uses": [
-    "lem-sp-completion-mate-comparison",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "def-weil-pbc-adjunction-conjugate"
+    "lem-weil-pbc-completed-pullback-reflection",
+    "lem-weil-pbc-completed-exchange-unit",
+    "lem-weil-pbc-ordinary-ringed-exchange-coherence",
+    "prop-weil-pbc-direct-image-limits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: the canonical associativity and identity maps in the completed equations."
-   }
+   "elementary": false
   },
   {
-   "text": "For horizontal squares $\\square_1=(f,f',g,g')$ and $\\square_2=(f',f'',h,h')$, apply [lem-weil-pbc-mate-pasting] (1) to their completed pullback squares. Step 4 identifies the pasted square with the outer pullback square. With canonical composition maps suppressed, its conclusion is\n$$E^c_{21}=(E^c_2F_{g'})\\circ(F_hE^c_1).$$\nFor vertical squares $\\square_1$ and $\\square_3=(e,e',g',g'')$, clause (2), then clause (3) for the canonical composition conjugates, gives\n$$E^c_{13}=(R_{f'}E^c_3)\\circ(E^c_1R_e).$$\nInsert the comparison maps of Step 4 on the sources and targets to obtain exactly horizontal and vertical pasting after canonical associativity isomorphisms. Outer rectangles are cartesian by [lem-weil-pbc-cartesian-square-pasting] (also applied after transposing the diagram). Step 3 identifies these mates with the completed exchanges of the item wherever that definition is applied.",
+   "text": "For horizontal pasting precompose with the unit of the outer pullback. Apply the completed composition unit equation, then ordinary-to-completed naturality and the exchange-unit equation for each inner square. Ordinary exchange naturality moves the intermediate unit to the target. The inverse completed composition unit equation cancels those units. The ordinary horizontal pasting equation is the remaining equality. All intermediate targets are complete by pullback reflection and direct image preservation.",
    "uses": [
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-cartesian-square-pasting"
+    "lem-weil-pbc-completed-pullback-reflection",
+    "lem-weil-pbc-completed-exchange-unit",
+    "lem-weil-pbc-ordinary-ringed-exchange-coherence",
+    "prop-weil-pbc-direct-image-limits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: horizontal and vertical S8 equations, using mates on the complete categories."
-   }
+   "elementary": false
   },
   {
-   "text": "The intermediate inputs are $F_{g'}K$ for horizontal pasting and $R_eK$ for vertical pasting; they are complete by Step 1. Apply [lem-weil-pbc-ordered-exchange-coefficient-comparison] to each of these very objects. Its raw map $x^a$ uses the same ordered $s,c$ and the specified strict diagram projection-formula realization of exchange; its equality with $(t^0)^{-1}\\mathcal L(E^{\\mathcal T})s^0$ requires no etale-origin witnesses. By [lem-sp-completion-mate-comparison] these raw arrows are therefore the $E^c$ arrows in Step 5, including at $R_eK$. At any witnessed input the new comparison identifies the raw map with the map of [def-weil-pbc-completed-base-change-map]. Substituting these equalities into Step 5 proves the pasting laws for the specified completed exchanges and their raw intermediate components. For identity squares use Step 4's identity comparisons. Clause (4) of [lem-weil-pbc-mate-pasting] gives identity when the horizontal edges are identities; with identity vertical adjunctions, the unit--square--counit formula of [def-weil-pbc-adjunction-mate] is itself the identity. Thus both identity orientations hold.",
+   "text": "For vertical pasting use the same injective unit precomposition. Naturality moves the ordinary direct-image composition comparison past the unit. Substitute the two exchange-unit equations, then use naturality of the target pushComp to collect its unit. The ordinary vertical pasting equation closes the result. No additional finite-origin witnesses on intermediate objects are needed.",
    "uses": [
-    "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-    "lem-sp-completion-mate-comparison",
-    "def-weil-pbc-completed-base-change-map",
-    "lem-weil-pbc-mate-pasting",
-    "def-weil-pbc-adjunction-mate"
+    "lem-weil-pbc-completed-pullback-reflection",
+    "lem-weil-pbc-completed-exchange-unit",
+    "lem-weil-pbc-ordinary-ringed-exchange-coherence",
+    "prop-weil-pbc-direct-image-limits"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: intermediate completed inputs and S0 identity equations; general complete-input extension avoids extra witness hypotheses."
-   }
-  },
-  {
-   "text": "The mate of [def-weil-pbc-adjunction-mate] is a natural transformation. For any $k:K\\to H$ of complete objects its equation is\n$$R_{f'}^0F_{g'}^0(\\operatorname{Res}k)E^c_{\\bar K}=E^c_{\\bar H}F_g^0R_f^0(\\operatorname{Res}k).$$\nThe comparisons and equalities of [lem-weil-pbc-ordered-exchange-coefficient-comparison] are natural for all such $k$. Step 3 therefore substitutes the ordered exchanges into this equation, with $\\iota_S,\\iota_T$ intertwining the two functor images of $k$. Naturality of those isomorphisms and cancellation prove the naturality equation for the original coefficient categories. Neither lifts of $k$ nor compatible choices of finite witnesses are required. The equivalence of [lem-weil-pbc-constant-completion-equivalence] reflects this equation and the identity and pasting equations proved in Steps 5--6.",
-   "uses": [
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph: naturality in K and return from constant coefficients."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-adjunction-conjugate",
-  "def-weil-pbc-adjunction-mate",
   "def-weil-pbc-completed-base-change-map",
-  "lem-sp-completed-pullback-adjunction",
-  "lem-sp-completion-mate-comparison",
-  "lem-weil-pbc-cartesian-square-pasting",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-completed-exchange-unit",
+  "lem-weil-pbc-completed-ordinary-comparisons",
+  "lem-weil-pbc-completed-pullback-reflection",
   "lem-weil-pbc-ordered-exchange-coefficient-comparison",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-  "prop-weil-pbc-rlim-functoriality"
+  "lem-weil-pbc-ordinary-ringed-exchange-coherence",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "prop-weil-pbc-direct-image-limits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-  "place": "Both paragraphs; retain strict-tower mate normalization and derived-limit route, with a separate statement-only coefficient/reconstruction comparison for the raw ordered exchange."
+  "place": "Coherence after canonical comparisons, proved by their actual unit equations; strict-tower naturality used directly."
  },
  "mathlib_searches": [
   {
@@ -292,13 +258,6 @@
   "module": "Sheaf.Paper.CompletedExchangeCoherence",
   "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedExchange_naturality",
   "declarations": [
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.integralRingIso_comp",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.pullComp",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.pushComp",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.modulePushId_existsUnique",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.modulePushId",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.pullId",
-   "AlgebraicGeometry.Scheme.AdicCoefficientDatum.pushId",
    "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullComp_existsUnique",
    "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullComp",
    "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedPullId_existsUnique",
@@ -337,8 +296,15 @@
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
- "tool_uses": [
-  "lem-sp-completed-pullback-adjunction",
-  "lem-sp-completion-mate-comparison"
- ]
+ "tool_uses": [],
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4ddf9",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T165936-L-2309985",
+  "kind": "interface",
+  "note": "independent cc review: item proof (5 clauses + completedPullComp/Id uniqueness) against node lemma-weil-pbc-completed-exchange-coherence; relocated ordinary comparisons byte-identical to base; split statements completedPull_reflection / integralExchange_coherence against their new nodes and Stacks 099M/099N, 07A7"
+ }
 }

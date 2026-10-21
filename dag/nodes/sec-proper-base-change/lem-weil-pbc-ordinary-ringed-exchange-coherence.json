@@ -1,0 +1,139 @@
+{
+ "id": "lem-weil-pbc-ordinary-ringed-exchange-coherence",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Ordinary mate identity and pasting; coherence proof steps 4–6 before adjoining completion",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Identity and pasting for ordinary ambient ringed exchange",
+ "statement": "Let d be the Noetherian adic coefficient datum of [def-weil-pbc-adic-coefficient-datum]. Write P_u=Lu^* and R_u=Ru_* for its ambient completed-coefficient ordinary derived operations, and E_σ:P_g R_f→R_f′ P_g′ for ordinary ringed exchange [def-weil-pbc-ambient-ringed-exchange]. Let c_(h,g):P_(h≫g)≅P_h P_g, i_T:P_id≅id and p_(f,e):R_e R_f≅R_(f≫e), r_T:R_id≅id be the normalized comparisons of [lem-weil-pbc-completed-ordinary-comparisons]. Then the following equations hold on every ambient input K, without properness or completeness hypotheses. (1) For a square with horizontal identity edges and vertical edge f, E(K)=i_Y(R_fK) ≫ R_f(i_X(K)⁻¹). (2) For a square with vertical identity edges and horizontal edge g, E(K)=P_g(r_V(K)) ≫ r_U(P_gK)⁻¹. (3) For horizontally adjacent cartesian squares σ₁=(f,f′,g,g′), σ₂=(f′,f″,h,h′) and any outer cartesian realization σ, E_σ(K)=c_(h,g)(R_fK) ≫ P_h(E_σ₁(K)) ≫ E_σ₂(P_g′K) ≫ R_f″(c_(h′,g′)(K)⁻¹). (4) For vertically adjacent cartesian squares σ₁=(f,f′,g,g′), σ₂=(e,e′,k,g) and any outer cartesian realization σ, E_σ(K)=P_k(p_(f,e)(K)⁻¹) ≫ E_σ₂(R_fK) ≫ R_e′(E_σ₁(K)) ≫ p_(f′,e′)(P_g′K). Composition is written in Lean order. Each square includes the actual coefficient identifications induced by d.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Remarks 07A7, 0E46, 0E47; Lemma 0D6E; the ordinary mate identity and pasting equations before completion."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-completed-ordinary-comparisons"
+ ],
+ "proof": [
+  {
+   "text": "The sectionwise direct-image identity and composition maps are restrictions along the canonical fiber-product maps. Their unit and associativity equations hold sectionwise. Tensor-unit adjunction conjugation gives the pullback equations. Their exact derived factorization, or their normalization on flat-term K-flat representatives, transports those equations to derived pullback.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remarks 07A7, 0E46, 0E47; Lemma 0D6E; the ordinary mate identity and pasting equations before completion."
+   }
+  },
+  {
+   "text": "The outer pullback square is the paste of the two inner comparisons. Apply the vertical and horizontal composition laws for mates, and then change composite adjunctions by their conjugate isomorphisms. For identity squares the same unit-square-counit expression reduces by the triangle identities. These are the four stated equations.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Remarks 07A7, 0E46, 0E47; Lemma 0D6E; the ordinary mate identity and pasting equations before completion."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Ordinary mate identity and pasting; coherence proof steps 4–6 before adjoining completion"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedPull|completionUnit|mateEquiv_vcomp|conjugateIsoEquiv",
+   "results": "{\"t\": \"2026-10-19T20:57:47Z\", \"tool\": \"grep\", \"query\": \"completedPull|completionUnit|mateEquiv_vcomp|conjugateIsoEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\"], \"digest\": \"2de1dc43f734cbb7\"}",
+   "date": "2026-10-19",
+   "verdict": "generic categorical or ordinary algebraic results only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adic completion reflects ordinary pullback with bijective unit precomposition into every complete object, and completed base change extends ordinary exchange along the completion unit",
+   "results": "{\"t\": \"2026-10-19T20:57:48Z\", \"tool\": \"leansearch\", \"query\": \"Derived adic completion reflects ordinary pullback with bijective unit precomposition into every complete object, and completed base change extends ordinary exchange along the completion unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"AdicCompletion.module\", \"AdicCompletion.of_bijective\", \"AdicCompletion.instCommRing\", \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"AdicCompletion.of_ofAlgEquiv_symm\", \"AdicCompletion.of_bijective_iff\", \"IsAdicComplete.of_comp_lift\"], \"digest\": \"f4a63a37ac80a6c6\"}",
+   "date": "2026-10-19",
+   "verdict": "generic categorical or ordinary algebraic results only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-19T20:57:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-19",
+   "verdict": "generic categorical or ordinary algebraic results only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedExchangeCoherence",
+  "date": "2026-10-20",
+  "group": "S9"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedOrdinaryExchangeCoherence",
+  "file": "lean/Sheaf/Paper/CompletedOrdinaryExchangeCoherence.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.integralExchange_coherence",
+  "statement": "theorem AdicCoefficientDatum.integralExchange_coherence :\n    (∀ {X Y : Scheme.{t}} (f : X ⟶ Y)\n      (sq : ChosenCartesianSquare (𝟙 X) f f (𝟙 Y)) (K : d.derived X),\n      (d.integralExchange sq).app K =\n        (d.pullId Y).hom.app ((d.push f).obj K) ≫\n          (d.push f).map ((d.pullId X).inv.app K)) ∧\n    (∀ {U V : Scheme.{t}} (g : U ⟶ V)\n      (sq : ChosenCartesianSquare g (𝟙 U) (𝟙 V) g) (K : d.derived V),\n      (d.integralExchange sq).app K =\n        (d.pull g).map ((d.pushId V).hom.app K) ≫\n          (d.pushId U).inv.app ((d.pull g).obj K)) ∧\n    (∀ {X X' X'' Y Y' Y'' : Scheme.{t}}\n      {f : X ⟶ Y} {f' : X' ⟶ Y'} {f'' : X'' ⟶ Y''}\n      {g : Y' ⟶ Y} {g' : X' ⟶ X} {h : Y'' ⟶ Y'} {h' : X'' ⟶ X'}\n      (sq₁ : ChosenCartesianSquare g' f' f g)\n      (sq₂ : ChosenCartesianSquare h' f'' f' h)\n      (outer : ChosenCartesianSquare (h' ≫ g') f'' f (h ≫ g)) (K : d.derived X),\n      (d.integralExchange outer).app K =\n        (d.pullComp h g).hom.app ((d.push f).obj K) ≫\n          (d.pull h).map ((d.integralExchange sq₁).app K) ≫\n            (d.integralExchange sq₂).app ((d.pull g').obj K) ≫\n              (d.push f'').map ((d.pullComp h' g').inv.app K)) ∧\n    (∀ {X X' Y Y' Z Z' : Scheme.{t}}\n      {f : X ⟶ Y} {f' : X' ⟶ Y'} {e : Y ⟶ Z} {e' : Y' ⟶ Z'}\n      {g' : X' ⟶ X} {g : Y' ⟶ Y} {k : Z' ⟶ Z}\n      (sq₁ : ChosenCartesianSquare g' f' f g)\n      (sq₂ : ChosenCartesianSquare g e' e k)\n      (outer : ChosenCartesianSquare g' (f' ≫ e') (f ≫ e) k) (K : d.derived X),\n      (d.integralExchange outer).app K =\n        (d.pull k).map ((d.pushComp f e).inv.app K) ≫\n          (d.integralExchange sq₂).app ((d.push f).obj K) ≫\n            (d.push e').map ((d.integralExchange sq₁).app K) ≫\n              (d.pushComp f' e').hom.app ((d.pull g').obj K))",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4ddf9",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T165936-L-2309985",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4ddf9",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T165936-L-2309985",
+  "kind": "interface",
+  "note": "independent cc review: item proof (5 clauses + completedPullComp/Id uniqueness) against node lemma-weil-pbc-completed-exchange-coherence; relocated ordinary comparisons byte-identical to base; split statements completedPull_reflection / integralExchange_coherence against their new nodes and Stacks 099M/099N, 07A7"
+ }
+}

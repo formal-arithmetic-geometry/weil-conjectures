@@ -1,0 +1,131 @@
+{
+ "id": "lem-weil-pbc-completed-exchange-unit",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Completion-mate comparison steps 6 and 7; coherence proof second paragraph, ordered construction and its completion units",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Completed exchange extends the ordinary mate along its unit",
+ "statement": "For the adic datum of [def-weil-pbc-adic-coefficient-datum], any chosen cartesian square of schemes, and every ambient derived input K, the ordered raw exchange x of [def-weil-pbc-completed-base-change-map] satisfies j_g(Rf_*K) ≫ x(K) = Ex(K) ≫ Rf′_*(j_g′(K)), where Ex is ordinary ambient ringed exchange and j is the specified ordinary-to-completed comparison. No completeness, properness or finite-origin condition is imposed.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex; literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 099N and 0E48; blueprint lem-sp-completion-mate-comparison proof steps 6–7; compatibility of strict quotient augmentations with the counit-tensor projection."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-base-change-map",
+  "def-weil-pbc-ambient-ringed-exchange"
+ ],
+ "proof": [
+  {
+   "text": "For abstract ordinary and tower adjunctions, naturality of the reduction/pullback square and the ordinary left triangle identity identify the tower transpose of the counit after the ordinary unit with the tower unit followed by the square. Naturality of the conjugate constant/pullback comparison and its unit equation identify the transpose of ordinaryToCompleted. Cancel the conjugate comparison and use these two equations to derive the pullback-unit equation from towerProjection_properties.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand the ordered completed exchange, combine the first two derived-limit maps, and cancel H followed by H inverse in the strict tower category. Apply the pullback-unit equation and naturality of the completion unit to the reduced ordinary exchange. Apply the projection-unit equation at the target, use naturality of directImageRlimIso inverse, and cancel its hom and inverse. The target pullback-unit equation, followed by the inverse reduction/pullback comparison, gives the asserted equality.",
+   "uses": [
+    "def-weil-pbc-completed-four-towers",
+    "prop-weil-pbc-direct-image-limits",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-completed-four-towers",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "prop-weil-pbc-direct-image-limits"
+ ],
+ "proof_origin": {
+  "by": "worker S9",
+  "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean; literature/stacks-project/sites-cohomology.tex",
+  "place": "unit_conjugateEquiv, naturality and adjunction triangles; the existing projection completion-unit equation of prop-weil-pbc-direct-image-limits. All steps proved in Lean."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "completedPull|completionUnit|mateEquiv_vcomp|conjugateIsoEquiv",
+   "results": "{\"t\": \"2026-10-19T20:57:47Z\", \"tool\": \"grep\", \"query\": \"completedPull|completionUnit|mateEquiv_vcomp|conjugateIsoEquiv\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/CompositionIso.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Unique.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\", \"Mathlib/CategoryTheory/Adjunction/Opposites.lean\"], \"digest\": \"2de1dc43f734cbb7\"}",
+   "date": "2026-10-19",
+   "verdict": "generic categorical or ordinary algebraic results only; no exact match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived adic completion reflects ordinary pullback with bijective unit precomposition into every complete object, and completed base change extends ordinary exchange along the completion unit",
+   "results": "{\"t\": \"2026-10-19T20:57:48Z\", \"tool\": \"leansearch\", \"query\": \"Derived adic completion reflects ordinary pullback with bijective unit precomposition into every complete object, and completed base change extends ordinary exchange along the completion unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AdicCompletion\", \"AdicCompletion.module\", \"AdicCompletion.of_bijective\", \"AdicCompletion.instCommRing\", \"Rat.HeightOneSpectrum.adicCompletion.padicEquiv\", \"AdicCompletion.of_ofAlgEquiv_symm\", \"AdicCompletion.of_bijective_iff\", \"IsAdicComplete.of_comp_lift\"], \"digest\": \"f4a63a37ac80a6c6\"}",
+   "date": "2026-10-19",
+   "verdict": "generic categorical or ordinary algebraic results only; no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-19T20:57:48Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-19",
+   "verdict": "generic categorical or ordinary algebraic results only; no exact match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedExchangeCoherence",
+  "date": "2026-10-20",
+  "group": "S9"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedExchangeUnit",
+  "file": "lean/Sheaf/Paper/CompletedExchangeUnit.lean",
+  "declaration": "AlgebraicGeometry.Scheme.AdicCoefficientDatum.completedExchange_unit",
+  "statement": "theorem AdicCoefficientDatum.completedExchange_unit\n    {X' X Y' Y : Scheme.{t}} {g' : X' ⟶ X} {f' : X' ⟶ Y'}\n    {f : X ⟶ Y} {g : Y' ⟶ Y} (sq : ChosenCartesianSquare g' f' f g)\n    (K : d.derived X) :\n    d.ordinaryToCompleted g ((d.push f).obj K) ≫ d.completedExchange sq K =\n      (d.integralExchange sq).app K ≫ (d.push f').map (d.ordinaryToCompleted g' K)",
+  "branch": "sheaf-dag",
+  "by": "S9",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4ddf9",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T165936-L-2309985",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4ddf9",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T165936-L-2309985",
+  "kind": "interface",
+  "note": "independent cc review: item proof (5 clauses + completedPullComp/Id uniqueness) against node lemma-weil-pbc-completed-exchange-coherence; relocated ordinary comparisons byte-identical to base; split statements completedPull_reflection / integralExchange_coherence against their new nodes and Stacks 099M/099N, 07A7"
+ }
+}
