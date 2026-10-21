@@ -10,6 +10,9 @@ public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.RingTheory.Finiteness.Defs
 public import Mathlib.RingTheory.Localization.Away.Basic
 
+import Mathlib.Algebra.Module.LocalizedModule.Submodule
+import Mathlib.RingTheory.Finiteness.Small
+
 /-! # Spreading a finite module from an element localization
 
 Source: Stacks Project, Algebra, Tag 05N5 (`algebra-lemma-construct-fp-module`),
@@ -48,6 +51,25 @@ theorem exists_finite_localizationAway_model
     [Module.Finite (Localization.Away f) L] :
     ∃ M : ModuleCat.{u} R, Module.Finite R M ∧
       Nonempty (LocalizedModule (Submonoid.powers f) M ≃ₗ[Localization.Away f] L) := by
-  sorry
+  let A := Localization.Away f
+  let S := Submonoid.powers f
+  let : Module R L := Module.compHom L (algebraMap R A)
+  have : IsScalarTower R A L := IsScalarTower.of_compHom R A L
+  obtain ⟨s, hs⟩ := Module.Finite.fg_top (R := A) (M := L)
+  -- This span is the image of the finite free module in the source proof.
+  let N : Submodule R L := Submodule.span R (s : Set L)
+  have hN : N.FG := Submodule.fg_span s.finite_toSet
+  have : Module.Finite R N := Module.Finite.of_fg hN
+  have : Small.{u} N := hN.small N
+  have : IsLocalizedModule S (LinearMap.id : L →ₗ[R] L) :=
+    isLocalizedModule_id S L A
+  have htop : N.localized' A S (LinearMap.id : L →ₗ[R] L) = ⊤ := by
+    simpa only [N, Submodule.localized'_span, LinearMap.id_coe, Set.image_id] using hs
+  refine ⟨ModuleCat.of R (Shrink.{u} N), inferInstance, ⟨?_⟩⟩
+  exact (IsLocalizedModule.mapEquiv S
+    (LocalizedModule.mkLinearMap S (Shrink.{u} N))
+    (N.toLocalized' A S (LinearMap.id : L →ₗ[R] L)) A
+    (Shrink.linearEquiv R N)).trans
+      ((LinearEquiv.ofEq _ _ htop).trans (Submodule.topEquiv : (⊤ : Submodule A L) ≃ₗ[A] L))
 
 end Module
