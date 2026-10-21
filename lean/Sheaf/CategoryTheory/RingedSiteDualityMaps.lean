@@ -792,7 +792,8 @@ private theorem ringedSiteBidualFormula_ext
     ext φ
     have h' : i + q = 0 := by omega
     have hqi : q + i = 0 := by omega
-    exact (hβ i q h' hqi U x W φ).trans (hγ i q h' hqi U x W φ).symm
+    simpa only [homComplexπ, homComplexFunctor] using
+      (hβ i q h' hqi U x W φ).trans (hγ i q h' hqi U x W φ).symm
   · exact (ringedSiteHomObj_isZero_target.{c, v, r} J R _ _
       (ringedSiteDualityUnit_isZero_X.{c, v, r} J R t ht)).eq_of_tgt _ _
 
@@ -825,8 +826,9 @@ theorem ringedSiteOrdinaryBidual_existsUnique (E : CochainComplex (SheafOfModule
         exact ringedSiteBidualDegree_comm.{c, v, r} J R E i }
   have hβ : RingedSiteBidualFormula.{c, v, r} J R E β := by
     intro i q h h' U x W φ
-    exact ringedSiteBidualDegree_eval.{c, v, r} J R E
-      (ringedSiteDualityUnitComplex.{c, v, r} J R) i q 0 h' U x W φ
+    simpa only [WeilConjectures.coefficientHomComponent, homComplexπ, homComplexFunctor] using
+      ringedSiteBidualDegree_eval.{c, v, r} J R E
+        (ringedSiteDualityUnitComplex.{c, v, r} J R) i q 0 h' U x W φ
   exact ⟨β, hβ, fun γ hγ ↦ ringedSiteBidualFormula_ext.{c, v, r} J R E γ β hγ hβ⟩
 
 end OrdinaryBidualConstruction

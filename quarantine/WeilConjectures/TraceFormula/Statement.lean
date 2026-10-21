@@ -1,61 +1,80 @@
 /-
-Copyright (c) 2026 Claude. All rights reserved.
+Copyright (c) 2026 Nailin Guan. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: Claude
+Authors: Nailin Guan
 -/
 module
 
-public import WeilConjectures.AlgebraicGeometry.Morphisms.Frobenius
-public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Rigid.Braided
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.BaseChangeTheorems.MorphismDefs
-public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructibleBraided
-public import WeilConjectures.TraceFormula.Basic
+public import WeilConjectures.TraceFormula.WeilTrace
 
 /-!
 
-# The statement of the Grothendieck–Lefschetz trace formula
+# The Grothendieck–Lefschetz trace formula for Weil objects
 
-Let `k₀ = 𝔽_q` be a finite field, `k` an algebraically closed field containing `k₀`, `X₀` a
-separated `k₀`-scheme of finite type and `X = X₀ ×_{k₀} k`, with its model Frobenius `Φ = F₀ × 𝟙`
-(`ProEtale.CondensedRing.IsModelFrobenius`). Let `(K, φ)` be a Weil object of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧`
-for `Φ`, that is `φ : LΦ^* K ≅ K` (`ProEtale.CondensedRing.WeilBoundedConstructibleOfEnd`). For
-every `m ≥ 1`,
+Let `ℓ` be a prime and `k = 𝔽_q` a finite field of characteristic `p ≠ ℓ`. For a separated
+scheme `X` of finite type over `Spec k` with an automorphism `e : X ≅ X` over `Spec k` and a Weil
+object `(K, φ_K)` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` for `e`, the trace formula states that for every `n : ℕ`
 ```
-tr(F_{c,m} | RΓ_c(X, K)) = ∑_{x ∈ X(k), Φ_m(x) = x} tr(F_{x,m} | K_x̄)
+L_{n+1}(X, K) = ∑_{x̄ ∈ X(𝔽_{q^{n+1}})} t_{n+1}(K; x̄),
 ```
-(`ProEtale.CondensedRing.trace_globalOperator_eq_sum_trace_stalkFrobenius`, blueprint
-`thm-trf-grothendieck-lefschetz-finite-ring` and `thm-trf-grothendieck-lefschetz-qbar`), where:
+that is
+```
+∑ᵢ (-1)ⁱ Tr(Fr_{c,n+1} | Hⁱ_c(X_k̄, K)) = ∑_{x̄} ∑ⱼ (-1)ʲ Tr(Fr_{x̄,n+1} | Hʲ(K)_x̄),
+```
+with both sides built from the existing Weil functors in
+`WeilConjectures.TraceFormula.WeilTrace` (`ProEtale.CondensedRing.weilTraceFormula`). The index
+`n` stands for the Frobenius power `n + 1`. The points of degree `n + 1` are the geometric points
+`x̄` over the base point with `x̄ ≫ e^{n+1} = σ^{n+1} ≫ x̄`
+(`ProEtale.CondensedRing.frobeniusFixedPoints`). No Frobenius correspondence, graph or kernel
+object occurs in the hypotheses or in the conclusion.
 
-* `(K, φ_m)` is the iterated Weil object for `Φ_m = Φ^m`
-  (`ProEtale.CondensedRing.WeilBoundedConstructibleOfEnd.iterate`);
-* `F_{c,m}` is the Frobenius of `RΓ_c(X, (K, φ_m)) = Ra_{X!}(K, φ_m)`, a Weil object for the
-  identity of the base point `s = Spec k`
-  (`ProEtale.CondensedRing.WeilBoundedConstructibleOfEnd.globalOperator`);
-* `x` runs over the rational points `x : s ⟶ X` fixed by `Φ_m`
-  (`ProEtale.CondensedRing.FixedPoint`), which are the points of `X₀` rational over `𝔽_{q^m}`;
-* `F_{x,m}` is the Frobenius of the stalk `Lx^*(K, φ_m)`, again a Weil object for the identity
-  of `s` (`ProEtale.CondensedRing.WeilBoundedConstructibleOfEnd.stalkFrobenius`);
-* both traces are categorical traces (`CategoryTheory.MonoidalCategory.trace`) in the symmetric
-  monoidal category `Dᵇc(s)⟦ℚ̲̄_ℓ⟧`, with values in `End (ℚ̄_ℓ,s)`, which is `ℚ̄_ℓ` since `k` is
-  separably closed. They are taken for chosen duals of `RΓ_c(X, K)` and of the stalks `K_x̄`;
-  the trace does not depend on this choice.
+## The relative form
 
-## Main definitions
+The trace formula is the case `Y = Spec k` of the compatibility of the Weil lower shriek with the
+pushforward of trace functions (`ProEtale.CondensedRing.weilShriekTraceFunction`): for a morphism
+`f : X ⟶ Y` over `Spec k`, automorphisms `e_X`, `e_Y` with `e_X ≫ f = f ≫ e_Y` and a point `ȳ` of
+`Y` of degree `n + 1`,
+```
+t_{n+1}(Rf_!^Weil K; ȳ) = ∑_{x̄ ↦ ȳ} t_{n+1}(K; x̄),
+```
+the sum running over the points of `X` of degree `n + 1` lying over `ȳ`. The absolute formula is
+deduced from it: the base `Spec k` has the single point `s` of degree `n + 1`, at which the local
+trace of `Ra_!^Weil K` is the global trace by definition.
 
-- `ProEtale.CondensedRing.weilStalk`: the stalk `Lx^*` of Weil objects at a fixed point `x`.
-- `ProEtale.CondensedRing.weilCompactCohomology`: the compactly supported cohomology
-  `RΓ_c(X, -) = Ra_{X!}` of Weil objects, for `Φ` a finite universal homeomorphism.
-- `ProEtale.CondensedRing.WeilBoundedConstructibleOfEnd.stalkFrobenius`,
-  `ProEtale.CondensedRing.WeilBoundedConstructibleOfEnd.globalOperator`: the local Frobenius
-  `F_{x,m}` and the global operator `F_{c,m}` (blueprint `sk-d-weil`,
-  `def-trf-frobenius-coefficient-morphism`).
-- `ProEtale.CondensedRing.IsModelFrobenius`: `Φ` is the base change of the `q`-power Frobenius
-  of a model `X₀` over `k₀` (blueprint `sk-d-weil`).
+## The twisting automorphism
 
-## Main statements
+For `e = 𝟙` and the classical Weil structure this is the Grothendieck–Lefschetz trace formula
+for `X` over `𝔽_q`. For an automorphism `e` of finite order, `σ` twisted by `e` is the Frobenius
+of a twisted form of `X` over `𝔽_q`, which has `frobeniusFixedPoints e n` as its set of
+`𝔽_{q^{n+1}}`-rational points, and the formula is the trace formula on that form (as in
+Deligne–Lusztig). The statements assume `e` has finite order: for an automorphism of infinite
+order the twisted Frobenius is no longer the Frobenius of a model over `𝔽_q`.
 
-- `ProEtale.CondensedRing.trace_globalOperator_eq_sum_trace_stalkFrobenius`: the
-  Grothendieck–Lefschetz trace formula.
+The geometric Galois Frobenius `g_X` of a geometric fiber is not of this form, since the geometric
+fiber is not of finite type over `𝔽_q`
+(see `WeilConjectures.WeilObject.BoundedConstructible.Defs`). Once the bounded constructible
+Weil formalism is extended to it, the same statements apply with the base `Spec k̄` and the
+automorphism `σ` in place of `Spec k` and the identity.
+
+## Main results
+
+- `ProEtale.CondensedRing.weilShriekTraceFunction`: the sheaf–function compatibility of the Weil
+  lower shriek, the deep sorried input.
+- `ProEtale.CondensedRing.weilTraceFormula`: the trace formula, deduced from the relative form.
+- `ProEtale.CondensedRing.weilPointCount`: the point count `L_{n+1}(X, ℚ̲̄_ℓ) = #X(𝔽_{q^{n+1}})`
+  for the canonical Weil unit, deduced from the trace formula and the normalization of the local
+  trace of the unit.
+- `ProEtale.CondensedRing.weilGlobalSupertrace_point_unit`: the normalization test N1, the
+  global trace of the unit of the base is `1`.
+
+These are the project's statements of the trace formula. They are stated for the Frobenius of
+`Spec k̄` twisted by an automorphism `e` of `X`, with the powers `CategoryTheory.Iso.powSucc e n`
+and the iterated Weil structures `ProEtale.CondensedRing.WeilSheaf.powSucc` on homology sheaves.
+`WeilConjectures.TraceFormula.Main` collects results for the model-Frobenius setting of the
+blueprint (an endomorphism `Φ` of `X` with its iterates
+`ProEtale.CondensedRing.frobeniusIterate Φ m` and the iterated Weil structures
+`ProEtale.CondensedRing.WeilBoundedConstructible.iterateStr`), such as additivity of the trace
+along an open subscheme and its closed complement.
 
 -/
 
@@ -63,235 +82,83 @@ tr(F_{c,m} | RΓ_c(X, K)) = ∑_{x ∈ X(k), Φ_m(x) = x} tr(F_{x,m} | K_x̄)
 
 universe u
 
-open CategoryTheory Limits MonoidalCategory Endofunctor
+open CategoryTheory MonoidalCategory Endofunctor
 
-open scoped CategoryTheory.Functor CategoryTheory.Obj
+open scoped CategoryTheory.Obj
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
 open Scheme
 
-variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Fact (ringChar k).Prime]
+variable (ℓ : ℕ) [Fact ℓ.Prime] {k : Type u} [Field k] [Finite k] [Fact (ringChar k).Prime]
   [Fact (ringChar k ≠ ℓ)]
-  {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
 
-/-! ### The stalk at a fixed point -/
-
-section Stalk
-
-variable (Φ : X ⟶ X)
-
-/-- The *stalk functor* at a rational point `x` fixed by `Φ`: the derived pullback `Lx^*`, from
-Weil objects for `Φ` on `X` to Weil objects for the identity of the base point `s`. The structure
-isomorphism of `Lx^* K` is
+/-- The sheaf–function compatibility of the Weil lower shriek: for a morphism `f : X ⟶ Y` of
+separated schemes of finite type over `Spec k`, automorphisms `e_X`, `e_Y` over `Spec k` with
+`e_X ≫ f = f ≫ e_Y` and `e_X` of finite order, a Weil object `K` for `e_X` and a point `ȳ` of `Y`
+of degree `n + 1`,
 ```
-L(𝟙 s)^* Lx^* K ≅ Lx^* LΦ^* K --Lx^* φ--> Lx^* K,
+t_{n+1}(Rf_!^Weil K; ȳ) = ∑_{x̄ ↦ ȳ} t_{n+1}(K; x̄),
 ```
-the first isomorphism being the comparison of the pullbacks along the square `𝟙 s ≫ x = x ≫ Φ`.
--/
-noncomputable def weilStalk (x : RationalPoint X) (hx : x ≫ Φ = x) :
-    WeilBoundedConstructibleOfEnd ℓ Φ ⥤ WeilBoundedConstructibleOfEnd ℓ (𝟙 (point k)) :=
-  IsoAlgebra.mapOfNatIso
-    (boundedConstructiblePullbackSquareComparison (Profinite.padicAlgClRingObj ℓ) ℓ
-      (CommSq.mk (show 𝟙 (point k) ≫ x = x ≫ Φ by rw [Category.id_comp, hx]))).symm
+the sum running over the points `x̄` of `X` of degree `n + 1` with `x̄ ≫ f = ȳ`. By compactly
+supported base change of the Weil lower shriek to `ȳ`, this is the trace formula for the fiber of
+`f` over `ȳ`.
 
-@[simp]
-lemma weilStalk_obj_carrier (x : RationalPoint X) (hx : x ≫ Φ = x)
-    (K : WeilBoundedConstructibleOfEnd ℓ Φ) :
-    ((weilStalk ℓ Φ x hx).obj K).carrier =
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier :=
-  rfl
-
-end Stalk
-
-/-! ### Compactly supported cohomology -/
-
-section CompactCohomology
-
-variable (Φ : X ⟶ X) [IsFinite Φ.left] [IsUniversalHomeomorphism Φ.left]
-
-/-- The Frobenius comparison `Ra_{X!} ⋙ L(𝟙 s)^* ≅ LΦ^* ⋙ Ra_{X!}` for a finite universal
-homeomorphism `Φ` of `X` over `Spec k`, with `a_X : X ⟶ s` the structure morphism: the composite
-```
-Ra_{X!} ⋙ L(𝟙 s)^* ≅ Ra_{X!} ≅ LΦ^* ⋙ RΦ_* ⋙ Ra_{X!} ≅ LΦ^* ⋙ RΦ_! ⋙ Ra_{X!}
-  ≅ LΦ^* ⋙ R(Φ ≫ a_X)_! = LΦ^* ⋙ Ra_{X!}
-```
-of the identity isomorphism of `L(𝟙 s)^*`, the unit of `LΦ^* ⊣ RΦ_*` (an isomorphism by
-topological invariance), the identification `RΦ_! ≅ RΦ_*` for the proper `Φ` and the composition
-isomorphism of the lower shriek (blueprint `sk-d-weil-push`). -/
-noncomputable def compactCohomologyFrobeniusComparison :
-    boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) ⋙
-        boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (𝟙 (point k)) ≅
-      boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ Φ ⋙
-        boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X) :=
-  have := isIso_unit_boundedConstructibleUpperStarLowerStarAdjunction
-    (Profinite.padicAlgClRingObj ℓ) ℓ Φ
-  Functor.isoWhiskerLeft _ (boundedConstructibleUpperStarId _ ℓ (point k)) ≪≫
-    Functor.rightUnitor _ ≪≫ (Functor.leftUnitor _).symm ≪≫
-    Functor.isoWhiskerRight
-      (asIso (boundedConstructibleUpperStarLowerStarAdjunction _ ℓ Φ).unit) _ ≪≫
-    Functor.associator _ _ _ ≪≫
-    Functor.isoWhiskerLeft _
-      (Functor.isoWhiskerRight
-          (boundedConstructibleLowerShriekIsoLowerStar_padicAlgCl ℓ Φ).symm _ ≪≫
-        (boundedConstructibleLowerShriekComp_padicAlgCl ℓ Φ (toPoint X)).symm ≪≫
-        eqToIso (by rw [comp_toPoint]))
-
-/-- The *compactly supported cohomology* `RΓ_c(X, -) = Ra_{X!}` of Weil objects for a finite
-universal homeomorphism `Φ`: a Weil object `(K, φ)` for `Φ` is sent to `Ra_{X!} K` with the
-structure isomorphism
-`L(𝟙 s)^* Ra_{X!} K ≅ Ra_{X!} LΦ^* K --Ra_{X!} φ--> Ra_{X!} K`
-of `compactCohomologyFrobeniusComparison`, a Weil object for the identity of the base point
-(blueprint `def-trf-weil-shriek-pushforward`). -/
-noncomputable def weilCompactCohomology :
-    WeilBoundedConstructibleOfEnd ℓ Φ ⥤ WeilBoundedConstructibleOfEnd ℓ (𝟙 (point k)) :=
-  IsoAlgebra.mapOfNatIso (compactCohomologyFrobeniusComparison ℓ Φ)
-
-@[simp]
-lemma weilCompactCohomology_obj_carrier (K : WeilBoundedConstructibleOfEnd ℓ Φ) :
-    ((weilCompactCohomology ℓ Φ).obj K).carrier =
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        K.carrier :=
-  rfl
-
-end CompactCohomology
-
-/-! ### The Frobenius operators -/
-
-namespace WeilBoundedConstructibleOfEnd
-
-variable {ℓ} {Φ : X ⟶ X}
-
-/-- The *local Frobenius* `F_{x,m}` of a Weil object `(K, φ)` at a rational point `x` fixed by
-`Φ_m`: the Frobenius of the stalk at `x` of the iterate `(K, φ_m)`, an automorphism of the
-geometric stalk `K_x̄ = Lx^* K`. Explicitly it is the composite
-```
-Lx^* K ≅ L(𝟙 s)^* Lx^* K ≅ Lx^* LΦ_m^* K --Lx^* φ_m--> Lx^* K
-```
-(blueprint `sk-d-weil`). -/
-noncomputable def stalkFrobenius (K : WeilBoundedConstructibleOfEnd ℓ Φ) (m : ℕ)
-    (x : RationalPoint X) (hx : x ≫ frobeniusIterate Φ m = x) :
-    (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier ⟶
-      (boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj K.carrier :=
-  ((weilStalk ℓ (frobeniusIterate Φ m) x hx).obj (K.iterate m)).frobenius.hom
-
-/- The carriers `(K.iterate m).carrier` and `K.carrier` are defeq, but the kernel check of this
-defeq times out, so the definition casts along `iterate_carrier`. -/
-/-- The *global operator* `F_{c,m}` of a Weil object `(K, φ)` on its compactly supported
-cohomology `RΓ_c(X, K) = Ra_{X!} K`, for `Φ_m` a finite universal homeomorphism: the Frobenius
-of the Weil object `RΓ_c(X, (K, φ_m))` for the identity of the base point. Explicitly it is
-```
-RΓ_c(X, K) ≅ L(𝟙 s)^* Ra_{X!} K ≅ Ra_{X!} LΦ_m^* K --Ra_{X!} φ_m--> Ra_{X!} K
-```
-(blueprint `def-trf-frobenius-coefficient-morphism` and
-`lem-trf-frobenius-operator-compact-description`). -/
-noncomputable def globalOperator (K : WeilBoundedConstructibleOfEnd ℓ Φ) (m : ℕ)
-    [IsFinite (frobeniusIterate Φ m).left] [IsUniversalHomeomorphism (frobeniusIterate Φ m).left] :
-    (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        K.carrier ⟶
-      (boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        K.carrier :=
-  eqToHom (by rw [weilCompactCohomology_obj_carrier, iterate_carrier]) ≫
-    ((weilCompactCohomology ℓ (frobeniusIterate Φ m)).obj (K.iterate m)).frobenius.hom ≫
-    eqToHom (by rw [weilCompactCohomology_obj_carrier, iterate_carrier])
-
-end WeilBoundedConstructibleOfEnd
-
-/-! ### The model Frobenius -/
-
-section Model
-
-variable {ℓ} (Φ : X ⟶ X)
-
-/-- The rational points `x : s ⟶ X` fixed by the iterate `Φ_m`. -/
-abbrev FixedPoint (m : ℕ) : Type u :=
-  {x : RationalPoint X // x ≫ frobeniusIterate Φ m = x}
-
-variable {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
-  (f₀ : X₀ ⟶ Spec (.of k₀)) (p : X.left ⟶ X₀)
-
-/-- The endomorphism `Φ` of `X` over `Spec k` is the *model Frobenius* of a model `X₀` of `X`
-over the finite field `k₀ ⊆ k`: the square
-```
-     X ───p───▶ X₀
-     │          │
-  a_X│          │f₀
-     ▼          ▼
-  Spec k ───▶ Spec k₀
-```
-is cartesian, so that `X = X₀ ×_{k₀} k`, and `Φ = F₀ × 𝟙` is the base change of the
-`#k₀`-power Frobenius `F₀` of `X₀`, that is `Φ ≫ p = p ≫ F₀`. Since the square is cartesian, the
-two equations `Φ ≫ p = p ≫ F₀` and `Φ ≫ a_X = a_X` determine `Φ` (blueprint `sk-d-weil`). -/
-structure IsModelFrobenius : Prop where
-  /-- `X` is the base change `X₀ ×_{k₀} k`. -/
-  isPullback : IsPullback p X.hom f₀ (Spec.map (CommRingCat.ofHom (algebraMap k₀ k)))
-  /-- `Φ` is the base change of the `#k₀`-power Frobenius of `X₀`. -/
-  exists_isFrobenius : ∃ F₀ : X₀ ⟶ X₀, F₀.IsFrobenius (Nat.card k₀) ∧ Φ.left ≫ p = p ≫ F₀
-
-variable {Φ f₀ p}
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
-/-- The iterates `Φ_m` of the model Frobenius are universal homeomorphisms (blueprint
-`i-relative-frob`, Step 2). -/
-lemma IsModelFrobenius.isUniversalHomeomorphism (hΦ : IsModelFrobenius Φ f₀ p) (m : ℕ) :
-    IsUniversalHomeomorphism (frobeniusIterate Φ m).left := by
-  obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
-  have : IsUniversalHomeomorphism Φ.left :=
-    hF₀.isUniversalHomeomorphism_of_isPullback hΦ.isPullback (Over.w Φ) hp
-  induction m with
-  | zero => exact inferInstanceAs (IsUniversalHomeomorphism (𝟙 X.left))
-  | succ m ih =>
-    rw [frobeniusIterate_succ, Over.comp_left]
-    infer_instance
-
-omit [Fact (ringChar k).Prime] [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
-  [IsSeparated X.hom] in
-/-- The iterates `Φ_m` of the model Frobenius of a model locally of finite type are finite
-(blueprint `i-relative-frob`, Step 1). -/
-lemma IsModelFrobenius.isFinite [LocallyOfFiniteType f₀] (hΦ : IsModelFrobenius Φ f₀ p)
-    (m : ℕ) : IsFinite (frobeniusIterate Φ m).left := by
-  obtain ⟨F₀, hF₀, hp⟩ := hΦ.exists_isFrobenius
-  have : IsFinite Φ.left := hF₀.isFinite_of_isPullback hΦ.isPullback (Over.w Φ) hp
-  induction m with
-  | zero => exact inferInstanceAs (IsFinite (𝟙 X.left))
-  | succ m ih =>
-    rw [frobeniusIterate_succ, Over.comp_left]
-    infer_instance
-
-end Model
-
-/-! ### The trace formula -/
-
-variable {ℓ} {Φ : X ⟶ X} {k₀ : Type u} [Field k₀] [Finite k₀] [Algebra k₀ k] {X₀ : Scheme.{u}}
-  {f₀ : X₀ ⟶ Spec (.of k₀)} {p : X.left ⟶ X₀}
-
-attribute [local instance] boundedConstructibleBraiding in
-/-- **The Grothendieck–Lefschetz trace formula** (blueprint
-`thm-trf-grothendieck-lefschetz-finite-ring`, `thm-trf-grothendieck-lefschetz-qbar`): let
-`X = X₀ ×_{k₀} k` be the base change of a separated `k₀`-scheme of finite type to an
-algebraically closed field `k`, with model Frobenius `Φ`, and let `(K, φ)` be a Weil object of
-`Dᵇc(X)⟦ℚ̲̄_ℓ⟧` for `Φ`. For every `m ≥ 1`,
-```
-tr(F_{c,m} | RΓ_c(X, K)) = ∑_{x ∈ X(k), Φ_m(x) = x} tr(F_{x,m} | K_x̄),
-```
-where `F_{c,m}` is the Frobenius of the compactly supported cohomology `RΓ_c(X, (K, φ_m))` and
-`F_{x,m}` the Frobenius of the stalk of `(K, φ_m)` at `x`, both Weil objects for the identity of
-the base point. The traces are taken in `Dᵇc(s)⟦ℚ̲̄_ℓ⟧` for chosen right duals of `RΓ_c(X, K)` and
-of the stalks. -/
-theorem trace_globalOperator_eq_sum_trace_stalkFrobenius [IsAlgClosed k] [IsSeparated f₀]
-    [LocallyOfFiniteType f₀] [QuasiCompact f₀] (hΦ : IsModelFrobenius Φ f₀ p)
-    (K : WeilBoundedConstructibleOfEnd ℓ Φ) (m : ℕ) (hm : 1 ≤ m)
-    [Fintype (FixedPoint Φ m)]
-    [HasRightDual
-      ((boundedConstructibleLowerShriek (Profinite.padicAlgClRingObj ℓ) ℓ (toPoint X)).obj
-        K.carrier)]
-    [∀ x : RationalPoint X,
-      HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ x).obj
-        K.carrier)] :
-    haveI := hΦ.isFinite m
-    haveI := hΦ.isUniversalHomeomorphism m
-    trace (K.globalOperator m) = ∑ x : FixedPoint Φ m, trace (K.stalkFrobenius m x.1 x.2) :=
+This is the relative, twisted variant of blueprint `thm-trf-grothendieck-lefschetz-finite-ring`,
+which is stated for the model Frobenius. -/
+theorem weilShriekTraceFunction {X Y : Over (Spec (.of k))}
+    [LocallyOfFiniteType X.hom] [QuasiCompact X.hom] [IsSeparated X.hom]
+    [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] [IsSeparated Y.hom]
+    (eX : X ≅ X) (eY : Y ≅ Y) {f : X ⟶ Y} (hf : eX.hom ≫ f = f ≫ eY.hom)
+    (he : ∃ m : ℕ, eX.powSucc m = Iso.refl X)
+    (K : WeilBoundedConstructible ℓ eX.hom) (n : ℕ) (y : frobeniusFixedPoints eY n) :
+    weilStalkSupertrace ℓ n y.1 y.2.2 ((weilLowerShriek ℓ eX eY hf).obj K) =
+      ∑ᶠ x : {x : frobeniusFixedPoints eX n // x.1 ≫ f.left = y.1},
+        weilStalkSupertrace ℓ n x.1.1 x.1.2.2 K :=
   sorry
+
+variable {X : Over (Spec (.of k))} [LocallyOfFiniteType X.hom] [QuasiCompact X.hom]
+  [IsSeparated X.hom] (e : X ≅ X)
+
+/-- **The Grothendieck–Lefschetz trace formula for Weil objects.** For a separated scheme `X` of
+finite type over `𝔽_q`, an automorphism `e` of `X` over `𝔽_q` of finite order and a Weil object
+`K` of `Dᵇc(X)⟦ℚ̲̄_ℓ⟧` for `e`, for every `n : ℕ`,
+```
+∑ᵢ (-1)ⁱ Tr(Fr_{c,n+1} | Hⁱ_c(X_k̄, K))
+  = ∑_{x̄ ∈ X(𝔽_{q^{n+1}})} ∑ⱼ (-1)ʲ Tr(Fr_{x̄,n+1} | Hʲ(K)_x̄).
+```
+It is the case `Y = Spec k` of `weilShriekTraceFunction`. This is a variant of blueprint
+`thm-trf-grothendieck-lefschetz-finite-ring` for the Frobenius twisted by `e`. -/
+theorem weilTraceFormula (he : ∃ m : ℕ, e.powSucc m = Iso.refl X)
+    (K : WeilBoundedConstructible ℓ e.hom) (n : ℕ) :
+    weilGlobalSupertrace ℓ e K n =
+      ∑ᶠ x : frobeniusFixedPoints e n, weilStalkSupertrace ℓ n x.1 x.2.2 K := by
+  refine (weilShriekTraceFunction ℓ e (Iso.refl (point k)) (f := toPoint X) (toPoint_ext _ _) he K n
+    (pointFixedPoint n)).trans ?_
+  exact finsum_comp_equiv (Equiv.subtypeUnivEquiv fun x ↦ x.2.1)
+    (f := fun x : frobeniusFixedPoints e n ↦ weilStalkSupertrace ℓ n x.1 x.2.2 K)
+
+/-- **Point counting.** For the canonical Weil unit `ℚ̲̄_ℓ,X`, the global trace in degree `n + 1` is
+the number of points of degree `n + 1`, that is `#X(𝔽_{q^{n+1}})` for `e = 𝟙`:
+```
+∑ᵢ (-1)ⁱ Tr(Fr_{c,n+1} | Hⁱ_c(X_k̄, ℚ̄_ℓ)) = #X(𝔽_{q^{n+1}}).
+```
+This is a variant of blueprint `cor-trf-point-counting` for the Frobenius twisted by `e`. -/
+theorem weilPointCount (he : ∃ m : ℕ, e.powSucc m = Iso.refl X) (n : ℕ) :
+    weilGlobalSupertrace ℓ e (WeilBoundedConstructible.unit ℓ e.hom) n =
+      (Nat.card (frobeniusFixedPoints e n) : _) := by
+  rw [weilTraceFormula ℓ e he]
+  simp only [weilStalkSupertrace_unit]
+  have := finite_frobeniusFixedPoints e n
+  let := Fintype.ofFinite (frobeniusFixedPoints e n)
+  rw [finsum_eq_sum_of_fintype, Finset.sum_const, Finset.card_univ, Nat.card_eq_fintype_card,
+    nsmul_eq_mul, mul_one]
+
+/-- The normalization test N1: the canonical Weil unit of the base `Spec 𝔽_q` has global trace
+`1` in every degree. -/
+theorem weilGlobalSupertrace_point_unit (n : ℕ) :
+    weilGlobalSupertrace ℓ (Iso.refl (point k))
+      (WeilBoundedConstructible.unit ℓ (Iso.refl (point k)).hom) n = 1 := by
+  rw [weilPointCount ℓ (Iso.refl (point k)) ⟨0, rfl⟩, Nat.card_unique, Nat.cast_one]
 
 end AlgebraicGeometry.ProEtale.CondensedRing

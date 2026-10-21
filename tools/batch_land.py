@@ -1612,6 +1612,9 @@ def drop_other_writers(b: dict, last: dict, failures: list, log, persist: bool =
     # a changed file goes back to the version its importers were compiled against
     _gone = {f['module'] for i in ids if i in _recs for f in _recs[i].get('files') or []
              if f.get('module') and not f.get('existed', True)}
+    # a failing module whose file is no longer in the library (taken out in an earlier round) is a removed root too:
+    # the modules still importing it fail with "no such file" / "bad import" build after build
+    _gone |= {m for m in failures if not (li.LEAN / (m.replace('.', '/') + '.lean')).is_file()}
     _seen, _todo = set(_gone), list(_gone)
     while _todo:
         for _x in _importers.get(_todo.pop(), ()):

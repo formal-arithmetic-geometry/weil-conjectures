@@ -20,6 +20,21 @@ open CategoryTheory Limits Opposite
 open scoped CategoryTheory.Functor AlgebraicGeometry.Etale
 namespace AlgebraicGeometry.Etale
 
+/-- The module formula for the raw pullback itself, stated over `B` rather than through the
+functor `higherDirectImageRawOverFunctor`. Keeping this a separate declaration keeps the
+`unop (op B)` objects of the functor out of the kernel check of the associativity step. -/
+private theorem higherDirectImageRawOverPullback_eq_moduleFactors
+    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)
+    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (U : S.Etale)
+    {A B : Over W} (f : A ⟶ B)
+    (z : (higherDirectImageRawOverPresheaf Λ k G q B).obj (op U)) :
+    higherDirectImageRawOverPullback Λ k G q f U z =
+      moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)
+        (by rw [← Category.assoc, Over.w]) ((freeSheaf Λ S).obj U) ≫
+      (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z ≫
+        moduleCoefficientFactor Λ G q A B f :=
+  (Category.assoc _ _ _).symm
+
 /-- The module raw map is the composite of its source, class, and coefficient factors.
 Source: Stacks Project, Tags 03FD and 03Q8, explicit-map expansion in the proof of
 lem-sbc-raw-module-abelian-hom-map-naturality.
@@ -46,10 +61,7 @@ theorem rawModuleScalar_pullback_module_formula
       moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)
         (by rw [← Category.assoc, Over.w]) ((freeSheaf Λ S).obj U) ≫
       (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z ≫
-        moduleCoefficientFactor Λ G (q : ℤ) A B f) := by
-  simp only [higherDirectImageRawOverFunctor,
-    higherDirectImageRawOverPullbackHom_apply, higherDirectImageRawOverPullback,
-    higherDirectImageRawTrianglePullback, rawTriangleMap, moduleSourceFactor,
-    rawTriangleSource, moduleCoefficientFactor, Category.assoc]; rfl
+        moduleCoefficientFactor Λ G (q : ℤ) A B f) :=
+  higherDirectImageRawOverPullback_eq_moduleFactors Λ k G q U f z
 
 end AlgebraicGeometry.Etale
