@@ -23571,3 +23571,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:49 L: merged deliver/Q04/lem-sfb-derived-invariants-normal-subgroup-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 19:49 L: merged deliver/NC/lem-sfb-proper-ultrametric-scalar-extension (stage 2; reviewer PASS; parallel immutable checks)
 - 19:49 L: merged deliver/NJ/det-lem-bounded-continuity-sections (stage 2; reviewer PASS; parallel immutable checks)
+- 19:49 L: returned deliver/NP/lem-sfb-geometric-condensed-finite-scalar-model (reviewer RETURN: L: independent stage-2 immutable head 7f3441a31a06: H13/H4: the delivery rebinds the landed record of the shared stmt_de)
