@@ -6,17 +6,8 @@ Authors: SHEAF group Q47
 module
 
 public import Sheaf.AlgebraicGeometry.VaryingRingProperOpenArrows
-import Mathlib.CategoryTheory.Adjunction.Mates
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryMate
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.AlgebraicGeometry.VaryingRingModulePiComplementZero
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
-import Sheaf.CategoryTheory.RingedSiteModules
-import Sheaf.Paper.SemilinearDerivedSections
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
+import all Sheaf.AlgebraicGeometry.StrictTowerProperOpenCalculus
 
 /-!
 # Proper/open projection and pasting for varying coefficient rings
@@ -146,6 +137,7 @@ private theorem derivedComp_fac (e : F₁ ⋙ F₂ ≅ F₀) (K : CochainComplex
 
 end DerivedMaps
 
+section PastingTransparency
 attribute [local irreducible] derivedSquare Functor.mapDerivedCategoryCompIso
   Functor.mapDerivedCategoryNatIso Functor.mapDerivedCategory DerivedCategory.Q
 
@@ -366,7 +358,46 @@ private theorem derivedSquare_horizontal
 end DerivedHorizontal
 
 
+end PastingTransparency
+
 attribute [local irreducible] moduleAlpha moduleGComp moduleJComp
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem module_isZero_of_eval {X : Scheme.{u}} (M : Modules R φ X)
+    (h : ∀ n, IsZero ((eval R φ X n).obj M)) : IsZero M := by
+  -- Componentwise exactness detects zero objects on the ordinary system category.
+  let S : ShortComplex (Modules R φ X) :=
+    ShortComplex.mk (0 : M ⟶ M) (0 : M ⟶ M) (by simp)
+  let d := (WeilConjectures.SemilinearSections.semilinearDerivedSections.{u + 1, u, u + 1}
+    (Scheme.ProEt.topology X) (coefficients R X) (coefficientTransition R φ X)).some
+  have hs : S.Exact := (d.systems.componentwise S).mpr (fun n ↦
+    (S.map (eval R φ X n)).exact_of_isZero_X₂ (h n))
+  exact hs.isZero_of_both_zeros rfl rfl
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem module_disjoint_direct {U X C : Scheme.{u}}
+    (s : U ⟶ X) (c : C ⟶ X) [IsOpenImmersion s]
+    (hc : Disjoint (Set.range s) (Set.range c)) (N : Modules R φ C) :
+    IsZero ((pull R φ s).obj ((push R φ c).obj N)) := by
+  apply module_isZero_of_eval R φ
+  intro n
+  let e := (moduleEvalG R φ s n).app ((push R φ c).obj N) ≪≫
+    (StrictTower.modulePullback (R n) s).mapIso ((moduleEvalP R φ c n).app N)
+  exact (StrictTower.module_disjoint_direct (R n) s c hc
+    ((eval R φ C n).obj N)).of_iso e
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem module_disjoint_extension {U X C : Scheme.{u}}
+    (s : U ⟶ X) (c : C ⟶ X) [IsOpenImmersion s] [IsOpenImmersion c]
+    (hc : Disjoint (Set.range s) (Set.range c)) (N : Modules R φ U) :
+    IsZero ((pull R φ c).obj ((extension R φ s).obj N)) := by
+  apply (IsZero.iff_id_eq_zero _).2
+  apply ((moduleAdj R φ c).homEquiv _ _).injective
+  apply ((moduleJAdj R φ s).homEquiv _ _).injective
+  exact (module_disjoint_direct R φ s c hc _).eq_of_tgt _ _
 
 /-- The system clopen projection is identity on its image and zero on the complement.
 Source: Stacks 09AE; node proof Step 4
@@ -415,7 +446,10 @@ theorem modulePi_components {U X C : Scheme.{u}} (s : U ⟶ X) (c : C ⟶ X)
     rw [Functor.map_comp, ← Category.assoc,
       (moduleJAdj R φ s).right_triangle_components]
     simp
-  · exact modulePi_complement_zero R φ s c hc M
+  · have hd : Disjoint (Set.range s) (Set.range c) := by
+      rw [hc]
+      exact disjoint_compl_right
+    exact (module_disjoint_extension R φ s c hd ((pull R φ s).obj M)).eq_of_tgt _ _
 
 /-- Intrinsic moduleAlpha agrees with vertical pasting on every input.
 Source: Stacks, Tag 0F7C and blueprint, fifth proof step
@@ -638,6 +672,416 @@ theorem properOpenPasting :
       Functor.whiskerLeft_app, Functor.whiskerRight_app,
       Category.id_comp, Category.comp_id, Category.assoc] using hmM.symm
 
+section OrdinaryUnits
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
+attribute [local irreducible] moduleAdj
+
+private theorem moduleP_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g)
+    (N : Modules R φ X) (U : ℕ × Y.ProEt)
+    (m : ((push R φ f).obj N).val.obj (op U)) :
+    ((eqToIso (congrArg (push R φ) e)).hom.app N).val.app (op U) m =
+      N.val.map (Prod.mkHom (𝟙 U.1)
+        (eqToHom (congrArg (fun t ↦ (Scheme.proEtaleBaseChange t).obj U.2) e.symm))).op m := by
+  cases e
+  change m = N.val.map (𝟙 _) m
+  rw [PresheafOfModules.map_id]
+  rfl
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem modulePComp_id_left {U X : Scheme.{u}} (j : U ⟶ X) :
+    modulePComp R φ (𝟙 U) j ≪≫
+        eqToIso (congrArg (push R φ) (Category.id_comp j)) =
+      Functor.isoWhiskerRight (modulePId R φ U) (push R φ j) ≪≫
+        Functor.leftUnitor (push R φ j) := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext N
+  apply SheafOfModules.hom_ext
+  apply PresheafOfModules.hom_ext
+  intro V
+  ext m
+  simp only [Iso.trans_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+    Functor.whiskerRight_app, Functor.leftUnitor_hom_app]
+  change ((eqToIso (congrArg (push R φ) (Category.id_comp j))).hom.app N).val.app
+      V (((modulePComp R φ (𝟙 U) j).hom.app N).val.app V m) =
+    ((modulePId R φ U).hom.app N).val.app
+      (op (V.unop.1, (Scheme.proEtaleBaseChange j).obj V.unop.2)) m
+  rw [moduleP_transport R φ (Category.id_comp j) N V.unop]
+  erw [(Classical.choose_spec (modulePComp_existsUnique R φ (𝟙 U) j)).1]
+  erw [(Classical.choose_spec (modulePId_existsUnique R φ U)).1]
+  rw [← PresheafOfModules.map_comp_apply, ← op_comp]
+  have hsite :
+      eqToHom (congrArg (fun t ↦ (Scheme.proEtaleBaseChange t).obj V.unop.2)
+        (Category.id_comp j).symm) ≫
+        (MorphismProperty.Over.pullbackComp (P := @WeaklyEtale) (Q := ⊤)
+          (𝟙 U) j).hom.app V.unop.2 =
+      (MorphismProperty.Over.pullbackId @WeaklyEtale ⊤ U).inv.app
+        ((Scheme.proEtaleBaseChange j).obj V.unop.2) := by
+    have hcongr {f g : U ⟶ X} (e : f = g) :
+        MorphismProperty.Over.pullbackCongr (P := @WeaklyEtale) (Q := ⊤) e =
+          eqToIso (congrArg Scheme.proEtaleBaseChange e) := by
+      cases e
+      simp only [MorphismProperty.Over.pullbackCongr_refl, eqToIso_refl]
+    have h := congrArg (fun e ↦ e.hom.app V.unop.2)
+      (MorphismProperty.Over.pullbackComp_id_left
+        (P := @WeaklyEtale) (Q := ⊤) j ((𝟙 U) ≫ j) rfl)
+    rw [hcongr] at h
+    simp only [Iso.trans_hom, NatTrans.comp_app, Iso.symm_hom, Functor.isoWhiskerLeft_hom,
+      Functor.whiskerLeft_app, Functor.rightUnitor_inv_app] at h
+    rw [h]
+    simp only [eqToIso.hom,
+      eqToHom_refl, NatTrans.id_app, Category.id_comp]
+  exact congrArg (fun a : (Scheme.proEtaleBaseChange j).obj V.unop.2 ⟶
+      (Scheme.proEtaleBaseChange (𝟙 U)).obj ((Scheme.proEtaleBaseChange j).obj V.unop.2) ↦
+        N.val.map (Prod.mkHom (𝟙 V.unop.1) a).op m) hsite
+
+private def moduleGId (X : Scheme.{u}) : pull R φ (𝟙 X) ≅ 𝟭 (Modules R φ X) :=
+  Adjunction.leftAdjointIdIso (moduleAdj R φ (𝟙 X)) (modulePId R φ X)
+
+private theorem moduleGComp_id_left {U X : Scheme.{u}} (j : U ⟶ X) :
+    (moduleGComp R φ (𝟙 U) j).hom ≫
+        Functor.whiskerLeft (pull R φ j) (moduleGId R φ U).hom =
+      (eqToIso (congrArg (pull R φ) (Category.id_comp j))).hom := by
+  unfold moduleGComp moduleGId
+  exact StrictTower.leftAdjoint_unit_left (pull R φ) (push R φ) (moduleAdj R φ)
+    (moduleAdj R φ (𝟙 U)) (modulePId R φ U) (Category.id_comp j)
+    (modulePComp R φ (𝟙 U) j) (modulePComp_id_left R φ j)
+
+private theorem derived_transport {X Y : Scheme.{u}} {f g : X ⟶ Y} (e : f = g) :
+    (Functor.mapDerivedCategoryNatIso
+      (eqToIso (congrArg (pull R φ) e))).hom =
+        (eqToIso (congrArg (G R φ) e)).hom := by
+  cases e
+  exact Functor.mapDerivedCategoryNatIso_refl
+
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem gComp_id_left {U X : Scheme.{u}} (j : U ⟶ X) :
+    (gComp R φ (𝟙 U) j).hom ≫
+        Functor.whiskerLeft (G R φ j) (gId R φ U).hom =
+      (eqToIso (congrArg (G R φ) (Category.id_comp j))).hom := by
+  change (_ ≫ _) ≫ Functor.whiskerLeft (pull R φ j).mapDerivedCategory
+    ((Functor.mapDerivedCategoryNatIso (moduleGId R φ U)).hom ≫
+      (Functor.mapDerivedCategoryIdIso (Modules R φ U)).hom) = _
+  rw [Category.assoc]
+  exact
+    (StrictTower.derived_unit_left (pull R φ j) (pull R φ ((𝟙 U) ≫ j))
+    (pull R φ (𝟙 U)) (moduleGComp R φ (𝟙 U) j) (moduleGId R φ U)
+    (eqToIso (congrArg (pull R φ) (Category.id_comp j)))
+    (moduleGComp_id_left R φ j)).trans (derived_transport R φ (Category.id_comp j))
+
+private theorem pull_equivalence {U X : Scheme.{u}} (s : U ⟶ X) [IsIso s] :
+    (pull R φ s).IsEquivalence := by
+  let e : Modules R φ X ≌ Modules R φ U := CategoryTheory.Equivalence.mk
+    (pull R φ s) (pull R φ (inv s))
+    ((moduleGId R φ X).symm ≪≫
+      eqToIso (congrArg (pull R φ) (IsIso.inv_hom_id s).symm) ≪≫
+      moduleGComp R φ (inv s) s)
+    ((moduleGComp R φ s (inv s)).symm ≪≫
+      eqToIso (congrArg (pull R φ) (IsIso.hom_inv_id s)) ≪≫ moduleGId R φ U)
+  exact e.isEquivalence_functor
+
+private theorem pi_isIso {U X : Scheme.{u}} (s : U ⟶ X) [IsIso s]
+    [IsOpenImmersion s] [IsClosedImmersion s] : IsIso (modulePi R φ s) := by
+  have := pull_equivalence R φ s
+  have := (moduleAdj R φ s).unit_isIso_of_L_fully_faithful
+  have := moduleOpenToP_isIso R φ s
+  unfold modulePi
+  infer_instance
+
+private theorem lift_isIso {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    (h : k ≫ p = r ≫ i) (hsq : IsPullback k r p i) :
+    IsIso (StrictTower.squareLift k r p i h) := by
+  have he : StrictTower.squareLift k r p i h = hsq.isoPullback.hom := by
+    apply pullback.hom_ext
+    · exact (pullback.lift_fst k r h).trans hsq.isoPullback_hom_fst.symm
+    · exact (pullback.lift_snd k r h).trans hsq.isoPullback_hom_snd.symm
+  rw [he]
+  infer_instance
+
+private theorem moduleAlpha_isIso {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
+    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (hsq : IsPullback k r p i) :
+    IsIso (moduleAlpha R φ k r p i h) := by
+  have := lift_isIso k r p i h hsq
+  have := pi_isIso R φ (StrictTower.squareLift k r p i h)
+  unfold moduleAlpha
+  infer_instance
+
+private theorem alpha_isIso {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i : S ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
+    [IsProper r] [IsProper p] (h : k ≫ p = r ≫ i) (hsq : IsPullback k r p i) :
+    IsIso (alpha R φ k r p i h) := by
+  have := moduleAlpha_isIso R φ k r p i h hsq
+  change IsIso ((Functor.mapDerivedCategorySquareIso
+    (asIso (moduleAlpha R φ k r p i h))).hom)
+  infer_instance
+
+
+end OrdinaryUnits
+private theorem alpha_proper_congr {V W S T : Scheme.{u}}
+    (k : V ⟶ W) (r r' : V ⟶ S) (p p' : W ⟶ T) (i : S ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion i] [QuasiCompact k] [QuasiCompact i]
+    [IsProper r] [IsProper r'] [IsProper p] [IsProper p']
+    (hr : r = r') (hp : p = p') (h : k ≫ p = r ≫ i) (h' : k ≫ p' = r' ≫ i)
+    (M : Derived R φ S) :
+    (alpha R φ k r p i h).app M ≫
+        (J R φ k).map ((eqToIso (congrArg (G R φ) hr)).hom.app M) =
+      (eqToIso (congrArg (G R φ) hp)).hom.app ((J R φ i).obj M) ≫
+        (alpha R φ k r' p' i h').app M := by
+  cases hr
+  cases hp
+  simp
+
+private theorem isoId_comm {C : Type*} [Category* C] {I : C ⥤ C}
+    (e : I ≅ 𝟭 C) (M : C) : I.map (e.hom.app M) = e.hom.app (I.obj M) := by
+  apply (cancel_mono (e.hom.app M)).1
+  exact e.hom.naturality (e.hom.app M)
+
+private theorem alpha_first {U X : Scheme.{u}} (j : U ⟶ X)
+    [IsOpenImmersion j] [QuasiCompact j]
+    (h : j ≫ (𝟙 X) = (𝟙 U) ≫ j) (M : Derived R φ U) :
+    (alpha R φ j (𝟙 U) (𝟙 X) j h).app M ≫
+        (J R φ j).map ((gId R φ U).hom.app M) =
+      (gId R φ X).hom.app ((J R φ j).obj M) := by
+  have := alpha_isIso R φ j (𝟙 U) (𝟙 X) j h (IsPullback.of_id_snd (f := j))
+  let h' : j ≫ ((𝟙 X) ≫ (𝟙 X)) = ((𝟙 U) ≫ (𝟙 U)) ≫ j := by simp
+  have ht := alpha_vertical R φ j j j (𝟙 U) (𝟙 U) (𝟙 X) (𝟙 X) h h h' M
+  have hc := alpha_proper_congr R φ j ((𝟙 U) ≫ (𝟙 U)) (𝟙 U)
+    ((𝟙 X) ≫ (𝟙 X)) (𝟙 X) j (Category.id_comp _) (Category.id_comp _) h' h M
+  have hu := congr_app (gComp_id_left R φ (𝟙 U)) M
+  have hx := congr_app (gComp_id_left R φ (𝟙 X)) ((J R φ j).obj M)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hu hx
+  have hn := (alpha R φ j (𝟙 U) (𝟙 X) j h).naturality ((gId R φ U).hom.app M)
+  simp only [Functor.comp_map] at hn
+  rw [isoId_comm] at hn
+  have ht' := congrArg (fun a ↦ a ≫
+    (J R φ j).map ((gId R φ U).hom.app ((G R φ (𝟙 U)).obj M))) ht
+  simp only [Category.assoc, ← Functor.map_comp, hu, hc] at ht'
+  rw [← hn] at ht'
+  apply (Functor.Faithful.of_iso (gId R φ X).symm).map_injective
+  apply (cancel_epi ((gComp R φ (𝟙 X) (𝟙 X)).hom.app ((J R φ j).obj M))).1
+  apply (cancel_mono ((alpha R φ j (𝟙 U) (𝟙 X) j h).app M)).1
+  simpa only [Functor.map_comp, Category.assoc, isoId_comm, hx,
+    Functor.id_obj, Functor.comp_obj] using ht'
+
+
+section OpenUnits
+private def moduleJId (X : Scheme.{u}) : extension R φ (𝟙 X) ≅ 𝟭 (Modules R φ X) :=
+  Adjunction.leftAdjointIdIso (moduleJAdj R φ (𝟙 X)) (moduleGId R φ X)
+
+private def derivedJId (X : Scheme.{u}) : J R φ (𝟙 X) ≅ 𝟭 (Derived R φ X) :=
+  Functor.mapDerivedCategoryNatIso (moduleJId R φ X) ≪≫
+    Functor.mapDerivedCategoryIdIso (Modules R φ X)
+
+private theorem derived_id_fac {X : Scheme.{u}}
+    (L : Modules R φ X ⥤ Modules R φ X)
+    [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]
+    (e : L ≅ 𝟭 _) (K : HomotopyCategory (Modules R φ X) (.up ℤ)) :
+    (Functor.mapDerivedCategoryNatIso e ≪≫
+      Functor.mapDerivedCategoryIdIso (Modules R φ X)).hom.app (DerivedCategory.Qh.obj K) =
+      L.mapDerivedCategoryFactorsh.hom.app K ≫
+        DerivedCategory.Qh.map ((NatTrans.mapHomotopyCategory e.hom (.up ℤ)).app K) := by
+  simp only [Iso.trans_hom, NatTrans.comp_app,
+    Functor.mapDerivedCategoryIdIso_hom_app_Qh_obj]
+  exact Functor.mapDerivedCategoryNatIso_fach e K
+
+private theorem jAdj_unit_fac (X : Scheme.{u})
+    (K : HomotopyCategory (Modules R φ X) (.up ℤ)) :
+    (jAdj R φ (𝟙 X)).unit.app (DerivedCategory.Qh.obj K) ≫
+        (G R φ (𝟙 X)).map ((extension R φ (𝟙 X)).mapDerivedCategoryFactorsh.hom.app K) ≫
+        (pull R φ (𝟙 X)).mapDerivedCategoryFactorsh.hom.app
+          (((extension R φ (𝟙 X)).mapHomotopyCategory (.up ℤ)).obj K) =
+      DerivedCategory.Qh.map
+        (((moduleJAdj R φ (𝟙 X)).mapHomotopyCategory (.up ℤ)).unit.app K) := by
+  let L := extension R φ (𝟙 X)
+  let P := pull R φ (𝟙 X)
+  let a := moduleJAdj R φ (𝟙 X)
+  have hη : a.mapDerivedCategoryRightDerivedAdjunction.unit.app (DerivedCategory.Qh.obj K) ≫
+      P.rightDerivedFunctor.map (L.mapDerivedCategoryFactorsh.hom.app K) =
+    DerivedCategory.Qh.map ((a.mapHomotopyCategory (.up ℤ)).unit.app K) ≫
+      P.rightDerivedFunctorUnit.app ((L.mapHomotopyCategory (.up ℤ)).obj K) :=
+    (a.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
+      (HomotopyCategory.quasiIso (Modules R φ X) (.up ℤ))
+      L.mapDerivedCategoryFactorsh.hom P.rightDerivedFunctorUnit K
+  have hn := P.rightDerivedFunctorIsoMapDerivedCategory.hom.naturality
+    (L.mapDerivedCategoryFactorsh.hom.app K)
+  have hr := congr_app P.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
+    ((L.mapHomotopyCategory (.up ℤ)).obj K)
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hr
+  change (a.mapDerivedCategoryRightDerivedAdjunction.unit.app _ ≫
+    P.rightDerivedFunctorIsoMapDerivedCategory.hom.app _) ≫
+    P.mapDerivedCategory.map (L.mapDerivedCategoryFactorsh.hom.app K) ≫
+    P.mapDerivedCategoryFactorsh.hom.app _ = _
+  rw [Category.assoc, ← reassoc_of% hn, ← Category.assoc, hη, Category.assoc,
+    ← Category.assoc (P.rightDerivedFunctorUnit.app _) _ _, hr,
+    Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+
+attribute [local irreducible] jAdj gId
+
+private theorem derivedJId_transpose (X : Scheme.{u}) :
+    (jAdj R φ (𝟙 X)).unit ≫
+        Functor.whiskerRight (derivedJId R φ X).hom (G R φ (𝟙 X)) = (gId R φ X).inv := by
+  apply Localization.natTrans_ext DerivedCategory.Qh
+    (HomotopyCategory.quasiIso (Modules R φ X) (.up ℤ))
+  intro K
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app]
+  apply (cancel_mono ((gId R φ X).hom.app (DerivedCategory.Qh.obj K))).1
+  erw [Iso.inv_hom_id_app, Category.assoc]
+  change (jAdj R φ (𝟙 X)).unit.app _ ≫
+    (pull R φ (𝟙 X)).mapDerivedCategory.map ((derivedJId R φ X).hom.app _) ≫
+    (gId R φ X).hom.app _ = _
+  erw [show (derivedJId R φ X).hom.app (DerivedCategory.Qh.obj K) = _ from
+    derived_id_fac R φ _ (moduleJId R φ X) K]
+  erw [Functor.map_comp]
+  have hn := (gId R φ X).hom.naturality
+    (DerivedCategory.Qh.map
+      ((NatTrans.mapHomotopyCategory (moduleJId R φ X).hom (.up ℤ)).app K))
+  simp only [Functor.id_map] at hn
+  simp only [Category.assoc]
+  erw [hn]
+  erw [show (gId R φ X).hom.app _ = _ from
+    (by simpa only [gId, moduleGId] using
+      derived_id_fac R φ _ (moduleGId R φ X) _)]
+  erw [Category.assoc]
+  erw [reassoc_of% (jAdj_unit_fac R φ X K)]
+  erw [← Functor.map_comp, ← Functor.map_comp]
+  have hk :
+      ((moduleJAdj R φ (𝟙 X)).mapHomotopyCategory (.up ℤ)).unit.app K ≫
+        (NatTrans.mapHomotopyCategory (moduleGId R φ X).hom (.up ℤ)).app
+          (((extension R φ (𝟙 X)).mapHomotopyCategory (.up ℤ)).obj K) ≫
+        (NatTrans.mapHomotopyCategory (moduleJId R φ X).hom (.up ℤ)).app K = 𝟙 K := by
+    obtain ⟨K, rfl⟩ := HomotopyCategory.quotient_obj_surjective K
+    rw [Adjunction.mapHomotopyCategory_unit_app_quotient]
+    change (HomotopyCategory.quotient _ (.up ℤ)).map _ ≫
+      (HomotopyCategory.quotient _ (.up ℤ)).map _ ≫
+      (HomotopyCategory.quotient _ (.up ℤ)).map _ = _
+    erw [← Functor.map_comp]
+    rw [← (HomotopyCategory.quotient (Modules R φ X) (.up ℤ)).map_id K]
+    apply (HomotopyCategory.quotient _ (.up ℤ)).congr_map
+    apply HomologicalComplex.hom_ext
+    intro n
+    simp only [HomologicalComplex.id_f]
+    change (moduleJAdj R φ (𝟙 X)).unit.app (K.X n) ≫
+      (moduleGId R φ X).hom.app ((extension R φ (𝟙 X)).obj (K.X n)) ≫
+      (moduleJId R φ X).hom.app (K.X n) = 𝟙 _
+    erw [← (moduleGId R φ X).hom.naturality ((moduleJId R φ X).hom.app (K.X n)),
+      ← Category.assoc, StrictTower.leftAdjointIdIso_transpose]
+    exact Iso.inv_hom_id_app _ _
+  erw [hk]
+  exact DerivedCategory.Qh.map_id _
+
+
+private theorem jId_eq (X : Scheme.{u}) : jId R φ X = derivedJId R φ X := by
+  apply Iso.ext
+  apply NatTrans.ext
+  funext M
+  apply ((jAdj R φ (𝟙 X)).homEquiv M M).injective
+  simp only [Adjunction.homEquiv_unit]
+  change (jAdj R φ (𝟙 X)).unit.app M ≫
+      (G R φ (𝟙 X)).map
+        ((Adjunction.leftAdjointIdIso (jAdj R φ (𝟙 X)) (gId R φ X)).hom.app M) = _
+  rw [StrictTower.leftAdjointIdIso_transpose]
+  exact (congr_app (derivedJId_transpose R φ X) M).symm
+
+private def jCongr {U X : Scheme.{u}} {f g : U ⟶ X}
+    [IsOpenImmersion f] [IsOpenImmersion g] (e : f = g) : J R φ f ≅ J R φ g :=
+  eqToIso (by cases e; rfl)
+
+private theorem derivedJ_transport {U X : Scheme.{u}} {f g : U ⟶ X}
+    [IsOpenImmersion f] [IsOpenImmersion g] (e : f = g) :
+    (Functor.mapDerivedCategoryNatIso (moduleJCongr R φ e)).hom =
+      (jCongr R φ e).hom := by
+  cases e
+  exact Functor.mapDerivedCategoryNatIso_refl
+
+attribute [local irreducible] moduleJAdj moduleGId moduleJId
+
+private theorem moduleJComp_id (X : Scheme.{u}) :
+    (moduleJComp R φ (𝟙 X) (𝟙 X)).inv ≫
+      Functor.whiskerRight (moduleJId R φ X).hom (extension R φ (𝟙 X)) =
+        (moduleJCongr R φ (Category.id_comp (𝟙 X))).hom := by
+  let K := {t : X ⟶ X // IsOpenImmersion t}
+  let L : K → Modules R φ X ⥤ Modules R φ X := fun t ↦ @extension R φ _ _ t.1 t.2
+  let P : K → Modules R φ X ⥤ Modules R φ X := fun t ↦ pull R φ t.1
+  let a : ∀ t : K, L t ⊣ P t := fun t ↦ @moduleJAdj R φ _ _ t.1 t.2
+  let ki : K := ⟨(𝟙 X) ≫ (𝟙 X), inferInstance⟩
+  let kj : K := ⟨𝟙 X, inferInstance⟩
+  have e : ki = kj := Subtype.ext (Category.id_comp _)
+  have hd : (moduleGComp R φ (𝟙 X) (𝟙 X)).symm ≪≫
+      eqToIso (congrArg (pull R φ) (Category.id_comp (𝟙 X))) =
+    Functor.isoWhiskerLeft (pull R φ (𝟙 X)) (moduleGId R φ X) ≪≫
+      Functor.rightUnitor (pull R φ (𝟙 X)) := by
+    apply Iso.ext
+    change (moduleGComp R φ (𝟙 X) (𝟙 X)).inv ≫
+        (eqToIso (congrArg (pull R φ) (Category.id_comp (𝟙 X)))).hom =
+      Functor.whiskerLeft (pull R φ (𝟙 X)) (moduleGId R φ X).hom
+    apply (cancel_epi (moduleGComp R φ (𝟙 X) (𝟙 X)).hom).1
+    rw [← Category.assoc, Iso.hom_inv_id]
+    exact (Category.id_comp _).trans (moduleGComp_id_left R φ (𝟙 X)).symm
+  unfold moduleJComp moduleJId
+  exact StrictTower.leftAdjoint_unit_right L P a (moduleJAdj R φ (𝟙 X))
+    (moduleGId R φ X) e (moduleGComp R φ (𝟙 X) (𝟙 X)).symm hd
+
+private theorem jComp_id (X : Scheme.{u}) (M : Derived R φ X) :
+    (jComp R φ (𝟙 X) (𝟙 X)).hom.app M ≫
+        (jCongr R φ (Category.id_comp (𝟙 X))).hom.app M =
+      (J R φ (𝟙 X)).map ((jId R φ X).hom.app M) := by
+  have ht := StrictTower.derived_unit_right
+    (extension R φ (𝟙 X)) (extension R φ ((𝟙 X) ≫ (𝟙 X)))
+    (extension R φ (𝟙 X)) (moduleJComp R φ (𝟙 X) (𝟙 X)).symm
+    (moduleJId R φ X) (moduleJCongr R φ (Category.id_comp (𝟙 X)))
+    (moduleJComp_id R φ X)
+  rw [Functor.mapDerivedCategoryNatIso_symm, derivedJ_transport] at ht
+  have hh := congr_app ht M
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app] at hh
+  simp only [← Category.assoc] at hh
+  change (jComp R φ (𝟙 X) (𝟙 X)).inv.app M ≫
+    (J R φ (𝟙 X)).map ((derivedJId R φ X).hom.app M) = _ at hh
+  rw [← jId_eq] at hh
+  exact StrictTower.iso_unit_cancel ((jComp R φ (𝟙 X) (𝟙 X)).app M) _ _ hh
+
+end OpenUnits
+
+private theorem alpha_open_congr {V W S T : Scheme.{u}}
+    (k k' : V ⟶ W) (r : V ⟶ S) (p : W ⟶ T) (i i' : S ⟶ T)
+    [IsOpenImmersion k] [IsOpenImmersion k'] [IsOpenImmersion i] [IsOpenImmersion i']
+    [QuasiCompact k] [QuasiCompact k'] [QuasiCompact i] [QuasiCompact i']
+    [IsProper r] [IsProper p]
+    (hk : k = k') (hi : i = i') (h : k ≫ p = r ≫ i) (h' : k' ≫ p = r ≫ i')
+    (M : Derived R φ S) :
+    (G R φ p).map ((jCongr R φ hi).hom.app M) ≫
+        (alpha R φ k' r p i' h').app M =
+      (alpha R φ k r p i h).app M ≫ (jCongr R φ hk).hom.app ((G R φ r).obj M) := by
+  cases hk
+  cases hi
+  simp [jCongr]
+
+private theorem alpha_second {U X : Scheme.{u}} (p : U ⟶ X) [IsProper p]
+    (h : (𝟙 U) ≫ p = p ≫ (𝟙 X)) (M : Derived R φ X) :
+    (alpha R φ (𝟙 U) p p (𝟙 X) h).app M ≫
+        (jId R φ U).hom.app ((G R φ p).obj M) =
+      (G R φ p).map ((jId R φ X).hom.app M) := by
+  have := alpha_isIso R φ (𝟙 U) p p (𝟙 X) h (IsPullback.of_id_fst (f := p))
+  let h' : ((𝟙 U) ≫ (𝟙 U)) ≫ p = p ≫ ((𝟙 X) ≫ (𝟙 X)) := by simp
+  have ht := alpha_horizontal R φ (𝟙 U) (𝟙 U) (𝟙 X) (𝟙 X) p p p h h h' M
+  have hc := alpha_open_congr R φ ((𝟙 U) ≫ (𝟙 U)) (𝟙 U) p p
+    ((𝟙 X) ≫ (𝟙 X)) (𝟙 X) (Category.id_comp _) (Category.id_comp _) h' h M
+  have hn := (alpha R φ (𝟙 U) p p (𝟙 X) h).naturality ((jId R φ X).hom.app M)
+  simp only [Functor.comp_map, Functor.id_obj] at hn
+  have ht' := congrArg (fun a ↦ a ≫
+    (jCongr R φ (Category.id_comp (𝟙 U))).hom.app ((G R φ p).obj M)) ht
+  simp only [Category.assoc, jComp_id] at ht'
+  rw [← hc, ← Category.assoc, ← Functor.map_comp, jComp_id, hn] at ht'
+  apply (Functor.Faithful.of_iso (jId R φ U).symm).map_injective
+  apply (cancel_epi ((alpha R φ (𝟙 U) p p (𝟙 X) h).app ((J R φ (𝟙 X)).obj M))).1
+  simpa only [Functor.map_comp, Category.assoc, Functor.comp_obj] using ht'.symm
+
+
 /-- Identity normalizations of the intrinsic inverse-image/open-extension arrow.
 Source: Stacks 07A7, 0F7B; node proof Steps 5 and 11
 (blueprint: lem-sp-varying-ring-proper-open-pasting).
@@ -655,7 +1099,12 @@ theorem alpha_identities :
       (alpha R φ (𝟙 U) p p (𝟙 X) h).app M ≫
           (jId R φ U).hom.app ((G R φ p).obj M) =
         (G R φ p).map ((jId R φ X).hom.app M)) := by
-  sorry
+  constructor
+  · intro U X j _ _ h M
+    exact alpha_first R φ j h M
+  · intro U X p _ h M
+    exact alpha_second R φ p h M
+
 
 /-- Identity normalizations of gamma in both directions.
 Source: Stacks, Tags 0F7B and 07A7, blueprint, steps 6 and 10

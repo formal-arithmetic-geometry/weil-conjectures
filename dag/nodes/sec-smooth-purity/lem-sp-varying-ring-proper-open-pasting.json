@@ -72,11 +72,10 @@
    }
   },
   {
-   "text": "For a test scheme $H\\to W'$, set $H_V=H\\times_{W'}s(V)$ and $H_C=H\\times_{W'}C$. They are disjoint opens covering $H$. Open localization identifies their sheaves with restrictions by [lem-weil-proetale-weakly-etale-localization]. The sheaf axiom therefore gives $F_n(H)=F_n(H_V)\\times F_n(H_C)$; the common restriction over the empty intersection imposes no condition. Extension by zero from $s(V)$ has sections $F_n(H_V)\\times0$ under this identification, by the open-extension construction of [lem-pur-site-restriction-module-adjunction-exact]. Define $\\pi_{s,n}(x,y)=(x,0)$. It is linear and compatible with restriction maps by [def-weil-sheaf-of-modules-category]. Each transition is componentwise on this decomposition, so $\\pi_{s,n}t_n(x,y)=(t_nx,0)=t_n\\pi_{s,n+1}(x,y)$. The same calculation applies to every morphism and differential. Hence $\\pi_s$ is an actual natural system projection, and composing it with Step 3 and $b_!s_!\\simeq k_!$ gives the specified $a_Q$.",
+   "text": "For the image component, use the invertible open unit, the adjunction triple extension ⊣ pull ⊣ push, and the right triangle equation: pull_s(modulePi_s M) is the open unit at pull_s M. For the complementary component first prove disjoint-open vanishing for ordinary systems. At every index n, moduleEvalG and moduleEvalP identify pull_s(push_c N) with the constant-ring pull_s(push_c(N_n)); the proved module_disjoint_direct in [lem-cbc-strict-tower-proper-open-calculus] makes this zero when the two images are disjoint. Componentwise exactness in [lem-coef-semilinear-derived-sections], applied to the zero-arrow short complex with middle object pull_s(push_c N), detects that the ordinary system is zero. Transpose twice, along pull_c ⊣ push_c and extension_s ⊣ pull_s, to deduce pull_c(extension_s N)=0. The target of pull_c(modulePi_s M) is consequently zero. This proves both clauses of modulePi_components without the separate complementary-projection lemma and without detecting equality of arbitrary derived morphisms by evaluation.",
    "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-sheaf-of-modules-category"
+    "lem-cbc-strict-tower-proper-open-calculus",
+    "lem-coef-semilinear-derived-sections"
    ],
    "elementary": true,
    "source": {
@@ -102,8 +101,7 @@
    "text": "For vertically stacked squares, write the top, middle and bottom opens as $k,i,j$, and the successive proper maps as $p_1,p_2$ on the right and $r_1,r_2$ on the left. The underived equation to prove is\n$$a_{Q_2Q_1}=(a_{Q_1}r_2^*)\\circ(p_1^*a_{Q_2}):p_1^*p_2^*j_!\\longrightarrow k_!r_1^*r_2^*.$$\nAfter the lift identifications of Step 5, the first projection retains the inverse image of the middle-left open and the second retains $k(V)$ inside it. The latter is contained in the former because $p_1k=ir_1$. Refine the clopen covers of Step 4 by their intersections. On the final retained component both maps keep the same section and lift label. On every other component either the first or second projection is zero, and the outer projection is zero as well. This is the identity $(x,y)\\mapsto(x,0)$ applied twice to nested retained components. The sheaf uniqueness axiom proves the equation on sections at every degree and level; since all maps already commute with transitions, this is an equality of system maps, before localization.",
    "uses": [
     "def-pc-fibre-product",
-    "def-weil-sheaf-of-modules-category",
-    "new-lem-sp-varying-ring-module-pi-complement-zero"
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
@@ -116,8 +114,7 @@
    "uses": [
     "def-pc-fibre-product",
     "def-weil-sheaf-of-modules-category",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "new-lem-sp-varying-ring-module-pi-complement-zero"
+    "lem-pur-site-restriction-module-adjunction-exact"
    ],
    "elementary": true,
    "source": {
@@ -160,7 +157,7 @@
    }
   },
   {
-   "text": "If both vertical maps are identities, then $i=k$ and the intrinsic $a$ is the identity of $i_!$ by its lift and projection formula. Its mate under identity adjunctions is the identity. If both horizontal opens are identities, then $r=p$ and $a$ is the identity of $p^*$; clause 4 of [lem-weil-pbc-mate-pasting] makes its mate the identity of $Rp_{*,\\bullet}$. Finally [lem-coef-semilinear-derived-sections] says that evaluation preserves the specified operations, units, counits, composition, and transposes. Evaluation of the constructed $a_Q$ is therefore the same lift map followed by $(x,y)\\mapsto(x,0)$ at $R_n$. By the definition and evaluation clause of [lem-cbc-strict-tower-proper-open-calculus] its mate is exactly that node's constant-$R_n$ clopen-projection mate (apply its arbitrary-$B$ assertion with $B=R_n$). This proves the stated normalization for every $n$, including infinite rings. No finite-coefficient invertibility theorem and no faithfulness of evaluation on morphisms is used.",
+   "text": "For either identity square, its canonical lift into the chosen pullback is an isomorphism. Pullback along an isomorphism is an equivalence, using moduleGComp and modulePId, so its adjunction unit is invertible; moduleOpenToP is invertible for the clopen lift. Hence modulePi, moduleAlpha and its localized alpha are invertible in these cartesian cases. Normalize the pushforward identity compositor directly on the pro-etale base-change site, and transpose that equation to the pullback identity compositor. Localize this unit law. For extension by zero, transpose the pullback unit law, and compare the derived extension identity with jId by the right-derived adjunction unit factorization on Qh. Apply vertical pasting to the square with both proper maps identities, and horizontal pasting to the square with both opens identities. Transport the composites of scheme identities, insert the just-proved compositor unit laws, use naturality, and cancel the invertible alpha components and faithful identity-equivalent functors. This proves both alpha identity normalizations from the two pasting equations, with no additional lemma assumption. Taking mates and the triangle identities proves both gamma identity normalizations. Finally [lem-coef-semilinear-derived-sections] says that evaluation preserves the specified operations, units, counits, composition, and transposes. Evaluation of the constructed $a_Q$ is therefore the same lift map followed by $(x,y)\\mapsto(x,0)$ at $R_n$. By the definition and evaluation clause of [lem-cbc-strict-tower-proper-open-calculus] its mate is exactly that node's constant-$R_n$ clopen-projection mate (apply its arbitrary-$B$ assertion with $B=R_n$). This proves the stated normalization for every $n$, including infinite rings. No finite-coefficient invertibility theorem and no faithfulness of evaluation on morphisms is used.",
    "uses": [
     "lem-weil-pbc-mate-pasting",
     "lem-coef-semilinear-derived-sections",
@@ -185,13 +182,12 @@
   "lem-weil-proetale-weakly-etale-localization",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-adjunction-mate",
-  "lem-weil-pbc-mate-pasting",
-  "new-lem-sp-varying-ring-module-pi-complement-zero"
+  "lem-weil-pbc-mate-pasting"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tags 0F7B, 0F7C, 0F7D, open cases; explicit semilinear lift/projection construction and abstract mate pasting. The Stacks tags do not assert varying-ring assembly."
+  "place": "Tags 0F7B, 0F7C, 0F7D, open cases; explicit semilinear lift/projection construction and abstract mate pasting. The Stacks tags do not assert varying-ring assembly. Complement calculation: ordinary componentwise zero detection and disjoint-open adjunctions, following the proved constant-ring disjoint-direct-image lemma (Q2, 2026-10-21). Identity normalization: invertibility of cartesian clopen projections, ordinary/derived compositor unit laws and cancellation in the existing pasting equations (Q2, 2026-10-21)."
  },
  "mathlib_searches": [
   {
@@ -384,12 +380,12 @@
   "note": "[launcher 2026-10-18: Codex fallback verdict not landed after the Codex reviewers stopped; handed to the cc lander]"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "W4",
+  "group": "Q2",
   "result": "pass",
-  "landing": "20261020T230844-L-621438",
+  "landing": "20261021T001135-L-1376634",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
