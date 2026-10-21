@@ -21998,3 +21998,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:50 L: merged deliver/Q05/lem-pc-tate-abstract-residue-calculus (stage 2; reviewer PASS; parallel immutable checks)
 - 09:50 L: merged deliver/NV/lem-pc-finite-potent-trace-calculus (stage 2; reviewer PASS; parallel immutable checks)
 - 09:51 L: merged deliver/Q55/det-sp-composition-factors (reviewer FIX; after a return; new nodes: 0)
+- 09:51 L: merged deliver/Q91/lem-pur-coordinate-chart-finite-dimension-witness (stage 2; reviewer PASS; parallel immutable checks)
+- 09:51 L: merged deliver/Q15/lem-weil-pbc-proetale-closed-underived-projection (stage 2; reviewer PASS; parallel immutable checks)

@@ -219,5 +219,32 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-7b68ad049 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement and stmt_deps are identical to the base copy (dagsnap 1418c7aa, md5 d0abf422), so the target is not weakened, and no re-split repair note exists for this item. Sources checked: Stacks proetale.tex 09AA lemma-closed-immersion (l.4945), 09AH lemma-ses-associated-to-open (l.5135; needs j quasi-compact, which the item assumes) and sites-modules.tex 03EL (l.3649). I read in full the statements of lem-weil-pbc-proetale-ringed-open-closed, lem-pur-proetale-inverse-image-tensor-comparison (clause 1: σ^h with its pure-tensor characterisation, an isomorphism and natural), def-weil-proetale-inverse-image and def-pur-sheaf-tensor-product. Step 1: π = i_*(α)∘η_H with α = (ε⊗1)∘σ^i is the correct adjunct formula and is the map the statement specifies. Fault C4: the step took invertibility of the counit ε_M from the ringed open-closed lemma, but that lemma only states an abstract isomorphism i^{-1}i_* ≅ id. FIX: step 1 now cites lem-weil-pbc-proetale-ringed-closed-counit (same unit; it states that the counit of every adjunction between these functors is an isomorphism), and proof_deps is updated; there is no cycle, because that node is already in the ringed lemma's closure and the item is not in its closure. Step 2: the comparison with h=j, together with j^{-1}i_*=0, 0⊗−=0 and j_!0=0, puts a zero first term in the SES for H, so η_H is an isomorphism; correct. Step 3: naturality is elementary; I checked the displayed square. Step 4: I recomputed π(m⊗b) = m⊗b̄ through η, σ^i and the triangle identity; \\overline{cb} = c̄b̄ because the ring unit is a ring map; local generation by pure tensors and injectivity of π give B-linearity of the map and its inverse; correct, and no flatness is needed. Edge cases Z=∅, Z=X, M=0, F=0, a DVR with constant ℤ and a non-flat B all hold. Duplicate search (rg -L): lem-weil-proetale-closed-tensor-projection and lem-weil-etale-closed-tensor-projection are derived versions with an unpinned isomorphism, and lem-sfb-closed-immersion-derived-tensor-projection and lem-weil-pbc-ringed-projection-restriction are derived too; none is a duplicate. Accepted tool_use: lem-pur-proetale-inverse-image-tensor-comparison, a generic inverse-image tensor comparison that no node of the unit gives. Fix file: fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-proetale-closed-underived-projection.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleClosedUnderivedProjection",
+  "declaration": "AlgebraicGeometry.ProEtaleClosedProjection.closed_underived_projection",
+  "declarations": [
+   "AlgebraicGeometry.ProEtaleClosedProjection.adjunction_exists",
+   "AlgebraicGeometry.ProEtaleClosedProjection.adjunction",
+   "AlgebraicGeometry.ProEtaleClosedProjection.projection",
+   "AlgebraicGeometry.ProEtaleClosedProjection.coefficientModule",
+   "AlgebraicGeometry.ProEtaleClosedProjection.CoefficientLinear",
+   "AlgebraicGeometry.ProEtaleClosedProjection.closed_underived_projection"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleClosedUnderivedProjection.lean",
+  "statement": "theorem closed_underived_projection {X Z : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] (U : X.ProEt) [IsOpenImmersion U.hom] [QuasiCompact U.hom] (hU : Set.range U.hom = (Set.range i)ᶜ) (R : Rings X) : (∀ (M : Modules (inverseRing i R)) (F : Modules R), IsIso (projection i R M F)) ∧ (∀ (M M' : Modules (inverseRing i R)) (F F' : Modules R) (a : M ⟶ M') (b : F ⟶ F'), tensorMap ((proEtaleRingedDirectImage i R).map a) b ≫ projection i R M' F' = projection i R M F ≫ (proEtaleRingedDirectImage i R).map (tensorMap a ((inverse i R).map b))) ∧ (∀ (M : Modules (inverseRing i R)) (B : Rings X) (a : R ⟶ B), CoefficientLinear i R M B a)",
+  "branch": "newtargets-dag",
+  "by": "Q15",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The adjunction data are uniquely fixed by equality of their unit with the recorded actual inverseSection, not selected from mere existence. The projection is the precise tensor-comparison/counit adjunct. The coefficient clause fixes B-actions by pure tensors and requires the B-linear isomorphism to have exactly this underlying projection; no arbitrary comparison is substituted."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a44605e5a",
+  "group": "Q15",
+  "result": "pass",
+  "note": "Node unchanged except the lean field; lean.statement is verbatim in the file. Hypotheses match: closed immersion i, U : X.ProEt with IsOpenImmersion, QuasiCompact and complementary range, any R : Rings X (dependency universes u/u+1). projection = adjunct of the dependency's normalized comparison followed by tensorMap(counit, 1), as in the node. The adjunction is Classical.choose of an exists-unique statement that pins the unit sectionwise to inverseSection (no public canonical adjunction exists in live; ringedInverseImageAdjunction is private), so it is not arbitrary. IsIso and naturality clauses are exact. CoefficientLinear pins the B and i^{-1}B actions by pure-tensor identities, eB by the ring unit, and p's underlying map to projection, with the target action through B -> i_*i^{-1}B; this is B-linearity of the specified map with no condition on the ring map. No hollow definitions, only sorry with proof docstrings, source/blueprint docstrings present, all declarations used come from stmt_deps or Mathlib. Edge cases (Z empty, Z = X, zero modules, non-flat B) are covered. Advisory: ProEtaleRingedClosedCounit is a proof-only plain import. No compile run (no change)."
  }
 }
