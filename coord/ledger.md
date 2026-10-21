@@ -23609,3 +23609,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:04 L: merged deliver/O2/lem-sfb-bounded-finite-evaluation-rectangle-replacement (reviewer PASS; first push; new nodes: 0)
 - 20:05 L: merged deliver/N6/lem-sfb-profinite-metric-function-quotients (reviewer PASS; first push; new nodes: 1)
 - 20:05 L: merged deliver/N5/lem-sfb-prime-to-ell-complete-scalar-integral (reviewer PASS; first push; new nodes: 2)
+- 2026-10-21T20:05:36Z L: superseded stage-1 delivery NV/lem-sfb-profinite-derived-functions-filtered-colimit at b275ef87cf5057adb6c0aebfbf052e81bca72c72; current completion retained; packet archived at refs/superseded/NV/lem-sfb-profinite-derived-functions-filtered-colimit/b275ef87cf5057adb6c0aebfbf052e81bca72c72; stale return retired.
