@@ -20,59 +20,44 @@
  ],
  "proof": [
   {
-   "text": "Put $Q=Q_h$. Treat either side simultaneously: take $(H,G,\\eta)=(H_A,G_A,\\eta_L)$ or $(H^A,G^A,\\eta_R)$, and put $U=QH$. The hypotheses say exactly that $U$ inverts quasi-isomorphisms. The homotopy localization of [def-weil-abstract-derived-category] and clause (1) of [lem-weil-pbc-localization-universal-property] give $G:D(R)\\to D(R)$ and an isomorphism $\\eta:U\\cong GQ$ (the inverse of the comparison in that clause). This construction does not require choosing resolutions. The exactness of $Q$ is supplied by [lem-pur-homotopy-category-triangulated].",
+   "text": "Let P be the published resolving class and L=P.ι⋙Q. Its published localization-equivalence witness supplies an equivalence F₀ with V.Q⋙F₀≅L, where V is the quasi-isomorphisms restricted to P. Composition with an equivalence and transport along this isomorphism make L a localization. This is resolving_isLocalization.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Categories Tags 04VG/04VK; sites-cohomology Tag 06YU, resolving presentation"
+   }
+  },
+  {
+   "text": "Treat either fixed tensor H simultaneously. Localize H⋙Q to G₀ and η₀:H⋙Q≅Q⋙G₀. The natural resolving comparison c yields b:L⋙G₀≅L⋙F by composing η₀ inverse with c. Extend b along L to d₀:G₀≅F. Put η=η₀ followed by Qd₀; the liftNatTrans component formula proves η_P=c_P. Use the published F itself as the final descended functor G, and take d to be its identity isomorphism.",
    "uses": [
     "def-weil-abstract-derived-category",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Categories Tags 04VG/04VK, transformation descent; sites-cohomology Tag 06YU"
+   }
+  },
+  {
+   "text": "Use Functor.commShiftOfLocalization for the lifting η inverse to give F coherent integer shifts. The localization theorem also proves η inverse, and hence η, commutes with shifts. Expanding the composite shift comparisons is exactly ShiftCompatible. For another shift structure with that square, cancel η at shifted objects and F applied to the canonical Q shift map. Localization.natTrans_ext along Q gives equality of all shift isomorphisms, hence equality of the structures.",
+   "uses": [
     "lem-weil-pbc-localization-universal-property",
     "lem-pur-homotopy-category-triangulated"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tags 04VG/04VK (lemma-properties-left-localization, lemma-properties-right-localization); sites-cohomology.tex Tag 06YU, paragraph preceding definition-derived-tor"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Categories Tag 04VK; Mathlib CategoryTheory/Shift/Localization.lean, commShiftOfLocalization and NatTrans.commShift_iso_hom_of_localization"
    }
   },
   {
-   "text": "Both $K(R)$ and $D(R)$ are additive, and $Q$ is additive because it is exact [lem-pur-homotopy-category-triangulated]. Thus $U=QH$ is additive by the assumed additivity of $H$. Every derived object is isomorphic to $QB$ for a complex $B$, by the localization construction in [def-weil-abstract-derived-category]. Apply [lem-pur-additive-localization-descent] with $q=Q$, target $D(R)$, and comparison $\\eta^{-1}:GQ\\cong U$. All its hypotheses now hold, so $G$ is additive. This applies separately to $G_A$ and $G^A$.",
-   "uses": [
-    "def-weil-abstract-derived-category",
-    "lem-pur-homotopy-category-triangulated",
-    "lem-pur-additive-localization-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VG (lemma-properties-left-localization); additive descent via the cited additive-localization theorem"
-   }
-  },
-  {
-   "text": "Write $q_n(B):Q(B[n])\\cong(QB)[n]$ for the canonical comparisons of $Q$, and $h_n(B):H(B[n])\\cong HB[n]$ for $s^2_n$ on the left or $s^1_n$ on the right [lem-weil-pbc-total-tensor-integer-shifts, lem-pur-homotopy-category-triangulated]. Set $u_n(B)=q_n(HB)\\circ Q(h_n(B))$. On precomposition with $Q$, define a natural isomorphism from $G(-[n])$ to $(G-)[n]$ by components\n$$a_n(B)=\\eta_B[n]\\circ u_n(B)\\circ\\eta_{B[n]}^{-1}\\circ G(q_n(B)^{-1}).$$\nEvery factor is natural in $B$, so this really is a transformation on the precomposed functors. Clause (2) of [lem-weil-pbc-localization-universal-property], applied to these two functors on $D(R)$ and their identity factorization comparisons, extends $a_n$ uniquely to $\\sigma_n:G(-[n])\\cong(G-)[n]$. Extend the displayed componentwise inverse too; preservation of composition and uniqueness show that the extensions are inverse. By construction,\n$$\\sigma_n(QB)\\circ G(q_n(B))\\circ\\eta_{B[n]}=\\eta_B[n]\\circ q_n(HB)\\circ Q(h_n(B)).$$\nThis is the required signed normalization and shift compatibility of $\\eta$.",
-   "uses": [
-    "lem-weil-pbc-total-tensor-integer-shifts",
-    "lem-pur-homotopy-category-triangulated",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VK (lemma-properties-right-localization), transformation full faithfulness; explicit conjugation, as in Mathlib CategoryTheory/Shift/Localization.lean commShiftOfLocalization"
-   }
-  },
-  {
-   "text": "The comparisons $u_n$ obey the zero and addition laws: they are the comparisons of the composite $QH$, obtained by first applying $Q$ to $h_n$ and then $q_n$; the two laws follow by substituting the laws of $h_n$ and $q_n$ [lem-weil-pbc-total-tensor-integer-shifts, lem-pur-homotopy-category-triangulated]. Check the laws for $\\sigma_n$ after precomposition with $Q$. In the zero law the adjacent $\\eta_B^{-1}\\eta_B$ cancel and $u_0$ is the canonical zero comparison. In the addition law, substitute the equation of Step 3 for the successive shifts $n$ and $m$. Naturality of $\\eta$ moves the intermediate shift-identification map across $\\eta$; the intermediate $\\eta_{B[n]}^{-1}\\eta_{B[n]}$ cancels. The result is the addition law for $u_{n+m}$, with the canonical $q$ identifications. Clause (3) of [lem-weil-pbc-localization-universal-property] gives equality on all derived objects. The same clause shows uniqueness of every $\\sigma_n$, since compatibility with $\\eta$ forces precisely $a_n$ on precomposition. Thus these are coherent integer shifts.",
-   "uses": [
-    "lem-weil-pbc-total-tensor-integer-shifts",
-    "lem-pur-homotopy-category-triangulated",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VK (lemma-properties-right-localization), faithfulness on transformations; zero/addition identities by conjugation"
-   }
-  },
-  {
-   "text": "Let $\\Delta$ be a distinguished derived triangle. By [def-weil-abstract-derived-category], it is isomorphic to $Q\\Delta_0$ for a cone triangle $\\Delta_0=(X\\to Y\\to Z\\xrightarrow{w}X[1])$ of $K(R)$. The hypothesis on $H$ says $H\\Delta_0$ is distinguished with last arrow $h_1(X)\\circ H(w)$, so its image under the exact $Q$ is distinguished [lem-pur-homotopy-category-triangulated]. The first two naturality squares of $\\eta$ compare this triangle to $G(Q\\Delta_0)$. For the last square, naturality at $w$ and Step 3 give explicitly\n$$\\sigma_1(QX)\\circ G(q_1(X))\\circ G(Qw)\\circ\\eta_Z\n=\\eta_X[1]\\circ q_1(HX)\\circ Q(h_1(X))\\circ Q(Hw).$$\nHence the three components $\\eta_X,\\eta_Y,\\eta_Z$ give an isomorphism of triangles, including the connecting arrow. Distinguished triangles are closed under isomorphism [def-weil-triangulated-category], so $G(Q\\Delta_0)$, and then $G\\Delta$, are distinguished. Together with Step 2 this proves exactness of both functors for the specified shifts.",
+   "text": "The functors H and Q are triangulated. Q.mapArrow is essentially surjective, as for the derived localization. Apply Functor.isTriangulated_of_precomp_iso to η inverse: F is triangulated for the shift structure just constructed, including the connecting morphism. The proved Mathlib instance Functor.IsTriangulated gives F.Additive. Thus no separate additive-descent lemma is required.",
    "uses": [
     "def-weil-abstract-derived-category",
     "lem-pur-homotopy-category-triangulated",
@@ -81,72 +66,67 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor and preceding paragraph); derived.tex definition-distinguished-triangle, explicit connecting-arrow comparison"
+    "place": "sites-cohomology Tag 06YU, exact derived tensor; Mathlib CategoryTheory/Triangulated/Functor.lean, isTriangulated_of_precomp_iso and IsTriangulated additive instance"
    }
   },
   {
-   "text": "Let $L=Q|_{\\mathcal P_R}$. The induced equivalence $J:W_R^{-1}\\mathcal P_R\\to D(R)$ in [lem-weil-pbc-site-derived-tensor-descent] identifies $L$ with the fraction localization followed by $J$. Therefore $L$ is a localization: for any target, precomposition with $J$ is an equivalence (inverse given by precomposition with an inverse equivalence), and then precomposition with the fraction localization has the universal property [lem-weil-pbc-localization-universal-property]. In particular restriction along $L$ is fully faithful on transformations between functors on $D(R)$. Since $A\\in\\mathcal P_R$, the specified $c_{A,P}$ are natural in $P\\in\\mathcal P_R$ by [lem-weil-pbc-site-derived-tensor-descent]. Thus\n$$b_P=c_{A,P}\\circ(\\eta_L)_P^{-1}:G_A(LP)\\cong T(QA,LP)$$\nis a natural isomorphism on the restrictions. Extend it and its inverse along $L$ by clause (2) of the universal property. Their composites extend the identities and hence are identities. This gives a unique natural isomorphism $d_L:G_A\\cong T(QA,-)$ with the claimed normalization.",
+   "text": "The identity isomorphism d:F≅F is normalized because η_P=c_P. Any other normalized d′ has η_P d′_(QP)=η_P; cancel η_P and apply Localization.natTrans_ext along L to obtain d′=id.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor, resolving comparison); Categories Tag 04VK (lemma-properties-right-localization)"
-   }
-  },
-  {
-   "text": "For the right-hand operation the same restriction calculation starts with the natural isomorphism\n$$b'_P=c_{P,A}\\circ(\\eta_R)_P^{-1}:G^A(LP)\\cong T(LP,QA).$$\nIts naturality is the first-variable naturality explicitly included in [lem-weil-pbc-site-derived-tensor-descent]. The fully faithful restriction along $L$ established in Step 6, using [lem-weil-pbc-localization-universal-property], extends $b'$ and its inverse to inverse transformations. It yields the unique $d_R:G^A\\cong T(-,QA)$ with $(d_R)_{QP}(\\eta_R)_P=c_{P,A}$. No shift structure on the published bifunctor is assumed or used for this identification.",
-   "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor and symmetry paragraph following it); Categories Tag 04VK"
-   }
-  },
-  {
-   "text": "Put $e_L=(d_LQ)\\eta_L$ and $e_R=(d_RQ)\\eta_R$. For any quasi-isomorphism $r:P\\to B$ with $P\\in\\mathcal P_R$, naturality gives\n$$e_{L,B}\\circ QH_A(r)=T(1,Qr)\\circ c_{A,P},\\qquad e_{R,B}\\circ QH^A(r)=T(Qr,1)\\circ c_{P,A}.$$\nThe maps $QH_A(r)$ and $QH^A(r)$ are invertible by the explicit hypothesis; compose on the right with their inverses to obtain exactly the two formulas in the statement. Such an $r$ exists for every unbounded $B$ by [lem-pc-kflat-resolution]. Each formula equals the already defined $e$ component, so two different resolutions give equal answers without selecting a comparison between their resolutions. Naturality for an arbitrary map $v:M\\to N$ of $D(R)$ is the identity\n$$d_{L,N}\\circ G_A(v)=T(1,v)\\circ d_{L,M},$$\nand its right-hand counterpart; these hold because $d_L,d_R$ are natural transformations on $D(R)$, not merely on representatives. In particular they apply to inverse quasi-isomorphisms and to their composites. The representative values used above are the specified comparisons of [lem-weil-pbc-site-derived-tensor-descent].",
-   "uses": [
-    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-universal-property",
     "lem-weil-pbc-site-derived-tensor-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor); naturality and inversion of the displayed equations"
+    "place": "Categories Tag 04VK, faithfulness on transformations"
    }
   },
   {
-   "text": "Finally suppose $(\\widetilde G,\\widetilde\\eta)$ is another factorization of either $U$. Clause (2) of [lem-weil-pbc-localization-universal-property] gives exactly one isomorphism $\\theta:G\\cong\\widetilde G$ with $(\\theta Q)\\eta=\\widetilde\\eta$. It respects the shifts: after precomposition with $Q$ the required square reduces, by this equality and the normalization equation of Step 3, to the identical $u_n$ comparison on each side; clause (3) gives the square on $D(R)$. Its compatibility with the normalized $d$ follows after restriction along $L$: both composites with $\\eta_P$ are $c_{A,P}$ on the left, or $c_{P,A}$ on the right. Faithfulness along $L$ from Step 6 proves the equality globally. This proves the final uniqueness assertion, with its signed shifts and normalized comparisons. The only resolutions used are those of [lem-pc-kflat-resolution], whose statement has no boundedness or cohomological-flatness hypothesis.",
+   "text": "For any quasi-isomorphism f:P→B, naturality of η gives (H⋙Q)(f) η_B=η_P F(Qf). Its first factor is invertible by hU; multiply by that inverse and substitute η_P=c_P. This gives exactly the stated invertedMapIso formula. Each expression equals η_B, so the formula is independent of any chosen resolution. The Lean conclusion quantifies over every such resolution and requires no separate construction of one.",
    "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "lem-pc-kflat-resolution"
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 04VK (lemma-properties-right-localization); uniqueness on transformations, with Tag 06YS for the absence of boundedness"
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "sites-cohomology Tag 06YU, comparison on resolutions; naturality and inversion"
+   }
+  },
+  {
+   "text": "Given another factorization η′:H⋙Q≅Q⋙G′, lift the identity of H⋙Q using the two lifting comparisons to θ:F≅G′. The component formula gives η_X θ_(QX)=η′_X. After precomposition with Q its shift compatibility is that of η inverse followed by η′; cancel the canonical Q shift maps and use natTrans_ext to obtain compatibility globally. Restrict θ followed by d′ to L; normalization and cancellation of η_P give the identity there, hence everywhere. Any θ′ with the required comparison agrees on Q by cancellation of η_X, and natTrans_ext proves uniqueness.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Categories Tag 04VK, full faithfulness and compatible uniqueness"
+   }
+  },
+  {
+   "text": "Apply normalizedDescent to the left and right fixed tensor functors. In each case construct c by evaluating resolvingComparison at (A,P) or (P,A), where A is resolvingObject A hA hAf. Its naturality is the published two-variable naturality evaluated on (id,f) or (f,id). The given CommShift structures retain the signed normalization recorded by hSL and hSR; no change to those hypotheses is needed.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "sites-cohomology Tag 06YU, derived tensor and its two-variable natural resolving comparison"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-pur-homotopy-category-triangulated",
-  "lem-pur-additive-localization-descent",
-  "lem-weil-pbc-total-tensor-integer-shifts",
-  "def-weil-triangulated-category",
   "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pc-kflat-resolution"
+  "lem-weil-pbc-localization-universal-property",
+  "def-weil-abstract-derived-category",
+  "lem-pur-homotopy-category-triangulated",
+  "def-weil-triangulated-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 06YU (definition-derived-tor and preceding construction), expanded using Categories 04VG/04VK transformation descent; explicit signed-shift conjugation and normalized comparison to the existing resolving tensor. The source omits these coherence/normalization details; they are written out here."
+  "place": "Tag 06YU and Categories Tags 04VG/04VK. Lean proof by M1: use the published tensor itself as the final descent, extend its comparison by localization, descend coherent shifts with Mathlib commShiftOfLocalization, and obtain additivity from isTriangulated_of_precomp_iso. Normalization, resolution formula, and compatible uniqueness are proved by component calculations and localization faithfulness."
  },
  "mathlib_searches": [
   {
@@ -259,10 +239,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pur-additive-localization-descent",
-  "lem-pc-kflat-resolution"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -307,5 +284,15 @@
   "group": "Q30",
   "result": "pass",
   "note": "Statement field unchanged from side-live and lean.statement matches the file word for word. Every object is a projection of the published site_derived_tensor_descent_independentCoefficients.{u,v,r,w,0,0} witness, consistent with siteDerivedTensorIndependentCoefficients. Hypotheses match the node: K-flat and flat-term A; additive, CommShift and IsTriangulated binders pinned by hSL/hSR to mapBifunctorShift2Iso (signed) and mapBifunctorShift1Iso (unsigned), conjugated by the published chainComparison, consistent for any Nonempty choice; quasi-iso inversion. Conclusion clauses checked: exactness including the connecting arrow, the ShiftCompatible square with q_n and shift uniqueness, the unique normalized d, the resolution formula derived from naturality, and the unique theta. Edge cases fine; universes independent. No hollow definitions, only the theorem is sorried, docstrings and nine-step plan present, no duplicate. Advisory: proof-only imports unused in the statement; AdditiveLocalizationDescent landed live today without a published olean, so if landing fails on it, drop that import. No fixes; no recompile."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M1",
+  "result": "pass",
+  "landing": "20261021T111311-L-71327",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

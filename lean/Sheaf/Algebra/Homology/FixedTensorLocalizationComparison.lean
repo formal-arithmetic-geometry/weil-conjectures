@@ -13,11 +13,6 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 public import Mathlib.Algebra.Homology.BifunctorShift
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
 public import Mathlib.CategoryTheory.Triangulated.Functor
-import Mathlib.CategoryTheory.Localization.Predicate
-import Mathlib.CategoryTheory.Shift.Localization
-import Mathlib.Algebra.Homology.HomotopyCategory.Triangulated
-import Sheaf.CategoryTheory.AdditiveLocalizationDescent
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 
 /-! # Normalized exact localization of fixed tensor
 
@@ -180,6 +175,159 @@ def NormalizedDescent (H : Homotopy R ⥤ Homotopy R) [H.CommShift ℤ]
             NatTrans.CommShift θ.hom ℤ ∧
             (∀ M : Derived R, θ.hom.app M ≫ d'.hom.app M = d.hom.app M))
 
+private theorem resolving_isLocalization :
+    ((resolving R).ι ⋙ Q R).IsLocalization
+      ((HomotopyCategory.quasiIso (Modules R) (.up ℤ)).inverseImage (resolving R).ι) := by
+  obtain ⟨F, hF, ⟨e⟩⟩ :=
+    (site_derived_tensor_descent_independentCoefficients.{u, v, r, w, 0, 0}
+      J R).choose_spec.2.1
+  let := hF
+  exact Functor.IsLocalization.of_iso _ e
+
+private theorem shiftCompatible_iff
+    (H : Homotopy R ⥤ Homotopy R) [H.CommShift ℤ]
+    (G : Derived R ⥤ Derived R) (s : G.CommShift ℤ)
+    (η : H ⋙ Q R ≅ Q R ⋙ G) :
+    ShiftCompatible R H G s η ↔
+      (let := s; NatTrans.CommShift η.hom ℤ) := by
+  let := s
+  constructor
+  · intro h
+    constructor
+    intro n
+    ext X
+    simpa only [Functor.commShiftIso_comp_hom_app, NatTrans.comp_app,
+      Functor.whiskerLeft_app, Functor.whiskerRight_app, Category.assoc] using (h n X).symm
+  · intro h n X
+    let := h
+    simpa only [Functor.commShiftIso_comp_hom_app, Category.assoc] using
+      (NatTrans.shift_app_comm η.hom n X).symm
+
+private theorem shiftCompatible_unique
+    (H : Homotopy R ⥤ Homotopy R) [H.CommShift ℤ]
+    (G : Derived R ⥤ Derived R) (s s' : G.CommShift ℤ)
+    (η : H ⋙ Q R ≅ Q R ⋙ G)
+    (h : ShiftCompatible R H G s η) (h' : ShiftCompatible R H G s' η) : s' = s := by
+  have he : s'.commShiftIso = s.commShiftIso := by
+    funext n
+    apply Iso.ext
+    apply Localization.natTrans_ext (Q R)
+      (HomotopyCategory.quasiIso (Modules R) (.up ℤ))
+    intro X
+    apply (cancel_epi (η.hom.app (X⟦n⟧) ≫ G.map (((Q R).commShiftIso n).hom.app X))).1
+    simpa only [Category.assoc] using (h' n X).trans (h n X).symm
+  cases s
+  cases s'
+  cases he
+  rfl
+
+private theorem normalizedDescent
+    (H : Homotopy R ⥤ Homotopy R) [H.CommShift ℤ] [H.IsTriangulated]
+    (hU : (HomotopyCategory.quasiIso (Modules R) (.up ℤ)).IsInvertedBy (H ⋙ Q R))
+    (F : Derived R ⥤ Derived R)
+    (c : (resolving R).ι ⋙ H ⋙ Q R ≅ (resolving R).ι ⋙ Q R ⋙ F) :
+    NormalizedDescent R H hU F (fun P ↦ c.app P) := by
+  classical
+  let W := HomotopyCategory.quasiIso (Modules R) (.up ℤ)
+  let V := W.inverseImage (resolving R).ι
+  let L := (resolving R).ι ⋙ Q R
+  have : L.IsLocalization V := resolving_isLocalization R
+  let G := Localization.lift (H ⋙ Q R) hU (Q R)
+  let η₀ : H ⋙ Q R ≅ Q R ⋙ G := (Localization.fac (H ⋙ Q R) hU (Q R)).symm
+  let b : L ⋙ G ≅ L ⋙ F :=
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft _ η₀.symm ≪≫ c ≪≫
+      (Functor.associator _ _ _).symm
+  let d₀ : G ≅ F := Localization.liftNatIso L V (L ⋙ G) (L ⋙ F) G F b
+  have hd₀ (P : (resolving R).FullSubcategory) :
+      η₀.hom.app P.obj ≫ d₀.hom.app ((Q R).obj P.obj) = (c.app P).hom := by
+    change η₀.hom.app P.obj ≫
+      (Localization.liftNatTrans L V (L ⋙ G) (L ⋙ F) G F b.hom).app (L.obj P) = _
+    rw [Localization.liftNatTrans_app]
+    change η₀.hom.app P.obj ≫ (𝟙 _ ≫ (𝟙 _ ≫ η₀.inv.app P.obj ≫
+      c.hom.app P ≫ 𝟙 _) ≫ 𝟙 _) = c.hom.app P
+    simp
+  let η : H ⋙ Q R ≅ Q R ⋙ F := η₀ ≪≫ Functor.isoWhiskerLeft (Q R) d₀
+  have hη (P : (resolving R).FullSubcategory) :
+      η.hom.app P.obj = (c.app P).hom := hd₀ P
+  let : Localization.Lifting (Q R) W (H ⋙ Q R) F := ⟨η.symm⟩
+  let s := Functor.commShiftOfLocalization (Q R) W ℤ (H ⋙ Q R) F
+  let := s
+  have : NatTrans.CommShift η.inv ℤ :=
+    NatTrans.commShift_iso_hom_of_localization (Q R) W ℤ (H ⋙ Q R) F
+  have : NatTrans.CommShift η.symm.hom ℤ := ‹NatTrans.CommShift η.inv ℤ›
+  have : NatTrans.CommShift η.hom ℤ := NatTrans.CommShift.of_iso_inv η.symm ℤ
+  have : F.IsTriangulated := Functor.isTriangulated_of_precomp_iso η.symm
+  refine ⟨F, s, inferInstance, inferInstance, η,
+    (shiftCompatible_iff R H F s η).2 inferInstance, ?_, Iso.refl F, ?_, ?_, ?_, ?_⟩
+  · intro s' hs'
+    exact shiftCompatible_unique R H F s s' η
+      ((shiftCompatible_iff R H F s η).2 inferInstance) hs'
+  · intro P
+    simpa using hη P
+  · intro d' hd'
+    apply Iso.ext
+    apply Localization.natTrans_ext L V
+    intro P
+    change d'.hom.app ((Q R).obj P.obj) = 𝟙 _
+    apply (cancel_epi (η.hom.app P.obj)).1
+    exact ((hd' P).trans (hη P).symm).trans (Category.comp_id _).symm
+  · intro P B f hf
+    have : IsIso ((H ⋙ Q R).map f) := hU f hf
+    change η.hom.app B ≫ 𝟙 _ =
+      inv ((H ⋙ Q R).map f) ≫ (c.app P).hom ≫ F.map ((Q R).map f)
+    refine (Category.comp_id _).trans ?_
+    have hn := congrArg (fun z ↦ inv ((H ⋙ Q R).map f) ≫ z) (η.hom.naturality f)
+    simpa only [Functor.comp_map, ← hη P, ← Category.assoc,
+      IsIso.inv_hom_id, Category.id_comp] using hn
+  · intro G' s' η' d' hs' hd'
+    let := s'
+    have : NatTrans.CommShift η'.hom ℤ := (shiftCompatible_iff R H G' s' η').1 hs'
+    let : Localization.Lifting (Q R) W (H ⋙ Q R) G' := ⟨η'.symm⟩
+    let θ : F ≅ G' := Localization.liftNatIso (Q R) W (H ⋙ Q R) (H ⋙ Q R)
+      F G' (Iso.refl _)
+    have hθ (X : Homotopy R) :
+        η.hom.app X ≫ θ.hom.app ((Q R).obj X) = η'.hom.app X := by
+      change η.hom.app X ≫
+        (Localization.liftNatTrans (Q R) W (H ⋙ Q R) (H ⋙ Q R) F G'
+          (𝟙 (H ⋙ Q R))).app ((Q R).obj X) = _
+      rw [Localization.liftNatTrans_app]
+      change η.hom.app X ≫ (η.inv.app X ≫ 𝟙 _ ≫ η'.hom.app X) = _
+      simp
+    have hθshift : NatTrans.CommShift θ.hom ℤ := by
+      have he : Functor.whiskerLeft (Q R) θ.hom = η.inv ≫ η'.hom := by
+        ext X
+        apply (cancel_epi (η.hom.app X)).1
+        simpa using hθ X
+      have : NatTrans.CommShift (Functor.whiskerLeft (Q R) θ.hom) ℤ := by
+        rw [he]
+        infer_instance
+      constructor
+      intro n
+      apply Localization.natTrans_ext (Q R) W
+      intro X
+      have h := NatTrans.shift_app_comm (Functor.whiskerLeft (Q R) θ.hom) n X
+      simp only [Functor.comp_obj, Functor.whiskerLeft_app,
+        Functor.commShiftIso_comp_hom_app, Category.assoc] at h
+      rw [← θ.hom.naturality_assoc] at h
+      exact (cancel_epi _).1 h
+    refine ⟨θ, ⟨hθ, hθshift, ?_⟩, ?_⟩
+    · have he : θ.hom ≫ d'.hom = 𝟙 F := by
+        apply Localization.natTrans_ext L V
+        intro P
+        change θ.hom.app ((Q R).obj P.obj) ≫ d'.hom.app ((Q R).obj P.obj) = 𝟙 _
+        apply (cancel_epi (η.hom.app P.obj)).1
+        rw [← Category.assoc, hθ, hd']
+        exact (hη P).symm.trans (Category.comp_id _).symm
+      intro M
+      exact congr_app he M
+    · intro θ' hθ'
+      apply Iso.ext
+      apply Localization.natTrans_ext (Q R) W
+      intro X
+      apply (cancel_epi (η.hom.app X)).1
+      exact (hθ'.1 X).trans (hθ X).symm
+
+set_option linter.unusedVariables false in
 /-- Exact localization of both fixed tensors, with signed shifts and comparisons normalized
 on the published resolving class.
 
@@ -250,6 +398,33 @@ theorem fixed_tensor_localization_comparison
       ((Functor.curry.obj (tensorK R)).flip.obj ((quotient R).obj A)) hUR
       ((tensorD R).flip.obj ((Q R).obj ((quotient R).obj A)))
       (fun P ↦ (resolvingComparison R).app (P, resolvingObject R A hA hAf)) := by
-  sorry
+  -- Descent applies to any coherent input shifts; these hypotheses fix the signed ones.
+  clear hSL hSR
+  let A' := resolvingObject R A hA hAf
+  constructor
+  · refine normalizedDescent R _ hUL
+      ((tensorD R).obj ((Q R).obj ((quotient R).obj A)))
+      (NatIso.ofComponents (fun P ↦ (resolvingComparison R).app (A', P)) ?_)
+    intro P S f
+    have hn := (resolvingComparison R).hom.naturality (Prod.mkHom (𝟙 A') f)
+    change (Q R).map ((tensorK R).map (Prod.mkHom (𝟙 _) f.hom)) ≫
+        (resolvingComparison R).hom.app (A', S) =
+      (resolvingComparison R).hom.app (A', P) ≫
+        (siteDerivedTensorIndependentCoefficients J R).map
+          (Prod.mkHom ((Q R).map (𝟙 _)) ((Q R).map f.hom)) at hn
+    rw [(Q R).map_id] at hn
+    exact hn
+  · refine normalizedDescent R _ hUR
+      ((tensorD R).flip.obj ((Q R).obj ((quotient R).obj A)))
+      (NatIso.ofComponents (fun P ↦ (resolvingComparison R).app (P, A')) ?_)
+    intro P S f
+    have hn := (resolvingComparison R).hom.naturality (Prod.mkHom f (𝟙 A'))
+    change (Q R).map ((tensorK R).map (Prod.mkHom f.hom (𝟙 _))) ≫
+        (resolvingComparison R).hom.app (S, A') =
+      (resolvingComparison R).hom.app (P, A') ≫
+        (siteDerivedTensorIndependentCoefficients J R).map
+          (Prod.mkHom ((Q R).map f.hom) ((Q R).map (𝟙 _))) at hn
+    rw [(Q R).map_id] at hn
+    exact hn
 
 end SheafOfModules.FixedTensorLocalization
