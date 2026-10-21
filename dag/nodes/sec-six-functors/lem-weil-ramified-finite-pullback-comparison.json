@@ -1,0 +1,150 @@
+{
+ "id": "lem-weil-ramified-finite-pullback-comparison",
+ "kind": "statement",
+ "title": "Normalized finite pullback comparison along coefficient quotient base change",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "statement": "Let l be prime, E and L finite extensions of Q_l, and ι:E→L a Q_l-algebra embedding. Let g:X→Y, e an exponent with monotone index(e,-), j the quotient inclusions induced by ι, and source and target Coefficients data on Y and X as in def-weil-ramified-pullback-tower-data. There are natural isomorphisms between finite E-pullback followed by completed scalar extension on X and completed scalar extension on Y followed by finite L-pullback at index(e,n). They satisfy the pure-tensor formula and adjacent tower square displayed verbatim in the Lean attachment. This assumes coefficient comparison and proves only finite pullback base change; it does not assert ramification existence, coefficient comparison existence, or the same-index factorization.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-pur-integral-derived-operations",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension",
+  "def-weil-ramified-pullback-tower-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EL (lemma-tensor-product-pullback) and 03EK (section-tensor-product): inverse-image tensor comparison and balanced reassociation, original node proof steps 5–7. Context: Bhatt–Scholze Lemma 6.8.2(1)."
+ },
+ "proof": [
+  {
+   "text": "For $F=E,L$, let $R^E_W=R_W$, $R^L_W=S_W$. The normalized inverse-image tensor comparison applies to $g^{-1}$, the geometric inverse image defined in the statement, and the ring $R^F_Y$. For any complex $M$ of $R^F_Y$-modules it gives, termwise, a canonical identification\n$$D^F_n(M)\\cong g^{-1}M\\otimes_{g^{-1}R^F_Y}B_{F,X,n}.$$\nExplicitly it sends $((g^{-1}(x\\otimes a))\\otimes b)$ to $g^{-1}x\\otimes c^g_{A_{F,n}}(g^{-1}a)b$; the inverse sends $g^{-1}x\\otimes b$ to $(g^{-1}(x\\otimes1))\\otimes b$. The displayed maps are inverse by the two tensor-balancing relations. Here $c^g_{A_{F,n}}:g^{-1}B_{F,Y,n}\\to B_{F,X,n}$ is the canonical constant-ring structure map of the inverse-image definition; this calculation does not require that map to be invertible. The action of $g^{-1}R^F_Y$ on the last factor is its projected action, so restriction to $R^F_X$ is the one in $D^F_n$. No identification $g^{-1}R^F_Y=R^F_X$ is made.",
+   "uses": [
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), before scalar extension; explicit balanced reassociation and canonical finite constant coefficient map"
+   }
+  },
+  {
+   "text": "Put $H=g^{-1}R_Y$ and $N=g^{-1}P$. Reassociate the tensor in Step 5, using $(x\\otimes b)\\otimes s\\leftrightarrow x\\otimes(b\\otimes s)$, and apply Step 4 on $X$. This identifies $D^E_m(P)\\otimes_{R_X}S_X$ with $N\\otimes_H B_{L,X,em}$. On the other side apply Step 5 to $Q$ and the inverse-image tensor comparison to $P\\otimes_{R_Y}S_Y$. It identifies $D^L_{em}(Q)$ with\n$$(N\\otimes_H g^{-1}S_Y)\\otimes_{g^{-1}S_Y}B_{L,X,em}\\cong N\\otimes_H B_{L,X,em},$$\nwhere the last map sends $(x\\otimes z)\\otimes b$ to $x\\otimes\\bar z b$, with inverse $x\\otimes b\\mapsto(x\\otimes1)\\otimes b$. All displayed reassociations are inverse balanced maps and are linear in the final scalar. Compose the first identification with the inverse of the second to obtain $\\widetilde d_m$. On local tensor generators its formula is\n$$((g^{-1}(p\\otimes\\bar a))\\otimes b)\\otimes s\\longmapsto(g^{-1}((p\\otimes1)\\otimes j_m(\\bar a)))\\otimes(j_m(b)\\pi^L_{em}(s)).$$\nHere $p\\otimes1\\in Q$ explains the implicit $p$ on the statement's right-hand side. The formulas are natural in each module variable; applying them degreewise to $P$ therefore commutes with its differential and gives an isomorphism of $S_X$-complexes.",
+   "uses": [
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL (lemma-tensor-product-pullback) and 03EK (section-tensor-product); agent balanced-map calculation after Steps 4 and 5"
+   }
+  },
+  {
+   "text": "Write $q^F_{b,a}$ for quotient reduction from level $b$ to $a$. On quotient representatives,\n$$q^L_{e(m+1),em}j_{m+1}(\\bar a)=j_m q^E_{m+1,m}(\\bar a),\\qquad q^L_{e(m+1),em}\\pi^L_{e(m+1)}(s)=\\pi^L_{em}(s).$$\nBoth first expressions are the residue of the same element of $\\mathcal O_E$ in $\\mathcal O_L/v^{em}$; the second equality is the limit-projection identity. Applying these equations to $\\bar a,b,s$ in Step 6 shows that its two transition composites both have image $(g^{-1}((p\\otimes1)\\otimes j_m(q^E_{m+1,m}\\bar a)))\\otimes(j_m(q^E_{m+1,m}b)\\pi^L_{em}(s))$. Thus $\\widetilde d_\\bullet$ is a map of the specified towers, including their restricted completed-scalar actions. For a chain map $f:P\\to P'$, either composite replaces $p$ by $f(p)$ in Step 6 and leaves the coefficient factors unchanged. The pure pairings determine tensor maps, so these generator equalities are equalities of sheaf maps, also on sections that require covers.",
+   "uses": [
+    "def-pur-integral-derived-operations",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product); quotient and inverse-limit transition calculations with the towers of def-pur-integral-derived-operations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-pur-sheaf-tensor-product",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Separate source subargument of lem-weil-ramified-pullback-tower-identification, steps 5,6,7"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor scalar extension of a quotient of a completed coefficient sheaf agrees with the quotient by the extended ideal",
+   "results": "8 hits: TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor, AdicCompletion.ofTensorProduct_tmul, TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor, TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, TensorProduct.tensorQuotMapSMulEquivTensorQuot, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ",
+   "date": "2026-10-21",
+   "verdict": "No direct match for the normalized sheaf coefficient or finite pullback comparison; ordinary quotient tensor isomorphisms do not identify the specified sheaf maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotient\", TensorProduct",
+   "results": "12 hits: TensorProduct.quotientTensorEquiv, TensorProduct.tensorQuotientEquiv, TensorProduct.quotientTensorQuotientEquiv, TensorProduct.quotientTensorEquiv_apply_tmul_mk, TensorProduct.tensorQuotientEquiv_apply_mk_tmul, TensorProduct.quotientTensorEquiv_symm_apply_mk_tmul, TensorProduct.tensorQuotientEquiv_symm_apply_tmul_mk, TensorProduct.quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk",
+   "date": "2026-10-21",
+   "verdict": "No direct match for the normalized sheaf coefficient or finite pullback comparison; ordinary quotient tensor isomorphisms do not identify the specified sheaf maps."
+  },
+  {
+   "tool": "grep",
+   "query": "quotTensorEquivQuotSMul|tensorQuotientEquiv|pullback.*[Tt]ensor",
+   "results": "25 hits: Mathlib/Algebra/Module/SpanRankOperations.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+   "date": "2026-10-21",
+   "verdict": "No direct match for the normalized sheaf coefficient or finite pullback comparison; ordinary quotient tensor isomorphisms do not identify the specified sheaf maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules scalar extension of a quotient commutes with pullback and sends pure tensors to their normalized coefficient products.",
+   "results": "8 hits: PresheafOfModules.pullback, ModuleCat.ExtendScalars.obj', ModuleCat.extendScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.ExtendScalars.map_tmul, SheafOfModules.restrictScalars, SheafOfModules.sheafificationCompPullback, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "Generic extension and pullback APIs, no match for this normalized ramified tower comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RamifiedPullbackTowerIdentification",
+  "date": "2026-10-21",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-ramified-pullback-tower-identification",
+   "place": "Proof steps 5,6,7"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RamifiedFinitePullbackComparison",
+  "file": "lean/Sheaf/Paper/RamifiedFinitePullbackComparison.lean",
+  "declaration": "WeilConjectures.RamifiedPullback.finitePullbackComparison_exists",
+  "statement": "theorem finitePullbackComparison_exists {X Y : Scheme.{t}} (g : X ⟶ Y)\n    (e : ℕ) (hmono : Monotone (index e))\n    (j : ∀ n : ℕ, Padic.coefficientExtensionRing l E (n + 1) →+*\n      Padic.coefficientExtensionRing l L (index e n + 1))\n    (hj : ∀ (n : ℕ) (a : Padic.coefficientExtensionIntegers l E),\n      j n (Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l E (n + 1)) a) =\n        Ideal.Quotient.mk (Padic.coefficientExtensionIdeal l L (index e n + 1))\n          (integralScalarIntegerInclusion l E L ι a))\n    (source : Coefficients l E L ι e j Y) (target : Coefficients l E L ι e j X) :\n    ∃ levelIso : ∀ n : ℕ,\n    integralOperationsPullbackLevel l E g n ⋙ scalarCx.{t, u} target.completedMap ≅\n      scalarCx.{t, u} source.completedMap ⋙\n        integralOperationsPullbackLevel l L g (index e n),\n      ( ∀ (n : ℕ) (P : CochainComplex (integralTowerModules l E Y) ℤ)\n    (i : ℤ) (V : Y.ProEt)\n    (a : (integralCoefficientCommRingSheaf l E Y n).obj.obj (op V))\n    (b : (integralCoefficientCommRingSheaf l E X n).obj.obj\n      (op ((Scheme.proEtaleBaseChange g).obj V)))\n    (s : (completedIntegralCommRingSheafUnrestricted l L X).obj.obj\n      (op ((Scheme.proEtaleBaseChange g).obj V))) (p : (P.X i).val.obj (op V)),\n    (((levelIso n).hom.app P).f i).val.app _\n      (tensor target.completedMap (((integralOperationsPullbackLevel l E g n).obj P).X i)\n        _ s (pullTensor l E g n P i V a b p)) =\n      pullTensor l L g (index e n) ((scalarCx.{t, u} source.completedMap).obj P) i V\n        ((ramifiedMap l E L Y e n (j n)).hom.app (op V) a)\n        ((ramifiedMap l E L X e n (j n)).hom.app _ b *\n          (completedIntegralCommRingProjectionUnrestricted l L X (index e n)).hom.app _ s)\n        (tensor source.completedMap (P.X i) (op V) 1 p)) ∧\n      ( ∀ (n : ℕ) (P : CochainComplex (integralTowerModules l E Y) ℤ),\n    (scalarCx.{t, u} target.completedMap).map\n        ((integralOperationsPullbackTransition l E g n).app P) ≫\n          (levelIso n).hom.app P =\n      (levelIso (n + 1)).hom.app P ≫\n        transition l L g (index e n) (index e (n + 1)) (hmono (Nat.le_succ n))\n          ((scalarCx.{t, u} source.completedMap).obj P))",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-cc983",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261021T174242-L-3772858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-cc983",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261021T174242-L-3772858",
+  "kind": "interface",
+  "note": "independent cc review: delivered RamifiedPullbackTowerData vs clone item block (verbatim apart from docstrings), identification signature vs clone (identical), two sorry lemmas vs nodes and source (true, not restatements), proof_deps vs Lean names used, sandbox compile of all 5 modules + #print axioms"
+ }
+}

@@ -23219,3 +23219,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:42 L: merged deliver/NB/lem-sfb-integral-lisse-closed-base-change (reviewer PASS; after a return; new nodes: 1)
 - 17:42 L: merged deliver/A8/Sheaf.TraceFormula.CounitRealizationSubstitution (stage 3; reviewer PASS; first push; landing 20261021T174235-L-3769668 (interface); batch 20261021T174231; modules 3; new nodes 2)
 - 17:42 L: merged deliver/G4/Sheaf.Paper.SfClopenLisseCompleteLocalization (stage 3; reviewer FIX; first push; landing 20261021T174238-L-3771479 (interface); batch 20261021T174231; modules 7; new nodes 6; change records: coord/changes/sf-clopen-interface-extraction.md)
+- 17:42 L: merged deliver/H3/Sheaf.Paper.RamifiedPullbackTowerIdentification (stage 3; reviewer FIX; first push; landing 20261021T174242-L-3772858 (interface); batch 20261021T174231; modules 5; new nodes 4; change records: coord/changes/ramified-pullback-tower-data.md)

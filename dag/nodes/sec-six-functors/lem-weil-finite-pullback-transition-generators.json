@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-finite-pullback-transition-generators",
+ "kind": "statement",
+ "title": "Composite finite pullback transitions reduce both tensor coefficients",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "statement": "For a prime l, a finite extension E of Q_l, a scheme morphism g:X→Y, arbitrary finite tower indices a≤b, a cochain complex P of completed E-coefficient modules, and pure tensor coefficients x,y and p, the actual pullback tower map from b to a sends pullTensor_b(x,y,p) to pullTensor_a(red(x),red(y),p). The transitions, pullback generator and tensor sections are those of def-pur-integral-derived-operations and def-weil-ramified-pullback-tower-data.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-pur-integral-derived-operations",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension",
+  "def-weil-ramified-pullback-tower-data"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK and 03EL: tensor generators and pullback adjunction; defining finite pullback transition unit formula and its composite iteration, a subcalculation of original node proof steps 7–8."
+ },
+ "proof": [
+  {
+   "text": "Every finite coefficient projection is surjective on sections: lift the section to the constant integral coefficient sheaf using constantQuotient_surjective, then apply the constant-to-completion map. Its defining limit projection gives the desired section lift.",
+   "uses": [
+    "lem-sp-completed-integral-finite-quotient-hom-ext",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For an adjacent pullback transition apply integralOperationsPullbackTransition_existsUnique to the inner finite pure tensor and then the defining unrestricted finite reduction transition formula. Lift the outer finite coefficient through the completed projection, use completed linearity, and use limit.w to replace its higher residue by its lower residue. This proves the adjacent formula.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "def-pur-integral-derived-operations",
+    "def-weil-completed-integral-coefficients"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Induct on b≥a. The case a=b is the identity law for the pullback and coefficient tower functors. At b+1, factor the poset morphism through b and use the functor composition law. Apply the adjacent formula, then the induction hypothesis. The coefficient tower composition law identifies the resulting two successive reductions with the reduction from b+1 to a.",
+   "uses": [
+    "def-pur-integral-derived-operations"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-completed-integral-finite-quotient-hom-ext",
+  "def-weil-completed-integral-coefficients",
+  "lem-pur-integral-operations-well-defined",
+  "def-pur-integral-derived-operations"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EK, 03EL; defining unit formula for finite pullback transitions, followed by induction on the poset interval."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor scalar extension of a quotient of a completed coefficient sheaf agrees with the quotient by the extended ideal",
+   "results": "8 hits: TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor, AdicCompletion.ofTensorProduct_tmul, TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor, TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, TensorProduct.tensorQuotMapSMulEquivTensorQuot, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ",
+   "date": "2026-10-21",
+   "verdict": "No direct match for the normalized sheaf coefficient or finite pullback comparison; ordinary quotient tensor isomorphisms do not identify the specified sheaf maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotient\", TensorProduct",
+   "results": "12 hits: TensorProduct.quotientTensorEquiv, TensorProduct.tensorQuotientEquiv, TensorProduct.quotientTensorQuotientEquiv, TensorProduct.quotientTensorEquiv_apply_tmul_mk, TensorProduct.tensorQuotientEquiv_apply_mk_tmul, TensorProduct.quotientTensorEquiv_symm_apply_mk_tmul, TensorProduct.tensorQuotientEquiv_symm_apply_tmul_mk, TensorProduct.quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk",
+   "date": "2026-10-21",
+   "verdict": "No direct match for the normalized sheaf coefficient or finite pullback comparison; ordinary quotient tensor isomorphisms do not identify the specified sheaf maps."
+  },
+  {
+   "tool": "grep",
+   "query": "quotTensorEquivQuotSMul|tensorQuotientEquiv|pullback.*[Tt]ensor",
+   "results": "25 hits: Mathlib/Algebra/Module/SpanRankOperations.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+   "date": "2026-10-21",
+   "verdict": "No direct match for the normalized sheaf coefficient or finite pullback comparison; ordinary quotient tensor isomorphisms do not identify the specified sheaf maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules scalar extension of a quotient commutes with pullback and sends pure tensors to their normalized coefficient products.",
+   "results": "8 hits: PresheafOfModules.pullback, ModuleCat.ExtendScalars.obj', ModuleCat.extendScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.ExtendScalars.map_tmul, SheafOfModules.restrictScalars, SheafOfModules.sheafificationCompPullback, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "Generic extension and pullback APIs, no match for this normalized ramified tower comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RamifiedPullbackTowerIdentification",
+  "date": "2026-10-21",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-ramified-pullback-tower-identification",
+   "place": "Proof steps 7"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FinitePullbackTransitionGenerators",
+  "file": "lean/Sheaf/Paper/FinitePullbackTransitionGenerators.lean",
+  "declaration": "WeilConjectures.RamifiedPullback.pullTensor_transition",
+  "statement": "theorem pullTensor_transition {X Y : Scheme.{t}} (g : X ⟶ Y)\n    (a b : ℕ) (h : a ≤ b) (P : CochainComplex (integralTowerModules l E Y) ℤ)\n    (i : ℤ) (V : Y.ProEt)\n    (x : (integralCoefficientCommRingSheaf l E Y b).obj.obj (op V))\n    (y : (integralCoefficientCommRingSheaf l E X b).obj.obj\n      (op ((Scheme.proEtaleBaseChange g).obj V))) (p : (P.X i).val.obj (op V)) :\n    ((transition l E g a b h P).f i).val.app _\n        (pullTensor l E g b P i V x y p) =\n      pullTensor l E g a P i V\n        (((integralCoefficientSheafSystem l E Y).map (homOfLE h).op).hom.app (op V) x)\n        (((integralCoefficientSheafSystem l E X).map (homOfLE h).op).hom.app _ y) p",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-cc983",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261021T174242-L-3772858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-cc983",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261021T174242-L-3772858",
+  "kind": "interface",
+  "note": "independent cc review: delivered RamifiedPullbackTowerData vs clone item block (verbatim apart from docstrings), identification signature vs clone (identical), two sorry lemmas vs nodes and source (true, not restatements), proof_deps vs Lean names used, sandbox compile of all 5 modules + #print axioms"
+ }
+}

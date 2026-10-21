@@ -1,0 +1,121 @@
+{
+ "id": "def-weil-ramified-pullback-tower-data",
+ "kind": "definition",
+ "title": "Interfaces for normalized ramified coefficient and pullback towers",
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "statement": "The ring and module sheaf categories, ordinary scalar extension with pure tensors, finite pullback tensor generators, and the structures Coefficients and Identification in the parent statement, verbatim. These retain independent site and coefficient universes and zero-based positive-exponent indexing.",
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-proetale-inverse-image",
+  "def-pur-integral-derived-operations",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-integral-scalar-extension"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Unchanged interfaces of lem-weil-ramified-pullback-tower-identification; finite coefficient convention. Context: Bhatt–Scholze Lemma 6.8.2(1)."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Definitions used in the parent statement; no mathematical change."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Tensor scalar extension of a quotient of a completed coefficient sheaf agrees with the quotient by the extended ideal",
+   "results": "8 hits: TensorProduct.quotTensorEquivQuotSMul_comp_mkQ_rTensor, AdicCompletion.ofTensorProduct_tmul, TensorProduct.tensorQuotEquivQuotSMul_comp_mkQ_lTensor, TensorProduct.quotTensorEquivQuotSMul_comp_mk, TensorProduct.tensorQuotEquivQuotSMul_comp_mk, AdicCompletion.ofTensorProductEquivOfFiniteNoetherian_apply, TensorProduct.tensorQuotMapSMulEquivTensorQuot, TensorProduct.quotTensorEquivQuotSMul_symm_comp_mkQ",
+   "date": "2026-10-21",
+   "verdict": "No direct match for the normalized sheaf coefficient or finite pullback comparison; ordinary quotient tensor isomorphisms do not identify the specified sheaf maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"quotient\", TensorProduct",
+   "results": "12 hits: TensorProduct.quotientTensorEquiv, TensorProduct.tensorQuotientEquiv, TensorProduct.quotientTensorQuotientEquiv, TensorProduct.quotientTensorEquiv_apply_tmul_mk, TensorProduct.tensorQuotientEquiv_apply_mk_tmul, TensorProduct.quotientTensorEquiv_symm_apply_mk_tmul, TensorProduct.tensorQuotientEquiv_symm_apply_tmul_mk, TensorProduct.quotientTensorQuotientEquiv_apply_tmul_mk_tmul_mk",
+   "date": "2026-10-21",
+   "verdict": "No direct match for the normalized sheaf coefficient or finite pullback comparison; ordinary quotient tensor isomorphisms do not identify the specified sheaf maps."
+  },
+  {
+   "tool": "grep",
+   "query": "quotTensorEquivQuotSMul|tensorQuotientEquiv|pullback.*[Tt]ensor",
+   "results": "25 hits: Mathlib/Algebra/Module/SpanRankOperations.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/CategoryTheory/Monoidal/PushoutProduct.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean, Mathlib/LinearAlgebra/TensorProduct/Quotient.lean",
+   "date": "2026-10-21",
+   "verdict": "No direct match for the normalized sheaf coefficient or finite pullback comparison; ordinary quotient tensor isomorphisms do not identify the specified sheaf maps."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For sheaves of modules scalar extension of a quotient commutes with pullback and sends pure tensors to their normalized coefficient products.",
+   "results": "8 hits: PresheafOfModules.pullback, ModuleCat.ExtendScalars.obj', ModuleCat.extendScalars, PresheafOfModules.restrictScalarsObj, ModuleCat.ExtendScalars.map_tmul, SheafOfModules.restrictScalars, SheafOfModules.sheafificationCompPullback, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "Generic extension and pullback APIs, no match for this normalized ramified tower comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.RamifiedPullbackTowerIdentification",
+  "date": "2026-10-21",
+  "group": "H3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-ramified-pullback-tower-identification",
+   "place": "Definitions of its coefficient and finite pullback tower interfaces"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.RamifiedPullbackTowerData",
+  "file": "lean/Sheaf/Paper/RamifiedPullbackTowerData.lean",
+  "declaration": "WeilConjectures.RamifiedPullback.Identification",
+  "declarations": [
+   "WeilConjectures.RamifiedPullback.ring",
+   "WeilConjectures.RamifiedPullback.Mod",
+   "WeilConjectures.RamifiedPullback.scalarWitness",
+   "WeilConjectures.RamifiedPullback.scalar",
+   "WeilConjectures.RamifiedPullback.scalar_additive",
+   "WeilConjectures.RamifiedPullback.scalarCx",
+   "WeilConjectures.RamifiedPullback.tensor",
+   "WeilConjectures.RamifiedPullback.constantMap",
+   "WeilConjectures.RamifiedPullback.index",
+   "WeilConjectures.RamifiedPullback.coefficientModule",
+   "WeilConjectures.RamifiedPullback.transition",
+   "WeilConjectures.RamifiedPullback.pullTensor",
+   "WeilConjectures.RamifiedPullback.ramifiedMap",
+   "WeilConjectures.RamifiedPullback.Coefficients",
+   "WeilConjectures.RamifiedPullback.Identification"
+  ],
+  "statement": "structure Identification {X Y : Scheme.{t}} (g : X ⟶ Y)",
+  "branch": "sheaf-dag",
+  "by": "H3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-cc983",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261021T174242-L-3772858",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-cc983",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261021T174242-L-3772858",
+  "kind": "interface",
+  "note": "independent cc review: delivered RamifiedPullbackTowerData vs clone item block (verbatim apart from docstrings), identification signature vs clone (identical), two sorry lemmas vs nodes and source (true, not restatements), proof_deps vs Lean names used, sandbox compile of all 5 modules + #print axioms"
+ }
+}

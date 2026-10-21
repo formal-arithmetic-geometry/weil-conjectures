@@ -24,7 +24,8 @@
    "text": "Write $t=\\varpi_E$ and $v=\\varpi_L$. Uniqueness of the extended absolute value gives $|x|_L=|x|_E$ for $x\\in E$, hence $\\mathcal O_E\\subset\\mathcal O_L$ and $0<|t|_L<1$. Apply the uniformizer factorization in $\\mathcal O_L$ to $t\\ne0$: $t=u v^e$ with $u\\in\\mathcal O_L^\\times$ and $e\\in\\mathbf Z$. Since $|u|_L=1$ and $0<|v|_L<1$, the inequality $|t|_L<1$ forces $e\\ge1$. Uniqueness of this exponent also gives uniqueness of the ideal exponent: equality $(v^a)=(v^b)$ implies $v^a=w v^b$ for a unit $w$, so $a=b$. Raising $t=u v^e$ to the $m$-th power gives $(t^m)=(v^{em})$ in $\\mathcal O_L$. Both valuation rings are Noetherian, since every ideal of the principal ideal domains in the cited DVR statement has one generator.",
    "uses": [
     "lem-weil-l-adic-extension-absolute-value",
-    "lem-weil-l-adic-extension-integers-dvr"
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-integral-scalar-extension-well-defined"
    ],
    "elementary": false,
    "source": {
@@ -33,117 +34,46 @@
    }
   },
   {
-   "text": "Use the compatible same-index maps $\\iota_n$ and projections of the scalar-extension definition to define $c_W:R_W\\to S_W$ by $\\pi^L_n c_W=(\\iota_n)_W\\pi^E_n$. Its component at $n=em$ factors through $B_{E,W,m}$: the map $\\mathcal O_E/t^{em}\\to\\mathcal O_L/v^{em}$ kills $t^m$ by Step 1, and its factor is exactly $j_m$. Consequently $\\pi^L_{em}c_W=(j_m)_W\\pi^E_m$. This proves the coefficient square needed at every level, rather than assuming that the same-index map is already an isomorphism. Put $R^E_W=R_W$ and $R^L_W=S_W$. Write $r^F:g^{-1}R^F_Y\\to R^F_X$ for the completed structure maps induced by the finite projections and $c^g_{A_{F,n}}$. At every level $n$, naturality of the constant-ring maps gives\n$$(\\iota_n)_X c^g_{A_{E,n}}=c^g_{A_{L,n}}g^{-1}(\\iota_n)_Y.$$\nIndeed their adjoints extend the same map of constant presheaves, sending $a$ to its included residue on $X$, so sheafification gives equality. After projection to $B_{L,X,n}$, both $c_Xr^E$ and $r^Lg^{-1}c_Y$ are therefore\n$$(\\iota_n)_X c^g_{A_{E,n}}g^{-1}\\pi^E_{Y,n}.$$\nThe limit universal property yields $c_Xr^E=r^Lg^{-1}c_Y$. This proves compatibility on the completed coefficient sheaves by their finite projections.",
+   "text": "Construct the ramified quotient maps by Ideal.Quotient.lift using the equality of extended uniformizer-power ideals. Prove index e n+1=e*(n+1), monotonicity, and n<=index e n by natural-number arithmetic.",
    "uses": [
-    "def-weil-integral-scalar-extension",
+    "def-weil-integral-scalar-extension"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply the coefficient quotient comparison on X and Y, then the normalized finite pullback comparison. These supply the coefficient data, level isomorphisms, pure-tensor formula and adjacent transition square.",
+   "uses": [
+    "lem-weil-ramified-coefficient-quotient-comparison",
+    "lem-weil-ramified-finite-pullback-comparison"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Define sameIndex as levelIso followed by the canonical transition from the ramified index to n. The composite transition formula reduces both coefficient factors. Quotient induction proves that reducing the ramified quotient inclusion is the same-index inclusion. The limit projection equation reduces pi at the ramified index to pi at n. Hence the same-index formula follows, while factorization is definitional.",
+   "uses": [
+    "lem-weil-finite-pullback-transition-generators",
     "def-weil-completed-integral-coefficients",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.2(1), inverse-limit coefficient sheaves; agent calculation of their components"
-   }
-  },
-  {
-   "text": "Apply the canonical quotient clause of the constant-completion equivalence to $A=\\mathcal O_E$, $I=(t)$ on $W_{\\mathrm{proet}}$, and to $A=\\mathcal O_L$, $I=(v)$ on the same site. Noetherianity was checked in Step 1; the sites are taken small in the sheaf universe. Thus the actual limit projections induce $R_W/t^mR_W\\cong B_{E,W,m}$ and $S_W/v^{em}S_W\\cong B_{L,W,em}$. The constants $u,u^{-1}$ define mutually inverse sections of $S_W$, so Step 1 gives equality of ideal sheaves $t^mS_W=v^{em}S_W$. Hence $B_{L,W,em}$ is canonically $S_W/t^mS_W$ with its actual projection from $S_W$. This uses the degree-zero quotient clause only, and imposes no completeness or flatness condition on $P$.",
-   "uses": [
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093M (lemma-completion-flat), canonical quotient identifications, with the ideal powers; as packaged in lem-weil-pbc-constant-completion-equivalence"
-   }
-  },
-  {
-   "text": "For $R=R_W$, $S=S_W$, the map $(R/t^mR)\\otimes_R S\\to S/t^mS$ sends $\\bar r\\otimes s$ to $\\overline{c_W(r)s}$. Its inverse sends $\\bar s$ to $\\bar1\\otimes s$: changing $s$ by $t^m s'$ changes the image by $\\bar1\\otimes t^m s'=\\overline{t^m}\\otimes s'=0$. The two composites are identities, since $\\bar1\\otimes c_W(r)s=\\bar r\\otimes s$. These bilinear formulas commute with restriction, and therefore define inverse maps of the sheaf tensor products, including when quotient sections lift only after a cover. Combine with Step 3. By the coefficient square in Step 2 the resulting coefficient isomorphism is precisely $\\bar a\\otimes s\\mapsto j_m(\\bar a)\\pi^L_{em}(s)$.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-ringed-tensor-section-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), sheafified balanced tensor; explicit quotient inverse using Tag 093M as established in Step 3"
-   }
-  },
-  {
-   "text": "For $F=E,L$, let $R^E_W=R_W$, $R^L_W=S_W$. The normalized inverse-image tensor comparison applies to $g^{-1}$, the geometric inverse image defined in the statement, and the ring $R^F_Y$. For any complex $M$ of $R^F_Y$-modules it gives, termwise, a canonical identification\n$$D^F_n(M)\\cong g^{-1}M\\otimes_{g^{-1}R^F_Y}B_{F,X,n}.$$\nExplicitly it sends $((g^{-1}(x\\otimes a))\\otimes b)$ to $g^{-1}x\\otimes c^g_{A_{F,n}}(g^{-1}a)b$; the inverse sends $g^{-1}x\\otimes b$ to $(g^{-1}(x\\otimes1))\\otimes b$. The displayed maps are inverse by the two tensor-balancing relations. Here $c^g_{A_{F,n}}:g^{-1}B_{F,Y,n}\\to B_{F,X,n}$ is the canonical constant-ring structure map of the inverse-image definition; this calculation does not require that map to be invertible. The action of $g^{-1}R^F_Y$ on the last factor is its projected action, so restriction to $R^F_X$ is the one in $D^F_n$. No identification $g^{-1}R^F_Y=R^F_X$ is made.",
-   "uses": [
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "def-weil-proetale-inverse-image",
-    "def-weil-pbc-ringed-tensor-section-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EL (lemma-tensor-product-pullback), before scalar extension; explicit balanced reassociation and canonical finite constant coefficient map"
-   }
-  },
-  {
-   "text": "Put $H=g^{-1}R_Y$ and $N=g^{-1}P$. Reassociate the tensor in Step 5, using $(x\\otimes b)\\otimes s\\leftrightarrow x\\otimes(b\\otimes s)$, and apply Step 4 on $X$. This identifies $D^E_m(P)\\otimes_{R_X}S_X$ with $N\\otimes_H B_{L,X,em}$. On the other side apply Step 5 to $Q$ and the inverse-image tensor comparison to $P\\otimes_{R_Y}S_Y$. It identifies $D^L_{em}(Q)$ with\n$$(N\\otimes_H g^{-1}S_Y)\\otimes_{g^{-1}S_Y}B_{L,X,em}\\cong N\\otimes_H B_{L,X,em},$$\nwhere the last map sends $(x\\otimes z)\\otimes b$ to $x\\otimes\\bar z b$, with inverse $x\\otimes b\\mapsto(x\\otimes1)\\otimes b$. All displayed reassociations are inverse balanced maps and are linear in the final scalar. Compose the first identification with the inverse of the second to obtain $\\widetilde d_m$. On local tensor generators its formula is\n$$((g^{-1}(p\\otimes\\bar a))\\otimes b)\\otimes s\\longmapsto(g^{-1}((p\\otimes1)\\otimes j_m(\\bar a)))\\otimes(j_m(b)\\pi^L_{em}(s)).$$\nHere $p\\otimes1\\in Q$ explains the implicit $p$ on the statement's right-hand side. The formulas are natural in each module variable; applying them degreewise to $P$ therefore commutes with its differential and gives an isomorphism of $S_X$-complexes.",
-   "uses": [
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-ringed-tensor-section-calculus"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03EL (lemma-tensor-product-pullback) and 03EK (section-tensor-product); agent balanced-map calculation after Steps 4 and 5"
-   }
-  },
-  {
-   "text": "Write $q^F_{b,a}$ for quotient reduction from level $b$ to $a$. On quotient representatives,\n$$q^L_{e(m+1),em}j_{m+1}(\\bar a)=j_m q^E_{m+1,m}(\\bar a),\\qquad q^L_{e(m+1),em}\\pi^L_{e(m+1)}(s)=\\pi^L_{em}(s).$$\nBoth first expressions are the residue of the same element of $\\mathcal O_E$ in $\\mathcal O_L/v^{em}$; the second equality is the limit-projection identity. Applying these equations to $\\bar a,b,s$ in Step 6 shows that its two transition composites both have image $(g^{-1}((p\\otimes1)\\otimes j_m(q^E_{m+1,m}\\bar a)))\\otimes(j_m(q^E_{m+1,m}b)\\pi^L_{em}(s))$. Thus $\\widetilde d_\\bullet$ is a map of the specified towers, including their restricted completed-scalar actions. For a chain map $f:P\\to P'$, either composite replaces $p$ by $f(p)$ in Step 6 and leaves the coefficient factors unchanged. The pure pairings determine tensor maps, so these generator equalities are equalities of sheaf maps, also on sections that require covers.",
-   "uses": [
-    "def-pur-integral-derived-operations",
-    "def-weil-pbc-ringed-tensor-section-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product); quotient and inverse-limit transition calculations with the towers of def-pur-integral-derived-operations"
-   }
-  },
-  {
-   "text": "Since $em\\ge m$, let $q=q^L_{em,m}$. Then $qj_m=\\iota_m$ and $q\\pi^L_{em}=\\pi^L_m$, as each equality is reduction of the same ring element. The transition $T_{m,em}$ is induced by $q$ on both finite coefficient factors. Consequently its composite with the formula in Step 6 is\n$$(g^{-1}((p\\otimes1)\\otimes\\iota_m(\\bar a)))\\otimes(\\iota_m(b)\\pi^L_m(s)),$$\nwhich is exactly the prescribed same-index map. The map $m\\mapsto em$ is increasing and unbounded, and Step 7 identifies its adjacent transitions, so $\\widetilde d_\\bullet$ identifies the scalar-extended $E$ tower with the $e$-subsequence of the $L$ tower. This is a statement about strict towers and their maps; no inverse-limit theorem or injectivity of $T_{m,em}$ is used.",
-   "uses": [
     "def-weil-integral-scalar-extension",
-    "def-pur-integral-derived-operations"
+    "lem-sp-completed-integral-projection-divisibility"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product); agent calculation of the same-index factorization"
-   }
-  },
-  {
-   "text": "The maps just constructed use the inclusions of valuation rings, the equality of ideals $(t^m)=(v^{em})$, the actual quotient projections, and the normalized balanced tensor maps. The auxiliary equation $t=u v^e$ was used only to prove this equality of ideals. No multiplication or division by $u$ occurs in $j_m$, the coefficient isomorphism, or $\\widetilde d_m$. Thus the identifications are independent of the unit relating the uniformizers. If either uniformizer is replaced by a unit multiple, its powers generate the same ideals, the corresponding quotient rings and projections are canonically identical, and every displayed formula is unchanged under these identifications.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Agent observation from the explicit maps in Steps 2, 4, and 6"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-l-adic-extension-absolute-value",
   "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-integral-scalar-extension-well-defined",
   "def-weil-integral-scalar-extension",
+  "lem-weil-ramified-coefficient-quotient-comparison",
+  "lem-weil-ramified-finite-pullback-comparison",
+  "lem-weil-finite-pullback-transition-generators",
   "def-weil-completed-integral-coefficients",
-  "def-weil-proetale-inverse-image",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-ringed-tensor-section-calculus",
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
-  "def-pur-integral-derived-operations"
+  "lem-sp-completed-integral-projection-divisibility"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 093M (lemma-completion-flat), canonical quotient identifications; Tags 03EK and 03EL, balanced tensor and inverse-image tensor. Explicit ramification, tower, and same-index compatibility calculations by Q40; Bhatt–Scholze Lemma 6.8.2(1) supplies the coefficient-sheaf context."
+  "place": "H3: direct DVR arithmetic and quotient construction; source coefficient and pullback subarguments isolated; same-index factorization proved by quotient and limit-projection equations."
  },
  "mathlib_searches": [
   {
@@ -304,21 +234,6 @@
   "module": "Sheaf.Paper.RamifiedPullbackTowerIdentification",
   "declaration": "WeilConjectures.RamifiedPullback.identification",
   "declarations": [
-   "WeilConjectures.RamifiedPullback.ring",
-   "WeilConjectures.RamifiedPullback.Mod",
-   "WeilConjectures.RamifiedPullback.scalarWitness",
-   "WeilConjectures.RamifiedPullback.scalar",
-   "WeilConjectures.RamifiedPullback.scalar_additive",
-   "WeilConjectures.RamifiedPullback.scalarCx",
-   "WeilConjectures.RamifiedPullback.tensor",
-   "WeilConjectures.RamifiedPullback.constantMap",
-   "WeilConjectures.RamifiedPullback.index",
-   "WeilConjectures.RamifiedPullback.coefficientModule",
-   "WeilConjectures.RamifiedPullback.transition",
-   "WeilConjectures.RamifiedPullback.pullTensor",
-   "WeilConjectures.RamifiedPullback.ramifiedMap",
-   "WeilConjectures.RamifiedPullback.Coefficients",
-   "WeilConjectures.RamifiedPullback.Identification",
    "WeilConjectures.RamifiedPullback.identification"
   ],
   "file": "lean/Sheaf/Paper/RamifiedPullbackTowerIdentification.lean",
@@ -335,5 +250,15 @@
   "group": "NS",
   "result": "pass",
   "note": "Lean record only (item node otherwise unchanged; 8 stmt_dep records identical to live); statement verbatim; 16/16 declarations recorded. Every clause matches the node: e≥1 pinned by ideal equality + unique_index; completedMap pinned by finite projections (ρ_n); j_m by quotient_formula; coefficientIso (W=X,Y) by s⊗a↦j_m(a)π_em(s) plus coefficient_transitions; levelIso natural on all complexes, pinned by the node's local formula with p⊗1 (S_X-linear, constant B_X, generators → determined); transitions m+1→m / e(m+1)→em; sameIndex pinned by the ι_n/π_n formula, = levelIso≫T_{m,em}, no injectivity claimed; no unit data. Hypotheses: ℓ a stalk unit on X and Y, not stronger; universes t/u kept independent. scalar = .choose of derivedChangeOfRingsIndependentCoefficients with objects and maps pinned. Docstrings carry source + blueprint and the 9 proof steps; only sorry is the statement. Advisories: integralOperationsPullback* tower decls owned by theorem lem-pur-integral-operations-well-defined (not a stmt_dep; reached via def-pur-integral-derived-operations re-export; stmt_deps unchanged from stage-1, as Q101 precedent), and derivedChangeOfRingsIndependentCoefficients owner not a stmt_dep. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-cc983",
+  "group": "H3",
+  "result": "fix",
+  "landing": "20261021T174242-L-3772858",
+  "kind": "interface",
+  "note": "independent cc review: delivered RamifiedPullbackTowerData vs clone item block (verbatim apart from docstrings), identification signature vs clone (identical), two sorry lemmas vs nodes and source (true, not restatements), proof_deps vs Lean names used, sandbox compile of all 5 modules + #print axioms"
  }
 }
