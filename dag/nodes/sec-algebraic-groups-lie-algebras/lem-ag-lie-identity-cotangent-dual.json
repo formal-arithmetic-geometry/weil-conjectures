@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Apply identity_residue_rational to the identity section and form RingEquiv.ofBijective of its structural residue homomorphism.",
+   "text": "Use identityResidueEquiv G, defined as RingEquiv.ofBijective of the structural residue homomorphism using identity_residue_rational G. This is a ring isomorphism from k to the residue field at the same identity point.",
    "uses": [
     "lem-ag-lie-identity-residue-rational"
    ],
@@ -29,7 +29,7 @@
    "elementary": false
   },
   {
-   "text": "Apply exists_rationalPoint_tangent_cotangent_linearEquiv using residue rationality. Compose the two linear equivalences and transport functional values by the residue ring equivalence. The scalar transport has inverse given by transport through the inverse ring equivalence.",
+   "text": "Apply exists_rationalPoint_tangent_cotangent_linearEquiv using residue rationality. Compose its chosen linear equivalence with lieIdentityTangentEquiv and cotangentDualScalarEquiv, transporting functional values by identityResidueEquiv. This is exactly the existing upstream lieCotangentDualEquiv construction. The old existential statement follows by introducing identityResidueEquiv G and this equivalence as witnesses, so the duplicate Sheaf module is withdrawn without removing the mathematics.",
    "uses": [
     "lem-sc-rational-point-tangent-derivation-identification"
    ],
@@ -42,9 +42,9 @@
   "lem-sc-rational-point-tangent-derivation-identification"
  ],
  "proof_origin": {
-  "by": "B5 stage 3; use the upstream identity tangent linear equivalence directly; remaining argument unchanged",
+  "by": "W3 stage 3; retire the duplicate existential wrapper in favor of the proved upstream construction",
   "document": "literature/blueprint/master/blueprint/sec-algebraic-groups-lie-algebras/sk-i-cartier/lem-wf-same-lie-closed-subgroup.md",
-  "place": "Identity tangent-space and cotangent-duality identification"
+  "place": "Identity tangent-space and cotangent-duality identification; same three proof dependencies retained"
  },
  "mathlib_searches": [
   {
@@ -102,14 +102,20 @@
  "chapter": "sec-algebraic-groups-lie-algebras",
  "unit": "sk-i-cartier",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.GroupScheme.LieCotangentDual",
-  "file": "lean/Sheaf/AlgebraicGeometry/GroupScheme/LieCotangentDual.lean",
-  "declaration": "AlgebraicGeometry.GrpObj.exists_lie_identity_cotangent_dual_equiv",
-  "statement": "theorem exists_lie_identity_cotangent_dual_equiv\n    {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let R := G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k))\n    ∃ r : k ≃+* IsLocalRing.ResidueField R,\n      letI : RingHomInvPair r.toRingHom r.symm.toRingHom :=\n        RingHomInvPair.of_ringEquiv r\n      letI : RingHomInvPair r.symm.toRingHom r.toRingHom :=\n        RingHomInvPair.of_ringEquiv r.symm\n      Nonempty (Lie G ≃ₛₗ[r.toRingHom]\n        Module.Dual (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R))",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.GroupScheme.LieCotangentDual",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/GroupScheme/LieCotangentDual.lean",
+  "declaration": "AlgebraicGeometry.GrpObj.lieCotangentDualEquiv",
+  "declarations": [
+   "AlgebraicGeometry.GrpObj.identityResidueEquiv",
+   "AlgebraicGeometry.GrpObj.lieCotangentDualEquiv",
+   "AlgebraicGeometry.GrpObj.lieCotangentDualEquiv_apply_toCotangent"
+  ],
+  "statement": "def lieCotangentDualEquiv {k : Type u} [Field k] (G : Over (Spec (.of k))) [GrpObj G] :\n    let R := G.left.presheaf.stalk (unitSection G (IsLocalRing.closedPoint k))\n    letI : RingHomInvPair (identityResidueEquiv G).toRingHom\n        (identityResidueEquiv G).symm.toRingHom :=\n      RingHomInvPair.of_ringEquiv (identityResidueEquiv G)\n    letI : RingHomInvPair (identityResidueEquiv G).symm.toRingHom\n        (identityResidueEquiv G).toRingHom :=\n      RingHomInvPair.of_ringEquiv (identityResidueEquiv G).symm\n    Lie G ≃ₛₗ[(identityResidueEquiv G).toRingHom]\n      Module.Dual (IsLocalRing.ResidueField R) (IsLocalRing.CotangentSpace R)",
   "branch": "sheaf-dag",
-  "by": "K1",
-  "date": "2026-10-12"
+  "by": "W3",
+  "date": "2026-10-21",
+  "note": "Retire the duplicate Sheaf existential wrapper. The upstream construction supplies the same semilinear equivalence for the canonical residue-field isomorphism identityResidueEquiv. The old statement follows by existential and Nonempty introduction; the existing dimension consumer already uses these constructions directly."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -122,14 +128,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-e329c",
-  "group": "B5",
+  "reviewer": "C-6b811",
+  "group": "W3",
   "result": "pass",
-  "landing": "20261020T233053-L-889724",
+  "landing": "20261021T001151-L-1379392",
   "kind": "interface",
-  "note": "independent cc review: removed Sheaf exists_lie_identity_tangent_linearEquiv (Nonempty) vs upstream WeilConjectures lieIdentityTangentEquiv (identical type); adapted LieCotangentDual vs live (2 lines: import + witness), compiled with delivered item; node lean record vs upstream signature"
+  "note": "independent cc review: retired Sheaf exists_lie_identity_cotangent_dual_equiv vs upstream WeilConjectures lieCotangentDualEquiv/identityResidueEquiv (old signature re-proved from them in a scratch probe); node lean record vs upstream def signature; node JSON diffs vs live (only lean/proof/proof_origin); zero importers"
  },
  "lean_audit": {
   "master": {
