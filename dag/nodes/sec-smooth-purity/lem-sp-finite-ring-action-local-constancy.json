@@ -16,95 +16,69 @@
  ],
  "proof": [
   {
-   "text": "Fix $U$ and an underlying-set trivializing cover. On one member $T$, work on $\\mathcal D=\\mathcal C/T$ and choose $e:\\underline S\\xrightarrow{\\sim}|F|_T$ with $S$ finite. By [lem-cbc-sieve-slice-sheafification], constant set and ring sheaves restrict to the same constant models on every further localization, with their unit sections unchanged. In particular the coefficient ring on $\\mathcal D$ is the sheafification of the constant ring presheaf $\\Lambda$. Put $\\sigma_s=e(\\eta(s))\\in F(T)$, where $\\eta$ is the constant-set sheafification unit. Restricting $\\sigma_s$ along any arrow gives the corresponding unit-labelled section, by naturality. Take all site and coefficient sets in one ambient universe containing the small site.",
+   "text": "Restrict scalars along the genuine constant-ring sheafification unit eta: const Lambda -> R. This gives a sheaf G with values in ModuleCat Lambda, with exactly the underlying set sheaf of F. Restriction is fully faithful: a Lambda-linear natural map between R-module sheaves is R-linear because every local R-coefficient is locally in the image of eta and the target is separated. In Lean this is scalarSheafFullyFaithful, using Mathlib PresheafOfModules.restrictHomEquivOfIsLocallySurjective.",
    "uses": [
-    "lem-cbc-sieve-slice-sheafification",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On each member T of the given actual trivializing cover, apply the finite-operation construction to G restricted to C/T. For a finite label set X, form sections sigma_x using the inverse of the given constant-set isomorphism. Take the finite family consisting of zero, all sums of two labelled sections and all Lambda-multiples. The image sieves of these sections under the constant-set sheafification unit are covering; their finite intersection is covering. This uses Mathlib imageSieve_mem and GrothendieckTopology.finsetInf_mem, with the proved ConstantForget label identities; no site-specific local representation theorem is needed.",
+   "uses": [
     "def-pur-localized-ringed-site",
     "def-weil-pbc-constant-sheaf"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00XZ (section-localize); constant sheaves and restriction; Tag 093S finite-operation reduction"
-   }
+   "elementary": false
   },
   {
-   "text": "Apply local representation [lem-weil-pbc-site-sheafification-sections-local] to the finite family of sections of $\\underline S(T)$ obtained via $e^{-1}$ from $0$, all $\\sigma_s+\\sigma_t$, and all $\\lambda\\sigma_s$ for $s,t\\in S$ and $\\lambda\\in\\Lambda$. There is one covering $\\{W_j\\to T\\}$ on which every one of these sections has a label in $S$: obtain it by successively pulling back the cover for the next section to the members of the preceding cover and composing, using the covering axioms [def-weil-pbc-sites-and-cohomology]. There are finitely many sections because both $S$ and $\\Lambda$ are finite. Thus on each $W=W_j$ the image of $S\\to F(W)$ contains zero and is closed under addition and multiplication by every $\\lambda\\in\\Lambda$. This argument includes the zero section even if $S$ is empty; its representation may give an empty covering.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WK (lemma-sections-sheafification); expansion of the omitted finite-source argument of sites-modules Tag 093S(1)"
-   }
-  },
-  {
-   "text": "Fix such a $W$. Regard $F(W)$ as a $\\Lambda$-module through $\\Lambda\\to\\underline\\Lambda(W)$ and set $M=\\{\\sigma_s|_W:s\\in S\\}\\subset F(W)$. The preceding closure statements make $M$ a submodule: additive inverses are multiplication by $-1$, and the other module identities are inherited from $F(W)$. It is a finite module since it is the image of the finite set $S$. On $\\mathcal C/W$ define a natural $\\Lambda$-linear map $a$ from the constant module presheaf with value $M$ to $F|_W$ by $a_V(m)=m|_V$. Linearity and naturality follow directly from semilinearity and composition of restrictions [def-weil-sheaf-of-modules-category]. In particular $a_V(\\sigma_s|_W)=e_V(\\eta_V(s))$. No injectivity of $S\\to F(W)$ is asserted or needed.",
+   "text": "On a member of this sieve, take the actual image N of X in the sections. Closure of the finite operation table gives a Lambda-submodule, including zero and negatives via the scalar -1. N is finite because X is finite. Restriction of sections gives a linear natural map from the constant presheaf N to the restricted ModuleCat-valued sheaf. Sheafify it to obtain phi. This is the construction of WeilConjectures/CategoryTheory/Sites/ConstantForget.lean with the finite witness retained, rather than merely concluding IsConstant.",
    "uses": [
     "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 093S(1), finite-operation expansion: use the actual finite image submodule of sections"
-   }
+   "elementary": true
   },
   {
-   "text": "Apply [lem-pc-sites-module-sheafification-interface] with the constant ring presheaf $\\Lambda$ and constant module presheaf $M$. It gives a morphism $\\psi:\\underline M\\to F|_W$ of modules over the sheafified constant ring, extending $a$. By the ring case of [lem-cbc-sieve-slice-sheafification] this ring is precisely $\\underline\\Lambda|_W$. By [lem-pc-sites-sheafification-underlying-sets], the underlying set sheaf of $\\underline M$ with its unit is the set sheafification of the constant set presheaf $|M|$. Hence $|\\psi|$ is the set-sheafification of $|a|$, identifying the sheafification of the already sheaf-valued target with itself.",
+   "text": "The presheaf map is locally surjective since the constant-set sheafification unit is locally surjective. It is locally injective by representing two elements of N by labels, using the given set-sheaf isomorphism and local injectivity of the constant-set unit; equal labels imply equal actual image elements. The argument allows empty equality sieves and an empty label set. Cancel the locally bijective module-valued sheafification unit to see that phi is an isomorphism. In Lean these are imageSieve_mem, equalizerSieve_mem, the two comp_isLocally..._iff lemmas and Sheaf.isLocallyBijective_iff_isIso.",
+   "uses": [
+    "lem-cbc-set-presheaf-sheafification-local-bijection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The recorded constant module realization, after restriction along eta, is the ordinary constant ModuleCat-valued sheaf: its linear unit has the same underlying map as abelian-group sheafification, hence is locally bijective, and its sheafified lift is an isomorphism. Constant sheafification commutes with Over.forget and with the inverse of the iterated-slice equivalence. Transport the finite ModuleCat-valued trivialization to C/W and lift it through the fully faithful scalar-restriction functor to an R-module-sheaf isomorphism F.over W ~= (commutativeSiteConstantModuleFunctor M).over W.",
    "uses": [
     "lem-pc-sites-module-sheafification-interface",
     "lem-cbc-sieve-slice-sheafification",
-    "lem-pc-sites-sheafification-underlying-sets"
+    "def-pur-localized-ringed-site",
+    "def-sfb-site-derived-constant-module-functor"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CY (lemma-sheafification-presheaf-modules); sites.tex section-sheaves-algebraic-structures, clauses (beta)--(epsilon)"
-   }
+   "elementary": false
   },
   {
-   "text": "The set map $|a|$ is locally surjective: for any $V\\to W$ and $x\\in F(V)$, local representation [lem-weil-pbc-site-sheafification-sections-local] of $e_V^{-1}(x)$ gives, on a cover of $V$, labels $s\\in S$; the elements $\\sigma_s|_W\\in M$ map to the restrictions of $x$. It is locally injective: if $m,n\\in M$ have equal images in $F(V)$, choose $s,t\\in S$ representing them at $W$. Then $\\eta_V(s)=\\eta_V(t)$, so local equality in the same cited node gives a covering of $V$ on which $s=t$ in the constant presheaf. On each member this implies $m=n$ in $M$, and therefore equality of their constant-presheaf restrictions. If $s\\ne t$, that covering has no members and the condition is vacuous; no point of $V$ was used. The covering families generate covering sieves, so [lem-cbc-set-presheaf-sheafification-local-bijection] applies and makes $|\\psi|$ an isomorphism.",
+   "text": "Every covering sieve of the topology generated by J contains an actual J-covering presieve. Prove this by induction on Precoverage.Saturate: original coverings and the maximal sieve are immediate; pullbacks use the covering pullback existence clause of IsSiteForCoverings; transitivity uses bind composition. Apply this to the finite-operation sieve on each original trivializing cover member, and bind the resulting actual covers to the original cover. Each resulting member has the finite module and ringed isomorphism constructed above. No nonempty-object or nonzero-ring assumption is used.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local",
-    "lem-cbc-set-presheaf-sheafification-local-bijection"
+    "def-weil-pbc-sites-and-cohomology"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00WK (lemma-sections-sheafification), local representation and local equality; Mathlib Sites/LocallyBijective.lean W_iff_isLocallyBijective"
-   }
-  },
-  {
-   "text": "The sectionwise inverses of $\\psi$ are linear: for sections $x,y$ and a coefficient $b$, apply the injective map $\\psi$ to the proposed identities $\\psi^{-1}(x+y)=\\psi^{-1}(x)+\\psi^{-1}(y)$ and $\\psi^{-1}(bx)=b\\psi^{-1}(x)$; both become the corresponding identities for $\\psi$. The inverses are natural by the same cancellation. Thus $\\psi$ is a module-sheaf isomorphism. Compose the refinements $\\{W_j\\to T\\}$ with the original cover of $U$ [def-weil-pbc-sites-and-cohomology], and use relocalization [def-pur-localized-ringed-site]. They give the required covering and the finite modules $M_j$. The argument works for an empty covering and for the zero ring, without any nonempty-object assumption.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00VH (definition-site), composition of coverings; Tag 00XZ (section-localize), relocalization"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "def-pur-localized-ringed-site",
+  "def-sfb-site-derived-constant-module-functor",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sites-and-cohomology",
   "def-weil-sheaf-of-modules-category",
   "lem-cbc-set-presheaf-sheafification-local-bijection",
   "lem-cbc-sieve-slice-sheafification",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-sites-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-pc-sites-module-sheafification-interface"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 093S (lemma-morphism-locally-constant), finite-operation refinement, with sites.tex Tag 00WK (lemma-sections-sheafification) and sites-modules.tex Tag 03CY (lemma-sheafification-presheaf-modules)",
-  "note": "093S omits its proof. The finite-image submodule argument is written out, including local injectivity on empty-covered objects; it also follows the proved construction in lean/WeilConjectures/CategoryTheory/Sites/ConstantForget.lean."
+  "place": "Tag 093S finite-operation refinement, with sites.tex Tag 00WK and Modules on Sites Tag 03CY",
+  "note": "W6 Lean proof follows the proved finite-image construction in WeilConjectures/CategoryTheory/Sites/ConstantForget.lean, retaining its finite submodule witness. It adds proved private scalar-restriction, constant-model and slice comparison helpers and derives actual covering presieves from IsSiteForCoverings. Generic Mathlib local-bijection APIs replace the unnecessary SiteSheafificationSectionsLocal dependency. No new holes, public interfaces or unit-route changes."
  },
  "mathlib_searches": [
   {
@@ -217,9 +191,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-site-sheafification-sections-local"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -247,5 +219,15 @@
   "result": "pass",
   "note": "Re-delivery fixes the H3 universe RETURN of a05421e5: the site is now {C : Type uC} [Category.{vC} C] with a Precoverage J and IsSiteForCoverings; Λ, the finite sets and the modules are in max uC vC; the constant model is the landed commutativeSiteConstantModuleFunctor (constant presheaf, then module sheafification along the forgotten CommRingCat unit), and its owning node def-sfb-site-derived-constant-module-functor is added to stmt_deps. Clause-by-clause match with the node (hF on actual covers with finite X; conclusion F.over V ≅ c(M).over V over Λ̲|_V with Finite M). Edge cases (empty site, empty covers, empty X, zero ring) are fine. lean.statement is verbatim; docstrings have the source, blueprint and six proof steps; proof is sorry only. nt_compile --json: module clean 2.1 s; the T.ProEt / ULift A consumer probe is clean 2.2 s; the control without hF errors. Advisory only: unused plain proof imports."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W6",
+  "result": "pass",
+  "landing": "20261021T120853-L-3974501",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
