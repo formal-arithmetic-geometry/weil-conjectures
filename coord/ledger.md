@@ -19981,3 +19981,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:48 L: merged deliver/NG/lem-weil-pbc-exact-faithful-torsion (stage 2; reviewer PASS; parallel immutable checks)
 - 03:48 L: merged deliver/Q07/lem-sfb-cohomology-tor-interval (stage 2; reviewer PASS; parallel immutable checks)
 - 03:48 L: merged deliver/Q12/lem-weil-pbc-finite-postnikov-isomorphism (stage 2; reviewer PASS; parallel immutable checks)
+- 2026-10-21T03:48:25Z L: superseded stage-1 delivery O3/lem-sp-finite-coefficient-input-models at 4c8d447f9bc81067a22eb077e59ea7a213977e02; current completion retained; packet archived at refs/superseded/O3/lem-sp-finite-coefficient-input-models/4c8d447f9bc81067a22eb077e59ea7a213977e02; stale return retired.
