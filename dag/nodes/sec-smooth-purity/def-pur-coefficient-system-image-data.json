@@ -1,0 +1,136 @@
+{
+ "id": "def-pur-coefficient-system-image-data",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-coefficient-system-derived-comparison",
+   "place": "Construction 4.1 and Lemma 4.10; existing reviewed interface, extracted to avoid an import cycle.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "kind": "definition",
+ "title": "Normalized ordinary and derived image data for strict coefficient systems",
+ "statement": "For the constant quotient-ring strict systems and normalized evaluation package of [lem-pur-coefficient-evaluation-derived-left-adjoint], define the underlying set-sheaf functor, constant-generator maps and scalar-restriction underlying comparison. An ordinary image package consists of normalized algebraic inverse images, right adjoints, scalar-restriction comparisons and exact functors of strict systems with their component adjunctions. A derived image package consists of exact inverse and total right-derived direct images at the system and level categories, normalized chain-map transposes, evaluation, tensor and restriction comparisons with the displayed adjunction-mate and transition equations, joint detection of isomorphisms, lower-bound preservation, and the bounded-below essential-image and normalization criterion. The first six existing declaration bodies are unchanged. The full derived structure groups the same seventeen construction fields into abstract evaluation/scalar data specialized to the prescribed sheaf functors and retains the three formal descent fields. The old twenty projection names remain abbreviations; only the representation changes, not the specified data or equations. The evaluated unit identity is proved from the counit identity and the triangle identities, rather than supplied as independent construction data.",
+ "source": {
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; existing reviewed interface, extracted to avoid an import cycle."
+ },
+ "stmt_deps": [
+  "lem-pur-coefficient-evaluation-derived-left-adjoint",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "The first six definitions are extracted verbatim. Group the construction fields into evaluation data and scalar data over generic abelian categories, specialize every parameter to the prescribed coefficient-system functors, and retain the three formal descent fields. The original seventeen projection names are abbreviations through the grouped construction. No mathematical field or normalization is dropped. Targets using the changed representation require renewed statement review. The formal descent structure is also generic; the public full image abbreviation fixes its direct/inverse functors and its counit-isomorphism and normalization predicates to exactly the original expressions. The evaluation unit equation is a proved theorem: transpose under the level adjunction, precompose with the inverse-evaluation isomorphism, use naturality and the evaluated counit equation, and apply the system triangle identity. It is therefore not an additional construction field.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/zheng-six-operations-lefschetz-verdier-DM-stacks_arXiv-1006.3810.pdf",
+  "place": "Construction 4.1 and Lemma 4.10; existing reviewed interface, extracted to avoid an import cycle."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A left exact left adjoint between categories of sheaves lifts to an exact functor on sheaves of modules over constant rings and acts levelwise on inverse systems",
+   "results": "HasSheafify.isLeftExact; constantSheafΓAdj; Sheaf.instPreservesSheafificationOfIsLeftAdjoint; SheafOfModules.pullback; SheafOfModules.pullbackPushforwardAdjunction; SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "The ordinary continuous-site pullback API is useful but does not supply the arbitrary geometric morphism, independent site universes, constant coefficient normalization and strict-system transition comparison here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"IsIso\", \"homEquiv\"",
+   "results": "CategoryTheory.Functor.isIso_ranAdjunction_homEquiv_iff; CategoryTheory.Functor.isIso_lanAdjunction_homEquiv_symm_iff",
+   "date": "2026-10-21",
+   "verdict": "These concern Kan extension adjunctions, not this scalar square or exact derived essential-image argument."
+  },
+  {
+   "tool": "grep",
+   "query": "homEquiv.*[Ii]so|[Ii]so.*homEquiv|[Bb]ounded.*[Ff]aithful",
+   "results": "25 hits including localization Hom equivalences and CategoryTheory.Triangulated.Adjunction; no exact statement. Local rg found WeilConjectures exact derived functors, right-derived adjunctions, ConstantLeftModuleTransport and SemilinearOperationsExistence.",
+   "date": "2026-10-21",
+   "verdict": "The exact-derived and adjunction APIs are used in the proved formal lemmas. ConstantLeftModuleTransport uses SmallCategory sites and RingCat constant sheaves in one universe; SemilinearOperationsExistence uses sequence-site systems, unspecified transported coefficient rings and one common site universe. Neither directly gives these normalized prescribed-coefficient packages."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientSystemDerivedComparison",
+  "date": "2026-10-21",
+  "group": "B4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-sf-operations",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientSystemImageData",
+  "file": "lean/Sheaf/Paper/CoefficientSystemImageData.lean",
+  "declaration": "SheafOfModules.coefficientUnderlying",
+  "declarations": [
+   "SheafOfModules.coefficientUnderlying",
+   "SheafOfModules.coefficientConstantSection",
+   "SheafOfModules.coefficientRestrictionUnderlying",
+   "SheafOfModules.CoefficientDerivedImage",
+   "SheafOfModules.CoefficientSystemOrdinaryImage",
+   "SheafOfModules.IsNormalizedCoefficientSystem",
+   "SheafOfModules.CoefficientSystemDerivedImage",
+   "SheafOfModules.CoefficientEvaluationImageData",
+   "SheafOfModules.CoefficientScalarImageData",
+   "SheafOfModules.CoefficientEvaluationImage",
+   "SheafOfModules.CoefficientScalarImage",
+   "SheafOfModules.CoefficientSystemUnboundedImage",
+   "SheafOfModules.CoefficientSystemDerivedImage.system",
+   "SheafOfModules.CoefficientSystemDerivedImage.level",
+   "SheafOfModules.CoefficientSystemDerivedImage.inverseEvaluation",
+   "SheafOfModules.CoefficientSystemDerivedImage.inverseEvaluation_rep",
+   "SheafOfModules.CoefficientSystemDerivedImage.directEvaluation",
+   "SheafOfModules.CoefficientSystemDerivedImage.counit",
+   "SheafOfModules.CoefficientSystemDerivedImage.unit",
+   "SheafOfModules.CoefficientSystemDerivedImage.tensor",
+   "SheafOfModules.CoefficientSystemDerivedImage.tensor_unit",
+   "SheafOfModules.CoefficientSystemDerivedImage.derivedTensor",
+   "SheafOfModules.CoefficientSystemDerivedImage.derivedTensor_rep",
+   "SheafOfModules.CoefficientSystemDerivedImage.restrictedDirect",
+   "SheafOfModules.CoefficientSystemDerivedImage.restrictedDirect_mate",
+   "SheafOfModules.CoefficientSystemDerivedImage.restrictedInverse",
+   "SheafOfModules.CoefficientSystemDerivedImage.restrictedInverse_mate",
+   "SheafOfModules.CoefficientSystemDerivedImage.inverseTransition",
+   "SheafOfModules.CoefficientSystemDerivedImage.directTransition",
+   "SheafOfModules.CoefficientImageDescentData",
+   "SheafOfModules.CoefficientSystemDerivedImage.detectsIso",
+   "SheafOfModules.CoefficientSystemDerivedImage.boundedBelow",
+   "SheafOfModules.CoefficientSystemDerivedImage.origin",
+   "SheafOfModules.CoefficientEvaluationImageData.unit"
+  ],
+  "statement": "abbrev coefficientUnderlying (n : ℕ) :\n    coefficientLevelModules (J := J) O ell n ⥤ Sheaf J (Type w)",
+  "branch": "sheaf-dag",
+  "by": "B4",
+  "date": "2026-10-21",
+  "note": "Representation repair documented in coord/changes/B4-coefficient-system-image-interface.md. Full target statement review reopens for users of this definition."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d8f52",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261021T005723-L-1884505",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d8f52",
+  "group": "B4",
+  "result": "fix",
+  "landing": "20261021T005723-L-1884505",
+  "kind": "interface",
+  "note": "independent cc review: B4 Lean byte-identical to the PASSed V5 37a5cdb4 packet (landing removed later); recompiled all 7 delivered modules vs current live (rc 0, no warnings); item theorem text md5-identical to live; old 20-field CoefficientSystemDerivedImage (text = live) converts both ways with the new grouped abbrev; 6 moved decls verbatim; #print axioms clean (sorryAx only via the 2 named sorries + coefficientEvaluationDerivedLeftAdjoint); 0 live importers"
+ }
+}
