@@ -5,16 +5,8 @@ Authors: SHEAF group NI
 -/
 module
 
-public import Sheaf.Paper.PbcQbarCompletedPullback
 public import Sheaf.Paper.CompletedPullback
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.CategoryTheory.Functor.OfSequence
-public import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Localization.Predicate
-import Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits
+import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Adjunction
 
 /-! # The projection-defined constant-tower derived-limit unit
 
@@ -92,6 +84,68 @@ theorem constantDerivedLimitResolutionUnit (T : Scheme.{t})
         (∀ (C D : d.derived T) (h : C ⟶ D),
           η.app C ≫ (completedRlim T (d.completedRing T)).map
               ((d.derivedConstantTower T).map h) = h ≫ η.app D) := by
-  sorry
+  have := hι
+  have := hJ
+  let L := (d.constantTower T).mapHomologicalComplex (.up ℤ)
+  let R := (completedTowerLimit T (d.completedRing T)).mapHomologicalComplex (.up ℤ)
+  let a : d.constantTower T ⊣ completedTowerLimit T (d.completedRing T) := constLimAdj
+  let u := (a.mapHomologicalComplex (.up ℤ)).unit
+  let z : 𝟭 (CochainComplex (reductionModules T (d.completedRing T)) ℤ) ⟶
+      L ⋙ J ⋙ R := u ≫ Functor.whiskerRight (Functor.whiskerLeft L ι) R
+  have hz (C : CochainComplex (reductionModules T (d.completedRing T)) ℤ)
+      (i : ℤ) (n : ℕ) :
+      (z.app C).f i ≫ limit.π ((J.obj (L.obj C)).X i) (op n) =
+        ((ι.app (L.obj C)).f i).app (op n) := by
+    dsimp [z, u, R]
+    simp only [Functor.mapHomologicalComplex_map_f]
+    change (a.unit.app (C.X i) ≫ lim.map ((ι.app (L.obj C)).f i)) ≫
+      limit.π _ (op n) = _
+    simp [a, constLimAdj]
+  refine ⟨z, hz, ?_, (d.constantRlimAdjunction T).unit, rfl, ?_, ?_⟩
+  · intro C w hw
+    apply HomologicalComplex.Hom.ext
+    funext i
+    apply limit.hom_ext
+    intro n
+    exact (hw i n.unop).trans (hz C i n.unop).symm
+  · intro C
+    have hu := (a.mapHomotopyCategory (.up ℤ)).derivedη_fac_app
+      (HomotopyCategory.quasiIso _ (.up ℤ))
+      (d.constantTower T).mapDerivedCategoryFactorsh.hom
+      (completedTowerLimit T (d.completedRing T)).rightDerivedFunctorUnit
+      ((HomotopyCategory.quotient _ (.up ℤ)).obj C)
+    rw [Adjunction.mapHomotopyCategory_unit_app_quotient] at hu
+    have hfac : (d.constantTower T).mapDerivedCategoryFactorsh.hom.app
+        ((HomotopyCategory.quotient _ (.up ℤ)).obj C) =
+        (d.constantTower T).mapDerivedCategoryFactors.hom.app C := by
+      simp only [Functor.mapDerivedCategoryFactorsh_hom_app,
+        Functor.mapHomotopyCategoryFactors, DerivedCategory.quotientCompQhIso,
+        HomologicalComplexUpToQuasiIso.quotientCompQhIso,
+        Quotient.lift.isLift_hom, Quotient.lift.isLift_inv, Functor.comp_obj]
+      erw [DerivedCategory.Qh.map_id]
+      erw [(d.constantTower T).mapDerivedCategory.map_id]
+      erw [Category.id_comp]
+      repeat erw [Category.comp_id]
+    rw [hfac] at hu
+    change (d.constantRlimAdjunction T).unit.app (DerivedCategory.Q.obj C) ≫
+        (completedRlim T (d.completedRing T)).map
+          ((d.constantTower T).mapDerivedCategoryFactors.hom.app C) =
+      DerivedCategory.Q.map (u.app C) ≫
+        (completedRlimUnit T (d.completedRing T)).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj (L.obj C)) at hu
+    have hn := (completedRlimUnit T (d.completedRing T)).naturality
+      ((HomotopyCategory.quotient _ (.up ℤ)).map (ι.app (L.obj C)))
+    change DerivedCategory.Q.map (R.map (ι.app (L.obj C))) ≫
+        (completedRlimUnit T (d.completedRing T)).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj (J.obj (L.obj C))) =
+      (completedRlimUnit T (d.completedRing T)).app
+          ((HomotopyCategory.quotient _ (.up ℤ)).obj (L.obj C)) ≫
+        (completedRlim T (d.completedRing T)).map
+          (DerivedCategory.Q.map (ι.app (L.obj C))) at hn
+    rw [Functor.map_comp, ← Category.assoc, hu, Category.assoc, ← hn,
+      ← Category.assoc, ← Functor.map_comp]
+    rfl
+  · intro C D h
+    exact ((d.constantRlimAdjunction T).unit.naturality h).symm
 
 end AlgebraicGeometry.Scheme
