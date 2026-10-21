@@ -13,9 +13,83 @@
   "def-weil-pbc-etale-sheaves",
   "def-weil-pbc-direct-image"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an arbitrary $R$-module sheaf $M$. For $0\\leq j\\leq t$ define a subsheaf by $M_j(U)=\\{s\\in M(U):rs=0\\text{ for every }r\\in I^j\\}$. This is a sheaf: restrictions preserve the displayed equations, and a compatible family glues in $M$ to a section satisfying each equation by uniqueness of gluing. It is an $R_X$-submodule because the coefficient ring is commutative. Since $I^{j+1}\\subseteq I^j$, these subsheaves give $0=M_0\\subseteq M_1\\subseteq\\cdots\\subseteq M_t=M$: $I^0=R$ contains $1$, and $I^t=0$. The category and its sectionwise kernels are those of [def-weil-sheaf-of-modules-category].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, label lemma-abelian: kernels and sheafified cokernels of module sheaves; elementary annihilator filtration constructed here."
+   }
+  },
+  {
+   "text": "For $0\\leq j<t$ take the cokernel $Q_j=M_{j+1}/M_j$ in the abelian category [def-weil-sheaf-of-modules-category], so $0\\to M_j\\to M_{j+1}\\to Q_j\\to0$ is short exact. For $a\\in I$ and $s\\in M_{j+1}(U)$, every $r\\in I^j$ satisfies $r(as)=(ra)s=0$, since $ra\\in I^{j+1}$. Thus multiplication by $a$ on $M_{j+1}$ factors through $M_j$, and induces zero on its cokernel $Q_j$. Give $Q_j$ the $R/I$-action $\\bar r\\,x=rx$ on constants; independence of the lift follows because $I$ acts by zero. By the constant-sheaf construction [def-weil-pbc-constant-sheaf] and the sheafification universal property [def-weil-pbc-sheafification], this action extends to $(R/I)_X$ (glue the action on sections of the constant presheaf); its module identities hold on constants and hence after sheafification. Its restriction along $R\\to R/I$ is exactly the original $R_X$-action on $Q_j$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, label lemma-abelian: kernels and sheafified cokernels of module sheaves; elementary annihilator filtration constructed here."
+   }
+  },
+  {
+   "text": "Fix $q\\geq0$ with $q>N$. By the assumed bound, $R^qf_*^{R/I}Q_j=0$ for every $j<t$. Apply [lem-sbc-coefficient-higher-direct-image-zero] to the quotient ring homomorphism $R\\to R/I$, the given qcqs morphism $f$, and the $R/I$-module sheaf $Q_j$ of step 2. It gives $R^qf_*^R Q_j=0$ for its restriction to $R$-coefficients, which step 2 identified with the cokernel used in the short exact sequence. This uses neither flatness of $R/I$ over $R$ nor preservation of injectives by restriction of scalars.",
+   "uses": [
+    "lem-sbc-coefficient-higher-direct-image-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03FD (lemma-cohomology-modules-abelian-agree) and 0D6J (lemma-modules-abelian-unbounded), especially (3); coefficient-change vanishing is the cited existing DAG lemma."
+   }
+  },
+  {
+   "text": "The category of $R_X$-module sheaves is abelian [def-weil-sheaf-of-modules-category], has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives], and $f_*^R$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. Apply [lem-weil-pbc-derived-functor-long-exact] to each short exact sequence of step 2. Its exact sequence contains $R^qf_*^R M_j\\to R^qf_*^R M_{j+1}\\to R^qf_*^R Q_j$ for every $q\\geq0$, including $q=0$ at the start of the sequence. When the outer two sheaves vanish, exactness forces the middle sheaf to vanish: its entire kernel is the image of a zero object, whereas its map to the zero object has kernel the whole object.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-weil-pbc-derived-functor-long-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B, label lemma-higher-derived-functors, parts (1) and (2), applied to complexes concentrated in degree zero."
+   }
+  },
+  {
+   "text": "For the fixed $q$ of step 3, induct on $j$ from $0$ to $t$. The base is $R^qf_*^R M_0=R^qf_*^R0=0$, computed by the zero injective resolution in [def-weil-pbc-direct-image]. If $R^qf_*^R M_j=0$, step 3 gives $R^qf_*^R Q_j=0$, and the exact segment of step 4 gives $R^qf_*^R M_{j+1}=0$. Hence $M_t=M$ has $R^qf_*^RM=0$. Since $M$ and $q\\geq0$, $q>N$, were arbitrary, this proves the claimed common bound. The induction uses only the same degree $q$, so it never enlarges $N$; it works also for $N<0$, when $q=0$ must be included, and uses no finiteness or flatness of $M$.",
+   "uses": [
+    "def-weil-pbc-direct-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015B, label lemma-higher-derived-functors: elementary finite induction using the exact segments above."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-sheafification",
+  "def-weil-sheaf-of-modules-category",
+  "lem-sbc-coefficient-higher-direct-image-zero",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-module-sheaves-enough-injectives"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 015B, label lemma-higher-derived-functors, applied to the explicit annihilator filtration; motivated by the residue-coefficient bound in Bhatt-Scholze Lemma 6.5.11, without claiming that lemma states this general nilpotent-ideal result."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -65,10 +139,59 @@
    "results": "No hits",
    "date": "2026-10-21",
    "verdict": "no match: hits concern nilpotent elements, local cohomology or general derived-category vanishing, not nilpotent-coefficient invariance of an etale direct-image bound"
+  },
+  {
+   "tool": "grep",
+   "query": "nilpotent.*(cohomolog|derived)|cohomolog.*nilpotent",
+   "results": "Mathlib/Algebra/Lie/CartanCriterion.lean; Mathlib/Algebra/Lie/CartanCriterion.lean; Mathlib/Algebra/Lie/CartanCriterion.lean; Mathlib/Algebra/Lie/CartanCriterion.lean; Mathlib/Algebra/Lie/CartanCriterion.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: returned results do not state nilpotent-coefficient invariance of an etale higher direct-image bound"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite filtration with quotient module sheaves annihilated by an ideal transfers a common cohomological dimension bound for pushforward",
+   "results": "IsModuleFiltration; Ideal.Filtration; Ideal.Filtration.Stable; IsModuleFiltration.toIsFiltration; Ideal.stableFiltration; Ideal.Filtration.recOn; Ideal.Filtration.casesOn; Ideal.stableFiltration_stable",
+   "date": "2026-10-21",
+   "verdict": "no match: returned results do not state nilpotent-coefficient invariance of an etale higher direct-image bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, Ideal.IsNilpotent",
+   "results": "No hits [loogle: unknown identifier 'Ideal.IsNilpotent']",
+   "date": "2026-10-21",
+   "verdict": "invalid query: loogle: unknown identifier 'Ideal.IsNilpotent'"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A nilpotent ideal of the coefficient ring preserves a uniform bound on the higher direct images of all etale module sheaves",
+   "results": "Algebra.Etale.formallyEtale; Algebra.FormallyEtale.comp_bijective; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; Algebra.FormallyEtale.iff_comp_bijective; Algebra.etaleLocus_eq_compl_support; StandardEtalePair.instFormallyEtaleRing; Algebra.FormallyEtale.instForallOfFinite; Algebra.IsEtaleAt.comp",
+   "date": "2026-10-21",
+   "verdict": "no match: returned results do not state nilpotent-coefficient invariance of an etale higher direct-image bound"
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*(zero|Zero)|[Cc]ohomological[Dd]imension",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean; Mathlib/CategoryTheory/Abelian/RightDerived.lean [subdirectory CategoryTheory]",
+   "date": "2026-10-21",
+   "verdict": "no match: returned results do not state nilpotent-coefficient invariance of an etale higher direct-image bound"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived, ModuleCat.restrictScalars",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match: returned results do not state nilpotent-coefficient invariance of an etale higher direct-image bound"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If higher direct images of all R/I module sheaves vanish above N and I to the power t is zero then higher direct images of all R module sheaves vanish above the same N by the long exact sequence",
+   "results": "localCohomology.ofSelfLERadical; localCohomology.diagram; localCohomology.ofDiagram; localCohomology; localCohomology.isoSelfLERadical; DerivedCategory.isZero_of_isGE; DerivedCategory.isZero_of_isLE; DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective",
+   "date": "2026-10-21",
+   "verdict": "no match: returned results do not state nilpotent-coefficient invariance of an etale higher direct-image bound"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-integral-direct-image-constructible",
@@ -89,5 +212,44 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-nilpotent-coefficient-direct-image-bound",
+  "worker": "stage1",
+  "summary": "Q23: statement unchanged. Constructed the finite annihilator filtration of an arbitrary module sheaf, checked that its sheaf cokernels carry quotient coefficients, transferred quotient vanishing using the existing qcqs coefficient-change lemma, and used the existing derived long exact sequence with all its hypotheses cited. Explicit induction retains the same degree and handles N<0. No new nodes or Mathlib matches.",
+  "blueprint": "Realizes the integral constructible codomain needed by def-weil-ordinary-compact-cohomology through the nilpotent-coefficient bound used in step 6 of lem-sf-integral-direct-image-constructible (formerly coefficient-filtration step 5); unit and chapter unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-coefficient-higher-direct-image-zero",
+    "why": "Generic restriction-of-scalars vanishing criterion for the quotient R to R/I; this unit has no coefficient-change vanishing statement."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic existence of injective resolutions for etale module sheaves, needed to apply the long exact sequence; this unit has no replacement."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic additivity and left exactness of the module pushforward; this unit supplies no such foundational functor theorem."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic long exact sequence of right derived functors, used on the explicit filtration extensions; no statement of this unit gives it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-coefficient-higher-direct-image-zero",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-derived-functor-long-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-c86f33450",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-c86f33450 (reviewer sub-agent of L); spot-checked: This is a one-level split with no new nodes and no fixes. The statement and stmt_deps are unchanged from NU's creation of the node (compared with the run NU__lem-sf-integral-direct-image-constructible__3de9538c105b, where the proof was empty). There is no repair note, so the 2026-10-21 re-split rule does not apply. The statement is the standard nilpotent dévissage and is true; I tested t=1, Z/p^n with (p), k[ε], N<0 (q=0 included), the zero ring and empty X. Step 1: the annihilator subsheaves M_j are R_X-submodules with M_0=0 and M_t=M (correct). Step 2: the sheaf cokernel Q_j is killed by I through r(as)=(ra)s, so it is an (R/I)_X-module whose restriction to R is the original structure (correct). Step 3: every hypothesis of lem-sbc-coefficient-higher-direct-image-zero holds (same universe, f qcqs, S=R/I module sheaf), and its 'vanishes iff' statement is used exactly. Step 4: lem-weil-pbc-derived-functor-long-exact has its hypotheses supplied by enough-injectives and module-direct-image-left-exact; its R^n v by injective resolutions agrees with R^q f_* in the 'Module sheaves' paragraph of def-weil-pbc-direct-image. I read the source, Stacks derived.tex Tag 015B (label at line 7048). Step 5: induction at fixed q, so N is never enlarged. Bhatt–Scholze 6.5.11 (local PDF) is cited only as motivation, which is accurate. There is no proof cycle (388-node closure without the item) and no SGA. Duplicate grep over dag/nodes found no node with this statement. The four generic tool_uses are declared and accepted."
+ }
 }
