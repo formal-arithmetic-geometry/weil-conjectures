@@ -20801,3 +20801,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:50 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
 - 07:51 L: returned deliver/NE/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-finite-field-stratified-perfect-models: l)
 - 07:51 L: returned deliver/Q02/lem-wf-tate-twist-compatibility (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-wf-tate-twist-compatibility: cited node lem-wf-int)
+- 07:52 L: returned deliver/Q95/def-nagata-affine-proj (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED def-nagata-affine-proj: cited node def-nagata-homogene)
