@@ -28,54 +28,28 @@
  ],
  "proof": [
   {
-   "text": "Construct the bounded-above natural comparison functor isomorphism by resolving with bounded-above flat complexes, using exact point sections and the derived change-of-rings counits.",
-   "uses": [
-    "lem-trf-point-sections-finite-reduction-iso"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Show that finite sheaf scalar extension preserves the bounded-above condition and that ordinary point sections after finite reduction have vanishing homology above a bound.",
-   "uses": [
-    "lem-trf-point-sections-finite-reduction-bounded"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "For a bounded-above termwise flat complex, construct the quotient complex isomorphism, verify the pure tensor generator equation, and identify the counit square.",
+   "text": "Choose the normalized natural family and its flat-complex generator/counit compatibility from the repaired complex theorem.",
    "uses": [
     "lem-trf-point-sections-finite-reduction-complex"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For every finite reduction, attach the bounded-above sheaf and ordinary-module homology bounds. This assembles exactly the existing parent statement.",
+   "uses": [
+    "lem-trf-point-sections-finite-reduction-bounded"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-pc-flat-sheaf-modules",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-constant-sheaf",
-  "def-weil-pbc-proetale-site",
-  "def-weil-pbc-sheafification",
-  "lem-cbc-continuous-functions-fpqc-sheaf",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-derived-tensor-second-factor-functor",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-pur-derived-change-of-rings",
   "lem-trf-point-sections-finite-reduction-bounded",
-  "lem-trf-point-sections-finite-reduction-complex",
-  "lem-trf-point-sections-finite-reduction-iso",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-bounded-below-cochain-localization",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-flat-fg-ideal-criterion",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-point-proetale-sections-exact"
+  "lem-trf-point-sections-finite-reduction-complex"
  ],
  "proof_origin": {
-  "by": "A7 stage 3",
+  "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
-  "place": "Proof (1), decomposed into natural comparison, boundedness, and normalized flat-complex compatibility.",
-  "note": "The three intermediate statements are strict subresults of the original eight-step argument; the target combines them definitionally."
+  "place": "Proof (1); T4: final-point identity covers, ordinary tensor comparison and flat-model derived descent."
  },
  "mathlib_searches": [
   {
@@ -234,17 +208,12 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-constant-module-section-properties",
   "def-pur-sheaf-tensor-product",
   "lem-weil-point-proetale-sections-exact",
   "def-pc-flat-sheaf-modules",
-  "lem-pc-kflat-bounded-flat-replacement",
-  "lem-pc-bounded-above-flat-kflat-site",
   "lem-pc-module-bounded-flat-kflat",
   "lem-pur-derived-change-of-rings",
   "lem-pc-derived-tensor-second-factor-functor",
-  "lem-cbc-continuous-functions-fpqc-sheaf",
   "def-weil-pbc-proetale-site",
   "def-weil-pbc-constant-sheaf",
   "def-weil-pbc-sheafification"
@@ -276,33 +245,8 @@
   "module": "Sheaf.Paper.PointSectionsFiniteReduction",
   "declaration": "WeilConjectures.point_sections_finite_reduction",
   "declarations": [
-   "WeilConjectures.pointFiniteReductionRingSheaf",
-   "WeilConjectures.pointFiniteReductionRingMap",
-   "WeilConjectures.pointFiniteReductionModuleTensor",
-   "WeilConjectures.pointFiniteReductionSections",
-   "WeilConjectures.pointFiniteReductionModules",
-   "WeilConjectures.pointFiniteReductionSheaves",
-   "WeilConjectures.pointFiniteReductionSheafMap",
-   "WeilConjectures.pointFiniteReductionSheafExistence",
-   "WeilConjectures.pointFiniteReductionSheafExtension",
-   "WeilConjectures.pointFiniteReductionSheafTensor",
-   "WeilConjectures.pointFiniteReductionSheafCounit",
-   "WeilConjectures.pointFiniteReductionCoefficientComplex",
-   "WeilConjectures.pointFiniteReductionComplexTensor",
-   "WeilConjectures.pointFiniteReductionModuleCounit",
-   "WeilConjectures.pointFiniteReductionSheafComplexTensor",
-   "WeilConjectures.pointFiniteReductionSectionComplex",
-   "WeilConjectures.pointFiniteReductionTensorGenerator",
-   "WeilConjectures.pointFiniteReductionSectionGenerator",
-   "WeilConjectures.pointFiniteReductionSectionFactors",
-   "WeilConjectures.pointFiniteReductionBoundedAbove",
-   "WeilConjectures.pointFiniteReductionSiteSmall",
-   "WeilConjectures.pointFiniteReductionRingSheafify",
-   "WeilConjectures.pointFiniteReductionGroupSheafify",
-   "WeilConjectures.pointFiniteReductionLocalBijections",
-   "WeilConjectures.pointFiniteReductionSectionsLimits",
-   "WeilConjectures.pointFiniteReductionSectionsColimits",
-   "WeilConjectures.pointFiniteReductionSheafExtensionAdditive"
+   "WeilConjectures.point_sections_finite_reduction",
+   "WeilConjectures.finiteReductionStandardDerived"
   ],
   "file": "lean/Sheaf/Paper/PointSectionsFiniteReduction.lean",
   "statement": "theorem point_sections_finite_reduction (_hl : IsUnit (l : k)) : ∃ e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n), (pointFiniteReductionBoundedAbove k l E n).ι ⋙ pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅ (pointFiniteReductionBoundedAbove k l E n).ι ⋙ pointFiniteReductionSheafTensor k l E n j hjn ⋙ pointFiniteReductionSections k l E j, ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n), (∀ N : (pointFiniteReductionBoundedAbove k l E n).FullSubcategory, pointFiniteReductionBoundedAbove k l E j ((pointFiniteReductionSheafTensor k l E n j hjn).obj N.obj) ∧ ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero ((DerivedCategory.homologyFunctor _ q).obj ((pointFiniteReductionModuleTensor l E n j hjn).obj ((pointFiniteReductionSections k l E n).obj N.obj)))) ∧ ∀ (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ) (_hbound : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero (P.X q)) (_hflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (R := pointFiniteReductionRingSheaf k l E n) (P.X q)), ∃ hP : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj P), ∃ q : (pointFiniteReductionComplexTensor l E n j hjn).obj ((pointFiniteReductionSectionComplex k l E n).obj P) ≅ (pointFiniteReductionSectionComplex k l E j).obj ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P), (∀ (a : ℤ) (b c : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j)) (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj (P.X a)), q.hom.f a (pointFiniteReductionTensorGenerator l E n j hjn ((pointFiniteReductionSectionComplex k l E n).obj P) a b c x) = (b * c) • pointFiniteReductionSectionGenerator k l E n j hjn (P.X a) x) ∧ (pointFiniteReductionModuleTensor l E n j hjn).map (pointFiniteReductionSectionFactors k l E n P).hom ≫ (pointFiniteReductionModuleCounit l E n j hjn).app ((pointFiniteReductionSectionComplex k l E n).obj P) ≫ DerivedCategory.Q.map q.hom = (e n j hn hj hjn).hom.app ⟨DerivedCategory.Q.obj P, hP⟩ ≫ (pointFiniteReductionSections k l E j).map (pointFiniteReductionSheafCounit k l E n j hjn P) ≫ (pointFiniteReductionSectionFactors k l E j ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom",
@@ -314,20 +258,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
-  "result": "pass",
-  "landing": "20261021T012426-L-2189397",
+  "reviewer": "C-3df84",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261021T061705-L-1812936",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.point_sections_finite_reduction_bounded",
-   "WeilConjectures.point_sections_finite_reduction_complex",
-   "WeilConjectures.point_sections_finite_reduction_iso"
-  ],
-  "sorry_after": [
-   "WeilConjectures.point_sections_finite_reduction_complex",
-   "WeilConjectures.point_sections_finite_reduction_iso"
-  ]
+  "note": "independent cc review: delivered Data/SectionAlgebra/item/PointReductionUnits vs live item and PointReductionUnits; four item-node statements vs live (only complex changed, STATEMENT-DISPUTED, counterexample -e checked); original PointReductionUnits compiled against the delivered modules (fails, so the adaptation is forced); 5 direct importers compiled against the delivered .lbuild; #print axioms; each plain import removed and recompiled; elaborated types published vs delivered"
  }
 }

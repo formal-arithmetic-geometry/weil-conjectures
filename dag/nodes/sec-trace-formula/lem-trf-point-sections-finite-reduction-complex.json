@@ -46,13 +46,13 @@
   }
  ],
  "proof_origin": {
-  "by": "A7 stage 3",
+  "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
-  "place": "Proof (1)"
+  "place": "Proof (1); T4: final-point identity covers, ordinary tensor comparison and flat-model derived descent."
  },
  "id": "lem-trf-point-sections-finite-reduction-complex",
  "title": "Normalized flat-complex quotient comparison",
- "statement": "theorem point_sections_finite_reduction_complex (_hl : IsUnit (l : k)) (e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n), (pointFiniteReductionBoundedAbove k l E n).ι ⋙ pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅ (pointFiniteReductionBoundedAbove k l E n).ι ⋙ pointFiniteReductionSheafTensor k l E n j hjn ⋙ pointFiniteReductionSections k l E j) : ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n), ∀ (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ) (_hbound : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero (P.X q)) (_hflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (R := pointFiniteReductionRingSheaf k l E n) (P.X q)), ∃ hP : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj P), ∃ q : (pointFiniteReductionComplexTensor l E n j hjn).obj ((pointFiniteReductionSectionComplex k l E n).obj P) ≅ (pointFiniteReductionSectionComplex k l E j).obj ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P), (∀ (a : ℤ) (b c : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j)) (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj (P.X a)), q.hom.f a (pointFiniteReductionTensorGenerator l E n j hjn ((pointFiniteReductionSectionComplex k l E n).obj P) a b c x) = (b * c) • pointFiniteReductionSectionGenerator k l E n j hjn (P.X a) x) ∧ (pointFiniteReductionModuleTensor l E n j hjn).map (pointFiniteReductionSectionFactors k l E n P).hom ≫ (pointFiniteReductionModuleCounit l E n j hjn).app ((pointFiniteReductionSectionComplex k l E n).obj P) ≫ DerivedCategory.Q.map q.hom = (e n j hn hj hjn).hom.app ⟨DerivedCategory.Q.obj P, hP⟩ ≫ (pointFiniteReductionSections k l E j).map (pointFiniteReductionSheafCounit k l E n j hjn P) ≫ (pointFiniteReductionSectionFactors k l E j ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom",
+ "statement": "theorem point_sections_finite_reduction_complex (_hl : IsUnit (l : k)) :\n    ∃ e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n),\n      (pointFiniteReductionBoundedAbove k l E n).ι ⋙\n          pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅\n        (pointFiniteReductionBoundedAbove k l E n).ι ⋙\n          pointFiniteReductionSheafTensor k l E n j hjn ⋙ pointFiniteReductionSections k l E j,\n    ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n),\n      ∀ (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ)\n        (_hbound : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero (P.X q))\n        (_hflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n          (R := pointFiniteReductionRingSheaf k l E n) (P.X q)),\n      ∃ hP : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj P),\n      ∃ q :\n        (pointFiniteReductionComplexTensor l E n j hjn).obj\n          ((pointFiniteReductionSectionComplex k l E n).obj P) ≅\n        (pointFiniteReductionSectionComplex k l E j).obj\n          ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P),\n      (∀ (a : ℤ) (b c : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))\n        (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj (P.X a)),\n        q.hom.f a\n          (pointFiniteReductionTensorGenerator l E n j hjn\n            ((pointFiniteReductionSectionComplex k l E n).obj P) a b c x) =\n          (b * c) • pointFiniteReductionSectionGenerator k l E n j hjn (P.X a) x) ∧\n      (pointFiniteReductionModuleTensor l E n j hjn).map\n          (pointFiniteReductionSectionFactors k l E n P).hom ≫\n        (pointFiniteReductionModuleCounit l E n j hjn).app\n          ((pointFiniteReductionSectionComplex k l E n).obj P) ≫\n        DerivedCategory.Q.map q.hom =\n      (e n j hn hj hjn).hom.app ⟨DerivedCategory.Q.obj P, hP⟩ ≫\n        (pointFiniteReductionSections k l E j).map\n          (pointFiniteReductionSheafCounit k l E n j hjn P) ≫\n        (pointFiniteReductionSectionFactors k l E j\n          ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom",
  "stmt_deps": [
   "def-weil-algebraic-closure",
   "def-weil-affine-spectrum",
@@ -65,26 +65,29 @@
  ],
  "proof": [
   {
-   "text": "On a bounded-above termwise flat complex, define the degreewise quotient comparison, prove the pure tensor generator equation and the universal counit square.",
+   "text": "Use the natural comparison just constructed by flat models. The explicit mixed tensor unitor followed by the ordinary point-sections comparison gives q on every bounded-above termwise flat complex. Its generator formula is the ordinary generator formula with coefficient b*c.",
    "uses": [
     "lem-trf-point-sections-finite-reduction-iso",
-    "lem-pc-derived-tensor-second-factor-functor",
-    "lem-pur-derived-change-of-rings"
+    "lem-trf-point-finite-reduction-section-algebra"
    ],
    "elementary": false
+  },
+  {
+   "text": "Independence of the chosen flat model identifies the natural comparison with the five-factor counit composite on P. Cancel the inverse sheaf counit and inverse sections factor in that composite to obtain the asserted square.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-trf-point-sections-finite-reduction-iso",
-  "lem-pc-derived-tensor-second-factor-functor",
-  "lem-pur-derived-change-of-rings"
+  "lem-trf-point-finite-reduction-section-algebra",
+  "lem-trf-point-sections-finite-reduction-iso"
  ],
  "lean": {
   "existing": false,
   "module": "Sheaf.Paper.PointSectionsFiniteReduction",
   "file": "lean/Sheaf/Paper/PointSectionsFiniteReduction.lean",
   "declaration": "WeilConjectures.point_sections_finite_reduction_complex",
-  "statement": "theorem point_sections_finite_reduction_complex (_hl : IsUnit (l : k)) (e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n), (pointFiniteReductionBoundedAbove k l E n).ι ⋙ pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅ (pointFiniteReductionBoundedAbove k l E n).ι ⋙ pointFiniteReductionSheafTensor k l E n j hjn ⋙ pointFiniteReductionSections k l E j) : ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n), ∀ (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ) (_hbound : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero (P.X q)) (_hflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (R := pointFiniteReductionRingSheaf k l E n) (P.X q)), ∃ hP : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj P), ∃ q : (pointFiniteReductionComplexTensor l E n j hjn).obj ((pointFiniteReductionSectionComplex k l E n).obj P) ≅ (pointFiniteReductionSectionComplex k l E j).obj ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P), (∀ (a : ℤ) (b c : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j)) (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj (P.X a)), q.hom.f a (pointFiniteReductionTensorGenerator l E n j hjn ((pointFiniteReductionSectionComplex k l E n).obj P) a b c x) = (b * c) • pointFiniteReductionSectionGenerator k l E n j hjn (P.X a) x) ∧ (pointFiniteReductionModuleTensor l E n j hjn).map (pointFiniteReductionSectionFactors k l E n P).hom ≫ (pointFiniteReductionModuleCounit l E n j hjn).app ((pointFiniteReductionSectionComplex k l E n).obj P) ≫ DerivedCategory.Q.map q.hom = (e n j hn hj hjn).hom.app ⟨DerivedCategory.Q.obj P, hP⟩ ≫ (pointFiniteReductionSections k l E j).map (pointFiniteReductionSheafCounit k l E n j hjn P) ≫ (pointFiniteReductionSectionFactors k l E j ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom",
+  "statement": "theorem point_sections_finite_reduction_complex (_hl : IsUnit (l : k)) :\n    ∃ e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n),\n      (pointFiniteReductionBoundedAbove k l E n).ι ⋙\n          pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅\n        (pointFiniteReductionBoundedAbove k l E n).ι ⋙\n          pointFiniteReductionSheafTensor k l E n j hjn ⋙ pointFiniteReductionSections k l E j,\n    ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n),\n      ∀ (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ)\n        (_hbound : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero (P.X q))\n        (_hflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n          (R := pointFiniteReductionRingSheaf k l E n) (P.X q)),\n      ∃ hP : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj P),\n      ∃ q :\n        (pointFiniteReductionComplexTensor l E n j hjn).obj\n          ((pointFiniteReductionSectionComplex k l E n).obj P) ≅\n        (pointFiniteReductionSectionComplex k l E j).obj\n          ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P),\n      (∀ (a : ℤ) (b c : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))\n        (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj (P.X a)),\n        q.hom.f a\n          (pointFiniteReductionTensorGenerator l E n j hjn\n            ((pointFiniteReductionSectionComplex k l E n).obj P) a b c x) =\n          (b * c) • pointFiniteReductionSectionGenerator k l E n j hjn (P.X a) x) ∧\n      (pointFiniteReductionModuleTensor l E n j hjn).map\n          (pointFiniteReductionSectionFactors k l E n P).hom ≫\n        (pointFiniteReductionModuleCounit l E n j hjn).app\n          ((pointFiniteReductionSectionComplex k l E n).obj P) ≫\n        DerivedCategory.Q.map q.hom =\n      (e n j hn hj hjn).hom.app ⟨DerivedCategory.Q.obj P, hP⟩ ≫\n        (pointFiniteReductionSections k l E j).map\n          (pointFiniteReductionSheafCounit k l E n j hjn P) ≫\n        (pointFiniteReductionSectionFactors k l E j\n          ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom",
   "branch": "sheaf-dag",
   "by": "A7",
   "date": "2026-10-21"
@@ -102,21 +105,45 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
-  "result": "pass",
-  "landing": "20261021T012426-L-2189397",
+  "reviewer": "C-3df84",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261021T061705-L-1812936",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.point_sections_finite_reduction_bounded",
-   "WeilConjectures.point_sections_finite_reduction_complex",
-   "WeilConjectures.point_sections_finite_reduction_iso"
-  ],
-  "sorry_after": [
-   "WeilConjectures.point_sections_finite_reduction_complex",
-   "WeilConjectures.point_sections_finite_reduction_iso"
-  ]
+  "note": "independent cc review: delivered Data/SectionAlgebra/item/PointReductionUnits vs live item and PointReductionUnits; four item-node statements vs live (only complex changed, STATEMENT-DISPUTED, counterexample -e checked); original PointReductionUnits compiled against the delivered modules (fails, so the adaptation is forced); 5 direct importers compiled against the delivered .lbuild; #print axioms; each plain import removed and recompiled; elaborated types published vs delivered"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "T4 stage 2",
+  "old_statement": "theorem point_sections_finite_reduction_complex (_hl : IsUnit (l : k)) (e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n), (pointFiniteReductionBoundedAbove k l E n).ι ⋙ pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅ (pointFiniteReductionBoundedAbove k l E n).ι ⋙ pointFiniteReductionSheafTensor k l E n j hjn ⋙ pointFiniteReductionSections k l E j) : ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n), ∀ (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ) (_hbound : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero (P.X q)) (_hflat : ∀ q : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1} (R := pointFiniteReductionRingSheaf k l E n) (P.X q)), ∃ hP : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj P), ∃ q : (pointFiniteReductionComplexTensor l E n j hjn).obj ((pointFiniteReductionSectionComplex k l E n).obj P) ≅ (pointFiniteReductionSectionComplex k l E j).obj ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P), (∀ (a : ℤ) (b c : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j)) (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj (P.X a)), q.hom.f a (pointFiniteReductionTensorGenerator l E n j hjn ((pointFiniteReductionSectionComplex k l E n).obj P) a b c x) = (b * c) • pointFiniteReductionSectionGenerator k l E n j hjn (P.X a) x) ∧ (pointFiniteReductionModuleTensor l E n j hjn).map (pointFiniteReductionSectionFactors k l E n P).hom ≫ (pointFiniteReductionModuleCounit l E n j hjn).app ((pointFiniteReductionSectionComplex k l E n).obj P) ≫ DerivedCategory.Q.map q.hom = (e n j hn hj hjn).hom.app ⟨DerivedCategory.Q.obj P, hP⟩ ≫ (pointFiniteReductionSections k l E j).map (pointFiniteReductionSheafCounit k l E n j hjn P) ≫ (pointFiniteReductionSectionFactors k l E j ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom",
+  "what": "STATEMENT-DISPUTED: the old theorem asserted the normalized counit square for every family e. Multiplying a comparison by -1 gives another natural isomorphism and violates this square for l=3 and n=j=1 on a nonzero degree-zero free coefficient module. The blueprint and parent require existence of a canonical normalized comparison, not normalization of an arbitrary one. The repaired theorem existentially constructs such a family.",
+  "source": {
+   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+   "place": "Proof (1), the reductions of $P_{n+1}$ and $P_{\\bar y,n+1}$, where the point fibre $\\operatorname{Fib}_s=\\Gamma(s,-)$ of def-weil-finite-coefficient-point and the stalk at a geometric point are applied to a sheaf-level reduction isomorphism without a statement of their compatibility with $-\\otimes^{\\mathbf L}_{A_{n+1}}A_n$; the integral analogue is lem-pod-point-sections-derived-reduction"
+  },
+  "citers": [
+   {
+    "id": "lem-trf-point-sections-finite-reduction",
+    "holds": true,
+    "note": "The parent needs one normalized natural family, supplied directly by the repaired existential theorem; its signature is unchanged."
+   }
+  ],
+  "old_proof": [
+   {
+    "text": "On a bounded-above termwise flat complex, define the degreewise quotient comparison, prove the pure tensor generator equation and the universal counit square.",
+    "uses": [
+     "lem-trf-point-sections-finite-reduction-iso",
+     "lem-pc-derived-tensor-second-factor-functor",
+     "lem-pur-derived-change-of-rings"
+    ],
+    "elementary": false
+   }
+  ],
+  "old_proof_deps": [
+   "lem-trf-point-sections-finite-reduction-iso",
+   "lem-pc-derived-tensor-second-factor-functor",
+   "lem-pur-derived-change-of-rings"
+  ]
+ }
 }

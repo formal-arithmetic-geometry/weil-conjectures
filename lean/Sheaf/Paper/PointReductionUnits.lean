@@ -379,8 +379,8 @@ private theorem pointUnitSheafNormalization
               ).mapDerivedCategoryFactors.hom.app
                 ((E₀.mapHomologicalComplex (.up ℤ)).obj P) =
             DerivedCategory.Q.map ((a₀.mapHomologicalComplex (.up ℤ)).unit.app P) := by
-  let h := SheafOfModules.sheafRingDerivedCoefficientAdjunction φ
-  obtain ⟨a₀, ha₀, hd⟩ := h.choose_spec.choose_spec E₀ ho hm
+  obtain ⟨_, _, h⟩ := SheafOfModules.sheafRingDerivedCoefficientAdjunction φ
+  obtain ⟨a₀, ha₀, hd⟩ := h E₀ ho hm
   refine ⟨a₀, ?_, ?_⟩
   · intro M U x
     have hh := ha₀ M (SheafOfModules.changeOfRings φ M) (𝟙 _) U x
@@ -392,7 +392,8 @@ private theorem pointUnitSheafNormalization
   · obtain ⟨a, ha⟩ := hd LF ε hLF
     refine ⟨a, ?_⟩
     intro P hP hfP
-    exact pointUnitCochainNormalization E₀ _ a₀ LF ε a P (ha P hP hfP).2.1
+    obtain ⟨_, hp, _⟩ := ha P hP hfP
+    exact pointUnitCochainNormalization E₀ _ a₀ LF ε a P hp
 
 variable (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
@@ -603,13 +604,14 @@ def pointUnitFiniteCoefficientMap (n j : ℕ) (h : j ≤ n) :
 
 section
 attribute [local irreducible] pointFiniteReductionSheafExistence
+  pointFiniteReductionSheafModel
 /-- The object equation of the existing finite scalar-extension witness.
 Source: Stacks Tag 06YY (blueprint: def-trf-point-reduction-units). -/
 theorem pointUnitFiniteExtensionObj (n j : ℕ) (h : j ≤ n)
     (M : pointFiniteReductionSheaves D.k l E n) :
     (pointFiniteReductionSheafExtension D.k l E n j h).obj M =
       SheafOfModules.changeOfRings (pointUnitFiniteCoefficientMap D l E n j h) M := by
-  exact (pointFiniteReductionSheafExistence D.k l E n j h).choose_spec.choose M
+  exact (pointFiniteReductionSheafModel D.k l E n j h).objEq M
 end
 
 /-- Actual sheaf restriction for a pair of finite quotients.
@@ -722,6 +724,7 @@ theorem pointUnitFiniteModuleAdjunction (n j : ℕ) (h : j ≤ n) :
 section
 
 attribute [local irreducible] pointFiniteReductionSheafExistence
+  pointFiniteReductionSheafModel
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 
@@ -766,9 +769,9 @@ theorem pointUnitFiniteSheafAdjunction (n j : ℕ) (h : j ≤ n) :
   dsimp only [pointUnitFiniteDerivedRestriction, pointUnitFiniteRestriction,
     pointFiniteReductionSheafComplexTensor, pointFiniteReductionSheafCounit,
     pointFiniteReductionSheafExtension, pointFiniteReductionSheafTensor,
-    pointUnitFiniteCoefficientMap]
-  let z := pointFiniteReductionSheafExistence D.k l E n j h
-  convert! @pointUnitSheafNormalization
+    pointUnitFiniteCoefficientMap, pointFiniteReductionSheafEpsilon]
+  let z := pointFiniteReductionSheafModel D.k l E n j h
+  exact @pointUnitSheafNormalization
     (Scheme.ProEt (Spec (.of D.k))) inferInstance (pointFiniteReductionSiteSmall D.k)
     (ProEt.topology (Spec (.of D.k))) inferInstance
     (pointFiniteReductionLocalBijections D.k) (pointFiniteReductionGroupSheafify D.k)
@@ -778,12 +781,7 @@ theorem pointUnitFiniteSheafAdjunction (n j : ℕ) (h : j ≤ n) :
     (pointFiniteReductionSheafMap D.k l E n j h)
     (pointUnitFiniteRestrictionLimits D l E n j h)
     (pointUnitFiniteRestrictionColimits D l E n j h)
-    z.choose z.choose_spec.choose z.choose_spec.choose_spec.choose
-    z.choose_spec.choose_spec.choose_spec.choose
-    z.choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose
-    z.choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose_spec.choose
-    z.choose_spec.choose_spec.choose_spec.choose_spec.2.2.choose_spec.choose_spec.1
-    using 3
+    z.F z.objEq z.mapEq z.additive z.T z.ε z.universal
 
 end
 

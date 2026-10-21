@@ -46,9 +46,9 @@
   }
  ],
  "proof_origin": {
-  "by": "A7 stage 3",
+  "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
-  "place": "Proof (1)"
+  "place": "Proof (1); T4: final-point identity covers, ordinary tensor comparison and flat-model derived descent."
  },
  "id": "lem-trf-point-sections-finite-reduction-bounded",
  "title": "Boundedness after finite coefficient reduction",
@@ -65,19 +65,29 @@
  ],
  "proof": [
   {
-   "text": "Resolve a bounded-above module object by a bounded-above termwise flat complex and use the chosen derived tensor comparison to transfer the upper bound. For the sheaf component, apply the recorded ringed derived scalar-extension upper-bound theorem and identify its selected functor with the point-reduction witness; exact point sections preserve the upper bound, and the module-side tensor bound gives the homology vanishing clause.",
+   "text": "Use the bounded-above flat model constructed in the comparison proof. Ordinary additive sheaf extension preserves its zero terms above a bound. The K-flat counit and the model isomorphism identify its derived scalar extension with the image of this bounded-above complex, transferring the upper bound.",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pc-module-bounded-flat-kflat",
-    "lem-weil-pbc-ringed-tensor-cohomological-bounds"
+    "lem-trf-site-functorial-flat-resolution",
+    "lem-trf-point-finite-reduction-sheaf-model",
+    "lem-weil-pbc-independent-bounded-flat-kflat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Exact point sections preserve the derived upper bound. Apply the existing module derived-tensor upper-bound theorem to the degree-zero quotient coefficient complex, then express IsLE as homology vanishing.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "lem-trf-point-sections-finite-reduction-module-bound"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-module-bounded-flat-kflat",
-  "lem-weil-pbc-ringed-tensor-cohomological-bounds"
+  "lem-trf-point-finite-reduction-sheaf-model",
+  "lem-trf-point-sections-finite-reduction-module-bound",
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-point-proetale-sections-exact"
  ],
  "lean": {
   "existing": false,
@@ -102,12 +112,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
-  "result": "pass",
-  "landing": "20261021T012426-L-2189397",
+  "reviewer": "C-3df84",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261021T061705-L-1812936",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: delivered Data/SectionAlgebra/item/PointReductionUnits vs live item and PointReductionUnits; four item-node statements vs live (only complex changed, STATEMENT-DISPUTED, counterexample -e checked); original PointReductionUnits compiled against the delivered modules (fails, so the adaptation is forced); 5 direct importers compiled against the delivered .lbuild; #print axioms; each plain import removed and recompiled; elaborated types published vs delivered"
  },
  "lean_audit": {}
 }

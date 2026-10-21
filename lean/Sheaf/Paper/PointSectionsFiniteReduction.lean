@@ -3,344 +3,521 @@ Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 -/
 module
 
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
-public import Sheaf.Paper.PointSectionsFiniteness
-public import Sheaf.Paper.PointProEtaleSectionsExact
-public import Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients
-public import Sheaf.Algebra.Homology.DerivedTensorSecondFactorFunctor
-public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-public import Mathlib.Algebra.Category.ModuleCat.ChangeOfRingsExact
-public import Mathlib.CategoryTheory.Sites.ConstantSheaf
-
-import Sheaf.Paper.ConstantModuleSectionProperties
-import WeilConjectures.Algebra.Homology.BoundedFlatReplacement
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import WeilConjectures.Algebra.Homology.BoundedFlatKFlat
-import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Sheaf.Algebra.Homology.RingedTensorCohomologicalBounds
+public import Sheaf.Paper.PointSectionsFiniteReductionData
+import Sheaf.Paper.PointFiniteReductionSectionAlgebra
 import Sheaf.Paper.PointSectionsFiniteReductionModuleBound
-import Mathlib.AlgebraicGeometry.Sites.ConstantSheaf
-import Mathlib.RingTheory.Flat.Tensor
-import Mathlib.Algebra.Homology.DerivedCategory.Plus
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
+import Sheaf.Algebra.Homology.BoundedFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.Algebra.Homology.TensorColimitsIndependentCoefficients
+import WeilConjectures.FromJoel.Algebra.Homology.LeftResolution.CochainComplexMinus
+import WeilConjectures.FromJoel.Algebra.Homology.BifunctorSingle
+import WeilConjectures.CategoryTheory.Abelian.Flat.ModuleCat
+import Mathlib.Algebra.Homology.DerivedCategory.Fractions
 
-/-!
-# Point sections and finite coefficient reduction
+/-! # Point sections and finite coefficient reduction
 
-Source: literature/blueprint/main-20261015/blueprint/sec-trace-formula/
-`sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md`, Proof (1)
-(blueprint: lem-trf-point-sections-finite-reduction).
--/
+Source: Stacks Tags 093J, 064L, 06YY, 06Y6 and the blueprint proof (1).
+(blueprint: lem-trf-point-sections-finite-reduction). -/
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types false
 set_option linter.style.haveILetI false
 set_option linter.unusedVariables false
-universe u
-
+universe u v r
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 open AlgebraicGeometry.Scheme AlgebraicGeometry.ProEtale
 open scoped TensorProduct ChangeOfRings
-
 namespace WeilConjectures
-
-/-- The standard small model of the point site in the coefficient universe.
-Source: Stacks Tag 0982 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable instance pointFiniteReductionSiteSmall (k : Type u) [Field k] :
-    EssentiallySmall.{u + 1} (Scheme.ProEt (Spec (.of k))) :=
-  essentiallySmallSelf.{0, u, u + 1} _
-
-/-- Ring sheafification in the standard coefficient universe.
-Source: Stacks Tag 00W1 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable instance (priority := 2000) pointFiniteReductionRingSheafify
-    (k : Type u) [Field k] :
-    HasSheafify (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1} :=
-  hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
-
-/-- Additive sheafification in the same coefficient universe.
-Source: Stacks Tag 00W1 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable instance (priority := 2000) pointFiniteReductionGroupSheafify
-    (k : Type u) [Field k] :
-    HasSheafify (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{u + 1} :=
-  hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
-
-/-- The standard local-bijection characterization for additive sheafification.
-Source: Stacks Tag 00W1 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable instance (priority := 2000) pointFiniteReductionLocalBijections
-    (k : Type u) [Field k] :
-    (Scheme.ProEt.topology (Spec (.of k))).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
-  GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1, u + 1,
-    u + 2, u + 1, u + 1, u + 1} _
-
-/-- The constant coefficient ring sheaf at an algebraically closed point.
-Source: Stacks Tags 093J and 0982 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionRingSheaf (k : Type u) [Field k]
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
-    [FiniteDimensional ℚ_[l] E] (n : ℕ) :
-    Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1} :=
-  (constantSheaf.{u, u + 1, u + 1, u + 2} (Scheme.ProEt.topology (Spec (.of k)))
-    CommRingCat.{u + 1}).obj
-    (CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))
-
-/-- The quotient map between finite coefficient levels.
-Source: Stacks Tag 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionRingMap (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-    (n j : ℕ) (h : j ≤ n) :
-    ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n) →+*
-      ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j) :=
-  RingHom.ulift (Ideal.Quotient.factor (Ideal.pow_le_pow_right h))
-
-/-- The ordinary derived tensor functor for a finite coefficient quotient.
-Source: Stacks Tags 06Y6 and 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionModuleTensor (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
-    (n j : ℕ) (h : j ≤ n) :
-    DerivedCategory (ModuleCat.{u + 1}
-      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) ⥤
-    DerivedCategory (ModuleCat.{u + 1}
-      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))) :=
-  (Classical.choose (DerivedCategory.exists_derivedTensor_second_factor_functor
-    (pointFiniteReductionRingMap l E n j h)).2).obj
-    ((HomologicalComplex.single _ (ComplexShape.up ℤ) 0).obj
-      (ModuleCat.of (ULift.{u + 1, u}
-        (Padic.coefficientExtensionRing l E j))
-        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))))
-
-/-- Exactness of finite coefficient sections at kernels.
-Source: Stacks Tags 0982 and 0946 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable instance pointFiniteReductionSectionsLimits (k : Type u) [Field k]
-    [IsAlgClosed k] (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
-    PreservesFiniteLimits (pointFiniteSections k (Padic.coefficientExtensionRing l E n)) := by
-  let A := (constantSheaf.{u, u + 1, u + 1, u + 2} (Scheme.ProEt.topology (Spec (.of k)))
-    CommRingCat.{u + 1}).obj
-    (CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))
-  letI : PreservesFiniteLimits (pointModuleSections k A) :=
-    ((@point_proEtale_sections_exact.{u, u + 1, u + 1} k).2 A).1
-  exact inferInstanceAs (PreservesFiniteLimits
-    (pointModuleSections k _ ⋙ ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
-      (pointConstantSectionMap k (Padic.coefficientExtensionRing l E n))))
-
-/-- Exactness of finite coefficient sections at cokernels.
-Source: Stacks Tags 0982 and 0946 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable instance pointFiniteReductionSectionsColimits (k : Type u) [Field k]
-    [IsAlgClosed k] (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
-    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :
-    PreservesFiniteColimits (pointFiniteSections k (Padic.coefficientExtensionRing l E n)) := by
-  let A := (constantSheaf.{u, u + 1, u + 1, u + 2} (Scheme.ProEt.topology (Spec (.of k)))
-    CommRingCat.{u + 1}).obj
-    (CommRingCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n)))
-  letI : PreservesFiniteColimits (pointModuleSections k A) :=
-    ((@point_proEtale_sections_exact.{u, u + 1, u + 1} k).2 A).2.1
-  letI : PreservesFiniteColimits
-      (ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
-        (pointConstantSectionMap k (Padic.coefficientExtensionRing l E n))) := by
-    infer_instance
-  exact inferInstanceAs (PreservesFiniteColimits
-    (pointModuleSections k _ ⋙ ModuleCat.restrictScalars.{u + 1, u + 1, u + 1}
-      (pointConstantSectionMap k (Padic.coefficientExtensionRing l E n))))
-
-/-- Derived sections at the final point with the canonical finite coefficient action.
-Source: Stacks Tags 0946 and 0982 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionSections (k : Type u) [Field k] [IsAlgClosed k]
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
-    [FiniteDimensional ℚ_[l] E] (n : ℕ) :
-    DerivedCategory
-      (SheafOfModules.{u + 1}
-        (SheafOfModules.derivedChangeRingIndependentCoefficients.{u + 1, u + 1, u}
-          (Scheme.ProEt.topology (Spec (.of k))) (pointFiniteReductionRingSheaf k l E n))) ⥤
-      DerivedCategory (ModuleCat.{u + 1}
-        (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))) :=
-  (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).mapDerivedCategory
-
-/-- The existing coefficient module category, with the point-site size lift.
-Source: Stacks Tag 06Y6 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable abbrev pointFiniteReductionModules (l : ℕ) [Fact l.Prime]
-    (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) :=
-  ModuleCat.{u + 1} (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))
-
-/-- The existing module-sheaf category on the small pro-etale point site.
-Source: Stacks Tag 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable abbrev pointFiniteReductionSheaves (k : Type u) [Field k]
-    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]
-    [FiniteDimensional ℚ_[l] E] (n : ℕ) :=
-  SheafOfModules.{u + 1}
-    (SheafOfModules.derivedChangeRingIndependentCoefficients.{u + 1, u + 1, u}
-      (Scheme.ProEt.topology (Spec (.of k))) (pointFiniteReductionRingSheaf k l E n))
-
 variable (k : Type u) [Field k] (l : ℕ) [Fact l.Prime]
-  (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+  (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [IsAlgClosed k]
 
-/-- The canonical map of constant coefficient sheaves.
-Source: Stacks Tag 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionSheafMap (n j : ℕ) (h : j ≤ n) :=
-  (constantSheaf.{u, u + 1, u + 1, u + 2} (Scheme.ProEt.topology (Spec (.of k)))
-    CommRingCat.{u + 1}).map
-    (CommRingCat.ofHom (pointFiniteReductionRingMap l E n j h))
+/-- Keep the standard point-sheaf localization while module localization stays small.
+Source: Stacks Tag 05RU (blueprint: lem-trf-point-sections-finite-reduction). -/
+local instance finiteReductionStandardDerived (n : ℕ) :
+    HasDerivedCategory.{u + 2} (pointFiniteReductionSheaves k l E n) :=
+  HasDerivedCategory.standard _
 
-set_option linter.defProp false in
-/-- The universal derived-change-of-rings witness; both its objects and maps are fixed.
-Source: Stacks Tag 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionSheafExistence (n j : ℕ) (h : j ≤ n) :=
-  letI : EssentiallySmall.{u + 1} (Scheme.ProEt (Spec (.of k))) :=
-    essentiallySmallSelf.{0, u, u + 1} _
-  letI : HasSheafify (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{u + 1} :=
-    hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
-  letI : (Scheme.ProEt.topology (Spec (.of k))).WEqualsLocallyBijective
-      AddCommGrpCat.{u + 1} :=
-    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1, u + 1,
-      u + 2, u + 1, u + 1, u + 1} _
-  letI := HasDerivedCategory.standard (pointFiniteReductionSheaves k l E n)
-  letI := HasDerivedCategory.standard (pointFiniteReductionSheaves k l E j)
-  SheafOfModules.derivedChangeOfRingsIndependentCoefficients
-    (J := Scheme.ProEt.topology (Spec (.of k)))
-    (O := pointFiniteReductionRingSheaf k l E n)
-    (O' := pointFiniteReductionRingSheaf k l E j)
-    (pointFiniteReductionSheafMap k l E n j h)
+open SheafOfModules in
+private theorem SheafOfModules.finiteReductionBoundedFlatReplacement
+    {C : Type u} [Category.{v} C] [EssentiallySmall.{r} C]
+    {J : GrothendieckTopology C}
+    [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{r}]
+    [HasSheafify J AddCommGrpCat.{r}]
+    (R : Sheaf J CommRingCat.{r})
+    (G : CochainComplex (SheafOfModules.{r}
+      (derivedChangeRingIndependentCoefficients J R)) ℤ)
+    (a : ℤ) [G.IsStrictlyLE a] :
+    ∃ (P : CochainComplex (SheafOfModules.{r}
+        (derivedChangeRingIndependentCoefficients J R)) ℤ) (p : P ⟶ G),
+      P.IsStrictlyLE a ∧
+        (∀ i : ℤ, SheafOfModules.IsFlatOnSite (R := R) (P.X i)) ∧ QuasiIso p := by
+  let A := SheafOfModules.{r} (derivedChangeRingIndependentCoefficients J R)
+  let := isMonoidal_W_independentCoefficients R
+  let := monoidalCategory R
+  let := symmetricCategory R
+  let := tensorPreadditive R
+  have (M : A) : PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorLeft M) := by
+    have := tensorLeft_preservesColimits_independentCoefficients R M
+    exact preservesColimitsOfSize_shrink (MonoidalCategory.tensorLeft M)
+  have (M : A) : PreservesColimitsOfSize.{0, 0} (MonoidalCategory.tensorRight M) :=
+    preservesColimits_of_natIso (BraidedCategory.tensorLeftIsoTensorRight M)
+  have : ∀ X₁ X₂ X₃ : GradedObject ℤ A,
+      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := by infer_instance
+  have : ∀ X₁ X₂ X₃ : GradedObject ℤ A,
+      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := by infer_instance
+  have : ∀ X₁ X₂ X₃ X₄ : GradedObject ℤ A,
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := by infer_instance
+  let := hasFunctorialFlatResolution_kfi R
+  let Λ := (Classical.arbitrary (Abelian.LeftResolution
+    (ObjectProperty.flat.ι : _ ⥤ A))).reduced
+  let K : CochainComplex.Minus A := ⟨G, a, inferInstance⟩
+  have : (Λ.bicomplexFunctor.obj G).HasTotal (.up ℤ) :=
+    HomologicalComplex₂.hasTotal_of_isStrictlyLE _ a 0
+  let P := ((ObjectProperty.flat.ι : _ ⥤ A).mapHomologicalComplex (.up ℤ)).obj
+    ((Λ.bicomplexFunctor.obj G).total (.up ℤ))
+  have hb : CochainComplex.IsStrictlyLE P a := by
+    dsimp [P]
+    infer_instance
+  have hf (i : ℤ) : IsFlatOnSite (J := J) (R := R) (P.X i) := by
+    exact (exactFunctor _ _).prop_of_iso (siteSheafTensorRightIso R (P.X i)).symm
+      (((Λ.bicomplexFunctor.obj G).total (.up ℤ)).X i).property.2
+  exact ⟨P, Λ.totalπ K, hb,
+    hf, inferInstance⟩
 
-/-- Ordinary sheaf scalar extension from the universal witness.
-Source: Stacks Tag 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionSheafExtension (n j : ℕ) (h : j ≤ n) :
-    pointFiniteReductionSheaves k l E n ⥤ pointFiniteReductionSheaves k l E j :=
-  (pointFiniteReductionSheafExistence k l E n j h).choose
+omit [IsAlgClosed k] in
+private theorem finiteReductionFlatArrow (n : ℕ)
+    (K : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ)
+    (hK : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj K)) :
+    ∃ (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ) (p : P ⟶ K),
+      (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i)) ∧
+      (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+        (R := pointFiniteReductionRingSheaf k l E n) (P.X i)) ∧ QuasiIso p := by
+  obtain ⟨b, hb⟩ := hK
+  letI : K.IsLE b := (DerivedCategory.isLE_Q_obj_iff K b).1 hb
+  obtain ⟨P, p, hP, hf, hp⟩ :=
+    SheafOfModules.finiteReductionBoundedFlatReplacement
+      (pointFiniteReductionRingSheaf k l E n) (K.truncLE b) b
+  letI := hp
+  refine ⟨P, p ≫ K.ιTruncLE b, ⟨b, (P.isStrictlyLE_iff b).1 hP⟩, hf, ?_⟩
+  infer_instance
 
-/-- Additivity is part of the universal scalar-extension witness.
-Source: Stacks Tag 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable instance pointFiniteReductionSheafExtensionAdditive (n j : ℕ) (h : j ≤ n) :
-    (pointFiniteReductionSheafExtension k l E n j h).Additive :=
-  (pointFiniteReductionSheafExistence k l E n j h).choose_spec.choose_spec.choose_spec.choose
+omit [IsAlgClosed k] in
+private theorem finiteReductionFlatModel (n : ℕ)
+    (N : (pointFiniteReductionBoundedAbove k l E n).FullSubcategory) :
+    ∃ P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ,
+      (∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i)) ∧
+      (∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+        (R := pointFiniteReductionRingSheaf k l E n) (P.X i)) ∧
+      Nonempty (DerivedCategory.Q.obj P ≅ N.obj) := by
+  let K := DerivedCategory.Q.objPreimage N.obj
+  let e : DerivedCategory.Q.obj K ≅ N.obj := DerivedCategory.Q.objObjPreimageIso N.obj
+  have hK : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj K) := by
+    obtain ⟨b, hb⟩ := N.property
+    letI := hb
+    exact ⟨b, DerivedCategory.TStructure.t.isLE_of_iso e.symm b⟩
+  obtain ⟨P, p, hb, hf, hp⟩ := finiteReductionFlatArrow k l E n K hK
+  letI := hp
+  exact ⟨P, hb, hf, ⟨asIso (DerivedCategory.Q.map p) ≪≫ e⟩⟩
 
-/-- Derived scalar extension, retaining the same universal witness as its counit.
-Source: Stacks Tag 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionSheafTensor (n j : ℕ) (h : j ≤ n) :
-    DerivedCategory (pointFiniteReductionSheaves k l E n) ⥤
-      DerivedCategory (pointFiniteReductionSheaves k l E j) :=
-  (((pointFiniteReductionSheafExistence k l E n j h).choose_spec
-    ).choose_spec.choose_spec.choose_spec).2.2.choose
 
-/-- The universal sheaf-tensor computation map on a complex.
-Source: Stacks Tag 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionSheafCounit (n j : ℕ) (h : j ≤ n)
-    (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ) :
-    (pointFiniteReductionSheafTensor k l E n j h).obj (DerivedCategory.Q.obj P) ⟶
-      DerivedCategory.Q.obj
-        (((pointFiniteReductionSheafExtension k l E n j h).mapHomologicalComplex
-          (.up ℤ)).obj P) :=
-  (pointFiniteReductionSheafTensor k l E n j h).map
-      ((DerivedCategory.quotientCompQhIso (pointFiniteReductionSheaves k l E n)).inv.app P) ≫
-    ((((pointFiniteReductionSheafExistence k l E n j h).choose_spec
-      ).choose_spec.choose_spec.choose_spec).2.2.choose_spec.choose).app
-        ((HomotopyCategory.quotient _ (.up ℤ)).obj P) ≫
-    DerivedCategory.Qh.map
+private def finiteReductionOrdinaryIso (n j : ℕ) (h : j ≤ n) :
+    pointFiniteSections k (Padic.coefficientExtensionRing l E n) ⋙
+        ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+          (pointFiniteReductionRingMap l E n j h) ≅
+      pointFiniteReductionSheafExtension k l E n j h ⋙
+        pointFiniteSections k (Padic.coefficientExtensionRing l E j) :=
+  ((pointFiniteReductionSectionAlgebra k l E).2 n j h).choose
+
+private def finiteReductionMixedIso {R S : Type u} [CommRing R] [CommRing S]
+    (f : R →+* S) [(ModuleCat.extendScalars.{u, u, u} f).Additive] :
+    (((ModuleCat.mixedTensor f).flip.map₂CochainComplex).flip.obj
+      ((HomologicalComplex.single _ (.up ℤ) 0).obj (ModuleCat.of S S))) ≅
+        (ModuleCat.extendScalars.{u, u, u} f).mapHomologicalComplex (.up ℤ) :=
+  CochainComplex.map₂HomologicalComplexFlipObjSingleIso
+      (ModuleCat.mixedTensor f).flip (ModuleCat.of S S) ≪≫
+    NatIso.mapHomologicalComplex
+      (Functor.isoWhiskerLeft (ModuleCat.extendScalars.{u, u, u} f)
+        (MonoidalCategory.leftUnitorNatIso (ModuleCat.{u} S)) ≪≫
+          Functor.rightUnitor _) (.up ℤ)
+
+private theorem finiteReductionMixedIso_inv {R S : Type u} [CommRing R] [CommRing S]
+    (f : R →+* S) [(ModuleCat.extendScalars.{u, u, u} f).Additive]
+    (C : CochainComplex (ModuleCat.{u} R) ℤ) (a : ℤ) (y : (ModuleCat.extendScalars f).obj (C.X a)) :
+    ((finiteReductionMixedIso f).inv.app C).f a y =
+      (HomologicalComplex.ιMapBifunctorOrZero C
+        ((HomologicalComplex.single _ (.up ℤ) 0).obj (ModuleCat.of S S))
+        (ModuleCat.mixedTensor f).flip (.up ℤ) a 0 a)
+        ((1 : S) ⊗ₜ y) := by
+  simp only [finiteReductionMixedIso, Iso.trans_inv, NatTrans.comp_app,
+    HomologicalComplex.comp_f, ModuleCat.hom_comp, LinearMap.comp_apply,
+    CochainComplex.map₂HomologicalComplexFlipObjSingleIso_inv_app,
+    CochainComplex.mapBifunctorSingle₂Iso_inv]
+  change (HomologicalComplex.mapBifunctorFlipIso C
+    ((HomologicalComplex.single _ (.up ℤ) 0).obj (ModuleCat.of S S))
+    (ModuleCat.mixedTensor f).flip (.up ℤ)).hom.f a
+      ((CochainComplex.mapBifunctorSingle₁Iso (ModuleCat.mixedTensor f)
+        (ModuleCat.of S S) C).inv.f a
+          ((1 : S) ⊗ₜ[S] y)) = _
+  rw [CochainComplex.mapBifunctorSingle₁Iso_inv_f]
+  have hsingle : (HomologicalComplex.singleObjXSelf (.up ℤ) 0
+      (ModuleCat.of S S)).inv = 𝟙 (ModuleCat.of S S) := rfl
+  erw [hsingle, CategoryTheory.Functor.map_id, NatTrans.id_app, Category.id_comp]
+  rw [HomologicalComplex.ιMapBifunctorOrZero_eq _ _ _ _ a 0 a (by simp)]
+  have hf := HomologicalComplex.ι_mapBifunctorFlipIso_hom C
+    ((HomologicalComplex.single _ (.up ℤ) 0).obj (ModuleCat.of S S))
+    (ModuleCat.mixedTensor f).flip (.up ℤ) a 0 a (by simp)
+  have hs : ComplexShape.σ (.up ℤ) (.up ℤ) (.up ℤ) a 0 = 1 := by
+    change (a * 0).negOnePow = 1
+    simp
+  rw [hs, one_smul] at hf
+  exact congrArg (fun g ↦ g ((1 : S) ⊗ₜ[S] y)) hf
+
+private theorem finiteReductionMixedIso_hom {R S : Type u} [CommRing R] [CommRing S]
+    (f : R →+* S) [(ModuleCat.extendScalars.{u, u, u} f).Additive]
+    (C : CochainComplex (ModuleCat.{u} R) ℤ) (a : ℤ) (b : S)
+    (y : (ModuleCat.extendScalars f).obj (C.X a)) :
+    ((finiteReductionMixedIso f).hom.app C).f a
+      ((HomologicalComplex.ιMapBifunctorOrZero C
+        ((HomologicalComplex.single _ (.up ℤ) 0).obj (ModuleCat.of S S))
+        (ModuleCat.mixedTensor f).flip (.up ℤ) a 0 a) (b ⊗ₜ[S] y)) = b • y := by
+  let e := (finiteReductionMixedIso f).app C
+  let ι := HomologicalComplex.ιMapBifunctorOrZero C
+    ((HomologicalComplex.single _ (.up ℤ) 0).obj (ModuleCat.of S S))
+    (ModuleCat.mixedTensor f).flip (.up ℤ) a 0 a
+  have h1 : e.hom.f a (ι ((1 : S) ⊗ₜ[S] y)) = y := by
+    rw [← finiteReductionMixedIso_inv f C a y]
+    exact ConcreteCategory.congr_hom (HomologicalComplex.congr_hom e.inv_hom_id a) y
+  have hb : b ⊗ₜ[S] y = b • ((1 : S) ⊗ₜ[S] y) := by
+    simp only [TensorProduct.smul_tmul', smul_eq_mul, mul_one]
+  change e.hom.f a (ι (b ⊗ₜ[S] y)) = _
+  erw [hb, map_smul, map_smul, h1]
+  rfl
+
+private def finiteReductionComplexIso (n j : ℕ) (h : j ≤ n) :
+    pointFiniteReductionSectionComplex k l E n ⋙
+        pointFiniteReductionComplexTensor l E n j h ≅
+      pointFiniteReductionSheafComplexTensor k l E n j h ⋙
+        pointFiniteReductionSectionComplex k l E j := by
+  let A := ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j)
+  letI : (ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+      (pointFiniteReductionRingMap l E n j h)).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1}
+      (pointFiniteReductionRingMap l E n j h)).left_adjoint_additive
+  letI : (pointFiniteReductionSheafExtension k l E n j h).Additive :=
+    pointFiniteReductionSheafExtensionAdditive k l E n j h
+  letI : (pointFiniteSections k (Padic.coefficientExtensionRing l E j)).Additive :=
+    pointFiniteSectionsAdditive k (Padic.coefficientExtensionRing l E j)
+  letI : (pointFiniteSections k (Padic.coefficientExtensionRing l E n) ⋙
+      ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+        (pointFiniteReductionRingMap l E n j h)).Additive := inferInstance
+  letI hzeroLeft : (pointFiniteSections k (Padic.coefficientExtensionRing l E n) ⋙
+      ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+        (pointFiniteReductionRingMap l E n j h)).PreservesZeroMorphisms := inferInstance
+  letI hzero : (pointFiniteReductionSheafExtension k l E n j h ⋙
+      pointFiniteSections k (Padic.coefficientExtensionRing l E j)).PreservesZeroMorphisms := by
+    constructor
+    intro X Y
+    change (pointFiniteSections k (Padic.coefficientExtensionRing l E j)).map
+        ((pointFiniteReductionSheafExtension k l E n j h).map (0 : X ⟶ Y)) = _
+    rw [(pointFiniteReductionSheafExtension k l E n j h).map_zero]
+    exact (pointFiniteSections k (Padic.coefficientExtensionRing l E j)).map_zero _ _
+  let eOrd : pointFiniteSections k (Padic.coefficientExtensionRing l E n) ⋙
+      ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+        (pointFiniteReductionRingMap l E n j h) ≅
+      pointFiniteReductionSheafExtension k l E n j h ⋙
+        pointFiniteSections k (Padic.coefficientExtensionRing l E j) :=
+    finiteReductionOrdinaryIso k l E n j h
+  exact Functor.isoWhiskerLeft _
+      (finiteReductionMixedIso (pointFiniteReductionRingMap l E n j h)) ≪≫
+    (@NatIso.mapHomologicalComplex ℤ _ _ _ _ _ _ _ _ hzeroLeft hzero eOrd (.up ℤ))
+
+private theorem finiteReductionComplexIso_generator (n j : ℕ) (h : j ≤ n)
+    (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ) (a : ℤ)
+    (b c : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))
+    (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj (P.X a)) :
+    (((finiteReductionComplexIso k l E n j h).app P).hom.f a)
+        (pointFiniteReductionTensorGenerator l E n j h
+          ((pointFiniteReductionSectionComplex k l E n).obj P) a b c x) =
+      (b * c) • pointFiniteReductionSectionGenerator k l E n j h (P.X a) x := by
+  letI : (ModuleCat.extendScalars.{u + 1, u + 1, u + 1}
+      (pointFiniteReductionRingMap l E n j h)).Additive :=
+    (ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1}
+      (pointFiniteReductionRingMap l E n j h)).left_adjoint_additive
+  change (finiteReductionOrdinaryIso k l E n j h).hom.app (P.X a)
+    (((finiteReductionMixedIso (pointFiniteReductionRingMap l E n j h)).app
+      ((pointFiniteReductionSectionComplex k l E n).obj P)).hom.f a
+        (pointFiniteReductionTensorGenerator l E n j h
+          ((pointFiniteReductionSectionComplex k l E n).obj P) a b c x)) = _
+  dsimp only [pointFiniteReductionTensorGenerator]
+  erw [finiteReductionMixedIso_hom]
+  letI := (pointFiniteReductionRingMap l E n j h).toAlgebra
+  change (finiteReductionOrdinaryIso k l E n j h).hom.app (P.X a)
+    ((b * c) ⊗ₜ[_, pointFiniteReductionRingMap l E n j h] x) = _
+  exact ((pointFiniteReductionSectionAlgebra k l E).2 n j h).choose_spec (P.X a) (b * c) x
+
+attribute [local irreducible] pointFiniteReductionSheafExistence pointFiniteReductionSheafModel
+
+omit [IsAlgClosed k] in
+private theorem finiteReductionSheafCounitIso (n j : ℕ) (h : j ≤ n)
+    (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ)
+    (hb : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i))
+    (hf : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pointFiniteReductionRingSheaf k l E n) (P.X i)) :
+    IsIso (pointFiniteReductionSheafCounit k l E n j h P) := by
+  obtain ⟨b, hb⟩ := hb
+  letI : P.IsStrictlyLE b := (P.isStrictlyLE_iff b).2 hb
+  have hk := SheafOfModules.isKFlatIndependentCoefficients_of_boundedAbove_flatOnSite
+    (pointFiniteReductionRingSheaf k l E n) P b hf
+  letI := (pointFiniteReductionSheafModel k l E n j h).computes P hk
+  dsimp only [pointFiniteReductionSheafCounit]
+  apply IsIso.comp_isIso'
+  · infer_instance
+  apply IsIso.comp_isIso'
+  · exact (pointFiniteReductionSheafModel k l E n j h).computes P hk
+  apply IsIso.comp_isIso'
+  · exact (DerivedCategory.Qh.mapIso
       (((pointFiniteReductionSheafExtension k l E n j h).mapHomotopyCategoryFactors
-        (.up ℤ)).hom.app P) ≫
-    (DerivedCategory.quotientCompQhIso (pointFiniteReductionSheaves k l E j)).hom.app
-      (((pointFiniteReductionSheafExtension k l E n j h).mapHomologicalComplex (.up ℤ)).obj P)
+        (.up ℤ)).app P)).isIso_hom
+  exact ((DerivedCategory.quotientCompQhIso
+    (pointFiniteReductionSheaves k l E j)).app
+      (((pointFiniteReductionSheafExtension k l E n j h).mapHomologicalComplex
+        (.up ℤ)).obj P)).isIso_hom
 
-/-- The quotient coefficient complex in degree zero.
-Source: Stacks Tag 06Y6 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionCoefficientComplex (j : ℕ) :
-    CochainComplex (pointFiniteReductionModules l E j) ℤ :=
-  (HomologicalComplex.single _ (.up ℤ) 0).obj
-    (ModuleCat.of (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))
-      (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j)))
+private theorem finiteReductionModuleCounitIso (n j : ℕ) (h : j ≤ n)
+    (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ)
+    (hb : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i))
+    (hf : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pointFiniteReductionRingSheaf k l E n) (P.X i)) :
+    IsIso ((pointFiniteReductionModuleCounit l E n j h).app
+      ((pointFiniteReductionSectionComplex k l E n).obj P)) := by
+  let C := (pointFiniteReductionSectionComplex k l E n).obj P
+  obtain ⟨b, hb⟩ := hb
+  have hC : C.IsStrictlyLE b := by
+    rw [CochainComplex.isStrictlyLE_iff]
+    intro i hi
+    exact (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).map_isZero (hb i hi)
+  letI := hC
+  have hk : (HomologicalComplex.quasiIso _ (.up ℤ)).kFlat C :=
+    CochainComplex.kFlat_of_isStrictlyLE_of_flat C b (fun i ↦
+      (ModuleCat.flat_iff_flat _).2 ((pointFiniteReductionSectionAlgebra k l E).1
+        n (P.X i) (hf i)))
+  exact (DerivedCategory.exists_derivedTensor_second_factor_functor
+    (pointFiniteReductionRingMap l E n j h)).2.choose_spec.choose_spec.2.2.1
+      (pointFiniteReductionCoefficientComplex l E j) C hk
 
-/-- The actual mixed total-tensor complex computing ordinary reduction.
-Source: Stacks Tag 06Y6 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionComplexTensor (n j : ℕ) (h : j ≤ n) :
-    CochainComplex (pointFiniteReductionModules l E n) ℤ ⥤
-      CochainComplex (pointFiniteReductionModules l E j) ℤ :=
-  (((ModuleCat.mixedTensor (pointFiniteReductionRingMap l E n j h)).flip
-    ).map₂CochainComplex).flip.obj (pointFiniteReductionCoefficientComplex l E j)
+private def finiteReductionSheafCounitNat (n j : ℕ) (h : j ≤ n) :
+    DerivedCategory.Q ⋙ pointFiniteReductionSheafTensor k l E n j h ⟶
+      pointFiniteReductionSheafComplexTensor k l E n j h ⋙ DerivedCategory.Q :=
+  Functor.whiskerRight
+      (DerivedCategory.quotientCompQhIso (pointFiniteReductionSheaves k l E n)).inv _ ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient _ (.up ℤ))
+      (pointFiniteReductionSheafEpsilon k l E n j h) ≫
+    Functor.whiskerRight
+      ((pointFiniteReductionSheafExtension k l E n j h).mapHomotopyCategoryFactors
+        (.up ℤ)).hom DerivedCategory.Qh ≫
+    Functor.whiskerLeft (pointFiniteReductionSheafComplexTensor k l E n j h)
+      (DerivedCategory.quotientCompQhIso (pointFiniteReductionSheaves k l E j)).hom
 
-/-- The universal ordinary-tensor computation map, retained with the chosen functor.
-Source: Stacks Tag 06Y6 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionModuleCounit (n j : ℕ) (h : j ≤ n) :
-    DerivedCategory.Q ⋙ pointFiniteReductionModuleTensor l E n j h ⟶
-      pointFiniteReductionComplexTensor l E n j h ⋙ DerivedCategory.Q :=
-  (DerivedCategory.exists_derivedTensor_second_factor_functor
-    (pointFiniteReductionRingMap l E n j h)).2.choose_spec.choose
-    (pointFiniteReductionCoefficientComplex l E j)
+private def finiteReductionAlpha (n j : ℕ) (h : j ≤ n)
+    (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ)
+    (hb : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i))
+    (hf : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pointFiniteReductionRingSheaf k l E n) (P.X i)) :
+    (pointFiniteReductionModuleTensor l E n j h).obj
+        ((pointFiniteReductionSections k l E n).obj (DerivedCategory.Q.obj P)) ≅
+      (pointFiniteReductionSections k l E j).obj
+        ((pointFiniteReductionSheafTensor k l E n j h).obj (DerivedCategory.Q.obj P)) := by
+  letI := finiteReductionSheafCounitIso k l E n j h P hb hf
+  letI := finiteReductionModuleCounitIso k l E n j h P hb hf
+  exact (pointFiniteReductionModuleTensor l E n j h).mapIso
+      (pointFiniteReductionSectionFactors k l E n P) ≪≫
+    asIso ((pointFiniteReductionModuleCounit l E n j h).app
+      ((pointFiniteReductionSectionComplex k l E n).obj P)) ≪≫
+    DerivedCategory.Q.mapIso ((finiteReductionComplexIso k l E n j h).app P) ≪≫
+    (pointFiniteReductionSectionFactors k l E j
+      ((pointFiniteReductionSheafComplexTensor k l E n j h).obj P)).symm ≪≫
+    (pointFiniteReductionSections k l E j).mapIso
+      (asIso (pointFiniteReductionSheafCounit k l E n j h P)).symm
 
-/-- Termwise scalar extension, using the recorded ordinary sheaf extension.
-Source: Stacks Tag 06YY (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionSheafComplexTensor (n j : ℕ) (h : j ≤ n) :
-    CochainComplex (pointFiniteReductionSheaves k l E n) ℤ ⥤
-      CochainComplex (pointFiniteReductionSheaves k l E j) ℤ :=
-  (pointFiniteReductionSheafExtension k l E n j h).mapHomologicalComplex (.up ℤ)
+private theorem squareComp {C : Type*} [Category* C]
+    {X₀ X₁ X₂ Y₀ Y₁ Y₂ : C}
+    {a : X₀ ⟶ X₁} {b : X₁ ⟶ X₂} {a' : Y₀ ⟶ Y₁} {b' : Y₁ ⟶ Y₂}
+    {f₀ : X₀ ⟶ Y₀} {f₁ : X₁ ⟶ Y₁} {f₂ : X₂ ⟶ Y₂}
+    (ha : a ≫ f₁ = f₀ ≫ a') (hb : b ≫ f₂ = f₁ ≫ b') :
+    (a ≫ b) ≫ f₂ = f₀ ≫ (a' ≫ b') := by
+  rw [Category.assoc, hb, ← Category.assoc, ha, Category.assoc]
 
-/-- Termwise point sections, with the fixed quotient-coefficient action.
-Source: Stacks Tag 0946 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionSectionComplex (n : ℕ) :
-    CochainComplex (pointFiniteReductionSheaves k l E n) ℤ ⥤
-      CochainComplex (pointFiniteReductionModules l E n) ℤ :=
-  (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).mapHomologicalComplex (.up ℤ)
+private theorem mapSquare {C D : Type*} [Category* C] [Category* D]
+    (F : C ⥤ D) {X₀ X₁ Y₀ Y₁ : C} {a : X₀ ⟶ X₁} {b : Y₀ ⟶ Y₁}
+    {f₀ : X₀ ⟶ Y₀} {f₁ : X₁ ⟶ Y₁} (h : a ≫ f₁ = f₀ ≫ b) :
+    F.map a ≫ F.map f₁ = F.map f₀ ≫ F.map b := by
+  rw [← F.map_comp, h, F.map_comp]
 
-/-- The specified tensor generator in the degree-a summand of the mixed total complex.
-Source: Stacks Tag 06Y6 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionTensorGenerator (n j : ℕ) (h : j ≤ n)
-    (C : CochainComplex (pointFiniteReductionModules l E n) ℤ) (a : ℤ)
-    (b c : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j)) (x : C.X a) :
-    ((pointFiniteReductionComplexTensor l E n j h).obj C).X a :=
-  (HomologicalComplex.ιMapBifunctorOrZero C
-    (pointFiniteReductionCoefficientComplex l E j)
-    (ModuleCat.mixedTensor (pointFiniteReductionRingMap l E n j h)).flip
-    (.up ℤ) a 0 a)
-    (b ⊗ₜ (c ⊗ₜ[_, pointFiniteReductionRingMap l E n j h] x))
+private theorem inverseSquare {C : Type*} [Category* C]
+    {X Y X' Y' : C} (e : X ≅ Y) (e' : X' ≅ Y')
+    (f : X ⟶ X') (g : Y ⟶ Y') (h : f ≫ e'.hom = e.hom ≫ g) :
+    e.inv ≫ f = g ≫ e'.inv := by
+  have hh := congrArg (fun t ↦ e.inv ≫ t ≫ e'.inv) h
+  simpa only [Category.assoc, Iso.inv_hom_id_assoc, Iso.hom_inv_id,
+    Category.comp_id] using hh
 
-/-- The image of a section under the actual sheaf quotient unit, not a chosen map.
-Source: Stacks Tag 03EK (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionSectionGenerator (n j : ℕ) (h : j ≤ n)
-    (M : pointFiniteReductionSheaves k l E n)
-    (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj M) :
-    (pointFiniteSections k (Padic.coefficientExtensionRing l E j)).obj
-      ((pointFiniteReductionSheafExtension k l E n j h).obj M) := by
-  letI : EssentiallySmall.{u + 1} (Scheme.ProEt (Spec (.of k))) :=
-    essentiallySmallSelf.{0, u, u + 1} _
-  letI : HasSheafify (Scheme.ProEt.topology (Spec (.of k))) AddCommGrpCat.{u + 1} :=
-    hasSheafifyEssentiallySmallSite.{u, u + 1, u + 1, u + 2, u + 1} _ _
-  letI : (Scheme.ProEt.topology (Spec (.of k))).WEqualsLocallyBijective
-      AddCommGrpCat.{u + 1} :=
-    GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall.{u, u + 1, u + 1,
-      u + 2, u + 1, u + 1, u + 1} _
-  let y := (((PresheafOfModules.sheafificationAdjunction.{u + 1}
-      (J := Scheme.ProEt.topology (Spec (.of k)))
-      (R := SheafOfModules.derivedChangeRingIndependentCoefficients.{u + 1, u + 1, u}
-        (Scheme.ProEt.topology (Spec (.of k))) (pointFiniteReductionRingSheaf k l E j))
-      (𝟙 _)).unit.app
-        (SheafOfModules.changeOfRingsPresheaf.{u, u + 1, u + 1}
-          (pointFiniteReductionSheafMap k l E n j h) M)).app
-            (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))))
-      (((ModuleCat.extendRestrictScalarsAdj.{u + 1, u + 1, u + 1}
-        ((pointFiniteReductionSheafMap k l E n j h).hom.app
-          (op (Scheme.ProEt.mk (𝟙 (Spec (.of k)))))).hom).unit.app
-            (M.val.obj (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))))) x)
-  exact (eqToHom
-    ((pointFiniteReductionSheafExistence k l E n j h).choose_spec.choose M).symm).val.app
-      (op (Scheme.ProEt.mk (𝟙 (Spec (.of k))))) y
+private theorem finiteReductionAlpha_naturality (n j : ℕ) (h : j ≤ n)
+    {P P' : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ}
+    (hb : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i))
+    (hb' : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P'.X i))
+    (hf : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pointFiniteReductionRingSheaf k l E n) (P.X i))
+    (hf' : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pointFiniteReductionRingSheaf k l E n) (P'.X i)) (f : P ⟶ P') :
+    (finiteReductionAlpha k l E n j h P hb hf).hom ≫
+        (pointFiniteReductionSheafTensor k l E n j h ⋙
+          pointFiniteReductionSections k l E j).map (DerivedCategory.Q.map f) =
+      (pointFiniteReductionSections k l E n ⋙
+          pointFiniteReductionModuleTensor l E n j h).map (DerivedCategory.Q.map f) ≫
+        (finiteReductionAlpha k l E n j h P' hb' hf').hom := by
+  let L := pointFiniteReductionModuleTensor l E n j h
+  let G := pointFiniteReductionSections k l E j
+  let C := pointFiniteReductionSectionComplex k l E n
+  let B := pointFiniteReductionSheafComplexTensor k l E n j h
+  let c := pointFiniteReductionModuleCounit l E n j h
+  let s := pointFiniteReductionSectionFactorsNat k l E n
+  let s' := pointFiniteReductionSectionFactorsNat k l E j
+  letI := finiteReductionSheafCounitIso k l E n j h P hb hf
+  letI := finiteReductionSheafCounitIso k l E n j h P' hb' hf'
+  let eP := asIso (pointFiniteReductionSheafCounit k l E n j h P)
+  let eP' := asIso (pointFiniteReductionSheafCounit k l E n j h P')
+  have hs := mapSquare L (s.hom.naturality f).symm
+  have hc := (c.naturality (C.map f)).symm
+  have ht := mapSquare DerivedCategory.Q
+    ((finiteReductionComplexIso k l E n j h).hom.naturality f).symm
+  have hs' := (s'.inv.naturality (B.map f)).symm
+  have hi := inverseSquare eP eP'
+    ((pointFiniteReductionSheafTensor k l E n j h).map (DerivedCategory.Q.map f))
+    (DerivedCategory.Q.map (B.map f))
+    ((finiteReductionSheafCounitNat k l E n j h).naturality f)
+  have hi' := mapSquare G hi
+  exact squareComp hs (squareComp hc (squareComp ht (squareComp hs' hi')))
 
-/-- The exact-sections localization comparison at a complex.
-Source: Stacks Tag 0946 (blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable def pointFiniteReductionSectionFactors [IsAlgClosed k] (n : ℕ)
-    (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ) :
-    (pointFiniteReductionSections k l E n).obj (DerivedCategory.Q.obj P) ≅
-      DerivedCategory.Q.obj ((pointFiniteReductionSectionComplex k l E n).obj P) :=
-  (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).mapDerivedCategoryFactors.app P
+private theorem finiteReductionAlpha_derived (n j : ℕ) (h : j ≤ n)
+    (P P' : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ)
+    (hb : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i))
+    (hb' : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P'.X i))
+    (hf : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pointFiniteReductionRingSheaf k l E n) (P.X i))
+    (hf' : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pointFiniteReductionRingSheaf k l E n) (P'.X i))
+    (f : DerivedCategory.Q.obj P ⟶ DerivedCategory.Q.obj P') :
+    (finiteReductionAlpha k l E n j h P hb hf).hom ≫
+        (pointFiniteReductionSheafTensor k l E n j h ⋙
+          pointFiniteReductionSections k l E j).map f =
+      (pointFiniteReductionSections k l E n ⋙
+          pointFiniteReductionModuleTensor l E n j h).map f ≫
+        (finiteReductionAlpha k l E n j h P' hb' hf').hom := by
+  let F := pointFiniteReductionSections k l E n ⋙
+    pointFiniteReductionModuleTensor l E n j h
+  let H := pointFiniteReductionSheafTensor k l E n j h ⋙
+    pointFiniteReductionSections k l E j
+  obtain ⟨S, s, hs, g, hfac⟩ := DerivedCategory.right_fac f
+  have hsq : QuasiIso s := (DerivedCategory.isIso_Q_map_iff_quasiIso _ s).1 hs
+  have hS : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj S) := by
+    obtain ⟨b, hb⟩ := hb
+    letI : P.IsStrictlyLE b := (P.isStrictlyLE_iff b).2 hb
+    letI : (DerivedCategory.Q.obj P).IsLE b := by
+      rw [DerivedCategory.isLE_Q_obj_iff]
+      infer_instance
+    letI := hs
+    exact ⟨b, DerivedCategory.TStructure.t.isLE_of_iso
+      (asIso (DerivedCategory.Q.map s)).symm b⟩
+  obtain ⟨V, q, hbV, hfV, hq⟩ := finiteReductionFlatArrow k l E n S hS
+  letI := hq
+  letI := hsq
+  let a := q ≫ s
+  let b := q ≫ g
+  have ha := finiteReductionAlpha_naturality k l E n j h hbV hb hfV hf a
+  have hb := finiteReductionAlpha_naturality k l E n j h hbV hb' hfV hf' b
+  have hab : DerivedCategory.Q.map a ≫ f = DerivedCategory.Q.map b := by
+    simp [a, b, hfac, Functor.map_comp, Category.assoc]
+  apply (cancel_epi (F.map (DerivedCategory.Q.map a))).1
+  change F.map (DerivedCategory.Q.map a) ≫
+    (finiteReductionAlpha k l E n j h P _ hf).hom ≫ H.map f = _
+  change F.map (DerivedCategory.Q.map a) ≫
+    ((finiteReductionAlpha k l E n j h P _ hf).hom ≫ H.map f) =
+      F.map (DerivedCategory.Q.map a) ≫ F.map f ≫
+        (finiteReductionAlpha k l E n j h P' hb' hf').hom
+  change (finiteReductionAlpha k l E n j h V hbV hfV).hom ≫
+      H.map (DerivedCategory.Q.map a) =
+    F.map (DerivedCategory.Q.map a) ≫
+      (finiteReductionAlpha k l E n j h P _ hf).hom at ha
+  change (finiteReductionAlpha k l E n j h V hbV hfV).hom ≫
+      H.map (DerivedCategory.Q.map b) =
+    F.map (DerivedCategory.Q.map b) ≫
+      (finiteReductionAlpha k l E n j h P' hb' hf').hom at hb
+  rw [← Category.assoc, ← ha, Category.assoc, ← H.map_comp, hab, hb,
+    ← F.map_comp_assoc, hab]
 
-/-- Mathlib's bounded-above object property, specialized to the point sheaf category.
-Source: blueprint Proof (1), Stacks Tag 064L
-(blueprint: lem-trf-point-sections-finite-reduction). -/
-noncomputable abbrev pointFiniteReductionBoundedAbove (n : ℕ) :
-    ObjectProperty (DerivedCategory (pointFiniteReductionSheaves k l E n)) :=
-  (DerivedCategory.TStructure.t (C := pointFiniteReductionSheaves k l E n)).minus
+private def finiteReductionDerivedIso (n j : ℕ) (h : j ≤ n) :
+    (pointFiniteReductionBoundedAbove k l E n).ι ⋙
+        pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j h ≅
+      (pointFiniteReductionBoundedAbove k l E n).ι ⋙
+        pointFiniteReductionSheafTensor k l E n j h ⋙ pointFiniteReductionSections k l E j := by
+  choose P hb hf he using finiteReductionFlatModel k l E n
+  let e N := (he N).some
+  let F := pointFiniteReductionSections k l E n ⋙
+    pointFiniteReductionModuleTensor l E n j h
+  let H := pointFiniteReductionSheafTensor k l E n j h ⋙
+    pointFiniteReductionSections k l E j
+  exact NatIso.ofComponents
+    (fun N ↦ (F.mapIso (e N)).symm ≪≫
+      finiteReductionAlpha k l E n j h (P N) (hb N) (hf N) ≪≫ H.mapIso (e N))
+    (by
+      intro N N' f
+      have hn := finiteReductionAlpha_derived k l E n j h
+        (P N) (P N') (hb N) (hb N') (hf N) (hf N')
+        ((e N).hom ≫ f.hom ≫ (e N').inv)
+      change (finiteReductionAlpha k l E n j h (P N) (hb N) (hf N)).hom ≫
+        H.map ((e N).hom ≫ f.hom ≫ (e N').inv) =
+          F.map ((e N).hom ≫ f.hom ≫ (e N').inv) ≫
+            (finiteReductionAlpha k l E n j h (P N') (hb N') (hf N')).hom at hn
+      have hh := congrArg
+        (fun t ↦ F.map (e N).inv ≫ t ≫ H.map (e N').hom) hn
+      change F.map f.hom ≫
+          (F.map (e N').inv ≫
+            (finiteReductionAlpha k l E n j h (P N') (hb N') (hf N')).hom ≫
+              H.map (e N').hom) =
+        (F.map (e N).inv ≫
+          (finiteReductionAlpha k l E n j h (P N) (hb N) (hf N)).hom ≫
+            H.map (e N).hom) ≫ H.map f.hom
+      simpa only [Functor.map_comp, Category.assoc, Iso.map_hom_inv_id_assoc,
+        Iso.map_inv_hom_id_assoc, Iso.map_inv_hom_id, Category.comp_id] using hh.symm)
 
-variable [IsAlgClosed k]
+private theorem finiteReductionDerivedIso_app (n j : ℕ) (h : j ≤ n)
+    (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ)
+    (hb : ∃ b : ℤ, ∀ i : ℤ, b < i → IsZero (P.X i))
+    (hf : ∀ i : ℤ, SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}
+      (R := pointFiniteReductionRingSheaf k l E n) (P.X i))
+    (hP : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj P)) :
+    (finiteReductionDerivedIso k l E n j h).hom.app ⟨DerivedCategory.Q.obj P, hP⟩ =
+      (finiteReductionAlpha k l E n j h P hb hf).hom := by
+  let N : (pointFiniteReductionBoundedAbove k l E n).FullSubcategory :=
+    ⟨DerivedCategory.Q.obj P, hP⟩
+  let m := finiteReductionFlatModel k l E n N
+  let P' := m.choose
+  let hb' := m.choose_spec.1
+  let hf' := m.choose_spec.2.1
+  let e := m.choose_spec.2.2.some
+  let F := pointFiniteReductionSections k l E n ⋙
+    pointFiniteReductionModuleTensor l E n j h
+  let H := pointFiniteReductionSheafTensor k l E n j h ⋙
+    pointFiniteReductionSections k l E j
+  have hn := finiteReductionAlpha_derived k l E n j h P' P hb' hb hf' hf e.hom
+  change F.map e.inv ≫ (finiteReductionAlpha k l E n j h P' hb' hf').hom ≫
+    H.map e.hom = (finiteReductionAlpha k l E n j h P hb hf).hom
+  change (finiteReductionAlpha k l E n j h P' hb' hf').hom ≫ H.map e.hom =
+    F.map e.hom ≫ (finiteReductionAlpha k l E n j h P hb hf).hom at hn
+  rw [hn, ← F.map_comp_assoc, Iso.inv_hom_id, F.map_id, Category.id_comp]
 
 /-- Natural comparison on the bounded-above derived subcategory.
 Source: Steps 4--6 of the parent proof.
@@ -358,7 +535,7 @@ theorem point_sections_finite_reduction_iso (_hl : IsUnit (l : k)) :
         (pointFiniteReductionBoundedAbove k l E n).ι ⋙
           pointFiniteReductionSheafTensor k l E n j hjn ⋙
             pointFiniteReductionSections k l E j) := by
-  sorry
+  exact ⟨fun n j _ _ h ↦ finiteReductionDerivedIso k l E n j h⟩
 
 /-- Boundedness and vanishing after finite coefficient reduction.
 Source: Steps 4 and 7 of the parent proof.
@@ -382,18 +559,27 @@ theorem point_sections_finite_reduction_bounded (_hl : IsUnit (l : k)) :
   obtain ⟨b, hb⟩ := N.property
   have hSheaf : pointFiniteReductionBoundedAbove k l E j
       ((pointFiniteReductionSheafTensor k l E n j hjn).obj N.obj) := by
-    have h := (SheafOfModules.ringedTensorCohomologicalBounds
-      (pointFiniteReductionSheafMap k l E n j hjn) b).1 N.obj hb
-    have heq : pointFiniteReductionSheafTensor k l E n j hjn =
-        SheafOfModules.ringedDerivedScalarExtension
-          (pointFiniteReductionSheafMap k l E n j hjn) := by
-      unfold pointFiniteReductionSheafTensor SheafOfModules.ringedDerivedScalarExtension
-      rfl
-    rw [heq]
-    exact ⟨b, h⟩
-  have hsec : ((pointFiniteReductionSections k l E n).obj N.obj).IsLE b :=
-    (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).isLE_mapDerivedCategory_obj
-      N.obj b
+    obtain ⟨P, hbP, hfP, ⟨eP⟩⟩ := finiteReductionFlatModel k l E n N
+    let B := (pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P
+    obtain ⟨c, hc⟩ := hbP
+    have hB : B.IsStrictlyLE c := by
+      rw [CochainComplex.isStrictlyLE_iff]
+      intro i hi
+      exact (pointFiniteReductionSheafExtension k l E n j hjn).map_isZero (hc i hi)
+    letI := hB
+    letI : (DerivedCategory.Q.obj B).IsLE c :=
+      (DerivedCategory.isLE_Q_obj_iff B c).2 inferInstance
+    letI := finiteReductionSheafCounitIso k l E n j hjn P ⟨c, hc⟩ hfP
+    let e : DerivedCategory.Q.obj B ≅
+        (pointFiniteReductionSheafTensor k l E n j hjn).obj N.obj :=
+      (asIso (pointFiniteReductionSheafCounit k l E n j hjn P)).symm ≪≫
+      (pointFiniteReductionSheafTensor k l E n j hjn).mapIso eP
+    exact ⟨c, DerivedCategory.TStructure.t.isLE_of_iso e c⟩
+  have hsec : ((pointFiniteReductionSections k l E n).obj N.obj).IsLE b := by
+    letI := hb
+    let F : pointFiniteReductionSheaves k l E n ⥤ pointFiniteReductionModules l E n :=
+      pointFiniteSections k (Padic.coefficientExtensionRing l E n)
+    exact F.isLE_mapDerivedCategory_obj N.obj b
   have hC : (pointFiniteReductionCoefficientComplex l E j).IsStrictlyLE 0 := by
     rw [CochainComplex.isStrictlyLE_iff]
     intro q hq
@@ -420,12 +606,16 @@ Proof: apply the degreewise quotient-to-sections map to a bounded-above termwise
 The balanced tensor associator proves the pure tensor generator equation, while the universal
 counits and localization factors give the displayed counit square.
 -/
-theorem point_sections_finite_reduction_complex (_hl : IsUnit (l : k))
-    (e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n),
+/- STATEMENT-DISPUTED: the previous formulation asserted normalization for every
+natural isomorphism e. Multiplying the canonical comparison by a nonidentity unit
+preserves naturality but changes its normalization. The repaired statement constructs
+one normalized comparison, as required by the parent theorem. -/
+theorem point_sections_finite_reduction_complex (_hl : IsUnit (l : k)) :
+    ∃ e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n),
       (pointFiniteReductionBoundedAbove k l E n).ι ⋙
           pointFiniteReductionSections k l E n ⋙ pointFiniteReductionModuleTensor l E n j hjn ≅
         (pointFiniteReductionBoundedAbove k l E n).ι ⋙
-          pointFiniteReductionSheafTensor k l E n j hjn ⋙ pointFiniteReductionSections k l E j) :
+          pointFiniteReductionSheafTensor k l E n j hjn ⋙ pointFiniteReductionSections k l E j,
     ∀ (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n),
       ∀ (P : CochainComplex (pointFiniteReductionSheaves k l E n) ℤ)
         (_hbound : ∃ b : ℤ, ∀ q : ℤ, b < q → IsZero (P.X q))
@@ -453,7 +643,22 @@ theorem point_sections_finite_reduction_complex (_hl : IsUnit (l : k))
           (pointFiniteReductionSheafCounit k l E n j hjn P) ≫
         (pointFiniteReductionSectionFactors k l E j
           ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom := by
-  sorry
+  refine ⟨fun n j _ _ h ↦ finiteReductionDerivedIso k l E n j h, ?_⟩
+  intro n j hn hj h P hb hf
+  have hP : pointFiniteReductionBoundedAbove k l E n (DerivedCategory.Q.obj P) := by
+    obtain ⟨b, hb⟩ := hb
+    letI : P.IsStrictlyLE b := (P.isStrictlyLE_iff b).2 hb
+    exact ⟨b, (DerivedCategory.isLE_Q_obj_iff P b).2 inferInstance⟩
+  refine ⟨hP, (finiteReductionComplexIso k l E n j h).app P,
+    finiteReductionComplexIso_generator k l E n j h P, ?_⟩
+  rw [finiteReductionDerivedIso_app k l E n j h P hb hf hP]
+  letI := finiteReductionSheafCounitIso k l E n j h P hb hf
+  dsimp only [finiteReductionAlpha, Iso.trans_hom, Functor.mapIso_hom,
+    Iso.symm_hom, asIso_inv]
+  let G := pointFiniteReductionSections k l E j
+  simp only [asIso_hom, Category.assoc]
+  rw [← G.map_comp_assoc, IsIso.inv_hom_id, G.map_id, Category.id_comp,
+    Iso.inv_hom_id, Category.comp_id]
 
 
 /-- Sections at an algebraically closed point commute canonically with finite reduction.
@@ -468,42 +673,20 @@ it sends x to x; for n >= j >= i both iterated and direct reductions send the cl
 of x to its quotient section. The universal counits transport these equalities to
 D(A_i), under the usual tensor unit and associativity identifications.
 
-Proof (the node's eight steps):
-1. The DVR theorem (lem-weil-l-adic-extension-integers-dvr) shows every ideal is (pi^r),
-   with presentation
-   A_n/(pi^(n-r)); this includes the whole and zero ideals and proves Noetherianity.
-2. Use lem-cbc-continuous-functions-fpqc-sheaf and
-   lem-weil-pbc-constant-module-section-properties. Continuous functions to a discrete
-   ring form the constant ring sheaf by gluing
-   on their open fibres. Its sections on Spec k are the coefficient ring itself.
-   Constant exactness and the balanced tensor maps identify reduction with F/pi^j F.
-   Exact sections of the image and cokernel sequences identify Gamma(F)/pi^j Gamma(F)
-   with Gamma(F/pi^j F), by the actual quotient-section map.
-3. Use def-pc-flat-sheaf-modules and lem-weil-pbc-flat-fg-ideal-criterion.
-   For each ideal (pi^r), flatness of F and exact sections give injectivity of
-   (pi^r) tensor Gamma(F) into Gamma(F). The finitely generated ideal criterion
-   proves flatness of Gamma(F).
-4. Use lem-pc-kflat-bounded-flat-replacement, lem-pc-bounded-above-flat-kflat-site
-   and lem-pc-module-bounded-flat-kflat. Good truncation gives a bounded-above
-   representative. Bounded flat replacement
-   gives P with flat terms; P and Gamma(P) are K-flat by the site and module criteria.
-5. Use lem-pur-derived-change-of-rings and lem-pc-derived-tensor-second-factor-functor.
-   Both derived reductions are computed by their universal counits on these models.
-   The degreewise quotient-section map is a chain isomorphism and preserves A_j actions.
-6. Use lem-weil-pbc-bounded-below-cochain-localization and
-   lem-weil-pbc-localization-universal-property. Functorial flat replacement and its
-   natural augmentation give commuting squares
-   for chain maps and inverted quasi-isomorphisms. Bounded-above localization, obtained
-   by opposite-category degree reversal from bounded-below localization, descends
-   these squares. Comparing any other flat model through its replacement proves
-   resolution independence and the displayed normalization on every flat model.
-7. P tensor A_j stays bounded above and termwise flat over (A_j)_t; the balanced
-   tensor associator proves flatness. Its sections remain flat. Thus successive
-   reductions use the same flat model and stay in the bounded-above domain.
-8. For j=n the quotient-section map is the identity. For n >= j >= i the tensor
-   associator sends ((x tensor b) tensor c) to x tensor bc. Both paths send [[x]]
-   to the same quotient section. They agree degreewise and descend through the
-   canonical counits to the claimed identity and successive-reduction compatibility.
+Proof: every covering sieve at the final point contains its identity, so sheafification
+is bijective there. The constant-section ring map is consequently an isomorphism.
+The local equational criterion for flatness becomes global at the final point, and
+transport of tensor products across these ring isomorphisms gives the ordinary
+comparison with its pure-tensor formula. Good truncation and the total of a
+functorial flat resolution produce bounded-above flat models. The site and module
+K-flat criteria make both universal derived counits invertible on these models.
+The ordinary comparison therefore gives an isomorphism between their derived
+images. Naturality for chain maps, fractions for derived morphisms, and another
+bounded-above flat replacement show independence of the model and give naturality
+on the bounded-above derived subcategory. Its value on every flat model is the
+explicit composite of the counits and ordinary comparison, proving the displayed
+normalization. Tensoring preserves the upper bound of these models, and the
+existing module tensor upper-bound theorem gives the stated homology vanishing.
 -/
 theorem point_sections_finite_reduction (_hl : IsUnit (l : k)) :
     ∃ e : ∀ (n j : ℕ) (_hn : 1 ≤ n) (_hj : 1 ≤ j) (hjn : j ≤ n),
@@ -545,11 +728,11 @@ theorem point_sections_finite_reduction (_hl : IsUnit (l : k)) :
           (pointFiniteReductionSheafCounit k l E n j hjn P) ≫
         (pointFiniteReductionSectionFactors k l E j
           ((pointFiniteReductionSheafComplexTensor k l E n j hjn).obj P)).hom := by
-  obtain ⟨e⟩ := point_sections_finite_reduction_iso k l E _hl
+  obtain ⟨e, hcomplex⟩ := point_sections_finite_reduction_complex k l E _hl
   have hbounded := fun (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n) ↦
     point_sections_finite_reduction_bounded k l E _hl n j hn hj hjn
   have hcomplex := fun (n j : ℕ) (hn : 1 ≤ n) (hj : 1 ≤ j) (hjn : j ≤ n) ↦
-    point_sections_finite_reduction_complex k l E _hl e n j hn hj hjn
+    hcomplex n j hn hj hjn
   refine ⟨e, ?_⟩
   intro n j hn hj hjn
   exact ⟨hbounded n j hn hj hjn, hcomplex n j hn hj hjn⟩

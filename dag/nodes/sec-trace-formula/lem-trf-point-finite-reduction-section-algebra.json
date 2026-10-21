@@ -1,0 +1,134 @@
+{
+ "id": "lem-trf-point-finite-reduction-section-algebra",
+ "kind": "statement",
+ "title": "Flat point sections and normalized ordinary scalar extension",
+ "statement": "theorem pointFiniteReductionSectionAlgebra (k : Type u) [Field k] [IsAlgClosed k]\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] :\n    (∀ (n : ℕ) (M : pointFiniteReductionSheaves k l E n),\n      SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n        (R := pointFiniteReductionRingSheaf k l E n) M →\n      Module.Flat (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))\n        ((pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj M)) ∧\n    ∀ (n j : ℕ) (h : j ≤ n),\n      ∃ e : pointFiniteSections k (Padic.coefficientExtensionRing l E n) ⋙\n          ModuleCat.extendScalars.{u + 1, u + 1, u + 1} (pointFiniteReductionRingMap l E n j h) ≅\n        pointFiniteReductionSheafExtension k l E n j h ⋙\n          pointFiniteSections k (Padic.coefficientExtensionRing l E j),\n        ∀ (M : pointFiniteReductionSheaves k l E n)\n          (b : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))\n          (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj M),\n          e.hom.app M (b ⊗ₜ[_, pointFiniteReductionRingMap l E n j h] x) =\n            b • pointFiniteReductionSectionGenerator k l E n j h M x\nDefinitions and coefficient conventions: [def-weil-algebraic-closure], [def-weil-affine-spectrum], [def-weil-pbc-proetale-site], [lem-weil-point-proetale-sections-exact], [def-weil-l-adic-coefficient-extension], [def-weil-abstract-derived-category], [lem-pur-derived-change-of-rings], [def-weil-pbc-constant-sheaf].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+  "place": "Proof (1), the reductions of $P_{n+1}$ and $P_{\\bar y,n+1}$, where the point fibre $\\operatorname{Fib}_s=\\Gamma(s,-)$ of def-weil-finite-coefficient-point and the stalk at a geometric point are applied to a sheaf-level reduction isomorphism without a statement of their compatibility with $-\\otimes^{\\mathbf L}_{A_{n+1}}A_n$; the integral analogue is lem-pod-point-sections-derived-reduction"
+ },
+ "stmt_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-affine-spectrum",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-point-proetale-sections-exact",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-abstract-derived-category",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-constant-sheaf"
+ ],
+ "proof": [
+  {
+   "text": "The constant presheaf sheafification unit at the final point is bijective, hence the coefficient-to-final-sections ring map is a ring equivalence.",
+   "uses": [
+    "lem-trf-point-sheafification-final"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a finite linear relation in the sections of a flat module sheaf, use the local equational criterion. The covering sieve contains the identity, so the witnesses are global. Transport their coefficients through the constant-section ring equivalence. The ordinary module equational criterion proves flatness of the sections.",
+   "uses": [
+    "lem-trf-point-cover-identity",
+    "lem-weil-pbc-flat-local-relations-universes"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the tensor product through the source and target constant-section ring equivalences. Final sections of the sheafified tensor presheaf equal its presheaf sections, and the prescribed ordinary object equation identifies them with the chosen extension. Naturality follows from the sheafification unit and the prescribed map equation. On b tensor x this is exactly b times the sheafification-unit section x. The proof also covers n=j, j=0, the zero module and infinite modules.",
+   "uses": [
+    "lem-trf-point-sheafification-final",
+    "lem-trf-point-finite-reduction-sheaf-model"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-cover-identity",
+  "lem-trf-point-finite-reduction-sheaf-model",
+  "lem-trf-point-sheafification-final",
+  "lem-weil-pbc-flat-local-relations-universes"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
+  "place": "Proof (1), the reductions of $P_{n+1}$ and $P_{\\bar y,n+1}$, where the point fibre $\\operatorname{Fib}_s=\\Gamma(s,-)$ of def-weil-finite-coefficient-point and the stalk at a geometric point are applied to a sheaf-level reduction isomorphism without a statement of their compatibility with $-\\otimes^{\\mathbf L}_{A_{n+1}}A_n$; the integral analogue is lem-pod-point-sections-derived-reduction"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every covering sieve of the final pro etale object over an algebraically closed field contains the identity and sheafification is bijective on its sections",
+   "results": "8 hits: StandardEtalePresentation.lift_bijective, AlgebraicGeometry.Scheme.etaleTopology, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk', AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-21",
+   "verdict": "No exact match; the displayed general results do not state this point-site comparison or its typed universal pair."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sieve\", \"GrothendieckTopology\"",
+   "results": "12 hits: CategoryTheory.GrothendieckTopology.sieves, CategoryTheory.GrothendieckTopology.instDFunLikeSetSieve, CategoryTheory.GrothendieckTopology.Cover.instCoeOutSieve, CategoryTheory.GrothendieckTopology.sieves_copy, CategoryTheory.GrothendieckTopology.mem_sieves_iff_coe, CategoryTheory.GrothendieckTopology.mem_iff_isSheafFor_closedSieves, CategoryTheory.GrothendieckTopology.Cover.preOneHypercover_sieve₀, CategoryTheory.GrothendieckTopology.Cover.preOneHypercover_sieve₁",
+   "date": "2026-10-21",
+   "verdict": "No exact match; the displayed general results do not state this point-site comparison or its typed universal pair."
+  },
+  {
+   "tool": "grep",
+   "query": "id_mem_of_mem_topology_of_iso|bijective_toSheafify_app_of_iso",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact match; the displayed general results do not state this point-site comparison or its typed universal pair."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections at an algebraically closed pro etale point preserve flat modules and commute with extension of scalars",
+   "results": "8 hits: Module.Flat.of_isLocalizedModule, Algebra.FormallyUnramified.flat_of_restrictScalars, Module.Flat.localizedModule, ModuleCat.preservesFiniteLimits_extendScalars_of_flat, AlgebraicGeometry.Scheme.Γevaluation, AlgebraicGeometry.Flat.flat_of_affine_subset, Algebra.Smooth.flat, AlgebraicGeometry.Flat.instMorphismRestrict",
+   "date": "2026-10-21",
+   "verdict": "No exact match for this point-site construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsFiniteReduction",
+  "date": "2026-10-21",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-point-sections-finite-reduction",
+   "place": "Proof (1), point-site tensor and bounded flat-model comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.PointFiniteReductionSectionAlgebra",
+  "file": "lean/Sheaf/Paper/PointFiniteReductionSectionAlgebra.lean",
+  "declaration": "WeilConjectures.pointFiniteReductionSectionAlgebra",
+  "statement": "theorem pointFiniteReductionSectionAlgebra (k : Type u) [Field k] [IsAlgClosed k]\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E]\n    [FiniteDimensional ℚ_[l] E] :\n    (∀ (n : ℕ) (M : pointFiniteReductionSheaves k l E n),\n      SheafOfModules.IsFlatOnSite.{u + 1, u, u + 1, u + 1}\n        (R := pointFiniteReductionRingSheaf k l E n) M →\n      Module.Flat (ULift.{u + 1, u} (Padic.coefficientExtensionRing l E n))\n        ((pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj M)) ∧\n    ∀ (n j : ℕ) (h : j ≤ n),\n      ∃ e : pointFiniteSections k (Padic.coefficientExtensionRing l E n) ⋙\n          ModuleCat.extendScalars.{u + 1, u + 1, u + 1} (pointFiniteReductionRingMap l E n j h) ≅\n        pointFiniteReductionSheafExtension k l E n j h ⋙\n          pointFiniteSections k (Padic.coefficientExtensionRing l E j),\n        ∀ (M : pointFiniteReductionSheaves k l E n)\n          (b : ULift.{u + 1, u} (Padic.coefficientExtensionRing l E j))\n          (x : (pointFiniteSections k (Padic.coefficientExtensionRing l E n)).obj M),\n          e.hom.app M (b ⊗ₜ[_, pointFiniteReductionRingMap l E n j h] x) =\n            b • pointFiniteReductionSectionGenerator k l E n j h M x",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3df84",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261021T061705-L-1812936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3df84",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261021T061705-L-1812936",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/SectionAlgebra/item/PointReductionUnits vs live item and PointReductionUnits; four item-node statements vs live (only complex changed, STATEMENT-DISPUTED, counterexample -e checked); original PointReductionUnits compiled against the delivered modules (fails, so the adaptation is forced); 5 direct importers compiled against the delivered .lbuild; #print axioms; each plain import removed and recompiled; elaborated types published vs delivered"
+ }
+}

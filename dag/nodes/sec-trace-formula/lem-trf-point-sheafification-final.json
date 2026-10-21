@@ -1,0 +1,108 @@
+{
+ "id": "lem-trf-point-sheafification-final",
+ "kind": "statement",
+ "title": "Sheafification is bijective on final point sections",
+ "statement": "Let K be algebraically closed and e : X ≅ Spec K. Let A be a concrete category with pro-etale sheafification, sheaf composition with its forgetful functor, and preservation of sheafification by that forgetful functor, as in the attached declaration. For every A-valued presheaf G, the sheafification unit G → G^a is bijective on sections over id_X.\nDefinitions and coefficient conventions: [def-weil-pbc-proetale-site], [def-weil-pbc-sheafification].",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/AlgClosedFieldSiteColimits.lean",
+  "place": "bijective_toSheafify_app_of_iso, proof"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "def-weil-pbc-sheafification"
+ ],
+ "proof": [
+  {
+   "text": "For injectivity, apply identity containment to the covering equalizer sieve of two sections with equal sheafifications. For surjectivity, apply it to the covering image sieve of a section of the sheafification. In both cases the local witness lies at the identity itself.",
+   "uses": [
+    "lem-trf-point-cover-identity"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-point-cover-identity"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/AlgClosedFieldSiteColimits.lean",
+  "place": "bijective_toSheafify_app_of_iso, proof"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Every covering sieve of the final pro etale object over an algebraically closed field contains the identity and sheafification is bijective on its sections",
+   "results": "8 hits: StandardEtalePresentation.lift_bijective, AlgebraicGeometry.Scheme.etaleTopology, LightProfinite.instWEqualsLocallyBijectiveCoherentTopology, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.mk', AlgebraicGeometry.Scheme.smallEtaleTopology, CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall, AlgebraicGeometry.Scheme.etalePretopology, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful",
+   "date": "2026-10-21",
+   "verdict": "No exact match; the displayed general results do not state this point-site comparison or its typed universal pair."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Sieve\", \"GrothendieckTopology\"",
+   "results": "12 hits: CategoryTheory.GrothendieckTopology.sieves, CategoryTheory.GrothendieckTopology.instDFunLikeSetSieve, CategoryTheory.GrothendieckTopology.Cover.instCoeOutSieve, CategoryTheory.GrothendieckTopology.sieves_copy, CategoryTheory.GrothendieckTopology.mem_sieves_iff_coe, CategoryTheory.GrothendieckTopology.mem_iff_isSheafFor_closedSieves, CategoryTheory.GrothendieckTopology.Cover.preOneHypercover_sieve₀, CategoryTheory.GrothendieckTopology.Cover.preOneHypercover_sieve₁",
+   "date": "2026-10-21",
+   "verdict": "No exact match; the displayed general results do not state this point-site comparison or its typed universal pair."
+  },
+  {
+   "tool": "grep",
+   "query": "id_mem_of_mem_topology_of_iso|bijective_toSheafify_app_of_iso",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact match; the displayed general results do not state this point-site comparison or its typed universal pair."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Every covering sieve of the terminal object of the pro etale site over an algebraically closed field contains the identity",
+   "results": "8 hits: CategoryTheory.GrothendieckTopology.Cover, CategoryTheory.GrothendieckTopology.covering_iff_covers_id, CategoryTheory.Precoverage.coverings, CategoryTheory.GrothendieckTopology.coversTop_iff_of_isTerminal, CategoryTheory.GrothendieckTopology.top_covering, CategoryTheory.GrothendieckTopology.Cover.pullbackId, CategoryTheory.Sheaf.isTerminalOfBotCover, CategoryTheory.GrothendieckTopology.covering_of_eq_top",
+   "date": "2026-10-21",
+   "verdict": "No exact match for this point-site construction."
+  }
+ ],
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.PointSectionsFiniteReduction",
+  "date": "2026-10-21",
+  "group": "T4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-trf-point-sections-finite-reduction",
+   "place": "Proof (1), point-site tensor and bounded flat-model comparison",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-sf-compatibility",
+ "lean": {
+  "existing": true,
+  "module": "WeilConjectures.SixFunctors.ProEtale.AlgClosedFieldSiteColimits",
+  "declaration": "AlgebraicGeometry.ProEtale.bijective_toSheafify_app_of_iso",
+  "statement": "lemma bijective_toSheafify_app_of_iso (e : X ≅ Spec (.of K)) (G : X.ProEtᵒᵖ ⥤ A) :\n    Function.Bijective ((toSheafify (Scheme.ProEt.topology X) G).app\n      (op (Scheme.ProEt.mk (𝟙 X))))",
+  "branch": "sheaf-dag",
+  "by": "T4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3df84",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261021T061705-L-1812936",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-3df84",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261021T061705-L-1812936",
+  "kind": "interface",
+  "note": "independent cc review: delivered Data/SectionAlgebra/item/PointReductionUnits vs live item and PointReductionUnits; four item-node statements vs live (only complex changed, STATEMENT-DISPUTED, counterexample -e checked); original PointReductionUnits compiled against the delivered modules (fails, so the adaptation is forced); 5 direct importers compiled against the delivered .lbuild; #print axioms; each plain import removed and recompiled; elaborated types published vs delivered"
+ }
+}

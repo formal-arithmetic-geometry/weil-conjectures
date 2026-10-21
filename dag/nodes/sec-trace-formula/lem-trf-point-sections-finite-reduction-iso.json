@@ -46,9 +46,9 @@
   }
  ],
  "proof_origin": {
-  "by": "A7 stage 3",
+  "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-prop-trace-adic/prop-trf-adic-coefficient-morphism-systems.proof.md",
-  "place": "Proof (1)"
+  "place": "Proof (1); T4: final-point identity covers, ordinary tensor comparison and flat-model derived descent."
  },
  "id": "lem-trf-point-sections-finite-reduction-iso",
  "title": "Natural bounded-above point-sections comparison",
@@ -65,16 +65,39 @@
  ],
  "proof": [
   {
-   "text": "Resolve bounded-above objects by flat complexes and descend the degreewise quotient-to-sections chain comparison through derived localization.",
+   "text": "Good upper truncation and the reduced bicomplex total of a functorial flat resolution give a bounded-above flat complex mapping quasi-isomorphically to every bounded-above representative. Colimit preservation makes the total available; the categorical-flat/site-flat tensor comparison retains flatness of every term.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
+    "lem-trf-site-functorial-flat-resolution",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The ordinary comparison is an isomorphism of complexes and its pure tensor equation is preserved by the degree-zero mixed-tensor unitor. Sections are termwise flat. Both bounded-above flat complexes are K-flat, so the sheaf and module universal derived counits are invertible.",
+   "uses": [
+    "lem-trf-point-finite-reduction-section-algebra",
+    "lem-trf-point-finite-reduction-sheaf-model",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pc-module-bounded-flat-kflat",
+    "lem-pc-derived-tensor-second-factor-functor",
     "lem-weil-point-proetale-sections-exact"
    ],
    "elementary": false
+  },
+  {
+   "text": "Compose sections factors, module counit, ordinary complex comparison, inverse target sections factors and inverse sheaf counit. Their naturality squares compose for chain maps. Represent any derived morphism by a right fraction and replace its middle complex by a bounded-above flat complex; cancel the invertible denominator to get naturality for derived morphisms. Transport along chosen model isomorphisms. A second application of naturality proves agreement on every bounded-above flat model.",
+   "uses": [],
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-pur-derived-change-of-rings",
+  "lem-pc-derived-tensor-second-factor-functor",
+  "lem-pc-module-bounded-flat-kflat",
+  "lem-trf-point-finite-reduction-section-algebra",
+  "lem-trf-point-finite-reduction-sheaf-model",
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "lem-weil-point-proetale-sections-exact"
  ],
  "lean": {
@@ -100,21 +123,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "R1",
-  "result": "pass",
-  "landing": "20261021T012426-L-2189397",
+  "reviewer": "C-3df84",
+  "group": "T4",
+  "result": "fix",
+  "landing": "20261021T061705-L-1812936",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.point_sections_finite_reduction_bounded",
-   "WeilConjectures.point_sections_finite_reduction_complex",
-   "WeilConjectures.point_sections_finite_reduction_iso"
-  ],
-  "sorry_after": [
-   "WeilConjectures.point_sections_finite_reduction_complex",
-   "WeilConjectures.point_sections_finite_reduction_iso"
-  ]
+  "note": "independent cc review: delivered Data/SectionAlgebra/item/PointReductionUnits vs live item and PointReductionUnits; four item-node statements vs live (only complex changed, STATEMENT-DISPUTED, counterexample -e checked); original PointReductionUnits compiled against the delivered modules (fails, so the adaptation is forced); 5 direct importers compiled against the delivered .lbuild; #print axioms; each plain import removed and recompiled; elaborated types published vs delivered"
  },
  "lean_audit": {}
 }
