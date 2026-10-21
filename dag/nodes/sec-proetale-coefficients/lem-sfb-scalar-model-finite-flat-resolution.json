@@ -20,7 +20,7 @@
  ],
  "proof": [
   {
-   "text": "For $R$ a DVR, apply [lem-sfb-scalar-finite-free-resolutions] to a finite presentation of $P$. It gives finite $m,n$ and $0\\to R^m\\xrightarrow{A}R^n\\to P\\to0$.",
+   "text": "For a DVR, take the finite presentation supplied by Module.FinitePresentation.exists_fin'. Submodule.basisOfPid, as recorded in [lem-sfb-scalar-finite-free-resolutions], gives a finite basis of its kernel inside R^n. The basis inclusion and quotient form a short exact scalar sequence.",
    "uses": [
     "lem-sfb-scalar-finite-free-resolutions"
    ],
@@ -31,10 +31,19 @@
    }
   },
   {
-   "text": "The given flatness of $B$ over $R_{\\mathcal C}$ permits [lem-sfb-constant-finite-free-presentation-extension] to turn this into $0\\to B^m\\xrightarrow{A_B}B^n\\to M\\to0$. Apply the exact-sequence augmentation clause of [lem-sfb-ringed-finite-free-resolution-tensor]. This very two-term complex represents $M$, is K-flat, and computes its derived tensor with each $N$ as $[N^m\\xrightarrow{A_N}N^n]$ in degrees $[-1,0]$.",
+   "text": "Work with the actual independent-coefficient constant functor of the statement. Constant presheaves preserve finite limits and colimits sectionwise, and module sheafification preserves them. The ring sheafification unit identifies the constant rank-one module with the unit. Sectionwise multiplication identifies extension of that unit with B; additivity then identifies all finite powers, including the empty power. After forgetting scalars, extension is naturally tensor by B restricted to the constant ring, via the tensor swap. The given flatness and reflection of exactness by the additive-sheaf forgetful functor therefore make extension exact. Transport the scalar sequence by these finite-power isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
+    "place": "Local models, scalar finite free resolution, exact scalar extension and tensor calculation"
+   }
+  },
+  {
+   "text": "Augment the double complex of the resulting short exact sequence by its quotient map. In degree -1 its homology vanishes by injectivity; in degree 0 exactness and surjectivity identify homology with M; every other degree is zero. Apply [lem-sfb-ringed-finite-free-resolution-tensor] to this bounded-above finite-free complex to obtain K-flatness and its derived tensor comparison. Tensoring a double complex is the double complex of the mapped differential. The proved independent-coefficient tensor presentation [lem-weil-pbc-independent-sheaf-tensor-colimits], additivity, and the tensor unit identify the tensor images of B^m and B^n with N^m and N^n, transporting the same differential as in the statement.",
    "uses": [
-    "lem-sfb-constant-finite-free-presentation-extension",
-    "lem-sfb-ringed-finite-free-resolution-tensor"
+    "lem-sfb-ringed-finite-free-resolution-tensor",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
@@ -43,10 +52,9 @@
    }
   },
   {
-   "text": "For $R$ a field, [lem-sfb-scalar-finite-free-resolutions] supplies an isomorphism $R^r\\to P$ for finite $r$. The isomorphism clause of [lem-sfb-constant-finite-free-presentation-extension] gives $B^r\\cong M$; that clause imposes no flatness assumption on $B$.",
+   "text": "For a field, use Module.finBasis from [lem-sfb-scalar-finite-free-resolutions] to identify P with R^n. Functoriality and the finite-power comparison just proved identify its scalar model with B^n. This uses no exactness or flatness hypothesis on B.",
    "uses": [
-    "lem-sfb-scalar-finite-free-resolutions",
-    "lem-sfb-constant-finite-free-presentation-extension"
+    "lem-sfb-scalar-finite-free-resolutions"
    ],
    "elementary": false,
    "source": {
@@ -55,7 +63,7 @@
    }
   },
   {
-   "text": "Apply the degree-zero augmentation and tensor formula of [lem-sfb-ringed-finite-free-resolution-tensor] to $B^r[0]\\to M[0]$. This is a K-flat resolution and gives $M[0]\\otimes_B^{\\mathbf L}N[0]\\cong N^r[0]$ for every $N$.",
+   "text": "Apply the degree-zero finite-free case of [lem-sfb-ringed-finite-free-resolution-tensor] to this isomorphism. Applying its bounded-above K-flat conclusion to the single complex of M also gives the required K-flatness of M[0] itself. The tensor comparison gives N^n[0], including n=0.",
    "uses": [
     "lem-sfb-ringed-finite-free-resolution-tensor"
    ],
@@ -68,13 +76,13 @@
  ],
  "proof_deps": [
   "lem-sfb-scalar-finite-free-resolutions",
-  "lem-sfb-constant-finite-free-presentation-extension",
-  "lem-sfb-ringed-finite-free-resolution-tensor"
+  "lem-sfb-ringed-finite-free-resolution-tensor",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-localizing-closure/sk-def-localizing-closure-ctf-equals-bc.proof.md",
-  "place": "Local models; expanded using Stacks 0AUW, 03EI, 06YQ, 06YS, 06YP, 06YU"
+  "place": "Local models, scalar finite free resolution, exact scalar extension and tensor calculation; J3 Lean proof: Mathlib scalar bases, direct independent-coefficient exact extension, explicit double augmentation, and the finite-free tensor comparison"
  },
  "mathlib_searches": [
   {
@@ -182,13 +190,7 @@
   "blueprint": "All of the same Local models paragraph: scalar length-one/zero resolution by lem-sfb-scalar-finite-free-resolutions; exact sheaf extension with the same matrix by lem-sfb-constant-finite-free-presentation-extension; augmented finite-free complex and tensor computation by lem-sfb-ringed-finite-free-resolution-tensor. All new nodes are independently unsplit, without edges between them; no unit/chapter route change.",
   "tool_uses": []
  },
- "tool_uses": [
-  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-resolution",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-kflat-tensor-quasiiso-independent"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -234,20 +236,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "J2",
+  "reviewer": "COMPILER",
+  "group": "J3",
   "result": "pass",
-  "landing": "20261021T101142-L-17671",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "CategoryTheory.independentConstantRingUnit_locallyBijective",
-   "SheafOfModules.scalarModel_finite_flat_resolution_dvr",
-   "SheafOfModules.scalarModel_finite_free_field"
-  ],
-  "sorry_after": [
-   "SheafOfModules.scalarModel_finite_flat_resolution_dvr",
-   "SheafOfModules.scalarModel_finite_free_field"
-  ]
+  "landing": "20261021T130038-L-2498770",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
