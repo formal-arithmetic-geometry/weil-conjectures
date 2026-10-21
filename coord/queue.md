@@ -1,8 +1,8 @@
 # Work queue
 
-196 items; claim with `tools/claim.py next <group> [--stage N]`.
+199 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (19 clusters, 954 modules)
+## Rework: quarantined by the upstream sync (19 clusters, 951 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -28,9 +28,9 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 87, stage 3 5 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 90, stage 3 4 items.
 
-## Stage 1: nodes to split (19)
+## Stage 1: nodes to split (21)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -40,17 +40,19 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-discrete-lattice-koszul-resolution` | 4011 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-prime-to-ell-derived-invariants-reduction` | 4011 | none |
-| `lem-sfb-root-tower-boundary-acyclicity` | 4011 | none |
+| `lem-sfb-integral-lisse-closed-base-change` | 4012 | none |
 | `lem-sfb-norm-algcl-cohomology-topology-comparison` | 4012 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
+| `lem-sfb-profinite-constant-derived-functions` | 4012 | none |
+| `lem-sfb-root-coordinate-supported-vanishing` | 4012 | none |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 4012 | none |
 | `lem-sfb-snc-universal-residual-charts` | 4012 | none |
-| `lem-sfb-bicosimplicial-shuffle-totalization` | 4013 | none |
 | `lem-sfb-finite-closed-cover-resolution` | 4013 | none |
 | `lem-sfb-nonnegative-derived-totalization` | 4013 | none |
 | `lem-sfb-root-tower-coordinate-face` | 4013 | none |
 | `lem-sfb-root-tower-puncture-invariance` | 4013 | none |
 | `lem-sfb-faithfully-flat-normal-ring-descent` | 4014 | none |
+| `lem-sfb-simplex-lattice-shuffle-boundary` | 4014 | none |
 | `lem-sfb-snc-finite-root-regular-ring` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
@@ -59,17 +61,17 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
-| `lem-tw-lisse-rational-realization` | 1 | state | 5 |
+| `lem-sfb-root-tower-boundary-acyclicity` | 1 | state | 1 |
 | `det-lem-stratified-lattice-scheme` | 1 | state | 0 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-fd-whole-tower-integral-pullback-comparison` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
 | `lem-pod-fixed-pair-truncation-cohomology` | 1 | state | 0 |
+| `lem-sfb-bicosimplicial-shuffle-totalization` | 1 | state | 0 |
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-complete-group-torsor-monodromy` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
-| `lem-sfb-condensed-internal-bar-resolution` | 1 | state | 0 |
 | `lem-sfb-condensed-product-bar-comparison` | 1 | state | 0 |
 | `lem-sfb-derived-cech-image-totalization` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
@@ -78,16 +80,16 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-internal-action-site-presentation` | 1 | state | 0 |
 | `lem-sfb-partial-kummer-boundary-unit-model` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
-| `lem-sfb-root-tower-lisse-morphism-extension` | 1 | state | 0 |
 | `lem-sfb-snc-root-limit-normal-charts` | 1 | state | 0 |
 | `lem-sfb-supported-finite-stage-topology-defect` | 1 | state | 0 |
 | `lem-sfb-tame-root-tower-extension` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sp-cofinal-finite-reduction-constructibility` | 1 | state | 0 |
+| `lem-zl-raw-heart-adic-lisse-stratification` | 1 | state | 0 |
 | `lem-sfb-integral-quotient-projection-comparison` | 2 | state | 0 |
 | `lem-sfb-tame-inertia-continuous-koszul` | 2 | state | 0 |
 
-Not open yet: 375 nodes that below a finished node, not needed, 106 nodes that wait for a statement dependency (bottom-up), 18 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 375 nodes that below a finished node, not needed, 102 nodes that wait for a statement dependency (bottom-up), 20 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (123)
 
@@ -183,6 +185,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.SequencePushforwardLimitProjections` | - | 1 | proof | 9 |
 | `Sheaf.Paper.CompletedOperationTowerSubstitution` | - | 1 | proof | 9 |
 | `Sheaf.Paper.EffectiveComparisonRealizationModels` | - | 1 | proof | 9 |
+| `Sheaf.Paper.EtaleCompactSupportCoefficientChange` | - | 3 | proof | 9 |
 | `Sheaf.Paper.IntegralAmbientOperationModels` | - | 4 | proof | 9 |
 | `Sheaf.Paper.IntegralCoherenceTower` | - | 1 | proof | 9 |
 | `Sheaf.Paper.IntegralTowerInverseImageUnit` | - | 1 | proof | 9 |
@@ -214,7 +217,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.PrimeCurveArtinSchreierKernel` | - | 1 | proof | 15 |
 | `Sheaf.AlgebraicGeometry.AffineCohomologyEtaleModuleRealization` | - | 1 | proof | 17 |
 | `Sheaf.AlgebraicGeometry.CoherentAffineBaseChangeEdge` | - | 1 | proof | 17 |
-| `Sheaf.AlgebraicGeometry.DerivedPullbackTopCohomology` | - | 1 | proof | 18 |
 | `Sheaf.AlgebraicGeometry.RawRestrictedClassNormalization` | - | 5 | proof | 18 |
 | `Sheaf.AlgebraicGeometry.TopBaseChangePresheaf` | - | 1 | proof | 18 |
 | `Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge` | - | 1 | proof | 19 |
