@@ -302,5 +302,44 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-4321f73f0 (reviewer sub-agent of L); spot-checked: Read the whole item at 4321f73f: unchanged statement, 8 steps, no new nodes, item first split (live side node is still unsplit, no prior runs, no re-split note, not in the drop list). Every step is correct against the statements of its 13 cited nodes, none merged, with no cycle (closure of 157 nodes). Step 1: terminal and product uniqueness give θ_{X×Y}=θ_X×θ_Y. Step 2: R_C=∐_R 1 (geometric-inverse-image-constant-module final sentence with M=R; Stacks 0H7J); the left-adjoint-preserves-colimits node gives preservation. Naturality at each i_r with coproduct uniqueness makes θ_{R_C} the identity as a sheaf map; the lem-pe identification agrees with the coproduct comparison because both send I(i_r) to i_r. Step 3: naturality at addition, zero, negation and action gives R_D-linearity, and the inverse is linear too. Step 4: θ_T I(q)=J(q)(θ_B×θ_N), and balancing a(r)b⊗θm=b⊗θ(rm) checks. Step 5: the generalized pure-tensor clause with Z=B_C×N, x,y the projections, z=q gives e_I I(q)=q_I; then u I(q)=q_J(1×θ)=v I(q), and tensor uniqueness gives the square; I re-derived it. Step 6: sheafification factorization is correctly cited, redundant but harmless. Step 7: the composite e_H∘H_B(e_K) has the same normalization as e_{HK}; the induction on path length has its base and inductive step. Step 8: termwise chain-map naturality. Edge cases checked: zero ring, non-flat Z→Z/2, degenerate topos, nontrivial point automorphism, unbounded complexes. Stacks tags 03EK, 03EL (sites-modules.tex:3649), 0H7J (sites.tex:2099) and 00YV (sites.tex:10473) verified; no SGA. Generic sheaf/module tool_uses accepted. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.GeometricTwoIsoScalarPairing",
+  "declaration": "CategoryTheory.GeometricScalar.geometric_two_iso_scalar_pairing",
+  "declarations": [
+   "CategoryTheory.GeometricScalar.Modules",
+   "CategoryTheory.GeometricScalar.underlyingModules",
+   "CategoryTheory.GeometricScalar.coefficient",
+   "CategoryTheory.GeometricScalar.scalarSection",
+   "CategoryTheory.GeometricScalar.extension",
+   "CategoryTheory.GeometricScalar.extensionPure",
+   "CategoryTheory.GeometricScalar.IsScalarPairing",
+   "CategoryTheory.GeometricScalar.Step",
+   "CategoryTheory.GeometricScalar.Path",
+   "CategoryTheory.GeometricScalar.Path.inverse",
+   "CategoryTheory.GeometricScalar.Path.left",
+   "CategoryTheory.GeometricScalar.Path.right",
+   "CategoryTheory.GeometricScalar.Path.leftUnderlying",
+   "CategoryTheory.GeometricScalar.Path.rightUnderlying",
+   "CategoryTheory.GeometricScalar.Path.leftCoefficient",
+   "CategoryTheory.GeometricScalar.Path.rightCoefficient",
+   "CategoryTheory.GeometricScalar.Path.comparison",
+   "CategoryTheory.GeometricScalar.geometric_two_iso_scalar_pairing"
+  ],
+  "file": "lean/Sheaf/SixFunctors/GeometricTwoIsoScalarPairing.lean",
+  "statement": "theorem geometric_two_iso_scalar_pairing (p q : Path a J K) (θ : p.inverse ≅ q.inverse) : ∃ θA : p.left ≅ q.left, ∃ θB : p.right ≅ q.right, (∀ M : Modules J A, (underlyingModules K A).map (θA.hom.app M) ≫ q.leftUnderlying.hom.app M = p.leftUnderlying.hom.app M ≫ θ.hom.app ((underlyingModules J A).obj M)) ∧ (∀ M : Modules J B, (underlyingModules K B).map (θB.hom.app M) ≫ q.rightUnderlying.hom.app M = p.rightUnderlying.hom.app M ≫ θ.hom.app ((underlyingModules J B).obj M)) ∧ (θ.hom.app (coefficient J A) ≫ q.leftCoefficient.hom = p.leftCoefficient.hom) ∧ (θ.hom.app (coefficient J B) ≫ q.rightCoefficient.hom = p.rightCoefficient.hom) ∧ (p.inverse.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map ((constantSheaf J CommRingCat.{u}).map a)) ≫ p.rightCoefficient.hom = p.leftCoefficient.hom ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{u})).map ((constantSheaf K CommRingCat.{u}).map a)) ∧ (q.inverse.map ((sheafCompose J (CategoryTheory.forget CommRingCat.{u})).map ((constantSheaf J CommRingCat.{u}).map a)) ≫ q.rightCoefficient.hom = q.leftCoefficient.hom ≫ (sheafCompose K (CategoryTheory.forget CommRingCat.{u})).map ((constantSheaf K CommRingCat.{u}).map a)) ∧ (∀ M : Modules J A, θB.hom.app ((extension J a).obj M) ≫ q.comparison.hom.app M = p.comparison.hom.app M ≫ (extension K a).map (θA.hom.app M)) ∧ (∀ (M : Modules J A) (b : coefficient J B ⨯ (underlyingModules J A).obj M ⟶ (underlyingModules J B).obj ((extension J a).obj M)), IsScalarPairing J a M b → (p.inverse.map b ≫ θ.hom.app ((underlyingModules J B).obj ((extension J a).obj M)) = θ.hom.app (coefficient J B ⨯ (underlyingModules J A).obj M) ≫ q.inverse.map b) ∧ (θ.hom.app (coefficient J B ⨯ (underlyingModules J A).obj M) ≫ prodComparison q.inverse _ _ = prodComparison p.inverse _ _ ≫ prod.map (θ.hom.app (coefficient J B)) (θ.hom.app ((underlyingModules J A).obj M)))) ∧ (∀ (M : Modules J A) (W : Dᵒᵖ) (b : ((constantSheaf K CommRingCat.{u}).obj B).obj.obj W) (m : (p.left.obj M).val.obj W), ((extension K a).map (θA.hom.app M)).val.app W (extensionPure K a (p.left.obj M) W b m) = extensionPure K a (q.left.obj M) W b ((θA.hom.app M).val.app W m)) ∧ (∀ (M : Modules J A) (W : Dᵒᵖ) (r : ((constantSheaf K CommRingCat.{u}).obj A).obj.obj W) (b : ((constantSheaf K CommRingCat.{u}).obj B).obj.obj W) (m : (p.left.obj M).val.obj W), extensionPure K a (q.left.obj M) W ((((constantSheaf K CommRingCat.{u}).map a).hom.app W r) * b) ((θA.hom.app M).val.app W m) = extensionPure K a (q.left.obj M) W b ((θA.hom.app M).val.app W (r • m))) ∧ (∃ hF : (extension J a ⋙ p.right).PreservesZeroMorphisms, ∃ hL : (q.left ⋙ extension K a).PreservesZeroMorphisms, @NatTrans.mapHomologicalComplex ℤ _ _ _ _ _ _ _ _ hF hL (Functor.whiskerLeft (extension J a) θB.hom ≫ q.comparison.hom) (ComplexShape.up ℤ) = @NatTrans.mapHomologicalComplex ℤ _ _ _ _ _ _ _ _ hF hL (p.comparison.hom ≫ Functor.whiskerRight θA.hom (extension K a)) (ComplexShape.up ℤ))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Normalized scalar/pullback presentations and their finite composite expressions are auxiliary declarations of this node. A one-step path gives the ordinary case; the empty path retains identity presentations. All tensors and module categories are the existing dependency constructions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-909f2be59",
+  "group": "NI",
+  "result": "pass",
+  "note": "Every clause matches the node and Stacks 03EL in order and orientation: induced linear isos (pinned via underlying maps), coefficient identities and compatibility with a, main square, prequotient equation, pure tensors and balancing, composite paths including the empty one, and complexes. Ring identifications are pinned by the scalar-section equations; the scalar/pullback comparison is pinned by its normalization and is inhabited by the canonical map. No existing general scalar/pullback iso, so no duplicate. Statement verbatim, sole sorry in the main theorem, docstrings complete, only the lean field changed. Advisory: AlgebraicInverseImage and tensorFunctor belong to nodes outside stmt_deps; the second reading is a worker self-check."
  }
 }

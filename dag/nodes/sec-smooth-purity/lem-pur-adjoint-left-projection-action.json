@@ -225,5 +225,27 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-6f0e0ef66 (reviewer sub-agent of L); spot-checked: I read the item and all five steps in full and redid each calculation by hand against the three cited Mathlib-leaf statements. Step 1: the transpose of t is (1⊗ε_N)∘δ_{B,RN}, by counit naturality, β-naturality, preservation of the symmetry (read with inverses) and involutivity. Step 2: joint naturality, from δ-naturality and counit naturality. Step 3: the unit law, from the inverted left-unit axiom and λ-naturality. Steps 4–5: associativity; both transposes reduce to the same Q via δ-naturality, α-naturality and the inverted associativity axiom of CoreMonoidal. All are correct, and no invertibility of ρ or t is used. Stacks 0B56 (sites-cohomology.tex l.13657–13675) defines ρ exactly as the item's counit adjunct (E=N, K=B); tags 0B56/0037/0FFK/0FFL match tags/tags. The statement is byte-identical to base and live, so the target is not weakened and the parent's forward use is unaffected. The item is unsplit on both live clones and not superseded; there is no repair note, so the re-split rule does not apply; it is not in the dropped list; no SGA is cited. There are no new nodes and no tool_uses. I found no duplicate: the candidates read were lem-pur-finite-projection-action-laws, lem-pur-composite-tensor-transpose, lem-pd-monoidal-adjunction-equivalence-transport, lem-sfb-ringed-* and the sibling lem-pur-open-left-projection-action. Edge cases checked: identity adjunction (t = 1); B or B' equal to the unit; free ⊣ forgetful from Set to Ab, where t is not invertible."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.Adjunction.LeftCoefficientProjectionAction",
+  "declaration": "CategoryTheory.Adjunction.leftCoefficientProjectionMap_coherence",
+  "declarations": [
+   "CategoryTheory.Adjunction.leftCoefficientProjectionMap",
+   "CategoryTheory.Adjunction.leftCoefficientProjectionMap_coherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/Adjunction/LeftCoefficientProjectionAction.lean",
+  "statement": "theorem leftCoefficientProjectionMap_coherence (adj : F ⊣ R) : (∀ (B B' : C) (N N' : D) (f : B ⟶ B') (g : N ⟶ N'), leftCoefficientProjectionMap adj B N ≫ R.map (F.map f ⊗ₘ g) = (f ⊗ₘ R.map g) ≫ leftCoefficientProjectionMap adj B' N') ∧ (∀ (B : C) (N : D), F.map (leftCoefficientProjectionMap adj B N) ≫ adj.counit.app (F.obj B ⊗ N) = Functor.OplaxMonoidal.δ F B (R.obj N) ≫ (𝟙 (F.obj B) ⊗ₘ adj.counit.app N)) ∧ (∀ (N : D), leftCoefficientProjectionMap adj (𝟙_ C) N ≫ R.map ((Functor.OplaxMonoidal.η F ⊗ₘ 𝟙 N) ≫ (λ_ N).hom) = (λ_ (R.obj N)).hom) ∧ (∀ (B B' : C) (N : D), leftCoefficientProjectionMap adj (B ⊗ B') N ≫ R.map ((Functor.OplaxMonoidal.δ F B B' ⊗ₘ 𝟙 N) ≫ (α_ (F.obj B) (F.obj B') N).hom) = (α_ B B' (R.obj N)).hom ≫ (𝟙 B ⊗ₘ leftCoefficientProjectionMap adj B' N) ≫ leftCoefficientProjectionMap adj B (F.obj B' ⊗ N))",
+  "branch": "newtargets-dag",
+  "by": "Q01",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-bae01ec7a",
+  "group": "Q01",
+  "result": "pass",
+  "note": "Module LeftCoefficientProjectionAction defines t = β_{B,RN} ≫ ρ ≫ R(β_{N,FB}), with ρ the existing rightAdjointProjectionMap applied to δNatTrans F (read and confirmed as the adjunct of δ followed by the counit in the first factor). The four conjuncts match the node exactly: joint naturality, F(t)≫ε = δ≫(1⊗ε), the unit law with h=(η⊗1)≫λ, and the associativity law with a=(δ⊗1)≫α. F.Braided between SymmetricCategory instances renders a symmetric strong monoidal functor; universes are independent; there are no IsIso binders or extra hypotheses. The statement field is verbatim in the file, docstrings carry the source place, blueprint and five proof steps, and the proof is sorry only. Only the lean field changed. H4: Sheaf/Paper leftProjection is a ringed-specific analogue, not a duplicate (advisory). Transpose identity re-derived by hand. Not recompiled per the 2026-10-21 instruction; no file changed."
  }
 }

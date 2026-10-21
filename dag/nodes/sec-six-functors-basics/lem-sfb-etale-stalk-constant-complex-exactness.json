@@ -14,7 +14,9 @@
   "def-kun-constant-sheaf",
   "def-weil-pbc-geometric-stalks",
   "def-weil-abstract-derived-category",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-sf-site-constant-module-functor",
+  "def-sfb-constant-ring-module-restriction"
  ],
  "proof": [
   {
@@ -238,5 +240,36 @@
   "group": "O1",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-db61742bf (reviewer sub-agent of L); spot-checked: Read the item's six-step proof in full. The item is first split by N9's node; it is neither a 10-21 re-split nor dropped, and side-live still has it unsplit. No new nodes. The statement is unchanged and true. Edge cases checked: empty T; T = Spec of a separably closed field; A=0 and A=Z/4; an unbounded complex A^2 with d(a,b)=(b,0). Sources: Stacks 03EI, 04EQ, 03PT and 010N; no SGA. Steps 3, 5 and 6 are correct. Fault 1, C4/C1 at step 1: the cited lem-weil-pbc-site-r-module-presheaf-sheafification-exact is for a fixed ring R. It gives neither the A_T-module structure on the sheafification nor exactness in Mod(A_T). Fault 2, C3/C4 at step 2: the abelian constant-stalk node was applied to c(M) without the identification of its underlying abelian sheaf or the A-linearity of iota. Fixed by citing the Mathlib leaf lem-pc-sites-module-sheafification-interface (Stacks 03EI form: O-module presheaf to O^#-module sheaf, with the abelian sheafification underneath). Step 1 now takes exactness from abelian sheafification (R=Z) and reflects it through the faithful forgetful functor that preserves kernels and cokernels (forgetful node, clause 1). Fault 3, a small gap at step 4: the step did not show that preserving short exact sequences gives the 'exact functor' hypothesis of the cited cohomology node (preserving finite limits and colimits). Step 4 now spells this out via 010N. proof_deps and the summary were updated; the statement, stmt_deps, blueprint and tool_uses are unchanged. Two off-unit tool uses are accepted: constant-germ normalization and forgetful exactness.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.EtaleStalkConstantComplexExactness",
+  "declaration": "AlgebraicGeometry.Scheme.etale_stalk_constant_complex_retraction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.etaleConstantComplexRing",
+   "AlgebraicGeometry.Scheme.etaleConstantComplexModules",
+   "AlgebraicGeometry.Scheme.etaleConstantComplexFunctor",
+   "AlgebraicGeometry.Scheme.etaleConstantModuleStalkFunctor",
+   "AlgebraicGeometry.Scheme.etaleConstantComplexFunctor_additive",
+   "AlgebraicGeometry.Scheme.etaleConstantModuleStalkFunctor_additive",
+   "AlgebraicGeometry.Scheme.etale_stalk_constant_exact",
+   "AlgebraicGeometry.Scheme.etale_stalk_constant_cohomology",
+   "AlgebraicGeometry.Scheme.etale_stalk_constant_preserves",
+   "AlgebraicGeometry.Scheme.etale_stalk_constant_complex_retraction"
+  ],
+  "file": "lean/Sheaf/SixFunctors/EtaleStalkConstantComplexExactness.lean",
+  "statement": "theorem etale_stalk_constant_complex_retraction (t : Spec (.of Ω) ⟶ T) : (∃ η : 𝟭 (CochainComplex (ModuleCat.{u + 1} A) ℤ) ≅ (etaleConstantComplexFunctor T A).mapHomologicalComplex (.up ℤ) ⋙ (etaleConstantModuleStalkFunctor A t).mapHomologicalComplex (.up ℤ), ∀ (E : CochainComplex (ModuleCat.{u + 1} A) ℤ) (n : ℤ) (e : E.X n), ((η.hom.app E).f n) e = (pointedEtaleGerm ((constantRingModuleRestriction T.smallEtaleTopology A).obj ((etaleConstantComplexFunctor T A).obj (E.X n))) t (Etale.mk (𝟙 T)) (Over.homMk t (Category.comp_id t))) ((toSheafify T.smallEtaleTopology ((siteConstantModulePresheafGeneral (C := T.Etale) A).obj (E.X n)).presheaf).app (op (Etale.mk (𝟙 T))) e)) ∧ (∃ ε : ModuleCat.of A A ≅ (etaleConstantModuleStalkFunctor A t).obj (SheafOfModules.unit (etaleConstantComplexRing T A)), ∀ a : A, ε.hom a = (pointedEtaleGerm ((constantRingModuleRestriction T.smallEtaleTopology A).obj (SheafOfModules.unit (etaleConstantComplexRing T A))) t (Etale.mk (𝟙 T)) (Over.homMk t (Category.comp_id t))) ((toSheafify T.smallEtaleTopology ((Functor.const T.Etaleᵒᵖ).obj (RingCat.of A))).app (op (Etale.mk (𝟙 T))) a))",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The declarations jointly render all clauses: the genuine constant-ring module category, canonical scalar-restricted pointed-neighbourhood stalk, additivity, finite-limit/colimit exactness, natural integer-degree homology comparisons, preservation of acyclicity and quasi-isomorphisms, and the constant-germ-normalized natural chain retraction and regular-module stalk identification. Helpers only specialize recorded constructions; no new underlying category, sheafification, or colimit is defined."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7b90bcb0b",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed head 3da47abf: the only change is the requested stmt_deps swap lem-cbc-constant-ring-module-sheaves -> def-sfb-constant-ring-module-restriction (definition node, existing:true, owns constantRingModuleRestriction); Lean module byte-identical; item unlanded in side-live. Independent clause check: c = recorded siteConstantModuleFunctorGeneral, S = constantRingModuleRestriction ⋙ pointSmallEtale.sheafFiber (same diagram as pointedEtaleStalk), additivity, PreservesFiniteLimits/Colimits, natural H^n isos for all n:ℤ, Acyclic/QuasiIso preservation, η pinned by pointedEtaleGerm of the toSheafify unit at (𝟙 T, t), ε normalized on SheafOfModules.unit; A : Type (u+1) is the recorded convention; edge cases A=0, empty T, T=Spec Ω, unbounded complexes; no duplicate (only pro-étale module stalk functors exist); docstrings and sorry-only proofs OK; lean.statement verbatim. No compile (no file changed); worker scompile clean. Advisory: unused t binder in the c-clauses."
  }
 }

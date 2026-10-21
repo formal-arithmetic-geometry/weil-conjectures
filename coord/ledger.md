@@ -21728,3 +21728,20 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T09:13:29Z L: superseded stage-1 delivery Q61/lem-fd-frobenius-fixed-pair-comparison at ff42296d0d44fcf0d4745b0cb97ff76d480de97e; current completion retained; packet archived at refs/superseded/Q61/lem-fd-frobenius-fixed-pair-comparison/ff42296d0d44fcf0d4745b0cb97ff76d480de97e; stale return retired.
 - 2026-10-21T09:13:33Z L: superseded stage-1 delivery Q44/lem-sf-package-exceptional-coherence-realization at c4afdf7938fa2651fe35acc75506bfa200acdd0f; current completion retained; packet archived at refs/superseded/Q44/lem-sf-package-exceptional-coherence-realization/c4afdf7938fa2651fe35acc75506bfa200acdd0f; stale return retired.
 - 2026-10-21T09:13:37Z L: superseded stage-1 delivery NR/lem-trf-point-sections-completion-cone at a17683cff67802c1d35a01bd010b4c243a6ba9bf; current completion retained; packet archived at refs/superseded/NR/lem-trf-point-sections-completion-cone/a17683cff67802c1d35a01bd010b4c243a6ba9bf; stale return retired.
+- 09:13 L: merged deliver/Q84/lem-pur-etale-sum-right-adjoint-coherence (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/O2/lem-pur-completed-tensor-unit-insertion (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q57/lem-pur-common-line-positive-scalar-powers (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q03/lem-pur-composite-left-projection-action (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q02/lem-pur-proetale-support-global-boundary (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q51/lem-sfb-section-ring-lax-pushforward-coherence (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q50/lem-pur-completed-line-tensor-coherence (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/N5/lem-sf-bounded-epimorphic-top-derived-limit (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/NE/lem-sfb-etale-stalk-constant-complex-exactness (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q30/lem-weil-pbc-fixed-tensor-localization-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/NI/lem-sfb-geometric-two-iso-scalar-pairing (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q13/lem-sfb-etale-proetale-cube-flat-model (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q19/lem-amb-finite-root-site-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q25/lem-trf-effective-comparison-realization-models (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q01/lem-pur-adjoint-left-projection-action (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/Q44/lem-sfb-finite-colimit-matrix-cokernels (stage 2; reviewer PASS; parallel immutable checks)
+- 09:13 L: merged deliver/N6/lem-pur-completed-coefficient-tensor-normalization (stage 2; reviewer PASS; parallel immutable checks)

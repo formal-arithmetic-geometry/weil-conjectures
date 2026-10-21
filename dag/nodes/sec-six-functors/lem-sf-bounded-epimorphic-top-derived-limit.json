@@ -237,5 +237,23 @@
   "group": "NH",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-e83c137cf (reviewer sub-agent of L); spot-checked: Read the whole item and found no faults. The statement and stmt_deps are unchanged from live (status unsplit there). There are no new nodes. The item is not on route-pivot-dropped and has no repair note. The statement is true: Milnor sequence plus R^1lim=coker(1-T)=0 for an epimorphic tower (Stacks Tag 0947 (4)-(7), sites-cohomology.tex:13801ff). Without top epimorphy H^{b+1} can be a nonzero coker(1-T), so the hypothesis is needed. Steps checked: (1) det-pe-products-derived (termwise product is the product in D, piComparison with components H^j(pr_n)) and def-weil-category-product uniqueness identify 1-s with 1-T_j on V_j. (2) lem-sf-derived-homology-long-exact (Mathlib leaf), applied to the supplied Roos triangle of def-weil-derived-limit, gives the exact sequence V_{j-1}->V_{j-1}->H^j(L)->V_j->V_j in the right order, with no cone-model assumption. (3) For j<a or j>b+1 both V vanish. (4) Assertion 1 of det-pe-milnor-epimorphic, applied to the tower H^b(P_n) over the same R and reindexed n->n+1, gives d_b epic. (5) For j=b+1: V_{b+1}=0, delta_{b+1}d_b=0 and d_b epic give delta=0, so H^{b+1}(L)=0. Edge case a=b works. Duplicate search over the snapshot DAG (milnor-sequence/epimorphic, roos-cone-calculus, left-complete-truncation-tower, complete-residue-cohomology-bounds): no node states this result. The only citer, lem-sf-complete-residue-cohomology-bounds, uses the item as stated. The unit sk-rem-sf-pf-done has uses:[]. The two det-pe tool_uses are generic pro-etale black-box tools and I accept them as the maintainer's record; the worker wrote them themselves (A8), which I count as no fault. No SGA is used. The citations.json named in the report is not on the branch; I count that as no fault."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProEtaleBoundedEpimorphicTopDerivedLimit",
+  "declaration": "AlgebraicGeometry.Scheme.ProEt.bounded_epimorphic_top_derivedLimit",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProEtaleBoundedEpimorphicTopDerivedLimit.lean",
+  "statement": "theorem bounded_epimorphic_top_derivedLimit (X : Scheme.{t}) (R : Sheaf (topology X) RingCat.{max u (t + 1)}) (_hcomm : ∀ U : X.ProEtᵒᵖ, ∀ r s : R.obj.obj U, r * s = s * r) [HasDerivedCategory.{w} (ringedSiteModules.{max u (t + 1)} R)] (P : ℕ → CochainComplex (ringedSiteModules.{max u (t + 1)} R) ℤ) (τ : ∀ n : ℕ, P (n + 1) ⟶ P n) [HasProduct (fun n : ℕ ↦ DerivedCategory.Q.{w}.obj (P n))] (L : DerivedCategory (ringedSiteModules.{max u (t + 1)} R)) (_hL : IsDerivedLimit (K := fun n : ℕ ↦ DerivedCategory.Q.{w}.obj (P n)) (fun n : ℕ ↦ DerivedCategory.Q.{w}.map (τ n)) L) (a b : ℤ) (_hab : a ≤ b) (_hP : ∀ (n : ℕ) (j : ℤ), j < a ∨ b < j → IsZero ((P n).homology j)) (_htop : ∀ n : ℕ, Epi (HomologicalComplex.homologyMap (τ n) b)) : ∀ j : ℤ, j < a ∨ b < j → IsZero ((DerivedCategory.homologyFunctor (ringedSiteModules.{max u (t + 1)} R) j).obj L)",
+  "branch": "newtargets-dag",
+  "by": "N5",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-786577a8c",
+  "group": "N5",
+  "result": "pass",
+  "note": "Only change is the new module ProEtaleBoundedEpimorphicTopDerivedLimit plus the item's lean record; lean.statement is verbatim in the file; the proof is sorry only. Clause-by-clause match: X : Scheme.{t} on topology X; R as a RingCat.{max u (t+1)} sheaf plus sectionwise commutativity _hcomm, the same universe convention as products_derived and milnor_epimorphic; P : ℕ → CochainComplex with τ n : P(n+1) ⟶ P n (n ↦ n+1 indexing); IsDerivedLimit gives any Roos triangle with towerTransitionEndomorphism, so no cone model is chosen; the HasProduct instance is the product the node presupposes; _hP vanishing outside [a,b]; _htop Epi of homologyMap on H^b only, no Epi (τ n); conclusion is vanishing outside [a,b] including b+1. True by Stacks 0947 (5)-(7): Milnor sequence plus R^1lim of the epimorphic H^b tower = 0. Edge cases a=b, negative degrees, empty scheme, zero ring and zero tower are covered. Docstrings carry the source place, the blueprint id and all 5 proof steps; no hollow definition; no duplicate declaration found. The only citer, complete-residue-cohomology-bounds, can apply the theorem. Advisory: the sheafify instances come by public import of ProEtaleSurjectiveTowerDerivedLimit (a non-stmt_dep node), the same as det-pe-products-derived's module. Compile not reproduced per the 2026-10-21 instruction; the worker reports clean compiles."
  }
 }

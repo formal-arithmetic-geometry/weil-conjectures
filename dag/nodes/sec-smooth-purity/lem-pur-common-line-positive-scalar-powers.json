@@ -11,7 +11,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-pur-sheaf-tensor-product",
   "def-weil-size-convention",
-  "def-weil-pbc-sites-and-cohomology"
+  "def-weil-pbc-sites-and-cohomology",
+  "def-sp-scalar-tensor-comparison-data"
  ],
  "proof": [
   {
@@ -274,5 +275,39 @@
   "group": "Q121",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q121-752a19877 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, the item plus its report, no new nodes and the statement unchanged from base. The item is not in the route-pivot drop list, has no repair note and is still unsplit on live and side-live. Sources check out: Stacks 03EL (lemma-tensor-product-pullback, sites-modules.tex:3649), 03EK and 0GMW, and the main-20261015 proof of prop-weil-twist-preserves (scalar-extension/tensor-power sentence); no SGA. The statement is true. I tested it at n=0,1,2, T=0, non-free T, Z->Z/2, the zero ring, and a change of generator (both sides scale by iota(u)^n). Steps 3-7 are correct: the A- and B-balance, the R_i-linearity and the inverse composites for i_i, j_i and b_1; the binary node (E(N tensor P) = E(N) tensor E(P), s tensor (x tensor y) to (s tensor x) tensor (1 tensor y), natural in both factors) applied to R_0->R_1 with an explicit induction; slice restriction (no flatness) for rank one on the same covering; and the generator formula recomputed. lem-sp-invertible-tensor-scalar-extension covers only rank-one M, so it is a neighbour, not a duplicate. I made two citation repairs (C4/C1). (1) Steps 1-2 build maps on nested sheafified tensors and the product R_i x R_i from formulas on presheaf sections, which needs bilinear extension along sheafification; the cited Hom/Bilin and linear-factorization nodes do not state that. I added the existing lem-pc-sites-module-sheafification-bilinear-extension-existence and -uniqueness, with O already a sheaf and alpha=id. (2) Step 5 switches between left and right scalars by tensor symmetry without a citation; I added lem-pc-sites-sheaf-tensor-bilinear-universal to its uses. proof_deps is now the union of all uses, and split_report.tool_uses has the two new picard-framework tool entries. I accept the four declared tool_uses. The corrected item is in fixes/dag/nodes/sec-smooth-purity/; review.md has the details.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CommonLinePositiveScalarPowers",
+  "declaration": "SheafOfModules.CommonLine.exists_positiveScalarPowers",
+  "declarations": [
+   "SheafOfModules.CommonLine.Modules",
+   "SheafOfModules.CommonLine.restrict",
+   "SheafOfModules.CommonLine.regular",
+   "SheafOfModules.CommonLine.tensor",
+   "SheafOfModules.CommonLine.sectionPower",
+   "SheafOfModules.CommonLine.Coefficients",
+   "SheafOfModules.CommonLine.Presentation",
+   "SheafOfModules.CommonLine.Presentation.map",
+   "SheafOfModules.CommonLine.PositiveScalarPowers",
+   "SheafOfModules.CommonLine.exists_positiveScalarPowers",
+   "SheafOfModules.CommonLine.PresentationChange",
+   "SheafOfModules.CommonLine.CoefficientNaturality",
+   "SheafOfModules.CommonLine.exists_coefficientNaturality"
+  ],
+  "file": "lean/Sheaf/Paper/CommonLinePositiveScalarPowers.lean",
+  "statement": "theorem exists_positiveScalarPowers [HasFiniteLimits C] [EssentiallySmall.{u} C] (B A D₀ D₁ : Sheaf J CommRingCat.{u}) (a : B ⟶ A) (c₀ : B ⟶ D₀) (c₁ : B ⟶ D₁) (φ : D₀ ⟶ D₁) (hφ : c₀ ≫ φ = c₁) : Nonempty (PositiveScalarPowers a c₀ c₁ φ hφ)",
+  "branch": "sheaf-dag",
+  "by": "Q57",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The normalized existential package supplies the tensor rings and R-linear structures together with isomorphisms to the actual B-module sheaf tensors. All local pure-tensor, inverse, degree-recursion and same-cover formulas are fields. The second theorem spells out naturality in commuting coefficient diagrams. Helpers are presentations of the objects and clauses of this node; all tensor, restriction, extension and power constructions are the recorded existing ones."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3a918b8e9",
+  "group": "Q57",
+  "result": "pass",
+  "note": "Node changed only in lean plus stmt_deps adding the landed definition node def-sp-scalar-tensor-comparison-data (its scalarTensorPower, scalarTensorPowerMap and scalarExtensionSection are used; no cycle); lean.statement verbatim. Clause match: Coefficients pins R_i=A⊗_B C_i through a B-linear iso from the actual siteSheafTensorRight with x⊗y↦left x*right y, which forces left/right and the multiplication and unit; Presentation.common/underlying with common_tmul/inverse_tmul give R-linear i_i, its inverse and the R-action; iota_left/right and transition_tmul pin id⊗φ and common_square commutes; comparison gives b_n with zero_tmul, one_tmul/one_inverse and a left-associated succ_tmul (binary comparison then b_n⊗b_1); naturality in T and in commuting coefficient diagrams (PresentationChange/CoefficientNaturality, all pinned on pure tensors); same_cover on the original CoversTop family for every n; generator_tmul b_n(s⊗r e0^n)=ι(r)s e1^n recomputed at n=0, n=1 and n+2. Hypotheses HasFiniteLimits and EssentiallySmall.{u} match the node; the instance variables equal the dependency modules' and restrict nothing; universes uC, vC, u, uI free. Edge cases n=0, T=0, empty cover, zero rings, non-flat maps covered. No duplicate ring-sheaf tensor or section-power helper found; defs carry real data; theorems sorry-only; docstrings with source, blueprint id and proof steps 1-7; lines at most 100 characters; non-public imports are exactly the proof_deps modules. Not compiled (no file changed; the human's 2026-10-21 rule). Advisory: short second-reading section; inverse_tmul and the two naturality fields are redundant but correct."
  }
 }

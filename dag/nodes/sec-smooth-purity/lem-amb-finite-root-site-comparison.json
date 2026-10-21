@@ -17,7 +17,9 @@
   "def-weil-pbc-site-comparison-morphism",
   "lem-asd-etale-finite-twist-pullback",
   "def-weil-pbc-inverse-image",
-  "lem-weil-pbc-comparison-pullback"
+  "lem-weil-pbc-comparison-pullback",
+  "def-sfb-cartier-reduction-data",
+  "def-sfb-constant-ring-module-restriction"
  ],
  "proof": [
   {
@@ -297,5 +299,31 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-4ffd5e176 (reviewer sub-agent of L); spot-checked: I read the whole item (6 steps, no new nodes) and every cited statement. Statement and stmt_deps are byte-identical to the Q41-reviewed version and the live side node, which is still unsplit; no target is weakened. The item is not in route-pivot-dropped, there is no SGA citation, and the dep closure (411 nodes) does not reach the item. The old parent steps 3, 4 and the root part of 6 from the Q41 packet are all carried here, in more detail; nothing is dropped. Sources: Stacks 0GLZ (proetale.tex l.3760, sections Γ(Y_et,f^{-1}F) on every weakly étale Y), which lem-cbc-comparison-pullback-sections states, and 03EL (sites-modules.tex l.3649), whose role is taken by the normalized lem-weil-pbc-algebraic-inverse-image-tensor-comparison. Steps 1–3, 5 and 6 check out: lem-asd gives root pullback for arbitrary v with m invertible, plus composition; the unit clause of lem-cbc; Z/m-linearity via lem-pur-torsion-sheaf-constant-module(2); sf-comparison-pullback-exact(1) with Λ=Z/m and A; prop-weil-pbc-proetale-constant-ring-map for arbitrary maps including ∅; bilinear universality after reducing to locally constant scalars. I recomputed both step-4 adjuncts at étale U: each gives z↦pr_U^♯z. Edge cases tested: m=1/A=0, A=0, T=∅, m=2/m'=4/A=Z/2, non-étale v, disconnected T. No duplicate found: def-pur/def-amb finite-tate comparison data are root-limit predicates, roots-inverse-image-iso covers isomorphisms only, and lem-sp-cartier-reduction builds the same comparison inline. FIX (C3/C4): step 4 said κ_v 'is the comparison underlying' the conjugate of the direct-image identification. That normalization is only in the proof of lem-weil-pbc-comparison-pullback; its statement gives existence plus coherence. Step 4 now cites def-per-site-comparison-pullback-data, whose statement defines the canonical iso as the adjoint mate of the direct-image comparison and whose Lean declarations are the ones lem-weil-pbc-comparison-pullback's statement is built from. It also adds the missing def-weil-pbc-direct-image for the étale direct-image formula. Both added deps are acyclic (closure of 194 nodes). proof_deps are updated, and a tool_uses entry is added for the off-unit definition. I accept the 6 declared tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.FiniteRootSiteComparison",
+  "declaration": "AlgebraicGeometry.Scheme.finiteRootSiteComparison",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.finiteRootProModule",
+   "AlgebraicGeometry.Scheme.finiteRootProTensor",
+   "AlgebraicGeometry.Scheme.finiteRootProGenerator",
+   "AlgebraicGeometry.Scheme.FiniteRootSiteComparisonSpec",
+   "AlgebraicGeometry.Scheme.finiteRootSiteComparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/FiniteRootSiteComparison.lean",
+  "statement": "theorem finiteRootSiteComparison (A : Type (u + 1)) [CommRing A] [Finite A] : FiniteRootSiteComparisonSpec A",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The predicate spells out the normalized root-section identification, scalar-extension comparison, canonical root-induced scheme arrows, their comparison-mate square, invertibility, identity/composition laws and exponent-power squares. The root isomorphism is reused from CartierReductionData, not defined again. The fixed-coefficient presentation in finiteRootProModule uses the plain scalar-restriction definition CategoryTheory.constantRingModuleRestriction, owned by def-sfb-constant-ring-module-restriction; it does not use the equivalence theorem lem-cbc-constant-ring-module-sheaves. The dependency citation is corrected as required by the return of immutable head 7fcd82765c8d; the Lean source is unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a609c8bbf",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery of the H2 return of 7fcd82765c8d. The theorem stmt_dep lem-cbc-constant-ring-module-sheaves is replaced by the owning definition node def-sfb-constant-ring-module-restriction, as requested. That node record is byte-identical to the live node (existing:true, N8). constantRingModuleRestriction (ConstantRingModuleSheaves.lean:56) is a plain def that restricts scalars along toSheafify, not a .choose. lean.note and the report are updated. The Lean module is byte-identical to the returned head (sha256 597db5af…a43c). Independent re-read: the hypotheses match the node (arbitrary T; A : Type (u+1) is forced by the deps). c is the fixed cartierRootsIso, pinned by root_unit. σ and d are existential but pinned by tensor_unit and d_unit. The scheme square uses κ_v = .inv of the recorded mate. The id/comp laws use the canonical comparisons, and the power squares are pinned. Edge cases m=1, A=0, T=∅ and non-étale v are covered. The item and the added deps are not in route-pivot-dropped. The live item is unlanded and differs only in stmt_deps/lean. Advisory only: the root_sections clause quantifies a free equivalence e and adds nothing; its content is carried by root_unit. No compile run (no fix); the worker records a clean scompile and an OK dry run at 1fbea631abd."
  }
 }

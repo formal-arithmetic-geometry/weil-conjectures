@@ -362,5 +362,50 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-543978ba5 (reviewer sub-agent of L); spot-checked: Read the full 9-step split; no new nodes. Statement unchanged; the only stmt_deps added are additive-functor and galois-exact-functor, which the statement already names. Not dropped, no repair note, still unsplit on side-live, no cycle (DFS over the snapshot DAG), no SGA. Stacks 03D6 checked at sites-modules.tex:1146; the tensor-internal refinement is correctly marked agent-written. Each cited statement matches its use. Step 1: the generator comparison U_C(mu_R)t_C=r(t_D) gives section products on S(FV); commutativity follows because the sheaf symmetry is built from the objectwise one. Steps 2-4: psi is a ring map, the Res_psi.mapMod action is psi_V(r)n, and the identity comparison is linear. Step 5: c_kappa is monoidal; both sides reduce to t_H naturality along kappa_V:KV->GFV, then ring-object-transport cl.3 applies. Steps 6-7: uniqueness gives phi_chi, and every path of the square is N(kappa_V). Step 8: the quasi-inverse is additive by counit conjugation and faithfulness. Step 9: modobj-abelian hypotheses hold via sheaf-tensor-closed, then equivalence-injective-resolutions (2). Small cases checked: terminal site, Z->Z/2, variance of kappa. The pro-etale instances in def-pd-section-module-operations-data are users of this generic lemma, not duplicates. Accepted the generic tool_uses."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.CategoryTheory.SectionRingLaxPushforwardCoherence",
+  "declaration": "CategoryTheory.InternalAbelianSheafModule.laxSectionPushforward_composition",
+  "declarations": [
+   "CategoryTheory.Sheaf.coefficientRestriction",
+   "CategoryTheory.Sheaf.coefficientRestrictionCounitIso",
+   "CategoryTheory.Sheaf.coefficientRestrictionLaxMonoidal",
+   "CategoryTheory.Sheaf.coefficientRestriction_comparison",
+   "CategoryTheory.InternalAbelianSheafModule.coefficientModulePushforward",
+   "CategoryTheory.InternalAbelianSheafModule.laxSectionRingImage_isSheaf",
+   "CategoryTheory.InternalAbelianSheafModule.laxSectionRingImage",
+   "CategoryTheory.InternalAbelianSheafModule.laxSectionRingMap_existsUnique",
+   "CategoryTheory.InternalAbelianSheafModule.laxSectionRingMap",
+   "CategoryTheory.InternalAbelianSheafModule.laxSectionRingSheafMap",
+   "CategoryTheory.InternalAbelianSheafModule.laxInternalPushforward",
+   "CategoryTheory.InternalAbelianSheafModule.laxSectionPushforward",
+   "CategoryTheory.InternalAbelianSheafModule.laxSectionComparison_existsUnique",
+   "CategoryTheory.InternalAbelianSheafModule.laxInternalPushforward_sectionAction",
+   "CategoryTheory.InternalAbelianSheafModule.laxSectionComparison",
+   "CategoryTheory.InternalAbelianSheafModule.laxRestrictionCompositor",
+   "CategoryTheory.InternalAbelianSheafModule.laxRestrictionCompositor_isMonHom",
+   "CategoryTheory.InternalAbelianSheafModule.laxCompositeCoefficient",
+   "CategoryTheory.InternalAbelianSheafModule.laxCompositeCoefficient_isMonHom",
+   "CategoryTheory.InternalAbelianSheafModule.laxSectionPushforward_composition",
+   "CategoryTheory.InternalAbelianSheafModule.sectionModuleEquivalence_additive_exact",
+   "CategoryTheory.InternalAbelianSheafModule.laxIdentityCoefficient",
+   "CategoryTheory.InternalAbelianSheafModule.laxIdentityCoefficient_isMonHom",
+   "CategoryTheory.InternalAbelianSheafModule.laxSectionPushforward_identity"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/SectionRingLaxPushforwardCoherence.lean",
+  "statement": "theorem laxSectionPushforward_composition : laxSectionRingMap T hT RC RH (laxCompositeCoefficient F hF RC RD ψ G hG T hT κ RH θ) = laxSectionRingMap F hF RC RD ψ ≫ Functor.whiskerLeft F.op (laxSectionRingMap G hG RD RH θ) ≫ Functor.whiskerRight (NatTrans.op κ.hom) (sectionRings.{u, uH, vH} L RH) ∧ ∃ i : laxInternalPushforward G hG RD RH θ ⋙ laxInternalPushforward F hF RC RD ψ ≅ laxInternalPushforward T hT RC RH (laxCompositeCoefficient F hF RC RD ψ G hG T hT κ RH θ), ∃ s : laxSectionPushforward G hG RD RH θ ⋙ laxSectionPushforward F hF RC RD ψ ≅ laxSectionPushforward T hT RC RH (laxCompositeCoefficient F hF RC RD ψ G hG T hT κ RH θ), (∀ (M : Mod (Sheaf L AddCommGrpCat.{u}) RH) (U : Cᵒᵖ), (i.hom.app M).hom.hom.app U = M.X.obj.map (κ.hom.app U.unop).op) ∧ (∀ (M : SheafOfModules.{u} ((sheafCompose L (forget₂ CommRingCat RingCat)).obj (sectionRingSheaf.{u, uH, vH} L RH))) (U : Cᵒᵖ), ((s.hom.app M).val.app U).hom.toAddMonoidHom = (M.val.presheaf.map (κ.hom.app U.unop).op).hom) ∧ (∀ M : Mod (Sheaf L AddCommGrpCat.{u}) RH, (sectionModuleEquivalence.{u, uC, vC} J RC).functor.map (i.hom.app M) ≫ (laxSectionComparison T hT RC RH (laxCompositeCoefficient F hF RC RD ψ G hG T hT κ RH θ)).hom.app M = (laxSectionComparison F hF RC RD ψ).hom.app ((laxInternalPushforward G hG RD RH θ).obj M) ≫ (laxSectionPushforward F hF RC RD ψ).map ((laxSectionComparison G hG RD RH θ).hom.app M) ≫ s.hom.app ((sectionModuleEquivalence.{u, uH, vH} L RH).functor.obj M))",
+  "branch": "sheaf-dag",
+  "by": "Q51",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Returned-delivery repair: the four independent-universe coefficientRestriction helpers belong to this item module and are listed here. The reviewed Q46 dependency node record and SheafPushforwardGeneratorComparison module are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6ce703d09",
+  "group": "Q51",
+  "result": "pass",
+  "note": "Re-delivery after RETURN 5d056c4632b3 (H13/H4). Fixed as prescribed (option 1): the lem-sfb-sheaf-pushforward-generator-comparison record is byte-identical to live (Q46, 8 decls incl. generatorRestriction kept). The 4 coefficientRestriction* helpers moved into the item module with signatures and bodies unchanged, only blueprint tags changed, and are listed in lean.declarations. SheafCoefficientRestriction.lean removed. The other 20 item decls are identical to the returned head. statement/stmt_deps/source unchanged; lean.statement is verbatim in the file; all 24 decls are present; no full-name clash. Independent re-read of every node clause: ∃! ring map, Res_ψ∘mapMod, sectionwise pushforward via φ_ψ, ∃! identity comparison and action, κ-pinned compositors and square, identity case, additive/exact both ways; independent universes; no hollow defs; 11 sorries, all in theorems. No compile (no file changed)."
+ }
 }

@@ -270,5 +270,42 @@
   "group": "Q14",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q14-d875315c4 (reviewer sub-agent of L); spot-checked: First split of a statement-only node that NI's re-split of lem-weil-pbc-kflat-fixed-tensor-triangulated created. That repair note is about the parent and is resolved; side-live still has this item unsplit, so it is not superseded. The statement is unchanged from base and matches the parent's Step 2 use. Sources read: Stacks sites-cohomology 06YS and 06YU (the source descends the functor 'simply because D(O) is the localization'; the details it leaves out are what the nine steps write, D5), categories 04VG/04VK, and the blueprint main-20261015 perfect-projection-formula proof, first paragraph (from.place is right). No SGA is used. Each step checked against the cited statements: Step 1, clause (1) gives G and eta = phi^-1. Step 2, every hypothesis of additive-localization-descent holds (Q additive because exact, H additive by hypothesis, essential surjectivity, e = eta^-1). Step 3, I type-checked a_n: G((QB)[n]) -> GQ(B[n]) -> QH(B[n]) -> (QHB)[n] -> (GQB)[n], extended by clause (2) with identity comparisons. Step 4, the zero and addition laws hold by conjugation and clause (3). Step 5, I re-derived the connecting square from the Step 3 normalization and the naturality of eta at w, then TR1. Steps 6-7, L = J composed with the fraction localization is a localization; b_P = c_{A,P} eta_P^-1 is natural on P_R and extends uniquely. Step 8, naturality of e at a resolution r gives the formulas, QH(r) is invertible by hypothesis, and independence of r is equality to e_B. Step 9, theta comes from clause (2) with tau = id, and the shift and d compatibilities follow by faithfulness. Edge cases: n=0, the sign (-1)^{np} on the left side only, zero complexes, r=id gives c, unbounded complexes. Duplicate search over the whole DAG found nothing that states the item or replaces Steps 3-5: the exact-functor-derived nodes are termwise-abelian only, and left-derived-exact-chosen-localization has no eta-normalization. Accepted tool_uses: lem-pur-additive-localization-descent and lem-pc-kflat-resolution, both generic black boxes. proof_deps equals the union of the uses lists, and there is no cycle. No changes. Advisory: the proof is 7.8k characters with no new nodes; this is acceptable because the parent's re-split note does not bind this item."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FixedTensorLocalizationComparison",
+  "declaration": "SheafOfModules.FixedTensorLocalization.fixed_tensor_localization_comparison",
+  "declarations": [
+   "SheafOfModules.FixedTensorLocalization.Modules",
+   "SheafOfModules.FixedTensorLocalization.Complexes",
+   "SheafOfModules.FixedTensorLocalization.Homotopy",
+   "SheafOfModules.FixedTensorLocalization.quotient",
+   "SheafOfModules.FixedTensorLocalization.totalTensor",
+   "SheafOfModules.FixedTensorLocalization.Derived",
+   "SheafOfModules.FixedTensorLocalization.Q",
+   "SheafOfModules.FixedTensorLocalization.resolving",
+   "SheafOfModules.FixedTensorLocalization.tensorK",
+   "SheafOfModules.FixedTensorLocalization.tensorD",
+   "SheafOfModules.FixedTensorLocalization.chainComparison",
+   "SheafOfModules.FixedTensorLocalization.resolvingComparison",
+   "SheafOfModules.FixedTensorLocalization.resolvingObject",
+   "SheafOfModules.FixedTensorLocalization.invertedMapIso",
+   "SheafOfModules.FixedTensorLocalization.ShiftCompatible",
+   "SheafOfModules.FixedTensorLocalization.NormalizedDescent",
+   "SheafOfModules.FixedTensorLocalization.fixed_tensor_localization_comparison"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FixedTensorLocalizationComparison.lean",
+  "statement": "theorem fixed_tensor_localization_comparison (A : Complexes R) (hA : CochainComplex.IsKFlatIndependentCoefficients A) (hAf : ∀ n : ℤ, IsFlatOnSite (J := J) (R := R) (A.X n)) [((Functor.curry.obj (tensorK R)).obj ((quotient R).obj A)).CommShift ℤ] [((Functor.curry.obj (tensorK R)).flip.obj ((quotient R).obj A)).CommShift ℤ] [((Functor.curry.obj (tensorK R)).obj ((quotient R).obj A)).Additive] [((Functor.curry.obj (tensorK R)).flip.obj ((quotient R).obj A)).Additive] [((Functor.curry.obj (tensorK R)).obj ((quotient R).obj A)).IsTriangulated] [((Functor.curry.obj (tensorK R)).flip.obj ((quotient R).obj A)).IsTriangulated] (hUL : (HomotopyCategory.quasiIso (Modules R) (.up ℤ)).IsInvertedBy (((Functor.curry.obj (tensorK R)).obj ((quotient R).obj A)) ⋙ Q R)) (hUR : (HomotopyCategory.quasiIso (Modules R) (.up ℤ)).IsInvertedBy (((Functor.curry.obj (tensorK R)).flip.obj ((quotient R).obj A)) ⋙ Q R)) (hSL : ∀ (n : ℤ) (B : Complexes R), ((Functor.curry.obj (tensorK R)).obj ((quotient R).obj A)).map (((quotient R).commShiftIso n).hom.app B) ≫ (((Functor.curry.obj (tensorK R)).obj ((quotient R).obj A)).commShiftIso n).hom.app ((quotient R).obj B) = (chainComparison R).hom.app (A, B⟦n⟧) ≫ (quotient R).map (CochainComplex.mapBifunctorShift₂Iso A B (@curriedTensor (Modules R) _ (SheafOfModules.monoidalCategory R)) n).hom ≫ ((quotient R).commShiftIso n).hom.app (((totalTensor R).obj A).obj B) ≫ (shiftFunctor (Homotopy R) n).map ((chainComparison R).inv.app (A, B))) (hSR : ∀ (n : ℤ) (B : Complexes R), ((Functor.curry.obj (tensorK R)).flip.obj ((quotient R).obj A)).map (((quotient R).commShiftIso n).hom.app B) ≫ (((Functor.curry.obj (tensorK R)).flip.obj ((quotient R).obj A)).commShiftIso n).hom.app ((quotient R).obj B) = (chainComparison R).hom.app (B⟦n⟧, A) ≫ (quotient R).map (CochainComplex.mapBifunctorShift₁Iso B A (@curriedTensor (Modules R) _ (SheafOfModules.monoidalCategory R)) n).hom ≫ ((quotient R).commShiftIso n).hom.app (((totalTensor R).obj B).obj A) ≫ (shiftFunctor (Homotopy R) n).map ((chainComparison R).inv.app (B, A))) : NormalizedDescent R ((Functor.curry.obj (tensorK R)).obj ((quotient R).obj A)) hUL ((tensorD R).obj ((Q R).obj ((quotient R).obj A))) (fun P ↦ (resolvingComparison R).app (resolvingObject R A hA hAf, P)) ∧ NormalizedDescent R ((Functor.curry.obj (tensorK R)).flip.obj ((quotient R).obj A)) hUR ((tensorD R).flip.obj ((Q R).obj ((quotient R).obj A))) (fun P ↦ (resolvingComparison R).app (P, resolvingObject R A hA hAf))",
+  "branch": "sheaf-dag",
+  "by": "Q30",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-86e33a4eb",
+  "group": "Q30",
+  "result": "pass",
+  "note": "Statement field unchanged from side-live and lean.statement matches the file word for word. Every object is a projection of the published site_derived_tensor_descent_independentCoefficients.{u,v,r,w,0,0} witness, consistent with siteDerivedTensorIndependentCoefficients. Hypotheses match the node: K-flat and flat-term A; additive, CommShift and IsTriangulated binders pinned by hSL/hSR to mapBifunctorShift2Iso (signed) and mapBifunctorShift1Iso (unsigned), conjugated by the published chainComparison, consistent for any Nonempty choice; quasi-iso inversion. Conclusion clauses checked: exactness including the connecting arrow, the ShiftCompatible square with q_n and shift uniqueness, the unique normalized d, the resolution formula derived from naturality, and the unique theta. Edge cases fine; universes independent. No hollow definitions, only the theorem is sorried, docstrings and nine-step plan present, no duplicate. Advisory: proof-only imports unused in the statement; AdditiveLocalizationDescent landed live today without a published olean, so if landing fails on it, drop that import. No fixes; no recompile."
  }
 }

@@ -312,5 +312,52 @@
   "group": "Q96",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q96-6215e1e3f (reviewer sub-agent of L); spot-checked: Read the statement and all ten steps in full. Opened all 13 cited statements and the integral-twist paragraph of det-prop-sfb-cartesian-coefficients-twists.proof.md. Statement unchanged and true: B=D^d by an integral basis, so A⊗_D B=A^d=lim_r(O_H/ℓ^r)=R_H by cofinality (ℓ^r O_H=ϖ^{er} O_H). The admissibility condition is equivalent to ek≥n. Small cases checked: H=Q_ℓ, h=id, E=F, ramified e>1, empty scheme. Steps 1-7, 9 and 10 are correct as cited. Step 6's adjoint argument via ρ^h_C and sheafification uniqueness gives δ-naturality and the α cone compatibility. One repaired fault (C3/C4), step 8: it took the pure-tensor normalization of σ_h from lem-weil-pbc-ringed-topoi-module-pullback-tensor, whose statement gives only an unspecified canonical isomorphism; the normalization exists only in the Yoneda proof of Stacks 03EL. Fixed in fixes/dag/nodes/sec-smooth-purity/lem-pur-completed-coefficient-tensor-normalization.json: τ is built from h⁻¹ of the universal balanced pairing (def-weil-proetale-inverse-image, lem-pe-constant-left-module-inverse-image) and proved invertible with the finite basis of steps 2/4 (τγ′=h⁻¹γ), σ_h=τ⁻¹ is multiplicative, and the ringed-topoi lemma is removed from uses, proof_deps and tool_uses. No new nodes. Duplicate candidates read and rejected: det-prop-sfb-cartesian-coefficients-finite-free, det-prop-sfb-qlbar-colimit-x-integral-limit, lem-sfb-constant-finite-free-presentation-extension, lem-sfb-finite-free-scalar-coordinates. Declared generic tool uses accepted. No SGA. Dependency closure (251 nodes) has no cycle.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedCoefficientTensorNormalization",
+  "declaration": "WeilConjectures.CompletedCoefficientNormalization.completed_coefficient_tensor_normalization",
+  "declarations": [
+   "WeilConjectures.CompletedCoefficientNormalization.Rings",
+   "WeilConjectures.CompletedCoefficientNormalization.liftHom",
+   "WeilConjectures.CompletedCoefficientNormalization.discrete",
+   "WeilConjectures.CompletedCoefficientNormalization.baseLevel",
+   "WeilConjectures.CompletedCoefficientNormalization.baseTransition",
+   "WeilConjectures.CompletedCoefficientNormalization.baseTower",
+   "WeilConjectures.CompletedCoefficientNormalization.baseCompletion",
+   "WeilConjectures.CompletedCoefficientNormalization.baseProjection",
+   "WeilConjectures.CompletedCoefficientNormalization.baseResidue",
+   "WeilConjectures.CompletedCoefficientNormalization.kan",
+   "WeilConjectures.CompletedCoefficientNormalization.inverse",
+   "WeilConjectures.CompletedCoefficientNormalization.delta",
+   "WeilConjectures.CompletedCoefficientNormalization.BaseData",
+   "WeilConjectures.CompletedCoefficientNormalization.integralDiscrete",
+   "WeilConjectures.CompletedCoefficientNormalization.integralResidue",
+   "WeilConjectures.CompletedCoefficientNormalization.scalar",
+   "WeilConjectures.CompletedCoefficientNormalization.tensor",
+   "WeilConjectures.CompletedCoefficientNormalization.residueFromBase",
+   "WeilConjectures.CompletedCoefficientNormalization.Presentation",
+   "WeilConjectures.CompletedCoefficientNormalization.BasePullback",
+   "WeilConjectures.CompletedCoefficientNormalization.pulledTensor",
+   "WeilConjectures.CompletedCoefficientNormalization.Pullback",
+   "WeilConjectures.CompletedCoefficientNormalization.constantInclusion",
+   "WeilConjectures.CompletedCoefficientNormalization.quotientInclusion",
+   "WeilConjectures.CompletedCoefficientNormalization.Extension",
+   "WeilConjectures.CompletedCoefficientNormalization.completed_coefficient_tensor_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedCoefficientTensorNormalization.lean",
+  "statement": "theorem completed_coefficient_tensor_normalization (iota : H →ₐ[Padic l] F) : ∃ (d : BaseData.{t, u} l) (p : Presentation l H d) (q : Presentation l F d) (e : Extension l H F iota d p q), ∀ (T' T : Scheme.{t}) (h : T' ⟶ T), ∃ (a : BasePullback l d h) (b : Pullback l H d p h a) (c : Pullback l F d q h a), (inverse.{t, u} h).map (e.inclusion T) ≫ c.alpha = b.alpha ≫ e.inclusion T' ∧ (inverse.{t, u} h).map (constantInclusion l H F e.integers T) ≫ delta.{t, u} h (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l F))) = delta.{t, u} h (CommRingCat.of (ULift.{t + 1} (Padic.coefficientExtensionIntegers l H))) ≫ constantInclusion l H F e.integers T'",
+  "branch": "newtargets-dag",
+  "by": "N6",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The canonical maps are conclusion witnesses fixed by all quotient projections or the two tensor inclusions; none is an input hypothesis. The tensor is the categorical pushout in commutative ring sheaves, i.e. the sheafified balanced ring tensor. Original site sizes are retained, with independent coefficient universe. All auxiliary declarations belong to this normalization statement."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-dcf0a86ca",
+  "group": "N6",
+  "result": "pass",
+  "note": "Read the node, all 7 stmt_deps with their recorded decls (ProEtaleInverseImage:68-106, CompletedIntegralCoefficients:213-276, CoefficientExtension:53-112), the module and the report. Every node clause is rendered: beta iso with the projection formula for all admissible k; epsilon square; sigma_h fixed on both pushout inclusions; delta_OH scalar square; beta pullback square; i_EF/q_EF extension squares; final alpha/delta equalities. All exists-packaged maps are unique (limit projections, pushout preserved by the left adjoint h^-1, injective subring coercion), so not hollow. No extra hypotheses; independent t/u universes; edge cases (empty scheme, H=Q_l, h=id, l=2, ramified) covered. Statement verbatim, 26 declarations listed, docstrings and ten proof steps present, only sorry, node changed only in lean. Advisories: local general-size inverse/delta copies are justified because the recorded proEtaleSheafInverseImage needs Category.{t+1} (same sheafPullback construction, no public general version); module imports unused by the statement."
  }
 }

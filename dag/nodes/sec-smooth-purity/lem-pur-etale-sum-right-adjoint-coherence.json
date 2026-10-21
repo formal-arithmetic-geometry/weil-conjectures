@@ -34,7 +34,9 @@
   "def-weil-pbc-composite-adjunction",
   "def-weil-pbc-cartesian-square",
   "def-weil-pbc-etale-shriek-base-change-map",
-  "lem-weil-pbc-etale-shriek-base-change-modules"
+  "lem-weil-pbc-etale-shriek-base-change-modules",
+  "def-asd-compact-support-graph-comparison",
+  "lem-asd-compact-support-graph-derived-isomorphism"
  ],
  "proof": [
   {
@@ -341,5 +343,38 @@
   "group": "Q17",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q17-1f047c783 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and every cited statement in full. The delivery creates 0 new nodes. The statement is byte-identical to live, where the item is still unsplit. The item is not dropped and has no re-split note. Sources checked: blueprint lem-pur-co-smooth-etale-locality Step 1, Stacks 03S6 l.11493, 0F7J and 0F7K. No SGA source is used. I recomputed Steps 2, 4, 5, 6 and 8: the conjugate counit identity; rho_ve = chi^-1 e*rho_v rho_e c_ve; beta equals the mate of chi, with its conjugate equal to Ex0 shown by a hom-set calculation; the counit square; and the transpose chain giving rho'b = chi w'*rho. All are correct. Small cases checked: identity, fold map, empty source, open immersion, A=0, unbounded complexes. FAULT (C3/C4) in Steps 7 and 9: they took the base-change square from lem-asd-etale-compact-support-normalization. That square is for asd's own graph comparison c, which no statement identifies with the lem-sfb comparison d_e that the item uses; agreeing degree-zero sheaf maps do not make two unbounded derived isomorphisms equal. FIXED: Steps 7 and 9 now cite the reviewed node lem-pur-etale-support-map-compatibility, whose clause (1) states exactly (c_e'^c' h*)C = b_e(g*c_e^c) for lem-sfb's c_e^c and lem-amb's exchange Rr'_*(b_j)Ex_r, with refinement agreement. proof_deps and tool_uses were updated; there is no cycle. Batch-5: the flagged asd citation is removed. The item's closure without asd already contains the same pod/trf nodes through the base cites of lem-sfb and lem-amb. The replacement adds lem-pod-etale-stalk-tensor-scalar, a general fact about stalks of tensor products and not part of Poincaré duality or the trace formula, so I accept it. The remaining declared tool uses are accepted. No duplicate found.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleSumRightAdjointCoherence",
+  "declaration": "AlgebraicGeometry.Etale.etaleSumRightAdjoint_comp",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleSumSupportIso",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjointIso",
+   "AlgebraicGeometry.Etale.etaleSumPullbackUnitIso",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjointUnitIso",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjointCompIso",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjointBaseChange",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjoint_comp",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjoint_id",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjoint_baseChange",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjoint_evaluation",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjoint_refinement",
+   "AlgebraicGeometry.Etale.etaleSumRightAdjoint_openRestriction"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleSumRightAdjointCoherence.lean",
+  "statement": "theorem etaleSumRightAdjoint_comp (A : Type (u + 1)) [CommRing A] [Finite A] {U X T : Scheme.{u}} [IsNoetherian U] [IsNoetherian X] [IsNoetherian T] (e : U ⟶ X) (v : X ⟶ T) [Etale e] [Etale v] [IsSeparated e] [IsSeparated v] [QuasiCompact e] [QuasiCompact v] [HasCompactification e] [HasCompactification v] [HasCompactification (e ≫ v)] (G_e : DerivedCategoryModule A X ⥤ DerivedCategoryModule A U) (G_v : DerivedCategoryModule A T ⥤ DerivedCategoryModule A X) (G_ve : DerivedCategoryModule A T ⥤ DerivedCategoryModule A U) (adj_e : rightDerivedLowerShriek (ModuleCat.{u + 1} A) e ⊣ G_e) (adj_v : rightDerivedLowerShriek (ModuleCat.{u + 1} A) v ⊣ G_v) (adj_ve : rightDerivedLowerShriek (ModuleCat.{u + 1} A) (e ≫ v) ⊣ G_ve) (K : DerivedCategoryModule A T) : (etaleSumRightAdjointIso A (e ≫ v) G_ve adj_ve).hom.app K ≫ (unboundedEtaleUpperStarCompIso A e v).hom.app K = (etaleSumRightAdjointCompIso A e v G_e G_v G_ve adj_e adj_v adj_ve).hom.app K ≫ (etaleSumRightAdjointIso A e G_e adj_e).hom.app (G_v.obj K) ≫ (upperStar (ModuleCat.{u + 1} A) e).mapDerivedCategory.map ((etaleSumRightAdjointIso A v G_v adj_v).hom.app K)",
+  "branch": "newtargets-dag",
+  "by": "Q84",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All clauses are stated by the six listed theorems. Helpers construct the specified graph-normalized comparison, its adjunction conjugate, coefficient-unit identification, actual-compositor conjugate and inverse-exchange counit adjunct. No arbitrary isomorphism or Brown adjoint is selected. Added statement dependencies identify the existing canonical graph-derived comparison and exact sum exchange used to render the specified proper-support/sum identification."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0f5f82517",
+  "group": "Q84",
+  "result": "pass",
+  "note": "Only the item node changed versus live: a lean record plus two added stmt_deps (def-asd-compact-support-graph-comparison, lem-asd-compact-support-graph-derived-isomorphism); the dep closure is unchanged (0 nodes added) and there is no cycle. lean.statement is verbatim and the 12 declarations match the file. Clauses checked: rho = conjugateIsoEquiv adj sumAdj d.symm (direction correct); eta = rho at constantComplex followed by the pullback-unit iso; c_{v,e} = conjugate of unboundedEtaleLowerShriekCompIso against adj_e.comp adj_v; the composition equation in diagrammatic order with upperStarCompIso; the identity clause as the conjugate of unboundedEtaleLowerShriekId; b = homEquiv of inv(actual C) ≫ w^*counit ≫ unit iso, and b ≫ eta' = w'^*eta ≫ unit iso; the evaluation clause with exactEtaleSumExchange.inv; refinement for arbitrary c,d; open-restriction pasting. No stronger hypotheses (w arbitrary, A=0 allowed, universes u/u+1). d_a = canonicalEtaleCompactSupportComparison equals the n of lem-pur-etale-support-map-compatibility, which the node's Step 7 uses: n is pinned via the graph sheaf map, unique because compactificationSheafToDirectImage is mono, and compactSupportDerivedComparison_app gives the same Qh components. Mechanical finding: canonicalEtaleCompactSupportComparison is asIso via the theorem isIso_compactSupportGraphDerivedComparison and is listed in that node's declarations, so the statement depends on an object the theorem constructs: PASS on that point. Helpers are real constructions; docstrings carry source and blueprint tags and the proof steps; only sorry; no pro-etale substitute. No file changed, so no compile."
  }
 }

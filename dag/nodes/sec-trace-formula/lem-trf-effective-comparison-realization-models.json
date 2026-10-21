@@ -358,5 +358,28 @@
   "group": "Q105",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q105-14bb0da2b (reviewer sub-agent of L); spot-checked: I read the item, all 20 cited node statements, Stacks 099N (2),(5) and the main-20261015 prop-trf-karoubi-independence proof (final sentence). Shape: one commit, no new nodes, and the statement and stmt_deps are identical to the live unsplit node. There is no repair note, the item is not on the dropped list, there is no cycle, proof_deps equals the union of the step uses, and there is no SGA. Step 1: product exactness on Y_proet meets the hypothesis of lem-weil-strict-roos-comparison, which gives ρ with the limit-tuple/zero-shifted normalization. Step 2: the counit evaluation matches the calculus node and the K-injective total-limit model, and the whole-system e is taken from the adjunction. Step 3: the K-flat quotient complexes come from lem-pur-kflat-change-of-rings, which holds for any ring map. The system inverse image is levelwise and exact by prop-weil-pbc-proetale-constant-exact, and def-pur-integral-derived-operations' Lf* is the same Roos tower. Step 4: the scalar association, its transitions and transitivity are stated in lem-pur-coefficient-extension-reduction-model, and the Roos value is def-weil-integral-scalar-extension. Step 5: the unit identity is lem-trf-completion-unit-strict-quotient-model; I checked the chain-map claim. Step 6: normalization comes from the reduction, inverse-image closure and reduction-model nodes, and the counit and unit isomorphisms from lem-pur-normalized-actual-reconstruction-maps (only needs ℓ invertible). Step 7: the two constructibility nodes cover an arbitrary f and Y and finite E⊂L in the same C_E category. Step 8: the descent comes from the two well-definedness nodes and the naturality of ρ and the adjunction. Edge cases: the ramified case Q_ℓ(ℓ^{1/2}) (A_{E,n}→A_{L,n} is not flat, and nothing uses flatness), n=1, L=E, f=id and K=0 all behave. I accept the 14 declared tool_uses as generic calculus tools. I found no duplicate node. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EffectiveComparisonRealizationModels",
+  "declaration": "WeilConjectures.effectiveComparisonRealizationModels",
+  "declarations": [
+   "WeilConjectures.IsEffectiveComparisonCompletionNormalized",
+   "WeilConjectures.EffectiveComparisonRealizationModels",
+   "WeilConjectures.effectiveComparisonRealizationModels"
+  ],
+  "file": "lean/Sheaf/Paper/EffectiveComparisonRealizationModels.lean",
+  "statement": "theorem effectiveComparisonRealizationModels (l : ℕ) [Fact l.Prime] : Nonempty (EffectiveComparisonRealizationModels.{u} l)",
+  "branch": "newtargets-dag",
+  "by": "Q25",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a822e107d",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Only the lean record changed; the statement field matches the file exactly; one module, sorry only, source/blueprint docstrings and all 8 proof steps present; report has both sections. Clause check: system (CoefficientDerivedSystemCalculus) is pinned by its adjunction with fixed right adjoint coefficientSequenceLimit, by unit/counit_projection and by reductionModel, so presentations exist and normalizations are not vacuous; roos is fixed on K-injectives by the unique limit-tuple/zero-shift map; pullback and scalar models are the landed representative-normalized interfaces, and the scalar normalization fixes (x⊗a)⊗b↦x⊗ab; completion_normalization gives unshifted coordinates κ⁻¹(x⊗1), zero snd and unit≫L(e)≫bridge = Q.map v as whole derived arrows (v exists via κ-compatible transitions and is unique); pullback/scalar_effective state normalized ∧ sfIntegralConstructible realization ∧ IsIso of the actual counit; complete states IsIso of the unit; ℓ invertible on every scheme; no Tor/flatness hypothesis. Edge cases: n=0 is A_1, E=L, f=id, empty scheme, ramified. The common universe u is forced by sfIntegralConstructible and matches the parent. Advisory: IsNormalizedCoefficientSequence comes from def-coef-ringed-sequence-site (not a stmt_dep) and equals def-coef-normalized-dvr-tower for systems; the second reading is thin. Not recompiled (no change; human rule 2026-10-21); worker reports clean compiles and an OK dry run."
  }
 }

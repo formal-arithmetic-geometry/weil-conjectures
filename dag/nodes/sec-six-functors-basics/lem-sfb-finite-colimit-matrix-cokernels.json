@@ -240,5 +240,28 @@
   "group": "Q57",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q57-5ff008cc1 (reviewer sub-agent of L); spot-checked: Q57 5ff008cc: the item lem-sfb-finite-colimit-matrix-cokernels is still unsplit in clones/live and side-live, and has no repair note. Compared with live, the statement, stmt_deps, blueprint and unit are unchanged; all 7 inherited searches are kept and 5 were added (leanfinder/loogle/grep/leansearch). No new nodes, no unit edits, no tool_uses. proof_deps equals the union of the step uses. Read all 8 steps. (1) Additivity via the Mathlib leaf lem-sfb-preserving-colimits-additive (rightExactFunctor_le_additiveFunctor, AdditiveFunctor.lean:330, re-read; Stacks 010N(1) homology.tex:1545); the hypotheses match, and H(0)=0 follows by cancellation. (2) Biproduct = coproduct over discrete Fin(r); E_r is the unique comparison with (Y^r, ι_j e), and r=0 gives initial objects. (3) Projection equation checked on the mapped injections, using H(0)=0. (4) Matrix existence and uniqueness via Σ ι p π, empty cases included. (5) π_i E_n H(p) H(ι_j) = eH(p_ij) = q_ij e = π_i q E_m H(ι_j); projections detect equality, then the source coproduct gives the square. (6) Cokernel = coequalizer of (p,0) over the finite parallel-pair category, preserved by H, so H(κ_p) is a cokernel of H(p). (7)-(8) u and v come from the two cokernel properties, with the inverse-square orientation checked; they are mutually inverse and u is unique. The elementary flags are justified. Route: the only off-definition citation is the Mathlib leaf; no cycle (the scalar-matrix parent is not cited). Tested m=n=0, m=0, n=0, r=0, the zero functor and ⊗Z/2 on Ab: the statement is true and needs no further hypotheses. Duplicate scan of the DAG (finite colimit/right exact × cokernel/biproduct, entrywise, mapBiproduct): no duplicate; lem-sp-exact-functor-preserves-homology needs exact functors. The Mathlib components (mapBiproduct, PreservesCokernel.iso, Mat_ naturality) do not make the item a one-line leaf. Blueprint from-chain det-proper-base-change-unbounded-pullback via [scalar-matrix, pullback-constant-model-constructible] is correct; proof_origin agent is correct (blueprint proof.md line 9 says only 'via the local coefficient models on strata'). No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteColimitMatrixCokernels",
+  "declaration": "CategoryTheory.Functor.finiteColimit_matrix_cokernels",
+  "declarations": [
+   "CategoryTheory.Functor.finiteColimitBiproductIso",
+   "CategoryTheory.Functor.finiteColimit_matrix_cokernels"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteColimitMatrixCokernels.lean",
+  "statement": "theorem finiteColimit_matrix_cokernels {B : Type u₁} [Category.{v₁} B] [Abelian B] {D : Type u₂} [Category.{v₂} D] [Abelian D] (H : B ⥤ D) [PreservesFiniteColimits H] (X : B) (Y : D) (e : H.obj X ≅ Y) : H.PreservesZeroMorphisms ∧ (∀ (r : ℕ) (j : Fin r), H.map (biproduct.ι (fun _ : Fin r ↦ X) j) ≫ (finiteColimitBiproductIso H X Y e r).hom = e.hom ≫ biproduct.ι (fun _ : Fin r ↦ Y) j) ∧ (∀ (r : ℕ) (j : Fin r), (finiteColimitBiproductIso H X Y e r).hom ≫ biproduct.π (fun _ : Fin r ↦ Y) j = H.map (biproduct.π (fun _ : Fin r ↦ X) j) ≫ e.hom) ∧ (∀ (m n : ℕ) (p : Fin n → Fin m → (X ⟶ X)) (q : Fin n → Fin m → (Y ⟶ Y)), (∀ (i : Fin n) (j : Fin m), H.map (p i j) ≫ e.hom = e.hom ≫ q i j) → (H.map (biproduct.matrix (fun j i ↦ p i j)) ≫ (finiteColimitBiproductIso H X Y e n).hom = (finiteColimitBiproductIso H X Y e m).hom ≫ biproduct.matrix (fun j i ↦ q i j)) ∧ (∀ (cp : CokernelCofork (biproduct.matrix (fun j i ↦ p i j))) (cq : CokernelCofork (biproduct.matrix (fun j i ↦ q i j))), IsColimit cp → IsColimit cq → ∃ u : H.obj cp.pt ≅ cq.pt, H.map cp.π ≫ u.hom = (finiteColimitBiproductIso H X Y e n).hom ≫ cq.π ∧ cq.π ≫ u.inv = (finiteColimitBiproductIso H X Y e n).inv ≫ H.map cp.π ∧ ∀ u' : H.obj cp.pt ≅ cq.pt, H.map cp.π ≫ u'.hom = (finiteColimitBiproductIso H X Y e n).hom ≫ cq.π → u' = u))",
+  "branch": "sheaf-dag",
+  "by": "Q44",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper constructs the canonical comparison from PreservesCoproduct.iso, biproduct.isoCoproduct and biproduct.mapIso; the theorem covers arbitrary colimiting cokernel coforks and uniqueness from the forward equation alone."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-baf28892a",
+  "group": "Q44",
+  "result": "pass",
+  "note": "Only the lean record changed against side-live; statement verbatim, one sorry. Helper finiteColimitBiproductIso is real data and satisfies the node's injection equation (checked against Mathlib's isoCoproduct and PreservesCoproduct.iso); projection equation follows from additivity. All clauses match the node: zero preservation as a conclusion, matrix index order reversed for Mathlib, square E_n∘H(p)=q∘E_m, arbitrary colimiting cokernel coforks, forward and inverse cokernel equations, uniqueness from the forward equation alone. No extra hypotheses; universes bound. Ranks zero, zero objects, zero functor and right exact but not exact H covered. Docstrings give source place, blueprint tag and all 8 steps; report has both required sections. Advisory: unused plain AdditiveFunctor import kept for the stage-3 proof dependency. No compile (no change); worker reports a clean compile."
  }
 }

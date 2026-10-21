@@ -249,5 +249,37 @@
   "group": "Q77",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-618dd1a1e (reviewer sub-agent of L); spot-checked: Read in full: the item's 9 steps, all 6 cited statements, and Stacks 099G/099A (algebraization.tex l.1362/930). Step 1 is the 099G Hom argument (tensor-Hom, RHom completeness for arbitrary first input, reflectivity) and correctly proves that C(η⊗1) is invertible. Steps 2-3 correctly prove the other tensor insertion and that F=C∘u^* inverts C-local equivalences; step 3 uses only 'Ru_* preserves complete objects' and the two adjunctions. Step 4 transports the cochain coherence of lem-pur-cochain-pullback-tensor-coherence to the specified μ through the representative formula of lem-weil-pbc-pullback-tensor-canonical-shift-unit and the descent equivalence. The unit equations are stated in that node verbatim, and no existing node states associativity or symmetry of the derived μ. I recomputed the step 8 associativity and step 9 symmetry and unit cancellations; they reduce exactly to the displayed ordinary equations. μ^c=b·a^{-1} gives the stated normalization and uniqueness. Edge cases I=0, I=A, nilpotent I with non-perfect A_n, and u=id are consistent. Only split-owned fields changed versus live (statement and stmt_deps untouched); there are no new nodes. No cycle (the parent is the only citer). All cited units are in the route of sk-thm-sf-compatibility. No SGA. Not dropped, no repair note, live still unsplit. No duplicate found in the DAG; the abstract reflective and ℓ-adic analogues are different settings. Advisory: the statement inherited from Q75 does not define the completed constraints; step 5 supplies the canonical ones."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedTensorUnitInsertion",
+  "declaration": "CategoryTheory.ConstantCompletion.completedTensorUnitInsertion",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.tensorInsertLeft",
+   "CategoryTheory.ConstantCompletion.tensorInsertRight",
+   "CategoryTheory.ConstantCompletion.CompletedConstraintModel",
+   "CategoryTheory.ConstantCompletion.completeInverse",
+   "CategoryTheory.ConstantCompletion.CompletedPullbackCoherence",
+   "CategoryTheory.ConstantCompletion.CompletedTensorAssertions",
+   "CategoryTheory.ConstantCompletion.constantDerivedMonoidal",
+   "CategoryTheory.ConstantCompletion.constantDerivedSymmetric",
+   "CategoryTheory.ConstantCompletion.constantDerivedTensor",
+   "CategoryTheory.ConstantCompletion.ConstantTensorData",
+   "CategoryTheory.ConstantCompletion.ConstantTensorNormalization",
+   "CategoryTheory.ConstantCompletion.completedTensorUnitInsertion"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedTensorUnitInsertion.lean",
+  "statement": "theorem completedTensorUnitInsertion {C E : Type u} [SmallCategory C] [SmallCategory E] (JC : GrothendieckTopology C) (JD : GrothendieckTopology E) (A : Type u) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (L : Sheaf JC (Type u) ⥤ Sheaf JD (Type u)) (V : Sheaf JD (Type u) ⥤ Sheaf JC (Type u)) (adj : L ⊣ V) [PreservesFiniteLimits L] : ∃ (F : InverseImageData L) (k : ConstantTensorData F A) (μ : constantDerivedTensor JC A ⋙ (derivedPull F V adj (constantMap F A)).functor ≅ (((derivedPull F V adj (constantMap F A)).functor).prod ((derivedPull F V adj (constantMap F A)).functor)) ⋙ constantDerivedTensor JD A), ConstantTensorNormalization F V adj A k μ ∧ @CompletedTensorAssertions (D (constant JC A)) _ (constantDerivedMonoidal JC A) (constantDerivedSymmetric JC A) (D (constant JD A)) _ (constantDerivedMonoidal JD A) (constantDerivedSymmetric JD A) (IsComplete (quotient JC A I 0)) (IsComplete (quotient JD A I 0)) (derivedPull F V adj (constantMap F A)).functor (completion JC A I false) (completion JD A I false) (completionUnit JC A I false) (completionUnit JD A I false) μ",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-191890bce",
+  "group": "O2",
+  "result": "pass",
+  "note": "One Lean file plus the item lean record (only the lean field changed vs live); statement verbatim; 12 declarations match the file; only the theorem is sorry, no hollow defs; imports follow stage-2 rule 7; docstrings carry the source tags, blueprint id and all 9 proof steps. Setting is the completedPullbackAdjunction interface verbatim, no extra hypothesis, no perfectness. Ordinary mu is an existential fixed uniquely by a flat K-flat representative equation with the canonical comparison k.total (directions checked); derived tensor is RingedDerivedNative, the structure ringedDerived_closed_symmetric_monoidal uses. Tensor insertions on both sites and the pullback insertion asserted for arbitrary inputs; mu^c has the node's type, normalization and a separate uniqueness clause; unit comparisons e and e^c fixed uniquely; completed constraints match proof step 5; associativity and unit laws via OplaxMonoidal with delta = mu^c and eta = e^c, plus the symmetry square. Edge cases I=0, I=A, nilpotent I, A=0, u=id allowed; universes as the dependency. Advisories: CanonicalRingedTensorComparison and RingedDerivedNative come from nodes outside stmt_deps; the named RingedTensorEdge.tensorComparison is characterized by the same representative equation. No file changed, so no compile (worker reports clean compiles in 12.9 s and 13.9 s)."
  }
 }

@@ -236,5 +236,27 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-b2a804c02 (reviewer sub-agent of L); spot-checked: I read the item and all 7 steps in full and redid each calculation by hand. Step 1: the composite comparisons h^S = h^Q(Q e_F⊗1) and a^S = a^Q(Qδ^F⊗1) follow from bifunctoriality. Step 2: joint naturality of T comes from the naturality of v and then of t. Step 3: the unit law uses naturality of v at e_F, then the v-unit law, then the t-unit law, and keeps F1 distinct from 1. Steps 4–7: v-naturality at δ^F, then v-associativity together with α(d⊗1) = a^F, then t-associativity at (B,B',JM), then t-naturality at v_{D,M}; this gives T_{B,SB'⊗M}(1⊗T_{B',M})α. All are correct. The statement is byte-identical to the base and is a true formal lemma that does not need invertibility, braiding or an adjunction. Edge cases checked: unit objects, identity functors, and the Set example with constant R, J and non-invertible t, v. stmt_deps and proof_deps are the two mathlib-status definition nodes, and each step is a single naturality square or substitution, so elementary=true is justified. There are no new nodes and no tool_uses. lem-pur-composite-relative-tensor-action is the right-coefficient version without a unit clause, so it is not a duplicate. Mathlib LaxLeftLinear has a single coefficient category, so it is not a match; all four search tools are recorded. There is no repair note, so this is not a re-split. No SGA is cited. Stacks tags 0B56 and 0GL1 and the blueprint's (G13) at main-20261015 sk-prop-cohsm.proof.md:21 were checked. The parent lem-pur-projection-formula-coefficient-coherence Step 2 uses the statement exactly as stated. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CompositeLeftProjectionAction",
+  "declaration": "CategoryTheory.compositeLeftProjectionAction_coherence",
+  "declarations": [
+   "CategoryTheory.compositeLeftProjectionAction",
+   "CategoryTheory.compositeLeftProjectionAction_coherence"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CompositeLeftProjectionAction.lean",
+  "statement": "theorem compositeLeftProjectionAction_coherence {C₀ : Type u₀} [Category.{v₀} C₀] [MonoidalCategory C₀] {C₁ : Type u₁} [Category.{v₁} C₁] [MonoidalCategory C₁] {C₂ : Type u₂} [Category.{v₂} C₂] [MonoidalCategory C₂] (F : C₀ ⥤ C₁) (Q : C₁ ⥤ C₂) (R : C₁ ⥤ C₀) (J : C₂ ⥤ C₁) (f : F.CoreMonoidal) (q : Q.CoreMonoidal) (t : ∀ (B : C₀) (N : C₁), B ⊗ R.obj N ⟶ R.obj (F.obj B ⊗ N)) (v : ∀ (C : C₁) (M : C₂), C ⊗ J.obj M ⟶ J.obj (Q.obj C ⊗ M)) (ht : ∀ (B B' : C₀) (N N' : C₁) (b : B ⟶ B') (n : N ⟶ N'), t B N ≫ R.map (F.map b ⊗ₘ n) = (b ⊗ₘ R.map n) ≫ t B' N') (hv : ∀ (C C' : C₁) (M M' : C₂) (c : C ⟶ C') (m : M ⟶ M'), v C M ≫ J.map (Q.map c ⊗ₘ m) = (c ⊗ₘ J.map m) ≫ v C' M') (ht_unit : ∀ N : C₁, t (𝟙_ C₀) N ≫ R.map (f.εIso.inv ▷ N ≫ (λ_ N).hom) = (λ_ (R.obj N)).hom) (hv_unit : ∀ M : C₂, v (𝟙_ C₁) M ≫ J.map (q.εIso.inv ▷ M ≫ (λ_ M).hom) = (λ_ (J.obj M)).hom) (ht_assoc : ∀ (B B' : C₀) (N : C₁), t (B ⊗ B') N ≫ R.map ((f.μIso B B').inv ▷ N ≫ (α_ (F.obj B) (F.obj B') N).hom) = (α_ B B' (R.obj N)).hom ≫ B ◁ t B' N ≫ t B (F.obj B' ⊗ N)) (hv_assoc : ∀ (C C' : C₁) (M : C₂), v (C ⊗ C') M ≫ J.map ((q.μIso C C').inv ▷ M ≫ (α_ (Q.obj C) (Q.obj C') M).hom) = (α_ C C' (J.obj M)).hom ≫ C ◁ v C' M ≫ v C (Q.obj C' ⊗ M)) : (∀ (B B' : C₀) (M M' : C₂) (b : B ⟶ B') (m : M ⟶ M'), compositeLeftProjectionAction F Q R J t v B M ≫ (J ⋙ R).map ((F ⋙ Q).map b ⊗ₘ m) = (b ⊗ₘ (J ⋙ R).map m) ≫ compositeLeftProjectionAction F Q R J t v B' M') ∧ (∀ M : C₂, compositeLeftProjectionAction F Q R J t v (𝟙_ C₀) M ≫ (J ⋙ R).map ((Q.map f.εIso.inv ≫ q.εIso.inv) ▷ M ≫ (λ_ M).hom) = (λ_ ((J ⋙ R).obj M)).hom) ∧ (∀ (B B' : C₀) (M : C₂), compositeLeftProjectionAction F Q R J t v (B ⊗ B') M ≫ (J ⋙ R).map ((Q.map (f.μIso B B').inv ≫ (q.μIso (F.obj B) (F.obj B')).inv) ▷ M ≫ (α_ ((F ⋙ Q).obj B) ((F ⋙ Q).obj B') M).hom) = (α_ B B' ((J ⋙ R).obj M)).hom ≫ B ◁ compositeLeftProjectionAction F Q R J t v B' M ≫ compositeLeftProjectionAction F Q R J t v B ((F ⋙ Q).obj B' ⊗ M))",
+  "branch": "newtargets-dag",
+  "by": "Q03",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-541ac6d93",
+  "group": "Q03",
+  "result": "pass",
+  "note": "Every clause matches the node, read against Mathlib CoreMonoidal (Functor.lean:620-651). εIso.inv = e_H and μIso.inv = δ^H, directions correct. h^H, a^H and the composite comparisons e_S = Q(e_F)≫e_Q and δ^S = Q(δ^F)≫δ^Q are written explicitly. Joint naturality is rendered as ht/hv; unit and associativity hypotheses and all three conclusions are exact, with no braiding, adjunction or invertibility assumed. The helper T = t B (J M) ≫ R.map (v (F B) M) is real data. lean.statement is verbatim the file signature; one sorry. The node differs from live only by the lean field. stmt_deps are Mathlib-status nodes; the only import is Mathlib.CategoryTheory.Monoidal.Functor; six independent universes. Docstrings carry the source place, the blueprint id and all 7 steps. Not a duplicate: lem-pur-composite-relative-tensor-action is the right-action variant without a unit clause, and Mathlib LaxLeftLinear has one acting category. Report has both required sections. No repair note, not dropped. Not recompiled (2026-10-21 rule); no file changed. No findings."
  }
 }
