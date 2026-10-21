@@ -1,0 +1,157 @@
+{
+ "id": "lem-zl-condensed-scalar-finite-presentation",
+ "kind": "statement",
+ "title": "Finite scalar presentation under internal-module transport",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], $R=\\Lambda(*)$ its reconstructed ordinary scalar ring [def-zl-t-admissible-coefficient-models], and $X$ any scheme [def-pc-scheme]. Let $F_X$ be the ordinary realization defined in [lem-zl-flat-condensed-scalar-realization] (the construction, without its flatness assumption). Let $R_{\\mathrm{int}}$ be the internal scalar ring object of abelian groups and $E_X$ the finite-constant scalar-extension functor of [det-def-sfb-constructible-local-model]. For any internal $\\Lambda_X$-module sheaf $M$, the following are equivalent: (i) there is a finitely presented ordinary $R$-module $N$ and an isomorphism $M\\cong F_X(N)$; (ii) there is an internal $R_{\\mathrm{int}}$-module $P$ which is a cokernel of a map between finite direct sums of the regular module, and an isomorphism $M\\cong E_X(P)$. No flatness, coherence, regularity or geometric component hypothesis is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, formula (3.1), Remark 3.2, proof of Theorem 6.2(2), and equation (6.2)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-zl-t-admissible-coefficient-models",
+  "def-pc-scheme",
+  "lem-zl-flat-condensed-scalar-realization",
+  "det-def-sfb-constructible-local-model"
+ ],
+ "proof": [
+  {
+   "text": "The unique isomorphism from the explicitly chosen one-point profinite set to the chosen terminal object identifies its Lambda section ring with R, including multiplication and the unit. The internal-module/ordinary-module equivalence converts an action gamma to r*x=gamma(r tensor x). It sends the regular module to R and finite direct sums to finite free modules. Both directions preserve cokernels. A presentation R^m -> R^n -> N -> 0 therefore gives an internal finite presentation, and every internal finite presentation becomes such an ordinary presentation. This includes m=0, n=0 and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-internal-module-ab-equivalence",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2(2), using (3.1), Remark 3.2, (6.2), and Proposition 6.6"
+   }
+  },
+  {
+   "text": "Compare constant modules before and after section reconstruction: both are sheafifications of the constant module presheaf with the original scalar action. Their sheafification units identify them uniquely. The two coefficient maps are the constant-section adjunction counit, so they agree under the terminal-object identification of Step 1. The normalized internal/sectionwise scalar-adjunction comparison sends s tensor n to s tensor n; its inverse is the same generator formula in the opposite convention. Thus ordinary scalar extensions agree naturally. Apply the sectionwise/internal inverse equivalence and inverse image to X.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "def-zl-condensed-scalar-realization",
+    "det-def-sfb-constructible-local-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2(2), using (3.1), Remark 3.2, (6.2), and Proposition 6.6"
+   }
+  },
+  {
+   "text": "For (i), apply the inverse scalar-module equivalence to N, use Step 1 for finite presentation, and compose the isomorphism of Step 2 with M isomorphic to F_X(N). For (ii), apply the forward equivalence to P, use Step 1, and use the inverse comparison of Step 2. Neither direction requires a uniform choice across different covering members.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2(2), using (3.1), Remark 3.2, (6.2), and Proposition 6.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-internal-module-ab-equivalence",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "det-def-sfb-constructible-local-model",
+  "def-sfb-site-derived-constant-module-functor",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "def-zl-condensed-scalar-realization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 6.2(2), flat evaluation and heart identification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flat condensed coefficient scalar realization is exact and commutes with derived category localization",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; instAbelianCondensedMod; Condensed.instAB5CondensedMod; CondensedMod.IsSolid; instAbelianLightCondMod; Condensed.profiniteSolid; CondensedMod.LocallyConstant.functor; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "no exact match: these general APIs do not identify the two prescribed scalar realization functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented modules over an ordinary scalar ring and finitely presented internal modules in abelian groups have the same images under constant sheaf scalar extension",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.isFinitePresentation; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.Presentation.map_generators_I; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.Presentation.map; SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no exact match: these general APIs do not identify the two prescribed scalar realization functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation",
+   "results": "Module.FinitePresentation; instFinitePresentation; instFiniteOfFinitePresentation; Module.FinitePresentation.of_subsingleton; instFinitePresentationForall; Module.finitePresentation_of_finite; Module.finitePresentation_iff_finite; Module.finitePresentation_of_projective",
+   "date": "2026-10-21",
+   "verdict": "no exact match: these general APIs do not identify the two prescribed scalar realization functors"
+  },
+  {
+   "tool": "grep",
+   "query": "Mod.IsFinitelyPresented|ordinaryScalarRealization",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no exact match: these general APIs do not identify the two prescribed scalar realization functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finitely presented ordinary modules and internal modules in abelian groups agree under constant sheaf scalar extension",
+   "results": "instFinitePresentationTensorProduct; SheafOfModules.IsFinitePresentation; SheafOfModules.IsFinitePresentation.mk; SheafOfModules.isFinitePresentation; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; Module.finitePresentation_iff_exists_presentation; Module.FinitePresentation.iff_finitePresentation_of_finite; Module.FinitePresentation.mk",
+   "date": "2026-10-21",
+   "verdict": "Found the ordinary flat-exactness and finite-presentation APIs, but no comparison between the prescribed scalar realization encodings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TAdmissibleDualizableTruncations",
+  "date": "2026-10-21",
+  "group": "P4"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, third comparison (the perfect form of duality), continuous-coefficient realization through lem-zl-adic-hom-tensor-lisse-criterion and its t-admissible truncation input",
+   "via": [
+    "lem-zl-adic-hom-tensor-lisse-criterion",
+    "lem-zl-t-admissible-dualizable-truncations"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CondensedScalarFinitePresentation",
+  "file": "lean/Sheaf/Paper/CondensedScalarFinitePresentation.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ordinaryScalarRealization_finitePresentation",
+  "statement": "theorem ordinaryScalarRealization_finitePresentation\n    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (X : Scheme.{u})\n    (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ.X X)) :\n    (∃ N : ModuleCat.{u + 1} (scalarRing Λ), Module.FinitePresentation (scalarRing Λ) N ∧\n      Nonempty (M ≅ (ordinaryScalarRealization Λ X).obj N)) ↔\n    (∃ P : Mod Ab.{u + 1} (scalarRingObj Λ.X),\n      Mod.IsFinitelyPresented (scalarRingObj Λ.X) P ∧\n      Nonempty (M ≅ (finiteConstantScalarExtension Λ.X X).obj P))",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T163820-L-1106263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T163820-L-1106263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

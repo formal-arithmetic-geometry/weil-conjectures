@@ -1,0 +1,195 @@
+{
+ "id": "lem-zl-flat-condensed-scalar-realization",
+ "kind": "statement",
+ "title": "Flat condensed scalar realization is exact",
+ "statement": "Let $\\Lambda$ be a commutative condensed ring [sk-def-sfb-condensed-ring], let $R=\\Lambda(*)$ with its reconstructed section-ring multiplication [def-zl-t-admissible-coefficient-models], and let $X$ be any scheme [def-pc-scheme]. Suppose the restriction map $R\\to\\Lambda(S)$ is flat for every extremally disconnected profinite set $S$. Define $F_X$ from ordinary $R$-modules to internal $\\Lambda_X$-module sheaves by the actual exact constant-module functor [def-sfb-site-derived-constant-module-functor], the ordinary extension functor in the fixed scalar change-of-rings model [def-zl-condensed-scalar-realization], the sectionwise-to-internal equivalence [def-weil-pbc-internal-abelian-sheaf-module-equivalence], and inverse image from the profinite point to $X$. Then $F_X$ is additive and preserves finite limits and finite colimits. Its termwise functor on the ordinary unbounded derived categories is naturally isomorphic to the prescribed condensed scalar realization $L_X:D(R)\\to D(\\Lambda_X)$ [def-zl-condensed-scalar-realization]. No coherence, regularity, boundedness or condition on the irreducible components of $X$ is assumed.",
+ "source": {
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Section 3, formula (3.1), Remark 3.2, proof of Theorem 6.2(2), and equation (6.2)"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring",
+  "def-zl-t-admissible-coefficient-models",
+  "def-pc-scheme",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-zl-condensed-scalar-realization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-pbc-flat-ring-map"
+ ],
+ "proof": [
+  {
+   "text": "Ordinary scalar realization is the composite of exact constant realization, ordinary scalar extension, the section/internal equivalence, and inverse image. Its factors are additive (for inverse image use preservation of finite products). This gives additivity without flatness.",
+   "uses": [
+    "def-sfb-site-derived-constant-module-functor",
+    "def-zl-condensed-scalar-realization",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2(2), using (3.1), Remark 3.2, (6.2), and Proposition 6.6"
+   }
+  },
+  {
+   "text": "On Spec D over X for D w-contractible and its structural morphism weakly etale, the ordinary scalar-section comparison identifies F_X, after section reconstruction and coefficient transport, with extension of scalars R -> Lambda(pi_0 Spec D). The component space is extremally disconnected. Flatness and the ordinary flat tensor exactness criterion make this evaluation exact. Restriction of scalars along the coefficient isomorphism is faithful and exact, so it reflects exactness.",
+   "uses": [
+    "lem-zl-condensed-affine-ordinary-scalar-sections",
+    "lem-weil-pbc-source-affine-wcontractible-evaluation",
+    "lem-weil-pbc-flat-tensor-exact",
+    "sk-def-pe-wlocal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2(2), using (3.1), Remark 3.2, (6.2), and Proposition 6.6"
+   }
+  },
+  {
+   "text": "To detect exactness of a short complex S of module sheaves, take u:S.X1 -> ker S.g. It is enough for u to be epi. The forgetful functor to abelian sheaves preserves finite colimits and reflects epis. For a section of ker S.g on V, use the affine w-contractible cover of V. On each member, the spectral evaluation from Step 2 makes u surjective, after transport by its affine isomorphism. Hence the image sieve of the section contains this covering sieve. The underlying abelian sheaf morphism is locally surjective, so epi. Thus F_X preserves all exact short complexes; the abelian exact-functor criterion supplies preservation of finite limits and colimits.",
+   "uses": [
+    "det-pe-wcb-cover",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2(2), using (3.1), Remark 3.2, (6.2), and Proposition 6.6"
+   }
+  },
+  {
+   "text": "Let c be exact constant realization, m the fixed derived extension model, and phi the exact composite of the section/internal equivalence and inverse image. Set H=D(c) followed by m.T and D(phi). Compose the factorization isomorphisms for c and phi with m.epsilon to construct beta:Q H -> F_X(complexes) Q. If P is K-flat with flat terms, c(P) is K-flat, so m.computes makes beta_P invertible.",
+   "uses": [
+    "lem-sfb-constant-module-kflat",
+    "def-zl-condensed-scalar-realization",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2(2), using (3.1), Remark 3.2, (6.2), and Proposition 6.6"
+   }
+  },
+  {
+   "text": "Resolve every scalar complex K by a flat-term K-flat P -> K. Both sides of beta invert this quasi-isomorphism: the left because it factors through Q, the right because F_X is exact. Naturality and beta_P invertible force beta_K invertible. The localization universal property lifts beta to an isomorphism H -> D(F_X). The exact composition comparison D(phi) = D(p)D(q) identifies H with the prescribed L_X. Invert the comparison to obtain D(F_X) isomorphic to L_X.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-localization-universal-property",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Proof of Theorem 6.2(2), using (3.1), Remark 3.2, (6.2), and Proposition 6.6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-site-derived-constant-module-functor",
+  "def-zl-condensed-scalar-realization",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-zl-condensed-affine-ordinary-scalar-sections",
+  "lem-weil-pbc-source-affine-wcontractible-evaluation",
+  "lem-weil-pbc-flat-tensor-exact",
+  "sk-def-pe-wlocal",
+  "det-pe-wcb-cover",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-sfb-constant-module-kflat",
+  "lem-weil-pbc-exact-functor-bounded-below",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+  "place": "Proof of Theorem 6.2(2), flat evaluation and heart identification"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "flat condensed coefficient scalar realization is exact and commutes with derived category localization",
+   "results": "LightCondensed.instIsGrothendieckAbelianLightCondMod; instAbelianCondensedMod; Condensed.instAB5CondensedMod; CondensedMod.IsSolid; instAbelianLightCondMod; Condensed.profiniteSolid; CondensedMod.LocallyConstant.functor; CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "no exact match: these general APIs do not identify the two prescribed scalar realization functors"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finitely presented modules over an ordinary scalar ring and finitely presented internal modules in abelian groups have the same images under constant sheaf scalar extension",
+   "results": "SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation; SheafOfModules.isFinitePresentation; SheafOfModules.instIsFiniteTypeOfIsFinitePresentation; SheafOfModules.IsFinitePresentation; SheafOfModules.Presentation.map_generators_I; SheafOfModules.IsFinitePresentation.exists_quasicoherentData; SheafOfModules.Presentation.map; SheafOfModules.quasicoherentDataOfIsFinitePresentation",
+   "date": "2026-10-21",
+   "verdict": "no exact match: these general APIs do not identify the two prescribed scalar realization functors"
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.FinitePresentation",
+   "results": "Module.FinitePresentation; instFinitePresentation; instFiniteOfFinitePresentation; Module.FinitePresentation.of_subsingleton; instFinitePresentationForall; Module.finitePresentation_of_finite; Module.finitePresentation_iff_finite; Module.finitePresentation_of_projective",
+   "date": "2026-10-21",
+   "verdict": "no exact match: these general APIs do not identify the two prescribed scalar realization functors"
+  },
+  {
+   "tool": "grep",
+   "query": "Mod.IsFinitelyPresented|ordinaryScalarRealization",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no exact match: these general APIs do not identify the two prescribed scalar realization functors"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat scalar realization of ordinary modules as condensed sheaves is exact and agrees with derived scalar extension",
+   "results": "Module.Flat.rTensor_shortComplex_exact; Algebra.FormallyUnramified.flat_of_restrictScalars; ModuleCat.preservesFiniteLimits_extendScalars_of_flat; Module.Flat.lTensor_shortComplex_exact; Module.Flat.iff_rTensor_exact'; Module.Flat.iff_lTensor_exact'; comonadicExtendScalars; Module.Flat.iff_lTensor_exact",
+   "date": "2026-10-21",
+   "verdict": "Found the ordinary flat-exactness and finite-presentation APIs, but no comparison between the prescribed scalar realization encodings."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.TAdmissibleDualizableTruncations",
+  "date": "2026-10-21",
+  "group": "P4"
+ },
+ "chapter": "sec-zeta-weil",
+ "unit": "sk-prop-smooth-proper-purity",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-zl-smooth-proper-relative-purity",
+   "place": "Proof Step 3, third comparison (the perfect form of duality), continuous-coefficient realization through lem-zl-adic-hom-tensor-lisse-criterion and its t-admissible truncation input",
+   "via": [
+    "lem-zl-adic-hom-tensor-lisse-criterion",
+    "lem-zl-t-admissible-dualizable-truncations"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.FlatCondensedScalarRealization",
+  "file": "lean/Sheaf/Paper/FlatCondensedScalarRealization.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.flat_ordinaryScalarRealization",
+  "statement": "theorem flat_ordinaryScalarRealization\n    (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X]\n    (hflat : ∀ S : Profinite.{u}, ExtremallyDisconnected S → (scalarSectionMap Λ S).Flat)\n    (X : Scheme.{u}) :\n    ∃ (ha : (ordinaryScalarRealization Λ X).Additive)\n      (hl : PreservesFiniteLimits (ordinaryScalarRealization Λ X))\n      (hr : PreservesFiniteColimits (ordinaryScalarRealization Λ X)),\n      letI := ha\n      letI := hl\n      letI := hr\n      Nonempty ((ordinaryScalarRealization Λ X).mapDerivedCategory ≅\n        condensedScalarRealization Λ.X X)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T163820-L-1106263",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T163820-L-1106263",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
