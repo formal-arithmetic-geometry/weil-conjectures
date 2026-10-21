@@ -40,9 +40,37 @@
   "def-weil-algebraically-closed-coefficients",
   "lem-pur-derived-pullback-tensor-iso"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For each negative exponent apply the canonical internal-Hom comparison to the positive-power map and the degree-zero coefficient map. Conjugate by these maps. Check the evaluation formula and prove uniqueness after taking the adjunction mate; the unit is invertible along a scheme isomorphism.",
+   "uses": [
+    "lem-pur-inverse-image-hom-comparison",
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Descend the strict augmentation through the localization of good complexes, composing with the normalized derived pullback comparison. On the full constructible subcategory its components are invertible by pullbackAugmentation_isIso. Invert this natural transformation. The representative normalization follows by cancelling the comparison factors, and essential surjectivity proves uniqueness.",
+   "uses": [
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-integral-constructible-triangulated"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-inverse-image-hom-comparison",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-integral-constructible-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-purity-conv/def-weil-frobenius-coefficient-twists.md",
+  "place": "Definition clauses 3–4 and the existing declaration proof docstrings; normalized internal Hom and localization descent (B3). The positive-power maps and the two strict augmentation statements retain their original unfinished proofs."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -153,35 +181,13 @@
   "note": "Re-delivery of 7d346b RETURN (H2). Only change: item Lean l.554/556/558 `.rational (AdicSmoothDualizing.fieldStage P)` -> `.rational ⟨P.extension⟩` (fieldStage is an abbrev for exactly that, same F/G/adjunction; compile confirms defeq with rationalWeilPurityGamma's type); other 3 modules byte-identical to the reviewed head. Item stmt_deps drop cor-pur-adic-and-rational-smooth-dualizing-complexes and thm-pur-adic-reconstruction, add new def node def-pur-canonical-purity-source-transports (owns rationalSource/commonSource/commonShiftedLine used by H and b); no added theorem stmt_deps remain. lean.statement verbatim for item, both new nodes and the twist (B) record. Dep records identical to live except the accepted twist (B) lean record; the derived-pullback record differs from the old snapshot only by live drift (NQ landing). No live collisions. Substance (clauses, edge cases, F1-F3 repairs, gates) unchanged from the prior review. nt_compile --json rc=0 clean: 14.9/29.7/23.8/18.8 s. Advisory: the realization def node still cites three theorem nodes for plain defs; second reading is a self-check; def-zl-weil-ind-sheaf-category is uncited (gap predates this delivery)."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "R3",
+  "reviewer": "COMPILER",
+  "group": "B3",
   "result": "pass",
-  "landing": "20261019T005411-L-2764497",
+  "landing": "20261021T214736-L-1845252",
   "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.FrobeniusCoefficientTwists.commonTwistCommutation_naturality",
-   "WeilConjectures.FrobeniusCoefficientTwists.commonWeilLine_heart",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_completedToOrdinary",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finitePositiveLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finiteSignedLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_positiveLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_pullbackAugmentation",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_signedLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.pullbackAugmentation_isIso",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalTwistCommutation_naturality",
-   "WeilConjectures.FrobeniusCoefficientTwists.rationalWeilLine_heart"
-  ],
-  "sorry_after": [
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_completedToOrdinary",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finitePositiveLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_finiteSignedLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_positiveLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_pullbackAugmentation",
-   "WeilConjectures.FrobeniusCoefficientTwists.existsUnique_signedLineMaps",
-   "WeilConjectures.FrobeniusCoefficientTwists.pullbackAugmentation_isIso"
-  ]
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
