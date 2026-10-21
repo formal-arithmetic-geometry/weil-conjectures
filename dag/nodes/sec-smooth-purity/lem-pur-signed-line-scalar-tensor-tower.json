@@ -14,9 +14,145 @@
   "def-pur-sheaf-tensor-product",
   "def-pur-sheaf-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work on the localized sites of a covering $\\{U_\\lambda\\to1\\}$ trivializing a line. Restriction commutes with sheaf tensor, including change of rings, by [lem-sfb-localized-site-tensor-restriction], and with sheaf Hom by its slice definition [def-pur-sheaf-hom]. By [lem-pur-sheaf-hom-cover-gluing], maps agreeing on the pairwise fiber products glue uniquely. In particular, equality of two global module maps can be checked on this cover: both are the unique gluing of the same restrictions. A map with inverses on the cover is invertible globally: on overlaps two local inverses $v,w$ of $f$ satisfy $v=vfw=w$, hence glue, and the two inverse identities hold by the same uniqueness. All pullbacks of the cover exist by finite limits, so this applies over every object of the site, without assuming enough points.",
+   "uses": [
+    "lem-sfb-localized-site-tensor-restriction",
+    "def-pur-sheaf-hom",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EL (lemma-tensor-product-pullback), 04TT (section-internal-hom), 03EM (lemma-internal-hom) and Sites 04TQ (lemma-glue-maps)."
+   }
+  },
+  {
+   "text": "On a chart with basis $e$ for $L$, the tensor unitors of [lem-sp-scalar-extension-binary-coherence] identify $L^{[n]}$ with $R$ by the basis $e^n$ for $n\\geq0$ (start at $1\\in R$ and tensor one more $e$). For $n>0$ the slice definition of Hom identifies its dual with $R$: a functional is determined by $c=\\varphi(e^n)$, and is $re^n\\mapsto rc$. Thus $e^{-n}$ is the functional taking $e^n$ to $1$. These identifications hold on every object over the chart, and commute with restriction. If $e'=ue$ is another basis, its coordinate $u$ is a unit since the inverse basis change supplies $u^{-1}$. Tensoring gives $(e')^n=u^ne^n$, while evaluating on $(e')^n$ gives $(e')^{-n}=u^{-n}e^{-n}$. Consequently $(e')^m=u^me^m$ for every integer $m$.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product) and 04TT (section-internal-hom), unitors and local rank-one coordinates."
+   }
+  },
+  {
+   "text": "Use the scalar/tensor and unit comparisons of [lem-sp-scalar-extension-binary-coherence], exchanging the two tensor factors to use the statement's right-hand scalar convention. The exchange is $s\\otimes x\\mapsto x\\otimes s$, with inverse the same exchange, by the bilinear universal property. The unit comparison is $r\\otimes s\\mapsto\\iota_{ij}(r)s$. For a local basis $e_i$, the scalar extension of its chart is a free $R_j$-module with basis $e_i\\otimes1$, so $e_j=b_{ij}(e_i\\otimes1)$ is a basis. The recursive positive-power map is an isomorphism, being a composite of the binary comparison and tensors of the given isomorphism. Induction, with exponent zero the unit comparison, proves that $b_{ij,m}((re_i^m)\\otimes s)=\\iota_{ij}(r)s e_j^m$ for every $m\\geq0$: the induction step sends the pure basis tensor to $e_j^m\\otimes e_j=e_j^{m+1}$ and linearity supplies its coefficient.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), scalar tensor formula and its bilinear universal property; recursive tensor powers."
+   }
+  },
+  {
+   "text": "Apply [lem-sp-scalar-extension-dual-evaluation] to $N=L_i^{[n]}$. In the right-hand scalar convention it constructs exactly $\\beta_{ij,n}$ with evaluation $\\iota_{ij}(\\varphi(x))st$ on $x\\otimes t$, on every slice. To check it is invertible, choose the chart of step 2. The source has basis $(e_i^n)^\\vee\\otimes1$ by the scalar unit comparison. The target has basis the functional sending $e_i^n\\otimes1$ to $1$ by the slice Hom definition. The evaluation formula sends the former basis to the latter. The local inverse sends a functional $h$ to $((e_i^n)^\\vee\\otimes1)h(e_i^n\\otimes1)$. These are inverse maps on every object over the chart. The local inverses glue by step 1, giving an isomorphism without any flatness assumption on $R_i\\to R_j$.",
+   "uses": [
+    "lem-sp-scalar-extension-dual-evaluation",
+    "lem-sp-scalar-extension-binary-coherence",
+    "def-pur-sheaf-hom",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), specialized to change of rings; Tags 03EK, 04TT and 03EM for the local inverse."
+   }
+  },
+  {
+   "text": "Precomposition with $b_{ij,n}^{-1}$ is an isomorphism on sheaf Hom: its inverse is precomposition with $b_{ij,n}$, by the slice definition. Hence the stated definition of $b_{ij,-n}$ is an isomorphism. Evaluation at $b_{ij,n}(x\\otimes t)$ cancels this inverse, leaving exactly $\\beta_{ij,n}(\\varphi\\otimes s)(x\\otimes t)=\\iota_{ij}(\\varphi(x))st$. In compatible bases, this says $b_{ij,-n}((re_i^{-n})\\otimes s)$ evaluated at $e_j^n$ is $\\iota_{ij}(r)s$; a functional on a free line is determined by that value. This proves the displayed local formula for every negative exponent, completing all signed exponents.",
+   "uses": [
+    "def-pur-sheaf-hom",
+    "lem-sp-scalar-extension-dual-evaluation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMX (remark-pullback-internal-hom), evaluation; Tag 04TT (section-internal-hom), precomposition on slices."
+   }
+  },
+  {
+   "text": "For any integers $a,b$ define on a basis chart the bilinear map $(re^a,qe^b)\\mapsto rq e^{a+b}$. By [lem-pc-sites-sheaf-tensor-bilinear-universal] this defines a linear map from the sheaf tensor, and its inverse in these coordinates is $ce^{a+b}\\mapsto(ce^a)\\otimes e^b$. To compare charts put $e'=ue$. The map normalized using $e$ sends $(e')^a\\otimes(e')^b$ to $u^au^b e^{a+b}=u^{a+b}e^{a+b}=(e')^{a+b}$, including negative $a,b$ since $u$ is a unit. Thus the chart maps and inverses agree on overlaps. By [lem-pur-sheaf-hom-cover-gluing] they glue to an isomorphism $\\mu_i^{a,b}$. The normalization determines it uniquely, since on every chart its domain is a free line generated by $e^a\\otimes e^b$.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK (section-tensor-product), bilinear universal property; 03EM (lemma-internal-hom), via Sites 04TQ (lemma-glue-maps), gluing."
+   }
+  },
+  {
+   "text": "Verify the contraction description without choosing additional data. Put $D=\\mathcal Hom_R(L,R)$. The pairing of pure tensors $d_1\\otimes\\cdots\\otimes d_n$ and $x_1\\otimes\\cdots\\otimes x_n$ with value $\\prod_k d_k(x_k)$ gives a map $D^{\\otimes n}\\to\\mathcal Hom_R(L^{\\otimes n},R)$ by the bilinear universal property and the slice definition of Hom. It is an isomorphism: on each basis chart it sends $(e^\\vee)^{\\otimes n}$ to $e^{-n}$, and the inverse chart maps glue as in step 1. For $a,b\\geq0$ concatenate the $L$ factors. For $a,b\\leq0$ concatenate the $D$ factors using these identifications. For $a=p\\geq0$, $b=-q\\leq0$, reassociate and exchange factors, evaluate $\\min(p,q)$ pairs $e^\\vee\\otimes e$, and retain the remaining $L$ factors if $p\\geq q$ or $D$ factors otherwise. For $a\\leq0$, $b\\geq0$ first exchange the two blocks and use the same construction; exponent zero uses a unitor. Every evaluation contributes $1$, so each such map sends $e^a\\otimes e^b$ to $e^{a+b}$. Uniqueness in step 6 identifies these maps with $\\mu_i^{a,b}$.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-pur-sheaf-hom",
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03EK and 04TT, tensor and evaluation on slices; Tag 0FNY (example-dual), local dual-basis pairing, with the rank-one verification written here."
+   }
+  },
+  {
+   "text": "The normalized binary scalar comparison of [lem-sp-scalar-extension-binary-coherence] is, in our tensor order, $\\sigma_{ij}((x\\otimes y)\\otimes s)=(x\\otimes s)\\otimes(y\\otimes1)$. Check the desired multiplication square over a chart of $L_i$, using $e_j=b_{ij}(e_i\\otimes1)$. Its source is a free $R_j$-line with basis $((e_i^a\\otimes e_i^b)\\otimes1)$. More explicitly, on $((re_i^a\\otimes qe_i^b)\\otimes s)$ the left route gives $\\iota_{ij}(rq)s e_j^{a+b}$; the right route gives $\\iota_{ij}(r)s\\,\\iota_{ij}(q)e_j^{a+b}$. These are equal because $\\iota_{ij}$ preserves products. This calculation uses the already proved formula for all signed $a,b$ and $a+b$, so includes every mixed-sign case. Linearity gives equality on the whole chart and the uniqueness in step 1 gives equality globally.",
+   "uses": [
+    "lem-sp-scalar-extension-binary-coherence",
+    "lem-pur-sheaf-hom-cover-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), normalized scalar/tensor comparison; signed-power basis calculation."
+   }
+  },
+  {
+   "text": "For completeness the coefficient associator used in the tower is defined on pure tensors by $((x\\otimes s)\\otimes t)\\mapsto x\\otimes\\iota_{12}(s)t$. This respects the inner $R_0$ balance since $\\iota_{02}(r)=\\iota_{12}(\\iota_{01}(r))$, and respects the outer $R_1$ balance since $\\iota_{12}(ss')t=\\iota_{12}(s)\\iota_{12}(s')t$. The sheaf bilinear universal property therefore constructs it. Its inverse is $x\\otimes t\\mapsto(x\\otimes1)\\otimes t$, which respects $R_0$ balance using the same coefficient equation. The first composite fixes $x\\otimes t$. The second sends $((x\\otimes s)\\otimes t)$ to $(x\\otimes1)\\otimes\\iota_{12}(s)t=((x\\otimes s)\\otimes t)$ by the outer balancing relation. Equality follows by the universal property's uniqueness, iterated over the two tensors. Thus this is the asserted isomorphism for arbitrary $M$, not just for lines.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), bilinear universal property and ordinary change-of-rings associativity."
+   }
+  },
+  {
+   "text": "Choose a basis $e_0$ on a trivializing cover and put $e_1=b_{01}(e_0\\otimes1)$ and $e_2=b_{12}(e_1\\otimes1)$. The hypothesis at exponent one implies also $e_2=b_{02}(e_0\\otimes1)$. For every integer $m$, the left route in the tower equation sends $((re_0^m\\otimes s)\\otimes t)$ to $\\iota_{02}(r)\\iota_{12}(s)t e_2^m$. The right route sends it to $\\iota_{12}(\\iota_{01}(r)s)t e_2^m$. Multiplicativity and the composite-ring-map hypothesis identify these coefficients. The source is a free $R_2$-line on the iterated extension of $e_0^m$, so this gives the tower equality on the chart; step 1 gives it globally. Finally take the identity ring map with $b_{ii,1}(x\\otimes s)=sx$. The compatible basis is then $e_i$ itself. For every signed $m$ the formula already proved reads $(re_i^m)\\otimes s\\mapsto rs e_i^m$, which is exactly the tensor-unit comparison. Local equality and gluing prove this globally, including $m=0$.",
+   "uses": [
+    "lem-pur-sheaf-hom-cover-gluing",
+    "lem-sp-scalar-extension-binary-coherence"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), coefficient associativity and units; Tag 0GMX (remark-pullback-internal-hom), signed evaluation normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-localized-site-tensor-restriction",
+  "def-pur-sheaf-hom",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-sp-scalar-extension-dual-evaluation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-existence/prop-weil-twist-preserves.proof.md",
+  "place": "Tensor-power/internal-Hom sentence and final common-finite-stage sentence, expanded by local basis calculations using Stacks 03EK, 03EL, 03EM, 04TT and 0GMX; this signed coherence proof is written by Q132."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +195,45 @@
    "results": "18 hit(s): Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/TensorProduct/Tower.lean, Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean, Mathlib/LinearAlgebra/ExteriorPower/Pairing.lean",
    "date": "2026-10-21",
    "verdict": "no match: Algebraic dual and Picard-group results do not state isomorphisms of module sheaves and their signed multiplication, evaluation and tower equations."
+  },
+  {
+   "tool": "loogle",
+   "query": "Module.Dual.baseChange",
+   "results": "6 hit(s): Module.Dual.baseChange, Module.Dual.baseChange_apply_tmul, IsBaseChange.toDual_apply, Module.Dual.baseChange_baseChange, LinearMap.transvection.baseChange, LinearEquiv.transvection.baseChange",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern algebraic module duals, Picard classes, presheaf tensors or sheafification actions; none states the signed sheaf isomorphisms with every tensor, evaluation, tower and identity clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Scalar extension comparisons on signed powers of locally free rank one module sheaves preserve multiplication, evaluation, and composition of ring maps",
+   "results": "8 hit(s): PresheafOfModules.Sheafify.mul_smul, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux, CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul, PresheafOfModules.Sheafify.map_smul_eq, PresheafOfModules.Sheafify.one_smul, PresheafOfModules.Sheafify.SMulCandidate.h, SheafOfModules.freeHomEquiv_comp_apply, PresheafOfModules.Sheafify.map_smul",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern algebraic module duals, Picard classes, presheaf tensors or sheafification actions; none states the signed sheaf isomorphisms with every tensor, evaluation, tower and identity clause."
+  },
+  {
+   "tool": "grep",
+   "query": "baseChange.*[Dd]ual|[Dd]ual.*baseChange|signed.*power",
+   "results": "10 hit(s): Mathlib/LinearAlgebra/Transvection/Basic.lean, Mathlib/LinearAlgebra/Transvection/Basic.lean, Mathlib/LinearAlgebra/Transvection/Basic.lean, Mathlib/RingTheory/PicardGroup.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean, Mathlib/LinearAlgebra/Dual/BaseChange.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern algebraic module duals, Picard classes, presheaf tensors or sheafification actions; none states the signed sheaf isomorphisms with every tensor, evaluation, tower and identity clause."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaf line dual scalar extension is compatible with all integer powers and coefficient towers",
+   "results": "8 hit(s): WeakSpace.instIsScalarTower, PresheafOfModules.Sheafify.SMulCandidate.h, TensorPower.pairingDual, PresheafOfModules.Sheafify.map_smul_eq, LinearMap.IsScalarTower.compatibleSMul', Valuation.HasExtension.instIsScalarTowerInteger, LinearPMap.instIsScalarTower, LinearMap.IsScalarTower.compatibleSMul",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern algebraic module duals, Picard classes, presheaf tensors or sheafification actions; none states the signed sheaf isomorphisms with every tensor, evaluation, tower and identity clause."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Integer tensor powers of invertible sheaves: evaluation-defined dual base change and coherence for tensor multiplication and ring towers",
+   "results": "8 hit(s): CommRing.Pic.mapAlgebra_apply, CommRing.Pic.mk_tensor, CommRing.Pic.mul_eq_tensor, PresheafOfModules.Monoidal.tensorObj, PresheafOfModules.monoidalCategoryStruct, CommRing.Pic.mapAlgebra, PresheafOfModules.Monoidal.tensorObj_obj, PresheafOfModules.monoidalCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern algebraic module duals, Picard classes, presheaf tensors or sheafification actions; none states the signed sheaf isomorphisms with every tensor, evaluation, tower and identity clause."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-integral-twist-base-change",
@@ -81,5 +252,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-signed-line-scalar-tensor-tower",
+  "worker": "stage1",
+  "summary": "Expanded every signed comparison and tensor/tower equation in local bases. Reused the existing sheaf tensor universal property, localized restriction, Hom gluing, normalized binary scalar comparison and scalar dual evaluation. No statement correction and no new nodes; all signs, non-flat maps and units are covered.",
+  "blueprint": "prop-weil-twist-preserves.proof.md: the sentence that twists are tensor powers and internal Homs, and the last sentence about levelwise and common finite stages. Steps 2-7 construct signed comparisons and contractions, step 8 checks tensor compatibility, steps 9-10 give coefficient towers and identities.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Uses only the ordinary sheaf tensor bilinear universal property to construct and compare the local pairings and balanced coefficient associator; the unit has no such universal-property node."
+   },
+   {
+    "node": "lem-sfb-localized-site-tensor-restriction",
+    "why": "Uses restriction of the actual sheaf tensor to arbitrary localized sites, preserving pure sections, to compute on a basis cover; this is generic sheaf infrastructure absent from the unit."
+   },
+   {
+    "node": "lem-pur-sheaf-hom-cover-gluing",
+    "why": "Uses existence and uniqueness of gluing linear maps on one cover, both for basis-independent products and inverse maps; this generic locality theorem is not a step replacing the unit route."
+   },
+   {
+    "node": "lem-sp-scalar-extension-binary-coherence",
+    "why": "Uses only normalized binary tensor, unit and scalar comparisons, with their section formulas, to induce positive powers and compute the tensor square; the signed powers and tower equalities are proved here."
+   },
+   {
+    "node": "lem-sp-scalar-extension-dual-evaluation",
+    "why": "Uses the canonical ordinary dual evaluation map and its section formula, not any signed-power or tower assertion; its rank-one inverse is proved here."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-sfb-localized-site-tensor-restriction",
+  "lem-pur-sheaf-hom-cover-gluing",
+  "lem-sp-scalar-extension-binary-coherence",
+  "lem-sp-scalar-extension-dual-evaluation"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q132-4e2331e96",
+  "group": "Q132",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q132-4e2331e96 (reviewer sub-agent of L); spot-checked: Ordinary one-level split (no re-split note on this item; it is Q42's statement-only child of lem-weil-integral-twist-base-change), with no new nodes. Live copy still unsplit; neither the item nor any cited node is in route-pivot-dropped. Statement, source, stmt_deps and blueprint are unchanged; the 6 old searches are kept and 5 new ones added; proof_deps equals the union of uses. I read all 10 steps in full and every cited statement: localized-site tensor restriction, sheaf-Hom slice definition, Hom cover gluing (existence and uniqueness), binary scalar coherence (sigma s(x⊗y)↦(s⊗x)⊗(1⊗y), unitors), sheaf bilinear universal property, and scalar-extension dual evaluation (construction and formula only, not used for invertibility). Every clause is proved: beta invertible by local basis-to-basis plus a glued inverse, with no flatness (right for Z→Z/2) (step 4); the signed evaluation formula (5); mu^{a,b} with chart independence under e'=ue for negative exponents and uniqueness (6); the contraction description in all sign cases, symmetric on a line so no sign issue (7); the sigma-square coefficients ι(rq)s = ι(r)sι(q) (8); the associator balances and inverse (9); the tower via e_2=b02(e_0⊗1) from the hypothesis, and the identity case equal to the unitor for every signed m (10). Checked on a one-object site, Z→Z/2, the zero ring, (a,b)=(0,0),(1,-1),(-2,1),(2,-1) and basis change by a unit. Stacks tags 03EK/03EL/03EM/04TT/0GMX/0FNY/04TQ match their labels; 0GMX is used only as a canonical map. No SGA source. The 5 declared tool_uses are generic sheaf-module infrastructure from other units; I accept them, and there is no cycle. Advisory: overlap with lem-sp-invertible-tensor-scalar-extension (non-negative powers and one dual) and lem-asd-int-tensor-family-comparison (generic monoidal integer families). It predates this split (Q42 created the item); worth a maintainer de-duplication note. The proof is about 8.1k characters with no new nodes, which is allowed without a note; the natural cut points if a re-split is ever ordered are steps 4-5, 6-7 and 9-10. No fixes."
  }
 }
