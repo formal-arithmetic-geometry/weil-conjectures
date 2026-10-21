@@ -252,5 +252,23 @@
   "group": "Q131",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q131-69a0ff401 (reviewer sub-agent of L); spot-checked: Read the item, the report, the parent det-ctf step 1, unit sk-prop-ctf-finite-proper, the main-20261015 'Étale statements' paragraph, and Stacks 0A3V, 00P3, 0F0V and 0F10. The statement change is accepted: 'geometric point with Ω separably closed', which cited a definition requiring algebraic closure, becomes 'every separably closed Ω and every Spec Ω→Y'. This is strictly stronger and true, since 0F0V needs only cd(Ω)=0, which holds for separably closed fields including imperfect ones. The only citer, the parent, still applies, and the report names the change. Step 1: proper ⇒ finite type, and lem-fin-finite-type-fibre-dimension-bound (0A3V) gives the bound e. Step 2: the residue-point factorization, the fibre-product pasting, finite type by base change, and the field-extension clause of lem-kun-dimension-extension (00P3) give dim ≤ e on every field-valued fibre. Step 3: elementary pasting with L=κ(s). Step 4: cd_tor(Ω)≤0, the affine bound d+c and the Leray reduction with c=0 give H^q=0 for q>2e. Checked edge cases: empty X, Y and fibres; finite f; P^1 over the separable closure of F_p(t). No new nodes, no duplicate of the full conjunction, no cycle, no SGA source. The five declared tool uses are generic and accepted. FIX (C4/E6): step 4 silently passed from the colimit notion of a torsion sheaf (def-weil-pbc-torsion-etale-sheaf, used in the item's statement) to the local-section notion of def-sc-etale-torsion-cd that the cited cd nodes use. The fix adds the (1)⇒(2) citation of lem-weil-pbc-torsion-sheaf-characterizations to step 4's uses and proof_deps, and declares it in split_report.tool_uses. That node's closure does not contain the item, so there is no cycle. One file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-finite-proper-geometric-cd-bound.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ProperGeometricFibreCohomologicalBound",
+  "declaration": "AlgebraicGeometry.exists_uniform_geometric_fibre_dimension_and_torsion_cohomology_bound",
+  "file": "lean/Sheaf/AlgebraicGeometry/ProperGeometricFibreCohomologicalBound.lean",
+  "statement": "theorem exists_uniform_geometric_fibre_dimension_and_torsion_cohomology_bound {X Y : Scheme.{u}} (f : X ⟶ Y) [IsProper f] [CompactSpace Y] : ∃ e : ℕ, (∀ (S : Scheme.{u}) (g : S ⟶ Y) (s : S), topologicalKrullDim ((pullback.snd f g).fiber s) ≤ (e : WithBot ℕ∞)) ∧ (∀ (Ω : Type u) [Field Ω] [IsSepClosed Ω] (ybar : Spec (.of Ω) ⟶ Y) (F : Sheaf (pullback f ybar).smallEtaleTopology AddCommGrpCat.{u + 1}), Scheme.IsTorsionAbelianSheaf F → ∀ q : ℕ, 2 * e < q → IsZero ((Etale.cohomology AddCommGrpCat.{u + 1} (pullback f ybar) (q : ℤ)).obj ((DerivedCategory.singleFunctor (Sheaf (pullback f ybar).smallEtaleTopology AddCommGrpCat.{u + 1}) 0).obj F)))",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-808810aa8",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Only the item node's lean field and one module changed vs side-live. Every clause matches the node and its stmt_dep records: IsProper, CompactSpace Y, one e : ℕ for both conclusions, all base changes and points via (pullback.snd f g).fiber s with topologicalKrullDim ≤ e, Ω : Type u with Field and IsSepClosed, ybar : Spec Ω ⟶ Y, IsTorsionAbelianSheaf on AddCommGrpCat.{u+1}, and IsZero of Etale.cohomology of singleFunctor 0 F for q > 2e. Edge cases checked: empty Y or fibres, e = 0, P^1, imperfect Ω, p-torsion. Proof-only imports are exactly the stated proof-dep modules; docstrings, source place and the 4 proof steps are present; the recorded statement is verbatim in the file; the theorem name is unused. nt_compile --json is clean (2.2 s, exit 0). No findings."
  }
 }

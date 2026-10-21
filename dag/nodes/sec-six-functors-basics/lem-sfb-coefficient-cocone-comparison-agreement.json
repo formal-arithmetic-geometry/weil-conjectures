@@ -201,5 +201,23 @@
   "group": "Q103",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q103-632960e40 (reviewer sub-agent of L); spot-checked: Read the item in full; it is a first split with no new nodes. Its statement and stmt_deps are byte-identical to live (live node unsplit). It is not in route-pivot-dropped and has no repair note, so the 10-21 re-split rule does not apply. No SGA is cited. Its only citer is lem-sfb-constructible-cocone-hom-surj, and there is no cycle. Coefficient category: the pbc and sfb nodes give the same rings, E_X = p_X^*C(-,E) with p_X^* = pi_X^{-1} o sheafify o Lan along S -> Spec LC(S,Z), and the same finite-subfield-valued Omega (def-weil-pbc-condensed-e-module-category, def-sfb-padic-subfield-condensed-ring, sk-def-sfb-pullback-from-point, sk-def-sfb-qlbar-condensed). In Lean both sides are leftDerivedFunctor of Mod.extendScalars along the same padicSubfieldRingObj maps (CondensedDerivedTensorComparison.lean:31-45 = TwoColimit.lean:118-129). Step 1 is a correct unfolding. Step 2 (repaired, risk C3/E6): the delivery matched the pbc 'underived tensor multiplication iso' with delta only through the Lean bodies, but the DAG construction of def-sfb-derived-extend-comp-iso (steps 3-4) uses the unit-compatible iso of lem-weil-pbc-conjugate-iso-unit-equation. I added that m_0: s(x)(f(x)x) -> sf(x)x carries the composite unit to the unit of Ext_{psi phi}, so by the uniqueness clause of that Mathlib leaf m_0 = theta_0. I added the leaf to uses and proof_deps (Mathlib leaf, so no tool_use is needed); the step is now 1798 chars. Lean confirms the repair: Mod.extendScalarsComp and extendScalarsIsoOfEq are leftAdjointUniq (ExtendScalars.lean:462-466, ChangeOfScalarsSquare.lean:144), and the bodies at TwoColimit.lean:135-147 and CondensedDerivedTensorComparison.lean:108-120 are term-for-term identical with the same orientation. Step 3 is projection of an iso equality. Step 4: the statement of def-sfb-constructible-extend-comp-iso says 'restriction of' delta, and its construction steps 2-3 define both components from theta and theta^{-1}, matching fullyFaithfulCancelRight at TwoColimit.lean:198-213. Edge cases checked: E=H, empty X, zero complex; no hypothesis is weakened. Fix file: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-coefficient-cocone-comparison-agreement.json.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CoefficientCoconeComparisonAgreement",
+  "declaration": "AlgebraicGeometry.ProEtale.finiteCoefficient_cocone_comparison_agreement",
+  "file": "lean/Sheaf/AlgebraicGeometry/CoefficientCoconeComparisonAgreement.lean",
+  "statement": "theorem finiteCoefficient_cocone_comparison_agreement (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime] {E H : PadicAlgCl.FiniteIntermediateField ℓ} (h : E ≤ H) : finiteCoefficientDerivedTensorCompIso X ℓ h = derivedExtendScalarsCompIso X ℓ h ∧ ∀ K : PadicSubfieldConstructible X ℓ E, ((constructibleToPadicAlgClCompIso X ℓ h).hom.app K).hom = (finiteCoefficientDerivedTensorCompIso X ℓ h).hom.app K.obj ∧ ((constructibleToPadicAlgClCompIso X ℓ h).inv.app K).hom = (finiteCoefficientDerivedTensorCompIso X ℓ h).inv.app K.obj",
+  "branch": "sheaf-dag",
+  "by": "Q62",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-40cacae2e",
+  "group": "Q62",
+  "result": "pass",
+  "note": "Node diff vs side-live: only the new lean record. Lean matches every clause: prime ℓ, any Scheme.{u}, E ≤ H with E = H allowed, Iso equality θ = derivedExtendScalarsCompIso (bodies term-identical; rfl probe closes it), and constructible hom/inv components = ambient arrows at K.obj (true via map_preimage, not closed in Lean). No extra hypotheses or universe restriction; coefficient universe u+1 as in deps. No public duplicate (CoefficientFiniteDescentHom lemmas are private). sorry-only proof; docstrings carry source place, blueprint tag and 4 proof steps; statement verbatim. Edge cases E=H, empty X, zero object covered. nt_compile --json on the snapshot: clean, 5.6 s. Advisory: plain Mates import possibly redundant."
  }
 }

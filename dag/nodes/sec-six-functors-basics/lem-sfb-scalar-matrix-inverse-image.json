@@ -242,5 +242,28 @@
   "group": "Q72",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q72-f898bd62d (reviewer sub-agent of L); spot-checked: Read the item's statement and all 6 steps in full, along with every cited node's statement. No new nodes, statement unchanged; it gives exactly what the parent lem-sfb-pullback-constant-model-constructible takes from it. It holds for any commutative condensed Λ and any morphism h, because sk-def-sfb-coefficient-morphisms makes α_h a ring iso unconditionally. The base change is Ext_α∘mapMod(h^{-1}) of sk-def-sfb-module-pushforward-pullback, in the module category of def-sfb-finitely-presented-module. Step checks: (1) naturality of pullback-from-point-comp at t_a with c_Λ=α_h gives α F(t_{a,U}) = t_{a,V} α; transported unit and multiplication match the canonical scalar of det-def-sfb-constructible-local-model. (2) mapMod(F)Λ_U is the regular T-module; the Ext_α coequalizer is that of lem-sfb-mixed-bimodule-right-unitor (Mathlib Bimod.rightUnitorBimod) with ρ=μ_S(S⊗α), and the colimit hypotheses come from sk-def-sfb-sheaf-tensor(2). (3) The adjunction plus the Stacks 0038 leaf (categories.tex 3472, read) give preservation of the initial object, finite coproducts, coequalizers and zero maps; I verified the e_r injection and projection identities. (4) Coequalizer calculation via commutativity, correct. (5) Entrywise matrix square via joint epi and mono, correct, including m=0 and n=0. (6) Cokernel comparison u,v with both inverses, correct. Edge cases zero matrix, identity, Λ(*)=0 and h=id are fine. Blueprint sources read: the Constructible complexes paragraph l.9-13 and the last sentence of lem-sfb-dc-upper-star-preserves. No SGA. Off-unit citations are Mathlib leaves only, so no tool_uses are needed. Duplicate search: lem-sfb-monoidal-finite-free-transport (mapMod only), the O_X-module node new-sbc-pullback-free-coordinates-naturality and the admissible-only sk-prop-sfb-cartesian-coefficients are not duplicates. Advisory: step 4 does not say that t_{a,U} is Λ_U-linear; this is immediate from commutativity and from A_U being a module morphism by the statement."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ScalarMatrixInverseImage",
+  "declaration": "AlgebraicGeometry.ProEtale.scalarMatrix_inverseImage",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.scalarMatrixRegularPullbackIso",
+   "AlgebraicGeometry.ProEtale.scalarMatrixFreePullbackIso",
+   "AlgebraicGeometry.ProEtale.scalarMatrix_inverseImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ScalarMatrixInverseImage.lean",
+  "statement": "theorem scalarMatrix_inverseImage {m n : ℕ} (A : Fin m → Fin n → (𝟙_ Ab.{u + 1} ⟶ scalarRingObj Λ)) : (CondensedRing.upperStar Λ h).map (scalarMatrix Λ U A) ≫ (scalarMatrixFreePullbackIso Λ h n).hom = (scalarMatrixFreePullbackIso Λ h m).hom ≫ scalarMatrix Λ V A ∧ ∃ e : (CondensedRing.upperStar Λ h).obj (cokernel (scalarMatrix Λ U A)) ≅ cokernel (scalarMatrix Λ V A), (CondensedRing.upperStar Λ h).map (cokernel.π (scalarMatrix Λ U A)) ≫ e.hom = (scalarMatrixFreePullbackIso Λ h n).hom ≫ cokernel.π (scalarMatrix Λ V A)",
+  "branch": "newtargets-dag",
+  "by": "Q52",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-df2b30123",
+  "group": "Q52",
+  "result": "pass",
+  "note": "All node clauses match the Lean: arbitrary h:V→U, commutative condensed Λ, upperStar = mapMod⋙extendScalars(condensedPullbackHom), A_U/A_V from the same entries via the canonical scalarSection, e_r = mapBiproduct ≪≫ biproduct.mapIso of the canonical regular comparison (mapModUnitIso.symm then regularExtensionIso), the matrix square, and a cokernel iso that the projection equation fixes uniquely since pullback is a left adjoint. Edge cases m=0, n=0, zero matrix, zero ring, empty scheme and h=id are covered; no extra hypotheses or universe restriction. No duplicate in side-live or Mathlib. Helper definitions are canonical, the only proof is a sorry in the main theorem, docstrings and blueprint ids are present, lines are at most 100 characters, the statement field is verbatim, and the plain imports are stated proof-dependency modules as rule 7 requires. nt_compile --json is clean in 3.8 s. Advisory: def-sfb-finitely-presented-module and def-pc-scheme have no lean record."
  }
 }

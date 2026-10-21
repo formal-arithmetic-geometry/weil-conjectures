@@ -215,5 +215,23 @@
   "group": "Q66",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-0a6dd2655 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. Item: a geometric-stalk test for Tor amplitude on the small étale site, for any commutative A and any scheme T, plus the consequence that u^* preserves Tor intervals. The statement is unchanged, adds no hypothesis, and matches Stacks 0DJJ (sites-cohomology lemma-tor-amplitude-stalk) on the ordinary étale coefficient category that the parent sk-prop-sf-rf-shriek-preservation uses in steps 3 and 4. Geometric points use algebraically closed Ω throughout (def-weil-geometric-point), the same as in the cited tensor nodes. Step 1: stalk exactness on Ab plus the exact-functor homology lemma give H^i(E)_t̄ ≅ H^i(E_t̄) for unbounded E, and conservativity detects zero; the module-to-abelian forgetful step is written out. Step 2: the definition tested on the constant sheaf M_T[0], then step 1, then lem-sfb-geometric-stalk-tensor-constant-single, for arbitrary M. Step 3: lem-sfb-etale-derived-tensor-stalk (unbounded, any K and L) with L = F[0] and M = F_t̄, then step 1 and conservativity; this follows the converse argument of 0DJJ. Step 4: prop-weil-pbc-inverse-image-modules-exact (1)-(3) and the stalk pullback lemma (03Q1 (3)), with A-linearity and the differentials handled by naturality, give (u^*K)_v̄ ≅ K_{u∘v̄}; then step 2 on T and step 3 on U. The delivery creates no new nodes. Duplicate search over all statement nodes: lem-sfb-tor-interval-local-detection is pro-étale cover/open-closed locality, and the pc Tor nodes are Zariski, so neither is a duplicate. There is no cycle and no SGA. Tags 0DJJ, 0DEN, 03Q1, 03PT, 03PU and 010N were verified against the tags file. I accept all five tool_uses: the two genuinely off-route ones are the generic tensor/stalk comparisons (sk-lem-integral-models, sk-prop-ctf-finite-proper), and the other three are on the unit's route anyway. Edge cases checked: empty T, K = 0, K = A_T[0], a = b, unbounded K, non-Noetherian A, arbitrary u. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleStalkTorTest",
+  "declaration": "AlgebraicGeometry.Etale.geometricStalk_torAmplitude_test",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleStalkTorTest.lean",
+  "statement": "theorem geometricStalk_torAmplitude_test (A : Type (u + 1)) [CommRing A] (T : Scheme.{u}) (K : DerivedCategoryModule A T) (a b : ℤ) (_hab : a ≤ b) : (DerivedCategory.hasTorAmplitudeIn A T a b K ↔ ∀ (Ω : Type u) [Field Ω] [IsAlgClosed Ω] (t : Spec (.of Ω) ⟶ T) (M : ModuleCat.{u + 1} A) (i : ℤ), i < a ∨ b < i → IsZero ((_root_.DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) i).obj (((pointSmallEtale t).sheafFiber (A := ModuleCat.{u + 1} A)).mapDerivedCategory.obj K ⊗ (_root_.DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) 0).obj M))) ∧ (∀ (U : Scheme.{u}) (f : U ⟶ T), DerivedCategory.hasTorAmplitudeIn A T a b K → DerivedCategory.hasTorAmplitudeIn A U a b ((upperStar (ModuleCat.{u + 1} A) f).mapDerivedCategory.obj K))",
+  "branch": "newtargets-dag",
+  "by": "Q61",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-79f0a6444",
+  "group": "Q61",
+  "result": "pass",
+  "note": "lem-sf-etale-stalk-tor-test at 79f0a644: every clause matches the node. Ring any commutative A (Type u+1), no extra hypotheses; K an unbounded DerivedCategoryModule; a ≤ b kept; the iff ranges over all geometric points (Ω : Type u, algebraically closed) and all modules (ModuleCat.{u+1} A); i < a ∨ b < i → IsZero(H^i(stalk K ⊗ M[0])), where ⊗ is the derived monoidal structure on D(ModuleCat A) (checked by #synth); the pullback conjunct holds for arbitrary f with the same interval, via upperStar.mapDerivedCategory, which is the framework's own D((f)^*[A]). Point.sheafFiber is the colimit of the same diagram as the recorded pointedEtaleStalk and is the convention the landed lem-sfb-etale-derived-tensor-stalk uses, so it is not a second definition. torAmplitudeIn_leftDerivedUpperStar is about a different flat-model predicate, so not a duplicate. Only the node's lean field changed and lean.statement matches the file verbatim. Docstrings carry the source and the four proof steps; imports are statement-dep and proof-dep modules (lean_audit modules for the two Mathlib-matched proof deps); no line over 100 characters. nt_compile --json is clean in 2.6 s, and a control copy with an injected error fails as expected. No findings."
  }
 }

@@ -19993,3 +19993,7 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:49:13Z L: superseded stage-1 delivery Q85/prop-sfb-module-left-derived-upper-star-comp at 52baf7ecedba2bea4b5f625486a1c567296db665; current completion retained; packet archived at refs/superseded/Q85/prop-sfb-module-left-derived-upper-star-comp/52baf7ecedba2bea4b5f625486a1c567296db665; stale return retired.
 - 2026-10-21T03:49:13Z L: superseded stage-1 delivery Q36/det-sp-reduction-exceptional at 64d7c1cfdb1e667a7056fcf466ef6013e30b3efa; current completion retained; packet archived at refs/superseded/Q36/det-sp-reduction-exceptional/64d7c1cfdb1e667a7056fcf466ef6013e30b3efa; stale return retired.
 - 2026-10-21T03:49:14Z L: superseded stage-1 delivery NB/lem-weil-pbc-perfect-strata-uniform-reductions at 90cdbeb7649912dc55ff8930ced75c8c046faa53; current completion retained; packet archived at refs/superseded/NB/lem-weil-pbc-perfect-strata-uniform-reductions/90cdbeb7649912dc55ff8930ced75c8c046faa53; stale return retired.
+- 03:49 L: merged deliver/Q62/lem-sfb-coefficient-cocone-comparison-agreement (stage 2; reviewer PASS; parallel immutable checks)
+- 03:49 L: merged deliver/Q61/lem-sf-etale-stalk-tor-test (stage 2; reviewer PASS; parallel immutable checks)
+- 03:49 L: merged deliver/Q59/lem-sfb-finite-proper-geometric-cd-bound (stage 2; reviewer PASS; parallel immutable checks)
+- 03:49 L: merged deliver/Q52/lem-sfb-scalar-matrix-inverse-image (stage 2; reviewer PASS; parallel immutable checks)
