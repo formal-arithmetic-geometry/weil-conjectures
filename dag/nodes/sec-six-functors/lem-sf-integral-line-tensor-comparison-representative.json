@@ -1,0 +1,116 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-dual-perfect",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-line-tensor-comparison",
+   "place": "Intermediate result required by the proof of the integral line tensor comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLineTensorComparison",
+  "date": "2026-10-21",
+  "group": "H2"
+ },
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 06YQ, 06YY and 07A4; scalar-extension tensor balancing"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensoring a derived complete complex by an invertible locally free rank one sheaf preserves completion",
+   "results": "No direct match; the search returned only generic condensed tensor structures.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso ((completionUnit _ _ _ _).app _)",
+   "results": "No direct match for the sheaf derived completion unit.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit.*IsIso|IsComplete.*completionUnit|finiteLocallyFree.*completion",
+   "results": "Existing completion and locally free APIs inspected; no theorem combines them.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "id": "lem-sf-integral-line-tensor-comparison-representative",
+ "kind": "statement",
+ "title": "K-flat line tensor models and finite balancing",
+ "statement": "Let l be prime, E/Q_l a finite extension, and X a scheme. Write R for the completed integral coefficient sheaf and R_n for its positive-power finite quotients. For every rank-one finite locally free R-module sheaf T and every flat-term K-flat complex P, T[0] is K-flat [def-pc-kflat-complex] and Tot(P tensor_R T[0]) is a flat-term K-flat complex [def-pur-integral-derived-operations, def-pc-tensor-complex-sheaves]. For each n, extension of scalars from R to R_n gives an isomorphism R_n tensor_R Tot(P tensor_R T[0]) to Tot((R_n tensor_R P) tensor_{R_n} (R_n tensor_R T[0])). On the summand in bidegree (p,q) it sends a tensor (x tensor y) to (a tensor x) tensor (1 tensor y).",
+ "stmt_deps": [
+  "def-pur-integral-derived-operations",
+  "def-pc-tensor-complex-sheaves",
+  "def-sf-integral-line-tensor-comparison-constructors",
+  "def-pc-kflat-complex"
+ ],
+ "proof": [
+  {
+   "text": "A local rank-one trivialization makes tensor by T exact, hence T is flat. The bounded-above flat criterion gives K-flatness of T[0]. The total tensor model theorem gives K-flatness and flat terms for Tot(P tensor T[0]).",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-independent-bounded-flat-kflat",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "At every finite quotient use the normalized scalar tensorator on each bidegree summand. Its formula is a tensor (x tensor y) mapped to (a tensor x) tensor (1 tensor y); multiplication of the two finite coefficients is its inverse. Distribute extension over the direct sums and observe that both total differentials have the same second-factor sign (-1)^p. This constructs the finite chain isomorphism with the stated generator equation.",
+   "uses": [
+    "lem-pur-independent-ringed-tensorator-existence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-independent-bounded-flat-kflat",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-pur-independent-ringed-tensorator-existence"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLineTensorComparisonRepresentative",
+  "file": "lean/Sheaf/Paper/IntegralLineTensorComparisonRepresentative.lean",
+  "declaration": "WeilConjectures.integralLineTensorComparison_representative",
+  "statement": "theorem integralLineTensorComparison_representative (T : Mod l E X none) [T.IsFiniteLocallyFreeOfRank 1] (P : (Good l E X none).FullSubcategory) : ∃ (hT : CochainComplex.IsKFlatIndependentCoefficients (J := topology X none) (R := ring l E X none) ((integralLineSingle l E X).obj T)) (hS : Good l E X none (integralLineComplex l E X P.obj T)), ∀ n : ℕ, ∃ β : (integralLineFiniteComplex l E X n).obj (integralLineComplex l E X P.obj T) ≅ integralLineFiniteTensor l E X P.obj T n, (∀ (p q k : ℤ) (hpq : p + q = k) (V : X.ProEtᵒᵖ) (a : (finite l E X none n).obj.obj V) (x : (P.obj.X p).val.obj V) (y : (((integralLineSingle l E X).obj T).X q).val.obj V), (β.hom.f k).val.app V (generator l E X none n ((integralLineComplex l E X P.obj T).X k) V a (coefficientTensorGenerator.{u, t + 1, t} (topology X none) (ring l E X none) P.obj ((integralLineSingle l E X).obj T) p q k hpq V x y)) = coefficientTensorGenerator.{u, t + 1, t} (topology X none) (finite l E X none n) ((integralLineFiniteComplex l E X n).obj P.obj) ((integralLineFiniteComplex l E X n).obj ((integralLineSingle l E X).obj T)) p q k hpq V (generator l E X none n (P.obj.X p) V a x) (generator l E X none n (((integralLineSingle l E X).obj T).X q) V 1 y))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-21"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Stacks 06YQ, 06YY and 07A4; scalar-extension tensor balancing"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-69bed",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261021T001119-L-1372542",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-69bed",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261021T001119-L-1372542",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs live clone (identical), ten moved defs vs change-record Old block (verbatim), new sorry statements vs nodes and BS 3.5.1/Stacks 06YY, node stmt_deps vs Lean usage"
+ }
+}

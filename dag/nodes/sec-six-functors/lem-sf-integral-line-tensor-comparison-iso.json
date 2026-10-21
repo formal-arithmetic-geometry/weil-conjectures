@@ -1,0 +1,107 @@
+{
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-dual-perfect",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sf-integral-line-tensor-comparison",
+   "place": "Intermediate result required by the proof of the integral line tensor comparison.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralLineTensorComparison",
+  "date": "2026-10-21",
+  "group": "H2"
+ },
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Proposition 3.5.1 and Definition 3.5.2"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "tensoring a derived complete complex by an invertible locally free rank one sheaf preserves completion",
+   "results": "No direct match; the search returned only generic condensed tensor structures.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso ((completionUnit _ _ _ _).app _)",
+   "results": "No direct match for the sheaf derived completion unit.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "completionUnit.*IsIso|IsComplete.*completionUnit|finiteLocallyFree.*completion",
+   "results": "Existing completion and locally free APIs inspected; no theorem combines them.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "id": "lem-sf-integral-line-tensor-comparison-iso",
+ "kind": "statement",
+ "title": "Invertibility of the integral-line completion comparison",
+ "statement": "Let l be prime, E/Q_l a finite extension, and X a scheme on which l is invertible. Let R be the completed integral coefficient sheaf on X_proet and C in D(R) be derived complete [def-weil-derived-complete]. If T is a rank-one finite locally free R-module sheaf in degree zero, the canonical comparison from the ordinary derived tensor C tensor_R^L T to its quotient-tower completion [def-pur-integral-derived-operations, def-sf-integral-line-tensor-comparison-constructors] is an isomorphism.",
+ "stmt_deps": [
+  "def-weil-derived-complete",
+  "def-pur-integral-derived-operations",
+  "def-sf-integral-line-tensor-comparison-constructors"
+ ],
+ "proof": [
+  {
+   "text": "Choose a flat-term K-flat representative of C. Tensor the normalized completion augmentation with T. Local triviality of the rank-one finite locally free module identifies tensoring with the identity, and preservation of products and the strict cone identifies this map with the canonical completion unit. The completion unit is invertible on the given derived-complete object, so the tensor comparison is invertible.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-acyclic-kflat-tensor-arbitrary",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-acyclic-kflat-tensor-arbitrary",
+  "lem-pur-integral-operations-well-defined"
+ ],
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralLineTensorComparisonIso",
+  "file": "lean/Sheaf/Paper/IntegralLineTensorComparisonIso.lean",
+  "declaration": "WeilConjectures.integralLineTensorComparison_iso",
+  "statement": "theorem integralLineTensorComparison_iso (_hl : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (C : D l E X none) (hC : IsComplete l E X none C) (T : Mod l E X none) [T.IsFiniteLocallyFreeOfRank 1] : IsIso ((integralLineComparison l E X).app (C, T))",
+  "branch": "sheaf-dag",
+  "by": "H2",
+  "date": "2026-10-21"
+ },
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 3.4.10, Proposition 3.5.1 and Definition 3.5.2"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-69bed",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261021T001119-L-1372542",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-69bed",
+  "group": "H2",
+  "result": "fix",
+  "landing": "20261021T001119-L-1372542",
+  "kind": "interface",
+  "note": "independent cc review: item theorem statement vs live clone (identical), ten moved defs vs change-record Old block (verbatim), new sorry statements vs nodes and BS 3.5.1/Stacks 06YY, node stmt_deps vs Lean usage"
+ }
+}
