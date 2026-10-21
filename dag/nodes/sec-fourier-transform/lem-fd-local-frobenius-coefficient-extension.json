@@ -20,9 +20,85 @@
   "lem-pur-integral-operations-scalar-extension",
   "lem-weil-point-sections-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $V=T_{\\mathrm{pt}}$ and let $u_N:VQ_FN\\xrightarrow{\\sim}Q_LT_sN$ be the inverse rationalized sections comparison of [lem-weil-point-sections-scalar-extension]. Its naturality says $u_{N'}VQ_F(w)=Q_L(T_sw)u_N$. Write $e_M:T_sP_FM\\xrightarrow{\\sim}P_LT_XM$ for the specified pullback/scalar comparison for $\\bar x$. Its naturality, from [lem-pur-integral-operations-scalar-extension] with the choices of [lem-trf-integral-pullback-comparison-realization], says $e_{M'}T_sP_F(v)=P_LT_X(v)e_M$. Since $b_M=Q_L(e_M)u_{P_FM}$, substitution gives\n$$b_{M'}VD_F(v)=Q_L(e_{M'})Q_L(T_sP_Fv)u_{P_FM}=D_L(T_Xv)b_M.$$\nBoth factors of $b_M$ are isomorphisms, so this proves the first assertion.",
+   "uses": [
+    "lem-weil-point-sections-scalar-extension",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed local trace: coefficient-model independence, explicit formal comparison argument"
+   }
+  },
+  {
+   "text": "Use the iterated-map convention of [def-weil-local-frobenius-trace]. Let $c_{H,r}:G_{H,r+1}\\xrightarrow{\\sim}G_{H,r}G_{H,1}$ be the specified compositor. The mixed equation and finite-iteration clause of [lem-trf-integral-pullback-comparison-realization] give\n$$c_{L,r,T_XM}a_{r+1,M}=G_{L,r}(a_{1,M})a_{r,G_{F,1}M}T_X(c_{F,r,M}).$$\nProve $\\theta_L^{[r]}a_{r,M}=T_X(\\theta^{[r]})$ by induction. For $r=1$ cancel $a_{1,M}^{-1}a_{1,M}$ in the definition of $\\theta_L$. If it holds for $r$, expand $\\theta_L^{[r+1]}=\\theta_L^{[r]}G_{L,r}(\\theta_L)c_{L,r,T_XM}$ and substitute the displayed mixed equation. As $\\theta_La_{1,M}=T_X\\theta$, naturality of $a_r$ at $\\theta:G_{F,1}M\\to M$ gives\n$$\\begin{aligned}\n\\theta_L^{[r+1]}a_{r+1,M}\n&=\\theta_L^{[r]}G_{L,r}(T_X\\theta)a_{r,G_{F,1}M}T_X(c_{F,r,M})\\\\\n&=\\theta_L^{[r]}a_{r,M}T_X(G_{F,r}\\theta)T_X(c_{F,r,M})\\\\\n&=T_X(\\theta^{[r]}G_{F,r}(\\theta)c_{F,r,M})\n=T_X(\\theta^{[r+1]}).\n\\end{aligned}$$",
+   "uses": [
+    "def-weil-local-frobenius-trace",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed local trace: coefficient-model independence, explicit formal comparison argument"
+   }
+  },
+  {
+   "text": "Apply the final coefficient-extension assertion of [lem-trf-local-frobenius-transport-normalization] with $E=F$, its $M=L$, $m=n$ and $y=x$. Its $J_{y,H}$ is $D_H$ here. Its $t_{y,n,M}$ is exactly $R_H(M)$: both are the $n$ successive point transports followed by the return comparison for $g_X^n\\bar x=\\bar xg_s^n$ in [def-weil-local-frobenius-trace]. The lemma writes the target as $D_H(G_{H,1}^nM)$; identify $G_{H,1}^n$ with $G_{H,n}$ by the specified compositors. Its iterated scalar map $d_M$ then becomes $a_{n,M}$ by the finite-iteration coherence of [lem-trf-integral-pullback-comparison-realization]. Its $b_M$ is our $b_M$: both use the specified pullback comparison and inverse sections comparison (moving the latter past the former is precisely its naturality in step 1). Thus the lemma's displayed scalar equation reads\n$$D_L(a_{n,M})b_{G_{F,n}M}V(R_F(M))=R_L(T_XM)b_M,$$\nwhich is the required return equation. The cited lemma assumes separated finite type and rational constructibility, and explicitly imposes no finite Tor-amplitude condition.",
+   "uses": [
+    "lem-trf-local-frobenius-transport-normalization",
+    "def-weil-local-frobenius-trace",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-thm-trace-transport/prop-trf-karoubi-independence.proof.md",
+    "place": "Final Frobenius-transport sentence; use the already stated local-normalization lemma, coefficient-extension clause"
+   }
+  },
+  {
+   "text": "Apply step 1 to the actual rational morphism $\\theta^{[n]}:G_{F,n}M\\to M$. Use step 2 and then step 3 to calculate\n$$\\begin{aligned}\nb_MV(\\mathcal F_{F,x,n})\n&=D_L(T_X\\theta^{[n]})b_{G_{F,n}M}V(R_F(M))\\\\\n&=D_L(\\theta_L^{[n]})D_L(a_{n,M})b_{G_{F,n}M}V(R_F(M))\\\\\n&=D_L(\\theta_L^{[n]})R_L(T_XM)b_M\n=\\mathcal F_{L,x,n}b_M.\n\\end{aligned}$$\nThe first and last expressions use the local-operator definition of [def-weil-local-frobenius-trace]. This is the claimed intertwining identity.",
+   "uses": [
+    "def-weil-local-frobenius-trace"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed local trace: coefficient-model independence, explicit formal comparison argument"
+   }
+  },
+  {
+   "text": "All equations above are in the raw rationalized categories of [def-weil-rationalization-karoubi]. In particular step 1 applies to all their morphisms: the integral naturality equation is linear, so after scalar localization it holds on each $f\\otimes\\lambda$ and hence on their sums. The same applies to the mixed comparison equation. A Weil structure in [def-weil-weil-sheaf-complex] is only a rational isomorphism; $\\theta_L=T_X(\\theta)a_{1,M}^{-1}$ is again an isomorphism, and step 2 uses its rational naturality without choosing an integral Weil-stable lattice. Step 3 already holds on the full constructible domain. Finally, for $F=L$, [lem-weil-point-sections-scalar-extension] makes $u_N$ the identity under the stated unit identifications and [lem-trf-integral-pullback-comparison-realization] makes $e_M$ the identity. Therefore $b_M=Q_L(e_M)u_{P_FM}=1$. No restriction on the Tor-amplitude of finite reductions entered any step.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-weil-sheaf-complex",
+    "lem-weil-point-sections-scalar-extension",
+    "lem-trf-integral-pullback-comparison-realization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Displayed local trace: coefficient-model independence, explicit formal comparison argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-local-frobenius-trace",
+  "lem-trf-local-frobenius-transport-normalization",
+  "def-weil-rationalization-karoubi",
+  "def-weil-weil-sheaf-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Displayed trace formula: formal coefficient comparison using existing normalized transport and scalar-composition statements; not a verbatim blueprint proof"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +134,38 @@
    "results": "6 hits: CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
    "date": "2026-10-21",
    "verdict": "no match: generic functor/naturality identities and module or Witt-vector Frobenius results do not construct the specified rational constructible local-operator comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural scalar extension comparisons commute with iterated Frobenius and point transport on derived constructible sheaves",
+   "results": "8 hits: RingHom.map_iterate_frobenius, LinearMap.iterateFrobenius, ModuleCat.ExtendRestrictScalarsAdj.homEquiv, iterateFrobenius_mul_apply, MonoidHom.map_iterate_frobenius, RingHom.iterateFrobenius_comm, RingHom.iterate_map_frobenius, IsPurelyInseparable.iterateFrobeniusₛₗ_algebraMap_base",
+   "date": "2026-10-21",
+   "verdict": "no match: ring Frobenius, ordinary module scalar adjunctions, or ordinary sheaf pullback comparisons; none states the normalized rational constructible Weil-pair local-operator comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, CategoryTheory.NatTrans.naturality",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: ring Frobenius, ordinary module scalar adjunctions, or ordinary sheaf pullback comparisons; none states the normalized rational constructible Weil-pair local-operator comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of coefficient fields intertwines local Frobenius on constructible Weil complexes through point fibre comparisons",
+   "results": "8 hits: PreTilt.coeff_frobeniusEquiv_symm, Perfection.coeff_frobeniusEquiv_symm, WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.frobenius_frobeniusRotation, WittVector.IsocrystalEquiv.frob_equivariant, WittVector.IsocrystalHom.frob_equivariant, WittVector.frobeniusEquiv_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: ring Frobenius, ordinary module scalar adjunctions, or ordinary sheaf pullback comparisons; none states the normalized rational constructible Weil-pair local-operator comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural isomorphism commuting with pullback composition and point transport conjugates the local endomorphism of a Weil object after extension of scalars",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjFreeIso_hom_naturality, AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τl, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, AlgebraicGeometry.Scheme.Modules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ring Frobenius, ordinary module scalar adjunctions, or ordinary sheaf pullback comparisons; none states the normalized rational constructible Weil-pair local-operator comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fd-local-weil-model-trace-independence",
@@ -80,5 +184,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fd-local-frobenius-coefficient-extension",
+  "worker": "stage1",
+  "summary": "No new nodes. Proved naturality of the specified point comparison, wrote the iterated Weil-map induction with the compositor/scalar equation, reused the existing full-domain local-normalization scalar identity for return transports, and pasted the equations to intertwine the local operators. Preserved the statement and all its hypotheses.",
+  "blueprint": "def-fd-trace-function, displayed alternating local trace: coefficient-model independence; realizes the extracted natural point comparison, iterated scalar map, and return-pasting requirements through lem-fd-local-weil-model-trace-independence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-point-sections-scalar-extension",
+    "why": "Generic natural point-sections scalar comparison, used to construct b; the trace unit supplies no sections comparison."
+   },
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Generic natural pullback/scalar comparison, used at the geometric point; the trace unit supplies no such comparison."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Specified scalar/composition coherence for the iterated Weil-map induction and its identification with the normalized return transport."
+   },
+   {
+    "node": "lem-trf-local-frobenius-transport-normalization",
+    "why": "Generic full-domain normalized local return transport under coefficient extension; applies to the trace unit without replacing its trace construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-point-sections-scalar-extension",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-trf-integral-pullback-comparison-realization",
+  "lem-trf-local-frobenius-transport-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q147-2ba2b3adc",
+  "group": "Q147",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q147-2ba2b3adc (reviewer sub-agent of L); spot-checked: I read the full statement of the item and of every node its proof cites; there are no new nodes. The statement and stmt_deps are unchanged from the live node. Step 1: b = Q_L(e)·u is natural; u is the inverse of the rationalized φ of lem-weil-point-sections-scalar-extension (rational Fib = Γ⊗E, def-weil-finite-coefficient-point item 3), and e is the specified a_f of lem-trf-integral-pullback-comparison-realization. Step 2: I re-did the induction using the mixed equation with h=g_X^r, k=g_X (c: G_{r+1}→G_rG_1) and naturality of a_r at θ; it is correct and the convention matches def-weil-local-frobenius-trace. Step 3: the final display of lem-trf-local-frobenius-transport-normalization with E=F, M=L, m=n, y=x gives the return equation, using the compositor identification G_1^n≅G_n, the finite-iteration clause (d becomes a_n) and the naturality from step 1; it has no Tor or lattice hypothesis. Step 4 pastes steps 1-3 correctly. Step 5: linear equations extend to the raw rationalized categories, and b=1 when F=L. Edge cases checked: n=1, F=L, a zero complex, a Weil structure with no integral lattice, an empty set of rational points. No duplicate: trf rational-local-frobenius-powers, rp local-frobenius-models-agree, trf frobenius-transports-scalar-extension and the naturality of point transports are different statements. Batch-5 flag on lem-trf-local-frobenius-transport-normalization: I recomputed the batch-5 closure with and without the item's proof deps and it gains 0 nodes. The base already reaches this node via lem-trf-completed-stalk-frobenius-reduction and sk-thm-trace-transport, and several non-trf batch-5 nodes cite it. The clause used is generic point-transport/scalar-extension coherence that neither assumption leaf provides, so I accept it, as with the earlier ruling on lem-trf-integral-pullback-comparison-realization. All four tool_uses are accepted."
  }
 }
