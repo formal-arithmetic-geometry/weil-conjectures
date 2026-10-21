@@ -21924,3 +21924,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:31 L: returned deliver/A7/Sheaf.Paper.IntegralPullbackCompletedComparison (reviewer RETURN: (reviewer C-e5011, head e50118b76) D2/C5: the item's proof_deps drop all four re-split work packages (principal-koszul-s)
 - 09:32 L: returned deliver/NB/lem-weil-pbc-projection-mate-square-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-projection-mate-square-coherence: lem-wei)
 - 09:32 L: returned deliver/Q27/lem-sfb-internal-extension-finite-presentation (reviewer RETURN: A7/B10 with A6/G4, fourth push. The two new nodes are byte-identical to the returned pushes fbd206ba, 054257bd and 365cf)
+- 09:32 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
