@@ -1,6 +1,6 @@
 # Work queue
 
-84 items; claim with `tools/claim.py next <group> [--stage N]`.
+78 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (12 clusters, 363 modules)
 
@@ -35,33 +35,27 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-supported-lattice-norm-projection` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (13)
+## Stage 2: nodes to state (8)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-pur-affine-line-purity-comparison` | 1 | state | 14 |
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
-| `det-sp-orientation-vector-bundle` | 1 | state | 0 |
-| `lem-coef-compact-support-normalized-realization` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-pur-affine-translation-trace` | 1 | state | 0 |
 | `lem-pur-line-zero-class-etale-realization` | 1 | state | 0 |
 | `lem-sfb-lattice-koszul-triangulated-cup-comparison` | 1 | state | 0 |
-| `lem-sfb-norm-algcl-profinite-cech-exact` | 1 | state | 0 |
-| `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `thm-pur-vector-bundle-thom` | 1 | state | 0 |
-| `lem-sfb-countable-split-profinite-cover` | 2 | state | 0 |
 
 Not open yet: 372 nodes that below a finished node, not needed, 94 nodes that wait for a statement dependency (bottom-up), 6 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (46)
+## Stage 3: modules to prove (45)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
-| `Sheaf.AlgebraicGeometry.RelativeProjExists` | 10 | 0 | repair | route |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 9 | 1 | repair | route |
 | `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 1 | repair | route |
 | `Sheaf.Algebra.Homology.ScalarHomTensorCoherence` | 6 | 1 | repair | route |
