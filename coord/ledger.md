@@ -23375,3 +23375,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:45 L: merged deliver/Q13/lem-sfb-poset-augmented-chain-prism (reviewer PASS; first push; new nodes: 0)
 - 18:45 L: returned deliver/Q27/lem-pur-dualizing-unit-composite (reviewer RETURN: L: independent stage-2 immutable head 16b9a6c9cec6: H2 + mechanical theorem-stmt_dep: the delivery adds theorem node lem)
 - 18:45 L: returned deliver/NA/lem-sfb-polynomial-derived-bar-comparison (reviewer RETURN: L: independent stage-2 immutable head 642ade15deb5: H2: the delivery added theorem node lem-sfb-prime-to-ell-condensed-a)
+- 2026-10-21T18:45:23Z L: superseded stage-1 delivery NR/lem-sfb-root-coordinate-supported-vanishing at ca0825dc929302b7ba7c8ced7f82aaf18566a822; current completion retained; packet archived at refs/superseded/NR/lem-sfb-root-coordinate-supported-vanishing/ca0825dc929302b7ba7c8ced7f82aaf18566a822; stale return retired.
