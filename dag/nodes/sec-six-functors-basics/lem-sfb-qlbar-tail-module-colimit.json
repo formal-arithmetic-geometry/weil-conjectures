@@ -21,18 +21,16 @@
  ],
  "proof": [
   {
-   "text": "Write $I$ for all finite intermediate fields of $\\Omega/\\mathbf Q_\\ell$. By [det-def-sfb-qlbar-condensed-subextensions], every finite compositum is finite. The field $E$ belongs to $I_E$, and for $F,G\\in I_E$ the compositum $FG$ belongs to $I_E$ and contains both. Thus $I_E$ is nonempty and directed. For every $H\\in I$, the finite compositum $EH$ is an object of $I_E$ containing $H$. All these fields form a set in the coefficient universe fixed in the statement, so both indexing posets are small.",
-   "uses": [
-    "det-def-sfb-qlbar-condensed-subextensions"
-   ],
-   "elementary": false,
+   "text": "The published IsDirectedOrder instance on PadicAlgCl.FiniteIntermediateField supplies common upper bounds by finite composita. The tail contains E; for F,G in the tail a common upper bound H of F,G is again above E. For an arbitrary finite H a common upper bound of E,H belongs to the tail. Mathlib Monotone.final_functor_iff therefore makes the monotone inclusion of the tail final.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "First sentence: the filtered poset of finite extensions containing E."
+    "place": "First sentence: the finite-subextension colimit above E, compatibly with E_X-module structures."
    }
   },
   {
-   "text": "Put $a_{H,K}:H_X\\to K_X$ for an inclusion $H\\subseteq K$. These maps are the functorial images of subfield inclusions by [def-sfb-subfield-coefficient-map] and [sk-def-sfb-pulled-back-coefficients], so $a_{H,H}=1$ and $a_{K,L}a_{H,K}=a_{H,L}$. By [lem-sfb-subfield-coefficient-map-comp], $q_Ka_{H,K}=q_H$. In particular for $F\\in I_E$, put $s_F=a_{E,F}$; then $a_{F,G}s_F=s_G$ and $q_Fs_F=q_E$. These are equalities of unital commutative ring-sheaf maps: [def-weil-pbc-internal-abelian-sheaf-module-equivalence] reconstructs the section rings and preserves the underlying sheaves identically. For a local scalar $r$ and section $x$, multiplicativity gives $a_{F,G}(s_F(r)x)=s_G(r)a_{F,G}(x)$ and $q_F(s_F(r)x)=q_E(r)q_F(x)$. Hence the transitions and the specified legs are $R$-linear for exactly the actions in the statement.",
+   "text": "Construct the restricted-regular-module map from a scalar-compatible ring-object morphism a by Mod.homMk. Its linearity follows from IsMonHom.mul_hom and the scalar compatibility equation using whisker interchange. Apply sectionModuleEquivalence to these internal maps. Functoriality of upperStarFromPoint gives the diagram identities, and padicSubfieldRingObjMap_comp_toPadicAlgCl gives the cocone equation. The equivalence leaves all underlying abelian sheaves and maps unchanged.",
    "uses": [
     "def-sfb-subfield-coefficient-map",
     "sk-def-sfb-pulled-back-coefficients",
@@ -42,47 +40,50 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "First sentence: compatibility with the E_X-module structures."
+    "place": "First sentence: the finite-subextension colimit above E, compatibly with E_X-module structures."
    }
   },
   {
-   "text": "The last isomorphism in [sk-prop-sfb-qlbar-colimit-x] identifies $B$, with its inclusion maps $q_H$ for $H\\in I$, as a colimit in commutative ring sheaves. We verify the same universal property after restriction to $I_E$, rather than choosing a new isomorphism. Let $t_F:F_X\\to A$ be a ring-sheaf cocone on $I_E$. For $H\\in I$ define $\\widetilde t_H=t_{EH}a_{H,EH}$. If $H\\subseteq K$, then $EH\\subseteq EK$; the cocone equation and composition from step 2 give $\\widetilde t_Ka_{H,K}=t_{EK}a_{H,EK}=t_{EH}a_{H,EH}=\\widetilde t_H$. Thus this is a cocone on $I$. The full colimit gives a unique ring-sheaf map $t:B\\to A$ with $tq_H=\\widetilde t_H$. For $F\\in I_E$, $EF=F$ and hence $tq_F=t_F$. Conversely any map $u:B\\to A$ with $uq_F=t_F$ on $I_E$ satisfies $uq_H=uq_{EH}a_{H,EH}=t_{EH}a_{H,EH}$ for every $H$, and full-colimit uniqueness gives $u=t$. This proves the tail colimit with the original $q_F$, by the definition in [def-weil-pbc-category-colimit].",
+   "text": "Use the already proved abelian coefficient-colimit clause of sk-prop-sfb-qlbar-colimit-x, supplied directly by AlgebraicGeometry.ProEtale.isColimitPadicAlgClRingObjCocone in the published Compatibility module. Mathlib Functor.Final.isColimitWhiskerEquiv restricts it to the tail. This is definitionally the underlying abelian cocone of the constructed module cocone. Module sheaf colimits exist and the forgetful functor to abelian sheaves preserves them, as in lem-weil-pbc-module-sheaves-colimits-forgetful; the proof imports its sorry-free source instance SheafOfModules.preservesColimitsOfShape_toSheaf. Colimit existence is constructed explicitly by applying the sheafification left adjoint to the underlying presheaf diagram and transporting along its invertible counit, using hasColimit_of_iso. No direct import of Mathlib.Algebra.Category.ModuleCat.Sheaf.Colimits is needed. The forgetful functor reflects isomorphisms, so Mathlib reflectsColimit_of_reflectsIsomorphisms and isColimitOfReflects prove that this module cocone is a colimit.",
    "uses": [
     "sk-prop-sfb-qlbar-colimit-x",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
+    "place": "First sentence: the finite-subextension colimit above E, compatibly with E_X-module structures."
+   }
+  },
+  {
+   "text": "The given family f is a cocone on the module diagram because its compatibility hypothesis is precisely the naturality equation on sections. The colimit descent supplies g; evaluate IsColimit.fac on sections for its factorization equations. For any other g, the equations give equality after each leg by module morphism extensionality; IsColimit.uniq proves uniqueness.",
+   "uses": [
     "def-weil-pbc-category-colimit"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "First sentence: restricting the coefficient colimit to F containing E, with its given cocone."
-   }
-  },
-  {
-   "text": "Apply [lem-sfb-directed-ring-sheaf-module-colimit] on the chosen small pro-etale site, with $R=E_X$, $I=I_E$, $A_F=F_X$, $A=B$, $s_F=a_{E,F}$ and $s=q_E$. Step 1 checks the small nonempty directed index; step 2 checks compatibility of all scalar maps and legs as unital ring-sheaf maps; step 3 supplies the required commutative-ring-sheaf colimit. The lemma therefore makes $B$ a colimit in sheaves of $R$-modules with the very same maps $q_F$. Its explicit uniqueness assertion says that every compatible family of $R$-linear maps $F_X\\to M$ factors uniquely through these $q_F$. Consequently the comparison from any chosen module colimit to $B$ is the map characterized by these legs, as required.",
-   "uses": [
-    "lem-sfb-directed-ring-sheaf-module-colimit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-    "place": "First sentence: passage from the ring-sheaf cocone to the E_X-module colimit."
+    "place": "First sentence: the finite-subextension colimit above E, compatibly with E_X-module structures."
    }
   }
  ],
  "proof_deps": [
-  "det-def-sfb-qlbar-condensed-subextensions",
   "def-sfb-subfield-coefficient-map",
   "sk-def-sfb-pulled-back-coefficients",
   "lem-sfb-subfield-coefficient-map-comp",
   "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
   "sk-prop-sfb-qlbar-colimit-x",
-  "def-weil-pbc-category-colimit",
-  "lem-sfb-directed-ring-sheaf-module-colimit"
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-weil-pbc-category-colimit"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "J4",
+  "date": "2026-10-21",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sfb-finite-extension-compatibility/lem-sfb-qlbar-flat.proof.md",
-  "place": "First sentence; explicit compositum reindexing of sk-prop-sfb-qlbar-colimit-x followed by the existing generic directed ring-sheaf/module comparison (Stacks Tag 03DB, sites-modules.tex, lemma-limits-colimits)."
+  "place": "First sentence: the finite-subextension colimit above E, compatibly with E_X-module structures.",
+  "note": "Shorter route: final restriction of the existing abelian coefficient colimit, reflected through the module forgetful functor. All cocone maps are constructed explicitly from the original coefficient inclusions; no new theorem or sorry."
  },
  "mathlib_searches": [
   {
@@ -193,7 +194,6 @@
   ]
  },
  "tool_uses": [
-  "det-def-sfb-qlbar-condensed-subextensions",
   "sk-prop-sfb-qlbar-colimit-x"
  ],
  "reviewed": {
@@ -227,5 +227,15 @@
   "result": "pass",
   "note": "Item qlbar_tail_module_colimit matches the node clause by clause: ℓ prime, PadicAlgCl closure, E in FiniteIntermediateField, arbitrary X : Scheme.{u}, ProEt site, u+1 coefficients with no universe equality, R=padicSubfieldRingObj and B=padicAlgClRingObj as section rings, I_E as an inclusion-ordered subtype, transitions padicSubfieldRingObjMap, legs padicSubfieldRingObjToPadicAlgCl used literally, module structures through Mod.comap of Mod.regular and sectionModuleEquivalence (real data). Nonempty, directed and the full ∃! universal property in SheafOfModules are on sections, with no unspecified iso. Edge cases E=⊥, F=E, incomparable fields, ℓ=2, empty X and zero M are covered. Not a duplicate of the Compatibility colimit, which is over all fields in Ab sheaves. Docstrings, source, blueprint tags, sorry-only proof and verbatim records are fine. nt_compile --json on both files: clean (3.4 s, 11.2 s). Maintainer note: the §1(B) restoration of Sheaf.Paper.FiniteSubextensionsDirected, pruned as dead by U on 10-20, has the recorded statement but with sorry. V8's landed proof (1cbd6bfe) is lost, so re-queue it for stage 3 or restore the proof. The item's public import of it is unused (advisory)."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4e6d6",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261021T101150-L-19788",
+  "kind": "interface",
+  "note": "independent cc review: delivered QlbarTailModuleColimit.lean and lem-sfb-qlbar-tail-module-colimit node vs clones/live; isColimitPadicAlgClRingObjCocone vs units sk-prop-sfb-qlbar-colimit-x (lean list) and sk-prop-sfb-finite-extension-compatibility (empty realized); compile rc 0, axioms propext/Classical.choice/Quot.sound"
+ }
 }

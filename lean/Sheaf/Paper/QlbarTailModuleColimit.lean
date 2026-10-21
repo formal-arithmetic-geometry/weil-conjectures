@@ -8,9 +8,10 @@ module
 public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility
 public import Sheaf.CategoryTheory.InternalAbelianSheafModuleEquivalence
 public import Sheaf.CategoryTheory.RingedSiteModules
-public import Sheaf.Paper.FiniteSubextensionsDirected
-import Sheaf.Paper.CompletedCondensedCoefficients
-import Sheaf.CategoryTheory.DirectedRingSheafModuleColimit
+import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
+import Mathlib.CategoryTheory.Filtered.Final
+import Mathlib.Algebra.Category.Grp.FilteredColimits
+import Mathlib.CategoryTheory.Sites.PreservesSheafification
 
 /-! # The coefficient module colimit above a finite subextension
 
@@ -58,28 +59,38 @@ noncomputable abbrev qlbarTailVertex (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prim
       ((Mod.comap (padicSubfieldRingObjToPadicAlgCl X ℓ E)).obj
         (Mod.regular (padicAlgClRingObj X ℓ)))
 
+open CategoryTheory.MonoidalCategory CategoryTheory.MonObj in
+private noncomputable def tailRestrictedMap
+    {C : Type*} [Category C] [MonoidalCategory C]
+    {R A B : C} [MonObj R] [MonObj A] [MonObj B]
+    (s : R ⟶ A) (t : R ⟶ B) (a : A ⟶ B)
+    [IsMonHom s] [IsMonHom t] [IsMonHom a] (h : s ≫ a = t) :
+    (Mod.comap s).obj (Mod.regular A) ⟶ (Mod.comap t).obj (Mod.regular B) :=
+  Mod.homMk a (by
+    change (s ▷ A ≫ μ[A]) ≫ a = R ◁ a ≫ t ▷ B ≫ μ[B]
+    rw [Category.assoc, IsMonHom.mul_hom, MonoidalCategory.tensorHom_def, Category.assoc,
+      ← comp_whiskerRight_assoc, h, whisker_exchange_assoc])
+
 /-- The finite fields containing E form a nonempty directed poset, and the original maps
 q_F : F_X → Ω_X have the colimit universal property in sectionwise E_X-module sheaves.
 Source: blueprint lem-sfb-qlbar-flat.proof.md, first sentence.
 (blueprint: lem-sfb-qlbar-tail-module-colimit).
 
 Proof:
-1. E itself belongs to the indexing tail. The finite compositum FG contains F and G,
-   and EH lies above E for every finite subextension H, so the tail is cofinal.
-   Use det-def-sfb-qlbar-condensed-subextensions for finiteness of these composita.
-2. Functoriality of the coefficient inclusions and
-   lem-sfb-subfield-coefficient-map-comp give a_FG s_F = s_G and q_F s_F = q_E.
-   Multiplicativity makes these maps linear for the displayed restricted actions.
-   The sectionModuleEquivalence preserves their underlying sheaves identically.
-3. By sk-prop-sfb-qlbar-colimit-x the full coefficient ring cocone is a colimit.
-   Given a ring cocone t_F on the tail, extend it to all H by t_EH a_H,EH.
-   For H ≤ K, EH ≤ EK, so functoriality and the cocone equation give compatibility.
-   The full colimit gives a unique factorization; EF = F identifies its tail legs.
-   Conversely any tail factorization is fixed on H by q_H = a_H,EH q_EH, hence unique.
-4. Apply lem-sfb-directed-ring-sheaf-module-colimit to this tail ring cocone, with
-   scalar maps E_X → F_X and q_E. Its module universal property is precisely the
-   sectionwise existence and uniqueness below, with the original q_F as legs.
-   Thus the comparison from any chosen module colimit is characterized by these legs. -/
+1. Use the existing directed order on finite intermediate fields to obtain common upper
+   bounds in the tail. The tail contains E, and every finite field has a common upper
+   bound with E. Thus its inclusion in all finite intermediate fields is final, by
+   Mathlib's Monotone.final_functor_iff.
+2. Multiplicativity and compatibility of the coefficient inclusions give linear maps
+   between the restricted regular internal modules. Apply sectionModuleEquivalence
+   to obtain the module diagram and its cocone with exactly the original section maps.
+3. Restrict the already proved abelian coefficient colimit
+   isColimitPadicAlgClRingObjCocone along the final inclusion. The result is definitionally
+   the underlying abelian cocone of the module cocone. The module forgetful functor
+   preserves colimits and reflects isomorphisms, so it reflects this colimit.
+4. Package the given compatible family as a module cocone. Its descent map and the
+   colimit's factorization and uniqueness equations give the stated sectionwise
+   existence and uniqueness. -/
 theorem qlbar_tail_module_colimit (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
     (E : FiniteIntermediateField ℓ) :
     Nonempty {F : FiniteIntermediateField ℓ // E ≤ F} ∧
@@ -101,6 +112,87 @@ theorem qlbar_tail_module_colimit (X : Scheme.{u}) (ℓ : ℕ) [Fact ℓ.Prime]
           (U : X.ProEtᵒᵖ) (x : (padicSubfieldRingObj X ℓ F.1).obj.obj U),
           g.val.app U ((padicSubfieldRingObjToPadicAlgCl X ℓ F.1).hom.app U x) =
             (f F).val.app U x) := by
-  sorry
+  classical
+  let I := {F : FiniteIntermediateField ℓ // E ≤ F}
+  have hdir (F G : I) : ∃ H : I, F ≤ H ∧ G ≤ H := by
+    obtain ⟨H, hF, hG⟩ := exists_ge_ge F.1 G.1
+    exact ⟨⟨H, F.2.trans hF⟩, hF, hG⟩
+  have : Nonempty I := ⟨⟨E, le_rfl⟩⟩
+  have : IsDirectedOrder I := ⟨hdir⟩
+  let inc : I ⥤ FiniteIntermediateField ℓ :=
+    (show Monotone (fun F : I ↦ F.1) from fun _ _ h ↦ h).functor
+  have : inc.Final := (Monotone.final_functor_iff _).2 (by
+    intro F
+    obtain ⟨G, hE, hF⟩ := exists_ge_ge E F
+    exact ⟨⟨G, hE⟩, hF⟩)
+  let K := InternalAbelianSheafModule.sectionModuleEquivalence.{u + 1, u + 1, u}
+    (ProEt.topology X) (padicSubfieldRingObj X ℓ E)
+  let O := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+    (InternalAbelianSheafModule.sectionRingSheaf.{u + 1, u + 1, u} (ProEt.topology X)
+      (padicSubfieldRingObj X ℓ E))
+  have hcomp {F G H : FiniteIntermediateField ℓ} (h : F ≤ G) (k : G ≤ H) :
+      padicSubfieldRingObjMap X ℓ h ≫ padicSubfieldRingObjMap X ℓ k =
+        padicSubfieldRingObjMap X ℓ (h.trans k) := by
+    exact (upperStarFromPoint X).map_comp _ _ |>.symm
+  let D : I ⥤ SheafOfModules.{u + 1} O :=
+    { obj := fun F ↦ qlbarTailStage X ℓ F.2
+      map := fun {F G} h ↦ K.functor.map (tailRestrictedMap
+        (padicSubfieldRingObjMap X ℓ F.2) (padicSubfieldRingObjMap X ℓ G.2)
+        (padicSubfieldRingObjMap X ℓ (leOfHom h)) (hcomp _ _))
+      map_id := by
+        intro F
+        ext U x
+        change ((upperStarFromPoint X).map (𝟙 _)).hom.app U x = x
+        simp
+      map_comp := by
+        intro F G H h k
+        ext U x
+        exact congrArg (fun t ↦ t.hom.app U x) (hcomp (leOfHom h) (leOfHom k)).symm }
+  let d : Cocone D :=
+    { pt := qlbarTailVertex X ℓ E
+      ι :=
+        { app := fun F ↦ K.functor.map (tailRestrictedMap
+            (padicSubfieldRingObjMap X ℓ F.2)
+            (padicSubfieldRingObjToPadicAlgCl X ℓ E)
+            (padicSubfieldRingObjToPadicAlgCl X ℓ F.1)
+            (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ F.2))
+          naturality := by
+            intro F G h
+            ext U x
+            exact congrArg (fun t ↦ t.hom.app U x)
+              (padicSubfieldRingObjMap_comp_toPadicAlgCl X ℓ (leOfHom h)) } }
+  have ha := (Functor.Final.isColimitWhiskerEquiv inc
+    (padicAlgClRingObjCocone X ℓ)).symm (isColimitPadicAlgClRingObjCocone X ℓ)
+  have : (ProEt.topology X).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    inferInstance
+  have : HasColimit D := by
+    let e : D ≅ (D ⋙ SheafOfModules.forget O) ⋙
+        PresheafOfModules.sheafification (𝟙 O.obj) :=
+      Functor.isoWhiskerLeft D
+        (asIso (PresheafOfModules.sheafificationAdjunction (𝟙 O.obj)).counit).symm
+    exact hasColimit_of_iso e
+  have : PreservesColimit D (SheafOfModules.toSheaf.{u + 1} O) := inferInstance
+  have : ReflectsColimit D (SheafOfModules.toSheaf.{u + 1} O) :=
+    reflectsColimit_of_reflectsIsomorphisms D (SheafOfModules.toSheaf.{u + 1} O)
+  have hd : IsColimit d := isColimitOfReflects (SheafOfModules.toSheaf.{u + 1} O) ha
+  refine ⟨inferInstance, hdir, ?_⟩
+  intro M f hf
+  let c : Cocone D :=
+    { pt := M
+      ι :=
+        { app := f
+          naturality := by
+            intro F G h
+            ext U x
+            exact hf F G (leOfHom h) U x } }
+  refine ⟨hd.desc c, ?_, ?_⟩
+  · intro F U x
+    exact congrArg (fun t ↦ t.val.app U x) (hd.fac c F)
+  · intro g hg
+    apply hd.uniq c g
+    intro F
+    ext U x
+    exact hg F U x
 
 end AlgebraicGeometry.ProEtale
