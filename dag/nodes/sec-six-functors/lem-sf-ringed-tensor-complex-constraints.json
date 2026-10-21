@@ -20,14 +20,18 @@
    "elementary": false
   },
   {
-   "text": "Apply the lax braidedness equation to the presheaf pure tensor x tensor y, then the formula for complex braiding on a (p,q) summand. The result is (-1)^(pq) times the generator with factors reversed.",
-   "uses": [],
-   "elementary": true
+   "text": "Rewrite coefficientTensorGenerator as its bidegree summand inclusion applied to the existing moduleTmul pure tensor. Apply the adopted-source Koszul summand formula and moduleTmul_braiding. Evaluation commutes with integer scalar multiplication, giving exactly the factor (-1)^(p*q).",
+   "uses": [
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
   },
   {
-   "text": "Apply lax associativity to (x tensor y) tensor z and the total associator formula on a (p,q,r) summand. Naturality moves the inner summand inclusions through the pairing. The result is the nested generator x tensor (y tensor z), without any interchange or sign.",
-   "uses": [],
-   "elementary": true
+   "text": "Use the adopted-source triple-summand associator equation, decomposing each triple inclusion into its two bidegree inclusions. Evaluate it on a nested moduleTmul pure tensor. The existing moduleTmul_map formula moves the inner inclusion through the outer pairing, and moduleTmul_associator reassociates the three pure sections. The resulting two expressions are the specified nested coefficientTensorGenerators.",
+   "uses": [
+    "lem-pur-module-tensor-generator-calculus"
+   ],
+   "elementary": false
   },
   {
    "text": "Use the complex unitor inverse formula on its sole degree-zero unit summand. The single-complex comparison carries a to the indicated degree-zero section. Lax unitality of the forgetful functor reduces both unitors to the ordinary module unitors, which send a tensor x and x tensor a to a*x. Apply the inverse identities to obtain the formulas for their forward maps. No elementwise generation claim for global sections after sheafification is required; these are identities on the specified pure sections only.",
@@ -36,12 +40,16 @@
   }
  ],
  "proof_deps": [
-  "def-pur-sheaf-tensor-product"
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-module-tensor-generator-calculus"
  ],
  "proof_origin": {
   "by": "agent",
+  "group": "H2",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0FPQ, including its unit and coherence hints; More on Algebra, sign rules."
+  "place": "Tag 0FPQ, including its unit and coherence hints; More on Algebra, sign rules.",
+  "note": "Native complex summand formulas combined with the existing proved moduleTmul generator API; unit formulas from the sheafification adjunction triangle identity and lax unitality."
  },
  "mathlib_searches": [
   {
@@ -128,12 +136,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Y5",
+  "group": "H2",
   "result": "pass",
-  "landing": "20261020T211903-L-3515264",
+  "landing": "20261021T130030-L-2496645",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

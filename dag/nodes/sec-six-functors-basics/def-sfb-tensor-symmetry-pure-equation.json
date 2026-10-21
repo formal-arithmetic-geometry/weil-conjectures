@@ -148,5 +148,19 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-420823618 (reviewer sub-agent of L); spot-checked: Read the item, the base node (live and side-live), the report, all stmt_dep statements, the Lean body of symmetryPure (RingedTensorComplexConstraints.lean l.31-38) and the sources: Stacks 06YU (sites-cohomology l.3300), 0FPQ (l.12936) and More on Algebra section-symmetric-monoidal (l.14036), whose commutativity constraint has sign (-1)^{pq} on L^p⊗M^q. The predicate matches the source and the Lean body clause by clause. Small cases checked: p=q=0, p=q=1, p=-1 with q=1, an even degree, characteristic 2, zero complexes. No re-split note, not dropped, no new nodes. Single fault: the delivery's only substantive change adds lem-sf-ringed-tensor-complex-constraints as a stmt_dep of this definition. That lemma asserts this very formula (its Lean ComplexConstraints.symmetry : symmetryPure), so stages/1-dag.md §1 l.37 forbids it as a stmt_dep: a definition does not cite a lemma about itself, since the edge would close a cycle. The lemma also does not define the braiding (C4/B3), and the statement text never cites it. FIX: removed that stmt_dep and identified β as the commutativity constraint induced termwise by the sheaf-tensor symmetry, citing [def-pur-sheaf-tensor-product], which owns SheafOfModules.cochainModulesSymmetric (CochainTensorUniverses.lean l.100). The sign is not written into the definition of β, and the meaning, hypotheses and Lean record are unchanged. Updated the split_report summary to match. No cycle: none of the four stmt_deps reaches the item.; 1 file(s) fixed by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261021T130030-L-2496645",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
+  "sorry_before": [
+   "CategoryTheory.RingedDerivedNative.complexConstraints"
+  ],
+  "sorry_after": []
  }
 }
