@@ -20,9 +20,102 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-sp-et-proet-coefficient-compatibility"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $V=\\mathbf A^d_Y$, $E_R=De_{\\Sigma!,R}$, $h_R=e_R^*$, $P_R=F_{d,R}$ and $G_R=p_{d,R}^*(-)(d)[2d]$. Write $u_R$ and $v_R$ for the affine and sum counits. The chart adjunction has right functor $h_RG_R$ and composite counit $w_R=u_R\\circ P_R(v_R G_R)$ before its left comparison. The cited domain statement puts $G_AK$, $h_AG_AK$, all compact-support values and their scalar extensions in the required finite-Tor categories. The canonical chart tensor map is\n$$a_g=h_B(a_d)\\circ a_e(G_AK).$$\nIndeed the pullback/tensor maps on a K-flat representative carry $x\\otimes b$ to the pullback of $x$ tensored with $b$; the Tate factor on either path carries $(z\\otimes a)\\otimes b$ to $z\\otimes\\varphi(a)b$. The shift is even, so no interchange sign occurs. The domain statement also identifies this map through site comparison.",
+   "uses": [
+    "lem-sp-chart-finite-ring-adjunction",
+    "lem-sp-etale-ctf-chart-domain",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: domains, canonical right-functor comparison and sum-then-affine counit"
+   }
+  },
+  {
+   "text": "Apply the two scalar-counit statements with base $Y$ for $p_d$ and with input $G_AK$ for $e$. They give\n$$u_{B,T_YK}P_B(a_d)\\beta_d(G_AK)=T_Y(u_{A,K}),$$\n$$v_{B,T_VG_AK}E_B(a_e(G_AK))\\sigma_e(h_AG_AK)=T_V(v_{A,G_AK}).$$\nBoth use the specified coefficient maps; the second input is allowed by Step 1. These statements require neither flatness nor finite projective dimension of $B/A$.",
+   "uses": [
+    "lem-sp-affine-counit-scalar",
+    "lem-sp-etale-sum-counit-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: the affine and etale-sum coefficient-counit equations"
+   }
+  },
+  {
+   "text": "For an object $M$ on $U$ set $s_M=P_B(\\sigma_e(M))\\beta_d(E_AM)$. Suppress object subscripts when their type determines them. Expanding $w_B$ and $a_g$, naturality of $v_B$ at $a_d:T_VG_AK\\to G_BT_YK$ gives\n$$w_BP_BE_B(a_g)s_{h_AG_AK}\n=u_BP_B\\bigl(a_d\\,v_{B,T_VG_AK}E_B(a_e(G_AK))\\sigma_e(h_AG_AK)\\bigr)\\beta_d(E_Ah_AG_AK).$$\nThe sum equation of Step 2 replaces the three middle factors by $T_V(v_{A,G_AK})$. Naturality of $\\beta_d$ at $v_{A,G_AK}$ then gives\n$$u_BP_B(a_d)\\beta_d(G_AK)\\,T_Y(P_A(v_{A,G_AK}))=T_Y(u_A)T_Y(P_A(v_AG_A))=T_Y(w_A),$$\nwhere the affine equation of Step 2 was used. This is a direct substitution and naturality calculation, not an extra geometric comparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: paste the two scalar-counit equations"
+   }
+  },
+  {
+   "text": "Let $\\lambda_R:P_RE_R\\xrightarrow{\\sim}F^{et}_{g,R}$ be the cited graph-normalized comparison. Its statement gives both $\\epsilon^{et}_{g,R}=w_R\\lambda_R(h_RG_R)^{-1}$ and\n$$\\beta_g\\,T_Y(\\lambda_A)=\\lambda_BT_U\\,s.$$\nPrecompose the desired etale equality with the isomorphism $T_Y(\\lambda_A(h_AG_AK))$. The left side becomes, by this square and naturality of $\\lambda_B$ at $a_g$,\n$$\\epsilon^{et}_{g,B}F^{et}_{g,B}(a_g)\\lambda_B(T_Uh_AG_AK)s=w_BP_BE_B(a_g)s.$$\nStep 3 makes this $T_Y(w_A)$, which equals $T_Y(\\epsilon^{et}_{g,A})T_Y(\\lambda_A(h_AG_AK))$. Cancel the common invertible precomposition. This proves the asserted equation for the actual etale counit and the named $\\beta_g$.",
+   "uses": [
+    "lem-sp-chart-left-scalar-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: identify the fixed left map, preserving its actual counit"
+   }
+  },
+  {
+   "text": "For an etale object $L$ on $Y$, abbreviate site comparison by $C_{T,R}$, its tensor comparison by $\\delta_T$, and the fixed compact-support comparison by $c_R=c_{g,R}$. Put $M=H^{et}_{g,A}L$ and $M'=H^{et}_{g,B}T_YL$. The chart-adjunction statement gives $\\widetilde\\epsilon_R=C_{Y,R}(\\epsilon^{et}_R)c_R^{-1}$ on comparison objects. The coefficient/site square gives, at $M$,\n$$F^{pro}_{g,B}(\\delta_{U,M})b_g(C_{U,A}M)=c_B(T_UM)C_{Y,B}(\\beta_g(M))\\delta_{Y,F^{et}_{g,A}M}\\,T_Y(c_A(M))^{-1}.$$\nThe domain statement intertwines the geometric right functors and their tensor comparisons. Thus after identifying $H^{pro}_{g,A}C_{Y,A}L$ with $C_{U,A}M$, the map $H^{pro}_{g,B}(\\delta_{Y,L})a^{pro}_g$ is $C_{U,B}(a^{et}_g)\\delta_{U,M}$. These are the specified comparisons, not a choice of right-adjoint orientation.",
+   "uses": [
+    "lem-sp-chart-finite-ring-adjunction",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-sp-etale-ctf-chart-domain"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: specified transported counit and coefficient/site square"
+   }
+  },
+  {
+   "text": "Postcompose the proposed pro-etale equation at $C_{Y,A}L$ with $\\delta_{Y,L}$. Naturality of the B-counit first replaces its target by $C_{Y,B}T_YL$ and inserts $F^{pro}_{g,B}(H^{pro}_{g,B}(\\delta_{Y,L}))$. Substitute the formulas of Step 5. Naturality of $c_B^{-1}$ at $a_g^{et}:T_UM\\to M'$ cancels $c_B(T_UM)$, leaving\n$$C_{Y,B}\\bigl(\\epsilon^{et}_{g,B}F^{et}_{g,B}(a_g^{et})\\beta_g(M)\\bigr)\\delta_{Y,F^{et}_{g,A}M}\\,T_Y(c_A(M))^{-1}.$$\nStep 4 replaces the parenthesized factor by $T_Y(\\epsilon^{et}_{g,A})$. Naturality of $\\delta_Y$ turns the result into\n$$\\delta_{Y,L}\\,T_Y\\bigl(C_{Y,A}(\\epsilon^{et}_{g,A})c_A(M)^{-1}\\bigr)=\\delta_{Y,L}\\,T_Y(\\widetilde\\epsilon_{g,A}).$$\nCancel $\\delta_{Y,L}$. This proves precisely the equation with the named $b_g$ on every etale-origin object.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: explicit cancellation in transport of the counit identity"
+   }
+  },
+  {
+   "text": "Every pro-etale $K$ in the stated category is isomorphic to $C_{Y,A}L$ by the comparison equivalence in the chart-adjunction statement. All factors of the equation are natural transformations (the canonical tensor comparisons, coefficient maps and counits). Applying their naturality to this isomorphism and cancelling it proves the equation at $K$. For refinement $c\\to c'$, write $\\phi_R:F^c_{g,R}\\xrightarrow{\\sim}F^{c'}_{g,R}$. The refinement clause gives $q^{c'}T_Y(\\phi_A)=\\phi_BT_U q^c$, with $q=\\beta$ or $b$. Under the canonical adjunction identification the counit is $\\epsilon^{c'}=\\epsilon^c\\phi_R(H_R)^{-1}$. Substitution, naturality of $\\phi_B$ at $a_g$ and cancellation of $\\phi_B$ show that the equation for $c'$ is the equation for $c$ precomposed with $T_Y(\\phi_A(H_A))^{-1}$. Common-refinement comparisons obey the same clause, so the assertions hold after their canonical identifications as well.",
+   "uses": [
+    "lem-sp-chart-finite-ring-adjunction",
+    "lem-sp-et-proet-coefficient-compatibility",
+    "lem-sp-chart-left-scalar-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts: arbitrary pro-etale input and canonical compactification refinements"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-chart-finite-ring-adjunction",
+  "lem-sp-etale-ctf-chart-domain",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sp-affine-counit-scalar",
+  "lem-sp-etale-sum-counit-scalar",
+  "lem-sp-chart-left-scalar-normalization",
+  "lem-sp-et-proet-coefficient-compatibility"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts paragraph: explicit counit pasting and comparison cancellation"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +151,45 @@
    "results": "{\"t\": \"2026-10-21T03:27:17Z\", \"tool\": \"leansearch\", \"query\": \"The composite etale affine space counit on finite Tor constructible complexes obeys the derived scalar extension equation after normalized etale proetale transport\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.ExtendRestrictScalarsAdj.Counit.map_hom_apply\", \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"Algebra.Etale.comp\", \"ModuleCat.ExtendRestrictScalarsAdj.Counit.map\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"ModuleCat.ExtendRestrictScalarsAdj.counit\", \"algHomEquivSigma\", \"AlgebraicGeometry.Scheme.Modules.pseudofunctor_mapComp_hom_τr\"], \"digest\": \"b9df978288467b08\"}",
    "date": "2026-10-21",
    "verdict": "no match: results concern general algebra/category theory or unrelated geometry, not the stated finite-ring geometric comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "counit.*coefficient|coefficient.*counit|affine.*trace",
+   "results": "{\"t\": \"2026-10-21T03:52:04Z\", \"tool\": \"grep\", \"query\": \"counit.*coefficient|coefficient.*counit|affine.*trace\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Results do not state the geometric finite-ring chart counit identity or its specified etale/pro-etale normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived scalar extension preserves the sum then affine integration counit for an etale chart into affine space",
+   "results": "{\"t\": \"2026-10-21T03:52:04Z\", \"tool\": \"leansearch\", \"query\": \"Derived scalar extension preserves the sum then affine integration counit for an etale chart into affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgHom.extendScalars\", \"ModuleCat.RestrictionCoextensionAdj.counit'\", \"LinearEquiv.extendScalarsOfSurjective_apply\", \"LinearMap.extendScalarsOfIsLocalization\", \"Algebra.FormallyEtale.of_restrictScalars\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"Algebra.IsAlgebraic.extendScalars\", \"LinearMap.extendScalarsOfIsLocalization.congr_simp\"], \"digest\": \"5a85a21b96fdd0eb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Results do not state the geometric finite-ring chart counit identity or its specified etale/pro-etale normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp_counit_app",
+   "results": "{\"t\": \"2026-10-21T03:52:04Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction.comp_counit_app\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.comp_counit_app\"], \"digest\": \"e29c8b5d96b9ac85\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Adjunction.comp_counit_app only expands a composite counit; it does not prove either geometric coefficient equation or identify the fixed compact-support maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension preserves the sum then affine integration counit for an etale chart into affine space",
+   "results": "{\"t\": \"2026-10-21T03:52:05Z\", \"tool\": \"leanfinder\", \"query\": \"Derived scalar extension preserves the sum then affine integration counit for an etale chart into affine space\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_apply\", \"StandardEtalePair.homEquiv_symm_apply\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom_appTop\", \"AlgebraicGeometry.AffineSpace.map_toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_inv_over\", \"AlgebraicGeometry.AffineSpace.homOfVector_toSpecMvPoly\", \"AlgebraicGeometry.AffineSpace.isoOfIsAffine_hom\", \"AlgebraicGeometry.AffineSpace.toSpecMvPolyIntEquiv_symm_apply\"], \"digest\": \"e9b9ecb6500dac7e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Results do not state the geometric finite-ring chart counit identity or its specified etale/pro-etale normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Paste coefficient compatible adjunction counits and transport through etale proetale comparison equivalences",
+   "results": "{\"t\": \"2026-10-21T03:52:06Z\", \"tool\": \"leanfinder\", \"query\": \"Paste coefficient compatible adjunction counits and transport through etale proetale comparison equivalences\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolidCounit\", \"LightCondSet.instIsIsoFunctorSequentialCounitSequentialAdjunction\", \"AlgebraicTopology.DoldKan.Compatibility.τ₀_hom_app\", \"CategoryTheory.Adjunction.comp_counit\", \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"CategoryTheory.Adjunction.comp_counit_app\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\", \"CategoryTheory.Adjunction.Triple.map_adj₂_counit_app_leftToRight_app\"], \"digest\": \"838ba30ff6e8a745\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Results do not state the geometric finite-ring chart counit identity or its specified etale/pro-etale normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-reduction-exceptional",
@@ -78,5 +206,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-chart-counit-scalar-transport",
+  "worker": "stage1",
+  "summary": "No new nodes. Reused the affine and etale-sum scalar counit equations, proved their composite equation by naturality, normalized it to the specified compactification, and expanded the site-comparison cancellation. Kept the statement unchanged and checked domains, arbitrary finite coefficient maps and refinements.",
+  "blueprint": "Realizes the Charts paragraph of det-sp-reduction-exceptional.proof.md: sum and iterated affine integration commute with coefficients; identifies their fixed compact-support coefficient map and transports the actual counit, retained Steps 7--11.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-et-proet-coefficient-compatibility",
+    "why": "Uses its specified coefficient/site square and refinement equations to transport the actual counit; the chart unit does not itself provide these compact-support coherence squares."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Its K-flat computation of the canonical tensor/pullback comparison justifies checking the factorization on the representing tensor maps; this general ringed-topos construction is not supplied by a chart-unit node."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-et-proet-coefficient-compatibility",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NS-226049096",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-226049096 (reviewer sub-agent of L); spot-checked: I read the item, its 7 steps and the statements of all 7 cited nodes, against the main-20261015 sk-lem-sp-reduction-exceptional.proof.md Charts paragraph (lines 20-36). The statement is byte-identical to base 5241533, where the item was unsplit with no proof. There are 0 new nodes and no cycle. Step 2 applies lem-sp-affine-counit-scalar with S=Y and lem-sp-etale-sum-counit-scalar with input G_AK; Step 1 puts G_AK in ctf through lem-sp-etale-ctf-chart-domain. I redid the elementary Steps 3 and 6: they are correct naturality pastings (v_B at a_d, beta_d at v_A, c_B^-1 at a^et, delta_Y at eps^et_A). Step 4 uses both clauses of lem-sp-chart-left-scalar-normalization: the beta_g/lambda square and eps=w lambda^-1. In Step 5 the coefficient/site square of lem-sp-et-proet-coefficient-compatibility for h=g, right-multiplied by T(c_A)^-1, gives the displayed formula with the directions checked. Its c^c is the same construction as def-sp-fixed-compact-support-comparison. Step 7 extends the equation through the comparison equivalence and the refinement squares. Edge cases checked: d=0, e=id, U empty, A=B, non-flat Z/l^2->Z/l, N=1. I accept the tool_uses lem-sp-et-proet-coefficient-compatibility and lem-weil-pbc-ringed-topoi-derived-tensor-pullback as generic coherence tools. Batch-5 flag on affine-counit-scalar and etale-sum-counit-scalar: both reach lem-pod-lisse-tensor-and-scalar-extension only through lem-sp-et-proet-coefficient-compatibility, which was already a stmt_dep on base. The closure difference against sec-trace-formula, sec-poincare-duality and sk-thm-trace-transport is empty. The reached node is generic lisse tensor and scalar-extension algebra, not part of the trace formula or of Poincare duality, so both citations stand. No dropped-item or re-split note applies. Maintainer note: a parallel O3 delivery of the same item on the same base (run d705e3d3a6d6) is also under review; merge only one."
  }
 }
