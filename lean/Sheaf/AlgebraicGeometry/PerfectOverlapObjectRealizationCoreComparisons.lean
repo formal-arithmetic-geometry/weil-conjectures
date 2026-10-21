@@ -20,9 +20,6 @@ Source: Stacks Project, Tags 08DW and 0D5S.
 @[expose] public section
 
 set_option autoImplicit false
-set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
 
 universe u w
 open CategoryTheory CategoryTheory.Limits
@@ -58,13 +55,10 @@ theorem openPullbackRestrictionIso_hom_app_eq_square_inv
     (openPullbackRestrictionIso g P U h).hom.app M =
       (singleComplexOpenPullbackSquareIso g U P (g.resLE U P h)
         (Scheme.Hom.resLE_comp_ι g h)).inv.app M := by
-  have he : (openPullbackRestrictionIso g P U h).symm.app M =
-      (singleComplexOpenPullbackSquareIso g U P (g.resLE U P h)
-        (Scheme.Hom.resLE_comp_ι g h)).app M := by
-    apply Iso.ext
-    exact openPullbackRestrictionIso_inv_app_eq_square g P U h M
-  have := congrArg Iso.symm he
-  exact congrArg Iso.hom this
+  exact (Iso.hom_eq_inv ((openPullbackRestrictionIso g P U h).app M)
+    ((singleComplexOpenPullbackSquareIso g U P (g.resLE U P h)
+      (Scheme.Hom.resLE_comp_ι g h)).app M)).2
+    (openPullbackRestrictionIso_inv_app_eq_square g P U h M).symm
 
 section
 
