@@ -22178,3 +22178,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:08 L: returned deliver/S6/Sheaf.NumberTheory.Padics.BaseCoefficientCondensedIdentification (reviewer RETURN: (the landing tools, head 4492a7be5) the delivery did not land: lean/Sheaf/NumberTheory/Padics/BaseCoefficientCondensedId)
 - 11:08 L: returned deliver/T2/Sheaf.CategoryTheory.Monoidal.AdjunctionEquivalenceTransport (reviewer RETURN: (the landing tools, head 0cd5ba469) the delivery did not land: lean/Sheaf/CategoryTheory/Monoidal/AdjunctionEquivalenceT)
 - 11:09 L: merged deliver/A3/Sheaf.AlgebraicGeometry.ProEtale.WeaklyContractibleBasis (stage 3; reviewer PASS; first push; landing 20261021T110909-L-3781765 (proof); batch 20261021T110859; modules 1; new nodes 0)
+- 11:09 L: merged deliver/A4/Sheaf.RingTheory.ProEtale.HenselianClosedLift (stage 3; reviewer PASS; first push; landing 20261021T110913-L-3789127 (proof); batch 20261021T110859; modules 1; new nodes 0)
