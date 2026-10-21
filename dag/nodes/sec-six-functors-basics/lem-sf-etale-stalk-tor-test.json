@@ -15,22 +15,10 @@
  ],
  "proof": [
   {
-   "text": "Apply the existing exact geometric stalk functor directly to module-valued sheaves. Functor.mapDerivedCategoryHomologyFunctorIso identifies the stalk of each cohomology sheaf with the cohomology of the derived stalk, without a boundedness assumption. The universe-lifted algebraic-closure points jointly reflect isomorphisms for ModuleCat A coefficients. Therefore a module sheaf H is zero if all its ordinary geometric stalks are zero: use uliftSheafFiberIso to pass to the conservative lifted family, apply isIso_of_isIso_sheafFiber_map to the zero morphism H → 0, and transport the zero-object property through that isomorphism. This is the module-valued specialization of exactness, homology comparison and conservativity already stated by the dependencies.",
-   "uses": [
-    "prop-weil-pbc-geometric-stalks-exact",
-    "lem-sp-exact-functor-preserves-homology",
-    "lemma-weil-pbc-geometric-stalk-conservative"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks); homology.tex Tag 010N (lemma-exact-functor)"
-   }
-  },
-  {
-   "text": "Assume $K$ has Tor amplitude $[a,b]$. Fix a geometric point $\\bar t$ and an arbitrary $A$-module $M$. In the defining quantifier for Tor amplitude take the degree-zero constant sheaf $\\underline M$. Then $H^i(K\\otimes_{A_T}^{\\mathbf L}\\underline M)=0$ for $i\\notin[a,b]$. By step 1 the same vanishing holds after taking the stalk at $\\bar t$. The constant-module tensor/stalk comparison identifies this stalk complex with $K_{\\bar t}\\otimes_A^{\\mathbf L}M[0]$. Hence its cohomology vanishes outside $[a,b]$, for every $M$ and $\\bar t$.",
+   "text": "Assume $K$ has Tor amplitude $[a,b]$. For a geometric point $\\bar t$ and an arbitrary $A$-module $M$, apply the definition to the degree-zero constant module sheaf $\\underline M[0]$. Its derived tensor with $K$ has zero cohomology outside $[a,b]$. The module-stalk cohomology comparison transfers this vanishing to its stalk at $\\bar t$, and the constant-module tensor/stalk isomorphism identifies that stalk with $K_{\\bar t}\\otimes_A^{\\mathbf L}M[0]$. This proves the required stalk condition.",
    "uses": [
     "def-kun-tor-amplitude",
+    "lem-sf-etale-module-stalk-cohomology-test",
     "lem-sfb-geometric-stalk-tensor-constant-single"
    ],
    "elementary": false,
@@ -40,10 +28,10 @@
    }
   },
   {
-   "text": "Conversely assume the stated condition for all geometric points and all ordinary $A$-modules. Let $\\mathcal F$ be any $A_T$-module sheaf, placed in degree zero, and fix $i\\notin[a,b]$. The unbounded derived tensor/stalk comparison gives $(K\\otimes_{A_T}^{\\mathbf L}\\mathcal F[0])_{\\bar t}\\cong K_{\\bar t}\\otimes_A^{\\mathbf L}\\mathcal F_{\\bar t}[0]$. Its right-hand side has zero $i$-th cohomology by the assumption with $M=\\mathcal F_{\\bar t}$. Step 1 therefore gives zero for every stalk of $H^i(K\\otimes_{A_T}^{\\mathbf L}\\mathcal F[0])$. Geometric-stalk conservativity applied to its underlying abelian sheaf makes this cohomology sheaf zero. Since $\\mathcal F$ and $i$ were arbitrary, this is precisely Tor amplitude $[a,b]$.",
+   "text": "Conversely, let $\\mathcal F$ be any $A_T$-module sheaf and $i\\notin[a,b]$. The unbounded tensor/stalk comparison identifies $(K\\otimes_{A_T}^{\\mathbf L}\\mathcal F[0])_{\\bar t}$ with $K_{\\bar t}\\otimes_A^{\\mathbf L}\\mathcal F_{\\bar t}[0]$. The hypothesis, tested on the ordinary module $M=\\mathcal F_{\\bar t}$, makes its $i$-th cohomology zero at every $\\bar t$. The module-stalk zero-detection criterion therefore gives $\\mathcal H^i(K\\otimes_{A_T}^{\\mathbf L}\\mathcal F[0])=0$. Quantifying over $\\mathcal F$ and $i$ is exactly the definition of Tor amplitude.",
    "uses": [
     "lem-sfb-etale-derived-tensor-stalk",
-    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-sf-etale-module-stalk-cohomology-test",
     "def-kun-tor-amplitude"
    ],
    "elementary": false,
@@ -53,10 +41,9 @@
    }
   },
   {
-   "text": "For a scheme morphism u:U → T, use the exact ModuleCat A-valued upperStar functor already supplied by the source library. The module-valued natural isomorphism upperStarCompSheafFiberIso identifies upperStar u followed by the stalk at v with the stalk at v ≫ u. Apply Functor.mapDerivedCategoryNatIso and Functor.mapDerivedCategoryCompIso to obtain the same identification on unbounded derived categories. Tensor its component on the right with an arbitrary M[0] and apply homology. The forward direction of the stalk test on T gives vanishing; transport it through this isomorphism, then use the converse of the stalk test on U. The existing exact-functor instances and the module-valued stalk comparison already incorporate linearity and differential compatibility, so no reconstruction of a SheafOfModules inverse-image witness is needed.",
+   "text": "For $u:U\\to T$ and $K$ of Tor amplitude $[a,b]$, the derived module pullback/stalk isomorphism gives $(u^*K)_{\\bar v}\\cong K_{u\\circ\\bar v}$ for every geometric point $\\bar v$ of $U$. By the forward implication, tensoring the right-hand side with any ordinary $A$-module has cohomology only in $[a,b]$. The converse implication, now on $U$, gives the same Tor interval for $u^*K$.",
    "uses": [
-    "lemma-openclosed-stalk-upperstar",
-    "prop-weil-pbc-geometric-stalks-exact"
+    "lem-sf-etale-derived-pullback-stalk"
    ],
    "elementary": false,
    "source": {
@@ -66,13 +53,11 @@
   }
  ],
  "proof_deps": [
-  "prop-weil-pbc-geometric-stalks-exact",
-  "lem-sp-exact-functor-preserves-homology",
-  "lemma-weil-pbc-geometric-stalk-conservative",
   "def-kun-tor-amplitude",
+  "lem-sf-etale-module-stalk-cohomology-test",
   "lem-sfb-geometric-stalk-tensor-constant-single",
   "lem-sfb-etale-derived-tensor-stalk",
-  "lemma-openclosed-stalk-upperstar"
+  "lem-sf-etale-derived-pullback-stalk"
  ],
  "proof_origin": {
   "by": "document",
@@ -174,17 +159,9 @@
   "date": "2026-10-21",
   "item": "lem-sf-etale-stalk-tor-test",
   "worker": "stage1",
-  "summary": "Expanded both directions of the geometric-stalk Tor test and inverse-image stability using existing unbounded tensor/stalk, exactness, homology and conservativity nodes. No new nodes, no extra boundedness or finiteness hypotheses, no change to the statement. Recorded five fresh Mathlib searches including a second semantic phrasing.",
-  "blueprint": "Opening/closed-immersion Tor-bound paragraph and affine-space paragraph of sk-prop-sf-rf-shriek-preservation: the stalk test used for Tor intervals and their preservation by pullback.",
+  "summary": "Repair of the human re-split request: extracted the module stalk cohomology/zero-detection argument and the scalar-linear derived pullback/stalk comparison into two independent statement-only unsplit nodes. The unchanged parent statement is proved by the two Tor-test implications and their pullback consequence, using these nodes and the existing tensor comparisons. Original arguments and their new locations are preserved in the report.",
+  "blueprint": "Closed-support paragraph Tor-bound test (steps 1 and 2); affine-space paragraph pullback preservation (step 3). The extracted nodes implement old item proof steps 1 and 4 within those blueprint places.",
   "tool_uses": [
-   {
-    "node": "lem-sp-exact-functor-preserves-homology",
-    "why": "Generic exact-functor homology comparison, applied to stalks; the item unit supplies no such categorical tool."
-   },
-   {
-    "node": "lemma-weil-pbc-geometric-stalk-conservative",
-    "why": "Generic geometric-stalk detection of zero abelian sheaves; the item unit uses but does not construct the stalk criterion."
-   },
    {
     "node": "lem-sfb-geometric-stalk-tensor-constant-single",
     "why": "Generic unbounded derived tensor comparison for constant module tests; no such comparison is stated in the item unit."
@@ -192,10 +169,6 @@
    {
     "node": "lem-sfb-etale-derived-tensor-stalk",
     "why": "Generic unbounded tensor/stalk comparison for arbitrary module sheaves, needed to test Tor amplitude; the item unit has no tensor comparison."
-   },
-   {
-    "node": "lemma-openclosed-stalk-upperstar",
-    "why": "Generic inverse-image stalk formula for any scheme morphism; no such pointwise comparison is stated in the item unit."
    }
   ]
  },
@@ -209,10 +182,10 @@
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q66-0a6dd2655",
-  "group": "Q66",
+  "reviewer": "NT-cc-Q18-b7ded8b93",
+  "group": "Q18",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-0a6dd2655 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. Item: a geometric-stalk test for Tor amplitude on the small étale site, for any commutative A and any scheme T, plus the consequence that u^* preserves Tor intervals. The statement is unchanged, adds no hypothesis, and matches Stacks 0DJJ (sites-cohomology lemma-tor-amplitude-stalk) on the ordinary étale coefficient category that the parent sk-prop-sf-rf-shriek-preservation uses in steps 3 and 4. Geometric points use algebraically closed Ω throughout (def-weil-geometric-point), the same as in the cited tensor nodes. Step 1: stalk exactness on Ab plus the exact-functor homology lemma give H^i(E)_t̄ ≅ H^i(E_t̄) for unbounded E, and conservativity detects zero; the module-to-abelian forgetful step is written out. Step 2: the definition tested on the constant sheaf M_T[0], then step 1, then lem-sfb-geometric-stalk-tensor-constant-single, for arbitrary M. Step 3: lem-sfb-etale-derived-tensor-stalk (unbounded, any K and L) with L = F[0] and M = F_t̄, then step 1 and conservativity; this follows the converse argument of 0DJJ. Step 4: prop-weil-pbc-inverse-image-modules-exact (1)-(3) and the stalk pullback lemma (03Q1 (3)), with A-linearity and the differentials handled by naturality, give (u^*K)_v̄ ≅ K_{u∘v̄}; then step 2 on T and step 3 on U. The delivery creates no new nodes. Duplicate search over all statement nodes: lem-sfb-tor-interval-local-detection is pro-étale cover/open-closed locality, and the pc Tor nodes are Zariski, so neither is a duplicate. There is no cycle and no SGA. Tags 0DJJ, 0DEN, 03Q1, 03PT, 03PU and 010N were verified against the tags file. I accept all five tool_uses: the two genuinely off-route ones are the generic tensor/stalk comparisons (sk-lem-integral-models, sk-prop-ctf-finite-proper), and the other three are on the unit's route anyway. Edge cases checked: empty T, K = 0, K = A_T[0], a = b, unbounded K, non-Noetherian A, arbitrary u. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-b7ded8b93 (reviewer sub-agent of L); spot-checked: Re-split of lem-sf-etale-stalk-tor-test in answer to the human's 2026-10-21 note; statement unchanged; the item is not on the dropped list and no other group has superseded it. The split is genuine. Old step 1 (module stalk exactness, the exact-functor homology comparison, preservation of quasi-isomorphisms, zero detection by conservativity) is now the new node lem-sf-etale-module-stalk-cohomology-test, with every sub-argument in its statement. Old step 4 (exact module u^*, the degreewise 03Q1 comparison, A-linearity from naturality in m_c and d, descent to D(A)) is now the new node lem-sf-etale-derived-pullback-stalk. Old steps 2 and 3, the two directions of the Tor iff, stay in the parent as steps 1 and 2 with the same arguments: test on M_T[0], then the stalk transfer, then lem-sfb-geometric-stalk-tensor-constant-single; and lem-sfb-etale-derived-tensor-stalk with L=F[0] and M=F_t, then zero detection. Parent step 3 assembles the Tor consequence. The parent proof is 1434 characters and the new nodes are about 1.2k and 1.3k characters; nothing was summarised away, and neither node restates the item. Both new statements are true for unbounded E and K, any commutative A, any u, and geometric points with Omega algebraically closed. Small cases checked: T empty, A=0, K=0, K=A_T[0], a=b, non-flat M, u=id. Source checks: Stacks 03PT(3) (etale-cohomology.tex l.3456), 03PU (l.3546), 03Q1(1)(3) (l.4649) and 0DJJ (sites-cohomology.tex l.12690) were read and their tags verified. No duplicates: lem-kun-stalks-of-cohomology is abelian only, lem-weil-pbc-derived-stalk-conservative is D^+ of Ab, and lem-sf-etale-stratified-stalk-identification builds the pullback-stalk comparison only inside its proof (advisory: its upperStarCompSheafFiberIso + mapDerivedCategoryNatIso route can be reused for the new node). No SGA, no cycle, proof_deps equals the union of the steps' uses, each new node has five Mathlib searches of three kinds and correct created and blueprint fields. Accepted tool_uses: the two generic unbounded tensor/stalk comparisons. The snapshot's dagsnap symlinks were pruned during the review, so existing-node statements after that point were read from clones/side-live. No fixes."
  },
  "lean": {
   "module": "Sheaf.AlgebraicGeometry.EtaleStalkTorTest",
