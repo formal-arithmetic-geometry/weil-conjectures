@@ -54,10 +54,21 @@ def _load(root, families):
     if data is None:
         # One builder for all commits/configurations, avoiding a cold-cache herd.
         with (directory / 'library-builder.lock').open('a') as lock:
-            fcntl.flock(lock, fcntl.LOCK_EX)
+            # 2026-10-22 (the human: 50 deliveries queued on this lock): wait for the builder WITHOUT the lock, polling
+            # for an index it may have finished; the lock is taken only to build. Before, every waiter parsed the
+            # 187 MB index under the lock, one after the other.
+            while True:
+                try:
+                    fcntl.flock(lock, fcntl.LOCK_EX | fcntl.LOCK_NB); break
+                except OSError:
+                    data = read() or _recent(root, directory, signature, suffix, commit, families)
+                    if data is not None:
+                        _how = "recent-while-waiting"; break
+                    _time.sleep(5)
             _t.append(_time.time())
-            _how = "exact-after-lock"; data = read()
             if data is None:
+                _how = "exact-after-lock"; data = read()
+            if data is None and _how != "recent-while-waiting":
                 # 2026-10-22 (the human: deliveries waited an hour on this lock): the builder that just finished built an
                 # ancestor of this commit; take it, as the lookup before the lock would have. Without this every waiter
                 # of a herd rebuilt the whole index for its own commit, one after the other.
