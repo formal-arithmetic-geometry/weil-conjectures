@@ -9,13 +9,16 @@ public import Sheaf.Paper.RingedDerivedSliceLocalization
 public import Sheaf.Paper.DerivedAdjunctionShift
 public import Sheaf.CategoryTheory.SiteCoveringAxioms
 public import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
 import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
 import WeilConjectures.Algebra.Homology.KInjectiveRestrictLocalized
-import Sheaf.Paper.RingedSliceDerivedComparisons
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.CategoryTheory.Shift.Adjunction
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
+import Sheaf.CategoryTheory.DerivedCategory.DerivedSquareShiftOnKInjectives
+import Sheaf.CategoryTheory.AdjunctionSquareShiftMate
+import Sheaf.Algebra.Homology.SliceTensorIntegerShiftCompatibility
+import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
+import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryAdjunctionShift
+import Mathlib.CategoryTheory.Adjunction.Whiskering
+import Mathlib.Algebra.Category.ModuleCat.Presheaf.Monoidal
 
 /-! # Integer shifts of canonical ringed-slice comparisons
 
@@ -37,9 +40,169 @@ set_option backward.isDefEq.respectTransparency.types false
 
 universe u w
 
-open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures
+open CategoryTheory CategoryTheory.Limits Opposite WeilConjectures MonoidalCategory
 
 namespace SheafOfModules
+
+-- The normalized-unit argument of DerivedAdjunctionShift, on complexes.
+private theorem rightKan_postadjoint_ext
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    (Q : A ⥤ B) (F : A ⥤ C) (LF : B ⥤ C) (α : Q ⋙ LF ⟶ F)
+    [LF.IsRightKanExtension α] (T : D ⥤ C) (S : C ⥤ D) (a : T ⊣ S)
+    (H : B ⥤ D) (γ₁ γ₂ : H ⟶ LF ⋙ S)
+    (h : ∀ X, γ₁.app (Q.obj X) ≫ S.map (α.app X) =
+      γ₂.app (Q.obj X) ≫ S.map (α.app X)) : γ₁ = γ₂ := by
+  apply ((a.whiskerRight B).homEquiv H LF).symm.injective
+  apply LF.hom_ext_of_isRightKanExtension α
+  simp only [Adjunction.homEquiv_counit]
+  ext X
+  have hx := congrArg ((a.homEquiv (H.obj (Q.obj X)) (F.obj X)).symm) (h X)
+  simpa [Adjunction.homEquiv_counit, CategoryTheory.Functor.map_comp, Category.assoc,
+    ← a.counit.naturality, Adjunction.whiskerRight_counit_app_app] using hx
+
+private theorem rightKan_postadjoint_commShift
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [HasShift A ℤ] [HasShift B ℤ] [HasShift C ℤ] [HasShift D ℤ]
+    (Q : A ⥤ B) [Q.CommShift ℤ] (F : A ⥤ C) [F.CommShift ℤ]
+    (LF : B ⥤ C) [LF.CommShift ℤ] (α : Q ⋙ LF ⟶ F)
+    [LF.IsRightKanExtension α] [NatTrans.CommShift α ℤ]
+    (T : D ⥤ C) (S : C ⥤ D) [S.CommShift ℤ] (a : T ⊣ S)
+    (H : B ⥤ D) [H.CommShift ℤ] (τ : H ⟶ LF ⋙ S)
+    [NatTrans.CommShift (Functor.whiskerLeft Q τ ≫
+      (Functor.associator Q LF S).inv ≫ Functor.whiskerRight α S) ℤ] :
+    NatTrans.CommShift τ ℤ := by
+  let δ := (Functor.associator Q LF S).inv ≫ Functor.whiskerRight α S
+  have : NatTrans.CommShift δ ℤ := by dsimp [δ]; infer_instance
+  have hτ : NatTrans.CommShift (Functor.whiskerLeft Q τ ≫ δ) ℤ := by assumption
+  constructor
+  intro n
+  apply rightKan_postadjoint_ext Q F LF α
+    ((shiftEquiv D n).symm.functor ⋙ T) (S ⋙ shiftFunctor D n)
+    ((shiftEquiv D n).symm.toAdjunction.comp a)
+  intro X
+  have hdapp (Y : A) : δ.app Y = S.map (α.app Y) := by
+    simp [δ]
+  simp only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+    Functor.comp_map, ← hdapp X]
+  apply (cancel_epi (H.map ((Q.commShiftIso n).hom.app X))).mp
+  have hd := NatTrans.shift_app_comm δ n X
+  have ht := NatTrans.shift_app_comm (Functor.whiskerLeft Q τ ≫ δ) n X
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, CategoryTheory.Functor.map_comp,
+    Category.assoc] at ht
+  rw [← hd] at ht
+  have hn := τ.naturality ((Q.commShiftIso n).hom.app X)
+  dsimp at hn
+  have hn' := congrArg (fun f ↦ f ≫ ((LF ⋙ S).commShiftIso n).hom.app (Q.obj X) ≫
+    (shiftFunctor D n).map (δ.app X)) hn
+  simp only [Functor.commShiftIso_comp_hom_app, Category.assoc, Functor.comp_map] at ht
+  simp only [Functor.commShiftIso_comp_hom_app, Category.assoc] at hn' ⊢
+  exact ht.trans hn'.symm
+
+private theorem normalized_unit_commShift
+    {A B C D : Type*} [Category A] [Category B] [Category C] [Category D]
+    [HasShift A ℤ] [HasShift B ℤ] [HasShift C ℤ] [HasShift D ℤ]
+    (QA : A ⥤ C) (QB : B ⥤ D) [QA.CommShift ℤ] [QB.CommShift ℤ]
+    (F : A ⥤ B) (G : B ⥤ A) [F.CommShift ℤ] [G.CommShift ℤ]
+    (L : C ⥤ D) (R : D ⥤ C) [L.CommShift ℤ] [R.CommShift ℤ]
+    (ah : F ⊣ G) [NatTrans.CommShift ah.unit ℤ] (adj : L ⊣ R)
+    (α : QA ⋙ L ⟶ F ⋙ QB) (β : G ⋙ QA ⟶ QB ⋙ R)
+    [L.IsRightKanExtension α] [NatTrans.CommShift α ℤ] [NatTrans.CommShift β ℤ]
+    (hnorm : ∀ (M : A) (N : B) (f : F.obj M ⟶ N),
+      adj.homEquiv (QA.obj M) (QB.obj N) (α.app M ≫ QB.map f) =
+        QA.map (ah.homEquiv M N f) ≫ β.app N) :
+    NatTrans.CommShift adj.unit ℤ := by
+  have hnorm' (M : A) : adj.unit.app (QA.obj M) ≫ R.map (α.app M) =
+      QA.map (ah.unit.app M) ≫ β.app (F.obj M) := by
+    have h := hnorm M _ (𝟙 _)
+    rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit] at h
+    simpa only [CategoryTheory.Functor.map_id, Functor.comp_obj, Functor.id_obj,
+      Category.comp_id] using h
+  let δ := Functor.whiskerLeft QA adj.unit ≫
+    (Functor.associator QA L R).inv ≫ Functor.whiskerRight α R
+  have heq : δ =
+      (Functor.rightUnitor QA).hom ≫ (Functor.leftUnitor QA).inv ≫
+      Functor.whiskerRight ah.unit QA ≫ (Functor.associator F G QA).hom ≫
+      Functor.whiskerLeft F β ≫ (Functor.associator F QB R).inv := by
+    ext M
+    simpa [δ] using hnorm' M
+  have hδ : NatTrans.CommShift δ ℤ := by
+    rw [heq]
+    infer_instance
+  exact rightKan_postadjoint_commShift QA _ L α L R adj (𝟭 _) adj.unit
+
+-- Conjugate a normalization without unfolding any of the functors involved.
+private theorem iso_normalization_cancel
+    {B C : Type*} [Category B] [Category C] (G : B ⥤ C)
+    {X Y Z W : C} {P Q : B} (a : X ≅ Y) (b : P ≅ Q)
+    (f₁ : X ⟶ Z) (f₂ : Z ⟶ G.obj P) (c : Y ⟶ W) (g : W ⟶ G.obj Q)
+    (h : f₁ ≫ f₂ ≫ G.map b.hom = a.hom ≫ c ≫ g) :
+    (a.inv ≫ f₁) ≫ f₂ = c ≫ (g ≫ G.map b.inv) := by
+  have hh := congrArg (fun z ↦ a.inv ≫ z ≫ G.map b.inv) h
+  simpa only [Category.assoc, ← CategoryTheory.Functor.map_comp, Iso.hom_inv_id,
+    CategoryTheory.Functor.map_id, Category.comp_id, Iso.inv_hom_id_assoc] using hh
+
+private theorem shift_mate_commShift
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    [HasShift C ℤ] [HasShift D ℤ] [HasShift C' ℤ] [HasShift D' ℤ]
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    (adj : L ⊣ R) (adj' : L' ⊣ R') (r : C ⥤ C') (t : D ⥤ D')
+    [L.CommShift ℤ] [R.CommShift ℤ] [L'.CommShift ℤ] [R'.CommShift ℤ]
+    [r.CommShift ℤ] [t.CommShift ℤ]
+    [NatTrans.CommShift adj.unit ℤ] [NatTrans.CommShift adj'.unit ℤ]
+    (β : R ⋙ r ⟶ t ⋙ R') [NatTrans.CommShift β ℤ]
+    (θ : r ⋙ L' ⟶ L ⋙ t)
+    (hθ : ∀ P, θ.app P = L'.map (r.map (adj.unit.app P) ≫ β.app (L.obj P)) ≫
+      adj'.counit.app (t.obj (L.obj P))) : NatTrans.CommShift θ ℤ := by
+  have hu (n : ℤ) : Adjunction.CommShift.CompatibilityUnit adj
+      (L.commShiftIso n) (R.commShiftIso n) := by
+    intro X
+    simpa only [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_id_hom_app,
+      Functor.comp_obj, Functor.id_obj, Category.id_comp] using
+      (NatTrans.shift_app_comm adj.unit n X)
+  have hu' (n : ℤ) : Adjunction.CommShift.CompatibilityUnit adj'
+      (L'.commShiftIso n) (R'.commShiftIso n) := by
+    intro X
+    simpa only [Functor.commShiftIso_comp_hom_app, Functor.commShiftIso_id_hom_app,
+      Functor.comp_obj, Functor.id_obj, Category.id_comp] using
+      (NatTrans.shift_app_comm adj'.unit n X)
+  constructor
+  intro n
+  ext P
+  have h := (Adjunction.square_shift_mate adj adj' r t hu hu' β (fun E n ↦ by
+    simpa only [Functor.commShiftIso_comp_hom_app, Category.assoc] using
+      (NatTrans.shift_app_comm β n E).symm) P n).2.2.2
+  simpa only [← hθ, NatTrans.comp_app, Functor.whiskerRight_app,
+    Functor.whiskerLeft_app, Functor.commShiftIso_comp_hom_app, Category.assoc] using h.symm
+
+private def tensorShiftComparisons
+    {D : Type*} [Category D] [Preadditive D] [HasShift D ℤ]
+    [∀ n : ℤ, (shiftFunctor D n).Additive]
+    (B : D × D ⥤ D) [(Functor.curry.obj B).CommShift₂Int] :
+    TensorIntegerShiftComparisons B where
+  first n := NatIso.ofComponents
+    (fun X ↦ (((Functor.curry.obj B).flip.obj X.2).commShiftIso n).app X.1) (by
+      rintro ⟨X, Y⟩ ⟨X', Y'⟩ ⟨f, g⟩
+      have h₁ := NatTrans.shift_app_comm ((Functor.curry.obj B).flip.map g) n X'
+      have h₂ := (((Functor.curry.obj B).flip.obj Y).commShiftIso n).hom.naturality f
+      dsimp at h₁ h₂ ⊢
+      rw [show B.map (Prod.mkHom (f⟦n⟧') g) =
+        B.map (Prod.mkHom (f⟦n⟧') (𝟙 Y)) ≫ B.map (Prod.mkHom (𝟙 (X'⟦n⟧)) g) by
+          simp [← B.map_comp]]
+      rw [Category.assoc, ← h₁, ← Category.assoc, h₂, Category.assoc,
+        ← CategoryTheory.Functor.map_comp, ← B.map_comp]
+      simp)
+  second n := NatIso.ofComponents
+    (fun X ↦ (((Functor.curry.obj B).obj X.1).commShiftIso n).app X.2) (by
+      rintro ⟨X, Y⟩ ⟨X', Y'⟩ ⟨f, g⟩
+      have h₁ := NatTrans.shift_app_comm ((Functor.curry.obj B).map f) n Y
+      have h₂ := (((Functor.curry.obj B).obj X').commShiftIso n).hom.naturality g
+      dsimp at h₁ h₂ ⊢
+      rw [show B.map (Prod.mkHom f (g⟦n⟧')) =
+        B.map (Prod.mkHom f (𝟙 (Y⟦n⟧))) ≫ B.map (Prod.mkHom (𝟙 X') (g⟦n⟧')) by
+          simp [← B.map_comp]]
+      rw [Category.assoc, h₂, ← Category.assoc, ← h₁, Category.assoc,
+        ← CategoryTheory.Functor.map_comp, ← B.map_comp]
+      simp)
 
 /-- The inherited resolution shift of the existing exact derived slice restriction.
 Source: Stacks Tags 08FI and 07A4; signed representative calculation
@@ -54,6 +217,42 @@ instance ringedSliceRestrictionCommShift
   letI := (ringedOverFunctor_exactGeneral.{u, u, u, u} (localCoefficientRings A) U).2.1
   letI := (ringedOverFunctor_exactGeneral.{u, u, u, u} (localCoefficientRings A) U).2.2
   inferInstanceAs ((overFunctor.{u} (localCoefficientRings A) U).mapDerivedCategory.CommShift ℤ)
+
+section TensorExt
+
+variable {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+  (A : Sheaf J CommRingCat.{u})
+
+-- Total-tensor maps are determined by the sheafified pure-tensor generators.
+private theorem tensorGenerator_ext
+    (P Q F : CochainComplex (SheafOfModules.{u} ((sheafCompose J (forget₂
+      CommRingCat.{u} RingCat.{u})).obj A)) ℤ)
+    (φ ψ : (coefficientTotalTensor.{u, u, u} J A).obj (P, Q) ⟶ F)
+    (h : ∀ (p q k : ℤ) (hpq : p + q = k) (V : Cᵒᵖ)
+      (x : (P.X p).val.obj V) (y : (Q.X q).val.obj V),
+      (φ.f k).val.app V (coefficientTensorGenerator.{u, u, u} J A P Q p q k hpq V x y) =
+        (ψ.f k).val.app V (coefficientTensorGenerator.{u, u, u} J A P Q p q k hpq V x y)) :
+    φ = ψ := by
+  let := SheafOfModules.isMonoidal_W_independentCoefficients A
+  let := SheafOfModules.monoidalCategory A
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients A
+  let := SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients A
+  apply HomologicalComplex.hom_ext
+  intro k
+  apply HomologicalComplex.mapBifunctor.hom_ext
+  intro p q hpq
+  apply (cancel_epi (SheafOfModules.tensorObjIsoSheafification (R := A) (P.X p) (Q.X q)).inv).mp
+  let adj := PresheafOfModules.sheafificationAdjunction.{u}
+    (𝟙 ((sheafCompose J (forget₂ CommRingCat.{u} RingCat.{u})).obj A).obj)
+  apply (adj.homEquiv ((P.X p).val ⊗ (Q.X q).val) (F.X k)).injective
+  rw [Adjunction.homEquiv_unit, Adjunction.homEquiv_unit]
+  apply PresheafOfModules.hom_ext
+  intro V
+  apply ModuleCat.MonoidalCategory.tensor_ext
+  intro x y
+  exact h p q k hpq V x y
+
+end TensorExt
 
 section Tensor
 
@@ -112,6 +311,32 @@ def RingedSliceTensorShiftNormalized : Prop :=
           ((coefficientTotalTensor.{u, u, u} J A).obj (P, Q)) ≫
         (T.iso J A S P Q hp hq).hom⟦n⟧')
 
+private theorem tensorShiftNormalized_formula
+    (s : TensorIntegerShiftComparisons (coefficientTotalTensor.{u, u, u} J A))
+    (hs : TotalTensorIntegerShiftFormula J A s)
+    (hn : RingedSliceTensorShiftNormalized J A S T) :
+    DerivedTensorIntegerShiftFormula J A S T s (tensorShiftComparisons S.tensor) := by
+  intro P Q hp hq _ _ n
+  constructor
+  · intro hpn
+    obtain ⟨_, γ, hg, he⟩ := hn.1 P Q hp hq n
+    have heq : γ.hom = (s.first n).hom.app (P, Q) := by
+      apply tensorGenerator_ext J A (P⟦n⟧) Q
+      intro p q k h V x y
+      have h' : (p + n) + q = k + n := by omega
+      exact (hg p q k h h' V x y).trans (hs.1 P Q n p q k h h' V x y).symm
+    simpa only [tensorShiftComparisons, NatIso.ofComponents_hom_app, Iso.app_hom, heq] using he
+  · intro hqn
+    obtain ⟨_, γ, hg, he⟩ := hn.2 P Q hp hq n
+    have heq : γ.hom = (s.second n).hom.app (P, Q) := by
+      apply tensorGenerator_ext J A P (Q⟦n⟧)
+      intro p q k h V x y
+      have h' : p + (q + n) = k + n := by omega
+      have hh := hs.2 P Q n p q k h h' V x y
+      rw [mul_comm n p] at hh
+      exact (hg p q k h h' V x y).trans hh.symm
+    simpa only [tensorShiftComparisons, NatIso.ofComponents_hom_app, Iso.app_hom, heq] using he
+
 end Tensor
 
 /-- Both tensor shift squares for the canonical slice comparison, with the other
@@ -160,6 +385,22 @@ def RingedSliceTensorShiftCompatibility
         ((((Functor.curry.obj S.tensor).obj M).commShiftIso n).hom.app N) ≫
         ((ringedSliceRestriction.{u, w} A U).commShiftIso n).hom.app
           (S.tensor.obj (M, N)) ≫ (d.rho M N).hom⟦n⟧')
+
+private theorem tensorShiftCompatibility
+    {C : Type u} [SmallCategory C] (J : GrothendieckTopology C)
+    (A : Sheaf J CommRingCat.{u}) (U : C)
+    [HasDerivedCategory.{w} (SheafOfModules.{u} (localCoefficientRings A))]
+    [HasDerivedCategory.{w} (SheafOfModules.{u} ((localCoefficientRings A).over U))] :
+    RingedSliceTensorShiftCompatibility.{u, w} J A U := by
+  intro S T SU TU d hd _ _ hn hnU
+  obtain ⟨s, hs⟩ := (total_tensor_integer_shift_models.{u, u, u} J A).2
+  obtain ⟨sU, hsU⟩ := (total_tensor_integer_shift_models.{u, u, u} (J.over U) (A.over U)).2
+  have h := (slice_tensor_integer_shift_compatibility J A U S T SU TU d hd s sU hs hsU).2
+    (tensorShiftComparisons S.tensor) (tensorShiftComparisons SU.tensor)
+    (tensorShiftNormalized_formula J A S T s hs hn)
+    (tensorShiftNormalized_formula (J.over U) (A.over U) SU TU sU hsU hnU)
+  intro M N n
+  exact h M N n
 
 /-- The adjunct of the specified coefficient isomorphism, used by the recorded module API.
 Source: Stacks Tag 04J0 (blueprint: lem-weil-pbc-ringed-slice-comparisons-shift). -/
@@ -247,6 +488,106 @@ theorem ringedSliceComparisonsShift
     NatTrans.CommShift d.beta.hom ℤ ∧ NatTrans.CommShift d.lambda.hom ℤ ∧
       RingedSliceTensorShiftCompatibility.{u, w} K R V ∧
       RingedSliceTensorShiftCompatibility.{u, w} J S (u.obj V) := by
-  sorry
+  let a := ringedSliceShiftStructuralMap u c
+  let F := ringedSliceModulePushforward u a
+  let G := ringedSliceModulePushforward (Over.post (X := V) u)
+    (localizedRingedSiteMap u a V)
+  let r := overFunctor (localCoefficientRings R) V
+  let t := overFunctor (localCoefficientRings S) (u.obj V)
+  let := (ringedOverFunctor_exactGeneral.{u, u, u, u} (localCoefficientRings R) V).1
+  let := (ringedOverFunctor_exactGeneral.{u, u, u, u} (localCoefficientRings R) V).2.1
+  let := (ringedOverFunctor_exactGeneral.{u, u, u, u} (localCoefficientRings R) V).2.2
+  let := (ringedOverFunctor_exactGeneral.{u, u, u, u}
+    (localCoefficientRings S) (u.obj V)).1
+  let := (ringedOverFunctor_exactGeneral.{u, u, u, u}
+    (localCoefficientRings S) (u.obj V)).2.1
+  let := (ringedOverFunctor_exactGeneral.{u, u, u, u}
+    (localCoefficientRings S) (u.obj V)).2.2
+  let := e.isRightDerived
+  let := l.isRightDerived
+  obtain ⟨I, ηI, hI⟩ :=
+    (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u, u, u} J S).2.2
+  obtain ⟨I', ηI', hI'⟩ :=
+    (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u, u, u}
+      (J.over (u.obj V)) (S.over (u.obj V))).2.2
+  let := (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u, u, u} J S).1
+  let := (grothendieckAbelian_and_functorial_kInjective_resolutionsOfUniverses.{u, u, u}
+    (J.over (u.obj V)) (S.over (u.obj V))).1
+  have hb := derivedSquare_shift_on_kinjectives F G t r (Iso.refl _)
+    (fun K ↦ ⟨I.obj K, (hI K).2.1, ηI.app K, (hI K).1⟩)
+    (fun K ↦ ⟨I'.obj K, (hI' K).2.1, ηI'.app K, (hI' K).1⟩)
+    (fun K hK ↦ by
+      let := hK
+      exact isKInjective_restrict_localized _ _ inferInstance K)
+    e.right l.right e.eta l.eta
+    (fun K hK ↦ by
+      let := hK
+      exact (CategoryTheory.derives F).isIso_of_isRightDerivedFunctor e.eta
+        (CochainComplex.KInjectives.mk K))
+    (fun K hK ↦ by
+      let := hK
+      exact (CategoryTheory.derives G).isIso_of_isRightDerivedFunctor l.eta
+        (CochainComplex.KInjectives.mk K))
+    (fun K _ n ↦ (NatTrans.shift_app_comm e.eta n K).symm)
+    (fun K _ n ↦ (NatTrans.shift_app_comm l.eta n K).symm)
+    d.beta (by
+      intro K
+      exact iso_normalization_cancel l.right
+        ((ringedSliceRestrictionFactors.{u, w} R V).app
+          ((F.mapHomologicalComplex (.up ℤ)).obj K))
+        ((ringedSliceRestrictionFactors.{u, w} S (u.obj V)).app K)
+        ((ringedSliceRestriction R V).map (e.eta.app K))
+        (d.beta.hom.app (DerivedCategory.Q.obj K))
+        (DerivedCategory.Q.map (ringedSlicePushforwardComplexIso.{u} u a V K).hom)
+        (l.eta.app ((ringedSliceComplexRestriction.{u, u, u} J S (u.obj V)).obj K))
+        (_normalized K))
+  have hbeta : NatTrans.CommShift d.beta.hom ℤ := by
+    constructor
+    intro n
+    ext E
+    simpa only [NatTrans.comp_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.commShiftIso_comp_hom_app, ringedSliceRestrictionCommShift,
+      ringedSliceRestriction, ringedSliceDerivedRestriction, ringedDerivedRestrictionGeneral]
+      using (hb.2.1 n E).symm
+  clear hb I ηI hI I' ηI' hI'
+  let := e.isLeftDerived.isRightKanExtension
+  let := l.isLeftDerived.isRightKanExtension
+  refine ⟨hbeta, ?_, ?_, ?_⟩
+  · have hunit := normalized_unit_commShift DerivedCategory.Q DerivedCategory.Q
+      ((ringedSliceModulePullback u a).mapHomologicalComplex (.up ℤ))
+      (F.mapHomologicalComplex (.up ℤ)) e.left e.right
+      ((ringedSliceModuleAdjunction u a).mapHomologicalComplex (.up ℤ))
+      e.adjunction e.epsilon e.eta e.normalized
+    have hunit' := normalized_unit_commShift DerivedCategory.Q DerivedCategory.Q
+      ((ringedSliceModulePullback (Over.post (X := V) u)
+        (localizedRingedSiteMap u a V)).mapHomologicalComplex (.up ℤ))
+      (G.mapHomologicalComplex (.up ℤ)) l.left l.right
+      ((ringedSliceModuleAdjunction (Over.post (X := V) u)
+        (localizedRingedSiteMap u a V)).mapHomologicalComplex (.up ℤ))
+      l.adjunction l.epsilon l.eta l.normalized
+    let := hbeta
+    let := hunit
+    let := hunit'
+    have hlam (P : ringedSiteDerived.{u, w} R) :
+        d.lambda.hom.app P =
+          l.left.map ((ringedSliceRestriction R V).map (e.adjunction.unit.app P) ≫
+            d.beta.hom.app (e.left.obj P)) ≫
+              l.adjunction.counit.app ((ringedSliceRestriction S (u.obj V)).obj
+                (e.left.obj P)) := by
+      apply (l.adjunction.homEquiv _ _).injective
+      rw [← l.adjunction.homEquiv_counit (g :=
+        (ringedSliceRestriction R V).map (e.adjunction.unit.app P) ≫
+          d.beta.hom.app (e.left.obj P))]
+      dsimp only [Functor.comp_obj, Functor.id_obj]
+      rw [Equiv.apply_symm_apply]
+      have h := congrArg (fun f ↦ f ≫ l.right.map (d.lambda.hom.app P)) (d.unit P)
+      simpa only [Category.assoc, ← CategoryTheory.Functor.map_comp, Iso.inv_hom_id_app,
+        Functor.comp_obj, Functor.id_obj, CategoryTheory.Functor.map_id, Category.comp_id,
+        Adjunction.homEquiv_unit] using h.symm
+    exact shift_mate_commShift e.adjunction l.adjunction
+      (ringedSliceRestriction R V) (ringedSliceRestriction S (u.obj V))
+      d.beta.hom d.lambda.hom hlam
+  · exact tensorShiftCompatibility K R V
+  · exact tensorShiftCompatibility J S (u.obj V)
 
 end SheafOfModules

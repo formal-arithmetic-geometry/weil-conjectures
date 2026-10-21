@@ -33,13 +33,12 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-derived-square-shift-on-kinjectives] with $F=f_*$, $G=(f_V)_*$ and the termwise comparison of [lem-weil-pbc-localize-ringed-site-morphism]. All four categories are module-sheaf categories on small sites, so [prop-pur-kinjective-resolutions-exist] supplies resolutions; $t$ preserves K-injectives by [lem-pur-kinjective-restrict-localized]. The right-derived-unit square in [lem-weil-pbc-ringed-slice-derived-comparisons] is exactly the required normalization. The resolution shifts are those of [lem-weil-pbc-derived-adjunction-shift]. Thus $\\beta$ commutes with every integer shift; its model component at $T\\to V$ is the identity on $I^{a+n}(uT)$ with its $R(T)$-action.",
+   "text": "Apply [lem-weil-pbc-derived-square-shift-on-kinjectives] with F the ordinary module pushforward, G the slice pushforward, and t,r the exact module restrictions. Their ordinary comparison is definitionally the identity, as in [lem-weil-pbc-localize-ringed-site-morphism]. Obtain K-injective resolutions and Grothendieck abelianness from [prop-pur-kinjective-resolutions-exist]; the generic K-injective derivability structure makes each supplied right-derived unit invertible on K-injectives. Restriction preserves K-injectives by [lem-pur-kinjective-restrict-localized]. Conjugating the given all-complex normalization by the inverse restriction factorizations gives exactly the computation-map normalization of the generic theorem. Its shift clause, using the two assumed unit-shift normalizations of [lem-weil-pbc-derived-adjunction-shift], yields NatTrans.CommShift of the specified beta.",
    "uses": [
     "lem-weil-pbc-derived-square-shift-on-kinjectives",
     "lem-weil-pbc-localize-ringed-site-morphism",
     "prop-pur-kinjective-resolutions-exist",
     "lem-pur-kinjective-restrict-localized",
-    "lem-weil-pbc-ringed-slice-derived-comparisons",
     "lem-weil-pbc-derived-adjunction-shift"
    ],
    "elementary": false,
@@ -49,7 +48,7 @@
    }
   },
   {
-   "text": "The adjunction compatibility in [lem-weil-pbc-ringed-derived-slice-localization] identifies $\\theta_P$ with the adjunct of $h_P=\\beta_{Lf^*P}r(\\eta_P)$. Both adjunctions have shift-compatible units by [lem-weil-pbc-derived-adjunction-shift]. Step 2 and [lem-weil-pbc-adjunction-square-shift-mate], with the restriction shifts of Step 1, therefore give exactly the required square for the specified $\\theta$ (and its inverse orientation).",
+   "text": "Use the normalized-unit argument of [lem-weil-pbc-derived-adjunction-shift] directly on complexes: postcomposition with a right adjoint preserves the needed Kan-extension extensionality, so the normalized unit factorization detects its shift square. Both supplied derived adjunction units therefore commute with their fixed shifts. The unit square in [lem-weil-pbc-ringed-derived-slice-localization], followed by the image of lambda, identifies lambda with the adjunct of r(eta) followed by beta. Apply [lem-weil-pbc-adjunction-square-shift-mate] to beta from Step 2, and substitute this adjunct identity, obtaining NatTrans.CommShift of the specified lambda.",
    "uses": [
     "lem-weil-pbc-adjunction-square-shift-mate",
     "lem-weil-pbc-ringed-derived-slice-localization",
@@ -62,7 +61,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-pbc-slice-tensor-integer-shift-compatibility] with $(\\mathcal C,\\mathcal O,W)=(\\mathcal D,R,V)$ and $(\\mathcal C,S,U)$. The tensor normalizations are exactly those of [lem-weil-pbc-ringed-slice-evaluation-transpose]; the two applications give the four required tensor shift squares.",
+   "text": "Package the fixed-variable CommShift comparisons of each supplied tensor as TensorIntegerShiftComparisons; their naturality in the other variable is the CommShift2Int naturality. Take the canonical natural total-tensor shifts supplied by [lem-weil-pbc-slice-tensor-integer-shift-compatibility]. The pointwise chain shifts in RingedSliceTensorShiftNormalized equal these canonical maps because morphisms from a total tensor are determined by sheafified pure-tensor generators and the sum inclusions. For the second input use np=pn. Thus the supplied derived tensor shifts satisfy precisely DerivedTensorIntegerShiftFormula. Apply the universal normalized derived compatibility clause of [lem-weil-pbc-slice-tensor-integer-shift-compatibility] to these supplied shifts, at (D,R,V) and (C,S,u(V)). The tensor comparison model is the normalization of [lem-weil-pbc-ringed-slice-evaluation-transpose]; no new comparison or shift is chosen for the conclusion.",
    "uses": [
     "lem-weil-pbc-slice-tensor-integer-shift-compatibility",
     "lem-weil-pbc-ringed-slice-evaluation-transpose"
@@ -82,7 +81,6 @@
   "lem-weil-pbc-localize-ringed-site-morphism",
   "prop-pur-kinjective-resolutions-exist",
   "lem-pur-kinjective-restrict-localized",
-  "lem-weil-pbc-ringed-slice-derived-comparisons",
   "lem-weil-pbc-derived-adjunction-shift",
   "lem-weil-pbc-adjunction-square-shift-mate",
   "lem-weil-pbc-ringed-derived-slice-localization",
@@ -92,7 +90,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent."
+  "place": "Tags 08FI (lemma-restrict-K-injective-to-open), 0D6G (lemma-restrict-direct-image-open), 07A6 (lemma-adjoint), and 07A4 (lemma-pullback-tensor-product); signed-shift equations expanded by the agent. Lean assembly by M3: computation-map normalization, the normalized-unit Kan-extension argument on complexes, the mate equation, and pure-tensor identification of the supplied shifts."
  },
  "mathlib_searches": [
   {
@@ -267,5 +265,15 @@
   "result": "pass",
   "note": "Read item, all 9 stmt_deps, live RingedDerivedSliceData/CoefficientRingedTensorHomModel/RingedSliceEvaluationModels decls. Clause-by-clause match: small sites/u continuous/finite-limit pullback, specified ring iso c via adjunct ringedSliceShiftStructuralMap, beta pinned by the dep's verbatim right-derived-unit square, theta = d.lambda (r⋙Lf_V^* ≅ Lf^*⋙t, node orientation), derived shifts pinned by NatTrans.CommShift of eta/epsilon, restriction shift = mapDerivedCategory instance; tensor clauses for R at V and S at u(V), both inputs, shifts pinned by generator formulas (1 and (p*n).negOnePow) and the T.iso localization square, consistent with CommShift₂Setup.int. Elaborator probe: only ringedSliceRestrictionCommShift and the bound CommShift₂Int/derived instances are used. Statement verbatim, 5 declarations, only the item's lean record changed, stmt_deps unchanged. nt_compile --json clean 11.3 s. Edge cases n=0, negative, char 2, zero objects, unbounded inputs ok; universes as the dependency. Advisories: tensor via RingedSliceEvaluationComparisons/RingedSliceTensorModel owned by the non-stmt_dep evaluation-transpose node (same canonical map); proof-only imports; private duplicate restriction CommShift instances in RingedSliceHomSourceShift are consistent."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M3",
+  "result": "pass",
+  "landing": "20261021T160334-L-3591634",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
