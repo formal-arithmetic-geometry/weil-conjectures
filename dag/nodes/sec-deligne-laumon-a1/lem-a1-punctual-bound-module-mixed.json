@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lem-a1-punctual-bound-module-mixed",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Punctual bound suffices for a module bound",
@@ -17,40 +17,139 @@
  ],
  "proof": [
   {
-   "text": "Induct strongly on the dimension of V. In dimension zero V is subsingleton and has no eigenvalues; it is vacuously pure of weight w. A pure module of weight t <= w is mixed: use the two-term filtration 0 <= V, identify its only quotient with V, and conjugate Frobenius along that identification.",
+   "text": "Fix the coefficient data, $q>1$, and $w$ from [def-weil-frobenius-module-weights]. We prove the claim for every Frobenius module with the asserted eigenvalue bound by strong induction on $n=\\dim_{\\Qlb}V$. If $n=0$, then $V=0$ and the length-zero filtration, with no weights or graded pieces, satisfies the definition of mixedness. In the induction step assume the claim for every module of dimension less than $n$.",
    "uses": [
     "def-weil-frobenius-module-weights"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-punctual-bound-module-mixed.proof.md",
+    "place": "Proof, construction of the finite stable filtration; dimension-zero case"
+   }
   },
   {
-   "text": "For nonzero V, Mathlib Module.End.exists_eigenvalue over the algebraically closed field Qlb gives an eigenvalue alpha. It is nonzero because Frobenius is invertible. Let S be its eigenspace. Frobenius acts on S by alpha; multiplication by alpha inverse shows F(S)=S. Equip S and V/S with the restriction and quotient automorphisms. Their inclusion and projection are equivariant and form a short exact sequence. Since S is nonzero, the quotient has strictly smaller dimension. Every quotient eigenvalue is an eigenvalue of V by the already proved FrobeniusModule.hasEigenvalue_of_surjective in WeilConjectures.ZetaLinearAlgebra.FrobeniusModule.Map. Thus the induction hypothesis makes V/S mixed of weights at most w.",
-   "uses": [
-    "def-weil-frobenius-module-weights"
-   ],
-   "elementary": false
-  },
-  {
-   "text": "Write q=p^a>1 and t=2 log(norm(iota alpha))/log q. Nonvanishing of alpha gives positive norm. The real exponential/logarithm identities give q^(t/2)=norm(iota alpha); strict monotonicity of rpow in the exponent for q>1 and the assumed bound give t<=w. Every eigenvalue beta of the restriction to S equals alpha: apply the scalar-action identity to a nonzero beta-eigenvector and cancel the vector. Therefore S is pure of weight t, hence mixed by the two-term filtration from step 1. Apply lem-a1-extension-bounds to S -> V -> V/S to finish the induction.",
+   "text": "If $n>0$, apply [lem-zl-alg-closed-endomorphism-eigenvalue] with the algebraically closed field $\\Qlb$, nonzero finite-dimensional space $V$, and endomorphism $F$. Obtain $v\\ne0$ and $\\alpha$ with $Fv=\\alpha v$. Since $F$ is injective, $\\alpha\\ne0$. Set $L=\\Qlb v$. For each scalar $c$, $F(cv)=c\\alpha v$, and $F(c\\alpha^{-1}v)=cv$, so $F(L)=L$. The inverse acts on $L$ by $\\alpha^{-1}$; consequently both $F$ and its inverse descend to $C=V/L$. Inclusion and the quotient map give a Frobenius-equivariant short exact sequence $0\\to L\\to V\\to C\\to0$: the quotient map is surjective with kernel $L$ by [def-weil-pbc-quotient-module].",
    "uses": [
     "def-weil-frobenius-module-weights",
+    "lem-zl-alg-closed-endomorphism-eigenvalue",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-punctual-bound-module-mixed.proof.md",
+    "place": "Proof, eigenvector and its stable span"
+   }
+  },
+  {
+   "text": "The map $\\Qlb\\to L$, $c\\mapsto cv$, is surjective by the definition of $L$ and injective because $v\\ne0$; thus $v$ is a basis of $L$ and $\\dim L=1$. The images of any finite spanning set of $V$ span $C$, so $C$ is finite-dimensional. Apply [lem-weil-pbc-idempotent-charpoly-rank-nullity] to the quotient map $\\pi:V\\to C$ of step 2: by [def-weil-pbc-quotient-module] $\\pi$ is surjective with kernel $L$, so $\\operatorname{Im}(\\pi)=C$ and $\\ker(\\pi)=L$, and the lemma gives $\\dim C+1=n$, hence $\\dim C<n$.",
+   "uses": [
+    "lem-weil-pbc-idempotent-charpoly-rank-nullity",
+    "def-weil-pbc-quotient-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-punctual-bound-module-mixed.proof.md",
+    "place": "Proof, finite-dimensional termination of the stable filtration"
+   }
+  },
+  {
+   "text": "Apply [lem-a1-spectrum-exact-sequence] to the equivariant short exact sequence in step 2. Every eigenvalue $\\beta$ of the induced automorphism on $C$ has $\\iota(\\beta)$ in its spectrum, hence in that of $V$. Since $\\iota$ is injective, $\\beta$ itself is an eigenvalue of $F$, and therefore $|\\iota(\\beta)|\\leq q^{w/2}$. The module $C$ has the same coefficient data and smaller dimension, so the strong induction hypothesis makes $C$ mixed of weights at most $w$.",
+   "uses": [
+    "lem-a1-spectrum-exact-sequence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-punctual-bound-module-mixed.proof.md",
+    "place": "Proof, graded eigenvalues inherited from the original module by the spectrum lemma"
+   }
+  },
+  {
+   "text": "Put $r=|\\iota(\\alpha)|$. Nonvanishing of $\\alpha$ and injectivity of $\\iota$ give $r>0$. Define $t=2\\log_q r$. Apply [lem-a1-real-logarithm-power] with $b=q>1$, $x=r>0$, and $y=w/2$. It gives $q^{t/2}=q^{\\log_q r}=r$ and, from the assumed bound $r\\leq q^{w/2}$, $\\log_q r\\leq w/2$. Multiplying by $2>0$ yields $t\\leq w$.",
+   "uses": [
+    "lem-a1-real-logarithm-power"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-punctual-bound-module-mixed.proof.md",
+    "place": "Proof, assignment of the real weight 2 log_q of the nonzero eigenvalue modulus"
+   }
+  },
+  {
+   "text": "Every nonzero vector of $L$ is $cv$ with $c\\ne0$. If it is a $\\beta$-eigenvector, then $c\\alpha v=F(cv)=\\beta cv$; cancellation of the nonzero scalar $c$ and vector $v$ gives $\\beta=\\alpha$. Step 5 therefore proves that every eigenvalue on $L$ has modulus $q^{t/2}$, so $L$ is pure of weight $t$ by [def-weil-frobenius-module-weights]. The filtration $0\\subseteq L$ has only the quotient $L/0$, identified with $L$ by $[x]\\mapsto x$; this map intertwines the induced automorphism because it sends $[Fx]$ to $Fx$. Since $t\\leq w$, this filtration makes $L$ mixed of weights at most $w$.",
+   "uses": [
+    "def-weil-frobenius-module-weights"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-punctual-bound-module-mixed.proof.md",
+    "place": "Proof, pure simple pieces and the filtration witnessing mixedness"
+   }
+  },
+  {
+   "text": "In $0\\to L\\to V\\to C\\to0$, both outer terms are mixed of weights at most $w$ by steps 4 and 6. All maps are equivariant and the sequence is short exact by step 2. Apply [lem-a1-extension-bounds] to deduce that $V$ is mixed of weights at most $w$. This completes the strong induction.",
+   "uses": [
     "lem-a1-extension-bounds"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-punctual-bound-module-mixed.proof.md",
+    "place": "Proof, assembly of the finite stable filtration from the eigenline and quotient"
+   }
   }
  ],
  "proof_deps": [
   "def-weil-frobenius-module-weights",
+  "lem-zl-alg-closed-endomorphism-eigenvalue",
+  "def-weil-pbc-quotient-module",
+  "lem-weil-pbc-idempotent-charpoly-rank-nullity",
+  "lem-a1-spectrum-exact-sequence",
+  "lem-a1-real-logarithm-power",
   "lem-a1-extension-bounds"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-punctual-bound-module-mixed.md",
-  "place": "Proof: eigenspace and quotient dimension induction replaces Jordan-Holder filtration; extension assembly uses lem-a1-extension-bounds"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-deligne-laumon-a1/sk-thm-dl-a1-upper/lem-a1-punctual-bound-module-mixed.proof.md",
+  "place": "Entire proof: explicit eigenline and quotient induction realizing the stable-filtration argument, with spectrum inheritance and real weights as in the blueprint."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "IsMixedOfWeightsAtMost|FrobeniusModule|mixed.*weight",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"sub\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Frobenius ring arithmetic, isocrystals, ideal filtrations and generalized eigenspace stabilization do not give the finite pure-weight filtration predicate"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An automorphism over an algebraically closed field whose eigenvalues have absolute values bounded by q power w over two admits a pure weight filtration",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"service unavailable: {\\\"error\\\":\\\"Rate limit exceeded: 60 per 1 minute\\\"}\", \"sub\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsMixedOfWeightsAtMost\"",
+   "results": "{\"n_hits\": 0, \"top\": [], \"note\": \"\", \"sub\": \"\", \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Frobenius ring arithmetic, isocrystals, ideal filtrations and generalized eigenspace stabilization do not give the finite pure-weight filtration predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every eigenvalue of a finite dimensional Frobenius automorphism has complex absolute value at most q to the w over two implies a finite invariant filtration with pure quotients of weights at most w",
+   "results": "{\"n_hits\": 8, \"top\": [\"IsArithFrobAt.exists_of_isInvariant\", \"IsArithFrobAt.arithFrobAt\", \"WittVector.isocrystal_classification\", \"FiniteField.orderOf_frobeniusAlgEquivOfAlgebraic\", \"arithFrobAt\", \"FiniteField.orderOf_frobeniusAlgHom\", \"Ideal.Filtration.Stable.exists_pow_smul_eq_of_ge\", \"Ideal.Filtration.Stable.bounded_difference\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"f372fecf97c51cec\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Frobenius ring arithmetic, isocrystals, ideal filtrations and generalized eigenspace stabilization do not give the finite pure-weight filtration predicate"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A complex eigenvalue modulus bound implies a finite filtration by invariant subspaces with each quotient pure of some real weight bounded above",
+   "results": "{\"n_hits\": 8, \"top\": [\"Module.End.genEigenspace_le_genEigenspace_maxUnifEigenspaceIndex\", \"Module.End.genEigenspace_le_genEigenspace_finrank\", \"Module.End.genEigenspace_eq_genEigenspace_maxUnifEigenspaceIndex_of_le\", \"Module.End.maxUnifEigenspaceIndex\", \"Module.End.maxUnifEigenspaceIndex_le_finrank\", \"Module.End.genEigenspace_top_eq_maxUnifEigenspaceIndex\", \"Module.End.genEigenspace_eq_genEigenspace_finrank_of_le\", \"LieModule.exists₂_genWeightSpace_smul_add_eq_bot\"], \"note\": \"\", \"sub\": \"\", \"digest\": \"11a79bb68a7193c2\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Frobenius ring arithmetic, isocrystals, ideal filtrations and generalized eigenspace stabilization do not give the finite pure-weight filtration predicate"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "lemma",
@@ -90,5 +189,21 @@
   "landing": "20261019T093310-L-2291211",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-a1-punctual-bound-module-mixed",
+  "worker": "stage1",
+  "summary": "Audited the two blueprint snapshots and the live Lean theorem, distinguishing the upstream eigenvalue predicate from the stable-filtration conclusion. Expanded the existing induction into seven steps, reusing the existing eigenvalue-existence leaf, spectrum lemma, coefficient definition, quotient definition and extension lemma; added only two generic Mathlib leaves for quotient dimension and positive logarithmic powers. Normalized doubled TeX backslashes in the statement without changing its mathematical content. No compiler or Lean writing.",
+  "blueprint": "Realizes all of the blueprint proof: the eigenvector/span argument constructs the finite stable filtration by dimension induction in place of invoking Jordan–Holder; spectrum inheritance and the logarithmic real-weight calculation are retained. The unit composition-filtration/extension route is unchanged; this is not its key node.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q118-91139206d",
+  "group": "Q118",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q118-91139206d (reviewer sub-agent of L); spot-checked: I read the whole delivery and fixed one duplicate node. The statement is identical to the blueprint in both snapshots (master order 2788, main-20261015 order 3132) and is not weakened. The proof writes out the blueprint's Jordan–Hölder argument as a strong induction on dim V: split off an eigenline L, apply induction to the quotient C = V/L, then join the two with lem-a1-extension-bounds. I checked every step against the cited statements. The induction is set up properly, with the case V=0 handled by m=0. α≠0 because F is injective, and F(L)=L both ways, so F and its inverse pass to C. For C, lem-a1-spectrum-exact-sequence plus injectivity of ι means C's eigenvalues are eigenvalues of F, so they keep the bound. Step 5 uses Mathlib's Real.rpow_logb (Log/Base.lean 146–148) and Real.logb_le_iff_le_rpow (206–207), whose hypotheses b>1 and x>0 hold. I tested V=0, a scalar module with |ι(α)|<1 and negative w, a Jordan block, and a diagonal module with different moduli; all work. There is no cycle: no cited node's dependency closure contains the item. Fault (C5): the new node lem-a1-quotient-dimension duplicates the existing Mathlib leaf lem-weil-pbc-idempotent-charpoly-rank-nullity, applied to the quotient map V→C, which is surjective with kernel L by def-weil-pbc-quotient-module. It also wrote out 'dimension' instead of citing def-weil-vector-space-dimension. I dropped it and rewrote step 3 and proof_deps to cite the existing node; nothing else cited it. The other new node, lem-a1-real-logarithm-power, is a correct, self-contained two-declaration Mathlib leaf with no duplicate in the DAG; accepted. Batch-5 check: lem-a1-spectrum-exact-sequence reaches sk-def-frobmod only through def-weil-frobenius-module-weights, which cites it just for what a Frobenius module is. That is a general definition, not part of the trace formula or Poincaré duality, and the spectrum lemma is characteristic-polynomial linear algebra, so I accepted it. No tool_uses are needed; the route goes through sk-l-dl-a1-endpoints, which the unit uses. Maintainer note: the item is already proved in Lean (FrobeniusModule.isMixedOfWeightsAtMost_of_forall_hasEigenvalue, reviewed_proof pass on 2026-10-19), so this stage-1 split was redundant (B10) and the item should not be re-dispatched.; 1 file(s) fixed by the reviewer"
  }
 }
