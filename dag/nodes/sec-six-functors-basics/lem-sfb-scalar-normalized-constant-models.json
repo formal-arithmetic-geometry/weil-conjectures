@@ -16,9 +16,138 @@
   "sk-def-sfb-change-of-scalars",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $C_B(P)$ for the internal $\\underline B$-module obtained by sheafifying the constant module presheaf, and $G(P)$ for its fixed-$B$ module-valued version. Module sheafification extends the action uniquely and has the factorization property of [lem-pc-sites-module-sheafification-interface]; [lem-cbc-constant-ring-module-sheaves] identifies the section-ring and fixed-$B$ versions with their underlying sheaves unchanged. For a linear map $q$, the constant presheaf of $\\operatorname{coker}q$ is its pointwise cokernel; the assumed exact abelian sheafification gives the same cokernel on underlying abelian sheaves. By [sk-def-sfb-sheaf-tensor], $\\underline B\\otimes-$ preserves finite colimits, so [lem-sfb-modobj-cokernels] makes that sheafified quotient a cokernel in internal $\\underline B$-modules. In the section-ring version the same quotient is a module cokernel: a map killing $q$ factors uniquely through it by module sheafification's factorization property; the fixed-$B$ equivalence then gives the assertion for $G$. Finite sums are sheafifications of the finite sums of constant presheaves, with the same inclusions and projections. Thus $C_B$ and $G$ preserve finite sums and cokernels, and $C_B(B)=\\underline B$, $G(B)=\\underline B$.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-cbc-constant-ring-module-sheaves",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-modobj-cokernels"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; Tag 03EI, lemma-sheafification-exact; agent application to constant presheaves and internal cokernels"
+   }
+  },
+  {
+   "text": "By [sk-def-sfb-change-of-scalars], $T=\\operatorname{Ext}_\\sigma$ preserves finite colimits. Its hypotheses hold: the sheaf tensor is braided and closed, hence preserves colimits in each variable, and both coefficient rings are commutative. The balancing coequalizer identifies $T(\\underline B)$ with $R$: the action map is $r\\otimes b\\mapsto r\\sigma(b)$, with inverse induced by $r\\mapsto r\\otimes1$; balancing gives the inverse equations. These are equations of the sheaf tensor maps, so they descend from presheaves. In particular $M_R(B^n)\\cong R^n$ with its standard summands. By [lem-galois-equivalence-preserves-limits], $E$ preserves finite sums and cokernels. Set $F=E\\circ T\\circ C_B$. Both $F$ and $G$ therefore preserve finite sums and cokernels.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-change-of-scalars/_section.md",
+    "place": "Extension clause (2), the balancing coequalizer and finite-colimit preservation; categories.tex Tag 0038 for the equivalence"
+   }
+  },
+  {
+   "text": "Let $t_n:F(B^n)\\cong G(B^n)$ be the finite-sum extension of $t$, using the regular-module identification of step 2. For any scalar matrix $q=(q_{ij}):B^m\\to B^n$, its extension is $\\sigma(q)=\\sum_{i,j}\\iota_i\\,\\sigma(q_{ij})\\,p_j$. An additive functor takes this expression to the same sum of the images of its factors. The definition of $t_n$ identifies the summand inclusions and projections, and the hypothesis on $t$ identifies the middle factor with multiplication by $q_{ij}$. Consequently $t_n F(q)=G(q)t_m$. Empty sums give the same equality when $m=0$ or $n=0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent matrix computation using the stated scalar normalization and finite biproduct identities"
+   }
+  },
+  {
+   "text": "Choose a presentation $B^m\\xrightarrow{q}B^n\\xrightarrow{\\pi}P\\to0$. By steps 1 and 2, $F(\\pi)$ and $G(\\pi)$ are cokernels of $F(q)$ and $G(q)$. Step 3 shows that $G(\\pi)t_n$ kills $F(q)$, giving a unique $\\theta_{P,\\pi}$ with $\\theta_{P,\\pi}F(\\pi)=G(\\pi)t_n$. Conversely $F(\\pi)t_n^{-1}$ kills $G(q)$ and gives an inverse: both composites are identities after precomposition with their cokernel projections, which are epimorphisms. Thus this is an isomorphism identifying precisely the two specified cokernel projections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent use of the cokernel universal property after Tag 03CY and the matrix computation"
+   }
+  },
+  {
+   "text": "For a linear map $f:P\\to Q$ and presentations with surjections $\\pi:B^n\\to P$ and $\\pi':B^{n'}\\to Q$, choose, for each basis vector $e_j$ of $B^n$, a vector $a_j\\in B^{n'}$ with $\\pi'(a_j)=f\\pi(e_j)$. Such vectors exist by surjectivity of the ordinary module map $\\pi'$. The matrix $A$ with columns $a_j$ satisfies $\\pi'A=f\\pi$. This lifts only a map of ordinary finite free $B$-modules; it makes no assertion that constant free sheaves are projective.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent finite-basis lifting in ordinary modules"
+   }
+  },
+  {
+   "text": "Precomposing with $F(\\pi)$, use steps 3–5 to calculate\n$$\\theta_{Q,\\pi'}F(f)F(\\pi)=G(\\pi')t_{n'}F(A)=G(\\pi')G(A)t_n=G(f)G(\\pi)t_n=G(f)\\theta_{P,\\pi}F(\\pi).$$\nSince $F(\\pi)$ is a cokernel projection and hence an epimorphism, this proves naturality for $f$. The calculation uses only $\\pi'A=f\\pi$, so it works for every choice of the lifts, without a lifting of the relation modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent explicit naturality equation for the quotient comparison"
+   }
+  },
+  {
+   "text": "Apply step 6 to $f=\\mathrm{id}_P$ and any two finite presentations of $P$. Both functors send this identity to an identity, so $\\theta_{P,\\pi}=\\theta_{P,\\pi'}$. Define $\\theta_P$ by this presentation-independent value. On $B^n$, use the presentation $0\\to B^n\\xrightarrow{\\mathrm{id}}B^n\\to0$ to obtain $\\theta_{B^n}=t_n$. If $\\eta:F\\to G$ is any natural comparison with these free-module components, naturality for $\\pi:B^n\\to P$ forces $\\eta_P F(\\pi)=G(\\pi)t_n$ and hence $\\eta_P=\\theta_P$. This proves the asserted uniqueness, as well as the normalization for every presentation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent independence and uniqueness from the preceding quotient equation"
+   }
+  },
+  {
+   "text": "For localization, strong monoidal sheafification in step 1 makes its local equivalences stable under tensoring, as required by the internal/section-ring comparison. Use [def-weil-pbc-internal-abelian-sheaf-module-equivalence] to pass between internal and section-ring modules without changing their underlying sheaves or maps. Restriction preserves finite colimits by [lem-weil-pbc-finite-type-restriction-exact]. By [lem-weil-pbc-site-constant-restriction], restriction takes a constant module sheaf and its constant linear maps to the same constant module sheaf and maps on the slice, compatibly with their sheafification units. These statements apply to $B$, $R$ and each localized site, which are small in the same coefficient universe. The sectionwise description and relocalization in [def-pur-localized-ringed-site] identify $R|_U$, its regular module, and further restrictions.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-weil-pbc-finite-type-restriction-exact",
+    "lem-weil-pbc-site-constant-restriction",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section Tag 03DH, Definition 04IX; sites.tex Tag 00XR for restriction/sheafification, Tag 03EH for relocalization"
+   }
+  },
+  {
+   "text": "Restrict the presentation $R^m\\xrightarrow{\\sigma(q)}R^n\\to M_R(P)\\to0$. Step 8 makes it the cokernel presentation $(R|_U)^m\\xrightarrow{\\sigma|_U(q)}(R|_U)^n\\to M_R(P)|_U\\to0$. Step 2 on $C/U$ gives exactly this presentation for $M_{R|_U}(P)$. Their unique isomorphism preserving the quotient projections is the canonical model restriction comparison: the canonical balanced map sends $r\\otimes p$ to the same $r\\otimes p$ on the slice and, on the standard generator indexed by $e_j$, sends $r\\otimes e_j$ to $r\\otimes e_j$. It therefore gives that same quotient isomorphism. Step 6 with $f=\\mathrm{id}_P$ shows independence of the presentation. On successive slices the two possible composites preserve the same quotient projection, so they agree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent restriction of a finite cokernel presentation; normalization by the standard generators"
+   }
+  },
+  {
+   "text": "Compare $\\theta_P|_U$ with the comparison built using $E_U$, after the model and constant restriction isomorphisms of steps 8–9 and the supplied equivalence comparison. Both maps now have source $E_U(M_{R|_U}(P))$ and target $\\underline P_{C/U}$. Precompose each with the epimorphism $E_U((R|_U)^n\\to M_{R|_U}(P))$. The defining equation in step 4 gives $G_U(\\pi)t_{U,n}$ for both: the supplied comparison is natural in that quotient map and preserves $t_U$ on the regular summands. Epimorphic cancellation proves equality. Repeating this calculation on $C/V$ for $V\\to U$, and using the given coherence, proves compatibility with every further localization.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent quotient-projection test for localization compatibility; no enough-points test"
+   }
+  },
+  {
+   "text": "On each member $U$ of the specified covering family, an isomorphism $M|_U\\cong M_{R|_U}(P_U)$ is sent by $E_U$ and $\\theta_{P_U}$ to an isomorphism $E(M)|_U\\cong\\underline{P_U}$. Conversely such a fixed-$B$ isomorphism, composed with $\\theta_{P_U}^{-1}$, lifts uniquely through the fully faithful $E_U$ to an isomorphism of internal modules; full faithfulness reflects inverses. These constructions keep both the covering family and the finitely presented modules $P_U$. Compatibility on further slices is step 10. No step uses finiteness or Noetherianity of $B$, or points of the site.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Agent application of full faithfulness on the given cover"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-cbc-constant-ring-module-sheaves",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-modobj-cokernels",
+  "sk-def-sfb-change-of-scalars",
+  "lem-galois-equivalence-preserves-limits",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-finite-type-restriction-exact",
+  "lem-weil-pbc-site-constant-restriction",
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03CY (module sheafification); explicit finite-matrix, cokernel and localization argument from the hypotheses, not an assertion that Stacks states this equivalence comparison"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -61,10 +190,52 @@
    "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean; Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module/presheaf machinery does not assert the specified normalized comparison, its naturality and coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "additive equivalence of module sheaf categories preserving scalar endomorphisms of regular module sends constant finitely presented models naturally to constant module sheaves",
+   "results": "8 hits: LightCondMod.LocallyConstant.functorIsoDiscreteAux₁, CondensedMod.LocallyConstant.functorIsoDiscreteAux₁, SheafOfModules.Presentation.mapGenerators, CondensedMod.LocallyConstant.functorIsoDiscreteAux₂, LightCondMod.LocallyConstant.functorIsoDiscreteAux₂, CondensedMod.LocallyConstant.functorToPresheaves, CondensedMod.LocallyConstant.functor, CompHausLike.LocallyConstantModule.functor_obj_val",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned presentation, free-completion, condensed-discrete and exact-functor interfaces; none gives the scalar-normalized natural comparison on arbitrary sites, presentation independence and slice coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Pp]resentation.*[Ee]quiv|[Ee]quiv.*constant.*[Mm]odel|constant.*[Mm]atrix.*[Cc]okernel",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned presentation, free-completion, condensed-discrete and exact-functor interfaces; none gives the scalar-normalized natural comparison on arbitrary sites, presentation independence and slice coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural comparison for right exact functors from finitely presented modules determined on finite free modules",
+   "results": "8 hits: CategoryTheory.RightExactFunctor, CategoryTheory.exactFunctor, CategoryTheory.rightExactFunctor, CategoryTheory.RightExactFunctor.of, CategoryTheory.exactFunctor_le_rightExactFunctor, CategoryTheory.term_⥤ᵣ_, CategoryTheory.Functor.rightDerived, CategoryTheory.rightExactFunctor_iff",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned presentation, free-completion, condensed-discrete and exact-functor interfaces; none gives the scalar-normalized natural comparison on arbitrary sites, presentation independence and slice coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"constantSheaf\", \"cokernel\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned presentation, free-completion, condensed-discrete and exact-functor interfaces; none gives the scalar-normalized natural comparison on arbitrary sites, presentation independence and slice coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "Presentation.map|iso.*[Pp]resentation|[Pp]resentation.*[Nn]atIso|[Ff]in.*[Ff]ree.*[Nn]atTrans",
+   "results": "5 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean (directory Algebra/Category/ModuleCat)",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned presentation, free-completion, condensed-discrete and exact-functor interfaces; none gives the scalar-normalized natural comparison on arbitrary sites, presentation independence and slice coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right exact additive functors from finitely presented modules natural isomorphism determined by agreement on scalar matrices and finite free modules",
+   "results": "8 hits: CategoryTheory.Functor.mapExactFunctor_smul, CategoryTheory.Free.ext, CategoryTheory.Free.liftUnique, ModuleCat.matrixEquivalence_functor, CategoryTheory.Mat_.liftUnique, MatrixModCat.counitIso, FGModuleRepr.instIsEquivalenceFGModuleCatEmbed, CategoryTheory.Mat_.ext",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned presentation, free-completion, condensed-discrete and exact-functor interfaces; none gives the scalar-normalized natural comparison on arbitrary sites, presentation independence and slice coherence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-module-object-ordinary-coefficient-equivalence",
@@ -83,5 +254,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-normalized-constant-models",
+  "worker": "stage1",
+  "summary": "Q20: no attachment found; no new nodes. Proved the comparison using exact constant realization, scalar matrices and cokernel universal properties; wrote basis lifts for all morphisms, presentation independence, normalized uniqueness and quotient-tested localization coherence. Kept the statement and its hypotheses unchanged, including arbitrary B and pointless sites. Read every cited statement and generated verbatim step citations.",
+  "blueprint": "Auxiliary coefficient-identification part of sk-prop-sf-rf-shriek-preservation: the parent lem-sf-module-object-ordinary-coefficient-equivalence step 4 (original step 9, coefficient-identification subargument of DAG step 8), comparing finite constant local models. This realizes the existing blueprint.from.place; the chapter and unit route are unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "The arbitrary-site module sheafification universal property supplies the action and quotient factorization for constant modules; this coefficient-universe tool is not supplied by the finite-shriek unit."
+   },
+   {
+    "node": "lem-cbc-constant-ring-module-sheaves",
+    "why": "Its identity-on-underlying-sheaves equivalence identifies section-ring and fixed-B encodings of the constant cokernel. It is a generic coefficient-encoding tool, not a replacement for a finite-shriek step."
+   },
+   {
+    "node": "lem-sfb-modobj-cokernels",
+    "why": "Underlying abelian cokernels carry the required internal module action. This general monoidal-category tool is not a geometric shriek assertion."
+   },
+   {
+    "node": "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "why": "The generic internal/section-ring equivalence lets the slice finite-colimit theorem apply to the actual internal modules in this item."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-restriction-exact",
+    "why": "Only its arbitrary-ring finite-colimit preservation on a slice is used to restrict the displayed matrix cokernel; the unit contains no such general localization result."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-sfb-modobj-cokernels",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-weil-pbc-finite-type-restriction-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q20-04495181b",
+  "group": "Q20",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q20-04495181b (reviewer sub-agent of L); spot-checked: Read the item's 11 steps in full, every cited statement, and Stacks sites-modules.tex Tag 03CY/03EI (l.813-889). Statement is byte-identical to live/base. 0 new nodes. Live node still unsplit and no parallel delivery or LAND line, so not superseded. The item has no repair note of its own: it is a statement-only child of Q74's resolved re-split of the parent, so this is an ordinary split. Step 1: the internal action comes from strong monoidal sheafification (sk-def-sfb-sheaf-tensor 1); exact sheafification plus lem-sfb-modobj-cokernels give the internal cokernel; the 03CY factorization (lem-pc leaf) plus lem-cbc give the fixed-B version. Step 2: Ext_sigma hypotheses checked; T(B)=R; E preserves finite colimits. Step 3: matrix expansion with the t-normalization gives t_n F(q)=G(q)t_m without assuming E is B-linear. Steps 4-7: cokernel comparison, finite-basis lift through an ordinary surjection, naturality chain checked, presentation independence and uniqueness. Steps 8-11: the internal/section equivalence hypothesis is discharged by monoidal sheafification; restriction is finitely exact and constant restriction is natural; the localization equality holds by cancelling against the local cokernel projection, using that the supplied comparison preserves t; local models go both ways by full faithfulness. Tests: point site (Morita plus normalization forces E=Res_sigma, so theta is canonical), sigma an automorphism, B=0, m=0 or n=0, empty site, Z/n over Z. No duplicate (checked lem-sfb-proetale-fp-local-models-comparison, lem-pe-finite-coefficient-model-comparison, lem-sfb-local-model-cohomology-descent); no cycle; proof_deps equal the union of uses. All five declared tool_uses are accepted as generic coefficient tools. Advisory only: the step-9 'canonical balanced map' aside tacitly uses restriction-tensor compatibility, but the comparison is defined by presentations; the proof totals ~7.4k characters, mostly elementary. No SGA."
  }
 }
