@@ -22536,3 +22536,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:28 L: returned deliver/NA/lem-sfb-bounded-bifunctor-devissage (reviewer RETURN: Superseded (A7/B10); C5 is advisory. This is the third push of this re-split, after Q20 90d757505 and NH d4ae18616, both)
 - 13:29 L: merged deliver/NB/lem-sfb-qcqs-proper-integral-rational-scalar-comparison (reviewer PASS; first push; new nodes: 0); claim not held by NB: not your claim
 - 13:30 L: merged deliver/NN/lem-sbc-ambient-operations-scalar-linearity (reviewer PASS; after a return; new nodes: 2)
+- 2026-10-21T13:30:31Z L: superseded stage-1 delivery NE/lem-sfb-qcqs-proper-integral-rational-scalar-comparison at 9b4367fdc06b87c8bbe8964276cb43355bd482bd; current completion retained; packet archived at refs/superseded/NE/lem-sfb-qcqs-proper-integral-rational-scalar-comparison/9b4367fdc06b87c8bbe8964276cb43355bd482bd; stale return retired.
