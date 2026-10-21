@@ -23768,3 +23768,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:12 L: merged deliver/NW/lem-sfb-internal-bar-roof-adjunction (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T21:12:35Z L: superseded stage-1 delivery NE/lem-sfb-root-tower-inner-support at d040e009f9fd94e87b2db53c65845b935ce7e294; current completion retained; packet archived at refs/superseded/NE/lem-sfb-root-tower-inner-support/d040e009f9fd94e87b2db53c65845b935ce7e294; stale return retired.
 - 21:14 L: merged deliver/NJ/lem-sfb-strict-local-prime-to-p-kummer-splitting (stage 2; reviewer PASS; parallel immutable checks)
+- 21:14 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
