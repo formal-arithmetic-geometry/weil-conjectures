@@ -31,9 +31,8 @@
    }
   },
   {
-   "text": "For $R=A,B$, use the coproduct presentation of the underlying constant sheaf $R_C$ and its canonical inverse-image comparison from [lem-sfb-geometric-inverse-image-constant-module], applied to the $R$-module $R$. The index set $R$ is small in the coefficient universe. Both left adjoints preserve this coproduct by [lem-weil-pbc-left-adjoint-preserves-colimits]. For each inclusion $i_r:1_C\\to R_C$, naturality gives $\\theta_{R_C}I(i_r)=J(i_r)\\theta_{1_C}$. Under the canonical comparisons this fixes each coproduct inclusion into $R_D$. Uniqueness in the coproduct universal property therefore makes $\\theta_{R_C}$ the identity on the entire sheaf $R_D$. Applying naturality to $a:A_C\\to B_C$ now gives compatibility with $a$. This proves a sheaf identity, with no assumption that global scalar sections exhaust sections.",
+   "text": "The set constant sheaf of a set R is the coproduct of R copies of the constant singleton sheaf: construct the scalar-labelled cofan in Type and apply the constant-sheaf functor. The constantCommuteCompose isomorphism identifies its inclusions with scalarSection for the underlying constant commutative ring sheaf. Each path inverse preserves this coproduct, by induction using its steps’ adjunctions and [lem-weil-pbc-left-adjoint-preserves-colimits]. The constant singleton is terminal, and the comparison on it is unique. Induct the scalar-section normalization of each step along a path. Naturality of theta on every inclusion and the colimit universal property then give both coefficient identities. Naturality of constantCommuteCompose in a gives scalarSection(r) followed by a equal to scalarSection(a(r)); applying the same colimit uniqueness proves compatibility of every path coefficient comparison with a. These are equalities of sheaves, not a test on global sections.",
    "uses": [
-    "lem-sfb-geometric-inverse-image-constant-module",
     "lem-weil-pbc-left-adjoint-preserves-colimits"
    ],
    "elementary": false,
@@ -43,9 +42,9 @@
    }
   },
   {
-   "text": "The module lifts are those of [lem-pe-constant-left-module-inverse-image]. For a module $M$, apply naturality of $\\theta$ to its addition $M\\times M\\to M$, zero $1_C\\to M$, negation $M\\to M$, and action $R_C\\times M\\to M$. Step 1 identifies the product components and step 2 identifies the coefficient component with the identity. Thus $\\theta_M$ preserves addition, zero, negation and the full $R_D$-action on every test object. Hence it is a module map $\\theta^R_M$. Apply the same equations to $\\theta^{-1}$: the inverse is also linear. Naturality with respect to module maps is the original naturality equation, so these are $R_D$-linear natural isomorphisms.",
+   "text": "Use the algebraic module lifts stored in each Step, as defined by [def-weil-pbc-algebraic-inverse-image]. Induction along each Path transports their generalized addition, scalar-action and zero graph equations to the iterated underlying comparisons. Applying these equations to the universal operand products gives the binary-operation comparison equations. Naturality of theta on these operation maps and on both projections, together with the coefficient identities of step 2, makes the conjugated underlying module map additive and linear. Package it as a module map. These module maps are natural by faithfulness of the underlying functor, and are isomorphisms because that functor reflects isomorphisms. This constructs the required thetaA and thetaB with the stipulated underlying equations.",
    "uses": [
-    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-pbc-algebraic-inverse-image",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
@@ -66,10 +65,9 @@
    }
   },
   {
-   "text": "Let $q_I:B_D\\times I_AN\\to E_DI_AN$ and $q_J:B_D\\times J_AN\\to E_DJ_AN$ denote the target tensor pairings. The stipulated normalized comparisons satisfy $e_I I(q)=q_I$ and $e_J J(q)=q_J$ under the product and constant-ring identifications. Concretely, apply their generalized pure-tensor normalization with test sheaf $Z=B_C\\times N$, its two projections, and $z=q$; this gives an equation on the entire domain $I(Z)$, respectively $J(Z)$, not just on inverse images of constant sections. Set $u=e_J\\theta^B_T$ and $v=E_D(\\theta^A_N)e_I$. Step 4 and $\\theta_{B_C}=1$ give $u I(q)=q_J(1\\times\\theta^A_N)=v I(q)$. Consequently $u e_I^{-1}$ and $v e_I^{-1}$ agree after $q_I$. Pure tensors determine linear maps out of the sheaf tensor [def-weil-pbc-ringed-tensor-section-calculus], so $u e_I^{-1}=v e_I^{-1}$; cancel $e_I^{-1}$ to obtain the asserted equality. The comparisons are the given normalized ones, whose existence is [lem-weil-pbc-canonical-ringed-tensor-comparison-construction].",
+   "text": "The generalized pure-tensor normalization is part of each supplied Step. First establish its iterated form by the induction of step 7. Applying that form to the actual sheaf scalar pairing gives the entire pairing comparison equation, using the product comparison and the two underlying identifications. Conjugate the two sides of the desired square by eI inverse. After precomposition with the target scalar pairing, step 4, coefficient rigidity, and the two module-isomorphism underlying equations identify the sides. Cancel the product and underlying isomorphisms. The module sheafification adjunction and sectionwise extension-of-scalars hom_ext show that linear maps agreeing on this pairing are equal. Cancel eI inverse to obtain the desired square. Only the supplied normalized comparisons are used; no comparison is selected using an existence theorem.",
    "uses": [
     "def-weil-pbc-canonical-ringed-tensor-comparison",
-    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
     "def-weil-pbc-ringed-tensor-section-calculus"
    ],
    "elementary": false,
@@ -91,9 +89,8 @@
    }
   },
   {
-   "text": "For two successive geometric inverse images $K,H$, the ordinary module identification $(HK)_R\\cong H_RK_R$ is the composition identification of [lem-pe-constant-left-module-inverse-image]. The product comparison for $HK$ is the iterated product comparison: both have the same two projections. The constant-ring comparison is likewise the iterated one, since both preserve every constant inclusion, as in step 2. Consider $H_BE_C\\cong E_DH_A$ and $K_BE_{C'}\\cong E_CK_A$. The composite $H_BK_BE_{C'}\\xrightarrow{H_B(e_K)}H_BE_CK_A\\xrightarrow{e_H}E_DH_AK_A$ carries $(HK)(q)$ to the target pairing: first $K(q)$ is carried to the intermediate pairing by $e_K$, then its $H$-image is carried to the final pairing by $e_H$. Thus this composite and $e_{HK}$ have exactly the same normalization on $(HK)(q)$. Repeat the cancellation with the tensor pairing in step 5 to see that they are equal. The identity path satisfies the same formula. Induction on path length now identifies every iterated normalized comparison with $e_I$ or $e_J$ for its composite. Substitution into the equality proved in step 5 proves it with the specified expanded presentations as well.",
+   "text": "Prove the generalized normalization for a Path by induction. For the empty path it is the given formula itself, since all comparisons are identities. For cons s p, first apply s.normalized to get the intermediate pairing formula on s.inverse(Z); then apply the induction hypothesis to that whole sheaf and its three resulting maps. Naturality of p.rightUnderlying inverse at s.comparison moves the intermediate comparison through p.inverse. The resulting expression is exactly Path.comparison with its displayed associators. This proves the square for the actual expanded comparisons, without replacing the supplied paths or maps.",
    "uses": [
-    "lem-pe-constant-left-module-inverse-image",
     "def-weil-pbc-canonical-ringed-tensor-comparison",
     "def-weil-pbc-ringed-tensor-section-calculus"
    ],
@@ -104,9 +101,11 @@
    }
   },
   {
-   "text": "Apply the module isomorphisms and the equality of step 5 in each degree $n$ of a cochain complex. Naturality of $\\theta^R$ and of $e_I,e_J$ at $d^n:N^n\\to N^{n+1}$ says that the degreewise maps commute with the differentials. Hence they define chain isomorphisms, and equality degree by degree is equality of chain maps. For a chain map $f$, naturality at each $f^n$ proves naturality of these isomorphisms on complexes. This uses exactly the definition of complexes and their morphisms in [def-pc-cochain-complex-modules]; there are no totalizations, boundedness conditions or signs beyond the unchanged differentials.",
+   "text": "Induction along paths also transports the generalized zero graph equations of the algebraic lifts. Naturality of their underlying comparisons then shows the left and right module path functors preserve zero morphisms. Scalar extension preserves zero morphisms because tensorAdjunction makes it a left adjoint. Thus both functors in the complex clause admit the required PreservesZeroMorphisms instances. Naturality of the square is equality of the corresponding natural transformations, by evaluation at each module. Apply NatTrans.mapHomologicalComplex to that equality for ComplexShape.up Z to get the stated termwise and chain-map-natural equation, with no boundedness hypothesis.",
    "uses": [
-    "def-pc-cochain-complex-modules"
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-pc-cochain-complex-modules",
+    "def-weil-pbc-ringed-tensor-section-calculus"
    ],
    "elementary": true,
    "source": {
@@ -117,13 +116,11 @@
  ],
  "proof_deps": [
   "def-weil-pbc-ringed-topos-morphism",
-  "lem-sfb-geometric-inverse-image-constant-module",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-pe-constant-left-module-inverse-image",
+  "def-weil-pbc-algebraic-inverse-image",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-ringed-tensor-section-calculus",
   "def-weil-pbc-canonical-ringed-tensor-comparison",
-  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
   "def-pc-cochain-complex-modules"
@@ -131,7 +128,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-modules.tex",
-  "place": "Tag 03EL balanced-pairing proof and Tag 03EK universal characterization; agent-written naturality and expanded-composite argument"
+  "place": "Tag 03EL balanced pairing and Tag 03EK universal characterization; explicit Lean proof of constant coproduct rigidity, algebraic graph transport along finite paths, scalar-pairing uniqueness, and termwise functoriality. Group J8, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -284,13 +281,10 @@
  },
  "tool_uses": [
   "def-weil-pbc-ringed-topos-morphism",
-  "lem-sfb-geometric-inverse-image-constant-module",
   "lem-weil-pbc-left-adjoint-preserves-colimits",
-  "lem-pe-constant-left-module-inverse-image",
   "def-weil-sheaf-of-modules-category",
   "def-weil-pbc-ringed-tensor-section-calculus",
   "def-weil-pbc-canonical-ringed-tensor-comparison",
-  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
   "def-pc-cochain-complex-modules"
@@ -341,5 +335,15 @@
   "group": "NI",
   "result": "pass",
   "note": "Every clause matches the node and Stacks 03EL in order and orientation: induced linear isos (pinned via underlying maps), coefficient identities and compatibility with a, main square, prequotient equation, pure tensors and balancing, composite paths including the empty one, and complexes. Ring identifications are pinned by the scalar-section equations; the scalar/pullback comparison is pinned by its normalization and is inhabited by the canonical map. No existing general scalar/pullback iso, so no duplicate. Statement verbatim, sole sorry in the main theorem, docstrings complete, only the lean field changed. Advisory: AlgebraicInverseImage and tensorFunctor belong to nodes outside stmt_deps; the second reading is a worker self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J8",
+  "result": "pass",
+  "landing": "20261021T193402-L-1148170",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
