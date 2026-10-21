@@ -15,68 +15,58 @@
  ],
  "proof": [
   {
-   "text": "For any object $W$ and two fixed module sheaves $A,B$ on $\\mathcal C/W$ with section sets in $\\mathcal V$, a module morphism is determined by its component functions. Thus its Hom set embeds into $\\prod_{(T\\to W)\\in\\operatorname{Ob}(\\mathcal C/W)}\\operatorname{Map}(A(T\\to W),B(T\\to W))$. The slice has a $\\mathcal V$-small object set, since its objects are arrows of $\\mathcal C$ ending at $W$. Every factor is in $\\mathcal V$; naturality and linearity merely specify a subset of this product. In particular both this Hom set and its subset of isomorphisms belong to $\\mathcal V$. This is direct counting of natural transformations, not essential smallness of all module sheaves.",
+   "text": "For a fixed presheaf Q of R-modules, the class of module sheaves M whose underlying presheaf embeds into Q is essentially small. Mathlib PresheafOfModules.wellPowered makes Subobject Q small in the section universe. Restrict that small type to the subobjects isomorphic to underlying presheaves of sheaves and choose one realizing sheaf for each. Any embedding determines such a subobject, and Subobject.underlyingIso identifies its source with the chosen subobject. The fully faithful forgetful functor lifts the presheaf isomorphism between two realizations to a sheaf isomorphism. This is implemented by the proved private helper essentiallySmall_embeds, and uses choice only inside a theorem proof, not to supply any undefined object.",
    "uses": [
     "def-weil-size-convention",
-    "def-weil-sheaf-of-modules-category",
-    "def-pur-localized-ringed-site"
+    "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
-    "place": "Essentially small paragraph; explicit small-site local-model counting argument"
+    "place": "Essentially small paragraph; agent refinement by slice direct images and well-poweredness, with sheaf uniqueness as in Stacks Sites Tag 04TQ"
    }
   },
   {
-   "text": "Choose once and for all products $W_{UV}=U\\times_1 V$, with their two projections, for all objects $U,V$. For $K\\subseteq\\operatorname{Ob}(\\mathcal C)$ and $t\\in\\prod_{U\\in K}I_U$, put $B_U=B_{U,t_U}$ and form the set of families $g_{UV}:B_U|_{W_{UV}}\\xrightarrow{\\sim}B_V|_{W_{UV}}$ indexed by $K\\times K$. Restrictions here are along the respective projections to $U$ and $V$. Each isomorphism set is small by step 1. Let $D$ consist of all triples $(K,t,(g_{UV}))$, without imposing a cover or cocycle condition. Then $D\\in\\mathcal V$: its construction uses the power set of the small object set, small products of the $I_U$ and isomorphism sets, and small indexed unions. Including unrealizable data only enlarges the small indexing set.",
+   "text": "The type of codes (S,t), where S is a subset of the small object type and t assigns to each U in S a label in I_U, is small in the fixed universe. For each code form Q(S,t) as the small product of the right direct images of B_{U,t(U)} under the slice projections. Mathlib overPushforwardOverAdj supplies the adjunction from slice restriction to this direct image, using binary products in C. Mathlib constructs the actual sheaf products and shows the forgetful functor preserves finite limits. No descent datum or effectivity assertion is involved.",
    "uses": [
     "def-weil-size-convention",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
-    "place": "Essentially small paragraph; explicit small-site local-model counting argument"
-   }
-  },
-  {
-   "text": "Every $M\\in\\mathcal P$ realizes a code in $D$. Start with a witnessing cover $\\{U_j\\to1\\}_j$. Let $K$ be its object support, a subset of $\\operatorname{Ob}(\\mathcal C)$. For each $U\\in K$, choose one occurrence in that cover and retain its label $t_U$ and trivialization $a_U:M|_U\\xrightarrow{\\sim}B_U$. Define $g_{UV}=(a_V|_{W_{UV}})(a_U|_{W_{UV}})^{-1}$. Both sources are $M|_{W_{UV}}$ by the sectionwise restriction rule. Thus these maps give a member of $D$. In what follows the original covering family is retained, using $a_{U_j}$ on every occurrence, including repeated ones. There is no assertion that deletion of repeated cover members remains a covering in the original coverage.",
-   "uses": [
-    "def-weil-pbc-sites-and-cohomology",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
-    "place": "Essentially small paragraph; explicit small-site local-model counting argument"
-   }
-  },
-  {
-   "text": "Suppose $M,N$ realize the same code $d=(K,t,g)$, with trivializations $a_U:M|_U\\xrightarrow{\\sim}B_U$ and $b_U:N|_U\\xrightarrow{\\sim}B_U$, and witnessing covers with object support $K$. Set $h_U=b_U^{-1}a_U$. On $W_{UV}$ the common-code identities give $a_V=g_{UV}a_U$ and $b_V=g_{UV}b_U$, so $b_V^{-1}a_V=(g_{UV}b_U)^{-1}(g_{UV}a_U)=b_U^{-1}a_U$. These are equalities of restricted module morphisms on the whole overlap slice. The inverse maps $h_U^{-1}=a_U^{-1}b_U$ agree there too, by taking inverses of this equality. Use the witnessing cover for $M$ for both families; every one of its objects lies in $K$, where both trivializations are available.",
-   "uses": [
     "def-pur-localized-ringed-site",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
-    "place": "Essentially small paragraph; explicit small-site local-model counting argument"
+    "place": "Essentially small paragraph; agent refinement by slice direct images and well-poweredness, with sheaf uniqueness as in Stacks Sites Tag 04TQ"
    }
   },
   {
-   "text": "Apply [lem-pur-sheaf-hom-cover-gluing] to this original cover of $1$, first to $(h_{U_j})_j$ and then to $(h_{U_j}^{-1})_j$. The finite-limit hypothesis supplies every required overlap and pulled-back cover. The lemma gives module morphisms $h:M\\to N$ and $k:N\\to M$: restriction to $\\mathcal C/1$ is the original sheaf, since every object has a unique arrow to $1$. The restrictions of $kh$ and $hk$ to all cover members are identities. The uniqueness assertion of that same lemma gives $kh=\\mathrm{id}_M$ and $hk=\\mathrm{id}_N$. Hence two realizations of one code are isomorphic. This uses only the morphism-gluing assertion of Stacks Tag 04TQ and its module version, Tag 03EM, not existence of a sheaf for arbitrary descent data.",
+   "text": "For a locally prescribed M, start with its witnessing indexed cover and take S to be its object support. For each U in S choose an occurrence of U in the original cover, with its model label and local trivialization. Transpose the local trivialization through overPushforwardOverAdj. The product of these transposed maps gives a morphism phi:M -> Q(S,t). The original cover, including all repeated objects, remains available; no claim that the support is itself a covering in the precoverage is made.",
    "uses": [
-    "lem-pur-sheaf-hom-cover-gluing",
-    "def-pur-localized-ringed-site"
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EM, lemma-internal-hom, using sites.tex Tag 04TQ, lemma-glue-maps; apply to the maps and their inverses"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
+    "place": "Essentially small paragraph; agent refinement by slice direct images and well-poweredness, with sheaf uniqueness as in Stacks Sites Tag 04TQ"
    }
   },
   {
-   "text": "Let $S\\subseteq D$ be the subset of codes realized by members of $\\mathcal P$; then $S\\in\\mathcal V$. Choose one realizing $M_s\\in\\mathcal P$ for each $s\\in S$. This is ordinary set-indexed choice: in an ambient universe containing $\\mathcal V$, all the $\\mathcal V$-valued module sheaves on the fixed small category form a set (each sheaf's section sets, operations and restriction graphs together are coded in $\\mathcal V$). Thus this choice does not require choice from proper classes. For any $M\\in\\mathcal P$, step 3 gives a realized code $s$, and steps 4–5 identify $M\\cong M_s$. The required indexing set is $S\\in\\mathcal V$, regardless of the auxiliary ambient universe used to describe the choice. If $S$ is empty, the empty family suffices.",
+   "text": "The morphism phi is monic. If a,b:L -> M have a phi = b phi, compose with each product projection. Naturality of the adjunction and cancellation of each local trivialization imply that the restrictions of a,b to each object of S agree. In particular they agree over every member of the original indexed cover. For each W pull back that original cover along W -> 1, using IsSiteForCoverings. At each member of the pulled-back cover evaluate the equality on the corresponding object over a cover member; naturality and the uniqueness part of the sheaf condition then identify a_W,b_W. This proves a=b, including for empty covers. The proved private helper hom_ext_over_cover carries out this separatedness argument directly with Presheaf.IsSheaf.hom_ext_ofArrows.",
+   "uses": [
+    "def-weil-pbc-sites-and-cohomology",
+    "def-pur-localized-ringed-site",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
+    "place": "Essentially small paragraph; agent refinement by slice direct images and well-poweredness, with sheaf uniqueness as in Stacks Sites Tag 04TQ"
+   }
+  },
+  {
+   "text": "The forgetful functor from module sheaves to presheaves preserves finite limits, so the underlying presheaf map of phi is monic. Apply step 1 to the fixed underlying presheaf of Q(S,t) for each code. The supremum over the small code type of those essentially small object properties is essentially small, by Mathlib ObjectProperty instances. Step 3 puts every locally prescribed module in that supremum, and ObjectProperty.EssentiallySmall.of_le gives the stated conclusion. All sheaf and module universes and all hypotheses remain those of the original statement.",
    "uses": [
     "def-weil-size-convention",
     "def-weil-sheaf-of-modules-category"
@@ -84,7 +74,7 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
-    "place": "Essentially small paragraph; explicit small-site local-model counting argument"
+    "place": "Essentially small paragraph; agent refinement by slice direct images and well-poweredness, with sheaf uniqueness as in Stacks Sites Tag 04TQ"
    }
   }
  ],
@@ -92,13 +82,12 @@
   "def-weil-size-convention",
   "def-weil-sheaf-of-modules-category",
   "def-pur-localized-ringed-site",
-  "def-weil-pbc-sites-and-cohomology",
-  "lem-pur-sheaf-hom-cover-gluing"
+  "def-weil-pbc-sites-and-cohomology"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
-  "place": "Essentially small paragraph, local models and gluing morphisms; expanded by elementary universe counting and Stacks 04TQ/03EM morphism gluing"
+  "place": "Essentially small paragraph, local models on a fixed small site; shorter counting argument by embeddings into products of slice direct images and Mathlib well-poweredness; uniqueness on pulled-back covers as in Stacks 04TQ"
  },
  "mathlib_searches": [
   {
@@ -205,9 +194,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-pur-sheaf-hom-cover-gluing"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -233,5 +220,15 @@
   "group": "O1",
   "result": "pass",
   "note": "Lean statement matches every node clause: small site (C : Type u, Category.{u}, J precoverage with IsSiteForCoverings), finite limits and ⊤_ C, sheaf of comm rings R/hR, ringedSiteModules.{u}, I : C → Type u, B over Sheaf.over U; class P is an actual J-covering presieve of ⊤_ C plus overFunctor local isos; conclusion ObjectProperty.EssentiallySmall.{u} equals the node's S∈V family of members (via exists_small_le). No added hypotheses; edge cases (empty I_U, empty P, empty or repeated covers, zero ring) are covered. Only the item's lean field changed and its statement is verbatim. Imports are used; the non-public HomCoverGluing import is the recorded proof-dependency module. Docstrings have source, blueprint tag and all 6 steps; sorry-only; max line 82; no duplicate found; item not route-pivot dropped. nt_compile --json clean in 20.7 s."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G7",
+  "result": "pass",
+  "landing": "20261021T101045-L-3372",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
