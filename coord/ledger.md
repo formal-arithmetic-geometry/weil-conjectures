@@ -20733,3 +20733,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:35 L: returned deliver/NZ/det-def-sfb-filtered-two-colimit-characterization (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED det-def-sfb-filtered-two-colimit-characterization: det)
 - 07:35 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 07:36 L: returned deliver/Q33/lem-sfb-adic-stratum-completion-unit (reviewer RETURN: L: independent stage-2 immutable head 335822fa56e1: file-only compilation failed: sandbox Sheaf.Stage2.Sandbox0 timeout )
+- 07:37 L: returned deliver/Q86/lem-sfb-ring-isomorphism-tensor-transport (reviewer RETURN: L: independent stage-2 immutable head 34ed7f399cbb: Statement correct in substance. Clauses checked: equivalence, invers)
