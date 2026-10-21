@@ -23371,3 +23371,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:43 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 18:44 L: merged deliver/Q36/lem-sfb-field-profinite-galois-site (reviewer FIX; first push; new nodes: 2)
 - 18:44 L: merged deliver/NM/lem-sfb-condensed-split-coset-induction (stage 2; reviewer PASS; parallel immutable checks)
+- 18:44 L: returned deliver/Q14/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: C5/B9 + F/G1/G3 + G4. This is the 8th push of this item; N5 68c9bff0, NL 1f51eeaf, NX af5315f6, NN b8613865, NZ 8589c9f9)
