@@ -12,27 +12,12 @@ public import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import Sheaf.Algebra.Homology.DerivedInternalHomOfUniverses
 public import Sheaf.AlgebraicGeometry.ProEtaleOperations
-public import WeilConjectures.CategoryTheory.GrothendieckAbelian.ConcreteCoefficients
-public import WeilConjectures.SixFunctors.Etale.UpperLowerStar.Defs
-import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
-import WeilConjectures.SixFunctors.OpenClosed.Stalk
-import WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint
-import Sheaf.AlgebraicGeometry.EtaleClosedImmersionEssentialImage
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.Paper.PbcCompletedPullbackActual
-import Sheaf.Paper.PbcActualScalarPullback
-import Sheaf.Algebra.Homology.RingedInternalHomExactRestriction
-import Sheaf.Algebra.Homology.RhomGlobalSectionsOfUniverses
-import Mathlib.CategoryTheory.Sites.Point.Basic
-import Mathlib.CategoryTheory.Sites.Point.Skyscraper
-import Mathlib.Algebra.Homology.ShortComplex.ShortExact
-import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-import Sheaf.Algebra.Homology.RingedInternalHomShiftOfUniverses
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+public import Sheaf.SixFunctors.ClosedCostalkEtaleOperations
 import Sheaf.SixFunctors.CommonLeftAdjunctionIso
+import Sheaf.SixFunctors.ClosedTensorDualAdjunction
+import Sheaf.SixFunctors.EtaleClosedTensorProjection
+import Sheaf.SixFunctors.ProEtaleClosedTensorProjection
+import Sheaf.Algebra.Homology.RingedDerivedTensorHomAdjunction
 
 /-!
 # Exceptional restriction of a Verdier dual
@@ -55,66 +40,6 @@ universe u
 open CategoryTheory CategoryTheory.Limits Opposite
 
 namespace AlgebraicGeometry.Scheme
-
-/-- Modules over arbitrary commutative etale coefficients, without boundedness.
-Source: Stacks, Modules on Sites, Tag 03D1
-(blueprint: lem-weil-closed-costalk-duality). -/
-abbrev closedCostalkEtaleModules (X : Scheme.{u})
-    (R : Sheaf X.smallEtaleTopology CommRingCat.{u + 1}) :=
-  ringedSiteModules.{u + 1} ((sheafCompose X.smallEtaleTopology
-    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
-
-/-- The standard ordinary unbounded localization on the small etale site.
-Source: Stacks, Tag 05RU (blueprint: lem-weil-closed-costalk-duality). -/
-noncomputable instance closedCostalkEtaleModules_hasDerivedCategory (X : Scheme.{u})
-    (R : Sheaf X.smallEtaleTopology CommRingCat.{u + 1}) :
-    HasDerivedCategory (closedCostalkEtaleModules X R) :=
-  HasDerivedCategory.standard _
-
-/-- Ring inverse image, by left Kan extension and sheafification on the actual etale sites.
-Source: Stacks, Tags 00VC and 00WX (blueprint: lem-weil-closed-costalk-duality). -/
-noncomputable def closedCostalkEtaleRingPullback {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    Sheaf Y.smallEtaleTopology CommRingCat.{u + 1} ⥤
-      Sheaf X.smallEtaleTopology CommRingCat.{u + 1} :=
-  Functor.sheafPullbackConstruction.sheafPullback
-    (MorphismProperty.Over.pullback @Etale ⊤ f) CommRingCat.{u + 1}
-    (Y.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale)
-
-/-- The canonical ring-sheaf adjunction determining the coefficient unit.
-Source: Stacks, Tag 00YV (blueprint: lem-weil-closed-costalk-duality). -/
-noncomputable def closedCostalkEtaleRingAdjunction {X Y : Scheme.{u}} (f : X ⟶ Y) :
-    closedCostalkEtaleRingPullback f ⊣
-      (MorphismProperty.Over.pullback @Etale ⊤ f).sheafPushforwardContinuous
-        CommRingCat.{u + 1} (Y.smallGrothendieckTopology @Etale)
-        (X.smallGrothendieckTopology @Etale) :=
-  Functor.sheafPullbackConstruction.sheafAdjunctionContinuous
-    (MorphismProperty.Over.pullback @Etale ⊤ f) CommRingCat.{u + 1}
-    (Y.smallGrothendieckTopology @Etale) (X.smallGrothendieckTopology @Etale)
-
-/-- Actual closed direct image with scalars restricted through the inverse-image unit.
-Source: Stacks, Modules on Sites, Tag 03D6
-(blueprint: lem-weil-closed-costalk-duality). -/
-noncomputable def closedCostalkEtaleModulePush {X Y : Scheme.{u}} (f : X ⟶ Y)
-    (R : Sheaf Y.smallEtaleTopology CommRingCat.{u + 1}) :
-    closedCostalkEtaleModules X ((closedCostalkEtaleRingPullback f).obj R) ⥤
-      closedCostalkEtaleModules Y R :=
-  SheafOfModules.pushforward.{u + 1}
-    (F := MorphismProperty.Over.pullback @Etale ⊤ f)
-    (J := Y.smallGrothendieckTopology @Etale) (K := X.smallGrothendieckTopology @Etale)
-    (S := (sheafCompose Y.smallEtaleTopology
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
-    (R := (sheafCompose X.smallEtaleTopology
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
-        ((closedCostalkEtaleRingPullback f).obj R))
-    ⟨Functor.whiskerRight ((closedCostalkEtaleRingAdjunction f).unit.app R).hom
-      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})⟩
-
-/-- Closed direct image is additive since its linear components are unchanged.
-Source: Stacks, Tag 03D6 (blueprint: lem-weil-closed-costalk-duality). -/
-noncomputable instance closedCostalkEtaleModulePush_additive {X Y : Scheme.{u}}
-    (f : X ⟶ Y) (R : Sheaf Y.smallEtaleTopology CommRingCat.{u + 1}) :
-    (closedCostalkEtaleModulePush f R).Additive where
-  map_add := by intros; rfl
 
 /- The tensor-Hom and exceptional-adjunction calculation used below has a
    categorical core: both displayed functors are right adjoints of one common
@@ -156,7 +81,27 @@ theorem exceptionalRestrictionVerdierDuality_etale_common_left_adjunction
           ((Functor.const _).obj ωT)) ⋙ Ht ⋙ riExcl) ×
         Adjunction F (iPull.op ⋙ ((𝟭 _).prod'
           ((Functor.const _).obj (riExcl.obj ωT))) ⋙ Hz)) := by
-  sorry
+  dsimp only
+  let RZ := ((closedCostalkEtaleRingPullback i).obj R)
+  obtain ⟨⟨mt, aT, eT⟩, hmt, _, _⟩ :=
+    RingedDerivedNative.closedAdjunction.{u + 1, u, 0, u + 2} T.smallEtaleTopology R
+  dsimp only [WeilConjectures.CoefficientClosedStructure.monoidal] at hmt
+  subst mt
+  obtain ⟨⟨mz, az, ez⟩, hmz, _, _⟩ :=
+    RingedDerivedNative.closedAdjunction.{u + 1, u, 0, u + 2} Z.smallEtaleTopology RZ
+  dsimp only [WeilConjectures.CoefficientClosedStructure.monoidal] at hmz
+  subst mz
+  let ST : WeilConjectures.CoefficientClosedStructure
+      (derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} T.smallEtaleTopology R) :=
+    ⟨RingedDerivedNative.monoidal.{u + 1, u, 0, u + 2} T.smallEtaleTopology R, aT, eT⟩
+  let SZ : WeilConjectures.CoefficientClosedStructure
+      (derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} Z.smallEtaleTopology RZ) :=
+    ⟨RingedDerivedNative.monoidal.{u + 1, u, 0, u + 2} Z.smallEtaleTopology RZ, az, ez⟩
+  obtain ⟨e⟩ := etaleClosedTensorProjection i j _hij R iStar _ai
+    iPull _pullFactors iPush _pushFactors
+  exact ST.common_left_of_projection SZ
+    (RingedDerivedNative.symmetric.{u + 1, u, 0, u + 2} T.smallEtaleTopology R)
+    (iPull) (iPush) riExcl _adj e ωT
 
 set_option linter.unusedVariables false in
 /-- Exceptional restriction of derived internal Hom, on the small etale site.
@@ -246,7 +191,27 @@ theorem exceptionalRestrictionVerdierDuality_proetale_common_left_adjunction
         Adjunction F ((proEtaleRingDerivedPullback i R
           ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R) (Iso.refl _)).op ⋙
           ((𝟭 _).prod' ((Functor.const _).obj (riExcl.obj ωT))) ⋙ Hz)) := by
-  sorry
+  dsimp only
+  let RZ := ((proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R)
+  obtain ⟨⟨mt, aT, eT⟩, hmt, _, _⟩ :=
+    RingedDerivedNative.closedAdjunction.{u + 1, u, 0, u + 2} (ProEt.topology T) R
+  dsimp only [WeilConjectures.CoefficientClosedStructure.monoidal] at hmt
+  subst mt
+  obtain ⟨⟨mz, az, ez⟩, hmz, _, _⟩ :=
+    RingedDerivedNative.closedAdjunction.{u + 1, u, 0, u + 2} (ProEt.topology Z) RZ
+  dsimp only [WeilConjectures.CoefficientClosedStructure.monoidal] at hmz
+  subst mz
+  let ST : WeilConjectures.CoefficientClosedStructure
+      (derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} (ProEt.topology T) R) :=
+    ⟨RingedDerivedNative.monoidal.{u + 1, u, 0, u + 2} (ProEt.topology T) R, aT, eT⟩
+  let SZ : WeilConjectures.CoefficientClosedStructure
+      (derivedInternalHomOfUniverses.{u + 1, u, 0, u + 2} (ProEt.topology Z) RZ) :=
+    ⟨RingedDerivedNative.monoidal.{u + 1, u, 0, u + 2} (ProEt.topology Z) RZ, az, ez⟩
+  obtain ⟨e⟩ := proEtaleClosedTensorProjection i j _hij R
+  exact ST.common_left_of_projection SZ
+    (RingedDerivedNative.symmetric.{u + 1, u, 0, u + 2} (ProEt.topology T) R)
+    (proEtaleRingDerivedPullback i R RZ (Iso.refl _))
+    (proEtaleRingDerivedDirectImage i R RZ (Iso.refl _)) riExcl _adj e ωT
 
 set_option linter.unusedVariables false in
 /-- Exceptional restriction of a Verdier dual, on the small pro-etale site.

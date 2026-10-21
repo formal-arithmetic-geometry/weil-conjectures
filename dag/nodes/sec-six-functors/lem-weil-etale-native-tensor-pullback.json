@@ -1,0 +1,140 @@
+{
+ "id": "lem-weil-etale-native-tensor-pullback",
+ "kind": "statement",
+ "title": "Native unbounded derived tensor commutes with etale inverse image",
+ "statement": "For every morphism f:X → Y, arbitrary commutative ring sheaf R on Y_et, and additive module functor p left adjoint to actual direct image with inverse-image coefficients S=f^{-1}R, any functor d on the unbounded derived categories equipped with Q ⋙ d ≅ p_on_complexes ⋙ Q preserves native tensor: tensor_Y ⋙ d ≅ (d × d) ⋙ tensor_X. No closed immersion, open complement, exceptional adjunction, dualizing object, boundedness, perfectness or constancy assumption occurs.",
+ "stmt_deps": [
+  "def-weil-closed-costalk-etale-operations",
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "Tensor-pullback input in the projection identity; Stacks Modules on Sites 03EL and Cohomology on Sites 07A4, 0G7E."
+ },
+ "proof": [
+  {
+   "text": "Use the ring and module Hom equivalences to obtain underlying-set isomorphisms normalized on unit sections. These are constructed in etaleUnderlyingUnits. A sheaf map out of inverse image is determined by its adjunct. On unit sections ring maps preserve addition, multiplication, zero and one, and the module unit preserves addition, zero and scalar multiplication through the ring unit. Naturality of the set unit therefore transports all operation graphs, giving etaleAlgebraicPresentation with modules literally p.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-module-adjunction",
+    "lem-weil-pbc-etale-module-ring-iso-adjunction",
+    "lem-weil-pbc-etale-module-inverse-image-transport",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-exact"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the scalar-extension functor explicitly from sectionwise extendScalars and module sheafification. For identity coefficients its natural isomorphism with identity comes from extendScalarsId and the sheafification counit. The universe-generalized private proofs preserve all functor and naturality laws. Thus U = I.modules followed by identity scalar extension is canonically isomorphic to p and exact; its derived functor is left derived via its invertible homotopy-localization factorization. Obtain the uniquely normalized ordinary tensor comparison from the existing canonical ringed tensor comparison theorem.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-pullback"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Build the native representative isomorphisms on flat-term K-flat complexes by tensorIso and tensorIso_naturality. Apply ringedTopoiCanonicalDerivedTensorPullback at independent site-object and site-Hom universes to the explicit presentation and actual module right adjoint; it supplies the natural derived tensor isomorphism. Transport the exact derived U through the identity-extension isomorphism to exact derived p, then to d by uniqueness of localization lifts through the supplied Q factorization. This proves the displayed functor isomorphism without an unproved new statement.",
+   "uses": [
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-exact-functor-bounded-below"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-inverse-image-module-adjunction",
+  "lem-weil-pbc-etale-module-ring-iso-adjunction",
+  "lem-weil-pbc-etale-module-inverse-image-transport",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "prop-weil-pbc-inverse-image-exact",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-pbc-exact-functor-bounded-below"
+ ],
+ "proof_origin": {
+  "by": "V4",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "Tensor-pullback input in the projection identity; Stacks Modules on Sites 03EL and Cohomology on Sites 07A4, 0G7E.",
+  "note": "V4 proves the explicit arbitrary-coefficient algebraic inverse-image presentation, including all operation graphs via unit normalization. The private identity scalar-extension construction and proof are generalized from RingedTopoiDerivedPullback to independent site universes. The canonical tensor-pullback theorem is applied to that presentation with native representative isomorphisms and transported through exact localization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image of sheaves of modules along an arbitrary morphism of schemes commutes with unbounded derived tensor product over an arbitrary inverse-image ring sheaf",
+   "results": "Only unrelated light condensed tensor results; no actual small etale ring-sheaf theorem.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.mapDerivedCategory",
+   "results": "Exact functor descent and localization factorization API; no native ringed-site tensor comparison.",
+   "date": "2026-10-21",
+   "verdict": "Use this API for localization transport."
+  },
+  {
+   "tool": "grep",
+   "query": "etale.*[Tt]ensor|[Tt]ensor.*[Ee]tale|upperStar.*[Tt]ensor",
+   "results": "Source formulas are for constant coefficients or module objects. The general canonical tensor theorem requires explicit algebraic inverse-image and coefficient presentations not supplied by this arbitrary p interface.",
+   "date": "2026-10-21",
+   "verdict": "A separate arbitrary-ring presentation and native tensor-pullback assertion is needed."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image functor for sheaves of modules over an arbitrary sheaf of commutative rings preserves unbounded derived tensor products",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction and pullback, sheafPullback finite-limit preservation, and module sheafification exactness. No native unbounded tensor comparison.",
+   "date": "2026-10-21",
+   "verdict": "Use these ordinary constructions and prove the native derived comparison by canonical representative descent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ClosedCostalkDuality",
+  "date": "2026-10-21",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-closed-costalk-duality",
+   "place": "Tensor-pullback input in the projection identity; Stacks Modules on Sites 03EL and Cohomology on Sites 07A4, 0G7E.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.EtaleNativeTensorPullback",
+  "file": "lean/Sheaf/SixFunctors/EtaleNativeTensorPullback.lean",
+  "declaration": "AlgebraicGeometry.Scheme.etaleNativeTensorPullback",
+  "statement": "theorem etaleNativeTensorPullback\n    {X Y : Scheme.{u}} (f : X ⟶ Y)\n    (R : Sheaf Y.smallEtaleTopology CommRingCat.{u + 1})\n    (p : closedCostalkEtaleModules Y R ⥤\n      closedCostalkEtaleModules X ((closedCostalkEtaleRingPullback f).obj R))\n    [p.Additive] (a : p ⊣ closedCostalkEtaleModulePush f R)\n    (d : DerivedCategory (closedCostalkEtaleModules Y R) ⥤\n      DerivedCategory (closedCostalkEtaleModules X ((closedCostalkEtaleRingPullback f).obj R)))\n    (factors : DerivedCategory.Q ⋙ d ≅\n      p.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q) :\n    let S := (closedCostalkEtaleRingPullback f).obj R\n    let tY := @MonoidalCategory.tensor _ _\n      (RingedDerivedNative.monoidal.{u + 1, u, 0, u + 2} Y.smallEtaleTopology R)\n    let tX := @MonoidalCategory.tensor _ _\n      (RingedDerivedNative.monoidal.{u + 1, u, 0, u + 2} X.smallEtaleTopology S)\n    Nonempty (tY ⋙ d ≅ d.prod d ⋙ tX)",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-db51f",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261021T011047-L-2034296",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-db51f",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261021T011047-L-2034296",
+  "kind": "interface",
+  "note": "independent cc review: V4 db51fe96 item and 5 new modules compiled in import order (all exit 0) and checked with #print axioms (sorryAx only from upstream holes such as closedAdjunction); the moved operations are byte-identical to the clone apart from blueprint tags and re-exported; node proof fields match the Lean proofs; import sweep finds only redundant transitive imports"
+ }
+}

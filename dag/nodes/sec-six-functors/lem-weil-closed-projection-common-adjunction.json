@@ -1,0 +1,117 @@
+{
+ "id": "lem-weil-closed-projection-common-adjunction",
+ "kind": "statement",
+ "title": "Projection and exceptional adjunction give common dual left adjoints",
+ "statement": "Let C,D be categories with H_C:C^op × C → C and H_D:D^op × D → D, and closed tensor-Hom structures S_C,S_D [def-coef-ringed-tensor-hom-model]. Assume S_C symmetric. Given p:C → D, q:D → C, s:C → D, an adjunction q ⊣ s, and a natural isomorphism q(N) tensor_C K ≅ q(N tensor_D p(K)), put D_M(K)=H_C(K,M). For every M in C the functor F=q ⋙ D_M.rightOp is left adjoint both to D_M ⋙ s and to p.op ⋙ H_D(-,s(M)).",
+ "stmt_deps": [
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "The displayed Hom chain, with all arrows induced by adjunction and evaluation; last sentence on naturality."
+ },
+ "proof": [
+  {
+   "text": "The contravariant self-adjunction gives D_M.rightOp ⊣ D_M. Compose it with q ⊣ s to get F ⊣ D_M ⋙ s.",
+   "uses": [
+    "lem-weil-closed-tensor-dual-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For N in D and K in C^op use the first self-adjunction, inverse ambient currying, precomposition with the inverse projection isomorphism, the exceptional Hom equivalence, and closed-side currying. This constructs Hom(F(N),K) ≃ Hom(N,H_D(p(K),s(M))).",
+   "uses": [
+    "lem-weil-closed-tensor-dual-adjunction",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Verify naturality in N using projection naturality in the first variable and both adjunction naturality laws. Verify naturality in K using inverse transposition naturality, projection naturality in the second variable and closed-side transposition naturality. Package as Adjunction.mkOfHomEquiv. These are the two explicit naturality calculations in the Lean proof.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-closed-tensor-dual-adjunction",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof_origin": {
+  "by": "V4",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "The displayed Hom chain, with all arrows induced by adjunction and evaluation; last sentence on naturality.",
+  "note": "The source supplies the mathematical argument; V4 writes the categorical packaging and its Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "In a symmetric monoidal closed category internal Hom into a fixed object is adjoint to its opposite; a projection formula and an exceptional adjunction identify the two dual functors",
+   "results": "MonoidalClosed.internalHomAdjunction₂, ihom.adjunction and Closed.rightAdj; no fixed-target contravariant adjunction or exceptional transport for CoefficientClosedStructure.",
+   "date": "2026-10-21",
+   "verdict": "Generic currying API only; formal Hom calculation required."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.leftOp",
+   "results": "Generic opposite-adjunction operations, including rightOp; no theorem packages the required projection transport.",
+   "date": "2026-10-21",
+   "verdict": "Use opposite categories and mkOfHomEquiv."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*closed|closed.*projection|Adjunction.*rightOp",
+   "results": "No closed-costalk or fixed-target self-adjunction in Mathlib. Mathlib.CategoryTheory.Adjunction.Opposites supplies opposite operations. Local source search finds no duplicate.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ClosedCostalkDuality",
+  "date": "2026-10-21",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-closed-costalk-duality",
+   "place": "The displayed Hom chain, with all arrows induced by adjunction and evaluation; last sentence on naturality.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ClosedTensorDualAdjunction",
+  "file": "lean/Sheaf/SixFunctors/ClosedTensorDualAdjunction.lean",
+  "declaration": "WeilConjectures.CoefficientClosedStructure.common_left_of_projection",
+  "statement": "theorem common_left_of_projection\n    {D : Type u'} [Category.{v'} D] {HD : Dᵒᵖ × D ⥤ D}\n    (SD : CoefficientClosedStructure HD) (β : @SymmetricCategory C _ S.monoidal)\n    (p : C ⥤ D) (q : D ⥤ C) (s : C ⥤ D) (a : q ⊣ s)\n    (e : q.prod (𝟭 C) ⋙ S.tensor ≅ (𝟭 D).prod p ⋙ SD.tensor ⋙ q) (M : C) :\n    ∃ F : D ⥤ Cᵒᵖ,\n      Nonempty (Adjunction F (dual H M ⋙ s) ×\n        Adjunction F (p.op ⋙ dual HD (s.obj M)))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-db51f",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261021T011047-L-2034296",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-db51f",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261021T011047-L-2034296",
+  "kind": "interface",
+  "note": "independent cc review: V4 db51fe96 item and 5 new modules compiled in import order (all exit 0) and checked with #print axioms (sorryAx only from upstream holes such as closedAdjunction); the moved operations are byte-identical to the clone apart from blueprint tags and re-exported; node proof fields match the Lean proofs; import sweep finds only redundant transitive imports"
+ }
+}

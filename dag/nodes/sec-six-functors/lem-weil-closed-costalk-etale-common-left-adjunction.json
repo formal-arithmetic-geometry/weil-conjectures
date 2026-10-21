@@ -15,24 +15,26 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "This is the common-left-adjunction stage of the blueprint Hom calculation. Expand the closed-support projection identity, tensor-Hom currying, and the assumed exceptional adjunction; package the resulting natural Hom equivalences as adjunctions. The detailed construction is the only deferred part of this delivery.",
+   "text": "Use evaluation-normalized closedAdjunction at T and Z; substitute its equality with the native monoidal structure. Native symmetry on T supplies the ambient symmetry. Apply the site-specific closed-support tensor projection. The fully proved generic common-left theorem constructs both adjunctions, with F = closed direct image followed by fixed-target dual.rightOp.",
    "uses": [
-    "lem-weil-closed-costalk-duality"
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-sf-ringed-derived-native-tensor",
+    "lem-weil-etale-closed-tensor-projection",
+    "lem-weil-closed-projection-common-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
-    "place": "Proof, steps 1–5"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-weil-closed-costalk-duality"
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-weil-etale-closed-tensor-projection",
+  "lem-weil-closed-projection-common-adjunction"
  ],
  "proof_origin": {
-  "by": "G3",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.md",
-  "place": "Lean decomposition of etale proof"
+  "by": "V4",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "The displayed natural Hom chain, using the native tensor-Hom adjunction and the separately stated middle projection formula."
  },
  "mathlib_searches": [
   {
@@ -90,13 +92,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "G3",
+  "reviewer": "C-db51f",
+  "group": "V4",
   "result": "pass",
-  "landing": "20261020T230740-L-608051",
+  "landing": "20261021T011047-L-2034296",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: V4 db51fe96 item and 5 new modules compiled in import order (all exit 0) and checked with #print axioms (sorryAx only from upstream holes such as closedAdjunction); the moved operations are byte-identical to the clone apart from blueprint tags and re-exported; node proof fields match the Lean proofs; import sweep finds only redundant transitive imports"
  }
 }

@@ -1,0 +1,109 @@
+{
+ "id": "def-weil-closed-costalk-etale-operations",
+ "kind": "definition",
+ "title": "The exact-operation presentation of etale closed costalks",
+ "statement": "For a scheme X and commutative ring sheaf R on its small etale site, take the ordinary unbounded derived category of R-module sheaves [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. For any scheme morphism f:X → Y construct ring inverse image by the existing left-Kan-extension/sheafification functor, its canonical adjunction, and module direct image with scalar action restricted through the ring unit. Direct image is additive. These are the identical six constructions used to state the etale closed-costalk comparison; only their module location changes.",
+ "stmt_deps": [
+  "def-weil-pbc-etale-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "The module categories, actual inverse image and exact closed direct image in the middle projection identity."
+ },
+ "proof": [
+  {
+   "text": "Specialize Mathlib ringedSiteModules and standard derived localization; use the canonical ring sheaf pullback construction and its adjunction. Apply SheafOfModules.pushforward to the unit followed by forgetful scalar restriction. Its morphism components preserve addition definitionally.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "V4",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "The module categories, actual inverse image and exact closed direct image in the middle projection identity.",
+  "note": "The source supplies the mathematical argument; V4 writes the categorical packaging and its Lean proof."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "SheafOfModules.pushforward induced by the unit of sheaf inverse image is additive and its module category has a derived category",
+   "results": "SheafOfModules.pushforward and scheme structural module pushforward additivity.",
+   "date": "2026-10-21",
+   "verdict": "Use the Mathlib pushforward construction; no mathematical change to the existing definitions."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward",
+   "results": "The public Mathlib pushforward construction used verbatim.",
+   "date": "2026-10-21",
+   "verdict": "Existing construction specialized to etale coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "closedCostalkEtaleModules|closedCostalkEtaleModulePush",
+   "results": "Only the item defines or uses the six specialized declarations; downstream.py finds no external importer.",
+   "date": "2026-10-21",
+   "verdict": "Extract the existing definitions, retaining every signature and body."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ClosedCostalkDuality",
+  "date": "2026-10-21",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-closed-costalk-duality",
+   "place": "The module categories, actual inverse image and exact closed direct image in the middle projection identity.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ClosedCostalkEtaleOperations",
+  "file": "lean/Sheaf/SixFunctors/ClosedCostalkEtaleOperations.lean",
+  "declaration": "AlgebraicGeometry.Scheme.closedCostalkEtaleModules",
+  "statement": "abbrev closedCostalkEtaleModules (X : Scheme.{u})\n    (R : Sheaf X.smallEtaleTopology CommRingCat.{u + 1})",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-21",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleModules",
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleModules_hasDerivedCategory",
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleRingPullback",
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleRingAdjunction",
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleModulePush",
+   "AlgebraicGeometry.Scheme.closedCostalkEtaleModulePush_additive"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-db51f",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261021T011047-L-2034296",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-db51f",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261021T011047-L-2034296",
+  "kind": "interface",
+  "note": "independent cc review: V4 db51fe96 item and 5 new modules compiled in import order (all exit 0) and checked with #print axioms (sorryAx only from upstream holes such as closedAdjunction); the moved operations are byte-identical to the clone apart from blueprint tags and re-exported; node proof fields match the Lean proofs; import sweep finds only redundant transitive imports"
+ }
+}

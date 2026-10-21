@@ -1,0 +1,136 @@
+{
+ "id": "lem-weil-proetale-closed-tensor-projection",
+ "kind": "statement",
+ "title": "Pro-etale unbounded closed-support tensor projection",
+ "statement": "Let i:Z → T be a closed immersion with complementary quasi-compact open j:U → T. Let R be any commutative ring sheaf on T_proet and R_Z=i^{-1}R. Use the actual recorded proetale derived pullback p and right-derived direct image q, with identity coefficient identification. With native derived tensors [lem-sf-ringed-derived-native-tensor] there is a natural isomorphism q(N) tensor_T K ≅ q(N tensor_Z p(K)), natural simultaneously in every N in D(R_Z) and K in D(R). There is no boundedness, Tor, finiteness or constancy assumption on complexes or coefficients, and no exceptional adjoint or dualizing object appears.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-operations",
+  "def-weil-closed-immersion",
+  "lem-sf-ringed-derived-native-tensor"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "The middle projection identity in the displayed Hom chain, and the following paragraph: closed exact fully faithful extension by zero commutes with tensor; flat resolutions give the derived identity."
+ },
+ "proof": [
+  {
+   "text": "Identify the actual scalar-unit direct image with ringed direct image by the identity coefficient map. Uniqueness of left adjoints identifies their inverse images. Ringed open/closed localization supplies exact closed direct image, invertible counit and complementary-open vanishing; open/closed zero detection supplies joint reflection.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-exc-open-closed-detection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Pass the exact adjunction and counit to the unbounded derived categories by the termwise localization construction. Use homology comparisons to transfer complementary-open vanishing and joint reflection. The proof imports the proved localization helpers of the ringed closed-kernel adjoint module, without using its exceptional-adjoint conclusion.",
+   "uses": [
+    "lem-sf-ringed-closed-kernel-adjoint",
+    "lem-exc-open-closed-detection"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Specialize canonical derived tensor pullback to the native tensor models using their natural flat-representative comparisons. Do this for both the closed and open inverse images.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-sf-ringed-derived-native-tensor"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For X = q(N) tensor K, apply joint reflection to the unit X → qp(X). Its closed restriction is invertible by the adjunction triangle and invertible counit. Its open restriction has zero source and target, by tensor pullback, cross-vanishing and preservation of zero by tensor as a left adjoint. Thus the unit is invertible. Whisker this natural unit with the closed tensor comparison and counit to obtain q(N) tensor K ≅ q(N tensor p(K)). Transport the exact direct-image descent to its right-derived presentation.",
+   "uses": [
+    "lem-sf-ringed-derived-tensor-hom-adjunction",
+    "lem-weil-closed-projection-common-adjunction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-exc-open-closed-detection",
+  "lem-sf-ringed-closed-kernel-adjoint",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sf-ringed-derived-native-tensor",
+  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-weil-closed-projection-common-adjunction"
+ ],
+ "proof_origin": {
+  "by": "V4",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-biduality-general/lem-weil-closed-costalk-duality.proof.md",
+  "place": "The middle projection identity in the displayed Hom chain, and the following paragraph: closed exact fully faithful extension by zero commutes with tensor; flat resolutions give the derived identity.",
+  "note": "V4 proves the derived projection directly from closed/open detection and canonical tensor pullback. The native closed adjunction supplies preservation of zero. No new totalization statement is introduced."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "For a closed immersion of schemes, direct image of sheaves of modules over an arbitrary sheaf of rings commutes with derived tensor product against ambient complexes on the etale or pro-etale site",
+   "results": "ClosedImmersion facts and Scheme.Modules.restrictAdjunction; no unbounded ringed-site projection formula.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion i the derived projection formula i_* N tensor K is isomorphic to i_*(N tensor i^* K) for all unbounded complexes over a sheaf of commutative rings",
+   "results": "SheafOfModules.pushforwardPushforwardAdj, pushforwardComp and Scheme.Modules.restrictFunctorAdjCounitIso. They do not prove the tensor projection formula.",
+   "date": "2026-10-21",
+   "verdict": "No exact match."
+  },
+  {
+   "tool": "grep",
+   "query": "projection.*closed|closed.*projection|Adjunction.*rightOp",
+   "results": "No relevant Mathlib projection formula. Broad local search finds only constant-coefficient formulas, open extension formulas, perfect formulas and the parent Hom calculation. Blueprint search for closed projection returns no separate node.",
+   "date": "2026-10-21",
+   "verdict": "New separate result is the middle identity explicitly asserted by the current blueprint."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.ClosedCostalkDuality",
+  "date": "2026-10-21",
+  "group": "V4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-closed-costalk-duality",
+   "place": "The middle projection identity in the displayed Hom chain, and the following paragraph: closed exact fully faithful extension by zero commutes with tensor; flat resolutions give the derived identity.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ProEtaleClosedTensorProjection",
+  "file": "lean/Sheaf/SixFunctors/ProEtaleClosedTensorProjection.lean",
+  "declaration": "AlgebraicGeometry.Scheme.proEtaleClosedTensorProjection",
+  "statement": "theorem proEtaleClosedTensorProjection\n    {T Z U : Scheme.{u}} (i : Z ⟶ T) [IsClosedImmersion i]\n    (j : U ⟶ T) [IsOpenImmersion j] [QuasiCompact j]\n    (hij : Set.range j.base = (Set.range i.base)ᶜ)\n    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) :\n    let RZ := (proEtaleSheafInverseImage i CommRingCat.{u + 1}).obj R\n    let tT := @MonoidalCategory.tensor _ _\n      (RingedDerivedNative.monoidal.{u + 1, u, 0, u + 2} (ProEt.topology T) R)\n    let tZ := @MonoidalCategory.tensor _ _\n      (RingedDerivedNative.monoidal.{u + 1, u, 0, u + 2} (ProEt.topology Z) RZ)\n    Nonempty ((proEtaleRingDerivedDirectImage i R RZ (Iso.refl _)).prod (𝟭 _) ⋙ tT ≅\n      (𝟭 _).prod (proEtaleRingDerivedPullback i R RZ (Iso.refl _)) ⋙ tZ ⋙\n        proEtaleRingDerivedDirectImage i R RZ (Iso.refl _))",
+  "branch": "sheaf-dag",
+  "by": "V4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-db51f",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261021T011047-L-2034296",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-db51f",
+  "group": "V4",
+  "result": "pass",
+  "landing": "20261021T011047-L-2034296",
+  "kind": "interface",
+  "note": "independent cc review: V4 db51fe96 item and 5 new modules compiled in import order (all exit 0) and checked with #print axioms (sorryAx only from upstream holes such as closedAdjunction); the moved operations are byte-identical to the clone apart from blueprint tags and re-exported; node proof fields match the Lean proofs; import sweep finds only redundant transitive imports"
+ }
+}
