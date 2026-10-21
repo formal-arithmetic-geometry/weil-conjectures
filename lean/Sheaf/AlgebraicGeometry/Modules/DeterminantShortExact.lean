@@ -10,7 +10,7 @@ public import WeilConjectures.AlgebraicGeometry.Modules.TensorSection
 public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFree
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafTopInvertible
-import Sheaf.AlgebraicGeometry.Modules.DeterminantShortExactExists
+import WeilConjectures.AlgebraicGeometry.Modules.DeterminantShortExactExists
 import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
 /-!
@@ -27,6 +27,14 @@ universe v
 open CategoryTheory Opposite MonoidalCategory
 
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorSheafPowerIso_hom_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
+    (U : X.Opens) (a : Fin n → M.val.obj (op U)) :
+    (exteriorSheafPowerIso M n).hom.app U (exteriorSheafSection M n U a) =
+      wedge (M := M) (r := n) (U := U) a := by
+  rw [← exteriorSheafPowerIso_inv_wedge M n U a]
+  exact inv_app_hom_app_apply_of_iso (exteriorSheafPowerIso M n).symm _
 
 /-- Determinant lines are invertible and multiplicative, with the canonical isomorphism
 characterized on wedges on every open subset. The inverse sends a tensor of wedges to the
@@ -66,7 +74,29 @@ theorem determinant_shortExact {X : Scheme.{v}} (S : ShortComplex X.Modules)
   refine ⟨exteriorSheaf_top_isInvertible S.X₁ r₁,
     exteriorSheaf_top_isInvertible S.X₂ r₂,
     exteriorSheaf_top_isInvertible S.X₃ r₃, ?_⟩
-  obtain ⟨e, he⟩ := determinant_shortExact_exists S hS r₁ r₂ r₃ hr
+  obtain ⟨e₀, he₀⟩ := determinant_shortExact_exists S hS r₁ r₂ r₃ hr
+  let eA := tensorIso (C := X.Modules) (exteriorSheafPowerIso S.X₁ r₁)
+    (exteriorSheafPowerIso S.X₃ r₃)
+  let eB := exteriorSheafPowerIso S.X₂ r₂
+  let e := eB ≪≫ e₀ ≪≫ eA.symm
+  have he : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))
+      (b : Fin r₃ → S.X₃.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)),
+      (∀ i, S.g.val.app (op U) (c i) = b i) →
+      e.inv.val.app (op U)
+          (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
+            (exteriorSheafSection S.X₃ r₃ U b)) =
+        exteriorSheafSection S.X₂ r₂ U
+          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
+    intro U a b c hc
+    change (exteriorSheafPowerIso S.X₂ r₂).inv.app U
+      (e₀.inv.app U ((((exteriorSheafPowerIso S.X₁ r₁).hom ⊗ₘ
+        (exteriorSheafPowerIso S.X₃ r₃).hom).app U)
+          (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
+            (exteriorSheafSection S.X₃ r₃ U b)))) = _
+    rw [tensorHom_app_tmulSection, exteriorSheafPowerIso_hom_wedge,
+      exteriorSheafPowerIso_hom_wedge]
+    exact (congrArg ((exteriorSheafPowerIso S.X₂ r₂).inv.app U)
+      (he₀ U a b c hc)).trans (exteriorSheafPowerIso_inv_wedge S.X₂ r₂ U _)
   refine ⟨e, he, ?_⟩
   intro e' he'
   apply Iso.ext_inv

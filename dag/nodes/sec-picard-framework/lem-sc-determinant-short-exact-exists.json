@@ -10,28 +10,21 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Apply the adopted determinant_wedgeMorphism_exists to obtain a canonical exteriorPower morphism psi and its formula on tensors of wedges.",
+   "text": "Apply determinant_wedgeMorphism_exists to construct the canonical exteriorPower morphism phi with its formula for arbitrary lifts.",
    "uses": [
     "lem-sc-determinant-wedge-morphism"
    ],
    "elementary": false
   },
   {
-   "text": "Let eA be the tensor of the outside exteriorSheafPowerIso comparisons and eB the middle comparison. Define phi=eA.hom ≫ psi ≫ eB.inv. Derive the hom wedge equation from exteriorSheafPowerIso_inv_wedge and the inverse-hom identity. tensorHom_app_tmulSection, these hom equations, the formula for psi and the inverse wedge equation give the required legacy formula hphi. All ranks, including zero, and all opens, including the empty open, are covered.",
-   "uses": [
-    "lem-sc-exterior-sheaf-power-comparison"
-   ],
-   "elementary": true
-  },
-  {
-   "text": "Take the splitting cover from exists_openCover_split_shortExact. For each point choose a member containing it, using the supremum equality with the top open.",
+   "text": "Obtain the splitting cover from exists_openCover_split_shortExact; every point belongs to a cover member because its supremum is top.",
    "uses": [
     "lem-sc-local-splitting-finite-free"
    ],
    "elementary": false
   },
   {
-   "text": "On each splitting-cover member apply the adopted determinant_wedgeMorphism_bijective_of_split to psi and its canonical wedge formula. Hom.isIso_of_forall_bijective_app gives IsIso psi globally. The comparison identities give eA.hom ≫ psi ≫ eB.inv = phi, hence IsIso phi by composition of isomorphisms.",
+   "text": "On each splitting member apply determinant_wedgeMorphism_bijective_of_split to phi and its wedge formula. Hom.isIso_of_forall_bijective_app gives IsIso phi.",
    "uses": [
     "lem-sc-determinant-wedge-morphism-split",
     "lem-sc-module-hom-local-bijective-iso"
@@ -39,7 +32,7 @@
    "elementary": false
   },
   {
-   "text": "Take the inverse of asIso phi for e. Its inverse is definitionally phi, so the required formula is hphi unchanged.",
+   "text": "The inverse of asIso phi has inverse morphism phi, so its required formula is exactly the original formula. This includes zero ranks and empty opens.",
    "uses": [],
    "elementary": true
   }
@@ -48,14 +41,13 @@
   "lem-sc-determinant-wedge-morphism",
   "lem-sc-local-splitting-finite-free",
   "lem-sc-determinant-wedge-morphism-split",
-  "lem-sc-module-hom-local-bijective-iso",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "lem-sc-module-hom-local-bijective-iso"
  ],
  "proof_origin": {
-  "by": "B7 retirement",
+  "by": "K4 retirement",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph: lift independence, local splitting and gluing; T2 decomposition into construction and split-local bijectivity",
-  "note": "Use the adopted wedge morphism and split-local bijectivity theorems on canonical exterior powers. Transport the constructed morphism to the legacy exteriorSheaf representation and its wedge formula using the proved comparisons. Preserve the public statement and the determinant unit route."
+  "place": "Proof of (*), determinant paragraph",
+  "note": "Read and retain the unchanged adopted proof: canonical wedge morphism, splitting cover, local bijectivity, and inverse isomorphism. The exterior-sheaf comparison is used by the legacy parent, not this adopted declaration."
  },
  "mathlib_searches": [
   {
@@ -101,14 +93,15 @@
  "unit": "sk-thm-picard-rr",
  "lean_audit": {},
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantShortExactExists",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.DeterminantShortExactExists",
   "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_shortExact_exists",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantShortExactExists.lean",
-  "statement": "theorem determinant_shortExact_exists {X : Scheme.{v}} (S : ShortComplex X.Modules)\n    (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₂.IsFiniteLocallyFreeOfRank r₂]\n    [S.X₃.IsFiniteLocallyFreeOfRank r₃] :\n    ∃ e : exteriorSheaf S.X₂ r₂ ≅ exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃,\n      ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))\n        (b : Fin r₃ → S.X₃.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)),\n        (∀ i, S.g.val.app (op U) (c i) = b i) →\n        e.inv.val.app (op U)\n          (tmulSection (exteriorSheafSection S.X₁ r₁ U a)\n            (exteriorSheafSection S.X₃ r₃ U b)) =\n          exteriorSheafSection S.X₂ r₂ U\n            (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/DeterminantShortExactExists.lean",
+  "statement": "theorem determinant_shortExact_exists {X : Scheme.{v}} (S : ShortComplex X.Modules)\n    (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₂.IsFiniteLocallyFreeOfRank r₂]\n    [S.X₃.IsFiniteLocallyFreeOfRank r₃] :\n    ∃ e : exteriorPower S.X₂ r₂ ≅ exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃,\n      ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))\n        (b : Fin r₃ → S.X₃.val.obj (op U)) (c : Fin r₃ → S.X₂.val.obj (op U)),\n        (∀ i, S.g.val.app (op U) (c i) = b i) →\n        e.inv.val.app (op U)\n          (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)\n            (wedge (M := S.X₃) (r := r₃) (U := U) b)) =\n          wedge (M := S.X₂) (r := r₂) (U := U)\n            (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))",
   "branch": "sheaf-dag",
-  "by": "X2",
-  "date": "2026-10-12",
-  "existing": false
+  "by": "K4",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Retired legacy duplicate. The adopted theorem uses exteriorPower and wedge; its sole legacy parent transports the isomorphism and its inverse wedge formula through exteriorSheafPowerIso. The mathematical statement and unit route are unchanged."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -123,11 +116,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-5c09d",
-  "group": "B7",
-  "result": "pass",
-  "landing": "20261021T023301-L-2944426",
+  "reviewer": "C-4eba8",
+  "group": "K4",
+  "result": "fix",
+  "landing": "20261021T061457-L-1780492",
   "kind": "interface",
-  "note": "independent cc review: retired Sheaf DeterminantWedgeMorphism stub + adapted DeterminantShortExactExists + 2 node files vs live clone and WC adopted determinant_wedgeMorphism_exists (node lean.statement verbatim); --all compile clean, original consumer fails vs stub (forced), importer DeterminantShortExact compiles, axioms standard"
+  "note": "independent cc review: re-delivery of e8f8ba768 (FIX, landing failed on change-record path): item node lem-sc-determinant-short-exact-exists existing:true on WC determinant_shortExact_exists with full verbatim statement (vs WC file 53-65); consumer Sheaf DeterminantShortExact transports e0 via exteriorSheafPowerIso, signature/public imports = live; --all and importer DeterminantDualEvaluation compile clean; axioms standard"
  }
 }
