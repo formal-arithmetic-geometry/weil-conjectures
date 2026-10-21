@@ -10,10 +10,8 @@ public import Mathlib.AlgebraicGeometry.Properties
 public import Mathlib.RingTheory.IntegralClosure.IntegrallyClosed
 public import Mathlib.Topology.Irreducible
 public import Mathlib.Topology.NoetherianSpace
-import Mathlib.AlgebraicGeometry.AffineScheme
+import Mathlib.AlgebraicGeometry.Stalk
 import Mathlib.AlgebraicGeometry.OpenImmersion
-import Mathlib.Topology.Sets.Closeds
-import WeilConjectures.RingTheory.ReducedNormalIffIntegrallyClosedTotalFractions
 
 /-!
 # Components of a normal, topologically Noetherian scheme
@@ -78,6 +76,59 @@ theorem normal_topologicallyNoetherian_components
       ∀ z : (Scheme.Opens.toScheme (⟨C, hC⟩ : Z.Opens)),
         IsDomain ((Scheme.Opens.toScheme (⟨C, hC⟩ : Z.Opens)).presheaf.stalk z) ∧
         IsIntegrallyClosed ((Scheme.Opens.toScheme (⟨C, hC⟩ : Z.Opens)).presheaf.stalk z) := by
-  sorry
+  classical
+  have hfinite : (irreducibleComponents Z).Finite :=
+    TopologicalSpace.NoetherianSpace.finite_irreducibleComponents
+  -- Every component through x is the closure of the generizations of x.
+  have hcomponent (x : Z) (C : Set Z) (hC : C ∈ irreducibleComponents Z) (hx : x ∈ C) :
+      C = closure {y : Z | y ⤳ x} := by
+    let : IsDomain (Z.presheaf.stalk x) := (hnormal x).1
+    have hS : IsIrreducible {y : Z | y ⤳ x} := by
+      rw [← Z.range_fromSpecStalk, ← Set.image_univ]
+      exact (IrreducibleSpace.isIrreducible_univ _).image _
+        (Z.fromSpecStalk x).continuous.continuousOn
+    obtain ⟨η, hη⟩ := QuasiSober.sober hC.1 (isClosed_of_mem_irreducibleComponents _ hC)
+    have hCS : C ⊆ closure {y : Z | y ⤳ x} :=
+      hη.symm.trans_subset (closure_mono (Set.singleton_subset_iff.mpr (hη.specializes hx)))
+    exact hCS.antisymm (hC.2 hS.closure hCS)
+  have hdisjoint : (irreducibleComponents Z).Pairwise Disjoint := by
+    intro C hC D hD hne
+    apply Set.disjoint_left.mpr
+    intro x hxC hxD
+    exact hne ((hcomponent x C hC hxC).trans (hcomponent x D hD hxD).symm)
+  refine ⟨hfinite, hdisjoint, ?_⟩
+  intro C hC
+  have hclosed := isClosed_of_mem_irreducibleComponents C hC
+  have hopen : IsOpen C := by
+    have hcompl : C = (⋃₀ (irreducibleComponents Z \ {C}))ᶜ := by
+      ext x
+      constructor
+      · intro hx hothers
+        obtain ⟨D, hD, hxD⟩ := hothers
+        exact Set.disjoint_left.mp (hdisjoint hC hD.1
+          (fun h ↦ hD.2 (Set.mem_singleton_iff.mpr h.symm))) hx hxD
+      · intro hx
+        by_contra hxC
+        apply hx
+        refine ⟨irreducibleComponent x, ⟨irreducibleComponent_mem_irreducibleComponents x,
+          ?_⟩, mem_irreducibleComponent⟩
+        intro heq
+        exact hxC ((Set.mem_singleton_iff.mp heq) ▸ mem_irreducibleComponent)
+    rw [hcompl]
+    simpa only [Set.sUnion_eq_biUnion] using
+      ((hfinite.sdiff (t := {C})).isClosed_biUnion
+        fun D hD ↦ isClosed_of_mem_irreducibleComponents D hD.1).isOpen_compl
+  let U : Z.Opens := ⟨C, hopen⟩
+  have hnormalU (z : U.toScheme) : IsDomain (U.toScheme.presheaf.stalk z) ∧
+      IsIntegrallyClosed (U.toScheme.presheaf.stalk z) := by
+    obtain ⟨hd, hi⟩ := hnormal (U.ι z)
+    let : IsDomain (Z.presheaf.stalk (U.ι z)) := hd
+    let : IsIntegrallyClosed (Z.presheaf.stalk (U.ι z)) := hi
+    let e := (CategoryTheory.asIso (U.ι.stalkMap z)).commRingCatIsoToRingEquiv
+    exact ⟨e.symm.toMulEquiv.isDomain, IsIntegrallyClosed.of_equiv e⟩
+  let (z : U.toScheme) : IsDomain (U.toScheme.presheaf.stalk z) := (hnormalU z).1
+  let : IsReduced U.toScheme := isReduced_of_isReduced_stalk _
+  let : IrreducibleSpace U.toScheme := isIrreducible_iff_irreducibleSpace.mp hC.1
+  exact ⟨hopen, hclosed, isIntegral_of_irreducibleSpace_of_isReduced _, hnormalU⟩
 
 end AlgebraicGeometry
