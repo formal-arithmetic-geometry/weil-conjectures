@@ -20745,3 +20745,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:39 L: returned deliver/NZ/sk-lem-nagata-sketch-dense-valuative (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-nagata-sketch-dense-valuative: cited node lemma)
 - 07:39 L: returned deliver/NM/lem-weil-pbc-strict-perfect-ringed-pullback-model (reviewer RETURN: L: independent stage-2 immutable head 5178b4c19696: file-only compilation failed: private overlay Sheaf.Paper.RingedTopo)
 - 07:39 L: returned deliver/ND/lem-pur-finite-free-completion-exchange (reviewer RETURN: L: independent stage-2 immutable head 55cd6f9a897b: file-only compilation failed: private overlay Sheaf.Algebra.Homology)
+- 07:39 L: returned deliver/Q134/thm-nagata-blowup-flat-base-change (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED thm-nagata-blowup-flat-base-change: cited node def-nag)
