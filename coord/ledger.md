@@ -23803,3 +23803,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:37 L: merged deliver/NQ/lem-pur-vector-integration-site-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 21:39 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 21:40 L: merged deliver/NH/lem-sfb-countable-split-profinite-cover (reviewer FIX; first push; new nodes: 0)
+- 21:41 L: returned deliver/A3/Sheaf.AlgebraicGeometry.ModuleSpecializationAbelianIso (reviewer RETURN: (the landing tools, head dbe981400) the delivery did not land: the global build of 1ad473e94e failed in Sheaf.AlgebraicG)
