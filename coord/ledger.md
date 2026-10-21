@@ -20417,3 +20417,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:28 L: merged deliver/O1/lem-sfb-module-derived-compositor-coherence (reviewer PASS; first push; new nodes: 0)
 - 06:28 L: merged deliver/N7/lem-sfb-exact-tensor-functor-derived-braiding (reviewer PASS; first push; new nodes: 0)
 - 06:28 L: returned deliver/NR/lem-sfb-grothendieck-sheafification (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-grothendieck-sheafification: lem-sfb-grothendi)
+- 06:28 L: returned deliver/Q08/lem-sfb-filtered-ring-object-cocone-colimit (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-filtered-ring-object-cocone-colimit: lem-sfb-f)
