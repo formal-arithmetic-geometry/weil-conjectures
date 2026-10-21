@@ -22166,3 +22166,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:08 L: returned deliver/M7/Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus (reviewer RETURN: (the landing tools, head d1a559245) the delivery did not land: lean/Sheaf/Paper/PurNormalizedReconstructionAdjunctionCal)
 - 11:08 L: returned deliver/N2/Sheaf.CategoryTheory.StrictRoosHomotopyFunctor (reviewer RETURN: (the landing tools, head 267acc6da) the delivery did not land: lean/Sheaf/CategoryTheory/StrictRoosHomotopyFunctor.lean )
 - 11:08 L: returned deliver/N2/Sheaf.Paper.FiniteFieldClosedSupport (reviewer RETURN: (the landing tools, head ef166fe54) the delivery did not land: lean/Sheaf/Paper/FiniteFieldClosedSupport.lean changed on)
+- 11:08 L: returned deliver/P3/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (the landing tools, head cfc77798f) the delivery did not land: lean/Sheaf/Paper/CompletedOperationTowerSubstitution.lean)
