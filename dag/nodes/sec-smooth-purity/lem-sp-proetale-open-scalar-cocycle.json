@@ -14,9 +14,90 @@
   "def-sp-reduction-direct-image-comparison",
   "def-weil-extension-by-zero"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $S_T^{A,B}=T_T^{A,B}$, let $R_T^{A,B}$ be exact derived restriction of scalars, and put $P_A=j_A^*$ and $J_A=J_j^A$. The scalar adjunction $S_T^{A,B}\\dashv R_T^{A,B}$ is the normalized unbounded adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction]; $J_A\\dashv P_A$ and the coordinate isomorphism $r_A:j_!^A\\xrightarrow{\\sim}J_A$ are those fixed by [def-sp-reduction-direct-image-comparison]. Use composite adjunctions [def-weil-pbc-composite-adjunction] throughout. Let $\\chi^{A,B}:R_U^{A,B}P_B\\xrightarrow{\\sim}P_AR_Z^{A,B}$ be the inverse-image comparison $b$ of [lem-weil-pbc-ring-sheaf-change-adjunction], with $u=j$ and constant-ring maps. By the definition of $\\beta$, its right-adjoint conjugate is exactly $\\chi^{A,B}$; this fixes the direction as well as the map.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-sp-reduction-direct-image-comparison",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 1, normalized open scalar comparison; sites-cohomology.tex Tag 07A6 (lemma-adjoint)"
+   }
+  },
+  {
+   "text": "Let $\\rho_T:R_T^{A,C}\\xrightarrow{\\sim}R_T^{A,B}R_T^{B,C}$ be the termwise identity comparison: by [def-pc-sheaf-restrict-scalars] both actions on a $C_T$-module are $a\\cdot n=\\psi(\\varphi(a))n$, and all maps are unchanged. The comparison $\\chi$ of [lem-weil-pbc-ring-sheaf-change-adjunction] is induced by identified-coefficient inverse image. In inverse-image abelian-sheaf coordinates it is the identity on the underlying inverse-image sheaf; changing the module action before or after inverse image gives the same action through the compatible constant-ring maps. Therefore both routes for $A\\to B\\to C$ are the identity on that sheaf, with action through $\\psi\\varphi$. Applying this equality in each complex degree and descending gives\n$$ (P_A\\rho_Z)\\circ\\chi^{A,C}=(\\chi^{A,B}R_Z^{B,C})\\circ(R_U^{A,B}\\chi^{B,C})\\circ(\\rho_UP_C). $$\nHere all functor rebracketings are the canonical localization comparisons. Descent preserves the equality, identities and composition by [lem-weil-pbc-localization-universal-property](2),(3); thus no strict equality of chosen derived-functor implementations is assumed.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition), identified-coefficient exact inverse images; elementary restriction-action calculation and localization"
+   }
+  },
+  {
+   "text": "The specified $\\alpha_T:S_T^{B,C}S_T^{A,B}\\xrightarrow{\\sim}S_T^{A,C}$ of [det-sp-scalar-extension-functor] is the comparison of [lem-sfb-successive-derived-quotient-normalization]. The latter states that, after restriction, it carries the composite scalar unit to the direct scalar unit. Under the composite adjunction of Step 1, this is precisely the defining unit equation for the left-adjoint comparison whose right conjugate is $\\rho_T$. By [lem-weil-pbc-conjugate-iso-unit-equation] that comparison is unique. Consequently $\\alpha_T$ has right conjugate $\\rho_T$ for both $T=U,Z$. This uses the unit-normalized tensor associator, not an arbitrary natural isomorphism between the two scalar functors.",
+   "uses": [
+    "det-sp-scalar-extension-functor",
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D (lemma-derived-pullback-composition), scalar units; categories.tex Tag 0B65 (lemma-transformation-between-functors-and-adjoints)"
+   }
+  },
+  {
+   "text": "Consider the two natural maps from $S_Z^{B,C}S_Z^{A,B}J_A$ to $J_CS_U^{A,C}$. Under the composite adjunctions their right conjugates run from $R_U^{A,C}P_C$ to $P_AR_Z^{A,B}R_Z^{B,C}$. By [lem-weil-pbc-mate-pasting](2),(3), and the identifications of Steps 1 and 3, the conjugate of $\\beta^{A,C}\\circ(\\alpha_ZJ_A)$ is $(P_A\\rho_Z)\\circ\\chi^{A,C}$, whereas the conjugate of\n$$ (J_C\\alpha_U)\\circ(\\beta^{B,C}S_U^{A,B})\\circ(S_Z^{B,C}\\beta^{A,B}) $$\nis $(\\chi^{A,B}R_Z^{B,C})\\circ(R_U^{A,B}\\chi^{B,C})\\circ(\\rho_UP_C)$. Step 2 equates these. Injectivity of the conjugate correspondence [def-weil-pbc-adjunction-conjugate] gives the equality of the two displayed left-adjoint maps. All intermediate objects are in the full unbounded categories; none of the adjunctions imposes a Tor or boundedness condition.",
+   "uses": [
+    "lem-weil-pbc-mate-pasting",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Step 4, coefficient composition; explicit conjugate calculation using categories.tex Tag 0B65"
+   }
+  },
+  {
+   "text": "It remains to express this equality in the prescribed sectionwise coordinates. By [def-sp-reduction-direct-image-comparison], at $M$ one has\n$$e^{A,B}_M=r_{B,S_U^{A,B}M}^{-1}\\circ\\beta^{A,B}_M\\circ S_Z^{A,B}(r_{A,M}).$$\nExpanding the two successive $e$'s, functoriality cancels $S_Z^{B,C}(r_B)$ against $S_Z^{B,C}(r_B^{-1})$. Thus the right side of the desired identity becomes\n$$j_!^C(\\alpha_{U,M})\\circ r_{C,S_U^{B,C}S_U^{A,B}M}^{-1}\\circ\\beta^{B,C}_{S_U^{A,B}M}\\circ S_Z^{B,C}(\\beta^{A,B}_M)\\circ S_Z^{B,C}S_Z^{A,B}(r_{A,M}).$$\nNaturality of $r_C$ moves $j_!^C(\\alpha_U)$ through $r_C^{-1}$, replacing the initial pair by $r_{C,S_U^{A,C}M}^{-1}\\circ J_C(\\alpha_{U,M})$. Step 4 replaces the three middle factors by $\\beta^{A,C}_M\\circ\\alpha_{Z,J_AM}$. Finally naturality of $\\alpha_Z$ [det-sp-scalar-extension-functor](4) gives\n$$\\alpha_{Z,J_AM}\\circ S_Z^{B,C}S_Z^{A,B}(r_{A,M})=S_Z^{A,C}(r_{A,M})\\circ\\alpha_{Z,j_!^AM}.$$\nThe resulting composite is exactly $e^{A,C}_M\\circ\\alpha_{Z,j_!^AM}$. This proves the stated identity for the actual normalized $e$, including empty opens, arbitrary unbounded $M$ and nonflat coefficient maps.",
+   "uses": [
+    "def-sp-reduction-direct-image-comparison",
+    "det-sp-scalar-extension-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+    "place": "Steps 1 and 4, change from normalized left-adjoint coordinates to the sectionwise sheafified open extension"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-sp-reduction-direct-image-comparison",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-pc-sheaf-restrict-scalars",
+  "lem-weil-pbc-localization-universal-property",
+  "det-sp-scalar-extension-functor",
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-weil-pbc-mate-pasting",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
+  "place": "Steps 1 and 4, detailed coefficient-cocycle argument by normalized adjunction conjugates and cancellation of the prescribed coordinate isomorphisms"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +140,59 @@
    "results": "OK: 0 hits; ",
    "date": "2026-10-21",
    "verdict": "no match: hits on ordinary module scalar associativity do not identify the normalized open derived comparisons."
+  },
+  {
+   "tool": "grep",
+   "query": "openScalar.*(comp|assoc|cocycle)|extensionByZero.*scalar|shriek.*scalar",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar composition, structure-sheaf restrictions or unrelated cocycles do not state the normalized unbounded pro-etale open scalar cocycle."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived open extension by zero scalar extension comparison satisfies the coefficient cocycle",
+   "results": "OK: 8 hits; LieAlgebra.Extension.twoCocycleOf, CochainComplex.HomComplex.Cocycle.instSMul, CochainComplex.HomComplex.Cocycle.homOf, LieAlgebra.Extension.twoCocycleOf_coe_coe, groupCohomology.cocyclesMap_cocyclesIso₀_hom_f_apply, CochainComplex.HomComplex.δ_comp_zero_cocycle, CochainComplex.HomComplex.Cocycle.toSingleMk_zero, liftOfDerivationToSquareZero",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar composition, structure-sheaf restrictions or unrelated cocycles do not state the normalized unbounded pro-etale open scalar cocycle."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"comp\"",
+   "results": "OK: 9 hits; ModuleCat.extendScalarsComp, ModuleCat.ExtendScalars.map'_comp, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalars_comp_id_assoc, ModuleCat.extendScalars_id_comp_assoc, ModuleCat.extendScalarsComp_hom_app_one_tmul, ModuleCat.homEquiv_extendScalarsComp",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar composition, structure-sheaf restrictions or unrelated cocycles do not state the normalized unbounded pro-etale open scalar cocycle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes coherently with extension by zero on the pro-etale site under a tower of finite coefficient rings",
+   "results": "OK: 8 hits; CommRingCat.moduleCatExtendScalarsPseudofunctor_mapComp, KaehlerDifferential.isBaseChange_of_formallyEtale, Algebra.FormallyEtale.of_restrictScalars, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, Algebra.Etale.comp, Algebra.Extension.lTensor_cotangentComplex_eq_cotangentComplexBaseChange, Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars, Algebra.FormallyEtale.comp",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar composition, structure-sheaf restrictions or unrelated cocycles do not state the normalized unbounded pro-etale open scalar cocycle."
+  },
+  {
+   "tool": "grep",
+   "query": "jShriek|extensionByZero",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar composition, structure-sheaf restrictions or unrelated cocycles do not state the normalized unbounded pro-etale open scalar cocycle."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Composition of scalar change comparisons for open immersion shriek functors equals tensor associativity",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_inv_app'_assoc, AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc, AlgebraicGeometry.Scheme.Hom.app_invApp'_assoc, AlgebraicGeometry.Scheme.Modules.restrictFunctorComp, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.Scheme.Hom.appIso_inv_appLE_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar composition, structure-sheaf restrictions or unrelated cocycles do not state the normalized unbounded pro-etale open scalar cocycle."
+  },
+  {
+   "tool": "grep",
+   "query": "def extendScalarsComp|theorem homEquiv_extendScalarsComp|theorem extendScalars_comp_id",
+   "results": "OK: 1 hits; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; subdirectory Algebra/Category/ModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar composition, structure-sheaf restrictions or unrelated cocycles do not state the normalized unbounded pro-etale open scalar cocycle."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-sp-reduction-direct-image",
@@ -79,5 +209,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-proetale-open-scalar-cocycle",
+  "worker": "stage1",
+  "summary": "Proved the coefficient cocycle using existing normalized scalar adjunctions, explicit restriction/pullback coherence, mate pasting, and cancellation of the prescribed open coordinate changes. No new node, no statement change, no Lean edit or compiler invocation.",
+  "blueprint": "det-sp-reduction-direct-image proof Steps 1 and 4: normalized open comparison and coefficient composition, elaborating the first paragraph of returned Step 11.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Supplies normalized unbounded scalar extension/restriction adjunctions for constant-ring sheaves; a generic ringed-site tool, not a replacement for the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Supplies the identified-coefficient restriction/pullback comparison whose conjugate defines the open scalar map; the unit does not restate this generic coefficient tool."
+   },
+   {
+    "node": "lem-sfb-successive-derived-quotient-normalization",
+    "why": "Supplies the scalar associator unit equation, identifying the already specified alpha with the conjugate of restriction composition; no open cocycle conclusion is imported."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sfb-successive-derived-quotient-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q60-874d9a43c",
+  "group": "Q60",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q60-874d9a43c (reviewer sub-agent of L); spot-checked: Read the item's five steps, every cited statement, and blueprint main-20261015 sk-lem-sp-reduction-direct-image proof Steps 1 and 4 (the item is the open half of the Step 4 cocycle; parent det-sp Step 5 pastes it with the proper cocycle). Statement, coefficients (def-weil-pbc-proetale-modules) and e_j are exactly those of def-sp-reduction-direct-image-comparison; nothing weakened, no new nodes, no SGA. Item not dropped, unsplit on side-live, no repair note. Step 1: the conjugate of beta runs R_U P_B -> P_A R_Z, the same direction as b of lem-weil-pbc-ring-sheaf-change-adjunction with u=j and constant rings; the constant-ring compatibility holds. Step 2 is genuinely elementary: restriction keeps the abelian sheaf, and b is the identity on j^{-1}N; it descends because Lj^* is termwise, using the localization lemma (2),(3). Step 3: lem-sfb's unit equation plus uniqueness in lem-weil-pbc-conjugate-iso-unit-equation give alpha^c = rho. Minor point: that det-sp's 'canonical' alpha is the lem-sfb map comes from det-sp proof Step 7; accepted, since this is the standard associator. Step 4: I recomputed both conjugates with (tau tau')^c = tau'^c tau^c and mate-pasting (2),(3); they match Step 2, and injectivity of the conjugate bijection finishes. Step 5: I redid the cancellation of S(r_B), naturality of r_C, Step 4 and naturality of alpha (det-sp 4); the result is exactly the stated identity. Edge cases checked: empty U, j=id, identity ring maps, nonflat Z/l^2->F_l, zero ring. Duplicate grep: lem-sp-open-scalar-site-coherence, lem-fix-open-scalar-exchange and others state different things. The three tool_uses (lem-pur-sheaf-ring-derived-coefficient-adjunction, lem-weil-pbc-ring-sheaf-change-adjunction, lem-sfb-successive-derived-quotient-normalization) are generic black-box tools; accepted. Stacks tags 07A6, 0D6D and 0B65 are correct."
  }
 }
