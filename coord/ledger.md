@@ -20265,3 +20265,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:10 L: merged deliver/Q14/lem-pe-finite-scalar-restriction-constructible (reviewer PASS; first push; new nodes: 0)
 - 04:10 L: merged deliver/Q24/lem-sfb-constructible-local-tor-etale-origin (reviewer FIX; first push; new nodes: 0); claim not held by Q24: not your claim
 - 04:10 L: merged deliver/Q25/lem-sfb-local-integral-perfect-model-cohomology (reviewer PASS; first push; new nodes: 0)
+- 04:10 L: merged deliver/NO/lem-sf-compact-support-restriction-of-scalars (reviewer FIX; after a return; new nodes: 2)
