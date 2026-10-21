@@ -16,112 +16,58 @@
  ],
  "proof": [
   {
-   "text": "If $A=0$, take $r=0$, and take the unique maps between $O^0=0$ and $A=0$. They have all the asserted algebraic, topological and sectionwise properties, including for the empty profinite set. Henceforth assume $A\\ne0$.",
+   "text": "Enumerate all elements of A by Fin r, r=card A, and extend this family linearly from the coordinate basis to q:O^r→A. Basis vectors give surjectivity and LinearMap.continuous_on_pi gives continuity. This construction also covers the zero ring without a separate case.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
-   }
+   "elementary": true
   },
   {
-   "text": "List the elements of $A$ as $b_1,\\ldots,b_r$, with $r=|A|$, and define $q:O^r\\to A$ by $q(x_1,\\ldots,x_r)=\\sum_i a(x_i)b_i$. This is $O$-linear for the specified action. It is surjective since $q(e_i)=b_i$. Each function $x\\mapsto a(x_i)b_i$ is continuous: coordinate projection and $a$ are continuous and multiplication on the discrete ring $A$ is continuous. Finite addition on $A$ is continuous as well, so $q$ is continuous. Put $K=\\ker q$, an $O$-submodule of $O^r$, with its subspace topology.",
+   "text": "Let K=ker q and c=card(A) in O. The additive group of A is killed by its cardinality, so c O^r lies in K. The positive integer c is nonzero since O is a subring of the characteristic-zero field E.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
-   }
+   "elementary": true
   },
   {
-   "text": "Put $N=|A|$ and let $c=N!\\cdot1\\in O$. For each $b\\in A$, among $0,b,2b,\\ldots,Nb$ two terms agree, so $k b=0$ for some integer $1\\le k\\le N$. Since $k$ divides $N!$, $N!b=0$. Thus $cA=0$ and $cO^r\\subseteq K$. Also $c\\ne0$: $O$ is a subring of the characteristic-zero field $E$, an extension of $\\mathbf Q_\\ell$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
-   }
-  },
-  {
-   "text": "By [lem-weil-l-adic-extension-integers-dvr], $O$ is a discrete valuation ring, in particular a domain and a principal ideal domain. Apply [lem-sc-dvr-saturation-line-smith-normal-form] to the finite free module $O^r$ and its submodule $K$. It gives an ambient basis $u_1,\\ldots,u_r$, a basis $v_1,\\ldots,v_k$ of $K$ with $k\\le r$, and scalars $d_i\\in O$ such that, after indexing the distinct ambient basis vectors first, $v_i=d_i u_i$ for $1\\le i\\le k$. Each $d_i$ is nonzero, since a basis vector $v_i$ is nonzero.",
+   "text": "The integer-ring DVR theorem supplies the PID instance. Apply the Mathlib Smith normal form construction to K in O^r. Its embedding of the kernel-basis indices into the ambient-basis indices is surjective: an omitted ambient coordinate of c times its basis vector would be zero on K, giving c=0. Reindex the kernel basis along this bijection. The resulting equivalence eL:O^r≃K, followed by inclusion, defines the injective linear map φ with range K. Its standard matrix is LinearMap.toMatrix′ φ, and it is continuous by LinearMap.continuous_on_pi.",
    "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-sc-dvr-saturation-line-smith-normal-form"
    ],
-   "elementary": false,
-   "source": {
-    "document": "Mathlib/LinearAlgebra/FreeModule/PID.lean",
-    "place": "Submodule.exists_smith_normal_form_of_le, lines 492-510, applied to the kernel submodule; local-field hypothesis from lem-weil-l-adic-extension-integers-dvr"
-   }
+   "elementary": false
   },
   {
-   "text": "In fact $k=r$. Otherwise $c u_{k+1}\\in K$ by step 3, so it is an $O$-linear combination of $v_1,\\ldots,v_k$, hence of $u_1,\\ldots,u_k$. Comparing the coefficient of $u_{k+1}$ in the ambient basis gives $c=0$, a contradiction. Define $\\phi:O^r\\to O^r$ by $\\phi(x)=\\sum_{i=1}^r x_i v_i$. Since the $v_i$ form a basis of $K$, $\\phi$ is injective with image $K$. Thus the algebraic sequence is exact. Its columns in the standard coordinates are the $v_i$, so it is given by a matrix with entries in $O$ and is continuous, by finite addition and multiplication in the valuation topology.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
-   }
+   "text": "The recorded integer-ring profinite-tower theorem supplies compactness and Hausdorffness of O for precisely its recorded topology. Thus O^r is compact, and K has the Hausdorff subspace topology. The continuous bijection eL:O^r→K is closed, hence is a homeomorphism. This proves the required kernel homeomorphism without coordinate division.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower"
+   ],
+   "elementary": false
   },
   {
-   "text": "Write $P:O^r\\to O^r$ for the change-of-basis map with columns $u_i$. Both $P$ and $P^{-1}$ are matrices with entries in $O$, so both are continuous. For $y\\in K$, the inverse of $\\phi:O^r\\to K$ is explicitly $\\psi(y)_i=(P^{-1}y)_i/d_i$, computed in $E$. Indeed $y=\\sum_i x_i d_i u_i$ for unique $x_i\\in O$, so this formula has values in $O$ and gives $\\psi\\phi=1$ and $\\phi\\psi=1_K$. Each coordinate is continuous as an $E$-valued function: multiplication by $d_i^{-1}$ satisfies $|d_i^{-1}t-d_i^{-1}t^{\\prime}|_E=|d_i|_E^{-1}|t-t^{\\prime}|_E$. Since its values lie in $O$, it is continuous into the subspace $O$ as well. The product topology now makes $\\psi:K\\to O^r$ continuous. Hence $\\phi$ is a homeomorphism onto $K$ with exactly the required subspace topology.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
-   }
+   "text": "Apply the already-proved continuousSections_finiteDiscrete_shortExact to φ and q, using the established algebraic exactness and kernel homeomorphism. Its component formulas identify its section maps with compLeftContinuous, and its condensed conclusion supplies the required specified arrows and short exactness.",
+   "uses": [
+    "lem-pe-profinite-sections-finite-quotient"
+   ],
+   "elementary": false
   },
   {
-   "text": "Fix a profinite set $S$. Postcomposition with $\\phi$ is injective because $\\phi$ is injective. If $g:S\\to O^r$ is continuous and $qg=0$, then $g$ takes values in $K$ and is continuous into that subspace. The continuous map $\\psi g:S\\to O^r$ is its unique lift under $\\phi$. Conversely $q\\phi=0$, so this proves equality of image and kernel on continuous functions.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
-   }
-  },
-  {
-   "text": "For every $b\\in A$, choose $t_b\\in O^r$ with $q(t_b)=b$. If $f:S\\to A$ is continuous, its fibres $S_b=f^{-1}(\\{b\\})$ are clopen, because $A$ is finite discrete. They form a finite partition, including possibly empty parts. Define $h:S\\to O^r$ to be $t_b$ on $S_b$. For every open $U\\subseteq O^r$, $h^{-1}(U)=\\bigcup_{t_b\\in U}S_b$ is open, so $h$ is continuous, and $qh=f$. This proves surjectivity on continuous functions. Steps 7 and 8 give the whole asserted exact sequence of abelian groups, with no nonempty assumption on $S$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
-   }
-  },
-  {
-   "text": "Coordinate projection and assembly give inverse natural $C(S,O)$-linear maps $C(S,O^r)\\simeq C(S,O)^r$. Finite products here are also finite direct sums: the coordinate injections and projections obey $p_i\\iota_j=\\delta_{ij}$ and $\\sum_i\\iota_i p_i=1$, section by section. Thus these identify the two free sheaves with $\\underline O^{\\oplus r}$. By [sk-def-sfb-condensed-ring] the target is the sheaf $\\underline A(S)=C(S,A)$, with the $\\underline O$-action induced by $a$. The maps commute with precomposition in $S$ and with this action, so they are morphisms of module objects as in [sk-def-sfb-module-objects].",
+   "text": "Postcomposition by continuous O-linear maps is a morphism of the restricted regular continuous-section modules: verify naturality pointwise, and action compatibility on presheaf pure tensors using Sheaf.tensor_hom_ext. Identify continuousSectionsModule O O with the regular module since the scalar ring map is the identity. Coordinate projections and insertions give a bicone on r copies of that regular module. Their pairwise composites are Kronecker identities, and the sum of projection-insertion composites is the identity, sectionwise. The preadditive total-identity criterion and uniqueness of biproducts give the required finite-free identification. Combine this with the preceding clauses.",
    "uses": [
     "sk-def-sfb-condensed-ring",
     "sk-def-sfb-module-objects"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
-   }
-  },
-  {
-   "text": "The sectionwise sequence is short exact also in the category of these sheaves of modules. Explicitly, a sheaf-module map into the middle term annihilated by $q$ has, on every $S$, the unique $C(S,O)$-linear lift furnished by step 7; uniqueness makes these lifts natural in $S$, giving the kernel universal property. For the cokernel property, if a sheaf-module map $t$ out of the middle term annihilates $\\phi$, define its factor on $f\\in C(S,A)$ by $t_S(h)$ for any lift $h$ from step 8. Two lifts differ by an element in the image of $\\phi$ by step 7, so this is well defined. Choosing lifts of sums and scalar multiples proves additivity and $C(S,O)$-linearity; restricting a lift gives a lift of the restricted section, so these maps are natural. Surjectivity on each $S$ proves uniqueness of the factor. Finally $\\phi$ is monic because it is injective on every $S$. Thus $\\phi$ identifies the first term with the kernel of $q$, and $q$ is its cokernel, proving the claimed condensed short exact sequence.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-    "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-sc-dvr-saturation-line-smith-normal-form",
+  "lem-sfb-integers-profinite-tower",
+  "lem-pe-profinite-sections-finite-quotient",
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-module-objects"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-direct-image.proof.md",
-  "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra; Q121 expands the algebraic and topological arguments using the existing Smith normal form leaf"
+  "place": "Finite free and finitely presented coefficient extensions: exactness of the condensed finite free resolution of a finite O_E-algebra; N2 formalization uses cardinality annihilation, the existing profinite compactness theorem, and the existing continuous-section exactness theorem; the scalar-six unit route is unchanged."
  },
  "mathlib_searches": [
   {
@@ -262,5 +208,15 @@
   "group": "Q107",
   "result": "pass",
   "note": "Re-delivery of the 10dcaeb5 H2/H13 RETURN. Item Lean byte-identical (sha256 3db16005); item record differs from live only in lean + stmt_deps (two theorem nodes replaced by new existing:true def nodes def-sfb-coefficient-extension-integers-topology (Padic.coefficientExtensionIntegersTopology, TopologicalSpace.induced via spectralNorm, IntegersProfiniteTower:63) and def-sfb-continuous-sections-module (Profinite.continuousSectionsModule, Mod.comap of regular along continuousMapRingSheafMapOfUniverse, ProfiniteSectionsFiniteQuotient:45)); node statements match bodies; body owners in stmt_deps (def-weil-l-adic-coefficient-extension, def-sfb-continuous-map-condensed-ring-map, sk-def-sfb-condensed-ring, sk-def-sfb-module-objects); check_existing/check_new_node no failures (noncomputable note only); no ownership collision or cycle; item lean.statement verbatim; prior clause-by-clause and edge-case verdict (A=0/r=0, empty S, ramified E) still applies; both report sections present. No compile (no file changed). Advisory: later citers of these decls should cite the new def nodes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T152354-L-1913501",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
