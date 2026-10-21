@@ -20800,3 +20800,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:50 L: returned deliver/Q13/lem-asd-affine-roots-representability (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-asd-affine-roots-representability: lem-asd-affine-)
 - 07:50 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
 - 07:51 L: returned deliver/NE/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-finite-field-stratified-perfect-models: l)
+- 07:51 L: returned deliver/Q02/lem-wf-tate-twist-compatibility (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-wf-tate-twist-compatibility: cited node lem-wf-int)
