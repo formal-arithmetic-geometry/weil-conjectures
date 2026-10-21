@@ -1,0 +1,120 @@
+{
+ "id": "lem-sp-scalar-associator-conjugate",
+ "kind": "statement",
+ "title": "Right conjugate of the normalized scalar associator",
+ "statement": "For any scheme T and unital maps A -> B -> C of commutative rings, the right-adjoint conjugate of the inverse prescribed scalarExtensionFunctor_composition is the canonical derived restriction-composition comparison. No coefficient flatness or finiteness is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A6, 0D6D; scalar associator unit normalization"
+ },
+ "stmt_deps": [
+  "det-sp-scalar-extension-functor",
+  "def-weil-pbc-four-corners",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-adjunction-conjugate"
+ ],
+ "proof_deps": [
+  "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-sheaf-ring-derived-hom-comparison",
+  "lem-weil-pbc-conjugate-iso-unit-equation"
+ ],
+ "proof": [
+  {
+   "text": "Bundle the published ordinary tensor functors and universal derived pairs into presentations. Ordinary tensor-unit uniqueness and the Hom comparison evaluated at the identity identify the normalized adjunctions with the published pbc adjunctions. The ordinary associator has the balanced pure-tensor formula, so uniqueness identifies it with reductionBalance. The derived representative equation is exactly the defining K-flat normalization of scalarExtensionFunctor_composition; its uniqueness identifies the derived comparisons. The conjugate of the normalized composite left-adjoint comparison is restriction composition. Ordinary restriction comparisons are identical on sections, hence equal; localizing identifies their derived comparisons.",
+   "uses": [
+    "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-sheaf-ring-derived-hom-comparison",
+    "lem-weil-pbc-conjugate-iso-unit-equation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YY, 07A6, 0D6D; scalar associator unit normalization"
+   }
+  }
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 07A6, 0D6D; scalar associator unit normalization"
+ },
+ "status": "split",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-lem-sp-reduction",
+ "created": {
+  "by": "worker",
+  "group": "E4",
+  "item": "Sheaf.SecSmoothPurity.ProEtaleOpenScalarCocycle",
+  "date": "2026-10-22"
+ },
+ "blueprint": {
+  "from": {
+   "node": "lem-sp-proetale-open-scalar-cocycle",
+   "place": "Step 3: identify the specified scalar associator by its unit normalization",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.ScalarAssociatorConjugate",
+  "declaration": "AlgebraicGeometry.ProEtale.scalarAssociatorConjugate",
+  "file": "lean/Sheaf/SecSmoothPurity/ScalarAssociatorConjugate.lean",
+  "statement": "theorem scalarAssociatorConjugate {A B C : Type u} [CommRing A] [CommRing B] [CommRing C] (φ : A →+* B) (ψ : B →+* C) (T : Scheme.{u}) : conjugateEquiv ((proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := T) φ)).comp (proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := T) ψ))) (proEtaleRingDerivedExtensionAdjunction (proEtaleConstantRingMap (T := T) (ψ.comp φ))) (scalarExtensionFunctor_composition φ ψ T).inv = (pbcDerivedRestrictComp _ _ _ (scalarExtensionFunctor_ringMap_comp φ ψ T)).hom",
+  "existing": false,
+  "branch": "sheaf-dag",
+  "by": "E4",
+  "date": "2026-10-22"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "scalarExtensionFunctor_composition|derivedComp_representative",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "The ordinary scalar associator and abstract conjugate-composition lemma are available, but no result identifies the published derived scalar normalization; the proof combines those interfaces."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv",
+   "results": "1 hits; CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv",
+   "date": "2026-10-21",
+   "verdict": "The ordinary scalar associator and abstract conjugate-composition lemma are available, but no result identifies the published derived scalar normalization; the proof combines those interfaces."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right adjoint conjugate of the derived scalar extension associator equals restriction of scalars composition",
+   "results": "8 hits; ModuleCat.homEquiv_extendScalarsComp, ModuleCat.ExtendRestrictScalarsAdj.Unit.map, ModuleCat.RestrictionCoextensionAdj.app', ModuleCat.ExtendRestrictScalarsAdj.counit, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.ExtendRestrictScalarsAdj.Counit.map, ModuleCat.ExtendRestrictScalarsAdj.counit_app",
+   "date": "2026-10-21",
+   "verdict": "The ordinary scalar associator and abstract conjugate-composition lemma are available, but no result identifies the published derived scalar normalization; the proof combines those interfaces."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right adjoint conjugate of the normalized derived extension of scalars associator is the composition isomorphism for restriction of scalars.",
+   "results": "8 hits; ModuleCat.instIsRightAdjointRestrictScalars, ModuleCat.extendScalars_assoc', ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars_hom_apply, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars",
+   "date": "2026-10-21",
+   "verdict": "Mathlib supplies ordinary module scalar associators and scalar adjunctions, but not the identification of the prescribed sheaf-derived coefficient associator with its restriction conjugate. The proof combines the existing derived normalization and adjunction-composition interfaces."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261021T225108-L-3768353",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261021T225108-L-3768353",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

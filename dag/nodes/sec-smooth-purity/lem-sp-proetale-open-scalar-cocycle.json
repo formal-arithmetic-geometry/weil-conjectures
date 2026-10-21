@@ -30,11 +30,12 @@
    }
   },
   {
-   "text": "Let $\\rho_T:R_T^{A,C}\\xrightarrow{\\sim}R_T^{A,B}R_T^{B,C}$ be the termwise identity comparison: by [def-pc-sheaf-restrict-scalars] both actions on a $C_T$-module are $a\\cdot n=\\psi(\\varphi(a))n$, and all maps are unchanged. The comparison $\\chi$ of [lem-weil-pbc-ring-sheaf-change-adjunction] is induced by identified-coefficient inverse image. In inverse-image abelian-sheaf coordinates it is the identity on the underlying inverse-image sheaf; changing the module action before or after inverse image gives the same action through the compatible constant-ring maps. Therefore both routes for $A\\to B\\to C$ are the identity on that sheaf, with action through $\\psi\\varphi$. Applying this equality in each complex degree and descending gives\n$$ (P_A\\rho_Z)\\circ\\chi^{A,C}=(\\chi^{A,B}R_Z^{B,C})\\circ(R_U^{A,B}\\chi^{B,C})\\circ(\\rho_UP_C). $$\nHere all functor rebracketings are the canonical localization comparisons. Descent preserves the equality, identities and composition by [lem-weil-pbc-localization-universal-property](2),(3); thus no strict equality of chosen derived-functor implementations is assumed.",
+   "text": "Transpose the ordinary restriction/pullback squares using their specified pullback/direct-image adjunctions. The resulting direct-image comparisons and restriction-composition comparisons act identically on every section. The mates equivalence, including whiskering at the top and bottom, therefore gives the ordinary coefficient pasting equation. Apply the exact-square composition theorem to descend this equation to the unbounded derived categories, retaining its canonical derived-composition comparisons. Cancel the inverse restriction compositors to obtain the right-adjoint pasting equation used in Step 4.",
    "uses": [
     "def-pc-sheaf-restrict-scalars",
     "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-weil-pbc-localization-universal-property"
+    "lem-fix-ordinary-restriction-pullback-square",
+    "lem-pod-derived-exact-square-composition"
    ],
    "elementary": true,
    "source": {
@@ -43,11 +44,9 @@
    }
   },
   {
-   "text": "The specified $\\alpha_T:S_T^{B,C}S_T^{A,B}\\xrightarrow{\\sim}S_T^{A,C}$ of [det-sp-scalar-extension-functor] is the comparison of [lem-sfb-successive-derived-quotient-normalization]. The latter states that, after restriction, it carries the composite scalar unit to the direct scalar unit. Under the composite adjunction of Step 1, this is precisely the defining unit equation for the left-adjoint comparison whose right conjugate is $\\rho_T$. By [lem-weil-pbc-conjugate-iso-unit-equation] that comparison is unique. Consequently $\\alpha_T$ has right conjugate $\\rho_T$ for both $T=U,Z$. This uses the unit-normalized tensor associator, not an arbitrary natural isomorphism between the two scalar functors.",
+   "text": "Apply lem-sp-scalar-associator-conjugate at U and Z. It identifies the right conjugate of each inverse prescribed scalar associator with pbcDerivedRestrictComp. This is solely the scalar normalization part of the argument; Steps 1, 2, 4 and 5 supply the geometric square coherence and coordinate transport.",
    "uses": [
-    "det-sp-scalar-extension-functor",
-    "lem-sfb-successive-derived-quotient-normalization",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-sp-scalar-associator-conjugate"
    ],
    "elementary": false,
    "source": {
@@ -86,17 +85,17 @@
   "def-weil-pbc-composite-adjunction",
   "lem-weil-pbc-ring-sheaf-change-adjunction",
   "def-pc-sheaf-restrict-scalars",
-  "lem-weil-pbc-localization-universal-property",
-  "det-sp-scalar-extension-functor",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "lem-fix-ordinary-restriction-pullback-square",
+  "lem-pod-derived-exact-square-composition",
+  "lem-sp-scalar-associator-conjugate",
   "lem-weil-pbc-mate-pasting",
-  "def-weil-pbc-adjunction-conjugate"
+  "def-weil-pbc-adjunction-conjugate",
+  "det-sp-scalar-extension-functor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-direct-image.proof.md",
-  "place": "Steps 1 and 4, detailed coefficient-cocycle argument by normalized adjunction conjugates and cancellation of the prescribed coordinate isomorphisms"
+  "place": "Steps 1 and 4; Lean proof follows the normalized adjunction route, using ordinary mates on sections and exact-square composition for the restriction/pullback pasting."
  },
  "mathlib_searches": [
   {
@@ -262,5 +261,15 @@
   "group": "Q05",
   "result": "pass",
   "note": "Lean theorem proEtaleOpenScalarCocycle matches the node clause by clause: alpha is the unit-normalized scalarExtensionFunctor_composition (exists-unique choose), every e is reductionOpenScalarIso (openScalarIso transported through reductionOpenModel), j_! is sfIntrinsicExtensionByZero.mapDerivedCategory; orientation recomputed, both sides run from T^{BC}T^{AB}j_!^A M to j_!^C T^{AC} M. No extra assumptions (no boundedness, flatness, quasi-compactness, Nontrivial or universe restriction). Edge cases covered (empty U/Z, j=id, identity maps, zero rings, unbounded M, nonflat maps). Node differs from side-live only in lean; lean.statement matches the file verbatim; no dependency record changes, no new nodes, sorry only, source and blueprint docstrings with all 5 steps, both report sections present. No duplicate cocycle in project Lean or Mathlib. Not recompiled per the 2026-10-21 instruction; worker compile clean. Advisory: hl/hA/hB/hC do not enter the type but are the node's own hypotheses."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E4",
+  "result": "pass",
+  "landing": "20261021T225108-L-3768353",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

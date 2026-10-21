@@ -220,7 +220,7 @@ abbrev pbcExtensionExistence :=
 
 /-- Ordinary sheafified tensor extension, determined on both objects and maps.
 Source: Stacks Tag 03EK (blueprint: def-weil-pbc-bounded-constructible-tower). -/
-abbrev pbcExtend : pbcModules X R ⥤ pbcModules X S := completedAdicChange X φ
+abbrev pbcExtend : pbcModules X R ⥤ pbcModules X S := reductionChange X φ
 
 /-- Tensor extension is additive. Source: Stacks Tag 03EK
 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
@@ -246,13 +246,13 @@ Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -
 universal counit. Source: Stacks Tag 06YY
 (blueprint: def-weil-pbc-bounded-constructible-tower). -/
 abbrev pbcDerivedExtend : DerivedCategory (pbcModules X R) ⥤
-    DerivedCategory (pbcModules X S) := completedAdicDerivedChange X φ
+    DerivedCategory (pbcModules X S) := reductionDerivedChange X φ
 
 /-- The universal comparison, invertible on K-flat complexes.
 Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
 def pbcExtensionCounit : DerivedCategory.Qh ⋙ pbcDerivedExtend φ ⟶
     (pbcExtend φ).mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh :=
-  (pbcDerivedExtensionExistence φ).choose_spec.choose
+  reductionDerivedCounit X φ
 
 /-- The universal property of the recorded scalar-extension comparison.
 Source: Stacks Tag 06YY (blueprint: def-weil-pbc-bounded-constructible-tower). -/
