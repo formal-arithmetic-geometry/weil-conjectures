@@ -137,7 +137,7 @@
    }
   },
   {
-   "text": "For a module sheaf $F$ on $W_S$, every pro-etale test object $H$ is covered by the two disjoint opens $H\\times_{W_S}s(V)$ and $H\\times_{W_S}C$. The sheaf axiom identifies its sections with the product of the two component section modules, since the intersection is empty. Projection to the first factor, extended by zero on the second, consequently defines a unique natural module map $\\pi_s:F\\to s_!s^{-1}F$. On a clopen immersion extension by zero and direct image agree by exactly this product formula (the other component is the zero module); thus this is the claimed projection and it commutes with restrictions, module maps, tower transitions and differentials. Compose it with the $\\beta$ of steps 3-4 and the open-composition comparison to obtain exactly the displayed $\\alpha_Q$. If the square is cartesian then $s=1$, so $\\pi_s=1$ and $\\alpha_Q=\\beta_{i,p}$. If $r=1$ and $V=S$, then $s=(k,1)$ is the indicated clopen section and the projection is its component projection. This is a construction, not an inference from the finite-coefficient theorem. The direct-image adjunction unit is restriction to this component; the canonical map $s_!\to s_*$ is identity on it and zero on its complement. Consequently this sectionwise projection agrees with the adjunction definition in [def-cbc-strict-tower-proper-open-arrows]. For the formal proof of pi_components, the adjoint triple J_s ⊣ G_s ⊣ R_s identifies G_s(pi_s) with the open-adjunction unit. For disjoint opens, restriction of a direct image from the other open is zero: each pulled-back test scheme is empty and the empty covering gives a zero section module. The ringed-open comparison identifies this restriction with actual module inverse image. The open adjunction then makes extension from the other open zero after restriction. This zero-object statement passes termwise to towers and through exact derived localization, so the complementary restriction of pi_s has zero target. This proof does not use faithfulness of evaluation.",
+   "text": "For a module sheaf $F$ on $W_S$, every pro-etale test object $H$ is covered by the two disjoint opens $H\\times_{W_S}s(V)$ and $H\\times_{W_S}C$. The sheaf axiom identifies its sections with the product of the two component section modules, since the intersection is empty. Projection to the first factor, extended by zero on the second, consequently defines a unique natural module map $\\pi_s:F\\to s_!s^{-1}F$. On a clopen immersion extension by zero and direct image agree by exactly this product formula (the other component is the zero module); thus this is the claimed projection and it commutes with restrictions, module maps, tower transitions and differentials. Compose it with the $\\beta$ of steps 3-4 and the open-composition comparison to obtain exactly the displayed $\\alpha_Q$. For a cartesian square the lift is canonically isomorphic to the chosen pullback, rather than literally equal to its identity. The reverse-comparison cancellation below identifies alpha with beta without assuming literal equality of the pullback objects. If $r=1$ and $V=S$, then $s=(k,1)$ is the indicated clopen section and the projection is its component projection. This is a construction, not an inference from the finite-coefficient theorem. The direct-image adjunction unit is restriction to this component; the canonical map $s_!\to s_*$ is identity on it and zero on its complement. Consequently this sectionwise projection agrees with the adjunction definition in [def-cbc-strict-tower-proper-open-arrows]. For the formal proof of pi_components, the adjoint triple J_s ⊣ G_s ⊣ R_s identifies G_s(pi_s) with the open-adjunction unit. For disjoint opens, restriction of a direct image from the other open is zero: each pulled-back test scheme is empty and the empty covering gives a zero section module. The ringed-open comparison identifies this restriction with actual module inverse image. The open adjunction then makes extension from the other open zero after restriction. This zero-object statement passes termwise to towers and through exact derived localization, so the complementary restriction of pi_s has zero target. This proof does not use faithfulness of evaluation.",
    "uses": [
     "lem-weil-proetale-weakly-etale-localization",
     "lem-pur-site-restriction-module-adjunction-exact",
@@ -155,43 +155,34 @@
    }
   },
   {
-   "text": "Write $J_j=j_!$, suppressing the canonical compositors of steps 3-4. For vertically stacked squares, the alpha identity is\n$$\\alpha_{Q_2Q_1}=(\\alpha_{Q_1}G_{r_2})\\circ(G_{p_1}\\alpha_{Q_2}).$$\nAfter the beta identifications, the source is extension from the inverse image of the bottom-left open in the top-right scheme. The first component projection retains the inverse image of the middle-left open; the second retains the top-left open, which lies inside it by commutativity. Subdivide each test object by the two clopen decompositions of step 5. On the retained intersection both maps are the same canonical pullback identification; on every other intersection the composite and the outer projection are zero. The sheaf uniqueness axiom proves the identity. This is multiplication of nested identity/zero component projections, using the beta coherences already proved in step 4.",
+   "text": "Let A_Q be betaInv, defined for every commutative open square, without cartesianness. For a clopen s, J_s is isomorphic to R_s, so G_s detects maps into J_s. The open triangle and the previously proved G_s(pi_s) identity therefore imply counit_s followed by pi_s is identity. Reverse open pasting factors A_Q through the clopen pullback lift: J_k of the inverse pullback compositor, inverse open compositors, J_b(counit_s), and canonical cartesian beta inverse. Generic split-cancellation proves A_Q followed by alpha_Q is identity. Precomposition by A_Q detects maps to J_k Y: cancel the surrounding isomorphisms, use full faithfulness of J_b, and use G_s to cancel the remaining counit. For a cartesian square A_Q is invertible, giving alpha_cartesian. The reverse vertical pasting equation follows directly from the open-unit transpose and squareG_pasting_inv. Precompose the asserted vertical alpha equation by A_total and cancel A_Q alpha_Q in the two squares. Both sides are the same pullback compositor.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-weil-sheaf-of-modules-category"
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-cbc-strict-tower-pullback-square-pasting"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7C (lemma-shriek-proper-and-open-compose); explicit projection calculation for the underived pro-etale alpha"
-   }
+   "elementary": true
   },
   {
-   "text": "For horizontally adjacent squares, with top opens $k,l$, bottom opens $i,j$ and proper verticals $r,p,q$, the identity is\n$$\\alpha_{Q_2Q_1}=(J_l\\alpha_{Q_1})\\circ(\\alpha_{Q_2}J_i).$$\nThe first projection retains $l(W)$ inside the source-support open, while the second retains $lk(V)$ inside it. On their common retained component both sides give the same inverse-image identification; on its complement both sides are zero. Use the intersections of the clopen covers as in step 7 and glue. Extension by zero across the surrounding opens does not alter this calculation: on those opens it is the given map, and off them it is the zero map, by step 6. The beta/open compositors coincide by step 4. Hence the identity concerns the specified transformations, including their normalizations.",
+   "text": "Normalize the horizontal alpha equation by the lower open compositor. Precompose it by the total reverse comparison, using the injectivity established in the preceding step. The reverse open-composition formula cancels the two lower open compositors, the two factors A_Q alpha_Q, and the upper open compositor with its inverse. Both sides reduce to identity. This proves alpha_horizontal without a new sheafwise nested-component lemma.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-weil-sheaf-of-modules-category",
-    "lem-pur-site-restriction-module-adjunction-exact"
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-cbc-strict-tower-pullback-square-pasting"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7D (lemma-shriek-proper-and-open-compose-horizontal); nested component projections"
-   }
+   "elementary": true
   },
   {
-   "text": "Base change sends the disjoint-open decomposition $W_S=s(V)\\amalg C$ to $W_{1,S_1}=s_1(V_1)\\amalg C_1$, by the fibre-product universal property. Its exact additive inverse image preserves the split product of module sheaves, so it preserves the identity and zero component projections. Steps 3-4 identify the surrounding open extensions. Writing $\\theta:G_{p_1}G_b\\cong G_aG_p$ for the canonical inverse-image square identification, these observations give\n$$(\\beta_kG_r)\\circ(G_a\\alpha_Q)\\circ(\\theta J_i)=(\\alpha_{Q_1}G_c)\\circ(G_{p_1}\\beta_i).$$\nIndeed, restrict both sides to each of the two pulled-back clopen components: on $s_1(V_1)$ both are the canonical composite pullback identification, and on $C_1$ both vanish. The pullback compositors identify $G_dG_r$ with $G_{r_1}G_c$; the sheaf uniqueness axiom gives the equation. No coefficient finiteness is used.",
+   "text": "Paste reverse comparisons along each diagonal of a commutative cube. The reverse vertical composition equation expresses the two diagonal pastings in terms of their compositors. Equality transport along d r = r1 c and a p = p1 b identifies the diagonal reverse comparisons. The squareG compositor formula then gives the reverse-comparison cube. Normalize the alpha cube by the inverse lower-open beta, precompose by the upper reverse comparison and use its injectivity. Substitute the reverse cube, cancel A_Q alpha_Q, and cancel the upper-open beta and squareG isomorphisms. Recover the displayed alpha_baseChange equation by multiplying back the lower-open beta. Only the two open faces need cartesianness; all original vertical-face hypotheses remain in the signature.",
    "uses": [
-    "def-pc-fibre-product",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-sheaf-of-modules-category",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "def-cbc-strict-tower-proper-open-arrows",
+    "def-cbc-strict-tower-open-extension",
+    "def-cbc-strict-constant-tower-operations",
+    "lem-cbc-strict-tower-pullback-square-pasting"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7F (lemma-shriek-proper-and-open-base-change), explicit underived clopen cube; proetale.tex Tag 09AE"
-   }
+   "elementary": true
   },
   {
    "text": "All functors occurring in $\\alpha$ and $\\beta$ are exact. Apply their sheaf transformations termwise to towers and then to complexes. Exact-functor factorization and the uniqueness part of localization descend their transformations and every equation of steps 3-4 and 6-9 to the unbounded derived strict-tower categories. Now take the mate of $\\alpha_Q$ for $G_r\\dashv R_r^{\\mathcal T}$ and $G_p\\dashv R_p^{\\mathcal T}$. The mate definition is precisely\n$$(R_p^{\\mathcal T}J_k\\varepsilon_r)\\circ(R_p^{\\mathcal T}\\alpha_QR_r^{\\mathcal T})\\circ(\\eta_pJ_iR_r^{\\mathcal T}).$$\nThis constructs the stated $\\gamma_Q$, naturally on the derived tower category. Its transformation is fixed by this formula on that category. In particular it is not selected by asking for prescribed evaluations.",
@@ -208,93 +199,23 @@
    }
   },
   {
-   "text": "Evaluation commutes with exact $G_u,J_j$ termwise. Choose a K-injective tower representative $I$ of an input. Its evaluation $I_n$ is K-injective by the tower-evaluation theorem, so $\\operatorname{ev}_n(u_*I)=u_*I_n$ computes both $\\operatorname{ev}_nR_u^{\\mathcal T}$ and $Ru_*\\operatorname{ev}_n$, with the canonical resolution comparison. These identifications preserve the adjunction units and counits: on homotopy categories the adjunction is the termwise one, and the canonical derived Hom bijection is computed by that adjunction into the K-injective representative. Evaluating that chain-map transpose gives exactly the transpose into $I_n$; the K-injective Hom bijection makes it the same derived transpose. Hence evaluating the mate formula of step 10 gives the single-level mate of the single-level clopen $\\alpha_Q$. No assertion that evaluation is faithful is needed. ",
+   "text": "Use gamma_single_evaluation to compare evaluation of the tower mate with the independently constructed single-level module mate. This is a proved consequence of the exact alpha evaluation result and coefficient/exchange mate pasting. The exact evaluation lemma is a separate source result, without proper direct images or finite origins.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-tower-evaluation-kinjective",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-cbc-strict-constant-tower-operations"
+    "lem-cbc-strict-tower-gamma-single-evaluation",
+    "lem-cbc-strict-tower-alpha-single-evaluation",
+    "def-cbc-single-proper-open-arrows"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 08BJ (lemma-adjoint-preserve-K-injectives), 0DVC (lemma-pre-derived-adjoint-functors); evaluated chain-map transpose calculation"
-   }
+   "elementary": true
   },
   {
-   "text": "For a coefficient map $B\\to\\Lambda$, apply the ring-sheaf-change-adjunction theorem to $\\underline B_T\\to\\underline\\Lambda_T$. It supplies the canonical inverse-image and derived direct-image scalar-restriction comparisons and their adjunct identity. Open extension commutes with scalar restriction as well: its extension presheaf has exactly the same underlying additive sections and the restricted scalar action, and sheafification gives the same underlying sheaf with that action. The component projection also has the same identity/zero formula. Thus the adjunct identity and the mate formula identify the single-level $B$-mate on $\\operatorname{Res}N$ with the restriction of the $\\Lambda$-mate on $N$. This uses no flatness of $B\\to\\Lambda$ and does not assert that scalar restriction preserves K-injectives.",
+   "text": "Use singleGamma_finite_normalization for the finite etale complex of the origin witness. This separate source result concerns the single-level mate, arbitrary scalar restriction, and canonical etale/pro-etale comparisons, with no tower or evaluation index. Compose its source and target isomorphisms with the given originIso. Naturality of singleGamma transports it along that iso. A proved generic categorical comparison_transport lemma combines this naturality square with the preceding evaluation square. Expanding only the isomorphism composites identifies the results exactly with finiteSource and finiteTarget. This proves gamma_evaluation from the two distinct normalization results.",
    "uses": [
-    "lem-weil-pbc-ring-sheaf-change-adjunction",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-pc-sheaf-restrict-scalars",
-    "def-weil-presheaf-modules-sheafification",
-    "def-weil-sheaf-of-modules-category",
-    "def-cbc-finite-constant-coefficient-transport"
+    "lem-cbc-single-proper-open-finite-normalization",
+    "lem-cbc-strict-tower-gamma-single-evaluation",
+    "def-cbc-finite-constant-coefficient-transport",
+    "lem-cbc-proper-open-interchange-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E (lemma-derived-pushforward-composition) and Tag 07A6 (lemma-adjoint); scalar-adjunction compatibility from the cited ring-sheaf-change theorem"
-   }
-  },
-  {
-   "text": "For finite $\\Lambda$, first work on the etale site. The proper-support composition theorem gives a sheaf isomorphism $\\delta:i_!r_*F\\cong p_*k_!F$: both are the same subsheaf of $(ir)_*F=(pk)_*F$, and the comparison keeps the underlying section. It is the underived proper mate of the etale clopen alpha. To verify this equality, transpose under the open adjunction $i_!\\dashv i^{-1}$. Localizing to $S$ identifies the right side with $q_*s_!F=r_*F$: extension and direct image along the clopen $s$ agree by the two-component formula of step 6. The transpose of $\\delta$ is identity on these sections. The transpose of the proper mate also restricts to identity: its alpha retains the $s(V)$ component and the remaining inverse-image/direct-image unit-counit pair cancels by the adjunction triangle identity. Thus the two transposes, and hence the two sheaf maps, agree.\nFor $L\\in D^+(V_{\\mathrm{et}},\\Lambda)$ choose K-injective $J$ representing $L$ and a K-injective resolution $t:k_!J\\to I$. Then $r_*J$ is K-injective, since $r^{-1}$ is exact. The derived proper mate transposes to the chain map\n$$p^{-1}i_!r_*J\\xrightarrow{\\alpha}k_!r^{-1}r_*J\\xrightarrow{k_!\\varepsilon_r}k_!J\\xrightarrow{t}I.$$\nThe canonical derived Hom bijection and the termwise adjunction identify its adjunct with $p_*t\\circ\\delta_J$. This is exactly the resolution normalization stated in [lem-cbc-proper-open-interchange-coherence]. Its refinement normalization therefore agrees as well.",
-   "uses": [
-    "lem-cbc-proper-support-sheaf-composition",
-    "lem-cbc-proper-open-interchange-coherence",
-    "lem-weil-pbc-localize-ringed-site-morphism",
-    "lem-weil-pbc-extension-by-zero-adjunction",
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-pbc-termwise-adjunction-homotopy",
-    "lem-pc-pre-derived-adjoint-functors-general",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-weil-pbc-adjunction-mate",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7B (lemma-shriek-proper-and-open), first paragraph of proof; proper-support sheaf identification and K-injective normalization"
-   }
-  },
-  {
-   "text": "The site-comparison hypotheses hold without a Noetherian assumption. Proper $p,r$ are quasi-compact by their finite-type hypothesis. Their diagonals are closed immersions; on an affine open a closed immersion is the spectrum of a quotient ring, hence its inverse image is affine and quasi-compact. Therefore $p,r$ are quasi-separated. These are precisely the qcqs hypotheses of the counit-normalized direct-image comparison. Exact etale open extension preserves the lower bound, since it preserves kernels, cokernels and zero objects and therefore cohomology; thus both $L$ and $k_!L$ lie in its required bounded-below domain.",
-   "uses": [
-    "def-weil-proper-morphism",
-    "def-weil-finite-type-morphism",
-    "def-weil-closed-immersion",
-    "def-weil-quasi-separated-morphism",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-extension-by-zero-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 099R (section-comparison), domain of etale/pro-etale direct-image comparison; qcqs checked from definitions"
-   }
-  },
-  {
-   "text": "Apply the finite open comparison and the site pullback comparison to the etale alpha of step 13. They identify it with the pro-etale alpha: both keep the same clopen component, are identity there, and are zero on the complementary component. Exactness descends this equality from complexes. Let $A_T=\\nu_T^*$ and let $b_u:A_TRu_{\\mathrm{et},*}\\to Ru_{\\mathrm{proet},*}A_U$ be the canonical comparison. Its specified counit equation is\n$$\\varepsilon^p_u\\circ G_u(b_u)\\circ a_u=A_U(\\varepsilon^e_u).$$\nSubstitute this equation for $u=p,r$ in the proper-mate formula: naturality moves the open comparison past the units, and the two proper-adjunction triangle identities cancel the inserted unit-counit pairs. The remaining middle square is exactly the alpha square just verified. Equivalently this is the coefficient-square mate-pasting theorem, which assumes only those counit equations and that pull-comparison cube. Consequently the mate on $A_VL$ is, under the canonical source/target comparisons, $A_T$ applied to the normalized finite etale arrow of step 13. All the comparisons used are the specified ones: the direct-image comparison has the stated counit normalization, and open comparison is the adjoint comparison. The finite etale arrow and both direct-image site comparisons are isomorphisms by the cited theorems. Hence this pro-etale mate is invertible and has exactly the finite normalization asserted in the item.",
-   "uses": [
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "prop-weil-pbc-comparison-direct-image",
-    "lem-weil-pbc-coefficient-exchange-mates",
-    "lem-weil-pbc-mate-pasting",
-    "lem-cbc-proper-open-interchange-coherence",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AF (lemma-jshriek-comparison), 099R (section-comparison); sites-cohomology.tex Tag 07A7 (remark-base-change), counit-mate comparison calculation"
-   }
+   "elementary": true
   },
   {
    "text": "Let $M$ satisfy the stated witnesses, with a possibly different finite ring and lower bound for every $n$. Steps 11-12 transports evaluation of $\\gamma_{Q,M}$ along the given isomorphism $\\operatorname{ev}_nM\\cong\\operatorname{Res}\\nu_V^*L_n$; steps 13-15 proves that transported arrow is an isomorphism. Evaluation is exact and tower cohomology is levelwise, so for every degree $a$ the morphism $H^a(\\gamma_{Q,M})$ has isomorphic components at every $n$. A morphism of towers with isomorphic components is itself invertible: the component inverses commute with transitions by multiplying the original commutative transition squares by those inverses. Therefore each $H^a(\\gamma_{Q,M})$ is an isomorphism, and the unbounded-derived cohomology criterion makes $\\gamma_{Q,M}$ an isomorphism. This detects invertibility only. It does not infer equality of derived morphisms from equality of their evaluations, and it uses no uniform bound in $n$.",
@@ -366,6 +287,7 @@
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "lem-weil-pbc-localization-universal-property",
   "lem-cbc-proetale-extension-zero-base-change",
+  "lem-cbc-strict-tower-pullback-square-pasting",
   "def-pc-fibre-product",
   "def-weil-open-immersion",
   "def-weil-proper-morphism",
@@ -377,37 +299,25 @@
   "def-weil-presheaf-modules-sheafification",
   "def-weil-pbc-proetale-site",
   "def-cbc-strict-tower-proper-open-arrows",
-  "def-weil-pbc-adjunction-mate",
-  "lem-weil-tower-evaluation-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "def-pc-sheaf-restrict-scalars",
-  "def-cbc-finite-constant-coefficient-transport",
-  "lem-cbc-proper-support-sheaf-composition",
-  "lem-cbc-proper-open-interchange-coherence",
-  "lem-weil-pbc-extension-by-zero-adjunction",
-  "prop-weil-pbc-inverse-image-modules-exact",
-  "def-weil-finite-type-morphism",
-  "def-weil-closed-immersion",
-  "def-weil-quasi-separated-morphism",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-extension-by-zero-exact",
-  "lem-cbc-proetale-extension-zero-comparison",
-  "lem-weil-pbc-comparison-pullback",
-  "prop-weil-pbc-comparison-direct-image",
-  "lem-weil-pbc-coefficient-exchange-mates",
-  "lem-weil-pbc-mate-pasting",
-  "lem-weil-pbc-unbounded-derived-iso-cohomology",
-  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-pbc-proper-base-change",
-  "lem-pc-quasi-compact-base-change",
   "lem-weil-pbc-proetale-ringed-open-comparison",
-  "lem-cbc-strict-tower-pullback-square-pasting"
+  "def-weil-pbc-adjunction-mate",
+  "lem-cbc-strict-tower-gamma-single-evaluation",
+  "lem-cbc-strict-tower-alpha-single-evaluation",
+  "def-cbc-single-proper-open-arrows",
+  "lem-cbc-single-proper-open-finite-normalization",
+  "def-cbc-finite-constant-coefficient-transport",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-proper-base-change",
+  "lem-pc-quasi-compact-base-change"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-pf-adic/thm-cbc-complete-proetale.proof.md",
-  "place": "Final sentence on comparison compatibility before derived limits; expanded via the cited Stacks sources, clopen projection and adjunction arguments; Lean refinements: normalized module/tower/derived pullback unit equations, adjoint-triple projection calculation, disjoint-open zero objects, and abstract identity-mate transport; T4: beta_comp reduced by a proved adjunction calculation to general inverse-image square pasting"
+  "place": "Final sentence on comparison compatibility before derived limits; expanded via the cited Stacks sources, clopen projection and adjunction arguments; Lean refinements: normalized module/tower/derived pullback unit equations, adjoint-triple projection calculation, disjoint-open zero objects, and abstract identity-mate transport; T4: beta_comp reduced by a proved adjunction calculation to general inverse-image square pasting; U3: reverse-comparison factorization and cancellation prove all four alpha clauses; evaluation is reduced by proved mate pasting and origin naturality to exact alpha evaluation and single-level finite normalization."
  },
  "mathlib_searches": [
   {
@@ -942,26 +852,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "J7",
+  "reviewer": "COMPILER",
+  "group": "U3",
   "result": "pass",
-  "landing": "20261021T001124-L-1373453",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_baseChange",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_cartesian",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_horizontal",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_vertical",
-   "AlgebraicGeometry.ProEtale.StrictTower.beta_open_comp",
-   "AlgebraicGeometry.ProEtale.StrictTower.gamma_evaluation"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_baseChange",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_cartesian",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_horizontal",
-   "AlgebraicGeometry.ProEtale.StrictTower.alpha_vertical",
-   "AlgebraicGeometry.ProEtale.StrictTower.gamma_evaluation"
-  ]
+  "landing": "20261021T024203-L-3042570",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
