@@ -1,0 +1,84 @@
+{
+ "id": "lem-fd-local-frobenius-coefficient-extension",
+ "kind": "statement",
+ "title": "Coefficient extension of local Frobenius through the specified point comparison",
+ "statement": "Fix the finite-field datum $(p,a,q,k_0,k)$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, an algebraic closure $\\Qlb/\\Ql$, and a separated finite-type $k_0$-scheme $X_0$ [def-weil-proper-morphism, def-weil-finite-type-morphism]. Put $X=X_0\\times_{k_0}k$, $s=\\operatorname{Spec}k$, $g_X=\\operatorname{id}_{X_0}\\times\\operatorname{Spec}(\\operatorname{Frob}_q)$ and $g_s=\\operatorname{Spec}(\\operatorname{Frob}_q)$, with geometric Frobenius as in [def-weil-local-frobenius-trace]. All coefficient categories are the raw rationalized constructible categories [def-weil-rationalization-karoubi], and Weil pairs and their morphisms are those of [def-weil-weil-sheaf-complex]. Use the specified natural pullback-composition and pullback/scalar comparisons, rationalized with their equality-of-morphisms and finite-iteration compatibilities, of [lem-trf-integral-pullback-comparison-realization].\n\nLet $F\\subset L$ be finite subextensions of $\\Qlb/\\Ql$, write $T_U(M)=M\\otimes_F L$ on $U=X,s$, and write $T_{\\mathrm{pt}}(C)=C\\otimes_F L$ on ordinary point complexes. Let $n\\geq1$ and $x\\in X_0(\\mathbf F_{q^n})$ with geometric point $\\bar x:s\\to X$. For $H=F,L$ put $P_H=L\\bar x_H^*$, $Q_H=\\operatorname{Fib}_{s,H}$ [def-weil-finite-coefficient-point], $D_H=Q_HP_H$, $G_{H,r}=L(g_X^r)_H^*$ and $S_{H,r}=L(g_s^r)_H^*$. Let\n$$a_{r,M}:T_XG_{F,r}M\\xrightarrow{\\sim}G_{L,r}T_XM$$\nbe the specified pullback/scalar comparison of [lem-pur-integral-operations-scalar-extension], with normalization as above. Write\n$$b_M:D_F(M)\\otimes_F L\\xrightarrow{\\sim}D_L(T_XM)$$\nfor the inverse rationalized point-sections scalar comparison of [lem-weil-point-sections-scalar-extension] followed by $Q_L$ of the specified pullback/scalar comparison for $\\bar x$. For a Weil pair $(M,\\theta)$ over $F$, put $M^T=T_XM$ and $\\theta_L=T_X(\\theta)a_{1,M}^{-1}$. Use the iterated Weil maps and point transports of [def-weil-local-frobenius-trace] and [lem-weil-frobenius-point-transport-natural]. For $H=F,L$ let\n$$\\rho_{H,N}:S_{H,n}P_HN\\xrightarrow{\\sim}P_HG_{H,n}N,\\quad R_H(N)=Q_H(\\rho_{H,N})I_{P_HN}^{[n]},$$\nwhere $\\rho$ uses $g_X^n\\bar x=\\bar xg_s^n$.\n\nThe maps $b_M$ are natural isomorphisms for all morphisms of $D^b_c(X,F)$: for every $v:M\\to M'$,\n$$b_{M'}(D_F(v)\\otimes_F L)=D_L(T_Xv)b_M.$$\nFor every $F$-Weil pair $(M,\\theta)$ their iterated structure maps satisfy\n$$\\theta_L^{[r]}a_{r,M}=T_X(\\theta^{[r]})\\quad(r\\geq1).$$\nFor every $M\\in D^b_c(X,F)$ the return transports satisfy\n$$D_L(a_{n,M})b_{G_{F,n}M}(R_F(M)\\otimes_F L)=R_L(M^T)b_M.$$\nThe local operators $\\mathcal F_{H,x,n}(N,\\eta)=D_H(\\eta^{[n]})R_H(N)$ therefore satisfy\n$$b_M(\\mathcal F_{F,x,n}(M,\\theta)\\otimes_F L)=\\mathcal F_{L,x,n}(M^T,\\theta_L)b_M.$$\nAll assertions apply to the full constructible Weil-pair domain, with no integral Weil-stable lattice or finite-Tor condition on finite reductions. For $F=L$, $b_M$ is the identity under the specified unit identifications.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Displayed local alternating-trace formula: coefficient-model independence; extracted from prior local-model proof steps 1,5,6 (natural b, iterated scalar comparison, point-transport and return pasting). Agent-extracted comparison lemma, not a verbatim theorem of the blueprint."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-proper-morphism",
+  "def-weil-finite-type-morphism",
+  "def-weil-local-frobenius-trace",
+  "def-weil-rationalization-karoubi",
+  "def-weil-weil-sheaf-complex",
+  "lem-trf-integral-pullback-comparison-realization",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-frobenius-point-transport-natural",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-point-sections-scalar-extension"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "localFrobenius|pointRationalFibreScalar|pullbackScalarComparison|frobenius.*scalar",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic functor/naturality identities and module or Witt-vector Frobenius results do not construct the specified rational constructible local-operator comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension intertwines iterated Frobenius structures and semilinear point return transport on constructible Weil complexes",
+   "results": "8 hits: LinearMap.frobenius, ModuleCat.ExtendScalars.map', LinearMap.iterateFrobenius, IsPurelyInseparable.iterateFrobeniusₛₗ, IsPurelyInseparable.iterateFrobenius, LinearEquiv.extendScalarsOfSurjective_apply, WittVector.frobenius_verschiebung, IntermediateField.extendScalars.congr_simp",
+   "date": "2026-10-21",
+   "verdict": "no match: generic functor/naturality identities and module or Witt-vector Frobenius results do not construct the specified rational constructible local-operator comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp, CategoryTheory.NatIso",
+   "results": "0 hits: ; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-21",
+   "verdict": "no match: generic functor/naturality identities and module or Witt-vector Frobenius results do not construct the specified rational constructible local-operator comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of a finite l-adic coefficient field commutes with the local Frobenius operator of a constructible Weil complex through the specified point fibre scalar comparison",
+   "results": "8 hits: WittVector.StandardOneDimIsocrystal.frobenius_apply, WittVector.exists_frobenius_solution_fractionRing_aux, WittVector.instIsocrystalStandardOneDimIsocrystal, WittVector.Isocrystal.frob, WittVector.Isocrystal.frobenius, WittVector.IsocrystalHom.frob_equivariant, WittVector.exists_frobenius_solution_fractionRing, WittVector.IsocrystalEquiv.frob_equivariant",
+   "date": "2026-10-21",
+   "verdict": "no match: generic functor/naturality identities and module or Witt-vector Frobenius results do not construct the specified rational constructible local-operator comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.map_comp",
+   "results": "6 hits: CategoryTheory.Functor.map_comp, PresheafOfModules.map_comp, PresheafOfModules.map_comp_assoc, PresheafOfModules.mk, PresheafOfModulesOfCommRing.mk, AlgebraicGeometry.PresheafedSpace.map_comp_c_app",
+   "date": "2026-10-21",
+   "verdict": "no match: generic functor/naturality identities and module or Witt-vector Frobenius results do not construct the specified rational constructible local-operator comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-fd-local-weil-model-trace-independence",
+  "date": "2026-10-21",
+  "group": "Q128"
+ },
+ "chapter": "sec-fourier-transform",
+ "unit": "sk-def-trace",
+ "blueprint": {
+  "from": {
+   "node": "def-fd-trace-function",
+   "place": "Displayed local alternating-trace formula: coefficient-model independence; extracted from prior local-model proof steps 1,5,6 (natural b, iterated scalar comparison, point-transport and return pasting).",
+   "via": [
+    "lem-fd-local-weil-model-trace-independence"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
