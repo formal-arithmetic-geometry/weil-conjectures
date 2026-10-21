@@ -20,85 +20,78 @@
  ],
  "proof": [
   {
-   "text": "Let $j:U=T\\setminus g(Z)\\hookrightarrow T$ be the complementary open immersion. The spectrum of the field $k$ is Noetherian, so [lem-weil-pbc-finite-type-over-noetherian] makes $T$ Noetherian. By [lem-weil-pbc-noetherian-open-subscheme-noetherian], $U$ is Noetherian and every open subset of $T$ is quasi-compact. Hence $j$ is quasi-compact: the inverse image of an affine open of $T$ is an open subset of this Noetherian space. By [lem-weil-pbc-immersion-base-change-lft] it is locally of finite type, hence finite type by [def-weil-finite-type-morphism]. Applying [lem-sfb-finite-type-composition-base-change] to $U\\to T\\to\\operatorname{Spec}k$ makes $U$ finite type over $k$. ",
+   "text": "Let U be the open subscheme with underlying set complementary to the image of g, and j its inclusion. Local finite type over Spec k makes T locally Noetherian, and quasi-compactness of its structure map makes it compact. Thus T is Noetherian and j is quasi-compact. The images of g and j are complementary.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-    "lem-weil-pbc-immersion-base-change-lft",
-    "def-weil-finite-type-morphism",
-    "lem-sfb-finite-type-composition-base-change"
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.11, proof for a closed immersion, with R=A and m=0; ordinary finite-coefficient specialization."
+    "place": "Lemma 6.7.11, closed-immersion argument with finite-field coefficients; reuse of its fixed-module formalization in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible."
    }
   },
   {
-   "text": "By [lem-sfb-intrinsic-finite-derived-pullback], for $h=j$ and $h=g$ the module inverse image is exact, commutes with every cohomology sheaf on the ordinary derived categories, and preserves $\\mathcal B_A$ with the same vanishing interval and base-changed finite local models. Both are scheme morphisms and $A$ is a finite field, so all its hypotheses hold.",
+   "text": "For any scheme X and finite ring A, the intrinsic realization equivalence identifies the fixed-module bounded-constructible predicate of etale origin with finite intrinsic cohomological support and constructible intrinsic homology. Convert finite support to vanishing outside a closed integer interval (choose min and max of bounding integers, including the empty-support case). The finite-ring constructible-derived-origin theorem identifies this intrinsic condition with the essential image of bounded constructible etale complexes. Convert the two etale bounded-constructible predicates by the etale sheaf constructibility comparison and the standard derived t-structure. Factor the derived comparison as fixed-coefficient comparison followed by realization and cancel the fully faithful realization. This proves the equivalence in both directions.",
    "uses": [
-    "lem-sfb-intrinsic-finite-derived-pullback"
+    "lem-weil-pbc-finite-ring-constructible-derived-origin",
+    "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+    "def-weil-proetale-inverse-image"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.5.9(5), finite discrete specialization R=A and m=0; Lemma 6.5.8(2) for the open and closed immersions used in Lemma 6.7.11. The exactness and intrinsic stratification argument is isolated from steps 2–3 of lem-sfb-finite-field-closed-support."
+    "place": "Lemma 6.7.11, closed-immersion argument with finite-field coefficients; reuse of its fixed-module formalization in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible."
    }
   },
   {
-   "text": "Fix $K\\in\\mathcal B_A(T)$. Step 2 gives $j^*K\\in\\mathcal B_A(U)$. Apply [lem-sfb-finite-field-proetale-direct-image] to the finite-type map $j$ of step 1: $Rj_*j^*K\\in\\mathcal B_A(T)$. The field and coefficient hypotheses are exactly the ones in this item; that theorem does not assume a cohomological-dimension bound on $k$.",
+   "text": "The adjoint constant-ring map for g identifies sfConstantModuleDirectImage with proEtaleConstantModuleDirectImage: unfold the two definitions and apply proEtaleConstantModulePullback_ring_direct. The canonical sfIntrinsicDerivedDirectImageComparison then identifies realization followed by intrinsic derived direct image with fixed-module derived direct image followed by realization. Compose the intrinsic closed ambient adjunction and the fixed-module closed ambient adjunction with the realization adjunctions. Uniqueness of right adjoints produces an isomorphism from intrinsic exceptional inverse image followed by inverse realization to inverse realization followed by fixed-module exceptional inverse image.",
    "uses": [
-    "lem-sfb-finite-field-proetale-direct-image"
+    "lem-pur-proetale-finite-local-constancy-pullback",
+    "def-weil-proetale-inverse-image",
+    "lem-exc-proetale-closed-support"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.11, proof for a closed immersion, with R=A and m=0; ordinary finite-coefficient specialization."
+    "place": "Lemma 6.7.11, closed-immersion argument with finite-field coefficients; reuse of its fixed-module formalization in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible."
    }
   },
   {
-   "text": "By [lem-exc-proetale-support-triangle], in the ambient ordinary derived category there is a distinguished triangle $C\\to K\\to Rj_*j^*K\\to C[1]$, where $C=g_*Rg^!K$. Its exceptional inverse image is the right adjoint of the same closed direct image as in the statement; uniqueness of right adjoints identifies any choices. By [lem-weil-proetale-dbc-triangulated], $\\mathcal B_A(T)$ is invariant under isomorphisms and shifts and is closed under triangle extensions. Rotate the triangle to $Rj_*j^*K[-1]\\to C\\to K\\to Rj_*j^*K$. Its outer vertices lie in $\\mathcal B_A(T)$ by step 3 and the hypothesis on $K$, so $C\\in\\mathcal B_A(T)$.",
+   "text": "Reuse the already proved fixed-module formalization of this closed-support result, AlgebraicGeometry.ProEtale.boundedConstructible_closedUpperShriek_rightDerivedFunctor_obj in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible. Its proof is the source support-triangle proof: the open direct image of the open pullback is bounded constructible; triangulated closure gives constructibility of the closed-support term; exact closed direct image and the closed counit identify its closed pullback with the exceptional inverse image. Specialize its finite ring to ULift A and its annihilator to ell. The scalar ell vanishes in ULift A by its characteristic, and is nonzero in k since ell is prime and p differs from ell. The target structure morphism supplies exactly its finite-type hypotheses. This is reuse of the existing fixed-module proof of the present mathematical node, followed by the explicit coefficient and adjoint comparisons, not an additional unproved intermediate statement.",
+   "uses": [],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.11, closed-immersion argument with finite-field coefficients; reuse of its fixed-module formalization in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible."
+   }
+  },
+  {
+   "text": "Use the equivalence of bounded-constructible predicates from step 2 on inverse realization of K, apply step 4, and transport back along the isomorphism of exceptional inverse images from step 3 and the realization counits. The intrinsic bounded-constructible property is invariant under isomorphisms by the existing triangulated-subcategory theorem. This proves exactly the stated ordinary intrinsic exceptional inverse-image conclusion. No separatedness, nonemptiness or absolute cohomological-dimension bound is required.",
    "uses": [
-    "lem-exc-proetale-support-triangle",
     "lem-weil-proetale-dbc-triangulated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.11, proof for a closed immersion, with R=A and m=0; ordinary finite-coefficient specialization."
-   }
-  },
-  {
-   "text": "Apply $g^*$ to $C$. Step 2 gives $g^*C\\in\\mathcal B_A(Z)$. The counit $g^*g_*M\\to M$ is an isomorphism for every module sheaf $M$ by [lem-exc-proetale-closed-fully-faithful], and $g_*$ is exact by [lem-exc-proetale-closed-exact], since its complementary open immersion is quasi-compact by step 1. Both functors therefore descend termwise to ordinary derived categories; applying the sheaf counit degree by degree to any representative of $Rg^!K$ yields $g^*g_*Rg^!K\\cong Rg^!K$. Consequently $Rg^!K\\in\\mathcal B_A(Z)$ by the isomorphism invariance in [lem-weil-proetale-dbc-triangulated]. For $Z=∅$ the value is zero; for $Z=T$ the counit gives $K$. No field cohomological-dimension bound is used.",
-   "uses": [
-    "lem-exc-proetale-closed-fully-faithful",
-    "lem-exc-proetale-closed-exact",
-    "lem-weil-proetale-dbc-triangulated"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.7.11, proof for a closed immersion, with R=A and m=0; ordinary finite-coefficient specialization."
+    "place": "Lemma 6.7.11, closed-immersion argument with finite-field coefficients; reuse of its fixed-module formalization in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-finite-type-morphism",
-  "lem-exc-proetale-closed-exact",
-  "lem-exc-proetale-closed-fully-faithful",
-  "lem-exc-proetale-support-triangle",
-  "lem-sfb-finite-field-proetale-direct-image",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-sfb-intrinsic-finite-derived-pullback",
+  "def-weil-proetale-inverse-image",
+  "lem-exc-proetale-closed-support",
+  "lem-pur-proetale-finite-local-constancy-pullback",
+  "lem-weil-pbc-constructible-etale-module-sheaf-comparison",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-immersion-base-change-lft",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "lem-weil-proetale-dbc-triangulated"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.7.11, proof for a closed immersion, with R=A and m=0; ordinary finite-coefficient specialization."
+  "place": "Lemma 6.7.11, closed-immersion argument with finite-field coefficients; reuse of its fixed-module formalization in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible. N2: transport the adopted, already proved fixed-module version via finite-ring derived origin, the section-normalized derived direct-image comparison and uniqueness of right adjoints. All comparison glue is proved in the item module."
  },
  "mathlib_searches": [
   {
@@ -235,20 +228,9 @@
   ]
  },
  "tool_uses": [
-  "lem-exc-proetale-closed-exact",
-  "lem-exc-proetale-closed-fully-faithful",
-  "lem-exc-proetale-pullback-locally-constant",
-  "lem-exc-proetale-support-triangle",
-  "lem-sfb-finite-type-composition-base-change",
-  "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-immersion-base-change-lft",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-site-pullback-abelian-exact",
-  "lem-weil-proetale-dbc-triangulated",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "lem-pur-proetale-module-pullback-composition",
-  "lem-pur-scheme-constructible-preimage"
+  "lem-weil-proetale-dbc-triangulated"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -276,5 +258,15 @@
   "result": "pass",
   "note": "Only the lean field changed; new module Sheaf/Paper/FiniteFieldClosedSupport.lean. Clause by clause: Fact ℓ.Prime; CharP k p with 0<p and p≠ℓ; finite field A of characteristic ℓ; Z and T finite type over k (LocallyOfFiniteType + QuasiCompact, as the dependency record says); g a closed immersion over k; ambient proEtaleDerivedCategory; B_A as finitely many nonzero degrees plus the recorded IsConstructibleProEtaleModuleSheaf in every degree (same encoding as the dbc-triangulated module); Rg^! = (sfIntrinsicClosedUpperShriek g ι((range g)ᶜ) A).rightDerivedFunctor, exactly the right adjoint in sfIntrinsicClosedAmbientAdjunction. Matches Bhatt–Scholze 6.7.11, closed case. Edge cases: Z empty (empty strata allowed), Z=T, T empty, K=0; universes are those the dependencies force. No duplicate: the condensed closedSupport_constructible and the upstream fixed-ModuleCat lemma use other notions. Gates: docstrings with source place and blueprint tag, the six proof steps, sorry only, statement verbatim, lines ≤100 characters, private imports equal to the proof-dependency modules. nt_compile --json: 3.5 s, exit 0, clean."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "N2",
+  "result": "pass",
+  "landing": "20261021T130057-L-2514054",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

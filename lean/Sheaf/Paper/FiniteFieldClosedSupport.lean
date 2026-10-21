@@ -9,18 +9,13 @@ public import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicClosedAmbient
 public import Sheaf.Paper.ProEtaleConstructibleSheaf
 public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
-import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.ClosedImmersion
-import Sheaf.AlgebraicGeometry.ProEtalePullbackLocallyConstant
-import Sheaf.AlgebraicGeometry.ProEtaleClosedSupportTriangle
-import Sheaf.AlgebraicGeometry.ProEtaleModulePullbackComposition
-import Sheaf.CategoryTheory.SitePullbackAbelianExact
+import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
+import Sheaf.AlgebraicGeometry.SfIntrinsicRealizationTransport
+import Sheaf.Paper.ProEtaleFiniteLocalConstancyPullback
 import Sheaf.Paper.ProEtaleBoundedConstructibleTriangulated
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
+import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible
+import WeilConjectures.AlgebraicGeometry.ConstructibleEtaleModuleSheafComparison
+import Mathlib.Data.Int.Interval
 
 /-! # Finite-field closed-support constructibility
 
@@ -39,6 +34,92 @@ open CategoryTheory CategoryTheory.Limits
 
 namespace AlgebraicGeometry.Scheme
 
+private abbrev intrinsicBC (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A] :
+    ObjectProperty (proEtaleDerivedCategory X A) := fun K ↦
+  Set.Finite {q : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor
+    (proEtaleRingModules X (proEtaleConstantRing X A)) q).obj K)} ∧
+  ∀ q : ℤ, IsConstructibleProEtaleModuleSheaf X A
+    ((DerivedCategory.homologyFunctor
+      (proEtaleRingModules X (proEtaleConstantRing X A)) q).obj K)
+
+private theorem finite_homology_support_iff
+    {C : Type*} [Category C] [Abelian C] [HasDerivedCategory C]
+    (K : DerivedCategory C) :
+    Set.Finite {i : ℤ | ¬ IsZero ((DerivedCategory.homologyFunctor C i).obj K)} ↔
+      ∃ a b : ℤ, a ≤ b ∧ ∀ i : ℤ, i < a ∨ b < i →
+        IsZero ((DerivedCategory.homologyFunctor C i).obj K) := by
+  classical
+  constructor
+  · intro h
+    obtain ⟨a, ha⟩ := h.bddBelow
+    obtain ⟨b, hb⟩ := h.bddAbove
+    refine ⟨min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
+    by_contra hn
+    rcases hi with hi | hi
+    · exact (not_lt_of_ge (le_trans (min_le_left _ _) (ha hn))) hi
+    · exact (not_lt_of_ge (le_trans (hb hn) (le_max_right _ _))) hi
+  · rintro ⟨a, b, _, h⟩
+    apply (Set.finite_Icc a b).subset
+    intro i hi
+    exact ⟨le_of_not_gt (fun hia ↦ hi (h i (Or.inl hia))),
+      le_of_not_gt (fun hbi ↦ hi (h i (Or.inr hbi)))⟩
+
+private theorem etaleBC_iff (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (K : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) X) :
+    Etale.DerivedCategory.isBoundedConstructible (ULift.{u + 1, u} A) X K ↔
+      Etale.DerivedCategory.boundedConstructible
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X K := by
+  constructor
+  · rintro ⟨hc, a, b, _, hv⟩
+    refine ⟨⟨⟨a, (DerivedCategory.isGE_iff K a).2 ?_⟩,
+      ⟨b, (DerivedCategory.isLE_iff K b).2 ?_⟩⟩, ?_⟩
+    · exact fun i hi ↦ hv i (Or.inl hi)
+    · exact fun i hi ↦ hv i (Or.inr hi)
+    · exact fun i ↦ (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mp (hc i)
+  · rintro ⟨⟨⟨a, ha⟩, ⟨b, hb⟩⟩, hc⟩
+    refine ⟨fun i ↦ (isConstructibleEtaleModuleSheaf_iff_isConstructibleSheaf _).mpr (hc i),
+      min a b, max a b, min_le_max, fun i hi ↦ ?_⟩
+    rcases hi with hi | hi
+    · exact (DerivedCategory.isGE_iff K a).mp ha i (lt_of_lt_of_le hi (min_le_left _ _))
+    · exact (DerivedCategory.isLE_iff K b).mp hb i (lt_of_le_of_lt (le_max_right _ _) hi)
+
+private theorem realizationBC_iff (X : Scheme.{u}) (A : Type u) [CommRing A] [Finite A]
+    (K : DerivedCategory (Sheaf (ProEt.topology X)
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) :
+    intrinsicBC X A ((sfIntrinsicDerivedEquivalence X A).functor.obj K) ↔
+      ProEtale.DerivedCategory.boundedConstructible
+        (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X K := by
+  let R := (sfIntrinsicModuleEquivalence X A).functor
+  let C := ProEtale.comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X
+  have h := (finiteRing_constructibleDerived_origin X A).2.2.1
+  constructor
+  · rintro ⟨hb, hc⟩
+    obtain ⟨G, ⟨e⟩⟩ := (h _).mpr ⟨hc, (finite_homology_support_iff _).mp hb⟩
+    refine ⟨G.obj, (etaleBC_iff X A G.obj).mp G.property, ⟨?_⟩⟩
+    exact R.mapDerivedCategory.preimageIso
+      ((Functor.mapDerivedCategoryCompIso C R).symm.app G.obj ≪≫ e)
+  · rintro ⟨G, hG, ⟨e⟩⟩
+    have he : (ObjectProperty.ι (Etale.DerivedCategory.isBoundedConstructible
+        (ULift.{u + 1, u} A) X) ⋙
+      ProEtale.finiteCoefficientIntrinsicDerivedComparison X A).essImage
+        ((sfIntrinsicDerivedEquivalence X A).functor.obj K) :=
+      ⟨⟨G, (etaleBC_iff X A G).mpr hG⟩,
+        ⟨(Functor.mapDerivedCategoryCompIso C R).app G ≪≫
+          R.mapDerivedCategory.mapIso e⟩⟩
+    obtain ⟨hc, hb⟩ := (h _).mp he
+    exact ⟨(finite_homology_support_iff _).mpr hb, hc⟩
+
+private noncomputable def constantDirectIso {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A : Type u) [CommRing A] [Finite A] :
+    sfConstantModuleDirectImage f A ≅ proEtaleConstantModuleDirectImage f A := by
+  have := constantComparison_isIso f A
+  unfold sfConstantModuleDirectImage proEtaleRingModuleDirectImage
+  rw [show proEtaleRingDirectImageMap f (proEtaleConstantRing Y A)
+      (proEtaleConstantRing X A) (sfConstantCoefficientIso f A) =
+        proEtaleCoefficientDirectImageMap f A from
+      proEtaleConstantModulePullback_ring_direct f A]
+  exact Iso.refl _
+
 /-- The ambient closed exceptional inverse image preserves bounded constructible
 cohomology for finite-field coefficients prime to the positive characteristic.
 The complementary open is the actual open subscheme with underlying set
@@ -47,58 +128,29 @@ The complementary open is the actual open subscheme with underlying set
 Source: Bhatt--Scholze, Lemma 6.7.11, closed-immersion proof, R = A and m = 0
 (blueprint: lem-sfb-finite-field-closed-support).
 
-Proof (the DAG proof plan, with its dependencies):
-1. Let $j:U=T\setminus g(Z)\hookrightarrow T$ be the complementary open immersion. The spectrum of
-the field $k$ is Noetherian, so [lem-weil-pbc-finite-type-over-noetherian] makes $T$ Noetherian.
-By [lem-weil-pbc-noetherian-open-subscheme-noetherian], $U$ is Noetherian and every open subset of
-$T$ is quasi-compact. Hence $j$ is quasi-compact: the inverse image of an affine open of $T$ is an
-open subset of this Noetherian space. By [lem-weil-pbc-immersion-base-change-lft] it is locally of
-finite type, hence finite type by [def-weil-finite-type-morphism]. Applying
-[lem-sfb-finite-type-composition-base-change] to $U\to T\to\operatorname{Spec}k$ makes $U$ finite
-type over $k$. Thus the support-triangle theorem applies to $(g,j)$, and the finite-field
-direct-image theorem applies to $j$.
-
-2. For $h=j$ or $h=g$, [prop-weil-pbc-proetale-constant-ring-map] identifies $h^{-1}A_T$ with the
-constant ring on its source. In [def-weil-proetale-inverse-image], extension along this
-isomorphism merely identifies scalar actions. The underlying abelian inverse image is exact by
-[lem-weil-pbc-site-pullback-abelian-exact]; kernels and cokernels of module sheaves have their
-induced scalar actions, so $h^*$ is exact as well. Therefore
-[lem-weil-pbc-exact-functor-complex-cohomology] gives $\mathcal H^q(h^*K)\cong h^*\mathcal H^q(K)$
-for every complex $K$ and integer $q$, with $h^*$ applied termwise on the ordinary derived
-category. In particular, pullback preserves the cohomological vanishing interval.
-
-3. The same pullbacks preserve constructible cohomology. For a finite stratification $T=\coprod
-T_a$ as in [def-weil-proetale-constructible-sheaf], put $S_a=S\times_TT_a$ ($S$ the source of
-$h$): its projection $i'_a$ to $S$ is an immersion by [lem-weil-pbc-immersion-base-change-lft],
-and $h\circ i'_a=i_a\circ h_a$. The $S_a$ partition $S$ into finitely many locally closed subsets,
-constructible by [lem-pur-scheme-constructible-preimage]. By
-[lem-pur-proetale-module-pullback-composition], $i_a'^*h^*F\cong h_a^*i_a^*F$, and
-[lem-exc-proetale-pullback-locally-constant] gives this a covering with the same finite $A$-module
-models, hence finite geometric stalks. Finite $A$-modules are finite-dimensional. With step 2,
-$h^*\mathcal B_A(T)\subseteq\mathcal B_A(S)$. Empty strata are discarded.
-
-4. Fix $K\in\mathcal B_A(T)$. Step 3 gives $j^*K\in\mathcal B_A(U)$. Apply
-[lem-sfb-finite-field-proetale-direct-image] to the finite-type map $j$ of step 1:
-$Rj_*j^*K\in\mathcal B_A(T)$. The field and coefficient hypotheses are exactly the ones in this
-item; that theorem does not assume a cohomological-dimension bound on $k$.
-
-5. By [lem-exc-proetale-support-triangle], in the ambient ordinary derived category there is a
-distinguished triangle $C\to K\to Rj_*j^*K\to C[1]$, where $C=g_*Rg^!K$. Its exceptional inverse
-image is the right adjoint of the same closed direct image as in the statement; uniqueness of
-right adjoints identifies any choices. By [lem-weil-proetale-dbc-triangulated], $\mathcal B_A(T)$
-is invariant under isomorphisms and shifts and is closed under triangle extensions. Rotate the
-triangle to $Rj_*j^*K[-1]\to C\to K\to Rj_*j^*K$. Its outer vertices lie in $\mathcal B_A(T)$ by
-step 4 and the hypothesis on $K$, so $C\in\mathcal B_A(T)$.
-
-6. Apply $g^*$ to $C$. Step 3 gives $g^*C\in\mathcal B_A(Z)$. The counit $g^*g_*M\to M$ is an
-isomorphism for every module sheaf $M$ by [lem-exc-proetale-closed-fully-faithful], and $g_*$ is
-exact by [lem-exc-proetale-closed-exact], since its complementary open immersion is quasi-compact
-by step 1. Both functors therefore descend termwise to ordinary derived categories; applying the
-sheaf counit degree by degree to any representative of $Rg^!K$ yields $g^*g_*Rg^!K\cong Rg^!K$.
-Consequently $Rg^!K\in\mathcal B_A(Z)$ by the isomorphism invariance in
-[lem-weil-proetale-dbc-triangulated]. When $Z$ is empty the value is zero, and when $Z=T$ the same
-counit identifies the value with $K$; these include the boundary cases. No step uses finiteness of
-the absolute cohomological dimension of $k$.
+Proof:
+1. The finite-type target is Noetherian, so its actual complementary open immersion `j` is
+quasi-compact. Its image is complementary to that of `g`.
+2. Under `sfIntrinsicDerivedEquivalence`, intrinsic bounded constructibility is equivalent to
+the fixed-module predicate of étale origin. Indeed, finite cohomological support is equivalent
+to vanishing outside an integer interval. The finite-ring derived-origin criterion identifies
+the intrinsic predicate with the essential image of bounded constructible étale complexes.
+The étale constructibility comparison and the standard derived t-structure identify the two
+étale predicates. Cancel the fully faithful intrinsic realization to obtain the equivalence.
+3. Normalize the intrinsic closed direct image by the adjoint constant-ring map. Its derived
+comparison commutes the realization equivalences with fixed-module direct image. Compose
+both closed ambient adjunctions with the realization adjunctions; uniqueness of right adjoints
+then identifies intrinsic `Rg!` with fixed-module `Rg!` under those equivalences.
+4. Apply the already formalized closed-support argument
+`ProEtale.boundedConstructible_closedUpperShriek_rightDerivedFunctor_obj` from
+`WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.LocalizeConstructible`,
+with coefficient ring `ULift A` and annihilator `ℓ`. The scalar `ℓ` is nonzero in `k` because
+`ℓ` is prime and `p ≠ ℓ`, and it vanishes in `ULift A`. This existing proof is exactly the
+support-triangle argument of the source: the open direct-image term is bounded constructible,
+so the closed-support term is too, and closed pullback recovers the exceptional inverse image.
+Finally use steps 2 and 3 and isomorphism invariance to obtain the stated intrinsic conclusion.
+No separatedness or bound on the absolute cohomological dimension of `k` is used. The integer
+interval conversion also covers zero complexes, so empty schemes require no extra assumption.
 -/
 theorem finiteFieldClosedSupport_bounded_constructible
     (ℓ p : ℕ) [Fact ℓ.Prime] (k : Type u) [Field k] [CharP k p]
@@ -127,6 +179,48 @@ theorem finiteFieldClosedSupport_bounded_constructible
             (Scheme.Opens.ι
             (⟨(Set.range g)ᶜ, g.isClosedEmbedding.isClosed_range.isOpen_compl⟩ : T.Opens))
             A).rightDerivedFunctor.obj K)) := by
-  sorry
+  classical
+  let U : T.Opens := ⟨(Set.range g)ᶜ, g.isClosedEmbedding.isClosed_range.isOpen_compl⟩
+  let j := U.ι
+  have : IsLocallyNoetherian T :=
+    LocallyOfFiniteType.isLocallyNoetherian (T ↘ Spec (.of k))
+  have : CompactSpace T := QuasiCompact.compactSpace_of_compactSpace (T ↘ Spec (.of k))
+  have : IsNoetherian T := {}
+  have : QuasiCompact j := inferInstance
+  have hij : IsCompl (Set.range g.base) (Set.range j.base) := by
+    rw [show Set.range j.base = (Set.range g.base)ᶜ from U.range_ι]
+    exact isCompl_compl
+  let EZ := sfIntrinsicDerivedEquivalence Z A
+  let ET := sfIntrinsicDerivedEquivalence T A
+  let P := (sfConstantModuleDirectImage g A).rightDerivedFunctor
+  let H := (sfIntrinsicClosedUpperShriek g j A).rightDerivedFunctor
+  let F := (ProEtale.lowerStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g).rightDerivedFunctor
+  let G := (ProEtale.closedUpperShriek
+    (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) g j).rightDerivedFunctor
+  let a : P ⊣ H := (sfIntrinsicClosedAmbientAdjunction A g j hij).2.some
+  let b : F ⊣ G := ProEtale.derivedLowerStarClosedUpperShriekAdjunction g j hij
+  let e : EZ.functor ⋙ P ≅ F ⋙ ET.functor :=
+    Functor.isoWhiskerLeft EZ.functor (Functor.rightDerivedFunctorNatIso
+      (constantDirectIso g A)) ≪≫ sfIntrinsicDerivedDirectImageComparison g A
+  let r : H ⋙ EZ.inverse ≅ ET.inverse ⋙ G :=
+    (EZ.toAdjunction.comp a).rightAdjointUniq
+      ((b.comp ET.toAdjunction).ofNatIsoLeft e.symm)
+  have htri := proEtale_bounded_constructible_isTriangulated T A
+  have : (intrinsicBC T A).IsClosedUnderIsomorphisms := htri.1
+  have : (intrinsicBC Z A).IsClosedUnderIsomorphisms :=
+    (proEtale_bounded_constructible_isTriangulated Z A).1
+  have hK' : intrinsicBC T A (ET.functor.obj (ET.inverse.obj K)) :=
+    (intrinsicBC T A).prop_of_iso (ET.counitIso.app K).symm _hK
+  have hfixed := (realizationBC_iff T A (ET.inverse.obj K)).mp hK'
+  have hellk : (ℓ : k) ≠ 0 :=
+    CharP.cast_ne_zero_of_ne_of_prime k (Fact.out : ℓ.Prime) _hpℓ
+  have hG : ProEtale.DerivedCategory.boundedConstructible
+      (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) Z (G.obj (ET.inverse.obj K)) :=
+    ProEtale.boundedConstructible_closedUpperShriek_rightDerivedFunctor_obj g j
+      ℓ hellk (CharP.cast_eq_zero (ULift.{u + 1, u} A) ℓ) (T ↘ Spec (.of k)) hij hfixed
+  have hresult := (realizationBC_iff Z A (G.obj (ET.inverse.obj K))).mpr hG
+  exact (intrinsicBC Z A).prop_of_iso
+    ((EZ.counitIso.app (H.obj K)).symm ≪≫ EZ.functor.mapIso (r.app K)).symm hresult
 
 end AlgebraicGeometry.Scheme
+
