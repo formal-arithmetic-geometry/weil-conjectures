@@ -29,9 +29,141 @@
   "def-weil-derived-complete",
   "def-weil-pbc-completed-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The valuation ring $R$ is a PID and a domain, with finite residue field, by [lem-weil-l-adic-extension-integers-dvr]. Thus each ideal is finitely generated, so $R$ is Noetherian. By [lem-weil-valued-dvr-finite-quotients] every $A_n$ is finite. The additive group of $A_1$ is torsion because it is finite. Since $t\\ne0$, multiplication by $t^n$ on $R$ is injective, its image is $(t^n)$, and its cokernel is $A_n$. Hence $0\\to R\\xrightarrow{t^n}R\\to A_n\\to0$ is a finite free resolution. This verifies every coefficient hypothesis of [def-weil-pbc-adic-coefficient-datum], including perfectness, for $(R,(t))$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-prop-nagata-sketch-comp-category/def-weil-finite-field-fiber.md",
+    "place": "Coefficient datum, using the two cited DVR results; the Noetherian and two-term resolution deductions are elementary."
+   }
+  },
+  {
+   "text": "The field $k$ is Noetherian (its only ideals are $0$ and $k$), and $\\operatorname{Spec}k$ is quasi-compact. Applying [lem-weil-pbc-finite-type-over-noetherian] gives that $V,W$ are Noetherian; [lem-weil-pbc-locally-noetherian-quasi-separated] gives quasi-separatedness, so both are qcqs. For each affine open $T\\subset W$, the open subscheme $T\\cap V$ is Noetherian, hence quasi-compact, by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. This is the affine-local definition that $e$ is quasi-compact.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tags 01OY, 01OW and 01OZ."
+   }
+  },
+  {
+   "text": "Use [lem-weil-proetale-weakly-etale-localization] to identify the site of $V$ with the slice over the open. Its constant-coefficient identification takes $a\\in A_n$ to the same constant section. For the quotient $A_{n+1}\\to A_n$, the two possible composites therefore agree on constant sections, hence agree as maps of constant sheaves. The inverse-image functor preserves limits and is exact by [lem-weil-pbc-proetale-immersion-limit-preservation]. Apply it to $B_W=\\lim_n(A_n)_W$ to obtain $e^{-1}B_W=B_V$; the induced comparison is characterized by the equalities of all quotient projections. These are the coefficient identifications claimed. Countable products are exact for both completed ring sheaves by [lem-weil-proetale-countable-products-exact].",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "lem-weil-proetale-countable-products-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Open localization and immersion limit preservation; coefficient identifications by the universal property of the limit. Countable-product exactness is the cited pro-etale product result."
+   }
+  },
+  {
+   "text": "For $T=W$ or $V$, let $\\Lambda_T(H)$ be the Koszul completion on $B_T$ for the global section $t$. The ringed Koszul reflector [lem-weil-pbc-ringed-koszul-completion-reflector] says that $\\Lambda_T(H)$ is locally derived $(t)$-complete and that its unit induces $\\operatorname{Hom}(\\Lambda_T(H),L)\\simeq\\operatorname{Hom}(H,L)$ for every locally complete $L$. The intrinsic product-fibre construction and this strict derived-limit Koszul construction agree, including their units: [lem-weil-strict-roos-comparison] identifies the product-fibre unit $(u_H,0)$ with the strict augmentation unit. By [lem-pur-roos-intrinsic-completeness-equivalence], intrinsic completeness is precisely the local completeness condition in the reflector theorem. Finally [lem-weil-pbc-completed-koszul-quotient-comparison] supplies a natural isomorphism $a_H:\\Lambda_T(H)\\xrightarrow{\\sim}C_T(H)$ satisfying $a_H\\kappa_H=\\eta_H$. Therefore $C_T(H)$ is intrinsically complete. The bijection for $C_T(H)$ is explicitly $f\\mapsto f\\eta_H$: composing first with $a_H$ and then with $\\kappa_H$ gives exactly this map. The same equivalence lemma identifies the Roos predicate, intrinsic completeness and invertibility of this specified $\\eta_H$. This proves all reflector and predicate assertions on both sites.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-strict-roos-comparison",
+    "lem-pur-roos-intrinsic-completeness-equivalence",
+    "lem-weil-pbc-completed-koszul-quotient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tags 099B, lemma-derived-completion, and 0A0E, lemma-derived-completion-koszul; proetale.tex Tag 099M. Completed-ring and actual-unit bridges are the cited nodes."
+   }
+  },
+  {
+   "text": "Choose a flat-term K-flat representative $P\\to H$ by [lem-pc-kflat-resolution]. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], $e^*P$ is flat-term K-flat. On a slice object $T\\to V$, restriction of $P\\otimes_{B_W}(A_n)_W$ is canonically $(e^*P)\\otimes_{B_V}(A_n)_V$: the tensor map sends $x\\otimes a$ to the same tensor with its restricted coefficient, and its inverse is the same balanced tensor formula under the slice identifications. It commutes with $1\\otimes(A_{n+1}\\to A_n)$ and sends $x\\mapsto x\\otimes1$ to $x\\mapsto x\\otimes1$. Thus these maps give a comparison $\\tau_H:e^*Q_W(H)_\\bullet\\xrightarrow{\\sim}Q_V(e^*H)_\\bullet$ of strict tower complexes, including the augmentations. Naturality is already an equality on tensors. The derived pullback theorem and the functorial reduction tower of [def-weil-pbc-adic-coefficient-datum] make the resulting comparison independent of representatives.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0G7E, lemma-pullback-K-flat, and 07A4, lemma-pullback-tensor-product; strict slice tensor calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-cbc-exact-product-functor-strict-limit] to the exact product-preserving functor $e^*$ from Step 3 and its termwise action on strict towers. Define $\\rho_H=R\\lim(\\tau_H)\\circ\\lambda_{Q_W(H)}$. This is a natural isomorphism $e^*C_W(H)\\to C_V(e^*H)$. In normalized Roos coordinates $H_M^q=(\\prod M_n)^q\\oplus(\\prod M_n)^{q-1}$, $\\lambda=\\theta^{-1}\\kappa e^*\\theta$ with $\\kappa$ the canonical product comparison on both summands. In particular, the augmentation clause of the cited lemma and the strict augmentation equality of Step 5 give the equality $\\rho_H\\,e^*\\eta_H=\\eta_{e^*H}$. If $H$ is complete, $e^*\\eta_H$ is invertible and hence so is $\\eta_{e^*H}$; Step 4 proves completeness of $e^*H$. By [def-weil-pbc-completed-pullback], the comparison from ordinary to completed open pullback is induced by applying the tower pullback to the strict quotient augmentation. Step 5 identifies that augmented tower with the quotient tower of $e^*H$, so the comparison becomes exactly $\\eta_{e^*H}$. It is therefore invertible on complete objects.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit",
+    "def-weil-pbc-completed-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5); normalized strict-limit augmentation comparison in the cited exact-product lemma."
+   }
+  },
+  {
+   "text": "Exact extension by zero is [lem-pur-site-restriction-module-adjunction-exact]; it preserves countable products by [lem-cbc-ringed-open-extension-products], since Step 2 proves $e$ quasi-compact. For a flat-term K-flat $P\\to M$ on $V$, [lem-sf-open-semilinear-tensor-model] says that $e_!P$ is flat-term K-flat and gives the simultaneous tensor isomorphisms $r_n:(e_!P)\\otimes_{B_W}(A_n)_W\\to e_!(P\\otimes_{B_V}(A_n)_V)$ with formula $[x]\\otimes a\\mapsto[x\\otimes a|_V]$. Forgetting the finite-ring actions yields an isomorphism $r:Q_W(e_!M)_\\bullet\\to e_!Q_V(M)_\\bullet$ in strict $B_W$-module towers: extension by zero has the same underlying module sections before and after this scalar restriction. Its transitions and augmentations commute by the cited model. The strict-limit lemma now gives the natural isomorphism $\\sigma_M=(R\\lim r)^{-1}\\lambda:e_!C_V(M)\\to C_W(e_!M)$. Its augmentation clause gives $\\sigma_M e_!\\eta_M=\\eta_{e_!M}$. Thus completeness of $M$ makes $\\eta_{e_!M}$ invertible, and Step 4 proves completeness of $e_!M$.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-cbc-ringed-open-extension-products",
+    "lem-sf-open-semilinear-tensor-model",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BN, lemma-open-immersion; normalized strict-tower proof using open product preservation and the simultaneous open tensor model. Agent-written assembly."
+   }
+  },
+  {
+   "text": "The specified exact open adjunction localizes termwise as in [def-weil-exact-derived-adjunction]. By Steps 6 and 7 both functors preserve complete objects, and the complete subcategories are full, so its Hom bijections restrict unchanged to an adjunction between them. The open unit in [lem-sf-open-tensor-normalization] is the identity on sections under the slice identification $e^*e_!M=M$. This remains the unit after restricting the Hom bijections. Explicitly, a map $e_!M\\to e_!N$ corresponds under that bijection to a unique map $M\\to e^*e_!N=N$; naturality of the unit says that the map corresponding to $e_!f$ is $f$. Hence $e_!$ induces a bijection on these Hom sets and is fully faithful on the complete subcategories.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-sf-open-tensor-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BN, lemma-open-immersion; sites-modules.tex lemma-restrict-back; restriction of the specified exact derived adjunction."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-strict-roos-comparison",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-weil-pbc-completed-koszul-quotient-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "def-weil-pbc-completed-pullback",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-ringed-open-extension-products",
+  "lem-sf-open-semilinear-tensor-model",
+  "def-weil-exact-derived-adjunction",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 099M, 099N (2),(5), 09BN; completed-ring and strict normalized-unit assembly using existing DAG nodes."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -88,10 +220,52 @@
    "results": "Mathlib/CategoryTheory/Sites/Coherent/ExtensiveColimits.lean, Mathlib/CategoryTheory/Functor/Flat.lean, Mathlib/CategoryTheory/Limits/Preserves/Limits.lean, Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean, Mathlib/CategoryTheory/Limits/Preserves/FunctorCategory.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/FunctorCategory/Basic.lean, Mathlib/CategoryTheory/Limits/Elements.lean",
    "date": "2026-10-21",
    "verdict": "no match: inspected AdicCompletion.map_exact (RingTheory/AdicCompletion/Exactness.lean:184), ofTensorProduct_naturality (AsTensorProduct.lean:74), Scheme.Modules.restrictFunctorIsoPullback (AlgebraicGeometry/Modules/Sheaf.lean:453), restrictAdjunction_unit_app_app (:442), and preservesLimitIso_inv_π (CategoryTheory/Limits/Preserves/Limits.lean:63); these are respectively ordinary module completion, Zariski structure-module restriction, and ordinary categorical limits, not this pro-etale strict derived/unit assertion."
+  },
+  {
+   "tool": "grep",
+   "query": "derivedComplete|DerivedComplete|Roos|completionUnit",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the completed-ring strict quotient reflector with its actual open completion unit."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact restriction to an open subscheme commutes with derived completion and its canonical unit",
+   "results": "AlgebraicGeometry.morphismRestrict, AlgebraicGeometry.Scheme.Opens.toScheme, AlgebraicGeometry.Scheme.Hom.resLE, AlgebraicGeometry.Scheme.restrict, AlgebraicGeometry.Scheme.restrictRestrictComm, AlgebraicGeometry.Scheme.Opens.stalkIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.toOpen_toSpecΓ_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the completed-ring strict quotient reflector with its actual open completion unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, FullyFaithful",
+   "results": "loogle: unknown identifier 'FullyFaithful'",
+   "date": "2026-10-21",
+   "verdict": "unavailable: Loogle rejected an unqualified identifier; the valid AdicCompletion/Sheaf query was then run."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived completion of pro etale sheaves with completed DVR coefficients is left adjoint to the inclusion of complete objects and open extension and restriction preserve completeness",
+   "results": "BDeRhamPlus, BDeRham, Condensed.profiniteSolidification, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, Condensed.profiniteSolid, CondensedMod.LocallyConstant.adjunction, Condensed.profiniteSolidCounit, LightCondensed.freeForgetAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the completed-ring strict quotient reflector with its actual open completion unit."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact functor preserving countable products commutes with the derived inverse limit of strict towers and carries the quotient augmentation to the completion unit",
+   "results": "CategoryTheory.CountableAB4Star.of_countableAB5Star, instPreservesLimitsOfShapeLightProfiniteLightCondSetLightProfiniteToLightCondSetOfCountableCategory, CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat, CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat_and_finite, CategoryTheory.CountableAB4Star.ofShape, LightCondensed.instPreservesEpimorphismsFunctorDiscreteNatLightCondModLim, LightCondensed.instCountableAB4StarLightCondMod, Condensed.hasExactLimitsOfShape",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the completed-ring strict quotient reflector with its actual open completion unit."
+  },
+  {
+   "tool": "loogle",
+   "query": "AdicCompletion, CategoryTheory.Sheaf",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits do not state the completed-ring strict quotient reflector with its actual open completion unit."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-pf-open-factor-coherence",
@@ -108,5 +282,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-open-roos-unit-adjunction",
+  "worker": "stage1",
+  "summary": "Q141 checked the completed-ring statement against the constant-coefficient scope of Stacks 099M/099N and used existing ringed Koszul and actual-unit bridges. Wrote eight proof steps, including coefficient and geometric hypotheses, strict reduction comparisons, both normalized completion-unit equations, and restriction of the actual adjunction. No statement change or new nodes.",
+  "blueprint": "prop-sf-pf-coherence, base-change paragraph: the open factor lies in the essential image and restricts to the identity. These steps justify the complete-category open embedding and the actual restriction unit needed by that paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic The valuation ring of a finite extension of $\\mathbf Q_\\ell$ is a discrete valuation ring with finite residue field used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-valued-dvr-finite-quotients",
+    "why": "Generic Finite quotients of a discrete valuation ring with finite residue field used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic A locally Noetherian scheme is quasi-separated (Stacks 01OY) used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "why": "Generic An open subscheme of a Noetherian scheme is Noetherian used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic The small pro-etale site of a weakly etale X-scheme is the localization of X_proet used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
+    "why": "Generic Inverse images along immersions preserve pro-etale limits used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Generic Countable products of pro-etale modules are exact used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "why": "Generic Ringed koszul reflector used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-strict-roos-comparison",
+    "why": "Generic Natural comparison of strict derived inverse limit and the product cone used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-pur-roos-intrinsic-completeness-equivalence",
+    "why": "Generic Roos and intrinsic completeness for completed local-field coefficients used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-pbc-completed-koszul-quotient-comparison",
+    "why": "Generic Unit-compatible Koszul-to-quotient comparison in the completed coefficient presentation used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-cbc-exact-product-functor-strict-limit",
+    "why": "Generic Canonical strict derived-limit comparison for exact product-preserving module functors used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic Restriction and extension by zero for modules on a localized site used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-cbc-ringed-open-extension-products",
+    "why": "Generic Products of ringed pro-etale open extensions without ambient quasi-compactness used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-sf-open-semilinear-tensor-model",
+    "why": "Generic Simultaneous semilinear open tensor comparison on flat K-flat models used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   },
+   {
+    "node": "lem-sf-open-tensor-normalization",
+    "why": "Generic Open-extension unit normalization for derived tensor and base change used at its stated hypotheses to justify the completed-ring open-factor argument; this unit supplies projection-formula coherence, not this auxiliary interface."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-weil-pbc-proetale-immersion-limit-preservation",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-pbc-ringed-koszul-completion-reflector",
+  "lem-weil-strict-roos-comparison",
+  "lem-pur-roos-intrinsic-completeness-equivalence",
+  "lem-weil-pbc-completed-koszul-quotient-comparison",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-cbc-exact-product-functor-strict-limit",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-ringed-open-extension-products",
+  "lem-sf-open-semilinear-tensor-model",
+  "lem-sf-open-tensor-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q141-d97dc0e76",
+  "group": "Q141",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q141-d97dc0e76 (reviewer sub-agent of L); spot-checked: I read the item in full: an 8-step split, no new nodes, statement and stmt_deps byte-identical to live. It is still unsplit live and in side-live, it is not in route-pivot-dropped, and it has no repair note. The dependency closure has no cycle, and the parent lem-sf-pf-open-factor-coherence is not in it. Source checks: Stacks proetale 099M (l.4305), 099N (2),(5) (l.4336) and 09BN (l.5117), and the blueprint main-20261015 prop-sf-pf-coherence proof l.23-25 (the j_! factor lies in the essential image and restricts to the identity). The split correctly does not apply the constant-coefficient 099M/099N to completed-ring modules. Step checks: S1 DVR/finite-quotient nodes plus elementary steps (PID ⇒ Noetherian; t≠0 ⇒ free resolution) give every adic-datum hypothesis. S2: finite type over k ⇒ Noetherian and quasi-separated, and e is quasi-compact via open subschemes of a Noetherian scheme. S3: weakly-étale localization (2) plus immersion limit preservation give e⁻¹B_W = B_V; this is c_g of the completed-pullback definition. S4: Koszul reflector, strict Roos comparison ((γ,0) ↔ augmentation), Roos/intrinsic equivalence (needs ℓ≠p and the adic datum, both checked) and the Koszul/quotient comparison with units give the reflector for the actual η_H. S5: tensor-pullback with an isomorphic c makes e*P flat-term K-flat, and τ_H respects transitions and augmentations. S6: the strict-limit lemma's augmentation clause gives ρ e*η = η_{e*H}; since e* is exact, the completed-pullback comparison is η_{e*H}. S7: e_! is exact and preserves products (e quasi-compact by S2); the open semilinear tensor model applies since ℓ is invertible over F̄_q, giving σ e_!η = η_{e_!M}. S8: the localized adjunction restricts to the full complete subcategories, and open-tensor-normalization gives unit = identity and full faithfulness. Edge cases checked: V empty, V=W, ramified E, unbounded complexes. Duplicate search: the nearby cbc nodes assume j_!K complete, so none restates this item. I accept the 19 tool_uses as generic black boxes. No changes."
  }
 }
