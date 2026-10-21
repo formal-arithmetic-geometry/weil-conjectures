@@ -12,9 +12,106 @@
  "stmt_deps": [
   "def-nagata-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "We use the category laws of [def-nagata-category] and the definitions of functor and natural transformation given in the statement. Evaluating any parenthesization of a functor composite at an object gives the same nested object, and evaluating at a morphism gives the same nested image. The canonical associator and unitors therefore have identity components; these are natural since the morphism images on both sides agree. Their inverses, composites and functor images still have identity components. Thus the flattening maps $c_E,d_E$ exist, and any sequence of the specified reassociations and identity removals gives the same maps, component by component. In subsequent calculations we suppress these identity components, retaining the indicated source and target functors.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps."
+   }
+  },
+  {
+   "text": "Construct $q_W$ by induction on word length. Set $q_{\\varnothing_s}(x)=1_{R_sx}$. If $W:s\\to t$ is constructed and $e:t\\to v$, set $q_{eW}(x)=G_e(q_W(x))\\circ q_e(F_Wx)$; its type is $R_vF_eF_Wx\\to G_eG_WR_sx$. For $u:x\\to y$, the naturality calculation is\n$$\\begin{aligned}\nG_eG_WR_s(u)\\circ q_{eW}(x)\n&=G_e(q_W(y))\\circ G_eR_tF_W(u)\\circ q_e(F_Wx)\\\\\n&=G_e(q_W(y))\\circ q_e(F_Wy)\\circ R_vF_eF_W(u)\\\\\n&=q_{eW}(y)\\circ R_vF_eF_W(u).\n\\end{aligned}$$\nThe first equality is the inductive naturality square and preservation of composition by $G_e$; the second is naturality of the supplied $q_e$ at $F_W(u)$. The empty case is the identity square. This constructs natural transformations on all of $\\mathcal D_s$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps."
+   }
+  },
+  {
+   "text": "For the singleton $e\\varnothing_s$, the recursion gives $G_e(1_{R_sx})\\circ q_e(x)=q_e(x)$, hence the prescribed edge map. If $q'_W$ is a second family satisfying the empty map and recursion, equality holds on empty words; from $q'_W=q_W$ the recursion gives $q'_{eW}=G_eq'_W\\circ(q_eF_W)=q_{eW}$. Induction proves uniqueness for every finite word; no map is recovered by cancellation through $R_s$ or $L_s$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps."
+   }
+  },
+  {
+   "text": "Induct simultaneously on length to show $F_W(\\mathcal E_s)\\subseteq\\mathcal E_t$ and invertibility of $q_W(x)$ for $x\\in\\mathcal E_s$. The empty word preserves $x$ and has identity comparison. In the step, $F_Wx\\in\\mathcal E_t$, so $q_e(F_Wx)$ is invertible by the given hypothesis, and $F_eF_Wx\\in\\mathcal E_v$. The inverse of $q_{eW}(x)$ is explicitly\n$$q_e(F_Wx)^{-1}\\circ G_e(q_W(x)^{-1});$$\nboth inverse equations follow from functoriality and the two inverse equations for the factors. These component inverses form a natural transformation on the full subcategory: multiplying the naturality equation $B(u)q_x=q_yA(u)$ on the left by $q_y^{-1}$ and on the right by $q_x^{-1}$ gives $q_y^{-1}B(u)=A(u)q_x^{-1}$. Hence the restriction of $q_W$ is a natural isomorphism.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps."
+   }
+  },
+  {
+   "text": "Define $a_W(x)=L_t(q_W(x))\\circ\\eta_t(F_Wx)$ on all objects. It is natural: for $u:x\\to y$, functoriality and naturality of $q_W$ and $\\eta_t$ give\n$$\\begin{aligned}\nL_tG_WR_s(u)\\circ a_W(x)\n&=L_t(q_W(y))\\circ L_tR_tF_W(u)\\circ\\eta_t(F_Wx)\\\\\n&=a_W(y)\\circ F_W(u).\n\\end{aligned}$$\nFor $x\\in\\mathcal E_s$, Step 4 puts $F_Wx\\in\\mathcal E_t$; thus the inverse is $\\eta_t(F_Wx)^{-1}\\circ L_t(q_W(x)^{-1})$. Its naturality follows by multiplying the displayed naturality square by the inverses, as in Step 4. This proves the asserted restricted natural isomorphism. For the empty word, $L_s(1_{R_sx})\\circ\\eta_s(x)=\\eta_s(x)$, giving $a_{1_s}=\\eta_s$.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps."
+   }
+  },
+  {
+   "text": "Fix $W:s\\to t$ and induct on the length of $V:t\\to v$ to prove the concatenation equation at every $x\\in\\mathcal D_s$. When $V=\\varnothing_t$, its right side is $q_W(x)\\circ1_{R_tF_Wx}=q_W(x)$. For the induction step append $e:v\\to w$. Substitution of the induction hypothesis gives\n$$\\begin{aligned}\nq_{(eV)W}(x)\n&=G_e(q_{VW}(x))\\circ q_e(F_VF_Wx)\\\\\n&=G_eG_V(q_W(x))\\circ G_e(q_V(F_Wx))\\circ q_e(F_VF_Wx)\\\\\n&=G_{eV}(q_W(x))\\circ q_{eV}(F_Wx).\n\\end{aligned}$$\nOnly preservation of composition and associativity are used. Step 1 inserts the canonical functor identifications, giving $q_{VW}=(G_Vq_W)\\circ(q_VF_W)$ as a natural-transformation equality. This includes empty $W$, and is proved before using arbitrary binary expressions.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps."
+   }
+  },
+  {
+   "text": "Induct on the binary expression $E$ to prove the first flattening equation. At an edge leaf or an empty-word leaf, it is the defining map and identity comparisons. Suppose $E=(E_2E_1)$, with flattened words $U:s\\to t$ and $V:t\\to v$. Under the identity-component flattenings of Step 1, the two induction hypotheses give $q_{E_1}(x)=q_U(x)$ and $q_{E_2}(y)=q_V(y)$ for every $x,y$ in their source categories. The functors $F_{E_1}$ and $F_U$ have the same object values, and $G_{E_2}$ and $G_V$ have the same action on morphisms. Therefore\n$$q_E(x)=G_{E_2}(q_{E_1}(x))\\circ q_{E_2}(F_{E_1}x)\n=G_V(q_U(x))\\circ q_V(F_Ux)=q_{VU}(x),$$\nwhere the last equality is Step 6. Restoring the flattening components yields $(d_ER_s)\\circ q_W=q_E\\circ R_t(c_E)$, for $W=VU$. Both child expressions are strictly smaller, even when one has no edges; hence identity insertions of arbitrary finite depth are covered. Equality of components is equality of the families defining natural transformations.",
+   "uses": [
+    "def-nagata-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps."
+   }
+  },
+  {
+   "text": "Apply [lem-amb-natural-transformation-whisker-exchange] with its $F=F_W$, $G=F_E$, $H=1_{\\mathcal D_t}$, $K=L_tR_t$, $\\eta=c_E$ and $\\theta=\\eta_t$. It gives\n$$L_tR_t(c_E)\\circ(\\eta_tF_W)=(\\eta_tF_E)\\circ c_E.$$\nThe hypotheses are satisfied on the whole category: $c_E$ is natural by Step 1 and $\\eta_t$ is given natural; neither has to be inverted here. Apply $L_t$ to the first flattening equation of Step 7 and then compose with $\\eta_tF_W$. Functoriality and the displayed exchange law give\n$$\\begin{aligned}\nL_t(d_ER_s)\\circ a_W\n&=L_t(q_E)\\circ L_tR_t(c_E)\\circ(\\eta_tF_W)\\\\\n&=L_t(q_E)\\circ(\\eta_tF_E)\\circ c_E=a_E\\circ c_E.\n\\end{aligned}$$\nThus both equalities hold on all of $\\mathcal D_s$, before any restriction to $\\mathcal E_s$. They prove the claimed independence without assuming faithfulness of either functor.",
+   "uses": [
+    "def-nagata-category",
+    "lem-amb-natural-transformation-whisker-exchange"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+    "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-nagata-category",
+  "lem-amb-natural-transformation-whisker-exchange"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/fix-lem-exchanges.proof.md",
+  "place": "Step 5, compatibility with composition; agent-written componentwise categorical argument for the supplied generator maps."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +154,157 @@
    "results": "2 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean; Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean; directory Mathlib/CategoryTheory/PathCategory",
    "date": "2026-10-21",
    "verdict": "no match: Paths.liftNatIso extends object-component naturality along paths in one fixed category; it does not construct indexed intertwining transformations between functor words, nor reconstruct them through a separate unit and limit functor. ComposableArrows.isoMk likewise concerns diagrams in a fixed category. No exact or one-line specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "liftNatTrans|liftNatIso|associator_hom_app|whiskerLeft_comp_whiskerRight",
+   "results": {
+    "t": "2026-10-21T08:21:38Z",
+    "tool": "grep",
+    "query": "liftNatTrans|liftNatIso|associator_hom_app|whiskerLeft_comp_whiskerRight",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean",
+     "Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean",
+     "Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean",
+     "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+     "Mathlib/CategoryTheory/Localization/LocalizerMorphism.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean",
+     "Mathlib/CategoryTheory/Localization/Adjunction.lean"
+    ],
+    "digest": "e8539c23277fb16e"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatTrans and Paths.liftNatIso extend vertex components to natural transformations between functors into one fixed category; the present edge-indexed intertwining maps have different source and target categories. Functor associators/unitors and whiskering exchange are individual ingredients only, not a one-line specialization proving the recursive word and reconstruction assertions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Coherent comparison natural transformations between words in functors extend generator comparisons and a unit from identity to reconstruction composed with reduction",
+   "results": {
+    "t": "2026-10-21T08:21:38Z",
+    "tool": "leansearch",
+    "query": "Coherent comparison natural transformations between words in functors extend generator comparisons and a unit from identity to reconstruction composed with reduction",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Limits.prodComparisonNatTrans",
+     "CategoryTheory.SingleObj.natTrans",
+     "CategoryTheory.NatTrans.mk",
+     "CategoryTheory.NatTrans",
+     "CategoryTheory.CartesianMonoidalCategory.prodComparisonBifunctorNatTrans",
+     "CategoryTheory.SingleFunctors.hom_ext",
+     "CategoryTheory.Functor.HomObj.ext_iff",
+     "CategoryTheory.SingleObj.natTrans.congr_simp"
+    ],
+    "digest": "26fe878b23e739bb"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatTrans and Paths.liftNatIso extend vertex components to natural transformations between functors into one fixed category; the present edge-indexed intertwining maps have different source and target categories. Functor associators/unitors and whiskering exchange are individual ingredients only, not a one-line specialization proving the recursive word and reconstruction assertions."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatTrans, CategoryTheory.Functor.associator",
+   "results": {
+    "t": "2026-10-21T08:21:38Z",
+    "tool": "loogle",
+    "query": "CategoryTheory.NatTrans, CategoryTheory.Functor.associator",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatTrans and Paths.liftNatIso extend vertex components to natural transformations between functors into one fixed category; the present edge-indexed intertwining maps have different source and target categories. Functor associators/unitors and whiskering exchange are individual ingredients only, not a one-line specialization proving the recursive word and reconstruction assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Given natural transformations intertwining generator functors between indexed categories, recursively extend them to finite paths compatibly with concatenation and all parenthesizations, then compose with a reconstruction unit",
+   "results": {
+    "t": "2026-10-21T08:21:42Z",
+    "tool": "leanfinder",
+    "query": "Given natural transformations intertwining generator functors between indexed categories, recursively extend them to finite paths compatibly with concatenation and all parenthesizations, then compose with a reconstruction unit",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Paths.liftNatTrans",
+     "CategoryTheory.Paths.liftNatTrans_app",
+     "CategoryTheory.Paths.liftNatIso_hom_app",
+     "CategoryTheory.Paths.lift",
+     "CategoryTheory.Paths.liftNatIso",
+     "CategoryTheory.pathComposition",
+     "CategoryTheory.Cat.freeMap",
+     "CategoryTheory.Quiv.pathCompositionNaturality"
+    ],
+    "digest": "e82ce68b44e430f2"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatTrans and Paths.liftNatIso extend vertex components to natural transformations between functors into one fixed category; the present edge-indexed intertwining maps have different source and target categories. Functor associators/unitors and whiskering exchange are individual ingredients only, not a one-line specialization proving the recursive word and reconstruction assertions."
+  },
+  {
+   "tool": "grep",
+   "query": "def associator|def leftUnitor|def rightUnitor|theorem whiskerLeft_comp_whiskerRight",
+   "results": {
+    "t": "2026-10-21T08:22:30Z",
+    "tool": "grep",
+    "query": "def associator|def leftUnitor|def rightUnitor|theorem whiskerLeft_comp_whiskerRight",
+    "sub": "CategoryTheory",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean",
+     "Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean",
+     "Mathlib/CategoryTheory/Localization/Monoidal/Basic.lean",
+     "Mathlib/CategoryTheory/Localization/Trifunctor.lean",
+     "Mathlib/CategoryTheory/Products/Associator.lean",
+     "Mathlib/CategoryTheory/Products/Unitor.lean",
+     "Mathlib/CategoryTheory/Products/Unitor.lean",
+     "Mathlib/CategoryTheory/Products/Unitor.lean"
+    ],
+    "digest": "6d06d072bf4252d6"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatTrans and Paths.liftNatIso extend vertex components to natural transformations between functors into one fixed category; the present edge-indexed intertwining maps have different source and target categories. Functor associators/unitors and whiskering exchange are individual ingredients only, not a one-line specialization proving the recursive word and reconstruction assertions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural transformations between composites of functors defined by recursion on paths satisfy an associative concatenation formula and are independent of reassociation and identity insertions",
+   "results": {
+    "t": "2026-10-21T08:22:31Z",
+    "tool": "leanfinder",
+    "query": "Natural transformations between composites of functors defined by recursion on paths satisfy an associative concatenation formula and are independent of reassociation and identity insertions",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Quiv.pathCompositionNaturality",
+     "CategoryTheory.Paths.liftNatTrans",
+     "CategoryTheory.Quiv.pathComposition_naturality",
+     "CategoryTheory.Prefunctor.mapPath_comp'",
+     "CategoryTheory.Paths.liftNatTrans_app",
+     "CategoryTheory.Paths.liftNatIso",
+     "CategoryTheory.pathComposition_map",
+     "CategoryTheory.Paths.liftNatIso_hom_app"
+    ],
+    "digest": "8274ba0bf04cbce2"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: Paths.liftNatTrans and Paths.liftNatIso extend vertex components to natural transformations between functors into one fixed category; the present edge-indexed intertwining maps have different source and target categories. Functor associators/unitors and whiskering exchange are individual ingredients only, not a one-line specialization proving the recursive word and reconstruction assertions."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-cbc-compact-support-composition-limit",
@@ -77,5 +321,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-cbc-word-reconstruction-coherence",
+  "worker": "stage1",
+  "summary": "Wrote the recursive component construction, its naturality and uniqueness, the full-subcategory closure and explicit inverse formulas, concatenation by word-length induction, binary flattening by expression induction, and reconstruction compatibility by the existing whiskering-exchange Mathlib leaf. No new node or statement change; no faithfulness or adjunction assumed. Preserved the inherited searches and added six logged searches read in this session.",
+  "blueprint": "fix-lem-exchanges Proof Step 5, compatibility with composition: the categorical prerequisite extracted from lem-sf-cbc-compact-support-composition-limit old Steps 1 and 5. Steps 1, 6 and 7 establish all reassociation/identity comparisons, Steps 2-5 construct and invert the prescribed maps, and Step 8 establishes the unit-normalized reconstruction equation."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-f9670a02c",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-f9670a02c (reviewer sub-agent of L); spot-checked: Read the item in full (8 steps, 0 new nodes). Statement, stmt_deps and source are identical to the side-live base. The item is not on the drop list and has no repair note, and live still has it unsplit. Both cited statements were read: def-nagata-category (Category leaf) and lem-amb-natural-transformation-whisker-exchange, checked against whiskerLeft_comp_whiskerRight at Whiskering.lean:203-207 in diagrammatic order. I recomputed every step. Step 2: type of q_eW and the naturality chain, using G_e of the inductive square and naturality of q_e at F_W u. Step 3: one-edge case and uniqueness by length induction. Step 4: closure of F_W(E_s) in E_t and the explicit inverse q_e(F_Wx)^-1 G_e(q_W x^-1). Step 5: a_W naturality, invertibility via eta_t on E_t, and a_1=eta. Step 6: concatenation by induction on |V|. Step 7: expression-tree induction, with empty leaves covered. Step 8: the exchange instance F=F_W, G=F_E, H=1, K=L_tR_t gives L_t(d_E R_s) a_W = a_E c_E. Tested on empty S, no edges, a singleton word, a three-edge word in both bracketings, and identity R, L, eta. The source is fix-lem-exchanges Step 5 in main-20261015 (lines 43-49), an agent-stated prerequisite; proof_origin agent is correct. The parent lem-sf-cbc-compact-support-composition-limit Step 5 uses exactly this statement. The DAG-wide duplicate search (parenthesization, word, flattening, free/path category) found no duplicate. Paths.liftNatTrans/liftNatIso exist at MorphismProperty.lean:66,78 and are not a match. No SGA. FIX (B4): Step 2 contained a raw U+000B control character in place of '\\v', so it rendered 'q_{arnothing_s}'. Corrected to '\\varnothing' in fixes/dag/nodes/sec-smooth-purity/lem-sf-cbc-word-reconstruction-coherence.json; nothing else changed.; 1 file(s) fixed by the reviewer"
  }
 }
