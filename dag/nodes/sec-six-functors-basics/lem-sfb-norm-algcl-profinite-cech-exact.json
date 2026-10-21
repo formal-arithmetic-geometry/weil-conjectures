@@ -2,18 +2,120 @@
  "id": "lem-sfb-norm-algcl-profinite-cech-exact",
  "kind": "statement",
  "title": "Positive profinite Cech exactness for norm-topological algebraic scalars",
- "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ with its extended nonarchimedean norm topology. Work in the compatible profinite universes of [def-weil-size-convention]. A profinite set means a compact Hausdorff totally disconnected space. Let $q:T\\to V$ be a continuous surjection of profinite sets. For $n\\geq0$ put\n$$T_V^{n+1}=\\{(t_0,\\ldots,t_n)\\in T^{n+1}:q(t_0)=\\cdots=q(t_n)\\},$$\nwith its subspace topology, and put $C^n=C(T_V^{n+1},\\Omega)$, the additive group of all continuous maps [def-sfb-continuous-map-condensed-ring]. Define\n$$ (d^nf)(t_0,\\ldots,t_{n+1})=\\sum_{j=0}^{n+1}(-1)^j f(t_0,\\ldots,\\widehat{t_j},\\ldots,t_{n+1}). $$\nFor every $n\\geq1$ and every $f\\in C^n$ satisfying $d^nf=0$, there exists $g\\in C^{n-1}$ with $d^{n-1}g=f$. This is equality in additive groups, without closure of images. The empty surjection is included. The coefficient field is the noncomplete norm field $\\Omega$ itself; neither completion nor restriction to functions valued in one finite subextension is made.",
+ "statement": "Fix a prime $\\ell$ and an algebraic closure $\\Omega/\\mathbf Q_\\ell$ [def-weil-algebraic-closure] with its extended nonarchimedean norm topology, and use the universes of [def-weil-size-convention]. A profinite set means a compact Hausdorff totally disconnected space. For a continuous surjection $q:T\\to V$ of profinite sets and $n\\geq0$, put\n$$T_V^{n+1}=\\{(t_0,\\ldots,t_n)\\in T^{n+1}:q(t_0)=\\cdots=q(t_n)\\},\\qquad C^n(q)=C(T_V^{n+1},\\Omega),$$\nwith the subspace topology and all continuous functions [def-sfb-continuous-map-condensed-ring]. Give these additive groups the differential\n$$(d^nf)(t_0,\\ldots,t_{n+1})=\\sum_{j=0}^{n+1}(-1)^jf(t_0,\\ldots,\\widehat{t_j},\\ldots,t_{n+1}).$$\nThe following is the corrected noncomplete-coefficient statement.\n\n(1) Global positive exactness fails in general: there exist nonempty metrizable profinite $T,V$, a continuous surjection $q:T\\to V$, and $f\\in C^1(q)$ with $d^1f=0$, such that there is no $g\\in C^0(q)$ with $d^0g=f$.\n\n(2) The split-cover and local replacement holds in every positive degree. If $q$ has a continuous section $\\sigma:V\\to T$, then for every $n\\geq1$ and $f\\in C^n(q)$ with $d^nf=0$, the formula\n$$g(t_0,\\ldots,t_{n-1})=f(\\sigma(q(t_0)),t_0,\\ldots,t_{n-1})$$\ndefines a continuous $g$ with $d^{n-1}g=f$. For an arbitrary $q$, let $q':T\\times_VT\\to T$ be the first projection. The pullback of $f$ to the nerve of $q'$ has the continuous primitive\n$$h(s;t_0,\\ldots,t_{n-1})=f(s,t_0,\\ldots,t_{n-1}),$$\nwhere all displayed points have the same $q$-image. Thus this positive exactness is valid after the profinite base change $T\\to V$. The empty surjection is included in (2). All equalities concern the actual $\\Omega$-valued functions, without completion, closure of images, or finite-subextension-valued replacement.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), open direct image: analytic scalar input below the tame-boundary polynomial bar calculation. Agent-formulated noncomplete analytic Cech input. WANTED: a proof for all continuous Omega-valued functions and arbitrary profinite surjections. The complete finite-extension Cech lemma does not establish this assertion."
  },
  "stmt_deps": [
+  "def-weil-algebraic-closure",
   "def-weil-size-convention",
   "def-sfb-continuous-map-condensed-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For clause (1), choose $q:T\\to V$ and $(t_k^-,t_k^+)$ from [lem-sfb-countable-split-profinite-cover]. Thus every nonempty open subset of $T$ contains both points of some double fibre with arbitrarily large index, and the two oriented off-diagonal points of each such fibre are clopen in $R=T\\times_VT$. These are the exact topological properties used below; no continuous section of $q$ is assumed.",
+   "uses": [
+    "lem-sfb-countable-split-profinite-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Counterexample: choose the purely topological cover."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-algcl-countable-closed-finite-cover] with the finite intermediate field $E=\\mathbf Q_\\ell$. It gives increasing closed intermediate fields $F_k\\subseteq\\Omega$, finite over $\\mathbf Q_\\ell$, with $\\Omega=\\bigcup_kF_k$. In particular $F_j\\subseteq F_k$ whenever $j\\leq k$, and for any continuous $g:T\\to\\Omega$ the subsets $g^{-1}(F_j)$ are closed and cover $T$.",
+   "uses": [
+    "lem-sfb-algcl-countable-closed-finite-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stanford-weil2-seminar/L19.pdf",
+    "place": "Proposition 1.1.9, first bullet, p. 3: countability of finite subextensions. The cited node supplies the increasing closed cover, not a finite-stage factorization of a continuous function."
+   }
+  },
+  {
+   "text": "For each $k$, apply [lem-weil-l-adic-extension-integers-dvr] to the finite extension $F_k$ with the restricted norm and choose a uniformizer $\\pi_k$. Its conclusions give $0<|\\pi_k|<1$, units of norm $1$, and $x=u\\pi_k^m$ for $x\\in F_k^\\times$, $m\\in\\mathbf Z$. By algebraic closedness [def-weil-algebraic-closure] choose $b_k\\in\\Omega$ with $b_k^2=\\pi_k$. It is outside $F_k$: otherwise $|b_k|=|\\pi_k|^m$ for an integer $m$, so $|\\pi_k|^{2m}=|\\pi_k|$, forcing $2m=1$. By [def-weil-l-adic-numbers], $|\\ell|=\\ell^{-1}<1$. Choose an integer $M_k\\geq0$ with $|\\ell|^{M_k}|b_k|\\leq\\ell^{-k}$, and put $a_k=\\ell^{M_k}b_k$. Then $|a_k|\\leq\\ell^{-k}$, hence $a_k\\to0$, while $a_k\\notin F_k$ because the nonzero scalar $\\ell^{M_k}$ and its inverse belong to $F_k$.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-algebraic-closure",
+    "def-weil-l-adic-numbers"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Counterexample: explicit small coefficients escaping the increasing finite fields, using the uniformizer decomposition."
+   }
+  },
+  {
+   "text": "Define $f:R\\to\\Omega$ by $f(x,x)=0$, $f(t_k^-,t_k^+)=a_k$ and $f(t_k^+,t_k^-)=-a_k$. The fibre classification in [lem-sfb-countable-split-profinite-cover] exhausts $R$, so this defines an actual function. For each $N$, the function $f_N$ with these values for $k<N$ and zero elsewhere is continuous: its finitely many nonzero loci are clopen singletons. Given $\\epsilon>0$, choose $N$ with $\\ell^{-N}<\\epsilon$. Around any $z\\in R$ choose an open neighbourhood where $f_N$ is constant. On that neighbourhood the ultrametric inequality gives\n$$|f(y)-f(z)|\\leq\\max(|f(y)-f_N(y)|,|f(z)-f_N(z)|)\\leq\\ell^{-N}<\\epsilon.$$\nThis proves continuity into $\\Omega$ itself; no infinite sum is used to define $f$.",
+   "uses": [
+    "lem-sfb-countable-split-profinite-cover"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Counterexample: direct epsilon-neighbourhood proof of continuity, avoiding completion."
+   }
+  },
+  {
+   "text": "Every tuple in $T_V^3$ lies in a fibre of cardinality one or two. On a singleton fibre put $u=0$. On the fibre $\\{t_k^-,t_k^+\\}$ put $u(t_k^-)=0$ and $u(t_k^+)=a_k$. On each individual fibre $f(x,y)=u(y)-u(x)$, so\n$$f(y,z)-f(x,z)+f(x,y)=(u(z)-u(y))-(u(z)-u(x))+(u(y)-u(x))=0.$$\nHence $d^1f=0$. These fibrewise functions $u$ are used only for this algebraic identity; no global continuity of them is claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Counterexample: verify the cocycle equation on every possible fibre triple."
+   }
+  },
+  {
+   "text": "Suppose a continuous $g:T\\to\\Omega$ satisfied $g(y)-g(x)=f(x,y)$. The closed sets $A_j=g^{-1}(F_j)$ cover the nonempty compact Hausdorff space $T$ by [lem-sfb-algcl-countable-closed-finite-cover]. Apply [lem-sfb-baire-closed-cover-interior] to $Y=X=T$ and $I=\\mathbf N$: a compact Hausdorff space is locally compact, since the whole space is a compact neighbourhood of every point. Thus some $A_j$ contains a nonempty open subset $U$ of $T$. By [lem-sfb-countable-split-profinite-cover], choose $k\\geq j$ with $t_k^-,t_k^+\\in U$. Then\n$$a_k=f(t_k^-,t_k^+)=g(t_k^+)-g(t_k^-)\\in F_j\\subseteq F_k,$$\ncontradicting step 3. This proves clause (1), with equality of cochains rather than any statement about closures.",
+   "uses": [
+    "lem-sfb-algcl-countable-closed-finite-cover",
+    "lem-sfb-baire-closed-cover-interior",
+    "lem-sfb-countable-split-profinite-cover"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tag 0CQN (lemma-baire-category-locally-compact), closed-cover consequence; agent application to the arithmetic cover and the split Cantor relation."
+   }
+  },
+  {
+   "text": "For clause (2), suppose $q\\sigma=\\mathrm{id}_V$. The map\n$$(t_0,\\ldots,t_{n-1})\\longmapsto(\\sigma(q(t_0)),t_0,\\ldots,t_{n-1})$$\nis continuous into $T_V^{n+1}$: its coordinates are continuous and the equal-image equations follow from $q\\sigma=\\mathrm{id}_V$. Thus the displayed $g$ is continuous. Apply $d^nf=0$ to $(\\sigma(v),t_0,\\ldots,t_n)$, where $v=q(t_i)$ for every $i$. Its first summand is $f(t_0,\\ldots,t_n)$; the remaining summands give\n$$0=f(t_0,\\ldots,t_n)-\\sum_{j=0}^n(-1)^jf(\\sigma(v),t_0,\\ldots,\\widehat{t_j},\\ldots,t_n)=f-d^{n-1}g.$$\nThe equality uses $\\sigma(q(t_i))=\\sigma(v)$ for every face, including deletion of $t_0$. It works for $n=1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Correct local replacement: explicit extra-coordinate contraction for a split cover."
+   }
+  },
+  {
+   "text": "For any $q$, [lem-sfb-finite-quotient-fiber-product] applied to $T\\to V\\leftarrow T$ makes $T\\times_VT$ profinite. The projection $q':T\\times_VT\\to T$ is continuous and has the continuous diagonal section $s\\mapsto(s,s)$, so is surjective. Its $(n+1)$-fold fibre product over $T$ consists of $(s;t_0,\\ldots,t_n)$ with all $q$-images equal; the tuple maps in both directions are coordinate maps and are continuous for the subspace topologies. Pullback sends $f$ to $(s;t_0,\\ldots,t_n)\\mapsto f(t_0,\\ldots,t_n)$ and commutes with each coordinate deletion, hence preserves the cocycle equation. Step 7 with the diagonal section gives exactly\n$$h(s;t_0,\\ldots,t_{n-1})=f(s,t_0,\\ldots,t_{n-1})$$\nand $d^{n-1}h=q^*f$. If $T=V=\\varnothing$, all these function groups are zero, and the same formulas are the unique zero functions. This completes clause (2).",
+   "uses": [
+    "lem-sfb-finite-quotient-fiber-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/topology.tex",
+    "place": "Tags 08ZY (lemma-profinite) and 0A2P (lemma-describe-limits), the fibre-product input as stated in the cited node; extra-coordinate contraction after base change."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-algebraic-closure",
+  "def-weil-l-adic-numbers",
+  "lem-sfb-algcl-countable-closed-finite-cover",
+  "lem-sfb-baire-closed-cover-interior",
+  "lem-sfb-countable-split-profinite-cover",
+  "lem-sfb-finite-quotient-fiber-product",
+  "lem-weil-l-adic-extension-integers-dvr"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. STATEMENT-DISPUTED: the imported global exactness assertion is false. Agent counterexample via a countably split Cantor cover, an increasing closed finite-field exhaustion, and Baire; the corrected positive assertion is the explicit split-cover/local contraction."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +158,208 @@
    "results": "{\"t\": \"2026-10-21T20:08:34Z\", \"tool\": \"leanfinder\", \"query\": \"For every continuous surjection of profinite sets T to S the positive Cech complex of all continuous functions from its fiber powers to the normed algebraic closure of Qp is exact without completing coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"Profinite.NobelingProof.CC_exact\", \"AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace\", \"Profinite.NobelingProof.CC_comp_zero\", \"Algebra.H1Cotangent.exact_map_δ\", \"LightProfinite.surjective_transitionMap\", \"Condensed.hasExactLimitsOfShape\", \"Algebra.Generators.H1Cotangent.exact_map_δ\"], \"digest\": \"f2734f67460cead1\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern locally constant integer functions, finite approximation, or the sheaf equalizer condition; none proves positive Cech exactness for all continuous functions to noncomplete Omega."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cech complex continuous functions incomplete normed vector spaces profinite surjections exact",
+   "results": {
+    "t": "2026-10-21T21:12:03Z",
+    "tool": "leanfinder",
+    "query": "Cech complex continuous functions incomplete normed vector spaces profinite surjections exact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.CC_exact",
+     "Profinite.NobelingProof.succ_exact",
+     "Profinite.NobelingProof.CC_comp_zero",
+     "Profinite.NobelingProof.iso_map",
+     "LightProfinite.surjective_transitionMap",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.IndexFunctor.surjective_π_app",
+     "Profinite.NobelingProof.spanCone"
+    ],
+    "digest": "6403ae52c70e8ec3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern locally constant Nobeling sequences, continuous group-cohomology definitions, Hilbert 90, or additive characters with completeness hypotheses. None gives this noncomplete Cech counterexample and local replacement; the original universal exactness assertion is false."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ContinuousMap\", \"Exact\"",
+   "results": {
+    "t": "2026-10-21T21:12:21Z",
+    "tool": "loogle",
+    "query": "\"ContinuousMap\", \"Exact\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern locally constant Nobeling sequences, continuous group-cohomology definitions, Hilbert 90, or additive characters with completeness hypotheses. None gives this noncomplete Cech counterexample and local replacement; the original universal exactness assertion is false."
+  },
+  {
+   "tool": "grep",
+   "query": "(cech|Cech|acyclic).*(Normed|ContinuousMap)|(Normed|ContinuousMap).*(cech|Cech|acyclic)",
+   "results": {
+    "t": "2026-10-21T21:12:21Z",
+    "tool": "grep",
+    "query": "(cech|Cech|acyclic).*(Normed|ContinuousMap)|(Normed|ContinuousMap).*(cech|Cech|acyclic)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern locally constant Nobeling sequences, continuous group-cohomology definitions, Hilbert 90, or additive characters with completeness hypotheses. None gives this noncomplete Cech counterexample and local replacement; the original universal exactness assertion is false."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous Cech cocycles on profinite fiber powers with values in incomplete normed vector spaces are coboundaries",
+   "results": {
+    "t": "2026-10-21T21:12:21Z",
+    "tool": "leansearch",
+    "query": "Continuous Cech cocycles on profinite fiber powers with values in incomplete normed vector spaces are coboundaries",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "continuousCohomology",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "Profinite.NobelingProof.CC_exact",
+     "Profinite.asLimit",
+     "Profinite.lim",
+     "Condensed.isSheafProfinite",
+     "Profinite.hasColimits"
+    ],
+    "digest": "0d9554cd161848c0"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern locally constant Nobeling sequences, continuous group-cohomology definitions, Hilbert 90, or additive characters with completeness hypotheses. None gives this noncomplete Cech counterexample and local replacement; the original universal exactness assertion is false."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Continuous functions to arbitrary metrizable topological abelian groups have vanishing positive Cech cohomology on compact zero dimensional spaces",
+   "results": {
+    "t": "2026-10-21T21:14:21Z",
+    "tool": "leanfinder",
+    "query": "Continuous functions to arbitrary metrizable topological abelian groups have vanishing positive Cech cohomology on compact zero dimensional spaces",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.continuousCohomologyZeroIso",
+     "ContinuousCohomology.MultiInd.d_zero",
+     "continuousCohomology",
+     "AlgebraicTopology.isZero_singularHomologyFunctor_of_totallyDisconnectedSpace",
+     "ContinuousCohomology.I_obj_V_topologicalSpace",
+     "ContinuousCohomology.const",
+     "ContinuousCohomology.kerHomogeneousCochainsZeroEquiv",
+     "ContinuousCohomology.MultiInd.complex"
+    ],
+    "digest": "9f74f4f7b7478b23"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern locally constant Nobeling sequences, continuous group-cohomology definitions, Hilbert 90, or additive characters with completeness hypotheses. None gives this noncomplete Cech counterexample and local replacement; the original universal exactness assertion is false."
+  },
+  {
+   "tool": "grep",
+   "query": "(Cech|cech|Čech|exact)",
+   "results": {
+    "t": "2026-10-21T21:14:21Z",
+    "tool": "grep",
+    "query": "(Cech|cech|Čech|exact)",
+    "sub": "Condensed",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/TopComparison.lean",
+     "Mathlib/Condensed/CartesianClosed.lean",
+     "Mathlib/Condensed/Module.lean",
+     "Mathlib/Condensed/EffectiveEpi.lean",
+     "Mathlib/Condensed/Discrete/Colimit.lean",
+     "Mathlib/Condensed/Discrete/Colimit.lean"
+    ],
+    "digest": "0561aed3c2cfdb56"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern locally constant Nobeling sequences, continuous group-cohomology definitions, Hilbert 90, or additive characters with completeness hypotheses. None gives this noncomplete Cech counterexample and local replacement; the original universal exactness assertion is false."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the noncomplete normed algebraic closure of Qp there is a continuous degree one Cech cocycle on a profinite surjection that is not a continuous coboundary by the Baire category theorem",
+   "results": {
+    "t": "2026-10-21T21:17:49Z",
+    "tool": "leanfinder",
+    "query": "For the noncomplete normed algebraic closure of Qp there is a continuous degree one Cech cocycle on a profinite surjection that is not a continuous coboundary by the Baire category theorem",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "cyclotomicCharacter.continuous",
+     "groupCohomology.Hilbert90.aux_ne_zero",
+     "Profinite.NobelingProof.Nobeling_aux",
+     "Profinite.NobelingProof.CC_exact",
+     "PadicInt.continuousAddCharEquiv_of_norm_mul",
+     "PadicInt.continuousAddCharEquiv",
+     "groupCohomology.isMulCoboundary₁_of_isMulCocycle₁_of_aut_to_units",
+     "Profinite.NobelingProof.instNontrivialLocallyConstantIntOfNonempty"
+    ],
+    "digest": "26f2ff23df7dfa64"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern locally constant Nobeling sequences, continuous group-cohomology definitions, Hilbert 90, or additive characters with completeness hypotheses. None gives this noncomplete Cech counterexample and local replacement; the original universal exactness assertion is false."
+  },
+  {
+   "tool": "loogle",
+   "query": "PadicAlgCl, ContinuousMap",
+   "results": {
+    "t": "2026-10-21T21:17:50Z",
+    "tool": "loogle",
+    "query": "PadicAlgCl, ContinuousMap",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern locally constant Nobeling sequences, continuous group-cohomology definitions, Hilbert 90, or additive characters with completeness hypotheses. None gives this noncomplete Cech counterexample and local replacement; the original universal exactness assertion is false."
+  },
+  {
+   "tool": "grep",
+   "query": "(Cech|cech|cocycle|coboundary|Baire)",
+   "results": {
+    "t": "2026-10-21T21:17:50Z",
+    "tool": "grep",
+    "query": "(Cech|cech|cocycle|coboundary|Baire)",
+    "sub": "NumberTheory/Padics",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: hits concern locally constant Nobeling sequences, continuous group-cohomology definitions, Hilbert 90, or additive characters with completeness hypotheses. None gives this noncomplete Cech counterexample and local replacement; the original universal exactness assertion is false."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-norm-algcl-bar-augmentation",
@@ -71,7 +371,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), open direct image: analytic scalar input below the tame-boundary polynomial bar calculation. Positive Cech exactness of the all-continuous noncomplete scalar sheaf, before the derived Hom and totalization steps.",
+   "place": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. Counterexample diagnoses failure of the global analytic input; the valid replacement is exactness after the cover base change.",
    "via": [
     "lem-sfb-norm-algcl-bar-augmentation",
     "lem-sfb-ind-unipotent-procyclic-difference",
@@ -88,5 +388,35 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-norm-algcl-profinite-cech-exact",
+  "worker": "stage1",
+  "group": "NI",
+  "summary": "STATEMENT-DISPUTED: disprove the imported universal exactness assertion by a continuous degree-one cocycle on a countably split profinite cover; repair the statement explicitly to the counterexample and the valid split-cover/local contraction. Reuse the existing countable closed finite-field cover, Baire leaf, DVR theorem, and profinite fibre-product theorem. One new statement-only pure-topology input, with a full construction in the report. No coefficient completion or finite-stage replacement.",
+  "blueprint": "Paragraph (3), open direct image: audit of the agent-formulated all-continuous noncomplete scalar Cech input below the polynomial bar calculation. The blueprint does not itself assert this Cech input. The item is an agent-created auxiliary, not the unit statement. Its created.item chain terminates at the module name Sheaf.SixFunctors.CtfStabilityDirectImages, so blueprint_refs.py ancestor reports None; preserve that inherited provenance and give the exact motivating paragraph here.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "The arithmetic uniformizer decomposition proves that each finite subfield omits an arbitrarily small element of Omega; it is a generic local-field input, not a replacement of a six-functor unit step."
+   },
+   {
+    "node": "lem-sfb-finite-quotient-fiber-product",
+    "why": "Step 8 uses only the stated conclusion that the fibre product T x_V T of profinite sets with the subspace topology is compact Hausdorff totally disconnected; a generic profinite-topology lemma of unit sk-def-sfb-pullback-from-point, used as a black box, not a replacement of a six-functor unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-finite-quotient-fiber-product"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NI-2dfde744e",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-2dfde744e (reviewer sub-agent of L); spot-checked: Read the item, the new node, every cited statement and the old item statement (NC snapshot). The old global claim is false: every positive-degree Cech cocycle in C(T_V^{n+1},Omega) for noncomplete Omega = algebraic closure of Q_l was said to have a continuous primitive. I checked the counterexample independently. The cover is the graph closure over Cantor space with eventually-alternating sequences split in two. Over v not in D the fibres are singletons, because the lexicographic comparisons are locally constant. Over v_k there are exactly two points, since v_k is approached from both sides by eventually constant sequences. The oriented pairs are clopen in R by a kth-bit condition, and tail density holds via B = V minus q(T minus U). The cocycle f with values a_k, |a_k| <= l^-k, is a uniform limit of continuous f_N, and d^1 f = 0 holds through a fibrewise potential. No continuous primitive g exists: Baire on g^-1(F_j) gives a_k in F_j, contained in F_k. a_k is not in F_k: if b_k^2 = pi_k with b_k in F_k, then 2m = 1. Clause (2) contraction signs checked, including the t_0 face, n=1, the base change via the diagonal section of q', and the empty case. The correction is legitimate under brief-stage1 section 1 and E7, is named in the report, and no target or unit statement is touched. The new node is self-contained topology, not a restated clause, with no duplicate found by rg -L over dag/nodes. Batch-5: lem-sfb-algcl-countable-closed-finite-cover reaches lem-trf-irreducible-separable-derivative (irreducible f is separable iff f' != 0). That is general field algebra outside both assumptions, so I accept it. FIX: step 8 cites lem-sfb-finite-quotient-fiber-product, whose unit sk-def-sfb-pullback-from-point is outside the route, without a tool_uses entry. I added one in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-norm-algcl-profinite-cech-exact.json. Maintainer: the parent lem-sfb-norm-algcl-bar-augmentation, step 3, relies on the disproved global exactness and must be reopened. Also rename the item's title.; 1 file(s) fixed by the reviewer"
  }
 }
