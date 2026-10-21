@@ -19941,3 +19941,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:45 L: merged deliver/O3/lem-weil-pbc-perfect-strata-uniform-reductions (reviewer FIX; first push; new nodes: 0); claim not held by O3: not your claim
 - 03:45 L: merged deliver/Q07/det-thm-sfb-proper-base-change-integral (reviewer FIX; after a return; new nodes: 3)
 - 03:45 L: merged deliver/Q68/lem-sf-localizing-hom-test (reviewer PASS; first push; new nodes: 1)
+- 03:45 L: merged deliver/NX/lem-weil-pbc-direct-image-roos-normalization (reviewer FIX; first push; new nodes: 0)
