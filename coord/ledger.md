@@ -21224,3 +21224,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:42 L: merged deliver/Q141/lem-weil-point-finite-free-sections-tensor (reviewer FIX; first push; new nodes: 0)
 - 08:42 L: merged deliver/Q07/lem-sfb-reduction-single-cohomology-normalization (reviewer FIX; first push; new nodes: 0)
 - 08:42 L: merged deliver/NJ/lem-sf-perfect-tensor-roos-completion (reviewer PASS; first push; new nodes: 0)
+- 08:42 L: merged deliver/N0/lem-pur-finite-proper-product-transpose (reviewer PASS; first push; new nodes: 0)

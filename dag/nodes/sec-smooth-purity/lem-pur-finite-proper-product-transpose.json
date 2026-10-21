@@ -18,9 +18,112 @@
   "lem-weil-pbc-proetale-derived-pullback-composition",
   "def-weil-pbc-composite-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the finite coefficient ring and write $P_u=Lu^*$, $R_u=Ru_*$; all tensors below are derived over $A$. The ordinary unbounded operations and adjunctions are those of [def-weil-pbc-proetale-operations]. The constant-ring structure maps compose by [lem-pur-proetale-constant-ring-composition], so composable scheme maps give precisely the composite ringed-topos morphism. Apply [lem-sfb-ringed-derived-monoidal-comparisons] to these ringed topoi: the pullback tensor comparisons are symmetric monoidal and the K-injective direct-image compositor is adjunction-compatible with pullback composition. Its finite-level specialization is the canonical compositor of [lem-weil-derived-direct-image-composition]. Consequently, after the stated comparisons, $\\varepsilon_{bt,K}=\\varepsilon_{t,K}\\circ P_t(\\varepsilon_{b,R_tK})$. This fixes the actual counit, rather than merely choosing some adjunction on isomorphic functors. All later formulas insert these same comparisons.",
+   "uses": [
+    "def-weil-pbc-proetale-operations",
+    "lem-pur-proetale-constant-ring-composition",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+   }
+  },
+  {
+   "text": "Put $Q=P_bF\\otimes J$ and $T=P_rH$. The exchange definition [def-exchange-projection] gives $\\varepsilon_{t,T}\\circ P_t(x)=P_r(\\varepsilon_{a,H})$ after the square pullback comparison. The projection map in that same definition satisfies $\\varepsilon_{t,T\\otimes P_tJ}\\circ P_t(\\pi_{t;T,J})=(\\varepsilon_{t,T}\\otimes1)\\mu_t$. Therefore naturality of $\\mu_t$ [lem-pur-derived-pullback-tensor-iso] and tensor bifunctoriality give\n$$\\widehat v=\\varepsilon_{t,E}\\circ P_t(v)=(\\varepsilon_{t,T}\\circ P_t(x))\\otimes1_{P_tJ}=P_r(\\varepsilon_{a,H})\\otimes1_{P_tJ}.$$\nThis is a calculation with the defining transposes, and uses no invertibility of $x$ or $\\pi_t$.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+   }
+  },
+  {
+   "text": "Transpose $w$ under $P_b\\dashv R_b$. Naturality of the counit moves the postcomposed $R_b(\\sigma_{J,P_bF})$ outside the transpose. The projection definition [def-exchange-projection] then gives, under $\\mu_b$,\n$$\\widehat w=\\sigma_{J,P_bF}\\circ(\\varepsilon_{b,J}\\otimes1_{P_bF})\\circ\\sigma_{P_bF,P_bG}=1_{P_bF}\\otimes\\varepsilon_{b,J}.$$\nIndeed the last equality is naturality of the signed symmetry followed by $\\sigma_{J,P_bF}\\circ\\sigma_{P_bF,J}=1$. Pullback carries the input symmetry to the displayed one by [lem-pur-derived-pullback-tensor-iso]. Both counits and all morphisms being tensored have degree zero; no assertion that the symmetry itself has trivial Koszul signs is used.",
+   "uses": [
+    "def-exchange-projection",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+   }
+  },
+  {
+   "text": "Compute the composite transpose, keeping $Q=P_bF\\otimes J$. By Step 1 and the composite hom bijection [def-weil-pbc-composite-adjunction], the transpose of $\\kappa_{b,t}^{-1}\\circ R_b(v)\\circ w$ is\n$$\\varepsilon_{t,E}\\circ P_t(\\varepsilon_{b,R_tE})\\circ P_tP_b(R_bv)\\circ P_tP_b(w).$$\nNaturality of $\\varepsilon_b$ for $v:Q\\to R_tE$ rewrites the middle pair as $P_t(v)\\circ P_t(\\varepsilon_{b,Q})$. Hence the displayed arrow equals\n$$\\bigl(\\varepsilon_{t,E}\\circ P_t(v)\\bigr)\\circ P_t\\bigl(\\varepsilon_{b,Q}\\circ P_b(w)\\bigr)=\\widehat v\\circ P_t(\\widehat w).$$\nThe cancellation of $\\kappa$ here is justified by the adjunction compatibility of [lem-sfb-ringed-derived-monoidal-comparisons], not just by associativity of direct images.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+   }
+  },
+  {
+   "text": "Insert Steps 2 and 3 into Step 4. Pullback tensor naturality gives $P_t(\\widehat w)=1_{P_tP_bF}\\otimes P_t(\\varepsilon_{b,J})$. Use $P_tP_b=P_c=P_rP_a$ through [lem-weil-pbc-proetale-derived-pullback-composition]; compatibility of these comparisons with tensor is [lem-pur-derived-pullback-tensor-iso]. Thus\n$$\\widehat\\Omega_{a,b}=(P_r\\varepsilon_{a,H}\\otimes1)\\circ(1\\otimes P_t\\varepsilon_{b,J})=P_r\\varepsilon_{a,H}\\otimes P_t\\varepsilon_{b,J}.$$\nThe last equality is the composition law for a bifunctor. This proves all three transpose formulas and the asserted composite hom-bijection formula.",
+   "uses": [
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "lem-pur-derived-pullback-tensor-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+   }
+  },
+  {
+   "text": "For the swap write $s=\\bar s:C\\to C'$, $E'=P_{r'}J\\otimes P_{t'}H$, and $d:P_sE'\\to E$ for the pullback comparisons followed by $\\sigma_{P_tJ,P_rH}$. The isomorphism of sites in [lem-weil-proetale-isomorphism-inverse-image] makes $P_s\\dashv R_s$ an equivalence on the ordinary derived categories (apply its exact inverse functors termwise). Its unit $\\eta_s$ is invertible. With $c's=c$, the specified transport is\n$$S_{a,b}=R_c(d)\\circ\\kappa_{c',s}^{-1}\\circ R_{c'}(\\eta_{s,E'}).$$\nFor any $u:M\\to R_{c'}E'$, its transported transpose, using Step 1, is\n$$d\\circ\\varepsilon_{s,P_sE'}\\circ P_s(\\varepsilon_{c',R_sP_sE'})\\circ P_sP_{c'}(R_{c'}\\eta_{s,E'}\\circ u).$$\nNaturality of $\\varepsilon_{c'}$ moves $\\eta_{s,E'}$ to the left of $\\varepsilon_{c',E'}$; the triangle identity $\\varepsilon_{s,P_sE'}\\circ P_s(\\eta_{s,E'})=1$ cancels it. The result is exactly $d\\circ P_s(\\widehat u)$. Composition and transport use [lem-sfb-ringed-derived-monoidal-comparisons, lem-weil-derived-direct-image-composition], so this calculation concerns the stipulated $S_{a,b}$.",
+   "uses": [
+    "lem-weil-proetale-isomorphism-inverse-image",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-derived-direct-image-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+   }
+  },
+  {
+   "text": "Apply Step 5 with $(a,H)$ and $(b,J)$ interchanged, and then Step 6 to $u=\\Omega_{b,a}$. Precomposing by $\\sigma_{F,G}$ precomposes the transpose by $P_c(\\sigma_{F,G})$. The pullback/tensor and composition comparisons [lem-pur-derived-pullback-tensor-iso, lem-weil-pbc-proetale-derived-pullback-composition] identify the result with\n$$\\sigma_{P_tJ,P_rH}\\circ(P_t\\varepsilon_{b,J}\\otimes P_r\\varepsilon_{a,H})\\circ\\sigma_{P_rP_aF,P_tP_bG}=P_r\\varepsilon_{a,H}\\otimes P_t\\varepsilon_{b,J}.$$\nThis is signed symmetry naturality and its involution identity. It equals $\\widehat\\Omega_{a,b}$ by Step 5. Injectivity of the ordinary adjunction hom bijection [def-weil-pbc-proetale-operations] proves the claimed equality of forward maps. No boundedness, finite Tor, etale-origin or constructibility condition entered any step.",
+   "uses": [
+    "lem-pur-derived-pullback-tensor-iso",
+    "lem-weil-pbc-proetale-derived-pullback-composition",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E48, label remark-compatible-with-diagram; equation-projection-formula-map immediately preceding it; agent-written counit calculation expanding the omitted verification. Composition: Tag 0D6E, label lemma-derived-pushforward-composition."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-exchange-projection",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0E48 and 0D6E; explicit counit expansion of the proper symmetry paragraph of literature/blueprint/main-20261015/blueprint/sec-six-functors/sk-thm-sf-kunneth-relative/lem-sf-kunneth-coherence.proof.md. The blueprint states the reduction but does not supply these calculations."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +159,80 @@
    "results": "Actual returned hits: AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, PresheafOfModules.pullbackComp, SheafOfModules.pullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.pseudofunctor_map_adj. The adjunction comp_homEquiv is only a composite hom-bijection identity. The scheme module conjugate-comparison theorem is underived on structure sheaves, and the exponentiable-morphism results concern slice categories. None identifies this specified derived exchange/projection composite with the tensor of two counits, including its derived compositor normalization.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*[Cc]omp|[Cc]omp.*counit|derived_counit",
+   "results": "25 returned hits: Mathlib/RepresentationTheory/Coinduced.lean, Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/ModelCategory/BifibrantObjectHomotopy.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/AlgebraicTopology/SingularHomology/Basic.lean, Mathlib/CategoryTheory/Localization/FiniteProducts.lean, Mathlib/RepresentationTheory/Rep/Iso.lean, Mathlib/AlgebraicTopology/DoldKan/EquivalencePseudoabelian.lean. Read the adjunction CompositionIso and Derived/Adjunction APIs and the sheaf pullback composition conjugacy. The sheaf comparison is underived; the abstract derived-counit result requires derived comparison data. Neither supplies the specified geometric derived exchange/projection product with its swap identity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.conjugateEquiv",
+   "results": "0 returned hits: . loogle: unknown identifier 'CategoryTheory.Adjunction.conjugateEquiv'. Read the adjunction CompositionIso and Derived/Adjunction APIs and the sheaf pullback composition conjugacy. The sheaf comparison is underived; the abstract derived-counit result requires derived comparison data. Neither supplies the specified geometric derived exchange/projection product with its swap identity.",
+   "date": "2026-10-21",
+   "verdict": "invalid query: unknown identifier; corrected by the subsequent CategoryTheory.conjugateEquiv query"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical composition of unbounded derived direct images is the mate of derived inverse image composition and preserves the composite adjunction counit",
+   "results": "8 returned hits: CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.comp_counit_app, CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc, CategoryTheory.Adjunction.counit, CategoryTheory.Bicategory.Adjunction.compCounit, CategoryTheory.Adjunction.counitAsIsoOfIso, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.CoreUnitCounit.counit. Read the adjunction CompositionIso and Derived/Adjunction APIs and the sheaf pullback composition conjugacy. The sheaf comparison is underived; the abstract derived-counit result requires derived comparison data. Neither supplies the specified geometric derived exchange/projection product with its swap identity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For exact inverse images on constant coefficient proetale module sheaves the canonical unbounded derived pushforward compositor is adjunction conjugate to pullback composition and intertwines composite counits",
+   "results": "8 returned hits: SheafOfModules.pullbackComp, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardPushforwardAdj, PresheafOfModules.pullbackComp, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app. Read the adjunction CompositionIso and Derived/Adjunction APIs and the sheaf pullback composition conjugacy. The sheaf comparison is underived; the abstract derived-counit result requires derived comparison data. Neither supplies the specified geometric derived exchange/projection product with its swap identity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compatibility of the canonical K-injective derived pushforward composition isomorphism with the composite counit for exact sheaf inverse images",
+   "results": "8 returned hits: SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforward_assoc, CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app, SheafOfModules.pushforwardComp, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pushforwardComp_hom_app_val_app, CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility. Read the adjunction CompositionIso and Derived/Adjunction APIs and the sheaf pullback composition conjugacy. The sheaf comparison is underived; the abstract derived-counit result requires derived comparison data. Neither supplies the specified geometric derived exchange/projection product with its swap identity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "externalProduct|projectionFormula|projection_formula",
+   "results": "25 returned hits: Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/DayConvolution.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean, Mathlib/CategoryTheory/Monoidal/ExternalProduct/KanExtension.lean. Read the adjunction CompositionIso and Derived/Adjunction APIs and the sheaf pullback composition conjugacy. The sheaf comparison is underived; the abstract derived-counit result requires derived comparison data. Neither supplies the specified geometric derived exchange/projection product with its swap identity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The canonical derived external product is symmetric because its transpose under pullback pushforward adjunction is the tensor of the two counits",
+   "results": "8 returned hits: CategoryTheory.Adjunction.derivedε, CategoryTheory.MonoidalCategory.externalProduct, CategoryTheory.Limits.pullbackSymmetry, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.MonoidalCategory.externalProductFlip_hom_app_app_app_app, CategoryTheory.Prod.braiding, CategoryTheory.MonoidalCategory.externalProductCompDiagIso, CategoryTheory.MonoidalCategory.externalProductFlip. Read the adjunction CompositionIso and Derived/Adjunction APIs and the sheaf pullback composition conjugacy. The sheaf comparison is underived; the abstract derived-counit result requires derived comparison data. Neither supplies the specified geometric derived exchange/projection product with its swap identity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.conjugateEquiv",
+   "results": "12 returned hits: CategoryTheory.conjugateEquiv_leftUnitor_hom, CategoryTheory.conjugateEquiv_rightUnitor_hom, CategoryTheory.iterated_mateEquiv_conjugateEquiv, CategoryTheory.conjugateEquiv_whiskerLeft, CategoryTheory.conjugateEquiv_whiskerRight, CategoryTheory.conjugateEquiv_associator_hom, CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm, CategoryTheory.Adjunction.conjugateEquiv_leftAdjointCompIso_inv. Read the adjunction CompositionIso and Derived/Adjunction APIs and the sheaf pullback composition conjugacy. The sheaf comparison is underived; the abstract derived-counit result requires derived comparison data. Neither supplies the specified geometric derived exchange/projection product with its swap identity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived relative external product built from the exchange and projection maps has adjoint transpose the tensor product of pulled back counits and commutes with swapping factors",
+   "results": "8 returned hits: CategoryTheory.frobeniusMorphism, CategoryTheory.frobeniusMorphism_mate, CategoryTheory.coev_expComparison, CategoryTheory.expComparison, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.tensorLeftAdjunction, CategoryTheory.MonoidalCategory.externalProductCompDiagIso. Read the adjunction CompositionIso and Derived/Adjunction APIs and the sheaf pullback composition conjugacy. The sheaf comparison is underived; the abstract derived-counit result requires derived comparison data. Neither supplies the specified geometric derived exchange/projection product with its swap identity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv_pullbackComp_inv|derived_counit|comp_counit_app",
+   "results": "15 returned hits: Mathlib/CategoryTheory/Shift/Adjunction.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/AlgebraicGeometry/Modules/Sheaf.lean, Mathlib/CategoryTheory/Adjunction/Basic.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Adjunction/Mates.lean, Mathlib/CategoryTheory/Monoidal/NaturalTransformation.lean. Read the adjunction CompositionIso and Derived/Adjunction APIs and the sheaf pullback composition conjugacy. The sheaf comparison is underived; the abstract derived-counit result requires derived comparison data. Neither supplies the specified geometric derived exchange/projection product with its swap identity.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-forward-product-symmetry",
@@ -79,5 +252,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-finite-proper-product-transpose",
+  "worker": "stage1",
+  "summary": "Expanded the three counit transposes and swap into seven typed calculations on ordinary unbounded finite-coefficient pro-etale categories. Reused the existing general ringed-topos monoidal/adjunction compositor theorem, avoiding a duplicate normalization node. No statement changes or new nodes. Retained all prior searches and provenance.",
+  "blueprint": "Realizes the proper-product symmetry ingredient of prop-pur-affine-space-composition-law Steps 3--4, through the recorded ancestors; expands the proper two-counit paragraph of lem-sf-kunneth-coherence without invoking compact-support or exceptional operations.",
+  "tool_uses": [
+   {
+    "node": "def-exchange-projection",
+    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "def-weil-pbc-composite-adjunction",
+    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-pur-derived-pullback-tensor-iso",
+    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-pur-proetale-constant-ring-composition",
+    "why": "Identifies the actual constant-ring maps for a composite with the composite ringed-topos structure maps."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Canonical ordinary ringed-topos compositor preserves the actual adjunction counit, tensor and diagram isomorphisms; this is a generic coherence tool, not a replacement for the affine-space trace route."
+   },
+   {
+    "node": "lem-weil-derived-direct-image-composition",
+    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
+   },
+   {
+    "node": "lem-weil-proetale-isomorphism-inverse-image",
+    "why": "Generic definition or comparison for ordinary finite-coefficient pullback, tensor and adjunction calculus; sk-prop-an supplies no replacement for this foundational tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-exchange-projection",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-proetale-operations",
+  "lem-pur-derived-pullback-tensor-iso",
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-derived-direct-image-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-weil-proetale-isomorphism-inverse-image"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N0-46f6035c5",
+  "group": "N0",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N0-46f6035c5 (reviewer sub-agent of L); spot-checked: Read the item's statement and all 7 steps, every cited statement in full (def-exchange-projection, lem-sfb-ringed-derived-monoidal-comparisons, lem-weil-derived-direct-image-composition and its proof Step 1, lem-pur-derived-pullback-tensor-iso, lem-weil-pbc-proetale-derived-pullback-composition, def-weil-pbc-proetale-operations, lem-weil-proetale-isomorphism-inverse-image, def-weil-pbc-composite-adjunction, lem-pur-proetale-constant-ring-composition), Stacks 0E48 (remark-compatible-with-diagram plus equation-projection-formula-map; its verification is omitted) and lem-sf-kunneth-coherence.proof.md l.26-33. The delivery is valid: statement and stmt_deps match the base exactly, the base proof was empty, there are 0 new nodes, the item is still unsplit on live and side-live, it is not in the dropped list, there is no repair note, and there is no SGA citation and no cycle. I recomputed each step's mathematics myself. Typing with f=a, g=b, f'=t, g'=r is correct. Step 2: v-hat=Lr*eps_a tensor 1, from the pi-transpose (eps tensor 1)mu and the Ex-transpose Lr*eps_a theta. Step 3: w-hat=1 tensor eps_b, from mu commuting with the signed symmetry, naturality of sigma, and sigma sigma=1. Steps 4-5: the composite transpose is v-hat composed with P_t(w-hat), giving P_r eps_a tensor P_t eps_b. Step 6: S=R_c(d)kappa^{-1}R_{c'}(eta_s) equals the transport along the swap and sigma; the transpose is d P_s(u-hat) by counit naturality and the triangle identity. Step 7: r's=t, t's=r, and symmetry naturality and involution close it. Edge cases checked: zero objects, empty schemes, identities, odd shifts, unbounded tensors at n>1. No duplicate found (lem-trf-exceptional-kunneth-counit and lem-sf-kv-alpha-transpose-coherence state different things). All nine tool_uses are accepted as generic coherence tools. Advisory only: Step 1 identifies the finite compositor of lem-weil-derived-direct-image-composition with the ringed-topos kappa via that node's proof Step 1; this is acceptable because the ringed lemma's normalization determines the comparison for the same K-injective functors. No fixes."
  }
 }
