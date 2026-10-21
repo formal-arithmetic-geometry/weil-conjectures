@@ -1,88 +1,77 @@
 ## What changed
 
-Proved `AlgebraicGeometry.Scheme.pbc_levelwise_truncation_origins` in
-`Sheaf.Paper.LevelwiseAdicTruncations`, with its statement unchanged. Both bounded-below
-etale witnesses are constructed from the actual standard truncations of the retained
-origins. Their alpha isomorphisms are explicit fully faithful preimages of the specified
-fixed-ring truncation comparisons. The alpha equations follow by functoriality and
-cancellation, rather than by choosing arbitrary witnesses.
+Proved AlgebraicGeometry.Scheme.pbc_adic_levelwise_truncations in
+Sheaf.Paper.LevelwiseAdicTruncations. The construction uses the canonical lower
+and upper truncations of the actual strict tower and of its quotient-linear
+levels. Tensor cohomological bounds and uniqueness of truncation triangles give
+the normalization isomorphisms, including equal levels. Taking adjuncts identifies
+the end maps with truncated semilinear transitions. Exact-restriction truncation
+comparisons then prove the strict evaluation equations and every quotient cocycle.
 
-The transition squares follow from the unit law for the canonical tensor/restriction
-mate and the input witnessed tower's compatibility equation. The lower square uses
-the truncation counit universal property; the upper square uses its dual unit property.
-All new helpers are private and proved. No public signature or definition changes.
-The command-scope review return is addressed by
-`coord/changes/levelwise-adic-truncations-command-scope.md`, which records the
-module-local options, opens, variables, and attributes retained by the rebased file.
-The module-local `warn.sorry` option was removed because the hole ledger interpreted
-the option name itself as an unattributed `sorry`; the compiler-wide option remains
-unchanged.
-The node's eighth proof step now records this argument and explicitly cites the existing
-witness-compatibility node. The other proof steps remain the plan for the remaining holes.
+Added only private proof helpers, module-local transparency and instance controls,
+and proof-only imports of Mathlib.CategoryTheory.Triangulated.Adjunction and the
+private APIs of AdicCoefficientDatum and BoundedConstructibleTower. Existing public
+signatures, data definitions and public imports are preserved. Updated proof step 3
+and proof_origin in prop-weil-pbc-levelwise-truncations to describe the implementation.
+The local-command change record is
+coord/changes/K2-levelwise-truncations-private-proof-commands.md; it lists all
+1084 current transitive users and records why none needs adaptation.
 
-Removed unused private proof imports. The resulting module compiles cleanly through
-`lcompile.py` (14.6 seconds in the final validation). The axiom audit of the completed
-clause still includes `sorryAx` through existing library dependencies, including the
-invertibility theorem for the canonical tensor mate. This is a proof from the existing
-stated interface, as required by stage 3, rather than an axiom-complete target proof.
+The current item compiled without warnings against the published build in 42.8
+seconds in this continuation. Earlier clean verification took 51.7 seconds
+(resumed-compile7.log). The uncompleted reduction-tower-law calculations remain
+in scratchpad; they are not delivery modules.
 
 ## Proved and sorry left
 
-Closed 1 of the 7 original holes:
+Closed one of the six original named holes:
+AlgebraicGeometry.Scheme.pbc_adic_levelwise_truncations.
+Added zero holes; this is a proof, not a decomposition.
 
-- `AlgebraicGeometry.Scheme.pbc_levelwise_truncation_origins`.
+Five original holes remain, all attached to
+prop-weil-pbc-levelwise-truncations:
 
-Added 0 holes; split off 0 statements. The 6 remaining holes, all attached to
-`prop-weil-pbc-levelwise-truncations`, are:
+- AlgebraicGeometry.Scheme.pbc_reduction_adic_tower_laws
+- AlgebraicGeometry.Scheme.pbc_levelwise_tor_of_uniformizer_injective
+- AlgebraicGeometry.Scheme.pbc_levelwise_truncations_constructible
+- AlgebraicGeometry.Scheme.pbc_levelwise_truncation_counterexample
+- AlgebraicGeometry.Scheme.pbc_levelwise_truncation_compatible_origins
 
-- `AlgebraicGeometry.Scheme.pbc_adic_levelwise_truncations`.
-- `AlgebraicGeometry.Scheme.pbc_reduction_adic_tower_laws`.
-- `AlgebraicGeometry.Scheme.pbc_levelwise_tor_of_uniformizer_injective`.
-- `AlgebraicGeometry.Scheme.pbc_levelwise_truncations_constructible`.
-- `AlgebraicGeometry.Scheme.pbc_levelwise_truncation_counterexample`.
-- `AlgebraicGeometry.Scheme.pbc_levelwise_truncation_compatible_origins`.
-
-The five previously completed clauses are retained with their proofs unchanged.
+Each retains its original statement, source and natural-language proof. No other
+Lean module is included and no new node is introduced.
 
 ## No longer needed
 
-The completed origin clause requires no additional imports beyond the module's public
-statement interfaces. Removed these unused private proof imports:
+No original public imports removed, no withdrawals, and no DAG dependencies
+pruned. The main theorem follows the existing tensor-bound and unique-truncation-
+triangle route, using Mathlib's t-structure triangle existence and uniqueness APIs
+and its triangulated adjunction API. The proof establishes strict-transition
+compatibility directly by taking adjuncts of the two triangle squares, as already
+allowed by the current node proof.
 
-- `Sheaf.CategoryTheory.RingedSiteModules`.
-- `Sheaf.Algebra.Homology.DerivedChangeOfRingsIndependentCoefficients`.
-- `Mathlib.CategoryTheory.Abelian.FunctorCategory`.
-- `Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations`.
-- `Sheaf.AlgebraicGeometry.ProEtaleComparisonStalk`.
-- `Sheaf.CategoryTheory.SiteCoveringAxioms`.
-- `Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat`.
-- `Sheaf.AlgebraicGeometry.ProEtaleInverseImageStalk`.
-- `Sheaf.Paper.ComparisonPullbackExact`.
-- `Sheaf.Paper.FiniteRingConstructibleSheafOrigin`.
-- `Mathlib.CategoryTheory.ObjectProperty.FullSubcategory`.
-- `WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf`.
-- `Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity`.
-- `Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect`.
-- `WeilConjectures.CategoryTheory.Triangulated.TriangleMorphismExtension` (duplicate import also removed).
-- `WeilConjectures.Mathlib.AlgebraicGeometry.Sites.EtalePoint`.
-- `Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel`.
-- `Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel`.
-- `Sheaf.Algebra.Homology.ScalarExtensionUnitTriangles`.
-- `Sheaf.AlgebraicGeometry.FixedEtaleOriginWitness`.
-- `Sheaf.AlgebraicGeometry.ProEtaleConstantRingOperations`.
-
-No module or DAG node is withdrawn. The removed direct imports include interfaces still
-named in the plan for the six remaining holes; those mathematical dependencies have not
-been pruned from the node. Existing public imports are retained.
+The unverified reduction-tower-law helpers and their private successive-quotient
+normalization import are excluded from the delivery module. Their checkpoint is
+retained in scratchpad for continued work. The dependencies of the five remaining
+holes are retained; zero current importers is not being used to justify pruning.
 
 ## Where the brief, the DAG or earlier work was wrong
 
-No statement correction was necessary. The original node described compatibility with
-strict transitions but did not spell out how normalization compatibility passes to
-semilinear transitions. The canonical mate's unit law supplies this missing argument;
-the eighth step now records it. The landing classifier also requested an explicit
-command-scope change record; that record documents the unchanged local command
-environment and public API. No second reader or subagent was used.
+No mathematical statement defect found. The current reviewed nine-step node proof
+corrects the historical stronger blueprint_update claims. The unit sk-rem-rest has
+no realized statement or proof step bypassed by this argument. No statement,
+definition data, target, upstream declaration, or launcher file was changed.
+
+The previous attempt recorded repeated deliver3.py termination with exit 143,
+without diagnostics or a DELIVERED line. The required first delivery invocation
+of this continuation reproduced exit 143 with no output. A retry uses the supported
+LCOMPILE_NO_LOCAL=1 path. A separate compilation through that same path succeeded
+without warnings in 42.8 seconds. These process terminations are distinct from a
+Lean compile timeout. The preserved packet is the canonical truncation proof;
+unvalidated scratch calculations are not claimed as completed proofs.
+
+Server preflight then reached a concrete diagnostic: the static command-surface
+classifier requires a change record for the added local commands. The record
+above repairs that diagnostic; no public interface change is asserted.
 
 ## Second reading by K2
 
