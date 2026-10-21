@@ -14,8 +14,6 @@ public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 public import Sheaf.Paper.SfDerivedComplete
 import Sheaf.Paper.CompletedConstantSheafReduction
 import Sheaf.Paper.CompletedConstantAlgebraFlatQuotients
-import Sheaf.Paper.IntegralStratifiedPerfectClosureTruncation
-import Sheaf.Paper.IntegralStratifiedPerfectClosureHomology
 import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
 import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
 import Sheaf.Paper.ConstantCompletionEquivalence
@@ -45,6 +43,7 @@ import Sheaf.Paper.DerivedCompleteOnSlices
 import Sheaf.Paper.IntegralUniformCoefficient
 import Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity
 import Sheaf.Paper.PbcUniformCompleteTriangulated
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
 import Sheaf.Paper.ProEtaleConstructibleSheaf
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
 import Sheaf.Paper.WeilCompletedTensorReflector
@@ -409,17 +408,57 @@ theorem integralStratifiedPerfectClosure
       (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) := h.2
   let : ObjectProperty.IsClosedUnderIsomorphisms
       (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) := h.1
-  refine ⟨?_, ?_, ?_, ?_⟩
+  refine ⟨?_, ?_, ?_⟩
   · intro K hK n
     exact ObjectProperty.le_shift
       (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) n K hK
   · intro Δ hΔ h₁ h₂
     exact ObjectProperty.ext_of_isTriangulatedClosed₃
       (PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E)) Δ hΔ h₁ h₂
-  · intro K hK n
-    exact integralStratifiedPerfectClosure_truncation T l E _hdim _hl K hK n
-  · intro K hK q
-    exact integralStratifiedPerfectClosure_homology T l E _hdim _hl K hK q
+  · let Q : ObjectProperty (pbcModules T (pbcAdicCompletion T (pbcIntegralDatum l E))) :=
+      IsIntegralStratifiedFinitelyPresented T (pbcIntegralDatum l E)
+    have : Q.IsClosedUnderIsomorphisms := ⟨by
+      rintro F G e ⟨s, hs⟩
+      refine ⟨s, fun i ↦ ?_⟩
+      obtain ⟨V, hV, hlocal⟩ := hs i
+      refine ⟨V, hV, fun U f hf ↦ ?_⟩
+      obtain ⟨N, hN, ⟨eN⟩⟩ := hlocal U f hf
+      exact ⟨N, hN, ⟨((SheafOfModules.overFunctor _ U).mapIso
+        ((proEtaleModuleInverseImage (s.immersion i)
+          (pbcAdicCompletion T (pbcIntegralDatum l E))).mapIso e)).symm ≪≫ eN⟩⟩⟩
+    have criterion (K : PbcCompletedDerived T (pbcIntegralDatum l E)) :
+        PbcIsBoundedConstructibleComplete T (pbcIntegralDatum l E) K ↔
+          IsIntegralBoundedConstructibleCohomology T (pbcIntegralDatum l E) K := by
+      have hchar := integralStratifiedPerfectCharacterization T l E _hdim _hl K
+      exact hchar.1.trans hchar.2
+    constructor
+    · intro K hK n
+      obtain ⟨⟨a, b, hab, ha, hb⟩, hcoh⟩ := (criterion K).mp hK
+      have : Q.ContainsZero := ⟨_, DerivedCategory.isZero_of_isLE K b (b + 1) (by omega),
+        hcoh (b + 1)⟩
+      have hQ : DerivedCategory.homologyProperty Q K := hcoh
+      constructor
+      · apply (criterion _).mpr
+        exact ⟨⟨a, b, hab, inferInstance, inferInstance⟩,
+          DerivedCategory.homologyProperty_truncLE hQ n⟩
+      · apply (criterion _).mpr
+        exact ⟨⟨a, b, hab, inferInstance, inferInstance⟩,
+          DerivedCategory.homologyProperty_truncGE hQ n⟩
+    · intro K hK q
+      obtain ⟨⟨a, b, _, ha, hb⟩, hcoh⟩ := (criterion K).mp hK
+      have : Q.ContainsZero := ⟨_, DerivedCategory.isZero_of_isLE K b (b + 1) (by omega),
+        hcoh (b + 1)⟩
+      apply (criterion _).mpr
+      refine ⟨⟨0, 0, le_rfl, inferInstance, inferInstance⟩, fun r ↦ ?_⟩
+      change Q _
+      by_cases hr : r = 0
+      · subst r
+        exact Q.prop_of_iso ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).app
+          ((DerivedCategory.homologyFunctor _ q).obj K)).symm (hcoh q)
+      · apply Q.prop_of_isZero
+        rcases lt_or_gt_of_ne hr with hr | hr
+        · exact DerivedCategory.isZero_of_isGE _ 0 r hr
+        · exact DerivedCategory.isZero_of_isLE _ 0 r hr
 
 /-- The quotient coefficient identification induced by the canonical valuation-ring lift.
 The normalization on representatives determines the equivalence uniquely. The source

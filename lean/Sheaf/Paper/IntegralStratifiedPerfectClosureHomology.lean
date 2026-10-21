@@ -2,7 +2,7 @@ module
 
 public import Sheaf.Paper.BoundedConstructibleComplete
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
-import Sheaf.Paper.IntegralStratifiedPerfectClosureTruncation
+import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
 import Sheaf.Paper.PbcUniformCompleteTriangulated
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.TStructure
 
@@ -43,9 +43,9 @@ theorem integralStratifiedPerfectClosure_homology
   let L := (t.truncLE q).obj K
   let M := (t.truncGE q).obj L
   have hL : P L :=
-    (integralStratifiedPerfectClosure_truncation T l E _hdim _hl K hK q).1
+    ((integralStratifiedPerfectClosure T l E _hdim _hl).2.2.1 K hK q).1
   have hM : P M :=
-    (integralStratifiedPerfectClosure_truncation T l E _hdim _hl L hL q).2
+    ((integralStratifiedPerfectClosure T l E _hdim _hl).2.2.1 L hL q).2
   have : M.IsLE q := inferInstanceAs (t.IsLE ((t.truncGE q).obj L) q)
   have : M.IsGE q := inferInstanceAs (t.IsGE ((t.truncGE q).obj L) q)
   obtain ⟨Y, ⟨e⟩⟩ := DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE M q
