@@ -15,7 +15,8 @@
   "def-exchange-projection",
   "def-pur-co-smoothness",
   "thm-sf-comp-composition",
-  "def-weil-pbc-adjunction-conjugate"
+  "def-weil-pbc-adjunction-conjugate",
+  "def-pur-finite-exceptional-composition"
  ],
  "proof": [
   {
@@ -237,5 +238,42 @@
   "group": "Q116",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q116-1c8ee9a28 (reviewer sub-agent of L); spot-checked: First split of the Q81 statement-only node. Live and side-live have it unsplit; statement and stmt_deps are byte-identical to live. There are no new nodes and no fixes. Its 7 steps fully cover the parent's old Steps 6-7 from the Q152 base (theta_{a,A} = unitor, naturality at eta, the E sigma cancellation), with nothing dropped. Step 1: lem-weil-pbc-ringed-projection-mate-exact gives alpha_{R_Y} = 1 for the counit-defined proper factor, which is the map def-exchange-projection uses. lem-sf-open-tensor-normalization gives gamma^{-1} as the adjunct of u_M tensor 1, which at N = A is the adjunct of 1_{j_!M}, so PF^c_{M,A} = 1. Step 2: by the triangle identity the transpose of eps_A composed with F(x) is x, so theta_{a,A} is the canonical map. Step 3: I re-checked the naturality square for q_K. It needs PF^{-1}_{W,K}, which lem-weil-finite-compact-projection-formula gives on D^b_c x D^b_ctf, and W_b is ctf by def-weil-exceptional-inverse-image. Step 4: c is the conjugate of the iso alpha_{b,a} (direction checked), invertible by def-weil-pbc-adjunction-conjugate. Steps 5-6: recomputed G(eta)c sigma = rho(1 tensor P eta) = t and E sigma = lambda(eta_e tensor 1). Step 7: a functor preserves equations and inverses, using only the supplied compatibility data. Edge cases tested: identities, eta rescaled by a unit, e = id, empty schemes, n = 1, non-separated schemes. Stacks labels 0B56, 0GL1 and 0E8I are correct; no SGA is cited. Duplicate search with rg -L found no node stating this item. Accepted tool_uses: lem-sf-open-tensor-normalization and lem-weil-finite-compact-projection-formula are generic and off-route; ringed-projection and comp-composition are on-route. Batch-5 flag on lem-weil-finite-compact-projection-formula accepted: the chain ends at the generic lisse-module/FLC algebra lemma lem-pod-lisse-module-sheaves-as-module-objects; the projection formula is a six-functor foundation that neither assumption states; and the node is already in the base closure through def-pur-co-smoothness, fix-prop-projection-formula and its proof_deps. review_split 'no such node' messages come from the snapshot's symlinked chapter directories; all four nodes exist and were read."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.DualizingUnitComposite",
+  "declaration": "WeilConjectures.PurityFiniteSetting.dualizingComposite_inverse",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.dualizingUnitModel",
+   "WeilConjectures.PurityFiniteSetting.dualizingCompositeConjugate",
+   "WeilConjectures.PurityFiniteSetting.dualizingCompositeSigma",
+   "WeilConjectures.PurityFiniteSetting.dualizingCompositeTrivialization",
+   "WeilConjectures.PurityFiniteSetting.dualizingUnitAssertion",
+   "WeilConjectures.PurityFiniteSetting.dualizingInverseAssertion",
+   "WeilConjectures.PurityFiniteSetting.dualizingRhoUnit",
+   "WeilConjectures.PurityFiniteSetting.dualizingRhoNormalized",
+   "WeilConjectures.PurityFiniteSetting.dualizingSourceAssertion",
+   "WeilConjectures.PurityFiniteSetting.dualizingCompositeModel",
+   "WeilConjectures.PurityFiniteSetting.dualizingFiniteUnitAssertion",
+   "WeilConjectures.PurityFiniteSetting.dualizingFiniteInverseAssertion",
+   "WeilConjectures.PurityFiniteSetting.dualizingFiniteSourceAssertion",
+   "WeilConjectures.PurityFiniteSetting.dualizingTensor_unit",
+   "WeilConjectures.PurityFiniteSetting.dualizingComposite_inverse",
+   "WeilConjectures.PurityFiniteSetting.dualizingComposite_sourceCancellation"
+  ],
+  "file": "lean/Sheaf/Paper/DualizingUnitComposite.lean",
+  "statement": "theorem dualizingComposite_inverse (P : PurityFiniteSetting.{u}) {X Y Z : Scheme.{u}} [X.Over (Spec (.of P.field.k))] [Y.Over (Spec (.of P.field.k))] [Z.Over (Spec (.of P.field.k))] [LocallyOfFiniteType (X ↘ Spec (.of P.field.k))] [QuasiCompact (X ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Y ↘ Spec (.of P.field.k))] [QuasiCompact (Y ↘ Spec (.of P.field.k))] [LocallyOfFiniteType (Z ↘ Spec (.of P.field.k))] [QuasiCompact (Z ↘ Spec (.of P.field.k))] (a : X ⟶ Y) (b : Y ⟶ Z) [a.IsOver (Spec (.of P.field.k))] [b.IsOver (Spec (.of P.field.k))] [IsSeparated a] [LocallyOfFiniteType a] [QuasiCompact a] [IsSeparated b] [LocallyOfFiniteType b] [QuasiCompact b] : dualizingFiniteInverseAssertion P a b",
+  "branch": "newtargets-dag",
+  "by": "Q27",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The three theorem declarations state the three clauses in the canonical etale-origin coordinates already used by def-pur-co-smoothness. Formula definitions supply the actual canonical compositor, sigma, t, rho unit, and restriction equations; the finite-purity wrappers derive compactifications rather than assuming them. All helper declarations belong to this node. No statement correction. Return 16b9a6c9cec6 repaired: the invertible-exponent fact is now provided by the repaired def-pur-co-smoothness module, with no DNC import or theorem statement dependency."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-501cb03c3",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Re-delivery of 16b9a6c9cec6 RETURN (H2/theorem stmt_dep lem-pur-dnc-section-geometry used only for Dnc.invertibleExponent). Item module diff vs returned head: only the PurityDncComparisons import is dropped and the helper is swapped to finiteComparedInvertibleExponent; stmt_deps drop the dnc theorem and keep the previously accepted def-pur-finite-exceptional-composition; lean.statement is verbatim. Section 1(B) repair of def-pur-co-smoothness is additive only: 7 declarations byte-identical to live and side-live; the record changes only in lean (by, date, note appended, declarations superset); live equals the repair base, so nothing is overwritten. The new helper HasInvertibleExponent P.Coefficient T for any T over Spec k is true (n = l^level: zero in O_E/varpi^n, a unit in k since l != p; the same type is already proved as Dnc.invertibleExponent), is unconditional in the level, has a source/blueprint/proof docstring and no name clash. Independent re-read: theta_A unit clause with the unit comparison; sigma = dualizingComplexTensorMap followed by c.inv with the canonical conjugate compositor; arbitrary eta and exists s with s.hom = sigma and s.inv then t = c then a!(eta); rho on Dctf, normalized for all K, giving the E sigma clause and IsIso; j* open-restriction images per node Step 7; no absolute separatedness, smoothness or universe restriction. Report has the Worker report and a clause-by-clause Second reading by Q27 (H11 addressed). No compile needed (no file changed); the worker reports clean per-file compiles of 6.5 s and 29.4 s."
  }
 }

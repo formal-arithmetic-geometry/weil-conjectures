@@ -11,6 +11,7 @@ public import WeilConjectures.SixFunctors.Etale.Derived.UpperShriekCanonicalMaps
 public import WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.TorAmplitude
 public import WeilConjectures.Compactification.NagataCompactification
 public import Mathlib.AlgebraicGeometry.Noetherian
+public import WeilConjectures.AlgebraicGeometry.InvertibleExponent
 
 /-!
 # Cohomological smoothness in finite-coefficient comparison coordinates
@@ -58,6 +59,26 @@ noncomputable def finiteComparedCompactification (P : PurityFiniteSetting.{u})
   letI := AlgebraicGeometry.LocallyOfFiniteType.isLocallyNoetherian aY
   letI := AlgebraicGeometry.QuasiCompact.compactSpace_of_compactSpace aY
   AlgebraicGeometry.HasCompactification.compactification f
+
+/-- The coefficient hypothesis of finite purity supplies an invertible exponent on every
+scheme over the fixed field; no divisibility of the level by the ramification index is needed.
+Source: main-20261015, sk-def-purity-conv/def-pur-co-smoothness, finite coefficients
+and the clause that ell is invertible on the schemes in sight
+(blueprint: def-pur-co-smoothness).
+Proof: write ell for the coefficient prime and n for the positive level. In the DVR O_E,
+ell lies in the maximal ideal (varpi_E): its spectral absolute value restricts to the
+ell-adic one, in which ell has norm less than one. Consequently ell^n lies in (varpi_E)^n,
+so its image in A = O_E/(varpi_E^n), and in the specified ULift, is zero. The integer
+ell^n is positive. The finite field k_0 has characteristic p, as does its algebraic
+closure k; since ell and p are distinct primes, ell^n is nonzero and hence a unit in k.
+Map this unit through the spectrum global-sections identification and the structure
+morphism to Gamma(T, top). These witnesses give HasInvertibleExponent. This argument
+also applies to the empty scheme and does not require T to be finite type or separated. -/
+theorem finiteComparedInvertibleExponent (P : PurityFiniteSetting.{u})
+    {T : AlgebraicGeometry.Scheme.{u}}
+    (a : T ⟶ AlgebraicGeometry.Spec (.of P.field.k)) :
+    AlgebraicGeometry.HasInvertibleExponent P.Coefficient T := by
+  sorry
 
 end WeilConjectures.PurityFiniteSetting
 
