@@ -7,11 +7,6 @@ module
 public import Sheaf.Paper.ReductionPullbackDerivedTower
 public import Sheaf.CategoryTheory.RingedConstantTowerPushforwardNormalization
 public import Sheaf.CategoryTheory.TowerDerivedEvaluationNormalization
-public import Sheaf.CategoryTheory.RingedToposMorphism
-import Sheaf.Paper.ProjectionMateExact
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
 
 /-! # The augmented projection mate in the derived category of strict towers
 
@@ -130,32 +125,18 @@ equation-projection-formula-map, on the diagram sites
 (blueprint: lem-weil-pbc-augmented-diagram-projection-mate).
 
 Proof:
-1. Use lem-weil-pbc-diagram-site-realization on both presenting sites for the inverse
-sequence category. Module equivalences are exact; their termwise adjunction is the
-adjunction on the diagram sites. Small-module-diagrams-grothendieck supplies the derived
-categories and K-injective right derived functors. Levelwise exactness gives exact
-termwise pullback.
-2. Apply lem-weil-pbc-ringed-projection-mate-exact on these diagram sites to the constant
-object Delta K and the actual algebra tower Q. Precompose its first tensor factor with
-chi from lem-weil-pbc-constant-tower-pushforward-normalization. All coefficient transitions
-are retained in this single map. The comparison is tau: both are the ordinary tensor
-pullback map on flat-term K-flat representatives, conjugated by the reduction counits,
-as in lem-weil-pbc-reduction-pullback-derived-tower.
-3. Transpose this map. Naturality of the tensor comparison moves the counit past it;
-chi_counit identifies the constant counit. The result is tau followed by BX of the
-ambient counit. Thus the displayed explicit unit construction is exactly the diagram
-site projection map, and is natural in K.
-4. Evaluate the transpose. The equation beta_counit from
-lem-weil-pbc-tower-derived-evaluation-normalization and the exact interchange identify it
-with the ambient adjunct displayed below. By the evaluated universal reduction counits
-and the representative normalization of tau, this is precisely the counit-tensor map
-RG K tensor Q_n to RG(K tensor FQ_n), with no flatness assumption on Q_n.
-5. Compare the transposes of iY followed by h and chi followed by RT(iX).
-The augmentation equation of reduction-pullback-derived-tower identifies the former with
-iX after Delta of the ambient counit, by naturality of iX. Naturality of the tower counit
-and chi_counit give the same transpose for the latter. The adjunction Hom bijection gives
-the equality in the derived category of strict towers itself. No inverse limit,
-perfectness, invertibility of h, boundedness or completeness enters this argument. -/
+1. The explicit unit construction is the tower-adjunction Hom equivalence applied to
+   tau followed by BX of the ambient counit. Apply its inverse to get the first equation.
+2. Apply the inverse ambient Hom equivalence to the evaluated equation and precompose
+   with the invertible evaluation interchange. Its naturality and beta_counit reduce
+   the equation to evaluation of the first equation. Cancel the interchange and its inverse.
+3. Uniqueness of the normalized reduction comparison gives augmentation compatibility
+   for the supplied tau. Apply the inverse tower Hom equivalence to both augmentation
+   composites. The first equation, augmentation compatibility and naturality of iX give
+   the first transpose. Naturality of the tower counit and chi_counit give the second.
+   The constant-tower interchanges in these transposes are definitionally equal, since
+   their ordinary components are identities. Injectivity gives the strict-tower equality.
+No inverse limit, perfectness, invertibility of h, boundedness or completeness is used. -/
 theorem augmentedDiagramProjectionMate
     (f : RingedPullback R S) [IsIso f.coefficient] [f.V.Additive]
     [PreservesFiniteLimits f.L] [PreservesFiniteColimits f.L]
@@ -188,6 +169,55 @@ theorem augmentedDiagramProjectionMate
       MY.i.app (P.RG.obj M) ≫
           (augmentedDiagramProjection f.L f.V f.moduleAdj P MY.B MX.B tau).app M =
         P.chi.hom.app M ≫ P.RT.map (MX.i.app M)) := by
-  sorry
+  have hmate (M : DerivedCategory (Modules S)) :
+      (augmentedDiagramProjection f.L f.V f.moduleAdj P MY.B MX.B tau).app M =
+        P.dT.homEquiv _ _ (tau.hom.app (P.RG.obj M) ≫ MX.B.map (P.d.counit.app M)) := by
+    simp only [augmentedDiagramProjection, NatTrans.comp_app, Functor.whiskerLeft_app,
+      Functor.whiskerRight_app, Functor.comp_obj, Adjunction.homEquiv_unit,
+      Functor.map_comp]
+  have hc (M : DerivedCategory (Modules S)) :
+      (termwise f.L).mapDerivedCategory.map
+          ((augmentedDiagramProjection f.L f.V f.moduleAdj P MY.B MX.B tau).app M) ≫
+        P.dT.counit.app (MX.B.obj M) =
+      tau.hom.app (P.RG.obj M) ≫ MX.B.map (P.d.counit.app M) := by
+    rw [hmate]
+    exact (P.dT.homEquiv _ _).symm_apply_apply _
+  refine ⟨hc, ?_, ?_⟩
+  · intro n M
+    apply (P.d.homEquiv _ _).symm.injective
+    erw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit, Functor.map_comp]
+    let E := ((evaluation ℕᵒᵖ (Modules S)).obj n).mapDerivedCategory
+    let c := towerDerivedEvaluationInterchange f.L n
+    let h := (augmentedDiagramProjection f.L f.V f.moduleAdj P MY.B MX.B tau).app M
+    apply (cancel_epi (c.hom.app (MY.B.obj (P.RG.obj M)))).mp
+    calc
+      _ = E.map ((termwise f.L).mapDerivedCategory.map h) ≫
+          (c.hom.app (P.RT.obj (MX.B.obj M)) ≫
+            f.L.mapDerivedCategory.map ((P.beta n).hom.app (MX.B.obj M)) ≫
+              P.d.counit.app (E.obj (MX.B.obj M))) := by
+        simpa only [c, E, h, Category.assoc, Functor.comp_map, Functor.comp_obj] using
+          congrArg (fun g ↦ g ≫
+            f.L.mapDerivedCategory.map ((P.beta n).hom.app (MX.B.obj M)) ≫
+              P.d.counit.app (E.obj (MX.B.obj M))) (c.hom.naturality h).symm
+      _ = E.map ((termwise f.L).mapDerivedCategory.map h) ≫
+          E.map (P.dT.counit.app (MX.B.obj M)) := by
+        rw [← P.beta_counit n (MX.B.obj M)]
+      _ = E.map (tau.hom.app (P.RG.obj M) ≫ MX.B.map (P.d.counit.app M)) := by
+        rw [← E.map_comp, hc M]
+      _ = _ := by
+        simp only [c, Iso.hom_inv_id_app_assoc, E, Functor.map_comp]
+  · intro M
+    obtain ⟨tau', hn, hu, ha, _⟩ := (reductionPullbackDerivedTower f k Q).2.2.2 MY MX
+    have heq := hu tau htau
+    subst tau'
+    apply (P.dT.homEquiv _ _).symm.injective
+    simp only [Adjunction.homEquiv_counit, Functor.map_comp, Category.assoc]
+    rw [hc M]
+    rw [← Category.assoc, ha (P.RG.obj M), Category.assoc]
+    erw [← MX.i.naturality (P.d.counit.app M)]
+    erw [P.dT.counit.naturality (MX.i.app M)]
+    simp only [Functor.id_map]
+    rw [reassoc_of% (P.chi_counit M)]
+    rfl
 
 end CategoryTheory.StrictReduction

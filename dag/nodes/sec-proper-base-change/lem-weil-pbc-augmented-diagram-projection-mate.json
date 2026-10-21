@@ -19,86 +19,35 @@
  ],
  "proof": [
   {
-   "text": "Put $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$. The rings $R_X,R_Y$ are commutative: the statement tensors over them and calls $Q_{Y,n}$ commutative $R_Y$-algebras, and $R_X\\cong f^{-1}R_Y$ inherits commutativity; so the diagram rings $\\Delta_TR_T$ are sheaves of commutative rings, as [lem-weil-pbc-diagram-site-realization] and [lem-weil-pbc-ringed-projection-mate-exact] require. Apply [lem-weil-pbc-diagram-site-realization] to both small presenting sites. Its exact module equivalences identify modules over the diagram ring $\\Delta_TR_T$ with strict $J$-diagrams of $R_T$-modules; applying the equivalences and their inverses to complexes therefore identifies their derived categories as well. The termwise sheaf adjunction $f^{-1,J}\\dashv f_*^J$ is obtained by transposing each component: naturality of the original adjunction says precisely that the transposes commute with each arrow of $J$. Finite limits are levelwise, so $f^{-1,J}$ preserves them. This gives a morphism between the diagram topoi, with ring map $\\Delta_YR_Y\\to f_*^J\\Delta_XR_X$ induced by the specified ring map. Its module pullback and direct image are $F^{\\rm Tow},G^{\\rm Tow}$. By levelwise exactness [lem-weil-tower-category-levelwise-abelian] and exactness of $F$, $F^{\\rm Tow}$ is exact. Thus the ringed derived adjunction in [lem-weil-pbc-ringed-projection-mate-exact], applied to these diagram sites, is $F^{\\rm Tow}\\dashv\\mathcal G^{\\rm Tow}$, with its canonical counit $\\varepsilon^{\\rm Tow}$.",
-   "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); agent expansion on the small product sites"
-   }
+   "text": "Use the equivalent adjoint description already adopted in the Lean statement: augmentedDiagramProjection is the tower unit followed by RT of tau and RT of BX of the ambient counit. Functoriality identifies its component with dT.homEquiv applied to tau followed by BX of the ambient counit. The inverse Hom equivalence gives the first counit equation. All derived categories, adjunctions and normalized comparisons are supplied in AugmentedProjectionDirectImage and the reduction models, so no further existence construction is needed.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "Write $\\mu$ for the canonical derived tensor/pullback comparison on these diagram sites. Apply [lem-weil-pbc-ringed-projection-mate-exact] with $E=\\Delta_XK$ and $P=Q_{Y,\\bullet}$. It gives $\\alpha_{\\Delta_XK,Q}:\\mathcal G^{\\rm Tow}(\\Delta_XK)\\otimes^L Q_{Y,\\bullet}\\to\\mathcal G^{\\rm Tow}(\\Delta_XK\\otimes^L F^{\\rm Tow}Q_{Y,\\bullet})$. The coefficient pullback is $Q_{X,\\bullet}$, so the target is $\\mathcal G^{\\rm Tow}B_X(K)$ using [lem-weil-pbc-reduction-pullback-derived-tower]. Define\n$$h_K=\\alpha_{\\Delta_XK,Q}\\circ(\\chi_K\\otimes^L1_Q).$$\nIts source is $B_Y(\\mathcal GK)$ by [lem-weil-pbc-constant-tower-pushforward-normalization]. This is a single morphism in the derived category of strict towers: $\\alpha$ has been constructed on the diagram site, rather than assembled from evaluated arrows. It is natural in $K$ because $\\alpha$, $\\chi$, and tensor are natural. All transitions of $Q$ are part of the diagram object used in this construction.",
+   "text": "For the evaluation equation, apply the inverse ambient Hom equivalence and precompose by the invertible towerDerivedEvaluationInterchange hom. Naturality of this interchange moves the evaluated projection map to its left. The supplied beta_counit equation identifies the remaining composite with evaluation of the tower counit [lem-weil-pbc-tower-derived-evaluation-normalization]. Functoriality and the first equation then give evaluation of tau followed by evaluation of BX of the ambient counit. Cancel the interchange hom against its inverse to obtain exactly the required ambient adjunct.",
    "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-weil-pbc-tower-derived-evaluation-normalization"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Obtain the unique normalized comparison and its augmentation equation from [lem-weil-pbc-reduction-pullback-derived-tower]; its uniqueness identifies it with the supplied tau using htau. Apply the inverse tower Hom equivalence to both proposed augmentation composites. For iY followed by h, functoriality, the first counit equation and augmentation compatibility give constantDerivedSquare followed by DeltaX of the ambient counit and iX, using naturality of iX. For chi followed by RT(iX), naturality of the tower counit and the supplied chi_counit equation [lem-weil-pbc-constant-tower-pushforward-normalization] give ringedConstantTowerPullback followed by the same two maps. The two constant interchanges are definitionally equal: their ordinary components are identities and their localization composition comparisons coincide. Injectivity of the Hom equivalence proves the strict-tower identity before evaluation or inverse limit.",
+   "uses": [
     "lem-weil-pbc-reduction-pullback-derived-tower",
     "lem-weil-pbc-constant-tower-pushforward-normalization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0B56 (equation-projection-formula-map), applied on diagram sites"
-   }
-  },
-  {
-   "text": "For $M\\in D(R_Y)$ the comparison $\\mu_{\\Delta_YM,Q}$ identifies with $\\tau_M$ of [lem-weil-pbc-reduction-pullback-derived-tower]. Indeed, with flat-term K-flat representatives, both are the ordinary tensor/pullback map $F(x\\otimes q)\\mapsto F(x)\\otimes F(q)$, with the same reduction counits; the uniqueness normalization in that node identifies the derived maps. This is the representative construction of Tag 07A4 (lemma-pullback-tensor-product). Transpose the definition of $h_K$ from step 2. The mate formula and naturality of $\\mu$ from [lem-weil-pbc-ringed-projection-mate-exact] give\n$$\\begin{aligned}\n\\varepsilon^{\\rm Tow}_{B_XK}F^{\\rm Tow}(h_K)\n&=(\\varepsilon^{\\rm Tow}_{\\Delta_XK}\\otimes1)\\mu\\,F^{\\rm Tow}(\\chi_K\\otimes1)\\\\\n&=((\\varepsilon^{\\rm Tow}_{\\Delta_XK}F^{\\rm Tow}\\chi_K)\\otimes1)\\mu_{\\Delta_Y\\mathcal GK,Q}\\\\\n&=(\\Delta_X\\varepsilon_K\\otimes1)\\tau_{\\mathcal GK}\n=B_X(\\varepsilon_K)\\tau_{\\mathcal GK}.\n\\end{aligned}$$\nThe third equality is the strict counit equation of [lem-weil-pbc-constant-tower-pushforward-normalization]. This proves the asserted equivalent description, with all comparisons in the derived category of strict towers.",
-   "uses": [
-    "lem-weil-pbc-reduction-pullback-derived-tower",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-constant-tower-pushforward-normalization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A4 (lemma-pullback-tensor-product), 0B56 (equation-projection-formula-map); explicit transpose calculation with the cited normalizations"
-   }
-  },
-  {
-   "text": "The hypotheses of [lem-weil-pbc-tower-derived-evaluation-normalization] hold: $\\operatorname{Mod}(R_T)$ and $\\operatorname{Fun}(\\mathbf N_{\\geq1}^{\\mathrm{op}},\\operatorname{Mod}(R_T))$ are Grothendieck abelian by [lem-weil-pbc-small-module-diagrams-grothendieck] (for the second, $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$; for the first, $J$ the one-object category), evaluation is exact [lem-weil-tower-category-levelwise-abelian], and $F\\dashv G$ with $F$ exact by hypothesis. Let $e_n$ denote evaluation and use $\\beta_n:e_n\\mathcal G^{\\rm Tow}\\cong\\mathcal Ge_n$ from [lem-weil-pbc-tower-derived-evaluation-normalization]. That node carries evaluation of $\\varepsilon^{\\rm Tow}$ to the specified ambient counit. The evaluations of $B_T$ and $\\tau$ are the normalized derived tensors and tensor/pullback comparisons by [lem-weil-pbc-reduction-pullback-derived-tower]. Evaluating the transpose equation of step 3 consequently says that $\\beta_{n,B_XK}e_n(h_K)$ is adjoint to\n$$F(\\mathcal GK\\otimes^L Q_{Y,n})\\xrightarrow{\\mu}F\\mathcal GK\\otimes^L Q_{X,n}\\xrightarrow{\\varepsilon_K\\otimes1}K\\otimes^L Q_{X,n}.$$\nBy the mate description of [lem-weil-pbc-ringed-projection-mate-exact], this is exactly its counit-tensor projection map, with the source and target claimed in the statement. Uniqueness in the ambient adjunction proves this identification of arrows, not merely of their objects.",
-   "uses": [
-    "lem-weil-pbc-tower-derived-evaluation-normalization",
-    "lem-weil-pbc-reduction-pullback-derived-tower",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-small-module-diagrams-grothendieck",
-    "lem-weil-tower-category-levelwise-abelian"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); evaluation using the specified counit normalization"
-   }
-  },
-  {
-   "text": "Compare the transposes of the two maps from $\\Delta_Y\\mathcal GK$ to $\\mathcal G^{\\rm Tow}B_XK$. By step 3, the transpose of $h_Ki_{Y,\\mathcal GK}$ is\n$$B_X(\\varepsilon_K)\\tau_{\\mathcal GK}F^{\\rm Tow}(i_{Y,\\mathcal GK})\n=B_X(\\varepsilon_K)i_{X,F\\mathcal GK}\n=i_{X,K}\\Delta_X(\\varepsilon_K).$$\nHere the first equality is the augmentation equation for $\\tau$ in [lem-weil-pbc-reduction-pullback-derived-tower], and the second is naturality of $i_X$: it is tensoring with the fixed algebra unit $\\Delta_XR_X\\to Q_{X,\\bullet}$. On the other hand, naturality of the tower counit gives the transpose of $\\mathcal G^{\\rm Tow}(i_{X,K})\\chi_K$ as\n$$i_{X,K}\\varepsilon^{\\rm Tow}_{\\Delta_XK}F^{\\rm Tow}(\\chi_K)\n=i_{X,K}\\Delta_X(\\varepsilon_K),$$\nby [lem-weil-pbc-constant-tower-pushforward-normalization]. The adjunction of [lem-weil-pbc-ringed-projection-mate-exact] on the diagram sites is a bijection on Hom sets, so equality of these transposes proves the required strict derived-tower identity. This calculation uses only the algebra units, the cited natural comparisons, and the counits; it imposes no perfectness, completeness, or invertibility condition on $h_K$.",
-   "uses": [
-    "lem-weil-pbc-reduction-pullback-derived-tower",
-    "lem-weil-pbc-constant-tower-pushforward-normalization",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 0B56 (equation-projection-formula-map); agent calculation of the augmentation square before evaluation or inverse limit"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-reduction-pullback-derived-tower",
   "lem-weil-pbc-constant-tower-pushforward-normalization",
-  "lem-weil-pbc-tower-derived-evaluation-normalization",
-  "lem-weil-pbc-small-module-diagrams-grothendieck"
+  "lem-weil-pbc-tower-derived-evaluation-normalization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4, 07A6, 0B56; diagram-site specialization and explicit normalized counit/augmentation calculations"
+  "place": "Tags 0B56, 07A6 and 07A4; S3 stage-3 formal proof using the existing equivalent adjoint description, normalized evaluation and constant counits, and reduction augmentation compatibility"
  },
  "mathlib_searches": [
   {
@@ -236,5 +185,15 @@
   "group": "NI",
   "result": "pass",
   "note": "Only the item lean record and the new module changed; statement verbatim, sorry-only theorem, docstrings with source, blueprint id and 5 proof steps. h = dT.unit ≫ RT(τ) ≫ RT(B_X ε) is the node's 'equivalently' adjoint description (Stacks 0B56), one natural transformation in D(Tow). Dropping the separate diagram-site α∘(χ⊗1) clause is accepted: the landed reduction dependency renders B_T as a left-derived functor, not a diagram-site ⊗^L, and the stmt citer only needs this map. τ is pinned by IsNormalized (∃! in the dependency); MY/MX are the dependency's RingedModels; the struct fields chi_counit and beta_counit match the dependencies verbatim and fix χ and β as transposes; d and dT are fixed by the dependency Hom normalizations. Conjuncts checked: adjoint description; evaluation = d-adjunct of interchange⁻¹ ≫ ev τ ≫ ev B_X(ε) (types and directions verified); augmentation i_Y≫h = χ≫RT(i_X) before evaluation or Rlim, provable since constantDerivedSquare and ringedConstantTowerPullback are both identity-component. No perfectness, completeness or IsIso; universes independent; [f.V.Additive] redundant but provable (right_adjoint_additive). Advisories: the def equals Mathlib mateEquiv d dT componentwise; unused public import RingedToposMorphism; proof-plan imports per rule 7. No compile run (no changes)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S3",
+  "result": "pass",
+  "landing": "20261021T130139-L-2562071",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
