@@ -22123,3 +22123,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:12 L: merged deliver/NK/lem-pc-tate-residue-lattice-identity (stage 2; reviewer PASS; parallel immutable checks)
 - 10:12 L: merged deliver/Q61/lem-pur-proetale-direct-image-global-evaluation (stage 2; reviewer FIX; parallel immutable checks)
 - 10:12 L: merged deliver/Q27/lem-weil-coefficient-complex-rationalization (stage 2; reviewer PASS; parallel immutable checks)
+- 10:12 L: returned deliver/Q10/lem-sfb-ordinary-proetale-direct-image-plus-comparison (reviewer RETURN: L: independent stage-2 immutable head f9a8a166fdc6: H13: the delivered def-weil-pbc-direct-image lean record replaces th)
