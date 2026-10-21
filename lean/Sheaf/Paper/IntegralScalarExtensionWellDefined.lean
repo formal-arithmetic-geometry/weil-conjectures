@@ -435,11 +435,18 @@ theorem integralScalarChainAction_existsUnique (a : Padic.coefficientExtensionIn
   let μ : ∀ M : integralTowerModules l E Y, M ⟶ M := fun M ↦
     { val :=
         { app := fun U ↦ by
-            let : CommRing ((completedIntegralCoefficientSheafUnrestricted l E Y).obj.obj U) :=
+            let : CommRing
+                ((SheafOfModules.derivedChangeRingIndependentCoefficients
+                  (AlgebraicGeometry.Scheme.ProEt.topology Y)
+                  (completedIntegralCommRingSheafUnrestricted l E Y)).obj.obj U) :=
               inferInstanceAs
                 (CommRing ((completedIntegralCommRingSheafUnrestricted l E Y).obj.obj U))
+            let c : (SheafOfModules.derivedChangeRingIndependentCoefficients
+                (AlgebraicGeometry.Scheme.ProEt.topology Y)
+                (completedIntegralCommRingSheafUnrestricted l E Y)).obj.obj U :=
+              integralScalarConstant l E Y U a
             exact ModuleCat.ofHom
-              { toFun := fun x ↦ integralScalarConstant l E Y U a • x
+              { toFun := fun x ↦ c • x
                 map_add' := smul_add _
                 map_smul' := fun r x ↦ smul_comm _ r x }
           naturality := by
@@ -447,7 +454,7 @@ theorem integralScalarChainAction_existsUnique (a : Padic.coefficientExtensionIn
             ext x
             change integralScalarConstant l E Y V a • M.val.map f x =
               M.val.map f (integralScalarConstant l E Y U a • x)
-            rw [M.val.map_smul, integralScalarConstant_naturality l E Y f a] } }
+            erw [M.val.map_smul, integralScalarConstant_naturality l E Y f a] } }
   have hμ : ∀ {M N : integralTowerModules l E Y} (f : M ⟶ N),
       f ≫ μ N = μ M ≫ f := by
     intro M N f

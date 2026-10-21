@@ -296,12 +296,23 @@ variable (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
 Source: Bhatt--Scholze, Definition 3.5.2
 (blueprint: def-weil-integral-reduction-tower). -/
 noncomputable abbrev integralTowerModules :=
-  SheafOfModules.{max u (t + 1)} (completedIntegralCoefficientSheafUnrestricted l E Y)
+  SheafOfModules.{max u (t + 1)}
+    (SheafOfModules.derivedChangeRingIndependentCoefficients
+      (AlgebraicGeometry.Scheme.ProEt.topology Y)
+      (completedIntegralCommRingSheafUnrestricted l E Y))
 
 /-- The standard localization for unrestricted completed coefficients.
 Source: Stacks Tag 05RU (blueprint: def-weil-integral-reduction-tower). -/
 noncomputable instance integralTowerHasDerivedCategory :
     HasDerivedCategory (integralTowerModules l E Y) :=
+  HasDerivedCategory.standard _
+
+/-- Preserve the standard localization for the recorded completed-ring presentation.
+This is definitionally the same module category as integralTowerModules.
+Source: Stacks Tag 05RU (blueprint: def-weil-integral-reduction-tower). -/
+noncomputable instance integralCompletedRingHasDerivedCategory :
+    HasDerivedCategory (SheafOfModules.{max u (t + 1)}
+      (completedIntegralCoefficientSheafUnrestricted l E Y)) :=
   HasDerivedCategory.standard _
 
 set_option linter.defProp false in
