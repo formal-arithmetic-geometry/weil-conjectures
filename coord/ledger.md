@@ -20796,3 +20796,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:49 L: returned deliver/N9/lem-sfb-identity-open-derived-restriction (reviewer RETURN: L: independent stage-2 immutable head 4fee98f59fa7: H2: the delivery adds the existing theorem node lem-sfb-derived-dire)
 - 07:49 L: returned deliver/NF/lem-cbc-ringed-open-flat-resolution (reviewer RETURN: L: independent stage-2 immutable head 7b9a7c7b5b26: H2: delivery adds theorem node lem-sf-ringed-open-total-tensor-kflat)
 - 07:49 L: returned deliver/NG/lem-weil-pbc-flat-curve-derived-structure-model (reviewer RETURN: L: independent stage-2 immutable head ab7ba9f8967e: H2: stmt_deps cite theorem nodes lem-pc-canonical-single-direct-imag)
+- 07:49 L: returned deliver/NE/lem-pur-quotient-scalar-comparison-descent (reviewer RETURN: L: independent stage-2 immutable head ea19ee12c164: H2/theorem-stmt_dep: stmt_deps adds theorem node lem-pur-compatible-)
