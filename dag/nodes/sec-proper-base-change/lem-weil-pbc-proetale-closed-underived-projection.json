@@ -19,9 +19,73 @@
   "def-pur-sheaf-tensor-product",
   "lem-pur-proetale-inverse-image-tensor-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $H=(i_*M)\\otimes_R F$ and $N=M\\otimes_{R_Z}i^{-1}F$. Write $\\sigma^i$ for the inverse-image tensor comparison. The closed counit $\\varepsilon_M:i^{-1}i_*M\\to M$ of the module adjunction $i^{-1}\\dashv i_*$ of the ringed open-closed lemma is invertible by the closed-counit lemma, which states this for every adjunction between the actual module inverse image and the direct image with action through the inverse-image ring unit (the ringed open-closed lemma itself only records an abstract isomorphism $i^{-1}i_*\\cong\\operatorname{id}$). Hence $\\alpha=(\\varepsilon_M\\otimes1)\\circ\\sigma^i_{i_*M,F}:i^{-1}H\\to N$ is invertible: its inverse is $(\\sigma^i_{i_*M,F})^{-1}\\circ(\\varepsilon_M^{-1}\\otimes1)$. The adjunction formula for the transpose gives $\\pi_{M,F}=i_*(\\alpha)\\circ\\eta_H$, where $\\eta_H:H\\to i_*i^{-1}H$ is the closed unit. This is precisely the adjunct specified in the statement.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-proetale-ringed-closed-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AA (lemma-closed-immersion), closed counit; sites-modules.tex Tag 03EL (lemma-tensor-product-pullback); agent-written adjunct formula"
+   }
+  },
+  {
+   "text": "Apply the tensor comparison to $j$ and use the open-closed vanishing: $j^{-1}H\\cong(j^{-1}i_*M)\\otimes_{j^{-1}R}j^{-1}F=0$. Here tensoring the zero sheaf gives zero directly from the sheafified sectionwise tensor definition, since every pure tensor with a zero entry is zero. Apply the ringed localization sequence to the $R$-module sheaf $H$: $0\\to j_!j^{-1}H\\to H\\xrightarrow{\\eta_H}i_*i^{-1}H\\to0$. Its first nonzero term is zero (extension by zero of the zero presheaf is zero), so exactness says that $\\eta_H$ is an isomorphism. The quasi-compactness hypothesis required for this sequence is exactly the hypothesis on $j$ in the item.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH (lemma-ses-associated-to-open); sites-modules.tex Tag 03EL (lemma-tensor-product-pullback)"
+   }
+  },
+  {
+   "text": "The formula of step 1 expresses $\\pi_{M,F}$ as the composite of the isomorphism $\\eta_H$ from step 2 and the functorial image $i_*(\\alpha)$ of an isomorphism. Its inverse is $\\eta_H^{-1}\\circ i_*(\\alpha^{-1})$. Naturality in $M$ and $F$ follows by substituting the naturality equations for $\\sigma^i$, $\\varepsilon$ and $\\eta$ into this formula: for $a:M\\to M\\prime$ and $b:F\\to F\\prime$, one obtains $i_*(a\\otimes i^{-1}b)\\circ\\pi_{M,F}=\\pi_{M\\prime,F\\prime}\\circ(i_*a\\otimes b)$. All these are the actual adjunction and tensor maps, so this proves naturality of the specified projection map.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL (lemma-tensor-product-pullback), functoriality; agent-written composition and inverse calculation"
+   }
+  },
+  {
+   "text": "For the coefficient clause take $F=B$. On $V\\to X$, write $V_Z=Z\\times_XV$ and $m\\in(i_*M)(V)=M(V_Z)$. If $b\\in B(V)$, let $\\bar b\\in(i^{-1}B)(V_Z)$ be its image under the inverse-image unit. The pure-tensor characterization of $\\sigma^i$, followed by the counit and the adjunction triangle identity, makes the composite in step 1 send $m\\otimes b$ to $m\\otimes\\bar b$. Thus for $c\\in B(V)$ its value on $m\\otimes cb$ is $m\\otimes\\overline{cb}=m\\otimes\\bar c\\bar b=\\bar c(m\\otimes\\bar b)$, exactly the asserted direct-image $B$-action through $B\\to i_*i^{-1}B$. The equality extends additively and through sheafification because sheaf tensor products are sheafifications of sectionwise tensors: locally their sections are sums of pure tensors. Hence $\\pi_{M,B}$ is $B$-linear. Its already constructed inverse is $B$-linear as well: apply $\\pi_{M,B}$ to both sides of $\\pi_{M,B}^{-1}(cy)=c\\pi_{M,B}^{-1}(y)$ and use injectivity. This proves the isomorphism in $B$-modules without imposing any condition on $R\\to B$.",
+   "uses": [
+    "lem-pur-proetale-inverse-image-tensor-comparison",
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03EK (section-tensor-product), sheafified tensors; Tag 03EL (lemma-tensor-product-pullback); agent-written scalar calculation"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-proetale-inverse-image",
+  "lem-pur-proetale-inverse-image-tensor-comparison",
+  "lem-weil-pbc-proetale-ringed-closed-counit",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Formal underived projection consequence of Tags 09AA and 09AH, with sites-modules.tex Tag 03EL; coefficient-linearity checked on local pure tensors."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +128,52 @@
    "results": "OK: 8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, PresheafOfModules.Monoidal.tensorObjMap, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, PresheafOfModules.Monoidal.tensorObj, LightCondensed.instMonoidalClosedLightCondMod, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars_hom_apply, LightCondensed.instMonoidalLightCondSetLightCondModFree",
    "date": "2026-10-21",
    "verdict": "no match: the returned declarations concern presheaf tensor constructions, light condensed monoidal structures or Zariski structure-sheaf modules; none states the pro-etale closed-immersion projection formula"
+  },
+  {
+   "tool": "grep",
+   "query": "(closedImmersion|[Cc]losed[Ii]mmersion).*(tensor|projection)|(tensor|projection).*(closedImmersion|[Cc]losed[Ii]mmersion)",
+   "results": "OK: 0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; presheaf tensor constructions, light condensed monoidal structures and scheme closed-immersion geometry do not give the arbitrary-ring pro-etale projection formula"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion direct image tensor projection formula for arbitrary sheaves of modules on a ringed site",
+   "results": "OK: 8 hits; AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.toSurjectiveOnStalks, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom, AlgebraicGeometry.IsClosedImmersion.isAffine_surjective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion.instIsAffineHom, AlgebraicGeometry.IsClosedImmersion.iff_isPreimmersion",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; presheaf tensor constructions, light condensed monoidal structures and scheme closed-immersion geometry do not give the arbitrary-ring pro-etale projection formula"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "OK: 10 hits; PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; presheaf tensor constructions, light condensed monoidal structures and scheme closed-immersion geometry do not give the arbitrary-ring pro-etale projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of pro etale sites with arbitrary ring sheaf coefficients the underived direct image satisfies the tensor projection formula for every module sheaf",
+   "results": "OK: 8 hits; LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.internallyProjective_iff_tensor_condition",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; presheaf tensor constructions, light condensed monoidal structures and scheme closed-immersion geometry do not give the arbitrary-ring pro-etale projection formula"
+  },
+  {
+   "tool": "grep",
+   "query": "(pushforward|directImage|lowerStar).*(tensor|[Pp]rojection)|(tensor|[Pp]rojection).*(pushforward|directImage|lowerStar)",
+   "results": "OK: 0 hits; ; Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; presheaf tensor constructions, light condensed monoidal structures and scheme closed-immersion geometry do not give the arbitrary-ring pro-etale projection formula"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero from a closed subtopos commutes with ordinary tensor product with any sheaf of modules via the inverse image tensor comparison",
+   "results": "OK: 8 hits; LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat, LightCondensed.instMonoidalClosedLightCondMod, LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf, LightCondensed.instMonoidalLightCondSetLightCondModFree, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, LightCondensed.instIsMonoidalFunctorOppositeLightProfiniteModuleCatWCoherentTopology, LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected returned signatures; presheaf tensor constructions, light condensed monoidal structures and scheme closed-immersion geometry do not give the arbitrary-ring pro-etale projection formula"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-integral-model-open-closed-pieces",
@@ -89,5 +195,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-proetale-closed-underived-projection",
+  "worker": "stage1",
+  "summary": "Proved the stated arbitrary-ring underived projection map by its adjunction formula, open support of the tensor product, and the existing ringed localization sequence. Checked naturality and B-linearity explicitly. Statement unchanged; no new nodes.",
+  "blueprint": "thm-weil-pbc-finite-extension proof, first sentence, Choose an integral lattice for K: closed-stratum scalar extension comparison in the Bhatt-Scholze Lemma 6.8.13 constructible-filtration assembly.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-proetale-inverse-image-tensor-comparison",
+    "why": "Generic inverse-image tensor comparison for arbitrary commutative ring sheaves, including its local pure-tensor description and naturality; the unit supplies no substitute, and this realizes the closed-stratum scalar extension comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-proetale-inverse-image-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-7b68ad049",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-7b68ad049 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The statement and stmt_deps are identical to the base copy (dagsnap 1418c7aa, md5 d0abf422), so the target is not weakened, and no re-split repair note exists for this item. Sources checked: Stacks proetale.tex 09AA lemma-closed-immersion (l.4945), 09AH lemma-ses-associated-to-open (l.5135; needs j quasi-compact, which the item assumes) and sites-modules.tex 03EL (l.3649). I read in full the statements of lem-weil-pbc-proetale-ringed-open-closed, lem-pur-proetale-inverse-image-tensor-comparison (clause 1: σ^h with its pure-tensor characterisation, an isomorphism and natural), def-weil-proetale-inverse-image and def-pur-sheaf-tensor-product. Step 1: π = i_*(α)∘η_H with α = (ε⊗1)∘σ^i is the correct adjunct formula and is the map the statement specifies. Fault C4: the step took invertibility of the counit ε_M from the ringed open-closed lemma, but that lemma only states an abstract isomorphism i^{-1}i_* ≅ id. FIX: step 1 now cites lem-weil-pbc-proetale-ringed-closed-counit (same unit; it states that the counit of every adjunction between these functors is an isomorphism), and proof_deps is updated; there is no cycle, because that node is already in the ringed lemma's closure and the item is not in its closure. Step 2: the comparison with h=j, together with j^{-1}i_*=0, 0⊗−=0 and j_!0=0, puts a zero first term in the SES for H, so η_H is an isomorphism; correct. Step 3: naturality is elementary; I checked the displayed square. Step 4: I recomputed π(m⊗b) = m⊗b̄ through η, σ^i and the triangle identity; \\overline{cb} = c̄b̄ because the ring unit is a ring map; local generation by pure tensors and injectivity of π give B-linearity of the map and its inverse; correct, and no flatness is needed. Edge cases Z=∅, Z=X, M=0, F=0, a DVR with constant ℤ and a non-flat B all hold. Duplicate search (rg -L): lem-weil-proetale-closed-tensor-projection and lem-weil-etale-closed-tensor-projection are derived versions with an unpinned isomorphism, and lem-sfb-closed-immersion-derived-tensor-projection and lem-weil-pbc-ringed-projection-restriction are derived too; none is a duplicate. Accepted tool_use: lem-pur-proetale-inverse-image-tensor-comparison, a generic inverse-image tensor comparison that no node of the unit gives. Fix file: fixes/dag/nodes/sec-proper-base-change/lem-weil-pbc-proetale-closed-underived-projection.json.; 1 file(s) fixed by the reviewer"
  }
 }

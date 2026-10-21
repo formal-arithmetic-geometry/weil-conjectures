@@ -1,0 +1,39 @@
+# Stage-1 report: lem-weil-pbc-proetale-closed-underived-projection
+
+1. Files written: `dag/nodes/sec-proper-base-change/lem-weil-pbc-proetale-closed-underived-projection.json` (statement, split; no Mathlib match), `citations.json`, and this report. Search commands recorded their own `searches.jsonl`. No new nodes and no Mathlib leaves. The item's original statement, provenance, and inherited searches are retained.
+2. Attachments: none. Searched `lean/WeilConjectures/` for the exact id and the projection/tensor/closed-immersion notions. The existing open-extension projection results concern open immersions and constant coefficients; the scheme structure-sheaf tensor projection uses Zariski modules, not the arbitrary ring sheaf on the pro-etale site. Neither states this item.
+3. WANTED: none.
+4. The imported node had an empty proof. Its statement is correct as written; no STATEMENT-DISPUTED and no change of hypotheses, map, or coefficient category. Filled the argument rather than creating a projection-formula restatement. `coord/dag-sync.md`, referred to by the historical brief, is absent from this read clone; the explicitly supplied live read-clone protocol was followed.
+5. Unfinished: none at the requested one-level split. No Lean was written, no compiler run, and nothing in the repository or launcher was edited.
+
+## Sources and blueprint
+
+Read Stacks `proetale.tex`, Tag 09AA, `lemma-closed-immersion`, including its three assertions and proof; Tag 09AH, `lemma-ses-associated-to-open`, including the quasi-compact-open assumption and its proof; and `sites-modules.tex`, Section 03EK and Tag 03EL, `lemma-tensor-product-pullback`, including its bilinear-map proof. The ringed open-closed DAG statement already supplies the module versions and the actual closed adjunction unit in the exact sequence, so no uncited module transfer is needed here. The proof is agent-written as a formal consequence of these results, not attributed to an explicit projection theorem in Stacks.
+
+Read the chapter and unit records. Read the current `main-20261015` proof of `thm-weil-pbc-finite-extension`: its first sentence chooses an integral lattice. This item supplies the closed-stratum scalar extension comparison in that lattice construction; it preserves the inherited route through constructible filtration. The item is not the unit's key statement, so no unit realization fields change. Ran `blueprint_refs.py ancestor` and searches for `underived projection` and `closed immersion tensor` (both searches returned no blueprint node). The item already had an exact `from.place` and `same_as: []`; these remain correct. The existing arbitrary-ring inverse-image tensor comparison is an off-unit generic tool, declared in `split_report.tool_uses`.
+
+## Mathlib and duplication
+
+Ran LeanFinder in two different phrasings, Loogle, LeanSearch, and two grep patterns through the required msearch command. Read all returned signatures. Loogle's presheaf module tensor constructions and their colimit instances do not assert a closed-immersion projection formula. Read the actual presheaf construction in `Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean` (tensorObjMap at 45, tensorObj at 63, tensorObj_obj at 169, tensorHom_app at 188). LeanSearch returned closed-immersion geometry, not module projections. LeanFinder returned light condensed tensor structures and free-sheaf pullback, none with this ringed closed-site conclusion. Both grep patterns had zero hits. No service failure was recorded as absence.
+
+Searched the DAG/blueprint and inspected the statements of `lem-weil-pbc-proetale-ringed-open-closed`, `lem-pur-proetale-inverse-image-tensor-comparison`, `def-pur-sheaf-tensor-product`, and `def-weil-proetale-inverse-image`. Also read `lem-exc-proetale-closed-essential-image` and `lem-weil-pbc-sheaf-tensor-closed`: the former gives the supported-unit consequence but adds an off-unit citation unnecessarily; the latter concerns constant-category-valued sheaves and is unnecessary for variable ring coefficients. The support/unit consequence is proved directly in step 2 from the existing localization sequence. There is no new fact requiring its own node.
+
+## Not duplicates
+
+No new nodes. All non-elementary input is reused from existing nodes.
+
+## Review by Q16
+
+I checked the item against the actual Stacks source and the existing node statements with the formulas open. The crucial hypothesis is that the complementary open immersion is quasi-compact: Tag 09AH and the ringed localization sequence both require it, and the item supplies it. Neither X qcqs nor a noetherian condition is required; the ringed lemma's separate filtered-colimit assertion is never used. The pullback coefficient ring is exactly i^{-1}R throughout. There is no arbitrary extension-of-scalars exactness assumption or use of geometric stalk conservativity.
+
+Step 1 uses the ringed lemma's invertible closed counit, the tensor comparison's invertibility, the inverse-image adjunction, and the tensor definition for functorial tensoring. I checked that the tensor comparison has direction i^{-1}(tensor) to tensor of inverse images and uses the pulled-back ring. I wrote the inverse of alpha and the actual transpose formula pi = i_*(alpha) eta_H. Thus the proof addresses the specified map, not merely an abstract isomorphism of its endpoints.
+
+Step 2 uses the tensor comparison with h=j, the ringed lemma's j^{-1}i_*=0 and canonical short exact sequence, and the sheafified tensor definition to justify zero tensor. Applying that sequence to H makes its unit invertible. The argument is two explicit deductions from these statements; it does not import a support-equivalence theorem without citing it. Extension by zero of zero is immediate from the sheafification of its zero extension presheaf, described in the same ringed lemma. This avoids needing an additional exactness/detection lemma or any flatness hypothesis.
+
+Step 3 uses the natural tensor comparison and the adjunction unit/counit already cited, and writes both the inverse and the two-variable naturality equation. Composition of inverse maps is elementary. It introduces no comparison lemma concealed by a phrase such as “transport.”
+
+Step 4 uses the tensor comparison's stated local pure-tensor characterization, the inverse-image definition's unit and direct-image evaluation, and the sheaf tensor definition. For m on V_Z and b on V the transpose sends m tensor b to m tensor bar(b); the closed counit triangle identity gives this formula. I checked multiplication by c explicitly, including the scalar map B to i_*i^{-1}B. Additivity and sheafification extend the calculation, and injectivity of pi proves its inverse is B-linear. No existence or comparison theorem beyond the cited statements is hidden here. Every proof-step citation has its verbatim statement in citations.json.
+
+Against delivery-errors B–E: no new node can be hollow, a duplicate, elementary, or a relabelled clause; every non-elementary fact in the proof is a cited statement; no proof of another node is used as an interface; no new dependency cycles are introduced by construction (server checks verify this); and the maps and hypotheses have been checked clause by clause. All four steps are below 2000 characters. The statement has no correction to report.
+
+Edge cases: if Z is empty, i_*M and both tensors are zero; if Z=X, the closed unit/counit reduce the argument to the tensor identity. If X or U is empty, the same localization sequence remains valid. If R is the zero ring, all its unital modules are zero, and the argument still applies. M=0 and F=0 are included. Taking a nonflat B causes no difficulty: the proof only tensors isomorphisms and a zero object, never a general exact sequence. Thus no extra flatness, finite presentation, or constructibility condition has slipped in.
