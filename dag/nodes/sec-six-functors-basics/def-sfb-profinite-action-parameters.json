@@ -1,0 +1,110 @@
+{
+ "id": "def-sfb-profinite-action-parameters",
+ "kind": "definition",
+ "title": "Trivial and free profinite action-parameter functors",
+ "status": "split",
+ "statement": "Let $J$ be a compact Hausdorff totally disconnected topological group in $\\mathbf{Set}_u$, and let $P$ be the category of profinite sets in that universe [sk-def-sfb-condensed-ring]. Let $A_J$ be the category whose objects are profinite spaces with continuous left $J$-action and whose maps are continuous equivariant maps. Define $t_J:P\\to A_J$ by giving $S$ its trivial action and retaining each continuous map. Define $H_J:P\\to A_J$ by $H_J(S)=J\\times S$, with action $g\\cdot(j,s)=(gj,s)$, and $H_J(f)(j,s)=(j,f(s))$. Both constructions use the original topological spaces and continuous maps; the trivial-action construction needs only a topological group.",
+ "stmt_deps": [
+  "sk-def-sfb-condensed-ring"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-formulated finite-cover action-space infrastructure: t in the statement and H(S)=J times S in proof steps 6--10 of lem-sfb-profinite-action-coherent-presentation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Functor from profinite spaces to continuous group actions trivial action and product with a profinite group acting by left translation",
+   "results": "[leansearch] OK 8 hit(s): CategoryTheory.Functor.mapContAction, profiniteToCondensed, ProfiniteGrp.toProfinite, ContAction.res, ProfiniteGrp, ProfiniteGrp.ofHom_comp, FintypeCat.toLightProfinite, CategoryTheory.PreGaloisCategory.functorToContAction. None supplies these two parameter functors.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Action.trivial, ContAction",
+   "results": "[loogle] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "def (trivial|regular)|Profinite.*ContAction; Mathlib CategoryTheory/Action, lean/WeilConjectures/CategoryTheory, lean/Sheaf/CategoryTheory, lean/Sheaf/Paper/FieldProfiniteGaloisSite.lean; DAG trivial action / left translation / free action; blueprint_refs.py search profinite action",
+   "results": "Mathlib grep: [grep] OK 1 hit(s), Mathlib/CategoryTheory/Action/Basic.lean:74 def trivial (X : V) : Action V G := { V := X, ρ := 1 }. This object-level action is reused. Project hits include FieldGaloisSite.trivial and regular (lines 60,70), read in full; their owning theorem node is not needed to state the item. The maintainer explicitly requires this definition node with fresh declarations and no edit or redeclaration of the landed module. No separate DAG definition node owns the parameter functors. blueprint_refs.py: 0 blueprint nodes match profinite action. Other project hits concern internal module actions or unrelated regular constructions.",
+   "date": "2026-10-21",
+   "verdict": "authorized definition-node extraction with fresh names; reuse Mathlib Action.trivial and ContAction"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-action-coherent-presentation",
+  "date": "2026-10-21",
+  "group": "NH"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": null,
+   "place": "Trivial parameters t and free parameters H(S)=J times S in the coherent profinite action-space presentation, paragraph (3).",
+   "via": [
+    "lem-sfb-profinite-action-coherent-presentation",
+    "lem-sfb-profinite-invariants-filtered-continuity",
+    "lem-sfb-ind-unipotent-procyclic-difference",
+    "lem-sfb-polynomial-translation-acyclic",
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-trivial-ladic-derived-exterior",
+    "lem-sfb-dense-lattice-derived-invariants-comparison",
+    "lem-sfb-tame-inertia-continuous-koszul",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProfiniteActionParameters",
+  "declaration": "Profinite.ContinuousActionParameter.freeAction",
+  "declarations": [
+   "Profinite.ContinuousActionParameter.trivialAction",
+   "Profinite.ContinuousActionParameter.freeAction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProfiniteActionParameters.lean",
+  "statement": "def freeAction (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] : Profinite.{u} ⥤ ContAction Profinite.{u} G",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Owns the plain parameter functors requested by the independent H2 return. Fresh names avoid redeclaring landed FieldGaloisSite declarations; that module is neither imported nor edited."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee3220bca",
+  "group": "NH",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee3220bca",
+  "group": "NH",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 9e1c74. Diff vs prior snapshot: the theorem stmt_dep lem-sfb-field-profinite-galois-site is replaced by new definition node def-sfb-profinite-action-parameters. Module Sheaf.CategoryTheory.ProfiniteActionParameters has fresh Profinite.ContinuousActionParameter.trivialAction/freeAction, with the same data as the landed FieldGaloisSite.trivial/regular, real proofs and no sorry; the field-Galois module is neither imported nor edited. trivialParameter/freeParameter are rebuilt from the new functors with the same AsSmall transport. All other declarations, 12 sorry theorems and the main signature are byte-identical. Item node vs live: only the stmt_dep and the lean record are added. New node: statement matches Lean, J hypotheses exact, trivial functor needs only a topological group (stated in the node), lean.statement verbatim, source/blueprint docstrings present, no name collision live. Full clause re-check of the item found no fault: universes AsSmall u+1, finite jointly surjective covers incl. empty, site properties, coherent generators, Phi pinned to restricted Yoneda, ring/module pinned by evaluation, exact additive equivalence, PresentsDirectImage, FixedAll invariants, free (1,s) evaluation consistent with the freeAction space. Report has Worker report and Second reading by NH. No compile (no FIX); worker reports clean scompile and dry run. Advisory: new functors duplicate the FieldGaloisSite ones by design of the prior return."
+ }
+}

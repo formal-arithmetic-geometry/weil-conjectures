@@ -15,7 +15,8 @@
   "lem-sfb-action-topos-geometric-restriction",
   "def-sfb-condensed-action-module",
   "sk-def-sfb-module-objects",
-  "def-weil-sheaf-of-modules-category"
+  "def-weil-sheaf-of-modules-category",
+  "def-sfb-profinite-action-parameters"
  ],
  "proof": [
   {
@@ -443,5 +444,59 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-3c031b3d4 (reviewer sub-agent of L); spot-checked: I read the whole delivery. It is one commit with no new nodes; the item statement and stmt_deps are unchanged, and the base proof was empty with a WANTED source. There is no repair note for this item, so the re-split rule does not apply. No SGA is cited: the source text 'non-SGA ... WANTED' does not match the review_split SGA 4 regex. I checked all 15 steps by hand: (1) finite limits via the Tychonoff, closed-in-quasi-compact and clopen-basis leaves; (2) pretopology axioms pointwise; (3) subcanonicity via lem-sfb-compact-hausdorff-surjection-quotient, with Stacks 08YD and 0AAU present in topology.tex; (4) coherence, since the hypotheses of lem-trf-finitary-site-coherent-generators are exactly what steps 1-2 give; (5) by Yoneda, equivariance of x is the universal equation alpha_T^*x = gamma.pr_T^*x, and gluing works on the cover {J x T_i -> J x T}; (6) the free/forget adjunction; (7) G(F)(S) = F(J x S) is a P-sheaf, using H(S_i) x_{H(S)} H(S_j) = H(S_i x_S S_j); (8) r_h o r_g = r_{gh}, which gives a left action by contravariance; (9) the fibre square of a_T is identified with J x J x T via (j,k,t) -> ((j,kt),(jk,t)), the inverse (j, j^{-1}j', v) is continuous, and the projections are H(alpha_T) and H(pr_T) o r_gamma, so the equalizer is exactly the equation of step 5; (10) the two functors are quasi-inverse, with naturality from u a_T = a_T' H(u); (11-12) scalar closure holds because alpha^*r = pr^*r for trivially acted R, R_J(H(S)) = R(S) via pr_S^*, r_g acts as the identity on that ring, and M(a_T) is semilinear over the inclusion R_J(T) into R(T); (13) exactness holds because the equivalence is additive onto the abelian category Mod(R_J); (14) (p_* X)(S) = Phi(X)(tS) by the adjunction of lem-sfb-action-topos-geometric-restriction; (15) the fixed sections are exactly the 'fully fixed' clause of def-sfb-condensed-action-module. Small cases checked: J = 1, empty objects, trivial action, R = 0. Duplicates: none. lem-sfb-internal-action-site-presentation concerns a different site (C_K), lem-sfb-field-profinite-galois-site concerns the pro-etale site of a field, and lem-sfb-profinite-action-finite-quotients concerns finite quotients only. The item's statement matches what the parent lem-sfb-profinite-invariants-filtered-continuity uses. Batch-5 check: I accept the new citation of lem-trf-finitary-site-coherent-generators. It is generic topos theory (coherent representables in a finitary finite-limit site), not given by either assumption and not part of the proof of the trace formula or of Poincare duality. Its 133-node closure contains only generic trf topos nodes and no trace formula or duality theorem, and def-trf-coherent-topos was already a stmt_dep on the base. The declared tool_use is accepted for the same reason. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ProfiniteActionCoherentPresentation",
+  "declaration": "Profinite.CondensedAction.CoherentPresentation.profiniteAction_coherentPresentation",
+  "declarations": [
+   "Profinite.CondensedAction.CoherentPresentation.Base",
+   "Profinite.CondensedAction.CoherentPresentation.parameter",
+   "Profinite.CondensedAction.CoherentPresentation.baseCoverage",
+   "Profinite.CondensedAction.CoherentPresentation.base_site",
+   "Profinite.CondensedAction.CoherentPresentation.groupPresheaf",
+   "Profinite.CondensedAction.CoherentPresentation.group_isSheaf",
+   "Profinite.CondensedAction.CoherentPresentation.Actions",
+   "Profinite.CondensedAction.CoherentPresentation.Space",
+   "Profinite.CondensedAction.CoherentPresentation.underlying",
+   "Profinite.CondensedAction.CoherentPresentation.coverage",
+   "Profinite.CondensedAction.CoherentPresentation.trivialParameter",
+   "Profinite.CondensedAction.CoherentPresentation.freeParameter",
+   "Profinite.CondensedAction.CoherentPresentation.space_hasFiniteLimits",
+   "Profinite.CondensedAction.CoherentPresentation.site_properties",
+   "Profinite.CondensedAction.CoherentPresentation.representable_isSheaf",
+   "Profinite.CondensedAction.CoherentPresentation.representable",
+   "Profinite.CondensedAction.CoherentPresentation.sheaves_hasCoproducts",
+   "Profinite.CondensedAction.CoherentPresentation.coherent_generators",
+   "Profinite.CondensedAction.CoherentPresentation.trivial_restriction_isSheaf",
+   "Profinite.CondensedAction.CoherentPresentation.trivialRestriction",
+   "Profinite.CondensedAction.CoherentPresentation.base_transport",
+   "Profinite.CondensedAction.CoherentPresentation.base_hasFiniteLimits",
+   "Profinite.CondensedAction.CoherentPresentation.SetPresentation",
+   "Profinite.CondensedAction.CoherentPresentation.evaluate",
+   "Profinite.CondensedAction.CoherentPresentation.PresentsDirectImage",
+   "Profinite.CondensedAction.CoherentPresentation.coefficient",
+   "Profinite.CondensedAction.CoherentPresentation.coefficientSets_isSheaf",
+   "Profinite.CondensedAction.CoherentPresentation.coefficientSets",
+   "Profinite.CondensedAction.CoherentPresentation.trivialCoefficient",
+   "Profinite.CondensedAction.CoherentPresentation.ModuleData",
+   "Profinite.CondensedAction.CoherentPresentation.ModuleProperties",
+   "Profinite.CondensedAction.CoherentPresentation.ModulePresentation",
+   "Profinite.CondensedAction.CoherentPresentation.profiniteAction_coherentPresentation"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/ProfiniteActionCoherentPresentation.lean",
+  "statement": "theorem profiniteAction_coherentPresentation : ∃ P : SetPresentation J, PresentsDirectImage J P ∧ ∀ (R : Profinite.CondensedRing.{u}) [IsCommMonObj R.X], Nonempty (ModulePresentation J P R)",
+  "branch": "newtargets-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Finite-cover action-space site, represented internal actions, coherent generators, restricted Yoneda equivalence, exact additive module lift and normalized trivial/free section and morphism formulas. AsSmall gives the common u+1 small-site model; base_transport identifies its sheaves with those on the existing coherent profinite site. No data are chosen from the existence statements. H2 repair: trivialParameter and freeParameter use the plain functors owned by def-sfb-profinite-action-parameters. The field-Galois theorem is not a statement dependency, and its module is not imported."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ee3220bca",
+  "group": "NH",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 9e1c74. Diff vs prior snapshot: the theorem stmt_dep lem-sfb-field-profinite-galois-site is replaced by new definition node def-sfb-profinite-action-parameters. Module Sheaf.CategoryTheory.ProfiniteActionParameters has fresh Profinite.ContinuousActionParameter.trivialAction/freeAction, with the same data as the landed FieldGaloisSite.trivial/regular, real proofs and no sorry; the field-Galois module is neither imported nor edited. trivialParameter/freeParameter are rebuilt from the new functors with the same AsSmall transport. All other declarations, 12 sorry theorems and the main signature are byte-identical. Item node vs live: only the stmt_dep and the lean record are added. New node: statement matches Lean, J hypotheses exact, trivial functor needs only a topological group (stated in the node), lean.statement verbatim, source/blueprint docstrings present, no name collision live. Full clause re-check of the item found no fault: universes AsSmall u+1, finite jointly surjective covers incl. empty, site properties, coherent generators, Phi pinned to restricted Yoneda, ring/module pinned by evaluation, exact additive equivalence, PresentsDirectImage, FixedAll invariants, free (1,s) evaluation consistent with the freeAction space. Report has Worker report and Second reading by NH. No compile (no FIX); worker reports clean scompile and dry run. Advisory: new functors duplicate the FieldGaloisSite ones by design of the prior return."
  }
 }
