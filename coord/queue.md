@@ -1,6 +1,6 @@
 # Work queue
 
-108 items; claim with `tools/claim.py next <group> [--stage N]`.
+107 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (6 clusters, 466 modules)
 
@@ -17,7 +17,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 52, stage 3 2 items.
 
-## Stage 1: nodes to split (12)
+## Stage 1: nodes to split (11)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -25,13 +25,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
-| `lem-sfb-prime-to-ell-cochain-finite-quotient-descent` | 4013 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `lem-sfb-supported-lattice-norm-projection` | 4014 | none |
-| `lem-sfb-ind-unipotent-procyclic-difference` | 4015 | none |
-| `lem-sfb-ordered-join-partial-contraction` | 4016 | none |
-| `lem-sfb-padic-rational-algebraic-generator` | 4016 | none |
+| `lem-sfb-norm-algcl-bar-augmentation` | 4016 | none |
+| `lem-sfb-procyclic-scalar-cochain-evaluation` | 4016 | none |
+| `lem-sfb-profinite-action-coherent-presentation` | 4017 | none |
 | `def-per-support-condition` | - | none |
 
 ## Stage 2: nodes to state (26)
@@ -41,31 +40,31 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `sk-def-sf-orientation` | 2 | state | 17 |
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
-| `lem-sfb-condensed-derived-restriction-calculus` | 1 | state | 8 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
-| `lem-trf-point-system-transport-descent` | 1 | state | 2 |
 | `lem-sfb-root-tower-boundary-acyclicity` | 1 | state | 1 |
-| `det-lem-bounded-continuity-sections` | 1 | state | 0 |
-| `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-coef-compact-support-normalized-realization` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
-| `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
-| `lem-sf-package-compactified-tower-comparisons` | 1 | state | 0 |
-| `lem-sfb-algcl-countable-closed-finite-cover` | 1 | state | 0 |
-| `lem-sfb-closed-test-derived-exchange-model` | 1 | state | 0 |
-| `lem-sfb-derived-invariants-normal-subgroup-comparison` | 1 | state | 0 |
+| `lem-sfb-bounded-finite-evaluation-rectangle-replacement` | 1 | state | 0 |
+| `lem-sfb-discrete-lattice-cup-exterior` | 1 | state | 0 |
+| `lem-sfb-equivariant-resolution-bar-normalization` | 1 | state | 0 |
 | `lem-sfb-field-action-derived-section-transport` | 1 | state | 0 |
-| `lem-sfb-finite-valued-cech-cocycle-descent` | 1 | state | 0 |
-| `lem-sfb-free-representable-derived-functions-model` | 1 | state | 0 |
-| `lem-sfb-geometric-condensed-finite-scalar-model` | 1 | state | 0 |
-| `lem-sfb-homogeneous-cocycle-rectangle-detection` | 1 | state | 0 |
-| `lem-sfb-prime-to-ell-derived-invariants-reduction` | 1 | state | 0 |
-| `lem-sfb-profinite-derived-functions-filtered-colimit` | 1 | state | 0 |
-| `lem-sfb-proper-ultrametric-scalar-extension` | 1 | state | 0 |
+| `lem-sfb-ind-unipotent-procyclic-difference` | 1 | state | 0 |
+| `lem-sfb-internal-bar-ordered-cup` | 1 | state | 0 |
+| `lem-sfb-internal-bar-roof-adjunction` | 1 | state | 0 |
+| `lem-sfb-internal-inflation-graded-cup` | 1 | state | 0 |
+| `lem-sfb-lattice-koszul-triangulated-cup-comparison` | 1 | state | 0 |
+| `lem-sfb-polynomial-translation-acyclic` | 1 | state | 0 |
+| `lem-sfb-prime-to-ell-complete-scalar-integral` | 1 | state | 0 |
+| `lem-sfb-profinite-invariants-filtered-continuity` | 1 | state | 0 |
+| `lem-sfb-profinite-metric-function-quotients` | 1 | state | 0 |
+| `lem-sfb-relative-cyclic-restriction-model` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
+| `lem-sfb-trivial-ladic-derived-exterior` | 1 | state | 0 |
+| `lem-trf-point-system-roos-transport` | 1 | state | 0 |
 | `lem-zl-classical-weil-filtration-heart-transport` | 1 | state | 0 |
+| `lem-trf-point-system-power-roos-coherence` | 2 | state | 0 |
 
-Not open yet: 373 nodes that below a finished node, not needed, 108 nodes that wait for a statement dependency (bottom-up), 11 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 373 nodes that below a finished node, not needed, 98 nodes that wait for a statement dependency (bottom-up), 10 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (57)
 
