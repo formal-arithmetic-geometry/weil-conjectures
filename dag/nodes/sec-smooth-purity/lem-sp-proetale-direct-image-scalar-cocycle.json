@@ -15,83 +15,80 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathscr Y=\\operatorname{Sh}(Y_{\\mathrm{proet}})$, $\\mathscr X=\\operatorname{Sh}(Z_{\\mathrm{proet}})$ and $u=q_{\\mathrm{proet}}$. These are the small-site geometric operations of [def-weil-pbc-proetale-operations]. For $R=A,B,C$, [lem-pur-proetale-constant-coefficient-comparison] gives the specified isomorphism $c_R:u^{-1}R_Y\\xrightarrow{\\sim}R_Z$. Its definition in [def-weil-proetale-inverse-image] shows that $c_B\\circ u^{-1}(\\varphi_Y)=\\varphi_Z\\circ c_A$, and likewise for $\\psi$: the adjoints send each constant section $a$ to the same constant section $\\varphi(a)$ on the base change. The maps on locally constant sections follow by restriction and gluing, and then by sheafification. Thus the coefficient sheaves and both coefficient maps on $Z$ are precisely the inverse images of those on $Y$, identified through the specified $c_R$. Transporting module actions through these ring isomorphisms is the identified-coefficient convention already built into the prescribed operations; it introduces no new choice of adjunction.",
+   "text": "Normalize the scalar associator using the actual scalar-extension presentation and its tensor-unit normalized ordinary adjunction. The derived Hom comparison identifies its derived adjunction with the specified one by uniqueness of unit normalization on K-flat complexes. The representative formula for successive derived quotients then identifies the adjunction composition isomorphism with scalarExtensionFunctor_composition: both send (x tensor r) tensor s to x tensor b(r)s. This requires no coefficient flatness.",
    "uses": [
-    "def-weil-pbc-proetale-operations",
-    "lem-pur-proetale-constant-coefficient-comparison",
-    "def-weil-proetale-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A6 (lemma-adjoint), 07A7 (remark-base-change); sites.tex Tag 0H7J (example-constant-sheaf) for the canonical constant-coefficient specialization"
-   }
-  },
-  {
-   "text": "Identify the scalar associators before using the general cocycle. On either site choose a flat-term K-flat representative $P\\to N$ by [lem-pc-kflat-resolution]. The comparison $\\tau_T$ of [lem-sfb-successive-derived-quotient-normalization] is represented by\n$$(P\\otimes_{A_T}B_T)\\otimes_{B_T}C_T\\longrightarrow P\\otimes_{A_T}C_T,\\qquad (x\\otimes b)\\otimes c\\longmapsto x\\otimes\\psi(b)c.$$\nIts inverse inserts $1_B$. This is exactly the canonical tensor associativity used for $\\alpha_{T,N}$ in [det-sp-scalar-extension-functor], whose scalar extension is computed by the same K-flat model, including the action through the right factor. Hence $\\tau_T=\\alpha_T$, with the direction from iterated extension to direct extension. This verification applies to every $N$ by the representative isomorphism and naturality. The normalization theorem already supplies the validity of the iterated K-flat computation for arbitrary ring maps; no flatness of $B$ over $A$ or $C$ over $B$ is inferred.",
-   "uses": [
-    "lem-pc-kflat-resolution",
     "lem-sfb-successive-derived-quotient-normalization",
+    "lem-pur-sheaf-ring-derived-hom-comparison",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-adic-coefficient-datum",
     "det-sp-scalar-extension-functor"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 0D6D (lemma-derived-pullback-composition); blueprint scalar-extension proof paragraph (4)"
+    "place": "Tags 06YY and 0D6D: scalar adjunction and derived composition normalization."
    }
   },
   {
-   "text": "Write $P_R=q_R^*$, $G_R=Rq_{*,R}$ and $\\lambda^{R,S}:P_ST_Y^{R,S}\\xrightarrow{\\sim}T_Z^{R,S}P_R$. In [def-sp-reduction-direct-image-comparison], $\\lambda$ is the balanced K-flat tensor/pullback map, so under the coefficient identifications of step 1 it is the canonical inverse-image/tensor comparison in [lem-pur-ringed-coefficient-projection-cocycle]. Both send the inverse image of $x\\otimes s$ to the inverse image of $x$ tensor $s$, and use the same normalized geometric adjunction [def-weil-pbc-proetale-operations]. For $R\\to S$ equal to any of $A\\to B$, $B\\to C$ or $A\\to C$, the specified mate is consequently characterized by\n$$\\varepsilon^S_{T_Z^{R,S}E}\\circ P_S(\\gamma^{R,S}_{q,E})=T_Z^{R,S}(\\varepsilon^R_E)\\circ\\lambda^{R,S}_{G_RE}.$$\nThe adjunct-counit equivalence [lem-weil-pbc-adjunct-counit-identity] makes this characterization unique. It is exactly the defining transpose of $\\chi$ in the cited general cocycle, so $\\chi_\\varphi=\\gamma^{A,B}_q$, $\\chi_\\psi=\\gamma^{B,C}_q$ and $\\chi_{\\psi\\varphi}=\\gamma^{A,C}_q$. This checks equality of the specified maps, not only existence of some comparison.",
+   "text": "Prove coherence of ordinary restriction/pullback squares for the coefficient tower. Transpose through the geometric adjunctions. The resulting restriction/direct-image comparisons and the restriction associators act identically on underlying sections, so sectionwise extensionality proves the identity. Injectivity of the mate correspondence returns the pullback identity. Naturality of the canonical constant-ring inverse-image comparisons supplies the coefficient squares.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-proetale-inverse-image",
+    "lem-sp-scalar-tensor-pullback-square",
+    "lem-pur-proetale-constant-coefficient-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 and 07A7: restriction, pullback and their counit mates."
+   }
+  },
+  {
+   "text": "Transport the ordinary identity to derived categories using the proved exact-functor square-pasting lemma CategoryTheory.Functor.mapDerivedCategorySquareIso_hom_app_comp in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.RestrictScalars. Its triangle comparison is pbcDerivedRestrictComp. Horizontal and vertical composition of mates for the scalar adjunctions gives the scalar-extension/pullback identity. Substitute the normalized associators from step 1 and the actual inverse-mate definition of directImageScalarPullbackIso.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "def-weil-pbc-bounded-constructible-tower",
+    "det-sp-scalar-extension-functor",
+    "def-sp-reduction-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0E47: pasting comparison squares and their mates."
+   }
+  },
+  {
+   "text": "Transpose the claimed direct-image equation through the target geometric adjunction. The counit formula for mateEquiv replaces each directImageScalarComparison by its specified scalar/pullback comparison followed by scalar extension of the source counit. Naturality of the pullback comparison and scalar associator reduces the two composites to the identity of step 3. Injectivity of the Hom equivalence proves the equation for every unbounded E. No properness, boundedness or coefficient flatness is used.",
    "uses": [
     "def-sp-reduction-direct-image-comparison",
-    "lem-pur-ringed-coefficient-projection-cocycle",
     "def-weil-pbc-proetale-operations",
     "lem-weil-pbc-adjunct-counit-identity"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A7 (remark-base-change), 07A6 (lemma-adjoint); categories.tex Tag 0037 (definition-adjoint), the equivalent counit description of the adjunct"
-   }
-  },
-  {
-   "text": "Apply [lem-pur-ringed-coefficient-projection-cocycle] to $u$ and the three ring sheaves $A_Y\\to B_Y\\to C_Y$. Step 1 checks its inverse-image coefficient hypothesis; the derived categories are ordinary unbounded module categories as required. Its identity is\n$$\\chi_{\\psi\\varphi,E}\\circ\\tau_{Y,G_AE}=G_C(\\tau_{Z,E})\\circ\\chi_{\\psi,T_Z^{A,B}E}\\circ T_Y^{B,C}(\\chi_{\\varphi,E}).$$\nSubstitute $\\tau=\\alpha$ from step 2 and $\\chi=\\gamma$ from step 3. With $G_R=Rq_{*,R}$ this is exactly the required displayed equality, as an equality in $D(Y_{\\mathrm{proet}},C)$. Its common source is $T_Y^{B,C}T_Y^{A,B}G_AE$, and its common target is $G_CT_Z^{A,C}E$.",
-   "uses": [
-    "lem-pur-ringed-coefficient-projection-cocycle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0E47 (remark-compose-base-change-horizontal), coefficient-change specialization; the general normalized coefficient cocycle node supplies the verification omitted in the Stacks remark"
-   }
-  },
-  {
-   "text": "The equation supplied by [lem-pur-ringed-coefficient-projection-cocycle] is an identity of natural transformations, so evaluating it gives the asserted equality for every $E$ and its naturality in every morphism $E\\to E'$. That node works with arbitrary unbounded objects and arbitrary sheaf ring maps, and explicitly assumes neither flatness nor invertibility of the comparison. Its geometric morphism is arbitrary. Thus the specialization uses no properness of $q$, boundedness of $E$, or flatness or finite projective dimension of either coefficient map. The finite $\\ell$-power coefficient hypotheses in the item merely restrict the allowed rings.",
-   "uses": [
-    "lem-pur-ringed-coefficient-projection-cocycle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 07A7 (remark-base-change) and 0E47 (remark-compose-base-change-horizontal), natural transformations on the unbounded derived categories"
+    "place": "Tags 07A7 and 0E47; blueprint direct-image proof Step 4: composition of counit transposes."
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-proetale-operations",
-  "lem-pur-proetale-constant-coefficient-comparison",
-  "def-weil-proetale-inverse-image",
-  "lem-pc-kflat-resolution",
   "lem-sfb-successive-derived-quotient-normalization",
+  "lem-pur-sheaf-ring-derived-hom-comparison",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-adic-coefficient-datum",
   "det-sp-scalar-extension-functor",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-proetale-inverse-image",
+  "lem-sp-scalar-tensor-pullback-square",
+  "lem-pur-proetale-constant-coefficient-comparison",
   "def-sp-reduction-direct-image-comparison",
-  "lem-pur-ringed-coefficient-projection-cocycle",
+  "def-weil-pbc-proetale-operations",
   "lem-weil-pbc-adjunct-counit-identity"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Explicit constant-coefficient specialization of lem-pur-ringed-coefficient-projection-cocycle (Stacks 07A7 and 0E47), checking the balanced associator and counit-mate normalizations; realizes blueprint direct-image proof Step 4."
+  "place": "E2: normalized scalar associators, sectionwise restriction-square coherence, exact derived square pasting, and composition of counit mates; realizes the existing unit associativity step directly."
  },
  "mathlib_searches": [
   {
@@ -218,9 +215,7 @@
  },
  "tool_uses": [
   "lem-pur-proetale-constant-coefficient-comparison",
-  "lem-pc-kflat-resolution",
-  "lem-sfb-successive-derived-quotient-normalization",
-  "lem-pur-ringed-coefficient-projection-cocycle"
+  "lem-sfb-successive-derived-quotient-normalization"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -248,5 +243,15 @@
   "group": "Q04",
   "result": "pass",
   "note": "Node unchanged except its lean record; statement verbatim, lines <=91 chars. Clause-by-clause check: prime ℓ, finite comm rings A,B,C each with an ℓ^n annihilation hypothesis, no Nontrivial; φ, ψ, ψ.comp φ; arbitrary q : Z ⟶ Y and unbounded E : proEtaleDerivedCategory Z A; T = scalarExtensionFunctor, definitionally scalarExtension = directImageScalarExtension; α = scalarExtensionFunctor_composition.hom in the successive→direct direction; Rq_* = directImageConstantPush; γ = directImageScalarComparison (mateEquiv of the normalized adjunctions and directImageScalarPullbackIso), re-exported by the def-sp-reduction-direct-image-comparison module. The equation is the node's display in reverse (≫) order with matching source and target; naturality follows from the natural transformations; no extra hypotheses. Edge cases (zero rings, identity and non-flat maps, empty schemes, E=0, Type u rings as in all dep interfaces) OK. H4: no existing cocycle among the directImageScalarComparison users; ringedCoefficientProjectionCocycle is the general proof-only node. Docstrings carry the source place, blueprint tag and five proof steps. Advisory only: private proof-plan imports unused under sorry; the Second reading section is the dispatcher-policy placeholder. No compile (per the 2026-10-21 instruction); the worker reports clean scompile runs."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "E2",
+  "result": "pass",
+  "landing": "20261021T214746-L-1848167",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
