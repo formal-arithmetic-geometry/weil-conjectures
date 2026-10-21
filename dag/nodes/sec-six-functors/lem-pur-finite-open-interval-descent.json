@@ -15,9 +15,148 @@
   "def-weil-constructible-intervals",
   "def-weil-finite-torsion-constructibility"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First record the geometric finiteness needed for the partitions. The field $k$ is Noetherian (its only ideals are $0$ and $k$), and $\\operatorname{Spec}k$ is quasi-compact, so [lem-weil-pbc-finite-type-over-noetherian] makes $X$ Noetherian. It is quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. For finite-type schemes over a field, [def-weil-constructible-subset] records that every locally closed subset is constructible and every open is retrocompact. For each $x\\in X$ choose $t$ with $x\\in U_t$ and an affine open neighbourhood $W_x\\subset U_t$, using [lem-weil-pbc-affine-opens-basis]. Quasi-compactness gives a finite affine subcover $W_a$ of $X$, indexed by $\\operatorname{Fin}N$, with a chosen containment $W_a\\subset U_{t(a)}$. No separatedness of $X$ or affineness of intersections is used.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-affine-opens-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6 (lemma-finite-type-noetherian); properties.tex Tag 01OY; schemes.tex Tag 01IT; topology.tex Tag 005L."
+   }
+  },
+  {
+   "text": "For any open immersion $v:V\\hookrightarrow X$, [lem-weil-proetale-weakly-etale-localization] identifies $V_{\\mathrm{proet}}$ with $X_{\\mathrm{proet}}/V$ and identifies their constant coefficient rings. By [lem-sfb-proetale-object-inverse-image-restriction], the module inverse image $v^*$ is localized restriction. This functor is exact by [lem-pur-site-restriction-module-adjunction-exact]. Thus termwise restriction of an arbitrary representative complex preserves quasi-isomorphisms and computes $Lv^*F$, with no boundedness assumption. Since exactness preserves kernels, images and their quotient, the cohomology formula of [def-weil-derived-cohomology-sheaves] gives $\\mathcal H^i(F)|_V\\cong\\mathcal H^i(Lv^*F)$ for every integer $i$. The same assertion applies to open immersions between any of the charts and local strata.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tag 03CE (lemma-localize-given-products); sites-modules.tex Section 03DH and Tag 03DJ; kernels/images formula for cohomology."
+   }
+  },
+  {
+   "text": "The family $\\{U_t\\to X\\}$ is a covering in the small pro-etale site. Indeed its arrows are open immersions, hence weakly etale; for every affine open $V\\subset X$, refine the open cover $\\{V\\cap U_t\\}$ by affine opens and choose a finite subcover of the quasi-compact $V$. This is exactly the covering criterion of [def-weil-pbc-proetale-site]. If $i\\notin[r,s]$, the hypotheses and Step 2 make every restriction of $\\mathcal H^i(F)$ to $U_t$ zero. The sheaf-vanishing assertion in [lem-cbc-proetale-stalk-conservative](1) therefore gives $\\mathcal H^i(F)=0$. This uses covering-family detection, which is valid for arbitrary pro-etale sheaves, and does not use detection by geometric stalks.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-constructible-intervals",
+    "lem-cbc-proetale-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Definition of the small pro-etale covering families; covering-locality argument of blueprint thm-pur-general-admissibility, Step 4."
+   }
+  },
+  {
+   "text": "We spell out a sheaf transport fact used for the partitions. Let $L$ be a locally constant $A$-module sheaf with finite geometric stalks on a scheme $T$. Choose trivializing covering members $T_j\\to T$ and constant values $M_j$ by [def-weil-proetale-locally-constant-sheaf]. Discard empty members. On each remaining member $r_j:T_j\\to T$ choose a geometric point. Since $T_j\\to T$ is an object of $T_{\\mathrm{proet}}$, [lem-sfb-proetale-object-inverse-image-restriction](1),(3) identifies the localized restriction $L|_{T_j}$ of [def-weil-proetale-locally-constant-sheaf] with the inverse image $r_j^{-1}L$, as abelian sheaves and as $A$-module sheaves. The inverse-image stalk isomorphism [lem-pur-proetale-inverse-image-stalk], together with the underlying abelian inverse-image identification of [lem-pe-constant-left-module-inverse-image], then identifies the stalk of $L|_{T_j}$ there with a finite stalk of $L$. By [lem-weil-proetale-constant-sheaf-stalk], that same stalk is $M_j$; hence $M_j$ is finite. Thus the chosen trivialization has finite module models. For any scheme morphism $h:Z\\to T$, [lem-exc-proetale-pullback-locally-constant] provides the base-changed trivialization of $h^*L$ with the same finite $M_j$. Its stalks are finite by [lem-weil-pbc-proetale-finite-model-stalks]. Consequently pullback preserves local constancy with finite stalks. If $T$ or $Z$ is empty the assertion is vacuous. No conservativity assertion about stalks is involved.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "lem-pur-proetale-inverse-image-stalk",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-pe-constant-left-module-inverse-image",
+    "lem-weil-proetale-constant-sheaf-stalk",
+    "lem-exc-proetale-pullback-locally-constant",
+    "lem-weil-pbc-proetale-finite-model-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R (lemma-pullback-locally-constant); sites.tex Tag 00Y8(3), sheafification does not change stalks; proetale.tex Tag 0993, classical points."
+   }
+  },
+  {
+   "text": "Fix $i\\in[r,s]$. By [def-weil-finite-torsion-constructibility] each $\\mathcal H^i(Lu_t^*F)$ admits a finite partition of $U_t$ by constructible locally closed immersed subschemes on which it is locally constant with finite stalks. For $W_a\\subset U_{t(a)}$, intersect that partition with $W_a$: more precisely take the open inverse image of $W_a$ in each stratum scheme, so there are actual morphisms to those strata. These are disjoint locally closed subschemes covering $W_a$ and are constructible by the Noetherian-space clause of [def-weil-constructible-subset]. Step 2 identifies the sheaf being restricted with $\\mathcal H^i(F)|_{W_a}$; Step 4 preserves its local constancy and finite stalks on the intersected strata. For these identifications inverse images along composite scheme morphisms compose: [lem-weil-pbc-site-morphism-composition] gives this for underlying abelian sheaves, and [lem-pe-constant-left-module-inverse-image] gives the same compatibility with the fixed $A$-action.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-constructible-subset",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-pe-constant-left-module-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E (lemma-constructible-quasi-compact-quasi-separated), finite affine refinement; topology.tex Tag 005L; sites.tex Tag 03CB."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-etale-stratification-local-gluing-core] to the finite affine cover $W_a$ and the partitions of Step 5. Its quasi-compact and quasi-separated hypotheses hold by Step 1. It gives a finite constructible locally closed immersed stratification $X=\\coprod_c S_c$ and, for each $c$, an actual factorization $S_c\\to T_{a,b}\\to W_a\\to X$ through one of the chart strata. Pulling $\\mathcal H^i(F)$ along this factorization identifies its restriction to $S_c$ with the pullback of its locally constant finite-stalk restriction to $T_{a,b}$. Here composition for underlying abelian inverse images is [lem-weil-pbc-site-morphism-composition], and the coefficient-compatible version is [lem-pe-constant-left-module-inverse-image]. Step 4 shows that this pullback is locally constant with finite stalks. Hence $\\mathcal H^i(F)$ has exactly the finite global partition required by [def-weil-finite-torsion-constructibility]. This applies separately to each of the finitely many $i\\in[r,s]$; a common stratification across all degrees is not required by that definition.",
+   "uses": [
+    "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "lem-weil-pbc-site-morphism-composition",
+    "lem-pe-constant-left-module-inverse-image",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095E (lemma-constructible-quasi-compact-quasi-separated), implication (2) to (3): finite global immersed refinement."
+   }
+  },
+  {
+   "text": "Step 3 gives vanishing outside the finite integer interval $[r,s]$, and Steps 5--6 give constructibility in every remaining degree. Zero cohomology sheaves are constructible as well: on the single stratum $X$ they are the constant module sheaf with value $0$. By [def-weil-finite-torsion-constructibility] this says $F\\in D_c^b(X,A)$, and by [def-weil-constructible-intervals] it says $F\\in D_c^{[r,s]}(X,A)$. This conclusion has used no Tor-amplitude condition.",
+   "uses": [
+    "def-weil-finite-torsion-constructibility",
+    "def-weil-constructible-intervals"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Definition of constructible sheaves, Tag 099Y; blueprint definitions of bounded constructible complexes and cohomological intervals."
+   }
+  },
+  {
+   "text": "For the asserted consequence assume first $J\\ne\\varnothing$. Choose a finite interval $[r_t,s_t]$ for each bounded constructible restriction (choose $[0,0]$ when the restriction is zero), and put $r=\\min_t r_t$, $s=\\max_t s_t$. Since $r\\le r_t\\le s_t\\le s$, its cohomology vanishes outside $[r,s]$ by the same vanishing condition of [def-weil-constructible-intervals]; Steps 1--7 apply. If $X=\\varnothing$, every object of its small pro-etale site is the empty scheme. The empty family covers the final object by [def-weil-pbc-proetale-site]. Clause (1) of [lem-cbc-proetale-stalk-conservative] with this empty covering says every module sheaf is zero and every derived morphism is an isomorphism; in particular $0\\to F$ is an isomorphism, so $F=0$. The zero object has no nonzero cohomology and the empty partition witnesses constructibility, so it lies in every displayed interval. This proves both the $J=\\varnothing$ convention and the bounded-constructible consequence in the empty case.",
+   "uses": [
+    "def-weil-constructible-intervals",
+    "def-weil-pbc-proetale-site",
+    "lem-cbc-proetale-stalk-conservative",
+    "def-weil-finite-torsion-constructibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 095F locality argument; elementary finite minimum/maximum assembly and the empty-cover sheaf axiom."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-constructible-intervals",
+  "def-weil-constructible-subset",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-finite-torsion-constructibility",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-locally-constant-sheaf",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-exc-proetale-pullback-locally-constant",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-pbc-etale-stratification-local-gluing-core",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-weil-proetale-weakly-etale-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 095E/095F, finite affine refinement and constructible partition gluing; explicit translation to arbitrary pro-etale complexes using exact localized restriction and covering-family vanishing. Blueprint thm-pur-general-admissibility Step 4."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +206,59 @@
    "results": "No hits.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite open cover detects bounded constructible proetale complexes with fixed cohomological bounds without finite Tor dimension",
+   "results": "{\"t\": \"2026-10-21T06:41:50Z\", \"tool\": \"leanfinder\", \"query\": \"Finite open cover detects bounded constructible proetale complexes with fixed cohomological bounds without finite Tor dimension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.QuasiCompactCover\", \"AlgebraicGeometry.Scheme.instFintypeI₀FiniteSubcover\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D\", \"AlgebraicGeometry.ExistsHomHomCompEqCompAux.𝒰D₀\", \"AlgebraicGeometry.QuasiCompactCover.of_finite\", \"AlgebraicGeometry.Scheme.etalePretopology\", \"AlgebraicGeometry.Scheme.OpenCover.finiteSubcover_X\", \"AlgebraicGeometry.Scheme.etaleTopology\"], \"digest\": \"e9d750414718bbb5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, DerivedCategory",
+   "results": "{\"t\": \"2026-10-21T06:41:50Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, DerivedCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "constructible.*(cover|local)|[Cc]onstructible.*[Ss]heaf",
+   "results": "{\"t\": \"2026-10-21T06:41:50Z\", \"tool\": \"grep\", \"query\": \"constructible.*(cover|local)|[Cc]onstructible.*[Ss]heaf\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\", \"Mathlib/AlgebraicGeometry/Morphisms/FinitePresentation.lean\"], \"digest\": \"612ec9f6e7e92f08\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A complex of proetale module sheaves is bounded constructible in an interval if so on a finite open cover",
+   "results": "{\"t\": \"2026-10-21T06:41:51Z\", \"tool\": \"leansearch\", \"query\": \"A complex of proetale module sheaves is bounded constructible in an interval if so on a finite open cover\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Topology.IsLocallyConstructible.iff_isConstructible_of_isOpenCover\", \"SheafOfModules.IsFiniteType.mk\", \"TopCat.Presheaf.IsSheafOpensLeCover\", \"SheafOfModules.IsFiniteType\", \"SheafOfModules.hasLimitsOfSize\", \"SheafOfModules.hasLimitsOfShape\", \"SheafOfModules.mk\", \"SheafOfModules.Finite.hasFiniteLimits\"], \"digest\": \"aa168adc1d382ff4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cohomology sheaves with finite locally constant strata and vanishing outside an interval descend along Zariski open coverings",
+   "results": "{\"t\": \"2026-10-21T06:42:26Z\", \"tool\": \"leanfinder\", \"query\": \"Cohomology sheaves with finite locally constant strata and vanishing outside an interval descend along Zariski open coverings\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.isColimitLocallyConstantPresheaf_desc_apply\", \"LightCondensed.isColimitLocallyConstantPresheaf_desc_apply\", \"LightCondensed.isColimitLocallyConstantPresheaf\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"Condensed.isColimitLocallyConstantPresheaf\", \"AlgebraicGeometry.Scheme.OpenCover.ext_elem\", \"TopCat.Sheaf.existsUnique_gluing'\", \"TopCat.Sheaf.existsUnique_gluing\"], \"digest\": \"632f5b7eb53abbcd\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"boundedConstructible\"",
+   "results": "{\"t\": \"2026-10-21T06:42:27Z\", \"tool\": \"loogle\", \"query\": \"\\\"boundedConstructible\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "boundedConstructible|constructibleSheaf|ConstructibleSheaf|proetale",
+   "results": "{\"t\": \"2026-10-21T06:42:27Z\", \"tool\": \"grep\", \"query\": \"boundedConstructible|constructibleSheaf|ConstructibleSheaf|proetale\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-general-admissibility",
@@ -87,5 +275,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-finite-open-interval-descent",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Eight steps separate exact restriction, covering-local cohomological vanishing, finite-model transport, and geometric finite partition gluing. All inputs already exist in the DAG: no new nodes or Mathlib leaves. Explicitly handles arbitrary unbounded pro-etale complexes, absent Tor hypotheses, non-separated schemes, and empty covers.",
+  "blueprint": "Realizes thm-pur-general-admissibility main-20261015 Step 4: the cohomological vanishing and constructibility part of chart-to-global descent, and unit sk-prop-sf-rf-shriek-preservation Step 4 finite-cover assembly; Tor descent remains the separate existing node.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Finite-type Noetherianity is a generic geometric prerequisite for the finite stratifications. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Supplies quasi-separatedness for finite affine stratification gluing, without separatedness of X. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-opens-basis",
+    "why": "Generic affine-basis refinement of the given open cover. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the open localized pro-etale site and its constant coefficients. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Identifies the scheme module inverse image with localized restriction. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exactness of localized restriction gives the unbounded cohomology comparison. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-cbc-proetale-stalk-conservative",
+    "why": "Only clause (1), covering-family vanishing and isomorphism detection, is used; no geometric stalk conservativity. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pur-proetale-inverse-image-stalk",
+    "why": "Generic stalk transport turns finite stalks into finite constant models on nonempty trivializing members. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-pe-constant-left-module-inverse-image",
+    "why": "Fixed-ring module inverse images agree with abelian inverse images and commute with composition. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-proetale-constant-sheaf-stalk",
+    "why": "Identifies a constant model with its stalk, so a finite stalk forces a finite model. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-exc-proetale-pullback-locally-constant",
+    "why": "Generic pullback of finite constant local models along actual morphisms between strata. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-model-stalks",
+    "why": "Finite constant local models have finite geometric stalks. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-morphism-composition",
+    "why": "Generic composition isomorphisms identify the pullbacks along the factorizations supplied by gluing. No statement of this unit supplies this generic tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-stratification-local-gluing-core",
+    "why": "Purely geometric finite immersed refinement; its statement supplies actual morphism factorizations. No statement of this unit supplies this generic tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-affine-opens-basis",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-pur-proetale-inverse-image-stalk",
+  "lem-pe-constant-left-module-inverse-image",
+  "lem-weil-proetale-constant-sheaf-stalk",
+  "lem-exc-proetale-pullback-locally-constant",
+  "lem-weil-pbc-proetale-finite-model-stalks",
+  "lem-weil-pbc-site-morphism-composition",
+  "lem-weil-pbc-etale-stratification-local-gluing-core"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q32-3c4a439fc",
+  "group": "Q32",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-3c4a439fc (reviewer sub-agent of L); spot-checked: Q32 lem-pur-finite-open-interval-descent 3c4a439f. The statement is unchanged, the delivery creates no new nodes, the item is still unsplit on live and side-live, and there is no repair note. The proof follows Stacks 095E (2)=>(3) (finite affine refinement, local constructible decompositions, then a global refining stratification) and realizes Step 4 of blueprint main-20261015 thm-pur-general-admissibility and Step 4 of unit sk-prop-sf-rf-shriek-preservation. Every cited statement was read. Steps 1, 2, 3, 5, 6, 7 and 8 are correct. Step 2 uses exactness of localized restriction, so the cohomology comparison holds for unbounded F. Step 3 uses only clause (1) of lem-cbc-proetale-stalk-conservative, which applies because A is finite; it does not use geometric-stalk conservativity. Steps 5 and 6 take Z x_{U_t} W_a and the actual factorizations supplied by the J2 gluing core, so there is no E3 image-containment fault, and only quasi-separatedness of X is used. Step 8 handles empty X correctly: the empty family covers it, so F=0. Edge cases tested: X empty, J empty, empty members, non-separated X, r=s, and n>1 with no Tor hypothesis. lem-sf-finite-cover-ctf-locality needs Tor data, so it is not a duplicate (advisory overlap only). All 14 tool_uses are accepted; two are redundant on-route declarations. FIX (C4): Step 4 treated the localized restriction L|_{T_j} as an inverse image without a node saying so. Step 4 now cites lem-sfb-proetale-object-inverse-image-restriction(1),(3) to identify L|_{T_j} with r_j^{-1}L, and that node is added to its uses; proof_deps is unchanged and is still the union.; 1 file(s) fixed by the reviewer"
  }
 }

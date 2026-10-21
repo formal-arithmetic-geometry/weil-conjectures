@@ -20898,3 +20898,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/Q26/lem-sfb-equivariant-coequalizer-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q105/lem-kun-0f1m (reviewer PASS; after a return; new nodes: 2)
 - 08:08 L: merged deliver/Q72/det-lem-int-integral-heart-triangulated (reviewer PASS; after a return; new nodes: 3)
+- 08:08 L: merged deliver/Q32/lem-pur-finite-open-interval-descent (reviewer FIX; first push; new nodes: 0)
