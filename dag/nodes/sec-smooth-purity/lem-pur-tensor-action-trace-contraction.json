@@ -11,9 +11,74 @@
   "def-sfb-monoidal-category",
   "def-sfb-strong-monoidal-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $A=F_fL_f$, $B=L_g$, and $C=P_gK$, so $L=L_f\\otimes P_fB$. All compositions below are right to left. The specified map $\\sigma_K$ has inverse $(1_{L_f}\\otimes\\delta_{f;B,C}^{-1})\\alpha_{L_f,P_fB,P_fC}$. Substitute $M=L_f$, $N=B$, $N'=C$ into the assumed tensor-action equation and take inverses. Since functors preserve inverse arrows and the tensor is a bifunctor, this gives the explicitly typed equality\n$$q_{f;L_f,B\\otimes C}=\\alpha_{A,B,C}(q_{f;L_f,B}\\otimes1_C)q_{f;L,C}F_f(\\sigma_K).$$\nBoth sides go from $F_f(L_f\\otimes P_f(B\\otimes C))$ to $A\\otimes(B\\otimes C)$. This uses the tensor-action equation only at the displayed triple.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Final sentence, canonical reassociations; agent expansion: inverse of the assumed tensor-action equation."
+   }
+  },
+  {
+   "text": "Associator naturality, with the arbitrary morphism $t_f:A\\to\\mathbf1_Y$, gives\n$$(t_f\\otimes1_{B\\otimes C})\\alpha_{A,B,C}=\\alpha_{\\mathbf1_Y,B,C}((t_f\\otimes1_B)\\otimes1_C).$$\nApply [lem-coef-monoidal-structural-coherence] to the two formal structural arrows from $(\\mathbf1_Y\\otimes B)\\otimes C$ to $B\\otimes C$: one is $\\lambda_{B\\otimes C}\\alpha_{\\mathbf1_Y,B,C}$, the other is $\\lambda_B\\otimes1_C$. Their formal endpoints agree, so\n$$\\lambda_{B\\otimes C}\\alpha_{\\mathbf1_Y,B,C}=\\lambda_B\\otimes1_C.$$\nCombining these two equalities and bifunctoriality yields\n$$\\lambda_{B\\otimes C}(t_f\\otimes1_{B\\otimes C})\\alpha_{A,B,C}=(\\lambda_B(t_f\\otimes1_B))\\otimes1_C.$$\nCoherence is applied only to structural arrows; $t_f$ is moved using naturality, not treated as a structural generator.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "lem-coef-monoidal-structural-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0HAY, lemma-monoidal-coherence (2), with associators restored; associator naturality from Tag 0FFK, definition-monoidal-category."
+   }
+  },
+  {
+   "text": "Postcompose the equality in Step 1 with $\\lambda_{B\\otimes C}(t_f\\otimes1_{B\\otimes C})$ and use Step 2. By the definitions in the statement, $a=\\lambda_B(t_f\\otimes1_B)q_{f;L_f,B}$. Tensor bifunctoriality combines these factors, giving\n$$d_{f,B\\otimes C}=(a\\otimes1_C)q_{f;L,C}F_f(\\sigma_K).$$\nThe domain is $F_f(L_f\\otimes P_f(B\\otimes C))$ and the codomain is $B\\otimes C$. The arrow $q_{f;L,C}$ has target $F_fL\\otimes C$, so it is precisely the specified arrow to which $a\\otimes1_C$ can be applied.",
+   "uses": [
+    "def-sfb-monoidal-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Final sentence, canonical reassociations; agent expansion: contraction of the first trace after the inverse action."
+   }
+  },
+  {
+   "text": "The inverse of a natural isomorphism is natural: multiply the naturality square for $\\operatorname{PF}_g$ by its component inverses. At $a:F_fL\\to B$ and the fixed object $K$ this says\n$$q_{g;B,K}F_g(a\\otimes1_{P_gK})=(F_g(a)\\otimes1_K)q_{g;F_fL,K}.$$\nBoth sides have domain $F_g(F_fL\\otimes P_gK)$ and codomain $F_gB\\otimes K$. This square uses only the assumed naturality of $\\operatorname{PF}_g$; no tensor-action equation for $g$ is required.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Final sentence, canonical reassociations; agent expansion: the given projection naturality in the coefficient object."
+   }
+  },
+  {
+   "text": "Apply $F_g$ to Step 3, using preservation of composition, and postcompose with $d_{g,K}=\\lambda_K(t_g\\otimes1_K)q_{g;B,K}$. Step 4 and tensor bifunctoriality give\n$$\\begin{aligned}\nd_{g,K}F_g(d_{f,B\\otimes C})\n&=\\lambda_K(t_g\\otimes1_K)q_{g;B,K}F_g(a\\otimes1_C)F_g(q_{f;L,C})F_gF_f(\\sigma_K)\\\\\n&=\\lambda_K((t_gF_g(a))\\otimes1_K)q_{g;F_fL,K}F_g(q_{f;L,C})F_gF_f(\\sigma_K).\n\\end{aligned}$$\nInsert $b=t_gF_g(a)$, $B=L_g$ and $C=P_gK$. This is exactly the asserted equality from $F_gF_f(L_f\\otimes P_f(L_g\\otimes P_gK))$ to $K$. Every object and arrow used is among the displayed ones or their structural comparisons, so the assumed domain-closure condition permits every substitution.",
+   "uses": [
+    "def-sfb-monoidal-category",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+    "place": "Final sentence, canonical reassociations; agent expansion: successive trace contractions followed by naturality."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor",
+  "lem-coef-monoidal-structural-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-smooth-purity/lem-pur-projection-purity-agreement.proof.md",
+  "place": "Final sentence on canonical reassociations, expanded into the two-functor tensor-action calculation; structural unit coherence is Stacks Tag 0HAY, lemma-monoidal-coherence (2)."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +128,66 @@
    "results": "{\"t\": \"2026-10-21T06:19:20Z\", \"tool\": \"leanfinder\", \"query\": \"A natural inverse projection formula satisfying the tensor associativity law transports a trace t from F L to the tensor unit into a coefficient linear map and contraction through two functors factors through the iterated projection formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"contractLeft_assoc_coevaluation'\", \"contractLeft_assoc_coevaluation\", \"LinearMap.trace_eq_contract_apply\", \"LinearMap.trace_eq_contract\", \"LinearMap.trace_eq_contract'\", \"LinearMap.trace_tensorProduct\", \"CategoryTheory.tensorLeftHomEquiv_symm_naturality\", \"CategoryTheory.tensorLeftHomEquiv_tensor\"], \"digest\": \"b523cb275f3c33a6\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern module endomorphism traces, rigid dual-pair Hom bijections or associator naturality, not contraction of arbitrary coefficient functionals through two supplied projection actions; no one-line specialization gives the displayed equality."
+  },
+  {
+   "tool": "grep",
+   "query": "leftUnitor_tensor|projectionFormula|trace.*contract",
+   "results": "{\"t\": \"2026-10-21T08:19:30Z\", \"tool\": \"grep\", \"query\": \"leftUnitor_tensor|projectionFormula|trace.*contract\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/Mon.lean\", \"Mathlib/CategoryTheory/Monoidal/CoherenceLemmas.lean\", \"Mathlib/CategoryTheory/Monoidal/CoherenceLemmas.lean\", \"Mathlib/CategoryTheory/Monoidal/CoherenceLemmas.lean\", \"Mathlib/CategoryTheory/Monoidal/Category.lean\", \"Mathlib/CategoryTheory/Monoidal/Category.lean\"], \"digest\": \"c29b1aad3f1e8f2b\"}",
+   "date": "2026-10-21",
+   "verdict": "related: exact left-unitor tensor coherence identity, read in Mathlib/CategoryTheory/Monoidal/Category.lean:686-688 and CoherenceLemmas.lean:31-38; it is only a structural substep of this item, already supplied by existing lem-coef-monoidal-structural-coherence. No match for the full two-functor contraction statement."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.MonoidalCategory.leftUnitor_tensor",
+   "results": "{\"t\": \"2026-10-21T08:19:31Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.MonoidalCategory.leftUnitor_tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"loogle: unknown identifier 'CategoryTheory.MonoidalCategory.leftUnitor_tensor'\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: query returned no declarations; loogle: unknown identifier 'CategoryTheory.MonoidalCategory.leftUnitor_tensor'; the corrected named query is recorded separately."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associative natural projection formula contractions of two maps to the monoidal unit compose through inverse projection formulas",
+   "results": "{\"t\": \"2026-10-21T08:19:31Z\", \"tool\": \"leansearch\", \"query\": \"Associative natural projection formula contractions of two maps to the monoidal unit compose through inverse projection formulas\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.CartesianMonoidalCategory.associator_inv_fst_snd_assoc\", \"CategoryTheory.CartesianMonoidalCategory.associator_inv_fst_fst_assoc\", \"CategoryTheory.CartesianMonoidalCategory.associator_inv_snd_assoc\", \"CategoryTheory.CartesianMonoidalCategory.associator_inv_fst_snd\", \"CategoryTheory.CartesianMonoidalCategory.rightUnitor_inv_fst\", \"CategoryTheory.CartesianMonoidalCategory.rightUnitor_inv_fst_assoc\", \"CategoryTheory.monoidalOfHasFiniteProducts.associator_inv\", \"CategoryTheory.Limits.Pi.reindex_inv_π_assoc\"], \"digest\": \"bfa3f9e625052b1e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned results concern endomorphism traces, rigid coevaluation contractions, structural naturality, Cartesian projections, or unrelated algebraic factorizations. None states the supplied two-functor inverse-projection contraction formula or specializes to it in one line."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In monoidal categories a tensor action satisfying associativity makes two successive trace contractions equal to contraction after iterated inverse projection formula",
+   "results": "{\"t\": \"2026-10-21T08:19:32Z\", \"tool\": \"leanfinder\", \"query\": \"In monoidal categories a tensor action satisfying associativity makes two successive trace contractions equal to contraction after iterated inverse projection formula\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.trace_eq_contract_apply\", \"contractLeft_assoc_coevaluation\", \"contractLeft_assoc_coevaluation'\", \"Mathlib.Tactic.Monoidal.evalHorizontalCompAux_cons\", \"LinearMap.trace_eq_contract\", \"LinearMap.trace_tensorProduct\", \"CategoryTheory.MonoidalCategory.associator_inv_conjugation_assoc\", \"LinearMap.trace_eq_contract'\"], \"digest\": \"2c481a982460c1d4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned results concern endomorphism traces, rigid coevaluation contractions, structural naturality, Cartesian projections, or unrelated algebraic factorizations. None states the supplied two-functor inverse-projection contraction formula or specializes to it in one line."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"leftUnitor_tensor_hom\"",
+   "results": "{\"t\": \"2026-10-21T08:20:08Z\", \"tool\": \"loogle\", \"query\": \"\\\"leftUnitor_tensor_hom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom_assoc\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom'\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom''\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom''_assoc\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom'_assoc\"], \"digest\": \"4b3c8813578bff1d\"}",
+   "date": "2026-10-21",
+   "verdict": "related: exact left-unitor tensor coherence identity, read in Mathlib/CategoryTheory/Monoidal/Category.lean:686-688 and CoherenceLemmas.lean:31-38; it is only a structural substep of this item, already supplied by existing lem-coef-monoidal-structural-coherence. No match for the full two-functor contraction statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A natural inverse projection formula and its associativity law make maps obtained by contracting two arbitrary coefficient functionals factor through their composite coefficient functional",
+   "results": "{\"t\": \"2026-10-21T08:20:09Z\", \"tool\": \"leanfinder\", \"query\": \"A natural inverse projection formula and its associativity law make maps obtained by contracting two arbitrary coefficient functionals factor through their composite coefficient functional\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HVertexOperator.coeff_comp\", \"contractLeft_assoc_coevaluation\", \"contractLeft_assoc_coevaluation'\", \"CliffordAlgebra.contractRight_comm\", \"Fin.comp_contractNth\", \"PolynomialLaw.factorsThrough_toFunLifted_π\", \"FormalMultilinearSeries.comp_rightInv_aux2\", \"Profinite.NobelingProof.GoodProducts.smaller_factorization\"], \"digest\": \"ac9ed008c4eeeac4\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned results concern endomorphism traces, rigid coevaluation contractions, structural naturality, Cartesian projections, or unrelated algebraic factorizations. None states the supplied two-functor inverse-projection contraction formula or specializes to it in one line."
+  },
+  {
+   "tool": "leansearch",
+   "query": "For any monoidal category lambda of X tensor Y equals lambda X tensor identity after the inverse associator at unit X Y",
+   "results": "{\"t\": \"2026-10-21T08:20:51Z\", \"tool\": \"leansearch\", \"query\": \"For any monoidal category lambda of X tensor Y equals lambda X tensor identity after the inverse associator at unit X Y\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.FreeMonoidalCategory.Hom.α_inv\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom\", \"CategoryTheory.MonoidalCategory.termλ_\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_inv'\", \"CategoryTheory.MonoidalCategory.leftUnitor_inv_tensor_id\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom'\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom'_assoc\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_inv_assoc\"], \"digest\": \"76c1d7c02ef4a9d5\"}",
+   "date": "2026-10-21",
+   "verdict": "related: exact left-unitor tensor coherence identity, read in Mathlib/CategoryTheory/Monoidal/Category.lean:686-688 and CoherenceLemmas.lean:31-38; it is only a structural substep of this item, already supplied by existing lem-coef-monoidal-structural-coherence. No match for the full two-functor contraction statement."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a monoidal category the left unitor on a tensor product equals the inverse associator followed by the left unitor on the first factor tensored with identity",
+   "results": "{\"t\": \"2026-10-21T08:20:52Z\", \"tool\": \"leanfinder\", \"query\": \"In a monoidal category the left unitor on a tensor product equals the inverse associator followed by the left unitor on the first factor tensored with identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom'\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom_assoc\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_inv_assoc\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_hom''\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_inv'_assoc\", \"CategoryTheory.MonoidalCategory.leftUnitor_inv_tensor_id\", \"CategoryTheory.MonoidalCategory.leftUnitor_tensor_inv\"], \"digest\": \"40ee5efd66f25f54\"}",
+   "date": "2026-10-21",
+   "verdict": "related: exact left-unitor tensor coherence identity, read in Mathlib/CategoryTheory/Monoidal/Category.lean:686-688 and CoherenceLemmas.lean:31-38; it is only a structural substep of this item, already supplied by existing lem-coef-monoidal-structural-coherence. No match for the full two-functor contraction statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-composite-integration-counit",
@@ -85,5 +206,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-tensor-action-trace-contraction",
+  "worker": "stage1",
+  "summary": "Q71: proved the unchanged two-functor contraction identity in five explicit steps, using inverse tensor action, associator naturality, existing monoidal structural coherence, and inverse-projection naturality. No new nodes or Mathlib leaves are created; no adjunction, symmetry, compositor or tensor-action law for g is used. Checked sources, existing declarations, exact citation statements, types, domain restrictions and scalar/unit edge cases.",
+  "blueprint": "Realizes the canonical-reassociations sentence at the end of lem-pur-projection-purity-agreement.proof.md, through lem-pur-composite-integration-counit: the coefficient contraction before any compact-support compositor.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-monoidal-category",
+    "why": "Generic ambient monoidal-category definition supplies associator naturality and tensor bifunctoriality; the smooth-purity unit does not replace these definitions."
+   },
+   {
+    "node": "def-sfb-strong-monoidal-functor",
+    "why": "Generic definition supplies the stated inverse tensorator convention and functoriality; it adds no geometric route to the smooth-purity unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-monoidal-category",
+  "def-sfb-strong-monoidal-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q71-206141b98",
+  "group": "Q71",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-206141b98 (reviewer sub-agent of L); spot-checked: I read the whole delivery and recomputed all 5 steps with types. The statement, stmt_deps, source and blueprint fields are unchanged from side-live, and only the proof fields changed. There are no new nodes, no repair note, no SGA citation and no dropped-list entry, and the item is still unsplit live. Step 1: I typed the tensor-action hypothesis and inverted it at (L_f, L_g, P_gK); α^{-1}(1⊗δ) is exactly σ_K. Step 2: associator naturality moves the arbitrary t_f. The coherence leaf lem-coef-monoidal-structural-coherence (Stacks 0HAY(2), matching Mathlib leftUnitor_tensor) is used only for λ_{B⊗C}α_{1,B,C} = λ_B⊗1_C, which has the same formal endpoints on both sides. Step 3 gives d_{f,B⊗C} = (a⊗1)q_{L,C}F_f σ_K. Step 4 is the inverse naturality of PF_g at a, with no action law for g. Step 5 assembles to the stated right-hand side with b = t_g F_g(a), and domain and codomain match. Edge cases: strict monoidal with identity functors, rescaling one PF, zero t, and no braiding used. There is no citation cycle with the parent composite-integration-counit, and proof_deps equal the union of the step uses. I made no changes."
  }
 }
