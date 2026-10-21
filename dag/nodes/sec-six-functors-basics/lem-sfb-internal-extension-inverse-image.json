@@ -16,9 +16,87 @@
   "def-sfb-modobj-transport",
   "sk-def-sfb-change-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an $R$-module $M$ with action $\\gamma_M$. By [sk-def-sfb-change-of-scalars](2), the underlying object $P_M$ of $\\operatorname{Ext}_{\\varphi}M$ has a coequalizer map $q_M:S\\otimes M\\to P_M$ for $a=(\\mu_S\\circ(1\\otimes\\varphi))\\otimes1$ and $b=(1\\otimes\\gamma_M)\\circ\\alpha$, from $(S\\otimes R)\\otimes M$ to $S\\otimes M$. Its $S$-action is induced by multiplication on the first factor. Use [lem-sfb-finite-upper-star-braided] to obtain commutative $F(R),F(S)$. Transport the multiplication, $\\varphi$, and the module action by [def-sfb-modobj-transport]. Thus, writing $\\mu^F$ for the tensorator, $\\mu_{FS}=F(\\mu_S)\\circ\\mu^F_{S,S}$, $\\varphi'=F\\varphi$, and $\\gamma_{FM}=F(\\gamma_M)\\circ\\mu^F_{R,M}$. Let $q'_M:FS\\otimes FM\\to Q_M$ be the balancing coequalizer for these data, with arrows $a',b'$ and its induced $FS$-action. This is precisely $\\operatorname{Ext}_{F\\varphi}(F_RM)$, with the actual rings $FR,FS$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-finite-upper-star-braided",
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Final sentence: tensoring local finite presentations on the strata; unpack the internal extension coequalizer"
+   }
+  },
+  {
+   "text": "The map $F(q_M)$ is a coequalizer of $F(a),F(b)$. Here is the universal-property argument, rather than an additional preservation assertion. Put $G=g_*$ and use [def-sfb-finite-upper-lower-star-adjunction]. For every abelian sheaf $T$ on $Z$, its natural adjunction bijections identify\n\\[\n\\Hom(FP_M,T)\\cong\\Hom(P_M,GT)\\cong\\{h:S\\otimes M\\to GT\\mid h a=h b\\}\\cong\\{k:F(S\\otimes M)\\to T\\mid kF(a)=kF(b)\\}.\n\\]\nThe middle bijection is the coequalizer property supplied by [sk-def-sfb-change-of-scalars]. Naturality of the adjunction says that the resulting bijection is precomposition with $F(q_M)$, as required. This only uses a finite parallel-pair diagram.",
+   "uses": [
+    "def-sfb-finite-upper-lower-star-adjunction",
+    "sk-def-sfb-change-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact(1), its Hom-set proof specialized to a coequalizer"
+   }
+  },
+  {
+   "text": "Set $t_0=\\mu^F_{S,M}$ and $t_1=\\mu^F_{S\\otimes R,M}\\circ(\\mu^F_{S,R}\\otimes1)$. These are isomorphisms by [def-sfb-finite-upper-star-monoidal]. Naturality and the associativity identity in [def-sfb-strong-monoidal-functor], with the transported actions of [def-sfb-modobj-transport], give\n\\[\nF(a)t_1=t_0a',\\qquad F(b)t_1=t_0b'.\n\\]\nIndeed the first equality replaces $\\mu_{FS}(1\\otimes F\\varphi)$ by $F(\\mu_S(1\\otimes\\varphi))\\mu^F_{S,R}$ and then uses naturality in the first tensor factor; the second uses the associativity identity to move $t_1$ past $F\\alpha$ and replaces $\\gamma_{FM}$ by $F\\gamma_M\\,\\mu^F_{R,M}$. Thus $\\widehat q_M=F(q_M)t_0$ and $q'_M$ are coequalizers of the same pair. Their universal properties give unique maps $c_M:Q_M\\to FP_M$ and $d_M:FP_M\\to Q_M$ with $c_Mq'_M=\\widehat q_M$ and $d_M\\widehat q_M=q'_M$. Uniqueness gives $d_Mc_M=1$ and $c_Md_M=1$.",
+   "uses": [
+    "def-sfb-finite-upper-star-monoidal",
+    "def-sfb-strong-monoidal-functor",
+    "def-sfb-modobj-transport"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 002A, definition-coequalizers and uniqueness, applied after the two displayed tensorator identities"
+   }
+  },
+  {
+   "text": "These underlying isomorphisms are $FS$-linear. Write $\\delta$ for the action on $FP_M$ from [def-sfb-modobj-transport] and $\\delta'$ for the action on $Q_M$ from [sk-def-sfb-change-of-scalars]. Both quotient maps respect multiplication on the first $FS$ factor: for $q'_M$ this is its defining induced action, and for $\\widehat q_M$ it follows by applying $F$ to the defining action equation for $q_M$ and using the tensorator's naturality and associativity identity [def-sfb-strong-monoidal-functor]. Consequently, after precomposition with $1_{FS}\\otimes q'_M$, both $c_M\\delta'$ and $\\delta(1_{FS}\\otimes c_M)$ equal $\\widehat q_M(\\mu_{FS}\\otimes1)$, with the same associator. By [sk-def-sfb-sheaf-tensor](2), $FS\\otimes-$ preserves this coequalizer, so $1\\otimes q'_M$ is a coequalizer map. Such a map is epic: two maps equal after it are the unique factorization of the same map. Cancel it to obtain $c_M\\delta'=\\delta(1\\otimes c_M)$. Multiplying this equation by $d_M$ and $1\\otimes d_M$ shows $d_M$ is linear as well.",
+   "uses": [
+    "def-sfb-modobj-transport",
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-strong-monoidal-functor",
+    "sk-def-sfb-sheaf-tensor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Final sentence, restriction of extended presentations; verification of linearity of the coequalizer comparison"
+   }
+  },
+  {
+   "text": "For an $R$-linear map $u:M\\to N$, the two functors send it to the maps induced by $1_S\\otimes u$ and $1_{FS}\\otimes F(u)$ on the respective coequalizers, by [sk-def-sfb-change-of-scalars] and [def-sfb-modobj-transport]. Precomposing the desired equality $F(\\operatorname{Ext}_{\\varphi}u)c_M=c_N\\operatorname{Ext}_{F\\varphi}(F_Ru)$ with $q'_M$ gives, on both sides, $F(q_N)\\mu^F_{S,N}(1\\otimes Fu)$: this uses $\\operatorname{Ext}_{\\varphi}(u)q_M=q_N(1\\otimes u)$ and tensorator naturality [def-sfb-strong-monoidal-functor]. Cancel the coequalizer map $q'_M$. Hence the $c_M$ form a natural isomorphism $\\operatorname{Ext}_{F\\varphi}\\circ F_R\\cong F_S\\circ\\operatorname{Ext}_{\\varphi}$. Its inverse is the displayed isomorphism in the statement, including the formula on objects.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-modobj-transport",
+    "def-sfb-strong-monoidal-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+    "place": "Final sentence: functorial restriction of extended local presentations to strata and pro-étale covers"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-finite-upper-star-braided",
+  "def-sfb-modobj-transport",
+  "def-sfb-finite-upper-lower-star-adjunction",
+  "def-sfb-finite-upper-star-monoidal",
+  "def-sfb-strong-monoidal-functor",
+  "sk-def-sfb-sheaf-tensor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-to-qlbar-constructible.proof.md",
+  "place": "Final sentence, expanded by the balancing coequalizer argument; elementary universal-property arguments also follow Stacks Tags 0038 and 002A"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -62,10 +140,46 @@
    "results": "8 hits: PresheafOfModules.Monoidal.tensorObjMap, PresheafOfModules.Monoidal.tensorObj, SheafOfModules.pullbackObjFreeIso, PresheafOfModules.Monoidal.tensorObj_map_tmul, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, Algebra.IsPushout.cancelBaseChangeAux_symm_tmul, Algebra.IsPushout.cancelBaseChange_symm_tmul, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
    "date": "2026-10-21",
    "verdict": "no match: ordinary ModuleCat/SheafOfModules or monoidal infrastructure, not internal module objects with the stated comparison and finite-presentation convention"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod.*extendScalars|extendScalars.*mapMod|pullbackExtendScalarsIso",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module sheaves, scalar restriction, or general monoidal infrastructure; none states transport of arbitrary internal ring-object extension by inverse image"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A colimit preserving strong monoidal functor preserves relative tensor products of internal module objects and extension of scalars",
+   "results": "8 hits: CategoryTheory.MonoidalCategory.Limits.preservesCoLimit_curriedTensor, ModuleCat.preservesColimit_restrictScalars, CategoryTheory.instPreservesColimitsTensorLeft, CategoryTheory.MonoidalCategory.Limits.preservesLimit_curriedTensor, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, PresheafOfModules.Monoidal.tensorObj, CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionAtExtensionUnitLeft, CategoryTheory.MonoidalCategory.ExternalProduct.isPointwiseLeftKanExtensionExtensionUnitLeft",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module sheaves, scalar restriction, or general monoidal infrastructure; none states transport of arbitrary internal ring-object extension by inverse image"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strong monoidal inverse image of abelian sheaves commutes with extension of scalars along arbitrary internal ring objects",
+   "results": "8 hits: SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module sheaves, scalar restriction, or general monoidal infrastructure; none states transport of arbitrary internal ring-object extension by inverse image"
+  },
+  {
+   "tool": "grep",
+   "query": "mapMod|extendScalars|tensorObjπ",
+   "results": "1 hits: Mathlib/CategoryTheory/Monoidal/Mon.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module sheaves, scalar restriction, or general monoidal infrastructure; none states transport of arbitrary internal ring-object extension by inverse image",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transporting internal modules by a monoidal functor preserves the balancing coequalizer defining S tensor over R M",
+   "results": "8 hits: CategoryTheory.Mod_.comap, CategoryTheory.Mod_.scalarRestriction, CategoryTheory.monoidalLinearOfFaithful, π_tensor_id_preserves_coequalizer_inv_desc, CategoryTheory.MonoidalLinear.ofFaithful, CategoryTheory.Mod_.comap_obj_X, CategoryTheory.Mod_.comap_obj_mod, ModuleCat.monoidalCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern ordinary module sheaves, scalar restriction, or general monoidal infrastructure; none states transport of arbitrary internal ring-object extension by inverse image"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-extend-to-qlbar-constructible",
@@ -82,5 +196,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-internal-extension-inverse-image",
+  "worker": "stage1",
+  "summary": "Expanded inverse-image compatibility by the actual balancing diagram: adjunction proves preservation of its coequalizer, monoidal coherence identifies both arrows, quotient universality constructs inverse maps, and explicit cancellation proves module linearity and naturality. No new nodes, statement changes, or coefficient-ring identifications.",
+  "blueprint": "Realizes the final sentence of lem-sfb-extend-to-qlbar-constructible.proof.md (tensoring local finite presentations on strata), supplying its inverse-image comparison before the finite-presentation argument.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-upper-star-braided",
+    "why": "Generic symmetric monoidality ensures the inverse-image rings are commutative; the coefficient-descent unit does not reprove inverse-image monoidality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-upper-star-braided"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O3-0f0d2d9a1",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-0f0d2d9a1 (reviewer sub-agent of L); spot-checked: PASS, no changes. The delivery is a one-level split of lem-sfb-internal-extension-inverse-image with no new nodes and the statement unchanged. There is no repair note for this item, it is not on a dropped list, and no SGA is used. The blueprint source (the final clause of lem-sfb-extend-to-qlbar-constructible.proof.md: tensoring local finite presentations on strata) needs this comparison, and the actual rings F(R),F(S) are used. I read every cited statement and recomputed each step. Step 1: the hypotheses of Ext in change-of-scalars (2) hold on Z (braided, coequalizers, tensor preserving colimits, F(R) commutative by the braided lemma). Step 2: F(q) is a coequalizer, by the Hom-chain through the g^*⊣g_* adjunction, natural in the first variable. Step 3: F(a)t1=t0a' (naturality) and F(b)t1=t0b' (associativity axiom and the transported action) both hold, so F(q)t0 and q' coequalize the same pair and give inverse maps c,d. Step 4: linearity, by cancelling the epi 1⊗q', which is a coequalizer by sheaf-tensor (2); I checked δ(1⊗F(q)t0)=F(q)t0(μ⊗1)α^{-1}. Step 5: naturality, both sides equal F(q_N)μ_{S,N}(1⊗Fu) after q'_M. Edge cases checked: identity g and φ, zero module or ring, non-flat Z→Z/2. No duplicate: def-sfb-pull-iso is a condensed coefficient change, def-sfb-module-upper-star only uses Ext∘mapMod, and the restricted-transport and finite-free transport lemmas differ. I accept the tool_use of lem-sfb-finite-upper-star-braided; it is already in stmt_deps and needed for the commutativity of F(R)."
  }
 }
