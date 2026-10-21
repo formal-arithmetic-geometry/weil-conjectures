@@ -11,6 +11,8 @@ public import WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.OpenImme
 public import WeilConjectures.CategoryTheory.Monoidal.Instances.CochainComplex
 
 import WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.MonoidalModule
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.Monoidal
+import Sheaf.Paper.InverseImageModuleFlat
 
 /-!
 # Canonical tensor comparison for condensed module inverse image
@@ -73,6 +75,252 @@ private theorem existsUnique_mapModComapTensorComparison
   simp only [← Category.assoc]
   rw [he]
   simpa only [r, Iso.symm_hom, Category.assoc] using he'.trans hn.symm
+
+section ExactTensor
+
+variable {C : Type w₁} {D : Type w₂}
+  [Category.{u + 1} C] [Abelian C] [IsGrothendieckAbelian.{u + 1} C]
+  [MonoidalCategory C] [MonoidalPreadditive C] [MonoidalClosed C] [BraidedCategory C]
+  [Abelian.HasFunctorialFlatResolution C]
+  [Category.{u + 1} D] [Abelian D] [IsGrothendieckAbelian.{u + 1} D]
+  [MonoidalCategory D] [MonoidalPreadditive D] [MonoidalClosed D] [BraidedCategory D]
+  [Abelian.HasFunctorialFlatResolution D]
+  (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+  [F.IsLeftAdjoint] [F.Monoidal]
+
+/-- The comparison family for the termwise derived functor of an exact functor.
+Source: Stacks Tag 0G7D
+(blueprint: def-sfb-condensed-pullback-tensor-comparison).
+Keeping the tensor structure inside this generic definition avoids repeatedly unfolding
+specialized sheaf monoidal instances when checking a comparison family. -/
+def ExactDerivedTensorComparisonFamily :=
+  ∀ K M : DerivedCategory C,
+    F.mapDerivedCategory.obj (K ⊗ M) ≅
+      F.mapDerivedCategory.obj K ⊗ F.mapDerivedCategory.obj M
+
+/-- Naturality and the total-complex square for a specified ordinary comparison.
+Source: Stacks Tags 06YL and 0G7D
+(blueprint: def-sfb-condensed-pullback-tensor-comparison).
+This is the generic form of `SupportDerivedTensorNormalization`: tensor morphisms
+are written as the two maps of the curried tensor functor. -/
+def ExactDerivedTensorNormalization
+    (d : ∀ A B : CochainComplex C ℤ,
+      (F.mapHomologicalComplex (.up ℤ)).obj (A ⊗ B) ⟶
+        (F.mapHomologicalComplex (.up ℤ)).obj A ⊗
+          (F.mapHomologicalComplex (.up ℤ)).obj B)
+    (e : ExactDerivedTensorComparisonFamily F) : Prop :=
+  (∀ (K K' M M' : DerivedCategory C) (a : K ⟶ K') (b : M ⟶ M'),
+    F.mapDerivedCategory.map
+        (((curriedTensor _).map a).app M ≫ ((curriedTensor _).obj K').map b) ≫
+        (e K' M').hom =
+      (e K M).hom ≫
+        ((curriedTensor _).map (F.mapDerivedCategory.map a)).app
+          (F.mapDerivedCategory.obj M) ≫
+        ((curriedTensor _).obj (F.mapDerivedCategory.obj K')).map
+          (F.mapDerivedCategory.map b)) ∧
+  ∀ A B : CochainComplex C ℤ,
+    F.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Q A B) ≫
+      F.mapDerivedCategoryFactors.hom.app (A ⊗ B) ≫ DerivedCategory.Q.map (d A B) =
+    (e (DerivedCategory.Q.obj A) (DerivedCategory.Q.obj B)).hom ≫
+      (((curriedTensor _).map (F.mapDerivedCategoryFactors.hom.app A)).app
+          (F.mapDerivedCategory.obj (DerivedCategory.Q.obj B)) ≫
+        ((curriedTensor _).obj
+          (DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj A))).map
+            (F.mapDerivedCategoryFactors.hom.app B)) ≫
+      Functor.LaxMonoidal.μ DerivedCategory.Q
+        ((F.mapHomologicalComplex (.up ℤ)).obj A)
+        ((F.mapHomologicalComplex (.up ℤ)).obj B)
+
+private noncomputable def exactDerivedTensorCandidate [F.PreservesFlat] :
+    ∀ K M : DerivedCategory C,
+      F.mapDerivedCategory.obj (K ⊗ M) ≅
+        F.mapDerivedCategory.obj K ⊗ F.mapDerivedCategory.obj M := by
+  let e := F.leftDerivedFunctorIsoMapDerivedCategory
+  exact fun K M ↦ e.symm.app (K ⊗ M) ≪≫
+    asIso ((F.leftDerivedTensorComparison.app K).app M) ≪≫
+    (tensorIso (e.app K) (e.app M))
+
+private theorem exactDerivedTensorCandidate_naturality [F.PreservesFlat]
+    (K K' M M' : DerivedCategory C)
+    (a : K ⟶ K') (b : M ⟶ M') :
+    F.mapDerivedCategory.map (a ⊗ₘ b) ≫
+        (exactDerivedTensorCandidate F K' M').hom =
+      (exactDerivedTensorCandidate F K M).hom ≫
+        (F.mapDerivedCategory.map a ⊗ₘ
+          F.mapDerivedCategory.map b) := by
+  let e := F.leftDerivedFunctorIsoMapDerivedCategory
+  change F.mapDerivedCategory.map (a ⊗ₘ b) ≫
+      (e.inv.app (K' ⊗ M') ≫ (F.leftDerivedTensorComparison.app K').app M' ≫
+        (e.hom.app K' ⊗ₘ e.hom.app M')) =
+    (e.inv.app (K ⊗ M) ≫ (F.leftDerivedTensorComparison.app K).app M ≫
+        (e.hom.app K ⊗ₘ e.hom.app M)) ≫
+      (F.mapDerivedCategory.map a ⊗ₘ F.mapDerivedCategory.map b)
+  rw [e.inv.naturality_assoc, F.leftDerivedTensorComparison_naturality_tensorHom_assoc]
+  simp only [Category.assoc, tensorHom_comp_tensorHom, e.hom.naturality]
+
+private theorem exactDerivedTensorCandidate_homotopy [F.PreservesFlat]
+    (A B : HomotopyCategory C (.up ℤ)) :
+    (exactDerivedTensorCandidate F (DerivedCategory.Qh.obj A)
+        (DerivedCategory.Qh.obj B)).hom ≫
+      (F.mapDerivedCategoryFactorsh.hom.app A ⊗ₘ F.mapDerivedCategoryFactorsh.hom.app B) ≫
+      Functor.LaxMonoidal.μ DerivedCategory.Qh
+        ((F.mapHomotopyCategory (.up ℤ)).obj A)
+        ((F.mapHomotopyCategory (.up ℤ)).obj B) =
+      F.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Qh A B) ≫
+        F.mapDerivedCategoryFactorsh.hom.app (A ⊗ B) ≫ DerivedCategory.Qh.map
+          (((Functor.OplaxMonoidal.mapHomotopyCategoryδNatTrans (.up ℤ) F).app A).app B) := by
+  let e := F.leftDerivedFunctorIsoMapDerivedCategory
+  change (e.inv.app _ ≫ (F.leftDerivedTensorComparison.app _).app _ ≫
+      (e.hom.app _ ⊗ₘ e.hom.app _)) ≫ _ ≫ _ = _
+  simp only [Category.assoc, tensorHom_comp_tensorHom_assoc, e,
+    F.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac]
+  rw [F.leftDerivedTensorComparison_app_app_comp_tensorHom]
+  rw [← e.inv.naturality_assoc]
+  rw [← F.leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac]
+  simp only [e, Category.assoc, Iso.inv_hom_id_app_assoc]
+
+private theorem derivedLocalizationTensor_eq (P Q : CochainComplex C ℤ) :
+    Functor.LaxMonoidal.μ DerivedCategory.Q P Q =
+      Functor.LaxMonoidal.μ DerivedCategory.Qh
+        ((HomotopyCategory.quotient C (.up ℤ)).obj P)
+        ((HomotopyCategory.quotient C (.up ℤ)).obj Q) := by
+  change (𝟙 _ ⊗ₘ 𝟙 _) ≫
+    (Functor.LaxMonoidal.μ DerivedCategory.Qh _ _ ≫ (DerivedCategory.Qh (C := C)).map (𝟙 _)) ≫
+    𝟙 _ = _
+  rw [(DerivedCategory.Qh (C := C)).map_id]
+  simp only [id_tensorHom_id, Category.id_comp, Category.comp_id]
+  rfl
+
+private theorem exactDerivedTensorCandidate_complex [F.PreservesFlat]
+    (A B : CochainComplex C ℤ) :
+    (exactDerivedTensorCandidate F (DerivedCategory.Q.obj A)
+        (DerivedCategory.Q.obj B)).hom ≫
+      (F.mapDerivedCategoryFactors.hom.app A ⊗ₘ F.mapDerivedCategoryFactors.hom.app B) ≫
+      Functor.LaxMonoidal.μ DerivedCategory.Q
+        ((F.mapHomologicalComplex (.up ℤ)).obj A)
+        ((F.mapHomologicalComplex (.up ℤ)).obj B) =
+      F.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Q A B) ≫
+        F.mapDerivedCategoryFactors.hom.app (A ⊗ B) ≫ DerivedCategory.Q.map
+          (HomologicalComplex.mapBifunctorComparison
+            (Functor.OplaxMonoidal.δNatTrans F) (.up ℤ) A B) := by
+  have h := exactDerivedTensorCandidate_homotopy F
+    ((HomotopyCategory.quotient C (.up ℤ)).obj A)
+    ((HomotopyCategory.quotient C (.up ℤ)).obj B)
+  have hf (A : CochainComplex C ℤ) :
+      F.mapDerivedCategoryFactorsh.hom.app ((HomotopyCategory.quotient C (.up ℤ)).obj A) =
+        F.mapDerivedCategoryFactors.hom.app A := by
+    rw [F.mapDerivedCategoryFactorsh_hom_app]
+    change F.mapDerivedCategory.map (𝟙 _) ≫
+      F.mapDerivedCategoryFactors.hom.app A ≫ 𝟙 _ ≫
+        (DerivedCategory.Qh (C := D)).map (𝟙 _) = _
+    rw [F.mapDerivedCategory.map_id, (DerivedCategory.Qh (C := D)).map_id]
+    simp only [Category.id_comp]
+    exact Category.comp_id _
+  change (exactDerivedTensorCandidate F (DerivedCategory.Q.obj A)
+      (DerivedCategory.Q.obj B)).hom ≫
+      (F.mapDerivedCategoryFactorsh.hom.app
+          ((HomotopyCategory.quotient C (.up ℤ)).obj A) ⊗ₘ
+        F.mapDerivedCategoryFactorsh.hom.app
+          ((HomotopyCategory.quotient C (.up ℤ)).obj B)) ≫
+      Functor.LaxMonoidal.μ DerivedCategory.Qh
+        ((HomotopyCategory.quotient D (.up ℤ)).obj
+          ((F.mapHomologicalComplex (.up ℤ)).obj A))
+        ((HomotopyCategory.quotient D (.up ℤ)).obj
+          ((F.mapHomologicalComplex (.up ℤ)).obj B)) =
+      F.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Qh
+        ((HomotopyCategory.quotient C (.up ℤ)).obj A)
+        ((HomotopyCategory.quotient C (.up ℤ)).obj B)) ≫
+      F.mapDerivedCategoryFactorsh.hom.app
+        ((HomotopyCategory.quotient C (.up ℤ)).obj (A ⊗ B)) ≫
+      DerivedCategory.Q.map (HomologicalComplex.mapBifunctorComparison
+        (Functor.OplaxMonoidal.δNatTrans F) (.up ℤ) A B) at h
+  rw [derivedLocalizationTensor_eq, derivedLocalizationTensor_eq]
+  simpa only [hf] using h
+
+private theorem exactDerivedTensorCandidate_unique [F.PreservesFlat]
+    (e : ∀ K M : DerivedCategory C,
+      F.mapDerivedCategory.obj (K ⊗ M) ≅
+        F.mapDerivedCategory.obj K ⊗ F.mapDerivedCategory.obj M)
+    (hn : ∀ (K K' M M' : DerivedCategory C) (a : K ⟶ K') (b : M ⟶ M'),
+      F.mapDerivedCategory.map (a ⊗ₘ b) ≫ (e K' M').hom =
+        (e K M).hom ≫ (F.mapDerivedCategory.map a ⊗ₘ F.mapDerivedCategory.map b))
+    (hs : ∀ A B : CochainComplex C ℤ,
+      (e (DerivedCategory.Q.obj A) (DerivedCategory.Q.obj B)).hom ≫
+        (F.mapDerivedCategoryFactors.hom.app A ⊗ₘ F.mapDerivedCategoryFactors.hom.app B) ≫
+        Functor.LaxMonoidal.μ DerivedCategory.Q
+          ((F.mapHomologicalComplex (.up ℤ)).obj A)
+          ((F.mapHomologicalComplex (.up ℤ)).obj B) =
+        F.mapDerivedCategory.map (Functor.LaxMonoidal.μ DerivedCategory.Q A B) ≫
+          F.mapDerivedCategoryFactors.hom.app (A ⊗ B) ≫ DerivedCategory.Q.map
+            (HomologicalComplex.mapBifunctorComparison
+              (Functor.OplaxMonoidal.δNatTrans F) (.up ℤ) A B)) :
+    e = exactDerivedTensorCandidate F := by
+  have heq (A B : CochainComplex C ℤ)
+      (hB : (HomotopyCategory.quasiIso D (.up ℤ)).kFlat
+        ((HomotopyCategory.quotient D (.up ℤ)).obj
+          ((F.mapHomologicalComplex (.up ℤ)).obj B))) :
+      (e (DerivedCategory.Q.obj A) (DerivedCategory.Q.obj B)).hom =
+        (exactDerivedTensorCandidate F (DerivedCategory.Q.obj A)
+          (DerivedCategory.Q.obj B)).hom := by
+    have : IsIso (Functor.LaxMonoidal.μ DerivedCategory.Q
+        ((F.mapHomologicalComplex (.up ℤ)).obj A)
+        ((F.mapHomologicalComplex (.up ℤ)).obj B)) := by
+      rw [derivedLocalizationTensor_eq]
+      exact Functor.isIso_μNatTrans_Qh_app_app_of_kFlat _ _ hB
+    apply (cancel_mono
+      ((F.mapDerivedCategoryFactors.hom.app A ⊗ₘ F.mapDerivedCategoryFactors.hom.app B) ≫
+        Functor.LaxMonoidal.μ DerivedCategory.Q
+          ((F.mapHomologicalComplex (.up ℤ)).obj A)
+          ((F.mapHomologicalComplex (.up ℤ)).obj B))).mp
+    simpa only [Category.assoc] using
+      (hs A B).trans (exactDerivedTensorCandidate_complex F A B).symm
+  funext K M
+  let A := DerivedCategory.Q.objPreimage K
+  let a := DerivedCategory.Q.objObjPreimageIso K
+  let R := (inferInstance : Abelian.HasFunctorialFlatResolution C).some
+  let B := R.reduced.resolutionFunctor.obj (DerivedCategory.Q.objPreimage M)
+  let b : DerivedCategory.Q.obj B ≅ M :=
+    asIso (DerivedCategory.Q.map
+      (R.reduced.resolutionNatTrans.app (DerivedCategory.Q.objPreimage M))) ≪≫
+      DerivedCategory.Q.objObjPreimageIso M
+  have hB : (HomotopyCategory.quasiIso D (.up ℤ)).kFlat
+      ((HomotopyCategory.quotient D (.up ℤ)).obj
+        ((F.mapHomologicalComplex (.up ℤ)).obj B)) :=
+    F.kFlatMap_quotient_obj_resolutionFunctor_obj R.reduced _
+  apply Iso.ext
+  apply (cancel_epi (F.mapDerivedCategory.map (a.hom ⊗ₘ b.hom))).mp
+  rw [hn _ _ _ _ a.hom b.hom,
+    exactDerivedTensorCandidate_naturality F _ _ _ _ a.hom b.hom, heq A B hB]
+
+private theorem existsUnique_exactDerivedTensorComparison [F.PreservesFlat]
+    (d : ∀ A B : CochainComplex C ℤ,
+      (F.mapHomologicalComplex (.up ℤ)).obj (A ⊗ B) ⟶
+        (F.mapHomologicalComplex (.up ℤ)).obj A ⊗
+          (F.mapHomologicalComplex (.up ℤ)).obj B)
+    (hd : ∀ A B, d A B = HomologicalComplex.mapBifunctorComparison
+      (Functor.OplaxMonoidal.δNatTrans F) (.up ℤ) A B) :
+    ∃! e : ExactDerivedTensorComparisonFamily F, ExactDerivedTensorNormalization F d e := by
+  refine ⟨exactDerivedTensorCandidate F, ⟨?_, ?_⟩, ?_⟩
+  · intro K K' M M' a b
+    simpa only [curriedTensor_map_app, curriedTensor_obj_map,
+      curriedTensor_obj_obj, Functor.comp_obj, MonoidalCategory.tensorHom_def,
+      Category.assoc] using exactDerivedTensorCandidate_naturality F K K' M M' a b
+  · intro A B
+    simpa only [hd, curriedTensor_map_app, curriedTensor_obj_map,
+      curriedTensor_obj_obj, Functor.comp_obj, MonoidalCategory.tensorHom_def,
+      Category.assoc] using (exactDerivedTensorCandidate_complex F A B).symm
+  · intro e he
+    apply exactDerivedTensorCandidate_unique F e
+    · intro K K' M M' a b
+      simpa only [curriedTensor_map_app, curriedTensor_obj_map,
+        curriedTensor_obj_obj, Functor.comp_obj, MonoidalCategory.tensorHom_def,
+        Category.assoc] using he.1 K K' M M' a b
+    · intro A B
+      simpa only [hd, curriedTensor_map_app, curriedTensor_obj_map,
+        curriedTensor_obj_obj, Functor.comp_obj, MonoidalCategory.tensorHom_def,
+        Category.assoc] using (he.2 A B).symm
+
+end ExactTensor
 
 namespace AlgebraicGeometry.ProEtale.CondensedRing
 
@@ -255,10 +503,7 @@ noncomputable def supportComplexTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y
 /-- The type of candidate derived pullback tensor comparison families.
 Source: Stacks Tag 0G7D (blueprint: def-sfb-condensed-pullback-tensor-comparison). -/
 def SupportDerivedTensorComparisonFamily {X Y : Scheme.{u}} (f : X ⟶ Y) :=
-  ∀ K M : DerivedCategory (supportModules Λ Y),
-    (supportPullback Λ f).mapDerivedCategory.obj (((derivedTensor Λ Y).obj K).obj M) ≅
-      ((derivedTensor Λ X).obj ((supportPullback Λ f).mapDerivedCategory.obj K)).obj
-        ((supportPullback Λ f).mapDerivedCategory.obj M)
+  ExactDerivedTensorComparisonFamily (supportPullback Λ f)
 
 /-- Naturality and the localization square on total-complex representatives.
 Source: Stacks Tags 06YL and 0G7D
@@ -266,50 +511,30 @@ Source: Stacks Tags 06YL and 0G7D
 The tensor maps are those of the existing derivedTensor functors and lax localization. -/
 def SupportDerivedTensorNormalization {X Y : Scheme.{u}} (f : X ⟶ Y)
     (e : SupportDerivedTensorComparisonFamily Λ f) : Prop :=
-  (∀ (K K' M M' : DerivedCategory (supportModules Λ Y)) (a : K ⟶ K') (b : M ⟶ M'),
-    (supportPullback Λ f).mapDerivedCategory.map
-        (((derivedTensor Λ Y).map a).app M ≫ ((derivedTensor Λ Y).obj K').map b) ≫
-        (e K' M').hom =
-      (e K M).hom ≫
-        ((derivedTensor Λ X).map ((supportPullback Λ f).mapDerivedCategory.map a)).app
-          ((supportPullback Λ f).mapDerivedCategory.obj M) ≫
-        ((derivedTensor Λ X).obj ((supportPullback Λ f).mapDerivedCategory.obj K')).map
-          ((supportPullback Λ f).mapDerivedCategory.map b)) ∧
-  ∀ A B : CochainComplex (supportModules Λ Y) ℤ,
-    SupportTensorDescentSquare
-      (DerivedCategory.Q (C := supportModules Λ Y))
-      (DerivedCategory.Q (C := supportModules Λ X))
-      ((supportPullback Λ f).mapHomologicalComplex (.up ℤ))
-      (supportPullback Λ f).mapDerivedCategory
-      (supportPullback Λ f).mapDerivedCategoryFactors
-      (HomologicalComplex.tensorObj A B)
-      (HomologicalComplex.tensorObj
-        (((supportPullback Λ f).mapHomologicalComplex (.up ℤ)).obj A)
-        (((supportPullback Λ f).mapHomologicalComplex (.up ℤ)).obj B))
-      (((derivedTensor Λ Y).obj (DerivedCategory.Q.obj A)).obj (DerivedCategory.Q.obj B))
-      (((derivedTensor Λ X).obj
-        ((supportPullback Λ f).mapDerivedCategory.obj (DerivedCategory.Q.obj A))).obj
-          ((supportPullback Λ f).mapDerivedCategory.obj (DerivedCategory.Q.obj B)))
-      (((derivedTensor Λ X).obj
-        (DerivedCategory.Q.obj
-          (((supportPullback Λ f).mapHomologicalComplex (.up ℤ)).obj A))).obj
-        (DerivedCategory.Q.obj
-          (((supportPullback Λ f).mapHomologicalComplex (.up ℤ)).obj B)))
-      (@Functor.LaxMonoidal.μ _ _ _ _ _ _
-        (DerivedCategory.Q (C := supportModules Λ Y)) (laxMonoidal_Q Λ Y) A B)
-      (@Functor.LaxMonoidal.μ _ _ _ _ _ _
-        (DerivedCategory.Q (C := supportModules Λ X)) (laxMonoidal_Q Λ X)
-        (((supportPullback Λ f).mapHomologicalComplex (.up ℤ)).obj A)
-        (((supportPullback Λ f).mapHomologicalComplex (.up ℤ)).obj B))
-      (((derivedTensor Λ X).map
-        ((supportPullback Λ f).mapDerivedCategoryFactors.hom.app A)).app
-          ((supportPullback Λ f).mapDerivedCategory.obj (DerivedCategory.Q.obj B)) ≫
-        ((derivedTensor Λ X).obj
-          (DerivedCategory.Q.obj
-            (((supportPullback Λ f).mapHomologicalComplex (.up ℤ)).obj A))).map
-          ((supportPullback Λ f).mapDerivedCategoryFactors.hom.app B))
-      (supportComplexTensorComparison Λ f A B)
-      (e (DerivedCategory.Q.obj A) (DerivedCategory.Q.obj B))
+  ExactDerivedTensorNormalization (supportPullback Λ f)
+    (supportComplexTensorComparison Λ f) e
+
+private theorem supportPullback_preservesFlat {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (supportPullback Λ f).PreservesFlat := by
+  exact ProEtale.inverseImageModule_preservesFlat f (condensedRingObj Λ Y)
+    (condensedRingObj Λ X) (asIso (condensedPullbackHom Λ f)).inv
+
+private noncomputable instance supportPullbackIsLeftAdjoint
+    {X Y : Scheme.{u}} (f : X ⟶ Y) : (supportPullback Λ f).IsLeftAdjoint :=
+  (supportPullbackAdjunction Λ f).isLeftAdjoint
+
+private theorem supportComplexTensorComparison_eq_δ {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (A B : CochainComplex (supportModules Λ Y) ℤ) :
+    supportComplexTensorComparison Λ f A B = HomologicalComplex.mapBifunctorComparison
+      (Functor.OplaxMonoidal.δNatTrans (supportPullback Λ f)) (.up ℤ) A B := by
+  apply (existsUnique_supportComplexTensorComparison Λ f A B).unique
+  · exact Classical.choose_spec
+      (ExistsUnique.exists (existsUnique_supportComplexTensorComparison Λ f A B))
+  · intro p q n h
+    dsimp only
+    rw [supportTensorComparison_eq_δ]
+    exact HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX
+      (Functor.OplaxMonoidal.δNatTrans (supportPullback Λ f)) (.up ℤ) A B p q n h
 
 /-- The normalized derived comparison exists uniquely.
 Source: Stacks Tags 03EL, 06YS and 0G7D
@@ -324,7 +549,9 @@ every component uniquely; the factorization isomorphisms extend this to all obje
 theorem existsUnique_supportDerivedTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y) :
     ∃! e : SupportDerivedTensorComparisonFamily Λ f,
       SupportDerivedTensorNormalization Λ f e := by
-  sorry
+  let : (supportPullback Λ f).PreservesFlat := supportPullback_preservesFlat Λ f
+  exact existsUnique_exactDerivedTensorComparison (supportPullback Λ f)
+    (supportComplexTensorComparison Λ f) (supportComplexTensorComparison_eq_δ Λ f)
 
 /-- Derived pullback-tensor comparison with the specified total-complex normalization.
 Source: Stacks Tag 0G7D (blueprint: def-sfb-condensed-pullback-tensor-comparison). -/

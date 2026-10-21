@@ -17,9 +17,52 @@
   "document": "literature/stacks-project/sites-modules.tex; literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 03EL (pullback and relative tensor), Tag 06YL (total tensor complexes), Tags 06YS and 0G7D (K-flat resolution and derived tensor descent); normalization in steps 3--7 of lem-sfb-open-closed-internal-hom-formulas."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The ordinary balanced-generator comparison is the inverse monoidal constraint of the module inverse-image functor r. Its degreewise total-complex comparison is therefore mapBifunctorComparison of the oplax monoidal constraint: both satisfy the same equations on every tensor summand. Their equality follows from the already proved uniqueness of the total-complex map.",
+   "uses": [
+    "def-sfb-module-upper-star"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply inverseImageModule_preservesFlat to r, using the inverse of the canonical coefficient isomorphism. The support pullback adjunction makes r a left adjoint. Together with the existing exactness and monoidal instances, these are the hypotheses of the source-library leftDerivedTensorComparison theorem. Transport that isomorphism from the total left derived functor to the termwise exact derived functor by leftDerivedFunctorIsoMapDerivedCategory. Naturality follows by conjugating the source comparison naturality square.",
+   "uses": [
+    "new-proetale-inverse-image-module-flat",
+    "det-lem-formal-closed-support-adjunction",
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The characterizing homotopy-category square for leftDerivedTensorComparison commutes with the exact-functor isomorphism by leftDerivedFunctorIsoMapDerivedCategory_hom_app_fac. Apply it to the homotopy classes of two complexes. The localization tensor map for Q is the map for Qh on those classes, and the homotopy factorization maps agree with the complex factorization maps. Substitute the total-complex identification from the first step to obtain exactly SupportDerivedTensorNormalization for every pair of complexes.",
+   "uses": [
+    "lem-sfb-derived-monoidal"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For uniqueness, replace the second derived input by the functorial flat resolution of a complex representative. Its image under r is K-flat because r preserves flat objects and colimits. The target localization tensor map is thus invertible, as are both exact-functor factorization maps. Cancel these maps in the two normalization squares to identify the comparison components on this pair of representatives. Essential surjectivity of Q and naturality transport the equality to arbitrary derived inputs, proving uniqueness of the entire family. No additional hypothesis on the morphism or on either input is used.",
+   "uses": [
+    "new-proetale-inverse-image-module-flat",
+    "lem-sfb-derived-monoidal",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-module-upper-star",
+  "new-proetale-inverse-image-module-flat",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-sfb-derived-monoidal",
+  "sk-def-sfb-derived-categories"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex; lean/WeilConjectures/CategoryTheory/DerivedCategory/LeftDerivedFunctor/Monoidal.lean",
+  "place": "Stacks lemma-pullback-tensor-product, the total tensor construction of Tag 06YL, and the generic source-library tensor/counit comparison and one-K-flat localization computation; implemented by P1 without changing the statement. The support predicates specialize generic categorical predicates to avoid nested instance proof unfolding; their tensor objects and normalization equations are unchanged."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -83,7 +126,9 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.SupportDerivedTensorComparisonFamily",
    "AlgebraicGeometry.ProEtale.CondensedRing.SupportDerivedTensorNormalization",
    "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_supportDerivedTensorComparison",
-   "AlgebraicGeometry.ProEtale.CondensedRing.supportDerivedTensorComparison"
+   "AlgebraicGeometry.ProEtale.CondensedRing.supportDerivedTensorComparison",
+   "ExactDerivedTensorComparisonFamily",
+   "ExactDerivedTensorNormalization"
   ],
   "file": "lean/Sheaf/AlgebraicGeometry/CondensedPullbackTensorComparison.lean",
   "statement": "def supportDerivedTensorComparison {X Y : Scheme.{u}} (f : X ⟶ Y) : SupportDerivedTensorComparisonFamily Λ f",
@@ -110,21 +155,13 @@
   "note": "Head 0f4c12212a35 is byte-identical to the PASSed 94631a apart from blueprint-index; L returned the earlier heads only because CondensedPullbackTensorComparison exceeded the 60 s compile limit. Re-read independently: every node clause matches the Lean (arbitrary commutative condensed Λ; closed i and quasi-compact open j with complementary images, no condition on X; j_! and exact i_* termwise; total Rj_*; Ri^! as the right-derived i^* ker(N → j_*j^*N) of the actual unit). Both Hom maps traced against steps 9-11; the closed projection uses the unit of i^* ⊣ i_*. Naturality squares correct; the auxiliary invertibility of the closed projection is true (node steps 3 and 7). The new comparison node is canonical: each comparison is chosen from a fully specifying uniqueness theorem and holds for any f. Item changes only lean plus one stmt_dep; statements verbatim; declarations exist; only the item theorem and three uniqueness theorems are sorry; docstrings and both report sections present. nt_compile --json clean: comparison module 46.9 s and item module 19.1 s at load 109, comparison module 32-39 s back to back at load 93-99. Profiler: ~21 s kernel check of SupportDerivedTensorNormalization; linter-off variant gave no gain, so no FIX. Retry landing at lower load."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "E2",
+  "group": "P1",
   "result": "pass",
-  "landing": "20261019T002530-L-2148928",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_supportComplexTensorComparison",
-   "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_supportDerivedTensorComparison",
-   "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_supportTensorComparison"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.ProEtale.CondensedRing.existsUnique_supportDerivedTensorComparison"
-  ]
+  "landing": "20261021T061554-L-1793200",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
