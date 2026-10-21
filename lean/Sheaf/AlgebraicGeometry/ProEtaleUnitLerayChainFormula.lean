@@ -67,9 +67,18 @@ noncomputable def proEtaleUnitLerayDirectImageIso {X Y : Scheme.{u}} (h : X ⟶ 
       (((proEtaleSheafAdjunction h CommRingCat.{u + 1}).homEquiv _ _).symm
         (proEtaleCoefficientDirectImageMap h A)) = _
     exact Equiv.apply_symm_apply _ _
-  unfold proEtaleConstantRingPushforward proEtaleRingModuleDirectImage
-  rw [he]
-  exact Iso.refl _
+  exact SheafOfModules.pushforwardCongr
+    (congrArg (fun (a : proEtaleConstantRing Y A ⟶
+      (proEtaleSheafDirectImage h CommRingCat.{u + 1}).obj (proEtaleConstantRing X A)) ↦
+      (show ((sheafCompose (ProEt.topology Y)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+          (proEtaleConstantRing Y A)) ⟶
+        ((proEtaleBaseChange h).sheafPushforwardContinuous RingCat.{u + 1}
+          (ProEt.topology Y) (ProEt.topology X)).obj
+          ((sheafCompose (ProEt.topology X)
+            (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj
+              (proEtaleConstantRing X A)) from
+        ⟨Functor.whiskerRight a.hom (forget₂ CommRingCat RingCat)⟩)) he)
 
 /-- The exact recorded pullback makes its recorded right adjoint preserve K-injectives.
 Source: Stacks Tag 08BJ (blueprint: lem-trf-proetale-unit-leray-chain-formula). -/
