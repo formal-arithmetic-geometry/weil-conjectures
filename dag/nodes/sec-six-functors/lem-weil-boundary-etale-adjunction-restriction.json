@@ -22,9 +22,141 @@
   "pqf-def-locnoeth",
   "def-weil-quasi-separated-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The ring $A$ is finite and commutative by [def-weil-l-adic-coefficient-extension], clause 4. Its additive group is torsion: multiplication by its finite cardinality annihilates every element, hence every $A$-module sheaf. The spectrum of the field $k$ is Noetherian (its only ideals are zero and the unit ideal). Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure maps of $V,W$, then [lem-weil-pbc-locally-noetherian-quasi-separated]. Thus $W$ is quasi-compact and quasi-separated, and [thm-nagata-compactification] applies to the separated finite-type map $h$, giving a compactification $c$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex",
+    "place": "Tag 01T6, lemma-finite-type-noetherian; properties.tex Tag 01OY, lemma-locally-Noetherian-quasi-separated; compactification supplied by thm-nagata-compactification."
+   }
+  },
+  {
+   "text": "For any compactification $c=(j,p)$, properness of $p$ includes finite type. By [lem-sfb-finite-type-composition-base-change], $\\overline V\\to W\\to\\operatorname{Spec}k$ is finite type. Apply [lem-weil-pbc-finite-type-over-noetherian] and [lem-weil-pbc-locally-noetherian-quasi-separated] to $\\overline V$. By [lem-kun-dimension-finite-type] it has finite dimension. Choose a nonnegative integer bound $d_c$; if $\\overline V$ is empty, choose $d_c=0$ (there are no chains of points to bound). This proves the geometric assertions for every compactification, without assuming that $j(V)$ is dense.",
+   "uses": [
+    "lem-sfb-finite-type-composition-base-change",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "lem-kun-dimension-finite-type"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-kunneth-ordinary/lem-kun-dimension-finite-type.md",
+    "place": "Finite-dimensionality assertion; morphisms.tex Tag 01T6 and properties.tex Tag 01OY for Noetherianity and quasi-separatedness."
+   }
+  },
+  {
+   "text": "For this $c$, [thm-amb-etale-exceptional-adjoint] applies: $A$ is finite commutative, all three schemes are Noetherian, $j$ is open and $p$ is proper of finite type. Thus the ambient ordinary etale functor $F_c=Rp_*j_!$ has a right adjoint $R_c$. This is the ordinary module-sheaf adjunction, without any constructibility or pro-etale ambient-adjoint hypothesis.",
+   "uses": [
+    "thm-amb-etale-exceptional-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/thm-amb-etale-exceptional-adjoint.md",
+    "place": "Statement and Brown representability argument (Stacks Tag 0F5Y)."
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-extension-by-zero-exact] and [lem-weil-pbc-exact-functor-complex-cohomology], $j_!$ preserves each cohomological bound. The module direct image $p_*$ is additive and left exact by [lem-weil-pbc-module-direct-image-left-exact]. The module-sheaf categories of $\\overline V$ and $W$ are Grothendieck abelian by [lem-pur-ringed-site-grothendieck-abelian] (small sites taken in a common larger universe), so [lem-weil-pbc-derived-functor-negative-vanishing] applies: its bounded-below right derived functor, computed by K-injective resolutions, preserves each lower bound. The natural compatibility [src-right-derived-functor-plus-compatibility] identifies that functor with the restriction of the unbounded total $Rp_*$ defining $F_c$. Therefore $F_c(D^{\\ge b})\\subset D^{\\ge b}$ for every integer $b$, so $F_c$ preserves $D^+$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-derived-functor-negative-vanishing",
+    "src-right-derived-functor-plus-compatibility"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TC, lemma-negative-vanishing; exact extension by zero: sites-modules.tex Tag 03DJ; unbounded/plus compatibility: src-right-derived-functor-plus-compatibility."
+   }
+  },
+  {
+   "text": "Apply [lem-kun-relative-torsion-direct-image-dimension-bound] to $p:\\overline V\\to W$: $k$ is separably closed, $A$ is additively torsion, $p$ is quasi-compact and locally finite type, $W/k$ is locally finite type, and $\\dim\\overline V\\le d_c$. Thus $R^qp_*M=0$ for every module sheaf $M$ and $q>2d_c$. The module-sheaf category is Grothendieck by [lem-pur-ringed-site-grothendieck-abelian], with the small sites understood in a common larger universe; it has enough injectives by [lem-weil-pbc-module-sheaves-enough-injectives] and K-injective resolutions by [prop-weil-pbc-kinjective-resolutions-exist]. Use these and the left exactness in step 4 in [lem-etale-derived-functor-upper-amplitude]. It gives $Rp_*(D^{\\le m})\\subset D^{\\le m+2d_c}$ even for unbounded-below inputs. Exactness of $j_!$ gives the same upper bound for $F_c$. Now [lem-etale-upper-shriek-explicit-amplitude-interface] with $N=2d_c$ and the ambient adjunction of step 3 shows that $R_c$ preserves $D^+$. This proves boundedness before making any restriction of the adjunction.",
+   "uses": [
+    "lem-kun-relative-torsion-direct-image-dimension-bound",
+    "lem-pur-ringed-site-grothendieck-abelian",
+    "lem-weil-pbc-module-sheaves-enough-injectives",
+    "prop-weil-pbc-kinjective-resolutions-exist",
+    "lem-weil-pbc-module-direct-image-left-exact",
+    "lem-etale-derived-functor-upper-amplitude",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-etale-upper-shriek-explicit-amplitude-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 07K7, lemma-unbounded-right-derived, (4)(c); upper-amplitude interface and the torsion relative dimension bound as stated in the cited DAG nodes."
+   }
+  },
+  {
+   "text": "For $K\\in D^+(V_{\\mathrm{et}},A)$ and $L\\in D^+(W_{\\mathrm{et}},A)$, both $F_cK$ and $R_cL$ lie in the indicated full subcategories by steps 4–5. Consequently the same ambient bijection $\\operatorname{Hom}(F_cK,L)\\cong\\operatorname{Hom}(K,R_cL)$ is a bijection of the subcategory Hom sets. Its naturality equations are the ambient equations. The unit is the transpose of $1_{F_cK}$ and the counit is the inverse transpose of $1_{R_cL}$, so the full inclusions send them to the ambient unit and counit, respectively. Their triangle identities are the same equations. This constructs the asserted restricted adjunction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+    "place": "Agent-explicit preparation for ordinary etale costalk adjunctions; direct full-subcategory Hom argument. Mathlib CategoryTheory/Adjunction/Restrict.lean, lines 42–74, implements the same construction."
+   }
+  },
+  {
+   "text": "By [lem-sf-comparison-pullback-exact], for every integer $i$ and arbitrary unbounded $C$ one has $\\mathcal H^i(S_VC)\\cong S_V\\mathcal H^i(C)$. On degree-zero sheaves, [thm-weil-pbc-site-comparison] makes $S_V$ faithful, since such sheaves are bounded below. If $S_VM=0$ for a sheaf $M$, then faithfulness sends the equality $S_V(1_M)=S_V(0)$ back to $1_M=0$, hence $M=0$. Thus each $\\mathcal H^i(S_VC)$ vanishes exactly when $\\mathcal H^i(C)$ vanishes. Requiring this for all $i<b$ proves the stated equivalence for any $C$, without assuming $C$ bounded below.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 5.1.6, together with exact comparison inverse image (lem-sf-comparison-pullback-exact); degreewise detection of zero."
+   }
+  },
+  {
+   "text": "For $L\\in D^+(W_{\\mathrm{et}},A)$, [thm-weil-pbc-site-comparison] says that the specified unit $\\eta_{W,L}:L\\to U_WS_WL$ is invertible. Its target is therefore bounded below, and step 5 puts both $R_cL$ and $R_cU_WS_WL$ in $D^+$. Step 7 (or its forward implication) puts their $S_V$-images in $D^+$. Every functor carries an inverse to an inverse, so applying $S_VR_c$ to this actual unit gives exactly the displayed isomorphism. No bound on $R_cL$ was an input; it was proved in step 5.",
+   "uses": [
+    "thm-weil-pbc-site-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Corollary 5.1.6: bounded-below comparison unit is an equivalence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-kun-dimension-finite-type",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-kun-relative-torsion-direct-image-dimension-bound",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-etale-derived-functor-upper-amplitude",
+  "lem-etale-upper-shriek-explicit-amplitude-interface",
+  "lem-sf-comparison-pullback-exact",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/cor-weil-boundary-duality-discharge.md",
+  "place": "Preparation for ordinary etale costalk adjunctions: geometric compactification, finite-cd bounds, full-subcategory restriction, and Bhatt–Scholze Corollary 5.1.6."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -74,10 +206,31 @@
    "results": "Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; searched Mathlib/CategoryTheory/Adjunction",
    "date": "2026-10-21",
    "verdict": "no match: the actual source hits give only generic adjunction machinery, or none for the etale/pro-etale scheme functors; no full statement or one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A left exact functor of finite cohomological dimension has unbounded right derived functor sending D le m to D le m plus d and D ge m to D ge m",
+   "results": "DerivedCategory.instIsGEObjCochainComplexIntQOfIsGE; DerivedCategory.isGE_Q_obj_iff; DerivedCategory.instIsLEObjCochainComplexIntQOfIsLE; DerivedCategory.isLE_Q_obj_iff; DerivedCategory.instIsGEObjSingleFunctor; DerivedCategory.exists_iso_Q_obj_of_isGE; CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ; DerivedCategory.exists_iso_Q_obj_of_isLE",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned generic t-structure, sheaf-adjunction, and full-subcategory restriction results do not give the complete geometric, boundedness, and comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictFullyFaithful|map_restrictFullyFaithful_unit_app",
+   "results": "Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean; Mathlib/CategoryTheory/Adjunction/Restrict.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned generic t-structure, sheaf-adjunction, and full-subcategory restriction results do not give the complete geometric, boundedness, and comparison statement."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale compact support adjunction on finite type schemes with finite torsion coefficients preserves bounded below derived categories and site comparison reflects cohomological bounds",
+   "results": "SheafOfModules.PullbackConstruction.adjunction; CategoryTheory.Functor.sheafAdjunctionCocontinuous; DerivedCategory.TStructure.t; AlgebraicGeometry.IsEtale; AlgebraicGeometry.Scheme.smallEtaleTopology; CompHausLike.LocallyConstant.adjunction; AlgebraicGeometry.Scheme.etaleTopology; CategoryTheory.constantSheafAdj",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned generic t-structure, sheaf-adjunction, and full-subcategory restriction results do not give the complete geometric, boundedness, and comparison statement."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-boundary-dualizing-composition",
@@ -96,5 +249,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-boundary-etale-adjunction-restriction",
+  "worker": "stage1",
+  "summary": "All clauses proved using existing DAG nodes. Finite type gives finite-dimensional Noetherian compactifications. The unbounded upper-amplitude theorem and right-adjoint criterion establish boundedness before restriction. Exact comparison and faithfulness on heart objects reflect arbitrary lower bounds; the final map is the image of the specified invertible comparison unit. No statement change or new node.",
+  "blueprint": "Nearest ancestor cor-weil-boundary-duality-discharge, first proof paragraph: preparation of ordinary etale costalk adjunctions, as exposed by lem-weil-boundary-dualizing-composition proof steps 1–3. The remaining boundary-duality argument is not altered.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "thm-nagata-compactification",
+    "why": "Existence of a compactification for a separated finite-type map over a qcqs base. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-sfb-finite-type-composition-base-change",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-kun-dimension-finite-type",
+    "why": "Finite dimension of each finite-type compactification over k. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "thm-amb-etale-exceptional-adjoint",
+    "why": "The ordinary ambient adjunction for finite constant coefficients. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-complex-cohomology",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-direct-image-left-exact",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-negative-vanishing",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "src-right-derived-functor-plus-compatibility",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-kun-relative-torsion-direct-image-dimension-bound",
+    "why": "Relative torsion cohomological-dimension estimate applied to the proper factor. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-enough-injectives",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "prop-weil-pbc-kinjective-resolutions-exist",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-etale-derived-functor-upper-amplitude",
+    "why": "Generic unbounded derived upper bound from uniform higher-functor vanishing. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-etale-upper-shriek-explicit-amplitude-interface",
+    "why": "Generic adjunction orthogonality criterion converting the proved upper bound into boundedness of the right adjoint. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic scheme/sheaf or derived-category fact used exactly as stated in the proof; no node of the biduality unit supplies this preliminary tool. This is a preliminary tool, not a replacement of a biduality unit step."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "The specified bounded-below site-comparison unit and faithfulness on sheaves. This is a preliminary tool, not a replacement of a biduality unit step."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "thm-nagata-compactification",
+  "lem-sfb-finite-type-composition-base-change",
+  "lem-kun-dimension-finite-type",
+  "thm-amb-etale-exceptional-adjoint",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-module-direct-image-left-exact",
+  "lem-weil-pbc-derived-functor-negative-vanishing",
+  "src-right-derived-functor-plus-compatibility",
+  "lem-kun-relative-torsion-direct-image-dimension-bound",
+  "lem-pur-ringed-site-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "prop-weil-pbc-kinjective-resolutions-exist",
+  "lem-etale-derived-functor-upper-amplitude",
+  "lem-etale-upper-shriek-explicit-amplitude-interface",
+  "lem-sf-comparison-pullback-exact",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-d014558d9",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-d014558d9 (reviewer sub-agent of L); spot-checked: I read the whole delivery: report plus item, no new nodes. Statement and stmt_deps are identical to live/side-live, where the item is unsplit; no repair note, not dropped, no SGA. Steps 1–2 hold. W is qcqs via 01T6/01OY, so Nagata applies. V̄ is finite type over k and so finite-dimensional, and the empty case with d=0 is fine. Step 3 meets every hypothesis of thm-amb-etale-exceptional-adjoint. Step 5 is correct: the kun relative bound (k separably closed, A torsion, p qc+lft) gives R^q p_*=0 for q>2d. The upper-amplitude node matches Stacks 07K7(4)(c) on unbounded input. The interface node gives R_c(D^+)⊂D^+ by orthogonality, before the restriction, so there is no circularity. Steps 6–8 hold: restriction to full subcategories; reflection of lower bounds via comparison-exact (3) plus faithfulness from BS Cor 5.1.6 (read: K→ν_*ν^*K is an equivalence on D^+); and the image of the invertible unit. FIX, C-type: step 4 applies lem-weil-pbc-derived-functor-negative-vanishing, whose hypothesis is Grothendieck abelian categories, without citing a node for it. The corrected item now cites lem-pur-ringed-site-grothendieck-abelian in step 4; proof_deps is unchanged. Advisory: no stmt_dep defines U_T=Rν_* or η_T. This gap predates this delivery, and thm-weil-pbc-site-comparison has it too. Read as the D^+ unit of that theorem, which is how step 8 uses it, it is consistent; a def node for Rν_{T,*} is suggested. Accept all 19 declared tool_uses as generic preliminaries.; 1 file(s) fixed by the reviewer"
  }
 }
