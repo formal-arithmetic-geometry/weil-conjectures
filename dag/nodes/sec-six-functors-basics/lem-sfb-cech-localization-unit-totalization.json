@@ -2,7 +2,7 @@
  "id": "lem-sfb-cech-localization-unit-totalization",
  "kind": "statement",
  "title": "Closed localization unit through bounded-below Cech descent",
- "statement": "Let $\\mathcal X,\\mathcal V,\\mathcal Y,\\mathcal Z,\\mathcal B$ be topoi of sheaves on small sites with module categories over sheaves of commutative rings in fixed larger universes [def-weil-pbc-sites-and-cohomology, def-weil-size-convention, def-weil-sheaf-of-modules-category]. Let $f:\\mathcal X\\to\\mathcal V$, $g:\\mathcal V\\to\\mathcal Y$, and $t:\\mathcal B\\to\\mathcal Y$ be morphisms of ringed topoi with exact module inverse images. Let $h^*:\\operatorname{Mod}(\\mathcal V)\\rightleftarrows\\operatorname{Mod}(\\mathcal Z):h_*$ be a specified additive adjunction with both functors exact; write $H=h_*h^*$ and $\\eta:\\mathrm{id}\\to H$ for its unit. All module categories are Grothendieck abelian [def-sp-grothendieck-abelian], and use ordinary unbounded K-injective derived categories [sk-def-sfb-derived-categories].\nLet $v:V\\to1_{\\mathcal X}$ be an epimorphism of sheaves of sets, $\\mathcal X_n=\\mathcal X/(V^{\\times(n+1)})$ its Cech slices [def-pur-localized-ringed-site], $v_n:\\mathcal X_n\\to\\mathcal X$ their localization morphisms, and $N$ a module sheaf on $\\mathcal X$. Put $N_n=v_n^*N$ and $C_n=R(fv_n)_*(N_n[0])$, with the augmented Cech maps. There are natural identifications\n$$t^*Rg_*Rf_*(N[0])\\cong\\operatorname{Tot}_n t^*Rg_*C_n,$$\n$$t^*Rg_*H\\bigl(Rf_*(N[0])\\bigr)\\cong\\operatorname{Tot}_n t^*Rg_*H(C_n).$$\nHere $H$ on derived categories is its termwise exact descent. Each totalization is computed with compatible nonnegative resolutions and the Cech alternating differential; all total degrees have finite diagonals. Under these identifications the actual map\n$$t^*Rg_*\\bigl(\\eta_{Rf_*(N[0])}\\bigr)$$\nis the totalization of $t^*Rg_*(\\eta_{C_n})$. The identifications preserve the augmentation and its restriction-of-sections map and are natural in $N$ and refinements of $v$. Restricting the entire diagram to an object of a small site, using its slice site and pulled-back coefficient ring, gives these same comparisons; the adjunction unit remains the original unit under slice restriction. No claim about arbitrary unbounded product totalizations or about $h^*$ preserving injectives is included.",
+ "statement": "Let $\\mathcal X,\\mathcal V,\\mathcal Y,\\mathcal Z,\\mathcal B$ be topoi of sheaves on small sites with module categories over sheaves of commutative rings in fixed larger universes [def-weil-pbc-sites-and-cohomology, def-weil-size-convention, def-weil-sheaf-of-modules-category]. Let $f:\\mathcal X\\to\\mathcal V$, $g:\\mathcal V\\to\\mathcal Y$, and $t:\\mathcal B\\to\\mathcal Y$ be morphisms of ringed topoi with exact module inverse images. Let $h^*:\\operatorname{Mod}(\\mathcal V)\\rightleftarrows\\operatorname{Mod}(\\mathcal Z):h_*$ be a specified additive adjunction with both functors exact; write $H=h_*h^*$ and $\\eta:\\mathrm{id}\\to H$ for its unit. All module categories are Grothendieck abelian [def-sp-grothendieck-abelian], and use ordinary unbounded K-injective derived categories [sk-def-sfb-derived-categories].\nLet $v:V\\to1_{\\mathcal X}$ be an epimorphism of sheaves of sets, $\\mathcal X_n=\\mathcal X/(V^{\\times(n+1)})$ its Cech slices [def-pur-localized-ringed-site], $v_n:\\mathcal X_n\\to\\mathcal X$ their localization morphisms, and $N$ a module sheaf on $\\mathcal X$. Put $N_n=v_n^*N$ and $C_n=R(fv_n)_*(N_n[0])$, with the augmented Cech maps. There are natural identifications\n$$t^*Rg_*Rf_*(N[0])\\cong\\operatorname{Tot}_n t^*Rg_*C_n,$$\n$$t^*Rg_*H\\bigl(Rf_*(N[0])\\bigr)\\cong\\operatorname{Tot}_n t^*Rg_*H(C_n).$$\nHere $H$ on derived categories is its termwise exact descent. Each totalization is computed with compatible nonnegative resolutions and the Cech alternating differential; all total degrees have finite diagonals. Under these identifications the actual map\n$$t^*Rg_*\\bigl(\\eta_{Rf_*(N[0])}\\bigr)$$\nis the totalization of $t^*Rg_*(\\eta_{C_n})$. The identifications preserve the augmentation and its restriction-of-sections map and are natural in $N$ and refinements of $v$. Restricting the entire displayed diagram on $\\mathcal B$ to an object $U$ of its small site, using the slice site and pulled-back coefficient ring, gives the restrictions of these comparisons. The restricted arrow is $j_U^*t^*Rg_*(\\eta_{Rf_*(N[0])})$, where $j_U^*$ denotes slice restriction. This assertion restricts the original unit map; it does not assert that an arbitrary additive adjunction $h^*\\dashv h_*$ induces an adjunction on slice topoi. No claim about arbitrary unbounded product totalizations or about $h^*$ preserving injectives is included.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
   "place": "Paragraph (3), formal first-quadrant descent of an exact closed-localization unit, prior to the root-tower calculation. Agent-formulated input; exact all-continuous reference WANTED."
@@ -13,11 +13,100 @@
   "def-weil-sheaf-of-modules-category",
   "def-sp-grothendieck-abelian",
   "sk-def-sfb-derived-categories",
+  "def-pur-localized-ringed-site",
+  "def-sp-double-complex-total"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-sfb-derived-cech-image-totalization] with both its morphisms equal to the identity of $\\mathcal X$, and coefficient sheaf $N$. Its Cartesian coefficient hypothesis is then automatic. It supplies an augmented nonnegative cosimplicial complex $A^{n,\\bullet}$ on $\\mathcal X$ representing $Rv_{n*}(N_n[0])$ and the augmentation isomorphism $a:N[0]\\xrightarrow{\\sim}QT(A)$. Retain the compatible model supplied there, with differential $\\delta+(-1)^n d$. Its degree-zero augmentation is the actual restriction of sections. The cited statement also supplies naturality in $N$ and cover refinements. All slice topoi and diagrams are small in the fixed universes.",
+   "uses": [
+    "lem-sfb-derived-cech-image-totalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FC, lemma-injective-module-trivial-cech; existing derived sheaf descent comparison, applied only to identity morphisms."
+   }
+  },
+  {
+   "text": "The direct image $f_*$ is additive and left exact: the adjunction bijection identifies maps into its kernel diagram with maps into the original kernel diagram, giving the kernel universal property; the same argument for finite products gives biproduct preservation. Apply [lem-sfb-nonnegative-derived-totalization] with $F=f_*$ to $A$, including its augmentation. This gives an augmented coherent nonnegative model $B$ on $\\mathcal V$ with $QB^n=Rf_*Rv_{n*}(N_n[0])$ and an isomorphism $\\alpha:Rf_*(N[0])\\xrightarrow{\\sim}QT(B)$. By [lem-sfb-derived-composition-adjunction-normalization], identify these columns with $C_n=R(fv_n)_*(N_n[0])$ through the canonical comparison, and retain all its coface and codegeneracy maps. Here $f^*$ is exact by hypothesis. For $v_n^*$, present the slice at $V^{\\times(n+1)}$ by [lem-trf-topos-localization-site-presentation], then apply the module restriction exactness of [lem-pur-site-restriction-module-adjunction-exact] with the localized ring. Thus both left adjoints are exact, as the composition node requires. The augmentation clause in the totalization lemma identifies $\\alpha$ with the derived restriction augmentation, rather than an arbitrary isomorphism. Each added resolution index is nonnegative.",
+   "uses": [
+    "lem-sfb-nonnegative-derived-totalization",
+    "lem-sfb-derived-composition-adjunction-normalization",
+    "lem-trf-topos-localization-site-presentation",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J, lemma-two-ss-complex-functor, finite-total computation; Tag 09T5, lemma-derived-adjoint-functors, and sites-cohomology.tex Tag 0D6E, lemma-derived-pushforward-composition."
+   }
+  },
+  {
+   "text": "Put $H=h_*h^*$. It is additive and exact, so [lem-weil-pbc-exact-functor-derived-factorization] represents its descent by termwise application on every complex. The unit therefore gives the strict cosimplicial chain map $e:B\\to H(B)$ with $e^{n,q}=\\eta_{B^{n,q}}$. For every coface, codegeneracy, and internal differential $u$, its required equation is $H(u)\\eta=\\eta u$, the naturality equation of the specified unit. Write $E:HT(B)\\xrightarrow{\\sim}T(HB)$ for the canonical finite-sum identification. In degree $r$, naturality for the inclusion $\\iota_{n,q}:B^{n,q}\\to T(B)^r$ gives $\\eta_{T(B)^r}\\iota_{n,q}=H(\\iota_{n,q})\\eta_{B^{n,q}}$. Hence $E\\eta_{T(B)}=T(e)$, by equality on every biproduct summand. Additivity also preserves both differential signs. Naturality at $\\alpha$ now gives $E\\,H(\\alpha)\\,\\eta_{Rf_*N}=QT(e)\\,\\alpha$ in the derived category. This equality follows by localizing the termwise naturality equations, so it applies to the derived isomorphism $\\alpha$ as well.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sp-double-complex-total"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; termwise unit naturality and finite diagonal calculation."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-nonnegative-derived-totalization] with $F=g_*$ to the two cosimplicial complexes $B,HB$ and their map $e$. The kernel and finite-product adjunction argument of step 2 proves that $g_*$ is additive and left exact as well. Both diagrams are nonnegative, including $HB$, since $H$ is termwise exact. Naturality of $\\chi$ gives the commuting square with top arrow $Rg_*(QT(e))$ and bottom arrow $\\operatorname{Tot}_n Rg_*(\\eta_{C_n})$. Compose its source comparison with $Rg_*(\\alpha)$ and its target comparison with $Rg_*(E\\,H(\\alpha))$. Step 3 identifies the arrow between these two sources as $Rg_*(\\eta_{Rf_*(N[0])})$. Thus the two object comparisons and the equality of the actual unit maps are obtained together. Finally apply $t^*$ termwise, using [lem-weil-pbc-exact-functor-derived-factorization]. In total degree $r$, the canonical identification $t^*(\\bigoplus_{n+q+s=r}L^{n,q,s})=\\bigoplus_{n+q+s=r}t^*L^{n,q,s}$ is an isomorphism because the index set is finite. It commutes with the differentials, and with the map on each summand, by additivity. This proves the two displayed isomorphisms and the asserted equality after $t^*$.",
+   "uses": [
+    "lem-sfb-nonnegative-derived-totalization",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015J, lemma-two-ss-complex-functor, derived finite-total comparison; Tag 015F, lemma-right-derived-exact-functor."
+   }
+  },
+  {
+   "text": "All comparisons above preserve augmentations: step 1 uses the restriction augmentation, and each application of [lem-sfb-nonnegative-derived-totalization] uses its augmentation clause. Their composite in Cech degree zero is therefore the same derived restriction-of-sections map. A map of coefficient sheaves or a cover refinement induces a map of the augmented cosimplicial models by [lem-sfb-derived-cech-image-totalization]. Apply the naturality clauses of the totalization comparison to this map in steps 2 and 4; the square in step 3 commutes because the original $\\eta$ is natural on every column. Composition and identity equations are preserved by these functors and finite-sum identifications. This proves the requested naturality, retaining the coherent models rather than only their separate derived columns.",
+   "uses": [
+    "lem-sfb-derived-cech-image-totalization",
+    "lem-sfb-nonnegative-derived-totalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03FC, lemma-injective-module-trivial-cech, functorial restrictions; derived.tex Tag 015J, natural mapped-total comparison."
+   }
+  },
+  {
+   "text": "For a site object $U$ of $\\mathcal B$, [lem-pur-site-restriction-module-adjunction-exact] gives the exact restriction $j_U^*$ to modules over the restricted ring on the slice site. Applying it to the entire already constructed square preserves its equalities and isomorphisms; [lem-weil-pbc-exact-functor-derived-factorization] identifies this operation with termwise restriction. In degree $r$ there are only finitely many summands, so restriction commutes with each total by the same inclusion calculation as in step 4. The section rule of [def-pur-localized-ringed-site] identifies the restricted augmentation on an object $W\\to U$ with the original augmentation on $W$. In particular the restricted unit arrow is literally $j_U^*t^*Rg_*(\\eta_{Rf_*N})$ under these comparisons. This proves the slice clause with the original specified unit, without manufacturing slice functors from the arbitrary additive adjunction.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DJ (lemma-extension-by-zero-exact) and 04IX (definition-localize-ringed-site); derived.tex Tag 015F."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-derived-cech-image-totalization",
+  "lem-sfb-nonnegative-derived-totalization",
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-trf-topos-localization-site-presentation",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sp-double-complex-total",
   "def-pur-localized-ringed-site"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 03FC, lemma-injective-module-trivial-cech; derived.tex Tag 015J finite-total computation and Tag 015F exact descent. The arbitrary exact-adjunction unit and slice interpretation are agent arguments following these constructions."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +142,38 @@
    "results": "8 hits: CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derivedε_fac_app_assoc, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.totalLeftDerivedCounit",
    "date": "2026-10-21",
    "verdict": "no match: the returned declarations do not state this ringed-topos or internal condensed-action assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Functorial bounded below Cech descent identifies the unit of an exact adjunction after a derived direct image with its first quadrant totalization",
+   "results": "8 hits: CategoryTheory.Adjunction.derived'_unit, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedη_fac_app, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derived'_counit",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply ordinary derived functors, their units, or underived total complexes; none gives the compatible nonnegative derived-totalization comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(cech|Cech).*(derived|total)|(derived|total).*(cech|Cech)",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply ordinary derived functors, their units, or underived total complexes; none gives the compatible nonnegative derived-totalization comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerived\", \"total\"",
+   "results": "4 hits: CategoryTheory.Functor.totalRightDerived, CategoryTheory.Functor.instIsRightDerivedFunctorTotalRightDerivedTotalRightDerivedUnit, CategoryTheory.Functor.totalRightDerivedUnit, CategoryTheory.Functor.IsRightDerivedFunctor.instCommShiftTotalRightDerived",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply ordinary derived functors, their units, or underived total complexes; none gives the compatible nonnegative derived-totalization comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact adjunction unit is compatible with Cech descent under derived pushforward and finite diagonal total complexes",
+   "results": "8 hits: CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived_unit, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.CoreUnitCounit.unit, CategoryTheory.Adjunction.CoreHomEquivUnitCounit.unit",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply ordinary derived functors, their units, or underived total complexes; none gives the compatible nonnegative derived-totalization comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-partial-kummer-boundary-unit-model",
@@ -80,5 +197,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-cech-localization-unit-totalization",
+  "worker": "stage1",
+  "summary": "Split the unit comparison through existing source-topos Cech descent, a generic nonnegative derived-totalization tool, canonical direct-image composition, the explicit finite-biproduct unit equation, and exact slice restriction. Corrected the ill-typed blanket assertion that an arbitrary additive adjunction restricts to slice topoi; the precise restricted original unit map is now stated. No hypothesis on f,g,t was strengthened.",
+  "blueprint": "Realizes main-20261015 direct-images.proof.md paragraph (3), the bounded-below Cech comparison before the partial Kummer root-tower unit calculation; inherited nearest-blueprint-ancestor is None.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-derived-composition-adjunction-normalization",
+    "why": "Canonical composition of derived direct images with exact inverse images; it retains the actual adjunction maps and supplies no alternative finiteness route."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic exact module restriction to a slice site, needed for the final slice clause; it is not a geometric purity input."
+   },
+   {
+    "node": "lem-trf-topos-localization-site-presentation",
+    "why": "Generic presentation of a topos slice by an object of a small site, allowing the cited exact module restriction theorem to apply to the Cech sheaf objects; no trace-formula argument is used."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-derived-composition-adjunction-normalization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-trf-topos-localization-site-presentation"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NM-e19f3f995",
+  "group": "NM",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-e19f3f995 (reviewer sub-agent of L); spot-checked: I read the item (6 steps), the new node lem-sfb-nonnegative-derived-totalization, every cited statement, main-20261015 direct-images.proof.md paragraph (3) (it does not prove this comparison, so the agent origin and the WANTED line are correct) and the Stacks places 015J/015F/09T5/03FC/0D6E/0133/03DJ/04IX. There is no repair note, nothing in the closure is in route-pivot-dropped, no SGA is cited, and the live node is still unsplit. Statement change: only the slice sentence changed, now restriction on B's site with the restricted arrow j_U^*t^*Rg_*(eta). The two-point counterexample is valid: h^*(A,B)=A⊕B, h_*M=(M,M); (0,0) and (0,Z) restrict equally but H does not. So the 'localize H' reading is ill-typed, and this is a justified E7 correction with no hypothesis changed. Steps: step 1 applies derived-cech with f=h=id, so the Cartesian hypothesis is trivial. Step 2: f_* is left exact as a right adjoint. The composition node's hypotheses (exact f^*, v_n^* exact via the trf site presentation plus pur exact restriction) are discharged, and its K-injective normalization keeps the cosimplicial maps. Step 3: the termwise unit and the finite-biproduct E give E eta_T = T(e), and the derived equation follows by naturality at alpha; elementary is acceptable. Step 4: g_* is left exact, HB is re-resolved by the new node, naturality in e holds, and t^* is exact on finite diagonals. Steps 5-6: augmentation, naturality and exact slice restriction are correct. New node: true (levelwise injective replacement in Fun(Delta,Ch>=0), first-quadrant filtration, T(J) bounded-below injective). Small cases checked: constant cosimplicial M, and no negative degrees. It is statement-only, has all three search kinds and proper blueprint fields, and no duplicate exists (I checked the monadic bar, cbc holim, trf total-site spectral sequence, alternating Cech, CE mapped total and the derived-cech nodes). It is not a clause of the item and is used twice. Tool uses accepted: derived-composition-adjunction-normalization, trf topos-localization-site-presentation, pur site-restriction (on route). Batch 5: derived-cech-image-totalization and lem-trf-topos-localization-site-presentation are general (descent / topos slice presentation); the trf node's closure adds only def-trf-geometric-morphism, and both are already in the batch-5 closure without the item via the parent. The item adds only the new node to the closure, so I accept both. Maintainer note: parent lem-sfb-partial-kummer-boundary-unit-model step 2 cited the old slice clause to localize the calculation to U_α. That clause never validly gave this for arbitrary h. The parent should cite lem-sbc-ringed-topos-sheaf-slice-derived-comparison / lem-weil-pbc-ringed-slice-derived-comparisons and then apply the item to the localized data. Recommend reopening that step."
  }
 }

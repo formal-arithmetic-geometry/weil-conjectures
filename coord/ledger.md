@@ -22999,3 +22999,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:03 L: merged deliver/M3/Sheaf.Paper.RingedSliceComparisonsShift (stage 3; reviewer PASS; first push; landing 20261021T160334-L-3591634 (interface); batch 20261021T160329; modules 1; new nodes 0; change records: coord/changes/M3-ringed-slice-comparisons-shift-proof-scopes.md)
 - 16:03 L: returned deliver/C2/Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated (reviewer RETURN: (reviewer C-17c01, head 17c0184b9) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Algebra.Homology.KFl)
 - 16:03 L: returned deliver/U7/Sheaf.CategoryTheory.SubterminalDerivedImageCalculus (reviewer RETURN: (reviewer C-58f40, head 58f40d74d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.CategoryTheory.Subte)
+- 16:04 L: merged deliver/NM/lem-sfb-cech-localization-unit-totalization (reviewer PASS; first push; new nodes: 1)
