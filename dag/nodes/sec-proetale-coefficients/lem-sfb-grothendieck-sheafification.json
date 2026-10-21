@@ -252,5 +252,24 @@
   "group": "Q01",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-5825bdb99 (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes and every cited statement (def-sp-grothendieck-abelian, lem-coef-grothendieck-locally-presentable, lem-coef-object-presentability-rank, lem-coef-small-family-regular-bound, def-weil-pbc-sheafification, def-galois-finite-limits-colimits, def-weil-pbc-category-colimit, def-weil-pbc-sites-and-cohomology). Also read the blueprint main-20261015 proof of lem-sfb-finite-upper-star-exact (first paragraph), the project Lean (HasSheafify.lean:54-65; TransfinitePlusSheaf.lean:72-188; TransfinitePlus.lean:55-181) and Mathlib Sites/Abelian.lean:30-42 and Sheafification.lean:40-63. The item statement is verbatim. The five steps are correct and complete. Step 1: the rank κ is larger than κ0 and #Mor C, and κ-filtered implies κ0-filtered. Steps 2-4: convergence, then orthogonality giving the adjunction by fullness, then finite-limit preservation of the same functor. Step 5: the sheafIsAbelian leaf, through HasSheafify.mk'. The new statements are true: convergence by κ-presentability and κ-small matching diagrams, with a generator being a detector in an abelian category; orthogonality for every κ (W_toTransfinitePlus_app); left exactness by AB5 and filtered colimits over covering sieves. None restates an item clause and none is a duplicate (DAG grep for plus construction, transfinite, covering sieve, 03A3, HasSheafify, sheafIsAbelian). Small cases checked: empty C, zero A, coarsest topology, covering empty sieve. FIX (B3): the three transfinite nodes use 'covering sieves J(U)' but cite only def-weil-pbc-sites-and-cohomology, which defines covering families and no sieves. Added [def-weil-pbc-topos] (same unit, no cycle) to their text and stmt_deps; the corrected whole files are in fixes/dag/nodes/sec-proetale-coefficients/. Advisory for the maintainer: (1) the item is covered clause by clause by the sorry-free hasSheafify_of_isGrothendieckAbelian (HasSheafify.lean:61-65) plus Mathlib sheafIsAbelian, so a per-clause attachment is possible; the split is still legitimate because no single declaration states the whole item. (2) The helpers have exact project-Lean candidates: isSheaf_transfinitePlus_obj_of_isSeparator, W_toTransfinitePlus_app, preservesFiniteLimits_transfinitePlusSheaf. (3) The helpers take the existence of V-small limits in Grothendieck abelian A for granted; whoever splits a helper needs a completeness node. No SGA is used and no tool_uses are needed.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.GrothendieckSheafification",
+  "declaration": "CategoryTheory.GrothendieckTopology.hasSheafify_and_nonempty_abelian_of_isGrothendieckAbelian",
+  "file": "lean/Sheaf/CategoryTheory/GrothendieckSheafification.lean",
+  "statement": "theorem hasSheafify_and_nonempty_abelian_of_isGrothendieckAbelian {C : Type v} [SmallCategory C] (J : GrothendieckTopology C) (A : Type u) [Category.{v} A] [Abelian A] [IsGrothendieckAbelian.{v} A] : HasSheafify J A ∧ Nonempty (Abelian (Sheaf J A))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "HasSheafify packages existence of the sheafification adjunction and finite-limit preservation; Nonempty Abelian records the final clause without choosing a second abelian structure. No HasSheafify hypothesis is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-39bf6224f",
+  "group": "NI",
+  "result": "fix",
+  "note": "Statement correct clause by clause: HasSheafify J A (left adjoint presheafToSheaf + PreservesFiniteLimits of the same functor) ∧ Nonempty (Abelian (Sheaf J A)) (sheafIsAbelian). Hypotheses SmallCategory C : Type v, Category.{v} A, Abelian, IsGrothendieckAbelian.{v} A; no extra assumptions. Signature equals project hasSheafify_of_isGrothendieckAbelian plus the abelian conjunct. Presheaf.IsSheaf = Hom-tested condition. Only the lean field changed vs live; statement verbatim; imports are stmt_dep/proof_dep modules; edge cases fine; nt_compile --json clean in 3.3 s. Fault H11: the 'Second reading by NI' section was explicitly not a reading. FIX: fixes/lem-sfb-grothendieck-sheafification.report.md replaces it with a real clause-by-clause second reading. Advisory: Sites.Abelian could be a plain import."
  }
 }

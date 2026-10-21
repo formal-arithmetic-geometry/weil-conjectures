@@ -20073,3 +20073,10 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:56 L: merged deliver/Q52/lem-sp-flat-coefficient-chain-transpose (reviewer PASS; first push; new nodes: 0)
 - 03:56 L: merged deliver/Q70/lem-sfb-open-scalar-conjugate-normalization (reviewer FIX; first push; new nodes: 0)
 - 2026-10-21T03:56:44Z L: superseded stage-1 delivery Q49/lem-sfb-common-field-lattice-generators at 7b997d760acf25788cb2ee410b4b284e8ff5b111; current completion retained; packet archived at refs/superseded/Q49/lem-sfb-common-field-lattice-generators/7b997d760acf25788cb2ee410b4b284e8ff5b111; stale return retired.
+- 03:56 L: merged deliver/O2/lem-weil-pbc-kflat-fixed-tensor-triangulated (stage 2; reviewer PASS; parallel immutable checks)
+- 03:56 L: merged deliver/NY/lem-sf-localizing-hom-test (stage 2; reviewer PASS; parallel immutable checks)
+- 03:56 L: merged deliver/NI/lem-sfb-grothendieck-sheafification (stage 2; reviewer FIX; parallel immutable checks)
+- 03:56 L: merged deliver/Q21/lem-sfb-finite-field-proetale-direct-image (stage 2; reviewer PASS; parallel immutable checks)
+- 03:56 L: merged deliver/Q02/lem-weil-pbc-ringed-slice-comparisons-shift (stage 2; reviewer PASS; parallel immutable checks)
+- 03:56 L: merged deliver/NE/lem-sf-normalized-derived-comparison-composition (stage 2; reviewer PASS; parallel immutable checks)
+- 03:56 L: merged deliver/NG/lem-pur-ringed-derived-composition-cocycle (stage 2; reviewer PASS; parallel immutable checks)

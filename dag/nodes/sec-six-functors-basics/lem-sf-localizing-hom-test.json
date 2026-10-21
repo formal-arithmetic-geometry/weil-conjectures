@@ -194,5 +194,23 @@
   "group": "Q68",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q68-75c182458 (reviewer sub-agent of L); spot-checked: I read the delivery in full. The item's statement is the live base statement unchanged except for an added citation of def-weil-triangulated-subcategory. Its general form (an arbitrary class of objects, no compactness) is what parent step 5 of sk-prop-sf-rf-shriek-preservation needs, since the class there is D_ctf. Step 1 uses TR1, then a rotation, then extension closure and repleteness to show the cone C lies in Loc(S); this is correct. Step 2 shows Hom(S[n],C)=0: injectivity for α[1] comes from the hypothesis at n-1 through the shift equivalence, clause (i) is applied to the rotated triangles, and clause (ii) to G→C→B[1] at C, all as stated in lem-weil-pbc-hom-into-triangle-exact. Step 3 uses the new leaf for the left orthogonal of the iso-closure of {C[m]}, and its coproduct closure is written out from the universal property. Step 4 gives S ⊆ O, so Loc ⊆ O and C ∈ O ∩ Q, hence 1_C=0. Step 5 applies lem-kun-distinguished-cone-zero (Stacks 05QR). The new node lem-sf-shift-stable-left-orthogonal is true: it is the left-orthogonal half of Stacks 0FXC. It is a correct Mathlib leaf: I checked Triangulated/Orthogonal.lean:68 and ObjectProperty/Orthogonal.lean:47/58/66, and it needs only Pretriangulated, not TR4. Its form is OK (B1, B9, four search kinds). It does not restate a clause of the item or the parent. An rg duplicate search found no existing node stating the item or the leaf; lem-pc-cohomological-generator-detection needs compact set-indexed generators, and the lem-sc iso-locus lemmas concern a natural transformation of exact functors. Off-unit citations are Mathlib leaves, so no tool_uses are needed. Item not dropped, no repair note, live still unsplit, no SGA. Edge cases tested: S empty, S={Z} in D(Z), Q empty/zero/all. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.LocalizingHomTest",
+  "declaration": "CategoryTheory.ObjectProperty.isIso_of_bijective_postcomp_shift_generators",
+  "file": "lean/Sheaf/CategoryTheory/LocalizingHomTest.lean",
+  "statement": "theorem isIso_of_bijective_postcomp_shift_generators {C : Type u} [Category.{v} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ] [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C] [IsTriangulated C] [HasCoproducts.{v} C] (S : ObjectProperty C) {B G : C} (α : B ⟶ G) (hB : S.localizingClosure B) (hG : S.localizingClosure G) (hα : ∀ (X : C), S X → ∀ (n : ℤ), Function.Bijective (fun (f : X⟦n⟧ ⟶ B) ↦ f ≫ α)) : IsIso α",
+  "branch": "newtargets-dag",
+  "by": "NY",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34f5ba75b",
+  "group": "NY",
+  "result": "pass",
+  "note": "Lean statement matches lem-sf-localizing-hom-test clause by clause: Category.{v} + Preadditive/HasZeroObject/additive ℤ-shift/Pretriangulated/IsTriangulated (recorded def-weil-triangulated-category match), HasCoproducts.{v}, arbitrary S : ObjectProperty C, B G ∈ upstream ObjectProperty.localizingClosure (∀ Q ⊇ S IsLocalizing = IsTriangulated + replete + Discrete J:Type v colimits, exactly the node's Loc(S)), Bijective (f ↦ f ≫ α) on X⟦n⟧ ⟶ B for all X ∈ S and n : ℤ, conclusion IsIso α; no extra hypotheses, universes u/v independent. Node differs from live only by lean; dep records byte-identical to live; statement verbatim; source place and blueprint docstrings present; docstring carries all 5 steps. Truth traced (cone in Loc, shift-stable left orthogonal is localizing, K≅0, isZero₃_iff_isIso₁); edge cases S=⊥, n=0 and negative n, empty coproducts, S larger than a set OK. No duplicate: only a private set-indexed generators_detect_iso; no new definition. nt_compile --json clean 2.6 s. Advisory: the Orthogonal import is proof-only and unused under sorry."
  }
 }

@@ -13,7 +13,8 @@
   "def-sfb-right-derived-functor",
   "def-weil-abstract-derived-category",
   "lem-sf-kinjective-derived-map-computation",
-  "lem-weil-pbc-exact-functor-derived-factorization"
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sf-normalized-derived-comparison-identifications"
  ],
  "proof": [
   {
@@ -219,5 +220,29 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-86f176f37 (reviewer sub-agent of L); spot-checked: I read the whole item, all 6 steps, and every cited statement: common-resolution (Q112 PASS; its proof_deps exclude this item, so there is no cycle), kinjective-derived-map-computation, def-sfb-right-derived-functor, the exact-functor leaf and def-weil-abstract-derived-category. I also read Stacks derived.tex lemma-K-injective-defined (070Y). The delivery has no new nodes, no fixes and no tool_uses. No repair note exists for this item, so the re-split rule does not apply. Statement, stmt_deps, blueprint ancestry and unit are unchanged from the NO-created record. The normalization types check: both sides run P_iF_iI -> P_iF_i r_ij H. Step 1: w=v∘r01(u) is a K-injective resolution because r01 is exact, and I checked the endpoints of A, B, T, X and Y. Step 2: the common-resolution lemma with (F,G,r,s,N)=(F0,F1,r01,s01,r12H) gives Aβ01B^-1=X^-1, and its hypothesis is exactly the item's β01 normalization. Step 3: the β12 normalization at (H,u) with s01 applied gives T^-1 s01β12 A^-1 = Y^-1, using s01P1F1 = P0F0r01; the β02 normalization at (H,w) is applied directly. Step 4: P0F0w = XY, so the product is Y^-1X^-1, and the composition order and the cancellations are correct. Steps 5-6: I re-derived the naturality pasting at q:L≅Q2H, followed by cancellation of D2(q). Edge cases checked: identity functors and resolutions, zero categories, an acyclic N, and r12H not K-injective. Preservation of K-injectives is never used. Duplicate candidates rg'd and read (ringed-derived-identity-comparison, ext-right-derived-cocycle-comparison): different statements. No SGA. The route is unchanged. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.NormalizedDerivedComparisonComposition",
+  "declaration": "CategoryTheory.Functor.normalizedDerivedComparison_composition",
+  "declarations": [
+   "CategoryTheory.Functor.normalizedDerivedComparisonCompositionLocalizationIso",
+   "CategoryTheory.Functor.IsKInjectiveNormalizedDerivedComparison",
+   "CategoryTheory.Functor.normalizedDerivedComparison_composition"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/NormalizedDerivedComparisonComposition.lean",
+  "statement": "theorem normalizedDerivedComparison_composition {A0 : Type uA0} {A1 : Type uA1} {A2 : Type uA2} {B0 : Type uB0} {B1 : Type uB1} {B2 : Type uB2} [Category.{vA0} A0] [Category.{vA1} A1] [Category.{vA2} A2] [Category.{vB0} B0] [Category.{vB1} B1] [Category.{vB2} B2] [Abelian A0] [Abelian A1] [Abelian A2] [Abelian B0] [Abelian B1] [Abelian B2] [HasDerivedCategory.{wA0} A0] [HasDerivedCategory.{wA1} A1] [HasDerivedCategory.{wA2} A2] [HasDerivedCategory.{wB0} B0] [HasDerivedCategory.{wB1} B1] [HasDerivedCategory.{wB2} B2] (F0 : A0 ⥤ B0) (F1 : A1 ⥤ B1) (F2 : A2 ⥤ B2) [F0.Additive] [F1.Additive] [F2.Additive] (enough0 : ∀ K : CochainComplex A0 ℤ, ∃ (I : CochainComplex A0 ℤ) (a : K ⟶ I), I.IsKInjective ∧ QuasiIso a) (enough1 : ∀ K : CochainComplex A1 ℤ, ∃ (I : CochainComplex A1 ℤ) (a : K ⟶ I), I.IsKInjective ∧ QuasiIso a) (enough2 : ∀ K : CochainComplex A2 ℤ, ∃ (I : CochainComplex A2 ℤ) (a : K ⟶ I), I.IsKInjective ∧ QuasiIso a) (r01 : A1 ⥤ A0) (r12 : A2 ⥤ A1) (r02 : A2 ⥤ A0) (s01 : B1 ⥤ B0) (s12 : B2 ⥤ B1) (s02 : B2 ⥤ B0) [r01.Additive] [r12.Additive] [r02.Additive] [s01.Additive] [s12.Additive] [s02.Additive] [PreservesFiniteLimits r01] [PreservesFiniteColimits r01] [PreservesFiniteLimits r12] [PreservesFiniteColimits r12] [PreservesFiniteLimits r02] [PreservesFiniteColimits r02] [PreservesFiniteLimits s01] [PreservesFiniteColimits s01] [PreservesFiniteLimits s12] [PreservesFiniteColimits s12] [PreservesFiniteLimits s02] [PreservesFiniteColimits s02] (er : r02 = r12 ⋙ r01) (es : s02 = s12 ⋙ s01) (e01 : r01 ⋙ F0 = F1 ⋙ s01) (e12 : r12 ⋙ F1 = F2 ⋙ s12) (e02 : r02 ⋙ F0 = F2 ⋙ s02) (β01 : r01.mapDerivedCategory ⋙ F0.rightDerivedFunctorOfQuasiIsoResolutions enough0 ≅ F1.rightDerivedFunctorOfQuasiIsoResolutions enough1 ⋙ s01.mapDerivedCategory) (β12 : r12.mapDerivedCategory ⋙ F1.rightDerivedFunctorOfQuasiIsoResolutions enough1 ≅ F2.rightDerivedFunctorOfQuasiIsoResolutions enough2 ⋙ s12.mapDerivedCategory) (β02 : r02.mapDerivedCategory ⋙ F0.rightDerivedFunctorOfQuasiIsoResolutions enough0 ≅ F2.rightDerivedFunctorOfQuasiIsoResolutions enough2 ⋙ s02.mapDerivedCategory) (h01 : IsKInjectiveNormalizedDerivedComparison F0 F1 r01 s01 e01 enough0 enough1 β01) (h12 : IsKInjectiveNormalizedDerivedComparison F1 F2 r12 s12 e12 enough1 enough2 β12) (h02 : IsKInjectiveNormalizedDerivedComparison F0 F2 r02 s02 e02 enough0 enough2 β02) (L : DerivedCategory A2) : β02.hom.app L = (F0.rightDerivedFunctorOfQuasiIsoResolutions enough0).map ((normalizedDerivedComparisonCompositionLocalizationIso r02 r12 r01 er).hom.app L) ≫ β01.hom.app (r12.mapDerivedCategory.obj L) ≫ s01.mapDerivedCategory.map (β12.hom.app L) ≫ (normalizedDerivedComparisonCompositionLocalizationIso s02 s12 s01 es).inv.app ((F2.rightDerivedFunctorOfQuasiIsoResolutions enough2).obj L)",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The two real-data helpers express the supplied K-injective normalization and the canonical exact-functor composition transports. Uses the recorded total right derived pairs and resolution identifications. All six categories have independent object, morphism and localization universes. No restriction functor is assumed to preserve K-injectives."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9006f2f7b",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery of 8711b9b5 (H2/H12 RETURN). Item .lean is byte-identical (sha256 95f64698), so the earlier clause check holds: 6 abelian categories with independent universes, enough K-injectives on the Ai only, Fi additive, rij/sij exact, strict equalities, β natural isos, normalization over every K-injective H, I and quasi-iso a with IsIso Q(Fa), conclusion for every L via canonical mapDerivedCategoryNatIso/CompIso endpoints, no K-injective preservation. Item vs live: only lean and stmt_deps differ; stmt_deps adds the new def-sf-normalized-derived-comparison-identifications (existing:true on the unchanged NormalizedDerivedComparisonCommonResolution: ComplexIso, TargetIso). Both are real-data defs; the node formulas match the bodies (λ directions checked); stmt_deps are leaves only, no cycle; no duplicate notion; the statement is verbatim. Common-resolution theorem only in proof_deps. Not in route-pivot-dropped, no repair note. nt_compile --json 5.4 s clean. Maintainer note: the theorem node's record still lists the two defs (double listing, accepted existing:true pattern)."
  }
 }
