@@ -23208,3 +23208,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:35 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 17:36 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 17:37 L: merged deliver/Q06/lem-sfb-snc-tame-root-etale-extension (reviewer PASS; first push; new nodes: 1)
+- 2026-10-21T17:37:09Z L: superseded stage-1 delivery NP/lem-sfb-qlbar-internal-hom-coefficient-comparison at cea68b1adc164001208e54420c95c4cd9dabf2c9; current completion retained; packet archived at refs/superseded/NP/lem-sfb-qlbar-internal-hom-coefficient-comparison/cea68b1adc164001208e54420c95c4cd9dabf2c9; stale return retired.
