@@ -20,7 +20,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 154, stage 3 190 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 154, stage 3 182 items.
 
 ## Stage 1: nodes to split (22)
 
