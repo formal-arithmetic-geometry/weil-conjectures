@@ -19746,3 +19746,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:21 L: returned deliver/Q23/lem-sfb-dc-lower-star-preserves (reviewer RETURN: I read all of the mathematics, and it is sound; the RETURN is only for granularity. Read: the rules A–G, the repair note)
 - 03:21 L: returned deliver/Q60/det-ctf-finite-proper-localizing (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
 - 03:21 L: returned deliver/O3/det-pe-derived-nakayama-resolution (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
+- 03:21 L: returned deliver/Q20/det-prop-scalar-six-pullback (reviewer RETURN: re-split (the human, 2026-10-21): every delivery made before the final requirement is returned and the re-split starts a)
