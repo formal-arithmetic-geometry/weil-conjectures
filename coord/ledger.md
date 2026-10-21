@@ -23483,3 +23483,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:27 L: returned deliver/T9/Sheaf.AlgebraicGeometry.StrictLocalBaseChangeModelGlobalHomology (reviewer RETURN: (the landing tools, head 988cd807c) the delivery did not land: lean/Sheaf/AlgebraicGeometry/StrictLocalBaseChangeModelGl)
 - 19:27 L: returned deliver/V8/Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackNormalization (reviewer RETURN: (the landing tools, head 364eab3a2) the delivery did not land: every module of the delivery is in the library already, w)
 - 19:27 L: merged deliver/NR/lem-sfb-proper-ultrametric-scalar-extension (reviewer PASS; first push; new nodes: 0)
+- 19:27 L: merged deliver/B4/Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison (stage 3; reviewer PASS; first push; landing 20261021T192754-L-724351 (proof); batch 20261021T192711; modules 1; new nodes 0; change records: coord/changes/canonical-pullback-tensor-source-compatibility.md)

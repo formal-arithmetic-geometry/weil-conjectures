@@ -51,9 +51,9 @@
  ],
  "proof_origin": {
   "by": "agent",
-  "group": "U2",
-  "date": "2026-10-13",
-  "note": "Complete counit-transport proof and proved generic private helpers. Named existing tensor instances reduce definition unfolding; all three edited definitions are definitionally equal to their original versions. K-flat coordinates use nonempty_coordinates; no separate KFlatResolution import is needed."
+  "group": "B4",
+  "date": "2026-10-22",
+  "note": "Reuse the existing complete adopted-source implementation of the same proof route. Restore the old Sheaf path by public import and private import all. Checked definitional equality of all three definitions, and availability of existence, model transport, uniqueness and the private helper API to an import-all consumer. No proof dependency or unit route is removed."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -110,21 +110,22 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-semicon",
  "lean": {
-  "module": "Sheaf.AlgebraicGeometry.CanonicalPullbackTensorComparison",
+  "module": "WeilConjectures.AlgebraicGeometry.CanonicalPullbackTensorComparison",
   "declaration": "AlgebraicGeometry.IsCanonicalPullbackTensorComparison",
-  "file": "lean/Sheaf/AlgebraicGeometry/CanonicalPullbackTensorComparison.lean",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/CanonicalPullbackTensorComparison.lean",
   "statement": "def IsCanonicalPullbackTensorComparison {T X : Scheme.{uTC}} (g : T ⟶ X) (τ : ∀ E K : schemeDerivedCategory X, (derivedPullback g).obj (E ⊗ K) ⟶ (derivedPullback g).obj E ⊗ (derivedPullback g).obj K) : Prop",
   "branch": "sheaf-dag",
-  "by": "R1",
-  "date": "2026-10-12",
-  "existing": false,
+  "by": "B4",
+  "date": "2026-10-22",
+  "existing": true,
   "declarations": [
    "AlgebraicGeometry.pullbackTensorTotal",
    "AlgebraicGeometry.pullbackTensorModelMap",
    "AlgebraicGeometry.IsCanonicalPullbackTensorComparison",
    "AlgebraicGeometry.exists_canonicalPullbackTensorComparison",
    "AlgebraicGeometry.IsCanonicalPullbackTensorComparison.unique"
-  ]
+  ],
+  "note": "The quarantined Sheaf implementation is supplied by the adopted source module. Its three definitions are definitionally equal to the archived definitions (checked by rfl); the old Sheaf path is restored as a compatibility import, including private import-all helper access. Declaration names and all mathematical proof dependencies are preserved."
  },
  "reviewed": {
   "date": "2026-10-11",
@@ -142,13 +143,13 @@
   "result": "fix"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-a9b8c",
-  "group": "U2",
+  "reviewer": "COMPILER",
+  "group": "B4",
   "result": "pass",
-  "landing": "20261013T100146-L-2492692",
-  "kind": "interface",
-  "note": "independent Codex review: Matched the delivered Lean proof with both DAG nodes, unchanged signatures, recorded definition changes, pruning, and report; compilation, all fourteen axiom probes, and three definitional-equality checks passed."
+  "landing": "20261021T192754-L-724351",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
