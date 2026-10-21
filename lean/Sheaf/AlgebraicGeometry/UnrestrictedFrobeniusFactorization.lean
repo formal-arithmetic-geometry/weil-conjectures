@@ -13,8 +13,7 @@ public import Mathlib.AlgebraicGeometry.Over
 public import Mathlib.AlgebraicGeometry.Scheme
 public import Mathlib.CategoryTheory.Limits.Shapes.Pullback.HasPullback
 public import Mathlib.FieldTheory.Finite.Basic
-import Mathlib.Geometry.RingedSpace.LocallyRingedSpace
-import Sheaf.AlgebraicGeometry.SchemeCharacteristic
+import WeilConjectures.AlgebraicGeometry.AbsoluteFrobeniusNatural
 
 /-!
 # Unrestricted finite-field Frobenius factorization
@@ -96,7 +95,39 @@ theorem unrestricted_frobenius_projections (D : WeilConjectures.FiniteFieldDatum
     (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ Spec.map (CommRingCat.ofHom
     (@FiniteField.frobeniusAlgEquivOfAlgebraic D.k₀ _ (Fintype.ofFinite D.k₀) D.k _ _
     _).toRingHom) := by
-  sorry
+  classical
+  let := Fintype.ofFinite D.k₀
+  let b := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  let π := pullback.fst T₀.hom b
+  let ρ := pullback.snd T₀.hom b
+  let σ := FiniteField.frobeniusAlgEquivOfAlgebraic D.k₀ D.k
+  have hFₖ : (Spec (CommRingCat.of D.k)).iterateFrobenius D.prime
+      (D.model_characteristic b) D.a = Spec.map (CommRingCat.ofHom σ.toRingHom) := by
+    apply AlgebraicGeometry.ext_to_Spec
+    change (Scheme.ΓSpecIso (CommRingCat.of D.k)).inv ≫
+        ((Spec (CommRingCat.of D.k)).iterateFrobenius D.prime
+          (D.model_characteristic b) D.a).appTop =
+      (Scheme.ΓSpecIso (CommRingCat.of D.k)).inv ≫
+        (Spec.map (CommRingCat.ofHom σ.toRingHom)).appTop
+    rw [← Scheme.ΓSpecIso_inv_naturality]
+    ext x
+    change ((Scheme.ΓSpecIso (CommRingCat.of D.k)).inv x) ^ D.p ^ D.a =
+      (Scheme.ΓSpecIso (CommRingCat.of D.k)).inv (σ x)
+    rw [FiniteField.coe_frobeniusAlgEquivOfAlgebraic, ← map_pow,
+      ← Nat.card_eq_fintype_card, D.card_base, D.cardinality_eq]
+  refine ⟨D.model_frobenius_over T₀.hom, ?_, ?_, ?_, ?_,
+    (D.galoisMap_projections T₀.hom σ).1,
+    (D.galoisMap_projections T₀.hom σ).2⟩
+  · exact (Scheme.comp_iterateFrobenius D.prime π (D.model_characteristic T₀.hom)
+      (D.model_characteristic (π ≫ T₀.hom)) D.a).symm
+  · change _ ≫ ρ = ρ ≫ Spec.map (CommRingCat.ofHom σ.toRingHom)
+    rw [← hFₖ]
+    exact (Scheme.comp_iterateFrobenius D.prime ρ (D.model_characteristic b)
+      (D.model_characteristic (π ≫ T₀.hom)) D.a).symm
+  · simp [Over.pullback_map_left]
+  · exact ((Over.pullback b).map (Over.homMk
+      (T₀.left.iterateFrobenius D.prime (D.model_characteristic T₀.hom) D.a)
+      (D.model_frobenius_over T₀.hom))).w
 
 /-- Absolute q-power Frobenius is the commuting composite of model Frobenius
 and arithmetic coefficient Frobenius. Geometric coefficient Frobenius cancels it
@@ -150,7 +181,36 @@ theorem unrestricted_frobenius_factorization (D : WeilConjectures.FiniteFieldDat
     D.k _ _ _) ≫ D.galoisMap T₀.hom (@FiniteField.frobeniusAlgEquivOfAlgebraic D.k₀ _
     (Fintype.ofFinite D.k₀) D.k _ _ _).symm = 𝟙 (pullback T₀.hom (Spec.map (CommRingCat.ofHom
     (algebraMap D.k₀ D.k)))) := by
-  sorry
+  classical
+  let := Fintype.ofFinite D.k₀
+  let b := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  let T := pullback T₀.hom b
+  let π := pullback.fst T₀.hom b
+  let ρ := pullback.snd T₀.hom b
+  let F := T.iterateFrobenius D.prime (D.model_characteristic (π ≫ T₀.hom)) D.a
+  let P : T ⟶ T := ((Over.pullback b).map (Over.homMk
+    (T₀.left.iterateFrobenius D.prime (D.model_characteristic T₀.hom) D.a)
+    (D.model_frobenius_over T₀.hom))).left
+  let σ := FiniteField.frobeniusAlgEquivOfAlgebraic D.k₀ D.k
+  let S := D.galoisMap T₀.hom σ
+  let G := D.galoisMap T₀.hom σ.symm
+  obtain ⟨_, hF₁, hF₂, hP₁, hP₂, hS₁, hS₂⟩ :=
+    D.unrestricted_frobenius_projections T₀
+  have hPS : F = P ≫ S := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hS₁, hP₁, hF₁]
+    · rw [Category.assoc, hS₂, ← Category.assoc, hP₂, hF₂]
+  have hSP : F = S ≫ P := by
+    apply pullback.hom_ext
+    · rw [Category.assoc, hP₁, ← Category.assoc, hS₁, hF₁]
+    · rw [Category.assoc, hP₂, hS₂, hF₂]
+  have hSG : S ≫ G = 𝟙 T := (D.galoisMap_inverse T₀.hom σ).1
+  have hGS : G ≫ S = 𝟙 T := (D.galoisMap_inverse T₀.hom σ).2
+  change F = P ≫ S ∧ F = S ≫ P ∧ P = F ≫ G ∧ P = G ≫ F ∧
+    G ≫ S = 𝟙 T ∧ S ≫ G = 𝟙 T
+  refine ⟨hPS, hSP, ?_, ?_, hGS, hSG⟩
+  · rw [hPS, Category.assoc, hSG, Category.comp_id]
+  · rw [hSP, ← Category.assoc, hGS, Category.id_comp]
 
 /-- For every morphism of arbitrary finite-field models, its scalar extension
 commutes with the base-changed model Frobenius and with absolute q-power Frobenius.
@@ -181,6 +241,22 @@ theorem unrestricted_frobenius_naturality (D : WeilConjectures.FiniteFieldDatum.
     (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).map f₀).left ≫ (pullback Y₀.hom (Spec.map
     (CommRingCat.ofHom (algebraMap D.k₀ D.k)))).iterateFrobenius D.prime (D.model_characteristic
     (pullback.fst Y₀.hom (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))) ≫ Y₀.hom)) D.a := by
-  sorry
+  let b := Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k))
+  let F₀ (T₀ : Over (Spec (CommRingCat.of D.k₀))) : T₀ ⟶ T₀ :=
+    Over.homMk (T₀.left.iterateFrobenius D.prime (D.model_characteristic T₀.hom) D.a)
+      (D.model_frobenius_over T₀.hom)
+  have hnat : F₀ X₀ ≫ f₀ = f₀ ≫ F₀ Y₀ := by
+    apply Over.OverMorphism.ext
+    exact (Scheme.comp_iterateFrobenius D.prime f₀.left
+      (D.model_characteristic Y₀.hom) (D.model_characteristic X₀.hom) D.a).symm
+  constructor
+  · have hmap : (Over.pullback b).map (F₀ X₀) ≫ (Over.pullback b).map f₀ =
+        (Over.pullback b).map f₀ ≫ (Over.pullback b).map (F₀ Y₀) := by
+      simpa only [Functor.map_comp] using congrArg ((Over.pullback b).map) hnat
+    exact congrArg (fun f : (Over.pullback b).obj X₀ ⟶
+      (Over.pullback b).obj Y₀ ↦ f.left) hmap
+  · exact (Scheme.comp_iterateFrobenius D.prime ((Over.pullback b).map f₀).left
+      (D.model_characteristic (pullback.fst Y₀.hom b ≫ Y₀.hom))
+      (D.model_characteristic (pullback.fst X₀.hom b ≫ X₀.hom)) D.a).symm
 
 end WeilConjectures.FiniteFieldDatum

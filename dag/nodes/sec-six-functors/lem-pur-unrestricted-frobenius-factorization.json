@@ -24,121 +24,71 @@
  ],
  "proof": [
   {
-   "text": "Every scheme $Z$ over $k_0$ has characteristic $p$: the structure morphism gives a unital ring map $k_0\\to\\mathcal O_Z(Z)$, followed by restriction to $\\mathcal O_Z(U)$ for any open $U$, and these maps send $p\\cdot1=0$ to $p\\cdot1=0$. This applies to $T_0,T$, to $\\operatorname{Spec}k_0,\\operatorname{Spec}k$, and later to $X_0,Y_0,X,Y$. Thus all absolute Frobenii used below are defined, including when a scheme is empty.",
+   "text": "Use model_characteristic and model_frobenius_over from def-weil-relative-frobenius-geometric-fiber for arbitrary schemes over the finite base. These already prove characteristic inheritance and descent of q-power model Frobenius, including the empty scheme.",
    "uses": [
-    "def-weil-scheme-over-base",
-    "def-weil-affine-spectrum",
-    "def-weil-locally-ringed-space-morphism",
-    "def-weil-scheme-characteristic-p"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 03SM, definition-absolute-frobenius, characteristic-p hypothesis; inherited along the structure morphism"
-   }
-  },
-  {
-   "text": "For any morphism $h:Z\\to W$ between these characteristic-$p$ schemes, the absolute $q$-power Frobenii satisfy $hF_Z^{(q)}=F_W^{(q)}h$. Indeed both composites have underlying continuous map $h$, and for every open $V\\subseteq W$ and $s\\in\\mathcal O_W(V)$ their maps on sections are $(h^\\sharp_V(s))^q$ and $h^\\sharp_V(s^q)$, which agree since $h^\\sharp_V$ is a ring homomorphism. Equality of both components gives equality as scheme morphisms. This is the full sectionwise proof of the iterated form of Stacks Tag 0CC7, not an appeal to an uncited naturality theorem.",
-   "uses": [
-    "def-weil-absolute-frobenius-scheme",
-    "def-weil-locally-ringed-space-morphism"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tag 0CC7, lemma-frobenius-endomorphism-identity, proof; same ring-homomorphism calculation with exponent q"
-   }
-  },
-  {
-   "text": "Write $t_0:T_0\\to\\operatorname{Spec}k_0$ for the structure morphism. By [lem-weil-finite-field-pow-card], $c^q=c$ for every $c\\in k_0$. The affine description of absolute Frobenius and functoriality of $\\operatorname{Spec}$ therefore give $F_{\\operatorname{Spec}k_0}^{(q)}=\\operatorname{id}$. Step 2 applied to $t_0$ gives $t_0F_0=t_0$, so $F_0$ is over $k_0$. On $\\operatorname{Spec}k$, the same affine description gives $F_{\\operatorname{Spec}k}^{(q)}=\\operatorname{Spec}(\\sigma)$, since $\\sigma(z)=z^q$. Applying Step 2 to $\\pi$ and $\\rho$ gives $\\pi F=F_0\\pi$ and $\\rho F=\\operatorname{Spec}(\\sigma)\\rho$.",
-   "uses": [
-    "lem-weil-finite-field-pow-card",
-    "def-weil-absolute-frobenius-scheme",
-    "def-weil-affine-spectrum",
-    "def-weil-frobenius-substitution",
+    "def-weil-relative-frobenius-geometric-fiber",
     "def-weil-scheme-over-base"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/varieties.tex",
-    "place": "Tags 03SM and 0CC7, definition-absolute-frobenius and lemma-frobenius-endomorphism-identity; finite-field identity from the cited Mathlib leaf"
-   }
+   "elementary": false
   },
   {
-   "text": "Since $F_0$ is over $k_0$, the induced map of fibre products $\\Phi=F_0\\times\\operatorname{id}_k$ exists and satisfies $\\pi\\Phi=F_0\\pi$, $\\rho\\Phi=\\rho$. The automorphisms $\\sigma,\\gamma$ fix $k_0$ by [def-weil-frobenius-substitution], so both $\\operatorname{Spec}(\\epsilon)$ are morphisms over $\\operatorname{Spec}k_0$. The induced maps $g_\\epsilon=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\epsilon)$ consequently satisfy $\\pi g_\\epsilon=\\pi$ and $\\rho g_\\epsilon=\\operatorname{Spec}(\\epsilon)\\rho$ for $\\epsilon=\\sigma,\\gamma$. These are exactly the defining projection equations of the induced maps, with no finiteness or separation assumption.",
+   "text": "Use the proved source-library lemma Scheme.comp_iterateFrobenius (AbsoluteFrobeniusNatural) for naturality of the recorded absolute Frobenius. This lemma proves equality on underlying spaces and on every section by preservation of powers under ring homomorphisms; it has only global p-vanishing hypotheses and so covers empty schemes.",
    "uses": [
-    "def-pc-base-change",
-    "def-pc-fibre-product",
-    "def-weil-frobenius-substitution",
-    "def-weil-affine-spectrum"
+    "def-weil-absolute-frobenius-scheme"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01JP, definition-fibre-product; induced maps characterized by the universal property"
-   }
+   "elementary": true
   },
   {
-   "text": "Use the projection equations of Steps 3 and 4. Both $g_\\sigma\\Phi$ and $\\Phi g_\\sigma$ have first projection $F_0\\pi$ and second projection $\\operatorname{Spec}(\\sigma)\\rho$: for example, $\\pi\\Phi g_\\sigma=F_0\\pi g_\\sigma=F_0\\pi$ and $\\rho g_\\sigma\\Phi=\\operatorname{Spec}(\\sigma)\\rho\\Phi=\\operatorname{Spec}(\\sigma)\\rho$. The other two equations follow by the same substitutions, namely $\\pi g_\\sigma\\Phi=\\pi\\Phi=F_0\\pi$ and $\\rho\\Phi g_\\sigma=\\rho g_\\sigma=\\operatorname{Spec}(\\sigma)\\rho$. These are the two projections of $F$. Uniqueness in the fibre-product universal property yields $F=g_\\sigma\\Phi=\\Phi g_\\sigma$.",
+   "text": "Identify q-power Frobenius on Spec k with Spec of arithmetic Frobenius using ext_to_Spec and GammaSpecIso_inv_naturality: both global ring maps send x to x^(p^a), since Nat.card k0=q=p^a and coe_frobeniusAlgEquivOfAlgebraic is the cardinality-power map. Apply the preceding naturality lemma to the two pullback projections. The remaining four projection identities are Over.pullback_map_left, the over-morphism equation, and galoisMap_projections.",
    "uses": [
-    "def-pc-fibre-product"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-    "place": "absolute-Frobenius factorization display; verification using Tag 01JP projection uniqueness"
-   }
-  },
-  {
-   "text": "The maps $g_\\sigma g_\\gamma$ and $g_\\gamma g_\\sigma$ both have first projection $\\pi$. Their second projections are respectively $\\operatorname{Spec}(\\sigma)\\operatorname{Spec}(\\gamma)\\rho=\\operatorname{Spec}(\\gamma\\sigma)\\rho=\\rho$ and $\\operatorname{Spec}(\\gamma)\\operatorname{Spec}(\\sigma)\\rho=\\operatorname{Spec}(\\sigma\\gamma)\\rho=\\rho$, because $\\gamma=\\sigma^{-1}$ and $\\operatorname{Spec}$ is contravariantly functorial. Fibre-product uniqueness gives $g_\\sigma g_\\gamma=g_\\gamma g_\\sigma=\\operatorname{id}_T$.",
-   "uses": [
-    "def-pc-fibre-product",
+    "def-weil-absolute-frobenius-scheme",
     "def-weil-affine-spectrum",
-    "def-weil-frobenius-substitution"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/schemes.tex",
-    "place": "Tag 01JP, definition-fibre-product; uniqueness applied to the inverse composites"
-   }
-  },
-  {
-   "text": "Associativity and Steps 5 and 6 give $g_\\gamma F=g_\\gamma(g_\\sigma\\Phi)=(g_\\gamma g_\\sigma)\\Phi=\\Phi$ and $Fg_\\gamma=(\\Phi g_\\sigma)g_\\gamma=\\Phi(g_\\sigma g_\\gamma)=\\Phi$. This proves both geometric cancellation identities.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-    "place": "geometric-Galois inverse convention and absolute-Frobenius factorization paragraph"
-   }
-  },
-  {
-   "text": "Let $f_0:X_0\\to Y_0$ be any $k_0$-morphism and let $f:X\\to Y$ be its base change, with projections $\\pi_X,\\rho_X,\\pi_Y,\\rho_Y$. By the defining projection equations of base change, $\\pi_Yf=f_0\\pi_X$ and $\\rho_Yf=\\rho_X$. Step 2 gives $f_0F_{X_0}^{(q)}=F_{Y_0}^{(q)}f_0$. Thus $\\pi_Yf\\Phi_X=f_0F_{X_0}^{(q)}\\pi_X=F_{Y_0}^{(q)}f_0\\pi_X=\\pi_Y\\Phi_Yf$, while $\\rho_Yf\\Phi_X=\\rho_X\\Phi_X=\\rho_X=\\rho_Y\\Phi_Yf$. Fibre-product uniqueness gives $f\\Phi_X=\\Phi_Yf$. Finally Step 2 applied directly to $f$ gives $fF_X^{(q)}=F_Y^{(q)}f$. All the comparisons concern scheme morphisms; $F$ and $g_\\epsilon$ need not be $k$-morphisms.",
-   "uses": [
+    "def-weil-frobenius-substitution",
     "def-pc-base-change",
+    "def-pc-fibre-product",
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For each order of the composite of base-changed model Frobenius and arithmetic coefficient Frobenius, compare its two projections with absolute Frobenius using the six projection equations. pullback.hom_ext gives both arithmetic factorizations.",
+   "uses": [
     "def-pc-fibre-product"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-    "place": "second commuting square; naturality by Tag 0CC7 and the induced fibre-product map"
-   }
+   "elementary": true
+  },
+  {
+   "text": "The already proved galoisMap_inverse gives both inverse composites of arithmetic and geometric coefficient Frobenius. Substitute each arithmetic factorization and use associativity with the corresponding inverse identity to obtain the two geometric cancellation equalities.",
+   "uses": [
+    "def-weil-frobenius-detailed"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Apply Scheme.comp_iterateFrobenius to the underlying model morphism. Over-morphism extensionality upgrades the equality to the slice category, and functoriality of Over.pullback transports it to the scalar extensions; taking the left component proves model-Frobenius naturality. Apply Scheme.comp_iterateFrobenius directly to the scalar-extended morphism for absolute-Frobenius naturality.",
+   "uses": [
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-relative-frobenius-geometric-fiber",
+    "def-pc-base-change",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
+  "def-weil-relative-frobenius-geometric-fiber",
   "def-weil-scheme-over-base",
-  "def-weil-affine-spectrum",
-  "def-weil-locally-ringed-space-morphism",
-  "def-weil-scheme-characteristic-p",
   "def-weil-absolute-frobenius-scheme",
-  "lem-weil-finite-field-pow-card",
+  "def-weil-affine-spectrum",
   "def-weil-frobenius-substitution",
   "def-pc-base-change",
-  "def-pc-fibre-product"
+  "def-pc-fibre-product",
+  "def-weil-frobenius-detailed"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
-  "place": "absolute-Frobenius factorization paragraph and second commuting square, expanded by Stacks Tags 03SM, 0CC7 and 01JP"
+  "place": "Absolute-Frobenius factorization paragraph and second commuting square; B7 Lean proof using the existing naturality, descent, coefficient projection and inverse APIs, with pullback uniqueness."
  },
  "mathlib_searches": [
   {
@@ -276,5 +226,15 @@
   "group": "Q89",
   "result": "pass",
   "note": "All 15 clauses match the node: 7 conjuncts in unrestricted_frobenius_projections (F0 over k0 plus six projections), 6 in unrestricted_frobenius_factorization (F=Φ≫gσ, F=gσ≫Φ, Φ=F≫gγ, Φ=gγ≫F, both inverse composites), 2 in naturality over every Over-morphism f0. Composition order checked right-to-left vs ≫. Objects: iterateFrobenius p^a, σ=frobeniusAlgEquivOfAlgebraic (z^card k0 = z^q), γ=.symm, galoisMap = id×Spec ε, Φ = Over.pullback.map of F0. No finite-type/separatedness instances; characteristic from the structure map. Node minus lean identical to side-live; lean.statement verbatim; 3 sorry, no defs, source and blueprint docstrings. Edge cases: empty T0, a=1, non-reduced/infinite type; universe u forced by Spec. No existing declaration states this (FrobeniusFactorization is finite-type only). Advisory: model_characteristic/model_frobenius_over proof terms come from a non-stmt_dep node via FrobeniusDetailed's public import; two proof-only imports. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B7",
+  "result": "pass",
+  "landing": "20261021T134307-L-785754",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
