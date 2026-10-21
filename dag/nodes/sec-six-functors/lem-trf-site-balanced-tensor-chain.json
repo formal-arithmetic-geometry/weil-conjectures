@@ -1,0 +1,72 @@
+{
+ "id": "lem-trf-site-balanced-tensor-chain",
+ "kind": "statement",
+ "title": "Balanced sheaf tensor chain comparison with local generator normalization",
+ "statement": "Let $\\mathcal C$ be a site small in the module universe [def-weil-size-convention], $R,S$ sheaves of commutative rings, and $\\varphi:R\\to S$ a ring-sheaf morphism. Use module sheaves [def-weil-sheaf-of-modules-category], sheafified tensor and scalar extension [def-pur-sheaf-tensor-product], and scalar restriction $U=\\operatorname{Res}_\\varphi$ [def-pc-sheaf-restrict-scalars]. For every possibly unbounded cochain complex $P$ of $R$-module sheaves [def-weil-abstract-derived-category] and every $S$-module sheaf $N$, write $N[0]$ for the complex concentrated in degree zero and $P_S^i=P^i\\otimes_R S$, with differential $d_P^i\\otimes1$. There is a chain isomorphism of $R$-module sheaves\n$$a_{P,N}:\\operatorname{Tot}(P\\otimes_R UN[0])\\xrightarrow{\\sim}U\\operatorname{Tot}(P_S\\otimes_S N[0])$$\nfor the signed direct-sum total tensor [def-pc-tensor-complex-sheaves]. It is characterized, on the images of local presheaf-tensor generators in each degree, by\n$$a_{P,N}(x\\otimes n)=(x\\otimes1)\\otimes n,\\qquad a_{P,N}^{-1}((x\\otimes s)\\otimes n)=x\\otimes sn.$$\nBoth maps are morphisms of sheaves, including the scalar action through $N$ on $P^i\\otimes_R UN$; the formulas use the sheafification units and do not identify sections of a sheaf tensor with tensor products of sections. The family is natural simultaneously in all chain maps $P\\to P'$ and $S$-linear maps $N\\to N'$. For a chain homotopy $h$ between maps of $P$, these naturality squares also commute with the induced degree-minus-one tensor homotopies, so the same family is natural on the homotopy category in $P$. No flatness or K-flatness assumption is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03EK (section-tensor-product): sheafified balanced tensor formulas; their degreewise chain and homotopy extension"
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a morphism R to S of sheaves of commutative rings on a site, the balanced tensor chain isomorphism P tensor_R Res N is Res ((P tensor_R S) tensor_S N), natural in complexes P and sheaves N",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; PresheafOfModules.Monoidal.tensorObjMap; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; CategoryTheory.Sheaf.monoidalCategory; CategoryTheory.Sheaf.braidedCategory; PresheafOfModules.Monoidal.tensorObj; CategoryTheory.Sheaf.tensorProd_isSheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module/presheaf tensor, free pullback or scalar-action results do not give the normalized sheaf chain comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tensor.*[Rr]estrict|[Rr]estrict.*tensor",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Descent.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module/presheaf tensor, free pullback or scalar-action results do not give the normalized sheaf chain comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"restrictScalars\"",
+   "results": "TensorProduct.AlgebraTensorModule.restrictScalars_curry; TensorProduct.AlgebraTensorModule.restrictScalars_lTensor; TensorProduct.AlgebraTensorModule.restrictScalars_rTensor; Algebra.TensorProduct.restrictScalars_lift; Algebra.TensorProduct.map_restrictScalars_comp_includeRight",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module/presheaf tensor, free pullback or scalar-action results do not give the normalized sheaf chain comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Associativity of extension of scalars and tensor product for sheaves of modules, natural chain isomorphism by balanced local generators",
+   "results": "Algebra.TensorProduct.assoc; ModuleCat.extendScalars_assoc; TensorProduct.AlgebraTensorModule.distribBaseChange; ModuleCat.extendScalars_assoc'; TensorProduct.AlgebraTensorModule.assoc; PresheafOfModules.Sheafify.mul_smul; ModuleCat.extendScalars_assoc_assoc; IsLocalization.moduleLid",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module/presheaf tensor, free pullback or scalar-action results do not give the normalized sheaf chain comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-site-derived-tensor-restriction",
+  "date": "2026-10-21",
+  "group": "Q19"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-lem-sf-kunneth-star",
+ "blueprint": {
+  "from": {
+   "node": "lem-trf-ordinary-kunneth",
+   "place": "Proof Step 2, sentence P tensor_A Q = (P tensor_A kappa) tensor_kappa Q: local balanced sheaf maps and their chain/homotopy naturality (returned item steps 2-3)",
+   "via": [
+    "lem-trf-site-derived-tensor-restriction"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

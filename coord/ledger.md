@@ -20684,3 +20684,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:30 L: merged deliver/Q20/lem-per-dual-lisse-tensor (reviewer FIX; first push; new nodes: 0); claim not held by Q20: not your claim
 - 07:30 L: merged deliver/Q06/lem-wf-internal-hom-weil (reviewer PASS; first push; new nodes: 0)
 - 07:31 L: merged deliver/Q18/lem-sf-etale-stalk-tor-test (reviewer PASS; after a return; new nodes: 2)
+- 07:31 L: merged deliver/Q19/lem-trf-site-derived-tensor-restriction (reviewer PASS; after a return; new nodes: 2)

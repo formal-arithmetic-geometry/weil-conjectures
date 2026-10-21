@@ -33,31 +33,7 @@
    }
   },
   {
-   "text": "For an $\\mathcal R$-module sheaf $M$ and an $\\mathcal S$-module sheaf $N$, construct inverse maps $a_{M,N}:M\\otimes_{\\mathcal R}\\operatorname{Res}_\\varphi N\\to\\operatorname{Res}_\\varphi((M\\otimes_{\\mathcal R}\\mathcal S)\\otimes_{\\mathcal S}N)$ and $b_{M,N}$ by $x\\otimes n\\mapsto(x\\otimes1)\\otimes n$ and $(x\\otimes s)\\otimes n\\mapsto x\\otimes sn$. These formulas are first applied to local tensor generators, not to an identification of sheaf-tensor sections with tensor products of sections. Additivity is immediate. The first formula is $\\mathcal R$-balanced since $(rx\\otimes1)\\otimes n=(x\\otimes\\varphi(r))\\otimes n=(x\\otimes1)\\otimes\\varphi(r)n$. The second respects the inner relation $(rx\\otimes s)=(x\\otimes\\varphi(r)s)$ and the outer relation $(x\\otimes st)\\otimes n=(x\\otimes s)\\otimes tn$. For $b$, the target $M\\otimes_{\\mathcal R}\\operatorname{Res}_\\varphi N$ is a sheaf of $\\mathcal S$-modules through $N$: the presheaf tensor $U\\mapsto M(U)\\otimes_{\\mathcal R(U)}N(U)$ is a presheaf of $\\mathcal S$-modules, and by [lem-pc-sites-module-sheafification-interface] its $\\mathcal S$-module sheafification and its $\\mathcal R$-module sheafification have the same underlying abelian sheaf; so the second formula is $\\mathcal S$-bilinear into an $\\mathcal S$-module sheaf, as bilinear extension over $\\mathcal S$ requires. The module sheafification universal property [lem-pc-sites-module-sheafification-interface] and bilinear extension [lem-pc-sites-module-sheafification-bilinear-extension], together with the tensor definition [def-pur-sheaf-tensor-product], therefore give sheaf maps. Their composites are identities on local tensor generators, hence on the sheaves by uniqueness in those universal properties. Both formulas commute with restriction and with module maps; this proves simultaneous naturality.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "lem-pc-sites-module-sheafification-interface",
-    "lem-pc-sites-module-sheafification-bilinear-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), bilinear universal property; Tag 03CY (lemma-sheafification-presheaf-modules)"
-   }
-  },
-  {
-   "text": "Apply step 2 with $M=P^i$ in every degree and $N$ in degree zero. Naturality with respect to $d_P^i$ gives a chain isomorphism $a_{P,N}$ with exactly the forward and inverse formulas in the statement. The differential is $d_P\\otimes1$ on both sides, since $N$ has only degree zero [def-pc-tensor-complex-sheaves]. For a chain map $u:P\\to P'$ and an $\\mathcal S$-linear map $v:N\\to N'$, the two composites in the naturality square both send $x\\otimes n$ to $(u(x)\\otimes1)\\otimes v(n)$. A chain homotopy in $u$ is carried to the corresponding tensor homotopy by the same degreewise formula, so this naturality also holds in the homotopy category.",
-   "uses": [
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YU (definition-derived-tor), total tensor construction; balanced formula from step 2"
-   }
-  },
-  {
-   "text": "Choose a representing complex $C$ of $H$ and a quasi-isomorphism $p:P\\to C$ with $P$ K-flat and with flat terms using [lem-pc-kflat-resolution]. By [lem-pur-kflat-change-of-rings], $P_{\\mathcal S}=P\\otimes_{\\mathcal R}\\mathcal S$ is K-flat with flat $\\mathcal S$-terms, even if $\\mathcal S$ is not flat over $\\mathcal R$. By [lem-pur-derived-change-of-rings], it represents $H\\otimes_{\\mathcal R}^{\\mathbf L}\\mathcal S$ in $D(\\mathcal S)$, with canonical comparisons natural in maps of resolutions.",
+   "text": "Choose a K-flat flat-term resolution $P\\to C$ of a complex representing $H$ by [lem-pc-kflat-resolution]. By [lem-pur-kflat-change-of-rings], $P_S=P\\otimes_R S$ is K-flat with flat $S$-terms, without flatness of $S/R$. By [lem-pur-derived-change-of-rings], $Q_SP_S$ canonically represents $H\\otimes_R^{\\mathbf L}S$, compatibly with maps of resolutions.",
    "uses": [
     "lem-pc-kflat-resolution",
     "lem-pur-kflat-change-of-rings",
@@ -70,24 +46,10 @@
    }
   },
   {
-   "text": "For a K-flat complex $T$ on either coefficient site, tensoring with $T$ preserves quasi-isomorphisms: if $s$ is a quasi-isomorphism, its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic]; K-flatness [def-pc-kflat-complex] makes its tensor with $T$ acyclic; the cone identification [lem-pc-tensor-mapping-cone-iso] then shows that $1_T\\otimes s$ is a quasi-isomorphism. Interchanging the factors uses the symmetry from [lem-pc-sheaf-modules-tensor-closed], with graded sign $(-1)^{ij}$ in total degree $(i,j)$; this sign identifies the two differentials $d_T\\otimes1+(-1)^i1\\otimes d$ and $d\\otimes1+(-1)^j1\\otimes d_T$. This gives either tensor order without a flatness assumption on the other complex.",
+   "text": "Apply [lem-trf-site-balanced-tensor-chain] to $P,N$. Its sheaf chain isomorphism $a_{P,N}$ has exactly the two generator formulas required here and is natural in both variables, including homotopies in $P$. By [lem-trf-site-one-sided-tensor-normalization], applied over $R$ to $(P,UN[0])$ and over $S$ to $(P_S,N[0])$, these two total complexes compute the two desired derived tensors with their specified canonical comparisons. Apply the exact restriction from step 1 to the second comparison. Conjugating $Q_R(a_{P,N})$ by these comparisons and the scalar-extension comparison of step 2 gives the required isomorphism on K-flat flat-term representatives.",
    "uses": [
-    "lem-pur-quasi-iso-cone-acyclic",
-    "def-pc-kflat-complex",
-    "lem-pc-tensor-mapping-cone-iso",
-    "lem-pc-sheaf-modules-tensor-closed"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism), its cone proof"
-   }
-  },
-  {
-   "text": "For K-flat flat-term $T$ over a coefficient ring sheaf $B$ and an arbitrary complex $M$, $Q_B\\operatorname{Tot}(T\\otimes_B M)$ canonically computes $Q_BT\\otimes_B^{\\mathbf L}Q_BM$. To see this precisely, tensor with $T$ descends in $M$ by step 5 and [lem-weil-pbc-localization-universal-property]. On the K-flat flat-term subcategory its comparison with derived tensor is the canonical natural comparison in [lem-weil-pbc-site-derived-tensor-descent]. That subcategory localized at its quasi-isomorphisms is $D(B)$ by the same node; hence the comparison extends uniquely to all $M$ by the localization universal property. For a map $T\\to T'$, the naturality square agrees on K-flat flat-term $M$, so uniqueness gives the square for every $M$. In particular, using $T=P$, $M=\\operatorname{Res}_\\varphi N$, and then $T=P_{\\mathcal S}$, $M=N$, proves that the two complexes in step 3 compute respectively the left and right derived objects in the statement, after the exact restriction of step 1. The identification of $Q_{\\mathcal S}P_{\\mathcal S}$ with the inner scalar extension is step 4.",
-   "uses": [
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-site-derived-tensor-descent"
+    "lem-trf-site-balanced-tensor-chain",
+    "lem-trf-site-one-sided-tensor-normalization"
    ],
    "elementary": false,
    "source": {
@@ -96,7 +58,7 @@
    }
   },
   {
-   "text": "Let $\\mathcal P_{\\mathcal R}$ be the homotopy subcategory of K-flat flat-term complexes. Regard both sides of the desired identity as functors of $H$ with values in the category of functors from $\\operatorname{Mod}(\\mathcal S)$ to $D(\\mathcal R)$. Steps 3 and 6 give a natural isomorphism between their restrictions along $Q_{\\mathcal R}|_{\\mathcal P_{\\mathcal R}}$. By [lem-weil-pbc-site-derived-tensor-descent], this restriction is a localization at the quasi-isomorphisms. Apply clause (2) of [lem-weil-pbc-localization-universal-property], with that functor category as target: the isomorphism and its inverse extend uniquely, their composites extending the identities. The result is therefore natural simultaneously in $H$ and the degree-zero sheaf $N$. For a specified resolution $p:P\\to C$, naturality along $Qp$ expresses its component as the chain map $a_{P,N}$ under the canonical computation isomorphisms of steps 4 and 6. Uniqueness shows that any other resolution gives the same component; no direct chain map between the two resolutions is needed. Only the existence of unbounded K-flat resolutions and their preservation under change of rings were used, so no boundedness, finite Tor amplitude, or flatness of the coefficient map is required.",
+   "text": "Let $\\mathcal P_R$ be the homotopy subcategory of K-flat flat-term complexes. By [lem-weil-pbc-site-derived-tensor-descent], $Q_R|_{\\mathcal P_R}$ is a localization at its quasi-isomorphisms. The isomorphisms in step 3 and their inverses are natural transformations with values in $\\operatorname{Fun}(\\operatorname{Mod}(S),D(R))$: naturality in $P$ uses the two new lemmas and the scalar-extension comparison, and naturality in $N$ uses their other variables. Clause (2) of [lem-weil-pbc-localization-universal-property] extends both transformations uniquely along this localization. Their composites extend the identities, so they remain inverse, simultaneously natural in $H,N$. For any specified resolution $p:P\\to C$, naturality along $Q_Rp$ identifies the component with $a_{P,N}$ under the comparisons in steps 2-3. Uniqueness gives the same component for every other resolution, without requiring a chain map between the resolutions. All complexes and coefficient maps were arbitrary; no boundedness, Tor-amplitude, or coefficient-flatness hypothesis entered.",
    "uses": [
     "lem-weil-pbc-site-derived-tensor-descent",
     "lem-weil-pbc-localization-universal-property"
@@ -112,19 +74,13 @@
   "def-pc-sheaf-restrict-scalars",
   "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "def-weil-abstract-derived-category",
-  "def-pur-sheaf-tensor-product",
-  "lem-pc-sites-module-sheafification-interface",
-  "lem-pc-sites-module-sheafification-bilinear-extension",
-  "def-pc-tensor-complex-sheaves",
   "lem-pc-kflat-resolution",
   "lem-pur-kflat-change-of-rings",
   "lem-pur-derived-change-of-rings",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "def-pc-kflat-complex",
-  "lem-pc-tensor-mapping-cone-iso",
-  "lem-pc-sheaf-modules-tensor-closed",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-trf-site-balanced-tensor-chain",
+  "lem-trf-site-one-sided-tensor-normalization",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
@@ -238,22 +194,14 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-trf-site-derived-tensor-restriction",
   "worker": "stage1",
-  "summary": "Statement retained. Proved by explicit balanced inverse sheaf maps, K-flat scalar extension, one-sided K-flat computation and localization of the natural chain isomorphism. All needed facts already have DAG nodes; no new nodes.",
-  "blueprint": "lem-trf-ordinary-kunneth proof Step 2, sentence P tensor_A Q = (P tensor_A kappa) tensor_kappa Q; supplies its ringed-site unbounded balanced tensor justification.",
+  "summary": "Human-requested re-split: retained the statement verbatim; extracted the normalized balanced chain comparison (old steps 2-3) and the normalized one-sided tensor computation (old steps 5-6) as two independent statement-only unsplit nodes. Retained exact restriction, scalar-extension computations and localization assembly; preserved the complete returned arguments and their allocation in report.md.",
+  "blueprint": "lem-trf-ordinary-kunneth proof Step 2: P tensor_A Q = (P tensor_A kappa) tensor_kappa Q; the two new nodes carry balanced chains and their one-sided derived normalization.",
   "tool_uses": [
    {
     "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
-    "why": "Generic module-sheaf/K-flat/localization interface used exactly as stated in the proof; the Kunneth unit does not prove this general foundational tool."
-   },
-   {
-    "node": "lem-pc-sites-module-sheafification-interface",
-    "why": "Generic module-sheaf/K-flat/localization interface used exactly as stated in the proof; the Kunneth unit does not prove this general foundational tool."
-   },
-   {
-    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
     "why": "Generic module-sheaf/K-flat/localization interface used exactly as stated in the proof; the Kunneth unit does not prove this general foundational tool."
    },
    {
@@ -266,18 +214,6 @@
    },
    {
     "node": "lem-pur-derived-change-of-rings",
-    "why": "Generic module-sheaf/K-flat/localization interface used exactly as stated in the proof; the Kunneth unit does not prove this general foundational tool."
-   },
-   {
-    "node": "lem-pur-quasi-iso-cone-acyclic",
-    "why": "Generic module-sheaf/K-flat/localization interface used exactly as stated in the proof; the Kunneth unit does not prove this general foundational tool."
-   },
-   {
-    "node": "lem-pc-tensor-mapping-cone-iso",
-    "why": "Generic module-sheaf/K-flat/localization interface used exactly as stated in the proof; the Kunneth unit does not prove this general foundational tool."
-   },
-   {
-    "node": "lem-pc-sheaf-modules-tensor-closed",
     "why": "Generic module-sheaf/K-flat/localization interface used exactly as stated in the proof; the Kunneth unit does not prove this general foundational tool."
    },
    {
@@ -304,12 +240,12 @@
   "lem-weil-pbc-site-derived-tensor-descent"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q03-502658cfa",
-  "group": "Q03",
+  "reviewer": "NT-cc-Q19-b7e2d8255",
+  "group": "Q19",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-502658cfa (reviewer sub-agent of L); spot-checked: I read the item, all 19 cited statements, the parent lem-trf-ordinary-kunneth (main-20261015 Step 2 sentence 'P⊗_A Q=(P⊗_Aκ)⊗_κ Q', and DAG step 8, which cites this item) and Stacks sites-cohomology 06YP, 06YS, 06YT, 06YU and 0G7E. The statement is true and not weakened: unbounded H, arbitrary φ, the coefficient categories D(R)/D(S) and the balanced representative are all kept. I tested it on Z→F_p, Z/4→F_2 (infinitely many Tor groups), φ=id and S=0. Steps 1, 3, 4, 5, 6 and 7 follow from what the cited nodes state. Step 5 handles the order of the K-flat factor with the Koszul sign, and I checked that sign. Steps 6 and 7 use only the stated clauses (1)-(3) of the localization lemma and the P_R equivalence from the site-derived-tensor-descent lemma. One fault, fixed: step 2 builds b by S-bilinear extension, but the cited extension lemma needs the target M⊗_R Res N to be an S-module sheaf, and the step did not say why it is one. I added one sentence: the presheaf tensor is a presheaf of S-modules through N, and by lem-pc-sites-module-sheafification-interface its S- and R-sheafifications have the same underlying abelian sheaf. The corrected node is in fixes/dag/nodes/sec-six-functors/; the step is now 1821 characters. There are no new nodes. In the duplicate search, lem-pur-sheaf-ring-derived-coefficient-adjunction (adjunction only), lem-kun-change-of-rings-tensor (ordinary modules, flat M) and lem-pc-balanced-derived-tensor-model (one-point site) all state something different. I accept the 11 declared generic tool_uses (module-sheaf, K-flat and localization interfaces used as black boxes). No SGA is cited.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-b7e2d8255 (reviewer sub-agent of L); spot-checked: This is a valid re-split answering the 2026-10-21 human note. The statement and stmt_deps are byte-identical to base. The proof is now 4 assembly steps (2670 characters, at most 3000). The item is not in the dropped list and no other group has superseded it. Base steps 1 and 4 are kept verbatim as steps 1 and 2, and base step 7 is kept in full as step 4. Base steps 2-3 became lem-trf-site-balanced-tensor-chain (1623 characters): both generator formulas, sheaf maps including the S-action through N, the d_P⊗1 chain structure, and naturality including homotopies. Base steps 5-6 became lem-trf-site-one-sided-tensor-normalization (1954 characters): preservation of quasi-isomorphisms in both orders, and a unique c_{T,M} normalized by c_{T,V}=δ_{T,V}^{-1} and natural in both T and M. Nothing was shortened or dropped, and neither node restates the item. Both new statements are true. I checked the balancing relations, the inverse identities and the Koszul sign, and the localization existence/uniqueness through lem-weil-pbc-site-derived-tensor-descent and the localization universal property. Small cases P=R[0], T=B[0], S=0, φ=id, Z→F_p and Z/4→F_2 all hold. I verified the assembly orientation c_R, then Q(a), then Res c_S^{-1}, and the hypotheses: P_S is K-flat with flat terms by lem-pur-kflat-change-of-rings, and M is arbitrary. Sources are Stacks 03EK (sites-modules l.3551) and 06YP/06YT/06YU (sites-cohomology l.3011-3310), plus blueprint main-20261015 lem-trf-ordinary-kunneth Step 2 (l.64-68). No SGA is cited. I accept the six generic tool_uses. Advisory: lem-pur-change-of-rings-tensor-cancellation proves the same degree-0 iso with the same formulas, but its statement does not pin them. lem-weil-pbc-kflat-fixed-tensor-triangulated states the preservation clause and an unnormalized canonical identification, so future provers should cite both. Maintainer note: the snapshot's dagsnap symlink target was deleted mid-review, so the later reads used clones/side-live."
  },
  "lean": {
   "module": "Sheaf.Paper.SiteDerivedTensorRestriction",
