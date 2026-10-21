@@ -10,9 +10,111 @@
  "stmt_deps": [
   "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\lambda_j$ for the coordinate of $b_j$. The lower bound gives $|\\lambda_j(v)|\\leq c^{-1}\\|v\\|$, so each coordinate is continuous. For every $i,j\\in J$ the operator $E_{ij}(v)=\\lambda_j(v)b_i$ satisfies $\\|E_{ij}(v)\\|\\leq (C/c)\\|v\\|$, hence belongs to $D$. Checking basis vectors gives $E_{ij}E_{kl}=\\delta_{jk}E_{il}$ and $e=E_{00}$. Also $\\theta_v(w)=\\lambda_0(w)v$ has $\\|\\theta_v(w)\\|\\leq c^{-1}\\|v\\|\\|w\\|$ and is continuous. These estimates use finite algebraic expansions only.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary: rank-one reconstruction, explicit coordinate calculation."
+   }
+  },
+  {
+   "text": "Since $e^2=e$, its image $eH$ is an $E$-subspace and $eh=h$ for $h\\in eH$. The function $(v,h)\\mapsto\\theta_vh$ is $E$-bilinear, because $v\\mapsto\\theta_v$ is $E$-linear and the $E$-action on $H$ comes from the central scalar operators in $D$. It therefore induces the specified linear map $\\Phi:V\\otimes_E eH\\to H$. For $T\\in D$, evaluation on $w$ gives $T\\theta_v(w)=\\lambda_0(w)T(v)=\\theta_{T(v)}(w)$. Thus $\\Phi(Tv\\otimes h)=T\\Phi(v\\otimes h)$, proving $D$-linearity.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary: rank-one reconstruction, explicit coordinate calculation."
+   }
+  },
+  {
+   "text": "To prove injectivity, expand the first factors of any tensor using the algebraic basis and collect terms: $z=\\sum_{j\\in F}b_j\\otimes h_j$ for a finite $F\\subseteq J$ and $h_j\\in eH$. If $\\Phi(z)=\\sum_{j\\in F}E_{j0}h_j=0$, apply $E_{0k}$ for each $k\\in F$. The matrix-unit identities give $0=eh_k=h_k$. Hence $z=0$. No independence theorem for tensor products is required, only bilinearity and the finite expansions.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary: rank-one reconstruction, explicit coordinate calculation."
+   }
+  },
+  {
+   "text": "Put $N=\\operatorname{im}\\Phi=\\{\\sum_{r=1}^n\\theta_{v_r}h_r:n\\geq0,\\ v_r\\in V,\\ h_r\\in eH\\}$. The preceding $D$-linearity makes $N$ a $D$-submodule, so $Q=H/N$ is a unital $D$-module. It is countably spanned over $E$: project the given countable spanning family of $H$ to $Q$. For every $h\\in H$, $eh=\\theta_{b_0}(eh)$ lies in $N$, so $eQ=0$. Consequently $E_{jj}=E_{j0}eE_{0j}$ acts as zero on $Q$. If $J$ is finite, $1_D=\\sum_{j\\in J}E_{jj}$, whence $Q=0$. It remains to prove $Q=0$ when $J=\\mathbf N$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary: rank-one reconstruction, explicit coordinate calculation."
+   }
+  },
+  {
+   "text": "Assume now $J=\\mathbf N$. Apply [lem-sfb-uncountable-almost-disjoint-family] to obtain an uncountable index set $I$ and infinite subsets $A_i\\subseteq\\mathbf N$ with finite pairwise intersections. For each $i$, let $a_i:\\mathbf N\\to A_i$ enumerate $A_i$ in increasing order. This enumeration exists by successively taking the least element not yet listed: infinitely many elements ensure each next choice, and an element $m\\in A_i$ must occur among the first $m+1$ choices. Thus $a_i$ is a bijection.",
+   "uses": [
+    "lem-sfb-uncountable-almost-disjoint-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary: infinite-coordinate case, almost-disjoint-family input."
+   }
+  },
+  {
+   "text": "For $i\\in I$, define $u_i(b_n)=b_{a_i(n)}$ and define $r_i(b_{a_i(n)})=b_n$, with $r_i(b_m)=0$ for $m\\notin A_i$. Extend by finite linear combinations. Reindexing preserves the maximum of the nonzero coefficients; deleting coordinates cannot increase it. The two norm bounds therefore give $\\|u_i(v)\\|\\leq(C/c)\\|v\\|$ and $\\|r_i(v)\\|\\leq(C/c)\\|v\\|$. Both maps belong to $D$. On basis vectors $r_iu_i=1_D$ and $u_ir_i=p_i$, where $p_i$ keeps precisely the coordinates in $A_i$. In particular $p_i^2=p_i$ and $p_iu_i=u_i$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary: rank-one reconstruction, explicit coordinate calculation."
+   }
+  },
+  {
+   "text": "For distinct $i,j$, put $F=A_i\\cap A_j$, a finite set by step 5. Computing on each basis vector gives $p_ip_j=\\sum_{k\\in F}E_{kk}=\\sum_{k\\in F}E_{k0}eE_{0k}$. Since $e$ annihilates $Q$, this product annihilates $Q$. This uses only finite coordinate projections, and needs no identification of all continuous finite-rank operators with a generated ideal.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary: rank-one reconstruction, explicit coordinate calculation."
+   }
+  },
+  {
+   "text": "If $Q\\ne0$, fix $0\\ne q\\in Q$ and put $x_i=u_iq$. Then $r_ix_i=q$, so $x_i\\ne0$, and $p_ix_i=x_i$. For $j\\ne i$, $p_ix_j=p_ip_jx_j=0$. In a finite relation $\\sum_{j\\in F}t_jx_j=0$, apply $p_i$ to get $t_ix_i=0$ for every $i\\in F$, hence $t_i=0$ since $E$ is a field. Thus $(x_i)_{i\\in I}$ is an $E$-linearly independent family.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary: rank-one reconstruction, explicit coordinate calculation."
+   }
+  },
+  {
+   "text": "Let $W\\subseteq Q$ be the image of a countable spanning set of $H$, so $W$ is countable and spans $Q$. Apply [lem-sfb-independent-family-spanning-cardinality] with $K=E$, $M=Q$ and the independent family of step 8. It supplies an injection $I\\to W$. Composing with an injection $W\\to\\mathbf N$ contradicts the uncountability of $I$. Therefore $Q=0$ also for infinite $J$.",
+   "uses": [
+    "lem-sfb-independent-family-spanning-cardinality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary: infinite-coordinate case, cardinal contradiction."
+   }
+  },
+  {
+   "text": "In either case $Q=H/N=0$, hence $N=H$ and $\\Phi$ is surjective. Together with step 3 this makes $\\Phi$ a bijective $E$-linear and $D$-linear map. Its inverse is $D$-linear as well: if $y=\\Phi(z)$, then $\\Phi(Tz)=Ty$, so uniqueness of the preimage gives $\\Phi^{-1}(Ty)=Tz$. This is precisely the claimed isomorphism with the given action on the first tensor factor. If $H=0$, both tensor product and target are zero and the same argument applies; finite-dimensional $V$, including $d=1$, was handled in step 4.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient auxiliary: rank-one reconstruction, explicit coordinate calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-uncountable-almost-disjoint-family",
+  "lem-sfb-independent-family-spanning-cardinality"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), coefficient auxiliary only; the blueprint does not supply this algebraic lemma. Agent proof expanding the rank-one argument in coord/reports/NC/lem-sfb-supported-lattice-norm-projection.md, intended arguments. Exact external reference WANTED."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -108,10 +210,105 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: finite matrix Morita equivalence and finite-dimensional endomorphism equivalences do not address the infinite continuous endomorphism algebra or its countable-dimensional modules."
+  },
+  {
+   "tool": "grep",
+   "query": "Morita|rank.one.*(module|tensor)|countab.*endomorph",
+   "results": {
+    "t": "2026-10-21T22:23:47Z",
+    "tool": "grep",
+    "query": "Morita|rank.one.*(module|tensor)|countab.*endomorph",
+    "sub": "RingTheory",
+    "ok": true,
+    "n_hits": 10,
+    "note": "",
+    "top": [
+     "Mathlib/RingTheory/Morita/Basic.lean",
+     "Mathlib/RingTheory/Morita/Basic.lean",
+     "Mathlib/RingTheory/Morita/Basic.lean",
+     "Mathlib/RingTheory/Morita/Basic.lean",
+     "Mathlib/RingTheory/Morita/Basic.lean",
+     "Mathlib/RingTheory/Morita/Matrix.lean",
+     "Mathlib/RingTheory/Morita/Matrix.lean",
+     "Mathlib/RingTheory/Morita/Matrix.lean"
+    ],
+    "digest": "3cf7e49783e2d0c1"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: finite matrix Morita equivalence, inner-product rank-one idempotents, diagonal representations and finite semisimple endomorphism decompositions do not establish the infinite continuous-endomorphism case with arbitrary countably spanned algebraic modules."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Rank one idempotent reconstruction for small representations of an infinite endomorphism algebra",
+   "results": {
+    "t": "2026-10-21T22:23:47Z",
+    "tool": "leansearch",
+    "query": "Rank one idempotent reconstruction for small representations of an infinite endomorphism algebra",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "InnerProductSpace.isIdempotentElem_rankOne_self",
+     "InnerProductSpace.isIdempotentElem_rankOne_self_iff",
+     "LinearMap.isIdempotentElem_iff_eq_isCompl_projection_range_ker",
+     "Submodule.isIdempotentElemEquiv",
+     "LinearMap.toSpanSingleton_isIdempotentElem_iff",
+     "FDRep.simple_iff_end_is_rank_one",
+     "ContinuousLinearMap.IsIdempotentElem.range_eq_ker",
+     "LinearEquiv.smul_id_of_finrank_eq_one"
+    ],
+    "digest": "6b0a8a58e36e8796"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: finite matrix Morita equivalence, inner-product rank-one idempotents, diagonal representations and finite semisimple endomorphism decompositions do not establish the infinite continuous-endomorphism case with arbitrary countably spanned algebraic modules."
+  },
+  {
+   "tool": "loogle",
+   "query": "ContinuousLinearMap, Module.End",
+   "results": {
+    "t": "2026-10-21T22:23:48Z",
+    "tool": "loogle",
+    "query": "ContinuousLinearMap, Module.End",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: finite matrix Morita equivalence, inner-product rank-one idempotents, diagonal representations and finite semisimple endomorphism decompositions do not establish the infinite continuous-endomorphism case with arbitrary countably spanned algebraic modules."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every countably dimensional representation of continuous endomorphisms of the algebraic direct sum of a field is the tensor product with its rank one corner",
+   "results": {
+    "t": "2026-10-21T22:23:50Z",
+    "tool": "leanfinder",
+    "query": "Every countably dimensional representation of continuous endomorphisms of the algebraic direct sum of a field is the tensor product with its rank one corner",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Rep.diagonalSuccIsoTensorTrivial_hom_hom_single",
+     "Rep.diagonalSuccIsoTensorTrivial",
+     "Rep.diagonalSuccIsoTensorTrivial_inv_hom_single_right",
+     "IsAzumaya.coe_tensorEquivEnd",
+     "FGModuleCat.FGModuleCatCoevaluation_apply_one",
+     "IsAzumaya.tensorEquivEnd",
+     "IsSemisimpleModule.exists_end_algEquiv_pi_matrix_end",
+     "IsSemisimpleModule.exists_end_algEquiv_pi_matrix_divisionRing"
+    ],
+    "digest": "0d84dde7e4012faf"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: finite matrix Morita equivalence, inner-product rank-one idempotents, diagonal representations and finite semisimple endomorphism decompositions do not establish the infinite continuous-endomorphism case with arbitrary countably spanned algebraic modules."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-supported-lattice-norm-projection",
@@ -138,5 +335,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-countable-endomorphism-module-reconstruction",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Constructed all coordinate operators with explicit norm estimates, proved injectivity by matrix units, and killed the quotient by the image using uncountably many almost-disjoint coordinate projections. Created one statement-only combinatorial input and one exact Mathlib spanning-cardinality leaf; no finite-rank ideal classification, topology on H, completion, or finite-dimensional Morita extension is assumed.",
+  "blueprint": "Main-20261015 direct-images proof paragraph (3), agent geometric norm-coefficient auxiliary inherited through the recorded via chain: the rank-one reconstruction used by supported-lattice-norm-projection. The ancestor tool reports None; this delivery preserves that null anchor and records the concrete paragraph rather than inventing a blueprint id."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NJ-2970e5b2a",
+  "group": "NJ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-2970e5b2a (reviewer sub-agent of L); spot-checked: Read the item and all four new nodes in full; no fixes written. Not superseded: the item is unsplit and unreviewed in clones/live and side-live, with no repair note, so the re-split rule does not apply. It was created 2026-10-22 by NC, so it is not on the 2026-10-19 dropped list. The statement is unchanged from side-live and true; tested on H=0, d=1, finite d (matrix Morita via 1=ΣE_jj) and J=ℕ with H=V. Steps 1-4: |λ_j|≤c⁻¹‖v‖, ‖E_ij‖≤C/c, ‖θ_v w‖≤c⁻¹‖v‖‖w‖, matrix-unit identities, θ_{b0}=e so eQ=0, and finite J gives Q=0. Step 5 uses exactly the statement of lem-sfb-uncountable-almost-disjoint-family, with the increasing enumeration written out. Steps 6-8: u_i, r_i bounded by C/c; r_i u_i=1, u_i r_i=p_i; p_i p_j=Σ_{k∈A_i∩A_j}E_kk kills Q; x_i=u_i q are independent. Step 9 cites lem-sfb-independent-family-spanning-cardinality; I checked Mathlib linearIndependent_le_span'' at StrongRankCondition.lean:290-291 and it is a one-line specialization. Step 10: inverse D-linear. Countable (Data/Countable/Defs.lean:41) and Set.Finite/Set.Infinite (Data/Finite/Defs.lean:185/205) are exact leaves. No existing DAG node defines countable or finite sets, states an almost-disjoint family, or bounds an independent family by a spanning set (trf cardinal-dimension bounds by rank; the weil one is finite only). The almost-disjoint node is a real combinatorial lemma, statement-only, notions cited, and true by the binary-prefix construction. All steps stay in unit sk-thm-sf-ctf-stability, so no tool_uses are needed. No SGA source is cited."
  }
 }
