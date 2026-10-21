@@ -22014,3 +22014,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:59 L: merged deliver/NF/lem-weil-pbc-ringed-common-quotient-pullback-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 09:59 L: returned deliver/U1/Sheaf.AlgebraicGeometry.VaryingRingOperations (reviewer RETURN: (reviewer C-23729, head 23729633d) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Va)
 - 10:01 L: returned deliver/J7/Sheaf.Paper.ExternalRHomConePairing (reviewer RETURN: (reviewer C-72ecd, head 72ecd3f41) C5: new sorry'd lem-pur-external-rhom-restriction-naturality (CommutesWithOpenRestric)
+- 10:01 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
