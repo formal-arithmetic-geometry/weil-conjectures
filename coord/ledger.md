@@ -21124,3 +21124,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:19 L: returned deliver/NN/lem-sbc-ambient-operations-scalar-linearity (reviewer RETURN: Superseded again (A6/A7/B10; brief-stage1 l.103 'live finished nodes win; never split one'). This is a re-push of c27a08)
 - 08:19 L: returned deliver/NU/def-per-support-condition (reviewer RETURN: I read the delivered item, its five stmt_deps and the main-20261015 blueprint def-per-support-condition.md in full. No n)
 - 08:19 L: returned deliver/Q12/lem-pd-module-ringed-topos-derived-comparison (reviewer RETURN: G1/A6/D: the re-split note (11140 chars, at least 3 new nodes, reopened 13:45 'split further') is not answered. The deli)
+- 08:19 L: returned deliver/Q25/lem-sfb-cohomology-tor-interval (reviewer RETURN: Returned because the item is already finished on live (B10, A7; brief-stage1 says live finished nodes win and must never)
