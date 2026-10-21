@@ -23853,3 +23853,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:54 L: returned deliver/Q09/lem-sfb-lattice-koszul-triangulated-cup-comparison (reviewer RETURN: L: independent stage-2 immutable head bdc4ce08b4f8: H3(1): TriangulatedModel.commShift is a free field constrained only )
 - 21:55 L: merged deliver/NF/lem-sfb-norm-algcl-profinite-cech-exact (stage 2; reviewer PASS; parallel immutable checks)
 - 21:55 L: returned deliver/NC/lem-sfb-relative-cyclic-restriction-model (reviewer RETURN: L: independent stage-2 immutable head d8090fdb551d: A7/A6: credit-only re-delivery after NB's stage-2 landing of this it)
+- 21:56 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
