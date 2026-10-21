@@ -103,14 +103,15 @@
  "chapter": "sec-smooth-purity",
  "unit": "sk-prop-sf-cbc",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.ConstructibleEtaleSetPullbackStratum",
-  "file": "lean/Sheaf/AlgebraicGeometry/ConstructibleEtaleSetPullbackStratum.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.ConstructibleEtaleSetPullbackStratum",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/ConstructibleEtaleSetPullbackStratum.lean",
   "declaration": "AlgebraicGeometry.Scheme.finiteLocallyConstant_pullback_stratum",
   "branch": "sheaf-dag",
   "by": "K2",
   "date": "2026-10-12",
-  "statement": "theorem finiteLocallyConstant_pullback_stratum\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (E : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (S : Stratification X)\n    (hS : ∀ i : Fin S.n, IsFiniteLocallyConstantEtaleSheafOfSets\n      ((etaleSetPullback (S.immersion i)).obj\n        ((sheafCompose X.smallEtaleTopology\n          (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj E))) :\n    ∀ i : Fin S.n, IsFiniteLocallyConstantEtaleSheafOfSets\n      ((etaleSetPullback ((S.pullback g).immersion i)).obj\n        ((sheafCompose Y.smallEtaleTopology\n          (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj\n          ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj E)))"
+  "statement": "theorem finiteLocallyConstant_pullback_stratum\n    {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (E : Sheaf X.smallEtaleTopology AddCommGrpCat.{u + 1})\n    (S : Stratification X)\n    (hS : ∀ i : Fin S.n, IsFiniteLocallyConstantSheafOfTypes\n      ((etaleSetPullback (S.immersion i)).obj\n        ((sheafCompose X.smallEtaleTopology\n          (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj E))) :\n    ∀ i : Fin S.n, IsFiniteLocallyConstantSheafOfTypes\n      ((etaleSetPullback ((S.pullback g).immersion i)).obj\n        ((sheafCompose Y.smallEtaleTopology\n          (CategoryTheory.forget AddCommGrpCat.{u + 1})).obj\n          ((Etale.upperStar AddCommGrpCat.{u + 1} g).obj E)))",
+  "note": "Retire the Sheaf twin under coord/retire-items.tsv. The upstream theorem has the same name and a definitionally identical signature: IsLisseEtaleSheafOfSets abbreviates IsFiniteLocallyConstantSheafOfTypes. Both complete proofs follow the recorded fixed-stratum argument. The existing parent already imports the upstream module; all parent dependency edges and the unit route remain intact. Exact former signature and standard axioms checked through lcompile.py by N3, 2026-10-21."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -125,12 +126,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-ca588",
-  "group": "H5",
-  "result": "fix",
-  "landing": "20261021T002935-L-1581010",
+  "reviewer": "C-c09f8",
+  "group": "N3",
+  "result": "pass",
+  "landing": "20261021T011026-L-2029799",
   "kind": "interface",
-  "note": "independent cc review: withdrawn Sheaf twin vs upstream WeilConjectures.AlgebraicGeometry.PullbackFiniteLocallyConstant (abbrev-equal signatures, exact old signature checked in scratch); four importers diffed against live and compiled"
+  "note": "independent cc review: withdrawn Sheaf twin finiteLocallyConstant_pullback_stratum vs upstream WeilConjectures.AlgebraicGeometry.ConstructibleEtaleSetPullbackStratum (identical up to abbrev IsLisseEtaleSheafOfSets = IsFiniteLocallyConstantSheafOfTypes; former signature accepted in scratch; axioms standard); node lean record vs upstream signature; no importers"
  },
  "lean_audit": {
   "master": {
