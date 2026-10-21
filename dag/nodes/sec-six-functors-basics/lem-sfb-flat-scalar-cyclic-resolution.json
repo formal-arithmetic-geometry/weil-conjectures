@@ -13,9 +13,98 @@
   "def-pc-kflat-complex",
   "lem-weil-pbc-ringed-projection-mate-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $a\\ne0$. Since $A$ is an integral domain, $ax=ay$ implies $a(x-y)=0$ and hence $x=y$. Multiplication by $a$ is therefore a monomorphism of constant $A$-module presheaves. By [lem-weil-pbc-site-r-module-presheaf-sheafification-exact], evaluation computes presheaf kernels and module sheafification is exact. Sheafify this monomorphism over the constant ring presheaf $A$: by [def-weil-pbc-constant-sheaf] its source and target are $A_{\\mathcal C}$, and its map is multiplication by the constant scalar $a$. Thus $a:A_{\\mathcal C}\\to A_{\\mathcal C}$ is a monomorphism. This uses exact sheafification, without any assumption that the site has enough points.",
+   "uses": [
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI (lemma-sheafification-exact), applied to the constant presheaf of rings; compare Tag 093J (lemma-constant-exact)"
+   }
+  },
+  {
+   "text": "By [def-pc-flat-sheaf-modules], the given flatness of $R$ means precisely that $-\\otimes_{A_{\\mathcal C}}R$ is exact, so it preserves the kernel sequence $0\\to A_{\\mathcal C}\\xrightarrow{a}A_{\\mathcal C}$ from Step 1. The sheaf tensor product of [def-pur-sheaf-tensor-product] identifies $A_{\\mathcal C}\\otimes_{A_{\\mathcal C}}R$ with $R$: sectionwise the map is $b\\otimes r\\mapsto br$, with inverse $r\\mapsto1\\otimes r$, and these maps respect restrictions and hence sheafify. Under this identification $a\\otimes1$ sends $r$ to $ar$. Thus $a:R\\to R$ is monic. Kernels of module sheaves are sectionwise by [def-weil-sheaf-of-modules-category], so this is injectivity on sections as well.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER (definition-flat), sheaf clause; Section Tag 03EK (section-tensor-product); Tag 03DA (lemma-abelian)"
+   }
+  },
+  {
+   "text": "Let $C^{-1}=R$, $C^0=R$, $d^{-1}=a$, and all other terms and differentials be zero. Let $q:R\\to R/aR$ be the sheaf cokernel of $a$. Cokernels are sheafifications of sectionwise cokernels by [def-weil-sheaf-of-modules-category], so this is the quotient sheaf meant by $R/aR$. The augmentation $\\epsilon:C\\to(R/aR)[0]$ has $\\epsilon^0=q$ and zero components elsewhere; $qa=0$ gives its cochain-map equation. By [def-pc-acyclic-complex-modules], $H^{-1}(C)=\\ker(a)=0$ by Step 2, $H^0(C)=\\operatorname{coker}(a)=R/aR$, and $H^i(C)=0$ for $i\\ne-1,0$. The map $H^0(\\epsilon)$ is precisely the cokernel identification, and all other cohomology maps are isomorphisms between zero sheaves. Hence $\\epsilon$ is a quasi-isomorphism by [def-pc-quasi-iso-modules].",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-acyclic-complex-modules",
+    "def-pc-quasi-iso-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 0115 (definition-quasi-isomorphism-cochain), with the preceding formula for cohomology; quotient sheaf from Modules on Sites Tag 03DA"
+   }
+  },
+  {
+   "text": "Over the coefficient sheaf $R$ itself, both nonzero terms of $C$ are flat, independently of the original flatness over $A_{\\mathcal C}$. Indeed, [def-pur-sheaf-tensor-product] gives $M\\otimes_RR\\cong M$ by $m\\otimes r\\mapsto rm$ with inverse $m\\mapsto m\\otimes1$, sectionwise and then after sheafification; consequently tensoring with $R$ is exact. Tensoring with the zero sheaf is the zero functor, also exact. By [def-pc-flat-sheaf-modules], this proves flatness of every term of $C$ and of $R[0]$ as $R$-module sheaves.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section Tag 03EK (section-tensor-product), tensor unit; Tag 03ER (definition-flat)"
+   }
+  },
+  {
+   "text": "The complexes $C$ and $R[0]$ both vanish in degrees strictly greater than zero, and every term is flat over $R$ by Step 4. Apply [lem-pc-bounded-above-flat-kflat-site] to the ringed site $(\\mathcal C,R)$, with upper bound $b=0$, separately to each complex. Both are K-flat over $R$. Combining the K-flatness of $C$ with the actual augmentation quasi-isomorphism from Step 3 gives a K-flat resolution of $(R/aR)[0]$, exactly as defined by [def-pc-kflat-complex].",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ (lemma-bounded-flat-K-flat); definition of a K-flat resolution"
+   }
+  },
+  {
+   "text": "The statement [lem-weil-pbc-ringed-projection-mate-exact] says that derived tensor is computed by replacing one factor by a K-flat resolution (take the identity morphism of the small ringed site $(\\mathcal C,R)$ for its ambient ringed-topos data). Use the resolution $\\epsilon$ of Step 5 for the quotient factor. Thus for any $R$-module complex $M^\\bullet$, $M^\\bullet\\otimes_R^{\\mathbf L}(R/aR)$ is represented by $\\operatorname{Tot}(M^\\bullet\\otimes_R C)$. This is precisely computation by the displayed two-term complex, and proves the final assertion.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor) and the immediately preceding K-flat-resolution construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "def-weil-pbc-constant-sheaf",
+  "def-pc-flat-sheaf-modules",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-acyclic-complex-modules",
+  "def-pc-quasi-iso-modules",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "def-pc-kflat-complex",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit scalar-resolution argument using Modules on Sites Tags 03EI and 03ER; two-term cohomology calculation (Homology Tag 0115); K-flatness and derived tensor from Tags 06YQ and 06YU."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +140,45 @@
    "results": "Mathlib/RingTheory/Flat/TorsionFree.lean:79 Module.Flat.isSMulRegular_of_nonZeroDivisors; Mathlib/RingTheory/Regular/Category.lean:35 ModuleCat.smulShortComplex, :42 smulShortComplex_exact and :50 IsSMulRegular.smulShortComplex_shortExact. Read the source: these concern modules over one ordinary ring, not flat sheaf algebras or K-flat resolutions on a site.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A flat sheaf algebra over a constant integral domain has an injective nonzero scalar map and a two term K flat quotient resolution",
+   "results": "8 hits: Module.Flat.tfae_equational_criterion, Module.FaithfullyFlat, Module.flat_of_isLocalized_span, Module.Flat.iff_lift_lsmul_comp_subtype_injective, Module.Flat.iff_lTensor_injective', Module.Flat.iff_rTensor_injective', Module.FaithfullyFlat.toFlat, Module.Flat.iff_rTensor_injective. These are ordinary ring-module flatness criteria, not the sheaf assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded above complexes of flat sheaves are K flat and compute derived tensor products",
+   "results": "8 hits: Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, HomologicalComplex.tensorObj, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_flat_tensorProduct, DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE, Module.Flat.iff_rTensor_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact. No ringed-site K-flat quotient resolution.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\"",
+   "results": "1 hit: Lean.mkFlatCtorOfStructCtorName in Lean.Structure, unrelated to homological K-flatness.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|smulShortComplex|isSMulRegular_of_nonZeroDivisors",
+   "results": "17 hits: ModuleCat.smulShortComplex (Mathlib/RingTheory/Regular/Category.lean:35), smulShortComplex_exact (:42), smulShortComplex_g_epi (:45), IsSMulRegular.smulShortComplex_shortExact (:50), Module.Flat.isSMulRegular_of_nonZeroDivisors (Mathlib/RingTheory/Flat/TorsionFree.lean:79), plus uses in Regular/ProjectiveDimension.lean, Depth/Rees.lean and KrullDimension/Regular.lean. Read Category.lean:20-53 and TorsionFree.lean:71-89: ordinary modules, not sheaves. No KFlat hit.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A two term complex of free sheaves resolving a scalar quotient is K flat over a ringed site",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, Module.Flat.of_projective, Module.flat_of_isLocalized_span, Module.Flat.tfae_equational_criterion, Module.Flat.of_forall_exists_factorization, SheafOfModules.instAbelian, Module.FaithfullyFlat. Sheaf finite presentation and abelian-category instances do not give the K-flat cyclic resolution.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-integral-models-operations",
@@ -71,5 +195,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-flat-scalar-cyclic-resolution",
+  "worker": "stage1",
+  "summary": "Proved scalar injectivity by exact constant-module sheafification followed by the defining exact tensor functor for flat R. Computed the two-term augmentation on all cohomology sheaves, checked R-flatness via the tensor unit, and applied the existing general ringed-site bounded-above K-flat criterion. No new nodes; original statement retained; no exact project or Mathlib attachment.",
+  "blueprint": "Realizes paragraph (2), tensor product local scalar-model calculation, in det-lem-integral-models-operations: the cyclic torsion factors after flat scalar extension. The source proof calls this the elementary local finite-free calculation.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "General K-flatness theorem on arbitrary ringed sites, applied to two bounded free R-complexes; the unit has no separate criterion."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Only its explicit one-K-flat-factor computation of derived tensor is used as a generic ringed-site tool, not its projection formula or any geometric theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-weil-pbc-ringed-projection-mate-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-96ab709aa",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-96ab709aa (reviewer sub-agent of L); spot-checked: I read the item, all 6 steps and every cited statement in full. The delivery creates no new nodes. The item was created by Q19's re-split of det-lem-integral-models-operations (its old steps 5-7). Its statement and stmt_deps are byte-identical to the Q19 base, so nothing was weakened. In the live and side-live clones the node is still unsplit, it is not on any dropped list, and no SGA source is cited. The statement is true. Small cases checked: a a unit, R=0, R=A on the point site, a=0 excluded, and A=Z with R=(Z/2)_C and a=2, which shows the flatness hypothesis is needed. Step 1: exact sheafification (Stacks 03EI, read at sites-modules.tex:874) of the injective map a on the constant presheaf. Step 2: the flatness definition 03ER and the tensor unit at presheaf level (03EK), with kernels sectionwise (03DA). Step 3: the two-term cohomology calculation and the quasi-isomorphism (0115). Step 4: R-flatness from the unit isomorphism, kept separate from flatness over A_C. Step 5: lem-pc-bounded-above-flat-kflat-site with b=0, which is Stacks 06YQ lemma-bounded-flat-K-flat, read at sites-cohomology.tex:3120. Step 6: the 'one K-flat factor' sentence of lem-weil-pbc-ringed-projection-mate-exact at f=id (Stacks 06YU, line 3300). proof_deps equals the union of uses, and all step tags check out against tags/tags. I accept both declared tool uses (bounded-flat K-flat criterion, generic derived-tensor computation). None of these is a duplicate: lem-pur-constant-two-term-resolution (Z_l only), lem-sfb-scalar-model-finite-flat-resolution (DVR, existence of some resolution only), lem-sfb-locally-free-derived-scalars. Maintainer note: the existing node lem-pc-bounded-above-flat-kflat-site has source 'Lemma 06YS', which should be 06YQ; 06YS is lemma-K-flat-resolution. No fixes."
  }
 }
