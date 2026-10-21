@@ -1,6 +1,6 @@
 # Work queue
 
-97 items; claim with `tools/claim.py next <group> [--stage N]`.
+87 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (10 clusters, 381 modules)
 
@@ -21,47 +21,39 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 52, stage 3 1 items.
 
-## Stage 1: nodes to split (10)
+## Stage 1: nodes to split (7)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
-| `lem-sfb-strict-local-prime-to-p-kummer-splitting` | 4011 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
 | `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `lem-sfb-supported-lattice-norm-projection` | 4014 | none |
-| `lem-sfb-norm-algcl-profinite-cech-exact` | 4017 | none |
-| `lem-sfb-parameter-cochain-completion-boundary-descent` | 4017 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (18)
+## Stage 2: nodes to state (13)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
-| `sk-def-sf-orientation` | 2 | state | 17 |
+| `def-pur-affine-line-purity-comparison` | 1 | state | 14 |
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
-| `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
-| `lem-sfb-root-tower-boundary-acyclicity` | 1 | state | 1 |
+| `det-sp-orientation-vector-bundle` | 1 | state | 0 |
 | `lem-coef-compact-support-normalized-realization` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
+| `lem-pur-affine-translation-trace` | 1 | state | 0 |
 | `lem-sfb-equivariant-resolution-bar-normalization` | 1 | state | 0 |
-| `lem-sfb-internal-bar-ordered-cup` | 1 | state | 0 |
-| `lem-sfb-internal-bar-roof-adjunction` | 1 | state | 0 |
-| `lem-sfb-internal-inflation-graded-cup` | 1 | state | 0 |
 | `lem-sfb-lattice-koszul-triangulated-cup-comparison` | 1 | state | 0 |
-| `lem-sfb-lisse-lattice-potential-kummer-tameness` | 1 | state | 0 |
-| `lem-sfb-norm-algcl-bar-augmentation` | 1 | state | 0 |
-| `lem-sfb-profinite-action-coherent-presentation` | 1 | state | 0 |
+| `lem-sfb-norm-algcl-profinite-cech-exact` | 1 | state | 0 |
 | `lem-sfb-relative-cyclic-restriction-model` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
-| `lem-sfb-trivial-ladic-derived-exterior` | 1 | state | 0 |
+| `lem-sfb-countable-split-profinite-cover` | 2 | state | 0 |
 
-Not open yet: 373 nodes that below a finished node, not needed, 98 nodes that wait for a statement dependency (bottom-up), 9 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 373 nodes that below a finished node, not needed, 94 nodes that wait for a statement dependency (bottom-up), 6 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (53)
+## Stage 3: modules to prove (51)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -70,10 +62,8 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.RelativeProjExists` | 10 | 1 | repair | route |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 9 | 1 | repair | route |
 | `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 1 | repair | route |
-| `WeilConjectures.SixFunctors.Etale.Derived.Exchange` | 5 | 0 | repair | route |
 | `Sheaf.Algebra.Homology.ScalarHomTensorCoherence` | 6 | 1 | repair | route |
 | `Sheaf.Paper.DerivedInternalHomFilteredColimit` | 3 | 2 | repair | route |
-| `Sheaf.CategoryTheory.ElementRestrictionHom` | 9 | 0 | repair | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.Compatibility` | 3 | 1 | disputed | route |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
 | `Sheaf.Paper.ConstantCompletionEquivalence` | 5 | 10 | proof | route |
