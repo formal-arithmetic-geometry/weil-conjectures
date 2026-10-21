@@ -1,0 +1,122 @@
+{
+ "id": "def-pur-coordinate-germ-concentration-data",
+ "kind": "definition",
+ "title": "CoordinateGermConcentrationData",
+ "status": "split",
+ "statement": "In the finite setting [def-pur-conventions], use the affine spaces [def-sbc-affine-space], support kernels and normalized germs [def-pur-etale-coordinate-support], supported coefficients [def-pur-supported-exterior-product], ordinary signed cup classes and comparison [def-pur-supported-class-operations] and comparison [def-pur-supported-hom-site-comparison], and the ordered frame boundary product [def-pur-frame-class]. For b≥0, define N=A^b_k and its coordinate zero subscheme. Let L_s=A(s)(k), K_r=RΓ_0(N,A(r)), and let D(i,t,r) be the bounded-below derived supported stalk. The ordered ordinary class c_N is the unique ordinary supported class whose canonical comparison is the ordered frame boundary product (including the empty unit). For every v in L_(r-b), form c_N tensor v with the prescribed signed cup multiplication, using the actual global coefficient section determined by v. The support-coefficient adjunction to the literal global restriction kernel is the unique adjunction whose inverse Hom equivalence followed by the closed coefficient quotient is the ordinary constant-sheaf adjoint followed by inclusion of the kernel. Use this uniquely normalized adjunction, not an arbitrary one. The coefficient pullback, field-to-supported-stalk germ and single sheaves are those of the recorded support and signed-twist constructions. Use the shared localization, equality reindexing and identity-support unitor of [def-pur-supported-class-normalizations].",
+ "stmt_deps": [
+  "def-pur-conventions",
+  "def-sbc-affine-space",
+  "def-pur-etale-coordinate-support",
+  "def-pur-supported-exterior-product",
+  "def-pur-supported-class-operations",
+  "def-pur-supported-hom-site-comparison",
+  "def-pur-frame-class",
+  "def-pur-supported-class-normalizations"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XP (section-cohomology-support), kernel definition and support localization; agent conditional transfer lemma extracted from coordinate-model Steps 5--7, using literal etale restriction, injective restriction, normal coordinate pullback and functorial good truncation. Purity/concentration are explicit hypotheses, not attributed to the tag."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical supported coordinate cohomology orientation and derived germ concentration data",
+   "results": "OK 8 hits: Filter.Germ.coeTC, Module.Basis.orientation, ShortComplex.HomologyData.canonical, DerivedCategory.isGE_Q_obj_iff and unrelated smooth/distribution germs. No coordinate support construction.",
+   "date": "2026-10-21",
+   "verdict": "No matching notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical supported coordinate cohomology orientation and derived germ concentration data",
+   "results": "OK 8 hits: smoothSheaf.eval_germ, smoothSheafCommRing.eval_germ, SmoothBumpCovering.c/ind, TopCat.Presheaf.germ_exist and Γgerm_res_apply, Filter.Germ.valueₗ, RingedSpace.exists_res_eq_zero_of_germ_eq_zero.",
+   "date": "2026-10-21",
+   "verdict": "No ordinary etale coordinate or derived support construction."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinateClass|coordinate.*orientation|concentrated.*germ",
+   "results": "Mathlib: OK 0 hits. blueprint_refs search concentrated coordinate germ: 0 nodes. rg in dag/nodes/sec-smooth-purity, lean/WeilConjectures/EtaleCohomology/Purity and lean/Sheaf/Paper finds surrounding purity orientation nodes but no canonical coordinate-germ data or class evaluator. Existing supported cup and support functors reused.",
+   "date": "2026-10-21",
+   "verdict": "No duplicate of the assembled normalized data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-concentrated-support-etale-transfer",
+  "date": "2026-10-21",
+  "group": "N9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Conditional normal-coordinate supported germ in Steps 5--7; ordinary kernel and ordered Kummer normalization.",
+   "via": [
+    "lem-pur-concentrated-support-etale-transfer",
+    "lem-pur-relative-support-coordinate-model",
+    "lem-pur-relative-support-bottom-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.Paper.CoordinateGermConcentrationData",
+  "declaration": "WeilConjectures.PurityFiniteSetting.transferCoordinateClass",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.transferModuleHasDerived",
+   "WeilConjectures.PurityFiniteSetting.transferSheafHasDerived",
+   "WeilConjectures.PurityFiniteSetting.transferNormal",
+   "WeilConjectures.PurityFiniteSetting.transferCoordinates",
+   "WeilConjectures.PurityFiniteSetting.transferZero",
+   "WeilConjectures.PurityFiniteSetting.transferLine",
+   "WeilConjectures.PurityFiniteSetting.transferSingle",
+   "WeilConjectures.PurityFiniteSetting.transferField",
+   "WeilConjectures.PurityFiniteSetting.transferStalk",
+   "WeilConjectures.PurityFiniteSetting.transferTwistPullback",
+   "WeilConjectures.PurityFiniteSetting.transferGerm",
+   "WeilConjectures.PurityFiniteSetting.transferCoordinateClass_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.transferCoordinateClass",
+   "WeilConjectures.PurityFiniteSetting.transferCoefficientSection",
+   "WeilConjectures.PurityFiniteSetting.transferTwistedCoordinateClass",
+   "WeilConjectures.PurityFiniteSetting.transferSupportAdjunction_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.transferSupportAdjunction"
+  ],
+  "file": "lean/Sheaf/Paper/CoordinateGermConcentrationData.lean",
+  "statement": "def transferCoordinateClass (P : PurityFiniteSetting.{u}) (b : ℕ)",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e1c6ac8",
+  "group": "N9",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e1c6ac8",
+  "group": "N9",
+  "result": "pass",
+  "note": "Re-delivery of the d9c95854 H2/H12 RETURN. Lean files byte-identical (SHA256 11d292ae/56c217c6/cc1e73a3); only records changed. Theorem stmt_dep lem-pur-supported-cup-functoriality removed from the item and both coordinate-germ def nodes; replaced by live def nodes def-pur-supported-class-operations and def-pur-supported-hom-site-comparison. New existing:true def node def-pur-supported-class-normalizations owns functorialCupHasDerived/Reindex/FullSupportIso on the unchanged SupportedCupFunctoriality; statement verbatim in the live module, no other owner. All 11 used decls of that module have def-node owners, no .choose of the theorem. All stmt_deps live or delivered; statements verbatim; not dropped. Maths spot-checked, agreeing with the earlier full reading: concentration pinned per v, nothing assumed on T, IsIso/H^{2b} identity/vanishing/TransferTruncation-pinned aK,aD with inverses, sheaf exchange, restriction and coefficient compatibilities; b=0, empty B/Z, any affine B, negative r covered; ordinary etale only; no hollow defs."
+ }
+}

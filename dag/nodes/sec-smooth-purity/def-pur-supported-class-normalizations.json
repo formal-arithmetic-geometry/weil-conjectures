@@ -1,0 +1,108 @@
+{
+ "id": "def-pur-supported-class-normalizations",
+ "kind": "definition",
+ "title": "Shared derived localization and elementary normalizations of supported signed-twist classes",
+ "status": "split",
+ "statement": "Fix the finite coefficient datum $P$ and, for either the small etale or small pro-etale site, the module-sheaf category, supported Hom groups $H_i^a(X,A(r))$, degree-zero embedding and constant sheaf of [def-pur-supported-class-operations]. Use the existing small derived localization of this same sheaf category, with Hom universe $u+1$ for schemes in universe $u$. For every closed immersion $i:C\\hookrightarrow X$, integers $a,b,r,s$, equalities $h_a:a=b$, $h_r:r=s$, and $\\alpha\\in H_i^a(X,A(r))$, define its equality reindexing in $H_i^b(X,A(s))$ by substitution along $h_a$ and $h_r$. For the identity closed immersion $\\mathrm{id}_X$, define the full-support coefficient-source isomorphism $(\\mathrm{id}_X)_*A_X\\xrightarrow{\\sim}A_X$ to be the canonical direct-image identity unitor, on each of the two sites. These are the existing constructions only; no functoriality or cup-product laws are asserted.",
+ "stmt_deps": [
+  "def-pur-supported-class-operations"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md; literature/stacks-project/etale-cohomology.tex",
+  "place": "First two proof sentences: sheaf-theoretic supported cup class and etale-local comparison, applied in coordinate-model Steps 5--7. Tag 09XP, section-cohomology-support: derived supported cohomology; elementary equality substitution and the direct-image identity unitor in its supported Hom presentation. Existing realization: Sheaf.Paper.SupportedCupFunctoriality, shared localization, graded reindexing and full-support normalization."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived supported Tate twist Hom reindexing degree weight equality full identity support constant sheaf isomorphism",
+   "results": "{\"t\": \"2026-10-21T15:56:03Z\", \"tool\": \"leansearch\", \"query\": \"Derived supported Tate twist Hom reindexing degree weight equality full identity support constant sheaf isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TwistShiftData.shiftIso\", \"HomologicalComplex.isSupported_of_iso\", \"TensorAlgebra.mk_reindex_cast\", \"DerivedCategory.TStructure.t\", \"DerivedCategory.singleFunctorsPostcompQhIso\", \"HomologicalComplex.XIsoOfEq\", \"Finsupp.degree_eq_weight_one\", \"RootPairing.Hom.weightMap_one\"], \"digest\": \"b6477e9855380545\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions without restating them."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Supported signed Tate twist derived Hom groups canonical equality reindexing and identity direct image coefficient sheaf isomorphism",
+   "results": "{\"t\": \"2026-10-21T15:58:33Z\", \"tool\": \"leanfinder\", \"query\": \"Supported signed Tate twist derived Hom groups canonical equality reindexing and identity direct image coefficient sheaf isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"LightCondensed.ihom_map_val_app\", \"LightCondensed.ihomPoints_symm_comp\", \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"CategoryTheory.InjectiveResolution.extEquivCohomologyClass_symm_mk_hom\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CategoryTheory.Sheaf.cohomologyPresheafFunctor\", \"CochainComplex.ConnectData.restrictionLEIso_hom_f\"], \"digest\": \"8e39ced5c4aeabad\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions without restating them."
+  },
+  {
+   "tool": "grep",
+   "query": "functorialCupHasDerived|functorialCupReindex|functorialCupFullSupportIso",
+   "results": "{\"t\": \"2026-10-21T15:58:32Z\", \"tool\": \"grep\", \"query\": \"functorialCupHasDerived|functorialCupReindex|functorialCupFullSupportIso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib match; reuse the existing project definitions without restating them."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n functorialCupHasDerived|functorialCupReindex|functorialCupFullSupportIso dag/nodes lean/WeilConjectures lean/Sheaf; python3 tools/blueprint_refs.py search \"supported class reindex\"",
+   "results": "Only lem-pur-supported-cup-functoriality lists these names in DAG lean records; it is a theorem node, not a definition owner. No upstream WeilConjectures hits. Existing definitions in Sheaf/Paper/SupportedCupFunctoriality.lean: functorialCupHasDerived at 167, functorialCupReindex at 1023, functorialCupFullSupportIso at 1074. Other Sheaf modules are consumers. Blueprint search: 0 nodes. No node def-pur-supported-class-normalizations exists.",
+   "date": "2026-10-21",
+   "verdict": "Add the missing definition-node ownership with existing:true; no Lean module or declaration is changed."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-concentrated-support-etale-transfer",
+  "date": "2026-10-21",
+  "group": "N9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Conditional normal-coordinate supported germ in Steps 5--7; ordinary kernel and ordered Kummer normalization.",
+   "via": [
+    "lem-pur-concentrated-support-etale-transfer",
+    "lem-pur-relative-support-coordinate-model",
+    "lem-pur-relative-support-bottom-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.Paper.SupportedCupFunctoriality",
+  "declaration": "WeilConjectures.PurityFiniteSetting.functorialCupReindex",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.functorialCupHasDerived",
+   "WeilConjectures.PurityFiniteSetting.functorialCupReindex",
+   "WeilConjectures.PurityFiniteSetting.functorialCupFullSupportIso"
+  ],
+  "statement": "def functorialCupReindex (P : PurityFiniteSetting.{u}) (pro : Bool)\n    {C X : Scheme.{u}} (i : C ⟶ X) {a b r s : ℤ} (ha : a = b) (hr : r = s)\n    (α : P.FunctorialCupH pro i a r) : P.FunctorialCupH pro i b s",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "H2/H12 repair of returned immutable head d9c95854dc46: provide missing definition-node ownership for these three unchanged definitions. The localization is the existing site localization; reindexing is equality substitution; the full-support isomorphism is the canonical direct-image identity unitor. Nothing is chosen from supportedCupFunctoriality and no Lean declaration is restated."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e1c6ac8",
+  "group": "N9",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e1c6ac8",
+  "group": "N9",
+  "result": "pass",
+  "note": "Re-delivery of the d9c95854 H2/H12 RETURN. Lean files byte-identical (SHA256 11d292ae/56c217c6/cc1e73a3); only records changed. Theorem stmt_dep lem-pur-supported-cup-functoriality removed from the item and both coordinate-germ def nodes; replaced by live def nodes def-pur-supported-class-operations and def-pur-supported-hom-site-comparison. New existing:true def node def-pur-supported-class-normalizations owns functorialCupHasDerived/Reindex/FullSupportIso on the unchanged SupportedCupFunctoriality; statement verbatim in the live module, no other owner. All 11 used decls of that module have def-node owners, no .choose of the theorem. All stmt_deps live or delivered; statements verbatim; not dropped. Maths spot-checked, agreeing with the earlier full reading: concentration pinned per v, nothing assumed on T, IsIso/H^{2b} identity/vanishing/TransferTruncation-pinned aK,aD with inverses, sheaf exchange, restriction and coefficient compatibilities; b=0, empty B/Z, any affine B, negative r covered; ordinary etale only; no hollow defs."
+ }
+}

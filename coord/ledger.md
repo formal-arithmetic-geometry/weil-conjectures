@@ -23004,3 +23004,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:07 L: merged deliver/W3/Sheaf.Paper.AdicStratumCompletionUnit (stage 3; reviewer PASS; first push; landing 20261021T160738-L-3834799 (interface); batch 20261021T160737; modules 3; new nodes 2; change records: coord/changes/W3-adic-stratum-proof-elaboration.md)
 - 16:10 L: merged deliver/A2/Sheaf.AlgebraicGeometry.Morphisms.RegularDivisorStrictLocalLimit (stage 3; reviewer PASS; first push; landing 20261021T161021-L-3955733 (interface); batch 20261021T161020; modules 1; new nodes 0; change records: coord/changes/A2-retire-regular-divisor-strict-local-limit.md)
 - 16:11 L: merged deliver/NG/lem-pe-internal-module-sectionwise-short-exact (reviewer PASS; first push; new nodes: 0)
+- 16:11 L: merged deliver/N9/lem-pur-concentrated-support-etale-transfer (stage 2; reviewer PASS; parallel immutable checks)

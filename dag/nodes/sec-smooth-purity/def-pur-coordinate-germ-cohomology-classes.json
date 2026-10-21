@@ -1,0 +1,114 @@
+{
+ "id": "def-pur-coordinate-germ-cohomology-classes",
+ "kind": "definition",
+ "title": "CoordinateGermCohomologyClasses",
+ "status": "split",
+ "statement": "Use the finite datum, coordinate classes and uniquely normalized support adjunction [def-pur-coordinate-germ-concentration-data], the existing support functors [def-pur-etale-coordinate-support], and normalized supported pullback [def-pur-supported-class-operations] and comparison [def-pur-supported-hom-site-comparison]. For a closed immersion i:C→X, a supported arrow α:i_*A_C→A_X(r)[q] defines its actual supported cohomology class by bounded-below derived adjunction, H^0, evaluation at 1, and the canonical shift comparison to H^q RΓ_C. Define global supported cohomology, the identity germ, the projection A^b_B→A^b_k, and the inverse-image zero section by the fibre product, with its canonical chosen Cartesian square [def-weil-pbc-cartesian-square]. Pull back the ordered twisted coordinate class through this square. For an etale e:Y→X and inverse-image closed support j:D→Y, define supported-stalk restriction by the recorded normalized derived restriction followed by the specified signed coefficient comparison. The sheaf support exchange e^*Q_C→Q_De^* is the unique natural transformation whose composite with the target support inclusion is e^* of the source inclusion; equivalently it is the literal identity on complement kernels on every etale test object. Define its derived exchange using the bounded-below right-derived base-change transformation.",
+ "stmt_deps": [
+  "def-pur-coordinate-germ-concentration-data",
+  "def-pur-etale-coordinate-support",
+  "def-pur-supported-class-operations",
+  "def-pur-supported-hom-site-comparison",
+  "def-weil-pbc-cartesian-square"
+ ],
+ "source": {
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tag 09XP (section-cohomology-support), kernel definition and support localization; agent conditional transfer lemma extracted from coordinate-model Steps 5--7, using literal etale restriction, injective restriction, normal coordinate pullback and functorial good truncation. Purity/concentration are explicit hypotheses, not attributed to the tag."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "canonical supported coordinate cohomology orientation and derived germ concentration data",
+   "results": "OK 8 hits: Filter.Germ.coeTC, Module.Basis.orientation, ShortComplex.HomologyData.canonical, DerivedCategory.isGE_Q_obj_iff and unrelated smooth/distribution germs. No coordinate support construction.",
+   "date": "2026-10-21",
+   "verdict": "No matching notion."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical supported coordinate cohomology orientation and derived germ concentration data",
+   "results": "OK 8 hits: smoothSheaf.eval_germ, smoothSheafCommRing.eval_germ, SmoothBumpCovering.c/ind, TopCat.Presheaf.germ_exist and Γgerm_res_apply, Filter.Germ.valueₗ, RingedSpace.exists_res_eq_zero_of_germ_eq_zero.",
+   "date": "2026-10-21",
+   "verdict": "No ordinary etale coordinate or derived support construction."
+  },
+  {
+   "tool": "grep",
+   "query": "coordinateClass|coordinate.*orientation|concentrated.*germ",
+   "results": "Mathlib: OK 0 hits. blueprint_refs search concentrated coordinate germ: 0 nodes. rg in dag/nodes/sec-smooth-purity, lean/WeilConjectures/EtaleCohomology/Purity and lean/Sheaf/Paper finds surrounding purity orientation nodes but no canonical coordinate-germ data or class evaluator. Existing supported cup and support functors reused.",
+   "date": "2026-10-21",
+   "verdict": "No duplicate of the assembled normalized data."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-concentrated-support-etale-transfer",
+  "date": "2026-10-21",
+  "group": "N9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-frame-independence",
+   "place": "Conditional normal-coordinate supported germ in Steps 5--7; ordinary kernel and ordered Kummer normalization.",
+   "via": [
+    "lem-pur-concentrated-support-etale-transfer",
+    "lem-pur-relative-support-coordinate-model",
+    "lem-pur-relative-support-bottom-descent"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "lean": {
+  "module": "Sheaf.Paper.CoordinateGermCohomologyClasses",
+  "declaration": "WeilConjectures.PurityFiniteSetting.transferClassValue",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.transferClassValue",
+   "WeilConjectures.PurityFiniteSetting.transferGlobal",
+   "WeilConjectures.PurityFiniteSetting.transferH",
+   "WeilConjectures.PurityFiniteSetting.transferLocalGerm",
+   "WeilConjectures.PurityFiniteSetting.transferProjection",
+   "WeilConjectures.PurityFiniteSetting.transferBaseZero",
+   "WeilConjectures.PurityFiniteSetting.transferBaseSquare",
+   "WeilConjectures.PurityFiniteSetting.transferBaseClass",
+   "WeilConjectures.PurityFiniteSetting.transferRestriction",
+   "WeilConjectures.PurityFiniteSetting.transferSupportRestriction_existsUnique",
+   "WeilConjectures.PurityFiniteSetting.transferSupportRestriction",
+   "WeilConjectures.PurityFiniteSetting.transferDerivedSupportRestriction"
+  ],
+  "file": "lean/Sheaf/Paper/CoordinateGermCohomologyClasses.lean",
+  "statement": "def transferClassValue (P : PurityFiniteSetting.{u}) {C X : Scheme.{u}} (i : C ⟶ X) [IsClosedImmersion i] (q r : ℤ) (α : P.FunctorialCupH false i q r) : (DerivedCategory.Plus.homologyFunctor.{u + 1, u + 2, u + 1} (ModuleCat.{u + 1} P.Coefficient) q).obj ((Etale.coordinateGlobalSupport P.Coefficient i).rightDerivedFunctorPlus.obj (P.transferSingle X r))",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e1c6ac8",
+  "group": "N9",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e1c6ac8",
+  "group": "N9",
+  "result": "pass",
+  "note": "Re-delivery of the d9c95854 H2/H12 RETURN. Lean files byte-identical (SHA256 11d292ae/56c217c6/cc1e73a3); only records changed. Theorem stmt_dep lem-pur-supported-cup-functoriality removed from the item and both coordinate-germ def nodes; replaced by live def nodes def-pur-supported-class-operations and def-pur-supported-hom-site-comparison. New existing:true def node def-pur-supported-class-normalizations owns functorialCupHasDerived/Reindex/FullSupportIso on the unchanged SupportedCupFunctoriality; statement verbatim in the live module, no other owner. All 11 used decls of that module have def-node owners, no .choose of the theorem. All stmt_deps live or delivered; statements verbatim; not dropped. Maths spot-checked, agreeing with the earlier full reading: concentration pinned per v, nothing assumed on T, IsIso/H^{2b} identity/vanishing/TransferTruncation-pinned aK,aD with inverses, sheaf exchange, restriction and coefficient compatibilities; b=0, empty B/Z, any affine B, negative r covered; ordinary etale only; no hollow defs."
+ }
+}

@@ -20,7 +20,12 @@
   "def-weil-pbc-derived-categories",
   "lem-amb-cartier-kummer-map",
   "def-pur-supported-cup",
-  "lem-asd-etale-finite-twist-pullback"
+  "lem-asd-etale-finite-twist-pullback",
+  "def-pur-coordinate-germ-concentration-data",
+  "def-pur-coordinate-germ-cohomology-classes",
+  "def-pur-supported-class-operations",
+  "def-pur-supported-hom-site-comparison",
+  "def-pur-supported-class-normalizations"
  ],
  "proof": [
   {
@@ -278,5 +283,34 @@
   "group": "Q74",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q74-395674c0d (reviewer sub-agent of L); spot-checked: I read all 8 steps and every cited statement in full. The statement is identical to the live unsplit node (unchanged). The item is not in the drop list, has no repair note and has not been split elsewhere; it adds no new nodes. Hypotheses: k = F̄_q, so all schemes are k-schemes and supported-cup-functoriality applies for any affine B; ℓ ≠ p makes m invertible, as the twist-pullback lemma needs; |Z| = f^{-1}(0) for f = p∘e meets the def-pur-etale-coordinate-support requirement; x̄ = e t̄ lies on C, so the concentration hypothesis applies there. Steps 1–2: W×_T Z = W×_P C gives literally equal kernels; exact étale restriction plus preservation of injectives represents both derived objects; the stalk-pullback identification and exact stalks transport concentration from x̄ to t̄. Step 3: composition of supported pullbacks gives f^* = e^*p^*, and the coefficient v goes through the twist-pullback lemma. Steps 4–5: I checked a_D γ = S(u_D^{-1} H^qγ) ε = a_K using the naturality and Hom bijection of lem-pur-good-truncation-exact-normalization in D(A-Mod) after shifting by q. Steps 6–8: the definition's restriction commutation, the twist lemma and the Hom bijection give the stated compatibilities; b = 0, empty Z and non-Noetherian B are fine. Small case b = 1, B = Spec k, e = id: the item gives the identity on the rank-one Kummer line, as expected. Stacks sources (09XP at lines 13966ff, 03Q1, 03PK, 0118, 0FPL/0FPM) and the blueprint place (lem-pur-frame-independence, first two proof sentences) are correctly labelled. No duplicate: finite-type-coordinate-support-orientation, etale-supported-kernel-adjunction and concentrated-complex-shift differ. Batch-5: lem-pur-supported-cup-functoriality reaches lem-pod-etale-stalk-tensor-scalar, a generic stalk/tensor/scalar identity that is neither trace formula nor Poincaré duality nor a step of their proofs, so the citation is accepted. The declared tool uses are generic and accepted. Cosmetic only: the report mentions a citations.json that is not in the commit."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConcentratedSupportEtaleTransfer",
+  "declaration": "WeilConjectures.PurityFiniteSetting.concentratedSupportEtaleTransfer",
+  "declarations": [
+   "WeilConjectures.PurityFiniteSetting.TransferConcentration",
+   "WeilConjectures.PurityFiniteSetting.TransferTruncation",
+   "WeilConjectures.PurityFiniteSetting.transferEtaleGerm",
+   "WeilConjectures.PurityFiniteSetting.transferPointIso",
+   "WeilConjectures.PurityFiniteSetting.transferStalkOrientation",
+   "WeilConjectures.PurityFiniteSetting.concentratedSupportEtaleTransfer",
+   "WeilConjectures.PurityFiniteSetting.transferSupportRestriction_isIso",
+   "WeilConjectures.PurityFiniteSetting.transferGerm_restriction",
+   "WeilConjectures.PurityFiniteSetting.transferCoefficientCompatibility"
+  ],
+  "file": "lean/Sheaf/Paper/ConcentratedSupportEtaleTransfer.lean",
+  "statement": "theorem concentratedSupportEtaleTransfer (P : PurityFiniteSetting.{u}) (b : ℕ) {B : Scheme.{u}} [IsAffine B] (aB : B ⟶ Spec (.of P.field.k)) (r : ℤ) (h : P.TransferConcentration b aB r) {T : Scheme.{u}} (e : T ⟶ AffineSpace (ULift.{u} (Fin b)) B) [Etale e] {Ω : Type u} [Field Ω] [IsSepClosed Ω] (z : Spec (.of Ω) ⟶ pullback (P.transferBaseZero b aB) e) : IsIso (P.transferEtaleGerm b aB e (z ≫ pullback.snd (P.transferBaseZero b aB) e) r) ∧ IsIso (P.transferStalkOrientation b aB r h e z) ∧ (h.field_orientation.hom ≫ (P.transferH (2 * (b : ℤ))).map (P.transferEtaleGerm b aB e (z ≫ pullback.snd (P.transferBaseZero b aB) e) r) = P.transferStalkOrientation b aB r h e z) ∧ (∀ n : ℤ, n ≠ 2 * (b : ℤ) → IsZero ((P.transferH n).obj (P.transferStalk (pullback.snd (P.transferBaseZero b aB) e) (z ≫ pullback.snd (P.transferBaseZero b aB) e) r))) ∧ ∃ (aK : P.transferField b r ≅ (DerivedCategory.Plus.singleFunctor _ (2 * (b : ℤ))).obj (P.transferLine (r - b))) (aD : P.transferStalk (pullback.snd (P.transferBaseZero b aB) e) (z ≫ pullback.snd (P.transferBaseZero b aB) e) r ≅ (DerivedCategory.Plus.singleFunctor _ (2 * (b : ℤ))).obj (P.transferLine (r - b))), P.TransferTruncation (P.transferGlobal (transferZero (Spec (.of P.field.k)) b) r) (2 * (b : ℤ)) (P.transferLine (r - b)) h.field_orientation.hom aK ∧ P.TransferTruncation (P.transferStalk (pullback.snd (P.transferBaseZero b aB) e) (z ≫ pullback.snd (P.transferBaseZero b aB) e) r) (2 * (b : ℤ)) (P.transferLine (r - b)) (P.transferStalkOrientation b aB r h e z) aD ∧ P.transferEtaleGerm b aB e (z ≫ pullback.snd (P.transferBaseZero b aB) e) r = aK.hom ≫ aD.inv ∧ (aD.hom ≫ aK.inv) ≫ P.transferEtaleGerm b aB e (z ≫ pullback.snd (P.transferBaseZero b aB) e) r = 𝟙 _ ∧ P.transferEtaleGerm b aB e (z ≫ pullback.snd (P.transferBaseZero b aB) e) r ≫ (aD.hom ≫ aK.inv) = 𝟙 _",
+  "branch": "newtargets-dag",
+  "by": "N9",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-58e1c6ac8",
+  "group": "N9",
+  "result": "pass",
+  "note": "Re-delivery of the d9c95854 H2/H12 RETURN. Lean files byte-identical (SHA256 11d292ae/56c217c6/cc1e73a3); only records changed. Theorem stmt_dep lem-pur-supported-cup-functoriality removed from the item and both coordinate-germ def nodes; replaced by live def nodes def-pur-supported-class-operations and def-pur-supported-hom-site-comparison. New existing:true def node def-pur-supported-class-normalizations owns functorialCupHasDerived/Reindex/FullSupportIso on the unchanged SupportedCupFunctoriality; statement verbatim in the live module, no other owner. All 11 used decls of that module have def-node owners, no .choose of the theorem. All stmt_deps live or delivered; statements verbatim; not dropped. Maths spot-checked, agreeing with the earlier full reading: concentration pinned per v, nothing assumed on T, IsIso/H^{2b} identity/vanishing/TransferTruncation-pinned aK,aD with inverses, sheaf exchange, restriction and coefficient compatibilities; b=0, empty B/Z, any affine B, negative r covered; ordinary etale only; no hollow defs."
  }
 }
