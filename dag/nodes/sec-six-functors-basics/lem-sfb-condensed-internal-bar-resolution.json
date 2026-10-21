@@ -13,9 +13,136 @@
   "sk-def-sfb-module-objects",
   "lem-pc-sheaf-modules-tensor-closed"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First transfer the statement to sheaves of modules. Since $A$ is a commutative condensed ring, its reconstructed section-ring sheaf is $A$ itself, and [def-weil-pbc-internal-abelian-sheaf-module-equivalence] gives an equivalence $E_A$ from internal $A$-module objects [sk-def-sfb-module-objects] to $\\mathcal M=\\operatorname{Mod}(A)$, sheaves of $A$-modules, leaving underlying abelian sheaves, sections and morphisms unchanged; in particular it commutes with the forgetful functors to condensed sets, so it carries free internal modules to free objects of $\\mathcal M$, and it carries kernel, image and cokernel subobjects to the same subsheaves. By [lem-pe-internal-section-tensor-comparison], $E_A$ is exact and carries the internal relative tensor product to $\\otimes_A$ of $\\mathcal M$, with $E_A(A)=A$ and pure tensors $m\\otimes n\\mapsto m\\otimes n$, compatibly with associators and unitors. Hence every assertion of the statement, including the tensored complexes, may be proved in $\\mathcal M$, which all remaining steps do. For a condensed set $X$, form the presheaf $F_X(S)=A(S)[X(S)]$ of free $A(S)$-modules; restriction sends $a[x]$ to $a|_T[x|_T]$. By [lem-pc-sites-module-sheafification-interface], its module sheafification $F_X^\\#$ exists and maps from it to an $A$-module sheaf $M$ are exactly presheaf-module maps $F_X\\to M$. Such a map is uniquely specified by a natural assignment $x\\mapsto m_x\\in M(S)$, by the formula $\\sum a_x[x]\\mapsto\\sum a_xm_x$. These assignments are exactly maps of condensed sets $X\\to M$. Thus $F_X^\\#$ realizes the free module $A[X]$ specified in the statement. For any map $u:X\\to Y$, its linearization is $[x]\\mapsto[u(x)]$; equalities between linearized maps can be checked on these generators before sheafification. For the terminal sheaf $1$, $F_1=A$, so $A[1]=A$.",
+   "uses": [
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; free-module construction in proof of lemma-universal-module, applied to A[X]."
+   }
+  },
+  {
+   "text": "For condensed sets $X,Y$, sectionwise bilinear extension gives inverse maps\n$$A(S)[X(S)]\\otimes_{A(S)}A(S)[Y(S)]\\ \\rightleftarrows\\ A(S)[X(S)\\times Y(S)],\\qquad [x]\\otimes[y]\\longleftrightarrow[(x,y)].$$\nThe inverse respects the tensor relations because $(\\sum a_x[x],\\sum b_y[y])$ is sent to $\\sum_{x,y}a_xb_y[(x,y)]$; both composites are the identity on generating tensors or generators. These maps commute with restriction. Sheafify and use [lem-pc-sites-module-sheafification-tensor] with ring presheaf $A=A^\\#$ to obtain\n$$A[X]\\otimes_A A[Y]\\cong A[X\\times Y].$$\nThe displayed maps, their inverses and their compatibility with maps of $X,Y$ are retained. This is a calculation with free modules, not an assertion that their sections after sheafification are sectionwise free.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, lemma-sheafification-tensor."
+   }
+  },
+  {
+   "text": "If a condensed group acts on $X$, linearize its action map $\\underline G\\times X\\to X$ and use the isomorphism of step 2 to obtain $A[\\underline G]\\otimes_A A[X]\\to A[X]$. On generators this is $[g]\\otimes[x]\\mapsto[gx]$; the group laws are verified on $[g]\\otimes[h]\\otimes[x]$. Consequently the diagonal actions on $P_n$ are internal $A$-linear actions. Deleting coordinate $i$ is a continuous equivariant map $G^{n+1}\\to G^n$, since deletion of $(gg_0,\\ldots,gg_n)$ is $g$ times the deleted tuple. Its linearization is therefore an equivariant module map. Their signed sum is $\\partial_n$. The map to $A=A[1]$ induced by $\\underline G\\to1$ is the stated augmentation and is equivariant for the trivial action. For actions on an arbitrary module sheaf, sectionwise extension on $A(S)[G(S)]\\times M(S)$ is bilinear and natural; [lem-pc-sites-module-sheafification-bilinear-extension] uniquely extends it after sheafifying the first factor, since the second factor and target are already sheaves. The tensor universal property then gives the corresponding action map. Its uniqueness justifies checking equivariance on group generators and arbitrary module sections.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the internal homogeneous bar input."
+   }
+  },
+  {
+   "text": "On a generator $[g_0,g_1]$, $\\epsilon\\partial_1=1-1=0$. In $\\partial_n\\partial_{n+1}$, fix two original indices $0\\le i<j\\le n+1$. Deleting $j$ and then $i$ contributes sign $(-1)^{j+i}$; deleting $i$ and then original $j$ (now at index $j-1$) contributes $(-1)^{i+j-1}$. The resulting tuple is identical and the coefficients sum to zero. Every ordered double deletion belongs to exactly one such pair. Thus the composite is zero on every generator and hence zero as an internal module map by step 1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the internal homogeneous bar input."
+   }
+  },
+  {
+   "text": "Forget the $G$-action for the following maps. The continuous insertion $G^{n+1}\\to G^{n+2}$, $(g_0,\\ldots,g_n)\\mapsto(1,g_0,\\ldots,g_n)$, gives $h_n:P_n\\to P_{n+1}$. Set $h_{-1}:A\\to P_0$ to be $a\\mapsto a[1]$. Then $\\epsilon h_{-1}=\\mathrm{id}_A$. Expanding the differential on an inserted tuple gives, for $n\\ge1$,\n$$\\partial_{n+1}h_n[g_0,\\ldots,g_n]=[g_0,\\ldots,g_n]-h_{n-1}\\partial_n[g_0,\\ldots,g_n].$$\nIndeed deleting the inserted $1$ is the first term, and deleting original coordinate $i$ has sign $(-1)^{i+1}$, the negative of its sign in $h_{n-1}\\partial_n$. In degree zero the expansion is $\\partial_1h_0[g]=[g]-[1]$, so $\\partial_1h_0+h_{-1}\\epsilon=\\mathrm{id}_{P_0}$. These generator equalities give identities of sheaf-module morphisms. No equivariance of $h_n$ is required or claimed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the internal homogeneous bar input."
+   }
+  },
+  {
+   "text": "The underlying module category is abelian by [lem-pur-ringed-site-module-category-abelian], applied to the small site in the statement and its commutative ring sheaf $A$. Put $d_0=\\epsilon$ and $d_n=\\partial_n$ for $n\\ge1$. For the kernel inclusion $k_n:K_n\\to P_n$, step 5 yields\n$$k_n=d_{n+1}h_nk_n+h_{n-1}d_nk_n=d_{n+1}h_nk_n.$$\nThus $k_n$ factors through $d_{n+1}$, so $\\ker d_n\\subseteq\\operatorname{im}d_{n+1}$. The reverse inclusion follows from step 4. This proves exactness at every $P_n$ in underlying modules. The identity $\\epsilon h_{-1}=\\mathrm{id}_A$ proves that the augmentation is a split epimorphism there, giving exactness at $A$ as well.",
+   "uses": [
+    "lem-pur-ringed-site-module-category-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the internal homogeneous bar input."
+   }
+  },
+  {
+   "text": "To justify exactness in equivariant modules, set $B=A[\\underline G]$ in $\\mathcal M=\\operatorname{Mod}(A)$. Step 2 linearizes group multiplication to $B\\otimes_A B\\to B$ with $[g]\\otimes[h]\\mapsto[gh]$, and gives unit $A\\to B$, $1\\mapsto[1]$. Associativity and unity are generator equalities. An internal linear $G$-action on $M$ gives the $B$-module action $[g]\\otimes m\\mapsto gm$ by linear extension; conversely restrict a $B$-module action to the generators $g\\mapsto[g]$. These constructions are inverse because linear maps from a free module are determined on its generators; the module laws become the group-action laws, and $g^{-1}$ provides the inverse action. The morphism conditions also agree. Thus equivariant modules and their forgetful functor are the $B$-module objects [sk-def-sfb-module-objects] in $\\mathcal M$ and their forgetful functor. Here $B$ is a monoid object; it is not assumed commutative. More explicitly, the map $A(S)[G(S)]\\times M(S)\\to M(S)$ sends $(\\sum a_g[g],m)$ to $\\sum a_g(gm)$ and is $A(S)$-bilinear. It is natural in $S$. By [lem-pc-sites-module-sheafification-bilinear-extension] it uniquely extends to $B\\times M\\to M$ as a bilinear sheaf map, hence to $B\\otimes_A M\\to M$. This construction, rather than global lifting of arbitrary sections to generators, supplies the claimed action and its uniqueness.",
+   "uses": [
+    "sk-def-sfb-module-objects",
+    "lem-pc-sites-module-sheafification-bilinear-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the internal homogeneous bar input."
+   }
+  },
+  {
+   "text": "The tensor of $\\mathcal M$ is additive and closed by [lem-pc-sheaf-modules-tensor-closed]. For fixed $B$, its tensor functor preserves finite colimits: if $L=\\operatorname{colim}_i M_i$, the adjunction identifies maps $B\\otimes_A L\\to N$ with maps $L\\to\\mathcal Hom_A(B,N)$, hence with compatible maps $M_i\\to\\mathcal Hom_A(B,N)$, hence with compatible maps $B\\otimes_A M_i\\to N$. This proves the colimit universal property. In particular [lem-sfb-modobj-abelian] makes the category of $B$-module objects abelian. Then [lem-sfb-modobj-kernels] and [lem-sfb-modobj-cokernels] apply to $B$ in $\\mathcal M$: equivariant kernels and cokernels are computed in underlying modules, with their uniquely induced actions. Images, being kernels of cokernels, are computed there as well. If the underlying image and kernel coincide, their action structures agree by uniqueness on the same subobject; the resulting identification is equivariant. Similarly a zero underlying cokernel is a zero equivariant cokernel. Consequently the exactness and augmentation surjectivity proved in step 6 hold in equivariant modules.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sfb-modobj-kernels",
+    "lem-sfb-modobj-cokernels",
+    "lem-sfb-modobj-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the internal homogeneous bar input."
+   }
+  },
+  {
+   "text": "Let $T$ be any internal $A$-module with trivial action. By [lem-pc-sheaf-modules-tensor-closed], $-\\otimes_A T$ is an additive functor and $A\\otimes_A T\\cong T$. Apply this functor to the identities of steps 4 and 5. The maps $h_n\\otimes\\mathrm{id}_T$ and $h_{-1}\\otimes\\mathrm{id}_T$ satisfy the same contracting identities for the augmented tensored complex, with augmentation to $T$. The kernel-factorization argument of step 6 now proves exactness in underlying modules, including the split surjectivity onto $T$. The tensor actions $g(p\\otimes t)=(gp)\\otimes t$ make the differentials and augmentation equivariant. Step 8 proves exactness in equivariant modules. This argument uses additivity and the explicit contraction, so it imposes no flatness condition on $T$.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the internal homogeneous bar input."
+   }
+  },
+  {
+   "text": "Define $c_n:G^{n+1}\\to G\\times G^n$ by\n$$c_n(g_0,\\ldots,g_n)=(g_0,g_0^{-1}g_1,\\ldots,g_{n-1}^{-1}g_n).$$\nIts inverse sends $(a,b_1,\\ldots,b_n)$ to $(a,ab_1,ab_1b_2,\\ldots,ab_1\\cdots b_n)$. The composites are identities by cancellation of adjacent inverse factors. Both maps are continuous because multiplication and inverse in $G$ are continuous and only finitely many coordinates occur. For $u\\in G$, $(ug_{i-1})^{-1}(ug_i)=g_{i-1}^{-1}g_i$, while the first coordinate becomes $ug_0$; thus $c_n$ is equivariant for left translation on the first factor and trivial action on the other factors. Linearizing $c_n$ and its inverse, then applying the product/free-tensor identification of step 2, gives\n$$P_n\\cong A[\\underline G]\\otimes_A A[\\underline G^n]$$\nwith precisely the stated action. At $n=0$, $G^0=1$ and this is the unit isomorphism $A[\\underline G]\\cong A[\\underline G]\\otimes_A A$. No projectivity assertion enters the construction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: agent expansion of the internal homogeneous bar input."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pur-ringed-site-module-category-abelian",
+  "sk-def-sfb-module-objects",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-modobj-kernels",
+  "lem-sfb-modobj-cokernels",
+  "lem-sfb-modobj-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), internal homogeneous bar input: explicit free-sheaf construction and insertion-of-identity contraction; supporting sheafification is Stacks 03CY and 0GMW."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +185,52 @@
    "results": "{\"t\": \"2026-10-21T14:50:06Z\", \"tool\": \"leanfinder\", \"query\": \"Augmented simplicial bar resolution of a group object in condensed modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"Rep.barResolution\", \"Rep.barResolution_complex\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"Rep.standardResolution\", \"Rep.barComplex\", \"Rep.standardComplex.compForgetAugmentedIso\", \"Rep.standardComplex.forget₂ToModuleCat\"], \"digest\": \"1bb2aa8da60690e4\"}",
    "date": "2026-10-21",
    "verdict": "no match: read Rep.barResolution and its standard-complex identification (Resolution.lean:393-445), Condensed.profiniteFree (Solid.lean:44-46), and LightCondensed.ihomPoints (InternallyProjective.lean:48-60). The bar resolution is for an abstract group acting on ordinary modules; the condensed declarations construct free objects or underived Hom with constant coefficients. None states exactness of the internal augmented bar complex for a variable condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The augmented homogeneous bar complex of free internal modules on powers of a condensed group is exact by insertion of the identity",
+   "results": "{\"t\": \"2026-10-21T15:17:11Z\", \"tool\": \"leanfinder\", \"query\": \"The augmented homogeneous bar complex of free internal modules on powers of a condensed group is exact by insertion of the identity\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Profinite.NobelingProof.succ_exact\", \"groupCohomology.shortComplexH0_exact\", \"Rep.barResolution_complex\", \"groupHomology.shortComplexH0_exact\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"Rep.barResolution\", \"classifyingSpaceUniversalCover.compForgetAugmented.toModule\", \"Rep.barComplex\"], \"digest\": \"47507f286c0ffa90\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read Mathlib/RepresentationTheory/Homological/Resolution.lean:160-162, 249-255, 408-443 and Mathlib/Condensed/Solid.lean:40-46. Rep resolutions and contractions concern an abstract group over an ordinary constant ring; Condensed.profiniteFree only defines free modules over an ordinary ring. No declaration states the full internal augmented resolution over a variable condensed ring, its arbitrary-module tensor exactness and its continuous equivariant induced presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"bar\"",
+   "results": "{\"t\": \"2026-10-21T15:17:12Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"bar\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read Mathlib/RepresentationTheory/Homological/Resolution.lean:160-162, 249-255, 408-443 and Mathlib/Condensed/Solid.lean:40-46. Rep resolutions and contractions concern an abstract group over an ordinary constant ring; Condensed.profiniteFree only defines free modules over an ordinary ring. No declaration states the full internal augmented resolution over a variable condensed ring, its arbitrary-module tensor exactness and its continuous equivariant induced presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "barResolution|barComplex|free.*profinite",
+   "results": "{\"t\": \"2026-10-21T15:17:12Z\", \"tool\": \"grep\", \"query\": \"barResolution|barComplex|free.*profinite\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Sequence.lean\", \"Mathlib/Condensed/Solid.lean\", \"Mathlib/Condensed/Solid.lean\", \"Mathlib/Condensed/Solid.lean\", \"Mathlib/Condensed/Solid.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\", \"Mathlib/Condensed/Light/InternallyProjective.lean\"], \"digest\": \"f0c2914718506f3f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read Mathlib/RepresentationTheory/Homological/Resolution.lean:160-162, 249-255, 408-443 and Mathlib/Condensed/Solid.lean:40-46. Rep resolutions and contractions concern an abstract group over an ordinary constant ring; Condensed.profiniteFree only defines free modules over an ordinary ring. No declaration states the full internal augmented resolution over a variable condensed ring, its arbitrary-module tensor exactness and its continuous equivariant induced presentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A split augmented bar complex of a group object in sheaves of modules remains exact after tensoring with any module",
+   "results": "{\"t\": \"2026-10-21T15:17:13Z\", \"tool\": \"leansearch\", \"query\": \"A split augmented bar complex of a group object in sheaves of modules remains exact after tensoring with any module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.lTensor_shortComplex_exact\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.rTensor_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"CategoryTheory.ShortComplex.exact_iff_exact_map_forget₂\", \"CategoryTheory.ShortComplex.Splitting.exact\", \"CategoryTheory.ShortComplex.Splitting.shortExact\", \"CategoryTheory.ShortComplex.Splitting\"], \"digest\": \"ba35b8dee2202be9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read Mathlib/RepresentationTheory/Homological/Resolution.lean:160-162, 249-255, 408-443 and Mathlib/Condensed/Solid.lean:40-46. Rep resolutions and contractions concern an abstract group over an ordinary constant ring; Condensed.profiniteFree only defines free modules over an ordinary ring. No declaration states the full internal augmented resolution over a variable condensed ring, its arbitrary-module tensor exactness and its continuous equivariant induced presentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of commutative rings the sheafified free homogeneous group complex has a contracting homotopy after forgetting the action",
+   "results": "{\"t\": \"2026-10-21T15:21:16Z\", \"tool\": \"leanfinder\", \"query\": \"For a sheaf of commutative rings the sheafified free homogeneous group complex has a contracting homotopy after forgetting the action\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv\", \"Rep.standardComplex.εToSingle₀_comp_eq\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"Rep.standardComplex.forget₂ToModuleCatHomotopyEquiv_f_0_eq\", \"AlgebraicTopology.DoldKan.homotopyPInftyToId\", \"AlgebraicTopology.DoldKan.homotopyQToZero\", \"instQFactorsThroughHomotopyDown\", \"AlgebraicTopology.DoldKan.homotopyHσToZero\"], \"digest\": \"111da8d1af94dd28\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read Mathlib/RepresentationTheory/Homological/Resolution.lean:160-162, 249-255, 408-443 and Mathlib/Condensed/Solid.lean:40-46. Rep resolutions and contractions concern an abstract group over an ordinary constant ring; Condensed.profiniteFree only defines free modules over an ordinary ring. No declaration states the full internal augmented resolution over a variable condensed ring, its arbitrary-module tensor exactness and its continuous equivariant induced presentation."
+  },
+  {
+   "tool": "grep",
+   "query": "barResolution|barComplex|extraDegeneracyCompForgetAugmentedToModule",
+   "results": "{\"t\": \"2026-10-21T15:21:16Z\", \"tool\": \"grep\", \"query\": \"barResolution|barComplex|extraDegeneracyCompForgetAugmentedToModule\", \"sub\": \"RepresentationTheory/Homological\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/Resolution.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/Basic.lean\"], \"digest\": \"6ffe83358ac18321\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: read Mathlib/RepresentationTheory/Homological/Resolution.lean:160-162, 249-255, 408-443 and Mathlib/Condensed/Solid.lean:40-46. Rep resolutions and contractions concern an abstract group over an ordinary constant ring; Condensed.profiniteFree only defines free modules over an ordinary ring. No declaration states the full internal augmented resolution over a variable condensed ring, its arbitrary-module tensor exactness and its continuous equivariant induced presentation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-condensed-derived-invariant-bar",
@@ -85,5 +254,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-condensed-internal-bar-resolution",
+  "worker": "stage1",
+  "summary": "NG supplies a ten-step proof without new nodes. Constructs the free internal modules by module sheafification, writes the product/tensor maps and double-deletion cancellation, and inserts the identity to contract the forgotten augmented complex. Existing generic module-object kernel/cokernel results justify reflection of exactness from underlying modules, avoiding an equivariant contraction claim. Tensoring preserves the contraction for arbitrary T; explicit inverse coordinate maps prove the induced presentation. Statement unchanged. No completed project attachment or Mathlib match.",
+  "blueprint": "Inherited non-blueprint chain has ancestor None. This realizes the formal internal bar input to paragraph (3), open direct image, of sk-thm-sf-ctf-stability-direct-images.proof.md. Steps 1-4 construct the resolution, 5-8 prove its exactness, 9 proves tensor exactness and 10 proves the induced presentation. Whole-blueprint searches homogeneous bar and free internal found no matching statement.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Generic module sheafification universal property gives the actual free internal module on a condensed set; it is a Mathlib tool, not a replacement geometric route."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic ringed-site sheafification/tensor comparison turns the explicit sectionwise free-module product maps into the internal tensor isomorphism."
+   },
+   {
+    "node": "lem-pur-ringed-site-module-category-abelian",
+    "why": "Generic abelianness for modules on a small ringed site supplies kernels and images for the explicit contracting-homotopy argument."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic internal-module closed additive tensor supplies additivity for the contraction after tensoring, and the adjunction used to verify the group-algebra cokernel hypotheses."
+   },
+   {
+    "node": "lem-sfb-modobj-kernels",
+    "why": "Generic monoid-module kernel construction shows the internal group-algebra forgetful functor creates kernels; no condensed-group comparison is assumed."
+   },
+   {
+    "node": "lem-sfb-modobj-cokernels",
+    "why": "Generic monoid-module cokernel construction shows the internal group-algebra forgetful functor creates cokernels once tensor preservation of finite colimits has been verified."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic bilinear extension through module sheafification constructs the action of the internal group algebra on an arbitrary module sheaf; this avoids assuming its sections globally have finite generator expressions."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Generic abelianness of modules over a monoid object gives the abelian category of group-algebra module objects, after tensor preservation of finite colimits is proved explicitly."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic comparison of the internal relative tensor of module objects with the ringed-site tensor; needed because the statement is about internal module objects while the explicit calculation is made in sheaves of A-modules. No node of the unit gives it. Added by the maintainer reader."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pur-ringed-site-module-category-abelian",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-modobj-kernels",
+  "lem-sfb-modobj-cokernels",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-sfb-modobj-abelian",
+  "lem-pe-internal-section-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NG-41e5e72e7",
+  "group": "NG",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-41e5e72e7 (reviewer sub-agent of L); spot-checked: Read the item's 10 steps in full against every cited statement: the three sheafification lemmas (interface, tensor, bilinear-extension), ringed-site abelianness, lem-pc-sheaf-modules-tensor-closed, and modobj kernels/cokernels/abelian. Their hypotheses hold: small site via def-weil-size-convention, A commutative, B⊗− a left adjoint so it preserves finite colimits, B noncommutative allowed. The mathematics is correct. Double-deletion signs (−1)^{i+j} against (−1)^{i+j−1} cancel. The contraction h_n[g]=[1,g] gives ∂h+h∂=id, and in degree 0 ∂₁h₀[g]=[g]−[1] with h₋₁ε=id. Kernels factor through d, ε is split, and exactness passes to Mod_{A[G]} because the forgetful functor creates kernels and cokernels. Tensoring with any T is additive, so no flatness is needed. c_n is equivariant for left translation on the first coordinate. Small cases: trivial G (alternating 1/0 differentials), n=0, non-flat T, A=0. No new nodes. The only near match, lem-sfb-bar-resolution-cochains, is the ordinary Z[G] resolution and not a duplicate. No SGA, no re-split note. Fault C1/C4: the statement is about internal A-module objects [sk-def-sfb-module-objects] with the internal relative tensor, but all steps work in Mod(A) with ⊗_A and nothing identified the two. FIX: step 1 now opens with a transfer through def-weil-pbc-internal-abelian-sheaf-module-equivalence and lem-pe-internal-section-tensor-comparison (exact, tensor- and unit-compatible, underlying sheaves unchanged). Both were added to uses and proof_deps, and the tensor comparison to split_report.tool_uses. Checked acyclic. All 8 declared tool uses accepted as generic tools.; 1 file(s) fixed by the reviewer"
  }
 }
