@@ -489,5 +489,48 @@
   "group": "Q56",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-20a08894a (reviewer sub-agent of L); spot-checked: Read the item and all 27 cited statements in full; review.md has the step-by-step checks. The delivery adds no new nodes. The item is not dropped, has no repair note and is still unsplit live. Only citer: lem-pur-scalar-extension-tower-coherence. No SGA. The statement correction is valid: 'quotient inclusions' becomes the induced maps i_n of def-weil-integral-scalar-extension. Ramified test: E=Q_l, L=Q_l(sqrt l), n=2, the class of l maps to 0. No weakening. Main checks: Step 2's K-flat induction uses 06YS/0G7E/07A2 and needs no ring flatness. Step 4: normalization is preserved, via c_{f,g} with the 2-iso clause and the monoidal t_h. Steps 8 and 14: I recomputed the counit-naturality algebra (c_H=e R(beta_A), then d_H R(a_H)=alpha c_H). Step 9: the unit is the strict augmentation, read off the derived-fraction Hom bijection on a K-injective resolution. Steps 10-13: completion is a reflection, from the adjoint equivalence and normalization of R Z for all ambient Z. So a_H nu_H = u b_H fixes a unique arrow. This matches how lem-pur-integral-operations-scalar-extension's own proof builds a_F,a_T (completion exchange respecting quotient units, then chi). Hypotheses (l invertible, D^b_c inputs complete) are present where chi and the ambient models need them. All 20 off-unit statements are declared in tool_uses, and I accept them as generic infrastructure. The closure of 3065 nodes has no cycle. Maintainer notes: (1) lem-trf-integral-pullback-comparison-realization (Q42) separately specifies a_f=mu^-1 lambda, the realization of the same strict association, for the pullback half only. The two characterizations agree; it is not a duplicate. (2) The inherited phrase 'canonical tensor-association normalization' is made exact only in Step 13; a later statement edit could write that equation into the statement."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedScalarComparisonRealization",
+  "declaration": "WeilConjectures.normalizedScalarComparisonRealization",
+  "declarations": [
+   "WeilConjectures.IsNormalizedScalarTensorRealization",
+   "WeilConjectures.NormalizedScalarTensorRealization",
+   "WeilConjectures.normalizedScalarSystemTotal",
+   "WeilConjectures.normalizedScalarSystemChain",
+   "WeilConjectures.IsNormalizedScalarTensorChain",
+   "WeilConjectures.IsNormalizedScalarTensorLocalization",
+   "WeilConjectures.normalizedScalarPullbackReduction",
+   "WeilConjectures.normalizedScalarTensorReduction",
+   "WeilConjectures.normalizedScalarExtensionReduction",
+   "WeilConjectures.NormalizedScalarFiniteGood",
+   "WeilConjectures.normalizedScalarFiniteRing",
+   "WeilConjectures.normalizedScalarFiniteComplexAt",
+   "WeilConjectures.NormalizedScalarGenerated",
+   "WeilConjectures.NormalizedScalarRepresentativeClosure",
+   "WeilConjectures.NormalizedScalarOperationModels",
+   "WeilConjectures.NormalizedScalarReductionEquations",
+   "WeilConjectures.NormalizedScalarLimitEquations",
+   "WeilConjectures.NormalizedScalarSystemPreservation",
+   "WeilConjectures.NormalizedScalarReductionsInvertible",
+   "WeilConjectures.NormalizedScalarQuotientAssociations",
+   "WeilConjectures.NormalizedScalarComparisonNaturality",
+   "WeilConjectures.normalizedScalarComparisonRealization"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedScalarComparisonRealization.lean",
+  "statement": "theorem normalizedScalarComparisonRealization (_hX : IsUnit (l : Γ(X, ⊤))) (_hY : IsUnit (l : Γ(Y, ⊤))) : NormalizedScalarRepresentativeClosure l E L ι f ∧ NormalizedScalarSystemPreservation l E L ι f EY LY ∧ NormalizedScalarQuotientAssociations l E L ι EX EY LX LY ∧ NormalizedScalarComparisonNaturality l E L ι f ∧ ∃ D : NormalizedScalarOperationModels l E L ι f EX EY LX LY, NormalizedScalarReductionsInvertible l E L ι f EX EY LX LY D ∧ NormalizedScalarReductionEquations l E L ι f EX EY LX LY D ∧ NormalizedScalarLimitEquations l E L ι f EX EY LX LY D",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The single statement packages the representative-normalized realization data, unique entire-system scalar/tensor localization, actual-counit reduction maps and both displayed equations for the recorded completed comparisons. All helper predicates and the generated finite-expression family belong to this node; no independent coefficient or operation construction is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-27f02cd4d",
+  "group": "O3",
+  "result": "pass",
+  "note": "Read item node, all 15 stmt_deps, worker report, the 705-line module, and the dependency sources: CoefficientDerivedSystemCalculus, the quarantined IntegralComparisonRealizationModels and IntegralComparisonSequenceSystems, IntegralOperationsScalarComparisons, CoefficientExtensionReductionModel. Every hypothesis and conclusion clause is matched. Calculi pin reduction as left adjoint of the specified limit. D's Roos, pullback and scalar models and the new tensor realization are all representative-normalized on every simultaneous presentation with generator formulas and the Roos bridge; the tensor version mirrors IsIntegralComparisonPullbackNormalized. sigma is fixed by the chain generator formula plus the counit/K-flat-model square and is unique; kappa = integralComparisonSystemScalarPullback, the unique localization of the generator-normalized association. a_F, a_T = scalarPullbackCompleted, scalarTensorCompleted. Both displayed equations and the limit consequences are correct in order and type. No flatness or limit-interchange assumption; universes as in the deps. Statement verbatim, 22 declarations present, one sorry, only the item's lean record changed. Advisory: QuotientAssociations restates coefficientExtensionReductionModel (faithful to the node's recalled citation); kappa's owner is reached indirectly and cochain-coherence is cited but unused in the statement; the dep modules are quarantined but their published oleans are fresh and the item is on rework-hold (pipeline matter); the parent tower-coherence item should reuse NormalizedScalarTensorRealization; duplicate import and stripped LaTeX backslashes are cosmetic. No recompile (no file changed)."
  }
 }
