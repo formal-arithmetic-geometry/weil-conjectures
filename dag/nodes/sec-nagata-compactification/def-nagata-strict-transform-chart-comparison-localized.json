@@ -3,24 +3,71 @@
  "blueprint": {
   "is": "def-nagata-strict-transform-chart-comparison-localized",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Localized strict-transform chart comparison",
- "statement": "After localizing the base ring or a chart ring, define\n$(\\overline\\sigma_a)_s$ by localizing the source and target of\n$\\overline\\sigma_a$ and transporting along the canonical tensor-product\nand iterated-localization associativity maps.",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, $I\\subseteq A$ an ideal, $a\\in I$, $b$ the image of $a$ in $B$, and $J=IB$. Write $R=C_a^{\\mathrm{st}}(A,B,I)$, $T=B[J/b]$, and $f=\\overline\\sigma_a:R\\to T$ for [def-nagata-strict-transform-chart-comparison]. Localizations at one element have the meaning of [def-weil-ring-localization-away].\n\nFor a chart element $c\\in R$, define the localized comparison\n$$f_c:R_c\\longrightarrow T_{f(c)},\\qquad \\frac{z}{c^n}\\longmapsto\\frac{f(z)}{f(c)^n}.$$\nPrecisely, this is the unique extension of $R\\xrightarrow{f}T\\to T_{f(c)}$ supplied by [lem-weil-pbc-localization-away-universal-property]. If $s\\in B$ (or $s\\in A$), take $c$ to be its structural image in $R$ and denote this map by $(\\overline\\sigma_a)_s$; the denominator in the target is the structural image of the same $s$.\n\nWhen the localized source and target are written in canonically isomorphic tensor-product or iterated-localization presentations, with isomorphisms $\\alpha:R_c\\xrightarrow{\\sim}R'$ and $\\beta:T_{f(c)}\\xrightarrow{\\sim}T'$, the notation means the transported homomorphism $\\beta\\circ f_c\\circ\\alpha^{-1}$. The tensor-localization identifications are those of [lem-weil-pbc-algebra-localization-away-base-change], with formula $(x/s^n)\\otimes y\\mapsto(x\\otimes y)/(s\\otimes1)^n$ (or the exchanged tensor factors). The iterated-localization identifications are the unique isomorphisms over the original ring from [lem-weil-pbc-localization-of-localization] and the localization universal property; for elements $s,t$ of a ring $E$, the identifications of $(E_s)_{t/1}$ and $(E_t)_{s/1}$ send an iterated fraction to $z\\,s^{-m}t^{-n}$ in $E_{st}$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-strict-transform-chart-comparison-localized.md",
   "place": "node def-nagata-strict-transform-chart-comparison-localized, order 152"
  },
  "stmt_deps": [
-  "def-nagata-strict-transform-chart-comparison"
+  "def-nagata-strict-transform-chart-comparison",
+  "def-weil-ring-localization-away",
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-algebra-localization-away-base-change",
+  "lem-weil-pbc-localization-of-localization"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Localize a ring homomorphism at an element in its source, sending fractions x/s^n to f(x)/f(s)^n, and localize a strict transform blowup chart comparison",
+   "results": "8 hits: RingHom.IsStandardOpenImmersion.holdsForLocalizationAway, Localization.localRingHom, Localization.localRingHom_mk', RingHom.HoldsForLocalization.localRingHom, AlgebraicGeometry.StructureSheaf.comapFun, AlgebraicGeometry.HasRingHomProperty.stalkwise, Localization.localRingHom_to_map, AlgebraicGeometry.HasRingHomProperty.stalkMap",
+   "date": "2026-10-21",
+   "verdict": "No exact match; returned local-ring maps and scheme localization tools. Second semantic phrasing below found awayMap."
+  },
+  {
+   "tool": "grep",
+   "query": "def awayMap|def awayLift|def mulEquiv|def tensorProductEquivTMulRight",
+   "results": "No hits: pattern used def but awayMap and awayLift are abbrev. Corrected grep query below found the declarations.",
+   "date": "2026-10-21",
+   "verdict": "Generic localization map/tool found; no exact match for the blow-up-specific definition including its presentation transports."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Localization of a ring homomorphism at a source element induced map between localized rings",
+   "results": "8 hits: Localization.localRingHom_mk', IsLocalization.map, IsLocalization.Away.map, IsLocalization.Away.mapₐ_apply, IsLocalization.map_unique, IsLocalization.Away.mapₐ, Localization.localRingHom, IsLocalization.map_mk'",
+   "date": "2026-10-21",
+   "verdict": "Generic localization map/tool found; no exact match for the blow-up-specific definition including its presentation transports."
+  },
+  {
+   "tool": "loogle",
+   "query": "Localization.awayMap",
+   "results": "12 hits: Localization.awayMap, Localization.awayMap_surjective_iff, Localization.awayMap_injective_iff, Localization.awayMap_surjective_of_dvd, Localization.awayMap_bijective_of_dvd, Localization.awayMap_injective_of_dvd, Localization.awayMap_awayMap_surjective, RingHom.RespectsIso.isLocalization_away_iff",
+   "date": "2026-10-21",
+   "verdict": "Generic localization map/tool found; no exact match for the blow-up-specific definition including its presentation transports."
+  },
+  {
+   "tool": "grep",
+   "query": "awayMap|awayLift|tensorProductEquivTMulRight|mulEquiv",
+   "results": "20 hits: Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/FractionRing.lean, Mathlib/RingTheory/Localization/Basic.lean, Mathlib/RingTheory/Localization/Basic.lean, Mathlib/RingTheory/Localization/BaseChange.lean",
+   "date": "2026-10-21",
+   "verdict": "Generic localization map/tool found; no exact match for the blow-up-specific definition including its presentation transports."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "induced homomorphism R[1/s] to S[1/f(s)] from a ring homomorphism f : R to S",
+   "results": "8 hits: IsLocalization.Away.map, Localization.awayMap, Localization.awayLift, IsLocalization.Away.lift, Localization.awayMapₐ, IsLocalization.Away.awayToAwayLeft, IsLocalization.Away.awayToAwayRight, IsLocalization.lift",
+   "date": "2026-10-21",
+   "verdict": "Generic localization map/tool found; no exact match for the blow-up-specific definition including its presentation transports."
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -48,5 +95,20 @@
   "statement": "After localizing the base ring or a chart ring, define\n$(\\overline\\sigma_a)_s$ by localizing the source and target of\n$\\overline\\sigma_a$ and transporting along the canonical tensor-product\nand iterated-localization associativity maps.",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-strict-transform-chart-comparison-localized",
+  "worker": "stage1",
+  "summary": "Q129: expanded the current blueprint definition into its typed source and target, fraction formula, and explicit conjugation by the canonical presentation isomorphisms. Reused the existing comparison definition and four localization/tensor tools; no new nodes and no proof obligations hidden inside a definition. The tagged Lean definition covers only localization at s in B with values in the ambient localization, so is not an exact attachment.",
+  "blueprint": "Current snapshot main-20261015, order 160: localizing source and target gives f_c; base-ring elements are inserted via structural maps; transport along tensor-product and iterated-localization associativity maps is beta composed with f_c composed with alpha inverse."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q129-befd82c24",
+  "group": "Q129",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q129-befd82c24 (reviewer sub-agent of L); spot-checked: I read the item in full: a definition split with 0 new nodes and 5 stmt_deps. It matches the main-20261015 definition (order 160): f_c sends z/c^n to f(z)/f(c)^n from R_c to T_{f(c)}. The map comes from lem-weil-pbc-localization-away-universal-property (Stacks 00CP), and f(c)/1 is a unit, so it exists. Base elements of A or B enter as their structural images. This is correct because sigma_a(y⊗1)=y, so the comparison is a B-algebra map. The transport is beta∘f_c∘alpha^{-1}. The tensor identification comes from lem-weil-pbc-algebra-localization-away-base-change (00DK/00DL), and the formula matches that node. The iterated-localization identification (E_s)_{t/1} ≅ E_{st} is unique over E, and the image z s^-m t^-n is correct. Identifying R_s with C^st(A,B_s,I) is left to lemma-nagata-strict-transform-chart-localization(-data), which cite this item, so there is no cycle. Nothing was weakened, and the route of unit sk-lem-nagata-sketch-blowups (step 1, 'commute with localization') is unchanged. Small cases checked: Z with I=(2), k[x,y]/(y) on the x-chart (R=T=k[x]), f(c)=0, c=0, c=1, and Z[1/6]. The Mathlib searches cover all three kinds. Localization.awayMap is the generic core of f_c, but the blow-up comparison f is not in Mathlib, so status split is right. B10: slopmaster2 has no declaration for this id. The live strictChartComparisonAway (StrictTransformChart.lean:565) handles only s∈B and lands in (B_s)_{b'}, so it is not exact and was rightly not attached. The item is not on the dropped list and is unsplit on live and side-live. Minor: the report says source now names order 160, but the JSON still names the master copy (order 152). The defining sentence is identical there, so I made no fix."
  }
 }
