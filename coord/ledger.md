@@ -21466,3 +21466,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:55 L: returned deliver/Q32/lem-sfb-monoidal-finite-free-transport (reviewer RETURN: Superseded by live (brief-stage1: live finished nodes win and are never split, superseded deliveries are discarded; B10,)
 - 08:58 L: merged deliver/Q100/lem-sp-normalized-error-tower-vanishing (reviewer PASS; first push; new nodes: 0)
 - 08:58 L: merged deliver/Q23/lem-pur-support-comparison-common-injectives (reviewer FIX; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q69/lem-sfb-lattice-supported-hom-reduction-tower (reviewer PASS; first push; new nodes: 0); claim not held by Q69: not your claim

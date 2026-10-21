@@ -24,9 +24,157 @@
   "sk-def-pe-derived-completion",
   "def-weil-derived-limit"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the finiteness needed for extension by zero and closed direct image. By the finite-type definition each scheme in the statement has a finite affine cover by spectra of finitely generated $k$-algebras. The affine Noetherian lemma makes the closed-subset descending-chain condition hold on each member of this finite cover; a descending chain therefore stabilizes globally by taking the maximum of the finitely many stabilization indices. Every subset of such a Noetherian space is quasi-compact. In particular $X,Z,B$ are qcqs (intersections of affine opens are quasi-compact), and $j,u,v$ and the open complements of $i,h$ are quasi-compact: the inverse image of any affine open is a subset of a Noetherian space. Thus all uses below of the pro-étale open/closed lemmas satisfy their quasi-compactness hypotheses.",
+   "uses": [
+    "def-weil-finite-type-morphism",
+    "lem-wf-affine-noetherian-components",
+    "lem-sfb-noetherian-space-compact-subsets"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Lattices and Integral targets"
+   }
+  },
+  {
+   "text": "On a pro-étale trivializing cover $L_0$ is $R_S^{\\oplus r}$. Its sheaf dual has the dual basis, hence is $R_S^{\\oplus r}$ on that cover. Evaluation and the basis coevaluation satisfy the two triangular identities by $e_i^\\vee(e_j)=\\delta_{ij}$ and glue because evaluation is intrinsic. In particular $L_0$ is finite locally projective and $L_0^\\vee$ is finite locally free, including rank zero. This verifies the source hypothesis of the support-Hom formula and the tensor hypothesis of the limit-preservation lemma.",
+   "uses": [
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Lattices and Integral targets"
+   }
+  },
+  {
+   "text": "Use the coefficient comparison $R_Y\\cong\\varprojlim_n A_{n,Y}$, with its actual quotient projections. The completed-coefficient free-resolution lemma then gives $[R_Y\\xrightarrow{\\pi_E^n}R_Y]\\to\\operatorname{Res}_n A_{n,Y}$ in degrees $-1,0$, K-flat and a quasi-isomorphism. On a cover where $M_0\\cong R_T^{\\oplus r}$ its tensor with $M_0$ is the direct sum of $r$ copies of this resolution. Thus $\\pi_E^n:M_0\\to M_0$ is injective, its cokernel is $M_0/\\pi_E^n$, and $M_0\\otimes^L_{R_T}A_{n,T}\\cong M_0/\\pi_E^n$ in $D(A_{n,T})$. The augmentation is the quotient map. Local isomorphisms here identify intrinsic quotient maps, so they glue.",
+   "uses": [
+    "sk-prop-sfb-qlbar-colimit-x",
+    "lem-sf-completed-coefficient-free-resolution",
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Lattices and Integral targets"
+   }
+  },
+  {
+   "text": "The canonical map $M_0\\to\\varprojlim_n M_0/\\pi_E^n$ is an isomorphism of sheaves. Indeed restriction to a slice is evaluation on its objects, so it preserves sheaf limits. On each trivializing slice this map is the finite direct sum of the coefficient isomorphism $R_T\\cong\\varprojlim_n A_{n,T}$ from the previous step; finite direct sums are finite products and commute with limits. Isomorphisms of sheaves are local, so the map is globally invertible. This argument allows locally varying ranks and does not commute stalks with infinite products. Each quotient transition is an epimorphism, since it is the factorization of the quotient $M_0\\to M_0/\\pi_E^n$ through $M_0/\\pi_E^{n+1}$.",
+   "uses": [
+    "def-pur-localized-ringed-site",
+    "sk-prop-sfb-qlbar-colimit-x",
+    "def-sfb-lisse-coefficient-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Lattices and Integral targets"
+   }
+  },
+  {
+   "text": "For the coefficients $R$, the module open/closed theorem makes $v_!$ and $h_*$ additive exact functors; the Cartesian coefficient isomorphisms identify their inverse-image coefficient rings with $R_T,R_B$. Applying $b_!=h_*v_!$ to the exact sequence $0\\to M_0\\xrightarrow{\\pi_E^n}M_0\\to M_0/\\pi_E^n\\to0$ gives $0\\to N\\xrightarrow{\\pi_E^n}N\\to N_n\\to0$ on underlying $R_X$-modules. The action on its last term factors through $A_{n,X}$; it is exactly the scalar restriction of $b_!(M_0/\\pi_E^n)$, since applying the same open/closed sheaf functors retains this quotient action. Using the K-flat resolution of $A_{n,X}$ from step 3, the derived reduction of $N$ is $[N\\xrightarrow{\\pi_E^n}N]$. Its augmentation to $N_n$ is a quasi-isomorphism. Hence $N_n\\simeq\\operatorname{Res}_n(N\\otimes^L_{R_X}A_{n,X})$. For $n+1\\to n$ the chain map is multiplication by $\\pi_E$ in degree $-1$ and identity in degree $0$; its augmentation is the quotient $N_{n+1}\\to N_n$. These comparisons are therefore compatible with all quotient transitions.",
+   "uses": [
+    "lem-weil-pbc-proetale-ringed-open-closed",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sf-completed-coefficient-free-resolution",
+    "def-sfb-module-lower-star",
+    "def-sfb-module-open-lower-shriek"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Lattices and Integral targets"
+   }
+  },
+  {
+   "text": "On module sheaves $v_!$ preserves products by the pro-étale extension-zero limit lemma; as an exact additive functor it preserves kernels, hence inverse limits of sequences (the limit is the kernel of $1-s$ on the product). The module adjunction $h^*\\dashv h_*$ and preservation of limits by right adjoints give the same property for $h_*$. Consequently applying $h_*v_!$ to the canonical sheaf limit in step 4 gives $N\\cong\\varprojlim_n N_n$, through the specified quotient projections. Exactness from step 5 makes the transitions $N_{n+1}\\to N_n$ epimorphic.",
+   "uses": [
+    "det-sf-open-closed-extension-zero-limits",
+    "def-sfb-module-upper-lower-adjunction",
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Lattices: exact extension by zero preserving limits (Stacks 09BP), and exact closed direct image (09BM) preserving limits as a right adjoint"
+   }
+  },
+  {
+   "text": "Apply the surjective-tower theorem on $X_{\\mathrm{proét}}$ with ring sheaf $R_X$ to the sheaves $N_n$. Its hypothesis is exactly the epimorphic quotient transitions established above. It identifies their sheaf product with their product in $D(R_X)$ and gives the distinguished Roos triangle $N\\to\\prod_nN_n\\xrightarrow{1-s}\\prod_nN_n\\to N[1]$, using the projections of step 6. Thus $N\\simeq R\\varprojlim_nN_n$. With the reduction identifications of step 5, this is the canonical completion map of the derived-completeness definition. In particular $N$ is derived complete, with the requested reduction tower.",
+   "uses": [
+    "lem-weil-proetale-surjective-tower-derived-limit",
+    "sk-def-pe-derived-completion"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 3.1.10, with 3.2.3 and 4.2.8; quotient-tower definition of completeness"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\underline{\\mathcal O_E}$, the closed-support limit lemma applies to $u^*R\\underline\\Gamma_{Z,R}$ and to tensor with the finite locally free $L_0^\\vee$ of step 2. Its statement specifies commutation by applying these functors to a Roos triangle. Apply the first functor and then the second to the Roos triangle in step 7. Their composites take $N,N_n$ to $F,F_n$, and identify the images of both products with $\\prod_nF_n$. The maps between products are $1-s_F$: their $n$th coordinates are $\\mathrm{pr}_n-T_R(N_{n+1}\\to N_n)\\mathrm{pr}_{n+1}$, because the additive functors preserve subtraction and the cited product comparisons preserve projections. This proves the asserted Roos triangle for $(F_n)$ and $F\\simeq R\\varprojlim_nF_n$.",
+   "uses": [
+    "sk-lem-formal-closed-support-ii"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+    "place": "Integral targets: the functors forming F commute with derived inverse limits of sequences"
+   }
+  },
+  {
+   "text": "Apply the ringed-site derived-sections limit theorem to the small pro-étale site of $S$, ring $R_S$, and its final object $S\\to S$. It identifies $R\\Gamma(S,\\prod_nF_n)$ with $\\prod_n R\\Gamma(S,F_n)$ through the actual projection maps and sends the triangle of step 8 to a Roos triangle in $D(\\operatorname{Ab})$. With $B_n=R\\Gamma(S,F_n)$ this yields $R\\Gamma(S,F)\\simeq R\\varprojlim_n B_n$, with quotient-induced transitions and with the coefficient action forgotten, exactly as stated. The indexing $n\\ge1$ is the reindexing $n=m+1$ of its $m\\ge0$ convention.",
+   "uses": [
+    "lem-kun-site-rgamma-derived-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6K, label lemma-RGamma-commutes-with-Rlim, first assertion"
+   }
+  },
+  {
+   "text": "Use the supported stratum-Hom theorem with coefficient $\\underline{\\mathcal O_E}$, $a=i\\circ u$ and the finite locally projective $L_0$ from step 2. Its quasi-compact complementary-open hypothesis was checked in step 1. At $K=N$ it gives $R\\operatorname{Hom}_{R_X}(Q,N)\\simeq R\\Gamma(S,F)$, and at $K=N_n$ it gives $R\\operatorname{Hom}_{R_X}(Q,N_n)\\simeq B_n$. Its termwise-tensor convention agrees with derived tensor for this dual, as its statement specifies. Compose the first identification with step 9. Finally the theorem's shifted-Hom formula, first at $N$ and then at each $N_n$, gives $\\Ext^q_{R_X}(Q,N)\\cong H^q(R\\varprojlim_nB_n)$ and $H^q(B_n)\\cong\\operatorname{Hom}_{D(R_X)}(Q,N_n[q])$ for every integer $q$, including negative $q$. All identifications of supported Hom are natural in the target by the cited statement.",
+   "uses": [
+    "det-lem-formal-closed-support-stratum-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sf-localization/sk-lem-formal-closed-support-stratum-hom.md",
+    "place": "three derived Hom isomorphisms and final shifted-Hom formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-finite-type-morphism",
+  "lem-wf-affine-noetherian-components",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "def-sfb-lisse-coefficient-module",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-sf-completed-coefficient-free-resolution",
+  "def-pur-localized-ringed-site",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "sk-prop-sfb-cartesian-coefficients",
+  "def-sfb-module-lower-star",
+  "def-sfb-module-open-lower-shriek",
+  "det-sf-open-closed-extension-zero-limits",
+  "def-sfb-module-upper-lower-adjunction",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "sk-def-pe-derived-completion",
+  "sk-lem-formal-closed-support-ii",
+  "lem-kun-site-rgamma-derived-limit",
+  "det-lem-formal-closed-support-stratum-hom"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-uniform-constructible-ext/sk-lem-uniform-constructible-ext.proof.md",
+  "place": "Lattices and Integral targets; explicit assembly using the existing quotient resolution, surjective-tower, support-limit and ringed-site sections lemmas"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -83,10 +231,31 @@
    "results": "No hits. The hits concern ordinary condensed colimits, generic derived categories or triangles, and ordinary limits; none states the supported lattice reduction-tower comparison or a one-line specialization. Searched Mathlib/Algebra/Homology/",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Global derived Hom from a locally closed finite free integral local system is the derived inverse limit of supported cohomology of target reductions",
+   "results": "localCohomology.diagram, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, CategoryTheory.Sheaf.H, AlgebraicGeometry.exists_appTop_π_eq_of_isLimit, AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit, AlgebraicGeometry.exists_appTop_map_eq_zero_of_isLimit, CategoryTheory.Sheaf.cohomologyPresheaf, CategoryTheory.Sheaf.cohomologyPresheafFunctor; read returned types: generic derived-category, ordinary/profinite limits, local cohomology, monoidal sheaves or unrelated adic algebra; none is the stated supported lattice comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Supported integral lattice derived Hom is inverse limit of derived global sections of finite quotient targets on a proetale site",
+   "results": "HasDerivedCategory.standard, ProfiniteGrp.isIso_toLimit, ProfiniteGrp.toLimit, DerivedCategory, ProfiniteGrp.toLimit_fun, ProfiniteGrp.isoLimittoFiniteQuotientFunctor, Profinite.asLimitCone, Profinite.lim; read returned types: generic derived-category, ordinary/profinite limits, local cohomology, monoidal sheaves or unrelated adic algebra; none is the stated supported lattice comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite locally free source and a complete target compute global derived Hom from a locally closed extension by a Roos triangle of reductions modulo powers of a uniformizer",
+   "results": "BDeRhamPlus, BDeRham, Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete, AlgebraicGeometry.finite_appTop_of_universallyClosed, AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType, Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq, AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType, AlgebraicGeometry.FormallyUnramified.formallyUnramified_appLE; read returned types: generic derived-category, ordinary/profinite limits, local cohomology, monoidal sheaves or unrelated adic algebra; none is the stated supported lattice comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-uniform-constructible-ext-integral",
@@ -103,5 +272,84 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-lattice-supported-hom-reduction-tower",
+  "worker": "stage1",
+  "summary": "Q69: checked the current blueprint, all cited statements, quotient maps and quasi-compactness. The split has ten explicit steps and reuses existing nodes, with no new node. Distinguished ordinary unbounded pulled-back-coefficient categories from completed models; no statement change or route change.",
+  "blueprint": "Realizes the Lattices paragraph (target completeness and reductions) and Integral targets through the displayed supported RHom/global-sections/derived-limit comparison of det-uniform-constructible-ext-integral. The later Milnor upper-bound argument belongs to the parent, not this item.",
+  "tool_uses": [
+   {
+    "node": "lem-wf-affine-noetherian-components",
+    "why": "Affine finite-type Noetherianity is used only to check quasi-compactness hypotheses of the unit’s open/closed functors."
+   },
+   {
+    "node": "lem-sfb-noetherian-space-compact-subsets",
+    "why": "Generic Noetherian topological compactness checks quasi-compactness of all complementary opens."
+   },
+   {
+    "node": "sk-prop-sfb-qlbar-colimit-x",
+    "why": "Only the integral coefficient identity with its quotient projections is used; no replacement of the unit’s proof route."
+   },
+   {
+    "node": "lem-sf-completed-coefficient-free-resolution",
+    "why": "Generic uniformizer free resolution computes ordinary integral derived reductions and their quotient maps."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic exactness of open extension and closed direct image for arbitrary ring sheaves, needed by the blueprint lattice argument."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic coefficient or categorical statement used to implement the unit’s prescribed lattice reduction argument; the unit has no such standalone statement."
+   },
+   {
+    "node": "det-sf-open-closed-extension-zero-limits",
+    "why": "Generic extension-zero product theorem implements Stacks 09BP in the blueprint lattice argument."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-limits",
+    "why": "Generic categorical preservation of limits is used for the closed direct image right adjoint."
+   },
+   {
+    "node": "lem-weil-proetale-surjective-tower-derived-limit",
+    "why": "Generic replete-topos quotient-tower theorem provides the Roos triangle from the actual sheaf limit."
+   },
+   {
+    "node": "sk-lem-formal-closed-support-ii",
+    "why": "Generic coefficient or categorical statement used to implement the unit’s prescribed lattice reduction argument; the unit has no such standalone statement."
+   },
+   {
+    "node": "lem-kun-site-rgamma-derived-limit",
+    "why": "Generic ringed-site derived sections theorem implements Stacks 0D6K, keeping the unit’s integral reduction route."
+   },
+   {
+    "node": "det-lem-formal-closed-support-stratum-hom",
+    "why": "The explicit shifted-Hom formula supplements the unit’s formal support-Hom lemma; same support-adjunction argument, with every cohomological degree included."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-wf-affine-noetherian-components",
+  "lem-sfb-noetherian-space-compact-subsets",
+  "sk-prop-sfb-qlbar-colimit-x",
+  "lem-sf-completed-coefficient-free-resolution",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "sk-prop-sfb-cartesian-coefficients",
+  "det-sf-open-closed-extension-zero-limits",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "lem-weil-proetale-surjective-tower-derived-limit",
+  "sk-lem-formal-closed-support-ii",
+  "lem-kun-site-rgamma-derived-limit",
+  "det-lem-formal-closed-support-stratum-hom"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q69-07a9af0ca",
+  "group": "Q69",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-07a9af0ca (reviewer sub-agent of L); spot-checked: I read the delivery in full. It adds a 10-step proof to the item (created 2026-10-21 by Q76, base proof empty) and adds no new nodes. The statement and stmt_deps are unchanged. It is not a re-split and not on the dropped list. The route matches the blueprint main-20261015 proof of sk-lem-uniform-constructible-ext, paragraphs Lattices (lines 22-35) and Integral targets (lines 59-70). Checks: step 1, X/Z/B Noetherian, so j, u, v and the closed complements are quasi-compact, as open/closed exactness, extension-zero limits and stratum-hom require. Step 2, lisse gives finite locally free and finite locally projective, rank 0 included. Steps 3-4, R_Y = lim A_n with the free-resolution node's B_T, pi^n injective, M_0 = lim M_0/pi^n by a local finite-sum argument. Step 5, b_! exact; N tensor^L A_n = [N -> N] ~ N_n; the transition chain map (pi, id) commutes. Step 6, v_! keeps products and kernels, h_* is a right adjoint, so N = lim N_n with epimorphic transitions. Step 7, the surjective-tower lemma gives the Roos triangle, and the canonical completion map is an isomorphism. Step 8, closed-support-ii with O_E (admissible) sends Roos triangles to Roos triangles. Step 9, the ringed-site RGamma-limit lemma on S_proet at U=S. Step 10, stratum-hom (quasi-compact j, locally projective L, all q) gives all displayed identifications. Edge cases tested: empty strata, rank 0, varying rank, identity immersions, n=1, ramified pi, negative q. No cycle; the only citer is the parent, which uses exactly the stated clauses. No duplicate found in the DAG. Off-unit tool_uses are generic, and I accept them. Batch-5 flag on sk-lem-formal-closed-support-ii: its path to lem-trf-geometric-inverse-image-exact runs through sk-lem-formal-closed-support, which is already a base stmt_dep of the item. A closure walk finds no trace-formula or Poincare-duality node added by the new citations. The flagged node is a generic topos fact (geometric inverse image is exact), not part of either assumption or its proof, so I accept it."
  }
 }
