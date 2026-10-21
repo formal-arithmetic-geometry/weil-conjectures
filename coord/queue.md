@@ -1,6 +1,6 @@
 # Work queue
 
-196 items; claim with `tools/claim.py next <group> [--stage N]`.
+192 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (22 clusters, 954 modules)
 
@@ -33,7 +33,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 87, stage 3 5 items.
 
-## Stage 1: nodes to split (14)
+## Stage 1: nodes to split (13)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -49,22 +49,20 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-bicosimplicial-shuffle-totalization` | 4013 | none |
 | `lem-sfb-nonnegative-derived-totalization` | 4013 | none |
 | `lem-sfb-snc-root-limit-normal-charts` | 4013 | none |
-| `lem-pe-internal-module-sectionwise-short-exact` | - | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (28)
+## Stage 2: nodes to state (27)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
 | `def-sfb-finite-derived-adjunction` | 1 | state | 0 |
 | `lem-tw-lisse-rational-realization` | 1 | state | 5 |
-| `lem-sfb-pointed-finite-etale-limit-cover` | 1 | state | 2 |
 | `det-lem-stratified-lattice-scheme` | 1 | state | 0 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-fd-whole-tower-integral-pullback-comparison` | 1 | state | 0 |
+| `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
 | `lem-pod-fixed-pair-truncation-cohomology` | 1 | state | 0 |
-| `lem-pur-concentrated-support-etale-transfer` | 1 | state | 0 |
 | `lem-sf-open-exchange-roos-restriction` | 1 | state | 0 |
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-complete-group-torsor-monodromy` | 1 | state | 0 |
@@ -85,9 +83,9 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-weil-point-derived-tensor-tower-coherence` | 1 | state | 0 |
 | `lem-sfb-integral-quotient-projection-comparison` | 2 | state | 0 |
 
-Not open yet: 375 nodes that below a finished node, not needed, 105 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 375 nodes that below a finished node, not needed, 105 nodes that wait for a statement dependency (bottom-up), 12 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (125)
+## Stage 3: modules to prove (123)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -102,7 +100,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | - | 5 | proof | 1 |
 | `Sheaf.Paper.PerfectProjectionFormula` | 3 | 3 | proof | 2 |
 | `Sheaf.Paper.ProjectionMateExact` | 3 | 1 | proof | 2 |
-| `Sheaf.CategoryTheory.InternalSectionScalarAdjunction` | - | 1 | proof | 2 |
 | `Sheaf.Paper.CompletedCoefficientPushforwardComparison` | - | 1 | proof | 2 |
 | `Sheaf.Paper.FiniteStagePairCategory` | - | 8 | proof | 2 |
 | `Sheaf.Paper.PbcDescentFunctors` | - | 1 | proof | 2 |
@@ -122,7 +119,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Algebra.Homology.DerivedTensorShiftDescent` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.TotalTensorHomotopyConeSigns` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.KoszulFibreLinearDescent` | - | 1 | proof | 4 |
-| `Sheaf.CategoryTheory.RingedConstantTowerPushforwardNormalization` | - | 1 | proof | 4 |
 | `Sheaf.Paper.CompletedPullbackReduction` | - | 5 | proof | 4 |
 | `Sheaf.Paper.DerivedCompletedTensorBilinearity` | - | 1 | proof | 4 |
 | `Sheaf.Paper.FiniteFreeQuotientCompletion` | - | 1 | proof | 4 |
@@ -228,14 +224,12 @@ Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean stat
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | `lem-sfb-integral-ambient-tower-comparison` |
 | `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | `lem-weil-point-derived-tensor-tower-coherence` |
 
-## Stage 3: held for an open upstream PR (5)
+## Stage 3: held for an open upstream PR (3)
 
 Not items: an open Orchestra branch or PR of the source library proves the module (~/upstream-pr/upstream-pending.tsv, the human, 2026-10-18: do not duplicate Orchestra's open PRs); the routine sync brings the proof, and the hold ends when no sorry is left.
 
 | module | source |
 |---|---|
 | `WeilConjectures.SixFunctors.ProEtale.BaseChange.SmoothBaseChange` | bundle/sec-smooth-purity-d3 |
-| `WeilConjectures.SixFunctors.ProEtale.ConstructibleSheaf` | bundle/sec-smooth-purity-d3 |
-| `WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.Derived.Perfect` | bundle/sec-poincare-duality-c1 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.UpperLowerStar` | bundle/sec-smooth-purity-d3 |
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal` | bundle/sec-smooth-purity-d1 |
