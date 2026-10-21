@@ -1,6 +1,6 @@
 # Work queue
 
-192 items; claim with `tools/claim.py next <group> [--stage N]`.
+198 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (22 clusters, 954 modules)
 
@@ -33,21 +33,25 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 87, stage 3 5 items.
 
-## Stage 1: nodes to split (13)
+## Stage 1: nodes to split (17)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
 | `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
-| `lem-sfb-tame-inertia-continuous-koszul` | 4010 | none |
+| `lem-sfb-dense-lattice-derived-invariants-comparison` | 4011 | none |
+| `lem-sfb-discrete-lattice-koszul-resolution` | 4011 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
+| `lem-sfb-prime-to-ell-derived-invariants-reduction` | 4011 | none |
 | `lem-sfb-root-tower-boundary-acyclicity` | 4011 | none |
 | `lem-sfb-supported-finite-stage-topology-defect` | 4011 | none |
-| `lem-sfb-root-tower-inner-support` | 4012 | none |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 4012 | none |
 | `lem-sfb-snc-universal-residual-charts` | 4012 | none |
 | `lem-sfb-bicosimplicial-shuffle-totalization` | 4013 | none |
+| `lem-sfb-finite-closed-cover-resolution` | 4013 | none |
 | `lem-sfb-nonnegative-derived-totalization` | 4013 | none |
+| `lem-sfb-root-tower-coordinate-face` | 4013 | none |
+| `lem-sfb-root-tower-puncture-invariance` | 4013 | none |
 | `lem-sfb-snc-root-limit-normal-charts` | 4013 | none |
 | `def-per-support-condition` | - | none |
 
@@ -80,12 +84,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-tame-root-tower-extension` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sp-cofinal-finite-reduction-constructibility` | 1 | state | 0 |
-| `lem-weil-point-derived-tensor-tower-coherence` | 1 | state | 0 |
 | `lem-sfb-integral-quotient-projection-comparison` | 2 | state | 0 |
+| `lem-sfb-tame-inertia-continuous-koszul` | 2 | state | 0 |
 
-Not open yet: 375 nodes that below a finished node, not needed, 105 nodes that wait for a statement dependency (bottom-up), 12 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 375 nodes that below a finished node, not needed, 106 nodes that wait for a statement dependency (bottom-up), 16 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (123)
+## Stage 3: modules to prove (125)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -170,6 +174,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralOperationsScalarComparisons` | - | 13 | proof | 8 |
 | `Sheaf.Paper.IntegralPullbackComparisonRealization` | - | 1 | proof | 8 |
 | `Sheaf.Paper.IntegralPullbackReductionCounit` | - | 1 | proof | 8 |
+| `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | proof | 8 |
 | `Sheaf.Paper.SfIntegralCompactSupportConstructible` | - | 2 | proof | 8 |
 | `Sheaf.Paper.WeilIndSheafCategory` | - | 8 | proof | 8 |
 | `Sheaf.Algebra.Homology.FiniteFreeCompletionExchangeCoherence` | - | 2 | proof | 9 |
@@ -183,6 +188,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.IntegralCoherenceTower` | - | 1 | proof | 9 |
 | `Sheaf.Paper.IntegralTowerInverseImageUnit` | - | 1 | proof | 9 |
 | `Sheaf.Paper.PointDerivedSectionsTensorDescent` | - | 1 | proof | 9 |
+| `Sheaf.Paper.PointDerivedTensorTowerCoherence` | - | 1 | proof | 9 |
 | `Sheaf.Paper.PointFiniteFreeSectionsTensor` | - | 1 | proof | 9 |
 | `Sheaf.Paper.QuotientSystemMixedCoherence` | - | 3 | proof | 9 |
 | `Sheaf.SixFunctors.CompactSupportProperImageTower` | - | 1 | proof | 9 |
@@ -215,14 +221,13 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.AlgebraicGeometry.TopBaseChangePresheaf` | - | 1 | proof | 18 |
 | `Sheaf.AlgebraicGeometry.DerivedAdjunctionTopEdge` | - | 1 | proof | 19 |
 
-## Stage 3: waiting for statements of dependencies (2)
+## Stage 3: waiting for statements of dependencies (1)
 
 Not items: a node in the dependencies (stmt_deps or proof_deps) has no Lean statement yet (the human, 2026-10-17 and 2026-10-18).
 
 | module | distance to a target | sorry | waits for (first unstated node) |
 |---|---|---|---|
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | `lem-sfb-integral-ambient-tower-comparison` |
-| `Sheaf.Paper.PointSectionsScalarExtension` | - | 14 | `lem-weil-point-derived-tensor-tower-coherence` |
 
 ## Stage 3: held for an open upstream PR (3)
 
