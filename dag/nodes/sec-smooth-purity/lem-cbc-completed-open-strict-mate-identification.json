@@ -317,5 +317,40 @@
   "group": "Q106",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-751be40ba (reviewer sub-agent of L); spot-checked: I read the item and all 18 cited nodes in full, plus Stacks 03DI (sites-modules l.2058) and the main-20261015 lem-cbc-completed-extension-zero-comparison proof. The statement is unchanged. The item is not dropped, has no re-split note, has no new nodes and is still unsplit live. I found no duplicate: the lem-zl-framework and lem-fix compactification comparisons state other things. Steps 1-5 and 8 are correct. The strict finite exchange supplies the simultaneous strict maps and the inverse open-unit transpose; restriction to constant A preserves the units (open-tensor-normalization, finite-open-exchange-scalars over a ring sheaf acting through (P_n)); the strict equality descends to b r(omega) = beta a (I checked the inversion order); and Step 5 checks every hypothesis of the exact-product lemma for j'_! (j' quasi-compact by base change). Defect (C1/C4/E5): Steps 6-7 turn the scalar restriction of the completed-ring extension/limit comparison lambda^comp_{j'} into the constant-A lambda_{j'}. That needs the pasting equation between the scalar/limit comparisons lambda_r, the iso e: r J = J r and the two lambda_J; the step only gestured at it, through a one-functor characterization. The existing same-unit node lem-cbc-ringed-open-scalar-limit-coherence states exactly this equation; it is unsplit with no proof deps, so citing it creates no cycle, and its hypotheses hold (j' quasi-compact; constant A -> completed A ring map). FIX: Steps 2, 6 and 7 now cite it, Step 6 writes out the source comparison L(a) lambda_r and the target comparison via the lemma's equation, and proof_deps is updated. I checked the edge cases U empty, u = id, K = 0 and unbounded K. I accepted the generic tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedOpenStrictMateIdentification",
+  "declaration": "AlgebraicGeometry.Scheme.completedOpenStrictMateIdentification",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcOpenMateSource",
+   "AlgebraicGeometry.Scheme.cbcOpenMateTarget",
+   "AlgebraicGeometry.Scheme.cbcOpenMateOmega",
+   "AlgebraicGeometry.Scheme.cbcOpenMateM",
+   "AlgebraicGeometry.Scheme.cbcOpenMateN",
+   "AlgebraicGeometry.Scheme.cbcOpenMateN'",
+   "AlgebraicGeometry.Scheme.cbcOpenMateA",
+   "AlgebraicGeometry.Scheme.cbcOpenMateB",
+   "AlgebraicGeometry.Scheme.cbcOpenMateBeta",
+   "AlgebraicGeometry.Scheme.cbcOpenMateQC",
+   "AlgebraicGeometry.Scheme.cbcOpenMateCompletedA",
+   "AlgebraicGeometry.Scheme.cbcOpenMateCompletedB",
+   "AlgebraicGeometry.Scheme.completedOpenStrictMateIdentification",
+   "AlgebraicGeometry.Scheme.completedOpenStrictMateIdentification_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedOpenStrictMateIdentification.lean",
+  "statement": "theorem completedOpenStrictMateIdentification [QuasiCompact j] (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = d.ideal) (K : (cbcCompleteProperty d U r a ha).FullSubcategory) (_completeOpen : cbcCompleteProperty d T r a ha ((cbcDerivedOpenShriek d j inferInstance).obj K.obj)) : (exchangeTowerRes d T').map (cbcOpenMateOmega d sq K.obj).hom ≫ (cbcOpenMateB d (j' := j') (v := v) K.obj).hom = (cbcOpenMateA d (j := j) (g := g) K.obj).hom ≫ (cbcOpenMateBeta d sq K.obj).hom ∧ (cbcRealizationRes d T').mapDerivedCategory.map ((cbcDatumCompletedExchange d sq r a ha).app K) ≫ (cbcOpenMateCompletedB d (j' := j') (v := v) K.obj).hom = (cbcOpenMateCompletedA d (j := j) (g := g) K.obj).hom ≫ (completedRlim T' (exchangeConstantRing T' A)).map (cbcOpenMateBeta d sq K.obj).hom ≫ (@cbcRealizationOpenLimit _ _ d U' T' j' inferInstance (cbcOpenMateQC sq)).inv.app ((ProEtale.StrictTower.G A v).obj ((cbcOpenMateM d (U := U)).obj K.obj)) ∧ ∀ n : ℕ, HEq ((pbcTowerEvaluation T' (pbcAdicCompletion T' d) n).map (cbcOpenMateOmega d sq K.obj).hom ≫ (cbcTargetFiniteComparison d sq n).hom.app K.obj) ((pbcTowerEvaluation T' (pbcAdicCompletion T' d) n).map ((completedTowerPullback g d).map (cbcRealizationReduction d j K.obj).hom) ≫ (cbcSourceFiniteComparison d sq n).hom.app K.obj ≫ (cbcFiniteExchange d sq n).hom.app ((cbcFiniteReduction d U n).obj K.obj))",
+  "branch": "sheaf-dag",
+  "by": "N6",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the existing actual strict exchange and canonical endpoint definitions; states strict mate equality, ordered completed-limit equality, finite evaluation, and naturality. CompleteProetaleStrictTowerRealization is imported only for its independently constructed endpoint definitions; its realization theorem is never used. Its proof import of this module must be omitted to avoid a module cycle (stages/2-statements.md section 3.7)."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b77aade98",
+  "group": "N6",
+  "result": "pass",
+  "note": "Read the item, the stmt_dep sources (CompletedRingStrictFiniteExchange, CompletedOpenExchangeTransport, CompleteProetaleStrictTowerRealization endpoint defs, StrictTowerProperOpenArrows beta/betaInvApp, exchangeResPull) and the report. Every clause matches the node: omega = G_g(cbcRealizationReduction) then cbcReductionStrictExchange (the actual strict exchange, built before evaluation); beta = StrictTower.beta from J_j then G_g to G_v then J_j', inverse = open-unit transpose; b r(omega) = beta a stated in D(strict towers); r(beta_comp) = lambda^-1 L(beta) with canonical CompletedA/B endpoints, beta_comp = cbcDatumCompletedExchange, lambda = cbcRealizationOpenLimit; finite HEq has defeq types and follows from the dependency's clause; 5 naturality squares. QuasiCompact j only (j' derived), j_!K completeness hypothesis as in the node, no extra assumptions, universes u/u+1 as in the deps. lean.statement verbatim and declarations list exact; stmt_deps and statement unchanged; the def-weil-pbc-completed-pullback snapshot diff is base staleness (live stage-3 landing 11:13 after base 10:13). No hollow defs; proofs are sorry; docstrings OK. No compile (per instructions; worker reports clean 7.4 s and dry run OK). Maintainer note: the item imports the parent module CompleteProetaleStrictTowerRealization (parent proof_deps cite the item), so the parent's stage-3 import would cycle; move cbcRealization* endpoint defs into a def-node interface module. Advisory: non-stmt_dep owner modules (StrictTowerExchangeMateNormalization, CompletedStrictOpenExchange, CompletedFiniteExchangeCoordinates); unused proof-only plain imports."
  }
 }
