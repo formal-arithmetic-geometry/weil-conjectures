@@ -22022,3 +22022,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:01 L: merged deliver/Q11/lem-pur-injective-tower-roos-shifts (stage 2; reviewer PASS; parallel immutable checks)
 - 10:01 L: merged deliver/Q81/lem-a1-point-realization-standard-cohomology (stage 2; reviewer PASS; parallel immutable checks)
 - 10:02 L: returned deliver/Q48/lem-weil-ramified-pullback-tower-identification (reviewer RETURN: L: independent stage-2 immutable head 5eb2f9fe2c4d: H13/H4: the delivery rebinds Q30's landed def-weil-integral-scalar-e)
+- 10:02 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
