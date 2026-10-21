@@ -21671,3 +21671,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:12 L: merged deliver/Q36/lem-sf-locally-closed-closure-adjoint-realization (reviewer FIX; first push; new nodes: 0)
 - 09:12 L: merged deliver/Q38/lem-sf-locally-closed-relative-transpose-normalization (reviewer PASS; first push; new nodes: 0); claim not held by Q38: not your claim
 - 09:12 L: merged deliver/NR/lem-sf-exact-pullback-counit-normalization (reviewer PASS; first push; new nodes: 0)
+- 09:12 L: merged deliver/Q35/lem-sf-derived-immersion-comparison-normalization (reviewer PASS; first push; new nodes: 0)

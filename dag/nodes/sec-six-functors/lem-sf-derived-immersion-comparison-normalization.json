@@ -22,9 +22,160 @@
   "pqf-def-locnoeth",
   "def-weil-pbc-quasi-compact-scheme"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "All inverse images here are exact on constant-$A$ modules: use [lem-sf-comparison-pullback-exact] for $C_T$, [prop-weil-pbc-inverse-image-modules-exact] for etale restriction, and [def-weil-pbc-proetale-operations] with [prop-weil-pbc-proetale-constant-ring-map] for pro-etale restriction. The latter definition identifies the module pullback with exact abelian inverse image when the coefficient map is invertible. Both open extensions are exact by [lem-weil-pbc-extension-by-zero-exact] and [lem-weil-extension-by-zero-exact]. By [lem-weil-pbc-exact-functor-derived-factorization], all edges in the open comparison squares preserve quasi-isomorphisms and descend canonically. Their termwise localization is the functor intended in the statement, with its canonical exact-composition identifications; in particular this applies on unbounded complexes.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-proetale-operations",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-weil-extension-by-zero-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04JC (lemma-flat-pullback-exact), 03DJ (lemma-extension-by-zero-exact); constant-ring identifications as in the cited nodes"
+   }
+  },
+  {
+   "text": "First work on sheaves, writing $E=j_{e,!}$, $r=j_e^*$, $J=j_{p,!}$, $s=j_p^*$ and $o=o_j$. The comparison $o$ is the canonical one, so [lem-sf-open-comparison-unit-normalization] gives\n$$s(o_F)a_{EF}C_U(\\eta^e_F)=\\eta^p_{C_UF}.$$\nThe $a$ in that node is precisely the canonical pullback comparison of the statement, not an independently chosen identification. This is the required open unit equation before localization.",
+   "uses": [
+    "lem-sf-open-comparison-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison, common-right-adjoint proof; unit normalization as recorded by the cited refinement"
+   }
+  },
+  {
+   "text": "Derive the sheaf counit equation explicitly. The open adjunctions are [lem-weil-pbc-extension-by-zero-adjunction] and [lem-weil-extension-by-zero-adjunction]. Put\n$$y=C_X(e^e_M)o_{rM}^{-1}:JC_UrM\\longrightarrow C_XM.$$\nIts $J\\dashv s$ transpose, using the preceding unit equation at $F=rM$, is\n$$s(y)\\eta^p_{C_UrM}=s(C_Xe^e_M)a_{ErM}C_U(\\eta^e_{rM})\n=a_M C_U(r(e^e_M)\\eta^e_{rM})=a_M.$$\nThe middle equality is naturality of $a$; the last is the etale triangle identity. The inverse-transpose formula therefore gives $y=e^p_{C_XM}J(a_M)$. Compose with $o_{rM}$ on the right to obtain exactly the asserted counit equation on sheaves.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-extension-by-zero-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison; elementary transpose calculation from the preceding unit equation and the two specified open adjunctions"
+   }
+  },
+  {
+   "text": "Use [def-weil-exact-derived-adjunction] for the exact open adjunctions: their derived units and counits are the localized termwise sheaf units and counits. Apply [lem-sp-exact-derived-transformation-pasting] to the two sheaf equalities of Steps 2 and 3, with the exact functors of Step 1. Its cells need not be invertible, so it applies to units and counits as well as to $a,o$. It gives both displayed open equations, for all unbounded $L,M$, with exactly the specified termwise $a_j,o_j$ and their canonical composition identifications.",
+   "uses": [
+    "def-weil-exact-derived-adjunction",
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; localization of adjunction transformations and their finite pasting equations"
+   }
+  },
+  {
+   "text": "The etale open unit is invertible by [lem-weil-pbc-extension-by-zero-unit-iso]. This abelian-sheaf statement applies to the underlying abelian sheaves of constant-$A$ modules: the extension presheaf and its adjunction maps are the same after forgetting the $A$-action [def-weil-pbc-extension-by-zero]. An inverse to an $A$-linear bijection is $A$-linear, since $f(ax)=af(x)$ implies $f^{-1}(ay)=af^{-1}(y)$. The termwise inverse is a chain map by naturality, and localizes to the inverse derived unit. The open unit equation of Step 4, whose other factors are invertible, also makes the pro-etale unit at $C_UL$ invertible. It says precisely that $j_p^*(o_{j,L})$, identified on its source by $a_{j,j_{e,!}L}$ and these units, is the identity of $C_UL$.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-unit-iso",
+    "def-weil-pbc-extension-by-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 0F70, lemma-jshriek-open; module version is the same canonical map with its coefficient action"
+   }
+  },
+  {
+   "text": "For a closed $h:Z\\hookrightarrow X$, its complementary open immersion $v$ is quasi-compact. Indeed, for every quasi-compact open $V\\subset X$, the inverse image $V\\cap(X\\setminus Z)$ is an open subscheme of the Noetherian scheme $X$, hence is quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]. Apply [lem-exc-proetale-closed-exact] to obtain exactness of $h_{p,*}$; the quasi-compactness just checked is its essential hypothesis. On the etale site [lem-trf-oriented-closed-base-localization] identifies $Z_e$ with the closed complement and states exactness and invertibility of the module counit for its direct image. Thus $h_{e,*}$ is exact too. The pro-etale sheaf counit is invertible by [lem-exc-proetale-closed-fully-faithful]. These facts concern all constant-$A$ module sheaves, without constructibility assumptions. Also $h$ is separated and universally closed by [lem-weil-pbc-closed-immersion-integral-separated-uc], hence quasi-compact by [lem-weil-pbc-universally-closed-quasi-compact] and quasi-separated by [lem-pc-separated-quasi-separated]. This verifies the hypotheses of the named direct-image mate comparison used in Step 8.",
+   "uses": [
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-exc-proetale-closed-exact",
+    "lem-trf-oriented-closed-base-localization",
+    "lem-exc-proetale-closed-fully-faithful",
+    "lem-weil-pbc-closed-immersion-integral-separated-uc",
+    "lem-weil-pbc-universally-closed-quasi-compact",
+    "lem-pc-separated-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BM, lemma-closed-immersion-complement-retrocompact-exact; Tag 09AA, lemma-closed-immersion; etale closed complement: Tag 04CA and sites-modules.tex Tag 08M3"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-exact-functor-derived-functor], the right derived functors of the two now-exact closed direct images are their termwise localizations, with the canonical universal derived comparisons. Their derived adjunctions agree, under these comparisons, with [def-weil-exact-derived-adjunction]. To check the normalization, use the canonical Hom formula of [lem-pc-pre-derived-adjoint-functors-general] for $F=h_{\\tau,*}$ and $G=h_\\tau^*$. Both are exact. Every quasi-isomorphism $s:K\\to I$ is sent to an isomorphism, so $QF(s)^{-1}$ gives the representing cocone for $RF(K)=QF(K)$; likewise $QG(t)^{-1}$ gives the representing cone for $LG(M)=QG(M)$. These diagrams are isomorphic to constant diagrams, verifying essential constancy. For $s=t=1$, the cited formula identifies the transpose of $Qf$ with $Q(f^\\sharp)$; for all other fraction representatives it is the same formula with the inverse images of $s,t$ inserted. The localized ordinary adjunction has this formula too, so uniqueness in that node identifies the Hom bijections. Consequently the canonical derived closed counits are precisely the localized ordinary counits, rather than counits of arbitrarily chosen isomorphic adjunctions.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-weil-exact-derived-adjunction",
+    "lem-pc-pre-derived-adjoint-functors-general"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; Tag 0FND, lemma-pre-derived-adjoint-functors-general, fraction formula specialized to two exact functors"
+   }
+  },
+  {
+   "text": "On sheaves, the defining transpose formula for $\\delta_h^0$ gives\n$$\\varepsilon^p_{h,C_ZF}h_p^*(\\delta^0_{h,F})a_{h,h_{e,*}F}=C_Z(\\varepsilon^e_{h,F});$$\nthis is the inverse-transpose identity of [def-weil-pbc-adjunction-mate]. All functors in this equality are exact by Steps 1 and 6. Therefore [lem-sp-exact-derived-transformation-pasting], together with the counit identification of Step 7, gives the same equation on $D^+$ for the termwise descent $D(\\delta_h^0)$. On the other hand [lem-weil-pbc-comparison-direct-image-canonical-mate] defines $\\delta_h$ as the transpose of $C_Z(\\varepsilon^e_h)a_h^{-1}$ and supplies the same equation. Both maps therefore have the same transpose under $h_p^*\\dashv Rh_{p,*}$, so the bijectivity in [def-weil-pbc-adjunction-mate] gives $D(\\delta_h^0)=\\delta_h$. The closed-immersion instance of the named comparison is exactly the one fixed in the statement; its isomorphism assertion now also shows that this particular localized mate is invertible.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-sp-exact-derived-transformation-pasting",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0B65, lemma-transformation-between-functors-and-adjoints; derived.tex Tag 015F for passage of the sheaf transpose equation to exact derived functors"
+   }
+  },
+  {
+   "text": "The closed sheaf counits in Step 6 are natural isomorphisms. Their termwise inverses are chain maps and remain inverse after localization, so Step 7 makes both closed derived counits invertible. The equation of Step 8 consequently reads\n$$\\varepsilon^p_{h,C_ZL}\\,h_p^*(\\delta_{h,L})\\,a_{h,h_{e,*}L}\\,(C_Z\\varepsilon^e_{h,L})^{-1}=1_{C_ZL},$$\nwhich is exactly the stated closed restriction normalization. The analogous open normalization was proved in Step 5. Finally [lem-weil-pbc-comparison-pullback] supplies identity and composite compatibility of the canonical sheaf pullback comparisons. [lem-sp-exact-derived-transformation-pasting] carries those equations with their compositors to the derived comparisons. Thus all restrictions above use the canonical composition identifications as asserted, including identity and empty immersions.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sp-exact-derived-transformation-pasting"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, exact localization of the canonical restriction maps; cancellation of the invertible counits and preservation of the composition equations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-comparison-pullback-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-adjunction",
+  "def-weil-exact-derived-adjunction",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "def-weil-pbc-extension-by-zero",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-exc-proetale-closed-exact",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-exc-proetale-closed-fully-faithful",
+  "lem-weil-pbc-closed-immersion-integral-separated-uc",
+  "lem-weil-pbc-universally-closed-quasi-compact",
+  "lem-pc-separated-quasi-separated",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-tower/lem-weil-finite-duality-site-comparison.proof.md",
+  "place": "Second proof paragraph, locally closed comparison; explicit open transpose calculation and exact-localization proof of the closed counit mate, using Stacks 09AF, 09BM, 09AA, 04CA, 015F and 0FND."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -81,10 +232,52 @@
    "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; generic adjunction or scheme/site declarations only; no stated site-derived normalization result.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|jshriek|closedImmersion",
+   "results": "none; 0 hits; actual returned signatures read.",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction/localization or module-pullback declarations supply inputs, not the named etale/pro-etale immersion normalization assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact adjunction of sheaf functors descends to derived categories with its units counits and conjugate natural transformations",
+   "results": "CategoryTheory.Adjunction.derivedη.congr_simp, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.mk, stalkSkyscraperSheafAdjunction; 8 hits; actual returned signatures read.",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction/localization or module-pullback declarations supply inputs, not the named etale/pro-etale immersion normalization assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction\", \"localization\"",
+   "results": "CategoryTheory.Adjunction.isLocalization, CategoryTheory.Adjunction.isLocalization', CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.Localization.ε, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.Localization.η_app, CategoryTheory.Adjunction.Localization.ε_app, CategoryTheory.Adjunction.localization_counit_app; 12 hits; actual returned signatures read.",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction/localization or module-pullback declarations supply inputs, not the named etale/pro-etale immersion normalization assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For finite constant module sheaves on etale and proetale sites the derived extension by zero comparison preserves adjunction units and counits and the closed direct image mate is the termwise sheaf mate",
+   "results": "CondensedMod.LocallyConstant.adjunction, CategoryTheory.constantSheafAdj_counit_w, SheafOfModules.pushforwardPushforwardAdj, LightCondMod.LocallyConstant.adjunction, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app; 8 hits; actual returned signatures read.",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction/localization or module-pullback declarations supply inputs, not the named etale/pro-etale immersion normalization assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical pullback comparison between etale and proetale module sheaves commutes with open extension by zero and its adjunction unit",
+   "results": "SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjUnitToUnit, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality; 8 hits; actual returned signatures read.",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction/localization or module-pullback declarations supply inputs, not the named etale/pro-etale immersion normalization assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "proetale|jshriek|comparisonUpperStar",
+   "results": "Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean, Mathlib/AlgebraicGeometry/Sites/Proetale.lean; 10 hits; actual returned signatures read.",
+   "date": "2026-10-21",
+   "verdict": "no match: general adjunction/localization or module-pullback declarations supply inputs, not the named etale/pro-etale immersion normalization assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-finite-duality-locally-closed-comparison",
@@ -103,5 +296,119 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-derived-immersion-comparison-normalization",
+  "worker": "stage1",
+  "summary": "Reused existing sheaf open-unit normalization, exact localization/pasting, closed exactness and full-faithfulness nodes. Derived the missing open counit equation by transposition and identified the localized closed sheaf mate with the specified derived mate by equality of their transposes. Checked Noetherian complement quasi-compactness and the normalization of the actual canonical derived counits; no new nodes or statement change.",
+  "blueprint": "Realizes the second proof paragraph of lem-weil-finite-duality-site-comparison: the open/closed factors used for the locally closed exceptional comparison, via lem-weil-finite-duality-locally-closed-comparison. This is the normalization subargument, not a replacement of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "def-weil-pbc-proetale-operations",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-exact",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-sf-open-comparison-unit-normalization",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-adjunction",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-extension-by-zero-adjunction",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-sp-exact-derived-transformation-pasting",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-unit-iso",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "def-weil-pbc-extension-by-zero",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-exc-proetale-closed-fully-faithful",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-pc-pre-derived-adjoint-functors-general",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Generic sheaf/adjunction/exact-localization input used for the specified open and closed site comparisons; this unit contains no replacement for this input and its proof route is unchanged."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-comparison-pullback-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-pbc-proetale-operations",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-extension-by-zero-exact",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "lem-weil-extension-by-zero-adjunction",
+  "lem-sp-exact-derived-transformation-pasting",
+  "lem-weil-pbc-extension-by-zero-unit-iso",
+  "def-weil-pbc-extension-by-zero",
+  "lem-exc-proetale-closed-exact",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-exc-proetale-closed-fully-faithful",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "lem-pc-pre-derived-adjoint-functors-general",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q35-52e9ad3cb",
+  "group": "Q35",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q35-52e9ad3cb (reviewer sub-agent of L); spot-checked: Read the whole item (statement and 9 steps), all 39 cited node statements, the citer lem-weil-finite-duality-locally-closed-comparison and the main-20261015 proof of lem-weil-finite-duality-site-comparison. The statement, stmt_deps and source are byte-identical to the earlier unsplit copy, so nothing was weakened. Not a re-split delivery, no new nodes, no SGA. Step 2: lem-sf-open-comparison-unit-normalization states the open unit equation with the same canonical a and c. Step 3: recomputed the counit transpose (unit equation at rM, naturality of a, triangle identity give transpose a_M) and the indices match the statement. Step 4: def-weil-exact-derived-adjunction plus the pasting node, which allows non-invertible cells; all edges are exact by Step 1, unbounded case included. Step 6: Noetherian X makes the complement retrocompact, so 09BM applies; the etale exactness and counit come from the trf closed-subtopos node; 09AA gives the pro-etale counit; qcqs is checked through three Mathlib leaves. Step 7: def-weil-pbc-proetale-operations defines the canonical derived adjunction as the 0FND bijection; checked the cocones QF(s)^-1 and QG(t)^-1 and that the localized adjunction satisfies the same characterizing formula, so uniqueness identifies the counits. Step 8: D(delta^0) and delta_h have the same p-adjunction transpose, so they are equal. Step 9: cancelling the invertible localized counits gives the identity. Edge cases (empty U or Z, identity immersions, A=0, nonreduced Z) hold. Checked Stacks tags 09BM, 09AA, 09AF, 0F70, 04JC, 03DJ, 015F, 0FND and 0B65 at their labels. All off-unit tool uses are declared and generic; I accept them. No duplicate found among the open-comparison counit/unit nodes. Minor, no change needed: the report calls 08BJ a componentwise adjunction argument, but its label is adjoint-preserve-K-injectives; no step cites it."
  }
 }
