@@ -22,202 +22,106 @@
  ],
  "proof": [
   {
-   "text": "Choose a complex $C$ representing $L$ and an integer $b$ such that $H^n(C)=0$ for $n<b$. Replace $C$ by $L^\\bullet$ with zero terms below $b$, term $C^b/\\operatorname{im}(d^{b-1})$ in degree $b$, and terms $C^n$ above $b$, with the induced differential. The quotient map $C\\to L^\\bullet$ induces the identity on cohomology in degrees at least $b$ and is an isomorphism on the zero cohomology objects below $b$. It is therefore a quasi-isomorphism. Put $M_i^\\bullet=S_i\\otimes_R L^\\bullet$. Every $M_i^\\bullet$ vanishes termwise below the same integer $b$.",
+   "text": "Choose a representative D of L with cohomology zero below b. Its good lower truncation C has $D^b/\\operatorname{im}d^{b-1}$ in degree b and zero terms below b; $D\\to C$ is a quasi-isomorphism by the cohomology formula. Choose a flat-term K-flat representative P of K. Put $J=I_R(C)$, $B=\\mathcal Hom(P,J)$ and $F=\\operatorname{homFixed}(P)$ in the strict models. The one-K-flat transpose lemma identifies the evaluation transposes used below with chain evaluation, without assuming B K-flat.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "def-pc-tensor-complex-sheaves"
+    "lem-pc-kflat-resolution",
+    "def-sfb-internal-hom-strict-models",
+    "lem-sfb-hom-kflat-chain-transpose"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Agent argument: explicit lower good truncation, using cohomology and quasi-isomorphisms as in Tag 05RU (derived-definition-unbounded-derived-category)."
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), proof: arbitrary first complex and K-flat second factor; agent refinement fixing the chain transpose on one-sided models."
    }
   },
   {
-   "text": "For any $R$-module sheaf $A$, tensor-colimit preservation gives $S\\otimes_R A\\cong\\varinjlim_i(S_i\\otimes_R A)$. The size hypothesis on the site and the smallness of $I$ are precisely those required by [lem-weil-pbc-independent-sheaf-tensor-colimits]. A finite basis of $S_i$ identifies $S_i\\otimes_R A$ with $A^{d_i}$: the maps send $e_a\\otimes x$ to the $a$-th summand and conversely. Thus tensoring with $S_i$ is exact, including $d_i=0$. Apply these exact functors to a short exact sequence and take its exact filtered colimit. The displayed tensor-colimit identification proves that $S\\otimes_R-$ is exact as well. In particular, applying the same identification in every degree gives $\\varinjlim_i M_i^\\bullet\\cong S\\otimes_R L^\\bullet$.",
+   "text": "Tensor-colimit preservation gives $S\\otimes A=\\varinjlim_i(S_i\\otimes A)$. Each stage functor is $A\\mapsto A^{d_i}$ and is exact; the assumed exact filtered colimit makes $S\\otimes-$ exact. Exact functors commute with cohomology, so these tensors compute derived scalar extension and exact termwise colimits preserve quasi-isomorphisms.",
    "uses": [
     "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "def-pur-sheaf-tensor-product"
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-pur-derived-change-of-rings"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EP (sites-modules-lemma-tensor-commute-colimits), (2); agent specialization to finite free stages, using the assumed exactness of filtered colimits."
+    "place": "Tag 03EP, tensor-colimit preservation; elementary finite-biproduct and exact-functor specialization."
    }
   },
   {
-   "text": "For $T=S_i$ or $S$, exactness of $T\\otimes_R-$ implies $H^n(T\\otimes_R A^\\bullet)=T\\otimes_R H^n(A^\\bullet)$: an exact functor preserves the kernels, images and quotients defining cohomology. It therefore preserves every quasi-isomorphism. Tensor a K-flat resolution $P^\\bullet\\to A^\\bullet$ with $T$. The resulting quasi-isomorphism identifies the K-flat computation of $T\\otimes_R^{\\mathbf L}A$ with $T\\otimes_R A^\\bullet$. These identifications are canonical because they are induced by the resolution maps and localization. Apply them to $A=L$ and $A=H_R(K,L)$, with no boundedness requirement on the latter. For any representative $B^\\bullet$ of $H_R(K,L)$ the degreewise tensor-colimit identification also gives $S\\otimes_R B^\\bullet\\cong\\varinjlim_i(S_i\\otimes_R B^\\bullet)$. Exact filtered colimits preserve quasi-isomorphisms by the same cohomology argument, so this computes the first isomorphism of the claimed formula.",
+   "text": "Use the normalized transformation $a_T$ and roof denominator $v_T$ of the strict roof. The finite-free-stage node makes every $a_{S_i},v_{S_i}$ a quasi-isomorphism. The continuity node supplies $v_S$, $\\lambda_J:\\varinjlim_iF(S_i\\otimes J)\\to F(S\\otimes J)$ and the tensor cocone isomorphism. Its hypotheses hold since $S_i\\otimes C$ all vanish below $b$ and the stated continuity hypothesis is Continuous(P) on these representatives.",
    "uses": [
-    "lem-pur-derived-change-of-rings",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY (sites-cohomology-lemma-derived-base-change), identity-topos scalar extension; agent exact-functor computation."
-   }
-  },
-  {
-   "text": "Choose a K-flat representative $P$ of $K$ with flat terms by [lem-pc-kflat-resolution]. Fix the functorial K-injective replacement $\\eta_M:M\\to I(M)$ of [prop-pur-kinjective-resolutions-exist]. Write $C=L^\\bullet$ for step 1's bounded-below complex, $e=\\eta_C:C\\to J=I(C)$, $B=\\mathcal Hom^\\bullet(P,J)$ and $F(M)=\\mathcal Hom^\\bullet(P,I(M))$. Thus $B$ represents $H_R(K,L)$ and $F$ is the actual functor on complexes used to represent $H_R(K,-)$. It preserves quasi-isomorphisms: naturality of $\\eta$ and two-out-of-three show $I(u)$ is a quasi-isomorphism whenever $u$ is; apply [lem-pur-rhom-well-defined] to $I(u)$. For every finite $d$, $J^{\\oplus d}$ is K-injective, since the component null-homotopies of a map from an acyclic complex assemble into a null-homotopy. Moreover $\\mathcal Hom^\\bullet(P,J^{\\oplus d})\\cong B^{\\oplus d}$ as complexes: $f\\mapsto(\\pi_a f)_a$ and $(f_a)_a\\mapsto\\sum_a\\iota_a f_a$ are inverse, including $d=0$, and commute with the Hom differential. No lower bound on $J$ or $B$ is needed.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "prop-pur-kinjective-resolutions-exist",
-    "def-pur-derived-internal-hom",
-    "lem-pur-rhom-well-defined",
-    "def-pur-kinjective-complex",
-    "def-pur-hom-complex"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS (lemma-K-flat-resolution), 0A95 (lemma-RHom-well-defined); functorial replacement as in Injectives Tag 079P; agent finite-biproduct calculation."
-   }
-  },
-  {
-   "text": "We will use the chain-level tensor-Hom adjunction [lem-sc-derived-hom-tensor-total]. Its degree-zero chain-map correspondence sends $\\phi:A\\to\\mathcal Hom^\\bullet(P,E)$ to $a\\otimes p\\mapsto\\phi(a)(p)$ on $\\operatorname{Tot}(A\\otimes P)$. This formula respects the differentials: for $a$ of degree $n$, $d(\\phi(a))(p)=d_E(\\phi(a)(p))-(-1)^n\\phi(a)(d_Pp)$. The Hom-complex isomorphism, followed by ordinary global sections and $H^0$, gives the correspondence on homotopy classes by [lem-pur-hom-complex-global-homotopy]. If $E$ is K-injective then $\\mathcal Hom^\\bullet(P,E)$ is K-injective by [lem-pur-hom-kflat-into-kinjective]. Both Hom-sets can therefore be computed in the derived category by [lem-weil-pbc-kinjective-hom-derived]. For completeness, choose a flat-term K-flat resolution $Q\\to A$. Its acyclic cone stays acyclic after tensoring with $P$. The cone of $Q\\otimes P\\to A\\otimes P$ is this tensor of the cone (the direct-sum terms and block differentials agree), so that map is a quasi-isomorphism by [lem-pur-quasi-iso-cone-acyclic]. The tensor descent statement [lem-weil-pbc-site-derived-tensor-descent] computes the derived tensor on $Q,P$; hence $A\\otimes P$ computes it as well. Consequently the derived tensor-Hom transpose is computed by this chain formula, even when $A$ is not K-flat. In particular evaluation $B\\otimes P\\to J$ is $f\\otimes p\\mapsto f(p)$. The order $P\\otimes B$ instead gives $p\\otimes f\\mapsto(-1)^{|p||f|}f(p)$ by the Koszul interchange; all uses below keep $B$ before $P$.",
-   "uses": [
-    "lem-sc-derived-hom-tensor-total",
-    "lem-pur-hom-complex-global-homotopy",
-    "lem-pur-hom-kflat-into-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "def-pc-kflat-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pur-quasi-iso-cone-acyclic",
-    "lem-weil-pbc-site-derived-tensor-descent"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A90 (lemma-compose), Tag 0A96 (lemma-RHom-from-K-flat-into-K-injective), and the chain-level construction in Tag 08J9 (lemma-internal-hom); Derived Categories Tag 070I (lemma-K-injective)."
-   }
-  },
-  {
-   "text": "For every $R$-module sheaf $T$ in degree zero define actual chain maps\n$$\\alpha_T:T\\otimes B\\to\\mathcal Hom^\\bullet(P,T\\otimes J),\\qquad \\alpha_T(t\\otimes f)(p)=t\\otimes f(p),$$\n$$a_T=\\mathcal Hom^\\bullet(P,\\eta_{T\\otimes J})\\alpha_T:T\\otimes B\\to F(T\\otimes J),\\qquad v_T=F(T\\otimes e):F(T\\otimes C)\\to F(T\\otimes J).$$\nThe first formula is sheaf-linear, balanced, compatible with restrictions, and hence extends through the sheaf tensor product; the Hom differential gives $d\\alpha_T(t\\otimes f)=\\alpha_T(t\\otimes df)$. For every module map $u:T\\to T'$ the equality $\\mathcal Hom^\\bullet(P,u\\otimes1_J)\\alpha_T=\\alpha_{T'}(u\\otimes1_B)$ holds on $t\\otimes f$, both sides sending $p$ to $u(t)\\otimes f(p)$. Naturality of $\\eta$ now gives the strict equalities\n$$F(u\\otimes1_J)a_T=a_{T'}(u\\otimes1_B),\\qquad F(u\\otimes1_J)v_T=v_{T'}F(u\\otimes1_C).$$\nThus $a_{S_i}$ and $v_{S_i}$ are transformations of actual $I$-diagrams of complexes, not merely compatible derived morphisms. The formulas also hold for $T=S$ and for the maps $S_i\\to S$.",
-   "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-pur-hom-complex",
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent chain-map and strict-naturality calculation from the Hom differential (Section 0A8X) and the functorial resolution augmentation."
-   }
-  },
-  {
-   "text": "If $T=S_i\\cong R^{d_i}$, $\\alpha_T$ is a chain isomorphism by step 4's projection/inclusion calculation, and $T\\otimes J\\cong J^{\\oplus d_i}$ is K-injective. Thus $\\mathcal Hom^\\bullet(P,\\eta_{T\\otimes J})$ is a quasi-isomorphism by [lem-pur-rhom-well-defined], applied to a quasi-isomorphism between the K-injective complexes $T\\otimes J$ and $I(T\\otimes J)$. Hence $a_{S_i}$ is a quasi-isomorphism. For $T=S_i$ or $S$, flatness from step 2 makes $T\\otimes e$ a quasi-isomorphism, and step 4 then shows $v_T$ is a quasi-isomorphism. After localization the roof\n$$T\\otimes B\\xrightarrow{a_T}F(T\\otimes J)\\xleftarrow{v_T}F(T\\otimes C)$$\nrepresents the stage comparison $\\beta_T=v_T^{-1}a_T$. Indeed step 5 transposes $a_T$ to $(t\\otimes f)\\otimes p\\mapsto\\eta_{T\\otimes J}(t\\otimes f(p))$; removing the resolution augmentation and then $T\\otimes e$ gives precisely evaluation tensored with $T$. The bases were used only to prove invertibility of $a_{S_i}$; the maps and their strict transition squares were defined without bases.",
-   "uses": [
-    "lem-pur-rhom-well-defined",
-    "def-pur-derived-internal-hom",
-    "lem-sc-derived-hom-tensor-total"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A95 (lemma-RHom-well-defined) and 0A90 (lemma-compose); agent identification of the finite-stage roof by the chain transpose."
-   }
-  },
-  {
-   "text": "Take termwise sheaf colimits of those strict diagrams. Write $X=\\varinjlim_i(S_i\\otimes B)\\cong S\\otimes B$, $W=\\varinjlim_i F(S_i\\otimes C)$ and $Z=\\varinjlim_i F(S_i\\otimes J)$. The maps $a=\\varinjlim_i a_{S_i}:X\\to Z$ and $v=\\varinjlim_i v_{S_i}:W\\to Z$ are actual chain maps and quasi-isomorphisms by steps 3 and 7. Let $\\lambda_C:W\\to F(S\\otimes C)$ be the chain map induced by $F(S_i\\otimes C\\to S\\otimes C)$. This is the specified continuity map on functorial representatives. The complexes $S_i\\otimes C$ have the common lower bound $b$, so the hypothesis says $\\lambda_C$ is a quasi-isomorphism. Therefore, in $D(R)$,\n$$\\gamma=[\\lambda_C][v]^{-1}[a]:S\\otimes_R^{\\mathbf L}H_R(K,L)\\xrightarrow{\\sim}H_R(K,S\\otimes_R L).$$\nThis constructs the middle arrow of the stated three-arrow formula as the colimit roof $[v]^{-1}[a]$ of strictly natural representatives of the evaluation-defined $\\beta_{S_i}$. It is not obtained by taking a colimit of arbitrary derived-category maps.",
-   "uses": [
-    "def-pur-derived-internal-hom",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent application of the exact termwise-colimit convention and the stated continuity hypothesis; ordinary tensor-colimit identification: Tag 03EP (lemma-tensor-commute-colimits)."
-   }
-  },
-  {
-   "text": "There is also an actual chain map $\\lambda_J:Z\\to F(S\\otimes J)$ induced by the cocone, without assuming continuity for the possibly unbounded complex $J$. Strict naturality of $v_T$ in step 6 gives\n$$\\lambda_Jv=v_S\\lambda_C.$$\nStrict naturality of $a_T$ with respect to each $S_i\\to S$ gives\n$$\\lambda_Ja=a_S:X=S\\otimes B\\to F(S\\otimes J).$$\nThe second equality is in the category of complexes: after composition with the actual colimit injection $S_i\\otimes B\\to X$, the maps are $F(S_i\\otimes J\\to S\\otimes J)a_{S_i}$ and $a_S(S_i\\to S)\\otimes1_B$, equal by the chain-map formula of step 6. The universal property of the colimit of complexes gives the equality before localization. These two identities imply $[v_S]\\gamma=[a_S]$, and hence\n$$\\gamma=[v_S]^{-1}[a_S].$$\nOnly $v_S$ is inverted here; $\\lambda_J$ need not be a quasi-isomorphism. This proves the comparison with the global evaluation map using strict chain maps, with no assertion that stage restrictions determine morphisms in $D(R)$.",
-   "uses": [
-    "def-weil-pbc-category-colimit",
-    "def-pur-hom-complex",
-    "prop-pur-kinjective-resolutions-exist"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent strict-cocone calculation. The universal property is used in complexes, before localization, not in the triangulated category."
-   }
-  },
-  {
-   "text": "Let $c$ be the stated comparison, and use the evaluation-normalized isomorphism $\\theta:U H_S(S\\otimes_R^{\\mathbf L}K,S\\otimes_R^{\\mathbf L}L)\\cong H_R(K,S\\otimes_R^{\\mathbf L}L)$ of [lem-sfb-dc-hom-scalar-adjunction]. Compose $\\theta U(c)$ with $H_R(K,S\\otimes e)$, represented by $v_S$. By that node's evaluation normalization its derived transpose is the scalar-extension of evaluation with $L$ represented by $J$. On the complexes of steps 4–6 this is the chain map\n$$(S\\otimes B)\\otimes P\\longrightarrow I(S\\otimes J),\\qquad (s\\otimes f)\\otimes p\\longmapsto\\eta_{S\\otimes J}(s\\otimes f(p)).$$\nThere is no interchange sign in regrouping $s,f,p$, since $s$ has degree zero. The differential and transpose are those of step 5. In particular this chain map is exactly the uncurrying of the already constructed $a_S$, not merely a map with the same stage restrictions. Step 5's derived adjunction bijection therefore gives $[v_S]\\theta U(c)=[a_S]$. Step 9 gives the same equality for $\\gamma$, so $\\theta U(c)=\\gamma$ after inverting $[v_S]$. Since $\\gamma$ is invertible and the restriction functor $U$ is conservative by the scalar-adjunction node, $c$ is an isomorphism in $D(S)$. The strict scalar comparison is constructed before this invertibility argument: on each slice extend a local R-linear Hom section by sectionwise scalar extension, then descend along the locally bijective sheafification unit. Transpose its postcomposition with the target augmentation through the ordinary coefficient adjunction and lift the resulting components through the Hom-product limit. The differential formula d(f)=d_Q f-(-1)^n f d_P and naturality of the augmentation show that these components form a chain map. The scalar-extension unit preserves subtraction and the integral signs. S-bilinearity extends its normalization on 1 tensor f and 1 tensor x to (s tensor f)(t tensor x)=st tensor f(x). Local generation by these pure tensors, followed by Hom-product extensionality, proves uniqueness. This construction uses no flatness, finite-free hypothesis, boundedness or derived scalar-adjunction existence result.",
-   "uses": [
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-sc-derived-hom-tensor-total",
-    "def-pc-tensor-complex-sheaves",
-    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-    "lem-sc-hom-complex-projections"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent identification by the chain-level transposition of Tag 0A90 and its derived realization in Tag 08J9, together with the evaluation normalization explicitly stated by the scalar-adjunction node."
-   }
-  },
-  {
-   "text": "The chain adjunction in step 5 is natural in all inputs. On representatives, postcomposing $f$ by a map of $J$'s or precomposing it by a map of $P$'s commutes with $\\alpha_T(t\\otimes f)(p)=t\\otimes f(p)$; the same is true for $a_T,v_T$ by the natural resolution augmentation. Derived internal Hom sends quasi-isomorphisms in either variable to isomorphisms, so the evaluation and transpose used in step 10 descend with this naturality to derived inputs. Together with the scalar-adjunction node's naturality, this proves that the canonical $c$ is natural contravariantly in $K$ and covariantly in $L$; its inverse is then natural whenever $c$ is invertible. For a compatible morphism of algebra diagrams, the strict equalities in step 6 hold for its maps as well, so the induced colimit maps commute with $a,v,\\lambda_C$; the scalar-adjunction normalization commutes with coefficient-ring maps. Thus the same naturality holds for the formula in the statement. Boundedness was used only for the common lower bound on $S_i\\otimes C$, never for $J$, $B$ or $K$. The strict scalar naturality identity is proved directly on the generators 1 tensor f and 1 tensor x. The ordinary coefficient adjunction supplies their natural unit. Local surjectivity of sheafification and linearity detect equality from these generators; the actual Hom-product projections detect equality in each Hom-complex degree. Componentwise Hom functoriality and the natural augmentation square then identify the two evaluations. This calculation works for arbitrary target complexes with a commuting augmentation square, before specializing to the fixed resolutions.",
-   "uses": [
-    "lem-sc-derived-hom-tensor-total",
-    "def-pur-derived-internal-hom",
-    "lem-pur-rhom-well-defined",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sfb-dc-hom-scalar-adjunction",
-    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-    "lem-sc-hom-complex-projections"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Agent naturality check from strict chain formulas, functoriality of the Hom-complex adjunction (Tag 0A90), and the scalar-adjunction evaluation normalization."
-   }
-  },
-  {
-   "text": "Stage-3 Lean reduction: use [lem-sfb-internal-hom-finite-free-stage] at every coefficient stage, and [lem-sfb-internal-hom-filtered-continuity] for the colimit denominator, target cocone quasi-isomorphism and source tensor cocone isomorphism. Exact colimits preserve the objectwise comparison quasi-isomorphisms (the generic isStableUnderColimitsOfShape_quasiIso instance). The strict naturality square is proved by colimit.hom_ext and comparison.naturality. Functoriality proves the denominator square. Rewrite the first square to obtain a quasi-isomorphism of the composite source-post then a_colim, and apply quasiIso_of_comp_left to conclude that a_colim is a quasi-isomorphism. This is a genuine decomposition of filteredColimit_comparison, with no change to any original signature.",
-   "uses": [
+    "def-sfb-internal-hom-strict-roof",
     "lem-sfb-internal-hom-finite-free-stage",
-    "lem-sfb-internal-hom-filtered-continuity",
+    "lem-sfb-internal-hom-filtered-continuity"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), chain realization of transposition; agent flat-coefficient evaluation-roof refinement of the parent proof, old steps 7 and 10. This is not a verbatim assertion of the tag."
+   }
+  },
+  {
+   "text": "Put $a=\\varinjlim a_{S_i}$, $v=\\varinjlim v_{S_i}$ and let $\\lambda_C$ be the continuity map. Exact colimits make $a,v$ quasi-isomorphisms. Strict naturality and the colimit universal property give $\\lambda_Ja=a_S$ and $\\lambda_Jv=v_S\\lambda_C$ on complexes. Thus $\\gamma=[\\lambda_C][v]^{-1}[a]$ is an isomorphism and $[v_S]\\gamma=[a_S]$. This is exactly the three-arrow formula, with its middle arrow the colimit roof.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sfb-internal-hom-comparison-exists",
     "def-sfb-internal-hom-strict-roof",
     "def-weil-pbc-category-colimit"
    ],
-   "elementary": true
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), chain realization of transposition; agent flat-coefficient evaluation-roof refinement of the parent proof, old steps 7 and 10. This is not a verbatim assertion of the tag."
+   }
+  },
+  {
+   "text": "The flat-evaluation-roof node identifies $\\Theta U(c)=[v_S]^{-1}[a_S]=\\gamma$. Since $\\Theta$ is invertible and $U$ conservative, $c$ is an isomorphism in $D(S)$. The roof identification also identifies each stage map with evaluation, independently of finite bases.",
+   "uses": [
+    "lem-sfb-hom-flat-evaluation-roof",
+    "lem-sfb-dc-hom-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), chain realization of transposition; agent flat-coefficient evaluation-roof refinement of the parent proof, old steps 7 and 10. This is not a verbatim assertion of the tag."
+   }
+  },
+  {
+   "text": "The evaluation-roof equality is natural in both derived inputs and compatible coefficient maps. The strict scalar square and uniqueness of the normalized transformation make all the cocone identities natural. Therefore the formula and $c$ have every stated naturality; inverses of these natural isomorphisms are natural too.",
+   "uses": [
+    "lem-sfb-hom-flat-evaluation-roof",
+    "lem-sfb-hom-scalar-chain-identification",
+    "lem-sfb-internal-hom-comparison-exists"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (sites-cohomology-lemma-internal-hom), chain realization of transposition; agent flat-coefficient evaluation-roof refinement of the parent proof, old steps 7 and 10. This is not a verbatim assertion of the tag."
+   }
   }
  ],
  "proof_deps": [
+  "def-sfb-internal-hom-strict-models",
+  "def-sfb-internal-hom-strict-roof",
   "def-weil-abstract-derived-category",
-  "def-pc-tensor-complex-sheaves",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "def-pur-sheaf-tensor-product",
-  "lem-pur-derived-change-of-rings",
-  "lem-pc-kflat-resolution",
-  "prop-pur-kinjective-resolutions-exist",
-  "def-pur-derived-internal-hom",
-  "lem-pur-rhom-well-defined",
-  "def-pur-kinjective-complex",
-  "def-pur-hom-complex",
-  "lem-sc-derived-hom-tensor-total",
-  "lem-pur-hom-complex-global-homotopy",
-  "lem-pur-hom-kflat-into-kinjective",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "def-pc-kflat-complex",
-  "lem-pur-quasi-iso-cone-acyclic",
-  "lem-weil-pbc-site-derived-tensor-descent",
   "def-weil-pbc-category-colimit",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
   "lem-sfb-dc-hom-scalar-adjunction",
-  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
-  "lem-sc-hom-complex-projections",
-  "lem-sfb-internal-hom-finite-free-stage",
+  "lem-sfb-hom-flat-evaluation-roof",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-sfb-hom-scalar-chain-identification",
+  "lem-sfb-internal-hom-comparison-exists",
   "lem-sfb-internal-hom-filtered-continuity",
-  "def-sfb-internal-hom-strict-roof"
+  "lem-sfb-internal-hom-finite-free-stage",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-hom-preserves.proof.md",
-  "place": "Final paragraph: passage from finite coefficient extensions to their filtered colimit. Agent conditional ring-sheaf elaboration, repaired with strict chain maps and natural resolution zigzags; chain transposition from Stacks 0A90 and its 08J9 realization. Bhatt–Scholze 6.8.12–6.8.15 is context, not this statement verbatim. Stage-3 strict scalar naturality: direct generator and projection calculation using the ordinary scalar-adjunction unit and its functoriality; other unfinished portions retain their recorded plans. Stage-3 R4: scalarComparison_existsUnique is proved by slice sheafification descent, the ordinary scalar adjunction, Hom-product lifting and the signed differential formula. Four original auxiliary holes remain unchanged. R6: filteredColimit_comparison is reduced to finite-free stages and continuity at the colimit, combined by exact colimits, strict cocone equations and two-out-of-three. The unchanged initial definitions and comparison_existsUnique moved into a publicly reexported data module to avoid a proof import cycle."
+  "place": "Final paragraph, finite coefficient extension and filtered coefficient passage. Finer repair of the previously reviewed chain-zigzag proof, retaining the evaluation normalization and reusing the newer strict-model, finite-free-stage and filtered-continuity nodes. The auxiliary chain and scalar identifications are now separate statement-only nodes."
  },
  "mathlib_searches": [
   {
@@ -311,47 +215,23 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sfb-dc-hom-filtered-colimit",
   "worker": "stage1",
-  "summary": "Repair of the returned delivery: retained statement and steps 1–3; rebuilt the rest with a strictly natural chain-map zigzag, stagewise quasi-isomorphisms and actual colimits of complexes. Constructed the colimit roof and identified it with the global evaluation map by two strict cocone identities before localization. Cited existing chain tensor-Hom, Hom/global-homotopy, K-flat-to-K-injective and K-injective localization statements to derive the chain-normalized derived transpose. No new nodes or statement correction.",
-  "blueprint": "Realizes the final paragraph of lem-sfb-dc-hom-preserves.proof.md, descending to a finite extension E and passage to the coefficient colimit; does not change the unit route.",
+  "summary": "Re-split the 13346-character proof as requested on 2026-10-21, with the statement unchanged. Reused the current finite-free-stage, strict comparison and filtered-continuity nodes; extracted one-sided K-flat transposition, strict scalar Hom identification/evaluation, and flat evaluation-roof compatibility into three statement-only unsplit nodes, as explicitly required by the updated route note. The parent is a short assembly with strict cocone identities before localization. Retained auxiliary arguments, citations and searches in the sandbox report/research notes. No Lean files changed.",
+  "blueprint": "Final paragraph of lem-sfb-dc-hom-preserves.proof.md, descent to a finite extension and coefficient-colimit passage, now realized by the strict finite-free-stage/continuity nodes and three evaluation-model lemmas.",
   "tool_uses": [
    {
-    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
-    "why": "Ordinary sheaf-tensor preservation of small colimits, used in steps 2–3 and 8; no unit-specific replacement exists."
-   },
-   {
     "node": "lem-pc-kflat-resolution",
-    "why": "Generic existence of a K-flat representative P of the arbitrary input K, used only for the chain-normalized derived transpose."
+    "why": "Generic exact-functor, resolution, tensor or scalar-adjunction tool needed by the short assembly; it does not replace the coefficient-colimit argument."
    },
    {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Generic functorial K-injective resolution and its natural augmentation, required to construct strictly commuting chain diagrams."
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic exact-functor, resolution, tensor or scalar-adjunction tool needed by the short assembly; it does not replace the coefficient-colimit argument."
    },
    {
-    "node": "lem-pur-rhom-well-defined",
-    "why": "Generic quasi-isomorphism invariance of Hom complexes into K-injectives, used to prove the explicit stage roofs are objectwise quasi-isomorphisms."
-   },
-   {
-    "node": "lem-sc-derived-hom-tensor-total",
-    "why": "Existing ringed-site chain-level tensor-Hom isomorphism (0A90); supplies strict transposition and its naturality, not any coefficient-colimit theorem."
-   },
-   {
-    "node": "lem-pur-hom-complex-global-homotopy",
-    "why": "Identifies H^0 of ordinary global Hom complexes with homotopy-class Hom-sets, so the chain tensor-Hom isomorphism gives the homotopy-category adjunction."
-   },
-   {
-    "node": "lem-pur-quasi-iso-cone-acyclic",
-    "why": "Generic cone criterion for quasi-isomorphisms, used in step 5 to justify the computation of derived tensor with one K-flat factor."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "Generic K-flat tensor localization, used only in step 5 to identify the one-sided complex model of the derived tensor; does not replace the coefficient-colimit route."
-   },
-   {
-    "node": "lem-pur-hom-kflat-into-kinjective",
-    "why": "Hom from K-flat P into K-injective E is K-injective, allowing the chain adjunction to compute the derived one; a generic resolution tool."
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Generic exact-functor, resolution, tensor or scalar-adjunction tool needed by the short assembly; it does not replace the coefficient-colimit argument."
    }
   ]
  },
@@ -364,15 +244,16 @@
   "lem-pur-hom-complex-global-homotopy",
   "lem-pur-quasi-iso-cone-acyclic",
   "lem-weil-pbc-site-derived-tensor-descent",
-  "lem-pur-hom-kflat-into-kinjective"
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NG-b1ebe443d",
-  "group": "NG",
+  "reviewer": "NT-cc-Q52-6058a974e",
+  "group": "Q52",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-b1ebe443d (reviewer sub-agent of L); spot-checked: I read the whole item, all 11 steps, the statement of every cited node, the unit, the blueprint parent's final paragraph, the DAG parent's step 10, Bhatt–Scholze 6.8.12–6.8.15 and Stacks 0A90. There are no new nodes and the statement is unchanged. The repaired argument holds. Steps 6–9 build strictly natural chain maps a_T and v_T from the functorial K-injective resolution and its natural augmentation. On each stage I checked lambda_J v = v_S lambda_C and lambda_J a = a_S, which give [v_S]gamma = [a_S] with no phantom-map inference. Step 10 identifies theta U(c) with gamma: the transpose of c is the scalar extension of evaluation, and the uncurrying of a_S gives the same chain map. I also checked the uncurrying sign against the Tot convention and the cone identification for Q⊗P → A⊗P. Edge cases (a single stage, d_i=0, constant R×R, any transition matrices, odd-degree f) cause no problem. No duplicate found in the DAG and no cycle. Every off-route statement is either a Mathlib leaf or one of the nine declared tool_uses; I accept all nine as generic tools. One fault fixed: step 1 cited Tag 05RU in sites-cohomology.tex, but 05RU is in derived.tex (definition-unbounded-derived-category). The corrected node is in fixes/.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-6058a974e (reviewer sub-agent of L); spot-checked: I read the whole item, all 6 steps, the statement of every cited node (including the five R6 strict-model, roof, comparison-exists, finite-free-stage and filtered-continuity nodes, all split and reviewed pass), the unit, the blueprint final paragraph of lem-sfb-dc-hom-preserves, Stacks 08J9 and 03CZ, and the earlier 12-step proof. This is the human-ordered re-split: the statement and stmt_deps are byte-identical to live, and the proof is now 2269 characters. The assembly is correct. Exactness of S⊗− comes from finite-free stages and exact colimits. The filtered-continuity hypotheses hold (C bounded below; Continuous(P) is the item's hypothesis and does not depend on the representative). The chain equations λ_J a = a_S (modulo the tensor-cocone iso (iii)) and λ_J v = v_S λ_C give [v_S]γ = [a_S] before localization. The roof node gives ΘU(c) = γ, and conservative U makes c an iso. I checked the three new statement-only nodes and all are true. The one-K-flat transpose holds because tensoring with K-flat P preserves quasi-isos and ev is a chain map. The scalar chain identification holds: θ(g)(x) = g(1⊗x) on slices, σ_q is balanced and unique, and the strict square sends s⊗f to s·q(1⊗f(x)). For the evaluation roof, both transposes are (s⊗f)⊗p ↦ s⊗f(p); for R = S it reduces to η_J ≃ I(η_C), which holds. None restates an item clause, and none duplicates an existing node: def-coef-ringed-tensor-hom-model and kflat-rhom-currying need both factors K-flat, and the ordinary adjunction node gives Hom-sets only. No cycle. I accept the 3 declared tool_uses (kflat-resolution, derived-change-of-rings, independent-sheaf-tensor-colimits). FIX (B2): the roof node used Q and U without introducing them. I added both, bracketed [def-pc-kflat-complex], and added def-pc-sheaf-restrict-scalars to stmt_deps, in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-hom-flat-evaluation-roof.json. Note for the maintainer: the transpose and scalar-chain nodes are really inputs to the roof node's future proof, so their parent citations are thin. When the roof node is split, its worker should cite them rather than re-create them.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",
