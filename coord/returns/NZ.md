@@ -89,3 +89,7 @@ re-split (decision of the human, 2026-10-21): the proof in words is 15922 charac
 ## det-def-sfb-filtered-two-colimit-characterization (2026-10-21 07:35 UTC, branch head a68ccc954d4)
 
 L: approved by the reader, but the landing refused it: NOT MERGED det-def-sfb-filtered-two-colimit-characterization: det-def-sfb-filtered-two-colimit-characterization: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
+
+## sk-lem-nagata-sketch-dense-valuative (2026-10-21 07:39 UTC, branch head f7b2971e53f)
+
+L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-nagata-sketch-dense-valuative: cited node lemma-nagata-scheme-image-ideal-qc: statement changed since the reviewed delivery; rebase and revalidate the citation Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
