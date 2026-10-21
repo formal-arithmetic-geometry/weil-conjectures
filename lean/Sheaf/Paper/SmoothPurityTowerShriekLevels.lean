@@ -33,7 +33,6 @@ import Sheaf.AlgebraicGeometry.ProEtaleExtensionZero
 import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 import Sheaf.AlgebraicGeometry.ProEtaleRingedOpenClosed
 import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.SfProEtaleProjectionFormula
 import Sheaf.Paper.CanonicalFiniteLevelCompactSupportBaseChange
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 import Sheaf.Paper.SmoothPurityTowerInjectiveComponents

@@ -1,0 +1,115 @@
+{
+ "id": "def-sfb-diagonal-coefficient-endpoints",
+ "kind": "definition",
+ "title": "Adjoint-normalized scalar endpoints for diagonal diagrams",
+ "status": "split",
+ "statement": "For a coefficient map $a:\\Lambda\\to\\Lambda'$ and modules in the categories of [def-sfb-diagonal-coefficient-category], a prescribed underlying sheaf map is semilinear when it lifts to a module map into restriction of scalars with exactly that underlying map. An endpoint consists of this semilinear map and an isomorphism $La^*(M[0])\\simeq N[0]$ whose transpose under the actual derived extension/restriction adjunction of [sk-def-sfb-change-of-scalars] is exactly the single of that semilinear map followed by the inverse exact restriction/single comparison. Its shifted comparison is the canonical derived shift isomorphism followed by this endpoint shifted by two. For the supported source, the scalar map is the coefficient-unit map pushed along the diagonal followed by the canonical ordinary coefficient-restriction/direct-image comparison. No flatness is imposed on $a$, including quotient maps.",
+ "stmt_deps": [
+  "def-sfb-diagonal-coefficient-category",
+  "sk-def-sfb-change-of-scalars"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-diagonal-tower/sk-prop-diagonal-tower-coefficients.md",
+  "place": "coefficient changes proof, normalized diagram, endpoint and scalar-mate data"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "DiagonalCoefficients|QuotientLineRealization|FinitePushSquare|FamilyPullback|CompletedRealization",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact normalized diagonal coefficient notion. The reported field traces, scheme normalization and solid-module facts do not define these diagrams or comparisons."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized diagonal class and projective line trace diagrams, their scalar extension endpoints, quotient Cartier realizations, and base change Beck Chevalley mates over ell adic condensed coefficients",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap, Algebra.normalizedTrace, CategoryTheory.MorphismProperty.IsStableUnderBaseChange.diagonal, Algebra.normalizedTrace_self, Algebra.normalizedTrace_eq_of_fininteDimensional, Algebra.normalizedTrace.congr_simp, Algebra.normalizedTrace_eq_of_finiteDimensional, Algebra.normalizedTrace_eq_of_finiteDimensional_apply",
+   "date": "2026-10-21",
+   "verdict": "No exact normalized diagonal coefficient notion. The reported field traces, scheme normalization and solid-module facts do not define these diagrams or comparisons."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Normalized diagonal class and projective line trace diagrams, their scalar extension endpoints, quotient Cartier realizations, and base change Beck Chevalley mates over ell adic condensed coefficients",
+   "results": "8 hits: Condensed.profiniteSolid, Condensed.profiniteSolidCounit, AlgebraicGeometry.Scheme.Hom.normalizationDiagramMap, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition, LightCondensed.ihomPoints_symm_comp, LightCondensed.free_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-21",
+   "verdict": "No exact normalized diagonal coefficient notion. The reported field traces, scheme normalization and solid-module facts do not define these diagrams or comparisons."
+  },
+  {
+   "tool": "rg",
+   "query": "structure (FamilyPullback|CompletedRealization|QuotientCompatibility|ScalarCompatibility)|namespace.*DiagonalCoefficients in lean/Sheaf and lean/WeilConjectures",
+   "results": "Three unrelated ScalarCompatibility structures (OpenTensorQuotientAugmentation, RationalOperations, DenseLatticeDerivedInvariants); no diagonal coefficient framework.",
+   "date": "2026-10-21",
+   "verdict": "Read the domains: open tensor quotient augmentations, rational operations and lattice invariants. None has these diagonal objects or maps."
+  },
+  {
+   "tool": "blueprint_refs.py search / rg DAG",
+   "query": "diagonal coefficient; diagonal coefficient diagrams|quotient Cartier realization|coefficient family pullback",
+   "results": "0 matching blueprint nodes; 0 exact DAG title/statement matches.",
+   "date": "2026-10-21",
+   "verdict": "The existing coefficient proposition is the owning theorem. These nodes define its normalized constituent data only."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "det-prop-diagonal-tower-coefficients",
+  "date": "2026-10-21",
+  "group": "N8"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-diagonal-tower-coefficients",
+   "place": "Adjoint-normalized scalar endpoints for diagonal diagrams",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-prop-diagonal-tower",
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalCoefficientEndpoints",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.Endpoint",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.derivedScalars",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.Semilinear",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.Endpoint",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.supportMap",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.Endpoint.shift",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.scalarCommShift"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalCoefficientEndpoints.lean",
+  "statement": "structure Endpoint {X : Scheme.{u}} (M : Modules Λ X) (N : Modules Λ' X) (m : M.X ⟶ N.X)",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf03d617d",
+  "group": "N8",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf03d617d",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read the item, all 19 modules, the 15 new def nodes, the 3 dependency records (via git show of the head), the report and the live dependencies. H3: hypotheses equal diagonalTower_trace token for token; δ fixed by IsDiagonalLimit; clause 1: Family/ScalarCompatibility pinned by adjoint-normalized Endpoints and full-unit ExactSquareOfUniverses squares, Reference ties the Z_l stage to the completed δ and Results (the free underlying iso cancels), FiniteReductions covers every E, π and n through the derived quotient extension and asserts the canonical geoCartier class and geoP1Trace; clause 2: rational/closure stages and all transitions are Diagrams with both identities; clause 3: FamilyPullback at Z_l/O_E/E/Q̄/quotients with exchangeRight mates, PullEndpoints and pinned CartesianAdicComparison line maps; no flatness; edge cases ∅, n=0, ℓ=2, bottom E, ramified, nonflat ok; universes unchanged. (B): DiagonalTowerTrace restores U's 2026-10-20 deleted module (= O1 PASSed text minus one import); TraceModels is a pure superset (ExactSquareOfUniverses, Q53 form). Advisory: SmoothPurityTowerShriekLevels needlessly drops a private import, record note false and by NY→N8 (optional --revert-nodes det-sp-tower-shriek-levels); TraceModels note's first sentence inaccurate; new def nodes cite theorem nodes for plain defs as the landed framework does; proof-route private imports; item was pruned as unreachable; finite p_i traces follow from δ plus the identities; exchange node overlaps generic def-trf-topos-derived-base-change-map (exchangeRight only). No recompile: no file changed; worker compile and dry run clean."
+ }
+}

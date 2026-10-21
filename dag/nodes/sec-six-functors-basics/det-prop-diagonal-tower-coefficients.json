@@ -23,7 +23,22 @@
   "det-prop-sfb-qlbar-colimit-x-pullback",
   "sk-def-sp-tate-twist",
   "sk-def-sfb-pulled-back-coefficients",
-  "sk-def-sfb-change-of-scalars"
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-diagonal-coefficient-diagrams",
+  "def-sfb-diagonal-coefficient-maps",
+  "def-sfb-diagonal-coefficient-exchange",
+  "def-sfb-diagonal-coefficient-pullback-endpoints",
+  "def-sfb-diagonal-coefficient-source-pullback",
+  "def-sfb-diagonal-coefficient-category",
+  "def-sfb-diagonal-coefficient-endpoints",
+  "def-sfb-diagonal-coefficient-scalars",
+  "def-sfb-diagonal-coefficient-pullback",
+  "def-sfb-diagonal-coefficient-reference",
+  "def-sfb-diagonal-coefficient-finite-realization",
+  "def-sfb-diagonal-coefficient-quotient-line",
+  "def-sfb-diagonal-coefficient-finite-diagonal",
+  "def-sfb-diagonal-coefficient-quotients",
+  "def-sfb-diagonal-coefficient-family-pullback"
  ],
  "proof": [
   {
@@ -217,5 +232,27 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q38-8fd2a76c6 (reviewer sub-agent of L); spot-checked: Read the item, blueprint route, all cited node statements, source locations, unit/chapter records, and delivery report. The five proof steps correctly establish integral coefficient extension and all reductions, filtered rationalization, Cartier/Kummer system base change, specified derived-limit comparisons, and trace compatibility. Hypotheses, coefficient categories, nonflat base change, ramified reductions, edge cases, and route-lock restrictions were checked. The earlier bundled helper was removed; no new nodes remain. Review written to review.md."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.DiagonalTowerCoefficients",
+  "declaration": "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalTower_coefficients",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalTower_coefficients",
+   "AlgebraicGeometry.ProEtale.DiagonalCoefficients.diagonalTower_coefficients_baseChange"
+  ],
+  "file": "lean/Sheaf/Paper/DiagonalTowerCoefficients.lean",
+  "statement": "theorem diagonalTower_coefficients (l : ℕ) [Fact l.Prime] (k : Type u) [Field k] (p : ℕ) [Fact p.Prime] [CharP k p] (_hpl : p ≠ l) (Y : Scheme.{u}) [Y.Over (Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] [IsNoetherian Y] [IsNoetherian (ProjectiveLine Y)] [IsNoetherian (diagonalSurface Y)] (hY : IsUnit (l : Γ(Y, ⊤))) [DiagonalTraceLocalizations l Y] [DiagonalTraceLocalizations l (ProjectiveLine Y)] [DiagonalTraceLocalizations l (diagonalSurface Y)] (D : DiagonalDerivedReduction l (diagonalScalarExtension l (diagonalSurface Y))) (_hcompletion : DiagonalCompletionSpec l (diagonalSurface Y) D) (_hsystem : DiagonalCycleSystemSpec l Y hY D) (δ : diagonalCompletedDomain l Y ⟶ diagonalCompletedCodomain l Y) (_hδ : DiagonalTrace.IsDiagonalLimit l Y hY D δ) : ∃ family : Family l Y, Nonempty (Reference l Y δ family) ∧ FiniteReductions l Y family",
+  "branch": "newtargets-dag",
+  "by": "N8",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cf03d617d",
+  "group": "N8",
+  "result": "pass",
+  "note": "Read the item, all 19 modules, the 15 new def nodes, the 3 dependency records (via git show of the head), the report and the live dependencies. H3: hypotheses equal diagonalTower_trace token for token; δ fixed by IsDiagonalLimit; clause 1: Family/ScalarCompatibility pinned by adjoint-normalized Endpoints and full-unit ExactSquareOfUniverses squares, Reference ties the Z_l stage to the completed δ and Results (the free underlying iso cancels), FiniteReductions covers every E, π and n through the derived quotient extension and asserts the canonical geoCartier class and geoP1Trace; clause 2: rational/closure stages and all transitions are Diagrams with both identities; clause 3: FamilyPullback at Z_l/O_E/E/Q̄/quotients with exchangeRight mates, PullEndpoints and pinned CartesianAdicComparison line maps; no flatness; edge cases ∅, n=0, ℓ=2, bottom E, ramified, nonflat ok; universes unchanged. (B): DiagonalTowerTrace restores U's 2026-10-20 deleted module (= O1 PASSed text minus one import); TraceModels is a pure superset (ExactSquareOfUniverses, Q53 form). Advisory: SmoothPurityTowerShriekLevels needlessly drops a private import, record note false and by NY→N8 (optional --revert-nodes det-sp-tower-shriek-levels); TraceModels note's first sentence inaccurate; new def nodes cite theorem nodes for plain defs as the landed framework does; proof-route private imports; item was pruned as unreachable; finite p_i traces follow from δ plus the identities; exchange node overlaps generic def-trf-topos-derived-base-change-map (exchangeRight only). No recompile: no file changed; worker compile and dry run clean."
+ }
 }

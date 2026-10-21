@@ -110,14 +110,16 @@
    "AlgebraicGeometry.ProEtale.DiagonalTrace.ExactSquare",
    "AlgebraicGeometry.ProEtale.DiagonalTrace.LimitSquare",
    "AlgebraicGeometry.ProEtale.exactConeComparison",
-   "AlgebraicGeometry.ProEtale.DiagonalTrace.shiftedComparison"
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.shiftedComparison",
+   "AlgebraicGeometry.ProEtale.DiagonalTrace.ExactSquareOfUniverses"
   ],
   "file": "lean/Sheaf/Paper/DiagonalTowerTraceModels.lean",
   "statement": "structure Model (b : SpTowerShriek.Base l E) (S X : Scheme.{u}) (f : X ⟶ S) (cS : Chern l E S) (cP : Chern l E X) (tS : Twisting l E cS) (tP : Twisting l E cP)",
   "branch": "newtargets-dag",
-  "by": "O1",
-  "date": "2026-10-19",
-  "existing": false
+  "by": "N8",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "§1(B): restore the recorded module, deleted as outside the target closure on 2026-10-20, because the coefficient compatibility item now needs its normalized interface. Archived source retained; retired forwarding imports are replaced by their published upstream modules. No mathematical statement change. ExactSquareOfUniverses extends the full universal-unit normalization to different derived-localization universes on the two rows, without changing the published ExactSquare declaration. This compares completed and condensed-module presentations without restricting site universes or invalidating published importers."
  },
  "reviewed": {
   "date": "2026-10-19",
@@ -128,11 +130,11 @@
   "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
  },
  "reviewed_lean": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-8f60c01ca",
-  "group": "O1",
+  "reviewer": "NT-stage2-cc-cf03d617d",
+  "group": "N8",
   "result": "pass",
-  "note": "Read node, 4 new def nodes, report, all 5 modules and the recorded deps (diagonalTower_limit, DiagonalTowerSystem, GeoP1Cohomology, SpTowerShriek, TowerClass*). Clause 1: strict splitting IsIso on constant-Z_l towers, completed trace pinned by IsTrace, reductions plus torsion 0/1 normalization, p1/p2 models over fst/snd (checked). Clause 2: IsIntegration a≫R.map δ≫t=𝟙 for both projections. δ fixed by IsDiagonalLimit = diagonalTower_limit conclusion token for token (∃! as named δ plus uniqueness). SupportedSource HEq types equal by with_unfolding_all rfl (probe clean). All comparisons pinned; no free arrows. No extra hypotheses; edge cases (empty Y, n=0, l=2) and universes ok. Statements verbatim, docstrings with all 11 steps, item changed only lean plus new def stmt_deps. nt_compile --json: clean once (Limit 57.5 s at load 125), later Limit timeouts (IsDiagonalLimit ~40 s CPU) → maintainer: land at lower load, re-push same head if returned. Advisory: new def node cites theorem det-sp-tower-shriek-levels for plain SpTowerShriek defs (no owning def node; landed tower-class nodes do the same); torsion trace characterized rather than naming geoP1Trace; Model generalizes SpTowerClasses.Projective."
+  "note": "Read the item, all 19 modules, the 15 new def nodes, the 3 dependency records (via git show of the head), the report and the live dependencies. H3: hypotheses equal diagonalTower_trace token for token; δ fixed by IsDiagonalLimit; clause 1: Family/ScalarCompatibility pinned by adjoint-normalized Endpoints and full-unit ExactSquareOfUniverses squares, Reference ties the Z_l stage to the completed δ and Results (the free underlying iso cancels), FiniteReductions covers every E, π and n through the derived quotient extension and asserts the canonical geoCartier class and geoP1Trace; clause 2: rational/closure stages and all transitions are Diagrams with both identities; clause 3: FamilyPullback at Z_l/O_E/E/Q̄/quotients with exchangeRight mates, PullEndpoints and pinned CartesianAdicComparison line maps; no flatness; edge cases ∅, n=0, ℓ=2, bottom E, ramified, nonflat ok; universes unchanged. (B): DiagonalTowerTrace restores U's 2026-10-20 deleted module (= O1 PASSed text minus one import); TraceModels is a pure superset (ExactSquareOfUniverses, Q53 form). Advisory: SmoothPurityTowerShriekLevels needlessly drops a private import, record note false and by NY→N8 (optional --revert-nodes det-sp-tower-shriek-levels); TraceModels note's first sentence inaccurate; new def nodes cite theorem nodes for plain defs as the landed framework does; proof-route private imports; item was pruned as unreachable; finite p_i traces follow from δ plus the identities; exchange node overlaps generic def-trf-topos-derived-base-change-map (exchangeRight only). No recompile: no file changed; worker compile and dry run clean."
  }
 }

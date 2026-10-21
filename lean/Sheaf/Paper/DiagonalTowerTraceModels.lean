@@ -296,6 +296,31 @@ structure ExactSquare
           ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P) ≫
         RG.η.app ((U.mapHomologicalComplex (.up ℤ)).obj P)
 
+/-- Exact coefficient restriction between independently sized derived categories
+commutes with direct image via the underived comparison and full derived-unit equation.
+This extends `ExactSquare` without changing its published interface.
+Source: blueprint trace proof steps 3 and 7
+(blueprint: def-sfb-diagonal-trace-models). -/
+structure ExactSquareOfUniverses
+    {A B C D : Type a} [Category.{v} A] [Category.{v} B]
+    [Category.{v} C] [Category.{v} D] [Abelian A] [Abelian B] [Abelian C] [Abelian D]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    [HasDerivedCategory.{wc} C] [HasDerivedCategory.{wc} D]
+    (F : A ⥤ B) (G : C ⥤ D) [F.Additive] [G.Additive]
+    (U : A ⥤ C) (V : B ⥤ D) [U.Additive] [V.Additive]
+    [PreservesFiniteLimits U] [PreservesFiniteColimits U]
+    [PreservesFiniteLimits V] [PreservesFiniteColimits V]
+    (RF : DiagonalRightDerived F) (RG : DiagonalRightDerived G)
+    (ordinary : F ⋙ V ≅ U ⋙ G) where
+  iso : RF.R ⋙ V.mapDerivedCategory ≅ U.mapDerivedCategory ⋙ RG.R
+  normalization : ∀ P : CochainComplex A ℤ,
+    V.mapDerivedCategory.map (RF.η.app P) ≫ iso.hom.app (DerivedCategory.Q.obj P) ≫
+        RG.R.map (U.mapDerivedCategoryFactors.hom.app P) =
+      V.mapDerivedCategoryFactors.hom.app ((F.mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map
+          ((NatTrans.mapHomologicalComplex ordinary.hom (.up ℤ)).app P) ≫
+        RG.η.app ((U.mapHomologicalComplex (.up ℤ)).obj P)
+
 /-- The canonical direct-image/limit comparison, fixed by its common derived unit.
 The projection equation retains the level maps, rather than only its object values.
 Source: blueprint trace proof step 5; Stacks 0A07

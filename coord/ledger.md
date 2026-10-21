@@ -23880,3 +23880,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:20 L: batch 20261021T214727 dependency take-out
 - 22:21 L: merged deliver/NC/lem-sfb-supported-lattice-norm-projection (reviewer PASS; first push; new nodes: 3)
 - 22:21 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
+- 22:22 L: merged deliver/N8/det-prop-diagonal-tower-coefficients (stage 2; reviewer PASS; parallel immutable checks)
