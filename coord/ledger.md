@@ -20097,3 +20097,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:58 L: merged deliver/NP/lem-sf-integral-compact-support-constructible (reviewer FIX; after a return; new nodes: 4)
 - 03:58 L: merged deliver/NJ/lem-sfb-filtered-colimit-flat-module-sheaves (reviewer PASS; first push; new nodes: 0)
 - 03:58 L: merged deliver/NE/lem-weil-pbc-bounded-complex-triangulated-devissage (reviewer PASS; first push; new nodes: 0)
+- 03:58 L: merged deliver/Q46/lem-sfb-closed-supported-scalar-comparison (reviewer PASS; first push; new nodes: 0)

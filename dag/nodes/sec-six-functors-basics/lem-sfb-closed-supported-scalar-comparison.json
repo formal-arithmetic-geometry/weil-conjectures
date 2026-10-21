@@ -19,9 +19,65 @@
   "lem-sfb-exact-open-closed-unbounded-calculus",
   "lem-sfb-kflat-scalar-comparison-normalization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $Q_R=i_R^*$, $I_R=i_{*,R}$ and $P_R=j_R^*$. The assumed unbounded calculus gives $P_AI_A=0$ and $P_BI_B=0$. The specified open scalar comparison gives $P_BH\\cong T_UP_AI_AM\\cong T_U0$. Here $T_U0\\cong0$: by the scalar adjunction, for every $N$, $\\operatorname{Hom}(T_U0,N)\\cong\\operatorname{Hom}(0,\\operatorname{Res}N)$ is a singleton, so $T_U0$ is initial, hence is a zero object of the derived category. Thus $P_BH=0$, and also $P_BI_BT_ZM=0$. This establishes support for both objects without a boundedness or flatness assumption.",
+   "uses": [
+    "lem-sfb-exact-open-closed-unbounded-calculus",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(1)-(2), inverse-image scalar comparison and support of the closed extension"
+   }
+  },
+  {
+   "text": "The assumed calculus now makes $\\eta_{B,H}:H\\to I_BQ_BH$ invertible, and makes $\\varepsilon_{A,M}:Q_AI_AM\\to M$ invertible. Put $N=T_ZM$ and $\\alpha_M=T_Z(\\varepsilon_{A,M})\\circ\\theta_{i,I_AM}^{-1}:Q_BH\\to N$. The scalar-comparison lemma makes $\\theta_i$ invertible; functors preserve inverses, so $\\alpha_M$ is invertible. Therefore $\\delta_M=I_B(\\alpha_M)\\circ\\eta_{B,H}$ is a composite of isomorphisms and equals exactly the displayed formula in the statement. Each factor is a morphism in a derived category of $B$-modules, so the construction retains the $B_X$-action. Each factor is natural in $M$ (unit, counit, inverse of the natural comparison, and functor application); composing their naturality squares proves naturality of $\\delta$. By step 1 its open restriction is the unique morphism between zero objects, hence zero.",
+   "uses": [
+    "lem-sfb-exact-open-closed-unbounded-calculus",
+    "lem-sfb-kflat-scalar-comparison-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), closed-unit comparison, coefficient action and invertibility"
+   }
+  },
+  {
+   "text": "Use the actual $Q_B\\dashv I_B$ from the calculus. Naturality of its counit applied to $\\alpha_M:Q_BH\\to N$, followed by its left triangle identity, gives\n$$\\varepsilon_{B,N}\\circ Q_B(\\delta_M)=\\varepsilon_{B,N}\\circ Q_BI_B(\\alpha_M)\\circ Q_B(\\eta_{B,H})=\\alpha_M\\circ\\varepsilon_{B,Q_BH}\\circ Q_B(\\eta_{B,H})=\\alpha_M.$$\nSubstituting the definition of $\\alpha_M$ proves precisely the asserted normalization; no unnamed comparison between adjunction maps has been inserted.",
+   "uses": [
+    "lem-sfb-exact-open-closed-unbounded-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), restriction normalization of the closed-unit comparison"
+   }
+  },
+  {
+   "text": "For any morphism $f:H\\to I_BN$, naturality of the unit and the right triangle identity of the same adjunction give\n$$I_B(\\varepsilon_{B,N}\\circ Q_Bf)\\circ\\eta_{B,H}=I_B(\\varepsilon_{B,N})\\circ\\eta_{B,I_BN}\\circ f=f.$$\nIf $f$ has the required normalization, its left side is $I_B(\\alpha_M)\\circ\\eta_{B,H}=\\delta_M$. Hence $f=\\delta_M$. This proves uniqueness among all morphisms with the given source and target, and in particular uniqueness among the natural $B$-linear comparisons.",
+   "uses": [
+    "lem-sfb-exact-open-closed-unbounded-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+    "place": "(2), uniqueness for the specified restriction normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(2), closed-immersion analogue of extension by zero, using the supported-unit construction in the current DAG ancestor proof step 5; explicit adjunction calculation. Background: Stacks proetale.tex Tags 09AA (lemma-closed-immersion), 09BM (lemma-closed-immersion-complement-retrocompact-exact), 09AH (lemma-ses-associated-to-open)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +113,52 @@
    "results": "8 hits: AlgebraicGeometry.Scheme.kerAdjunction_unit_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pushforwardSections_unitHomEquiv, AlgebraicGeometry.liftCoborder_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.instFullPushforward, AlgebraicGeometry.Scheme.kerAdjunction",
    "date": "2026-10-21",
    "verdict": "no match: ordinary scheme structure-sheaf restriction adjunctions and triangle identities do not construct this arbitrary-ring-sheaf derived supported scalar map"
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*(scalar|coefficient)|supported.*unit|extensionByZero",
+   "results": "25 hits: Mathlib/Algebra/Module/Congruence/Defs.lean, Mathlib/LinearAlgebra/Span/Defs.lean, Mathlib/LinearAlgebra/Multilinear/Basic.lean, Mathlib/Algebra/Star/NonUnitalSubalgebra.lean, Mathlib/FieldTheory/IntermediateField/Basic.lean, Mathlib/FieldTheory/Minpoly/IsIntegrallyClosed.lean, Mathlib/GroupTheory/GroupAction/SubMulAction.lean, Mathlib/GroupTheory/GroupAction/SubMulAction.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf adjunctions, adjunction identities or unrelated scalar-closedness facts do not state the derived supported coefficient construction. The abstract identities are used explicitly as elementary calculations from the assumed adjunction."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Closed immersion derived coefficient comparison is the unique morphism normalized by inverse image and counit",
+   "results": "8 hits: AlgebraicGeometry.IsClosedImmersion.instIsIsoSchemeToImage, AlgebraicGeometry.IsClosedImmersion.isIso_of_injective_of_isAffine, AlgebraicGeometry.IsClosedImmersion.lift, AlgebraicGeometry.IsClosedImmersion.instIsPreimmersion, AlgebraicGeometry.IsClosedImmersion.of_isPreimmersion, AlgebraicGeometry.IsClosedImmersion, AlgebraicGeometry.instIsClosedImmersionInclusion, AlgebraicGeometry.isClosedImmersion_iff_isAffineHom",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf adjunctions, adjunction identities or unrelated scalar-closedness facts do not state the derived supported coefficient construction. The abstract identities are used explicitly as elementary calculations from the assumed adjunction."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit, CategoryTheory.Adjunction.counit",
+   "results": "12 hits: CategoryTheory.Adjunction.toEquivalence, CategoryTheory.Adjunction.toEquivalence_functor, CategoryTheory.Adjunction.toEquivalence_inverse, CategoryTheory.Adjunction.left_triangle_components, CategoryTheory.Adjunction.right_triangle_components, CategoryTheory.Functor.isEquivalence_of_isRightAdjoint, CategoryTheory.Adjunction.left_triangle_components_assoc, CategoryTheory.Adjunction.right_triangle_components_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf adjunctions, adjunction identities or unrelated scalar-closedness facts do not state the derived supported coefficient construction. The abstract identities are used explicitly as elementary calculations from the assumed adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "If an object has zero open restriction then its closed adjunction unit is invertible and scalar tensor commutes with closed direct image",
+   "results": "8 hits: SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, CompHausLike.LocallyConstant.adjunction_left_triangle, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Functor.monoidalClosed_closed_adj, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf adjunctions, adjunction identities or unrelated scalar-closedness facts do not state the derived supported coefficient construction. The abstract identities are used explicitly as elementary calculations from the assumed adjunction."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension of scalars commutes with a fully faithful closed immersion pushforward via the supported closed unit and inverse pullback comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPushforward, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit, SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit, SheafOfModules.pushforwardPushforwardAdj, AlgebraicGeometry.Scheme.Modules.pullbackPushforwardAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, SheafOfModules.pushforwardSections_unitHomEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf adjunctions, adjunction identities or unrelated scalar-closedness facts do not state the derived supported coefficient construction. The abstract identities are used explicitly as elementary calculations from the assumed adjunction."
+  },
+  {
+   "tool": "grep",
+   "query": "closed.*(scalar|coefficient)|supported.*unit|extensionByZero",
+   "results": "0 hits: ; restricted to Mathlib/Algebra/Category/ModuleCat/Sheaf",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary sheaf adjunctions, adjunction identities or unrelated scalar-closedness facts do not state the derived supported coefficient construction. The abstract identities are used explicitly as elementary calculations from the assumed adjunction."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-scalar-six-pullback",
@@ -77,5 +175,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-closed-supported-scalar-comparison",
+  "worker": "stage1",
+  "summary": "Proved the supported closed-unit formula in four steps using the two existing technical hypotheses, with an explicit zero-object argument from the scalar adjunction, and explicit left/right triangle calculations for normalization and uniqueness. No new nodes, no statement change and no Lean work. Retained prior source and Mathlib evidence.",
+  "blueprint": "det-prop-scalar-six-pullback proof (2), current DAG proof step 5: closed-unit comparison supporting sk-prop-scalar-six step 2. The published proof gives the open alternative; the closed supported-unit expansion is agent-written.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic unbounded scalar adjunction is used only to prove T_U sends the zero object to zero via its Hom bijection; no scalar-adjunction theorem belongs to this unit."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q46-efe6d12a4",
+  "group": "Q46",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-efe6d12a4 (reviewer sub-agent of L); spot-checked: I read the item, its 4 steps, the statements of all 3 cited nodes, the parent det-prop-scalar-six-pullback (step 5 is the only citer), the unit sk-prop-scalar-six and blueprint main-20261015 det-prop-scalar-six-pullback.proof.md (2). Shape: one commit, item plus report, no new nodes. Compared with the live node, only the split fields changed; statement, stmt_deps and source are unchanged, and the live node is still unsplit. The item is not dropped and has no re-split note. Step 1: P_A I_A=0 and P_B I_B=0 from the calculus node; theta_j: T_U j_A^* -> j_B^* T_X is invertible on unbounded D (kflat node), with the direction checked; T_U 0 is initial by the scalar adjunction bijection, hence zero. Step 2: the closed unit is invertible on H since P_B H=0, the closed counit and theta_i are invertible, and the types of alpha_M: Q_B H -> T_Z Q_A I_A M -> T_Z M check out; delta equals the displayed formula, is B-linear and natural, and its open restriction is a map between zero objects. Step 3: counit naturality plus the left triangle identity give the normalization (elementary, correct). Step 4: unit naturality plus the right triangle identity give f = I(eps∘Qf)∘eta, so uniqueness holds (elementary, correct). Edge cases checked: M=0, Z or U empty, A=B, non-flat Z/l^2 -> F_l; no flatness or boundedness is used. The only nodes stating this comparison are the item and its parent, so there is no duplicate. No SGA. Tool use lem-pur-sheaf-ring-derived-coefficient-adjunction is accepted; it is only used to show T_U 0 = 0 and is already a stmt_dep here and of the kflat node. No fixes."
  }
 }
