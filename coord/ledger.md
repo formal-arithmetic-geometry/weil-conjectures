@@ -20181,3 +20181,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:04 L: merged deliver/NU/lem-sf-integral-direct-image-constructible (reviewer FIX; after a return; new nodes: 3)
 - 04:04 L: merged deliver/NV/lem-sfb-shriek-coefficient-isomorphism (reviewer PASS; first push; new nodes: 0)
 - 04:04 L: merged deliver/Q04/det-sf-existence-brown (reviewer PASS; after a return; new nodes: 2)
+- 2026-10-21T04:04:57Z L: superseded stage-1 delivery Q81/lem-sfb-lattice-subquotient-filtration at c880ae3a5687c3ff2d3875c65b0b312d44a76936; current completion retained; packet archived at refs/superseded/Q81/lem-sfb-lattice-subquotient-filtration/c880ae3a5687c3ff2d3875c65b0b312d44a76936; stale return retired.
