@@ -58,6 +58,11 @@ def _load(root, families):
             _t.append(_time.time())
             _how = "exact-after-lock"; data = read()
             if data is None:
+                # 2026-10-22 (the human: deliveries waited an hour on this lock): the builder that just finished built an
+                # ancestor of this commit; take it, as the lookup before the lock would have. Without this every waiter
+                # of a herd rebuilt the whole index for its own commit, one after the other.
+                _how = "recent-after-lock"; data = _recent(root, directory, signature, suffix, commit, families)
+            if data is None:
                 _how = "build"; data = build(root, commit, families, signature, directory)
                 fd, tmp = tempfile.mkstemp(prefix='.library-', dir=directory)
                 try:
