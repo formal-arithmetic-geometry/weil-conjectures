@@ -17,9 +17,103 @@
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $m\\ge n$, abbreviate $p=r^W_{m,n}$ and $q=r^V_{m,n}$, and put $F_i=u^{-1}:D(B_i)\\to D(C_i)$, with right adjoint $G_i$. The ring-change theorem applies with $R_W=B_m$, $S_W=B_n$, $R_V=C_m$, $S_V=C_n$, and both coefficient identifications the identity: its compatibility equation is exactly $C_m\\to C_n=u^{-1}(B_m\\to B_n)$. It gives $d:pG_n\\xrightarrow{\\sim}G_mq$ and hence $\\delta=d^{-1}$. The scalar adjunctions are $T\\dashv p$ and $S\\dashv q$ on the ordinary unbounded derived categories. All four sites/ringed topoi in this coefficient square are small in the prescribed universe.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-size-convention"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written coefficient-square mate calculation."
+   }
+  },
+  {
+   "text": "Consider the two equal ringed-topos composites $(V,C_n)\\to(W,B_m)$, factored through $(V,C_m)$ and through $(W,B_n)$. Their composite left adjoints are $SF_m$ and $F_nT$, and their composite right adjoints are $G_mq$ and $pG_n$. Write $\\alpha:SF_m\\xrightarrow{\\sim}F_nT$ for the canonical pullback comparison between the two factorizations (built from the pullback-composition comparisons $c_{f,g}$) and $\\chi=\\alpha^{-1}$. Since each $\\kappa$ is adjunction-compatible, both composite adjunctions are identified with the adjunction of the composite, so $d:pG_n\\to G_mq$, the direct-image comparison of the two factorizations, is the right-adjoint conjugate of $\\alpha$; hence $\\delta=d^{-1}$ is the conjugate of $\\chi$. It remains to see that $\\alpha$ is the coefficient comparison used to define $b$, which the normalized geometric interface fixes as the $S\\dashv q$ transpose of the identity-on-underlying-sheaves comparison $u^{-1}p=qu^{-1}$, namely of $F_m(\\eta^T_P):F_mP\\to qF_nTP$. Check on a K-flat complex $P$ of $B_m$-modules with flat terms, where both are computed termwise. Since $C_i=u^{-1}B_i$, module pullback is $u^{-1}$, and $c_{f,g}$ makes $\\alpha_P$ the class of $u^{-1}P\\otimes_{C_m}C_n\\to u^{-1}(P\\otimes_{B_m}B_n)$, $x\\otimes\\lambda\\mapsto\\lambda\\cdot u^{-1}(x\\otimes1)$. Normalizations (1) and (2) of the coefficient adjunction compute that transpose as $x\\otimes\\lambda\\mapsto\\lambda\\cdot u^{-1}(\\eta^T_P(x))=\\lambda\\cdot u^{-1}(x\\otimes1)$: the same map. Thus $b$ is the mate of $\\chi:F_nT\\to SF_m$.",
+   "uses": [
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-coef-semilinear-derived-sections",
+    "def-coef-semilinear-geometry-derived",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written coefficient-square mate calculation."
+   }
+  },
+  {
+   "text": "Write $\\eta^T:1\\to pT$, $\\epsilon^S:Sq\\to1$ for the scalar unit and counit and $\\eta^i,\\epsilon^i$ for those of $F_i\\dashv G_i$. By the definition of mate, $b:TG_m\\to G_nS$ is the mate of $\\chi:F_nT\\to SF_m$ under $F_m\\dashv G_m$ and $F_n\\dashv G_n$:\n$$b=G_nS\\epsilon^m\\circ G_n\\chi G_m\\circ\\eta^nTG_m.$$\nThe composite adjunctions of step 2 have units and counits as in the mate-pasting theorem: $\\eta^{F_nT}=p\\eta^nT\\circ\\eta^T$ and $\\epsilon^{SF_m}=\\epsilon^S\\circ S\\epsilon^mq$. Hence the conjugate of $\\chi$, which is $\\delta$ by step 2, is\n$$\\delta=pG_n\\epsilon^S\\circ pG_nS\\epsilon^mq\\circ pG_n\\chi G_mq\\circ p\\eta^nTG_mq\\circ\\eta^TG_mq,$$\nand the middle three factors are $p(bq)$. So, at every $L\\in D(C_n)$,\n$$\\delta_L=pG_n(\\epsilon^S_L)\\circ p(b_{qL})\\circ\\eta^T_{G_mqL}.$$\nThis is a direct unit/counit calculation; it does not assert that taking mates preserves invertibility for an arbitrary square.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written coefficient-square mate calculation."
+   }
+  },
+  {
+   "text": "For $a:M\\to qL$, step 3 and naturality of $\\eta^T$ give\n$$\\delta_LG_m(a)=p\\bigl(G_n(\\epsilon^S_L)b_{qL}T G_m(a)\\bigr)\\eta^T_{G_mM}.$$\nThe transpose of a map $h:TX\\to Y$ is $p(h)\\eta^T_X$. Hence the scalar transpose of the left side is $G_n(\\epsilon^S_L)b_{qL}TG_m(a)$. Naturality of $b$ rewrites this as\n$$G_n(\\epsilon^S_L)G_n(Sa)b_M=G_n(\\epsilon^S_L\\circ Sa)b_M=G_n(a^\\sharp)b_M,$$\nsince the other scalar adjunction gives $a^\\sharp=\\epsilon^S_L\\circ Sa$. This proves the asserted identity for arbitrary $M,L,a$.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written coefficient-square mate calculation."
+   }
+  },
+  {
+   "text": "Apply the coherent-section theorem to $N$. Under its specified evaluation isomorphisms the extension-form transition is\n$$t^{GN}_{m,n}=G_n(t^N_{m,n})\\circ b_{N_m}.$$\nBy construction of the reduction maps from semilinear transitions, $t^N_{m,n}=(a^N_{m,n})^\\sharp$ and $t^{GN}_{m,n}=(a^{GN}_{m,n})^\\sharp$. Step 4 with $M=N_m$, $L=N_n$, $a=a^N_{m,n}$ identifies the displayed right side with $(\\delta_{N_n}G_m(a^N_{m,n}))^\\sharp$. Injectivity of the scalar adjunction bijection now yields $a^{GN}_{m,n}=\\delta_{N_n}\\circ G_m(a^N_{m,n})$. This proves equality of these actual evaluated transition maps without using joint faithfulness of evaluation on arbitrary system-derived morphisms.",
+   "uses": [
+    "lem-coef-semilinear-derived-sections",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written coefficient-square mate calculation."
+   }
+  },
+  {
+   "text": "For the normalization, take a K-injective $C_n$-complex $I$ and a K-injective replacement $j:qI\\to H$ over $C_m$. Apply the normalized direct-image composition comparison to the factorization through $(V,C_m)$. Its representative is $u_*qI\\xrightarrow{u_*j}u_*H$. For the other factorization, restriction $p$ is exact and its derived functor is termwise restriction, so its source is canonically $pu_*I=u_*qI$. Thus the comparison between these two factorizations is $d_{QI}=[u_*j]$ under the canonical identifications. Inverting gives exactly the normalization of $\\delta$ in the statement. The quoted composition theorem supplies that this representative is a quasi-isomorphism. All comparisons and adjunction bijections used above are natural, so the resulting formula is natural in $N$. When $m=n$ the coefficient morphisms and their pullback comparisons are identities; identity compatibility of composition adjunctions gives $\\delta=1$, and both transition maps are identities. The argument nowhere restricts the tower maps to be flat or $N$ to be normalized, and makes no claim that $q$ or $e_n$ preserves K-injectives.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-coef-semilinear-derived-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 07A6 (lemma-adjoint), 0D6D (lemma-derived-pullback-composition), 0D6E (lemma-derived-pushforward-composition); agent-written coefficient-square mate calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-weil-size-convention",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-coef-semilinear-derived-sections",
+  "def-coef-semilinear-geometry-derived",
+  "def-weil-pbc-adjunction-mate",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 07A6, 0D6D and 0D6E: coefficient-square application, combined with the existing semilinear-system transition theorem and its normalized geometric interface."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -91,10 +185,45 @@
    "results": "8 hits; PresheafOfModules.restrictScalarsObj, RestrictScalars, LinearMap.restrictScalarsₗ, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.fromExtendScalars, ModuleCat.restrictCoextendScalarsAdj, PresheafOfModules.restrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars",
    "date": "2026-10-21",
    "verdict": "no match: underived module adjunction/composition or scalar restriction, without the unbounded system mate and its K-injective comparison normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pushforward, CategoryTheory.Adjunction",
+   "results": "6 hits; SheafOfModules.overPushforwardOverAdj, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.PullbackConstruction.adjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module or sheaf adjunctions/composition, or abstract localization comparisons; none states the unbounded system transition with the specified scalar mate and resolution normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The adjunction transpose of the restriction of scalars comparison for derived pushforward of a module tower is the coefficient extension mate",
+   "results": "8 hits; ModuleCat.restrictCoextendScalarsAdj, ModuleCat.extendRestrictScalarsAdj, ModuleCat.homEquiv_extendScalarsComp, ModuleCat.RestrictionCoextensionAdj.app', ModuleCat.ExtendRestrictScalarsAdj.unit, ModuleCat.extendRestrictScalarsAdj_homEquiv_apply, ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.ExtendRestrictScalarsAdj.Unit.map",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module or sheaf adjunctions/composition, or abstract localization comparisons; none states the unbounded system transition with the specified scalar mate and resolution normalization."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Tt]ransition|[Tt]ransition.*derived|semilinear.*system",
+   "results": "1 hits; Mathlib/Algebra/Ring/CompTypeclasses.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module or sheaf adjunctions/composition, or abstract localization comparisons; none states the unbounded system transition with the specified scalar mate and resolution normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived direct image of module systems has restriction transitions given by the canonical ring change comparison and its scalar adjunction mate",
+   "results": "8 hits; ModuleCat.RestrictScalars.obj', ModuleCat.restrictScalars, PresheafOfModules.restrictScalarsObj, PresheafOfModules.pushforward_obj_map_apply', ModuleCat.restrictCoextendScalarsAdj, PresheafOfModules.restrictScalars, RestrictScalars, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module or sheaf adjunctions/composition, or abstract localization comparisons; none states the unbounded system transition with the specified scalar mate and resolution normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For unbounded derived semilinear module systems, the transition of right derived direct image equals pushforward of transition followed by inverse ring change comparison",
+   "results": "8 hits; PresheafOfModules.pushforwardComp, PresheafOfModules.pushforward_assoc, SheafOfModules.pushforwardComp_inv_app_val_app, SheafOfModules.pushforwardComp, SheafOfModules.pushforwardCongr, PresheafOfModules.pushforwardCompToPresheaf, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module or sheaf adjunctions/composition, or abstract localization comparisons; none states the unbounded system transition with the specified scalar mate and resolution normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-compact-support-reduction-tower-functor",
@@ -114,5 +243,54 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-system-pushforward-restriction-transition",
+  "worker": "stage1",
+  "summary": "Q82: no exact project attachment found. Proved the coefficient-square identification using existing adjunction-compatible composition and mate-pasting nodes, expanded the scalar unit/counit calculation, deduced the restriction-form transition by the existing extension-form transition theorem, and checked K-injective normalization and identity levels. No new nodes and no statement change.",
+  "blueprint": "First sentence of the proof of lem-weil-compact-support-representative-independence: the implicit varying-coefficient direct-image transition identification required by the coherent integral compact-support tower. Current snapshot main-20261015, sec-six-functors-basics/sk-thm-sf-pf-field/lem-weil-compact-support-representative-independence.proof.md.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Canonical ring-change comparison for the coefficient square, with exactly the pulled-back coefficient hypotheses."
+   },
+   {
+    "node": "def-weil-size-convention",
+    "why": "Small-site universe convention for applying composition and the coherent-section construction."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Supplies adjunction-compatible canonical composition comparisons for the coefficient square; the local unit has no separate theorem stating this normalization."
+   },
+   {
+    "node": "lem-coef-semilinear-derived-sections",
+    "why": "Supplies the actual simultaneous derived direct image, its normalized evaluation and its extension-form transitions, the coherent construction the local unit needs."
+   },
+   {
+    "node": "def-coef-semilinear-geometry-derived",
+    "why": "Specifies the normalization of the coefficient-pullback comparison used by the cited coherent-section construction."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Resolution-normalized composition comparison needed to identify the specified restriction comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "def-weil-size-convention",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-coef-semilinear-derived-sections",
+  "def-coef-semilinear-geometry-derived",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q82-593781192",
+  "group": "Q82",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-593781192 (reviewer sub-agent of L); spot-checked: Read the item, all 9 cited statements, Stacks 0D6E/0D6D/07A6 (sites-cohomology.tex l.4011) and the ancestor proof (main-20261015). The statement is unchanged from base. The item is unsplit on live, has no repair note and is not on the dropped list. No new nodes, no cycle (600-node closure checked), and no duplicate among the system/tower transition nodes I read. The dictionary to lem-weil-pbc-ring-sheaf-change-adjunction is correct (U=V, V=W, R=B_m/C_m, S=B_n/C_n, identity c's), so δ=d^{-1}: G_m q → pG_n. Small cases m=n, u=id, N=0 and the non-flat tower Z/4→Z/2 are all fine. Steps 1, 4, 5 and 6 are correct; in step 6, u_* keeps K-injectives and Rp is termwise p, so d_{QI}=[u_*j]. The declared tool uses are accepted as generic. FIX of two terse places, written out in fixes/dag/nodes/sec-smooth-purity/<item>.json. (1) Step 2 (E5): α (the pullback-composition comparison) was identified with def-coef-semilinear-geometry-derived's scalar transpose of the identity restriction comparison only by assertion. It now has the flat-term K-flat check x⊗λ↦λ·u^{-1}(x⊗1) via normalizations (1) and (2) of lem-pur-sheaf-ring-derived-coefficient-adjunction, which is added to the step's uses. (2) Step 3: the formula δ_L = pG_nε^S∘p(b_{qL})∘η^T was claimed by 'mate-pasting', which states no horizontal/vertical double-mate clause. It is now an explicit expansion of the conjugate of χ using the composite unit and counit, with b = G_nSε^m∘G_nχG_m∘η^nTG_m. proof_deps are unchanged.; 1 file(s) fixed by the reviewer"
+ }
 }

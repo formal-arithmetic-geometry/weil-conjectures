@@ -20579,3 +20579,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:13 L: merged deliver/Q77/lem-pur-ringed-derived-pullback-linear (reviewer PASS; first push; new nodes: 0)
 - 07:13 L: merged deliver/Q45/lem-pur-integral-line-reduction-restriction (reviewer PASS; first push; new nodes: 0)
 - 07:13 L: merged deliver/Q92/def-nagata-scheme-theoretic-image (reviewer PASS; first push; new nodes: 0)
+- 07:13 L: merged deliver/Q82/lem-pur-system-pushforward-restriction-transition (reviewer FIX; first push; new nodes: 0)
