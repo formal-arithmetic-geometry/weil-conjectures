@@ -12,7 +12,7 @@
  "stmt_deps": [],
  "proof": [
   {
-   "text": "Use the existing total derived functors and adjunction. Cache leftDerivedUpperStarComp with the named derived functors in its signature. Form coefficientAmbientSquare from the same inverse composition map, equality transport along sq.w, and other composition map, using an objectwise three-isomorphism constructor; coefficientIsoTransThree_eq identifies it with the ordinary composite. Define the generic FunctorComparisonSquare predicate as the universal component equation for functor comparisons between category families. Specialize it to the etale and internal derived functors to define CoefficientPullbackSquare; beta reduction gives exactly its former binders and equation. Reuse the same family and square interfaces in the existing records; no mathematical object or property changes. Preserve the non-exposed adjunction and ambient-square bodies and both existing equation APIs. The new coefficientAmbientSquare_eq exposes the objectwise construction to the square proof; coefficientAmbientSquare_app retains its original signature and follows from coefficientIsoTransThree_eq and NatIso.trans_app.",
+   "text": "Use the existing total derived functors and adjunction. Cache leftDerivedUpperStarComp with the named derived functors in its signature. Form coefficientAmbientSquare from the same inverse composition map, equality transport along sq.w, and other composition map, using an objectwise three-isomorphism constructor; coefficientIsoTransThree_eq identifies it with the ordinary composite. Define the generic FunctorComparisonSquare predicate as the universal component equation for functor comparisons between category families. Specialize it to the etale and internal derived functors to define CoefficientPullbackSquare; beta reduction gives exactly its former binders and equation. Reuse the same family and square interfaces in the existing records; no mathematical object or property changes. Preserve the non-exposed adjunction and ambient-square bodies and both existing equation APIs. The new coefficientAmbientSquare_eq exposes the objectwise construction to the square proof; coefficientAmbientSquare_app retains its original signature and follows by rewriting coefficientAmbientSquare_eq and reducing the objectwise components. For the restored component formulas, rewrite coefficientAmbientSquare_eq before using the objectwise component definition; neither proof unfolds the cached ambient-square definition.",
    "uses": [],
    "elementary": true
   }
@@ -22,7 +22,7 @@
   "by": "agent",
   "document": "lean/WeilConjectures/SixFunctors/ProEtale/ModuleObject/Derived/UpperLowerStar.lean",
   "place": "derivedUpperStarLowerStarAdjunction and leftDerivedUpperStarComp",
-  "note": "B3: cached composition components and a generic category-family square predicate avoid kernel expansion of concrete derived-functor components; the mathematical comparisons and square equation are unchanged. Return repair, B3 2026-10-17: rebased on the current non-exposed wrappers; retained coefficientDerivedAdjunction_eq and coefficientAmbientSquare_app and their signatures."
+  "note": "B3: cached composition components and a generic category-family square predicate avoid kernel expansion of concrete derived-functor components; the mathematical comparisons and square equation are unchanged. Return repair, B3 2026-10-17: rebased on the current non-exposed wrappers; retained coefficientDerivedAdjunction_eq and coefficientAmbientSquare_app and their signatures. P3 2026-10-21: restore the complete quarantined API and retain every declaration, definition body, public import, attribute and signature. Use coefficientAmbientSquare_eq in both component proofs. No mathematical route or dependency changes."
  },
  "mathlib_searches": [
   {
@@ -105,14 +105,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "XREPAIR-af46747ed5a82c85",
-  "group": "XRaf46747ed5a82c85",
+  "reviewer": "COMPILER",
+  "group": "P3",
   "result": "pass",
-  "landing": "20261017T095839-L-2856933",
-  "kind": "interface",
-  "note": "maintainer L-only: restored B3 delivery 22f176714e; unfold Etale.pullbackSquareComparison -> rw [Etale.pullbackSquareComparison_def]; each file compiles alone (11.7/7.9/14.6 s); gate AUTO"
+  "landing": "20261021T021923-L-2793030",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },
  "lean_audit": {
   "master": {
