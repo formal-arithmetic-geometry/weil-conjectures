@@ -20,89 +20,61 @@
  ],
  "proof": [
   {
-   "text": "Identify the coefficient rings before using scalar extension. The canonical isomorphisms of [lem-weil-pbc-continuous-coefficients-immersion-restriction] identify $A_X$ with $\\varprojlim_n(A/\\varpi^n)_X$ and identify the actual inclusion $A_X\\to E_X$ with $A_X\\to A_X[1/\\varpi]$. Thus [lem-weil-pbc-scalar-localization-sheaf-exact], with $R=A_X$ and $s=\\varpi$, says that $S_X=E_X\\otimes_{A_X}-$ is an exact additive functor on the ambient abelian categories of module sheaves. The coefficient identifications apply because $X$ is noetherian; the localization exactness lemma has no additional geometric hypothesis.",
+   "text": "Apply the expanded denominator-surjectivity hypothesis directly to the Ext class of the given rational short exact sequence. It supplies m and an integral short exact sequence 0→Q→B→P→0, its scalar-extended short exact sequence, and the equality of its Ext class with the given class postcomposed by multiplication by the uniformizer power. No reconstruction from a fraction and no separate proof of exact scalar extension is needed: these data are explicit in the unchanged Lean hypothesis.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10, Proposition 6.8.11(3), and Lemma 6.5.8(1)."
+   }
+  },
+  {
+   "text": "Use the continuous/completed degree-zero comparison e. The equivalence is additive and exact, so the integral short exact sequence gives a distinguished single-object triangle e(Q)[0]→e(B)[0]→e(P)[0]. Constructibility of P,Q gives membership of both endpoints in the complete category. Its triangulated, isomorphism-closed property puts the middle object there; the comparison in the reverse direction proves B continuous-constructible.",
    "uses": [
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-weil-pbc-scalar-localization-sheaf-exact"
+    "lem-weil-pbc-continuous-integral-constructible-comparison",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "lem-weil-pbc-complex-ses-triangle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+    "place": "Definition 6.8.10, Proposition 6.8.11(3), and Lemma 6.5.8(1)."
    }
   },
   {
-   "text": "Write the given sequence as $\\mathcal E:0\\to S_XQ\\xrightarrow{u}F\\xrightarrow{v}S_XP\\to0$. By [lem-weil-pbc-ext-one-extension-classification] it has a class $\\xi\\in\\operatorname{Ext}^1_{E_X}(S_XP,S_XQ)$. Surjectivity in the hypothesis supplies a preimage. Every element of the localized module is a fraction by [def-weil-pbc-module-localization-away], so choose $m\\geq0$ and $\\alpha\\in\\operatorname{Ext}^1_{A_X}(P,Q)$ with $\\xi=\\varpi^{-m}S_X(\\alpha)$. Consequently $S_X(\\alpha)=\\varpi^m\\xi$. This uses the specified scalar-extension map, rather than an unspecified isomorphism of Ext groups.",
+   "text": "The chosen uniformizer is nonzero because it generates the nonzero maximal ideal of a DVR. Its mth power is therefore nonzero in E. Multiplication by this scalar on the rational Q-module sheaf is an automorphism, with inverse multiplication by its inverse; the identities follow sectionwise from smul_smul and one_smul.",
    "uses": [
-    "lem-weil-pbc-ext-one-extension-classification",
-    "def-weil-pbc-module-localization-away"
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+    "place": "Definition 6.8.10, Proposition 6.8.11(3), and Lemma 6.5.8(1)."
    }
   },
   {
-   "text": "Apply the surjective direction of [lem-weil-pbc-ext-one-extension-classification] in the ambient category of $A_X$-module sheaves to $\\alpha$. Obtain an actual short exact sequence $\\mathcal A:0\\to Q\\xrightarrow{i}N\\xrightarrow{p}P\\to0$ whose connecting class is $\\alpha$. This assertion does not yet claim constructibility of $N$; that is checked separately in the next step.",
+   "text": "Twist the given inclusion by the inverse scalar automorphism. This preserves short exactness by an isomorphism of short complexes. Naturality of extClass identifies the twisted class with the original class postcomposed by the scalar automorphism, hence with the scalar-extended integral sequence class. The injective direction of Ext-one extension classification gives an isomorphism of middle objects S(B)≅F. Return B and this isomorphism.",
    "uses": [
     "lem-weil-pbc-ext-one-extension-classification"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
-   }
-  },
-  {
-   "text": "To verify the required notion of constructibility, use the completed-ring isomorphism in [lem-weil-pbc-continuous-coefficients-immersion-restriction]. The complexes $Q[0]$ and $P[0]$ satisfy condition (iii) of [lem-weil-pbc-integral-stratified-perfect-characterization]: they are bounded, their sole cohomology sheaves are $Q,P$, and their finite stratifications with local models $A_X\\otimes_A M$ are exactly those in the hypothesis. Here the coefficient restriction to each stratum agrees with the continuous coefficient ring by the same immersion-restriction lemma. Regard $\\mathcal A$ as a degreewise short exact sequence of degree-zero complexes. By [lem-weil-pbc-complex-ses-triangle] it gives a distinguished triangle $Q[0]\\to N[0]\\to P[0]\\to Q[0][1]$. The full subcategory in the characterization is closed under shifts and cones, hence contains $N[0]$ as well (rotate this triangle to $P[0][-1]\\to Q[0]\\to N[0]$). Applying condition (iii) back to $N[0]$ proves that $N$ is continuous-constructible with ordinary finitely presented $A$-module local models. The finite-extension, noetherian, finite-dimensional, and invertibility hypotheses of the characterization are precisely assumed here; no local freeness or torsion-freeness of $P,Q$ is used.",
-   "uses": [
-    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-weil-pbc-complex-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
-   }
-  },
-  {
-   "text": "Exactness from step 1 sends $\\mathcal A$ to $0\\to S_XQ\\xrightarrow{S_Xi}S_XN\\xrightarrow{S_Xp}S_XP\\to0$. By the exact-functor compatibility in [lem-weil-pbc-ext-one-extension-classification], its class is $S_X(\\alpha)=\\varpi^m\\xi$. Define another short exact sequence $\\mathcal E_m$ with the same middle and quotient sheaves as $\\mathcal E$, but inclusion $u_m=u\\circ(\\varpi^{-m}\\operatorname{id}_{S_XQ})$. It is short exact because the scalar factor is an automorphism. The triple $(\\varpi^m\\operatorname{id}_{S_XQ},\\operatorname{id}_F,\\operatorname{id}_{S_XP})$ is a morphism $\\mathcal E\\to\\mathcal E_m$, since $u_m\\circ\\varpi^m=u$ and $v\\circ\\operatorname{id}_F=\\operatorname{id}_{S_XP}\\circ v$. Naturality of the connecting morphism in [lem-weil-pbc-complex-ses-triangle], applied to the corresponding degree-zero complexes, gives $[\\mathcal E_m]=(\\varpi^m\\operatorname{id}_{S_XQ})[1]\\circ\\xi=\\varpi^m\\xi$. Scalar multiplication here is postcomposition by the shifted scalar map, the usual module action on derived Ext.",
-   "uses": [
-    "lem-weil-pbc-ext-one-extension-classification",
-    "lem-weil-pbc-complex-ses-triangle"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
-   }
-  },
-  {
-   "text": "The rationalization of $\\mathcal A$ and $\\mathcal E_m$ now have the same endpoints and the same degree-one Ext class. The injective direction of [lem-weil-pbc-ext-one-extension-classification] gives an isomorphism $h:S_XN\\xrightarrow{\\sim}F$ with $h\\circ S_Xi=u_m$ and $v\\circ h=S_Xp$. The constructibility of $N$ was proved in step 4, so this is the requested integral model. The formula for $u_m$ explains exactly why the result asserts no compatibility with the originally prescribed inclusion $u$.",
-   "uses": [
-    "lem-weil-pbc-ext-one-extension-classification"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+    "place": "Definition 6.8.10, Proposition 6.8.11(3), and Lemma 6.5.8(1)."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
-  "lem-weil-pbc-scalar-localization-sheaf-exact",
-  "lem-weil-pbc-ext-one-extension-classification",
-  "def-weil-pbc-module-localization-away",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-complex-ses-triangle"
+  "lem-weil-pbc-continuous-integral-constructible-comparison",
+  "lem-weil-pbc-uniform-complete-triangulated",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-ext-one-extension-classification"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.13, final paragraph; Proposition 6.8.11(1),(3); denominator argument expanded using Stacks Tags 06XV and 0152."
+  "place": "Lemma 6.8.13, final Ext-denominator argument; Proposition 6.8.11(3). Lean proof uses the expanded denominator hypothesis directly and isolates the coefficient/slice-model comparison."
  },
  "mathlib_searches": [
   {
@@ -253,5 +225,15 @@
   "group": "O4",
   "result": "pass",
   "note": "Clause-by-clause match of node and Lean: canonical changeOfRings along the subring inclusion, IsContinuousConstructible for P/Q/N, Mathlib Ext, conclusion Nonempty(S N ≅ F) with no compatibility condition. The surjectivity hypothesis is stated via short-exact representatives (ξ.comp(mk₀ ϖ^m) = class of the scalar-extended integral SES, B not assumed constructible); it is equivalent to the localized-Ext surjectivity via ext_one_extension_classification and exactness of S (node step 1). Helper integralModelConstantScalar has real data and no existing duplicate. Docstrings, sorry-only proof, imports (stmt and proof dep modules), lines ≤93, only the lean field changed, statement verbatim, both report sections present. Source BS 6.8.13 checked. Edge cases empty X, zero/torsion P/Q, m=0 and universes ok. nt_compile --json clean in 38.5 s (delivery recorded 38.0 s). Advisory only: def-weil-pbc-module-localization-away is not referenced in the signature."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261021T165932-L-2306566",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

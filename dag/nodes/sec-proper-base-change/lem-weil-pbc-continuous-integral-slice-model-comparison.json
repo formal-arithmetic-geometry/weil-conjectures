@@ -1,0 +1,144 @@
+{
+ "id": "lem-weil-pbc-continuous-integral-slice-model-comparison",
+ "kind": "statement",
+ "title": "Finite scalar models in continuous and completed coefficients on a slice",
+ "statement": "Let l be prime, E/Q_l finite, A its topological valuation ring, and X a Noetherian scheme [def-weil-l-adic-coefficient-extension, def-pc-scheme]. Use continuous coefficients A_X and the ordinary scalar modules A_T tensor_A P [def-weil-pbc-continuous-constructible-module], and the lifted valuation ring O^up with completed coefficient sheaf B_X [def-weil-pbc-adic-coefficient-datum]. Fix any ring equivalence s:A^up≃O^up and ring-sheaf isomorphism c:B_X≃A_X respecting the actual constant scalar maps [def-weil-pbc-rational-category]. Let e:Mod(A_X)≃Mod(B_X) be restriction along c [def-weil-pbc-continuous-coefficient-module-encoding]. For every locally closed immersion h:Z→X [def-weil-proetale-inverse-image], every A_X-module sheaf M, and every object U of Z_proet, these conditions are equivalent: (a) the slice restriction of the continuous ringed pullback h* M is isomorphic to (A_Z tensor_A P)|U for some finitely presented A^up-module P; (b) the slice restriction of raw inverse image h^(-1)e(M), over h^(-1)B_X, is isomorphic to h^(-1)F_X(N)|U for some finitely presented O^up-module N, where F_X is the ordinary completed scalar realization [def-weil-pbc-integral-stratified-perfect-models]. No Ext groups, exact sequences, stratifications, constructibility, completeness or cohomological boundedness of M are involved; zero and torsion modules are allowed.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10, Proposition 6.8.11(3), and Lemma 6.5.8(1)."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-rational-category",
+  "def-weil-pbc-continuous-coefficient-module-encoding"
+ ],
+ "proof": [
+  {
+   "text": "For h:Z→X a locally closed immersion, the immersion restriction comparison identifies h^(-1)A_X with A_Z. This comparison is the adjunct of precomposition of continuous functions; after each finite quotient projection it is the constant-ring comparison. The given coefficient isomorphism c therefore gives an isomorphism h^(-1)B_X≅A_Z compatible with the actual scalar maps and with constant sections. No exchange of arbitrary infinite limits with arbitrary scheme pullback is used: h is precisely an immersion. Compatibility with the scalar maps is the stated normalization hypothesis; it is preserved by inverse image.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10, Proposition 6.8.11(3), and Lemma 6.5.8(1)."
+   }
+  },
+  {
+   "text": "Transport ordinary module inverse image and ordinary scalar extension across the coefficient isomorphisms. Their tensor/adjunction universal properties identify the pullback of F_X(N) with A_Z tensor_A P, where P is N restricted along s. The equivalence of scalar module categories preserves finite presentation in both directions. Restrict these natural comparisons to Over U. The resulting coefficient restrictions are equivalences on the slice; apply full faithfulness in one direction and the inverse equivalence in the other to the model isomorphisms. Zero and torsion modules and the empty slice are included.",
+   "uses": [
+    "def-weil-pbc-integral-stratified-perfect-models",
+    "def-weil-pbc-continuous-constructible-module",
+    "def-weil-pbc-continuous-coefficient-module-encoding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10, Proposition 6.8.11(3), and Lemma 6.5.8(1)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-continuous-coefficients-immersion-restriction",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-integral-stratified-perfect-models",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-weil-pbc-continuous-coefficient-module-encoding"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Definition 6.8.10, Proposition 6.8.11(3), and Lemma 6.5.8(1)."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous valuation ring coefficients and completed adic coefficients identify finitely presented constant scalar sheaf models on a pro etale slice",
+   "results": "8 hits: AdicCompletion.val_smul_eq_evalₐ_smul; IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers; NumberField.FinitePlace.embedding; LaurentSeries.tendsto_valuation; Valuation.instCoeCompletion; LaurentSeries.powerSeriesAlgEquiv; IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_eq_valuation'; IsDedekindDomain.HeightOneSpectrum.coe_smul_adicCompletionIntegers.",
+   "date": "2026-10-21",
+   "verdict": "No match: these concern scalar adic completions and valuations, not coefficient transport of sheaf models on slice sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing between continuous valuation ring coefficients and completed quotient coefficients preserves finite scalar models on pro etale slice sites",
+   "results": "8 hits: BDeRham, BDeRhamPlus, StandardEtalePresentation.toPresentation_val, StandardEtalePresentation.toPresentation_σ', StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePresentation, StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation, StandardEtalePair.instFormallyEtaleRing.",
+   "date": "2026-10-21",
+   "verdict": "No match: the returned completion rings and etale scalar presentations do not compare the continuous and completed ring sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"IsIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact sheaf-model comparison found."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|restrictScalars.*overFunctor|changeOfRings.*[iI]so",
+   "results": "1 hit: SheafOfModules.overFunctorMap, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:83.",
+   "date": "2026-10-21",
+   "verdict": "Used overFunctorMap for the covering-family-to-sieve proof; it gives restriction within one coefficient presentation, not the comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelsExtensionClosed",
+  "date": "2026-10-21",
+  "group": "R5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Historical integral-lattice sentence: coefficient and local-model identification in step 4 of lem-weil-pbc-integral-models-extension-closed, expanded from BS Definition 6.8.10 and Lemma 6.5.8(1).",
+   "via": [
+    "lem-weil-pbc-integral-models-extension-closed",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralSliceModelComparison",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralSliceModelComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousIntegralSliceModelComparison",
+  "statement": "theorem continuousIntegralSliceModelComparison\n    (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] [IsNoetherian X]\n    (s : ULift.{u + 1} (latticeCoefficientIntegers l E) ≃+* Scheme.PbcIntegralRing l E)\n    (c : Scheme.pbcAdicCompletion X (Scheme.pbcIntegralDatum l E) ≅\n      latticeCoefficientSheaf X (latticeCoefficientIntegers l E))\n    (_hc : (constantSheaf (Scheme.ProEt.topology X) CommRingCat.{u + 1}).map\n        s.toCommRingCatIso.hom ≫ Scheme.pbcCompletedScalar X (Scheme.pbcIntegralDatum l E) =\n      continuousCoefficientConstantMap X (latticeCoefficientIntegers l E) ≫ c.inv) :\n      ∀ {Z : Scheme.{u}} (h : Z ⟶ X) [IsImmersion h]\n        (M : SheafOfModules.{u + 1}\n          (latticeModuleRing X (latticeCoefficientIntegers l E))) (U : Z.ProEt),\n        (∃ P : ModuleCat.{u + 1} (ULift.{u + 1} (latticeCoefficientIntegers l E)),\n          Module.FinitePresentation (ULift.{u + 1} (latticeCoefficientIntegers l E)) P ∧\n          Nonempty ((continuousModulePullback h (latticeCoefficientIntegers l E) M).over U ≅\n            (continuousCoefficientModule Z (latticeCoefficientIntegers l E) P).over U)) ↔\n        (∃ N : ModuleCat.{u + 1} (Scheme.PbcIntegralRing l E),\n          Module.FinitePresentation (Scheme.PbcIntegralRing l E) N ∧\n          Nonempty ((SheafOfModules.overFunctor _ U).obj\n            ((Scheme.proEtaleModuleInverseImage h\n              (Scheme.pbcAdicCompletion X (Scheme.pbcIntegralDatum l E))).obj\n                ((CondensedRing.ringModuleEquivalenceOfIso X\n                  ((Scheme.adicLisseForget X).mapIso c)).functor.obj M)) ≅\n            (SheafOfModules.overFunctor _ U).obj\n              ((Scheme.proEtaleModuleInverseImage h\n                (Scheme.pbcAdicCompletion X (Scheme.pbcIntegralDatum l E))).obj\n                  ((Scheme.integralConstantModule X (Scheme.pbcIntegralDatum l E)).obj N))))",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261021T165932-L-2306566",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261021T165932-L-2306566",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

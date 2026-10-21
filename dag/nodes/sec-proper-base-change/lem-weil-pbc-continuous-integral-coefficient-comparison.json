@@ -1,0 +1,151 @@
+{
+ "id": "lem-weil-pbc-continuous-integral-coefficient-comparison",
+ "kind": "statement",
+ "title": "Continuous integral coefficients agree with their normalized completed presentation",
+ "statement": "Let l be prime, E/Q_l a finite extension, A its valuation ring with the valuation topology, and X any scheme [def-weil-l-adic-coefficient-extension, def-pc-scheme]. Let A_X be the sheaf of continuous A-valued functions, using the lifted section convention [def-weil-pbc-continuous-constructible-module]. Let O be the standard valuation subring in E, O^up its universe lift, and B_X the completed coefficient sheaf of its adic datum [def-weil-pbc-adic-coefficient-datum]. There exist a ring equivalence s:A^up≃O^up and a ring-sheaf isomorphism c:B_X≃A_X. They respect the actual scalar maps: the constant sheaf map induced by s followed by the completed scalar map O^up_X→B_X [def-weil-pbc-rational-category] equals the constant-section map A^up_X→A_X followed by c^(-1). No Noetherian, dimension or invertibility assumption on X is required.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 4.2.12 and 6.8.2(1), with the completed coefficient convention in Section 6.5; explicit ULift and constant-scalar normalization."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-pc-scheme",
+  "def-weil-pbc-continuous-constructible-module",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-rational-category"
+ ],
+ "proof": [
+  {
+   "text": "Restrict WithAbs.equiv to the integer subrings. Their membership conditions are definitionally identical; the resulting ring equivalence is isometric. Postcomposition gives an isomorphism from lifted continuous A-valued functions to continuous functions valued in lifted O, with inverse postcomposition by the inverse equivalence. Constants, operations and restriction maps are preserved pointwise. Lift the underlying ring equivalence to s:A^up≃O^up.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "def-weil-pbc-continuous-constructible-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 4.2.12 and 6.8.2(1), with the completed coefficient convention in Section 6.5; explicit ULift and constant-scalar normalization."
+   }
+  },
+  {
+   "text": "The normalized finite quotient equivalence sends [x] to [x.down].up. Quotient surjectivity shows that it commutes with every adjacent transition. Apply the constant-sheaf functor and take the limit of this diagram isomorphism. Compose with the specified pbcCompletedComparison to identify B_X with the finite coefficient limit. Its composite with the completed scalar and each limit projection is the constant sheaf quotient map followed by the finite quotient equivalence, by the recorded normalization of adicDatumScalar.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "def-weil-pbc-adic-coefficient-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 4.2.12 and 6.8.2(1), with the completed coefficient convention in Section 6.5; explicit ULift and constant-scalar normalization."
+   }
+  },
+  {
+   "text": "Use the normalized continuousCoefficientCompletion isomorphism and the continuous-function isomorphism of step 1 to get c:B_X≃A_X. To verify the scalar equality, cancel the limit isomorphism, test each finite projection and cancel the finite continuous-functions comparison. The constant-sheaf adjunction reduces equality to constant presheaf elements, then evaluation at a point. On the left the quotient equivalence returns the lifted residue of s(a); on the right the completion comparison returns the residue of the constant continuous function a. Their normalization formulas identify them. Extensionality for continuous functions, the constant-sheaf adjunction and limit hom-ext finish the proof.",
+   "uses": [
+    "lem-weil-pbc-continuous-coefficient-completion",
+    "def-weil-pbc-continuous-constructible-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 4.2.12 and 6.8.2(1), with the completed coefficient convention in Section 6.5; explicit ULift and constant-scalar normalization."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-pbc-continuous-constructible-module",
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-continuous-coefficient-completion"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemmas 4.2.12 and 6.8.2(1), with the completed coefficient convention in Section 6.5; explicit ULift and constant-scalar normalization."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Continuous valuation ring coefficients and completed adic coefficients identify finitely presented constant scalar sheaf models on a pro etale slice",
+   "results": "8 hits: AdicCompletion.val_smul_eq_evalₐ_smul; IsDedekindDomain.HeightOneSpectrum.adicCompletionIntegers; NumberField.FinitePlace.embedding; LaurentSeries.tendsto_valuation; Valuation.instCoeCompletion; LaurentSeries.powerSeriesAlgEquiv; IsDedekindDomain.HeightOneSpectrum.valuedAdicCompletion_eq_valuation'; IsDedekindDomain.HeightOneSpectrum.coe_smul_adicCompletionIntegers.",
+   "date": "2026-10-21",
+   "verdict": "No match: these concern scalar adic completions and valuations, not coefficient transport of sheaf models on slice sites."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing between continuous valuation ring coefficients and completed quotient coefficients preserves finite scalar models on pro etale slice sites",
+   "results": "8 hits: BDeRham, BDeRhamPlus, StandardEtalePresentation.toPresentation_val, StandardEtalePresentation.toPresentation_σ', StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot, StandardEtalePresentation, StandardEtalePresentation.toSubmersivePresentation_toPreSubmersivePresentation_toPresentation, StandardEtalePair.instFormallyEtaleRing.",
+   "date": "2026-10-21",
+   "verdict": "No match: the returned completion rings and etale scalar presentations do not compare the continuous and completed ring sheaves."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"IsIso\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No exact sheaf-model comparison found."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|restrictScalars.*overFunctor|changeOfRings.*[iI]so",
+   "results": "1 hit: SheafOfModules.overFunctorMap, Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean:83.",
+   "date": "2026-10-21",
+   "verdict": "Used overFunctorMap for the covering-family-to-sieve proof; it gives restriction within one coefficient presentation, not the comparison theorem."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralModelsExtensionClosed",
+  "date": "2026-10-21",
+  "group": "R5"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Historical integral-lattice sentence: coefficient identification inside step 4 of lem-weil-pbc-integral-models-extension-closed, making explicit the continuous/completed comparison and its scalar normalization from BS Lemmas 4.2.12 and 6.8.2(1).",
+   "via": [
+    "lem-weil-pbc-integral-models-extension-closed",
+    "lem-weil-pbc-lisse-e-constructible-integral-lattice",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ContinuousIntegralCoefficientComparison",
+  "file": "lean/Sheaf/Paper/ContinuousIntegralCoefficientComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousIntegralCoefficientComparison",
+  "statement": "theorem continuousIntegralCoefficientComparison\n    (X : Scheme.{u}) (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :\n    ∃ (s : ULift.{u + 1} (latticeCoefficientIntegers l E) ≃+* PbcIntegralRing l E)\n      (c : pbcAdicCompletion X (pbcIntegralDatum l E) ≅\n        latticeCoefficientSheaf X (latticeCoefficientIntegers l E)),\n      (constantSheaf (ProEt.topology X) CommRingCat.{u + 1}).map\n          s.toCommRingCatIso.hom ≫ pbcCompletedScalar X (pbcIntegralDatum l E) =\n        continuousCoefficientConstantMap X (latticeCoefficientIntegers l E) ≫ c.inv",
+  "branch": "sheaf-dag",
+  "by": "R5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261021T165932-L-2306566",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R5",
+  "result": "pass",
+  "landing": "20261021T165932-L-2306566",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

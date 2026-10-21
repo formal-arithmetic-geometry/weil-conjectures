@@ -13,10 +13,9 @@ public import Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass
 public import Mathlib.Algebra.Module.LocalizedModule.Basic
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.Topology.KrullDimension
-import Sheaf.AlgebraicGeometry.ContinuousCoefficientImmersionRestriction
-import Sheaf.CategoryTheory.ScalarLocalizationSheafExact
 import Sheaf.CategoryTheory.ExtOneExtensionClassification
-import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
+import Sheaf.Paper.ContinuousIntegralConstructibleComparison
+import Sheaf.Paper.PbcUniformCompleteTriangulated
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 /-!
@@ -75,6 +74,104 @@ def integralModelConstantScalar (X : Scheme.{u}) (K : Type u) [CommRing K]
       naturality := fun {V W} f ↦ by
         ext x
         exact (M.val.map_smul f (ULift.up (ContinuousMap.const V.unop.left a)) x).symm }
+
+private theorem constantScalar_mul
+    (X : Scheme.{u}) (K : Type u) [CommRing K] [TopologicalSpace K] [IsTopologicalRing K]
+    (M : SheafOfModules.{u + 1} (latticeModuleRing X K)) (a b : K) :
+    integralModelConstantScalar X K M a ≫ integralModelConstantScalar X K M b =
+      integralModelConstantScalar X K M (a * b) := by
+  ext V x
+  change (ULift.up (ContinuousMap.const V.unop.left b) :
+      (latticeCoefficientSheaf X K).obj.obj V) •
+      ((ULift.up (ContinuousMap.const V.unop.left a) :
+        (latticeCoefficientSheaf X K).obj.obj V) • x) =
+      (ULift.up (ContinuousMap.const V.unop.left (a * b)) :
+        (latticeCoefficientSheaf X K).obj.obj V) • x
+  rw [smul_smul, mul_comm]
+  rfl
+private theorem constantScalar_one
+    (X : Scheme.{u}) (K : Type u) [CommRing K] [TopologicalSpace K] [IsTopologicalRing K]
+    (M : SheafOfModules.{u + 1} (latticeModuleRing X K)) :
+    integralModelConstantScalar X K M 1 = 𝟙 M := by
+  ext V x
+  exact one_smul ((latticeCoefficientSheaf X K).obj.obj V) x
+private def constantScalarIso
+    (X : Scheme.{u}) (K : Type u) [Field K] [TopologicalSpace K] [IsTopologicalRing K]
+    (M : SheafOfModules.{u + 1} (latticeModuleRing X K)) (a : K) (ha : a ≠ 0) : M ≅ M where
+  hom := integralModelConstantScalar X K M a
+  inv := integralModelConstantScalar X K M a⁻¹
+  hom_inv_id := by rw [constantScalar_mul, mul_inv_cancel₀ ha, constantScalar_one]
+  inv_hom_id := by rw [constantScalar_mul, inv_mul_cancel₀ ha, constantScalar_one]
+
+private theorem middle_iso_of_extClass_twist.{u₁, v₁}
+    {C : Type u₁} [Category.{v₁} C] [Abelian C] [HasExt.{w} C]
+    {P Q B F : C} (a : Q ⟶ B) (b : B ⟶ P) (zB : a ≫ b = 0)
+    (hB : (ShortComplex.mk a b zB).ShortExact)
+    (i : Q ⟶ F) (p : F ⟶ P) (zF : i ≫ p = 0)
+    (hF : (ShortComplex.mk i p zF).ShortExact)
+    (s : Q ≅ Q)
+    (heq : hB.extClass = hF.extClass.comp (Abelian.Ext.mk₀ s.hom) (add_zero 1)) :
+    Nonempty (B ≅ F) := by
+  let := HasDerivedCategory.standard C
+  have z' : (s.inv ≫ i) ≫ p = 0 := by simp [Category.assoc, zF]
+  let S' := ShortComplex.mk (s.inv ≫ i) p z'
+  let e : ShortComplex.mk i p zF ≅ S' :=
+    ShortComplex.isoMk s (Iso.refl _) (Iso.refl _) (by simp [S']) (by simp [S'])
+  have h' : S'.ShortExact := ShortComplex.shortExact_of_iso e hF
+  have hn := hF.extClass_naturality h' e.hom
+  have heq' : hB.extClass = h'.extClass := by
+    simpa [e] using heq.trans hn
+  obtain ⟨t, -, -⟩ :=
+    ((ext_one_extension_classification.{w, w, max u₁ v₁, max u₁ v₁, v₁, v₁, u₁, u₁}
+      Q P).2.1 B F a b zB hB
+      (s.inv ≫ i) p z' h').mp heq'
+  exact ⟨t⟩
+
+private theorem integral_uniformizer_ne_zero
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
+    (Padic.coefficientExtensionUniformizer l E : E) ≠ 0 := by
+  have h := (Padic.extension_integers_dvr l E
+    (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  have hm : Padic.coefficientExtensionMaximalIdeal l E ≠ ⊥ :=
+    h.2.2.2.2.2.2.2.2.2.1
+  have hg : Ideal.span ({Padic.coefficientExtensionUniformizer l E} :
+      Set (Padic.coefficientExtensionIntegers l E)) =
+      Padic.coefficientExtensionMaximalIdeal l E :=
+    h.2.2.2.2.2.2.2.2.2.2.2.2.2.1.choose_spec
+  intro hz
+  apply hm
+  rw [← hg, show Padic.coefficientExtensionUniformizer l E = 0 from Subtype.ext hz]
+  exact Ideal.span_singleton_zero
+
+private theorem integral_constructible_middle
+    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E]
+    (X : Scheme.{u}) [IsNoetherian X]
+    (hdim : ∃ n : ℕ, topologicalKrullDim X ≤ n) (hl : IsUnit (l : Γ(X, ⊤)))
+    (S : ShortComplex (SheafOfModules.{u + 1}
+      (latticeModuleRing X (latticeCoefficientIntegers l E))))
+    (hS : S.ShortExact)
+    (h₁ : IsContinuousConstructible X (latticeCoefficientIntegers l E) S.X₁)
+    (h₃ : IsContinuousConstructible X (latticeCoefficientIntegers l E) S.X₃) :
+    IsContinuousConstructible X (latticeCoefficientIntegers l E) S.X₂ := by
+  obtain ⟨e, he⟩ := continuousIntegralConstructibleComparison X l E hdim hl
+  have := Functor.additive_of_preserves_binary_products e.functor
+  let S' := S.map e.functor
+  have hS' : S'.ShortExact := hS.map_of_exact e.functor
+  let P : ObjectProperty (Scheme.PbcCompletedDerived X (Scheme.pbcIntegralDatum l E)) :=
+    Scheme.PbcIsBoundedConstructibleComplete X (Scheme.pbcIntegralDatum l E)
+  have hInv : ∀ x : X, IsUnit (l : X.presheaf.stalk x) := by
+    intro x
+    simpa only [map_natCast] using
+      RingHom.isUnit_map (X.presheaf.germ ⊤ x trivial).hom hl
+  have hp := Scheme.pbcIntegralUniformComplete_isTriangulated l E X hdim hInv
+  let : P.IsClosedUnderIsomorphisms := hp.1
+  let : P.IsTriangulated := hp.2
+  apply (he S.X₂).mpr
+  exact P.ext_of_isTriangulatedClosed₂ hS'.singleTriangle hS'.singleTriangle_distinguished
+    ((he S.X₁).mp h₁) ((he S.X₃).mp h₃)
 
 /-- An extension of two rationalized constructible integral modules admits an integral model.
 Source: Bhatt--Scholze, Lemma 6.8.13, final paragraph; Stacks Project, Tag 06XV
@@ -143,6 +240,19 @@ theorem integralModels_extension_closed
     ∃ N : SheafOfModules.{u + 1} (latticeModuleRing X (latticeCoefficientIntegers l E)),
       IsContinuousConstructible X (latticeCoefficientIntegers l E) N ∧
         Nonempty (integralModelScalarExtension X l E N ≅ F) := by
-  sorry
+  obtain ⟨m, B, a, b, zB, hB, zE, hE, heq⟩ := _hsurj _h.extClass
+  have hBc := integral_constructible_middle l E X _hdim _hl
+    (ShortComplex.mk a b zB) hB _hQ _hP
+  let K := WithAbs (Padic.coefficientExtensionAbsoluteValue l E)
+  let c : K := ((WithAbs.equiv (Padic.coefficientExtensionAbsoluteValue l E)).symm
+    (Padic.coefficientExtensionUniformizer l E : E)) ^ m
+  have hc : c ≠ 0 := by
+    apply pow_ne_zero
+    exact (map_ne_zero (WithAbs.equiv _).symm).mpr (integral_uniformizer_ne_zero l E)
+  let s := constantScalarIso X K (integralModelScalarExtension X l E Q) c hc
+  refine ⟨B, hBc, ?_⟩
+  exact middle_iso_of_extClass_twist
+    (integralModelScalarExtensionMap X l E a)
+    (integralModelScalarExtensionMap X l E b) zE hE i p z _h s heq
 
 end AlgebraicGeometry.ProEtale

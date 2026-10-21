@@ -23107,3 +23107,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:58 L: merged deliver/M7/Sheaf.RingTheory.RegularLocalPicardZero (stage 3; reviewer PASS; first push; landing 20261021T165826-L-2257738 (proof); batch 20261021T165743; modules 1; new nodes 3)
 - 16:59 L: merged deliver/Q02/lem-sfb-root-tower-coordinate-face (reviewer FIX; first push; new nodes: 2)
 - 16:59 L: returned deliver/NZ/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: C5/B9: the new node is a duplicate that gets around the 2026-10-19 drop. This is the fifth delivery of the item, after N)
+- 16:59 L: merged deliver/R5/Sheaf.Paper.IntegralModelsExtensionClosed (stage 3; reviewer PASS; first push; landing 20261021T165932-L-2306566 (interface); batch 20261021T165743; modules 4; new nodes 3)
