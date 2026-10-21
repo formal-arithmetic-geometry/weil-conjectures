@@ -1,0 +1,141 @@
+{
+ "id": "lem-coef-signed-single-dual-restriction",
+ "kind": "statement",
+ "title": "Normalized slice comparison for a single coefficient dual",
+ "statement": "For a ringed site (C,J,R), its slice at U, independent coefficient and derived universes, and arbitrary representative-normalized duality models M,M_U [lem-sfb-ringed-site-duality-maps], let H,H_U be the actual derived internal Homs [def-pur-derived-internal-hom], O=R[0], O_U=(R|U)[0], and F the specified exact derived restriction [def-weil-pbc-ringed-derived-restriction]. There exist natural tensor and Hom restriction isomorphisms t and h, and a coefficient isomorphism o:F(O)≅O_U. The evaluation counit square commutes, t carries the specified Koszul symmetries to one another, and the single dual isomorphism alpha_X = h_(op X,O) ; H_U(id,o) satisfies, for every integer n, F(s(X,n)) ; alpha_(X[n]) = c_F(-n) ; alpha_X[-n] ; s_U(FX,n) ; H_U(c_F(n).op,id). The source comparisons s are those of [lem-weil-pbc-ringed-internal-hom-exact-restriction]. There is no bidual or triangle assertion in this statement. The accompanying definition closedDualRestrictionIso packages this alpha naturally.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JB, 08FI, 08J9 (equation-internal-hom), 0A97 and 03EL; representative-normalized tensor, Hom, evaluation and Koszul comparison calculations."
+ },
+ "stmt_deps": [
+  "lem-sfb-ringed-site-duality-maps",
+  "def-pur-derived-internal-hom",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-coef-ringed-tensor-hom-model"
+ ],
+ "proof": [
+  {
+   "text": "Obtain the representative-normalized comparison data d. Package d.eta and d.rho as natural isomorphisms using their simultaneous naturality fields. Take o to be the canonical derived degree-zero ring restriction isomorphism. Define alpha by fixing the second Hom argument to O and transporting its value by o; its naturality follows by functoriality in the two Hom arguments.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-normalized-comparisons",
+    "def-sfb-ringed-slice-comparison-model",
+    "def-weil-pbc-ringed-derived-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The existing evaluation-coherence theorem gives the evaluation square for the actual fixed restriction functor. The normalized Koszul symmetries in d equal the symmetries supplied by M and M_U: compare on pure-tensor summands of K-flat representatives using tensorGenerator_ext, then transport along K-flat resolutions and tensor naturality. Substitute these equalities into the existing Koszul-coherence theorem to obtain the stated symmetry square.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-evaluation-coherence",
+    "lem-weil-pbc-ringed-slice-koszul-coherence",
+    "lem-pc-kflat-resolution",
+    "def-coef-ringed-tensor-hom-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the normalized single-Hom source-shift restriction theorem with Y=O. Postcompose with transport by o. Naturality of sourceShift_U in its second argument moves o through the source shift. The product-functor interchange law moves the first-argument c_F(n) past the second-argument o. This is the claimed alpha formula for every integer n; it uses no biduality assertion.",
+   "uses": [
+    "lem-coef-slice-hom-source-shift",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-tensor-hom-model",
+  "def-sfb-ringed-slice-comparison-model",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-coef-slice-hom-source-shift",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-weil-pbc-ringed-slice-evaluation-coherence",
+  "lem-weil-pbc-ringed-slice-koszul-coherence",
+  "lem-weil-pbc-ringed-slice-normalized-comparisons"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-21",
+  "note": "Explicit source construction and categorical transport written while proving the slice clause of lem-coef-rational-bidual-triangle-compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized restriction comparison for derived internal Hom on a slice commutes with the source shift of complexes",
+   "results": "Eight hits on exact functor shifts, localization factorization shifts, cochain reindexing and homology shifts. None concerns the representative-normalized sheaf internal Hom restriction comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived internal Hom restriction comparison commutes with shifts and double dual evaluation",
+   "results": "Eight hits including expComparison_ev, coev_expComparison and expComparison. These give general closed functor comparisons, without the normalized signed sheaf Hom source shift.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual.*restriction|restriction.*bidual|closed.*comparison|comparison.*closed",
+   "results": "Five hits in the Mathlib closed monoidal functor comparison API. No site restriction or Hom-complex source reindexing result. Local source searches and blueprint searches for source shift and normalized slice found no matching statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "Q3",
+  "item": "Sheaf.CategoryTheory.CoefficientBidualTriangleCompatibility",
+  "date": "2026-10-21"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-retract-evaluation",
+   "place": "Proof, paragraph 3: local finite-free/retract and bounded-complex biduality; restriction of the canonical evaluation comparison used to extend the canonical biduality map.",
+   "via": [
+    "lem-coef-rational-bidual-triangle-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedSiteSignedDualRestriction",
+  "file": "lean/Sheaf/CategoryTheory/RingedSiteSignedDualRestriction.lean",
+  "declaration": "CategoryTheory.ringedSiteSignedDual_restriction",
+  "statement": "theorem ringedSiteSignedDual_restriction\n    (M : RingedSiteDualityModel.{c, v, r, w} J R)\n    (MU : RingedSiteDualityModel.{max c v, v, r, w'} (J.over U) (R.over U))\n    : ∃ (h : H ⋙ F ≅ ((F).op.prod F) ⋙ HU) (o : (F).obj O ≅ OU)\n      (t : M.closed.tensor ⋙ F ≅ ((F).prod F) ⋙ MU.closed.tensor),\n      (∀ X Y : D.{c, v, r, w} J R,\n        (F).map (M.closed.evaluation X Y) =\n          t.hom.app ((H).obj (op X, Y), X) ≫\n            MU.closed.tensor.map (Prod.mkHom (h.hom.app (op X, Y)) (𝟙 _)) ≫\n              MU.closed.evaluation ((F).obj X) ((F).obj Y)) ∧\n      (∀ X Y : D.{c, v, r, w} J R,\n        (F).map (M.symmetric.braiding X Y).hom ≫ t.hom.app (Y, X) =\n          t.hom.app (X, Y) ≫ (MU.symmetric.braiding ((F).obj X) ((F).obj Y)).hom) ∧\n      (∀ (X : D.{c, v, r, w} J R) (n : ℤ),\n        (F).map ((sourceShift.{c, v, r, w} J R X n).hom.app O) ≫\n            (closedDualRestrictionIso h o).hom.app (op (X⟦n⟧)) =\n          ((F).commShiftIso (-n)).hom.app ((T).obj (op X)) ≫\n            ((closedDualRestrictionIso h o).hom.app (op X))⟦-n⟧' ≫\n            (sourceShift.{max c v, v, r, w'} (J.over U) (R.over U) ((F).obj X) n).hom.app OU ≫\n            (HU).map (Prod.mkHom (((F).commShiftIso n).hom.app X).op (𝟙 OU)))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.closedDualRestrictionIso",
+   "CategoryTheory.ringedSiteSignedDual_restriction"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T024155-L-3041028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T024155-L-3041028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

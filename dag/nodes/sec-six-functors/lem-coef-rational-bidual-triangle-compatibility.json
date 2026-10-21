@@ -38,36 +38,36 @@
    "elementary": false
   },
   {
-   "text": "Write $j^*$ for restriction to $\\mathcal C/U$. Ordinary Hom complexes restrict by the componentwise identification\n$$j^*\\mathcal Hom^\\bullet(E,I)=\\mathcal Hom^\\bullet(j^*E,j^*I).$$\nTo verify it, on an object $V\\to U$ both sides in degree $n$ consist of families of module maps $E^a|_V\\to I^{a+n}|_V$ on $\\mathcal C/V$; relocalization identifies the two sites, and both differentials are $d_If-(-1)^nfd_E$. Restriction preserves products sectionwise. Also $j^*I$ is K-injective: for an acyclic complex $N$ on the slice, exactness of $j_!$ makes $j_!N$ acyclic; the termwise adjunction, applied to chain maps and their homotopies, identifies $\\operatorname{Hom}_{K}(N,j^*I)$ with $\\operatorname{Hom}_{K}(j_!N,I)=0$. Exactness of $j^*$ makes $\\mathcal O_U\\to j^*I$ a resolution. Thus these componentwise Hom comparisons compute the canonical derived restriction comparison of the exactness/restriction node, using $j^*I$ on the slice. If the slice's fixed resolution is different, the canonical resolution comparisons in the derived-Hom definition identify the two models.",
+   "text": "Apply ringedSiteSignedDual_restriction to the two supplied normalized closed models. This gives the actual fixed restriction functor F, its tensor and Hom comparisons t,h, the coefficient isomorphism o, evaluation and symmetry squares, and the normalized single-dual source-shift square. No replacement of F by an unspecified localization is used.",
    "uses": [
-    "def-pur-localized-ringed-site",
-    "def-pur-hom-complex",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-pur-kinjective-complex",
-    "def-pur-derived-internal-hom",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+    "lem-coef-signed-single-dual-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 08FI (lemma-restrict-K-injective-to-open); sites-modules.tex Tag 03DJ; explicit sectionwise Hom comparison."
-   }
+   "elementary": false
   },
   {
-   "text": "Let $\\beta_V:j^*F(V)\\cong F_U(j^*V)$ be the double-Hom comparison from Step 9. The formula for $s$ restricts to the same formula $f\\mapsto(-1)^{mq}f$ on each $V'\\to U$; reindexing and multiplication by $-1$ are unchanged. Restricting its inverse and applying $T$ is also componentwise precomposition. Hence, for the composite $\\chi$ including its leading minus, one obtains the equality\n$$\\psi^U_{j^*V}\\,\\beta_{V[1]}=\\beta_V[1],j^*\\psi_V.$$\nThese formulas also respect a change of K-injective target $t:I\\to J$: the two comparisons through $\\mathcal Hom(T_I(E),J)$ send $b^I_E$ and $b^J_E$ to the same map, since $t((-1)^{pq}f(x))=(-1)^{pq}(t f)(x)$. The $s$ and $\\chi$ formulas commute with both precomposition by $\\mathcal Hom(E,t)$ and postcomposition by $t$, because their signs depend only on degrees. For a quasi-isomorphism $t$, both comparison arrows are quasi-isomorphisms by the well-definedness lemma. The same calculation applies to zigzags between fixed resolutions, so the displayed shift equality holds for the slice's specified model as well. The restriction clause of the duality-map node gives $\\beta_V j^*d_V=d^U_{j^*V}$. For the connecting arrow, naturality of $\\beta$ now gives\n$$\\psi^U F_U(j^*w)d^U_{j^*Z}=\\psi^U\\beta_{V[1]}j^*(F(w)d_Z)=\\beta_V[1]j^*(\\psi_VF(w)d_Z)=d^U_{j^*V}[1]j^*w.$$\nRestriction is exact and commutes with the shift and cone formulas degreewise, so it takes distinguished triangles to distinguished triangles. The same naturality equality for $u,v$ supplies the other two squares. This proves the precise slice connecting-square assertion.",
+   "text": "Prove preservation of the evaluation-defined bidual by transposing the evaluation restriction square. Naturality of the closed adjunction identifies transposes after restriction. Insert the symmetry square before transposition, and transport the coefficient object along o. The resulting composite is exactly the three factors in restrictionBidualIso. These arguments are the proved generic transpose_restriction, bidual_restriction_untransported, bidual_coefficient and bidual_restriction helpers. Only isomorphisms and transpose equivalences are canceled; no evaluation or biduality map is inverted.",
    "uses": [
-    "lem-sf-double-hom-cone-comparison",
     "lem-sfb-ringed-site-duality-maps",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-abstract-derived-category",
-    "def-pur-hom-complex",
-    "lem-pur-rhom-well-defined"
+    "lem-coef-signed-single-dual-restriction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JB and 08JD, with the explicit s and chi formulas; derived.tex Tag 014E (restriction of cones)."
-   }
+   "elementary": false
+  },
+  {
+   "text": "Use normalized contravariant single-Hom exactness on both sites. Let alpha be the single-dual restriction isomorphism. Its degree-one shift square is precisely the source n=-1 formula above, after substituting the normalized single-Hom shifts, the opposite restriction shift, and their leading minus signs. CommShiftCore propagation proves alpha is shift-compatible. Apply rightOp, compose with alpha, and insert associators to form the double-dual natural isomorphism beta. Naturality and product functoriality identify beta pointwise with restrictionBidualIso. Expand the opposite and composite shift comparisons: the normalizations at 1 and -1 give exactly signedShift. The supplied bidual shift structures agree in degree one, so the proved generic integer propagation gives the required CommShift structure on beta for those supplied structures.",
+   "uses": [
+    "lem-coef-signed-derived-internal-hom-exact",
+    "lem-coef-signed-single-dual-restriction",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For a triangle V, use beta naturality at its connecting arrow and beta shift compatibility at V.obj1. Substitute the already established evaluation restriction square at V.obj3. Reassociating yields exactly the displayed restriction connecting-map equation. This identity holds for every triangle; the distinguished-triangle hypothesis is consequently not needed in this final calculation. Exactness of F separately preserves distinguished triangles.",
+   "uses": [
+    "lem-coef-signed-single-dual-restriction",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false
   },
   {
    "text": "The closed tensor–Hom adjunction makes tensoring additive: tensorRight is a left adjoint and hence preserves finite coproducts, and symmetry transfers additivity to tensorLeft. The central unit-action formula for a scalar identity, together with associator and right-unitor coherence, makes tensorLeft linear; symmetry gives the same for tensorRight. Transpose the source-naturality equation for evaluation. Since both tensor variables are additive and linear, the contravariant internal-Hom functor preserves sums and scalar multiplication. Apply this twice to obtain additivity and linearity of the actual bidual, then use injectivity of underlying full-subcategory morphisms to obtain subcategory_linearity. This is a direct closed-category argument, so no localization-fraction calculation is needed in this step.",
@@ -81,7 +81,7 @@
    }
   },
   {
-   "text": "The ambient signed compatibility constructed in Steps 6–8 restricts to the full dual-stable triangulated subcategory: use the full inclusion to lift its coherent shift comparisons, and test exactness and the evaluation shift equation after that faithful inclusion. For scalar descent, compare the raw tensor-Hom category with the existing rationalization by the tensorHomEquiv linear equivalences. Tensor induction verifies its functor laws; these equivalences make the comparison fully faithful, and every rationalized object has a lattice, so it is an equivalence. Thus the raw Q is a categorical localization. The identity-component isomorphism Q composed with the extended F is isomorphic to F composed with Q. Mathlib localization descent gives a coherent CommShift structure on the extended F for all integer shifts, with the displayed Q comparison equation. Descend the natural transformation by the same universal property; its component is exactly Q(d_X). The unitor-adjusted whiskering equation proves shift compatibility after Q, and essential surjectivity on objects proves it before Q. Every localized distinguished triangle is isomorphic to a Q-image triangle; compare the two composite image-triangle functors to deduce exactness of the descended F. Apply the generic shift-compatible transformation triangle morphism construction to obtain all three squares. This argument works for the specified localization shift structure without using the extra degree-one hshift or hQ normalizations.",
+   "text": "The ambient signed compatibility constructed in Steps 1–2 restricts to the full dual-stable triangulated subcategory: use the full inclusion to lift its coherent shift comparisons, and test exactness and the evaluation shift equation after that faithful inclusion. For scalar descent, compare the raw tensor-Hom category with the existing rationalization by the tensorHomEquiv linear equivalences. Tensor induction verifies its functor laws; these equivalences make the comparison fully faithful, and every rationalized object has a lattice, so it is an equivalence. Thus the raw Q is a categorical localization. The identity-component isomorphism Q composed with the extended F is isomorphic to F composed with Q. Mathlib localization descent gives a coherent CommShift structure on the extended F for all integer shifts, with the displayed Q comparison equation. Descend the natural transformation by the same universal property; its component is exactly Q(d_X). The unitor-adjusted whiskering equation proves shift compatibility after Q, and essential surjectivity on objects proves it before Q. Every localized distinguished triangle is isomorphic to a Q-image triangle; compare the two composite image-triangle functors to deduce exactness of the descended F. Apply the generic shift-compatible transformation triangle morphism construction to obtain all three squares. This argument works for the specified localization shift structure without using the extra degree-one hshift or hQ normalizations.",
    "uses": [
     "def-weil-linear-scalar-localization",
     "lem-weil-linear-scalar-localization-triangulated"
@@ -93,7 +93,7 @@
    }
   },
   {
-   "text": "For any exact endofunctor F with a shift-compatible natural transformation d from the identity, use the canonical identity image-triangle isomorphism followed by NatTrans.mapTriangle to obtain the triangle map with components d. Mathlib triangle two-out-of-three for natural transformations gives all three invertibility implications. The formula for d on X[n] expresses it as the shifted d_X conjugated by the two shift comparisons, so invertibility of d_X implies invertibility of d_(X[n]). Conversely the shift equation gives invertibility of the shifted d_X, and the shift equivalence reflects isomorphisms. Apply this categorical argument both on the full subcategory and on its scalar localization in Step 12. The same categorical conclusion is available to the ambient signed construction in Steps 6–8; the ambient construction is reduced to the two separate source results above; the slice construction remains unfinished.",
+   "text": "For any exact endofunctor F with a shift-compatible natural transformation d from the identity, use the canonical identity image-triangle isomorphism followed by NatTrans.mapTriangle to obtain the triangle map with components d. Mathlib triangle two-out-of-three for natural transformations gives all three invertibility implications. The formula for d on X[n] expresses it as the shifted d_X conjugated by the two shift comparisons, so invertibility of d_X implies invertibility of d_(X[n]). Conversely the shift equation gives invertibility of the shifted d_X, and the shift equivalence reflects isomorphisms. Apply this categorical argument both on the full subcategory and on its scalar localization in Step 8. The same categorical conclusion is available to the ambient signed construction in Steps 1–2; the ambient construction is reduced to the two separate source results above. The slice construction is assembled from the single-Hom source-shift comparison and generic closed-category transport in Steps 3–6.",
    "uses": [
     "lem-sf-triangle-two-out-of-three"
    ],
@@ -105,26 +105,20 @@
   }
  ],
  "proof_deps": [
-  "def-pur-derived-internal-hom",
-  "def-pur-hom-complex",
-  "def-pur-kinjective-complex",
-  "def-pur-localized-ringed-site",
-  "def-weil-abstract-derived-category",
   "def-weil-linear-scalar-localization",
   "lem-coef-bidual-evaluation-shift-one",
   "lem-coef-signed-derived-internal-hom-exact",
-  "lem-pur-rhom-well-defined",
+  "lem-coef-signed-single-dual-restriction",
   "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-sf-double-hom-cone-comparison",
   "lem-sf-triangle-two-out-of-three",
   "lem-sfb-ringed-site-duality-maps",
   "lem-weil-linear-scalar-localization-triangulated",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction"
  ],
  "proof_origin": {
-  "by": "Q7",
+  "by": "Q3",
   "date": "2026-10-21",
-  "note": "Ambient compatibility reduced in Lean to normalized single-Hom exactness and the degree-one evaluation calculation. Opposite/composition signs, negative-shift propagation, integer induction and triangle assembly are completely proved. Existing scalar and slice routes retained; slice_compatibility remains sorry. This is a decomposition, not an unconditional proof."
+  "note": "All proofs in the item module are complete, including slice_compatibility. Its slice clause is reduced to the strictly simpler normalized source-shift restriction square for one derived Hom. The generic transpose, coefficient transport, right-opposite shift, double-dual comparison and connecting-arrow assembly are completely proved. One existing hole is closed and one narrower source hole is added; this is a decomposition with net zero among changed declarations, not an unconditional proof."
  },
  "mathlib_searches": [
   {
@@ -313,9 +307,9 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "Q7",
+  "group": "Q3",
   "result": "pass",
-  "landing": "20261021T011030-L-2030374",
+  "landing": "20261021T024155-L-3041028",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  },

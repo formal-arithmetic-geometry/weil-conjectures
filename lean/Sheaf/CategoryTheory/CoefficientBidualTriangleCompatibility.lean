@@ -14,6 +14,8 @@ import WeilConjectures.CategoryTheory.DerivedCategory.Complete.RationalizationHo
 import WeilConjectures.Mathlib.CategoryTheory.Shift.CommShift
 import Sheaf.CategoryTheory.SignedDerivedInternalHomExact
 import Mathlib.CategoryTheory.Triangulated.Opposite.OpOp
+import Sheaf.CategoryTheory.RingedSiteSignedDualRestriction
+import all Sheaf.CategoryTheory.RingedSiteDualityMaps
 import Sheaf.CategoryTheory.CoefficientBidualEvaluationShiftOne
 import Mathlib.CategoryTheory.Monoidal.Linear
 import Mathlib.CategoryTheory.Monoidal.Limits.Preserves
@@ -425,6 +427,253 @@ private theorem coefficientClosedDual_linear
     simp
 end ClosedLinearity
 
+open WeilConjectures MonoidalCategory in
+section
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+variable {D : Type a} [Category.{b} D] {E : Type c} [Category.{v} E]
+  {H : Dᵒᵖ × D ⥤ D} {HU : Eᵒᵖ × E ⥤ E} (F : D ⥤ E)
+  (S : CoefficientClosedStructure H) (SU : CoefficientClosedStructure HU)
+  (s : @SymmetricCategory D _ S.monoidal)
+  (sU : @SymmetricCategory E _ SU.monoidal)
+  (h : H ⋙ F ≅ (F.op.prod F) ⋙ HU)
+  (t : S.tensor ⋙ F ≅ (F.prod F) ⋙ SU.tensor)
+  (he : ∀ X Y : D, F.map (S.evaluation X Y) =
+    t.hom.app (H.obj (op X, Y), X) ≫
+      SU.tensor.map (Prod.mkHom (h.hom.app (op X, Y)) (𝟙 _)) ≫
+        SU.evaluation (F.obj X) (F.obj Y))
+
+include he in
+private theorem transpose_restriction (V X Y : D) (f : S.tensor.obj (V, X) ⟶ Y) :
+    SU.transpose (F.obj V) (F.obj X) (F.obj Y)
+      (t.inv.app (V, X) ≫ F.map f) =
+    F.map (S.transpose V X Y f) ≫ h.hom.app (op X, Y) := by
+  let := S.monoidal
+  let := SU.monoidal
+  let g := S.transpose V X Y f
+  have hg : S.tensor.map (g, 𝟙 X) ≫ S.evaluation X Y = f := by
+    have hh := (S.transpose V X Y).symm_apply_apply f
+    change ((S.adjunction X).homEquiv V Y).symm g = f at hh
+    rw [Adjunction.homEquiv_symm_apply] at hh
+    simpa only [CoefficientClosedStructure.tensor, CoefficientClosedStructure.evaluation,
+      tensor_map, tensorRight, Functor.flip, curriedTensor, tensorHom_id] using hh
+  have hn : SU.tensor.map (F.map g, 𝟙 (F.obj X)) ≫
+      t.inv.app (H.obj (op X, Y), X) =
+      t.inv.app (V, X) ≫ F.map (S.tensor.map (g, 𝟙 X)) := by
+    have hh := t.inv.naturality (Prod.mkHom g (𝟙 X))
+    simpa only [Functor.comp_map, Functor.prod_map, Functor.map_id] using hh
+  apply (SU.transpose _ _ _).symm.injective
+  rw [Equiv.symm_apply_apply]
+  change t.inv.app (V, X) ≫ F.map f =
+    ((SU.adjunction (F.obj X)).homEquiv _ _).symm
+      (F.map g ≫ h.hom.app (op X, Y))
+  rw [Adjunction.homEquiv_symm_apply]
+  change t.inv.app (V, X) ≫ F.map f =
+    (F.map g ≫ h.hom.app (op X, Y)) ▷ F.obj X ≫ SU.evaluation (F.obj X) (F.obj Y)
+  rw [← tensorHom_id]
+  change t.inv.app (V, X) ≫ F.map f =
+    SU.tensor.map (Prod.mkHom (F.map g ≫ h.hom.app (op X, Y)) (𝟙 _)) ≫
+      SU.evaluation (F.obj X) (F.obj Y)
+  have ht : SU.tensor.map (Prod.mkHom (F.map g ≫ h.hom.app (op X, Y)) (𝟙 _)) =
+      SU.tensor.map (Prod.mkHom (F.map g) (𝟙 (F.obj X))) ≫
+        SU.tensor.map (Prod.mkHom (h.hom.app (op X, Y)) (𝟙 (F.obj X))) := by
+    rw [← SU.tensor.map_comp]
+    congr 1
+    ext <;> simp
+  rw [ht, Category.assoc]
+  have hh : SU.tensor.map (Prod.mkHom (h.hom.app (op X, Y)) (𝟙 (F.obj X))) ≫
+      SU.evaluation (F.obj X) (F.obj Y) =
+      t.inv.app (H.obj (op X, Y), X) ≫ F.map (S.evaluation X Y) := by
+    rw [he, ← Category.assoc, ← Category.assoc, t.inv_hom_id_app, Category.id_comp]
+  rw [hh, ← Category.assoc, hn, Category.assoc, ← F.map_comp, hg]
+
+private theorem transpose_right {V X Y Z : D} (f : S.tensor.obj (V, X) ⟶ Y)
+    (g : Y ⟶ Z) :
+    S.transpose V X Y f ≫ H.map (Prod.mkHom (𝟙 (op X)) g) =
+      S.transpose V X Z (f ≫ g) := by
+  exact ((S.adjunction X).homEquiv_naturality_right f g).symm
+
+private theorem bidual_coefficient {O OU : D} (o : O ≅ OU) (X : D) :
+    ringedSiteBidual S s O X ≫ H.map
+      (Prod.mkHom (H.map (Prod.mkHom (𝟙 (op X)) o.inv)).op o.hom) =
+      ringedSiteBidual S s OU X := by
+  let := S.monoidal
+  let := s
+  unfold ringedSiteBidual
+  rw [show H.map (Prod.mkHom (H.map (Prod.mkHom (𝟙 (op X)) o.inv)).op o.hom) =
+    H.map (Prod.mkHom (H.map (Prod.mkHom (𝟙 (op X)) o.inv)).op (𝟙 O)) ≫
+      H.map (Prod.mkHom (𝟙 _) o.hom) by
+        rw [← H.map_comp]; congr 1; ext <;> simp]
+  rw [← Category.assoc, ← ringedSiteTranspose_source, transpose_right]
+  congr 1
+  dsimp only [CoefficientClosedStructure.tensor]
+  simp only [MonoidalCategory.tensor_map, id_tensorHom,
+    BraidedCategory.braiding_naturality_right_assoc, Category.assoc]
+  have hn := (S.adjunction X).counit.naturality o.inv
+  change (H.map (Prod.mkHom (𝟙 (op X)) o.inv) ▷ X) ≫ S.evaluation X O =
+    S.evaluation X OU ≫ o.inv at hn
+  erw [reassoc_of% hn, Iso.inv_hom_id, Category.comp_id]
+
+include he in
+private theorem bidual_restriction_untransported
+    (hs : ∀ X Y : D, F.map (s.braiding X Y).hom ≫ t.hom.app (Y, X) =
+      t.hom.app (X, Y) ≫ (sU.braiding (F.obj X) (F.obj Y)).hom)
+    (O X : D) :
+    F.map (ringedSiteBidual S s O X) ≫ h.hom.app (op (H.obj (op X, O)), O) =
+    ringedSiteBidual SU sU (F.obj O) (F.obj X) ≫
+      HU.map (Prod.mkHom (h.hom.app (op X, O)).op (𝟙 (F.obj O))) := by
+  let := S.monoidal
+  let := SU.monoidal
+  let := sU
+  unfold ringedSiteBidual
+  rw [← transpose_restriction F S SU h t he]
+  rw [← ringedSiteTranspose_source]
+  congr 1
+  rw [F.map_comp]
+  have hb : t.inv.app (X, H.obj (op X, O)) ≫
+      F.map (s.braiding X (H.obj (op X, O))).hom =
+      (sU.braiding (F.obj X) (F.obj (H.obj (op X, O)))).hom ≫
+        t.inv.app (H.obj (op X, O), X) := by
+    apply (cancel_mono (t.hom.app (H.obj (op X, O), X))).mp
+    simp only [Category.assoc, t.inv_hom_id_app]
+    rw [hs, Iso.inv_hom_id_app_assoc]
+    exact (Category.comp_id _).symm
+  rw [← Category.assoc, hb, Category.assoc, he]
+  simp only [← Category.assoc, Iso.inv_hom_id_app]
+  erw [Category.comp_id]
+  dsimp only [CoefficientClosedStructure.tensor]
+  simp only [MonoidalCategory.tensor_map, id_tensorHom]
+  erw [tensorHom_id]
+  congr 1
+  exact (BraidedCategory.braiding_naturality_right (F.obj X)
+    (h.hom.app (op X, O))).symm
+
+include he in
+private theorem bidual_restriction
+    (hs : ∀ X Y : D, F.map (s.braiding X Y).hom ≫ t.hom.app (Y, X) =
+      t.hom.app (X, Y) ≫ (sU.braiding (F.obj X) (F.obj Y)).hom)
+    {O : D} {OU : E} (o : F.obj O ≅ OU) (X : D) :
+    F.map (ringedSiteBidual S s O X) ≫
+      h.hom.app (op (H.obj (op X, O)), O) ≫
+      HU.map (Prod.mkHom (h.inv.app (op X, O)).op o.hom) ≫
+      HU.map (Prod.mkHom (HU.map (Prod.mkHom (𝟙 (op (F.obj X))) o.inv)).op
+        (𝟙 OU)) = ringedSiteBidual SU sU OU (F.obj X) := by
+  rw [← Category.assoc, ← Category.assoc,
+    bidual_restriction_untransported F S SU s sU h t he hs]
+  simp only [Category.assoc, ← HU.map_comp]
+  have hh :
+      Prod.mkHom (h.hom.app (op X, O)).op (𝟙 (F.obj O)) ≫
+        (Prod.mkHom (h.inv.app (op X, O)).op o.hom ≫
+          Prod.mkHom (HU.map (Prod.mkHom (𝟙 (op (F.obj X))) o.inv)).op (𝟙 OU)) =
+      Prod.mkHom (HU.map (Prod.mkHom (𝟙 (op (F.obj X))) o.inv)).op o.hom := by
+    ext
+    · dsimp
+      rw [← Category.assoc, ← op_comp, h.inv_hom_id_app]
+      erw [CategoryTheory.op_id, Category.id_comp]
+    · simp
+  rw [hh]
+  exact bidual_coefficient SU sU o (F.obj X)
+
+end
+
+open Pretriangulated.Opposite in
+@[instance_reducible] private def dualRightOpCommShift
+    {D : Type a} [Category.{b} D] [Preadditive D] [HasZeroObject D]
+    [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (T : Dᵒᵖ ⥤ D) [T.CommShift ℤ] : T.rightOp.CommShift ℤ :=
+  inferInstanceAs (((opOp D) ⋙ T.op).CommShift ℤ)
+
+attribute [local instance] dualRightOpCommShift
+
+open Pretriangulated.Opposite in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem rightOp_shift_one
+    {D : Type a} [Category.{b} D] [Preadditive D] [HasZeroObject D]
+    [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    (T : Dᵒᵖ ⥤ D) [T.CommShift ℤ] (X : D) :
+    (T.rightOp.commShiftIso (1 : ℤ)).hom.app X =
+      ((T.commShiftIso (-1 : ℤ)).inv.app (op X)).op := by
+  change (((opOp D) ⋙ T.op).commShiftIso (1 : ℤ)).hom.app X = _
+  rw [Functor.commShiftIso_comp_hom_app,
+    commShiftIso_opOp_hom_app X 1 (-1)]
+  dsimp only [opOp_obj]
+  rw [Functor.op_commShiftIso_hom_app T (op (op X)) 1 (-1) (by decide)]
+  simp only [shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+    NatTrans.id_app, Functor.op_map]
+  erw [Category.comp_id, Quiver.Hom.unop_op, Functor.map_id,
+    op_id, Category.id_comp, Category.comp_id]
+  exact Category.id_comp _
+
+open Pretriangulated.Opposite in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem doubleDualRestriction
+    {D : Type a} [Category.{b} D] [Preadditive D] [HasZeroObject D]
+    [HasShift D ℤ] [∀ n : ℤ, (shiftFunctor D n).Additive] [Pretriangulated D]
+    {E : Type c} [Category.{v} E] [Preadditive E] [HasZeroObject E]
+    [HasShift E ℤ] [∀ n : ℤ, (shiftFunctor E n).Additive] [Pretriangulated E]
+    (T : Dᵒᵖ ⥤ D) (TU : Eᵒᵖ ⥤ E) (F : D ⥤ E)
+    [T.CommShift ℤ] [TU.CommShift ℤ] [F.CommShift ℤ]
+    (α : T ⋙ F ≅ F.op ⋙ TU) [NatTrans.CommShift α.hom ℤ] :
+    ∃ β : (T.rightOp ⋙ T) ⋙ F ≅ F ⋙ (TU.rightOp ⋙ TU),
+      (∀ X : D, β.hom.app X = α.hom.app (op (T.obj (op X))) ≫
+        TU.map ((α.inv.app (op X)).op)) ∧ NatTrans.CommShift β.hom ℤ := by
+  let α' : T.rightOp ⋙ F.op ≅ F ⋙ TU.rightOp :=
+    Functor.isoWhiskerLeft (opOp D) (NatIso.op α).symm
+  have : NatTrans.CommShift α'.hom ℤ := by
+    apply commShift_of_one
+    constructor
+    ext X
+    dsimp only [α', Functor.isoWhiskerLeft_hom, NatIso.op_inv, Functor.whiskerLeft_app,
+      NatTrans.op_app, Iso.symm_hom]
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.commShiftIso_comp_hom_app]
+    rw [rightOp_shift_one T X, rightOp_shift_one TU (F.obj X)]
+    erw [
+      Functor.op_commShiftIso_hom_app F (op (T.obj (op X))) 1 (-1) (by decide)]
+    simp only [shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+      NatTrans.id_app, Functor.op_map]
+    simp only [NatIso.op_inv, NatTrans.op_app, opOp_obj,
+      Functor.rightOp_map, Quiver.Hom.unop_op]
+    apply Quiver.Hom.unop_inj
+    simp only [unop_comp, Quiver.Hom.unop_op]
+    erw [unop_id, Functor.map_id, Category.id_comp, Category.comp_id]
+    rw [shiftFunctor_op_map _ 1 (-1)]
+    simp only [shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+      NatTrans.id_app, Category.id_comp, Quiver.Hom.unop_op,
+      unop_comp, Category.assoc]
+    erw [unop_id, Category.id_comp]
+    change (α.inv.app (op X))⟦(-1 : ℤ)⟧' ≫
+        (F.commShiftIso (-1 : ℤ)).inv.app (T.obj (op X)) ≫
+          F.map ((T.commShiftIso (-1 : ℤ)).inv.app (op X)) =
+      (TU.commShiftIso (-1 : ℤ)).inv.app (op (F.obj X)) ≫
+        TU.map ((F.commShiftIso (1 : ℤ)).hom.app X).op ≫
+          α.inv.app (op (X⟦(1 : ℤ)⟧))
+    rw [NatTrans.shift_app α.inv (-1) (op X)]
+    simp only [Functor.commShiftIso_comp_hom_app,
+      Functor.commShiftIso_comp_inv_app, Category.assoc,
+      Iso.hom_inv_id_app_assoc, ← Functor.map_comp, Iso.hom_inv_id_app,
+      ]
+    rw [Functor.op_commShiftIso_inv_app F (op X) (-1) 1 (by decide)]
+    simp only [shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+      NatTrans.id_app, Category.id_comp, Functor.map_comp, Category.assoc]
+    erw [unop_id, F.map_id, op_id, TU.map_id, Category.id_comp, F.map_id,
+      Category.comp_id]
+    rfl
+  let β : (T.rightOp ⋙ T) ⋙ F ≅ F ⋙ (TU.rightOp ⋙ TU) :=
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft T.rightOp α ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight α' TU ≪≫
+        Functor.associator _ _ _
+  refine ⟨β, ?_, ?_⟩
+  · intro X
+    change 𝟙 _ ≫ (α.hom.app (op (T.obj (op X))) ≫
+      (𝟙 _ ≫ (TU.map ((α.inv.app (op X)).op) ≫ 𝟙 _))) = _
+    simp only [Category.id_comp, Category.comp_id]
+  · dsimp [β]
+    infer_instance
+
+
 section Site
 variable {C : Type c} [Category.{v} C] (J : GrothendieckTopology C)
   [HasSheafify J AddCommGrpCat.{max c v r}]
@@ -465,6 +714,33 @@ def signedShift (X : D.{c, v, r, w} J R) :
         (𝟙 (ringedSiteDualityUnit.{c, v, r, w} J R))) ≫
     (sourceShift.{c, v, r, w} J R ((dual.{c, v, r, w} J R).obj (op X)) (-1)).inv.app
       (ringedSiteDualityUnit.{c, v, r, w} J R))
+
+open Pretriangulated.Opposite in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem signed_bidual_normalized
+    [(dual.{c, v, r, w} J R).CommShift ℤ]
+    (hPlus : ∀ X : D.{c, v, r, w} J R,
+      ((dual.{c, v, r, w} J R).commShiftIso (1 : ℤ)).hom.app (op X) =
+        -(sourceShift.{c, v, r, w} J R X (-1)).inv.app
+          (ringedSiteDualityUnit.{c, v, r, w} J R))
+    (hMinus : ∀ X : D.{c, v, r, w} J R,
+      ((dual.{c, v, r, w} J R).commShiftIso (-1 : ℤ)).inv.app (op X) =
+        (sourceShift.{c, v, r, w} J R X 1).hom.app
+          (ringedSiteDualityUnit.{c, v, r, w} J R)) :
+    ∀ X : D.{c, v, r, w} J R,
+      (((dual.{c, v, r, w} J R).rightOp ⋙ dual.{c, v, r, w} J R).commShiftIso (1 : ℤ)).hom.app X =
+        signedShift.{c, v, r, w} J R X := by
+  let T := dual.{c, v, r, w} J R
+  intro X
+  rw [Functor.commShiftIso_comp_hom_app, rightOp_shift_one]
+  change T.map (((T.commShiftIso (-1 : ℤ)).inv.app (op X)).op) ≫
+    (T.commShiftIso (1 : ℤ)).hom.app (op (T.obj (op X))) = _
+  change ∀ X, (T.commShiftIso (-1 : ℤ)).inv.app (op X) = _ at hMinus
+  change ∀ X, (T.commShiftIso (1 : ℤ)).hom.app (op X) = _ at hPlus
+  rw [hMinus, hPlus]
+  simp only [Preadditive.comp_neg]
+  rfl
 
 open Pretriangulated.Opposite in
 set_option backward.isDefEq.respectTransparency false in
@@ -613,6 +889,11 @@ def restrictionBidualIso
         ((Iso.refl (op ((restriction.{c, v, r, w, w'} J R U).obj X))).prod o.symm)).op.prod
           (Iso.refl _))
 
+set_option maxHeartbeats 600000 in
+-- The two-site comparison carries independent derived and Hom universe parameters.
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+open Pretriangulated.Opposite in
 /-- Exact slice restriction transports the signed bidual triangle morphism. The comparisons are
 formed from the evaluation-compatible tensor/Hom restriction comparisons, by the same double-Hom
 formula as the dependency's restriction theorem.
@@ -679,7 +960,131 @@ theorem slice_compatibility
               (((restriction.{c, v, r, w, w'} J R U).mapTriangle.obj T).mor₃) ≫
             signedShift.{max c v, v, r, w'} (J.over U) (R.over U)
               ((restriction.{c, v, r, w, w'} J R U).obj T.obj₁)) := by
-  sorry
+  let T := dual.{c, v, r, w} J R
+  let TU := dual.{max c v, v, r, w'} (J.over U) (R.over U)
+  let F := restriction.{c, v, r, w, w'} J R U
+  obtain ⟨S, _, hPlus, hMinus⟩ := signedDerivedInternalHom_exact.{c, v, r, w} J R
+    (ringedSiteDualityUnit.{c, v, r, w} J R)
+  obtain ⟨SU, _, hPlusU, hMinusU⟩ :=
+    signedDerivedInternalHom_exact.{max c v, v, r, w'} (J.over U) (R.over U)
+      (ringedSiteDualityUnit.{max c v, v, r, w'} (J.over U) (R.over U))
+  let : T.CommShift ℤ := S
+  let : TU.CommShift ℤ := SU
+  obtain ⟨h, o, t, he, hs, hr⟩ :=
+    ringedSiteSignedDual_restriction.{c, v, r, w, w'} J R U M MU
+  let α : T ⋙ F ≅ F.op ⋙ TU := closedDualRestrictionIso h o
+  have hd := bidual_restriction F M.closed MU.closed M.symmetric MU.symmetric h t he hs o
+  have ha : NatTrans.CommShift α.hom ℤ := by
+    apply commShift_of_one
+    constructor
+    ext X
+    obtain ⟨X⟩ := X
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+    rw [Functor.commShiftIso_comp_hom_app T F,
+      Functor.commShiftIso_comp_hom_app F.op TU]
+    erw [hPlus X, hPlusU (F.obj X)]
+    erw [Functor.op_commShiftIso_hom_app F (op X) 1 (-1) (by decide)]
+    simp only [shiftFunctorOpIso, eqToIso_refl, Iso.refl_hom, Iso.refl_inv,
+      NatTrans.id_app]
+    erw [unop_id, Functor.map_id, op_id, Category.id_comp, Category.comp_id]
+    have : F.Additive := by dsimp only [F, restriction]; infer_instance
+    simp only [Functor.map_neg, Preadditive.neg_comp, Preadditive.comp_neg,
+      Category.assoc, neg_inj]
+    change F.map ((sourceShift J R X (-1)).inv.app (ringedSiteDualityUnit J R)) ≫
+        (F.commShiftIso (1 : ℤ)).hom.app (T.obj (op X)) ≫
+          (α.hom.app (op X))⟦(1 : ℤ)⟧' =
+      α.hom.app (op (X⟦(-1 : ℤ)⟧)) ≫
+        TU.map (((F.commShiftIso (-1 : ℤ)).inv.app X).op) ≫
+          (sourceShift (J.over U) (R.over U) (F.obj X) (-1)).inv.app
+            (ringedSiteDualityUnit (J.over U) (R.over U))
+    have hh := hr X (-1)
+    change F.map ((sourceShift J R X (-1)).hom.app (ringedSiteDualityUnit J R)) ≫
+        α.hom.app (op (X⟦(-1 : ℤ)⟧)) =
+      (F.commShiftIso (1 : ℤ)).hom.app (T.obj (op X)) ≫
+        (α.hom.app (op X))⟦(1 : ℤ)⟧' ≫
+        (sourceShift (J.over U) (R.over U) (F.obj X) (-1)).hom.app
+          (ringedSiteDualityUnit (J.over U) (R.over U)) ≫
+        TU.map (((F.commShiftIso (-1 : ℤ)).hom.app X).op) at hh
+    apply (cancel_epi (F.map ((sourceShift J R X (-1)).hom.app
+      (ringedSiteDualityUnit J R)))).mp
+    simp only [← Category.assoc, ← F.map_comp, Iso.hom_inv_id_app, Functor.map_id,
+      Category.id_comp]
+    rw [hh]
+    simp only [Category.assoc, ← TU.map_comp, ← op_comp, Iso.inv_hom_id_app,
+      op_id]
+    erw [TU.map_id, Category.id_comp, Iso.hom_inv_id_app, Category.comp_id]
+  let : NatTrans.CommShift α.hom ℤ := ha
+  obtain ⟨β, hβ, hβcomm⟩ := doubleDualRestriction T TU F α
+  have hn := signed_bidual_normalized.{c, v, r, w} J R hPlus hMinus
+  have hnU := signed_bidual_normalized.{max c v, v, r, w'}
+    (J.over U) (R.over U) hPlusU hMinusU
+  let beta : bidual.{c, v, r, w} J R ⋙ F ≅
+      F ⋙ bidual.{max c v, v, r, w'} (J.over U) (R.over U) := β
+  have hβshift (X : D.{c, v, r, w} J R) :
+      F.map (signedShift.{c, v, r, w} J R X) ≫
+          (F.commShiftIso (1 : ℤ)).hom.app ((bidual.{c, v, r, w} J R).obj X) ≫
+          (beta.hom.app X)⟦(1 : ℤ)⟧' =
+        beta.hom.app (X⟦(1 : ℤ)⟧) ≫
+          (bidual.{max c v, v, r, w'} (J.over U) (R.over U)).map
+            ((F.commShiftIso (1 : ℤ)).hom.app X) ≫
+          signedShift.{max c v, v, r, w'} (J.over U) (R.over U) (F.obj X) := by
+    let := hβcomm
+    have hh := NatTrans.shift_app_comm β.hom (1 : ℤ) X
+    rw [Functor.commShiftIso_comp_hom_app (T.rightOp ⋙ T) F,
+      Functor.commShiftIso_comp_hom_app F (TU.rightOp ⋙ TU), hn X, hnU (F.obj X)] at hh
+    simpa only [T, TU, bidual, beta, Category.assoc] using hh
+  have hβiso (X : D.{c, v, r, w} J R) : beta.app X =
+      restrictionBidualIso.{c, v, r, w, w'} J R U h o X := by
+    apply Iso.ext
+    change β.hom.app X = _
+    rw [hβ]
+    simp only [α, closedDualRestrictionIso, NatIso.ofComponents_hom_app,
+      NatIso.ofComponents_inv_app, Iso.trans_hom, Iso.trans_inv, Functor.mapIso_hom,
+      Functor.mapIso_inv, Iso.prod_hom, Iso.prod_inv, Iso.refl_hom, Iso.refl_inv,
+      restrictionBidualIso]
+    dsimp only [TU, dual, Functor.comp_map, Prod.sectL_map]
+    simp only [op_comp, Functor.map_comp, Iso.symm_hom, Iso.op_hom,
+      Functor.mapIso_hom, Iso.prod_hom, Iso.refl_hom, Category.assoc]
+    simp only [← Functor.map_comp]
+    congr 2
+    ext <;> simp
+    rfl
+  have hβcompatible : NatTrans.CommShift beta.hom ℤ := by
+    apply commShift_of_one
+    constructor
+    ext X
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app]
+    rw [Functor.commShiftIso_comp_hom_app (bidual.{c, v, r, w} J R) F,
+      Functor.commShiftIso_comp_hom_app F
+        (bidual.{max c v, v, r, w'} (J.over U) (R.over U)), hS, hSU]
+    simpa only [Category.assoc] using hβshift X
+  have hdeval (X : D.{c, v, r, w} J R) :
+      F.map ((evaluation.{c, v, r, w} J R M).app X) ≫ beta.hom.app X =
+        (evaluation.{max c v, v, r, w'} (J.over U) (R.over U) MU).app (F.obj X) := by
+    change F.map _ ≫ (beta.app X).hom = _
+    rw [hβiso]
+    dsimp only [evaluation, restrictionBidualIso, dual, bidual, F, restriction,
+      Functor.comp_obj, Prod.sectL, Functor.rightOp_obj]
+    simpa only [restrictionBidualIso, Iso.trans_hom, Functor.mapIso_hom, Iso.prod_hom,
+      Iso.op_hom, Iso.symm_hom, Iso.symm_inv, Iso.refl_hom, evaluation,
+      Iso.app_hom, Iso.app_inv, F, restriction, dual, bidual, Functor.comp_obj,
+      Prod.sectL_obj, Functor.id_obj, Functor.rightOp_obj, Category.assoc] using hd X
+  refine ⟨h, o, t, he, beta, hβiso, hβcompatible, hdeval, ?_⟩
+  intro V _
+  let B := bidual.{c, v, r, w} J R
+  let BU := bidual.{max c v, v, r, w'} (J.over U) (R.over U)
+  change F.map ((evaluation J R M).app V.obj₃ ≫ B.map V.mor₃ ≫
+      signedShift J R V.obj₁) ≫
+      (F.commShiftIso (1 : ℤ)).hom.app (B.obj V.obj₁) ≫
+      (beta.hom.app V.obj₁)⟦(1 : ℤ)⟧' =
+    (evaluation (J.over U) (R.over U) MU).app (F.obj V.obj₃) ≫
+      BU.map (F.map V.mor₃ ≫ (F.commShiftIso (1 : ℤ)).hom.app V.obj₁) ≫
+        signedShift (J.over U) (R.over U) (F.obj V.obj₁)
+  simp only [Functor.map_comp, Category.assoc]
+  erw [hβshift V.obj₁]
+  have hnat := beta.hom.naturality V.mor₃
+  change F.map (B.map V.mor₃) ≫ beta.hom.app _ = beta.hom.app _ ≫ BU.map (F.map V.mor₃) at hnat
+  rw [reassoc_of% hnat, ← Category.assoc, hdeval]
 end Slice
 
 /-- The induced action of a coefficient endomorphism, through the tensor unit.Endomorphisms of O[0]

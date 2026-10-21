@@ -1,0 +1,136 @@
+{
+ "id": "lem-coef-slice-hom-source-shift",
+ "kind": "statement",
+ "title": "Slice restriction preserves the normalized source shift of derived Hom",
+ "statement": "Let C be a category with Grothendieck topology J and sheaf R of commutative rings. Work with module sheaves in max(c,v,r), arbitrary independent derived-category universes w,w', and the actual unbounded derived internal Homs H and H_U [def-pur-derived-internal-hom, def-weil-abstract-derived-category]. Fix U in C and let F be exact derived restriction [def-weil-pbc-ringed-derived-restriction]. Let M,M_U be the representative-normalized closed tensor-Hom models [lem-sfb-ringed-site-duality-maps]. Let d be RingedSliceEvaluationComparisons with Hom-model normalization [def-sfb-ringed-slice-comparison-model], and write eta(X,Y): F H(X,Y) ≅ H_U(FX,FY). For the uniquely projection-normalized signed source comparisons s(X,n): H(X,Y)[-n] ≅ H(X[n],Y) [lem-weil-pbc-ringed-internal-hom-exact-restriction], for all X,Y and n in Z one has F(s(X,n)) ; eta(X[n],Y) = c_F(-n) ; eta(X,Y)[-n] ; s_U(FX,n) ; H_U(c_F(n).op,id). Here c_F(n):F(X[n]) ≅ (FX)[n] is the specified exact restriction shift comparison. No double dual, evaluation map, distinguished triangle or reflexivity assumption occurs.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 08JB (lemma-restriction-RHom-to-U), 08FI (lemma-restrict-K-injective-to-open), and Section 0A8X (Hom complexes, degreewise product and differential). Signed source reindexing and the localization square are expanded explicitly."
+ },
+ "stmt_deps": [
+  "def-pur-derived-internal-hom",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-derived-restriction",
+  "lem-sfb-ringed-site-duality-maps",
+  "def-sfb-ringed-slice-comparison-model",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+ ],
+ "proof": [
+  {
+   "text": "Represent X by a complex L and Y by a K-injective complex I. The augmentation equation in RingedKInjectiveHomModel fixes kappa.inv to the actual ordinary-to-derived comparison: multiply its normalization by the inverse localization factorization. This equality is the proved private homModel_inv_eq. Apply LeftNormalization with the identity representative isomorphism and substitute this equality. The resulting source-shift representative square is the proved private sourceShift_model.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-sfb-ringed-slice-comparison-model",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose the local-family Hom comparisons gamma for (L,I) and (L[n],I) from the Hom-model hypothesis. On each degree-k projection indexed by p, the ordinary source shift reindexes p to p+n and multiplies by (-1)^(n*k). Termwise restriction preserves this integer scalar and has the identity shift comparison in every degree. Both paths in the comparison square therefore give the same family on every further slice W over V over U. Equality of module maps on sections, of internal Hom families on all further slices, and the product universal property imply equality of chain maps. This whole chain calculation is the proved private restriction_sourceShift_chain, using the proved homFamily_ext and restrictionShift_component helpers.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-sfb-ringed-slice-comparison-model",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The Hom-model hypothesis already supplies the augmentation-normalized comparison isomorphisms on both sites. Localize the chain equality and conjugate by these Hom models. The localization factorization a is compatible with the canonical exact-functor shift structures; this is the proved localization_shift. For X=QL,Y=QI, precompose the desired equation by F(Q.cs(-n).hom ; kappa.inv[-n]) and postcompose by H_U((a_(L[n]).inv ; F(Q.cs(n).hom)).op,a_I.hom), both isomorphisms. Hom-model normalization (proved hom_restriction_model), eta naturality and ambient LeftNormalization turn the first path into a_(Hom(L,I)[-n]) ; Q_U(r(e.hom) ; gamma_n.hom) ; kappa_Un.inv. This reduction of the first path is proved as sourceShift_model_restriction_left, followed by naturality of the localization factorization. On the other path use localization_shift at -n and n, move a_I by target naturality of sourceShift_U, and use LeftNormalization_U with representative isomorphism a_L.symm. Naturality of the ordinary Hom comparison (proved private ordinaryComparison_source) for r(L[n]) to (rL)[n] gives a_(Hom(L,I)[-n]) ; Q_U(r.cs(-n).hom ; gamma.hom[-n] ; e_U.hom ; Hom(r.cs(n).hom,id)) ; kappa_Un.inv. The proved chain square identifies these expressions. Substitute the Hom-model localization squares and cancel only the model and localization isomorphisms. This proves the equation on QL,QI. For a general source, choose e_X:QL≅X and use it in the ambient LeftNormalization and F(e_X.symm) followed by a_L in the slice LeftNormalization; eta naturality cancels the additional source maps. A K-injective representative isomorphism QI≅Y and target naturality of eta and sourceShift give arbitrary Y. The same computation covers n=0, negative n, and coefficients of characteristic two.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-abstract-derived-category",
+    "def-sfb-ringed-slice-comparison-model",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-pur-hom-complex",
+  "def-sfb-ringed-slice-comparison-model",
+  "def-weil-abstract-derived-category",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "Q3",
+  "date": "2026-10-21",
+  "note": "Explicit source construction and categorical transport written while proving the slice clause of lem-coef-rational-bidual-triangle-compatibility."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The normalized restriction comparison for derived internal Hom on a slice commutes with the source shift of complexes",
+   "results": "Eight hits on exact functor shifts, localization factorization shifts, cochain reindexing and homology shifts. None concerns the representative-normalized sheaf internal Hom restriction comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical derived internal Hom restriction comparison commutes with shifts and double dual evaluation",
+   "results": "Eight hits including expComparison_ev, coev_expComparison and expComparison. These give general closed functor comparisons, without the normalized signed sheaf Hom source shift.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "bidual.*restriction|restriction.*bidual|closed.*comparison|comparison.*closed",
+   "results": "Five hits in the Mathlib closed monoidal functor comparison API. No site restriction or Hom-complex source reindexing result. Local source searches and blueprint searches for source shift and normalized slice found no matching statement.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "group": "Q3",
+  "item": "Sheaf.CategoryTheory.CoefficientBidualTriangleCompatibility",
+  "date": "2026-10-21"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-biduality-general",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-coef-rational-retract-evaluation",
+   "place": "Proof, paragraph 3: local finite-free/retract and bounded-complex biduality; restriction of the canonical evaluation comparison used to extend the canonical biduality map.",
+   "via": [
+    "lem-coef-rational-bidual-triangle-compatibility"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.RingedSliceHomSourceShift",
+  "file": "lean/Sheaf/Algebra/Homology/RingedSliceHomSourceShift.lean",
+  "declaration": "CategoryTheory.ringedSlice_hom_sourceShift",
+  "statement": "theorem ringedSlice_hom_sourceShift\n    (M : RingedSiteDualityModel.{c, v, r, w} J R)\n    (MU : RingedSiteDualityModel.{max c v, v, r, w'} (J.over U) (R.over U))\n    (d : RingedSliceEvaluationComparisons H HU\n      (ringedSliceDerivedRestriction.{c, v, r, w, w'} J R U) M.closed MU.closed\n      (RingedSliceFlatRestriction.{c, v, r} J R U))\n    (hh : RingedSliceHomModel.{c, v, r, w, w'} J R U\n      M.closed M.models MU.closed MU.models d) :\n    ∀ (X Y : D.{c, v, r, w} J R) (n : ℤ),\n      (F).map ((sourceShift.{c, v, r, w} J R X n).hom.app Y) ≫\n          (d.eta (X⟦n⟧) Y).hom =\n        ((F).commShiftIso (-n)).hom.app ((H).obj (op X, Y)) ≫\n          ((d.eta X Y).hom)⟦-n⟧' ≫\n          (sourceShift.{max c v, v, r, w'} (J.over U) (R.over U) ((F).obj X) n).hom.app\n            ((F).obj Y) ≫\n          (HU).map (Prod.mkHom (((F).commShiftIso n).hom.app X).op (𝟙 ((F).obj Y)))",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T024155-L-3041028",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T024155-L-3041028",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
