@@ -38,59 +38,44 @@
  ],
  "proof": [
   {
-   "text": "Put $p=\\bar f$, $J_R=j_!^R$ and $r_\\theta=\\operatorname{Res}_\\theta$. The direct-image restriction theorem supplies exactness of scalar restriction and its termwise triangulated descent. In the following formulas identify $r_\\varphi r_\\psi$ with $r_{\\psi\\varphi}$ by the canonical sectionwise-identity comparison $\\rho$, including its exact localization.",
-   "uses": [
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0D6E (lemma-derived-pushforward-composition), through the normalized direct-image restriction theorem"
-   }
-  },
-  {
-   "text": "Apply coherent open-extension scalar restriction to $j$ and the given finite rings. It supplies the presheaf-identity-normalized $e_\\varphi:J_A r_\\varphi\\cong r_\\varphi J_B$ on the unbounded derived categories and $e_{\\psi\\varphi}=r_\\varphi(e_\\psi)\\circ e_\\varphi r_\\psi$. The open-immersion hypothesis is part of the chosen compactification.",
+   "text": "Use sfOpenRestriction_derived_comp, the already proved unbounded exact-localization cocycle, for the open immersion of the compactification. Its source and target associators are exactly sfDerivedCoefficientRestrictionComp.",
    "uses": [
     "lem-sf-open-extension-scalar-restriction-coherence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI, label lemma-extension-by-zero: sheafified extension-by-zero construction; coefficient coherence and its unbounded localization are the agent-written argument extracted from former steps 2–3 of lem-sf-compact-support-restriction-of-scalars."
-   }
+   "elementary": false
   },
   {
-   "text": "For the specified direct-image comparisons $\\beta_\\theta:P_Rr_\\theta\\cong r_\\theta P_S$, $P_R=Rp_*^R$, apply the normalized coefficient cocycle to $p$. Thus $\\beta_{\\psi\\varphi}=r_\\varphi(\\beta_\\psi)\\circ\\beta_\\varphi r_\\psi$. Define $\\alpha_{\\varphi,K}=\\beta_{\\varphi,J_BK}\\circ P_A(e_{\\varphi,K})$. Its endpoints are $P_AJ_A r_\\varphi K$ and $r_\\varphi P_BJ_BK$, precisely the compact-support candidates in the statement. Both factors are natural isomorphisms.",
+   "text": "In the intrinsic constant-ring presentation, the published ordinary direct-image restriction square and the ordinary scalar associator are identity on every section. Their composite coefficient square therefore equals the square for the composite ring map. For the inverse associator, apply section evaluation to its inverse-hom identity and use the hom normalization.",
    "uses": [
-    "lem-sf-direct-image-scalar-restriction-cocycle"
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070Y, label lemma-K-injective-defined: computation on K-injectives; the coefficient cocycle and canonical restriction-associator normalization are the agent-written argument of former steps 5–8 of lem-sf-compact-support-restriction-of-scalars, using the normalized direct-image comparison."
-   }
+   "elementary": false
   },
   {
-   "text": "Expand $\\alpha_{\\psi\\varphi,K}$ with the two cocycles. Naturality of $\\beta_\\varphi$ on $e_{\\psi,K}$ gives\n$$\\beta_{\\varphi,r_\\psi J_CK}\\circ P_A(r_\\varphi e_{\\psi,K})=r_\\varphi P_B(e_{\\psi,K})\\circ\\beta_{\\varphi,J_Br_\\psi K}.$$\nSubstitution and associativity give $\\alpha_{\\psi\\varphi,K}=r_\\varphi(\\alpha_{\\psi,K})\\circ\\alpha_{\\varphi,r_\\psi K}$. Restoring $\\rho$ gives exactly the canonical coefficient-composition identifications. This proves the claimed composition law for the specified composite.",
+   "text": "Apply the proved private generic rightTower calculation in FiniteFreeDirectImageBalancingCoherence to the three ordinary constant-ring direct images, the three exact restrictions at each end, and the ordinary coefficient associators. Each required unit-factorization equation is precisely the normalization in proEtaleRingRestrictionDerivedDirectImage_existsUnique. This gives composition of the specified intrinsic ring-sheaf derived comparisons, with no finite-free or scalar-model hypothesis. Invert this isomorphism equality and cancel the source associator to obtain the forward direct-image cocycle.",
+   "uses": [
+    "lem-sp-finite-free-balancing-coherence",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Expand intrinsicCompactSupportRestriction as direct image of the open comparison followed by the inverse published direct-image comparison. Map the open cocycle through the A-direct-image functor and apply the forward direct-image cocycle at the C-extension-by-zero of L. Naturality of the inverse phi direct-image comparison on the psi open-comparison component moves the middle open map past it. Functoriality and associativity give exactly the displayed compact-support equation.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-integral-rational-qbar-compact-support.md",
-    "place": "The finite-level transition maps implicit in the derived inverse-limit formula; expanded using sites-modules.tex Tags 03CY, 03DI, 03DJ and sites-cohomology.tex Tag 0D6E"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-weil-proetale-direct-image-restriction-of-scalars",
-  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-sf-open-extension-scalar-restriction-coherence",
-  "lem-sf-direct-image-scalar-restriction-cocycle"
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sp-finite-free-balancing-coherence",
+  "lem-weil-pbc-exact-functor-derived-factorization"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/def-weil-integral-rational-qbar-compact-support.md",
-  "place": "The finite-level transition maps implicit in the derived inverse-limit formula; expanded using sites-modules.tex Tags 03CY, 03DI, 03DJ and sites-cohomology.tex Tag 0D6E"
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6E, lemma-derived-pushforward-composition; Tag 03DI in sites-modules.tex for open extension. Y2 reuses the proved generic rightTower unit-normalization calculation from FiniteFreeDirectImageBalancingCoherence and assembles the two cocycles by naturality."
  },
  "mathlib_searches": [
   {
@@ -200,7 +185,15 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NO-02d282ae8 (reviewer sub-agent of L); spot-checked: This answers the reopened human re-split note of 2026-10-21 (need >=2 new nodes and <=3000 chars). The delivery adds 2 statement-only nodes and the item proof is now 4 steps, 1660 chars. Field diff vs live: only proof, proof_deps and split_report changed; statement, stmt_deps, lean and tool_uses are identical, so nothing is weakened. Step-by-step mapping from the live 6-step proof: old steps 2-3 (presheaf identity, sheafified e_phi, cocycle, exactness and descent to D) became lem-sf-open-extension-scalar-restriction-coherence. Old step 5 (hypotheses of the generic composition lemma for p_* and Res) became lem-sf-direct-image-scalar-restriction-cocycle. Old steps 1, 4 and 6 are new steps 1, 3 and 4. No argument was dropped. The two nodes are comparable in size, and neither restates the item: one has only j, the other only p. I proved both. Open node: P_{r_phi M} = r_phi P_M as A-presheaves (def-weil-extension-by-zero), unique sheafified action and factorization (def-weil-presheaf-modules-sheafification), exactness, and localization clauses (2)/(3). Edge cases U empty, j=id, identity maps and zero ring all hold. Direct-image node: the normalization is the value clause of lem-weil-proetale-direct-image-restriction-of-scalars, and uniqueness follows from enough K-injectives. The cocycle is lem-sf-normalized-derived-comparison-composition with p_* r = r p_* on sections over Z x_Y V. I re-derived the step-4 naturality expansion, including restoring rho. Sources checked: sites-modules.tex 03DI (line 2058) and derived.tex 070Y (line 9747). Duplicate candidates read and found different: lem-cbc-proetale-extension-zero (bare complex iso only), lem-cbc-finite-open-exchange-scalars, lem-pur-ringed-derived-composition-cocycle (kappa associativity), lem-pur-diagram-ring-restriction-pushforward, lem-sbc-canonical-restrict-scalars-functor-comparisons. No cycle, no SGA, the item is not dropped, and the tool use is unchanged. Fixes: (1) the open node used 'exact termwise localization' of j_! without citation; I added [lem-weil-extension-by-zero-exact] to its statement and stmt_deps. (2) Item step 1's source was a copy of the 070Y cocycle text; I restored 0D6E via the direct-image theorem, and rewrote split_report.blueprint to the 4-step numbering, since the ancestor has no 'steps 5-8'.; 2 file(s) fixed by the reviewer"
  },
- "tool_uses": [
-  "lem-weil-proetale-direct-image-restriction-of-scalars"
- ]
+ "tool_uses": [],
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y2",
+  "result": "pass",
+  "landing": "20261021T151213-L-1180328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
