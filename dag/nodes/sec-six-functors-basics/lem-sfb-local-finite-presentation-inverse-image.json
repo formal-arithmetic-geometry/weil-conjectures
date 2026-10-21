@@ -363,5 +363,29 @@
   "group": "Q09",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-415a7aa4c (reviewer sub-agent of L); spot-checked: I read the full delivery: the item proof (8 steps), every cited statement, the main-20261015 blueprint proof of lem-sfb-dc-upper-star-preserves (the sentences from 'Choose a pro-étale cover' to the end) and the unit route. The delivery is one commit with the item and its report; there are 0 new nodes, the statement is unchanged and there is no SGA. Every step's uses match its text and proof_deps, and there is no cycle (the item is not in its 305-node closure). Step 2: fpqc-covering-axioms(3) holds for any T'→T and weakly étale is stable under base change, so the base change of the cover covers X. V_i is U-small, so it is an X_proét object. Step 3: I checked the inverse mate formula c_A=ε^L_{KA}L(s_{KA})L(η^K_A) against def-weil-pbc-adjunction-mate and the conjugate direction in def-sfb-finite-upper-star-comp. Each factor is monoidal: the composite unit, the pushforward compositor from lem-sfb-pushforward-comp-monoidal (its canonical lax structure is the def-sfb-finite-lower-star-lax-monoidal one for Ab), and the counit. Since f v = u h, e is well typed and β=e_R is a ring isomorphism A'→S. Step 4: the parameters of restricted-transport-comparison-linear check out (ψ=ψ'=id, φ=β), and mapMod of the composite is T_hT_u. Step 5: the mate condition of modobj-transport-adjunction holds because mates are a bijection, so T_h is a left adjoint and preserves cokernels. Step 6: finite-free transport gives the basis maps; I verified the linearity of β^{-1} from β m=m(β⊗β), and the k=0 case. Step 7: Res_β preserves colimits by change-of-scalars(3), and I checked the cokernel of d'=a_nH(d)a_m^{-1} by hand. Edge cases checked: f=id, ranks 0, R=0, empty cover, non-flat f. Route: only lem-sfb-monoidal-finite-free-transport is off-route; it is a declared tool use and I accept it as generic. Duplicates: lfp-scalar-isomorphism, proetale-fp-local-models-pullback and internal-scalar-extension are different statements. Maintainer note: lem-weil-pbc-proetale-module-lfp-immersion-transport (with i=id) gives only the existential lfp clause, not the specified cover, β or d'. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.LocalFinitePresentationInverseImage",
+  "declaration": "AlgebraicGeometry.ProEtale.localFinitePresentation_inverseImage",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.FinitePresentationTransportWitness",
+   "AlgebraicGeometry.ProEtale.localFinitePresentation_inverseImage"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/LocalFinitePresentationInverseImage.lean",
+  "statement": "theorem localFinitePresentation_inverseImage {X Y : Scheme.{u}} (f : X ⟶ Y) (R : Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) [MonObj R] [IsCommMonObj R] (M : Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) R) (𝒰 : Scheme.Cover.{v} Scheme.proetalePrecoverage Y) (m n : 𝒰.I₀ → ℕ) (d : ∀ i, Mod.finiteFree ((upperStar Ab.{u + 1} (𝒰.f i)).obj R) (m i) ⟶ Mod.finiteFree ((upperStar Ab.{u + 1} (𝒰.f i)).obj R) (n i)) (p : ∀ i, ((upperStar Ab.{u + 1} (𝒰.f i)).mapMod R).obj M ≅ cokernel (d i)) : (𝒰.toPreZeroHypercover.pullback₁ f).presieve₀ ∈ Scheme.proetalePrecoverage X ∧ (∀ i : 𝒰.I₀, Nonempty (FinitePresentationTransportWitness (upperStar Ab.{u + 1} f) (upperStar Ab.{u + 1} (pullback.fst f (𝒰.f i))) (upperStar Ab.{u + 1} (𝒰.f i)) (upperStar Ab.{u + 1} (pullback.snd f (𝒰.f i))) (upperStarCompIso Ab.{u + 1} (pullback.condition (f := f) (g := 𝒰.f i))) R M (m i) (n i) (d i) (p i))) ∧ IsLocallyFinitelyPresented ((upperStar Ab.{u + 1} f).obj R) (((upperStar Ab.{u + 1} f).mapMod R).obj M)",
+  "branch": "newtargets-dag",
+  "by": "Q57",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The comparison e of the witness is the existing AlgebraicGeometry.ProEtale.upperStarCompIso (UpperLowerStar.Iso) of pullback.condition: the inverse upperStarComp for pullback.fst ≫ f, the congruence of the pullback equality, and upperStarComp for pullback.snd ≫ u (reviewer FIX: the delivered helper finitePresentationPullbackComparison was a copy of it, equal by rfl). The witness structure packages this item's local conclusions, including coordinate and induced-cokernel-arrow normalization; no ring, module, finite-free or finite-presentation notion is redefined. The cover index universe is independent of the scheme universe.",
+  "fixed_by": "NT-stage2-cc-418d91b23"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-418d91b23",
+  "group": "Q57",
+  "result": "fix",
+  "note": "Statement matches the node clause by clause: same-index base-changed cover via pullback₁ (components pullback.fst); beta, the module iso, freeIso (coordinates H(π_j)≫β⁻¹) and presentationIso (π-equation, derived from step 7) are all pinned to e, p and d, so nothing is hollow; existing IsLocallyFinitelyPresented; no extra hypotheses; empty cover, rank 0, zero ring and free cover universe all fine. H4 fixed: the helper finitePresentationPullbackComparison is rfl-equal to the existing upstream ProEtale.upperStarCompIso (UpperLowerStar/Iso.lean:119); fixes/LocalFinitePresentationInverseImage.lean removes it, public-imports UpperLowerStar.Iso and uses upperStarCompIso Ab (pullback.condition); the lean-record.json override sets declarations, statement and note. nt_compile: delivered clean 32.7 s, fixed clean 29.7 s, rfl probe clean, control errors as expected; refit_record gives no notes or refusals. Advisory: def-sfb-finite-upper-star-comp is used by the statement but is only in proof_deps; the second reading was a self-reread by the same worker but records clause checks."
  }
 }

@@ -245,5 +245,28 @@
   "group": "Q18",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-2fdd50126 (reviewer sub-agent of L); spot-checked: I read the whole delivery and wrote no fixes. It is an ordinary split with no new nodes. There is no repair note for this item; Q26 created it on 2026-10-21 when re-splitting lem-sfb-flat-scalar-cyclic-resolution, and it carries that parent's old Steps 3-5. The item is not on the drop list and is still unsplit in live and side-live. The statement is byte-identical to live; stmt_deps adds def-weil-abstract-derived-category for the Cone gloss. The statement is true. Tested cases: R=Z with u=2 (Z/2 resolved, never called flat); n=0 forces P=0; m=0; u an isomorphism; R=0 and the empty site. Step checks: step 1, monomorphism plus cokernel gives a short exact sequence in Mod(R) for a small site, and qu=0 makes ε a chain map. Step 2, the cone matrix (d_L f; 0 −d_K), as in derived.tex:2471 and the def node, gives differential +u and inclusion 1_Q. Step 3, the Mathlib leaf lem-pc-cone-short-exact-quasi-iso (quasiIso_descShortComplex) maps exactly to ε, which is unchanged even by a ± sign on P. Step 4, the tensor unit isomorphism makes R flat. Step 5, 03EU(2) at sites-modules.tex:4342 covers finite sums and the empty sum. Step 6, 06YQ at sites-cohomology.tex:3120 (bounded above and flat implies K-flat) applies to all three complexes with bound 0. proof_deps equals the union of the steps' uses, there is no cycle (closure of 183 nodes), all three search kinds are recorded, and the blueprint from/via fields are correct. I accept the three declared tool_uses: tensor unit, coproduct flatness and the bounded-above K-flat criterion. Advisories: lem-pc-bounded-above-flat-kflat-site labels its source 06YS, but the right tag is 06YQ. lem-sfb-ringed-finite-free-resolution-tensor (unsplit, another unit) overlaps the K-flatness clause, but it has no mono/cokernel quasi-isomorphism, so it is not a duplicate."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.FiniteFreeMonoCokernelKFlat",
+  "declaration": "CochainComplex.finite_free_mono_cokernel_kflat",
+  "declarations": [
+   "CochainComplex.monoCokernelComplex",
+   "CochainComplex.monoCokernelAugmentation",
+   "CochainComplex.finite_free_mono_cokernel_kflat"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/FiniteFreeMonoCokernelKFlat.lean",
+  "statement": "theorem finite_free_mono_cokernel_kflat (S : ShortComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) [Mono S.f] (hq : IsColimit (CokernelCofork.ofπ S.g S.zero)) (m n : ℕ) (eP : S.X₁ ≅ ∐ (fun (_ : Fin m) ↦ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) (eQ : S.X₂ ≅ ∐ (fun (_ : Fin n) ↦ SheafOfModules.unit ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))) : QuasiIso (monoCokernelAugmentation S) ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) ((monoCokernelComplex S.f).X i)) ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (((singleFunctor _ 0).obj S.X₁).X i)) ∧ (∀ i : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := R) (((singleFunctor _ 0).obj S.X₂).X i)) ∧ IsKFlatIndependentCoefficients (J := J) (R := R) (monoCokernelComplex S.f) ∧ IsKFlatIndependentCoefficients (J := J) (R := R) ((singleFunctor _ 0).obj S.X₁) ∧ IsKFlatIndependentCoefficients (J := J) (R := R) ((singleFunctor _ 0).obj S.X₂) ∧ IsKFlatResolutionIndependentCoefficients (J := J) (R := R) (monoCokernelAugmentation S) ∧ mappingCone.inr ((singleFunctor _ 0).map S.f) ≫ monoCokernelAugmentation S = (singleFunctor _ 0).map S.g ∧ (mappingCone.inl ((singleFunctor _ 0).map S.f)).v 0 (-1) rfl ≫ (monoCokernelComplex S.f).d (-1) 0 = ((singleFunctor _ 0).map S.f).f 0 ≫ (mappingCone.inr ((singleFunctor _ 0).map S.f)).f 0",
+  "branch": "sheaf-dag",
+  "by": "Q50",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c046e16c2",
+  "group": "Q50",
+  "result": "pass",
+  "note": "Every node clause matches the Lean: the cone of u[0] stands for C_u (the node allows Cone(u[0])), the augmentation is Mathlib's canonical cone map (zero on P, q on Q), plus QuasiIso, termwise IsFlatOnSite and IsKFlatIndependentCoefficients for C_u, P[0] and Q[0], the K-flat resolution, inr ≫ ε = q[0], and the +u differential via inl_v_d. Hypotheses are Mono, the cokernel IsColimit of the given q, ranks m,n ≥ 0 including 0, an arbitrary CommRingCat sheaf and EssentiallySmall.{r} with u, v, r independent; nothing extra. Edge cases m=0, n=0, u iso, ℤ with u=2, zero ring and empty site are all fine. No duplicate: the helpers only name mappingCone and descShortComplex, consistent with the parent's scalarCyclicComplex. Docstrings and the 6 proof steps are present, imports are the stmt/proof_deps modules, lean.statement matches the file verbatim, and the node copy changes only its lean field. nt_compile --json is clean (34.8 s, EXIT 0). Advisory: stage 3 needs the independent-universe bounded-flat K-flat interface."
  }
 }

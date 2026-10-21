@@ -240,5 +240,38 @@
   "group": "O3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-9bf6c3bd8 (reviewer sub-agent of L); spot-checked: Item-only split: 0 new nodes, and statement, stmt_deps and blueprint are identical to the Q33 version that created it. No repair or re-split note, no SGA, proof_deps equals the union of uses. Stacks 06YY (sites-cohomology l.3585) and 06YT (l.3233) match their use through the identity topos. Steps: (1) restriction is exact by lem-pur-sheaf-ring-coefficient-ordinary-adjunction, so cohomology and quasi-isomorphisms are preserved. (2) λ comes from the localization universal property and has the item's orientation; shifts commute strictly. (3) The swap is B-balanced, (φ(b)s)⊗p and s⊗bp both going to p⊗φ(b)s; it is S-linear, has no sign because the coefficient is in degree 0, and extends by sheafification uniqueness. (4) Clause (2) of lem-pur-derived-change-of-rings applies to vu and wu, and η has the right orientation. (5) Trivial. (6) A-linearity of h gives B-balancing; both square routes send s⊗p to p⊗h(s), and maps agree by pure-tensor generation on presheaves and uniqueness on sheafifications. (7) I expanded the conjugation formula myself and it is correct. Small-case test on the one-point site with B=ℤ, A=ℤ/4, S=ℤ/2, T=ℤ/4, h:1↦2, P=ℤ: the square commutes. The parent lem-pe-successive-quotient-linear-triangle step 4 needs exactly an arbitrary A-linear h (multiplication by t or quotient), and the statement covers it. Advisory only: lem-pur-sheaf-ring-derived-coefficient-adjunction already states that exact Res induces Res on D, but steps 1-2 prove this directly, so it is not a duplicate fault. Both tool_uses accepted. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RestrictedKFlatTensorIdentification",
+  "declaration": "SheafOfModules.nonempty_restrictedKFlatTensorIdentification",
+  "declarations": [
+   "SheafOfModules.restrictedTensorScalars",
+   "SheafOfModules.restrictedTensorScalars_preservesFiniteColimits",
+   "SheafOfModules.restrictedTensorScalars_preservesFiniteLimits",
+   "SheafOfModules.restrictedTensorCoefficient",
+   "SheafOfModules.restrictedTensorLastComplex",
+   "SheafOfModules.restrictedTensorFirstSection",
+   "SheafOfModules.restrictedTensorLocalization",
+   "SheafOfModules.restrictedTensorScalars_quasiIso",
+   "SheafOfModules.restrictedTensorLocalization_commShift",
+   "SheafOfModules.RestrictedKFlatTensorIdentification",
+   "SheafOfModules.nonempty_restrictedKFlatTensorIdentification",
+   "SheafOfModules.restrictedKFlatTensorIdentification_coefficientMap"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RestrictedKFlatTensorIdentification.lean",
+  "statement": "theorem nonempty_restrictedKFlatTensorIdentification (u : B ⟶ A) (v : A ⟶ S) (D : DerivedChangeOfRingsCochainModel.{u, v, r, wB, wS} (u ≫ v)) (K : DerivedCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J B))) (P G : CochainComplex (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J B)) ℤ) (e : DerivedCategory.Q.obj G ≅ K) (f : P ⟶ G) [QuasiIso f] (hP : CochainComplex.IsKFlatIndependentCoefficients (R := B) P) (hflat : ∀ n : ℤ, IsFlatOnSite (R := B) (P.X n)) : Nonempty (RestrictedKFlatTensorIdentification u v D K P G e f)",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The existence theorem and coefficientMap theorem together state every clause. The scalar-first model is the prescribed E.mapHomologicalComplex; the scalar-last S-linear complex is characterized by a B-linear identification with the existing sheafified tensor P tensor S and the pure-tensor swap equation. The counit equation fixes the K-flat computation; eta_eq and delta_eq fix the displayed composites. No arbitrary map or data chosen from uncharacterized existence is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-34199754b",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Only new: RestrictedKFlatTensorIdentification.lean + item lean record. Rest of node = live. Clause by clause vs node: EssentiallySmall.{r} site with independent universes; Res_v exact (instances) and preserves quasi-isos with no flatness; lambda = mapDerivedCategoryFactors.symm, node orientation, plus CommShift. K-flat resolution = [QuasiIso f] + IsKFlatIndependentCoefficients + flat terms. C_S = D.E (fixed to changeOfRings, S on first factor). tau: S-linear iso to H; B-linear 'last' to the actual siteSheafTensorRight P⊗S, pinned on pure sections s⊗p ↦ p⊗s, so unique up to unique iso and realizable (Nonempty genuine). c pinned by computation = inv(T(Q f)) ≫ ε_P (lem-pur-derived-change-of-rings (2)). eta_eq/delta_eq are the node composites. Coefficient theorem: arbitrary A-linear h, a/b pinned on generators, swap square, step-7 conjugation formula type-checked by hand. No hollow defs, all sorry, docstrings with source/blueprint, statement verbatim, report sections present. nt_compile --json at load ~214: first run 60 s timeout, then clean 58.1 s exit 0 (genInjectivity-off variant clean 55.3 s); if landing times out, retry at lower load. Advisory: commShift/exactness helpers follow from Mathlib/the ordinary-adjunction lemma; second reading by author."
  }
 }

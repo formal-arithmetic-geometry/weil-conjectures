@@ -278,5 +278,28 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-b6cece22b (reviewer sub-agent of L); spot-checked: I read the item in full: 7 steps, no new nodes, statement unchanged against base. Live still has it unsplit and there is no repair note. The coefficient category is the ordinary unbounded constant-A module derived category, matching def-amb-etale-compact-support and both citers (chart-adjoint-comparison, chart-left-compositor, whose n_s/n_v/n_i are these n_a). Compactifications do not need density, so (j,id_T) and (id_Z,c) are valid; c is proper by closed-immersion-proper (a). Source Stacks more-etale 0F7I (lemma-shriek-well-defined, l.3081): checked, the item is its specialization to these trivial compactifications; 0F51/03S5/04FX/03QP exist. Step 1: c finite, so the abelian finite f_* is exact; the module u_* commutes with forget (module-direct-image-left-exact (1)); forget is faithful and preserves kernels and cokernels, so it reflects exactness; correct. Step 2: extension-by-zero-exact holds for arbitrary Λ; the exact-functor factorization is unbounded. Step 3: bounded-below node gives the H^r iso and D^{≥n} preservation for every n. Step 4: identity normalizations come only from the sheafification universal property (no plus construction) and descend by localization-universal-property (2). Step 5: the inverse of the invertible Dc_*→Rc_* comparison works on every unbounded complex. Matching that node's CoCh→D Kan extension with the def's K-injective K(A)→D one is elementary (CoCh→K is the identity on objects and full); no FIX. Step 6: hypotheses of lem-amb-etale-compact-comparisons hold (A finite, Noetherian, compactifiable); D^+ inputs only. Step 7: the cocycle gives n^{d'}ρ_{d,d'}=n^d in the right order. Edge cases checked: A=0, empty W or Z, identity immersions, arbitrary m; no ℓ-invertibility needed. Duplicate search on side-live: no node states this ordinary-étale normalization or closed module exactness; no cycle, no missing ids. The 7 declared tool_uses are accepted as generic tools. No SGA."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleImmersionShriekNormalization",
+  "declaration": "AlgebraicGeometry.Etale.etaleImmersionShriekNormalization",
+  "declarations": [
+   "AlgebraicGeometry.Etale.etaleOpenCompactSupportNormalization",
+   "AlgebraicGeometry.Etale.etaleClosedCompactSupportNormalization",
+   "AlgebraicGeometry.Etale.etaleImmersionShriekNormalization"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleImmersionShriekNormalization.lean",
+  "statement": "theorem etaleImmersionShriekNormalization (A : Type (u + 1)) [CommRing A] [Finite A] {W Z T : Scheme.{u}} [IsNoetherian W] [IsNoetherian Z] [IsNoetherian T] (j : W ⟶ T) [IsOpenImmersion j] (c : Z ⟶ T) [IsClosedImmersion c] (dj : Compactification j) (dc : Compactification c) : (PreservesFiniteLimits (lowerStar (ModuleCat.{u + 1} A) c) ∧ PreservesFiniteColimits (lowerStar (ModuleCat.{u + 1} A) c)) ∧ (∀ (m : ℤ) (H : DerivedCategoryModule A W), H.IsGE m → ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj H).IsGE m) ∧ (∀ (m : ℤ) (L : DerivedCategoryModule A Z), L.IsGE m → ((lowerStar (ModuleCat.{u + 1} A) c).mapDerivedCategory.obj L).IsGE m) ∧ (∀ q : ℤ, Nonempty ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory ⋙ DerivedCategory.homologyFunctor _ q ≅ DerivedCategory.homologyFunctor _ q ⋙ openImmersionLowerShriek (ModuleCat.{u + 1} A) j)) ∧ (∀ q : ℤ, Nonempty ((lowerStar (ModuleCat.{u + 1} A) c).mapDerivedCategory ⋙ DerivedCategory.homologyFunctor _ q ≅ DerivedCategory.homologyFunctor _ q ⋙ lowerStar (ModuleCat.{u + 1} A) c)) ∧ (∀ dj' : Compactification j, rightDerivedLowerShriekOfCompactificationPlusιIso A dj dj' ≪≫ etaleOpenCompactSupportNormalization A j dj' = etaleOpenCompactSupportNormalization A j dj) ∧ (∀ dc' : Compactification c, rightDerivedLowerShriekOfCompactificationPlusιIso A dc dc' ≪≫ etaleClosedCompactSupportNormalization A c dc' = etaleClosedCompactSupportNormalization A c dc)",
+  "branch": "newtargets-dag",
+  "by": "Q17",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-89aabaefa",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Node copy differs from side-live only in lean; statement verbatim. Every clause matches the node: finite CommRing A : Type (u+1), Noetherian W/Z/T, open j and closed c, chosen compactifications given as arguments; c_* exact as PreservesFiniteLimits and PreservesFiniteColimits; IsGE m preserved for all m on unbounded inputs; natural H^q isos (Nonempty, not used by citers, accepted); n_j and n_c are real defs built from canonical maps only (PlusιIso to ofIsOpenImmersion or ofIsProper, rightDerivedLowerStarIdIso, mapDerivedCategoryOpenImmersionLowerShriekId, rightDerivedFunctorLowerStarIsoMapDerivedCategory), each opened and checked; naturality comes from the natural-iso type; change-of-compactification equations go in the right direction and follow from the cocycle law. No extra hypotheses (QuasiCompact j inferred). Edge cases A=0, empty schemes, negative m, trivial compactification covered. Only the theorem has sorry; docstrings carry source tags and blueprint id. nt_compile --json clean, 46.5 s of 60 s. Advisory: the citer's ChartAdjointComparison.open/closedNormalization duplicate this item's notion and should be re-pointed at stage 3; Compactification and PlusιIso are decls from outside stmt_deps, inherited through existing deps; unused proof-dep imports."
  }
 }

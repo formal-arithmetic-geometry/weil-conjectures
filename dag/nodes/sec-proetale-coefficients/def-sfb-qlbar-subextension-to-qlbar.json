@@ -177,5 +177,29 @@
  },
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-qlbar-colimit-point",
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension",
+  "declaration": "Profinite.padicSubfieldRingObjToPadicAlgCl",
+  "declarations": [
+   "Profinite.padicSubfieldRingObjToPadicAlgCl",
+   "Profinite.padicSubfieldCondensedRingToPadicAlgCl",
+   "Profinite.padicSubfieldToPadicAlgClRingPresheaf",
+   "Profinite.padicSubfieldRingObjMap_comp_toPadicAlgCl"
+  ],
+  "statement": "noncomputable def padicSubfieldRingObjToPadicAlgCl (E : FiniteIntermediateField ℓ) :\n    continuousMapRingObj.{u} E ⟶ padicAlgClRingObj ℓ",
+  "branch": "slopmaster2",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing inclusion of each finite p-adic subextension into the finite-subextension-valued condensed algebraic closure. Section binders are (ℓ : ℕ) [Fact ℓ.Prime], with arbitrary profinite universe u. FiniteIntermediateField ℓ packages the intermediate field and its finite dimension over ℚ_[ℓ]. The presheaf map postcomposes with algebraMap E (PadicAlgCl ℓ), using E itself as the finite-image witness, and the condensed ring map has the recorded padicSubfieldCondensedRing source definitionally. The main declaration forgets this ring-sheaf map to abelian sheaves; its IsMonHom instance is in the same module. The recorded compatibility lemma is exactly j_F ∘ ι_{E,F} = j_E. A clean server consumer validates endpoints, the sectionwise formula and its image in E, ring-object compatibility, the identity-inclusion case and the bottom intermediate field. No new module, dependency repair or statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a5bdc5d33",
+  "group": "NA",
+  "result": "pass",
+  "note": "existing:true attachment to Profinite.padicSubfieldRingObjToPadicAlgCl (FiniteSubextension.lean 128-131); node unchanged except lean record. Source continuousMapRingSheaf E = padicSubfieldCondensedRing ℓ E by rfl; target padicAlgClRingObj (finite-subextension-valued Q̄_ℓ); sectionwise algebraMap∘a by rfl; IsMonHom instance; padicSubfieldRingObjMap_comp_toPadicAlgCl = j_F∘ι_{E,F}=j_E using the recorded dependency map. Statement verbatim; no extra hypotheses; universe u free; not dropped. Consumer probe via nt_compile --json clean in 29.3 s. No findings."
+ }
 }

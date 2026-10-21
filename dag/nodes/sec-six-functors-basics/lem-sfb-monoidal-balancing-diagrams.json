@@ -210,5 +210,23 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-5057055b6 (reviewer sub-agent of L); spot-checked: Q33 lem-sfb-monoidal-balancing-diagrams @5057055b: a split with no new nodes of a statement-only lemma that Q29 created. The statement and stmt_deps are unchanged from the base (dagsnap 7223b2f7). The item is still unsplit in live and side-live, is not in any dropped list, and has no repair note. I recomputed all 5 steps against the displayed axioms in def-sfb-strong-monoidal-functor (naturality and the associativity equation with alpha pointing (XY)Z->X(YZ)), def-sfb-monoidal-category (bifunctoriality) and def-sfb-modobj-transport (F(m)t and F(gamma)t). Step 1: the inverse of t1 is correct. Step 2: k'=F(k)t_{S,R} by naturality at (1,phi), so F(a)t1=t0a'. Step 3: associativity at (S,R,M) plus naturality at (1,gamma) give F(b)t1=t0b'. Step 4: v alpha_D^{-1}=F(alpha_C^{-1})u. Step 5: both sides reduce to F(-)u, and the hypothesis on q makes them equal. Sources and targets check at every junction. Source: Stacks Tag 0FFL, categories.tex l.9238, checked against tags/tags; the proof is marked by:agent. Edge cases: F=id; S=R with phi=1; noncommutative rings (no braiding used); zero M or P. Duplicate search with rg -L for tensorator, balancing and mapMod covered sk-def-sfb-transport, def-sfb-modobj-extend-restrict-adjunction and pur713-def-mapmod: none matches. The citer lem-sfb-internal-extension-inverse-image step 2 uses exactly these three identities. Four Mathlib searches are recorded. No SGA, no tool_uses. Advisory only: steps 2 and 3 use bifunctoriality without listing def-sfb-monoidal-category in uses (it is in proof_deps)."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.MonoidalBalancingDiagrams",
+  "declaration": "CategoryTheory.Functor.monoidal_balancing_diagrams",
+  "file": "lean/Sheaf/CategoryTheory/MonoidalBalancingDiagrams.lean",
+  "statement": "theorem monoidal_balancing_diagrams {C : Type u₁} [Category.{v₁} C] [MonoidalCategory C] {D : Type u₂} [Category.{v₂} D] [MonoidalCategory D] (F : C ⥤ D) [F.Monoidal] {R S : C} [MonObj R] [MonObj S] (φ : R ⟶ S) [IsMonHom φ] (M : Mod C R) : ((whiskerRightIso (Monoidal.μIso F S R) (F.obj M.X)) ≪≫ Monoidal.μIso F (S ⊗ R) M.X).hom ≫ F.map ((S ◁ φ ≫ μ[S]) ▷ M.X) = (F.obj S ◁ F.map φ ≫ μ[F.obj S]) ▷ F.obj M.X ≫ (Monoidal.μIso F S M.X).hom ∧ ((whiskerRightIso (Monoidal.μIso F S R) (F.obj M.X)) ≪≫ Monoidal.μIso F (S ⊗ R) M.X).hom ≫ F.map ((α_ S R M.X).hom ≫ S ◁ γ[R,M.X]) = (α_ (F.obj S) (F.obj R) (F.obj M.X)).hom ≫ F.obj S ◁ γ[F.obj R,((F.mapMod R).obj M).X] ≫ (Monoidal.μIso F S M.X).hom ∧ ∀ (P : Mod C S) (q : S ⊗ M.X ⟶ P.X), S ◁ q ≫ γ[S,P.X] = (α_ S S M.X).inv ≫ μ[S] ▷ M.X ≫ q → F.obj S ◁ ((Monoidal.μIso F S M.X).hom ≫ F.map q) ≫ γ[F.obj S,((F.mapMod S).obj P).X] = (α_ (F.obj S) (F.obj S) (F.obj M.X)).inv ≫ μ[F.obj S] ▷ F.obj M.X ≫ (Monoidal.μIso F S M.X).hom ≫ F.map q",
+  "branch": "newtargets-dag",
+  "by": "Q59",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7aab597d5",
+  "group": "Q59",
+  "result": "pass",
+  "note": "Every clause matches the node. F.Monoidal is the equivalent packaging of the recorded CoreMonoidal. Transported μ[FS] and γ[FR,mapMod] equal F(m)∘t and F(γ)∘t by rfl. t1 is whiskerRightIso≪≫μIso. The first two conjuncts are F(a)t1=t0a' and F(b)t1=t0b'. The third quantifies P : Mod C S and q with the exact premise. Statement verbatim; node diff vs side-live = lean only; no extra hypotheses (IsMonHom = the node's monoid morphism, independent universes). nt_compile --json: delivered module clean (25.6 s). A scratch copy with a full proof replacing sorry also compiles clean (26.9 s), so the statement is correctly typed and true. No duplicate: MapModMonoidal needs braided/commutative/colimit hypotheses. Docstrings carry the source and blueprint tag; the theorem docstring gives the 5 proof steps. Advisory: the def-sfb-modobj-transport record lacks a module key (pre-existing)."
  }
 }

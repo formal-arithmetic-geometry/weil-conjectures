@@ -264,5 +264,28 @@
   "group": "Q38",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q38-24314daec (reviewer sub-agent of L); spot-checked: PASS; review.md is written and I made no fixes. Shape: one commit touching only the item and its report; statement and stmt_deps identical to the unsplit base; no new nodes. Live and side-live still have the item unsplit, it is in no dropped list, there is no repair note, no SGA is cited and there is no cycle (its only citer is lem-sfb-coefficient-cocone-comparison-agreement). Sources read: blueprint main-20261015 def-sfb-derived-extend-comp-iso.proof (sentence 'Extension of scalars is compatible with composition'); ExtendScalars.lean whiskerLeft_extendπ_smul l.224-229, extendUnitHom and whiskerLeft_extendUnitHom_smul' l.320-350, extendScalarsComp l.461-466; Mathlib leftAdjointUniq and unit_leftAdjointUniq_hom; the statements of all 8 cited nodes. Statement: Res_φRes_ψ equals U on objects, arrows and actions. The conjugate-iso lemma with L1=BA, L2=D, δ=id gives u:BA→D. extendScalarsComp is leftAdjointUniq(adj_D, adj_BA):D≅BA with η^D≫U(hom)=η^{BA}, so its inverse is m_0 and the stated direction is right. Steps: (1) the composite unit is ba via the Hom bijections and the direct unit is c. (2) γ_F(V⊗d)=e, recomputed by α-naturality, μ(V⊗η)=ρ and the triangle identity; this is the source lemma whiskerLeft_extendUnitHom_smul'. (3) All hypotheses hold, including S commutative for Ext_ψ. (4) h=v_M b is S-linear with ha=c, so hq=r(ψ⊗M). (5) v_M p(T⊗q) is the multiplication map; T⊗q is a coequalizer by the preservation hypothesis and cancellation uses the colimit uniqueness, so m_0=v. (6) w_M r=p(T⊗a), which is the stated inverse formula. (7) Naturality comes from v, and uniqueness gives m_0=u. All four elementary steps really are elementary. Dup search over the DAG found nothing equivalent. Small cases checked: identity morphisms, ModuleCat, zero M. I accept the declared tool uses (generic module-object definitions, colimit and conjugate-iso); the entries for the Mathlib leaves are redundant but harmless."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ModuleObjects.InternalTensorCompositionUnitNormalization",
+  "declaration": "CategoryTheory.Mod.internal_tensor_composition_unit_normalization",
+  "file": "lean/Sheaf/CategoryTheory/ModuleObjects/InternalTensorCompositionUnitNormalization.lean",
+  "statement": "theorem internal_tensor_composition_unit_normalization {C : Type u} [Category.{v} C] [MonoidalCategory C] [BraidedCategory C] [HasCoequalizers C] [∀ X : C, PreservesColimits (tensorLeft X)] [∀ X : C, PreservesColimits (tensorRight X)] {R S T : C} [MonObj R] [MonObj S] [MonObj T] [IsCommMonObj R] [IsCommMonObj S] [IsCommMonObj T] (φ : R ⟶ S) [IsMonHom φ] (ψ : S ⟶ T) [IsMonHom ψ] : ∃ m₀ : extendScalars φ ⋙ extendScalars ψ ≅ extendScalars (φ ≫ ψ), (∀ M : Mod C R, T ◁ extendπ φ M ≫ extendπ ψ ((extendScalars φ).obj M) ≫ (m₀.hom.app M).hom = (α_ T S M.X).inv ≫ (T ◁ ψ ≫ μ[T]) ▷ M.X ≫ extendπ (φ ≫ ψ) M) ∧ (∀ M : Mod C R, extendπ (φ ≫ ψ) M ≫ (m₀.inv.app M).hom = T ◁ ((λ_ M.X).inv ≫ η[S] ▷ M.X ≫ extendπ φ M) ≫ extendπ ψ ((extendScalars φ).obj M)) ∧ (∀ M : Mod C R, ((((extendRestrictAdjunction φ).comp (extendRestrictAdjunction ψ)).ofNatIsoRight (comapComp φ ψ).symm).unit.app M) ≫ (comap (φ ≫ ψ)).map (m₀.hom.app M) = (extendRestrictAdjunction (φ ≫ ψ)).unit.app M) ∧ m₀ = (((extendRestrictAdjunction φ).comp (extendRestrictAdjunction ψ)).ofNatIsoRight (comapComp φ ψ).symm).leftAdjointUniq (extendRestrictAdjunction (φ ≫ ψ)) ∧ m₀ = (extendScalarsComp φ ψ).symm",
+  "branch": "newtargets-dag",
+  "by": "Q55",
+  "date": "2026-10-21",
+  "existing": false,
+  "declarations": [
+   "CategoryTheory.Mod.internal_tensor_composition_unit_normalization",
+   "CategoryTheory.Mod.internalTensorComposition_tensorLeft_preservesSmallestColimits",
+   "CategoryTheory.Mod.internalTensorComposition_tensorRight_preservesSmallestColimits"
+  ]
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2bdf940cd",
+  "group": "Q55",
+  "result": "pass",
+  "note": "All hypotheses and the 5 conjuncts match the node. A, B, D, U are the recorded extendScalars/comap. The restriction comparison is (comapComp φ ψ).symm, identity on underlying data. Forward formula α⁻¹≫(T◁ψ≫μ)▷M≫π and inverse T◁(λ⁻¹≫η_S▷M≫π_φ)≫π_ψ are correctly typed. m₀ is pinned by leftAdjointUniq; direction vs extendScalarsComp.symm checked against ExtendScalars.lean:461-466. A probe proving conjuncts 3-5 with leftAdjointUniq compiled clean (20.5 s). PreservesColimits form matches the landed ExtensionIsoQuotientFormula. Delivered module compiles clean (nt_compile --json, 28.9 s). Statement verbatim, imports per brief, docstrings and one sorry OK, no H4 duplicate. Advisory: the two adapter instances are global, not term arguments."
  }
 }

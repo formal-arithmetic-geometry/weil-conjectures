@@ -271,5 +271,35 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-7ea3098d1 (reviewer sub-agent of L); spot-checked: Read the item's full statement and all 11 steps, every cited node's statement, and Stacks derived.tex 090X (l.9674) and 05SU (l.4657). 05SU's proof is 'Omitted', so the agent-written shift construction in steps 4-7 is correct as the proof origin. Statement and stmt_deps are unchanged from live (live is unsplit). There are no new nodes, no repair note and no dropped-list entry. The only citer is roos-normalization step 2, and the statement still gives everything it uses. Recomputed checks: d_H^2=0; the homotopy (t,s) proving H K-injective (steps 2-3, with P[-1] K-injective by the shift lemma); naturality of s_I=eta_I[1]eta_{I[1]}^{-1}; independence of choices, normalization and uniqueness of sigma (steps 5-7, using the hom-derived bijection, with no enough-injectives assumption on B); the inverse-rotation signs r=p[-1] and b=i with H[1]=C(u) literally (step 8, TR2 iff); the diagonal theta (step 9); all three triangle squares including the connecting square (step 10); and naturality (step 11). Small cases tested: P=0, u=0, u=id, G=0, G=id with c=id. No duplicate in the DAG: 05su-pur concerns LF without the normalization, and derived-direct-image-triangulated needs D^+ and enough injectives. FIX (E1/C4-type): the statement applies lem-weil-pbc-kinjective-total-derived, which requires an exact functor out of K(A), but step 1 showed only shifts and homotopies. Step 1 now shows G(C(f)) is isomorphic to C(Gf) via the biproduct matrices, so Q_B∘G is exact. Its uses gain def-weil-abstract-derived-category and lem-weil-pbc-kinjective-total-derived, and it is now marked elementary:false; proof_deps is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.KInjectiveFiberTriangleComparison",
+  "declaration": "CategoryTheory.kInjectiveFiberTriangle_comparison",
+  "declarations": [
+   "CategoryTheory.kInjectiveFiberTriangle",
+   "CategoryTheory.kInjectiveFiberTriangleMap",
+   "CategoryTheory.kInjectiveFiberChainComparison",
+   "CategoryTheory.IsUnitNormalizedKInjectiveShift",
+   "CategoryTheory.kInjectiveInverseUnit",
+   "CategoryTheory.kInjectiveDerivedFiberTriangle",
+   "CategoryTheory.existsUnique_unitNormalizedKInjectiveShift",
+   "CategoryTheory.kInjectiveFiberTriangle_comparison",
+   "CategoryTheory.kInjectiveFiberTriangle_comparison_naturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/KInjectiveFiberTriangleComparison.lean",
+  "statement": "theorem kInjectiveFiberTriangle_comparison (hA : ∀ K : CochainComplex A ℤ, ∃ (J : CochainComplex A ℤ) (i : K ⟶ J), J.IsKInjective ∧ QuasiIso i) (G : A ⥤ B) [G.Additive] (hG : ∀ K : CochainComplex A ℤ, K.IsKInjective → CochainComplex.IsKInjective ((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj K)) (RG : DerivedCategory A ⥤ DerivedCategory B) (η : G.mapHomologicalComplex (ComplexShape.up ℤ) ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RG) (hUniversal : ∀ F : DerivedCategory A ⥤ DerivedCategory B, Function.Bijective (fun β : RG ⟶ F ↦ η ≫ Functor.whiskerLeft DerivedCategory.Q β)) (hη : ∀ K : CochainComplex A ℤ, K.IsKInjective → IsIso (η.app K)) (σ : shiftFunctor (DerivedCategory A) (1 : ℤ) ⋙ RG ≅ RG ⋙ shiftFunctor (DerivedCategory B) (1 : ℤ)) (hσ : IsUnitNormalizedKInjectiveShift G RG η σ) (P : CochainComplex A ℤ) (P' : CochainComplex B ℤ) (hP : P.IsKInjective) (hP' : P'.IsKInjective) (u : P ⟶ P) (u' : P' ⟶ P') (c : (G.mapHomologicalComplex (ComplexShape.up ℤ)).obj P ≅ P') (hc : (G.mapHomologicalComplex (ComplexShape.up ℤ)).map u ≫ c.hom = c.hom ≫ u') : ∃ hH : (kInjectiveFiberTriangle u).obj₁.IsKInjective, (kInjectiveFiberTriangle u').obj₁.IsKInjective ∧ CochainComplex.IsKInjective ((G.mapHomologicalComplex (ComplexShape.up ℤ)).obj (kInjectiveFiberTriangle u).obj₁) ∧ (kInjectiveFiberChainComparison G u u' c hc).hom₂ = c.hom ∧ (kInjectiveFiberChainComparison G u u' c hc).hom₃ = c.hom ∧ IsIso (kInjectiveFiberChainComparison G u u' c hc).hom₁ ∧ DerivedCategory.Q.mapTriangle.obj (kInjectiveFiberTriangle u) ∈ distTriang (DerivedCategory A) ∧ kInjectiveDerivedFiberTriangle RG σ u ∈ distTriang (DerivedCategory B) ∧ DerivedCategory.Q.mapTriangle.obj (kInjectiveFiberTriangle u') ∈ distTriang (DerivedCategory B) ∧ ∃ e : kInjectiveDerivedFiberTriangle RG σ u ≅ DerivedCategory.Q.mapTriangle.obj (kInjectiveFiberTriangle u'), e.hom.hom₁ = (kInjectiveInverseUnit G RG η hη _ hH).hom ≫ DerivedCategory.Q.map (kInjectiveFiberChainComparison G u u' c hc).hom₁ ∧ e.hom.hom₂ = (kInjectiveInverseUnit G RG η hη P hP).hom ≫ DerivedCategory.Q.map c.hom ∧ e.hom.hom₃ = (kInjectiveInverseUnit G RG η hη P hP).hom ≫ DerivedCategory.Q.map c.hom ∧ (kInjectiveDerivedFiberTriangle RG σ u).mor₃ ≫ e.hom.hom₁⟦(1 : ℤ)⟧' = e.hom.hom₃ ≫ (DerivedCategory.Q.mapTriangle.obj (kInjectiveFiberTriangle u')).mor₃",
+  "branch": "newtargets-dag",
+  "by": "Q110",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The three named theorem statements together render the node: unique unit-normalized natural shift, the canonical K-injective fibre triangle comparison, and its chain/derived naturality. The unit is expressed on complexes using the canonical quotient-to-derived identifications; its universal property is the equivalent chain-category form of the recorded homotopy-category universal property. All six auxiliary definitions construct the objects/maps of this same node from Mathlib, with real data."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ecc0b1336",
+  "group": "Q110",
+  "result": "pass",
+  "note": "Statement matches the node clause by clause: hA/hG/G.Additive, RG and η with explicit universal-property bijection and invertibility on K-injectives (equivalent to the homotopy-level form of lem-weil-pbc-kinjective-total-derived via quotientCompQhIso, no stronger assumption, no exactness of G); ∃! σ with unit normalization at every complex, both shift identifications explicit; H = invRotate of mappingCone.triangle u, signs hand-checked against Mathlib's cone (d = (−dy−ux,dx), r(y,x)=x, b(z)=(z,0)); θ built from canonical Mathlib isomorphisms, hom₂/hom₃ = c.hom (probe: true); c̄ and Θ pinned via inverse units; source, target and RG-image triangles distinguished; connecting square stated; naturality of θ, Θ and c̄. Node changed only in its lean record; lean.statement verbatim; nine declarations recorded; docstrings carry source, blueprint and proof; all proofs sorry; no duplicate (05su-pur is left-derived values, derived-direct-image-triangulated needs D+). nt_compile --json clean, 35.8 s. Advisory: second reading is a self-audit; the KInjectiveTotalDerived import is unused in the statements; hA, hG and hUniversal are unused in the naturality theorem."
  }
 }

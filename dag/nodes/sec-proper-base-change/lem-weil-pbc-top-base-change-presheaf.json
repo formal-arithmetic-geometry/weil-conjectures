@@ -23,7 +23,8 @@
   "lem-pc-module-pullback-adjunction",
   "lem-weil-pbc-higher-direct-image-presheaf",
   "def-weil-pbc-module-cohomology-fmap",
-  "lem-pc-module-pullback-identity-composition"
+  "lem-pc-module-pullback-identity-composition",
+  "def-weil-pbc-flat-base-change-open-choices"
  ],
  "proof": [
   {
@@ -291,5 +292,31 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-7b08a3f35 (reviewer sub-agent of L); spot-checked: PASS. I read in full the item lem-weil-pbc-top-base-change-presheaf, the new node lem-weil-pbc-derived-adjunction-top-edge, every cited statement and the Stacks sources 01E4, 01FB, 08HY, 0BKJ and 0D5X. The item's statement is byte-identical to the base copy, and the item is still unsplit there, so no other group has superseded it. It is not a re-split item: its base proof was empty. Step 1: the adjunct of δ_g is comp∘Rf_*(ν), because c_v is normalized as the transpose of the ordinary unit. Advisory: def-pc-derived-base-change-map is worded for D_QCoh, but the module-map node already applies it to arbitrary modules and nothing uses quasi-coherence. Step 2: C is in D^{≤q} by the hypothesis and D is bounded below through a bounded-below injective resolution; a_g^q = e∘H^q(A) is exactly the ordinary adjoint of b_g^q. Step 3: the roof matches the definition of the module cohomology map. Open restriction preserves the resolutions, Γ(U,ℓ) is a quasi-isomorphism by the pushforward-injectives lemma, and the composition class is f_*ℓ by its stated normalization. The step never needs f_*I to be K-injective. Its local comparisons use the evident resolution maps, which lem-trf's canonical statement pins; I accept this at stage-1 level. Step 4: θ is pinned by its explicit cocycle formula, and naturality of Θ comes from the germ clause. Step 5: I recomputed the cancellation chain. Edge cases checked: q=0 (classical f_* base change on sections), g=id, non-flat g, empty V. New node: statement only, self-contained, with four kinds of Mathlib search recorded. It is true by my proof sketch: truncate K to D^{≥q}, Hom from D^{≤q} to D^{≥q} reduces to H^q, then apply the shifted single-module transpose and e∘H^q(u)=id. It is strictly smaller than the item, not a restatement, and has no duplicate after a DAG grep. Batch-5 flag on lem-trf-unbounded-direct-image-section-presheaf (cited by both nodes): accepted. It is Stacks 0D5X, generic local Leray for ringed spaces, not a step of the trace formula or Poincaré duality. Its closure has no other trace-formula or Poincaré-duality node and no assumption leaf. It is already in the batch-5 closure through lem-trf-derived-basis-local-ext-sheaf, and the delivery adds only the new node to that closure. I accept the 11 declared tool uses. Tooling notes: coord/dag-sync.md is missing from the snapshot, and the snapshot's dagsnap e3ececac was garbage-collected during the review, so I did the closure checks on dagsnap 3eb42cc9 with the two delivered files overlaid. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.TopBaseChangePresheaf",
+  "declaration": "AlgebraicGeometry.top_base_change_presheaf",
+  "declarations": [
+   "AlgebraicGeometry.topBaseChangeRestrictedUnit",
+   "AlgebraicGeometry.topBaseChangeClass",
+   "AlgebraicGeometry.topBaseChangeDelta",
+   "AlgebraicGeometry.topBaseChangeAdjoint",
+   "AlgebraicGeometry.top_base_change_presheaf"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/TopBaseChangePresheaf.lean",
+  "statement": "theorem top_base_change_presheaf {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) (F : X.Modules) (q : ℕ) (hC : ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)).IsLE (q : ℤ)) (V : S.Opens) (I : InjectiveResolution F) (J : InjectiveResolution ((tensorPullback (pullback.snd g f)).obj F)) (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) (R' : RestrictedResolutionSections J ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V))) : topBaseChangeClass f F I V (f ⁻¹ᵁ V) rfl R q ≫ Hom.app (topBaseChangeAdjoint f g F q hC) V = moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V) ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) (topBaseChangeRestrictedUnit (pullback.snd g f) F (f ⁻¹ᵁ V)) q ≫ topBaseChangeClass (pullback.fst g f) ((tensorPullback (pullback.snd g f)).obj F) J (g ⁻¹ᵁ V) ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) (flatBaseChangeOpenEquality f g V) R' q",
+  "branch": "newtargets-dag",
+  "by": "NV",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the chosen fibre product pullback g f (v=snd, f_T=fst). The cohomological upper bound hC is exactly vanishing of the higher direct images above q. The adjoint is expressed on classical higher direct images through the canonical total/classical comparison. The theta maps are computed with arbitrary injective resolutions and augmentation-preserving restricted-resolution section identifications; these parameters impose no geometric restriction. The restricted unit has the restricted global pulled-back module as coefficient, rather than an arbitrary coefficient map."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8a4052f1e",
+  "group": "NV",
+  "result": "pass",
+  "note": "Clause-by-clause check of top_base_change_presheaf against the node: hC IsLE q matches the vanishing of R^i f_*F for i>q exactly; delta = schemeDerivedBaseChangeMap followed by pinnedModulePullbackComparisonAt, built on the same chosen derived counit as the base-change map's adjunctions; kappa from derivedPullback_topCohomology, the only map inverted; a = tensorPullbackSectionAdjunction homEquiv, moved to classical higher direct images by the canonical homologyRightDerivedFunctorObjSingleFunctorIso; theta = resolutionSectionClass with RestrictedResolutionSections (augmentation and section components fixed, so canonical) followed by isoRightDerivedObj inv, matching higher-direct-image-presheaf; restricted unit unfolds to the FlatBaseChangeOpenChoices.psi unit_square with coefficient (v^*F)|U'; U'=f_T^-1 W via flatBaseChangeOpenEquality. Delivery changes only the new module, the item's lean record and one added stmt_dep (def-weil-pbc-flat-base-change-open-choices, landed and used); statement text unchanged; lean.statement matches the file verbatim. No extra assumptions or universe restriction; edge cases q=0, empty V, V=top, g=id, non-flat g and non-invertible delta covered; helpers not hollow; only sorry is the theorem; docstrings carry source place, blueprint and proof steps; no duplicate found. nt_compile --json: one timeout at load 238, then clean at 50.7 s (load 206) and 57.4 s (load 197); near the 60 s limit, retry landing at lower load if it times out."
  }
 }

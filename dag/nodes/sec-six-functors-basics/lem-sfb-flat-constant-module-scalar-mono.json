@@ -199,5 +199,23 @@
   "group": "Q19",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-fa6a05dc7 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. Read every cited statement and the Stacks places 03EI, 03ER(3), 03EK, 03CY, 03DA and 010N, all checked in tags/tags. The statement is true without domain or points hypotheses. Tested cases: M=0, the empty site, objects with an empty covering, Z/6 with a=5, Z×Z with a=(2,3), a=0 forcing A=0, and Z/2 with a=2 showing flatness is needed. Steps 2-4 are correct: the explicit unitor is built on presheaf tensors and then sheafified; exactness of the flat tensor with lem-sp-exact-functor-preserves-homology (a) carries the monomorphism through and it is conjugated by the unitor; kernels are computed sectionwise. All cited nodes are definitions or Mathlib leaves, so there is no route issue and no tool_uses are needed. No duplicate found in the DAG. One C4 fault: Step 1 identified the abelian sheafification P^# with the additive sheaf of the ring sheafification R=A_C by citing def-weil-pbc-constant-sheaf and def-sf-site-constant-module-functor, and neither statement gives this. Fixed: Step 1 now cites the Mathlib leaf lem-pc-sites-module-sheafification-interface (unique R-action on P^# and unique R-linear extension) and proves P^#≅R explicitly. The maps are θ̄ and r↦r·η(1); one composite is the identity by computation and the other by uniqueness of extensions. It then shows that u^# is multiplication by θ(a), also by uniqueness. In the item, proof_deps are updated: def-sf-site-constant-module-functor is replaced by the interface lemma. The statement is unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatConstantScalarMono",
+  "declaration": "SheafOfModules.constantScalar_injective_of_flat",
+  "file": "lean/Sheaf/Algebra/Category/ModuleCat/Sheaf/FlatConstantScalarMono.lean",
+  "statement": "theorem constantScalar_injective_of_flat {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) [HasSheafify J CommRingCat.{r}] [J.HasSheafCompose (forget₂ CommRingCat.{r} RingCat.{r})] [HasSheafify J AddCommGrpCat.{max r m}] [J.WEqualsLocallyBijective AddCommGrpCat.{max r m}] (A : Type r) [CommRing A] (M : ringedSiteModules.{max r m} ((sheafCompose J (forget₂ CommRingCat RingCat)).obj ((constantSheaf J CommRingCat.{r}).obj (CommRingCat.of A)))) (hM : IsFlatOnSite M) (a : A) (ha : Function.Injective (fun x : A ↦ a * x)) : ∀ U : C, Function.Injective (fun s : (sheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).obj (op U) ↦ ((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).app (op U)) a * s) ∧ Function.Injective (fun s : M.val.obj (op U) ↦ ((toSheafify J ((Functor.const Cᵒᵖ).obj (CommRingCat.of A))).app (op U)) a • s)",
+  "branch": "sheaf-dag",
+  "by": "O4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e2496f4b6",
+  "group": "O4",
+  "result": "pass",
+  "note": "Node vs Lean checked clause by clause; all three stmt_deps use their recorded declarations (constantSheaf, ringedSiteModules, IsFlatOnSite). The scalar is the sheafification unit applied to a. The probe compile shows the ring-section type is rfl-equal to A_C sections and • is the module-sheaf action, and the theorem instantiates at modules in the ring universe (m:=0), which is the citer's setting. The module universe max r m (at least the ring universe) is documented in the report and accepted; it does not restrict the site universes. Edge cases checked: empty site, M=0, A=0, zero divisors, ℤ/2 needs flatness. Only the lean record changed in the item; dependency nodes unchanged vs live. Docstrings carry source place, blueprint id and Steps 1-4; lines at most 100 characters; plain imports are proof_deps modules (allowed); record statement verbatim. nt_compile --json clean in 13.9 s. Advisory: HasSheafify instead of HasWeakSheafify instance parameters; no action."
  }
 }

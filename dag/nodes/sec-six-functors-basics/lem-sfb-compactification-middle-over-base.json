@@ -216,5 +216,23 @@
   "group": "Q08",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q08-e8827ea39 (reviewer sub-agent of L); spot-checked: I read the whole delivery and every cited source, and found nothing to fix. The delivery is one commit (the item plus its report) and creates no new nodes. Compared with the side-live unsplit node, only proof, proof_deps, proof_origin, status, split_report and the appended mathlib_searches changed; the 7 old searches are kept as a prefix. The statement is unchanged and true: it generalizes paragraph 3 of the unit sk-def-sfb-dc-setting statement (main-20261015 _section.md) to a qcqs base S. Uniqueness of a_Z is forced by p being over S, and quasi-compactness of Z needs S quasi-compact (counterexample: an infinite disjoint union of Spec of a field). Quasi-separatedness of S is unused but harmless. The steps follow the unit's own step exactly, and each cited statement says what the step takes from it. Step 1 (elementary): the S-morphism definition gives a_Z=a_Y∘p, both i and p are over S, and a_Z is unique. Step 2 (elementary): proper includes separated and finite type by the statement of def-weil-proper-morphism. Step 3: clause (e) of lem-weil-pbc-proper-fp-permanence (separated composition; Stacks 01KU checked at schemes.tex:4289). Step 4: clause (1) of lem-sfb-finite-type-composition-base-change (Stacks 01T3). Step 5: finite type includes quasi-compact, then clause (2) of lem-weil-pbc-qcqs-morphism-permanence with U=Z, T=S (Stacks 01K4 checked at schemes.tex:3584). Off-unit citations are only Mathlib leaves and definitions, so no tool_uses are needed. There is no SGA, no Nagata existence or choice, and no cycle. Edge cases checked: X=∅, Z=∅, p=id, and proper components of Z away from X. The item is not in a dropped list and has no re-split note."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.CompactificationMiddleOverBase",
+  "declaration": "AlgebraicGeometry.Compactification.compactification_middle_over_base",
+  "file": "lean/Sheaf/AlgebraicGeometry/CompactificationMiddleOverBase.lean",
+  "statement": "theorem compactification_middle_over_base {S : Scheme.{u}} [CompactSpace S] [QuasiSeparatedSpace S] {X Y : Over S} (f : X ⟶ Y) [IsSeparated Y.hom] [LocallyOfFiniteType Y.hom] [QuasiCompact Y.hom] (c : BoundaryCompactification f.left) : (∃! aZ : c.obj.obj.Z ⟶ S, c.obj.obj.i ≫ aZ = X.hom ∧ c.obj.obj.g ≫ Y.hom = aZ) ∧ IsSeparated c.obj.obj.overObj.hom ∧ LocallyOfFiniteType c.obj.obj.overObj.hom ∧ QuasiCompact c.obj.obj.overObj.hom ∧ CompactSpace c.obj.obj.Z ∧ c.obj.obj.overI ≫ c.obj.obj.overG = f ∧ IsOpenImmersion c.obj.obj.overI.left ∧ QuasiCompact c.obj.obj.overI.left ∧ IsProper c.obj.obj.overG.left",
+  "branch": "newtargets-dag",
+  "by": "NX",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-cbccf0e81",
+  "group": "NX",
+  "result": "pass",
+  "note": "Node unchanged except its new lean record; lean.statement verbatim in file. Each clause matches the node: qcqs S via CompactSpace+QuasiSeparatedSpace; X,Y : Over S with f (Over.w); IsSeparated + LocallyOfFiniteType + QuasiCompact on Y.hom only, nothing on a_X; c : the recorded BoundaryCompactification (qc open immersion via c.obj.property, IsProper g, no density); ∃! aZ with both triangles and aZ = g≫Y.hom; separated/LOFT/QC of overObj.hom (= g≫Y.hom by rfl); CompactSpace Z; overI≫overG=f with .left = i,g; open immersion, qc and proper clauses retained. One universe u, everything bound. Edge cases: empty S/X/Z and p=id covered. No definitions, sorry only, docstrings give the source place, blueprint id and all 5 proof steps. nt_compile --json clean (16.6 s, exit 0). A scratch copy with a full proof compiles, so the statement is true and well-typed. Not dropped, no repair note, no live module overwritten. Advisory: two redundant transitive Mathlib imports."
  }
 }

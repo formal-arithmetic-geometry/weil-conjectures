@@ -257,5 +257,29 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-3cbe42556 (reviewer sub-agent of L); spot-checked: This is a first split of a node created 2026-10-21 by Q09; it is unsplit on live and side-live, has no repair note and is not on the dropped list. The statement, stmt_deps and blueprint are unchanged and there are no new nodes. I read Stacks 0H9K (more-algebra.tex lemma-pro-isomorphism-iso-Rlim) in full: the selection map, the finite-block map, the nested composition and the correction b_i are exactly the item's a_phi, b_phi, composition law and h. The item lifts them to a strict chain-level homotopy inverse, so proof_origin by=agent is correct. I recomputed every step. Step 2: b(1-s)=(1-s')a by telescoping, and the cone map C(y,z)=(by,az) commutes with D(y,z)=(-dy-delta z,dz), the coordinates of def-weil-strict-roos-model (F^{p+1}=P^p+P^{p+1}). Step 3: nu exists by unboundedness and nu(m_n)=n by strict increase. aE=1 and bJ=1, and delta E=J delta' holds both at unselected indices and at i=m_n, so CS=1 strictly. Step 4: h delta=1-Ea and delta h=1-Jb, including indices i<m_1. Step 5: K(y,z)=(0,-hy) gives DK+KD=1-SC, with the sign and degree convention of lem-weil-pbc-homotopic-maps-equal-cohomology (b), a Mathlib leaf. Step 6: H^k(C) is inverse to H^k(S), so C is a quasi-isomorphism in the sense of def-weil-abstract-derived-category; product exactness is retained but unused. Steps 7-9: naturality, phi∘psi composition by partition of nested blocks, identity, and augmentation (0,q) mapping to (0,q_phi(n)) all hold. Edge cases tested: phi=n+1 on the constant Z tower, phi=id, m_1>1, phi=n^2, and the zero tower. All cited nodes are definitions or Mathlib leaves, so there is no route issue and no tool_uses; no SGA. Not a duplicate: lem-pur-compact-support-roos-cofinality (constant ring, phi=en, plus a tensor clause) is a special case of this item. lem-sp-strict-tower-arithmetic-restriction(-comparison), lem-weil-roos-comparison-maps and lem-sf-strict-roos-derived-limit-comparison state different results. The parent's step 6 uses exactly the clauses proved here. Maintainer note: the restriction clauses of lem-pur-compact-support-roos-cofinality could later cite this item."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CofinalRoosRestriction",
+  "declaration": "CategoryTheory.CofinalRoos.cofinalRoosRestriction",
+  "declarations": [
+   "CategoryTheory.CofinalRoos.restriction",
+   "CategoryTheory.CofinalRoos.selection",
+   "CategoryTheory.CofinalRoos.block",
+   "CategoryTheory.CofinalRoos.cofinalRoosRestriction"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CofinalRoosRestriction.lean",
+  "statement": "theorem cofinalRoosRestriction {C : Type uC} [Category.{vC} C] (J : GrothendieckTopology C) [HasSheafify J AddCommGrpCat.{max uC vC r}] [J.WEqualsLocallyBijective AddCommGrpCat.{max uC vC r}] (R : Sheaf J RingCat.{max uC vC r}) (_hcomm : ∀ (U : Cᵒᵖ) (a b : R.obj.obj U), a * b = b * a) [HasCountableProducts (ringedSiteModules.{max uC vC r} R)] [HasExactLimitsOfShape (Discrete ℕ) (ringedSiteModules.{max uC vC r} R)] : ∃ ρ : ∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (φ : ℕ ↪o ℕ), roosF.obj X ⟶ roosF.obj ((restriction _ φ).obj X), (∀ (X : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (φ : ℕ ↪o ℕ) (_hunbounded : ∀ i : ℕ, ∃ n : ℕ, i ≤ φ n), roosU X ≫ block X φ = selection X φ ≫ roosU ((restriction _ φ).obj X) ∧ QuasiIso (ρ X φ) ∧ (∀ p : ℤ, (ρ X φ).f (p + 1) ≫ (roosχ ((restriction _ φ).obj X) p).hom = (roosχ X p).hom ≫ biprod.map ((block X φ).f p) ((selection X φ).f (p + 1))) ∧ (∀ (Y : CochainComplex (ℕᵒᵖ ⥤ ringedSiteModules.{max uC vC r} R) ℤ) (f : X ⟶ Y), roosF.map f ≫ ρ Y φ = ρ X φ ≫ roosF.map ((restriction _ φ).map f)) ∧ (∀ (ψ : ℕ ↪o ℕ) (_hψ : ∀ i : ℕ, ∃ n : ℕ, i ≤ ψ n), HEq (ρ X φ ≫ ρ ((restriction _ φ).obj X) ψ) (ρ X (ψ.trans φ))) ∧ (∀ (P : CochainComplex (ringedSiteModules.{max uC vC r} R) ℤ) (γ : ∀ n : ℕ, P ⟶ X.asFunctor.obj (op n)) (hγ : ∀ n : ℕ, γ (n + 1) ≫ X.asFunctor.map (homOfLE (Nat.le_succ n)).op = γ n), ∀ p : ℤ, (roosAugment γ hγ ≫ ρ X φ).f (p + 1) ≫ (roosχ ((restriction _ φ).obj X) p).hom = biprod.lift 0 ((Pi.lift (fun n : ℕ ↦ γ (φ n))).f (p + 1)))) ∧ (∀ X, HEq (ρ X (RelEmbedding.refl (α := ℕ) (· ≤ ·))) (𝟙 (roosF.obj X)))",
+  "branch": "sheaf-dag",
+  "by": "Q70",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80b66f530",
+  "group": "Q70",
+  "result": "pass",
+  "note": "Node unchanged except the new lean field; statement verbatim; nt_compile clean (18.4 s). Every clause matches: selection = x_{φ(n)}; block = sum over [φ(n),φ(n+1)); square roosU≫block=selection≫roosU'; ρ pinned by roosχ coordinates biprod.map block selection in every degree (same convention as roosF_map_χ), so not arbitrary; QuasiIso; naturality; composition via ψ.trans φ = φ∘ψ and identity. Probe compiles: restriction ψ∘restriction φ = restriction (ψ.trans φ) and restriction refl = X by rfl (HEq is genuine equality); order embeddings are automatically unbounded; control with a false rfl fails as expected. Augmentation coordinates (0,γ∘φ). Hypotheses not stronger (small-site module universe convention, countable exact products, no HasDerivedCategory). Arithmetic-restriction helpers are a special case, not a duplicate. Advisory: redundant Homotopy import; arithmetic and compact-support cofinality results could later cite this item; the Q70 second reading is a self-check."
  }
 }

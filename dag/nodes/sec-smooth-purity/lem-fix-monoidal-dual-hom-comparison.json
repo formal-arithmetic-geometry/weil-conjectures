@@ -225,5 +225,23 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-d70f379c2 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. The delivery adds no new nodes, and the statement is byte-identical to the live base. The item is still unsplit live, has no repair note, is not on the dropped list and cites no SGA. All three cited nodes (def-sfb-monoidal-category, def-sfb-strong-monoidal-functor, lem-pod-closed-uncurry-laws) are Mathlib leaves, so there is no route issue and no tool_uses. I recomputed every step. Step 1: the mapped snake identities follow from the cited naturality, associativity and unit coherences of the strong monoidal functor. Step 2: psi∘phi equals the D-snake tensored with 1_N, which I checked against the triangle identities of ExactPairing D P. Step 3: uncurry(phi∘psi) = a_N(1⊗psi) = v∘(P-snake⊗1) = uncurry(1), using clauses 1-3 of uncurry-laws and injectivity. Step 4: I recomputed the transpose calculation through mu naturality, associativity coherence and left-unit coherence, and it gives a'. Step 5 writes an explicit inverse. Tensor orders are kept throughout and no braiding is used. Edge cases checked: unit duality, zero object, non-faithful G. The parent lem-fix-site-perfect-scalar-hom (live, reviewed) cites the item with the same pairing convention and the same gamma. Read-only cross-check: the sorry-free project lemma isIso_ihomComparison_app_of_exactPairing (GenericFibre/Comparison.lean:51-81) proves the same statement. Duplicate search found nothing that states the generic comparison; lem-sc-monoidal-projection-conjugate, lem-sf-source-etale-dualizable-hom-comparison, lem-ag-dual-tensor-hom-comparison and lem-sfb-dual-tensor-adjunctions are each specialized or only ingredients. Stacks 0FFP and 0FFQ (lemma-left-dual proof, categories.tex 9341ff) were read, and 0GWJ and 0GM7 were located in tags/tags. No changes."
+ },
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.Etale.Derived.GenericFibre.Comparison",
+  "declaration": "CategoryTheory.Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing",
+  "statement": "lemma isIso_ihomComparison_app_of_exactPairing (Y X : C) [ExactPairing Y X] (Z : C) :\n    IsIso ((ihomComparison G X).natTrans.app Z)",
+  "branch": "slopmaster2",
+  "by": "O1",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact upstream statement at Comparison.lean:72–73. Its section variables quantify over arbitrary monoidal closed C and D and a strong monoidal G. Take Y = the node's D, X = P and Z = N. ExactPairing D P packages exactly c : 𝟙_ C ⟶ D ⊗ P, e : P ⊗ D ⟶ 𝟙_ C and the two stated triangles. The conclusion concerns precisely the specified transpose, by Functor.LaxMonoidal.ihomComparison_app_eq_curry. No equivalence, exactness, braiding or symmetry is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e185dded8",
+  "group": "O1",
+  "result": "pass",
+  "note": "existing:true attach of CategoryTheory.Functor.Monoidal.isIso_ihomComparison_app_of_exactPairing (side-live GenericFibre/Comparison.lean:72-81, sorry-free); lean.statement verbatim; only the lean field changed vs the live node. Clause check: MonoidalClosed = specified Hom(A⊗T,B)≅Hom(T,H(A,B)); G.Monoidal ≅ recorded CoreMonoidal; ExactPairing Y X with Y=D, X=P gives η:𝟙→D⊗P, ε:P⊗D→𝟙 (compile-checked); comparison = curry(μ≫G.map ev) via ihomComparison_app_eq_curry (compile-checked); Z arbitrary; IsIso conclusion. No braiding, exactness or equivalence assumption; 4 independent universes. Scratch compile via nt_compile --json clean in 17.7 s, axioms propext/Choice/Quot.sound. Not dropped; no duplicate; Stacks 0GM7(1) categorical core. No findings."
  }
 }

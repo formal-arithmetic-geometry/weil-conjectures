@@ -11,7 +11,8 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-presheaf-modules-sheafification",
   "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-ringed-tensor-section-calculus"
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-weil-pbc-ideal-module-quotients"
  ],
  "proof": [
   {
@@ -277,5 +278,26 @@
   "group": "N5",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N5-90fd36c84 (reviewer sub-agent of L); spot-checked: Read in full. The delivery is the item JSON plus its report; there are no new nodes. The statement is byte-identical to the side-live base. stmt_deps are unchanged and proof_deps equals the union of the step uses. Live and side-live still show the item as unsplit, so it is not superseded. The item is not in the dropped list and has no repair note. Route: lem-weil-pbc-site-sheafification-sections-local is in unit sk-thm-p1, which sk-thm-properbasechange cites. The two lem-pc-sites-* nodes are Mathlib leaves and the rest are definitions, so no tool_uses are needed. No SGA is cited. I checked the Stacks tags 03EK, 03CY, 00YR and 00WK; the 03EK text defines the tensor as the sheafification of the sectionwise tensor, matching def-pur-sheaf-tensor-product. Step 1 uses only the local-representative and equality clauses of the cited lemmas, which say what is needed. Step 2 proves IF is a submodule sheaf, ker q = IF, and q is epi via local representatives plus separatedness, without assuming q is surjective on sections. In step 3, the module-sheafification interface lemma allows a presheaf coefficient ring, so it applies to the quotient presheaf R/I. The restricted R-action agrees with the original one by the uniqueness clause of def-weil-presheaf-modules-sheafification. Step 4: the pairing is defined locally, and two lifts change the value only by q(if) = 0. Bilinearity and balancing are checked, then the map is extended by sheafification. Steps 5–7: balancing gives f⊗ī = 0; the inverses are checked by pure-section extensionality; u is epi with kernel IF. Steps 8–9: both naturality squares are checked on local lifts. Edge cases tested: I=0, I=R, F=0, I'=I, I'=0, a one-object site, non-flat Z/2 over Z, objects with no global lifts, and empty covers. Duplicate search: lem-weil-pbc-ringed-ideal-quotient-comparison and lem-weil-pbc-tensor-relation-section-quotient state different results. No fixes were made."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SheafTensorIdealQuotient",
+  "declaration": "CategoryTheory.RingedSiteIdeal.sheaf_tensor_ideal_quotient",
+  "declarations": [
+   "CategoryTheory.RingedSiteIdeal.sheaf_tensor_ideal_quotient"
+  ],
+  "file": "lean/Sheaf/Paper/SheafTensorIdealQuotient.lean",
+  "statement": "theorem sheaf_tensor_ideal_quotient {C : Type u} [SmallCategory C] {J : GrothendieckTopology C} (R : Sheaf J CommRingCat.{u}) : ∃ (a : ∀ (I : RingedSiteIdeal R) (F : SheafOfModules.{u} (siteModuleRings R)), quotientTensor I F ≅ moduleQuotient I F) (uMap : ∀ (I : RingedSiteIdeal R) (F : SheafOfModules.{u} (siteModuleRings R)), F ⟶ quotientTensor I F) (Q : ∀ (I : RingedSiteIdeal R) (_ : SheafOfModules.{u} (siteModuleRings R)), SheafOfModules.{u} (siteModuleRings (ringQuotient I))) (e : ∀ (I : RingedSiteIdeal R) (F : SheafOfModules.{u} (siteModuleRings R)), (SheafOfModules.RingedTensor.restriction (ringProjection I)).obj (Q I F) ≅ moduleQuotient I F), ∀ (I : RingedSiteIdeal R) (F : SheafOfModules.{u} (siteModuleRings R)), Presheaf.IsSheaf J (localProduct I F).toPresheafOfModules.presheaf ∧ (∀ (U : C) (f : F.val.obj (op U)), f ∈ (localProduct I F).obj (op U) ↔ ∃ S : Sieve U, S ∈ J U ∧ ∀ (V : C) (g : V ⟶ U), S g → ∃ (n : ℕ) (i : Fin n → I.sections V) (x : Fin n → F.val.obj (op V)), F.val.map g.op f = ∑ k : Fin n, (i k).val • x k) ∧ (∀ (W : Cᵒᵖ) (f : F.val.obj W), (uMap I F).val.app W f = SheafOfModules.RingedTensor.pure R F (quotientCoefficient I) W f (1 : (ringQuotient I).obj.obj W)) ∧ (∀ (W : Cᵒᵖ) (f : F.val.obj W) (r : R.obj.obj W), (a I F).hom.val.app W (SheafOfModules.RingedTensor.pure R F (quotientCoefficient I) W f ((ringProjection I).hom.app W r)) = (moduleProjection I F).val.app W (r • f)) ∧ (∀ (W : Cᵒᵖ) (f : F.val.obj W), (a I F).inv.val.app W ((moduleProjection I F).val.app W f) = SheafOfModules.RingedTensor.pure R F (quotientCoefficient I) W f (1 : (ringQuotient I).obj.obj W)) ∧ (∀ (W : Cᵒᵖ) (f : F.val.obj W) (s t : (ringQuotient I).obj.obj W), (e I F).inv.val.app W ((a I F).hom.val.app W (SheafOfModules.RingedTensor.pure R F (quotientCoefficient I) W f (s * t))) = s • @id ((Q I F).val.obj W) ((e I F).inv.val.app W ((a I F).hom.val.app W (SheafOfModules.RingedTensor.pure R F (quotientCoefficient I) W f t)))) ∧ uMap I F ≫ (a I F).hom = moduleProjection I F ∧ Epi (uMap I F) ∧ (∀ (W : Cᵒᵖ) (f : F.val.obj W), (uMap I F).val.app W f = 0 ↔ f ∈ (localProduct I F).obj W) ∧ (∀ (G : SheafOfModules.{u} (siteModuleRings R)) (h : F ⟶ G), ∃ (qh : moduleQuotient I F ⟶ moduleQuotient I G) (hS : Q I F ⟶ Q I G), moduleProjection I F ≫ qh = h ≫ moduleProjection I G ∧ (e I F).hom ≫ qh = (SheafOfModules.RingedTensor.restriction (ringProjection I)).map hS ≫ (e I G).hom ∧ (a I F).hom ≫ qh = (SheafOfModules.monoidalCategory R).tensorHom h (𝟙 (quotientCoefficient I)) ≫ (a I G).hom) ∧ (∀ (I' : RingedSiteIdeal R) (hI : IsContained I' I), ∃ (tM : quotientCoefficient I' ⟶ quotientCoefficient I) (v : moduleQuotient I' F ⟶ moduleQuotient I F), (∀ (W : Cᵒᵖ) (s : (ringQuotient I').obj.obj W), tM.val.app W s = (ringTransition hI).hom.app W s) ∧ moduleProjection I' F ≫ v = moduleProjection I F ∧ (a I' F).hom ≫ v = (SheafOfModules.monoidalCategory R).tensorHom (𝟙 F) tM ≫ (a I F).hom ∧ uMap I' F ≫ (SheafOfModules.monoidalCategory R).tensorHom (𝟙 F) tM = uMap I F)",
+  "branch": "sheaf-dag",
+  "by": "ND",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6214dd3ed",
+  "group": "ND",
+  "result": "pass",
+  "note": "Item statement byte-identical to the side-live base; stmt_deps only gain the new def node def-weil-pbc-ideal-module-quotients (H12 fields ok). Clause-by-clause match: localProduct (sInf of saturated submodules) plus an explicit locally-finite-sum membership clause and sheaf clause; ring and module quotients built by sectionwise quotient then sheafification, with no surjectivity assumed; canonical S-structure via Q/e pinned by S-linearity on pure sections; a formula, a inverse formula, uMap pinned to pure(f,1), a u = q, Epi, kernel = IF; h-naturality with qh pinned by projections and S-linear through hS; ideal-inclusion squares with tM pinned to the sheafified quotient transition (ringTransition) and v pinned by projections. No extra hypotheses; edge cases I=0, I=R, F=0, empty site/covers, local-only lifts covered. Defs non-hollow; theorem proof is only sorry; docstrings carry source, blueprint id and 9 proof steps. No duplicates (private R/I helpers only; constant-sheaf quotients differ). nt_compile --json clean: 33.5 s and 25.5 s. Advisory: u/u universe restriction inherited from RingedSiteIdeal (citer needs a small model at stage 3); redundant imports (Presheaf.Colimits, recorded dep modules) are reached transitively or required by the brief."
  }
 }

@@ -271,5 +271,44 @@
   "group": "Q39",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q39-444a0e200 (reviewer sub-agent of L); spot-checked: PASS, no changes or fixes. The delivery is one commit: the item plus its report, with no new nodes. The statement is byte-identical to live, stmt_deps are unchanged and the item is still unsplit in live and side-live. There is no repair note, the item is not on the dropped list and no earlier runs exist. I checked all seven steps by hand. (1) τ^n and its inverse are built from coproduct universal properties over S_n≅Z. (2) Chain-map check: both sides equal ι'(Fd⊗1)c+(−1)^pι'(1⊗Fd)c, using additivity of F and naturality of c. (3) Naturality c∘F(f⊗g)=(Ff⊗Fg)∘c. (4) F(0) is a zero object and j=e_F^{-1}[0]. (5) Associativity on nested triple coprojections, via naturality of c past F(1⊗ι) and the inverted strong-monoidal associativity identity (1⊗c)c F(α)=α(c⊗1)c, with no Koszul sign. (6) Unitors on the (0,n) and (n,0) summands with e^{-1}; the other summands are zero by additivity of the tensor. (7) Inverting gives the defining identities. Each cited statement says what its step uses: the def-sfb-strong-monoidal-functor equations, the summand formulas of def-sfb-preserves-kflat-quasi-iso, and the reindexing associator and unitors of lem-sfb-total-tensor-homotopy. Small cases tested: zero, single-degree, identity functor and odd negative degrees. The statement matches what parent lem-sfb-exact-tensor-functor-derived-normalization uses in steps 1 and 5–7. On route: the unit uses sk-def-sfb-derived-tensor-hom, and the tool_uses are acceptable. No duplicate: lem-pur-cochain-comparison-monoidal-equations is a sheaf-pullback special case with a braiding clause; a later repoint is possible, as an advisory. Stacks 0FPQ only hints at the monoidal structure of complexes, so proof_origin=agent is correct. The Lean candidate is recorded, not attached; no SGA source is used."
+ },
+ "lean": {
+  "module": "WeilConjectures.Algebra.Homology.Monoidal.MapHomologicalComplex",
+  "declaration": "CategoryTheory.Functor.mapCochainComplexMonoidal",
+  "declarations": [
+   "CategoryTheory.Functor.mapCochainComplexμIso",
+   "CategoryTheory.Functor.mapCochainComplexμIso_inv",
+   "CategoryTheory.Functor.ιTensorObj_mapCochainComplexμIso_hom_f",
+   "CategoryTheory.Functor.mapCochainComplexεIso",
+   "CategoryTheory.Functor.mapCochainComplexεIso_hom_f_zero",
+   "CategoryTheory.Functor.mapCochainComplexμIso_hom_naturality_left",
+   "CategoryTheory.Functor.mapCochainComplexμIso_hom_naturality_right",
+   "CategoryTheory.Functor.mapCochainComplexμIso_associativity",
+   "CategoryTheory.Functor.mapCochainComplex_leftUnitor_inv",
+   "CategoryTheory.Functor.mapCochainComplex_rightUnitor_inv",
+   "CategoryTheory.Functor.mapCochainComplex_δ",
+   "CategoryTheory.Functor.mapCochainComplex_η",
+   "CategoryTheory.Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans",
+   "CategoryTheory.Functor.OplaxMonoidal.mapHomologicalComplexδNatTrans_app_app",
+   "CategoryTheory.Functor.OplaxMonoidal.associativity",
+   "CategoryTheory.Functor.OplaxMonoidal.left_unitality_hom",
+   "CategoryTheory.Functor.OplaxMonoidal.right_unitality_hom",
+   "HomologicalComplex.map_ιMapBifunctor_mapBifunctorComparisonX",
+   "HomologicalComplex.mapBifunctor.hom_ext_of_map"
+  ],
+  "statement": "noncomputable instance mapCochainComplexMonoidal : (G.mapHomologicalComplex (.up ℤ)).Monoidal",
+  "branch": "slopmaster2",
+  "by": "Q66",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Exact existing interface, specialized to abelian monoidal categories with two-sided additive, colimit-preserving tensor and a countable-coproduct-preserving additive strong monoidal functor. The comparison τ is (G.mapCochainComplexμIso P Q).symm, with summand formula from map_ιMapBifunctor_mapBifunctorComparisonX and uniqueness from mapBifunctor.hom_ext_of_map. The unit j is G.mapCochainComplexεIso.symm, with the specified zero-degree component and zero objects elsewhere. The recorded OplaxMonoidal identities give exactly the three displayed equations, and mapCochainComplex_δ/η identify their maps with these canonical comparisons. No symmetry is assumed. Server validation with independent object/morphism universes and only HasColimitsOfSize.{0,0}, two-sided tensor PreservesColimitsOfSize.{0,0}, and preservation by G of every countable discrete colimit inferred every graded tensor prerequisite. No new Lean module or new proof; the existing instance uses only propext, Classical.choice and Quot.sound."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ab009a88f",
+  "group": "Q66",
+  "result": "pass",
+  "note": "Existing:true binding of lem-sfb-termwise-strong-monoidal to CategoryTheory.Functor.mapCochainComplexMonoidal (upstream MapHomologicalComplex.lean:227). The statement is verbatim and only the lean field changes versus live. The upstream hypotheses all follow from the node's: Abelian, MonoidalPreadditive, small colimits with two-sided tensor preservation, additive strong monoidal F preserving countable coproducts (each π-fibre is countable); no braiding, no universe restriction. τ=μIso.symm: summand formula from ιTensorObj_mapCochainComplexμIso_hom_f, uniqueness from mapBifunctor.hom_ext_of_map. j=εIso.symm is e_F⁻¹ in degree 0. The associator and both unitor equations are OplaxMonoidal.associativity/left_unitality_hom/right_unitality_hom with sides swapped. The complex tensor is the same Mathlib HomologicalComplex.monoidalCategory as lem-sfb-total-tensor-homotopy, and no duplicate binding exists. Probes compiled clean through nt_compile --json with independent universes: instance inference, rfl δ/η identifications and the coherence equations; axioms are propext, Classical.choice, Quot.sound. The Second reading section is a placeholder because the launcher told the worker not to start agents; not a fault."
  }
 }

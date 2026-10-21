@@ -21,7 +21,9 @@
   "lem-weil-pbc-ringed-koszul-completion-reflector",
   "lem-sf-ringed-rhom-derived-complete",
   "def-wf-automorphism-completed-transport",
-  "lem-weil-pbc-ringed-presentation-transport"
+  "lem-weil-pbc-ringed-presentation-transport",
+  "def-wf-tensor-product",
+  "def-coef-hom-representative-evaluation"
  ],
  "proof": [],
  "proof_deps": [],
@@ -130,5 +132,49 @@
   "group": "Q160",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q160-792cb3b50 (reviewer sub-agent of L); spot-checked: I read all of it: the item, the report, the master blueprint (order 2570) and the current blueprint (main-20261015, order 2914), unit sk-p-cyclotomic, the full statements of all nine cited nodes and of the related nodes (def-wf-tensor-product, def-weil-pbc-adic-coefficient-datum, def-weil-pbc-bounded-constructible-complete, def-weil-pbc-rational-category, def-weil-derived-pullback-tensor-hom, def-pur-integral-derived-operations, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-wf-internal-hom-weil), and Stacks algebraization.tex 099A (lines 930-935) and sites-cohomology.tex 08J7. The item matches the current blueprint: the internal Hom uses a K-injective replacement in the second variable, and the Frobenius is the composite of alpha with RHom_E(phi_K^{-1}, phi_L), with every arrow's source and target checked. Phi_X agrees with def-wf-weil-category. The bilinear extension to rational morphisms is well defined because H_B is O_E-bilinear. Completeness of H_B(M,N) follows from the reflector (b_1 = varpi) and from lem-sf-ringed-rhom-derived-complete (Stacks 099A). The comparison alpha follows from presentation-transport, which keeps the transported injective complex K-injective. Small cases checked: on Spec F_q with scalar Frobenii lambda and mu the datum acts by mu/lambda (inverse in the first variable), zero objects, identity Frobenius, shifts, the empty scheme. No new nodes, no duplicate found (def-weil-derived-pullback-tensor-hom is consistent but only covers constructible pairs and has no Weil datum), no cycle, no SGA source, no tool_uses needed. Two small faults, repaired in the corrected item file. (1) E6/B3: the coefficient sheaf was cited from def-weil-completed-integral-coefficients, but def-wf-weil-category, intrinsic completion, the transport node and the landed def-wf-tensor-product all use A_T of def-weil-pbc-adic-coefficient-datum, and no DAG node identifies the two sheaves. The statement now cites the adic datum with A = O_E, I = (varpi), its hypotheses checked inline, and stmt_deps swaps the dependency accordingly. (2) A gap: the statement did not say that the transport preserves D_comp(B), which Phi_X^* needs on the ambient D(X,E). I added that it does, by presentation-transport (c(varpi) = varpi) and the Koszul reflector, both already cited. Details are in review.md.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.WeilInternalHom",
+  "declaration": "WeilConjectures.wfInternalHomFrobenius",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.wfOrdinaryDerivedHom",
+   "AlgebraicGeometry.Scheme.wfDerivedHom_complete",
+   "AlgebraicGeometry.Scheme.wfIntegralHom",
+   "AlgebraicGeometry.Scheme.wfRationalHomObj",
+   "AlgebraicGeometry.Scheme.wfRationalHomMap_exists",
+   "AlgebraicGeometry.Scheme.wfRationalHomMap",
+   "AlgebraicGeometry.Scheme.wfRationalHom_laws",
+   "AlgebraicGeometry.Scheme.wfRationalHom",
+   "AlgebraicGeometry.Scheme.wfModuleTransportUnit",
+   "AlgebraicGeometry.Scheme.wfModuleHomEvaluation",
+   "AlgebraicGeometry.Scheme.wfModuleHomTransport_exists",
+   "AlgebraicGeometry.Scheme.wfModuleHomTransport",
+   "AlgebraicGeometry.Scheme.wfHomComplexTransport_exists",
+   "AlgebraicGeometry.Scheme.wfHomComplexTransport",
+   "AlgebraicGeometry.Scheme.wfHomResolutionUnit",
+   "AlgebraicGeometry.Scheme.wfHomResolutionMap_isIso",
+   "AlgebraicGeometry.Scheme.wfHomKInjectiveModel",
+   "AlgebraicGeometry.Scheme.wfDerivedHomTransport_exists",
+   "AlgebraicGeometry.Scheme.wfDerivedHomTransport",
+   "AlgebraicGeometry.Scheme.wfIntegralHomTransport",
+   "AlgebraicGeometry.Scheme.wfRationalHomTransport_exists",
+   "AlgebraicGeometry.Scheme.wfRationalHomTransport",
+   "WeilConjectures.wfInternalHom",
+   "WeilConjectures.wfInternalHomFrobenius"
+  ],
+  "file": "lean/Sheaf/Paper/WeilInternalHom.lean",
+  "statement": "def wfInternalHomFrobenius (K L : WeilD D c X₀ E) : (wfAmbientFrobenius D c X₀ E).obj ((wfInternalHom D c X₀ E).obj (op (wfWeilCarrier D c X₀ E K), wfWeilCarrier D c X₀ E L)) ≅ (wfInternalHom D c X₀ E).obj (op (wfWeilCarrier D c X₀ E K), wfWeilCarrier D c X₀ E L)",
+  "branch": "newtargets-dag",
+  "by": "Q43",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-b3afbe376",
+  "group": "Q43",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 7d88d094; item WeilInternalHom.lean byte-identical (sha cf9189aa), substance as previously verified (alpha pinned, Frobenius = alpha then RHom(phi_K^-1 contravariant, phi_L covariant), K-injective derivedInternalHomOfUniverses, bilinear varpi^(r+s) extension, no extra universe equality). F1 fixed: stmt_deps = 9 live + def-wf-tensor-product + def-coef-hom-representative-evaluation, both genuine against current live records (8 and 3 used declarations); the two theorem stmt_deps are dropped. F2 fixed: IntegralScalarExtensionWellDefined.lean and its record change removed; no dep module/record change. Node differs from live only in lean/stmt_deps; statement verbatim; report sections present. Compile: nt_compile --json timed out at 60 s at load 184 (13 s CPU); lcompile.run timeout=540 clean rc 0 in 354 s at load 204. Land at lower load."
  }
 }

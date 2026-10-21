@@ -205,5 +205,28 @@
   "group": "NG",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-46e0344e1 (reviewer sub-agent of L); spot-checked: I read the item in full: 0 new nodes and 7 steps. The statement, stmt_deps, source and blueprint fields are byte-identical to clones/live, where the item is still unsplit with an empty proof. The item is not in route-pivot-dropped, has no repair note and no SGA source. I typed every object (l, t, r and the composites a, b, h, g, plus the μ and η hypotheses), and both conclusions are well-typed. I recomputed all steps. Step 2: (b⊗Lp)β^c = β^{c'}L(a⊗p), using bifunctoriality, bc = c'L(a) and naturality of μ. Step 3: R(v)α^c = α^{c'}u, using unit naturality from lem-weil-pbc-adjunction-of-natural-bijection (Ψ(u) = R(u)η). Step 4: h θ = θ[n] b, using naturality of t in the fixed input at c, a stated hypothesis. Step 5: from the μ shift hypothesis. Step 6: r R(a) η_{X'} = η_X[n] s, with a = l_X L(s), unit naturality and the η hypothesis. Step 7: from naturality of r at β_P. All are correct and genuinely elementary. lem-weil-pbc-commshift-nattrans-comp-whisker is cited only for the composite-comparison convention χ = γ_{FX}G(φ). Advisory: that node is stated for [1] only, but the item assumes comparisons for all n. Source check: Stacks 0B56 (sites-cohomology.tex l.13650-13672) is the counit case c = ε_E with K = RE. The parent formal-exact-projection-mate step 2 applies the item exactly this way, and its s_{F_E,n} matches t^{RE}. The blueprint perfect-projection-formula proof's first paragraph is the shift-closure place. Small tests: identity adjunction (the claims reduce to naturality of t at c), S⊗_R− with restriction, c = 0, n ≤ 0. The rg -L search found no duplicate; the sibling right-unit node is a different clause. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.TensorArrowMateNaturalityShifts",
+  "declaration": "CategoryTheory.TensorArrowMate.naturality_shifts",
+  "declarations": [
+   "CategoryTheory.TensorArrowMate.beta",
+   "CategoryTheory.TensorArrowMate.alpha",
+   "CategoryTheory.TensorArrowMate.naturality_shifts"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/TensorArrowMateNaturalityShifts.lean",
+  "statement": "theorem naturality_shifts (TC : C ⥤ C ⥤ C) (TD : D ⥤ D ⥤ D) (L : C ⥤ D) (R : D ⥤ C) (adj : L ⊣ R) (μ : TC ⋙ (Functor.whiskeringRight C C D).obj L ≅ (L ⋙ TD) ⋙ (Functor.whiskeringLeft C D D).obj L) [HasShift C ℤ] [HasShift D ℤ] [L.CommShift ℤ] [R.CommShift ℤ] [∀ M : C, (TC.obj M).CommShift ℤ] [∀ M : D, (TD.obj M).CommShift ℤ] (hTC : ∀ (M N : C) (f : M ⟶ N), NatTrans.CommShift (TC.map f) ℤ) (hTD : ∀ (M N : D) (f : M ⟶ N), NatTrans.CommShift (TD.map f) ℤ) (hη : NatTrans.CommShift adj.unit ℤ) (hμ : ∀ K : C, NatTrans.CommShift (F₁ := TC.obj K ⋙ L) (F₂ := L ⋙ TD.obj (L.obj K)) (μ.hom.app K) ℤ) : (∀ (K : C) (E : D) (c : L.obj K ⟶ E) (P : C) (n : ℤ), beta TC TD L μ c (P⟦n⟧) ≫ ((L ⋙ TD.obj E).commShiftIso n).hom.app P = ((TC.obj K ⋙ L).commShiftIso n).hom.app P ≫ (beta TC TD L μ c P)⟦n⟧' ∧ alpha TC TD L R adj μ c (P⟦n⟧) ≫ (((L ⋙ TD.obj E) ⋙ R).commShiftIso n).hom.app P = ((TC.obj K).commShiftIso n).hom.app P ≫ (alpha TC TD L R adj μ c P)⟦n⟧') ∧ (∀ (K K' : C) (E E' : D) (c : L.obj K ⟶ E) (c' : L.obj K' ⟶ E') (a : K ⟶ K') (b : E ⟶ E'), c ≫ b = L.map a ≫ c' → ∀ (P P' : C) (p : P ⟶ P'), beta TC TD L μ c P ≫ ((TD.map b).app (L.obj P) ≫ (TD.obj E').map (L.map p)) = L.map ((TC.map a).app P ≫ (TC.obj K').map p) ≫ beta TC TD L μ c' P' ∧ alpha TC TD L R adj μ c P ≫ R.map ((TD.map b).app (L.obj P) ≫ (TD.obj E').map (L.map p)) = ((TC.map a).app P ≫ (TC.obj K').map p) ≫ alpha TC TD L R adj μ c' P')",
+  "branch": "sheaf-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ace498cdb",
+  "group": "NE",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: curried bifunctors, μ natural iso in both inputs, beta = μ ≫ (c⊗1) and alpha = adj.homEquiv(beta) with real data, hTC/hTD/hη/hμ in the node's orientations (checked against Mathlib commShiftIso_comp_hom_app and shift_app_comm), all four conclusions, ∀ n : ℤ, independent universes, no extra assumptions. A scratch probe proves the whole theorem with no sorry (nt_compile --json exit 0, 14.4 s), so the hypotheses are correctly oriented. Delivered file compiles clean in 12.2 s; lean.statement is verbatim in the file; docstrings carry Stacks 0B56 (sites-cohomology.tex l.13666) and the blueprint id; theorem docstring has the 7 steps; both stmt_deps are Mathlib leaves that are used; non-lean node fields identical to live. H4: the parent's formalProjectionBeta/Alpha cover only the counit case, so the arbitrary-c beta/alpha are not a duplicate. Advisory: hTC unused but a node hypothesis; the parent's family-μ encoding needs NatIso packaging at stage 3."
  }
 }

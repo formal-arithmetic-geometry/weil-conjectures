@@ -261,5 +261,31 @@
   "group": "O4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-89d716883 (reviewer sub-agent of L); spot-checked: I read the item in full: 9 steps, 0 new nodes, statement and stmt_deps unchanged. It is the first split of a new node that Q33 created for the parent linear-triangle on 2026-10-21; its base proof was empty and it has no re-split note. Steps 1-3 build the presheaf sequence Q_{n-1} -> Q_n -> Q_1 by elementary arguments: well-definedness, linearity through the quotient maps, regularity of t, and the cancellation xc=x^n d => c=x^{n-1}d. Step 4 applies lem-pc-sites-module-sheafification-interface with the presheaf Q_n (Stacks 03CY). Together with lem-pc-sites-sheafification-underlying-sets (same set sheafification and unit) it identifies Q_j^# with Res R_j as R_n-modules and as B-modules, and identifies a and b with the sheafified maps. Step 5 uses exactness of sheafification over the ring sheaf B (03EI). Step 6 shows restriction of scalars preserves and reflects short exactness, because kernels and cokernels are computed on underlying abelian sheaves (03DA); I accept it as elementary. Steps 7-8 give the first-factor R_j-actions on C_j, balanced R_n-linear maps alpha and beta with correct generator identities, and cochain identities on pure tensors. Step 9 is an instance of def-pc-flat-sheaf-modules, which defines flatness as exactness of G -> G tensor_O F (Stacks 03ER item 3, checked at sites-modules.tex:4243), combined with step 6. proof_deps equals the union of the step uses. Every cited node is a definition or a Mathlib leaf, so there is no route issue, no cycle and no tool_uses. No SGA is cited. Small cases: B=Z, t=2, n=2 and n=3 are exact; t a unit and B=0 are trivial. Without regularity (Z/4, t=2) a is not injective; without flatness (P^0=Z/2) the sequence fails, so both hypotheses are needed. I searched the whole DAG for duplicates and found none: kflat-scalar-tower-realization, flat-coefficient-reduction-adjunct, opcycles-tor-criterion and restriction-of-scalars-exact all state other things. Advisory: step 6 could cite lem-weil-pbc-restriction-derived-products. The report mentions citations.json and searches.jsonl, but neither file is in the commit. Maintainer note: every snapshot chapter directory except sec-proetale-coefficients is a dangling symlink to the missing dagsnap ba587727. I read the cited out-of-chapter nodes from dagsnap 78f93be7; the four I hashed are identical across all remaining dagsnaps. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SuccessiveQuotientFlatComplexSequence",
+  "declaration": "SheafOfModules.nonempty_successiveQuotientFlatComplexSequence",
+  "declarations": [
+   "SheafOfModules.PrincipalQuotientTensorComplex",
+   "SheafOfModules.principalQuotientTensorSection",
+   "SheafOfModules.principalQuotientRestrictComplex",
+   "SheafOfModules.SuccessiveQuotientFlatTensorSequence",
+   "SheafOfModules.SuccessiveQuotientFlatComplexSequence",
+   "SheafOfModules.nonempty_successiveQuotientFlatComplexSequence"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SuccessiveQuotientFlatComplexSequence.lean",
+  "statement": "theorem nonempty_successiveQuotientFlatComplexSequence [EssentiallySmall.{r} C] (B : Sheaf J CommRingCat.{r}) (t : (B.obj ⋙ CategoryTheory.forget CommRingCat.{r}).sections) (hregular : ∀ U : Cᵒᵖ, Function.Injective (fun c : B.obj.obj U ↦ (@id (B.obj.obj U) (t.val U)) * c)) (n : ℕ) (hn : 1 < n) : Nonempty (SuccessiveQuotientFlatComplexSequence t (principalPowerRingProjection B t (n - 1)) (principalPowerRingProjection B t n) (principalPowerRingProjection B t 1))",
+  "branch": "sheaf-dag",
+  "by": "Q27",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-57c7a610f",
+  "group": "Q27",
+  "result": "pass",
+  "note": "Item node changes only in lean; the six stmt_dep records are identical to side-live; lean.statement is verbatim in the file. Clause-by-clause match: essentially small site in universe r; B, t; sectionwise injectivity of t (equivalent to the sheaf statement); n>1; the dependency's projections at n-1, n, 1. qPrev/qOne are pinned by projection equations (pi_n is epi). a/b are pinned by [c]->[tc] and [c]->[c]. Short exactness over R_n and after restrictScalars to B. For all unbounded P with IsFlatOnSite terms, the tensor complexes are pinned to changeOfRings objects and changeOfRingsHom differentials; alpha/beta are pinned by a(s)⊗p and b(s)⊗p on sheafification-unit pure tensors; degreewise short exactness over SN and B. No extra assumptions; edge cases n=2, B=0, t a unit and unbounded P are covered. H4: no duplicate (the parent linear-triangle is a different statement). Helpers have real data; the only sorry is the main theorem; docstrings carry sources, blueprint ids and nine proof steps; report sections present. nt_compile --json clean, exit 0, 55.8 s at load ~230 (worker 26.6/33.8 s). Advisory: tight compile margin under load; the parent must bridge its own models to this item's complexes."
  }
 }

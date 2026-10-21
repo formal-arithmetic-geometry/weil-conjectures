@@ -287,5 +287,42 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-7944355cf (reviewer sub-agent of L); spot-checked: I read the item, all five steps, the statement of every cited node, the unit sk-lem-integral-models, and the Bhatt–Scholze sources: Lemma 6.5.8(1)–(2) with its proof (k^* commutes with limits), Remark 6.5.10, and the reverse direction of Proposition 6.6.11. The retained statement is a faithful generalization: any Noetherian A, any finitely generated I, any locally closed immersion, and local derived completeness, which equals Koszul-unit invertibility by lem-weil-pbc-constant-completion-equivalence. There are no new nodes and no SGA source. Step checks: (1) Immersion limit preservation, which holds for every locally closed immersion with no Noetherian hypothesis, plus the scalar-identity constant-sheaf comparison, gives the isomorphism i^{-1}B_X ≅ B_S projection by projection. The isomorphism clause gives exactness and limit preservation of F_i. (2) Slice restriction is exact with the left adjoint j_!, and the weakly-étale localization identifies B_S|_U with B_U. (3) Tensor pullback plus K-flat preservation. Because Q_m is finite free, the Koszul tower, its transitions (a_j in degree −1, identity in degree 0) and the augmentations γ_m carry over termwise; I checked r=1 by hand. (4) Exact countable products for any pro-étale ring sheaf. The normalized strict Roos statement identifies the augmentation (γ_m, 0) with the derived augmentation, and the additive Roos comparison carries it to (Fγ_m, 0), so Fη_M = η_{FM}. (5) The detection lemma's hypotheses match: Noetherian X, a finite stratification, arbitrary chosen covers and an arbitrary ring sheaf, in the unbounded derived category. Edge cases tested: empty X or empty strata, I=0 or r=0, I=A, repeated generators, A/I^n of infinite projective dimension, and unbounded M. Fault (C1/C4), repaired: steps 3 and 5 apply the morphism-of-topoi tensor-pullback lemma and the stratum-detection lemma, both stated with r^{-1} of def-weil-proetale-inverse-image, to slice restriction, with no node identifying the two. I added the existing node lem-sfb-proetale-object-inverse-image-restriction (r^{-1}G ≅ G|_W for sets, abelian groups and rings) to steps 2 and 5 with explicit sentences, recomputed proof_deps, and added a tool_use entry. The 11 declared tool_uses are accepted as generic black boxes. Maintainer note: the unsplit NF node lem-weil-pbc-stratum-completion-unit-restriction, created the same day, states essentially the same result (intrinsic completeness and the quotient unit). It is a merge candidate, not a fault of this delivery. Advisory: 'locally closed immersion' in the retained statement has no definition citation.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.AdicStratumCompletionUnit",
+  "declaration": "AlgebraicGeometry.Scheme.SfbAdicRestriction.adicStratumCompletionUnit",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.modelEquivalence",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.inverse",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.direct",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.adjunction",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.inverse_finiteLimits",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.sliceAlgebra",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.sliceDirect",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.sliceAdjunction",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.completedPull",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.finiteComparison",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.UnitRestriction",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.stratumPull",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.stratumSlicePull",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.adicStratumCompletionUnit",
+   "AlgebraicGeometry.Scheme.SfbAdicRestriction.adicStratumCompletionUnit_detection"
+  ],
+  "file": "lean/Sheaf/Paper/AdicStratumCompletionUnit.lean",
+  "statement": "theorem adicStratumCompletionUnit (X : Scheme.{u}) [IsNoetherian X] (A : Type (u + 1)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (r : ℕ) (a : Fin r → A) (ha : Ideal.span (Set.range a) = I) : (∀ (S : Scheme.{u}) (i : S ⟶ X) [IsImmersion i] (F : ConstantCompletion.InverseImageData (inverse i)), UnitRestriction F (direct i) (adjunction i) A I r a) ∧ (∀ (S : Scheme.{u}) (i : S ⟶ X) [IsImmersion i] (U : proEtaleSiteModel S), UnitRestriction (sliceAlgebra (proEtaleModelTopology S) U) (sliceDirect (proEtaleModelTopology S) U) (sliceAdjunction (proEtaleModelTopology S) U) A I r a)",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The first theorem states coefficient, actual Koszul-unit and finite-reduction compatibility and preservation; adicStratumCompletionUnit_detection states detection on finite stratum covers. Helpers give the canonical transported inverse image, actual slice overFunctor, and normalized finite comparison. No statement change. Timeout repair: inverse/direct and derived restriction helpers have explicit functor types; the three derived restriction abbreviations are regular definitions, with completed coefficients, derived pullback, standard localization and the transported restriction helpers locally irreducible to control unfolding. Canonical constructions and theorem signatures are unchanged.",
+  "fixed_by": "NT-stage2-cc-110ad13d7"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-110ad13d7",
+  "group": "Q33",
+  "result": "fix",
+  "note": "Re-push of PASSed 335822fa after landing Sandbox0 60 s timeout. Delta: explicit functor types, abbrev→def, local irreducible attrs, lean.note sentence. Statement/stmt_deps/proof/signatures unchanged, so prior full review (12 stmt_deps, ConstantCompletion decls, BS 6.5.8/6.5.10/6.6.11; edge cases, 2 sorries, docstrings) carries over. nt_compile at load 147–252: all whole-file runs timed out (header alone 24 s). Split profiled compiles (Slice prefix; rest with sliceAlgebra stubbed) cover all decls, no errors or warnings. sliceAlgebra linting 12–20 s → fixes/AdicStratumCompletionUnit.lean = delivered + linter.all/unusedVariables false (prefix 56.2→47.3 s back to back). Kernel ~35 s in finiteComparison/UnitRestriction remains; land at lower load. Advisories A1–A5 as before."
+ }
 }

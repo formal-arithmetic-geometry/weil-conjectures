@@ -367,5 +367,37 @@
   "group": "Q10",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-9da732bf2 (reviewer sub-agent of L); spot-checked: First delivery, with the statement unchanged from base. The item is still unsplit in live and side-live, is not in a dropped list and has no repair note. The delivery is one item commit plus its report, with no new nodes. The three added stmt_deps (module objects, fibre product, module upper-star comp) are notions the statement uses, and proof_deps is the union of the step uses. I checked the typing of (b), (c) and (d) through the identifications X×_Y Y_U≅X_U and S_U×_U W≅S_W, and tested identity f or j, identity factors, empty U or W and the empty scheme. Step 1: section-ring-lax-pushforward-coherence with ψ=η_a gives exactly Res_η mapMod(f_*), with the identity as underlying map. Step 3: the unit of Lan+sheafify at an object over U is the identity, because (W, graph) is initial in I_W, so η_j=α_j; the scalar-extension isomorphism is verbatim from def-weil-pbc-proetale-operations. Step 4: eta-comp applied to jf_U=fj_S gives b_A η_f=η_{f_U} a_V, and I re-derived that the two scalar actions match. Step 5: open-restriction-counit holds for arbitrary f and R; with M restricted along α_f its f_* action is η_f; linearity comes from step 4. Steps 6, 8 and 9 equate fibre-product maps by their projections. Step 7: α_{jv}=α_vα_j, and the conjugate characterization of def-sfb-module-upper-star-comp fixes the comparison. Steps 10–11 cover identities via eta-id and naturality at the differentials. The parent derived-open-coherence uses exactly c, β, (b)–(d) and the identity cases. Source: blueprint sk-thm-sf-comp-composition, 'Canonicity and associativity'; Stacks 09A5, 00XZ, 03D3 and 03DH match their labels; no SGA. I accept the 16 declared tool uses as generic sheaf and coefficient tools. I found no duplicate in the DAG. Advisory only: step 3 cites the continuous-functor adjunction rather than def-sfb-finite-upper-lower-star-adjunction, which is the same construction; stage 2 should pin β sectionwise. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.ModuleDirectImageOpenPasting",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.moduleDirectImageOpenPasting",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.Comparisons",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.inverseImageActionIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.coprojection",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.sectionArrow",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.Sectionwise",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.Composition",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.SuccessiveOpens",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.MixedPasting",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.Units",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.Degreewise",
+   "AlgebraicGeometry.ProEtale.CondensedRing.ModuleOpenPasting.moduleDirectImageOpenPasting"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/ModuleDirectImageOpenPasting.lean",
+  "statement": "theorem moduleDirectImageOpenPasting : ∃ β : Comparisons Λ, Sectionwise Λ β ∧ Composition Λ ∧ SuccessiveOpens Λ β ∧ MixedPasting Λ β ∧ Units Λ β ∧ Degreewise Λ β",
+  "branch": "newtargets-dag",
+  "by": "Q58",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helpers only spell out this node’s section normalization and coherence clauses. Comparisons range over cartesian representatives with their actual projections, so both pasting laws have matching endpoints without arbitrary fibre-product identifications. Sectionwise fixes every comparison on sections through the specified module-adjunction coprojections, and inverseImageActionIso is the existing scalar-extension/comap-inverse isomorphism whiskered by sheaf inverse image. No coefficient map, module functor or adjunction is replaced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f7fc4f026",
+  "group": "Q58",
+  "result": "pass",
+  "note": "First S2 delivery; only node.lean changed vs side-live. Lean read clause by clause: Λ unbundled as in the framework (Defs.lean:78), α iso by the unconditional instance isIso_condensedPullbackHom, c = lowerStarComp.inv with section formula = ProEtale.lowerStarComp_inv_app_hom_app; β family over IsPullback squares pinned uniquely by Sectionwise (coprojection bijectivity plus the sectionArrow formula M(S×_T V)≅M(S_U×_U V)); (b) = lowerStarComp_assoc inverted; (c) and (d) typed by hand with upperStarComp/lowerStarComp directions and associators, matching the node; Units use upperStarId/lowerStarId/unitors and lowerStarComp_id_left/right; Degreewise = naturality at differentials (the node's clause is that trivial). No extra hypotheses; edge cases identity/empty/zero/all degrees covered. No duplicate in side-live. Theorem stmt_dep lem-sfb-proetale-open-restriction-counit is base-era and cited by the node statement itself; only the abbrev objectComposition (= Over.map ⊤) is used from its module, so advisory. Docstrings have source and blueprint, exactly one sorry, statement field verbatim, 11 declarations listed. nt_compile --json clean 30.6 s/60 s (load ~227). Advisory: inverseImageActionIso unused; second reading written by the same worker."
  }
 }

@@ -207,5 +207,30 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-a1eb8df3f (reviewer sub-agent of L); spot-checked: Shape: one commit on c1c2047 with only the item node and its report, and no new nodes. Compared with side-live, the item differs only in status, proof, proof_deps, proof_origin, mathlib_searches and split_report; the statement, stmt_deps, source and unit are unchanged. The item is still unsplit on live, is not in route-pivot-dropped.txt, has no repair note and cites no SGA. The steps cite only two existing Mathlib leaves, and proof_deps is exactly the set of nodes the steps cite. I read the statement of def-weil-pbc-composite-adjunction in full: it gives the counit formula and says the composite Hom bijection is the composite of the two bijections, which is what Steps 3 and 5 use. I redid every step. Step 2 checks the triangles of the reverse adjunction (L(e)=u^-1, R(u)=e^-1). Step 3 gets the counit u2^-1∘L2(ε∘F(e1)) by composing twice. Step 4 checks both naturalities of c. Steps 5–6 compute the transpose: e1-naturality, then ε-naturality at e2,N^-1, then the cancellation u2,L2N^-1=L2(e2,N). I checked this a second way as ε̄_{L2N}∘F̄(b) and got the same map. Step 7 checks the naturality of κ. Step 8 checks the horizontal-composition square: after applying L3, the right side is κ'∘β̄_{L2T'}∘H̄(ᾱ_K). Every step is a written-out few-line calculation with no hidden lemma. Small cases: identity equivalences; a one-object category from an abelian group with u=g and e=g^-1; empty categories. Searched the DAG with rg for possible duplicates (lem-sfb-equivalence-square-inverse-mate-coherence, lem-cbc-enhanced-equivalence-square-mates): none states the conjugated counit, the transpose or the κ compositor. Blueprint source paragraph and Stacks 0037/0DV0 labels checked. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.AdjointEquivalenceConjugation",
+  "declaration": "CategoryTheory.AdjointEquivalenceConjugation.conjugation_counit",
+  "declarations": [
+   "CategoryTheory.AdjointEquivalenceConjugation.conjugation_counit",
+   "CategoryTheory.AdjointEquivalenceConjugation.conjugation_transpose",
+   "CategoryTheory.AdjointEquivalenceConjugation.conjugation_comparison_naturality",
+   "CategoryTheory.AdjointEquivalenceConjugation.conjugation_compositor_naturality"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/AdjointEquivalenceConjugation.lean",
+  "statement": "theorem conjugation_counit (E₁ : C₁ ≌ N₁) (E₂ : C₂ ≌ N₂) {F : N₁ ⥤ N₂} {G : N₂ ⥤ N₁} (adj : F ⊣ G) (K : C₂) : ((E₁.toAdjunction.comp adj).comp E₂.symm.toAdjunction).counit.app K = E₂.inverse.map (F.map (E₁.counitIso.hom.app (G.obj (E₂.functor.obj K)))) ≫ E₂.inverse.map (adj.counit.app (E₂.functor.obj K)) ≫ E₂.unitIso.inv.app K",
+  "branch": "newtargets-dag",
+  "by": "Q72",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Four clauses of the node are stated in the listed theorems. The comparison natural isomorphism and its component formula are Mathlib Equivalence.invFunIdAssoc and invFunIdAssoc_hom_app; the compositor is its Functor.isoWhiskerLeft along E₁.functor ⋙ F. Equivalence packages exactly the specified adjunction with invertible unit and counit, without adjointifying or changing the maps."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-743c88afd",
+  "group": "Q72",
+  "result": "pass",
+  "note": "Shape: only the item node gains a lean field; statement, stmt_deps, source and proof are unchanged; no new nodes; module new on side-live; lean.statement is verbatim the conjugation_counit signature. Equivalence Eᵢ (functor=R, inverse=L, unitIso.hom=u, counitIso.hom=e) is equivalent data to the node's adjunction with invertible unit/counit, not a stronger assumption; E.symm.toAdjunction gives unit e⁻¹ and counit u⁻¹. The composite (E₁.toAdjunction.comp adj).comp E₂.symm.toAdjunction gives counit L₂F(e₁)≫L₂ε≫u₂⁻¹ via comp_counit_app twice. c_F = invFunIdAssoc, a real NatIso with component L_jF(e_i). Transpose direction correct. Comparison naturality matches, G case by swapping E₁,E₂. Compositor = isoWhiskerLeft (E₁.functor⋙F) of invFunIdAssoc with component L₃H(e₂,FR₁K). Square matches (α◫β = β∗α); F,H,α,β arbitrary. Delivered module compiles clean via nt_compile --json (12.5 s). Scratch copy with all four theorems proved (0 sorry) compiles, so the statements are true. Source/blueprint docstrings present, no hollow defs, no extra hypotheses, independent universes, no live write. H4 grep of the project Lean finds only specific uses. Advisory: the second reading was by the same worker."
  }
 }

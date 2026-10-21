@@ -203,5 +203,23 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q44-47b95eb0d (reviewer sub-agent of L); spot-checked: Read the whole 4-step split, adds no new nodes; statement, stmt_deps and provenance unchanged against the side-live base. Not in the drop list, no repair note, side-live item still unsplit, no SGA. It realizes the second sentence of main-20261015 lem-sfb-extend-subfield-constructible.proof.md ('tensoring a local finite presentation … on the same stratification'). Steps: (1) and (2) apply lem-sfb-internal-extension-inverse-image first to f with E_X→F_X, then to each cover member u_i with R=f^{-1}E_X and S=f^{-1}F_X; mapMod(u_i^*) of θ is an S_i-linear iso, and the rings match the u_i^*R in def-sfb-locally-finitely-presented, so no coefficient identification is hidden. (3) lem-sfb-internal-extension-finite-presentation applies on U_i without flatness, giving coker(a_{i,S}). (4) Elementary: the same cover, which was arbitrary, witnesses the conclusion. Edge cases E=F, f=id, empty Z, zero modules and infinite covers are fine; neither lemma needs qcqs. Same route as sibling lem-sfb-extend-to-qlbar-constructible step 2. The overlap between lem-sfb-internal-scalar-extension-finite-presentation and the stronger lemma predates this delivery; the stronger one is cited. One repair: step 1 did not check that E_X and F_X are commutative, which the inverse-image lemma requires. Added this, citing def-sfb-padic-subfield-condensed-ring and sk-def-sfb-pulled-back-coefficients (uses and proof_deps updated), in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-subfield-extension-local-presentation.json.; 1 file(s) fixed by the reviewer"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.SubfieldExtensionLocalPresentation",
+  "declaration": "AlgebraicGeometry.ProEtale.subfieldExtension_localPresentation",
+  "file": "lean/Sheaf/AlgebraicGeometry/SubfieldExtensionLocalPresentation.lean",
+  "statement": "theorem subfieldExtension_localPresentation (ℓ : ℕ) [Fact ℓ.Prime] {E F : PadicAlgCl.FiniteIntermediateField ℓ} (hEF : E ≤ F) {X Z : Scheme.{u}} (f : Z ⟶ X) (M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (padicSubfieldRingObj X ℓ E)) (hM : IsLocallyFinitelyPresented ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj X ℓ E)) ((Functor.mapMod (upperStar Ab.{u + 1} f) (padicSubfieldRingObj X ℓ E)).obj M)) : IsLocallyFinitelyPresented ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj X ℓ F)) ((Functor.mapMod (upperStar Ab.{u + 1} f) (padicSubfieldRingObj X ℓ F)).obj ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hEF)).obj M)) ∧ ∀ (𝒰 : Scheme.Cover Scheme.proetalePrecoverage Z), (∀ i : 𝒰.I₀, Mod.IsFinitelyPresented ((upperStar Ab.{u + 1} (𝒰.f i)).obj ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj X ℓ E))) (((Functor.mapMod (upperStar Ab.{u + 1} (𝒰.f i)) ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj X ℓ E))).obj ((Functor.mapMod (upperStar Ab.{u + 1} f) (padicSubfieldRingObj X ℓ E)).obj M)))) → ∀ i : 𝒰.I₀, Mod.IsFinitelyPresented ((upperStar Ab.{u + 1} (𝒰.f i)).obj ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj X ℓ F))) (((Functor.mapMod (upperStar Ab.{u + 1} (𝒰.f i)) ((upperStar Ab.{u + 1} f).obj (padicSubfieldRingObj X ℓ F))).obj ((Functor.mapMod (upperStar Ab.{u + 1} f) (padicSubfieldRingObj X ℓ F)).obj ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hEF)).obj M))))",
+  "branch": "newtargets-dag",
+  "by": "NJ",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3d3835964",
+  "group": "NJ",
+  "result": "pass",
+  "note": "Statement matches the node and the source (lem-sfb-extend-subfield-constructible.proof.md, second sentence) clause by clause: prime l; FiniteIntermediateField E<=F; arbitrary f:Z->X with no qcqs or Noetherian hypothesis; E_X,F_X = padicSubfieldRingObj (p_X^* condensed ring); G_X = Mod.extendScalars of padicSubfieldRingObjMap; raw mapMod(upperStar f) over the literal inverse-image rings; hypothesis lfp; conclusion lfp plus same-cover preservation. A test example deriving conclusion 1 from hM and conclusion 2 compiles, so the expanded clause is definitionally the body of IsLocallyFinitelyPresented (single monoidal_upperStar instance). nt_compile --json: exit 0, 33.7 s, no warnings, axioms propext/sorryAx/choice/Quot.sound. Node copy differs from side-live only in lean; statement verbatim; 8 dependency records identical to live; stmt_deps unchanged; docstrings carry source and blueprint id and the 4 proof steps; sorry only; no hollow defs; no public duplicate (lfp_extend is private). Advisory: the cover universe in conjunct 2 is free (u_2), a harmless generalization of the definition's .{u}; the report says it is the same universe."
+ }
 }

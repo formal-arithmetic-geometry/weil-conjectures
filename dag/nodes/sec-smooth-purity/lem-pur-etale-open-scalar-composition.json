@@ -173,5 +173,27 @@
   "group": "N6",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-628827207 (reviewer sub-agent of L); spot-checked: I read the item and all four cited statements in full. Statement-level nodes outside the item's chapter were read from clones/side-live, because their snapshot symlinks are dangling. The delivery has no new nodes and leaves the statement unchanged (field-diffed against live). Its one step specializes the separate composition and identity clauses of the reviewed lem-sp-open-scalar-site-coherence, taking j1=a and j2=b. Its bounded-flat hypothesis governs only the scalar/site square, so the result holds for every M, including unbounded ones. Writing out 'after the canonical open compositors' gives exactly beta_{ba} o Q(c_A) = c_B o b_!(beta_a) o beta_b(a_!M); I checked the types of both sides. t_j (summand-retaining, s(x)b to s(x)b) equals q_j of lem-coef-etale-open-tensor: both restrict to the identity on U, and the inverse's j_! adjunction transpose is then forced to be lambda^{-1} o Q_U(eta_A). That is iota of def-pur-open-coefficient-normalizations, whose lambda^ex comes from lem-pur-etale-scalar-mate-projection, which uses the ringed-topoi comparison. The compositors are those of lem-cbc-extension-zero-composition. Small cases checked: a or b equal to id, U empty, M=0, A=B, and the nonflat map Z/4 to Z/2. None of the four cited nodes' closures reaches the item, so there is no cycle. Nothing touched is on the route-pivot dropped list. Sources are Stacks 0E46 (sites-cohomology.tex:4062) and 0GL1 (:4578), checked against tags/tags; no SGA is cited. The overlap with the lem-sp clause was already recorded with a keep-both note in the Q11 parent reviews; citing the existing node is the right resolution. The three off-unit tool_uses are generic and accepted. The Mathlib searches are real."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.OpenScalarSiteCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.OpenScalarSite.etale_scalar_comp",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.etale_scalar_comp",
+   "AlgebraicGeometry.ProEtale.OpenScalarSite.etale_scalar_id"
+  ],
+  "statement": "theorem etale_scalar_comp {A B : Type (u + 1)} [CommRing A] [CommRing B]\n    [Finite A] [Finite B] (φ : A →+* B) {V U X : Scheme.{u}}\n    (k : V ⟶ U) (j : U ⟶ X) [IsOpenImmersion k] [IsOpenImmersion j]\n    (L : Etale.DerivedCategoryModule A V) :\n    (Etale.scalarExtension φ X).map\n        ((Etale.mapDerivedCategoryOpenImmersionLowerShriekComp\n          (ModuleCat.{u + 1} A) k j).hom.app L) ≫\n      (Etale.openScalarExtension φ j).hom.app\n        ((Etale.openImmersionLowerShriek (ModuleCat.{u + 1} A) k).mapDerivedCategory.obj L) ≫\n      (Etale.openImmersionLowerShriek (ModuleCat.{u + 1} B) j).mapDerivedCategory.map\n        ((Etale.openScalarExtension φ k).hom.app L) ≫\n      (Etale.mapDerivedCategoryOpenImmersionLowerShriekComp\n        (ModuleCat.{u + 1} B) k j).inv.app ((Etale.scalarExtension φ V).obj L) =\n    (Etale.openScalarExtension φ (k ≫ j)).hom.app L",
+  "branch": "newtargets-dag",
+  "by": "Q33",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "The already published ordinary-etale scalar composition and identity clauses of lem-sp-open-scalar-site-coherence state both conclusions for arbitrary unbounded inputs. The composition comparison in that module is oriented from composite to iterated extension, so its inverse is the c_R of this node. Cancelling its components gives precisely the displayed equation. Its openScalarExtension is the K-flat-normalized balancing isomorphism of lem-coef-etale-open-tensor; its inverse has the open-unit transpose of def-pur-open-coefficient-normalizations. No new module or duplicate statement is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-905a58585",
+  "group": "Q33",
+  "result": "pass",
+  "note": "Existing:true attachment to the live Sheaf.Paper.OpenScalarSiteCoherence theorems etale_scalar_comp and etale_scalar_id (owned by lem-sp-open-scalar-site-coherence, Q38 PASS). Only the item's lean field changed versus live; the statement is verbatim in the live file and the record is complete. A/B are finite commutative Type(u+1) rings, schemes arbitrary, ordinary unbounded etale DerivedCategoryModule, L arbitrary; the bounded flat representative belongs only to scalar_site_square and is unused. beta = Etale.openScalarExtension, the q fixed by EtaleOpenTensorComparisons (leftAdjointUniq); its inverse open-unit normalisation is proved live (openScalarExtension_unit, compactScalarOpen_normalization). The compositor mapDerivedCategoryOpenImmersionLowerShriekComp goes composite to iterated, so c_R = .inv. A scratch nt_compile --json probe derived the node-oriented equation from etale_scalar_comp: clean, 49.7 s. The identity clause is etale_scalar_id. Edge cases covered (identity opens, empty U, M=0, unbounded, A=B, non-flat phi, zero ring). Sources 0E46 and 0GL1 verified; not on the dropped list; Worker report and Second reading present. Advisory only: openScalarExtension and the module owner are not stmt_deps."
  }
 }

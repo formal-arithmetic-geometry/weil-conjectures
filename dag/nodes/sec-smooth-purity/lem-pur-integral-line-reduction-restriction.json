@@ -29,7 +29,11 @@
   "def-weil-derived-complete",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-cohomological-support",
-  "def-weil-finite-torsion-constructibility"
+  "def-weil-finite-torsion-constructibility",
+  "def-coefficient-twists-detailed",
+  "def-sf-integral-line-tensor-comparison-constructors",
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-coef-ringed-tensor-hom-model"
  ],
  "proof": [
   {
@@ -344,5 +348,56 @@
   "group": "Q45",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q45-58b0db19c (reviewer sub-agent of L); spot-checked: I read the item's ten steps in full against the statements of all 19 proof deps and 12 stmt deps; the delivery creates no new nodes. Admissibility: the statement and stmt_deps are unchanged. Live and side-live still have the item unsplit, so nothing supersedes it. It is not on the dropped list and has no repair note of its own; the parent's re-split note covers only the parent. No SGA is cited, proof_deps equal the union of the step uses, and a reachability search finds no cycle. Mathematics: Steps 1-2 are elementary basis computations for the signed powers, the dual base-change map φ⊗a↦(x⊗b↦φ̄(x)ab) and evaluation, and they glue under basis change u^{±m}. Step 3 applies the ringed-topoi tensor-pullback node with u=id and R→R_n, and the comparison is compatible with transitions. Step 4: in lem-sfb-dual-tensor-adjunctions, U_Q⊣U_P, so −⊗P preserves products, and derived products are termwise (derived-limit-existence (2)). Step 5 carries the Roos triangle over with exactly the reduction-unit first map c, so no cone-uniqueness argument is needed. Steps 6-7 use the identity-field case of lem-weil-finite-free-completed-scalar-comparison (it explicitly allows L=E and any scheme) to show that the specified zero-shifted-product augmentation into the completed tensor is an isomorphism. Step 8 keeps the same interval of cohomological support, not a Tor bound. Step 9 gets finite constructibility on the same strata from exact constant-coefficient pullback (A_n finite). Step 10 restricts the inverse equivalences through the full subcategory and conjugates by χ. Edge cases checked: m=0,±1, negative m, n=1, X=∅, K=0, unbounded K. Sources: the blueprint's sk-def-sp-tate-twist-locally-free proof (3), last sentence, and Bhatt–Scholze 3.4.10/3.4.12/3.5.1/3.5.2, pp. 22-24. All nine tool_uses are generic black boxes and I accept them. Minor, not faults: the Step 5 balancing map is written out only in Step 6, and the hypothesis that L_n is locally constant is redundant. Maintainer note: the proof is 8883 characters with no new nodes. That may qualify it for a later re-split if the 2026-10-21 length rule is applied to fresh splits, but no rule binds a first split."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.IntegralLineReductionRestriction",
+  "declaration": "WeilConjectures.IntegralLineReduction.integral_line_reduction_restriction",
+  "declarations": [
+   "WeilConjectures.IntegralLineReduction.line",
+   "WeilConjectures.IntegralLineReduction.power",
+   "WeilConjectures.IntegralLineReduction.finitePower",
+   "WeilConjectures.IntegralLineReduction.ordinary",
+   "WeilConjectures.IntegralLineReduction.completed",
+   "WeilConjectures.IntegralLineReduction.comparison",
+   "WeilConjectures.IntegralLineReduction.finiteModel",
+   "WeilConjectures.IntegralLineReduction.finiteOrdinary",
+   "WeilConjectures.IntegralLineReduction.PowerComparisons",
+   "WeilConjectures.IntegralLineReduction.PowerFormula",
+   "WeilConjectures.IntegralLineReduction.FiniteReductions",
+   "WeilConjectures.IntegralLineReduction.reduceComplex",
+   "WeilConjectures.IntegralLineReduction.reduceCounit",
+   "WeilConjectures.IntegralLineReduction.restrictComplex",
+   "WeilConjectures.IntegralLineReduction.finiteTensorComplex",
+   "WeilConjectures.IntegralLineReduction.finiteRepresentativeIso",
+   "WeilConjectures.IntegralLineReduction.ChainFormula",
+   "WeilConjectures.IntegralLineReduction.DerivedComparisons",
+   "WeilConjectures.IntegralLineReduction.Evaluations",
+   "WeilConjectures.IntegralLineReduction.EvaluationFormula",
+   "WeilConjectures.IntegralLineReduction.powerTransition",
+   "WeilConjectures.IntegralLineReduction.TransitionFormula",
+   "WeilConjectures.IntegralLineReduction.DerivedFormula",
+   "WeilConjectures.IntegralLineReduction.DerivedEvaluationFormula",
+   "WeilConjectures.IntegralLineReduction.reverseEvaluation",
+   "WeilConjectures.IntegralLineReduction.OrdinaryRestriction",
+   "WeilConjectures.IntegralLineReduction.PreservesIntegral",
+   "WeilConjectures.IntegralLineReduction.CompletedRestriction",
+   "WeilConjectures.IntegralLineReduction.Restrictions",
+   "WeilConjectures.IntegralLineReduction.integral_line_reduction_restriction"
+  ],
+  "file": "lean/Sheaf/Paper/IntegralLineReductionRestriction.lean",
+  "statement": "theorem integral_line_reduction_restriction (_hl : ∀ x : X, Invertible (l : X.residueField x)) (L : scalarReductionSource.{u, u} l E X) [L.IsFiniteLocallyFreeOfRank 1] (_hfinite : FiniteReductions l E X L) : ∃ (b : PowerComparisons l E X L) (d : DerivedComparisons l E X L) (e : Evaluations l E X L), PowerFormula l E X L b ∧ DerivedFormula l E X L b d ∧ EvaluationFormula l E X L e ∧ (∀ (m : ℤ) (K : D.{u, u} l E X none), IsComplete l E X none K → IsIso ((comparison l E X L m).app K) ∧ IsComplete l E X none ((ordinary l E X L m).obj K)) ∧ (∀ (m : ℤ) (K : D.{u, u} l E X none) (a z : ℤ), (∀ n : ℕ, proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E X n).obj K) ⊆ Set.Icc a z) → ∀ n : ℕ, proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E X n).obj ((ordinary l E X L m).obj K)) ⊆ Set.Icc a z) ∧ Restrictions l E X L e",
+  "branch": "newtargets-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The generic signed powers, derived scalar extension, normalized ordinary tensor, and actual quotient-tower completion comparison are reused. Auxiliary predicates expose the balancing, dual evaluation, strict quotient compatibility, unchanged support intervals, and the ordinary/completed full-subcategory equivalences. The only postponed proof is the main named theorem; no statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ba328140a",
+  "group": "NR",
+  "result": "pass",
+  "note": "Every node clause has its Lean counterpart: signed powers via coefficientTwistLine; PowerFormula pins unit, identity, recursive balancing and the negative dual φ⊗a↦(x⊗b↦φ̄(x)ab); DerivedFormula pins the derived reduction isos on Good K-flat representatives, with a strict transition square fixed on generators; IsIso of the actual integralLineComparison plus completeness for complete K; support clause for all K with the same interval (stronger than the node, true since P_n is flat); PreservesIntegral via the recorded sfIntegralConstructible (finite-torsion constructibility, common interval); ordinary and completed Equivalences whose unit and counit are transports of the pinned evaluations (the free functor isos a, b cannot absorb a twist, so the clause is not hollow). Edge cases m=0,±1, negative m, n=1, empty interval, K=0, unbounded K checked. Same universe for E and X is inherited from sfIntegralConstructible and coefficientTwistLine. The 4 added stmt_deps are existing def nodes owning the used declarations; no new nodes, no dependency modules, statement verbatim. nt_compile --json: two 60 s timeouts at load ~240-250, then clean in 53.9 s at load ~199; lcompile clean (rc 0); delivery recorded 25.6 s. Advisory: finiteModel = Classical.choice of ringedSiteDualityMaps_exists (lem-sfb-ringed-site-duality-maps, not in stmt_deps), the same pattern as the recorded IntegralOnSlice.duality and pinned by K-flat normalization; retry landing at lower load if it times out."
  }
 }

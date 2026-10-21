@@ -228,5 +228,23 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-25a9296d1 (reviewer sub-agent of L); spot-checked: Read the item, all 6 steps and every cited statement (lem-coef-etale-open-tensor, def-pur-open-coefficient-normalizations, lem-cbc-extension-zero-base-change, lem-sf-scalar-pullback-composition, plus the λ sources ringed-topoi tensor-pullback and pur-etale-scalar-mate-projection), Stacks 03S6 (etale-cohomology.tex l.11493, lemma-shriek-base-change) and blueprint main-20261015 cor-pur-vector-bundle-purity proof paragraph 2. The delivery has no new nodes, and statement and stmt_deps are unchanged against live. Step-by-step: I re-derived step 2 by hand (eliminate λ_k, right-multiply by a_{j,h,B}^{-1}, invert) with c=a_{g,j'}a_{j,h}^{-1}; (*) is correct and both sides go S'H_AJ_AN→J'_BG_BQN. Steps 4 and 5 use the unit formulas of step 1 and naturality of η'_B, c_B, λ_h^{-1} at η_{A,M} and λ_{j'}^{-1} at d_{A,M}; every composite is typed and correct. Step 6: (*) at N=L_AM, precomposed with S'H_A(η_{A,M}), equates (1) and (2), and the adjunction bijection gives x=y. The cbc unit formula is degreewise for finite rings and descends because the derived adjunction is degreewise-normalized (stated in the open tensor node). Route: cbc is on the sk-prop-an route; I accept the two tool_uses (open tensor, scalar composition) as generic coherence tools. No cycle: none of the four proof_deps reaches the item. Edge cases: U empty, g=id, non-flat Z/4→Z/2, unbounded and non-quasi-compact. Not duplicates: lem-fix-open-scalar-exchange (pro-étale), coef-etale-open-scalar-coherence, sp-open-scalar-site-coherence, cbc-finite-open-exchange-scalars and sfb-open-scalar-conjugate-normalization each state something else. The item is unsplit in live and side-live, so it is not superseded, and there is no re-split note. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleOpenScalarExchange",
+  "declaration": "AlgebraicGeometry.Etale.etaleOpenScalarExchange",
+  "file": "lean/Sheaf/Paper/EtaleOpenScalarExchange.lean",
+  "statement": "theorem etaleOpenScalarExchange {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {U T T' : Scheme.{u}} (j : U ⟶ T) [IsOpenImmersion j] (g : T' ⟶ T) (M : DerivedCategoryModule A U) : (upperStar (ModuleCat.{u + 1} B) g).mapDerivedCategory.map ((openScalarExtension φ j).hom.app M) ≫ (mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} B) (IsPullback.of_hasPullback g j).flip).inv.app ((scalarExtension φ U).obj M) ≫ (openImmersionLowerShriek (ModuleCat.{u + 1} B) (pullback.fst g j)).mapDerivedCategory.map ((properOpenCoefficientPullbackIso φ (pullback.snd g j)).hom.app M) = (properOpenCoefficientPullbackIso φ g).hom.app ((openImmersionLowerShriek (ModuleCat.{u + 1} A) j).mapDerivedCategory.obj M) ≫ (scalarExtension φ T').map ((mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso (ModuleCat.{u + 1} A) (IsPullback.of_hasPullback g j).flip).inv.app M) ≫ (openScalarExtension φ (pullback.fst g j)).hom.app ((upperStar (ModuleCat.{u + 1} A) (pullback.snd g j)).mapDerivedCategory.obj M)",
+  "branch": "sheaf-dag",
+  "by": "Q35",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4cbd2553f",
+  "group": "Q35",
+  "result": "pass",
+  "note": "Q35 lem-pur-etale-open-scalar-exchange 4cbd2553: only the lean field is added (diffed vs side-live), not dropped, first delivery. Each factor checked against the node: β_j = openScalarExtension (q field of EtaleOpenTensorComparisons), λ = properOpenCoefficientPullbackIso (def-pur-open-coefficient-normalizations), e_R = .inv of mapDerivedCategoryOpenImmersionLowerShriekBaseChangeIso on (IsPullback.of_hasPullback g j).flip (h=snd, j'=fst, direction correct); both composites typed g_B^*Q_T j_!M → j'_!Q_U' h^*M, diagrammatic order matches. The node's β^{-1} open-unit transpose holds for openScalarExtension via compactScalarOpen_normalization (openIso.inv = properOpenCoefficientOpenInverse) and the he/heq transport identifications. No hypotheses beyond the node (Finite A B, arbitrary g, unbounded M); edge cases empty U/T', g=id, zero rings and non-flat φ are fine; no duplicate. nt_compile --json clean in 38.8 s, exit 0. Statement verbatim; source/blueprint docstrings and the six proof steps present; report sections present. Advisory: upperStar and openScalarExtension are owned by non-stmt_dep nodes but are interface types of cited deps; the plain ScalarPullbackComposition import is a stage-3 proof dep."
  }
 }

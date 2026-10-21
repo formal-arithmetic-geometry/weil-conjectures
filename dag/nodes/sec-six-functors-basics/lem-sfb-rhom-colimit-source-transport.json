@@ -14,7 +14,9 @@
   "def-weil-abstract-derived-category",
   "def-pur-derived-internal-hom",
   "def-sfb-internal-hom-strict-models",
-  "def-weil-pbc-category-colimit"
+  "def-weil-pbc-category-colimit",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "def-coef-hom-representative-evaluation"
  ],
  "proof": [
   {
@@ -257,5 +259,29 @@
   "group": "Q32",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q32-4361a8ed8 (reviewer sub-agent of L); spot-checked: I read the item in full; there are no new nodes. The item is an ordinary one-level split of a node created today by Q56's re-split of lem-sfb-rhom-continuity-triangle-closure. The repair note is for that parent only. The item is unsplit on live and side-live, and its statement is byte-identical. The parent uses it only for source-iso invariance and the alpha_{A[n]} ~ alpha_A[-n] conjugation, which are clauses of this statement. Sources checked: sites-cohomology 08JC l.8948 (details omitted, so recorded as agent), 0A95 l.8754 (source quasi-iso with K-injective target quasi-iso gives a quasi-iso of Hom complexes, no source hypothesis), and the 0A8X Hom differential, which matches def-pur-hom-complex. Step 1: cocone map a_L and the precomposition square, tested on injections. Step 2: the homology-preserves-exact-colimits node applies because Mod(O) is Grothendieck with exact filtered colimits, so termwise colimits preserve quasi-isos. Step 3: 0A95 with identity on J(T), then step 2; L->Q(a_L) inverts quasi-isos into Arr(D), so it factors through the localization, and the right endpoint is RHom(-,N_inf) by uniqueness. Step 4 is the naturality square. Step 5 sign checked by hand: the domain differential is d_I f-(-1)^{q+n} f d_L and the target differential is (-1)^n times it; c_q=(-1)^{nq} satisfies c_{q+1}=(-1)^n c_q. Step 6 injection test: s a_{L[n]} iota_i = B_L(u_i)[-n] s_i = a_L[-n] t iota_i, then Q commutes with shifts. Step 7: target naturality and the conjugation formulas. Edge cases checked: n=0, n=+-1, zero source, constant or one-object I, e=id; no boundedness is used. No cycle (BFS over 212 nodes), no SGA, and no duplicate found by DAG rg and blueprint search. The four declared tool_uses are accepted as generic infrastructure: ringed-site Grothendieck, homology/exact colimits, rhom-well-defined, hom-complex-shift-left. Advisory only: the shift-left citation is decorative, and step 2 overlaps the quasi-iso clause of the sibling lem-sfb-rhom-colimit-cohomology-ladder."
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.RHomColimitSourceTransport",
+  "declaration": "CategoryTheory.RingedHomColimitTransport.source_transport",
+  "declarations": [
+   "CategoryTheory.RingedHomColimitTransport.strictColimit",
+   "CategoryTheory.RingedHomColimitTransport.target",
+   "CategoryTheory.RingedHomColimitTransport.source_transport"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/RHomColimitSourceTransport.lean",
+  "statement": "theorem source_transport [IsFiltered I] : ∃ (G : (D.{c, v, r, w} J R)ᵒᵖ ⥤ (I ⥤ Complex.{c, v, r} J R) ⥤ D.{c, v, r, w} J R) (rho : DerivedCategory.Q.op ⋙ G ≅ strictColimit.{c, v, r, w} J R) (alpha : G ⟶ target.{c, v, r, w} J R) (t : ∀ (A : D.{c, v, r, w} J R) (n : ℤ), G.obj (op (A⟦n⟧)) ≅ G.obj (op A) ⋙ shiftFunctor _ (-n)), (∀ (L : Complex.{c, v, r} J R) (N : I ⥤ Complex.{c, v, r} J R), (alpha.app (op (DerivedCategory.Q.obj L))).app N = (rho.hom.app (op L)).app N ≫ DerivedCategory.Q.map (colimit.post N (WeilConjectures.SfbHomFilteredColimit.homFixed.{c, v, r} J R L)) ≫ (WeilConjectures.coefficientHomResolutionIso.{r, c, v, w} J R L (colimit N)).inv) ∧ (∀ (A A' : D.{c, v, r, w} J R) (e : A ≅ A') (N : I ⥤ Complex.{c, v, r} J R), (G.mapIso e.op).hom.app N ≫ (alpha.app (op A)).app N = (alpha.app (op A')).app N ≫ ((target.{c, v, r, w} J R).mapIso e.op).hom.app N) ∧ (∀ (A : D.{c, v, r, w} J R) (n : ℤ) (N : I ⥤ Complex.{c, v, r} J R), (alpha.app (op (A⟦n⟧))).app N ≫ (sourceShift.{c, v, r, w} J R A n).inv.app (DerivedCategory.Q.obj (colimit N)) = (t A n).hom.app N ≫ ((alpha.app (op A)).app N)⟦-n⟧') ∧ (∀ (L : Complex.{c, v, r} J R) (n : ℤ), ∃ sigma : WeilConjectures.SfbHomFilteredColimit.homFixed.{c, v, r} J R (L⟦n⟧) ≅ WeilConjectures.SfbHomFilteredColimit.homFixed.{c, v, r} J R L ⋙ shiftFunctor _ (-n), (∀ M : Complex.{c, v, r} J R, LeftFormula.{c, v, r} J R L ((WeilConjectures.coefficientHomResolution.{r, c, v} J R).obj M) n (sigma.symm.app M)) ∧ ∀ N : I ⥤ Complex.{c, v, r} J R, (rho.inv.app (op (L⟦n⟧))).app N ≫ (G.map ((DerivedCategory.Q.commShiftIso n).inv.app L).op).app N ≫ (t (DerivedCategory.Q.obj L) n).hom.app N = DerivedCategory.Q.map (colim.map (Functor.whiskerLeft N sigma.hom) ≫ (preservesColimitIso (shiftFunctor (Complex.{c, v, r} J R) (-n)) (N ⋙ WeilConjectures.SfbHomFilteredColimit.homFixed.{c, v, r} J R L)).inv) ≫ (DerivedCategory.Q.commShiftIso (-n)).hom.app (colimit (N ⋙ WeilConjectures.SfbHomFilteredColimit.homFixed.{c, v, r} J R L)) ≫ ((rho.inv.app (op L)).app N)⟦-n⟧')",
+  "branch": "sheaf-dag",
+  "by": "Q61",
+  "date": "2026-10-21",
+  "existing": false,
+  "fixed_by": "NT-stage2-cc-0bebd5b9d"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0bebd5b9d",
+  "group": "Q61",
+  "result": "fix",
+  "note": "Delivered module compiles clean (44.8 s); fixed module clean (24.5 s). Clauses 1-3 correct: alpha pinned to Q(colimit.post) with resolution iso; G is unique via the Q.op localization; sourceShift.inv direction and (-1)^{nq} LeftFormula sign checked for n=0,±1. Mechanical theorem-stmt_dep finding: sourceShift = leftShift_existsUnique.exists.choose (an object constructed by lem-weil-pbc-ringed-internal-hom-exact-restriction) → PASS on that point. FIX: the last conjunct pinned t only through Q(colimit.ι i), which is not jointly epi in D (phantom/lim^1 maps), so t was fixed only up to phantoms. Replaced it with the chain-level identity Q.map(colim.map(whiskerLeft N σ.hom) ≫ (preservesColimitIso ⟦-n⟧ _).inv) ≫ Q.commShiftIso(-n) ≫ (rho⁻¹)⟦-n⟧'. This is strictly stronger and implies the delivered equation. Files: fixes/RHomColimitSourceTransport.lean and fixes/lem-sfb-rhom-colimit-source-transport.lean-record.json (statement), accepted by refit_record. Advisory: the source-iso clause is alpha.naturality (the node's own clause); proof-only imports are unused under sorry."
  }
 }
