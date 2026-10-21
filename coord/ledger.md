@@ -22640,3 +22640,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:44 L: merged deliver/Q42/lem-sfb-sheaf-pushforward-generator-comparison (reviewer PASS; after a return; new nodes: 2)
 - 13:44 L: merged deliver/F9/Sheaf.AlgebraicGeometry.CompleteLinearSystemClosed (stage 3; reviewer PASS; first push; landing 20261021T134432-L-1093020 (proof); batch 20261021T134254; modules 1; new nodes 2)
 - 13:44 L: merged deliver/G6/Sheaf.AlgebraicGeometry.CoordinateChartFiniteDimensionWitness (stage 3; reviewer PASS; first push; landing 20261021T134442-L-1133548 (interface); batch 20261021T134254; modules 2; new nodes 1)
+- 13:44 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
