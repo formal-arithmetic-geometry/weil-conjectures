@@ -22,9 +22,124 @@
   "def-weil-frobenius-detailed",
   "def-weil-affine-spectrum"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every scheme $Z$ over $k_0$ has characteristic $p$: the structure morphism gives a unital ring map $k_0\\to\\mathcal O_Z(Z)$, followed by restriction to $\\mathcal O_Z(U)$ for any open $U$, and these maps send $p\\cdot1=0$ to $p\\cdot1=0$. This applies to $T_0,T$, to $\\operatorname{Spec}k_0,\\operatorname{Spec}k$, and later to $X_0,Y_0,X,Y$. Thus all absolute Frobenii used below are defined, including when a scheme is empty.",
+   "uses": [
+    "def-weil-scheme-over-base",
+    "def-weil-affine-spectrum",
+    "def-weil-locally-ringed-space-morphism",
+    "def-weil-scheme-characteristic-p"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 03SM, definition-absolute-frobenius, characteristic-p hypothesis; inherited along the structure morphism"
+   }
+  },
+  {
+   "text": "For any morphism $h:Z\\to W$ between these characteristic-$p$ schemes, the absolute $q$-power Frobenii satisfy $hF_Z^{(q)}=F_W^{(q)}h$. Indeed both composites have underlying continuous map $h$, and for every open $V\\subseteq W$ and $s\\in\\mathcal O_W(V)$ their maps on sections are $(h^\\sharp_V(s))^q$ and $h^\\sharp_V(s^q)$, which agree since $h^\\sharp_V$ is a ring homomorphism. Equality of both components gives equality as scheme morphisms. This is the full sectionwise proof of the iterated form of Stacks Tag 0CC7, not an appeal to an uncited naturality theorem.",
+   "uses": [
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-locally-ringed-space-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tag 0CC7, lemma-frobenius-endomorphism-identity, proof; same ring-homomorphism calculation with exponent q"
+   }
+  },
+  {
+   "text": "Write $t_0:T_0\\to\\operatorname{Spec}k_0$ for the structure morphism. By [lem-weil-finite-field-pow-card], $c^q=c$ for every $c\\in k_0$. The affine description of absolute Frobenius and functoriality of $\\operatorname{Spec}$ therefore give $F_{\\operatorname{Spec}k_0}^{(q)}=\\operatorname{id}$. Step 2 applied to $t_0$ gives $t_0F_0=t_0$, so $F_0$ is over $k_0$. On $\\operatorname{Spec}k$, the same affine description gives $F_{\\operatorname{Spec}k}^{(q)}=\\operatorname{Spec}(\\sigma)$, since $\\sigma(z)=z^q$. Applying Step 2 to $\\pi$ and $\\rho$ gives $\\pi F=F_0\\pi$ and $\\rho F=\\operatorname{Spec}(\\sigma)\\rho$.",
+   "uses": [
+    "lem-weil-finite-field-pow-card",
+    "def-weil-absolute-frobenius-scheme",
+    "def-weil-affine-spectrum",
+    "def-weil-frobenius-substitution",
+    "def-weil-scheme-over-base"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/varieties.tex",
+    "place": "Tags 03SM and 0CC7, definition-absolute-frobenius and lemma-frobenius-endomorphism-identity; finite-field identity from the cited Mathlib leaf"
+   }
+  },
+  {
+   "text": "Since $F_0$ is over $k_0$, the induced map of fibre products $\\Phi=F_0\\times\\operatorname{id}_k$ exists and satisfies $\\pi\\Phi=F_0\\pi$, $\\rho\\Phi=\\rho$. The automorphisms $\\sigma,\\gamma$ fix $k_0$ by [def-weil-frobenius-substitution], so both $\\operatorname{Spec}(\\epsilon)$ are morphisms over $\\operatorname{Spec}k_0$. The induced maps $g_\\epsilon=\\operatorname{id}_{T_0}\\times\\operatorname{Spec}(\\epsilon)$ consequently satisfy $\\pi g_\\epsilon=\\pi$ and $\\rho g_\\epsilon=\\operatorname{Spec}(\\epsilon)\\rho$ for $\\epsilon=\\sigma,\\gamma$. These are exactly the defining projection equations of the induced maps, with no finiteness or separation assumption.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product",
+    "def-weil-frobenius-substitution",
+    "def-weil-affine-spectrum"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP, definition-fibre-product; induced maps characterized by the universal property"
+   }
+  },
+  {
+   "text": "Use the projection equations of Steps 3 and 4. Both $g_\\sigma\\Phi$ and $\\Phi g_\\sigma$ have first projection $F_0\\pi$ and second projection $\\operatorname{Spec}(\\sigma)\\rho$: for example, $\\pi\\Phi g_\\sigma=F_0\\pi g_\\sigma=F_0\\pi$ and $\\rho g_\\sigma\\Phi=\\operatorname{Spec}(\\sigma)\\rho\\Phi=\\operatorname{Spec}(\\sigma)\\rho$. The other two equations follow by the same substitutions, namely $\\pi g_\\sigma\\Phi=\\pi\\Phi=F_0\\pi$ and $\\rho\\Phi g_\\sigma=\\rho g_\\sigma=\\operatorname{Spec}(\\sigma)\\rho$. These are the two projections of $F$. Uniqueness in the fibre-product universal property yields $F=g_\\sigma\\Phi=\\Phi g_\\sigma$.",
+   "uses": [
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
+    "place": "absolute-Frobenius factorization display; verification using Tag 01JP projection uniqueness"
+   }
+  },
+  {
+   "text": "The maps $g_\\sigma g_\\gamma$ and $g_\\gamma g_\\sigma$ both have first projection $\\pi$. Their second projections are respectively $\\operatorname{Spec}(\\sigma)\\operatorname{Spec}(\\gamma)\\rho=\\operatorname{Spec}(\\gamma\\sigma)\\rho=\\rho$ and $\\operatorname{Spec}(\\gamma)\\operatorname{Spec}(\\sigma)\\rho=\\operatorname{Spec}(\\sigma\\gamma)\\rho=\\rho$, because $\\gamma=\\sigma^{-1}$ and $\\operatorname{Spec}$ is contravariantly functorial. Fibre-product uniqueness gives $g_\\sigma g_\\gamma=g_\\gamma g_\\sigma=\\operatorname{id}_T$.",
+   "uses": [
+    "def-pc-fibre-product",
+    "def-weil-affine-spectrum",
+    "def-weil-frobenius-substitution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01JP, definition-fibre-product; uniqueness applied to the inverse composites"
+   }
+  },
+  {
+   "text": "Associativity and Steps 5 and 6 give $g_\\gamma F=g_\\gamma(g_\\sigma\\Phi)=(g_\\gamma g_\\sigma)\\Phi=\\Phi$ and $Fg_\\gamma=(\\Phi g_\\sigma)g_\\gamma=\\Phi(g_\\sigma g_\\gamma)=\\Phi$. This proves both geometric cancellation identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
+    "place": "geometric-Galois inverse convention and absolute-Frobenius factorization paragraph"
+   }
+  },
+  {
+   "text": "Let $f_0:X_0\\to Y_0$ be any $k_0$-morphism and let $f:X\\to Y$ be its base change, with projections $\\pi_X,\\rho_X,\\pi_Y,\\rho_Y$. By the defining projection equations of base change, $\\pi_Yf=f_0\\pi_X$ and $\\rho_Yf=\\rho_X$. Step 2 gives $f_0F_{X_0}^{(q)}=F_{Y_0}^{(q)}f_0$. Thus $\\pi_Yf\\Phi_X=f_0F_{X_0}^{(q)}\\pi_X=F_{Y_0}^{(q)}f_0\\pi_X=\\pi_Y\\Phi_Yf$, while $\\rho_Yf\\Phi_X=\\rho_X\\Phi_X=\\rho_X=\\rho_Y\\Phi_Yf$. Fibre-product uniqueness gives $f\\Phi_X=\\Phi_Yf$. Finally Step 2 applied directly to $f$ gives $fF_X^{(q)}=F_Y^{(q)}f$. All the comparisons concern scheme morphisms; $F$ and $g_\\epsilon$ need not be $k$-morphisms.",
+   "uses": [
+    "def-pc-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
+    "place": "second commuting square; naturality by Tag 0CC7 and the induced fibre-product map"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-scheme-over-base",
+  "def-weil-affine-spectrum",
+  "def-weil-locally-ringed-space-morphism",
+  "def-weil-scheme-characteristic-p",
+  "def-weil-absolute-frobenius-scheme",
+  "lem-weil-finite-field-pow-card",
+  "def-weil-frobenius-substitution",
+  "def-pc-base-change",
+  "def-pc-fibre-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-def-sf-weil-complexes/def-pur-scheme-geometric-frobenius.md",
+  "place": "absolute-Frobenius factorization paragraph and second commuting square, expanded by Stacks Tags 03SM, 0CC7 and 01JP"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -67,10 +182,45 @@
    "results": "Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/GaloisField.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Basic.lean, Mathlib/FieldTheory/Finite/Trace.lean; directory Mathlib/FieldTheory/Finite",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"frobenius\", \"comp\"",
+   "results": "coe_frobeniusEquiv_symm_comp_coe_frobenius, coe_frobenius_comp_coe_frobeniusEquiv_symm, frobeniusEquiv_symm_comp_frobenius, frobenius_comp_frobeniusEquiv_symm, CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso, CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso, Coalgebra.IsFrobenius.nondegenerate_compr₂_mul_counit, Coalgebra.IsFrobenius.left_eq_comul_comp_mul'",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Absolute Frobenius on a scalar extension of an arbitrary scheme over a finite field equals model Frobenius composed with arithmetic coefficient Frobenius",
+   "results": "WittVector.StandardOneDimIsocrystal.frobenius_apply, coe_frobeniusEquiv, frobeniusEquiv_apply, IsPurelyInseparable.iterateFrobeniusₛₗ, WittVector.frobenius_eq_map_frobenius, RingHom.map_frobenius, RingHom.frobenius_comm, FiniteField.frobeniusAlgEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius|geometricFrobenius|iterateFrobenius",
+   "results": "No hits; directory Mathlib/AlgebraicGeometry",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Absolute Frobenius on a scheme over a finite field base changed to its algebraic closure factors as model Frobenius and coefficient Frobenius",
+   "results": "FiniteField.Extension.frob, LinearMap.frobenius, FiniteField.frobeniusAlgHom_apply, FiniteField.frobeniusAlgEquivOfAlgebraic_apply, FiniteField.frobeniusAlgEquivOfAlgebraic, FiniteField.coe_frobeniusAlgEquivOfAlgebraic, PerfectClosure.frobenius_mk, FiniteField.frobeniusAlgHom",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius naturality for scheme morphisms and uniqueness of maps into a scheme pullback from their two projections",
+   "results": "AlgebraicGeometry.Scheme.Pullback.Triplet.Spec_map_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.Triplet.SpecMap_tensorInl_fromSpecResidueField, AlgebraicGeometry.Scheme.Pullback.carrierEquiv_eq_iff, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo_assoc, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst_assoc, AlgebraicGeometry.Scheme.Pullback.ofPointTensor_SpecTensorTo, AlgebraicGeometry.Scheme.Pullback.Triplet.specTensorTo_fst, AlgebraicGeometry.pullbackSpecIso_hom_fst'_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "def-pur-scheme-geometric-frobenius",
@@ -87,5 +237,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-unrestricted-frobenius-factorization",
+  "worker": "stage1",
+  "summary": "Q61 proves the unrestricted identities by a sectionwise naturality calculation, the existing finite-field power identity, and uniqueness of maps into the fibre product. Both orders of arithmetic factorization, both inverse composites, both geometric cancellations and both naturality assertions are checked. No new nodes and no statement change.",
+  "blueprint": "Realizes the absolute-Frobenius factorization paragraph and second commuting square of def-pur-scheme-geometric-frobenius (main-20261015, order 2579), used in its current split step 2. The source display is verified for arbitrary models, without applying finite-type-only definitions or prop-trf-frobenius-factorization outside their hypotheses."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q61-c040a6a38",
+  "group": "Q61",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-c040a6a38 (reviewer sub-agent of L); spot-checked: I read all eight steps and recomputed them. The statement and stmt_deps are byte-identical to side-live. There are no new nodes and no SGA, and the item is not in the dropped list or under a re-split note. Live still has it unsplit, so it is not superseded. Every citation is a definition or a Mathlib leaf (lem-weil-finite-field-pow-card), so there is no route issue and no tool_uses are needed. Source checks: the main-20261015 def-pur-scheme-geometric-frobenius display Fr=g_sigma Phi=Phi g_sigma, with g_gamma=g_sigma^-1, matches the item's convention. Stacks 0CC7 (varieties.tex lemma-frobenius-endomorphism-identity) is written out sectionwise in step 2 for exponent q. Parent step 2 takes exactly the factorizations and naturality square this item states. I recomputed: char p via the structure map (step 1); t0F0=t0 from c^q=c and the affine description (step 3); the hypotheses of the induced-morphism clause for Phi and for g_eps (eps fixes k0, step 4); all four projections of g_sigma Phi and Phi g_sigma (step 5); Spec(sigma)Spec(gamma)=Spec(gamma sigma)=id by contravariance (step 6); cancellation (step 7); and both projections of f Phi_X versus Phi_Y f (step 8). No finite-type or separatedness assumption is used, and the finite-type-only prop-trf-frobenius-factorization and relative-Frobenius definition are not applied. Edge cases tested: empty T0; Spec k0 (Phi=id, F=g_sigma); F_q[e]/e^2 (Phi not invertible, never claimed); infinite type. Duplicate check: prop-trf-frobenius-factorization is a finite-type special case, lem-weil-frobenius-square-cartesian only overlaps the elementary step 6, and lem-weil-absolute-frobenius-well-defined does not state naturality or the factorization. No changes."
  }
 }
