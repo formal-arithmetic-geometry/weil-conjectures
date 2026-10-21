@@ -31,58 +31,166 @@
  ],
  "proof": [
   {
-   "text": "For each finite coefficient field $E$ put $R=\\mathcal O_E$. Finite-type $k$-schemes $X,W$ are Noetherian and finite-dimensional by [lem-weil-pbc-finite-type-over-noetherian] and [lem-fin-finite-type-fibre-dimension-bound], applied over the one-point Noetherian scheme $\\operatorname{Spec}k$; $\\ell$ is invertible since $\\ell\\ne p$. Apply [lem-a1-integral-stratum-chart-restrictions] to any integral $K$: it supplies exact chart restrictions, perfect scalar models, the base-changed restriction square, and the $R$-linear exact constructible pullback.",
+   "text": "Put $R=\\mathcal O_E$, $\\pi=\\varpi_E$, $A_n=R/\\pi^n$, and $B_T=\\varprojlim_n(A_n)_T$. First work integrally. The schemes $X,W$ are Noetherian and finite-dimensional: apply [lem-weil-pbc-finite-type-over-noetherian] and [lem-fin-finite-type-fibre-dimension-bound] to their structure maps to $\\operatorname{Spec}k$, whose one-point space is quasi-compact and whose field coordinate ring is Noetherian. Also $\\ell$ is invertible since $\\ell\\ne p$. Thus [lem-weil-pbc-integral-stratified-perfect-characterization] applies to exactly the integral category used here, including its uniform reduction bounds. For $K\\in D^b_c(X,R)$, [lem-pur-integral-operations-preserve-constructible](1) ensures $Lh^*K\\in D^b_c(W,R)$ with the specified finite reductions. We will prove that any cohomological interval $[a,b]$ for $K$ is also an interval for $Lh^*K$.",
    "uses": [
     "lem-weil-pbc-finite-type-over-noetherian",
     "lem-fin-finite-type-fibre-dimension-bound",
-    "lem-a1-integral-stratum-chart-restrictions"
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-pur-integral-operations-preserve-constructible"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Assembly of the four extracted subarguments; returned proof Steps 1-11; Definition 6.8.10 and Proposition 6.8.11(3) (constructible $\\mathcal O_E$-complexes are the bounded ones with constructible cohomology sheaves, locally $\\Lambda\\otimes_{\\mathcal O_E}\\mathcal O_{E,X}$ on strata), Remark 6.8.15 ($f^*K=f^*_{\\mathrm{naive}}K\\otimes_{f^*_{\\mathrm{naive}}\\Lambda_X}\\Lambda_Y$), and Proposition 6.8.14(2) for rationalization; the t-exactness is the agent's reading of these places."
+    "place": "Proposition 6.6.11; Proposition 6.8.11(3); Lemma 6.5.9(5)"
    }
   },
   {
-   "text": "Choose $[a,b]$ outside which $\\mathcal H^jK=0$. On each input chart the scalar model has this bound by Step 1. By [lem-a1-completed-perfect-scalar-pullback] its pullback has the same bound; the square in Step 1 identifies it with the output chart restriction. Exact restriction commutes with cohomology, so [lem-weil-pbc-noetherian-stratum-detection] on $W$ gives $\\mathcal H^j(Lh^*K)=0$ outside $[a,b]$. Taking $b=0$ or $a=0$ proves preservation of the integral halves [def-weil-constructible-standard-tstructure].",
+   "text": "Choose the finite constructible locally closed stratification $i_\\alpha:S_\\alpha\\to X$ and pro-etale covers $v_{\\alpha t}:V_{\\alpha t}\\to S_\\alpha$ in [lem-weil-pbc-integral-stratified-perfect-characterization](ii). Write $K|_{V_{\\alpha t}}\\cong B_{V_{\\alpha t}}\\otimes_R P_{\\alpha t}^\\bullet$, with $P^\\bullet$ bounded finite projective. Restrictions here are ordinary exact inverse images, and they agree with the item's integral pullback. By [lem-a1-integral-pullback-completed-comparison] the integral pullback of [def-weil-derived-pullback-tensor-hom] along any morphism is naturally isomorphic to the strict-tower completed pullback, compatibly with the finite reductions; for immersions [lem-sf-immersion-completed-pullback-comparison] identifies the latter with the exact ordinary inverse image. For $v_{\\alpha t}$, [lem-weil-proetale-weakly-etale-localization] identifies $V_{\\alpha t,\\mathrm{proet}}$ with the localized site and [lem-sfb-proetale-object-inverse-image-restriction](3) identifies the module inverse image $v_{\\alpha t}^*$ with restriction to it, which is exact by [lem-weil-pbc-site-restriction-exact]. Restriction evaluates a sheaf on the same objects, so it preserves the sectionwise products of [lem-weil-proetale-countable-products-exact] and the inverse limit defining $B$. Applying it to both coordinates of the Roos cone in [lem-sf-strict-roos-derived-limit-comparison] therefore also commutes with completed pullback. In particular these restrictions commute with cohomology by [lem-weil-pbc-exact-functor-complex-cohomology]; hence $K|_{V_{\\alpha t}}$ still has cohomology only in $[a,b]$.",
    "uses": [
-    "lem-a1-completed-perfect-scalar-pullback",
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-sf-immersion-completed-pullback-comparison",
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-weil-pbc-site-restriction-exact",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-sf-strict-roos-derived-limit-comparison",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-a1-integral-pullback-completed-comparison",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11; Lemma 6.5.8 and Remark 6.5.10; replete inverse-limit model of §3.1"
+   }
+  },
+  {
+   "text": "Here is the scalar-model calculation needed for these chosen $P^\\bullet$. Its completed-coefficient representative is bounded and termwise projective, hence K-flat by [lem-pc-bounded-above-flat-kflat-site]. For a morphism $g:V'\\to V$, the reduction of $B_V\\otimes_RP^\\bullet$ is $(A_n)_V\\otimes_RP^\\bullet$ by [lem-weil-pbc-completed-constant-sheaf-reduction]. Its finite pullback is $(A_n)_{V'}\\otimes_RP^\\bullet$: the constant-section comparison of [prop-weil-pbc-proetale-constant-ring-map] preserves each scalar matrix, and the finite module pullback is exact by [prop-weil-pbc-proetale-constant-exact]. Consequently the defining reduction-tower formula in [def-weil-derived-pullback-tensor-hom] gives\n$$Lg^*(B_V\\otimes_RP^\\bullet)\\cong R\\varprojlim_n((A_n)_{V'}\\otimes_RP^\\bullet)\\cong B_{V'}\\otimes_RP^\\bullet.$$\nFor the last equality, each projective term is a summand of a finite free module. The tower of that term has epimorphic transitions, so [det-pe-milnor-epimorphic] computes its derived limit as its ordinary limit. Finite sums and projectors commute with the limit, and the exact functor $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit] commutes with the finitely many cones constructing the bounded complex. Thus the same differential matrices occur after the limit. All maps used are the constant-section and quotient maps, so this calculation respects their transitions.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-derived-pullback-tensor-hom",
+    "det-pe-milnor-epimorphic",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.5.9(4)-(5), finite perfect scalar models; Lemma 6.5.8; §3.1; Stacks Tag 093M (sites-modules.tex, lemma-completion-flat)"
+   }
+  },
+  {
+   "text": "Base change the chosen strata and covers to $W$. By [lemma-constructible-pullback-stratification], $S'_\\alpha=W\\times_XS_\\alpha\\to W$ is a finite stratification; its strata are constructible by [lem-pur-scheme-constructible-preimage]. The base changes $V'_{\\alpha t}=W\\times_XV_{\\alpha t}\\to S'_\\alpha$ cover in the pro-etale topology, by its base-change-stable covering definition [def-weil-pbc-proetale-site]. Let $g_{\\alpha t}:V'_{\\alpha t}\\to V_{\\alpha t}$ be the projection. The two factorizations of $V'_{\\alpha t}\\to X$, together with the composition comparison [lem-pod-integral-pullback-composition], identify\n$$(Lh^*K)|_{V'_{\\alpha t}}\\cong Lg_{\\alpha t}^*(K|_{V_{\\alpha t}})\\cong B_{V'_{\\alpha t}}\\otimes_RP_{\\alpha t}^\\bullet.$$\nThe first isomorphism uses the exact immersion and site restrictions just established in Step 2; the second is Step 3. Empty base-changed strata contribute no condition. This uses actual fibre-product strata and their projection morphisms.",
+   "uses": [
+    "lemma-constructible-pullback-stratification",
+    "lem-pur-scheme-constructible-preimage",
+    "def-weil-pbc-proetale-site",
+    "lem-pod-integral-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.6.11, pullback of its stratified models; Lemma 6.5.9"
+   }
+  },
+  {
+   "text": "Fix one of the models in Step 4, abbreviating it by $P^\\bullet$ on $V$, and put $N^j=H^j(P^\\bullet)$. The constant-sheaf functor $M\\mapsto\\underline M$ is exact, since it is sectionwise exact by [lem-weil-pbc-constant-module-section-properties](1), so $H^j(\\underline{P^\\bullet})=\\underline{N^j}$; tensoring with $B_T$ is exact by flatness of $B_T$ over the constant ring $R$ in [lem-weil-pbc-completed-constant-sheaf-reduction]. Applying [lem-weil-pbc-exact-functor-complex-cohomology] to these two exact functors gives\n$$H^j(B_T\\otimes_RP^\\bullet)=B_T\\otimes_R\\underline{N^j}_T\\quad(T=V,V').$$\nFor $j\\notin[a,b]$ the expression at $V$ is zero by Step 2. Its underived ringed pullback along $g:V'\\to V$ is $B_{V'}\\otimes_R\\underline{N^j}_{V'}$: on balanced tensors the identification is $b'\\otimes(b\\otimes n)\\mapsto b'g^\\sharp(b)\\otimes n$, with inverse $b'\\otimes n\\mapsto b'\\otimes(1\\otimes n)$. Constant sheaves pull back to the same constant module; this follows by applying the constant functor and inverse image to a presentation, both being left adjoints, or directly from their constant-section universal property [def-weil-pbc-constant-sheaf, def-weil-proetale-inverse-image]. Underived pullback sends the zero module to zero. Therefore the expression at $V'$ is zero as well. This only uses scalar flatness over $R$, and does not require flatness of $B_{V'}$ over $g^{-1}B_V$.",
+   "uses": [
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-constant-module-section-properties"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.11(3), finite scalar models; Stacks Tag 093M, lemma-completion-flat"
+   }
+  },
+  {
+   "text": "The exact restrictions to $S'_\\alpha$ and $V'_{\\alpha t}$ commute with cohomology as in Step 2. For $j\\notin[a,b]$, Steps 4-5 show that every such restriction of $\\mathcal H^j(Lh^*K)$ vanishes. Apply [lem-weil-pbc-noetherian-stratum-detection] on the Noetherian scheme $W$ to its underlying abelian sheaf: $\\mathcal H^j(Lh^*K)=0$. Thus integral pullback preserves every cohomological interval $[a,b]$. In particular if $K$ is in the integral nonpositive half, choose a lower bound $a$ and take $b=0$; if it is in the nonnegative half choose an upper bound $b$ and take $a=0$. The integral standard classes in [def-weil-constructible-standard-tstructure] are therefore preserved. No restriction is imposed on the geometric fibres of $h$.",
+   "uses": [
     "lem-weil-pbc-noetherian-stratum-detection",
     "def-weil-constructible-standard-tstructure"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Assembly of the four extracted subarguments; returned proof Steps 1-11; Definition 6.8.10 and Proposition 6.8.11(3) (constructible $\\mathcal O_E$-complexes are the bounded ones with constructible cohomology sheaves, locally $\\Lambda\\otimes_{\\mathcal O_E}\\mathcal O_{E,X}$ on strata), Remark 6.8.15 ($f^*K=f^*_{\\mathrm{naive}}K\\otimes_{f^*_{\\mathrm{naive}}\\Lambda_X}\\Lambda_Y$), and Proposition 6.8.14(2) for rationalization; the t-exactness is the agent's reading of these places."
+    "place": "Proposition 6.6.11 and Proposition 6.8.11(3), detection on a finite stratification"
    }
   },
   {
-   "text": "Apply [lem-a1-texact-coefficient-stage-descent] to these integral pullbacks for all finite $E$. The integral bounded t-structures are [prop-weil-pbc-integral-tstructure]; coefficient transitions are exact by [lem-weil-scalar-extension-exact-triangulated], with the associators of [def-weil-algebraically-closed-coefficients]. The rational and common-stage halves are precisely the isomorphism closures in [def-weil-constructible-standard-tstructure]; [prop-constructible-truncations] supplies their bounded t-structures and scalar-compatible truncation maps. The comparisons of [lem-pur-integral-operations-scalar-extension] give the required identity and tower coherence; their termwise scalar maps commute with shifts on every reduction tower. The resulting functors are those of [def-weil-derived-pullback-tensor-hom]. Hence they are t-exact, exact on hearts, and have the stated canonical cohomology comparisons, commuting with finite coefficient extension.",
+   "text": "Pass to $E$. Integral pullback is $R$-linear by its termwise scalar action. By [lem-a1-integral-pullback-completed-comparison] it is naturally isomorphic on derived complete objects, in particular on $D^b_c$, to the strict-tower completed pullback, which preserves shifts and distinguished triangles of complete objects by [lem-cbc-completed-pullback-triangles]; transporting that shift comparison along the natural isomorphism, the integral pullback is exact on $D^b_c(X,R)\\to D^b_c(W,R)$. Its extension on fractions is precisely the rational pullback of [def-weil-derived-pullback-tensor-hom]; [lem-pur-semilinear-scalar-localization] shows it is again exact. An object in either rational standard half is, by [def-weil-constructible-standard-tstructure], isomorphic after rationalization to an integral object in that half. Applying $Lh^*$ to this isomorphism and using Step 6 puts its image in the same rational half. This proves both required inclusions for $E$. The argument uses the isomorphism closures in the definition, and does not infer an integral bound from an arbitrary rational representative.",
    "uses": [
-    "lem-a1-texact-coefficient-stage-descent",
-    "prop-weil-pbc-integral-tstructure",
-    "lem-weil-scalar-extension-exact-triangulated",
-    "def-weil-algebraically-closed-coefficients",
+    "lem-cbc-completed-pullback-triangles",
+    "lem-pur-semilinear-scalar-localization",
+    "def-weil-derived-pullback-tensor-hom",
     "def-weil-constructible-standard-tstructure",
-    "prop-constructible-truncations",
-    "lem-pur-integral-operations-scalar-extension",
-    "def-weil-derived-pullback-tensor-hom"
+    "lem-a1-integral-pullback-completed-comparison"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Assembly of the four extracted subarguments; returned proof Steps 1-11; Definition 6.8.10 and Proposition 6.8.11(3) (constructible $\\mathcal O_E$-complexes are the bounded ones with constructible cohomology sheaves, locally $\\Lambda\\otimes_{\\mathcal O_E}\\mathcal O_{E,X}$ on strata), Remark 6.8.15 ($f^*K=f^*_{\\mathrm{naive}}K\\otimes_{f^*_{\\mathrm{naive}}\\Lambda_X}\\Lambda_Y$), and Proposition 6.8.14(2) for rationalization; the t-exactness is the agent's reading of these places."
+    "place": "Proposition 6.8.14(2); Remark 6.8.15"
    }
   },
   {
-   "text": "Apply Step 3 to $\\bar x:s\\to X$, also a morphism between finite-type $k$-schemes. Compose its cohomology comparison with [lem-a1-point-realization-standard-cohomology] to obtain $\\operatorname{Fib}_s(L\\bar x^*\\mathcal H^jK)\\cong H^j(\\operatorname{Fib}_s(L\\bar x^*K))$. A heart object pulls back to the point heart, whose realization is concentrated in degree zero by that lemma. Its scalar-cohomology squares together with Step 3 show that all these maps at $\\Qlb$ are the scalar extensions of the maps at a common finite field.",
+   "text": "At $\\Qlb$, use the objects $(F,M)$ and common-stage morphisms of [def-weil-algebraically-closed-coefficients]. Pullback sends this object to $(F,Lh_F^*M)$, and acts on arrows by the scalar-extension comparison specified in [def-weil-derived-pullback-tensor-hom]. An object of either standard half is isomorphic to such a pair with $M$ in that half at a finite field $F$, by [def-weil-constructible-standard-tstructure]. Step 7, applied to $F$, sends it into the required half. The functor is exact: a distinguished triangle has a representative at one common finite field, and its image there is distinguished by Step 7, hence also in the pair category. This proves t-exactness at $\\Qlb$.",
    "uses": [
-    "lem-a1-point-realization-standard-cohomology"
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom",
+    "def-weil-constructible-standard-tstructure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14 and the common-stage convention; Remark 6.8.15"
+   }
+  },
+  {
+   "text": "By [prop-constructible-truncations], both standard pairs are bounded t-structures. Steps 7-8 and shift compatibility give preservation of both halves at every integer. Apply [lem-pod-texact-truncation-comparison] to the exact functor $Lh^*$. Its unique comparisons commute with the canonical truncation maps, hence their composite and the shift comparison give the stated natural isomorphism $\\mathcal H^j(Lh^*K)\\cong Lh^*\\mathcal H^j(K)$. T-exactness also sends the intersection of the two halves into their intersection, the hearts of [def-weil-constructible-heart]. A short exact heart sequence gives a distinguished triangle by [lem-weil-heart-short-exact-triangles](4); its image is a distinguished triangle with all vertices in the target heart, hence is a short exact sequence by the same clause. The heart functor is therefore exact.",
+   "uses": [
+    "prop-constructible-truncations",
+    "lem-pod-texact-truncation-comparison",
+    "def-weil-constructible-heart",
+    "lem-weil-heart-short-exact-triangles"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Assembly of the four extracted subarguments; returned proof Steps 1-11; Definition 6.8.10 and Proposition 6.8.11(3) (constructible $\\mathcal O_E$-complexes are the bounded ones with constructible cohomology sheaves, locally $\\Lambda\\otimes_{\\mathcal O_E}\\mathcal O_{E,X}$ on strata), Remark 6.8.15 ($f^*K=f^*_{\\mathrm{naive}}K\\otimes_{f^*_{\\mathrm{naive}}\\Lambda_X}\\Lambda_Y$), and Proposition 6.8.14(2) for rationalization; the t-exactness is the agent's reading of these places."
+    "place": "Proposition 6.8.11 and Proposition 6.8.14; BBD 1.3.3-1.3.6 for the generic truncation/heart argument"
+   }
+  },
+  {
+   "text": "These comparisons respect finite coefficient extension. Indeed [lem-pur-integral-operations-scalar-extension] supplies the natural pullback comparison and its tower compatibility, while [prop-constructible-truncations] gives the corresponding compatibility of truncations and their natural maps. The natural-transformation and composition assertions of [lem-pod-texact-truncation-comparison] imply that the two truncation comparisons obtained by extending the field satisfy the same characterizing equations and coincide. The same holds for their composite defining $\\mathcal H^j$. Thus every map and equality at $\\Qlb$ is represented at a common finite field and is unchanged upon further extension. No compatibility of arbitrarily chosen splittings is needed.",
+   "uses": [
+    "lem-pur-integral-operations-scalar-extension",
+    "prop-constructible-truncations",
+    "lem-pod-texact-truncation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 6.8.14; common-stage functor convention; uniqueness of truncation comparisons"
+   }
+  },
+  {
+   "text": "Finally let $\\bar x:s=\\operatorname{Spec}k\\to X$ be as in the statement. This is a morphism between finite-type $k$-schemes, so apply Step 9 to it. Sections on $s_{\\mathrm{proet}}$ are exact and commute with cohomology by [lem-weil-point-proetale-sections-exact]. The functor $\\operatorname{Fib}_s$ is, at $E$, exactly sections followed by tensor with $E$ as in [def-weil-finite-coefficient-point]. Tensor with $E=R[1/\\pi]$ is exact by [lem-weil-pbc-localization-module-exact], so [lem-weil-pbc-exact-functor-complex-cohomology] identifies its cohomology with the fibre of the integral cohomology, and the same remains true after rationalization: [prop-weil-localized-tstructure] identifies rational truncations with localized integral truncations. Combining this with the pullback/cohomology comparison gives\n$$\\operatorname{Fib}_s(L\\bar x^*\\mathcal H^jK)\\cong H^j(\\operatorname{Fib}_s(L\\bar x^*K)).$$\nIf $K=\\mathcal F$ is in the heart, $L\\bar x^*\\mathcal F$ is in the point heart and the same exact functors put its fibre in degree zero. At $\\Qlb$ apply this at a common finite field; [lem-weil-point-sections-scalar-extension] provides the fibre scalar comparisons with their identity and composition compatibility. Together with Step 10 these give exactly the final scalar-extension clause. Implementation: first construct the scalar-compatible pullback and point-evaluation packages by the preceding argument. The theorem constructible_pullback_t_exact extracts the finite-stage witness at E and the common-stage witness from constructible_pullback_scalar_compatibility. For constructible_pullback_point_fibre, extract the pullback comparisons at x directly from constructible_pullback_scalar_compatibility and reuse the point-evaluation comparison data in constructible_point_scalar_compatibility. Whisker the pullback cohomology isomorphism by point evaluation and compose with the point-evaluation cohomology isomorphism; the functor associators give a natural isomorphism whose component is exactly the specified composite. The two heart-factorization equalities identify the evaluated pullback of a heart object with the underlying object of the composite heart functor. It is therefore in both standard degree-zero halves in the derived category of modules. For j<0 use DerivedCategory.isZero_of_isGE, and for j>0 use DerivedCategory.isZero_of_isLE. These two cases exhaust j≠0. No additional statement or hypothesis is introduced.",
+   "uses": [
+    "lem-weil-point-proetale-sections-exact",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-pbc-localization-module-exact",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-point-sections-scalar-extension",
+    "prop-weil-localized-tstructure"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 6.5.2; exact point evaluation on the replete pro-etale topos; Proposition 6.8.14"
    }
   }
  ],
@@ -105,7 +213,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Short assembly of integral exact restriction charts, the completed perfect scalar-model calculation, t-exact coefficient-family descent, and exact point realization; source route unchanged."
+  "place": "Lemmas 6.5.8-6.5.9, Proposition 6.6.11, Definition 6.8.10, Proposition 6.8.11(3), Proposition 6.8.14(2), Remark 6.8.15; detailed scalar-model, standard t-structure and common-stage argument supplied here; C8: reuse the two existing scalar-compatible packages for the bare comparison witnesses, and explicitly compose their cohomology comparisons and heart factorizations for the point-fibre clause"
  },
  "mathlib_searches": [
   {
@@ -328,5 +436,15 @@
   "group": "NL",
   "result": "pass",
   "note": "Reviewed the immutable node, dependencies, source, Lean module, report, route-pivot constraints, edge cases, and compiler evidence. scompile.py passed sandbox and library compilation with no errors or warnings; no substantive findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "C8",
+  "result": "pass",
+  "landing": "20261021T100916-L-4170228",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

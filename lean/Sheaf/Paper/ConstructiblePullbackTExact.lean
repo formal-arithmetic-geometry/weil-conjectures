@@ -13,47 +13,11 @@ public import Sheaf.Paper.FiniteCoefficientPoint
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Sheaf.Paper.FieldDerivedScalarTower
 
-import Sheaf.AlgebraicGeometry.FiniteTypeFibreDimensionBound
-import Sheaf.Paper.IntegralStratifiedPerfectCharacterization
-import Sheaf.Paper.IntegralOperationsPreserveConstructible
-import Sheaf.Paper.SfImmersionCompletedPullbackComparison
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import WeilConjectures.AlgebraicGeometry.SiteRestrictionExact
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import Sheaf.CategoryTheory.StrictRoosDerivedLimitComparison
-import Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
 public import Sheaf.Paper.DerivedPullbackTensorHom
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.AlgebraicGeometry.ProEtaleConstantRingMap
-import Sheaf.AlgebraicGeometry.ProEtaleConstantExact
-import Sheaf.AlgebraicGeometry.ProEtaleMilnorEpimorphic
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitOfUniverses
-import Sheaf.Algebra.Homology.BoundedAboveFlatSheafKFlat
-import WeilConjectures.ConstructibleSheaf.Pullback
-import Mathlib.AlgebraicGeometry.Sites.Proetale
-import Mathlib.CategoryTheory.Sites.ConstantSheaf
-import Sheaf.AlgebraicGeometry.ProEtaleInverseImage
-import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
 public import Sheaf.Paper.SfConstructibleHeart
-import Sheaf.Paper.CompletedPullbackTriangles
-import Sheaf.CategoryTheory.SemilinearScalarLocalization
 public import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
 import Sheaf.CategoryTheory.Triangulated.TExactTruncationComparison
-import WeilConjectures.CategoryTheory.Triangulated.TStructure.Homology
-import Sheaf.Paper.IntegralOperationsScalarComparisons
-import Sheaf.Paper.PointProEtaleSectionsExact
-import Sheaf.Paper.PointSectionsScalarExtension
-import Sheaf.Paper.LocalizedTStructure
 
-import Mathlib.AlgebraicGeometry.Noetherian
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.Algebra.Homology.ShortComplex.PreservesHomology
-import Mathlib.AlgebraicGeometry.Morphisms.FinitePresentation
-import Mathlib.Algebra.Module.LocalizedModule.Exact
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.IntegralPullbackCompletedComparison
-import Sheaf.Paper.IntegralPullbackComposition
 
 /-! # T-exact constructible pullback and geometric-point fibres
 
@@ -76,15 +40,25 @@ isomorphisms. The categories and the standard pairs are the recorded intrinsic o
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 2048
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 
 universe u v uC vC uB vB uD vD uA vA
 
 open CategoryTheory CategoryTheory.Limits CategoryTheory.Triangulated AlgebraicGeometry
 
 namespace WeilConjectures
+
+attribute [local instance 1100] DivisionSemiring.to_moduleIsTorsionFree
+  sfRationalConstructibleZero sfRationalConstructibleShift
+  sfRationalConstructibleShiftAdditive sfRationalConstructiblePretriangulated
+  sfRationalConstructibleTriangulated
+
+
+private instance moduleShiftAdditive (E : Type u) [Field E] (n : ℤ) :
+    (shiftFunctor (DerivedCategory (ModuleCat.{u} E)) n).Additive := inferInstance
 
 /-- Clause package: preservation of both standard halves, the exact restriction to
 specified full hearts, and the canonical truncation and cohomology comparisons.
@@ -199,6 +173,88 @@ abbrev ConstructibleCommonStagePullbackComparison
     (sfCommonStageStandardTStructure l W Ω D hl)
     (sfCommonStageHeartProperty l X Ω) (sfCommonStageHeartProperty l W Ω)
     (commonStageDerivedPullback l Ω h)
+
+
+open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
+open GeneralAlgebraicallyClosedCoefficients (Stage inclusion stageTransition)
+
+/-- The complete finite-scalar and common-stage compatibility clause for the
+pullback comparisons. The beta at a common-stage inclusion has the object equality
+specified by the recorded pullback, so it cannot be replaced by an arbitrary map.
+Source: Bhatt--Scholze 6.8.14(2), 6.8.15; common-stage coefficients
+(blueprint: lem-a1-constructible-pullback-t-exact). -/
+def ConstructiblePullbackScalarCompatibility
+    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    {W X : Scheme.{u}} [W.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (W ↘ Spec (.of D.k))] [QuasiCompact (W ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    (h : W ⟶ X) : Prop :=
+  letI := constructiblePullbackResidueUnits D l hl W
+  letI := constructiblePullbackResidueUnits D l hl X
+  ∃ (d : ∀ E : Index l Ω,
+      ConstructibleRationalPullbackComparison D l hl (Coefficient.{u} l Ω E) h)
+    (e : ConstructibleCommonStagePullbackComparison D l hl Ω h),
+    (∀ (E L : Index l Ω) (a : E ≤ L),
+      ∃ (sX : ConstructiblePullbackComparison
+          (sfRationalStandardTStructure l (Coefficient.{u} l Ω E) X D hl)
+          (sfRationalStandardTStructure l (Coefficient.{u} l Ω L) X D hl)
+          (sfRationalHeartProperty l (Coefficient.{u} l Ω E) X)
+          (sfRationalHeartProperty l (Coefficient.{u} l Ω L) X)
+          (sfRationalScalarExtension l (Coefficient.{u} l Ω E) X 0
+            (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
+            (coefficientInclusion l Ω E L a)))
+        (sW : ConstructiblePullbackComparison
+          (sfRationalStandardTStructure l (Coefficient.{u} l Ω E) W D hl)
+          (sfRationalStandardTStructure l (Coefficient.{u} l Ω L) W D hl)
+          (sfRationalHeartProperty l (Coefficient.{u} l Ω E) W)
+          (sfRationalHeartProperty l (Coefficient.{u} l Ω L) W)
+          (sfRationalScalarExtension l (Coefficient.{u} l Ω E) W 0
+            (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
+            (coefficientInclusion l Ω E L a))),
+        ConstructiblePullbackScalarSquare (d E) (d L) sX sW
+          (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
+            (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L a) h)) ∧
+    (∀ E : Index l Ω,
+      ∃ (iX : ConstructiblePullbackComparison
+          (sfRationalStandardTStructure l (Coefficient.{u} l Ω E) X D hl)
+          (sfCommonStageStandardTStructure l X Ω D hl)
+          (sfRationalHeartProperty l (Coefficient.{u} l Ω E) X)
+          (sfCommonStageHeartProperty l X Ω)
+          (inclusion (l := l) (Ω := Ω) (Y := X) E))
+        (iW : ConstructiblePullbackComparison
+          (sfRationalStandardTStructure l (Coefficient.{u} l Ω E) W D hl)
+          (sfCommonStageStandardTStructure l W Ω D hl)
+          (sfRationalHeartProperty l (Coefficient.{u} l Ω E) W)
+          (sfCommonStageHeartProperty l W Ω)
+          (inclusion (l := l) (Ω := Ω) (Y := W) E))
+        (β : rationalDerivedPullback l (Coefficient.{u} l Ω E) h ⋙
+            inclusion (l := l) (Ω := Ω) (Y := W) E ≅
+          inclusion (l := l) (Ω := Ω) (Y := X) E ⋙ commonStageDerivedPullback l Ω h),
+        (∀ K : Stage l Ω X E,
+          β.symm.app K = eqToIso
+            ((commonStageDerivedPullback_existsUnique l Ω h).exists.choose_spec.1
+              ((inclusion (l := l) (Ω := Ω) (Y := X) E).obj K))) ∧
+        ConstructiblePullbackScalarSquare (d E) e iX iW β)
+
+/-- All pullback cohomology maps descend from a common finite coefficient field,
+and remain the same after any further extension, including identity extensions.
+Source: Bhatt--Scholze 6.8.14(2), 6.8.15
+(blueprint: lem-a1-constructible-pullback-t-exact).
+Proof: carry out the integral interval-preservation and finite/common-stage
+comparison constructions of Steps 1--9 of the node at each finite field.
+The integral scalar comparisons commute with towers. Uniqueness of the truncation
+counit and unit comparisons makes both routes in every scalar square equal.
+Compose with the coherent shift comparisons. The recorded common-stage pullback
+has the displayed object equality and conjugated representative maps, so these
+same comparisons descend, with the prescribed inclusion beta. This is Step 10
+of the node, and applies also to equal fields and repeated extensions. -/
+theorem constructible_pullback_scalar_compatibility
+    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    {W X : Scheme.{u}} [W.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (W ↘ Spec (.of D.k))] [QuasiCompact (W ↘ Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    (h : W ⟶ X) : ConstructiblePullbackScalarCompatibility D l hl Ω h := by
+  sorry
 
 /-- Pullback preserves both standard halves, restricts to an exact heart functor,
 and has the cohomology comparison induced by the canonical truncation maps.
@@ -356,88 +412,9 @@ theorem constructible_pullback_t_exact
     Nonempty (ConstructibleRationalPullbackComparison D l hl
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω E) h) ∧
       Nonempty (ConstructibleCommonStagePullbackComparison D l hl Ω h) := by
-  sorry
+  obtain ⟨d, e, _⟩ := constructible_pullback_scalar_compatibility D l hl Ω h
+  exact ⟨⟨d E⟩, ⟨e⟩⟩
 
-
-open AlgebraicallyClosedCoefficients (Index Coefficient coefficientInclusion)
-open GeneralAlgebraicallyClosedCoefficients (Stage inclusion stageTransition)
-
-/-- The complete finite-scalar and common-stage compatibility clause for the
-pullback comparisons. The beta at a common-stage inclusion has the object equality
-specified by the recorded pullback, so it cannot be replaced by an arbitrary map.
-Source: Bhatt--Scholze 6.8.14(2), 6.8.15; common-stage coefficients
-(blueprint: lem-a1-constructible-pullback-t-exact). -/
-def ConstructiblePullbackScalarCompatibility
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    {W X : Scheme.{u}} [W.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))]
-    [LocallyOfFiniteType (W ↘ Spec (.of D.k))] [QuasiCompact (W ↘ Spec (.of D.k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
-    (h : W ⟶ X) : Prop :=
-  letI := constructiblePullbackResidueUnits D l hl W
-  letI := constructiblePullbackResidueUnits D l hl X
-  ∃ (d : ∀ E : Index l Ω,
-      ConstructibleRationalPullbackComparison D l hl (Coefficient.{u} l Ω E) h)
-    (e : ConstructibleCommonStagePullbackComparison D l hl Ω h),
-    (∀ (E L : Index l Ω) (a : E ≤ L),
-      ∃ (sX : ConstructiblePullbackComparison
-          (sfRationalStandardTStructure l (Coefficient.{u} l Ω E) X D hl)
-          (sfRationalStandardTStructure l (Coefficient.{u} l Ω L) X D hl)
-          (sfRationalHeartProperty l (Coefficient.{u} l Ω E) X)
-          (sfRationalHeartProperty l (Coefficient.{u} l Ω L) X)
-          (sfRationalScalarExtension l (Coefficient.{u} l Ω E) X 0
-            (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
-            (coefficientInclusion l Ω E L a)))
-        (sW : ConstructiblePullbackComparison
-          (sfRationalStandardTStructure l (Coefficient.{u} l Ω E) W D hl)
-          (sfRationalStandardTStructure l (Coefficient.{u} l Ω L) W D hl)
-          (sfRationalHeartProperty l (Coefficient.{u} l Ω E) W)
-          (sfRationalHeartProperty l (Coefficient.{u} l Ω L) W)
-          (sfRationalScalarExtension l (Coefficient.{u} l Ω E) W 0
-            (Nat.Prime.ne_zero (Fact.out : l.Prime)) (Coefficient.{u} l Ω L)
-            (coefficientInclusion l Ω E L a))),
-        ConstructiblePullbackScalarSquare (d E) (d L) sX sW
-          (rationalPullbackScalarComparison l (Coefficient.{u} l Ω E)
-            (Coefficient.{u} l Ω L) (coefficientInclusion l Ω E L a) h)) ∧
-    (∀ E : Index l Ω,
-      ∃ (iX : ConstructiblePullbackComparison
-          (sfRationalStandardTStructure l (Coefficient.{u} l Ω E) X D hl)
-          (sfCommonStageStandardTStructure l X Ω D hl)
-          (sfRationalHeartProperty l (Coefficient.{u} l Ω E) X)
-          (sfCommonStageHeartProperty l X Ω)
-          (inclusion (l := l) (Ω := Ω) (Y := X) E))
-        (iW : ConstructiblePullbackComparison
-          (sfRationalStandardTStructure l (Coefficient.{u} l Ω E) W D hl)
-          (sfCommonStageStandardTStructure l W Ω D hl)
-          (sfRationalHeartProperty l (Coefficient.{u} l Ω E) W)
-          (sfCommonStageHeartProperty l W Ω)
-          (inclusion (l := l) (Ω := Ω) (Y := W) E))
-        (β : rationalDerivedPullback l (Coefficient.{u} l Ω E) h ⋙
-            inclusion (l := l) (Ω := Ω) (Y := W) E ≅
-          inclusion (l := l) (Ω := Ω) (Y := X) E ⋙ commonStageDerivedPullback l Ω h),
-        (∀ K : Stage l Ω X E,
-          β.symm.app K = eqToIso
-            ((commonStageDerivedPullback_existsUnique l Ω h).exists.choose_spec.1
-              ((inclusion (l := l) (Ω := Ω) (Y := X) E).obj K))) ∧
-        ConstructiblePullbackScalarSquare (d E) e iX iW β)
-
-/-- All pullback cohomology maps descend from a common finite coefficient field,
-and remain the same after any further extension, including identity extensions.
-Source: Bhatt--Scholze 6.8.14(2), 6.8.15
-(blueprint: lem-a1-constructible-pullback-t-exact).
-Proof: use Steps 1--9 of constructible_pullback_t_exact at each finite field.
-The integral scalar comparisons commute with towers. Uniqueness of the truncation
-counit and unit comparisons makes both routes in every scalar square equal.
-Compose with the coherent shift comparisons. The recorded common-stage pullback
-has the displayed object equality and conjugated representative maps, so these
-same comparisons descend, with the prescribed inclusion beta. This is Step 10
-of the node, and applies also to equal fields and repeated extensions. -/
-theorem constructible_pullback_scalar_compatibility
-    (Ω : Type v) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    {W X : Scheme.{u}} [W.Over (Spec (.of D.k))] [X.Over (Spec (.of D.k))]
-    [LocallyOfFiniteType (W ↘ Spec (.of D.k))] [QuasiCompact (W ↘ Spec (.of D.k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
-    (h : W ⟶ X) : ConstructiblePullbackScalarCompatibility D l hl Ω h := by
-  sorry
 
 /-- The rational point fibre, followed by its recorded fully faithful inclusion in
 D(E). This is the given fibre functor, not a new evaluation construction.
@@ -483,7 +460,8 @@ def ConstructiblePointRationalComparison
       ∀ K : sfRationalConstructibleCategory l E X,
         γ.app K = (constructiblePointRationalRealization D l hl E).mapIso
             ((d.cohomology j).app K) ≪≫
-          (f.cohomology j).app ((rationalDerivedPullback l E x).obj K)) ∧
+          (f.cohomology (B := DerivedCategory (ModuleCat.{u} E)) j).app
+            ((rationalDerivedPullback l E x).obj K)) ∧
     ∀ (F : sfRationalHeart l E X) (j : ℤ), j ≠ 0 →
       IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} E) j).obj
         ((constructiblePointRationalRealization D l hl E).obj
@@ -516,33 +494,12 @@ def ConstructiblePointCommonStageComparison
       ∀ K : generalAlgebraicallyClosedConstructibleCategory l Ω X,
         γ.app K = (constructiblePointCommonStageRealization D l hl Ω).mapIso
             ((d.cohomology j).app K) ≪≫
-          (f.cohomology j).app ((commonStageDerivedPullback l Ω x).obj K)) ∧
+          (f.cohomology (B := DerivedCategory (ModuleCat.{u} Ω)) j).app
+            ((commonStageDerivedPullback l Ω x).obj K)) ∧
     ∀ (F : sfCommonStageHeart l X Ω) (j : ℤ), j ≠ 0 →
       IsZero ((DerivedCategory.homologyFunctor (ModuleCat.{u} Ω) j).obj
         ((constructiblePointCommonStageRealization D l hl Ω).obj
           ((commonStageDerivedPullback l Ω x).obj F.obj)))
-
-/-- The point-fibre formula and the degree-zero assertion at both coefficient levels.
-Source: Bhatt--Scholze Example 6.5.2, 6.8.11(3), 6.8.14(2)
-(blueprint: lem-a1-constructible-pullback-t-exact).
-Proof: Steps 1--10 above apply to x, which need not respect the chosen k-structure.
-Exact point sections commute with cohomology. Tensoring with E is exact localization;
-prop-weil-localized-tstructure identifies the localized integral cohomology and its
-truncation maps. Compose this comparison with the canonical pullback comparison.
-For a heart object, t-exactness of both functors gives degree-zero concentration.
-At the algebraically closed level compute at a common finite field; the given
-point-section scalar comparisons preserve the identity and tower comparisons,
-so the same point maps descend. This is Step 11 of the node. -/
-theorem constructible_pullback_point_fibre
-    (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
-    (E : Index l Ω)
-    {X : Scheme.{u}} [X.Over (Spec (.of D.k))]
-    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
-    (x : Spec (.of D.k) ⟶ X) :
-    ConstructiblePointRationalComparison D l hl (Coefficient.{u} l Ω E) x ∧
-      ConstructiblePointCommonStageComparison D l hl Ω x := by
-  sorry
-
 
 /-- Point comparison data at a finite stage, in the existing small coefficient model.
 Source: Bhatt--Scholze 6.8.14(2); blueprint point-fibre clause
@@ -717,5 +674,112 @@ theorem constructible_point_scalar_compatibility
     (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] :
     ConstructiblePointScalarCompatibility D l hl Ω := by
   sorry
+
+attribute [local irreducible] sfRationalStandardTStructure sfCommonStageStandardTStructure
+  rationalDerivedPullback commonStageDerivedPullback pointRationalFibre pointQbarFibre
+  DerivedCategory.TStructure.t
+
+private theorem cohomologyComparison_comp
+    {C : Type uC} [Category.{vC} C] {B : Type uB} [Category.{vB} B]
+    {A : Type uA} [Category.{vA} A]
+    (H : C ⥤ C) (I : B ⥤ B) (J : A ⥤ A) (F : C ⥤ B) (G : B ⥤ A)
+    (α : H ⋙ F ≅ F ⋙ I) (β : I ⋙ G ≅ G ⋙ J) :
+    ∃ γ : H ⋙ F ⋙ G ≅ F ⋙ G ⋙ J,
+      ∀ K, γ.app K = G.mapIso (α.app K) ≪≫ β.app (F.obj K) := by
+  refine ⟨(Functor.associator _ _ _).symm ≪≫
+    Functor.isoWhiskerRight α _ ≪≫ Functor.associator _ _ _ ≪≫
+    Functor.isoWhiskerLeft _ β, ?_⟩
+  intro K
+  apply Iso.ext
+  simp
+
+private theorem heartComparison_comp
+    {C : Type uC} [Category.{vC} C] {B : Type uB} [Category.{vB} B]
+    {A : Type uA} [Category.{vA} A]
+    {P : ObjectProperty C} {Q : ObjectProperty B} {R : ObjectProperty A}
+    {F : C ⥤ B} {G : B ⥤ A}
+    (H : P.FullSubcategory ⥤ Q.FullSubcategory)
+    (I : Q.FullSubcategory ⥤ R.FullSubcategory)
+    (hH : H ⋙ Q.ι = P.ι ⋙ F) (hI : I ⋙ R.ι = Q.ι ⋙ G)
+    (K : P.FullSubcategory) : R (G.obj (F.obj K.obj)) := by
+  have h := (I.obj (H.obj K)).property
+  have hH' := congrArg (fun L ↦ L.obj K) hH
+  have hI' := congrArg (fun L ↦ L.obj (H.obj K)) hI
+  dsimp only [Functor.comp_obj, ObjectProperty.ι_obj] at hH' hI'
+  rw [hI', hH'] at h
+  exact h
+
+private theorem heart_homology_vanish
+    {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{uD} A]
+    {K : DerivedCategory A}
+    (hK : (DerivedCategory.TStructure.t (C := A)).heart K) (j : ℤ) (hj : j ≠ 0) :
+    IsZero ((DerivedCategory.homologyFunctor A j).obj K) := by
+  have : K.IsLE 0 := ⟨hK.1⟩
+  have : K.IsGE 0 := ⟨hK.2⟩
+  rcases lt_or_gt_of_ne hj with hj | hj
+  · exact DerivedCategory.isZero_of_isGE _ 0 j hj
+  · exact DerivedCategory.isZero_of_isLE _ 0 j hj
+
+private theorem pointComparison_comp
+    {C : Type uC} [Category.{vC} C] [Preadditive C] [HasZeroObject C] [HasShift C ℤ]
+    [∀ n : ℤ, (shiftFunctor C n).Additive] [Pretriangulated C]
+    {B : Type uB} [Category.{vB} B] [Preadditive B] [HasZeroObject B] [HasShift B ℤ]
+    [∀ n : ℤ, (shiftFunctor B n).Additive] [Pretriangulated B]
+    {A : Type uA} [Category.{vA} A] [Abelian A] [HasDerivedCategory.{uD} A]
+    {t : TStructure C} {s : TStructure B} {P : ObjectProperty C} {Q : ObjectProperty B}
+    {F : C ⥤ B} {G : B ⥤ DerivedCategory A}
+    (d : ConstructiblePullbackComparison t s P Q F)
+    (f : ConstructiblePullbackComparison s (DerivedCategory.TStructure.t (C := A)) Q
+      (DerivedCategory.TStructure.t (C := A)).heart G) :
+    (∀ j : ℤ, ∃ γ : constructibleTruncationCohomology t j ⋙ F ⋙ G ≅
+        F ⋙ G ⋙ constructibleTruncationCohomology
+          (DerivedCategory.TStructure.t (C := A)) j,
+      ∀ K, γ.app K = G.mapIso ((d.cohomology j).app K) ≪≫
+        (f.cohomology j).app (F.obj K)) ∧
+    ∀ (K : P.FullSubcategory) (j : ℤ), j ≠ 0 →
+      IsZero ((DerivedCategory.homologyFunctor A j).obj (G.obj (F.obj K.obj))) := by
+  constructor
+  · intro j
+    exact cohomologyComparison_comp _ _ _ _ _ (d.cohomology j) (f.cohomology j)
+  · intro K j hj
+    exact heart_homology_vanish
+      (heartComparison_comp d.heart f.heart d.heart_fac f.heart_fac K) j hj
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+set_option backward.defeqAttrib.useBackward true in
+/-- The point-fibre formula and the degree-zero assertion at both coefficient levels.
+Source: Bhatt--Scholze Example 6.5.2, 6.8.11(3), 6.8.14(2)
+(blueprint: lem-a1-constructible-pullback-t-exact).
+Proof: Steps 1--10 above apply to x, which need not respect the chosen k-structure.
+Exact point sections commute with cohomology. Tensoring with E is exact localization;
+prop-weil-localized-tstructure identifies the localized integral cohomology and its
+truncation maps. Compose this comparison with the canonical pullback comparison.
+For a heart object, t-exactness of both functors gives degree-zero concentration.
+At the algebraically closed level compute at a common finite field; the given
+point-section scalar comparisons preserve the identity and tower comparisons,
+so the same point maps descend. This is Step 11 of the node. -/
+theorem constructible_pullback_point_fibre
+    (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω]
+    (E : Index l Ω)
+    {X : Scheme.{u}} [X.Over (Spec (.of D.k))]
+    [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))]
+    (x : Spec (.of D.k) ⟶ X) :
+    ConstructiblePointRationalComparison D l hl (Coefficient.{u} l Ω E) x ∧
+      ConstructiblePointCommonStageComparison D l hl Ω x := by
+  let := constructiblePullbackResidueUnits D l hl X
+  let := constructiblePullbackResidueUnits D l hl (Spec (.of D.k))
+  obtain ⟨d, e, _⟩ := constructible_pullback_scalar_compatibility D l hl Ω x
+  obtain ⟨f, g, _⟩ := constructible_point_scalar_compatibility D l hl Ω
+  constructor
+  · exact ⟨d E, f E,
+      pointComparison_comp
+        (C := sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) X)
+        (B := sfRationalConstructibleCategory l (Coefficient.{u} l Ω E) (Spec (.of D.k)))
+        (A := ModuleCat.{u} (Coefficient.{u} l Ω E)) (d E) (f E)⟩
+  · exact ⟨e, g, pointComparison_comp
+      (C := generalAlgebraicallyClosedConstructibleCategory l Ω X)
+      (B := generalAlgebraicallyClosedConstructibleCategory l Ω (Spec (.of D.k)))
+      (A := ModuleCat.{u} Ω) e g⟩
 
 end WeilConjectures
