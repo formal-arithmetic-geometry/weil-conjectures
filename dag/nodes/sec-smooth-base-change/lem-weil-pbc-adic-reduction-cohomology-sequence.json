@@ -28,47 +28,43 @@
  ],
  "proof": [
   {
-   "text": "Let pi be the chosen DVR uniformizer. The exact sequence of ordinary valuation-ring modules 0→A→A→A/(pi^(n+1))→0, whose first map is multiplication by pi^(n+1), remains exact after constant sheafification. The completed constant sheaf is flat over the constant coefficient ring and its ordinary quotient is the actual finite coefficient sheaf. Thus it gives the monic unit endomorphism f and a two-term free B-resolution of R_n.",
+   "text": "Use the integer DVR uniformizer to construct the ordinary exact sequence A --pi^(n+1)--> A → A/(pi^(n+1)). Apply exact constant module sheafification and the flat constant-to-completed scalar extension. Transport its terms along the constructed unit isomorphism and finiteReduction isomorphism. Their formulas on the constant generator 1 prove that the resulting quotient map p satisfies p(1)=1. Its first map f is monic.",
    "uses": [
     "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-constant-module-section-properties"
+    "lem-weil-pbc-completed-constant-algebra-flat-quotients"
    ],
    "elementary": false
   },
   {
-   "text": "Choose a flat-term K-flat representative of the arbitrary complex K. Tensor it with the two-term quotient resolution, which is itself K-flat. Its mapping-cone triangle computes scalar restriction of derived quotient extension. Apply the homology long exact sequence to get the exact cokernel-to-cohomology-to-kernel short exact sequence. The last object is the kernel of f tensored with H^(q+1)(K), with no flatness assumption on that cohomology.",
+   "text": "Apply the normalized two-term quotient reduction triangle to the coefficient short exact sequence. Its homology first arrow is conjugate to tensoring f with homology; its cokernel is restricted ordinary scalar extension, normalized by the ordinary unit.",
    "uses": [
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-pur-derived-change-of-rings",
-    "lem-sf-derived-homology-long-exact"
+    "lem-weil-pbc-adic-reduction-triangle"
    ],
    "elementary": false
   },
   {
-   "text": "Right exactness of ordinary scalar extension identifies the cokernel with the restricted ordinary extension of H^q(K). On a K-flat cocycle its arrow is z↦z tensor 1, so the normalization of the scalar adjunction identifies it with the displayed canonical map. This yields the asserted delta, zero-composite equality and short exactness in every degree.",
+   "text": "Take the three consecutive exact portions of the distinguished triangle homology sequence. Transport them through exact restriction and the tensor-unit comparison. Descend the middle arrow from its cokernel and lift the connecting arrow to the kernel; exactness gives a monic cokernel map and an epic kernel map, and the intervening short complex is exact. The ordinary adjunction identity homEquiv_unit identifies the injection with precisely the displayed canonical adjunct.",
    "uses": [
-    "def-weil-pbc-bounded-constructible-tower",
-    "lem-pur-derived-change-of-rings"
+    "lem-sf-derived-homology-long-exact",
+    "def-weil-pbc-bounded-constructible-tower"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-bounded-constructible-tower",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-derived-change-of-rings",
-  "lem-sf-derived-homology-long-exact",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
+  "lem-weil-pbc-adic-reduction-triangle",
+  "lem-sf-derived-homology-long-exact",
+  "def-weil-pbc-bounded-constructible-tower"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker",
+  "group": "J6",
   "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
-  "place": "Proof steps 1 and 3: the completed uniformizer quotient resolution and its cohomology sequence."
+  "place": "Proof steps 1 and 3, implemented by exact completed coefficient resolution, normalized scalar-extension triangle and the homology cokernel/kernel sequence."
  },
  "mathlib_searches": [
   {
@@ -132,12 +128,8 @@
   "date": "2026-10-20"
  },
  "tool_uses": [
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pur-derived-change-of-rings",
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-weil-pbc-site-derived-tensor-descent"
+  "lem-weil-pbc-completed-constant-sheaf-reduction"
  ],
  "reviewed": {
   "date": "2026-10-20",
@@ -150,12 +142,12 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K7",
+  "group": "J6",
   "result": "pass",
-  "landing": "20261020T051503-L-1695358",
+  "landing": "20261021T001122-L-1373080",
   "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }

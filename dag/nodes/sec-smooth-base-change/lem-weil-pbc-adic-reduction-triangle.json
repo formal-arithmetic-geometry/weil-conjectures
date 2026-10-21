@@ -1,0 +1,121 @@
+{
+ "id": "lem-weil-pbc-adic-reduction-triangle",
+ "kind": "statement",
+ "title": "The normalized two-term quotient scalar-extension triangle",
+ "statement": "For a ring-sheaf homomorphism phi:R→S on the pro-etale site of a scheme T [def-weil-pbc-bounded-constructible-tower], assume a short exact coefficient sequence 0→R --f--> R --p--> Res(S)→0 with p(1)=1 on every object. Every unbounded derived R-complex K admits a distinguished triangle K --a--> K --eta--> Res^D(L Ext(K)) --> K[1], with its normalized derived scalar-adjunction unit as second arrow. The tensor-unit comparison conjugates H^q(a) to tensoring f with H^q(K). The cokernel of H^q(a) is isomorphic to Res(Ext(H^q(K))), with cokernel projection equal to the ordinary scalar-adjunction unit.",
+ "stmt_deps": [
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-pc-scheme"
+ ],
+ "source": {
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
+  "place": "Proof steps 1 and 3: the two-term completed quotient resolution, its derived triangle, and ordinary cokernel normalization before applying long exact cohomology."
+ },
+ "proof": [
+  {
+   "text": "Tensor the coefficient sequence with an arbitrary module. Construct the unit and quotient tensor comparisons by sheafifying their sectionwise tensor maps. The equation p(1)=1 identifies the resulting quotient map with the normalized ordinary scalar-adjunction unit. Tensor preserves colimits, hence the sequence is right exact; for a flat module it is short exact. The cokernel comparison is therefore an isomorphism for every module, normalized by the ordinary unit.",
+   "uses": [
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Choose a flat-term K-flat resolution of a cochain representative of K. Apply the preceding short exact sequence degreewise. Mathlib triangleOfSES_distinguished constructs its distinguished triangle. The K-flat scalar counit and the specified normalization of the derived adjunction identify its second arrow with the derived unit. Transport the triangle to K along the resolution isomorphism. Tensor multiplication is a natural endomorphism of the identity; homologyMap_eq_app_homology identifies its action on cohomology. Transport the right-exact cokernel isomorphism from the first step along this equality.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "def-weil-pbc-bounded-constructible-tower",
+  "lem-pc-kflat-resolution"
+ ],
+ "proof_origin": {
+  "by": "worker",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-base-change/sk-rem-rest/thm-weil-pbc-integral-truncations.md",
+  "place": "Proof steps 1 and 3: general two-term quotient coefficient resolution, scalar-extension triangle and ordinary cokernel normalization."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.AdicReductionCohomologySequence",
+  "date": "2026-10-21",
+  "group": "J6"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-adic-reduction-cohomology-sequence",
+   "place": "The coefficient quotient triangle and its normalization, before long exact cohomology.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-rem-rest",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.AdicReductionTriangle",
+  "file": "lean/Sheaf/Paper/AdicReductionTriangle.lean",
+  "declaration": "AlgebraicGeometry.Scheme.pbc_adic_reduction_triangle",
+  "statement": "theorem pbc_adic_reduction_triangle\n    (T : Scheme.{u}) {R S : Sheaf (ProEt.topology T) CommRingCat.{u + 1}}\n    (φ : R ⟶ S)\n    (f : SheafOfModules.unit ((adicLisseForget T).obj R) ⟶\n      SheafOfModules.unit ((adicLisseForget T).obj R))\n    (p : SheafOfModules.unit ((adicLisseForget T).obj R) ⟶\n      (pbcRestrict φ).obj (SheafOfModules.unit ((adicLisseForget T).obj S)))\n    (hp : ∀ V : T.ProEtᵒᵖ, p.val.app V (1 : R.obj.obj V) = (1 : S.obj.obj V))\n    (hzero : f ≫ p = 0) (hS : (ShortComplex.mk f p hzero).ShortExact)\n    (K : DerivedCategory (pbcModules T R)) :\n    ∃ (a : K ⟶ K)\n      (w : (pbcDerivedRestrict φ).obj ((pbcDerivedExtend φ).obj K) ⟶ K⟦(1 : ℤ)⟧),\n      Pretriangulated.Triangle.mk a ((pbcDerivedScalarAdjunction φ).unit.app K) w ∈\n        distTriang _ ∧\n      ∀ q : ℤ,\n        let H := (DerivedCategory.homologyFunctor _ q).obj K\n        (∃ e : H ≅ (SheafOfModules.siteSheafTensorRight\n            (J := ProEt.topology T) (A := R) H).obj\n              (SheafOfModules.unit ((adicLisseForget T).obj R)),\n          (DerivedCategory.homologyFunctor _ q).map a ≫ e.hom =\n            e.hom ≫ (SheafOfModules.siteSheafTensorRight\n              (J := ProEt.topology T) (A := R) H).map f) ∧\n        ∃ e : cokernel ((DerivedCategory.homologyFunctor _ q).map a) ≅\n            (pbcRestrict φ).obj ((pbcExtend φ).obj H),\n          cokernel.π ((DerivedCategory.homologyFunctor _ q).map a) ≫ e.hom =\n            (pbcScalarAdjunction φ).unit.app H",
+  "branch": "sheaf-dag",
+  "by": "J6",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A two term flat resolution of a quotient ring gives a distinguished triangle for derived scalar extension and identifies the cokernel on cohomology",
+   "results": "ProjectiveResolution.extMk_hom, InjectiveResolution.extMk_hom, Abelian.Ext homologySequence singleTriangle lemmas; no normalized sheaf scalar-extension triangle.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; construct the triangle from a degreewise short exact sequence."
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory.triangleOfSES_distinguished",
+   "results": "DerivedCategory.triangleOfSES_distinguished in Mathlib.Algebra.Homology.DerivedCategory.ShortExact",
+   "date": "2026-10-21",
+   "verdict": "Used to construct the distinguished triangle."
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES|mono_cokernelDesc|epi_kernelLift",
+   "results": "DerivedCategory.triangleOfSESδ and triangleOfSES_distinguished; ShortComplex.Exact.mono_cokernelDesc and epi_kernelLift",
+   "date": "2026-10-21",
+   "verdict": "Used for the triangle and cokernel identification."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A short exact sequence of cochain complexes gives a distinguished triangle in the derived category and its long exact cohomology sequence",
+   "results": "DerivedCategory.triangleOfSES, triangleOfSESδ, triangleOfSES_distinguished; ShortComplex.ShortExact.singleTriangle.",
+   "date": "2026-10-21",
+   "verdict": "Use triangleOfSES_distinguished for the degreewise coefficient short exact sequence; the scalar-unit normalization still needs the local proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261021T001122-L-1373080",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J6",
+  "result": "pass",
+  "landing": "20261021T001122-L-1373080",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
