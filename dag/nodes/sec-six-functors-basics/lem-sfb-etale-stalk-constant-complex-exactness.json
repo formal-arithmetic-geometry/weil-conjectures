@@ -16,9 +16,93 @@
   "def-weil-abstract-derived-category",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The constant-presheaf functor takes a short exact sequence $0\\to M'\\to M\\to M''\\to0$ of ordinary $A$-modules to a sectionwise short exact sequence of presheaves: at every object it is the given sequence, with identity restriction maps. Regard the constant presheaf $U\\mapsto M$ as a presheaf of modules over the constant presheaf of rings $U\\mapsto A$. By [lem-pc-sites-module-sheafification-interface], applied with $\\mathcal O$ that constant ring presheaf (whose ring sheafification is $A_T$ [def-kun-constant-sheaf]), its sheafification $c(M)$ is a sheaf of $A_T$-modules, functorial in $M$ for $A$-linear maps, the canonical map from the constant presheaf to $c(M)$ is linear over $A\\to A_T$, and the underlying abelian sheaf of $c(M)$ is the abelian sheafification of the constant presheaf $U\\mapsto M$, with the same canonical map. Apply [lem-weil-pbc-site-r-module-presheaf-sheafification-exact](1),(2) with $R=\\mathbf Z$: abelian sheafification is exact, so the underlying abelian sheaves of $c(M')\\to c(M)\\to c(M'')$ form a short exact sequence. By [lem-weil-pbc-module-sheaves-colimits-forgetful](1) the forgetful functor $\\mathrm{Mod}(A_T)\\to\\mathrm{Ab}(T_{\\mathrm{et}})$ is faithful and preserves kernels and cokernels; hence it preserves the homology objects of a composable pair, and a faithful additive functor sends only zero objects to zero (if $F(X)=0$ then $F(\\mathrm{id}_X)=0=F(0)$). So it reflects short exactness, and $c(M')\\to c(M)\\to c(M'')$ is short exact in $\\mathrm{Mod}(A_T)$. Thus $c$ is exact; it is additive because the map induced by $f+g$ is the sum of those induced by $f,g$ on the constant presheaves and sheafification is additive. This uses arbitrary $A$-modules, not the finite-module constant-exactness lemma.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "def-kun-constant-sheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI, label lemma-sheafification-exact (PMod(O) to Mod(O^#) for the constant presheaf of rings O=A); reflection through the forgetful functor, Tag 03DA, label lemma-abelian"
+   }
+  },
+  {
+   "text": "For an $A$-module $M$, step 1 identifies the underlying abelian sheaf of $c(M)$ with the abelian constant sheaf $\\underline M$, the canonical maps $\\iota_U$ agreeing. Apply [lem-weil-pbc-constant-sheaf-geometric-stalk] to it. It gives the bijective additive map $\\eta_M:M\\to S(cM)$ sending $m$ to the germ of $\\iota_T(m)$ at $(T,\\bar t)$. The scalar action of $a\\in A$ on a germ of $s\\in F(U)$ is the germ of $\\iota_U(a)s$; this is well defined because restriction is semilinear [def-weil-sheaf-of-modules-category] and $\\iota$ commutes with restriction. By the linearity of the canonical map over $A\\to A_T$ in [lem-pc-sites-module-sheafification-interface], $\\iota_T(a)\\iota_T(m)=\\iota_T(am)$ and $\\iota_T(a)\\iota_T(b)=\\iota_T(ab)$, $\\iota_T(1)=1$. Hence $\\eta_A(1)=1$, $\\eta_A(ab)=\\eta_A(a)\\eta_A(b)$ and $\\eta_M(am)=a\\cdot\\eta_M(m)=\\eta_A(a)\\eta_M(m)$. So $\\eta_A:A\\cong S(A_T)$ is a ring isomorphism, $\\eta_M$ is $A$-linear for the specified scalar action, and for each linear $f:M\\to N$ the sheaf map $c(f)$ sends $\\iota_T(m)$ to $\\iota_T(f(m))$, so $S(cf)\\eta_M(m)=\\eta_N(f(m))$. This proves naturality in ordinary modules. Germs of a sum of sheaf morphisms are sums of their germs, so $S$ is additive as well.",
+   "uses": [
+    "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "def-weil-pbc-geometric-stalks",
+    "lem-pc-sites-module-sheafification-interface",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PT, label lemma-stalk-exact, clause (2); constant-germ normalization; sites-modules.tex, stalk operations immediately before Tag 04EQ"
+   }
+  },
+  {
+   "text": "Given a short exact sequence of $A_T$-module sheaves, forgetting scalars leaves a short exact sequence of abelian sheaves by [lem-weil-pbc-module-sheaves-colimits-forgetful](1). Applying [prop-weil-pbc-geometric-stalks-exact] gives a short exact sequence of underlying abelian groups. Its maps are $A$-linear for the action fixed in step 2. For linear maps the kernel and image as sets are the same subgroups and submodules, and surjectivity is independent of forgetting scalars. Thus this sequence is short exact as ordinary $A$-modules, proving exactness of $S$.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-geometric-stalks-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04EQ, label lemma-stalk-exact-modules, clause (1), reducing to abelian exactness using Tag 03DA, label lemma-abelian"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-complex-cohomology] first to $S$ and $C$, and then to $c$ and $E$. Its hypotheses are the additive exactness established in steps 1 and 3: an additive functor of abelian categories carrying short exact sequences to short exact sequences preserves kernels and cokernels (apply it to $0\\to\\ker f\\to X\\to\\operatorname{im}f\\to0$ and $0\\to\\operatorname{im}f\\to Y\\to\\operatorname{coker}f\\to0$, Stacks Tag 010N, homology.tex lemma-exact-functor), and with finite biproducts hence all finite limits and colimits. It identifies the kernels of the mapped differentials and the images of the preceding mapped differentials with the images under the functor of the original cycles and boundaries; passing to their quotient gives $H^n(SC)\\cong S(H^n(C))$ and $H^n(cE)\\cong c(H^n(E))$. The cited statement gives naturality in complex maps and compatibility with cycles and the cohomology projections. These are isomorphisms in the respective module categories, so the first is $A$-linear and the second is $A_T$-linear.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, label lemma-exact-functor, applied degreewise to cycles and boundaries"
+   }
+  },
+  {
+   "text": "Both functors send zero objects to zero objects. The isomorphisms of step 4 therefore send a complex with all cohomology zero to one with all cohomology zero. For a quasi-isomorphism $f$, naturality gives $H^n(Ff)=(c^n_{\\mathrm{target}})^{-1}F(H^n(f))c^n_{\\mathrm{source}}$ for $F=S$ or $F=c$; all three factors are invertible. Thus both termwise functors preserve acyclic complexes and quasi-isomorphisms. The argument in a fixed degree uses only the two adjacent differentials and their kernel/image quotient, and applies to every integer degree without bounds.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, label lemma-exact-functor; degreewise consequence of the cohomology comparisons"
+   }
+  },
+  {
+   "text": "Set $(\\eta_E)^n=\\eta_{E^n}$ from step 2. Naturality there applied to $d_E^n:E^n\\to E^{n+1}$ says $S(c(d_E^n))\\eta_{E^n}=\\eta_{E^{n+1}}d_E^n$, precisely the chain-map equation. Each component is an isomorphism, and the same equation multiplied by the component inverses proves that the inverse family is a chain map. For a complex map $u:E\\to E^{\\prime}$, the degreewise identity $S(c(u^n))\\eta_{E^n}=\\eta_{E^{\\prime n}}u^n$ proves naturality of the chain isomorphism. Its components have the prescribed constant-germ formula; step 2 with $M=A$ gives the ordinary scalar action. No step used finiteness of $A$ or a bound on $E$ or $C$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03PT, label lemma-stalk-exact, clause (2); termwise constant-germ construction"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-weil-pbc-site-r-module-presheaf-sheafification-exact",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "def-kun-constant-sheaf",
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "def-weil-pbc-geometric-stalks",
+  "def-weil-sheaf-of-modules-category",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lem-weil-pbc-exact-functor-complex-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03EI (lemma-sheafification-exact), 03DA (lemma-abelian), 04EQ (lemma-stalk-exact-modules); constant-germ normalization from etale-cohomology.tex Tag 03PT (lemma-stalk-exact), cohomology from homology.tex Tag 010N (lemma-exact-functor). Termwise consequences are expanded in steps 4–6."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -61,10 +145,52 @@
    "results": "8 hits: PresheafOfModules.sheafificationCompForgetCompToPresheaf, PresheafOfModules.sheafificationCompToSheaf, CategoryTheory.constantCommuteCompose, PresheafOfModules.comp_toPresheaf_map_sheafifyHomEquiv'_symm_hom, TopCat.Presheaf.sheafifyStalkIso, PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm, CategoryTheory.GrothendieckTopology.Point.presheafToSheafCompSheafFiber, PresheafOfModules.toPresheaf_map_toSheafify",
    "date": "2026-10-21",
    "verdict": "no match: the homology and sheafification APIs are ingredients; none supplies both module-valued etale functors, their constant-germ chain retraction and the stated exactness comparisons"
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberConstantSheaf|constantSheaf.*[Ee]xact|sheafFiber.*[Hh]omology",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: reviewed hits supply general homology or sheafification ingredients, or Zariski/condensed stalk statements; none states the whole etale module-complex result with the normalized constant-germ chain isomorphism"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact geometric stalks and constant module sheaves commute with unbounded cochain cohomology and stalks retract constant complexes",
+   "results": "8 hits: CategoryTheory.constantCommuteCompose, CategoryTheory.Sheaf.H, LightCondensed.IsDiscrete, TopCat.Presheaf.stalk_mono_of_mono, CategoryTheory.constantSheafΓAdj, stalkSkyscraperSheafAdjunction, CategoryTheory.Sheaf.isConstant_iff_forget, TopCat.Presheaf.app_injective_iff_stalkFunctor_map_injective",
+   "date": "2026-10-21",
+   "verdict": "no match: reviewed hits supply general homology or sheafification ingredients, or Zariski/condensed stalk statements; none states the whole etale module-complex result with the normalized constant-germ chain isomorphism"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiber\", \"constantSheaf\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: reviewed hits supply general homology or sheafification ingredients, or Zariski/condensed stalk statements; none states the whole etale module-complex result with the normalized constant-germ chain isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The geometric stalk and constant module sheaf functors are exact additive and commute with cohomology of unbounded complexes with stalk of a constant complex naturally the original complex",
+   "results": "8 hits: ModuleCat.Tilde.toStalk, smoothSheafCommRing.forgetStalk, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.toOpen_germ_assoc, ModuleCat.Tilde.toOpen_germ, smoothSheafCommRing.ι_forgetStalk_hom, ModuleCat.Tilde.germ_comp_stalkToFiberLinearMap, smoothSheafCommRing.ι_forgetStalk_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: reviewed hits supply general homology or sheafification ingredients, or Zariski/condensed stalk statements; none states the whole etale module-complex result with the normalized constant-germ chain isomorphism"
+  },
+  {
+   "tool": "grep",
+   "query": "preservesHomologyOfExact|homologyFunctorIso|presheafToSheafCompSheafFiber",
+   "results": "24 hits: Mathlib/CategoryTheory/Functor/ReflectsIso/Exact.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/ShortComplex/PreservesHomology.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShiftSequence.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: reviewed hits supply general homology or sheafification ingredients, or Zariski/condensed stalk statements; none states the whole etale module-complex result with the normalized constant-germ chain isomorphism"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact fibre functor on sheaves of modules sends the sheafification of a constant complex to that complex by constant germs",
+   "results": "8 hits: CompHausLike.LocallyConstantModule.functor, CategoryTheory.Sheaf.isConstant_of_forget, CategoryTheory.Sheaf.isConstant_iff_forget, PresheafOfModules.sheafificationCompToSheaf, LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat, CompHausLike.LocallyConstantModule.functor_obj_val, CategoryTheory.instIsConstantObjSheafSheafCompose, LightCondMod.LocallyConstant.functor",
+   "date": "2026-10-21",
+   "verdict": "no match: reviewed hits supply general homology or sheafification ingredients, or Zariski/condensed stalk statements; none states the whole etale module-complex result with the normalized constant-germ chain isomorphism"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-etale-derived-tensor-stalk",
@@ -83,5 +209,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-etale-stalk-constant-complex-exactness",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Six-step proof reuses exact module-presheaf sheafification, the normalized constant abelian stalk isomorphism, exact module-to-abelian forgetting, exact abelian geometric stalks, and the existing general cohomology comparison. Writes out scalar compatibility, constant-germ naturality, exactness reflection in ordinary modules, preservation of acyclicity/quasi-isomorphisms and the degreewise inverse chain map. No new nodes. All searches actually run are recorded, with inherited searches preserved. Maintainer reader FIX (2026-10-21): step 1 now cites the presheaf-of-O-modules sheafification interface (Stacks 03EI form) for the A_T-action and the underlying abelian sheaf of c(M), takes exactness from abelian sheafification and reflects it through the faithful exact forgetful functor; step 2 cites the same interface for the A-linearity of the constant section; step 4 writes the short-exact-to-finite-limits translation (010N).",
+  "blueprint": "det-ctf-finite-proper-tor, From constant modules to all sheaves paragraph (flat-resolution restriction and stalkwise tensor test), through parent lem-sfb-etale-derived-tensor-stalk: steps 1–5 supply the exact termwise functors and step 6 the constant-complex retraction used for the acyclic constant-complex test.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-constant-sheaf-geometric-stalk",
+    "why": "General constant-germ normalization on the small etale site, with no finite-module hypothesis; the proper-direct-image unit has no such normalization result."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exactness of forgetting module sheaves to abelian sheaves, used to derive module-stalk exactness from the existing exact abelian stalk tool; this unit has no forgetful exactness lemma."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-constant-sheaf-geometric-stalk",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O1-db61742bf",
+  "group": "O1",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O1-db61742bf (reviewer sub-agent of L); spot-checked: Read the item's six-step proof in full. The item is first split by N9's node; it is neither a 10-21 re-split nor dropped, and side-live still has it unsplit. No new nodes. The statement is unchanged and true. Edge cases checked: empty T; T = Spec of a separably closed field; A=0 and A=Z/4; an unbounded complex A^2 with d(a,b)=(b,0). Sources: Stacks 03EI, 04EQ, 03PT and 010N; no SGA. Steps 3, 5 and 6 are correct. Fault 1, C4/C1 at step 1: the cited lem-weil-pbc-site-r-module-presheaf-sheafification-exact is for a fixed ring R. It gives neither the A_T-module structure on the sheafification nor exactness in Mod(A_T). Fault 2, C3/C4 at step 2: the abelian constant-stalk node was applied to c(M) without the identification of its underlying abelian sheaf or the A-linearity of iota. Fixed by citing the Mathlib leaf lem-pc-sites-module-sheafification-interface (Stacks 03EI form: O-module presheaf to O^#-module sheaf, with the abelian sheafification underneath). Step 1 now takes exactness from abelian sheafification (R=Z) and reflects it through the faithful forgetful functor that preserves kernels and cokernels (forgetful node, clause 1). Fault 3, a small gap at step 4: the step did not show that preserving short exact sequences gives the 'exact functor' hypothesis of the cited cohomology node (preserving finite limits and colimits). Step 4 now spells this out via 010N. proof_deps and the summary were updated; the statement, stmt_deps, blueprint and tool_uses are unchanged. Two off-unit tool uses are accepted: constant-germ normalization and forgetful exactness.; 1 file(s) fixed by the reviewer"
  }
 }
