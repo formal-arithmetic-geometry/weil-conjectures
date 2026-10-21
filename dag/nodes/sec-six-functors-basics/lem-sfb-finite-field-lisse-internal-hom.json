@@ -2,7 +2,7 @@
  "id": "lem-sfb-finite-field-lisse-internal-hom",
  "kind": "statement",
  "title": "Finite-field internal Hom from a finite local system",
- "statement": "Let $A$ be a finite field and $S$ a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Use ordinary uncompleted derived categories of module sheaves over the constant ring sheaf $A_T$ on small pro-étale sites [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $\\mathcal B_A(T)$ for the complexes whose cohomology vanishes outside a finite interval and is constructible [def-weil-proetale-constructible-sheaf]: there is a finite constructible locally closed stratification on which each cohomology sheaf is pro-étale locally constant with finite-dimensional $A$-module values. Let $L$ be an $A_S$-module sheaf admitting a pro-étale covering on each member of which it is a constant finite-dimensional $A$-module [def-weil-proetale-locally-constant-sheaf]. For integers $a\\le b$ and $N\\in\\mathcal B_A(S)$ with $H^r(N)=0$ outside $[a,b]$, the ambient ringed-site $R\\mathcal Hom_{A_S}(L[0],N)$ [def-pur-derived-internal-hom] belongs to $\\mathcal B_A(S)$ and has cohomology zero outside the same interval $[a,b]$. More precisely, with $L^\\vee=\\mathcal Hom_{A_S}(L,A_S)$ [def-pur-sheaf-hom], there are natural isomorphisms $H^rR\\mathcal Hom_{A_S}(L,N)\\cong L^\\vee\\otimes_{A_S}H^r(N)$ for all $r$.",
+ "statement": "Let $A$ be a finite field and $S$ a Noetherian scheme [def-pc-scheme, pqf-def-locnoeth, def-weil-pbc-quasi-compact-scheme]. Use ordinary uncompleted derived categories of module sheaves over the constant ring sheaf $A_T$ on small pro-étale sites [def-weil-pbc-proetale-site, def-weil-pbc-constant-sheaf, def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Write $\\mathcal B_A(T)$ for the complexes whose cohomology [def-weil-derived-cohomology-sheaves] vanishes outside a finite interval and is constructible [def-weil-proetale-constructible-sheaf]: there is a finite constructible locally closed stratification on which each cohomology sheaf is pro-étale locally constant with finite-dimensional $A$-module values. Let $L$ be an $A_S$-module sheaf admitting a pro-étale covering on each member of which it is a constant finite-dimensional $A$-module [def-weil-proetale-locally-constant-sheaf]. For integers $a\\le b$ and $N\\in\\mathcal B_A(S)$ with $H^r(N)=0$ outside $[a,b]$, the ambient ringed-site $R\\mathcal Hom_{A_S}(L[0],N)$ [def-pur-derived-internal-hom] belongs to $\\mathcal B_A(S)$ and has cohomology zero outside the same interval $[a,b]$. More precisely, with $L^\\vee=\\mathcal Hom_{A_S}(L,A_S)$ [def-pur-sheaf-hom], there are natural isomorphisms $H^rR\\mathcal Hom_{A_S}(L,N)\\cong L^\\vee\\otimes_{A_S}H^r(N)$ for all $r$, with sheaf tensor product [def-pur-sheaf-tensor-product].",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.7.13, local-system case of the finite-coefficient computation, using the ringed-site perfect-dual formula."
@@ -18,11 +18,97 @@
   "def-weil-pbc-quasi-compact-scheme",
   "def-weil-proetale-locally-constant-sheaf",
   "def-pur-derived-internal-hom",
-  "def-pur-sheaf-hom"
+  "def-pur-sheaf-hom",
+  "def-weil-derived-cohomology-sheaves",
+  "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $R=A_S$ and choose the given covering $\\{U_i\\to S\\}$ with $L|_{U_i}\\simeq\\underline{V_i}$. A finite basis of $V_i$ identifies this with $R|_{U_i}^{\\oplus d_i}$, where $d_i=\\dim_A V_i\\geq0$; sheafifying the basis maps and their inverse gives the identification. By the definition of sheaf Hom, $L^\\vee|_{U_i}\\simeq R|_{U_i}^{\\oplus d_i}$. For any module sheaf $M$ define $e_M:L^\\vee\\otimes_R M\\to\\mathcal Hom_R(L,M)$ by $e_M(\\lambda\\otimes m)(x)=\\lambda(x)m$. In this basis its inverse is $f\\mapsto\\sum_{j=1}^{d_i}e_j^\\vee\\otimes f(e_j)$, and both composites are identities by $x=\\sum_j e_j^\\vee(x)e_j$. Restriction to the slice of $U_i$ is the module inverse image along $U_i\\to S$ by clause 3 of [lem-sfb-proetale-object-inverse-image-restriction], so by [lem-weil-pbc-ringed-topoi-module-pullback-tensor] it commutes with the tensor product, and by the definition of sheaf Hom it commutes with $\\mathcal Hom_R$; hence the restriction of $e_M$ to $U_i$ is the evaluation map formed from $L|_{U_i}$ and $M|_{U_i}$. Thus $e_M$ is locally invertible, and its local inverses agree on overlaps because each inverts the same map; the sheaf gluing axiom gives a global inverse. These maps are natural contravariantly in $L$ and covariantly in $M$, since evaluation commutes with precomposition and postcomposition. The same calculation shows that $L^\\vee$ is locally constant with finite-dimensional models. Empty sums give the assertions for $d_i=0$.",
+   "uses": [
+    "def-weil-proetale-locally-constant-sheaf",
+    "def-pur-sheaf-hom",
+    "def-pur-sheaf-tensor-product",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0FNY, example-dual: finite-free evaluation calculation; Section 03DH, section-localize, and Tag 03DJ, lemma-extension-by-zero-exact: exact slice restriction."
+   }
+  },
+  {
+   "text": "The functor $T(M)=\\mathcal Hom_R(L,M)$ is exact. Indeed restrict a short exact sequence of module sheaves to each $U_i$. Exact slice restriction is supplied by [lem-pur-site-restriction-module-adjunction-exact], and on this slice $T$ is the finite direct sum functor $M\\mapsto M^{\\oplus d_i}$ by the basis calculation of step 1, so the resulting sequence is exact. The kernel, middle homology and cokernel of its image under $T$ consequently restrict to zero. Their vanishing is detected by this covering, by clause 1 of [lem-cbc-proetale-stalk-conservative]; [lem-sfb-proetale-object-inverse-image-restriction] identifies its covering inverse images with the slice restrictions used here. This proves exactness globally, without assuming exactness of sections or conservativity of geometric-point stalks.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-cbc-proetale-stalk-conservative",
+    "lem-sfb-proetale-object-inverse-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0FNY, example-dual: finite-free evaluation calculation; Section 03DH, section-localize, and Tag 03DJ, lemma-extension-by-zero-exact: exact slice restriction."
+   }
+  },
+  {
+   "text": "Represent $N$ by a cochain complex $C^\\bullet$, and use the K-injective resolution $C^\\bullet\\to I^\\bullet$ in [def-pur-derived-internal-hom]. Since the first argument is $L[0]$, that definition represents $R\\mathcal Hom_R(L,N)$ by the complex $T(I^\\bullet)$, with differential $T(d_I)$: the Hom-complex differential has no source differential in this case. An exact additive functor preserves kernels, images and their quotient, so step 2 and [def-weil-derived-cohomology-sheaves] give $H^r(T(I^\\bullet))\\simeq T(H^r(I^\\bullet))\\simeq T(H^r(N))$. Apply $e_{H^r(N)}^{-1}$ from step 1 to obtain the asserted isomorphism $H^rR\\mathcal Hom_R(L,N)\\simeq L^\\vee\\otimes_R H^r(N)$. Kernel and image comparisons are functorial, and evaluation is natural, so these are natural isomorphisms. This argument works for arbitrary $N$ in the uncompleted derived category.",
+   "uses": [
+    "def-pur-derived-internal-hom",
+    "def-weil-derived-cohomology-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section section-internal-hom, K-injective construction of derived internal Hom; agent exact-functor cohomology calculation for a degree-zero locally free source."
+   }
+  },
+  {
+   "text": "Choose a finite constructible locally closed stratification witnessing the constructibility of $H^r(N)$, as in [def-weil-proetale-constructible-sheaf], and let $i:Z\\to S$ be any one of its strata. By that definition $i^*H^r(N)$ is locally constant with finite geometric stalks, so [lem-sf-proetale-lisse-finite-models] gives a pro-etale covering of $Z$ on whose members it is the constant sheaf of a finite $A$-module $W$; it is a finite-dimensional $A$-space. Step 1 gives finite locally constant models $A^{d_i}$ for $L^\\vee$; [lem-exc-proetale-pullback-locally-constant] therefore gives such models for $i^*L^\\vee$ on the base-changed covering, with the same finite-dimensional $A$-spaces. By [lem-weil-pbc-ringed-topoi-module-pullback-tensor], $i^*(L^\\vee\\otimes_R H^r(N))\\simeq i^*L^\\vee\\otimes_{A_Z}i^*H^r(N)$. Take the common pro-etale refinement by fibre products of the two trivializing coverings. Restricting along a member $V\\to U$ of the refinement is the module inverse image by clause 3 of [lem-sfb-proetale-object-inverse-image-restriction], so constant models stay constant with the same module by [lem-exc-proetale-pullback-locally-constant], and the restriction of the tensor is the tensor of the restrictions by [lem-weil-pbc-ringed-topoi-module-pullback-tensor]. On $V$, choose a basis of the first model, of dimension $d$. Tensoring with its constant sheaf is then a direct sum of $d$ copies of the second constant sheaf, hence is the constant sheaf of $W^{\\oplus d}$ if the second model is $W$. This value is finite-dimensional, and finite as a set since $A$ is finite. Thus $i^*(L^\\vee\\otimes_RH^r(N))$ has finite constant models on a pro-etale covering of $Z$, and [lem-weil-pbc-proetale-finite-model-stalks] shows that its geometric stalks are finite. So it is locally constant with finite geometric stalks on each of the original strata, and $L^\\vee\\otimes_RH^r(N)$ is constructible by the cited definition. This uses the given stratification, without a geometric finiteness or purity theorem.",
+   "uses": [
+    "def-weil-proetale-constructible-sheaf",
+    "lem-sf-proetale-lisse-finite-models",
+    "lem-exc-proetale-pullback-locally-constant",
+    "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "lem-weil-pbc-proetale-finite-model-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 093R, lemma-pullback-locally-constant; finite-free tensor calculation on common trivializing coverings; constructibility as in literature/stacks-project/proetale.tex, Tag 09AJ, definition-constructible."
+   }
+  },
+  {
+   "text": "For $r\\notin[a,b]$, $H^r(N)=0$, so the formula of step 3 gives $H^rR\\mathcal Hom_R(L,N)=L^\\vee\\otimes_R0=0$. For the remaining finitely many degrees, step 4 proves constructibility. These two assertions are exactly membership in $\\mathcal B_A(S)$ with the same cohomological interval. If $S$ is empty or $L=0$ the formula gives the zero object in every degree; if $a=b$, the argument gives a single cohomology sheaf in that degree.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 6.7.13, local-system case; the sharper same-interval conclusion follows from the preceding explicit computation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-locally-constant-sheaf",
+  "def-pur-sheaf-hom",
+  "def-pur-sheaf-tensor-product",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-proetale-stalk-conservative",
+  "def-pur-derived-internal-hom",
+  "def-weil-derived-cohomology-sheaves",
+  "def-weil-proetale-constructible-sheaf",
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-exc-proetale-pullback-locally-constant",
+  "lem-weil-pbc-proetale-finite-model-stalks"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Finite-free local-basis argument of Tag 0FNY, exact restriction in Section 03DH and pullback of locally constant sheaves in Tag 093R, combined with the K-injective definition of derived internal Hom. Bhatt-Scholze Lemma 6.7.13 is context, not a claim of this precise same-interval statement under its general hypotheses."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -51,10 +137,38 @@
    "results": "{\"t\": \"2026-10-21T03:03:23Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"ihom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits give vector-space dual-tensor Hom or underived sheaf Hom and condensed closed structures, not the ringed-site derived cohomology formula and constructibility assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal Hom from a locally constant finite dimensional vector space sheaf to a bounded constructible complex preserves its cohomological interval",
+   "results": "{\"t\": \"2026-10-21T03:29:17Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal Hom from a locally constant finite dimensional vector space sheaf to a bounded constructible complex preserves its cohomological interval\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstantModule.functor\", \"CondensedMod.LocallyConstant.functor\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondMod.LocallyConstant.functor\", \"CondensedMod.LocallyConstant.functorToPresheaves\", \"CompHausLike.LocallyConstantModule.functorToPresheaves\", \"CompHausLike.LocallyConstantModule.functor_obj_val\", \"CategoryTheory.Sheaf.H\"], \"digest\": \"c8b59384f1d20270\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are ordinary module dual-tensor linear algebra, underived sheaf constructions or condensed structures; none states the pro-etale derived cohomology and constructibility assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "([Cc]onstructible|[Ll]ocally[Cc]onstant).*(internalHom|ihom|RHom)|(internalHom|ihom|RHom).*([Cc]onstructible|[Ll]ocally[Cc]onstant)",
+   "results": "{\"t\": \"2026-10-21T03:29:31Z\", \"tool\": \"grep\", \"query\": \"([Cc]onstructible|[Ll]ocally[Cc]onstant).*(internalHom|ihom|RHom)|(internalHom|ihom|RHom).*([Cc]onstructible|[Ll]ocally[Cc]onstant)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are ordinary module dual-tensor linear algebra, underived sheaf constructions or condensed structures; none states the pro-etale derived cohomology and constructibility assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Internal derived sheaf Hom out of a finite locally free module is exact and is its dual tensor the cohomology sheaves",
+   "results": "{\"t\": \"2026-10-21T03:29:32Z\", \"tool\": \"leansearch\", \"query\": \"Internal derived sheaf Hom out of a finite locally free module is exact and is its dual tensor the cohomology sheaves\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"dualTensorHomEquivOfBasis\", \"dualTensorHomEquiv\", \"CategoryTheory.sheafHom\", \"AlgebraicGeometry.Scheme.Modules.Hom\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.freeHomEquiv_comp_apply\", \"SheafOfModules.instAbelian\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality\"], \"digest\": \"fc1aba9f2d517358\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are ordinary module dual-tensor linear algebra, underived sheaf constructions or condensed structures; none states the pro-etale derived cohomology and constructibility assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"ihom\"",
+   "results": "{\"t\": \"2026-10-21T03:29:32Z\", \"tool\": \"loogle\", \"query\": \"\\\"SheafOfModules\\\", \\\"ihom\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits are ordinary module dual-tensor linear algebra, underived sheaf constructions or condensed structures; none states the pro-etale derived cohomology and constructibility assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-finite-field-internal-hom-finiteness",
@@ -73,5 +187,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-finite-field-lisse-internal-hom",
+  "worker": "stage1",
+  "summary": "Q114: preserved all mathematical hypotheses and conclusions, and supplied the local-basis evaluation, exactness of sheaf Hom, K-injective cohomology computation and stratumwise constructibility argument. Reused only existing nodes; no new nodes. Added explicit definition citations for cohomology sheaves and sheaf tensor. No completed Lean declaration or Mathlib match states the item. The general ringed-site perfect-dual and strict-perfect Hom nodes were also inspected, but are unnecessary because the degree-zero finite-free calculation is written out.",
+  "blueprint": "Realizes the local-system case of the finite-coefficient internal-Hom sentence of lem-sfb-dc-hom-preserves following its reduction-modulo-varpi display; through lem-sfb-finite-field-internal-hom-finiteness, within unit sk-def-sfb-dc-restricted-functors step 1. The argument uses ordinary finite constant coefficients, with no SGA source. Whole-blueprint searches found no node stating this entire same-interval formula.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Exact restriction to a ringed slice lets one check the finite-sum Hom calculation on the given trivializing covering; the item unit has no general slice-exactness lemma."
+   },
+   {
+    "node": "lem-cbc-proetale-stalk-conservative",
+    "why": "Only clause 1, vanishing detected by a pro-etale covering, is used to detect the three homology sheaves of the image sequence; no geometric-stalk conservativity is used."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Identifies covering inverse image with slice restriction so that the covering-vanishing criterion applies to the exactness calculation."
+   },
+   {
+    "node": "lem-exc-proetale-pullback-locally-constant",
+    "why": "Pulls the finite constant dual models back to constructible strata; a generic inverse-image fact, independent of the finiteness route of the item unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+    "why": "Identifies restriction to a stratum of the ordinary tensor with the tensor of the two inverse images; generic ringed-topos tensor functoriality."
+   },
+   {
+    "node": "lem-sf-proetale-lisse-finite-models",
+    "why": "Turns the definition's locally constant with finite geometric stalks on a stratum into finite constant models on a pro-etale covering; generic finite-coefficient fact, no node of the item unit gives it."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-finite-model-stalks",
+    "why": "Finite constant models on a pro-etale covering give finite geometric stalks, the finiteness clause of the constructibility definition; generic stalk fact."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-proetale-stalk-conservative",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "lem-exc-proetale-pullback-locally-constant",
+  "lem-weil-pbc-ringed-topoi-module-pullback-tensor",
+  "lem-sf-proetale-lisse-finite-models",
+  "lem-weil-pbc-proetale-finite-model-stalks"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q114-c5c407e63",
+  "group": "Q114",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q114-c5c407e63 (reviewer sub-agent of L); spot-checked: Read the item, all 11 cited statements, and Stacks 0FNY/03DH/03DJ/093R/09AJ (tags verified in tags/tags); no SGA source. The item is not dropped, has no re-split note, the live node is still unsplit, no new nodes, no cycle. The statement only gains the cohomology-sheaf and sheaf-tensor definition citations; it is not weakened and matches its only citer, finite-field-internal-hom-finiteness step 4. Steps 2, 3 and 5 are correct. Step 2: slice restriction is exact, Hom(L,-) on U_i is (-)^{d_i}, and vanishing is detected by clause 1 of cbc-stalk-conservative with inverse image identified as restriction. Step 3: Hom^*(L[0],I) = T(I) with differential T(d_I); exact T commutes with H^r; then e^{-1}. Fixed three C1/E1 faults. (1) Step 1 used, without a citation, that restriction commutes with the tensor product; I added lem-sfb-proetale-object-inverse-image-restriction (3) and lem-weil-pbc-ringed-topoi-module-pullback-tensor. (2) Step 4 took the local model W of i^*H^r(N) to be finite, but the constructible definition only gives finite geometric stalks; I added lem-sf-proetale-lisse-finite-models. (3) Step 4 concluded constructibility from finite local models, but the definition requires finite geometric stalks; I added lem-weil-pbc-proetale-finite-model-stalks, and made the restriction to the common refinement explicit (lem-sfb (3) + lem-exc + pullback-tensor). proof_deps recomputed; tool_uses accepted (the 5 declared + the 2 added, all generic). Small cases checked: a point with L=A^d, varying rank, L=0, N=0, a=b.; 1 file(s) fixed by the reviewer"
  }
 }
