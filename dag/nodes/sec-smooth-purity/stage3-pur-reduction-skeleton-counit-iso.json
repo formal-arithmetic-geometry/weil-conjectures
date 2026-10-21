@@ -23,21 +23,37 @@
  ],
  "proof": [
   {
-   "text": "Apply normalized DVR effectivity to the normalized tower carried by the skeleton and identify its canonical counit with coefficientExtensionCounit through the recorded completion projection.",
+   "text": "For any normalized coefficient sequence N, construct its canonical normalized DVR tower model and its Roos triangle with exactly the specified total-limit projections. The auxiliary finite-field parameter is harmless: choose a prime p greater than l, the finite field ZMod p and its algebraic closure, so l differs from D.p without any added assumption on W or l.",
    "uses": [
-    "lem-coef-normalized-dvr-effectivity"
+    "lem-coef-sequence-roos-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each n apply the finite Roos-reduction theorem with the actual finite tensor-restriction adjunction. Its adjunct is invertible. Product projection cancellation and naturality of the adjunction hom-equivalence identify that map with the adjunct of coefficientSequenceProjection, composed with the inverse finite-model isomorphism; cancel this isomorphism.",
+   "uses": [
+    "lem-coef-normalized-dvr-roos-finite-reduction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The calculus counit_projection equation says that this adjunct is the n-th evaluated system counit preceded by the inverse reductionEvaluation isomorphism. Cancel that isomorphism. Joint conservativity of the derived evaluations now makes the system counit invertible. Apply this to the normalized sequences carried by the skeleton, object by object, and compose with the completion isomorphism in coefficientExtensionCounit.",
+   "uses": [
+    "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-coef-normalized-dvr-effectivity"
+  "lem-coef-sequence-roos-model",
+  "lem-coef-normalized-dvr-roos-finite-reduction",
+  "lem-coef-derived-system-evaluation-calculus"
  ],
  "proof_origin": {
   "kind": "from-document",
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
-  "place": "Integral operations clause"
+  "place": "Integral coefficient clause and normalized DVR effectivity, with the canonical sequence-site Roos model and finite-reduction comparison."
  },
  "mathlib_searches": [
   {
@@ -111,20 +127,10 @@
   "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "X3",
+  "group": "S1",
   "result": "pass",
-  "landing": "20261021T005757-L-1892424",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "WeilConjectures.coefficientExtensionReductionCompositionEquation_proved",
-   "WeilConjectures.coefficientExtensionReductionSkeleton_comparison_isIso",
-   "WeilConjectures.coefficientExtensionReductionSkeleton_exists",
-   "WeilConjectures.coefficientExtensionScalarAssociation_exists"
-  ],
-  "sorry_after": [
-   "WeilConjectures.coefficientExtensionReductionSkeleton_comparison_isIso",
-   "WeilConjectures.coefficientExtensionReductionSkeleton_exists"
-  ]
+  "landing": "20261021T020137-L-2590496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

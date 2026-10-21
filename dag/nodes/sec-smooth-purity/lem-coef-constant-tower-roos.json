@@ -1,0 +1,147 @@
+{
+ "id": "lem-coef-constant-tower-roos",
+ "kind": "statement",
+ "title": "Canonical Roos triangle of a completed-coefficient derived tower",
+ "statement": "Fix a prime l, a finite extension E of Q_l, a scheme W, and the auxiliary datum D with l different from D.p as in [def-coef-normalized-dvr-tower]. For any derived inverse system X of completed-coefficient sheaves in [def-coef-ringed-sequence-site], the actual right-derived tower limit admits a Roos distinguished triangle [def-weil-derived-limit] whose first arrow is the product lift of coefficientConstantTowerProjection and whose successor maps are normalizedDVRTowerTransition. The countable product needed in this assertion exists.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral coefficient clause: derived inverse limits of compatible finite reductions; Roos computation as in Stacks Tags 0941, 079P, 0BK6 and 0BK7."
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-coef-ringed-sequence-site",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Exact countable products on the small pro-etale site give countable AB4-star for completed-coefficient sheaves and the specified products of derived objects. Grothendieck abelianness gives enough injectives and K-injective resolutions.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-pur-integral-operations-well-defined"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Represent X by a simultaneous K-injective complex I of inverse systems. The degreewise limit complex and its evaluation projections form a limit cone, as can be checked degreewise. Apply the proved canonical tower-limit triangle to this cone.",
+   "uses": [
+    "lem-weil-derived-limit-tower-core-property-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport the triangle along the right-derived limit comparison and the evaluation comparison isomorphisms, then along the chosen isomorphism Q(I) with X. Product extensionality and naturality identify the second arrow with the successor endomorphism. The defining normalization of coefficientConstantTowerProjection on K-injective representatives identifies the first arrow with its stated product lift. Transport distinguishedness along this triangle isomorphism.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-countable-products-exact",
+  "lem-pur-integral-operations-well-defined",
+  "lem-weil-derived-limit-tower-core-property-triangle",
+  "def-coef-ringed-sequence-site"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral coefficient clause: derived inverse limits of compatible finite reductions; Roos computation as in Stacks Tags 0941, 079P, 0BK6 and 0BK7."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized tower counit isomorphism from normalized derived coefficient sequence",
+   "results": "Eight generic Dold-Kan/normalization results; none identifies the canonical derived-limit projections of the ringed coefficient sequence site. The source-library K-injective tower-limit triangle supplies the Roos ingredient.",
+   "date": "2026-10-21",
+   "verdict": "source-library ingredients used"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso, Adjunction.counit",
+   "results": "No usable exact match (unqualified IsIso was not recognized). Local library search supplies the finite-reduction theorem with an arbitrary adjunction.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*counit|counit.*normalized",
+   "results": "No Mathlib match. Local searches found the exact sequence-site constructions and the proved K-injective tower-limit triangle, but no bridge identifying its projections with coefficientSequenceProjection.",
+   "date": "2026-10-21",
+   "verdict": "use existing definitions and prove projection transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The right derived inverse limit of a tower of sheaves has a distinguished Roos triangle with the canonical projections to each level",
+   "results": "Eight hits include DerivedCategory.triangleOfSES (Mathlib.Algebra.Homology.DerivedCategory.ShortExact), SheafOfModules.hasLimitsOfSize and hasLimitsOfShape (Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits), and ordinary Kan-extension limit projection formulas. These are generic triangle and limit ingredients; none is the canonical tower Roos triangle.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "canonical Roos distinguished triangle for right derived inverse limit of tower with canonical projections",
+   "results": "Eight generic distinguished-triangle hits: DerivedCategory.triangleOfSES, triangleOfSESIso and mem_distTriang_iff, plus distinguished_cocone_triangle in localized/homotopy triangulated categories. No theorem about the right-derived tower limit with its specified projections.",
+   "date": "2026-10-21",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i roos|derived.*inverse.*limit|normalized.*coefficient|coefficient.*sequence Mathlib/Algebra/Homology Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/RingTheory/AdicCompletion",
+   "results": "No regex hits. Read Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits: its isSheaf_of_isLimit, createsLimit and hasLimit declarations establish ordinary sheaf-module limits, not the derived Roos triangle or normalized coefficient-sequence coherence.",
+   "date": "2026-10-21",
+   "verdict": "no match; source-library theorem and explicit localization proof used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionReductionModel",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Integral coefficient clause: derived inverse limits of compatible finite reductions; Roos computation as in Stacks Tags 0941, 079P, 0BK6 and 0BK7.",
+   "via": [
+    "lem-pur-coefficient-extension-reduction-model",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientConstantTowerRoos",
+  "file": "lean/Sheaf/Paper/CoefficientConstantTowerRoos.lean",
+  "declaration": "WeilConjectures.coefficientConstantTower_roos",
+  "statement": "theorem coefficientConstantTower_roos\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})\n    (D : FiniteFieldDatum.{v}) (hl : l ≠ D.p)\n    (X : coefficientSequenceRestrictedDerived l E W) :\n    ∃ hp : HasProduct (fun n : ℕ ↦ (coefficientConstantTowerEvaluation l E W n).obj X),\n      letI := hp\n      ∃ δ, IsDerivedLimitTriangle\n        (fun n : ℕ ↦ (normalizedDVRTowerTransition l E W D hl n.le_succ).app X)\n        ((coefficientConstantTowerLimit l E W).obj X)\n        (Pi.lift (fun n : ℕ ↦ (coefficientConstantTowerProjection l E W n).app X)) δ",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T020137-L-2590496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T020137-L-2590496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

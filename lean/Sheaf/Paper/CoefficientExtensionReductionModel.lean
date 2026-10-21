@@ -9,6 +9,10 @@ public import Sheaf.Paper.SemilinearDerivedSections
 public import Sheaf.Paper.IntegralScalarExtensionUniverses
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 import WeilConjectures.CategoryTheory.DerivedCategory.MapDerivedCategoryCocycle
+import Sheaf.Paper.CoefficientSequenceRoosModel
+import Sheaf.Paper.NormalizedDVRRoosFiniteReduction
+import Mathlib.FieldTheory.IsAlgClosed.AlgebraicClosure
+import Mathlib.Data.ZMod.Basic
 /-! # Coherent finite reduction of completed coefficient extension
 
 Source: main-20261015 blueprint, sec-proetale-coefficients/sk-def-sf-operations,
@@ -731,6 +735,59 @@ theorem coefficientExtensionReductionSkeleton_exists
     Nonempty (CoefficientExtensionReductionSkeleton l E L ι W SE A) := by
   sorry
 
+private def effectivityTestDatum (p : ℕ) (hp : p.Prime) : FiniteFieldDatum.{0} := by
+  letI : Fact p.Prime := ⟨hp⟩
+  exact {
+    p := p
+    a := 1
+    q := p
+    prime := hp
+    exponent_pos := le_refl 1
+    cardinality_eq := (pow_one p).symm
+    k₀ := ZMod p
+    card_base := by simp [Nat.card_eq_fintype_card]
+    k := AlgebraicClosure (ZMod p) }
+
+private theorem normalizedSequence_counit_isIso
+    (N : coefficientSequenceDerived l L W)
+    (hN : IsNormalizedCoefficientSequence l L W N) :
+    IsIso (SL.adjunction.counit.app N) := by
+  obtain ⟨p, hpl, hp⟩ := Nat.exists_infinite_primes (l + 1)
+  let D := effectivityTestDatum p hp
+  have hlp : l ≠ D.p := by
+    change l ≠ p
+    omega
+  obtain ⟨T, e, hprod, δ, hδ⟩ := coefficientSequence_roosModel l L W D hlp N hN
+  let := hprod
+  apply (SL.isIso_iff_evaluations _).2
+  intro n
+  let adj := coefficientFiniteAdjunction l L W n
+  let q := (adj.homEquiv _ _).symm ((coefficientSequenceProjection l L W n).app N)
+  have hi := normalizedDVRRoos_finite_reduction l L W D hlp T _ _ δ hδ n adj
+  have heq : (adj.homEquiv _ _).symm
+      ((Pi.lift (fun k : ℕ ↦ (coefficientSequenceProjection l L W k).app N ≫
+        (normalizedDVRResCompleted l L W D hlp k).map (e k).inv ≫
+        (T.evaluationIso k).inv)) ≫ Pi.π _ n ≫ (T.evaluationIso n).hom) =
+      q ≫ (e n).inv := by
+    simp only [Pi.lift_π_assoc, Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact adj.homEquiv_naturality_right_symm _ _
+  have : IsIso (q ≫ (e n).inv) := by
+    rw [← heq]
+    exact hi
+  have : IsIso q := IsIso.of_isIso_comp_right q (e n).inv
+  have hq : (SL.reductionEvaluation n).inv.app ((coefficientSequenceLimit l L W).obj N) ≫
+      (coefficientSequenceDerivedEvaluation l L W n).map (SL.adjunction.counit.app N) = q := by
+    apply (adj.homEquiv _ _).injective
+    exact (SL.counit_projection N n).trans
+      ((adj.homEquiv _ _).apply_symm_apply _).symm
+  have : IsIso ((SL.reductionEvaluation n).inv.app
+      ((coefficientSequenceLimit l L W).obj N) ≫
+      (coefficientSequenceDerivedEvaluation l L W n).map (SL.adjunction.counit.app N)) := by
+    rw [hq]
+    infer_instance
+  exact IsIso.of_isIso_comp_left
+    ((SL.reductionEvaluation n).inv.app ((coefficientSequenceLimit l L W).obj N)) _
+
 /-- The normalized tower counit of a reduction skeleton is invertible.
 Source: normalized DVR effectivity
 (blueprint: lem-pur-coefficient-extension-reduction-model).
@@ -742,7 +799,14 @@ theorem coefficientExtensionReductionSkeleton_comparison_isIso
     (_hl : IsUnit (l : Γ(W, ⊤)))
     (s : CoefficientExtensionReductionSkeleton l E L ι W SE A) :
     IsIso (coefficientExtensionCounit l E L ι W SE SL A s.completion) := by
-  sorry
+  have (K : DerivedCategory (scalarReductionSource l E W)) :
+      IsIso (SL.adjunction.counit.app ((coefficientExtensionSystem l E L ι W SE A).obj K)) :=
+    normalizedSequence_counit_isIso l L W SL _ (s.normalized K)
+  apply (NatTrans.isIso_iff_isIso_app _).2
+  intro K
+  unfold coefficientExtensionCounit
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app]
+  infer_instance
 
 /-- Coherent finite reduction of completed scalar extension on the entire derived category.
 Source: integral operations, Stacks 06YS, 0G7E, 06YY

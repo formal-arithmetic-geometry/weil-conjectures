@@ -1,0 +1,148 @@
+{
+ "id": "lem-coef-sequence-roos-model",
+ "kind": "statement",
+ "title": "Normalized DVR tower carried by a normalized derived coefficient sequence",
+ "statement": "For l,E,W,D and l different from D.p as in [def-coef-normalized-dvr-tower], every normalized derived coefficient sequence N of [def-coef-ringed-sequence-site] admits a normalized DVR tower T whose finite objects are isomorphic to the actual derived evaluations of N. Its specified total limit coefficientSequenceLimit(N) has a Roos triangle [def-weil-derived-limit] whose projection to level n, after the evaluation isomorphism, is exactly coefficientSequenceProjection(N,n). In particular the tower and maps are constructed from the given sequence, without asserting any finite-effectivity conclusion.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral coefficient clause: interpreting compatible finite reductions as a completed-coefficient tower and identifying its derived inverse-limit projections; Stacks Tags 0940 and 0941."
+ },
+ "stmt_deps": [
+  "def-coef-normalized-dvr-tower",
+  "def-coef-ringed-sequence-site",
+  "def-weil-derived-limit"
+ ],
+ "proof": [
+  {
+   "text": "Take T.M(n) to be the actual derived evaluation of N, T.tau to be the localized coefficientSequenceTransition, and T.tower to be the derived exact scalar restriction of N. On ordinary section maps prove identity, composition and compatibility with completed-coefficient restriction: all are the presheaf identity and composition equations, with the canonical restriction-of-scalars associators. This includes equal indices and hence every identity transition.",
+   "uses": [
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For arbitrary exact functors, verify that their localized transition maps and induced comparison isomorphisms satisfy the same equations: use localization extensionality, the factorization isomorphisms on complexes, and cancellation. Apply these generic proofs to the ordinary equations. The resulting derived equations supply tau_refl, tau_comp and tower_tau. Use the supplied normalization of N for the normalization field of T. The finite comparison isomorphisms e(n) can therefore be identities.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-coef-normalized-dvr-tower"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the canonical Roos triangle of the restricted tower. By the definition of coefficientSequenceProjection its n-th projection is the completed-tower projection followed by the finite evaluation isomorphism. Composing with the inverse of that isomorphism cancels it. Product extensionality identifies the first arrow with the precise product lift in the statement.",
+   "uses": [
+    "lem-coef-constant-tower-roos",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-coef-ringed-sequence-site",
+  "def-weil-abstract-derived-category",
+  "def-coef-normalized-dvr-tower",
+  "lem-coef-constant-tower-roos"
+ ],
+ "proof_origin": {
+  "kind": "from-document",
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+  "place": "Integral coefficient clause: interpreting compatible finite reductions as a completed-coefficient tower and identifying its derived inverse-limit projections; Stacks Tags 0940 and 0941."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "normalized tower counit isomorphism from normalized derived coefficient sequence",
+   "results": "Eight generic Dold-Kan/normalization results; none identifies the canonical derived-limit projections of the ringed coefficient sequence site. The source-library K-injective tower-limit triangle supplies the Roos ingredient.",
+   "date": "2026-10-21",
+   "verdict": "source-library ingredients used"
+  },
+  {
+   "tool": "loogle",
+   "query": "IsIso, Adjunction.counit",
+   "results": "No usable exact match (unqualified IsIso was not recognized). Local library search supplies the finite-reduction theorem with an arbitrary adjunction.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "grep",
+   "query": "normalized.*counit|counit.*normalized",
+   "results": "No Mathlib match. Local searches found the exact sequence-site constructions and the proved K-injective tower-limit triangle, but no bridge identifying its projections with coefficientSequenceProjection.",
+   "date": "2026-10-21",
+   "verdict": "use existing definitions and prove projection transport"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A normalized derived sequence of modules over finite quotient coefficient sheaves gives a coherent derived tower of completed coefficient modules with the same derived inverse limit projections",
+   "results": "Eight hits, all ordinary adic-completion declarations in Mathlib.RingTheory.AdicCompletion.Basic, including AdicCompletion, of_apply and IsAdicComplete.of_lift. None concerns derived sheaf sequences or coherent restriction and Roos projections.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "coherent normalized derived sequence restricts to inverse system over completed coefficient ring with same limit projections",
+   "results": "Eight ordinary module adic-completion hits, including AdicCompletion.pi_apply_coe (Functoriality), IsPrecomplete.prec, and AdicCompletion.transitionMap_comp_eval_apply (Basic). Their types are ordinary module/completion equations, not derived sheaf sequence coherence.",
+   "date": "2026-10-21",
+   "verdict": "generic ingredients only"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i roos|derived.*inverse.*limit|normalized.*coefficient|coefficient.*sequence Mathlib/Algebra/Homology Mathlib/Algebra/Category/ModuleCat/Sheaf Mathlib/RingTheory/AdicCompletion",
+   "results": "No regex hits. Read Mathlib.Algebra.Category.ModuleCat.Sheaf.Limits: its isSheaf_of_isLimit, createsLimit and hasLimit declarations establish ordinary sheaf-module limits, not the derived Roos triangle or normalized coefficient-sequence coherence.",
+   "date": "2026-10-21",
+   "verdict": "no match; source-library theorem and explicit localization proof used"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CoefficientExtensionReductionModel",
+  "date": "2026-10-21",
+  "group": "S1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "Integral coefficient clause: interpreting compatible finite reductions as a completed-coefficient tower and identifying its derived inverse-limit projections; Stacks Tags 0940 and 0941.",
+   "via": [
+    "lem-pur-coefficient-extension-reduction-model",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CoefficientSequenceRoosModel",
+  "file": "lean/Sheaf/Paper/CoefficientSequenceRoosModel.lean",
+  "declaration": "WeilConjectures.coefficientSequence_roosModel",
+  "statement": "theorem coefficientSequence_roosModel\n    (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]\n    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (W : Scheme.{t})\n    (D : FiniteFieldDatum.{d}) (hl : l ≠ D.p)\n    (N : coefficientSequenceDerived l E W) (hN : IsNormalizedCoefficientSequence l E W N) :\n    ∃ (T : NormalizedDVRTower l E W D hl)\n      (e : ∀ n : ℕ, T.M n ≅ (coefficientSequenceDerivedEvaluation l E W n).obj N)\n      (hp : HasProduct (fun n : ℕ ↦\n        (normalizedDVRTowerEvaluation l E W D hl n).obj T.tower)), letI := hp\n      ∃ δ, IsDerivedLimitTriangle\n        (fun n : ℕ ↦ (normalizedDVRTowerTransition l E W D hl n.le_succ).app T.tower)\n        ((coefficientSequenceLimit l E W).obj N)\n        (Pi.lift (fun n : ℕ ↦ (coefficientSequenceProjection l E W n).app N ≫\n          (normalizedDVRResCompleted l E W D hl n).map (e n).inv ≫\n          (T.evaluationIso n).inv)) δ",
+  "branch": "sheaf-dag",
+  "by": "S1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T020137-L-2590496",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S1",
+  "result": "pass",
+  "landing": "20261021T020137-L-2590496",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
