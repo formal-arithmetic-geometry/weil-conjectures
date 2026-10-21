@@ -20933,3 +20933,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/O4/lem-pur-etale-direct-image-scalar-composition (reviewer PASS; first push; new nodes: 0)
 - 08:09 L: merged deliver/Q113/def-nagata-scheme-image-comparison (reviewer PASS; after a return; new nodes: 0)
 - 08:09 L: merged deliver/Q31/lem-weil-compact-support-representative-independence (reviewer FIX; after a return; new nodes: 1)
+- 08:09 L: merged deliver/N6/lem-pur-etale-open-scalar-composition (reviewer PASS; first push; new nodes: 0)

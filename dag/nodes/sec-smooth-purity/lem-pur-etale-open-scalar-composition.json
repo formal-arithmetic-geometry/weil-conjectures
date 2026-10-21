@@ -20,9 +20,33 @@
   "lem-weil-pbc-extension-by-zero-adjunction",
   "lem-cbc-extension-zero-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the ordinary etale scalar-composition and identity clauses of [lem-sp-open-scalar-site-coherence], with $T=Q$, $j_1=a$ and $j_2=b$. Its $t_j$ is the same balancing map as $\\beta_j$: [lem-coef-etale-open-tensor] specifies the scalar isomorphism by the canonical tensor identification over $U$, and both maps there send $s\\otimes b$ to $s\\otimes b$. The inverse has open-adjunction transpose $\\lambda_{j,j_{!,A}M}^{-1}\\circ Q_U(\\eta_{j,A,M})$: after $j_R^*j_{!,R}\\cong1$, both units and the restricted balancing map are identities. This is exactly the prescription of [def-pur-open-coefficient-normalizations]; the derived open adjunction and its degreewise normalization are part of [lem-coef-etale-open-tensor]. Thus this identifies the specified maps, including their inverses. The composition clause of [lem-sp-open-scalar-site-coherence] uses the canonical compositors of [lem-cbc-extension-zero-composition]. Restoring those compositors gives\n$$\\beta_{ba,M}\\circ Q_T(c_{A,M})=c_{B,Q_UM}\\circ b_{!,B}(\\beta_{a,M})\\circ\\beta_{b,a_{!,A}M}.$$\nIts identity clause gives $\\beta_{\\mathrm{id}}=1$ under the canonical identity-open identifications. The scalar-composition clause is on ordinary unbounded categories; the separate scalar/site square assumes a bounded flat representative, but is not used here. [lem-coef-etale-open-tensor] likewise imposes no boundedness condition. Both conclusions therefore apply to every $M\\in D_A(U)$.",
+   "uses": [
+    "lem-sp-open-scalar-site-coherence",
+    "lem-coef-etale-open-tensor",
+    "def-pur-open-coefficient-normalizations",
+    "lem-cbc-extension-zero-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor, and Tag 0E46, remark-compose-base-change; specialization of the existing scalar-composition clause, with its open-unit normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-open-scalar-site-coherence",
+  "lem-coef-etale-open-tensor",
+  "def-pur-open-coefficient-normalizations",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0GL1 and 0E46; specialize the existing ordinary-etale scalar-composition and identity clauses and identify their maps by the open-unit normalization"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +82,45 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ZeroHom.smul_comp\", \"module\": \"Mathlib.Algebra.GroupWithZero.Action.Hom\", \"type\": \"[SMulZeroClass M C] (m : M) (g : ZeroHom B C) (f : ZeroHom A B) : (m • g).comp f = m • g.comp f\", \"doc\": \"For any scalar $ m $ in a type $ M $ with zero-preserving scalar multiplication on $ C $, and for any zero-preserving homomorphisms $ g : B \\\\to C $ and $ f : A \\\\to B $, the composition of the scalar m\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsOpenImmersion g] (M : Z.Modules) :\\n  ((restrictFunctorComp f g).hom.app M).app U = M.presheaf.map (eqToHom (by simp)).op\", \"doc\": \"For schemes $X, Y, Z$ and open immersions $f: X \\\\to Y$, $g: Y \\\\to Z$, the composition of the functors induced by $g$ on open subsets of $Y$ and by $f$ on open subsets of $X$ (via opposite category ope\"}\n  {\"name\": \"ContinuousMapZero.instSMulCommClass\", \"module\": \"Mathlib.Topology.ContinuousMap.ContinuousMapZero\", \"type\": \"{M N : Type*} [SMulZeroClass M R] [ContinuousConstSMul M R] [SMulZeroClass N R] [ContinuousConstSMul N R]\\n  [SMulCommClass M N R] : SMulCommClass M N C(X, R)₀\", \"doc\": \"If scalar multiplications by monoids $M$ and $N$ commute on a topological space $R$ equipped with continuous scalar actions preserving zero, then they also commute on the space of continuous functions\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Hom.opensRange_comp\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \"{X Y Z : Scheme} (f : X ⟶ Y) (g : Y ⟶ Z) [IsOpenImmersion f] [IsOpenImmersion g] :\\n  (f ≫ g).opensRange = g ''ᵁ f.opensRange\", \"doc\": \"For schemes $X, Y, Z$ and open immersions $f: X \\\\to Y$ and $g: Y \\\\to Z$, the open subset of $Z$ that is the image of the composition $f \\\\circ g$ equals the direct image under $g$ of the open subset of\"}\n  {\"name\": \"ZeroHom.instSMulCommClass\", \"module\": \"Mathlib.Algebra.GroupWithZero.Action.Hom\", \"type\": \"[SMulZeroClass M B] [SMulZeroClass N B] [SMulCommClass M N B] : SMulCommClass M N (ZeroHom A B)\", \"doc\": \"Given types $ M $, $ N $, $ A $, and $ B $ with zero elements, if scalar multiplications of $ M $ and $ N $ on $ B $ commute and preserve zero, then the induced scalar multiplications of $ M $ and $ N\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift_fac\", \"module\": \"Mathlib.Geometry.RingedSpace.OpenImmersion\", \"type\": \"(H : Set.range g.base ⊆ Set.range f.base) : lift f g H ≫ f = g\", \"doc\": \"Given open immersions $ f: X \\to Z $ and $ g: Y \\to Z $ such that the image of the base map of $ g $ is contained in the image of the base map of $ f $, the composition of the lifted morphism $ Y \\to X $\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"[IsOpenImmersion g] (M : Z.Modules) :\\n  ((restrictFunctorComp f g).inv.app M).app U = M.presheaf.map (eqToHom (by simp)).op\", \"doc\": \"For open immersions $ f: X \\\\to Y $ and $ g: Y \\\\to Z $ between schemes, the functor induced by the composition $ g \\\\circ f $ on open subsets of $ X $ satisfies $ (g \\\\circ f)_*(U) = g_*(f_*(U)) $ for an\"}\n  {\"name\": \"AlgebraicGeometry.IsLocalAtSource.respectsLeft_isOpenImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Basic\", \"type\": \"∀ {P : CategoryTheory.MorphismProperty AlgebraicGeometry.Scheme} [AlgebraicGeometry.IsZariskiLocalAtSource P],\\n  P.RespectsLeft AlgebraicGeometry.IsOpenImmersion\", \"doc\": \"If $ P $ is a morphism property of schemes that is Zariski-local at the source, then $ P $ respects left composition with open immersions. Specifically, for any morphisms $ f: X \\\\to Y $ and $ g: Y \\\\to\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary modules, scheme structure-sheaf modules, or generic mates; none states this normalized unbounded small-etale coefficient identity"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived extension by zero along composite open immersions commutes with extension of scalars with open unit normalization",
+   "results": "{\"t\": \"2026-10-21T07:16:58Z\", \"tool\": \"leanfinder\", \"query\": \"Derived extension by zero along composite open immersions commutes with extension of scalars with open unit normalization\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ModuleCat.Tilde.toOpen_res\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_inv_app'_assoc\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_invApp_assoc\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"AlgebraicGeometry.Scheme.Hom.app_appIso_inv_assoc\", \"AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq\"], \"digest\": \"ecaebc60cbee0fff\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction compositors for structure-sheaf modules and generic underived pullback mates do not state the normalized ordinary-etale unbounded coefficient/open-extension law"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Sheaf, CategoryTheory.Adjunction.comp",
+   "results": "{\"t\": \"2026-10-21T07:17:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Sheaf, CategoryTheory.Adjunction.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"8037497ca6f7e908\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction compositors for structure-sheaf modules and generic underived pullback mates do not state the normalized ordinary-etale unbounded coefficient/open-extension law"
+  },
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|lowerShriek|shriek).*(scalar|coeff|comp)|(scalar|coeff).*(extensionByZero|lowerShriek|shriek)",
+   "results": "{\"t\": \"2026-10-21T07:17:25Z\", \"tool\": \"grep\", \"query\": \"(extensionByZero|lowerShriek|shriek).*(scalar|coeff|comp)|(scalar|coeff).*(extensionByZero|lowerShriek|shriek)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction compositors for structure-sheaf modules and generic underived pullback mates do not state the normalized ordinary-etale unbounded coefficient/open-extension law"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Open immersion shriek scalar coefficient comparison composition of open embeddings unbounded derived category",
+   "results": "{\"t\": \"2026-10-21T07:17:26Z\", \"tool\": \"leanfinder\", \"query\": \"Open immersion shriek scalar coefficient comparison composition of open embeddings unbounded derived category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"AlgebraicGeometry.Scheme.Hom.comp_appIso\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"AlgebraicGeometry.Scheme.Hom.app_invApp'_assoc\", \"AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv\", \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\"], \"digest\": \"5c6dac930ea05425\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction compositors for structure-sheaf modules and generic underived pullback mates do not state the normalized ordinary-etale unbounded coefficient/open-extension law"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar comparison for extension by zero commutes with composition of open immersions",
+   "results": "{\"t\": \"2026-10-21T07:17:41Z\", \"tool\": \"leansearch\", \"query\": \"Canonical scalar comparison for extension by zero commutes with composition of open immersions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ZeroHom.smul_comp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_hom_app_app\", \"ContinuousMapZero.instSMulCommClass\", \"AlgebraicGeometry.Scheme.Hom.opensRange_comp\", \"ZeroHom.instSMulCommClass\", \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.lift_fac\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp_inv_app_app\", \"AlgebraicGeometry.IsLocalAtSource.respectsLeft_isOpenImmersion\"], \"digest\": \"169f467e0f25e628\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction compositors for structure-sheaf modules and generic underived pullback mates do not state the normalized ordinary-etale unbounded coefficient/open-extension law"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-etale-compact-scalar-coherence",
@@ -80,5 +139,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-etale-open-scalar-composition",
+  "worker": "stage1",
+  "summary": "No new nodes. The reviewed existing lem-sp-open-scalar-site-coherence already states the ordinary-etale scalar composition and identity laws. Identify its summandwise scalar comparison with the prescribed balancing map using lem-coef-etale-open-tensor and the open-unit definition, and restore the canonical open compositors. The statement and all imported metadata are unchanged. The unrestricted scalar clause is used, not the bounded-flat scalar/site square.",
+  "blueprint": "cor-pur-vector-bundle-purity, proof paragraph 2: coefficient reduction commutes with the projective-line trace and composition of its adjunctions gives the affine-space compatibilities. This supplies precisely the open scalar/composition constituent extracted by lem-pur-etale-compact-scalar-coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-sp-open-scalar-site-coherence",
+    "why": "Use only its generic ordinary-etale open scalar composition and identity clauses, with the same canonical balancing maps; no site comparison or geometric purity step is substituted."
+   },
+   {
+    "node": "lem-coef-etale-open-tensor",
+    "why": "Identifies the canonical unbounded open balancing comparison and its degreewise adjunction normalization; this generic coefficient-tensor tool fixes the map used in the unit compatibility argument."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "Supplies the canonical open-extension compositors and identity identifications in the scalar law; it is a generic open-extension tool, not a replacement purity argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sp-open-scalar-site-coherence",
+  "lem-coef-etale-open-tensor",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N6-628827207",
+  "group": "N6",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N6-628827207 (reviewer sub-agent of L); spot-checked: I read the item and all four cited statements in full. Statement-level nodes outside the item's chapter were read from clones/side-live, because their snapshot symlinks are dangling. The delivery has no new nodes and leaves the statement unchanged (field-diffed against live). Its one step specializes the separate composition and identity clauses of the reviewed lem-sp-open-scalar-site-coherence, taking j1=a and j2=b. Its bounded-flat hypothesis governs only the scalar/site square, so the result holds for every M, including unbounded ones. Writing out 'after the canonical open compositors' gives exactly beta_{ba} o Q(c_A) = c_B o b_!(beta_a) o beta_b(a_!M); I checked the types of both sides. t_j (summand-retaining, s(x)b to s(x)b) equals q_j of lem-coef-etale-open-tensor: both restrict to the identity on U, and the inverse's j_! adjunction transpose is then forced to be lambda^{-1} o Q_U(eta_A). That is iota of def-pur-open-coefficient-normalizations, whose lambda^ex comes from lem-pur-etale-scalar-mate-projection, which uses the ringed-topoi comparison. The compositors are those of lem-cbc-extension-zero-composition. Small cases checked: a or b equal to id, U empty, M=0, A=B, and the nonflat map Z/4 to Z/2. None of the four cited nodes' closures reaches the item, so there is no cycle. Nothing touched is on the route-pivot dropped list. Sources are Stacks 0E46 (sites-cohomology.tex:4062) and 0GL1 (:4578), checked against tags/tags; no SGA is cited. The overlap with the lem-sp clause was already recorded with a keep-both note in the Q11 parent reviews; citing the existing node is the right resolution. The three off-unit tool_uses are generic and accepted. The Mathlib searches are real."
  }
 }
