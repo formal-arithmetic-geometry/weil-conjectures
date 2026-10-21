@@ -21157,3 +21157,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:34 L: merged deliver/Q139/lem-coef-exact-sections-reduction-unit (reviewer FIX; first push; new nodes: 0)
 - 08:34 L: merged deliver/Q119/lem-pur-etale-quotient-tensor-stalk-criterion (reviewer PASS; first push; new nodes: 0)
 - 08:34 L: merged deliver/Q66/lem-sfb-geometric-two-iso-scalar-pairing (reviewer PASS; first push; new nodes: 0)
+- 08:34 L: merged deliver/O3/lem-pod-formal-verdier-exchange-equivariance (reviewer FIX; first push; new nodes: 0); claim not held by O3: not your claim

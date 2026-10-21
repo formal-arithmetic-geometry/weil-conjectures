@@ -19,9 +19,108 @@
   "fix-lem-tensor-adjunction",
   "fix-cor-verdier-exchange"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [cor-coef-verdier-weil-equivariance] to each of $T_0=X_0,Y_0$. Its hypotheses are exactly the separated finite-type finite-field and rational/common-stage coefficient hypotheses here. It gives the contravariant Weil lift of $D_T$, equivariance of evaluation and biduality, and the dualizing/duality scalar-extension comparisons together with their evaluation, biduality and exceptional-adjunction diagrams. In particular $A=D_YRf_!M$ has its specified Weil structure whenever $Rf_!M$ is in the stated constructible domain. For orientation only (nothing below uses the formula): writing $h_T:P_TR\\mathcal Hom(K,\\omega_T)\\simeq R\\mathcal Hom(P_TK,P_T\\omega_T)$, the structure $R\\mathcal Hom(\\theta_K^{-1},\\theta_{\\omega_T})h_T$ makes evaluation equivariant, since $\\operatorname{ev}(\\theta_Kx,\\theta_D\\varphi)=\\theta_{\\omega_T}((h_T\\varphi)(\\theta_K^{-1}\\theta_Kx))$; it uses the rational isomorphism $\\theta_K$ itself. Steps 2--8 use only the equivariance assertions of the corollary. The cited corollary also gives these assertions in the common-stage category without a stable integral lattice.",
+   "uses": [
+    "cor-coef-verdier-weil-equivariance"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 4: duality and evaluation; preliminary rational/common-stage assertions."
+   }
+  },
+  {
+   "text": "Write $F=Rf_!$, $G=Rf^!$, $P=Lf^*$ and $Q=Rf_*$, and put $V=M\\otimes^L PA$. The projection isomorphism $\\operatorname{PF}:FM\\otimes^L A\\xrightarrow{\\sim}FV$ of [def-exchange-projection] is a morphism of Weil pairs on this domain by [lem-pod-constructible-mate-coherence], whose statement makes the projection transformation of [def-exchange-projection] a Weil morphism on its constructible domains for the same separated finite-type $f_0$ and the same rational/common-stage Weil pairs; its invertibility is the hypothesis of the item, not a consequence of equivariance. Its inverse is a Weil morphism: if $u\\theta_B=\\theta_CP_Y(u)$, multiplication by $u^{-1}$ on the left and $P_Y(u^{-1})$ on the right gives $u^{-1}\\theta_C=\\theta_BP_Y(u^{-1})$. The evaluation $FM\\otimes^L D_YFM\\to\\omega_Y$ is equivariant by Step 1. Consequently $b=\\operatorname{ev}\\circ\\operatorname{PF}^{-1}:FV\\to\\omega_Y$ is equivariant. Indeed for two composable Weil arrows $u,v$, $(vu)\\theta=v\\theta'P_Y(u)=\\theta''P_Y(vu)$, the defining equation of [def-weil-weil-sheaf-complex]. The displayed evaluation uses the $FM\\otimes A$ order, so no symmetry needs to be inserted.",
+   "uses": [
+    "def-weil-weil-sheaf-complex",
+    "cor-coef-verdier-weil-equivariance",
+    "lem-pod-constructible-mate-coherence",
+    "def-exchange-projection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 4: the projection-inverse/evaluation composite."
+   }
+  },
+  {
+   "text": "For the assumed lifted exceptional adjunction $F\\dashv G$, with unit $\\eta^!$, the first transpose is exactly $t=G(b)\\circ\\eta^!_V:V\\to G\\omega_Y$. Both factors are arrows of Weil pairs: $G(b)$ because $G$ is the supplied lifted functor, and $\\eta^!_V$ because its unit is assumed equivariant. Thus $t$ is equivariant by the composition equation of Step 2. This only uses the constructible lifted adjunction stipulated in the statement, and does not assume an ambient exceptional right adjoint.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 4: first (exceptional) adjunction transpose."
+   }
+  },
+  {
+   "text": "Let $H_M=R\\mathcal Hom_X(M,-)$ and let $\\nu$ be the unit of the stipulated lifted adjunction $M\\otimes^L-\\dashv H_M$. The second transpose is $r=H_M(t)\\circ\\nu_{PA}:PA\\to H_M(G\\omega_Y)$. Its factors are Weil arrows by functoriality of the lifted $H_M$ and equivariance of $\\nu$. For the lifted ordinary adjunction $P\\dashv Q$ with unit $\\eta^*$ the third transpose is $s=Q(r)\\circ\\eta^*_A:A\\to QH_M(G\\omega_Y)$. The same two assertions for $Q$ and $\\eta^*$ make $s$ equivariant. These are the unit-then-right-adjoint formulas for the given adjunction bijections, so their underlying maps are precisely the successive transposes specified in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 4: tensor–Hom and ordinary adjunction transposes."
+   }
+  },
+  {
+   "text": "Here is the mate expression for $c$. Set $H=Ra_Y{}_!$, $J=Ra_Y^!$, $U=Ra_X{}_!$, $W=Ra_X^!$, and let $\\alpha:HF\\xrightarrow{\\sim}U$ be the stipulated compact-support compositor. The counit of the pasted adjunction $HF\\dashv GJ$ is $\\varepsilon^{HF}_Z=\\varepsilon^H_Z\\circ H(\\varepsilon^F_{JZ})$. Transposing $\\varepsilon^{HF}_Z\\circ\\alpha^{-1}_{GJZ}:U(GJZ)\\to Z$ through $U\\dashv W$ gives\n$$c_Z=W(\\varepsilon^{HF}_Z\\circ\\alpha^{-1}_{GJZ})\\circ\\eta^U_{GJZ}:GJZ\\longrightarrow WZ.$$\nThis is the unit–map–counit mate formula of [def-weil-pbc-adjunction-mate], applied to $\\alpha^{-1}:U\\to HF$ and the pasted adjunction. Each unit, counit and $\\alpha$ is equivariant by hypothesis, its inverse is equivariant by Step 2, and the displayed lifted functors preserve Weil arrows. Hence $c_Z$ is equivariant. At $Z=\\Lambda_s$, with its coefficient-unit Weil structure, this is the specified $c:G\\omega_Y\\simeq\\omega_X$. The specified compositor and pasted adjunctions fix this mate; no independent choice of dualizing identification is being made.",
+   "uses": [
+    "def-weil-pbc-adjunction-mate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 4: structure-morphism comparison as the mate of compact-support composition."
+   }
+  },
+  {
+   "text": "The given lift of $H_M$ sends the Weil arrow $c$ to $H_M(c)$, and the given lift of $Q$ sends that arrow to $QH_M(c)$. Thus\n$$e_M=QH_M(c)\\circ s:D_YFM\\longrightarrow QD_XM$$\nis equivariant, by Steps 4–5 and the composition equation of Step 2. This is exactly the requested formal map: $b$ was the specified inverse projection followed by evaluation, $s$ its three successive transposes, and the last factor is the specified substitution of $c$. All of these arguments use just the lifted data on the domain in the question; none enlarges that domain or asserts a new invertibility theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 4: the specific formal Verdier exchange is equivariant."
+   }
+  },
+  {
+   "text": "Under the additional hypotheses of [fix-lem-tensor-adjunction, fix-cor-verdier-exchange], use their canonical exchange in the normalization [def-sf-verdier-exchange-data]. That definition specifies its arrow $\\epsilon_M$ by projection and evaluation, exceptional transposition, substitution of $c$, then tensor–Hom and ordinary transposition. Moving substitution of $c$ past the latter two transposes changes neither map: for any adjunction $L\\dashv R$, the unit formula gives $(v h)^\\sharp=R(v)h^\\sharp$, since both sides are $R(v)R(h)\\eta$. Apply this first to $M\\otimes-\\dashv H_M$ and then to $P\\dashv Q$. Therefore $\\epsilon_M=e_M$, including the specified projection map and composition mate. In this normalization the internal-adjunction comparison has the direction stated in [fix-lem-tensor-adjunction], so the arrow from $D_YFM$ is its inverse followed by $QH_M(c)$, as specified by the auxiliary exchange in [def-sf-verdier-exchange-data]. The canonical isomorphism of [fix-cor-verdier-exchange] is, through its statement dependency [def-sf-verdier-exchange-data], a stage conclusion, whose components are by that definition exactly the arrows $\\epsilon_M$; so its isomorphism assertion applies to this same arrow $\\epsilon_M=e_M$. This invocation retains its exceptional admissibility and finite-Tor hypotheses only for this invertibility assertion.",
+   "uses": [
+    "fix-lem-tensor-adjunction",
+    "fix-cor-verdier-exchange",
+    "def-sf-verdier-exchange-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 4 and fix-cor-verdier-exchange.proof.md Steps 1–2: normalization and conditional invertibility."
+   }
+  },
+  {
+   "text": "If $e_M$ is invertible, its Weil equation $e_M\\theta_A=\\theta_{QD_XM}P_Y(e_M)$ gives\n$$e_M^{-1}\\theta_{QD_XM}=\\theta_AP_Y(e_M^{-1})$$\nby the same multiplication as in Step 2. Thus its inverse is also equivariant. Steps 2–6 did not use the extra hypotheses of Step 7, so they also establish the stated equivariance on every domain supplying the displayed formal data. They used only rational Weil maps and lifted units/counits, never reduction of a rational Frobenius automorphism on an invariant integral lattice.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+    "place": "Sentence 4: inverse equivariance and the distinction between formal equivariance and invertibility."
+   }
+  }
+ ],
+ "proof_deps": [
+  "cor-coef-verdier-weil-equivariance",
+  "def-exchange-projection",
+  "def-sf-verdier-exchange-data",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-weil-sheaf-complex",
+  "fix-cor-verdier-exchange",
+  "fix-lem-tensor-adjunction",
+  "lem-pod-constructible-mate-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-poincare-duality/sk-lem-finite/prop-weil-operations.proof.md",
+  "place": "Sentence 4, expanded by the explicit unit/right-adjoint formulas and the existing duality-equivariance corollary."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +156,45 @@
    "results": "8 hit(s): IsBaseChange.toDualBaseChange_tmul; IsBaseChange.toDual_apply; Module.Dual.congr_symm_apply_apply; Module.Dual.eval_comp_comp_evalEquiv_eq; CategoryTheory.evaluationAdjunctionLeft; Module.symm_dualMap_evalEquiv; Module.evalEquiv; Module.Dual.congr_apply_apply",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius equivariant formal Verdier duality exchange by projection formula evaluation and successive adjunction transposes",
+   "results": "8 hit(s): CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso; CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso; CategoryTheory.frobeniusMorphism_mate; LightCondensed.ihomPoints_symm_comp; CategoryTheory.coev_expComparison; CategoryTheory.ExponentiableMorphism.coev_ev; CategoryTheory.ExponentiableMorphism.ev_coev; CategoryTheory.ExponentiableMorphism.ev_coev_assoc. Read hits: general adjunction/closed-category infrastructure or textual dualizing mentions; none states rational Weil equivariance of this sheaf-theoretic Verdier map.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "verdierExchange|verdier_exchange|dualizing|IsoAlgebra",
+   "results": "5 hit(s): Mathlib/CategoryTheory/Adjunction/PartialAdjoint.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Category/Cat/Op.lean. Read hits: general adjunction/closed-category infrastructure or textual dualizing mentions; none states rational Weil equivariance of this sheaf-theoretic Verdier map.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Verdier exchange is equivariant for Weil complexes from evaluation and adjunction units",
+   "results": "8 hit(s): CategoryTheory.Equivalence.toAdjunction_unit; CategoryTheory.Adjunction.whiskerRight_unit_app_app; HomologicalComplex.singleCompEvalIsoSelf; CategoryTheory.Equivalence.mapHomologicalComplex_functor; CategoryTheory.ShortComplex.functorEquivalence; HomologicalComplex.forgetEval; HomologicalComplex.Hom.isoApp; CategoryTheory.mateEquiv. Read hits: general adjunction/closed-category infrastructure or textual dualizing mentions; none states rational Weil equivariance of this sheaf-theoretic Verdier map.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.ihom",
+   "results": "10 hit(s): CategoryTheory.ihom.adjunction; CategoryTheory.MonoidalClosed.internalHomAdjunction₂_adj; CategoryTheory.MonoidalClosed.ofEquiv_curry_def; CategoryTheory.MonoidalClosed.ofEquiv_uncurry_def; CategoryTheory.Over.toOverSectionsAdj; CategoryTheory.Monoidal.Reflective.instIsIsoAppUnitObjIhom; CategoryTheory.Monoidal.Reflective.isIso_tfae; CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso. Read hits: general adjunction/closed-category infrastructure or textual dualizing mentions; none states rational Weil equivariance of this sheaf-theoretic Verdier map.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Equivariance of a morphism defined by transposing evaluation under lifted adjunctions on Frobenius fixed objects",
+   "results": "8 hit(s): CategoryTheory.frobeniusMorphism_mate; CategoryTheory.expComparison_iso_of_frobeniusMorphism_iso; CategoryTheory.frobeniusMorphism_iso_of_expComparison_iso; CategoryTheory.frobeniusMorphism; CategoryTheory.expComparison_ev; CategoryTheory.coev_expComparison; CategoryTheory.expComparison; CategoryTheory.MonoidalClosed.pre. Read hits: general adjunction/closed-category infrastructure or textual dualizing mentions; none states rational Weil equivariance of this sheaf-theoretic Verdier map.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-operations",
@@ -77,5 +211,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pod-formal-verdier-exchange-equivariance",
+  "worker": "stage1",
+  "summary": "Reused the existing rational/coefficient duality-equivariance corollary. Wrote the inverse-projection/evaluation pairing, all three unit/right-adjoint transposes, and the unit–map–counit composition mate explicitly. Identified the canonical exchange under the existing normalization before invoking its conditional invertibility; no new nodes or statement changes. Maintainer reader fix (O3 review): Step 2 cites lem-pod-constructible-mate-coherence for the Weil equivariance of the projection map, which the item's hypothesis list does not name; Step 1's dual-structure formula is marked as orientation with its check; Step 7 names why the fix-cor isomorphism has components epsilon_M.",
+  "blueprint": "Realizes prop-weil-operations.proof.md sentence 4 (formal duality exchange made from evaluation and adjunction maps), including the preliminary rational duality/coefficient comparisons from cor-coef-verdier-weil-equivariance.",
+  "tool_uses": [
+   {
+    "node": "cor-coef-verdier-weil-equivariance",
+    "why": "Supplies the already-proved rational/common-stage duality, evaluation, biduality and scalar-extension equivariance on separated finite-type fibers. It is the coefficient-duality tool needed before forming the formal exchange; it replaces no step of the unit finiteness route."
+   },
+   {
+    "node": "fix-lem-tensor-adjunction",
+    "why": "Supplies the named internal-adjunction isomorphism under its exceptional-admissibility and finite-Tor hypotheses, used solely to identify the conditional isomorphism normalization explicitly required by this item."
+   },
+   {
+    "node": "fix-cor-verdier-exchange",
+    "why": "Supplies invertibility of the specified canonical Verdier exchange under its own hypotheses, as explicitly requested in the statement; the formal equivariance construction is proved independently in Steps 2–6."
+   }
+  ]
+ },
+ "tool_uses": [
+  "cor-coef-verdier-weil-equivariance",
+  "fix-lem-tensor-adjunction",
+  "fix-cor-verdier-exchange"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O3-442c6b136",
+  "group": "O3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-442c6b136 (reviewer sub-agent of L); spot-checked: I read the whole item (8 steps). The statement, stmt_deps, source and blueprint fields are unchanged, and the item is still unsplit live with no repair note. Source: main-20261015 prop-weil-operations.proof.md, sentence 4 ('made from the same evaluation and adjunction maps'). Typing checks: PF^{-1} matches def-exchange-projection's direction. ev in FM⊗D_YFM order matches cor-coef-verdier-weil-equivariance. The transposes t=G(b)η^!, r=H_M(t)ν, s=Q(r)η^* are correct. c is the conjugate of α^{-1} by the def-weil-pbc-adjunction-mate formula, which matches def-sf-verdier-exchange-data and fix-cor-verdier-exchange step 1. Moving c past the two transposes by unit naturality gives e_M=ε_M. This agrees with the Yoneda inverse in fix-lem-tensor-adjunction (a=h_B(1)). Repairs, 3 small faults: (1) C4/E1, Step 2: the item's hypotheses do not name Weil equivariance of the projection map PF, so Step 2 now cites the sibling lem-pod-constructible-mate-coherence (same unit, unsplit, no cycle), whose statement makes the projection transformation a Weil morphism; Step 2 is now non-elementary, and def-exchange-projection is added to its uses. (2) C3, Step 1: the dual-structure formula was presented as the corollary's own; it is relabelled as orientation, with a check that it makes evaluation equivariant. (3) Step 7: added why fix-cor-verdier-exchange's isomorphism has components ε_M (a stage conclusion of its stmt_dep def-sf-verdier-exchange-data). Edge cases f=id, M=0, the empty scheme, the point with nonsemisimple Frobenius and Λ=Q̄_ℓ give no counterexample. No cycles. fix-lem-tensor-adjunction and fix-cor-verdier-exchange are on route (via sk-prop-sf-biduality-general). I accept cor-coef-verdier-weil-equivariance (sk-thm-sf-package, reviewed PASS) as a tool use for coefficient-duality equivariance. No new nodes and no SGA.; 1 file(s) fixed by the reviewer"
  }
 }
