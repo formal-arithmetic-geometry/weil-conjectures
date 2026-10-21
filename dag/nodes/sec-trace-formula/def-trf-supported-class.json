@@ -3,11 +3,11 @@
  "blueprint": {
   "is": "def-trf-supported-class",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Classes supported on a map",
- "statement": "In the setting of [def-trf-correspondence-between-pairs], let\n$P\\in D(Z,A)$ and let $i:T\\to Z$ be a separated finite-type morphism of\nseparated finite-type $k$-schemes, with compact-support direct image\n$Ri_!$ as in the coefficient conventions. A *class supported on $i$*\nwith values in $P$ is an element of\n\n$$\nH_T^0(Z,P):=\\operatorname{Hom}_{D(Z,A)}\\bigl(Ri_!A_T,P\\bigr),\n$$\n\nwhere $A_T$ is the constant sheaf. The map $i$ is part of the data of\nthe class: it need not be an immersion, and different specified maps\nwith the same image give different groups.",
+ "statement": "Fix a prime $p$, an integer $a\\geq1$, $q=p^a$, a field $k_0=\\mathbf F_q$\nand its fixed algebraic closure $k$ [def-weil-finite-field-fiber], and put\n$s=\\operatorname{Spec}k$. Fix a prime $\\ell\\neq p$, a finite extension\n$E/\\mathbf Q_\\ell$ in the fixed algebraic closure of $\\mathbf Q_\\ell$,\nits valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and $n\\geq1$;\nput $A=A_{E,n}=\\mathcal O_E/\\varpi_E^n$, as in\n[def-trf-coefficient-conventions]. Let $X,Y$ be separated finite-type\n$k$-schemes and put $Z=Y\\times_s X$ [def-pc-fibre-product], the product\nused in [def-trf-correspondence-between-pairs].\nWrite $D(W,A)$ for the derived category\nof sheaves of $A$-modules on the small pro-etale site of $W$, as in\n[def-weil-derived-pullback-tensor-hom]. Let\n$P\\in D(Z,A)$ and let $i:T\\to Z$ be a separated finite-type morphism of\nseparated finite-type $k$-schemes [def-weil-scheme-morphism-properties],\nwith compact-support direct image $Ri_!$ as in\n[def-compact-support-direct-image-detailed] and the coefficient conventions. A *class supported on $i$*\nwith values in $P$ is an element of\n\n$$\nH_T^0(Z,P):=\\operatorname{Hom}_{D(Z,A)}\\bigl(Ri_!A_T,P\\bigr),\n$$\n\nwhere $A_T$ is the constant sheaf of [def-weil-pbc-constant-sheaf],\nregarded as a complex concentrated in degree zero. The map $i$ is part of the data of\nthe class: it need not be an immersion, and the group is indexed by the specified map, not merely its image.\nNo identification of groups is made solely from equality of the images.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-trace-formula/sk-d-corr/def-trf-supported-class.md",
   "place": "node def-trf-supported-class, order 2277"
@@ -15,14 +15,69 @@
  "stmt_deps": [
   "def-trf-correspondence-between-pairs",
   "def-trf-coefficient-conventions",
-  "def-weil-scheme-morphism-properties"
+  "def-weil-scheme-morphism-properties",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-compact-support-direct-image-detailed",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-finite-field-fiber",
+  "def-pc-fibre-product"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Category.Hom, DerivedCategory",
+   "results": "No hits; service reported unknown identifier CategoryTheory.Category.Hom. This malformed query is not evidence of absence; replaced by DerivedCategory, \"Hom\".",
+   "date": "2026-10-21",
+   "verdict": "no match: query rejected for unknown identifier; superseded by the valid second query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A class supported on a scheme morphism i with values in a derived sheaf P is Hom from the compact support direct image of the constant sheaf to P",
+   "results": "Eight hits including AlgebraicGeometry.Scheme.Modules.Hom, Modules.pushforward and Modules.instIsRightAdjointPushforward (Mathlib/AlgebraicGeometry/Modules/Sheaf), ordinary structure-sheaf modules. Read Modules and Hom there; neither is a derived finite-coefficient supported-class definition.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "SupportedClass|supportedClass|lowerShriek|compactSupport.*[Cc]ohomology",
+   "results": "No hits in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology class supported on a morphism defined as a derived Hom from shriek pushforward of the constant sheaf",
+   "results": "Eight hits: CochainComplex.HomComplex.CohomologyClass and toSmallShiftedHom, their constructors and comparison formulas; CategoryTheory.Functor.sheafAdjunctionCocontinuous_homEquiv_apply_val; AlgebraicGeometry.Scheme.Hom.support_ker. These concern hom-complex cohomology or ordinary sheaf adjunctions, not compact-support direct image along i.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Degree zero cohomology with supports in a map T to Z is the morphism group Hom of Ri shriek A to P in the derived category",
+   "results": "Eight hits including CategoryTheory.Sheaf.H, cohomologyPresheafFunctor and cohomologyPresheaf (Mathlib/CategoryTheory/Sites/SheafCohomology/Basic), and injective/projective Ext comparisons. Read Sheaf.H: it is Ext from the constant integers to an abelian sheaf; it does not supply Ri_! A_T for an arbitrary scheme map.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "DerivedCategory, \"Hom\"",
+   "results": "Twelve hits in Mathlib.Algebra.Homology.DerivedCategory.Basic, including Qh essential-surjectivity/localization/additivity, singleFunctorIsoCompQ_hom_app, singleFunctorsPostcompQIso_hom_hom and Q_map_eq_of_homotopy; ambient derived-category infrastructure only.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "cohomology.*support|support.*cohomology|[Ss]hriek",
+   "results": "No hits in Mathlib/CategoryTheory.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [],
  "blueprint_kind": "definition",
@@ -45,5 +100,20 @@
    "AlgebraicGeometry.ProEtale.SupportedClass"
   ],
   "note": "attached by the lead's tool attach.py 2026-10-16 22:52 UTC for group Q55, the statement match confirmed by two remote workers, sorry-free and resting on no sorry by sorry_map_slopmaster2_19b471a7.jsonl.gz: Defines Hom(Ri_! A_T, P) on the specified pro-étale derived category, retaining i as data without requiring an immersion; its compactification hypothesis follows from the node’s separated fin"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-trf-supported-class",
+  "worker": "stage1 Q13",
+  "summary": "Definition-only split against master order 2277 and unchanged main-20261015 order 2621. Added explicit existing definitions for ambient finite-coefficient pro-etale derived categories, the compact-support direct image and the constant coefficient sheaf. The support map remains specified and is not required to be an immersion; P remains arbitrary in the ambient derived category. No new nodes or proof steps. The inherited Lean attachment cannot be reused: its declaration is absent from the current authorized upstream source. Actual Mathlib queries, including a second semantic phrasing and a corrected Loogle query, found no exact supported-class definition. Clarified the final sentence: different maps index specified groups, without claiming those groups must be nonisomorphic (false for P=0). Dry-run B2 repair: replaced the inherited contextual opening by explicit finite-field, finite-coefficient, scheme and product data, retaining the source setting Z=Y times_s X.",
+  "blueprint": "Realizes the entire definition def-trf-supported-class: the opening support morphism and coefficient setup; displayed Hom(Ri_! A_T,P); and specified-map paragraph. This is the supported-class sentence of sk-d-corr, not the whole unit. The item is imported, so blueprint.from remains null. Whole-blueprint searches found sk-d-corr as a larger bundle containing this clause, and other consumers but no other standalone definition of the same notion."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q13-ee4127fb7",
+  "group": "Q13",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-ee4127fb7 (reviewer sub-agent of L); spot-checked: Definition-only split, no new nodes, no fixes needed. The item is still imported and unreviewed on live and side-live, so the delivery is not superseded, and there is no repair note. Sources: master order 2277 and main-20261015 order 2621 are identical; I also read the unit and the sk-d-corr node. Statement: the 'In the setting of' opening (B2) is written out as the finite-field and coefficient datum and Z=Y×_s X, matching def-trf-correspondence-between-pairs, with no hypothesis added. P stays arbitrary in D(Z_proet,A_{E,n}) and i stays a separated finite-type k-morphism, with no immersion assumed. Ri_! now cites def-compact-support-direct-image-detailed; its hypotheses hold (finite type over k, i separated of finite type, ℓ≠p), and it is the same Rc_! that def-trf-admissibility gives the citers (lem-trf-correspondence-class, def-trf-supported-pairing). The compactification choice is as implicit as in the source, and A_T is étale-origin, so it lies where independence is asserted. The Hom display is verbatim. The last sentence was reworded: read literally the source's 'different maps give different groups' is false (P=0; the fold map s⊔s→s against id_s gives 0=0). It now says the group is indexed by the specified map, which is the unit's 'specified data' intent. This is reported under Source error and is not a weakening (E7/E7b), so the maintainer should record it in HUMAN.md. All 8 stmt_deps were read and each defines the notion it is cited for; there is no cycle. same_as [] is correct: sk-d-corr is the unit bundle. The Mathlib searches cover three kinds and were run. Edge cases checked: T empty, i=id, fold map, P=0. The inherited lean record is untouched and stale, which is advisory. No SGA citations."
  }
 }

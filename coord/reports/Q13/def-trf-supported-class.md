@@ -1,0 +1,42 @@
+## Worker report
+
+Files written:
+
+- `dag/nodes/sec-trace-formula/def-trf-supported-class.json`: definition-only split; no Mathlib match. Added five existing definition dependencies and explicit citations for the three inherited dependencies. The Hom formula and all coefficient, morphism and ambient-category hypotheses are retained.
+- `citations.json`: `[]`, since this definition has no proof steps and no step citations.
+
+Attachments: none. The inherited maintainer-owned `lean` record names `AlgebraicGeometry.ProEtale.SupportedClass`, formerly present in `WeilConjectures.SixFunctors.ProEtale.TraceFormula.Correspondence` at lines 105–111 in the old `19b471a7` sorry map (s=false, ts=false). That module and declaration are absent from the current authorized `lean/WeilConjectures` source. Searches by the exact blueprint tag, declaration name and supported-class terminology give no current exact declaration. The current `TraceFormula/Slop/Correspondence.lean` describes condensed rational-coefficient endocorrespondences and a sorried trace class, not this finite-level definition. Historical attachment evidence cannot establish a current-source attachment; the inherited record is retained untouched for the maintainer to refresh.
+
+WANTED: none.
+
+No new nodes, no Mathlib leaves, no proof steps, no tool uses, no unit/chapter edits. This is not the key node of sk-d-corr. The stage-1 task is to expose a definition's constituent notions, not manufacture a theorem proof or split its displayed formula into new nodes. No remaining mathematical work for this one-level split.
+
+## Source error
+
+STATEMENT-DISPUTED: the imported last sentence, “different specified maps with the same image give different groups”, is false if read as asserting necessarily different isomorphism types. For example take Z=Spec(k), i the identity, and i' the fold map from two disjoint copies of Spec(k); both are separated finite-type maps with the same image. With P=0, both Hom groups are zero. The correct source intent, made explicit in the unit's sentence “All supports and structure maps remain specified data”, is that the map indexes the group and no identification is made solely from equality of images. The last sentence is corrected to exactly this intent; the Hom formula is unchanged. Nothing asserts that two indexed groups cannot happen to be isomorphic. All other statement edits only expose the definitions already in use.
+
+## Searches and existing nodes
+
+Read the unchanged main-20261015 source `blueprint/sec-trace-formula/sk-d-corr/def-trf-supported-class.md` (order 2621), original master source (order 2277), current unit source `_section.md`, DAG unit sk-d-corr and DAG chapter sec-trace-formula. Searches of the whole DAG and `tools/blueprint_refs.py search supported class`, `search 'class supported'`, and `search 'Hom(Ri_!'` found the item, the larger sk-d-corr bundle, supported-pairing definitions and consumers. The larger unit includes more correspondence and exceptional-adjunction data; it is not another standalone definition to replace this node. No new node is justified and blueprint.same_as is []. blueprint.from is null because this is an imported node. The split_report names the displayed formula and surrounding paragraphs it realizes.
+
+All seven Mathlib queries in mathlib_searches were actually run through the prescribed msearch command and are logged in searches.jsonl. The first Loogle query had an unknown identifier; its failure is explicitly recorded and was replaced by a valid query. Two different semantic phrasings, a valid Loogle query, LeanSearch, and two source greps found no exact supported-class definition. I read the returned Scheme.Modules and Modules.Hom definitions in Mathlib/AlgebraicGeometry/Modules/Sheaf.lean and the Sheaf.H, cohomologyPresheafFunctor and cohomologyPresheaf definitions in Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean. Ordinary structure-sheaf module Hom and Ext-valued sheaf cohomology do not supply the arbitrary-map compact-support direct image in this definition. Derived-category localization infrastructure also does not define it. These are not one-line specializations of the full supported-class notion.
+
+## Not duplicates
+
+No new nodes. Existing definitions are reused rather than restated as nodes.
+
+## Review by Q13
+
+I compared every clause with master order 2277 and main-20261015 order 2621; these item sources have identical mathematical text. I also read the current unit's supported-class sentence and its specified-data paragraph. The only correction of mathematical wording is explained with the zero-object counterexample above. I retain arbitrary P in D(Z,A), not just a bounded constructible or finite-Tor P, and retain all separated finite-type assumptions without adding an immersion or properness assumption on i.
+
+I opened each of the eight cited node statements. def-trf-correspondence-between-pairs supplies Z=Y×_s X with the same factor order and the geometric coefficient setting. def-trf-coefficient-conventions supplies A=O_E/varpi_E^n, n≥1 and ell≠p, so ell is invertible on the k-schemes here. def-weil-scheme-morphism-properties explicitly redirects separated and finite type to their definitions. def-weil-derived-pullback-tensor-hom explicitly defines D(W_proet,A) and the constant coefficient notation; none of its tensor or exceptional-adjunction theorems is used. def-weil-pbc-constant-sheaf explicitly defines A_T as sheafification of the constant ring presheaf. I checked its Stacks source sites.tex, Example sites-example-constant-sheaf (Tag 0H7J), which defines the constant sheaf; the node extends this ordinary definition to constant rings. Its degree-zero realization is a convention here, not an extra comparison theorem.
+
+Finally, def-compact-support-direct-image-detailed explicitly supplies Ri_! between the ambient derived categories via a chosen compactification and R(bar i)_* j_!. I read its node statement and master definition source, order 1486. Its assumptions match T,Z finite type over k, i separated finite type, and ell invertible. The inherited item already assumes the compact-support direct image is supplied; I assert no new compactification-existence theorem. Crucially its independence/coherence assertions are restricted to bounded-below etale-origin inputs. This definition applies Ri_! only to A_T in degree zero, which is the inverse image of the constant etale coefficient sheaf; it does not assert compactification independence on arbitrary unbounded inputs. Arbitrary P is only the Hom target. No exceptional inverse image or adjunction is needed, so no admissibility assumption is added.
+
+There are no proof steps to audit for C1/C4: every reference is a statement dependency defining a constituent, and citations.json is empty for that reason. B1–B9 hold without new nodes: TeX is encoded once, the existing definitions introduce the notions used, source places and blueprint provenance are preserved, and no new statement-only theorem is manufactured. D1–D5 are avoided by keeping this as a definition. There are no long proof steps and no hidden theorem in one. No prohibited source route is used.
+
+I tested i=id, an empty support T, P=0, and the nonimmersive fold Spec(k)⊔Spec(k)→Spec(k). The Hom formula remains meaningful in each case. In the fold example Ri_!A_T is the sum of two constant coefficient objects, so the construction keeps multiplicity data rather than replacing i by its image. The zero-object case exposed and repaired the final sentence's overly literal reading. No other hypotheses need repair. The old attachment was the other fault found; its maintainer-owned fields are not edited by this delivery.
+
+## Dry-run repair
+
+The first preflight rejected the inherited opening “In the setting of …” under B2. I replaced it by the full global datum p, a, q, k_0, k, s; ell, E, O_E, varpi_E, n, A; and the separated finite-type schemes X,Y and Z=Y×_s X. P, T and i remain introduced by the following sentences. This retains the exact original correspondence setting instead of relying on an unnamed external setup. I read and added the existing def-weil-finite-field-fiber statement (which specifies all of the field/coefficient datum) and def-pc-fibre-product statement (which explicitly defines the chosen product and its projections). They are definitions, with no new route or theorem proof needed. There are still no new nodes.
