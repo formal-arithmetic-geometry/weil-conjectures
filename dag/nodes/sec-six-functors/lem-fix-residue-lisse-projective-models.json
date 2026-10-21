@@ -45,138 +45,84 @@
  ],
  "proof": [
   {
-   "text": "The valuation ring $R$ is a principal ideal domain with nonzero uniformizer and finite residue field by [lem-weil-l-adic-extension-integers-dvr]; in particular it is Noetherian since each ideal has one generator. Apply [lem-weil-pbc-completed-constant-sheaf-reduction] to $R,(\\varpi)$: $B_T$ is flat over the constant $R_T$ on any scheme $T$, and $B_T\\otimes^L_{R_T}(R/\\varpi^n)_T\\simeq(R/\\varpi^n)_T$. The constant sequence $0\\to R_T\\xrightarrow{\\varpi^n}R_T\\to(R/\\varpi^n)_T\\to0$ is exact (constant-sheaf exactness is clause (1) of [lem-weil-pbc-constant-module-section-properties]). Tensoring it with the flat $B_T$ gives $0\\to B_T\\xrightarrow{\\varpi^n}B_T\\to(R/\\varpi^n)_T\\to0$. Thus $[B_T\\xrightarrow{\\varpi^n}B_T]$ in degrees $[-1,0]$ is a free resolution of the quotient, and is K-flat by [lem-pc-bounded-above-flat-kflat-site]. The quotient tower has epimorphic transitions, so [lem-weil-proetale-surjective-tower-derived-limit] identifies its ordinary limit $B_T$ with its derived limit, through the quotient maps; hence $B_T[0]$ and its finite sums and shifts are complete. We use [det-pe-derived-nakayama-first-reduction] for closure of complete complexes under cones and for detecting an isomorphism by its residue reduction. The statement of [det-prop-integral-criterion-constant-coefficients] explicitly identifies $B_T$ with $\\mathcal O_{E,T}$ and identifies its quotient-tower completeness with [sk-def-pe-derived-completion], which is the completeness convention of the Nakayama node.",
+   "text": "By [lem-sf-clopen-lisse-complete-localization], simultaneously trivialize the finitely many nonzero residue cohomology sheaves on a finite clopen partition. On every nonempty piece $U$, restriction preserves completeness and the residue interval $[a,b]$; $U$ is quasi-compact, evaluation is exact, and finite free module sheaves are projective. Work on one such $U$.",
    "uses": [
+    "lem-sf-clopen-lisse-complete-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 1; extracted arguments in the cited nodes."
+   }
+  },
+  {
+   "text": "By [lem-sf-completed-coefficient-free-resolution], shifted finite free $B_U$-sheaves are complete and uniformizer reduction is the stated triangle. Use [det-prop-integral-criterion-constant-coefficients] to identify this completeness with the convention of [det-pe-derived-nakayama-first-reduction]. Thus cones stay complete, and zero residue detects zero complete objects. The coefficient input and completeness convention require no finite-type or characteristic restriction on $U$.",
+   "uses": [
+    "lem-sf-completed-coefficient-free-resolution",
     "det-prop-integral-criterion-constant-coefficients",
-    "sk-def-pe-derived-completion",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-weil-proetale-surjective-tower-derived-limit",
     "det-pe-derived-nakayama-first-reduction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, preliminary complete coefficients and derived Nakayama inputs; Tag 099I comparison supplied by the cited completed-coefficient lemma"
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 2; extracted arguments in the cited nodes."
    }
   },
   {
-   "text": "There are only finitely many nonzero sheaves $H^q(K_1)$. By their finite locally constant hypothesis, choose a common pro-etale covering, using finite base changes and compositions of coverings in [det-pe-topos-functoriality-site], trivializing them as constant finite-dimensional $k$-vector spaces. The covering definition [def-weil-pbc-proetale-covering], applied to the affine $S$, gives finitely many affine opens $V_j$ of covering members whose maps cover $S$; their restrictions retain the trivializations. Form $V=\\coprod_jV_j$ using [lem-weil-pbc-scheme-coproduct-family]. The composite $V\\to S$ is weakly etale by composition and source locality in [sk-lem-pe-weakly-etale-stability] (open immersions are etale by [lem-weil-pbc-open-immersion-etale], hence weakly etale by clause (1) of [det-pe-morphisms-etale-comparison]), and is a covering. The representables are sheaves by [lem-weil-pbc-proetale-subcanonical], and $h_V\\to h_S$ is an epimorphism: a section of $h_S$ locally lifts along this covering by its base changes. Weak contractibility of $S$ lifts $\\mathrm{id}_S$ to a section $s:S\\to V$; this is an actual scheme morphism by the definition $h_V(S)=\\operatorname{Hom}_S(S,V)$. The inverse images $U_j=s^{-1}(V_j)$ form a finite clopen partition, since the coproduct components are clopen. The restrictions $U_j\\to V_j$ pull back the chosen trivializations, so every $H^q(K_1)|_{U_j}$ is a constant finite-dimensional $k$-module sheaf. Discard empty pieces. This proves the needed partition directly from categorical weak contractibility; it does not assume the stronger ring-theoretic formulation of a w-contractible ring.",
-   "uses": [
-    "det-pe-topos-functoriality-site",
-    "def-weil-pbc-proetale-covering",
-    "lem-weil-pbc-scheme-coproduct-family",
-    "sk-lem-pe-weakly-etale-stability",
-    "lem-weil-pbc-open-immersion-etale",
-    "det-pe-morphisms-etale-comparison",
-    "lem-weil-pbc-proetale-subcanonical"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, finite disjoint trivializing cover; expanded categorical proof of the covering step of Tag 098F, lemma-w-contractible-proetale-cover"
-   }
-  },
-  {
-   "text": "Fix a nonempty clopen piece $U$ of step 2. Restriction to $U_{\\mathrm{proet}}$ is localization of $S_{\\mathrm{proet}}$ by [lem-weil-proetale-weakly-etale-localization]. Sheaf gluing for the disjoint open cover $S=U\\amalg(S\\setminus U)$ identifies sheaves, module sheaves, and their complexes with pairs on these two pieces: a sheaf on $U$ extends by zero on the complement, and sections on a disjoint union are products. Therefore a sheaf epimorphism on $U$ extends to one on $S$ by putting the terminal sheaf on the complement. Lifting its sections over $S$ proves weak contractibility on $U$. In particular evaluation on $U$ is exact on module sheaves: it preserves kernels sectionwise, and lifts sections of epimorphisms by weak contractibility. For any ring sheaf $C$ on $U$, $\\operatorname{Hom}_C(C,F)=F(U)$ (a map is determined by the image of $1$); hence $C$ and every finite sum of it are projective objects. Restriction to a clopen factor is exact, commutes with all limits, quotient tensors and their Roos triangles under this product description, so $B_S|_U=B_U$ and $K|_U$ is complete with the same residue interval. The space $U$ is quasi-compact, being closed in the quasi-compact affine $S$.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, restriction to the finite disjoint open cover; sites-cohomology.tex Tag 0946, lemma-w-contractible, exact evaluation expanded from the defining lifting property"
-   }
-  },
-  {
-   "text": "On this fixed $U$ prove by induction on $b-a$ the stronger assertion: any complete $M$ whose residue cohomology sheaves are constant finite-dimensional $k$-vector spaces in $[a,b]$ and whose residue has Tor amplitude $[a,b]$ has a finite free $B_U$-complex representative with terms zero outside $[a,b]$. Apply [lem-sf-complete-residue-cohomology-bounds] to obtain $H^q(M)=0$ outside $[a,b]$. First note an explicit residue model: for each $q$ choose a basis of the constant $H^q(M_1)$. Exact evaluation on $U$ lifts these basis sections along the epimorphism from cycles of any representative of $M_1$ onto its cohomology. Sending each basis generator to its lifted cycle defines a chain map $\\bigoplus_{q=a}^b k_U^{r_q}[-q]\\to M_1$. It induces the selected basis isomorphisms on every cohomology sheaf, and is therefore a quasi-isomorphism by [def-weil-abstract-derived-category]. Its source has zero differentials. Moreover [lem-pc-ring-derived-map-representative] applies to all the bounded complexes of finite free sheaves here, because their terms are projective by step 3. In particular $\\operatorname{Hom}_{D(C)}(C^{r}[-q],N)=H^q(N)(U)^r$: chain maps are cycles and chain homotopies are boundaries, with exact evaluation commuting with these kernels and cokernels.",
+   "text": "Induct on $b-a\\geq0$, with claim that any complete $M$ on this fixed $U$ with constant finite-dimensional residue cohomology and residue Tor amplitude $[a,b]$ has a finite free model supported in $[a,b]$. The bound [lem-sf-complete-residue-cohomology-bounds] gives $H^q(M)=0$ outside that interval. Choose residue bases; [lem-sf-projective-cohomology-split-model] supplies their zero-differential model and the shifted-free Hom calculation.",
    "uses": [
     "lem-sf-complete-residue-cohomology-bounds",
-    "def-weil-abstract-derived-category",
-    "lem-pc-ring-derived-map-representative"
+    "lem-sf-projective-cohomology-split-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, induction on the residue interval; Tag 09C2, lemma-describe-constructible-complexes, cohomological bounds; derived.tex Tag 064B, lemma-morphisms-from-projective-complex"
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 3; extracted arguments in the cited nodes."
    }
   },
   {
-   "text": "Put $r=r_b$ and $P=B_U^{\\oplus r}$. The free quotient resolution $F=[B_U\\xrightarrow{\\varpi}B_U]$ in step 1 computes residue tensor even for an unbounded representative of $M$: choose a K-flat resolution $M^{\\flat}\\to M$ by [lem-pc-kflat-resolution]; the maps $M^{\\flat}\\otimes F\\to M^{\\flat}\\otimes k_U$ and $M^{\\flat}\\otimes F\\to M\\otimes F$ are quasi-isomorphisms by K-flatness of the two factors, the latter provided by [lem-pc-bounded-above-flat-kflat-site]. Consequently it yields the distinguished triangle $M\\xrightarrow{\\varpi}M\\to M_1\\to M[1]$. Its long exact sequence, supplied by [lem-sf-derived-homology-long-exact], gives a surjection $H^b(M)\\to H^b(M_1)$ because $H^{b+1}(M)=0$. Exact evaluation on $U$ lifts the chosen $r$ basis sections of $H^b(M_1)$ to sections of $H^b(M)$, and then to cycles of a representative of $M$. These cycles define $f:P[-b]\\to M$ inducing that basis on $H^b(M_1)$. By the Hom calculation of step 4 its reduction $f_1:k_U^r[-b]\\to M_1$, under the zero-differential residue model chosen there, is exactly the inclusion of the degree-$b$ summand: a map from $k_U^r[-b]$ into that model has only its degree-$b$ component, determined by $H^b(f_1)$.",
+   "text": "Apply [lem-sf-complete-top-residue-cell-cone] to these bases. It gives $P=B_U^{r_b}$, a map $P[-b]\\to M$, and a complete cone $L$ with residue the split complex in $[a,b-1]$. If $a=b$, it gives $L=0$ and $M\\cong P[-a]$, proving the base case. If $a<b$, the cone satisfies precisely the induction hypotheses for $[a,b-1]$ on the same $U$, so induction supplies a finite free representative $Q^\\bullet$ of $L$ in that interval. This also includes $r_b=0$.",
    "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-bounded-above-flat-kflat-site",
-    "lem-sf-derived-homology-long-exact",
-    "lem-pc-ring-derived-map-representative"
+    "lem-sf-complete-top-residue-cell-cone"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, lifting the top-degree generators to a derived map; basis choice replaces the arbitrary top-degree surjection in the general-ring proof"
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 4; extracted arguments in the cited nodes."
    }
   },
   {
-   "text": "Complete $f$ to a triangle $P[-b]\\to M\\to L\\xrightarrow{\\delta}P[-b+1]$. The complex $L$ is complete by [det-pe-derived-nakayama-first-reduction]. Derived reduction is an exact triangulated functor by [lem-pur-derived-change-of-rings], so $L_1$ is the cone of $f_1$. Under the residue decomposition in step 4 this cone is the direct sum of $\\bigoplus_{q=a}^{b-1}k_U^{r_q}[-q]$ and the two-term identity complex on $k_U^r$, the latter contracted by the identity in the reverse direction. Thus $L_1\\simeq\\bigoplus_{q=a}^{b-1}k_U^{r_q}[-q]$. Its cohomology remains constant finite-dimensional; the displayed bounded free complex is K-flat by [lem-pc-bounded-above-flat-kflat-site], and tensoring it with any $k$-module sheaf gives zero terms outside $[a,b-1]$, hence the required Tor amplitude. This supplies explicitly the amplitude decrease that the general source omits. When $a=b$, this residue is zero, so $L=0$ by the same derived Nakayama lemma; then $f$ is an isomorphism, and $P[-a]$ is the required one-term free model. If $r=0$ the same calculation has $P=0$ and still decreases the interval.",
+   "text": "Use [lem-sf-projective-top-cell-attachment] for the triangle $P[-b]\\to M\\to L\\to P[-b+1]$ and its representative $Q^\\bullet$. Its conclusion realizes the connecting map by an actual sheaf chain map and gives $\\operatorname{Cone}(g)[-1]\\cong M$ with finite free terms in $[a,b]$. This proves the induction step.",
    "uses": [
-    "det-pe-derived-nakayama-first-reduction",
-    "lem-pur-derived-change-of-rings",
-    "lem-pc-bounded-above-flat-kflat-site"
+    "lem-sf-projective-top-cell-attachment"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, cone and induction; the sentence asserting decreased Tor amplitude, whose details are omitted there, is computed using the split residue complex"
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 5; extracted arguments in the cited nodes."
    }
   },
   {
-   "text": "If $b>a$, apply the induction hypothesis on this same $U$ to $L$, using the explicitly verified interval and constant residue sheaves of step 6. It gives a finite free complex $Q^\\bullet$, supported in $[a,b-1]$, representing $L$. By [lem-pc-ring-derived-map-representative], the connecting morphism $\\delta:L\\to P[-b+1]$ is represented by a chain map $Q^\\bullet\\to P[-b+1]$. Only its component $Q^{b-1}\\to P$ can be nonzero, and its chain-map equation is $\\delta^{b-1}d_Q^{b-2}=0$. Form the shifted mapping cone $\\operatorname{Cone}(\\delta)[-1]$, using the cone and shift conventions in [def-weil-abstract-derived-category]. It has finite free terms $Q^q$ for $q<b$, term $P$ in degree $b$, and zero terms outside $[a,b]$; the last differential is the displayed sheaf map with its cone sign. The chain-map equation makes its composite with the preceding differential zero. Rotating the triangle of step 6 identifies this cone shifted by $-1$ with $M$, by the cone-triangle characterization of distinguished triangles. This establishes the induction step, including the actual sheaf differential needed to attach the top free term.",
-   "uses": [
-    "lem-pc-ring-derived-map-representative",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, last paragraph: representing the connecting morphism and extending the complex by one term; derived.tex Tag 064B"
-   }
-  },
-  {
-   "text": "Apply the induction to $M=K|_U$ on each of the finitely many pieces of step 2. The hypotheses hold by step 3, and the residue cohomology vanishes outside the given $[a,b]$ by taking the tensor test sheaf to be $k_U$ itself. The resulting models even have finite free terms; each term is a direct summand of itself, with identity inclusion and retraction. The maps used to lift cycles and to represent $\\delta$ are $B_U$-linear sheaf maps, so no step imposes constant matrix entries over $R$. If $S$ is empty use the empty partition and no models; if $K_1=0$ on a piece, derived Nakayama gives the zero model. This proves exactly the asserted finite disjoint open local models.",
+   "text": "Apply the claim to $K|_U$ on every partition member. Finite free terms are direct summands of themselves via identity maps, and the attachment allows arbitrary sheaf-linear differentials. For empty $S$ take the empty partition. On a piece with zero residue, [det-pe-derived-nakayama-first-reduction] gives $K|_U=0$, represented by the zero complex. These choices yield the asserted models.",
    "uses": [
     "det-pe-derived-nakayama-first-reduction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09C3, conclusion and empty/zero cases"
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, short assembly step 6; extracted arguments in the cited nodes."
    }
   }
  ],
  "proof_deps": [
+  "lem-sf-clopen-lisse-complete-localization",
+  "lem-sf-completed-coefficient-free-resolution",
   "det-prop-integral-criterion-constant-coefficients",
-  "sk-def-pe-derived-completion",
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-module-section-properties",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-weil-proetale-surjective-tower-derived-limit",
   "det-pe-derived-nakayama-first-reduction",
-  "det-pe-topos-functoriality-site",
-  "def-weil-pbc-proetale-covering",
-  "lem-weil-pbc-scheme-coproduct-family",
-  "sk-lem-pe-weakly-etale-stability",
-  "lem-weil-pbc-open-immersion-etale",
-  "det-pe-morphisms-etale-comparison",
-  "lem-weil-pbc-proetale-subcanonical",
-  "lem-weil-proetale-weakly-etale-localization",
   "lem-sf-complete-residue-cohomology-bounds",
-  "def-weil-abstract-derived-category",
-  "lem-pc-ring-derived-map-representative",
-  "lem-pc-kflat-resolution",
-  "lem-sf-derived-homology-long-exact",
-  "lem-pur-derived-change-of-rings"
+  "lem-sf-projective-cohomology-split-model",
+  "lem-sf-complete-top-residue-cell-cone",
+  "lem-sf-projective-top-cell-attachment"
  ],
  "proof_origin": {
   "by": "agent",
@@ -328,63 +274,19 @@
  "chapter": "sec-six-functors",
  "unit": "sk-rem-sf-pf-done",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "lem-fix-residue-lisse-projective-models",
   "worker": "stage1",
-  "summary": "Split the Stacks 09C3 local-model argument into a finite clopen trivialization, exact evaluation and projective residue formality, top-basis lifting, explicit cone amplitude decrease, and mapping-cone assembly. Added one statement-only cohomological-bounds input. Corrected the constructibility definition binding from the unused global finite-field convention to the intrinsic pro-etale notion, and made quotient-tower completeness and derived reduction explicit through generic ringed-site definitions; no hypothesis or conclusion is weakened. All Mathlib searches were run through msearch.py and source candidates read.",
-  "blueprint": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Steps 1-8 supply the projective sheaf models required by lem-fix-constructible-tensor-completion beneath the evaluation sentence, following Stacks 09C3 without asserting constant integral matrices.",
+  "summary": "Human-requested re-split: five independent statement-only tasks extract completed-coefficient free resolutions, clopen lisse trivialization and complete localization, projective-cohomology formality, lifted top residue cells and cone amplitude decrease, and last-term chain attachment. The parent statement and Lean record are unchanged. The full previous eight-step argument is retained and assigned to the new tasks in the delivery report; the parent is a short induction assembly.",
+  "blueprint": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. The five local-model arguments remain below the same tensor-evaluation comparison; no unit route changes.",
   "tool_uses": [
    {
     "node": "det-prop-integral-criterion-constant-coefficients",
-    "why": "Generic sheaf/coefficient tool used as explicitly stated in the proof; the unit has no corresponding local-model input."
-   },
-   {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "The coefficient ring is a Noetherian domain with finite residue field; this is a generic coefficient fact, not a replacement for the local-model induction."
-   },
-   {
-    "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "why": "Generic sheaf/coefficient tool used as explicitly stated in the proof; the unit has no corresponding local-model input."
-   },
-   {
-    "node": "lem-weil-pbc-constant-module-section-properties",
-    "why": "Generic sheaf/coefficient tool used as explicitly stated in the proof; the unit has no corresponding local-model input."
-   },
-   {
-    "node": "lem-pc-bounded-above-flat-kflat-site",
-    "why": "Generic sheaf/coefficient tool used as explicitly stated in the proof; the unit has no corresponding local-model input."
-   },
-   {
-    "node": "lem-weil-proetale-surjective-tower-derived-limit",
-    "why": "Generic sheaf/coefficient tool used as explicitly stated in the proof; the unit has no corresponding local-model input."
+    "why": "Identifies completed-coefficient quotient-tower completeness with the Nakayama convention."
    },
    {
     "node": "det-pe-derived-nakayama-first-reduction",
-    "why": "The proof needs closure of complete objects under cones and residue detection on arbitrary pro-etale schemes, not a constructibility theorem."
-   },
-   {
-    "node": "det-pe-topos-functoriality-site",
-    "why": "Generic sheaf/coefficient tool used as explicitly stated in the proof; the unit has no corresponding local-model input."
-   },
-   {
-    "node": "sk-lem-pe-weakly-etale-stability",
-    "why": "Generic composition and source-locality properties verify the finite coproduct of trivializing maps is a site object."
-   },
-   {
-    "node": "det-pe-morphisms-etale-comparison",
-    "why": "Generic sheaf/coefficient tool used as explicitly stated in the proof; the unit has no corresponding local-model input."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Identifies the small pro-etale sites of clopen pieces with localizations, so the sheaf-gluing argument applies."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic sheaf/coefficient tool used as explicitly stated in the proof; the unit has no corresponding local-model input."
-   },
-   {
-    "node": "lem-pur-derived-change-of-rings",
-    "why": "Exactness of derived coefficient reduction identifies the cone residue."
+    "why": "Closure under cones and detection of the zero complete complex; this is a generic completion tool."
    }
   ]
  },
@@ -404,12 +306,12 @@
   "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q48-2325107df",
-  "group": "Q48",
+  "reviewer": "NT-cc-Q43-d7de9670c",
+  "group": "Q43",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q48-2325107df (reviewer sub-agent of L); spot-checked: Read the full delivery, unit route, cited nodes, Stacks Tags 09C2/09C3 and supporting sources. Verified all eight proof steps, the unsplit bounds lemma, hypotheses, cone induction, edge cases, Mathlib searches, duplicate/cycle checks, and no SGA route. Review written to review.md; no repairs needed."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-d7de9670c (reviewer sub-agent of L); spot-checked: Re-split asked for by the human (live repair note 2026-10-21: needs >=3 new nodes, parent proof <=3000 chars). Delivered: 5 statement-only new nodes, proof=[] on each, and a 6-step parent proof of 2442 chars. Live and side-live still hold the old 8-step proof of 9717 chars, so no other group has superseded this delivery. The item and all cited nodes are absent from route-pivot-dropped.txt. Parent statement and Lean record are unchanged. Each old step matches its allocation in the report verbatim. Step 1 goes to the completed-coefficient free resolution node, except the B=O_E completeness convention, which stays in parent step 2 (citing det-prop-integral-criterion and Nakayama). Steps 2-3 go to the clopen lisse localization node. Step 4 goes to the projective cohomology split model node. Steps 5-6 go to the free-resolution, split-model and top residue cell cone nodes. Step 7 goes to the top-cell attachment node, and step 8 to parent step 6. No argument was dropped or shortened, and no new node restates the parent conclusion. Each statement checked true. Free resolution: phi^n is injective on B_T, the two-term complex is a flat bounded complex hence K-flat, and the surjective tower gives R lim = lim, so free cells are complete; the reduction triangle holds for unbounded M. Clopen node: finite affine refinement, section from weak contractibility, clopen preimages, each piece weakly contractible (extend epimorphisms by the terminal sheaf on the complement), Gamma(U,-) exact so C^r is projective, and restriction to the localization commutes with R lim and derived tensor. Split model: lift cycles over U to get a quasi-isomorphism; exact Gamma gives RGamma = Gamma, so Hom(C^r[-q],A) = H^q(A)(U)^r for unbounded A; Tag 064B holds for bounded-above projective sources in any abelian category. Top-cell cone: H^{b+1}(M)=0 by lem-sf-complete-residue-cohomology-bounds (T quasi-compact is a hypothesis), surjectivity onto H^b(M_1), the cone is the split residue plus a contractible identity complex with amplitude [a,b-1], and Nakayama gives L=0 when a=b. Attachment: the only component of g is g^{b-1} with g^{b-1}d=0, Cone(g)[-1] has P in degree b, and rotation gives M ~ fib(delta); checked for b=a+1. Parent hypotheses match each cited statement; edge cases checked: empty S, empty family, r_b=0, a=b. Source labels confirmed: 09C3 at proetale.tex:5825, 09C2, 098F, 0946, 064B, 099I. No SGA is cited. Accepted tool_uses: det-prop-integral-criterion-constant-coefficients and det-pe-derived-nakayama-first-reduction. Advisories, no action: the free-resolution node overlaps lem-weil-pbc-completed-constant-sheaf-reduction but adds complete free cells and the unbounded triangle; the item-level tool_uses still lists old-step citations, which the new nodes' future proofs now carry. No fixes."
  },
  "lean": {
   "module": "Sheaf.Paper.ResidueLisseProjectiveModels",

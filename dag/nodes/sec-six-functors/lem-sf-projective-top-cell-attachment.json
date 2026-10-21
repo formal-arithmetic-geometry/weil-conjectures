@@ -1,0 +1,76 @@
+{
+ "id": "lem-sf-projective-top-cell-attachment",
+ "kind": "statement",
+ "title": "Representing a connecting map and attaching the top projective term",
+ "statement": "Let $\\mathcal C$ be a site small relative to the module universe and let $C$ be a sheaf of commutative rings. Work in $\\mathcal A=\\operatorname{Mod}(C)$ [def-weil-sheaf-of-modules-category] and its unbounded derived category $D(\\mathcal A)$ with localization $Q$, cochain shifts and cones [def-weil-abstract-derived-category]. Fix integers $a<b$, an object $P\\in\\mathcal A$, an object $M\\in D(\\mathcal A)$, and a complex $Q^\\bullet$ which is zero outside $[a,b-1]$ and has projective terms (maps from each term lift along epimorphisms). Suppose a distinguished triangle is given:\n$$P[-b]\\longrightarrow M\\longrightarrow Q(Q^\\bullet)\\xrightarrow{\\delta}P[-b+1].$$\nWrite $P[-b+1]$ also for the actual single-term complex with $P$ in degree $b-1$. There is a chain map $g:Q^\\bullet\\to P[-b+1]$ representing $\\delta$ in the derived category. Its only possibly nonzero component is $g^{b-1}:Q^{b-1}\\to P$, and it satisfies $g^{b-1}d_Q^{b-2}=0$. The complex $D^\\bullet=\\operatorname{Cone}(g)[-1]$ represents $M$. Under the evident term identifications it has terms $Q^q$ for $q<b$, term $P$ in degree $b$, and zero terms outside $[a,b]$; its last differential is $g^{b-1}$ with the sign fixed by the cone and shift convention. In particular, if $P$ and all $Q^q$ are finite free $C$-module sheaves, then so are all terms of $D^\\bullet$. The rank-zero case $P=0$ is included. No constancy of entries of $g^{b-1}$ is required.",
+ "source": {
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, final paragraph, connecting map and extending the complex by one. Chain-map representative supplied by Tag 064B, derived.tex, lemma-morphisms-from-projective-complex. General ringed-site form of parent proof step 7."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A distinguished triangle from a shifted projective object to a complex with a bounded projective cone can be represented by attaching one last term using the connecting chain map",
+   "results": "8 hits: CategoryTheory.Triangulated.TStructure.exists_triangle, HomotopyCategory.Pretriangulated.distinguished_cocone_triangle, CategoryTheory.Pretriangulated.distinguished_cocone_triangle₂, CategoryTheory.Pretriangulated.distinguished_cocone_triangle₁, HomotopyCategory.mappingCone_triangleh_distinguished, CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.mem_distTriang_iff, DerivedCategory.triangleOfSESδ",
+   "date": "2026-10-21",
+   "verdict": "no match: mappingCone, its triangle, support lemmas and short-exact triangles are ingredients; none represents this connecting morphism and gives this prescribed last-term realization in one specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.mappingCone\"",
+   "results": "12 hits: CochainComplex.mappingCone.fst, CochainComplex.mappingCone.snd, CochainComplex.mappingCone.inl, CochainComplex.mappingCone, CochainComplex.mappingCone.descCochain, CochainComplex.mappingCone.liftCochain, CochainComplex.mappingCone.liftCochain_snd, CochainComplex.mappingCone.inl_descCochain",
+   "date": "2026-10-21",
+   "verdict": "no match: mappingCone, its triangle, support lemmas and short-exact triangles are ingredients; none represents this connecting morphism and gives this prescribed last-term realization in one specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Represent a derived connecting morphism from a bounded projective complex to a single projective object as a chain map and attach its last differential to realize a triangle",
+   "results": "0 hits: ; service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
+   "date": "2026-10-21",
+   "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "connecting.*chain|mappingCone.*(single|Strictly)|single.*mappingCone",
+   "results": "3 hits: Mathlib/Algebra/Homology/HomotopyCategory/Plus.lean, Mathlib/Algebra/Homology/Factorizations/CM5b.lean, Mathlib/Algebra/Homology/Embedding/Connect.lean (Mathlib/Algebra/Homology)",
+   "date": "2026-10-21",
+   "verdict": "no match: mappingCone, its triangle, support lemmas and short-exact triangles are ingredients; none represents this connecting morphism and gives this prescribed last-term realization in one specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Represent a derived connecting morphism from a bounded projective complex to a single projective object as a chain map and attach its last differential to realize a triangle",
+   "results": "8 hits: DerivedCategory.triangleOfSESδ, DerivedCategory.triangleOfSES_mor₁, CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₁, DerivedCategory.triangleOfSES, CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.triangleOfSES_mor₂, CochainComplex.mappingCone.triangle, CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₂",
+   "date": "2026-10-21",
+   "verdict": "no match: mappingCone, its triangle, support lemmas and short-exact triangles are ingredients; none represents this connecting morphism and gives this prescribed last-term realization in one specialization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-fix-residue-lisse-projective-models",
+  "date": "2026-10-21",
+  "group": "Q43"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-rem-sf-pf-done",
+ "blueprint": {
+  "from": {
+   "node": "lem-fix-weil-operations",
+   "place": "Proof, paragraph beginning \"For an admissible exceptional adjoint\", sentence \"Evaluation is natural in the two Weil maps and their inverses, so its square commutes\": local projective models used to compare ordinary tensor evaluation with integral completed tensor. Extracted local-model argument: Representing a connecting map and attaching the top projective term; old parent steps 7.",
+   "via": [
+    "lem-fix-residue-lisse-projective-models",
+    "lem-fix-constructible-tensor-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
