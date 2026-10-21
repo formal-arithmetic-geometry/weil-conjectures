@@ -23412,3 +23412,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:02 L: merged deliver/NA/lem-sfb-polynomial-derived-bar-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 19:02 L: merged deliver/NB/lem-sfb-profinite-constant-derived-functions (stage 2; reviewer FIX; parallel immutable checks)
 - 19:03 L: merged deliver/B4/Sheaf.AlgebraicGeometry.SetsPushforwardStalkStrictHenselization (stage 3; reviewer PASS; first push; landing 20261021T190333-L-3566932 (proof); batch 20261021T185359; modules 1; new nodes 0)
+- 19:04 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
