@@ -20,9 +20,135 @@
   "def-sfb-preserves-kflat-quasi-iso",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $E$ for action extension in [lem-cbc-constant-ring-module-sheaves]. Its statement identifies its inverse with the actual restriction $C_B$ of [def-sfb-constant-ring-module-restriction], retaining underlying abelian sheaves and maps, not merely an unspecified equivalence. Both functors are additive. By [lem-galois-equivalence-preserves-limits] both preserve limits and colimits, hence kernels and cokernels, so they are exact. In particular their termwise extensions identify cohomology (kernels modulo images), preserve and reflect acyclicity and quasi-isomorphisms, and commute with arbitrary direct sums. These assertions require neither points nor a terminal object.",
+   "uses": [
+    "lem-cbc-constant-ring-module-sheaves",
+    "def-sfb-constant-ring-module-restriction",
+    "lem-galois-equivalence-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03CY, lemma-sheafification-presheaf-modules; constant-ring specialization; categories.tex Tag 0038, lemma-adjoint-exact"
+   }
+  },
+  {
+   "text": "Put $T=C_BM\\otimes_B C_BN$. Its pure-tensor pairing, valued in the underlying sheaf of $E(T)$, is a restriction-compatible $B^{\\mathrm{pre}}$-bilinear pairing. Apply [lem-pc-sites-module-sheafification-bilinear-extension] with $\\mathcal O=B^{\\mathrm{pre}}$. The module sheafifications of the restricted $M,N$ identify with $M,N$ by [lem-pc-sites-module-sheafification-interface] (their underlying abelian sheaves are already sheaves, and the counit is the identity on original sections). Thus this pairing is $R$-bilinear on $M\\times N$. By [lem-pc-sites-sheaf-tensor-bilinear-universal] it gives $M\\otimes_RN\\to E(T)$ sending $m\\otimes_R n$ to $m\\otimes_B n$. Conversely the pairing $m,n\\mapsto m\\otimes_R n$ is $B$-bilinear, so the sheafified objectwise tensor universal property [lem-sfb-braided-sheaf-tensor-generators], with $\\mathcal A=\\operatorname{Mod}_B$, gives $T\\to C_B(M\\otimes_RN)$. Both composites fix every pure tensor; the same two universal properties show that they are identities. They are therefore inverse isomorphisms. Applying morphisms $a,b$ sends every such tensor to $a(m)\\otimes b(n)$ in either construction; uniqueness proves naturality in both variables.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-bilinear-extension",
+    "lem-pc-sites-module-sheafification-interface",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-sfb-braided-sheaf-tensor-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, lemma-sheafification-tensor and its bilinear-map hint; Tag 03CY"
+   }
+  },
+  {
+   "text": "For the unit, $C_B\\dashv E$ (step 1) gives $\\operatorname{Hom}_B(C_BR,H)=\\operatorname{Hom}_R(R,E H)$. Precomposition with $\\iota$ maps this bijectively onto $\\operatorname{Hom}_{B^{\\mathrm{pre}}}(B^{\\mathrm{pre}},E H)$: an $R$-linear $f$ satisfies $f_U(r)=r\\,f_U(1)$ and $1=\\iota_U(1)$, so $f$ is determined by $f\\iota$; conversely a $B$-linear natural $g$ gives the restriction-compatible family $n_U=g_U(1)$ (restrictions of $B^{\\mathrm{pre}}$ are identities), and $f_U(r)=r\\,n_U$ is natural, $R$-linear and satisfies $f\\iota=g$ because $B$ acts on $EH$ through $\\iota$. Thus $R$ with $\\iota$ is the module sheafification of $B^{\\mathrm{pre}}$ in the sense of [lem-pc-sites-module-sheafification-interface], whose underlying abelian sheaf is the abelian sheafification.\nThe set $\\operatorname{Hom}_{B^{\\mathrm{pre}}}(B^{\\mathrm{pre}},E H)$ consists of the restriction-compatible $B$-linear maps from the constant module presheaf to $H$. Hence $C_BR$, with $b\\mapsto\\iota(b)$, is its sheafification. Uniqueness of sheafification identifies it with the tensor unit of [sk-def-sfb-sheaf-tensor], fixing the image of each $b$. Check the constraints by precomposing with pure tensors, using the equality-detection bijections of [lem-pc-sites-sheaf-tensor-bilinear-universal] and [lem-sfb-braided-sheaf-tensor-generators] repeatedly. The associator diagram on $(m\\otimes n)\\otimes l$ gives $m\\otimes(n\\otimes l)$ on both paths; the symmetry diagram gives $n\\otimes m$; the left and right unitor diagrams on $b\\otimes m$ and $m\\otimes b$ both give $\\iota(b)m=bm$. Thus the comparison is symmetric monoidal. The inverse equivalence gets the inverse comparisons, with the same identities.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface",
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-sheafification",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-sfb-braided-sheaf-tensor-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY and 0GMW; Section 03EK, tensor constraints and bilinear universal property"
+   }
+  },
+  {
+   "text": "Apply the ordinary comparison on each $(p,q)$ summand and the direct-sum comparison from step 1. In total degree $n$ this gives\n$C_B(\\bigoplus_{p+q=n}P^p\\otimes_RQ^q)\\cong\\bigoplus_{p+q=n}C_BP^p\\otimes_B C_BQ^q$.\nNaturality with $d_P$ and $d_Q$ identifies the two parts $d_P\\otimes1$ and $1\\otimes d_Q$ of [def-pc-tensor-complex-sheaves]; additivity preserves the coefficient $(-1)^p$. These degreewise isomorphisms therefore form a natural chain isomorphism of signed direct-sum totals. Their inverses give the analogous comparison for $E$. The associator and unit diagrams agree on each direct-sum injection by step 3; the symmetry sends a homogeneous tensor to $(-1)^{pq}$ times the reversed tensor on both paths. This proves coherence for the total-complex comparisons, including all signs.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-sfb-preserves-kflat-quasi-iso"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 06YL, total tensor convention; homology.tex Definition 012Z"
+   }
+  },
+  {
+   "text": "For a fixed module sheaf $M$, step 2 identifies tensor with $C_BM$ with the conjugate by $C_B,E$ of tensor with $M$. Since these equivalences are exact and essentially surjective, one tensor functor is exact if and only if the other is. This proves preservation and reflection of flatness [def-pc-flat-sheaf-modules]. For a complex $P$ and any acyclic fixed-$B$ complex $A$, step 1 makes $EA$ acyclic and step 4 identifies\n$C_B\\operatorname{Tot}(P\\otimes_R EA)\\cong\\operatorname{Tot}(C_BP\\otimes_B A)$.\nAcyclicity on one side is equivalent to that on the other. Every acyclic complex on either side is obtained this way, up to the termwise equivalence isomorphism. This proves preservation and reflection of K-flatness [def-pc-kflat-complex]. The symmetric total braiding gives the same assertion with the two tensor arguments interchanged.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER, definition-flat; sites-cohomology.tex Tag 06YN, definition-K-flat"
+   }
+  },
+  {
+   "text": "For completeness, the acyclic-test definition equals the quasi-isomorphism-test definition [def-sfb-preserves-kflat-quasi-iso]. On $R$-module complexes, tensoring a cone is the cone of the tensor map by [lem-pc-tensor-mapping-cone-iso], while a map is a quasi-isomorphism precisely when its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic]. Thus an acyclic-test K-flat complex tensors every quasi-isomorphism to a quasi-isomorphism. Conversely apply quasi-isomorphism preservation to $0\\to A$ for an arbitrary acyclic $A$; its tensor source is zero, so its tensor target is acyclic. Symmetry handles the other side. Steps 1 and 4 transfer this equivalence to fixed-$B$ complexes: lift any complex or map by $E$, and use preservation and reflection of acyclicity and quasi-isomorphisms.",
+   "uses": [
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-pc-tensor-mapping-cone-iso",
+    "lem-pur-quasi-iso-cone-acyclic"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism; derived.tex Tag 05RT, lemma-acyclic"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-exact-functor-derived-triangulated] to $C_B$ and $E$, exact by step 1. The termwise unit and counit isomorphisms descend through localization at quasi-isomorphisms [def-weil-abstract-derived-category]. Their inverse identities remain identities after localization. Hence $D(C_B)$ and $D(E)$ are mutually inverse equivalences on the ordinary unbounded derived categories, with their specified termwise localization comparisons.",
+   "uses": [
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; Tag 05RT and definition of the derived category"
+   }
+  },
+  {
+   "text": "Use the full subcategory $\\mathcal P_R$ of K-flat complexes with flat terms in [lem-weil-pbc-site-derived-tensor-descent]. Steps 1 and 5 identify it under the homotopy-category equivalence with the corresponding subcategory $\\mathcal P_B$, and identify their quasi-isomorphisms. Thus its resolving localization equivalence transports to $W_B^{-1}\\mathcal P_B\\simeq D(\\operatorname{Sh}(C,\\operatorname{Mod}_B))$. On $P,Q\\in\\mathcal P_R$, the chain isomorphism of step 4 yields\n$D(C_B)(QP\\otimes_R^{\\mathbf L}QQ)\\cong D(C_B)(QP)\\otimes_B^{\\mathbf L}D(C_B)(QQ)$\nunder the canonical total-tensor localization comparisons. Its naturality commutes with every quasi-isomorphism in either variable, so the uniqueness and extension assertion of the cited descent node, transported through the equivalence in step 7, extends it to all derived objects and morphisms. Inverting the chain comparison supplies its inverse. On three resolving arguments the two associativity paths agree by step 4; successively localizing each variable proves the derived associator equation. The same argument with two variables proves symmetry, and with the flat regular unit in degree zero proves both unitor equations. Hence these are the coherent comparisons computed by the stated total maps on corresponding K-flat resolutions. Any K-flat representatives may be used: by step 6 tensor with them preserves quasi-isomorphisms, so comparison with flat-term K-flat resolutions gives the same localized maps.",
+   "uses": [
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution), 0G7D (lemma-factor-through-K-flat), 06YT (lemma-derived-tor-quasi-isomorphism-other-side), 06YU (definition-derived-tor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-constant-ring-module-sheaves",
+  "def-sfb-constant-ring-module-restriction",
+  "lem-galois-equivalence-preserves-limits",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-sfb-braided-sheaf-tensor-generators",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-sheafification",
+  "def-pc-tensor-complex-sheaves",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 0GMW, specialized to the constant ring presheaf; explicit constraints, signed totals and resolving-localization assembly using sites-cohomology.tex Tags 06YN, 06YP, 06YS, 0G7D, 06YT, 06YU."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -65,10 +191,52 @@
    "results": "Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Presheaf/Monoidal.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean; Mathlib/Algebra/Category/ModuleCat/Monoidal/Basic.lean",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module/presheaf machinery does not assert the specified normalized comparison, its naturality and coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "constant.*[Rr]estrict|[Rr]estrict.*constant|sheafification.*tensor",
+   "results": "{\"t\": \"2026-10-21T03:48:49Z\", \"tool\": \"grep\", \"query\": \"constant.*[Rr]estrict|[Rr]estrict.*constant|sheafification.*tensor\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned ordinary module, generic module sheafification, or light-condensed results do not state the full normalized constant-scalar tensor/total/K-flat comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, \"tensor\"",
+   "results": "{\"t\": \"2026-10-21T03:48:49Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules, \\\"tensor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned ordinary module, generic module sheafification, or light-condensed results do not state the full normalized constant-scalar tensor/total/K-flat comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction from sheaves of modules over the sheafified constant ring to fixed coefficient module valued sheaves is a symmetric monoidal equivalence preserving K flat total tensor complexes",
+   "results": "{\"t\": \"2026-10-21T03:48:50Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction from sheaves of modules over the sheafified constant ring to fixed coefficient module valued sheaves is a symmetric monoidal equivalence preserving K flat total tensor complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.mapFree\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"PresheafOfModules.sheafificationCompForgetCompToPresheaf\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalCategorySheafLightProfiniteCoherentTopologyModuleCat\", \"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"LightCondensed.instMonoidalLightCondSetLightCondModFree\", \"CategoryTheory.Sheaf.instMonoidalFunctorOppositePresheafToSheaf\"], \"digest\": \"7aee817833986a55\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned ordinary module, generic module sheafification, or light-condensed results do not state the full normalized constant-scalar tensor/total/K-flat comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "tensorObjIsoSheafification|sheafificationTensor|SheafOfModules.*[Mm]onoidal",
+   "results": "{\"t\": \"2026-10-21T03:49:00Z\", \"tool\": \"grep\", \"query\": \"tensorObjIsoSheafification|sheafificationTensor|SheafOfModules.*[Mm]onoidal\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned ordinary module, generic module sheafification, or light-condensed results do not state the full normalized constant-scalar tensor/total/K-flat comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The equivalence between fixed ring module sheaves and modules over the constant ring sheaf preserves tensor products and K flat resolutions",
+   "results": "{\"t\": \"2026-10-21T03:49:01Z\", \"tool\": \"leansearch\", \"query\": \"The equivalence between fixed ring module sheaves and modules over the constant ring sheaf preserves tensor products and K flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LinearMap.lTensor_eqLocus_subtype_tensoreqLocusEquiv_symm\", \"LinearMap.tensorEqLocusEquiv_apply\", \"Module.Flat.iff_flat_tensorProduct\", \"LinearMap.tensorEqLocusEquiv\", \"AlgHom.tensorEqualizerEquiv_apply\", \"SheafOfModules.mk\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\"], \"digest\": \"b9b0623e8ab442e7\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned ordinary module, generic module sheafification, or light-condensed results do not state the full normalized constant-scalar tensor/total/K-flat comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sheafification of modules along the constant ring presheaf induces a monoidal equivalence with sheaves of modules over its ring sheafification",
+   "results": "{\"t\": \"2026-10-21T03:49:02Z\", \"tool\": \"leanfinder\", \"query\": \"Sheafification of modules along the constant ring presheaf induces a monoidal equivalence with sheaves of modules over its ring sheafification\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\", \"PresheafOfModules.sheafificationCompToSheaf\", \"PresheafOfModules.sheafifyHomEquiv'\", \"PresheafOfModules.sheafifyHomEquiv\", \"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.sheafificationAdjunction\"], \"digest\": \"e970b54e93bb7b99\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned ordinary module, generic module sheafification, or light-condensed results do not state the full normalized constant-scalar tensor/total/K-flat comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-module-object-ordinary-coefficient-equivalence",
@@ -87,5 +255,99 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-constant-scalar-restriction-tensor",
+  "worker": "stage1",
+  "summary": "Q19 gives eight proof steps with no new nodes: explicit normalized tensor maps from the existing bilinear extension and tensor universal properties, constraint checks, signed totals, flat/K-flat tests, and coherent unbounded localization. Statement unchanged; no Lean edits or compilation. All cited statements and sources were read.",
+  "blueprint": "Auxiliary coefficient-identification route of parent lem-sf-module-object-ordinary-coefficient-equivalence, steps 1-2 (original coefficient steps 3, 5-6), under ancestor sk-prop-sf-rf-shriek-preservation. The actual blueprint proof has four paragraphs; its fourth paragraph is the adjunction restriction this coefficient bridge serves, not a literal numbered step 8.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-constant-ring-module-sheaves",
+    "why": "Generic arbitrary-site scalar action equivalence; the unit has no such coefficient infrastructure."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-bilinear-extension",
+    "why": "Generic extension and normalization of bilinear pairings, not a replacement of the unit route."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-interface",
+    "why": "Generic module sheafification adjunction and underlying abelian sheaf needed for the constant-ring specialization."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Generic ringed-site tensor representing property used to construct and compare maps."
+   },
+   {
+    "node": "lem-sfb-braided-sheaf-tensor-generators",
+    "why": "Generic fixed-coefficient tensor universal property and detection of equality on generators."
+   },
+   {
+    "node": "sk-def-sfb-sheaf-tensor",
+    "why": "Fixed coefficient tensor and unit structures that the item compares."
+   },
+   {
+    "node": "def-weil-pbc-sheafification",
+    "why": "Generic uniqueness of sheafification identifies the normalized unit."
+   },
+   {
+    "node": "def-pc-tensor-complex-sheaves",
+    "why": "Definition of the signed direct-sum total, used without changing any geometric route."
+   },
+   {
+    "node": "def-sfb-preserves-kflat-quasi-iso",
+    "why": "Definition of two-sided K-flatness and quasi-isomorphism preservation."
+   },
+   {
+    "node": "def-pc-flat-sheaf-modules",
+    "why": "Definition of flatness as tensor exactness."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Definition of the acyclic-test K-flat condition."
+   },
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "Generic cone/tensor comparison proves equivalence of the two K-flat conventions."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic cone characterization of quasi-isomorphisms, not a geometric theorem."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Generic unbounded exact-functor localization used for the coefficient equivalence."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Generic ringed-site resolving localization; no unit-specific alternative supplies its universal property."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-constant-ring-module-sheaves",
+  "lem-pc-sites-module-sheafification-bilinear-extension",
+  "lem-pc-sites-module-sheafification-interface",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "lem-sfb-braided-sheaf-tensor-generators",
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-sheafification",
+  "def-pc-tensor-complex-sheaves",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q19-1a708595a",
+  "group": "Q19",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q19-1a708595a (reviewer sub-agent of L); spot-checked: I read all 8 steps and every cited statement in full; the delivery adds no new nodes and the statement is unchanged from live, where the item is still unsplit. There is no repair note for the item, it is not in a dropped list, it cites no SGA, and there is no cycle (the DFS over 175 nodes never reaches the item). Every Stacks tag cited exists; I read 0GMW and its bilinear hint at sites-modules.tex:3606-3631. Steps 1, 2 and 4-8 are correct. Step 2 legitimately gets R-bilinearity from the uniqueness clauses of the bilinear-extension and interface lemmas. Step 6 proves the acyclic-test and quasi-iso-test K-flat definitions agree using the cone lemmas. Step 8 applies the extension/uniqueness clause of lem-weil-pbc-site-derived-tensor-descent to bifunctors on D(R)xD(R). FIX (C4), step 3: it derives Hom_R(R,EH) = Hom_{B^pre}(B^pre,EH) from the module-sheafification interface, which gives Hom_R((B^pre)^#,EH); no cited node says the ring sheafification R is that module sheafification. I replaced the sentence with the direct argument: f_U(r) = r f_U(1) gives injectivity, and the compatible family n_U = g_U(1) gives surjectivity. Uses and all other fields are unchanged. I tested B = 0, the empty site, a disconnected site without a terminal object, and unbounded totals. Size hypotheses are covered. All 15 declared tool_uses are generic and accepted. No duplicate: lem-sfb-ring-isomorphism-tensor-transport is about a ring isomorphism, lem-weil-pbc-site-module-sheaf-constant-ring-equivalence is an equivalence only, and lem-pur-etale-constant-module-tensor is an étale special case of the tensor clause (advisory).; 1 file(s) fixed by the reviewer"
  }
 }
