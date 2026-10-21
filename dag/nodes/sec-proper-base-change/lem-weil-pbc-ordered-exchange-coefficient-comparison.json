@@ -41,7 +41,7 @@
  ],
  "proof": [
   {
-   "text": "The coefficient maps commute with $\\underline A\\to A_T$ on constant sections and hence on all finite projections. Profinite inverse image gives their composition compatibility; constant-completion gives flatness. Apply flat diagram restriction with one-object index and with $J$, obtaining $a,\\chi,p,d$ with their adjunct normalization. Apply the scalar-limit-square lemma to obtain $\\lambda$ and its canonical direct-image compatibility.",
+   "text": "The coefficient maps commute with $\\underline A\\to A_T$ on constant sections and hence on all finite projections. Profinite inverse image gives their composition compatibility; constant-completion gives flatness. Apply flat diagram restriction with one-object index and with $J$, obtaining $a,\\chi,p,d$ with their adjunct normalization. Apply the scalar-limit-square lemma to obtain $\\lambda$ and its canonical direct-image compatibility. Formalized ordinary-limit part: restriction preserves inverse limits because the faithful underlying-presheaf functor reflects them and creates the restricted limiting diagram. The standard preservesLimitNatIso has the required projection equations; limit.hom_ext proves uniqueness.",
    "uses": [
     "lem-weil-pbc-profinite-coefficient-inverse-image",
     "lem-weil-pbc-constant-completion-equivalence",
@@ -84,12 +84,13 @@
    }
   },
   {
-   "text": "Completion-unit scalar adjunction gives $\\phi$, its Hom bijections, units, counits and conjugates. Its reconstruction equation at $(g',K)$ is the target reconstruction equation. At $(g,Rf_*K)$, $r_S=\\mathcal L^a(\\tau_{g,Rf_*K})^{-1}r_{g,Rf_*K}$ (completed-pullback definition), and the balancing $q$-equation turns $q_{g,Rf_*K}$ into $\\rho_M$; transporting by $\\chi_f$, it is the source reconstruction equation with $\\rho_M,\\iota_S$; direct-image completeness verifies this input. Thus (1) and both fixed reconstruction equations hold on the full complete categories.",
+   "text": "Completion-unit scalar adjunction gives $\\phi$, its Hom bijections, units, counits and conjugates. Its reconstruction equation at $(g',K)$ is the target reconstruction equation. At $(g,Rf_*K)$, $r_S=\\mathcal L^a(\\tau_{g,Rf_*K})^{-1}r_{g,Rf_*K}$ (completed-pullback definition), and the balancing $q$-equation turns $q_{g,Rf_*K}$ into $\\rho_M$; transporting by $\\chi_f$, it is the source reconstruction equation with $\\rho_M,\\iota_S$; direct-image completeness verifies this input. Thus (1) and both fixed reconstruction equations hold on the full complete categories. Formalized Hom normalization: solve the defining phi unit equation for the inverse comparison, postcompose with the restricted map, and apply the constant-ring adjunction homEquiv. The transpose formula proEtaleRingSheafChangeAdjunction then gives exactly chi composed with the restricted completed transpose.",
    "uses": [
     "lem-weil-pbc-completed-scalar-unit-adjunction",
     "prop-weil-pbc-direct-image-limits",
     "lem-weil-pbc-strict-quotient-scalar-balancing",
-    "def-weil-pbc-completed-pullback"
+    "def-weil-pbc-completed-pullback",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
    ],
    "elementary": false,
    "source": {
@@ -98,7 +99,7 @@
    }
   },
   {
-   "text": "Naturality of $\\lambda$ and $s^a=\\mathcal L^a(H^a)r_S$ give $\\mathcal L(\\beta)\\lambda r(s^a)=\\mathcal L(H^0)r_S^0\\iota_S=s^0\\iota_S$. For $Z=\\mathscr L_{g'}\\mathcal R_X^aK$, use $c^a=\\kappa_{f'}^a(Z)Rf'_*(r_{g',K})$ and the scalar-limit square; substitute the target reconstruction equation to get $\\mathcal L(\\delta)\\lambda r(c^a)=t^0\\iota_T$. Here $s^0,t^0$ are precisely the specified constant comparisons. Applying $\\mathcal L$ to the mate equation and cancelling yields $\\iota_Tr(x_K^a)=(t^0)^{-1}\\mathcal L(E^{\\mathcal T})s^0\\iota_S$. These are compositions of natural transformations, hence apply to every complete-object morphism and intermediate complete input.",
+   "text": "Naturality of $\\lambda$ and $s^a=\\mathcal L^a(H^a)r_S$ give $\\mathcal L(\\beta)\\lambda r(s^a)=\\mathcal L(H^0)r_S^0\\iota_S=s^0\\iota_S$. For $Z=\\mathscr L_{g'}\\mathcal R_X^aK$, use $c^a=\\kappa_{f'}^a(Z)Rf'_*(r_{g',K})$ and the scalar-limit square; substitute the target reconstruction equation to get $\\mathcal L(\\delta)\\lambda r(c^a)=t^0\\iota_T$. Here $s^0,t^0$ are precisely the specified constant comparisons. Applying $\\mathcal L$ to the mate equation and cancelling yields $\\iota_Tr(x_K^a)=(t^0)^{-1}\\mathcal L(E^{\\mathcal T})s^0\\iota_S$. These are compositions of natural transformations, hence apply to every complete-object morphism and intermediate complete input. Formalized naturality part: assemble the raw map from the natural tower projection isomorphism, exchangeStrictNatTrans, and the inverse direct-image/limit comparison. For the constant map, identify projection with the mate of reductionPullIso by mateEquiv_counit. Whisker the resulting natural isomorphisms and the constant exchange mate; their composite has exactly the displayed components, so its naturality proves the claim.",
    "uses": [
     "lem-weil-pbc-flat-scalar-tower-limit-square",
     "prop-weil-pbc-direct-image-limits",
@@ -125,6 +126,7 @@
   "lem-weil-pbc-flat-scalar-tower-limit-square",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
   "lem-weil-pbc-quotient-diagram-scalar-projection",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
   "lem-weil-pbc-strict-quotient-scalar-balancing",
   "lem-weil-pbc-strict-tower-exchange-mate-normalization",
   "prop-weil-pbc-direct-image-limits",
@@ -133,7 +135,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-  "place": "Second proof paragraph, coefficient normalization and reconstruction comparisons; strict coefficient comparison supplement"
+  "place": "Second proof paragraph, coefficient normalization and reconstruction comparisons; strict coefficient comparison supplement; K9 formalizes the ordinary limit, completed Hom and naturality auxiliary statements. The current separated proof obligations are retained. RhoNormalization and LambdaNormalization name the unchanged complex formulas."
  },
  "mathlib_searches": [
   {
@@ -311,7 +313,11 @@
    "AlgebraicGeometry.Scheme.OrderedExchange.normalized_naturality",
    "AlgebraicGeometry.Scheme.OrderedExchange.rawNormalized",
    "AlgebraicGeometry.Scheme.OrderedExchange.constantNormalized",
-   "AlgebraicGeometry.Scheme.OrderedExchange.coefficientComparison"
+   "AlgebraicGeometry.Scheme.OrderedExchange.coefficientComparison",
+   "AlgebraicGeometry.Scheme.OrderedExchange.RhoNormalization",
+   "AlgebraicGeometry.Scheme.OrderedExchange.rho_normalization",
+   "AlgebraicGeometry.Scheme.OrderedExchange.LambdaNormalization",
+   "AlgebraicGeometry.Scheme.OrderedExchange.lambda_normalization"
   ],
   "file": "lean/Sheaf/Paper/OrderedExchangeCoefficientComparison.lean",
   "statement": "theorem coefficientComparison (sq : ChosenCartesianSquare g' f' f g) : (∀ (K : d.derived X) (hK : d.TowerComplete X K), (d.towerV' sq K = (exchangeRealizationH (f := f) (g := g) d K).inv ≫ (completedReductionTower Y' d).map ((d.integralExchange sq).app K) ≫ (exchangeRealizationHPrime (f' := f') (g' := g') d K).hom) ∧ ((exchangeTowerRes d Y').map (exchangeRealizationH (f := f) (g := g) d K).hom ≫ (beta (f := f) (g := g) d K).hom = (rhoM (f := f) (g := g) d K).hom ≫ (H (f := f) (g := g) d ((res d X).obj K)).hom) ∧ ((exchangeTowerRes d Y').map (d.towerV' sq K) ≫ (delta (f' := f') (g' := g') d K).hom = (beta (f := f) (g := g) d K).hom ≫ (exchangeConstantSquare (A := A) sq).exchangeTowerMate.app ((reduction d X).obj ((res d X).obj K))) ∧ ((res d Y').map (sourceReconstruction (f := f) (g := g) d K).hom ≫ (lambda d Y').hom.app ((completedReductionTower Y' d).obj ((d.pull g).obj ((d.push f).obj K))) ≫ (rlim (A := A) Y').map (rhoM (f := f) (g := g) d K).hom = (iotaS (f := f) (g := g) d K hK).hom) ∧ ((lambda d X').hom.app ((d.towerPull g').obj ((completedReductionTower X d).obj K)) ≫ (rlim (A := A) X').map (rhoPull (g' := g') d K).hom = (phi d g').hom.app ⟨K, hK⟩ ≫ (reconstruction d g' ((res d X).obj K)).hom) ∧ ((res d Y').map (sourceA (f := f) (f' := f') (g := g) (g' := g') d K).hom ≫ (lambda d Y').hom.app ((d.towerPull g).obj ((d.towerPush f).obj ((completedReductionTower X d).obj K))) ≫ (rlim (A := A) Y').map (beta (f := f) (g := g) d K).hom = (iotaS (f := f) (g := g) d K hK).hom ≫ (S (f := f) (g := g) d ((res d X).obj K)).hom) ∧ ((res d Y').map (targetA (g' := g') (f' := f') d K).hom ≫ (lambda d Y').hom.app ((d.towerPush f').obj ((d.towerPull g').obj ((completedReductionTower X d).obj K))) ≫ (rlim (A := A) Y').map (delta (f' := f') (g' := g') d K).hom = (iotaT (f' := f') (g' := g') d K hK).hom ≫ (T (f' := f') (g' := g') d ((res d X).obj K)).hom)) ∧ rawNormalized d sq = constantNormalized d sq ∧ (∀ [IsProper f] (K : d.derived X) (hK : d.TowerComplete X K) (W : ∀ n : ℕ, FiniteEtaleOriginWitness X (A ⧸ d.ideal ^ (n + 1)) ((d.reduction X n).obj K)), d.completedExchange sq K = d.completedBaseChangeMap sq K hK W)",
@@ -319,5 +325,15 @@
   "by": "N8",
   "date": "2026-10-17",
   "existing": false
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-4c1aa",
+  "group": "K9",
+  "result": "pass",
+  "landing": "20261021T203708-L-3854176",
+  "kind": "interface",
+  "note": "independent cc review: delivered OrderedExchangeCoefficientComparison.lean, node and change record vs clones/live: reworded rho/lambda_existsUnique equal the old formulas verbatim via the new predicates, limitComplexUnit/rawComponent/constantComponent only gain their inferred types; item + CompletedExchangeCoherence + PulledReductionStrictTowerComparison compiled clean; axioms checked"
  }
 }

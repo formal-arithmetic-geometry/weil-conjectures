@@ -6,48 +6,9 @@ Authors: SHEAF group N8
 module
 
 public import Sheaf.Paper.ProEtaleConstantReductionTower
-public import Sheaf.Paper.PbcActualRingedExchange
-public import Sheaf.Paper.PbcActualScalarPullback
-public import Sheaf.Paper.PbcActualStrictPullback
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.CategoryTheory.DiagramSiteRealization
-import Mathlib.Algebra.Category.Grp.FilteredColimits
-import Mathlib.CategoryTheory.Abelian.FunctorCategory
-import Mathlib.CategoryTheory.Sites.Limits
-import Sheaf.Paper.KoszulReconstruction
-import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
-import Sheaf.AlgebraicGeometry.ProfiniteCoefficientInverseImage
-
-import Sheaf.Paper.CompletedBaseChangeMap
-import Sheaf.Paper.StrictTowerOperations
-import Sheaf.AlgebraicGeometry.ProEtaleIntrinsicFiniteOperations
-import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.PreDerivedAdjointFunctorsGeneral
-import Sheaf.Paper.CompletedPullbackAdjunction
-import Sheaf.Paper.CompletionMateComparison
-import WeilConjectures.CategoryTheory.GrothendieckAbelian.KInjectiveResolution
-import Sheaf.CategoryTheory.KInjectiveTotalDerived
-import Sheaf.AlgebraicGeometry.ProEtaleCanonicalPullbackComposition
-import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.Comp
-import Sheaf.Paper.RingedExchangeTensorCoherence
-import Sheaf.Paper.WeilCompletedTensorReflector
-import Sheaf.Algebra.Homology.WeilSiteDerivedTensorDescent
-import Sheaf.CategoryTheory.SmallModuleDiagramsGrothendieck
-import Sheaf.Paper.StrictTowerExchangeMateNormalization
-import Sheaf.CategoryTheory.RingedTowerPushforwardLimitComparison
-import Sheaf.CategoryTheory.RingedToposMorphism
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Paper.PerfectProjectionFormula
-import Sheaf.Paper.CompletedDirectImageLimits
-import Sheaf.Paper.CompletedRlimFunctor
-
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
-import Sheaf.Algebra.Homology.SiteDerivedTensorDescentIndependentCoefficients
-import Sheaf.CategoryTheory.FlatRingedDiagramRestriction
-import Sheaf.Paper.IntegralFinitePullbackComposition
-import Sheaf.Paper.PbcQbarCompletedPullback
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.AlgebraicGeometry.ProEtaleRingSheafChangeAdjunction
+
 /-! # Coefficient normalization of the raw ordered completed exchange
 
 Source: main-20261015 blueprint, proper base change, completed-exchange-coherence,
@@ -60,11 +21,89 @@ normalizations. The ambient constant and completed module categories remain dist
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option linter.unusedTactic false
+set_option linter.unreachableTactic false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.defeqAttrib.useBackward true
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency.types false
 universe t
 open CategoryTheory CategoryTheory.Limits Opposite
 namespace AlgebraicGeometry.Scheme.OrderedExchange
+
+-- Prefer the concrete pro-etale site and module instances to abstract corner projections.
+attribute [local instance 0] SheafOfModules.RingedTensorCorner.category
+  SheafOfModules.RingedTensorCorner.derived
+
+private theorem orderedAbSheafify (T : Scheme.{t}) :
+    HasSheafify (ProEt.topology T) AddCommGrpCat.{t + 1} :=
+  WeilConjectures.integralCoefficientAbSheafify.{t, 0} T
+
+private theorem orderedAbLocallyBijective (T : Scheme.{t}) :
+    (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{t + 1} :=
+  WeilConjectures.integralCoefficientAbLocallyBijective.{t, 0} T
+
+
+private theorem orderedRestrictLimits (T : Scheme.{t})
+    {R B : Sheaf (ProEt.topology T) CommRingCat.{t + 1}} (φ : R ⟶ B) :
+    PreservesLimitsOfShape ℕᵒᵖ (reductionRestrict T φ) := by
+  let := orderedAbSheafify T
+  let := orderedAbLocallyBijective T
+  let r := reductionRestrict T φ
+  let F := SheafOfModules.forget.{t + 1} (reductionModuleRing T R) ⋙
+    PresheafOfModules.toPresheaf (reductionModuleRing T R).obj
+  have : PreservesLimitsOfShape ℕᵒᵖ (r ⋙ F) :=
+    inferInstanceAs (PreservesLimitsOfShape ℕᵒᵖ
+      (SheafOfModules.forget.{t + 1} (reductionModuleRing T B) ⋙
+        PresheafOfModules.toPresheaf (reductionModuleRing T B).obj))
+  have : ReflectsLimitsOfShape ℕᵒᵖ F := reflectsLimitsOfShape_of_reflectsIsomorphisms
+  exact preservesLimitsOfShape_of_reflects_of_preserves r F
+
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem uniqueLimitComparison {C E : Type*} [Category C] [Category E]
+    [HasLimitsOfShape ℕᵒᵖ C] [HasLimitsOfShape ℕᵒᵖ E]
+    (r : C ⥤ E) [PreservesLimitsOfShape ℕᵒᵖ r] :
+    ∃! e : lim ⋙ r ≅ (Functor.whiskeringRight ℕᵒᵖ C E).obj r ⋙ lim,
+      ∀ (Z : ℕᵒᵖ ⥤ C) (n : ℕ),
+        e.hom.app Z ≫ limit.π (Z ⋙ r) (op n) = r.map (limit.π Z (op n)) := by
+  refine ⟨preservesLimitNatIso (J := ℕᵒᵖ) r, ?_, ?_⟩
+  · intro Z n
+    exact preservesLimitIso_hom_π r Z (op n)
+  · intro e he
+    apply Iso.ext
+    apply NatTrans.ext
+    funext Z
+    apply limit.hom_ext
+    intro n
+    exact (he Z n.unop).trans (preservesLimitIso_hom_π r Z n).symm
+
+private theorem unitIsoComparison {C : Type*} [Category C] {M N M' N' : C}
+    (j : M ⟶ N) (j' : M' ⟶ N') (a : M ≅ M') (p : N ≅ N')
+    (h : j ≫ p.hom = a.hom ≫ j') : j' ≫ p.inv = a.inv ≫ j :=
+  a.eq_inv_comp.mpr
+    ((Category.assoc a.hom j' p.inv).symm.trans (p.comp_inv_eq.mpr h.symm))
+
+private theorem mappedUnitIsoComparison {C E : Type*} [Category C] [Category E]
+    (r : C ⥤ E) {M N Z : C} {M' N' : E}
+    (j : M ⟶ N) (j' : M' ⟶ N') (a : r.obj M ≅ M') (p : r.obj N ≅ N')
+    (h : r.map j ≫ p.hom = a.hom ≫ j') (f : N ⟶ Z) :
+    j' ≫ p.inv ≫ r.map f = a.inv ≫ r.map (j ≫ f) := by
+  rw [← Category.assoc, unitIsoComparison _ _ a p h,
+    Category.assoc, Functor.map_comp]
+
+attribute [local irreducible] completedAdicChangeData completedAdicDerivedChange
+  HasDerivedCategory.standard Functor.mapDerivedCategory
+  Functor.mapDerivedCategoryFactors Functor.mapDerivedCategoryFactorsh
+  completedAdicChange reductionChange reductionDerivedChange reductionHomotopy
+  completedReductionTower reduction
+
+attribute [local instance 3000] orderedAbSheafify orderedAbLocallyBijective
+  reductionModulesHasDerivedCategory reductionTowerHasDerivedCategory
+  reductionRingModulesHasDerivedCategory
+
+-- Normalize the two ordinary presentations of scalar restriction before matching complexes.
+set_option allowUnsafeReducibility true in
+attribute [local reducible] reductionRestrict completedReductionComplexTowerFunctor
 
 variable {A : Type (t + 1)} [CommRing A] (d : AdicCoefficientDatum A)
 
@@ -97,18 +136,19 @@ def ordinaryRho (T : Scheme.{t}) :
       completedReductionModuleTowerFunctor T d ⋙ exchangeTowerModuleRes d T :=
   (ordinaryRho_existsUnique d T).exists.choose
 
-/-- The derived strict-tower comparison is fixed on K-flat representatives before evaluation.
+attribute [local irreducible] ordinaryRho reductionModule completedReductionModuleTowerFunctor
+  completedReductionCoefficient constantSheaf AdicCoefficients.coefficientRing
+  SheafOfModules.monoidalCategory
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- The complex-level normalization of the specified rho comparison.
 Source: Stacks 099M, 06YY
-(blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison).
-Proof: flatness makes restriction preserve flat-term K-flat representatives. Apply
-ordinaryRho to one such representative and conjugate by the two universal reduction
-counits and exact-restriction factorization maps. The formula descends through resolving
-quasi-isomorphisms, giving the isomorphism. Every derived object has a representative
-of this kind, so the formula determines the natural isomorphism uniquely. -/
-theorem rho_existsUnique (T : Scheme.{t}) :
-    ∃! e : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
-        res d T ⋙ reduction d T,
-      ∀ P : CochainComplex (reductionModules T (d.completedRing T)) ℤ,
+(blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison). -/
+def RhoNormalization (T : Scheme.{t})
+    (e : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
+        res d T ⋙ reduction d T) : Prop :=
+  ∀ P : CochainComplex (reductionModules T (d.completedRing T)) ℤ,
         CochainComplex.IsKFlatIndependentCoefficients.{t + 1, t, t + 1}
           (R := d.completedRing T) P →
         (∀ n : ℤ, SheafOfModules.IsFlatOnSite.{t + 1, t, t + 1, t + 1}
@@ -122,7 +162,24 @@ theorem rho_existsUnique (T : Scheme.{t}) :
             (exchangeTowerModuleRes d T).mapDerivedCategoryFactors.hom.app
               ((completedReductionComplexTowerFunctor T d).obj P) ≫
             DerivedCategory.Q.map
-              ((NatIso.mapHomologicalComplex (ordinaryRho d T).symm (.up ℤ)).hom.app P) := by
+              ((NatIso.mapHomologicalComplex (ordinaryRho d T).symm (.up ℤ)).hom.app P)
+
+attribute [local irreducible] RhoNormalization
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- The derived strict-tower comparison is fixed on K-flat representatives before evaluation.
+Source: Stacks 099M, 06YY
+(blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison).
+Proof: flatness makes restriction preserve flat-term K-flat representatives. Apply
+ordinaryRho to one such representative and conjugate by the two universal reduction
+counits and exact-restriction factorization maps. The formula descends through resolving
+quasi-isomorphisms, giving the isomorphism. Every derived object has a representative
+of this kind, so the formula determines the natural isomorphism uniquely. -/
+theorem rho_existsUnique (T : Scheme.{t}) :
+    ∃! e : completedReductionTower T d ⋙ exchangeTowerRes d T ≅
+        res d T ⋙ reduction d T,
+      RhoNormalization d T e := by
   sorry
 
 /-- The specified comparison rho, natural on all ambient inputs.
@@ -130,6 +187,13 @@ Source: Stacks 099M (blueprint: lem-weil-pbc-ordered-exchange-coefficient-compar
 def rho (T : Scheme.{t}) :
     completedReductionTower T d ⋙ exchangeTowerRes d T ≅ res d T ⋙ reduction d T :=
   (rho_existsUnique d T).exists.choose
+
+/-- The chosen rho retains its complex-level normalization.
+Source: Stacks 099M, 06YY
+(blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison).
+Proof: use the existence clause of the unique normalized comparison. -/
+theorem rho_normalization (T : Scheme.{t}) : RhoNormalization d T (rho d T) :=
+  (rho_existsUnique d T).exists.choose_spec
 
 /-- The actual ordinary limit/scalar comparison, fixed by all its projections.
 Source: Stacks 0A07 (blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison).
@@ -143,7 +207,10 @@ theorem ordinaryLambda_existsUnique (T : Scheme.{t}) :
       ∀ (Z : d.towers T) (n : ℕ),
         e.hom.app Z ≫ limit.π ((exchangeTowerModuleRes d T).obj Z) (op n) =
           (reductionRestrict T (exchangeScalar d T)).map (limit.π Z (op n)) := by
-  sorry
+  let := orderedAbSheafify T
+  let := orderedAbLocallyBijective T
+  have := orderedRestrictLimits T (exchangeScalar d T)
+  exact uniqueLimitComparison (reductionRestrict T (exchangeScalar d T))
 
 /-- The identity on compatible families, with its projection equations retained.
 Source: Stacks 0A07 (blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison). -/
@@ -152,11 +219,17 @@ def ordinaryLambda (T : Scheme.{t}) :
       exchangeTowerModuleRes d T ⋙ completedTowerLimit T (exchangeConstantRing T A) :=
   (ordinaryLambda_existsUnique d T).exists.choose
 
+attribute [local irreducible] ordinaryLambda Functor.rightDerivedFunctor
+  Functor.rightDerivedFunctorUnit
+
 /-- The universal right-derived limit unit at a cochain complex.
 Source: Stacks 0A07 (blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison). -/
 def limitComplexUnit (T : Scheme.{t})
     (R : Sheaf (ProEt.topology T) CommRingCat.{t + 1})
-    (P : CochainComplex (exchangeTowers T R) ℤ) :=
+    (P : CochainComplex (exchangeTowers T R) ℤ) :
+    DerivedCategory.Q.obj
+        (((completedTowerLimit T R).mapHomologicalComplex (.up ℤ)).obj P) ⟶
+      (completedRlim T R).obj (DerivedCategory.Q.obj P) :=
   (DerivedCategory.quotientCompQhIso _).inv.app
       (((completedTowerLimit T R).mapHomologicalComplex (.up ℤ)).obj P) ≫
     DerivedCategory.Qh.map
@@ -165,6 +238,32 @@ def limitComplexUnit (T : Scheme.{t})
       ((HomotopyCategory.quotient _ _).obj P) ≫
     (completedRlim T R).map ((DerivedCategory.quotientCompQhIso _).hom.app P)
 
+attribute [local irreducible] limitComplexUnit
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- The complex-level normalization of the specified lambda comparison.
+Source: Stacks 0A07
+(blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison). -/
+def LambdaNormalization (T : Scheme.{t})
+    (e : completedRlim T (d.completedRing T) ⋙ res d T ≅
+        exchangeTowerRes d T ⋙ rlim (A := A) T) : Prop :=
+  ∀ P : CochainComplex (d.towers T) ℤ,
+        (res d T).map (limitComplexUnit T (d.completedRing T) P) ≫
+            e.hom.app (DerivedCategory.Q.obj P) ≫
+            (rlim (A := A) T).map
+              ((exchangeTowerModuleRes d T).mapDerivedCategoryFactors.hom.app P) =
+          (reductionRestrict T (exchangeScalar d T)).mapDerivedCategoryFactors.hom.app
+              (((completedTowerLimit T (d.completedRing T)).mapHomologicalComplex (.up ℤ)).obj P) ≫
+            DerivedCategory.Q.map
+              ((NatIso.mapHomologicalComplex (ordinaryLambda d T) (.up ℤ)).hom.app P) ≫
+            limitComplexUnit T (exchangeConstantRing T A)
+              (((exchangeTowerModuleRes d T).mapHomologicalComplex (.up ℤ)).obj P)
+
+attribute [local irreducible] LambdaNormalization
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Restriction commutes with derived strict limit on arbitrary towers, with the
 K-injective comparison fixed by its ordinary compatible-family map and universal units.
 Source: Stacks 0A07 (blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison).
@@ -176,17 +275,7 @@ K-injective resolutions prove uniqueness. No finite-reduction condition is used.
 theorem lambda_existsUnique (T : Scheme.{t}) :
     ∃! e : completedRlim T (d.completedRing T) ⋙ res d T ≅
         exchangeTowerRes d T ⋙ rlim (A := A) T,
-      ∀ P : CochainComplex (d.towers T) ℤ,
-        (res d T).map (limitComplexUnit T (d.completedRing T) P) ≫
-            e.hom.app (DerivedCategory.Q.obj P) ≫
-            (rlim (A := A) T).map
-              ((exchangeTowerModuleRes d T).mapDerivedCategoryFactors.hom.app P) =
-          (reductionRestrict T (exchangeScalar d T)).mapDerivedCategoryFactors.hom.app
-              (((completedTowerLimit T (d.completedRing T)).mapHomologicalComplex (.up ℤ)).obj P) ≫
-            DerivedCategory.Q.map
-              ((NatIso.mapHomologicalComplex (ordinaryLambda d T) (.up ℤ)).hom.app P) ≫
-            limitComplexUnit T (exchangeConstantRing T A)
-              (((exchangeTowerModuleRes d T).mapHomologicalComplex (.up ℤ)).obj P) := by
+      LambdaNormalization d T e := by
   sorry
 
 /-- The canonical restriction/derived-limit comparison on actual strict towers.
@@ -194,6 +283,13 @@ Source: Stacks 0A07 (blueprint: lem-weil-pbc-ordered-exchange-coefficient-compar
 def lambda (T : Scheme.{t}) :
     completedRlim T (d.completedRing T) ⋙ res d T ≅ exchangeTowerRes d T ⋙ rlim (A := A) T :=
   (lambda_existsUnique d T).exists.choose
+
+/-- The chosen lambda retains its complex-level normalization.
+Source: Stacks 0A07
+(blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison).
+Proof: use the existence clause of the unique normalized comparison. -/
+theorem lambda_normalization (T : Scheme.{t}) : LambdaNormalization d T (lambda d T) :=
+  (lambda_existsUnique d T).exists.choose_spec
 
 variable {U V : Scheme.{t}} (u : U ⟶ V)
 
@@ -333,7 +429,7 @@ def ordinaryScalarDiagonal (T : Scheme.{t}) :
       reductionRestrict T (exchangeScalar d T) ⋙ (Functor.const ℕᵒᵖ) :=
   NatIso.ofComponents
     (fun _ ↦ NatIso.ofComponents (fun _ ↦ Iso.refl _) (fun _ ↦ by simp))
-    (fun _ ↦ by ext n; simp; rfl)
+    (fun _ ↦ by ext n; simp)
 
 /-- Exact descent of the identity scalar/diagonal comparison.
 Source: Stacks 0E48 (blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison). -/
@@ -381,7 +477,21 @@ theorem completedHom_normalization {U V : Scheme.{t}} (u : U ⟶ V)
       (res d V).map ((proEtaleRingDerivedAdjunction u (d.completedRing V) (d.completedRing U)
         (d.integralRingIso u)).homEquiv _ _ (d.ordinaryToCompleted u K ≫ a)) ≫
         (chi d u).hom.app L := by
-  sorry
+  have hphi := (phi_existsUnique d u).exists.choose_spec (⟨K, hK⟩ : AComplete d V)
+  change (res d U).map (d.ordinaryToCompleted u K) ≫
+    (phi d u).hom.app ⟨K, hK⟩ = (alpha d u).hom.app K ≫
+      (unit d U).app ((pull (A := A) u).obj ((res d V).obj K)) at hphi
+  have heq := mappedUnitIsoComparison (res d U) (d.ordinaryToCompleted u K) _
+    ((alpha d u).app K) ((phi d u).app ⟨K, hK⟩) hphi a
+  exact (congrArg
+    ((proEtaleRingDerivedAdjunction u (exchangeConstantRing V A) (exchangeConstantRing U A)
+      (exchangeConstantIso u A)).homEquiv _ _) heq).trans
+    ((proEtaleRingSheafChangeAdjunction u
+      (exchangeConstantRing V A) (d.completedRing V)
+      (exchangeConstantRing U A) (d.completedRing U)
+      (exchangeScalar d V) (exchangeScalar d U) (exchangeConstantIso u A)
+      (d.integralRingIso u) (exchangeScalar_comm d u)).2.2 K L
+        (d.ordinaryToCompleted u K ≫ a))
 
 
 /-- Source functor for the normalized equation, on the full derived-complete category.
@@ -397,14 +507,18 @@ def normalizedTarget := inclusion d X ⋙ res d X ⋙ completePull d g' ⋙ push
 /-- The restricted raw ordered construction followed by the specified target comparison.
 Source: blueprint completed-exchange-coherence, paragraph 2
 (blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison). -/
-def rawComponent (sq : ChosenCartesianSquare g' f' f g) (K : AComplete d X) :=
+def rawComponent (sq : ChosenCartesianSquare g' f' f g) (K : AComplete d X) :
+    (normalizedSource (f := f) (g := g) d).obj K ⟶
+      (normalizedTarget (g' := g') (f' := f') d).obj K :=
   (res d Y').map (d.completedExchange sq K.obj) ≫
     (iotaT (g' := g') (f' := f') d K.obj K.property).hom
 
 /-- The specified constant strict mate, conjugated by s, t and the source scalar map.
 Source: Stacks 099M, 0E48
 (blueprint: lem-weil-pbc-ordered-exchange-coefficient-comparison). -/
-def constantComponent (sq : ChosenCartesianSquare g' f' f g) (K : AComplete d X) :=
+def constantComponent (sq : ChosenCartesianSquare g' f' f g) (K : AComplete d X) :
+    (normalizedSource (f := f) (g := g) d).obj K ⟶
+      (normalizedTarget (g' := g') (f' := f') d).obj K :=
   (iotaS (f := f) (g := g) d K.obj K.property).hom ≫
     (S (f := f) (g := g) d ((res d X).obj K.obj)).hom ≫
     (rlim (A := A) Y').map ((exchangeConstantSquare (A := A) sq).exchangeTowerMate.app
@@ -426,7 +540,70 @@ theorem normalized_naturality (sq : ChosenCartesianSquare g' f' f g)
       rawComponent d sq K ≫ (normalizedTarget (g' := g') (f' := f') d).map a ∧
     (normalizedSource (f := f) (g := g) d).map a ≫ constantComponent d sq L =
       constantComponent d sq K ≫ (normalizedTarget (g' := g') (f' := f') d).map a := by
-  sorry
+  let piA (U V : Scheme.{t}) (u : U ⟶ V) :
+      d.push u ⋙ completedReductionTower V d ≅
+        completedReductionTower U d ⋙ d.towerPush u :=
+    NatIso.ofComponents (fun K ↦ asIso (d.towerProjection u K))
+      (fun {K L} a ↦ (d.towerProjection_properties u K).2.1 L a)
+  let e : d.push f ⋙ d.completedPull g ⟶ d.completedPull g' ⋙ d.push f' :=
+    Functor.whiskerRight (Functor.isoWhiskerRight (piA X Y f) (d.towerPull g)).hom
+        (completedRlim Y' (d.completedRing Y')) ≫
+      Functor.whiskerRight (exchangeStrictNatTrans d sq)
+        (completedRlim Y' (d.completedRing Y')) ≫
+      Functor.whiskerLeft (completedReductionTower X d ⋙ d.towerPull g')
+        (d.directImageRlimIso f').inv
+  let it : inclusion d X ⋙ d.completedPull g' ⋙ d.push f' ⋙ res d Y' ≅
+      normalizedTarget (g' := g') (f' := f') d :=
+    Functor.isoWhiskerLeft (inclusion d X ⋙ d.completedPull g') (chi d f') ≪≫
+      Functor.isoWhiskerRight (phi d g') (push (A := A) f')
+  constructor
+  · exact (Functor.whiskerLeft (inclusion d X)
+      (Functor.whiskerRight e (res d Y')) ≫ it.hom).naturality a
+  · let aj := exchangeTowerAdjunction f (exchangeConstantRing Y A)
+      (exchangeConstantRing X A) (exchangeConstantIso f A)
+    let ar := proEtaleRingDerivedAdjunction f (exchangeConstantRing Y A)
+      (exchangeConstantRing X A) (exchangeConstantIso f A)
+    let pi0 := (mateEquiv ar aj
+      (TwoSquare.mk _ _ _ _ (reductionPullIso d f).hom)).natTrans
+    have hpi (M : D (A := A) X) : pi0.app M = projection d f M := by
+      apply (aj.homEquiv _ _).symm.injective
+      change (aj.homEquiv _ _).symm (pi0.app M) =
+        (aj.homEquiv _ _).symm ((aj.homEquiv _ _)
+          ((reductionPullIso d f).hom.app ((push (A := A) f).obj M) ≫
+            (reduction d X).map (ar.counit.app M)))
+      rw [Equiv.symm_apply_apply, Adjunction.homEquiv_counit]
+      exact mateEquiv_counit ar aj
+        (TwoSquare.mk _ _ _ _ (reductionPullIso d f).hom) M
+    let p0 : push (A := A) f ⋙ reduction d Y ≅
+        reduction d X ⋙ exchangeConstantPush (A := A) f :=
+      NatIso.ofComponents (fun M ↦ asIso (projection d f M)) (by
+        intro M N b
+        simpa only [asIso_hom, ← hpi] using pi0.naturality b)
+    let h0 := Functor.isoWhiskerLeft (push (A := A) f) (reductionPullIso d g).symm ≪≫
+      Functor.isoWhiskerRight p0 (exchangeConstantPull (A := A) g)
+    let s0 := Functor.isoWhiskerRight h0 (rlim (A := A) Y')
+    let t0 := Functor.isoWhiskerLeft (reduction d X)
+      (Functor.isoWhiskerLeft (exchangeConstantPull (A := A) g')
+        (directLimitIso (A := A) f'))
+    let rec0 : completePull d g' ≅
+        reduction d X ⋙ exchangeConstantPull (A := A) g' ⋙ rlim (A := A) X' :=
+      Functor.isoWhiskerRight (reductionPullIso d g').symm (rlim (A := A) X')
+    let tt := Functor.isoWhiskerRight rec0 (push (A := A) f') ≪≫ t0
+    let pushed : AComplete d X ⥤ AComplete d Y :=
+      ObjectProperty.lift (d.TowerComplete Y) (inclusion d X ⋙ d.push f)
+        (fun M ↦ d.push_complete f M.obj M.property)
+    let src : normalizedSource (f := f) (g := g) d ≅
+        inclusion d X ⋙ res d X ⋙ push (A := A) f ⋙ completePull d g :=
+      Functor.isoWhiskerLeft pushed (phi d g) ≪≫
+        Functor.isoWhiskerRight (Functor.isoWhiskerLeft (inclusion d X) (chi d f))
+          (completePull d g)
+    let cc := src.hom ≫
+      Functor.whiskerLeft (inclusion d X ⋙ res d X) s0.hom ≫
+      Functor.whiskerLeft (inclusion d X ⋙ res d X ⋙ reduction d X)
+        (Functor.whiskerRight
+          (exchangeConstantSquare (A := A) sq).exchangeTowerMate (rlim (A := A) Y')) ≫
+      Functor.whiskerLeft (inclusion d X ⋙ res d X) tt.inv
+    exact cc.naturality a
 
 /-- The raw ordered exchange as an actual natural transformation after scalar restriction.
 Source: blueprint completed-exchange-coherence, paragraph 2
