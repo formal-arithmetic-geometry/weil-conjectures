@@ -21391,3 +21391,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:52 L: merged deliver/Q89/lem-per-adic-stratified-pullback-texact (reviewer FIX; first push; new nodes: 0); claim not held by Q89: not your claim
 - 08:52 L: merged deliver/Q91/lem-a1-completed-perfect-scalar-pullback (reviewer FIX; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q29/lem-sfb-integral-general-lfp-hom-finiteness (reviewer FIX; first push; new nodes: 0)
+- 08:52 L: merged deliver/NL/lem-sfb-integral-bounded-stratum-base-change (reviewer FIX; first push; new nodes: 0)

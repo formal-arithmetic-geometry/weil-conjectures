@@ -19,9 +19,106 @@
   "def-weil-open-immersion",
   "def-weil-closed-immersion"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Check the geometric hypotheses for every complementary pair used below, including the pair inside $\\overline S$. A finite-type $k$-scheme has a finite affine cover by spectra of finitely generated $k$-algebras. Apply the finite-type Noetherian-spectrum lemma with $R=k$ (whose spectrum is a point). An ascending chain of opens stabilizes on each member of the finite cover, hence stabilizes globally. Every open is quasi-compact: otherwise, successively choosing members of an open cover not contained in the preceding finite union produces a strictly ascending chain. The same applies to its intersection with any affine open, so each open immersion in question is quasi-compact. Base change preserves the open and closed immersion hypotheses by the two cited permanence lemmas. Their ranges remain complementary: by the base-change image lemma (with $C$ the whole source) the range of $j'$ is $h^{-1}(j(U))$ and the range of $i'$ is $h^{-1}(i(Z))$, and these preimages of complementary subsets of $T$ are complementary in $T'$; the same holds for $u'$ and the complement of its range in $\\overline S\\times_TT'$. Thus the retrocompact-complement hypothesis of Tag 09BM and the quasi-compact-open hypothesis of Tag 09AH hold on both bases.",
+   "uses": [
+    "lem-sfb-finite-type-noetherian-spectrum",
+    "lem-weil-pbc-open-immersion-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "lem-weil-pbc-base-change-image"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BM (lemma-closed-immersion-complement-retrocompact-exact) and 09AH (lemma-ses-associated-to-open), hypotheses; finite affine cover argument for the standing setting"
+   }
+  },
+  {
+   "text": "Use the Cartesian-coefficient theorem with $\\Lambda=\\mathcal O_E$: every pullback is exact and its underlying functor is inverse image, with the action transferred along $\\alpha_f^{-1}$. Apply the internal-module-operations transport equivalences to identify the actual internal pullback/direct-image and open adjunctions with the section-ring ones, including units and counits. The ringed open-closed theorem, applied to $B_T$ and its inverse-image coefficient rings, supplies exact $j_!,i_*$, isomorphisms $j^{-1}j_!\\cong\\mathrm{id}$ and $i^{-1}i_*\\cong\\mathrm{id}$, both mixed zero restrictions, and the short exact sequence whose arrows are the actual counit and unit. Those two isomorphisms are not stated to be the adjunction maps; the actual open unit and closed counit are invertible because of the sequence: applying the exact $i^{-1}$ to it and using $i^{-1}j_!=0$, the map $i^{-1}$ of the unit at $M$ is invertible, so by the triangle identity the counit is invertible at every $i^{-1}M$, hence at every module $N\\cong i^{-1}i_*N$ by naturality; dually, applying $j^{-1}$ and $j^{-1}i_*=0$ makes $j^{-1}$ of the counit invertible, so the unit is invertible at every $j^{-1}M$, hence at every $N\\cong j^{-1}j_!N$. The ring isomorphisms $i^{-1}B_T\\cong B_Z$ and $j^{-1}B_T\\cong B_U$ of the transport theorem identify module categories over the inverse-image rings with $\\operatorname{Mod}(B_Z)$ and $\\operatorname{Mod}(B_U)$, and under them $i^{-1},j^{-1}$ are the sectionwise pullbacks. Transfer that sequence and those properties back through the exact equivalences. No finite or discrete coefficient hypothesis is used: the ringed theorem permits an arbitrary sheaf of commutative rings.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-internal-module-operations-transport",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA (lemma-closed-immersion), 09BM, 09BN (lemma-open-immersion), 09AH; coefficient-module translation through the cited transport theorem"
+   }
+  },
+  {
+   "text": "Apply exact open-closed unbounded calculus with $(J,P,Q,I)=(j_!,j^*,i^*,i_*)$, and again for the primed pair. Its hypotheses are precisely the exactness, adjunctions, units/counits, mixed vanishings and short exact sequence verified in step 2. Thus the actual derived adjunctions have invertible open units $\\eta_j,\\eta_{j'}$ and closed counits $\\varepsilon_i,\\varepsilon_{i'}$, the mixed restrictions vanish, and $(j'^*,i'^*)$ jointly reflects isomorphisms. The exact-functor cohomology theorem gives $H^q(FK)\\cong F(H^qK)$ for every functor here and for $h^*,h_U^*,h_Z^*$, so these functors preserve both cohomological bounds. All subsequent constructions therefore restrict to the ordinary bounded categories in the statement.",
+   "uses": [
+    "lem-sfb-exact-open-closed-unbounded-calculus",
+    "lem-weil-pbc-exact-functor-complex-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AH, passage of the actual sheaf adjunctions and localization sequence to complexes, via the cited abstract exact calculus"
+   }
+  },
+  {
+   "text": "The pullback-composition isomorphisms give $c_U:j'^*h^*\\xrightarrow{\\sim}h_U^*j^*$ and $c_Z:i'^*h^*\\xrightarrow{\\sim}h_Z^*i^*$. Use exact-derived composition and natural-isomorphism descent to take these very comparisons termwise to derived categories. Fix $\\beta_N$ by transposing\n$$t_N=c_{U,j_!N}^{-1}\\circ h_U^*(\\eta_{j,N}):h_U^*N\\longrightarrow j'^*h^*j_!N.$$\nFix $\\gamma_N$ as\n$$h^*i_*N\\xrightarrow{\\eta_{i',h^*i_*N}}i'_*i'^*h^*i_*N\\xrightarrow{i'_*(h_Z^*(\\varepsilon_{i,N})\\circ c_{Z,i_*N})}i'_*h_Z^*N.$$\nThese are exactly the maps of the statement, since the adjunctions in step 3 localize the actual sheaf units/counits. Naturality follows from the naturality of the units, counits and $c_U,c_Z$, or by transposing each naturality square. This defines maps on all bounded inputs, before imposing any support or constructibility condition.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "lem-sfb-exact-derived-composition",
+    "lem-sfb-exact-derived-natural-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN and 09AA, adjunction construction; blueprint det-lem-int-tensor-pullback.proof.md, Local models, sentence about open-closed base change"
+   }
+  },
+  {
+   "text": "The open adjunction formula gives\n$$j'^*(\\beta_N)\\circ\\eta_{j',h_U^*N}=t_N.$$\nBoth the unit on the left and $t_N$ are invertible, so $j'^*\\beta_N$ is invertible. Identifying its source with $h_U^*N$ by $\\eta_{j'}$ and its target with $h_U^*N$ by $h_U^*(\\eta_j^{-1})\\circ c_U$, the displayed equality says its restriction is the identity. On the closed part, $i'^*j'_!h_U^*N=0$, while $i'^*h^*j_!N\\cong h_Z^*i^*j_!N=0$ by $c_Z$ and the mixed vanishing. Thus $i'^*\\beta_N$ is the unique map between zero objects and is invertible. Joint reflection from step 3 proves that $\\beta_N$ itself is invertible.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN, 09AH; elementary adjunction and complementary-restriction calculation using steps 3--4"
+   }
+  },
+  {
+   "text": "The closed adjunction formula, equivalently its triangle identity and counit naturality, gives\n$$\\varepsilon_{i',h_Z^*N}\\circ i'^*(\\gamma_N)=h_Z^*(\\varepsilon_{i,N})\\circ c_{Z,i_*N}.$$\nThe counit on the left and the whole right side are invertible. Hence $i'^*\\gamma_N$ is invertible and, after the indicated counit identifications of both ends with $h_Z^*N$, is the identity. On the open part, $j'^*h^*i_*N\\cong h_U^*j^*i_*N=0$ and $j'^*i'_*h_Z^*N=0$. Its open restriction is therefore the unique map between zero objects and is invertible. Joint reflection from step 3 proves that $\\gamma_N$ is invertible. This also verifies all four restriction normalizations claimed in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09AA, 09AH; elementary adjunction and complementary-restriction calculation using steps 3--4"
+   }
+  },
+  {
+   "text": "For $a=i\\circ u$, write $h_{\\overline S}:\\overline S\\times_TT'\\to\\overline S$. Apply step 5 to $u$ inside $\\overline S$ and step 6 to $i$, with input $u_!M$. The required composite is explicitly\n$$i'_*u'_!h_S^*M\\xrightarrow{i'_*(\\beta_{u,M})}i'_*h_{\\overline S}^*u_!M\\xrightarrow{\\gamma_{i,u_!M}^{-1}}h^*i_*u_!M.$$\nEvery factor is an isomorphism and natural in $M$. The fibre-product identifications are those of the given factorization; no independence of the choice of factorization is asserted or needed. Exactness and step 3 keep $u_!M$ and every displayed object bounded. The proof used neither constructibility nor derived completeness, so it applies to every bounded input as stated.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Blueprint det-lem-int-tensor-pullback.proof.md, Local models: open-closed base change for the stratum inclusion; composition of steps 5--6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-type-noetherian-spectrum",
+  "lem-weil-pbc-open-immersion-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-base-change-image",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "sk-def-sfb-module-pushforward-pullback",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tags 09AA, 09BM, 09BN, 09AH; adjunction-normalized bounded base change deduced explicitly by complementary restriction, realizing det-lem-int-tensor-pullback.proof.md, Local models"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -57,10 +154,52 @@
    "results": "No hits",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image commutes with open extension by zero and closed pushforward for bounded complexes of proetale module sheaves over pulled back integral condensed coefficients",
+   "results": "LightCondensed.ihomPoints_symm_comp; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.pushforwardComp_inv_app_val_app; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pushforwardCongr_inv_app_val_app; AlgebraicGeometry.Scheme.Modules.pushforwardComp_inv_app_app",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extensionByZero\", \"pullback\"",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|closed.*baseChange",
+   "results": "No hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical base change for open and closed immersions on bounded derived categories of sheaves of modules on the proetale site",
+   "results": "AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor; AlgebraicGeometry.isOpenImmersion_stableUnderBaseChange; RingHom.IsStandardOpenImmersion.isStableUnderBaseChange; AlgebraicGeometry.IsClosedImmersion.isStableUnderBaseChange; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.toSheafedSpaceHom_base; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback; CategoryTheory.GrothendieckTopology.instIsStableUnderBaseChangeToPrecoverage; AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.ofRestrict",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|closed.*baseChange",
+   "results": "Mathlib/AlgebraicGeometry/Morphisms/Integral.lean; Mathlib/AlgebraicGeometry/Morphisms/ClosedImmersion.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean; Mathlib/AlgebraicGeometry/Morphisms/UniversallyClosed.lean",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a cartesian square pullback of sheaves commutes with extension by zero along a locally closed immersion on ordinary bounded derived module categories",
+   "results": "SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc; SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom; SheafOfModules.pullbackComp; SheafOfModules.pullbackIso; SheafOfModules.conjugateEquiv_pullbackComp_inv; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; SheafOfModules.pullback_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-int-tensor-pullback",
@@ -72,10 +211,59 @@
  "blueprint": {
   "from": {
    "node": "det-lem-int-tensor-pullback",
-   "place": "Local models: 'The open–closed operations commute with base change'; old split steps 3--4, adjunction-normalized open and closed maps",
+   "place": "Local models, sentence 'The open–closed operations commute with base change': normalize the open and closed mates, detect their inverses by complementary restrictions, and compose them for a_!",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-integral-bounded-stratum-base-change",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Reused existing geometric, arbitrary-ring module transport and exact-derived localization nodes. Seven explicit steps construct the prescribed adjunction mates, prove their open/closed restriction identities and invertibility, and compose them for a factored locally closed immersion. No new nodes; Mathlib and attachment searches found no theorem covering all clauses on arbitrary bounded integral module inputs.",
+  "blueprint": "det-lem-int-tensor-pullback.proof.md, Local models, 'The open–closed operations commute with base change': steps 1--3 establish ambient exact localization; steps 4--6 prove the normalized open and closed maps; step 7 gives the stratum formula.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-type-noetherian-spectrum",
+    "why": "Generic finite-type affine Noetherian-topology tool supplies retrocompactness in the standing setting, not a replacement of integral tensor/pullback devissage."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Generic exact equivalence identifies internal module operations and their actual adjunctions with arbitrary section-ring operations; the integral unit does not reconstruct these equivalences."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic arbitrary-ring open/closed exactness, units, counits, mixed zero identities and localization sequence are the inputs to complementary restriction; no torsion proper-base-change theorem is used."
+   },
+   {
+    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
+    "why": "Generic passage of a specified exact abelian localization package to ordinary derived categories, needed for normalization and joint reflection, without constructibility preservation."
+   },
+   {
+    "node": "lem-sfb-exact-derived-composition",
+    "why": "Generic exact-derived composition comparison preserves the actual pullback composition used in the two normalized maps."
+   },
+   {
+    "node": "lem-sfb-exact-derived-natural-iso",
+    "why": "Generic localization of a natural isomorphism between exact functors preserves the specified square comparisons."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-type-noetherian-spectrum",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-sfb-exact-derived-composition",
+  "lem-sfb-exact-derived-natural-iso"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NL-9898f6132",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-9898f6132 (reviewer sub-agent of L); spot-checked: Read the item, all 11 proof_deps and the stmt_deps statements, Stacks proetale 09AA/09BM/09BN/09AH (l.4945-5160), the blueprint main-20261015 det-lem-int-tensor-pullback Local models sentence and unit sk-lem-int-tensor step 1. The statement is unchanged from Q70's unsplit node. It is not superseded live and has no repair note. The coefficients are the integral module objects O_E,V with the termwise module pullback, as the parent's step 2 needs (g^*a_!M ≅ a'_!g_S^*M, a_!=i_*u_!). Small cases checked: U or Z empty, h=id, h into U or into Z, nonreduced Z. Not a duplicate: thm-sfb-dc-open-base-change-iso is open-only on D_cons; lem-sf-ring-sheaf-base-change-mates is underived and qcqs; lem-sf-open-tensor-normalization is open-only. Steps 3-7 are correct: the abstract-calculus hypotheses are supplied, the transpose and triangle identities check, joint reflection applies and the stratum composite is right. The off-route tool_uses (internal transport, ringed open-closed, unbounded calculus) are generic black boxes and are accepted. Two repairable faults, fixed in the item file. C1, step 1: complementarity of the base-changed ranges had no cited statement; it now cites the Mathlib leaf lem-weil-pbc-base-change-image (range = h^{-1}(U), h^{-1}(Z)). C4, step 2: the statement of lem-weil-pbc-proetale-ringed-open-closed gives only abstract j^{-1}j_!≅id and i^{-1}i_*≅id, while the calculus needs the actual unit and counit invertible. The step now derives this from the stated SES: exact i^{-1}/j^{-1}, the mixed zeros, the triangle identities and naturality. It also identifies modules over the inverse-image rings with Mod(B_Z), Mod(B_U). proof_deps are updated; statement and stmt_deps are untouched. No SGA.; 1 file(s) fixed by the reviewer"
  }
 }
