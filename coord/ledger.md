@@ -19464,3 +19464,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 01:24 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
 
 - 09:30 L: batch 20261021T012342 dependency take-out
+- 01:30 L: returned deliver/J4/Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismGlue (reviewer RETURN: (reviewer C-68115, head 681151c2c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Mo)
