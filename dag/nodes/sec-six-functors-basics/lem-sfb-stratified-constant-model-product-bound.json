@@ -19,9 +19,158 @@
   "def-constructible-stratification",
   "sk-def-sfb-module-pushforward-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any stratum $T$, work on its fixed $\\mathcal V$-small site. This site has terminal object $T/T$ and finite limits: for $U\\to W\\leftarrow V$ over $T$, both arrows are weakly étale by [sk-lem-pe-weakly-etale-stability], so $U\\times_WV\\to T$ is weakly étale by base change and composition. These scheme fibre products exist by [def-pc-fibre-product] and satisfy the same universal property in the full site category. Products are fibre products over $T$; the equalizer of $a,b:U\\rightrightarrows V$ is $U\\times_{V\\times_TV}V$, using $(a,b)$ and the diagonal. Thus the same construction gives equalizers and finite limits. The bounded skeleton retains these limits up to isomorphism, by [def-weil-size-convention].",
+   "uses": [
+    "sk-lem-pe-weakly-etale-stability",
+    "def-pc-fibre-product",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 098M, lemma-fibre-products-proetale: explicit terminal-object, fibre-product and equalizer construction"
+   }
+  },
+  {
+   "text": "Put $A=\\mathcal O_E$. The scalar presentation codes form the set $Q=\\coprod_{m,n\\in\\mathbf N}\\operatorname{Mat}_{n\\times m}(A)$ in $\\mathcal U$, hence in $\\mathcal V$ [def-weil-size-convention]. For a code $q:A^m\\to A^n$, take the actual quotient module $P_q=A^n/\\operatorname{im}q$. By [def-sc-finitely-presented-module], every finitely presented scalar module is isomorphic to some $P_q$: its given surjection $A^n\\to P$ factors through this quotient, and the induced map is surjective with zero kernel. Consequently the modules $B_{U,q}=R_U\\otimes_{\\underline A}\\underline{P_q}$ provide a small family of the scalar models in [sk-def-sfb-constructible] on every site object $U$. Passing an isomorphism $P\\cong P_q$ through constant sheaves and tensor extension gives an isomorphism of these models; no assertion about arbitrary matrices of coefficient sections is used.",
+   "uses": [
+    "def-weil-size-convention",
+    "def-sc-finitely-presented-module",
+    "sk-def-sfb-constructible"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratifications, finite scalar presentations, small-site local models and gluing morphisms"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-proetale-weakly-etale-localization] to each site object $U\\to T$: $U_{\\mathrm{proét}}$ is the slice $T_{\\mathrm{proét}}/U$, with the same coverings. Clause (1) of [lem-sfb-proetale-object-inverse-image-restriction] identifies inverse image of any ring sheaf with slice restriction. Combining it with [sk-prop-sfb-cartesian-coefficients] identifies $R_T|_U$ with $R_U$, including its scalar constant-section map. Hence the families $B_{U,q}$ of step 2 are sheaves over precisely the restricted ring required by [lem-sfb-locally-prescribed-modules-small]. Apply that lemma on the site of step 1 with $I_U=Q$. For a module $M$ on $T$, the module pullback $M|_U$ of [sk-def-sfb-constructible] has underlying sheaf the inverse image, with action through the cartesian coefficient isomorphism (last paragraph of [sk-prop-sfb-cartesian-coefficients]), and clause (1) identifies that inverse image with the slice restriction. So the lemma's class is exactly the finite constant local model sheaves of the item, since the covers and scalar models agree. Its representative family consists of members of this class; denote it $(F_{T,t})_{t\\in I_T}$, with $I_T\\in\\mathcal V$. All sites and section sets have the required size. The strata within the fixed scheme bound form a set in $\\mathcal V$, so choose these representative families simultaneously, using set-indexed choice in an ambient universe containing $\\mathcal V$.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "lem-sfb-proetale-object-inverse-image-restriction",
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-sfb-locally-prescribed-modules-small"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratifications, finite scalar presentations, small-site local models and gluing morphisms"
+   }
+  },
+  {
+   "text": "A finite stratification is a finite list of schemes in the fixed bound and immersions to $X$ subject to the disjointness and covering conditions of [def-constructible-stratification]. Schemes and their morphisms in this bound have set-sized codes in $\\mathcal V$ [def-weil-size-convention]; a finite list is therefore in a $\\mathcal V$-small set, and imposing these conditions takes a subset. Call that set $H$. For $h\\in H$ let its strata be $(S_s)_{s<n(h)}$. Then $J=\\coprod_{h\\in H}\\prod_{s<n(h)}I_{S_s}$ is in $\\mathcal V$, by closure under small sums and finite products. This is exactly the indexing set asserted in the statement, including all choices of stratum representatives.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratifications, finite scalar presentations, small-site local models and gluing morphisms"
+   }
+  },
+  {
+   "text": "For $j=(h,(t_s)_s)$ the functors of [sk-def-sfb-module-pushforward-pullback] put every $a_{s*}F_{S_s,t_s}$ in $\\operatorname{Mod}(R_X)$ and specify the adjunction units used in the item. These functors, and constructibility, are defined on the internal module objects $\\operatorname{Mod}_{R_T}$; by [def-weil-pbc-internal-abelian-sheaf-module-equivalence] that category is equivalent to the sectionwise module sheaves of [def-weil-sheaf-of-modules-category] over the section-ring sheaf of $R_T$, by a functor keeping underlying abelian sheaves, sections and restriction maps, and $\\operatorname{Mod}(R_T)$ below means either through it. These categories are abelian, with kernels computed sectionwise, by [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-module-sheaves-limits-sectionwise] to the finite discrete diagram of these direct images: it gives the product $P_j$ in that category, with $P_j(V)=\\prod_{s<n(h)}(a_{s*}F_{S_s,t_s})(V)$. The section sets lie in $\\mathcal V$; the empty product is the zero module sheaf.",
+   "uses": [
+    "sk-def-sfb-module-pushforward-pullback",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "def-weil-sheaf-of-modules-category",
+    "lem-weil-pbc-module-sheaves-limits-sectionwise"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, lemma-limits-colimits, limits paragraph; Tag 03DA, lemma-abelian; module adjunctions as fixed in the statement"
+   }
+  },
+  {
+   "text": "Let $C$ be constructible. Its defining finite stratification in [sk-def-sfb-constructible] has finite constant local models on each stratum. Since $X$ is quasi-compact and locally Noetherian, it is Noetherian; [lem-weil-pbc-locally-noetherian-quasi-separated] gives quasi-separatedness. Thus $X$ is qcqs and the finite-stratification clause of that definition applies. Choose that stratification $h\\in H$. For each of its finitely many strata, the representative property proved in step 3 supplies $t_s\\in I_{S_s}$ and an isomorphism $\\varphi_s:a_s^*C\\xrightarrow{\\sim}F_{S_s,t_s}$. Thus these choices define $j\\in J$.",
+   "uses": [
+    "sk-def-sfb-constructible",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratifications, finite scalar presentations, small-site local models and gluing morphisms"
+   }
+  },
+  {
+   "text": "Each $a_s^*$ is exact and its underlying abelian sheaf is the inverse image along $a_s$, by [sk-prop-sfb-cartesian-coefficients]; it is additive and preserves kernels. The restrictions $a_s^*$ jointly detect zero objects: apply [lem-weil-pbc-noetherian-stratum-detection] to the given finite stratification and the identity pro-étale covering on each stratum. Its Noetherian hypothesis is exactly quasi-compactness and local Noetherianity, both assumed for $X$; its arbitrary-ring-sheaf conclusion applies to $R_X$, identified with $R_{S_s}$ after inverse image by the cartesian coefficient isomorphism. Now apply [lem-sfb-joint-adjunction-model-embedding] with $\\mathcal A=\\operatorname{Mod}(R_X)$, $\\mathcal B_s=\\operatorname{Mod}(R_{S_s})$, $F_s=a_s^*$, $G_s=a_{s*}$, $M=C$, $B_s=F_{S_s,t_s}$ and $e_s=\\varphi_s$. The abelian categories, adjunctions and product were verified in step 5. It follows that the map $u:C\\to P_j$ whose components are $a_{s*}(\\varphi_s)\\circ\\eta_{s,C}$ is a monomorphism, with exactly the units specified in the statement.",
+   "uses": [
+    "sk-prop-sfb-cartesian-coefficients",
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "lem-sfb-joint-adjunction-model-embedding"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratifications, finite scalar presentations, small-site local models and gluing morphisms"
+   }
+  },
+  {
+   "text": "Fix $j$ and a subobject represented by a monomorphism $m:M\\to P_j$. Its kernel arrow is zero, by cancellation against the zero arrow. Since kernels are sectionwise [def-weil-sheaf-of-modules-category], every $m_V$ is injective. Put $N(V)=m_V(M(V))\\subseteq P_j(V)$. Linearity and naturality make these subsets submodules stable under restriction. The bijections $M(V)\\to N(V)$ commute with restrictions and scalar actions; transporting the sheaf axiom through these bijections makes $N$ a module sheaf, and gives an isomorphism $M\\cong N$ over $P_j$. This is the sectionwise image for a mono; no assertion that the sectionwise image of an arbitrary sheaf morphism is already a sheaf is being made. If two such monos have equal families $N(V)$, their induced isomorphisms to $N$ identify them over $P_j$. Conversely an isomorphism over $P_j$ gives the same subsets at every $V$.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DA, lemma-abelian; explicit sectionwise kernel and image argument for monomorphisms"
+   }
+  },
+  {
+   "text": "Let $K$ be the object set of the fixed small site of $X$. The family of subsets specifying an image in step 8 is an element of $D_j=\\prod_{V\\in K}\\mathcal P(P_j(V))$. Both $K$ and the section sets are in $\\mathcal V$, so $D_j\\in\\mathcal V$ by [def-weil-size-convention]. Take the subset $E_j\\subseteq D_j$ consisting of families that form module subsheaves of $P_j$. The inherited operations and restrictions determine a unique module subsheaf from each such family. Each is itself an image, namely the image of its inclusion. Step 8 therefore represents all subobjects, up to isomorphism over $P_j$, by this small family of actual image subsheaves. Finally $\\coprod_{j\\in J}E_j\\in\\mathcal V$, giving the required small family simultaneously for all $j$.",
+   "uses": [
+    "def-weil-size-convention"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratifications, finite scalar presentations, small-site local models and gluing morphisms"
+   }
+  },
+  {
+   "text": "If $X$ is empty, the empty list is a stratification by [def-constructible-stratification], and its tuple of indices is the unique empty tuple. The empty cover of the empty scheme is a pro-étale cover by [def-weil-pbc-proetale-site]. The sheaf axiom forces every module sheaf on that site to be zero: every site object over $X$ is empty, and its empty covering has exactly one matching family. Thus the map to the empty product of step 5 is $0\\to0$, which is monic, and this product has exactly one image subsheaf. The same argument handles empty strata in any chosen stratification; zero scalar models, including the $m=n=0$ presentation, were already allowed in step 2.",
+   "uses": [
+    "def-constructible-stratification",
+    "def-weil-pbc-proetale-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+    "place": "Paragraph (2), final sentence: finite stratifications, finite scalar presentations, small-site local models and gluing morphisms"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-lem-pe-weakly-etale-stability",
+  "def-pc-fibre-product",
+  "def-weil-size-convention",
+  "def-sc-finitely-presented-module",
+  "sk-def-sfb-constructible",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-locally-prescribed-modules-small",
+  "def-constructible-stratification",
+  "sk-def-sfb-module-pushforward-pullback",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-sfb-joint-adjunction-model-embedding",
+  "def-weil-pbc-proetale-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-int-integral-heart/sk-lem-int-integral-heart-triangulated.proof.md",
+  "place": "Paragraph (2), final sentence; explicit expansion using existing local-model smallness, stratified zero detection and adjunction-unit embedding statements"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -64,10 +213,52 @@
    "results": "1 hits: Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean. Subdirectory: Mathlib/Algebra/Category/ModuleCat/Sheaf",
    "date": "2026-10-21",
    "verdict": "no match: small mono-over categories and local finite presentations do not produce the specified small family of stratum-product targets with adjunction-unit embeddings"
+  },
+  {
+   "tool": "grep",
+   "query": "(constructible|stratif).*(small|product|mono)|[Ww]ellPowered|[Ee]ssentiallySmall",
+   "results": "0 hits: none. Subdirectory: Algebra/Category/ModuleCat/Sheaf. Read Quasicoherent.lean finite-presentation predicates, Limits.lean section-smallness and limits, and Subobject/WellPowered.lean small-subobject equivalences: these do not give the combined scalar-local-model, stratified product and image-subsheaf assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.EssentiallySmall",
+   "results": "0 hits: none. Read Quasicoherent.lean finite-presentation predicates, Limits.lean section-smallness and limits, and Subobject/WellPowered.lean small-subobject equivalences: these do not give the combined scalar-local-model, stratified product and image-subsheaf assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sheaves locally having finitely presented scalar constant models admit a small family of embeddings into stratum direct image products",
+   "results": "8 hits: SheafOfModules.isFinitePresentation, SheafOfModules.IsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.mk, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.instIsFiniteTypeOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFiniteType.mk, SheafOfModules.IsFinitePresentation.mk. Read Quasicoherent.lean finite-presentation predicates, Limits.lean section-smallness and limits, and Subobject/WellPowered.lean small-subobject equivalences: these do not give the combined scalar-local-model, stratified product and image-subsheaf assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Constructible sheaves with finite constant scalar local models embed into a small family of products of stratum pushforwards and their subobjects form a small set",
+   "results": "8 hits: SheafOfModules.instSmallElemForallObjCompModuleCatCarrierOppositeRingCatValPresheafOfModulesForgetEvaluationForgetSections, CompHausLike.LocallyConstantModule.functor, CompHausLike.LocallyConstant.functor, CategoryTheory.PresheafIsFinite, CondensedMod.ofSheafCompHaus, CondensedMod.ofSheafStonean, CategoryTheory.presheafIsGeneratedBy_of_isFinite, CompHausLike.LocallyConstantModule.functor_obj_val. Read Quasicoherent.lean finite-presentation predicates, Limits.lean section-smallness and limits, and Subobject/WellPowered.lean small-subobject equivalences: these do not give the combined scalar-local-model, stratified product and image-subsheaf assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "wellPowered|EssentiallySmall|essentiallySmall|stratif",
+   "results": "20 hits: Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Lattice.lean, Mathlib/CategoryTheory/Subobject/Types.lean, Mathlib/CategoryTheory/Subobject/Types.lean, Mathlib/CategoryTheory/Subobject/Types.lean. Subdirectory: CategoryTheory/Subobject. Read Quasicoherent.lean finite-presentation predicates, Limits.lean section-smallness and limits, and Subobject/WellPowered.lean small-subobject equivalences: these do not give the combined scalar-local-model, stratified product and image-subsheaf assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A set of finite presentation matrices and local descent data on a small site bounds isomorphism classes of sheaves; finite stratifications give embeddings into products of direct images",
+   "results": "8 hits: SheafOfModules.IsFinitePresentation, SheafOfModules.quasicoherentDataOfIsFinitePresentation, SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation, SheafOfModules.isFinitePresentation, SheafOfModules.Presentation.IsFinite, SheafOfModules.QuasicoherentData.IsFinitePresentation, SheafOfModules.IsFinitePresentation.exists_quasicoherentData, SheafOfModules.QuasicoherentData.instIsFiniteTypeLocalGeneratorsDataOfIsFinitePresentation. Read Quasicoherent.lean finite-presentation predicates, Limits.lean section-smallness and limits, and Subobject/WellPowered.lean small-subobject equivalences: these do not give the combined scalar-local-model, stratified product and image-subsheaf assertion.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-lem-int-integral-heart-triangulated",
@@ -84,5 +275,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-stratified-constant-model-product-bound",
+  "worker": "stage1",
+  "summary": "Ten steps count scalar presentation matrices and stratifications, apply the existing prescribed-local-model smallness theorem on each stratum, verify the exact jointly zero-detecting adjunction hypotheses, and bound subobjects by sectionwise image subsets. No new nodes, statement changes or coefficient-category substitutions. Empty schemes, empty products, empty strata and torsion models are checked. Maintainer reader FIX (2026-10-21): step 5 cites def-weil-pbc-internal-abelian-sheaf-module-equivalence for the passage between the module objects of the constructibility and pushforward/pullback definitions and the sectionwise module sheaves used in steps 3, 5, 8 and 9; step 3 states the module-pullback/slice-restriction identification explicitly.",
+  "blueprint": "Realizes det-lem-int-integral-heart-triangulated, proof paragraph (2), final sentence on finite stratifications, finite scalar presentations, small-site local models and gluing morphisms, through the explicit product-and-subobject argument retained by the item.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
+    "why": "Generic local Noetherianity implies quasi-separatedness; together with the assumed quasi-compactness this checks the qcqs hypothesis in the constructibility definition."
+   },
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic base-change, composition and permanence of weakly étale morphisms to construct finite limits of the small site; no such site-geometry statement is in the integral-heart unit."
+   },
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic equivalence of the pro-étale site of a site object with the slice, identifying the coverings used in the local-model smallness theorem."
+   },
+   {
+    "node": "lem-sfb-proetale-object-inverse-image-restriction",
+    "why": "Generic clause (1) for ring sheaves identifies geometric inverse image with slice restriction, needed to apply the local-model theorem to precisely the ring R_T restricted to U."
+   },
+   {
+    "node": "sk-prop-sfb-cartesian-coefficients",
+    "why": "Generic cartesian coefficient isomorphism and exact module pullback, used to identify local coefficient rings and check kernel preservation in the embedding theorem."
+   },
+   {
+    "node": "lem-sfb-locally-prescribed-modules-small",
+    "why": "Generic small-site counting theorem for arbitrary prescribed slice models; specialize to the set of scalar presentation matrices. This supplies local representatives without using another global constructible-smallness theorem."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "why": "Generic existence and sectionwise computation of module-sheaf products on a small site; needed to construct the targets P_j."
+   },
+   {
+    "node": "lem-weil-pbc-noetherian-stratum-detection",
+    "why": "Generic finite-stratification zero-detection on pro-étale sheaves for Noetherian schemes, with identity covers; verifies the embedding theorem hypothesis."
+   },
+   {
+    "node": "lem-sfb-joint-adjunction-model-embedding",
+    "why": "Generic abelian-category adjunction/kernel lemma, specialized after all its hypotheses are verified, to obtain the specified unit-component embedding."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-sfb-proetale-object-inverse-image-restriction",
+  "sk-prop-sfb-cartesian-coefficients",
+  "lem-sfb-locally-prescribed-modules-small",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-sfb-joint-adjunction-model-embedding"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NC-dfb8e08d2",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-dfb8e08d2 (reviewer sub-agent of L); spot-checked: Item lem-sfb-stratified-constant-model-product-bound (NC, dfb8e08d): the statement and stmt_deps are unchanged, there are no new nodes, and the base proof was empty. The item is still unsplit on live and side-live and is not in the dropped list. There is no repair note, so the re-split rules do not apply. There is no cycle. The only citer is det-lem-int-integral-heart-triangulated, step 4. Sources: blueprint main-20261015 sk-lem-int-integral-heart-triangulated.proof.md paragraph (2), last sentence, and unit step 4 (the data form a set). Stacks 098M (lemma-fibre-products-proetale) supports step 1. The route is the same as step 6 of the reviewed det-brown-hypotheses-small. I checked all 10 steps against the statements of the nodes they cite. Step 2: the finite-presentation definition gives P = A^n/im q, and P_q matches the scalar Lambda(*) = O_E model. Step 3: I checked every hypothesis of lem-sfb-locally-prescribed-modules-small: the slice site, R|_U = R_U, terminal object and finite limits. Step 6: locally Noetherian implies quasi-separated, so X is qcqs and has one global stratification. Step 7: exact a_s^*, identity covers in the Noetherian stratum detection, and every input of lem-sfb-joint-adjunction-model-embedding. Steps 8 and 9 restrict the image argument to monos and count it correctly. Step 10 handles the empty cases correctly. Small cases tested: Spec F_q with O_E/varpi; j_!O_E on A^1, where u is the mono j_! -> j_* into a product with a zero factor; empty X. One fault, C1, fixed. Constructibility and a^*, a_* are defined on internal module objects Mod_{Lambda_X}(Sh(Ab)), but steps 3, 5, 8 and 9 and the cited smallness and sectionwise-limit lemmas use sectionwise module sheaves. The bridge is the definition node def-weil-pbc-internal-abelian-sheaf-module-equivalence, which det-brown-hypotheses-small cites for the same purpose. I added it to step 5 with one sentence, made the module-pullback = slice-restriction identification explicit in step 3, and updated proof_deps. Duplicate check: lem-sfb-constructible-module-objects-essentially-small (locally finite presentations over an arbitrary R, essential smallness only) has a different conclusion, so it is not a duplicate. The 9 declared tool_uses are generic and accepted.; 1 file(s) fixed by the reviewer"
  }
 }

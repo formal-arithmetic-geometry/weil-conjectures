@@ -21267,3 +21267,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:44 L: merged deliver/Q54/lem-weil-proetale-tor-interval-triangle (reviewer FIX; first push; new nodes: 0)
 - 08:44 L: merged deliver/Q14/lem-weil-pbc-fixed-tensor-localization-comparison (reviewer PASS; first push; new nodes: 0)
 - 08:44 L: merged deliver/Q126/lem-trf-section-local-dualizing-comparisons (reviewer FIX; first push; new nodes: 0)
+- 08:44 L: merged deliver/NC/lem-sfb-stratified-constant-model-product-bound (reviewer FIX; first push; new nodes: 0)
