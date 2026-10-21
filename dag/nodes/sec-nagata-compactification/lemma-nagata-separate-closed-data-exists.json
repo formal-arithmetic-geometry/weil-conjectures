@@ -3,7 +3,7 @@
  "blueprint": {
   "is": "lemma-nagata-separate-closed-data-exists",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Preparation data for separating two closed boundaries, [stacks-project]",
@@ -14,43 +14,175 @@
  },
  "stmt_deps": [
   "def-nagata-admissible-blowup",
-  "def-nagata-strict-transform"
+  "def-nagata-strict-transform",
+  "def-pc-scheme",
+  "def-weil-pbc-quasi-compact-scheme",
+  "def-weil-quasi-separated-morphism",
+  "def-weil-closed-immersion",
+  "def-sbc-locally-finite-presentation",
+  "def-pc-fibre-product"
  ],
  "proof": [
   {
-   "text": "Put $K_i=\\mathcal I_Z(P_i)$, the finite-type ideal whose vanishing set is\n$Z\\setminus P_i$ ([def-nagata-qc-open-complement-ideal]). Since\n$P_1$ and $P_2$ are disjoint, $V(K_1K_2)=Z$; finite type and\nquasi-compactness therefore give $N>0$ with $(K_1K_2)^N=0$ by\n[lemma-nagata-finite-type-nil-ideal-nilpotent]. The restrictions of\nboth $K_i$ to the quasi-compact closed boundary $Z\\setminus U_Z$ are finite\ntype nil ideals, so enlarge $N$ until those restrictions are also killed by\nthe $N$th power. Replace $K_i$ by $K_i^N$; their vanishing sets are\nunchanged, now $K_1K_2=0$, and both ideals vanish on $Z\\setminus U_Z$. Let\n$J=K_1+K_2$ and $C=V(J)$. On $U_Z=P_1\\amalg P_2$, $K_1$ is the unit ideal\non $P_1$ and zero on $P_2$, while $K_2$ has the opposite behaviour. Hence\n$J|_{U_Z}=\\mathcal O_{U_Z}$ and $J$ vanishes on $Z\\setminus U_Z$. Thus\n$Z\\setminus C=U_Z$ and $C\\cap U_Z=\\varnothing$. The closed\nimmersion $C\\hookrightarrow Z$ is finite presentation because $J$ is finite\ntype.",
+   "text": "First check the scheme structures in the asserted decomposition. At a point of $U$, the disjointness hypothesis means at least one of $\\mathcal I_1,\\mathcal I_2$ is the unit ideal on a neighbourhood: their vanishing loci are disjoint there, and [lemma-nagata-ideal-unit-off-support] applies. Where $\\mathcal I_2=\\mathcal O$, the equality $\\mathcal I_1\\mathcal I_2=\\mathcal I_1$ identifies $Z$ with $Z_1$ as closed subschemes; where $\\mathcal I_1=\\mathcal O$, it identifies $Z$ with $Z_2$. Where both are units, $Z$ is empty. These identifications are induced by the quotient maps, hence agree on restrictions. They identify $P_i$ with complementary open-and-closed subschemes of $U_Z$ and give $U_Z=P_1\\amalg P_2$ scheme-theoretically, including when either piece is empty.",
    "uses": [
-    "def-nagata-qc-open-complement-ideal",
-    "lemma-nagata-finite-type-nil-ideal-nilpotent"
+    "lemma-nagata-ideal-unit-off-support"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-boundary/lemma-nagata-separate-closed-data-exists.md",
+    "place": "statement, decomposition clause; explicit quotient-ideal verification"
+   }
   },
   {
-   "text": "Work on an affine open $\\operatorname{Spec}(A)\\subseteq Z$, with generators\n$(a_\\alpha)$ of $K_1$ and $(b_\\beta)$ of $K_2$. The blow-up of $J$ is\ncovered by $A[J/a_\\alpha]$ and $A[J/b_\\beta]$. In\n$A[J/a_\\alpha]$, the element $a_\\alpha$ is a nonzerodivisor by\n[lemma-nagata-chart-generator-regular]; since\n$a_\\alpha K_2=0$, it follows that $K_2A[J/a_\\alpha]=0$. Interchanging\nthe roles of $K_1$ and $K_2$ gives $K_1A[J/b_\\beta]=0$. An\n$a_\\alpha$-chart and a $b_\\beta$-chart have empty\nintersection: on their overlap $a_\\alpha b_\\beta$ is both zero and a\nnonzerodivisor, so the overlap ring is zero. Consequently the blow-up is a\ndisjoint union of the open-and-closed union $Z'_1$ of the $a_\\alpha$-charts\nand the open-and-closed union $Z'_2$ of the $b_\\beta$-charts; the construction\nis intrinsic in the extended ideals $K_i\\mathcal O_{Z'}$, so these local\ndecompositions glue.",
+   "text": "The closed subscheme $Z$ is qcqs: restrict a finite affine cover of $X$ to its closed subscheme $Z$; these restrictions are spectra of quotient rings, and pairwise intersections are closed subsets of the corresponding quasi-compact intersections in $X$. Those intersections are quasi-compact by [pqf-lem-qs-intersection-qc]. Now let $W,W'\\subseteq Z$ be quasi-compact opens. The sets $Z\\cap A$, $A\\subseteq X$ affine open, form a basis of $Z$, so $W$ and $W'$ are finite unions of such sets, and $W\\cap W'$ is a finite union of sets $Z\\cap(A\\cap A')$; each is closed in $A\\cap A'$, quasi-compact by [pqf-lem-qs-intersection-qc], hence quasi-compact. So $Z$ is quasi-separated. Likewise $U_Z$ is a closed subspace of the quasi-compact scheme $U$, so is quasi-compact. Each $P_i$ is closed in $U_Z$, hence quasi-compact, and is open in $Z$ by step 1. Apply [lemma-nagata-qc-open-complement-ideal-exists] on $Z$ to each $P_i$, obtaining finite-type quasi-coherent ideals $K_i$ with $V(K_i)=Z\\setminus P_i$.",
+   "uses": [
+    "def-weil-closed-immersion",
+    "pqf-lem-qs-intersection-qc",
+    "lemma-nagata-qc-open-complement-ideal-exists"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080P, lemma-separate-disjoint-opens-by-blowing-up, proof"
+   }
+  },
+  {
+   "text": "The product $K_1K_2$ is finite type (local products of finite generating sets generate it), and $V(K_1K_2)=V(K_1)\\cup V(K_2)=Z$ since $P_1\\cap P_2=\\varnothing$. By [lemma-nagata-finite-type-nil-ideal-nilpotent], choose $N>0$ with $(K_1K_2)^N=0$. Replace each $K_i$ by $K_i^N$. Finite products of generators again show finite type, $V(K_i^N)=V(K_i)$ since prime ideals are radical, and commutativity gives $K_1^NK_2^N=(K_1K_2)^N=0$. Henceforth $K_1K_2=0$ and the same vanishing-set identities hold. No assertion that the ideals vanish at the boundary stalks is needed.",
+   "uses": [
+    "lemma-nagata-finite-type-nil-ideal-nilpotent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080P, lemma-separate-disjoint-opens-by-blowing-up, proof"
+   }
+  },
+  {
+   "text": "Put $J=K_1+K_2$ and $C=V(J)\\hookrightarrow Z$. The union of local finite generating sets generates $J$, so it is finite type, and $V(J)=V(K_1)\\cap V(K_2)=Z\\setminus(P_1\\cup P_2)=Z\\setminus U_Z$. On an affine open $\\operatorname{Spec}A\\subseteq Z$, $\\Gamma(\\operatorname{Spec}A,J)$ is a finitely generated ideal by [lem-weil-pbc-quasi-coherent-finite-type-affine](a); writing it as $(c_1,\\ldots,c_r)$ exhibits the center as $\\operatorname{Spec}(A/(c_1,\\ldots,c_r))$; this is a finite presentation closed immersion. Indeed it has that explicit finite algebra presentation and is affine, hence quasi-compact and separated. By [lemma-nagata-ideal-unit-off-support], $K_i|_{P_i}=\\mathcal O_{P_i}$ and $J|_{U_Z}=\\mathcal O_{U_Z}$. The relation $K_1K_2=0$ then gives $K_2|_{P_1}=0$ and $K_1|_{P_2}=0$. Let $b:Z'=\\operatorname{Bl}_J(Z)\\to Z$. The open immersion $U_Z\\hookrightarrow Z$ is quasi-compact: for an affine open $A\\subseteq Z$, $A\\cap U_Z$ is quasi-compact by [pqf-lem-qs-intersection-qc], $Z$ being quasi-separated (step 2) and $U_Z$ quasi-compact. This ideal and its unit restriction give a $U_Z$-admissible blow-up datum by [def-nagata-admissible-blowup]; [thm-nagata-global-blowup-complement] identifies $b^{-1}(U_Z)\\to U_Z$ with an isomorphism.",
+   "uses": [
+    "def-sbc-locally-finite-presentation",
+    "lemma-nagata-ideal-unit-off-support",
+    "def-nagata-admissible-blowup",
+    "thm-nagata-global-blowup-complement",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "pqf-lem-qs-intersection-qc"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080P, lemma-separate-disjoint-opens-by-blowing-up, proof"
+   }
+  },
+  {
+   "text": "The global blow-up is glued from the local models $\\operatorname{Bl}_{J_V}(V)$ over the affine opens $V$ of the affine cover used in its glue datum, by [def-nagata-global-blowup] and [def-nagata-global-blowup-local-model]; so $b^{-1}(V)$ is that local model. Fix such $V=\\operatorname{Spec}A$. By [lem-weil-pbc-quasi-coherent-finite-type-affine](a), $\\Gamma(V,K_1)$ and $\\Gamma(V,K_2)$ are finitely generated; choose finite generating families $a_\\alpha$ and $b_\\beta$. Since $\\Gamma(V,-)$ is exact on quasi-coherent sheaves of the affine $V$, $\\Gamma(V,J)=\\Gamma(V,K_1)+\\Gamma(V,K_2)$ is generated by the finite family $(a_\\alpha,b_\\beta)$. By [prop-nagata-affine-blowup-chart-cover], $b^{-1}(V)$ is covered by the charts $\\operatorname{Spec}A[J/a_\\alpha]$ and $\\operatorname{Spec}A[J/b_\\beta]$. On an $a_\\alpha$-chart multiplication by $a_\\alpha$ is injective by [lemma-nagata-chart-generator-regular]. Since $a_\\alpha K_2=0$, the extended ideal $K_2\\mathcal O_{Z'}$ is zero there. On a $b_\\beta$-chart the extended ideal $K_1\\mathcal O_{Z'}$ is zero for the same reason. Moreover [lemma-nagata-chart-extended-ideal-principal] says that $J\\mathcal O_{Z'}$ is generated on each chart by its designated generator.",
+   "uses": [
+    "def-nagata-global-blowup",
+    "def-nagata-global-blowup-local-model",
+    "prop-nagata-affine-blowup-chart-cover",
+    "lemma-nagata-chart-generator-regular",
+    "lemma-nagata-chart-extended-ideal-principal",
+    "lem-weil-pbc-quasi-coherent-finite-type-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080P, lemma-separate-disjoint-opens-by-blowing-up, proof"
+   }
+  },
+  {
+   "text": "Define $Z'_1$ to be the union of all the $a$-charts of step 5 over all affine opens $V$ of that cover, and $Z'_2$ the union of all the $b$-charts. They are global opens and cover $Z'$. They are disjoint, even for charts from different base affine opens: at a purported common point $z'$, the extended ideal $K_1$ is zero by the $b$-chart calculation, so the $a$-chart generator has zero germ. But multiplication by that germ is injective. To check the last assertion after localization, if $a(r/s)=0$, some element $t$ inverted at $z'$ satisfies $tar=0$ before localization, hence $tr=0$ by regularity of $a$, and $r/s=0$. A zero element cannot act injectively on the nonzero local ring at a scheme point. This contradiction proves disjointness. Each $Z'_i$ is therefore also closed. Finally $b^{-1}(P_1)$ misses every $b$-chart, since $K_1$ is the unit ideal over $P_1$ and zero on those charts; likewise $b^{-1}(P_2)$ misses every $a$-chart. Thus $b^{-1}(P_i)\\subseteq Z'_i$.",
    "uses": [
     "lemma-nagata-chart-generator-regular"
    ],
-   "elementary": false
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080P, lemma-separate-disjoint-opens-by-blowing-up, proof"
+   }
   },
   {
-   "text": "Over $U_Z$, the inverse image of $P_i$ lies in $Z'_i$. The strict transform\nof $Z_i\\to Z$ is the scheme-theoretic closure of that inverse image. Since\n$Z'_i$ is closed as well as open, this closure remains in $Z'_i$. The two\nstrict transforms are therefore disjoint.",
-   "uses": [],
-   "elementary": null
+   "text": "Since $Z\\setminus C=U_Z$, [def-nagata-strict-transform] defines the strict transform of $Z_i\\to Z$ as the scheme-theoretic closure of its part over $U_Z$ in $B_i=Z_i\\times_ZZ'$. By step 6 that part factors through $B_i\\times_{Z'}Z'_i$. This is a closed subscheme of $B_i$: the inverse image of a clopen subscheme is clopen and its complementary component has the zero structure sheaf. By [lemma-nagata-scheme-theoretic-closure-minimal], the scheme-theoretic closure also factors through this closed subscheme. Its image in $Z'$ is consequently contained in $Z'_i$. The disjointness $Z'_1\\cap Z'_2=\\varnothing$ proves disjointness of the two strict transforms, with their full scheme structures.",
+   "uses": [
+    "def-nagata-strict-transform",
+    "lemma-nagata-scheme-theoretic-closure-minimal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/divisors.tex",
+    "place": "Tag 080P, lemma-separate-disjoint-opens-by-blowing-up, proof"
+   }
   }
  ],
  "proof_deps": [
-  "def-nagata-qc-open-complement-ideal",
+  "lemma-nagata-ideal-unit-off-support",
+  "def-weil-closed-immersion",
+  "pqf-lem-qs-intersection-qc",
+  "lemma-nagata-qc-open-complement-ideal-exists",
   "lemma-nagata-finite-type-nil-ideal-nilpotent",
-  "lemma-nagata-chart-generator-regular"
+  "def-sbc-locally-finite-presentation",
+  "def-nagata-admissible-blowup",
+  "thm-nagata-global-blowup-complement",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine",
+  "def-nagata-global-blowup",
+  "def-nagata-global-blowup-local-model",
+  "prop-nagata-affine-blowup-chart-cover",
+  "lemma-nagata-chart-generator-regular",
+  "lemma-nagata-chart-extended-ideal-principal",
+  "def-nagata-strict-transform",
+  "lemma-nagata-scheme-theoretic-closure-minimal"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-boundary/lemma-nagata-separate-closed-data-exists.md",
-  "place": "## Proof"
+  "by": "document",
+  "document": "literature/stacks-project/divisors.tex",
+  "place": "Tag 080P, lemma-separate-disjoint-opens-by-blowing-up, proof"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "blow.?up|strictTransform",
+   "results": "No source hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: no blow-up or strict-transform separation theorem; returned scheme separation properties concern a different notion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists an admissible blowup separating the strict transforms of two closed subschemes",
+   "results": "Returned AlgebraicGeometry.IsProper.of_comp_of_isSeparated, AlgebraicGeometry.IsProper.toIsSeparated, AlgebraicGeometry.isProper_eq, AlgebraicGeometry.IsSeparated.diagonal_isClosedImmersion, AlgebraicGeometry.Scheme.isSeparated_iff_isClosedImmersion_prod_lift, AlgebraicGeometry.isSeparated_iff, AlgebraicGeometry.IsSeparated.valuativeCriterion, AlgebraicGeometry.Scheme.instIsSeparatedOfIsSeparated.",
+   "date": "2026-10-21",
+   "verdict": "no match: no blow-up or strict-transform separation theorem; returned scheme separation properties concern a different notion"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry, \"blow\"",
+   "results": "loogle: unknown identifier 'AlgebraicGeometry'; No source hits.",
+   "date": "2026-10-21",
+   "verdict": "invalid query (unknown identifier); superseded by the valid quoted-name query"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A blowup away from a quasi compact open separates two closed subschemes disjoint over that open",
+   "results": "Returned AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.Scheme.Hom.instQuasiSeparatedToNormalization, AlgebraicGeometry.instQuasiCompactιSchemeOfQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Proj.isSeparated, AlgebraicGeometry.quasiSeparatedSpace_of_quasiSeparated.",
+   "date": "2026-10-21",
+   "verdict": "no match: no blow-up or strict-transform separation theorem; returned scheme separation properties concern a different notion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"blowup\"",
+   "results": "No source hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: no blow-up or strict-transform separation theorem; returned scheme separation properties concern a different notion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Separate disjoint quasi compact open subschemes by blowing up their complement ideals",
+   "results": "Returned AlgebraicGeometry.Scheme.instIsSeparatedOfIsQuasiAffine, AlgebraicGeometry.QuasiSeparated, AlgebraicGeometry.QuasiSeparated.of_quasiSeparatedSpace, AlgebraicGeometry.IsSeparated.instQuasiSeparated, AlgebraicGeometry.Scheme.instQuasiSeparatedSpaceCarrierCarrierCommRingCatOfIsSeparated, AlgebraicGeometry.instHasAffinePropertyQuasiSeparatedQuasiSeparatedSpaceCarrierCarrierCommRingCat, AlgebraicGeometry.Scheme.quasiSeparatedSpace_of_isOpenCover, AlgebraicGeometry.instQuasiSeparatedToSpecΓOfQuasiSeparatedSpaceCarrierCarrierCommRingCat.",
+   "date": "2026-10-21",
+   "verdict": "no match: no blow-up or strict-transform separation theorem; returned scheme separation properties concern a different notion"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -105,5 +237,39 @@
    }
   ],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lemma-nagata-separate-closed-data-exists",
+  "worker": "stage1",
+  "summary": "Q140 replaces the imported incomplete proof with the full Tag 080P nilpotent-product/chart argument, checks the scheme-theoretic decomposition, makes the global opens explicit, and cites closure minimality. No statement change and no new nodes. All Mathlib searches were actually run and logged. Second-reader FIX (Q140 review): step 2 now concludes quasi-separatedness of Z; step 4 checks quasi-compactness of U_Z -> Z for the admissible datum and cites finite generation on affines; step 5 works over the glue-datum affine cover with finite generator families.",
+  "blueprint": "main-20261015 statement; imported blueprint_update.proof[0] is realized by steps 1-4 (omitting the unnecessary assertion of boundary vanishing), proof[1] by steps 5-6 with the omitted global gluing made explicit, and proof[2] by step 7 using scheme-theoretic closure.",
+  "tool_uses": [
+   {
+    "node": "pqf-lem-qs-intersection-qc",
+    "why": "Generic quasi-separated intersection fact, used only to check qcqs for the closed subscheme Z before applying the complement-ideal existence theorem; it replaces no unit step."
+   },
+   {
+    "node": "lemma-nagata-scheme-theoretic-closure-minimal",
+    "why": "Generic universal property confines the scheme-theoretic strict transform to a closed component. The boundary unit has no separate minimality statement; this does not replace its separation argument."
+   },
+   {
+    "node": "lem-weil-pbc-quasi-coherent-finite-type-affine",
+    "why": "Generic fact that a finite-type quasi-coherent ideal has finitely generated sections on an affine open (Stacks 01PB), used in steps 4-5 for the finite chart cover and the finite presentation of the centre; Stacks 080P's proof uses it tacitly and no node of the Nagata units states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "pqf-lem-qs-intersection-qc",
+  "lemma-nagata-scheme-theoretic-closure-minimal",
+  "lem-weil-pbc-quasi-coherent-finite-type-affine"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q140-711af111d",
+  "group": "Q140",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q140-711af111d (reviewer sub-agent of L); spot-checked: I read the delivery against Stacks divisors.tex Tag 080P (label lemma-separate-disjoint-opens-by-blowing-up, full proof), against every cited statement and against the unit route (boundary -> blowups -> data/closure). There are 0 new nodes. The statement is unchanged and matches main-20261015. The item is not dropped and not superseded: it is still imported on live and side-live. The mathematics is correct. The decomposition U_Z=P_1⊔P_2 is checked through the cover W_1=U∖Z_2, W_2=U∖Z_1. K_i come from complement-ideal-exists on the qcqs Z, and (K_1K_2)^N=0 by the finite-type nil lemma. J=K_1+K_2 has V(J)=Z∖U_Z. The charts kill the opposite ideal by generator regularity. Disjointness across charts from different base opens is proved at stalks, which is the gluing that Stacks omits. Strict transforms are confined by closure minimality inside the clopen B_i×_{Z'}Z'_i. Dropping the base text's 'K_i vanish on the boundary' is right: the report's k[t] counterexample is valid, and the proof never uses the claim. Small cases checked: Z_2=∅, U_Z=∅, U_Z=Z, and the two axes. Three repairable gaps are fixed in fixes/dag/nodes/sec-nagata-compactification/lemma-nagata-separate-closed-data-exists.json. (1) Step 2 never concluded that Z is quasi-separated: it implicitly used 01KO with no node; it now has a direct argument from pqf-lem-qs-intersection-qc. (2) Step 4 did not check that U_Z↪Z is quasi-compact, which def-nagata-admissible-blowup requires; it now does, via pqf-lem-qs-intersection-qc. (3) Steps 4-6 needed finitely generated Γ(V,J) and Γ(V,K_i) on affines, both for the finite chart cover and for the fp centre, and needed V to be in the fixed glue-datum cover of def-nagata-global-blowup; they now cite lem-weil-pbc-quasi-coherent-finite-type-affine(a) (Stacks 01PB) and work over that cover. Tool uses accepted: pqf-lem-qs-intersection-qc; lemma-nagata-scheme-theoretic-closure-minimal (its unit is actually on the route); and the added lem-weil-pbc-quasi-coherent-finite-type-affine, a generic 01PB fact. lemma-nagata-chart-extended-ideal-principal is cited but not needed; this is harmless. review_split.py passes on the fixed file.; 1 file(s) fixed by the reviewer"
  }
 }
