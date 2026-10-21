@@ -48,11 +48,38 @@
    "elementary": false
   },
   {
-   "text": "The seven remaining named obligations retain their original docstring arguments: prove exactness by the constant-coefficient inverse image and levelwise exactness; construct composition and unit maps by fibre-product pasting and adjunction mates; construct scalar associators and unit maps on balanced tensor generators and sheafify; localize the scalar/pullback associator on K-flat complexes using the universal cochain scalar counits. These obligations remain sorry in this partial delivery, not asserted proved.",
+   "text": "Evaluate pullback at n. Construct the section-normalized direct-image square, and use the right coextension of vertical evaluation to show its inverse mate invertible. Constant-coefficient pro-etale pullback is exact at n. Since evaluations jointly detect monomorphisms, sequence pullback preserves monomorphisms; its left adjunction preserves cokernels. Additivity and these facts give exactness.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-proetale-derived-pullback-composition"
+    "lem-trf-vertical-evaluation-inverse-mate",
+    "lem-pur-coefficient-pullback-exact",
+    "def-coef-ringed-sequence-site"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Construct the direct-image composition and identity comparisons from fibre-product pasting and constant-section maps. Constant-sheaf adjunction injectivity proves their coefficient compatibilities. Take inverse-image mates. Their bijectivity gives exactly the required unique normalized compositors and units.",
+   "uses": [
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Package the prescribed scalar functor with its tensor/restriction adjunction and cochain normalization. The scalar/pullback right-adjoint square is identity on sections by naturality of constant coefficient maps. Conjugate adjoint uniqueness gives the ordinary square, and the units give its tensor-generator formula. For scalar composition and identity use the proved coherent scalar-model comparisons; the normalized units and tensor Hom extensionality give uniqueness. Quotient induction proves the scalar map composition and identity equations.",
+   "uses": [
+    "lem-pur-system-scalar-coherence",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+    "lem-weil-derived-scalar-extension-restriction-adjunction",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve each cochain complex by a K-flat complex with flat terms. Continuous module pullback preserves its K-flatness. Both scalar counits are therefore invertible on these representatives. Apply the resolving scalar square theorem and the ordinary comparison. It supplies the required formula on all representatives; cancellation and fully faithful restriction give uniqueness from the stated K-flat formula.",
+   "uses": [
+    "lem-trf-continuous-module-pullback-kflat",
+    "lem-trf-resolving-scalar-square",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "lem-pc-kflat-resolution"
    ],
    "elementary": false
   }
@@ -63,14 +90,21 @@
   "def-weil-proetale-inverse-image",
   "lem-weil-integral-scalar-extension-well-defined",
   "lem-weil-pbc-ring-sheaves-grothendieck",
-  "lem-coef-derived-system-evaluation-calculus",
+  "lem-trf-vertical-evaluation-inverse-mate",
+  "lem-pur-coefficient-pullback-exact",
+  "lem-pur-system-scalar-coherence",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-derived-scalar-extension-restriction-adjunction",
   "lem-pur-derived-change-of-rings",
-  "lem-weil-pbc-proetale-derived-pullback-composition"
+  "lem-trf-continuous-module-pullback-kflat",
+  "lem-trf-resolving-scalar-square",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
+  "lem-pc-kflat-resolution"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/proetale.tex",
-  "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), completed pullback and quotient realization; with Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition. The simultaneous integral scalar/composition coherence is an extracted construction, not a verbatim assertion of either tag; blueprint prop-trf-karoubi-independence.proof.md, last sentence.; R7 partial proof implementation, 2026-10-19: four completed obligations, with adjoint existence shortened using the Mathlib special adjoint functor theorem; seven original obligations remain."
+  "place": "Tag 099N, lemma-pushforward-Noetherian-case (2),(5), completed pullback and quotient realization; with Tag 0D6D, sites-cohomology.tex, lemma-derived-pullback-composition. The simultaneous integral scalar/composition coherence is an extracted construction, not a verbatim assertion of either tag; blueprint prop-trf-karoubi-independence.proof.md, last sentence.; K5: all seven remaining obligations implemented using evaluation coextension, adjoint mates, scalar generators and resolving cochains, 2026-10-22."
  },
  "mathlib_match": null,
  "mathlib_searches": [
@@ -189,13 +223,13 @@
   "note": "Read the item node, the 3 delivered modules, the 2 new definition nodes, the report and the key dependency declarations in the side clone. The node changes only in lean and in stmt_deps (+2 new nodes, per 1(A)); lean.statement is verbatim and the declarations lists match the files. Clause by clause the Lean matches the node: l prime, E,L finite over Q_l with iota, quotient levels n+1; l invertible via residue-field Invertible binders, same as constructibleIntegralPullback; recorded objects (integralDerivedPullback, integralScalarExtension, sfIntegralConstructibleCategory); eta/lambda/mu built from the derived const-lim counit with the K-injective normalization and the reduction-counit formula; c^E = eta^-1 o Rlim(c) after the realization; a = mu^-1 o lambda; displayed scalar/composition equation with correct order; associativity, both units, eqToHom transport for every finite F; E=L identity via chi and the ordinary unit; associator = chi-conjugate of the ordinary associator; system-level equations before realization; raw rationalized equation; no Tor-amplitude hypothesis. The existential D is not free: realizations are fixed by normalizations over every flat-term K-flat representative, and presentations exist by CoefficientReductionModels; Roos comparison fixed on K-injectives; Classical.choice of DerivedChangeOfRingsCochainModel is unique up to unique iso (same landed pattern). No hollow data; 17 sorries, all named theorems with source and proof docstrings. Common universe u inherited from sfIntegralConstructible; helpers keep t,u separate; the p=l+1 argument is unused. New nodes have the 5 fields and 4 searches and are cited. Line widths, docstrings and blueprint tags OK. nt_compile.py --json on all 3 modules, two runs: rc=0, no errors or warnings, 10.5/15.3/28.1 s within 60 s, reproducing the recorded times. Minor: the Second reading section is a thin self-check, compensated by the full worker mapping and this review."
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "R7",
+  "group": "K5",
   "result": "pass",
-  "landing": "20261019T005416-L-2765567",
-  "kind": "proof",
+  "landing": "20261021T214821-L-1860875",
+  "kind": "interface",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

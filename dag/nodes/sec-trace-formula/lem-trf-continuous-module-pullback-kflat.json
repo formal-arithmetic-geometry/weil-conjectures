@@ -1,0 +1,137 @@
+{
+ "id": "lem-trf-continuous-module-pullback-kflat",
+ "kind": "lemma",
+ "title": "Continuous module pullback preserves flat-term K-flat complexes",
+ "status": "split",
+ "statement": "For essentially small sites C,D and a representably flat continuous F:C→D, commutative ring sheaves R,S and φ:R→F_*S, let L be an additive left adjoint to the specified continuous module pushforward. If P is K-flat over R with flat terms, then its termwise image under L is K-flat over S. The coefficient and module universe contains all site universes, but their object and morphism universes remain independent. K-flatness is [def-pc-kflat-complex], inverse image is [def-weil-pbc-algebraic-inverse-image].",
+ "stmt_deps": [
+  "def-pc-kflat-complex",
+  "def-weil-pbc-algebraic-inverse-image"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat"
+ },
+ "proof": [
+  {
+   "text": "The flat site functor induces a finite-limit-preserving inverse image of set sheaves by Kan extension and sheafification. Construct the algebraic inverse image of R using its transported operation graphs and the generalized inverse-image construction.",
+   "uses": [
+    "lem-trf-geometric-inverse-image-exact",
+    "lem-weil-pbc-geometric-module-construction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transpose φ to the structural map from the inverse-image ring to S. Restrict the underlying geometric adjunction to maps preserving addition and scalar multiplication, and compose it with the tensor/restriction adjunction. This gives the tensor pullback as left adjoint to precisely the specified module pushforward.",
+   "uses": [
+    "lem-weil-pbc-geometric-module-transport",
+    "lem-pur-sheaf-ring-coefficient-ordinary-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing ringed-topos K-flat preservation theorem to that tensor pullback and the flat-term K-flat P. Uniqueness of left adjoints gives an isomorphism with L. Its induced cochain isomorphism transports K-flatness by the acyclic-test definition.",
+   "uses": [
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-trf-geometric-inverse-image-exact",
+  "lem-weil-pbc-geometric-module-construction",
+  "lem-weil-pbc-geometric-module-transport",
+  "lem-pur-sheaf-ring-coefficient-ordinary-adjunction",
+  "lem-weil-pbc-ringed-topos-kflat-pullback"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0G7E, lemma-pullback-K-flat; K5 proof implementation"
+ },
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "inverse image of sheaves of modules preserves K-flat complexes with flat terms",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.compatiblePreservingOfFlat\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverPreserving\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₁} [inst_1 : CategoryTheory.Category.{v₁, u₁} D]\\n  (K : CategoryTheory.GrothendieckTopology D) (G : CategoryTheory.Functor C D) [CategoryTheory.RepresentablyFlat G],\\n  CategoryTheory.CompatiblePreserving K G\", \"doc\": \"If a functor $ G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat, then it preserves compatibility with any Grothendieck topology $ K $ on $ \\\\mathcal{D} $.\"}\n  {\"name\": \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"module\": \"Mathlib/CategoryTheory/Sites/Pullback\", \"type\": \"∀ {C : Type v₁} [inst : CategoryTheory.SmallCategory C] {D : Type v₁} [inst_1 : CategoryTheory.SmallCategory D]\\n  (G : CategoryTheory.Functor C D) (A : Type u₁) [inst_2 : CategoryTheory.Category.{v₁, u₁} A]\\n  (J : CategoryTheory.GrothendieckTopology C) (K : CategoryTheory.GrothendieckTopology D) {FA\", \"doc\": \"If a functor $ G $ is representably flat, then its sheaf pullback functor preserves finite limits.\"}\n  {\"name\": \"CategoryTheory.lan_flat_of_flat\", \"module\": \"Mathlib/CategoryTheory/Functor/Flat\", \"type\": \"∀ {C D : Type u₁} [inst : CategoryTheory.SmallCategory C] [inst_1 : CategoryTheory.SmallCategory D] (E : Type u₂)\\n  [inst_2 : CategoryTheory.Category.{u₁, u₂} E] [inst_3 : CategoryTheory.HasForget E]\\n  [CategoryTheory.Limits.HasLimits E] [inst_5 : CategoryTheory.Limits.HasColimits E]\\n  [CategoryTheo\", \"doc\": \"If a functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is representably flat, then the left Kan extension of its opposite functor $ F^{\\\\text{op}} $ along the projection from the comma category $ \\\\mathcal{D}\"}\n  {\"name\": \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every exact short complex of $ R $-modules, the induced complex obtained by tensoring with $ M $ remains exact. In symbols, $ M \"}\n  {\"name\": \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/Descent\", \"type\": \"∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f)\", \"doc\": \"Given a flat ring homomorphism $ f : R \\\\to S $ between commutative rings, the scalar extension functor $ \\\\text{Mod}_R \\\\to \\\\text{Mod}_S $ induced by $ f $ preserves finite limits in the category of mod\"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R),\\n  Module.Flat R ↑M ↔\\n    ∀ (C : CategoryTheory.ShortComplex (ModuleCat R)),\\n      C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n  {\"name\": \"Module.Flat.instPreservesFiniteLimitsModuleCatTensorLeftOfCarrier\", \"module\": \"Mathlib/RingTheory/Flat/CategoryTheory\", \"type\": \"∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M],\\n  CategoryTheory.Limits.PreservesFiniteLimits (CategoryTheory.MonoidalCategory.tensorLeft M)\", \"doc\": \"For any commutative ring $ R $ and flat $ R $-module $ M $, the functor given by tensoring with $ M $ preserves finite limits in the category of $ R $-modules. This means that for any finite diagram i\"}\n  {\"name\": \"Module.Flat.of_flat_tensorProduct\", \"module\": \"Mathlib/RingTheory/Flat/FaithfullyFlat/Basic\", \"type\": \"∀ (R : Type u) (M : Type v) [inst : CommRing R] [inst_1 : AddCommGroup M] [inst_2 : Module R M] (S : Type u_1)\\n  [inst_3 : CommRing S] [inst_4 : Algebra R S] [Module.FaithfullyFlat R S] [Module.Flat S (TensorProduct R S M)],\\n  Module.Flat R M\", \"doc\": \"If $ S $ is a faithfully flat $ R $-algebra and the tensor product $ S \\\\otimes_R M $ is a flat $ S $-module, then $ M $ is a flat $ R $-module.\"}\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match; existing library arguments are generalized and reused"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"KFlat\", \"pullback\"",
+   "results": "[loogle] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match; existing library arguments are generalized and reused"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat.*pullback|kFlat.*Pullback",
+   "results": "[grep] OK 0 hit(s)\n",
+   "date": "2026-10-22",
+   "verdict": "no exact match; existing library arguments are generalized and reused"
+  },
+  {
+   "tool": "leansearch",
+   "query": "inverse image of sheaves of modules preserves K-flat complexes with flat terms",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso.congr_simp\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat} {R : CategoryTheor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.instIsLeftAdjointPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (pullback.{v} φ).IsLeftAdjoint\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"CategoryTheory.Functor.SmallCategories.instPreservesFiniteLimitsSheafSheafPullbackOfRepresentablyFlat\", \"module\": \"Mathlib.CategoryTheory.Sites.Pullback\", \"type\": \"[RepresentablyFlat G] : PreservesFiniteLimits (G.sheafPullback A J K)\", \"doc\": \"If a functor $ G $ is representably flat, then its sheaf pullback functor preserves finite limits.\"}\n  {\"name\": \"SheafOfModules.pullbackObjFreeIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \"(I : Type u) : (pullback φ).obj (free I) ≅ free I\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.freeFunctorCompPullbackIso\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": freeFunctor ⋙ pullback φ ≅ freeFunctor\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"SheafOfModules.sheafificationCompPullback\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \":\\n  PresheafOfModules.sheafification (𝟙 S.val) ⋙ pullback.{v} φ ≅\\n    PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)\", \"doc\": \"The natural isomorphism asserting that composing sheafification with the pullback functor (along a ring sheaf morphism) is equivalent to composing the pullback functor (on presheaves) with sheafificat\"}\n  {\"name\": \"SheafOfModules.fullyFaithfulForget_preimage_val\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {J : CategoryTheory.GrothendieckTopology C}\\n  (R : CategoryTheory.Sheaf J RingCat) {X Y : SheafOfModules R}\\n  (φ : (SheafOfModules.forget R).obj X ⟶ (SheafOfModules.forget R).obj Y),\\n  ((SheafOfModules.fullyFaithfulForget R).preimage φ).val\", \"doc\": \"For any morphism $\\\\varphi$ between the underlying presheaves of two sheaves of modules over a sheaf of rings $R$, the preimage of $\\\\varphi$ under the fully faithful forgetful functor from sheaves of m\"}\n  {\"name\": \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"module\": \"Mathlib.RingTheory.Flat.CategoryTheory\", \"type\": \": Flat R M ↔ ∀ (C : ShortComplex <| ModuleCat R) (_ : C.Exact), (C.map (tensorRight M) |>.Exact)\", \"doc\": \"A module $ M $ over a commutative ring $ R $ is flat if and only if for every short exact sequence in the category of $ R $-modules, the sequence obtained by tensoring with $ M $ remains exact. In oth\"}\n",
+   "date": "2026-10-22",
+   "verdict": "The returned generic categorical results do not prove this statement. The delivery uses the stated project dependencies and proves the remaining argument."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralComparisonSequenceSystems",
+  "date": "2026-10-22",
+  "group": "K5"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "prop-trf-karoubi-independence",
+   "place": "Entire quotient-system inverse image and scalar comparisons",
+   "via": [
+    "def-trf-integral-comparison-sequence-systems",
+    "lem-trf-integral-pullback-comparison-realization",
+    "lem-trf-local-frobenius-transport-normalization"
+   ]
+  },
+  "same_as": []
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-thm-trace-transport",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ContinuousModulePullbackKFlat",
+  "file": "lean/Sheaf/CategoryTheory/ContinuousModulePullbackKFlat.lean",
+  "declaration": "SheafOfModules.continuousModulePullback_kFlat",
+  "declarations": [
+   "SheafOfModules.continuousModulePullback_kFlat"
+  ],
+  "statement": "theorem continuousModulePullback_kFlat\n    {C : Type c} [Category.{v} C] [EssentiallySmall.{max w c v d z} C]\n    {D : Type d} [Category.{z} D] [EssentiallySmall.{max w c v d z} D]\n    (J : GrothendieckTopology C) (K : GrothendieckTopology D)\n    (F : C ⥤ D) [F.IsContinuous J K] [RepresentablyFlat F]\n    (R : Sheaf J CommRingCat.{max w c v d z}) (S : Sheaf K CommRingCat.{max w c v d z})\n    (φ : R ⟶ (F.sheafPushforwardContinuous CommRingCat.{max w c v d z} J K).obj S)\n    (L : SheafOfModules.{max w c v d z} ((sheafCompose J (forget₂ CommRingCat.{max w c v d z}\n      RingCat.{max w c v d z})).obj R) ⥤\n      SheafOfModules.{max w c v d z} ((sheafCompose K (forget₂ CommRingCat.{max w c v d z}\n        RingCat.{max w c v d z})).obj S))\n    [L.Additive]\n    (adj : L ⊣ pushforward.{max w c v d z}\n      ((sheafCompose J (forget₂ CommRingCat.{max w c v d z} RingCat.{max w c v d z})).map φ))\n    (P : CochainComplex\n      (SheafOfModules.{max w c v d z} ((sheafCompose J (forget₂ CommRingCat.{max w c v d z}\n        RingCat.{max w c v d z})).obj R)) ℤ)\n    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := R) P)\n    (hf : ∀ i : ℤ, IsFlatOnSite.{c, v, max w c v d z, max w c v d z} (J := J) (R := R) (P.X i)) :\n    CochainComplex.IsKFlatIndependentCoefficients (R := S)\n      ((L.mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "K5",
+  "date": "2026-10-22"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261021T214821-L-1860875",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K5",
+  "result": "pass",
+  "landing": "20261021T214821-L-1860875",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
