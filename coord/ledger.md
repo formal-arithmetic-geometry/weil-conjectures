@@ -23955,3 +23955,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:53 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 2026-10-21T22:54:25Z L: superseded stage-1 delivery NF/lem-sfb-finite-ultrametric-best-approximation at 9c6777744c0aa426d63c96507ee3849418d29c28; current completion retained; packet archived at refs/superseded/NF/lem-sfb-finite-ultrametric-best-approximation/9c6777744c0aa426d63c96507ee3849418d29c28; stale return retired.
 - 22:54 L: merged deliver/NE/lem-sfb-uncountable-almost-disjoint-family (stage 2; reviewer PASS; parallel immutable checks)
+- 22:56 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
