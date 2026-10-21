@@ -20665,3 +20665,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:25 L: returned deliver/NU/sk-def-sf-kv-maps (reviewer RETURN: E7/E1: the delivery restricts sk-def-sf-kv-maps to separated Y_i. This is the separated-target correction of def-sf-kv-m)
 - 07:26 L: returned deliver/Q31/def-per-support-condition (reviewer RETURN: Route-pivot fault: the cosupport clause cites lem-per-qbar-arbitrary-field-duality. That node is dropped (route-pivot-dr)
 - 07:26 L: returned deliver/N7/sk-def-perfect (reviewer RETURN: I read the full item, the new node lem-pod-ringed-site-dualizable-perfect, the unit, the report, the main-20261015 sk-de)
+- 07:29 L: merged deliver/Q56/lem-sfb-rhom-continuity-triangle-closure (reviewer FIX; after a return; new nodes: 2)

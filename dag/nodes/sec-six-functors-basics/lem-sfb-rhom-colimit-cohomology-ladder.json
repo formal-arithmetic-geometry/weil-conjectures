@@ -1,0 +1,89 @@
+{
+ "id": "lem-sfb-rhom-colimit-cohomology-ladder",
+ "kind": "statement",
+ "title": "Exact cohomology ladder for the internal-Hom filtered-colimit comparison",
+ "statement": "Let $(\\mathcal C,\\mathcal O)$ be a ringed site small in the chosen universe, with $\\mathcal O$ commutative [def-weil-pbc-sites-and-cohomology, def-weil-size-convention]. Put $\\mathcal M=\\operatorname{Mod}(\\mathcal O)$ and use its ordinary unbounded derived category $D(\\mathcal M)$ [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category]. Fix the functorial K-injective target models for $H(A,N)=R\\mathcal Hom_{\\mathcal O}(A,N)$ [def-pur-derived-internal-hom, def-sfb-internal-hom-strict-models]. For any small filtered diagram $N:I\\to\\operatorname{CoCh}(\\mathcal M)$ [def-weil-pbc-category-colimit], put $N_\\infty=\\varinjlim_iN_i$ termwise and let $\\alpha_A:\\varinjlim_iH(A,N_i)\\to H(A,N_\\infty)$ be the image in $D(\\mathcal M)$ of the canonical complex cocone map on these models. All colimits here are termwise sheaf colimits. For every small filtered complex diagram $(K_i)$ and $q\\in\\mathbf Z$, there is a natural isomorphism\n$$H^q(\\varinjlim_iK_i)\\cong\\varinjlim_iH^q(K_i).$$\nConsequently termwise filtered colimits preserve quasi-isomorphisms and common cohomological lower bounds. Let $A\\xrightarrow u B\\xrightarrow v C\\xrightarrow w A[1]$ be any distinguished triangle [def-weil-triangulated-category]. For every $q\\in\\mathbf Z$, the sequences\n$$\\cdots\\to\\varinjlim_iH^{q-1}(H(A,N_i))\\to\\varinjlim_iH^q(H(C,N_i))\\to\\varinjlim_iH^q(H(B,N_i))\\to\\varinjlim_iH^q(H(A,N_i))\\to\\varinjlim_iH^{q+1}(H(C,N_i))\\to\\cdots$$\nand\n$$\\cdots\\to H^{q-1}(H(A,N_\\infty))\\to H^q(H(C,N_\\infty))\\to H^q(H(B,N_\\infty))\\to H^q(H(A,N_\\infty))\\to H^{q+1}(H(C,N_\\infty))\\to\\cdots$$\nare exact, and form a commuting ladder whose vertical arrows at $X=A,B,C$ are $H^q(\\alpha_X)$ under the displayed cohomology-colimit identification. The arrows in both rows are those induced by precomposition with $u,v,w$; for $w$ one uses the signed source-shift comparison $H(A[1],N)\\cong H(A,N)[-1]$ (cochain convention $K[n]^q=K^{q+n}$, $d_{K[n]}=(-1)^nd_K$), which on the Hom-complex models reindexes components and multiplies degree-$q$ components by $(-1)^q$, independently of $N$. Commutativity includes every connecting square, with these specified signs. No boundedness, continuity or constructibility assumption is imposed on $A,B,C$ or $N$.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08JC (lemma-RHom-triangulated), old proof steps 1 and 4: exact termwise colimits, cycles and boundaries, and the natural long exact comparison including connecting maps; Modules on Sites Tag 03DB (lemma-limits-colimits); Derived Categories Tag 05RS (lemma-cohomology-homological)."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-size-convention",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pur-derived-internal-hom",
+  "def-sfb-internal-hom-strict-models",
+  "def-weil-pbc-category-colimit",
+  "def-weil-triangulated-category"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "(RHom|internalHom|derivedHom).*(boundary|connecting|colimit)|(boundary|connecting).*(colimit|colim)",
+   "results": "Hits read: Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Preserves/Lattice.lean, Mathlib/CategoryTheory/Limits/Shapes/CombinedProducts.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the results give general shifts, colimits or cohomology infrastructure, not the canonical internal-sheaf-Hom comparison with the asserted transport and boundary identifications."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the long exact derived internal Hom cohomology sequence with respect to filtered colimit target cocones",
+   "results": "Hits read: AddMonCat.FilteredColimits.cocone_naturality, ModuleCat.FilteredColimits.colimitCocone, HomologicalComplex.instHasFilteredColimitsOfSize, CommMonCat.FilteredColimits.colimitCocone, RingCat.FilteredColimits.colimitCocone, instPreservesHomologyFunctorAddCommGrpCatColim, CommGrpCat.FilteredColimits.colimitCocone, AddCommGrpCat.FilteredColimits.colimitCoconeIsColimit",
+   "date": "2026-10-21",
+   "verdict": "no match: the results give general shifts, colimits or cohomology infrastructure, not the canonical internal-sheaf-Hom comparison with the asserted transport and boundary identifications."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homology\", \"colimit\"",
+   "results": "Hits read: CategoryTheory.ShortComplex.LeftHomologyData.ofIsColimitCokernelCofork, CategoryTheory.ShortComplex.LeftHomologyData.ofIsColimitCokernelCofork_K, CategoryTheory.ShortComplex.LeftHomologyData.ofIsColimitCokernelCofork_i, CategoryTheory.ShortComplex.LeftHomologyData.ofIsColimitCokernelCofork_f', CategoryTheory.ShortComplex.LeftHomologyData.ofIsColimitCokernelCofork_liftK, CategoryTheory.ShortComplex.LeftHomologyData.ofIsColimitCokernelCofork_H, CategoryTheory.ShortComplex.LeftHomologyMapData.compatibilityOfZerosOfIsColimitCokernelCofork, CategoryTheory.ShortComplex.LeftHomologyMapData.compatibilityOfZerosOfIsColimitCokernelCofork_φK",
+   "date": "2026-10-21",
+   "verdict": "no match: the results give general shifts, colimits or cohomology infrastructure, not the canonical internal-sheaf-Hom comparison with the asserted transport and boundary identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived sheaf Hom sends a source triangle and filtered target cocone to a commuting ladder of exact cohomology sequences including the connecting morphisms",
+   "results": "Hits read: CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, DerivedCategory.triangleOfSESδ, DerivedCategory.HomologySequence.δ_comp_assoc, CategoryTheory.Functor.homologySequence_exact₂, DerivedCategory.HomologySequence.comp_δ_assoc, DerivedCategory.HomologySequence.exact₁, CochainComplex.mappingCone.homologySequenceδ_triangleh",
+   "date": "2026-10-21",
+   "verdict": "no match: the results give general shifts, colimits or cohomology infrastructure, not the canonical internal-sheaf-Hom comparison with the asserted transport and boundary identifications."
+  },
+  {
+   "tool": "grep",
+   "query": "(homologySequence.*naturality|naturality.*homologySequence|homologyFunctor.*PreservesColimits|PreservesColimits.*homologyFunctor)",
+   "results": "Hits read: Mathlib/Algebra/Homology/HomologySequenceLemmas.lean, Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean, Mathlib/RepresentationTheory/Homological/GroupCohomology/LongExactSequence.lean, Mathlib/CategoryTheory/Triangulated/HomologicalFunctor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the results give general shifts, colimits or cohomology infrastructure, not the canonical internal-sheaf-Hom comparison with the asserted transport and boundary identifications."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In module sheaves exact filtered colimits identify cohomology of colimit complexes and turn natural source RHom triangles into a commuting long exact cohomology comparison diagram",
+   "results": "Hits read: CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact, CategoryTheory.Abelian.Ext.preadditiveCoyoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.Abelian.Ext.preadditiveYoneda_homologySequenceδ_singleTriangle_apply, CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj, DerivedCategory.HomologySequence.exact₃, CochainComplex.mappingCone.homologySequenceδ_triangleh, CochainComplex.homologySequenceδ_quotient_mapTriangle_obj_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: the results give general shifts, colimits or cohomology infrastructure, not the canonical internal-sheaf-Hom comparison with the asserted transport and boundary identifications."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-rhom-continuity-triangle-closure",
+  "date": "2026-10-21",
+  "group": "Q56"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-dc-restricted-functors",
+ "blueprint": {
+  "from": {
+   "node": "lem-sfb-dc-hom-preserves",
+   "place": "lem-sfb-dc-hom-preserves.proof.md, last sentence 'The cases $\\underline E$ and $\\underline{\\Qlb}$ follow by inverting $\\ell$ and by descending to a finite extension $E$ ... see Bhatt–Scholze, §6.8': compatibility of internal Hom with inverting $\\ell$ and with the filtered coefficient colimit (parent steps 5 and 8). Extracted from returned continuity proof: formal internal-Hom triangle closure including lower bounds (returned step 6); re-split of lem-sfb-rhom-continuity-triangle-closure: old proof steps 1 and 4: exact termwise colimits, cycles and boundaries, and the natural long exact comparison including connecting maps",
+   "via": [
+    "lem-sfb-rhom-continuity-triangle-closure",
+    "lem-sfb-constructible-internal-hom-continuity"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
