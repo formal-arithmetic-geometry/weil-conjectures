@@ -1,0 +1,146 @@
+{
+ "id": "lem-weil-pbc-derived-square-unit-map",
+ "kind": "statement",
+ "title": "The ordinary-unit representative of the derived module base-change mate",
+ "statement": "Let $v:Z\\to X$, $f:X\\to S$, $k:Z\\to T$ and $g:T\\to S$ be scheme morphisms with $vf=kg$ [def-pc-scheme]. Use the fixed module derived categories [def-pc-derived-category], derived pullbacks and direct images [def-pc-derived-pullback, def-pc-derived-direct-image], the pinned derived adjunctions [def-pc-derived-base-change-map] and the pinned pullback composition comparisons [lem-pc-ringed-spaces-derived-pullback-composition]. Let $s:Lk^*Lg^*\\simeq Lv^*Lf^*$ be the composite pullback comparison of the square, and let $r:Rf_*Rv_*\\simeq Rg_*Rk_*$ be its right-adjoint mate under the composite adjunctions. For an $\\mathcal O_X$-module $F$ [def-weil-sheaf-of-modules-category], put $G=v^*F$, $\\eta:F\\to v_*G$ for the ordinary tensor-pullback unit [lem-pc-module-pullback-adjunction], $c:Lv^*(F[0])\\to G[0]$ for the pinned comparison [lem-weil-pbc-derived-pullback-top-cohomology], and $u:(v_*G)[0]\\to Rv_*(G[0])$ for the canonical direct-image comparison [lem-pc-canonical-single-direct-image-comparison]. The transpose under $Lg^*\\dashv Rg_*$ of the derived square map [def-pc-derived-base-change-map] followed by $Rk_*(c)$ is exactly $Rf_*(\\eta[0]\\,;\\,u)\\,;\\,r_{G[0]}$. More generally write $A(\\varphi)=Rf_*(\\varphi[0]\\,;\\,u_{v,G})\\,;\\,r_{G[0]}$ for any module map $\\varphi:F\\to v_*G$; this defines derivedSquareUnitMap. No bound or flatness hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY, remark-base-change; Tag 01FB, remark-explain-arrow"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pc-derived-category",
+  "def-pc-derived-pullback",
+  "def-pc-derived-direct-image",
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-module-pullback-adjunction",
+  "lem-weil-pbc-derived-pullback-top-cohomology",
+  "lem-pc-canonical-single-direct-image-comparison"
+ ],
+ "proof": [
+  {
+   "text": "For four adjunctions around a square, apply the inverse composite hom equivalence to the proposed double-transpose identity. The conjugate-equivalence counit identity replaces the mate by the pullback square followed by the composite counit. Naturality of the square and the first counit reduce both sides to the last hom-equivalence inverse law. This is the private square_transpose calculation.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "Apply the single-module transpose theorem to the inverse of the unique comparison from tensor pullback to ordinary pullback. The ordinary adjunction uniqueness identity makes its transpose the tensor unit, and the comparison and its inverse cancel inside the single functor. Thus the pinned tensor single comparison transposes to the single tensor unit followed by the canonical direct-image map.",
+   "uses": [
+    "lem-pc-canonical-single-adjunction-transpose",
+    "lem-pc-module-pullback-adjunction"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Instantiate the double-transpose identity with the pinned derived adjunctions and the pinned pullback square. Move Rk of the coefficient comparison through the inner hom equivalence by naturality and substitute the single-module identity. The definitions are the claimed two morphisms.",
+   "uses": [
+    "def-pc-derived-base-change-map",
+    "lem-pc-ringed-spaces-derived-pullback-composition",
+    "lem-weil-pbc-derived-pullback-top-cohomology"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-canonical-single-adjunction-transpose",
+  "lem-pc-module-pullback-adjunction",
+  "def-pc-derived-base-change-map",
+  "lem-pc-ringed-spaces-derived-pullback-composition",
+  "lem-weil-pbc-derived-pullback-top-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08HY, remark-base-change; Tag 01FB, remark-explain-arrow; explicit normalization and comparison argument"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The map on local cohomology classes induced by a coefficient morphism in a commutative square agrees with the derived direct image mate",
+   "results": "Generic localized functor homMap, imageMap, Square.map and rightDerivedFunctorComparison_fac_app; no local class compatibility for module h-maps.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"conjugateEquiv\", \"homEquiv\"",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "conjugateEquiv.*homEquiv|localHypercohomology|resolutionSectionClass",
+   "results": "One hit in Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean:521 for bicategorical mate calculus. No module-cohomology class comparison.",
+   "date": "2026-10-21",
+   "verdict": "generic mate calculus only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.TopBaseChangePresheaf",
+  "date": "2026-10-21",
+  "group": "G1"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-direct-image-finiteness-proper",
+   "place": "The canonical affine coherent cohomology identification in the 0GKA input to 0GKV(b), used in the classical torsion constructibility input of thm-weil-pbc-direct-image-finiteness-proper; the comparison and its restriction compatibility in steps 4 and 5 of lem-weil-pbc-smooth-curve-etale-structure-direct-images. Identification of the derived map with pullback of local cohomology classes. Generic ordinary-unit/local-cocycle comparison.",
+   "via": [
+    "lem-weil-pbc-top-base-change-presheaf",
+    "lem-weil-pbc-coherent-affine-base-change-edge-naturality",
+    "lem-weil-pbc-smooth-curve-etale-structure-direct-images",
+    "lem-weil-pbc-proper-smooth-curves-prime-coefficients",
+    "lem-weil-pbc-etale-proper-smooth-curves-finite-module",
+    "lem-weil-pbc-etale-constant-shriek-rel-dim-1",
+    "lem-weil-pbc-etale-lisse-open-relative-line-constructibility",
+    "lem-weil-pbc-etale-affine-line-shriek-sheaf-constructible",
+    "lem-weil-pbc-etale-compactification-constructibility",
+    "lem-weil-pbc-etale-proper-direct-image-finiteness"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.DerivedSquareUnitMap",
+  "file": "lean/Sheaf/AlgebraicGeometry/DerivedSquareUnitMap.lean",
+  "declaration": "AlgebraicGeometry.derivedModuleBaseChange_transpose",
+  "declarations": [
+   "AlgebraicGeometry.derivedSquareRightComparison",
+   "AlgebraicGeometry.derivedSquareUnitMap",
+   "AlgebraicGeometry.derivedModuleBaseChange_transpose"
+  ],
+  "statement": "theorem derivedModuleBaseChange_transpose {X S Z T : Scheme.{u}}\n    (f : X ⟶ S) (k : Z ⟶ T) (g : T ⟶ S) (v : Z ⟶ X) (h : v ≫ f = k ≫ g)\n    (F : X.Modules) :\n    (@pinnedDerivedAdjunction.{u, w} _\n      (fun {_ _} a ↦ Scheme.Modules.canonicalTensorPullbackAdditive.{u, w} a)\n      _ _ g).homEquiv _ _\n      (schemeDerivedBaseChangeMap f k g v h\n          ((DerivedCategory.singleFunctor\n            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F) ≫\n        (schemeDerivedDirectImage k).map (pinnedModulePullbackComparisonAt v 0 F)) =\n      derivedSquareUnitMap f k g v h F ((Scheme.Modules.tensorPullback v).obj F)\n        ((Classical.choose (Scheme.Modules.exists_tensorPullbackAdjunction v)).unit.app F)",
+  "branch": "sheaf-dag",
+  "by": "G1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261021T233708-L-851056",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "G1",
+  "result": "pass",
+  "landing": "20261021T233708-L-851056",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

@@ -10,14 +10,7 @@ public import Sheaf.Paper.HigherDirectImagePresheaf
 public import Sheaf.CategoryTheory.RingedSiteModules
 public import WeilConjectures.AlgebraicGeometry.FlatBaseChangeOpenChoices
 public import WeilConjectures.CategoryTheory.DerivedCategory.RightDerivedFunctor.PlusCompatibility
-import WeilConjectures.AlgebraicGeometry.DerivedDirectImageCompositionUnbounded
-import WeilConjectures.AlgebraicGeometry.RingedSpaceSheafificationCohomology
-import Sheaf.AlgebraicGeometry.UnboundedDirectImageSectionPresheaf
-import WeilConjectures.Algebra.Homology.BoundedBelowInjectiveResolution
-import WeilConjectures.AlgebraicGeometry.ModuleOpenRestrictionInjectives
-import WeilConjectures.AlgebraicGeometry.PushforwardInjectivesSectionsQuasiIso
-import Sheaf.CategoryTheory.RingedToposDerivedPushforwardComposition
-import WeilConjectures.AlgebraicGeometry.ModuleCohomologyFMapFunctorial
+import Sheaf.AlgebraicGeometry.DerivedSquareLocalClasses
 
 /-! # Top derived base change on local cohomology classes
 
@@ -31,16 +24,34 @@ by the canonical total/classical comparison. No map is assumed invertible except
 -/
 
 @[expose] public section
+set_option cleanup.letToHave false
 set_option autoImplicit false
 set_option relaxedAutoImplicit false
-set_option backward.isDefEq.respectTransparency false
-set_option backward.isDefEq.respectTransparency.types false
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types true
 set_option synthInstance.maxSize 2048
 universe u w
 open CategoryTheory CategoryTheory.Limits Opposite
 noncomputable section
 namespace AlgebraicGeometry
 open Scheme.Modules
+attribute [local instance_reducible] Scheme.Modules TopCat.Sheaf
+attribute [local irreducible] Scheme.Modules.tensorPullback
+attribute [local irreducible] limit limit.π
+
+private theorem normalized_tensorAdjunction {Y Z : Scheme.{u}} (v : Y ⟶ Z) :
+    Classical.choose (exists_tensorPullbackAdjunction v) =
+      tensorPullbackSectionAdjunction v := by
+  apply (Classical.choose_spec (existsUnique_tensorPullbackSectionAdjunction v)).2
+  intro M U m
+  exact (Classical.choose_spec (exists_tensorPullbackAdjunction v)) M (op U) m
+
+attribute [local irreducible] tensorPullbackSectionAdjunction resolutionSectionClass
+  moduleCohomologyFMap Functor.rightDerivedFunctor Functor.rightDerived
+  Functor.homologyRightDerivedFunctorObjSingleFunctorIso
+  InjectiveResolution.isoRightDerivedObj derivedPullbackTopCohomology
+  pinnedModulePullbackComparisonAt RingedSpace.topEdgeLocalClass
+  RingedSpace.topEdgeLocalLeray RingedSpace.topEdgeInverseLocalClass
 
 /-- Restrict the ordinary tensor-pullback unit to an inverse-image open. The coefficient
 is the restriction of the global pulled-back module, using direct-image composition and
@@ -102,6 +113,10 @@ def topBaseChangeDelta {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S) (F : X.M
     (schemeDerivedDirectImage (pullback.fst g f)).map
       (pinnedModulePullbackComparisonAt (pullback.snd g f) 0 F)
 
+attribute [local irreducible] topBaseChangeDelta
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- The ordinary adjoint of H^q(δ)κ⁻¹, expressed on classical higher direct images
 using the canonical total/classical cohomology isomorphisms. The inverse of κ uses the
 recorded top-cohomology theorem; δ itself need not be invertible.
@@ -129,6 +144,91 @@ def topBaseChangeAdjoint {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)
       (RingedSpace.moduleDirectImage (pullback.fst g f).toLRSHom.toShHom)
       ((tensorPullback (pullback.snd g f)).obj F) q).hom
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+private theorem topBaseChangeClass_source {X S : Scheme.{u}} (f : X ⟶ S)
+    (F : X.Modules) (I : InjectiveResolution F) (V : S.Opens)
+    (R : RestrictedResolutionSections I (f ⁻¹ᵁ V)) (q : ℕ) :
+    topBaseChangeClass f F I V (f ⁻¹ᵁ V) rfl R q =
+      resolutionSectionClass R.resolution
+        (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)
+        V R.sections q ≫ Hom.app (I.isoRightDerivedObj (pushforward f) q).inv V := by
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  simp only [topBaseChangeClass, eqToIso_refl, Iso.trans_refl]
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+private theorem restrictedDirectImageMap_unit {Z X : Scheme.{u}} (v : Z ⟶ X)
+    (F : X.Modules) (U : X.Opens) :
+    restrictedDirectImageMap v ((tensorPullbackSectionAdjunction v).unit.app F) U =
+      topBaseChangeRestrictedUnit v F U := by
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+private theorem topBaseChangeClass_eq {X S : Scheme.{u}} (f : X ⟶ S) (F : X.Modules)
+    (I : InjectiveResolution F) (V : S.Opens) (U : X.Opens) (e : U = f ⁻¹ᵁ V)
+    (R : RestrictedResolutionSections I U) (q : ℕ) :
+    topBaseChangeClass f F I V U e R q =
+      resolutionSectionClass R.resolution
+        (((pushforward f).mapHomologicalComplex (ComplexShape.up ℕ)).obj I.cocomplex)
+        V (R.sections ≪≫ eqToIso (congrArg (fun A ↦
+          ((RingedSpace.openModuleSections X.toRingedSpace A).mapHomologicalComplex
+            (ComplexShape.up ℕ)).obj I.cocomplex) e)) q ≫
+      Hom.app (I.isoRightDerivedObj (pushforward f) q).inv V := by
+  rfl
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem topBaseChangeAdjoint_eq {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S)
+    (F : X.Modules) (q : ℕ)
+    (hC : ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)).IsLE (q : ℤ)) :
+    topBaseChangeAdjoint f g F q hC =
+      (schemeSingleCohomologyComparison f F q).inv ≫
+      (tensorPullbackSectionAdjunction g).homEquiv _ _
+        (topEdgePullbackInverse g (q : ℤ)
+          ((schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
+            (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)) hC ≫
+          (DerivedCategory.homologyFunctor
+            (SheafOfModules.{u} (moduleRings T.toRingedSpace)) (q : ℤ)).map
+              (topBaseChangeDelta f g F)) ≫
+      (pushforward g).map (schemeSingleCohomologyComparison (pullback.fst g f)
+        ((tensorPullback (pullback.snd g f)).obj F) q).hom := by
+  delta schemeSingleCohomologyComparison
+  rfl
+
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+private theorem conjugate_comp {D : Type*} [Category D]
+    {A B C E H : D} (a : A ⟶ B) (b : E ⟶ H)
+    {m : B ⟶ E} {n : B ⟶ C} {p : C ⟶ E} (h : m = n ≫ p) :
+    a ≫ m ≫ b = a ≫ n ≫ p ≫ b := by
+  rw [h, Category.assoc]
+
+omit [∀ Y : Scheme.{u},
+  HasDerivedCategory.{w} (SheafOfModules.{u} (moduleRings Y.toRingedSpace))] in
+private theorem transport_class_equation {D : Type*} [Category D]
+    {A B C E : D} {s s' : A ⟶ B} {a a' : B ⟶ E}
+    {t t' : C ⟶ E} {m m' : A ⟶ C}
+    (hs : s = s') (ha : a = a') (ht : t = t') (hm : m = m')
+    (h : s' ≫ a' = m' ≫ t') : s ≫ a = m ≫ t := by
+  rw [hs, ha, ht, hm]
+  exact h
+
+attribute [local irreducible] topBaseChangeClass topBaseChangeRestrictedUnit
+  topBaseChangeAdjoint derivedSquareUnitMap derivedSquareRightComparison
+  schemeSingleCohomologyComparison
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- On every open, the ordinary adjoint of top derived module base change carries the
 canonical cocycle class to the cocycle class of pullback along the restricted ordinary
 unit. The resolution parameters merely express the specified θ maps and range over all
@@ -186,6 +286,66 @@ theorem top_base_change_presheaf {X S T : Scheme.{u}} (f : X ⟶ S) (g : T ⟶ S
       topBaseChangeClass (pullback.fst g f) ((tensorPullback (pullback.snd g f)).obj F)
         J (g ⁻¹ᵁ V) ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V))
         (flatBaseChangeOpenEquality f g V) R' q := by
-  sorry
+  dsimp only [Scheme.Modules, Scheme.ringCatSheaf] at *
+  let C := (schemeDerivedDirectImage f).obj ((DerivedCategory.singleFunctor
+    (SheafOfModules.{u} (moduleRings X.toRingedSpace)) 0).obj F)
+  let G := (tensorPullback (pullback.snd g f)).obj F
+  let K := (schemeDerivedDirectImage (pullback.fst g f)).obj
+    ((DerivedCategory.singleFunctor
+      (SheafOfModules.{u} (moduleRings (pullback g f).toRingedSpace)) 0).obj G)
+  have hK : K.IsGE 0 := by
+    dsimp only [K, schemeDerivedDirectImage, RingedSpace.derivedModuleDirectImage]
+    exact Functor.isGE_rightDerivedFunctor_obj_singleFunctor
+      (RingedSpace.moduleDirectImage (pullback.fst g f).toLRSHom.toShHom) G
+  have hedge :=
+    (@derivedAdjunction_topEdge.{u, w} inferInstance T S g (q : ℤ) C hC K ⟨0, hK⟩).exists
+  let e := Classical.choose hedge
+  have he := (Classical.choose_spec hedge).1
+  have ha := (Classical.choose_spec hedge).2
+  have hd : (@pinnedDerivedAdjunction.{u, w} _
+      (fun {_ _} v ↦ canonicalTensorPullbackAdditive.{u, w} v)
+      _ _ g).homEquiv C K (topBaseChangeDelta f g F) =
+      derivedSquareUnitMap f (pullback.fst g f) g (pullback.snd g f)
+        pullback.condition.symm F G
+        ((tensorPullbackSectionAdjunction (pullback.snd g f)).unit.app F) := by
+    unfold topBaseChangeDelta
+    exact (derivedModuleBaseChange_transpose f (pullback.fst g f) g
+      (pullback.snd g f) pullback.condition.symm F).trans
+        (congrArg (fun adj : tensorPullback (pullback.snd g f) ⊣
+            pushforward (pullback.snd g f) ↦
+          derivedSquareUnitMap f (pullback.fst g f) g (pullback.snd g f)
+            pullback.condition.symm F G (adj.unit.app F))
+          (normalized_tensorAdjunction (pullback.snd g f)))
+  have ht := (congrArg (fun adj : tensorPullback g ⊣ pushforward g ↦
+      adj.homEquiv _ _
+        (topEdgePullbackInverse g (q : ℤ) C hC ≫
+          (DerivedCategory.homologyFunctor
+            (SheafOfModules.{u} (moduleRings T.toRingedSpace)) (q : ℤ)).map
+              (topBaseChangeDelta f g F))) (normalized_tensorAdjunction g)).symm.trans
+                (ha (topBaseChangeDelta f g F))
+  have ht' := ht.trans (congrArg (fun z ↦
+    (DerivedCategory.homologyFunctor
+      (SheafOfModules.{u} (moduleRings S.toRingedSpace)) (q : ℤ)).map z ≫ e) hd)
+  have hlocal := @derivedSquareUnit_localClasses.{u, w} inferInstance
+    X S (pullback g f) T f (pullback.fst g f) g
+    (pullback.snd g f) pullback.condition.symm F G
+    ((tensorPullbackSectionAdjunction (pullback.snd g f)).unit.app F)
+    q e he V I J R R'
+  have hadj := conjugate_comp
+    (schemeSingleCohomologyComparison f F q).inv
+    ((pushforward g).map (schemeSingleCohomologyComparison (pullback.fst g f) G q).hom) ht'
+  have hadj' := (topBaseChangeAdjoint_eq f g F q hC).trans hadj
+  have hm := congrArg (fun φ ↦
+    moduleCohomologyFMap ((pullback.snd g f).resLE (f ⁻¹ᵁ V)
+      ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) le_rfl) φ q)
+      (restrictedDirectImageMap_unit (pullback.snd g f) F (f ⁻¹ᵁ V))
+  set_option backward.isDefEq.respectTransparency false in
+  set_option backward.isDefEq.respectTransparency.types false in
+  exact transport_class_equation (D := AddCommGrpCat.{u})
+    (topBaseChangeClass_source f F I V R q)
+    (congrArg (fun z ↦ Hom.app z V) hadj')
+    (topBaseChangeClass_eq (pullback.fst g f) G J (g ⁻¹ᵁ V)
+      ((pullback.snd g f) ⁻¹ᵁ (f ⁻¹ᵁ V)) (flatBaseChangeOpenEquality f g V) R' q)
+    hm.symm hlocal
 
 end AlgebraicGeometry
