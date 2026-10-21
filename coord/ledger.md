@@ -22322,3 +22322,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:47 L: merged deliver/Q59/lem-pur-finite-product-field-coefficient-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 11:49 L: merged deliver/NN/lem-pc-finite-dimensional-trace-exact (stage 2; reviewer PASS; parallel immutable checks)
 - 11:50 L: returned deliver/NS/lem-pur-normalized-operation-system-models (reviewer RETURN: L: independent stage-2 immutable head fc0bf4aba50d: H2 / theorem-stmt_dep rule: the delivery added theorem node lem-pur-)
+- 11:51 L: returned deliver/Q90/lem-weil-point-automorphism-transport-scalar-extension (reviewer RETURN: L: independent stage-2 immutable head ea11339c2afe: H13: the delivery rebinds Q57's landed record of lem-weil-point-auto)
