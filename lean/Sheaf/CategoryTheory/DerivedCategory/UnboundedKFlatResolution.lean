@@ -10,7 +10,6 @@ public import Mathlib.CategoryTheory.Abelian.GrothendieckAxioms.Basic
 public import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.Basic
 
 import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
-import Sheaf.Algebra.Homology.SubcategoryTruncationResolutionSystem
 
 /-!
 # Unbounded K-flat replacements from functorial flat covers
@@ -47,40 +46,24 @@ is equivalent to its countable small shrink, and colimit preservation is invaria
 under this equivalence. The category structure on `ℤ` is its usual order by `≤`.
 
 Proof:
-1. The isomorphism-stable class of two-sided flat objects contains every zero object,
-   since additive tensor functors preserve zero, and is closed under finite biproducts:
-   tensoring with a biproduct is a biproduct of exact tensor functors. Kernels and
-   cokernels of the resulting block-diagonal maps are computed componentwise.
-   The components of `ε` give epimorphic covers by objects of this class.
-2. Apply `lem-sfb-subcategory-truncation-resolution-system` to this class and `K`.
-   For each integer `n ≥ 1`, obtain a bounded-above flat-term complex `Eₙ`, a
-   quasi-isomorphism `eₙ : Eₙ ⟶ τ≤n K`, and transition maps for which the augmentation
-   squares commute as equalities of complex morphisms, not only up to homotopy.
-3. Extend the two diagrams by zero for `n < 1`, and form their termwise ordered-`ℤ`
-   colimits. The compatible differentials induce a square-zero differential on
-   `Q = colim Eₙ`, by the colimit universal property. In each degree `i`, the good
-   truncation diagram is constantly `K.X i` with identity transitions once
-   `n > max i 0`. Its augmentation is therefore a colimit cocone, naturally in degree.
-   This identifies its colimit with `K` and induces the complex morphism `q : Q ⟶ K`.
-4. Exactness of ordered-`ℤ` colimits applied to the short exact sequences defining
-   cycles, boundaries and their quotient identifies cohomology of a colimit complex
-   with the colimit of its cohomology, naturally in complex maps. Each `eₙ` is a
-   quasi-isomorphism, including the added zero stages, so every cohomology map of
-   `q` is invertible. Thus `q` is a quasi-isomorphism.
-5. By `lem-sfb-bounded-above-flat-kflat`, each positive stage `Eₙ` is K-flat.
-   The zero stages are K-flat since tensoring with the zero complex gives zero.
-6. For a quasi-isomorphism `s : L ⟶ M`, preservation of ordered-`ℤ` colimits by
-   tensoring and interchange with the countable total coproduct identify
-   `Q ⊗ L` with `colim (Eₙ ⊗ L)` and `L ⊗ Q` with `colim (L ⊗ Eₙ)`.
-   In degree `i`, maps from either description are families of maps from
-   `Eₙ.X a ⊗ L.X b`, or respectively `L.X a ⊗ Eₙ.X b`, with `a + b = i`,
-   compatible in `n`. The two components of the differential are respectively
-   `d_E ⊗ 1` and `(-1)^a (1 ⊗ d_L)`, or `d_L ⊗ 1` and `(-1)^a (1 ⊗ d_E)`;
-   hence these identifications commute with differentials and the maps induced by `s`.
-   The same identifications hold with `M` in place of `L`. Stagewise K-flatness
-   makes both tensor maps quasi-isomorphisms, and the cohomology calculation in
-   step 4 makes their colimits quasi-isomorphisms. Thus both tensor maps for `Q`
-   preserve every quasi-isomorphism, which is `Q.IsKFlatForTotalTensor`. -/
+1. Countable coproducts supply the graded binary total tensors. Their preservation
+   by both tensor functors supplies the triple and quadruple comparison instances,
+   since the indexing sets are subtypes of finite products of integers. Thus the
+   monoidal tensor on cochain complexes is available; its two-sided K-flat predicate
+   is definitionally `IsKFlatForTotalTensor`.
+2. Lift `P` to the full subcategory of flat objects and use `ε` as the augmentation
+   of a `LeftResolution`. Flat objects are closed under finite biproducts and retracts.
+   Apply `LeftResolution.reduced` to construct a flat resolution whose covering
+   functor preserves zero morphisms, without assuming that `P` itself does so.
+3. Use the source library's `resolutionFunctor` and `resolutionNatTrans` on `K`.
+   They resolve bounded-above truncations by totalizing the termwise resolutions,
+   then take the ordered-integer colimit. Exactness of this colimit makes the
+   augmentation a quasi-isomorphism (`quasiIso_resolutionNatTrans_app`).
+4. The bounded-above flat stages are K-flat by
+   `lem-sfb-bounded-above-flat-kflat`. Exact integer colimits preserve K-flatness
+   because both tensor functors preserve them. The source theorem
+   `LeftResolution.kFlat_resolutionFunctor_obj` applies these facts to the constructed
+   resolution. Its K-flatness and the augmentation give the required pair. -/
 theorem exists_quasiIso_isKFlatForTotalTensor_of_exact_int_colimits
     {C : Type u} [Category.{v} C] [Abelian C]
     [MonoidalCategory C] [MonoidalPreadditive C]
@@ -94,6 +77,24 @@ theorem exists_quasiIso_isKFlatForTotalTensor_of_exact_int_colimits
     (P : C ⥤ C) (hP : ∀ X : C, ObjectProperty.flat (P.obj X))
     (ε : P ⟶ 𝟭 C) [∀ X : C, Epi (ε.app X)] (K : CochainComplex C ℤ) :
     ∃ (Q : CochainComplex C ℤ) (q : Q ⟶ K), Q.IsKFlatForTotalTensor ∧ QuasiIso q := by
-  sorry
+  have (X₁ X₂ X₃ X₄ : GradedObject ℤ C) :
+      GradedObject.HasTensor₄ObjExt X₁ X₂ X₃ X₄ := by
+    intro i j
+    infer_instance
+  have (X₁ X₂ X₃ : GradedObject ℤ C) :
+      GradedObject.HasGoodTensor₁₂Tensor X₁ X₂ X₃ := by
+    intro i j
+    infer_instance
+  have (X₁ X₂ X₃ : GradedObject ℤ C) :
+      GradedObject.HasGoodTensorTensor₂₃ X₁ X₂ X₃ := by
+    intro i j
+    infer_instance
+  let Λ : Abelian.LeftResolution (ObjectProperty.flat.ι : _ ⥤ C) :=
+    { F := ObjectProperty.lift _ P hP
+      π := ε }
+  let Γ := Λ.reduced
+  refine ⟨Γ.resolutionFunctor.obj K, Γ.resolutionNatTrans.app K, ?_, ?_⟩
+  · exact Γ.kFlat_resolutionFunctor_obj ObjectProperty.flat.essImage_ι_le K
+  · infer_instance
 
 end CochainComplex
