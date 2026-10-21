@@ -22868,3 +22868,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:58 L: merged deliver/ND/lem-coef-enriched-sequence-projection-formula (stage 2; reviewer PASS; parallel immutable checks)
 - 15:00 L: returned deliver/N5/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: Returned for the route-pivot drop rule, plus C1. Steps 5 and 6 cite two nodes dropped on 2026-10-19 (clones/side-live/co)
 - 15:01 L: merged deliver/NZ/lem-sfb-derived-cech-image-totalization (reviewer PASS; first push; new nodes: 0)
+- 15:02 L: returned deliver/N6/lem-sfb-partial-kummer-boundary-unit-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-partial-kummer-boundary-unit-model: cited node)
