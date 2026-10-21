@@ -12,9 +12,74 @@
   "lem-weil-pbc-commshift-nattrans-comp-whisker",
   "lem-weil-pbc-adjunction-shift-compatibility-unique"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix an integer $n$ and $P\\in\\mathcal C$; every comparison below is for this $n$. Use the composite comparison convention of [lem-weil-pbc-commshift-nattrans-comp-whisker]. Expand $h_{P[n]}$ and $d_P$. Naturality of $\\beta$ at $a_P:L(P[n])\\to (LP)[n]$, the assumed shift equation for $\\beta$ at $LP$, the unprimed unit equation, and naturality of $c$ at $\\eta_P$ give, in this order,\n$$\\begin{aligned}\nb'_B R'(d_P)h_{P[n]}\n&=b'_{tLP}R'(e_{LP})R'(t(a_P))\\beta_{L(P[n])}r(\\eta_{P[n]})\\\\\n&=b'_{tLP}R'(e_{LP})\\beta_{(LP)[n]}r(R(a_P))r(\\eta_{P[n]})\\\\\n&=\\beta_{LP}[n]c_{RLP}r(b_{LP})r(R(a_P))r(\\eta_{P[n]})\\\\\n&=\\beta_{LP}[n]c_{RLP}r(\\eta_P[n])\\\\\n&=\\beta_{LP}[n](r(\\eta_P))[n]c_P=h_P[n]c_P.\n\\end{aligned}$$\nJuxtaposition denotes composition, with the rightmost map applied first. Every equality here is substitution of a stated hypothesis or the naturality/functor laws, so no additional comparison lemma is being used.",
+   "uses": [
+    "lem-weil-pbc-commshift-nattrans-comp-whisker"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+    "place": "First paragraph, 'closed under shifts'; agent-written mate-square calculation expanding the composite convention"
+   }
+  },
+  {
+   "text": "For the primed adjunction write $\\Phi_{X,Y}(u)=R'(u)\\eta'_X$. The hom-bijection and inverse formulas of [lem-weil-pbc-adjunction-of-natural-bijection], specialized to $F=L'$ and $G=R'$, give $\\Phi^{-1}_{X,Y}(v)=\\varepsilon'_Y L'(v)$. Thus $\\theta_P=\\Phi^{-1}_{rP,B}(h_P)$, so $\\Phi_{rP,B}(\\theta_P)=h_P$; the same holds with $P[n]$ replacing $P$. The hom-bijection is injective for each fixed pair $X,Y$.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint and the following paragraph, equivalence of the three descriptions of adjunct morphisms"
+   }
+  },
+  {
+   "text": "The first map in the statement has source $L'r(P[n])$ and target $B[n]$. Apply the target-naturality equation for the hom-bijection in [lem-weil-pbc-adjunction-of-natural-bijection] with $u=\\theta_{P[n]}$ and postcomposition $d_P:tL(P[n])\\to B[n]$. Step 2 gives\n$$\\Phi_{r(P[n]),B[n]}(d_P\\theta_{P[n]})=R'(d_P)\\Phi_{r(P[n]),tL(P[n])}(\\theta_{P[n]})=R'(d_P)h_{P[n]}.$$\nThis is the first requested adjunct formula.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0037, definition-adjoint: naturality in the target"
+   }
+  },
+  {
+   "text": "Apply clause (i) of [lem-weil-pbc-adjunction-shift-compatibility-unique] to $L'\\dashv R'$ and its given unit-compatible pair $(a',b')$. It gives\n$$\\varepsilon'_{B[n]}=\\varepsilon'_B[n]a'_{R'B}L'(b'_B).$$\nPut $q=(b'_B)^{-1}h_P[n]c_P:r(P[n])\\to R'(B[n])$. By the inverse hom-bijection formula of [lem-weil-pbc-adjunction-of-natural-bijection], the displayed counit equation, cancellation of $L'(b'_B)$ with $L'((b'_B)^{-1})$, and naturality of $a'$ at $h_P:rP\\to R'B$, respectively,\n$$\\begin{aligned}\n\\Phi^{-1}_{r(P[n]),B[n]}(q)\n&=\\varepsilon'_{B[n]}L'((b'_B)^{-1})L'(h_P[n])L'(c_P)\\\\\n&=\\varepsilon'_B[n]a'_{R'B}L'(h_P[n])L'(c_P)\\\\\n&=\\varepsilon'_B[n](L'(h_P))[n]a'_{rP}L'(c_P)\\\\\n&=\\theta_P[n]a'_{rP}L'(c_P).\n\\end{aligned}$$\nApplying $\\Phi$ proves that the adjunct of the second map is exactly $q$, as asserted.",
+   "uses": [
+    "lem-weil-pbc-adjunction-shift-compatibility-unique",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0A8D, lemma-adjoint-is-exact, first paragraph of proof (adjoint shift construction); unit-to-counit compatibility is the cited Mathlib leaf, and the displayed four-category calculation is agent-written"
+   }
+  },
+  {
+   "text": "Postcompose the equality of Step 1 with $(b'_B)^{-1}$. This gives $R'(d_P)h_{P[n]}=(b'_B)^{-1}h_P[n]c_P$. Steps 3 and 4 therefore give equal images under the same bijection $\\Phi_{r(P[n]),B[n]}$. Injectivity from [lem-weil-pbc-adjunction-of-natural-bijection] yields\n$$d_P\\theta_{P[n]}=\\theta_P[n]a'_{rP}L'(c_P).$$\nThe argument applies separately to every integer $n$. It uses inverse maps only for the specified shift isomorphisms; thus it requires no invertibility of $\\beta$ or $\\theta$, no adjoints of $r,t$, and no triangulated structure.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-perfect-projection-formula.proof.md",
+    "place": "First paragraph, 'closed under shifts'; agent-written conclusion by injectivity of the adjunction hom-bijection"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-commshift-nattrans-comp-whisker",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-adjunction-shift-compatibility-unique"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 0A8D, lemma-adjoint-is-exact, adjoint shift construction; explicit mate-square refinement written by NL using the stated Mathlib leaves and Stacks Tag 0037."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -57,10 +122,52 @@
    "results": "{\"t\": \"2026-10-21T05:47:48Z\", \"tool\": \"leanfinder\", \"query\": \"In a square of two adjunctions with shift compatible units, a shift compatible right adjoint comparison has a shift compatible left adjoint mate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit\", \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_left\", \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_right\", \"CategoryTheory.Adjunction.CommShift.compatibilityUnit_unique_right\", \"CategoryTheory.Adjunction.CommShift.CompatibilityUnit\", \"CategoryTheory.Adjunction.CommShift.instComp\", \"CategoryTheory.Adjunction.CommShift.CompatibilityCounit\", \"CategoryTheory.Adjunction.LeftAdjointCommShift.compatibilityUnit_iso\"], \"digest\": \"fb73cc74a512ccbe\"}",
    "date": "2026-10-21",
    "verdict": "no match: Mathlib gives unit/counit compatibility and uniqueness for a single adjunction and the unshifted mateEquiv. It does not state the four-category mate shift equation or the two shifted adjunct formulas."
+  },
+  {
+   "tool": "grep",
+   "query": "mate.*[Cc]ommShift|[Cc]ommShift.*mate|conjugate.*[Cc]ommShift|[Cc]ommShift.*conjugate",
+   "results": "{\"t\": \"2026-10-21T08:46:23Z\", \"tool\": \"grep\", \"query\": \"mate.*[Cc]ommShift|[Cc]ommShift.*mate|conjugate.*[Cc]ommShift|[Cc]ommShift.*conjugate\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits describe one adjunction or assume an existing CommShift natural transformation; none supplies this four-category mate equation together with both specified adjunct formulas. Read Mathlib/CategoryTheory/Shift/Adjunction.lean and Adjunction/Basic.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mateEquiv\", \"shift\"",
+   "results": "{\"t\": \"2026-10-21T08:46:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"mateEquiv\\\", \\\"shift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits describe one adjunction or assume an existing CommShift natural transformation; none supplies this four-category mate equation together with both specified adjunct formulas. Read Mathlib/CategoryTheory/Shift/Adjunction.lean and Adjunction/Basic.lean."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"homEquiv\", \"commShift\"",
+   "results": "{\"t\": \"2026-10-21T08:46:24Z\", \"tool\": \"loogle\", \"query\": \"\\\"homEquiv\\\", \\\"commShift\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits describe one adjunction or assume an existing CommShift natural transformation; none supplies this four-category mate equation together with both specified adjunct formulas. Read Mathlib/CategoryTheory/Shift/Adjunction.lean and Adjunction/Basic.lean."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural transformation mate in an adjunction square is compatible with shift",
+   "results": "{\"t\": \"2026-10-21T08:46:24Z\", \"tool\": \"leansearch\", \"query\": \"A natural transformation mate in an adjunction square is compatible with shift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.NatTrans.CommShiftCore.mk\", \"CategoryTheory.NatTrans.CommShiftCore.shift_comm\", \"CategoryTheory.NatTrans.shift_comm\", \"CategoryTheory.NatTrans.CommShiftCore.shift_app_comm\", \"CategoryTheory.NatTrans.CommShiftCore.app_shift\", \"CategoryTheory.NatTrans.CommShiftCore.shift_app\", \"CategoryTheory.NatTrans.shift_app\", \"CategoryTheory.NatTrans.CommShiftCore\"], \"digest\": \"ef3b958ecb0c7227\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits describe one adjunction or assume an existing CommShift natural transformation; none supplies this four-category mate equation together with both specified adjunct formulas. Read Mathlib/CategoryTheory/Shift/Adjunction.lean and Adjunction/Basic.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A mate in a square of adjunctions between categories with integer shifts commutes with shift when the right comparison and units commute with shift",
+   "results": "{\"t\": \"2026-10-21T08:46:25Z\", \"tool\": \"leanfinder\", \"query\": \"A mate in a square of adjunctions between categories with integer shifts commutes with shift when the right comparison and units commute with shift\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.CommShift.compatibilityUnit_right\", \"CategoryTheory.Adjunction.CommShift.compatibilityCounit_of_compatibilityUnit\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso'\", \"CategoryTheory.Adjunction.CommShift\", \"CategoryTheory.Adjunction.LeftAdjointCommShift.iso'\", \"CategoryTheory.Adjunction.CommShift.CompatibilityUnit\", \"CategoryTheory.Adjunction.CommShift.mk'\", \"CategoryTheory.Adjunction.LeftAdjointCommShift.iso_hom_app_assoc\"], \"digest\": \"1601bdd867b4338b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits describe one adjunction or assume an existing CommShift natural transformation; none supplies this four-category mate equation together with both specified adjunct formulas. Read Mathlib/CategoryTheory/Shift/Adjunction.lean and Adjunction/Basic.lean."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Adjunction hom equivalence transports a shifted morphism to the inverse right adjoint shift composed with the shifted adjunct",
+   "results": "{\"t\": \"2026-10-21T08:46:26Z\", \"tool\": \"leanfinder\", \"query\": \"Adjunction hom equivalence transports a shifted morphism to the inverse right adjoint shift composed with the shifted adjunct\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.RightAdjointCommShift.iso'\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso_hom_app\", \"CategoryTheory.Adjunction.RightAdjointCommShift.iso_hom_app_assoc\", \"CategoryTheory.Adjunction.LeftAdjointCommShift.iso'\", \"CategoryTheory.Adjunction.LeftAdjointCommShift.iso_hom_app_assoc\", \"CategoryTheory.Adjunction.LeftAdjointCommShift.iso_hom_app\", \"CategoryTheory.Adjunction.LeftAdjointCommShift.iso\"], \"digest\": \"8c41a2d07f69dc25\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: hits describe one adjunction or assume an existing CommShift natural transformation; none supplies this four-category mate equation together with both specified adjunct formulas. Read Mathlib/CategoryTheory/Shift/Adjunction.lean and Adjunction/Basic.lean."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-ringed-slice-comparisons-shift",
@@ -80,5 +187,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-adjunction-square-shift-mate",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement and supplied five explicit steps: expand the h shift square; identify the primed hom-bijection; compute the first adjunct by target naturality; use unit-to-counit compatibility and compute the inverse adjunct of the second map; cancel the right shift and use injectivity. All dependencies are three existing Mathlib leaves; no new nodes. Checked sources, types, edge cases, duplicate candidates and project declarations.",
+  "blueprint": "lemma-weil-pbc-perfect-projection-formula.proof.md, first paragraph 'closed under shifts': the comparison shift square passes through the ringed-slice adjunction units and counit, following the item's existing from.place and via chain."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NL-addf9ee23",
+  "group": "NL",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-addf9ee23 (reviewer sub-agent of L); spot-checked: I read and recomputed all five steps of the item's proof, and they are correct. This is a stage-1 split with no new nodes. The statement, source, stmt_deps and blueprint were kept, and there is no re-split repair note for this item. Step 1: I recomputed the h-square. It uses naturality of beta at a_P, the beta shift equation at LP, r applied to the unprimed unit equation (written in the composite convention of lem-weil-pbc-commshift-nattrans-comp-whisker), and naturality of c at eta_P. Steps 2 and 3: the hom-bijection formulas Phi(u)=R'(u)eta' and Phi^{-1}(v)=eps'L'(v) from lem-weil-pbc-adjunction-of-natural-bijection, with target naturality, give the first adjunct R'(d)h_{P[n]}. Step 4: clause (i) of lem-weil-pbc-adjunction-shift-compatibility-unique (unit compatibility implies counit compatibility) gives eps'_{B[n]}=eps'_B[n]a'_{R'B}L'(b'_B). Its hypotheses are exactly the primed unit equation. After cancelling b', naturality of a' at h_P gives theta_P[n]a'L'(c_P). The map q is well typed. Step 5: injectivity concludes; only the shift isomorphisms are inverted, never beta or theta. proof_deps equals the union of uses. Edge cases: with r=t=Id and beta=id the equation reduces to a_P=a_P by the triangle identity. With trivial shifts and a scalar beta (including 0) every equation holds. Sources: Stacks derived.tex 0A8D (line 2290) contains the adjoint shift construction, and the four-category refinement is correctly marked agent-written; Stacks categories.tex 0037 (line 3344) gives the adjunction bijection; the blueprint main-20261015 perfect-projection-formula proof, first paragraph 'closed under shifts', matches from.place. Mathlib Shift/ has no mate/conjugate CommShift lemma, so the 'no match' verdict is right. The only citer is the parent ringed-slice-comparisons-shift; its Step 3 uses the statement as stated, and the item is not a restated clause of that parent. No fixes."
  }
 }
