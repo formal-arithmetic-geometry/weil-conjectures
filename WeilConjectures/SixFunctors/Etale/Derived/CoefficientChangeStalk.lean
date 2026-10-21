@@ -174,13 +174,13 @@ lemma isDerivedBaseChange_rightDerivedGlobalSections_map_comp
     ((rightDerivedGlobalSectionsIsoOfIsSepClosed Λ' (k := k)).app M').symm
 
 /-- Blueprint `thm-trf-finite-coefficient-map` (subsection `sk-p-trace-coeff`), the pullback
-isomorphism at a geometric point: for a surjection `ρ : Λ →+* Λ'` of finite rings whose exponent
+isomorphism at a geometric point: for a morphism `ρ : Λ →+* Λ'` of finite rings whose exponent
 is invertible on `k`, the canonical coefficient comparison
 `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` of geometric stalks
 (`AlgebraicGeometry.Etale.geometricStalkRestrictScalarsIso`) is an isomorphism for every
 `K ∈ Dᵇctf(X, Λ)`. -/
 theorem isCoefficientChange_geometricStalkRestrictScalarsIso [Finite Λ] [Finite Λ']
-    [HasInvertibleExponent Λ (Spec (.of k))] (_hρ : Function.Surjective ρ) :
+    [HasInvertibleExponent Λ (Spec (.of k))] :
     IsCoefficientChange ρ (geometricStalk Λ x) (geometricStalk Λ' x)
       (geometricStalkRestrictScalarsIso ρ x) := by
   intro K K' η _ hη

@@ -409,20 +409,19 @@ theorem exists_isCoefficientChange_compactlySupportedGlobalSections
 
 /-- Blueprint `thm-trf-finite-coefficient-map` (subsection `sk-p-trace-coeff`), the pullback
 isomorphism at a geometric point: geometric stalks commute with finite-level coefficient
-reduction, compatibly with the stalk transports. For a surjection `ρ : Λ →+* Λ'` of finite
+reduction, compatibly with the stalk transports. For a morphism `ρ : Λ →+* Λ'` of finite
 coefficient rings whose exponent is invertible on `k` and a geometric point `x̄ : Spec k ⟶ X`,
 the geometric stalk commutes with restriction of scalars along `ρ` through a coefficient
 comparison `β` for which `K_x̄ ⊗ᴸ_Λ Λ' ⟶ (K ⊗ᴸ_Λ Λ')_x̄` is an isomorphism for every
 `K ∈ Dᵇctf(X, Λ)`, and `β` is compatible with the stalk transport at `x̄` along every pair of
 automorphisms fixing `x̄` (`AlgebraicGeometry.Etale.IsStalkPullbackCompatible`). -/
 theorem exists_isCoefficientChange_geometricStalk
-    [HasInvertibleExponent Λ (Spec (.of k))] (hρ : Function.Surjective ρ)
-    (x : Spec (.of k) ⟶ X) :
+    [HasInvertibleExponent Λ (Spec (.of k))] (x : Spec (.of k) ⟶ X) :
     ∃ β, IsCoefficientChange ρ (geometricStalk Λ x) (geometricStalk Λ' x) β ∧
       ∀ (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (hx : h ≫ x = x ≫ g) [IsIso h],
         IsStalkPullbackCompatible ρ β hx :=
   ⟨geometricStalkRestrictScalarsIso ρ x,
-    isCoefficientChange_geometricStalkRestrictScalarsIso ρ x hρ,
+    isCoefficientChange_geometricStalkRestrictScalarsIso ρ x,
     fun _ _ hx _ ↦ isStalkPullbackCompatible_geometricStalkRestrictScalarsIso ρ x hx⟩
 
 namespace AdicSystem
@@ -466,7 +465,8 @@ theorem isPerfect_and_exists_isDerivedBaseChange (n : ℕ) :
     ?_, fun x ↦ ⟨isPerfect_geometricStalk _ x _ (S.boundedConstructibleFiniteTor n), ?_⟩⟩
   · obtain ⟨α, hα, -⟩ := exists_isCoefficientChange_compactlySupportedGlobalSections _ aX hsurj
     exact ⟨α.app _, hα _ (S.boundedConstructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
-  · obtain ⟨β, hβ, -⟩ := exists_isCoefficientChange_geometricStalk _ hsurj x
+  · obtain ⟨β, hβ, -⟩ := exists_isCoefficientChange_geometricStalk
+      (Ideal.Quotient.factor (Ideal.pow_le_pow_right (I := I) n.le_succ)) x
     exact ⟨β.app _, hβ _ (S.boundedConstructibleFiniteTor (n + 1)) (S.isDerivedBaseChange n)⟩
 
 include aX in
@@ -497,7 +497,7 @@ lemma exists_stalkTower (x : Spec (.of k) ⟶ X) :
       ∀ (n : ℕ) (g : X ⟶ X) (h : Spec (.of k) ⟶ Spec (.of k)) (hx : h ≫ x = x ≫ g)
         [IsIso h], IsStalkPullbackCompatible (I.powSuccFactor n) (β n) hx := by
   choose β hβ hβ' using fun n : ℕ ↦ exists_isCoefficientChange_geometricStalk
-    (I.powSuccFactor n) (Ideal.Quotient.factor_surjective _) x
+    (I.powSuccFactor n) x
   exact ⟨β, hβ, hβ'⟩
 
 end AdicSystem

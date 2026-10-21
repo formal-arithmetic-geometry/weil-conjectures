@@ -31,11 +31,11 @@ the coefficient-change statements
 
 ## Remaining inputs
 
-- `isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso`
-  and `isCoefficientChange_geometricStalkRestrictScalarsIso`: the
-  canonical comparisons are isomorphisms on derived base changes of `Dᵇctf` complexes (blueprint
-  `lem-fix-compact-support-coefficient-change` and `thm-trf-finite-coefficient-map`, nodes of
-  the subsections `sk-def-sfb-coefficient-comparisons` and `sk-p-trace-coeff`).
+- `isCoefficientChange_compactlySupportedGlobalSectionsRestrictScalarsIso`: the canonical
+  comparison is an isomorphism on derived base changes of `Dᵇctf` complexes (blueprint
+  `lem-fix-compact-support-coefficient-change`, subsection `sk-def-sfb-coefficient-comparisons`).
+  The geometric-stalk analogue is proved in
+  `WeilConjectures.SixFunctors.Etale.Derived.CoefficientChangeStalk`.
 - `derivedRestrictScalarsCompRightDerivedLowerShriekIso_baseChangeMap`:
   the compatibility of the comparisons with the compact-support exchange map (the "compatible with
   pullback" clause of `lem-fix-compact-support-coefficient-change`). This is a coherence statement
