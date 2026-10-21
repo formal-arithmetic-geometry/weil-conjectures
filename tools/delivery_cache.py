@@ -45,16 +45,20 @@ def _load(root, families):
         except (OSError, ValueError, KeyError):
             pass
         return None
+    import time as _time
+    _t = [_time.time()]; _how = "exact"
     data = read()
     if data is None:
-        data = _recent(root, directory, signature, suffix, commit, families)
+        _how = "recent"; data = _recent(root, directory, signature, suffix, commit, families)
+    _t.append(_time.time())
     if data is None:
         # One builder for all commits/configurations, avoiding a cold-cache herd.
         with (directory / 'library-builder.lock').open('a') as lock:
             fcntl.flock(lock, fcntl.LOCK_EX)
-            data = read()
+            _t.append(_time.time())
+            _how = "exact-after-lock"; data = read()
             if data is None:
-                data = build(root, commit, families, signature, directory)
+                _how = "build"; data = build(root, commit, families, signature, directory)
                 fd, tmp = tempfile.mkstemp(prefix='.library-', dir=directory)
                 try:
                     with os.fdopen(fd, 'w') as out:
@@ -66,6 +70,14 @@ def _load(root, families):
                     pathlib.Path(tmp).unlink(missing_ok=True)
     if data['commit'] == commit and git(root, 'rev-parse', '--verify', 'origin/sheaf-dag').decode().strip() != commit:
         return load(root, families)
+    try:
+        _t.append(_time.time())
+        with (directory / 'load.log').open('a') as _lf:
+            _lf.write(f"{_time.strftime('%F %T')} pid={os.getpid()} {_how} fam={','.join(families)} sig={signature[:6]} "
+                      f"commit={commit[:9]} lookup={_t[1]-_t[0]:.1f}s lockwait={(_t[2]-_t[1]) if len(_t) > 3 else 0:.1f}s "
+                      f"build={(_t[-1]-_t[2]) if len(_t) > 3 else 0:.1f}s total={_t[-1]-_t[0]:.1f}s\n")
+    except Exception:
+        pass
     _MEM[key] = data
     return data
 
