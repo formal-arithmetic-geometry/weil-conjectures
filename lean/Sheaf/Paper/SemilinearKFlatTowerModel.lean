@@ -11,10 +11,9 @@ public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 public import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.CategoryTheory.DiagramSiteTopology
-import Sheaf.CategoryTheory.RingedToposMorphism
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Paper.KFlatRingedToposPullback
+import all Sheaf.Paper.SmoothPurityCoefficientTowersAbelian
+import Sheaf.CategoryTheory.SystemEvaluationKFlat
+import all Sheaf.Paper.KFlatRingedToposPullback
 
 /-!
 # Compatible K-flat representatives of semilinear coefficient towers
@@ -35,6 +34,7 @@ from a mere existence theorem.
 @[expose] public noncomputable section
 
 set_option autoImplicit false
+set_option linter.unusedVariables false
 set_option synthInstance.maxSize 2048
 set_option backward.isDefEq.respectTransparency true
 set_option backward.isDefEq.respectTransparency.types true
@@ -44,6 +44,163 @@ attribute [local instance high] HasDerivedCategory.standard
 universe t u
 
 open CategoryTheory CategoryTheory.Limits Opposite SheafOfModules
+
+section
+universe a₁ a₂ a₃ a₄
+variable {A : Type a₁} {B : Type a₂} {C : Type a₃} {D : Type a₄}
+  [Category A] [Category B] [Category C] [Category D]
+private theorem liftSquare (U : A ⥤ B) (V : B ⥤ D) (E : A ⥤ C) (R : C ⥤ D)
+    (α : U ⋙ V ≅ E ⋙ R) {X Y : A} (a : X ⟶ Y)
+    {UX : B} (i : U.obj X ≅ UX) {EX : C} (j : E.obj X ≅ EX) :
+    V.map i.hom ≫ V.map (i.inv ≫ U.map a) ≫ α.hom.app Y =
+      α.hom.app X ≫ R.map (j.hom ≫ (j.inv ≫ E.map a)) := by
+  simp only [Iso.hom_inv_id_assoc]
+  rw [← V.map_comp_assoc, i.hom_inv_id_assoc]
+  exact α.hom.naturality a
+
+end
+
+namespace SheafOfModules
+
+section
+universe c v w
+variable {X : Type c} [Category.{v} X] {J : GrothendieckTopology X}
+  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
+  [EssentiallySmall.{w} X]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Sectionwise pure-tensor equation, expressed before specializing the coefficient site.
+Source: Stacks 03D7 (blueprint: lem-sp-semilinear-kflat-tower-model). -/
+def systemTensorSectionFormula {R S : Sheaf J CommRingCat.{w}} {φ : R ⟶ S}
+    (A : SystemScalarModel φ)
+    (P : ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R))
+    (M : ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J S))
+    (f : A.model.E.obj P ⟶ M)
+    (q : P ⟶ (restrictScalars.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)).obj M) : Prop :=
+  ∀ (V : Xᵒᵖ) (c : S.obj.obj V) (x : P.val.obj V),
+    f.val.app V (systemModelTmul A.model P V c x) =
+      c • (show M.val.obj V from q.val.app V x)
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem tensorSectionFormula_of_transpose
+    {R S : Sheaf J CommRingCat.{w}} {φ : R ⟶ S} (A : SystemScalarModel φ)
+    (P : ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J R))
+    (M : ringedSiteModules.{w} (derivedChangeRingIndependentCoefficients J S))
+    (f : A.model.E.obj P ⟶ M)
+    (q : P ⟶ (restrictScalars.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map φ)).obj M)
+    (h : A.ordinaryAdj.homEquiv P M f = q) :
+    systemTensorSectionFormula A P M f q := by
+  intro V c x
+  simpa only [h] using systemScalarModel_transpose_tmul A P M f V c x
+
+end
+end SheafOfModules
+
+namespace SemilinearModelProof
+
+section
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+universe c v w
+variable {X : Type c} [Category.{v} X] {J : GrothendieckTopology X}
+  [J.HasSheafCompose (forget₂ CommRingCat.{w} RingCat.{w})]
+  [J.WEqualsLocallyBijective AddCommGrpCat.{w}] [HasSheafify J AddCommGrpCat.{w}]
+  (B : ℕᵒᵖ ⥤ Sheaf J CommRingCat.{w}) (R : Sheaf J CommRingCat.{w})
+  (rho : ∀ n : ℕ, R ⟶ B.obj (op n))
+  (hrho : ∀ {m n : ℕ} (h : m ≤ n), rho n ≫ B.map (homOfLE h).op = rho m)
+
+private abbrev res (n : ℕ) := restrictScalars.{w}
+  ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).map (rho n))
+
+private def restrictionArrow (M : StrictRingSystem B) {m n : ℕ} (h : m ≤ n) :
+    (res B R rho n).obj (M.level n) ⟶ (res B R rho m).obj (M.level m) where
+  val :=
+    { app V := ModuleCat.ofHom
+        (X := ((res B R rho n).obj (M.level n)).val.obj V)
+        (Y := ((res B R rho m).obj (M.level m)).val.obj V)
+        { toFun := fun x ↦ (M.transition h).val.app V x
+          map_add' := map_add _
+          map_smul' := by
+            intro r x
+            have he := congrArg (fun f ↦ f.hom.app V r) (hrho h)
+            change (B.map (homOfLE h).op).hom.app V ((rho n).hom.app V r) =
+              (rho m).hom.app V r at he
+            have hh := ((M.transition h).val.app V).hom.map_smul
+              ((rho n).hom.app V r) (show (M.level n).val.obj V from x)
+            exact hh.trans (congrArg
+              (fun r' : (B.obj (op m)).obj.obj V ↦
+                r' • (show (M.level m).val.obj V from (M.transition h).val.app V x)) he) }
+      naturality := by
+        intro V W f
+        ext x
+        exact PresheafOfModules.naturality_apply (M.transition h).val f x }
+
+private def restrictionFunctor : StrictRingSystem B ⥤
+    (ℕᵒᵖ ⥤ SheafOfModules.{w}
+      ((sheafCompose J (forget₂ CommRingCat.{w} RingCat.{w})).obj R)) where
+  obj M :=
+    { obj n := (res B R rho n.unop).obj (M.level n.unop)
+      map f := restrictionArrow B R rho (hrho := hrho) M (leOfHom f.unop)
+      map_id n := by
+        ext V x
+        exact M.identity n.unop V x
+      map_comp f g := by
+        ext V x
+        exact M.compose (leOfHom g.unop) (leOfHom f.unop) V x }
+  map f :=
+    { app n := (res B R rho n.unop).map (f.app n.unop)
+      naturality := by
+        intro m n h
+        ext V x
+        exact congrArg (fun a ↦ a.val.app V x) (f.comm (leOfHom h.unop)).symm }
+  map_id M := by
+    ext n V x
+    rfl
+  map_comp f g := by
+    ext n V x
+    rfl
+
+private theorem restrictionFunctor_evaluation (n : ℕ) :
+    restrictionFunctor B R rho hrho ⋙ (CategoryTheory.evaluation ℕᵒᵖ _).obj (op n) =
+      systemEvaluation B n ⋙ res B R rho n := rfl
+
+private theorem restrictionFunctor_limits :
+    PreservesFiniteLimits.{max c w, max c w} (restrictionFunctor B R rho hrho) := by
+  apply preservesFiniteLimits_of_evaluation
+  rintro ⟨n⟩
+  rw [restrictionFunctor_evaluation]
+  exact comp_preservesFiniteLimits _ _
+
+private theorem restrictionFunctor_colimits :
+    PreservesFiniteColimits.{max c w, max c w} (restrictionFunctor B R rho hrho) := by
+  apply preservesFiniteColimits_of_evaluation
+  rintro ⟨n⟩
+  rw [restrictionFunctor_evaluation]
+  exact comp_preservesFiniteColimits _ _
+
+end
+end SemilinearModelProof
+
+
+section
+universe c₁ c₂ c₃
+variable {A : Type c₁} {B : Type c₂} {D : Type c₃}
+  [Category A] [Category B] [Category D]
+private theorem transportReduction {Fn : A ⥤ B} {Fm : A ⥤ D} (T : B ⥤ D)
+    (r : Fn ⋙ T ⟶ Fm) {X Y : A} (a : X ⟶ Y)
+    {M : B} {N : D} (i : Fn.obj X ≅ M) (j : Fm.obj X ≅ N)
+    (v : T.obj M ⟶ N) (hr : r.app X = T.map i.hom ≫ v ≫ j.inv) :
+    T.map (i.inv ≫ Fn.map a) ≫ r.app Y = v ≫ j.inv ≫ Fm.map a := by
+  rw [T.map_comp, Category.assoc]
+  erw [r.naturality a, hr]
+  simp only [← Category.assoc, ← T.map_comp,
+    i.inv_hom_id, T.map_id, Category.id_comp]
+end
 
 namespace AlgebraicGeometry.ProEtale
 
@@ -96,6 +253,20 @@ def spSemilinearChainTransition (D : SpCoefficientTowersAbelian l E T)
       (strictSystemTransition (spCoefficientCommRings l E T) h)) (.up ℤ)).app P
 
 attribute [local irreducible] spSemilinearChainTransition
+
+private theorem chainTransition_f (D : SpCoefficientTowersAbelian l E T)
+    (P : CochainComplex (spCoefficientTowers l E T) ℤ) {m n : ℕ} (h : m ≤ n)
+    (i : ℤ) :
+    letI : HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{max u (t + 1)} :=
+      surjectiveTower_hasSheafify.{t, u} T
+    letI : (Scheme.ProEt.topology T).WEqualsLocallyBijective
+        AddCommGrpCat.{max u (t + 1)} := surjectiveTower_wEqualsLocallyBijective.{t, u} T
+    letI := D.equivalenceAdditive
+    (spSemilinearChainTransition l E T D P h).f i =
+      (D.equivalence.functor.obj (P.X i)).transition h := by
+  unfold spSemilinearChainTransition
+  rfl
+
 
 /-- The specified derived evaluation isomorphisms of one tower representative.
 They use the canonical exact-evaluation factorization and the same tower isomorphism.
@@ -213,6 +384,149 @@ def HasSpSemilinearCompletedLift (D : SpCoefficientTowersAbelian l E T)
             (pi n).app (DerivedCategory.Q.obj UP) ≫ (V.map b.hom).app (op n))
 
 
+section
+set_option allowUnsafeReducibility true in
+attribute [local semireducible] spCoefficientCommRings spCoefficientRings
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem completedProjection_comp {m n : ℕ} (h : m ≤ n) :
+    spSemilinearCompletedProjection l E T n ≫
+      (spCoefficientCommRings l E T).map (homOfLE h).op =
+        spSemilinearCompletedProjection l E T m := by
+  let F := sheafCompose (Scheme.ProEt.topology T)
+    (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})
+  apply F.map_injective
+  rw [F.map_comp]
+  simp only [spSemilinearCompletedProjection]
+  dsimp only [F]
+  rw [Functor.map_preimage, Functor.map_preimage]
+  have hm : F.map ((spCoefficientCommRings l E T).map (homOfLE h).op) =
+      (spCoefficientRings l E T).map (homOfLE h).op := by
+    exact eq_of_heq (Functor.hcongr_hom (coefficientRings_eq l E T) (homOfLE h).op).symm
+  rw [hm, Category.assoc, limit.w]
+
+end
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem completedLift (D : SpCoefficientTowersAbelian l E T)
+    (C : @DerivedCategory (spCoefficientTowers l E T) _ _ D.hasDerived)
+    (P : CochainComplex (spCoefficientTowers l E T) ℤ)
+    (a : (@DerivedCategory.Q (spCoefficientTowers l E T) _ _ D.hasDerived).obj P ≅ C) :
+    HasSpSemilinearCompletedLift l E T D C P a := by
+  let : HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{max u (t + 1)} :=
+    surjectiveTower_hasSheafify.{t, u} T
+  let : (Scheme.ProEt.topology T).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := surjectiveTower_wEqualsLocallyBijective.{t, u} T
+  let := D.hasDerived
+  let := D.equivalenceAdditive
+  let := D.evaluationLimits
+  let := D.evaluationColimits
+  let : ∀ n : ℕ, (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+    fun n ↦ Functor.additive_of_preserves_binary_products
+      (spCoefficientEvaluation l E T D.equivalence n)
+  let : EssentiallySmall.{max u (t + 1)} T.ProEt := essentiallySmallSelf.{u} _
+  let B := spCoefficientCommRings l E T
+  let R := WeilConjectures.completedIntegralCommRingSheafUnrestricted l E T
+  let RM := SheafOfModules.{max u (t + 1)}
+    ((sheafCompose (Scheme.ProEt.topology T)
+      (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)
+  let : HasDerivedCategory.{max u (t + 1) + 1} RM := HasDerivedCategory.standard _
+  let : HasDerivedCategory.{max u (t + 1) + 1} (ℕᵒᵖ ⥤ RM) :=
+    HasDerivedCategory.standard _
+  let rho := spSemilinearCompletedProjection l E T
+  let V := SemilinearModelProof.restrictionFunctor B R rho
+    (fun h ↦ completedProjection_comp l E T h)
+  have : PreservesFiniteLimits V := SemilinearModelProof.restrictionFunctor_limits B R rho
+    (fun h ↦ completedProjection_comp l E T h)
+  have : PreservesFiniteColimits V := SemilinearModelProof.restrictionFunctor_colimits B R rho
+    (fun h ↦ completedProjection_comp l E T h)
+  have : V.Additive := Functor.additive_of_preserves_binary_products _
+  let U := D.equivalence.functor ⋙ V
+  have : PreservesFiniteLimits U := comp_preservesFiniteLimits _ _
+  have : PreservesFiniteColimits U := comp_preservesFiniteColimits _ _
+  have : U.Additive := inferInstance
+  refine ⟨U, inferInstance, inferInstance, inferInstance, fun _ ↦ rfl, ?_, ?_⟩
+  · intro M m n h W
+    rfl
+  · constructor
+    · intro n
+      let Ev := spCoefficientEvaluation l E T D.equivalence
+      let Res := SemilinearModelProof.res B R rho
+      let RM := SheafOfModules.{max u (t + 1)}
+        ((sheafCompose (Scheme.ProEt.topology T)
+          (forget₂ CommRingCat.{max u (t + 1)} RingCat.{max u (t + 1)})).obj R)
+      let evR := fun n : ℕ ↦ (CategoryTheory.evaluation ℕᵒᵖ RM).obj (op n)
+      let cmp := (Functor.mapDerivedCategoryCompIso U (evR n)).symm ≪≫
+        Functor.mapDerivedCategoryNatIso (eqToIso (show U ⋙ evR n =
+          Ev n ⋙ Res n from rfl)) ≪≫ Functor.mapDerivedCategoryCompIso (Ev n) (Res n)
+      have ht := liftSquare U.mapDerivedCategory (evR n).mapDerivedCategory
+        (Ev n).mapDerivedCategory (Res n).mapDerivedCategory cmp a.hom
+        (U.mapDerivedCategoryFactors.app P) ((Ev n).mapDerivedCategoryFactors.app P)
+      convert ht using 1 <;>
+        simp only [spSemilinearEvaluationIso, Iso.trans_hom, Iso.symm_hom,
+          Functor.mapIso_hom, Iso.app_hom, Iso.app_inv] <;> rfl
+    · intro RF eta hRF W epsilon pi n
+      exact (pi n).naturality _
+
+
+
+private theorem kFlatRepresentative (D : SpCoefficientTowersAbelian l E T)
+    (C : @DerivedCategory (spCoefficientTowers l E T) _ _ D.hasDerived) :
+    letI : HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{max u (t + 1)} :=
+      surjectiveTower_hasSheafify.{t, u} T
+    letI : (Scheme.ProEt.topology T).WEqualsLocallyBijective
+        AddCommGrpCat.{max u (t + 1)} := surjectiveTower_wEqualsLocallyBijective.{t, u} T
+    letI := D.hasDerived
+    letI := D.equivalenceAdditive
+    letI := D.evaluationLimits
+    letI := D.evaluationColimits
+    letI : ∀ n : ℕ, (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+      fun n ↦ Functor.additive_of_preserves_binary_products
+        (spCoefficientEvaluation l E T D.equivalence n)
+    letI : EssentiallySmall.{max u (t + 1)} T.ProEt := essentiallySmallSelf.{u} _
+    let B := spCoefficientCommRings l E T
+    let Ev := spCoefficientEvaluation l E T D.equivalence
+    ∃ (P : CochainComplex (spCoefficientTowers l E T) ℤ)
+      (a : DerivedCategory.Q.obj P ≅ C),
+      ∀ n, systemLevelKFlat.{t + 1, t, max u (t + 1)} B n
+        (((Ev n).mapHomologicalComplex (.up ℤ)).obj P) := by
+  let : HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{max u (t + 1)} :=
+    surjectiveTower_hasSheafify.{t, u} T
+  let : (Scheme.ProEt.topology T).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := surjectiveTower_wEqualsLocallyBijective.{t, u} T
+  let := D.hasDerived
+  let := D.equivalenceAdditive
+  let := D.evaluationLimits
+  let := D.evaluationColimits
+  let : ∀ n : ℕ, (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+    fun n ↦ Functor.additive_of_preserves_binary_products
+      (spCoefficientEvaluation l E T D.equivalence n)
+  let : EssentiallySmall.{max u (t + 1)} T.ProEt := essentiallySmallSelf.{u} _
+  let B := spCoefficientCommRings l E T
+  let Ev := spCoefficientEvaluation l E T D.equivalence
+  classical
+  let M := DerivedCategory.Q.objPreimage C
+  let F := D.equivalence.mapHomologicalComplex (.up ℤ)
+  obtain ⟨L, f, hL, hf⟩ := strictRingSystem_kFlatResolution B (F.functor.obj M)
+  let P := F.inverse.obj L
+  let p : P ⟶ M := F.inverse.map f ≫ F.unitIso.inv.app M
+  have : QuasiIso f := hf
+  have : QuasiIso (F.inverse.map f) := by
+    change QuasiIso ((D.equivalence.inverse.mapHomologicalComplex (.up ℤ)).map f)
+    infer_instance
+  have : QuasiIso p := by dsimp only [p]; infer_instance
+  refine ⟨P, asIso (DerivedCategory.Q.map p) ≪≫
+    DerivedCategory.Q.objObjPreimageIso C, ?_⟩
+  intro n
+  let ec := ((systemEvaluation B n).mapHomologicalComplex (.up ℤ)).mapIso
+    (F.counitIso.app L)
+  exact ⟨SheafOfModules.kFlat_iso_independent (B.obj (op n)) ec.symm (hL n).1,
+    fun i ↦ SheafOfModules.flatOnSite_of_iso (B.obj (op n))
+      ((HomologicalComplex.eval _ (.up ℤ) i).mapIso ec).symm ((hL n).2 i)⟩
+
+
 /-- All clauses of the simultaneous model statement, expressed using one strict
 coefficient-tower complex and the original normalized reductions.
 
@@ -259,13 +573,10 @@ def HasSpSemilinearKFlatTowerModel (D : SpCoefficientTowersAbelian l E T)
           (systemRestriction B h).mapDerivedCategory.map (e m).hom =
         (e n).hom ≫ ((systemDerivedTensorAdj D.scalar B h).homEquiv _ _)
           ((D.reduction h).app C)) ∧
-    (∀ {m n : ℕ} (h : m ≤ n) (i : ℤ) (V : T.ProEtᵒᵖ)
-      (c : (B.obj (op m)).obj.obj V) (x : ((Qn n).X i).val.obj V),
-      ((beta h).f i).val.app V
-          (systemModelTmul (D.scalar (B.map (homOfLE h).op)).model
-            ((Qn n).X i) V c x) =
-        (ModuleCat.smul (((Qn m).X i).val.obj V) c).hom
-          (@id (((Qn m).X i).val.obj V) (((q h).f i).val.app V x))) ∧
+    (∀ {m n : ℕ} (h : m ≤ n) (i : ℤ),
+      systemTensorSectionFormula.{t + 1, t, max u (t + 1)}
+        (J := Scheme.ProEt.topology T) (D.scalar (B.map (homOfLE h).op))
+        ((Qn n).X i) ((Qn m).X i) ((beta h).f i) ((q h).f i)) ∧
     (∀ {m n : ℕ} (h : m ≤ n),
       IsIso ((D.scalar (B.map (homOfLE h).op)).model.ε.app (Qn n)) ∧
       (systemDerivedTensor D.scalar B h).map (e n).hom ≫ (D.reduction h).app C =
@@ -274,6 +585,8 @@ def HasSpSemilinearKFlatTowerModel (D : SpCoefficientTowersAbelian l E T)
     HasSpSemilinearCompletedLift l E T D C P a
 
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
 /-- Every derived semilinear coefficient tower has compatible flat-term K-flat
 representatives, a strict completed-ring derived lift with the specified evaluations
 and limit projections, and the original reduction maps on its tensor representatives.
@@ -322,6 +635,76 @@ This also retains all composite transitions, including nonflat coefficient maps.
 theorem sp_semilinear_kflat_tower_model (D : SpCoefficientTowersAbelian l E T)
     (C : @DerivedCategory (spCoefficientTowers l E T) _ _ D.hasDerived) :
     HasSpSemilinearKFlatTowerModel l E T D C := by
-  sorry
+  let : HasSheafify (Scheme.ProEt.topology T) AddCommGrpCat.{max u (t + 1)} :=
+    surjectiveTower_hasSheafify.{t, u} T
+  let : (Scheme.ProEt.topology T).WEqualsLocallyBijective
+      AddCommGrpCat.{max u (t + 1)} := surjectiveTower_wEqualsLocallyBijective.{t, u} T
+  let := D.hasDerived
+  let := D.equivalenceAdditive
+  let := D.evaluationLimits
+  let := D.evaluationColimits
+  let : ∀ n : ℕ, (spCoefficientEvaluation l E T D.equivalence n).Additive :=
+    fun n ↦ Functor.additive_of_preserves_binary_products
+      (spCoefficientEvaluation l E T D.equivalence n)
+  let : EssentiallySmall.{max u (t + 1)} T.ProEt := essentiallySmallSelf.{u} _
+  let B := spCoefficientCommRings l E T
+  let Ev := spCoefficientEvaluation l E T D.equivalence
+  classical
+  have hP := kFlatRepresentative l E T D C
+  let P := hP.choose
+  let a := hP.choose_spec.choose
+  have hflat := hP.choose_spec.choose_spec
+  let en := spSemilinearEvaluationIso l E T D C P a
+  let beta := fun {m n : ℕ} (h : m ≤ n) ↦
+    (NatTrans.mapHomologicalComplex (D.ordinaryReduction h) (.up ℤ)).app P
+  have red {m n : ℕ} (h : m ≤ n) :
+      (systemDerivedTensor D.scalar B h).map (en n).hom ≫ (D.reduction h).app C =
+        (D.scalar (B.map (homOfLE h).op)).model.ε.app
+          (((Ev n).mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map (beta h) ≫ (en m).hom := by
+    have ht := transportReduction (systemDerivedTensor D.scalar B h) (D.reduction h) a.hom
+      ((Ev n).mapDerivedCategoryFactors.app P)
+      ((Ev m).mapDerivedCategoryFactors.app P)
+      ((D.scalar _).model.ε.app _ ≫ DerivedCategory.Q.map (beta h))
+      (by
+        simpa only [Category.assoc, B, Ev, beta, Iso.app_hom, Iso.app_inv]
+          using D.reduction_rep h P)
+    convert ht using 1 <;> simp only [en, spSemilinearEvaluationIso,
+      Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom, Category.assoc,
+      B, Ev, Iso.app_inv]
+  unfold HasSpSemilinearKFlatTowerModel
+  dsimp only
+  refine ⟨P, a, hflat, ?_, ?_, ?_, completedLift l E T D C P a⟩
+  · intro m n h
+    have hb : ((systemTensorAdj D.scalar B h).mapHomologicalComplex (.up ℤ)).homEquiv _ _
+        (beta h) = spSemilinearChainTransition l E T D P h := by
+      apply HomologicalComplex.hom_ext
+      intro i
+      unfold spSemilinearChainTransition
+      change ((systemTensorAdj D.scalar B h).homEquiv _ _
+        ((D.ordinaryReduction h).app (P.X i))) = _
+      rw [D.ordinaryReduction_eq]
+      exact Equiv.apply_symm_apply _ _
+    have hr := (systemDerivedTensorAdj D.scalar B h).homEquiv_naturality_left_square
+      (en n).hom ((D.reduction h).app C)
+      ((D.scalar (B.map (homOfLE h).op)).model.ε.app
+        (((Ev n).mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map (beta h)) (en m).hom (by simpa only [Category.assoc] using red h)
+    have ht := (D.scalar (B.map (homOfLE h).op)).transpose
+      (((Ev n).mapHomologicalComplex (.up ℤ)).obj P)
+      (((Ev m).mapHomologicalComplex (.up ℤ)).obj P) (beta h)
+    dsimp only [systemDerivedTensorAdj] at hr
+    erw [ht, hb] at hr
+    simpa only [Category.assoc] using hr.symm
+  · intro m n h i
+    apply tensorSectionFormula_of_transpose
+    rw [chainTransition_f]
+    change (systemTensorAdj D.scalar B h).homEquiv _ _
+      ((D.ordinaryReduction h).app (P.X i)) = _
+    rw [D.ordinaryReduction_eq]
+    exact Equiv.apply_symm_apply _ _
+  · intro m n h
+    exact ⟨(D.scalar _).model.computes _ (hflat n).1, red h⟩
+
 
 end AlgebraicGeometry.ProEtale
