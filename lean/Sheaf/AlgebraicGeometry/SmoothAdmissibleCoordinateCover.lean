@@ -13,14 +13,7 @@ public import Mathlib.AlgebraicGeometry.Morphisms.FiniteType
 public import Mathlib.AlgebraicGeometry.OpenImmersion
 public import Mathlib.AlgebraicGeometry.Noetherian
 public import Mathlib.AlgebraicGeometry.Morphisms.Separated
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiCompact
-import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
-import Mathlib.AlgebraicGeometry.Morphisms.Affine
-import Mathlib.AlgebraicGeometry.Morphisms.Proper
-import Mathlib.AlgebraicGeometry.Morphisms.Immersion
-import Mathlib.AlgebraicGeometry.AffineScheme
-import Mathlib.RingTheory.RingHom.StandardSmooth
-import Mathlib.Topology.Defs.Filter
+import WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth
 
 /-!
 # Finite admissible smooth coordinate covers
@@ -114,7 +107,60 @@ theorem SmoothOfRelativeDimension.exists_finite_admissible_coordinate_cover
             (V a).ι ≫ (Y ↘ Spec (.of k))) ∧
         QuasiCompact
           ((AffineSpace (ULift.{u} (Fin d)) (V a).toScheme ↘ (V a).toScheme) ≫
-            (V a).ι ≫ (Y ↘ Spec (.of k))) :=
-  sorry
+            (V a).ι ≫ (Y ↘ Spec (.of k))) := by
+  classical
+  have _ := hp
+  have : IsLocallyNoetherian X :=
+    LocallyOfFiniteType.isLocallyNoetherian (X ↘ Spec (.of k))
+  have : CompactSpace X :=
+    QuasiCompact.compactSpace_of_compactSpace (X ↘ Spec (.of k))
+  have : IsNoetherian X := ⟨⟩
+  have : IsLocallyNoetherian Y :=
+    LocallyOfFiniteType.isLocallyNoetherian (Y ↘ Spec (.of k))
+  have : CompactSpace Y :=
+    QuasiCompact.compactSpace_of_compactSpace (Y ↘ Spec (.of k))
+  have : IsNoetherian Y := ⟨⟩
+  have : IsLocallyNoetherian (AffineSpace (ULift.{u} (Fin d)) Y) :=
+    LocallyOfFiniteType.isLocallyNoetherian (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)
+  have : CompactSpace (AffineSpace (ULift.{u} (Fin d)) Y) :=
+    QuasiCompact.compactSpace_of_compactSpace (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y)
+  have : IsNoetherian (AffineSpace (ULift.{u} (Fin d)) Y) := ⟨⟩
+  choose V U hV hU _ hx hUV e₀ he₀ hfactor using
+    fun x : X ↦ Smooth.exists_etale_to_affineSpace f d x
+  obtain ⟨s, hs⟩ := isCompact_univ.elim_finite_subcover (fun x ↦ (U x : Set X))
+    (fun x ↦ (U x).isOpen) (fun x _ ↦ Set.mem_iUnion.mpr ⟨x, hx x⟩)
+  let t : Fin s.card → X := fun a ↦ (s.equivFin.symm a).val
+  refine ⟨s.card, (fun a ↦ U (t a)), (fun a ↦ V (t a)), (fun a ↦ hUV (t a)),
+    (fun a ↦ e₀ (t a)),
+    (fun a ↦ e₀ (t a) ≫ AffineSpace.map (ULift.{u} (Fin d)) (V (t a)).ι),
+    ?_, inferInstance, inferInstance, inferInstance, inferInstance, ?_⟩
+  · intro x
+    obtain ⟨i, hi, hxi⟩ := Set.mem_iUnion₂.mp (hs (Set.mem_univ x))
+    exact ⟨s.equivFin ⟨i, hi⟩, by simpa [t] using hxi⟩
+  · intro a
+    have : IsAffine (U (t a)).toScheme := hU (t a)
+    have : IsAffine (V (t a)).toScheme := hV (t a)
+    have : Etale (e₀ (t a)) := he₀ (t a)
+    have : IsOpenImmersion (AffineSpace.map (ULift.{u} (Fin d)) (V (t a)).ι) :=
+      MorphismProperty.of_isPullback
+        (AffineSpace.isPullback_map (n := ULift.{u} (Fin d)) (V (t a)).ι).flip
+        (inferInstance : IsOpenImmersion (V (t a)).ι)
+    have hcomm : (U (t a)).ι ≫ f =
+        (e₀ (t a) ≫ AffineSpace.map (ULift.{u} (Fin d)) (V (t a)).ι) ≫
+          (AffineSpace (ULift.{u} (Fin d)) Y ↘ Y) := by
+      rw [Category.assoc, AffineSpace.map_over, ← Category.assoc, hfactor,
+        Scheme.Hom.resLE_comp_ι]
+    refine ⟨hU (t a), hV (t a), he₀ (t a), hfactor (t a), rfl,
+      inferInstance, inferInstance, inferInstance, inferInstance, inferInstance, hcomm,
+      inferInstance, inferInstance, inferInstance, ?_, ?_, ?_, inferInstance,
+      inferInstance, inferInstance, inferInstance, inferInstance, inferInstance,
+      inferInstance, inferInstance, inferInstance⟩
+    · exact ⟨⟩
+    · exact ⟨⟩
+    · have : IsLocallyNoetherian
+          (AffineSpace (ULift.{u} (Fin d)) (V (t a)).toScheme) :=
+        LocallyOfFiniteType.isLocallyNoetherian
+          (AffineSpace (ULift.{u} (Fin d)) (V (t a)).toScheme ↘ (V (t a)).toScheme)
+      exact ⟨⟩
 
 end AlgebraicGeometry

@@ -18,10 +18,9 @@
  ],
  "proof": [
   {
-   "text": "The only ideals of the field $k$ are $0$ and $k$, so $\\operatorname{Spec}k$ is Noetherian (its one-point space is quasi-compact and its single affine chart has a Noetherian ring). Apply [lem-weil-pbc-finite-type-over-noetherian] to the structure maps of $X$ and $Y$: both schemes are Noetherian. Also [lem-weil-pbc-qcqs-over-affine] applies to these separated finite-type maps to $\\operatorname{Spec}k$, giving quasi-compactness and quasi-separatedness of $X$ and $Y$.",
+   "text": "The field k is Noetherian. Apply lem-weil-pbc-finite-type-over-noetherian through Mathlib LocallyOfFiniteType.isLocallyNoetherian and QuasiCompact.compactSpace_of_compactSpace to the structure maps. Assemble IsNoetherian X and IsNoetherian Y. Their underlying spaces are Noetherian.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-qcqs-over-affine"
+    "lem-weil-pbc-finite-type-over-noetherian"
    ],
    "elementary": false,
    "source": {
@@ -30,12 +29,11 @@
    }
   },
   {
-   "text": "For each $x\\in X$, apply [lem-sc-standard-smooth-local-relative-dimension] to obtain affine opens $U_x=\\operatorname{Spec}A_x\\subseteq X$ and $V_x=\\operatorname{Spec}R_x\\subseteq Y$, with $x\\in U_x$, $f(U_x)\\subseteq V_x$, and induced ring map $R_x\\to A_x$ standard smooth of relative dimension exactly $d$. By [lem-sc-standard-smooth-etale-polynomial-chart] choose an etale $R_x$-algebra map $\\psi_x:R_x[t_1,\\ldots,t_d]\\to A_x$ whose restriction to constants is that induced ring map. Its map on spectra is etale, as that cited statement explicitly asserts. The affine-space description [def-sbc-affine-space] identifies its target with $\\mathbf A^d_{V_x}$. Define $e_x^0$ by this map of spectra. Its composite with the projection has ring map $R_x\\to A_x$; [lem-weil-pbc-affine-opens-induced-ring-map-spec-square] identifies this composite, followed by $V_x\\hookrightarrow Y$, with $f|_{U_x}$.",
+   "text": "Reuse the proved adopted-source theorem AlgebraicGeometry.Smooth.exists_etale_to_affineSpace, in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth. Its proof applies lem-sc-standard-smooth-local-relative-dimension and lem-sc-standard-smooth-etale-polynomial-chart, identifies the polynomial spectrum with affine space by def-sbc-affine-space, and uses isoSpec naturality to obtain the factorization as f.resLE. This theorem preserves the specified dimension d and supplies affine U_x and V_x, x in U_x, hUV, and the etale e0_x with its projection identity. The more general variable-dimension normal form is not used.",
    "uses": [
     "lem-sc-standard-smooth-local-relative-dimension",
     "lem-sc-standard-smooth-etale-polynomial-chart",
-    "def-sbc-affine-space",
-    "lem-weil-pbc-affine-opens-induced-ring-map-spec-square"
+    "def-sbc-affine-space"
    ],
    "elementary": false,
    "source": {
@@ -44,7 +42,7 @@
    }
   },
   {
-   "text": "The opens $U_x$ cover $X$ because each contains its indexing point. By Step 1 and the definition [def-weil-pbc-quasi-compact-scheme], this open cover has a finite subcover $U_a$; retain each selected $V_a$ and $e_a^0$. If $X=\\varnothing$, instead take the empty indexing set. This is just the finite-subcover clause of quasi-compactness and introduces no additional geometric assertion.",
+   "text": "Choose the pointwise charts, then use isCompact_univ.elim_finite_subcover on the open sets U_x. Reindex the resulting Finset s by Fin s.card using s.equivFin.symm, carrying the base opens and maps along the same index function. The coverage proof transports the finite-subcover membership along this equivalence. An empty source has no indexing points, so its finite subcover has cardinal zero.",
    "uses": [
     "def-weil-pbc-quasi-compact-scheme"
    ],
@@ -55,11 +53,10 @@
    }
   },
   {
-   "text": "For every retained chart, [lem-weil-pbc-noetherian-open-subscheme-noetherian] shows that $U_a$ and $V_a$ are Noetherian, hence quasi-compact. Their inclusions $j_a:U_a\\hookrightarrow X$ and $v_a:V_a\\hookrightarrow Y$ are open immersions by [def-weil-open-immersion]. Since $X,Y$ are quasi-separated by Step 1, clause (1) of [lem-weil-pbc-qcqs-morphism-permanence] makes $j_a,v_a$ quasi-compact. Thus [lem-weil-pbc-qc-open-immersion-finite-type] makes both inclusions of finite type. Clause (a) of [lem-weil-pbc-separated-cancellation] makes them separated. Composing them with the structure maps to $\\operatorname{Spec}k$, use [lem-sfb-finite-type-composition-base-change] (1) and [lem-weil-pbc-proper-fp-permanence] (e) to conclude that $U_a,V_a$ are separated and finite type over $k$.",
+   "text": "Each chosen U_a and V_a is affine, hence compact and separated, and is locally Noetherian as an open subscheme of X or Y by lem-weil-pbc-noetherian-open-subscheme-noetherian. Assemble their IsNoetherian instances. Their inclusions are open immersions, locally of finite type, and quasi-compact by Mathlib quasiCompact_of_noetherianSpace_source. Compose with the original separated finite-type structure morphisms using the composition instances to obtain every requested property over k.",
    "uses": [
     "lem-weil-pbc-noetherian-open-subscheme-noetherian",
     "def-weil-open-immersion",
-    "lem-weil-pbc-qcqs-morphism-permanence",
     "lem-weil-pbc-qc-open-immersion-finite-type",
     "lem-weil-pbc-separated-cancellation",
     "lem-sfb-finite-type-composition-base-change",
@@ -72,12 +69,13 @@
    }
   },
   {
-   "text": "For $S=Y$ and $S=V_a$, the projection $p_{d,S}:\\mathbf A^d_S\\to S$ is affine: over every affine open $W=\\operatorname{Spec}R\\subseteq S$, its preimage is $\\operatorname{Spec}R[t_1,\\ldots,t_d]$, by [def-sbc-affine-space] and [pqf-def-affine-morphism]. By [lem-weil-pbc-affine-morphism-permanence] (3), $p_{d,S}$ is separated and quasi-compact. It is locally of finite type directly from [def-weil-finite-type-morphism]: the displayed ring is generated over $R$ by the $d$ variables, and this single affine open covers the preimage of $W$. Thus $p_{d,S}$ is of finite type. Composing with $S\\to\\operatorname{Spec}k$, [lem-sfb-finite-type-composition-base-change] (1) and [lem-weil-pbc-proper-fp-permanence] (e) show that $\\mathbf A^d_Y$ and $\\mathbf A^d_{V_a}$ are separated and finite type over $k$. Applying [lem-weil-pbc-finite-type-over-noetherian] to these structure maps proves that both are Noetherian.",
+   "text": "AffineSpace projections are affine and locally of finite presentation for the finite coordinate type ULift (Fin d), by the instances in Mathlib.AlgebraicGeometry.AffineSpace. They are therefore separated, quasi-compact and locally of finite type. For the affine space over Y, explicitly transport local Noetherianity and compactness along its projection and assemble IsNoetherian; for that over each V_a do the same, with compactness also available from affineness. Composition instances give separation, local finite type and quasi-compactness of their maps to Spec k.",
    "uses": [
     "def-sbc-affine-space",
     "pqf-def-affine-morphism",
     "lem-weil-pbc-affine-morphism-permanence",
     "def-weil-finite-type-morphism",
+    "def-sbc-locally-finite-presentation",
     "lem-sfb-finite-type-composition-base-change",
     "lem-weil-pbc-proper-fp-permanence",
     "lem-weil-pbc-finite-type-over-noetherian"
@@ -89,7 +87,7 @@
    }
   },
   {
-   "text": "The restriction of $\\mathbf A^d_Y$ over $V_a$ is $\\mathbf A^d_{V_a}$, by [def-sbc-affine-space]. Thus $\\rho_a:\\mathbf A^d_{V_a}\\hookrightarrow\\mathbf A^d_Y$ is the inclusion of the open inverse image $p_{d,Y}^{-1}(V_a)$, an open immersion by [def-weil-open-immersion]. Set $e_a=\\rho_a e_a^0$. The restriction identity $p_{d,Y}\\rho_a=v_a p_{d,V_a}$ and Step 2 give $p_{d,Y}e_a=fj_a$. By [lem-weil-pbc-etale-composition-cancellation] (1),(2), $\\rho_a$ is etale and $e_a$ is etale. This constructs the maps over the original base $Y$, without changing that base.",
+   "text": "The flipped square AffineSpace.isPullback_map for V_a.ι makes AffineSpace.map of V_a.ι an open immersion by stability under base change. Define e_a as its composite with e0_a. It is etale by composition. Rewrite with AffineSpace.map_over, the projection identity for e0_a and Scheme.Hom.resLE_comp_ι to prove U_a.ι composed with f equals e_a composed with the affine-space projection.",
    "uses": [
     "def-sbc-affine-space",
     "def-weil-open-immersion",
@@ -102,13 +100,11 @@
    }
   },
   {
-   "text": "Every target $\\mathbf A^d_Y$ or $\\mathbf A^d_{V_a}$ is quasi-separated by Step 5 and [lem-weil-pbc-qcqs-over-affine]. Each chart source $U_a$ is affine. Therefore the explicit affine-source clause of [lem-weil-pbc-qcqs-morphism-permanence] (1) applies to the etale maps $e_a$ and $e_a^0$ and makes both of finite presentation. In particular they are quasi-compact and locally of finite type: in the presentation of [def-sbc-locally-finite-presentation], a quotient of a polynomial ring in finitely many variables is generated by the images of those variables, so local finite presentation implies local finite type. Hence they are of finite type as well. Their composites with the target structure maps to $\\operatorname{Spec}k$ equal the structure map of $U_a$, separated by Step 4. Cancellation [lem-weil-pbc-separated-cancellation] (b) makes both chart maps separated. All schemes and maps in the claimed charts now have the required Noetherian, separated and finite-type properties. When $d=0$, the polynomial algebra has no variables and $\\mathbf A^0_S=S$ by [def-sbc-affine-space]; every preceding construction and finiteness argument still applies.",
+   "text": "Each e_a is locally of finite presentation because it is etale. Its source is affine and thus absolutely separated; the Mathlib separated-source instance, proved by cancellation, makes e_a separated, hence quasi-separated. Its source is Noetherian, so quasiCompact_of_noetherianSpace_source makes it quasi-compact. These instances give all remaining conjuncts. No coordinate is selected by the argument, so the construction also handles d=0 and empty X or Y.",
    "uses": [
-    "lem-weil-pbc-qcqs-over-affine",
-    "lem-weil-pbc-qcqs-morphism-permanence",
     "def-sbc-locally-finite-presentation",
     "lem-weil-pbc-separated-cancellation",
-    "def-sbc-affine-space"
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
    ],
    "elementary": false,
    "source": {
@@ -119,15 +115,12 @@
  ],
  "proof_deps": [
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-qcqs-over-affine",
   "lem-sc-standard-smooth-local-relative-dimension",
   "lem-sc-standard-smooth-etale-polynomial-chart",
   "def-sbc-affine-space",
-  "lem-weil-pbc-affine-opens-induced-ring-map-spec-square",
   "def-weil-pbc-quasi-compact-scheme",
   "lem-weil-pbc-noetherian-open-subscheme-noetherian",
   "def-weil-open-immersion",
-  "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-qc-open-immersion-finite-type",
   "lem-weil-pbc-separated-cancellation",
   "lem-sfb-finite-type-composition-base-change",
@@ -135,13 +128,13 @@
   "pqf-def-affine-morphism",
   "lem-weil-pbc-affine-morphism-permanence",
   "def-weil-finite-type-morphism",
-  "lem-weil-pbc-etale-composition-cancellation",
-  "def-sbc-locally-finite-presentation"
+  "def-sbc-locally-finite-presentation",
+  "lem-weil-pbc-etale-composition-cancellation"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/morphisms.tex",
-  "place": "Tag 054L, lemma-smooth-etale-over-affine-space, with prescribed-dimension standard-smooth charts (01V7, 02G1), finite subcover (Topology 005A), and the cited separation, finite-type, Noetherian and quasi-compactness permanence lemmas"
+  "place": "Tag 054L and the listed permanence tags; Lean implementation reuses the proved fixed-dimension chart theorem Smooth.exists_etale_to_affineSpace in WeilConjectures.Mathlib.AlgebraicGeometry.Morphisms.Smooth, then finite subcover, affine-space base-change, Noetherian-source quasi-compactness and the standard morphism-property instances."
  },
  "mathlib_searches": [
   {
@@ -276,5 +269,15 @@
   "group": "Q66",
   "result": "pass",
   "note": "Matched every node hypothesis and clause to the Lean (k field, CharP p, 0<p; X,Y separated + LOFT + QC over Spec k; f.IsOver; SmoothOfRelativeDimension d f; finite affine U/V with U ≤ f⁻¹V; e₀ étale over V via resLE; cover; e pinned as e₀ ≫ AffineSpace.map (V a).ι; e separated étale LOFP+QC+QS; fj=pe; j qc open immersion of finite type; four schemes Noetherian, separated, finite type over k, with the A^d_Y clauses outside ∀ a). Edge cases X=∅ (n=0), Y=∅, d=0 and imperfect k are covered; universe u is forced by Spec k and matches the setting record. Node differs from side-live only in lean; statement verbatim; max line 92. Dropping the setting module import is consistent with its lean.note (setting rendered by explicit binders). Plain imports are proof-dep Mathlib modules. No duplicate in Mathlib or project; three search kinds recorded. Sole proof is sorry; module and theorem docstrings carry source, blueprint tag and the 7 proof steps. nt_compile --json: clean, 19.7 s; a broken control copy fails as expected. Advisory: the Second reading section is the author's self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W9",
+  "result": "pass",
+  "landing": "20261021T120910-L-3991913",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
