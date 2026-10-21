@@ -22798,3 +22798,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:26 L: merged deliver/NG/lem-dl-a1-normal-finite-aut-separable-subfield (stage 2; reviewer PASS; parallel immutable checks)
 - 14:26 L: merged deliver/Q70/lem-trf-section-coordinate-counit-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 14:27 L: merged deliver/Q03/lem-sfb-complete-group-torsor-monodromy (reviewer FIX; first push; new nodes: 3)
+- 14:28 L: merged deliver/Q01/lem-sfb-constructible-algcl-topology-comparison (reviewer PASS; first push; new nodes: 1)
