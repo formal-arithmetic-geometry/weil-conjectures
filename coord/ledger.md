@@ -20224,3 +20224,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: merged deliver/Q22/lem-sbc-unbounded-exact-adjunction-square (reviewer PASS; first push; new nodes: 0)
 - 04:07 L: merged deliver/O3/lem-sfb-extension-iso-quotient-formula (reviewer FIX; first push; new nodes: 0)
 - 04:07 L: merged deliver/Q56/det-sp-scalar-extension-functor (reviewer PASS; after a return; new nodes: 2)
+- 04:07 L: merged deliver/N7/lem-sp-open-proetale-counit-scalar (reviewer PASS; first push; new nodes: 0); claim not held by N7: not your claim
