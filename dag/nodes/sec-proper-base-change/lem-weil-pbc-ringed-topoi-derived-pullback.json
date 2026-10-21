@@ -28,13 +28,14 @@
  ],
  "proof": [
   {
-   "text": "Let $\\mathcal A=\\operatorname{Mod}(R)$. Termwise module pullback induces an additive functor $T:K(R)\\to K(S)$: an additive functor sends a chain homotopy $h$ to $u^*h$, preserving the identity $f-g=dh+hd$. It is exact on homotopy categories, since shifts and mapping cones are formed from finite direct sums and the differential matrices, which additive pullback preserves, including their signs. Put $F=Q_S\\circ T:K(R)\\to D(S)$; this is exact because localization sends each cone triangle to a distinguished triangle [def-weil-abstract-derived-category]. Let $\\mathcal P$ be the class of K-flat complexes with flat terms. By [lem-pc-kflat-resolution], every complex admits a quasi-isomorphism from an object of $\\mathcal P$.",
+   "text": "Let $\\mathcal A=\\operatorname{Mod}(R)$. Termwise module pullback induces an additive functor $T:K(R)\\to K(S)$: an additive functor sends a chain homotopy $h$ to $u^*h$, preserving the identity $f-g=dh+hd$. It is exact on homotopy categories, since shifts and mapping cones are formed from finite direct sums and the differential matrices, which additive pullback preserves, including their signs. Put $F=Q_S\\circ T:K(R)\\to D(S)$; this is exact because localization sends each cone triangle to a distinguished triangle [def-weil-abstract-derived-category]. Let $\\mathcal P$ be the class of K-flat complexes with flat terms. By [lem-pc-kflat-resolution], every complex admits a quasi-isomorphism from an object of $\\mathcal P$. In Lean use exists_isKFlatResolutionIndependentCoefficients; siteSheafTensorRightIso transports its monoidal flatness conclusion to IsFlatOnSite without changing the site.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "def-pur-sheaf-tensor-product",
     "def-pc-kflat-complex",
     "lem-pc-kflat-resolution",
-    "def-weil-abstract-derived-category"
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
    ],
    "elementary": false,
    "source": {
@@ -43,14 +44,14 @@
    }
   },
   {
-   "text": "Let $s:P\\to P'$ be a quasi-isomorphism between K-flat complexes with flat terms. The forgetful functor from module sheaves to sheaves of sets preserves finite limits and reflects them, and preserves epimorphisms. For the latter assertion first forget to abelian-group sheaves, which preserves finite colimits because module sheafification commutes with forgetting; hence it preserves epimorphisms. Then use the characterization of epis of abelian-group sheaves as locally surjective maps. The natural underlying-sheaf isomorphism in [def-weil-pbc-algebraic-inverse-image] identifies the composite of $I.modules$ and the target forgetful functor with source forgetful followed by $u^{-1}$. Hence $I.modules$ preserves finite limits. Since $u^{-1}$ is a left adjoint it preserves epis; naturality of the same isomorphism and reflection of epis by target forgetting show that $I.modules$ preserves epis. Mathlib's preservesHomology_of_preservesEpis_and_kernels therefore gives preservation of cohomology and of quasi-isomorphisms by $I.modules$. Construct the additive scalar-extension functor $E_c$ from sectionwise extension of scalars followed by module sheafification [def-pur-sheaf-tensor-product]. For the identity coefficient map, the standard extension-of-scalars identity and the sheafification counit give a natural isomorphism $E_{id}\\cong Id$. Identify the monoidal tensor-right functor with the site tensor-right functor using their common sheafification of the sectionwise tensor; this transports flatness [def-pc-flat-sheaf-modules] to the predicate used in [lem-weil-pbc-ringed-topos-kflat-pullback]. Apply that lemma with identity coefficient map and functor $E_{id}\\circ I.modules$. Transport its K-flat conclusion along the natural identity-scalar-extension isomorphism, and use the specialization of independent-coefficient K-flatness to ordinary K-flatness [def-pc-kflat-complex], obtaining K-flatness of $I.modules(P)$ and $I.modules(P')$. Now [lem-pur-change-of-rings-kflat-quasi-iso] applied to $E_c$ sends the quasi-isomorphism $I.modules(s)$ to a quasi-isomorphism. The supplied object and morphism equations give a natural isomorphism between $uStar$ and $E_c\\circ I.modules$, whose induced isomorphism of arrows transfers this conclusion to termwise $uStar(s)$.",
+   "text": "The algebraic inverse-image functor preserves finite limits and epimorphisms: transport these properties through its natural underlying-set-sheaf isomorphism, using preservation and reflection by forgetting modules and local surjectivity for sheaf epimorphisms. Thus it preserves homology and quasi-isomorphisms. For a flat-term independent-coefficient K-flat P, apply lem-weil-pbc-ringed-topos-kflat-pullback to inverse image followed by identity scalar extension. The explicitly constructed natural identity-scalar-extension isomorphism transports this K-flatness to I.modules(P). Apply the invariance clause of the existing derivedChangeOfRingsIndependentCoefficients interface of lem-pur-derived-change-of-rings. For this proof-only application choose HasDerivedCategory.standard on both target-site module categories, and retain only the ordinary extension functor and its invariance clause, which do not mention either derived category. Its prescribed objects and maps give a natural isomorphism to the explicitly constructed scalar-extension functor. The supplied hobj and hmap similarly identify uStar with inverse image followed by scalar extension. The induced natural isomorphisms on complexes and the arrow-isomorphism invariance of QuasiIso transfer the required quasi-isomorphism preservation to uStar. This is the original step with the independent-universe version of change-of-rings invariance.",
    "uses": [
     "def-weil-pbc-algebraic-inverse-image",
     "def-pur-sheaf-tensor-product",
     "def-pc-flat-sheaf-modules",
     "def-pc-kflat-complex",
     "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-pur-change-of-rings-kflat-quasi-iso"
+    "lem-pur-derived-change-of-rings"
    ],
    "elementary": false,
    "source": {
@@ -89,16 +90,17 @@
   "def-pc-kflat-complex",
   "lem-pc-kflat-resolution",
   "def-weil-abstract-derived-category",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits",
   "def-weil-pbc-algebraic-inverse-image",
   "def-pc-flat-sheaf-modules",
   "lem-weil-pbc-ringed-topos-kflat-pullback",
-  "lem-pur-change-of-rings-kflat-quasi-iso",
+  "lem-pur-derived-change-of-rings",
   "lem-pur-left-derived-from-kflat-class"
  ],
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 06YY, lemma-derived-base-change, with derived.tex Tags 06XN and 05SE; K4 Lean proof: exactness via underlying-sheaf finite limits and epimorphisms, avoiding a module-adjunction identification; identity scalar extension and tensor-predicate comparisons are proved explicitly"
+  "place": "Tag 06YY, lemma-derived-base-change, with derived.tex Tags 06XN and 05SE; K4 Lean proof: exactness via underlying-sheaf finite limits and epimorphisms, avoiding a module-adjunction identification; identity scalar extension and tensor-predicate comparisons are proved explicitly; M7: independent-universe generalization of the existing proved specialized construction; use the existing independent-coefficient derived-change-of-rings invariance clause and the site/monoidal flatness comparison"
  },
  "mathlib_searches": [
   {
@@ -200,12 +202,12 @@
   ]
  },
  "reviewed_proof": {
-  "date": "2026-10-15",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "K4",
+  "group": "M7",
   "result": "pass",
-  "landing": "20261015T212916-L-2069330",
+  "landing": "20261021T151131-L-1140026",
   "kind": "proof",
   "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
