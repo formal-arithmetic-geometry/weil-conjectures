@@ -1,25 +1,23 @@
 # Work queue
 
-140 items; claim with `tools/claim.py next <group> [--stage N]`.
+133 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (14 clusters, 708 modules)
+## Rework: quarantined by the upstream sync (12 clusters, 708 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
-| `Sheaf.Paper.FiniteCoefficientDirectImage` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.StandardSingleStalkFlatCounitModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ClosedSupportConstructible` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeModelGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.RelativeSupportBottomDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalizationChain` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
@@ -50,7 +48,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-product-chain-proper-interval-homology` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (36)
+## Stage 2: nodes to state (32)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -68,7 +66,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-fix-compactification-completed-realization` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
-| `lem-pur-affine-chart-exceptional-identification` | 1 | state | 0 |
 | `lem-pur-dualizing-unit-composite` | 1 | state | 0 |
 | `lem-pur-finite-site-counit-projection-transport` | 1 | state | 0 |
 | `lem-sfb-action-topos-geometric-restriction` | 1 | state | 0 |
@@ -77,7 +74,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-closed-test-derived-exchange-model` | 1 | state | 0 |
 | `lem-sfb-condensed-split-coset-induction` | 1 | state | 0 |
 | `lem-sfb-derived-invariants-normal-subgroup-comparison` | 1 | state | 0 |
-| `lem-sfb-integral-closure-ind-etale-base-change` | 1 | state | 0 |
 | `lem-sfb-polynomial-derived-bar-comparison` | 1 | state | 0 |
 | `lem-sfb-prime-to-ell-derived-invariants-reduction` | 1 | state | 0 |
 | `lem-sfb-rational-polynomial-bar-contraction` | 1 | state | 0 |
@@ -87,13 +83,11 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sfb-wcontractible-component-derived-hom` | 1 | state | 0 |
 | `lem-zl-constant-geometric-stalk-unit` | 1 | state | 0 |
-| `lem-zl-raw-heart-adic-lisse-stratification` | 1 | state | 0 |
-| `lem-pod-semilinear-field-operation-lifts` | 2 | state | 0 |
 | `lem-sfb-profinite-constant-derived-functions` | 2 | state | 0 |
 
 Not open yet: 372 nodes that below a finished node, not needed, 106 nodes that wait for a statement dependency (bottom-up), 19 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (63)
+## Stage 3: modules to prove (62)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -130,7 +124,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.CategoryTheory.KoszulFibreLinearDescent` | - | 1 | proof | 4 |
 | `Sheaf.Paper.CompletedPullbackReduction` | - | 5 | proof | 4 |
 | `Sheaf.Paper.FiniteFreeQuotientCompletion` | - | 1 | proof | 4 |
-| `Sheaf.Paper.RegularQuotientCompletionUnit` | - | 1 | proof | 4 |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | 6 | 6 | proof | 5 |
 | `Sheaf.Algebra.Homology.RingedSiteStrictPerfectHom` | - | 1 | proof | 5 |
 | `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | - | 1 | proof | 5 |
