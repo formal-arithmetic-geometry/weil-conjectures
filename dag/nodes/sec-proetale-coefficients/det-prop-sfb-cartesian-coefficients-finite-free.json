@@ -24,61 +24,40 @@
  ],
  "proof": [
   {
-   "text": "Put $R=\\mathcal O_E$ and $T=\\mathcal O_F$. By [lem-weil-l-adic-extension-integers-dvr], $R$ is a DVR with fraction field $E$, in particular a PID. By [lem-weil-pbc-pid-noetherian-normal] it is Noetherian and normal. The field extension $F/E$ is finite and separable: in characteristic zero each irreducible minimal polynomial has nonzero derivative of lower degree, so its gcd with its derivative is 1 and it has no repeated roots. By [lem-sfb-padic-integers-integral-closure], $T$ is its integral closure. Thus [lem-weil-pbc-noetherian-normal-separable-integral-closure-finite] (Stacks Tag 032L) makes $T$ a finite $R$-module. It is torsion-free, since $R\\subset T\\subset F$ and $F$ is a field. Apply [lem-sc-dvr-fg-torsionfree-free] to obtain an $R$-basis $b_1,\\ldots,b_r$ of $T$.",
+   "text": "An integral basis exists by [lem-sfb-local-field-integral-basis]. Fix any such basis. Since $|\\ell|=\\ell^{-1}<1$, multiplying an element of $F$, or finitely many relation coefficients in $E$, by a sufficiently large $\\ell$-power makes them integral. Integral spanning and independence therefore give an $E$-basis of $F$.",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-pid-noetherian-normal",
-    "lem-sfb-padic-integers-integral-closure",
-    "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
-    "lem-sc-dvr-fg-torsionfree-free"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "First sentence: finite torsion-free, hence free over the DVR"
-   }
-  },
-  {
-   "text": "The same $b_i$ form an $E$-basis of $F$. Indeed, for each $x\\in F$, choose $m\\geq0$ so that $|\\ell|^m|x|_F\\leq1$; then $\\ell^m x\\in T$, so the $b_i$ span $F$ over $E$. For any relation $\\sum_i a_i b_i=0$ with $a_i\\in E$, choose a common $m$ with $\\ell^m a_i\\in R$ for every $i$; the $R$-linear independence forces all $a_i=0$. Here $0<|\\ell|=\\ell^{-1}<1$, and the rings of integers are the unit balls of [def-weil-l-adic-coefficient-extension]. Consequently $r=[F:E]=d$. This proves existence of the basis in the statement and applies to any choice of it.",
-   "uses": [
+    "lem-sfb-local-field-integral-basis",
     "def-weil-l-adic-coefficient-extension"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "First sentence: rank equals d"
+    "place": "opening sentence: basis existence and field rank"
    }
   },
   {
-   "text": "Let $\\psi_E:E^d\\to F$ send $(a_i)$ to $\\sum_i a_i b_i$. It is the $E$-linear equivalence just proved. The absolute-value topologies are Hausdorff and make addition and scalar multiplication continuous; $E$ is complete by [lem-weil-l-adic-extension-complete] and is nontrivially normed since $|\\ell|<1$. Apply [lem-weil-pbc-finite-dimensional-linear-homeomorphism] to $\\psi_E$. The integral map $\\psi:R^d\\to T$ is the restriction of this homeomorphism to $R^d$, whose image is exactly $T$ by the integral basis property. Both integral topologies are subspace topologies as in [def-sfb-padic-integers-condensed-ring]; hence $\\psi$ and its inverse are continuous. This proves the homeomorphism used by the blueprint without a separate compact-bijection lemma.",
+   "text": "[lem-sfb-condensed-subfield-basis] makes the field coordinate map $c:F\\to E^d$ a homeomorphism. The integral basis gives $c^{-1}(\\mathcal O_E^d)=\\mathcal O_F$. Restrict $c$ and its inverse to these subspaces. On every profinite $S$, composition with these inverse maps identifies $C(S,\\mathcal O_F)$ with $C(S,\\mathcal O_E)^d$; the formulas commute with precomposition and pointwise scalar multiplication.",
    "uses": [
-    "lem-weil-l-adic-extension-complete",
-    "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
-    "def-sfb-padic-integers-condensed-ring"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "Second sentence: the basis map is a homeomorphism"
-   }
-  },
-  {
-   "text": "For every profinite $S$, send $(a_i)\\in C(S,R)^d$ to the function $s\\mapsto\\sum_i a_i(s)b_i$. Its inverse sends $h\\in C(S,T)$ to the coordinate functions of $\\psi^{-1}\\circ h$; these are continuous by the preceding step. The two composites are the identities, and both maps are $C(S,R)$-linear. Precomposition with any $S'\\to S$ commutes with these formulas. By the section description of [sk-def-sfb-condensed-ring], this is an isomorphism $\\underline R^{\\,d}\\cong\\underline T$ of condensed $\\underline R$-modules.",
-   "uses": [
+    "lem-sfb-condensed-subfield-basis",
+    "def-sfb-padic-integers-condensed-ring",
     "sk-def-sfb-condensed-ring"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "Third sentence: continuous functions, naturality, and condensed linearity"
+    "place": "topological basis and continuous-functions sentences"
    }
   },
   {
-   "text": "Apply $p_X^*$ from [sk-def-sfb-pullback-from-point]. It preserves finite coproducts: for its right adjoint $G$, the adjunction gives $\\operatorname{Hom}(p_X^*(\\bigoplus_i A_i),B)\\cong\\prod_i\\operatorname{Hom}(A_i,GB)\\cong\\prod_i\\operatorname{Hom}(p_X^*A_i,B)$. Finite coproducts of abelian sheaves are finite direct sums. The module transport in [sk-def-sfb-transport] gives the action $p_X^*\\underline R\\otimes p_X^*\\underline T\\cong p_X^*(\\underline R\\otimes\\underline T)\\to p_X^*\\underline T$; applying this functor to the isomorphism and its inverse preserves their linearity and both identity composites. Using [sk-def-sfb-pulled-back-coefficients] gives $\\Psi_{X,0}:R_X^d\\cong T_X$ as $R_X$-modules. Its restriction to summand $i$ is multiplication by the constant element $b_i$ pulled back from the point; therefore its formula is the stated $\\sum_i a_i b_i$.",
+   "text": "The cited sheafification theorem makes both abelian-sheaf categories abelian. For the sheafified tensor, the strong monoidal left adjoint $p_X^*$ preserves finite colimits and is additive by the cited preservation lemmas. Apply [lem-sfb-monoidal-finite-free-transport]: $\\Psi_{X,0}:\\mathcal O_{E,X}^d\\cong\\mathcal O_{F,X}$ has summands $p_X^*(a\\mapsto ab_i)$.",
    "uses": [
     "sk-def-sfb-pullback-from-point",
-    "sk-def-sfb-transport",
-    "sk-def-sfb-pulled-back-coefficients"
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "lem-sfb-preserving-colimits-additive",
+    "lem-sfb-monoidal-finite-free-transport",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-sfb-grothendieck-sheafification",
+    "sk-def-sfb-sheaf-tensor"
    ],
    "elementary": false,
    "source": {
@@ -87,86 +66,77 @@
    }
   },
   {
-   "text": "Localize $\\Psi_{X,0}$ at $\\ell$. Restriction of scalars along $R_X\\to T_X$ preserves colimits by the coextension adjunction in [sk-def-sfb-change-of-scalars]; the required closed tensor structure and colimit preservation of tensor are given by [sk-def-sfb-sheaf-tensor]. Equalizers of abelian sheaves are computed sectionwise: the subgroup on which two maps agree is a sheaf, since compatible sections glue uniquely in the ambient sheaf and their equality can be checked after restriction to a cover. This verifies the equalizer hypothesis for coextension. Thus the localization colimit of $T_X$ can equally be computed in $R_X$-modules. The colimit of a finite direct sum of systems is the finite direct sum of their colimits: maps from either object to a test module are exactly the same compatible families of maps from each summand. Since $\\Psi_{X,0}$ is linear, it commutes with multiplication by $\\ell$, so it induces an isomorphism between the colimits of $(R_X^d,\\ell)$ and $(T_X,\\ell)$. Identify these with $E_X^d$ and $F_X$ by [det-prop-sfb-qlbar-colimit-x-invert-ell], for $E$ and for $F$. The scalar map $\\iota_X:E_X\\to F_X$ is exactly the coefficient change of the condensed inclusion $\\underline E\\to\\underline F$ by [def-sfb-subfield-coefficient-map]; by [def-sfb-coefficient-map] its underlying map is $p_X^*$ of that inclusion. At the point the square of inclusions $\\underline R\\to\\underline T$ and $\\underline E\\to\\underline F$ commutes on every continuous function. Applying $p_X^*$ shows that $\\iota_X$ extends the integral scalar map after the maps $\\varphi_E,\\varphi_F$. By the localization universal property, this is the unique ring map from $R_X[1/\\ell]$ extending that integral scalar map, since $\\ell$ is invertible on $F_X$. Consequently the localized action on $F_X$ is restriction along precisely $\\iota_X$, so the isomorphism has the $E_X$-module structure required in the statement. On term $m$ the formula is $(a_i)\\mapsto\\ell^{-m}\\sum_i a_i b_i$, so the resulting $\\Psi_{X,1}$ has the required formula and is $E_X$-linear. The maps from term zero are precisely the integral-to-field morphisms of [def-sfb-integers-to-subfield]; thus $\\Psi_{X,1}\\circ\\varphi_E^d=\\varphi_F\\circ\\Psi_{X,0}$.",
+   "text": "Apply [lem-sfb-localized-basis-coefficients] at $t=\\ell$. The cited localization isomorphisms give $\\Psi_{X,1}:E_X^d\\cong F_X$ and its square with $\\mathcal O\\to E$. The square of coefficient inclusions commutes on continuous functions, hence after $p_X^*$. Uniqueness in the new lemma identifies its scalar map with the specified $E_X\\to F_X$.",
    "uses": [
+    "lem-sfb-localized-basis-coefficients",
     "det-prop-sfb-qlbar-colimit-x-invert-ell",
     "def-sfb-integers-to-subfield",
-    "sk-def-sfb-change-of-scalars",
-    "sk-def-sfb-sheaf-tensor",
     "def-sfb-subfield-coefficient-map",
     "def-sfb-coefficient-map"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "Invert ell and check the integral-to-rational square"
+    "place": "Invert ell and retain the integral-to-field square"
    }
   },
   {
-   "text": "For $f:X\\to Y$, let $f^*$ denote inverse image on abelian pro-étale sheaves. Use the monoidal natural isomorphism $\\theta_f:f^*p_Y^*\\cong p_X^*$ of [sk-def-sfb-pullback-from-point-comp]: first identify $p_Y^*=\\pi_Y^*p^*$, apply the inverse of the composition isomorphism to get $f^*\\pi_Y^*p^*\\cong(\\pi_Y\\circ f)^*p^*$, and then use $\\pi_Y\\circ f=\\pi_X$. Its components on the coefficient rings are the maps $\\alpha_f$ of [sk-def-sfb-coefficient-morphisms]. Naturality on each point-level map $\\underline R\\to\\underline T$, $a\\mapsto ab_i$, says $\\alpha_{f,T}\\circ f^*(b_i\\cdot-)=(b_i\\cdot-)\\circ\\alpha_{f,R}$. Hence the integral basis square commutes on every coproduct injection, and therefore commutes. Apply the same naturality to the rational point-level maps $\\underline E\\to\\underline F$, $a\\mapsto ab_i$ (they are continuous by the homeomorphism in step 3). Their pulled-back coproduct map agrees with step 6 because both agree after $R_X^d\\to E_X^d$ and are linear with $\\ell$ invertible. This proves the rational inverse-image square too.",
+   "text": "For $f:X\\to Y$, naturality of $\\alpha:f^*p_Y^*\\cong p_X^*$ on each multiplication map $t_i:a\\mapsto ab_i$ says $\\alpha_T f^*p_Y^*(t_i)=p_X^*(t_i)\\alpha_R$. This gives the integral summand squares, hence the integral square by the coproduct property. Applying [lem-sfb-monoidal-finite-free-transport] to the field basis isomorphism of [lem-sfb-condensed-subfield-basis] shows that the rational maps $p_X^*(E\\to F,a\\mapsto ab_i)$ are the summands of an $E_X$-linear map $E_X^d\\to F_X$; they extend the integral summands ($p_X^*$ of the commuting point-level square), so the uniqueness clause of [lem-sfb-localized-basis-coefficients] identifies this map with $\\Psi_{X,1}$; the same equation gives their squares.",
    "uses": [
     "sk-def-sfb-pullback-from-point-comp",
-    "sk-def-sfb-coefficient-morphisms"
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-condensed-subfield-basis",
+    "lem-sfb-monoidal-finite-free-transport",
+    "lem-sfb-localized-basis-coefficients"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "Last sentence: compatibility with inverse image"
+    "place": "last sentence: inverse-image compatibility"
    }
   },
   {
-   "text": "For either $(A,B)=(R_X,T_X)$ or $(E_X,F_X)$, the basis isomorphism identifies the underlying $A$-module of $B$ with $A^d$. The balanced coequalizer defining $B\\otimes_A M$ in [sk-def-sfb-change-of-scalars] therefore identifies its underlying abelian sheaf with $M^d$: explicitly, $(\\sum_i a_i b_i)\\otimes m\\mapsto(a_i m)_i$ and $(m_i)_i\\mapsto\\sum_i b_i\\otimes m_i$. For $a\\in A$, the images of $((\\sum_i a_i b_i)a)\\otimes m$ and $(\\sum_i a_i b_i)\\otimes (am)$ are both $(a_i a m)_i$, so the first formula is balanced. Additivity follows coordinatewise. The composite on $(m_i)_i$ is $(m_i)_i$, while the other composite sends $(\\sum_i a_i b_i)\\otimes m$ to $\\sum_i b_i\\otimes a_i m=\\sum_i a_i b_i\\otimes m$. These identities on the tensor generators prove that the maps are inverse. They define sheaf maps and factor through the sheaf tensor product of [sk-def-sfb-sheaf-tensor]; equivalently, distribute the coequalizer across the finite coproduct, using that tensor preserves coproducts. This identification is natural in $M$.",
+   "text": "For either finite-free pair $A\\to B$, namely $\\mathcal O_{E,X}\\to\\mathcal O_{F,X}$ with $\\Psi_{X,0}$ or $E_X\\to F_X$ with $\\Psi_{X,1}$, [lem-sfb-finite-free-scalar-coordinates] gives a natural isomorphism of $A$-module valued functors $\\operatorname{Res}(B\\otimes_A-)\\cong(-)^d$. Apply [lem-sfb-scalar-coordinate-limit-criterion] on the small pro-étale site of $X$ with $T=B\\otimes_A-$ of [sk-def-sfb-change-of-scalars]: $T$ preserves every finite limit, including the empty one. Thus both scalar extensions preserve finite limits, which is the asserted flatness.",
    "uses": [
-    "sk-def-sfb-change-of-scalars",
-    "sk-def-sfb-sheaf-tensor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "Flatness conclusion: identify tensor with a finite power"
-   }
-  },
-  {
-   "text": "Finite limits of abelian sheaves exist sectionwise: compatible component sections glue component by component, and the diagram equations hold after gluing by uniqueness. For either coefficient ring $C=A$ or $C=B$, limits of $C$-module objects are computed on those underlying abelian sheaves: given their limit $L$ for a diagram of $C$-modules, compose $C\\otimes L\\to C\\otimes M_j\\to M_j$ with its projections to define the unique action on $L$; its unit and associativity identities and its universal property follow after every projection, using the action identities of [sk-def-sfb-module-objects]. Finite products commute with finite limits, since a map to either iterated limit is precisely the same family of components satisfying both sets of compatibility equations. Under the natural identification in step 8, scalar extension consequently preserves finite limits on underlying abelian sheaves and thus on $B$-modules. Thus both extension-of-scalars functors of [sk-def-sfb-change-of-scalars] preserve finite limits, which is the flatness asserted here.",
-   "uses": [
-    "sk-def-sfb-module-objects",
+    "lem-sfb-finite-free-scalar-coordinates",
+    "lem-sfb-scalar-coordinate-limit-criterion",
     "sk-def-sfb-change-of-scalars"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-    "place": "Flatness conclusion: finite-limit preservation"
+    "place": "flatness conclusion: finite tensor coordinates and sectionwise limits"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-pbc-pid-noetherian-normal",
-  "lem-sfb-padic-integers-integral-closure",
-  "lem-weil-pbc-noetherian-normal-separable-integral-closure-finite",
-  "lem-sc-dvr-fg-torsionfree-free",
-  "def-weil-l-adic-coefficient-extension",
-  "lem-weil-l-adic-extension-complete",
-  "lem-weil-pbc-finite-dimensional-linear-homeomorphism",
+  "def-sfb-coefficient-map",
+  "def-sfb-integers-to-subfield",
   "def-sfb-padic-integers-condensed-ring",
+  "def-sfb-subfield-coefficient-map",
+  "def-weil-l-adic-coefficient-extension",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-sfb-condensed-subfield-basis",
+  "lem-sfb-finite-free-scalar-coordinates",
+  "lem-sfb-grothendieck-sheafification",
+  "lem-sfb-local-field-integral-basis",
+  "lem-sfb-localized-basis-coefficients",
+  "lem-sfb-monoidal-finite-free-transport",
+  "lem-sfb-preserving-colimits-additive",
+  "lem-sfb-scalar-coordinate-limit-criterion",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "sk-def-sfb-change-of-scalars",
+  "sk-def-sfb-coefficient-morphisms",
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-pullback-from-point",
-  "sk-def-sfb-transport",
-  "sk-def-sfb-pulled-back-coefficients",
-  "det-prop-sfb-qlbar-colimit-x-invert-ell",
-  "def-sfb-integers-to-subfield",
-  "sk-def-sfb-change-of-scalars",
-  "sk-def-sfb-sheaf-tensor",
-  "def-sfb-subfield-coefficient-map",
-  "def-sfb-coefficient-map",
   "sk-def-sfb-pullback-from-point-comp",
-  "sk-def-sfb-coefficient-morphisms",
-  "sk-def-sfb-module-objects"
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-sheaf-tensor"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-sfb-cartesian-coefficients/sk-prop-sfb-cartesian-coefficients-finite-free.proof.md",
-  "place": "Whole proof; expanded arithmetic, topology, naturality, and flatness arguments"
+  "place": "Short assembly following the integral basis, condensed sections, monoidal pullback, localization and naturality route; existing structural lemmas replace expanded arguments."
  },
  "mathlib_searches": [
   {
@@ -222,28 +192,34 @@
  "chapter": "sec-proetale-coefficients",
  "unit": "sk-prop-sfb-cartesian-coefficients",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "det-prop-sfb-cartesian-coefficients-finite-free",
   "worker": "stage1",
-  "summary": "Reconstructed the existing reviewed split from the current DAG. The nine proof steps use only the 22 existing dependency statements; no new node is created. I checked the arithmetic DVR/integral-closure route, the finite-dimensional topological argument, condensed sections, pullback transport, localization at ell, inverse-image naturality, tensor identification, and finite-limit flatness. The item statement and hypotheses are unchanged.",
-  "blueprint": "Steps 1-2 realize the first sentence, step 3 the homeomorphism sentence, step 4 the condensed module isomorphism, step 5 pullback, step 6 inversion of ell, step 7 naturality, and steps 8-9 the flatness conclusion.",
+  "summary": "Repair the coarse split with a statement-only node for localization of a prescribed finite basis. Reuse existing integral-basis, field-coordinate, monoidal finite-free transport and tensor-coordinate statements, and the scalar-coordinate finite-limit criterion (Q84) for flatness. Keep the parent statement unchanged and its proof a short assembly. Reviewer FIX: the delivered internal-module limit-creation node duplicated lem-sfb-modobj-forget-creates (NM, merged 03:50) and is dropped; step 6 now cites lem-sfb-scalar-coordinate-limit-criterion, and step 5 cites the transport and localization-uniqueness statements it uses.",
+  "blueprint": "Step 1 realizes the opening basis sentence; step 2 the homeomorphism and condensed-section sentences; step 3 monoidal pullback; step 4 inverting ell and the integral square; step 5 inverse-image naturality; step 6 flatness through finite tensor coordinates and the scalar-coordinate finite-limit criterion.",
   "tool_uses": [
    {
-    "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Arithmetic DVR/fraction-field input for coefficient fields, not a replacement for a unit step."
+    "node": "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "why": "Generic small-diagram adjunction tool applied to finite coproducts for the unit’s monoidal inverse image."
+   },
+   {
+    "node": "lem-sfb-grothendieck-sheafification",
+    "why": "Generic abelian-sheaf category and sheafification theorem, supplying the ambient abelian categories for the additive monoidal transport argument."
    }
   ]
  },
  "tool_uses": [
-  "lem-weil-l-adic-extension-integers-dvr"
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "lem-sfb-grothendieck-sheafification"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q119-d88178408",
-  "group": "Q119",
+  "reviewer": "NT-cc-Q21-8ef8f437b",
+  "group": "Q21",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-d88178408 (reviewer sub-agent of L); spot-checked: I read the item, all 9 steps and the statements of all 22 cited nodes in full; there is no new node. The statement matches main-20261015 sk-prop-sfb-cartesian-coefficients-finite-free.md word for word, with nothing weakened. Steps 1-2 (DVR, char-0 separability, integral closure, Stacks 032L, DVR fg torsion-free implies free, rank d by clearing l-powers) are correct; I checked them on Q_2(i)/Q_2. Step 3: all hypotheses of the finite-dimensional homeomorphism leaf hold and the subspace topologies restrict correctly; this replaces the blueprint's compact-Hausdorff argument without changing the route. Steps 4-5 (sections C(S,-), p_X^* a left adjoint, mapMod transport) are correct. Step 6 (2222 chars) is one argument: localize the integral iso, using Res preserves colimits via Coext, the invert-ell node and iota_X = p_X^* of the inclusion, plus one-line uniqueness of ring maps out of the localization. No hidden lemma, so I accept it unsplit. Step 7: naturality of theta_f with components alpha_f; the rational case follows by additivity with l invertible. Steps 8-9: B tensor_A M = M^d naturally, and finite limits are sectionwise. No cycle among the five citers. Accepted tool_use: lem-weil-l-adic-extension-integers-dvr, black-box arithmetic input that no node of the unit states. Duplicate note: lem-sfb-local-field-integral-basis (ND) states what steps 1-2 prove inline; this is redundant, not a fault. Supersession: the item was already split, reviewed and merged by Q24. This delivery changes only split_report metadata, and its report names a citations.json that the commit does not contain. The maintainer may discard it as superseded per the brief. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-8ef8f437b (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item, both new nodes, the statements of all 22 cited nodes, the 2026-10-21 re-split note (8834 chars, at least 2 nodes) and the base proof (9 steps, side-live). The statement is byte-identical to the main-20261015 blueprint. I read Stacks sites-modules.tex 0EMC/0EMD (lemma-simple-invert, lines 8649 and 8684). No SGA source is used. Every base step has a carrier. Base steps 1-2 go to existing lem-sfb-local-field-integral-basis plus an inline E-basis argument. Steps 3-4 go to lem-sfb-condensed-subfield-basis plus the integral restriction. Step 5 goes to lem-sfb-monoidal-finite-free-transport, whose hypotheses I checked for p_X^* and the sheaf tensor. Step 6 (2222 chars) goes to the new lem-sfb-localized-basis-coefficients. That node is true: A=(R[1/t])^#, T[1/t]=T tensor_R R[1/t]=R[1/t]^I sectionwise, then sheafify. I checked it on t=0, nilpotent t, I empty, non-injective phi and a rank-1 unit basis. It duplicates no existing node. Step 4 identifies its phi_t with iota_X by uniqueness, using qlbar-colimit-x-invert-ell (localization ring structure). Step 7 stays as naturality. Step 8 goes to lem-sfb-finite-free-scalar-coordinates. Step 9 went to the new limit-creation node. Faults fixed: (1) C5/D, a race: lem-sfb-internal-module-limit-creation is word for word clause 1 of NM lem-sfb-modobj-forget-creates, merged 03:50 after this 03:33 commit. The whole step-6 limit argument is also stated by Q84 lem-sfb-scalar-coordinate-limit-criterion (merged 03:40, same unit). I dropped the node and step 6 now cites the criterion plus the finite-free coordinates; this is the same application as landed lem-sfb-subfield-flat step 5. (2) C1/C2: step 5 used E_X-linearity of the rational transported summands and the uniqueness clause of the localization lemma without citing them, and was marked elementary. It now cites condensed-subfield-basis, monoidal-finite-free-transport and localized-basis-coefficients, and is marked non-elementary. The proof is now 2700 chars and has no cycle. Accepted tool_uses: lem-weil-pbc-left-adjoint-preserves-colimits and lem-sfb-grothendieck-sheafification. Maintainer notes: after the drop the delivery has 1 new node, but every base argument is carried by nodes that landed in parallel today. Attach CategoryTheory.Mod.createsLimit (WeilConjectures/CategoryTheory/Monoidal/Mod/Limits.lean:108-115, sorry-free) to lem-sfb-modobj-forget-creates clause 1.; 1 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
