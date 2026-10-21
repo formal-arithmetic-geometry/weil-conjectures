@@ -22342,3 +22342,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:03 L: returned deliver/U3/Sheaf.Topology.ProfiniteSectionsFiniteQuotient (reviewer RETURN: (the landing tools, head 53ff153dc) the delivery did not land: lean/Sheaf/Topology/ProfiniteSectionsFiniteQuotient.lean )
 - 12:03 L: returned deliver/X2/Sheaf.AlgebraicGeometry.CoefficientSectionsLocalization (reviewer RETURN: (the landing tools, head 3714d1737) the delivery did not land: lean/Sheaf/AlgebraicGeometry/CoefficientSectionsLocalizat)
 - 12:03 L: merged deliver/A2/Sheaf.CategoryTheory.CompositeRelativeTensorAction (stage 3; reviewer PASS; first push; landing 20261021T120309-L-3733040 (proof); batch 20261021T120309; modules 1; new nodes 0)
+- 12:03 L: merged deliver/A3/Sheaf.CategoryTheory.Sites.BinaryCoverSitePresentation (stage 3; reviewer PASS; first push; landing 20261021T120313-L-3740740 (interface); batch 20261021T120309; modules 2; new nodes 1)

@@ -17,156 +17,98 @@
  ],
  "proof": [
   {
-   "text": "Work in the coefficient universe of the given small-site presentation. The original site need not have pullbacks. Apply [lem-trf-sieve-sheaves-covering-site] to choose a covering-family site $\\mathcal A$ and an equivalence $H:\\mathcal T\\simeq\\operatorname{Sh}(\\mathcal A)$, with inverse $K$. If the original site already has this form, use the identity. Sheafified representables of the original site exist by [lem-trf-sieve-set-sheafification-exists]. In $\\mathcal T$ start with the set consisting of those objects, $1,U,V,W$, and the objects $K(h_a^\\#)$ for $a\\in\\mathcal A$. Including this last set will let us apply the covering-site comparison without imposing extra assumptions on the original site.",
+   "text": "Use the proved generators helper of ToposCompatibleGenerators: take the union of the original sheafified representables with 1,U,V,U×V and close under terminal objects and pullbacks using ObjectProperty.limitsClosure. Pass to its small model. This gives a single full faithful finite-limit-preserving inclusion F and chosen representatives for the four objects. The helper works directly in Sh(J), for an arbitrary Grothendieck topology J, so no replacement covering site is required.",
    "uses": [
-    "lem-trf-sieve-sheaves-covering-site",
-    "lem-trf-sieve-set-sheafification-exists"
+    "lem-weil-pbc-topos-compatible-generators"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00ZM (proposition-sheafification-adjoint-topology), 03CI (lemma-topos-good-site); covering-site replacement is the cited agent generalization."
+    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
    }
   },
   {
-   "text": "Let $E_0$ be the preceding set. Given $E_n$, adjoin a chosen terminal object and one chosen pullback for every cospan between its objects to obtain $E_{n+1}$; retain $E_n$. These limits exist: sheaf limits on $\\mathcal A$ are computed sectionwise by [lem-weil-pbc-site-sheaf-sets-limits-sectionwise], and their universal properties transport through $H,K$. Each stage is a set because the previous object set and all its Hom sets are sets. Put $E=\\bigcup_{n\\geq0}E_n$ and take the full subcategory $\\mathcal E$ on it. A cospan uses finitely many objects, all in some common stage, so its chosen pullback lies in the next stage. Thus $\\mathcal E$ has a terminal object and pullbacks computed in $\\mathcal T$, hence all finite limits (products are pullbacks over $1$ and equalizers are pullbacks of diagonals). The inclusion, and therefore $F=H|_{\\mathcal E}$, preserve these limits. This constructs the required single closure, rather than making unrelated choices of sites for $U,V,W$.",
+   "text": "Use the proved arbitrary-topology helpers in SheafSubcategoryComparison with pullbacks preserved by F. Set the precoverage to the epimorphic precoverage; it is a site and subcanonical, its nerve is an equivalence, and representables are represented by full faithfulness. At any original section, the covering sieve in the hypothesis locally supplies a U or V section. Product preservation lifts this section to F(X×U) or F(X×V); the two candidate maps agree there. Separatedness makes them equal on the original section, proving the binary families epimorphic. Apply exists_small_coveringFamilies to the entire epimorphic covering class to choose a small representative class with equal supports. Membership in that class implies a cover, and every cover has a representative with the same support.",
    "uses": [
-    "lem-weil-pbc-site-sheaf-sets-limits-sectionwise"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CI (lemma-topos-good-site), inductive closure construction, with only terminal objects and pullbacks needed here."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-site-of-sheaf-generators] to the small covering site $\\mathcal A$ and the fully faithful finite-limit-preserving $F:\\mathcal E\\to\\operatorname{Sh}(\\mathcal A)$. Its generator hypothesis holds because $K(h_a^\\#)\\in E_0$ and $HK(h_a^\\#)\\cong h_a^\\#$. We obtain the epimorphic covering precoverage on $\\mathcal E$ and a sheaf equivalence with underlying nerve $X\\mapsto(C\\mapsto\\operatorname{Hom}(H C,X))$. Compose with $H$ and use its fully faithful Hom bijections: the resulting functor is naturally $N(B)(C)=\\operatorname{Hom}_{\\mathcal T}(C,B)$. Replace the equivalence functor along this natural isomorphism to use exactly $N$. Since $\\mathcal E$ is full, $N(C)=h_C$ for $C\\in\\mathcal E$; thus every represented presheaf is a sheaf and the topology is subcanonical. Joint epimorphy is unchanged by $H$ (its Hom bijections preserve and reflect right cancellation), so the covers are exactly the jointly epimorphic families in $\\mathcal T$.",
-   "uses": [
-    "lem-weil-pbc-site-of-sheaf-generators"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03A1 (lemma-special-equivalence), clauses (1)-(5); use the existing fully faithful generator formulation."
-   }
-  },
-  {
-   "text": "We check the binary families are jointly epimorphic. For subterminal sheaves, their join is the local closure of their pointwise union: a section belongs to it if its restrictions locally belong to one of the two subsheaves. This description is a sheaf by the transitivity axiom for coverings and gluing; it is the least subsheaf containing both because any such subsheaf contains these local gluings. Consequently $U\\cup V=1$ means that locally on the original site the unique terminal section lifts to $U$ or $V$. If $a,b:C\\to B$ agree after both projections $C\\times U\\to C$ and $C\\times V\\to C$, restrict any section of $C$ to such a cover. There it lifts to one of the two products and its images under $a,b$ agree. The separatedness axiom then gives $a=b$. Hence each binary family covers for the precoverage just constructed; both product objects belong to $\\mathcal E$.",
-   "uses": [
-    "def-weil-pbc-topos"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03A1 (lemma-special-equivalence), epimorphic-family topology; direct verification using the sheaf and topology axioms."
-   }
-  },
-  {
-   "text": "Select covering-family representatives using [lem-weil-pbc-small-set-of-covering-families], with the prescribed set $\\operatorname{Cov}_0$ consisting of all these binary covers, indexed by the set $E$. The covering-class axioms hold by the precoverage of step 3; its pullbacks exist by step 2. Thus the representatives can retain every displayed binary family while preserving the site axioms, and every jointly epimorphic family is combinatorially equivalent to a chosen covering. The generated topology, its sheaves, and $N$ do not change.",
-   "uses": [
+    "lem-weil-pbc-sheaf-subcategory-comparison",
     "lem-weil-pbc-small-set-of-covering-families"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sets.tex",
-    "place": "Tag 000X (lemma-coverings-site), retaining a prescribed set of coverings."
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
    }
   },
   {
-   "text": "For each $Z=1,U,V,W$, apply [lem-weil-pbc-localized-sheaves-over-representable] to the subcanonical site $\\mathcal E$ and its object $Z$. Compose the equivalence $\\mathcal T/Z\\simeq\\operatorname{Sh}(\\mathcal E)/h_Z$ induced by $N$ with its fibre equivalence to $\\operatorname{Sh}(\\mathcal E/Z)$; here $h_Z=h_Z^\\#$ by subcanonicity. Explicitly it sends $p:B\\to Z$ to\n$$N_Z(B,p)(C\\xrightarrow c Z)=\\{b:C\\to B\\mid p b=c\\}=\\operatorname{Hom}_{\\mathcal T/Z}((C,c),(B,p)).$$\nRestriction along arrows of $\\mathcal E/Z$ is precomposition. This is the localized topology in [def-pur-localized-ringed-site], and makes the choice of each slice comparison explicit.",
+   "text": "For every X in E, transport the over category along the nerve and the canonical represented-object isomorphism. Compose with the fibre quasi-inverse of localizedSheavesOverRepresentable. A fibre section corresponds to a map F(T)→B with composite equal to F(T→X); full faithfulness converts the fibre condition into this equality. The inverse sends an over-category morphism to its section under the nerve isomorphism. Their inverse laws and both naturality equations follow from those of the nerve. This proves exactly the displayed sliceFormula.",
    "uses": [
-    "lem-weil-pbc-localized-sheaves-over-representable",
-    "def-pur-localized-ringed-site"
+    "lem-weil-pbc-localized-sheaves-over-representable"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 00Y1 (lemma-essential-image-j-shriek), fibre quasi-inverse; Tag 04GZ (lemma-localize-topos)."
+    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
    }
   },
   {
-   "text": "For an arrow $t:Z'\\to Z$ among these objects and $(B\\xrightarrow p Z)$, the comparison with slice restriction is the bijection\n$$\\operatorname{Hom}_{\\mathcal T/Z'}((C,c'),(B\\times_Z Z',\\operatorname{pr}_2))\\longrightarrow\\{b:C\\to B\\mid p b=t c'\\},\\qquad(b,c')\\longmapsto b.$$\nIts inverse is $b\\mapsto(b,c')$. For $Z\\to1$ this says $N_Z(B\\times Z\\to Z)=N(B)|_Z$. For $Z''\\xrightarrow s Z'\\xrightarrow t Z$ both iterated and direct comparisons send a lift to its $B$ component. They therefore agree under the canonical pullback associator, and are identity comparisons for identity arrows. This proves compatibility with composition, including both $W\\to U\\to1$ and $W\\to V\\to1$. Applied to $R$, the same formula sends addition, multiplication, zero and one to those on the $R$ component, hence sends $R_Z=R\\times Z\\to Z$ to $N(R)|_Z$.",
+   "text": "Transport R along the nerve using ringedTopos_equivalenceRingTransport. Its orientation has inverse N.inverse, so invert the ring data with RingData.square, using the identity ring data and N.unitIso. Full faithfulness reflects invertibility of the lifted structural map. Construct its induced module direct image with ringData_inducedModules. The presentationAt helper of RingedPresentationTransport gives the whole module transport. Obtain source slice data from ringed_sheaf_slice_adjunction and element-map continuity from element_site_descent.",
    "uses": [
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 00Y1 and 04GZ, product/fibre calculation; relocalization comparison is Tag 03EH (lemma-relocalize)."
-   }
-  },
-  {
-   "text": "View the internal commutative ring $R$ as its section-ring sheaf using [lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction]. Apply [lem-weil-pbc-ringed-topos-equivalence-ring-transport] to the equivalence whose direct functor is $N$. It gives the transported sheaf of rings with underlying sheaf $N(R)$ and invertible structural map $N^{-1}N(R)\\to R$. The operations are exactly those obtained by applying $N$ to the ring operations and its product comparisons. In the Hom description they are the pointwise operations on maps to $R$. Apply the same construction to each explicit $N_Z$; by step 7 its coefficient sheaf is precisely $N(R)|_Z$. Thus we have ringed-topos equivalences, with invertible structural maps, on the whole topos and all four slices.",
-   "uses": [
-    "lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction",
-    "lem-weil-pbc-ringed-topos-equivalence-ring-transport"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03CR (lemma-morphism-ringed-topoi-comes-from-morphism-ringed-sites), carry along the rings; sites.tex Proposition 00YV, ring objects as sextuples."
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-ringed-presentation-transport] to these ringed equivalences, whose sites are small relative to the module universe and whose structural maps have just been shown invertible. It gives additive exact equivalences between the module-sheaf categories, both on the whole topos and the slices, and their termwise induced equivalences of ordinary unbounded derived categories. It also supplies commutation with further restrictions. For the slice-side module category, the concrete identification uses [lem-weil-pbc-ringed-sheaf-slice-adjunction]: the restricted ring on the element site is $(A,z)\\mapsto R(A)$ and restricted modules have $(j_Z^*M)(A,z)=M(A)$. This identifies internal slice modules with the module sheaves to which the transport lemma applies.",
-   "uses": [
+    "lem-weil-pbc-ringed-topos-equivalence-ring-transport",
+    "lem-weil-pbc-ringed-topos-ring-square",
+    "lem-weil-pbc-ringed-topos-induced-modules",
     "lem-weil-pbc-ringed-presentation-transport",
-    "lem-weil-pbc-ringed-sheaf-slice-adjunction"
+    "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+    "lem-weil-pbc-element-site-descent"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03CR, 03D7 (lemma-adjoint-pullback-pushforward-modules), 04IE and 04J4; the exact and derived equivalence refinement is the cited existing transport statement."
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
    }
   },
   {
-   "text": "The restriction comparisons of these module equivalences are the ones of step 7: on an internal module the underlying lift $(m,c')$ is sent to $m$, preserving sums and the scalar action because both are computed on this component. Thus the module squares satisfy the same identity and composition equations. They hold degreewise on complexes and hence after localization. The derived equivalences are triangulated: an additive equivalence preserves biproducts, negatives, and the cone matrix $\\begin{pmatrix}d_L&f\\\\0&-d_K\\end{pmatrix}$, as well as the shift differential $-d_K$; it therefore sends each cone triangle to the corresponding cone triangle. The characterization of distinguished triangles in [def-weil-abstract-derived-category] gives the assertion in both directions, including unbounded complexes.",
+   "text": "Apply the separate normalized ringed-nerve slice transport result to these already constructed nerves and the whole module transport. Restrict its family indexed by all objects of E to the four chosen objects. This supplies the actual localized rings, ringed slice inverse images and all normalized module comparisons. The original site and cover constructions have already been proved, so this is only the remaining coefficient/module part of the argument.",
+   "uses": [
+    "lem-sp-ringed-nerve-slice-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
+   }
+  },
+  {
+   "text": "Convert each RingedPresentationAt to BinaryPresentationModules. Exactness and additivity are its recorded forward/backward properties; the ordinary derived equivalence is the actual mapDerivedCategory equivalence, so both functor equalities are reflexive. For any comparison square between equivalences, the mate is invertible: the left-mate assertion is the proved equivalentMate_isIso helper; for the right mate, the hom map induced by its component is a composite of the equivalence hom bijections, the two adjunction bijections and the comparison hom isomorphism. The mate-counit equation identifies this composite, so Yoneda proves componentwise invertibility. Thus binaryAdjointSquare fills both actual mate fields without additional hypotheses. All normalized equalities are those of the supplied module comparisons.",
    "uses": [
     "def-weil-abstract-derived-category",
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Definition 05RU (definition-derived-category), with the cone-triangle triangulation; sites-modules.tex Definition 04IX, sectionwise restriction."
-   }
-  },
-  {
-   "text": "Choose the identifications of the restriction adjoints as their adjunction-compatible conjugates under the equivalences. A right-adjoint identification is uniquely counit-compatible by [det-sp-unique-right-adjoint]; the left-adjoint identification is uniquely unit-compatible by [lem-weil-pbc-conjugate-iso-unit-equation]. The other adjunction transformation then agrees as well: its transpose is the identity, so injectivity of the adjunction Hom bijection determines it. Thus both units and counits are preserved. Finally use the explicit mate formula in [def-weil-pbc-adjunction-mate]: the mate of $\\alpha:L_2G\\to HL_1$ is $(R_2H\\varepsilon_1)\\circ(R_2\\alpha R_1)\\circ(\\eta_2GR_1)$. Under the comparison isomorphisms each of its three factors is the corresponding transported factor. Their composite is therefore the transported mate. Applying this to the composition comparisons verified in steps 7 and 10 proves preservation of the nested-localization mates; no inference from mere isomorphism of endpoints is used.",
-   "uses": [
-    "det-sp-unique-right-adjoint",
-    "lem-weil-pbc-conjugate-iso-unit-equation",
     "def-weil-pbc-adjunction-mate"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/categories.tex",
-    "place": "Tag 0B65 (lemma-transformation-between-functors-and-adjoints); the mate formula is that recorded in def-weil-pbc-adjunction-mate (sites-cohomology.tex Remark 07A7)."
+    "document": "literature/stacks-project/sites.tex",
+    "place": "Tags 03CI, 03A1, 00Y1; the ringed component calculation is sites-modules.tex 04IE, 04J4; mate argument categories.tex 0B65."
    }
   }
  ],
  "proof_deps": [
-  "lem-trf-sieve-sheaves-covering-site",
-  "lem-trf-sieve-set-sheafification-exists",
-  "lem-weil-pbc-site-sheaf-sets-limits-sectionwise",
-  "lem-weil-pbc-site-of-sheaf-generators",
-  "def-weil-pbc-topos",
+  "lem-weil-pbc-topos-compatible-generators",
+  "lem-weil-pbc-sheaf-subcategory-comparison",
   "lem-weil-pbc-small-set-of-covering-families",
   "lem-weil-pbc-localized-sheaves-over-representable",
-  "def-pur-localized-ringed-site",
-  "lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction",
   "lem-weil-pbc-ringed-topos-equivalence-ring-transport",
+  "lem-weil-pbc-ringed-topos-ring-square",
+  "lem-weil-pbc-ringed-topos-induced-modules",
   "lem-weil-pbc-ringed-presentation-transport",
   "lem-weil-pbc-ringed-sheaf-slice-adjunction",
+  "lem-weil-pbc-element-site-descent",
+  "lem-sp-ringed-nerve-slice-transport",
   "def-weil-abstract-derived-category",
-  "det-sp-unique-right-adjoint",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
   "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites.tex",
-  "place": "Tags 03CI and 03A1, finite-limit closure and nerve comparison; Tag 00Y1 for slice comparison. Additional coherence calculations and use of existing ringed/derived transport are written by Q155."
+  "place": "A3: direct finite-limit generator closure and arbitrary-sieve-topology nerve comparison; explicit slice-Hom formula and right-mate hom-bijection proof; normalized module lift separated as lem-sp-ringed-nerve-slice-transport."
  },
  "mathlib_searches": [
   {
@@ -301,11 +243,8 @@
   ]
  },
  "tool_uses": [
-  "lem-trf-sieve-sheaves-covering-site",
-  "lem-weil-pbc-site-of-sheaf-generators",
   "lem-weil-pbc-small-set-of-covering-families",
   "lem-weil-pbc-localized-sheaves-over-representable",
-  "lem-weil-pbc-sheaf-ring-object-sectionwise-reconstruction",
   "lem-weil-pbc-ringed-topos-equivalence-ring-transport",
   "lem-weil-pbc-ringed-presentation-transport",
   "lem-weil-pbc-ringed-sheaf-slice-adjunction"
@@ -341,5 +280,15 @@
   "group": "Q114",
   "result": "pass",
   "note": "Read node, the 4 stmt_deps (unchanged vs live), Stacks sites.tex 03A1 (l.6982)/03CI (l.7092), the new module and every helper declaration it uses. Every clause matches: small site in one universe u as in def-weil-pbc-topos; R commutative ring sheaf; IsSubterminal U,V; hcover is exactly U∪V=1, nothing stronger; full faithful finite-limit-closed small E containing h_a^#,1,U,V,U×V; epimorphic precoverage with small representatives; binaryCover; nerve ≅ restricted Yoneda; slices over J.over Z with Hom formula; ring transported with IsIso ringMap (R_Z ↦ ring.over Z); additive exact module equivalences pinned by underlying/unit/structural/pushforward; derived functors equal to presentationDerivedMap; restriction/further squares with HEq identity and cocycle equations. Checked that the HEq endpoint types are propositionally equal (map_π rfl; Over.map 𝟙 and f≫g agree by comp_id/assoc with identity ring maps), so no iso-only HEq. Edge cases: empty site, U=1/V=0, W=0, R=0. No duplicate (topos_sitePresentation family presents morphisms only). One sorry; docstrings with source and blueprint carry the 11 proof steps; statement verbatim; report sections present. Advisories: mate IsIso fields are formal (node's 'hence' clause); derived restriction squares are formal; owners not in stmt_deps; BinaryPresentationModules partly overlaps RingedPresentationAt. No compile (no file changed); worker reports clean scompile and dry-run OK."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A3",
+  "result": "pass",
+  "landing": "20261021T120313-L-3740740",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
