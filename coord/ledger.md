@@ -23374,3 +23374,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:44 L: returned deliver/Q14/lem-sfb-lisse-lattice-potential-kummer-tameness (reviewer RETURN: C5/B9 + F/G1/G3 + G4. This is the 8th push of this item; N5 68c9bff0, NL 1f51eeaf, NX af5315f6, NN b8613865, NZ 8589c9f9)
 - 18:45 L: merged deliver/Q13/lem-sfb-poset-augmented-chain-prism (reviewer PASS; first push; new nodes: 0)
 - 18:45 L: returned deliver/Q27/lem-pur-dualizing-unit-composite (reviewer RETURN: L: independent stage-2 immutable head 16b9a6c9cec6: H2 + mechanical theorem-stmt_dep: the delivery adds theorem node lem)
+- 18:45 L: returned deliver/NA/lem-sfb-polynomial-derived-bar-comparison (reviewer RETURN: L: independent stage-2 immutable head 642ade15deb5: H2: the delivery added theorem node lem-sfb-prime-to-ell-condensed-a)
