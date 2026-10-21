@@ -226,5 +226,49 @@
   "group": "O4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-7680dc52c (reviewer sub-agent of L); spot-checked: I read the delivery in full: one commit, the item with seven steps, no new nodes, statement unchanged. proof_deps equals the union of the step uses, all cited nodes are in unit sk-thm-properbasechange (sheaf-restrict-scalars is used only as a definition), and there is no cycle since only the parent cites the item. Step 1: equation (A) is verbatim the adjunct clause of lem-weil-pbc-flat-ringed-diagram-restriction, whose b,d are the item's p,d; its hypotheses (any small J, small sites, flat at both corners, coefficient isomorphisms compatible with the a_T maps) are supplied for every edge. Step 2: I verified the ring identity a_U c_u^R u^{-1}c_v^R = c_u^S u^{-1}c_v^S (vu)^{-1}a_W by substitution, and checked both sides of (C) as maps r L'L -> L L r. The descent uses localization-universal-property clauses (2),(3), which are exactly composition preservation and equality detection. Step 3: equation (K) follows from t=counit having adjunct 1 plus the inverse-adjunction formula. Steps 4-6: I checked (T) and (T') factor by factor: the adjunct rule, naturality of p_{g'}, (C) at A, the identity p_{g,A}b^{-1}=L_g(d^{-1}), naturality of theta and (K). The result equals the transpose L_{g'}(eps)theta of def-weil-pbc-adjunction-mate, which also matches Stacks 07A7 (remark-base-change), and injectivity of the adjunction bijection closes the argument. Step 7: naturality holds because both sides are composites of natural transformations. Edge cases: identity square with S=R, S=0, non-invertible exchange (only p,d,b are inverted), unbounded towers. Source: the ancestor completed-exchange-coherence proof, second paragraph ('naturality of coefficient reduction'); 0E48 is correctly cited as context only; no SGA. This is a first split, not a re-split, and no duplicate exists (compared with strict-tower-exchange-mate-normalization, sfb-integral-quotient-exchange-comparison, flat-scalar-tower-limit-square and ordinary-flat-exchange-prescribed-adjunction). The item is not a restatement of its parent, and parent step 2 meets its hypotheses (constant-to-completed flatness, profinite inverse-image coherence). No fixes were made and no tool_uses were needed."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FlatScalarTowerExchange",
+  "declaration": "CategoryTheory.FlatScalarTowerExchange.flatScalarTowerExchange",
+  "declarations": [
+   "CategoryTheory.FlatScalarTowerExchange.Index",
+   "CategoryTheory.FlatScalarTowerExchange.Corner",
+   "CategoryTheory.FlatScalarTowerExchange.Corner.modulesR",
+   "CategoryTheory.FlatScalarTowerExchange.Corner.modulesS",
+   "CategoryTheory.FlatScalarTowerExchange.Corner.modulesRAbelian",
+   "CategoryTheory.FlatScalarTowerExchange.Corner.modulesSAbelian",
+   "CategoryTheory.FlatScalarTowerExchange.underlying",
+   "CategoryTheory.FlatScalarTowerExchange.Corner.restrict",
+   "CategoryTheory.FlatScalarTowerExchange.LocalizedFunctor",
+   "CategoryTheory.FlatScalarTowerExchange.Corner.Restriction",
+   "CategoryTheory.FlatScalarTowerExchange.EdgeData",
+   "CategoryTheory.FlatScalarTowerExchange.EdgeData.input",
+   "CategoryTheory.FlatScalarTowerExchange.NormalizedDerivedAdjunction",
+   "CategoryTheory.FlatScalarTowerExchange.DerivedImage",
+   "CategoryTheory.FlatScalarTowerExchange.EdgeNormalized",
+   "CategoryTheory.FlatScalarTowerExchange.DerivedEdge",
+   "CategoryTheory.FlatScalarTowerExchange.ModuleSquare",
+   "CategoryTheory.FlatScalarTowerExchange.ModuleSquare.diagrams",
+   "CategoryTheory.FlatScalarTowerExchange.LocalizationSquareNormalized",
+   "CategoryTheory.FlatScalarTowerExchange.Square",
+   "CategoryTheory.FlatScalarTowerExchange.SquareNormalized",
+   "CategoryTheory.FlatScalarTowerExchange.sourceComparison",
+   "CategoryTheory.FlatScalarTowerExchange.targetComparison",
+   "CategoryTheory.FlatScalarTowerExchange.flatScalarTowerExchange"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FlatScalarTowerExchange.lean",
+  "statement": "theorem flatScalarTowerExchange (s : Square (f := f) (g := g) (fp := fp) (gp := gp)) (df : DerivedEdge f fR fS rX rY) (dg : DerivedEdge g gR gS rY' rY) (dfp : DerivedEdge fp fpR fpS rX' rY') (dgp : DerivedEdge gp gpR gpS rX' rX) (θR : gR.L ⋙ fpR.L ≅ fR.L ⋙ gpR.L) (θS : gS.L ⋙ fpS.L ≅ fS.L ⋙ gpS.L) (hθ : SquareNormalized s θR θS) : (∀ M : DerivedCategory Y.modulesS, rX'.functor.map (θS.hom.app M) ≫ dgp.p.hom.app (fS.L.obj M) ≫ gpR.L.map (df.p.hom.app M) = dfp.p.hom.app (gS.L.obj M) ≫ fpR.L.map (dg.p.hom.app M) ≫ θR.hom.app (rY.functor.obj M)) ∧ (whiskerRight (mateEquiv fS.adj fpS.adj (TwoSquare.mk _ _ _ _ θS.hom)).natTrans rY'.functor ≫ (targetComparison dfp dgp).hom = (sourceComparison df dg).hom ≫ whiskerLeft rX.functor (mateEquiv fR.adj fpR.adj (TwoSquare.mk _ _ _ _ θR.hom)).natTrans) ∧ (∀ Z : DerivedCategory X.modulesS, (fpR.adj.homEquiv _ _).symm ((sourceComparison df dg).inv.app Z ≫ rY'.functor.map ((mateEquiv fS.adj fpS.adj (TwoSquare.mk _ _ _ _ θS.hom)).app Z) ≫ (targetComparison dfp dgp).hom.app Z) = θR.hom.app (fR.F.obj (rX.functor.obj Z)) ≫ gpR.L.map (fR.adj.counit.app (rX.functor.obj Z)))",
+  "branch": "newtargets-dag",
+  "by": "N0",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-604287839",
+  "group": "N0",
+  "result": "pass",
+  "note": "Read node, 7 stmt_deps, live FlatRingedDiagramRestriction Defs/Comparisons/Adjuncts and theorem, AlgebraicInverseImage, Mathlib mateEquiv/TwoSquare. Hypotheses match (cornerwise IsFlatOnSite, EdgeData = FlatRingedDiagramInput fields incl. coherent, ModuleSquare coefficient equations + sameGeometry); p,d pinned to DerivedRestrictionComparison b,d with shared rU/qU; θ pinned by underlying-sheaf and localization normalization; derived adjunctions = dep's 0FND hypotheses. Conclusions (C), mate equality as nat-trans equality, explicit transpose all checked factor by factor; J = ULiftHom ULift ℕ+ᵒᵖ. lean.statement verbatim; universes bound; no hollow defs; docstrings OK; no duplicate. Advisory: unused plain imports (stage-3), non-stmt_dep owner decls via flat-ringed-diagram-restriction. No compile (no changes); worker compile 37-38 s clean."
  }
 }

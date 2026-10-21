@@ -22238,3 +22238,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:12 L: merged deliver/K2/Sheaf.Paper.RingedCoefficientPullbackComparison (stage 3; reviewer PASS; after a return; landing 20261021T111227-L-60755 (interface); batch 20261021T110859; modules 1; new nodes 0; change records: coord/changes/K2-ringed-coefficient-pullback-comparison-proof-scope.md)
 - 11:12 L: merged deliver/K3/Sheaf.CategoryTheory.CoextensionIsoEvaluationFormula (stage 3; reviewer PASS; first push; landing 20261021T111230-L-61299 (interface); batch 20261021T110859; modules 1; new nodes 0; change records: coord/changes/K3-coextension-evaluation-import-pruning.md)
 - 11:12 L: merged deliver/NP/lem-pod-stratified-dualizable-hom-continuity (reviewer FIX; first push; new nodes: 0); claim not held by NP: not your claim
+- 11:13 L: merged deliver/N0/lem-weil-pbc-flat-scalar-tower-exchange (stage 2; reviewer PASS; parallel immutable checks)
