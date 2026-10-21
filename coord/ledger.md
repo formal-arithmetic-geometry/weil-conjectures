@@ -23409,3 +23409,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:59 L: returned deliver/B2/Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent (reviewer RETURN: (reviewer C-51828, head 518284896) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.De)
 - 18:59 L: merged deliver/ND/lem-fix-compactification-completed-realization (stage 2; reviewer PASS; parallel immutable checks)
 - 19:01 L: merged deliver/NN/lem-sfb-profinite-action-finite-quotients (reviewer PASS; first push; new nodes: 0)
+- 19:02 L: merged deliver/NA/lem-sfb-polynomial-derived-bar-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 19:02 L: merged deliver/NB/lem-sfb-profinite-constant-derived-functions (stage 2; reviewer FIX; parallel immutable checks)

@@ -14,7 +14,9 @@
   "def-weil-abstract-derived-category",
   "def-weil-size-convention",
   "def-weil-pbc-mv-polynomial-ring",
-  "lem-sfb-condensed-derived-invariant-bar"
+  "lem-sfb-condensed-derived-invariant-bar",
+  "def-sfb-condensed-equivariant-bar-data",
+  "def-sfb-bundled-continuous-scalar-ring"
  ],
  "proof": [
   {
@@ -225,5 +227,38 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-eaecc5192 (reviewer sub-agent of L); spot-checked: I read the item, both new nodes and every cited statement in full, plus the main-20261015 direct-images proof paragraph (3). That paragraph only delegates the open-coefficient case, so the agent-written origin and the WANTED lines are honest. There is no re-split note and no SGA citation. Steps 1-7 check out. I verified the inserted-zero homotopy (delta h + h delta = 1, and h^0 a = 1). The coordinate change x_a = y_a - y_{a-1} identifies K^n with T_{r,nr}, with matching hypotheses. The leading-coefficient invariants argument needs only that A(S) is a Q-algebra, and the faces match the item's differential with its signs. Step 5 uses the bounded-below derived-object clause of sk-thm-acyclicity (declared tool use, accepted as generic). In step 6, e is equivariant and augmentation-preserving, rho is exactly polynomial evaluation, and j Q(rho) is eta, so eta = epsilon c. Epsilon is pinned by the augmentation normalization in def-sfb-condensed-equivariant-bar-data. New nodes: the translation-acyclicity node is plausible and strictly smaller than the item. I tested r=0, spectator variables (a direct sum of copies of T_{r,0}), and r=1, where H^1 of each degree-bounded piece is the top-degree line, the transition maps are zero and cohomology commutes with filtered colimits, so H^1=0. The normalization node is true for every augmentation-preserving e: by naturality of u it reduces to the case K=R_N, e=id, which is the bar normalization. Neither new node duplicates normed-scalar-profinite-hom-acyclic, rational-polynomial-bar-contraction, internal-bar-ordered-cup, derived-injective-resolution-naturality or the dense-lattice node, and there is no cycle. Batch 5: for all three flagged citations, lem-sfb-condensed-derived-restriction-calculus is generic action-category homological algebra. It reaches sec-trace-formula only through lem-trf-bounded-below-derived-mate-model, a general derived-adjunction mate lemma that is no part of the trace formula or Poincare duality. The parent trivial-ladic-derived-exterior already cites the same node, so the batch-5 closure is unchanged. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PolynomialDerivedBarComparison",
+  "declaration": "Profinite.CondensedAction.PolynomialBar.polynomial_derived_bar_comparison",
+  "declarations": [
+   "Profinite.CondensedAction.PolynomialBar.Lattice",
+   "Profinite.CondensedAction.PolynomialBar.latticeTotallyDisconnected",
+   "Profinite.CondensedAction.PolynomialBar.Monomial",
+   "Profinite.CondensedAction.PolynomialBar.polynomialArrow",
+   "Profinite.CondensedAction.PolynomialBar.faceVariable",
+   "Profinite.CondensedAction.PolynomialBar.differentialPolynomial",
+   "Profinite.CondensedAction.PolynomialBar.Complex",
+   "Profinite.CondensedAction.PolynomialBar.trivialScalar",
+   "Profinite.CondensedAction.PolynomialBar.Evaluation",
+   "Profinite.CondensedAction.PolynomialBar.TotalComponents",
+   "Profinite.CondensedAction.PolynomialBar.Comparison",
+   "Profinite.CondensedAction.PolynomialBar.polynomial_derived_bar_comparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PolynomialDerivedBarComparison.lean",
+  "statement": "theorem polynomial_derived_bar_comparison (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (E : IntermediateField ℚ_[ell] Ω) [FiniteDimensional ℚ_[ell] E] (r : ℕ) : Comparison ell E r ∧ Comparison ell Ω r",
+  "branch": "sheaf-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "All helpers belong to the polynomial complex and canonical comparison specified in this node. Complex.isColimit fixes the monomial coproducts; Evaluation.monomial and TotalComponents fix the actual evaluation-resolution arrow. The statement and stage-1 split are unchanged. Return L/H2 repaired: def-sfb-bundled-continuous-scalar-ring owns continuousScalarRing, bundling the already recorded continuous-map sheaf, MonObj and commutativity. It replaces the former added theorem dependency lem-sfb-prime-to-ell-condensed-acyclicity, whose module is no longer imported. The already landed def-sfb-condensed-equivariant-bar-data supplies the compatible bar model."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-4c2a54f3a",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 642ade15. The theorem stmt_dep lem-sfb-prime-to-ell-condensed-acyclicity and its public import are gone. Their place is taken by the new def node def-sfb-bundled-continuous-scalar-ring (module ContinuousScalarRing; continuousScalarRing bundles only the recorded continuousMapRingObjOfUniverse, MonObj and isCommMonObj fields; not hollow, no sorry, same universes). The item module diff vs 642ade15 is only the import swap, two Mathlib imports and a scalarRing to continuousScalarRing rename. The statement is identical to the live node. The prior faithful reading holds (E/Omega conjuncts, noncomplete IsAlgClosure Omega, all-continuous ring, trivial ULift(Fin r -> Z_ell) lattice, monomial coproducts, faceVariable signs, pinned Evaluation, TotalComponents, IsIso in D(Mod A), r=0/n=0). Both lean statements are verbatim and the records are complete. stmt_deps = 7 base + landed def-sfb-condensed-equivariant-bar-data + the new def node. No compile run (no file changed); the worker reports a clean scompile and an OK dry run. Maintainer note: PrimeToEllCondensedAcyclicity.lean:39 keeps an rfl-equal unowned scalarRing; it could become an abbrev of continuousScalarRing. Advisory: the Nonempty Model conjunct restates the bar node."
  }
 }
