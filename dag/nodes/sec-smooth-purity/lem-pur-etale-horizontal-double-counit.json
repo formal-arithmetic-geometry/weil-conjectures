@@ -24,9 +24,131 @@
   "lem-amb-unbounded-compact-support-comparisons",
   "def-weil-pbc-composite-adjunction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the adjunctions in the statement. We use the transpose rule $\\operatorname{adj}^{-1}(x)=\\varepsilon\\circ L(x)$ and its injectivity. In particular, for $\\tau:L_2\\to L_1$, the definition of conjugacy gives\n$$\\varepsilon_{2,K}\\circ L_2(\\tau^c_K)=\\varepsilon_{1,K}\\circ\\tau_{R_1K}.$$\nIndeed, $\\tau^c_K$ is by definition the adjunct of the right side under $L_2\\dashv R_2$. Taking $\\tau=d_a^{-1}:S_a\\to F_a$ therefore gives\n$$\\operatorname{ev}_{a,K}\\circ S_a(\\rho_{a,K})=\\varepsilon_{a,K}\\circ d_{a,G_aK}^{-1}.$$\nThis fixes the counit normalization, including its direction, for both $a=e,e'$.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-adjunction-of-natural-bijection"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 0037 (definition-adjoint), transpose formulas after the definition; conjugate specialization"
+   }
+  },
+  {
+   "text": "Put $L_1=F_hF_{e'}$, $R_1=G_{e'}G_h$, $L_2=F_eF_{h'}$, and $R_2=G_{h'}G_e$, using the composite adjunctions. The equality $he'=eh'$ lets us use one functor $F_{he'}=F_{eh'}$. Define\n$$\\tau=\\alpha_{h,e'}^{-1}\\circ\\alpha_{e,h'}:L_2\\longrightarrow L_1.$$\nContravariant composition of conjugates gives\n$$\\tau^c=c_{e,h'}\\circ c_{h,e'}^{-1}:R_1\\longrightarrow R_2.$$\nHere $\\alpha_{h,e'}^c=c_{h,e'}$ and $\\alpha_{e,h'}^c=c_{e,h'}$ by the specified definitions, so the formula follows by first conjugating $\\alpha_{h,e'}^{-1}$ and then $\\alpha_{e,h'}$. No claim about geometric base change is used in this calculation.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "conjugateEquiv_comp, conjugateEquiv_id, conjugateIsoEquiv; composite adjunction counit as in Stacks 0DV0"
+   }
+  },
+  {
+   "text": "Replace the etale left adjoints by $S_{e'},S_e$. The left-adjoint composite becomes\n$$\\widehat\\tau=F_h(d_{e'})\\circ\\tau\\circ(d_e^{-1}F_{h'}) : S_eF_{h'}\\longrightarrow F_hS_{e'}.$$\nInverting the four factors defining $\\delta$ shows $\\widehat\\tau=\\delta^{-1}$. Under $F_hS_{e'}\\dashv e'^*G_h$ and $S_eF_{h'}\\dashv G_{h'}e^*$, mate pasting for a change of adjunction identifies its conjugate as\n$$\\widehat\\tau^c_K=G_{h'}(\\rho_{e,K})\\circ\\tau^c_K\\circ\\rho_{e',G_hK}^{-1}=b_K.$$\nTo check the two normalization factors: the conjugate of $d_e^{-1}F_{h'}$ is $G_{h'}\\rho_e$, whereas the conjugate of $F_h d_{e'}$ is $\\rho_{e'}^{-1}G_h$. This is the composite-adjunction pasting rule, followed by contravariant composition. Every factor is an isomorphism by conjugacy, so $b$ is an isomorphism of functors.",
+   "uses": [
+    "def-weil-pbc-adjunction-conjugate",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "Mathlib/CategoryTheory/Adjunction/Mates.lean",
+    "place": "mateEquiv_hcomp; mateEquiv_conjugateEquiv_vcomp; conjugateEquiv_mateEquiv_vcomp; conjugateEquiv_comp"
+   }
+  },
+  {
+   "text": "For the normalized composite adjunctions of Step 3 the two counits are, respectively,\n$$t_K\\circ F_h(\\operatorname{ev}_{e',G_hK}),\\qquad\n\\operatorname{ev}_{e,K}\\circ S_e(t'_K).$$\nApply the conjugate transpose identity from Step 1 to $\\widehat\\tau=\\delta^{-1}$ and $\\widehat\\tau^c=b$. It reads\n$$\\operatorname{ev}_{e,K}\\circ S_e(t'_K)\\circ S_eF_{h'}(b_K)=t_K\\circ F_h(\\operatorname{ev}_{e',G_hK})\\circ\\delta^{-1}_{e'^*G_hK}.$$\nFunctoriality of $S_e$ combines its two rightmost factors on the left into $S_e(t'_K\\circ F_{h'}b_K)$. This is the asserted double-counit equality, with domain $S_eF_{h'}e'^*G_hK$.",
+   "uses": [
+    "def-weil-pbc-composite-adjunction",
+    "def-weil-pbc-adjunction-mate",
+    "def-weil-pbc-adjunction-conjugate"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Lemma 0DV0 (lemma-compose-counits) and Definition 0037 (definition-adjoint)"
+   }
+  },
+  {
+   "text": "Apply the existing etale-horizontal support-mate identity with $(f,f',u,u')=(h,h',e,e')$ and $M=G_hK$. Its $d$, $\\alpha$, $\\delta$, and $C$ are exactly the ones specified here, not replacements with the same endpoints. All its hypotheses hold: finite commutative coefficients, Noetherian schemes, separated finite-type arrows, etale horizontal arrows, and compactifications of the arrows and equal composites. It gives\n$$F_h(\\operatorname{ev}_{e',G_hK})\\circ\\delta^{-1}_{e'^*G_hK}\n=\\operatorname{ev}_{e,F_hG_hK}\\circ S_e(C^{-1}_{G_hK}).$$\nAfter postcomposing with $t_K$, naturality of the evaluation counit for $t_K:F_hG_hK\\to K$ changes the right side into\n$$\\operatorname{ev}_{e,K}\\circ S_e\\bigl(e^*(t_K)\\circ C^{-1}_{G_hK}\\bigr).$$\nThus Step 4 and this identity express two equal maps as inverse transposes under $S_e\\dashv e^*$.",
+   "uses": [
+    "lem-pur-etale-horizontal-support-mate",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7J/0F7K: specified compositor; etale-horizontal support-mate identity (existing DAG node), then counit naturality"
+   }
+  },
+  {
+   "text": "Set $N=F_{h'}e'^*G_hK$. The inverse transpose map\n$$\\operatorname{Hom}(N,e^*K)\\longrightarrow\\operatorname{Hom}(S_eN,K),\\qquad x\\longmapsto\\operatorname{ev}_{e,K}\\circ S_e(x)$$\nis injective because it is the inverse adjunction bijection. Cancelling this bijection in Steps 4 and 5 yields\n$$t'_K\\circ F_{h'}(b_K)=e^*(t_K)\\circ C^{-1}_{G_hK}.$$\nApplying the $F_{h'}\\dashv G_{h'}$ bijection identifies $b_K$ as the unique adjunct claimed. Every factor in the displayed expression for $b$ is a natural transformation, so their composition is natural in $K$; the equations just proved are equations of those natural transformations. This argument does not cancel $S_e$ as a faithful functor or assume either evaluation counit is invertible.",
+   "uses": [
+    "lem-weil-pbc-adjunction-of-natural-bijection",
+    "lem-amb-etale-adjoint-locality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Definition 0037 (definition-adjoint), inverse transpose formula and bijectivity"
+   }
+  },
+  {
+   "text": "For a change of compactification, identify the left adjoints by their proper-refinement comparisons. The comparison theorem says that $\\alpha$ and $C$ agree under these identifications, and the quasi-finite comparison theorem says that $d_e,d_{e'}$ do also. For example, if $r_a:F_a^c\\to F_a^{\\tilde c}$, then $d_a^c=d_a^{\\tilde c}\\circ r_a$; substituting this and the corresponding compositor square into the four factors of $\\delta$ cancels each adjacent $r_a,r_a^{-1}$. Thus $\\delta$ agrees. The right-adjoint comparisons are the conjugates of the inverse $r_a$. By the change-of-adjunction pasting rule these same substitutions into $\\widehat\\tau^c=b$ give the right-adjoint comparison square for $b$. The defining transpose identity preserves the counits as in Step 1. Consequently both counit equalities, including their normalization, agree under refinement. The cocycle identity for the left comparisons and contravariant composition give independence of a common refinement on both sides.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "lem-sfb-quasifinite-compact-support-exact",
+    "def-weil-pbc-adjunction-conjugate",
+    "lem-weil-pbc-mate-pasting"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I/0F7J/0F7K and 0GKM: refinement and composition of the specified comparisons; conjugate pasting"
+   }
+  },
+  {
+   "text": "Finally consider a further compatible Cartesian open restriction. For a vertical arrow $a:Z\\to W$ and its restricted arrow $\\bar a:\\bar Z\\to\\bar W$, with open maps $j_Z,j_W$, denote the inverse exchange by $E_a:F_{\\bar a}j_Z^*\\to j_W^*F_a$. Its mate $r_a:j_Z^*G_a\\to G_{\\bar a}j_W^*$ is precisely the right-adjoint restriction comparison specified in the question; its counit equation is\n$$\\varepsilon_{\\bar a,j_W^*K}\\circ F_{\\bar a}(r_{a,K})=j_W^*(\\varepsilon_{a,K})\\circ E_{a,G_aK}.$$\nThe comparison theorem's compatibility of $C$ with successive changes of base gives equality of the two pasted inverse-exchange squares obtained by first restricting our square or first applying its horizontal exchange. Apply mate pasting along the intervening functors to that equality. Its two mates are the two paths comparing the restriction of $b$ with $\\bar b$, since Step 6 identifies $b$ with the mate of $C^{-1}$. Hence their comparison square commutes. This also identifies both counit formulas after restriction, by the displayed counit equation. The normalization uses the same sum adjunctions: clause (1) of the etale support-map compatibility intertwines $d_a$ with the specified sum-extension base-change comparison. Restricting a sum/evaluation counit evaluates each restricted lift, the same operation as restricting its evaluated section; thus this comparison preserves evaluation, degreewise and hence on the stated termwise derived adjunctions. No new smoothness or purity input is involved.",
+   "uses": [
+    "lem-amb-unbounded-compact-support-comparisons",
+    "def-weil-pbc-adjunction-mate",
+    "lem-weil-pbc-mate-pasting",
+    "lem-pur-etale-support-map-compatibility",
+    "lem-amb-etale-adjoint-locality",
+    "def-weil-pbc-etale-sum-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0F7L (lemma-base-change-shriek), compatibility with successive base changes; etale-cohomology.tex Tag 03S6 (lemma-shriek-base-change), sum/evaluation normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adjunction-conjugate",
+  "def-weil-pbc-adjunction-mate",
+  "def-weil-pbc-composite-adjunction",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-pur-etale-horizontal-support-mate",
+  "lem-pur-etale-support-map-compatibility",
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-weil-pbc-adjunction-of-natural-bijection",
+  "lem-weil-pbc-mate-pasting"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-cohsm/lem-pur-co-smooth-etale-locality.proof.md",
+  "place": "Step 1: expand the composite counits and prove the two adjunction cancellations using the existing etale-horizontal support-mate identity; categorical formulas from Stacks 0037/0DV0 and Mathlib Adjunction.Mates"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +184,45 @@
    "results": "[grep] OK 0 hit(s)",
    "date": "2026-10-21",
    "verdict": "no match: hits concern generic categorical adjunctions, ordinary module sheaves, or unrelated condensed/tensor constructions; none states this specified geometric map equality or gives a one-line specialization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an etale horizontal Cartesian square the composite exceptional adjoint comparison satisfies the double counit identity and is the mate of compact support inverse exchange",
+   "results": "Q16 actual logged response: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.mateEquiv_counit\", \"CondensedSet.instIsIsoFunctorCompactlyGeneratedCounitCompactlyGeneratedAdjunction\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app\", \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: general categorical adjunction results and unrelated support constructions do not state the specified geometric-map equality; conjugate and transpose formulas are already cited as existing Mathlib nodes"
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactSupport|exceptional",
+   "results": "Q16 actual logged response: {\"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Tactic/Linarith/Oracle/FourierMotzkin.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\", \"Mathlib/Topology/UrysohnsLemma.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: general categorical adjunction results and unrelated support constructions do not state the specified geometric-map equality; conjugate and transpose formulas are already cited as existing Mathlib nodes"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exceptional inverse image etale horizontal base change equals composite adjoint comparison double counit",
+   "results": "Q16 actual logged response: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.inv_map_unit\", \"CategoryTheory.Adjunction.functorCategory_inverseImage_isomorphisms_counit\", \"CategoryTheory.Equivalence.changeInverse_counitIso_inv_app\", \"CategoryTheory.Adjunction.inv_counit_map\", \"CategoryTheory.ExponentiableMorphism.ev\", \"CategoryTheory.Adjunction.toEquivalence_counitIso_inv_app\", \"CategoryTheory.CatCommSq.hInv_iso_hom_app\", \"CategoryTheory.Comonad.ComonadicityInternal.comparisonAdjunction_counit_f_aux\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: general categorical adjunction results and unrelated support constructions do not state the specified geometric-map equality; conjugate and transpose formulas are already cited as existing Mathlib nodes"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.conjugateEquiv",
+   "results": "Q16 actual logged response: {\"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.conjugateEquiv\", \"CategoryTheory.conjugateEquiv_id\", \"CategoryTheory.conjugateEquiv_iso\", \"CategoryTheory.conjugateEquiv_of_iso\", \"CategoryTheory.conjugateEquiv_symm_id\", \"CategoryTheory.conjugateEquiv_symm_iso\", \"CategoryTheory.conjugateEquiv_symm_of_iso\", \"CategoryTheory.conjugateEquiv_adjunction_id\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: general categorical adjunction results and unrelated support constructions do not state the specified geometric-map equality; conjugate and transpose formulas are already cited as existing Mathlib nodes"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Compact support composition for an etale Cartesian square is compatible with sum extension evaluation and the counit of composite right adjoints",
+   "results": "Q16 actual logged response: {\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CompHausLike.LocallyConstant.adjunction_counit\", \"CompHausLike.LocallyConstant.counit_app_val\", \"CompHausLike.LocallyConstant.adjunction_left_triangle\", \"CompHausLike.LocallyConstant.incl_of_counitAppApp\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\", \"CompHausLike.LocallyConstant.counit\", \"CompHausLike.LocallyConstant.counitAppApp\", \"CompHausLike.LocallyConstant.counitApp_app\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: general categorical adjunction results and unrelated support constructions do not state the specified geometric-map equality; conjugate and transpose formulas are already cited as existing Mathlib nodes"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-etale-dualizing-normalization",
@@ -85,5 +242,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-etale-horizontal-double-counit",
+  "worker": "stage1",
+  "summary": "Proved both specified-map identities by conjugating the compositor difference under the two normalized composite adjunctions, expanding their counits, applying the existing etale-horizontal support mate, and cancelling the sum/evaluation hom bijection. Wrote refinement and open-restriction compatibility. No statement change and no new nodes. Retained the creator searches and appended the actual Q16 searches.",
+  "blueprint": "thm-pur-composition-coherence (main-20261015), Proof Step 1: compatibility with composition of the remaining smooth-base-change/co-projection constituents; via lem-pur-diagonal-section-pasting and lem-pur-finite-etale-dualizing-normalization. Also explicates lem-pur-co-smooth-etale-locality Proof Step 1 (etale normalization natural under base change).",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-quasifinite-compact-support-exact",
+    "why": "Uses only the existing proper-support-to-sum comparison and its invariance under refinement, a general compact-support foundation; no smooth-purity step is replaced."
+   },
+   {
+    "node": "lem-pur-etale-support-map-compatibility",
+    "why": "Clause (1) identifies the chosen proper-support-to-sum comparison under base change with the specified sum-extension comparison, needed to check normalization under open restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-quasifinite-compact-support-exact",
+  "lem-pur-etale-support-map-compatibility"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-0cc8a56a8",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-0cc8a56a8 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item has 8 steps and there are no new nodes. Statement, stmt_deps, source and blueprint are byte-identical to the live side node; only split-owned fields changed. Live the item is still unsplit, it is not on the route-pivot drop list, there is no repair note, and there is no cycle. Typing checks: rho_a=(d_a^{-1})^c is G_a->a^*, c_{b,a} is G_{ba}->G_aG_b, and b_K is e'^*G_hK->G_{h'}e^*K. Step 2: tau^c=c_{e,h'}c_{h,e'}^{-1} by contravariance. Step 3: tau-hat=delta^{-1} factor by factor, and the conjugate equals b_K, using (d_e^{-1}F_{h'})^c=G_{h'}rho_e and (F_h d_{e'})^c=rho_{e'}^{-1}G_h (mate-pasting clauses 2/3). Step 4: the composite counits follow from def-weil-pbc-composite-adjunction. Step 5 cites the statement of lem-pur-etale-horizontal-support-mate with (h,h',e,e') and M=G_hK; its hypotheses, d, alpha, delta and C match literally. Step 6 cancels the S_e-adjunction bijection; the single-counit formula is the counit form of the mate of C^{-1}. Step 7: refinement invariance uses the independence statements of lem-amb-unbounded-compact-support-comparisons and lem-sfb-quasifinite-compact-support-exact. Step 8: open restriction uses C's compatibility with composite base change, mate pasting, and clause (1) of lem-pur-etale-support-map-compatibility. Edge cases checked: h=id, e=id, open e, K=0, empty schemes, A=0. Sources checked: Stacks 0037, 0DV0, 0F7J, 0F7K, 0F7L, 03S6, and blueprint main-20261015 lem-pur-co-smooth-etale-locality Step 1; no SGA is used. No duplicate in the DAG; the support-mate node is strictly smaller. Batch 5: the support-mate path to lem-pod-lisse-module-sheaves-as-module-objects runs through proper-base-change foundations and is already in the base closure via the stmt_dep lem-sfb-quasifinite. The support-map-compatibility path reaches lem-pod-etale-stalk-tensor-scalar, a generic sheaf tensor fact. Neither is part of PD or the trace formula, so both are accepted. The worker wrote tool_uses entries for lem-sfb-quasifinite and support-map-compatibility, which C8 reserves for the maintainer; both are general foundations and I accept them."
  }
 }
