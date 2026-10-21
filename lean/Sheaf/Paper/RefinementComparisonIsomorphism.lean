@@ -202,6 +202,31 @@ def refinementComparisonIsomorphism (K₀ : Type u) [Field K₀]
 
 variable (A : Type (u + 1)) [CommRing A] [Finite A]
 
+/-- Transport proper direct image by equality of scheme maps, without comparing
+large derived functor structures when the equality transport is evaluated.
+Source: equality induction; the original refinement transport
+(blueprint: def-sf-refinement-comparison-isomorphism). -/
+def properTransportDirectImageCongr {X Y : Scheme.{u}} {f g : X ⟶ Y} (h : f = g) :
+    (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorPlus ≅
+      (lowerStar (ModuleCat.{u + 1} A) g).rightDerivedFunctorPlus := by
+  subst g
+  exact Iso.refl _
+
+omit [Finite A] in
+/-- Equality transport is the identity for a reflexive equality. -/
+@[simp]
+theorem properTransportDirectImageCongr_rfl {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    properTransportDirectImageCongr A (rfl : f = f) = Iso.refl _ := rfl
+
+omit [Finite A] in
+/-- This efficient equality transport is the usual transport isomorphism. -/
+theorem properTransportDirectImageCongr_eqToIso {X Y : Scheme.{u}} {f g : X ⟶ Y}
+    (h : f = g) :
+    properTransportDirectImageCongr A h = eqToIso (congrArg
+      (fun t ↦ (lowerStar (ModuleCat.{u + 1} A) t).rightDerivedFunctorPlus) h) := by
+  subst g
+  rfl
+
 /-- The actual refinement arrow on bounded-below comparison inputs: the direct-image
 compositor followed by the proper image of the inverse specified proper/open arrow.
 It is meaningful for every refinement, including noncartesian refinements.
@@ -210,9 +235,7 @@ Source: Stacks 0F7I, and def-sf-refinement-comparison-isomorphism, part (b)
 def properTransportRefinementPlus {X Y : Scheme.{u}} {f : X ⟶ Y}
     {c d : Compactification f} (r : c.Refinement d)
     (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} A))) :=
-  (eqToIso (congrArg
-      (fun q ↦ (lowerStar (ModuleCat.{u + 1} A) q).rightDerivedFunctorPlus)
-      r.hom_g.symm)).app
+  (properTransportDirectImageCongr A r.hom_g.symm).app
         ((openImmersionLowerShriek (ModuleCat.{u + 1} A) c.i).mapDerivedCategoryPlus.obj
           ((comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategoryPlus.obj L)) ≪≫
     (proEtaleComparisonDirectImageCompIso A r.hom d.g).symm.app

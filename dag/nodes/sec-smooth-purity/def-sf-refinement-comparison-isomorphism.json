@@ -33,9 +33,19 @@
   "def-weil-pbc-site-comparison-morphism",
   "def-weil-pbc-etale-origin-witness"
  ],
- "proof": [],
+ "proof": [
+  {
+   "text": "The existing proper/open and proper-composition construction is unchanged. Represent its equality transport by properTransportDirectImageCongr, constructed by induction on equality of the scheme maps. The reflexive case is the identity natural isomorphism. The proved properTransportDirectImageCongr_eqToIso theorem identifies this factor with the former eqToIso of congrArg, also by equality induction; therefore the actual refinement isomorphism is unchanged. This representation avoids comparing complete derived functor structures when evaluating the equality transport.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
  "proof_deps": [],
- "proof_origin": null,
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-operations/prop-compactification-coherence.md",
+  "place": "Existing refinement construction; H4 proof-preserving equality-transport implementation, analogous to ProEtale.rightDerivedLowerShriekCongr."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -98,7 +108,10 @@
    "AlgebraicGeometry.ProEtale.refinementFiniteLevelFixedObject",
    "AlgebraicGeometry.ProEtale.refinementComparisonIsomorphism",
    "AlgebraicGeometry.ProEtale.properTransportRefinementPlus",
-   "AlgebraicGeometry.ProEtale.properTransportRefinement"
+   "AlgebraicGeometry.ProEtale.properTransportRefinement",
+   "AlgebraicGeometry.ProEtale.properTransportDirectImageCongr",
+   "AlgebraicGeometry.ProEtale.properTransportDirectImageCongr_rfl",
+   "AlgebraicGeometry.ProEtale.properTransportDirectImageCongr_eqToIso"
   ],
   "file": "lean/Sheaf/Paper/RefinementComparisonIsomorphism.lean",
   "statement": "def refinementComparisonIsomorphism (K₀ : Type u) [Field K₀] (l : ℕ) [Fact l.Prime] (_hl : IsUnit (l : K₀)) (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (n : ℕ) (hn : 1 ≤ n) {X Y : Scheme.{u}} [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] {c₁ c₂ : Compactification f} (r : c₁.Refinement c₂) (O : RefinementFiniteLevelOrigin l E n hn X) : (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) c₁).obj (refinementFiniteLevelFixedObject l E n hn X O) ≅ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1} (Padic.coefficientExtensionRing l E n))) c₂).obj (refinementFiniteLevelFixedObject l E n hn X O)",
@@ -115,5 +128,15 @@
   "group": "Q44",
   "result": "pass",
   "note": "Every hypothesis matches the node and none is stronger: field k, prime l invertible in k, E/Q_l finite, n:ℕ+, separated finite-type k-schemes and maps, the IsProper h ∨ IsProper f disjunction, arbitrary compactifications ch/cf/chf, L in D+. All three conclusions match: the composition square with the recorded compositors (Etale.unboundedEtaleLowerShriekCompIso; originCompositionAmbient), c = symm of compactSupportSiteComparison (b, then P(e)), correct order and direction; the refinement square with the actual def (b) refinement map; the proper case c = b under adjunction-built identity-open identifications. The statement is verbatim. Dependency repairs: cor-cbc-proper-coincidence now states that Ex_! equals the PBC exchange, using the recorded maps (the old record was only a Nonempty iso); the other three modules only migrate imports, plus two def (b) helpers in the owning refinement module. No hollow definitions; sorry only in theorems; docstrings and the 10 proof steps present. nt_compile --json on all 5 files: rc 0, clean. Direct importers: ProjectiveLineFullAdjunction compiles before and after; CompactificationCoherence, CompactCoefficientComposition, FiniteCoefficientDirectImage and EtaleGeometricBiduality fail at baseline from unrelated duplicate-import or DeltaRestriction errors, the same way with the delivery, so no regression. Observations only: the recorded pro-etale compositor and proper/open map are conjugations of the etale ones, so the squares are near-formal (inherited from thm-sf-comp-composition); E : Type (u+1) is a presentation convention, not a restriction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-9bd4b",
+  "group": "H4",
+  "result": "fix",
+  "landing": "20261021T013343-L-2289028",
+  "kind": "interface",
+  "note": "independent cc review: delivered item and adapted RefinementComparisonIsomorphism vs live clone, node records (incl. def-pur-chosen-compactification-compositors lean.statement), change records, unit route; old vs new compositor definitions via originComposition_model"
  }
 }
