@@ -25,9 +25,134 @@
   "lem-pur-support-quotient-flat",
   "lem-weil-pbc-comparison-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first on the etale sites. Write $U=T\\setminus C$, $U'=T'\\setminus C'$, and $b:j_!A_U\\to A_T$ for the defining open-inclusion arrow. The category of constant-ring module sheaves is abelian, with cokernels obtained by sheafifying sectionwise cokernels. By exactness of constant-coefficient module pullback, the sequence\n$$f_{\\mathrm{et}}^*j_!A_U\\xrightarrow{f^*b} A_{T'}\\xrightarrow{f^*r^{\\mathrm{et}}_{T,C}}f_{\\mathrm{et}}^*Q^{\\mathrm{et}}_{T,C}\\to0$$\nis a cokernel presentation, using the constant-section-preserving identification $f^*A_T\\cong A_{T'}$. In particular $f^*r^{\\mathrm{et}}_{T,C}$ is an epimorphism.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "prop-weil-pbc-inverse-image-modules-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (1); constant-ring module version of Tag 04JC, sites-modules.tex lemma-flat-pullback-exact"
+   }
+  },
+  {
+   "text": "The composite $h=r^{\\mathrm{et}}_{T',C'}\\circ f^*b$ is zero. Indeed, at a geometric point $\\bar x'$ in $C'$, the image $\\bar x=f\\bar x'$ lies in $C$, by the assumed factorization of $fa'$ through $a$. The inverse-image stalk isomorphism and extension-by-zero stalk formula give\n$$(f^*j_!A_U)_{\\bar x'}\\cong(j_!A_U)_{\\bar x}=0.$$\nAt a geometric point outside $C'$ the target stalk $(Q^{\\mathrm{et}}_{T',C'})_{\\bar x'}$ is zero by the support-quotient stalk formula. Thus every stalk of $h$ is zero. For completeness, exact stalk functors carry the abelian-sheaf image of $h$ to its zero stalk image; conservativity applied to $0\\to\\operatorname{im}(h)$ makes this image zero, hence $h=0$. This argument is on underlying abelian sheaves and therefore also proves the equality of module morphisms.",
+   "uses": [
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lem-weil-pbc-extension-by-zero-stalks",
+    "lem-pur-support-quotient-flat",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03Q1 (lemma-stalk-pullback), 03PT (lemma-stalk-exact), 03PU (theorem-exactness-stalks); extension-by-zero stalk description in proposition-describe-jshriek"
+   }
+  },
+  {
+   "text": "The cokernel universal property applied to $h=0$ gives the unique $A_{T'}$-linear map $c^{\\mathrm{et}}_{f;C,C'}$ satisfying the stated equation. On a geometric stalk in $C'$, the source and target quotient stalks are both $A$, and both quotient maps in that equation are the identity of $A$. Here the source identification uses the natural inverse-image stalk isomorphism, which carries pulled-back constant germs to the same constant germs. Hence the stalk of $c^{\\mathrm{et}}$ is $\\operatorname{id}_A$. Outside $C'$ its target is zero and its stalk is the unique map to zero (the source can be $A$ or zero).",
+   "uses": [
+    "lem-pur-support-quotient-flat",
+    "lem-weil-pbc-inverse-image-stalk-germ"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1, lemma-stalk-pullback (3); agent cokernel construction from the preceding vanishing"
+   }
+  },
+  {
+   "text": "If $C'=T'\\times_TC$, a geometric point of $T'$ lies in $C'$ exactly when its image lies in $C$. The stalks of $f^*Q^{\\mathrm{et}}_{T,C}$ and $Q^{\\mathrm{et}}_{T',C'}$ are therefore simultaneously $A$ or zero. The map computed in the preceding step is respectively $\\operatorname{id}_A$ or the unique isomorphism $0\\to0$. Geometric-stalk conservativity gives that $c^{\\mathrm{et}}_{f;C,C'}$ is an isomorphism. This uses the actual fiber product of the closed immersions, and does not assert that a morphism factors through a closed subscheme merely from inclusion of its image.",
+   "uses": [
+    "lem-pur-support-quotient-flat",
+    "lem-weil-pbc-inverse-image-stalk-germ",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03Q1 (3), lemma-stalk-pullback, and Tag 03PU, theorem-exactness-stalks"
+   }
+  },
+  {
+   "text": "Write $\\rho_f:\\nu_{T'}^*f_{\\mathrm{et}}^*\\xrightarrow{\\sim}f_{\\mathrm{proet}}^*\\nu_T^*$ for the natural isomorphism of lem-weil-pbc-comparison-pullback. On module sheaves all four functors are the set-sheaf functors applied to the underlying sheaf, addition, zero, negation and each scalar endomorphism, so $\\rho_f$ is natural for maps of sheaves of sets and its components are module maps. All four functors preserve the final sheaf $*$: $\\nu^*$ is a finite-limit-preserving left adjoint, and the etale and pro-etale inverse images preserve finite products. Hence $\\rho_{f,*}$ is the unique map of final sheaves. We check that $\\rho_{f,A_T}$ is the identity of $A_{T'}$ under the identifications $\\nu_{T'}^*f_{\\mathrm{et}}^*A_T\\cong A_{T'}\\cong f_{\\mathrm{proet}}^*\\nu_T^*A_T$, each adjoint to a constant-section map and so carrying the pulled-back constant section $a$ to the constant section $a$. For $a\\in A$ the constant section is a map $a:*\\to A_T$, and naturality gives $\\rho_{f,A_T}\\circ\\nu_{T'}^*f_{\\mathrm{et}}^*(a)=f_{\\mathrm{proet}}^*\\nu_T^*(a)\\circ\\rho_{f,*}$. Thus the transported $\\rho_{f,A_T}$ is an endomorphism of $A_{T'}$ fixing every constant section; as $A_{T'}$ is the sheafification of the constant presheaf, the universal property of sheafification makes it the identity. The same argument applies to every natural isomorphism between composites of these finite-product-preserving functors, in particular to the identity and composition comparisons on either site, so they respect the coefficient identifications; on the pro-etale site this is the equation of lem-pur-proetale-constant-ring-composition. Consequently naturality of $\\rho_f$ applied to $r^{\\mathrm{et}}_{T,C}$ can be used with exactly the coefficient identifications in the statement. No property of the construction of $\\rho_f$ beyond its statement is used.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-proetale-inverse-image",
+    "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-pbc-constant-sheaf",
+    "def-weil-pbc-sheafification",
+    "lem-pur-proetale-constant-ring-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Agent normalization calculation: naturality of the stated comparison at constant sections; blueprint final paragraph, comparison commutes with pullback"
+   }
+  },
+  {
+   "text": "Now define the pro-etale map by the actual composite of ordinary module morphisms\n$$c^{\\mathrm{proet}}_{f;C,C'}=\\alpha_{T',C'}\\circ\\nu_{T'}^*(c^{\\mathrm{et}}_{f;C,C'})\\circ\\rho_{f,Q^{\\mathrm{et}}_{T,C}}^{-1}\\circ(f_{\\mathrm{proet}}^*\\alpha_{T,C})^{-1}.$$\nThe normalization $\\alpha\\circ\\nu^*r^{\\mathrm{et}}=r^{\\mathrm{proet}}$, naturality of $\\rho_f$ at $r^{\\mathrm{et}}$, and its coefficient normalization just checked give $c^{\\mathrm{proet}}\\circ f_{\\mathrm{proet}}^*r^{\\mathrm{proet}}=r^{\\mathrm{proet}}_{T',C'}$. Moreover $f_{\\mathrm{proet}}^*r^{\\mathrm{proet}}$ is, through these same isomorphisms, $\\nu_{T'}^*(f_{\\mathrm{et}}^*r^{\\mathrm{et}})$. The latter is an epimorphism because the module comparison functor is exact. Thus precomposition with $f_{\\mathrm{proet}}^*r^{\\mathrm{proet}}$ is injective on morphisms and proves uniqueness on the pro-etale site. Multiplying the displayed defining formula by $f_{\\mathrm{proet}}^*\\alpha_{T,C}$ on the right gives precisely the required site-comparison square under $\\rho_f$.",
+   "uses": [
+    "lem-pur-support-quotient-flat",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Agent quotient transport along the normalized ordinary comparisons; blueprint final paragraph, exact comparison and pullback"
+   }
+  },
+  {
+   "text": "In the Cartesian-support case the etale map was proved to be an isomorphism. Its image under $\\nu_{T'}^*$ is an isomorphism (a functor sends an inverse to an inverse), and every other factor in the displayed formula for $c^{\\mathrm{proet}}$ is an isomorphism. Their composite is therefore an isomorphism as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Agent direct consequence of the displayed transport formula"
+   }
+  },
+  {
+   "text": "For an identity map of pairs, the identity of $Q^\\tau_{T,C}$ satisfies the defining quotient equation, so uniqueness gives the identity assertion in each topology. For $T''\\xrightarrow gT'\\xrightarrow fT$, use the canonical inverse-image composition comparison, whose coefficient normalization was checked above. Precomposing the proposed composite with $(f\\circ g)^*r^\\tau_{T,C}$ gives\n$$c^\\tau_{g;C',C''}\\circ g^*(c^\\tau_{f;C,C'}\\circ f^*r^\\tau_{T,C})=c^\\tau_{g;C',C''}\\circ g^*r^\\tau_{T',C'}=r^\\tau_{T'',C''}.$$\nThe pair condition is transitive, since the two given factorizations compose. Uniqueness for the pair $(f\\circ g;C,C'')$ proves the composition equation. These are equalities of ordinary sheaf morphisms: no derived or stalkwise equality is substituted for the asserted equalities. Quasi-compactness is used only to keep all the support quotients and their comparisons within the hypotheses of lem-pur-support-quotient-flat; no flatness of a scheme morphism or reducedness assumption was used.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "lem-pur-proetale-constant-ring-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+    "place": "Agent cancellation of the quotient epimorphism; blueprint final paragraph, comparison commutes with pullback"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-sheafification",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-proetale-inverse-image",
+  "def-weil-sheaf-of-modules-category",
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-pur-support-quotient-flat",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "prop-weil-pbc-inverse-image-modules-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+  "place": "Final paragraph: normalized comparison commuting with pullback; cokernel argument using Stacks Tags 03Q1, 03PT and 03PU"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +195,52 @@
    "results": "[grep] OK 0 hit(s)\nMathlib subdirectory: AlgebraicGeometry",
    "date": "2026-10-21",
    "verdict": "no match: general pullback composition, free-sheaf presentation and topological sheaf gluing results do not supply the closed-pair quotient maps or their normalized etale/pro-etale comparison square"
+  },
+  {
+   "tool": "grep",
+   "query": "supportQuotient|extensionByZero.*pullback|pullback.*extensionByZero",
+   "results": "Logged 0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general module pullback, free-sheaf, Zariski module restriction, or topological sheaf facts, not the etale/pro-etale closed-pair support quotient theorem"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, CategoryTheory.Limits.cokernel",
+   "results": "Logged 0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general module pullback, free-sheaf, Zariski module restriction, or topological sheaf facts, not the etale/pro-etale closed-pair support quotient theorem"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Pullback of constant sheaf modulo open extension by zero under a map of closed supports is compatible with etale proetale comparison",
+   "results": "Logged 8 hits: TopCat.Presheaf.pullback_obj_obj_ext, TopCat.Presheaf.pullbackObjObjOfImageOpen, SheafOfModules.pullback, TopCat.Presheaf.stalkPullbackHom, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso, AlgebraicGeometry.Scheme.Modules.germ_restrictStalkNatIso_inv_app, CompHausLike.LocallyConstant.functor_map_val, SheafOfModules.pullbackObjFreeIso",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general module pullback, free-sheaf, Zariski module restriction, or topological sheaf facts, not the etale/pro-etale closed-pair support quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image of the cokernel of extension by zero of the constant sheaf on an open complement, functorial maps for closed support pairs",
+   "results": "Logged 8 hits: TopCat.Sheaf.extend_hom_app, SheafOfModules.generatorsOfIsCokernelFree_π, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd, TopCat.Sheaf.objSupIsoProdEqLocus_inv_fst, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Sheaf.interUnionPullbackCone_snd",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general module pullback, free-sheaf, Zariski module restriction, or topological sheaf facts, not the etale/pro-etale closed-pair support quotient theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change for extension by zero on an open immersion and the resulting cokernel of the counit on constant module sheaves",
+   "results": "Logged 8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general module pullback, free-sheaf, Zariski module restriction, or topological sheaf facts, not the etale/pro-etale closed-pair support quotient theorem"
+  },
+  {
+   "tool": "grep",
+   "query": "lowerShriek|extensionByZero|supportQuotient",
+   "results": "Logged 0 hits: none",
+   "date": "2026-10-21",
+   "verdict": "no match: these are general module pullback, free-sheaf, Zariski module restriction, or topological sheaf facts, not the etale/pro-etale closed-pair support quotient theorem"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-support-quotient-product",
@@ -93,5 +260,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-support-quotient-pair-pullback",
+  "worker": "stage1",
+  "summary": "Constructed the etale map by annihilating the pulled-back open relation on geometric stalks and the cokernel universal property; computed its stalks and Cartesian isomorphism. Constructed the pro-etale map explicitly through the normalized comparison, proved its quotient epimorphism and uniqueness, and checked identities, composition and the comparison square. Statement unchanged; no new nodes.",
+  "blueprint": "Final paragraph of lem-pur-kunneth-supported.proof.md: exact comparison commutes with pullback and transports the supported product maps. Steps 1-4 establish the underlying etale pair maps; steps 5-7 establish their normalized pro-etale transport; step 8 establishes functoriality.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exactness and normalized constant coefficients for arbitrary etale module pullback; a site-theoretic tool, not a replacement purity route."
+   },
+   {
+    "node": "lem-weil-pbc-inverse-image-stalk-germ",
+    "why": "Inverse-image geometric stalks and constant germs for the etale quotient calculation; no support-pair theorem is assumed."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-stalks",
+    "why": "The zero stalk off the extending open, for the pulled-back relation; an ordinary sheaf tool."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Detection of the zero image and the Cartesian isomorphism on the etale site only."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Canonical ordinary etale/pro-etale pullback comparison, already required by the ancestor blueprint proof."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Exactness of ordinary finite constant-coefficient site comparison, to preserve the quotient epimorphism."
+   },
+   {
+    "node": "lem-pur-proetale-constant-ring-composition",
+    "why": "Normalization of the specified pro-etale constant-ring maps for composition; a coefficient-coherence tool."
+   },
+   {
+    "node": "lem-weil-pbc-etale-inverse-image-algebraic-structures",
+    "why": "The etale set-sheaf inverse image preserves the final sheaf and finite products, so the stated comparison is natural at constant sections; a site-theoretic tool for the coefficient normalization of step 5."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-inverse-image-stalk-germ",
+  "lem-weil-pbc-extension-by-zero-stalks",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-sf-comparison-pullback-exact",
+  "lem-pur-proetale-constant-ring-composition",
+  "lem-weil-pbc-etale-inverse-image-algebraic-structures"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q120-ae8d92733",
+  "group": "Q120",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q120-ae8d92733 (reviewer sub-agent of L); spot-checked: 0-new-node split of lem-pur-support-quotient-pair-pullback, with the statement unchanged against base b813667. It is still unsplit live and not dropped. No repair note names this item (the only note is the parent lem-pur-support-quotient-product's, already resolved). It cites no SGA. I read all 8 steps against the statements of the cited nodes, and the maths is correct. Step 1: prop-weil-pbc-inverse-image-modules-exact (1) and (3) give the cokernel presentation, with no flatness of f. Step 2: extension-by-zero stalks (2), the inverse-image stalk-germ isomorphism and the support-quotient-flat stalk formula make every stalk of h zero; geometric-stalk exactness and conservativity on its image then give h=0. Step 3: the germ clause gives the stalk identity on C'. Step 4: |T'×_T C| = f⁻¹(C), so the Cartesian case is an isomorphism. Step 6: the alpha normalization, naturality of rho and exactness of nu* (lem-sf-comparison-pullback-exact (2)) give epi and uniqueness. Step 8: identity and composition follow by uniqueness, with lem-pur-proetale-constant-ring-composition. Small cases checked: C empty, C=T, C' empty, strict C' inside f⁻¹C (source A, target 0, so no isomorphism is claimed there), and a non-reduced T. FIX (C3): step 5 took the constant normalization of rho_f from the adjoint-conjugate construction in the proof of lem-weil-pbc-comparison-pullback, and the etale composition normalization from a construction its cited statement does not give. I rewrote step 5 to use statements only: all functors preserve the final sheaf (site-comparison definition; lem-weil-pbc-etale-inverse-image-algebraic-structures (1); pro-etale finite products), naturality at the constant sections a:*→A_T, and the universal property of def-weil-pbc-sheafification. I recomputed proof_deps (lem-weil-pbc-conjugate-iso-unit-equation is no longer used and was removed) and added lem-weil-pbc-etale-inverse-image-algebraic-structures to tool_uses. I accepted the other 7 tool_uses as site and coefficient tools. Maintainer note: lem-pur-supported-constant-exchange-normalization (Q55, unsplit) overlaps the Cartesian case for i_*A_Z, but it does not restate this item.; 1 file(s) fixed by the reviewer"
  }
 }

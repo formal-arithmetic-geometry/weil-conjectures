@@ -21255,3 +21255,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:43 L: merged deliver/Q144/lem-cbc-regular-quotient-cone-augmentation (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q87/lem-pur-proetale-direct-image-global-evaluation (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q15/lem-pur-finite-product-field-coefficient-descent (reviewer FIX; first push; new nodes: 0)
+- 08:43 L: merged deliver/Q120/lem-pur-support-quotient-pair-pullback (reviewer FIX; first push; new nodes: 0)
