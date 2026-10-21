@@ -15,9 +15,90 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "def-weil-pbc-strict-perfect-coefficient-package"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For any such $u$ and any fixed $E$, put $F(Q)=RE\\otimes^LQ$ and $G(Q)=R(E\\otimes^LLQ)$. By [lem-weil-pbc-ringed-projection-mate-exact], these are exact additive functors and the specified map $\\pi_Q:F(Q)\\to G(Q)$ is natural, commutes with integer shifts and gives a morphism of distinguished triangles. Under the unit identifications $\\pi_{R_Y}=1_{RE}$. Hence $\\pi_{R_Y[n]}$ is invertible for every integer $n$, including negative $n$. This argument applies to every ringed slice morphism as well, and puts no bound on $E$.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula, proof"
+   }
+  },
+  {
+   "text": "The isomorphism locus of $\\pi$ is closed under finite sums and retracts. Indeed, additivity and naturality from [lem-weil-pbc-ringed-projection-mate-exact] identify $\\pi_{Q_1\\oplus Q_2}$ with the diagonal matrix $(\\pi_{Q_1},\\pi_{Q_2})$. If $Q\\xrightarrow{i}H\\xrightarrow{p}Q$ satisfies $pi=1$ and $\\pi_H$ is invertible, the map $F(p)\\pi_H^{-1}G(i):G(Q)\\to F(Q)$ is its inverse: composing with $\\pi_Q$ on either side and using naturality gives respectively $F(p)F(i)=1$ and $G(p)G(i)=1$. By step 1 this proves the assertion for every shift of a sheaf which is a direct summand of a finite free sheaf, including rank zero.",
+   "uses": [
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula, proof"
+   }
+  },
+  {
+   "text": "Suppose $Q$ is represented by a strict-perfect complex $T$ supported in $[a,b]$, with the degreewise splittings of [def-weil-pbc-strict-perfect-coefficient-package]. For $c\\in\\mathbf Z$ let $T_{\\ge c}$ be the stupid tail (equal to $T$ in degrees at least $c$ and zero below). In each degree the sequence $0\\to T_{\\ge c+1}\\to T_{\\ge c}\\to T^c[-c]\\to0$ is split exact: above $c$ its maps are identity and zero, at $c$ they are zero and identity, and below $c$ everything is zero. Thus [lem-weil-pbc-degreewise-split-derived-triangle] gives its distinguished triangle. Descend from $c=b+1$ to $c=a$: the initial tail is zero, where an additive transformation between additive functors is invertible; at each step $\\pi_{T^c[-c]}$ is invertible by step 2. The transformation gives a morphism between the two image triangles by [lem-weil-pbc-ringed-projection-mate-exact], and [lem-sf-triangle-morphism-iso] makes $\\pi_{T_{\\ge c}}$ invertible from the outer two components. The final tail is $T$ itself. Naturality conjugates this isomorphism along any derived isomorphism $T\\cong Q$. This argument uses the degreewise summands directly, without claiming that their splittings are chain maps into a free complex.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-weil-pbc-degreewise-split-derived-triangle",
+    "lem-weil-pbc-ringed-projection-mate-exact",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula, proof"
+   }
+  },
+  {
+   "text": "Fix a target site object $V$. By the perfectness condition in [def-weil-pbc-strict-perfect-coefficient-package], choose a covering $\\{V_i\\to V\\}$ on which $P$ has strict-perfect representatives. For each $i$ put $A_i=a(h_{V_i})$ and $B_i=u^{-1}A_i$. By [lem-weil-pbc-element-restriction-hom], module sheaves on the element-site slice at $A_i$ are equivalent to module sheaves on the usual localized site at $V_i$, and element restriction corresponds to ordinary restriction. Apply [lem-sbc-ringed-topos-sheaf-slice-derived-comparison] to $A_i$: the pullback comparison is the one induced by the ringed square and its exchange mate $\\beta$ is invertible. The canonical tensor comparisons for the restrictions are those of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; here derived restriction is ordinary exact restriction. In [lem-weil-pbc-ringed-exchange-tensor-coherence] set $f=u$, $g=j_{A_i}$, $g'=j_{B_i}$, $f'=u_{A_i}$ and $Q=P$. Its displayed equality identifies restriction of $\\pi_{u,E,P}$, conjugated by these invertible comparisons, with $\\pi_{u_{A_i},r_XE,r_YP}$. Step 3 proves the latter invertible on its strict-perfect model. Consequently $\\pi_{u,E,P}|_{V_i}$ is invertible. Bounds and ranks are chosen separately on each $V_i$.",
+   "uses": [
+    "def-weil-pbc-strict-perfect-coefficient-package",
+    "lem-weil-pbc-element-restriction-hom",
+    "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-exchange-tensor-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula, proof"
+   }
+  },
+  {
+   "text": "For each integer $q$, exact restriction commutes with $H^q$ by [lem-weil-pbc-exact-functor-complex-cohomology], so step 4 makes every $H^q(\\pi)$ invertible on the covering slices. This natural cohomology comparison also applies to derived arrows: represent an arrow by a roof, apply the natural comparison to both chain maps, and invert the image of the quasi-isomorphism. Collect the domains $V_i$ of the chosen coverings for all site objects $V$; they form a small family whose domain sieve covers every $V$. Apply [lem-sfb-sheaf-cover-local-isomorphism] to the underlying abelian sheaves of $H^q(\\pi)$. The resulting inverse is module-linear, since the original map is module-linear and bijective. Thus $H^q(\\pi)$ is invertible for every $q$. By [lem-weil-pbc-unbounded-derived-iso-cohomology], $\\pi$ is an isomorphism in the ordinary unbounded derived category. No common bound on the local complexes or on $E$ has been used.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-sfb-sheaf-cover-local-isomorphism",
+    "lem-weil-pbc-unbounded-derived-iso-cohomology"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0944, lemma-projection-formula, proof"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "def-weil-pbc-strict-perfect-coefficient-package",
+  "lem-weil-pbc-degreewise-split-derived-triangle",
+  "lem-sf-triangle-morphism-iso",
+  "lem-weil-pbc-element-restriction-hom",
+  "lem-sbc-ringed-topos-sheaf-slice-derived-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "lem-sfb-sheaf-cover-local-isomorphism",
+  "lem-weil-pbc-unbounded-derived-iso-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0944, lemma-projection-formula, proof"
+ },
  "mathlib_searches": [
   {
    "tool": "loogle",
@@ -60,10 +141,52 @@
    "results": "{\"t\": \"2026-10-21T03:55:02Z\", \"tool\": \"grep\", \"query\": \"projection|dualizable|rigid\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/OfEquivalence.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Rigid/Functor.lean\"], \"digest\": \"74dd05a4caf93ce8\"}",
    "date": "2026-10-21",
    "verdict": "no match: derived-category localization and derived-zero comparison lemmas, underived monoidal adjunctions, rigid-category structures and internally projective condensed sheaves do not state the perfect-complex projection theorem for arbitrary ringed topoi; the projectionFormula grep returned no hits."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|Perfect.*[Tt]ensor",
+   "results": "{\"t\": \"2026-10-21T04:14:53Z\", \"tool\": \"grep\", \"query\": \"projectionFormula|projection_formula|Perfect.*[Tt]ensor\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: zeroth derived functors, localization of exact functors, Tor, and underived monoidal adjunctions do not assert the unbounded perfect-coefficient projection formula for arbitrary ringed topoi."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A perfect complex of sheaves satisfies the derived projection formula without boundedness of the other complex",
+   "results": "{\"t\": \"2026-10-21T04:14:54Z\", \"tool\": \"leansearch\", \"query\": \"A perfect complex of sheaves satisfies the derived projection formula without boundedness of the other complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"DerivedCategory.from_singleFunctor_obj_eq_zero_of_projective\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality_assoc\", \"AlgebraicGeometry.Scheme.Modules.instFullPushforward\", \"CategoryTheory.ProjectiveResolution.pOpcycles_comp_fromLeftDerivedZero'\", \"TopCat.Presheaf.SheafConditionEqualizerProducts.res_π\", \"CategoryTheory.ProjectiveResolution.instQuasiIsoIntπ'\", \"SheafOfModules.sheafificationCompPullback\", \"CochainComplex.isKProjective_of_iso\"], \"digest\": \"b4f1d4bd557ea215\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: zeroth derived functors, localization of exact functors, Tor, and underived monoidal adjunctions do not assert the unbounded perfect-coefficient projection formula for arbitrary ringed topoi."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory",
+   "results": "{\"t\": \"2026-10-21T04:14:54Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Adjunction, CategoryTheory.MonoidalCategory\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.leftAdjointOplaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.IsMonoidal\", \"CategoryTheory.Adjunction.laxMonoidalEquivOplaxMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal\", \"CategoryTheory.Adjunction.instIsMonoidal_1\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.IsMonoidal.leftAdjoint_ε\"], \"digest\": \"ec73ed347580c9e9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: zeroth derived functors, localization of exact functors, Tor, and underived monoidal adjunctions do not assert the unbounded perfect-coefficient projection formula for arbitrary ringed topoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical unbounded derived projection formula for a morphism of ringed topoi is an isomorphism for a locally perfect coefficient complex",
+   "results": "{\"t\": \"2026-10-21T04:14:55Z\", \"tool\": \"leanfinder\", \"query\": \"The canonical unbounded derived projection formula for a morphism of ringed topoi is an isomorphism for a locally perfect coefficient complex\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.instIsIsoAppFromLeftDerivedZero\", \"CategoryTheory.instIsIsoFromLeftDerivedZero'\", \"CategoryTheory.instIsIsoFunctorFromLeftDerivedZero\", \"CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self\", \"CategoryTheory.instIsIsoAppToRightDerivedZero\", \"CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective\", \"CategoryTheory.instIsIsoToRightDerivedZero'\", \"DerivedCategory.exists_iso_singleFunctor_obj_of_isGE_of_isLE\"], \"digest\": \"8a5e28a8bf9f5b6b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: zeroth derived functors, localization of exact functors, Tor, and underived monoidal adjunctions do not assert the unbounded perfect-coefficient projection formula for arbitrary ringed topoi."
+  },
+  {
+   "tool": "grep",
+   "query": "perfect|projectionFormula",
+   "results": "{\"t\": \"2026-10-21T04:15:18Z\", \"tool\": \"grep\", \"query\": \"perfect|projectionFormula\", \"sub\": \"Algebra/Homology\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: zeroth derived functors, localization of exact functors, Tor, and underived monoidal adjunctions do not assert the unbounded perfect-coefficient projection formula for arbitrary ringed topoi."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In an unbounded derived category of sheaves a locally bounded finite projective tensor factor can be moved through a right derived pushforward",
+   "results": "{\"t\": \"2026-10-21T04:15:20Z\", \"tool\": \"leanfinder\", \"query\": \"In an unbounded derived category of sheaves a locally bounded finite projective tensor factor can be moved through a right derived pushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Tor'_map_app\", \"CategoryTheory.Tor'\", \"CategoryTheory.Tor\"], \"digest\": \"dc0b5a77d2f98760\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: zeroth derived functors, localization of exact functors, Tor, and underived monoidal adjunctions do not assert the unbounded perfect-coefficient projection formula for arbitrary ringed topoi."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sbc-strict-quotient-exchange-unit-equation",
@@ -84,5 +207,44 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sbc-ringed-site-perfect-projection-formula",
+  "worker": "stage1",
+  "summary": "Followed Stacks 0944 with explicit unit, finite-summand and stupid-tail induction arguments, and local cohomological detection. Added one generic statement-only derived sheaf-slice comparison for arbitrary geometric morphisms, since the existing derived slice results require a continuous functor between the original sites. Statement and all original metadata retained. No Lean writes or compilation.",
+  "blueprint": "Proof, central localization sentence: integral operations and their specified natural exchange before inverting the uniformizer; inherited completed-operations proof, old steps 11-15: strict K-flat reduction, projection-formula rectangle, coefficient mate and inverse-limit/unit equation; invertibility of the perfect-coefficient projection maps used before the localization step; the proof supplies the invertible local perfect-coefficient projection maps in the integral exchange construction before central localization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-projection-mate-exact",
+    "why": "Exactness, unit normalization and shift compatibility of the canonical derived projection map; generic ringed-topos infrastructure, not a replacement for a smooth-base-change step."
+   },
+   {
+    "node": "lem-weil-pbc-element-restriction-hom",
+    "why": "The module-category equivalence for an ordinary localized site and the element site of its sheafified representable, identifying the actual restriction functors."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Canonical monoidal comparison for exact slice restriction with identity coefficient maps."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-exchange-tensor-coherence",
+    "why": "Generic equation comparing the canonical projection map with the slice exchange mate; it supplies equality of arrows rather than a projection-formula isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-projection-mate-exact",
+  "lem-weil-pbc-element-restriction-hom",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-ringed-exchange-tensor-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NU-b10060ae3",
+  "group": "NU",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-b10060ae3 (reviewer sub-agent of L); spot-checked: PASS: I read the item, its five steps and the one new node in full. Status: the item is unsplit on live and side-live. There is no repair note; the 10-21 re-split note is for the different node lemma-weil-pbc-perfect-projection-formula. The item and its cited nodes are not on the drop list, there is no cycle, there is no SGA, and the statement and stmt_deps are byte-identical to base. Source: Stacks 0944 (sites-cohomology l.13655-13712); its map is the adjoint of (eps tensor 1) composed with mu, the alpha of mate-exact. Step 1: alpha_R=1 plus the shift equation gives every shift, negative n included. Step 2: I recomputed the retract inverse F(p)pi_H^-1 G(i); it is a two-sided inverse, plus biproducts. Step 3: stupid tails are degreewise split, the base case is 0 at c=b+1, and 014A finishes the induction. Step 4: the coherence edges are f=u, g=j_A, g'=j_B, f'=u_A on the 04IF square. The coherence node's theta and Ex are the new node's theta and beta, so r_Y(pi_u) is invertible exactly when pi_{u_A} is. The strict-perfect model transfers through the element-restriction-hom equivalence. Step 5: H^q commutes with restriction, the domains form a small covering family, isIso_of_coversTop applies, the unbounded cohomology criterion finishes, and no bound on E is used. New node: I read 04IF (sites-modules l.2704-2772), which holds for any sheaf and any ringed morphism and gives the module identities. Theta is the image of sigma on flat K-flat complexes. r_X I is K-injective via the exact left adjoint j_B!, so beta is invertible, and the counit equation is correctly typed. The node is true, statement-only and not a clause of the item. Existing slice nodes need a continuous site functor or pro-etale sites, so it is not a duplicate; a 04IF grep finds no other node. Small cases: Z->Z/2 point topoi with P=Z and P=Z/2, P=0, empty A. The four declared tool uses are accepted; the unit sk-rem-rest has no uses. Advisory: step 3 could cite lem-weil-pbc-bounded-complex-triangulated-devissage instead of repeating the induction."
+ }
 }
