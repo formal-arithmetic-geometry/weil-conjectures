@@ -23281,3 +23281,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 02:07 L: batch 20261021T175005 dependency take-out
 - 18:08 L: merged deliver/O2/lem-sfb-condensed-galois-global-descent (reviewer FIX; first push; new nodes: 1)
 - 18:08 L: merged deliver/NJ/lem-sfb-norm-algcl-cohomology-topology-comparison (stage 2; reviewer PASS; parallel immutable checks)
+- 18:08 L: merged deliver/NK/lem-sfb-closed-test-derived-exchange-model (reviewer FIX; first push; new nodes: 0)
