@@ -73,6 +73,25 @@ theorem sheafification_tensor_local_iso
           IsIso
             ((presheafToSheaf J A).map
               (MonoidalCategoryStruct.tensorHom (toSheafify J F) (toSheafify J G)))) := by
-  sorry
+  let e := presheaf_enrichedHoms_exist (C := C) (A := A)
+  let : ∀ (F G : Cᵒᵖ ⥤ A), Enriched.FunctorCategory.HasEnrichedHom A F G := e.1
+  let : ∀ (F G : Cᵒᵖ ⥤ A), Enriched.FunctorCategory.HasFunctorEnrichedHom A F G := e.2
+  refine ⟨?_, ?_, ?_, ?_⟩
+  · intro F G g
+    constructor
+    · intro hg
+      exact ⟨(J.W_iff g).1 hg, fun H ↦ hg H.obj H.property⟩
+    · intro hg
+      exact (J.W_iff g).2 hg.1
+  · intro F F' g F₀ hg
+    constructor
+    · simpa only [MonoidalCategory.id_tensorHom] using hg.whiskerLeft F₀
+    · simpa only [MonoidalCategory.tensorHom_id] using hg.whiskerRight F₀
+  · intro F F' G G' g h hg hh
+    exact J.W.tensorHom_mem g h hg hh
+  · intro F G
+    have h := J.W.tensorHom_mem (toSheafify J F) (toSheafify J G)
+      (J.W_toSheafify F) (J.W_toSheafify G)
+    exact ⟨h, (J.W_iff _).1 h⟩
 
 end CategoryTheory
