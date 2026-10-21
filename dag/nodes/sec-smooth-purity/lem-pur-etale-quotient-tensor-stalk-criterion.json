@@ -17,9 +17,109 @@
   "def-weil-pbc-geometric-stalks",
   "def-pur-sheaf-tensor-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First fix the tensor convention without changing the quotient maps. By [lem-weil-pbc-etale-constant-ring-module-equivalence], regard an $A_T$-module sheaf as an $A$-module-valued sheaf by scalar restriction, with the same underlying abelian sheaf. Apply [lem-pc-sites-module-sheafification-tensor] to the constant ring presheaf $U\\mapsto A$ and these two scalar-restricted sheaves: their module sheafifications are the original $A_T$-module sheaves, and the displayed isomorphism identifies their tensor over $A_T$ with the sheafification of $U\\mapsto F(U)\\otimes_A G(U)$. This identification sends the image of $x\\otimes y$ to the image of that same pure tensor. It respects maps by the cited naturality. Its unit identification sends $a\\otimes b$ to $ab$: both maps have this formula before sheafification. Hence the constant-coefficient tensor convention of the geometric-stalk lemma below applies to the tensor and $m$ of the item.",
+   "uses": [
+    "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "lem-pc-sites-module-sheafification-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, label lemma-sheafification-tensor; apply to the constant ring presheaf. Agent specialization to the supplied quotient maps."
+   }
+  },
+  {
+   "text": "Put $B=F\\otimes_{A_T}G$. By [lem-pod-etale-stalk-tensor-scalar](1), $(B)_{\\bar t}=F_{\\bar t}\\otimes_A G_{\\bar t}$ naturally, with pure tensor germs and the unit identified as in step 1. Thus $m_{\\bar t}$ sends $c$ to $q_{\\bar t}(c)\\otimes s_{\\bar t}(1)$. If $t\\in E\\cap D$, this is $c\\mapsto c\\otimes1$ in $A\\otimes_A A$. Multiplication $a\\otimes b\\mapsto ab$ is its inverse, since $(ab)\\otimes1=a\\otimes b$ by the balancing relation and $c\\cdot1=c$. If $t\\notin E\\cap D$, at least one tensor factor is zero; every pure tensor is then zero, so $B_{\\bar t}=0$ and $m_{\\bar t}:A\\to0$. Consequently every $m_{\\bar t}$ is surjective. Its kernel is zero on $E\\cap D$ and all of $A$ elsewhere, exactly the kernel of $r_{\\bar t}$.",
+   "uses": [
+    "lem-pod-etale-stalk-tensor-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks); tensor compatibility via sites-modules Tag 03EL (lemma-tensor-product-pullback). Agent quotient-kernel argument."
+   }
+  },
+  {
+   "text": "The category of module sheaves is abelian by [lem-pur-ringed-site-module-category-abelian], since the site here is small. By [lem-weil-pbc-module-sheaves-colimits-forgetful](1), forgetting to abelian sheaves preserves kernels and cokernels; compose it with the exact stalk functor of [prop-weil-pbc-geometric-stalks-exact]. If a module sheaf $M$ has all stalks zero, the underlying map $M\\to0$ is an isomorphism by [lemma-weil-pbc-geometric-stalk-conservative], so $M=0$. This also detects zero morphisms: the image of a map zero on all stalks has all stalks zero by exactness, hence is zero, and the map is zero. Now take $C=\\operatorname{coker}(m)$ in the module category. Exactness gives $C_{\\bar t}=\\operatorname{coker}(m_{\\bar t})=0$ by step 2, whence $C=0$. By [lem-weil-pbc-preadditive-epi-iff-cokernel-zero], $m$ is an epimorphism.",
+   "uses": [
+    "lem-pur-ringed-site-module-category-abelian",
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative",
+    "lem-weil-pbc-preadditive-epi-iff-cokernel-zero"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks); tensor compatibility via sites-modules Tag 03EL (lemma-tensor-product-pullback). Agent quotient-kernel argument."
+   }
+  },
+  {
+   "text": "Let $k:K\\hookrightarrow A_T$ be the kernel of $m$. By [lem-weil-pbc-module-sheaves-colimits-forgetful] and [prop-weil-pbc-geometric-stalks-exact], $K_{\\bar t}\\to A$ is the kernel of $m_{\\bar t}$. For $t\\in E\\cap D$, step 2 gives $K_{\\bar t}=0$, so $(r\\circ k)_{\\bar t}=0$. Outside the intersection $r_{\\bar t}=0$, so again $(r\\circ k)_{\\bar t}=0$. The zero-morphism test proved in step 3 using [lemma-weil-pbc-geometric-stalk-conservative] gives $r\\circ k=0$. This uses the normalization of the quotient maps, rather than just the abstract isomorphism types of their stalks.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "prop-weil-pbc-geometric-stalks-exact",
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks); tensor compatibility via sites-modules Tag 03EL (lemma-tensor-product-pullback). Agent quotient-kernel argument."
+   }
+  },
+  {
+   "text": "By the definition of $k$, the complex $K\\xrightarrow{k}A_T\\xrightarrow{m}B$ is exact at $A_T$. Step 3 makes its second map epic and step 4 gives $r\\circ k=0$. Apply [lem-weil-pbc-abelian-exact-epi-cokernel](a), with $h=k$, the epimorphism $m$, and $\\varphi=r$. It produces a unique $A_T$-linear morphism $e:B\\to H$ with $e\\circ m=r$. Equivalently, uniqueness follows by cancellation of the epimorphism $m$.",
+   "uses": [
+    "lem-weil-pbc-abelian-exact-epi-cokernel"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tags 0109 (definition-abelian-category) and 010E (definition-exact); cokernel descent along an epimorphism, as stated in lem-weil-pbc-abelian-exact-epi-cokernel(a). Agent specialization."
+   }
+  },
+  {
+   "text": "At a geometric point in $E\\cap D$, the equation $e_{\\bar t}\\circ m_{\\bar t}=r_{\\bar t}$ reads $e_{\\bar t}(c\\otimes1)=c$. Every pure tensor is $(ab)\\otimes1=a\\otimes b$, so $e_{\\bar t}(a\\otimes b)=ab$. This is the inverse from step 2, with inverse $c\\mapsto c\\otimes1$. Off the intersection both $B_{\\bar t}$ and $H_{\\bar t}$ are zero, so $e_{\\bar t}$ is the unique map $0\\to0$, an isomorphism. Apply [lemma-weil-pbc-geometric-stalk-conservative] to the underlying abelian map of $e$: it is an isomorphism of abelian sheaves. Its inverse is $A_T$-linear: for $a\\in A_T(U)$ and $h\\in H(U)$, write $h=e_U(b)$; then $e_U(ab)=a h$, so $e_U^{-1}(a h)=a e_U^{-1}(h)$. Thus $e$ is an isomorphism of module sheaves, with exactly the asserted stalk normalization.",
+   "uses": [
+    "lemma-weil-pbc-geometric-stalk-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03PT (lemma-stalk-exact) and 03PU (theorem-exactness-stalks); tensor compatibility via sites-modules Tag 03EL (lemma-tensor-product-pullback). Agent quotient-kernel argument."
+   }
+  },
+  {
+   "text": "For any object $U$ of the etale site and $a,b\\in A_T(U)$, the tensor definition [def-pur-sheaf-tensor-product] gives $q(a)\\otimes s(b)=ab\\,(q(1)\\otimes s(1))=m(ab)$ as sections of $B$ over $U$. Here the equality follows from $A_T(U)$-bilinearity before sheafification and hence remains true after sheafification. Applying $e$ and $e\\circ m=r$ yields $e(q(a)\\otimes s(b))=r(ab)$. This finishes every clause, including the epic generator, uniqueness, section formula and stalk inverse. The assumed flatness is compatible with the proof but is not needed by this argument.",
+   "uses": [
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0GMW, label lemma-sheafification-tensor; apply to the constant ring presheaf. Agent specialization to the supplied quotient maps."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-pur-ringed-site-module-category-abelian",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "prop-weil-pbc-geometric-stalks-exact",
+  "lemma-weil-pbc-geometric-stalk-conservative",
+  "lem-weil-pbc-preadditive-epi-iff-cokernel-zero",
+  "lem-weil-pbc-abelian-exact-epi-cokernel",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-kunneth-supported.proof.md",
+  "place": "Final paragraph, \"Tensor and the two counits are transported as well\"; normalized support-quotient refinement, using the cited Stacks tensor, exactness and abelian-category facts."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -62,10 +162,31 @@
    "results": "[grep] OK 0 hit(s)\nMathlib subdirectory: Algebra/Category",
    "date": "2026-10-21",
    "verdict": "no match: ring-module quotient equivalences and free-sheaf generator lemmas do not construct the normalized tensor morphism from geometric quotient-stalk data for sheaves on an etale site"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Two epimorphisms from the constant ring sheaf with the same geometric stalk kernels induce a unique normalized quotient tensor isomorphism",
+   "results": "[leansearch] OK 8 hit(s)\nCategoryTheory.Abelian.epiIsCokernelOfKernel\nModuleCat.normalEpi\nAlgebra.TensorProduct.quotIdealMapEquivTensorQuot\nSheafOfModules.pushforwardCongr\nCategoryTheory.instIsRegularEpiCategorySheafTypeOfHasSheafify\nTensorProduct.quotTensorEquivQuotSMul\nCategoryTheory.Sheaf.isConstant_of_isIso_counit_app\nCategoryTheory.NonPreadditiveAbelian.epiIsCokernelOfKernel",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned abstract cokernel lemmas, free-sheaf presentations and algebraic quotient tensors do not state this geometric normalized quotient-tensor criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For module sheaves on a scheme etale site, normalized quotient maps with stalks zero or the constant ring give an isomorphism from tensor product to the quotient on intersection support",
+   "results": "[leanfinder] OK 8 hit(s)\nAlgebraicGeometry.Scheme.Hom.inl_normalizationCoprodIso_hom_fromNormalization\nAlgebraicGeometry.Scheme.Hom.inr_normalizationCoprodIso_hom_fromNormalization\nAlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv\nAlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv\nAlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation\nAlgebraicGeometry.Scheme.Hom.toNormalization_inr_normalizationCoprodIso_hom\nAlgebraicGeometry.Scheme.Hom.inl_toNormalization_normalizationCoprodIso_inv_assoc\nAlgebraicGeometry.Scheme.Hom.inr_toNormalization_normalizationCoprodIso_inv_assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned abstract cokernel lemmas, free-sheaf presentations and algebraic quotient tensors do not state this geometric normalized quotient-tensor criterion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A sheaf tensor product of cyclic quotient sheaves is the unique quotient of the unit with the same stalkwise kernel",
+   "results": "[leanfinder] OK 8 hit(s)\nSheafOfModules.relationsOfIsCokernelFree\nSheafOfModules.relationsOfIsCokernelFree_I\nSheafOfModules.relationsOfIsCokernelFree_s\nSheafOfModules.presentationOfIsCokernelFree\nSheafOfModules.Presentation.isColimit\nSheafOfModules.presentationOfIsCokernelFree_relations\nSheafOfModules.presentationOfIsCokernelFree_generators\nSheafOfModules.generatorsOfIsCokernelFree_I",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned abstract cokernel lemmas, free-sheaf presentations and algebraic quotient tensors do not state this geometric normalized quotient-tensor criterion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-support-quotient-product",
@@ -85,5 +206,50 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-etale-quotient-tensor-stalk-criterion",
+  "worker": "stage1",
+  "group": "Q119",
+  "summary": "Statement retained verbatim. Supplied a seven-step proof: constant-presheaf/sheaf tensor comparison, normalized stalk computation, epimorphic generator from zero cokernel, annihilation of its kernel by r, cokernel descent, stalkwise invertibility, and the section formula. All facts are existing nodes; no new nodes. Flatness is not used. Checked upstream project declarations, the full DAG, blueprint, source tags and Mathlib searches.",
+  "blueprint": "Realizes the final paragraph of lem-pur-kunneth-supported.proof.md, \"Tensor and the two counits are transported as well\", via the normalized quotient-product step of lem-pur-support-quotient-product. This is the elementary underived quotient normalization beneath that route, not a replacement for the unit or chapter proof.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-etale-constant-ring-module-equivalence",
+    "why": "Generic conversion from modules over the constant ring sheaf to constant-coefficient module-valued sheaves; the unit does not supply an encoding equivalence."
+   },
+   {
+    "node": "lem-pc-sites-module-sheafification-tensor",
+    "why": "Generic sheafification/tensor comparison applied to the constant ring presheaf, needed to match the two tensor conventions; no geometric argument of the unit is replaced."
+   },
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Generic geometric-stalk tensor comparison with pure-tensor and unit normalization; the unit gives no substitute for this site-level tool."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Generic exact forgetting of module sheaves to abelian sheaves, needed for stalk tests on kernels and cokernels; not a cohomological route change."
+   },
+   {
+    "node": "lemma-weil-pbc-geometric-stalk-conservative",
+    "why": "Generic conservativity of geometric stalks for underlying abelian sheaves; used only to test zero sheaves, zero maps and the final isomorphism."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-etale-constant-ring-module-equivalence",
+  "lem-pc-sites-module-sheafification-tensor",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lemma-weil-pbc-geometric-stalk-conservative"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q119-3183173e7",
+  "group": "Q119",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q119-3183173e7 (reviewer sub-agent of L); spot-checked: This is a first proof of a statement-only node created by Q57; there is no re-split repair note. The statement and stmt_deps are identical to live, where the item is unsplit, and flatness is kept although unused. There are 0 new nodes. Each of the 7 steps checked against the statements it cites. (1) Constant-ring equivalence plus lem-pc-sites-module-sheafification-tensor (second clause) identify ⊗_{A_T} with the sheafified ⊗_A presheaf. (2) pod stalk-tensor (1) gives m_t(c)=q_t(c)⊗s_t(1): this is c↦c⊗1 on E∩D, with multiplication as its inverse, and B_t=0 elsewhere. (3) Module sheaves form an abelian category, and the exact faithful forgetful functor, exact stalks and conservativity give coker m=0, so m is epic. (4) r∘k has zero stalks, so it is zero. (5) The exact-epi cokernel lemma (a) gives the unique e. (6) e is an isomorphism by stalks plus conservativity, and the inverse is A_T-linear. (7) The section formula follows from bilinearity (elementary). Small cases tested: T empty, A=0, E=D=|T|, E∩D empty, and the asymmetric points. Sources checked: Stacks 03PU/03PT (etale-cohomology.tex l.3546/3456) and the sites-modules lemma-sheafification-tensor; no SGA source. Duplicate search over dag/nodes found no match; lem-sfb-integral-tensor-quotient-epimorphism is a different statement. The tool_uses are generic and accepted. Batch-5 flag on lem-pod-etale-stalk-tensor-scalar: it is generic sheaf algebra. Its 66-node closure contains no trace-formula node and no PD proof node; the only other pod node is def-pod-ring-scalar-extension. Accepted."
  }
 }

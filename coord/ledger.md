@@ -21155,3 +21155,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:34 L: merged deliver/Q107/lem-cbc-flat-scalar-direct-image-limit-coherence (reviewer PASS; first push; new nodes: 0)
 - 08:34 L: merged deliver/N7/lem-pur-shifted-tate-unit-scalar-coherence (reviewer PASS; first push; new nodes: 0); claim not held by N7: not your claim
 - 08:34 L: merged deliver/Q139/lem-coef-exact-sections-reduction-unit (reviewer FIX; first push; new nodes: 0)
+- 08:34 L: merged deliver/Q119/lem-pur-etale-quotient-tensor-stalk-criterion (reviewer PASS; first push; new nodes: 0)
