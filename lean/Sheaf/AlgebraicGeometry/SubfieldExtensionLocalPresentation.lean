@@ -15,8 +15,6 @@ public import Mathlib.CategoryTheory.Monoidal.Mod
 public import WeilConjectures.ConstructibleSheaf.ProEtaleModule.Def
 import Sheaf.AlgebraicGeometry.InternalExtensionInverseImage
 import Sheaf.AlgebraicGeometry.InternalExtensionFinitePresentation
-import WeilConjectures.CategoryTheory.ModuleObjects.Free
-import WeilConjectures.CategoryTheory.RingObjects.Condensed.EllAdic
 
 /-!
 # Subfield scalar extension preserves local presentations after raw scheme pullback
@@ -92,6 +90,29 @@ theorem subfieldExtension_localPresentation
               ((Functor.mapMod (upperStar Ab.{u + 1} f)
                 (padicSubfieldRingObj X ℓ F)).obj
                 ((Mod.extendScalars (padicSubfieldRingObjMap X ℓ hEF)).obj M)))) := by
-  sorry
+  let R := padicSubfieldRingObj X ℓ E
+  let S := padicSubfieldRingObj X ℓ F
+  let φ : R ⟶ S := padicSubfieldRingObjMap X ℓ hEF
+  let T := upperStar Ab.{u + 1} f
+  obtain ⟨θ⟩ := internal_extension_inverse_image f R S φ
+  have hfp {W : Scheme.{u}} (g : W ⟶ Z)
+      (h : Mod.IsFinitelyPresented ((upperStar Ab.{u + 1} g).obj (T.obj R))
+        (((upperStar Ab.{u + 1} g).mapMod (T.obj R)).obj
+          ((T.mapMod R).obj M))) :
+      Mod.IsFinitelyPresented ((upperStar Ab.{u + 1} g).obj (T.obj S))
+        (((upperStar Ab.{u + 1} g).mapMod (T.obj S)).obj
+          ((T.mapMod S).obj ((Mod.extendScalars φ).obj M))) := by
+    let U := upperStar Ab.{u + 1} g
+    obtain ⟨η⟩ := internal_extension_inverse_image g (T.obj R) (T.obj S) (T.map φ)
+    obtain ⟨n, m, a, ⟨p⟩⟩ :=
+      (internalExtension_finitePresentation W (U.obj (T.obj R))
+        (U.obj (T.obj S)) (U.map (T.map φ))).1 _ h
+    exact ⟨n, m, a, ⟨(U.mapMod (T.obj S)).mapIso (θ.app M) ≪≫
+      η.app ((T.mapMod R).obj M) ≪≫ p⟩⟩
+  constructor
+  · obtain ⟨𝒰, h𝒰⟩ := hM
+    exact ⟨𝒰, fun i ↦ hfp (𝒰.f i) (h𝒰 i)⟩
+  · intro 𝒰 h𝒰 i
+    exact hfp (𝒰.f i) (h𝒰 i)
 
 end AlgebraicGeometry.ProEtale
