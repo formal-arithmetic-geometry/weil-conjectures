@@ -22871,3 +22871,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:02 L: returned deliver/N6/lem-sfb-partial-kummer-boundary-unit-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-partial-kummer-boundary-unit-model: cited node)
 - 15:02 L: returned deliver/NC/lem-fd-whole-tower-integral-pullback-comparison (reviewer RETURN: L: independent stage-2 immutable head d684f6d77462: H2/mechanical theorem stmt_dep, judged: the item's Lean uses lem-a1-)
 - 15:03 L: merged deliver/Q02/lem-sfb-prime-to-ell-linear-image-finite (reviewer PASS; first push; new nodes: 1)
+- 15:03 L: merged deliver/NX/lem-sfb-condensed-product-action-inflation (reviewer FIX; first push; new nodes: 1)

@@ -13,9 +13,91 @@
   "sk-def-sfb-module-objects",
   "def-sp-grothendieck-abelian"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=*_{\\mathrm{pro\\acute et}}$ in the size bound of the statement. Regard $R$ as its sheaf of commutative section rings. The tensor on abelian sheaves is the sheafified sectionwise tensor and abelian sheafification is strong monoidal by [sk-def-sfb-sheaf-tensor]. Thus [def-weil-pbc-internal-abelian-sheaf-module-equivalence] applies: internal $R$-modules and sectionwise $R$-module sheaves are equivalent with precisely the same underlying sheaves and maps. A map $\\underline P\\times M\\to M$ in the statement is exactly a family $C(S,P)\\times M(S)\\to M(S)$ natural in $S$; linearity and the action identities are the same sectionwise identities. Consequently this equivalence also identifies the categories with $P$-action. No discrete topology on a coefficient module has been introduced.",
+   "uses": [
+    "sk-def-sfb-sheaf-tensor",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), interpret the internal coefficient categories on the profinite site"
+   }
+  },
+  {
+   "text": "For each $P=1,G,H,G\\times H$ apply [lem-sfb-internal-action-site-presentation] with $K(S)=C(S,P)$. Here $K$ is the condensed group $\\underline P$ specified in the statement, with sectionwise multiplication and inverse; $C$ has finite limits and the prescribed covering families. The resulting $C_P$ is small in the fixed bound (each hom set is a set of pairs), and its ring $R_P$ is commutative. The cited equivalence identifies $\\mathcal A_P(R)$ additively with $\\operatorname{Mod}(R_P)$. Its kernel/cokernel assertion says that forgetting $P$ creates both; its zero-detection assertion also shows that underlying exactness detects equivariant exactness. Indeed homology is formed by kernels and cokernels, so it is zero exactly when its underlying module is zero.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), construct a small ringed-site presentation of the internal-action category"
+   }
+  },
+  {
+   "text": "Apply [lem-pur-ringed-site-grothendieck-abelian] to the small site $C_P$ and the commutative ring sheaf $R_P$ just constructed. It supplies an abelian category with small colimits, exact filtered colimits and a generator. Carry these structures through the additive equivalence of step 2: universal properties give the transported kernels, cokernels and colimits, preservation of exactness follows from the transported kernels and cokernels, and the image of the displayed generator still detects different morphisms by full faithfulness. This proves that every $\\mathcal A_P(R)$ is Grothendieck abelian. Neither nonzero coefficients nor a nontrivial group is required.",
+   "uses": [
+    "lem-pur-ringed-site-grothendieck-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Section 07A5 (section-unbounded), opening paragraph: apply the ringed-site theorem to the site from step 2"
+   }
+  },
+  {
+   "text": "For a projection $\\pi:P\\to Q$ in the statement, define inflation by $p\\cdot n=\\pi(p)\\cdot n$ on every section after every base change, and leave each linear map unchanged. Since $\\pi$ preserves multiplication and identity this satisfies the action laws and respects equivariant maps. Addition is unchanged, so inflation is additive. By the kernel/cokernel formula of step 2, the inflated kernel and cokernel are precisely the kernel and cokernel of the inflated map: on the underlying sectionwise kernel or sheafified quotient the action is induced by the same formula $p\\mapsto\\pi(p)$. Thus inflation preserves kernels and cokernels and is exact.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), exact inflation along the three split projections; direct argument from step 2"
+   }
+  },
+  {
+   "text": "Let $N=\\ker\\pi$. Define $M^N(S)$ by the quantified fixed-section condition in the statement. It is an $R(S)$-submodule since all $N(T)$ act linearly, and it is stable under restriction because the condition quantifies over every $T\\to S$. It is a sheaf: glue a compatible invariant family in $M$; for $T\\to S$ and $n\\in N(T)$, pull the cover back to $T$ and compare $n\\cdot m|_T$ with $m|_T$. They agree on this cover, hence agree in $M(T)$. In the product case $G$ acts by $(g,1)$ and preserves $M^H$ because $(1,h)(g,1)=(g,1)(1,h)$ on every base change. For a projection to $1$ no residual action remains. Restrict an equivariant map to these submodules; this defines the invariants functor. Restrictions of sums of maps are sums, so it is additive.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), invariant subsheaf and its residual action, checked by gluing and commuting product factors"
+   }
+  },
+  {
+   "text": "An equivariant map $f:\\operatorname{Inf}_\\pi L\\to M$ takes values in $M^N$: for $T\\to S$, $n\\in N(T)$ and $x\\in L(S)$, one has $n\\cdot f(x)|_T=f(n\\cdot x|_T)=f(x|_T)$, since $N$ acts trivially on the inflated source. Thus the same section maps, with codomain restricted, define $\\bar f:L\\to M^N$. They are $Q$-equivariant: in the product case use the lift $(q,1)$; for $Q=1$ this condition is vacuous. Conversely compose a $Q$-equivariant map $L\\to M^N$ with the inclusion. For $P=G\\times H$, writing $(g,h)=(g,1)(1,h)$ proves equivariance since $h$ fixes its image; the projections to $1$ use the same fixed-image argument. The two constructions are inverse because the inclusions are injective on sections. Precomposition or postcomposition commutes with codomain restriction and inclusion, giving naturality in both variables. These are the asserted additive adjunctions with exactly the stipulated bijections.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), construct and verify the inflation/invariants adjunction bijections"
+   }
+  },
+  {
+   "text": "Both inflations from $\\mathcal A_1(R)$ to $\\mathcal A_{G\\times H}(R)$ leave the module and its maps unchanged and give every $(g,h)$ trivial action, so the direct and composite functors agree. For $m\\in M(S)$, being fixed by all pairs after all $T\\to S$ implies being fixed by $(g,1)$ and $(1,h)$. Conversely these two fixedness conditions give $(g,h)m=(g,1)(1,h)m=m$ on every such $T$. Therefore $M^{G\\times H}$ and $(M^H)^G$ are the same submodule sheaf, naturally in $M$. Under the adjunction bijections of step 6, the direct and successive transposes of any map both retain its section maps and restrict their codomain to this same submodule. Hence the conjugate right-adjoint comparison is exactly this identity identification. When a group is trivial its fixedness condition is the unit law. When $R=0$ each unital section module is zero. The same constructions therefore include both stated edge cases.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), composite inflation and its normalized right-adjoint comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "sk-def-sfb-sheaf-tensor",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-pur-ringed-site-grothendieck-abelian"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written formal internal-action input below the partial Kummer boundary-unit calculation; Grothendieck input from Stacks section-unbounded, exact external reference for the action-site presentation WANTED"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -86,10 +168,45 @@
    "results": "13 hits: Mathlib/RepresentationTheory/Invariants.lean, Mathlib/RepresentationTheory/Invariants.lean, Mathlib/RepresentationTheory/Invariants.lean, Mathlib/RepresentationTheory/Invariants.lean, Mathlib/RepresentationTheory/Invariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean, Mathlib/RepresentationTheory/Coinvariants.lean",
    "date": "2026-10-21",
    "verdict": "no match: ordinary representations, light condensed modules, invariant ring extensions or unrelated nerve constructions do not state this internal condensed-action/geometric boundary assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"invariantsAdjunction\"",
+   "results": "{\"t\": \"2026-10-21T14:41:16Z\", \"tool\": \"loogle\", \"query\": \"\\\"invariantsAdjunction\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Rep.invariantsAdjunction\", \"Rep.invariantsAdjunction_counit_app\", \"Rep.invariantsAdjunction_homEquiv_apply_hom\", \"Rep.invariantsAdjunction_homEquiv_symm_apply_hom\", \"Rep.invariantsAdjunction_unit_app\", \"Rep.coinvariantsAdjunction\", \"Rep.coinvariantsAdjunction_counit_app\", \"Rep.coinvariantsAdjunction_homEquiv_symm_apply_hom\"], \"digest\": \"a227f5952fa1e750\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Rep.invariantsAdjunction concerns an abstract group and an ordinary coefficient ring; CondensedMod and LightCondMod use an ordinary fixed ring, not an arbitrary internal condensed ring with internal group actions"
+  },
+  {
+   "tool": "grep",
+   "query": "(inflation|invariantsAdjunction|IsGrothendieckAbelian).*Condensed|Condensed.*(inflation|invariantsAdjunction|IsGrothendieckAbelian)",
+   "results": "{\"t\": \"2026-10-21T14:41:16Z\", \"tool\": \"grep\", \"query\": \"(inflation|invariantsAdjunction|IsGrothendieckAbelian).*Condensed|Condensed.*(inflation|invariantsAdjunction|IsGrothendieckAbelian)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Rep.invariantsAdjunction concerns an abstract group and an ordinary coefficient ring; CondensedMod and LightCondMod use an ordinary fixed ring, not an arbitrary internal condensed ring with internal group actions"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The trivial internal profinite group action functor on condensed modules is left adjoint to fixed sections and is exact",
+   "results": "{\"t\": \"2026-10-21T14:41:17Z\", \"tool\": \"leansearch\", \"query\": \"The trivial internal profinite group action functor on condensed modules is left adjoint to fixed sections and is exact\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.invariantsAdjunction\", \"Rep.invariantsAdjunction_unit_app\", \"CondensedMod.LocallyConstant.adjunction\", \"Condensed.freeForgetAdjunction\", \"Rep.coinvariantsAdjunction\", \"Profinite.toProfiniteAdjToCompHaus\", \"LightCondensed.freeForgetAdjunction\", \"CompHaus.toProfinite\"], \"digest\": \"75dbd07d491999b5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Rep.invariantsAdjunction concerns an abstract group and an ordinary coefficient ring; CondensedMod and LightCondMod use an ordinary fixed ring, not an arbitrary internal condensed ring with internal group actions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal actions of profinite groups on modules over a condensed ring, inflation along split projections is exact and left adjoint to invariants, and invariants of a product are iterated invariants",
+   "results": "{\"t\": \"2026-10-21T14:41:20Z\", \"tool\": \"leanfinder\", \"query\": \"For internal actions of profinite groups on modules over a condensed ring, inflation along split projections is exact and left adjoint to invariants, and invariants of a product are iterated invariants\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Condensed.profiniteSolid\", \"Condensed.profiniteFree\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition'\", \"Condensed.profiniteSolidCounit\", \"LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition\", \"CondensedMod.ofSheafProfinite\", \"LightCondensed.free_internallyProjective_iff_tensor_condition\"], \"digest\": \"731d0992a24a3a7f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Rep.invariantsAdjunction concerns an abstract group and an ordinary coefficient ring; CondensedMod and LightCondMod use an ordinary fixed ring, not an arbitrary internal condensed ring with internal group actions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Modules with an action of an internal profinite group on the site of profinite sets form a Grothendieck abelian category",
+   "results": "{\"t\": \"2026-10-21T14:41:21Z\", \"tool\": \"leanfinder\", \"query\": \"Modules with an action of an internal profinite group on the site of profinite sets form a Grothendieck abelian category\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.instIsGrothendieckAbelianLightCondMod\", \"instAbelianCondensedMod\", \"Condensed.instAB4CondensedMod\", \"Condensed.instAB5CondensedMod\", \"Condensed.instAB4StarCondensedMod\", \"CondensedMod.ofSheafProfinite\", \"CondensedMod\", \"LightCondensed.instCountableAB4StarLightCondMod\"], \"digest\": \"84971393218a1462\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: Rep.invariantsAdjunction concerns an abstract group and an ordinary coefficient ring; CondensedMod and LightCondMod use an ordinary fixed ring, not an arbitrary internal condensed ring with internal group actions"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-transverse-tame-open-shriek-exchange",
@@ -112,5 +229,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-condensed-product-action-inflation",
+  "worker": "stage1",
+  "summary": "Kept the full internal-action statement. Reduced the structural category assertions to one new, general twisted-arrow-site presentation lemma and the existing small ringed-site Grothendieck theorem; gave explicit inflation, invariant-subsheaf, adjunction and mate-identity arguments. Searched the whole DAG, blueprint and project source; no attachment or duplicate found. All new-node searches were actually run with msearch.py.",
+  "blueprint": "The inherited created.item chain has no blueprint ancestor (ancestor command returns None); preserved that metadata. The split realizes the formal categorical input serving paragraph (3) of the current direct-images proof through the partial Kummer boundary-unit chain, and makes no geometric exchange claim.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-ringed-site-grothendieck-abelian",
+    "why": "General small ringed-site Grothendieck theorem applied to the action-site presentation; this unit has no theorem for arbitrary ringed sites."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-ringed-site-grothendieck-abelian"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NX-7ed4b063d",
+  "group": "NX",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NX-7ed4b063d (reviewer sub-agent of L); spot-checked: Read in full: the item (statement unchanged from base side-live; base unsplit, no proof, no repair note, not in route-pivot-dropped), the new node lem-sfb-internal-action-site-presentation, and the statements of every cited node. Source: main-20261015 sk-thm-sf-ctf-stability direct-images proof para (3); the item is agent-formulated categorical input, so proof_origin agent plus WANTED is correct; no SGA. Steps: 1 uses sfb-sheaf-tensor clause 1 (strong monoidal sheafification ⇒ monoidal local equivalences) to apply the internal/sectionwise module equivalence, which keeps sections. 2 applies the new node with K=C(-,P): a sheaf of groups because a finite jointly surjective family of profinite sets is a quotient; the skeleton has finite limits. 3 uses lem-pur-ringed-site-grothendieck-abelian on (C_P,R_P), transferred along the equivalence; tool_use accepted. 4–7 are elementary and checked: the invariant subsheaf glues via the pulled-back cover; the adjunction n·f(x)|_T=f(x|_T) holds; equivariance uses the lift (q,1) and (g,h)=(g,1)(1,h); the mate is the identity M^{G×H}=(M^H)^G. New node checked independently: composition label b·g*a is associative; the left action comes from (1,b)∘(1,a)=(1,ab); naturality from (1,a)∘(f,1)=(f,1)∘(1,f*a); R_K semilinear; fibre products exist with labels (1, pr1*a·(pr2*b)^{-1}), verified by the universal property; C_K-sheaves are C-sheaves with a natural action, since (f,a)=(f,1)∘iso and the sieves correspond; the sheafification comparison holds because K is a sheaf. Small cases tested: K=1, one-object nonabelian K, empty set, R=0. It is not a restated clause of the item (D1/D2 ok); there is no duplicate from rg -L for inflation/equivariant/twisted-arrow/action-site; three search kinds recorded. FIX (B3): the new node's 'module sheafification' was uncited; added [def-weil-presheaf-modules-sheafification] to its statement and stmt_deps (fixes/dag/nodes/sec-six-functors-basics/lem-sfb-internal-action-site-presentation.json).; 1 file(s) fixed by the reviewer"
  }
 }
