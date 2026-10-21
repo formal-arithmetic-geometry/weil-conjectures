@@ -18,9 +18,132 @@
   "def-fd-coefficient-comparison-datum",
   "lem-weil-pbc-integral-stratified-perfect-characterization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the integral identity identifications in the hypothesis throughout. Write $C_{L/E}(K)=K\\otimes^L_{R_E}R_L$ for ordinary extension and $U_{L/E}$ for framework strict-tower extension. The stratified-perfect characterization identifies both integral categories as the same full subcategory of $D(R_E)$. Finite-free constructible scalar transport puts $C_{L/E}K$ in the common category over $L$. Every such $K$ is derived complete, so the finite-free completed comparison supplies a natural isomorphism $b_{L/E,K}=\\chi_{L/E,K}:C_{L/E}K\\to U_{L/E}K$. Its target is in the same full category because it is isomorphic to $C_{L/E}K$. Thus $b$ and its inverse restrict to the integral categories; their naturality is the ambient derived naturality, not just naturality on chain maps.",
+   "uses": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-finite-free-constructible-scalar-transport",
+    "lem-weil-finite-free-completed-scalar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; expanded completion-inverse scalar comparison from lem-fd-rational-coefficient-category-comparison, old proof steps 3–4 (agent argument)."
+   }
+  },
+  {
+   "text": "Retain the specified map, rather than choose an isomorphism between its source and target. For a flat-term K-flat representative $P$, its $m$th quotient coordinate sends $p\\otimes s$ to $p\\otimes\\bar s$ and its shifted-product coordinate is zero. Ordinary change of coefficient presentation sends each tensor generator to that same generator under the identity ring identifications. Hence its transport is the prescribed ordinary tensor transport, and the comparison with derived localization is exactly the quotient-completion map with the canonical resolving comparisons. The descent lemma applies with $R=\\widehat{\\mathcal O}_{E,T}$, $S=\\widehat{\\mathcal O}_{L,T}$ and $B_n=(\\mathcal O_L/\\varpi_L^n)_T$: these are commutative $S$-algebras with $S$-linear transitions, and countable products of $S$-module sheaves on the pro-etale site are exact by the countable-products lemma. It makes this equation independent of $P$. This verifies the integral-lift normalization requested by the definition of comparison datum; no existence assertion is being taken from that definition.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-pur-quotient-scalar-comparison-descent",
+    "lem-weil-proetale-countable-products-exact",
+    "def-fd-coefficient-comparison-datum"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; expanded completion-inverse scalar comparison from lem-fd-rational-coefficient-category-comparison, old proof steps 3–4 (agent argument)."
+   }
+  },
+  {
+   "text": "Ordinary derived change of rings is exact. The common integral category has the inherited distinguished triangles, so its restriction $C_{L/E}$ is exact. The completed-scalar shift lemma gives $\\sigma^U_{m,K}b_{K[m]}=b_K[m]\\sigma^C_{m,K}$ for every integer $m$ with the specified shifts. In its reordered cone the comparison is $(x,y)\\mapsto(x,(-1)^m y)$; applying it to $(c(z),0)$ gives $(c(z),0)$, which is why no sign appears in the completion map itself. Consequently $\\sigma^C_{m,K}b_{K[m]}^{-1}=b_K^{-1}[m]\\sigma^U_{m,K}$. A triangle and its image under $U$ are identified by $b$ with its distinguished image under $C$, including the last arrow by this shift equation. Thus $U$ is exact with its specified shifts, and $b$ and $b^{-1}$ are exact natural isomorphisms.",
+   "uses": [
+    "lem-pur-derived-change-of-rings",
+    "lem-weil-integral-constructible-triangulated",
+    "lem-weil-point-completed-scalar-shift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; expanded completion-inverse scalar comparison from lem-fd-rational-coefficient-category-comparison, old proof steps 3–4 (agent argument)."
+   }
+  },
+  {
+   "text": "Let $A^C_{M,L,E}:C_{M/L}C_{L/E}\\to C_{M/E}$ be ordinary tensor associativity and $A^U$ the specified integral framework associator. The scalar-completion associator lemma gives\n$$A^U_K\\,U_{M/L}(b_{L/E,K})\\,b_{M/L,C_{L/E}K}=b_{M/E,K}\\,A^C_K.$$\nIts maps use the actual quotient cocones and are resolution independent. The normalization in the hypothesis, as specified in the integral realization node, identifies this $A^U$ with the framework associator used here: it is the conjugate of this same $A^C$ by these same maps $b$. Thus the displayed equality holds for the chosen associator, not merely for some associator. Ordinary tensor transport in step 2 identifies $A^C$ with the integral balancing whose rationalization is the specified PBC associator.",
+   "uses": [
+    "lem-fix-scalar-completion-associator",
+    "lem-trf-integral-pullback-comparison-realization",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; expanded completion-inverse scalar comparison from lem-fd-rational-coefficient-category-comparison, old proof steps 3–4 (agent argument)."
+   }
+  },
+  {
+   "text": "Naturality of $b_{M/L}$ at $b_{L/E,K}$ rewrites the middle factors in step 4 as\n$$U_{M/L}(b_{L/E,K})\\,b_{M/L,C_{L/E}K}=b_{M/L,U_{L/E}K}\\,C_{M/L}(b_{L/E,K}).$$\nInsert this equality in step 4, multiply on the left by $b_{M/E,K}^{-1}$, and on the right by $C_{M/L}(b_{L/E,K}^{-1})\\,b_{M/L,U_{L/E}K}^{-1}$. The result is precisely\n$$A^C_K\\,C_{M/L}(b_{L/E,K}^{-1})\\,b_{M/L,U_{L/E}K}^{-1}=b_{M/E,K}^{-1}\\,A^U_K.$$\nHere functoriality sends $b^{-1}$ to the inverse of the image of $b$; all adjacent pairs cancel. This is the integral inverse-comparison cocycle, with the direction of every arrow fixed.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; expanded completion-inverse scalar comparison from lem-fd-rational-coefficient-category-comparison, old proof steps 3–4 (agent argument)."
+   }
+  },
+  {
+   "text": "For $L=E$, multiplication identifies $C_{E/E}$ with the identity, and the finite-free completed comparison identifies $b_{E/E}$ with the natural completeness unit $K\\to U_{E/E}K$. Thus $b_{E/E}^{-1}$ is exactly the normalized unit $U_{E/E}\\to\\mathrm{id}$. The scalar-completion associator lemma supplies the unit equations with these multiplication/completeness identifications. Setting $L=E$ or $M=L$ in step 5 therefore gives the two unit comparison squares; with all fields equal it gives the identity square. This also covers a repeated field adjacent to a strict extension: no strict-inclusion hypothesis was used in steps 1–5.",
+   "uses": [
+    "lem-weil-finite-free-completed-scalar-comparison",
+    "lem-fix-scalar-completion-associator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; expanded completion-inverse scalar comparison from lem-fd-rational-coefficient-category-comparison, old proof steps 3–4 (agent argument)."
+   }
+  },
+  {
+   "text": "Localize $b^{-1}$ over the final field, defining $j_{T,L/E}=Q_L(b_{L/E}^{-1})$. The raw rationalizations have the same objects and tensor-localized Hom groups. Their identity equivalences send each integral map and each scalar to itself, so the source is exactly $J_{T,L}S_{L/E}$ and the target is $P_{L/E}J_{T,E}$. Semilinear localization applies: the image of $\\varpi_E$ is nonzero in $L=\\mathcal O_L[1/\\varpi_L]$, hence invertible. Both scalar functors are semilinear by coefficient multiplication on tensors; the comparison components are $R_L$-linear. The localization lemma preserves exact transformations, inverses, composition and whiskering. It therefore sends the inverse equation of step 5 to the displayed $a^p\\,P(j)\\,j=j\\,J(a^s)$, and preserves the shift and unit equations. In particular the integral lift retained in step 2 is still the specified lift, not a newly chosen map.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-pbc-rational-category",
+    "lem-weil-l-adic-integers-localization-uniformizer",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; expanded completion-inverse scalar comparison from lem-fd-rational-coefficient-category-comparison, old proof steps 3–4 (agent argument)."
+   }
+  },
+  {
+   "text": "Finally take $E_0\\subseteq E_1\\subseteq E_2\\subseteq E_3$ and abbreviate $S_{ba}=S_{E_b/E_a}$, $P_{ba}=P_{E_b/E_a}$, $J_b=J_{T,E_b}$ and $j_{ba}=j_{T,E_b/E_a}$. Suppressing component subscripts, the comparison from $J_3S_{32}S_{21}S_{10}$ to $P_{32}P_{21}P_{10}J_0$ is\n$$D=(P_{32}P_{21}j_{10})(P_{32}j_{21}S_{10})(j_{32}S_{21}S_{10}).$$\nTwice applying the cocycle of step 7, and moving the inner $j$ past an associator by naturality, identifies the two contractions of $D$ with\n$$j_{30}J_3\\bigl(a^s_{3,2,0}\\,S_{32}(a^s_{2,1,0})\\bigr),\\qquad\nj_{30}J_3\\bigl(a^s_{3,1,0}\\,(a^s_{3,2,1}S_{10})\\bigr).$$\nThe scalar-completion associator law makes these equal, and localization preserves that law. The PBC associators have the corresponding coherence by their scalar-extension proposition. These are exactly the four-field compatibility diagram for the specified comparisons. The same substitutions with units give its degeneracies, since step 6 included equal fields. All manipulations here are substitution, naturality and cancellation of already supplied natural isomorphisms.",
+   "uses": [
+    "lem-fix-scalar-completion-associator",
+    "prop-weil-pbc-scalar-extension",
+    "lem-pur-semilinear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+    "place": "Final coefficient-category sentence; expanded completion-inverse scalar comparison from lem-fd-rational-coefficient-category-comparison, old proof steps 3–4 (agent argument)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-finite-free-constructible-scalar-transport",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-quotient-scalar-comparison-descent",
+  "lem-weil-proetale-countable-products-exact",
+  "def-fd-coefficient-comparison-datum",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-point-completed-scalar-shift",
+  "lem-fix-scalar-completion-associator",
+  "lem-trf-integral-pullback-comparison-realization",
+  "prop-weil-pbc-scalar-extension",
+  "def-weil-rationalization-karoubi",
+  "def-weil-pbc-rational-category",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-pur-semilinear-scalar-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-fourier-transform/sk-def-trace/def-fd-trace-function.md",
+  "place": "Final coefficient-category sentence; expanded completion-inverse scalar comparison from lem-fd-rational-coefficient-category-comparison, old proof steps 3–4 (agent argument)."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +179,59 @@
    "results": "[leanfinder] OK 8 hit(s); Algebra.Extension.tensorCotangentInvFun; Algebra.Extension.tensorH1Cotangent; Algebra.Extension.tensorCotangentInvFun_smul_mk; Algebra.Extension.tensorCotangent; Algebra.Generators.CotangentSpace.compEquiv_symm_zero; rTensor.inverse_apply; Algebra.Generators.CotangentSpace.compEquiv_symm_inr; Algebra.TensorProduct.cancelBaseChange_symm_tmul",
    "date": "2026-10-21",
    "verdict": "no match: adic module completion and monoidal associator naturality do not state the specified derived quotient-completion comparison cocycle"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.NatIso, CategoryTheory.NatTrans.naturality",
+   "results": "0 hits; loogle: unknown identifier 'CategoryTheory.NatIso'",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar associativity and generic naturality do not identify the specified derived strict-tower completion map or its inverse coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "completion.*associator|associator.*completion|completed.*scalar.*shift",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar associativity and generic naturality do not identify the specified derived strict-tower completion map or its inverse coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse of the specified quotient completion comparison is a shift compatible coherent natural isomorphism between ordinary and completed l adic scalar extension",
+   "results": "8 hits; AdicCompletion.mk_ofAlgEquiv_symm; AdicCompletion.mk_smul_top_ofAlgEquiv_symm; AdicCompletion.congr_symm_apply; AdicCompletion.of_ofLinearEquiv_symm; AdicCompletion.ofLinearEquiv_symm_of; AdicCompletion.ofAlgEquiv_symm_of; AdicCompletion.of_ofAlgEquiv_symm; AdicCompletion.mk_ofAlgEquiv_symm_eq_evalOneₐ",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar associativity and generic naturality do not identify the specified derived strict-tower completion map or its inverse coherence"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Conjugating tensor associators by a derived completion natural isomorphism gives coherent inverse scalar comparisons",
+   "results": "8 hits; CategoryTheory.MonoidalCoherence.assoc'_iso; Bialgebra.TensorProduct.assoc_symm_tmul; SemimoduleCat.hom_inv_associator; CategoryTheory.Mathlib.Tactic.MonTauto.associator_inv_comp_tensorHom_tensorHom_assoc; QuadraticModuleCat.hom_inv_associator; CategoryTheory.conjugateEquiv_associator_hom; TensorProduct.assocIsometry_symm_apply; ModuleCat.extendScalars_assoc'",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar associativity and generic naturality do not identify the specified derived strict-tower completion map or its inverse coherence"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars_assoc|conjugateEquiv_associator",
+   "results": "8 hits; Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean; Mathlib/CategoryTheory/Adjunction/CompositionIso.lean; Mathlib/CategoryTheory/Adjunction/Mates.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean; Mathlib/CategoryTheory/Bicategory/Adjunction/Adj.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar associativity and generic naturality do not identify the specified derived strict-tower completion map or its inverse coherence"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"associator_naturality\"",
+   "results": "12 hits; CategoryTheory.Bicategory.associator_naturality_left; CategoryTheory.Bicategory.associator_naturality_right; CategoryTheory.Bicategory.associator_naturality_middle; CategoryTheory.Bicategory.associator_naturality_left_assoc; CategoryTheory.Bicategory.associator_naturality_right_assoc; CategoryTheory.Bicategory.associator_naturality_middle_assoc; CategoryTheory.Limits.coprod.associator_naturality; CategoryTheory.Limits.prod.associator_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar associativity and generic naturality do not identify the specified derived strict-tower completion map or its inverse coherence"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Ordinary derived scalar extension and strict quotient tower completion comparison satisfies cocycle inverse units and shifts",
+   "results": "8 hits; DerivedCategory.quotientCompQhIso; DerivedCategory.instCommShiftHomologicalComplexIntUpHomFunctorQuotientCompQhIso; DerivedCategory.left_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.instLinearCochainComplexIntQ; DerivedCategory.right_fac_of_isStrictlyLE; DerivedCategory.right_fac_of_isStrictlyLE_of_isStrictlyGE; DerivedCategory.left_fac_of_isStrictlyGE; CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module scalar associativity and generic naturality do not identify the specified derived strict-tower completion map or its inverse coherence"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fd-rational-coefficient-category-comparison",
@@ -78,5 +250,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-fd-completion-inverse-scalar-coherence",
+  "worker": "stage1",
+  "summary": "Restricted the actual finite-free quotient completion map to the common integral categories, verified its normalized lift and signed cone-shift compatibility, and derived the inverse cocycle explicitly by naturality and cancellation. Retained unit normalizations including repeated fields, used semilinear raw localization, and checked the four-field diagram. All mathematical inputs already have nodes; no new nodes or Mathlib leaves. Statement unchanged.",
+  "blueprint": "def-fd-trace-function, final coefficient-category sentence, through lem-fd-rational-coefficient-category-comparison old steps 3–4: finite scalar comparison and coherence.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "why": "Identifies the two integral full categories on allowed schemes, without changing any unit proof route. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-weil-pbc-finite-free-constructible-scalar-transport",
+    "why": "Supplies preservation of the integral constructible category by ordinary completed-ring tensor. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-weil-finite-free-completed-scalar-comparison",
+    "why": "Supplies the specified quotient-map natural isomorphism and its identity-extension value. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-pur-quotient-scalar-comparison-descent",
+    "why": "Supplies derived resolution-independent normalization of the quotient-map lift. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic exactness of ambient derived scalar tensor. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-weil-integral-constructible-triangulated",
+    "why": "Supplies inherited triangles and repleteness of the integral full category. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-weil-point-completed-scalar-shift",
+    "why": "Generic any-scheme completion-map shift equation, including the cone sign. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-fix-scalar-completion-associator",
+    "why": "Generic any-scheme normalization and coherence of the actual scalar associator. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-trf-integral-pullback-comparison-realization",
+    "why": "Fixes the already required conjugation normalization for the framework associator. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Identifies the specified PBC scalar associator and its units/coherence. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-weil-l-adic-integers-localization-uniformizer",
+    "why": "Identifies the scalar localization with the finite coefficient field. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic transport of exact natural isomorphisms and their equations through raw scalar localization. No lemma of sk-def-trace supplies this general tool."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Verifies the exact-countable-products hypothesis of the quotient descent lemma on the pro-etale site. No lemma of sk-def-trace supplies this general tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-integral-stratified-perfect-characterization",
+  "lem-weil-pbc-finite-free-constructible-scalar-transport",
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-pur-quotient-scalar-comparison-descent",
+  "lem-pur-derived-change-of-rings",
+  "lem-weil-integral-constructible-triangulated",
+  "lem-weil-point-completed-scalar-shift",
+  "lem-fix-scalar-completion-associator",
+  "lem-trf-integral-pullback-comparison-realization",
+  "prop-weil-pbc-scalar-extension",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q149-e50b2c896",
+  "group": "Q149",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q149-e50b2c896 (reviewer sub-agent of L); spot-checked: I read the whole delivery: the item only, no new nodes, statement unchanged. The proof expands the parent's old steps 3–4 (read in the Q05 snapshot of the parent) and drops none of their argument. Every cited statement was checked against its use. Step 1: the stratified-perfect characterization's last clause identifies the framework and PBC integral categories as the same full subcategory. Finite-free transport puts the ordinary extension K⊗^L R_L in that category. χ is invertible and natural on derived-complete inputs. Step 3: the point-shift lemma holds on any scheme and gives α(x,y)=(x,(−1)^m y) with αχ=χ[m]; the sign check on (c(z),0) is correct. Step 4: the scalar-completion associator's normalization (equal fields allowed) agrees with the χ-conjugated associator that the item's hypothesis fixes. Step 5: I recomputed the cancellation; it matches a^p P(j) j = j J(a^s) term by term. Step 6: the unit cases handle P_{E/E}=id literally against the multiplication isomorphism. Step 7: semilinear localization applies with φ:O_E→O_L, since ϖ_E is a unit in L. Step 8: the four-field diagram follows from the cocycle and both pentagons. Edge cases checked: empty T, K=0, m=0,±1, repeated fields. No cycle. Tool uses accepted: all are generic coefficient-category facts, and unit sk-def-trace is a definition with no comparison lemma on its route. Batch-5 flag on lem-weil-pbc-finite-free-constructible-scalar-transport → lem-trf-geometric-inverse-image-exact: that node only states that inverse image along a geometric morphism of topoi is exact, which is generic and not part of the trace formula or Poincaré duality. The trace-formula/Poincaré part of the item's closure is also identical before and after the delivery (added = none), so I accept it. lem-trf-integral-pullback-comparison-realization was already a stmt_dep and is used only for its associator convention. FIX, one error E1 in step 2: the step applied lem-pur-quotient-scalar-comparison-descent without checking its hypothesis that countable products of module sheaves are exact. I added the citation lem-weil-proetale-countable-products-exact, wrote out the check with R, S and B_n=(O_L/ϖ_L^n)_T, and updated proof_deps and tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
