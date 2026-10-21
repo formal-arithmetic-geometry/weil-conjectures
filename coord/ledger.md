@@ -22622,3 +22622,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:41 L: returned deliver/Q09/lem-sfb-common-field-lattice-generators (reviewer RETURN: L: independent stage-2 immutable head 70111c62c6e4: H2 / mechanical theorem-stmt_dep finding: the delivery adds theorem )
 - 13:41 L: returned deliver/NC/det-picard-rr-duality (reviewer RETURN: L: independent stage-2 immutable head 850e357f3fd5: Item maths correct on all four clauses: e in (1) pinned by trace∘eva)
 - 13:41 L: returned deliver/NQ/lem-sfb-finite-local-model-rhom-continuity (reviewer RETURN: L: independent stage-2 immutable head 87d1ccfe9637: H2 / mechanical theorem-stmt_dep finding upheld: the delivery added )
+- 13:41 L: returned deliver/NI/lem-sfb-qcqs-proper-integral-rational-scalar-comparison (reviewer RETURN: L: independent stage-2 immutable head d1ea899b0964: Not a stage-2 delivery: S1 re-split on the S2 lane. No .lean module,)
