@@ -1,0 +1,45 @@
+# Stage-1 delivery: def-nagata-blowup-flat-base-change-map
+
+## Files written
+
+- `dag/nodes/sec-nagata-compactification/def-nagata-blowup-flat-base-change-map.json`: definition-only split, not a Mathlib leaf. The statement specifies the composite defining the comparison and cites all eleven existing construction interfaces. No new nodes or Mathlib leaves.
+- `citations.json`: `[]`, since this definition has no proof steps or proof dependencies; all citations are statement dependencies.
+- `searches.jsonl`: actual msearch.py queries and results, retained with this report.
+
+## Attachments
+
+None. The previous attachment was rejected and the dispatch explicitly requires a split rather than another ATTACH answer. The current supplied read tree now does have `lean/WeilConjectures/Blowup/FlatBaseChange.lean`, with `AlgebraicGeometry.Scheme.IdealSheafData.blowupFlatBaseChange` at line 144. I read the file, including `reesPullbackData`, but do not assert that every dependency is transitively sorry-free. Its target uses the opposite order of fibre-product factors, `pullback I.blowupMap g`; the delivered definition keeps the blueprint's order, with Y first. No Lean record has been set or changed.
+
+## Literature wanted
+
+None. Read the current blueprint `literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-blowup-flat-base-change-map.md`, the imported definition, chapter and unit records, and their listed dependency statements. Supporting source read directly in `literature/stacks-project/`: `divisors.tex`, Tag 01OG (`definition-blow-up`), Tag 0804 (`lemma-blowing-up-affine`), Tag 0805 (`lemma-flat-base-change-blowing-up`); `constructions.tex`, Tag 01O3 (`lemma-relative-proj-base-change`). Tags checked against `tags/tags`. No SGA source is used.
+
+## Problems and corrections
+
+The original item is a definition, so stages/1-dag.md section 3(2) calls for a specification of its construction and statement dependencies, rather than a proof of a proposition. Its original five dependencies were appropriate but incompletely exposed: the text did not specify the Proj arrow direction, the canonical Proj base-change map or the intervening blow-up identifications. I retained all five, and added the existing definitions of flatness, fibre products, sheaf Rees algebras, relative Proj and affine blow-ups, plus the existing relative-Proj existence/chart-uniqueness statement. No hypotheses, objects or intended map change. In particular, no finite-type, Noetherian, separatedness, quasi-compactness or affine-intersection hypothesis is introduced. All imported metadata and blueprint_update fields are preserved.
+
+This is not a STATEMENT-DISPUTED case. It expands the definition's original instruction to apply Proj to beta_g on affine opens and glue. It does not substitute a universal-property lift. The item is not its unit's key statement, so no unit realization fields are changed. The three blueprint levels are respected, and all non-leaf statement interfaces used belong to this unit or its cited data unit.
+
+## Unfinished work
+
+None within this one-level definition split. The existing dependencies remain separate work items; their proofs are not certified by this delivery.
+
+## Not duplicates
+
+No new node is proposed. Whole-DAG keyword/tag searches and blueprint_refs searches for `base-change`, `blowup`, `blowup-flat-base-change`, `Rees algebra`, `comparison for blow` and `Blow-up` were read. The existing `thm-nagata-blowup-flat-base-change` asserts that the map is an isomorphism over Y and depends on this definition; it is not a replacement definition and is not cited here. The existing relative-Proj functoriality/existence and affine/global blow-up nodes supply the needed interfaces, so no restatement of them is introduced.
+
+## Review by Q135
+
+I reviewed the definition against the main-20261015 source's two paragraphs and the Stacks sources named above. Tag 01OG defines the blow-up by relative Proj of the sheaf Rees algebra; 0804 identifies its affine restrictions with the affine Rees Proj models. Tag 0805 uses exactly the pulled-back ideal and degreewise Rees comparison of this item. Tag 01O3 gives the canonical comparison to the fibre product. The delivered composite follows this construction and retains the blueprint's map rather than replacing it by a different blow-up lift.
+
+For the input part of the construction I opened `def-weil-flat-morphism`, which defines flatness stalkwise; `def-nagata-extended-ideal`, whose statement gives the image ideal; `def-nagata-sheaf-rees-algebra`, which specifies the direct sum, multiplication and degree-zero unit; and `def-nagata-flat-pullback-rees-map`, whose statement supplies beta_g in the required direction. I checked their current blueprint_update statements too. `lemma-nagata-flat-pullback-rees` explicitly states that this beta_g is a graded algebra equivalence, so it supplies the required admissible input to the equivalence clause of Proj functoriality. Flatness is already assumed, and the Rees map's degree zero is the structural identification, since the zeroth ideal power is the whole structure sheaf. No injectivity assumption on multiplication maps is used.
+
+For the blow-up identifications I read `def-nagata-affine-blowup`, which defines precisely Proj of the affine Rees algebra, and `def-nagata-global-blowup` together with its gluing/local-model dependencies. These use the same local Proj models and restriction maps as `def-nagata-relative-proj`. `lemma-nagata-relative-proj-exists` states existence and uniqueness of the chart-preserving comparison and compatibility with restrictions and structural maps. Thus the identifications in the definition are specified by the local charts, not chosen from a bare existence assertion and not arbitrary automorphisms over the base. They are elementary identifications of the same gluing construction using those stated interfaces; I did not introduce a separate node for them.
+
+For the central and final arrows I read the whole statement of `prop-nagata-relative-proj-functoriality`: clause (2) provides Proj of the graded equivalence, clause (4) provides the canonical flat base-change isomorphism, and clause (1) supplies compatible affine restrictions. All their hypotheses hold for the quasi-coherent sheaf Rees algebra, flat g, and base-compatible beta_g. Proj is contravariant: beta_g has source g*R_X and target R_Y, so the scheme map goes from P_Y(R_Y) to P_Y(g*R_X). There is no use of Proj of the inverse in this position. `def-pc-fibre-product` explicitly supplies existence, the projection-compatible universal property and induced maps of fibre products; it gives the last product map and fixes the Y-first convention. No cited definition is used for an unstated tensor-exactness theorem, and no proof of a cited node is being used instead of its statement.
+
+The definition has no proof steps. Accordingly the per-step C1/C4 check and citations.json are empty, not a replacement of an omitted proof: the non-elementary operations in the construction are precisely the named statement interfaces above. There is no new claim whose proof was moved into the definition. B1-B10 and D1-D4 do not yield any proposed new node to audit; no elementary or duplicate nodes, no restated clause and no inline long proof have been added. The comparison's isomorphism theorem remains its own existing node, avoiding a cycle.
+
+I tested the specification on the identity base change (beta and the chart comparisons give the identity), the zero ideal (Rees has no positive-degree part, so both blow-ups are empty), the unit ideal (the Proj model is the base and the comparison has the specified structural maps), the empty scheme, and unrestricted quasi-coherent ideals that need not be finitely generated. It needs no nonempty Proj chart, no cancellation by a homogeneous denominator and no assumption that intersections of affine opens are affine. Overlaps are handled by the existing compatible gluing interfaces.
+
+Every Mathlib query in the node is copied from searches.jsonl. Both semantic phrasings were read. LeanFinder returned flatness or absolute Proj/chart morphisms; LeanSearch returned flatness/base-change module results; Loogle returned absolute Proj and standard-open declarations. None constructs this sheaf-Rees blow-up map. The directory grep returned zero hits, so I also searched explicit Basic.lean and Functor.lean files through msearch.py and read the actual candidates at Basic.lean:151,256,443 and Functor.lean:34,40,56. pullbackAwayiotaIso compares two standard opens in one Proj, while fromOfGlobalSections requires a global-sections ring map and irrelevant-ideal condition; neither is the requested relative comparison or a one-line specialization of it. The explicit-file search formatter puts numeric line numbers in its `file` field; the node records the actual source path and lines read. No unavailable service or unrun search is reported as a successful no-match.

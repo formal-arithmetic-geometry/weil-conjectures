@@ -3,28 +3,91 @@
  "blueprint": {
   "is": "def-nagata-blowup-flat-base-change-map",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Flat base-change comparison for blow-ups",
- "statement": "Let $g\\colon Y\\to X$ be flat and let\n$\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent ideal. With\n$\\mathcal I\\mathcal O_Y$ defined in\n[def-nagata-extended-ideal], define\n\n$$\n\\operatorname{bc}_g\\colon\n\\operatorname{Bl}_{\\mathcal I\\mathcal O_Y}(Y)\n\\longrightarrow\nY\\times_X\\operatorname{Bl}_{\\mathcal I}(X)\n$$\n\nby applying relative Proj to $\\beta_g$ on affine opens and gluing. The\ndegreewise graded equivalence used in this construction is\n[lemma-nagata-flat-pullback-rees].",
+ "statement": "Let $g:Y\\to X$ be a flat morphism of schemes [def-weil-flat-morphism] and let $\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent ideal. Put $\\mathcal J=\\mathcal I\\mathcal O_Y$ as in [def-nagata-extended-ideal], and use the sheaf Rees algebras of [def-nagata-sheaf-rees-algebra]. Let\n$$\n\\beta_g:g^*\\mathcal R_X(\\mathcal I)\\longrightarrow\\mathcal R_Y(\\mathcal J)\n$$\nbe the canonical degreewise map of [def-nagata-flat-pullback-rees-map], regarded as a graded algebra equivalence using [lemma-nagata-flat-pullback-rees]. Its degree-zero map is the canonical identification $g^*\\mathcal O_X\\cong\\mathcal O_Y$.\n\nWrite $P_T(\\mathcal A)=\\operatorname{Proj}_T(\\mathcal A)$ for [def-nagata-relative-proj]. Use the chart-preserving identifications of the global blow-up [def-nagata-global-blowup] with $P_T(\\mathcal R_T(\\mathcal K))$: both are glued from the affine blow-ups $\\operatorname{Proj}(\\mathcal R_A(K))$ of [def-nagata-affine-blowup], with the same coefficientwise restriction maps. The identifications are the unique ones respecting these local models, supplied by [lemma-nagata-relative-proj-exists]. Define\n$$\n\\operatorname{bc}_g:\n\\operatorname{Bl}_{\\mathcal J}(Y)\n\\longrightarrow Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X)\n$$\nto be the composite\n$$\n\\operatorname{Bl}_{\\mathcal J}(Y)\n\\xrightarrow{\\sim}P_Y(\\mathcal R_Y(\\mathcal J))\n\\xrightarrow{P_Y(\\beta_g)}P_Y(g^*\\mathcal R_X(\\mathcal I))\n\\xrightarrow{c_g}Y\\times_X P_X(\\mathcal R_X(\\mathcal I))\n\\xrightarrow{\\sim}Y\\times_X\\operatorname{Bl}_{\\mathcal I}(X).\n$$\nHere $P_Y(\\beta_g)$ is the contravariant Proj map induced by the graded equivalence, and $c_g$ is the canonical flat base-change isomorphism; these are respectively clauses (2) and (4) of [prop-nagata-relative-proj-functoriality]. The products and the last induced map use [def-pc-fibre-product]. Thus the construction applies Proj to $\\beta_g$ on affine opens and uses the compatible gluing in those cited interfaces. The displayed target puts $Y$ in the first fibre-product factor.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-blowup-flat-base-change-map.md",
   "place": "node def-nagata-blowup-flat-base-change-map, order 116"
  },
  "stmt_deps": [
+  "def-weil-flat-morphism",
   "def-nagata-extended-ideal",
-  "lemma-nagata-flat-pullback-rees",
+  "def-nagata-sheaf-rees-algebra",
   "def-nagata-flat-pullback-rees-map",
+  "lemma-nagata-flat-pullback-rees",
+  "def-nagata-relative-proj",
   "def-nagata-global-blowup",
-  "prop-nagata-relative-proj-functoriality"
+  "def-nagata-affine-blowup",
+  "lemma-nagata-relative-proj-exists",
+  "prop-nagata-relative-proj-functoriality",
+  "def-pc-fibre-product"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For a flat morphism of schemes construct the canonical blowup comparison to the fiber product by relative Proj of the pulled back Rees algebra",
+   "results": "AlgebraicGeometry.Flat.instSndScheme, AlgebraicGeometry.Flat.instFstScheme, AlgebraicGeometry.Flat, AlgebraicGeometry.Flat.comp, AlgebraicGeometry.Flat.flat_appLE, AlgebraicGeometry.Flat.isStableUnderBaseChange, AlgebraicGeometry.Scheme.Hom.flat_appLE, AlgebraicGeometry.Flat.instDescScheme",
+   "date": "2026-10-21",
+   "verdict": "no match: none constructs the specified flat blow-up comparison from the sheaf Rees map"
+  },
+  {
+   "tool": "grep",
+   "query": "blowup|blow.up|relative.?proj|rees.*base.change",
+   "results": "Search in Mathlib/AlgebraicGeometry: No hits returned.",
+   "date": "2026-10-21",
+   "verdict": "inconclusive directory search; followed by explicit-file searches and source inspection"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat base change comparison morphism for blowups constructed from the Rees algebra",
+   "results": "Module.Flat.isBaseChange, IsSMulRegular.of_flat_of_isBaseChange, AlgebraicGeometry.Flat.isStableUnderBaseChange, RingHom.Flat.isStableUnderBaseChange, RingHom.FaithfullyFlat.isStableUnderBaseChange, RingTheory.Sequence.IsWeaklyRegular.of_flat_of_isBaseChange, RingTheory.Sequence.IsRegular.of_faithfullyFlat_of_isBaseChange, IsBaseChange.map_smul_top_ne_top_iff_of_faithfullyFlat",
+   "date": "2026-10-21",
+   "verdict": "no match: none constructs the specified flat blow-up comparison from the sheaf Rees map"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Proj",
+   "results": "AlgebraicGeometry.Proj, AlgebraicGeometry.Proj.affineOpenCover, AlgebraicGeometry.Proj.basicOpen, AlgebraicGeometry.Proj.isAffineOpen_basicOpen, AlgebraicGeometry.Proj.basicOpenToSpec, AlgebraicGeometry.Proj.basicOpen_pow, AlgebraicGeometry.Proj.awayι, AlgebraicGeometry.Proj.isBasis_basicOpen",
+   "date": "2026-10-21",
+   "verdict": "no match: none constructs the specified flat blow-up comparison from the sheaf Rees map"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Projective spectrum of the extension of scalars of a Rees algebra of an ideal gives the morphism from a blow up to its fiber product",
+   "results": "AlgebraicGeometry.Proj.pullbackAwayιIso, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec, AlgebraicGeometry.Proj.fromOfGlobalSections, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_right_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left_assoc, AlgebraicGeometry.Proj.pullbackAwayιIso_hom_SpecMap_awayMap_left, AlgebraicGeometry.ProjectiveSpectrum.Proj.toSpec_base_apply_eq",
+   "date": "2026-10-21",
+   "verdict": "no match: none constructs the specified flat blow-up comparison from the sheaf Rees map"
+  },
+  {
+   "tool": "grep",
+   "query": "Proj|baseChange|rees",
+   "results": "Search in Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean: 8, 14, 16, 17, 21",
+   "date": "2026-10-21",
+   "verdict": "no match: none constructs the specified flat blow-up comparison from the sheaf Rees map"
+  },
+  {
+   "tool": "grep",
+   "query": "def|theorem",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Functor.lean:34 ProjectiveSpectrum.comapFun, :40 ProjectiveSpectrum.comap, :56 comapStructureSheafFun; source read. Functoriality for individual graded rings, not a sheaf-Rees blow-up comparison.",
+   "date": "2026-10-21",
+   "verdict": "no match: none constructs the specified flat blow-up comparison from the sheaf Rees map"
+  },
+  {
+   "tool": "grep",
+   "query": "def fromOfGlobalSections|def pullbackAwayιIso|def toSpecZero",
+   "results": "Mathlib/AlgebraicGeometry/ProjectiveSpectrum/Basic.lean:151 Proj.toSpecZero, :256 Proj.pullbackAwayιIso, :443 Proj.fromOfGlobalSections; source read. These are absolute Proj structural, chart-overlap and global-section maps.",
+   "date": "2026-10-21",
+   "verdict": "no match: none constructs the specified flat blow-up comparison from the sheaf Rees map"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -58,5 +121,21 @@
   "statement": "Let $g\\colon Y\\to X$ be flat and let\n$\\mathcal I\\subseteq\\mathcal O_X$ be a quasi-coherent ideal. With\n$\\mathcal I\\mathcal O_Y$ defined in\n[def-nagata-extended-ideal], define\n\n$$\n\\operatorname{bc}_g\\colon\n\\operatorname{Bl}_{\\mathcal I\\mathcal O_Y}(Y)\n\\longrightarrow\nY\\times_X\\operatorname{Bl}_{\\mathcal I}(X)\n$$\n\nby applying relative Proj to $\\beta_g$ on affine opens and gluing. The\ndegreewise graded equivalence used in this construction is\n[lemma-nagata-flat-pullback-rees].",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-blowup-flat-base-change-map",
+  "worker": "stage1",
+  "summary": "Definition-only split with no new nodes: specify the composite of the contravariant relative Proj map of beta_g and canonical relative Proj base change, including chart-preserving blow-up identifications and fibre-product factor order. Audit the original five dependencies and add the existing definitions/existence interface explicitly used. Record actual searches and read candidate sources; do not repeat the rejected attachment claim.",
+  "blueprint": "Current main-20261015 definition, both paragraphs: the displayed map and the sentence applying relative Proj to beta_g on affine opens and gluing, using the degreewise graded equivalence. There is no proof in the blueprint for this definition; construction details are specified using existing nodes.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q135-211dc3d6a",
+  "group": "Q135",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q135-211dc3d6a (reviewer sub-agent of L); spot-checked: I read the whole definition-only split, which has no new nodes, against main-20261015 def-nagata-blowup-flat-base-change-map (order 124), the blueprint proof of thm-nagata-blowup-flat-base-change and Stacks 0805/01O3/01OG/0804. The hypotheses are unchanged (flat g, quasi-coherent I) and so are the source and target (Bl_{IO_Y}(Y) to Y x_X Bl_I(X), Y first). The composite is Bl_J(Y) = P_Y(R_Y(J)), then P_Y(beta_g), then c_g, then Y x_X P_X(R_X(I)) = Y x_X Bl_I(X). Proj is contravariant and the arrow direction is right; clause (2) of prop-nagata-relative-proj-functoriality needs beta_g to be a graded equivalence, which lemma-nagata-flat-pullback-rees provides, and in degree 0 beta_g is g*O_X = O_Y. c_g is clause (4), flat case. The blow-up/relative-Proj identifications use lemma-nagata-relative-proj-exists: Gamma(V,R_X(I)) is the sum of the I_V^n on affine V, so the all-affine-opens gluing data of def-nagata-global-blowup match. This is an elementary unfolding (advisory: no node states Bl = Proj_X(Rees)). The last map is induced by def-pc-fibre-product and is defined because the identifications are compatible with the structure maps to X. All 11 stmt_deps exist and none is merged. There is no cycle (the item is not in its 127-node closure). The off-unit statements are in the cited unit sk-def-nagata-sketch-data, so no tool_uses are needed. LeanFinder, LeanSearch, Loogle and grep searches are all recorded and none matches. Edge cases checked: I=O_X gives the identity, I=0 gives the empty map, g=id gives the identity, and ideals that are not of finite type need nothing extra. The blueprint metadata is preserved."
  }
 }
