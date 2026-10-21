@@ -25,11 +25,113 @@
   "def-weil-pbc-direct-image",
   "lem-asd-ordinary-supported-kummer",
   "def-asd-ordinary-supported-kummer-boundary",
-  "def-pc-divisor-line-bundle"
+  "def-pc-divisor-line-bundle",
+  "def-pc-projective-space-twist"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $U_0=D(x_0)=X$ and $U_1=D(x_1)=P-D_0$. The ideal of $D_0$ has frames $f_0=t$ on $U_0$ and $f_1=1$ on $U_1$. These generate Cartier ideals: $t$ is a non-zero-divisor in $\\Omega[t]$, and $1$ is a non-zero-divisor on $U_1$. For the dual ideal [def-pc-divisor-line-bundle], the dual frames satisfy $g_0=t^{-1}g_1$ on the overlap. The frame identifications $g_a\\mapsto e_a^{(1)}$ therefore glue to an isomorphism $\\mathcal O_P(D_0)\\cong\\mathcal O_P(1)$ by the transition rule of [def-pc-projective-space-twist]. The canonical divisor section has coordinates $t$ and $1$ in these frames, respectively; it is thus the section $x_1$ of the positive twist. Restriction to $X$ gives precisely the divisor pair used to define $c_{0,X}$.",
+   "uses": [
+    "def-pc-divisor-line-bundle",
+    "def-pc-projective-space-twist"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 2, supported origin; unit sk-prop-an Step 5(d), divisor normalization"
+   }
+  },
+  {
+   "text": "Write $F=\\bar i_{0*}A_S$ and $G=i_{0*}A_S$. Open inverse image is restriction, as specified in [lem-weil-pbc-extension-by-zero-adjunction]. Thus on every etale $V\\to X$ the two sheaves $j^{-1}F$ and $G$ are both $A_S(V\\times_XS)$, by [def-weil-pbc-direct-image]; this gives the canonical identification in the statement. The same direct-image formula shows that $F|_{U_1}=0$, since $U_1\\times_PS=\\varnothing$. In particular its inverse image at infinity is zero, since infinity lies in $U_1$. Apply the module-sheaf version of [lem-weil-pbc-open-closed-short-exact] to $j:X\\hookrightarrow P$ and its closed complement infinity, with coefficient sheaf $F$. Its last term is zero, so its first map $\\epsilon_F:j_!j^{-1}F\\to F$ is an isomorphism. Under $j^{-1}F=G$ this map is exactly $e$, not an arbitrary support isomorphism.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "def-weil-pbc-direct-image",
+    "lem-weil-pbc-open-closed-short-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03S3 definition-extension-zero and 095L lemma-ses-associated-to-open"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-extension-by-zero-adjunction] for the actual sheaf adjunction $j_!\\dashv j^{-1}$. Both functors are additive and exact, by [lem-weil-pbc-extension-by-zero-exact] and [prop-weil-pbc-inverse-image-modules-exact]. Its localization to derived categories is the specified exact derived adjunction of [def-weil-exact-derived-adjunction]. In particular its derived counit is the localized original counit on sheaves and is a natural transformation on the whole ordinary derived category, including morphisms to shifted sheaves. We use this normalization for every $\\epsilon_M$ below.",
+   "uses": [
+    "lem-weil-pbc-extension-by-zero-adjunction",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "prop-weil-pbc-inverse-image-modules-exact",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tag 03S3 definition-extension-zero; exact localization as in derived.tex Tag 015F"
+   }
+  },
+  {
+   "text": "The pullback clause of [lem-asd-ordinary-supported-kummer], applied to $j$ and the Cartier pair of Step 1, identifies $j^{-1}c_{0,P}$ with $c_{0,X}$. The target identification $j^{-1}L_P[2]=L_X[2]$ is the roots- and tensor-normalized comparison of [lem-asd-etale-finite-twist-pullback]; the source is the restriction identification of Step 2. Naturality of the counit of Step 3 at the actual arrow $c_{0,P}:F\\to L_P[2]$ reads\n$$c_{0,P}\\circ\\epsilon_F=\\epsilon_{L_P[2]}\\circ j_!j^{-1}(c_{0,P}).$$\nSubstituting these identifications gives exactly $c_{0,P}\\circ e=\\epsilon_{L_P[2]}\\circ j_!c_{0,X}$. This uses no equality deduced merely from equality of restrictions of derived morphisms.",
+   "uses": [
+    "lem-asd-ordinary-supported-kummer",
+    "lem-asd-etale-finite-twist-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-geo-cartier/lem-amb-cartier-kummer-map.proof.md",
+    "place": "Final paragraphs: Cartier pullback and forgetting support; Stacks Tag 03PL"
+   }
+  },
+  {
+   "text": "We check the source generator of the compact image. The closed immersion $\\bar i_0$ is finite by [lem-weil-pbc-closed-immersion-finite]. On abelian sheaves its direct image is exact by [lemma-weil-pbc-finite-direct-image-exact]; the derived direct-image composition of [def-weil-pbc-derived-direct-image-composition], for $S\\xrightarrow{\\bar i_0}P\\to S$ whose composite is the identity, gives $H^q(P,F)=H^q(S,A_S)$. Here the equality is first for underlying abelian sheaves, then for module cohomology by [lem-weil-pbc-etale-module-cohomology-forget]. By [lem-weil-pbc-geometric-point-cohomology], these groups vanish for $q>0$ and are $A$ in degree zero, with identification given by sections on $S$. There is no negative cohomology for a sheaf in degree zero under right derived sections. Thus $R\\Gamma(P,F)=A[0]$, normalized by the section $1$. By the chosen compactification definition [def-amb-etale-compact-support], $R\\Gamma_c(X,G)=R\\Gamma(P,j_!G)$; $R\\Gamma(e)$ gives its canonical identification with $A[0]$. Let $\\lambda:A\\to R\\Gamma(P,j_!G)$ be its inverse and $\\eta:A\\to R\\Gamma(P,A_P)$ the constant-section map. If $u:A_P\\to F$ is the closed unit, then\n$$R\\Gamma(e)\\lambda=R\\Gamma(u)\\eta.$$\nIndeed both sides are maps $A[0]\\to A[0]$ sending $1$ to $1$: the formula for direct image and its unit sends the constant section $1$ to its restriction on $D_0=S$. An $A$-linear map $A\\to A$ is determined by this value.",
+   "uses": [
+    "lem-weil-pbc-closed-immersion-finite",
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "def-weil-pbc-derived-direct-image-composition",
+    "lem-weil-pbc-etale-module-cohomology-forget",
+    "lem-weil-pbc-geometric-point-cohomology",
+    "def-amb-etale-compact-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex",
+    "place": "Tags 03QT theorem-equivalence-sheaves-point and 03QU lemma-compare-cohomology-point; sites-cohomology.tex Tag 0D6E lemma-derived-pushforward-composition"
+   }
+  },
+  {
+   "text": "Apply derived global sections to the equality of Step 4 and precompose with $\\lambda$ of Step 5. By [def-amb-etale-compact-support], $R\\Gamma(j_!c_{0,X})\\lambda=\\tau_X^e$ and $R\\Gamma(\\epsilon_{L_P[2]})=a$. Step 5 therefore gives\n$$a\\tau_X^e=R\\Gamma(c_{0,P})R\\Gamma(e)\\lambda=R\\Gamma(c_{0,P}u)\\eta.$$\nThe forgetting-support clause of [lem-asd-ordinary-supported-kummer] says $c_{0,P}u=c_1(\\mathcal O_P(D_0))$. By the explicit line-bundle isomorphism of Step 1 this is $c_1(\\mathcal O_P(1))$ with the positive Kummer boundary convention in the statement. Hence the last displayed morphism is the specified $h$. No generator was rescaled: the equality is with this Chern class itself, so its coefficient is $+1$.",
+   "uses": [
+    "def-amb-etale-compact-support",
+    "lem-asd-ordinary-supported-kummer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+    "place": "Step 2, compact image of the origin; unit sk-prop-an Step 5(d), positive projective Chern class"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-divisor-line-bundle",
+  "def-pc-projective-space-twist",
+  "lem-weil-pbc-extension-by-zero-adjunction",
+  "def-weil-pbc-direct-image",
+  "lem-weil-pbc-open-closed-short-exact",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "def-weil-exact-derived-adjunction",
+  "lem-asd-ordinary-supported-kummer",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact",
+  "def-weil-pbc-derived-direct-image-composition",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "def-amb-etale-compact-support"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/thm-pur-rank-one-thom.proof.md",
+  "place": "Step 2, repaired compact-generator comparison; expanded using sk-prop-an Step 5(d), the supported Cartier Kummer pullback/forgetting identities, and counit naturality"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -100,10 +202,102 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: read returned signatures; none states this supported-divisor, compact-support or localization comparison on ordinary etale/pro-etale coefficient complexes"
+  },
+  {
+   "tool": "grep",
+   "query": "Kummer|[Cc]hern|supported.*divisor",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": "AlgebraicGeometry"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern elliptic-curve class groups, scheme sections or unrelated naturality; none states this ordinary-etale supported Kummer/compact-image comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of extension by zero counit compares a Cartier divisor Kummer boundary on an open chart with its global Chern class.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "ContMDiff.extend_zero",
+     "CategoryTheory.Limits.cokernelComparison_map_desc",
+     "FractionalIdeal.extended_zero",
+     "exteriorPower.zeroEquiv_naturality",
+     "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality",
+     "HomologicalComplex.extendHomologyIso_hom_naturality_assoc",
+     "CategoryTheory.ProjectiveResolution.extEquivCohomologyClass_symm_zero",
+     "CochainComplex.isoHomologyπ₀_inv_naturality"
+    ],
+    "note": "",
+    "digest": "db044f962754b256",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern elliptic-curve class groups, scheme sections or unrelated naturality; none states this ordinary-etale supported Kummer/compact-image comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Kummer\", \"Chern\"",
+   "results": {
+    "n_hits": 0,
+    "top": [],
+    "note": "",
+    "digest": "4f53cda18c2baa0c",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern elliptic-curve class groups, scheme sections or unrelated naturality; none states this ordinary-etale supported Kummer/compact-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the origin divisor in affine line inside projective line, extension by zero sends its supported Kummer class to the positive first Chern class of O(1).",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "WeierstrassCurve.Affine.Point.toClass_zero",
+     "WeierstrassCurve.Affine.Point.toClass_apply",
+     "WeierstrassCurve.Affine.Point.toClass_some",
+     "WeierstrassCurve.Affine.Point.toClass",
+     "WeierstrassCurve.Affine.Point.toClass_eq_zero",
+     "WeierstrassCurve.Affine.CoordinateRing.XClass_ne_zero",
+     "WeierstrassCurve.Projective.PointClass",
+     "WeierstrassCurve.Affine.CoordinateRing.XClass"
+    ],
+    "note": "",
+    "digest": "3345ec489a267c05",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern elliptic-curve class groups, scheme sections or unrelated naturality; none states this ordinary-etale supported Kummer/compact-image comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A line bundle trivialized off an effective Cartier divisor defines a supported etale cohomology class whose extension to a proper compactification is the first Chern class.",
+   "results": {
+    "n_hits": 8,
+    "top": [
+     "AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux",
+     "Algebra.etaleLocus_eq_compl_support",
+     "AlgebraicGeometry.StructureSheaf.normalize_finite_fraction_representation",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_pow_mul_eq_zero_of_res_basicOpen_eq_zero_of_isCompact",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs_of_top",
+     "AlgebraicGeometry.exists_of_res_eq_of_qcqs",
+     "AlgebraicGeometry.exists_of_res_zero_of_qcqs"
+    ],
+    "note": "",
+    "digest": "a21df45f458c8733",
+    "subdirectory": ""
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern elliptic-curve class groups, scheme sections or unrelated naturality; none states this ordinary-etale supported Kummer/compact-image comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-pur-rank-one-thom",
@@ -120,5 +314,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-origin-class-projective-comparison",
+  "worker": "stage1",
+  "summary": "Q89: retain the full statement and prove it in six steps with no new nodes: calculate the positive divisor twist, prove the actual support counit invertible, localize its exact adjunction, use counit naturality and Cartier pullback, normalize the compact source at section one, and apply the supported-Chern identity. All citations were read clause by clause; ordinary etale modules are retained throughout.",
+  "blueprint": "thm-pur-rank-one-thom Step 2, geometric-fibre generator, made precise by sk-prop-an Step 5(d) zero-divisor Chern normalization; the argument compares compact image with projective Chern class rather than identifying supported and compact cohomology.",
+  "tool_uses": [
+   {
+    "node": "def-weil-exact-derived-adjunction",
+    "why": "Localize the specified exact open adjunction with its actual counit; generic formal construction, not a replacement of the purity route."
+   },
+   {
+    "node": "prop-weil-pbc-inverse-image-modules-exact",
+    "why": "Exact constant-coefficient inverse image needed to localize the open adjunction; no same-unit statement supplies this module-level exactness."
+   },
+   {
+    "node": "lem-weil-pbc-etale-module-cohomology-forget",
+    "why": "Carry the abelian finite-pushforward and geometric-point cohomology computations to constant-A modules; generic coefficient-forgetting tool."
+   },
+   {
+    "node": "lem-weil-pbc-geometric-point-cohomology",
+    "why": "Normalize the compact source at section one on Spec of the given algebraically closed field; generic geometric-point computation."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-finite",
+    "why": "Apply finite direct-image exactness to the closed origin; generic scheme-morphism property."
+   },
+   {
+    "node": "lemma-weil-pbc-finite-direct-image-exact",
+    "why": "Compute the cohomology of the closed origin pushforward using exact abelian direct image; generic tool, with module transport explicitly cited."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-weil-exact-derived-adjunction",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lem-weil-pbc-etale-module-cohomology-forget",
+  "lem-weil-pbc-geometric-point-cohomology",
+  "lem-weil-pbc-closed-immersion-finite",
+  "lemma-weil-pbc-finite-direct-image-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q89-5232be712",
+  "group": "Q89",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q89-5232be712 (reviewer sub-agent of L); spot-checked: PASS, no changes. Q89 splits lem-pur-origin-class-projective-comparison into 6 steps with 0 new nodes. Shape: the statement is byte-identical to live; the only stmt_dep added is def-pc-projective-space-twist, which is needed for O_P(1). The item is not in the drop list and has no repair note; its only citer is thm-pur-rank-one-thom. No cycle, no missing or merged ids, uses = proof_deps, no SGA. Route: every cited statement is on the sk-prop-an route (sk-thm-p1, sk-prop-sf-cbc, sk-def-exchange, sk-prop-h2, sk-prop-cd, sk-thm-reduction, sk-thm-picard-*). The one off-route citation is the definition def-weil-exact-derived-adjunction; its declared tool use is accepted. Step 1: O(D_0) ≅ O(1) via dual frames g0=t^-1 g1, which matches e0=(x0/x1)e1, and the divisor section is x1; checked by hand. Step 2: F|U1=0 (U1×_P S empty), and lem-weil-pbc-open-closed-short-exact (module version) makes ε_F an isomorphism. Step 3: the exact derived adjunction has the localized counit. Step 4: the Kummer pullback clause applies (D' is Cartier); the twist-pullback node and counit naturality give the equation. I checked that the open-immersion exchange agrees with restriction, and the argument stays consistent under any fixed identification. Step 5: ī finite and exact, rī=id, the derived composition, module-forget and geometric-point nodes give RΓ(P,F)=A[0] normalized at 1, and RΓ(e)λ=RΓ(u)η is fixed by the image of 1. Step 6: c_D u_D = c_1(O(D_0)) is a statement clause of lem-asd-ordinary-supported-kummer, so aτ = h with coefficient +1. Sources checked: current thm-pur-rank-one-thom.proof Step 2 and master sk-prop-an Step 5(d), lines 248-257. Edge cases A=0, N=1, non-flat A and the chart orientation all hold."
  }
 }
