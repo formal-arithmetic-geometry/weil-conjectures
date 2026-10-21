@@ -17,6 +17,13 @@
    "elementary": false
   },
   {
+   "text": "Let eA be the tensor of the exteriorSheafPowerIso comparisons for the outside terms and eB the comparison for the middle term. Conjugate phi to psi=eA.inv ≫ phi ≫ eB.hom. The tensor-section equation and exteriorSheafPowerIso_inv_wedge identify the source pure wedges. Apply the original wedge formula and use eB.inv_hom_id to get the canonical wedge formula for psi.",
+   "uses": [
+    "lem-sc-exterior-sheaf-power-comparison"
+   ],
+   "elementary": true
+  },
+  {
    "text": "Take the splitting cover from exists_openCover_split_shortExact. For each point choose a member containing it, using the supremum equality with the top open.",
    "uses": [
     "lem-sc-local-splitting-finite-free"
@@ -24,7 +31,7 @@
    "elementary": false
   },
   {
-   "text": "On that member, determinant_wedgeMorphism_bijective_of_split gives bijectivity on every subopen. Hom.isIso_of_forall_bijective_app gives IsIso phi globally.",
+   "text": "On each splitting-cover member apply the adopted determinant_wedgeMorphism_bijective_of_split to psi and its canonical wedge formula. Hom.isIso_of_forall_bijective_app gives IsIso psi globally. The comparison identities give eA.hom ≫ psi ≫ eB.inv = phi, hence IsIso phi by composition of isomorphisms.",
    "uses": [
     "lem-sc-determinant-wedge-morphism-split",
     "lem-sc-module-hom-local-bijective-iso"
@@ -41,12 +48,14 @@
   "lem-sc-determinant-wedge-morphism",
   "lem-sc-local-splitting-finite-free",
   "lem-sc-determinant-wedge-morphism-split",
-  "lem-sc-module-hom-local-bijective-iso"
+  "lem-sc-module-hom-local-bijective-iso",
+  "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "R4",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
-  "place": "Proof of (*), determinant paragraph: lift independence, local splitting and gluing; T2 decomposition into construction and split-local bijectivity"
+  "place": "Proof of (*), determinant paragraph: lift independence, local splitting and gluing; T2 decomposition into construction and split-local bijectivity",
+  "note": "Preserve the legacy existence signature and wedge formula; conjugate to canonical exteriorPower to use the adopted local bijectivity theorem. No target or unit route changes."
  },
  "mathlib_searches": [
   {
@@ -123,13 +132,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-12",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "T2",
+  "reviewer": "C-01248",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261012T135318-L-1693515",
+  "landing": "20261021T005748-L-1889502",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: Withdrawn Sheaf DeterminantWedgeMorphismSplit + node lean record vs WC adopted determinant_wedgeMorphism_bijective_of_split (statement verbatim, live lines 371-387); adapted DeterminantShortExactExists diffed vs live (imports + local set_option + proof only, signature identical); compiled --all clean, importer DeterminantShortExact compiled, axioms standard"
  }
 }

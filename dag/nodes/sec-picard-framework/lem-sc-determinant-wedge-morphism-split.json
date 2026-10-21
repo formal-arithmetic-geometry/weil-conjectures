@@ -19,15 +19,14 @@
    "elementary": true
   },
   {
-   "text": "Apply the adopted determinant_split_comparison_exists with these lifts. At each point obtain canonical exteriorPower equivalences on every subopen of a neighborhood V. Conjugate their forward linear maps by the tensor of exteriorSheafPowerIso.hom on the source and exteriorSheafPowerIso.inv on the target. Evaluation of these isomorphisms and composition of their bijections prove bijectivity of the transported linear maps; Equiv.ofBijective preserves their forward functions. The tensor section formula and the forward and inverse wedge comparison formulas transfer the concatenated-wedge equation. Naturality of both comparison morphisms transfers the restriction equation. These transported equivalences now have the legacy exteriorSheaf types used by the remaining proof.",
+   "text": "Apply determinant_split_comparison_exists to these lifts. At every point it supplies a neighborhood V and a natural family of linear equivalences on the canonical exteriorPower sheaves, with the concatenated-wedge formula for those lifts.",
    "uses": [
-    "lem-sc-determinant-split-comparison",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-determinant-split-comparison"
    ],
    "elementary": false
   },
   {
-   "text": "The wedge formula of phi and that of d_W give equality on tensors of pure wedges, since g(l_W(b))=b. Extend first in the second exterior factor and then in the first using exteriorPower.ιMulti_span, linearity, local surjectivity of the exterior sheafification unit, and separatedness. Extend to arbitrary tensor sheaf sections by local surjectivity of the tensor sheafification unit and TensorProduct.induction_on. Naturality of d_W and phi verifies local closure. This is the fully proved private helper bijective_of_comparison, using exterior_section_induction, tensor_section_induction and local_comparison_eq. Thus phi is bijective on every subopen of each neighborhood V.",
+   "text": "The wedge formula of phi and that of d_W give equality on tensors of pure wedges, since g(l_W(b))=b. Extend first in the second exterior factor and then in the first using exteriorPower.ιMulti_span, linearity, local surjectivity of the exterior sheafification unit, and separatedness. Extend to arbitrary tensor sheaf sections by local surjectivity of the tensor sheafification unit and TensorProduct.induction_on. Naturality of d_W and phi verifies local closure. This is the fully proved private helper bijective_of_comparison, using generated_sheafification_induction, tensor_section_induction and local_comparison_eq. Thus phi is bijective on every subopen of each neighborhood V.",
    "uses": [
     "def-sc-sheaf-exterior-power"
    ],
@@ -41,14 +40,13 @@
  ],
  "proof_deps": [
   "lem-sc-determinant-split-comparison",
-  "def-sc-sheaf-exterior-power",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "def-sc-sheaf-exterior-power"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "R4",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph: local comparison construction split off; local-generation identification, section lifting and sheaf gluing formally proved by F3",
-  "note": "W4 retirement adaptation: use the adopted split-comparison theorem and transport its local conclusion along the already constructed canonical comparison isomorphisms. All other proof steps and the public signature stay unchanged."
+  "note": "Retirement reattaches to the complete adopted canonical exteriorPower proof without changing upstream source. The legacy parent performs the construction comparison, so this node no longer depends on that comparison."
  },
  "mathlib_searches": [
   {
@@ -96,14 +94,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-rr",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeMorphismSplit",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeMorphismSplit",
   "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_wedgeMorphism_bijective_of_split",
-  "statement": "theorem determinant_wedgeMorphism_bijective_of_split {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (φ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ ⟶ exteriorSheaf S.X₂ r₂)\n    (hφ : ∀ (V : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op V))\n      (b : Fin r₃ → S.X₃.val.obj (op V)) (c : Fin r₃ → S.X₂.val.obj (op V)),\n      (∀ i, S.g.val.app (op V) (c i) = b i) →\n      φ.val.app (op V)\n        (tmulSection (exteriorSheafSection S.X₁ r₁ V a)\n          (exteriorSheafSection S.X₃ r₃ V b)) =\n        exteriorSheafSection S.X₂ r₂ V\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op V) (a j)) c (Fin.cast hr i)))\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g) :\n    ∀ W ≤ U, Function.Bijective (φ.app W)",
+  "statement": "theorem determinant_wedgeMorphism_bijective_of_split {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (r₁ r₂ r₃ : ℕ) (hr : r₂ = r₁ + r₃)\n    [S.X₁.IsFiniteLocallyFreeOfRank r₁] [S.X₃.IsFiniteLocallyFreeOfRank r₃]\n    (φ : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃ ⟶ exteriorPower S.X₂ r₂)\n    (hφ : ∀ (V : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op V))\n      (b : Fin r₃ → S.X₃.val.obj (op V)) (c : Fin r₃ → S.X₂.val.obj (op V)),\n      (∀ i, S.g.val.app (op V) (c i) = b i) →\n      φ.val.app (op V)\n        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := V) a)\n          (wedge (M := S.X₃) (r := r₃) (U := V) b)) =\n        wedge (M := S.X₂) (r := r₂) (U := V)\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op V) (a j)) c (Fin.cast hr i)))\n    (U : X.Opens)\n    (e : S.X₂.restrict U.ι ≅ S.X₁.restrict U.ι ⊞ S.X₃.restrict U.ι)\n    (hf : (restrictFunctor U.ι).map S.f ≫ e.hom = biprod.inl)\n    (hg : e.hom ≫ biprod.snd = (restrictFunctor U.ι).map S.g) :\n    ∀ W ≤ U, Function.Bijective (φ.app W)",
   "branch": "sheaf-dag",
-  "by": "T2",
-  "date": "2026-10-12",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantWedgeMorphismSplit.lean"
+  "by": "R4",
+  "date": "2026-10-21",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/DeterminantWedgeMorphismSplit.lean",
+  "note": "Retire the legacy duplicate; the parent transports its morphism through exteriorSheafPowerIso and applies this unchanged adopted theorem."
  },
  "reviewed": {
   "date": "2026-10-12",
@@ -118,12 +117,12 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-8dacc",
-  "group": "W4",
+  "reviewer": "C-01248",
+  "group": "R4",
   "result": "pass",
-  "landing": "20261021T002938-L-1582174",
+  "landing": "20261021T005748-L-1889502",
   "kind": "interface",
-  "note": "independent cc review: Withdrawn Sheaf DeterminantSplitComparison and adapted DeterminantWedgeMorphismSplit (live diff: import, moved private helper, proof body only) vs WC twin determinant_split_comparison_exists (node lean.statement verbatim); compiled --all clean plus importer DeterminantShortExactExists; axioms standard"
+  "note": "independent cc review: Withdrawn Sheaf DeterminantWedgeMorphismSplit + node lean record vs WC adopted determinant_wedgeMorphism_bijective_of_split (statement verbatim, live lines 371-387); adapted DeterminantShortExactExists diffed vs live (imports + local set_option + proof only, signature identical); compiled --all clean, importer DeterminantShortExact compiled, axioms standard"
  },
  "lean_audit": {
   "master": {
