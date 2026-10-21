@@ -2,7 +2,7 @@
  "id": "lem-sf-projective-top-cell-attachment",
  "kind": "statement",
  "title": "Representing a connecting map and attaching the top projective term",
- "statement": "Let $\\mathcal C$ be a site small relative to the module universe and let $C$ be a sheaf of commutative rings. Work in $\\mathcal A=\\operatorname{Mod}(C)$ [def-weil-sheaf-of-modules-category] and its unbounded derived category $D(\\mathcal A)$ with localization $Q$, cochain shifts and cones [def-weil-abstract-derived-category]. Fix integers $a<b$, an object $P\\in\\mathcal A$, an object $M\\in D(\\mathcal A)$, and a complex $Q^\\bullet$ which is zero outside $[a,b-1]$ and has projective terms (maps from each term lift along epimorphisms). Suppose a distinguished triangle is given:\n$$P[-b]\\longrightarrow M\\longrightarrow Q(Q^\\bullet)\\xrightarrow{\\delta}P[-b+1].$$\nWrite $P[-b+1]$ also for the actual single-term complex with $P$ in degree $b-1$. There is a chain map $g:Q^\\bullet\\to P[-b+1]$ representing $\\delta$ in the derived category. Its only possibly nonzero component is $g^{b-1}:Q^{b-1}\\to P$, and it satisfies $g^{b-1}d_Q^{b-2}=0$. The complex $D^\\bullet=\\operatorname{Cone}(g)[-1]$ represents $M$. Under the evident term identifications it has terms $Q^q$ for $q<b$, term $P$ in degree $b$, and zero terms outside $[a,b]$; its last differential is $g^{b-1}$ with the sign fixed by the cone and shift convention. In particular, if $P$ and all $Q^q$ are finite free $C$-module sheaves, then so are all terms of $D^\\bullet$. The rank-zero case $P=0$ is included. No constancy of entries of $g^{b-1}$ is required.",
+ "statement": "Let $\\mathcal C$ be a site small relative to the module universe and let $C$ be a sheaf of commutative rings. Work in $\\mathcal A=\\operatorname{Mod}(C)$ [def-weil-sheaf-of-modules-category] and its unbounded derived category $D(\\mathcal A)$ with localization $Q$, cochain shifts and cones [def-weil-abstract-derived-category]. Fix integers $a<b$, an object $P\\in\\mathcal A$, an object $M\\in D(\\mathcal A)$, and a complex $Q^\\bullet$ which is zero outside $[a,b-1]$ and has projective terms (maps from each term lift along epimorphisms). Suppose a distinguished triangle is given:\n$$P[-b]\\longrightarrow M\\longrightarrow Q(Q^\\bullet)\\xrightarrow{\\delta}P[-b+1].$$\nWrite $P[-b+1]$ also for the actual single-term complex with $P$ in degree $b-1$. There is a chain map $g:Q^\\bullet\\to P[-b+1]$ representing $\\delta$ in the derived category. Its only possibly nonzero component is $g^{b-1}:Q^{b-1}\\to P$, and it satisfies $g^{b-1}d_Q^{b-2}=0$. The complex $D^\\bullet=\\operatorname{Cone}(g)[-1]$ represents $M$. Under the evident term identifications it has terms $Q^q$ for $q<b$, term $P$ in degree $b$, and zero terms outside $[a,b]$; with the cone differential $d_{\\operatorname{Cone}(g)}(y,x)=(d_Ty+g(x),-d_Qx)$ for $T=P[-b+1]$, its last differential is $-g^{b-1}$. Negating the identification of the degree-$b$ term with $P$ gives the isomorphic attached complex with last differential $g^{b-1}$. In particular, if $P$ and all $Q^q$ are finite free $C$-module sheaves, then so are all terms of $D^\\bullet$. The rank-zero case $P=0$ is included. No constancy of entries of $g^{b-1}$ is required.",
  "source": {
   "document": "literature/stacks-project/proetale.tex",
   "place": "Tag 09C3, lemma-local-structure-constructible-complex, final paragraph, connecting map and extending the complex by one. Chain-map representative supplied by Tag 064B, derived.tex, lemma-morphisms-from-projective-complex. General ringed-site form of parent proof step 7."
@@ -11,9 +11,76 @@
   "def-weil-sheaf-of-modules-category",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $T=P[-b+1]$, the complex concentrated in degree $b-1$. By [def-weil-sheaf-of-modules-category], $\\mathcal A=\\operatorname{Mod}(C)$ is abelian, since the site is small relative to the module universe. The given $Q^\\bullet$ is bounded above by $b-1$ and all its terms are projective. Apply the surjectivity part of [lem-pc-ring-derived-map-representative] with source $Q^\\bullet$ and target $T$ to $\\delta:Q(Q^\\bullet)\\to Q(T)$. A homotopy-category morphism is a homotopy class of actual chain maps, so choose a representative $g:Q^\\bullet\\to T$. Its image under localization is $\\delta$. No assumption that the whole sheaf category has enough projectives is used.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-ring-derived-map-representative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 064B, lemma-morphisms-from-projective-complex; applied to the final connecting map in proetale.tex Tag 09C3, lemma-local-structure-constructible-complex"
+   }
+  },
+  {
+   "text": "Because $T^q=0$ for $q\\ne b-1$, each component $g^q$ except $g^{b-1}$ is zero. The chain-map equation in degree $b-2$, namely $d_T^{b-2}g^{b-2}=g^{b-1}d_Q^{b-2}$, has zero left-hand side. It therefore says $g^{b-1}d_Q^{b-2}=0$. All other chain-map equations have both sides zero: the target is supported in one degree and $Q^b=0$. This is exactly the cocycle condition needed for the last differential.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone, together with the definition of a morphism of complexes; proetale.tex Tag 09C3 final extension-by-one paragraph"
+   }
+  },
+  {
+   "text": "Write $A=P[-b]$, $B=Q(Q^\\bullet)$ and $E=\\operatorname{Cone}(g)$. By the cone-triangle clause of [def-weil-abstract-derived-category], $B\\xrightarrow{\\delta}A[1]\\to Q(E)\\to B[1]$ is distinguished. Rotate the given triangle twice using (TR2) of [def-weil-triangulated-category]. If its first two maps are $u:A\\to M$ and $v:M\\to B$, the resulting distinguished triangle is $B\\xrightarrow{\\delta}A[1]\\xrightarrow{-u[1]}M[1]\\xrightarrow{-v[1]}B[1]$. The identity maps on $B$ and $A[1]$ commute with the identical first arrow $\\delta$. By (TR3) of [def-weil-triangulated-category], they extend to a morphism of these two distinguished triangles, with third component $c:M[1]\\to Q(E)$. The first two components are isomorphisms, so [lem-sf-triangle-morphism-iso] makes $c$ an isomorphism. Apply the inverse shift equivalence and the shift comparison of $Q$ from [def-weil-abstract-derived-category]: $M\\cong Q(E)[-1]\\cong Q(E[-1])$. Thus the actual complex $D^\\bullet=E[-1]$ represents $M$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 0145 (derived-definition-triangulated-category), 014A (lemma-third-isomorphism-triangle), 014B (lemma-cone-triangle-unique-isomorphism), and 014Q (definition-distinguished-triangle); this spells out the triangulated-category argument in proetale.tex Tag 09C3 final paragraph"
+   }
+  },
+  {
+   "text": "Compute the shifted cone using [def-weil-abstract-derived-category]. In coordinates reordered as $(x,y)\\in Q^q\\oplus T^{q-1}$, one has $D^q=Q^q\\oplus T^{q-1}$ and $d_D^q(x,y)=(d_Q^qx,-g^qx-d_T^{q-1}y)=(d_Q^qx,-g^qx)$. For $q<b$, $T^{q-1}=0$, so $D^q$ identifies with $Q^q$. For $q=b$, $Q^b=0$ and $T^{b-1}=P$, so $D^b$ identifies with $P$. For $q<a$ or $q>b$, both summands vanish. Consequently the differentials below $b-1$ are those of $Q^\\bullet$, the last differential is $-g^{b-1}$, and the degree-$b$ outgoing differential is zero. The only new square-zero equation is $(-g^{b-1})d_Q^{b-2}=0$, established in step 2. The map that is identity in all degrees below $b$ and $-\\operatorname{id}_P$ in degree $b$ identifies this complex with the version having last differential $g^{b-1}$.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone, and the cochain shift convention; proetale.tex Tag 09C3 last paragraph"
+   }
+  },
+  {
+   "text": "The term identifications in step 4 show directly that every term is one of the given $Q^q$, $P$, or zero. If those sheaves are finite free (isomorphic to a finite direct sum of copies of $C$), each term is finite free, taking the empty direct sum for zero. When $P=0$, the target $T$ and $g$ vanish, and the formula gives $D^\\bullet\\cong Q^\\bullet$ with its original differential. When $Q^\\bullet=0$, it gives $D^\\bullet=P[-b]$. For $b=a+1$ the only possible differential is $-g^a:Q^a\\to P$, so the same construction still applies. The construction only uses a morphism of sheaves $g^{b-1}$ and its chain-map equation, with no condition on locally constant matrix entries.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09C3, lemma-local-structure-constructible-complex, final paragraph: extension by one using a map of sheaves"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-ring-derived-map-representative",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-sf-triangle-morphism-iso"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 09C3, lemma-local-structure-constructible-complex, final paragraph, expanded using derived.tex Tags 064B, 014E, 0145, 014A and 014Q"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -49,10 +116,45 @@
    "results": "8 hits: DerivedCategory.triangleOfSESδ, DerivedCategory.triangleOfSES_mor₁, CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₁, DerivedCategory.triangleOfSES, CategoryTheory.ShortComplex.ShortExact.singleTriangle, DerivedCategory.triangleOfSES_mor₂, CochainComplex.mappingCone.triangle, CategoryTheory.ShortComplex.ShortExact.singleTriangle_mor₂",
    "date": "2026-10-21",
    "verdict": "no match: mappingCone, its triangle, support lemmas and short-exact triangles are ingredients; none represents this connecting morphism and gives this prescribed last-term realization in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCone|exists_Q_map_eq|Qh_map_bijective",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean, Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean, Mathlib/Algebra/Homology/HomotopyCategory/SpectralObject.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply cone constructions, their distinguished triangles, or representatives; none supplies the entire prescribed top-term attachment statement by a one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Bounded projective complex connecting morphism to a single term represented by chain map and shifted mapping cone",
+   "results": "8 hits: CochainComplex.mappingCone, CategoryTheory.ProjectiveResolution.π, CochainComplex.mappingCone.triangleh, CochainComplex.mappingCone.triangle, CochainComplex.mappingCone.inr_descShortComplex, CochainComplex.mappingCone.descShortComplex, CochainComplex.mappingCone.inl_snd_assoc, CochainComplex.mappingCone.inr_desc",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply cone constructions, their distinguished triangles, or representatives; none supplies the entire prescribed top-term attachment statement by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A triangle P[-b] to M to a bounded projective complex is realized by the shifted mapping cone of its connecting chain map",
+   "results": "8 hits: CochainComplex.mappingCone.triangle, CochainComplex.mappingConeCompTriangle, CochainComplex.mappingCone.triangleh, DerivedCategory.triangleOfSESIso, HomotopyCategory.mappingCone_triangleh_distinguished, CochainComplex.mappingConeCompTriangleh, HomotopyCategory.mappingConeCompTriangleh_distinguished, CategoryTheory.ShortComplex.ShortExact.singleTriangle",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply cone constructions, their distinguished triangles, or representatives; none supplies the entire prescribed top-term attachment statement by a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"CochainComplex.mappingCone\"",
+   "results": "12 hits: CochainComplex.mappingCone.fst, CochainComplex.mappingCone.snd, CochainComplex.mappingCone.inl, CochainComplex.mappingCone, CochainComplex.mappingCone.descCochain, CochainComplex.mappingCone.liftCochain, CochainComplex.mappingCone.liftCochain_snd, CochainComplex.mappingCone.inl_descCochain",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply cone constructions, their distinguished triangles, or representatives; none supplies the entire prescribed top-term attachment statement by a one-line specialization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Represent a morphism in the derived category from a bounded above projective cochain complex and identify the middle object of a triangle with a mapping cocone",
+   "results": "8 hits: DerivedCategory.triangleOfSESδ, CochainComplex.mappingCone.triangle, DerivedCategory.mem_distTriang_iff, CochainComplex.mappingCone.triangle_obj₃, CochainComplex.mappingConeCompTriangle, CochainComplex.cm5b.p, CochainComplex.mappingCone.triangleh, CochainComplex.mappingCone.triangle_obj₂",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits supply cone constructions, their distinguished triangles, or representatives; none supplies the entire prescribed top-term attachment statement by a one-line specialization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-fix-residue-lisse-projective-models",
@@ -72,5 +174,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-projective-top-cell-attachment",
+  "worker": "stage1",
+  "summary": "Expanded the connecting-map representative, component cocycle equation, two rotations and triangle comparison, explicit shifted-cone differential and support, and finite-free and zero-rank clauses. Reused the existing general projective representative and triangle isomorphism Mathlib leaves; no new nodes. Made the cone-dependent sign explicit without changing the existence assertion.",
+  "blueprint": "Realizes the existing from.place: lem-fix-weil-operations evaluation-naturality paragraph through the local-model argument of lem-fix-residue-lisse-projective-models, old parent step 7, specifically the connecting map and extension-by-one step of Stacks 09C3."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-0db3b1d5a",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-0db3b1d5a (reviewer sub-agent of L); spot-checked: Item is still unsplit in live and side-live, not in the dropped list, and has no repair note. There are no new nodes and no fixes. Source: the delivery follows Stacks proetale 09C3 (final paragraph: extend the complex by one) together with derived 064B. Step 1: the abelian hypothesis of def-weil-sheaf-of-modules-category matches the site-smallness hypothesis, and lem-pc-ring-derived-map-representative (bounded-above projective source) gives the representative g. Step 2: the degree b-2 chain equation gives g^{b-1}d^{b-2}=0. Step 3: two TR2 rotations give B→A[1]→(-u[1])M[1]→(-v[1])B[1]; signs checked. TR3 with identities against the Q-image of the cone triangle of g, then the 2-of-3 Mathlib leaf, gives M≅Q(Cone(g)[-1]). Step 4: recomputed Cone(g)[-1] with the def node's cone matrix and the [-1] sign; the last differential is -g^{b-1}, and -id in degree b turns it into +g. Step 5: edge cases P=0, Q=0 and b=a+1, plus a two-term test with g=id that gives an acyclic complex. Statement change: the base's ambiguous 'sign fixed by convention' is made explicit, not weakened. The only citer, lem-fix-residue-lisse-projective-models step 5, uses only the iso with finite free terms. Both off-unit cites are Mathlib leaves, so no tool_uses. DAG duplicate search (09C3, top-cell, cone-attachment siblings) found no duplicate. Searches are complete; one leansearch is honestly recorded as unavailable and a later one ran."
  }
 }
