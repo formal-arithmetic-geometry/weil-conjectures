@@ -22,9 +22,130 @@
   "lem-cbc-exact-product-functor-strict-limit",
   "lem-weil-proetale-countable-products-exact"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the slice-site identification of [lem-weil-proetale-weakly-etale-localization]. For an $S_U$-module sheaf $N$, the two extension presheaves have the same abelian groups and restriction maps: at $V$ they are $\\bigoplus_{\\varphi:V\\to U}N(V,\\varphi)$. Their $R(V)$-actions are both $r(s_\\varphi)_\\varphi=(a_V(r)s_\\varphi)_\\varphi$, by [def-pc-sheaf-restrict-scalars, def-weil-extension-by-zero-presheaf]. By [def-weil-presheaf-modules-sheafification], their abelian sheafifications coincide and the induced $R$-actions coincide by uniqueness of the extending action. The identity thus induces $e_N:r_TJ_SN\\to J_Rr_UN$ and its inverse. A map of $N$ acts on each summand by the same map on either side, so $e$ is natural.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI (lemma-extension-by-zero), 03CY (lemma-sheafification-presheaf-modules); identity of scalar-restricted presheaves"
+   }
+  },
+  {
+   "text": "For the adjunction of [lem-pur-site-restriction-module-adjunction-exact], a map $h:N\\to j^*Q$ extends to $J N\\to Q$ by sending the generator $s$ in the summand indexed by $\\varphi:V\\to U$ to $h_{(V,\\varphi)}(s)\\in Q(V)$, then using sheafification. Conversely restrict such a map and precompose with the summand inclusion; these operations are inverse since all summand generators generate the presheaf and sheafification has unique factorization. Consequently $\\eta_N$ sends $s$ to its summand generator followed by sheafification and $\\epsilon_Q$ sends each generator to the same section of $Q(V)$. Scalar restriction changes none of these maps. Also $j_R^*r_T=r_Uj_S^*$ objectwise. Thus $j_R^*(e_N)\\,r_U(\\eta_N^S)=\\eta_{r_UN}^R$ and $\\epsilon_{r_TQ}^R\\,e_{j_S^*Q}=r_T(\\epsilon_Q^S)$, with the displayed restriction identification understood.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI (lemma-extension-by-zero), proof: the two explicit Hom maps; Tag 03CY"
+   }
+  },
+  {
+   "text": "Scalar restriction preserves kernels because they are sectionwise kernels with the restricted action; it preserves cokernels because sectionwise quotient groups and their abelian sheafification are unchanged, with the unique restricted action. These kernel/cokernel descriptions are [def-weil-sheaf-of-modules-category], and the action is [def-pc-sheaf-restrict-scalars]. Hence $r_U,r_T$ are exact. Both $J$ and both $j^*$ are exact by [lem-pur-site-restriction-module-adjunction-exact]. For strict towers the same conclusions hold levelwise by [lem-weil-tower-category-levelwise-abelian]; the natural transformations of Steps 1–2 satisfy the tower transition equations by their naturality. Apply all functors and transformations in every cochain degree. Exactness permits descent to the unbounded derived categories by [lem-sf-exact-functor-derived-triangulated]. The derived adjunction of [def-weil-exact-derived-adjunction] has the localized original unit and counit, so the identities in Step 2 descend as well.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-weil-exact-derived-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY, 03DJ (lemma-extension-by-zero-exact); derived localization uses the specified exact-derived adjunction"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-module-sheaves-limits-sectionwise], a product is the sectionwise product with coordinate actions. Thus restricting scalars gives exactly the same underlying product and projections, including the empty product, whose underlying group is zero. Invertibility of the canonical product comparisons for $J_R,J_S$ is [lem-cbc-ringed-open-extension-products], applicable since $j$ is quasi-compact; the base need not be quasi-compact or quasi-separated. Countable products are exact in each of the four ringed categories by [lem-weil-proetale-countable-products-exact], for arbitrary ring sheaves. Together with Step 3 this verifies all hypotheses of [lem-cbc-exact-product-functor-strict-limit] for each of $r_T,J_S,J_R,r_U$. Write $\\phi_F$ for their canonical product maps and $\\kappa_F$ for the maps on the two signed Roos summands specified by that node.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-limits-sectionwise",
+    "lem-cbc-ringed-open-extension-products",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09BP (lemma-j-shriek-limits); the ringed product and normalized exact-product comparison statements cited here"
+   }
+  },
+  {
+   "text": "Hereafter set $A=r_TJ_S$ and $B=J_Rr_U$. For any countable family $(N_n)$ in $\\operatorname{Mod}(S_U)$, with $P=\\prod_nN_n$, form\n$$u=(\\prod_ne_{N_n})\\,\\phi_{r_T,(J_SN_n)}\\,r_T(\\phi_{J_S,(N_n)}),\\qquad v=\\phi_{J_R,(r_UN_n)}\\,J_R(\\phi_{r_U,(N_n)})\\,e_P.$$\nBoth have domain $AP$ and codomain $\\prod_nBN_n$. For every projection $\\pi_n$ the defining projection equations for $\\phi$ give $\\pi_nu=e_{N_n}A(\\pi_n)$ and $\\pi_nv=B(\\pi_n)e_P$. These are equal by naturality of $e$ from Step 1, so $u=v$ by the product universal property. This is a calculation with the canonical maps of [lem-cbc-exact-product-functor-strict-limit], rather than a choice of a product isomorphism.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph: apply the exact product-preserving functor to defining derived limits; explicit product projection calculation"
+   }
+  },
+  {
+   "text": "For a strict tower complex $M$, let $H_M^q=P_M^q\\oplus P_M^{q-1}$ and $d(x,y)=(dx,(1-s)x-dy)$, as fixed in [lem-cbc-exact-product-functor-strict-limit]. Apply Step 5 separately to the families $(M_n^q)_n$ and $(M_n^{q-1})_n$. Naturality of $e$ for the two biproduct projections shows that $e_{H_M}$ is diagonal in these coordinates. Its naturality for the differentials and transitions shows that the resulting equality is an equality of chain maps, with the same minus sign on both sides. In notation\n$$K_A=\\kappa_{r_T,J_SM}\\,r_T(\\kappa_{J_S,M}),\\qquad K_B=\\kappa_{J_R,r_UM}\\,J_R(\\kappa_{r_U,M}),$$\nthe equality is\n$$H(e_M)K_A=K_Be_{H_M}.$$\nAll maps are natural for strict tower chain maps. The cited normalized comparison provides their descent to the derived categories.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph, canonical derived-limit comparison; explicit calculation on both signed Roos summands"
+   }
+  },
+  {
+   "text": "Let $\\theta$ denote the normalized natural isomorphism $L\\to H$ of [lem-cbc-exact-product-functor-strict-limit]; its normalization agrees with K-injective resolution, not just with an unspecified Roos triangle. Substitute $\\lambda_{F,M}=\\theta_{FM}^{-1}\\kappa_{F,M}F(\\theta_M)$ in the left-hand side of the required equation. The middle factors $r_T(\\theta_{J_SM})$ and its inverse cancel. Naturality of the target $\\theta$ for $e_M:AM\\to BM$ then makes that side\n$$\\theta_{BM}^{-1}H(e_M)K_A A(\\theta_M).$$\nSubstitute the same formula on the right-hand side and cancel $J_R(\\theta_{r_UM})$ with its inverse. Naturality of the derived $e$ for $\\theta_M:LM\\to H_M$ gives $B(\\theta_M)e_{LM}=e_{H_M}A(\\theta_M)$, so the right-hand side is\n$$\\theta_{BM}^{-1}K_Be_{H_M}A(\\theta_M).$$\nStep 6 proves these expressions equal. The four functor occurrences and the target limit are exactly those in the statement. Naturality of $\\lambda$ and $e$ makes the resulting equality natural for every derived strict-tower morphism, including morphisms represented by roofs.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph applying the exact-functor/derived-limit comparison; agent-written expansion of its specified normalized formula"
+   }
+  },
+  {
+   "text": "For a strict augmentation $\\gamma:\\Delta C\\to M$, [lem-cbc-exact-product-functor-strict-limit] states that $\\lambda_F\\,F(u_\\gamma)=u_{F\\gamma}$. In the signed coordinates this is the equality sending $c$ to $((F\\gamma_n)(c),0)$, since $\\phi_F$ is characterized by its projections. Apply this assertion successively along $J_S,r_T$ and along $r_U,J_R$. Naturality of $e$ at $\\gamma_n$ identifies the resulting augmentations: $e_{M_n}A(\\gamma_n)=B(\\gamma_n)e_C$. Step 7 therefore identifies their canonical derived maps after either composite. A quotient-tower completion unit is the map of its strict quotient augmentation, so it is included. In particular exactness preserves the quotient maps used in such an augmentation. The argument used neither preservation of K-injectives by scalar restriction nor tensoring along $a$; no flatness or boundedness is needed.",
+   "uses": [
+    "lem-cbc-exact-product-functor-strict-limit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Final paragraph applying the comparison to defining derived limits; augmentation clause of the normalized strict-limit comparison"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-sf-exact-functor-derived-triangulated",
+  "def-weil-exact-derived-adjunction",
+  "lem-weil-pbc-module-sheaves-limits-sectionwise",
+  "lem-cbc-ringed-open-extension-products",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-cbc-exact-product-functor-strict-limit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Final paragraph; scalar coherence supplied by the explicit presheaf, generator, product and signed-Roos calculations; sources supporting the underlying constructions are Stacks Tags 03CY, 03DI, 03DJ, 09BP, 0941."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -67,10 +188,52 @@
    "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"line\": \"17\", \"text\": \"`CommRingCat.moduleCatRestrictScalarsPseudofunctor` and\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"line\": \"18\", \"text\": \"`RingCat.moduleCatRestrictScalarsPseudofunctor` which send a (commutative) ring\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"line\": \"38\", \"text\": \"noncomputable def CommRingCat.moduleCatRestrictScalarsPseudofunctor :\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"line\": \"42\", \"text\": \"    (fun f ↦ (restrictScalars f.unop.hom).toCatHom)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean\", \"line\": \"43\", \"text\": \"    (fun R ↦ Cat.Hom.isoMk (restrictScalarsId R.unop))\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"line\": \"37\", \"text\": \"    PreservesFiniteLimits <| tensorLeft ((restrictScalars f).obj (ModuleCat.of B B)) := by\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"line\": \"44\", \"text\": \"  have : PreservesFiniteLimits (extendScalars.{_, _, u} f ⋙ restrictScalars.{_, _, u} f) :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"line\": \"46\", \"text\": \"  exact preservesFiniteLimits_of_reflects_of_preserves (extendScalars f) (restrictScalars f)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Descent.lean\", \"line\": \"65\", \"text\": \"      (extendRestrictScalarsAdj f)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Algebra.lean\", \"line\": \"8\", \"text\": \"public import Mathlib.Algebra.Algebra.RestrictScalars\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Algebra.lean\", \"line\": \"49\", \"text\": \"  Module.restrictScalars k A M\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Algebra.lean\", \"line\": \"54\", \"text\": \"  IsScalarTower.restrictScalars k A M\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"line\": \"16\", \"text\": \"`restrictScalars ⊣ coextendScalars`\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/EnoughInjectives.lean\", \"line\": \"36\", \"text\": \"  EnoughInjectives.of_equivalence (restrictScalars (equivShrink R).symm.ringEquiv.toRingHom)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"115\", \"text\": \"    (PresheafOfModules.isoMk (fun U ↦ (ModuleCat.restrictScalarsCongr (by subst e; rfl)).app _)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"196\", \"text\": \"  { val.app U := (ModuleCat.restrictScalars (φ.hom.app U).hom).map (X.val.map (α.app U.unop).op)\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"421\", \"text\": \"      sheafCompose K (ModuleCat.restrictScalars <| (φ.hom.app _).hom) ⋙\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"425\", \"text\": \"    · refine (ModuleCat.restrictScalarsComp'App _ _ _ ?_ _).symm ≪≫\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"line\": \"426\", \"text\": \"        (ModuleCat.restrictScalarsComp _ _).app _\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Basic.lean\", \"line\": \"132\", \"text\": \"/-- The map `KaehlerDifferential f ⟶ (ModuleCat.restrictScalars g').obj (KaehlerDifferential f')`\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Basic.lean\", \"line\": \"137\", \"text\": \"      (ModuleCat.restrictScalars g'.hom).obj (KaehlerDifferential f') :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Basic.lean\", \"line\": \"146\", \"text\": \"  -- This suggests `restrictScalars` needs to be redesigned.\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Differentials/Basic.lean\", \"line\": \"147\", \"text\": \"  ModuleCat.ofHom (Y := (ModuleCat.restrictScalars g'.hom).obj (KaehlerDifferential f'))\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"line\": \"16\", \"text\": \"`restrictScalars α : SheafOfModules.{v} R' ⥤ SheafOfModules.{v} R`\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\", \"line\": \"36\", \"text\": \"noncomputable def restrictScalars :\"}",
    "date": "2026-10-21",
    "verdict": "no match: SheafOfModules.restrictScalars at Mathlib/Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean:36 defines the underived functor only; the file was read and contains no strict derived-limit comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"restrictScalars\", \"limit\"",
+   "results": "{\"ok\": true, \"n_hits\": 6, \"top\": [\"ModuleCat.preservesColimit_restrictScalars\", \"ModuleCat.preservesLimit_restrictScalars\", \"instPreservesFiniteColimitsModuleCatRestrictScalars\", \"instPreservesFiniteLimitsModuleCatRestrictScalars\", \"PresheafOfModules.instHasColimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\", \"PresheafOfModules.instHasLimitModuleCatCarrierObjOppositeRingCatCompEvaluationRestrictScalarsHomMap\"], \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results inspected; none states ringed open/scalar coherence for the specified normalized derived strict-limit comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "(extensionByZero|lowerShriek|jShriek).*(limit|scalar)|restrictScalars.*(derived|limit)",
+   "results": "{\"ok\": true, \"n_hits\": 0, \"top\": [], \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results inspected; none states ringed open/scalar coherence for the specified normalized derived strict-limit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars for sheaves of rings commutes with open extension by zero and normalized derived inverse limits of strict towers",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.map_ιFree_mapFree_hom_assoc\", \"ModuleCat.Tilde.toOpen_res\", \"SheafOfModules.restrictScalars_map_val\", \"SheafOfModules.instAdditiveRestrictScalars\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc\", \"PresheafOfModules.restrictScalarsCompToPresheaf\"], \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results inspected; none states ringed open/scalar coherence for the specified normalized derived strict-limit comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars|sheafification",
+   "results": "{\"ok\": true, \"n_hits\": 5, \"top\": [\"16\", \"36\", \"39\", \"41\", \"43\"], \"note\": \"\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf/ChangeOfRings.lean\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results inspected; none states ringed open/scalar coherence for the specified normalized derived strict-limit comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Open extension by zero of ringed site modules commutes with scalar restriction and derived inverse limits",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"ContinuousLinearMap.restrictScalars_zero\", \"ModuleCat.preservesLimit_restrictScalars\", \"ModuleCat.RestrictScalars.obj'\", \"PresheafOfModules.restrictScalars\", \"PresheafOfModules.restrictScalarsObj\", \"SheafOfModules.restrictScalars\", \"CategoryTheory.Presieve.FamilyOfElements.isCompatible_map_smul_aux\", \"DirectLimit.instSMulWithZeroOfMulActionHomClassOfZeroHomClass\"], \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results inspected; none states ringed open/scalar coherence for the specified normalized derived strict-limit comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical product preserving exact functor comparison with the signed Roos complex is coherent under a natural isomorphism of composite functors",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"top\": [\"AlgebraicTopology.DoldKan.N₂Γ₂ToKaroubiIso\", \"AlgebraicTopology.DoldKan.Γ₂N₂ToKaroubiIso\", \"localCohomology.diagramComp\", \"CategoryTheory.Abelian.DoldKan.comparisonN\", \"CategoryTheory.Limits.prodComparisonNatIso\", \"CategoryTheory.Limits.prodComparison_comp\", \"CategoryTheory.Abelian.DoldKan.comparisonN_hom_app_f\", \"CategoryTheory.Limits.prodComparison_inv_natural_assoc\"], \"note\": \"\", \"sub\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: results inspected; none states ringed open/scalar coherence for the specified normalized derived strict-limit comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-complete-proetale-strict-tower-realization",
@@ -89,5 +252,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-ringed-open-scalar-limit-coherence",
+  "worker": "stage1",
+  "summary": "No new nodes: constructed the scalar comparison on the actual presheaves, computed the adjunction unit and counit, verified exactness/products, and expanded the signed normalized Roos formula to prove coherence and strict-augmentation compatibility. Statement unchanged.",
+  "blueprint": "thm-cbc-complete-proetale proof first sentence (two isomorphisms defining the completed exchange), and lem-cbc-completed-extension-zero-comparison proof final paragraph applying exactness and derived limits. This split supplies the scalar and normalized-limit compatibility needed to identify that composite with the strict-tower realization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Identifies the small pro-etale site of the open with the slice; this is a site-theoretic tool, absent from the compact-support unit itself."
+   },
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Provides exact ringed extension and restriction and their adjunction on arbitrary sites; the compact-support unit uses this generic module-sheaf tool."
+   },
+   {
+    "node": "lem-weil-tower-category-levelwise-abelian",
+    "why": "Computes kernels and cokernels of strict towers levelwise so exactness extends to towers; this generic abelian-category tool is not supplied by the compact-support unit."
+   },
+   {
+    "node": "lem-sf-exact-functor-derived-triangulated",
+    "why": "Descends exact termwise functors to unbounded derived categories; a generic localization tool needed by the unit."
+   },
+   {
+    "node": "lem-weil-proetale-countable-products-exact",
+    "why": "Provides exact countable products for arbitrary ring sheaves on arbitrary scheme pro-etale sites, a generic input to the normalized comparison."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-proetale-countable-products-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-1727f9579",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-1727f9579 (reviewer sub-agent of L); spot-checked: I read the item, all 8 steps and the statements of every cited node in full. Statement and stmt_deps are byte-identical to live (side-live), and the live node is still unsplit with an empty proof. There is no repair note, no new node and no SGA source. Step 1: the extension presheaves are identical (⊕ over φ of N(V,φ), action a_V(r)·s), so uniqueness of the sheafified action gives e. Step 2: the explicit adjunction bijection, unit, counit and both scalar identities check out. Step 3: exactness follows from the def-weil-sheaf-of-modules-category kernel/cokernel descriptions; towers are handled levelwise; descent works because def-weil-exact-derived-adjunction uses the localized unit and counit. Step 4: all hypotheses of lem-cbc-exact-product-functor-strict-limit hold for r_T, J_S, J_R and r_U. The sites are small (V-small skeleton). Countable products are exact for arbitrary ring sheaves. J has invertible product comparisons by lem-cbc-ringed-open-extension-products (quasi-compact j, arbitrary X, empty family included). r has the identity comparison by the sectionwise limits node. Steps 5–7: I re-derived the projection identity, H(e_M)K_A=K_B e_{H_M} and the θ cancellations (θ natural in D(Tow(R_T)), the derived e natural in θ_M); the equation's types match. Step 8: the augmentation clause holds via e_{M_n}A(γ_n)=B(γ_n)e_C. Edge cases: U=∅, j=id, a=id, the zero ring, non-flat Z→Z/2, the empty family and unbounded M. lem-sf-open-extension-scalar-restriction-coherence is the finite-constant-ring special case of e, a generalization rather than a duplicate (advisory). Stacks 09BP was read. I accept the declared generic tool_uses: weakly-etale localization, site adjunction, tower levelwise abelian, exact-functor descent and countable products exact. review_split's 'no such node' errors come from the chapter-directory symlinks; I checked every id with find -L. No fixes."
  }
 }

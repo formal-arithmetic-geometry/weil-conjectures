@@ -21204,3 +21204,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:42 L: merged deliver/Q125/lem-trf-section-exceptional-fibre-coherence (reviewer FIX; first push; new nodes: 0)
 - 08:42 L: merged deliver/Q105/lem-trf-effective-comparison-realization-models (reviewer PASS; first push; new nodes: 0)
 - 08:42 L: merged deliver/Q01/lem-sfb-localized-ring-mate-graph-evaluation (reviewer FIX; first push; new nodes: 0)
+- 08:42 L: merged deliver/Q109/lem-cbc-ringed-open-scalar-limit-coherence (reviewer PASS; first push; new nodes: 0)
