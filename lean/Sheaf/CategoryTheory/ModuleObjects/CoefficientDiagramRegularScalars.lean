@@ -7,8 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import WeilConjectures.Mathlib.CategoryTheory.Monoidal.Mod
-public import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
-import Mathlib.CategoryTheory.Monoidal.Free.Coherence
 
 /-! # Regular scalars in a monoidal coefficient diagram
 
@@ -48,8 +46,16 @@ lem-coef-monoidal-structural-coherence. -/
 theorem regularScalar_eq_leftMultiplication
     (Z : C) [MonObj Z] [IsCommMonObj Z] (b : 𝟙_ C ⟶ Z) :
     (Mod.regularLift (Mod.regular Z) b).hom = (λ_ Z).inv ≫ b ▷ Z ≫ μ[Z] := by
-  sorry
+  change (ρ_ Z).inv ≫ Z ◁ b ≫ μ[Z] = _
+  calc
+    _ = (ρ_ Z).inv ≫ Z ◁ b ≫ (β_ Z Z).hom ≫ μ[Z] := by
+      rw [IsCommMonObj.mul_comm]
+    _ = (λ_ Z).inv ≫ b ▷ Z ≫ μ[Z] := by
+      rw [BraidedCategory.braiding_naturality_right_assoc,
+        rightUnitor_inv_braiding_assoc]
 
+-- Keep the existing braided parameters in this public theorem.
+set_option linter.unusedSectionVars false in
 /-- The coefficient comparison is a ring morphism for sequential transport.
 Source: blueprint main-20261015, sk-def-sfb-pullback-from-point-comp, last paragraph.
 (blueprint: lem-sfb-coefficient-diagram-regular-scalars)
@@ -67,7 +73,14 @@ theorem coefficientDiagram_isMonHom
     (Λ : C) [MonObj Λ] :
     @IsMonHom E _ _ (F.obj (P.obj Λ)) (Q.obj Λ)
       (F.monObjObj (P.obj Λ)) (Q.monObjObj Λ) (c.hom.app Λ) := by
-  sorry
+  let f : F.mapMon.obj (P.mapMon.obj (Mon.mk Λ)) ⟶ Q.mapMon.obj (Mon.mk Λ) :=
+    (Functor.mapMonCompIso (F := P) (G := F)).inv.app (Mon.mk Λ) ≫
+      (Functor.mapMonNatTrans c.hom).app (Mon.mk Λ)
+  have hf : f.hom = c.hom.app Λ := by
+    change 𝟙 _ ≫ c.hom.app Λ = _
+    exact Category.id_comp _
+  rw [← hf]
+  exact f.isMonHom_hom
 
 /-- The recorded scalar-extension functor, supplying its small-colimit instances
 from preservation of all colimits. No coefficient structure is changed.
@@ -99,6 +112,17 @@ noncomputable abbrev coefficientDiagramProjection
     (fun X => preservesSmallestColimits_of_preservesColimits (tensorLeft X))
     (fun X => preservesSmallestColimits_of_preservesColimits (tensorRight X))
     _ T S _ _ _ φ _ M
+
+omit [BraidedCategory C] [BraidedCategory D] in
+private theorem map_leftScalar (G : C ⥤ D) [G.Monoidal]
+    (Z : C) [MonObj Z] (b : 𝟙_ C ⟶ Z) :
+    G.map ((λ_ Z).inv ≫ b ▷ Z ≫ μ[Z]) =
+      (λ_ (G.obj Z)).inv ≫ (Functor.LaxMonoidal.ε G ≫ G.map b) ▷ G.obj Z ≫
+        μ[G.obj Z] := by
+  simp only [Functor.map_comp, Functor.obj.μ_def, comp_whiskerRight, Category.assoc]
+  rw [Functor.Monoidal.map_leftUnitor_inv]
+  simp only [Category.assoc]
+  rw [← Functor.LaxMonoidal.μ_natural_left_assoc]
 
 /-- Scalar transport and the normalized comparison of regular modules.
 Source: blueprint main-20261015, sk-def-sfb-pullback-from-point-comp, last paragraph;
@@ -165,6 +189,61 @@ theorem coefficientDiagram_regularScalars
               (Functor.LaxMonoidal.ε P ≫ P.map a)) ≫ e.hom =
           e.hom ≫ Mod.regularLift (Mod.regular (Q.obj Λ))
             (Functor.LaxMonoidal.ε Q ≫ Q.map a) := by
-  sorry
+  let : MonObj (F.obj (P.obj Λ)) := F.monObjObj (P.obj Λ)
+  let (X : E) : PreservesColimitsOfSize.{0, 0} (tensorLeft X) :=
+    preservesSmallestColimits_of_preservesColimits (tensorLeft X)
+  let (X : E) : PreservesColimitsOfSize.{0, 0} (tensorRight X) :=
+    preservesSmallestColimits_of_preservesColimits (tensorRight X)
+  let M := (F.mapMod (P.obj Λ)).obj (Mod.regular (P.obj Λ))
+  let B : Bimod (Mon.mk (Q.obj Λ)) (Mon.mk (F.obj (P.obj Λ))) :=
+    Bimod.ofMonHom (c.hom.app Λ)
+  let i : M ≅ Mod.regular (F.obj (P.obj Λ)) :=
+    Mod.isoMk (Iso.refl _) (by
+      simp only [Iso.refl_hom, Category.comp_id, whiskerLeft_id, Category.id_comp])
+  let H : Mod E (F.obj (P.obj Λ)) ⥤ Mod E (Q.obj Λ) :=
+    @coefficientDiagramExtension E _ _ _ _ _ _ (F.obj (P.obj Λ)) (Q.obj Λ)
+      (F.monObjObj (P.obj Λ)) (Q.monObjObj Λ) _ (c.hom.app Λ)
+      (coefficientDiagram_isMonHom P Q F c Λ)
+  let eX : (H.obj M).X ≅ Q.obj Λ :=
+    { hom := Bimod.RightUnitorBimod.hom B
+      inv := Bimod.RightUnitorBimod.inv B
+      hom_inv_id := Bimod.RightUnitorBimod.hom_inv_id B
+      inv_hom_id := Bimod.RightUnitorBimod.inv_hom_id B }
+  let e : H.obj M ≅ Mod.regular (Q.obj Λ) :=
+    Mod.isoMk eX (Bimod.RightUnitorBimod.hom_left_act_hom' B)
+  have he :
+      @Mod.extendπ E _ _ _ _ _ _ (F.obj (P.obj Λ)) (Q.obj Λ)
+        (F.monObjObj (P.obj Λ)) (Q.monObjObj Λ) _ (c.hom.app Λ)
+        (coefficientDiagram_isMonHom P Q F c Λ) M ≫ e.hom.hom =
+      Q.obj Λ ◁ c.hom.app Λ ≫ μ[Q.obj Λ] := coequalizer.π_desc _ _
+  refine ⟨⟨i, rfl, rfl⟩, e, he, rfl, ?_⟩
+  intro a
+  have hP := map_leftScalar P Λ a
+  have hQ := map_leftScalar Q Λ a
+  have hscalar :
+      F.map ((λ_ (P.obj Λ)).inv ≫
+        (Functor.LaxMonoidal.ε P ≫ P.map a) ▷ P.obj Λ ≫ μ[P.obj Λ]) ≫
+        c.hom.app Λ = c.hom.app Λ ≫ (λ_ (Q.obj Λ)).inv ≫
+        (Functor.LaxMonoidal.ε Q ≫ Q.map a) ▷ Q.obj Λ ≫ μ[Q.obj Λ] := by
+    rw [← hP, ← Category.assoc, ← hQ]
+    simpa only [Functor.comp_map, Category.assoc] using
+      c.hom.naturality ((λ_ Λ).inv ≫ a ▷ Λ ≫ μ[Λ])
+  refine ⟨hP, hQ, hscalar, ?_⟩
+  apply @Mod.extendScalarsObj_hom_ext E _ _ _ _ _ _
+    (F.obj (P.obj Λ)) (Q.obj Λ) (F.monObjObj (P.obj Λ)) (Q.monObjObj Λ)
+    _ (c.hom.app Λ) (coefficientDiagram_isMonHom P Q F c Λ)
+  simp only [Mod.comp_hom', Functor.comp_map, coefficientDiagramExtension,
+    Mod.extendScalars_map, Mod.extendπ_extendScalarsMap_assoc]
+  dsimp only [M] at he
+  erw [he, reassoc_of% he]
+  simp only [← regularScalar_eq_leftMultiplication] at hscalar
+  change Q.obj Λ ◁ F.map
+      (Mod.regularLift (Mod.regular (P.obj Λ))
+        (Functor.LaxMonoidal.ε P ≫ P.map a)).hom ≫
+      Q.obj Λ ◁ c.hom.app Λ ≫ μ[Q.obj Λ] = _
+  rw [← whiskerLeft_comp_assoc, hscalar, whiskerLeft_comp_assoc]
+  exact congrArg (fun f ↦ Q.obj Λ ◁ c.hom.app Λ ≫ f)
+    (Mod.act_hom (Mod.regularLift (Mod.regular (Q.obj Λ))
+      (Functor.LaxMonoidal.ε Q ≫ Q.map a))).symm
 
 end CategoryTheory

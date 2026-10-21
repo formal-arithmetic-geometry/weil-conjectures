@@ -18,12 +18,11 @@
  ],
  "proof": [
   {
-   "text": "First check the asserted module endomorphisms. For any one of the commutative ring objects $Z=\\Lambda,R,T,S$ and $b:\\mathbf1\\to Z$, braiding naturality [lem-sfb-braiding-naturality] gives\n$$\\beta_{Z,Z}(1_Z\\otimes b)=(b\\otimes1_Z)\\beta_{Z,\\mathbf1}.$$\nBy [lem-sfb-braiding-unitors], $\\lambda_Z\\beta_{Z,\\mathbf1}=\\rho_Z$. Composing these equalities with $\\mu_Z$, and using $\\mu_Z\\beta_{Z,Z}=\\mu_Z$ from [sk-def-sfb-ring-object], yields\n$$t_b=\\mu_Z(1_Z\\otimes b)\\rho_Z^{-1}.$$\nWrite $A$ for the ambient associator. Associativity now gives the equality of maps $Z\\otimes Z\\to Z$\n$$t_b\\mu_Z=\\mu_Z(\\mu_Z\\otimes b)\\rho_{Z\\otimes Z}^{-1}\n=\\mu_Z(1_Z\\otimes\\mu_Z)A_{Z,Z,Z}(1_{Z\\otimes Z}\\otimes b)\\rho_{Z\\otimes Z}^{-1}\n=\\mu_Z(1_Z\\otimes t_b).$$\nThe first equality is naturality of $\\rho^{-1}$, and the last is naturality of $A$ together with the structural unit identifications of [lem-coef-monoidal-structural-coherence]. This is exactly regular-module linearity in [sk-def-sfb-module-objects]. All these are morphism identities, using no elements or sections.",
+   "text": "Use the existing regularLift of the regular module, whose underlying morphism is right scalar multiplication. Insert the commutative multiplication identity after the scalar whisker, apply braiding naturality, and use the right-unitor inverse braiding identity. This identifies it with the asserted left scalar multiplication. Its module linearity is already part of regularLift, so no new structural-coherence argument is needed.",
    "uses": [
     "lem-sfb-braiding-naturality",
     "lem-sfb-braiding-unitors",
     "sk-def-sfb-ring-object",
-    "lem-coef-monoidal-structural-coherence",
     "sk-def-sfb-module-objects"
    ],
    "elementary": false,
@@ -33,7 +32,7 @@
    }
   },
   {
-   "text": "Let $G$ stand for $P$ or $Q$, and write $u^G_{X,Y}$ for its tensor comparison. The left unit coherence in [def-sfb-strong-monoidal-functor], solved for the inverse unitor, reads\n$$G(\\lambda_Z^{-1})=u^G_{\\mathbf1,Z}(\\varepsilon_G\\otimes1_{GZ})\\lambda_{GZ}^{-1}.$$\nUsing the tensorator naturality from that same definition and the transported multiplication of [det-def-sfb-ring-object-transport], compute\n$$\\begin{aligned}\nG(t_b)&=G(\\mu_Z)G(b\\otimes1_Z)u^G_{\\mathbf1,Z}(\\varepsilon_G\\otimes1_{GZ})\\lambda_{GZ}^{-1}\\\\\n&=G(\\mu_Z)u^G_{Z,Z}(G(b)\\otimes1_{GZ})(\\varepsilon_G\\otimes1_{GZ})\\lambda_{GZ}^{-1}\\\\\n&=\\mu_{GZ}((G(b)\\varepsilon_G)\\otimes1_{GZ})\\lambda_{GZ}^{-1}=t_{G(b)\\varepsilon_G}.\n\\end{aligned}$$\nTaking $Z=\\Lambda$, $b=a$ proves $P(t_a)=t_{a_R}$ and $Q(t_a)=t_{a_S}$. This computation needs strong monoidality, not preservation of the braiding.",
+   "text": "The private helper map_leftScalar proves the displayed scalar transport formula for an arbitrary strong monoidal functor. Expand transported multiplication and map_comp, rewrite the image of the inverse left unitor by Functor.Monoidal.map_leftUnitor_inv, and use tensorator naturality on the scalar map. Apply this helper to P and Q.",
    "uses": [
     "def-sfb-strong-monoidal-functor",
     "det-def-sfb-ring-object-transport"
@@ -45,7 +44,7 @@
    }
   },
   {
-   "text": "The composite $FP$ has the sequentially transported ring structure, and clause 3 of [det-def-sfb-ring-object-transport] applied to the given monoidal natural isomorphism $c$ makes $\\alpha=c_\\Lambda$ a ring isomorphism. Naturality of $c$ at the ambient morphism $t_a:\\Lambda\\to\\Lambda$ is\n$$\\alpha F(P(t_a))=Q(t_a)\\alpha.$$\nSubstituting the two equalities from step 2 gives $\\alpha F(t_{a_R})=t_{a_S}\\alpha$. Naturality here concerns the underlying categories; $t_a$ need not be a morphism of ring objects.",
+   "text": "Compose the inverse component of Functor.mapMonCompIso with Functor.mapMonNatTrans c.hom at the bundled monoid Lambda. Its underlying map is identity followed by c_Lambda, so its monoid-hom structure is exactly coefficientDiagram_isMonHom for sequential transport. For the scalar square use naturality of c at the original scalar-multiplication morphism and substitute the two transport equalities from step 2.",
    "uses": [
     "det-def-sfb-ring-object-transport"
    ],
@@ -56,7 +55,7 @@
    }
   },
   {
-   "text": "The regular $R$-module has action $\\mu_R$, by [sk-def-sfb-module-objects]. By the formula in [def-sfb-modobj-transport], its image under $\\operatorname{mapMod}(F)$ has underlying object $F(R)=T$ and action $F(\\mu_R)u^F_{R,R}=\\mu_T$. Thus the identity of $T$ is the claimed identification with the regular $T$-module. On the scalar endomorphism the transported map is exactly $F(t_{a_R})$, since the transport commutes with the forgetful functors.",
+   "text": "The action on the image of the regular module under mapMod is definitionally the sequentially transported multiplication. Mod.isoMk applied to the identity isomorphism therefore gives the required regular-module comparison with both underlying maps identities.",
    "uses": [
     "sk-def-sfb-module-objects",
     "def-sfb-modobj-transport"
@@ -68,7 +67,7 @@
    }
   },
   {
-   "text": "Use [def-sfb-modobj-extension] with the ring map $\\alpha:T\\to S$. Its statement supplies the $S$-$T$-bimodule $S$, with left action $\\mu_S$ and right action $r=\\mu_S(1_S\\otimes\\alpha)$. The hypotheses hold: $T$ is commutative, and $\\mathcal E$ has the required coequalizers and tensor preservation. Step 4 identifies $H(R)$ with the displayed relative tensor $S\\otimes_TT$, with the same balancing arrows and left $S$-action as in that construction. Apply [lem-sfb-mixed-bimodule-right-unitor] to this bimodule and the regular $T$-$T$-bimodule. Its $S$-linear isomorphism $e$ and inverse are exactly\n$$e q=r=\\mu_S(1_S\\otimes\\alpha),\\qquad e^{-1}=q(1_S\\otimes\\eta_T)\\rho_S^{-1}.$$\nThe cited lemma allows different left and right coefficient rings, so no identification $S=T$ is made.",
+   "text": "Take Bimod.ofMonHom at the sequential coefficient map. Its mixed-bimodule right-unitor forward and inverse maps have definitionally the underlying source of the scalar extension of the transported regular module. Package these maps as an ambient isomorphism, using RightUnitorBimod.hom_inv_id and inv_hom_id, then use hom_left_act_hom' and Mod.isoMk for S-linearity. The coequalizer desc equation gives the exact balancing-projection formula; the inverse formula is definitional.",
    "uses": [
     "def-sfb-modobj-extension",
     "lem-sfb-mixed-bimodule-right-unitor"
@@ -80,7 +79,7 @@
    }
   },
   {
-   "text": "Set $v=F(t_{a_R})$ and $w=t_{a_S}$. The induced-map clause of [def-sfb-modobj-extension], together with step 4, gives $H(t_{a_R})q=q(1_S\\otimes v)$. Therefore, as maps $S\\otimes T\\to S$,\n$$\\begin{aligned}\neH(t_{a_R})q&=e q(1_S\\otimes v)=\\mu_S(1_S\\otimes\\alpha v)\\\\\n&=\\mu_S(1_S\\otimes w\\alpha)\n=\\mu_S(1_S\\otimes w)(1_S\\otimes\\alpha)\\\\\n&=w\\mu_S(1_S\\otimes\\alpha)=weq.\n\\end{aligned}$$\nThe third equality uses step 3; the penultimate uses the $S$-linearity $\\mu_S(1_S\\otimes w)=w\\mu_S$ proved in step 1. A coequalizer map is epimorphic directly by the uniqueness clause of the colimit universal property [def-weil-pbc-category-colimit]: two maps whose composites with $q$ coincide factor the same coequalizing cocone, and hence coincide. Cancelling $q$ proves $eH(t_{a_R})=t_{a_S}e$. Every calculation is in $\\mathcal E$, so in a sheaf category it does not assert that sections of a sheafified tensor product are pure tensors.",
+   "text": "Use Mod.extendScalarsObj_hom_ext to cancel the actual balancing projection. Its induced-map equation rewrites the left side as whiskering the transported scalar followed by the normalized comparison. Rewrite the scalar square from step 3 using regularScalar_eq_leftMultiplication, combine and split whiskering of compositions, and use Mod.act_hom for the scalar endomorphism on the regular S-module. These are ambient morphism identities; no statement about pure-tensor sections occurs.",
    "uses": [
     "def-sfb-modobj-extension",
     "def-weil-pbc-category-colimit"
@@ -96,7 +95,6 @@
   "lem-sfb-braiding-naturality",
   "lem-sfb-braiding-unitors",
   "sk-def-sfb-ring-object",
-  "lem-coef-monoidal-structural-coherence",
   "sk-def-sfb-module-objects",
   "def-sfb-strong-monoidal-functor",
   "det-def-sfb-ring-object-transport",
@@ -108,7 +106,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point-comp/_section.md",
-  "place": "Abstract coefficient-diagram calculation from the monoidal comparison; regular tensor normalization follows the mixed-bimodule right unitor. Supports det-proper-base-change-unbounded-pullback, Constructible complexes paragraph."
+  "place": "The same six-step coefficient-diagram argument, implemented by P2 using existing regularLift, mapMonCompIso/mapMonNatTrans, the mixed-bimodule right-unitor API, and extension projection hom-ext. No new lemmas with holes."
  },
  "mathlib_searches": [
   {
@@ -281,5 +279,15 @@
   "group": "Q47",
   "result": "pass",
   "note": "Clause-by-clause match of the node: braided C,D,E; HasCoequalizers E with full PreservesColimits of tensorLeft/Right (the {0,0} size for the recorded Mod.extendScalars is derived via preservesSmallestColimits_of_preservesColimits, not substituted); strong monoidal P,Q,F; c : P⋙F≅Q with NatTrans.IsMonoidal; commutative MonObj Λ and IsCommMonObj on R,T,S with sequential monObjObj. coefficientDiagram_isMonHom is needed because the composite and sequential structures on T are not defeq. regularScalar_eq_leftMultiplication ties regularLift (ρ⁻¹≫Z◁b≫μ) to t_b. The three scalar identities appear in diagrammatic order. The identity mapMod regular iso has content. e : H(R)≅S is pinned by q≫e=S◁α≫μ_S and e⁻¹=ρ⁻¹≫S◁η_T≫q with q=Mod.extendπ (epi, so e is unique). ∀a is inside ∃e. Statement field is verbatim; node differs from side-live only in lean; stmt_deps unchanged; no hollow defs (abbrevs are instance adapters); docstrings carry source and blueprint tag; both report sections present. Advisory only: possibly redundant Free.Coherence/RingPresheaf imports. No compile run (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P2",
+  "result": "pass",
+  "landing": "20261021T120438-L-3896355",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
