@@ -16,9 +16,115 @@
   "lem-sfb-condensed-product-action-inflation",
   "lem-sfb-condensed-derived-restriction-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $\\mathscr E=\\operatorname{Sh}(*_{\\mathrm{pro\\acute et}})$ and $K=\\underline G$. Apply [lem-sfb-action-topos-geometric-restriction] to the chosen small profinite site. It presents the action category as modules over $p_K^{-1}A$ on the small action topos, identifies $p_K^*$ with trivial inflation, and identifies its ordinary tensor and unit comparisons with the identity on coefficient tensors and on $A$. Apply [lem-sf-ringed-derived-closed-symmetric-monoidal] to these two small ringed sites and [lem-sfb-ringed-derived-monoidal-comparisons] to $p_K$. This supplies the ordinary unbounded derived tensors and the symmetric strong monoidal structure on $Lp_K^*$. In particular the symmetry is the signed cochain symmetry, rather than an unsigned tensor symmetry.",
+   "uses": [
+    "lem-sfb-action-topos-geometric-restriction",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0FPT (lemma-symmetric-monoidal-derived), 07A4 (lemma-pullback-tensor-product); internal action-site input is agent-formulated as specified in the cited node"
+   }
+  },
+  {
+   "text": "Let $T$ be trivial inflation. The underived adjunction $T\\dashv\\Gamma_G$ is the invariant-inclusion adjunction of [lem-sfb-condensed-product-action-inflation], with the second group trivial. Its categories are Grothendieck abelian and $T$ is additive and exact. By [lem-weil-pbc-exact-functor-derived-factorization], its derived functor $L=D(T)$ is triangulated, represented termwise, has the usual signed cochain shifts, and sends $A[0]$ to $A[0]$. It is $Lp_K^*$ from step 1: both are the canonical derived functor of the same exact module pullback. The canonical adjunction in [lem-sfb-ringed-derived-monoidal-comparisons] therefore gives $L\\dashv F=R\\Gamma_G$. The right derived functor is computed by equivariant injective resolutions on bounded-below objects as in [lem-sfb-condensed-derived-restriction-calculus]; the underived transpose is exactly the invariant inclusion, so this is the specified derived adjunction, with no new choice of its unit or counit. The canonical adjunction shift theorem [lem-sp-canonical-right-derived-adjunction-shift] applies because these Grothendieck categories admit K-injective resolutions by [lem-sfb-grothendieck-k-injective], and gives shift compatibility for the unit and counit.",
+   "uses": [
+    "lem-sfb-condensed-product-action-inflation",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), together with derived.tex Tag 0A8D (lemma-adjoint-is-exact); the invariant-inclusion normalization is the cited internal restriction calculus"
+   }
+  },
+  {
+   "text": "Write $I=A[0]$ in either category, $\\varepsilon:LF\\to1$ for the counit, and $m:I\\otimes^LI\\to I$ for unit multiplication. By [lem-sfb-monoidal-adjunction-mates], the inverse strong monoidal structure on $L$ gives a lax monoidal structure $(e,\\mu)$ on $F$. Its defining transpose is\n$$\\varepsilon_{U\\otimes V}\\circ L(\\mu_{U,V})=(\\varepsilon_U\\otimes\\varepsilon_V)\\circ t_{FU,FV},$$\nwhere $t:L(-\\otimes-)\\to L(-)\\otimes L(-)$ is the inverse tensor comparison. Put $C=FI$ and $M=F(m)\\circ\\mu_{I,I}$. The lax associativity and unit diagrams give the associativity and unit equations for $(C,M,e)$, using those of $m$. The monoidal unit/counit theorem [lem-sfb-monoidal-adjunction-unit-counit] ensures these are the tensor and unit comparisons of this actual adjunction. The transpose of $e:I\\to FI$ is the unit comparison $LI\\to I$, hence the identity under the prescribed identification.",
+   "uses": [
+    "lem-sfb-monoidal-adjunction-mates",
+    "lem-sfb-monoidal-adjunction-unit-counit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-pullback-from-point/lem-sfb-point-upper-star-unit.proof.md",
+    "place": "Generic mate construction; Mathlib/CategoryTheory/Monoidal/Functor.lean rightAdjointLaxMonoidal, and Monoidal/NaturalTransformation.lean IsMonoidal unit/counit instances"
+   }
+  },
+  {
+   "text": "For $S_n=I[-n]$ and $x:I\\to I[p]$, put $f=x[-p]:S_p\\to I$ in the action category. The shifted adjunction sends $x$ to the adjoint $a:S_p\\to FI$ of $f$; shift compatibility in step 2 identifies this with the specified $\\Phi_p$. Likewise write $g=y[-q]$ and $b=\\Phi_q(y)$. Let $r_{p,q}:S_{p+q}\\xrightarrow{\\sim}S_p\\otimes^LS_q$ be the fixed shifted-unit comparison. The cup product of $a,b$ is $M\\circ(a\\otimes b)\\circ r_{p,q}$. Transpose this map. Naturality of the counit at $m$, the tensor equation of step 3, and naturality of $t$ turn its transpose into\n$$m\\circ((\\varepsilon_I L(a))\\otimes(\\varepsilon_I L(b)))\\circ L(r_{p,q})=m\\circ(f\\otimes g)\\circ r_{p,q}.$$\nHere $L(S_n)=S_n$; the pullback tensor/shift compatibility [lem-pur-shifted-tensor-morphism-calculus] identifies $L(r_{p,q})$ with the same fixed comparison in the action category. This proves the tensor-of-arrows assertion before any graded composition is substituted.",
+   "uses": [
+    "lem-sp-canonical-right-derived-adjunction-shift",
+    "lem-sfb-monoidal-adjunction-unit-counit",
+    "lem-pur-shifted-tensor-morphism-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A6 (lemma-adjoint), tensor-of-counits mate calculation; signed comparisons follow more-algebra.tex Tag 0FNG, section-sign-rules"
+   }
+  },
+  {
+   "text": "We now compute this tensor of arrows without interchanging $f$ and $g$. For any derived object $Z$ define $\\kappa_{Z,q}:Z\\otimes^LS_q\\to Z[-q]$ by extracting the second shift and then applying the shifted right unitor. The natural signed shift comparisons exist on all derived morphisms by [lem-weil-pbc-derived-tensor-shift-descent], not merely on chain maps between chosen resolutions. On the degree-zero unit $I$, $\\kappa_{I,q}$ is the left unitor $\\lambda_{S_q}:I\\otimes^LS_q\\to S_q$: their representative formulas are both multiplication of the ring section, since the first-factor degree is zero. These unitor formulas are those of [lem-sf-ringed-derived-closed-symmetric-monoidal]. Bifunctoriality and left-unitor naturality, followed by naturality of $\\kappa$ at $f:S_p\\to I$, give\n$$m(f\\otimes g)=g\\lambda_{S_q}(f\\otimes1)=g\\kappa_{I,q}(f\\otimes1)=g f[-q]\\kappa_{S_p,q}.$$\nThis is a three-equality calculation with arbitrary derived arrows; in particular it does not assume that a map from the unit in the action category is represented by an ordinary chain map.",
+   "uses": [
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNG, section-sign-rules items shift-tensor and flip-tensor-product; derived extension supplied by the cited shift-descent node"
+   }
+  },
+  {
+   "text": "Both $\\kappa_{S_p,q}r_{p,q}$ and the ordinary identification $S_{p+q}=S_p[-q]$ are maps between the same shifted copies of the regular unit. Compute them on the single nonzero tensor summand $A\\otimes_A A$ in total degree $p+q$. By [lem-weil-pbc-total-tensor-integer-shifts], extracting the second shift $-q$ on a first factor concentrated in degree $p$ contributes $(-1)^{pq}$; first-shift extraction is unsigned. The fixed comparison $r_{p,q}$ is the shifted-unit identification made from these same signed comparisons. Thus its contribution is also a sign depending only on the integers and the fixed extraction order. Their composite is $t_{p,q}$ times the ordinary shift identification, for $t_{p,q}\\in\\{1,-1\\}$. This computation is valid after localization by [lem-weil-pbc-derived-tensor-shift-descent]. All possible signs here are products of $(-1)^{pq}$: the unit is concentrated in degree zero and only the two shifts are extracted. Hence $t_{p,0}=t_{0,q}=1$. No scalar, group element, or representative of $f,g$ enters this computation.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "lem-weil-pbc-derived-tensor-shift-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNG, section-sign-rules item shift-tensor; signed second-factor extraction and the exchange of extraction order"
+   }
+  },
+  {
+   "text": "Substitute step 6 into the last equality of step 5 and precompose with $r_{p,q}$. The adjoint of the cup product from step 4 is $t_{p,q}g\\circ f[-q]$. Shifting this map by $p+q$ gives exactly $t_{p,q}y[p]\\circ x$: indeed $f[-q][p+q]=x$ and $g[p+q]=y[p]$. Additivity of the adjunction bijection therefore gives\n$$\\Phi_p(x)\\smile\\Phi_q(y)=t_{p,q}\\Phi_{p+q}(y[p]\\circ x).$$\nNo symmetry was used to reverse the arrows. Degree zero has the unsigned unitors, giving both asserted zero-degree normalizations and the identity-to-unit assertion of step 3. Every construction applies to the zero ring: its unit object and all maps are zero, while the integer sign is still the same prescribed sign. For the trivial group, the invariant-inclusion adjunction is the identity adjunction, so the same calculation applies. The argument works for all integer shifts and hence for the required $p,q\\geq0$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent expansion of internal bar normalization: final ordered graded-composition calculation and edge cases"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-action-topos-geometric-restriction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-sfb-condensed-product-action-inflation",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-sfb-monoidal-adjunction-mates",
+  "lem-sfb-monoidal-adjunction-unit-counit",
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-weil-pbc-total-tensor-integer-shifts"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), categorical infrastructure expanded using Stacks Tags 0FPT, 07A4, 07A6, 0FNG and the existing monoidal-adjunction and shift nodes; this structural statement is not literally asserted in the blueprint."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -75,10 +181,45 @@
    "results": "{\"t\": \"2026-10-21T17:56:00Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"trivial\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
    "date": "2026-10-21",
    "verdict": "no match: Action monoidal structures and Adjunction.rightAdjointLaxMonoidal give abstract ingredients; neither supplies derived tensor for internal condensed-group actions nor its shift-normalized graded composition formula."
+  },
+  {
+   "tool": "grep",
+   "query": "(Condensed|CondensedMod).*(invariants|inflation|rightDerived)|invariants.*Condensed",
+   "results": "{\"t\": \"2026-10-21T18:26:39Z\", \"tool\": \"grep\", \"query\": \"(Condensed|CondensedMod).*(invariants|inflation|rightDerived)|invariants.*Condensed\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned general monoidal-adjunction or graded-object results do not supply internal condensed actions, derived inflation, and the ordered shifted-composition comparison together"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Adjunction.rightAdjointLaxMonoidal\"",
+   "results": "{\"t\": \"2026-10-21T18:26:39Z\", \"tool\": \"loogle\", \"query\": \"\\\"Adjunction.rightAdjointLaxMonoidal\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.rightAdjointLaxMonoidal\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_ε\", \"CategoryTheory.Adjunction.rightAdjointLaxMonoidal_μ\"], \"digest\": \"75eec76ead7ae1f6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned general monoidal-adjunction or graded-object results do not supply internal condensed actions, derived inflation, and the ordered shifted-composition comparison together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cup product under a derived strong monoidal adjunction equals composition of shifted endomorphisms of the tensor unit",
+   "results": "{\"t\": \"2026-10-21T18:26:39Z\", \"tool\": \"leansearch\", \"query\": \"Cup product under a derived strong monoidal adjunction equals composition of shifted endomorphisms of the tensor unit\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ\", \"CategoryTheory.Adjunction.ε_comp_map_ε_assoc\", \"CategoryTheory.Adjunction.unit_app_tensor_comp_map_δ_assoc\", \"CategoryTheory.Adjunction.isMonoidal_comp\", \"CategoryTheory.Adjunction.map_η_comp_η_assoc\", \"CategoryTheory.Adjunction.unit_app_unit_comp_map_η_assoc\", \"CategoryTheory.Adjunction.map_ε_comp_counit_app_unit_assoc\", \"CategoryTheory.Adjunction.map_μ_comp_counit_app_tensor\"], \"digest\": \"1715a46464a055a8\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned general monoidal-adjunction or graded-object results do not supply internal condensed actions, derived inflation, and the ordered shifted-composition comparison together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For internal actions of a profinite group on modules over a condensed ring, derived trivial inflation is symmetric monoidal and the adjoint cup product corresponds to shifted composition of unit endomorphisms",
+   "results": "{\"t\": \"2026-10-21T18:26:40Z\", \"tool\": \"leanfinder\", \"query\": \"For internal actions of a profinite group on modules over a condensed ring, derived trivial inflation is symmetric monoidal and the adjoint cup product corresponds to shifted composition of unit endomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"LightCondensed.ihomPoints_symm_comp\", \"LightCondensed.instMonoidalClosedFunctorOppositeLightProfiniteModuleCat\", \"LightCondensed.ihomPoints\", \"LightCondensed.ihomPoints_symm_apply\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.ihomPoints_apply\", \"LightCondensed.instMonoidalClosedLightCondMod\"], \"digest\": \"afb0f0a093f569fb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned general monoidal-adjunction or graded-object results do not supply internal condensed actions, derived inflation, and the ordered shifted-composition comparison together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal derived category, the product of two graded endomorphisms of the tensor unit is their shifted composition up to the Koszul sign",
+   "results": "{\"t\": \"2026-10-21T18:27:17Z\", \"tool\": \"leanfinder\", \"query\": \"In a symmetric monoidal derived category, the product of two graded endomorphisms of the tensor unit is their shifted composition up to the Koszul sign\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.instHasTensorXTensorUnit_1\", \"CategoryTheory.GradedObject.symmetricCategory\", \"CategoryTheory.GradedObject.Monoidal.instHasMapProdObjFunctorMapBifunctorCurriedTensorSingle₀TensorUnit_1\", \"CategoryTheory.GradedObject.Monoidal.instHasMapProdObjFunctorMapBifunctorCurriedTensorSingle₀TensorUnit\", \"CategoryTheory.GradedObject.Monoidal.symmetry_assoc\", \"CategoryTheory.GradedObject.Monoidal.symmetry\", \"HomologicalComplex.instHasTensorXTensorUnit\", \"CategoryTheory.CommShift₂Setup.hε\"], \"digest\": \"6982807b37fcfe6e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the returned general monoidal-adjunction or graded-object results do not supply internal condensed actions, derived inflation, and the ordered shifted-composition comparison together"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-internal-bar-ordered-cup",
@@ -90,7 +231,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), internal bar normalization: strong monoidal derived trivial inflation, its invariant adjunction and the graded unit-endomorphism law for its cup product. Agent-formulated structural input; exact internal-category reference WANTED.",
+   "place": "Paragraph (3), internal bar normalization: strong monoidal derived trivial inflation, its invariant adjunction and the graded unit-endomorphism law for its cup product. Agent-formulated structural input; exact internal-category reference WANTED. The ancestor command returns None for the inherited created.item chain; the precise source place is the internal categorical input serving paragraph (3).",
    "via": [
     "lem-sfb-internal-bar-ordered-cup",
     "lem-sfb-trivial-ladic-derived-exterior",
@@ -104,5 +245,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-internal-inflation-graded-cup",
+  "worker": "stage1",
+  "summary": "Kept the statement unchanged. Reused the existing action-topos, derived monoidal, adjunction-mate and signed tensor-shift nodes. Wrote the tensor-of-counits transpose and an explicit unitor-naturality calculation giving the required order y[p] after x, with signs computed only on shifted unit complexes. No new nodes or Mathlib leaves. Searched project source and whole DAG/blueprint, read all cited statements, and checked zero ring, trivial group and zero degrees.",
+  "blueprint": "Realizes the formal categorical input below paragraph (3) of the current direct-images proof. The inherited ancestor chain has no blueprint node (ancestor command None); preserved from.node=null and the existing via chain. No unit or chapter route changes.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Ordinary small ringed-site derived tensor and unitors, applied to the base site and action site; no theorem of this unit provides this general tensor infrastructure."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "General ringed-topos monoidal pullback and canonical adjunction, applied to the action-topos projection; this is infrastructure for the given internal route."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "General exact-functor descent with its pinned cochain shifts, applied to exact inflation."
+   },
+   {
+    "node": "lem-sp-canonical-right-derived-adjunction-shift",
+    "why": "Canonical exact-left/K-injective-right adjunction shift compatibility, needed to retain the specified shifted bijection."
+   },
+   {
+    "node": "lem-pur-shifted-tensor-morphism-calculus",
+    "why": "General signed tensor comparison for an exact ringed-topos pullback, used only to identify the fixed shifted-unit comparison under inflation."
+   },
+   {
+    "node": "lem-weil-pbc-derived-tensor-shift-descent",
+    "why": "General signed derived tensor naturality on arbitrary localized morphisms; required so the unitor calculation applies to arbitrary Ext classes."
+   },
+   {
+    "node": "lem-weil-pbc-total-tensor-integer-shifts",
+    "why": "General total-cochain tensor sign formulas; used to compute the universal sign on the shifted regular unit."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "General K-injective existence in a Grothendieck abelian category, supplying explicitly the hypothesis of canonical adjunction shift compatibility."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-sp-canonical-right-derived-adjunction-shift",
+  "lem-pur-shifted-tensor-morphism-calculus",
+  "lem-weil-pbc-derived-tensor-shift-descent",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "lem-sfb-grothendieck-k-injective"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q11-b3adfae7d",
+  "group": "Q11",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-b3adfae7d (reviewer sub-agent of L); spot-checked: I read the item, the report and every cited statement in full. The statement is unchanged, there are no new nodes, and no repair note applies. The only citer is lem-sfb-internal-bar-ordered-cup: its steps 1, 5 and 6 use exactly the item's adjunction, ordered-formula and unit clauses. Source: main-20261015 direct-images proof paragraph (3) has no monoidal content, so the item is correctly marked agent-written with a WANTED reference; the null blueprint ancestor is inherited. Steps 1–2: the action-topos presentation holds (small profinite site with finite limits, p_K exact, identity tensor and unit comparisons), and the K-injective canonical derived adjunction (ringed-projection-mate-exact) is the same as the adjunction of lem-sp-canonical-right-derived-adjunction-shift. That theorem's hypotheses (exact additive left adjoint, additive right adjoint, K-injectives) come from the product-inflation node and lem-sfb-grothendieck-k-injective. Step 3: the mate formula matches Mathlib Adjunction.rightAdjointLaxMonoidal (Monoidal/Functor.lean:947-950). Step 4: I recomputed the transpose (counit naturality, the mate equation, naturality of t), and L(r)=r follows from the pur shifted-tensor calculus. Step 5: I re-derived the three equalities. λ_{S_q}=κ_{I,q} because the s^2 sign at first degree 0 is 1, and the naturality of t^2 in the first variable for arbitrary derived f is stated in lem-weil-pbc-derived-tensor-shift-descent. Step 6: there is one K-flat summand in degree p+q, the signs are (-1)^{pq}, they are universal, and they equal 1 at p=0 or q=0. Step 7: the shift types check (f[-q][p+q]=x, g[p+q]=y[p]). Edge cases checked: p=q=0, q=0, trivial G, zero ring. No cycle (closure of 584 nodes excludes the item), no SGA. The duplicate search (cup with adjunction, composition or lax monoidal) found only ordinary-module and pairing nodes, none stating this law. I accept the eight declared tool uses, all generic infrastructure. Advisory only: step 1 relies on the identification of R_K-modules with linear actions, which the action-topos node takes for granted rather than states separately."
  }
 }
