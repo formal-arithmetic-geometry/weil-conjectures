@@ -43,13 +43,12 @@ import Mathlib.CategoryTheory.Adjunction.Whiskering
 import Mathlib.CategoryTheory.Adjunction.Additive
 import Sheaf.Paper.RingedTopoiDerivedPullback
 import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.TensorProductOfUniverses
-import WeilConjectures.Algebra.Category.ModuleCat.Sheaf.TensorProduct
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
 
 import Sheaf.Algebra.Homology.DerivedChangeOfRingsCochainModel
 import Mathlib.CategoryTheory.Limits.Preserves.FunctorCategory
 import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFromResolvingClass
 /-!
 # Constant coefficients and their sheafwise adic completion
 
@@ -136,6 +135,8 @@ def quotientCone : Cone (finiteSystem J A I) where
 (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
 def coefficientMap : constant J A ⟶ completed J A I :=
   limit.lift _ (quotientCone J A I)
+
+attribute [local irreducible] completed
 
 variable {J A I}
 
@@ -640,6 +641,8 @@ natural isomorphism; no arbitrary tensor functor is chosen. Source: Stacks 06YY
 def derivedExtension {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) : DerivedExtension φ :=
   Classical.choice (derivedExtension_exists φ)
 
+attribute [local irreducible] derivedExtension
+
 /-- The specified derived extension of scalars. Source: Stacks 06YY
 (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
 def extend {R S : Sheaf J CommRingCat.{u}} (φ : R ⟶ S) : D R ⥤ D S :=
@@ -1061,7 +1064,9 @@ theorem reductionStep_existsUnique (b : Bool) (n : ℕ) :
         Category.id_comp, finiteSystem,
         Functor.ofOpSequence_map_homOfLE_succ, Category.id_comp] using (quotient_step J A I n).symm
     | true =>
-      simpa only [finiteMap, projection, finiteSystem,
+      change projection J A I (n + 1) ≫ transition J A I n = projection J A I n
+      unfold projection completed
+      simpa only [finiteSystem,
         Functor.ofOpSequence_map_homOfLE_succ] using
           limit.w (finiteSystem J A I) (homOfLE (Nat.le_succ n)).op
   let t := scalarTransition (finiteMap J A I b (n + 1)) (transition J A I n)
@@ -1273,6 +1278,8 @@ Source: Stacks 0940 (blueprint: lem-weil-pbc-constant-completion-equivalence). -
 def strictLimit (O : Sheaf J CommRingCat.{u}) : StrictLimit O :=
   Classical.choice (strictLimit_exists O)
 
+attribute [local irreducible] strictLimit
+
 /-- Total right derived strict inverse limit, not a noncanonical triangulated cone.
 Source: Stacks 0940 (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
 def rlim (O : Sheaf J CommRingCat.{u}) : TD O ⥤ D O := (strictLimit O).functor
@@ -1359,6 +1366,314 @@ def ordinaryUnit (b : Bool) (P : Cx (coefficients J A I b)) :
     P ⟶ (ordinaryLimit (coefficients J A I b)).obj (reductionComplex J A I b P) :=
   (ordinaryUnit_existsUnique J A I b P).exists.choose
 
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Precomposition by a fully faithful whiskering functor preserves the terminal
+right-extension universal property. Construct its lifts by taking preimages. -/
+private theorem kan_precomp
+    {A B D H : Type*} [Category A] [Category B] [Category D] [Category H]
+    (P : A ⥤ B) (Q : B ⥤ D) (T : D ⥤ H) (G : B ⥤ H) (ε : Q ⋙ T ⟶ G)
+    [((Functor.whiskeringLeft A B H).obj P).Full]
+    [((Functor.whiskeringLeft A B H).obj P).Faithful]
+    [T.IsRightKanExtension ε] :
+    T.IsRightKanExtension
+      ((Functor.associator P Q T).hom ≫ Functor.whiskerLeft P ε) := by
+  let K := (Functor.whiskeringLeft A B H).obj P
+  let lift (s : Functor.RightExtension (P ⋙ Q) (P ⋙ G)) : s.left ⟶ T :=
+    T.liftOfIsRightKanExtension ε s.left
+      (K.preimage ((Functor.associator P Q s.left).inv ≫ s.hom))
+  have fac (s : Functor.RightExtension (P ⋙ Q) (P ⋙ G)) :
+      Functor.whiskerLeft (P ⋙ Q) (lift s) ≫
+        ((Functor.associator P Q T).hom ≫ Functor.whiskerLeft P ε) = s.hom := by
+    as_aux_lemma =>
+      apply NatTrans.ext
+      funext X
+      have h := congrArg (fun t ↦ t.app (P.obj X))
+        (T.liftOfIsRightKanExtension_fac ε s.left
+          (K.preimage ((Functor.associator P Q s.left).inv ≫ s.hom)))
+      have hp := congrArg (fun t ↦ t.app X)
+        (K.map_preimage ((Functor.associator P Q s.left).inv ≫ s.hom))
+      change (lift s).app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) = _
+      rw [Category.id_comp]
+      exact (h.trans hp).trans (Category.id_comp _)
+  clear_value lift
+  refine ⟨⟨IsTerminal.ofUniqueHom
+    (fun s ↦ CostructuredArrow.homMk (lift s) (fac s)) ?_⟩⟩
+  as_aux_lemma =>
+    intro s m
+    apply CostructuredArrow.hom_ext
+    apply T.hom_ext_of_isRightKanExtension ε
+    apply K.map_injective
+    have h := CostructuredArrow.w m
+    apply NatTrans.ext
+    funext X
+    have h' := congrArg (fun t ↦ t.app X) h
+    have h'' := congrArg (fun t ↦ t.app X) (fac s)
+    have hh := h'.trans h''.symm
+    change m.left.app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) = _ at hh
+    rw [Category.id_comp] at hh
+    change _ = (lift s).app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) at hh
+    rw [Category.id_comp] at hh
+    exact hh
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Transport a right Kan extension across isomorphisms of its source diagram and target. -/
+private theorem kan_change
+    {A D H : Type*} [Category A] [Category D] [Category H]
+    {Q Q' : A ⥤ D} {G G' : A ⥤ H} (T : D ⥤ H)
+    (i : Q ≅ Q') (j : G ≅ G') (ε : Q ⋙ T ⟶ G)
+    [T.IsRightKanExtension ε] :
+    T.IsRightKanExtension (Functor.whiskerRight i.inv T ≫ ε ≫ j.hom) := by
+  let Φ := Functor.rightExtensionEquivalenceOfIso₁ i G
+  have ht := (IsTerminal.isTerminalIffObj Φ.functor
+    (Functor.RightExtension.mk T ε)).1 (T.isUniversalOfIsRightKanExtension ε)
+  have hε : T.IsRightKanExtension (Functor.whiskerRight i.inv T ≫ ε) := ⟨⟨ht⟩⟩
+  exact (Functor.isRightKanExtension_iff_of_iso₂
+    (Functor.whiskerRight i.inv T ≫ ε)
+    (Functor.whiskerRight i.inv T ≫ ε ≫ j.hom) j (Iso.refl T) (by simp)).1 hε
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- Transport a homotopy-level derived counit to complexes, with abstract categories.
+The quotient comparison is invertible, so the transport preserves every computation
+component that is already an isomorphism. -/
+private theorem cochain_derived_counit
+    {A₀ B₀ : Type*} [Category A₀] [Category B₀] [Abelian A₀] [Abelian B₀]
+    [HasDerivedCategory A₀] [HasDerivedCategory B₀]
+    (E : A₀ ⥤ B₀) [E.Additive]
+    (T : DerivedCategory A₀ ⥤ DerivedCategory B₀)
+    (ε : DerivedCategory.Qh ⋙ T ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    [T.IsRightKanExtension ε] :
+    ∃ β : DerivedCategory.Q ⋙ T ⟶
+        E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q,
+      T.IsRightKanExtension β ∧
+        ∀ P : CochainComplex A₀ ℤ,
+          IsIso (ε.app ((HomotopyCategory.quotient A₀ (.up ℤ)).obj P)) →
+            IsIso (β.app P) := by
+  let q := HomotopyCategory.quotient A₀ (.up ℤ)
+  let H := E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  let α := (Functor.associator q DerivedCategory.Qh T).hom ≫ Functor.whiskerLeft q ε
+  have : T.IsRightKanExtension α := kan_precomp q DerivedCategory.Qh T H ε
+  let i := DerivedCategory.quotientCompQhIso A₀
+  let j : q ⋙ H ≅ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    (Functor.associator _ _ _).symm ≪≫
+      Functor.isoWhiskerRight (E.mapHomotopyCategoryFactors (.up ℤ)) _ ≪≫
+      Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso B₀)
+  let β : DerivedCategory.Q ⋙ T ⟶
+      E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+    Functor.whiskerRight i.inv T ≫ α ≫ j.hom
+  refine ⟨β, kan_change T i j α, ?_⟩
+  intro P hP
+  have := hP
+  dsimp [β, α]
+  infer_instance
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem resolving_derived_cochain
+    {M E : Type*} [Category M] [Abelian M] [HasDerivedCategory M]
+    [Category E] [Abelian E] [HasDerivedCategory E]
+    (T : M ⥤ E) [T.Additive] (S₀ : CochainComplex M ℤ → Prop)
+    (hres₀ : ∀ P : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (f : K ⟶ P), S₀ K ∧ QuasiIso f)
+    (hT : ∀ {P P' : CochainComplex M ℤ} (f : P ⟶ P'), S₀ P →
+      S₀ P' → QuasiIso f →
+        QuasiIso ((T.mapHomologicalComplex (.up ℤ)).map f)) :
+    ∃ (LT : DerivedCategory M ⥤ DerivedCategory E)
+      (β : DerivedCategory.Q ⋙ LT ⟶ T.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q),
+      LT.IsLeftDerivedFunctor β (HomologicalComplex.quasiIso M (.up ℤ)) ∧
+        ∀ P : CochainComplex M ℤ, S₀ P → IsIso (β.app P) := by
+  let q := HomotopyCategory.quotient M (.up ℤ)
+  let H := T.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
+  let S : Set (HomotopyCategory M (.up ℤ)) :=
+    {X | ∃ P : CochainComplex M ℤ, S₀ P ∧ q.obj P = X}
+  have hres (X : HomotopyCategory M (.up ℤ)) :
+      ∃ (Y : HomotopyCategory M (.up ℤ)) (f : Y ⟶ X),
+        Y ∈ S ∧ HomotopyCategory.quasiIso M (.up ℤ) f := by
+    obtain ⟨P, rfl⟩ := HomotopyCategory.quotient_obj_surjective X
+    obtain ⟨K, f, hK, hf⟩ := hres₀ P
+    exact ⟨q.obj K, q.map f, ⟨K, hK, rfl⟩,
+      (HomotopyCategory.quotient_map_mem_quasiIso_iff f).2 hf⟩
+  have hinv (X Y : HomotopyCategory M (.up ℤ)) (f : X ⟶ Y)
+      (hX : X ∈ S) (hY : Y ∈ S)
+      (hf : HomotopyCategory.quasiIso M (.up ℤ) f) : IsIso (H.map f) := by
+    obtain ⟨P, hP, rfl⟩ := hX
+    obtain ⟨P', hP', rfl⟩ := hY
+    obtain ⟨g, rfl⟩ := q.map_surjective f
+    have hg := (HomotopyCategory.quotient_map_mem_quasiIso_iff g).1 hf
+    have ht := hT g hP hP' hg
+    change IsIso (DerivedCategory.Qh.map
+      ((HomotopyCategory.quotient E (.up ℤ)).map
+        ((T.mapHomologicalComplex (.up ℤ)).map g)))
+    exact Localization.inverts DerivedCategory.Qh
+      (HomotopyCategory.quasiIso E (.up ℤ)) _
+      ((HomotopyCategory.quotient_map_mem_quasiIso_iff _).2 ht)
+  obtain ⟨_, LT, ε, hu, _, hc⟩ :=
+    Functor.leftDerived_from_resolvingClass M (DerivedCategory E) H S hres hinv
+  have : LT.IsLeftDerivedFunctor ε (HomotopyCategory.quasiIso M (.up ℤ)) := hu
+  have : LT.IsRightKanExtension ε :=
+    Functor.IsLeftDerivedFunctor.isRightKanExtension LT ε
+      (HomotopyCategory.quasiIso M (.up ℤ))
+  obtain ⟨β, hβ, hcomp⟩ := cochain_derived_counit T LT ε
+  exact ⟨LT, β, ⟨hβ⟩, fun P hP ↦ hcomp P (hc (q.obj P) ⟨P, hP, rfl⟩)⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem change_preserves_kFlat_quasiIso
+    {R S : Sheaf J CommRingCat.{u}}
+    (φ : R ⟶ S) {P P' : Cx R} (f : P ⟶ P')
+    (hP : P.IsAcyclicTensorKFlat) (hP' : P'.IsAcyclicTensorKFlat) (hf : QuasiIso f) :
+    QuasiIso (((change φ).mapHomologicalComplex (.up ℤ)).map f) := by
+  let := HasDerivedCategory.standard (Mod R)
+  let := HasDerivedCategory.standard (Mod S)
+  let d := derivedExtension φ
+  have : IsIso (d.comparison.app P) := d.computation P hP
+  have : IsIso (d.comparison.app P') := d.computation P' hP'
+  have : IsIso ((Q R).map f) := (DerivedCategory.isIso_Q_map_iff_quasiIso (Mod R) f).2 hf
+  have h := d.comparison.naturality f
+  dsimp only [Functor.comp_map] at h
+  apply (DerivedCategory.isIso_Q_map_iff_quasiIso (Mod S) _).1
+  have : IsIso (d.comparison.app P ≫ (Q S).map
+      (((change φ).mapHomologicalComplex (.up ℤ)).map f)) := by
+    rw [← h]
+    infer_instance
+  exact IsIso.of_isIso_comp_left (d.comparison.app P) _
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_tower_unit
+    {A₀ A₁ D₀ D₁ : Type*}
+    [Category A₀] [Category A₁] [Category D₀] [Category D₁]
+    (q : A₀ ⥤ D₀) (q' : A₁ ⥤ D₁) (W : MorphismProperty A₀)
+    [q.IsLocalization W] {G T : A₀ ⥤ A₁} {F : A₁ ⥤ A₀}
+    (ν : 𝟭 A₀ ⟶ G ⋙ F) (η : G ⟶ T) (DG LT : D₀ ⥤ D₁) (RF : D₁ ⥤ D₀)
+    (α : q ⋙ DG ≅ G ⋙ q') (β : q ⋙ LT ⟶ T ⋙ q')
+    [LT.IsLeftDerivedFunctor β W] (γ : F ⋙ q ⟶ q' ⋙ RF) :
+    ∃ unit : 𝟭 D₀ ⟶ LT ⋙ RF,
+      ∀ X, unit.app (q.obj X) ≫ RF.map (β.app X) =
+        q.map (ν.app X ≫ F.map (η.app X)) ≫ γ.app (T.obj X) := by
+  have : (DG ⋙ RF).IsLeftDerivedFunctor
+      ((Functor.associator q DG RF).inv ≫ Functor.whiskerRight α.hom RF) W :=
+    Functor.isLeftDerivedFunctor_of_inverts W _
+      ((Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight α RF)
+  let δ := (Functor.associator q DG RF).inv ≫ Functor.whiskerRight α.hom RF
+  let θ := q.rightUnitor.hom ≫ q.leftUnitor.inv ≫ Functor.whiskerRight ν q ≫
+    (Functor.associator G F q).hom ≫ Functor.whiskerLeft G γ ≫
+      (Functor.associator G q' RF).inv
+  let u := (DG ⋙ RF).leftDerivedLift δ W (𝟭 D₀) θ
+  let t := LT.leftDerivedLift β W DG (α.hom ≫ Functor.whiskerRight η q')
+  refine ⟨u ≫ Functor.whiskerRight t RF, ?_⟩
+  intro X
+  change (u.app (q.obj X) ≫ RF.map (t.app (q.obj X))) ≫ RF.map (β.app X) = _
+  rw [Category.assoc, ← RF.map_comp,
+    LT.leftDerived_fac_app β W DG (α.hom ≫ Functor.whiskerRight η q') X]
+  change u.app (q.obj X) ≫ RF.map (α.hom.app X ≫ q'.map (η.app X)) = _
+  have hu : u.app (q.obj X) ≫ RF.map (α.hom.app X) =
+      q.map (ν.app X) ≫ γ.app (G.obj X) := by
+    have hfac := (DG ⋙ RF).leftDerived_fac_app δ W (𝟭 D₀) θ X
+    change u.app (q.obj X) ≫ (𝟙 _ ≫ RF.map (α.hom.app X)) =
+      𝟙 _ ≫ 𝟙 _ ≫ q.map (ν.app X) ≫ 𝟙 _ ≫ γ.app (G.obj X) ≫ 𝟙 _ at hfac
+    simpa only [Category.id_comp, Category.comp_id] using hfac
+  rw [RF.map_comp, ← Category.assoc, hu]
+  have hn := γ.naturality (η.app X)
+  change q.map (F.map (η.app X)) ≫ γ.app (T.obj X) =
+    γ.app (G.obj X) ≫ RF.map (q'.map (η.app X)) at hn
+  rw [Category.assoc, ← hn, ← Category.assoc, ← q.map_comp]
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem module_kFlat_resolution {R : Sheaf J CommRingCat.{u}} (P : Cx R) :
+    ∃ (K : Cx R) (f : K ⟶ P), K.IsAcyclicTensorKFlat ∧ QuasiIso f := by
+  obtain ⟨K, f, hK, _, hf, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients P
+  exact ⟨K, f, (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat K).1 hK, hf⟩
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem reductionTower_preserves_kFlat_quasiIso (b : Bool)
+    {P P' : Cx (coefficients J A I b)} (f : P ⟶ P')
+    (hP : P.IsAcyclicTensorKFlat) (hP' : P'.IsAcyclicTensorKFlat) (hf : QuasiIso f) :
+    QuasiIso (((reductionTower J A I b).mapHomologicalComplex (.up ℤ)).map f) := by
+  apply (HomologicalComplex.quasiIso_iff_evaluation _).2
+  intro n
+  have he := change_preserves_kFlat_quasiIso J (finiteMap J A I b n.unop) f hP hP' hf
+  have := (siteRestrictScalars_exact (finiteMap J A I b n.unop)).1
+  have := (siteRestrictScalars_exact (finiteMap J A I b n.unop)).2
+  exact inferInstanceAs (QuasiIso
+    (((res (finiteMap J A I b n.unop)).mapHomologicalComplex (.up ℤ)).map
+      (((change (finiteMap J A I b n.unop)).mapHomologicalComplex (.up ℤ)).map f)))
+
+/-- The canonical complex-limit unit, chosen by its unique projection formula. -/
+private def towerOrdinaryUnit {M : Type*} [Category M] [Preadditive M]
+    [HasLimitsOfShape ℕᵒᵖ M] (T : M ⥤ ℕᵒᵖ ⥤ M) [T.PreservesZeroMorphisms]
+    [(lim : (ℕᵒᵖ ⥤ M) ⥤ M).PreservesZeroMorphisms]
+    (η : Functor.const ℕᵒᵖ ⟶ T) (P : CochainComplex M ℤ) :
+    P ⟶ (complexLimitFunctor M).obj ((T.mapHomologicalComplex (.up ℤ)).obj P) :=
+  (complexLimitUnit T η P).exists.choose
+
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+private theorem derived_tower_presentation
+    {M : Type*} [Category M] [Abelian M] [HasDerivedCategory M]
+    [HasDerivedCategory (ℕᵒᵖ ⥤ M)] [HasLimitsOfShape ℕᵒᵖ M]
+    [(lim : (ℕᵒᵖ ⥤ M) ⥤ M).Additive]
+    (T : M ⥤ ℕᵒᵖ ⥤ M) [T.Additive]
+    (η : (Functor.const ℕᵒᵖ : M ⥤ ℕᵒᵖ ⥤ M) ⟶ T)
+    (S₀ : CochainComplex M ℤ → Prop)
+    (hres : ∀ P : CochainComplex M ℤ,
+      ∃ (K : CochainComplex M ℤ) (f : K ⟶ P), S₀ K ∧ QuasiIso f)
+    (hT : ∀ {P P' : CochainComplex M ℤ} (f : P ⟶ P'), S₀ P → S₀ P' →
+      QuasiIso f → QuasiIso ((T.mapHomologicalComplex (.up ℤ)).map f))
+    (RF : DerivedCategory (ℕᵒᵖ ⥤ M) ⥤ DerivedCategory M)
+    (γ : complexLimitFunctor M ⋙ DerivedCategory.Q ⟶ DerivedCategory.Q ⋙ RF) :
+    ∃ (LT : DerivedCategory M ⥤ DerivedCategory (ℕᵒᵖ ⥤ M))
+      (β : DerivedCategory.Q ⋙ LT ⟶ T.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+      (unit : 𝟭 (DerivedCategory M) ⟶ LT ⋙ RF),
+      LT.IsLeftDerivedFunctor β (HomologicalComplex.quasiIso M (.up ℤ)) ∧
+      (∀ P : CochainComplex M ℤ, S₀ P → IsIso (β.app P)) ∧
+      (∀ P : CochainComplex M ℤ,
+        unit.app (DerivedCategory.Q.obj P) ≫ RF.map (β.app P) =
+          DerivedCategory.Q.map (towerOrdinaryUnit T η P) ≫
+            γ.app ((T.mapHomologicalComplex (.up ℤ)).obj P)) := by
+  obtain ⟨LT, β, hu, hc⟩ := resolving_derived_cochain T S₀ hres hT
+  have : LT.IsLeftDerivedFunctor β (HomologicalComplex.quasiIso M (.up ℤ)) := hu
+  let G : M ⥤ ℕᵒᵖ ⥤ M := Functor.const ℕᵒᵖ
+  let ηC := NatTrans.mapHomologicalComplex η (.up ℤ)
+  let ν : 𝟭 (CochainComplex M ℤ) ⟶
+      G.mapHomologicalComplex (.up ℤ) ⋙ complexLimitFunctor M :=
+    { app := fun P ↦
+        { f := fun q ↦ constLimAdj.unit.app (P.X q)
+          comm' := fun i j _ ↦ (constLimAdj.unit.naturality (P.d i j)).symm }
+      naturality := fun P P' f ↦ by
+        ext q
+        exact constLimAdj.unit.naturality (f.f q) }
+  obtain ⟨unit, hunit⟩ := derived_tower_unit DerivedCategory.Q DerivedCategory.Q
+    (HomologicalComplex.quasiIso M (.up ℤ))
+    ν ηC
+    G.mapDerivedCategory LT RF G.mapDerivedCategoryFactors β γ
+  refine ⟨LT, β, unit, hu, hc, ?_⟩
+  intro P
+  have hord : ν.app P ≫
+      (complexLimitFunctor M).map (ηC.app P) = towerOrdinaryUnit T η P := by
+    apply (complexLimitUnit T η P).unique
+    · intro q n
+      change (limit.lift _ { pt := P.X q, π := 𝟙 _ } ≫
+        limMap (η.app (P.X q))) ≫ limit.π _ (op n) = _
+      rw [Category.assoc, limMap_π, limit.lift_π_assoc]
+      change 𝟙 _ ≫ _ = _
+      rw [Category.id_comp]
+    · exact (complexLimitUnit T η P).exists.choose_spec
+  have h := hunit P
+  change unit.app (DerivedCategory.Q.obj P) ≫ RF.map (β.app P) =
+    DerivedCategory.Q.map
+      (ν.app P ≫
+        (complexLimitFunctor M).map (ηC.app P)) ≫
+      γ.app ((T.mapHomologicalComplex (.up ℤ)).obj P) at h
+  rw [hord] at h
+  exact h
+
 /-- The universal derived-tower laws and the actual quotient-unit computation.
 Naming this predicate keeps the dependent record small; its normalization is unchanged.
 Source: Stacks 099M, 06YY, 0940
@@ -1394,6 +1709,11 @@ structure QuotientPresentation (b : Bool) where
   unit : 𝟭 (D (coefficients J A I b)) ⟶ tower ⋙ rlim (coefficients J A I b)
   laws : QuotientPresentationLaws J A I b tower comparison unit
 
+section
+
+attribute [local irreducible] HasDerivedCategory.standard
+
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Strict diagram K-flat replacements and the universal derived limit supply this pair.
 Source: Stacks 06YY, 0940, 099M
 (blueprint: lem-weil-pbc-constant-completion-equivalence).
@@ -1404,12 +1724,33 @@ Apply total right derived limit to its strict quotient units. Their naturality a
 invariance under quasi-isomorphisms descend the unit to D(O). The comparison square is
 its construction, and determines it because every object has such a representative. -/
 theorem quotientPresentation_exists (b : Bool) : Nonempty (QuotientPresentation J A I b) := by
-  sorry
+  let O := coefficients J A I b
+  let := HasDerivedCategory.standard (Mod O)
+  let := HasDerivedCategory.standard (ℕᵒᵖ ⥤ Mod O)
+  have : (lim : (ℕᵒᵖ ⥤ Mod O) ⥤ Mod O).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  let hp :=
+    derived_tower_presentation (M := Mod O) (reductionTower J A I b) (reductionUnit J A I b)
+      (fun P ↦ P.IsAcyclicTensorKFlat) (module_kFlat_resolution J)
+      (reductionTower_preserves_kFlat_quasiIso J A I b) (rlim O) (limitComparison O)
+  let LT := hp.choose
+  let β := hp.choose_spec.choose
+  let unit := hp.choose_spec.choose_spec.choose
+  have hlaws := hp.choose_spec.choose_spec.choose_spec
+  refine ⟨{ tower := LT, comparison := β, unit := unit, laws := ⟨hlaws.1, ?_, ?_⟩ }⟩
+  · intro P hP _
+    exact hlaws.2.1 P hP
+  · intro P _ _
+    exact hlaws.2.2 P
+
+end
 
 /-- Choose the universally specified reduction tower and normalized unit.
 Source: Stacks 099M (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
 def quotientPresentation (b : Bool) : QuotientPresentation J A I b :=
   Classical.choice (quotientPresentation_exists J A I b)
+
+attribute [local irreducible] quotientPresentation
 
 /-- Quotient-tower derived completion, using total right derived inverse limit.
 Source: Stacks 099M (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -2177,7 +2518,8 @@ theorem pulledProjection_naturality (A : Type u) [CommRing A] (I : Ideal A)
         transition J' A I k at hnat
     have hproj : projection J A I (k + 1) ≫ transition J A I k =
         projection J A I k := by
-      simpa only [projection, finiteSystem, Functor.ofOpSequence_map_homOfLE_succ] using
+      unfold projection completed
+      simpa only [finiteSystem, Functor.ofOpSequence_map_homOfLE_succ] using
         limit.w (finiteSystem J A I) (homOfLE (Nat.le_succ k)).op
     calc
       _ = F.rings.map (projection J A I (k + 1) ≫ transition J A I k) ≫
@@ -2188,6 +2530,8 @@ theorem pulledProjection_naturality (A : Type u) [CommRing A] (I : Ideal A)
     (G := finiteSystem J' A I)
     (fun k ↦ F.rings.map (projection J A I k) ≫
       (F.constants.app (CommRingCat.of (A ⧸ I ^ (k + 1)))).hom) hstep).naturality f
+
+attribute [local semireducible] completed
 
 /-- The canonical map from the inverse image of the completed coefficient sheaf to the
 completion on the second site, formed from its finite projections.
@@ -2200,6 +2544,8 @@ def completedMap (A : Type u) [CommRing A] (I : Ideal A) :
         { app := fun n ↦ F.rings.map (projection J A I n.unop) ≫
             (F.constants.app (CommRingCat.of (A ⧸ I ^ (n.unop + 1)))).hom
           naturality := fun {m n} f ↦ pulledProjection_naturality F A I (m := m) (n := n) f } }
+
+attribute [local irreducible] completed
 
 /-- Module inverse image followed by the existing sheafified scalar extension.
 Source: Stacks 03D2, 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
@@ -2273,110 +2619,6 @@ structure DerivedPull {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
-/-- Precomposition by a fully faithful whiskering functor preserves the terminal
-right-extension universal property. Construct its lifts by taking preimages. -/
-private theorem kan_precomp
-    {A B D H : Type*} [Category A] [Category B] [Category D] [Category H]
-    (P : A ⥤ B) (Q : B ⥤ D) (T : D ⥤ H) (G : B ⥤ H) (ε : Q ⋙ T ⟶ G)
-    [((Functor.whiskeringLeft A B H).obj P).Full]
-    [((Functor.whiskeringLeft A B H).obj P).Faithful]
-    [T.IsRightKanExtension ε] :
-    T.IsRightKanExtension
-      ((Functor.associator P Q T).hom ≫ Functor.whiskerLeft P ε) := by
-  let K := (Functor.whiskeringLeft A B H).obj P
-  let lift (s : Functor.RightExtension (P ⋙ Q) (P ⋙ G)) : s.left ⟶ T :=
-    T.liftOfIsRightKanExtension ε s.left
-      (K.preimage ((Functor.associator P Q s.left).inv ≫ s.hom))
-  have fac (s : Functor.RightExtension (P ⋙ Q) (P ⋙ G)) :
-      Functor.whiskerLeft (P ⋙ Q) (lift s) ≫
-        ((Functor.associator P Q T).hom ≫ Functor.whiskerLeft P ε) = s.hom := by
-    as_aux_lemma =>
-      apply NatTrans.ext
-      funext X
-      have h := congrArg (fun t ↦ t.app (P.obj X))
-        (T.liftOfIsRightKanExtension_fac ε s.left
-          (K.preimage ((Functor.associator P Q s.left).inv ≫ s.hom)))
-      have hp := congrArg (fun t ↦ t.app X)
-        (K.map_preimage ((Functor.associator P Q s.left).inv ≫ s.hom))
-      change (lift s).app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) = _
-      rw [Category.id_comp]
-      exact (h.trans hp).trans (Category.id_comp _)
-  clear_value lift
-  refine ⟨⟨IsTerminal.ofUniqueHom
-    (fun s ↦ CostructuredArrow.homMk (lift s) (fac s)) ?_⟩⟩
-  as_aux_lemma =>
-    intro s m
-    apply CostructuredArrow.hom_ext
-    apply T.hom_ext_of_isRightKanExtension ε
-    apply K.map_injective
-    have h := CostructuredArrow.w m
-    apply NatTrans.ext
-    funext X
-    have h' := congrArg (fun t ↦ t.app X) h
-    have h'' := congrArg (fun t ↦ t.app X) (fac s)
-    have hh := h'.trans h''.symm
-    change m.left.app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) = _ at hh
-    rw [Category.id_comp] at hh
-    change _ = (lift s).app (Q.obj (P.obj X)) ≫ (𝟙 _ ≫ ε.app (P.obj X)) at hh
-    rw [Category.id_comp] at hh
-    exact hh
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-/-- Transport a right Kan extension across isomorphisms of its source diagram and target. -/
-private theorem kan_change
-    {A D H : Type*} [Category A] [Category D] [Category H]
-    {Q Q' : A ⥤ D} {G G' : A ⥤ H} (T : D ⥤ H)
-    (i : Q ≅ Q') (j : G ≅ G') (ε : Q ⋙ T ⟶ G)
-    [T.IsRightKanExtension ε] :
-    T.IsRightKanExtension (Functor.whiskerRight i.inv T ≫ ε ≫ j.hom) := by
-  let Φ := Functor.rightExtensionEquivalenceOfIso₁ i G
-  have ht := (IsTerminal.isTerminalIffObj Φ.functor
-    (Functor.RightExtension.mk T ε)).1 (T.isUniversalOfIsRightKanExtension ε)
-  have hε : T.IsRightKanExtension (Functor.whiskerRight i.inv T ≫ ε) := ⟨⟨ht⟩⟩
-  exact (Functor.isRightKanExtension_iff_of_iso₂
-    (Functor.whiskerRight i.inv T ≫ ε)
-    (Functor.whiskerRight i.inv T ≫ ε ≫ j.hom) j (Iso.refl T) (by simp)).1 hε
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
-/-- Transport a homotopy-level derived counit to complexes, with abstract categories.
-The quotient comparison is invertible, so the transport preserves every computation
-component that is already an isomorphism. -/
-private theorem cochain_derived_counit
-    {A₀ B₀ : Type*} [Category A₀] [Category B₀] [Abelian A₀] [Abelian B₀]
-    [HasDerivedCategory A₀] [HasDerivedCategory B₀]
-    (E : A₀ ⥤ B₀) [E.Additive]
-    (T : DerivedCategory A₀ ⥤ DerivedCategory B₀)
-    (ε : DerivedCategory.Qh ⋙ T ⟶ E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
-    [T.IsRightKanExtension ε] :
-    ∃ β : DerivedCategory.Q ⋙ T ⟶
-        E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q,
-      T.IsRightKanExtension β ∧
-        ∀ P : CochainComplex A₀ ℤ,
-          IsIso (ε.app ((HomotopyCategory.quotient A₀ (.up ℤ)).obj P)) →
-            IsIso (β.app P) := by
-  let q := HomotopyCategory.quotient A₀ (.up ℤ)
-  let H := E.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh
-  let α := (Functor.associator q DerivedCategory.Qh T).hom ≫ Functor.whiskerLeft q ε
-  have : T.IsRightKanExtension α := kan_precomp q DerivedCategory.Qh T H ε
-  let i := DerivedCategory.quotientCompQhIso A₀
-  let j : q ⋙ H ≅ E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
-    (Functor.associator _ _ _).symm ≪≫
-      Functor.isoWhiskerRight (E.mapHomotopyCategoryFactors (.up ℤ)) _ ≪≫
-      Functor.associator _ _ _ ≪≫
-      Functor.isoWhiskerLeft _ (DerivedCategory.quotientCompQhIso B₀)
-  let β : DerivedCategory.Q ⋙ T ⟶
-      E.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
-    Functor.whiskerRight i.inv T ≫ α ≫ j.hom
-  refine ⟨β, kan_change T i j α, ?_⟩
-  intro P hP
-  have := hP
-  dsimp [β, α]
-  infer_instance
-
-set_option backward.isDefEq.respectTransparency false in
-set_option backward.isDefEq.respectTransparency.types false in
 /-- The recorded K-flat derived-pullback theorem supplies this universal derived pair.
 Source: Stacks 06YY, 0G7E (blueprint: lem-weil-pbc-constant-completion-equivalence).
 Proof: apply ringedTopoiDerivedPullback to the supplied geometric adjunction and algebraic
@@ -2416,6 +2658,8 @@ Source: Stacks 06YY (blueprint: lem-weil-pbc-constant-completion-equivalence). -
 def derivedPull {R : Sheaf J CommRingCat.{u}} {S : Sheaf J' CommRingCat.{u}}
     (c : F.rings.obj R ⟶ S) : DerivedPull F c :=
   Classical.choice (derivedPull_exists F V adj c)
+
+attribute [local irreducible] derivedPull
 
 /-- The canonical constant-coefficient structural isomorphism.
 Source: Stacks 099L (blueprint: lem-weil-pbc-constant-completion-equivalence). -/
