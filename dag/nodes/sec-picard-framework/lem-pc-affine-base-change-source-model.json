@@ -109,14 +109,15 @@
  "unit": "sk-thm-picard-semicon",
  "lean_audit": {},
  "lean": {
-  "existing": false,
-  "module": "Sheaf.Algebra.Homology.AffineBaseChangeSourceModel",
-  "file": "lean/Sheaf/Algebra/Homology/AffineBaseChangeSourceModel.lean",
+  "existing": true,
+  "module": "WeilConjectures.Algebra.Homology.AffineBaseChangeSourceModel",
+  "file": "lean/WeilConjectures/Algebra/Homology/AffineBaseChangeSourceModel.lean",
   "declaration": "AlgebraicGeometry.exists_affineBaseChangeSourceModel",
-  "statement": "theorem exists_affineBaseChangeSourceModel (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A'] (φf : R →+* A) (φg : R →+* R') (φg' : A →+* A') (φf' : R' →+* A') (sq : IsPullback (Spec.map (CommRingCat.ofHom φg')) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φg))) (K : schemeDerivedCategory (Spec (.of A))) (hK : schemeDerivedQCohProperty (Spec (.of A)) K) (hL : schemeDerivedQCohProperty (Spec (.of A')) ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K)) (P : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (hP : P.IsAcyclicTensorKFlat) (e : DerivedCategory.Q.obj P ≅ K) (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (i : ℤ) : ∃ d : affineDerivedCohomologyModules A' i ⋙ (ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R')) ≅ (schemeDerivedQCohProperty (Spec (.of A'))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf')) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i, let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩ let V := (affineDerivedCohomologyModules A' i).obj L let F := ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R') let H := DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i ∃ (U : ModuleCat.{u} A') (a : U ⟶ V) (eU : F.obj U ≅ H.obj ((derivedPullback (Spec.map (CommRingCat.ofHom φg))).obj ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf))).obj K))), eU.hom ≫ H.map (schemeDerivedBaseChangeMap (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg')) sq.w K) = F.map a ≫ d.hom.app L ∧ ∀ p : PrimeSpectrum A', let r := affineBaseChangeIntoPullback (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg')) sq K P e hc p i ∃ lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk r).left, ∀ x, affineDerivedCohomologyStalkIso A' i p L (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x)",
+  "statement": "theorem exists_affineBaseChangeSourceModel (R A R' A' : Type u) [CommRing R] [CommRing A] [CommRing R'] [CommRing A'] (φf : R →+* A) (φg : R →+* R') (φg' : A →+* A') (φf' : R' →+* A') (sq : IsPullback (Spec.map (CommRingCat.ofHom φg')) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φg))) (K : schemeDerivedCategory (Spec (.of A))) (hK : schemeDerivedQCohProperty (Spec (.of A)) K) (hL : schemeDerivedQCohProperty (Spec (.of A')) ((derivedPullback (Spec.map (CommRingCat.ofHom φg'))).obj K)) (P : CochainComplex (SheafOfModules.{u} (moduleRings (Spec (.of A)).toRingedSpace)) ℤ) (hP : P.IsKFlatTensor) (e : DerivedCategory.Q.obj P ≅ K) (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φg'))).app ((HomotopyCategory.quotient _ (.up ℤ)).obj P))) (i : ℤ) : ∃ d : affineDerivedCohomologyModules A' i ⋙ (ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R')) ≅ (schemeDerivedQCohProperty (Spec (.of A'))).ι ⋙ schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf')) ⋙ DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i, let L : schemeDerivedQCohCategory (Spec (.of A')) := ⟨_, hL⟩ let V := (affineDerivedCohomologyModules A' i).obj L let F := ModuleCat.restrictScalars φf' ⋙ tilde.functor (.of R') let H := DerivedCategory.homologyFunctor (SheafOfModules.{u} (moduleRings (Spec (.of R')).toRingedSpace)) i ∃ (U : ModuleCat.{u} A') (a : U ⟶ V) (eU : F.obj U ≅ H.obj ((derivedPullback (Spec.map (CommRingCat.ofHom φg))).obj ((schemeDerivedDirectImage (Spec.map (CommRingCat.ofHom φf))).obj K))), eU.hom ≫ H.map (schemeDerivedBaseChangeMap (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg')) sq.w K) = F.map a ≫ d.hom.app L ∧ ∀ p : PrimeSpectrum A', let r := affineBaseChangeIntoPullback (Spec.map (CommRingCat.ofHom φf)) (Spec.map (CommRingCat.ofHom φf')) (Spec.map (CommRingCat.ofHom φg)) (Spec.map (CommRingCat.ofHom φg')) sq K P e hc p i ∃ lU : LocalizedModule p.asIdeal.primeCompl U ≃+ (Arrow.mk r).left, ∀ x, affineDerivedCohomologyStalkIso A' i p L (LocalizedModule.map p.asIdeal.primeCompl a.hom x) = r (lU x)",
   "branch": "sheaf-dag",
-  "by": "X2",
-  "date": "2026-10-13"
+  "by": "Q6",
+  "date": "2026-10-22",
+  "note": "Retired the quarantined Sheaf twin in favour of the existing proved official source module. Its IsKFlatTensor hypothesis is definitionally equal to the historical IsAcyclicTensorKFlat hypothesis. Mathematical statement, dependencies and unit route are unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -129,13 +130,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-87b5c",
-  "group": "V3",
+  "reviewer": "C-0b7fe",
+  "group": "Q6",
   "result": "pass",
-  "landing": "20261013T130037-L-3924354",
-  "kind": "interface",
-  "note": "independent Codex review: Lean signatures, unchanged definition body, and proof route match the DAG and change record; remaining lemmas agree with [Stacks 0DJ8](https://stacks.math.columbia.edu/tag/0DJ8). All four delivered modules and direct importer Sheaf.Algebra.Homology.AffineBaseChangeCohomologyModel compile cleanly; axioms conform."
+  "landing": "20261021T203719-L-3858263",
+  "kind": "proof",
+  "note": "independent cc review: node lem-pc-affine-base-change-source-model lean record (existing:true) with the official proved theorem in WeilConjectures.Algebra.Homology.AffineBaseChangeSourceModel (statement equal after whitespace normalization, axioms clean); no importers of the retired Sheaf path in lean/ or quarantine/"
  }
 }
