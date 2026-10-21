@@ -23,9 +23,10 @@
  ],
  "proof": [
   {
-   "text": "For module sheaves $M_n$ on $U$, apply the existing ringed sheaf-product theorem to the small family indexed by $\\mathbf N$. It gives the natural isomorphism $\\phi_M:j_!(\\prod_nM_n)\\xrightarrow{\\sim}\\prod_nj_!M_n$ whose $n$th component is $j_!(\\mathrm{pr}_n)$. Its hypotheses hold for the present quasi-compact open immersion and arbitrary ring sheaf $R$, with restricted ring $R_U=j^{-1}R$. In particular it requires neither that $X$ be quasi-compact and quasi-separated nor that $R$ be constant. Naturality in maps of families will allow this comparison to be used degreewise in complexes.",
+   "text": "Apply proEtaleRingedExtensionByZero_products to families indexed by ULift N in the module universe and transfer preservation along the discrete equivalence to N. The resulting comparison has components j_!(pr_n). The unit of the extension/restriction adjunction is invertible, so j_! is fully faithful. Its finite-limit and finite-colimit preservation supply additivity and exactness.",
    "uses": [
-    "lem-cbc-ringed-open-extension-products"
+    "lem-cbc-ringed-open-extension-products",
+    "lem-weil-pbc-proetale-ringed-open-closed"
    ],
    "elementary": true,
    "source": {
@@ -34,9 +35,11 @@
    }
   },
   {
-   "text": "Choose complexes $A_n$ representing $C_n$. Apply the preceding comparison in every degree. Its naturality with respect to differentials makes $j_!(\\prod_nA_n)\\to\\prod_nj_!A_n$ an isomorphism of complexes, with precisely the termwise image projections. By the derived-product theorem for arbitrary ring sheaves on the pro-etale site, these termwise products represent the products in both unbounded derived categories, with their specified projections. Exactness of $j_!$ gives its termwise triangulated derived functor $J$. Localizing the complex comparison therefore gives the canonical isomorphism $\\Phi:J(\\prod_nC_n)\\xrightarrow{\\sim}\\prod_nJC_n$, characterized by $q_n\\Phi=J(\\mathrm{pr}_n)$. This characterization also makes it independent of the representing complexes.",
+   "text": "Use det-pe-products-exact for the ambient category B. Because j_!:A -> B is fully faithful, it reflects finite colimits; it preserves finite colimits and countable products. Mathlib HasExactLimitsOfShape.domain_of_functor therefore transfers exact countable products to A, avoiding any new slice-site comparison. Both A and B are Grothendieck abelian by the existing universe-compatible module-sheaf theorem, hence have K-injective resolutions and derived products. For an exact product-preserving functor F, evaluation in each degree proves preservation by F_complex. The source-library DerivedCategory.isLimitFanQ and its preservation instance identify the localized termwise product fans with derived products. The factorization Q_A followed by D(F) is naturally isomorphic to F_complex followed by Q_B, so it preserves these fans. For arbitrary derived families choose complex representatives using essential surjectivity of Q_A and transfer preservation along their isomorphisms. The proved private helper derived_preserves_products carries out this argument. Apply it to j_! and take PreservesProduct.iso; its hom is piComparison, normalized on every projection.",
    "uses": [
-    "det-pe-products-derived",
+    "det-pe-products-exact",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sfb-grothendieck-k-injective",
     "lem-weil-pbc-proetale-ringed-open-closed",
     "lem-sf-exact-functor-derived-triangulated",
     "def-weil-category-product"
@@ -44,7 +47,7 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), combined with det-pe-products-derived and the preceding sheaf comparison"
+    "place": "lemma-products (termwise computation of derived products) and Tag 015F (lemma-right-derived-exact-functor); implemented by the existing source-library TowerLimit API"
    }
   },
   {
@@ -78,15 +81,17 @@
   "def-weil-category-product",
   "def-weil-derived-limit",
   "def-weil-triangulated-category",
-  "det-pe-products-derived",
+  "det-pe-products-exact",
   "lem-cbc-ringed-open-extension-products",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-proetale-ringed-open-closed"
+  "lem-sfb-grothendieck-k-injective",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "lem-weil-pbc-ring-sheaves-grothendieck"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.1.13; ringed product proof from Stacks Tags 09BP, 09AH and 09AA, followed by the explicit Roos coordinate calculation"
+  "document": "literature/stacks-project/derived.tex",
+  "place": "lemma-products and Tags 015F, 08TC; exact products transferred to the slice by fully faithful extension by zero, with the product comparison from Stacks Tag 09BP; Lean proof by T3, 2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -204,8 +209,7 @@
  },
  "tool_uses": [
   "lem-cbc-ringed-open-extension-products",
-  "lem-weil-pbc-proetale-ringed-open-closed",
-  "det-pe-products-derived"
+  "lem-weil-pbc-proetale-ringed-open-closed"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -238,5 +242,15 @@
   "group": "Q76",
   "result": "pass",
   "note": "Clause-by-clause match to node: closed immersion + complementary qc open as U:X.ProEt with hU (same presentation as recorded proEtale_ringed_open_closed), arbitrary R, localized open module category, J = mapDerivedCategory of recorded proEtaleRingedExtensionByZero (only Prop instances extracted from the dependency's ∃, not hollow, no duplicate), phi.hom = piComparison with projections, J(1-s)=1-s_J transition identity, transported IsDerivedLimitTriangle with phi.inv ≫ J δ ≫ commShiftIso, first-arrow components; HasCountableProducts in conclusion (Prop, true by det-pe-products-derived). Statement verbatim; decls map to stmt_deps (towerTransitionEndomorphism via def-weil-derived-limit closure: advisory). Node equals side-live except lean. Docstrings/source/blueprint/proof plan ok; one sorry. nt_compile --json clean, 51.2 s at load avg 202 (worker 6 s). Edge cases U=∅, U=X, zero ring, zero transitions covered."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T3",
+  "result": "pass",
+  "landing": "20261021T120539-L-3908365",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
