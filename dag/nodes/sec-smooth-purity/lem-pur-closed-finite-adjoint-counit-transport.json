@@ -20,9 +20,110 @@
   "def-weil-exceptional-inverse-image",
   "lem-exc-closed-support-triangle"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "The field $k$ is Noetherian (its ideals are $0$ and $k$), and [lem-weil-pbc-finite-type-over-noetherian] makes $X,Z$ Noetherian. On ordinary constant-$A$ module sheaves, [lem-trf-oriented-closed-base-localization] gives exact closed direct image $F=i_{\\mathrm{et},*}$. By [lem-sf-exact-functor-derived-triangulated], its total unbounded right derived functor is canonically its termwise descent: an exact functor preserves kernels, images and hence cohomology and quasi-isomorphisms. The localization universal property [lem-weil-pbc-localization-universal-property] identifies this descent with the total right derived functor: its comparison is already invertible before any resolution, and natural transformations out of either functor are the same transformations after localization. For $c=(\\operatorname{id}_Z,i)$, [def-amb-etale-compact-support] gives $Ri_!^c=Ri_{\\mathrm{et},*}D(\\operatorname{id}_!)$. The presheaf formula in [def-weil-pbc-extension-by-zero] at the identity is already the given sheaf, so its sheafification and derived descent are identities. This gives the asserted canonical isomorphisms on the entire unbounded etale category. In the rest of the proof read the compact-support adjunction through this left-functor isomorphism.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-trf-oriented-closed-base-localization",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-amb-etale-compact-support",
+    "def-weil-pbc-extension-by-zero",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor); etale-cohomology.tex Tag 04CA (proposition-closed-immersion-pushforward); sites-modules.tex Tag 08M3 (lemma-i-star-equivalence); identity extension by zero: Tag 03S3"
+   }
+  },
+  {
+   "text": "Write $G=i_c^\\times$, $J=i_{\\mathrm{supp}}^\\times$, and write $\\epsilon^G:FG\\to1$ for the compact-support counit after Step 1. The support adjunction $F\\dashv J$ and its counit $\\epsilon^J$ are those of [lem-exc-closed-support-triangle]. Apply [det-sp-unique-right-adjoint] to these two adjunctions of the same unbounded etale functor $F$. It gives a unique natural isomorphism $\\gamma:G\\xrightarrow{\\sim}J$ characterized, for every $M$, by $\\epsilon^J_M\\circ F(\\gamma_M)=\\epsilon^G_M$. This proves the first right-adjoint and counit assertion without restricting to constructible or bounded objects.",
+   "uses": [
+    "lem-exc-closed-support-triangle",
+    "det-sp-unique-right-adjoint"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-unique-adjoint/sk-prop-sp-unique-adjoint-categorical.md",
+    "place": "The two transpose maps and their counit equation; application to the first localization triangle of sk-prop-a1"
+   }
+  },
+  {
+   "text": "Choose $a$ with $B\\in D^{\\ge a}$. Exactness of $F$ in Step 1 makes $F$ t-exact, since $H^m(FV)=F(H^mV)$ termwise. Put $T=\\tau_{\\le a-1}(JB)$ using the standard truncation of [def-sbc-standard-tstructure-derived-category]. Then $FT\\in D^{\\le a-1}$, so the orthogonality axiom of [def-weil-t-structure] gives $\\operatorname{Hom}(FT,B)=0$. Under $F\\dashv J$, this is $\\operatorname{Hom}(T,JB)=0$. In particular the truncation map $T\\to JB$ is zero. In degrees $m<a$ it induces an isomorphism on cohomology, by the explicit kernel truncation, so $H^m(JB)=0$. Thus $D=JB\\in D^{\\ge a}$; this is a direct truncation argument on the unbounded category, without a cohomological-dimension assumption.",
+   "uses": [
+    "def-sbc-standard-tstructure-derived-category",
+    "def-weil-t-structure"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08J5 (remark-truncation-distinguished-triangle), standard truncation; agent application of adjunction and standard t-structure orthogonality"
+   }
+  },
+  {
+   "text": "Let $\\eta_B:B\\to R\\nu_{X,*}\\nu_X^*B$ be the comparison unit. It is a natural isomorphism on $D^+$ by [thm-weil-pbc-site-comparison]; set $r_B=\\eta_B^{-1}$. Define $E=G R\\nu_{X,*}\\nu_X^*B$ and $\\beta_B=\\gamma_B\\circ G(r_B):E\\xrightarrow{\\sim}JB=D$. Step 3 therefore also makes $E$ bounded below. The definition [def-weil-exceptional-inverse-image] is literally $Ri^!K=\\nu_Z^*E$ for $K=\\nu_X^*B$, so $\\alpha_B=\\nu_Z^*(\\beta_B)$ is the required isomorphism $Ri^!K\\xrightarrow{\\sim}\\nu_Z^*D$. Exact termwise pullback [def-sf-comparison-derived-pullback] preserves the lower bounds. All components are natural in $B$.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "def-weil-exceptional-inverse-image",
+    "def-sf-comparison-derived-pullback"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 5.2.6(1)-(2), p. 37; application to the finite transported definition in def-weil-exceptional-inverse-image"
+   }
+  },
+  {
+   "text": "Closed $i$ is quasi-compact and quasi-separated. For every $H\\in D^+(Z_{\\mathrm{et}},A)$, apply [sk-thm-pe-direct-image-comparison] to get the canonical comparison $\\lambda_H:\\nu_X^*FH\\xrightarrow{\\sim}Ri_{\\mathrm{proet},*}\\nu_Z^*H$. By [lem-exc-proetale-closed-exact] pro-etale $i_*$ is exact on module sheaves; here the quasi-compact open complement is exactly the required hypothesis. Hence, by the argument of Step 1 with [lem-sf-exact-functor-derived-triangulated] and [lem-weil-pbc-localization-universal-property], the latter is termwise $i_*\\nu_Z^*H$. At $c=(\\operatorname{id},i)$ this is also the inverse of the compact-support comparison of [lem-sf-class-compact-support-comparison], since the identity extension contributes no map. For a bounded-below etale $H$ and bounded-below pro-etale $L$, the transported adjunction is the chain\n$$\\operatorname{Hom}(i_*\\nu_Z^*H,L)\\cong\\operatorname{Hom}(\\nu_X^*FH,L)\\cong\\operatorname{Hom}(FH,R\\nu_{X,*}L)\\cong\\operatorname{Hom}(H,GR\\nu_{X,*}L)\\cong\\operatorname{Hom}(\\nu_Z^*H,\\nu_Z^*GR\\nu_{X,*}L).$$\nThe last bijection is comparison full faithfulness in [thm-weil-pbc-site-comparison]; the value is bounded below by the finite definition [def-weil-exceptional-inverse-image]. Expanding these adjunction bijections, the inverse image of the identity of $\\nu_Z^*GR\\nu_{X,*}L$ is\n$$\\epsilon^{\\mathrm{tr}}_L=\\epsilon^\\nu_L\\circ\\nu_X^*(\\epsilon^G_{R\\nu_{X,*}L})\\circ\\lambda_{GR\\nu_{X,*}L}^{-1},$$\nwhere $\\epsilon^\\nu$ is the comparison counit. This is precisely the counit of the finite transported exceptional functor, rather than a claim about adjunction on all pro-etale objects.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "lem-exc-proetale-closed-exact",
+    "lem-sf-class-compact-support-comparison",
+    "thm-weil-pbc-site-comparison",
+    "def-weil-exceptional-inverse-image",
+    "lem-sf-exact-functor-derived-triangulated",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09A6 (lemma-morphism-comparison) and Tag 09BM (lemma-closed-immersion-complement-retrocompact-exact); expanded transported Hom bijections of def-weil-exceptional-inverse-image"
+   }
+  },
+  {
+   "text": "Now take $L=K=\\nu_X^*B$. The comparison triangle identity gives $\\epsilon^\\nu_K\\circ\\nu_X^*(\\eta_B)=1_K$, hence $\\epsilon^\\nu_K=\\nu_X^*(r_B)$. Counit naturality for $F\\dashv G$, followed by the equation of Step 2, gives\n$$r_B\\circ\\epsilon^G_{R\\nu_{X,*}K}=\\epsilon^G_B\\circ FG(r_B)=\\epsilon^J_B\\circ F(\\gamma_B)\\circ FG(r_B)=\\epsilon^J_B\\circ F(\\beta_B).$$\nSubstitute in Step 5 and use naturality of $\\lambda$ at $\\beta_B:E\\to D$:\n$$\\epsilon^{\\mathrm{tr}}_K=\\nu_X^*(\\epsilon^J_B)\\circ\\nu_X^*F(\\beta_B)\\circ\\lambda_E^{-1}=\\nu_X^*(\\epsilon^J_B)\\circ\\lambda_D^{-1}\\circ i_*(\\alpha_B).$$\nThus after identifying $Ri^!K$ with $\\nu_Z^*D$ by $\\alpha_B$ and identifying $\\nu_X^*i_*D$ with $i_*\\nu_Z^*D$ by $\\lambda_D$, its counit is exactly the image of the etale support counit. The equation uses the actual comparison unit and counit and is natural in $B$; every object to which comparison full faithfulness was applied is bounded below by Steps 3--4.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+    "place": "First localization triangle: agent expansion of its closed counit identification by adjunction triangle identity and counit naturality"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-amb-etale-compact-support",
+  "def-sbc-standard-tstructure-derived-category",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-t-structure",
+  "det-sp-unique-right-adjoint",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-proetale-closed-exact",
+  "lem-sf-class-compact-support-comparison",
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-trf-oriented-closed-base-localization",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-localization-universal-property",
+  "sk-thm-pe-direct-image-comparison",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1/sk-prop-a1.proof.md",
+  "place": "First closed-open localization triangle; the ordinary etale compact-support adjoint and its finite comparison counit, expanded using Stacks 015F, 04CA, 08M3, 08J5, 09A6, 09BM and Bhatt-Scholze Proposition 5.2.6."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +159,45 @@
    "results": "CategoryTheory.Adjunction.derived'_counit; CategoryTheory.Adjunction.derivedε_fac_app; CategoryTheory.Adjunction.derived_counit; CategoryTheory.Adjunction.derivedε; CategoryTheory.Adjunction.derivedε_fac_app_assoc; CategoryTheory.Adjunction.derivedη_fac_app; CategoryTheory.Adjunction.derived'_unit; CategoryTheory.Adjunction.derived_unit",
    "date": "2026-10-21",
    "verdict": "no match: these hits do not state this ordinary module-sheaf support/site-comparison assertion"
+  },
+  {
+   "tool": "grep",
+   "query": "rightAdjointUniq|closed.*support|comparison.*counit",
+   "results": "25 hits: Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Unique.lean, Mathlib/CategoryTheory/Adjunction/Triple.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean, Mathlib/CategoryTheory/LocallyCartesianClosed/ExponentiableMorphism.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction uniqueness is already det-sp-unique-right-adjoint; these hits do not state the etale/proetale module-sheaf assertion"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale to proetale comparison pullback commutes with closed immersion direct image and exceptional inverse image counits",
+   "results": "8 hits: CategoryTheory.ExponentiableMorphism.ev, CategoryTheory.Limits.pullbackComparison, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.isPullback_of_isClosedImmersion, AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_pullbackHom, AlgebraicGeometry.IsSeparated.instIsClosedImmersionMapDescScheme, AlgebraicGeometry.Scheme.IdealSheafData.ker_fst_of_isClosedImmersion, AlgebraicGeometry.pullbackRestrictIsoRestrict",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction uniqueness is already det-sp-unique-right-adjoint; these hits do not state the etale/proetale module-sheaf assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.rightAdjointUniq",
+   "results": "12 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_refl, CategoryTheory.Adjunction.rightAdjointUniq_inv_app, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom, CategoryTheory.Adjunction.rightAdjointUniq_trans, CategoryTheory.Adjunction.rightAdjointUniq_trans_app, CategoryTheory.Adjunction.unit_rightAdjointUniq_hom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction uniqueness is already det-sp-unique-right-adjoint; these hits do not state the etale/proetale module-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Transporting two adjunctions with isomorphic left adjoints identifies their right adjoints and counits",
+   "results": "8 hits: CategoryTheory.Adjunction.rightAdjointUniq, CategoryTheory.Adjunction.leftAdjointUniq, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit, CategoryTheory.Adjunction.leftAdjointUniq_hom_counit, CategoryTheory.Adjunction.natIsoOfLeftAdjointNatIso, CategoryTheory.Adjunction.rightAdjointUniq_hom_counit_assoc, CategoryTheory.Adjunction.leftAdjointUniq_hom_app_counit, CategoryTheory.Adjunction.rightAdjointUniq_hom_app_counit",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction uniqueness is already det-sp-unique-right-adjoint; these hits do not state the etale/proetale module-sheaf assertion"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a closed immersion of schemes the etale compact support right adjoint on bounded below classical proetale objects has the same counit as sections with support",
+   "results": "8 hits: AlgebraicGeometry.ΓSpec.adjunction_counit_app', AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.ΓSpec.isIso_adjunction_counit, AlgebraicGeometry.Scheme.kerAdjunction_counit_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.kerAdjunction, AlgebraicGeometry.ΓSpec.locallyRingedSpaceAdjunction_counit, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso",
+   "date": "2026-10-21",
+   "verdict": "no match: generic adjunction uniqueness is already det-sp-unique-right-adjoint; these hits do not state the etale/proetale module-sheaf assertion"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-retracted-support-localization-comparison",
@@ -80,5 +216,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-closed-finite-adjoint-counit-transport",
+  "worker": "stage1",
+  "summary": "Split into exact unbounded closed compact support, counit-normalized right-adjoint uniqueness, explicit truncation lower bound, comparison unit isomorphism, transported Hom bijections, and the explicit counit equation. Reused existing nodes throughout; unchanged statement, no new nodes, no Lean changes.",
+  "blueprint": "prop-pur-affine-line-orientation-uniqueness proof Steps 1 and 3: sk-prop-a1 first closed-open localization triangle; closed adjoint and first counit before applying the retraction.",
+  "tool_uses": [
+   {
+    "node": "def-amb-etale-compact-support",
+    "why": "Generic definition or comparison theorem used at its stated domain to realize the closed localization triangle; it replaces no step of the unit route."
+   },
+   {
+    "node": "def-sf-comparison-derived-pullback",
+    "why": "Generic definition or comparison theorem used at its stated domain to realize the closed localization triangle; it replaces no step of the unit route."
+   },
+   {
+    "node": "def-weil-exceptional-inverse-image",
+    "why": "Generic definition or comparison theorem used at its stated domain to realize the closed localization triangle; it replaces no step of the unit route."
+   },
+   {
+    "node": "def-weil-pbc-extension-by-zero",
+    "why": "Generic definition or comparison theorem used at its stated domain to realize the closed localization triangle; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-exc-closed-support-triangle",
+    "why": "Generic definition or comparison theorem used at its stated domain to realize the closed localization triangle; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-exc-proetale-closed-exact",
+    "why": "Generic definition or comparison theorem used at its stated domain to realize the closed localization triangle; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic definition or comparison theorem used at its stated domain to realize the closed localization triangle; it replaces no step of the unit route."
+   },
+   {
+    "node": "lem-trf-oriented-closed-base-localization",
+    "why": "The module form explicitly gives exact closed etale direct image; the local support triangle only names its derived adjoint."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Canonical bounded-below direct-image comparison, including its normalization, is a generic site-comparison tool."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic definition or comparison theorem used at its stated domain to realize the closed localization triangle; it replaces no step of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-amb-etale-compact-support",
+  "def-sf-comparison-derived-pullback",
+  "def-weil-exceptional-inverse-image",
+  "def-weil-pbc-extension-by-zero",
+  "lem-exc-closed-support-triangle",
+  "lem-exc-proetale-closed-exact",
+  "lem-sf-class-compact-support-comparison",
+  "lem-trf-oriented-closed-base-localization",
+  "sk-thm-pe-direct-image-comparison",
+  "thm-weil-pbc-site-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q84-0a3c23f88",
+  "group": "Q84",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q84-0a3c23f88 (reviewer sub-agent of L); spot-checked: Zero-new-node split. The item statement and stmt_deps are unchanged from the side-live base. There is no re-split note, no dropped listing, no SGA citation and no cycle (closures of all 16 cited nodes checked). Steps 1-6 hold: (1) X and Z are Noetherian via 01T6 over k; trf-oriented-closed-base-localization, module paragraph plus scheme paragraph, gives exact étale i_*, so Ri_!^c at c=(id,i) equals termwise i_* (id_! is the identity). (2) det-sp-unique-right-adjoint applies to two adjoints of the same F. (3) The truncation argument correctly gives J(D^{>=a}) in D^{>=a}. (4) Ri^!K = nu_Z^* G Rnu_* K literally by the definition, and beta and alpha type-check. (5) The Hom chain realizes the transport of thm-sf-ambient-adjoint-class(2); the compact-support comparison at (id,i) is lambda^{-1}. (6) I re-derived the equation chain (triangle identity, counit naturality, naturality of lambda) and it is correct. FIX: Step 5 passed from exactness of pro-étale i_* to Ri_{proet,*} = termwise i_* without citing the exact-functor and localization nodes. I added lem-sf-exact-functor-derived-triangulated and lem-weil-pbc-localization-universal-property to its text and uses; both were already in proof_deps. Batch-5 flag lem-trf-oriented-closed-base-localization: this is generic Stacks topos theory (08LY/08M3/04CA). Its 236-node closure reaches only generic trf topos-construction nodes and no trace-formula, Poincaré, sk-thm-trace-transport or batch-4 node. It is not part of either assumption, so it is accepted. All ten tool_uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }

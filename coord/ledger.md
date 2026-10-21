@@ -21196,3 +21196,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:37 L: returned deliver/Q41/lem-weil-roos-transition-homotopy (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-roos-transition-homotopy: lem-weil-roos-trans)
 - 08:41 L: merged deliver/Q156/lem-pur-clopen-roos-integral-descent (reviewer PASS; first push; new nodes: 0)
 - 08:41 L: merged deliver/Q43/lem-pur-open-cover-cohomology-detection (reviewer PASS; first push; new nodes: 0)
+- 08:41 L: merged deliver/Q84/lem-pur-closed-finite-adjoint-counit-transport (reviewer FIX; first push; new nodes: 0); claim not held by Q84: not your claim
