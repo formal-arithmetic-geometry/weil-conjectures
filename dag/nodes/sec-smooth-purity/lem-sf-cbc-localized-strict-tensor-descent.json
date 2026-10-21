@@ -17,7 +17,12 @@
   "def-pur-sheaf-tensor-product",
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
-  "lem-weil-pbc-ringed-slice-extension-tensor"
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "def-sf-localized-strict-tensor-comparison-data",
+  "def-sf-strict-tensor-reduction-termwise",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "def-sf-localized-strict-tensor-linear-evaluation-data"
  ],
  "proof": [
   {
@@ -376,5 +381,29 @@
   "group": "Q05",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q05-0d2bf4c08 (reviewer sub-agent of L); spot-checked: I read all 8 steps and every cited statement. The item is not dropped and live is still unsplit, so it is not superseded. It has no repair note of its own: it is a statement-only child of Q52's re-split of lem-sf-cbc-extension-zero-completion, so 0 new nodes is permitted. The statement and stmt_deps are kept verbatim. There is no cycle (271-node closure) and all cited statements are identical on live. Sources checked: Stacks sites-modules 0E8I lemma-j-shriek-and-tensor (Yoneda proof); sites-cohomology 0GL1 ('details omitted'), so proof_origin agent is right; also 06YS, 06YU, 0G7D, 03DI, 03CY, 015F, 04VG and 04VK. Step 1: K-flatness comes from lem-sf-ringed-open-total-tensor-kflat, and flat terms are argued separately (j^*, ⊗P^i, j_! exact, then the projection iso). Step 2: ΔP is flat-term K-flat via e_n^{-1}O_D=O, the cochain-pullback tensor comparison, and joint detection in levelwise-abelian Tow. Step 3 uses the one-sided normalization with T=Δ(j_!P) and M=S_• arbitrary. Gap repaired in Step 3: the level-n comparisons were not shown to commute with the J-transitions, and the coherence node is not natural between different e_n. The fix adds the generator check (presheaf transition x⊗y↦x⊗s_n(y), comparison is the identity on pure tensors, sheafification uniqueness gives transitions 1⊗s_n) and adds uses already in proof_deps. Step 4: explicit [m]_u⊗s↦[m⊗s|_(W,u)]_u, balanced and restriction-compatible; the inverse uses (S|_V)(W,u)=S(W); the bilinear-extension existence and uniqueness nodes apply; it is S-linear. Advisory: the slice-extension-tensor node states only that an iso exists, so stage 2 should pin it by this formula. Step 5 is elementary: chain map, s_n transitions, tower-map naturality and the unit, all on generators. Steps 6–7: Q|_P is a localization (equivalence ∘ W^{-1}), and universal property (2)/(3) gives descent, inverse, uniqueness and coefficient naturality via c_{T,M} naturality in M. Step 8: identity-topos Lu^* with ring map R→S_n, exact j_{S_n!}, exact scalar restriction, then descent. Edge cases tested: one-point site with V final, Z→F_2 constant tower, zero algebras, a non-surjective x↦x² tower, and several arrows W→V. All 12 tool_uses are generic site/K-flat/localization tools; accept. Advisory overlap: lem-cbc-ringed-open-strict-reduction is the pro-étale A-adic special case of this item, and lem-sf-open-tensor-normalization γ is a pro-étale analogue. Neither is created by this delivery.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocalizedStrictTensorDescent",
+  "declaration": "SheafOfModules.LocalizedStrictTensor.localized_strict_tensor_descent",
+  "declarations": [
+   "SheafOfModules.LocalizedStrictTensor.OrdinaryComparison",
+   "SheafOfModules.LocalizedStrictTensor.DerivedComparison",
+   "SheafOfModules.LocalizedStrictTensor.Descent",
+   "SheafOfModules.LocalizedStrictTensor.localized_strict_tensor_descent"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedStrictTensorDescent.lean",
+  "statement": "theorem localized_strict_tensor_descent : ∃ (m : ReductionModel.{c, v, r} R) (mV : ReductionModel.{max c v, v, r} (R.over V)), Nonempty (Descent.{c, v, r} R V m mV)",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa7c7c6c9",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of 15083fd (RETURN H2/H12): Lean modules byte-identical; fixes (1) theorem stmt_dep lem-weil-pbc-reduction-pullback-derived-tower replaced by new existing:true def node def-sf-strict-tensor-reduction-termwise (statement matches live StrictReduction.reduction/reduction_additive/termwise/termwise_limits/termwise_colimits, verbatim def signature, def stmt_deps) and (2) lem-pur-derived-change-of-rings replaced by live def-sfb-derived-change-of-rings-cochain-model, in item and comparison-data node. Mechanical finding lem-pur-sheaf-ring-derived-coefficient-adjunction: scalars_limits/colimits are .choose/.choose_spec.choose of its exactness conclusion, a genuine dependency on the theorem's conclusion: PASS on this point. All dep records byte-identical to live; item differs only in lean/stmt_deps. Mathematics re-read: universal ReductionModel, generator-pinned ordinary iso incl. s=1, derived normalization on every flat-term K-flat P, uniqueness, tower naturality, S_n-linear evaluation; no flatness/surjectivity/boundedness/completion; independent universes; only main theorem sorry. No compile (no file changed); Data module ~58 s near 60 s limit (mechanical)."
  }
 }

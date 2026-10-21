@@ -1,0 +1,149 @@
+{
+ "id": "def-sf-localized-strict-tensor-comparison-data",
+ "kind": "definition",
+ "title": "Normalized cochain computation data for localized strict tensor towers",
+ "status": "split",
+ "statement": "For a small site $\\mathcal C$, a commutative ring sheaf $R$, and $V\\in\\mathcal C$, use its module sheaves [def-weil-sheaf-of-modules-category], their unbounded derived categories [def-weil-abstract-derived-category], exact localized extension [lem-pur-site-restriction-module-adjunction-exact], sheaf tensor [def-pur-sheaf-tensor-product], and flat-term K-flat representatives [def-pc-kflat-complex] and [def-pc-flat-sheaf-modules]. A strict unital algebra tower is a functor $S:\\mathbf N^{op}\\to(R\\downarrow\\operatorname{CAlgSh})$, with underlying module tower obtained by scalar restriction. Use the existing strict reduction and termwise extension [def-sf-strict-tensor-reduction-termwise]. A reduction-family presentation consists of a functor $F:S\\mapsto\\mathcal R_S$, its universal left-derived counits for ordinary strict tensor reduction, invertible on every flat-term K-flat representative, and their coefficient-map naturality equations. Define the normalized ordinary localized comparison by $[p]_a\\otimes s\\mapsto[p\\otimes s]_a$ and define its derived normalization by the equation conjugating its degreewise localized chain map by those counits and exact-extension localization comparisons. Define coefficient-linear evaluation presentations using the existing cochain scalar-extension model [def-sfb-derived-change-of-rings-cochain-model] and exact scalar restriction [lem-pur-sheaf-ring-derived-coefficient-adjunction]: the ordinary identification takes $p\\otimes s$ to $s\\otimes p$, and the derived identification obeys its computation-counit equation on every flat-term K-flat representative. All pure tensors and extension summands are the actual presheaf tensors followed by the canonical sheafification units. These records describe presentations only; existence and the localized comparison are not asserted by this definition.",
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-sf-strict-tensor-reduction-termwise",
+  "def-sfb-derived-change-of-rings-cochain-model",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, 03CY, 0E8I; sites-cohomology.tex Tags 06YS, 06YU, 06YY: representative and scalar-evaluation data for the localized strict-tower tensor comparison."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Localized extension of module sheaves commutes with derived tensor by strict inverse sequences of algebra sheaves",
+   "results": "IsLocalization.tensorProduct_isLocalizedModule; IsLocalization.instIsLocalizedModuleTensorProductMap; ModuleCat.tildeInModuleCat; AlgebraicGeometry.Scheme.Modules; ModuleCat.Tilde.stalkIso; SheafOfModules.hasLimit; ModuleCat.Tilde.stalkIso_inv",
+   "date": "2026-10-21",
+   "verdict": "No normalized derived strict-tower presentation. Algebraic localization and ordinary module sheaves only."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universal left derived tensor reduction of a strict tower of sheaves of algebras with canonical counit and normalized coefficient linear evaluation",
+   "results": "CategoryTheory.Tor; PresheafOfModules.Monoidal.tensorObj; CategoryTheory.Tor'; CategoryTheory.Tor'_obj_obj; CategoryTheory.Tor_obj; CategoryTheory.Tor'_obj_map; CategoryTheory.Tor_map; Algebra.FormallyUnramified.sec",
+   "date": "2026-10-21",
+   "verdict": "No normalized family of reductions or scalar-linear evaluation presentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "SheafOfModules.restrictScalars; SheafOfModules.instAdditiveRestrictScalars; SheafOfModules.restrictScalars_obj_val; SheafOfModules.restrictScalars_map_val",
+   "date": "2026-10-21",
+   "verdict": "Reuse this actual restriction; it does not define comparison presentations."
+  },
+  {
+   "tool": "grep",
+   "query": "extension.*tensor|localized.*strict (Mathlib/Algebra/Category/ModuleCat); LocalizedStrictTensor|lem-sf-cbc-localized-strict-tensor-descent (WeilConjectures, Sheaf, dag/lean_names_upstream.json); blueprint_refs.py search strict tensor",
+   "results": "Targeted Mathlib search: no hits. No existing LocalizedStrictTensor or item-id declaration in WeilConjectures/Sheaf. No blueprint match for strict tensor. Related project modules ReductionPullbackDerivedTower, RingedOpenStrictReduction, OpenTensorNormalizationData, RingedTopoiTensorSections were read.",
+   "date": "2026-10-21",
+   "verdict": "Reuse StrictReduction.reduction and termwise, scalar extension, and pure tensor/sheafification APIs. No existing general-site normalized reduction FAMILY and coefficient-evaluation data; related open formulas specialize to proetale sites and tensor section calculus identifies all site universes."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-cbc-localized-strict-tensor-descent",
+  "date": "2026-10-21",
+  "group": "NN"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Steps 1–2: strict localized tensor representative and scalar-linear evaluation data",
+   "via": [
+    "lem-sf-cbc-localized-strict-tensor-descent",
+    "lem-sf-cbc-extension-zero-completion"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.LocalizedStrictTensorData",
+  "declaration": "SheafOfModules.LocalizedStrictTensor.ReductionModel",
+  "declarations": [
+   "SheafOfModules.LocalizedStrictTensor.ring",
+   "SheafOfModules.LocalizedStrictTensor.Modules",
+   "SheafOfModules.LocalizedStrictTensor.algebraModule",
+   "SheafOfModules.LocalizedStrictTensor.algebraModules",
+   "SheafOfModules.LocalizedStrictTensor.AlgebraTowers",
+   "SheafOfModules.LocalizedStrictTensor.reduction",
+   "SheafOfModules.LocalizedStrictTensor.sliceAlgebras",
+   "SheafOfModules.LocalizedStrictTensor.reduction_additive",
+   "SheafOfModules.LocalizedStrictTensor.towerExtension",
+   "SheafOfModules.LocalizedStrictTensor.towerExtension_additive",
+   "SheafOfModules.LocalizedStrictTensor.towerExtension_limits",
+   "SheafOfModules.LocalizedStrictTensor.towerExtension_colimits",
+   "SheafOfModules.LocalizedStrictTensor.reductionFamily",
+   "SheafOfModules.LocalizedStrictTensor.reductionFamily_additive",
+   "SheafOfModules.LocalizedStrictTensor.modulesDerived",
+   "SheafOfModules.LocalizedStrictTensor.towersDerived",
+   "SheafOfModules.LocalizedStrictTensor.D",
+   "SheafOfModules.LocalizedStrictTensor.DT",
+   "SheafOfModules.LocalizedStrictTensor.Resolving",
+   "SheafOfModules.LocalizedStrictTensor.ReductionModel",
+   "SheafOfModules.LocalizedStrictTensor.extensionSection",
+   "SheafOfModules.LocalizedStrictTensor.pure",
+   "SheafOfModules.LocalizedStrictTensor.OrdinaryNormalized",
+   "SheafOfModules.LocalizedStrictTensor.comparisonOnComplexes",
+   "SheafOfModules.LocalizedStrictTensor.DerivedNormalized",
+   "SheafOfModules.LocalizedStrictTensor.scalars",
+   "SheafOfModules.LocalizedStrictTensor.scalars_limits",
+   "SheafOfModules.LocalizedStrictTensor.scalars_colimits",
+   "SheafOfModules.LocalizedStrictTensor.ScalarModel",
+   "SheafOfModules.LocalizedStrictTensor.scalarPure",
+   "SheafOfModules.LocalizedStrictTensor.evaluation",
+   "SheafOfModules.LocalizedStrictTensor.EvaluationOrdinaryNormalized",
+   "SheafOfModules.LocalizedStrictTensor.EvaluationModel",
+   "SheafOfModules.LocalizedStrictTensor.evaluationExtensionDerived",
+   "SheafOfModules.LocalizedStrictTensor.ScalarExtensionNormalized",
+   "SheafOfModules.LocalizedStrictTensor.scalarExtensionDerived",
+   "SheafOfModules.LocalizedStrictTensor.scalarComparisonOnComplexes"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedStrictTensorData.lean",
+  "statement": "structure ReductionModel",
+  "branch": "newtargets-dag",
+  "by": "NN",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa7c7c6c9",
+  "group": "NN",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aa7c7c6c9",
+  "group": "NN",
+  "result": "pass",
+  "note": "Re-delivery of 15083fd (RETURN H2/H12): Lean modules byte-identical; fixes (1) theorem stmt_dep lem-weil-pbc-reduction-pullback-derived-tower replaced by new existing:true def node def-sf-strict-tensor-reduction-termwise (statement matches live StrictReduction.reduction/reduction_additive/termwise/termwise_limits/termwise_colimits, verbatim def signature, def stmt_deps) and (2) lem-pur-derived-change-of-rings replaced by live def-sfb-derived-change-of-rings-cochain-model, in item and comparison-data node. Mechanical finding lem-pur-sheaf-ring-derived-coefficient-adjunction: scalars_limits/colimits are .choose/.choose_spec.choose of its exactness conclusion, a genuine dependency on the theorem's conclusion: PASS on this point. All dep records byte-identical to live; item differs only in lean/stmt_deps. Mathematics re-read: universal ReductionModel, generator-pinned ordinary iso incl. s=1, derived normalization on every flat-term K-flat P, uniqueness, tower naturality, S_n-linear evaluation; no flatness/surjectivity/boundedness/completion; independent universes; only main theorem sorry. No compile (no file changed); Data module ~58 s near 60 s limit (mechanical)."
+ }
+}

@@ -22977,3 +22977,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:48 L: merged deliver/Q10/sk-d-real-weights (stage 2; reviewer PASS; parallel immutable checks)
 - 15:49 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 15:49 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
+- 15:50 L: merged deliver/NN/lem-sf-cbc-localized-strict-tensor-descent (stage 2; reviewer PASS; parallel immutable checks)
