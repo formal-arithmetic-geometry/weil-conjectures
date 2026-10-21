@@ -16,6 +16,15 @@ public import Sheaf.Algebra.Category.ModuleCat.Sheaf.SiteTensorFunctoriality
 public import Mathlib.CategoryTheory.Adjunction.Mates
 
 public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
+import Sheaf.Paper.DerivedFiniteQuotientCoherence
+import all Sheaf.Algebra.Homology.DiagramKFlatReplacements
+import all Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
+import WeilConjectures.FromJoel.CategoryTheory.Abelian.Flat.KFlat
+import all Sheaf.Paper.ReductionPullbackDerivedTower
+import all Sheaf.AlgebraicGeometry.ProEtaleObjectInverseImageRestriction
+import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageComparison
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
+import all Sheaf.Paper.OpenImmersionTensorPiece
 /-!
 # Counit-normalized transport of adic pullback presentations
 
@@ -30,8 +39,425 @@ pairs over the same ordinary functor. No invertibility of the completed coeffici
 
 @[expose] public noncomputable section
 set_option autoImplicit false
-universe u
-open CategoryTheory CategoryTheory.Limits Opposite
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
+universe u c v
+open CategoryTheory CategoryTheory.Functor CategoryTheory.Limits MonoidalCategory Opposite
+open scoped ZeroObject
+
+-- A normalized comparison on resolving objects descends through fully faithful restriction.
+/-- Counit normalization on a family of representatives, written in arbitrary categories.
+Source: Stacks Tag 05S7, normalization of comparisons of derived functors
+(blueprint: lem-cbc-adic-pullback-presentation-transport). -/
+def CategoryTheory.Functor.HasRepresentativeNormalization
+    {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* F]
+    (L : C ⥤ E) (T : D ⥤ F) (H : E ⥤ F) (G : C ⥤ D)
+    {I : Type*} (good : I → Prop)
+    (q : I → C) (k : I → D) (p : I → E) (z : I → F)
+    (a : ∀ i, L.obj (q i) ⟶ p i) (c : ∀ i, T.obj (k i) ⟶ z i)
+    (f : ∀ i, G.obj (q i) ⟶ k i) (l : ∀ i, H.obj (p i) ⟶ z i)
+    (b : L ⋙ H ≅ G ⋙ T) : Prop :=
+  ∀ i, good i → H.map (a i) ≫ l i = b.hom.app (q i) ≫ T.map (f i) ≫ c i
+
+private theorem constantNormalizationTransport
+    {C D : Type*} [Category* C] [Category* D] (H : C ⥤ D)
+    {A A' A'' : C} {B B' C₀ C₀' Z : D}
+    (s : A ≅ A') (t : B ≅ B') (r : C₀ ⟶ C₀')
+    (a : A' ⟶ A'') (ε : A ⟶ A'') (l : H.obj A'' ⟶ Z)
+    (k : B ⟶ C₀) (k' : B' ⟶ C₀') (c : C₀' ⟶ Z) (τ : C₀ ⟶ Z)
+    (hs : s.hom ≫ a = ε) (ht : r ≫ c = τ) (hn : k ≫ r = t.hom ≫ k')
+    (b : H.obj A ⟶ B) :
+    (H.map ε ≫ l = b ≫ k ≫ τ) ↔
+      (H.map a ≫ l = (H.map s.inv ≫ b ≫ t.hom) ≫ k' ≫ c) := by
+  rw [← hs, H.map_comp, Category.assoc, ← ht, ← Category.assoc k,
+    hn, Category.assoc]
+  rw [← cancel_epi (H.map s.hom)]
+  simp only [Category.assoc, ← H.map_comp_assoc, Iso.hom_inv_id]
+  simp
+
+private theorem constantNormalizationTransportNat
+    {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* F]
+    {L L' : C ⥤ E} {T T' : D ⥤ F} (H : E ⥤ F) (G : C ⥤ D)
+    (s : L ≅ L') (t : T ≅ T') {I : Type*} (good : I → Prop)
+    (q : I → C) (k : I → D) (p : I → E) (z : I → F)
+    (a : ∀ i, L.obj (q i) ⟶ p i) (a' : ∀ i, L'.obj (q i) ⟶ p i)
+    (c : ∀ i, T.obj (k i) ⟶ z i) (c' : ∀ i, T'.obj (k i) ⟶ z i)
+    (f : ∀ i, G.obj (q i) ⟶ k i) (l : ∀ i, H.obj (p i) ⟶ z i)
+    (hs : ∀ i, s.hom.app (q i) ≫ a' i = a i)
+    (ht : ∀ i, t.hom.app (k i) ≫ c' i = c i) (b : L ⋙ H ≅ G ⋙ T) :
+    (∀ i, good i → H.map (a i) ≫ l i = b.hom.app (q i) ≫ T.map (f i) ≫ c i) ↔
+    (∀ i, good i → H.map (a' i) ≫ l i =
+      (Functor.isoWhiskerRight s.symm H ≪≫ b ≪≫
+        Functor.isoWhiskerLeft G t).hom.app (q i) ≫ T'.map (f i) ≫ c' i) := by
+  have h (i : I) := constantNormalizationTransport H (s.app (q i))
+    (t.app (G.obj (q i))) (t.hom.app (k i)) (a' i) (a i) (l i)
+    (T.map (f i)) (T'.map (f i)) (c' i) (c i) (hs i) (ht i)
+    (t.hom.naturality (f i)) (b.hom.app (q i))
+  constructor
+  · intro hb i hi
+    simpa only [Iso.app_hom, Iso.app_inv, Iso.trans_hom, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app] using (h i).1 (hb i hi)
+  · intro hb i hi
+    apply (h i).2
+    simpa only [Iso.app_hom, Iso.app_inv, Iso.trans_hom, Functor.isoWhiskerRight_hom,
+      Functor.isoWhiskerLeft_hom, Iso.symm_hom, NatTrans.comp_app,
+      Functor.whiskerRight_app, Functor.whiskerLeft_app] using hb i hi
+
+private theorem isoConjugate_unique
+    {C : Type*} [Category* C] {A A' B B' : C} (a : A ≅ A') (z : B ≅ B')
+    (P : (A ≅ B) → Prop) (Q : (A' ≅ B') → Prop)
+    (h : ∀ b, P b ↔ Q (a.symm ≪≫ b ≪≫ z)) (c : A' ≅ B') (hc : Q c)
+    (hu : ∀ b, Q b → b = c) :
+    P (a ≪≫ c ≪≫ z.symm) ∧ ∀ b, P b → b = a ≪≫ c ≪≫ z.symm := by
+  constructor
+  · apply (h _).2
+    simpa only [Iso.trans_assoc, Iso.symm_self_id_assoc, Iso.symm_self_id,
+      Iso.trans_refl] using hc
+  · intro b hb
+    have he := congrArg (fun c ↦ a ≪≫ c ≪≫ z.symm) (hu _ ((h b).1 hb))
+    simpa only [Iso.trans_assoc, Iso.self_symm_id_assoc, Iso.self_symm_id,
+      Iso.trans_refl] using he
+
+private theorem normalizedComparison
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (Q : C ⥤ D) (P : ObjectProperty C)
+    (ff : ((whiskeringLeft P.FullSubcategory D E).obj (P.ι ⋙ Q)).FullyFaithful)
+    (F G : D ⥤ E) (H : C ⥤ E) (α : Q ⋙ F ⟶ H) (β : Q ⋙ G ⟶ H)
+    (ha : ∀ X, P X → IsIso (α.app X)) (hb : ∀ X, P X → IsIso (β.app X)) :
+    ∃! e : F ≅ G, ∀ X, P X → α.app X = e.hom.app (Q.obj X) ≫ β.app X := by
+  let a : P.ι ⋙ Q ⋙ F ≅ P.ι ⋙ H :=
+    NatIso.ofComponents (fun X ↦ @asIso _ _ _ _ (α.app X.obj) (ha X.obj X.property))
+      (fun f ↦ α.naturality f.hom)
+  let b : P.ι ⋙ Q ⋙ G ≅ P.ι ⋙ H :=
+    NatIso.ofComponents (fun X ↦ @asIso _ _ _ _ (β.app X.obj) (hb X.obj X.property))
+      (fun f ↦ β.naturality f.hom)
+  let e := ff.preimageIso (a ≪≫ b.symm)
+  have he (X : P.FullSubcategory) :
+      e.hom.app (Q.obj X.obj) = (a ≪≫ b.symm).hom.app X :=
+    congrArg (fun z ↦ z.app X) (ff.map_preimage (a ≪≫ b.symm).hom)
+  have hs : ∀ X, P X → α.app X = e.hom.app (Q.obj X) ≫ β.app X := by
+    intro X hX
+    rw [he ⟨X, hX⟩]
+    have := hb X hX
+    simp [a, b]
+  refine ⟨e, hs, ?_⟩
+  intro e' he'
+  apply Iso.ext
+  apply ff.map_injective
+  ext X
+  change e'.hom.app (Q.obj X.obj) = e.hom.app (Q.obj X.obj)
+  have := hb X.obj X.property
+  exact (cancel_mono (β.app X.obj)).1
+    ((he' X.obj X.property).symm.trans (hs X.obj X.property))
+
+private def complexCounit
+    {C D : Type*} [Category* C] [Abelian C] [Category* D] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh) :
+    DerivedCategory.Q ⋙ L ⟶ F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q :=
+  (Functor.isoWhiskerRight (DerivedCategory.quotientCompQhIso C).symm L).hom ≫
+    (Functor.associator _ _ _).hom ≫
+    Functor.whiskerLeft (HomotopyCategory.quotient C (.up ℤ)) ε ≫
+    (Functor.associator _ _ _).inv ≫
+    (Functor.isoWhiskerRight (F.mapHomotopyCategoryFactors (.up ℤ))
+      DerivedCategory.Qh).hom ≫
+    (Functor.associator _ _ _).hom ≫
+    (Functor.isoWhiskerLeft (F.mapHomologicalComplex (.up ℤ))
+      (DerivedCategory.quotientCompQhIso D)).hom
+
+private theorem complexCounit_app
+    {C D : Type*} [Category* C] [Abelian C] [Category* D] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex C ℤ) :
+    (complexCounit F L ε).app P = Functor.leftDerivedCounitOnComplex F L ε P := by
+  simp [complexCounit, Functor.leftDerivedCounitOnComplex]
+
+private theorem derivedComplexCounit_isIso
+    {C D : Type*} [Category* C] [Abelian C] [Category* D] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    (F : C ⥤ D) [F.Additive] (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (P : CochainComplex C ℤ)
+    [IsIso (ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj P))] :
+    IsIso (Functor.leftDerivedCounitOnComplex F L ε P) := by
+  unfold Functor.leftDerivedCounitOnComplex
+  infer_instance
+
+private theorem evaluationComplex_eq
+    {C D : Type*} [Category* C] [Abelian C] [Category* D] [Abelian D]
+    (F : C ⥤ D) [F.Additive] (n : ℕ) (P : CochainComplex (ℕᵒᵖ ⥤ C) ℤ) :
+    (((CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)).mapHomologicalComplex (.up ℤ)).obj
+        ((((Functor.whiskeringRight ℕᵒᵖ C D).obj F).mapHomologicalComplex (.up ℤ)).obj P) =
+      (F.mapHomologicalComplex (.up ℤ)).obj
+        ((((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapHomologicalComplex (.up ℤ)).obj
+          P) := by
+  rfl
+
+private def evaluationComplexIso
+    {C D : Type*} [Category* C] [Abelian C] [Category* D] [Abelian D]
+    (F : C ⥤ D) [F.Additive] (n : ℕ) :
+    (((Functor.whiskeringRight ℕᵒᵖ C D).obj F).mapHomologicalComplex (.up ℤ)) ⋙
+      ((CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)).mapHomologicalComplex (.up ℤ) ≅
+      ((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapHomologicalComplex (.up ℤ) ⋙
+        F.mapHomologicalComplex (.up ℤ) :=
+  NatIso.ofComponents (fun P ↦ eqToIso (evaluationComplex_eq F n P))
+    (by
+      intro P P' f
+      simp only [eqToIso_refl, Iso.refl_hom, Category.comp_id, Category.id_comp]
+      rfl)
+
+private def EvaluationNormalization
+    {C D : Type*} [Category* C] [Abelian C] [Category* D] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [HasDerivedCategory (ℕᵒᵖ ⥤ C)] [HasDerivedCategory (ℕᵒᵖ ⥤ D)]
+    (F : C ⥤ D) [F.Additive]
+    (FT : (ℕᵒᵖ ⥤ C) ⥤ (ℕᵒᵖ ⥤ D)) [FT.Additive]
+    (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (T : DerivedCategory (ℕᵒᵖ ⥤ C) ⥤ DerivedCategory (ℕᵒᵖ ⥤ D))
+    (τ : DerivedCategory.Qh ⋙ T ⟶
+      FT.mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh)
+    (n : ℕ)
+    (e : FT.mapHomologicalComplex (.up ℤ) ⋙
+      ((CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)).mapHomologicalComplex (.up ℤ) ≅
+      ((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapHomologicalComplex (.up ℤ) ⋙
+        F.mapHomologicalComplex (.up ℤ))
+    (good : ObjectProperty (CochainComplex (ℕᵒᵖ ⥤ C) ℤ))
+    (v : T ⋙ ((CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)).mapDerivedCategory ≅
+      ((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapDerivedCategory ⋙ L) : Prop :=
+  ∀ P, good P →
+    (((CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)).mapDerivedCategory).map
+        (Functor.leftDerivedCounitOnComplex
+          FT T τ P) ≫
+      ((CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)).mapDerivedCategoryFactors.hom.app
+        ((FT.mapHomologicalComplex (.up ℤ)).obj P) ≫
+      DerivedCategory.Q.map (e.hom.app P) =
+    v.hom.app (DerivedCategory.Q.obj P) ≫
+      L.map (((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapDerivedCategoryFactors.hom.app
+        P) ≫
+      Functor.leftDerivedCounitOnComplex F L ε
+        ((((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapHomologicalComplex (.up ℤ)).obj P)
+
+private theorem evaluationNormalization_exists
+    {C D : Type*} [Category* C] [Abelian C] [Category* D] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [HasDerivedCategory (ℕᵒᵖ ⥤ C)] [HasDerivedCategory (ℕᵒᵖ ⥤ D)]
+    (F : C ⥤ D) [F.Additive]
+    (FT : (ℕᵒᵖ ⥤ C) ⥤ (ℕᵒᵖ ⥤ D)) [FT.Additive]
+    (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (T : DerivedCategory (ℕᵒᵖ ⥤ C) ⥤ DerivedCategory (ℕᵒᵖ ⥤ D))
+    (τ : DerivedCategory.Qh ⋙ T ⟶
+      FT.mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh)
+    (n : ℕ)
+    (e : FT.mapHomologicalComplex (.up ℤ) ⋙
+      ((CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)).mapHomologicalComplex (.up ℤ) ≅
+      ((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapHomologicalComplex (.up ℤ) ⋙
+        F.mapHomologicalComplex (.up ℤ))
+    (good : ObjectProperty (CochainComplex (ℕᵒᵖ ⥤ C) ℤ))
+    (res : ∀ K : CochainComplex (ℕᵒᵖ ⥤ C) ℤ,
+      ∃ (P : CochainComplex (ℕᵒᵖ ⥤ C) ℤ) (p : P ⟶ K), good P ∧ QuasiIso p)
+    (hε : ∀ P, good P → IsIso (ε.app ((HomotopyCategory.quotient C (.up ℤ)).obj
+      ((((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapHomologicalComplex (.up ℤ)).obj P))))
+    (hτ : ∀ P, good P → IsIso (τ.app ((HomotopyCategory.quotient (ℕᵒᵖ ⥤ C) (.up ℤ)).obj P))) :
+    ∃! v : T ⋙ ((CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)).mapDerivedCategory ≅
+      ((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapDerivedCategory ⋙ L,
+      EvaluationNormalization F FT L ε T τ n e good v := by
+  classical
+  let EY := (CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)
+  let EX := (CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)
+  let ffc := cochainRepresentativeWhiskering good res (DerivedCategory D)
+  let α : DerivedCategory.Q ⋙ T ⋙ EX.mapDerivedCategory ⟶
+      EY.mapHomologicalComplex (.up ℤ) ⋙ F.mapHomologicalComplex (.up ℤ) ⋙
+        DerivedCategory.Q :=
+    (Functor.associator _ _ _).inv ≫
+      Functor.whiskerRight (complexCounit FT T τ) EX.mapDerivedCategory ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (FT.mapHomologicalComplex (.up ℤ))
+        EX.mapDerivedCategoryFactors.hom ≫
+      (Functor.associator _ _ _).inv ≫
+      (Functor.isoWhiskerRight e DerivedCategory.Q).hom ≫
+      (Functor.associator _ _ _).hom
+  let β : DerivedCategory.Q ⋙ EY.mapDerivedCategory ⋙ L ⟶
+      EY.mapHomologicalComplex (.up ℤ) ⋙ F.mapHomologicalComplex (.up ℤ) ⋙
+        DerivedCategory.Q :=
+    (Functor.associator _ _ _).inv ≫
+      (Functor.isoWhiskerRight EY.mapDerivedCategoryFactors L).hom ≫
+      (Functor.associator _ _ _).hom ≫
+      Functor.whiskerLeft (EY.mapHomologicalComplex (.up ℤ)) (complexCounit F L ε)
+  have ha (P) (hP : good P) : IsIso (α.app P) := by
+    let := hτ P hP
+    have := derivedComplexCounit_isIso FT T τ P
+    have : IsIso ((complexCounit FT T τ).app P) := by
+      rw [complexCounit_app]; infer_instance
+    dsimp [α]
+    infer_instance
+  have hb (P) (hP : good P) : IsIso (β.app P) := by
+    let := hε P hP
+    have := derivedComplexCounit_isIso F L ε
+      ((EY.mapHomologicalComplex (.up ℤ)).obj P)
+    have : IsIso ((complexCounit F L ε).app
+        ((EY.mapHomologicalComplex (.up ℤ)).obj P)) := by
+      rw [complexCounit_app]; infer_instance
+    dsimp [β]
+    infer_instance
+  obtain ⟨v, hv, huv⟩ := normalizedComparison DerivedCategory.Q good ffc
+    (T ⋙ EX.mapDerivedCategory) (EY.mapDerivedCategory ⋙ L)
+    (EY.mapHomologicalComplex (.up ℤ) ⋙ F.mapHomologicalComplex (.up ℤ) ⋙
+      DerivedCategory.Q) α β ha hb
+  have heq (v : T ⋙ EX.mapDerivedCategory ≅ EY.mapDerivedCategory ⋙ L) :
+      (∀ P, good P → α.app P = v.hom.app (DerivedCategory.Q.obj P) ≫ β.app P) ↔
+        EvaluationNormalization F FT L ε T τ n e good v := by
+    simp only [α, β, NatTrans.comp_app, Functor.associator_inv_app,
+      Functor.associator_hom_app, Functor.whiskerRight_app, Functor.whiskerLeft_app,
+      Functor.isoWhiskerRight_hom,
+      complexCounit_app, Category.id_comp, Category.comp_id]
+    rfl
+  exact ⟨v, (heq v).1 hv, fun v' hv' ↦ huv v' ((heq v').2 hv')⟩
+
+private theorem counit_isIso_of_iso
+    {C D E : Type*} [Category* C] [Category* D] [Category* E]
+    (Q : C ⥤ D) (H : C ⥤ E) (L L' : D ⥤ E)
+    (ε : Q ⋙ L ⟶ H) (ε' : Q ⋙ L' ⟶ H)
+    (s : L ≅ L') (hs : Functor.whiskerLeft Q s.hom ≫ ε' = ε)
+    (P : C) (h : IsIso (ε'.app P)) : IsIso (ε.app P) := by
+  let := h
+  have hh := congr_app hs P
+  dsimp only [NatTrans.comp_app, Functor.whiskerLeft_app] at hh
+  rw [← hh]
+  infer_instance
+
+private theorem evaluationNormalization_of_canonical
+    {C D : Type*} [Category* C] [Abelian C] [Category* D] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [HasDerivedCategory (ℕᵒᵖ ⥤ C)] [HasDerivedCategory (ℕᵒᵖ ⥤ D)]
+    (F : C ⥤ D) [F.Additive]
+    (FT : (ℕᵒᵖ ⥤ C) ⥤ (ℕᵒᵖ ⥤ D)) [FT.Additive]
+    (L : DerivedCategory C ⥤ DerivedCategory D)
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (T : DerivedCategory (ℕᵒᵖ ⥤ C) ⥤ DerivedCategory (ℕᵒᵖ ⥤ D))
+    (τ : DerivedCategory.Qh ⋙ T ⟶
+      FT.mapHomotopyCategory (.up ℤ) ⋙
+        DerivedCategory.Qh)
+    (L₀ : DerivedCategory C ⥤ DerivedCategory D)
+    (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (T₀ : DerivedCategory (ℕᵒᵖ ⥤ C) ⥤ DerivedCategory (ℕᵒᵖ ⥤ D))
+    (τ₀ : DerivedCategory.Qh ⋙ T₀ ⟶ FT.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (s : L ≅ L₀) (t : T ≅ T₀)
+    (hs : Functor.whiskerLeft DerivedCategory.Qh s.hom ≫ ε₀ = ε)
+    (ht : Functor.whiskerLeft DerivedCategory.Qh t.hom ≫ τ₀ = τ)
+    (n : ℕ)
+    (e : FT.mapHomologicalComplex (.up ℤ) ⋙
+      ((CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)).mapHomologicalComplex (.up ℤ) ≅
+      ((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapHomologicalComplex (.up ℤ) ⋙
+        F.mapHomologicalComplex (.up ℤ))
+    (good : ObjectProperty (CochainComplex (ℕᵒᵖ ⥤ C) ℤ))
+    (res : ∀ K : CochainComplex (ℕᵒᵖ ⥤ C) ℤ,
+      ∃ (P : CochainComplex (ℕᵒᵖ ⥤ C) ℤ) (p : P ⟶ K), good P ∧ QuasiIso p)
+    (hε₀ : ∀ P, good P → IsIso (ε₀.app ((HomotopyCategory.quotient C (.up ℤ)).obj
+      ((((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapHomologicalComplex (.up ℤ)).obj P))))
+    (hτ₀ : ∀ P, good P → IsIso (τ₀.app ((HomotopyCategory.quotient (ℕᵒᵖ ⥤ C) (.up ℤ)).obj P))) :
+    ∃! v : T ⋙ ((CategoryTheory.evaluation ℕᵒᵖ D).obj (op n)).mapDerivedCategory ≅
+      ((CategoryTheory.evaluation ℕᵒᵖ C).obj (op n)).mapDerivedCategory ⋙ L,
+      EvaluationNormalization F FT L ε T τ n e good v := by
+  have hε (P) (hP : good P) := counit_isIso_of_iso DerivedCategory.Qh _ L L₀ ε ε₀
+    s hs _ (hε₀ P hP)
+  have hτ (P) (hP : good P) := counit_isIso_of_iso DerivedCategory.Qh _ T T₀ τ τ₀
+    t ht _ (hτ₀ P hP)
+  exact evaluationNormalization_exists F FT L ε T τ n e good res hε hτ
+
+namespace CochainComplex
+
+-- Resolve the entire tower functorially, so its transition maps remain strict.
+set_option synthInstance.maxSize 1024 in
+private theorem diagramResolution
+    {C : Type c} [Category.{v} C] [EssentiallySmall.{max c v} C]
+    (T : GrothendieckTopology C)
+    [T.HasSheafCompose (forget₂ CommRingCat.{max c v} RingCat.{max c v})]
+    [T.WEqualsLocallyBijective AddCommGrpCat.{max c v}]
+    [HasSheafify T AddCommGrpCat.{max c v}]
+    (R : Sheaf T CommRingCat.{max c v})
+    (K : CochainComplex (ℕᵒᵖ ⥤ SheafOfModules.{max c v}
+      ((sheafCompose T (forget₂ CommRingCat RingCat)).obj R)) ℤ) :
+    ∃ (P : CochainComplex (ℕᵒᵖ ⥤ SheafOfModules.{max c v}
+      ((sheafCompose T (forget₂ CommRingCat RingCat)).obj R)) ℤ) (p : P ⟶ K),
+      QuasiIso p ∧ ∀ j : ℕᵒᵖ, IsKFlatIndependentCoefficients (P.asFunctor.obj j) := by
+  classical
+  let A := SheafOfModules.{max c v}
+    ((sheafCompose T (forget₂ CommRingCat RingCat)).obj R)
+  let := SheafOfModules.isMonoidal_W_independentCoefficients R
+  let := SheafOfModules.monoidalCategory R
+  let := SheafOfModules.symmetricCategory R
+  let := SheafOfModules.monoidalClosed_kfi (R := R)
+  let := SheafOfModules.monoidalPreadditive_kfi R
+  have := SheafOfModules.hasExactColimits_int_kfi R
+  let := SheafOfModules.hasFunctorialFlatResolution_kfi R
+  have (X : A) : PreservesColimitsOfShape ℤ ((curriedTensor A).flip.obj X) :=
+    preservesColimitsOfShape_of_natIso (F := tensorLeft X)
+      (NatIso.ofComponents (fun Y ↦ β_ X Y) (by intros; simp [curriedTensor]))
+  let Λ := (Classical.arbitrary (Abelian.LeftResolution
+    (ObjectProperty.flat.ι : _ ⥤ A))).reduced
+  have hι : (ObjectProperty.flat.ι : _ ⥤ A).essImage ≤ ObjectProperty.flat := by
+    rintro X ⟨Y, ⟨e⟩⟩
+    exact ObjectProperty.prop_of_iso _ e Y.property
+  let P := diagramComplex (K.asFunctor ⋙ Λ.resolutionFunctor)
+  let p : P ⟶ K :=
+    { f := fun n ↦
+        { app := fun j ↦ (Λ.resolutionNatTrans.app (K.asFunctor.obj j)).f n
+          naturality := fun j k a ↦ congrArg (fun f ↦ f.f n)
+            (Λ.resolutionNatTrans.naturality (K.asFunctor.map a)) }
+      comm' := by
+        intro n m _
+        apply NatTrans.ext
+        funext j
+        exact (Λ.resolutionNatTrans.app (K.asFunctor.obj j)).comm n m }
+  refine ⟨P, p, ?_, ?_⟩
+  · rw [HomologicalComplex.quasiIso_iff_evaluation]
+    intro j
+    change QuasiIso (Λ.resolutionNatTrans.app (K.asFunctor.obj j))
+    infer_instance
+  · intro j
+    have hk := Λ.kFlat_resolutionFunctor_obj hι (K.asFunctor.obj j)
+    change (Λ.resolutionFunctor.obj (K.asFunctor.obj j)).IsAcyclicTensorKFlat
+    intro Z hZ
+    let U := tensorRight (Λ.resolutionFunctor.obj (K.asFunctor.obj j))
+    have hz : QuasiIso (0 : (0 : CochainComplex A ℤ) ⟶ Z) := by
+      rw [quasiIso_iff]
+      intro i
+      exact (quasiIsoAt_iff_exactAt _ i
+        ((HomologicalComplex.acyclic_of_isZero _ (isZero_zero _)) i)).2 (hZ i)
+    have hmap : QuasiIso (U.map (0 : (0 : CochainComplex A ℤ) ⟶ Z)) := hk.2 _ hz
+    have htzero : (U.obj (0 : CochainComplex A ℤ)).Acyclic :=
+      HomologicalComplex.acyclic_of_isZero _ (U.map_isZero (isZero_zero _))
+    exact fun i ↦ (exactAt_iff_of_quasiIsoAt
+      (U.map (0 : (0 : CochainComplex A ℤ) ⟶ Z)) i).1 (htzero i)
+
+end CochainComplex
+
+namespace AlgebraicGeometry.Scheme
+
+private theorem canonicalOrdinaryPair {X Y : Scheme.{u}} (g : X ⟶ Y)
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    IsCompletedOrdinaryPullbackPair g d
+      (completedOrdinaryPullback g d) (completedOrdinaryPullbackCounit g d) := by
+  unfold completedOrdinaryPullback completedOrdinaryPullbackCounit
+  exact (completedOrdinaryPullback_exists g d).choose_spec.choose_spec
+
+private theorem canonicalTowerPair {X Y : Scheme.{u}} (g : X ⟶ Y)
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A) :
+    IsCompletedTowerPullbackPair g d
+      (completedTowerPullback g d) (completedTowerPullbackCounit g d) := by
+  unfold completedTowerPullback completedTowerPullbackCounit
+  exact (completedTowerPullback_exists g d).choose_spec.choose_spec
+
+end AlgebraicGeometry.Scheme
+
 private theorem inverseMate_counit_formula
     {C D E F : Type*} [Category* C] [Category* D] [Category* E] [Category* F]
     {L₁ : C ⥤ D} {R₁ : D ⥤ C} {L₂ : E ⥤ F} {R₂ : F ⥤ E}
@@ -66,6 +492,46 @@ private theorem derivedCounitOnComplex_comp
       DerivedCategory.Qh.map ((F.mapHomotopyCategoryFactors (.up ℤ)).hom.app P) ≫
       (DerivedCategory.quotientCompQhIso D).hom.app
         ((F.mapHomologicalComplex (.up ℤ)).obj P)) h
+
+private theorem normalizationTransportCounits
+    {A B A' B' : Type*} [Category* A] [Abelian A] [Category* B] [Abelian B]
+    [Category* A'] [Abelian A'] [Category* B'] [Abelian B']
+    [HasDerivedCategory A] [HasDerivedCategory B]
+    [HasDerivedCategory A'] [HasDerivedCategory B']
+    (F : A ⥤ B) [F.Additive] (FT : A' ⥤ B') [FT.Additive]
+    (H : DerivedCategory B ⥤ DerivedCategory B')
+    (G : DerivedCategory A ⥤ DerivedCategory A')
+    (Δ : CochainComplex A ℤ ⥤ CochainComplex A' ℤ)
+    (L L₀ : DerivedCategory A ⥤ DerivedCategory B)
+    (T T₀ : DerivedCategory A' ⥤ DerivedCategory B')
+    (ε : DerivedCategory.Qh ⋙ L ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (ε₀ : DerivedCategory.Qh ⋙ L₀ ⟶ F.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (τ : DerivedCategory.Qh ⋙ T ⟶ FT.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (τ₀ : DerivedCategory.Qh ⋙ T₀ ⟶ FT.mapHomotopyCategory (.up ℤ) ⋙ DerivedCategory.Qh)
+    (s : L ≅ L₀) (t : T ≅ T₀)
+    (hs : Functor.whiskerLeft DerivedCategory.Qh s.hom ≫ ε₀ = ε)
+    (ht : Functor.whiskerLeft DerivedCategory.Qh t.hom ≫ τ₀ = τ)
+    (good : CochainComplex A ℤ → Prop)
+    (f : ∀ P, G.obj (DerivedCategory.Q.obj P) ⟶ DerivedCategory.Q.obj (Δ.obj P))
+    (l : ∀ P, H.obj (DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P)) ⟶
+      DerivedCategory.Q.obj ((FT.mapHomologicalComplex (.up ℤ)).obj (Δ.obj P)))
+    (b : L ⋙ H ≅ G ⋙ T) :
+    (∀ P, good P → H.map (Functor.leftDerivedCounitOnComplex F L ε P) ≫ l P =
+      b.hom.app (DerivedCategory.Q.obj P) ≫ T.map (f P) ≫
+        Functor.leftDerivedCounitOnComplex FT T τ (Δ.obj P)) ↔
+    (∀ P, good P → H.map (Functor.leftDerivedCounitOnComplex F L₀ ε₀ P) ≫ l P =
+      (Functor.isoWhiskerRight s.symm H ≪≫ b ≪≫
+        Functor.isoWhiskerLeft G t).hom.app (DerivedCategory.Q.obj P) ≫
+          T₀.map (f P) ≫ Functor.leftDerivedCounitOnComplex FT T₀ τ₀ (Δ.obj P)) := by
+  exact constantNormalizationTransportNat H G s t good
+    (fun P ↦ DerivedCategory.Q.obj P) (fun P ↦ DerivedCategory.Q.obj (Δ.obj P))
+    (fun P ↦ DerivedCategory.Q.obj ((F.mapHomologicalComplex (.up ℤ)).obj P))
+    (fun P ↦ DerivedCategory.Q.obj ((FT.mapHomologicalComplex (.up ℤ)).obj (Δ.obj P)))
+    (Functor.leftDerivedCounitOnComplex F L ε) (Functor.leftDerivedCounitOnComplex F L₀ ε₀)
+    (fun P ↦ Functor.leftDerivedCounitOnComplex FT T τ (Δ.obj P))
+    (fun P ↦ Functor.leftDerivedCounitOnComplex FT T₀ τ₀ (Δ.obj P)) f l
+    (derivedCounitOnComplex_comp F L L₀ ε ε₀ s.hom hs)
+    (fun P ↦ derivedCounitOnComplex_comp FT T T₀ τ τ₀ t.hom ht (Δ.obj P)) b
 
 namespace AlgebraicGeometry.Scheme
 
@@ -182,8 +648,7 @@ theorem adicPresentationOrdinaryUniversal_proof :
     (completedOrdinaryPullback g d).IsLeftDerivedFunctor
       (completedOrdinaryPullbackCounit g d)
       (HomotopyCategory.quasiIso (pbcModules Y (pbcAdicCompletion Y d)) (.up ℤ)) := by
-  unfold completedOrdinaryPullback completedOrdinaryPullbackCounit
-  exact (completedOrdinaryPullback_exists g d).choose_spec.choose_spec.1
+  exact (canonicalOrdinaryPair g d).1
 
 /-- The published ordinary pair carries its universal left-derived structure.
 Source: blueprint CBC argument, Step 3; Stacks 05S7
@@ -203,8 +668,7 @@ theorem adicPresentationTowerUniversal_proof :
     (completedTowerPullback g d).IsLeftDerivedFunctor
       (completedTowerPullbackCounit g d)
       (HomotopyCategory.quasiIso (pbcTowers Y (pbcAdicCompletion Y d)) (.up ℤ)) := by
-  unfold completedTowerPullback completedTowerPullbackCounit
-  exact (completedTowerPullback_exists g d).choose_spec.choose_spec.1
+  exact (canonicalTowerPair g d).1
 
 /-- The published strict-tower pair carries its universal left-derived structure.
 Source: blueprint CBC argument, Step 3; Stacks 05S7
@@ -334,17 +798,71 @@ Source: CBC Step 4; Stacks 05S7
 (blueprint: lem-cbc-adic-pullback-presentation-transport). -/
 def HasAdicPresentationConstantNormalization
     (b : L ⋙ completedDerivedConstant d X ≅ completedDerivedConstant d Y ⋙ T) : Prop :=
-  ∀ P : CochainComplex (pbcModules Y (pbcAdicCompletion Y d)) ℤ,
-    CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion Y d) P →
-    (completedDerivedConstant d X).map
-        (Functor.leftDerivedCounitOnComplex (completedModulePullback g d) L ε P) ≫
-      ((completedTowerConstant d X).mapDerivedCategoryFactors).hom.app
+  Functor.HasRepresentativeNormalization L T
+    (completedDerivedConstant d X) (completedDerivedConstant d Y)
+    (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion Y d) P)
+    (fun P ↦ DerivedCategory.Q.obj P)
+    (fun P ↦ DerivedCategory.Q.obj
+      (((completedTowerConstant d Y).mapHomologicalComplex (.up ℤ)).obj P))
+    (fun P ↦ DerivedCategory.Q.obj
+      (((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P))
+    (fun P ↦ DerivedCategory.Q.obj
+      (((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).obj
+        (((completedTowerConstant d Y).mapHomologicalComplex (.up ℤ)).obj P)))
+    (fun P ↦ Functor.leftDerivedCounitOnComplex (completedModulePullback g d) L ε P)
+    (fun P ↦ Functor.leftDerivedCounitOnComplex (completedTowerModulePullback g d) T τ
+      (((completedTowerConstant d Y).mapHomologicalComplex (.up ℤ)).obj P))
+    (fun P ↦ ((completedTowerConstant d Y).mapDerivedCategoryFactors).hom.app P)
+    (fun P ↦ ((completedTowerConstant d X).mapDerivedCategoryFactors).hom.app
+      (((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P) ≫
+        DerivedCategory.Q.map (eqToHom (completedPullbackConstantComplex_eq g d P))) b
+
+omit hL hT in
+private theorem constantProofAux
+    (s : L ≅ completedOrdinaryPullback g d)
+    (t : T ≅ completedTowerPullback g d)
+    (hs : Functor.whiskerLeft DerivedCategory.Qh s.hom ≫
+      completedOrdinaryPullbackCounit g d = ε)
+    (ht : Functor.whiskerLeft DerivedCategory.Qh t.hom ≫
+      completedTowerPullbackCounit g d = τ)
+    (c : completedOrdinaryPullback g d ⋙ completedDerivedConstant d X ≅
+      completedDerivedConstant d Y ⋙ completedTowerPullback g d)
+    (hc : HasCompletedPullbackConstantNormalization g d c)
+    (hu : ∀ b, HasCompletedPullbackConstantNormalization g d b → b = c) :
+    HasAdicPresentationConstantNormalization g d L ε T τ
+      (Functor.isoWhiskerRight s (completedDerivedConstant d X) ≪≫
+        c ≪≫
+        Functor.isoWhiskerLeft (completedDerivedConstant d Y) t.symm) ∧
+    ∀ b : L ⋙ completedDerivedConstant d X ≅ completedDerivedConstant d Y ⋙ T,
+      HasAdicPresentationConstantNormalization g d L ε T τ b →
+        b = Functor.isoWhiskerRight s (completedDerivedConstant d X) ≪≫
+          c ≪≫
+          Functor.isoWhiskerLeft (completedDerivedConstant d Y) t.symm := by
+  have transport (b : L ⋙ completedDerivedConstant d X ≅
+      completedDerivedConstant d Y ⋙ T) :
+      HasAdicPresentationConstantNormalization g d L ε T τ b ↔
+        HasCompletedPullbackConstantNormalization g d
+          (Functor.isoWhiskerRight s.symm (completedDerivedConstant d X) ≪≫ b ≪≫
+            Functor.isoWhiskerLeft (completedDerivedConstant d Y) t) := by
+    exact normalizationTransportCounits (completedModulePullback g d)
+      (completedTowerModulePullback g d)
+      (completedDerivedConstant d X) (completedDerivedConstant d Y)
+      ((completedTowerConstant d Y).mapHomologicalComplex (.up ℤ))
+      L (completedOrdinaryPullback g d) T (completedTowerPullback g d)
+      ε (completedOrdinaryPullbackCounit g d) τ (completedTowerPullbackCounit g d)
+      s t hs ht
+      (fun P ↦ CochainComplex.IsKFlatIndependentCoefficients
+        (R := pbcAdicCompletion Y d) P)
+      (fun P ↦ ((completedTowerConstant d Y).mapDerivedCategoryFactors).hom.app P)
+      (fun P ↦ ((completedTowerConstant d X).mapDerivedCategoryFactors).hom.app
         (((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map (eqToHom (completedPullbackConstantComplex_eq g d P)) =
-    b.hom.app (DerivedCategory.Q.obj P) ≫
-      T.map (((completedTowerConstant d Y).mapDerivedCategoryFactors).hom.app P) ≫
-      Functor.leftDerivedCounitOnComplex (completedTowerModulePullback g d) T τ
-        (((completedTowerConstant d Y).mapHomologicalComplex (.up ℤ)).obj P)
+          DerivedCategory.Q.map (eqToHom (completedPullbackConstantComplex_eq g d P))) b
+  exact isoConjugate_unique
+    (Functor.isoWhiskerRight s (completedDerivedConstant d X))
+    (Functor.isoWhiskerLeft (completedDerivedConstant d Y) t)
+    (HasAdicPresentationConstantNormalization g d L ε T τ)
+    (HasCompletedPullbackConstantNormalization g d) transport c hc hu
+
 
 /-- The transported constant comparison is the unique counit-normalized one.
 Source: CBC Step 4; Stacks 05S7
@@ -360,7 +878,13 @@ theorem adicPresentationConstantIso_normalized :
     ∀ b : L ⋙ completedDerivedConstant d X ≅ completedDerivedConstant d Y ⋙ T,
       HasAdicPresentationConstantNormalization g d L ε T τ b →
         b = adicPresentationConstantIso g d L ε T τ := by
-  sorry
+  exact constantProofAux g d L ε T τ
+    (adicPresentationOrdinaryIso g d L ε) (adicPresentationTowerIso g d T τ)
+    (by simp [adicPresentationOrdinaryIso]) (by simp [adicPresentationTowerIso])
+    (completedPullbackConstantIso g d)
+    (completedPullbackConstantIso_exists g d).exists.choose_spec
+    (fun b hb ↦ (completedPullbackConstantIso_exists g d).unique hb
+      (completedPullbackConstantIso_exists g d).exists.choose_spec)
 
 /-- Evaluation and levelwise pullback give the identical complex.
 Source: CBC Step 4; Stacks 015F
@@ -383,22 +907,31 @@ Source: CBC Step 4; Stacks 05S7 and 015F
 def HasAdicPresentationEvaluationNormalization (n : ℕ)
     (v : T ⋙ pbcTowerEvaluation X (pbcAdicCompletion X d) n ≅
       pbcTowerEvaluation Y (pbcAdicCompletion Y d) n ⋙ L) : Prop :=
-  ∀ P : CochainComplex (pbcTowers Y (pbcAdicCompletion Y d)) ℤ,
-    (∀ k : ℕ, CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion Y d)
+  Functor.HasRepresentativeNormalization T L
+    (pbcTowerEvaluation X (pbcAdicCompletion X d) n)
+    (pbcTowerEvaluation Y (pbcAdicCompletion Y d) n)
+    (fun P ↦ ∀ k : ℕ, CochainComplex.IsKFlatIndependentCoefficients
+      (R := pbcAdicCompletion Y d) (P.asFunctor.obj (op k)))
+    (fun P ↦ DerivedCategory.Q.obj P)
+    (fun P ↦ DerivedCategory.Q.obj
       ((((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y (pbcAdicCompletion Y d))).obj
-        (op k)).mapHomologicalComplex (.up ℤ)).obj P)) →
-    (pbcTowerEvaluation X (pbcAdicCompletion X d) n).map
-        (Functor.leftDerivedCounitOnComplex (completedTowerModulePullback g d) T τ P) ≫
-      ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X (pbcAdicCompletion X d))).obj
-        (op n)).mapDerivedCategoryFactors.hom.app
-          (((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P) ≫
-      DerivedCategory.Q.map (eqToHom (adicPresentationEvaluationComplex_eq g d n P)) =
-    v.hom.app (DerivedCategory.Q.obj P) ≫
-      L.map (((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y (pbcAdicCompletion Y d))).obj
-        (op n)).mapDerivedCategoryFactors.hom.app P) ≫
-      Functor.leftDerivedCounitOnComplex (completedModulePullback g d) L ε
+        (op n)).mapHomologicalComplex (.up ℤ)).obj P))
+    (fun P ↦ DerivedCategory.Q.obj
+      (((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P))
+    (fun P ↦ DerivedCategory.Q.obj
+      (((completedModulePullback g d).mapHomologicalComplex (.up ℤ)).obj
         ((((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y (pbcAdicCompletion Y d))).obj
-          (op n)).mapHomologicalComplex (.up ℤ)).obj P)
+          (op n)).mapHomologicalComplex (.up ℤ)).obj P)))
+    (fun P ↦ Functor.leftDerivedCounitOnComplex (completedTowerModulePullback g d) T τ P)
+    (fun P ↦ Functor.leftDerivedCounitOnComplex (completedModulePullback g d) L ε
+      ((((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y (pbcAdicCompletion Y d))).obj
+        (op n)).mapHomologicalComplex (.up ℤ)).obj P))
+    (fun P ↦ ((CategoryTheory.evaluation ℕᵒᵖ
+      (pbcModules Y (pbcAdicCompletion Y d))).obj (op n)).mapDerivedCategoryFactors.hom.app P)
+    (fun P ↦ ((CategoryTheory.evaluation ℕᵒᵖ
+      (pbcModules X (pbcAdicCompletion X d))).obj (op n)).mapDerivedCategoryFactors.hom.app
+        (((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P) ≫
+      DerivedCategory.Q.map (eqToHom (adicPresentationEvaluationComplex_eq g d n P))) v
 
 include hL hT in
 /-- Evaluation commutes with arbitrary universal pullback pairs in one normalized way.
@@ -412,7 +945,29 @@ theorem adicPresentationEvaluationIso_exists (n : ℕ) :
     ∃! v : T ⋙ pbcTowerEvaluation X (pbcAdicCompletion X d) n ≅
       pbcTowerEvaluation Y (pbcAdicCompletion Y d) n ⋙ L,
       HasAdicPresentationEvaluationNormalization g d L ε T τ n v := by
-  sorry
+  classical
+  let MY := pbcModules Y (pbcAdicCompletion Y d)
+  let MX := pbcModules X (pbcAdicCompletion X d)
+  let EY := (CategoryTheory.evaluation ℕᵒᵖ MY).obj (op n)
+  let EX := (CategoryTheory.evaluation ℕᵒᵖ MX).obj (op n)
+  let F := completedModulePullback g d
+  let FT := completedTowerModulePullback g d
+  let good : ObjectProperty (CochainComplex (ℕᵒᵖ ⥤ MY) ℤ) := fun P ↦
+    ∀ k : ℕ, CochainComplex.IsKFlatIndependentCoefficients
+      (R := pbcAdicCompletion Y d) (P.asFunctor.obj (op k))
+  have res (K : CochainComplex (ℕᵒᵖ ⥤ MY) ℤ) :
+      ∃ (P : CochainComplex (ℕᵒᵖ ⥤ MY) ℤ) (p : P ⟶ K), good P ∧ QuasiIso p := by
+    obtain ⟨P, p, hp, hP⟩ := CochainComplex.diagramResolution
+      (ProEt.topology Y) (pbcAdicCompletion Y d) K
+    exact ⟨P, p, fun k ↦ hP (op k), hp⟩
+  let e := evaluationComplexIso F n
+  exact evaluationNormalization_of_canonical F FT L ε T τ
+    (completedOrdinaryPullback g d) (completedOrdinaryPullbackCounit g d)
+    (completedTowerPullback g d) (completedTowerPullbackCounit g d)
+    (adicPresentationOrdinaryIso g d L ε) (adicPresentationTowerIso g d T τ)
+    (by simp [adicPresentationOrdinaryIso]) (by simp [adicPresentationTowerIso])
+    n e good res (fun P hP ↦ (canonicalOrdinaryPair g d).2 _ (hP n))
+    (fun P hP ↦ (canonicalTowerPair g d).2.2 P hP)
 
 /-- The unique evaluation comparison, including all maps of strict diagrams.
 Source: CBC Step 4; Stacks 015F
@@ -562,27 +1117,22 @@ theorem adicPresentationComparison_squares :
     have hv₁ : HasAdicPresentationEvaluationNormalization g d L₁ ε₁ T₁ τ₁ n v₁ :=
       (adicPresentationEvaluationIso_exists g d L₁ ε₁ T₁ τ₁ n).exists.choose_spec
     have hv : HasAdicPresentationEvaluationNormalization g d L₂ ε₂ T₂ τ₂ n v := by
-      intro P hP
-      have h := hv₁ P hP
-      have htc := derivedCounitOnComplex_comp (completedTowerModulePullback g d)
-        T₁ T₂ τ₁ τ₂ et.hom hτ P
-      have hec := derivedCounitOnComplex_comp (completedModulePullback g d)
-        L₁ L₂ ε₁ ε₂ e.hom hε
-        ((((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y (pbcAdicCompletion Y d))).obj
-          (op n)).mapHomologicalComplex (.up ℤ)).obj P)
-      apply (cancel_epi
-        ((pbcTowerEvaluation X (pbcAdicCompletion X d) n).map
-          (et.hom.app (DerivedCategory.Q.obj P)))).1
-      simp only [v, Iso.trans_hom, Functor.isoWhiskerRight_hom,
-        Functor.isoWhiskerLeft_hom, Iso.symm_hom, NatTrans.comp_app,
-        Functor.whiskerRight_app, Functor.whiskerLeft_app, Category.assoc]
-      rw [← Functor.map_comp_assoc, htc]
-      rw [← Functor.map_comp_assoc, Iso.hom_inv_id_app,
-        (pbcTowerEvaluation X (pbcAdicCompletion X d) n).map_id, Category.id_comp]
-      rw [← e.hom.naturality_assoc]
-      simp only [Functor.comp_obj]
-      rw [hec]
-      exact h
+      exact (normalizationTransportCounits (completedTowerModulePullback g d)
+        (completedModulePullback g d)
+        (pbcTowerEvaluation X (pbcAdicCompletion X d) n)
+        (pbcTowerEvaluation Y (pbcAdicCompletion Y d) n)
+        (((CategoryTheory.evaluation ℕᵒᵖ (pbcModules Y (pbcAdicCompletion Y d))).obj
+          (op n)).mapHomologicalComplex (.up ℤ))
+        T₁ T₂ L₁ L₂ τ₁ τ₂ ε₁ ε₂ et e hτ hε
+        (fun P ↦ ∀ k : ℕ, CochainComplex.IsKFlatIndependentCoefficients
+          (R := pbcAdicCompletion Y d) (P.asFunctor.obj (op k)))
+        (fun P ↦ ((CategoryTheory.evaluation ℕᵒᵖ
+          (pbcModules Y (pbcAdicCompletion Y d))).obj (op n)).mapDerivedCategoryFactors.hom.app P)
+        (fun P ↦ ((CategoryTheory.evaluation ℕᵒᵖ
+          (pbcModules X (pbcAdicCompletion X d))).obj (op n)).mapDerivedCategoryFactors.hom.app
+            (((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).obj P) ≫
+          DerivedCategory.Q.map (eqToHom (adicPresentationEvaluationComplex_eq g d n P)))
+        v₁).1 hv₁
     have heq : v = adicPresentationEvaluationIso g d L₂ ε₂ T₂ τ₂ n :=
       (adicPresentationEvaluationIso_exists g d L₂ ε₂ T₂ τ₂ n).unique hv
         (adicPresentationEvaluationIso_exists g d L₂ ε₂ T₂ τ₂ n).exists.choose_spec
@@ -638,7 +1188,17 @@ theorem adicPresentationFiniteIso_transition
       (pbcTowerTransition X (pbcAdicCompletion X d) b a h).app
           (T₁.obj ((completedReductionTower Y d).obj K)) ≫
         (adicPresentationFiniteIso g d T₁ τ₁ a).hom.app K := by
-  sorry
+  let t := adicPresentationTowerIso g d T₁ τ₁
+  let R := (completedReductionTower Y d).obj K
+  have hn := (pbcTowerTransition X (pbcAdicCompletion X d) b a h).naturality
+    (t.hom.app R)
+  have hc := (derived_finite_quotient_coherence g d).1 K a b h
+  dsimp only [adicPresentationFiniteIso, Iso.trans_hom, NatTrans.comp_app,
+    Functor.isoWhiskerRight_hom, Functor.isoWhiskerLeft_hom,
+    Functor.whiskerRight_app, Functor.whiskerLeft_app]
+  simp only [Category.assoc] at hc ⊢
+  rw [hc, ← Category.assoc, hn, Category.assoc]
+
 
 include hε hτ in
 /-- Completion units commute with the unique presentation comparisons, using the
@@ -714,6 +1274,104 @@ theorem adicPresentationCompletion_transport :
       hu.symm
 end TransportSquares
 
+-- Restriction is inverse image along the corresponding site object.
+private theorem restrictionIso_iff {X : Scheme.{u}} (U : X.ProEt)
+    {M N : Sheaf (ProEt.topology X) AddCommGrpCat.{u + 1}} (f : M ⟶ N) :
+    IsIso (((ProEt.topology X).overPullback AddCommGrpCat.{u + 1} U).map f) ↔
+      IsIso ((proEtaleSheafInverseImage U.hom AddCommGrpCat.{u + 1}).map f) := by
+  apply Iff.trans ?_
+    (NatIso.isIso_map_iff (restrictionComparison U AddCommGrpCat.{u + 1}).sheafIso f).symm
+  let : (ProEt.sliceFrom X U).IsEquivalence :=
+    inferInstanceAs (ProEt.sliceEquiv X U).inverse.IsEquivalence
+  let W := (whiskeringLeft U.left.ProEtᵒᵖ (Over U)ᵒᵖ
+    AddCommGrpCat.{u + 1}).obj (ProEt.sliceFrom X U).op
+  let α := (sheafToPresheaf ((ProEt.topology X).over U)
+    AddCommGrpCat.{u + 1}).map
+      (((ProEt.topology X).overPullback AddCommGrpCat.{u + 1} U).map f)
+  constructor
+  · intro h
+    have := h
+    have : IsIso α :=
+      (sheafToPresheaf ((ProEt.topology X).over U) AddCommGrpCat.{u + 1}).map_isIso _
+    have : IsIso (W.map α) := W.map_isIso α
+    rw [← isIso_iff_of_reflects_iso _
+      (sheafToPresheaf (ProEt.topology U.left) AddCommGrpCat.{u + 1})]
+    change IsIso (W.map α)
+    infer_instance
+  · intro h
+    have := h
+    have : IsIso (W.map α) :=
+      (sheafToPresheaf (ProEt.topology U.left) AddCommGrpCat.{u + 1}).map_isIso
+        ((AlgebraicGeometry.ProEtale.localizationRestriction AddCommGrpCat.{u + 1}
+          U.hom U.prop).map f)
+    have : IsIso α := isIso_of_reflects_iso _ W
+    exact isIso_of_reflects_iso _
+      (sheafToPresheaf ((ProEt.topology X).over U) AddCommGrpCat.{u + 1})
+
+private theorem localInverseImageIso {X Y : Scheme.{u}} (g : X ⟶ Y) (U : Y.ProEt)
+    {M N : Sheaf (ProEt.topology Y) AddCommGrpCat.{u + 1}} (f : M ⟶ N)
+    (hf : IsIso (((ProEt.topology Y).overPullback AddCommGrpCat.{u + 1} U).map f)) :
+    IsIso (((ProEt.topology X).overPullback AddCommGrpCat.{u + 1}
+      ((proEtaleBaseChange g).obj U)).map
+        ((proEtaleSheafInverseImage g AddCommGrpCat.{u + 1}).map f)) := by
+  let V := (proEtaleBaseChange g).obj U
+  let g' : V.left ⟶ U.left := pullback.fst U.hom g
+  have hsq : V.hom ≫ g = g' ≫ U.hom := by
+    exact pullback.condition.symm
+  have hi : IsIso ((proEtaleSheafInverseImage U.hom AddCommGrpCat.{u + 1}).map f) :=
+    (restrictionIso_iff U f).1 hf
+  have := hi
+  have hcomp : IsIso (((proEtaleSheafInverseImage U.hom AddCommGrpCat.{u + 1}) ⋙
+      proEtaleSheafInverseImage g' AddCommGrpCat.{u + 1}).map f) := by
+    change IsIso ((proEtaleSheafInverseImage g' AddCommGrpCat.{u + 1}).map
+      ((proEtaleSheafInverseImage U.hom AddCommGrpCat.{u + 1}).map f))
+    infer_instance
+  let e : proEtaleSheafInverseImage g AddCommGrpCat.{u + 1} ⋙
+      proEtaleSheafInverseImage V.hom AddCommGrpCat.{u + 1} ≅
+      proEtaleSheafInverseImage U.hom AddCommGrpCat.{u + 1} ⋙
+        proEtaleSheafInverseImage g' AddCommGrpCat.{u + 1} :=
+    (AlgebraicGeometry.ProEtale.upperStarComp AddCommGrpCat.{u + 1} V.hom g).symm ≪≫
+      eqToIso (congrArg (fun h ↦ proEtaleSheafInverseImage h AddCommGrpCat.{u + 1}) hsq) ≪≫
+        AlgebraicGeometry.ProEtale.upperStarComp AddCommGrpCat.{u + 1} g' U.hom
+  apply (restrictionIso_iff V _).2
+  exact (NatIso.isIso_map_iff e f).2 hcomp
+
+@[irreducible] private noncomputable def finiteUnderlying {X Y : Scheme.{u}} (g : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1})
+    (S : Sheaf (ProEt.topology X) CommRingCat.{u + 1})
+    (c : (proEtaleSheafInverseImage g CommRingCat.{u + 1}).obj R ≅ S) :
+    proEtaleRingModulePullback g R S c ⋙ SheafOfModules.toSheaf _ ≅
+      SheafOfModules.toSheaf _ ⋙ proEtaleSheafInverseImage g AddCommGrpCat.{u + 1} := by
+  let hx := SheafOfModules.exists_scalarExtensionRingIso.{u + 1, u, u + 1, u + 1} c
+  let theta := hx.choose
+  have hn := hx.choose_spec.2.2
+  let b : proEtaleRingModulePullback g R S c ⋙ SheafOfModules.toSheaf _ ≅
+      proEtaleModuleInverseImage g R ⋙ SheafOfModules.toSheaf _ :=
+    NatIso.ofComponents (fun M ↦
+      (SheafOfModules.toSheaf _).mapIso (theta ((proEtaleModuleInverseImage g R).obj M)) ≪≫
+        ObjectProperty.isoMk _ (Iso.refl _)) (by
+          intro M N f
+          have h := hn _ _ ((proEtaleModuleInverseImage g R).map f)
+          have hleft : (proEtaleRingModulePullback g R S c).map f =
+              SheafOfModules.changeOfRingsHomOfUniverses c.hom
+                ((proEtaleModuleInverseImage g R).obj M)
+                ((proEtaleModuleInverseImage g R).map f) := by rfl
+          have hright : ((SheafOfModules.toSheaf _).map
+              ((SheafOfModules.restrictScalars
+                ((sheafCompose (ProEt.topology X)
+                  (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).map c.inv)).map
+                  ((proEtaleModuleInverseImage g R).map f))).hom =
+              ((SheafOfModules.toSheaf _).map
+                ((proEtaleModuleInverseImage g R).map f)).hom := by rfl
+          apply ObjectProperty.hom_ext
+          simpa only [Functor.comp_map, hleft, hright, Functor.map_comp,
+            ObjectProperty.FullSubcategory.comp_hom,
+            Iso.trans_hom, Functor.mapIso_hom, ObjectProperty.isoMk_hom,
+            ObjectProperty.homMk_hom, Iso.refl_hom, Category.comp_id,
+            Category.id_comp] using
+              congrArg (fun f ↦ f.hom) (congrArg (SheafOfModules.toSheaf _).map h))
+  exact b ≪≫ (proEtale_moduleInverseImage_comparison g R).1.some
+
 section OpenMateTransport
 variable (U : Y.ProEt) [hU : IsOpenImmersion U.hom] (n : ℕ)
 
@@ -755,7 +1413,38 @@ and restriction therefore give inverse identity-on-generator maps. This is preci
 the restricted coefficient map and localized tensor comparison of 04J0. -/
 theorem adicPresentationLocalizedComparison_isIso :
     IsIso (adicPresentationLocalizedComparison g d U n) := by
-  sorry
+  let R := reductionCoefficient Y d n
+  let S := reductionCoefficient X d n
+  let V := (proEtaleBaseChange g).obj U
+  let F := completedReductionFiniteModules g d n
+  let RY := SheafOfModules.localizedModuleRestriction R U
+  let RX := SheafOfModules.localizedModuleRestriction S V
+  let a := SheafOfModules.localizedModuleAdjunctionIndependent R U
+  let PY := SheafOfModules.toSheaf
+    ((sheafCompose (ProEt.topology Y) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R)
+  let PX := SheafOfModules.toSheaf
+    ((sheafCompose (ProEt.topology X) (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj S)
+  have : IsIso a.unit := SheafOfModules.localizedUnit_isIso U.hom R
+  rw [NatTrans.isIso_iff_isIso_app]
+  intro M
+  change IsIso (RX.map (F.map (a.counit.app M)))
+  have hr : IsIso (RY.map (a.counit.app M)) := by
+    rw [← isIso_comp_left_iff (a.unit.app (RY.obj M)), a.right_triangle_components]
+    infer_instance
+  have hs : IsIso (((ProEt.topology Y).overPullback AddCommGrpCat.{u + 1} U).map
+      (PY.map (a.counit.app M))) := by
+    change IsIso ((SheafOfModules.toSheaf _).map (RY.map (a.counit.app M)))
+    infer_instance
+  have ht := localInverseImageIso g U (PY.map (a.counit.app M)) hs
+  let e := finiteUnderlying g R S (asIso (completedFiniteCoefficientMap g d n))
+  have hb : IsIso (((ProEt.topology X).overPullback AddCommGrpCat.{u + 1} V).map
+      (PX.map (F.map (a.counit.app M)))) :=
+    (NatIso.isIso_map_iff
+      (Functor.isoWhiskerRight e
+        ((ProEt.topology X).overPullback AddCommGrpCat.{u + 1} V))
+      (a.counit.app M)).2 ht
+  have : IsIso ((SheafOfModules.toSheaf _).map (RX.map (F.map (a.counit.app M)))) := hb
+  exact isIso_of_reflects_iso _ (SheafOfModules.toSheaf _)
 
 /-- The inverse open mate uses the actual sheafified presheaf extension and its
 uniquely generator-normalized adjunctions, with the canonical finite localized map.
