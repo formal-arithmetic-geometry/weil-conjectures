@@ -16,7 +16,9 @@
   "lem-pur-cochain-pullback-tensor-coherence",
   "def-pc-kflat-complex",
   "def-pc-flat-sheaf-modules",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-system-horizontal-reduction-adjoints",
+  "def-weil-proetale-inverse-image"
  ],
  "proof": [
   {
@@ -295,5 +297,47 @@
   "group": "Q101",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q101-addb71639 (reviewer sub-agent of L); spot-checked: I read the item and all 12 cited statements in full. Single commit, no new nodes. The item is not dropped and has no repair note. It is still unsplit in live and side-live. The statement, stmt_deps, source and blueprint fields are unchanged. The 8 steps expand the parent's old Q96 steps 1-3 (from the N5 re-split, PASS) without dropping anything, and no cycle reaches the item. Steps 1-2: lem-pur-system-evaluation-kflat gives one strict system model whose levels are K-flat with flat terms. lem-pur-kflat-total-tensor-model and lem-weil-pbc-ringed-pullback-preserves-kflat keep this under tensor and pullback, also for unbounded complexes and non-flat quotient ring maps. lem-weil-pbc-ringed-topoi-derived-tensor-pullback computes the derived operations on these models. Step 3: the adjunct formula from lem-pur-sheaf-ring-derived-coefficient-adjunction (2), (a⊗x)⊗b↦τa⊗bτx, factors through the cochain coherence c followed by α^P⊗α^Q (checked). Steps 4-5: κ s'⊗(x⊗r)↦(1⊗x)⊗s'φ'(r) has the orientation of lem-pur-cochain-pullback-tensor-coherence. Its inverse (s⊗p)⊗b↦bq(s)⊗(p⊗1) checks both ways by balancing. κ⁻¹ followed by f_n^*(α) equals the actual adjunct bq(s)⊗τp. c_j is invertible by prop-weil-pbc-proetale-constant-ring-map. Steps 6-7: I checked the triple-index cocycles by hand (τa⊗q(b)cτx and c·q(b)·q(s)⊗τp). Step 8: the unit B[0] is flat and K-flat, with inverse b↦1⊗b. Source checked: Stacks 07A4 and 0D6D (sites-cohomology.tex lines 3658/3684) use the same K-flat mechanism (06YS/0G7E/07A2). Edge cases: equal indices give the identity, U=∅ gives zero rings, the ℤ/ℓ²→𝔽_ℓ quotient needs no flatness, and a (−1)^{m−n} input twist is kept. The three Mathlib search kinds are recorded. I accept the tool_uses as generic tools; the system-evaluation and coefficient-adjunction nodes are on the sk-def-sf-operations route. No SGA. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedOperationSystemModels",
+  "declaration": "WeilConjectures.NormalizedOperations.normalizedOperationSystemModels",
+  "declarations": [
+   "WeilConjectures.NormalizedOperations.Calculus",
+   "WeilConjectures.NormalizedOperations.Whole",
+   "WeilConjectures.NormalizedOperations.WholeRing",
+   "WeilConjectures.NormalizedOperations.WholeModules",
+   "WeilConjectures.NormalizedOperations.level",
+   "WeilConjectures.NormalizedOperations.inverse",
+   "WeilConjectures.NormalizedOperations.direct",
+   "WeilConjectures.NormalizedOperations.geometricAdjunction",
+   "WeilConjectures.NormalizedOperations.coefficientDirect",
+   "WeilConjectures.NormalizedOperations.CoefficientsIdentified",
+   "WeilConjectures.NormalizedOperations.HasOperationSystemModels",
+   "WeilConjectures.NormalizedOperations.normalizedOperationSystemModels",
+   "WeilConjectures.SemilinearSections.operationScalarFunctor",
+   "WeilConjectures.SemilinearSections.operationScalarComplex",
+   "WeilConjectures.SemilinearSections.operationScalarCounit",
+   "WeilConjectures.SemilinearSections.operationUnitComplex",
+   "WeilConjectures.SemilinearSections.operationUnit",
+   "WeilConjectures.SemilinearSections.OperationTensorLaws",
+   "WeilConjectures.SemilinearSections.OperationModelLaws",
+   "WeilConjectures.SemilinearSections.OperationUnitLaws",
+   "WeilConjectures.SemilinearSections.OperationPullLaws"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedOperationSystemModels.lean",
+  "statement": "theorem normalizedOperationSystemModels (_hW : ∀ w : W, IsUnit (l : W.presheaf.stalk w)) (A : Calculus l E W) : HasOperationSystemModels l E W A",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Actual small pro-etale finite quotients and ordinary whole-system localizations. Helper aliases retain the existing universes and localization instances; proposition structures spell out this node’s tensor, unit, geometric transition and simultaneous representative clauses. Coefficient identifications are fixed by the canonical constant-section map, not an arbitrary map. Finite expression models are stated by simultaneous resolution and closure under each constructor."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-755462244",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery of the f91cca03 H2 RETURN; item Lean byte-identical (sha 61387eb2); item record changes only stmt_deps (theorem node lem-pur-system-cochain-tensor-reduction replaced by new def-pur-system-horizontal-reduction-adjoints). New node: existing:true on unchanged Sheaf.Paper.SystemCochainTensorReduction owning ordinaryReduction (SystemOrdinaryTensorReduction:192, public import) and cochainReduction (:37); statement verbatim; check_existing and check_new_node clean; TeX matches homEquiv.symm(transition) and the degreewise cochain map; its stmt_deps (semilinear-system-models, semilinear-derived-calculus, cochain-complex-modules) own the body decls; no competing owner, no cycle. Maths re-read clause by clause: tensor/pull/unit adjoints, kappa^-1 fixed by its transpose, cocycles, simultaneous flat-term K-flat models, actual X coefficients via coefficientDirect, universes t+1/t/max u (t+1), edge cases OK; one sorry, no hollow def. Advisories: input_factor and cocycle clauses follow from the existing interface; transitive base-era owners; second-reading section is the maintainer recap. No compile (no fix; Lean unchanged)."
  }
 }

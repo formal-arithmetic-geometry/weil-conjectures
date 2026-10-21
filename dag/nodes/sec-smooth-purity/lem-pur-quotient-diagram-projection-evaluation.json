@@ -17,7 +17,13 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-pur-ringed-coefficient-projection-data",
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus",
+  "def-coef-semilinear-geometry-base",
+  "def-coef-semilinear-geometry-derived",
+  "def-coef-semilinear-geometry-ops"
  ],
  "proof": [
   {
@@ -275,5 +281,43 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-f9f46cdd9 (reviewer sub-agent of L); spot-checked: This delivery has zero new nodes and leaves the item statement unchanged; the live item is still unsplit; nothing is in the dropped list; no SGA is cited; proof_deps equals the union of the step uses. Sources read: Stacks 0B56 (equation-projection-formula-map), 07A4, 07A6 and 0D6E (labels checked in tags/tags), and Zheng Construction 4.1, printed p.21. I read every cited statement and re-derived Step 3's counit tracking, Step 6's transpose, Step 7's Ex=beta_n identification through ringed-exchange-tensor-coherence (Ex is the mate of theta, so it equals the Step 3 beta) and the Step 8 assembly. Small cases checked: u=id, I=0, I=A, and A=Z, I=(2) with torsion inputs. Two faults are repaired in fixes/dag/nodes/sec-smooth-purity/lem-pur-quotient-diagram-projection-evaluation.json. (1) E5/C1, Step 2: the step never justified that G_B is computed termwise on the ordinary singleton extension. I added that this extension is K-flat with flat terms on the sequence site: its levels are K-flat by ringed-pullback-preserves-kflat (identity topos, ring map B_n to B_m), the vertical covers make tensor levelwise, and acyclicity is levelwise by system-level-left-extension, which I added to Step 2's uses. (2) C4, Step 5: diagram-site-realization was cited for 'Delta is a ringed inverse image', which that node does not state. I replaced this with Delta being levelwise the identity under its equivalences, plus the same levelwise K-flat argument. proof_deps is unchanged as a set. Advisory: lem-coef-semilinear-derived-sections already states that e_n G is isomorphic to Ru_{*,n} e_n, compatibly with units, counits and transitions, for general topoi with C_n=u^{-1}B_n. The delivery's independent singleton-adjoint route is still correct. Steps 4 and 9 are terse but cite correct nodes. No tool_uses.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.QuotientDiagramProjectionEvaluation",
+  "declaration": "SheafOfModules.QuotientDiagramProjection.quotientDiagramProjectionEvaluation",
+  "declarations": [
+   "SheafOfModules.QuotientDiagramProjection.ringSheafify",
+   "SheafOfModules.QuotientDiagramProjection.constant",
+   "SheafOfModules.QuotientDiagramProjection.finite",
+   "SheafOfModules.QuotientDiagramProjection.quotientMap",
+   "SheafOfModules.QuotientDiagramProjection.quotientTransition",
+   "SheafOfModules.QuotientDiagramProjection.Reduction",
+   "SheafOfModules.QuotientDiagramProjection.Reduction.insertion",
+   "SheafOfModules.QuotientDiagramProjection.TensorReduction",
+   "SheafOfModules.QuotientDiagramProjection.Presentation",
+   "SheafOfModules.QuotientDiagramProjection.coefficientMate",
+   "SheafOfModules.QuotientDiagramProjection.targetBalance",
+   "SheafOfModules.QuotientDiagramProjection.arrow",
+   "SheafOfModules.QuotientDiagramProjection.finiteMate",
+   "SheafOfModules.QuotientDiagramProjection.finitePull",
+   "SheafOfModules.QuotientDiagramProjection.finiteTargetBalance",
+   "SheafOfModules.QuotientDiagramProjection.Laws",
+   "SheafOfModules.QuotientDiagramProjection.quotientDiagramProjectionEvaluation"
+  ],
+  "file": "lean/Sheaf/Paper/QuotientDiagramProjectionEvaluation.lean",
+  "statement": "theorem quotientDiagramProjectionEvaluation (J : GrothendieckTopology C) (K : GrothendieckTopology X) (A : Type (max c v r)) [CommRing A] [IsNoetherianRing A] (I : Ideal A) (uInv : Sheaf J (Type (max c v r)) ⥤ Sheaf K (Type (max c v r))) (uPush : Sheaf K (Type (max c v r)) ⥤ Sheaf J (Type (max c v r))) (adj : uInv ⊣ uPush) [PreservesFiniteLimits uInv] : ∃ p : Presentation.{c, v, r} J K A I uInv uPush adj, Laws.{c, v, r} p",
+  "branch": "sheaf-dag",
+  "by": "NV",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The canonical reduction presentations are part of the existential conclusion, not additional assumptions. They use the existing ordinary strict-system localization, actual quotient ring maps, universal derived scalar extension, module-induced adjunctions and pure-tensor/K-flat normalizations. Natural finite evaluation includes both balanced identifications, the specified counit transpose, and actual quotient transitions. Added stmt_deps are already landed interfaces used to state these canonical operations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5384b2809",
+  "group": "NV",
+  "result": "pass",
+  "note": "Re-delivery after the a345d1d0 H2 RETURN. Snapshot diff: only `lem-coef-semilinear-derived-sections` dropped from stmt_deps and its public import made plain; grep shows none of that module's declarations in the file. Lean signatures, docstrings and other records unchanged; blueprint-index item line unchanged. The 6 added stmt_deps are landed definition nodes (RingedCoefficientProjectionData, SemilinearSystemModels, DerivedCalculus, GeometryCore/Derived/Ops). Statement verbatim; all 17 declarations present; single sorry. Live item still split with lean null; N5 parallel delivery was RETURNed. Re-checked the ∃ Presentation form: Reduction/TensorReduction/qX/pull fields pinned by unit, representative and underlying equations, and pull/pushEvaluation pinned by the landed Geometry (pullEvaluation_model, counit_evaluation), so Laws is not tautological. Clauses (arrow = π_B(h⊗1), coefficient_counit, evaluation with balanced source and target, naturality, transitions), hypotheses and edge cases match the node. No compile (no file changed; worker reports 28.7 s and 29.2 s clean). Advisories: KFlat and sequence-site owners not cited directly; balancing transition compatibility implicit."
  }
 }

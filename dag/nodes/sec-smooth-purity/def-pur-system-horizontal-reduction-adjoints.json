@@ -1,0 +1,116 @@
+{
+ "id": "def-pur-system-horizontal-reduction-adjoints",
+ "kind": "definition",
+ "title": "Ordinary and cochain horizontal reduction adjoints of semilinear systems",
+ "status": "split",
+ "statement": "Let $\\mathcal C$ be a category with object universe $c$ and morphism universe $v$, essentially small in universe $\\max(c,v,r)$, and let $J$ be a Grothendieck topology. Let $B_n$ be a strict inverse tower of commutative ring sheaves with values in universe $\\max(c,v,r)$ and adjacent maps $\\tau_n:B_{n+1}\\to B_n$. Use the actual strict semilinear systems, their evaluation $e_n$ and horizontal transition $t_{m,n}:e_m M\\to\\operatorname{Res}_{B_m\\to B_n}(e_n M)$ of [def-coef-semilinear-system-models], and let $A$ be the ordinary derived calculus datum of [def-coef-semilinear-derived-calculus], with ordinary scalar adjunction $E_{m,n}\\dashv\\operatorname{Res}_{B_m\\to B_n}$. For every $n\\le m$ and system $M$, define its ordinary horizontal reduction adjoint to be $\\alpha_{m,n}(M):E_{m,n}(e_mM)\\to e_nM$, the inverse of the adjunction Hom equivalence applied to the actual $t_{m,n}(M)$. For every unbounded cochain complex $P$ of these systems [def-pc-cochain-complex-modules], define its cochain horizontal reduction adjoint $E_{m,n}(e_mP)\\to e_nP$ degreewise by $\\alpha_{m,n}(P^k)$ for $k\\in\\mathbf Z$. The differentials commute by naturality of the actual transition and the adjunction Hom equivalence. These definitions use every actual transition, including equal indices; they impose neither normalization nor flatness and do not assert tensor compatibility.",
+ "stmt_deps": [
+  "def-coef-semilinear-system-models",
+  "def-coef-semilinear-derived-calculus",
+  "def-pc-cochain-complex-modules"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Zheng Construction 4.1 horizontal semilinear system maps, with Stacks Tags 06YY and 06YN for scalar adjunction and its termwise cochain construction; the ordinary adjoints used in the extracted normalized-operation model calculation."
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "ordinaryReduction|cochainReduction|semilinear.*system [Algebra/Homology]",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib definition of the ordinary and cochain horizontal adjoints; reuse the existing project definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Horizontal reduction adjoints of strict semilinear systems before localization and on cochain complexes",
+   "results": "8 hits: CategoryTheory.Adjunction.derived, CategoryTheory.Adjunction.derived', CategoryTheory.Adjunction.localization, CategoryTheory.Adjunction.localization_counit_app, CategoryTheory.Adjunction.Localization.η, CategoryTheory.Adjunction.isLocalization_leftAdjoint', DerivedCategory.instLinearCochainComplexIntQ, CategoryTheory.Adjunction.Localization.ε",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib definition of the ordinary and cochain horizontal adjoints; reuse the existing project definitions."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The ordinary scalar extension adjoint of horizontal transitions of a tower of sheaves of modules, degreewise on cochain complexes",
+   "results": "8 hits: SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.instIsRightAdjointPushforward, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app, SheafOfModules.pullbackObjUnitToUnit, PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+   "date": "2026-10-21",
+   "verdict": "No exact Mathlib definition of the ordinary and cochain horizontal adjoints; reuse the existing project definitions."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n ordinaryReduction|cochainReduction lean/WeilConjectures; rg -n ^(def|abbrev) (ordinaryReduction|cochainReduction) lean/Sheaf",
+   "results": "No matches in WeilConjectures. Exact definitions in Sheaf/Paper/SystemOrdinaryTensorReduction.lean:192 and Sheaf/Paper/SystemCochainTensorReduction.lean:37; other matches concern geometric pullback comparisons.",
+   "date": "2026-10-21",
+   "verdict": "Exact existing declarations reused, with existing:true; no Lean definition duplicated."
+  },
+  {
+   "tool": "grep",
+   "query": "rg -l ordinaryReduction|cochainReduction dag/nodes; tools/blueprint_refs.py search ordinaryReduction; tools/blueprint_refs.py search reduction adjoint",
+   "results": "DAG hits include lem-pur-system-ordinary-tensor-reduction and lem-pur-system-cochain-tensor-reduction, whose main declarations are tensor-compatibility theorems, and unrelated pullback/quotient-corner comparisons. No definition node owns the two plain definitions. Both blueprint searches returned 0 matches.",
+   "date": "2026-10-21",
+   "verdict": "New definition ownership node required by the immutable-head independent review; existing declarations suffice."
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-pur-normalized-operation-system-models",
+  "date": "2026-10-21",
+  "group": "NE"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "def-weil-frobenius-coefficient-twists",
+   "place": "The normalized-operation system models used for the integral coefficient-twist comparison: actual ordinary and cochain horizontal transition adjoints, before tensor compatibility and localization.",
+   "via": [
+    "lem-pur-normalized-operation-system-models",
+    "lem-pur-completed-operation-tower-substitution",
+    "lem-pur-derived-pullback-tensor-iso"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-def-purity-conv",
+ "lean": {
+  "module": "Sheaf.Paper.SystemCochainTensorReduction",
+  "declaration": "WeilConjectures.SemilinearSections.cochainReduction",
+  "declarations": [
+   "WeilConjectures.SemilinearSections.ordinaryReduction",
+   "WeilConjectures.SemilinearSections.cochainReduction"
+  ],
+  "statement": "def cochainReduction (A : Data.{c, v, r} J B τ) {m n : ℕ} (h : n ≤ m)\n    (P : CochainComplex (Systems.{c, v, max c v r} J B τ) ℤ) :\n    ((A.scalar h).model.E.mapHomologicalComplex (.up ℤ)).obj\n      (((evaluation.{c, v, max c v r} J B τ m).mapHomologicalComplex (.up ℤ)).obj P) ⟶\n      ((evaluation.{c, v, max c v r} J B τ n).mapHomologicalComplex (.up ℤ)).obj P",
+  "branch": "newtargets-dag",
+  "by": "NE",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Definition ownership required by return H2 at f91cca039d52. ordinaryReduction is the existing plain definition in Sheaf.Paper.SystemOrdinaryTensorReduction:192; cochainReduction is the existing plain definition in Sheaf.Paper.SystemCochainTensorReduction:37, which publicly imports the former module. Both modules and both definitions are unchanged. This node owns these definitions as a statement interface; it does not use or own the tensor-compatibility theorem or a theorem .choose."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-755462244",
+  "group": "NE",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-755462244",
+  "group": "NE",
+  "result": "pass",
+  "note": "Re-delivery of the f91cca03 H2 RETURN; item Lean byte-identical (sha 61387eb2); item record changes only stmt_deps (theorem node lem-pur-system-cochain-tensor-reduction replaced by new def-pur-system-horizontal-reduction-adjoints). New node: existing:true on unchanged Sheaf.Paper.SystemCochainTensorReduction owning ordinaryReduction (SystemOrdinaryTensorReduction:192, public import) and cochainReduction (:37); statement verbatim; check_existing and check_new_node clean; TeX matches homEquiv.symm(transition) and the degreewise cochain map; its stmt_deps (semilinear-system-models, semilinear-derived-calculus, cochain-complex-modules) own the body decls; no competing owner, no cycle. Maths re-read clause by clause: tensor/pull/unit adjoints, kappa^-1 fixed by its transpose, cocycles, simultaneous flat-term K-flat models, actual X coefficients via coefficientDirect, universes t+1/t/max u (t+1), edge cases OK; one sorry, no hollow def. Advisories: input_factor and cocycle clauses follow from the existing interface; transitive base-era owners; second-reading section is the maintainer recap. No compile (no fix; Lean unchanged)."
+ }
+}

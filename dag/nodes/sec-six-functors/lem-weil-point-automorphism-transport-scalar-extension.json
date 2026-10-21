@@ -310,5 +310,47 @@
   "group": "Q92",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q92-d3b10d30a (reviewer sub-agent of L); spot-checked: Read the item and all 22 cited statements in full. 0 new nodes; the live item is still unsplit; no cycle (the only citer is lem-weil-frobenius-point-transport-natural); no SGA. The statement change only makes the phi gloss explicit as (Gamma(chi) theta)^{-1}, which is exactly the formula in lem-weil-point-sections-scalar-extension, so nothing is weakened. Deligne (1.1.3) p.150 and (1.1.7) checked; they give context only, and proof_origin=agent is correct. Steps checked: Step 1, admissibility from lem-weil-isomorphism-derived-pullback (G_E K and P_E K are in D^b_c). Step 2, pure-tensor computation on a K-flat P: both routes give [x|_V tensor a_s|_V], using sigma(a_s)=c_L^{-1}(a_s) and the local formula of b. Step 3, naturality of sigma^L for chi_K plus beta=G(chi) b chi^{-1}, which gives equation 1 exactly. Step 4, alpha T(kappa)=kappa beta plus naturality of phi for kappa^E_K between objects of D^b_c, which gives equation 2. Step 5, ordinary b-tower on ((y tensor a) tensor b): both sides give g^{-1}(x tensor a_0 b_0). Step 6, beta- and psi-towers fully expanded; they need the naturality of b, which the step did not cite. Step 7, raw rationalization through lem-weil-coefficient-complex-rationalization. Edge cases tested: g=id, L=E, K=0, torsion K, ramified towers, g not over k_0. Tool uses accepted (all generic sections/coefficient/resolution tools of sk-thm-sf-compatibility and sk-thm-picard-semicon). FIX in fixes/dag/nodes/sec-six-functors/lem-weil-point-automorphism-transport-scalar-extension.json: (1) Step 6 now cites lem-weil-isomorphism-scalar-tensor-kflat-model for the naturality of b used in the chi cancellation (added to uses). (2) Step 6's loose 'composing the two instances of Step 4' sentence for the second equation is replaced by the explicit psi'=phi Gamma(alpha)^{-1} tower computation (alpha tower, phi associator, naturality of phi_{M/L} at alpha_{L/E,K}, unit clause). Step length is 1998 characters. Advisory: lem-pur-integral-operations-scalar-extension's statement does not name its composition isomorphism; its proof uses the chi-conjugated associator, which the repaired step makes explicit.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PointAutomorphismTransportScalarExtension",
+  "declaration": "WeilConjectures.point_automorphism_transport_scalar_extension",
+  "declarations": [
+   "WeilConjectures.pointAutomorphismRestrictionModules",
+   "WeilConjectures.pointAutomorphismRestrictionDerived",
+   "WeilConjectures.pointTransportPrimeUnits",
+   "WeilConjectures.pointTransportKappa",
+   "WeilConjectures.pointTransport",
+   "WeilConjectures.pointTransportInverseConstructible",
+   "WeilConjectures.pointTransportPullbackConstructible",
+   "WeilConjectures.pointTransportPhi",
+   "WeilConjectures.pointTransportBetaIso",
+   "WeilConjectures.pointTransportAlphaIso",
+   "WeilConjectures.pointTransportPsi",
+   "WeilConjectures.pointTransportPullbackPsi",
+   "WeilConjectures.pointTransportRationalPhi",
+   "WeilConjectures.pointTransportRationalPsi",
+   "WeilConjectures.pointTransportRationalPullbackPsi",
+   "WeilConjectures.point_automorphism_transport_scalar_extension",
+   "WeilConjectures.pointTransportScalarConstructible",
+   "WeilConjectures.pointTransportScalarUnit",
+   "WeilConjectures.pointTransportScalarAssoc",
+   "WeilConjectures.point_automorphism_transport_scalar_unit",
+   "WeilConjectures.point_automorphism_transport_scalar_tower"
+  ],
+  "file": "lean/Sheaf/Paper/PointAutomorphismTransportScalarExtension.lean",
+  "statement": "theorem point_automorphism_transport_scalar_extension (K : DerivedCategory (integralTowerModules l E (Spec (.of D.k)))) (hK : sfIntegralConstructible l E (Spec (.of D.k)) K) : ((pointAutomorphismRestrictionDerived D l hl L g).app ((integralScalarExtension l E L ι (Spec (.of D.k))).obj K) ≫ pointTransportPsi D l hl E g L ι K hK = (pointTransportPhi D l hl E L ι K hK).hom ≫ (pointIntegralModuleDerivedTensor l E L ι).map ((pointAutomorphismRestrictionDerived D l hl E g).app K)) ∧ (pointTransport D l hl L g ((integralScalarExtension l E L ι (Spec (.of D.k))).obj K) ≫ pointTransportPullbackPsi D l hl E g L ι K hK = (pointTransportPhi D l hl E L ι K hK).hom ≫ (pointIntegralModuleDerivedTensor l E L ι).map (pointTransport D l hl E g K)) ∧ ((pointModuleDerivedRationalization l L).map (pointTransport D l hl L g ((integralScalarExtension l E L ι (Spec (.of D.k))).obj K)) ≫ pointTransportRationalPullbackPsi D l hl E g L ι K hK = (pointTransportRationalPhi D l hl E L ι K hK).hom ≫ (pointCoefficientFieldDerivedTensor l E L ι).map ((pointModuleDerivedRationalization l E).map (pointTransport D l hl E g K)))",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "States both integral equations, the raw rationalized pullback equation, and both comparisons' identity and tower clauses. Helpers repackage the exact recorded phi, beta, alpha, kappa, unit and associator; no new comparison choice or naturality of t is asserted. The module/derived restriction helpers belong to this item; the restriction-natural dependency retains Q57's original theorem and all 12 recorded declarations unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1b900535e",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Re-delivery after the H13/H2 RETURN at a5562f0b. The lem-weil-point-automorphism-restriction-natural record is byte-identical to live (Q57 theorem and 12 decls restored); no dependency module is delivered. pointAutomorphismRestrictionModules/Derived are moved verbatim into PointAutomorphismTransportScalarExtension.lean with item blueprint docstrings and are listed in the item's lean.declarations; PointAutomorphismRestrictionDerived.lean is deleted. The item node differs from live only in lean; lean differs from the returned head only by the two declarations and the note. The statement is verbatim, all 21 decls are present and none is unlisted. The helpers are the .2.2.choose of the live theorem's sectionwise-pinned sigma (argument order checked against the live signature) and its liftNatTrans localization, so neither is arbitrary or hollow. The 4 theorems are sorry. All imports exist live and none is quarantined. The item mathematics was passed clause by clause in a5562f0b and Q90, and the signatures are unchanged. Advisory: pointTransportPrimeUnits duplicates the downstream frobeniusPointPrimeUnit. No compile, since no file was changed."
  }
 }

@@ -22734,3 +22734,8 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:03 L: merged deliver/N5/lem-sfb-qcqs-proper-constructible-closed-base-change (stage 2; reviewer PASS; parallel immutable checks)
 - 14:03 L: merged deliver/NC/lem-sp-normalized-error-tower-vanishing (stage 2; reviewer PASS; parallel immutable checks)
 - 14:03 L: returned deliver/Q09/lem-sfb-common-field-lattice-generators (reviewer RETURN: L: independent stage-2 immutable head ccd92d734587: Sheaf.SixFunctors.ScalarSixCoefficientInterfaces declares names that)
+- 14:06 L: merged deliver/O2/lem-pur-expression-counit-substitution-coherence (stage 2; reviewer PASS; parallel immutable checks)
+- 14:06 L: merged deliver/Q29/lem-weil-point-automorphism-transport-scalar-extension (stage 2; reviewer PASS; parallel immutable checks)
+- 14:06 L: merged deliver/Q06/lem-sp-proetale-scalar-tensor-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 14:06 L: merged deliver/NV/lem-pur-quotient-diagram-projection-evaluation (stage 2; reviewer PASS; parallel immutable checks)
+- 14:06 L: merged deliver/NE/lem-pur-normalized-operation-system-models (stage 2; reviewer PASS; parallel immutable checks)

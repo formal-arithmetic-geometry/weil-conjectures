@@ -289,5 +289,38 @@
   "group": "Q71",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q71-147b18c2a (reviewer sub-agent of L); spot-checked: Read all 15 steps and the full statements of the two proof deps. The primitive lemma's statement gives naturality of beta_T and beta_F on normalized systems and the whole-system counit identity e R L(u) = u e; def-pur-completed-operation-expressions gives the typed trees, repeated inputs and parenthesis-preserving substitution. I re-did every calculation: input naturality (steps 3-5), gamma naturality (6), simultaneous substitution with the types of c, d, h checked (7-9), the reduction equation (10), the second structural compatibility following from the first (11), closure under identities, composition and inverses (12), tensor and pullback contexts (13), and substitution of natural structural maps via naturality of the completed map at B (14). All are correct. Tested on i, 1_a, T(i,i) and F_f(1); the edge cases are fine. Primitive naturality is used only at maps between normalized systems, which the closure hypothesis guarantees. The statement is byte-identical to the base and the item is unsplit live. There is no repair note, it is not in the dropped list, and all three nodes are in sk-def-purity-conv: no off-route use, no cycle, no SGA. There are no new nodes and no duplicate: a DAG grep for 'simultaneous substitution' finds only the item and the expression definition. The parent's step 5 uses exactly the three conclusions. FIX (B4): two TeX slips corrected in fixes/dag/nodes/sec-smooth-purity/lem-pur-expression-counit-substitution-coherence.json: step 2 ',qquad' -> ',\\qquad', step 7 '\\mathrm{id},\\beta' -> '\\mathrm{id}\\,\\beta'. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ExpressionCounitSubstitutionCoherence",
+  "declaration": "WeilConjectures.CounitExpressions.expressionCounitSubstitutionCoherence",
+  "declarations": [
+   "WeilConjectures.CounitExpressions.Data",
+   "WeilConjectures.CounitExpressions.unit",
+   "WeilConjectures.CounitExpressions.system",
+   "WeilConjectures.CounitExpressions.completed",
+   "WeilConjectures.CounitExpressions.beta",
+   "WeilConjectures.CounitExpressions.gamma",
+   "WeilConjectures.CounitExpressions.systemSubstitution",
+   "WeilConjectures.CounitExpressions.completedSubstitution",
+   "WeilConjectures.CounitExpressions.Normalization",
+   "WeilConjectures.CounitExpressions.Compatible",
+   "WeilConjectures.CounitExpressions.EvaluationLaws",
+   "WeilConjectures.CounitExpressions.StructuralLaws",
+   "WeilConjectures.CounitExpressions.expressionCounitSubstitutionCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/ExpressionCounitSubstitutionCoherence.lean",
+  "statement": "theorem expressionCounitSubstitutionCoherence (_hl : ∀ (a : S) (x : W a), IsUnit (l : (W a).presheaf.stalk x)) (_h : Normalization l E D) : EvaluationLaws.{t, u, s, i, j} l E D (location := location) ∧ StructuralLaws.{t, u, s, i, j} l E D (location := location)",
+  "branch": "newtargets-dag",
+  "by": "O2",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0729c405a",
+  "group": "O2",
+  "result": "pass",
+  "note": "Read node, 15 proof steps, the snapshot module and deps (CompletedOperationExpressions, CompletedPrimitiveCounitComparison incl. Comparisons/TensorModel/PullModel/RoosRealization, CoefficientDerivedSystemReduction). system/completed/beta/gamma/c/d are the node's recursions on the recorded T (systemClosed.tensor), F (PrimitiveCounit.pull), U (SheafOfModules.unit in degree 0), and on integralCompletedTensor/integralDerivedPullback with tensorBeta/pullBeta (realization then L T(e,e)/L F(e)). Data uses only recorded interfaces and is inhabited (Roos comparison is pinned by its resolution clause). Normalization = node closure hypothesis. Naturality (beta and gamma), both substitution equations, Compatible = conjugation formula plus gamma square, and identity/composition/inverse/tensor/pullback/substitution closure all match; pointwise closure clauses re-derived from the naturality fields. The invertibility clause is implied by beta_Q^-1 and step 2. Edge cases: empty I/S, repeated slots, n=0; universes t,u,s,i,j bound. One sorry, docstrings and blueprint tags present, statement verbatim, node differs from live only in lean, not on the dropped lists. Advisory: uses the global integralCompletedTensor rather than the slice declaration recorded on def-pur-integral-derived-operations; consistent via public re-export, same as the primitive dependency. No fixes, no compile run."
  }
 }
