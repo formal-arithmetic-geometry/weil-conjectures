@@ -1,0 +1,76 @@
+{
+ "id": "lem-cbc-derived-finite-quotient-coherence",
+ "kind": "statement",
+ "title": "All-quotient coherence of the canonical finite evaluation of tower pullback",
+ "statement": "Let $g:T'\\to T$ and $A,I,P_n=A/I^n,A_T,A_{T'}$ satisfy [def-weil-pbc-adic-coefficient-datum]. Use its strict reduction functor $\\mathcal R_T$ and the canonical universal tower pullback $\\widetilde L_0$ of [def-weil-pbc-completed-pullback]. Let $B_n(K)=Lg_n^*(K\\otimes^L_{A_T}(P_n)_T)$, regarded as an $A_{T'}$-complex by the finite projection, and let\n$$F_{0,n}:\\operatorname{ev}'_n\\widetilde L_0\\mathcal R_T(K)\\xrightarrow{\\sim}B_n(K)$$\nbe the canonical finite coefficient comparison induced by [lem-weil-pbc-constant-completion-equivalence]. Write $d_{0,b,a}$ for the actual strict tower transition and $d_{B,b,a}$ for the finite target quotient map using the canonical restriction-of-scalars composition identification. For every $K\\in D(\\operatorname{Mod}(A_T))$ and $b\\geq a\\geq1$,\n$$d_{B,b,a}F_{0,b}=F_{0,a}d_{0,b,a}.$$\nThe finite target normalization uses $(x\\otimes r)\\otimes s\\mapsto x\\otimes q_{b,a}(r)s$; these identifications satisfy the equal-index identity and the three-index quotient cocycle.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Parent proof finite-reduction compatibility; item Step 5, canonical tower transition argument, before transport to arbitrary presentations."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-completed-pullback",
+  "lem-weil-pbc-constant-completion-equivalence"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalized finite reduction comparison for derived completed coefficient pullback commutes with every quotient transition",
+   "results": "[leanfinder] OK 8 hit(s); AdicCompletion.transitionMap_comp_reduceModIdeal: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n),\n  AdicCompletion.transitionMap I N hmn ∘ₗ ↑R (LinearMap.redu; AdicCompletion.factor_evalₐ_eq_eval: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {n : ℕ} (x : AdicCompletion I R) (h : I ^ n ≤ I ^ n • ⊤),\n  (Ideal.Quotient.factor h) ((AdicCompletion.evalₐ I n) x) = (AdicCompletion.eval I R n) x; AdicCompletion.factorₐ_evalₐ_one: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) (x : AdicCompletion I R),\n  (Ideal.Quotient.factor ⋯) ((AdicCompletion.evalₐ I 1) x) = (AdicCompletion.evalOneₐ I) x; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq': ∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] {I : Ideal S} {a : ℕ → ℕ}\n  (ha : StrictMono a) (f : (n : ℕ) → R →+* S ⧸ I ^ a n),\n  (∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (m + 1)) = f m) →\n    ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotie; PreTilt.mk_comp_untilt_eq_coeff_zero: ∀ {O : Type u_1} [inst : CommRing O] {p : ℕ} [inst_1 : Fact (Nat.Prime p)] [inst_2 : Fact ¬IsUnit ↑p]\n  [inst_3 : IsAdicComplete (Ideal.span {↑p}) O],\n  ⇑(Ideal.Quotient.mk (Ideal.span {↑p})) ∘ ⇑PreTilt.untilt = ⇑(PreTilt.coeff 0); Mathlib.Tactic.Module.reduceCoefficientwise: {u v : Lean.Level} →\n  {M : Q(Type v)} →\n    {R : Q(Type u)} →\n      {x : Q(AddCommMonoid «$M»)} →\n        {x_1 : Q(Semiring «$R»)} →\n          (iRM : Q(Module «$R» «$M»)) →\n            (l₁ l₂ : Mathlib.Tactic.Module.qNF R M) →\n              Lean.MetaM\n                (List Lean.; IsAdicComplete.StrictMono.mk_comp_liftRingHom: ∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] (I : Ideal S) {a : ℕ → ℕ}\n  (ha : StrictMono a) (f : (n : ℕ) → R →+* S ⧸ I ^ a n)\n  (hf : ∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (m + 1)) = f m) [inst_2 : IsAdicComplete I S] {n : ℕ},\n  (; IsAdicComplete.StrictMono.mkQ_comp_lift: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤) (hf : ∀ {m : ℕ}, Submodule.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_ext",
+   "results": "[loogle] OK 1 hit(s); CategoryTheory.Functor.leftDerived_ext:  {C : Type u_3} {D : Type u_1} {H : Type u_2} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Category.{v_2, u_1} D] [CategoryTheory.Category.{v_3, u_2} H] (LF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : L.comp LF ⟶ ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "completedReduction|[Dd]erived.*[Qq]uotient.*[Tt]ransition|[Kk][Ff]lat.*[Rr]eduction",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Finite quotient transition maps are compatible with derived scalar extension for complete ring sheaves",
+   "results": "[leansearch] OK 8 hit(s); QuotSMulTop.map_comp_mkQ: (f : M →ₗ[R] M') : map r f ∘ₗ mkQ (r • ⊤) = mkQ (r • ⊤) ∘ₗ f; Ideal.Quotient.isScalarTower_of_liesOver: : IsScalarTower R (A ⧸ p) (B ⧸ P); Ideal.Quotient.isScalarTower_right: {α} [SMul α R] [IsScalarTower α R R] : IsScalarTower α (R ⧸ I) (R ⧸ I); Ideal.Quotient.tower_quotient_map_quotient: [Algebra R S] : IsScalarTower R (R ⧸ p) (S ⧸ map (algebraMap R S) p); Algebra.QuasiFinite.of_restrictScalars: [QuasiFinite R T] : QuasiFinite S T; Ideal.instIsScalarTowerQuotientHPowKerRingHomAlgebraMapOfNat: [Algebra A B] [IsScalarTower R A B] : IsScalarTower R (A ⧸ (RingHom.ker (algebraMap A B) ^ 2)) B; RingHom.QuasiFinite.isStableUnderBaseChange: : IsStableUnderBaseChange QuasiFinite; Ideal.Quotient.isScalarTower: [SMul R₁ R₂] [IsScalarTower R₁ R₂ A] (I : Ideal A) : IsScalarTower R₁ R₂ (A ⧸ I)",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Strict derived reduction tower scalar change comparison is natural for all quotient powers of an ideal",
+   "results": "[leanfinder] OK 8 hit(s); AdicCompletion.transitionMap_comp_reduceModIdeal: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {M : Type u_2} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_3} [inst_3 : AddCommGroup N] [inst_4 : Module R N] (f : M →ₗ[R] N) {m n : ℕ} (hmn : m ≤ n),\n  AdicCompletion.transitionMap I N hmn ∘ₗ ↑R (LinearMap.redu; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq': ∀ {R : Type u_1} {S : Type u_2} [inst : NonAssocSemiring R] [inst_1 : CommRing S] {I : Ideal S} {a : ℕ → ℕ}\n  (ha : StrictMono a) (f : (n : ℕ) → R →+* S ⧸ I ^ a n),\n  (∀ {m : ℕ}, (Ideal.Quotient.factorPow I ⋯).comp (f (m + 1)) = f m) →\n    ∀ {m n : ℕ} (hle : m ≤ n), (Ideal.Quotie; IsAdicComplete.StrictMono.factorPow_comp_eq_of_factorPow_comp_succ_eq: ∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\n  (∀ {m : ℕ}, Submodule.fa; AdicCompletion.transitionMapₐ: {R : Type u_1} → [inst : CommRing R] → (I : Ideal R) → {m n : ℕ} → m ≤ n → R ⧸ I ^ n • ⊤ →ₐ[R] R ⧸ I ^ m • ⊤; AdicCompletion.transitionMap_map_pow: ∀ {R : Type u_1} [inst : CommRing R] (I : Ideal R) {m n a : ℕ} (hmn : m ≤ n) (x : R ⧸ I ^ n • ⊤),\n  (AdicCompletion.transitionMap I R hmn) (x ^ a) = (AdicCompletion.transitionMap I R hmn) x ^ a; IsAdicComplete.StrictMono.factorPow_comp_extend: ∀ {R : Type u_1} [inst : CommRing R] {I : Ideal R} {M : Type u_4} [inst_1 : AddCommGroup M] [inst_2 : Module R M]\n  {N : Type u_5} [inst_3 : AddCommGroup N] [inst_4 : Module R N] {a : ℕ → ℕ} (ha : StrictMono a)\n  (f : (n : ℕ) → M →ₗ[R] N ⧸ I ^ a n • ⊤),\n  (∀ {m : ℕ}, Submodule.fa; AdicCompletion.transitionMap: {R : Type u_1} →\n  [inst : CommRing R] →\n    (I : Ideal R) →\n      (M : Type u_4) →\n        [inst_1 : AddCommGroup M] → [inst_2 : Module R M] → {m n : ℕ} → m ≤ n → M ⧸ I ^ n • ⊤ →ₗ[R] M ⧸ I ^ m • ⊤; Ideal.powQuotSuccInclusion: {R : Type u} →\n  [inst : CommRing R] →\n    {S : Type v} →\n      [inst_1 : CommRing S] →\n        (p : Ideal R) →\n          (P : Ideal S) →\n            [inst_2 : Algebra R S] →\n              (i : ℕ) →\n                ↥(Ideal.map (Ideal.Quotient.mk (P ^ Ideal.ramificationIdx (algebr",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-adic-pullback-presentation-transport",
+  "date": "2026-10-21",
+  "group": "NW"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Parent proof finite-reduction compatibility; item Step 5, canonical tower transition argument, before transport to arbitrary presentations.",
+   "via": [
+    "lem-cbc-adic-pullback-presentation-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

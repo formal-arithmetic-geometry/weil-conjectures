@@ -1,0 +1,81 @@
+{
+ "id": "lem-cbc-derived-tower-evaluation-normalization",
+ "kind": "statement",
+ "title": "Unique representative normalization of derived tower evaluation",
+ "statement": "Let $\\mathcal C,\\mathcal C'$ be small sites with sheaves of commutative rings $R,S$ and a morphism of ringed topoi $(f,c)$, where $f^{-1}\\dashv f_*$ is left exact and $c:f^{-1}R\\to S$. Put $F(M)=f^{-1}M\\otimes_{f^{-1}R}S$ [def-pur-sheaf-tensor-product]. Use the module categories and derived localizations $Q,Q'$ of [def-weil-sheaf-of-modules-category, def-weil-abstract-derived-category], and strict towers indexed by $\\mathbf N_{\\geq1}^{\\mathrm{op}}$ [def-weil-inverse-system]. Choose universal total left-derived pairs $(L,\\varepsilon)$ for $Q'F$ and $(\\widetilde L,\\tau)$ for its levelwise tower functor. Universality and computation are as in [lem-pur-left-derived-from-kflat-class], using the objectwise K-flat flat-term class of [lem-weil-pbc-diagram-kflat-replacements]. All formulas below include the canonical exact-functor localization identifications. For $n\\geq1$, write $e_n,e'_n$ for exact evaluation and its termwise derived functor [lem-weil-tower-category-levelwise-abelian, lem-weil-pbc-exact-functor-derived-factorization]. There is a unique natural isomorphism $v_n:e'_n\\widetilde L\\xrightarrow{\\sim}Le_n$ such that, for every strict objectwise K-flat flat-term tower complex $P_\\bullet$,\n$$\\varepsilon_{P_n}v_{n,QP_\\bullet}=e'_n(\\tau_{P_\\bullet}),$$\nusing the degreewise identity $e'_nF(P_\\bullet)=F(P_n)$. For every $b\\geq a$, these comparisons commute with the tower transition:\n$$L(d_{b,a})v_{b,M}=v_{a,M}d'_{b,a}$$\non each derived strict tower $M$, where $d,d'$ are the evaluation transition transformations on $M,\\widetilde L M$, respectively.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 06XN, lemma-find-existence-computes (dual); parent blueprint completed-pullback invocation, item Step 4 evaluation subargument."
+ },
+ "stmt_deps": [
+  "def-pur-sheaf-tensor-product",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-system",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-diagram-kflat-replacements",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-exact-functor-derived-factorization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Evaluation of a strict tower commutes with total derived module pullback uniquely on K flat diagram resolutions",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.leftDerived_map_eq: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D; CategoryTheory.ProjectiveResolution.fromLeftDerivedZero'_naturality_assoc: ∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X Y : C} (f : X ⟶ Y)\n  (P : CategoryTheory.ProjectiveResolution X) (Q : Categor; Module.Flat.trans: ∀ (R : Type u) (S : Type v) (M : Type w) [inst : CommSemiring R] [inst_1 : CommSemiring S] [inst_2 : Algebra R S]\n  [inst_3 : AddCommMonoid M] [inst_4 : Module R M] [inst_5 : Module S M] [IsScalarTower R S M] [Module.Flat R S]\n  [Module.Flat S M], Module.Flat R M; CategoryTheory.ProjectiveResolution.leftDerived_app_eq: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] {X Y : C} (f : X ⟶ Y) (P : Cate; Module.Flat.rTensor_shortComplex_exact: ∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorRight M)).Exact; ModuleCat.preservesFiniteLimits_extendScalars_of_flat: ∀ {A B : Type u} [inst : CommRing A] [inst_1 : CommRing B] {f : A →+* B},\n  f.Flat → CategoryTheory.Limits.PreservesFiniteLimits (ModuleCat.extendScalars f); Module.Flat.lTensor_shortComplex_exact: ∀ {R : Type u} [inst : CommRing R] (M : ModuleCat R) [Module.Flat R ↑M] (C : CategoryTheory.ShortComplex (ModuleCat R)),\n  C.Exact → (C.map (CategoryTheory.MonoidalCategory.tensorLeft M)).Exact",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived",
+   "results": "[loogle] OK 12 hit(s); CategoryTheory.Functor.leftDerived:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] (n : ℕ) : CategoryTheory.Functor ; CategoryTheory.Functor.leftDerivedZeroIsoSelf:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.Limits.PreservesF; CategoryTheory.Functor.isZero_leftDerived_obj_projective_succ:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] (n : ℕ) (X : C) [CategoryTheory.P; CategoryTheory.Functor.fromLeftDerivedZero:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] : F.leftDerived 0 ⟶ F; CategoryTheory.instIsIsoFunctorFromLeftDerivedZero:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.Limits.PreservesF; CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] (X : C) [CategoryTheory.Projectiv; CategoryTheory.instIsIsoAppFromLeftDerivedZero:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.Limits.PreservesF; CategoryTheory.NatTrans.leftDerived:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [F.Additive] [G.Additive] (α : F ⟶ G) (n : ℕ; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.Limits.PreservesF; CategoryTheory.NatTrans.leftDerived_id:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] (n : ℕ) : CategoryTheory.NatTrans; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.Limits.PreservesF; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app:  {C : Type u} [CategoryTheory.Category.{v, u} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] [CategoryTheory.Abelian C] [CategoryTheory.HasProjectiveResolutions C] [CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [F.Additive] [CategoryTheory.Limits.PreservesF",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*leftDerived|leftDerived.*evaluation|[Kk][Ff]lat.*[Dd]iagram",
+   "results": "[grep] OK 0 hit(s); ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Unique normalized isomorphism between evaluation of derived diagram pullback and derived pullback of an evaluated diagram",
+   "results": "[leansearch] OK 8 hit(s); CategoryTheory.Limits.pullbackObjIso: (f : F ⟶ H) (g : G ⟶ H) (d : D) : (pullback f g).obj d ≅ pullback (f.app d) (g.app d); CategoryTheory.IsPullback.of_iso': (h : IsPullback fst snd f g) {P' X' Y' Z' : C} {fst' : P' ⟶ X'} {snd' : P' ⟶ Y'} {f' : X' ⟶ Z'} {g' : Y' ⟶ Z'}\n  (e₁ : P' ≅ P) (e₂ : X' ≅ X) (e₃ : Y' ≅ Y) (e₄ : Z' ≅ Z) (commfst : e₁.hom ≫ fst = fst' ≫ e₂.hom)\n  (commsnd : e₁.hom ≫ snd = snd' ≫ e₃.hom) (commf : e₂.hom ≫ f = f' ≫ ; CategoryTheory.Functor.IsFibered.pullbackPullbackIso: {p : 𝒳 ⥤ 𝒮} [IsFibered p] {R S T : 𝒮} {a : 𝒳} (ha : p.obj a = S) (f : R ⟶ S) (g : T ⟶ R) :\n  pullbackObj ha (g ≫ f) ≅ pullbackObj (pullbackObj_proj ha f) g; CategoryTheory.Limits.PreservesPullback.iso: : G.obj (pullback f g) ≅ pullback (G.map f) (G.map g); CategoryTheory.Limits.pullbackDiagonalMapIso: :\n  pullback (diagonal f)\n      (map (i₁ ≫ snd _ _) (i₂ ≫ snd _ _) f f (i₁ ≫ fst _ _) (i₂ ≫ fst _ _) i (by simp only [Category.assoc, condition])\n        (by simp only [Category.assoc, condition])) ≅\n    pullback i₁ i₂; CategoryTheory.IsPullback.isoIsPullback_hom_fst: (h : IsPullback fst snd f g) (h' : IsPullback fst' snd' f g) : (h.isoIsPullback _ _ h').hom ≫ fst' = fst; CategoryTheory.IsPullback.isoIsPullback.congr_simp: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {P : C} (X Y : C) {Z : C} {fst fst_1 : P ⟶ X}\n  (e_fst : fst = fst_1) {snd snd_1 : P ⟶ Y} (e_snd : snd = snd_1) {f f_1 : X ⟶ Z} (e_f : f = f_1) {g g_1 : Y ⟶ Z}\n  (e_g : g = g_1) {P' : C} {fst' fst'_1 : P' ⟶ X} (e_fst' : ; CategoryTheory.Functor.leftDerivedNatIso: (τ : F' ≅ F) : LF' ≅ LF",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived inverse image of modules computed on objectwise flat diagrams commutes with evaluation",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app: ∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : Categor; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_app_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasProjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D); CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc: ∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D); CategoryTheory.Functor.mapDerivedCategorySingleFunctor: {C₁ : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\n    [inst_1 : CategoryTheory.Abelian C₁] →\n      [inst_2 : HasDerivedCategory C₁] →\n        {C₂ : Type u₂} →\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\n            [inst_4 : CategoryTheory.Abelian C",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-adic-pullback-presentation-transport",
+  "date": "2026-10-21",
+  "group": "NW"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Tag 06XN, lemma-find-existence-computes (dual); parent blueprint completed-pullback invocation, item Step 4 evaluation subargument.",
+   "via": [
+    "lem-cbc-adic-pullback-presentation-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

@@ -1,0 +1,89 @@
+{
+ "id": "lem-cbc-open-localized-counit-comparison",
+ "kind": "statement",
+ "title": "Open localized finite pullback is the pulled-back extension counit",
+ "statement": "Let $g:T'\\to T$ be a scheme morphism, $j:U\\hookrightarrow T$ an open immersion and $j':U'=T'\\times_TU\\hookrightarrow T'$ its inverse image, with $g_U:U'\\to U$. Work on small pro-etale sites and their slice identifications [def-weil-proetale-inverse-image, lem-weil-proetale-weakly-etale-localization]. Let $B$ be a finite commutative ring and use its canonical coefficient maps [prop-weil-pbc-proetale-constant-ring-map] and module tensor pullbacks [def-pur-sheaf-tensor-product]. Write $g_B^*$ for this pullback, $j^*,j'^*$ for restriction, and $j_!F=P_F^\\#$ for the extension of [def-weil-extension-by-zero-presheaf, def-weil-presheaf-modules-sheafification], with its adjunction [lem-pur-site-restriction-module-adjunction-exact] and the unit-compatible slice sheafification comparison [lem-cbc-sieve-slice-sheafification]. Define $H=j'^*g_B^*j_!$. If $\\epsilon:j_!j^*\\to\\mathrm{id}$ is the actual adjunction counit, then\n$$\\beta=j'^*g_B^*(\\epsilon):Hj^*\\longrightarrow j'^*g_B^*$$\nis an isomorphism. Under the canonical identification $H\\cong g_{U,B}^*$ from [lem-weil-pbc-localize-ringed-site-morphism], $\\beta$ is exactly the canonical localized pullback comparison $g_{U,B}^*j^*\\xrightarrow{\\sim}j'^*g_B^*$. Its generator formula evaluates the summand indexed by $V\\to U$ as the same section on $V$. For the actual adjunction $j_!\\dashv j^*$, the unit sends a section $s\\in F(V\\to U)$ to its generator in the summand indexed by $V\\to U$, followed by sheafification. The counit $j_!j^*M\\to M$ sends the generator in each such summand to the same section of $M(V)$.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI, lemma-extension-by-zero, and 04J0, lemma-localize-morphism-ringed-sites; parent proof finite open comparison, item Steps 9--10."
+ },
+ "stmt_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-sieve-slice-sheafification",
+  "lem-weil-pbc-localize-ringed-site-morphism"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Pullback and restriction to a cartesian open send the sheafified extension by zero counit to an isomorphism",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso: {X Y : AlgebraicGeometry.Scheme} →\n  (f : X ⟶ Y) →\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\n      (AlgebraicGeometry.Scheme.Modules.pushforward f).comp (AlgebraicGeometry.Scheme.Modules.restrictFunctor f) ≅\n        CategoryTheory.Functor.id X.Modules; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback: {X Y : AlgebraicGeometry.Scheme} →\n  (f : X ⟶ Y) →\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f; CategoryTheory.Functor.toSheafify_pullbackSheafificationCompatibility: ∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] (G : CategoryTheory.Functor C D) (A : Type w)\n  [inst_2 : CategoryTheory.Category.{w', w} A] (J : CategoryTheory.GrothendieckTopology C)\n  (K : Category; SheafOfModules.pullbackIso: {C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    {D : Type u₂} →\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\n        {J : CategoryTheory.GrothendieckTopology C} →\n          {K : CategoryTheory.GrothendieckTopology D} →\n            {F : CategoryTheory.; SheafOfModules.sheafificationCompPullback: {C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    {D : Type u₂} →\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\n        {J : CategoryTheory.GrothendieckTopology C} →\n          {K : CategoryTheory.GrothendieckTopology D} →\n            {F : CategoryTheory.; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat; TopCat.Presheaf.pullbackObjObjOfImageOpen: {C : Type u} →\n  [inst : CategoryTheory.Category.{v, u} C] →\n    [inst_1 : CategoryTheory.Limits.HasColimits C] →\n      {X Y : TopCat} →\n        (f : X ⟶ Y) →\n          (ℱ : TopCat.Presheaf C Y) →\n            (U : TopologicalSpace.Opens ↑X) →\n              (H : IsOpen (⇑(Category",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Adjunction.counit",
+   "results": "[loogle] OK 5 hit(s); PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction:  {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurje; PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app:  {C : Type u'} [CategoryTheory.Category.{v', u'} C] {J : CategoryTheory.GrothendieckTopology C} {R₀ : CategoryTheory.Functor Cᵒᵖ RingCat} {R : CategoryTheory.Sheaf J RingCat} (α : R₀ ⟶ R.obj) [CategoryTheory.Presheaf.IsLocallyInjective J α] [CategoryTheory.Presheaf.IsLocallySurje; SheafOfModules.pushforwardPushforwardAdj:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.She; SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.She; SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app:  {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D} {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} {S : CategoryTheory.She",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedModule|extensionByZero.*counit|counit.*extensionByZero|[Ss]heaf.*[Ll]ocaliz.*[Pp]ullback",
+   "results": "[grep] OK 25 hit(s); Mathlib/Algebra/Module/FinitePresentation.lean:35: - `Module.FinitePresentation.isLocalizedModule_map`: If `M` and `N` are `R`-modules and `M` is f.p.,; Mathlib/Algebra/Module/FinitePresentation.lean:320: variable [AddCommGroup N'] [Module R N'] (S : Submonoid R) (f : N →ₗ[R] N') [IsLocalizedModule S f]; Mathlib/Algebra/Module/FinitePresentation.lean:362:     Module.FinitePresentation (Localization S) (LocalizedModule S M) :=; Mathlib/Algebra/Module/FinitePresentation.lean:363:   FinitePresentation.of_isBaseChange (LocalizedModule.mkLinearMap S M); Mathlib/Algebra/Module/FinitePresentation.lean:364:     ((isLocalizedModule_iff_isBaseChange S _ _).mp inferInstance); Mathlib/Algebra/Module/LocalizedModule/Int.lean:8: public import Mathlib.Algebra.Module.LocalizedModule.Basic; Mathlib/Algebra/Module/LocalizedModule/Int.lean:18: * `IsLocalizedModule.IsInteger` is a predicate stating that `m : M'` is in the image of `M`; Mathlib/Algebra/Module/LocalizedModule/Int.lean:22: After `IsLocalizedModule` and `IsLocalization` are unified, the two `IsInteger` predicates; Mathlib/Algebra/Module/LocalizedModule/Int.lean:35: namespace IsLocalizedModule; Mathlib/Algebra/Module/LocalizedModule/Int.lean:54: variable [IsLocalizedModule S f]; Mathlib/Algebra/Module/LocalizedModule/IsLocalization.lean:9: public import Mathlib.Algebra.Module.LocalizedModule.Basic; Mathlib/Algebra/Module/LocalizedModule/IsLocalization.lean:12: # Equivalence between `IsLocalizedModule` and `IsLocalization`; Mathlib/Algebra/Module/LocalizedModule/IsLocalization.lean:17: section IsLocalizedModule; Mathlib/Algebra/Module/LocalizedModule/IsLocalization.lean:24: theorem isLocalizedModule_iff_isLocalization :; Mathlib/Algebra/Module/LocalizedModule/IsLocalization.lean:25:     IsLocalizedModule S (IsScalarTower.toAlgHom R A Aₛ).toLinearMap ↔; Mathlib/Algebra/Module/LocalizedModule/AtPrime.lean:8: public import Mathlib.Algebra.Module.LocalizedModule.Basic; Mathlib/Algebra/Module/LocalizedModule/AtPrime.lean:17: /-- Given a prime ideal `P` and `f : M →ₗ[R] M'`, `IsLocalizedModule.AtPrime P f` states that `M'`; Mathlib/Algebra/Module/LocalizedModule/AtPrime.lean:19: protected abbrev IsLocalizedModule.AtPrime {R M M' : Type*} [CommSemiring R] (P : Ideal R); Mathlib/Algebra/Module/LocalizedModule/AtPrime.lean:21:   IsLocalizedModule P.primeCompl f; Mathlib/Algebra/Module/LocalizedModule/AtPrime.lean:23: /-- Given a prime ideal `P`, `LocalizedModule.AtPrime P M` is a localization of `M`; Mathlib/Algebra/Module/LocalizedModule/Basic.lean:21: * `LocalizedModule.r`: the equivalence relation defining this localization, namely; Mathlib/Algebra/Module/LocalizedModule/Basic.lean:23: * `LocalizedModule M S`: the localized module by `S`.; Mathlib/Algebra/Module/LocalizedModule/Basic.lean:24: * `LocalizedModule.mk`: the canonical map sending `(m, s) : M × S ↦ m/s : LocalizedModule M S`; Mathlib/Algebra/Module/LocalizedModule/Basic.lean:25: * `LocalizedModule.liftOn`: any well-defined function `f : M × S → α` respecting `r` descents to; Mathlib/Algebra/Module/LocalizedModule/Basic.lean:26:   a function `LocalizedModule M S → α`",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For ringed sites the pullback of an open extension restriction counit becomes an isomorphism after restriction to the inverse image open",
+   "results": "[leansearch] OK 8 hit(s); AlgebraicGeometry.arrowResLEAppIso: (f : X ⟶ Y) (U : Y.Opens) (V : X.Opens) (e : V ≤ f ⁻¹ᵁ U) :\n  Arrow.mk ((f.resLE U V e).appTop) ≅ Arrow.mk (f.appLE U V e); TopCat.Presheaf.pullbackObjObjOfImageOpen: {X Y : TopCat.{v}} (f : X ⟶ Y) (ℱ : Y.Presheaf C) (U : Opens X) (H : IsOpen (f '' SetLike.coe U)) :\n  ((pullback C f).obj ℱ).obj (op U) ≅ ℱ.obj (op ⟨_, H⟩); AlgebraicGeometry.pullbackRestrictIsoRestrict: {X Y : Scheme.{u}} (f : X ⟶ Y) (U : Y.Opens) : pullback f U.ι ≅ f ⁻¹ᵁ U; AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv: {X Y : Scheme.{u}} (f : X ⟶ Y) [IsOpenImmersion f] {U : Y.Opens} {V : X.Opens} (e : V ≤ f ⁻¹ᵁ U) :\n  f.appLE U V e ≫ (f.appIso V).inv =\n    Y.presheaf.map (homOfLE <| (f.image_mono e).trans (f.image_preimage_eq_opensRange_inf U ▸ inf_le_right)).op; AlgebraicGeometry.LocallyRingedSpace.restrictTopIso: (X : LocallyRingedSpace.{u}) : X.restrict (Opens.isOpenEmbedding ⊤) ≅ X; AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso: : IsIso ((X.ofRestrict h).stalkMap x); AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc: ∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\n  {Z : AlgebraicGeometry.LocallyRingedSpace} (h : Y ⟶ Z),\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict; AlgebraicGeometry.morphismRestrictOpensRange: {X Y U : Scheme.{u}} (f : X ⟶ Y) (g : U ⟶ Y) [IsOpenImmersion g] :\n  Arrow.mk (f ∣_ g.opensRange) ≅ Arrow.mk (pullback.snd f g)",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The canonical comparison of localized module pullback is the restriction of the pulled back open adjunction counit",
+   "results": "[leanfinder] OK 8 hit(s); AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app: ∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : X.Modules)\n  (U : X.Opens),\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).counit.app M) U =\n    M.presheaf.map (CategoryTheory.eq; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat; SheafOfModules.pullbackObjUnitToUnit: {C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    {D : Type u₂} →\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\n        {J : CategoryTheory.GrothendieckTopology C} →\n          {K : CategoryTheory.GrothendieckTopology D} →\n            {F : CategoryTheory.; AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback: {X Y : AlgebraicGeometry.Scheme} →\n  (f : X ⟶ Y) →\n    [inst : AlgebraicGeometry.IsOpenImmersion f] →\n      AlgebraicGeometry.Scheme.Modules.restrictFunctor f ≅ AlgebraicGeometry.Scheme.Modules.pullback f; SheafOfModules.PullbackConstruction.adjunction: {C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    {D : Type u₂} →\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\n        {J : CategoryTheory.GrothendieckTopology C} →\n          {K : CategoryTheory.GrothendieckTopology D} →\n            {F : CategoryTheory.; SheafOfModules.pullbackIso: {C : Type u₁} →\n  [inst : CategoryTheory.Category.{v₁, u₁} C] →\n    {D : Type u₂} →\n      [inst_1 : CategoryTheory.Category.{v₂, u₂} D] →\n        {J : CategoryTheory.GrothendieckTopology C} →\n          {K : CategoryTheory.GrothendieckTopology D} →\n            {F : CategoryTheory.; AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app: ∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [inst : AlgebraicGeometry.IsOpenImmersion f] (M : Y.Modules)\n  (U : Y.Opens),\n  AlgebraicGeometry.Scheme.Modules.Hom.app ((AlgebraicGeometry.Scheme.Modules.restrictAdjunction f).unit.app M) U =\n    M.presheaf.map (CategoryTheory.homO; SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit: ∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [inst_1 : CategoryTheory.Category.{v₂, u₂} D]\n  {J : CategoryTheory.GrothendieckTopology C} {K : CategoryTheory.GrothendieckTopology D}\n  {F : CategoryTheory.Functor C D} {S : CategoryTheory.Sheaf J RingCat",
+   "date": "2026-10-21",
+   "verdict": "no match: generic categorical or ordinary-module hits do not state this ringed-site normalization"
+  },
+  {
+   "tool": "grep",
+   "query": "localizedModule|extensionByZero|extension.*[Zz]ero|counit.*restrict",
+   "results": "[grep] OK 0 hit(s), restricted to Algebra/Category/ModuleCat/Sheaf.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-cbc-adic-pullback-presentation-transport",
+  "date": "2026-10-21",
+  "group": "NW"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Tags 03DI, lemma-extension-by-zero, and 04J0, lemma-localize-morphism-ringed-sites; parent proof finite open comparison, item Steps 9--10.",
+   "via": [
+    "lem-cbc-adic-pullback-presentation-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

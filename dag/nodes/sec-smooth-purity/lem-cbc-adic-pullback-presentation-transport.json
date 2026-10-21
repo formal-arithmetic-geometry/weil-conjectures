@@ -26,21 +26,19 @@
  ],
  "proof": [
   {
-   "text": "Lean proof: use joint monicity of the actual limit projections to identify each coefficient presentation with completedCoefficientMap. For quotient compatibility first prove naturality of proEtaleConstantDirectImageMap under every coefficient homomorphism by the sheafification adjunction and naturality of toSheafify. Apply inverse image and the counit naturality equation to obtain naturality of proEtaleConstantInverseImageMap. NatTrans.ofOpSequence supplies the comparison of the constant quotient systems from these consecutive squares. Conjugate it by pbcConstantSystemComparison on the two sites. Its naturality at (homOfLE hab).op gives the required finite coefficient square for all hab, including equal indices.",
+   "text": "The projections of $A_{T'}$ are jointly monic, so the prescribed components give $c_g^{(1)}=c_g^{(2)}$. Apply [lem-cbc-finite-constant-map-naturality] to each $P_b\\to P_a$ to obtain the quotient squares.",
    "uses": [
     "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-proetale-inverse-image",
-    "prop-weil-pbc-proetale-constant-ring-map",
-    "def-weil-presheaf-modules-sheafification"
+    "lem-cbc-finite-constant-map-naturality"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-    "place": "Presentation and quotient-unit normalization underlying the invocation of def-weil-pbc-completed-pullback; agent-written details"
+    "place": "Completed-pullback and finite-reduction sentences; assembly Step 1 of the finer split required by the human repair note of 2026-10-21."
    }
   },
   {
-   "text": "Since the two coefficient homomorphisms are equal, the balancing relations defining $G_1(M)$ and $G_2(M)$ coincide. Thus $x\\otimes b\\mapsto x\\otimes b$ and the identical reverse formula are well-defined inverse maps on presheaf tensor products [def-pur-sheaf-tensor-product]. They commute with restrictions, with module maps $h$ (both routes send $x\\otimes b$ to $g^{-1}h(x)\\otimes b$), and degreewise with differentials. Sheafification [def-weil-presheaf-modules-sheafification] gives the natural isomorphism $\\alpha$, also on strict diagrams: each transition square is this same naturality square.",
+   "text": "The balancing relations now coincide. Identity on $x\\otimes b$ and the same reverse formula give $\\alpha$; restrictions, module maps and differentials preserve this formula. Sheafification gives the same natural isomorphism on strict towers.",
    "uses": [
     "def-pur-sheaf-tensor-product",
     "def-weil-presheaf-modules-sheafification"
@@ -48,136 +46,105 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-    "place": "Presentation and quotient-unit normalization underlying the invocation of def-weil-pbc-completed-pullback; agent-written details"
+    "place": "Completed-pullback and finite-reduction sentences; assembly Step 2 of the finer split required by the human repair note of 2026-10-21."
    }
   },
   {
-   "text": "Lean proof: the chosen completedOrdinaryPullback_exists and completedTowerPullback_exists pairs satisfy their universal properties by choose_spec.choose_spec.1 after explicitly unfolding the chosen functors. For arbitrary universal pairs, Mathlib Functor.leftDerivedUnique constructs the ordinary and tower isomorphisms. Their counit equations follow from leftDerivedNatTrans_fac. Any other isomorphism with the same equation has equal hom by Functor.leftDerived_ext, hence is equal by Iso.ext. The construction theorems already retain the resolving-class and K-flat computation data; no new existence statement or resolution is needed here.",
+   "text": "Universality gives the maps induced by $\\alpha$ and $\\alpha^{-1}$. Their composites preserve the counits and hence are identities by uniqueness. This constructs the unique $e,\\widetilde e$ with the stated counit equations.",
    "uses": [
-    "def-weil-pbc-completed-pullback"
+    "lem-pur-left-derived-from-kflat-class"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05S7, section-derived-functors, universal derived pair; Tag 06XN, lemma-find-existence-computes, dual computation, with the universal property recorded in lem-pur-left-derived-from-kflat-class"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Completed-pullback and finite-reduction sentences; assembly Step 3 of the finer split required by the human repair note of 2026-10-21."
    }
   },
   {
-   "text": "Take a strict replacement $P_\\bullet\\to M_\\bullet$ from [lem-weil-pbc-diagram-kflat-replacements]. Evaluation gives K-flat complexes with flat terms. Since evaluation is exact [lem-weil-tower-category-levelwise-abelian], the computations of the preceding step identify both $\\operatorname{ev}_n\\widetilde L_i(M_\\bullet)$ and $L_i(\\operatorname{ev}_nM_\\bullet)$ with $Q'G_i(P_n)$; the comparison between presentations is $Q'\\alpha_{P_n}$ on either route. The constant diagram $\\Delta P$ is itself objectwise K-flat with flat terms; hence both $\\widetilde L_i\\Delta(QP)$ and $\\Delta L_i(QP)$ have representative $\\Delta G_i(P)$, and their presentation comparison is $\\Delta\\alpha_P$. These identifications are natural: resolve a chain arrow as a diagram indexed by $J\\times[1]$, so its two endpoints and its map are resolved simultaneously. Naturality is then the ordinary naturality of $\\alpha$; the objectwise quasi-isomorphisms are inverted by the cited replacement theorem. A roof in the localization is handled by its two chain arrows and inversion of its quasi-isomorphism. Any input has a replacement of this kind, so these computations also fix the comparisons uniquely. The constant-tower identification is the one used in [def-weil-pbc-completed-pullback]. Lean partial progress: adicPresentationEvaluationComplex_eq is proved by rfl. The constant comparison square follows by whiskering the counit-preserving identifications with the published pairs and cancelling the tower isomorphisms. For the evaluation square, conjugate the first normalized evaluation isomorphism by et inverse and e. A general private lemma shows that a counit-preserving map intertwines leftDerivedCounitOnComplex: move it through the quotient comparison by naturality and apply the counit equation. Apply this lemma to both pairs to verify the conjugated evaluation normalization on every strict objectwise K-flat complex. The existing evaluation uniqueness theorem identifies the conjugate with the second chosen evaluation isomorphism, and cancellation gives the square. The generalized constant normalization and evaluation existence/uniqueness remain their original named obligations.",
+   "text": "Apply [lem-cbc-derived-constant-tower-normalization, lem-cbc-derived-tower-evaluation-normalization]. Substituting the counit equations in their representative formulas cancels the invertible counits; both remaining maps are identity on the same tensors. Uniqueness extends the squares to all objects. In particular $\\widetilde e_{\\Delta K}b_1=b_2\\Delta(e_K)$.",
    "uses": [
-    "lem-weil-pbc-diagram-kflat-replacements",
-    "lem-pur-left-derived-from-kflat-class",
-    "lem-weil-tower-category-levelwise-abelian",
-    "def-weil-abstract-derived-category",
-    "def-weil-pbc-completed-pullback"
+    "lem-cbc-derived-constant-tower-normalization",
+    "lem-cbc-derived-tower-evaluation-normalization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-    "place": "Presentation and quotient-unit normalization underlying the invocation of def-weil-pbc-completed-pullback; agent-written details"
+    "place": "Completed-pullback and finite-reduction sentences; assembly Step 4 of the finer split required by the human repair note of 2026-10-21."
    }
   },
   {
-   "text": "For a K-flat flat-term representative $P$ of $K$, put $R_\\bullet(P)=(P\\otimes_{A_T}(P_n)_T)_n$ with the strict quotient transitions of [def-weil-pbc-adic-coefficient-datum]. Use the finite-reduction isomorphisms of [lem-weil-pbc-constant-completion-equivalence], which are natural for the projection-induced ring map and commute with quotient transitions. The ring map in both presentations is precisely that map by Step 1. At the ordinary tensor level their scalar comparisons use the same balancing maps: $((x\\otimes b)\\otimes a)\\mapsto x\\otimes q_{b,a}(b)a$, with reverse $x\\otimes a\\mapsto(x\\otimes1)\\otimes a$. Inserting $\\alpha$ before or after either map gives the same displayed tensor. Thus conjugating each finite-reduction comparison by the presentation comparisons leaves it unchanged. To read this calculation in the derived category, resolve the entire strict complex $R_\\bullet(P)$ by an objectwise K-flat flat-term diagram, using [lem-weil-pbc-diagram-kflat-replacements], and use the counit computations of Step 3. The quotient complexes $P\\otimes(P_n)_T$ need not be K-flat over $A_T$; they are not used as pullback resolutions. Naturality of the cited finite-reduction comparisons and the identity tensor maps proves the same square on these resolved diagrams. The transitions are already arrows of those diagrams, and both routes send a tensor to its image under the same $q_{b,a}$. Consequently the comparisons respect every quotient map in the strict tower, rather than only its separate derived evaluations. Lean partial progress: finite comparison transport is proved directly from universality. Functor.leftDerived_ext shows that et followed by the second comparison to the published tower pair equals the first comparison. Apply evaluation to this equality and postcompose with completedReductionFiniteEvaluation. The original all-quotient transition theorem remains open.",
+   "text": "For the canonical tower pair, [lem-cbc-strict-quotient-pullback-computation] supplies the whole-diagram counit computation; [lem-cbc-derived-finite-quotient-coherence] identifies its finite maps and transitions. For the counit-preserving $t_i:\\widetilde L_i\\cong\\widetilde L_0$, uniqueness gives $t_2\\widetilde e=t_1$. Thus $F_{i,n}=F_{0,n}\\operatorname{ev}_n(t_i)$ gives $F_{2,n}\\operatorname{ev}_n(\\widetilde e)=F_{1,n}$. Naturality of $t_i$ transports each quotient square.",
    "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-diagram-kflat-replacements",
-    "lemma-weil-pbc-completed-pullback-reduction"
+    "lem-cbc-strict-quotient-pullback-computation",
+    "lem-cbc-derived-finite-quotient-coherence",
+    "def-weil-pbc-completed-pullback",
+    "lem-pur-left-derived-from-kflat-class"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-    "place": "Presentation and quotient-unit normalization underlying the invocation of def-weil-pbc-completed-pullback; agent-written details"
+    "place": "Completed-pullback and finite-reduction sentences; assembly Step 5 of the finer split required by the human repair note of 2026-10-21."
    }
   },
   {
-   "text": "Let $a_P:\\Delta P\\to R_\\bullet(P)$ be the augmentation, $a_{P,n}(x)=x\\otimes1$. It is strict: $(1\\otimes q_{b,a})(x\\otimes1)=x\\otimes1$, and it commutes with differentials and with maps of $P$. This is the augmentation in [def-weil-pbc-completed-pullback]. Write $b_{i,K}:\\Delta L_iK\\xrightarrow{\\sim}\\widetilde L_i\\Delta K$ for the normalized constant-tower comparison of Step 4, and set $v_i=\\widetilde L_i(Q_{\\operatorname{Tow}}a_P)b_{i,K}$. Naturality of the actual transformation $\\widetilde e$ at the derived morphism $Q_{\\operatorname{Tow}}a_P$ gives\n$$\\widetilde e_{K_\\bullet}v_1=v_2\\Delta(e_K).$$\nIndeed Step 4 gives $\\widetilde e_{\\Delta K}b_{1,K}=b_{2,K}\\Delta(e_K)$, and substitution into the naturality equation gives the displayed formula. This is an equality in the derived category of strict towers; no lift of $a_P$ into an independently chosen target resolution is being assumed. Lean proof of the completion transport uses the constant-comparison square derived directly from the definitions: the composites of each presentation isomorphism with the comparison to the published pair agree by leftDerived_ext, and cancellation gives the corresponding inverse equation. Whisker and compose these equalities to obtain the square without assuming adicPresentationComparison_squares. Apply et.naturality to completedReductionTowerUnit to obtain the displayed strict-tower equality.",
+   "text": "Use the specified quotient augmentation of [lem-cbc-strict-quotient-pullback-computation] and the constant comparison $b_i$ of Step 4. Thus $v_i=\\widetilde L_i(Qa_P)b_i$. Naturality of $\\widetilde e$ at $Qa_P$ and $\\widetilde e_{\\Delta K}b_1=b_2\\Delta(e_K)$ give $\\widetilde e_{K_\\bullet}v_1=v_2\\Delta(e_K)$.",
    "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
+    "lem-cbc-strict-quotient-pullback-computation",
     "def-weil-pbc-completed-pullback"
    ],
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-    "place": "Presentation and quotient-unit normalization underlying the invocation of def-weil-pbc-completed-pullback; agent-written details"
+    "place": "Completed-pullback and finite-reduction sentences; assembly Step 6 of the finer split required by the human repair note of 2026-10-21."
    }
   },
   {
-   "text": "The functor $R\\lim$ of [prop-weil-pbc-rlim-functoriality] sends $\\widetilde e_{K_\\bullet}$ and its inverse to mutually inverse arrows. Thus $E_K=R\\lim(\\widetilde e_{K_\\bullet})$ is an isomorphism. Its naturality follows by applying this same functor to the naturality square of $\\widetilde e$ composed with the strict reduction functor $K\\mapsto K_\\bullet$ of [def-weil-pbc-adic-coefficient-datum]. Applying it to the equality of Step 6 gives $E_KR\\lim(v_1)=R\\lim(v_2)R\\lim\\Delta(e_K)$. Lean implementation unfolds adicPresentationLimitComparison and uses Functor.map_comp to apply completedTowerRlim to the strict-tower equality from the preceding step.",
+   "text": "The functor $R\\lim$ sends $\\widetilde e_{K_\\bullet}$ and its inverse to inverses, so $E_K$ is an isomorphism. Applied to the naturality square of $\\widetilde e$ composed with the strict reduction functor $K\\mapsto K_\\bullet$ of [def-weil-pbc-adic-coefficient-datum], it gives naturality of $E_K$ in $K$. It sends Step 6 to $E R\\lim(v_1)=R\\lim(v_2)R\\lim\\Delta(e)$. Naturality of the specified unit $\\eta$ is [lem-cbc-constant-derived-limit-resolution-unit]. Substitute $u_i=R\\lim(v_i)\\eta_{L_iK}$ to obtain $Eu_1=u_2e$.",
    "uses": [
     "prop-weil-pbc-rlim-functoriality",
-    "def-weil-pbc-adic-coefficient-datum"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-    "place": "Presentation and quotient-unit normalization underlying the invocation of def-weil-pbc-completed-pullback; agent-written details"
-   }
-  },
-  {
-   "text": "Write $\\eta_C:C\\to R\\lim\\Delta C$ for the constant-tower unit constructed in [def-weil-pbc-completed-pullback]. It is natural in $C$: for a chain map $h:C\\to D$, choose the functorial tower K-injective resolution used in [prop-weil-pbc-rlim-functoriality]. Its map $I(\\Delta h)$ sends each component of $\\Delta C\\to I(\\Delta C)$ to the corresponding component of $\\Delta D\\to I(\\Delta D)$ composed with $h$. Factoring the compatible families through the ordinary inverse limit therefore gives $(R\\lim\\Delta h)\\eta_C=\\eta_Dh$. The same equality holds for inverses of quasi-isomorphisms, hence for derived arrows. In particular $(R\\lim\\Delta e_K)\\eta_{L_1K}=\\eta_{L_2K}e_K$. By definition $u_i=R\\lim(v_i)\\eta_{L_iK}$; substitution into the last equation of Step 7 now gives\n$$E_Ku_1=R\\lim(v_2)R\\lim\\Delta(e_K)\\eta_{L_1K}=R\\lim(v_2)\\eta_{L_2K}e_K=u_2e_K.$$\nThis uses the specified quotient augmentation and its constant-tower normalization throughout. Lean implementation applies completedConstantRlimUnit.naturality at e.hom.app K and postcomposes by the two derived-limit factors. Associativity gives precisely adicPresentationCompletion_transport.",
-   "uses": [
+    "lem-cbc-constant-derived-limit-resolution-unit",
     "def-weil-pbc-completed-pullback",
-    "prop-weil-pbc-rlim-functoriality"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-    "place": "Presentation and quotient-unit normalization underlying the invocation of def-weil-pbc-completed-pullback; agent-written details"
-   }
-  },
-  {
-   "text": "For the final clause, in a cartesian open square identify the open sites with slice sites using [lem-weil-proetale-weakly-etale-localization]. This identification also restricts the completed coefficient sheaves: on an object over the open, their sections are the same compatible families of finite coefficient sections. Apply [lem-pur-site-restriction-module-adjunction-exact] to these ringed slice sites. Its extension is exactly $j_!F=P_F^\\#$ with $P_F$ from [def-weil-extension-by-zero-presheaf]. The adjunction counit $j_!j^*H\\to H$ sends the generator $s$ in the summand indexed by $\\varphi:V\\to U$ to the same section $s\\in H(V)$. The unit sends $s$ on $V\\to U$ to its generator in that summand. These descriptions follow by applying the adjunction's presheaf-to-sheaf factorization [def-weil-presheaf-modules-sheafification]. Since $\\alpha$ is identity on balanced tensors, these unit and counit formulas coincide for the two presentations, also after a finite quotient. The localized pullback comparison is that of [lem-weil-pbc-localize-ringed-site-morphism], induced by restriction of the same ring map $c_g$. Thus its finite maps coincide under Steps 1--5 as well.",
-   "uses": [
-    "lem-weil-proetale-weakly-etale-localization",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification",
-    "lem-weil-pbc-localize-ringed-site-morphism"
+    "def-weil-pbc-adic-coefficient-datum"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI and 03DJ, lemma-extension-by-zero and lemma-extension-by-zero-exact; generator descriptions in the proof of 03DI"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+    "place": "Completed-pullback and finite-reduction sentences; assembly Step 7 of the finer split required by the human repair note of 2026-10-21."
    }
   },
   {
-   "text": "Finally use the explicit inverse adjoint correspondence of [def-weil-pbc-adjunction-mate]. For $\\beta:GR_1\\to R_2H$ its inverse mate is\n$$L_2G\\xrightarrow{L_2G\\eta_1}L_2GR_1L_1\\xrightarrow{L_2\\beta L_1}L_2R_2HL_1\\xrightarrow{\\varepsilon_2HL_1}HL_1.$$\nIn the open square take $L_1=j_!$, $R_1=j^*$, $L_2=j'_!$, $R_2=j'^*$ and the finite pullbacks as $G,H$. The two presentations give the same $\\beta$ by the localized comparison in Step 9; that step also gives the same $\\eta_1,\\varepsilon_2$. Substitution into the displayed three-factor composite proves equality of the inverse mates. This is equality of the finite sheaf maps and counits themselves, and the computations in Steps 3--5 carry their normalized derived comparisons with them. It neither asserts that taking mates preserves arbitrary isomorphisms nor requires an inverse to the completed coefficient map. In particular all arguments remain in the distinct ambient coefficient categories specified in the statement. Lean proof: the specified inverse mate has the claimed counit formula by expanding mateEquiv in arbitrary categories and applying functoriality and the source adjunction triangle identity. The assertion that two specified mates equal the canonical one follows from injectivity of mateEquiv and Equiv.apply_symm_apply. The open-immersion hypothesis is retained unchanged. The invertibility theorem for the localized finite comparison remains open.",
+   "text": "For the open square, [lem-cbc-open-localized-counit-comparison] identifies the finite localized maps and their actual sheafified counits. The presentations have the same tensors and coefficient maps, so these data coincide. The inverse mate is the fixed composite $\\varepsilon_2HL_1\\circ L_2\\beta L_1\\circ L_2G\\eta_1$; substituting the identical data proves equality of mates.",
    "uses": [
+    "lem-cbc-open-localized-counit-comparison",
     "def-weil-pbc-adjunction-mate"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-    "place": "Presentation and quotient-unit normalization underlying the invocation of def-weil-pbc-completed-pullback; agent-written details"
+    "place": "Completed-pullback and finite-reduction sentences; assembly Step 8 of the finer split required by the human repair note of 2026-10-21."
    }
   }
  ],
  "proof_deps": [
   "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-proetale-inverse-image",
-  "prop-weil-pbc-proetale-constant-ring-map",
-  "def-weil-presheaf-modules-sheafification",
+  "lem-cbc-finite-constant-map-naturality",
   "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-completed-pullback",
-  "lem-weil-pbc-diagram-kflat-replacements",
+  "def-weil-presheaf-modules-sheafification",
   "lem-pur-left-derived-from-kflat-class",
-  "lem-weil-tower-category-levelwise-abelian",
-  "def-weil-abstract-derived-category",
-  "lem-weil-pbc-constant-completion-equivalence",
+  "lem-cbc-derived-constant-tower-normalization",
+  "lem-cbc-derived-tower-evaluation-normalization",
+  "lem-cbc-strict-quotient-pullback-computation",
+  "lem-cbc-derived-finite-quotient-coherence",
+  "def-weil-pbc-completed-pullback",
   "prop-weil-pbc-rlim-functoriality",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "def-weil-extension-by-zero-presheaf",
-  "lem-weil-pbc-localize-ringed-site-morphism",
-  "def-weil-pbc-adjunction-mate",
-  "lemma-weil-pbc-completed-pullback-reduction"
+  "lem-cbc-constant-derived-limit-resolution-unit",
+  "lem-cbc-open-localized-counit-comparison",
+  "def-weil-pbc-adjunction-mate"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-  "place": "M9 stage-3 partial proof, 2026-10-19: ten of fourteen original obligations proved from the published universal pairs, Mathlib left-derived uniqueness, constant-sheaf adjunction naturality, strict-tower naturality and the mate equivalence. Four original proof obligations retain their existing plans and statements."
+  "place": "2026-10-21 finer split: constant/evaluation normalization, canonical quotient coherence and localized counit arguments extracted; original item statement unchanged."
  },
  "mathlib_searches": [
   {
@@ -249,6 +216,41 @@
    "results": "8 hits: CategoryTheory.Adjunction.derived'_counit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedε_fac_app, AlgebraicTopology.DoldKan.Compatibility.τ₁, CategoryTheory.ChosenPullbacksAlong.iso_mapPullbackAdj_counit_app, CategoryTheory.Pseudofunctor.DescentData.pullFunctorEquivalence_counitIso, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit_assoc, CategoryTheory.ChosenPullbacksAlong.pullbackComp_hom_counit. Read LeftDerived.lean lines 77--137: the universal-pair comparison is present, but not the adic projections, strict finite-reduction compatibility and completion-unit statement.",
    "date": "2026-10-17",
    "verdict": "no match for the complete statement"
+  },
+  {
+   "tool": "grep",
+   "query": "completedPullback|derivedCompletion|adicPresentation|leftDerivedUnique|leftDerived_ext",
+   "results": "Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean; Mathlib/CategoryTheory/Functor/Derived/PointwiseLeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean; Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean. Read Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:91-137 for generic uniqueness; no hit states the adic strict-tower, finite-transition and unit assertions.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerivedUnique",
+   "results": "CategoryTheory.Functor.leftDerivedUnique. Read Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:91-137 for generic uniqueness; no hit states the adic strict-tower, finite-transition and unit assertions.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit normalized isomorphisms of derived module pullback commute with strict adic reduction towers and completion units",
+   "results": "AdicCompletion.transitionMap_comp_reduceModIdeal; IsAdicComplete.StrictMono.of_comp_lift; AdicCompletion.eval_comp_of; AdicCompletion.factor_eval_eq_evalₐ; AdicCompletion.factor_evalₐ_eq_eval; AdicCompletion.transitionMap_comp_eval; IsAdicComplete.of_comp_lift; AdicCompletion.transitionMap_comp_eval_apply. Read Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:91-137 for generic uniqueness; no hit states the adic strict-tower, finite-transition and unit assertions.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Natural isomorphisms between total left derived functors compatible with counits and quotient tower completion units",
+   "results": "CategoryTheory.Functor.leftDerivedNatIso; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc; CategoryTheory.Functor.leftDerivedZeroIsoSelf; CategoryTheory.Functor.isLeftDerivedFunctor_iff_of_inverts; CategoryTheory.Functor.isLeftDerivedFunctor_iff_isIso_leftDerivedLift; CategoryTheory.Functor.isIso_of_isLeftDerivedFunctor_of_inverts; CategoryTheory.Functor.leftDerivedNatIso_hom; CategoryTheory.ProjectiveResolution.isoLeftDerivedToHomotopyCategoryObj_hom_naturality. Read Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:91-137 for generic uniqueness; no hit states the adic strict-tower, finite-transition and unit assertions.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A change of presentation of ringed topos derived inverse image preserves finite coefficient reduction maps and derived completion augmentation",
+   "results": "SheafOfModules.Presentation.map_generators_I; SheafOfModules.Presentation.map_relations_I; SheafOfModules.Presentation.map_π_eq; SheafOfModules.Presentation.map; SheafOfModules.Presentation.mapRelations_mapGenerators; SheafOfModules.Presentation.mapGenerators; SheafOfModules.Presentation.mapRelations; SheafOfModules.QuasicoherentData.IsFinitePresentation.isFinite_presentation. Read Mathlib/CategoryTheory/Functor/Derived/LeftDerived.lean:91-137 for generic uniqueness; no hit states the adic strict-tower, finite-transition and unit assertions.",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item"
   }
  ],
  "mathlib_match": null,
@@ -271,39 +273,19 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-cbc-adic-pullback-presentation-transport",
   "worker": "stage1",
-  "summary": "Proved coefficient-map uniqueness, quotient naturality, the balanced tensor isomorphism, both counit-normalized universal comparisons, strict evaluation/constant/finite-reduction compatibility, and the completion-unit square. Kept the quotient tower distinct from its K-flat replacement and checked open inverse mates by the presheaf generator and adjunction formulas. Reused existing nodes throughout; no statement change or new node.",
-  "blueprint": "lem-cbc-completed-extension-zero-comparison.proof.md: invocation of def-weil-pbc-completed-pullback and finite-reduction compatibility. Steps 1--5 give the presentation normalization, 6--8 the quotient augmentation and completion-unit normalization, 9--10 the retained open adjunction data.",
+  "summary": "G1/A6 repair following coord/repair-notes/lem-cbc-adic-pullback-presentation-transport.json (2026-10-21, released, keep_plan). Preserved statement and stmt_deps. Extracted seven statement-only unsplit nodes: finite coefficient naturality, resolving strict quotient computation, normalized constant descent, normalized evaluation descent, canonical finite-transition coherence, projection-defined derived-limit unit, and localized open counit. Parent is a short assembly; each helper has a separate proof under 3000 characters retained only in report.md. Reused retained logged searches and report, and preserved current live metadata. No Lean written or compiler run.",
+  "blueprint": "Ancestor lem-cbc-completed-extension-zero-comparison, completed-pullback invocation and finite-reduction sentence. Seven extracted nodes carry the resolving, descent, finite-transition, unit and localized-counit arguments; elementary counit cancellation, augmentation naturality and mate substitution assemble them.",
   "tool_uses": [
    {
-    "node": "prop-weil-pbc-proetale-constant-ring-map",
-    "why": "Canonical constant-section structure maps at finite levels."
-   },
-   {
     "node": "lem-pur-left-derived-from-kflat-class",
-    "why": "Universal derived pair and invertible counit on the resolving class; used without changing the CBC route."
-   },
-   {
-    "node": "lem-weil-pbc-diagram-kflat-replacements",
-    "why": "Strict diagram resolving class for the singleton, tower and arrow categories; no CBC-specific theorem supplies these resolutions."
-   },
-   {
-    "node": "lem-weil-pbc-constant-completion-equivalence",
-    "why": "Already specified coefficient and finite-reduction comparisons; used as a coefficient tool, not to identify the ambient categories."
+    "why": "Generic universal derived-pair construction and uniqueness already used by this item."
    },
    {
     "node": "prop-weil-pbc-rlim-functoriality",
-    "why": "Functorial total derived inverse limit, applied to the strict-tower equality."
-   },
-   {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Identifies open pro-etale sites with their slice sites."
-   },
-   {
-    "node": "lem-weil-pbc-localize-ringed-site-morphism",
-    "why": "Canonical localized ringed pullback comparison in the open square."
+    "why": "Generic total derived inverse limit functor on strict towers (functorial K-injective model); used to apply R lim to the tower comparison and its inverse."
    }
   ]
  },
@@ -317,12 +299,12 @@
   "lem-weil-pbc-localize-ringed-site-morphism"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q18-a15f1e693",
-  "group": "Q18",
+  "reviewer": "NT-cc-NW-f59a23c1d",
+  "group": "NW",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-a15f1e693 (reviewer sub-agent of L); spot-checked: Read the item's statement and all ten steps in full, every cited node's statement, the parent lem-cbc-completed-extension-zero-comparison (Steps 9 and 11 cite this item), its main-20261015 blueprint proof, unit sk-prop-sf-cbc, and Stacks 05S7 (derived.tex l.4509) and 03DI/03DJ (sites-modules.tex l.2058/2160). The statement and stmt_deps are byte-identical to the unsplit side-DAG node, so nothing was changed or weakened. There are no new nodes and no SGA citation. review_split.py gives PASS, and every off-unit statement use is a declared tool_use; I accept all seven. Mathematics: the component hypothesis plus the limit-sheaf definition in the adic datum force c^(1)=c^(2) (Step 1). The quotient square holds because the adjuncts g_*(q)rho_b and rho_a q agree on constant sections and hence after sheafification. So G_1=G_2 and alpha is the identity (Step 2). I checked both hypotheses of lem-pur-left-derived-from-kflat-class through lem-weil-pbc-diagram-kflat-replacements, for J the singleton, N^op and Jx[1] (Steps 3-4). Exactness of Q'G_i on the homotopy category is one line. Step 5 resolves the quotient tower again instead of treating it as K-flat, which is correct. I recomputed e~ v_1 = v_2 Delta(e) (Step 6), E_K u_1 = u_2 e_K through naturality of eta for the functorial K-injective model (Steps 7-8), and the inverse-mate substitution (Steps 9-10). Steps 6-8 agree with the augmentation and unit construction in def-weil-pbc-completed-pullback. Non-load-bearing remarks: Step 9's generator formulas for unit and counit come from the 03DI construction, but Step 10 needs only that both presentations use the same adjunction. The report mislabels 05S9 and lists a citations.json that is not in the commit. Edge cases tested: empty T', g=id, a=b, unit ideal, U=X, K=0. No fixes made."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NW-f59a23c1d (reviewer sub-agent of L); spot-checked: This head carries out the human's re-split note of 2026-10-21. The note is in coord/repair-notes, released, keep_plan; heads 6ae0296e and 185a691f were returned for not doing so. The statement and stmt_deps are byte-identical to the live node, so no target is weakened. The item is not in the dropped list, no SGA source is cited, and the Lean module still has 4 sorries, so the item is not Lean-closed. Every argument of the old 10-step proof (11828 characters) is now a new node: old 1 is lem-cbc-finite-constant-map-naturality; old 4 is the constant-tower and evaluation normalization nodes; old 5 is lem-cbc-strict-quotient-pullback-computation plus lem-cbc-derived-finite-quotient-coherence; old 6's augmentation is in the strict-quotient node; old 8 is lem-cbc-constant-derived-limit-resolution-unit; old 9 is lem-cbc-open-localized-counit-comparison. Old steps 2, 3, 7 and 10 remain as short parent steps. The parent is 8 steps and 2470 characters (2704 after my fix). The seven nodes are statement-only and unsplit, with statements of 724 to 1743 characters, all references in stmt_deps, and recorded searches. None restates the item, and none duplicates an existing node; I checked finite-open-exchange-scalars, open-extension-zero-etale-adjunction-agreement, ringed-open-extension-products, completed-quotient-unit-normalization, completed-constant-presentation-transport and exact-product-functor-strict-limit. Mathematics checked: the counit formula chi_r and the identity Q'G(r)chi_r w_P=Q'G(a_P) by naturality of tau without lifting a_P; the typing of b=tau^-1 Delta'(eps) and v=eps^-1 e'(tau) and their descent by lem-sc-nattrans-from-resolving-class (right calculus, resolutions R->X); the transition identity L(d)v_b=v_a d'; the transitions of the finite-quotient coherence (n+1->n clause composed, cocycle); naturality and descent of the unit z_C; and invertibility of beta through 04J0, subterminal U, j^*j_!=id and the triangle identity, with the 03DI generator formulas. Parent steps 4 to 8 recomputed: tau2 e~ b1=tau2 b2 Delta'(e); t2 e~=t1; e~ v1=v2 Delta(e); E u1=u2 e; the inverse-mate substitution. Edge cases: K=0, B=0, T' empty, a=b, I=A, U empty, U=T. Sources: Stacks 06XN (derived l.5092), 03DI (sites-modules l.2058), 04J0 (l.2369), 079P (injectives l.1807) and the main-20261015 parent proof. Three fixes, all in the item file. (1) Step 7 had dropped the old argument that E_K is natural in K (apply R lim to the naturality square of e~ composed with the strict reduction functor K->K_bullet); restored, citing def-weil-pbc-adic-coefficient-datum. (2) Step 5 now also cites def-weil-pbc-completed-pullback and lem-pur-left-derived-from-kflat-class. (3) The tool_uses why-line for prop-weil-pbc-rlim-functoriality, which was a copy of the other entry's, is corrected. Both tool_uses are accepted. Advisory: two inherited stmt_deps of the item are not named in its statement.; 1 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-17",

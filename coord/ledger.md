@@ -19860,3 +19860,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:37 L: merged deliver/Q80/lem-sfb-adic-localizing-exceptional-cohomology (reviewer PASS; after a return; new nodes: 1)
 - 03:37 L: merged deliver/Q44/lem-sp-finite-ring-action-local-constancy (reviewer PASS; first push; new nodes: 0)
 - 03:37 L: merged deliver/Q14/det-thm-sfb-proper-base-change-rational (reviewer FIX; after a return; new nodes: 4)
+- 03:37 L: merged deliver/NW/lem-cbc-adic-pullback-presentation-transport (reviewer FIX; after a return; new nodes: 7)
