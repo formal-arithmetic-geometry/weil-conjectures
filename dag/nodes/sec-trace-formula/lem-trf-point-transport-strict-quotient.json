@@ -1,0 +1,91 @@
+{
+ "id": "lem-trf-point-transport-strict-quotient",
+ "kind": "statement",
+ "title": "Strict point transport on simultaneous quotient complexes",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$, a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi$, and $A_n=\\mathcal O_E/\\varpi^n$ for $n\\ge1$ [def-trf-coefficient-conventions]. Put $s=\\operatorname{Spec}k$, $g=\\operatorname{Spec}(\\gamma)$ for geometric Frobenius [def-weil-frobenius-detailed], $R=\\widehat{\\mathcal O}_{E,s}=\\lim_n(A_n)_s$, and $\\Gamma=\\Gamma(s,-)$ on the small pro-etale site [def-weil-pbc-proetale-site, def-weil-completed-integral-coefficients, lem-weil-point-proetale-sections-exact]. For a flat-term K-flat complex $P$ of $R$-modules [def-pc-kflat-complex, def-pc-flat-sheaf-modules], put $P_n=P\\otimes_R(A_n)_s$, $r_n(x)=x\\otimes1$, and $t_n=1\\otimes(A_{n+1}\\to A_n)$ [def-weil-pbc-adic-coefficient-datum]. Let $C_n=\\operatorname{Res}_ng_n^*P_n$, with the coefficient-induced transition $v_n:C_{n+1}\\to C_n$ of [def-weil-inverse-image-pullback-comparison](b); put $D_n=\\Gamma P_n$, $B_n=\\Gamma C_n$. All these towers are over the single integral coefficient ring after restriction of scalars. Use the restriction/colimit-insertion/sheafification map $\\sigma$ and finite tensor-insertion comparison $\\kappa$ of [def-weil-frobenius-point-transport, def-weil-inverse-image-pullback-comparison]. The maps $u_n=\\Gamma(\\kappa_{P_n})\\sigma_{P_n}:D_n\\to B_n$ are $\\mathcal O_E$-linear chain maps satisfying the strict equalities\n$$\\Gamma(v_n)u_{n+1}=u_n\\Gamma(t_n),\\qquad \\Gamma(\\theta_n)\\sigma_P=u_n\\Gamma(r_n),\\qquad \\theta_n=\\kappa_{P_n}g^{-1}(r_n).$$\nThey therefore give a strict tower map $u(P):D_\\bullet\\to B_\\bullet$. The equalities use the actual quotient coefficient maps and the structure square $\\pi_nc_{\\mathcal O_E}=c_{A_n}g^{-1}(\\pi_n)$; they hold before localization. For every chain map $f:P\\to P'$ between such complexes, writing $f_n=f\\otimes1$, one has\n$$u_n(P')\\Gamma(f_n)=\\Gamma(g_n^*f_n)u_n(P).$$\nThe two tower functors and this map descend through quasi-isomorphisms between flat-term K-flat representatives to a natural transformation on the derived category of $R$-modules, independently of the common representative. Its source is sections of the coherent reduction tower and its target is sections of the finite pullback quotient tower. If $N=[P]$ lies in $D^b_c(s,\\mathcal O_E)$ [def-weil-derived-complete-integral-detailed], its $n$-th evaluation is precisely $\\iota_{N_n}$, where $N_n=N\\otimes_R^L(A_n)_s$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
+  "place": "clause (3), simultaneous quotient transport: original realization proof steps 1-2 and chain/tower naturality in step 6"
+ },
+ "stmt_deps": [
+  "def-trf-coefficient-conventions",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-frobenius-point-transport",
+  "def-weil-derived-complete-integral-detailed",
+  "def-weil-frobenius-detailed",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Frobenius point transport on simultaneous quotient complexes commutes strictly with coefficient transitions and quotient augmentations",
+   "results": "[leanfinder] OK 8 hit(s); PreTilt.coeff_frobeniusEquiv_symm, PreTilt.coeff_iterate_frobeniusEquiv_symm, AlgHom.IsArithFrobAt.mk_apply, IsArithFrobAt.arithFrobAt, AlgHom.IsArithFrobAt.restrict_mk, Ideal.quotientToQuotientRangePowQuotSuccAux_mk, AlgHom.IsArithFrobAt.restrict, AdicCompletion.transitionMap_comp_reduceModIdeal. Restriction, pullback/sheafification and ordinary adic module quotients are ingredients only; none supplies the Frobenius point map with strict coefficient-transition and augmentation equalities and derived tower descent.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "restriction and inverse image tensor unit define a natural morphism between towers of sheaf sections over quotient coefficient rings",
+   "results": "[leanfinder] OK 8 hit(s); SheafOfModules.Presentation.map_π_eq, SheafOfModules.unitToPushforwardObjUnit, ModuleCat.Tilde.res_apply, SheafOfModules.unitHomEquiv_symm_comp, PresheafOfModules.Monoidal.tensorObjMap, ModuleCat.Tilde.toOpen_res, SheafOfModules.unitHomEquiv_comp_apply, ModuleCat.Tilde.toOpen. Restriction, pullback/sheafification and ordinary adic module quotients are ingredients only; none supplies the Frobenius point map with strict coefficient-transition and augmentation equalities and derived tower descent.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback",
+   "results": "[loogle] OK 12 hit(s); SheafOfModules.pullbackId, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, SheafOfModules.pullbackPushforwardAdjunction, SheafOfModules.pullbackComp, SheafOfModules.pullback_comp_id, SheafOfModules.pullback_id_comp, SheafOfModules.pullbackIso, SheafOfModules.sheafificationCompPullback, SheafOfModules.conjugateEquiv_pullbackId_hom, SheafOfModules.pullback_assoc, SheafOfModules.conjugateEquiv_pullbackComp_inv. Restriction, pullback/sheafification and ordinary adic module quotients are ingredients only; none supplies the Frobenius point map with strict coefficient-transition and augmentation equalities and derived tower descent.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "frobenius.*transport|point.*transport|quotient.*pullback.*tower",
+   "results": "[grep] OK 2 hit(s); Mathlib/LinearAlgebra/AffineSpace/Independent.lean:252, Mathlib/LinearAlgebra/AffineSpace/Combination.lean:957. Restriction, pullback/sheafification and ordinary adic module quotients are ingredients only; none supplies the Frobenius point map with strict coefficient-transition and augmentation equalities and derived tower descent.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "natural coefficient compatible point transport on strict quotient towers of sheaf complexes",
+   "results": "[leansearch] OK 8 hit(s); SheafOfModules.pushforwardNatTrans_app_val_app, CategoryTheory.sheafHomHasNSMul, SheafOfModules.pushforwardNatTrans_app_val_app_apply, CategoryTheory.Quotient.natTransLift, SheafOfModules.pushforwardNatTrans, CategoryTheory.Equivalence.transportSheafificationAdjunction, SheafOfModules.pushforwardNatTrans_comp, SheafOfModules.pushforwardNatIso. Restriction, pullback/sheafification and ordinary adic module quotients are ingredients only; none supplies the Frobenius point map with strict coefficient-transition and augmentation equalities and derived tower descent.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackIso|sheafificationCompPullback",
+   "results": "msearch printed single-file hits as file=106/118. Read the actual source Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean:106,118: SheafOfModules.pullbackIso and sheafificationCompPullback identify pullback presentations; neither supplies the quotient tower transport/augmentation equalities.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-trf-integral-point-transport-tower-realization",
+  "date": "2026-10-21",
+  "group": "Q91"
+ },
+ "chapter": "sec-trace-formula",
+ "unit": "sk-d-weil",
+ "blueprint": {
+  "from": {
+   "node": "prop-trf-rational-frobenius-integral-model",
+   "place": "clause (3), simultaneous quotient transport: original realization proof steps 1-2 and chain/tower naturality in step 6",
+   "via": [
+    "lem-trf-integral-point-transport-tower-realization"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

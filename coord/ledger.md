@@ -20992,3 +20992,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:10 L: merged deliver/Q119/lem-per-adic-heart-pullback-fibres (reviewer PASS; after a return; new nodes: 4)
 - 08:10 L: merged deliver/Q49/lem-sfb-finite-field-closed-support (reviewer FIX; after a return; new nodes: 1)
 - 08:10 L: merged deliver/N6/lem-sf-etale-immersion-shriek-normalization (reviewer PASS; first push; new nodes: 0)
+- 08:10 L: merged deliver/Q91/lem-trf-integral-point-transport-tower-realization (reviewer FIX; after a return; new nodes: 3)
