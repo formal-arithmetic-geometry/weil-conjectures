@@ -2,7 +2,7 @@ module
 
 public import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonProperty
 public import Mathlib.RingTheory.Flat.Basic
-import Sheaf.Algebra.Homology.LocalizedTensorComparisonClosureRetractCore
+import WeilConjectures.Algebra.Homology.LocalizedTensorComparisonClosureRetractCore
 
 @[expose] public section
 
@@ -53,6 +53,7 @@ theorem localizedTensorComparisonProperty_closure_retracts
       localizedTensorComparisonProperty R A B C Q N t Y →
       localizedTensorComparisonProperty R A B C Q N t X := by
   intro X Y hXY hY
-  exact localizedTensorComparisonProperty_retract_core R A B C Q N t hC hQ hXY hY
+  exact (fun (_ : Module.Flat (A ⊗[R] B) C) ↦
+    localizedTensorComparisonProperty_retract_core R A B C Q N t hQ hXY hY) hC
 
 end ModuleCat
