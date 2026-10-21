@@ -1,6 +1,6 @@
 # Work queue
 
-153 items; claim with `tools/claim.py next <group> [--stage N]`.
+154 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (11 clusters, 711 modules)
 
@@ -9,16 +9,16 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.Paper.FiniteCoefficientDirectImage` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.StrictHenselizationCohomologyComparisonIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.StandardSingleStalkFlatCounitModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.ClosedSupportConstructible` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.PerfectOverlapObjectRealizationCoreTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Algebra.Homology.AffineTildeTensorSourceComparisonCoreFinal` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 63, stage 3 2 items.
 
@@ -30,11 +30,11 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-derived-invariants-normal-subgroup-comparison` | 4012 | none |
-| `lem-sfb-integral-lisse-closed-base-change` | 4012 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
 | `lem-sfb-prime-to-ell-condensed-acyclicity` | 4012 | none |
 | `lem-sfb-root-coordinate-supported-vanishing` | 4012 | none |
 | `lem-sfb-action-topos-geometric-restriction` | 4013 | none |
+| `lem-sfb-closed-test-derived-exchange-model` | 4013 | none |
 | `lem-sfb-condensed-galois-global-descent` | 4013 | none |
 | `lem-sfb-geometric-condensed-finite-scalar-model` | 4013 | none |
 | `lem-sfb-internal-bar-ordered-cup` | 4013 | none |
@@ -43,12 +43,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-profinite-algcl-derived-invariants-comparison` | 4013 | none |
 | `lem-sfb-rational-polynomial-bar-contraction` | 4013 | none |
 | `lem-sfb-wcontractible-component-derived-hom` | 4013 | none |
+| `lem-sfb-acyclic-hypercover-pullback-normalization` | 4014 | none |
+| `lem-sfb-filtered-colimit-strictly-henselian-local` | 4014 | none |
 | `lem-sfb-integral-closure-ind-etale-base-change` | 4014 | none |
-| `lem-sfb-acyclic-hypercover-pullback-normalization` | 4015 | none |
-| `lem-sfb-filtered-colimit-strictly-henselian-local` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (52)
+## Stage 2: nodes to state (53)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -81,6 +81,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-indfinite-contractible-base-wstrict` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-lattice-cubical-contraction` | 1 | state | 0 |
+| `lem-sfb-integral-lisse-closed-base-change` | 1 | state | 0 |
 | `lem-sfb-lattice-supported-hom-reduction-tower` | 1 | state | 0 |
 | `lem-sfb-norm-algcl-cohomology-topology-comparison` | 1 | state | 0 |
 | `lem-sfb-prime-to-ell-derived-invariants-reduction` | 1 | state | 0 |
