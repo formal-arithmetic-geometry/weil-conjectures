@@ -21,113 +21,33 @@
  ],
  "proof": [
   {
-   "text": "Work on the small diagram sites, not in a category of diagrams in an already localized category. The completed scalar algebra $A_T$ is flat over $\\underline A_T$ by [lem-weil-pbc-completed-constant-algebra-flat-quotients], applied with its presentation $S=A_T$ and canonical scalar map. Reindexing $n+1$ by the positive integers leaves this limit unchanged. The completed and finite coefficient identifications $c_S=c_u:u^{-1}A_V\\cong A_U$ and $c_{u,n}$, including their compatibility with quotient transitions and projections, are those of [lem-weil-pbc-profinite-coefficient-inverse-image]. Since $A$ need not be finite, that statement does not cover the constant ring $\\underline A$: the identification $c_R:u^{-1}\\underline A_V\\cong\\underline A_U$ is the canonical ring-sheaf isomorphism of [lem-pe-constant-left-module-inverse-image] for the geometric morphism of pro-etale topoi, carrying constant scalar sections to the same scalars; the constant-coefficient operations $G_u\\dashv R_u^0$ and $G_u\\dashv R_u^{\\mathcal T}$ use it. Compatibility with the scalar map, $a_Uc_R=c_Su^{-1}a_V$, is checked after each projection $\\pi_{U,n}$, since these jointly determine a map into the limit $A_U$: both $\\pi_{U,n}a_Uc_R$ and $c_{u,n}u^{-1}(\\pi_{V,n}a_V)$ are ring maps $u^{-1}\\underline A_V\\to\\underline{P_n}_U$ whose adjuncts $\\underline A_V\\to u_*\\underline{P_n}_U$ send a constant section $x$ to the constant section $\\bar x$ (by the two constant-section descriptions just cited and $\\pi_{V,n}a_V(x)=\\bar x$); a map out of the sheafified constant sheaf $\\underline A_V$ is determined by the constant sections, so the two adjuncts, hence the two maps, agree. Apply [lem-weil-pbc-flat-ringed-diagram-restriction] with the terminal index category for ordinary modules and with $J=\\mathbf N_{\\geq1}^{op}$ for towers. This gives precisely the normalized comparisons $a,\\chi,p,d$ and their adjunct identities. The exact module-diagram equivalence of [lem-weil-pbc-diagram-site-realization] places these comparisons in the required derived strict-tower categories.",
+   "text": "Use [lem-weil-pbc-strict-quotient-scalar-direct-isomorphisms] for the two scalar right-mate isomorphisms. This is the independent flat scalar setup; no projection-formula compatibility is assumed by that result.",
    "uses": [
-    "lem-weil-pbc-completed-constant-algebra-flat-quotients",
-    "lem-weil-pbc-profinite-coefficient-inverse-image",
-    "lem-pe-constant-left-module-inverse-image",
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-diagram-site-realization"
+    "lem-weil-pbc-strict-quotient-scalar-direct-isomorphisms"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, projection-formula conjugation: flat scalar and strict-diagram setup; Stacks 093M (sites-modules.tex, lemma-completion-flat) and 0FND (derived.tex, lemma-pre-derived-adjoint-functors-general)."
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $f,K$ and suppress $f$ in subscripts. Write $B_T^a=\\mathcal R_T^a$, $B_T^0=\\mathcal R_T^0$, $L=L_f^a$, $R=R_f^a$, $F=\\mathscr L_f^a$, $H=\\mathscr R_f^a$, $G=G_f$, and $H_0=R_f^{\\mathcal T}$. Write $R_0=R_f^0$ for the ordinary constant-coefficient direct image. For an argument $M$, put $s_M^a:F B_Y^aM\\to B_X^a(LM)$ and $s_N^0:G B_Y^0N\\to B_X^0(GN)$. Thus $s_M^a=\\tau_{f,M}^{-1}$. These are the normalized comparisons of [lem-weil-pbc-reduction-pullback-derived-tower]. Let $\\varepsilon^a:LRK\\to K$ and $\\varepsilon^0:GR_0r_XK\\to r_XK$ be the ordinary counits. By [lem-weil-pbc-augmented-diagram-projection-mate] and [def-weil-pbc-projection-formula-map], $\\pi^a$ and $\\pi^0$ are respectively adjunct to\n$$t^a=B_X^a(\\varepsilon^a)s_{RK}^a,\\qquad t^0=B_X^0(\\varepsilon^0)s_{R_0r_XK}^0.$$\nHere the diagonal identifications are the canonical ones of [lem-weil-pbc-constant-tower-pushforward-normalization]: its strict counit equation identifies the diagram counit after the constant/direct-image comparison with the diagonal of the ordinary counit. Thus these are the specified projection maps, not maps chosen by their evaluations.",
-   "uses": [
-    "lem-weil-pbc-reduction-pullback-derived-tower",
-    "lem-weil-pbc-augmented-diagram-projection-mate",
-    "def-weil-pbc-projection-formula-map",
-    "lem-weil-pbc-constant-tower-pushforward-normalization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, the same projection-formula identifications; Stacks 0B56 (sites-cohomology.tex, equation-projection-formula-map), with strict diagonal counit normalization."
-   }
+   "text": "Expand quotientProjection and the two scalar direct maps as their actual Mathlib mates. The unit equation for mateEquiv and naturality of its resulting transformation show that the transpose of alpha_M followed by H(t) is G(t-sharp) followed by the right mate. Apply this to the two ordinary counits, whose transposes are identities. Thus the two projection maps are exactly the adjuncts of tau inverse followed by reduction of the counit. The scalar counit identity is mateEquiv_counit.",
+   "uses": [],
+   "elementary": true
   },
   {
-   "text": "The ordinary adjunct identity in [lem-weil-pbc-flat-ringed-diagram-restriction], applied to $\\varepsilon^a$ whose adjunct is $1_{RK}$, says that $r_X(\\varepsilon^a)a_{RK}^{-1}$ has adjunct $\\chi_K:r_YRK\\to R_0r_XK$. Expanding the inverse Hom bijection, its value is also $\\varepsilon^0G(\\chi_K)$. Therefore\n$$r_X(\\varepsilon^a)a_{RK}^{-1}=\\varepsilon^0G(\\chi_K).$$\nThis derives the required counit equation from the stated normalization; no compatibility of arbitrarily chosen comparison isomorphisms is being assumed.",
+   "text": "Invert the pullback equation supplied by [lem-weil-pbc-strict-quotient-scalar-balancing] at the arbitrary ambient object Ra(K), cancelling p, tau, the constant reassociation and a. Naturality of rho at the completed counit, the scalar mate-counit equation, and naturality of the constant reassociation at chi identify the two adjuncts. Naturality and injectivity of the Hom equivalence for the constant diagram adjunction prove the displayed equation, in the full strict-tower derived category.",
    "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction"
+    "lem-weil-pbc-strict-quotient-scalar-balancing"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, projection-formula conjugation: ordinary scalar-counit square, obtained from the normalized adjunct identity (Stacks 0FND)."
-   }
-  },
-  {
-   "text": "Use [lem-weil-pbc-strict-quotient-scalar-balancing] for the arbitrary ambient argument $M=RK$. With $s^a,s^0$ oriented as in Step 2, its pullback equation reads\n$$G(\\rho_M)p_{B_Y^aM}= (s_{r_YM}^0)^{-1}B_X^0(a_M)\\rho_{LM}r_X(s_M^a).$$\nIndeed this is its displayed equation for $\\tau_{f,M}=(s_M^a)^{-1}$, with the canonical identification $B_X^0G\\cong G B_Y^0$ written as $(s^0)^{-1}$. These two identifications hold because the balancing statement's $\\tau$ is the pullback/tensor isomorphism of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] on the ringed diagram sites, computed by applying module pullback to K-flat resolutions with flat terms, and on such a representative of $\\Delta M$ (and the flat-term tower $Q_Y$) it is the inverse of the termwise map $F(x\\otimes q)\\mapsto F(x)\\otimes F(q)$; [lem-weil-pbc-reduction-pullback-derived-tower] says that $s^a$ (its $\\tau$ for the coefficients $A_T$, $Q=(\\underline{P_n})_n$) is the unique natural isomorphism with exactly this representative component, and likewise $s^0$ for $\\underline A_T$. The pulled-back towers are identified with $Q_X$ by the coefficient isomorphisms of Step 1. Multiplying by the indicated inverses gives\n$$\\rho_{LM}r_X(s_M^a)p_{B_Y^aM}^{-1}=B_X^0(a_M^{-1})s_{r_YM}^0G(\\rho_M).$$\nAll these are morphisms of derived strict towers. The comparison $s^0$ is natural in its argument by [lem-weil-pbc-reduction-pullback-derived-tower].",
-   "uses": [
-    "lem-weil-pbc-strict-quotient-scalar-balancing",
-    "lem-weil-pbc-reduction-pullback-derived-tower",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, strict quotient scalar balancing and pullback/tensor reassociation before taking inverse limits."
-   }
-  },
-  {
-   "text": "Set $\\beta=B_Y^0(\\chi_K)\\rho_{RK}$ and $\\gamma=\\rho_K$. Naturality of $\\rho$ for the ordinary counit, followed by Steps 4 and 3, gives the following calculation in the strict-tower category:\n$$\\begin{aligned}\n\\gamma\\,r_X(t^a)p_{B_Y^aRK}^{-1}\n&=B_X^0(r_X\\varepsilon^a)\\rho_{LRK}r_X(s_{RK}^a)p_{B_Y^aRK}^{-1}\\\\\n&=B_X^0(r_X\\varepsilon^a\\,a_{RK}^{-1})s_{r_YRK}^0G(\\rho_{RK})\\\\\n&=B_X^0(\\varepsilon^0)B_X^0(G\\chi_K)s_{r_YRK}^0G(\\rho_{RK})\\\\\n&=B_X^0(\\varepsilon^0)s_{R_0r_XK}^0G(B_Y^0\\chi_K)G(\\rho_{RK})\n=t^0G(\\beta).\n\\end{aligned}$$\nThe first line is the naturality asserted by [lem-weil-pbc-strict-quotient-scalar-balancing]. The last line uses naturality of $s^0$ from [lem-weil-pbc-reduction-pullback-derived-tower] at $\\chi_K$. The intervening substitutions are exactly the equations established in Steps 4 and 3; only composition and functoriality are used.",
-   "uses": [
-    "lem-weil-pbc-strict-quotient-scalar-balancing",
-    "lem-weil-pbc-reduction-pullback-derived-tower"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, explicit projection-formula scalar conjugation calculation; agent expansion of the compatibility claimed there."
-   }
-  },
-  {
-   "text": "Apply the strict-diagram adjunct identity of [lem-weil-pbc-flat-ringed-diagram-restriction] to $t^a:F B_Y^aRK\\to B_X^aK$, whose adjunct is $\\pi^a$. It identifies $d_{B_X^aK}r_Y(\\pi^a)$ as adjunct to $r_X(t^a)p_{B_Y^aRK}^{-1}$. Postcomposing by $H_0(\\gamma)$ makes the adjunct equal to $\\gamma r_X(t^a)p_{B_Y^aRK}^{-1}$. By Step 5 this is $t^0G(\\beta)$. By the Hom-bijection definition of adjunct and its naturality in the source, this last morphism is adjunct to $\\pi^0\\beta$; $\\pi^0$ is adjunct to $t^0$ by Step 2. The Hom bijection is injective, so\n$$H_0(\\rho_K)d_{B_X^aK}r_Y(\\pi^a)=\\pi^0 B_Y^0(\\chi_K)\\rho_{RK},$$\nwhich is precisely the required equation. Postcomposition and precomposition of adjuncts here follow directly from their formulas $t\\mapsto H_0(t)\\eta$ and $h\\mapsto\\varepsilon G(h)$, using naturality of $\\eta,\\varepsilon$.",
-   "uses": [
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "def-weil-pbc-projection-formula-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, passage from the counit-tensor calculation to equality of projection maps by the normalized adjunction (Stacks 0B56 and 0FND)."
-   }
-  },
-  {
-   "text": "The isomorphisms $\\rho,q$ and their pullback square are natural on arbitrary ambient objects by [lem-weil-pbc-strict-quotient-scalar-balancing]; the normalized scalar comparisons and adjunct identity are natural derived diagram comparisons by [lem-weil-pbc-flat-ringed-diagram-restriction]. For a map $K\\to K'$, naturality of the counits and of $s^a,s^0$ makes $t^a,t^0$ commute with that map, and the natural Hom bijections carry this to the corresponding squares for $\\pi^a,\\pi^0$. Hence every composite in the equation is natural in $K$. Every equality above was made on the diagram site and then inside its derived category, so it already includes the quotient transitions. The argument used no property of the ambient input beyond being an object of $D(A_X)$, and introduced no properness, completeness, or witness condition.",
-   "uses": [
-    "lem-weil-pbc-strict-quotient-scalar-balancing",
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-weil-pbc-reduction-pullback-derived-tower"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-    "place": "Second paragraph, naturality of coefficient reduction and projection-formula conjugation on strict towers, prior to applying R lim."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-projection-formula-map",
-  "lem-pe-constant-left-module-inverse-image",
-  "lem-weil-pbc-augmented-diagram-projection-mate",
-  "lem-weil-pbc-completed-constant-algebra-flat-quotients",
-  "lem-weil-pbc-constant-tower-pushforward-normalization",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-flat-ringed-diagram-restriction",
-  "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-reduction-pullback-derived-tower",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-weil-pbc-strict-quotient-scalar-direct-isomorphisms",
   "lem-weil-pbc-strict-quotient-scalar-balancing"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
-  "place": "Second paragraph, projection-formula conjugation; explicit strict-diagram scalar-counit calculation, using Stacks Tags 0B56, 093M and 0FND through the cited DAG statements."
+  "place": "Second paragraph, projection-formula conjugation. F9 Lean proof: explicit mate-unit and counit algebra, inverted balancing square, rho and reassociation naturality, and Hom-bijection injectivity. Flat scalar invertibility is isolated as the independent first proof step."
  },
  "mathlib_searches": [
   {
@@ -305,5 +225,15 @@
   "group": "NI",
   "result": "pass",
   "note": "Node vs Lean checked clause by clause. Only the lean field was added to the node; the statement is verbatim; not dropped; no repair note. rho, the PullModel pullbacks, a, p, tau and the constant reassociation are pinned by the reviewed Balancing/PullCompatibility fields (BalancingComputes, a_computes, p_computes, PullReductionComputes). chi and d are mateEquiv right mates of a.inv and p.inv; checked by hand that they satisfy the flat-ringed-diagram-restriction adjunct identity, orientation r_Y R^a -> R^0 r_X correct. quotientProjection is the mate of tau.inv = adjunct of B_X(eps) after tau^-1 = counit tensor identity (node Step 2). Equation arrow order and types traced: both sides go r_Y B^a_Y R^a K -> H0 B^0_X r_X K. forall K is arbitrary; no extra hypotheses. Right adjoints are passed with adjunctions, unique up to compatible iso, and the equation is invariant. Universes follow the datum convention. Edge cases fine. Real mate defs, only the theorem is sorry, docstrings with source/blueprint and 7 proof steps, imports exist. Advisories: projection mate re-formed rather than reusing proEtaleProjectionFormulaMate (stated for ordinary tensor products, not strict diagrams); proetale-operations and constant-tower stmt_deps not referenced in Lean (stage-3 bridge); docstring typo. Not recompiled per instruction."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261021T203512-L-3794838",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

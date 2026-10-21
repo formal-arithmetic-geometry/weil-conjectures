@@ -1,0 +1,135 @@
+{
+ "id": "lem-weil-pbc-strict-quotient-scalar-direct-isomorphisms",
+ "kind": "statement",
+ "title": "Invertibility of the normalized ordinary and strict scalar right mates",
+ "statement": "Let $A$ be a commutative ring with an adic coefficient datum $d$ [def-weil-pbc-adic-coefficient-datum]. Let $X,Y$ be schemes and $f:X\\to Y$. On the published small pro-etale sites, use the constant ring $R_T^0=\\underline A_T$ and the completed ring $R_T^a=\\varprojlim_n\\underline{A/I^{n+1}}_T$, the canonical scalar map, ordinary module categories and strict $\\mathbf N^{op}$-diagram module categories [lem-weil-pbc-strict-quotient-scalar-balancing]. Take any balancing $bal$ and normalized pullback compatibility $p$ of that lemma, with ordinary inverse images $L^a,L^0$, strict-diagram inverse images $F^a,F^0$, scalar restrictions $r_T,s_T$ and normalized isomorphisms $a:L^a r_X\\cong r_Y L^0$ and $b:F^a s_X\\cong s_Y F^0$. Composition here follows the Lean functor order. Let $R^a,R^0,H^a,H^0$ be arbitrary right adjoints of these four inverse images, with their adjunctions. Then the actual right mates of $a^{-1}$ and $b^{-1}$ are isomorphisms $R^a r_Y\\to r_XR^0$ and $H^a s_Y\\to s_XH^0$. This assertion concerns full unbounded derived categories, for arbitrary objects and before evaluation of a strict tower. It asserts no compatibility with quotient reduction or projection maps.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-strict-quotient-scalar-balancing"
+ ],
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Second paragraph, strict coefficient supplement old Step 5: flat scalar setup; specifically Step 1 of lem-weil-pbc-quotient-diagram-scalar-projection. Stacks 03D2, 03D3, 093M, 0FND and 0DVC."
+ },
+ "proof": [
+  {
+   "text": "Use the normalized ordinary module adjunction constructed in [lem-sp-completed-pullback-adjunction]. Transpose the completed counit across ordinaryScalar inverse. Its scalar-insertion equation from [lem-weil-pbc-strict-quotient-scalar-balancing] and the normalized underlying geometric adjunction show that the mate becomes the identity underlying direct-image comparison. The underlying-sheaf functor reflects isomorphisms, so this ordinary mate is invertible. Whiskering by the full natural-number-opposite category preserves this calculation and gives an invertible ordinary tower mate.",
+   "uses": [
+    "lem-sp-completed-pullback-adjunction",
+    "lem-weil-pbc-strict-quotient-scalar-balancing"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Flatness of the completed ring over constant coefficients, recorded in [lem-weil-pbc-strict-quotient-scalar-balancing], makes scalar extension exact. Its adjunction proves that scalar restriction preserves K-injective complexes, also for strict towers. The module and tower categories have K-injective resolutions by [prop-pur-kinjective-resolutions-exist] and [lem-weil-pbc-small-module-diagrams-grothendieck]. Construct the normalized derived adjunction by the existing derived-right-functor construction used in [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] and Mathlib derived adjunction. Transport it to each supplied right adjoint by the unique adjunction-preserving isomorphism.",
+   "uses": [
+    "lem-weil-pbc-strict-quotient-scalar-balancing",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "On a K-injective representative the normalized right-derived comparison maps are isomorphisms, as is the ordinary mate. The adjunct equation identifies their composite with the supplied derived mate conjugated by the exact restriction factors, proving that mate invertible. Extend this conclusion to every derived object using an isomorphic K-injective representative. The comparison is the prescribed a inverse or p inverse: the ordinary a computation formula extends from flat-term K-flat representatives to all complexes by naturality and cancellation after a flat-term K-flat resolution; p already computes on all tower complexes. These are exactly the derived adjunct equations used above.",
+   "uses": [
+    "lem-weil-pbc-strict-quotient-scalar-balancing"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-completed-pullback-adjunction",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-weil-pbc-strict-quotient-scalar-balancing",
+  "prop-pur-kinjective-resolutions-exist"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-completed-exchange-coherence.proof.md",
+  "place": "Completed-exchange-coherence second paragraph: ordinary scalar-insertion mate, exact restriction preserving K-injectives, normalized derived adjunction and computation formulas. Stacks 03D2, 03D3, 0FND and 0DVC."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Right mate of scalar restriction pullback comparison is an isomorphism",
+   "results": "{\"t\": \"2026-10-21T13:37:42Z\", \"tool\": \"leanfinder\", \"query\": \"Right mate of scalar restriction pullback comparison is an isomorphism\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullback_id_comp\", \"PresheafOfModules.restrictScalarsCompToPresheaf\", \"ModuleCat.restrictScalarsComp'_inv_app\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback\", \"PresheafOfModules.pullbackComp\", \"PresheafOfModules.pullback_comp_id\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"ModuleCat.restrictScalarsComp'App_inv_naturality\"], \"digest\": \"5aaec3670e00c356\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary scalar restriction and general mate identities do not identify the normalized derived scalar mates on these module and strict-tower categories"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-21T13:37:43Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"b8ac30fd6644aa85\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary scalar restriction and general mate identities do not identify the normalized derived scalar mates on these module and strict-tower categories"
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv.*[Ii]so|[Ii]so.*mateEquiv",
+   "results": "{\"t\": \"2026-10-21T13:37:43Z\", \"tool\": \"grep\", \"query\": \"mateEquiv.*[Ii]so|[Ii]so.*mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Monoidal/Closed/Functor.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\", \"Mathlib/CategoryTheory/Bicategory/Adjunction/Mate.lean\"], \"digest\": \"a5b0d483ac90c32b\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary scalar restriction and general mate identities do not identify the normalized derived scalar mates on these module and strict-tower categories"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat scalar restriction commutes with the derived direct image as the right mate of the normalized inverse image comparison",
+   "results": "{\"t\": \"2026-10-21T15:00:01Z\", \"tool\": \"leansearch\", \"query\": \"Flat scalar restriction commutes with the derived direct image as the right mate of the normalized inverse image comparison\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.restrictScalarsObj\", \"Algebra.FormallyUnramified.flat_of_restrictScalars\", \"PresheafOfModules.restrictScalars\", \"SheafOfModules.restrictScalars\", \"ModuleCat.extendRestrictScalarsAdj\", \"ModuleCat.restrictScalars\", \"ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction\", \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\"], \"digest\": \"6ff5fe6c0d9b7bf0\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary scalar restriction and general mate identities do not identify the normalized derived scalar mates on these module and strict-tower categories"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.QuotientDiagramScalarProjection",
+  "date": "2026-10-21",
+  "group": "F9"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-completed-exchange-coherence",
+   "place": "Second paragraph, projection-formula conjugation: invertibility of the flat scalar direct comparisons (strict supplement Step 5, scalar setup).",
+   "via": [
+    "lem-weil-pbc-quotient-diagram-scalar-projection",
+    "lem-weil-pbc-ordered-exchange-coefficient-comparison"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.StrictQuotientScalarDirectIsomorphisms",
+  "file": "lean/Sheaf/Paper/StrictQuotientScalarDirectIsomorphisms.lean",
+  "declaration": "AlgebraicGeometry.Scheme.StrictScalarBalancing.strictQuotientScalarDirectIsomorphisms",
+  "statement": "theorem strictQuotientScalarDirectIsomorphisms\n    {X Y : Scheme.{u}} (f : X ⟶ Y) (d : AdicCoefficientDatum A)\n    (bal : Balancing d) (p : PullCompatibility f d (bal.ρ Y) (bal.ρ X))\n    (Ra : D (ring X d true) ⥤ D (ring Y d true))\n    (R0 : D (ring X d false) ⥤ D (ring Y d false))\n    (Ha : TD (ring X d true) ⥤ TD (ring Y d true))\n    (H0 : TD (ring X d false) ⥤ TD (ring Y d false))\n    (ordinaryAdjA : p.completed.ordinary ⊣ Ra)\n    (ordinaryAdj0 : p.constant.ordinary ⊣ R0)\n    (diagramAdjA : p.completed.diagrams ⊣ Ha)\n    (diagramAdj0 : p.constant.diagrams ⊣ H0) :\n    IsIso (mateEquiv ordinaryAdjA ordinaryAdj0\n      (TwoSquare.mk _ _ _ _ p.a.inv)).natTrans ∧\n    IsIso (mateEquiv diagramAdjA diagramAdj0\n      (TwoSquare.mk _ _ _ _ p.p.inv)).natTrans",
+  "branch": "sheaf-dag",
+  "by": "F9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261021T203512-L-3794838",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F9",
+  "result": "pass",
+  "landing": "20261021T203512-L-3794838",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

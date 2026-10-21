@@ -7,12 +7,7 @@ module
 
 public import Sheaf.Paper.StrictQuotientScalarBalancing
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import Sheaf.Paper.ProjectionFormulaBaseChangeNaturality
-import Sheaf.CategoryTheory.RingedConstantTowerPushforwardNormalization
-import Sheaf.CategoryTheory.ConstantLeftModuleInverseImage
-import Sheaf.Paper.CompletedConstantAlgebraFlatQuotients
-import Sheaf.Paper.ReductionPullbackDerivedTower
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
+import Sheaf.Paper.StrictQuotientScalarDirectIsomorphisms
 
 /-! # Scalar compatibility of the strict quotient projection morphism
 
@@ -44,6 +39,25 @@ open CategoryTheory.ConstantCompletion
 namespace AlgebraicGeometry.Scheme.StrictScalarBalancing
 
 variable {A : Type (u + 1)} [CommRing A]
+
+private theorem mate_adjunct
+    {C₁ C₂ C₃ C₄ : Type*}
+    [Category C₁] [Category C₂] [Category C₃] [Category C₄]
+    {L₁ : C₁ ⥤ C₂} {R₁ : C₂ ⥤ C₁} {L₂ : C₃ ⥤ C₄} {R₂ : C₄ ⥤ C₃}
+    (adj₁ : L₁ ⊣ R₁) (adj₂ : L₂ ⊣ R₂)
+    (G : C₁ ⥤ C₃) (H : C₂ ⥤ C₄) (α : G ⋙ L₂ ⟶ L₁ ⋙ H)
+    (M : C₁) (N : C₂) (t : L₁.obj M ⟶ N) :
+    adj₂.homEquiv _ _ (α.app M ≫ H.map t) =
+      G.map (adj₁.homEquiv _ _ t) ≫
+        (mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α)).app N := by
+  let δ := mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α)
+  have h := unit_mateEquiv adj₁ adj₂ (TwoSquare.mk _ _ _ _ α) M
+  change G.map (adj₁.unit.app M) ≫ δ.app (L₁.obj M) =
+    adj₂.unit.app (G.obj M) ≫ R₂.map (α.app M) at h
+  rw [adj₂.homEquiv_unit, R₂.map_comp, ← Category.assoc, ← h, Category.assoc]
+  have hd : δ.app (L₁.obj M) ≫ R₂.map (H.map t) =
+      G.map (R₁.map t) ≫ δ.app N := δ.natTrans.naturality t |>.symm
+  rw [hd, adj₁.homEquiv_unit, G.map_comp, Category.assoc]
 
 /-- The strict projection transformation, defined by the actual adjunction Hom bijection.
 At K its adjunct is the inverse of tau at RK followed by reduction of the ordinary counit.
@@ -145,6 +159,101 @@ theorem quotientDiagramScalarProjection
             ((ordinaryScalarDirect f d bal p Ra R0 ordinaryAdjA ordinaryAdj0).app K) ≫
           (quotientProjection f d false p.constant R0 H0 ordinaryAdj0 diagramAdj0
             p.constantReassociation).app ((dres (scalar X d)).obj K) := by
-  sorry
+  have h := strictQuotientScalarDirectIsomorphisms f d bal p Ra R0 Ha H0
+    ordinaryAdjA ordinaryAdj0 diagramAdjA diagramAdj0
+  refine ⟨h.1, h.2, ?_⟩
+  intro K
+  apply (diagramAdj0.homEquiv _ _).symm.injective
+  let εa := ordinaryAdjA.counit.app K
+  let ε0 := ordinaryAdj0.counit.app ((dres (scalar X d)).obj K)
+  let χ := ordinaryScalarDirect f d bal p Ra R0 ordinaryAdjA ordinaryAdj0
+  let πa := quotientProjection f d true p.completed Ra Ha ordinaryAdjA diagramAdjA p.τ
+  let π0 := quotientProjection f d false p.constant R0 H0 ordinaryAdj0 diagramAdj0
+    p.constantReassociation
+  let δ := diagramScalarDirect f d bal p Ha H0 diagramAdjA diagramAdj0
+  let ta := p.τ.inv.app (Ra.obj K) ≫ (reduction X d true).map εa
+  let t0 := p.constantReassociation.inv.app (R0.obj ((dres (scalar X d)).obj K)) ≫
+    (reduction X d false).map ε0
+  have hπa : diagramAdjA.homEquiv _ _ ta = πa.app K := by
+    simpa [ta, εa, πa, quotientProjection, ← ordinaryAdjA.homEquiv_symm_id K] using
+      mate_adjunct ordinaryAdjA diagramAdjA _ _ p.τ.inv (Ra.obj K) K εa
+  have hπ0 : diagramAdj0.homEquiv _ _ t0 =
+      π0.app ((dres (scalar X d)).obj K) := by
+    simpa [t0, ε0, π0, quotientProjection,
+      ← ordinaryAdj0.homEquiv_symm_id ((dres (scalar X d)).obj K)] using
+      mate_adjunct ordinaryAdj0 diagramAdj0 _ _ p.constantReassociation.inv
+        (R0.obj ((dres (scalar X d)).obj K)) ((dres (scalar X d)).obj K) ε0
+  have hχ : p.constant.ordinary.map (χ.app K) ≫ ε0 =
+      p.a.inv.app (Ra.obj K) ≫ (dres (scalar X d)).map εa := by
+    exact mateEquiv_counit ordinaryAdjA ordinaryAdj0
+      (TwoSquare.mk _ _ _ _ p.a.inv) K
+  have hτ : p.p.inv.app ((reduction Y d true).obj (Ra.obj K)) ≫
+      (tdres (scalar X d)).map (p.τ.inv.app (Ra.obj K)) ≫
+      (bal.ρ X).hom.app (p.completed.ordinary.obj (Ra.obj K)) =
+    p.constant.diagrams.map ((bal.ρ Y).hom.app (Ra.obj K)) ≫
+      p.constantReassociation.inv.app ((dres (scalar Y d)).obj (Ra.obj K)) ≫
+      (reduction X d false).map (p.a.inv.app (Ra.obj K)) := by
+    apply (cancel_epi (p.p.hom.app _)).mp
+    simp only [Iso.hom_inv_id_app_assoc]
+    apply (cancel_epi ((tdres (scalar X d)).map (p.τ.hom.app _))).mp
+    simp only [← Functor.map_comp_assoc, Iso.hom_inv_id_app]
+    rw [reassoc_of% (p.equation (Ra.obj K))]
+    simp only [Iso.hom_inv_id_app_assoc, ← Functor.map_comp,
+      Iso.hom_inv_id_app]
+    simp only [CategoryTheory.Functor.map_id, Category.id_comp]
+    change _ = _ ≫ (reduction X d false).map
+      (𝟙 ((dres (scalar X d)).obj (p.completed.ordinary.obj (Ra.obj K))))
+    rw [(reduction X d false).map_id, Category.comp_id]
+  have ht : p.p.inv.app ((reduction Y d true).obj (Ra.obj K)) ≫
+      (tdres (scalar X d)).map ta ≫ (bal.ρ X).hom.app K =
+    p.constant.diagrams.map ((bal.ρ Y).hom.app (Ra.obj K) ≫
+      (reduction Y d false).map (χ.app K)) ≫ t0 := by
+    dsimp only [ta]
+    simp only [Functor.map_comp, Category.assoc]
+    have hn := (bal.ρ X).hom.naturality εa
+    change (tdres (scalar X d)).map ((reduction X d true).map εa) ≫
+      (bal.ρ X).hom.app K = (bal.ρ X).hom.app _ ≫
+        (reduction X d false).map ((dres (scalar X d)).map εa) at hn
+    rw [hn]
+    change _ ≫ _ ≫ (bal.ρ X).hom.app
+      (p.completed.ordinary.obj (Ra.obj K)) ≫
+      (reduction X d false).map ((dres (scalar X d)).map εa) = _
+    rw [reassoc_of% hτ]
+    simp only [← Functor.map_comp, ← hχ]
+    rw [Functor.map_comp]
+    have hs := p.constantReassociation.inv.naturality (χ.app K)
+    change p.constant.diagrams.map ((reduction Y d false).map (χ.app K)) ≫
+      p.constantReassociation.inv.app (R0.obj ((dres (scalar X d)).obj K)) =
+      p.constantReassociation.inv.app ((dres (scalar Y d)).obj (Ra.obj K)) ≫
+        (reduction X d false).map (p.constant.ordinary.map (χ.app K)) at hs
+    dsimp only [t0]
+    rw [← reassoc_of% hs]
+  have hδ := mate_adjunct diagramAdjA diagramAdj0 _ _ p.p.inv
+    ((reduction Y d true).obj (Ra.obj K)) ((reduction X d true).obj K) ta
+  change diagramAdjA.homEquiv _ ((reduction X d true).obj K) ta = _ at hπa
+  change diagramAdj0.homEquiv _
+    ((reduction X d false).obj ((dres (scalar X d)).obj K)) t0 = _ at hπ0
+  rw [hπa] at hδ
+  change diagramAdj0.homEquiv _ _
+    (p.p.inv.app _ ≫ (tdres (scalar X d)).map ta) =
+    (tdres (scalar Y d)).map (πa.app K) ≫
+      δ.app ((reduction X d true).obj K) at hδ
+  simp only [← Category.assoc]
+  change (diagramAdj0.homEquiv _ _).symm
+    (((tdres (scalar Y d)).map (πa.app K) ≫ δ.app _) ≫
+      H0.map ((bal.ρ X).hom.app K)) =
+    (diagramAdj0.homEquiv _ _).symm
+      (((bal.ρ Y).hom.app (Ra.obj K) ≫
+        (reduction Y d false).map (χ.app K)) ≫
+        π0.app ((dres (scalar X d)).obj K))
+  rw [← hδ]
+  change (diagramAdj0.homEquiv _ _).symm
+    (diagramAdj0.homEquiv _ ((tdres (scalar X d)).obj
+      ((reduction X d true).obj K)) _ ≫ H0.map ((bal.ρ X).hom.app K)) = _
+  rw [diagramAdj0.homEquiv_naturality_right_symm,
+    Equiv.symm_apply_apply, ← hπ0, diagramAdj0.homEquiv_naturality_left_symm]
+  dsimp only [Functor.comp_obj]
+  rw [Equiv.symm_apply_apply]
+  simpa only [Category.assoc] using ht
 
 end AlgebraicGeometry.Scheme.StrictScalarBalancing
