@@ -18,7 +18,7 @@
  ],
  "proof": [
   {
-   "text": "Fix a degree $r$ and put $M=F^r$, $N=N_r$. The tensor definition gives $H\\otimes_R R^{\\oplus N}\\cong H^{\\oplus N}$: send $h\\otimes(r_j)_j$ to $(r_jh)_j$, with inverse $(h_j)_j\\mapsto\\sum_jh_j\\otimes e_j$. These maps commute with restriction and hence induce inverse maps on sheafifications. Tensoring $i_r,p_r$ makes the sequence obtained by tensoring any short exact sequence with $M$ a retract of its $N$-fold direct sum. Here exactness of the finite sum is checked coordinatewise, using a common refinement of the finitely many local lifts for the surjection. Exactness passes to this retract directly: a section in a kernel is included into the larger kernel, locally lifted there, and projected back; injectivity and surjectivity follow by the same inclusion and projection. Thus $-\\otimes_R M$ is exact, so $M$ is flat. This argument is valid for any commutative ring sheaf and any finite-free splitting; it also covers $N=0$.",
+   "text": "Install the existing sheaf tensor monoidal structure and its tensor-colimit preservation. The tensor unit is flat by ObjectProperty.prop_unit. Finite products of flat objects are flat by ObjectProperty.prop_of_isLimit (finite products and coproducts coincide in this abelian category). The specified inclusion and retraction exhibit each term as a retract of this finite product, so ObjectProperty.prop_of_retract gives categorical flatness. Transport exactness along siteSheafTensorRightIso to obtain IsFlatOnSite. These categorical arguments include the empty finite product and the zero ring.",
    "uses": [
     "def-weil-pbc-strict-perfect-coefficient-package",
     "def-pur-sheaf-tensor-product",
@@ -43,11 +43,10 @@
    }
   },
   {
-   "text": "Write $A=u^{-1}R$. Since the inverse image of a morphism of topoi preserves finite products, its transported module structure identifies $u^{-1}(R^{\\oplus N})$ with $A^{\\oplus N}$, with the standard coordinate maps. After this identification define $\\gamma:S\\otimes_A A^{\\oplus N}\\to S^{\\oplus N}$ by $s\\otimes(a_j)_j\\mapsto(s c(a_j))_j$. Its inverse sends $(s_j)_j$ to $\\sum_j s_j\\otimes e_j$; the balanced relation checks both composites are identities. These are maps of sheaves by the tensor definition. The same formula shows $u^*0=0$. Pullback is a functor, so its images of the differentials still have consecutive composite zero. Thus the termwise pullback is a complex, zero outside $[a,b]$. For each $r$, conjugating the pulled splitting by $\\gamma_r$ gives $p^u_ri^u_r=u^*p_r\\gamma_r^{-1}\\gamma_ru^*i_r=u^*(p_ri_r)=1$. These are the required specified splittings of the same ranks, with no assertion that the splittings are chain maps.",
+   "text": "Construct the rank-one comparison directly. The ringOne and moduleSMul graph equations of the algebraic inverse-image structure show that the inverse of its underlying-set comparison sends a to a times the image of 1. This gives the linear isomorphism I.modules(R) ≅ RI. Sectionwise extension of scalars and the tensor right unitor give S tensor_RI I.modules(R) ≅ S; their naturality and the sheafification counit give a sheaf isomorphism, with formula s tensor x maps to s c(x). Since the supplied uStar is additive, it preserves finite products. Compose its product comparison with the rank-one isomorphisms to obtain gamma in every finite rank. Naturality of the sheafification unit and moduleUnderlying proves the required coordinate formula. For uniqueness, use product hom-extensionality, the sheafification adjunction, and ModuleCat.ExtendScalars.hom_ext: a map out of scalar extension is determined by the images of 1 tensor m. This proves uniqueness, including rank zero. The transported splitting identity follows by cancelling gamma with its inverse and applying functoriality to package.splitting. Additivity preserves zero objects, so the pulled complex has exactly the same bounds.",
    "uses": [
     "def-weil-pbc-algebraic-inverse-image",
     "def-pur-sheaf-tensor-product",
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
     "def-weil-pbc-strict-perfect-coefficient-package"
    ],
    "elementary": true,
@@ -57,12 +56,9 @@
    }
   },
   {
-   "text": "Apply the coordinate and retract argument of step 1 over $S$ to the splittings just constructed. Every term of $u^*F^\\bullet$ is flat. This complex is bounded above by $b$, so [lem-weil-pbc-independent-bounded-flat-kflat] on the target site makes it K-flat as well. This uses neither flatness of $A\\to S$ nor exactness of $u^*$ on arbitrary modules.",
+   "text": "Apply the existing ringed-topos K-flat pullback theorem to the source complex with the K-flatness and site-flatness established in steps 1 and 2. Its two conclusions give K-flatness and site-flatness in every degree of the supplied uStar complex. The theorem applies at independent site-object, site-morphism and coefficient universes and assumes no flatness of c.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-sheaf-of-modules-category",
-    "def-pc-flat-sheaf-modules",
-    "lem-weil-pbc-independent-bounded-flat-kflat"
+    "lem-weil-pbc-ringed-topos-kflat-pullback"
    ],
    "elementary": false,
    "source": {
@@ -71,10 +67,16 @@
    }
   },
   {
-   "text": "The source complex is K-flat with flat terms by steps 1 and 2, so the canonical comparison of [lem-weil-pbc-ringed-topoi-derived-pullback] gives the isomorphism $\\epsilon_F:Lu^*(Q_RF^\\bullet)\\to Q_S(u^*F^\\bullet)$. For a derived isomorphism $e:Q_RF^\\bullet\\to P$, functoriality shows $Lu^*(e^{-1})$ is inverse to $Lu^*(e)$, so composing it with $\\epsilon_F$ gives the claimed isomorphism from $Lu^*P$. Finally pass a chain map $v:F^\\bullet\\to G^\\bullet$ to the homotopy category and evaluate the naturality square of the same canonical transformation $\\epsilon:Lu^*Q_R\\to Q_Su^*$. It reads exactly $Q_S(u^*v)\\circ\\epsilon_F=\\epsilon_G\\circ Lu^*(Q_Rv)$. No choice of inverse comparison or resolution is substituted for this transformation.",
+   "text": "The original specialized ringed-topos derived-pullback interface identifies all site universes, whereas this statement keeps them independent. The proof reproduces its resolving-class argument at the present universes from existing lower declarations; it does not rely on the subsequently stated independent-universe interface. Forgetting module sheaves to set sheaves preserves and reflects finite limits and preserves epimorphisms. The natural underlying-sheaf comparison, left exactness and the adjunction of uInv therefore show that I.modules preserves finite limits and epimorphisms, hence homology and quasi-isomorphisms. Construct ordinary scalar extension explicitly on presheaves and sheafify it; scalar extension by the identity is naturally isomorphic to the identity by the tensor unitor and sheafification counit. Apply ringed-topos K-flat pullback with identity coefficient map and transport along this isomorphism to see that I.modules preserves K-flat complexes with flat terms. The independent-universe derived-change-of-rings theorem supplies scalar extension preserving quasi-isomorphisms between K-flat complexes. Its object/map equations identify its composite with I.modules with uStar, so uStar preserves quasi-isomorphisms in this class. Flat K-flat resolutions give a quasi-isomorphism from the class into every homotopy-category object. Apply leftDerived_from_resolvingClass: its comparison is invertible on this class. The unique isomorphism between this left derived functor and the supplied LF respects the supplied epsilon, proving that epsilon is invertible there as well. Whiskering through the fixed quotient isomorphisms gives exactly ringedPullbackComplexComparison. Functors preserve isomorphisms, so composition with LF(e.inv) gives the requested model of LF(P). Finally the naturality equation is the symmetry of the naturality square of ringedPullbackComplexComparison.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "def-weil-abstract-derived-category"
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-abstract-derived-category",
+    "def-pc-flat-sheaf-modules",
+    "def-pur-sheaf-tensor-product",
+    "lem-weil-pbc-ringed-topos-kflat-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-left-derived-from-kflat-class"
    ],
    "elementary": false,
    "source": {
@@ -90,13 +92,18 @@
   "def-pc-flat-sheaf-modules",
   "lem-weil-pbc-independent-bounded-flat-kflat",
   "def-weil-pbc-algebraic-inverse-image",
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "def-weil-abstract-derived-category"
+  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "def-weil-abstract-derived-category",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "Q3",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 08H3 (lemma-strictly-perfect-pullback), 06YQ (lemma-bounded-flat-K-flat), 06YY (lemma-derived-base-change); elementary coordinate and retract arguments expanded explicitly"
+  "place": "Tags 08H3, 06YQ, 06YY; the existing categorical flat-retract API, the explicit rank-one pure-tensor construction, and the resolving-class proof at independent site universes. No new theorem is left unproved."
  },
  "mathlib_searches": [
   {
@@ -239,5 +246,15 @@
   "group": "NM",
   "result": "pass",
   "note": "Re-delivery after e786 RETURN (H13 dep-record rebinding, H9 global instance priority). Diff vs e786: node JSON identical; module only swaps the OfUniverses import for the original Sheaf.Paper.RingedTopoiDerivedPullback plus the recorded KFlatIndependentCoefficients/FlatOnSite modules, and makes both hasSheafCompose priority attributes local; dep module and dep record copy removed, live NG dep record untouched. All signatures byte-identical to the 5178 PASS version; re-checked universes, uStar pinned to changeOfRings, bounds, flat/K-flat both sides, ∃!-pinned finite-free γ and transported package (same N), IsIso ε_F and ε_F∘LF(e⁻¹), naturality direction, edge cases. nt_compile --json clean in 42.3 s at load ~190. Advisory: no lean.note on the general-universe dep content (stage-3 concern); proof-only plain imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T120448-L-3898536",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
