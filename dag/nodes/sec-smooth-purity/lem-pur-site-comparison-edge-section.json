@@ -5,53 +5,29 @@
  "unit": "sk-prop-a1-kummer",
  "proof": [
   {
-   "text": "Put K=F[0]. Choose a K-injective resolution F[0] -> I and then a K-injective resolution t:A_U I -> J, using the resolution-existence theorem for module sheaves on the two sites. Exactness of A_U makes A_U F[0] -> A_U I a quasi-isomorphism, so J also represents A_U F. The adjoint of t under A_U dashv nu_U,* is a chain map h:I -> nu_U,* J. The definition of the derived comparison unit, followed by the final-object comparison, therefore represents c^q_{U,F} by H^q of Gamma(U_et,I) -> Gamma(U_proet,J). On chains this sends a section z to t applied to its comparison pullback: evaluating nu_U,* J at U gives J(U). Thus no assertion that A_U preserves injectives is needed.",
+   "text": "Apply [lem-pur-comparison-global-resolution-model] to choose $F[0]\\to I$ and $t:A_UI\\to J$ with its stated nonnegative injective models. Put $h=\\operatorname{adj}(t)$. Represent $x$ by a degree-$q$ global cocycle $z$ of $I$. The cited model identifies $c^q_{U,F}(x)$ with the global class of $h(z)$ in $J$.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sf-comparison-pullback-exact",
-    "def-weil-pbc-site-comparison-morphism",
-    "lem-weil-pbc-comparison-global-cohomology",
-    "lem-weil-pbc-derived-sections-pushforward"
+    "lem-pur-comparison-global-resolution-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
-    "place": "Opening paragraph: bounded-below global comparison; resolution existence is Stacks Tag 079P, injectives.tex, theorem-K-injective-embedding-grothendieck."
+    "place": "Opening paragraph: transport of classes; assemble the normalized resolution model."
    }
   },
   {
-   "text": "Write C=u_et,* I and D=u_proet,* J. The direct-image definitions give a canonical identity nu_V,* D = u_et,* nu_U,* J: at an etale W/V, both sides are J(W times_V U), and both restriction maps are those of J. Compose u_et,* h with this identity to obtain k:C -> nu_V,* D, and let d:A_V C -> D be its comparison-adjunction transpose. This constructs the chain map rather than assuming that an abstract direct-image isomorphism supplies one. By the unit-counit formula for transposition, the comparison pullback of a global section z of C, followed by d, is k(z). At the terminal object V, k(z)=h(z), viewed as a section of J on U, because both direct images evaluate there on U.",
+   "text": "Set $C=u_{\\mathrm{et},*}I$ and $D=u_{\\mathrm{proet},*}J$. The restriction-transpose lemma [lem-pur-comparison-direct-image-resolution-mate] supplies $d:A_VC\\to D$, identifies $Qd$ with the specified $b_{u,F}$ under the canonical resolution identifications, and gives $d(A_V(z))=h(z)$ on terminal sections. Its hypotheses hold for the resolutions of Step 1 and the quasi-compact quasi-separated $u$ of the statement.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-site-comparison-morphism",
-    "def-weil-pbc-adjunction-mate"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
-    "place": "Opening paragraph: construct transport on the same resolution complexes; direct-image evaluation and the defining adjunction formulas."
-   }
-  },
-  {
-   "text": "The K-injective direct-image models identify $QC=Ru_{\\mathrm{et},*}F$ and $QD=Ru_{\\mathrm{proet},*}A_UF$. Work first on complexes, writing $l=u_{\\mathrm{et}}^{-1}$, $r=u_{\\mathrm{et},*}$, $p=u_{\\mathrm{proet}}^*$, $s=u_{\\mathrm{proet},*}$, $N=\\nu_{U,*}$, $M=\\nu_{V,*}$. Step 2 gives $\\delta:Ms\\cong rN$. The composite-adjunction definition and the unit-normalized conjugation lemma give its unique inverse-image conjugate $a:A_Ul\\cong pA_V$, the canonical pullback comparison of the cited comparison node. Explicitly, precomposition with $a_X$ is the Hom-bijection chain $\\operatorname{Hom}(pA_VX,J)\\cong\\operatorname{Hom}(X,MsJ)\\xrightarrow{\\delta}\\operatorname{Hom}(X,rNJ)\\cong\\operatorname{Hom}(A_UlX,J)$. Apply this to $X=C=rI$ and $v=\\varepsilon^p_J\\circ p(d)$. Its first two adjoints are $d$ and $k$ by Step 2. After $\\delta$, these give $r(h)$. Transposing under $l\\dashv r$ gives $h\\circ\\varepsilon^e_I$. Transposing under $A_U\\dashv N$ gives $t\\circ A_U(\\varepsilon^e_I)$: since $h=N(t)\\circ\\eta_I$, its transpose is $\\varepsilon^{A}_J\\circ A_UN(t)\\circ A_U(\\eta_I)=t\\circ\\varepsilon^{A}_{A_UI}\\circ A_U(\\eta_I)=t$ by counit naturality and the triangle identity. Thus $v\\circ a_C=t\\circ A_U(\\varepsilon^e_I)$. Localizing this equality and identifying $QJ$ with $A_UF$ via $Q(t)$ shows that the derived transpose of $Q(d)$ is $A_U(\\varepsilon^e_F)\\circ a_{u,r_uF}^{-1}$. This is precisely $q_{u,F}$ in the canonical-mate statement. Injectivity of the adjunction bijection gives $Q(d)=b_{u,F}$ with its specified normalization.",
-   "uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-adjunction-mate",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "def-weil-pbc-composite-adjunction",
-    "lem-weil-pbc-conjugate-iso-unit-equation"
+    "lem-pur-comparison-direct-image-resolution-mate"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
-    "place": "Opening paragraph transport: identify the constructed morphism with the specified mate, by the mate formula (Stacks Tag 0B65, categories.tex, lemma-transformation-between-functors-and-adjoints)."
+    "place": "Opening paragraph: transport of classes; assemble the normalized resolution model."
    }
   },
   {
-   "text": "Choose a degree-q global cocycle z in Gamma(U_et,I) representing x. The etale edge section is its class [z] in H^q(C), by the resolution description in the statement. The module-sheaf cohomology definition is kernel modulo image; hence a chain map sends the class of a cocycle to the class of its image, and sends boundaries to boundaries. Exactness of A_V identifies A_V H^q(C) with H^q(A_V C), naturally for d. Step 2 therefore gives H^q(d)(A_V([z]))=[h(z)] as global sections on V_proet. Step 1 identifies the global class of h(z) with c^q_{U,F}(x), so its class in H^q(D) is the pro-etale edge section of that class. Substitute Q(d)=b_{u,F} from Step 3 to obtain exactly the asserted equality. The same calculation covers q=0, the zero sheaf, the identity morphism, and empty U.",
+   "text": "The etale edge section is the image $[z]$ in $\\Gamma(V_{\\mathrm{et}},\\mathcal H^q(C))$, and the pro-etale edge of the class in Step 1 is $[h(z)]$ in $\\Gamma(V_{\\mathrm{proet}},\\mathcal H^q(D))$, by the stipulated cocycle descriptions of the two edges. Cohomology is kernel modulo image [def-weil-derived-cohomology-sheaves], so a chain map carries the class of a cycle to that of its image; boundaries go to boundaries. The natural exactness identification $A_V\\mathcal H^q(C)\\cong\\mathcal H^q(A_VC)$ [lem-sf-comparison-pullback-exact](3) therefore gives $\\mathcal H^q(d)(A_V([z]))=[d(A_V(z))]=[h(z)]$. Substituting $Qd=b_{u,F}$ from Step 2 is the required equality. This calculation also applies to $q=0$, zero sheaves, the identity morphism and empty $U$.",
    "uses": [
     "def-weil-derived-cohomology-sheaves",
     "lem-sf-comparison-pullback-exact"
@@ -59,29 +35,20 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
-    "place": "Opening paragraph: transport the global classes to their higher-direct-image edge sections; Stacks Tag 072W, sites-cohomology.tex, lemma-higher-direct-images, explains the cocycle-to-cohomology-sheaf construction."
+    "place": "Opening paragraph: transport of classes; Stacks Tag 072W, sites-cohomology.tex, lemma-higher-direct-images, cocycle-to-cohomology-sheaf map."
    }
   }
  ],
  "proof_deps": [
   "def-weil-derived-cohomology-sheaves",
-  "def-weil-pbc-adjunction-mate",
-  "def-weil-pbc-composite-adjunction",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-site-comparison-morphism",
-  "lem-sf-comparison-pullback-exact",
-  "lem-weil-pbc-comparison-direct-image-canonical-mate",
-  "lem-weil-pbc-comparison-global-cohomology",
-  "lem-weil-pbc-comparison-pullback",
-  "lem-weil-pbc-conjugate-iso-unit-equation",
-  "lem-weil-pbc-derived-sections-pushforward",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-pur-comparison-direct-image-resolution-mate",
+  "lem-pur-comparison-global-resolution-model",
+  "lem-sf-comparison-pullback-exact"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-a1-kummer/prop-pur-gm-relative-kummer.proof.md",
-  "place": "Opening paragraph transport, expanded using K-injective resolutions, the chain-level restriction identity, and the counit-mate formula; concludes by the cocycle definition of edge sections."
+  "place": "Opening paragraph transport, assembled from the separate global derived-unit resolution model and restriction-transpose counit-mate model, followed by the cocycle class calculation."
  },
  "created": {
   "by": "worker",
@@ -168,35 +135,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-pur-site-comparison-edge-section",
   "worker": "stage1",
-  "summary": "Retained the statement and all inherited searches. Repaired the saved proof by citing K-injective resolution existence, constructing the comparison chain map through the identity of restriction direct images, checking its transpose against the specified counit-mate formula, and then computing both edge sections on the same global cocycle. Four steps, no new nodes; no injective-preservation assumption or statement change. On resumption, expanded the mate identification into its Hom-bijection calculation and cited the existing composite-adjunction and unit-normalized-conjugation interfaces.",
-  "blueprint": "Opening paragraph transport of classes in prop-pur-gm-relative-kummer.proof.md; current parent split Step 15 uses this precise edge-section equality for the Kummer generator.",
+  "summary": "Deliberate human-requested re-split: statement unchanged. Extracted two statement-only tasks for the normalized global derived-unit model and the chain restriction-transpose/counit-mate identification. All old arguments are retained in the report for the future workers. Parent now has three assembly steps and no long step. No Lean writing or compilation.",
+  "blueprint": "Realizes the opening-paragraph transport of global classes to higher-direct-image sections in prop-pur-gm-relative-kummer; preserves the lecture-notes route.",
   "tool_uses": [
    {
     "node": "lem-sf-comparison-pullback-exact",
-    "why": "Exactness gives the resolution comparison in Step 1 and natural cohomology-sheaf identification in Step 4; this generic site-comparison tool does not replace the Kummer computation."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "why": "Its explicit transpose and counit normalization identify Q(d) with the named b_{u,F} in Step 3; the Kummer unit itself does not supply this generic comparison interface."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-global-cohomology",
-    "why": "Its derived-unit definition of c^q_{U,F} identifies the global chain map in Step 1; the Kummer unit supplies no independent construction of that comparison."
-   },
-   {
-    "node": "lem-weil-pbc-derived-sections-pushforward",
-    "why": "Evaluation on the final object is used to realize the global comparison at the resolution level in Step 1."
-   },
-   {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Generic existence of K-injective resolutions for module sheaves on a small ringed site, used to choose I and the replacement of A_U I without assuming inverse image preserves injectives."
-   },
-   {
-    "node": "lem-weil-pbc-comparison-pullback",
-    "why": "The canonical comparison a_u between the two inverse-image composites enters the transpose calculation identifying the constructed d with the named b_{u,F}."
+    "why": "Its natural exact cohomology identification is the generic tool used in Step 3; the Kummer computation does not supply this site-comparison fact."
    }
   ]
  },
@@ -209,12 +156,12 @@
   "lem-weil-pbc-comparison-pullback"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q91-488eaef9c",
-  "group": "Q91",
+  "reviewer": "NT-cc-Q56-88fe02f83",
+  "group": "Q56",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q91-488eaef9c (reviewer sub-agent of L); spot-checked: Reviewed item, all four steps, cited nodes and sources, unit/chapter route, coefficient category, canonical base-change mate, edge cases, and DAG acyclicity. No new nodes or repairs are needed. Full review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q56-88fe02f83 (reviewer sub-agent of L); spot-checked: Answers the 2026-10-21 re-split note (≥1 new node, ≤3000 chars). The statement is byte-identical to the live base (Q91 PASS), and only proof, proof_deps, proof_origin and split_report changed. Old step mapping: Step 1 goes to new lem-pur-comparison-global-resolution-model (existence of nonnegative termwise-injective K-injective I and J; h=adj(t) represents the derived unit; final-object evaluation; c^q[z]=[h(z)]; h(z)=t(A_U z)). Steps 2-3 go to new lem-pur-comparison-direct-image-resolution-mate (δ restriction identity; k=δ^{-1}u_*(h); d its transpose; the chain equality ε^p_J∘p(d)∘a^0_C=t∘A_U(ε^e_I); Qd=b_{u,F}; d(A_V z)=h(z)). Step 4 becomes the elementary parent Step 3. Nothing was dropped, the parent is 1478 chars, and neither node restates the item. Mathematics checked: the proof of lem-weil-pbc-comparison-pullback builds a^0 as the conjugate of exactly this δ_u, so the recomputed transposes (counit naturality plus the triangle identity) give the chain equality, and localizing matches the normalization of lem-weil-pbc-comparison-direct-image-canonical-mate. N_U J is K-injective (right adjoint of exact A_U), so Γ(N_U J)=J(U) computes the global comparison of lem-weil-pbc-comparison-global-cohomology / derived-sections-pushforward. Parent Step 3 uses exactly clause (3) of lem-sf-comparison-pullback-exact. Small cases checked: u=id (d=t, b=id), U=∅, F=0, q=0. Sources read: Stacks 099W proetale.tex:3986, 079P injectives.tex:1807, 0B65 categories.tex:3542, 072W, and the blueprint prop-pur-gm-relative-kummer proof opening paragraph. No SGA; the item is not dropped. Repair (B3): the mate node used u_et^{-1} and its counit with no definition cite; I added [def-weil-pbc-inverse-image] to its statement and stmt_deps (fixes/dag/nodes/sec-smooth-purity/lem-pur-comparison-direct-image-resolution-mate.json). Maintainer notes: the existing lem-pur-comparison-unit-injective-model (Q144) already gives the derived-unit representation part of the global-resolution node; this is an overlap, not a duplicate, and that node's worker should cite it. The item's top-level tool_uses are stale. The conjugate normalization of a^0 appears only in the proof of comparison-pullback; this was inherited from the base.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.SiteComparisonEdgeSection",
