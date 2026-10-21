@@ -21665,3 +21665,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:09 L: merged deliver/Q04/lem-sf-automorphism-completion-unit-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 09:09 L: merged deliver/Q47/lem-sfb-scalar-adjunction-unit-coefficient-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 09:09 L: merged deliver/Q94/lem-weil-boundary-etale-adjunction-restriction (stage 2; reviewer PASS; parallel immutable checks)
+- 09:09 L: returned deliver/Q20/lem-sfb-split-perfect-dual-tor-window (reviewer RETURN: L: independent stage-2 immutable head d17c0eceb3b5: H2 / mechanical theorem-stmt_dep finding. Of the three theorem nodes)
