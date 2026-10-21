@@ -20,7 +20,6 @@ import Sheaf.AlgebraicGeometry.ProperFlatSingleDerivedDirectImagePerfect
 import Sheaf.AlgebraicGeometry.PerfectFiniteFreeResidueModel
 import WeilConjectures.AlgebraicGeometry.Modules.ProjectionFormula
 import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.Free
-import Mathlib.AlgebraicGeometry.AffineScheme
 import WeilConjectures.AlgebraicGeometry.DescendedInvertibleNeighbourhood
 import Sheaf.AlgebraicGeometry.PicardDirectImageFibreBetti
 import Sheaf.AlgebraicGeometry.ResidueRankModelDifferential
@@ -100,10 +99,9 @@ private theorem refine_residue_model
     exact ⟨a, b, fun j hj ↦ F.map_isZero (hab j hj)⟩
   · intro j
     refine ⟨F.mapIso (hrank j).some ≪≫ ?_⟩
-    exact (asIso (sigmaComparison F
-      (fun _ : ULift.{v} (Fin (derivedFiberBetti W E j w)) ↦
-        SheafOfModules.unit ((moduleRings W.toRingedSpace).over U)))).symm ≪≫
-      Sigma.mapIso (fun _ ↦ SheafOfModules.overMapUnitIso (homOfLE hU'U))
+    exact (SheafOfModules.mapFreeIso F
+      (ULift.{v} (Fin (derivedFiberBetti W E j w)))
+      (SheafOfModules.overMapUnitIso (homOfLE hU'U)).symm).symm
 
 set_option linter.unusedVariables false in
 set_option backward.isDefEq.respectTransparency false in
