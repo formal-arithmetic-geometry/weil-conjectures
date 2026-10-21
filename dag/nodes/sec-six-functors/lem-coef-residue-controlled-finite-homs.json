@@ -198,5 +198,28 @@
   "group": "O4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-86f5dffda (reviewer sub-agent of L); spot-checked: I read the whole item and every cited statement. Shape: one commit holding the item and the report, with no new nodes. Statement, stmt_deps, blueprint and source are unchanged from side-live, where the item is still unsplit, so the delivery is not superseded. The item is not on the route-pivot dropped list and has no repair note. There is no cycle: the item is not in the closure of its proof_deps. The route is exactly sentences 2–3 of the main-20261015 cor-coef-integral-internal-hom.proof.md: residue-Tor lemma, then the finite internal-Hom corollary. Both cited nodes are in the item's own unit sk-prop-sf-biduality-general, so no tool_uses are needed. Step 1: lem-coef-integral-residue-tor's hypotheses hold. ℓ is invertible on a k-scheme because char k = p ≠ ℓ. K is integral D^b_c. Its K_n is K⊗^L over the completed coefficient sheaf with (A_n)_X, the same object as the item's K_n since B is that completed sheaf. The level-one cohomology bounds are given. So every K_n and L_n has the same Tor interval at every level, and with bounded constructibility from def-weil-derived-complete-integral-detailed this is D^b_ctf(X,A_n) by def-weil-finite-tor-amplitude. Step 2: the pro-étale clause of cor-weil-finite-constructible-hom has the same coefficient ring A_n, the same pro-étale site and the same hypotheses (separated, finite type, dim ≤ d). With (a,b,c,e) = (α,β,γ,ε) its quantitative clause gives exactly I = [γ−β−2d, ε−α+2d], with no n in the endpoints. Step 3: testing the Tor amplitude against B_n in degree 0 gives the support condition. It is elementary, with the unit isomorphism written out on a K-flat representative. Small cases: K = L = R/ϖ over a point gives [α,β] = [−1,0], and RHom(K_n,K_n) lies in [−1,1] = I, so the bound holds and is sharp. I also checked d = 0 (the perfect-complex duality bound), n = 1, X = ∅ and zero inputs. No SGA source is cited, and there are no duplicates. No changes or fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ResidueControlledFiniteHoms",
+  "declaration": "WeilConjectures.residue_controlled_finite_homs",
+  "declarations": [
+   "WeilConjectures.integralFiniteInternalHom",
+   "WeilConjectures.residue_controlled_finite_homs"
+  ],
+  "file": "lean/Sheaf/Paper/ResidueControlledFiniteHoms.lean",
+  "statement": "theorem residue_controlled_finite_homs (D : FiniteFieldDatum.{u}) (l : ℕ) [Fact l.Prime] (_hl : l ≠ D.p) (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (X : Scheme.{u}) [X.Over (Spec (.of D.k))] [IsSeparated (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] (d : ℕ) (_hd : topologicalKrullDim X ≤ (d : WithBot ℕ∞)) (K L : DerivedCategory (scalarReductionSource.{u, u} l E X)) (_hK : sfIntegralConstructible l E X K) (_hL : sfIntegralConstructible l E X L) (a b c e : ℤ) (_hab : a ≤ b) (_hce : c ≤ e) (_hK₁ : proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E X 0).obj K) ⊆ Set.Icc a b) (_hL₁ : proEtaleCohomologicalSupport ((scalarReductionDerivedExtension.{u, u} l E X 0).obj L) ⊆ Set.Icc c e) : ∀ n : ℕ, intrinsicFiniteTorsionConstructible l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n)) X (integralFiniteInternalHom l E X K L n) ∧ HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) (integralFiniteInternalHom l E X K L n) (c - b - 2 * (d : ℤ)) (e - a + 2 * (d : ℤ)) ∧ proEtaleCohomologicalSupport (integralFiniteInternalHom l E X K L n) ⊆ Set.Icc (c - b - 2 * (d : ℤ)) (e - a + 2 * (d : ℤ))",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Index n denotes exponent n+1, so all positive finite levels occur; index zero is the residue reduction. integralFiniteInternalHom is the explicit finite-level expression T_n from this node, using the recorded reduction and internal-Hom functors."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-3e5c54c3c",
+  "group": "Q18",
+  "result": "pass",
+  "note": "Each node clause maps to the Lean. ℓ≠p is l ≠ D.p. X is separated with LocallyOfFiniteType and QuasiCompact over Spec D.k. dim X ≤ d is topologicalKrullDim. K,L use sfIntegralConstructible on scalarReductionSource. The residue bounds are support inclusions at reduction index 0. T_n is derivedInternalHomOfUniverses.{u+1,u,u} over proEtaleConstantRing X A_{n+1} at (op K_n, L_n), identical to cor-weil-finite-constructible-hom's Lean. The conclusions are intrinsicFiniteTorsionConstructible, HasProEtaleTorAmplitude and support ⊆ Icc, all on [c-b-2d, e-a+2d] with no dependence on n. Checked in source: scalarReductionTarget n is the constant A_{n+1} sheaf, so ∀ n covers all levels ≥ 1. No extra hypotheses; the universe convention matches the recorded APIs. The node without its lean field equals side-live, the dependency nodes are byte-identical, the statement is verbatim and there are no name collisions. The helper has real data. Docstrings carry the source, blueprint id and the 3 proof steps; the proof is sorry only. Both report sections are present. Edge cases checked: n=1, d=0, empty X, zero complexes, R/ϖ over a point. Nothing compiled because nothing was changed."
  }
 }
