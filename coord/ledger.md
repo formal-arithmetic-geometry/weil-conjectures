@@ -23039,3 +23039,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T16:26:52Z L: superseded stage-1 delivery NA/lem-weil-point-derived-tensor-tower-coherence at 74d67276164f1bdae9f2b53175d3541d23921425; current completion retained; packet archived at refs/superseded/NA/lem-weil-point-derived-tensor-tower-coherence/74d67276164f1bdae9f2b53175d3541d23921425; stale return retired.
 - 16:27 L: merged deliver/NY/lem-sfb-bicosimplicial-shuffle-totalization (reviewer PASS; first push; new nodes: 1)
 - 16:27 L: returned deliver/E2/Sheaf.Paper.CartesianCoefficientsFiniteFree (reviewer RETURN: (the landing tools, head 1a820ada8) the delivery did not land: (d) user Sheaf.Paper.ProperIntegralRationalScalarComparis)
+- 16:27 L: returned deliver/S1/Sheaf.Algebra.Homology.KFlatResolution (reviewer RETURN: (the landing tools, head 4f1871883) the delivery did not land: (d) user Sheaf.Paper.SheafSliceDerivedComparison (mention)
