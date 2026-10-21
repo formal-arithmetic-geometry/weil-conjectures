@@ -312,14 +312,18 @@ lemma ext_comp_mk₀_hom {M M' N N' : Sheaf X.smallEtaleTopology (ModuleCat.{u +
 
 variable [HasInvertibleExponent Λ X] [HasInvertibleExponent Λ Y] [NeZero (ringChar Λ)]
 
-/-- The first Chern class is compatible with pullback: `Lg^* c₁(L) = c₁(g^* L)`. -/
-theorem leftDerivedUpperStar_map_chernClass (L : Y.Pic) :
-    (L((g)^*[ModuleCat.{u + 1} Λ])).map (chernClass Λ Y L) ≫
-        ((L((g)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 : ℤ)).hom.app (tateTwistObject Λ Y 1) ≫
-          (leftDerivedUpperStarTateTwistObjectIso Λ g 1).hom⟦(2 : ℤ)⟧' =
-      (leftDerivedUpperStarConstantComplexIso Λ g).hom ≫ chernClass Λ X (Pic.map g L) := by
-  have hB := leftDerivedUpperStar_map_tateTwistObjectOneIso Λ g
-  have hB' : (L((g)^*[ModuleCat.{u + 1} Λ])).map (tateTwistObjectOneIso Y Λ).inv ≫
+/-- The first Chern class `c₁(L)`, unfolded. -/
+lemma chernClass_eq (L : X.Pic) :
+    chernClass Λ X L = (constantComplexIsoSingleFunctorExtendScalarsInt X Λ).hom ≫
+      Abelian.Ext.homAddEquiv (kummerCoefficientMap Λ X 2
+        (Pic.chernClassRootsOfUnity (ringChar Λ) (isUnit_ringChar_of_hasInvertibleExponent X) L)) ≫
+      (tateTwistObjectOneIso X Λ).inv⟦(2 : ℤ)⟧' :=
+  rfl
+
+omit [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y] in
+/-- The derived pullback of `Λ_Y(1) ≅ (μₙ ⊗ Λ)[0]`, inverted. -/
+lemma leftDerivedUpperStar_map_tateTwistObjectOneIso_inv :
+    (L((g)^*[ModuleCat.{u + 1} Λ])).map (tateTwistObjectOneIso Y Λ).inv ≫
       (leftDerivedUpperStarTateTwistObjectIso Λ g 1).hom =
       ((singleFunctorCompLeftDerivedUpperStarIso _ g).hom.app _ ≫
           (DerivedCategory.singleFunctor _ 0).map
@@ -327,39 +331,49 @@ theorem leftDerivedUpperStar_map_chernClass (L : Y.Pic) :
               (extendScalars Λ X).map
                 (upperStarRootsOfUnitySheafToRootsOfUnitySheaf (ringChar Λ) g))) ≫
         (tateTwistObjectOneIso X Λ).inv := by
-    rw [Iso.eq_comp_inv, ← cancel_epi ((L((g)^*[ModuleCat.{u + 1} Λ])).map
-      (tateTwistObjectOneIso Y Λ).hom)]
-    simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
-      CategoryTheory.Functor.map_id, Category.id_comp]
-    exact hB.symm
-  have hA := leftDerivedUpperStar_map_constantComplexIsoSingleFunctorExtendScalarsInt Λ g
-  have hA' : (L((g)^*[ModuleCat.{u + 1} Λ])).map
+  have hB := leftDerivedUpperStar_map_tateTwistObjectOneIso Λ g
+  rw [Iso.eq_comp_inv, ← cancel_epi ((L((g)^*[ModuleCat.{u + 1} Λ])).map
+    (tateTwistObjectOneIso Y Λ).hom)]
+  simp only [Category.assoc, ← Functor.map_comp_assoc, Iso.hom_inv_id,
+    CategoryTheory.Functor.map_id, Category.id_comp]
+  exact hB.symm
+
+omit [CompactSpace X] [QuasiSeparatedSpace X] [CompactSpace Y] [QuasiSeparatedSpace Y]
+  [NeZero (ringChar Λ)] in
+/-- The derived pullback of `Λ_Y ≅ (Λ ⊗ ℤ)[0]`. -/
+lemma leftDerivedUpperStar_map_constantComplexIsoSingleFunctorExtendScalarsInt_hom :
+    (L((g)^*[ModuleCat.{u + 1} Λ])).map
       (constantComplexIsoSingleFunctorExtendScalarsInt Y Λ).hom =
       (leftDerivedUpperStarConstantComplexIso Λ g).hom ≫
         (constantComplexIsoSingleFunctorExtendScalarsInt X Λ).hom ≫
           (DerivedCategory.singleFunctor _ 0).map
             (upperStarExtendScalarsConstantSheafIntIso Λ g).inv ≫
           (singleFunctorCompLeftDerivedUpperStarIso _ g).inv.app _ := by
-    have e : (singleFunctorCompLeftDerivedUpperStarIso _ g).hom.app _ ≫
-        (DerivedCategory.singleFunctor _ 0).map
-          (upperStarExtendScalarsConstantSheafIntIso Λ g).hom ≫
-        (DerivedCategory.singleFunctor _ 0).map
-          (upperStarExtendScalarsConstantSheafIntIso Λ g).inv ≫
-        (singleFunctorCompLeftDerivedUpperStarIso _ g).inv.app _ = 𝟙 _ := by
-      rw [← Functor.map_comp_assoc, Iso.hom_inv_id, CategoryTheory.Functor.map_id,
-        Category.id_comp, Iso.hom_inv_id_app]
-    refine (Category.comp_id _).symm.trans ?_
-    erw [← e]
-    simp only [upperStarExtendScalarsConstantSheafIntIso, Iso.trans_hom, Functor.mapIso_hom,
-      Iso.app_hom, Functor.map_comp, Category.assoc] at hA ⊢
-    rw [reassoc_of% hA]
+  have hA := leftDerivedUpperStar_map_constantComplexIsoSingleFunctorExtendScalarsInt Λ g
+  have hE : (upperStarExtendScalarsIso Λ g).hom.app Y.constantSheafInt ≫
+      (extendScalars Λ X).map ((upperStarConstantSheafIso AddCommGrpCat.{u + 1} g).hom.app _) =
+      (upperStarExtendScalarsConstantSheafIntIso Λ g).hom := rfl
+  rw [hE] at hA
+  rw [← reassoc_of% hA, ← Functor.map_comp_assoc, Iso.hom_inv_id,
+    CategoryTheory.Functor.map_id, Category.id_comp, Iso.hom_inv_id_app]
+  exact (Category.comp_id _).symm
+
+/-- The first Chern class is compatible with pullback: `Lg^* c₁(L) = c₁(g^* L)`. -/
+theorem leftDerivedUpperStar_map_chernClass (L : Y.Pic) :
+    (L((g)^*[ModuleCat.{u + 1} Λ])).map (chernClass Λ Y L) ≫
+        ((L((g)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 : ℤ)).hom.app (tateTwistObject Λ Y 1) ≫
+          (leftDerivedUpperStarTateTwistObjectIso Λ g 1).hom⟦(2 : ℤ)⟧' =
+      (leftDerivedUpperStarConstantComplexIso Λ g).hom ≫ chernClass Λ X (Pic.map g L) := by
+  have hB' := leftDerivedUpperStar_map_tateTwistObjectOneIso_inv Λ g
+  have hA' := leftDerivedUpperStar_map_constantComplexIsoSingleFunctorExtendScalarsInt_hom Λ g
   have hcs := ((L((g)^*[ModuleCat.{u + 1} Λ])).commShiftIso (2 : ℤ)).hom.naturality
     (tateTwistObjectOneIso Y Λ).inv
   simp only [Functor.comp_map] at hcs
   set y := kummerCoefficientMap Λ Y 2 (Pic.chernClassRootsOfUnity (ringChar Λ)
     (isUnit_ringChar_of_hasInvertibleExponent Y) L) with hy
   have h3 := leftDerivedUpperStar_map_extHom (ModuleCat.{u + 1} Λ) g y
-  simp only [chernClass, Functor.map_comp, Category.assoc, Abelian.Ext.homAddEquiv_apply]
+  rw [chernClass_eq Λ L, chernClass_eq Λ (Pic.map g L)]
+  simp only [Functor.map_comp, Category.assoc, Abelian.Ext.homAddEquiv_apply]
   erw [reassoc_of% hcs]
   rw [← Functor.map_comp, hB', Functor.map_comp, Functor.map_comp]
   have h3' : (L((g)^*[ModuleCat.{u + 1} Λ])).map y.hom ≫
