@@ -20,106 +20,110 @@
  ],
  "proof": [
   {
-   "text": "Put $s=a(t)$. For a complex $P$ representing $M$, form the strict augmented tower $X_m=\\operatorname{Tot}(P\\otimes_R[R\\xrightarrow{t^m}R])$, with degrees $[-1,0]$ in the second factor and transition $(t,1)$. The finite-free strict-tower theorem says that scalar tensor is exact; hence $C$ is computed termwise on any $P$, not just on a resolution. Each Koszul tensor is the two-copy total complex (a shifted cone), so it preserves quasi-isomorphisms in $P$. The elementary balanced tensor map $(x\\otimes r)\\otimes z\\mapsto(x\\otimes1)\\otimes a(r)z$, with its inverse, identifies $C^{\\operatorname{Tow}}X$ with $Y_m=\\operatorname{Tot}((P\\otimes_RS)\\otimes_S[S\\xrightarrow{s^m}S])$. It intertwines differentials because $a(t^m)=s^m$, transitions because $a(t)=s$, and degree-zero augmentations because $a(1)=1$. These are maps of entire augmented towers, natural in $P$. The two-copy formula and exact scalar tensor show that these calculations descend to $D(R)$ and $D(S)$.",
+   "text": "For every specified Koszul limit presentation, compare with the same augmented Cech Hom functor. Compose the inverse comparison for the reflector presentation with the comparison for the given presentation. Its unit equation transports complete outputs, the Hom bijection and the invertible-unit criterion to the actual presentation. Naturality and both idempotence isomorphisms also transport from Cech completion.",
    "uses": [
-    "lem-weil-pbc-finite-free-strict-tower-transport",
-    "lem-pur-derived-change-of-rings",
-    "def-pc-tensor-complex-sheaves"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); agent assembly of finite-free scalar transport and reflector uniqueness."
-   }
-  },
-  {
-   "text": "Apply the strict-tower comparison $\\lambda_X:C R\\lim_R X\\xrightarrow{\\sim}R\\lim_S C^{\\operatorname{Tow}}X$ and the tower identification in step 1. The Koszul reflector statement identifies the two limits with $C\\Lambda_{R,t}M$ and $\\Lambda_{S,s}CM$. We obtain a natural isomorphism $\\kappa^s_M:C\\Lambda_{R,t}M\\xrightarrow{\\sim}\\Lambda_{S,s}CM$. The augmented-tower clause of the transport theorem, applied to the degree-zero maps $P\\to X_m$, gives the actual equality $\\kappa^s_M C(\\eta^R_M)=\\eta^{S,s}_{CM}$. This uses the specified total derived inverse limit, including its augmentation, rather than a choice of cones in the triangulated category. The comparison is independent of the finite-free basis by that same theorem.",
-   "uses": [
-    "lem-weil-pbc-finite-free-strict-tower-transport",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); agent assembly of finite-free scalar transport and reflector uniqueness."
-   }
-  },
-  {
-   "text": "Use the Cech--Koszul dual-limit comparison for the singleton parameters $s$ and $v$ over $S$. It identifies their Koszul reflectors, with their actual units, with $R\\mathcal Hom_S([S\\to S[1/s]],-)$ and $R\\mathcal Hom_S([S\\to S[1/v]],-)$. The unit-power completeness lemma applies since $s=wv^e$, $w$ is invertible and $e\\geq1$. It gives a natural isomorphism $h:\\Lambda_{S,s}\\xrightarrow{\\sim}\\Lambda_{S,v}$ satisfying $h_N\\eta^{S,s}_N=\\eta^{S,v}_N$. Concretely its augmented localization identification fixes $S$; in $S[1/s]$, $v^{-1}=wv^{e-1}/s$, and in $S[1/v]$, $s^{-1}=w^{-1}v^{-e}$, giving inverse maps on sheafified localizations. Define $\\kappa_M=h_{CM}\\kappa^s_M$. Then $\\kappa$ is a natural isomorphism and $\\kappa_M C(\\eta^R_M)=\\eta^S_{CM}$. No regularity, Noetherian condition or exactness of sheaf products was used.",
-   "uses": [
-    "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison",
+    "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+    "lem-weil-pbc-ringed-completion-unit-naturality",
     "lem-pur-unit-power-completeness"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); agent assembly of finite-free scalar transport and reflector uniqueness."
-   }
-  },
-  {
-   "text": "If $M$ is locally derived $t$-complete, the reflector theorem makes $\\eta^R_M$ invertible. The equality just proved makes $\\eta^S_{CM}$ invertible, so the same theorem over $S$ shows that $CM$ is locally derived $v$-complete. For later use, for every locally derived $v$-complete $L$, precomposition with $C(\\eta^R_M)$ is bijective on maps $C\\Lambda_{R,t}M\\to L$: indeed $C(\\eta^R_M)=\\kappa_M^{-1}\\eta^S_{CM}$, and precomposition with $\\eta^S_{CM}$ is bijective by the reflector theorem. Thus any two arrows to such $L$ agreeing after $C(\\eta^R_M)$ are equal. This proves uniqueness of a unit-normalized comparison, and, independently of the construction in step 2, shows basis independence and independence of any presentation of the unit-power relation.",
-   "uses": [
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
-   ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); agent assembly of finite-free scalar transport and reflector uniqueness."
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; finite-free scalar change and its unit/shift/tower normalization extracted from the retained scalar-extension proof steps 6-7 (agent lemma)."
    }
   },
   {
-   "text": "Write $c:C(N[1])\\xrightarrow{\\sim}(CN)[1]$, $r:\\Lambda_R(N[1])\\xrightarrow{\\sim}(\\Lambda_RN)[1]$, and $q:\\Lambda_S(N[1])\\xrightarrow{\\sim}(\\Lambda_SN)[1]$ for the canonical cochain shift comparisons. Exact derived scalar extension supplies $c$, and the complete-triangulated theorem supplies $r,q$ with shift-compatible units. The desired equation is\n$$\\kappa_M[1]\\,c_{\\Lambda_R M}\\,C(r_M)=q_{CM}\\,\\Lambda_S(c_M)\\,\\kappa_{M[1]}.$$\nPrecompose both sides with $C(\\eta^R_{M[1]})$. Shift compatibility of $\\eta^R$, naturality of $c$, and the unit equation for $\\kappa_M$ reduce the left side to $\\eta^S_{CM}[1]\\,c_M$. The unit equation for $\\kappa_{M[1]}$, naturality of $\\eta^S$ along $c_M$, and shift compatibility of $\\eta^S$ reduce the right side to the same expression. The common target $(\\Lambda_S CM)[1]$ is complete by the complete-triangulated theorem. Step 4 cancels the precomposition. Iteration, including inverse shifts, gives every integer shift.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-sfb-ringed-complete-triangulated",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); agent assembly of finite-free scalar transport and reflector uniqueness."
-   }
-  },
-  {
-   "text": "For the identity coefficient map and $v=t$, let $u_N:CN\\xrightarrow{\\sim}N$ be the multiplication unitor, computed by $x\\otimes r\\mapsto rx$ in each cochain degree. The tensor-unit comparison from $C\\Lambda_R M$ to $\\Lambda_R CM$ is $\\Lambda_R(u_M^{-1})u_{\\Lambda_R M}$. Its composite with $C(\\eta^R_M)$ is $\\Lambda_R(u_M^{-1})\\eta^R_M u_M=\\eta^R_{CM}$ by naturality of the unitor and the completion unit. Its target is complete. Step 4 therefore identifies it with $\\kappa_M$. This proves the stated normalization with the actual tensor unit.",
-   "uses": [
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); agent assembly of finite-free scalar transport and reflector uniqueness."
-   }
-  },
-  {
-   "text": "Consider $R\\xrightarrow a S\\xrightarrow b T$, parameters $t,v,z$, $a(t)=wv^e$, $b(v)=uz^f$. Then $ba(t)=b(w)u^e z^{ef}$, with a unit coefficient and $ef\\geq1$. Choosing bases only to verify the hypothesis gives $T\\cong S^{\\oplus j}\\cong R^{\\oplus dj}$, so the preceding construction also applies directly to $ba$. Write $\\alpha:C_bC_a\\xrightarrow{\\sim}C_{ba}$ for balanced tensor associativity. Since all three scalar functors are exact termwise, its formula on any complex is $(x\\otimes s)\\otimes y\\mapsto x\\otimes b(s)y$, with inverse $x\\otimes y\\mapsto(x\\otimes1)\\otimes y$; it is natural on complexes and hence on derived categories. Compare the two arrows\n$$A=\\Lambda_T(\\alpha_M)\\,\\kappa_{b,C_aM}\\,C_b(\\kappa_{a,M}),\\qquad B=\\kappa_{ba,M}\\,\\alpha_{\\Lambda_RM}.$$\nAfter precomposing with $C_bC_a(\\eta^R_M)$, the two unit equations and naturality of $\\eta^T$ give $A\\,C_bC_a(\\eta^R_M)=\\eta^T_{C_{ba}M}\\alpha_M$. Naturality of $\\alpha$ and the direct unit equation give exactly the same formula for $B$. The map $C_bC_a(\\eta^R_M)$, transported by $\\alpha$, is $C_{ba}(\\eta^R_M)$; step 4 for $ba$ makes precomposition with it injective into the complete target $\\Lambda_TC_{ba}M$. Hence $A=B$. Induction on the length of a finite tower, with the explicit associative balanced-tensor formula, proves the asserted agreement for successive extensions.",
+   "text": "Use finite-free strict tower transport only for exactness of ordinary scalar extension. The unique ordinary left-adjoint comparison transfers exactness to the tensor functor in the flat scalar Koszul comparison. Its unit-normalized restriction comparison, together with conservativity of exact derived restriction, identifies t-completeness of a restricted object with a(t)-completeness over S. The unit-power theorem identifies the latter with v-completeness. Conservativity here is the unconditional helper of the flat ringed ideal equivalence module; no quotient-isomorphism hypothesis is used.",
    "uses": [
     "lem-weil-pbc-finite-free-strict-tower-transport",
-    "lem-pur-derived-change-of-rings",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
+    "lem-weil-pbc-flat-scalar-koszul-tower-comparison",
+    "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+    "lem-pur-unit-power-completeness",
+    "def-weil-pbc-ringed-tensor-section-calculus"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/algebraization.tex",
-    "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); agent assembly of finite-free scalar transport and reflector uniqueness."
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; finite-free scalar change and its unit/shift/tower normalization extracted from the retained scalar-extension proof steps 6-7 (agent lemma)."
+   }
+  },
+  {
+   "text": "Instantiate the existing normalized closed tensor structures and the scalar tensor comparison for the given universal scalar model. The finite-free coordinate theorem supplies X^d isomorphic to the restriction of scalar extension of X. Completeness is a strictly full triangulated property, hence is closed under finite products, and the finite biproduct is such a product. Therefore scalar extension preserves completeness, also for d=0. Only the existing basis isomorphism a_Q is used; no internal-Hom base-change conclusion is assumed.",
+   "uses": [
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-sf-ringed-finite-free-tensor-data",
+    "lem-sf-ringed-finite-free-hom-coordinates",
+    "lem-sfb-ringed-complete-triangulated",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; finite-free scalar change and its unit/shift/tower normalization extracted from the retained scalar-extension proof steps 6-7 (agent lemma)."
+   }
+  },
+  {
+   "text": "For complete Y the scalar adjunction transports the reflector Hom bijection to bijectivity of precomposition with C(eta_R): Hom(C Lambda_R X,Y) to Hom(CX,Y). Both C Lambda_R X and Lambda_S CX are complete. Extend eta_S across C(eta_R), and extend C(eta_R) across eta_S. The two bijections prove the resulting maps inverse. Injectivity proves their naturality and uniqueness, yielding the asserted unique normalized natural isomorphism. Completeness preservation is the finite-biproduct argument of the preceding step.",
+   "uses": [
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "def-weil-pbc-system-scalar-model"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; finite-free scalar change and its unit/shift/tower normalization extracted from the retained scalar-extension proof steps 6-7 (agent lemma)."
+   }
+  },
+  {
+   "text": "For coherence, conjugate precomposition with C(eta_R) by the normalized comparison. Idempotence and naturality of the S-unit imply injectivity into any target whose S-unit is invertible. Its unit is invertible on completed objects; the given unit-compatible shift structure makes it invertible on every shift. The shift square follows by this cancellation, scalar-shift naturality, and the two normalized unit equations.",
+   "uses": [
+    "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+    "lem-weil-pbc-ringed-completion-unit-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; finite-free scalar change and its unit/shift/tower normalization extracted from the retained scalar-extension proof steps 6-7 (agent lemma)."
+   }
+  },
+  {
+   "text": "For identity scalars, naturality of the actual scalar unitor and completion unit makes the proposed tensor-unit map normalized. For two scalar maps, naturality of the balanced derived associator, successive normalization and target-unit naturality make the successive and direct comparisons have the same precomposition. Transport cancellation by the associator and cancel as in the preceding step. This proves the unchanged identity and composition equations.",
+   "uses": [
+    "def-weil-pbc-system-scalar-coherence",
+    "lem-weil-pbc-ringed-completion-unit-naturality"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/algebraization.tex",
+    "place": "Tag 0A0E, lemma-derived-completion-koszul; finite-free scalar change and its unit/shift/tower normalization extracted from the retained scalar-extension proof steps 6-7 (agent lemma)."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-free-strict-tower-transport",
-  "lem-pur-derived-change-of-rings",
-  "def-pc-tensor-complex-sheaves",
   "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "lem-weil-pbc-ringed-cech-koszul-dual-limit",
+  "lem-weil-pbc-ringed-cech-koszul-hom-limit-comparison",
+  "lem-weil-pbc-ringed-cech-completion-unit-idempotence",
+  "lem-weil-pbc-ringed-completion-unit-naturality",
   "lem-pur-unit-power-completeness",
-  "lem-sfb-ringed-complete-triangulated"
+  "lem-weil-pbc-finite-free-strict-tower-transport",
+  "lem-weil-pbc-flat-scalar-koszul-tower-comparison",
+  "lem-weil-pbc-flat-ringed-ideal-complete-equivalence",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sf-ringed-finite-free-tensor-data",
+  "lem-sf-ringed-finite-free-hom-coordinates",
+  "lem-sfb-ringed-complete-triangulated",
+  "lem-pur-derived-change-of-rings",
+  "def-weil-pbc-system-scalar-model",
+  "def-weil-pbc-system-scalar-coherence"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/algebraization.tex",
-  "place": "Tags 099B (lemma-derived-completion) and 0A0E (lemma-derived-completion-koszul); agent assembly of finite-free scalar transport and reflector uniqueness.",
-  "note": "Combines existing strict-tower scalar transport with the existing unit-power Cech comparison; proves shift, identity and tower equations by the reflector Hom bijection."
+  "place": "Tags 099B and 0A0E; finite-free scalar coordinates and adjunction assembly.",
+  "note": "Z7: complete Lean proof via scalar adjunction, finite biproduct coordinates and the reflector Hom bijection. No new statements or holes. Uses strict-tower transport for ordinary exactness; no new scalar-extension Koszul tower calculation."
  },
  "mathlib_searches": [
   {
@@ -270,5 +274,15 @@
   "group": "NK",
   "result": "pass",
   "note": "Re-delivery of 34d6bea90465 (H2 RETURN). Lean module byte-identical (diff), lean.statement verbatim; item differs from live base only in stmt_deps/lean. H2 repaired: theorem stmt_deps lem-pur-system-scalar-model/-coherence replaced by new def nodes def-weil-pbc-system-scalar-model (existing:true on unchanged SystemScalarModel; structure fields model/ordinaryAdj/unit_normalized/adjunction/transpose and systemModelTmul faithfully stated; statement verbatim l.102) and def-weil-pbc-system-scalar-coherence (existing:true on unchanged SystemScalarCoherence; restriction unit/composition identity-on-sections and derived unit/composition via leftAdjointUniq, no .choose; statement verbatim l.160); lem-sfb-ringed-complete-triangulated dropped (kept in proof_deps). No duplicate def records, no cycle. Math re-checked: u : T≅𝟭 and α : A.T⋙B.T≅F.T directions match node id/tower formulas; ∃! unit-normalized κ true by reflector cancellation; shift clause valid for any CommShift on T; single universe forced by RingedKoszulSystem; lem-pur-finite-free-completion-exchange(-coherence) narrower, not duplicates. No recompile (Lean unchanged; prior nt_compile 48.3 s clean). Advisories: coherence def body uses exactDerivedRestriction* (theorem-owned lem-pur-exact-restriction-composition) not in stmt_deps; systemRingHasDerived instance not listed; inherited unused reflector theorem stmt_dep."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z7",
+  "result": "pass",
+  "landing": "20261021T204147-L-3959797",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
