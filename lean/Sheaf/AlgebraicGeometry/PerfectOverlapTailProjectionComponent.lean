@@ -3,12 +3,8 @@ module
 
 public import Sheaf.AlgebraicGeometry.PerfectOverlapCompositeStageTail
 public import Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport
-import Sheaf.AlgebraicGeometry.PerfectOverlapStageSchemeIso
 import Sheaf.AlgebraicGeometry.PerfectHomCompositionPrism
 import Sheaf.AlgebraicGeometry.PerfectOverlapProjectionCompositeAbstract
-import Sheaf.AlgebraicGeometry.PerfectOverlapRestrictedComposition
-import Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare
-import Sheaf.AlgebraicGeometry.PerfectOverlapStageEquivalence
 
 /-! # A component of composite overlap compatibility
 Source: Stacks Project, Tags 08DW and 0D5S.
@@ -53,10 +49,9 @@ set_option linter.unusedVariables false in
 /-- Projection compatibility for the tail, before insertion of the site counit.
 Source: Stacks Project, Tags 08DW and 0D5S, composition comparisons in Tag 09RE.
 
-Proof: First rewrite the endpoint stage functors by their proved equations,
-so the stage transport is the fixed derived transport. Fix either Boolean branch,
-with its open L and local object M. Expand
-only the constructed tail and factor the g-stage object comparison using
+Proof: The stage transport is the fixed derived transport. Fix either Boolean
+branch, with its open L and local object M. Expand only the constructed tail
+and factor the g-stage object comparison using
 `perfectOverlapStageObjectIso_hom_app`. Expand the nested pullback square.
 Naturality of the inclusion-pullback isomorphism moves the local composition
 through the first inclusion, cancelling the adjacent inverse-forward pair.
@@ -66,11 +61,12 @@ r followed by jK equal to jX followed by rL, and restricted composition gives
 rL followed by fL equal to gL. Apply `compositionTo_prism` to these arrows.
 Its three reflexive named composites reduce to the fixed composition family,
 and the remaining local named composite is kappa by
-`perfectOverlapCompositeLocalIso_eq_compositionTo`. Apply the cartesian
+`perfectOverlapCompositeLocalIso_eq_compositionTo_global`. Apply the cartesian
 projection prism `perfectOverlapProjectionCompositeAbstract` to the resulting
-composite, using `perfectOverlapStageSchemeIso_inv_projection` for its two
-projection equations. Finally use naturality of the derived transport for
-the K-inclusion comparison and for the composition of jK with fL. Expanding
+composite, using Mathlib's `morphismRestrict_homOfLE` and the raw cartesian
+isomorphism's `isoPullback_inv_fst` for its two projection equations. Finally use
+naturality of the derived transport for the K-inclusion comparison and for the
+composition of jK with fL. Expanding
 the f-stage object comparison and associating the factors identifies the
 right side with transport followed by pullback of sigma. This argument uses
 only isomorphisms, so includes empty or equal opens and unbounded M.
@@ -174,13 +170,15 @@ theorem perfectOverlapTailProjectionComponent
       dsimp only [p, t]
       rw [← Category.assoc, hs, Category.assoc, hc]
     have ht : eX.inv ≫ t = pullback.fst s b ≫ a := by
-      simpa only [perfectOverlapStageSchemeIso_eq_raw, eX, eY, t, jX, iX,
-        W, s, a, Scheme.Hom.preimage_inf] using
-        perfectOverlapStageSchemeIso_inv_projection g pX pY b hg U V L hWL
+      change eY.inv ≫ (X.homOfLE _ ≫ (g ∣_ L)) = _
+      rw [← morphismRestrict_homOfLE g W L hWL, ← Category.assoc]
+      exact congrArg (fun k ↦ k ≫ a)
+        (((isPullback_morphismRestrict g W).paste_vert hg).isoPullback_inv_fst)
     have hp : eF.inv ≫ p = pullback.fst s q ≫ a := by
-      simpa only [perfectOverlapStageSchemeIso_eq_raw, eF, p, jK, iK,
-        W, s, a, Scheme.Hom.preimage_inf] using
-        perfectOverlapStageSchemeIso_inv_projection f pK pY q hf U V L hWL
+      change eK.inv ≫ (K.homOfLE _ ≫ (f ∣_ L)) = _
+      rw [← morphismRestrict_homOfLE f W L hWL, ← Category.assoc]
+      exact congrArg (fun k ↦ k ≫ a)
+        (((isPullback_morphismRestrict f W).paste_vert hf).isoPullback_inv_fst)
     have prism := compositionTo_prism r jK (f ∣_ L) jX rL p (g ∣_ L) t
       rfl hc hr rfl hs M
     have projection := perfectOverlapProjectionCompositeAbstract s l r eX eF hmapI
@@ -217,7 +215,7 @@ theorem perfectOverlapTailProjectionComponent
     simp only [Iso.trans_hom, Iso.symm_hom, Functor.mapIso_hom,
       Iso.app_hom, Iso.app_inv] at prismHom
     have localIso : κ = compositionTo rL (f ∣_ L) (g ∣_ L) hc :=
-      perfectOverlapCompositeLocalIso_eq_compositionTo g gk f hgf L
+      perfectOverlapCompositeLocalIso_eq_compositionTo_global g gk f hgf L
     rw [← localIso] at prismHom
     have reflK : compositionTo jK (f ∣_ L) p rfl = perfectHomComposition jK (f ∣_ L) := by
       simp only [compositionTo, eqToIso_refl, Iso.trans_refl]
