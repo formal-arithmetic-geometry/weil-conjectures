@@ -15,9 +15,75 @@
   "def-weil-closed-immersion",
   "def-weil-finite-type-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For $T=X,U,Z$, let $B_T$ be the section-ring sheaf of $\\Lambda_T$ and let $E_T:\\Mod_{\\Lambda_T}\\simeq\\Mod(B_T)$ be the equivalence in [lem-sfb-internal-module-operations-transport]. Its statement gives the coefficient identifications $g^{-1}B_X\\cong B_T$ induced by $\\alpha_g$ and natural comparisons $c_g:E_Tg^*\\cong g^*_{\\rm sec}E_X$ for $g=j,i$. It also gives $o:E_Xj_!\\cong LE_U$, where $L=j_{!,\\rm sec}$ is left adjoint to $R=j^*_{\\rm sec}$. These comparisons are for the actual tensor pullbacks and the coefficient-linear extension of the item, not merely the underlying abelian sheaves.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); module extension by zero: sites-modules.tex Tag 03DI (lemma-extension-by-zero). Internal/sectionwise comparison is the cited transport theorem; the composition argument is agent-written."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-proetale-identified-open-closed] with coefficient sheaves $B_X,B_Z,B_U$ and the identifications just obtained. The schemes, closed immersion, complementary quasi-compact open immersion, and arbitrary commutative coefficient rings meet exactly its hypotheses. It supplies an additive sectionwise functor $F:\\Mod(B_U)\\to\\Mod(B_X)$ and adjunction $F\\dashv R$ with invertible unit $\\eta^F:\\mathrm{id}\\to RF$, together with $i^*_{\\rm sec}F(N)\\cong0$ for every $N$. There is no Noetherian or coefficient-finiteness hypothesis in this application.",
+   "uses": [
+    "lem-sfb-proetale-identified-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); module extension by zero: sites-modules.tex Tag 03DI (lemma-extension-by-zero). Internal/sectionwise comparison is the cited transport theorem; the composition argument is agent-written."
+   }
+  },
+  {
+   "text": "Identify $L$ with $F$ as left adjoints to the same $R$, writing $\\eta^L,\\varepsilon^L$ and $\\eta^F,\\varepsilon^F$ for their units and counits. Explicitly, $a_N=\\varepsilon^F_{LN}\\circ F(\\eta^L_N):FN\\to LN$ and $b_N=\\varepsilon^L_{FN}\\circ L(\\eta^F_N):LN\\to FN$ are natural. Under the $F\\dashv R$ Hom bijection, $b_Na_N$ and $\\mathrm{id}_{FN}$ both transpose to $\\eta^F_N$; under $L\\dashv R$, $a_Nb_N$ and $\\mathrm{id}_{LN}$ both transpose to $\\eta^L_N$, by naturality and the triangle identities. Hence $b:L\\cong F$. In particular $o$ gives $\\widetilde o:E_Xj_!\\cong FE_U$ by composition with $bE_U$. This checks the identity of the extension functors, rather than choosing a different extension with the same name.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-proetale-identified-open-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); module extension by zero: sites-modules.tex Tag 03DI (lemma-extension-by-zero). Internal/sectionwise comparison is the cited transport theorem; the composition argument is agent-written."
+   }
+  },
+  {
+   "text": "Compose the natural isomorphisms from the previous steps to obtain $E_U(j^*j_!M)\\xrightarrow{c_j}R(E_Xj_!M)\\xrightarrow{R(\\widetilde o_M)}RF(E_UM)\\xrightarrow{(\\eta^F_{E_UM})^{-1}}E_UM$. Since $E_U$ is fully faithful, this lifts uniquely to an isomorphism $j^*j_!M\\cong M$: lift the displayed map and its inverse by fullness, then use faithfulness to check their two composites are identities. Apply the same faithfulness to each naturality square, giving naturality in $M$.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-proetale-identified-open-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); module extension by zero: sites-modules.tex Tag 03DI (lemma-extension-by-zero). Internal/sectionwise comparison is the cited transport theorem; the composition argument is agent-written."
+   }
+  },
+  {
+   "text": "Likewise $E_Z(i^*j_!M)\\xrightarrow{c_i}i^*_{\\rm sec}(E_Xj_!M)\\xrightarrow{i^*_{\\rm sec}(\\widetilde o_M)}i^*_{\\rm sec}F(E_UM)\\cong0$. The additive equivalence $E_Z$ sends the zero internal module to a zero sectionwise module. Fullness and faithfulness lift the last composite and its inverse to $i^*j_!M\\cong0$, as in Step 4. The maps to and from zero are unique, so this isomorphism is natural in $M$. The argument uses only the hypotheses checked in Step 2, and thus establishes the stated absence of finiteness and Noetherian restrictions.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "lem-sfb-proetale-identified-open-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 09BN (lemma-open-immersion), 09AH (lemma-ses-associated-to-open); module extension by zero: sites-modules.tex Tag 03DI (lemma-extension-by-zero). Internal/sectionwise comparison is the cited transport theorem; the composition argument is agent-written."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-proetale-identified-open-closed"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-dc-restricted-functors/lem-sfb-dc-open-lower-shriek-preserves.proof.md",
+  "place": "The two restriction assertions in the blueprint proof; explicit transport through the existing internal/sectionwise comparison and identified-coefficient open–closed theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -53,10 +119,45 @@
    "results": "; hits: ModuleCat.Tilde.res_const, TopCat.Sheaf.objSupIsoProdEqLocus_inv_eq_iff, ModuleCat.Tilde.toOpen_res, TopCat.Sheaf.objSupIsoProdEqLocus_hom_fst, TopCat.Sheaf.extend_hom_app, ModuleCat.Tilde.res_apply, TopCat.Sheaf.objSupIsoProdEqLocus_hom_snd, AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux",
    "date": "2026-10-21",
    "verdict": "no match: inspected results concern structure-sheaf restrictions, topological sheaves or abstract pullbacks, not both restriction identities for arbitrary condensed coefficient module objects"
+  },
+  {
+   "tool": "grep",
+   "query": "(lowerShriek|extensionByZero|jshriek).*(restrict|pullback)|(restrict|pullback).*(lowerShriek|extensionByZero|jshriek)",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern Zariski structure-sheaf restriction or unrelated extensions, not coefficient-linear pro-etale module extension by zero and both restriction identities"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero for sheaves of modules restricts to the original module on the open and to zero on the closed complement",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.RingedSpace.res_zero, Finsupp.restrictSupportEquiv_symm_apply_coe, AlgebraicGeometry.Scheme.Modules.restrictFunctor, ModuleCat.Tilde.toOpen, AlgebraicGeometry.Scheme.Modules.restrict, DFinsupp.lmk, ContMDiff.extend_zero",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern Zariski structure-sheaf restriction or unrelated extensions, not coefficient-linear pro-etale module extension by zero and both restriction identities"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Mod\", \"openImmersionLowerShriek\"",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern Zariski structure-sheaf restriction or unrelated extensions, not coefficient-linear pro-etale module extension by zero and both restriction identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of coefficient-linear extension by zero along an open immersion is identity on the open and zero on its closed complement for module objects over a condensed ring",
+   "results": "Hits: ModuleCat.Tilde.res_apply, ModuleCat.Tilde.toOpen_res, AlgebraicGeometry.Scheme.Modules.restrict, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrict_obj, AlgebraicGeometry.Scheme.Modules.restrictFunctor, AlgebraicGeometry.Scheme.Modules.restrict_map",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern Zariski structure-sheaf restriction or unrelated extensions, not coefficient-linear pro-etale module extension by zero and both restriction identities"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An open immersion extension by zero left adjoint on internal modules has invertible unit and vanishes after pullback to a disjoint closed subscheme",
+   "results": "Hits: AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrict",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern Zariski structure-sheaf restriction or unrelated extensions, not coefficient-linear pro-etale module extension by zero and both restriction identities"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-open-lower-shriek-preserves",
@@ -73,5 +174,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-open-module-restriction-identities",
+  "worker": "stage1",
+  "summary": "Kept the statement and its coefficient category unchanged. Reused the internal/sectionwise operations comparison and arbitrary identified-coefficient pro-etale open–closed theorem. Wrote the unique-left-adjoint comparison and both natural-isomorphism composites explicitly. No new nodes; Mathlib searches and project declaration inspection do not supply an attachment for the whole item.",
+  "blueprint": "Realizes the two sentences in lem-sfb-dc-open-lower-shriek-preserves.proof.md asserting restriction to U is M and restriction to X minus U is zero; no change of the unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "General coefficient-category comparison for the actual module functors; the constructible-restriction unit has no such comparison theorem."
+   },
+   {
+    "node": "lem-sfb-proetale-identified-open-closed",
+    "why": "General open–closed localization with arbitrary ring sheaves and specified inverse-image coefficient isomorphisms; used solely as a geometric tool to justify the two restrictions in the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-internal-module-operations-transport",
+  "lem-sfb-proetale-identified-open-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q109-7186e0113",
+  "group": "Q109",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q109-7186e0113 (reviewer sub-agent of L); spot-checked: I read the delivery in full; there are no new nodes and no fixes. The statement is byte-identical to side-live and the item is still unsplit in live and side-live, with no repair note and no parallel delivery, so this is a first split. Coefficient category: the item's g^*=Ext_alpha mapMod(g^*_Ab) from sk-def-sfb-module-pushforward-pullback is literally the f^*_int of lem-sfb-internal-module-operations-transport (def-sfb-module-upper-star). Its j_! is that lemma's j_{!,int} (sk-def-sfb-module-lower-shriek). Sectionwise B_{T'} tensor f^{-1}(-) is the same functor as the tensor pullback of def-weil-pbc-proetale-operations. Step 1 uses only the transport lemma's statement: E_{T'}f^*_int ≅ f^*_sec E_T, the alpha-induced ring isomorphisms and E_T j_{!,int} ≅ j_{!,sec} E_U. Step 2 meets every hypothesis of lem-sfb-proetale-identified-open-closed: arbitrary commutative ring sheaves, a closed immersion and a complementary quasi-compact open immersion, with no qcqs; its ringed dependency needs qcqs only for the colimit clause, which is not used. Step 3's unique-left-adjoint formulas a_N and b_N and the transpose check are correct. Steps 4 and 5 compose to j^*j_!M ≅ M and i^*j_!M ≅ 0 and lift through the fully faithful E_T. Both cited nodes are reviewed and neither reaches the item, so there is no cycle. Their other-unit use is declared in tool_uses as generic tools. Edge cases U empty, U=X (Z empty), M=0 and the zero ring all hold. Duplicate candidates are not duplicates: lem-exc-proetale-open-unit covers sectionwise modules and only the open clause, and lemma-openclosed-vanishing-lowershriek is étale abelian. The parent's Step 2 use, with reduced Z and quasi-compact j, fits the item's hypotheses. No SGA source is used."
  }
 }
