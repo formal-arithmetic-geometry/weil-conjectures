@@ -20888,3 +20888,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:08 L: merged deliver/NE/lem-sfb-ringed-site-bounded-evaluation-assembly (reviewer FIX; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q18/lem-sfb-finite-free-mono-cokernel-kflat (reviewer PASS; first push; new nodes: 0)
 - 08:08 L: merged deliver/Q127/lem-zl-bertini-finite-cover-curve (reviewer FIX; after a return; new nodes: 2)
+- 08:08 L: merged deliver/Q46/lem-cbc-complete-proetale-strict-tower-realization (reviewer FIX; after a return; new nodes: 3)

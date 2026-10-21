@@ -25,30 +25,15 @@
  ],
  "proof": [
   {
-   "text": "For any map of coefficient ring sheaves $R\\to S$ on the ambient site, restriction of scalars commutes with open extension. Indeed the presheaf defining $j_!$ has the same summands and restriction maps on both sides, and the $R$-action is the $S$-action composed with $R\\to S$. The unique extended action on its abelian sheafification is therefore the same. This gives the identity on underlying abelian sheaves, naturally in the module. It commutes with differentials and every transition, hence gives $\\operatorname{Res}(j_!K_\\bullet)\\cong J_j\\operatorname{Res}(K_\\bullet)$ on strict tower complexes and their derived categories. The adjunction unit sends a section on the slice into the summand indexed by its structure map; this is the same map after scalar restriction. The counit evaluates that summand by the given slice map, again unchanged. Thus the comparison preserves the normalized open adjunction, not just its functors.",
-   "uses": [
-    "def-weil-extension-by-zero-presheaf",
-    "def-weil-presheaf-modules-sheafification",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-cbc-strict-tower-open-extension"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 03DI (lemma-extension-by-zero), its explicit adjunction, and 03DJ (lemma-extension-by-zero-exact); elementary change of the scalar action."
-   }
-  },
-  {
-   "text": "Put $F=j_!K$. Completeness of $F$ and its identification $F_\\bullet\\cong j_!K_\\bullet$ are hypotheses of this item. By the unit-compatible Koszul reconstruction, $\\operatorname{comp}_F:F\\to R\\lim F_\\bullet$ is an isomorphism, so $F$ satisfies the precise completeness hypothesis of the proper normalization lemma. Its finite witnesses are $j_!^{\\mathrm{et}}L_n$: exactness of etale open extension preserves the lower cohomological bound of each $L_n$, and the etale/pro-etale open comparison, applied degreewise, gives $\\nu_{\\overline X}^*j_!^{\\mathrm{et}}L_n\\simeq j_!\\nu_X^*L_n\\simeq j_!K_n$. The comparison pullback is exact by [lem-sf-comparison-pullback-exact]. Exact termwise functors descend to derived categories, so these are derived comparisons. Their naturality and the scalar identification in Step 1 respect the given witness transitions. No common lower bound in $n$ is used. Consequently the proper square $(p,p',g,\\bar g)$ and $F$ meet the hypotheses of [lem-weil-pbc-strict-tower-exchange-mate-normalization].",
+   "text": "Put $F=j_!K$. Its assumed intrinsic completeness gives $\\operatorname{comp}_F:F\\simeq R\\lim F_\\bullet$ by unit-compatible Koszul reconstruction. Its witnesses are $j_!^{\\mathrm{et}}L_n$: etale extension is exact, and the natural open site comparison descends degreewise since both comparison pullback and open extension are exact. Thus $\\nu_{\\overline X}^*j_!^{\\mathrm{et}}L_n\\simeq j_!K_n=F_n$, with the given transitions and each individual lower bound. Apply the scalar/open comparison of [lem-cbc-ringed-open-scalar-limit-coherence] to identify $\\operatorname{Res}F_\\bullet=J_jM_\\bullet$.",
    "uses": [
     "prop-weil-pbc-koszul-reconstruction",
     "lem-weil-pbc-extension-by-zero-exact",
     "lem-cbc-proetale-extension-zero-comparison",
+    "lem-sf-comparison-pullback-exact",
     "lem-pur-site-restriction-module-adjunction-exact",
     "lem-sf-exact-functor-derived-triangulated",
-    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-    "lem-sf-comparison-pullback-exact"
+    "lem-cbc-ringed-open-scalar-limit-coherence"
    ],
    "elementary": false,
    "source": {
@@ -57,11 +42,10 @@
    }
   },
   {
-   "text": "Let $B_\\bullet,D_\\bullet,v_\\bullet$ be the completed-coefficient proper corners and specified map in [def-cbc-completed-exchange-map], applied to $F$. That definition uses the same diagram-site projection adjuncts $H,H'$ and the same equation $v_\\bullet=H'\\mathcal R(e_F)H^{-1}$ as the proper normalization statement. Thus it is the very map to which that statement applies. With $M_\\bullet=\\operatorname{Res}_XK_\\bullet$, Step 1 identifies $\\operatorname{Res}_{\\overline X}F_\\bullet$ with $J_jM_\\bullet$. The normalization supplies natural isomorphisms $b:\\operatorname{Res}B_\\bullet\\simeq G_gR_p^{\\mathcal T}J_jM_\\bullet$ and $d:\\operatorname{Res}D_\\bullet\\simeq R_{p'}^{\\mathcal T}G_{\\bar g}J_jM_\\bullet$ with $d\\operatorname{Res}(v_\\bullet)=E_p^{\\mathcal T}b$. This equality is in the derived strict-tower category. In particular it does not follow by comparing evaluations. By the ordered proper-factor formula, its image under $R\\lim$, with the specified source projection comparison and inverse target direct-image/limit comparison, is the proper factor $\\gamma_F$ of the completed compact-support exchange.",
+   "text": "The proper square and $F$ now satisfy [lem-weil-pbc-strict-tower-exchange-mate-normalization]. The completed-exchange definition uses exactly its $H,H'$ and $v=H'\\mathcal R(e_F)H^{-1}$. Hence its specified $b,d$ give $d\\operatorname{Res}(v)=E_p^{\\mathcal T}b$ before evaluation. Here $b,d$ use [lem-weil-pbc-constant-completion-equivalence] and $c$ is that of [prop-weil-pbc-direct-image-limits]. The definition's ordered proper factor is therefore $\\gamma_F=c_N^{-1}\\mathcal L(E_p^{\\mathcal T})s_K$, under scalar restriction (Step 3 identifies $c$), where $N=G_{\\bar g}J_jM_\\bullet$ and $s_K$ includes $\\mathcal L(b)$.",
    "uses": [
-    "def-cbc-completed-exchange-map",
     "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-    "def-weil-pbc-completed-base-change-map",
+    "def-cbc-completed-exchange-map",
     "lem-weil-pbc-constant-completion-equivalence",
     "prop-weil-pbc-direct-image-limits"
    ],
@@ -72,58 +56,15 @@
    }
   },
   {
-   "text": "The open square has the actual strict-tower isomorphism $\\beta=\\beta_{j,\\bar g}:G_{\\bar g}J_j\\to J_{j'}G_{g'}$ from [lem-cbc-strict-tower-proper-open-calculus]. Its inverse is the transpose of the pulled-back open unit. Step 1 identifies that unit under every scalar restriction, including $\\underline A\\to A_T$ and $\\underline A\\to(P_n)_T$. Therefore the transpose defining the constant-$A$ tower comparison is the transpose of the finite-coefficient unit on the strict finite model. The adjunction bijection identifies the maps themselves, before passing to evaluations. For $P_b\\to P_a$, [lem-cbc-finite-open-exchange-scalars] gives this same unit normalization and commutation with all quotient transitions; its final clause permits the compatible ambient $A_T$-actions. Together with the finite pullback/reduction identifications of [lem-weil-pbc-constant-completion-equivalence], this identifies the open map of the completed pullback towers with $\\beta_{M_\\bullet}$ after scalar restriction. All these comparisons are natural in $K$.",
-   "uses": [
-    "lem-cbc-strict-tower-proper-open-calculus",
-    "lem-cbc-finite-open-exchange-scalars",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "def-weil-pbc-completed-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03DI (lemma-extension-by-zero), unit transpose; the cited existing tower calculus and finite scalar lemma supply the strict and derived refinements."
-   }
-  },
-  {
-   "text": "The open immersions $j,j'$ are quasi-compact, as stated in [def-cbc-completed-exchange-map] for a supplied compactification and its base change. Here is the product check for the strict-limit comparison. For $e:W\\hookrightarrow T$ equal to either open, choose its closed complement $i$ and let $R$ be either the completed or constant coefficient sheaf. The sectionwise direct-image formula gives $e^{-1}e_*N=N$. The ringed open/closed exact sequence applied to $e_*N$ therefore gives $e_!N=\\ker(e_*N\\to i_*i^{-1}e_*N)$. Direct images preserve products by their sectionwise formula and sectionwise module limits. Closed inverse image preserves products by [lem-weil-pbc-proetale-immersion-limit-preservation], with coefficients $i^{-1}R$. On sections the kernel for a product family consists of the tuples all of whose components map to zero. Hence it is the product of these kernels, and the resulting isomorphism is precisely $e_!(\\prod N_s)\\to\\prod e_!N_s$ induced by projections. This includes the empty family. It uses no quasi-compactness or quasi-separatedness of $T$ and no assertion that extension is sectionwise zero on every test object.",
+   "text": "Both opens are quasi-compact by the completed-exchange definition. Apply [lem-cbc-completed-open-strict-mate-identification] to their open square: for $N'=J_{j'}G_{g'}M_\\bullet$ its actual strict map is $\\beta:N\\to N'$, and its ordered completed factor is $\\lambda_{j'}^{-1}\\mathcal L(\\beta)$. The scalar/open limit square of [lem-cbc-ringed-open-scalar-limit-coherence] identifies the extension comparisons and their completion units. Apply [lem-cbc-flat-scalar-direct-image-limit-coherence] to $p'$: coefficient flatness is supplied by constant/completed equivalence, exact countable products hold on pro-etale module sheaves, and the coefficient identifications are those of the direct-image/limit proposition. Thus its completed comparison restricts to $c$.",
    "uses": [
     "def-cbc-completed-exchange-map",
-    "lem-weil-pbc-closed-subset-closed-subscheme",
-    "lem-weil-pbc-proetale-ringed-open-closed",
-    "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "def-weil-proetale-inverse-image",
-    "lem-weil-proetale-weakly-etale-localization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP (lemma-j-shriek-limits), kernel argument; the cited ringed recollement and immersion statement give the module version without an ambient qcqs assumption."
-   }
-  },
-  {
-   "text": "Open extension is exact, and countable products of module sheaves on each small pro-etale site are exact. Step 5 verifies its canonical product comparison is invertible. Apply [lem-cbc-exact-product-functor-strict-limit] to $e_!$ for both constant and completed coefficients to obtain the specified natural isomorphism $\\lambda_e:e_!R\\lim N_\\bullet\\simeq R\\lim J_eN_\\bullet$. Apply the same theorem to scalar restriction: it is exact and preserves products since it leaves underlying abelian sheaves unchanged. Its product comparison is the identity. For composable exact product-preserving functors, substitute the theorem's formula $\\lambda_F=\\theta_{FM}^{-1}\\kappa_FF(\\theta_M)$ twice: the middle $F(\\theta_{GM})F(\\theta_{GM}^{-1})$ cancels, leaving $\\theta_{FGM}^{-1}\\kappa_FF(\\kappa_G)FG(\\theta_M)$. The product maps in the two orders of scalar restriction and open extension agree by Step 1, so the resulting comparisons agree. The theorem identifies them with the resolution/ordinary-limit comparison and preserves maps from strict augmentations. Thus this is the specified comparison, including its completion units. For the finite towers used here those scalar-restriction identifications of limits and units are also specified by [lem-weil-pbc-constant-completion-equivalence].",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-cbc-completed-open-strict-mate-identification",
+    "lem-cbc-ringed-open-scalar-limit-coherence",
+    "lem-cbc-flat-scalar-direct-image-limit-coherence",
+    "lem-weil-pbc-constant-completion-equivalence",
     "lem-weil-proetale-countable-products-exact",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "def-pc-sheaf-restrict-scalars",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 09BP (lemma-j-shriek-limits), together with the cited normalized strict-limit theorem; the signed fiber formula fixes the comparison and its unit."
-   }
-  },
-  {
-   "text": "Write $\\mathcal L_T=R\\lim$ on constant-$A$ strict towers and set $N_\\bullet=G_{\\bar g}J_jM_\\bullet$ and $N'_\\bullet=J_{j'}G_{g'}M_\\bullet$. After the canonical finite-reduction and coefficient comparisons, the ordered open factor specified in the item is exactly\n$$\\beta_K^{\\mathrm{comp}}=\\lambda_{j'}^{-1}\\circ\\mathcal L_{\\overline X'}(\\beta_{M_\\bullet}):\\mathcal L_{\\overline X'}N_\\bullet\\longrightarrow j'_!\\mathcal L_{X'}G_{g'}M_\\bullet.$$\nIndeed the completed-pullback definition supplies the two limit expressions, Step 4 identifies the actual intervening tower map with $\\beta$, and Step 6 identifies the last comparison with the specified extension/limit comparison. The statement of [lem-cbc-completed-extension-zero-comparison] says the canonical open comparison is induced by these finite exchanges and this extension/limit comparison. The item explicitly fixes their order. Thus no choice of an isomorphism between the endpoints or of a map between unrelated Roos triangles is being made.",
-   "uses": [
-    "def-weil-pbc-completed-pullback",
-    "lem-cbc-completed-extension-zero-comparison",
-    "lem-cbc-exact-product-functor-strict-limit",
-    "lem-cbc-strict-tower-proper-open-calculus"
+    "prop-weil-pbc-direct-image-limits"
    ],
    "elementary": false,
    "source": {
@@ -132,26 +73,12 @@
    }
   },
   {
-   "text": "The direct-image/limit comparison of [prop-weil-pbc-direct-image-limits] is stated for completed coefficients, while the next step uses it on constant-$A$ strict towers. They agree under scalar restriction. The map $\\underline A\\to A_T$ is flat by [lem-weil-pbc-constant-completion-equivalence]. Hence [lem-weil-pbc-flat-ringed-diagram-restriction], with $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$ and the morphism of $p'$, shows that termwise restriction preserves K-injective tower complexes. It also gives $\\operatorname{Res}R_{p'*}^{\\operatorname{Tow}}\\simeq R_{p'}^{\\mathcal T}\\operatorname{Res}$, induced by the underived identity. Restriction commutes on the nose with termwise limits and with $p'_*$, and on a K-injective tower $\\lambda_{\\operatorname{Res}}$ of Step 6 is the identity of $\\operatorname{Res}\\lim I_\\bullet$. Compute both comparisons on one K-injective completed tower $I_\\bullet$ and on its restriction. Then $\\operatorname{Res}(c^{\\mathrm{comp}}_{p',I})=c_{\\operatorname{Res}I}$ under these identifications, naturally in $I_\\bullet$. Thus the constant-coefficient comparison below is the target identification of the completed exchange after restriction.",
+   "text": "Naturality gives $c_{N'}Rp'_*(\\mathcal L\\beta)=\\mathcal L(R_{p'}^{\\mathcal T}\\beta)c_N$. Substitute the two ordered factors into the definition, cancel $c_Nc_N^{-1}$, and use functoriality of $\\mathcal L=R\\lim$:\n$$\\operatorname{Ex}^{\\mathrm{comp},c}_!(K)=t_K\\mathcal L((R_{p'}^{\\mathcal T}\\beta)E_p^{\\mathcal T})s_K,\\qquad t_K=Rp'_*(\\lambda_{j'}^{-1})c_{N'}^{-1}.$$\nThese are the specified endpoint comparisons, so this is the asserted equality of morphisms.",
    "uses": [
     "prop-weil-pbc-direct-image-limits",
-    "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "lem-cbc-exact-product-functor-strict-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim): comparison computed on K-injective towers; compatibility with flat scalar restriction added at maintainer review."
-   }
-  },
-  {
-   "text": "For a strict tower $T_\\bullet$ on $\\overline X'$ let $c_T:R p'_*\\mathcal L_{\\overline X'}T_\\bullet\\simeq\\mathcal L_{Y'}R_{p'}^{\\mathcal T}T_\\bullet$ be the canonical direct-image/limit comparison. It is natural: it is the derived comparison of the underived equality, as specified in [prop-weil-pbc-direct-image-limits]. Step 8 shows that it is the scalar restriction of the completed comparison of that proposition. Hence, for the actual tower map $\\beta:N_\\bullet\\to N'_\\bullet$,\n$$c_{N'}\\circ Rp'_*(\\mathcal L\\beta)=\\mathcal L(R_{p'}^{\\mathcal T}\\beta)\\circ c_N.$$\nLet $s_K:L g^*_{\\mathrm{comp}}Rp_*j_!K\\simeq\\mathcal L_{Y'}G_gR_p^{\\mathcal T}J_jM_\\bullet$ be the source comparison of Step 3, including $\\mathcal L(b)$. Let\n$$t_K=Rp'_*(\\lambda_{j'}^{-1})\\circ c_{N'}^{-1}:\\mathcal L_{Y'}R_{p'}^{\\mathcal T}J_{j'}G_{g'}M_\\bullet\\simeq Rp'_*j'_!Lg'^*_{\\mathrm{comp}}K.$$\nThese are precisely the specified source and target identifications. Substitute Steps 3 and 7 into the ordered definition of the completed exchange, use the displayed naturality equation to cancel $c_N^{-1}c_N$, and use functoriality of $\\mathcal L$ to obtain\n$$\\operatorname{Ex}^{\\mathrm{comp},c}_!(K)=t_K\\circ\\mathcal L_{Y'}\\big((R_{p'}^{\\mathcal T}\\beta)\\circ E_p^{\\mathcal T}\\big)\\circ s_K.$$\nThis proves the asserted identification of morphisms.",
-   "uses": [
-    "prop-weil-pbc-direct-image-limits",
+    "lem-cbc-flat-scalar-direct-image-limit-coherence",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "def-cbc-completed-exchange-map",
-    "lem-weil-pbc-constant-completion-equivalence"
+    "def-cbc-completed-exchange-map"
    ],
    "elementary": false,
    "source": {
@@ -160,13 +87,14 @@
    }
   },
   {
-   "text": "Finally evaluate the already constructed $e^c_M=(R_{p'}^{\\mathcal T}\\beta)E_p^{\\mathcal T}$. Evaluation is a functor, so it preserves this composite. The normalized strict operations give the termwise open comparison and the direct-image comparison which is its specified adjunction mate. The proper normalization identifies evaluation of its strict proper factor with the specified finite proper exchange: the proper lift has evaluations $v'_n$ by [def-weil-pbc-completed-base-change-map], and its $b,d$ are exactly the finite-reduction/evaluation comparisons of the normalization statement. The finite open factor is the specified inverse-unit mate by Step 4 and [lem-cbc-strict-tower-proper-open-calculus]. Thus evaluation is the specified finite proper/open ordered composite. Every ingredient used above is a natural transformation (including $b,d,c,\\lambda$), and composing their naturality squares gives naturality of the displayed identity in $K$. Evaluation is used only to describe this existing map; no faithfulness of derived evaluations or reconstruction of a morphism from its values is asserted.",
+   "text": "All factors are natural in $K$. Evaluation preserves the already constructed composite: proper normalization gives its specified finite proper factor, as its lift has the finite evaluations $v'_n$ of [def-weil-pbc-completed-base-change-map], and the strict open calculus gives its inverse-unit finite open factor. Their ordered composite is the required finite exchange. No reconstruction from evaluations is used.",
    "uses": [
+    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "lem-cbc-strict-tower-proper-open-calculus",
     "def-cbc-strict-constant-tower-operations",
     "def-cbc-strict-tower-open-extension",
-    "lem-weil-pbc-strict-tower-exchange-mate-normalization",
-    "def-weil-pbc-completed-base-change-map",
-    "lem-cbc-strict-tower-proper-open-calculus"
+    "lem-cbc-completed-open-strict-mate-identification",
+    "def-weil-pbc-completed-base-change-map"
    ],
    "elementary": false,
    "source": {
@@ -179,31 +107,20 @@
   "def-cbc-completed-exchange-map",
   "def-cbc-strict-constant-tower-operations",
   "def-cbc-strict-tower-open-extension",
-  "def-pc-sheaf-restrict-scalars",
-  "def-weil-extension-by-zero-presheaf",
   "def-weil-pbc-completed-base-change-map",
-  "def-weil-pbc-completed-pullback",
-  "def-weil-presheaf-modules-sheafification",
-  "def-weil-proetale-inverse-image",
-  "lem-cbc-completed-extension-zero-comparison",
-  "lem-cbc-exact-product-functor-strict-limit",
-  "lem-cbc-finite-open-exchange-scalars",
+  "lem-cbc-completed-open-strict-mate-identification",
+  "lem-cbc-flat-scalar-direct-image-limit-coherence",
   "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-ringed-open-scalar-limit-coherence",
   "lem-cbc-strict-tower-proper-open-calculus",
   "lem-pur-site-restriction-module-adjunction-exact",
   "lem-sf-comparison-pullback-exact",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-weil-pbc-closed-subset-closed-subscheme",
   "lem-weil-pbc-constant-completion-equivalence",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-flat-ringed-diagram-restriction",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
-  "lem-weil-pbc-proetale-immersion-limit-preservation",
-  "lem-weil-pbc-proetale-ringed-open-closed",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-pbc-strict-tower-exchange-mate-normalization",
   "lem-weil-proetale-countable-products-exact",
-  "lem-weil-proetale-weakly-etale-localization",
   "prop-weil-pbc-direct-image-limits",
   "prop-weil-pbc-koszul-reconstruction"
  ],
@@ -290,11 +207,11 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-cbc-complete-proetale-strict-tower-realization",
   "worker": "stage1",
-  "summary": "Realized the ordered two-factor completed exchange by its actual constant-coefficient strict-tower composite. Checked scalar restriction on the open unit, quotient-completeness and etale witnesses for j_!K, the specified proper lift, the normalized extension/limit comparison, naturality of the direct-image/limit comparison, and evaluation. No new nodes or changes to the statement.",
-  "blueprint": "thm-cbc-complete-proetale proof, first sentence: the composite consists of the proper and open completed factors; this split identifies their composite with Rlim of the normalized strict-tower composite, as required for its later coherence arguments.",
+  "summary": "Human-requested re-split: three independent statement-only work packages for ringed open scalar/limit coherence (old Steps 1,5,6), actual strict open mate and ordered completed open comparison (4,7), and flat scalar direct-image/limit coherence (8). The parent retains witness admissibility, strict proper normalization, naturality/cancellation assembly and evaluation. The complete original arguments are preserved verbatim in report.md, with the existing product lemma reused. Statement unchanged.",
+  "blueprint": "Proof, first sentence: 'the composite defining [def-cbc-completed-exchange-map] consists of two isomorphisms' (identification of that two-factor composite with Rlim of a strict-tower map, used for coherence)",
   "tool_uses": [
    {
     "node": "lem-pur-site-restriction-module-adjunction-exact",
@@ -305,28 +222,12 @@
     "why": "Generic descent of an exact functor justifies degreewise open comparisons on unbounded derived categories."
    },
    {
-    "node": "lem-weil-pbc-closed-subset-closed-subscheme",
-    "why": "Closed complement exists for the kernel computation proving open extension preserves products."
-   },
-   {
     "node": "lem-weil-pbc-constant-completion-equivalence",
     "why": "Generic coefficient and finite-reduction comparison keeps constant and completed coefficients distinct and identifies the specified tower units."
    },
    {
     "node": "lem-weil-pbc-extension-by-zero-exact",
     "why": "Exact etale extension preserves each witness lower bound; the unit requires these witnesses and does not replace this general sheaf theorem."
-   },
-   {
-    "node": "lem-weil-pbc-module-sheaves-limits-sectionwise",
-    "why": "Generic sectionwise module limits identify the canonical product maps in the kernel computation."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-immersion-limit-preservation",
-    "why": "Generic closed inverse-image preservation of products is used with inverse-image coefficients in that kernel formula."
-   },
-   {
-    "node": "lem-weil-pbc-proetale-ringed-open-closed",
-    "why": "Ringed recollement gives the kernel formula needed for product preservation, without an ambient qcqs assumption."
    },
    {
     "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
@@ -341,10 +242,6 @@
     "why": "Generic pro-etale module countable-product exactness verifies the hypotheses of the normalized strict-limit comparison."
    },
    {
-    "node": "lem-weil-proetale-weakly-etale-localization",
-    "why": "Generic slice-site equivalence identifies open inverse image with restriction when computing e^{-1}e_*."
-   },
-   {
     "node": "prop-weil-pbc-direct-image-limits",
     "why": "Generic natural direct-image/limit comparison is needed to compose the proper and open factors on strict towers."
    },
@@ -355,10 +252,6 @@
    {
     "node": "lem-sf-comparison-pullback-exact",
     "why": "Exactness of finite-coefficient etale/pro-etale comparison pullback justifies the degreewise witness comparison on derived categories."
-   },
-   {
-    "node": "lem-weil-pbc-flat-ringed-diagram-restriction",
-    "why": "Generic flat scalar restriction on diagram categories preserves K-injective towers and identifies constant and completed derived direct images, so the completed direct-image/limit comparison restricts to the constant one (Step 8)."
    }
   ]
  },
@@ -381,12 +274,12 @@
   "lem-weil-pbc-flat-ringed-diagram-restriction"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q27-f0f0308ff",
-  "group": "Q27",
+  "reviewer": "NT-cc-Q46-310bbdd27",
+  "group": "Q46",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q27-f0f0308ff (reviewer sub-agent of L); spot-checked: I read the item, all 29 cited statements (with their blueprint_update blocks), the master and main-20261015 sources (thm-cbc-complete-proetale proof, first sentence; def-cbc-completed-exchange-map; the proof of lem-cbc-completed-extension-zero-comparison) and Stacks 09BP (proetale.tex lemma-j-shriek-limits), 03DI/03DJ and 0A07. Shape: one commit, statement unchanged, no new nodes, no SGA, no cycle. Coefficients stay completed A_X, compared with constant A only through Res. The morphism is the ordered γ_{j_!K} then Rp'_*(β_K) of def-cbc-completed-exchange-map. Steps 1-7 and the evaluation step are correct. Step 1 (the j_! presheaf and its unit/counit do not depend on the scalar action) is genuinely elementary. Step 2's hypotheses check out: completeness via c_Fκ_F=comp_F, witnesses j_!^{et}L_n in D^+, finite P_n, cartesian square with p proper. Step 3 uses the same H,H' and the equality d·Res(v)=E·b. Step 4 applies the finite scalar lemma only to P_b→P_a, with its A_T clause. Step 5 is the 09BP kernel argument with j,j' quasi-compact and i^{-1} limits with coefficients i^{-1}R. Step 6: I recomputed λ_{FG}=λ_F∘F(λ_G). Step 7 matches the completed comparison's statement and order. The one fault (C1/E5, repaired): the composition step used the direct-image/limit comparison c of prop-weil-pbc-direct-image-limits, which is stated only for completed towers, on constant-A towers, and called it the target identification of Ex^comp without justification. The fix inserts a new Step 8: \\underline A→A_T is flat (lem-weil-pbc-constant-completion-equivalence); lem-weil-pbc-flat-ringed-diagram-restriction says restriction preserves K-injective towers and Res R_{p'*} ≅ R_{p'} Res via the underived identity; λ_Res is the identity on K-injective towers. Hence Res(c^comp)=c^const. proof_deps and tool_uses are updated. I accept all 14 declared tool uses plus the one added; the unit sk-prop-sf-cbc has no steps, so off-unit generic inputs must be tool uses. Not edited, noted for the maintainer: the statement writes β_{j,g} where the open square's map is \\bar g (Step 4 writes β_{j,\\bar g}). Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-cbc-complete-proetale-strict-tower-realization.json.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q46-310bbdd27 (reviewer sub-agent of L); spot-checked: Re-split against the repair note (at least 3 new nodes, parent at most 3000 characters) and the live 10-step base (11151 characters, quoted verbatim in the report). Every old argument has a carrier. The new N1 lem-cbc-ringed-open-scalar-limit-coherence carries old Steps 1 and 6. The existing lem-cbc-ringed-open-extension-products carries old Step 5 (09BP kernel argument, proetale.tex:5185). The new N2 lem-cbc-completed-open-strict-mate-identification carries old Steps 4 and 7. The new N3 lem-cbc-flat-scalar-direct-image-limit-coherence carries old Step 8 (0A07, sites-cohomology.tex:5150). Old Steps 2, 3, 9 and 10 stay in the parent as short applications of cited statements. The new statements are 2465, 3045 and 2516 characters, all true: I checked the types of each displayed equation and tested identity, empty and zero cases. N1 follows from lambda_{FG}=lambda_F G∘F lambda_G with the products node (j quasi-compact). N3 is the hypothesis set of lem-weil-pbc-flat-ringed-diagram-restriction; it applies at p' through flatness of A-hat (constant-completion-equivalence) and profinite coefficient pullback. N2 combines the strict finite exchange, the finite scalar lemma and the strict calculus. None duplicates a DAG node: I read lem-fix-open-scalar-exchange, lem-sp-slice-restriction-strict-derived-limit, lem-pur-completed-coefficient-pushforward-comparison (advisory overlap only) and others. There is no cycle and no SGA citation, and the item statement is unchanged. FIX, two C1/C3 faults: parent Step 2 used the constant/completed b,d and the direct-image/limit c without citing lem-weil-pbc-constant-completion-equivalence and prop-weil-pbc-direct-image-limits; parent Step 5 dropped def-weil-pbc-completed-base-change-map, which is where the proper lift's finite evaluations v'_n are stated. Both are restored. proof_deps is recomputed, and split_report.tool_uses is pruned to the off-unit nodes actually cited. The parent is now 2844 characters. Maintainer note: the snapshot's sec-proper-base-change symlink is broken, so I read those nodes from clones/live.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.CompleteProetaleStrictTowerRealization",
