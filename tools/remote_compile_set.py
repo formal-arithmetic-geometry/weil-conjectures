@@ -32,14 +32,44 @@ data = sys.stdin.buffer.read()
 # concurrent single-file compiles had saturated the 80 cores and starved the global build, the landings and the reviews.
 _SLOTS = int(os.environ.get("SHEAF_COMPILE_SLOTS", "40")); _slot_fh = None
 _sd = REPO / "local" / "compile-slots"; _sd.mkdir(parents=True, exist_ok=True)
+# 2026-10-22 (the human: the quarantine roots are fixed too slowly): a call compiling a rework or retire module
+# (coord/rework.tsv, coord/retire-items.tsv) is a root everything else waits for; it has SHEAF_COMPILE_PRIO_SLOTS (8)
+# slots of its own, tried first, and falls back to the ordinary slots
+def _prio_call(blob):
+    try:
+        import tarfile, io, json as _json
+        with tarfile.open(fileobj=io.BytesIO(blob), mode="r:*") as tf:
+            m = None
+            for ti in tf.getmembers():
+                if ti.name.rstrip("/").endswith("manifest.json"):
+                    m = _json.load(tf.extractfile(ti)); break
+        if not m:
+            return False
+        mods = {str(j.get("rel", "")).removesuffix(".lean").replace("/", ".") for j in m.get("jobs", [])}
+        listed = set()
+        for tsv, col in (("rework.tsv", 0), ("retire-items.tsv", 2)):
+            for l in (REPO / "coord" / tsv).read_text(errors="ignore").splitlines():
+                c = l.split("\t")
+                if l.strip() and not l.startswith("#") and len(c) > col:
+                    listed.add(c[col])
+        return bool(mods & listed)
+    except Exception:
+        return False
+_PRIO = _prio_call(data)
+_PSLOTS = int(os.environ.get("SHEAF_COMPILE_PRIO_SLOTS", "8"))
+_pd = REPO / "local" / "compile-slots-prio"; _pd.mkdir(parents=True, exist_ok=True)
 _t0 = time.time()
 while _slot_fh is None:
-    for _i in range(_SLOTS):
-        _f = open(_sd / f"{_i}.lock", "a")
-        try:
-            fcntl.flock(_f, fcntl.LOCK_EX | fcntl.LOCK_NB); _slot_fh = _f; break
-        except OSError:
-            _f.close()
+    _pools = ([(_pd, _PSLOTS)] if _PRIO else []) + [(_sd, _SLOTS)]
+    for _dir, _cnt in _pools:
+        for _i in range(_cnt):
+            _f = open(_dir / f"{_i}.lock", "a")
+            try:
+                fcntl.flock(_f, fcntl.LOCK_EX | fcntl.LOCK_NB); _slot_fh = _f; break
+            except OSError:
+                _f.close()
+        if _slot_fh is not None:
+            break
     if _slot_fh is None:
         if time.time() - _t0 > 540:
             sys.exit(75)
