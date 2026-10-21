@@ -26,6 +26,8 @@ for that unique `r`.
 
 Source: Stacks, Tag 03Q9, theorem-higher-direct-images, its restriction construction
 (blueprint: def-weil-pbc-strict-henselization-restriction).
+
+This live SHEAF interface is retained until its strict-local consumers are migrated.
 -/
 
 @[expose] public section
