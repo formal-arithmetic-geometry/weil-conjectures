@@ -1,0 +1,128 @@
+{
+ "kind": "statement",
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalScalarTensorComparison",
+  "date": "2026-10-21",
+  "group": "U1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "id": "lem-sfb-internal-extension-preserves-flat",
+ "title": "Extension of scalars preserves flat internal modules",
+ "statement": "Let C be an abelian symmetric monoidal category with coequalizers, and suppose tensoring on either side preserves colimits of small diagrams. Let R,S be commutative monoid objects and φ:R→S a monoid morphism. For extension E=Ext_φ of [sk-def-sfb-change-of-scalars] and the relative tensors of [def-sfb-modobj-symmetric-tensor], E preserves flat objects: if tensoring with M on either side is exact, tensoring with E(M) on either side is exact. No flatness of S over R is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-flat-change-of-rings (with its balanced tensor cancellation proof); sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product, applied to the identity underlying topos."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-symmetric-tensor"
+ ],
+ "proof": [
+  {
+   "text": "For an S-module N, restrict the right action on its symmetric bimodule along φ. The right unitor identifies this restricted bimodule with N tensor_S S_φ: its forward map is the right action of N and its inverse inserts the unit. Both action compatibilities follow by cancellation of the tensor coequalizer projections and the commuting-action law.",
+   "uses": [
+    "lem-sfb-mixed-bimodule-right-unitor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-flat-change-of-rings (with its balanced tensor cancellation proof); sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product, applied to the identity underlying topos."
+   }
+  },
+  {
+   "text": "Apply the bimodule associator to N tensor_S (S_φ tensor_R M), followed by that restricted right unitor. The restricted right action equals the symmetric R-action on Res N by braiding naturality. Thus obtain an underlying-object isomorphism (N tensor_S E M).X ≅ (Res N tensor_R M).X. Checking after N.X tensor the extension projection proves its explicit projection formula. Checking after the two projections proves naturality in N.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-flat-change-of-rings (with its balanced tensor cancellation proof); sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product, applied to the identity underlying topos."
+   }
+  },
+  {
+   "text": "TensorRight(E M) followed by forget S is naturally isomorphic to comap φ followed by TensorRight M and forget R. Limits and colimits of module objects are computed by the forgetful functors, and restriction does not change underlying objects or arrows. Hence flatness of M transfers preservation of finite limits and colimits to that composite. Reflect these properties through forget S. Finally the symmetric braiding identifies tensorLeft(E M) with tensorRight(E M), proving the second exactness condition.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-flat-change-of-rings (with its balanced tensor cancellation proof); sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product, applied to the identity underlying topos."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-mixed-bimodule-right-unitor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-flat-change-of-rings (with its balanced tensor cancellation proof); sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product, applied to the identity underlying topos."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars preserves flat objects in the category of internal modules",
+   "results": "Eight hits, including Module.Flat.isBaseChange, Module.Flat.instTensorProduct and ModuleCat.preservesFiniteLimits_extendScalars_of_flat.",
+   "date": "2026-10-21",
+   "verdict": "Ordinary modules only; no internal-module functor preserving categorically flat objects."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars preserves flat objects for internal module objects",
+   "results": "Eight hits, including Module.Flat.isBaseChange and ordinary ModuleCat exact scalar extension.",
+   "date": "2026-10-21",
+   "verdict": "No exact internal-module result."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*[Ff]lat|[Ff]lat.*extendScalars",
+   "results": "Five Mathlib hits in Algebra/Category/ModuleCat/Descent.lean: finite-limit preservation for a flat ring homomorphism and faithfully flat descent. Project search has no generic Mod.extendScalars_preservesFlat.",
+   "date": "2026-10-21",
+   "verdict": "These have different hypotheses and objects; prove the internal cancellation argument."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "paragraph (3), compatibility of tensor with scalar extension: preservation of flat terms in the ordinary internal-module construction",
+   "via": [
+    "def-sfb-internal-scalar-tensor-comparison",
+    "lem-sfb-coefficient-projection-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ModuleObjects.ScalarTensorCancellation",
+  "file": "lean/Sheaf/CategoryTheory/ModuleObjects/ScalarTensorCancellation.lean",
+  "declaration": "CategoryTheory.Mod.extendScalars_preservesFlat",
+  "statement": "theorem extendScalars_preservesFlat : (extendScalars φ).PreservesFlat",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261021T120717-L-3936328",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261021T120717-L-3936328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

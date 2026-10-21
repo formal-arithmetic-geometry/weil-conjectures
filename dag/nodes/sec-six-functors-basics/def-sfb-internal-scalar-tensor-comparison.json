@@ -12,9 +12,50 @@
   "sk-def-sfb-change-of-scalars",
   "sk-def-sfb-derived-tensor-hom"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply the generic normalized strong monoidal extension theorem to the coefficient morphism a_X. For uniqueness, cancel q and use the extension Hom equivalence to show that two normalized structures have equal oplax tensor maps. Their left unit coherence then identifies their unit maps after tensoring with E(R). Tensoring with its invertible unit comparison is cancellable, so the units agree. Injectivity of the oplax data of a strong monoidal structure gives equality of structures.",
+   "uses": [
+    "lem-sfb-internal-extension-monoidal",
+    "def-sfb-modobj-extend-restrict-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-tensor-product-pullback, balanced tensor universal property and change of rings; sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product."
+   }
+  },
+  {
+   "text": "Apply the generic flatness-preservation theorem to a_X. It uses tensor cancellation and exactness reflected by the forgetful functor, without assuming a_X is flat.",
+   "uses": [
+    "lem-sfb-internal-extension-preserves-flat"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-flat-change-of-rings and its tensor-cancellation proof; used for the flat terms in Tag 07A4."
+   }
+  },
+  {
+   "text": "Retain the prescribed total-left-derived functor and its existing canonical leftDerivedTensorComparison isomorphism. The newly proved ordinary monoidal structure and flatness instance supply exactly its original structural inputs; the derived definitions are unchanged.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-tensor-product-pullback, balanced tensor universal property and change of rings; sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-internal-extension-monoidal",
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-sfb-internal-extension-preserves-flat"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, ordinary scalar comparison and flat terms; categorical bimodule proof of the source construction."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -101,5 +142,15 @@
   "group": "Q07",
   "result": "pass",
   "note": "Item statement matches node clause by clause (standing-setting binders, exact-extension hypothesis identical to derivedPullIso/derivedPushHom, c_f/γ_f/π^R/π^S directions, both composites in order, no extra hypotheses); node diff vs side-live is only lean + new stmt_dep def-sfb-internal-scalar-tensor-comparison; lean.statement fields verbatim. New def node not a duplicate (Mod.monoidal_extendScalars needs IsIso; lem-sfb-scalar-(ordinary-)tensor-comparison are SheafOfModules models; residue-ordinary monoidal is geometric pullback); internalScalarMonoidal is .choose of a true ∃! pinned by the Stacks 07A4 scalar-unit normalization (δ fixed by epi tensorObjπ + generation, ε by unitality); μ = canonical leftDerivedTensorComparison; preservesFlat true. Docstrings/source/blueprint tags and 5-step proof present; only sorry. Edge cases a=id, f=id, empty schemes, S=0, unbounded ok. nt_compile --json clean: 49.1 s / 42.3 s (<60 s). Advisory: new node could also cite sk-def-sfb-derived-extension-of-scalars; helper compile near 60 s under load."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261021T120717-L-3936328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

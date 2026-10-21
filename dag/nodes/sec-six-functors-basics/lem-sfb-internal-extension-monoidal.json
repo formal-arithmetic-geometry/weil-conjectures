@@ -1,0 +1,140 @@
+{
+ "kind": "statement",
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.InternalScalarTensorComparison",
+  "date": "2026-10-21",
+  "group": "U1"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "id": "lem-sfb-internal-extension-monoidal",
+ "title": "Scalar-unit normalized strong monoidal extension of internal scalars",
+ "statement": "Let C be a symmetric monoidal category with coequalizers, with tensoring on either side preserving colimits of small diagrams. Let R,S be commutative monoid objects and φ:R→S a monoid morphism. Use E=Ext_φ, Res_φ and the scalar unit u of [sk-def-sfb-change-of-scalars], and the relative tensors of [def-sfb-modobj-symmetric-tensor]. There exists a strong monoidal structure m on E such that for every R-module M,N, the underlying comonoidal tensor map satisfies q(M,N);u(M tensor_R N);δ_m(M,N) = (u(M) tensor u(N));q(E M,E N). Here q is the relative tensor coequalizer projection and semicolons denote composition in the displayed order.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-tensor-product-pullback, balanced tensor universal property and change of rings; sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-symmetric-tensor"
+ ],
+ "proof": [
+  {
+   "text": "The S-balanced projection q(M,N) is R-balanced after restriction. Descend it to Res M tensor_R Res N → Res(M tensor_S N), with unit R→Res S equal to φ. Check linearity, naturality, associativity and both unitalities after the relative tensor projections, using ambient coherence and braiding naturality. This defines a lax monoidal restriction functor.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-tensor-product-pullback, balanced tensor universal property and change of rings; sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product."
+   }
+  },
+  {
+   "text": "Equip its left adjoint E with the canonical oplax monoidal structure. The adjunction Hom equivalence is the explicit extension equivalence, whose unit is u. Its defining tensor adjunct is (u M tensor_R u N) followed by the restriction tensor map. Precomposition with q gives precisely the required normalization.",
+   "uses": [
+    "def-sfb-modobj-extend-restrict-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-tensor-product-pullback, balanced tensor universal property and change of rings; sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product."
+   }
+  },
+  {
+   "text": "Construct an isomorphism E M tensor_S E N ≅ E(M tensor_R N): first cancel the middle S using the bimodule associator and restricted right unitor; identify the restricted symmetric bimodule of E M with the extension bimodule by symmetry and the action laws; reassociate to S tensor_R (M tensor_R N). The regular bimodule right unitor also gives E R ≅ S. Their projection formulas show that the first map carries u M tensor u N to u(M tensor_R N), and the unit map carries u R to φ.",
+   "uses": [
+    "lem-sfb-mixed-bimodule-right-unitor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-tensor-product-pullback, balanced tensor universal property and change of rings; sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product."
+   }
+  },
+  {
+   "text": "Compose the canonical oplax tensor map with this concrete inverse. Under the extension adjunction its composite with u is the identity after q, by the projection formula. Cancel the epimorphism q and use injectivity of the adjunction to get the identity. Thus the canonical tensor map is the inverse isomorphism. The same adjunct computation identifies the oplax unit map with E R ≅ S. An oplax monoidal functor with invertible unit and tensor maps is strong monoidal; the inherited tensor map satisfies the normalization already proved.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "lemma-tensor-product-pullback, balanced tensor universal property and change of rings; sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-modobj-extend-restrict-adjunction",
+  "lem-sfb-mixed-bimodule-right-unitor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "lemma-tensor-product-pullback, balanced tensor universal property and change of rings; sites-cohomology.tex, Tag 07A4, lemma-pullback-tensor-product."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension of scalars for internal module objects is strong monoidal",
+   "results": "Eight hits: ordinary ModuleCat extension and monoidal category, internal ModObj scalar multiplication and scalar restriction.",
+   "date": "2026-10-21",
+   "verdict": "No normalized strong monoidal structure for the internal extension functor."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"tensor\", \"extendScalars\"",
+   "results": "One hit: LieAlgebra.ExtendScalars.instBracketTensorProduct. LeanFinder search for internal strong monoidal scalar extension finds ordinary ModuleCat change of rings.",
+   "date": "2026-10-21",
+   "verdict": "No matching internal module-object theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalars.*Monoidal|monoidal_extendScalars|extendScalarsTensor",
+   "results": "Mathlib has monoidal ModuleCat.extendScalars; project MapModMonoidal.monoidal_extendScalars requires IsIso φ. Blueprint scalar tensor search finds only cor-pur-vector-bundle-purity.",
+   "date": "2026-10-21",
+   "verdict": "The isomorphism hypothesis is unavailable for arbitrary coefficient maps; no duplicate generic internal result."
+  }
+ ],
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-thm-sfb-proper-base-change-rational",
+   "place": "paragraph (3), compatibility of tensor with scalar extension: construction of the ordinary scalar-unit normalized tensor comparison",
+   "via": [
+    "def-sfb-internal-scalar-tensor-comparison",
+    "lem-sfb-coefficient-projection-square"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ModuleObjects.ScalarExtensionMonoidal",
+  "file": "lean/Sheaf/CategoryTheory/ModuleObjects/ScalarExtensionMonoidal.lean",
+  "declaration": "CategoryTheory.Mod.exists_extendScalarsMonoidal",
+  "statement": "theorem exists_extendScalarsMonoidal : ∃ m : (extendScalars φ).Monoidal, ∀ M N : Mod C R, tensorObjπ M N ≫ (extendUnit φ (M ⊗ N)).hom ≫ (m.toOplaxMonoidal.δ M N).hom = ((extendUnit φ M).hom ⊗ₘ (extendUnit φ N).hom) ≫ tensorObjπ ((extendScalars φ).obj M) ((extendScalars φ).obj N)",
+  "branch": "sheaf-dag",
+  "by": "U1",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261021T120717-L-3936328",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U1",
+  "result": "pass",
+  "landing": "20261021T120717-L-3936328",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
