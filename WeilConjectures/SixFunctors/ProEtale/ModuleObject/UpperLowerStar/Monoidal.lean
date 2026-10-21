@@ -52,6 +52,11 @@ module-object six functors need in order to transport ring objects and module ob
   `(V ×_Z Y) ×_Y X ≅ V ×_Z X`, which is compatible with the objectwise tensor products. It is
   the input making the composition isomorphism of pushforwards of module objects
   (`ProEtale.CondensedRing.lowerStarComp`) available.
+* `ProEtale.isMonoidal_lowerStarId`: the identity isomorphism `(𝟙 X)_* ≅ 𝟭` of
+  `ProEtale.lowerStarId` is monoidal. It is induced by the identification of the base change
+  along `𝟙 X` with the identity of the site, which is compatible with the objectwise tensor
+  products. It is the input making the identity isomorphism of pushforwards of module objects
+  (`ProEtale.CondensedRing.lowerStarId`) available.
 
 -/
 
@@ -142,5 +147,19 @@ instance ProEtale.isMonoidal_lowerStarComp :
     NatTrans.IsMonoidal (ProEtale.lowerStarComp A f g).hom := sorry
 
 end LowerStarComp
+
+/-! ### The identity isomorphism of pushforwards is monoidal -/
+
+section LowerStarId
+
+variable (A : Type u') [Category.{u + 1} A] [Abelian A] [IsGrothendieckAbelian.{u + 1} A]
+  [MonoidalCategory A] [BraidedCategory A] [MonoidalClosed A]
+
+/-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of pushforwards on pro-étale sheaves is a monoidal
+natural isomorphism. See the module docstring. -/
+instance ProEtale.isMonoidal_lowerStarId (X : Scheme.{u}) :
+    NatTrans.IsMonoidal (ProEtale.lowerStarId A X).hom := sorry
+
+end LowerStarId
 
 end AlgebraicGeometry

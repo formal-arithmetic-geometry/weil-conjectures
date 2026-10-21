@@ -5,15 +5,13 @@ Authors: Nailin Guan
 -/
 module
 
-public import Mathlib.Algebra.BigOperators.Finprod
-public import Mathlib.Algebra.Ring.NegOnePow
 public import Mathlib.CategoryTheory.Monoidal.Braided.Basic
 public import Mathlib.CategoryTheory.Monoidal.Preadditive
 public import Mathlib.CategoryTheory.Monoidal.Rigid.Basic
 
 /-!
 
-# Categorical traces and supertraces
+# Categorical traces
 
 Let `C` be a braided monoidal preadditive category. The *categorical trace* of an endomorphism
 `T : V ⟶ V` of an object `V` with a right dual `Vᘁ` is the endomorphism of the monoidal unit
@@ -29,17 +27,9 @@ using a right dual chosen from the proposition `Nonempty (HasRightDual V)`, and 
 has no right dual. The trace computed with any other right dual is the same, duals being unique up
 to unique isomorphism; this is the content of the invariance under conjugation below.
 
-The *supertrace* of a family of endomorphisms `T i : V i ⟶ V i` indexed by `i : ℤ` is the
-alternating sum `∑ᶠ i, (-1)ⁱ Tr(T i)` (`CategoryTheory.superTrace`). For the cohomology
-`V i = Hⁱ(W)` of a perfect complex `W` with an endomorphism, this is the supertrace
-`STr(T | W) = ∑ᵢ (-1)ⁱ Tr(Hⁱ(T) | Hⁱ(W))` of the trace formula. The sum is a `finsum`: it is `0`
-unless only finitely many traces are nonzero, which holds for the bounded complexes to which it is
-applied.
-
 ## Main definitions
 
 - `CategoryTheory.categoricalTrace`: the categorical trace `Tr(T) ∈ End (𝟙_ C)`.
-- `CategoryTheory.superTrace`: the alternating sum of the traces of a `ℤ`-indexed family.
 
 ## Sorried input
 
@@ -69,10 +59,6 @@ noncomputable def categoricalTrace {V : C} (T : V ⟶ V) : End (𝟙_ C) :=
     letI := h.some
     η_ V Vᘁ ≫ T ▷ Vᘁ ≫ (β_ V Vᘁ).hom ≫ ε_ V Vᘁ
   else 0
-
-/-- The supertrace `∑ᶠ i, (-1)ⁱ Tr(T i)` of a `ℤ`-indexed family of endomorphisms. -/
-noncomputable def superTrace (V : ℤ → C) (T : ∀ i, V i ⟶ V i) : End (𝟙_ C) :=
-  ∑ᶠ i : ℤ, (i.negOnePow : ℤ) • categoricalTrace (T i)
 
 /-- The categorical trace is invariant under conjugation by an isomorphism. -/
 theorem categoricalTrace_conj {V W : C} (e : V ≅ W) (T : V ⟶ V) :

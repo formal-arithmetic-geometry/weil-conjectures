@@ -53,6 +53,9 @@ and `f^*` on module objects is exact.
 - `ProEtale.CondensedRing.lowerStarComp` and `ProEtale.CondensedRing.upperStarComp`: the
   composition isomorphisms `f_* ⋙ g_* ≅ (f ≫ g)_*` and `(f ≫ g)^* ≅ g^* ⋙ f^*`, the latter
   obtained from the former by uniqueness of left adjoints.
+- `ProEtale.CondensedRing.lowerStarId` and `ProEtale.CondensedRing.upperStarId`: the identity
+  isomorphisms `(𝟙 X)_* ≅ 𝟭` and `(𝟙 X)^* ≅ 𝟭`, the latter obtained from the former by
+  uniqueness of left adjoints.
 
 ## Sorried input
 
@@ -60,6 +63,8 @@ and `f^*` on module objects is exact.
   `WeilConjectures.SixFunctors.ProEtale.ModuleObject.UpperLowerStar.Monoidal`):
   the composition isomorphism of pushforwards of sheaves is monoidal; it enters
   `ProEtale.CondensedRing.lowerStarComp`.
+- `ProEtale.isMonoidal_lowerStarId` (in the same file): the identity isomorphism of
+  pushforwards of sheaves is monoidal; it enters `ProEtale.CondensedRing.lowerStarId`.
 
 -/
 
@@ -303,5 +308,40 @@ noncomputable def upperStarComp : (f ≫ g)^*⟦Λ⟧ ≅ (g)^*⟦Λ⟧ ⋙ (f)^
     (lowerStarComp Λ f g).symm).symm
 
 end Comp
+
+/-! ### Identity -/
+
+section Id
+
+variable (X)
+
+/-- The identity isomorphism `(𝟙 X)_* ≅ 𝟭` of the pushforward on module objects over `Λ`: on
+underlying sheaves it is the identity isomorphism `ProEtale.lowerStarId`, which is monoidal
+(`ProEtale.isMonoidal_lowerStarId`), and it is compatible with the actions of `Λ_X` since
+`η_{𝟙 X}` is the inverse of `ProEtale.lowerStarId` at `Λ_X`
+(`ProEtale.condensedPushforwardHom_id`). -/
+noncomputable def lowerStarId :
+    (𝟙 X)_*⟦Λ⟧ ≅ 𝟭 (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+  NatIso.ofComponents (fun M ↦ Mod.isoMk ((ProEtale.lowerStarId Ab.{u + 1} X).app M.X) (by
+    have h := NatTrans.IsMonoidal.tensor (τ := (ProEtale.lowerStarId Ab.{u + 1} X).hom)
+      (condensedRingObj Λ X) M.X
+    simp only [Functor.LaxMonoidal.id_μ, Category.comp_id] at h
+    change (condensedPushforwardHom Λ (𝟙 X) ▷ _ ≫ Functor.LaxMonoidal.μ _ _ _ ≫ _) ≫ _ = _
+    rw [condensedPushforwardHom_id, Category.assoc, Category.assoc, Iso.app_hom,
+      (ProEtale.lowerStarId Ab.{u + 1} X).hom.naturality, ← Category.assoc
+        (Functor.LaxMonoidal.μ _ _ _), h, Functor.id_map, ← Category.assoc]
+    congr 1
+    rw [← tensorHom_id, tensorHom_comp_tensorHom, Iso.inv_hom_id_app, Category.id_comp]
+    exact id_tensorHom _ _))
+    (fun f ↦ by ext : 1; exact (ProEtale.lowerStarId Ab.{u + 1} X).hom.naturality f.hom)
+
+/-- The identity isomorphism `(𝟙 X)^* ≅ 𝟭` of the pullback on module objects over `Λ`, obtained
+from `ProEtale.CondensedRing.lowerStarId` by uniqueness of left adjoints. -/
+noncomputable def upperStarId :
+    (𝟙 X)^*⟦Λ⟧ ≅ 𝟭 (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj Λ X)) :=
+  ((conjugateIsoEquiv (upperStarLowerStarAdjunction Λ (𝟙 X)) Adjunction.id).symm
+    (lowerStarId Λ X)).symm
+
+end Id
 
 end AlgebraicGeometry.ProEtale.CondensedRing
