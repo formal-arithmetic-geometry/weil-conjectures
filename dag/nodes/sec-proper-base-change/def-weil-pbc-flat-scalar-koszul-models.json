@@ -1,0 +1,110 @@
+{
+ "id": "def-weil-pbc-flat-scalar-koszul-models",
+ "kind": "definition",
+ "title": "Ordered coordinate and restriction models for scalar Koszul towers",
+ "statement": "On a small ringed site, use the actual Koszul systems of [def-weil-pbc-ringed-koszul-system]. Index the ordered tensor basis by functions e : Fin r → Bool and let degree(e) count its true values. The basis map is the ordered total-tensor inclusion of the degree-zero/one basis maps of each positive factor; for the empty list it is the sole degree-zero basis map. Dual evaluation on this vector, zero outside its negative degree, defines dualCoordinate. The universal coproduct descendent of tensor with this evaluation followed by the right unit is coordinate : T_O(N)_m^n → N^(n+degree(e)). For a ring-sheaf map φ, define imageSections pointwise, restriction on modules, complexes and inverse towers, and the canonical ordinary-limit comparison. These are the existing constructions moved from the scalar tower comparison without changing any object or map.",
+ "source": {
+  "document": "literature/stacks-project/algebraization.tex",
+  "place": "Tag 0A0E (lemma-derived-completion-koszul), finite free Koszul model; derived-limit restriction is Tag 0A07 (sites-cohomology.tex, lemma-Rf-commutes-with-Rlim), specialized to the identity topos with flat structural ring map. The strict tower, evaluation and unit normalization are made explicit."
+ },
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.FlatScalarKoszulTowerComparison",
+  "date": "2026-10-21",
+  "group": "P4"
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorDesc\"",
+   "results": "3 hits: HomologicalComplex.mapBifunctorDesc, HomologicalComplex.ι_mapBifunctorDesc, HomologicalComplex.ι_mapBifunctorDesc_assoc",
+   "date": "2026-10-21",
+   "verdict": "No strict ringed-site Koszul scalar comparison among these results."
+  },
+  {
+   "tool": "grep",
+   "query": "Koszul.*[Rr]estrict|[Rr]estrict.*Koszul",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No strict ringed-site Koszul scalar comparison among these results."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The finite Koszul complex commutes with change of rings and its tensor with a module commutes with restriction of scalars.",
+   "results": "8 hits: RingHom.IsStableUnderBaseChange, Algebra.FinitePresentation.baseChange, instFinitePresentationTensorProduct, RingHom.finiteType_isStableUnderBaseChange, KaehlerDifferential.tensorKaehlerEquivBase, KaehlerDifferential.isLocalizedModule_map, RestrictScalars.isCentralScalar, KaehlerDifferential.mapBaseChange.congr_simp",
+   "date": "2026-10-21",
+   "verdict": "No strict ringed-site Koszul scalar comparison among these results."
+  }
+ ],
+ "mathlib_match": null,
+ "lean_audit": {},
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-ringed-koszul-system",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-flat-scalar-koszul-tower-comparison",
+   "place": "Strict finite-complex calculation, proof steps 1 and 2.",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.FlatScalarKoszulModels",
+  "file": "lean/Sheaf/CategoryTheory/FlatScalarKoszulModels.lean",
+  "declaration": "CategoryTheory.FlatScalarKoszul.coordinate",
+  "statement": "def coordinate (O : Sheaf J CommRingCat.{u}) (r : ℕ)\n    (a : Fin r → (O.obj ⋙ forget CommRingCat).sections) (N : ringedSiteComplex O)\n    (m : ℕ) (e : Fin r → Bool) (n : ℤ) :\n    ((ringedKoszulTensorTowerComplex O r a N).X n).obj (op m) ⟶\n      N.X (n + degree r e)",
+  "branch": "sheaf-dag",
+  "by": "P4",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.FlatScalarKoszul.Modules",
+   "CategoryTheory.FlatScalarKoszul.Towers",
+   "CategoryTheory.FlatScalarKoszul.tensor",
+   "CategoryTheory.FlatScalarKoszul.one",
+   "CategoryTheory.FlatScalarKoszul.degree",
+   "CategoryTheory.FlatScalarKoszul.factorBasis",
+   "CategoryTheory.FlatScalarKoszul.positiveBasis",
+   "CategoryTheory.FlatScalarKoszul.dualCoordinate",
+   "CategoryTheory.FlatScalarKoszul.coordinate",
+   "CategoryTheory.FlatScalarKoszul.restriction",
+   "CategoryTheory.FlatScalarKoszul.restrictComplex",
+   "CategoryTheory.FlatScalarKoszul.restrictTower",
+   "CategoryTheory.FlatScalarKoszul.restrictTowerComplex",
+   "CategoryTheory.FlatScalarKoszul.imageSections",
+   "CategoryTheory.FlatScalarKoszul.limitComplex",
+   "CategoryTheory.FlatScalarKoszul.limitComparison"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-8afb9",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T134522-L-1295510",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-8afb9",
+  "group": "P4",
+  "result": "pass",
+  "landing": "20261021T134522-L-1295510",
+  "kind": "interface",
+  "note": "independent cc review: Delivered item, Models and Strict modules vs the live item file (moved defs verbatim, theorem statement identical); new strict lemma vs its node and Stacks 0A0E coordinate argument; item node fields vs live"
+ }
+}
