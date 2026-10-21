@@ -1,6 +1,6 @@
 # Work queue
 
-304 items; claim with `tools/claim.py next <group> [--stage N]`.
+305 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (11 clusters, 1358 modules)
 
@@ -22,19 +22,18 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 79, stage 3 183 items.
 
-## Stage 1: nodes to split (71)
+## Stage 1: nodes to split (69)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `prop-weil-pbc-qbar-condensed-two-colimit` | 0 | rests_on_sorry |
 | `prop-weil-pbc-scalar-extension` | 1 | none |
-| `lem-pd-monoidal-adjunction-equivalence-transport` | 3 | none |
 | `lem-pur-finite-coefficient-adjoint-comparisons` | 3 | none |
 | `lem-weil-pbc-flat-coefficient-reduction-adjunct` | 5 | none |
 | `lem-weil-pbc-flat-scalar-koszul-tower-comparison` | 5 | none |
 | `lem-weil-pbc-pulled-reduction-normalization-comparison` | 5 | none |
 | `lem-weil-pbc-pulled-reduction-strict-tower-comparison` | 5 | none |
-| `lem-sbc-strict-quotient-exchange-unit-equation` | 6 | none |
+| `lem-sbc-ringed-site-perfect-projection-formula` | 7 | none |
 | `lem-weil-pbc-lisse-e-constructible-integral-lattice` | 9 | none |
 | `lem-weil-pbc-affine-cohomology-etale-module-realization` | 17 | none |
 | `lem-weil-pbc-coherent-affine-base-change-edge-naturality` | 17 | none |
@@ -84,7 +83,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `sk-lem-integral-models` | - | none |
 | `sk-prop-sfb-cartesian-coefficients` | - | rests_on_sorry |
 | `lem-pe-finite-scalar-restriction-constructible` | - | none |
-| `lem-sfb-scalar-presentation-cokernel` | - | none |
 | `lem-sfb-tor-interval-local-detection` | - | none |
 | `lem-sp-etale-ctf-chart-domain` | - | none |
 | `lem-sp-restricted-scalar-cohomology-local-constancy` | - | none |
@@ -98,7 +96,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-small-triangulated-extension-classes` | - | none |
 | `lem-sfb-weak-serre-bounded-thick` | - | none |
 
-## Stage 2: nodes to state (90)
+## Stage 2: nodes to state (93)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -114,6 +112,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-cbc-derived-tower-evaluation-normalization` | 1 | state | 0 |
 | `lem-cbc-finite-constant-map-naturality` | 1 | state | 0 |
 | `lem-cbc-open-localized-counit-comparison` | 1 | state | 0 |
+| `lem-pd-monoidal-adjunction-equivalence-transport` | 1 | state | 0 |
 | `lem-pd-ringed-direct-image-pairing-lax` | 1 | state | 0 |
 | `lem-pd-ringed-tensor-adjunction-mate` | 1 | state | 0 |
 | `lem-pe-comparison-etale-slice-abelian-pullback` | 1 | state | 0 |
@@ -132,6 +131,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sbc-reflected-compositor-unit-normalization` | 1 | state | 0 |
 | `lem-sbc-reflector-adjunction-unit-formulas` | 1 | state | 0 |
 | `lem-sbc-reflector-square-mate-factorization` | 1 | state | 0 |
+| `lem-sbc-strict-quotient-exchange-unit-equation` | 1 | state | 0 |
 | `lem-sbc-unbounded-exact-adjunction-square` | 1 | state | 0 |
 | `lem-sf-adjunct-conjugate-open-factor` | 1 | state | 0 |
 | `lem-sf-bounded-below-hom-test` | 1 | state | 0 |
@@ -164,6 +164,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-scalar-coordinate-limit-criterion` | 1 | state | 0 |
 | `lem-sfb-scalar-inverse-image-tower-diagram` | 1 | state | 0 |
 | `lem-sfb-scalar-normalized-constant-models` | 1 | state | 0 |
+| `lem-sfb-scalar-presentation-cokernel` | 1 | state | 0 |
 | `lem-sfb-section-ring-lax-pushforward-coherence` | 1 | state | 0 |
 | `lem-sfb-shriek-coefficient-isomorphism` | 1 | state | 0 |
 | `lem-sfb-stratified-local-cohomological-bounds` | 1 | state | 0 |
@@ -193,7 +194,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-finite-classical-localizing` | 2 | state | 0 |
 | `lem-sfb-subfield-extension-local-presentation` | 2 | state | 0 |
 
-Not open yet: 300 nodes that below a finished node, not needed, 98 nodes that wait for a statement dependency (bottom-up), 57 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 300 nodes that below a finished node, not needed, 98 nodes that wait for a statement dependency (bottom-up), 55 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (122)
 
