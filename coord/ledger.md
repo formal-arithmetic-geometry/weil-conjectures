@@ -23667,3 +23667,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:30 L: returned deliver/O3/lem-sfb-trivial-ladic-derived-exterior (reviewer RETURN: L: independent stage-2 immutable head 130eb8bf28ea: H2: delivery adds theorem stmt_dep lem-sfb-polynomial-derived-bar-co)
 - 20:30 L: returned deliver/NC/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: This is the 9th push of this item. NV 01fd, NF 02bf/7bcb/4bc0, NL 27f2/e7aa, NH e352 and NB bc06 were all returned for d)
 - 20:30 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 20:31 L: merged deliver/NH/lem-sfb-procyclic-scalar-cochain-evaluation (stage 2; reviewer PASS; parallel immutable checks)
+- 20:31 L: merged deliver/N9/lem-trf-point-system-roos-transport (stage 2; reviewer PASS; parallel immutable checks)

@@ -11,7 +11,9 @@
   "def-sfb-continuous-map-condensed-ring",
   "def-weil-size-convention",
   "sk-def-sfb-module-objects",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-sfb-bundled-continuous-scalar-ring",
+  "def-sfb-condensed-equivariant-bar-data"
  ],
  "proof": [
   {
@@ -242,5 +244,31 @@
   "group": "NL",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NL-c830b414c (reviewer sub-agent of L); spot-checked: I read the item, its 9 steps, the 3 new nodes and every cited statement. The item's statement and stmt_deps are byte-identical to base; no cycle; the only citer, lem-sfb-ind-unipotent-procyclic-difference, is unaffected; no re-split note; no SGA. Steps 1-3 and 9 are correct as elementary steps: d∘d=0, sheaf property via S_a×H^q covers, chain-map identities with d^0=0, H^1 = additive maps = t·a(s) by density of the nonnegative integers in Z_ℓ. Steps 4-7 are correct. Completeness: E by lem-weil-l-adic-extension-complete, Ω̂ by lem-sfb-normed-field-completion, C(S,B) by Mathlib Compact.lean:182/234/301 and CompactConvergence.lean:432. Mahler: the right shift is a continuous right inverse of Δ; mahlerEquiv's hypotheses (NormedAddCommGroup, ℤ_[p]-module, IsBoundedSMul, IsUltrametricDist, CompleteSpace; MahlerBasis.lean:247-382) are all met. The coinduced complex is contractible via F(x)(y)=φ(x+y) and φ↦φ(0,...). The long exact sequence H^{n-1}(R)→H^n(V)→H^n(R) gives vanishing for n≥2. Step 8 meets both hypotheses of the new descent node with G=H. Both Mathlib leaves are exact and not duplicates (other mahlerEquiv hits in the DAG are only search logs). The new unsplit node lem-sfb-parameter-cochain-completion-boundary-descent is self-contained, carries no proof sketch, and is neither a duplicate of nor a restatement of the item. Truth tests: n=1 holds vacuously; S=∅ holds. For S=point and any profinite G and n, it follows from existing nodes: local-norm-algcl-cocycle-descent plus finite-index-transfer give z=u'+db' with u' F-valued; the norm-one projection Ω→F extends to Ω̂, so z=d(b'+p̂(b-b')). I also proved n=2, G=Z_ℓ directly by a Baire box argument, which settles the doubt left open by the earlier NF bd874fb0 review; the G=Z_ℓ, n=2 family case holds via a canonical normalisation. Uniformity over an arbitrary profinite S for n≥3 is the node's genuine remaining content; I found no counterexample. I accept the generic tool_uses (currying, long exact sequence, completeness of finite extensions). No changes."
+ },
+ "lean": {
+  "module": "Sheaf.RepresentationTheory.ProcyclicScalarCochainEvaluation",
+  "declaration": "ContinuousCohomology.exists_procyclicScalarCochainEvaluation",
+  "declarations": [
+   "ContinuousCohomology.ProcyclicScalarCochainEvaluation",
+   "ContinuousCohomology.procyclicScalarUnderlying",
+   "ContinuousCohomology.procyclicScalarLocalization",
+   "ContinuousCohomology.ProcyclicScalarCoefficientCompatibility",
+   "ContinuousCohomology.exists_procyclicScalarCochainEvaluation"
+  ],
+  "file": "lean/Sheaf/RepresentationTheory/ProcyclicScalarCochainEvaluation.lean",
+  "statement": "theorem exists_procyclicScalarCochainEvaluation (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (E : IntermediateField ℚ_[ell] Ω) [FiniteDimensional ℚ_[ell] E] : ∃ (D : ProcyclicScalarCochainEvaluation ell E) (D' : ProcyclicScalarCochainEvaluation ell Ω), QuasiIso D.epsilon ∧ QuasiIso D'.epsilon ∧ Nonempty {e : (procyclicScalarLocalization E).obj D.U ≅ (procyclicScalarLocalization E).obj D.K // e.hom = (procyclicScalarLocalization E).map D.epsilon} ∧ Nonempty {e : (procyclicScalarLocalization Ω).obj D'.U ≅ (procyclicScalarLocalization Ω).obj D'.K // e.hom = (procyclicScalarLocalization Ω).map D'.epsilon} ∧ Nonempty (ProcyclicScalarCoefficientCompatibility ell E Ω E.subtype D D')",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The coordinate specifications determine the source and two-term target, the generator-evaluation map and both coefficient-change arrows up to their unique coordinate-preserving isomorphisms. The existence theorem asserts ordinary sheaf quasi-isomorphisms for E and the original norm-topological algebraic closure, with no completeness assumption on the latter. The two added statement dependencies are already landed: they provide the common-universe scalar ring bundle, module category and section-module operations, not new copies of those notions."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8424e7d49",
+  "group": "NH",
+  "result": "pass",
+  "note": "Item changed only in lean + two added stmt_deps (def-sfb-bundled-continuous-scalar-ring, def-sfb-condensed-equivariant-bar-data), both landed and used; lean.statement verbatim, record complete. Clause match: noncomplete IsAlgClosure normed Ω (unique extended norm), finite IntermediateField E, both F=E and F=Ω; U = C(S×(Fin n→ℤ_ℓ),F) coordinates natural in all Profinite.{u} S incl. empty, pointwise scalar action, contractNth differential recomputed (signs (-1)^{i+1}, last face drops, d^0=0); K two-term with zero d; ε = id / eval at 1 / 0; E↪Ω compatibility by postcomposition formulas and commuting square; QuasiIso in internal modules (kernel/image, no closure) plus normalized derived isos for the 2026-10-21 convention. Specification structure pins all data up to unique iso (not hollow, no sorry def); no existing parameterwise cochain notion (CondensedBar cochains are internal-Hom, excluded by the node). Common universe u as in landed continuousScalarRing/size convention. Docstrings with source+blueprint, 9 proof steps; plain imports = stated proof deps; lines ≤100; only the theorem proof is sorry. Edge cases S=∅, n=0,1, E=ℚ_ℓ covered. Only citer uses it as proof_dep, no Lean yet. No compile (no file changed). Advisory: derived conjuncts follow from QuasiIso, kept per convention."
  }
 }
