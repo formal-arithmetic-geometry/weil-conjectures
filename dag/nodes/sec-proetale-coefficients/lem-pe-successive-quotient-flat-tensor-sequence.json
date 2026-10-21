@@ -1,0 +1,168 @@
+{
+ "id": "lem-pe-successive-quotient-flat-tensor-sequence",
+ "kind": "statement",
+ "title": "Flat-term successive quotient tensor sequence",
+ "statement": "For a sheaf of commutative rings B and a section t whose multiplication is sectionwise injective, let R_j=B/t^jB. For n>1 and every cochain complex P of flat B-module sheaves, the ordinary scalar-extension complexes form a short exact sequence Res(R_(n-1) tensor_B P) to R_n tensor_B P to Res(R_1 tensor_B P) in cochain complexes of R_n-module sheaves. The first map sends [b] tensor x to [tb] tensor x, the second sends [b] tensor x to [b] tensor x. The quotient maps commute with the projections from B. The statement applies to any of the prescribed ordinary scalar-extension functor presentations. The quotient rings are [def-pe-principal-power-ring-quotients], scalar-extension presentations are those of [lem-pur-derived-change-of-rings], flatness is [def-pc-flat-sheaf-modules], and the endpoint actions use [def-pc-sheaf-restrict-scalars].",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "Second paragraph: coefficient exact sequence and derived tensor triangle, retaining the R_n-action."
+ },
+ "stmt_deps": [
+  "def-pe-principal-power-ring-quotients",
+  "lem-pur-derived-change-of-rings",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-sheaf-restrict-scalars"
+ ],
+ "proof": [
+  {
+   "text": "The sectionwise quotient maps give a short exact sequence of B-module presheaves, with multiplication [b] to [tb] and quotient [b] to [b]. Its exactness follows by cancellation of t and by quotient lifts. Exact module sheafification and the locally bijective quotient-ring units identify its terms with the actual ring-sheaf quotients restricted to B. The ring quotient transitions are induced from the sectionwise quotient factor maps and commute with the projections.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-pc-sheaf-restrict-scalars",
+    "def-pe-principal-power-ring-quotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+    "place": "Second paragraph, the coefficient exact sequence; local quotient verification of its general ring-sheaf form."
+   }
+  },
+  {
+   "text": "For the supplied complex P with flat terms, apply the sheafified tensor termwise to the coefficient sequence. The normalized coefficient maps are natural in P and commute with each differential. Thus they define the displayed cochain maps.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, sites-cohomology-lemma-K-flat-resolution; termwise scalar tensor as in Tag 06YY, sites-cohomology-lemma-derived-base-change."
+   }
+  },
+  {
+   "text": "Tensor the coefficient sequence with each flat term P^i using the exact-functor definition of sheaf flatness. Restricted ordinary scalar extension is canonically the sheaf tensor with the restricted coefficient ring, by the normalized presheaf tensor identity, the locally bijective tensor unit, and the sheafification universal property. Restriction along the locally surjective ring projection B to R_n recovers R_n-linear maps from their B-linear maps. It is exact and faithful, hence reflects the degreewise short exactness. Naturality in P^i gives cochain maps, and degreewise short exactness is short exactness of complexes.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-weil-sheaf-of-modules-category",
+    "def-pur-sheaf-tensor-product",
+    "def-pc-sheaf-restrict-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER, sites-modules-definition-flat, item (3); Tag 03DA, sites-modules-lemma-abelian, kernels and cokernels."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-pc-sheaf-restrict-scalars",
+  "def-pe-principal-power-ring-quotients",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
+  "place": "Ordinary coefficient and flat tensor sequence, the first three steps of the quotient-linear triangle argument."
+ },
+ "status": "split",
+ "chapter": "sec-proetale-coefficients",
+ "unit": "sk-prop-integral-criterion",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.SuccessiveQuotientLinearTriangle",
+  "date": "2026-10-21",
+  "group": "Q3"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.SuccessiveQuotientFlatTensorSequence",
+  "declaration": "SheafOfModules.successive_quotient_flat_tensor_sequence",
+  "declarations": [
+   "SheafOfModules.successiveQuotientTensorModel",
+   "SheafOfModules.successiveQuotientTensorSection",
+   "SheafOfModules.successiveQuotientRestrictedModel",
+   "SheafOfModules.SuccessiveQuotientFlatTensorData",
+   "SheafOfModules.successive_quotient_flat_tensor_sequence"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/SuccessiveQuotientFlatTensorSequence.lean",
+  "existing": false,
+  "statement": "theorem successive_quotient_flat_tensor_sequence (n : ℕ) (hn : 1 < n)\n    (ht : ∀ U : Cᵒᵖ, Function.Injective\n      (fun b : B.obj.obj U ↦ (@id (B.obj.obj U) (t.val U)) * b))\n    [HasDerivedCategory.{wB} (ringedSiteModules.{r}\n      (derivedChangeRingIndependentCoefficients J B))]\n    [HasDerivedCategory.{wPrev} (ringedSiteModules.{r}\n      (derivedChangeRingIndependentCoefficients J (principalPowerRingQuotient B t (n - 1))))]\n    [HasDerivedCategory.{wN} (ringedSiteModules.{r}\n      (derivedChangeRingIndependentCoefficients J (principalPowerRingQuotient B t n)))]\n    [HasDerivedCategory.{wOne} (ringedSiteModules.{r}\n      (derivedChangeRingIndependentCoefficients J (principalPowerRingQuotient B t 1)))]\n    (FPrev : DerivedChangeOfRingsCochainModel.{u, v, r, wB, wPrev}\n      (principalPowerRingProjection B t (n - 1)))\n    (FN : DerivedChangeOfRingsCochainModel.{u, v, r, wB, wN}\n      (principalPowerRingProjection B t n))\n    (FOne : DerivedChangeOfRingsCochainModel.{u, v, r, wB, wOne}\n      (principalPowerRingProjection B t 1))\n    (P : CochainComplex (ringedSiteModules.{r}\n      (derivedChangeRingIndependentCoefficients J B)) ℤ)\n    (hflat : ∀ i : ℤ, IsFlatOnSite (R := B) (P.X i)) :\n    Nonempty (SuccessiveQuotientFlatTensorData t\n      (principalPowerRingProjection B t (n - 1)) (principalPowerRingProjection B t n)\n      (principalPowerRingProjection B t 1) FPrev FN FOne P)",
+  "branch": "sheaf-dag",
+  "by": "Q3",
+  "date": "2026-10-21",
+  "note": "The generic data record packages the identical ordinary maps, zero composite, short exactness and pure-tensor equations before specializing the ring sheaves. The three existing typed model definitions move here verbatim and are publicly re-exported by the triangle module; no signature or definition body changes."
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-prop-integral-criterion-reductions",
+   "place": "Second paragraph: coefficient short exact sequence and its ordinary flat-term tensor sequence, before passage to the derived triangle.",
+   "via": [
+    "lem-pe-successive-quotient-linear-triangle"
+   ]
+  },
+  "same_as": []
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A regular section of a sheaf of rings gives a short exact sequence of successive principal quotient module sheaves; tensoring with a flat module sheaf preserves exactness",
+   "results": "8 hits. Module.Flat.lTensor_exact and rTensor_exact in Mathlib.RingTheory.Flat.Basic, and Module.Flat.lTensor_shortComplex_exact and rTensor_shortComplex_exact in Mathlib.RingTheory.Flat.CategoryTheory, concern modules over one commutative ring, not sheaf-flat modules or normalized quotient-ring-sheaf cochain maps.",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary module flatness does not imply that the modules of sections of a flat module sheaf are flat; the ring-sheaf construction and normalized cochain maps are still required."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A regular section of a ring sheaf gives a short exact sequence of successive quotient modules which remains exact after sheaf tensor with a flat module",
+   "results": "8 hits, including Module.Flat.rTensor_shortComplex_exact and Module.Flat.lTensor_shortComplex_exact, concern ordinary modules over one ring. None constructs the ring-sheaf coefficient sequence or its quotient-linear tensor maps.",
+   "date": "2026-10-21",
+   "verdict": "Use the exact-functor definition of sheaf flatness after constructing the coefficient sequence; sectionwise module-flatness is not a valid replacement."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"ShortExact\", \"map_of_exact\"",
+   "results": "CategoryTheory.ShortComplex.ShortExact.map_of_exact in Mathlib.Algebra.Homology.ShortComplex.ShortExact.",
+   "date": "2026-10-21",
+   "verdict": "Supplies preservation of an existing short exact sequence by the exact sheaf tensor functor; does not supply the coefficient construction or normalized maps."
+  },
+  {
+   "tool": "grep",
+   "query": "successive.*[Qq]uotient|[Qq]uotient.*[Ss]hortExact",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No existing successive quotient sequence theorem found."
+  }
+ ],
+ "mathlib_match": null,
+ "blueprint_searches": [
+  {
+   "query": "successive quotient",
+   "result": "20 blueprint nodes; no duplicate of this general-site normalized flat-term coefficient sequence."
+  },
+  {
+   "query": "tensor exact flat",
+   "result": "31 blueprint nodes; definitions of flatness and derived tensor, not this successive quotient coefficient sequence."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-86c6d",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T111443-L-148638",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-86c6d",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T111443-L-148638",
+  "kind": "interface",
+  "note": "independent cc review: item signature and moved Models section byte-identical to live (diff; #check confirms the extra HasSheafify CommRingCat section variable is not added); item proof = flat tensor sequence + triangleOfSES + counit computation, matching the node steps and proof_deps; new node lean.statement = Lean signature; sorryAx only from published PrincipalPowerQuotients/SiteTensorFunctoriality holes"
+ }
+}

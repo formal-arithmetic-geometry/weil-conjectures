@@ -12,8 +12,7 @@ public import Sheaf.Algebra.Homology.KFlatIndependentCoefficients
 public import Sheaf.Algebra.Category.ModuleCat.Sheaf.FlatOnSite
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.ChangeOfRings
 public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
+public import Sheaf.Algebra.Homology.SuccessiveQuotientFlatTensorSequence
 import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
 
 /-! # Successive derived quotients with the quotient-ring action
@@ -46,44 +45,6 @@ abbrev successiveQuotientLocalization (R : Sheaf J CommRingCat.{r})
       DerivedCategory (ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J R)) :=
   DerivedCategory.Q
 
-section Models
-variable {B S : Sheaf J CommRingCat.{r}} {φ : B ⟶ S}
-  [HasDerivedCategory.{wB} (ringedSiteModules.{r}
-    (derivedChangeRingIndependentCoefficients J B))]
-  [HasDerivedCategory.{wS} (ringedSiteModules.{r}
-    (derivedChangeRingIndependentCoefficients J S))]
-
-/-- The termwise extension in the recorded derived-change-of-rings presentation.
-Source: Stacks 06YY (blueprint: lem-pe-successive-quotient-linear-triangle). -/
-def successiveQuotientTensorModel (F : DerivedChangeOfRingsCochainModel φ)
-    (P : CochainComplex (ringedSiteModules.{r}
-      (derivedChangeRingIndependentCoefficients J B)) ℤ) :
-    CochainComplex (ringedSiteModules.{r}
-      (derivedChangeRingIndependentCoefficients J S)) ℤ :=
-  (F.E.mapHomologicalComplex (.up ℤ)).obj P
-
-/-- A pure tensor in the presented extension, using its fixed object equality.
-The existing scalar-first convention writes the paper's x tensor s as s tensor x.
-Source: Stacks 03EK, 06YY (blueprint: lem-pe-successive-quotient-linear-triangle). -/
-def successiveQuotientTensorSection (F : DerivedChangeOfRingsCochainModel φ)
-    (M : ringedSiteModules.{r} (derivedChangeRingIndependentCoefficients J B))
-    (U : Cᵒᵖ) (s : S.obj.obj U) (x : M.val.obj U) : (F.E.obj M).val.obj U :=
-  (eqToHom (F.obj_eq M).symm).val.app U
-    ((toSheafify J (changeOfRingsPresheaf φ M).presheaf).app U
-      (s ⊗ₜ[B.obj.obj U, (φ.hom.app U).hom] x))
-
-/-- Restrict the scalar action on every term and differential of the tensor model.
-Source: Stacks 03D7, 06YY (blueprint: lem-pe-successive-quotient-linear-triangle). -/
-def successiveQuotientRestrictedModel {A : Sheaf J CommRingCat.{r}} (a : A ⟶ S)
-    (F : DerivedChangeOfRingsCochainModel φ)
-    (P : CochainComplex (ringedSiteModules.{r}
-      (derivedChangeRingIndependentCoefficients J B)) ℤ) :
-    CochainComplex (ringedSiteModules.{r}
-      (derivedChangeRingIndependentCoefficients J A)) ℤ :=
-  (Functor.mapHomologicalComplex
-    (restrictScalars ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).map a))
-    (.up ℤ)).obj (successiveQuotientTensorModel F P)
-end Models
 
 section TriangleData
 variable {B SPrev SN SOne : Sheaf J CommRingCat.{r}}
@@ -162,6 +123,30 @@ end TriangleData
 variable [HasSheafify J CommRingCat.{r}]
   (B : Sheaf J CommRingCat.{r}) (t : (B.obj ⋙ CategoryTheory.forget CommRingCat.{r}).sections)
 
+omit [HasSheafify J CommRingCat.{r}] in
+private theorem canonical_computation
+    {S : Sheaf J CommRingCat.{r}} {φ : B ⟶ S}
+    [HasDerivedCategory.{wB} (ringedSiteModules.{r}
+      (derivedChangeRingIndependentCoefficients J B))]
+    [HasDerivedCategory.{wS} (ringedSiteModules.{r}
+      (derivedChangeRingIndependentCoefficients J S))]
+    (F : DerivedChangeOfRingsCochainModel φ)
+    (K : DerivedCategory (ringedSiteModules.{r}
+      (derivedChangeRingIndependentCoefficients J B)))
+    (G P : CochainComplex (ringedSiteModules.{r}
+      (derivedChangeRingIndependentCoefficients J B)) ℤ)
+    (e : DerivedCategory.Q.obj G ≅ K) (f : P ⟶ G)
+    (hf : CochainComplex.IsKFlatResolutionIndependentCoefficients (R := B) f) :
+    ∃ eP : F.T.obj K ≅ DerivedCategory.Q.obj
+        ((F.E.mapHomologicalComplex (.up ℤ)).obj P),
+      F.T.map (DerivedCategory.Q.map f ≫ e.hom) ≫ eP.hom = F.ε.app P := by
+  have : QuasiIso f := hf.1
+  have : IsIso (F.ε.app P) := F.computes P hf.2
+  let q := asIso (DerivedCategory.Q.map f) ≪≫ e
+  refine ⟨(F.T.mapIso q).symm ≪≫ asIso (F.ε.app P), ?_⟩
+  change F.T.map q.hom ≫ _ = _
+  simp
+
 /-- Successive derived reductions form the specified distinguished triangle in D(B/t^n).
 The statement uses any representative G of K and any flat-term K-flat resolution P to G.
 The three e's are the canonical derived computations: their equations explicitly use
@@ -174,25 +159,19 @@ Stacks 03D7, 03ER, 06YS, 06YY, 0152
 (blueprint: lem-pe-successive-quotient-linear-triangle).
 
 Proof:
-1. The coefficient maps send [b] to [tb] and [b] to [b]. Local quotient lifts show
-well-definedness and exactness. If tb = t^n c, injectivity of t gives b = t^(n-1)c.
-The quotient map is locally surjective; this proves the coefficient short exact
-sequence as B-modules and as R_n-modules, without choosing points of the site.
-2. Resolve an arbitrary representative by a flat-term K-flat complex (06YS).
-Apply the sheafified tensor termwise. The formulas on pure tensors commute with
-restriction and with the differentials, and are R_n-linear.
-3. Flatness, defined as exactness of the sheaf tensor functor (03ER), makes the
-resulting sequence degreewise short exact. Restriction retains the underlying
-abelian sheaves, so kernels, images and cokernels give the same exactness over R_n.
-4. Apply DerivedCategory.triangleOfSES_distinguished in Mod(R_n) (0152).
-Its first two maps are the localizations of the displayed cochain maps.
-5. The universal counit of derived change of rings is invertible on P (06YY).
-Compose its inverse comparison with the image of P to G and G to K to identify
-all three objects with K_j. Restriction preserves quasi-isomorphisms and shifts,
-since it retains the abelian sheaf and differential. This identifies the endpoints
-with the termwise restrictions of K_(n-1) and K_1. Tensor symmetry changes the
-scalar-first formulas to the paper's second-factor formulas. No bound or completeness
-is used, and the construction applies to every flat-term K-flat resolution. -/
+1. Apply successive_quotient_flat_tensor_sequence to the supplied flat-term complex P.
+It constructs the quotient ring maps, the two normalized cochain maps and a short exact
+sequence in modules over R_n. Its ordinary coefficient proof cancels t, sheafifies,
+and uses the exact sheaf tensor functor in each flat degree; it makes no assumption
+that section modules of P are flat.
+2. Apply DerivedCategory.triangleOfSES_distinguished to this short exact sequence.
+The connecting morphism and distinguishedness are constructed directly over R_n.
+3. For each supplied derived-change-of-rings model, the universal counit is invertible
+on the K-flat P. The quasi-isomorphism f followed by e identifies Q(P) with K. Apply
+the derived functor, invert this identification and compose with the counit to obtain
+the canonical computation isomorphism. Cancellation gives its prescribed equation.
+4. Package the three counit comparisons, the SES triangle and its normalized maps.
+No new resolution is chosen, and neither boundedness nor completeness is used. -/
 theorem successive_quotient_linear_triangle (n : ℕ) (hn : 1 < n)
     (ht : ∀ U : Cᵒᵖ, Function.Injective
       (fun b : B.obj.obj U ↦ (@id (B.obj.obj U) (t.val U)) * b))
@@ -219,6 +198,28 @@ theorem successive_quotient_linear_triangle (n : ℕ) (hn : 1 < n)
     (hflat : ∀ i : ℤ, IsFlatOnSite (R := B) (P.X i)) :
     Nonempty (SuccessiveQuotientLinearTriangle t
       (principalPowerRingProjection B t (n - 1)) (principalPowerRingProjection B t n)
-      (principalPowerRingProjection B t 1) FPrev FN FOne K G P e f) := sorry
+      (principalPowerRingProjection B t 1) FPrev FN FOne K G P e f) := by
+  obtain ⟨S⟩ :=
+    successive_quotient_flat_tensor_sequence B t n hn ht FPrev FN FOne P hflat
+  obtain ⟨ePrev, hePrev⟩ := canonical_computation B FPrev K G P e f hf
+  obtain ⟨eN, heN⟩ := canonical_computation B FN K G P e f hf
+  obtain ⟨eOne, heOne⟩ := canonical_computation B FOne K G P e f hf
+  exact ⟨{
+    rPrev := S.rPrev
+    rOne := S.rOne
+    rPrev_projection := S.rPrev_projection
+    rOne_projection := S.rOne_projection
+    ePrev := ePrev
+    eN := eN
+    eOne := eOne
+    computesPrev := hePrev
+    computesN := heN
+    computesOne := heOne
+    α := S.α
+    β := S.β
+    δ := DerivedCategory.triangleOfSESδ S.shortExact
+    distinguished := DerivedCategory.triangleOfSES_distinguished S.shortExact
+    alpha_formula := S.alpha_formula
+    beta_formula := S.beta_formula }⟩
 
 end SheafOfModules

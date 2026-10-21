@@ -18,29 +18,14 @@
  ],
  "proof": [
   {
-   "text": "Represent $K$ by a complex $G$. Choose a flat-term K-flat resolution $f:P\\to G$ using [lem-pc-kflat-resolution]; it exists for an arbitrary unbounded $G$. We will use this same $P$ for all three coefficient sheaves.",
+   "text": "Apply the ordinary flat-term tensor sequence to the supplied P, obtaining the quotient-normalized ring maps, cochain maps, their formulas and short exactness.",
    "uses": [
-    "lem-pc-kflat-resolution"
+    "lem-pe-successive-quotient-flat-tensor-sequence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YS, sites-cohomology-lemma-K-flat-resolution."
-   }
+   "elementary": false
   },
   {
-   "text": "Fix $n>1$. Apply [lem-pe-successive-quotient-flat-complex-sequence] to $B,t,n,P$. Its canonical quotient maps make the endpoint tensors $R_n$-complexes, and it gives the degreewise short exact sequence $0\\to\\operatorname{Res}C_{n-1}\\xrightarrow{\\alpha}C_n\\xrightarrow{\\beta}\\operatorname{Res}C_1\\to0$, where $C_j=R_j\\otimes_BP$, with the specified multiplication and quotient formulas.",
-   "uses": [
-    "lem-pe-successive-quotient-flat-complex-sequence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-    "place": "Second paragraph, coefficient exact sequence tensored termwise with the flat-term representative."
-   }
-  },
-  {
-   "text": "The smallness assumption makes $\\operatorname{Mod}(R_n)$ abelian [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-complex-ses-triangle] in this category to step 2. It gives a distinguished triangle $Q_n\\operatorname{Res}C_{n-1}\\xrightarrow{Q_n\\alpha}Q_n C_n\\xrightarrow{Q_n\\beta}Q_n\\operatorname{Res}C_1\\xrightarrow{\\delta}(Q_n\\operatorname{Res}C_{n-1})[1]$ directly in $D(R_n)$.",
+   "text": "The site-size assumption makes $\\operatorname{Mod}(R_n)$ abelian [def-weil-sheaf-of-modules-category]. Apply [lem-weil-pbc-complex-ses-triangle] to the degreewise short exact sequence from step 1 in this category. With $Q_n$ denoting its derived localization this gives a distinguished triangle $Q_nC_{n-1}\\xrightarrow{Q_n\\alpha}Q_nC_n\\xrightarrow{Q_n\\beta}Q_nC_1\\xrightarrow{\\delta}(Q_nC_{n-1})[1]$ in $D(R_n)$. In particular the connecting morphism is obtained in the category of $R_n$-modules itself; no lifting of a triangle from $D(B)$ is being asserted.",
    "uses": [
     "def-weil-sheaf-of-modules-category",
     "lem-weil-pbc-complex-ses-triangle"
@@ -48,44 +33,27 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0152, derived-lemma-derived-canonical-delta-functor."
+    "place": "Tag 0152, derived-lemma-derived-canonical-delta-functor, applied to Mod(R_n)."
    }
   },
   {
-   "text": "Apply [lem-pe-restricted-kflat-tensor-identification] with $A=R_n$ and $S=R_{n-1},R_n,R_1$, taking $v$ to be the canonical quotients or the identity. The three objects in step 3 identify with $\\operatorname{Res}K_{n-1},K_n,\\operatorname{Res}K_1$. Apply its coefficient-map equation to $h=a$ and $h=b$ from step 2: these are $R_n$-linear, though $a$ need not be a ring map. The first two arrows then have formulas $p\\otimes\\bar c\\mapsto p\\otimes\\overline{tc}$ and $p\\otimes\\bar c\\mapsto p\\otimes\\bar c$ on the second tensor factor.",
+   "text": "For each specified derived model F, the counit on the K-flat P is invertible. The quasi-isomorphism f gives Q(P) isomorphic to Q(G), and e identifies Q(G) with K. The inverse of the image of this isomorphism under F.T, followed by the invertible counit, is the required e_j; cancellation proves the exact prescribed counit equation. Package these three computations with the SES triangle and the given normalized maps.",
    "uses": [
-    "lem-pe-restricted-kflat-tensor-identification"
+    "lem-pur-derived-change-of-rings"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 06YY and the scalar-first/restricted K-flat comparison; tensor exchange from sites-modules.tex Tag 03EK."
-   }
-  },
-  {
-   "text": "Write the three isomorphisms of step 4 as $i_-:X_-\\to\\operatorname{Res}K_{n-1}$, $i_0:X_0\\to K_n$, $i_1:X_1\\to\\operatorname{Res}K_1$. Use first arrow $i_0(Q_n\\alpha)i_-^{-1}$, second arrow $i_1(Q_n\\beta)i_0^{-1}$ and connecting map $i_-[1]\\,\\delta\\,i_1^{-1}$. This triangle is isomorphic to step 3, hence distinguished by [def-weil-abstract-derived-category]. The construction applies to every flat-term K-flat resolution, since only these properties of $P$ were used; no bound or completeness was imposed.",
-   "uses": [
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05RU, derived category distinguished triangles are closed under isomorphism."
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "lem-pc-kflat-resolution",
-  "lem-pe-successive-quotient-flat-complex-sequence",
+  "lem-pe-successive-quotient-flat-tensor-sequence",
   "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-complex-ses-triangle",
-  "lem-pe-restricted-kflat-tensor-identification",
-  "def-weil-abstract-derived-category"
+  "lem-pur-derived-change-of-rings"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-prop-integral-criterion/sk-prop-integral-criterion-reductions.proof.md",
-  "place": "Second paragraph, coefficient exact sequence and derived tensor triangle; assembly through the two Q33 statement-only helper nodes and Stacks 06YS and 0152."
+  "place": "Separate the ordinary flat-term tensor sequence from the standard SES triangle and the three counit computations."
  },
  "mathlib_searches": [
   {
@@ -206,7 +174,6 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-kflat-resolution",
   "lem-pur-derived-change-of-rings"
  ],
  "reviewed": {
@@ -222,9 +189,6 @@
   "declaration": "SheafOfModules.successive_quotient_linear_triangle",
   "declarations": [
    "SheafOfModules.successiveQuotientLocalization",
-   "SheafOfModules.successiveQuotientTensorModel",
-   "SheafOfModules.successiveQuotientTensorSection",
-   "SheafOfModules.successiveQuotientRestrictedModel",
    "SheafOfModules.SuccessiveQuotientLinearTriangle",
    "SheafOfModules.successive_quotient_linear_triangle"
   ],
@@ -234,7 +198,7 @@
   "by": "N9",
   "date": "2026-10-21",
   "existing": false,
-  "note": "The triangle is displayed on termwise-restricted flat-term K-flat representatives, as the node specifies. The three computation isomorphisms are fixed by the resolution and the universal derived counits. Every representative of every unbounded K and every such resolution is quantified. The quotient maps and tensor arrows are fixed by projection and local-pure-tensor equations."
+  "note": "The triangle is displayed on termwise-restricted flat-term K-flat representatives, as the node specifies. The three computation isomorphisms are fixed by the resolution and the universal derived counits. Every representative of every unbounded K and every such resolution is quantified. The quotient maps and tensor arrows are fixed by projection and local-pure-tensor equations. The three typed model definitions are hosted verbatim by SuccessiveQuotientFlatTensorSequence and publicly re-exported here; all existing names, signatures and bodies remain the same."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
@@ -244,5 +208,15 @@
   "result": "pass",
   "note": "Clause-by-clause match. R_j = principalPowerRingQuotient: CommRingCat sheafification of B(U)/(t_U^j), real data. The rPrev/rOne quotient maps are pinned by the projections; the e_j isos are pinned by the counit along f. Every representative and every flat-term K-flat resolution is quantified. Res is restrictScalars applied termwise. The triangle is distinguished in D(R_n); alpha/beta are pinned by pure-tensor formulas [b]x->[tb]x and [b]x->[b]x; delta is existential as in the node. No extra hypotheses; HasSheafify CommRingCat holds for essentially small sites. Edge cases (t unit, t=0, n=2, unbounded, universes) are covered. H4: no duplicate quotient ring sheaf in side-live, run snapshots or Mathlib. Records: only lean and stmt_deps (+ the new node) change; statements verbatim; dependency records identical to side-live. nt_compile --json clean (2.5 s / 7.7 s). Advisory: changeOfRingsPresheaf owner (def-pur-sheaf-tensor-product) is a transitive stmt_dep only; the new node cites no [id]; proof-only imports kept; a later bridge to constant O_E/pi^n coefficients is needed in the parent."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-86c6d",
+  "group": "Q3",
+  "result": "pass",
+  "landing": "20261021T111443-L-148638",
+  "kind": "interface",
+  "note": "independent cc review: item signature and moved Models section byte-identical to live (diff; #check confirms the extra HasSheafify CommRingCat section variable is not added); item proof = flat tensor sequence + triangleOfSES + counit computation, matching the node steps and proof_deps; new node lean.statement = Lean signature; sorryAx only from published PrincipalPowerQuotients/SiteTensorFunctoriality holes"
+ }
 }
