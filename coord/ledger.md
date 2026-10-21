@@ -22318,3 +22318,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:42 L: returned deliver/NQ/def-per-support-condition (reviewer RETURN: I read the item in full; the delivery adds no new nodes. Support half (SuppCon ⇔ dim Supp H^{-i}K ≤ i, closed rational-f)
 - 11:43 L: merged deliver/Q34/lem-sf-complete-top-residue-cell-cone (stage 2; reviewer FIX; parallel immutable checks)
 - 11:45 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
+- 11:45 L: returned deliver/Q158/lem-weil-pbc-raw-restricted-class-normalization (reviewer RETURN: L: independent stage-2 immutable head bc0785c3579e: H2: delivery adds theorem stmt_dep sbc-lem-higher-direct-image-presh)
