@@ -23442,3 +23442,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:12 L: returned deliver/Q02/lem-sfb-prime-to-ell-derived-invariants-reduction (reviewer RETURN: L: independent stage-2 immutable head 5d0a89048873: H2: stmt_dep lem-sfb-condensed-derived-invariant-bar is unused: its )
 - 19:12 L: returned deliver/Q26/lem-sfb-closed-test-derived-exchange-model (reviewer RETURN: L: independent stage-2 immutable head 6c68d8543442: H2: stmt_deps cite theorem node sk-lem-formal-closed-support, but th)
 - 19:12 L: returned deliver/NB/lem-sfb-internal-homogeneous-functions-injective (reviewer RETURN: L: independent stage-2 immutable head 7f48924c142b: H2/H4: the worker added theorem node lem-sfb-condensed-internal-bar-)
+- 19:12 L: returned deliver/Q08/lem-sfb-proper-open-boundary-zero (reviewer RETURN: L: independent stage-2 immutable head a7ecdd8ffc52: H13/H4: delivery rebinds Q90's landed sk-def-localizing-closure reco)
