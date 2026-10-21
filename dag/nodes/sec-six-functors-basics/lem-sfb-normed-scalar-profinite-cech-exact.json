@@ -9,11 +9,111 @@
  },
  "stmt_deps": [
   "def-weil-size-convention",
-  "def-sfb-continuous-map-condensed-ring"
+  "def-sfb-continuous-map-condensed-ring",
+  "def-weil-l-adic-coefficient-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $P_r=T_S^r$. Repeatedly apply [lem-sfb-finite-quotient-fiber-product] to $P_{r+1}=P_r\\times_S T$, starting with $P_1=T$. It gives the compact Hausdorff totally disconnected topology on every $P_r$; the tuple identification and its inverse are the coordinate maps. Deleting a coordinate is continuous. Thus every displayed differential is continuous. In $d_{k+1}d_k$, deleting positions $i<j$ in the two possible orders gives the same function with opposite signs $(-1)^{i+j-1}$ and $(-1)^{i+j}$, so $d_{k+1}d_k=0$. If $T=S=\\varnothing$, every cochain group is zero and $g=0$ proves the claim. We may henceforth work with nonempty $S$ (surjectivity makes $T$ nonempty).",
+   "uses": [
+    "lem-sfb-finite-quotient-fiber-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(2)–(4), explicit Cech expansion: domains and differentials. Profinite fibre products are the Stacks 08ZY/0A2P input recorded by the cited node."
+   }
+  },
+  {
+   "text": "First let $M$ be any finite discrete abelian group and let $c\\in C(P_{n+1},M)$ be a cocycle, with $n\\geq1$. Apply [lem-sfb-finite-valued-cech-cocycle-descent] to obtain $q_0:T_0\\twoheadrightarrow S_0$, $a,b$ and $c_0$ with $d_nc_0=0$. Choose a set section $\\sigma:S_0\\to T_0$; it is continuous since both sets are finite discrete. Put\n$$v_0(x_0,\\ldots,x_{n-1})=c_0(\\sigma(q_0(x_0)),x_0,\\ldots,x_{n-1}).$$\nFor an equal-image tuple $(x_0,\\ldots,x_n)$, the equation $d_nc_0=0$ on $(\\sigma(q_0(x_0)),x_0,\\ldots,x_n)$ reads\n$$c_0(x_0,\\ldots,x_n)=\\sum_{j=0}^n(-1)^j c_0(\\sigma(q_0(x_0)),x_0,\\ldots,\\widehat{x_j},\\ldots,x_n).$$\nAll base images are equal, so the sum is $d_{n-1}v_0$. Precompose $v_0$ with $a$ in every coordinate. The resulting continuous $v:P_n\\to M$ satisfies $d_{n-1}v=c$, since coordinate deletion commutes with $a$. This proves the finite-coefficient assertion used below, including $n=1$.",
+   "uses": [
+    "lem-sfb-finite-valued-cech-cocycle-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(2), discrete coefficients: agent expansion through finite quotient descent and the explicit extra-coordinate contraction."
+   }
+  },
+  {
+   "text": "Use the coefficient datum [def-weil-l-adic-coefficient-extension], and put $O=\\mathcal O_E$. By [lem-weil-l-adic-extension-integers-dvr] choose a nonzero uniformizer $\\pi$ with $0<|\\pi|_E<1$ and $\\pi O=\\mathfrak m_E$; $O$ is a DVR with finite residue field. By [lem-weil-valued-dvr-finite-quotients], $A_m=O/\\pi^mO$ is finite for every $m\\geq1$ and $p_m:A_{m+1}\\to A_m$ is surjective. By [lem-sfb-integers-profinite-tower], the reduction map\n$$O\\xrightarrow{\\sim}\\varprojlim_{m\\geq1}A_m$$\nis a topological ring isomorphism for the discrete quotient topologies. In particular each reduction $O\\to A_m$ is continuous and the reductions jointly distinguish elements of $O$.",
+   "uses": [
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-valued-dvr-finite-quotients",
+    "lem-sfb-integers-profinite-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(4), the sequential limit of discrete integral quotients: local field data and the topological inverse-limit input are supplied by the cited arithmetic nodes."
+   }
+  },
+  {
+   "text": "Temporarily suppose $f:P_{n+1}\\to O$ is a continuous cocycle. Write $f_m$ for its reduction in $A_m$; then $d_nf_m=0$ because reduction is additive. Step 2 with $M=(A_1,+)$ gives a continuous $g_1:P_n\\to A_1$ with $d_{n-1}g_1=f_1$. We construct by induction continuous $g_m:P_n\\to A_m$ with\n$$d_{n-1}g_m=f_m,\\qquad p_mg_{m+1}=g_m.$$\nThe first equation at $m=1$ is the base case just obtained. The next two steps give the induction step for every $m\\geq1$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(4), agent expansion: initialize a compatible sequence of integral primitives, rather than choosing unrelated primitives at every level."
+   }
+  },
+  {
+   "text": "Assume $g_m$ is constructed. Choose a set section $s_m:A_m\\to A_{m+1}$ of the surjection $p_m$ from [lem-weil-valued-dvr-finite-quotients]; it is continuous between finite discrete spaces. Thus $\\widetilde g=s_m\\circ g_m$ is a continuous lift; no additivity of $s_m$ is assumed. Set\n$$r=d_{n-1}\\widetilde g-f_{m+1}.$$\nThe additive map $p_m$ sends $r$ to $d_{n-1}g_m-f_m=0$. Hence $r$ is a continuous cochain with values in the finite discrete abelian group $K_m=\\ker(p_m)$: it is continuous as a map to the subset $K_m\\subseteq A_{m+1}$. Further,\n$$d_nr=d_nd_{n-1}\\widetilde g-d_nf_{m+1}=0$$\nby step 1 and the cocycle equation for $f$. The same equation holds in $K_m$ because its inclusion is injective.",
+   "uses": [
+    "lem-weil-valued-dvr-finite-quotients"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(4), explicit profinitely split coefficient transition and its finite-kernel obstruction cocycle."
+   }
+  },
+  {
+   "text": "Apply the finite-coefficient result of step 2 to $M=K_m$ and this degree-$n$ cocycle $r$. It gives continuous $v:P_n\\to K_m$ with $d_{n-1}v=r$. Let $\\iota_m:K_m\\hookrightarrow A_{m+1}$ be the inclusion and define\n$$g_{m+1}=\\widetilde g-\\iota_m v.$$\nThen $p_mg_{m+1}=g_m$, since $p_m\\iota_m=0$, and\n$$d_{n-1}g_{m+1}=d_{n-1}\\widetilde g-\\iota_mr=f_{m+1}.$$\nThis completes the stated induction. It works in degree $n=1$: it solves a $K_m$-valued degree-one cocycle by a degree-zero cochain, and uses no negative degree or degree-zero vanishing claim.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(4), explicit finite-kernel correction producing compatible primitives."
+   }
+  },
+  {
+   "text": "For each $x\\in P_n$, the compatible tuple $(g_m(x))_{m\\geq1}$ lies in $\\varprojlim_mA_m$. The map to the product is continuous because each coordinate $g_m$ is continuous; corestricting to the compatibility subspace preserves continuity. Compose with the inverse homeomorphism in [lem-sfb-integers-profinite-tower] to obtain a continuous $g_O:P_n\\to O$. For every $m$, the reduction of $d_{n-1}g_O$ is $d_{n-1}g_m=f_m$, since the reduction maps preserve finite signed sums. The ring-isomorphism part of that node makes the reductions jointly injective, so $d_{n-1}g_O=f$ as actual $O$-valued functions. This proves the integral assertion without any exchange of cohomology and inverse limits.",
+   "uses": [
+    "lem-sfb-integers-profinite-tower"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(4), explicit inverse-limit reconstruction and equality checked in every finite quotient."
+   }
+  },
+  {
+   "text": "Return to the given $E$-valued cocycle $f$. The open sets\n$$U_k=\\{x\\in P_{n+1}:|f(x)|_E<|\\pi|_E^{-k}\\}\\qquad(k\\geq0)$$\ncover $P_{n+1}$ because $0<|\\pi|_E<1$. Compactness of $P_{n+1}$ from [lem-sfb-finite-quotient-fiber-product] gives a finite subcover. The $U_k$ are increasing; take its largest index $k$. Then $|\\pi^kf(x)|_E<1$ for every $x$, so $h=\\pi^kf$ is a continuous $O$-valued cocycle, with $O$ carrying its subspace topology. The integral result of steps 4–7 gives continuous $u:P_n\\to O$ with $d_{n-1}u=h$. Set $g=\\pi^{-k}u:P_n\\to E$. Multiplication by this fixed field element is continuous, and linearity of the finite signed sum gives\n$$d_{n-1}g=\\pi^{-k}d_{n-1}u=\\pi^{-k}\\pi^kf=f.$$\nNo local constancy is imposed on $f,u$ or $g$.",
+   "uses": [
+    "lem-sfb-finite-quotient-fiber-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.3.9(3), localization from integral to field coefficients: compactness supplies one denominator, followed by the explicit scalar cancellation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-finite-quotient-fiber-product",
+  "lem-sfb-finite-valued-cech-cocycle-descent",
+  "def-weil-l-adic-coefficient-extension",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-weil-valued-dvr-finite-quotients",
+  "lem-sfb-integers-profinite-tower"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Lemma 4.3.9(2)–(4), printed page 33. Agent-written explicit Cech proof along its discrete / sequential integral limit / localization route; no claim that the paper states this pointwise Cech lemma verbatim."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -230,10 +330,276 @@
    },
    "date": "2026-10-22",
    "verdict": "no match: constructors of condensed modules and Cech complexes, conditional light internal-projectivity criteria, locally constant integer sequences, singular homology or completeness of a field do not state positive continuous Cech exactness or this derived comparison for the variable sheaf C(-,E)"
+  },
+  {
+   "tool": "grep",
+   "query": "cechComplexFunctor|Cech.*(exact|acyclic)|ContinuousMap.*(Cech|cocycle)",
+   "results": {
+    "t": "2026-10-21T19:01:48Z",
+    "tool": "grep",
+    "query": "cechComplexFunctor|Cech.*(exact|acyclic)|ContinuousMap.*(Cech|cocycle)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 2,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean",
+     "Mathlib/CategoryTheory/Sites/SheafCohomology/Cech.lean"
+    ],
+    "digest": "7f32ed786627d148"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"cechComplexFunctor\"",
+   "results": {
+    "t": "2026-10-21T19:01:49Z",
+    "tool": "loogle",
+    "query": "\"cechComplexFunctor\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "CategoryTheory.cechComplexFunctor"
+    ],
+    "digest": "4596b05316f088d8"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite valued continuous Cech cocycle on a surjective map of profinite sets descends to a cocycle on a surjection of finite sets",
+   "results": {
+    "t": "2026-10-21T19:01:51Z",
+    "tool": "leanfinder",
+    "query": "A finite valued continuous Cech cocycle on a surjective map of profinite sets descends to a cocycle on a surjection of finite sets",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.IndexFunctor.surjective_π_app",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "LightProfinite.surjective_transitionMap",
+     "LightProfinite.proj_surjective",
+     "CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective",
+     "CochainComplex.HomComplex.Cocycle.toSingleMk_surjective",
+     "LightProfinite.surjective_transitionMapLE"
+    ],
+    "digest": "92f60fba543860da"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous Cech cocycles of a surjection of profinite spaces with coefficients in a finite extension of Q p are continuous coboundaries",
+   "results": {
+    "t": "2026-10-21T19:02:07Z",
+    "tool": "leansearch",
+    "query": "Continuous Cech cocycles of a surjection of profinite spaces with coefficients in a finite extension of Q p are continuous coboundaries",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ContinuousCohomology.MultiInd.complex",
+     "Profinite.asLimit",
+     "Profinite.lim",
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "Profinite.isoAsLimitConeLift",
+     "Profinite.asLimitConeIso",
+     "Profinite.NobelingProof.CC_exact",
+     "cyclotomicCharacter.continuous"
+    ],
+    "digest": "6d1be54ce15d2faa"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An alternating cocycle on the Cech nerve of a profinite surjection with complete nonarchimedean scalar coefficients is exact",
+   "results": {
+    "t": "2026-10-21T19:02:08Z",
+    "tool": "leanfinder",
+    "query": "An alternating cocycle on the Cech nerve of a profinite surjection with complete nonarchimedean scalar coefficients is exact",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.succ_exact",
+     "Profinite.NobelingProof.CC_exact",
+     "ChainComplex.alternatingConst_exactAt",
+     "AlgebraicTopology.singularChainComplexFunctor_exactAt_of_totallyDisconnectedSpace",
+     "Algebra.H1Cotangent.exact_map_δ",
+     "ContinuousCohomology.MultiInd.d_comp_d",
+     "CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_exact",
+     "Algebra.Generators.H1Cotangent.exact_map_δ"
+    ],
+    "digest": "08d6a4f4e0b8c066"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
+  },
+  {
+   "tool": "grep",
+   "query": "exists_locallyConstant|Cech|[Cc]ech|[Cc]ocycle",
+   "results": {
+    "t": "2026-10-21T19:04:00Z",
+    "tool": "grep",
+    "query": "exists_locallyConstant|Cech|[Cc]ech|[Cc]ocycle",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/Projective.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/CofilteredLimit.lean",
+     "Mathlib/Topology/Category/Profinite/Extend.lean",
+     "Mathlib/Topology/Category/Profinite/Nobeling/Span.lean"
+    ],
+    "digest": "4c34870224dc46b3"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous finite coefficient cocycles on the Cech nerve of a profinite surjection descend to a finite quotient surjection with the cocycle equation",
+   "results": {
+    "t": "2026-10-21T19:04:00Z",
+    "tool": "leansearch",
+    "query": "Continuous finite coefficient cocycles on the Cech nerve of a profinite surjection descend to a finite quotient surjection with the cocycle equation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "ProfiniteGrp.toLimit_fun_continuous",
+     "continuousCohomology",
+     "CochainComplex.HomComplex.Cocycle.isKernel",
+     "ProfiniteGrp.isoLimittoFiniteQuotientFunctor",
+     "groupCohomology.cocyclesMkOfCompEqD",
+     "ContinuousCohomology.homogeneousCochains",
+     "ProfiniteGrp.toLimit",
+     "CategoryTheory.PresheafOfGroups.OneCocycle.IsCohomologous"
+    ],
+    "digest": "1f4282da6e335295"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Profinite\", \"LocallyConstant\"",
+   "results": {
+    "t": "2026-10-21T19:04:00Z",
+    "tool": "loogle",
+    "query": "\"Profinite\", \"LocallyConstant\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Profinite.exists_locallyConstant",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "Profinite.exists_locallyConstant_fin_two",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat",
+     "LightCondMod.LocallyConstant.instFaithfulSheafLightProfiniteCoherentTopologyTypeConstantSheaf",
+     "LightCondMod.LocallyConstant.instFullSheafLightProfiniteCoherentTopologyTypeConstantSheaf",
+     "LightCondMod.LocallyConstant.instFaithfulModuleCatSheafLightProfiniteCoherentTopologyConstantSheaf"
+    ],
+    "digest": "3109b02c60515afd"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a surjection of profinite sets every continuous finite valued function on a fiber power factors through a finite quotient surjection preserving a given Cech cocycle equation",
+   "results": {
+    "t": "2026-10-21T19:04:01Z",
+    "tool": "leanfinder",
+    "query": "For a surjection of profinite sets every continuous finite valued function on a fiber power factors through a finite quotient surjection preserving a given Cech cocycle equation",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "Profinite.IndexFunctor.surjective_π_app",
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Profinite.NobelingProof.iso_map",
+     "LightProfinite.surjective_transitionMap",
+     "Profinite.effectiveEpiFamily_of_jointly_surjective",
+     "Profinite.lift",
+     "Profinite.NobelingProof.CC_exact"
+    ],
+    "digest": "11b1b197f487d169"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
+  },
+  {
+   "tool": "grep",
+   "query": "cocycle|cech|Cech",
+   "results": {
+    "t": "2026-10-21T19:04:31Z",
+    "tool": "grep",
+    "query": "cocycle|cech|Cech",
+    "sub": "Topology/Category/Profinite",
+    "ok": true,
+    "n_hits": 1,
+    "note": "",
+    "top": [
+     "Mathlib/Topology/Category/Profinite/Projective.lean"
+    ],
+    "digest": "bee7cf4ad316e555"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite valued continuous cocycle on the nerve of a profinite surjection is the pullback of a cocycle on the nerve of a finite surjection",
+   "results": {
+    "t": "2026-10-21T19:04:33Z",
+    "tool": "leanfinder",
+    "query": "A finite valued continuous cocycle on the nerve of a profinite surjection is the pullback of a cocycle on the nerve of a finite surjection",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Profinite.exists_locallyConstant_finite_aux",
+     "Profinite.NobelingProof.fin_comap_jointlySurjective",
+     "LightProfinite.surjective_transitionMap",
+     "Profinite.exists_locallyConstant_finite_nonempty",
+     "Profinite.exists_locallyConstant_fin_two",
+     "LightProfinite.surjective_transitionMapLE",
+     "CochainComplex.HomComplex.Cocycle.fromSingleMk_surjective",
+     "LightCondensed.isLocallySurjective_iff_locallySurjective_on_lightProfinite"
+    ],
+    "digest": "c63f3002d5ce309a"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match: Cech-complex construction, locally constant factorization, group cohomology, Nobeling sequences and singular chains do not assert this exactness for all continuous finite ell-adic field valued cochains"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-normed-scalar-profinite-hom-acyclic",
@@ -259,5 +625,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-normed-scalar-profinite-cech-exact",
+  "worker": "stage1",
+  "summary": "ND: proved by finite cocycle descent and finite extra-coordinate contraction, compatible integral primitives corrected through finite coefficient kernels, topological inverse-limit reconstruction, and one compact denominator. One strictly subsidiary statement-only finite-descent node; reused the existing integral tower and arithmetic inputs. Statement unchanged; all continuous functions and empty spaces retained. No Lean writing or compilation.",
+  "blueprint": "Realizes paragraph (3) of main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, the finite E open-direct-image analytic input in the inherited from.place/via chain. The ancestor command returns None for this detached ancestry; its inherited null node value and exact source place are preserved. Whole-blueprint searches found no same statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-finite-quotient-fiber-product",
+    "why": "Generic compactness of profinite fibre products, iterated to the finite tuple domains; it changes no geometric direct-image route."
+   },
+   {
+    "node": "lem-weil-l-adic-extension-integers-dvr",
+    "why": "Generic local field arithmetic supplying the DVR, finite residue field and uniformizer; no such arithmetic lemma is in this unit."
+   },
+   {
+    "node": "lem-sfb-integers-profinite-tower",
+    "why": "Generic topological integral coefficient inverse-limit presentation; reconstructs the compatible functions without any geometric route replacement."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-finite-quotient-fiber-product",
+  "lem-weil-l-adic-extension-integers-dvr",
+  "lem-sfb-integers-profinite-tower"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-ND-77fe211b8",
+  "group": "ND",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-77fe211b8 (reviewer sub-agent of L); spot-checked: Read the item and the new node in full, every cited statement, Bhatt–Scholze Lemma 4.3.9 with its proof (p.33), and the Stacks tags 08ZY/08ZZ/0A2P/0A2R. The item statement is unchanged and no repair note applies. Item steps: step 1 iterates lem-sfb-finite-quotient-fiber-product on P_{r+1}=P_r×_S T, and the d²=0 signs and the empty case are correct. Step 2's contraction v0=c0(σq0x0,…) is correct; it needs d c0=0 on the whole finite fibre power, and the new node supplies exactly that. Step 3's citations say what is used (DVR and uniformizer, finite A_m with surjective transitions, O→lim A_m a ring isomorphism and homeomorphism). Steps 4–6 set up the induction explicitly: a non-additive set-section lift, a cocycle error in the finite kernel, and a correction preserving both invariants. Step 7 rebuilds the O-valued primitive through the inverse homeomorphism and checks the equation via joint injectivity of the reductions. Step 8 bounds f by compactness, which gives one π^k denominator. New node lem-sfb-finite-valued-cech-cocycle-descent is true: compatible finite clopen partition pairs are cofinal, lim of the finite fibre powers is T_S^r, c factors through a finite stage, and the sets where the extended c0 fails the cocycle equation can't all be nonempty, by 0A2R. Small cases checked: empty spaces, a point with a constant cocycle (forces m=0 for odd n), M=0, n=1. It is statement-only, self-contained, strictly smaller than the item, and not a clause of the parent. rg -L DAG searches found no duplicate. Tool uses accepted as generic black boxes: fiber-product, integers-dvr, integers-profinite-tower. Coefficients are finite E with its norm topology, the statement is not weakened, there is no base-change morphism, no SGA, no cycle, and proof_deps equals the union of uses. from.node null is inherited from the detached chain. Advisory: the new node's source could also name Stacks 0A2R."
  }
 }
