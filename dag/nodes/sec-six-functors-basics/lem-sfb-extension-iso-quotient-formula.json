@@ -1,0 +1,75 @@
+{
+ "id": "lem-sfb-extension-iso-quotient-formula",
+ "kind": "statement",
+ "title": "Quotient formula for extension along an invertible scalar map",
+ "statement": "Let $\\mathcal C$ be a symmetric monoidal closed category with equalizers and coequalizers, in which tensoring on either side preserves colimits. Let $R,S$ be commutative monoid objects ([sk-def-sfb-ring-object]) and $\\varphi:R\\xrightarrow{\\sim}S$ an isomorphism of monoid objects. Module objects and their morphisms are those of [sk-def-sfb-module-objects]. Use restriction, extension and coextension of scalars as in [sk-def-sfb-change-of-scalars]. For an $R$-module $N$ with action $\\gamma_N:R\\otimes N\\to N$, put $T_N=\\operatorname{Res}_{\\varphi^{-1}}N$; its underlying object is $N$ and its $S$-action is $\\beta_N=\\gamma_N\\circ(\\varphi^{-1}\\otimes\\mathrm{id}_N)$. Write $\\eta_S:\\mathbf1\\to S$ for the unit and $\\lambda_A:\\mathbf1\\otimes A\\xrightarrow{\\sim}A$ for the left unitor.\n\nLet $F_N=\\operatorname{Ext}_{\\varphi}N=S\\otimes_R N$, with coequalizer map $q_N:S\\otimes N\\to F_N$. The action $\\beta_N$ coequalizes the two maps defining $F_N$. The component $p_N:F_N\\xrightarrow{\\sim}T_N$ of the adjoint-uniqueness comparison of [def-sfb-modobj-extension-along-iso] is the unique factor satisfying\n$$p_N\\circ q_N=\\beta_N.$$\nIts inverse has underlying morphism\n$$s_N=q_N\\circ(\\eta_S\\otimes\\mathrm{id}_N)\\circ\\lambda_N^{-1}:N\\to F_N.$$\nWith the $S$-action of $T_N$ on the domain of $s_N$, both $p_N$ and $s_N$ are $S$-linear, and\n$$p_N\\circ s_N=\\mathrm{id}_{T_N},\\qquad s_N\\circ p_N=\\mathrm{id}_{F_N}.$$\nThe $p_N$ and $s_N$ are natural in $R$-module morphisms $N\\to N'$. Thus the extension comparison is normalized by its value on the coequalizer map, and its inverse is insertion of the unit followed by that coequalizer map.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek-adjunction.proof.md",
+  "place": "Proof, last sentence: the two comparisons through restriction along the inverse; explicit component normalization of def-sfb-modobj-extension-along-iso"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-extension-along-iso"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For module objects in a monoidal category and an isomorphism of algebra objects, the relative tensor product is identified with the original module by the action through the inverse algebra map, inverse given by the unit tensor",
+   "results": "8 hits: TensorProduct.AlgebraTensorModule.rid_symm_apply, Submodule.rTensorOne_symm_apply, TensorProduct.lid'_symm_apply, TensorProduct.AlgebraTensorModule.rid, Algebra.TensorProduct.lid_symm_apply, Submodule.lTensorOne_symm_apply, Algebra.TensorProduct.rid_symm_apply, TensorProduct.lid'",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"extendScalars\", \"Iso\"",
+   "results": "7 hits: ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat, Subfield.extendScalars.orderIso, IntermediateField.extendScalars.orderIso, Subfield.extendScalars.orderIso_apply, Subfield.extendScalars.orderIso_symm_apply, IntermediateField.extendScalars.orderIso_apply, IntermediateField.extendScalars.orderIso_symm_apply_coe",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsIso|coextendScalarsIso|extend.*comap|coextend.*comap",
+   "results": "10 hits: Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean, Mathlib/Topology/Algebra/IsUniformGroup/Basic.lean, Mathlib/RingTheory/FractionalIdeal/Extended.lean, Mathlib/Topology/UniformSpace/UniformEmbedding.lean, Mathlib/Topology/UniformSpace/UniformEmbedding.lean, Mathlib/Topology/DenseEmbedding.lean, Mathlib/Topology/DenseEmbedding.lean, Mathlib/Topology/DenseEmbedding.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coequalizer defining extension of scalars along an isomorphism of internal ring objects has inverse the unit tensor and forward map the inverse scalar action",
+   "results": "8 hits: LinearEquiv.extendScalarsOfSurjective_symm, ModuleCat.extendScalarsId_inv_app_apply, ModuleCat.ExtendRestrictScalarsAdj.homEquiv_symm_apply, ModuleCat.restrictScalarsId'App_inv_apply, ModuleCat.extendScalars_comp_id, ModuleCat.extendScalars_id_comp, ModuleCat.extendScalarsId, LinearEquiv.extendScalarsOfIsLocalization_symm_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The balanced tensor coequalizer for change of internal scalars along an invertible monoid morphism collapses by the twisted action, with inverse insertion of the monoid unit",
+   "results": "8 hits: π_tensor_id_preserves_coequalizer_inv_desc, id_tensor_π_preserves_coequalizer_inv_desc, Bimod.TensorBimod.actRight_one', Bimod.TensorBimod.one_act_left', Bimod.TensorBimod.π_tensor_id_actRight, Bimod.tensorBimod_X, Bimod.TensorBimod.actLeft, π_tensor_id_preserves_coequalizer_inv_colimMap_desc",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-def-sfb-module-lower-shriek",
+  "date": "2026-10-21",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-module-lower-shriek",
+ "blueprint": {
+  "from": {
+   "node": "sk-def-sfb-module-lower-shriek",
+   "place": "Summary proof, adjunction sentence: identifying coextension with extension along the invertible coefficient morphism; balanced quotient and its inverse",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

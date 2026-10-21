@@ -1,0 +1,75 @@
+{
+ "id": "lem-sfb-coextension-iso-evaluation-formula",
+ "kind": "statement",
+ "title": "Evaluation formula for coextension along an invertible scalar map",
+ "statement": "Let $\\mathcal C$ be a symmetric monoidal closed category with equalizers and coequalizers, in which tensoring on either side preserves colimits. Let $R,S$ be commutative monoid objects ([sk-def-sfb-ring-object]) and $\\varphi:R\\xrightarrow{\\sim}S$ an isomorphism of monoid objects. Module objects and their morphisms are those of [sk-def-sfb-module-objects]. Use restriction, extension and coextension of scalars as in [sk-def-sfb-change-of-scalars]. For an $R$-module $N$ with action $\\gamma_N:R\\otimes N\\to N$, put $T_N=\\operatorname{Res}_{\\varphi^{-1}}N$; its underlying object is $N$ and its $S$-action is $\\beta_N=\\gamma_N\\circ(\\varphi^{-1}\\otimes\\mathrm{id}_N)$. Write $\\eta_S:\\mathbf1\\to S$ for the unit and $\\lambda_A:\\mathbf1\\otimes A\\xrightarrow{\\sim}A$ for the left unitor.\n\nLet $E_N=\\operatorname{Coext}_{\\varphi}N=\\operatorname{Hom}_R(S,N)$, with equalizer inclusion $\\iota_N:E_N\\to\\underline{\\operatorname{Hom}}(S,N)$ and restricted evaluation $v_N:S\\otimes E_N\\to N$. The component $e_N:E_N\\xrightarrow{\\sim}T_N$ of the adjoint-uniqueness comparison of [def-sfb-modobj-coextension-along-iso] has underlying morphism\n$$e_N=v_N\\circ(\\eta_S\\otimes\\mathrm{id}_{E_N})\\circ\\lambda_{E_N}^{-1}.$$\nThe transpose $\\widehat\\beta_N:N\\to\\underline{\\operatorname{Hom}}(S,N)$ factors uniquely through $\\iota_N$ as $d_N:N\\to E_N$. With the $S$-action of $T_N$ on its domain, $d_N$ is $S$-linear, $\\iota_N\\circ d_N=\\widehat\\beta_N$, and\n$$e_N\\circ d_N=\\mathrm{id}_{T_N},\\qquad d_N\\circ e_N=\\mathrm{id}_{E_N}.$$\nBoth formulas define natural transformations in $N$; in particular evaluation at the unit is the specified natural isomorphism of $S$-modules, with inverse the factored transpose of $\\beta_N$.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek-adjunction.proof.md",
+  "place": "Proof, last sentence: the two comparisons through restriction along the inverse; explicit component normalization of def-sfb-modobj-coextension-along-iso"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-ring-object",
+  "sk-def-sfb-module-objects",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-modobj-coextension-along-iso"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For internal modules in a closed symmetric monoidal category and an isomorphism of commutative ring objects, evaluation at one identifies coextension of scalars with restriction along the inverse, with inverse the transpose of the twisted module action",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply, ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.RestrictionCoextensionAdj.app', ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, ModuleCat.ihom_ev_app",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coextend\"",
+   "results": "12 hits: ModuleCat.CoextendScalars.obj', ModuleCat.coextendScalars, ModuleCat.instIsRightAdjointCoextendScalars, ModuleCat.restrictCoextendScalarsAdj, ModuleCat.CoextendScalars.map', ModuleCat.CoextendScalars.instCoeFunCarrierObjCoextendScalarsForall, ModuleCat.CoextendScalars.hasSMul, ModuleCat.CoextendScalars.mulAction",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  },
+  {
+   "tool": "grep",
+   "query": "coextend|coextension|coinduct.*[Ii]so",
+   "results": "0 hits: none; directory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation at the unit of a ring object gives an isomorphism from internal coextension to restriction along an inverse ring isomorphism",
+   "results": "8 hits: ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction_hom_apply, ModuleCat.RestrictionCoextensionAdj.counit'_app, ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt, ModuleCat.RestrictionCoextensionAdj.unit'_app, ModuleCat.RestrictionCoextensionAdj.unit', ModuleCat.RestrictionCoextensionAdj.HomEquiv.fromRestriction, ModuleCat.RestrictionCoextensionAdj.HomEquiv.toRestriction, AlgEquiv.moduleEndSelfOp_symm_apply",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "In a symmetric monoidal closed category evaluation at the unit on internal Hom of modules is invertible for an isomorphism of algebra objects and its inverse is the curried action through the inverse algebra map",
+   "results": "8 hits: ModuleCat.monoidalClosedHomEquiv, Rep.MonoidalClosed.linearHomEquivComm_symm_hom, Rep.MonoidalClosed.linearHomEquiv_symm_hom, ModuleCat.ihom_ev_app, ModuleCat.ihom_coev_app, ModuleCat.hom_inv_leftUnitor, ModuleCat.hom_inv_rightUnitor, ModuleCat.instMonoidalClosed",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary ModuleCat formulas, tensor unitors and bimodule coequalizer identities do not give this normalized comparison for internal module objects in arbitrary C"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "sk-def-sfb-module-lower-shriek",
+  "date": "2026-10-21",
+  "group": "Q11"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-def-sfb-module-lower-shriek",
+ "blueprint": {
+  "from": {
+   "node": "sk-def-sfb-module-lower-shriek",
+   "place": "Summary proof, adjunction sentence: identifying coextension with extension along the invertible coefficient morphism; evaluation and its inverse",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ }
+}

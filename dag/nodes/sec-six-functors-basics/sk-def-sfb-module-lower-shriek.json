@@ -60,14 +60,34 @@
    }
   },
   {
-   "text": "Use the adjunction of [def-sfb-module-open-lower-shriek-adjunction] for this same $\\Lambda,j$. Its left functor is the composite in step 3. Its right functor is $\\operatorname{Ext}_{\\alpha_j}\\circ\\operatorname{mapMod}(j^*_{\\Ab})=j^*$, including the natural identification $\\operatorname{Coext}_{\\alpha_j}\\cong\\operatorname{Ext}_{\\alpha_j}$ stated there. Hence it supplies exactly $j_!\\dashv j^*$.",
+   "text": "In $\\mathcal C=\\Sh(U_{\\mathrm{proét}},\\Ab)$ with the tensor of [sk-def-sfb-sheaf-tensor] (essentially small site), [lem-weil-pbc-sheaf-tensor-closed] makes $\\mathcal C$ abelian and closed symmetric monoidal with colimit-preserving tensor; (co)equalizers are (co)kernels of differences. By [sk-def-sfb-coefficient-morphisms] and [lem-sfb-alpha-iso], $\\alpha_j:j^*\\Lambda_X\\to\\Lambda_U$ is an isomorphism of ring objects; $\\Lambda_U$ is commutative ([sk-def-sfb-pulled-back-coefficients]), hence so is $j^*\\Lambda_X$. Apply [lem-sfb-coextension-iso-evaluation-formula] and [lem-sfb-extension-iso-quotient-formula] to $\\varphi=\\alpha_j$: natural $e:\\operatorname{Coext}_{\\alpha_j}\\cong\\operatorname{Res}_{\\alpha_j^{-1}}$ (evaluation at $1$) and $p:\\operatorname{Ext}_{\\alpha_j}\\cong\\operatorname{Res}_{\\alpha_j^{-1}}$ (quotient of the action). Set $\\tau=p^{-1}e$.",
    "uses": [
-    "def-sfb-module-open-lower-shriek-adjunction"
+    "sk-def-sfb-sheaf-tensor",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "sk-def-sfb-coefficient-morphisms",
+    "lem-sfb-alpha-iso",
+    "sk-def-sfb-pulled-back-coefficients",
+    "lem-sfb-coextension-iso-evaluation-formula",
+    "lem-sfb-extension-iso-quotient-formula"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek-adjunction.proof.md",
-    "place": "statement and accompanying proof"
+    "place": "Last sentence; normalized scalar comparisons through inverse restriction"
+   }
+  },
+  {
+   "text": "Compose $\\operatorname{Res}_{\\alpha_j}\\dashv\\operatorname{Coext}_{\\alpha_j}$ ([sk-def-sfb-change-of-scalars]) with the linear adjunction [def-sfb-module-linear-open-lower-shriek] of step 2: $\\Hom(j_!M,N)\\cong\\Hom(M,\\operatorname{Coext}_{\\alpha_j}\\operatorname{mapMod}(j^*_{\\Ab})N)$, natural in $M,N$. Postcomposition with $\\tau$ (inverse: with $\\tau^{-1}$) gives $\\Hom(M,\\operatorname{Ext}_{\\alpha_j}\\operatorname{mapMod}(j^*_{\\Ab})N)=\\Hom(M,j^*N)$ ([def-sfb-module-upper-star]), natural since $\\tau$ is. This is the composite and right-adjoint identification prescribed by [def-sfb-module-open-lower-shriek-adjunction], so $j_!\\dashv j^*$.",
+   "uses": [
+    "sk-def-sfb-change-of-scalars",
+    "def-sfb-module-linear-open-lower-shriek",
+    "def-sfb-module-upper-star",
+    "def-sfb-module-open-lower-shriek-adjunction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek-adjunction.proof.md",
+    "place": "Both sentences: compose Hom bijections and identify the right adjoint by the two normalized scalar comparisons"
    }
   },
   {
@@ -97,14 +117,23 @@
   "lem-sfb-open-projection-formula",
   "def-sfb-module-linear-open-lower-shriek",
   "def-sfb-module-open-lower-shriek",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "sk-def-sfb-coefficient-morphisms",
+  "lem-sfb-alpha-iso",
+  "sk-def-sfb-pulled-back-coefficients",
+  "lem-sfb-coextension-iso-evaluation-formula",
+  "lem-sfb-extension-iso-quotient-formula",
+  "sk-def-sfb-change-of-scalars",
+  "def-sfb-module-upper-star",
   "def-sfb-module-open-lower-shriek-adjunction",
   "def-sfb-module-compactification-lower-shriek",
   "def-sfb-module-lower-shriek"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/sk-def-sfb-module-lower-shriek.proof.md",
-  "place": "Summary proof assembled from the six existing detail nodes; internal linearization, exactness and scalar-adjunction arguments are delegated to their precise statements."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-module-lower-shriek/def-sfb-module-open-lower-shriek-adjunction.proof.md",
+  "place": "The unit summary route with the scalar comparison decomposed into two new statement-only normalization lemmas; existing detail nodes supply all other arguments."
  },
  "mathlib_searches": [
   {
@@ -303,16 +332,26 @@
   "date": "2026-10-21",
   "item": "sk-def-sfb-module-lower-shriek",
   "worker": "stage1",
-  "summary": "Repair of the human re-split request: kept the statement and all Lean/import metadata unchanged. Replaced the 4733-character proof by a short assembly of six already existing detail nodes. In particular the former long step 4 now uses the exact open-adjunction statement, which already includes the scalar adjunction and Coext-to-Ext identification, rather than repeating its ambient-category proof. No new nodes are needed: each extracted argument already has its own blueprint/DAG node. Recorded all six citations verbatim and realized the unit without changing its route.",
-  "blueprint": "The six sentences of the summary proof are realized in order by the projection-formula, linear-open-extension, open-extension, open-adjunction, compactification and chosen-lower-shriek detail nodes. Each is cited directly in the corresponding assembly step."
+  "summary": "Repair of the explicit demand for NEW work items: retain the current statement, searches, Lean bindings and existing six detail nodes; create two statement-only component-normalization lemmas for the inverse-scalar comparison in former long step 4. The parent assembles their evaluation and quotient isomorphisms into Coext-to-Ext and composes the adjunctions. Neither child restates an open-extension or lower-shriek clause.",
+  "blueprint": "All six summary-proof sentences remain realized by their existing detail nodes. The open-adjunction sentence is additionally refined into coextension evaluation and extension quotient normalization, followed by the elementary composition of the two natural Hom bijections.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Ambient abelianity and closed tensor for the pro-etale abelian sheaf category; verifies hypotheses of the two scalar-comparison lemmas."
+   },
+   {
+    "node": "lem-sfb-alpha-iso",
+    "why": "All-condensed-rings coefficient isomorphism, required for the scalar comparison in the unit adjunction route."
+   }
+  ]
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q29-90f8997a8",
-  "group": "Q29",
+  "reviewer": "NT-cc-Q11-ed1ab075c",
+  "group": "Q11",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q29-90f8997a8 (reviewer sub-agent of L); spot-checked: Diff against the earlier node (Q27 run snapshot): statement, stmt_deps, blueprint, import_flags, lean and lean_audit are byte-identical. Only proof, proof_deps, proof_origin and split_report changed; in the unit only realized and realized_by. The proof shrank from 4733 to 1876 characters (longest step 396), as the human's re-split asked. The six steps follow main-20261015 sk-def-sfb-module-lower-shriek.proof.md sentence by sentence and cite its six detail nodes, all of the same unit, so there is no off-unit use and no tool_uses. Each step's claim is in the cited statement: (1) the projection map is the unit-adjoint map, an iso for arbitrary abelian L and M; (2) j^lin_! has the action (proj)^-1 followed by j_!(action) and is left adjoint to mapMod(j*_Ab); (3) j_! = j^lin_! o Res_alpha_j, with underlying sheaf j^Ab_! M, exact; Res of def-sfb-modobj-restriction is the same functor as change-of-scalars clause 1; (4) the adjunction node states j_! left adjoint to Ext o mapMod with Coext = Ext; its j* is def-sfb-module-upper-star, the same formula as the pullback clause of sk-def-sfb-module-pushforward-pullback; alpha_j invertible is in that node's proof, and change-of-scalars clause 5 gives Ext = Res_inv = Coext; (5) the compactification of sk-def-nagata-sketch-data includes a quasi-compact open immersion, and the elementary type check is correct; (6) the chosen-c lower shriek node gives the underlying functor g^Ab_* o i^Ab_! and left exactness. proof_deps equals the union of uses; the closure contains no cycle; nothing is merged or missing; no new nodes; no SGA. Edge cases checked: j = id, U empty, Lambda = 0, the (id, id) compactification. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q11-ed1ab075c (reviewer sub-agent of L); spot-checked: Repair note (human, 2026-10-21, reopened after the Q29 landing that added no new node) is fulfilled. The item statement, stmt_deps, lean and blueprint fields are byte-identical to side-live. The proof is 7 steps, at most 3000 characters (2980 after my fix). The old 4733-character proof's arguments all survive: steps 1-3 and 6-7 cite the six detail nodes of the unit; old step 4 (alpha_j iso, Res-Coext adjunction, Coext=Ext, Hom chain) is now opened through two new statement-only nodes, while the existing adjunction node is still cited. I checked both new nodes on ordered tensor factors and found them true. Coextension node: the transpose of beta_N factors through the equalizer because phi^-1(phi(r)s)n = r phi^-1(s)n; d_N is S-linear; e d = id by the unit law; d e = id because f(t) = phi^-1(t) f(1). It also correctly names the adjoint-uniqueness comparison: the counit of the quasi-inverse adjunction is the identity from step 4 of def-sfb-modobj-restriction-equivalence, so gamma_N = epsilon^G_N, which is evaluation. Extension node: beta_N balances the coequalizer pair; p and s are S-linear and mutually inverse; and p is the conjugate iso c, since R(c) composed with the unit eta_a equals the identity unit eta_b. Small cases (phi = id gives the unitors, N = 0, the zero ring) pass. They are not duplicates of the along-iso, extension-iso-coextension or restrict-coextend-adjunction nodes, or of change-of-scalars clause 5, which state existence only. They do not restate the item. They are avoidable, because def-sfb-module-open-lower-shriek-adjunction already gives j_! left adjoint to j^*; this matches the accepted Q37/Q36 top-ups. tau = p^-1 e has the same direction as the adjunction node's tau. Tool uses lem-weil-pbc-sheaf-tensor-closed and lem-sfb-alpha-iso are the same ones already recorded on the adjunction node; I accept them. Faults fixed (C1/C4): step 4 never checked commutativity of j*Lambda_X and Lambda_U, which both new nodes assume, and did not tie the ambient tensor to the module tensor or cite alpha_j as a ring morphism. It now cites sk-def-sfb-sheaf-tensor, sk-def-sfb-coefficient-morphisms and sk-def-sfb-pulled-back-coefficients; step 5 is tightened with the same content, and proof_deps equals the union of uses. B3: both new nodes now cite sk-def-sfb-ring-object for commutative monoid objects. No SGA is used. Unit realized: only the two new ids were added.; 3 file(s) fixed by the reviewer"
  },
  "lean_audit": {
   "master": {
@@ -566,5 +605,9 @@
   "group": "Q27",
   "result": "fix",
   "note": "Mathematics, dependencies, universes, canonical constructions, verbatim signature and route-pivot checks pass. Reproduced all 20 declaration checks through scompile.py. Complete replacement report in fixes repairs the H11 placeholder second reading; details recorded in review.md."
- }
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-sfb-alpha-iso"
+ ]
 }
