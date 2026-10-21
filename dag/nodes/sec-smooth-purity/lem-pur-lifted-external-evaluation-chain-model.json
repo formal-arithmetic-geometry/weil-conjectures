@@ -25,9 +25,143 @@
   "def-pur-hom-complex",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pur-global-hom-evaluation-flat-lift] separately to $(X,E,K,I_K,U,\\alpha)$ and $(Y,H,L,I_L,V,\\gamma)$. Its hypotheses are exactly the bounded flat sources, bounded-below coefficients, K-injective representatives and flat-term K-flat resolutions assumed here. It identifies the two global Hom complexes with $\\mathsf H_X(E,K)$ and $\\mathsf H_Y(H,L)$ in $D(A)$, and identifies the localizations of $t_X,t_Y$ with the corresponding derived evaluations. Under localization from the homotopy category [def-weil-abstract-derived-category], the assumed homotopies give $Q(c_K)Q(u)=Q(t_X)$ and $Q(c_L)Q(v)=Q(t_Y)$. The same cited statement gives K-flatness and flatness of $E,H$ and of the evaluation sources.",
+   "uses": [
+    "lem-pur-global-hom-evaluation-flat-lift",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Agent representative refinement of Tags 0A8X (section-hom-complexes), 08J7 (section-internal-hom); evaluation normalization supplied by the cited existing node."
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] to the constant-ring morphisms of etale topoi induced by $a,b$. Because their module pullbacks are exact, the ordinary pullbacks of the given flat-term K-flat complexes $E,H,N_K,N_L$ are flat-term K-flat and compute their derived pullbacks. By [lem-pur-kflat-total-tensor-model], applied on $P$ to $a^{-1}N_K,b^{-1}N_L$, the complex $T$ is flat-term K-flat and its localization is the derived tensor of their localized objects. The two quasi-isomorphisms $c_K,c_L$ therefore identify $QT$ with $F$. Apply the same tensor-model statement to $a^{-1}E,b^{-1}H$: $G$ is flat-term K-flat and represents $a^{-1}E\\otimes_A^Lb^{-1}H$. It is bounded because the degree ranges of $E,H$ have finite sum. Finally apply that statement to $U,V$ viewed as module sheaves on the one-object site with ring $A$: $U\\otimes_A V$ is a flat-term K-flat representative of $\\mathsf H_X(E,K)\\otimes_A^L\\mathsf H_Y(H,L)$. Thus $i$ gives the required identification of $QJ$ with $F$.",
+   "uses": [
+    "lem-pur-kflat-total-tensor-model",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A2 (lemma-tensor-product-K-flat), together with the representative normalization in the cited node."
+   }
+  },
+  {
+   "text": "Write $S=U\\otimes_A V$, $C=\\underline S_P$, $D_X=a^{-1}(\\underline U_X\\otimes_A E)$ and $D_Y=b^{-1}(\\underline V_Y\\otimes_A H)$. Use the canonical constant-pullback and tensor comparisons of [lem-pur-external-evaluation-transpose-natural]. On homogeneous generators their interchange $\\chi:C\\otimes_A G\\to D_X\\otimes_A D_Y$ is $(w\\otimes z)\\otimes(e\\otimes h)\\mapsto(-1)^{sq}(w\\otimes e)\\otimes(z\\otimes h)$. It is a chain map: after differentiating $w,z,e,h$, the respective coefficients on both sides are $(-1)^{sq}$, $(-1)^{r+sq+q}$, $(-1)^{r+sq}$, $(-1)^{r+q+s+sq}$. Its inverse undoes the permutation with the same Koszul sign. These sectionwise multilinear formulas respect restriction and hence define maps of sheafified tensors and of their direct-sum total complexes. The composite $b=i\\circ(a^{-1}u\\otimes b^{-1}v)\\circ\\chi:C\\otimes_A G\\to J$ is consequently a chain map with exactly the evaluation formula in the statement.",
+   "uses": [
+    "lem-pur-external-evaluation-transpose-natural",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes); explicit elementary differential check for the Koszul interchange of the cited external transpose."
+   }
+  },
+  {
+   "text": "Curry $b$ on each total-tensor summand, using the product projections defining [def-pur-hom-complex]. For $x=w\\otimes z\\in S^n$, $n=r+s$, put $p(x)(y)=b(x\\otimes y)$ for homogeneous $y=e\\otimes h\\in G$. Since $b$ is a chain map, $d_Jp(x)(y)=p(d_Sx)(y)+(-1)^n p(x)(d_Gy)$, so $d_{\\operatorname{Hom}}p(x)=p(d_Sx)$. Thus $p$ is a chain map. Local bilinearity and sheafification give the sheaf-valued adjunct $\\bar p:C\\to\\mathcal Hom^\\bullet(G,J)$; degreewise constant/sections adjunction gives precisely the global chain map $p:S\\to\\operatorname{Hom}^\\bullet_P(G,J)$. The formulas are determined on every tensor summand and every Hom-product projection, so no finite-support assertion about Hom products is being assumed.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-kun-constant-projection-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A90 (lemma-compose), whose proof reduces to More on Algebra Tag 0A5Y (lemma-compose); the evaluation currying calculation is written out here."
+   }
+  },
+  {
+   "text": "The hypotheses of [lem-sfb-hom-kflat-chain-transpose] hold with its second tensor factor $G$, its K-injective target $J$, and its arbitrary first complex $C$. Therefore the internal derived transpose of $Q(\\bar p)$ is $Q(b)$ under the canonical one-sided tensor comparison. Also $\\mathcal Hom^\\bullet(G,J)$ is K-injective by [lem-pur-hom-kflat-into-kinjective]. Apply [lem-sfb-resolving-derived-adjunction-normalization] to constant realization left adjoint to sections: its left functor is exact, so all complexes form a resolving class and its left comparison is invertible. On this K-injective target the derived right comparison is invertible, and the cited formula identifies $Q(p)$ with the derived constant/sections adjunct of $Q(\\bar p)$. This is the canonical adjunction fixed in [def-kun-constant-projection-morphism]. Combining these normalized transpositions identifies $Q(p)$ with the global derived transpose of $Q(b)$. Since $G$ is bounded flat and $F$ is bounded below, [lem-pur-global-hom-evaluation-flat-lift] on $P$ identifies its target $Q\\operatorname{Hom}^{\\bullet}_P(G,J)$ with $\\mathsf H_P(G,F)$ in $D(A)$.",
+   "uses": [
+    "lem-sfb-hom-kflat-chain-transpose",
+    "lem-pur-hom-kflat-into-kinjective",
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "def-kun-constant-projection-morphism",
+    "lem-pur-global-hom-evaluation-flat-lift"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 0A96 (lemma-RHom-from-K-flat-into-K-injective), 08J9 (lemma-internal-hom); canonical constant/sections derived adjunction and the cited representative-normalization tool."
+   }
+  },
+  {
+   "text": "Under $Q(c_K),Q(c_L)$ the localized lifts are the derived evaluations by step 1. Their pullbacks and tensor are therefore the two pulled-back derived evaluations, because every complex used to compute that tensor is K-flat by steps 1 and 2. The interchange in step 3 is the canonical one, including its $(-1)^{sq}$ sign. It follows that, after the identification $QJ\\cong F$ induced by $i$ and $c_K,c_L$, $Q(b)$ is exactly the composite defining the external evaluation transpose in [lem-pur-external-evaluation-transpose-natural]. Step 5 then proves the asserted identity for $Q(p)$. That cited transpose is defined solely from the two derived evaluations and the canonical comparisons; it contains none of the choices $I_K,I_L,U,V,N_K,N_L,J$ or their lifts. Since the argument applies to every choice satisfying the stated hypotheses, the induced derived morphism is independent of all these choices.",
+   "uses": [
+    "lem-pur-external-evaluation-transpose-natural",
+    "lem-pur-global-hom-evaluation-flat-lift",
+    "lem-pur-kflat-total-tensor-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 08J9 (lemma-internal-hom), 07A2 (lemma-tensor-product-K-flat); agent assembly of the displayed augmentation identities, with no tensoring of non-K-flat injective representatives."
+   }
+  },
+  {
+   "text": "Use the differentials in [def-pur-hom-complex] and [def-weil-abstract-derived-category]. If $f\\in\\operatorname{Hom}^n(B[1],I)$, then $\\theta^n(f)^p=(-1)^nf^{p-1}$ has degree $n-1$ as a map from $B$ to $I$. Both $d\\theta(f)$ and $\\theta(df)$ have component $(-1)^{n+1}d_If^{p-1}-f^p d_B$ at $B^p$. Hence $\\theta$ is a chain map. Its inverse sends $g\\in\\operatorname{Hom}(B,I)[-1]^n$ to the family $f^q=(-1)^ng^{q+1}$, so the two composites are identities. The calculation works for sheaf Hom as well as global Hom, respects restriction, and is natural in $B,I$. Since derived internal Hom is computed with precisely these Hom complexes into $I$ [def-pur-derived-internal-hom], its localization realizes the first-variable Hom shift; no boundedness of $B$ is used.",
+   "uses": [
+    "def-pur-hom-complex",
+    "def-weil-abstract-derived-category",
+    "def-pur-derived-internal-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), Tag 08J7 (section-internal-hom); explicit agent sign calculation for the source shift."
+   }
+  },
+  {
+   "text": "For $w\\in U[-1]^r$, $e\\in E[1]^q$, view $w,e$ in original degrees $r-1,q+1$. Applying $\\eta$ to the source differential gives $(-1)^r dw\\otimes e-w\\otimes de$. This is also $d((-1)^rw\\otimes e)$ in $\\underline U_X\\otimes E$, by [def-pc-tensor-complex-sheaves]. Thus $\\eta$ is a chain map. The inverse uses the same sign on the corresponding summand, so it is a chain isomorphism. The shifted quasi-isomorphism $\\alpha'=\\theta_E^{-1}\\alpha[-1]$ has value $\\alpha'(w)(e)=(-1)^r\\alpha(w)(e)$; consequently its chain evaluation is exactly $t_X\\eta$, not merely an unspecified derived comparison. The sign depends only on the degree of the $U[-1]$ factor, so these formulas respect sheafification and restriction. The same calculation with $V,H$ gives the second shifted evaluation.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes); explicit elementary shift and tensor differential calculation."
+   }
+  },
+  {
+   "text": "Shifting a complex preserves quasi-isomorphisms, since $H^n(C[-1])=H^{n-1}(C)$. It preserves flat terms and K-flatness: for any acyclic complex $D$, the chain isomorphism $D\\otimes U[-1]\\cong(D\\otimes U)[-1]$, $x\\otimes w\\mapsto(-1)^{|x|}x\\otimes w$, makes the defining acyclicity test identical [def-pc-kflat-complex]. Thus $U[-1],\\alpha'$ satisfy the shifted hypotheses, and $E[1]$ remains bounded flat. If $k$ is the given degree-$-1$ homotopy with $c_Ku-t_X=dk+kd$, then $k\\eta$ gives $c_K(u\\eta)-t_X\\eta=d(k\\eta)+(k\\eta)d$ because $\\eta$ is a chain map. Hence $u\\eta$ lifts the shifted evaluation through the same $N_K,c_K$. The identical computation for $v$ gives the same $N_L,c_L$. Neither operation changes $T=a^{-1}N_K\\otimes b^{-1}N_L$, so the original $i:T\\to J$ is a K-injective resolution for each shifted construction as well. Applying the preceding steps to either or both shifted inputs proves the common-target assertion.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A8X (section-hom-complexes), definition-K-flat; explicit homotopy precomposition and shift calculation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-global-hom-evaluation-flat-lift",
+  "def-weil-abstract-derived-category",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-external-evaluation-transpose-natural",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "def-kun-constant-projection-morphism",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "def-pur-derived-internal-hom",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X, 0A90, 0A96, 08J7, 08J9 and 07A2; representative normalization from existing DAG nodes and explicit sign/homotopy calculations. Blueprint ancestor lem-pur-kunneth-supported, proof paragraphs 1 and 3."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -70,10 +204,45 @@
    "results": "[loogle] OK 12 hit(s)\n  {\"name\": \"CochainComplex.HomComplex.Cochain.diff\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] (K : CochainComplex C ℤ) : CochainComplex.HomComplex.Cochain K K 1\", \"doc\": \"The differential on a cochain complex, as a cochain of degree `1`.\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] (F G : CochainComplex C ℤ) (n : ℤ) : Type v\", \"doc\": \"A cochain of degree `n : ℤ` between two cochain complexes `F` and `G` consists\\nof a family of morphisms `F.X p ⟶ G.X q` whenever `p + n = q`, i.e. for all\\ntriplets in `HomComplex.Triplet n`.\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.instAddCommGroup\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u_2} [CategoryTheory.Category.{u_1, u_2} C] [CategoryTheory.Preadditive C] (F G : CochainComplex C ℤ) (n : ℤ) : AddCommGroup (CochainComplex.HomComplex.Cochain F G n)\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.HomComplex.δ\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} (n m : ℤ) (z : CochainComplex.HomComplex.Cochain F G n) : CochainComplex.HomComplex.Cochain F G m\", \"doc\": \"The differential on the complex of morphisms between cochain complexes.\"}\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.instCoeCochain\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] {F G : CochainComplex C ℤ} {n : ℤ} : Coe (CochainComplex.HomComplex.Cocycle F G n) (CochainComplex.HomComplex.Cochain F G n)\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.instSMulOfLinear\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u_3} [CategoryTheory.Category.{u_2, u_3} C] [CategoryTheory.Preadditive C] {R : Type u_1} [Ring R] [CategoryTheory.Linear R C] (F G : CochainComplex C ℤ) (n : ℤ) : SMul R (CochainComplex.HomComplex.Cochain F G n)\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.HomComplex.cocycle\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] (F G : CochainComplex C ℤ) (n : ℤ) : AddSubgroup (CochainComplex.HomComplex.Cochain F G n)\", \"doc\": \"The subgroup of cocycles in `Cochain F G n`.\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.instModuleOfLinear\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u_3} [CategoryTheory.Category.{u_2, u_3} C] [CategoryTheory.Preadditive C] {R : Type u_1} [Ring R] [CategoryTheory.Linear R C] (F G : CochainComplex C ℤ) (n : ℤ) : Module R (CochainComplex.HomComplex.Cochain F G n)\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.HomComplex.Cochain.comp\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] {F G K : CochainComplex C ℤ} {n₁ n₂ n₁₂ : ℤ} (z₁ : CochainComplex.HomComplex.Cochain F G n₁) (z₂ : CochainComplex.HomComplex.Cochain G K n₂) (h : n₁ + n₂ = n₁₂) : CochainComplex.HomComplex.Cochain F K n₁₂\", \"doc\": \"The composition of cochains.\"}\n  {\"name\": \"CochainComplex.HomComplex_X\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] (F G : CochainComplex C ℤ) (i : ℤ) : (F.HomComplex G).X i = ↧(CochainComplex.HomComplex.Cochain F G i)\", \"doc\": \"\"}\n  {\"name\": \"CochainComplex.HomComplex.Cocycle.toCochainLinearMap\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] (R : Type u_1) [Ring R] [CategoryTheory.Linear R C] (K L : CochainComplex C ℤ) (n : ℤ) : CochainComplex.HomComplex.Cocycle K L n →ₗ[R] CochainComplex.HomComplex.Cochain K L n\", \"doc\": \"The inclusion `Cocycle K L n →ₗ[R] Cochain K L n`.\"}\n  {\"name\": \"CochainComplex.HomComplex.δ_hom\", \"module\": \"Mathlib.Algebra.Homology.HomotopyCategory.HomComplex\", \"type\": \" {C : Type u} [CategoryTheory.Category.{v, u} C] [CategoryTheory.Preadditive C] (R : Type u_1) [Ring R] [CategoryTheory.Linear R C] (F G : CochainComplex C ℤ) (n m : ℤ) : CochainComplex.HomComplex.Cochain F G n →ₗ[R] CochainComplex.HomComplex.Cochain F G m\", \"doc\": \"The differential on the complex of morphisms between cochain complexes, as a linear map.\"}",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "(external.*eval|eval.*external|KFlat.*HomComplex|HomComplex.*KFlat)",
+   "results": "0 hits for the recorded pattern in Mathlib.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "External derived Hom tensor evaluation chain model with homotopy lifts and common targets for shifted complexes",
+   "results": "8 hits: HomologicalComplex.tensorHom, Homotopy.shift, Ext.homEquiv, Ext.hom, Ext.hom′, HomComplex.Cochain.rightUnshift, rightShift, shift. These give tensor morphisms or shifts, not the item.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.HomComplex.Cochain.leftShift",
+   "results": "12 hits in Mathlib.Algebra.Homology.HomotopyCategory.HomComplexShift: Cochain.leftShift, leftShift_v, inverses, additivity and differential identities. Source lines 66-77 read: degreewise cochain operations only; no global derived external evaluation or common-target claim.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Chain representative of external derived Hom evaluation from K-flat lifts with Koszul interchange and common shifted target",
+   "results": "8 hits: Ext/hom and fraction representatives for the first phrasing; K-injective null-homotopies and mapping-cone liftHomotopy for the second phrasing. None states an external sheaf evaluation with K-flat lifts or the common shifted target claim.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Hom complexes on sheaves tensor two homotopy lifted evaluations with shifted first variables and K-injective common target",
+   "results": "8 hits: Ext/hom and fraction representatives for the first phrasing; K-injective null-homotopies and mapping-cone liftHomotopy for the second phrasing. None states an external sheaf evaluation with K-flat lifts or the common shifted target claim.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-external-rhom-cone-pairing",
@@ -93,5 +262,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-lifted-external-evaluation-chain-model",
+  "worker": "stage1",
+  "summary": "Q83: proved the chain formula from canonical interchange and currying, identified its derived transpose through K-flat and K-injective models, and checked the first-variable Hom shift and both unchanged target lifts explicitly. Reused existing nodes throughout; no new nodes and no statement change.",
+  "blueprint": "lem-pur-kunneth-supported, proof paragraphs 1 and 3 (localization tensor comparison and evaluation identification), through steps 4 and 7 of lem-pur-external-rhom-cone-pairing; the present steps supply the lifted chain formula and common shifted targets.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Generic flat-term K-flat total-tensor and representative tool for the given pulled-back complexes; this does not replace any geometric step of the unit."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic preservation of arbitrary given flat-term K-flat complexes by ringed pullback and its tensor comparison; needed for the given lifts, not just some existentially constructed lifts."
+   },
+   {
+    "node": "lem-sfb-hom-kflat-chain-transpose",
+    "why": "Generic one-sided K-flat tensor-Hom representative normalization; used only to identify the written chain map with its derived transpose."
+   },
+   {
+    "node": "lem-pur-hom-kflat-into-kinjective",
+    "why": "Generic K-injectivity of Hom from a K-flat complex, needed to compute the right-derived sections adjunct on the actual Hom representative."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "Generic normalization of a derived adjunction on ordinary chain representatives, applied to exact constant realization and sections."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kflat-total-tensor-model",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-sfb-hom-kflat-chain-transpose",
+  "lem-pur-hom-kflat-into-kinjective",
+  "lem-sfb-resolving-derived-adjunction-normalization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q83-3cc521798",
+  "group": "Q83",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-3cc521798 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement and stmt_deps are identical to live and side-live, where the item is still unsplit, so there is no supersession and no repair note. No SGA, no cycle (the 359-node closure does not reach the item), and proof_deps equals the union of the step uses. Every Stacks tag/label pair matches tags/tags, and I read the Hom-complex differential at sites-cohomology l.8571. Step 1: flat-lift's 'for every such I,U,alpha' clause covers the given data, and Q(c)Q(u)=Q(t) follows from the given homotopy, not from the existential lift. Step 2: ringed-topoi pullback (u^*=a^{-1} for constant rings) preserves the given flat-term K-flat E,H,N_K,N_L; kflat-total-tensor-model makes T a model of F through c_K,c_L, G a bounded flat model, and U⊗V a model on the one-object site. Step 3: I recomputed the Koszul interchange; the dw,dz,de,dh coefficients (-1)^{sq}, (-1)^{r+sq+q}, (-1)^{r+sq}, (-1)^{r+s+q+sq} match on both sides. Step 4: currying gives d_Hom p(x)=p(dx). Step 5: the hypotheses of hom-kflat-chain-transpose (A=C, P=G, E=J), hom-kflat-into-kinjective and resolving-adjunction-normalization (exact constant realization left adjoint to sections) all hold; flat-lift on P needs F in D^+, which is a hypothesis. Step 6 matches the definition of beta in transpose-natural, so the result holds for every choice; I accept the chain-level pullback/tensor comparison as the canonical one (Stacks 07A4). Step 7: theta is a chain isomorphism with the forced sign (-1)^n (the unsigned map anticommutes), and its inverse checks. Step 8: eta is a chain map and theta^{-1}alpha[-1] evaluates to t_X eta. Step 9: the shift preserves K-flatness via (-1)^{|x|}, and the homotopy k eta works, so T, J and i are unchanged. Edge cases checked: zero complexes, characteristic 2, unbounded complexes, arbitrary A. The duplicate candidates (hom-complex-shift-left, derived-internal-hom-shift-left/comparison, two-shift-squares) pin no competing formula. Accepted tool_uses: ringed-topoi-derived-tensor-pullback, sfb-hom-kflat-chain-transpose, pur-hom-kflat-into-kinjective, sfb-resolving-derived-adjunction-normalization; kflat-total-tensor-model is already on the route through sk-def-purity-conv. No changes."
  }
 }
