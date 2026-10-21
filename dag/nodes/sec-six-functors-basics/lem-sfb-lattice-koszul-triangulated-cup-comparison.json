@@ -16,9 +16,201 @@
   "lem-sfb-condensed-derived-restriction-calculus",
   "lem-sfb-discrete-lattice-koszul-resolution"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\mathcal M=\\operatorname{Mod}_R$ and $\\mathcal E=\\mathcal A_R(D)$. By [lem-sfb-condensed-derived-restriction-calculus] these are Grothendieck abelian, forgetting is exact and detects exactness, and the exact trivial-action functor $t:\\mathcal M\\to\\mathcal E$ is left adjoint to $\\Gamma$. In each Koszul degree $a$, $K^a$ is a finite biproduct of the underlying-module functor; kernels and cokernels are componentwise, so $K^a$ is exact. The differential of [lem-sfb-discrete-lattice-koszul-resolution] is natural in equivariant maps and squares to zero. Totalizing with $d_K+(-1)^a d_P$ therefore defines an additive functor on bounded-below complexes.",
+   "uses": [
+    "lem-sfb-condensed-derived-restriction-calculus",
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "For a chain homotopy $h:P\\to Q[-1]$, put $H|_{K^a(P^b)}=(-1)^aK^a(h^b)$. The horizontal terms in $dH+Hd$ cancel, and the vertical terms are $K^a(dh+hd)$, so totalization respects homotopy. For a quasi-isomorphism $f$, each fixed-$a$ column $K^a(f)$ is a quasi-isomorphism by exactness. The bicomplexes vanish for $a<0$ and for $b$ below a common integer. Thus [lem-weil-pbc-bounded-below-total-column-comparison] gives that $K(f)$ is a quasi-isomorphism. Consequently $K$ descends to $\\mathsf K_R$ on $D^+$; its output is bounded below since $0\\leq a\\leq r$.",
+   "uses": [
+    "lem-weil-pbc-bounded-below-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "Use the shift comparison $K(P[1])\\to K(P)[1]$ that multiplies Koszul degree $a$ by $(-1)^a$. For $f:P\\to Q$, use the cone convention $\\operatorname{Cone}(f)^n=Q^n\\oplus P^{n+1}$, with differential $(q,p)\\mapsto(d_Qq+fp,-d_Pp)$. The map $K(\\operatorname{Cone}f)\\to\\operatorname{Cone}(Kf)$ is identity on $K^aQ$ and multiplication by $(-1)^a$ on $K^aP[1]$. The horizontal differential on that second summand changes sign because $a$ increases by one; the vertical differential and off-diagonal $f$ term acquire precisely the displayed cone signs. It commutes with the inclusion of $KQ$ and, with the preceding shift comparison, the projection to $KP[1]$. Thus $K$ preserves cone triangles and descends as a triangulated functor under the cone-triangle definition of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "For an injective $J\\in\\mathcal E$, its degree-zero injective resolution computes $R\\Gamma(J)=\\Gamma(J)[0]$, by [lem-sp-derived-injective-resolution-naturality]. The normalized comparison in [lem-sfb-discrete-lattice-koszul-resolution] consequently says that the actual inclusion $\\Gamma(J)[0]\\to K(J)$ is a quasi-isomorphism: after localization its composite with that isomorphism is the identity of $\\Gamma(J)[0]$. For a bounded-below $P$, take a monomorphic quasi-isomorphism $s:P\\to J$ with bounded-below injective terms using [lem-weil-pbc-complex-injective-resolution-mono]; enough injectives follows from [lem-sp-grothendieck-enough-injectives]. Each row inclusion just described is a quasi-isomorphism. The row version of [lem-weil-pbc-bounded-below-total-column-comparison] yields a quasi-isomorphism $b_J:\\Gamma(J)\\to K(J)$. Define\n$$\\lambda_P=Q(b_J)^{-1}Q(Ks):QK(P)\\longrightarrow Q\\Gamma(J)=R\\Gamma(P).$$",
+   "uses": [
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-sfb-discrete-lattice-koszul-resolution",
+    "lem-weil-pbc-complex-injective-resolution-mono",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-bounded-below-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "A chain map $P\\to P'$ lifts along the monomorphic resolution of $P$ to a map $J\\to J'$ by [lem-weil-pbc-lift-along-injective-quasi-iso]. Any two lifts are homotopic by [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy]. The maps $b_J$ commute with every such lift on complexes, and step 2 sends the lift homotopies to total homotopies. The normalized resolution comparison [lem-sp-derived-injective-resolution-naturality] therefore makes $\\lambda$ independent of resolutions and natural, including after localization. For a lifted map $J\\to J'$, its cone is again bounded below and termwise injective. That same cited lemma computes the canonical derived cone triangle on this cone. The cone isomorphism of step 3 is identity on Koszul degree zero, so it commutes with $b$ and the invariant inclusions. Hence $\\lambda$ respects the specified shifts and cone triangles. This proves an isomorphism of triangulated functors, and therefore compatibility with the canonical connecting arrow of any short exact sequence. Exactness of the $K^a$ identifies its image triangle with that of the termwise exact Koszul sequence.",
+   "uses": [
+    "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "lem-sp-derived-injective-resolution-naturality"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "For a module $P$, both maps from $P^D[0]$ into $K(J)$ put the same invariant section in $J^0$ and zero elsewhere. Thus the comparison of step 4 has exactly the invariant-inclusion normalization of [lem-sfb-discrete-lattice-koszul-resolution], and supplies a simultaneous choice of those module comparisons. For $r=0$, $K$ and $\\Gamma$ are the identity and $b_J=1_J$; under the normalized derived identity, the formula is the identity on $P$. This also fixes its restriction to modules.",
+   "uses": [
+    "lem-sfb-discrete-lattice-koszul-resolution"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "Let $L^{-a}=\\bigoplus_{|I|=a,v\\in D}R[v,I]$, with differential the integral boundary of [lem-sfb-integral-lattice-cubical-contraction], now read as a cochain differential from $-a$ to $-a+1$. Translation acts on $v$. Replace each integer coefficient in that lemma's contraction by the same multiple of an identity morphism; finite support on each basis vector makes every map a coproduct map. This gives a nonequivariant homotopy between $1_L$ and the vertex section followed by $\\varepsilon:L\\to tR$. After tensoring with any complex $X$, $h\\otimes1$ gives the same homotopy identity; the cross terms cancel by the total tensor sign of [lem-sfb-total-tensor-homotopy]. In particular $L\\otimes tX\\to tX$ is a quasi-isomorphism. Forgetting detects this by [lem-sfb-condensed-derived-restriction-calculus]. The same contraction shows that $L$ is K-flat: $L\\otimes X$ is homotopy equivalent, after forgetting, to $X$, and is acyclic when $X$ is acyclic.",
+   "uses": [
+    "lem-sfb-integral-lattice-cubical-contraction",
+    "lem-sfb-total-tensor-homotopy",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "Put $c_a=(-1)^{a(a+1)/2}$. For $x\\in K^a(P^b)$ define an equivariant map\n$$E_P:tK(P)\\otimes L\\longrightarrow P,\\qquad E_P(x\\otimes[v,I])=(-1)^{ab}c_aT^vx_I\\quad(|I|=a),$$\nand put it zero on the other Koszul/chain-degree pairs. Here $T^v=\\prod_iT_i^{v_i}$ and $K(P)$ has trivial action. Translation of $v$ proves equivariance. To check the chain equation, identify the degree-$a,b$ component with equivariant maps $L^{-a}\\to P^b$, multiplied by $\\theta_{a,b}=(-1)^{ab}c_a$. The usual Hom differential is $df=d_Pf-(-1)^{a+b}f\\partial$. The identities $\\theta_{a,b+1}=(-1)^a\\theta_{a,b}$ and $\\theta_{a+1,b}=(-1)^{a+b+1}\\theta_{a,b}$ identify it with $d_K+(-1)^ad_P$. Evaluation then has the stated chain equation. All assertions can be checked on each generator after every profinite base change, so they give morphisms of internal modules. On $t\\Gamma(P)\\otimes L$, evaluation is exactly the invariant inclusion composed with $1\\otimes\\varepsilon$: only $a=0$ and vertices survive.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "The adjunction $t\\dashv\\Gamma$ of step 1 has its normalized derived adjunction by [lem-sfb-resolving-derived-adjunction-normalization]: the left resolving class can be all complexes since $t$ is exact. Unbounded injective replacements exist by [lem-sfb-grothendieck-k-injective]. On a bounded-below injective $J$, its derived counit is $t\\Gamma(J)\\to J$, by the chain-transpose clause of the normalization lemma. Step 8 gives the commuting chain square with horizontal arrows $t\\Gamma(J)\\otimes L\\to tK(J)\\otimes L$ and $t\\Gamma(J)\\to J$, and vertical arrows $1\\otimes\\varepsilon$ and $E_J$. The top arrow is a quasi-isomorphism since $b_J$ is one and $L$ is K-flat (step 7). The left arrow is a quasi-isomorphism by the contraction. Thus, in the derived category, the roof\n$$tQK(P)\\xleftarrow{1\\otimes\\varepsilon}Q(tK(P)\\otimes L)\\xrightarrow{E_P}P$$\nis the derived counit composed with $t\\lambda_P$, first for $J$ and then for $P$ by the naturality of evaluation and $s:P\\to J$. This identifies the actual derived arrow; it does not infer equality from cohomology.",
+   "uses": [
+    "lem-sfb-resolving-derived-adjunction-normalization",
+    "lem-sfb-grothendieck-k-injective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "For flat $B$, each term of $K_B$ is a finite sum of copies of $B$ and hence flat: tensor with it is a finite sum of exact functors. The internal-to-sectionwise equivalence [lem-pe-internal-section-tensor-comparison] preserves flatness, total tensors and acyclicity. Apply [lem-pc-bounded-above-flat-kflat-site] to this bounded complex on the small condensed site and transport back: $K_B$ is K-flat. The same reasoning on underlying modules proves that $tK_B$ is K-flat equivariantly, since forgetting creates exactness and the equivariant tensor has underlying tensor with diagonal action. Thus ordinary tensor models every derived tensor in the following evaluation calculation.",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pc-bounded-above-flat-kflat-site"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; transported to internal modules by the cited tensor equivalence."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-integral-cubical-chain-diagonal] and replace its integer entries by $R$-linear maps as in step 7. This gives a counital equivariant chain map $\\Delta:L\\to L\\otimes_RL$. Define a bilinear map $\\star$ by the formula in the statement. It is a chain map by an explicit twisted Leibniz identity: put $D_i=T_i-1$; then\n$$D_i(xT_Ay)=D_i(x)T_{A\\cup\\{i\\}}y+xT_A D_i(y)\\quad(i\\notin A).$$\nFor each ordered partition of $I\\cup\\{i\\}$, group the differential terms according as $i$ is in the first or second factor. In the first group, moving $i$ through the ordered first block gives exactly the Koszul sign of $dx\\star y$; in the second it passes all $p$ elements of the first block, adding $(-1)^p$, and gives $x\\star dy$. The displayed identity supplies their coefficients. Therefore $d(x\\star y)=dx\\star y+(-1)^px\\star dy$.",
+   "uses": [
+    "lem-sfb-integral-cubical-chain-diagonal"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "Write $n=p+q$. Compare the two maps from $t(K_B\\otimes K_B)\\otimes L$ to $B$: evaluation after $t\\star$, and multiplication after $\\Delta$ and the two evaluations. On $x_A\\otimes y_C\\otimes[v,I]$ with $|A|=p$, $|C|=q$, both vanish unless $A\\sqcup C=I$. The first is\n$$c_n\\epsilon(A,C)T^v(x_A)T^{v+u_A}(y_C).$$\nIn the second, the relevant diagonal term is $\\epsilon(A,C)[v,A]\\otimes[v+u_A,C]$. Moving $y_C$ past $[v,A]$ contributes $(-1)^{pq}$, and the evaluations contribute $c_pc_q$. These agree because $c_n=(-1)^{pq}c_pc_q$. Thus the maps agree on every summand and hence as chain maps. The counit identity $(\\varepsilon\\otimes\\varepsilon)\\Delta=\\varepsilon$ identifies the left arrows of their evaluation roofs. Since $K_B$ is K-flat and the augmentations are quasi-isomorphisms, this is the derived equality between evaluation after $\\star$ and multiplication after the two counit evaluations.",
+   "uses": [
+    "lem-sfb-integral-cubical-chain-diagonal"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "For the ambient monoidal constructions, identify internal modules with section modules using [lem-pe-internal-section-tensor-comparison], and actions with module sheaves on the small action site using [lem-sfb-internal-action-site-presentation]. The latter equivalence also identifies tensors: both are the sheafification of the balanced local pure tensors, and an arrow $(f,a)$ acts on $m\\otimes n$ as $a f^*m\\otimes a f^*n$. The action site is small in the chosen universe. Thus [lem-trf-site-functorial-flat-resolution] provides functorial flat resolutions in both categories, and their tensor is closed by [lem-pc-sheaf-modules-tensor-closed]. The trivial-action functor $t$ is exact, left adjoint, and strong monoidal, with identity underlying tensor and unit identifications. It preserves flat objects since forgetting detects exactness. Apply [lem-sfb-exact-flat-tensor-derived-counit-comparison] to obtain its normalized derived tensor identification. The canonical cup is the adjunction transpose of multiplication after the tensor of the two derived counits. Step 9 identifies the evaluation roofs with these counits after $t\\lambda_B$. Step 12 says exactly that the transposes of $\\lambda_BQ(\\star)$ and $\\operatorname{cup}_B(\\lambda_B\\otimes^{\\mathrm L}\\lambda_B)$ coincide. The adjunction bijection proves their equality. Evaluation of $1_B$ is $\\varepsilon$ followed by $R\\to B$, since $T^v1_B=1_B$; its transpose is the derived unit. For trivial $B=R$, this is the cup and unit of [lem-sfb-condensed-derived-restriction-calculus].",
+   "uses": [
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-sfb-internal-action-site-presentation",
+    "lem-trf-site-functorial-flat-resolution",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-sfb-exact-flat-tensor-derived-counit-comparison",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  },
+  {
+   "text": "When $r=0$, only the empty partition occurs, $c_0=1$, and all evaluation, augmentation and diagonal formulas are identity or multiplication. For $r=1$, $\\Delta[v,\\{1\\}]=[v,\\varnothing]\\otimes[v,\\{1\\}]+[v,\\{1\\}]\\otimes[v+u_1,\\varnothing]$; accordingly $x^0\\star y^1=x^0y^1$ and $x^1\\star y^0=x^1T_1(y^0)$, whose differential is $(T_1-1)(xy)=(T_1-1)x\\,T_1y+x(T_1-1)y$. No division or alternating average was used. All formulas hold for the zero ring, the zero module, and characteristic two (where the signs become equal).",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-condensed-derived-restriction-calculus",
+  "lem-sfb-discrete-lattice-koszul-resolution",
+  "lem-weil-pbc-bounded-below-total-column-comparison",
+  "def-weil-abstract-derived-category",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-sfb-integral-lattice-cubical-contraction",
+  "lem-sfb-total-tensor-homotopy",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sfb-integral-cubical-chain-diagonal",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-exact-flat-tensor-derived-counit-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route. Explicit cone and evaluation-roof argument, with integral cubical diagonal separated as a new obligation."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +246,45 @@
    "results": "{\"t\": \"2026-10-21T17:17:30Z\", \"tool\": \"leanfinder\", \"query\": \"A natural Koszul model for invariants of commuting automorphisms preserves connecting triangles and the cup pairing for equivariant sheaf algebras\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Generators.H1Cotangent.δ_comp_equiv\", \"classifyingSpaceUniversalCover.extraDegeneracyCompForgetAugmentedToModule\", \"Rep.barComplex.isoStandardComplex\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso\", \"Rep.FiniteCyclicGroup.coinvariantsTensorResolutionIso_hom_f_hom_apply\", \"ContinuousCohomology.continuousCohomologyZeroIso\", \"ContinuousCohomology.homogeneousCochains\"], \"digest\": \"755e7251fa86f471\"}",
    "date": "2026-10-22",
    "verdict": "no match: hits concern ordinary representations, continuous topological cochains, Laurent algebra or exterior powers; none supplies the triangulated internal-module Koszul comparison with its derived cup pairing"
+  },
+  {
+   "tool": "grep",
+   "query": "(Koszul|koszul).*(cup|diagonal|group)|(cup|diagonal).*(Koszul|koszul)",
+   "results": "{\"t\": \"2026-10-21T17:39:40Z\", \"tool\": \"grep\", \"query\": \"(Koszul|koszul).*(cup|diagonal|group)|(cup|diagonal).*(Koszul|koszul)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary group representations, topological cochains and exact-functor derived comparisons do not state this internal lattice comparison or its cup normalization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A finite free group resolution with a diagonal computes the derived cup product of sheaf modules",
+   "results": "{\"t\": \"2026-10-21T17:39:41Z\", \"tool\": \"leansearch\", \"query\": \"A finite free group resolution with a diagonal computes the derived cup product of sheaf modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Rep.FiniteCyclicGroup.resolution\", \"Rep.diagonalSuccIsoFree\", \"SheafOfModules.isFinitePresentation\", \"Rep.standardResolution\", \"Rep.diagonalSuccIsoFree_inv_hom_single_single\", \"SheafOfModules.ιFree\", \"Rep.barComplex.d_comp_diagonalSuccIsoFree_inv_eq\", \"SheafOfModules.free\"], \"digest\": \"806a8aeb98efb2d6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary group representations, topological cochains and exact-functor derived comparisons do not state this internal lattice comparison or its cup normalization."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"groupCohomology\", \"cup\"",
+   "results": "{\"t\": \"2026-10-21T17:39:41Z\", \"tool\": \"loogle\", \"query\": \"\\\"groupCohomology\\\", \\\"cup\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary group representations, topological cochains and exact-functor derived comparisons do not state this internal lattice comparison or its cup normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A finite complex of exact functors computing invariants extends its comparison to a triangulated functor on bounded below derived categories",
+   "results": "{\"t\": \"2026-10-21T17:39:42Z\", \"tool\": \"leanfinder\", \"query\": \"A finite complex of exact functors computing invariants extends its comparison to a triangulated functor on bounded below derived categories\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.map_distinguished_exact\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\", \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory\"], \"digest\": \"8832e1d2ad03cb17\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary group representations, topological cochains and exact-functor derived comparisons do not state this internal lattice comparison or its cup normalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Koszul cochains for a discrete lattice acting on internal sheaf modules compute derived invariants with connecting triangles and cup products",
+   "results": "{\"t\": \"2026-10-21T17:39:43Z\", \"tool\": \"leanfinder\", \"query\": \"Koszul cochains for a discrete lattice acting on internal sheaf modules compute derived invariants with connecting triangles and cup products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Sheaf.H\", \"CochainComplex.cm5b.I\", \"ContinuousCohomology.homogeneousCochains\", \"ContinuousCohomology.MultiInd.complex\", \"CochainComplex.cm5b.I_d\", \"groupCohomology.inhomogeneousCochains\", \"CategoryTheory.Sheaf.cohomologyPresheaf\", \"CochainComplex.cm5b.I_X\"], \"digest\": \"f926ede2d7a82d58\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary group representations, topological cochains and exact-functor derived comparisons do not state this internal lattice comparison or its cup normalization."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-discrete-lattice-cup-exterior",
@@ -82,5 +309,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-lattice-koszul-triangulated-cup-comparison",
+  "worker": "stage1",
+  "summary": "Extended the finite exact Koszul total to a triangulated functor using explicit cone signs; constructed its normalized derived-invariants comparison on injective replacements; computed its cup transpose by counital cubical evaluation roofs, retaining all coefficient and zero-rank cases. One new integral chain-diagonal statement, no Mathlib leaves.",
+  "blueprint": "Paragraph (3), ordinary open direct image: agent expansion of the discrete-lattice calculation below the tame-boundary route. This is an agent expansion below the ordinary-open-direct-image route; the blueprint does not assert a lattice diagonal. Existing null nearest-blueprint ancestor is preserved.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-bounded-below-total-column-comparison",
+    "why": "Finite-strip bicomplex comparison supplies the generic total quasi-isomorphism theorem; the lattice unit gives only its degree-zero module instance."
+   },
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Normalized resolution and cone comparisons identify the specified triangulated derived maps, a generic homological-algebra input absent from the lattice unit."
+   },
+   {
+    "node": "lem-weil-pbc-complex-injective-resolution-mono",
+    "why": "Generic existence of monomorphic bounded-below injective replacements is needed for actual chain lifts; no lattice-unit statement supplies it."
+   },
+   {
+    "node": "lem-sp-grothendieck-enough-injectives",
+    "why": "Enough injectives for the given Grothendieck action category is a general existence theorem, not a lattice calculation."
+   },
+   {
+    "node": "lem-weil-pbc-lift-along-injective-quasi-iso",
+    "why": "Extends maps to the chosen injective replacements, a generic chain-level tool."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic homotopy uniqueness makes the comparison independent of all lifts."
+   },
+   {
+    "node": "lem-sfb-total-tensor-homotopy",
+    "why": "Supplies the signed total tensor on homotopy categories used to tensor the explicit contraction."
+   },
+   {
+    "node": "lem-sfb-resolving-derived-adjunction-normalization",
+    "why": "The transpose-normalized derived adjunction identifies evaluation with the canonical counit, rather than an arbitrary isomorphism of cohomology."
+   },
+   {
+    "node": "lem-sfb-grothendieck-k-injective",
+    "why": "Unbounded replacement existence verifies the ambient hypothesis of the generic derived adjunction lemma."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Transports the ringed-site K-flat criterion to the actual internal tensor without changing coefficients."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ringed-site bounded-flat criterion proves K-flatness of the finite lattice cochain complex."
+   },
+   {
+    "node": "lem-sfb-exact-flat-tensor-derived-counit-comparison",
+    "why": "Generic normalized exact derived tensor comparison identifies inflation of a derived tensor with the tensor of inflations."
+   },
+   {
+    "node": "lem-trf-site-functorial-flat-resolution",
+    "why": "Generic small-ringed-site flat resolution existence verifies both ambient hypotheses of the exact derived monoidal comparison."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic tensor-Hom adjunction gives the closed module tensor on both the coefficient and the action site."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-bounded-below-total-column-comparison",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-weil-pbc-complex-injective-resolution-mono",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-lift-along-injective-quasi-iso",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+  "lem-sfb-total-tensor-homotopy",
+  "lem-sfb-resolving-derived-adjunction-normalization",
+  "lem-sfb-grothendieck-k-injective",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sfb-exact-flat-tensor-derived-counit-comparison",
+  "lem-trf-site-functorial-flat-resolution",
+  "lem-pc-sheaf-modules-tensor-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-8a1472a9c",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-8a1472a9c (reviewer sub-agent of L); spot-checked: I read the item, all 14 steps, every cited statement and the new node. The statement is byte-identical to the Q08-fixed base (no weakening); this is not a re-split item, and no SGA is used. Source: main-20261015 sk-thm-sf-ctf-stability direct-images proof, paragraph (3), which has no lattice calculation, so proof_origin agent is right. Step checks: I recomputed the totalized homotopy sign (-1)^a and the shift and cone comparisons ((-1)^a on K^a P[1]); they match the cone convention of def-weil-abstract-derived-category and the -p projection, and the SES connecting clause follows. The column and row comparisons apply: bounded below in both indices, and Mod_R has countable coproducts. Step 4 uses only the lattice lemma's invariant-inclusion normalization, which makes Γ(J)[0]→K(J) a quasi-isomorphism on injectives. Mono replacement, lifts and lift homotopies are cited for their statements. In step 8 I re-derived that θ_{a,b}=(-1)^{ab}c_a turns the Hom differential d_P f-(-1)^{a+b}f∂ into d_K+(-1)^a d_P. In step 9 I chased the roof: roof∘t b_J=inc and the derived counit on K-injective J comes from the resolving-adjunction transpose clause. Step 10: B flat gives finite-sum flat terms, K-flat via pc-bounded-above-flat-kflat-site and pe-internal-section-tensor-comparison; flatness of R is never used. Step 12: c_n=(-1)^{pq}c_pc_q holds and the Koszul swap sign is (-1)^{pq}. Step 13: both categories are module sheaves on small sites (action-site presentation), closed and with functorial flat resolutions, and t is exact, strong monoidal and preserves flat objects, as exact-flat-tensor-derived-counit-comparison requires. Numerical tests: d(x⋆y)=dx⋆y+(-1)^p x⋆dy for B=functions on (Z/3)^r with shifts, r=0..4, all p,q, 0 failures. New node lem-sfb-integral-cubical-chain-diagonal: B1-B9 fine, statement only. Exact integer computation of ∂Δ=Δ∂ and all three counit identities on every face, r=0..4, at zero and random negative vertices: 0 failures. rg duplicate search (cubical, diagonal, Koszul+cup/shuffle, T_A, A⊔C) found none; it is not a clause of the item (D1 OK). Batch-5 flag lem-trf-site-functorial-flat-resolution: accepted as genuinely outside the assumptions. It says only that module sheaves on any small ringed site have functorial flat resolutions (Lean-sourced, KFlatResolutionIndependentCoefficients), which is neither the trace formula, Poincaré duality, nor a step of their proofs. Its closure has 8 nodes, and the only trf/pd node in it is itself. The non-trf lem-sfb-sheaf-functorial-flat-resolution covers only A-valued sheaves, so no repoint is available. All 14 declared tool_uses are generic homological black boxes; accepted. Advisory, not a fault: step 6 does not re-verify the lattice lemma's ring-change square for the chosen λ, but the statement does not assert it and the only citer (discrete-lattice-cup-exterior) does not use it. No fixes."
  }
 }
