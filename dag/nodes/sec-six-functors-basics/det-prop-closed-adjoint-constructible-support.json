@@ -60,7 +60,7 @@
    "elementary": false
   },
   {
-   "text": "Apply the existing formal_closed_support_adjunction realization of det-lem-formal-closed-support-adjunction, at derived Hom universe u+1. Its output supplies an ordinary adjunction a with kernel-normalized counit, a derived adjunction b equal to a.mapDerivedCategoryRightDerivedAdjunction, the open adjunction c equal to formalSupportPullbackAdjunction.mapDerivedCategoryRightDerivedAdjunction, a distinguished localization triangle, and the fiber comparison. Substitute the two equalities. The first arrow is already the actual counit, so no second counit normalization argument is required.",
+   "text": "Apply the existing formal_closed_support_adjunction realization of det-lem-formal-closed-support-adjunction, at derived Hom universe u+1. Its output supplies an ordinary adjunction a with kernel-normalized counit, a derived adjunction b equal to a.mapDerivedCategoryRightDerivedAdjunction, the open adjunction c equal to formalSupportPullbackAdjunction.mapDerivedCategoryRightDerivedAdjunction, a distinguished localization triangle, and the fiber comparison. Substitute the two equalities. The first arrow is already the actual counit, so no second counit normalization argument is required. In ClosedSupportConstructibleAssertions, derive finite-colimit preservation locally from a.leftAdjoint_preservesColimits before forming the termwise derived closed direct image, instead of quantifying a redundant independent preservation witness. The quantified adjunction already implies this property.",
    "uses": [
     "det-lem-formal-closed-support-adjunction"
    ],
@@ -103,7 +103,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-closed-adjoint-constructible/sk-prop-closed-adjoint-constructible-support.proof.md",
-  "place": "Both paragraphs; A7 formalizes the normalized localization triangle, exact pullback, open direct-image finiteness, coefficient-specific Serre triangulatedness, and closed-pullback fiber comparison."
+  "place": "Both paragraphs; A7 formalizes the normalized localization triangle, exact pullback, open direct-image finiteness, coefficient-specific Serre triangulatedness, and closed-pullback fiber comparison. Q9 reapplies the returned repair to the current restored module: derive finite-colimit preservation inside the assertion from its quantified adjunction, keeping all existing imports and completed proofs."
  },
  "mathlib_searches": [
   {
@@ -501,12 +501,13 @@
   "note": "The statement matches every hypothesis and conclusion clause of the node: both coefficient cases (all finite E and Q̄ℓ, existing ring structures), separated finite-type X/Z/U over k, k-morphisms, closed/open complementary immersions, no added quasi-compactness of j. RΓ_Z and Dbc are the recorded declarations; the first arrow is the counit of an existential adjunction pinned by the same equation as the landed FormalClosedSupportAssertions (so it is unique); the second arrow is the open unit; the third arrow is existential; the three non-K terms (including the shift) and RΓ_Z K on Z have explicit bounded-constructible clauses. j^* is the landed closed-support lemma's formalSupportPullback, canonically isomorphic to the pushpull extension of scalars; consistent, not a fault. Edge cases (empty schemes, K=0, ℓ=2) and the single universe checked. The helper is real, the only proof is sorry, docstrings carry source place, blueprint tag and seven proof steps, lean.statement is verbatim, and only the lean field of the node changed. nt_compile --json on the snapshot: exit 0, 13.6 s, no warnings; #print axioms shows only the standard axioms plus sorryAx. Non-blocking: the second reading was done by the same worker."
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
   "reviewer": "COMPILER",
-  "group": "A7",
+  "group": "Q9",
   "result": "pass",
-  "landing": "20261020T051010-L-1523965",
-  "kind": "interface"
+  "landing": "20261021T203722-L-3858705",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

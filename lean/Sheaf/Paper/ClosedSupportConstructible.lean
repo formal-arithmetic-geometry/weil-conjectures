@@ -58,9 +58,8 @@ as in `FormalClosedSupportAssertions`. Its derived counit and the canonical open
 the first two arrows. The only unspecified triangle arrow is the connecting morphism.
 The middle vertex is bounded constructible by its type; the other three displayed terms
 and the closed-support object are explicitly required to be bounded constructible.
-The exactness of the closed direct image is part of the assertion (it holds for a
-quasi-compact open complement, `closedSupport_lowerStarExact`); the derived functor
-`(lowerStar Λ i).mapDerivedCategory` is formed with it.
+The quantified adjunction supplies finite-colimit preservation of its left adjoint
+for the termwise derived functor; no separate preservation witness is required.
 
 Source: blueprint main-20261015, closed-adjoint-constructible, support detail statement
 (blueprint: det-prop-closed-adjoint-constructible-support). -/
@@ -68,7 +67,8 @@ def ClosedSupportConstructibleAssertions
     (Λ : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}) [MonObj Λ] [IsCommMonObj Λ]
     {Z U X : Scheme.{u}} (i : Z ⟶ X) (j : U ⟶ X)
     [IsClosedImmersion i] [IsOpenImmersion j] : Prop :=
-  ∃ (_ : PreservesFiniteColimits (lowerStar Λ i)) (a : lowerStar Λ i ⊣ formalClosedSupport Λ i j),
+  ∃ a : lowerStar Λ i ⊣ formalClosedSupport Λ i j,
+    letI := a.leftAdjoint_preservesColimits
     (∀ M : FormalSupportModules Λ X,
       (formalSupportKernelComparison Λ i j).app M ≫ a.counit.app M =
         (formalSupportKernelInclusion Λ j).app M) ∧
@@ -149,7 +149,7 @@ private theorem support_constructible_of_localization
   obtain ⟨_, _, a, hn, _, _, _, _, hc, b, c, δ, hb, hj, htri, hfiber⟩ :=
     formal_closed_support_adjunction.{u, u + 1} Λ i j hji
   subst b c
-  refine ⟨hc, a, hn, fun K ↦ ?_⟩
+  refine ⟨a, hn, fun K ↦ ?_⟩
   let F := (lowerStar Λ i).mapDerivedCategory.obj
     ((formalClosedSupport Λ i j).rightDerivedFunctor.obj K.obj)
   have hB := hpush _ (supportPullback_constructible Λ j K.obj K.property)
