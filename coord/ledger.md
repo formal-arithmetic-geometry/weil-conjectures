@@ -23391,3 +23391,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:51 L: merged deliver/Q25/lem-sf-open-external-tensor-normalization (stage 2; reviewer FIX; parallel immutable checks)
 - 18:51 L: merged deliver/NJ/lem-sfb-action-topos-geometric-restriction (stage 2; reviewer FIX; parallel immutable checks)
 - 18:53 L: merged deliver/Q12/lem-sfb-product-chain-proper-interval-homology (stage 2; reviewer PASS; parallel immutable checks)
+- 18:53 L: returned deliver/N2/Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison (reviewer RETURN: (the landing tools, head 9e329642c) the delivery did not land: lean/Sheaf/AlgebraicGeometry/StandardFlatSingleBaseChange)
