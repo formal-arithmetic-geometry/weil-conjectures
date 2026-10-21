@@ -23296,3 +23296,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:15 L: merged deliver/Q30/lem-zl-adic-hom-tensor-lisse-criterion (stage 2; reviewer PASS; parallel immutable checks)
 - 2026-10-21T18:16:07Z L: superseded stage-1 delivery NN/lem-pur-compact-support-arrow-scalar-transport at 4b4c68a2d883f09bfe58418d13d6ffc333b76eb4; current completion retained; packet archived at refs/superseded/NN/lem-pur-compact-support-arrow-scalar-transport/4b4c68a2d883f09bfe58418d13d6ffc333b76eb4; stale return retired.
 - 2026-10-21T18:16:50Z L: superseded stage-1 delivery Q34/lem-sp-finite-coefficient-input-models at ba442f26dd5daaf263fa6afbaec30cb901acd4de; current completion retained; packet archived at refs/superseded/Q34/lem-sp-finite-coefficient-input-models/ba442f26dd5daaf263fa6afbaec30cb901acd4de; stale return retired.
+- 18:17 L: merged deliver/Q18/lem-sfb-condensed-split-coset-induction (reviewer PASS; first push; new nodes: 0)

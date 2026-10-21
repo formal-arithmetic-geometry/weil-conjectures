@@ -13,9 +13,125 @@
   "def-sfb-condensed-action-module",
   "def-weil-presheaf-modules-sheafification"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the section-module interpretation of [def-sfb-condensed-action-module]. The subgroup $H$ is profinite: it is closed in the compact Hausdorff group $P$, and its subspace topology has the inherited clopen basis. For $J=H,P$ apply [lem-sfb-internal-action-site-presentation] on the specified small profinite site with $K(S)=C(S,J)$ and ring sheaf $A$. This site has finite limits and the given finite jointly surjective covers; $K$ is the condensed group of $J$ and acts trivially on $A$. The cited statement gives equivariant sheafification and says that forgetting the action creates kernels and cokernels, with sectionwise kernels and sheafified sectionwise cokernels. It also detects zero objects. The categories are abelian by [lem-sfb-condensed-product-action-inflation], taking its first group to be $J$ and its second group trivial. Thus exactness can be checked on underlying module sheaves: the image is the kernel of the cokernel, so both image and kernel are created by forgetting, and equality is reflected by the faithful forgetful functor.",
+   "uses": [
+    "def-sfb-condensed-action-module",
+    "lem-sfb-internal-action-site-presentation",
+    "lem-sfb-condensed-product-action-inflation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written exact-induction input for restriction to a closed condensed subgroup; this argument supplies details not present in the blueprint."
+   }
+  },
+  {
+   "text": "Write $B_M(S)=A(S)[P_S]\\otimes_{A(S)[H_S]}M(S)$. Its elements are finite sums of symbols $a[p]\\otimes m$, modulo additivity and the balancing relations $[ph]\\otimes m=[p]\\otimes h m$ and $a[p]\\otimes m=[p]\\otimes am$. Restriction along $t:T\\to S$ sends such a symbol to $t^*a[p\\circ t]\\otimes t^*m$; naturality and linearity of the $H$-action preserve both relations. Left multiplication $g([p]\\otimes m)=[gp]\\otimes m$ also preserves them, is $A(S)$-linear, and is natural in $S$. Its unit and associativity laws follow from $1p=p$ and $g(g'p)=(gg')p$. The equivariant sheafification assertion of [lem-sfb-internal-action-site-presentation], together with [def-weil-presheaf-modules-sheafification], therefore makes $B_M^\\#$ the claimed internal $P$-module. A morphism $u:M\\to M'$ acts by $[p]\\otimes m\\mapsto[p]\\otimes u(m)$ before sheafification. Identity, composition, zero and sums of maps have these same formulas; the sheafified maps retain them by uniqueness of their extensions. Hence this is an additive functor $L=\\operatorname{Ind}_H^P$.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written exact-induction input for restriction to a closed condensed subgroup; this argument supplies details not present in the blueprint."
+   }
+  },
+  {
+   "text": "Let $\\eta_M:B_M\\to L M$ be the sheafification unit. For a $P$-equivariant linear map $F:L M\\to N$ define $\\Phi(F)_S(m)=F_S(\\eta_M([1]\\otimes m))$. These maps are linear and commute with restriction. For $h\\in H_S$, balancing gives $[1]\\otimes hm=[h]\\otimes m=h([1]\\otimes m)$, so $\\Phi(F)(hm)=h\\Phi(F)(m)$. Thus $\\Phi(F)$ is a morphism $M\\to\\operatorname{Res}_H^P N$, with precisely the forward formula in the statement.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written exact-induction input for restriction to a closed condensed subgroup; this argument supplies details not present in the blueprint."
+   }
+  },
+  {
+   "text": "Conversely let $f:M\\to\\operatorname{Res}_H^P N$ be equivariant. On $B_M(S)$ define $\\widetilde f([p]\\otimes m)=p f(m)$ and extend linearly to finite sums. It respects balancing since $(ph)f(m)=p f(hm)$, and it respects scalar balancing since every $p$ acts $A(S)$-linearly. These maps commute with restriction, and $\\widetilde f(g([p]\\otimes m))=gp f(m)=g\\widetilde f([p]\\otimes m)$. By [def-weil-presheaf-modules-sheafification] there is a unique linear extension $\\Psi(f):L M\\to N$. It is $P$-equivariant: under the equivalence of [lem-sfb-internal-action-site-presentation], $\\widetilde f$ is a module-presheaf map on the action site $C_K$, and its extension by the module-sheafification universal property on $C_K$ corresponds to an equivariant map whose underlying extension on the base site is the same unique linear extension. This uses the cited statement's identification of the two sheafifications, including their units.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sfb-internal-action-site-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written exact-induction input for restriction to a closed condensed subgroup; this argument supplies details not present in the blueprint."
+   }
+  },
+  {
+   "text": "We have $\\Phi\\Psi(f)(m)=1f(m)=f(m)$. On every presheaf generator, $\\Psi\\Phi(F)(\\eta_M([p]\\otimes m))=pF(\\eta_M([1]\\otimes m))=F(\\eta_M([p]\\otimes m))$. The universal property in [def-weil-presheaf-modules-sheafification] makes the resulting sheaf maps equal. For a source map $u:M'\\to M$ and a target map $v:N\\to N'$, the formula gives $\\Phi(vFu)(m)=v\\Phi(F)(u(m))$, where on the left $u$ denotes $L u$. This proves naturality of the inverse bijections, hence the asserted adjunction $L\\dashv\\operatorname{Res}_H^P$ with both specified formulas. No property of $s$ was used for the adjunction.",
+   "uses": [
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written exact-induction input for restriction to a closed condensed subgroup; this argument supplies details not present in the blueprint."
+   }
+  },
+  {
+   "text": "Now use the continuous section to prove preservation of kernels. Put $X_S=C(S,X)$. Every $p\\in P_S$ has a unique expression $p=(s\\circ x)h$ with $x\\in X_S$ and $h\\in H_S$: necessarily $x=q\\circ p$ and $h=(s\\circ q\\circ p)^{-1}p$. The latter map has image in $H$ because $p$ and $s(q(p))$ belong to the same right coset. It is continuous as a map to $H$ with its subspace topology, since its composite to $P$ is continuous. Conversely $(x,h)$ has product $(s\\circ x)h$ with coset $x$, and these two formulas are inverse. They commute with precomposition by every map of profinite test sets. No normality or finite index of $H$ is used.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written exact-induction input for restriction to a closed condensed subgroup; this argument supplies details not present in the blueprint."
+   }
+  },
+  {
+   "text": "Define $D_M(S)=\\bigoplus_{x\\in X_S}M(S)$, whose elements have finite support, and write $e_x(m)$ for an element supported at $x$. The maps\n$$\\alpha_S:B_M(S)\\longrightarrow D_M(S),\\qquad [p]\\otimes m\\longmapsto e_{qp}\\bigl(((s\\circ qp)^{-1}p)m\\bigr),$$\n$$\\beta_S:D_M(S)\\longrightarrow B_M(S),\\qquad e_x(m)\\longmapsto[s\\circ x]\\otimes m$$\nare inverse $A(S)$-linear maps. Indeed the factorization of $ph$ is $(x,h_p h)$ if that of $p$ is $(x,h_p)$, so $\\alpha_S([ph]\\otimes m)=e_x(h_p h m)=\\alpha_S([p]\\otimes hm)$; scalar balancing follows from linearity of the $H_S$-action. This verifies that $\\alpha_S$ is defined on the tensor product. The map $\\beta_S$ is linear on each summand, so defines a linear map on finite-support sums. The two composites on generators are\n$$e_x(m)\\longmapsto e_x(m),\\qquad [p]\\otimes m\\longmapsto[s\\circ qp]\\otimes h_p m=[p]\\otimes m.$$\nAdditivity then proves both identities on all elements.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written exact-induction input for restriction to a closed condensed subgroup; this argument supplies details not present in the blueprint."
+   }
+  },
+  {
+   "text": "Give $D_M$ restriction maps $e_x(m)\\mapsto e_{x\\circ t}(t^*m)$ along $t:T\\to S$, adding coefficients when distinct indices become equal after restriction. The factorization in step 6 shows that $\\alpha,\\beta$ commute with these restrictions, even when indices merge. They are also natural in equivariant maps $M\\to M'$, since such a map commutes with every $h_p$. Thus $B_M\\cong D_M$ as module presheaves, naturally in $M$. This assertion concerns finite-support sums indexed by continuous maps $S\\to X$; it does not identify them with a product, nor with a sum indexed by individual points of $X$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written exact-induction input for restriction to a closed condensed subgroup; this argument supplies details not present in the blueprint."
+   }
+  },
+  {
+   "text": "For an equivariant map $u:M\\to N$, let $K=\\ker u$. By [lem-sfb-internal-action-site-presentation], $K(S)=\\ker u_S$. Under the normal forms of steps 7--8, $B_u(S)$ applies $u_S$ to each coefficient, so its kernel consists exactly of finite-support sums with coefficients in $K(S)$. The inclusion $B_K(S)\\to B_M(S)$ is injective and identifies $B_K$ with the presheaf kernel of $B_u$, naturally in $S$. Apply [lem-weil-pbc-ringed-site-module-sheafification-exact] to the ringed profinite site $(C,A)$. It preserves this kernel, so the underlying module sheaf of $L K$ is the kernel of the underlying map $L u$. The comparison is $P$-equivariant by construction in step 2; the action-site kernel assertion identifies it with the equivariant kernel as well. Consequently $L$ preserves kernels. This uses exact sheafification only for a sectionwise kernel diagram, and does not assume that epimorphisms of condensed modules are surjective on sections.",
+   "uses": [
+    "lem-sfb-internal-action-site-presentation",
+    "lem-weil-pbc-ringed-site-module-sheafification-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EI (lemma-sheafification-exact), applied to the explicit sectionwise kernel identification; equivariant kernels use the action-site presentation."
+   }
+  },
+  {
+   "text": "Let $u:M'\\to M$ and let $v:M\\to Q$ be its cokernel in the abelian action category of step 1. A map $a:L M\\to N$ with $aL u=0$ corresponds by the natural adjunction of step 5 to a map $b:M\\to\\operatorname{Res}N$ with $bu=0$. There is a unique $c:Q\\to\\operatorname{Res}N$ with $cv=b$; its adjoint $d:L Q\\to N$ is the unique map with $dL v=a$, by the same naturality. Also $L v L u=L(vu)=0$ by additivity. This is the cokernel universal property, so $L$ preserves cokernels. Finally, in a short exact sequence $0\\to M'\\xrightarrow{u}M\\xrightarrow{v}M''\\to0$, $u$ is the kernel of $v$ and $v$ is the cokernel of $u$. Steps 9 and 10 preserve both descriptions, which proves that the induced sequence is short exact. All finite-support formulas allow arbitrary $X_S$ and arbitrary section modules, establishing the last clause as well.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent-written exact-induction input for restriction to a closed condensed subgroup; this argument supplies details not present in the blueprint."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-condensed-action-module",
+  "lem-sfb-internal-action-site-presentation",
+  "lem-sfb-condensed-product-action-inflation",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-weil-pbc-ringed-site-module-sheafification-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written missing exact-induction input; explicit sectionwise tensor formulas, the action-site sheafification statement, and Stacks 03CY/03EI."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -72,10 +188,59 @@
    "results": "9 hits: Mathlib/RepresentationTheory/FiniteIndex.lean, Mathlib/RepresentationTheory/FiniteIndex.lean, Mathlib/RepresentationTheory/FiniteIndex.lean, Mathlib/RepresentationTheory/FiniteIndex.lean, Mathlib/RepresentationTheory/FiniteIndex.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean",
    "date": "2026-10-22",
    "verdict": "no match: abstract Rep induction and restriction adjunctions use a discrete scalar ring and abstract groups; module sheafification/pullback adjunctions do not supply exact condensed subgroup induction"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Exact induction left adjoint restriction for sheaves of modules with internal profinite group actions split quotient",
+   "results": "8 hits: Rep.instIsLeftAdjointActionModuleCatRes, Rep.resIndAdjunction, PresheafOfModules.sheafificationAdjunction, SheafOfModules.PullbackConstruction.adjunction, AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor, CategoryTheory.HasSheafify.isLeftExact, Rep.resIndAdjunction_homEquiv_symm_apply, CategoryTheory.plusPlusAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern abstract Rep induction, constant-ring condensed adjunctions, general sheafification, or unrelated induced topologies; none states exact induction for internal group actions over an arbitrary condensed ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "Rep.indResAdjunction",
+   "results": "3 hits: Rep.indResAdjunction, Rep.coindResAdjunction_counit_app, Rep.coindResAdjunction_unit_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern abstract Rep induction, constant-ring condensed adjunctions, general sheafification, or unrelated induced topologies; none states exact induction for internal group actions over an arbitrary condensed ring."
+  },
+  {
+   "tool": "grep",
+   "query": "indResAdjunction|indFunctor|induction.*exact",
+   "results": "18 hits: Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/Induced.lean, Mathlib/RepresentationTheory/FiniteIndex.lean, Mathlib/RepresentationTheory/FiniteIndex.lean, Mathlib/RepresentationTheory/FiniteIndex.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern abstract Rep induction, constant-ring condensed adjunctions, general sheafification, or unrelated induced topologies; none states exact induction for internal group actions over an arbitrary condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Induction of internal modules with condensed group action is an exact left adjoint to subgroup restriction when the profinite coset projection has a continuous section",
+   "results": "8 hits: CondensedMod.LocallyConstant.adjunction, LightCondMod.LocallyConstant.adjunction, Rep.resIndAdjunction, Rep.instIsLeftAdjointSubtypeMemSubgroupCoindFunctorSubtype, Rep.coindResAdjunction, Rep.instIsLeftAdjointActionModuleCatRes, Condensed.setAbAdjunction, Rep.instIsRightAdjointSubtypeMemSubgroupIndFunctorSubtype",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern abstract Rep induction, constant-ring condensed adjunctions, general sheafification, or unrelated induced topologies; none states exact induction for internal group actions over an arbitrary condensed ring."
+  },
+  {
+   "tool": "loogle",
+   "query": "CondensedMod, \"ind\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern abstract Rep induction, constant-ring condensed adjunctions, general sheafification, or unrelated induced topologies; none states exact induction for internal group actions over an arbitrary condensed ring."
+  },
+  {
+   "tool": "grep",
+   "query": "(induc|coset|indResAdjunction)",
+   "results": "20 hits: Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Discrete/Characterization.lean, Mathlib/Condensed/Light/Monoidal.lean, Mathlib/Condensed/Light/Small.lean, Mathlib/Condensed/Light/Small.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern abstract Rep induction, constant-ring condensed adjunctions, general sheafification, or unrelated induced topologies; none states exact induction for internal group actions over an arbitrary condensed ring."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of sheaves of representations along an internal subgroup has an exact left adjoint computed by sheafified tensor induction with a split space of cosets",
+   "results": "8 hits: Rep.resIndAdjunction, Rep.instIsLeftAdjointSubtypeMemSubgroupCoindFunctorSubtype, Rep.coindResAdjunction, Rep.instIsLeftAdjointIndFunctor, Rep.instIsLeftAdjointActionModuleCatRes, Rep.indResAdjunction, Rep.instIsRightAdjointSubtypeMemSubgroupIndFunctorSubtype, Rep.resIndAdjunction_counit_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern abstract Rep induction, constant-ring condensed adjunctions, general sheafification, or unrelated induced topologies; none states exact induction for internal group actions over an arbitrary condensed ring."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-derived-invariants-normal-subgroup-comparison",
@@ -100,5 +265,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-condensed-split-coset-induction",
+  "worker": "stage1",
+  "summary": "Constructed the additive functor and its two adjunction maps explicitly. A continuous coset section gives mutually inverse tensor/finite-support normal forms, natural under restriction even when indices collide. These identify sectionwise kernels; exact ringed-site module sheafification preserves them. The explicit adjunction preserves cokernels by their universal property. No statement change and no new nodes.",
+  "blueprint": "The source direct-images proof paragraph (3) is the proper/open compactification assembly; the item is an agent-formulated categorical input below the open coefficient calculation, not a claim that the blueprint states induction. Steps 1--5 give the induction/restriction adjunction needed for derived restriction, and steps 6--10 establish its exactness. The inherited nearest-blueprint ancestor is null, as reported by blueprint_refs.py ancestor; its non-unspecified from.place and via chain are retained."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-91188c5d8",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-91188c5d8 (reviewer sub-agent of L); spot-checked: Read in full the item's ten steps and the statements of all five cited nodes: def-sfb-condensed-action-module, lem-sfb-internal-action-site-presentation, lem-sfb-condensed-product-action-inflation, and the Mathlib leaves def-weil-presheaf-modules-sheafification and lem-weil-pbc-ringed-site-module-sheafification-exact. Also read the source: blueprint main-20261015 direct-images proof §(3), which does not state induction, so the item is correctly marked agent-written with WANTED, plus Stacks 03EI = sites-modules-lemma-sheafification-exact. Steps 1-5: the induction/restriction adjunction checks on generators. Balancing (ph)f(m)=p f(hm), equivariance of the unit, and ΨΦ(F)=F all follow from uniqueness of the sheafification extension; the P-equivariance of the extension comes from the action-site clause that identifies the two sheafifications. Steps 6-8: P_S ≅ X_S×H_S as right H_S-sets via p=(s∘qp)h_p, so A(S)[P_S] is a free right A(S)[H_S]-module and B_M(S) ≅ ⊕_{X_S} M(S). This is natural under restriction since h_{p∘t}=h_p∘t, and needs no normality. Step 9: ker B_u = B_K as presheaves, exact module sheafification on the ringed site (C,A) preserves it, and the action-site node gives the equivariant kernel. Step 10: cokernels are preserved by the written-out adjunction argument, and a short exact sequence is a kernel/cokernel pair in the abelian A_P. Small cases tested: H=P, H=1, P trivial, S=∅, A=0, P=Z_p with H=pZ_p. Route: all statement citations are in unit sk-thm-sf-ctf-stability, the rest are definitions or Mathlib leaves, and no tool_uses are needed. No cycle (closure of 271 nodes), no SGA, no new nodes, statement unchanged. The rg -L duplicate search over dag/nodes found no node stating condensed induction. The citer lem-sfb-derived-invariants-normal-subgroup-comparison uses exactly the stated exact left adjoint."
  }
 }
