@@ -218,5 +218,28 @@
   "group": "NM",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NM-1c6aff79a (reviewer sub-agent of L); spot-checked: I read the item, the full statements of the three cited definition nodes (sk-def-sfb-sheaf-tensor, sk-def-sfb-module-objects, sk-def-sfb-change-of-scalars) and the source, the last sentence of lem-sfb-subfield-flat.proof.md in blueprint main-20261015 ('F_X ⊗_{E_X} M ≅ M^n naturally'). The statement, stmt_deps, source and blueprint fields are unchanged from the record Q43 created; only split-owned fields changed. There are no new nodes, no repair note for this item, it is not on the route-pivot dropped list, and it cites no SGA. Step 1 gets the Kronecker identity q_i e_j=δ and s=Σφ(q_i s)b_i from θ's two inverse identities and R-linearity of e_i, q_i under the Res action. Step 2 builds Φ through the presheaf tensor, sheafification and the coequalizer. Its balancing check is correct: q_i(sφ(r))m=q_i(s)(rm) uses that B and R are commutative and the action is associative. Testing on the triple tensor is valid because sheafification is strong monoidal. Step 3 builds t_i=b_i⊗–, which is R-linear by the coequalizer relation. In step 4 the composite ΦΨ is the identity because q_i(b_j)=δ_ij. In step 5, ΨΦ(s⊗m)=s⊗m on elementary tensors, and uniqueness out of the bilinear tensor, the sheafification and the coequalizer gives ΨΦ=id. Step 6 proves naturality from the linearity of f. Every step is truly elementary from the cited statements. I tested n=0 (B=0, both sides zero), n=1 with b_1 a unit other than 1, and ordinary modules on a point. No candidate duplicates it: monoidal-finite-free-transport, det-prop-sfb-cartesian-coefficients-finite-free, scalar-model-finite-flat-resolution and sbc pullback-free-coordinates are all different statements. A cosmetic point: mathlib_searches lists the six searches twice, which does no harm. No tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FiniteFreeScalarCoordinates",
+  "declaration": "CategoryTheory.Mod.sheaf_finiteFreeScalarCoordinates",
+  "declarations": [
+   "CategoryTheory.Mod.FiniteFreeScalarCoordinates",
+   "CategoryTheory.Mod.sheaf_finiteFreeScalarCoordinates"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FiniteFreeScalarCoordinates.lean",
+  "statement": "theorem sheaf_finiteFreeScalarCoordinates {C : Type uC} [Category.{vC} C] [EssentiallySmall.{w} C] (J : GrothendieckTopology C) : @FiniteFreeScalarCoordinates (Sheaf J Ab.{w}) _ (sfbSheafTensorStructure (A := Ab.{w}) J).monoidal (sfbSheafTensorStructure (A := Ab.{w}) J).symmetric.toBraidedCategory (@sheafIsAbelian C _ Ab.{w} _ _ J (hasSheafifyEssentiallySmallSite J Ab.{w}))",
+  "branch": "newtargets-dag",
+  "by": "Q49",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The helper predicate packages this node’s coordinate assertion and its tensor infrastructure; it does not assert a theorem for a more general ambient category. The theorem specializes it to the canonical sfbSheafTensorStructure on abelian sheaves, with independent site and coefficient universes. Both local formulas are expressed as morphism identities using extendπ, action, unit, finite-free basis maps and finite-product projections. No sectionwise tensor equality is assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9ac8dbdb1",
+  "group": "Q49",
+  "result": "pass",
+  "note": "Node unchanged except lean. Lean matches every clause: EssentiallySmall.{w} site with independent universes, canonical sfbSheafTensorStructure on Ab (tensor over Z), commutative ring objects, θ : finiteFree R n ≅ comap φ (regular B), natural iso extendScalars⋙comap ≅ const⋙lim, forward formula after the epi extendπ (pins Φ), inverse = Σ b_i⊗m_i, no sectionwise-tensor equality. Helper is a full Prop; its instance binders are Prop classes asserted to exist and follow from the sheaf-tensor dependency. Edge cases n=0, zero rings, empty site covered. No duplicate (CondensedQbarScalarBasisSections has only private helpers). H8/H9 docstrings and conventions ok; only sorry is the theorem proof. nt_compile --json clean in 2.6 s. Advisory: sfbSheafTensorStructure is reached through the sk-def-sfb-sheaf-tensor dependency."
  }
 }

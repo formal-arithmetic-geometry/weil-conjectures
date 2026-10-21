@@ -19918,3 +19918,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:41 L: merged deliver/Q60/lem-sp-proetale-open-scalar-cocycle (reviewer PASS; first push; new nodes: 0); claim not held by Q60: not your claim
 - 03:41 L: merged deliver/Q125/lem-sp-finite-compact-support-domains (reviewer PASS; first push; new nodes: 0); claim not held by Q125: not your claim
 - 03:41 L: merged deliver/Q78/lem-sfb-qlbar-flat (reviewer PASS; after a return; new nodes: 2)
+- 03:42 L: merged deliver/Q49/lem-sfb-finite-free-scalar-coordinates (stage 2; reviewer PASS; parallel immutable checks)
