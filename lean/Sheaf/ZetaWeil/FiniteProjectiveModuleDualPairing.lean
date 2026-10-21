@@ -96,6 +96,39 @@ theorem finiteProjectiveModuleDualPairing (A : Type u) [CommRing A]
               (finiteProjectiveCoevaluation A P).lTensor (Module.Dual A P) ∘ₗ
                 (TensorProduct.rid A (Module.Dual A P)).symm.toLinearMap =
         (LinearMap.id : Module.Dual A P →ₗ[A] Module.Dual A P) := by
-  sorry
+  have left (t : P ⊗[A] Module.Dual A P) (y : P) :
+      TensorProduct.rid A P
+          ((finiteProjectiveEvaluation A P).lTensor P
+            (TensorProduct.assoc A P (Module.Dual A P) P (t ⊗ₜ[A] y))) =
+        finiteProjectiveTensorEndEquiv A P t y := by
+    induction t using TensorProduct.induction_on with
+    | zero => simp [finiteProjectiveTensorEndEquiv]
+    | tmul x f =>
+      simp [finiteProjectiveEvaluation, finiteProjectiveTensorEndEquiv,
+        dualTensorHomEquiv]
+    | add t₁ t₂ h₁ h₂ => simp [add_tmul, h₁, h₂]
+  have right (t : P ⊗[A] Module.Dual A P) (f : Module.Dual A P) (y : P) :
+      TensorProduct.lid A (Module.Dual A P)
+          ((finiteProjectiveEvaluation A P).rTensor (Module.Dual A P)
+            ((TensorProduct.assoc A (Module.Dual A P) P (Module.Dual A P)).symm
+              (f ⊗ₜ[A] t))) y =
+        f (finiteProjectiveTensorEndEquiv A P t y) := by
+    induction t using TensorProduct.induction_on with
+    | zero => simp [finiteProjectiveTensorEndEquiv]
+    | tmul x g =>
+      simp [finiteProjectiveEvaluation, finiteProjectiveTensorEndEquiv,
+        dualTensorHomEquiv, mul_comm]
+    | add t₁ t₂ h₁ h₂ => simp [tmul_add, h₁, h₂]
+  let c := (finiteProjectiveTensorEndEquiv A P).symm (LinearMap.id : P →ₗ[A] P)
+  have hc : finiteProjectiveTensorEndEquiv A P c = LinearMap.id :=
+    (finiteProjectiveTensorEndEquiv A P).apply_symm_apply _
+  refine ⟨inferInstance, inferInstance,
+    (finiteProjectiveTensorEndEquiv A P).bijective, ?_, ?_⟩
+  · ext y
+    simpa [finiteProjectiveCoevaluation, c] using
+      (left c y).trans (congrArg (fun g : P →ₗ[A] P ↦ g y) hc)
+  · ext f y
+    simpa [finiteProjectiveCoevaluation, c] using
+      (right c f y).trans (congrArg (fun g : P →ₗ[A] P ↦ f (g y)) hc)
 
 end LinearMap

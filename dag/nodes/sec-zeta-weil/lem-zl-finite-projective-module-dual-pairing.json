@@ -26,36 +26,31 @@
    }
   },
   {
-   "text": "Apply the existing finite-projective tensor-Hom equivalence with its module named M specialized to P, its module named P specialized to P, and its module named Q specialized to A. The canonical map then has source P tensor_A Hom_A(P,A) and target Hom_A(P,P tensor_A A). Using the right-unitor identification P tensor_A A with P identifies the target with End_A(P), and the pure-tensor formula is x tensor phi mapped to (y mapped to phi(y) x). Thus the canonical map P tensor_A P^vee to End_A(P) is an isomorphism. The evaluation map P^vee tensor_A P to A is the contraction phi tensor x mapped to phi(x), so it is exactly the stated canonical evaluation.",
-   "uses": [
-    "lem-pc-finite-projective-module-tensor-hom"
-   ],
-   "elementary": false,
+   "text": "The existing definition finiteProjectiveTensorEndEquiv is the tensor commutor followed by Mathlib dualTensorHomEquiv. Thus finiteProjectiveTensorEndMap is its underlying linear map and is bijective by LinearEquiv.bijective, with no need to pass through lTensorHomEquivHomLTensor and a right unitor. On a pure tensor x tensor phi it sends y to phi(y) times x, by the definitions of dualTensorHomEquiv and dualTensorHom. Evaluation is contractLeft, whose pure-tensor formula is phi tensor x mapped to phi(x).",
+   "uses": [],
+   "elementary": true,
    "source": {
-    "document": "literature/stacks-project/modules.tex",
-    "place": "Tag 0FNV, Example modules-example-dual; canonical evaluation and identity tensor correspondence"
+    "document": "Mathlib/LinearAlgebra/Contraction.lean",
+    "place": "dualTensorHomEquiv (lines 281-283), dualTensorHom_apply (lines 69-71); existing definition finiteProjectiveTensorEndEquiv in the item module"
    }
   },
   {
-   "text": "Put $c=\\Theta^{-1}(\\operatorname{id}_P)$, where $\\Theta:P\\otimes_A P^\\vee\\xrightarrow{\\sim}\\operatorname{End}_A(P)$ is the map of Step 2. Define $\\operatorname{coev}(a)=ac$; this is an $A$-linear map and sends $1$ to $c$. Every tensor is a finite sum of pure tensors, so choose $c=\\sum_{i=1}^r x_i\\otimes\\phi_i$. The formula for $\\Theta$ gives $\\sum_i\\phi_i(y)x_i=y$ for every $y\\in P$. The first triangle composite sends $y$ to precisely this sum, hence equals $1_P$. For $\\phi\\in P^\\vee$, the second triangle composite sends $\\phi$ to $\\sum_i\\phi(x_i)\\phi_i$. Evaluating this functional on $y$ gives $\\sum_i\\phi(x_i)\\phi_i(y)=\\phi(\\sum_i\\phi_i(y)x_i)=\\phi(y)$ by $A$-linearity and commutativity of $A$, so it equals $\\phi$. The canonical associators simply rebracket pure tensors and the unitors turn scalar tensors into scalar multiplication, giving exactly the two asserted composites. Thus this supplies the verification explicitly omitted by Stacks Tag 0FNV. For $P=0$, take the empty sum: both identity maps are zero; for a rank-one free module take $c=1\\otimes\\operatorname{id}_A$.",
-   "uses": [
-    "lem-pc-finite-projective-module-tensor-hom"
-   ],
-   "elementary": false,
+   "text": "Put c = finiteProjectiveTensorEndEquiv.symm(id). For every tensor t and y in P, tensor induction shows that rid((1 tensor ev)(assoc(t tensor y))) equals finiteProjectiveTensorEndEquiv(t)(y). For every phi in the dual, evaluating lid((ev tensor 1)(assoc.symm(phi tensor t))) at y gives phi(finiteProjectiveTensorEndEquiv(t)(y)); again use tensor induction. Zero and addition follow by linearity. On t = x tensor psi the first formula is psi(y) times x, and the second reduces to phi(x) times psi(y) = psi(y) times phi(x), using commutativity of A. Specialize both formulas to c, whose image under the equivalence is id by apply_symm_apply. Coevaluation sends 1 to c, and the inverse unitors insert the scalar 1, so extensionality gives the two displayed triangle identities. No basis or nonzero hypothesis is needed, so the zero module and zero ring are included.",
+   "uses": [],
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/modules.tex",
-    "place": "Tag 0FNV, Example modules-example-dual; coevaluation as the tensor corresponding to the identity and the two triangle identities"
+    "place": "Tag 0FNV, Example example-dual; omitted triangle checks supplied by tensor induction"
    }
   }
  ],
  "proof_deps": [
-  "lem-sf-finite-projective-dual",
-  "lem-pc-finite-projective-module-tensor-hom"
+  "lem-sf-finite-projective-dual"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
   "document": "literature/stacks-project/modules.tex",
-  "place": "Tag 0FNV, Example example-dual (with its omitted triangle calculations written out); Tag 07VI, lemma-dual-perfect-complex, for finite-projective dual terms"
+  "place": "Tag 0FNV, Example example-dual: direct tensor-induction verification of the omitted triangles; Mathlib dual_finite and dual_projective for dual finiteness and projectivity; existing tensor-End equivalence for bijectivity"
  },
  "mathlib_searches": [
   {
@@ -207,5 +202,15 @@
   "result": "pass",
   "note": "Statement matches node and Stacks 0FNV clause by clause: CommRing A; P with Module.Finite/Module.Projective (the recorded Mathlib leaves); Dual f.g. projective; canonical map = TensorProduct.comm then dualTensorHomEquiv (x⊗φ ↦ φ(·)x), stated bijective; ev = contractLeft; coev = toSpanSingleton of Θ⁻¹(id). Both triangle composites have the correct unitor/associator orientation and were checked by hand with a dual basis. Edge cases P=0, zero ring and rank-one free covered; universes u, v independent; no extra hypotheses. Helpers are real data with source and blueprint docstrings, listed in lean.declarations; only proof is sorry; lean.statement verbatim. nt_compile --json clean (exit 0, 2.6 s); a deliberately broken control copy fails, so the compile is real. No duplicates in Mathlib or side. Cosmetic only: docstring label for Tag 0FNJ reads lemma-left-dual instead of lemma-left-dual-module (tag number correct)."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "M7",
+  "result": "pass",
+  "landing": "20261021T111349-L-82450",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

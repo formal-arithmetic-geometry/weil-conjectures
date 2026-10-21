@@ -22254,3 +22254,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 11:13 L: merged deliver/M5/Sheaf.Paper.PbcAutomorphismTransport (stage 3; reviewer PASS; first push; landing 20261021T111341-L-77970 (interface); batch 20261021T110859; modules 1; new nodes 0; change records: coord/changes/pbc-automorphism-proof-commands.md)
 - 11:13 L: merged deliver/M6/Sheaf.AlgebraicGeometry.GeometricIrreducibilityFiniteSeparableTest (stage 3; reviewer PASS; first push; landing 20261021T111343-L-78447 (proof); batch 20261021T110859; modules 1; new nodes 0)
 - 11:13 L: merged deliver/M7/Sheaf.CategoryTheory.RingedCompleteTriangulated (stage 3; reviewer PASS; first push; landing 20261021T111346-L-79065 (proof); batch 20261021T110859; modules 1; new nodes 0)
+- 11:13 L: merged deliver/M7/Sheaf.ZetaWeil.FiniteProjectiveModuleDualPairing (stage 3; reviewer PASS; first push; landing 20261021T111349-L-82450 (proof); batch 20261021T110859; modules 1; new nodes 0)
