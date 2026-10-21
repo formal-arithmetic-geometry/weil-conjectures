@@ -347,5 +347,51 @@
   "group": "NY",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NY-4251c005b (reviewer sub-agent of L); spot-checked: FIX: one C3 repair, in step 6. I read the item, the new leaf, every cited statement, HRS Example 3.1 (p. 6), Bhatt–Scholze Lemmas 4.2.12 and 4.2.13 (pp. 30–31), and Mathlib Sites/ConstantSheaf.lean lines 44-46 and 68-85.\n\nNew node lem-sfb-set-continuous-functions-fpqc-sheaf: it is an exact Mathlib leaf (isSheaf_fpqcTopology_continuousMapPresheaf; arbitrary topological T, set-valued). It is not a duplicate: lem-cbc-continuous-functions-fpqc-sheaf is the abelian ...Ab declaration, and the other continuous-function nodes are ring-valued. It does not restate a clause of the item.\n\nSteps 1-5 and 7-9 hold:\n- step 1: quotient-map descent on profinite sets, and the fpqc leaf restricted to X_proet;\n- step 2: the component formula for qcqs objects through the spectral to profinite π0 nodes;\n- step 3: X[S] = X x_Z a(S), and the naturality of r, checked on evaluation primes;\n- step 4: p_X^* is identified with the sheafified Kan extension along a_X because their right adjoints agree;\n- step 5: σ is the adjunct of b ↦ b∘r;\n- step 7: naturality in D, finite products and the one-point space;\n- step 8: pullback along f, by transposing through f^{-1}π_X^{-1}a^* with r_X∘pr = r_Y;\n- step 9: the discrete case by the presheaf local-bijection criterion, including D empty and U empty.\n\nC3 fault in step 6: the step identified σ(U) with b ↦ b∘q_U only through the explicit forms in the proofs of lem-weil-pbc-point-lan-affine-evaluation and lem-weil-pbc-proetale-point-components-maps; their statements say only 'canonical isomorphism' and 'natural bijection'. Step 6 now proves Hom_X(U,X[S]) ≅ C(|U|,S), φ ↦ r∘|φ|, for finite S from the coproduct-family node and step 3, then for profinite S by compatible families. From this it shows that every Kan-colimit class equals one at (π0 U, φ0), so the adjunct of σ is c ↦ c∘q_U, which is bijective. The step then concludes with the sheafification-sections, weakly contractible covering and local-bijection nodes. The two nodes it no longer cites were removed from proof_deps and from split_report.tool_uses.\n\nOther checks: the remaining off-unit citations are generic site, Kan and profinite tools, accepted as tool uses. No cycle (BFS over 201 nodes). No SGA source. Not a re-split item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.TotallyDisconnectedCoefficientRealization",
+  "declaration": "AlgebraicGeometry.ProEtale.existsUnique_continuousSetRealization",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousSetPresheaf",
+   "AlgebraicGeometry.ProEtale.continuousSetPresheaf_isSheaf",
+   "AlgebraicGeometry.ProEtale.continuousSetSheaf",
+   "AlgebraicGeometry.ProEtale.continuousSetSheafMap",
+   "AlgebraicGeometry.ProEtale.continuousSetProfiniteFunctor",
+   "AlgebraicGeometry.ProEtale.continuousSetProfiniteSheaf",
+   "AlgebraicGeometry.ProEtale.continuousSetTestProjection",
+   "AlgebraicGeometry.ProEtale.continuousSetRelativeTestProjection",
+   "AlgebraicGeometry.ProEtale.continuousSetPointAdjunction",
+   "AlgebraicGeometry.ProEtale.IsContinuousSetRealization",
+   "AlgebraicGeometry.ProEtale.existsUnique_continuousSetRealization",
+   "AlgebraicGeometry.ProEtale.continuousSetRealizationHom",
+   "AlgebraicGeometry.ProEtale.continuousSetRealizationHom_spec",
+   "AlgebraicGeometry.ProEtale.continuousSetRealizationIso",
+   "AlgebraicGeometry.ProEtale.continuousSetDirectImage_naturality",
+   "AlgebraicGeometry.ProEtale.continuousSetDirectImageMap",
+   "AlgebraicGeometry.ProEtale.continuousSetPullbackMap",
+   "AlgebraicGeometry.ProEtale.continuousSetRealization_natural",
+   "AlgebraicGeometry.ProEtale.continuousSetRealization_products",
+   "AlgebraicGeometry.ProEtale.continuousSetRealization_pullback",
+   "AlgebraicGeometry.ProEtale.continuousSetRealization_coherence",
+   "AlgebraicGeometry.ProEtale.continuousSetConstantPresheafMap",
+   "AlgebraicGeometry.ProEtale.continuousSetConstantMap",
+   "AlgebraicGeometry.ProEtale.continuousSetRealization_discrete",
+   "AlgebraicGeometry.ProEtale.continuousSetRealization_components"
+  ],
+  "file": "lean/Sheaf/Paper/TotallyDisconnectedCoefficientRealization.lean",
+  "statement": "theorem existsUnique_continuousSetRealization (X : Scheme.{u}) (D : Type (u + 1)) [TopologicalSpace D] [T2Space D] [TotallyDisconnectedSpace D] : ∃! σ : (profinitePointSetSchemeInverseImage X).obj (continuousSetProfiniteSheaf D) ⟶ continuousSetSheaf X D, IsContinuousSetRealization X D σ ∧ IsIso σ",
+  "branch": "sheaf-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The complete node is stated by the listed family: the sheaf and uniquely test-function-normalized realization isomorphism; naturality in continuous coefficient maps; finite products including the empty product; the actual adjoint scheme-pullback comparison and its identity/composition laws; discrete constant-sheaf comparison; and the existing Mathlib component equivalence with quotient-precomposition formula. Helpers are the canonical maps of this notion. No statement correction or dependency repair."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-fccf50d6e",
+  "group": "NB",
+  "result": "pass",
+  "note": "Read the item, 7 stmt_dep records, the module (25 decls), HRS Ex 3.1 p6, BS 4.2.12 p30, the ProfinitePointPullback/ProEtaleInverseImage/LocallyConstant deps and the Mathlib ConstantSheaf/TopComparison sources. Realization is ∃! σ, normalized via the actual composite adjunction (left adjoint defeq profinitePointSetSchemeInverseImage) by b ↦ b∘r with r = fst∘homeomorphPrimeSpectrum.symm∘pullback.fst, so σ is pinned and the .choose is not hollow. Naturality uses C(D,E); products take any Finite I incl. empty; pullback is the adjunct of s∘|pullback.fst| under proEtaleSheafAdjunction, with IsIso and agreement with profinitePointSetSchemeComp; identity/comp coherence uses profinitePointSetIdentity/Comp; discrete IsIso from constantSheaf with no finiteness; the component clause pins Mathlib's continuousMapPresheafEquivOfTotallyDisconnectedSpace with qcqs on U.left. Universes compatible (u / Type (u+1)). All bodies sorry, docstrings present, statement verbatim, node differs from live only in lean, both report sections present. Advisory: products third conjunct is redundant with naturality; component clause content comes from the Mathlib Equiv; possibly unused non-public imports. No compile: no fixes."
  }
 }

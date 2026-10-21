@@ -22925,3 +22925,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:24 L: merged deliver/V5/Sheaf.AlgebraicGeometry.ProEtaleDirectImageGlobalEvaluation (stage 3; reviewer PASS; first push; landing 20261021T152407-L-1927624 (interface); batch 20261021T152302; modules 2; new nodes 0; change records: coord/changes/V5-ProEtaleDirectImageTransport.md)
 - 15:24 L: merged deliver/V5/Sheaf.Paper.GlobalHomEvaluationFlatLift (stage 3; reviewer PASS; first push; landing 20261021T152411-L-1933456 (interface); batch 20261021T152302; modules 7; new nodes 6)
 - 15:24 L: merged deliver/W6/Sheaf.Paper.ProperEtaleOriginScalarIsomorphism (stage 3; reviewer PASS; first push; landing 20261021T152415-L-1937288 (interface); batch 20261021T152302; modules 3; new nodes 2; change records: coord/changes/W6-proper-etale-origin-scalar-data.md)
+- 15:25 L: merged deliver/NB/lem-sfb-totally-disconnected-coefficient-realization (stage 2; reviewer PASS; parallel immutable checks)
