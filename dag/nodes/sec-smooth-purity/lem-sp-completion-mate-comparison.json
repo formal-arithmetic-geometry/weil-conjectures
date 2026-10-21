@@ -39,10 +39,11 @@
  ],
  "proof": [
   {
-   "text": "Represent the ordinary reduction/pullback and finite scalar-extension/pullback comparisons as explicit squares of iterated complex functors. Insert the explicit finite quotient evaluation comparison in the finite normalization. These are the same degreewise maps: the complex square hom formula identifies the former with NatIso.mapHomologicalComplex, and quotient evaluation is the identity in each degree. Thus the representative normalizations and the specified derived comparisons keep their mathematical meaning, while elaboration does not repeatedly reconstruct definitionally equal composite complex functors. Keep the module inverse image unchanged and record its additivity as a proved named instance; declare the iterated complex result type explicitly to avoid reconstructing the large inverse-image data during kernel conversion.",
+   "text": "Represent the ordinary reduction/pullback and finite scalar-extension/pullback comparisons as explicit squares of iterated complex functors. Insert the explicit finite quotient evaluation comparison in the finite normalization. These are the same degreewise maps: the complex square hom formula identifies the former with NatIso.mapHomologicalComplex, and quotient evaluation is the identity in each degree. Thus the representative normalizations and the specified derived comparisons keep their mathematical meaning, while elaboration does not repeatedly reconstruct definitionally equal composite complex functors. Keep the module inverse image unchanged and record its additivity as a proved named instance; declare the iterated complex result type explicitly to avoid reconstructing the large inverse-image data during kernel conversion. The actual original-small-site construction, universal derived model, augmentation and pullback normalization are packaged by [def-sp-constant-reduction-models]; its public reexport preserves the original module API.",
    "uses": [
     "def-sf-complex-functor-square",
-    "lem-sf-quotient-tower-evaluation-complex"
+    "lem-sf-quotient-tower-evaluation-complex",
+    "def-sp-constant-reduction-models"
    ],
    "elementary": false,
    "source": {
@@ -193,12 +194,18 @@
   }
  ],
  "proof_deps": [
+  "def-sf-complex-functor-square",
+  "lem-sf-quotient-tower-evaluation-complex",
+  "def-sp-constant-reduction-models",
   "lem-weil-pbc-diagram-site-realization",
   "lem-pc-kflat-resolution",
   "lem-weil-tower-category-levelwise-abelian",
   "def-pc-kflat-complex",
   "lem-weil-pbc-site-derived-tensor-descent",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
   "prop-pur-kinjective-resolutions-exist",
   "lem-weil-pbc-kinjective-total-derived",
@@ -213,17 +220,14 @@
   "lem-weil-pbc-ringed-projection-mate-exact",
   "def-weil-pbc-adjunction-conjugate",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-  "lem-weil-tower-evaluation-kinjective",
-  "lem-pur-derived-change-of-rings",
-  "lem-pur-left-derived-from-kflat-class",
-  "lem-weil-pbc-ring-sheaf-change-adjunction",
-  "def-sf-complex-functor-square",
-  "lem-sf-quotient-tower-evaluation-complex"
+  "lem-weil-tower-evaluation-kinjective"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-  "place": "Proof Step 4, missing integral completed-mate identification; explicit strict-diagram coherence and completion-unit transpose calculation, using Stacks 0941, 0A07, 0B56, 0944, 0E48, 099M and 099N; B3 stage-3 implementation of the original-site quotient compatibility, additivity and resolving-class construction of reduction_exists; V1 represents complex comparisons with explicit iterated endpoints and proved degreewise identities (2026-10-21)."
+  "place": "Proof Step 4, missing integral completed-mate identification; explicit strict-diagram coherence and completion-unit transpose calculation, using Stacks 0941, 0A07, 0B56, 0944, 0E48, 099M and 099N; B3 stage-3 implementation of the original-site quotient compatibility, additivity and resolving-class construction of reduction_exists; V1 represents complex comparisons with explicit iterated endpoints and proved degreewise identities (2026-10-21).; T1 original-site implementation: coupled universal models and normalized augmentation/pullback. Reviewer C-63948 option (b): retain the six complete model proofs and leave projection_isIso open; the three unlanded projection modules and nodes are omitted.",
+  "group": "T1",
+  "date": "2026-10-21"
  },
  "mathlib_searches": [
   {
@@ -575,11 +579,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-87143",
-  "group": "V1",
-  "result": "fix",
-  "landing": "20261021T021030-L-2694797",
+  "reviewer": "C-021ef",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261021T061653-L-1809251",
   "kind": "interface",
-  "note": "independent cc review: delivered 7 modules + 7 nodes + change record + report against the live clone, the published build and the direct importers OrientedNearbyCycles, ProEtaleConstantReductionTower and CompletedProjectionCoherence; CMC node against the live node (B3 09:21)"
+  "note": "independent cc review: Delivered Models + item vs live ProEtaleConstantReductionTower (39 public signatures byte-identical; post-projection item body identical); change record vs changed defs; both nodes' proof_deps vs step uses; 6 direct importers compiled against delivered modules; #print axioms on the 6 closed holes"
  }
 }

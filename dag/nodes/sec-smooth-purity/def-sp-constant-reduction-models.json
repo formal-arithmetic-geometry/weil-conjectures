@@ -1,0 +1,236 @@
+{
+ "id": "def-sp-constant-reduction-models",
+ "kind": "definition",
+ "title": "Coupled universal models for strict constant-coefficient reduction",
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "statement": "For a commutative coefficient ring A and an adic coefficient datum d [def-weil-pbc-adic-coefficient-datum], on the original small pro-etale site of any scheme T form the strict inverse sequence M tensor A/I^(n+1), with the quotient transitions and the original constant scalar action [lem-weil-pbc-strict-tower-exchange-mate-normalization]. Package its total left derived functor together with its universal counit and its invertible K-flat computation law as DerivedReductionModelData [def-weil-pbc-derived-reduction-model-data, def-pc-kflat-complex]. Use this coupled model to define reduction, its complex counit, the uniquely normalized augmentation from constant diagrams, and the uniquely normalized exact-pullback comparison. The constructions use the original unequal object and morphism universes.",
+ "stmt_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+  "def-weil-pbc-derived-reduction-model-data",
+  "def-pc-kflat-complex"
+ ],
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YY, 0941, 0944 and equation-projection-formula-map (0B56); original-site implementation of fix-lem-exchanges Proof Step 4."
+ },
+ "proof": [
+  {
+   "text": "The quotient maps and scalar adjunction units define the strict transitions and ordinary augmentation. Tensor-section extensionality and the adjunction Hom equivalence prove uniqueness and transition compatibility.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-sf-cbc-constant-tower-direct-image-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the existing universal derived-model construction to the strict reduction functor and the independent-coefficient K-flat class. A K-flat resolution resolves every complex. Scalar extension inverts quasi-isomorphisms between K-flat inputs; exact scalar restriction and evaluation do so levelwise. This gives a genuine DerivedReductionModelData value, determined up to its unique counit-compatible isomorphism.",
+   "uses": [
+    "def-weil-pbc-derived-reduction-model-data",
+    "lem-pc-kflat-resolution",
+    "lem-pur-derived-change-of-rings",
+    "lem-pur-left-derived-from-kflat-class"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "The universal lift of the ordinary augmentation gives the derived augmentation. Its universal factorization gives the complex normalization; cancellation of the K-flat computation counit and a K-flat representative of every derived object prove uniqueness.",
+   "uses": [
+    "def-weil-pbc-derived-reduction-model-data",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Scalar pullback comparisons are mates of the ordinary restriction square. Section formulas prove compatibility with quotient transitions. Descend the resulting strict-tower comparison using the localization of the flat-term K-flat resolving subcategory; cancel its invertible counits there and extend the normalization to every K-flat input by a flat-term refinement.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-pc-kflat-resolution",
+    "lem-trf-right-fraction-dense-subcategory",
+    "lem-sp-proetale-algebraic-inverse-image",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-sf-cbc-constant-tower-direct-image-normalization",
+  "def-weil-pbc-derived-reduction-model-data",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-pur-left-derived-from-kflat-class",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-trf-right-fraction-dense-subcategory",
+  "lem-sp-proetale-algebraic-inverse-image",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
+  "place": "Proof Step 4: original-site constant quotient reduction and its finite perfect projection. The normalization is the counit-tensor mate of Stacks 0B56.",
+  "group": "T1",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "derived projection formula computed by tensor with a bounded projective complex and a K-injective representative",
+   "results": "Eight results about projective resolutions, K-projectivity and derived objects; no projection-mate normalization or strict-tower theorem.",
+   "date": "2026-10-21",
+   "verdict": "no exact match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The constant sheaf of a perfect coefficient module is represented by a bounded complex of finite free retracts",
+   "results": "Eight results including SheafOfModules.freeFunctor and condensed constant-module functors; no such chain model. Reuse the project finite-projective splitting and constant-exactness APIs.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.leftDerived_from_resolvingClass",
+   "results": "No hit (project declaration unknown to Mathlib search). The existing project resolving-class theorem and DerivedReductionModelData API were read and reused.",
+   "date": "2026-10-21",
+   "verdict": "project ingredient"
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection.*[Mm]ate|counit.*tensor|tensor.*counit; Module.Finite.exists_comp_eq_id_of_projective; Q_map_surjective_of_projective",
+   "results": "Mathlib has ordinary monoidal adjunction identities and finite-projective splitting. The adopted source has projective lifting and the independent-universe tensorAdjunctionTotal inverse. No matching original-pro-etale reduction-mate computation was found. Whole-DAG search found no existing node for the three new projection specializations.",
+   "date": "2026-10-21",
+   "verdict": "ingredients only"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.ProEtaleConstantReductionTower",
+  "group": "T1",
+  "date": "2026-10-21"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Step 4, via lem-sp-completion-mate-comparison: strict constant reduction and perfect finite projection.",
+   "via": [
+    "lem-sp-completion-mate-comparison"
+   ]
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.ProEtaleConstantReductionModels",
+  "file": "lean/Sheaf/Paper/ProEtaleConstantReductionModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.OrderedExchange.reductionData",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.OrderedExchange.reductionData",
+   "AlgebraicGeometry.Scheme.OrderedExchange.reductionData_exists",
+   "AlgebraicGeometry.Scheme.OrderedExchange.canonicalModelAugmentation",
+   "AlgebraicGeometry.Scheme.OrderedExchange.augmentation_normalized",
+   "AlgebraicGeometry.Scheme.OrderedExchange.augmentation_eq_choose",
+   "AlgebraicGeometry.Scheme.OrderedExchange.ModelPullNormalized"
+  ],
+  "statement": "def reductionData (T : Scheme.{t}) : DerivedReductionModelData (reductionModule d T) (CochainComplex.IsKFlatIndependentCoefficients (R := exchangeConstantRing T A))",
+  "branch": "sheaf-dag",
+  "by": "T1",
+  "date": "2026-10-21"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "Sheaf.Paper.ProEtaleConstantReductionTower",
+  "worker": "T1",
+  "summary": "Coupled universal models for strict constant-coefficient reduction. The unit route is unchanged; only this original-site implementation is factored.",
+  "duplicate_check": "Searched the whole DAG and both Lean roots. The completed-coefficient projection theorem uses a different ring; the generic equal-universe theorem cannot instantiate the original pro-etale site. Reuse their existing abstract tensor and derived-functor ingredients.",
+  "tool_uses": [
+   {
+    "node": "def-weil-pbc-adic-coefficient-datum",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-weil-pbc-strict-tower-exchange-mate-normalization",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "def-weil-pbc-derived-reduction-model-data",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "def-pc-kflat-complex",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-sf-cbc-constant-tower-direct-image-normalization",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-pur-left-derived-from-kflat-class",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-trf-right-fraction-dense-subcategory",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-sp-proetale-algebraic-inverse-image",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "det-pe-topos-functoriality-inverse-image",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   },
+   {
+    "node": "lem-weil-pbc-independent-sheaf-tensor-colimits",
+    "why": "Existing general derived-functor, tensor or constant-sheaf construction used as a tool on the original small pro-etale site. It supports the prescribed strict-tower route and does not replace a statement or proof step of sk-prop-sf-cbc."
+   }
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-021ef",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261021T061653-L-1809251",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-021ef",
+  "group": "T1",
+  "result": "pass",
+  "landing": "20261021T061653-L-1809251",
+  "kind": "interface",
+  "note": "independent cc review: Delivered Models + item vs live ProEtaleConstantReductionTower (39 public signatures byte-identical; post-projection item body identical); change record vs changed defs; both nodes' proof_deps vs step uses; 6 direct importers compiled against delivered modules; #print axioms on the 6 closed holes"
+ }
+}
