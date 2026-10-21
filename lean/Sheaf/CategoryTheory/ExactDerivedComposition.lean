@@ -2,6 +2,7 @@ module
 
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 import Mathlib.CategoryTheory.Localization.Predicate
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 
 /-! # Uniqueness of composition on unbounded derived categories
 
@@ -58,6 +59,13 @@ theorem existsUnique_mapDerivedCategoryCompIso
             (ComplexShape.up ℤ)).hom.app K) =
         (@mapDerivedCategoryFactors C _ _ _ E _ _ _ (F ⋙ G) inferInstance
           (comp_preservesFiniteLimits F G) (comp_preservesFiniteColimits F G)).hom.app K := by
-  sorry
+  refine ⟨mapDerivedCategoryCompIso F G, mapDerivedCategoryCompIso_fac F G, ?_⟩
+  intro μ hμ
+  apply Iso.ext
+  apply Localization.natTrans_ext DerivedCategory.Q
+    (HomologicalComplex.quasiIso C (ComplexShape.up ℤ))
+  intro K
+  have h := (hμ K).trans (mapDerivedCategoryCompIso_fac F G K).symm
+  simpa only [← Category.assoc, cancel_mono] using h
 
 end CategoryTheory.Functor

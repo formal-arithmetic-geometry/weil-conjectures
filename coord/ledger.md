@@ -20359,3 +20359,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:12 L: merged deliver/H1/Sheaf.AlgebraicGeometry.ClassicalProEtaleProperBaseChange (stage 3; reviewer PASS; after a return; landing 20261021T061154-L-1730286 (interface); batch 20261021T060921; modules 4; new nodes 3)
 - 06:12 L: merged deliver/H2/Sheaf.CategoryTheory.DerivedCategory.BoundedBifunctorDevissage (stage 3; reviewer PASS; first push; landing 20261021T061203-L-1736688 (proof); batch 20261021T060921; modules 1; new nodes 0)
 - 06:12 L: merged deliver/H2/Sheaf.FieldTheory.CondensedSubfieldBasis (stage 3; reviewer PASS; first push; landing 20261021T061215-L-1741811 (proof); batch 20261021T060921; modules 1; new nodes 0)
+- 06:12 L: merged deliver/H3/Sheaf.CategoryTheory.ExactDerivedComposition (stage 3; reviewer PASS; first push; landing 20261021T061227-L-1745571 (proof); batch 20261021T060921; modules 1; new nodes 0)
