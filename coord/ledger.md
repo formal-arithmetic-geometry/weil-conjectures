@@ -23593,3 +23593,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:56 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
 - 19:56 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 19:58 L: merged deliver/NZ/lem-sfb-padic-rational-algebraic-generator (reviewer PASS; first push; new nodes: 3)
+- 2026-10-21T19:58:39Z L: superseded stage-1 delivery NM/lem-sfb-derived-invariants-normal-subgroup-comparison at 9a087d5fdc0017b0ddb95e4bc880cfb5fa52253d; current completion retained; packet archived at refs/superseded/NM/lem-sfb-derived-invariants-normal-subgroup-comparison/9a087d5fdc0017b0ddb95e4bc880cfb5fa52253d; stale return retired.
