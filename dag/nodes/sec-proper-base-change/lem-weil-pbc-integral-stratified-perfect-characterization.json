@@ -42,161 +42,111 @@
  ],
  "proof": [
   {
-   "text": "The ring $A$ is adically complete. Compatible representatives $x_n$ satisfy $|x_m-x_n|_E\\le|\\varpi|_E^n$ for $m\\ge n$. Completeness of $E$ gives a limit in the closed unit ball $A$, lying in every closed residue ball $x_n+\\varpi^nA$. The intersection $\\bigcap_n\\varpi^nA=0$ gives uniqueness.",
+   "text": "Apply integralCompletedLocalPerfectCriterion, the separate Proposition 6.6.11 result, to identify completed uniform constructible objects with stratified perfect models. The remaining argument proves the cohomology characterization of Proposition 6.8.11(3).",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-l-adic-extension-complete",
-    "lem-weil-l-adic-extension-absolute-value"
+    "lem-weil-pbc-integral-completed-local-perfect-criterion"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Section 6.5, coefficient completeness"
-   }
+   "elementary": false
   },
   {
-   "text": "Use the restriction-unit lemma throughout. Each term of a completed perfect constant is the inverse limit of its finite-projective torsion reductions (commute finite sums and the defining idempotent with limits). Torsion-limit completeness, scalar restriction and the constant-completion equivalence (local equals Koszul completeness) make the bounded complex complete. Finite-stratum detection gives completeness for (ii); the uniform-model lemma supplies boundedness and uniformly constructible reductions.",
-   "uses": [
-    "lem-weil-pbc-stratum-completion-unit-restriction",
-    "lem-weil-pbc-perfect-strata-uniform-reductions",
-    "lem-weil-pbc-torsion-limit-sheaf-completeness",
-    "lem-weil-pbc-restriction-local-completeness",
-    "lem-weil-pbc-constant-completion-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, perfect constants"
-   }
-  },
-  {
-   "text": "For (i), the uniform reduction criterion gives bounded constructible residue. Take its etale origin, then the finite-field model lemma gives a residue-perfect stratification. Restrictions are complete by the restriction-unit lemma; step 1 verifies coefficient completeness. Each stratum is Noetherian: locally closed in a Noetherian affine open, and quasi-compact since $|T|$ is Noetherian. Apply residue-lisse perfect lifting on each stratum to obtain (ii).",
-   "uses": [
-    "lem-weil-pbc-uniform-reduction-criterion",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-weil-pbc-finite-field-stratified-perfect-models",
-    "lem-weil-pbc-stratum-completion-unit-restriction",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-residue-lisse-perfect-lift",
-    "pqf-def-locnoeth",
-    "lem-sc-affine-noetherian-underlying-space",
-    "lem-sfb-noetherian-space-compact-subsets"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, forward implication"
-   }
-  },
-  {
-   "text": "Conversely (ii) has complete underlying object and a uniform constructible reduction profile by step 2. The uniform reduction criterion supplies the common tower models and compatible etale-origin witnesses. These are precisely all clauses of (i).",
-   "uses": [
-    "lem-weil-pbc-uniform-reduction-criterion",
-    "def-weil-pbc-bounded-constructible-complete"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse implication"
-   }
-  },
-  {
-   "text": "For (ii) implies (iii), exact constant realization and flatness give $\\mathcal H^q(B_U\\otimes_A P)=B_U\\otimes_A H^q(P)$. Kernels in finite-projective terms are finite over the Noetherian DVR, so their quotient cohomology is finite and finitely presented. Step 2 supplies boundedness.",
+   "text": "Construct canonical derived restriction comparisons with exact inverse image and exact slice restriction. Exact realization and restriction commute with homology. For a perfect algebra complex, cycles are submodules of finite modules and its cohomology is their quotient, hence finite and Noetherian finitely presented. Apply these comparisons to the same local perfect models, obtaining stratified finitely presented cohomology. For global boundedness, use a finite refinement of each cover on the quasi-compact Noetherian stratum, bound the finitely many perfect complexes, and take the negative sum and positive sum of the absolute endpoints. Outside this common window all local homology is zero. Cover detection gives zero on each stratum. The underlying abelian inverse-image comparison and finite-stratum detection give zero globally. This also covers an empty scheme or an empty cover.",
    "uses": [
     "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-constant-module-section-properties",
     "lem-weil-pbc-noetherian-submodule-finite",
     "lem-sc-noetherian-finite-module-finite-presentation",
-    "lem-weil-l-adic-extension-integers-dvr"
+    "lem-weil-pbc-noetherian-stratum-detection",
+    "lem-sfb-proetale-tor-local-global",
+    "def-weil-proetale-inverse-image"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3), perfect cohomology"
-   }
+   "elementary": false
   },
   {
-   "text": "For a finitely presented $A$-module $N$, the kernel of $A^r\\twoheadrightarrow N$ is finite and torsion-free, hence finite free. Its two-term resolution realizes $B_U\\otimes_A N$ by a perfect complex. Thus each sheaf in (iii), in degree zero, satisfies (ii) and (i). Finite Postnikov devissage and triangulated closure now give (i) for $K$.",
+   "text": "For a finitely presented local module over the integral PID, choose a surjection from a finite free module. Its kernel is finite by Noetherianity and free since it is a submodule of a free module over a PID. In the standard localization, the thick subcategory generated by the ring contains all finite free modules, their isomorphic kernel, and therefore the cokernel via its short-exact-sequence triangle. The proved perfect/classical-generator equality makes the module in degree zero perfect. Exact completed realization, inverse image, and slice restriction transport this model to the sheaf in degree zero. No degree-zero clause is postponed.",
    "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
     "lem-weil-pbc-noetherian-submodule-finite",
     "lem-sc-dvr-fg-torsionfree-free",
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-weil-pbc-constant-module-section-properties",
-    "lem-sfb-bounded-cohomology-cone-witness",
-    "lem-weil-pbc-uniform-complete-triangulated"
+    "lem-sf-perfect-ring-classical-generator",
+    "lem-weil-pbc-completed-constant-sheaf-reduction"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3), finite resolutions and Postnikov devissage"
-   }
+   "elementary": false
   },
   {
-   "text": "With the stipulated identical coefficient and reduction functors, both constructibility definitions give the same finite-stratum condition. The uniform reduction criterion identifies their uniform reduction requirements. Intrinsic completeness gives the detailed Roos triangle by constant-completion comparison. Conversely that triangle identifies $K$ with the quotient completion object, which is intrinsically complete by the Koszul reflector. This proves the detailed-category assertion.",
+   "text": "For bounded K with stratified finitely presented cohomology, the degree-zero result and the completed criterion put every cohomology sheaf in the uniform complete triangulated subcategory. Its isomorphism closure and all shifts come from pbcIntegralUniformComplete_isTriangulated. Apply the proved source-library prop_of_bounded, which performs finite Postnikov induction. This puts K in the completed category; the completed criterion then makes K stratified perfect. This completes the second equivalence without any unproved gluing theorem.",
+   "uses": [
+    "lem-weil-pbc-integral-completed-local-perfect-criterion",
+    "lem-weil-pbc-uniform-complete-triangulated",
+    "def-sbc-standard-tstructure-derived-category",
+    "lem-sf-derived-truncation-triangle"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the detailed integral notation, use it only under its own coefficient hypotheses and with the same completed ring and reduction functors. The finite-torsion and intrinsic pro-etale constructibility definitions both ask for a finite partition into constructible locally closed strata on which the sheaf is pro-etale locally constant with finite stalks; locally closed strata of $T$ are constructible as in step 5. Membership in (i) implies levelwise finite-torsion constructibility and the uniform interval, hence the reduction conditions of the detailed definition. Intrinsic completeness is the quotient completion condition by the constant-completion equivalence, and its Roos triangle supplies the completeness condition of the detailed definition. Conversely a detailed object has intrinsically constructible finite-level cohomology and the stipulated common interval. Its completeness Roos triangle identifies its underlying object with the quotient derived limit. The latter is the Koszul completion object and is intrinsically complete by the completion-reflector lemma; completeness is invariant under isomorphism. This argument only needs the object identification and does not assert uniqueness of a lift of its projection maps. Normalized constructible local effectivity gives the required uniform tower models, and the full-faithfulness lifting argument in step 6 gives compatible etale witnesses. Thus it belongs to (i). No equality between the constant and completed ambient module categories is used.",
    "uses": [
     "def-weil-derived-complete-integral-detailed",
     "def-weil-derived-complete",
     "def-weil-finite-torsion-constructibility",
-    "def-weil-proetale-constructible-sheaf",
-    "lem-weil-pbc-uniform-reduction-criterion",
+    "def-weil-pbc-bounded-constructible-complete",
     "lem-weil-pbc-constant-completion-equivalence",
-    "lem-weil-pbc-ringed-koszul-completion-reflector"
+    "lem-weil-pbc-ringed-koszul-completion-reflector",
+    "lem-weil-pbc-normalized-constructible-local-effectivity",
+    "thm-weil-pbc-site-comparison",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "prop-weil-pbc-site-comparison-finite-level",
+    "def-weil-proetale-constructible-sheaf",
+    "def-weil-constructible-subset"
    ],
    "elementary": false,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.5.1; Propositions 6.6.11 and 6.8.11(3), coefficient conventions"
+    "place": "Definition 6.5.1 and Proposition 6.8.11(3); comparison with the two explicitly defined DAG integral categories"
    }
   },
   {
-   "text": "Shifts and cones follow from triangulated closure. Good truncations retain the original cohomology sheaves in the retained degrees and give zero elsewhere; hence they still satisfy (iii). A cohomology sheaf in degree zero does also, since zero has the model $N=0$. Apply the equivalences just proved.",
+   "text": "The uniform-complete triangulated lemma gives shifts and cones. For truncations, use the equivalence of (i) and (iii) already established in integralStratifiedPerfectCharacterization. The permitted local-module property Q is invariant under isomorphism by composing each local realization isomorphism with the inverse image of the given sheaf isomorphism. If K has bounds [a,b], the zero cohomology sheaf H^(b+1)(K) satisfies Q, so Q contains zero. The existing DerivedCategory.homologyProperty_truncLE and homologyProperty_truncGE lemmas give Q for all cohomology sheaves of both truncations. Both truncations retain bounds [a,b], including cutoffs outside the interval. Apply (iii) implies (i). Thus the parent proves truncation closure directly, without the standalone truncation split and without commuting truncations with finite coefficient reductions. For the cohomology clause, H^q(K)[0] has bounds [0,0], its degree-zero cohomology is H^q(K), and every other degree is zero. The same isomorphism and zero closure proves (iii), hence (i), directly. This removes the dependency on the companion homology theorem and avoids a cycle when that theorem uses this truncation clause.",
    "uses": [
     "lem-weil-pbc-uniform-complete-triangulated",
-    "def-kun-truncations"
+    "def-sbc-standard-tstructure-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3), closure"
+    "place": "Proposition 6.8.11(3), stability under standard truncations and cohomology"
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-l-adic-extension-complete",
-  "lem-weil-l-adic-extension-absolute-value",
-  "lem-weil-pbc-stratum-completion-unit-restriction",
-  "lem-weil-pbc-perfect-strata-uniform-reductions",
-  "lem-weil-pbc-torsion-limit-sheaf-completeness",
-  "lem-weil-pbc-restriction-local-completeness",
-  "lem-weil-pbc-constant-completion-equivalence",
-  "lem-weil-pbc-uniform-reduction-criterion",
-  "lem-weil-pbc-finite-ring-constructible-derived-origin",
-  "lem-weil-pbc-finite-field-stratified-perfect-models",
-  "lem-weil-pbc-residue-lisse-perfect-lift",
-  "pqf-def-locnoeth",
-  "lem-sc-affine-noetherian-underlying-space",
-  "lem-sfb-noetherian-space-compact-subsets",
-  "def-weil-pbc-bounded-constructible-complete",
+  "lem-weil-pbc-integral-completed-local-perfect-criterion",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
-  "lem-weil-pbc-constant-module-section-properties",
   "lem-weil-pbc-noetherian-submodule-finite",
   "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-sfb-proetale-tor-local-global",
+  "def-weil-proetale-inverse-image",
+  "lem-weil-l-adic-extension-integers-dvr",
   "lem-sc-dvr-fg-torsionfree-free",
-  "lem-sfb-bounded-cohomology-cone-witness",
+  "lem-sf-perfect-ring-classical-generator",
   "lem-weil-pbc-uniform-complete-triangulated",
+  "def-sbc-standard-tstructure-derived-category",
+  "lem-sf-derived-truncation-triangle",
   "def-weil-derived-complete-integral-detailed",
   "def-weil-derived-complete",
   "def-weil-finite-torsion-constructibility",
-  "def-weil-proetale-constructible-sheaf",
+  "def-weil-pbc-bounded-constructible-complete",
+  "lem-weil-pbc-constant-completion-equivalence",
   "lem-weil-pbc-ringed-koszul-completion-reflector",
-  "def-kun-truncations"
+  "lem-weil-pbc-normalized-constructible-local-effectivity",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "prop-weil-pbc-site-comparison-finite-level",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-constructible-subset"
  ],
  "proof_origin": {
-  "by": "agent",
+  "by": "worker K2",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Propositions 6.6.11 and 6.8.11(3), with explicit DAG uniform-tower/witness and coefficient comparisons; truncation closure proved directly from the existing characterization"
+  "place": "Proposition 6.6.11 isolated as its own theorem; the resolution, exact homology comparison, finite-cover boundedness and Postnikov argument of Proposition 6.8.11(3) are implemented here. Detailed category comparison remains open; closure retains its existing proof."
  },
  "mathlib_searches": [
   {
@@ -444,16 +394,19 @@
   "branch": "newtargets-dag",
   "by": "Q26",
   "date": "2026-10-16",
-  "existing": false
+  "existing": false,
+  "supporting_modules": [
+   "Sheaf.Paper.IntegralStratifiedPerfectModels"
+  ]
  },
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-60824",
-  "group": "N4",
+  "reviewer": "C-0ced5",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261021T014718-L-2447196",
+  "landing": "20261021T061432-L-1774768",
   "kind": "interface",
-  "note": "independent cc review: delivered item/adapted modules and 3 nodes vs live clone and parent characterization node steps; compiled --all set and axioms scratch check"
+  "note": "independent cc review: integralStratifiedPerfectCharacterization (ii)⇔(iii) proof + new criterion sorry vs node lem-weil-pbc-integral-stratified-perfect-characterization and B-S 6.6.11/6.8.11(3); public decl type/value hashes of AdicCoefficientDatumCompleted, BoundedConstructibleComplete, Models/item published vs sandbox; 54 direct importers compiled"
  }
 }

@@ -6,48 +6,31 @@ Authors: SHEAF group Q26
 module
 
 public import Sheaf.Paper.BoundedConstructibleComplete
+public import Sheaf.Paper.IntegralStratifiedPerfectModels
 public import Sheaf.CategoryTheory.DerivedCategory.PerfectRingComplexGeneral
 public import Sheaf.CategoryTheory.RingedSiteDerivedRestrictionUniverses
 public import Mathlib.Algebra.Homology.DerivedCategory.TStructure
 public import Sheaf.Paper.SfIntegralConstructible
 public import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
 public import Sheaf.Paper.SfDerivedComplete
-import Sheaf.Paper.CompletedConstantSheafReduction
-import Sheaf.Paper.CompletedConstantAlgebraFlatQuotients
-import Sheaf.AlgebraicGeometry.ProEtaleImmersionLimitPreservation
-import Sheaf.AlgebraicGeometry.ProEtaleWeaklyEtaleLocalization
-import Sheaf.Paper.ConstantCompletionEquivalence
-import Sheaf.AlgebraicGeometry.ProEtaleCountableProductsExact
-import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimit
-import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
-import Sheaf.Paper.ConstantModuleSectionProperties
-import Sheaf.AlgebraicGeometry.ProEtaleDerivedCategory
-import Sheaf.Paper.BoundedConstructibleTower
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonFiniteLevel
-import Sheaf.Paper.FiniteRingConstructibleDerivedOrigin
-import Sheaf.AlgebraicGeometry.FiniteRingDerivedLocalConstancy
-import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 public import Sheaf.Paper.ResidueLissePerfectLift
-import WeilConjectures.AlgebraicGeometry.IsConstructibleEtaleModuleSheaf
-import Sheaf.AlgebraicGeometry.ProEtaleSiteComparisonDerived
-import Sheaf.Paper.AdicCoefficientDatum
-import Sheaf.Paper.ProEtaleCanonicalTensorPullback
-import Sheaf.Paper.DerivedComplete
-import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Sheaf.CategoryTheory.RingedKoszulCompletionReflector
-import Sheaf.AlgebraicGeometry.CompactSupportComparisonUnit
-import Sheaf.AlgebraicGeometry.SupportComparisonPullbackCoherence
-import Sheaf.CategoryTheory.RingedStrictTowerHomotopyLimitIndependentCoefficients
-import Sheaf.Paper.DerivedCompleteOnSlices
+import Sheaf.Paper.IntegralCompletedLocalPerfectCriterion
+import Mathlib.Algebra.Category.ModuleCat.Products
+import Mathlib.Algebra.Homology.DerivedCategory.SingleTriangle
+import Mathlib.Algebra.Homology.ShortComplex.ModuleCat
+import Mathlib.LinearAlgebra.FreeModule.PID
+import Sheaf.CategoryTheory.DerivedCategory.PerfectRingClassicalGenerator
+import Sheaf.Algebra.Category.ModuleCat.Sheaf.ScalarExtensionRingIso
+import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
+import Mathlib.Algebra.Module.FinitePresentation
+import Sheaf.AlgebraicGeometry.ProEtaleModuleInverseImageUnderlying
+import all Sheaf.AlgebraicGeometry.ProEtaleTorLocalGlobal
+import all Sheaf.AlgebraicGeometry.NoetherianStratumDetection
+import all Sheaf.AlgebraicGeometry.ProEtaleAbelianClosedSupport
+import Sheaf.NumberTheory.Padics.ExtensionIntegersDvr
 import Sheaf.Paper.IntegralUniformCoefficient
-import Sheaf.Paper.NormalizedConstructibleTowerLocalEffectivity
 import Sheaf.Paper.PbcUniformCompleteTriangulated
 import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.HomologyProperty
-import Sheaf.Paper.ProEtaleConstructibleSheaf
-import Sheaf.Paper.RingedTopoiCanonicalTensorPullbackOfUniverses
-import Sheaf.Paper.WeilCompletedTensorReflector
-import WeilConjectures.CategoryTheory.Triangulated.DerivedCountableProductsCore
 
 /-!
 # Integral stratified perfect characterization
@@ -70,6 +53,7 @@ strata and slice sites with their actual inverse-image coefficient action.
 @[expose] public noncomputable section
 set_option autoImplicit false
 set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 2048
 
 universe u
@@ -78,160 +62,354 @@ open CategoryTheory CategoryTheory.Limits CategoryTheory.Pretriangulated Opposit
 
 namespace AlgebraicGeometry.Scheme
 
+private theorem perfect_single_pid {A : Type (u + 1)} [CommRing A] [IsDomain A]
+    [IsPrincipalIdealRing A] (N : ModuleCat.{u + 1} A) [Module.Finite A N] :
+    @DerivedCategory.IsPerfectRingComplex A _
+      (HasDerivedCategory.standard (ModuleCat.{u + 1} A))
+      ((DerivedCategory.singleFunctor _ 0).obj N) := by
+  let := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
+  rw [DerivedCategory.isPerfectRingComplex_eq_triangEnvelope_singleton]
+  let P := (ObjectProperty.singleton
+    ((DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) 0).obj
+      (ModuleCat.of A A))).triangEnvelope
+  let : (ObjectProperty.singleton
+    ((DerivedCategory.singleFunctor (ModuleCat.{u + 1} A) 0).obj
+      (ModuleCat.of A A))).Nonempty :=
+    ⟨_, (ObjectProperty.singleton_iff _ _).mpr rfl⟩
+  have : P.IsTriangulated := by
+    dsimp [P]
+    infer_instance
+  have hA : P ((DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of A A)) :=
+    ObjectProperty.le_triangEnvelope _ _ ((ObjectProperty.singleton_iff _ _).mpr rfl)
+  have hfree (n : ℕ) :
+      P ((DerivedCategory.singleFunctor _ 0).obj (ModuleCat.of A (Fin n → A))) := by
+    exact P.prop_of_isLimit
+      (isLimitOfPreserves (DerivedCategory.singleFunctor _ 0)
+        (ModuleCat.productConeIsLimit (fun _ : Fin n ↦ ModuleCat.of A A)))
+      (fun _ ↦ hA)
+  obtain ⟨n, f, hf⟩ := Module.Finite.exists_fin' A N
+  have hS := LinearMap.shortExact_shortComplexKer hf
+  have : Module.Finite A (LinearMap.ker f) := Module.IsNoetherian.finite A _
+  have hker : P ((DerivedCategory.singleFunctor _ 0).obj
+      (ModuleCat.of A (LinearMap.ker f))) :=
+    P.prop_of_iso ((DerivedCategory.singleFunctor _ 0).mapIso
+      (Module.finBasis A (LinearMap.ker f)).equivFun.toModuleIso.symm) (hfree _)
+  exact P.ext_of_isTriangulatedClosed₃ _ hS.singleTriangle_distinguished hker (hfree n)
 
-/-- The ordinary realization N ↦ A_T ⊗_A N, using the normalized coefficient comparison.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization). -/
-def integralConstantModule (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A) : ModuleCat.{u + 1} A ⥤
-      pbcModules T (pbcAdicCompletion T d) :=
-  completedKoszulConstant T
-    { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum
-      quotientFinite := d.quotientFinite } ⋙
-    pbcRestrict (pbcCompletedComparison T d).inv
+private theorem integral_pid (l : ℕ) [Fact l.Prime] (E : Type u) [Field E]
+    [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] :
+    IsPrincipalIdealRing (PbcIntegralRing l E) := by
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  let : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
+    h.2.2.2.2.2.2.2.2.1
+  exact IsPrincipalIdealRing.of_surjective ULift.ringEquiv.symm
+    ULift.ringEquiv.symm.surjective
 
-/-- Exactness of the ordinary completed-constant realization.
-Source: Bhatt--Scholze, Lemma 6.5.8 and Proposition 6.6.11
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization).
-Proof: constant module sheafification is exact. The completed ring is flat over
-constant A by lem-weil-pbc-completed-constant-sheaf-reduction, since d is Noetherian.
-Thus tensoring with it preserves finite limits and colimits. Restriction along the
-normalized coefficient isomorphism is an exact equivalence. -/
-theorem integralConstantModule_exact (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A) :
-    PreservesFiniteLimits (integralConstantModule T d) ∧
-      PreservesFiniteColimits (integralConstantModule T d) := by
-  let dd : ProEtaleAdicCoefficientDatum A :=
-    { toCompleteCoefficientDatum := d.toCompleteCoefficientDatum
-      quotientFinite := d.quotientFinite }
-  let K := adicLisseConstantModules T A
-  let E := completedConstantExtension T (adicDatumScalar T dd)
-  let R := pbcRestrict (pbcCompletedComparison T d).inv
-  have hK : PreservesFiniteLimits K ∧ PreservesFiniteColimits K := by
-    let P : ModuleCat.{u + 1} A ⥤
-      _root_.PresheafOfModules.{u + 1}
-        ((Functor.const T.ProEtᵒᵖ).obj (RingCat.of A)) :=
-      siteConstantModulePresheaf (C := Discrete (ULift.{u + 1} Unit)) A ⋙
-        PresheafOfModules.pushforward₀
-          ((Functor.const T.ProEt).obj (Discrete.mk (ULift.up ())))
-          ((Functor.const (Discrete (ULift.{u + 1} Unit))ᵒᵖ).obj (RingCat.of A))
-    have hP : PreservesFiniteLimits P := by
-      constructor
-      intro J _ _
-      constructor
-      intro F
-      constructor
-      intro c hc
-      exact ⟨_root_.PresheafOfModules.evaluationJointlyReflectsLimits _ _
-        (fun X ↦ hc)⟩
-    have hP' : PreservesFiniteColimits P := by
-      constructor
-      intro J _ _
-      constructor
-      intro F
-      constructor
-      intro c hc
-      exact ⟨_root_.PresheafOfModules.evaluationJointlyReflectsColimits _ _
-        (fun X ↦ hc)⟩
-    exact ⟨comp_preservesFiniteLimits P
-      (PresheafOfModules.sheafification (adicLisseConstantUnit T A)),
-      comp_preservesFiniteColimits P
-        (PresheafOfModules.sheafification (adicLisseConstantUnit T A))⟩
-  have hE : PreservesFiniteLimits E ∧ PreservesFiniteColimits E := by
-    let := dd.toCompleteCoefficientDatum.noetherian
-    have h := completed_constant_algebra_flat_quotients T dd.ideal
-      _ (Iso.refl _) (adicDatumScalar T dd) (by
-        intro n
-        exact (adicDatumScalar_exists T dd).exists.choose_spec n)
-    have he := (exactFunctor_iff E).1 h.2.1
-    exact ⟨he.1, he.2⟩
-  let := hK.1
-  let := hK.2
-  let := hE.1
-  let := hE.2
-  exact ⟨comp_preservesFiniteLimits (K ⋙ E) R,
-    comp_preservesFiniteColimits (K ⋙ E) R⟩
+private theorem perfect_finite_homology {A : Type (u + 1)} [CommRing A]
+    [IsNoetherianRing A] (P : completedConstantDerived (ModuleCat.{u + 1} A))
+    (hP : @DerivedCategory.IsPerfectRingComplex A _
+      (HasDerivedCategory.standard (ModuleCat.{u + 1} A)) P) (q : ℤ) :
+    Module.Finite A ((DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) q).obj P) := by
+  obtain ⟨C, a, b, -, -, hC, ⟨e⟩⟩ := hP
+  let eH : (DerivedCategory.homologyFunctor (ModuleCat.{u + 1} A) q).obj P ≅ C.homology q :=
+    (DerivedCategory.homologyFunctor _ q).mapIso e ≪≫
+      (DerivedCategory.homologyFunctorFactors (ModuleCat.{u + 1} A) q).app C
+  have := (hC q).2
+  have : Module.Finite A (C.cycles q) :=
+    Module.Finite.of_injective (C.iCycles q).hom
+      ((ModuleCat.mono_iff_injective _).1 inferInstance)
+  have : Module.Finite A (C.homology q) :=
+    Module.Finite.of_surjective (C.homologyπ q).hom
+      ((ModuleCat.epi_iff_surjective _).1 inferInstance)
+  exact Module.Finite.equiv eH.toLinearEquiv.symm
 
-/-- Additivity of completed-constant realization, inherited from its two factors.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization). -/
-instance integralConstantModule_additive (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A) : (integralConstantModule T d).Additive :=
-  letI := (integralConstantModule_exact T d).1
-  Functor.additive_of_preserves_binary_products _
-
-/-- The derived realization P ↦ A_T ⊗^L_A P, obtained by localizing the exact
-ordinary constant-module realization. On bounded finite projective complexes this
-is its termwise tensor realization.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization). -/
-def integralConstantDerived (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A) : completedConstantDerived (ModuleCat.{u + 1} A) ⥤
-      DerivedCategory (pbcModules T (pbcAdicCompletion T d)) :=
-  letI := HasDerivedCategory.standard (ModuleCat.{u + 1} A)
-  letI := (integralConstantModule_exact T d).1
-  letI := (integralConstantModule_exact T d).2
-  (integralConstantModule T d).mapDerivedCategory
-
-/-- Restrict a derived object first to a stratum and then to a covering site object.
-The slice coefficient sheaf is the restriction of the actual inverse-image ring.
-Source: Bhatt--Scholze, Proposition 6.6.11; Stacks Tags 0997 and 0998
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization). -/
-def integralLocalDerived {T S : Scheme.{u}} (g : S ⟶ T)
+private def localRestrictionComparison {T S : Scheme.{u}} (g : S ⟶ T)
     (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt)
     (K : DerivedCategory (pbcModules T R)) :
-    completedConstantDerived (SheafOfModules.{u + 1}
-      (((adicLisseForget S).obj ((adicTowerInverseImage g).obj R)).over U)) :=
-  ringedSiteDerivedRestrictionOfUniverses
-    ((adicLisseForget S).obj ((adicTowerInverseImage g).obj R)) U
-    ((adicTowerPullback g R).obj K)
+    (ringedDerivedRestrictionGeneral
+      ((adicLisseForget S).obj ((adicTowerInverseImage g).obj R)) U).obj
+        ((adicTowerPullback g R).obj K) ≅ integralLocalDerived g R U K := by
+  let B := (adicLisseForget S).obj ((adicTowerInverseImage g).obj R)
+  let F := SheafOfModules.overFunctor.{u + 1} B U
+  have := (ringedOverFunctor_exactGeneral B U).1
+  have := (ringedOverFunctor_exactGeneral B U).2.1
+  have := (ringedOverFunctor_exactGeneral B U).2.2
+  exact F.mapDerivedCategory.mapIso
+    (DerivedCategory.Q.objObjPreimageIso ((adicTowerPullback g R).obj K)).symm ≪≫
+      F.mapDerivedCategoryFactors.app _
 
-/-- Condition (ii): finite strata, on each a pro-etale covering sieve, and on each
-cover member an actual perfect A-complex whose completed realization is K there.
-IsPerfectRingComplex is the recorded bounded finite-projective notion.
-Source: Bhatt--Scholze, Proposition 6.6.11
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization). -/
-def IsIntegralStratifiedPerfect (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d))) : Prop :=
-  ∃ s : Stratification T, ∀ i : Fin s.n,
-    ∃ V : Sieve (⊤_ (s.domain i).ProEt),
-      V ∈ ProEt.topology (s.domain i) (⊤_ (s.domain i).ProEt) ∧
-        ∀ (U : (s.domain i).ProEt) (f : U ⟶ ⊤_ (s.domain i).ProEt), V f →
-          ∃ P : completedConstantDerived (ModuleCat.{u + 1} A),
-            @DerivedCategory.IsPerfectRingComplex A _
-              (HasDerivedCategory.standard (ModuleCat.{u + 1} A)) P ∧
-              Nonempty (integralLocalDerived (s.immersion i) (pbcAdicCompletion T d) U K ≅
-                integralLocalDerived (s.immersion i) (pbcAdicCompletion T d) U
-                  ((integralConstantDerived T d).obj P))
+private def localMapIso {T S : Scheme.{u}} (g : S ⟶ T)
+    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt)
+    {K L : DerivedCategory (pbcModules T R)} (e : K ≅ L) :
+    integralLocalDerived g R U K ≅ integralLocalDerived g R U L :=
+  (localRestrictionComparison g R U K).symm ≪≫
+    (ringedDerivedRestrictionGeneral
+      ((adicLisseForget S).obj ((adicTowerInverseImage g).obj R)) U).mapIso
+        ((adicTowerPullback g R).mapIso e) ≪≫ localRestrictionComparison g R U L
 
-/-- The constructible integral sheaf condition: finite strata and locally the ordinary
-completed realization of a finitely presented A-module, including the zero module.
-Source: Bhatt--Scholze, Definition 6.8.10
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization). -/
-def IsIntegralStratifiedFinitelyPresented (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A) (F : pbcModules T (pbcAdicCompletion T d)) : Prop :=
-  ∃ s : Stratification T, ∀ i : Fin s.n,
-    ∃ V : Sieve (⊤_ (s.domain i).ProEt),
-      V ∈ ProEt.topology (s.domain i) (⊤_ (s.domain i).ProEt) ∧
-        ∀ (U : (s.domain i).ProEt) (f : U ⟶ ⊤_ (s.domain i).ProEt), V f →
-          ∃ N : ModuleCat.{u + 1} A, Module.FinitePresentation A N ∧
-            Nonempty ((SheafOfModules.overFunctor _ U).obj
-              ((proEtaleModuleInverseImage (s.immersion i) (pbcAdicCompletion T d)).obj F) ≅
-              (SheafOfModules.overFunctor _ U).obj
-                ((proEtaleModuleInverseImage (s.immersion i) (pbcAdicCompletion T d)).obj
-                  ((integralConstantModule T d).obj N)))
+private def localSingleIso {T S : Scheme.{u}} (g : S ⟶ T)
+    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt)
+    (M : pbcModules T R) :
+    integralLocalDerived g R U ((DerivedCategory.singleFunctor _ 0).obj M) ≅
+      (DerivedCategory.singleFunctor _ 0).obj ((SheafOfModules.overFunctor _ U).obj
+        ((proEtaleModuleInverseImage g R).obj M)) := by
+  let R' := (adicTowerInverseImage g).obj R
+  let B := (adicLisseForget S).obj R'
+  let F := proEtaleRingModulePullback g R R' (Iso.refl _)
+  let G := SheafOfModules.overFunctor.{u + 1} B U
+  have := (ringedOverFunctor_exactGeneral B U).1
+  have := (ringedOverFunctor_exactGeneral B U).2.1
+  have := (ringedOverFunctor_exactGeneral B U).2.2
+  let θ := (SheafOfModules.exists_scalarExtensionRingIso.{u + 1, u, u + 1, 0}
+    (Iso.refl R')).choose
+  let e : F.obj M ≅ (proEtaleModuleInverseImage g R).obj M := θ _
+  exact (localRestrictionComparison g R U _).symm ≪≫
+    G.mapDerivedCategory.mapIso ((F.mapDerivedCategorySingleFunctor 0).app M) ≪≫
+      (G.mapDerivedCategorySingleFunctor 0).app (F.obj M) ≪≫
+        (DerivedCategory.singleFunctor _ 0).mapIso (G.mapIso e)
 
-/-- Condition (iii): boundedness and the stated finitely presented local models for
-all cohomology sheaves. The finite stratification may depend on the cohomological degree.
-Source: Bhatt--Scholze, Proposition 6.8.11(3)
-(blueprint: lem-weil-pbc-integral-stratified-perfect-characterization). -/
-def IsIntegralBoundedConstructibleCohomology (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]
-    (d : AdicCoefficientDatum A)
-    (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d))) : Prop :=
-  (∃ a b : ℤ, a ≤ b ∧ K.IsGE a ∧ K.IsLE b) ∧
-    ∀ q : ℤ, IsIntegralStratifiedFinitelyPresented T d
-      ((DerivedCategory.homologyFunctor (pbcModules T (pbcAdicCompletion T d)) q).obj K)
+private def localHomologyIso {T S : Scheme.{u}} (g : S ⟶ T)
+    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt)
+    (K : DerivedCategory (pbcModules T R)) (q : ℤ) := by
+  let R' := (adicTowerInverseImage g).obj R
+  let B := (adicLisseForget S).obj R'
+  let F := proEtaleRingModulePullback g R R' (Iso.refl _)
+  let G := SheafOfModules.overFunctor.{u + 1} B U
+  have := (ringedOverFunctor_exactGeneral B U).1
+  have := (ringedOverFunctor_exactGeneral B U).2.1
+  have := (ringedOverFunctor_exactGeneral B U).2.2
+  let θ := (SheafOfModules.exists_scalarExtensionRingIso.{u + 1, u, u + 1, 0}
+    (Iso.refl R')).choose
+  exact (G.mapIso (θ ((proEtaleModuleInverseImage g R).obj
+    ((DerivedCategory.homologyFunctor (pbcModules T R) q).obj K)))).symm ≪≫
+    G.mapIso ((F.mapDerivedCategoryHomologyFunctorIso q).app K) ≪≫
+      ((G.mapDerivedCategoryHomologyFunctorIso q).app (F.mapDerivedCategory.obj K)) ≪≫
+        (DerivedCategory.homologyFunctor _ q).mapIso (localRestrictionComparison g R U K)
+
+private theorem perfect_stratified_homology (T : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d)))
+    (hK : IsIntegralStratifiedPerfect T d K) (q : ℤ) :
+    IsIntegralStratifiedFinitelyPresented T d
+      ((DerivedCategory.homologyFunctor _ q).obj K) := by
+  let : IsNoetherianRing A := d.noetherian
+  obtain ⟨s, hs⟩ := hK
+  refine ⟨s, fun i ↦ ?_⟩
+  obtain ⟨V, hV, hv⟩ := hs i
+  refine ⟨V, hV, fun U f hf ↦ ?_⟩
+  obtain ⟨P, hP, ⟨e⟩⟩ := hv U f hf
+  have := perfect_finite_homology P hP q
+  let : PreservesFiniteLimits (integralConstantModule T d) :=
+    (integralConstantModule_exact T d).1
+  let : PreservesFiniteColimits (integralConstantModule T d) :=
+    (integralConstantModule_exact T d).2
+  let c := ((integralConstantModule T d).mapDerivedCategoryHomologyFunctorIso q).app P
+  refine ⟨(DerivedCategory.homologyFunctor _ q).obj P,
+    Module.finitePresentation_of_finite A _, ⟨?_⟩⟩
+  exact localHomologyIso (s.immersion i) _ U K q ≪≫
+    (DerivedCategory.homologyFunctor _ q).mapIso e ≪≫
+      (localHomologyIso (s.immersion i) _ U ((integralConstantDerived T d).obj P) q).symm ≪≫
+        (SheafOfModules.overFunctor _ U).mapIso
+          ((proEtaleModuleInverseImage (s.immersion i) _).mapIso c.symm)
+
+private theorem finitelyPresented_single_perfect
+    (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A] [IsDomain A]
+    [IsPrincipalIdealRing A] (d : AdicCoefficientDatum A)
+    (M : pbcModules T (pbcAdicCompletion T d))
+    (hM : IsIntegralStratifiedFinitelyPresented T d M) :
+    IsIntegralStratifiedPerfect T d ((DerivedCategory.singleFunctor _ 0).obj M) := by
+  obtain ⟨s, hs⟩ := hM
+  refine ⟨s, fun i ↦ ?_⟩
+  obtain ⟨V, hV, hv⟩ := hs i
+  refine ⟨V, hV, fun U f hf ↦ ?_⟩
+  obtain ⟨N, hN, ⟨e⟩⟩ := hv U f hf
+  let : Module.FinitePresentation A N := hN
+  let : PreservesFiniteLimits (integralConstantModule T d) :=
+    (integralConstantModule_exact T d).1
+  let : PreservesFiniteColimits (integralConstantModule T d) :=
+    (integralConstantModule_exact T d).2
+  let c := ((integralConstantModule T d).mapDerivedCategorySingleFunctor 0).app N
+  refine ⟨(DerivedCategory.singleFunctor _ 0).obj N, perfect_single_pid N, ⟨?_⟩⟩
+  exact localSingleIso (s.immersion i) _ U M ≪≫
+    (DerivedCategory.singleFunctor _ 0).mapIso e ≪≫
+      (localSingleIso (s.immersion i) _ U ((integralConstantModule T d).obj N)).symm ≪≫
+        localMapIso (s.immersion i) _ U c.symm
+
+private theorem finitelyPresented_iso (T : Scheme.{u})
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    {M N : pbcModules T (pbcAdicCompletion T d)} (e : M ≅ N)
+    (hM : IsIntegralStratifiedFinitelyPresented T d M) :
+    IsIntegralStratifiedFinitelyPresented T d N := by
+  obtain ⟨s, hs⟩ := hM
+  refine ⟨s, fun i ↦ ?_⟩
+  obtain ⟨V, hV, hv⟩ := hs i
+  refine ⟨V, hV, fun U f hf ↦ ?_⟩
+  obtain ⟨L, hL, ⟨eL⟩⟩ := hv U f hf
+  exact ⟨L, hL, ⟨(SheafOfModules.overFunctor _ U).mapIso
+    ((proEtaleModuleInverseImage (s.immersion i) _).mapIso e.symm) ≪≫ eL⟩⟩
+
+private theorem perfect_bounded {A : Type (u + 1)} [CommRing A]
+    (P : completedConstantDerived (ModuleCat.{u + 1} A))
+    (hP : @DerivedCategory.IsPerfectRingComplex A _
+      (HasDerivedCategory.standard (ModuleCat.{u + 1} A)) P) :
+    DerivedCategory.TStructure.t.bounded P := by
+  obtain ⟨C, a, b, ha, hb, -, ⟨e⟩⟩ := hP
+  let eH (q : ℤ) : (DerivedCategory.homologyFunctor _ q).obj P ≅ C.homology q :=
+    (DerivedCategory.homologyFunctor _ q).mapIso e ≪≫
+      (DerivedCategory.homologyFunctorFactors _ q).app C
+  refine ⟨⟨a, (DerivedCategory.isGE_iff _ a).2 ?_⟩,
+    ⟨b, (DerivedCategory.isLE_iff _ b).2 ?_⟩⟩
+  · intro q hq
+    exact (C.exactAt_of_isGE a q hq).isZero_homology.of_iso (eH q)
+  · intro q hq
+    exact (C.exactAt_of_isLE b q hq).isZero_homology.of_iso (eH q)
+
+private theorem local_bounded {T S : Scheme.{u}} (g : S ⟶ T)
+    (R : Sheaf (ProEt.topology T) CommRingCat.{u + 1}) (U : S.ProEt)
+    (K : DerivedCategory (pbcModules T R)) (hK : DerivedCategory.TStructure.t.bounded K) :
+    DerivedCategory.TStructure.t.bounded (integralLocalDerived g R U K) := by
+  let R' := (adicTowerInverseImage g).obj R
+  let B := (adicLisseForget S).obj R'
+  let F := proEtaleRingModulePullback g R R' (Iso.refl _)
+  let G := SheafOfModules.overFunctor.{u + 1} B U
+  have := (ringedOverFunctor_exactGeneral B U).1
+  have := (ringedOverFunctor_exactGeneral B U).2.1
+  have := (ringedOverFunctor_exactGeneral B U).2.2
+  exact DerivedCategory.TStructure.t.bounded.prop_of_iso
+    (localRestrictionComparison g R U K)
+    (G.bounded_mapDerivedCategory_obj (F.bounded_mapDerivedCategory_obj hK))
+
+attribute [-instance] coefficientProEtaleModelBaseChange_isContinuous
+  coefficientProEtaleModelUp_isContinuous in
+private def commRingInverseImageUnderlying {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (R : Sheaf (ProEt.topology Y) CommRingCat.{u + 1}) :
+    proEtaleModuleInverseImage f R ⋙ SheafOfModules.toSheaf _ ≅
+      SheafOfModules.toSheaf ((adicLisseForget Y).obj R) ⋙
+        proEtaleSheafInverseImage f AddCommGrpCat.{u + 1} := by
+  let e := (proEtaleModelModuleInverseImage_underlying f R).some
+  let A := (adicLisseForget Y).obj R
+  let B := (adicLisseForget X).obj ((adicTowerInverseImage f).obj R)
+  let L := SheafOfModules.pullback.{u + 1} (F := proEtaleModelBaseChange f)
+    (J := proEtaleModelTopology Y) (K := proEtaleModelTopology X)
+    (proEtaleModelRingUnit f R)
+  let La := Functor.sheafPullbackConstruction.sheafPullback (proEtaleModelBaseChange f)
+    AddCommGrpCat.{u + 1} (proEtaleModelTopology Y) (proEtaleModelTopology X)
+  let t : proEtaleModuleToModel A ⋙ SheafOfModules.toSheaf _ ≅
+      SheafOfModules.toSheaf A ⋙
+        (modelSheafEquivalence Y AddCommGrpCat.{u + 1}).inverse :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; simp; rfl)
+  let q : proEtaleModuleFromModel B ⋙ SheafOfModules.toSheaf B ≅
+      SheafOfModules.toSheaf _ ⋙
+        (modelSheafEquivalence X AddCommGrpCat.{u + 1}).functor :=
+    NatIso.ofComponents (fun _ ↦ Iso.refl _) (by intros; simp; rfl)
+  exact Functor.isoWhiskerLeft (proEtaleModuleToModel A ⋙ L) q ≪≫
+    Functor.isoWhiskerLeft (proEtaleModuleToModel A)
+      (Functor.isoWhiskerRight e (modelSheafEquivalence X AddCommGrpCat.{u + 1}).functor) ≪≫
+    Functor.isoWhiskerRight t
+      (La ⋙ (modelSheafEquivalence X AddCommGrpCat.{u + 1}).functor) ≪≫
+    Functor.isoWhiskerLeft (SheafOfModules.toSheaf A) (modelAbelianPullbackIso f)
+
+private theorem stratified_perfect_bounded (T : Scheme.{u}) [IsNoetherian T]
+    {A : Type (u + 1)} [CommRing A] (d : AdicCoefficientDatum A)
+    (K : DerivedCategory (pbcModules T (pbcAdicCompletion T d)))
+    (hK : IsIntegralStratifiedPerfect T d K) : DerivedCategory.TStructure.t.bounded K := by
+  classical
+  let R := pbcAdicCompletion T d
+  obtain ⟨s, hs⟩ := hK
+  have hn (i : Fin s.n) : TopologicalSpace.NoetherianSpace (s.domain i) :=
+    (s.immersion i).isEmbedding.isInducing.noetherianSpace
+  let := hn
+  have hc (i : Fin s.n) : CompactSpace (⊤_ (s.domain i).ProEt).left := by
+    let X := s.domain i
+    have ht : IsTerminal (ProEt.mk (𝟙 X)) :=
+      IsTerminal.ofUniqueHom
+        (fun U ↦ MorphismProperty.Over.homMk U.hom (Category.comp_id _) (by trivial)) (by
+        intro U f
+        apply MorphismProperty.Over.Hom.ext
+        have hw := MorphismProperty.Over.w f
+        change f.left ≫ 𝟙 X = U.hom at hw
+        exact (Category.comp_id _).symm.trans hw)
+    let e : (⊤_ X.ProEt).left ≅ X :=
+      (ProEt.forget X ⋙ Over.forget X).mapIso (terminalIsTerminal.uniqueUpToIso ht)
+    exact QuasiCompact.compactSpace_of_compactSpace e.hom
+  let := hc
+  choose W hW hw using hs
+  choose I hI V f hV hf using
+    fun i ↦ ProEt.qc_finite_cover (s.domain i) (⊤_ (s.domain i).ProEt) (W i) (hW i)
+  let := hI
+  have hb (i : Fin s.n) (j : I i) :
+      DerivedCategory.TStructure.t.bounded
+        (integralLocalDerived (s.immersion i) R (V i j) K) := by
+    obtain ⟨P, hP, ⟨e⟩⟩ := hw i (V i j) (f i j) (hf i j)
+    let : PreservesFiniteLimits (integralConstantModule T d) :=
+      (integralConstantModule_exact T d).1
+    let : PreservesFiniteColimits (integralConstantModule T d) :=
+      (integralConstantModule_exact T d).2
+    exact DerivedCategory.TStructure.t.bounded.prop_of_iso e.symm
+      (local_bounded (s.immersion i) R (V i j) _
+        ((integralConstantModule T d).bounded_mapDerivedCategory_obj (perfect_bounded P hP)))
+  have hbounds (i : Fin s.n) (j : I i) : ∃ a b : ℤ,
+      (integralLocalDerived (s.immersion i) R (V i j) K).IsGE a ∧
+        (integralLocalDerived (s.immersion i) R (V i j) K).IsLE b := by
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := hb i j
+    exact ⟨a, b, ha, hb⟩
+  choose a b ha hb using hbounds
+  let J := Σ i : Fin s.n, I i
+  let : Fintype J := Fintype.ofFinite J
+  let a₀ : ℤ := -∑ j : J, |a j.1 j.2|
+  let b₀ : ℤ := ∑ j : J, |b j.1 j.2|
+  have key (q : ℤ) (hq : q < a₀ ∨ b₀ < q) :
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj K) := by
+    let H := (DerivedCategory.homologyFunctor _ q).obj K
+    have hstr (i : Fin s.n) :
+        IsZero ((proEtaleModuleInverseImage (s.immersion i) R).obj H) := by
+      let B := (adicLisseForget (s.domain i)).obj
+        ((adicTowerInverseImage (s.immersion i)).obj R)
+      have hcV : (ProEt.topology (s.domain i)).CoversTop (V i) :=
+        ((ProEt.topology (s.domain i)).coversTop_iff_of_isTerminal
+          (⊤_ (s.domain i).ProEt) terminalIsTerminal (V i)).mpr (by
+            exact (ProEt.topology (s.domain i)).superset_covering
+              (Sieve.ofArrows_le_ofObjects (V i) (f i)) (hV i))
+      apply CategoryTheory.isZero_of_slice_cover B (V i) hcV
+      intro j
+      have hz : IsZero ((DerivedCategory.homologyFunctor _ q).obj
+          (integralLocalDerived (s.immersion i) R (V i j) K)) := by
+        rcases hq with hq | hq
+        · apply (DerivedCategory.isGE_iff _ (a i j)).1 (ha i j) q
+          have hsum := Finset.single_le_sum
+            (f := fun j : J ↦ |a j.1 j.2|) (fun _ _ ↦ abs_nonneg _)
+            (Finset.mem_univ (⟨i, j⟩ : J))
+          dsimp [a₀] at hq
+          linarith [neg_abs_le (a i j)]
+        · apply (DerivedCategory.isLE_iff _ (b i j)).1 (hb i j) q
+          have hsum := Finset.single_le_sum
+            (f := fun j : J ↦ |b j.1 j.2|) (fun _ _ ↦ abs_nonneg _)
+            (Finset.mem_univ (⟨i, j⟩ : J))
+          dsimp [b₀] at hq
+          linarith [le_abs_self (b i j)]
+      exact hz.of_iso (localHomologyIso (s.immersion i) R (V i j) K q)
+    have hz : IsZero ((SheafOfModules.toSheaf ((adicLisseForget T).obj R)).obj H) := by
+      apply (IsZero.iff_id_eq_zero _).2
+      apply AlgebraicGeometry.ProEtale.abDetectMaps s.immersion
+      · intro x
+        obtain ⟨i, hi⟩ := Set.mem_iUnion.mp
+          (s.iUnion_stratum_eq_univ.symm ▸ Set.mem_univ x)
+        exact ⟨i, (s.range_immersion i).symm ▸ hi⟩
+      · intro i
+        rw [(AlgebraicGeometry.ProEtale.upperStar AddCommGrpCat.{u + 1}
+          (s.immersion i)).map_id]
+        have hi := (SheafOfModules.toSheaf _).map_isZero (hstr i)
+        exact (hi.of_iso
+          ((commRingInverseImageUnderlying (s.immersion i) R).app H).symm).eq_of_src _ _
+    apply (IsZero.iff_id_eq_zero H).2
+    apply (SheafOfModules.toSheaf ((adicLisseForget T).obj R)).map_injective
+    simpa using hz.eq_of_src
+      ((SheafOfModules.toSheaf _).map (𝟙 H)) ((SheafOfModules.toSheaf _).map 0)
+  exact ⟨⟨a₀, (DerivedCategory.isGE_iff _ _).2 fun q hq ↦ key q (.inl hq)⟩,
+    ⟨b₀, (DerivedCategory.isLE_iff _ _).2 fun q hq ↦ key q (.inr hq)⟩⟩
+
+
 
 /-- The three descriptions are equivalent. Source: Bhatt--Scholze, Definition 6.5.1,
 Proposition 6.6.11 and Proposition 6.8.11(3)
@@ -367,7 +545,38 @@ theorem integralStratifiedPerfectCharacterization
       IsIntegralStratifiedPerfect T (pbcIntegralDatum l E) K) ∧
     (IsIntegralStratifiedPerfect T (pbcIntegralDatum l E) K ↔
       IsIntegralBoundedConstructibleCohomology T (pbcIntegralDatum l E) K) := by
-  sorry
+  let d := pbcIntegralDatum l E
+  let : IsPrincipalIdealRing (PbcIntegralRing l E) := integral_pid l E
+  let : IsDomain (PbcIntegralRing l E) :=
+    (ULift.ringEquiv : PbcIntegralRing l E ≃+*
+      Padic.coefficientExtensionIntegers l E).toMulEquiv.isDomain _
+  have hc := integralCompletedLocalPerfectCriterion T l E _hdim _hl
+  refine ⟨hc K, ⟨?_, ?_⟩⟩
+  · intro hK
+    obtain ⟨⟨a, ha⟩, ⟨b, hb⟩⟩ := stratified_perfect_bounded T d K hK
+    let : K.IsGE a := ha
+    refine ⟨⟨min a b, b, min_le_right _ _, ?_, hb⟩,
+      fun q ↦ perfect_stratified_homology T d K hK q⟩
+    exact DerivedCategory.TStructure.t.isGE_of_ge K (min a b) a (min_le_left _ _)
+  · intro hK
+    let P : ObjectProperty (DerivedCategory (pbcModules T (pbcAdicCompletion T d))) :=
+      PbcIsBoundedConstructibleComplete T d
+    let Q : ObjectProperty (pbcModules T (pbcAdicCompletion T d)) :=
+      IsIntegralStratifiedFinitelyPresented T d
+    have hInv : ∀ t : T, IsUnit (l : T.presheaf.stalk t) := by
+      intro t
+      simpa only [map_natCast] using
+        RingHom.isUnit_map (T.presheaf.germ ⊤ t trivial).hom _hl
+    have hP := pbcIntegralUniformComplete_isTriangulated l E T _hdim hInv
+    let : P.IsClosedUnderIsomorphisms := hP.1
+    let : P.IsTriangulated := hP.2
+    let : Q.IsClosedUnderIsomorphisms := ⟨fun e h ↦ finitelyPresented_iso T d e h⟩
+    apply (hc K).mp
+    apply DerivedCategory.prop_of_bounded P Q
+      (fun M hM ↦ (hc _).mpr (finitelyPresented_single_perfect T d M hM)) K
+    · obtain ⟨a, b, -, ha, hb⟩ := hK.1
+      exact ⟨⟨a, ha⟩, ⟨b, hb⟩⟩
+    · exact hK.2
 
 /-- Closure under all shifts, ambient cones, standard truncations and cohomology in
 degree zero. Source: Bhatt--Scholze, Proposition 6.8.11(3)

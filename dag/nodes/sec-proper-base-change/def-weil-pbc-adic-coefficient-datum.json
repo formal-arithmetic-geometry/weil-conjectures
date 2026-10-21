@@ -93,6 +93,15 @@
     "lem-pc-kflat-resolution"
    ],
    "elementary": false
+  },
+  {
+   "text": "In AdicCoefficientDatumCompleted, extend finiteCoefficientScalarMap uniquely across the locally bijective constant-ring unit by its W hom-equivalence. The extended sheaf map is locally bijective since its composite with the unit is, hence is an isomorphism; the same hom-equivalence proves its normalized uniqueness. Precompose the finite-coefficient naturality square by the unit. The normalized equations, naturality of sheafification, and the specified postcomposition formula for q identify both composites. The explicit completedConstant_quotients functor supplies the actual quotient tower with its level and transition equations. Finally exact, faithful restriction of scalars preserves the sums computing total complexes. The independent-coefficient tensor-cancellation isomorphism gives a bicomplex isomorphism between the restricted tensor with the extended complex and the tensor of the restricted input with the original complex. The input remains acyclic by exact restriction, so original K-flatness gives acyclicity; faithful exact restriction reflects it. This proves preservation of K-flatness, without needing the separate flat-term conclusion of the existing change-of-rings theorem.",
+   "uses": [
+    "def-weil-pbc-proetale-modules",
+    "lem-weil-pbc-completed-constant-finite-complex-realization",
+    "lem-pur-kflat-change-of-rings-independent"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
@@ -107,12 +116,14 @@
   "lem-pur-left-derived-from-kflat-class",
   "lem-pur-kflat-change-of-rings",
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-  "lem-sf-exact-functor-derived-triangulated"
+  "lem-sf-exact-functor-derived-triangulated",
+  "lem-weil-pbc-completed-constant-finite-complex-realization",
+  "lem-pur-kflat-change-of-rings-independent"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/def-weil-pbc-adic-coefficient-datum.md",
-  "place": "order 1239; tensor-generator, quotient-normalization and evaluation calculations; Stacks Tags 03EK, 06YY and 015F"
+  "place": "order 1239; tensor-generator, quotient-normalization and evaluation calculations; Stacks Tags 03EK, 06YY and 015F; K2: the finite-presentation comparisons and actual quotient and K-flat extension interfaces in AdicCoefficientDatumCompleted, using the same sheafification and derived-change universal properties."
  },
  "mathlib_searches": [
   {
@@ -310,7 +321,10 @@
   "by": "Q44",
   "date": "2026-10-16",
   "existing": false,
-  "note": "Section 1(B), current-base repair: preserve every published AdicCoefficientDatum declaration and signature verbatim. Reuse its function coefficient sheaves, completed limit, datum-indexed strict reduction tower and scalar-extension pair. Add only universal-counit, normalized evaluation and derived quotient-normalization helpers needed by completed exchange. The previous packet used obsolete ideal-indexed signatures and would replace the published interface. Coefficients remain Type(t+1), site objects t+1, morphisms t."
+  "note": "Section 1(B), current-base repair: preserve every published AdicCoefficientDatum declaration and signature verbatim. Reuse its function coefficient sheaves, completed limit, datum-indexed strict reduction tower and scalar-extension pair. Add only universal-counit, normalized evaluation and derived quotient-normalization helpers needed by completed exchange. The previous packet used obsolete ideal-indexed signatures and would replace the published interface. Coefficients remain Type(t+1), site objects t+1, morphisms t.",
+  "supporting_modules": [
+   "Sheaf.Paper.AdicCoefficientDatumCompleted"
+  ]
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -321,11 +335,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-bb327",
-  "group": "U7",
+  "reviewer": "C-0ced5",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261021T005753-L-1891154",
+  "landing": "20261021T061432-L-1774768",
   "kind": "interface",
-  "note": "independent cc review: delivered AdicCoefficientDatum.lean (byte-identical to PASSed b0635f9c/77542233) and node vs live; item rebuilt (83.6 s, clean) and 28 direct importers + 8 name-users compiled against its olean, all rc 0; #print axioms of the 5 closed holes + completedReductionTower_exists clean; rfl of reductionChange/reductionDerivedChange to original witnesses"
+  "note": "independent cc review: integralStratifiedPerfectCharacterization (ii)⇔(iii) proof + new criterion sorry vs node lem-weil-pbc-integral-stratified-perfect-characterization and B-S 6.6.11/6.8.11(3); public decl type/value hashes of AdicCoefficientDatumCompleted, BoundedConstructibleComplete, Models/item published vs sandbox; 54 direct importers compiled"
  }
 }

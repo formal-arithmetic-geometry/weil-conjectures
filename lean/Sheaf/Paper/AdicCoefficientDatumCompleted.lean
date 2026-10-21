@@ -16,6 +16,8 @@ public import Mathlib.Algebra.Homology.Functor
 public import Mathlib.CategoryTheory.Abelian.FunctorCategory
 public import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
 public import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
+import all Sheaf.Paper.CompletedConstantFiniteComplexRealization
+import all Sheaf.Algebra.Homology.ChangeOfRingsKFlatIndependentCoefficients
 
 /-!
 # Completed adic coefficient datum and its strict reduction tower
@@ -72,7 +74,29 @@ theorem adicDatumFiniteCoefficientIso_exists :
     ∃! e : adicLisseRing T P ≅ AlgebraicGeometry.ProEtale.finiteCoefficientRingSheaf T P,
       adicLisseConstantUnit T P ≫ e.hom.hom =
         AlgebraicGeometry.ProEtale.finiteCoefficientScalarMap T P := by
-  sorry
+  let J := ProEt.topology T
+  let R := ProEtale.finiteCoefficientRingSheaf T P
+  let η := adicLisseConstantUnit T P
+  let h := (J.W_of_isLocallyBijective η).homEquiv R.obj R.property
+  let f : adicLisseRing T P ⟶ R := ⟨h.symm (ProEtale.finiteCoefficientScalarMap T P)⟩
+  have hf : η ≫ f.hom = ProEtale.finiteCoefficientScalarMap T P := h.apply_symm_apply _
+  have : Presheaf.IsLocallyInjective J (η ≫ f.hom) := by
+    rw [hf]
+    exact (ProEtale.finiteCoefficientScalarMap_locallyBijective T P).1
+  have : Presheaf.IsLocallySurjective J (η ≫ f.hom) := by
+    rw [hf]
+    exact (ProEtale.finiteCoefficientScalarMap_locallyBijective T P).2
+  have : Sheaf.IsLocallyInjective f :=
+    Presheaf.isLocallyInjective_of_isLocallyInjective_of_isLocallySurjective J η f.hom
+  have : Sheaf.IsLocallySurjective f :=
+    Presheaf.isLocallySurjective_of_isLocallySurjective J η f.hom
+  have : IsIso f := (Sheaf.isLocallyBijective_iff_isIso f).mp
+    ⟨inferInstance, inferInstance⟩
+  refine ⟨asIso f, hf, ?_⟩
+  intro e he
+  apply Iso.ext
+  apply Sheaf.hom_ext
+  exact h.injective (he.trans hf.symm)
 
 /-- The normalized finite coefficient isomorphism; its quotient specializations
 identify the inverse-limit ring used here with the node's completed coefficient sheaf.
@@ -102,7 +126,41 @@ theorem adicDatumFiniteCoefficientIso_natural
       (adicLisseForget T).map
         ((constantSheaf (ProEt.topology T) CommRingCat.{t + 1}).map
           (CommRingCat.ofHom φ)) ≫ (adicDatumFiniteCoefficientIso T B).hom := by
-  sorry
+  let J := ProEt.topology T
+  let η := adicLisseConstantUnit T P
+  let eP := adicDatumFiniteCoefficientIso T P
+  let eB := adicDatumFiniteCoefficientIso T B
+  have heP : η ≫ eP.hom.hom = ProEtale.finiteCoefficientScalarMap T P :=
+    (adicDatumFiniteCoefficientIso_exists T P).exists.choose_spec
+  have heB : adicLisseConstantUnit T B ≫ eB.hom.hom =
+      ProEtale.finiteCoefficientScalarMap T B :=
+    (adicDatumFiniteCoefficientIso_exists T B).exists.choose_spec
+  have hη : η ≫ ((adicLisseForget T).map
+        ((constantSheaf J CommRingCat.{t + 1}).map (CommRingCat.ofHom φ))).hom =
+      (Functor.const T.ProEtᵒᵖ).map (RingCat.ofHom φ) ≫ adicLisseConstantUnit T B := by
+    exact (congrArg (fun f ↦ Functor.whiskerRight f
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1}))
+        (toSheafify_naturality J
+          ((Functor.const T.ProEtᵒᵖ).map (CommRingCat.ofHom φ)))).symm
+  have hc : ProEtale.finiteCoefficientConstants T P ≫ q =
+      (Functor.const T.ProEtᵒᵖ).map (RingCat.ofHom φ) ≫
+        ProEtale.finiteCoefficientConstants T B := by
+    ext U a
+    apply ContinuousMap.ext
+    intro c
+    exact hq U (ContinuousMap.const _ a) c
+  have hs : ProEtale.finiteCoefficientScalarMap T P ≫
+        ((presheafToSheaf J RingCat.{t + 1}).map q).hom =
+      (Functor.const T.ProEtᵒᵖ).map (RingCat.ofHom φ) ≫
+        ProEtale.finiteCoefficientScalarMap T B := by
+    dsimp only [ProEtale.finiteCoefficientScalarMap]
+    rw [Category.assoc, ← toSheafify_naturality, ← Category.assoc, hc, Category.assoc]
+  apply Sheaf.hom_ext
+  apply ((J.W_of_isLocallyBijective η).homEquiv _
+    (ProEtale.finiteCoefficientRingSheaf T B).property).injective
+  change η ≫ eP.hom.hom ≫ _ = η ≫ _ ≫ eB.hom.hom
+  rw [← Category.assoc, heP, ← Category.assoc, hη, Category.assoc, heB]
+  exact hs
 end FiniteCoefficientComparison
 
 /-- The completed coefficient sheaf, with its genuine compatible-family sections.
@@ -168,7 +226,7 @@ Its underlying section map is the specified quotient. Identities and composition
 from those of the ring diagram. The fields of the indicated structure fix all data. -/
 theorem adicDatumQuotients_exists :
     Nonempty (CompletedConstantQuotientTower T d.ideal (adicDatumRing T d) (𝟙 _)) := by
-  sorry
+  exact ⟨completedConstant_quotients T d.ideal (adicDatumRing T d) (𝟙 _)⟩
 
 /-- The canonical quotient module tower, including its prescribed quotient transitions.
 Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum). -/
@@ -749,6 +807,11 @@ def adicDatumBalance :
       (completedConstantExtension T (φ ≫ ψ)).mapHomologicalComplex (ComplexShape.up ℤ) :=
   (adicDatumBalance_exists T φ ψ).exists.choose
 
+attribute [local instance] SheafOfModules.isMonoidal_W_independentCoefficients
+  SheafOfModules.preservesZeroMorphisms_curriedTensor_independentCoefficients
+  SheafOfModules.preservesZeroMorphisms_curriedTensor_obj_independentCoefficients
+
+open SheafOfModules MonoidalCategory in
 /-- K-flatness survives ordinary extension, with no flatness hypothesis on the ring map.
 Source: order 1239; Tag 06YY (blueprint: def-weil-pbc-adic-coefficient-datum).
 Proof: tensor an acyclic S-complex N with the extended R-complex. Balancing identifies
@@ -758,7 +821,100 @@ theorem adicDatumExtension_kflat (C : CochainComplex (completedConstantModules T
     (hC : CochainComplex.IsAcyclicTensorKFlat (R := R) C) :
     CochainComplex.IsAcyclicTensorKFlat (R := S)
       (((completedConstantExtension T φ).mapHomologicalComplex (ComplexShape.up ℤ)).obj C) := by
-  sorry
+  apply (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat _).1
+  let J := ProEt.topology T
+  let K := C
+  have hK := (CochainComplex.isKFlatIndependentCoefficients_iff_isKFlat C).2 hC
+  let E := completedConstantExtension T φ
+  let h := completedExtension_obj T φ
+  have hm {M N : completedConstantModules T R} (g : M ⟶ N) :
+      E.map g = eqToHom (h M) ≫ changeOfRingsHom φ M g ≫ eqToHom (h N).symm :=
+    completedExtension_map T φ g
+  classical
+  let := monoidalCategory R
+  let := monoidalCategory S
+  let α := (sheafCompose J (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).map φ
+  let U := restrictScalars.{t + 1} α
+  have hU := restrictScalars_exact_kflat α
+  have : PreservesFiniteLimits U := hU.1
+  have : PreservesFiniteColimits U := hU.2
+  have : U.ReflectsIsomorphisms := by
+    have : (U ⋙ toSheaf.{t + 1, t, t + 1, t + 1}
+        ((sheafCompose J
+          (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)).ReflectsIsomorphisms :=
+      inferInstanceAs ((toSheaf.{t + 1, t, t + 1, t + 1}
+        ((sheafCompose J
+          (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S)).ReflectsIsomorphisms)
+    exact reflectsIsomorphisms_of_comp U (toSheaf.{t + 1, t, t + 1, t + 1} _)
+  obtain ⟨e₀, he₀⟩ := exists_changeOfRings_tensorCancellation_independentCoefficients φ
+  let e (M : SheafOfModules.{t + 1} ((sheafCompose J
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S))
+      (N : SheafOfModules.{t + 1} ((sheafCompose J
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)) :=
+    U.mapIso (((curriedTensor _).obj M).mapIso (eqToIso (h N))) ≪≫ e₀ M N
+  have he {M M' : SheafOfModules.{t + 1} ((sheafCompose J
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S)}
+      {N N' : SheafOfModules.{t + 1} ((sheafCompose J
+      (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)} (f : M ⟶ M') (g : N ⟶ N') :
+      U.map (tensorHom f (E.map g)) ≫ (e M' N').hom =
+        (e M N).hom ≫ tensorHom (U.map f) g := by
+    have hs : tensorHom f (E.map g) ≫ whiskerLeft M' (eqToHom (h N')) =
+        whiskerLeft M (eqToHom (h N)) ≫ tensorHom f (changeOfRingsHom φ N g) := by
+      rw [← id_tensorHom, ← id_tensorHom, tensorHom_comp_tensorHom,
+        tensorHom_comp_tensorHom]
+      simp only [Category.comp_id, Category.id_comp, hm, Category.assoc,
+        eqToHom_trans, eqToHom_refl]
+    change U.map (tensorHom f (E.map g)) ≫
+        U.map (whiskerLeft M' (eqToHom (h N'))) ≫ (e₀ M' N').hom =
+      U.map (whiskerLeft M (eqToHom (h N))) ≫ (e₀ M N).hom ≫ tensorHom (U.map f) g
+    rw [← U.map_comp_assoc, hs, U.map_comp, Category.assoc, he₀ f g]
+  intro F hF
+  let T := (((curriedTensor _).mapBifunctorHomologicalComplex (.up ℤ) (.up ℤ)).obj F).obj
+    ((E.mapHomologicalComplex (.up ℤ)).obj K)
+  have hcolim (D : Type) [Category.{0} D] : PreservesColimitsOfShape D U := by
+    have : PreservesColimitsOfShape D (U ⋙ toSheaf.{t + 1, t, t + 1, t + 1}
+        ((sheafCompose J (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)) :=
+      inferInstanceAs (PreservesColimitsOfShape D (toSheaf.{t + 1, t, t + 1, t + 1}
+        ((sheafCompose J (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj S)))
+    have : ReflectsColimitsOfShape D (toSheaf.{t + 1, t, t + 1, t + 1}
+        ((sheafCompose J (forget₂ CommRingCat.{t + 1} RingCat.{t + 1})).obj R)) :=
+      reflectsColimitsOfShape_of_reflectsIsomorphisms
+    exact preservesColimitsOfShape_of_reflects_of_preserves U (toSheaf.{t + 1, t, t + 1, t + 1} _)
+  have : PreservesColimitsOfSize.{0, 0} U := ⟨fun {D} instD ↦ @hcolim D instD⟩
+  have : U.PreservesTotalComplex T (.up ℤ) := fun _ ↦ inferInstance
+  let t := (HomologicalComplex₂.mapTotalIso U T (.up ℤ)).symm
+  let f :
+      (((U.mapHomologicalComplex (.up ℤ)).mapHomologicalComplex (.up ℤ)).obj T) ≅
+      (((curriedTensor _).mapBifunctorHomologicalComplex (.up ℤ) (.up ℤ)).obj
+        ((U.mapHomologicalComplex (.up ℤ)).obj F)).obj K :=
+    HomologicalComplex.Hom.isoOfComponents
+      (fun i ↦ HomologicalComplex.Hom.isoOfComponents
+        (fun j ↦ e (F.X i) (K.X j)) (by
+          intro j j' hj
+          change (e (F.X i) (K.X j)).hom ≫ whiskerLeft (U.obj (F.X i)) (K.d j j') =
+            U.map (whiskerLeft (F.X i) (E.map (K.d j j'))) ≫
+              (e (F.X i) (K.X j')).hom
+          have hh := he (𝟙 (F.X i)) (K.d j j')
+          change U.map (tensorHom (𝟙 (F.X i)) (E.map (K.d j j'))) ≫
+              (e (F.X i) (K.X j')).hom =
+            (e (F.X i) (K.X j)).hom ≫ tensorHom (U.map (𝟙 (F.X i))) (K.d j j') at hh
+          rw [U.map_id, id_tensorHom, id_tensorHom] at hh
+          exact hh.symm))
+      (by
+        intro i i' hi
+        apply HomologicalComplex.Hom.ext
+        funext j
+        change (e (F.X i) (K.X j)).hom ≫ whiskerRight (U.map (F.d i i')) (K.X j) =
+          U.map (whiskerRight (F.d i i') (E.obj (K.X j))) ≫
+            (e (F.X i') (K.X j)).hom
+        simpa only [E.map_id, tensorHom_id]
+          using (he (F.d i i') (𝟙 (K.X j))).symm)
+  have h := hK ((U.mapHomologicalComplex (.up ℤ)).obj F)
+    (acyclic_restrictScalars_kflat α F hF)
+  apply acyclic_of_restrictScalars_kflat α
+  intro i
+  exact (h i).of_iso (t ≪≫ HomologicalComplex₂.total.mapIso f (.up ℤ)).symm
+
 /-- The actual balancing normalizations satisfy the cocycle, including all quotients.
 Source: order 1239 (blueprint: def-weil-pbc-adic-coefficient-datum).
 Proof: on a triple tensor s tensor (r tensor (q tensor x)), both routes give

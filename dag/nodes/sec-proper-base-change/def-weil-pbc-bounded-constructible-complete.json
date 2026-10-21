@@ -50,17 +50,52 @@
     "lem-weil-pbc-standard-quotients-perfect"
    ],
    "elementary": true
+  },
+  {
+   "text": "For the lifted coefficient datum pbcCoefficientDatumProperties, transport the principal ideal ring and domain structures through ULift.ringEquiv. Its induced quotient equivalence transfers finiteness of every positive quotient. Finite additive order gives the torsion clause. Multiplication by a nonzero uniformizer power is injective; the quotient map is surjective and has exactly that principal kernel. Apply the already proved principalExact and twoTermResolution constructions to obtain the bounded finite free resolution in degrees [-1,0], and invert its quasi-isomorphism in the standard localization.",
+   "uses": [
+    "lem-weil-l-adic-extension-integers-dvr",
+    "def-weil-l-adic-coefficient-extension",
+    "lem-weil-pbc-standard-quotients-perfect"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The coefficient constants map pbcFunctionScalars is the composite of a locally bijective scalar presentation and an isomorphism, so it is locally bijective. The existing coefficientRealization_isEquivalence theorem applies to its associated-module-sheaf realization. Equivalences preserve finite limits and colimits, and preserving binary products gives additivity. The induced exact derived functor is an equivalence by Functor.isEquivalence_mapDerivedCategory.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The reduction map is the inverse mate of the derived restriction isomorphism. Both vertical realization functors are equivalences. Conjugate the two adjunctions with the adjunctions of these equivalences: the iterated-mate identity identifies the map with a conjugate of an isomorphism. Conjugation preserves and reflects isomorphisms, proving invertibility. No K-flat representative calculation is required for this step.",
+   "uses": [
+    "def-weil-pbc-witness-compatibility"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For pbcAssociatedRestriction_exists, transpose the underlying additive sheafification unit through the module-sheafification adjunction. The scalar-square equation makes it linear: on constants, both actions are the action through beta composed with q. Uniqueness of extension from the sheafification unit identifies its underlying map with the canonical additive identity comparison. This comparison is natural and invertible; faithfulness of the additive forgetful functor gives naturality and uniqueness of its module lift. For pbcFunctionScalars_comp, first express the recorded scalar map directly through the commutative function-presheaf sheafification unit, using the normalization of finiteRingComparison. Naturality of that unit and postcomposition on constant functions give the quotient square.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-proetale-modules"
+   ],
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-l-adic-extension-integers-dvr",
   "def-weil-l-adic-coefficient-extension",
-  "lem-weil-pbc-standard-quotients-perfect"
+  "lem-weil-pbc-standard-quotients-perfect",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-witness-compatibility"
  ],
  "proof_origin": {
   "by": "worker K5",
   "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lem-weil-pbc-standard-quotients-perfect.md",
-  "place": "Proof; coefficient properties of the order-1300 specialization, using the recorded DVR and finite quotient interfaces and the explicit augmentation to pass between localization universes."
+  "place": "Proof; coefficient properties of the order-1300 specialization, using the recorded DVR and finite quotient interfaces and the explicit augmentation to pass between localization universes. K2 also proves the lifted coefficient facts and coefficient-presentation equivalence/mate assertions using the same source and the elementary adjunction argument."
  },
  "mathlib_searches": [
   {
@@ -198,7 +233,10 @@
   "by": "Q01",
   "date": "2026-10-16",
   "existing": false,
-  "note": "§1(B): reuse the published PbcIsBoundedConstructibleComplete and PbcBoundedConstructibleComplete unchanged. The published PbcIntegralCategory convenience specialization takes E : Type u and ULifts its integers; this module supplies the equivalent specialization to E : Type (u+1) and the actual valuation ring required by the compact-support interface, plus its uniquely residue-normalized scalar action. No completion, tower, or etale-origin predicate is redefined. Second reading reuses pbcCompletedScalarSections (Sheaf.Paper.PbcRationalCategory) and its published module/derived linear instances; the duplicate scalar construction is removed."
+  "note": "§1(B): reuse the published PbcIsBoundedConstructibleComplete and PbcBoundedConstructibleComplete unchanged. The published PbcIntegralCategory convenience specialization takes E : Type u and ULifts its integers; this module supplies the equivalent specialization to E : Type (u+1) and the actual valuation ring required by the compact-support interface, plus its uniquely residue-normalized scalar action. No completion, tower, or etale-origin predicate is redefined. Second reading reuses pbcCompletedScalarSections (Sheaf.Paper.PbcRationalCategory) and its published module/derived linear instances; the duplicate scalar construction is removed.",
+  "supporting_modules": [
+   "Sheaf.Paper.BoundedConstructibleComplete"
+  ]
  },
  "blueprint_update": {
   "snapshot": "main-20261015",
@@ -207,13 +245,13 @@
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "K5",
+  "reviewer": "C-0ced5",
+  "group": "K2",
   "result": "pass",
-  "landing": "20261019T005314-L-2751011",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "landing": "20261021T061432-L-1774768",
+  "kind": "interface",
+  "note": "independent cc review: integralStratifiedPerfectCharacterization (ii)⇔(iii) proof + new criterion sorry vs node lem-weil-pbc-integral-stratified-perfect-characterization and B-S 6.6.11/6.8.11(3); public decl type/value hashes of AdicCoefficientDatumCompleted, BoundedConstructibleComplete, Models/item published vs sandbox; 54 direct importers compiled"
  }
 }

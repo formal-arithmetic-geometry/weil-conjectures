@@ -11,6 +11,9 @@ public import Mathlib.Topology.KrullDimension
 public import Sheaf.Paper.BoundedConstructibleTower
 public import Sheaf.Paper.IntrinsicCompletionCompleted
 public import Sheaf.Paper.WitnessCompatibility
+import all Sheaf.CategoryTheory.DerivedCategory.StandardQuotientsPerfect
+import Mathlib.GroupTheory.OrderOfElement
+import all Sheaf.AlgebraicGeometry.ProEtaleFiniteModules
 
 /-!
 # Bounded constructible derived-complete objects
@@ -23,6 +26,8 @@ are properties; no origin, local model, or completion representative is retained
 
 @[expose] public noncomputable section
 set_option autoImplicit false
+set_option backward.isDefEq.respectTransparency false
+set_option backward.isDefEq.respectTransparency.types false
 set_option synthInstance.maxSize 512
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite
@@ -54,7 +59,8 @@ sheaf isomorphism, so composing it preserves local injectivity and local surject
 theorem pbcFunctionScalars_locallyBijective (n : ℕ) :
     Presheaf.IsLocallyInjective (ProEt.topology T) (pbcFunctionScalars T d n) ∧
       Presheaf.IsLocallySurjective (ProEt.topology T) (pbcFunctionScalars T d n) := by
-  sorry
+  dsimp only [pbcFunctionScalars]
+  constructor <;> infer_instance
 
 /-- Local injectivity of the specified coefficient presentation. Source: blueprint
 order 1300 (blueprint: def-weil-pbc-bounded-constructible-complete). -/
@@ -135,7 +141,65 @@ theorem pbcAssociatedRestriction_exists
       Functor.whiskerRight e.hom (SheafOfModules.toSheaf R) =
         (pbcAssociatedRestrictionSource T P Q R α q).hom ≫
           (pbcAssociatedRestrictionTarget T Q R S β r).inv := by
-  sorry
+  let δ := (pbcAssociatedRestrictionSource T P Q R α q).hom ≫
+    (pbcAssociatedRestrictionTarget T Q R S β r).inv
+  have hMap (N : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} Q)) :
+      ∃ f : (pbcAssociatedModule T P R α).obj
+          ((Sheaf.restrictScalars (ProEt.topology T) q).obj N) ⟶
+        (SheafOfModules.restrictScalars r).obj ((pbcAssociatedModule T Q S β).obj N),
+        (SheafOfModules.toSheaf R).map f = δ.app N := by
+    let M₀ := (finiteCoefficientModulePresheaf T.ProEt Q).obj N.obj
+    let M₁ := (finiteCoefficientModulePresheaf T.ProEt P).obj
+      ((Sheaf.restrictScalars (ProEt.topology T) q).obj N).obj
+    let φ := toSheafify (ProEt.topology T) M₀.presheaf
+    let G := (SheafOfModules.restrictScalars r).obj
+      ((pbcAssociatedModule T Q S β).obj N)
+    let v : M₁ ⟶ (PresheafOfModules.restrictScalars α).obj G.val :=
+      PresheafOfModules.homMk φ (fun X a m ↦ by
+        change φ.app X (q a • (show M₀.obj X from m)) =
+          (r.hom.app X (α.app X a)) •
+            (show ((PresheafOfModules.sheafification β).obj M₀).val.obj X from φ.app X m)
+        have hscalar : r.hom.app X (α.app X a) = β.app X (q a) :=
+          ConcreteCategory.congr_hom (congr_app _h X) a
+        rw [hscalar]
+        exact ((PresheafOfModules.toSheafify β φ).app X).hom.map_smul (q a) m)
+    let f := (PresheafOfModules.sheafificationHomEquiv α (P := M₁) (F := G)).symm v
+    refine ⟨f, ?_⟩
+    apply Sheaf.hom_ext
+    apply sheafify_hom_ext (ProEt.topology T) _ _
+      ((SheafOfModules.toSheaf R).obj G).property
+    change φ ≫ (PresheafOfModules.toPresheaf R.obj).map f.val = φ ≫ 𝟙 _
+    rw [Category.comp_id]
+    have hf := PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def α f
+    rw [Equiv.apply_symm_apply] at hf
+    exact hf.symm
+  choose f hf using hMap
+  let η : Sheaf.restrictScalars (ProEt.topology T) q ⋙ pbcAssociatedModule T P R α ⟶
+      pbcAssociatedModule T Q S β ⋙ SheafOfModules.restrictScalars r :=
+    { app := f
+      naturality := by
+        intro N N' g
+        apply (SheafOfModules.toSheaf R).map_injective
+        rw [Functor.map_comp, Functor.map_comp, hf, hf]
+        exact δ.naturality g }
+  have hη (N : Sheaf (ProEt.topology T) (ModuleCat.{u + 1} Q)) : IsIso (η.app N) := by
+    have : IsIso ((SheafOfModules.toSheaf R).map (η.app N)) := by
+      change IsIso ((SheafOfModules.toSheaf R).map (f N))
+      rw [hf]
+      infer_instance
+    exact isIso_of_reflects_iso _ (SheafOfModules.toSheaf R)
+  have : IsIso η := NatIso.isIso_of_isIso_app η
+  refine ⟨asIso η, ?_, ?_⟩
+  · apply NatTrans.ext
+    funext N
+    exact hf N
+  · intro e he
+    apply Iso.ext
+    apply NatTrans.ext
+    funext N
+    apply (SheafOfModules.toSheaf R).map_injective
+    have hn := congr_app he N
+    exact hn.trans (hf N).symm
 
 /-- Canonical associated-module-sheaf realization, with the coefficient presentation
 changed along the recorded isomorphism. Source: blueprint order 1300
@@ -159,7 +223,11 @@ theorem pbcFunctionRealization_exact (n : ℕ) :
       (pbcFunctionRealization T d n).Additive ∧
       PreservesFiniteLimits (pbcFunctionRealization T d n) ∧
       PreservesFiniteColimits (pbcFunctionRealization T d n) := by
-  sorry
+  have : (pbcFunctionRealization T d n).IsEquivalence :=
+    coefficientRealization_isEquivalence (ProEt.topology T) (PbcQuotient d n)
+      ((adicLisseForget T).obj ((pbcAdicRings T d).obj (op n)))
+      (pbcFunctionScalars T d n)
+  exact ⟨this, Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
 /-- The canonical realization equivalence. Source: blueprint order 1300
 (blueprint: def-weil-pbc-bounded-constructible-complete). -/
@@ -197,8 +265,33 @@ Exactness preserves quasi-isomorphisms on both sides. Localize both functors and
 the unit and counit, which remain isomorphisms and satisfy the triangle identities. -/
 @[instance] theorem pbcDerivedFunctionRealization_equivalence (n : ℕ) :
     (pbcDerivedFunctionRealization T d n).IsEquivalence := by
-  sorry
+  infer_instance
 
+private theorem functionScalars_eq (n : ℕ) :
+    pbcFunctionScalars T d n =
+      Functor.whiskerRight
+        (AdicCoefficients.constants T (PbcQuotient d n) ≫
+          toSheafify (ProEt.topology T)
+            (AdicCoefficients.functionPresheaf T (PbcQuotient d n)))
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) := by
+  let e := AdicCoefficients.finiteRingComparison T (PbcQuotient d n)
+  have he :
+      Functor.whiskerRight (toSheafify (ProEt.topology T)
+        (AdicCoefficients.functionPresheaf T (PbcQuotient d n)))
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ≫ e.hom.hom =
+      AdicCoefficients.finiteRingUnit T (PbcQuotient d n) :=
+    (AdicCoefficients.finiteRingComparison_exists T (PbcQuotient d n)).choose_spec.1.2
+  apply (cancel_mono e.hom.hom).1
+  have hi : e.inv.hom ≫ e.hom.hom = 𝟙 _ := congrArg
+    (fun f : AdicCoefficients.finiteRingPresentation T (PbcQuotient d n) ⟶
+      AdicCoefficients.finiteRingPresentation T (PbcQuotient d n) ↦ f.hom) e.inv_hom_id
+  change (finiteCoefficientScalarMap T (PbcQuotient d n) ≫ e.inv.hom) ≫ e.hom.hom = _
+  rw [Category.assoc, hi]
+  erw [Category.comp_id]
+  rw [Functor.whiskerRight_comp, Category.assoc, he]
+  rfl
+
+attribute [-instance] GrothendieckTopology.hasSheafify_of_essentiallySmall in
 /-- The scalar-presentation square is the canonical quotient square.
 Source: blueprint order 1300 (blueprint: def-weil-pbc-bounded-constructible-complete).
 Proof: all four maps send a constant residue class to its lower residue class.
@@ -211,7 +304,34 @@ theorem pbcFunctionScalars_comp (n : ℕ) :
       (Functor.const T.ProEtᵒᵖ).map
         (RingCat.ofHom (pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n))) ≫
           pbcFunctionScalars T d n := by
-  sorry
+  rw [functionScalars_eq, functionScalars_eq]
+  let q := pbcWitnessQuotientMap d (n + 1) n (Nat.le_succ n)
+  have hmap : pbcAdicQuotient T d (n + 1) n (Nat.le_succ n) =
+      AdicCoefficients.coefficientMap T q := by
+    simp only [pbcAdicQuotient, pbcAdicRings, AdicCoefficients.ringSystem,
+      Functor.ofOpSequence_map_homOfLE_succ]
+    congr 1
+  rw [hmap]
+  change Functor.whiskerRight _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ≫
+      Functor.whiskerRight
+        (((presheafToSheaf (ProEt.topology T) CommRingCat.{u + 1}).map
+          (AdicCoefficients.functionPresheafMap T q)).hom)
+        (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) =
+    Functor.whiskerRight ((Functor.const T.ProEtᵒᵖ).map (CommRingCat.ofHom q))
+      (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}) ≫
+    Functor.whiskerRight _ (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})
+  rw [← Functor.whiskerRight_comp, ← Functor.whiskerRight_comp]
+  have hc : AdicCoefficients.constants T (PbcQuotient d (n + 1)) ≫
+        AdicCoefficients.functionPresheafMap T q =
+      (Functor.const T.ProEtᵒᵖ).map (CommRingCat.ofHom q) ≫
+        AdicCoefficients.constants T (PbcQuotient d n) := by
+    ext U x
+    rfl
+  have hn := toSheafify_naturality (ProEt.topology T)
+    (AdicCoefficients.functionPresheafMap T q)
+  apply congrArg (fun f ↦ Functor.whiskerRight f
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1}))
+  rw [Category.assoc, ← hn, ← Category.assoc, hc, Category.assoc]
 
 /-- The normalized ordinary scalar-restriction comparison. Source: blueprint order 1300
 (blueprint: def-weil-pbc-bounded-constructible-complete). -/
@@ -254,6 +374,27 @@ def pbcFunctionReductionMap (n : ℕ) :
       (pbcAdicQuotient T d (n + 1) n (Nat.le_succ n)))).symm
     (TwoSquare.mk _ _ _ _ (pbcDerivedFunctionRestriction T d n).hom)).natTrans
 
+/-- Mates across equivalences preserve invertibility, by conjugating the two
+adjunctions with the inverse equivalences. -/
+private theorem inverseMate_equivalences
+    {C D C' D' : Type*} [Category C] [Category D] [Category C'] [Category D']
+    {L : C ⥤ D} {R : D ⥤ C} {L' : C' ⥤ D'} {R' : D' ⥤ C'}
+    {G : C ⥤ C'} {H : D ⥤ D'}
+    (a : L ⊣ R) (b : L' ⊣ R') [G.IsEquivalence] [H.IsEquivalence]
+    (β : TwoSquare R H G R') [IsIso β.natTrans] :
+    IsIso ((mateEquiv a b).symm β).natTrans := by
+  let eG := G.asEquivalence.toAdjunction
+  let eH := H.asEquivalence.toAdjunction
+  let α := (mateEquiv a b).symm β
+  have hi : IsIso (mateEquiv eH eG β).natTrans := by
+    dsimp only [mateEquiv, Equiv.coe_fn_mk]
+    infer_instance
+  have he := iterated_mateEquiv_conjugateEquiv a b eG eH α
+  change (mateEquiv eH eG ((mateEquiv a b) ((mateEquiv a b).symm β))).natTrans = _ at he
+  rw [Equiv.apply_symm_apply] at he
+  have : IsIso (conjugateEquiv (a.comp eH) (eG.comp b) α.natTrans) := he ▸ hi
+  exact conjugateEquiv_of_iso (a.comp eH) (eG.comp b) α.natTrans
+
 /-- The canonical tensor mate is invertible. Source: blueprint order 1300
 (blueprint: def-weil-pbc-bounded-constructible-complete).
 Proof: use flat-term K-flat representatives. Realization is an exact coefficient
@@ -261,7 +402,8 @@ presentation equivalence and preserves K-flatness. The mate is ordinary balancin
 these representatives, because the restriction comparison is the identity on local
 generators. Its inverse is the reverse balancing map. Localization proves the claim. -/
 theorem pbcFunctionReductionMap_isIso (n : ℕ) : IsIso (pbcFunctionReductionMap T d n) := by
-  sorry
+  exact inverseMate_equivalences _ _
+    (TwoSquare.mk _ _ _ _ (pbcDerivedFunctionRestriction T d n).hom)
 
 /-- Canonical coefficient-reduction comparison. Source: blueprint order 1300
 (blueprint: def-weil-pbc-bounded-constructible-complete). -/
@@ -359,7 +501,58 @@ theorem pbcCoefficientDatumProperties :
         (Ideal.span {pbcUniformizer l E}) n) ∧
       ∀ n : ℕ, Finite (PbcIntegralRing l E ⧸
         (Ideal.span {pbcUniformizer l E}) ^ (n + 1)) := by
-  sorry
+  have h := (Padic.extension_integers_dvr l E (Padic.coefficientExtensionAbsoluteValue l E)
+    (spectralNorm_extends (K := ℚ_[l]) (L := E))).choose_spec.choose_spec
+  let : IsPrincipalIdealRing (Padic.coefficientExtensionIntegers l E) :=
+    h.2.2.2.2.2.2.2.2.1
+  let e : PbcIntegralRing l E ≃+* Padic.coefficientExtensionIntegers l E :=
+    ULift.ringEquiv
+  let : IsPrincipalIdealRing (PbcIntegralRing l E) :=
+    IsPrincipalIdealRing.of_surjective e.symm e.symm.surjective
+  let : IsDomain (PbcIntegralRing l E) := e.toMulEquiv.isDomain _
+  have hfinite (n : ℕ) : Finite (PbcIntegralRing l E ⧸
+      (Ideal.span {pbcUniformizer l E}) ^ (n + 1)) := by
+    let := Padic.finite_coefficientExtensionRing l E (n + 1) (Nat.succ_le_succ (Nat.zero_le n))
+    have hI : Padic.coefficientExtensionIdeal l E (n + 1) =
+        Ideal.map e.toRingHom ((Ideal.span {pbcUniformizer l E}) ^ (n + 1)) := by
+      simp [Padic.coefficientExtensionIdeal, Ideal.map_pow, Ideal.map_span,
+        Set.image_singleton, e, pbcUniformizer]
+      rfl
+    let eq := Ideal.quotientEquiv _ _ e hI
+    exact Finite.of_equiv (Padic.coefficientExtensionRing l E (n + 1)) eq.symm.toEquiv
+  refine ⟨inferInstance, Submodule.fg_span_singleton _, ?_, ?_, hfinite⟩
+  · have : Finite (PbcIntegralRing l E ⧸ Ideal.span {pbcUniformizer l E}) := by
+      simpa only [Nat.zero_add, pow_one] using hfinite 0
+    intro x
+    exact (isOfFinAddOrder_of_finite x).exists_nsmul_eq_zero
+  · intro n _hn
+    let R := PbcIntegralRing l E
+    let J : Ideal R := (Ideal.span {pbcUniformizer l E}) ^ n
+    let M := ModuleCat.of R (R ⧸ J)
+    let q : ModuleCat.of R R ⟶ M := ModuleCat.ofHom J.mkQ
+    have hq (x : R) : q x = 0 ↔ x ∈ Ideal.span {pbcUniformizer l E ^ n} := by
+      change Ideal.Quotient.mk J x = 0 ↔ _
+      rw [Ideal.Quotient.eq_zero_iff_mem]
+      simp only [J, Ideal.span_singleton_pow]
+    have hp : pbcUniformizer l E ≠ 0 := by
+      intro hp
+      apply AlgebraicGeometry.uniformizer_ne_zero l E
+      exact congrArg ULift.down hp
+    have : Mono (ModuleCat.ofHom (LinearMap.mulLeft R (pbcUniformizer l E ^ n))) := by
+      rw [ModuleCat.mono_iff_injective]
+      intro x y hxy
+      exact mul_left_cancel₀ (pow_ne_zero n hp) hxy
+    have : Epi q := (ModuleCat.epi_iff_surjective q).2 J.mkQ_surjective
+    obtain ⟨hw, hex⟩ := AlgebraicGeometry.principalExact (pbcUniformizer l E ^ n) M q hq
+    obtain ⟨P, hge, hle, hfree, _, _, _, ε, hε, _, _⟩ :=
+      AlgebraicGeometry.twoTermResolution (pbcUniformizer l E ^ n) M q hw hex
+    let := HasDerivedCategory.standard (ModuleCat.{u + 1} R)
+    let : QuasiIso ε := hε
+    unfold adicQuotientPerfect
+    refine ⟨P, -1, 0, hge, hle, ?_, ⟨(asIso (DerivedCategory.Q.map ε)).symm⟩⟩
+    intro i
+    have := (hfree i).1
+    exact ⟨inferInstance, (hfree i).2⟩
 
 /-- The actual uniformizer-adic coefficient datum. All choices here are proofs of
 properties of the already specified ring and ideal.

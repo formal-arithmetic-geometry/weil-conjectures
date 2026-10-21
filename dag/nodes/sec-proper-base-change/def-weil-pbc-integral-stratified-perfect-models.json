@@ -1,0 +1,115 @@
+{
+ "id": "def-weil-pbc-integral-stratified-perfect-models",
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "kind": "definition",
+ "title": "Completed integral constant realization and stratified local models",
+ "statement": "For a scheme T [def-pc-scheme] and an adic coefficient datum A [def-weil-pbc-adic-coefficient-datum], let A_T be the actual completed coefficient sheaf. Define the constant-module realization by constant module sheafification, scalar extension to A_T, and transport along the normalized completed coefficient isomorphism. Its derived functor is the realization of complexes in [def-weil-abstract-derived-category]. Define local restriction by derived inverse image and slice restriction [def-weil-pbc-ringed-site-derived-restriction]. A complex is stratified perfect if some finite stratification [def-constructible-stratification] has covering sieves on which it is the realization of perfect algebra complexes [def-pc-perfect-ring-complex]. A sheaf is stratified finitely presented if on such local covers it is the ordinary realization of finitely presented algebra modules [def-sc-finitely-presented-module]. Bounded constructible cohomology means global upper and lower cohomology bounds and this sheaf condition in every degree.",
+ "source": {
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 6.6.11; Definition 6.8.10 and Proposition 6.8.11(3). Verbatim extraction of the existing parent interface."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-weil-abstract-derived-category",
+  "def-weil-pbc-ringed-site-derived-restriction",
+  "def-constructible-stratification",
+  "def-pc-perfect-ring-complex",
+  "def-sc-finitely-presented-module"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Completed constant realization of modules over a complete coefficient ring on the pro-etale site",
+   "results": [
+    "AdicCompletion.module",
+    "AdicCompletion",
+    "IsAdicComplete.bot",
+    "CompHausLike.LocallyConstantModule.functorToPresheaves_obj_obj_isModule",
+    "IsAdicComplete.mk",
+    "IsAdicComplete",
+    "IsAdicComplete.toIsPrecomplete",
+    "AdicCompletion.ofTensorProductEquivOfFiniteNoetherian"
+   ],
+   "date": "2026-10-21",
+   "verdict": "Algebraic adic completion and condensed locally constant modules exist, but no realization on this ringed pro-etale site."
+  },
+  {
+   "tool": "loogle",
+   "query": "integralConstantModule",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No matching Mathlib identifier; this is the existing project interface, relocated verbatim."
+  },
+  {
+   "tool": "grep",
+   "query": "integralConstantModule|IsIntegralStratifiedPerfect|completed.*constant.*realiz",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "No matches in Mathlib. Existing project declarations are relocated rather than duplicated."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.IntegralStratifiedPerfectCharacterization",
+  "date": "2026-10-21",
+  "group": "K2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-weil-pbc-finite-extension",
+   "place": "Proof first sentence: choose an integral lattice; via integral characterization, Proposition 6.6.11 alone.",
+   "via": [
+    "lem-weil-pbc-integral-stratified-perfect-characterization",
+    "lem-weil-pbc-condensed-e-realization",
+    "nt-target-proetale-e"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.IntegralStratifiedPerfectModels",
+  "file": "lean/Sheaf/Paper/IntegralStratifiedPerfectModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.integralConstantModule",
+  "statement": "def integralConstantModule (T : Scheme.{u}) {A : Type (u + 1)} [CommRing A]\n    (d : AdicCoefficientDatum A) : ModuleCat.{u + 1} A ⥤\n      pbcModules T (pbcAdicCompletion T d)",
+  "branch": "sheaf-dag",
+  "by": "K2",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0ced5",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261021T061432-L-1774768",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-0ced5",
+  "group": "K2",
+  "result": "pass",
+  "landing": "20261021T061432-L-1774768",
+  "kind": "interface",
+  "note": "independent cc review: integralStratifiedPerfectCharacterization (ii)⇔(iii) proof + new criterion sorry vs node lem-weil-pbc-integral-stratified-perfect-characterization and B-S 6.6.11/6.8.11(3); public decl type/value hashes of AdicCoefficientDatumCompleted, BoundedConstructibleComplete, Models/item published vs sandbox; 54 direct importers compiled"
+ }
+}
