@@ -1,0 +1,109 @@
+{
+ "id": "def-cbc-finite-comparison-models",
+ "kind": "definition",
+ "title": "Representative models and normalization of finite comparisons",
+ "statement": "For an adic coefficient datum and a cartesian open-immersion square [def-cbc-completed-finite-exchange-coordinates], use the universal scalar-extension and pullback counits to compare finite derived reduction with its ordinary complex model. Define the finite source and target model maps by applying the exact finite source and target functors and their localization factors. A finite comparison is normalized when, on every K-flat representative, its composite with this finite model map is the evaluated strict-model counit followed by the prescribed ordinary source or target level coordinate change. These are exactly the existing cbcFiniteReductionModelMap, cbcFiniteSourceModelMap, cbcFiniteTargetModelMap, CbcSourceFiniteNormalization and CbcTargetFiniteNormalization definitions, moved without changing their bodies or signatures.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Finite-exchange/reduction identification before Rlim; Stacks 03DI, sites-modules.tex, lemma-extension-by-zero; completed-ring strict exchange is an agent-written refinement."
+ },
+ "stmt_deps": [
+  "def-cbc-completed-finite-exchange-coordinates",
+  "def-cbc-completed-strict-open-exchange"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "Step 7, with the normalized representative equation made explicit."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "The natural transformation comparing two functors of a derived category is uniquely determined by its invertible counits on K-flat resolutions",
+   "results": "leftDerived_ext, leftDerivedUnique and general derived counits; no completed finite exchange normalization.",
+   "date": "2026-10-21",
+   "verdict": "No exact match; generic derived uniqueness does not construct the specified finite coordinate maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Counit of derived completed pullback applied to a reduction tower of a K-flat complex is an isomorphism",
+   "results": "derived_counit, derived_prime_counit and degree-zero derived comparisons; no completed reduction statement.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Functor\", \"IsIso\", \"DerivedCategory\"",
+   "results": "0 hits.",
+   "date": "2026-10-21",
+   "verdict": "No match."
+  },
+  {
+   "tool": "grep",
+   "query": "rg model counits, finite evaluation and normalization across Mathlib, lean/WeilConjectures and lean/Sheaf",
+   "results": "Existing completedReductionFiniteEvaluation_exists and cbcRingedOpenStrictReduction supply the geometric parts; no theorem directly produces these two prescribed finite normalizations.",
+   "date": "2026-10-21",
+   "verdict": "Reuse those declarations in the existence proof; uniqueness is proved in the parent."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.CompletedRingStrictFiniteExchange",
+  "date": "2026-10-21",
+  "group": "W4"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-cbc-completed-extension-zero-comparison",
+   "place": "Finite-exchange identification before Rlim; Step 7 of the completed-ring strict finite exchange refinement.",
+   "via": [
+    "lem-cbc-completed-ring-strict-finite-exchange"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.CompletedFiniteComparisonModels",
+  "file": "lean/Sheaf/Paper/CompletedFiniteComparisonModels.lean",
+  "declaration": "AlgebraicGeometry.Scheme.cbcFiniteReductionModelMap",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.cbcFiniteReductionModelMap",
+   "AlgebraicGeometry.Scheme.cbcFiniteSourceModelMap",
+   "AlgebraicGeometry.Scheme.cbcFiniteTargetModelMap",
+   "AlgebraicGeometry.Scheme.CbcSourceFiniteNormalization",
+   "AlgebraicGeometry.Scheme.CbcTargetFiniteNormalization"
+  ],
+  "statement": "def cbcFiniteReductionModelMap (T : Scheme.{u}) (n : ℕ)\n    (P : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :\n    (cbcFiniteReduction d T n).obj (DerivedCategory.Q.obj P) ⟶\n      DerivedCategory.Q.obj\n        (((cbcFiniteReductionModule d T n).mapHomologicalComplex (.up ℤ)).obj P)",
+  "branch": "sheaf-dag",
+  "by": "W4",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c8801",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261021T183353-L-1610710",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-c8801",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261021T183353-L-1610710",
+  "kind": "interface",
+  "note": "independent cc review: moved model defs vs live item module (verbatim apart from blueprint tags); existence lemma vs old ∃! statement (existence half); uniqueness proof vs node step 7; both direct importers compiled against the delivery"
+ }
+}

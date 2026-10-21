@@ -96,12 +96,16 @@
    }
   },
   {
-   "text": "To identify the finite objects, use [lem-cbc-ringed-open-strict-reduction] for $j$: it gives the actual strict isomorphism $(j_!K)_\\bullet\\cong J_jK_\\bullet$, represented on a K-flat $Q$ by $[p]\\otimes b\\mapsto[p\\otimes b|_U]$. It applies to arbitrary $K$, with no quasi-compactness or completeness assumption. The finite-evaluation assertion in [def-weil-pbc-completed-pullback], applied to $j_!K$ and to $K$ for $g_U$, now identifies the evaluations of the two objects in step 6 with the restrictions of $g_n^*j_!K_n$ and $j'_!g_{U,n}^*K_n$. Here reduction of $j_!K$ as a $(P_n)_X$-complex is also part of the strict-reduction lemma. The comparisons are those of [lem-weil-pbc-constant-completion-equivalence], and finite pullback is exact by [prop-weil-pbc-proetale-constant-exact]. Thus $Lg_n^*$ and $Lg_{U,n}^*$ at these finite objects are represented by the specified exact finite module pullbacks, even when $K$ is unbounded.",
+   "text": "To identify the finite objects, use [lem-cbc-ringed-open-strict-reduction] for $j$: it gives the actual strict isomorphism $(j_!K)_\\bullet\\cong J_jK_\\bullet$, represented on a K-flat $Q$ by $[p]\\otimes b\\mapsto[p\\otimes b|_U]$. It applies to arbitrary $K$, with no quasi-compactness or completeness assumption. The finite-evaluation assertion in [def-weil-pbc-completed-pullback], applied to $j_!K$ and to $K$ for $g_U$, now identifies the evaluations of the two objects in step 6 with the restrictions of $g_n^*j_!K_n$ and $j'_!g_{U,n}^*K_n$. Here reduction of $j_!K$ as a $(P_n)_X$-complex is also part of the strict-reduction lemma. The comparisons are those of [lem-weil-pbc-constant-completion-equivalence], and finite pullback is exact by [prop-weil-pbc-proetale-constant-exact]. Thus $Lg_n^*$ and $Lg_{U,n}^*$ at these finite objects are represented by the specified exact finite module pullbacks, even when $K$ is unbounded. The normalized comparison existence is isolated in [lem-cbc-normalized-finite-comparison-existence]. Their uniqueness is proved by cancelling the finite model maps on K-flat representatives, where scalar-extension counits are invertible [def-weil-pbc-bounded-constructible-tower], and using a K-flat resolution of an arbitrary complex to cancel the derived image of its quasi-isomorphism.",
    "uses": [
     "lem-cbc-ringed-open-strict-reduction",
     "def-weil-pbc-completed-pullback",
     "lem-weil-pbc-constant-completion-equivalence",
-    "prop-weil-pbc-proetale-constant-exact"
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-cbc-normalized-finite-comparison-existence",
+    "def-cbc-finite-comparison-models",
+    "lem-pc-kflat-resolution",
+    "def-weil-pbc-bounded-constructible-tower"
    ],
    "elementary": false,
    "source": {
@@ -155,6 +159,10 @@
   "lem-cbc-ringed-open-strict-reduction",
   "lem-weil-pbc-constant-completion-equivalence",
   "prop-weil-pbc-proetale-constant-exact",
+  "lem-cbc-normalized-finite-comparison-existence",
+  "def-cbc-finite-comparison-models",
+  "lem-pc-kflat-resolution",
+  "def-weil-pbc-bounded-constructible-tower",
   "lem-sf-open-tensor-normalization",
   "lem-cbc-finite-open-exchange-scalars",
   "lem-cbc-proetale-extension-zero-base-change"
@@ -162,7 +170,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
-  "place": "Finite-exchange/reduction identification before Rlim; ringed adjunction and strict K-flat representative refinement using the cited Stacks lemmas."
+  "place": "Original geometric proof retained; finite-comparison uniqueness now proved in Lean by K-flat resolution and counit cancellation, with existence split separately."
  },
  "mathlib_searches": [
   {
@@ -324,11 +332,6 @@
   "module": "Sheaf.Paper.CompletedRingStrictFiniteExchange",
   "declaration": "AlgebraicGeometry.Scheme.completedRingStrictFiniteExchange",
   "declarations": [
-   "AlgebraicGeometry.Scheme.cbcFiniteReductionModelMap",
-   "AlgebraicGeometry.Scheme.cbcFiniteSourceModelMap",
-   "AlgebraicGeometry.Scheme.cbcFiniteTargetModelMap",
-   "AlgebraicGeometry.Scheme.CbcSourceFiniteNormalization",
-   "AlgebraicGeometry.Scheme.CbcTargetFiniteNormalization",
    "AlgebraicGeometry.Scheme.cbcFiniteComparisons_existsUnique",
    "AlgebraicGeometry.Scheme.cbcSourceFiniteComparison",
    "AlgebraicGeometry.Scheme.cbcTargetFiniteComparison",
@@ -355,20 +358,11 @@
  "reviewed_proof": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "AUTO",
-  "group": "Y5",
-  "result": "pass",
-  "landing": "20261021T130239-L-2655100",
-  "kind": "proof",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)",
-  "sorry_before": [
-   "AlgebraicGeometry.Scheme.cbcFiniteComparisons_existsUnique",
-   "AlgebraicGeometry.Scheme.cbcFiniteInverse_isIso",
-   "AlgebraicGeometry.Scheme.completedRingStrictFiniteExchange"
-  ],
-  "sorry_after": [
-   "AlgebraicGeometry.Scheme.cbcFiniteComparisons_existsUnique",
-   "AlgebraicGeometry.Scheme.completedRingStrictFiniteExchange"
-  ]
+  "reviewer": "C-c8801",
+  "group": "W4",
+  "result": "fix",
+  "landing": "20261021T183353-L-1610710",
+  "kind": "interface",
+  "note": "independent cc review: moved model defs vs live item module (verbatim apart from blueprint tags); existence lemma vs old ∃! statement (existence half); uniqueness proof vs node step 7; both direct importers compiled against the delivery"
  }
 }

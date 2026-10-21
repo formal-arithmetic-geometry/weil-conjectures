@@ -5,7 +5,9 @@ Authors: SHEAF group NA
 -/
 module
 
-public import Sheaf.Paper.CompletedFiniteExchangeCoordinates
+public import Sheaf.Paper.CompletedFiniteComparisonModels
+import Sheaf.Paper.NormalizedFiniteComparisonExistence
+import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
 public import Sheaf.AlgebraicGeometry.FiniteOpenExchangeScalars
 public import Sheaf.AlgebraicGeometry.ProEtaleDerivedExtensionZeroBaseChange
 
@@ -43,88 +45,36 @@ variable {U' U X' X : Scheme.{u}} {gU : U' ⟶ U} {j' : U' ⟶ X'}
 
 open AlgebraicGeometry.ProEtale.StrictTower
 
-/-- The finite reduction's universal comparison, retaining its own finite action.
-Source: Stacks 06YY (blueprint: lem-cbc-completed-ring-strict-finite-exchange). -/
-def cbcFiniteReductionModelMap (T : Scheme.{u}) (n : ℕ)
-    (P : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
-    (cbcFiniteReduction d T n).obj (DerivedCategory.Q.obj P) ⟶
-      DerivedCategory.Q.obj
-        (((cbcFiniteReductionModule d T n).mapHomologicalComplex (.up ℤ)).obj P) :=
-  (pbcDerivedRestrict (pbcLevelConstantComparison T d n).hom).map
-      (pbcComplexCounit (pbcAdicProjection T d n) P) ≫
-    (pbcRestrict (pbcLevelConstantComparison T d n).hom).mapDerivedCategoryFactors.hom.app
-      (((reductionChange T (pbcAdicProjection T d n)).mapHomologicalComplex (.up ℤ)).obj P)
+private theorem finiteSourceModel_isIso (n : ℕ)
+    (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d) P) :
+    IsIso (cbcFiniteSourceModelMap d sq n P) := by
+  have := pbcExtensionCounit_isIso (pbcAdicProjection U d n) P hP
+  dsimp only [cbcFiniteSourceModelMap, cbcFiniteReductionModelMap, pbcComplexCounit]
+  infer_instance
 
-/-- Finite source comparison on representatives.
-Source: Stacks 06YY (blueprint: lem-cbc-completed-ring-strict-finite-exchange). -/
-def cbcFiniteSourceModelMap (n : ℕ)
-    (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ) :
-    (cbcFiniteReduction d U n ⋙ (cbcFiniteSource d sq n).mapDerivedCategory).obj
-      (DerivedCategory.Q.obj P) ⟶
-    DerivedCategory.Q.obj
-      (((cbcFiniteSource d sq n).mapHomologicalComplex (.up ℤ)).obj
-        (((cbcFiniteReductionModule d U n).mapHomologicalComplex (.up ℤ)).obj P)) :=
-  (cbcFiniteSource d sq n).mapDerivedCategory.map (cbcFiniteReductionModelMap d U n P) ≫
-    (cbcFiniteSource d sq n).mapDerivedCategoryFactors.hom.app
-      (((cbcFiniteReductionModule d U n).mapHomologicalComplex (.up ℤ)).obj P)
+private theorem finiteTargetModel_isIso (n : ℕ)
+    (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ)
+    (hP : CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d) P) :
+    IsIso (cbcFiniteTargetModelMap d sq n P) := by
+  have := pbcExtensionCounit_isIso (pbcAdicProjection U d n) P hP
+  dsimp only [cbcFiniteTargetModelMap, cbcFiniteReductionModelMap, pbcComplexCounit]
+  infer_instance
 
-/-- Finite target comparison on representatives.
-Source: Stacks 06YY (blueprint: lem-cbc-completed-ring-strict-finite-exchange). -/
-def cbcFiniteTargetModelMap (n : ℕ)
-    (P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ) :
-    (cbcFiniteReduction d U n ⋙ (cbcFiniteTarget d sq n).mapDerivedCategory).obj
-      (DerivedCategory.Q.obj P) ⟶
-    DerivedCategory.Q.obj
-      (((cbcFiniteTarget d sq n).mapHomologicalComplex (.up ℤ)).obj
-        (((cbcFiniteReductionModule d U n).mapHomologicalComplex (.up ℤ)).obj P)) :=
-  (cbcFiniteTarget d sq n).mapDerivedCategory.map (cbcFiniteReductionModelMap d U n P) ≫
-    (cbcFiniteTarget d sq n).mapDerivedCategoryFactors.hom.app
-      (((cbcFiniteReductionModule d U n).mapHomologicalComplex (.up ℤ)).obj P)
-
-/-- Normalization of the finite source comparison on every K-flat representative.
-Source: Stacks 099N, 06XN (blueprint: lem-cbc-completed-ring-strict-finite-exchange). -/
-def CbcSourceFiniteNormalization (n : ℕ)
-    (e : completedReductionTower U d ⋙ cbcStrictOpen d j sq.isOpenImmersion ⋙
-        completedTowerPullback g d ⋙ pbcTowerEvaluation X' (pbcAdicCompletion X' d) n ≅
-      cbcFiniteReduction d U n ⋙ (cbcFiniteSource d sq n).mapDerivedCategory) : Prop :=
-  ∀ P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ,
-    CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d) P →
-    HEq
-      ((pbcTowerEvaluation X' (pbcAdicCompletion X' d) n).map (cbcSourceModelMap d sq P) ≫
-      ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X' (pbcAdicCompletion X' d))).obj
-        (op n)).mapDerivedCategoryFactors.hom.app
-          (((completedTowerModulePullback g d).mapHomologicalComplex (.up ℤ)).obj
-            (((cbcStrictOpenModule d j sq.isOpenImmersion).mapHomologicalComplex (.up ℤ)).obj
-              (((completedReductionModuleTowerFunctor U d).mapHomologicalComplex (.up ℤ)).obj
-                P))) ≫
-      DerivedCategory.Q.map ((@NatTrans.mapHomologicalComplex _ _ _ _ _ _ _ _ _
-        (cbcSourceLevel_preservesZeroMorphisms d sq n)
-        (cbcFiniteSourceModel_preservesZeroMorphisms d sq n)
-        (cbcSourceLevel d sq n).hom (.up ℤ)).app P))
-      (e.hom.app (DerivedCategory.Q.obj P) ≫ cbcFiniteSourceModelMap d sq n P)
-
-/-- Normalization of the finite target comparison on the identical representative class.
-Source: Stacks 099N, 06XN (blueprint: lem-cbc-completed-ring-strict-finite-exchange). -/
-def CbcTargetFiniteNormalization (n : ℕ)
-    (e : completedReductionTower U d ⋙ completedTowerPullback gU d ⋙
-        cbcStrictOpen d j' sq.isOpenImmersion' ⋙
-          pbcTowerEvaluation X' (pbcAdicCompletion X' d) n ≅
-      cbcFiniteReduction d U n ⋙ (cbcFiniteTarget d sq n).mapDerivedCategory) : Prop :=
-  ∀ P : CochainComplex (pbcModules U (pbcAdicCompletion U d)) ℤ,
-    CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion U d) P →
-    HEq
-      ((pbcTowerEvaluation X' (pbcAdicCompletion X' d) n).map (cbcTargetModelMap d sq P) ≫
-      ((CategoryTheory.evaluation ℕᵒᵖ (pbcModules X' (pbcAdicCompletion X' d))).obj
-        (op n)).mapDerivedCategoryFactors.hom.app
-          (((cbcStrictOpenModule d j' sq.isOpenImmersion').mapHomologicalComplex (.up ℤ)).obj
-            (((completedTowerModulePullback gU d).mapHomologicalComplex (.up ℤ)).obj
-              (((completedReductionModuleTowerFunctor U d).mapHomologicalComplex (.up ℤ)).obj
-                P))) ≫
-      DerivedCategory.Q.map ((@NatTrans.mapHomologicalComplex _ _ _ _ _ _ _ _ _
-        (cbcTargetLevel_preservesZeroMorphisms d sq n)
-        (cbcFiniteTargetModel_preservesZeroMorphisms d sq n)
-        (cbcTargetLevel d sq n).hom (.up ℤ)).app P))
-      (e.hom.app (DerivedCategory.Q.obj P) ≫ cbcFiniteTargetModelMap d sq n P)
+private theorem kflat_resolutions (T : Scheme.{u})
+    (K : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) :
+    ∃ (P : CochainComplex (pbcModules T (pbcAdicCompletion T d)) ℤ) (s : P ⟶ K),
+      CochainComplex.IsKFlatIndependentCoefficients (R := pbcAdicCompletion T d) P ∧
+        QuasiIso s := by
+  let : EssentiallySmall.{u + 1} T.ProEt := essentiallySmallSelf.{0, u, u + 1} _
+  let : HasSheafify (ProEt.topology T) AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbSheafify.{u, 0} T
+  let : (ProEt.topology T).WEqualsLocallyBijective AddCommGrpCat.{u + 1} :=
+    WeilConjectures.integralCoefficientAbLocallyBijective.{u, 0} T
+  obtain ⟨P, s, hP, _, hs, _⟩ :=
+    CochainComplex.exists_isKFlatResolutionIndependentCoefficients
+      (R := pbcAdicCompletion T d) K
+  exact ⟨P, s, hP, hs⟩
 
 /-- Both finite comparison maps exist uniquely with their representative normalizations.
 Source: Stacks 099N, 03DI, 06XN
@@ -146,8 +96,43 @@ theorem cbcFiniteComparisons_existsUnique (n : ℕ) :
           cbcStrictOpen d j' sq.isOpenImmersion' ⋙
             pbcTowerEvaluation X' (pbcAdicCompletion X' d) n ≅
         cbcFiniteReduction d U n ⋙ (cbcFiniteTarget d sq n).mapDerivedCategory,
-      CbcTargetFiniteNormalization d sq n e) := by
-  sorry
+      CbcTargetFiniteNormalization d sq n e)  := by
+  obtain ⟨⟨e, he⟩, ⟨f, hf⟩⟩ := cbcNormalizedFiniteComparison_exists d sq n
+  constructor
+  · refine ⟨e, he, ?_⟩
+    intro z hz
+    apply Iso.ext
+    apply Localization.natTrans_ext DerivedCategory.Q
+      (HomologicalComplex.quasiIso (pbcModules U (pbcAdicCompletion U d)) (.up ℤ))
+    intro K
+    obtain ⟨P, s, hP, hs⟩ := kflat_resolutions d U K
+    have : QuasiIso s := hs
+    have hmodel := finiteSourceModel_isIso d sq n P hP
+    have hp : z.hom.app (DerivedCategory.Q.obj P) = e.hom.app
+        (DerivedCategory.Q.obj P) := by
+      apply (cancel_mono (cbcFiniteSourceModelMap d sq n P)).1
+      exact (eq_of_heq (hz P hP)).symm.trans (eq_of_heq (he P hP))
+    apply (cancel_epi ((completedReductionTower U d ⋙
+      cbcStrictOpen d j sq.isOpenImmersion ⋙ completedTowerPullback g d ⋙
+      pbcTowerEvaluation X' (pbcAdicCompletion X' d) n).map (DerivedCategory.Q.map s))).1
+    rw [z.hom.naturality, e.hom.naturality, hp]
+  · refine ⟨f, hf, ?_⟩
+    intro z hz
+    apply Iso.ext
+    apply Localization.natTrans_ext DerivedCategory.Q
+      (HomologicalComplex.quasiIso (pbcModules U (pbcAdicCompletion U d)) (.up ℤ))
+    intro K
+    obtain ⟨P, s, hP, hs⟩ := kflat_resolutions d U K
+    have : QuasiIso s := hs
+    have hmodel := finiteTargetModel_isIso d sq n P hP
+    have hp : z.hom.app (DerivedCategory.Q.obj P) = f.hom.app
+        (DerivedCategory.Q.obj P) := by
+      apply (cancel_mono (cbcFiniteTargetModelMap d sq n P)).1
+      exact (eq_of_heq (hz P hP)).symm.trans (eq_of_heq (hf P hP))
+    apply (cancel_epi ((completedReductionTower U d ⋙ completedTowerPullback gU d ⋙
+      cbcStrictOpen d j' sq.isOpenImmersion' ⋙
+      pbcTowerEvaluation X' (pbcAdicCompletion X' d) n).map (DerivedCategory.Q.map s))).1
+    rw [z.hom.naturality, f.hom.naturality, hp]
 
 /-- The canonical finite source identification, with its fixed counit equation.
 Source: Stacks 099N (blueprint: lem-cbc-completed-ring-strict-finite-exchange). -/
