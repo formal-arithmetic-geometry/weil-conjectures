@@ -2,7 +2,7 @@
  "id": "lem-sp-open-scalar-site-coherence",
  "kind": "statement",
  "title": "Open extension scalar/site square on flat models",
- "statement": "Let $j:U\\hookrightarrow X$ be an open immersion of schemes and let $A\\to B$ be a unital map of finite commutative rings. Work in ordinary constant-ring module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories] [def-weil-pbc-proetale-modules]. Write $T=-\\otimes_A^L B$, $N=\\nu^*$ [def-weil-pbc-site-comparison-morphism], and $\\delta:T N\\cong N T$ for the canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Let $t_j:Tj_{!,A}\\cong j_{!,B}T$ be the sheaf tensor comparison, derived on K-flat models, induced by retaining each extension summand and tensoring its section with $b\\in B$ [lem-weil-pbc-ringed-slice-extension-tensor]. Let $e_{j,R}:N_Xj_{!,R}^{\\rm et}\\cong j_{!,R}^{\\rm pro}N_U$ be the canonical site comparison for $R=A,B$ [lem-cbc-proetale-extension-zero-comparison].\nIf $P$ is a bounded flat complex representing an etale object $L$, then $j_!P$ is flat termwise and K-flat on either site (on the pro-etale site use $N_UP$), and\n$$j_{!,B}^{\\rm pro}(\\delta_{U,L})\\circ t_j(N_UL)\\circ T_X(e_{j,A}(L))=e_{j,B}(L_B)\\circ N_X(t_j(L))\\circ\\delta_{X,j_{!,A}^{\\rm et}L}.$$\nThese comparisons are natural in $L$. For composable open immersions $j_1,j_2$, their scalar comparisons satisfy $t_{j_2j_1}=j_{2!,B}(t_{j_1})\\circ t_{j_2}(j_{1!,A}(-))$ after the canonical open compositors [lem-cbc-extension-zero-composition]; the site comparisons obey the corresponding composition identity. Identity opens give identity comparisons. Flatness and K-flatness use [def-pc-flat-sheaf-modules] [def-pc-kflat-complex].",
+ "statement": "Let $j:U\\hookrightarrow X$ be an open immersion of schemes and let $A\\to B$ be a unital map of finite commutative rings. Work in ordinary constant-ring module derived categories on the small etale and pro-etale sites [def-weil-pbc-derived-categories] [def-weil-pbc-proetale-modules]. Write $T=-\\otimes_A^L B$ for derived change of rings along $A\\to B$ [lem-pur-derived-change-of-rings], $N=\\nu^*$ [def-weil-pbc-site-comparison-morphism], and $\\delta:T N\\cong N T$ for the canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Let $t_j:Tj_{!,A}\\cong j_{!,B}T$ be the sheaf tensor comparison, derived on K-flat models, induced by retaining each extension summand and tensoring its section with $b\\in B$ [lem-weil-pbc-ringed-slice-extension-tensor]. Let $e_{j,R}:N_Xj_{!,R}^{\\rm et}\\cong j_{!,R}^{\\rm pro}N_U$ be the canonical site comparison for $R=A,B$ [lem-cbc-proetale-extension-zero-comparison].\nIf $P$ is a bounded flat complex representing an etale object $L$, then $j_!P$ is flat termwise and K-flat on either site (on the pro-etale site use $N_UP$), and\n$$j_{!,B}^{\\rm pro}(\\delta_{U,L})\\circ t_j(N_UL)\\circ T_X(e_{j,A}(L))=e_{j,B}(L_B)\\circ N_X(t_j(L))\\circ\\delta_{X,j_{!,A}^{\\rm et}L}.$$\nThese comparisons are natural in $L$. For composable open immersions $j_1,j_2$, their scalar comparisons satisfy $t_{j_2j_1}=j_{2!,B}(t_{j_1})\\circ t_{j_2}(j_{1!,A}(-))$ after the canonical open compositors [lem-cbc-extension-zero-composition]; the site comparisons obey the corresponding composition identity. Identity opens give identity comparisons. Flatness and K-flatness use [def-pc-flat-sheaf-modules] [def-pc-kflat-complex].",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0GL1 (lemma-j-shriek-and-tensor); proetale.tex Tag 09AF (lemma-jshriek-comparison). Agent comparison of these specified tensor and site maps."
@@ -18,11 +18,140 @@
   "def-weil-open-immersion",
   "def-pc-flat-sheaf-modules",
   "def-pc-kflat-complex",
-  "def-weil-pbc-site-comparison-morphism"
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-pur-derived-change-of-rings"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On either localized site, for a flat module sheaf $F$ on $U$ the tensor formula identifies $(-)\\otimes_A j_!F$ with the composite $G\\mapsto j_!(j^*G\\otimes_A F)$. Restriction and extension by zero are exact by [lem-pur-site-restriction-module-adjunction-exact], and the middle functor is exact by flatness. Thus $j_!F$ is flat. The tensor identification is [lem-weil-pbc-ringed-slice-extension-tensor]; the identifications of the small sites with their open localizations are part of [def-weil-pbc-extension-by-zero] and [def-weil-extension-by-zero]. This argument does not use geometric stalks of the pro-etale topos.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "def-pc-flat-sheaf-modules",
+    "def-weil-pbc-extension-by-zero",
+    "def-weil-extension-by-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I, lemma-j-shriek-and-tensor; exact localized restriction and extension, Tags 03DI and 03DJ"
+   }
+  },
+  {
+   "text": "A bounded flat $P$ is K-flat by [lem-pc-bounded-above-flat-kflat-site]. The comparison pullback is exact and identifies the constant ring sheaves, by [lem-sf-comparison-pullback-exact]. Apply [lem-weil-pbc-ringed-pullback-preserves-kflat] to $\\nu_U$ with the constant-$A$ ring identification: $N_UP$ has flat terms and is K-flat. It has the same degree bounds since an additive functor sends zero to zero. Step 1 therefore gives flat terms for both $j^{et}_!P$ and $j^{pro}_!N_UP$; their unchanged bounds and the bounded-above flat lemma make both K-flat. In particular these complexes compute scalar extension by ordinary termwise tensor with $B$ [lem-pur-derived-change-of-rings], without assuming $B$ is $A$-flat.",
+   "uses": [
+    "lem-pc-bounded-above-flat-kflat-site",
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YQ, lemma-bounded-flat-K-flat; Tag 0G7E, lemma-pullback-K-flat"
+   }
+  },
+  {
+   "text": "First work with sheaves. Write $e=j^{et}_{!,A}$, $d=j^{pro}_{!,A}$, $C=N$, and $\\rho_T:C_T(F\\otimes_A G)\\to C_TF\\otimes_A C_TG$ for the ordinary tensorator. Identify $C_T(B_T)$ with $B_T$ using [lem-sf-comparison-pullback-exact] at coefficient $B$ and the underlying-module construction of [def-weil-pbc-site-comparison-morphism]. Thus $\\delta_T=\\rho_{T,-,B}^{-1}$. The maps $\\kappa^e_{F,B}:e(F\\otimes_A B_U)\\to eF\\otimes_A B_X$ and $\\kappa^d$ in [lem-sf-open-comparison-tensor-normalization] are the inverses of the specified scalar comparisons: their open-adjunction transposes are the identity on each section over $U$, so their inverse sends the original tensor generator $s\\otimes b$ to the extension generator with section $s\\otimes b$. This follows directly from the summand prescription in [def-weil-extension-by-zero-presheaf] and the sheafification universal property in [def-weil-presheaf-modules-sheafification]. The site comparison $c$ in that lemma is precisely $e_{j,A}$, by [lem-sf-open-comparison-unit-normalization]. When $F$ already has a $B$-action, naturality of $c_F$ in its multiplication endomorphisms makes it $B$-linear; its open-unit equation is also the $B$-unit equation, so uniqueness of the open-adjunction transpose identifies it with $e_{j,B}$. All these identifications take place in module-sheaf categories.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "def-weil-pbc-site-comparison-morphism",
+    "lem-sf-open-comparison-tensor-normalization",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-sf-open-comparison-unit-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison; agent specialization of the existing open-unit and tensor-normalization statements"
+   }
+  },
+  {
+   "text": "Apply [lem-sf-open-comparison-tensor-normalization] with its coefficient ring equal to $A$, its first module equal to an arbitrary $F$, and its second module equal to the constant $A$-algebra sheaf $B_X$. Its restriction comparison $a_B:C_UB_U\\to j_{pro}^*C_XB_X$ is the canonical identity on constant sections, so $h=(1\\otimes a_B)\\rho_U$ becomes $\\rho_U$. The cited equation is\n$$(c_F\\otimes1)\\rho_X C_X(\\kappa^e)=\\kappa^d\\,d(\\rho_U)\\,c_{F\\otimes_A B}.$$\nInvert the two $\\kappa$ maps and the two $\\rho$ maps and rearrange this equality to obtain\n$$d(\\rho_U^{-1})\\,(\\kappa^d)^{-1}(c_F\\otimes1)=c_{F\\otimes_A B}\\,C_X((\\kappa^e)^{-1})\\,\\rho_X^{-1}.$$\nBy Step 3 these are exactly the two maps of the requested scalar/site square. Each map is $B$-linear: multiplication by $b'$ acts on $s\\otimes b$ through $s\\otimes b'b$, and every displayed comparison preserves that action. Equality of the underlying sheaf maps is equality of $B$-linear sheaf maps, since forgetting an ordinary module structure is faithful. No faithfulness assertion about derived restriction of scalars is being made.",
+   "uses": [
+    "lem-sf-open-comparison-tensor-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison; agent algebraic rearrangement of the cited sheaf tensor compatibility equation"
+   }
+  },
+  {
+   "text": "Apply Step 4 to each $P^n$. Naturality of the sheaf comparisons makes these equalities commute with the differentials, so they give equal chain maps of $B$-module sheaves. By Step 2 all scalar extensions whose source must be resolved are computed on the indicated flat K-flat complexes. Exactness of $N$ and $j_!$ allows their comparisons to be applied degreewise even to $P\\otimes_A B$. The canonical derived tensor comparison of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] is computed on those models; the etale scalar comparison is the one of [lem-coef-etale-open-tensor], and the pro-etale tensor comparison is [lem-cbc-extension-zero-projection-formula]. Consequently the equal chain maps represent precisely the two composites in the statement, now in $D(X_{proet},B)$. The cited comparisons are natural, including [lem-cbc-proetale-extension-zero-comparison]; hence their composites are natural in the derived object $L$, independently of its chosen bounded flat representative.",
+   "uses": [
+    "lem-sf-comparison-pullback-exact",
+    "lem-weil-pbc-extension-by-zero-exact",
+    "lem-cbc-proetale-extension-zero",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-coef-etale-open-tensor",
+    "lem-cbc-extension-zero-projection-formula",
+    "lem-cbc-proetale-extension-zero-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0GL1, lemma-j-shriek-and-tensor, on the flat models from Step 2; proetale.tex Tag 09AF, lemma-jshriek-comparison"
+   }
+  },
+  {
+   "text": "For $U\\xrightarrow{j_1}V\\xrightarrow{j_2}X$, use the canonical open compositor of [lem-cbc-extension-zero-composition]. On a section over an object mapping to $U$, its presheaf description simply composes the two factorizations and retains the section. This description follows from the extension prescription [def-weil-extension-by-zero-presheaf]: the compositor is the adjunct of the identity after the two restrictions. Both scalar-comparison routes therefore send a generator indexed by the two factorizations, tensored with $b$, to the generator indexed by their composite with section $s\\otimes b$. On an object without the relevant factorization the source presheaf is zero. The tensor product and extension are sheafified presheaf constructions [def-pur-sheaf-tensor-product, def-weil-presheaf-modules-sheafification], so equality on these generators implies equality of the sheaf maps, including when an intermediate extension has already been sheafified, by applying the sheafification universal property at each stage. This proves the scalar composition identity. The computation with the unique identity factorization gives the identity scalar comparison. Apply this argument degreewise to flat K-flat models to obtain the displayed derived identity; Step 1 and the same tensor test show open extension preserves the flat terms used here.",
+   "uses": [
+    "lem-cbc-extension-zero-composition",
+    "def-weil-extension-by-zero-presheaf",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 03DJ, localized extension construction; Tag 0E8I, lemma-j-shriek-and-tensor; agent computation on the generating sections"
+   }
+  },
+  {
+   "text": "For the site comparisons, composition compatibility is already part of [lem-cbc-proetale-extension-zero-comparison], with the open compositors of [lem-cbc-extension-zero-composition]. For an identity open, its open adjunction units and restriction comparison are identities; the normalization equation of [lem-sf-open-comparison-unit-normalization] then forces $c_{id}$ to be the identity. Exact degreewise extension preserves both equations in the derived categories. This supplies the site composition and identity clauses, with the same canonical comparisons as in Steps 3--5.",
+   "uses": [
+    "lem-cbc-proetale-extension-zero-comparison",
+    "lem-cbc-extension-zero-composition",
+    "lem-sf-open-comparison-unit-normalization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09AF, lemma-jshriek-comparison, common-right-adjoint normalization and composition"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "def-pc-flat-sheaf-modules",
+  "def-weil-pbc-extension-by-zero",
+  "def-weil-extension-by-zero",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "def-weil-pbc-site-comparison-morphism",
+  "lem-sf-open-comparison-tensor-normalization",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-coef-etale-open-tensor",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-extension-zero-composition",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-derived-change-of-rings"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YQ, 0G7E and 0GL1; sites-modules.tex Tag 0E8I and proetale.tex Tag 09AF. Explicit specialization of the existing sheaf tensor/site normalization, with B-linear chain-level descent."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +188,24 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality_assoc\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] {U V : (TopologicalSpace.Opens ↑↑X.toPresheafedSpace)ᵒᵖ}\\n  (i : U ⟶ V) {Z : C}\\n  (h :\\n    Y.presheaf.obj\\n        (Opposite.op ((Algeb\", \"doc\": \"For any open immersion $ f : X \\to Y $ of sheafed spaces over a category $\\\\mathcal{C}$, and for any morphism $ i : U \\to V $ in the opposite category of open subsets of $ X $, the inverse of the preshea\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app_assoc\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] (U : TopologicalSpace.Opens ↑↑X.toPresheafedSpace) {Z : C}\\n  (h :\\n    ((TopCat.Presheaf.pushforward C f.hom.base).obj X.presheaf).obj\", \"doc\": \"For a sheafed space morphism $ f : X \\to Y $ that is an open immersion, and for any open subset $ U $ of $ X $, the composition of the inverse presheaf morphism $ \\text{invApp}(f, U) $ with the natural \"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.invApp_app\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] (U : TopologicalSpace.Opens ↑↑X.toPresheafedSpace),\\n  CategoryTheory.CategoryStruct.comp (AlgebraicGeometry.SheafedSpace.IsOpenImmers\", \"doc\": \"For a sheafed space morphism $ f : X \\to Y $ that is an open immersion, and for any open subset $ U $ of $ X $, the composition of the inverse presheaf component isomorphism $ H.\\text{invApp} $ at $ U $\"}\n  {\"name\": \"AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.LocallyRingedSpace} (f : X ⟶ Y) [H : AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion f]\\n  (U : TopologicalSpace.Opens ↑X.toTopCat) {Z : CommRingCat}\\n  (h :\\n    ((TopCat.Presheaf.pushforward CommRingCat f.base).obj X.presheaf).obj\\n        (Opposite.op ((AlgebraicGeomet\", \"doc\": \"For an open immersion $ f: X \\to Y $ of locally ringed spaces, the composition of the inverse presheaf isomorphism $ \\\\text{invApp}_f(U) $ with the morphism $ f.c.\\\\text{app}(f(U)) $ and an arbitrary mor\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.app_invApp_assoc\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] (U : TopologicalSpace.Opens ↑↑Y.toPresheafedSpace) {Z : C}\\n  (h :\\n    Y.presheaf.obj\\n        (Opposite.op\\n          ((AlgebraicGeomet\", \"doc\": \"For an open immersion $ f : X \\to Y $ of sheafed spaces over a category $ \\\\mathcal{C} $, and for any open subset $ U $ of $ Y $, the composition of the presheaf component morphism $ f_\\\\#(U) $, its inve\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.inv_naturality_assoc\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.PresheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] {U V : (TopologicalSpace.Opens ↑↑X)ᵒᵖ} (i : U ⟶ V) {Z : C}\\n  (h :\\n    Y.presheaf.obj\\n        (Opposite.op ((AlgebraicGeometry.P\", \"doc\": \"For a category $\\\\mathcal{C}$, presheafed spaces $X$ and $Y$ over $\\\\mathcal{C}$, and an open immersion $f : X \\\\to Y$, the inverse of the presheaf isomorphism associated to $f$ satisfies a naturality co\"}\n  {\"name\": \"AlgebraicGeometry.SheafedSpace.IsOpenImmersion.inv_naturality\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.SheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.SheafedSpace.IsOpenImmersion f] {U V : (TopologicalSpace.Opens ↑↑X.toPresheafedSpace)ᵒᵖ}\\n  (i : U ⟶ V),\\n  CategoryTheory.CategoryStruct.comp (X.presheaf.map i)\\n     \", \"doc\": \"For an open immersion $ f : X \\to Y $ of sheafed spaces, the inverse of the presheaf isomorphism $ H^{-1} $ satisfies the naturality condition: for any morphism $ i : U \\to V $ of open subsets in $ X $,\"}\n  {\"name\": \"AlgebraicGeometry.PresheafedSpace.IsOpenImmersion.invApp_app_assoc\", \"module\": \"Mathlib/Geometry/RingedSpace/OpenImmersion\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {X Y : AlgebraicGeometry.PresheafedSpace C} (f : X ⟶ Y)\\n  [H : AlgebraicGeometry.PresheafedSpace.IsOpenImmersion f] (U : TopologicalSpace.Opens ↑↑X) {Z : C}\\n  (h :\\n    ((TopCat.Presheaf.pushforward C f.base).obj X.presheaf).obj\\n        (Opposi\", \"doc\": \"For presheafed spaces $X$ and $Y$ over a category $\\\\mathcal{C}$, a morphism $f : X \\\\to Y$ that is an open immersion, and an open subset $U \\\\subseteq X$, the composition of the inverse presheaf isomorp\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern ordinary algebra, sheafification, categorical mates or underived sheaves; none states this normalized geometric derived assertion or a one-line generalization."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero for open immersions commutes coherently with coefficient scalar extension and etale to proetale inverse image",
+   "results": "8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.invApp_app_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.app_inv_app'_assoc, AlgebraicGeometry.IsOpenImmersion.lift_app, AlgebraicGeometry.IsOpenImmersion.app_eq_appIso_inv_app_of_comp_eq, AlgebraicGeometry.IsOpenImmersion.app_ΓIso_hom, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv_apply, AlgebraicGeometry.Scheme.Hom.appLE_appIso_inv, AlgebraicGeometry.IsOpenImmersion.map_ΓIso_hom",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary open-immersion and algebraic etaleness facts or sheafification adjunctions do not state the specified B-linear derived site/scalar square."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Inverse image between etale and proetale sheaves preserves the open projection formula and coefficient change on bounded flat complexes",
+   "results": "8 hits: SheafOfModules.Presentation.map_π_eq, AlgebraicGeometry.Scheme.Etale.forget, StandardEtalePair.homEquiv_symm_apply, StandardEtalePair.HasMap.map, AlgebraicGeometry.IsEtale.of_comp, Algebra.Etale.comp, Algebra.FormallyEtale.comp, Algebra.FormallyEtale.of_restrictScalars",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary open-immersion and algebraic etaleness facts or sheafification adjunctions do not state the specified B-linear derived site/scalar square."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sp-et-proet-coefficient-compatibility",
@@ -81,5 +224,94 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-open-scalar-site-coherence",
+  "worker": "stage1",
+  "summary": "No new nodes. Prove flatness by the exact restriction/tensor/extension composite, use existing bounded-flat K-flatness and comparison pullback, specialize the existing sheaf open/tensor/site compatibility at the constant A-algebra B, rearrange its equation before passing to B-linear complexes, and check composition on extension generators. The statement is unchanged.",
+  "blueprint": "det-sp-reduction-exceptional: locality/open chart restriction and finite coefficient/site transport in proof Steps 3--5; the parent lem-sp-et-proet-coefficient-compatibility open constituents.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-site-restriction-module-adjunction-exact",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-pc-bounded-above-flat-kflat-site",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-sf-open-comparison-tensor-normalization",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-sf-open-comparison-unit-normalization",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-weil-pbc-extension-by-zero-exact",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-coef-etale-open-tensor",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-cbc-extension-zero-projection-formula",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   },
+   {
+    "node": "lem-cbc-extension-zero-composition",
+    "why": "Generic ordinary module-sheaf, tensor, exactness or normalization input used as stated; this open coefficient/site constituent realizes the unit coefficient-compatibility route and does not replace its geometric argument."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-pc-bounded-above-flat-kflat-site",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-sf-open-comparison-tensor-normalization",
+  "lem-sf-open-comparison-unit-normalization",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-cbc-proetale-extension-zero",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "lem-coef-etale-open-tensor",
+  "lem-cbc-extension-zero-projection-formula",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-extension-zero-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q126-11b15ac57",
+  "group": "Q126",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q126-11b15ac57 (reviewer sub-agent of L); spot-checked: Read the full mathematics of the item and of all 21 cited statements, plus Stacks 0E8I, 0GL1 (l.4578), 09AF (l.5076), 06YQ and 0G7E, the parent's Step 2, unit sk-thm-sf-compatibility and the blueprint Locality step. First split of a node created by the Q58 re-split; statement unchanged against the Q58 delivery; no new nodes; no cycle; no SGA. Types of the square and of the composition identity agree. Small cases checked: U empty, j=id, A=B, P=0, and nonflat Z/4->Z/2 (L=Z/2 has no bounded flat model and is correctly excluded; P tensor B is never assumed A-flat). Step 1: correct exact three-functor composite. Step 2: 06YQ plus 0G7E with the constant-ring identification. Step 3: kappa^e is inverse to t_j on generators, and c^{-1} is fixed as the d-s transpose of a.C(eta), so e_{j,B}=e_{j,A}. Step 4: I re-derived the rearranged equation of lem-sf-open-comparison-tensor-normalization at second module B_X; with delta=rho^{-1}, t=kappa^{-1}, e=c it is exactly the item's square, and B-linearity is shown at sheaf level. Step 5: degreewise on K-flat models; the equality lives in D(B) and is not reflected from D(A). Steps 6-7: generator calculation for the compositor, and the composition and identity clauses of the cited comparison and normalization lemmas. Not duplicates: lem-sf-comparison-open-tensor-coherence (A-linear only, no composition clauses), lem-sf-open-tensor-normalization, lem-coef-etale-open-tensor, lem-pur-finite-ring-site-tensor-transpose, det-sp-reduction-direct-image. Tool uses accepted as generic sheaf/site lemmas. FIX 1 (B3): T=-tensor^L_A B had no cited notion, and Step 2 relied on its computation by K-flat models without a citation. Added lem-pur-derived-change-of-rings (on route, split, no cycle) to the statement, stmt_deps, Step 2 text and uses, and proof_deps. Maintainer note: the source field of lem-pc-bounded-above-flat-kflat-site says 06YS but the lemma is 06YQ.; 1 file(s) fixed by the reviewer"
  }
 }
