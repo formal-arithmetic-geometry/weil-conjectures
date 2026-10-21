@@ -7,6 +7,8 @@ module
 
 public import Sheaf.Paper.EtaleProEtaleScalarMate
 
+import Mathlib.Tactic.CategoryTheory.Slice
+
 /-! # Common counit transpose of the site/scalar direct-image composites
 
 Source: blueprint main-20261015, sec-six-functors-basics/sk-prop-scalar-six,
@@ -177,6 +179,81 @@ theorem etaleProEtale_scalar_counit_transposes
         scalarSiteCounitNormalForm a f J ∧
       scalarSiteCounitTranspose a f J (scalarSiteDirectImageV a f J) =
         scalarSiteCounitNormalForm a f J := by
-  sorry
+  let pA := L(upperStar (ModuleCat.{u + 1} A) f)
+  let pB := L(upperStar (ModuleCat.{u + 1} B) f)
+  let rA := R(Etale.lowerStar (ModuleCat.{u + 1} A) f)
+  let sB := R(lowerStar (ModuleCat.{u + 1} B) f)
+  let CA := (comparisonUpperStar (ModuleCat.{u + 1} A) X).mapDerivedCategory
+  let CB := (comparisonUpperStar (ModuleCat.{u + 1} B) X).mapDerivedCategory
+  let TX := pbcFixedScalarExtension (Scheme.ProEt.topology X) a
+  let TY := pbcFixedScalarExtension (Scheme.ProEt.topology Y) a
+  let EX := Etale.scalarExtension a X
+  let dA := (directImageComparisonAmbientPullbackIso A f).hom
+  let dB := (directImageComparisonAmbientPullbackIso B f).hom
+  let cp := (scalarPullbackProEtaleIso a f).hom
+  let ce := (Etale.scalarPullbackIso a f).hom
+  let dx := (pbcComparisonReduction X a).hom
+  let dy := (pbcComparisonReduction Y a).hom
+  let bA := directImageComparisonAmbient A f
+  let bB := directImageComparisonAmbient B f
+  let gp := (mateEquiv (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+    (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+    (TwoSquare.mk _ _ _ _ cp)).natTrans
+  let ge := Etale.scalarMate a f
+  let epA := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).counit
+  let epB := (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f).counit
+  let eeA := (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f).counit
+  let eeB := (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f).counit
+  have hbA : pA.map (bA.app J) ≫ epA.app (CA.obj J) =
+      dA.app (rA.obj J) ≫ CA.map (eeA.app J) :=
+    mateEquiv_counit
+      (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+      (TwoSquare.mk _ _ _ _ dA) J
+  have hbB : pB.map (bB.app (EX.obj J)) ≫ epB.app (CB.obj (EX.obj J)) =
+      dB.app _ ≫ CB.map (eeB.app (EX.obj J)) :=
+    mateEquiv_counit
+      (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+      (TwoSquare.mk _ _ _ _ dB) (EX.obj J)
+  have hgp : pB.map (gp.app (CA.obj J)) ≫ epB.app (TX.obj (CA.obj J)) =
+      cp.app _ ≫ TX.map (epA.app (CA.obj J)) :=
+    mateEquiv_counit
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+      (derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+      (TwoSquare.mk _ _ _ _ cp) (CA.obj J)
+  have hge : L(Etale.upperStar (ModuleCat.{u + 1} B) f).map (ge.app J) ≫
+      eeB.app (EX.obj J) = ce.app (rA.obj J) ≫ EX.map (eeA.app J) :=
+    mateEquiv_counit
+      (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+      (Etale.derivedUpperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+      (TwoSquare.mk _ _ _ _ ce) J
+  change cp.app _ ≫ TX.map (dA.app _) ≫ dx.app _ =
+    pB.map (dy.app _) ≫ dB.app _ ≫ CB.map (ce.app _) at _hCube
+  constructor
+  · change pB.map (TY.map (bA.app J) ≫ gp.app (CA.obj J) ≫
+        sB.map (dx.app J)) ≫ epB.app _ =
+      pB.map (dy.app _) ≫ dB.app _ ≫ CB.map (ce.app _ ≫ EX.map (eeA.app J))
+    simp only [Functor.map_comp, Category.assoc]
+    slice_lhs 3 4 => exact epB.naturality (dx.app J)
+    slice_lhs 2 3 => exact hgp
+    slice_lhs 1 2 => exact cp.naturality (bA.app J)
+    simp only [Functor.comp_map, Category.assoc]
+    slice_lhs 2 3 => rw [← TX.map_comp, hbA, TX.map_comp]
+    slice_lhs 3 4 => exact dx.naturality (eeA.app J)
+    slice_lhs 1 3 => exact _hCube
+    simp only [Functor.comp_map, Category.assoc]
+    rfl
+  · change pB.map (dy.app _ ≫
+        (comparisonUpperStar (ModuleCat.{u + 1} B) Y).mapDerivedCategory.map
+          (ge.app J) ≫ bB.app (EX.obj J)) ≫ epB.app _ =
+      pB.map (dy.app _) ≫ dB.app _ ≫ CB.map (ce.app _ ≫ EX.map (eeA.app J))
+    simp only [Functor.map_comp, Category.assoc]
+    rw [hbB]
+    slice_lhs 2 3 => exact dB.naturality (ge.app J)
+    simp only [Functor.comp_map, Category.assoc]
+    slice_lhs 3 4 => rw [← CB.map_comp, hge]
+    rw [CB.map_comp]
+    rfl
 
 end AlgebraicGeometry.ProEtale
