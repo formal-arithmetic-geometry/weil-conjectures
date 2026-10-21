@@ -1,8 +1,8 @@
 # Work queue
 
-214 items; claim with `tools/claim.py next <group> [--stage N]`.
+213 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (23 clusters, 997 modules)
+## Rework: quarantined by the upstream sync (23 clusters, 988 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -15,6 +15,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.WeilTensorProduct` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FormalClosedSupport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.FiniteTorConstructibleEtaleCompact` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionTriangles` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -24,7 +25,6 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.CanonicalTensorHomUncurryNormalizedComparison` | 1 |  | error: Sheaf/AlgebraicGeometry/CanonicalTensorHomUncurryNormalizedComparison.lean:174:12: error(lean.invalidField): Invalid field `IsAcyclicTensorKFlat`: The en |
-| `Sheaf.AlgebraicGeometry.SheafExtCoherent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.OpenRestrictedComparisonTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
@@ -34,7 +34,7 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 87, stage 3 5 items.
 
-## Stage 1: nodes to split (14)
+## Stage 1: nodes to split (15)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
@@ -51,6 +51,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-internal-action-site-presentation` | 4012 | none |
 | `lem-sfb-root-tower-inner-support` | 4012 | none |
 | `lem-sfb-root-tower-lisse-morphism-extension` | 4012 | none |
+| `lem-pe-profinite-sections-finite-quotient` | - | none |
 | `def-per-support-condition` | - | none |
 
 ## Stage 2: nodes to state (31)
@@ -91,7 +92,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 
 Not open yet: 375 nodes that below a finished node, not needed, 110 nodes that wait for a statement dependency (bottom-up), 13 nodes that wait for stage 1 (statement downstream not grounded).
 
-## Stage 3: modules to prove (138)
+## Stage 3: modules to prove (136)
 
 On the sorry route of an open batch, or below a route sorry of one (the human, 2026-10-18: provable as soon as every dependency is stated, whatever the depth); route first, then nearest to a route sorry.
 
@@ -156,7 +157,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.SiteDerivedTensorRestriction` | - | 1 | proof | 5 |
 | `Sheaf.Paper.StrictQuotientScalarBalancing` | - | 1 | proof | 5 |
 | `Sheaf.CategoryTheory.RingedSiteDualityMaps` | 4 | 4 | proof | 6 |
-| `Sheaf.Paper.IntegralOperationsWellDefined` | 11 | 2 | proof | 6 |
 | `Sheaf.Algebra.Homology.RingedSiteBoundedDualComponents` | - | 1 | proof | 6 |
 | `Sheaf.Algebra.Homology.RingedSiteBoundedEvaluationAssembly` | - | 1 | proof | 6 |
 | `Sheaf.AlgebraicGeometry.ProEtaleInverseImageScalarUnitNormalization` | - | 1 | proof | 6 |
@@ -177,6 +177,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.FiniteCoefficientPoint` | - | 9 | proof | 7 |
 | `Sheaf.Paper.StrictQuotientPullbackComputation` | - | 1 | proof | 7 |
 | `Sheaf.SixFunctors.FrobeniusPointTransport` | - | 3 | proof | 7 |
+| `Sheaf.Paper.IntegralOperationsWellDefined` | 11 | 2 | proof | 8 |
 | `Sheaf.Paper.CoefDerivedSystemEvaluationCalculus` | - | 11 | proof | 8 |
 | `Sheaf.Paper.ConstantScalarStrictUnit` | - | 1 | proof | 8 |
 | `Sheaf.Paper.ConstantScalarUnitQuasiIsomorphism` | - | 1 | proof | 8 |
@@ -210,14 +211,12 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.NormalizedPullbackCompositionTransport` | - | 1 | proof | 10 |
 | `Sheaf.Paper.NormalizedTensorConstraintTransport` | - | 1 | proof | 10 |
 | `Sheaf.Paper.ProEtaleScalarMateNormalization` | - | 3 | proof | 10 |
-| `Sheaf.Paper.ProperEtaleOriginScalarIsomorphism` | - | 1 | proof | 10 |
 | `Sheaf.Paper.PurNormalizedReconstructionAdjunctionCalculus` | - | 3 | proof | 10 |
 | `Sheaf.Paper.QuotientExpressionKFlatNormalization` | - | 1 | proof | 10 |
 | `Sheaf.Paper.SfOpenReductionAdjunctionTransport` | - | 1 | proof | 10 |
 | `Sheaf.SixFunctors.OpenQuotientKoszulCompleteness` | - | 1 | proof | 10 |
 | `Sheaf.SixFunctors.OpenScalarTensorNormalization` | - | 1 | proof | 10 |
 | `Sheaf.SixFunctors.OpenSemilinearTensorModel` | - | 1 | proof | 10 |
-| `Sheaf.AlgebraicGeometry.ProjectionComparisonEtaleProEtale` | - | 4 | proof | 11 |
 | `Sheaf.CategoryTheory.TowerLimitTransposeNormalization` | - | 1 | proof | 11 |
 | `Sheaf.Paper.CompletedTensorUnitInsertion` | - | 1 | proof | 11 |
 | `Sheaf.Paper.PerfectQuotientExchangeNormalization` | - | 1 | proof | 11 |
