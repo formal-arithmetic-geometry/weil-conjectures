@@ -3,25 +3,84 @@
  "blueprint": {
   "is": "def-nagata-strict-transform-chart-ring",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Affine strict-transform chart ring",
- "statement": "Define\n\n$$\nC_a^{\\mathrm{st}}(A,B,I)\n=C_a(A,B,I)/\\Gamma_{(a)}(C_a(A,B,I)).\n$$",
+ "statement": "Let $A\\to B$ be a homomorphism of commutative rings, let $I\\subseteq A$ be an ideal, and let $a\\in I$. Put $C=C_a(A,B,I)=B\\otimes_A A[I/a]$ as in [def-nagata-strict-transform-basechange-chart-ring], and write $\\alpha\\in C$ for the image of $a$ under the structural map $A\\to C$. Let\n\n$$\nT=\\Gamma_{(\\alpha)}(C)=\\{c\\in C\\mid \\exists n\\geq0,\\ \\alpha^nc=0\\}\n$$\nbe the power-torsion submodule of the regular $C$-module $C$ [def-nagata-power-torsion], viewed as an ideal using [lemma-nagata-power-torsion-submodule]. Define the affine strict-transform chart ring to be the quotient ring [def-weil-pbc-algebra-hom-quotient]\n\n$$\nC_a^{\\mathrm{st}}(A,B,I)\n=C/T\n=C_a(A,B,I)/\\Gamma_{(a)}(C_a(A,B,I)),\n$$\nwhere the last occurrence of $a$ means its image $\\alpha$ in $C$.",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-strict-transform-chart-ring.md",
   "place": "node def-nagata-strict-transform-chart-ring, order 144"
  },
  "stmt_deps": [
   "def-nagata-power-torsion",
-  "def-nagata-strict-transform-basechange-chart-ring"
+  "def-nagata-strict-transform-basechange-chart-ring",
+  "lemma-nagata-power-torsion-submodule",
+  "def-weil-pbc-algebra-hom-quotient"
  ],
  "proof": [],
  "proof_deps": [],
  "proof_origin": null,
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "StrictChart|strict.transform|powTorsion",
+   "results": "No hits in Mathlib/RingTheory.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The affine strict transform chart is the quotient of a base changed blowup chart by its power torsion ideal",
+   "results": "8 hits, including Ideal.quotientToQuotientRangePowQuotSuccAux, Scheme.Hom.liftQuotient and Scheme.IdealSheafData.subschemeι_app; none defines this chart quotient.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "Submodule.powTorsion, Ideal.Quotient",
+   "results": "No hits: Loogle reports unknown identifier 'Submodule.powTorsion'.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Affine strict transform chart ring B tensor A[I/a] quotient by the ideal of elements annihilated by a power of a",
+   "results": "8 hits, including Scheme.affineBasisCoverRing, specTargetImage and Scheme.IdealSheafData.isLocalization_away; none defines this chart quotient.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def Quotient|def algebra|def mkₐ|powTorsion|power.torsion",
+   "results": "5 hits: quotientKerEquivOfRightInverse (Operations.lean:66), quotientKerEquivOfSurjective (:89), quotientKerEquivRangeS (:108), quotientKerEquivRange (:115), quotientInfToPiQuotient (:202). No power-torsion chart definition.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; generic quotient construction reused through existing node"
+  },
+  {
+   "tool": "loogle",
+   "query": "Ideal.Quotient",
+   "results": "No hits: Loogle reports unknown identifier 'Ideal.Quotient' (the quotient is notation/instance rather than a declaration with that name).",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Quotient a commutative ring by the ideal of elements killed by some power of a fixed element",
+   "results": "8 hits: AdicCompletion.instCommRing, quotientToQuotientRangePowQuotSuccAux_mk, quotientToQuotientRangePowQuotSucc_mk, ModP.commRing, quotientToQuotientRangePowQuotSuccAux, WithIdeal, AdicCompletion.subring, Ideal.Quotient.factorPowSucc. No matching power-torsion quotient definition.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Quotient.algebra|Quotient.mkₐ|instance commRing|instHasQuotient",
+   "results": "Ideal.instHasQuotient (Mathlib/RingTheory/Ideal/Quotient/Defs.lean:43), Ideal.Quotient.commRing (:73), Ideal.Quotient.algebra (Operations.lean:354), Ideal.Quotient.mkₐ (:369). Read these definitions; they supply generic quotient algebras, already represented by def-weil-pbc-algebra-hom-quotient, not the project-specific base-change chart and power-torsion ideal.",
+   "date": "2026-10-21",
+   "verdict": "no match for the item; generic quotient construction reused through existing node"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -51,5 +110,20 @@
   "statement": "Define\n\n$$\nC_a^{\\mathrm{st}}(A,B,I)\n=C_a(A,B,I)/\\Gamma_{(a)}(C_a(A,B,I)).\n$$",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-strict-transform-chart-ring",
+  "worker": "stage1",
+  "summary": "Q130 made the imported quotient formula self-contained, specifying the commutative ring map, ideal, chart element and its structural image. Reused the two original notions and the existing power-torsion-submodule and quotient-algebra nodes for well-definedness and quotient construction. No new nodes and no theorem proof steps: this item defines an object. Searched Mathlib with two semantic phrasings, LeanSearch, Loogle and source grep; no Mathlib declaration supplies the full chart definition.",
+  "blueprint": "Realizes the definition in main-20261015/sk-lem-nagata-sketch-blowups/def-nagata-strict-transform-chart-ring.md and the unit step: quotienting the pulled-back chart by its a_i-power torsion gives the strict transform. The original quotient formula is preserved after making its parameters and structural image explicit."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q130-05bc18d9a",
+  "group": "Q130",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q130-05bc18d9a (reviewer sub-agent of L); spot-checked: I read the definition-only split in full (one commit, item and report only, no new nodes). It keeps the blueprint formula C_a^st = C_a(A,B,I)/Γ_(a)(C_a) (master order 144, main-20261015 order 152, same as blueprint_update). The added context matches the adjacent def-nagata-strict-transform-basechange-chart-ring (orders 143/151): commutative rings, I an ideal, a in I, α the image of a in C. This is no weakening, because A[S/a] = A[(S)/a]. The four stmt_deps match the citations in the text. def-nagata-power-torsion is applied with R = M = C. lemma-nagata-power-torsion-submodule makes T an ideal (its only dep is the torsion definition, so no cycle). def-weil-pbc-algebra-hom-quotient is the generic quotient, an off-unit notion, so no tool use is needed. The citers chart-closed, localization-data, chart-comparison and closed-chart-model consume the item and are not deps. A DAG search found no duplicate definition. Edge cases checked: α = 0 gives the zero ring, α a unit gives C, ℤ→ℤ/4 with a = 2 gives 0, ℤ→ℤ gives ℤ. Only split-owned fields changed versus live, and the item is still imported in live and side-live. There is no repair note and the item is not in the dropped list. Note for the maintainer: the project Lean AffineBlowup.StrictChart (StrictTransformChart.lean:60-65, no sorry) states exactly this ring and can be attached."
  }
 }
