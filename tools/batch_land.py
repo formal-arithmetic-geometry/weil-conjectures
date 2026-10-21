@@ -676,7 +676,9 @@ def land_one(plan: dict, batch_id: str) -> dict:
     for nid, x in D["nodes"].items():
         if x["role"] == "new" and (ROOT / x["path"]).exists():
             raise Refuse(f"the new node {nid} exists on {md.MAIN} now (another delivery created it)")
-    if plan.get("cycle_tip") and md.git("rev-parse", "HEAD") != plan["cycle_tip"]:
+    # 2026-10-22 (the human): compare the lean/ tree, not HEAD: coord-only commits (queue, claims, bookkeeping) land every
+    # minute and bounced deliveries for hours with "the library moved"
+    if plan.get("cycle_tip_lean") and md.git("rev-parse", "HEAD:lean") != plan["cycle_tip_lean"]:
         raise Wait("the library moved after the import-cycle check; retry on the new tip")
     mods = D["modules"]
     rels = [f[len("lean/"):] for f in plan["write"]]
@@ -908,6 +910,7 @@ def land_batch(cache: dict, log, target: pathlib.Path | None = None) -> dict | N
             except RuntimeError as exc:
                 raise Refuse(str(exc)) from exc
             plan["cycle_tip"] = expected_tip
+            plan["cycle_tip_lean"] = md.git("rev-parse", f"{expected_tip}:lean")
             cycle = cycles.closing_cycle(import_graph, {m["module"]: m["text"] for m in plan["D"]["modules"]})
             if cycle: raise Wait("import cycle: " + " -> ".join(cycle))
             lock_started = time.time()
