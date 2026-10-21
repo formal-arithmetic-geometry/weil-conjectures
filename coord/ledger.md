@@ -20072,3 +20072,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:56 L: merged deliver/Q34/lem-cbc-derived-finite-quotient-coherence (reviewer PASS; first push; new nodes: 0); claim not held by Q34: not your claim
 - 03:56 L: merged deliver/Q52/lem-sp-flat-coefficient-chain-transpose (reviewer PASS; first push; new nodes: 0)
 - 03:56 L: merged deliver/Q70/lem-sfb-open-scalar-conjugate-normalization (reviewer FIX; first push; new nodes: 0)
+- 2026-10-21T03:56:44Z L: superseded stage-1 delivery Q49/lem-sfb-common-field-lattice-generators at 7b997d760acf25788cb2ee410b4b284e8ff5b111; current completion retained; packet archived at refs/superseded/Q49/lem-sfb-common-field-lattice-generators/7b997d760acf25788cb2ee410b4b284e8ff5b111; stale return retired.
