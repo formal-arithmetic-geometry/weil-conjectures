@@ -306,5 +306,32 @@
   "group": "Q83",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q83-3cc521798 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement and stmt_deps are identical to live and side-live, where the item is still unsplit, so there is no supersession and no repair note. No SGA, no cycle (the 359-node closure does not reach the item), and proof_deps equals the union of the step uses. Every Stacks tag/label pair matches tags/tags, and I read the Hom-complex differential at sites-cohomology l.8571. Step 1: flat-lift's 'for every such I,U,alpha' clause covers the given data, and Q(c)Q(u)=Q(t) follows from the given homotopy, not from the existential lift. Step 2: ringed-topoi pullback (u^*=a^{-1} for constant rings) preserves the given flat-term K-flat E,H,N_K,N_L; kflat-total-tensor-model makes T a model of F through c_K,c_L, G a bounded flat model, and U⊗V a model on the one-object site. Step 3: I recomputed the Koszul interchange; the dw,dz,de,dh coefficients (-1)^{sq}, (-1)^{r+sq+q}, (-1)^{r+sq}, (-1)^{r+s+q+sq} match on both sides. Step 4: currying gives d_Hom p(x)=p(dx). Step 5: the hypotheses of hom-kflat-chain-transpose (A=C, P=G, E=J), hom-kflat-into-kinjective and resolving-adjunction-normalization (exact constant realization left adjoint to sections) all hold; flat-lift on P needs F in D^+, which is a hypothesis. Step 6 matches the definition of beta in transpose-natural, so the result holds for every choice; I accept the chain-level pullback/tensor comparison as the canonical one (Stacks 07A4). Step 7: theta is a chain isomorphism with the forced sign (-1)^n (the unsigned map anticommutes), and its inverse checks. Step 8: eta is a chain map and theta^{-1}alpha[-1] evaluates to t_X eta. Step 9: the shift preserves K-flatness via (-1)^{|x|}, and the homotopy k eta works, so T, J and i are unchanged. Edge cases checked: zero complexes, characteristic 2, unbounded complexes, arbitrary A. The duplicate candidates (hom-complex-shift-left, derived-internal-hom-shift-left/comparison, two-shift-squares) pin no competing formula. Accepted tool_uses: ringed-topoi-derived-tensor-pullback, sfb-hom-kflat-chain-transpose, pur-hom-kflat-into-kinjective, sfb-resolving-derived-adjunction-normalization; kflat-total-tensor-model is already on the route through sk-def-purity-conv. No changes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LiftedExternalEvaluationChainModel",
+  "declaration": "AlgebraicGeometry.Etale.ExternalRHom.lifted_external_evaluation_chain_model",
+  "declarations": [
+   "AlgebraicGeometry.Etale.ExternalRHom.lifted_external_evaluation_chain_evaluation",
+   "AlgebraicGeometry.Etale.ExternalRHom.lifted_external_evaluation_chain_model",
+   "AlgebraicGeometry.Etale.ExternalRHom.lifted_external_evaluation_source_model",
+   "AlgebraicGeometry.Etale.ExternalRHom.lifted_external_evaluation_hom_shift",
+   "AlgebraicGeometry.Etale.ExternalRHom.lifted_external_evaluation_shifted_lift",
+   "AlgebraicGeometry.Etale.ExternalRHom.lifted_external_evaluation_derived_hom_shift"
+  ],
+  "file": "lean/Sheaf/Paper/LiftedExternalEvaluationChainModel.lean",
+  "statement": "theorem lifted_external_evaluation_chain_model {X Y P : Scheme.{u}} (a : P ⟶ X) (b : P ⟶ Y) (E : Complexes A X) (H : Complexes A Y) (I : Complexes A X) (I' : Complexes A Y) [I.IsKInjective] [I'.IsKInjective] (hE : IsBoundedFlat A E) (hH : IsBoundedFlat A H) (hK : IsPlus A ((siteQ A X).obj I)) (hL : IsPlus A ((siteQ A Y).obj I')) (hF : IsPlus A (external A a b ((siteQ A X).obj I) ((siteQ A Y).obj I'))) : Nonempty (HomModel A E I) ∧ Nonempty (HomModel A H I') ∧ HasChainNormalization A a b E H I I' ∧ ∀ (N : Complexes A X) (M : Complexes A Y) (c : N ⟶ I) (c' : M ⟶ I') [QuasiIso c] [QuasiIso c'], CochainComplex.IsKFlatIndependentCoefficients (J := X.smallEtaleTopology) (R := realizationRing X.smallEtaleTopology A) ((ringedComplex A X).obj N) → CochainComplex.IsKFlatIndependentCoefficients (J := Y.smallEtaleTopology) (R := realizationRing Y.smallEtaleTopology A) ((ringedComplex A Y).obj M) → (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := X.smallEtaleTopology) (R := realizationRing X.smallEtaleTopology A) ((ringedRealization A X).obj (N.X n))) → (∀ n : ℤ, SheafOfModules.IsFlatOnSite (J := Y.smallEtaleTopology) (R := realizationRing Y.smallEtaleTopology A) ((ringedRealization A Y).obj (M.X n))) → IsIso (targetModel A a b N I M I' (externalComplex A a b N M) c c' (𝟙 _)) ∧ ∀ (J : Complexes A P) (i : externalComplex A a b N M ⟶ J) [QuasiIso i] [J.IsKInjective], IsIso (targetModel A a b N I M I' J c c' i) ∧ Nonempty (HomModel A (externalComplex A a b E H) J)",
+  "branch": "newtargets-dag",
+  "by": "Q02",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The six declarations state the chain evaluation formula, universal lifted external normalization and target model, source tensor comparison, arbitrary-source signed Hom shift, unchanged shifted homotopy lift, and derived Hom-shift normalization. Existing ExternalRHom helper definitions are reused verbatim; the consumer theorem external_rhom_cone_pairing is neither used nor assumed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-9d04ba7f6",
+  "group": "Q02",
+  "result": "pass",
+  "note": "Six sorry theorems; node record changed only in lean, statement verbatim; report has both sections. The main theorem matches every clause: all choices universal, homotopy lifts, T represents F, p pinned with the (-1)^{sq} sign, localization equals the choice-free transpose. Shift clauses: theta = leftUnshift, sign (-1)^n checked at a=1; eta = r.negOnePow; shifted alpha = alpha[-1] then theta inverse, evaluation t eta; same N, c, so same T, J, i; the derived-shift CommShift is fixed by its normalization equation. No extra hypotheses or universe restrictions; edge cases fine. Maintainer note: the item imports ExternalRHomConePairing, whose parent theorem cites the item, so stage 3 has an import cycle; the shared helpers should move to a def-node module (same note as on the two sibling deliveries). No compile, no file changed."
  }
 }

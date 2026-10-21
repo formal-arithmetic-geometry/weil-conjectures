@@ -290,5 +290,45 @@
   "group": "Q16",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-21568217b (reviewer sub-agent of L); spot-checked: I read all 10 steps of this no-new-node split in full and checked them against every cited statement. The item was created statement-only by Q55. It has no repair note of its own, is unsplit live, and is not dropped; it contains no SGA citation and its statement is unchanged. Sources checked: Milne LEC pp. 66–67 (Ex. 9.5 evaluation at 1; Thm 9.4 Ext proof with the open/closed sequence), the blueprint main-20261015 lem-amb-closed-support-hom proof (Hom triangle equals cone), and Stacks tags 07A5, 079H, 095L, 03DI, 03DJ, 05TH, 05TI, 070I, 070J, 070M, all present with the stated labels. Steps 2–4: θ(f)=(fρ)(1) is correct. On the étale site it follows from the Λ-module open/closed short exact sequence plus part (1) of prop-weil-pbc-inverse-image-modules-exact (i_*c∘η = constant restriction); on the pro-étale site from the cokernel presentation node, with no quasi-compactness needed. The existing lem-pur-supported-sections-hom is pro-étale only and does not fix the map, so this is not a duplicate. Step 6: Rt comes from the universal property in clause (1) of lem-weil-pbc-right-derived-plus-injective, its inverse from uniqueness, and c_{S,e}, c_{v,e} from clause (2); the identity checks. Step 7: the roof lemma applies with M=P and I K-injective, giving (Qe)[a]^{-1}∘Q(f_s). Step 9: injective module sheaves restrict surjectively, j^{-1}I is injective (j_! exact and left adjoint), and j^{-1}e is a quasi-isomorphism. Step 10: the kernel-cone convention matches Mathlib mappingCone, and the map v(I)→Cone[-1] is computed as κθ_I, so the sign is correct. Edge cases Z=∅, Z=X, a<0 and coboundary change of s all hold. The cross-unit generic homological tools listed in the report are accepted as tool_uses. Advisory: def-pur-support-cohomology derives Γ_Z on abelian sheaves, while this item derives it on module sheaves as its statement prescribes. The comparison between the two is in step 2 of lem-pur-supported-hom, and the canonical isomorphisms the statement names come from the proofs of lem-pur-supported-hom and lem-amb-closed-support-hom. Both points are inherited from Q55's statement, not faults of this delivery."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.SupportedHomCocycleNormalization",
+  "declaration": "AlgebraicGeometry.supportedHom_cocycle_normalization",
+  "declarations": [
+   "AlgebraicGeometry.supportedHomResolutionIso",
+   "AlgebraicGeometry.SupportedHomEvaluationIso",
+   "AlgebraicGeometry.SupportedHomEvaluation",
+   "AlgebraicGeometry.SupportedHomChi",
+   "AlgebraicGeometry.SupportedHomChiNatural",
+   "AlgebraicGeometry.SupportedHomChiCocycle",
+   "AlgebraicGeometry.SupportedHomCocycleNormalization",
+   "AlgebraicGeometry.supportedHomAbelianRestriction",
+   "AlgebraicGeometry.supportedHomAbelianInclusion",
+   "AlgebraicGeometry.SupportedHomCocycleNormalization.ConeAgreement",
+   "AlgebraicGeometry.Etale.supportedHomOpenConstantMap",
+   "AlgebraicGeometry.Etale.supportedHomOpenCounit",
+   "AlgebraicGeometry.Etale.SupportedHomOpenEvaluation",
+   "AlgebraicGeometry.Etale.supportedHomConstantRestriction",
+   "AlgebraicGeometry.Etale.supportedHomNormalization",
+   "AlgebraicGeometry.ProEtale.supportedHomOpenCounit",
+   "AlgebraicGeometry.ProEtale.SupportedHomOpenEvaluation",
+   "AlgebraicGeometry.ProEtale.supportedHomNormalization",
+   "AlgebraicGeometry.supportedHom_cocycle_normalization"
+  ],
+  "file": "lean/Sheaf/Paper/SupportedHomCocycleNormalization.lean",
+  "statement": "theorem supportedHom_cocycle_normalization (P : WeilConjectures.PurityFiniteSetting.{u}) {Z X : Scheme.{u}} (i : Z ⟶ X) [IsClosedImmersion i] : ∃ e : Etale.supportedHomNormalization P i, Nonempty (ProEtale.supportedHomNormalization P i) ∧ e.ConeAgreement ∧ Etale.SupportedHomOpenEvaluation P.Coefficient i.openComplement.ι ∧ ProEtale.SupportedHomOpenEvaluation P.Ring i.openComplement.ι",
+  "branch": "sheaf-dag",
+  "by": "Q21",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The single interface fixes theta by the actual evaluation after rho, chi on every injective resolution by the canonical derived-unit comparison and the localized cocycle roof, and etale cone agreement by the explicit kernel-to-shifted-cone map. The two ordinary constant-module presentations use the same finite coefficient ring. No dependency statement or mathematical statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f5faa8fe1",
+  "group": "Q21",
+  "result": "pass",
+  "note": "Statement field verbatim; all 19 declarations present; single sorry. θ pinned by evaluation (kernel.ι monic) as (constantSheafAdj.homEquiv (ρ≫f)) 1; χ is a ≃+ on supportHypercohomologyFunctor (derived module-valued kernel functor), pinned on every class by SupportedHomChiCocycle (∀ bounded-below injective I, qis e, a, cycle x: θ f = iCycles x, transport through supportSequenceModelIso with the actual derived unit, value ShiftedHom.map(fromSingleMk f) Q ≫ quotientCompQhIso⁻¹[a] ≫ ι(resIso⁻¹)[a], directions checked) plus naturality, so the ∃ is effectively unique. Étale/pro-étale ρ, open constant maps and counits are canonical sheafified/adjoint maps (upperStarConstantSheafIso, proEtaleConstantDirectImageMap, proEtaleFixedOpenConstantMap); the open-evaluation clauses are the right true statements. No extra hypotheses or universe equalities; edge cases Z=∅, Z=X, a<0, non-qc U ok; no duplicate (supported_*_hom are Nonempty only; pullback is downstream). Advisory: étale ConeAgreement (qis of closedConeLift and of κ∘θ_I) is implied by closedConeLift_quasiIso and does not relate χ to Etale.closedSupportHom's e, which is existential with an existential α in the dependency; the only citer (supported-hom-pullback) does not use it. Maintainer note: a §1(B) repair exposing α = θ ≫ kernel inclusion would make it substantive. Compile not reproduced per instruction; no fixes."
  }
 }

@@ -21979,3 +21979,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:39 L: merged deliver/Q96/lem-weil-boundary-q-defining-composite-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 09:39 L: returned deliver/Y3/Sheaf.Paper.AdicSmoothBaseChange (reviewer RETURN: (reviewer C-924d9, head 924d90dd4) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.AdicSmoothBase)
 - 09:39 L: returned deliver/F5/Sheaf.Paper.FiniteTateSiteDescent (reviewer RETURN: (reviewer C-ef9e8, head ef9e80fdd) C5/D1: finite_tate_root_reduction re-states the theta/theta_pure/transition_theta cor)
+- 09:40 L: merged deliver/Q02/lem-pur-lifted-external-evaluation-chain-model (stage 2; reviewer PASS; parallel immutable checks)
+- 09:40 L: merged deliver/Q21/lem-pur-supported-hom-cocycle-normalization (stage 2; reviewer PASS; parallel immutable checks)
