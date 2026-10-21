@@ -24,171 +24,73 @@
  ],
  "proof": [
   {
-   "text": "All exceptional functors in this argument are the transported etale adjoints, not unrestricted pro-etale adjoints. All these finite-type $k$-schemes are Noetherian by [lem-weil-pbc-finite-type-over-noetherian], applied to the spectrum of the field $k$; they are quasi-separated by [lem-weil-pbc-locally-noetherian-quasi-separated]. (A field is Noetherian because its only ideals are $0$ and the unit ideal.) A separated finite-type morphism between the finite-type $k$-schemes in the argument has a compactification by [thm-nagata-compactification]; its proper factor is finite type over $k$ and has finite dimension by [lem-kun-dimension-finite-type]. Thus [thm-sf-ambient-adjoint-class](2) supplies the adjunction on bounded-below objects of etale origin, with the canonical comparisons of its clause (3), as summarized in [cor-sf-ambient-adjoint-discharge]. By [lem-sf-proetale-constructible-origin](ii), bounded constructible inputs have etale-origin witnesses. The formula in [def-weil-exceptional-inverse-image] identifies the functor on such an input $\\nu_Y^*G$ with $\\nu_X^*f^\\times G$. Only this construction and the bounded-below adjunction are used at this stage; preservation of bounded constructibility is proved below. More explicitly, work in the categories $\\mathcal C(T)=\\mathcal D^+_{\\mathrm{et}}(T,A)$ of complexes with an etale-origin witness [def-sf-etale-origin-subcategory]. The comparison [lem-sf-class-compact-support-comparison] gives $Rf_!\\nu_X^*G\\cong\\nu_Y^*(Rf_!^{\\mathrm{et}}G)$, so compact support preserves these categories. The transported right functor also takes values in them: its witness is $f^\\times R\\nu_{Y,*}L$, bounded below by the construction above. Thus the displayed Hom bijection restricts to an actual adjunction $\\mathcal C(X)\\rightleftarrows\\mathcal C(Y)$, before any constructible-preservation assertion is used.",
+   "text": "Apply [lem-pur-affine-chart-exceptional-identification] to each chosen chart. With $g:V\\hookrightarrow Y$, $u:U\\hookrightarrow X$ and $N=Lg^*L$, it gives $Lu^*Rf^!L\\cong Ri_U^!R\\pi_U^!N$ on the bounded-below etale-origin domain, before any preservation assertion. By [prop-exc-open-adjoint] and [thm-exc-explicit-preservation], $N$ retains the cohomological interval of $L$; for a finite-Tor input $K$, $Lg^*K$ retains its Tor interval and bounded constructibility.",
    "uses": [
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "thm-nagata-compactification",
-    "lem-kun-dimension-finite-type",
-    "thm-sf-ambient-adjoint-class",
-    "cor-sf-ambient-adjoint-discharge",
-    "lem-sf-proetale-constructible-origin",
-    "def-weil-exceptional-inverse-image",
-    "def-sf-etale-origin-subcategory",
-    "lem-sf-class-compact-support-comparison"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
-    "place": "Imported proof, availability of the right adjoints and Step 1; unit proof (iv), first sentence"
-   }
-  },
-  {
-   "text": "For an affine base open $g:V\\hookrightarrow Y$, put $X_V=f^{-1}(V)$, $h:X_V\\hookrightarrow X$, and $f_V:X_V\\to V$. The class-restricted clause of [cor-exc-base-change-open-immersion-general] gives the correctly typed isomorphism\n$$\n Lh^*Rf^!L\\cong Rf_V^!Lg^*L.\n$$\nHere both sides are objects on $X_V$. By [prop-exc-open-adjoint], the exceptional adjoint for $g$ is $Lg^*$; hence [thm-exc-explicit-preservation] for $g$ shows that $Lg^*L$ has the same constructible interval as $L$, and that $Lg^*K$ has the same Tor interval as $K$. The comparison is used only on bounded constructible inputs, exactly the unconditional class specified by the cited base-change statement.",
-   "uses": [
-    "cor-exc-base-change-open-immersion-general",
+    "lem-pur-affine-chart-exceptional-identification",
     "prop-exc-open-adjoint",
     "thm-exc-explicit-preservation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
-    "place": "Imported proof, Step 3 (base-open comparison), with the missing source restriction restored"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+    "place": "Steps 1 and 3: witnessed chart comparison and base-open restriction."
    }
   },
   {
-   "text": "Fix one chart and let $u':U\\hookrightarrow X_V$, $u=hu':U\\hookrightarrow X$. Write $d=d_U$, $T=T_U$, $i=i_U$, and $\\pi=\\pi_U$, so $f_Vu'=\\pi i$. Open restriction preserves the categories $\\mathcal C$ of Step 1: the inclusion defining the comparison morphism [def-weil-pbc-site-comparison-morphism], restricted to objects over $U$, is the inclusion for $U$ itself; hence $L(u')^*\\nu_{X_V}^*G\\cong\\nu_U^*(G|_U)$, with witness $G|_U$. By [prop-exc-open-adjoint], the restriction of $L(u')^*$ is right adjoint to $R(u')_!$ on these categories.\n\nFor $M\\in\\mathcal C(U)$ and $N\\in\\mathcal C(V)$, Step 1 and [thm-sf-comp-composition] give the natural bijections\n$$\n\\begin{aligned}\n\\operatorname{Hom}(M,Ri^!R\\pi^!N)\n&\\cong\\operatorname{Hom}(Ri_!M,R\\pi^!N)\\\\\n&\\cong\\operatorname{Hom}(R\\pi_!Ri_!M,N)\\\\\n&\\cong\\operatorname{Hom}(R(\\pi i)_!M,N),\\\\\n\\operatorname{Hom}(M,L(u')^*Rf_V^!N)\n&\\cong\\operatorname{Hom}(R(u')_!M,Rf_V^!N)\\\\\n&\\cong\\operatorname{Hom}(Rf_{V,!}R(u')_!M,N)\\\\\n&\\cong\\operatorname{Hom}(R(f_Vu')_!M,N).\n\\end{aligned}\n$$\nSince $f_Vu'=\\pi i$, [lem-cat-right-adjoint-composition] identifies both right adjoints with $R(f_Vu')^!$ and gives\n$$\nL(u')^*Rf_V^!\\cong R(f_Vu')^!\\cong Ri^!R\\pi^!.\n$$\nConsequently, for $N=Lg^*L$, Step 2 and composition of open restrictions give\n$$\nLu^*Rf^!L\\cong Ri^!R\\pi^!N.\n$$\nAll Hom calculations take place on the bounded-below etale-origin categories, where both compact support and its right adjoint are defined by Step 1; none assumes the preservation being proved.",
-   "uses": [
-    "thm-sf-comp-composition",
-    "lem-cat-right-adjoint-composition",
-    "prop-exc-open-adjoint",
-    "def-weil-pbc-site-comparison-morphism"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
-    "place": "Imported proof, Step 1; unit proof (iv), composition of the chart right adjoints"
-   }
-  },
-  {
-   "text": "The affine-space projection $\\pi:T\\to V$ is smooth of pure relative dimension $d$ by [sbc-lem-affine-space-smooth]; over the affine $V=\\operatorname{Spec}R$ it is separated, since its diagonal is defined in $\\operatorname{Spec}R[x_1,\\ldots,x_d,y_1,\\ldots,y_d]$ by the equations $x_j-y_j=0$. Apply [cor-pur-smooth-admissibility] to obtain\n$$\n B=R\\pi^!N\\in D_c^{[a-2d,b-2d]}(T,A)\n$$\nwhen $N\\in D_c^{[a,b]}(V,A)$. If instead $N$ is bounded constructible with Tor amplitude $[a,b]$, the same corollary gives that $B$ is bounded constructible with Tor amplitude $[a-2d,b-2d]$. These are separate applications: the cohomological-interval assertion is not restricted to finite-Tor inputs.",
+   "text": "Write $d=d_U$. The projection $\\pi_U$ is smooth of pure relative dimension $d$ by [sbc-lem-affine-space-smooth]. It is separated: over $V=\\operatorname{Spec}R$, its diagonal is cut out by $x_j-y_j$ in $\\operatorname{Spec}R[x_1,\\ldots,x_d,y_1,\\ldots,y_d]$. Thus [cor-pur-smooth-admissibility] sends a constructible interval $[a,b]$ to $[a-2d,b-2d]$, and separately sends a bounded constructible Tor input of interval $[a,b]$ to that Tor interval with bounded constructibility. Apply [lem-pur-closed-etale-transport-bounds] to $i_U$, its stipulated etale complement condition and $c_U$. In both applications the chart interval becomes $[a-2d_U,b-2d_U+c_U+1]$; the first application needs no finite-Tor assumption.",
    "uses": [
     "sbc-lem-affine-space-smooth",
-    "cor-pur-smooth-admissibility"
+    "cor-pur-smooth-admissibility",
+    "lem-pur-closed-etale-transport-bounds"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
-    "place": "Imported proof, Step 2, smooth projection; unit proof (iii) used in (iv)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+    "place": "Step 2: smooth projection followed by the transported closed-support bounds."
    }
   },
   {
-   "text": "To apply the closed-immersion bounds, pass explicitly to the etale site. By [lem-sf-proetale-constructible-origin](ii) choose $B'\\in D^b_c(T_{\\mathrm{et}},A)$ with $B\\cong\\nu_T^*B'$. Exactness and the cohomology formula of [lem-sf-comparison-pullback-exact], together with full faithfulness in [thm-weil-pbc-site-comparison], show that $B'$ has the same cohomological interval as $B$: a cohomology sheaf with zero comparison pullback is zero because that pullback is faithful. For the Tor application, [lem-sf-comparison-tor-amplitude](ii) gives the same Tor interval for $B'$. The defining transport formula [def-weil-exceptional-inverse-image], using the unit isomorphism of [thm-weil-pbc-site-comparison], identifies\n$$\n Ri^!B\\cong\\nu_U^*i_{\\mathrm{et}}^!B'.\n$$\nThus the following closed-immersion calculation concerns ordinary etale adjoints and the etale complement condition, on the same coefficient ring $A$.",
-   "uses": [
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-pullback-exact",
-    "thm-weil-pbc-site-comparison",
-    "lem-sf-comparison-tor-amplitude",
-    "def-weil-exceptional-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
-    "place": "Imported proof, Step 2, site distinction needed before the closed-support computations; Stacks Tags 09AK and 04JC"
-   }
-  },
-  {
-   "text": "By [def-exc-open-complement-bound], the assumed constant $c_U$ gives both $R^qj_*M=0$ for all etale $A$-module sheaves $M$ and $q>c_U$, and constructibility of every $R^qj_*F$ for constructible $F$, where $j:W_U\\hookrightarrow T$. The ordinary etale closed adjoint is supplied by [lem-exc-closed-ambient]. Apply the constructible clause of [lem-exc-closed-amplitude] to $B'$ in the cohomological-interval application. In the Tor application apply [prop-exc-closed-tor] to the bounded constructible $B'$ of Step 5. The open $j$ is quasi-compact as required by the assumed open-complement condition. The resulting interval in either application is\n$$\n [a-2d,b-2d+c_U+1].\n$$\nIn both cases the result is bounded constructible. Pullback by $\\nu_U^*$ preserves this constructibility by [lem-sf-proetale-constructible-origin](ii), and preserves its cohomological interval by [lem-sf-comparison-pullback-exact]. In the Tor application it preserves the Tor interval by [lem-sf-comparison-tor-amplitude](i). Combining with Steps 2–5 gives the claimed chartwise bounds for $Lu^*Rf^!$.",
-   "uses": [
-    "def-exc-open-complement-bound",
-    "lem-exc-closed-ambient",
-    "lem-exc-closed-amplitude",
-    "prop-exc-closed-tor",
-    "lem-sf-proetale-constructible-origin",
-    "lem-sf-comparison-pullback-exact",
-    "lem-sf-comparison-tor-amplitude"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
-    "place": "Imported proof, Step 2, closed-support calculation; unit proof (ii) used in (iv)"
-   }
-  },
-  {
-   "text": "Suppose the chart family is nonempty and put $I=[a-2D,b-2D+c]$. For each chart $d_U\\leq D$, so $a-2D\\leq a-2d_U$. Also $c\\geq c_U+1+2(D-d_U)$ gives $b-2d_U+c_U+1\\leq b-2D+c$. Hence every chartwise interval of Step 6 is contained in $I$. Vanishing outside a smaller interval implies vanishing outside $I$, for ordinary cohomology and for every tensor test defining Tor amplitude. If there are no charts, $X$ is empty; sheaves on its small pro-etale site are zero by the sheaf condition for the empty covering, so both conclusions hold with $D=c=0$.",
+   "text": "For a nonempty chart family put $I=[a-2D,b-2D+c]$. Since $d_U\\leq D$ and $c\\geq c_U+1+2(D-d_U)$, one has $a-2D\\leq a-2d_U$ and $b-2d_U+c_U+1\\leq b-2D+c$. Hence each chart interval lies in $I$; the defining cohomology and tensor-test vanishings persist under this enlargement. If there are no charts, use the empty-cover clause of [lem-pur-finite-open-interval-descent]: every object on $X=\\varnothing$ is zero, and the assertions hold with $D=c=0$.",
    "uses": [
     "def-weil-constructible-intervals",
-    "def-weil-finite-tor-amplitude"
+    "def-weil-finite-tor-amplitude",
+    "lem-pur-finite-open-interval-descent"
    ],
    "elementary": true,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
-    "place": "Imported proof, Step 2, maximum of the chart bounds; empty-cover edge case made explicit"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+    "place": "Step 2: uniform maximum and the empty chart family."
    }
   },
   {
-   "text": "Let $F=Rf^!L$ in the cohomological-interval application. Open restriction on constant-$A$ pro-etale module sheaves is exact by [prop-weil-pbc-proetale-constant-exact], so $\\mathcal H^r(F)|_U=\\mathcal H^r(F|_U)$: apply restriction to the kernel/image quotient defining cohomology. The latter vanishes for $r\\notin I$ by Step 7. A sheaf zero on every $U$ is zero, since for any site object $P\\to X$ its inverse images $P\\times_XU$ cover it and every section restricting to zero is zero by the sheaf axiom. For $r\\in I$, glue the finite constructible stratifications of the finitely many $\\mathcal H^r(F)|_{U_i}$ as follows. Order the opens and replace the strata in $U_i$ by their intersections with $U_i\\setminus\\bigcup_{j<i}U_j$. These are finitely many locally closed constructible strata in $X$ (the opens here are quasi-compact, and the displayed difference is closed in $U_i$); they partition $X$. Pulling each local constant trivialization back to an intersection gives a local constant trivialization there with the same finite module, so the restrictions remain locally constant with finite stalks. This is precisely [def-weil-finite-torsion-constructibility]. Thus $F\\in D_c^I(X,A)$ by [def-weil-constructible-intervals]. For any bounded constructible $K$, choose integers $a_0\\leq b_0$ containing its finitely many nonzero cohomology degrees (choose $a_0=b_0=0$ when $K=0$). The first conclusion just proved, applied with $[a_0,b_0]$, gives bounded constructibility of $Rf^!K$.",
+   "text": "The chart opens form a finite cover of $X$. Apply [lem-pur-finite-open-interval-descent] to $Rf^!L$ and the interval $I$ to prove conclusion 1. For bounded constructible $K$, choose a cohomological interval containing its finitely many nonzero degrees (use $[0,0]$ for $K=0$); conclusion 1 already makes $Rf^!K$ bounded constructible. For a Tor input of interval $[a,b]$, every $Lu^*Rf^!K$ has Tor amplitude in $I$ by Steps 2–3. The chart open immersions form a pro-etale covering family of $X$ and $Lu^*$ is the module inverse image, so [lem-sfb-tor-interval-local-detection](i), for the constant ring sheaf $A$, gives Tor amplitude in $I$ for $Rf^!K$. Its tests range over every degree-zero pro-etale module sheaf, also those not of etale origin. Hence the bounded constructible $Rf^!K$ has the claimed Tor interval and belongs to $D^b_{ctf}(X,A)$.",
    "uses": [
-    "prop-weil-pbc-proetale-constant-exact",
-    "def-weil-finite-torsion-constructibility",
-    "def-weil-constructible-intervals"
+    "lem-pur-finite-open-interval-descent",
+    "lem-sfb-tor-interval-local-detection"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
-    "place": "Imported proof, Step 4; finite disjointification supplies the constructibility gluing argument"
-   }
-  },
-  {
-   "text": "Finally let $K\\in D^b_{ctf}(Y,A)$ have Tor amplitude $[a,b]$, and put $F=Rf^!K$, which is bounded constructible by Step 8. For an arbitrary pro-etale $A$-module sheaf $M$ on $X$, the ambient finite-level tensor comparison of [lem-pur-derived-pullback-tensor-iso] gives\n$$\n Lu^*(F\\otimes_A^LM)\\cong Lu^*F\\otimes_A^L u^*M.\n$$\nThe use of a sheaf $u^*M$ in degree zero is justified by [prop-weil-pbc-proetale-constant-exact]. The right side has no cohomology outside $I$ by the chartwise Tor bound of Steps 6–7. Exact restriction commutes with the kernel/image quotient defining cohomology. For $r\\notin I$, every section of $\\mathcal H^r(F\\otimes_A^LM)$ over a site object $P\\to X$ restricts to zero on all $P\\times_XU$; these form a covering, so the sheaf axiom makes the section zero. Hence $\\mathcal H^r(F\\otimes_A^LM)=0$ for $r\\notin I$. This is the Tor-amplitude condition of [def-weil-finite-tor-amplitude] for every $M$, including sheaves not of etale origin. Bounded constructibility of $F$ and this finite interval prove the second assertion and the stated $D^b_{ctf}$ preservation.",
-   "uses": [
-    "lem-pur-derived-pullback-tensor-iso",
-    "prop-weil-pbc-proetale-constant-exact",
-    "def-weil-finite-tor-amplitude"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
-    "place": "Imported proof, Step 4, Tor gluing on the full pro-etale site; Stacks Tag 07A4 (lemma-pullback-tensor-product)"
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+    "place": "Step 4: cohomological descent (new node) and arbitrary-sheaf Tor descent (existing local-detection lemma)."
    }
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "thm-nagata-compactification",
-  "lem-kun-dimension-finite-type",
-  "thm-sf-ambient-adjoint-class",
-  "cor-sf-ambient-adjoint-discharge",
-  "lem-sf-proetale-constructible-origin",
-  "def-weil-exceptional-inverse-image",
-  "def-sf-etale-origin-subcategory",
-  "lem-sf-class-compact-support-comparison",
-  "cor-exc-base-change-open-immersion-general",
+  "lem-pur-affine-chart-exceptional-identification",
   "prop-exc-open-adjoint",
   "thm-exc-explicit-preservation",
-  "thm-sf-comp-composition",
-  "lem-cat-right-adjoint-composition",
-  "def-weil-pbc-site-comparison-morphism",
   "sbc-lem-affine-space-smooth",
   "cor-pur-smooth-admissibility",
-  "lem-sf-comparison-pullback-exact",
-  "thm-weil-pbc-site-comparison",
-  "lem-sf-comparison-tor-amplitude",
-  "def-exc-open-complement-bound",
-  "lem-exc-closed-ambient",
-  "lem-exc-closed-amplitude",
-  "prop-exc-closed-tor",
+  "lem-pur-closed-etale-transport-bounds",
   "def-weil-constructible-intervals",
   "def-weil-finite-tor-amplitude",
-  "prop-weil-pbc-proetale-constant-exact",
-  "def-weil-finite-torsion-constructibility",
-  "lem-pur-derived-pullback-tensor-iso"
+  "lem-pur-finite-open-interval-descent",
+  "lem-sfb-tor-interval-local-detection"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-rf-shriek-preservation/thm-pur-general-admissibility.md",
-  "place": "Agent expansion and repair of the original Proof, Steps 1–4, following unit proof (iv); second reader checked the original master blueprint and Stacks sources in the read-only local literature copy /home/ubuntu/work-bp/sheaf/literature/."
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-sp-et-proet/thm-pur-general-admissibility.proof.md",
+  "place": "Steps 1–4, preserving the repaired domain, site-transfer and descent arguments of the previous nine-step DAG proof in three independent statement-only subproblems."
  },
  "mathlib_searches": [
   {
@@ -289,63 +191,23 @@
  "chapter": "sec-six-functors",
  "unit": "sk-prop-sf-rf-shriek-preservation",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "thm-pur-general-admissibility",
   "worker": "stage1",
-  "summary": "Replaced the imported single paragraph by nine checked steps, kept the chart factorization route, corrected the ill-typed base-open formula, supplied explicit etale/pro-etale and Tor-interval transport, and wrote the finite-cover constructibility and arbitrary-sheaf Tor gluing arguments. Made the unit’s finite-type k-scheme setting explicit and defined the empty-chart constants. All lemmas are existing nodes; no new nodes. Second reading supplied the etale-origin category closure and both Hom calculations, made affine-space separatedness and the final gluing deductions explicit, and checked the original local blueprint source.",
-  "blueprint": "Realizes the imported proof Step 1 by Steps 1–3; Step 2 by Steps 4–7; Step 3 by Step 2; Step 4 by Steps 8–9. This is unit sk-prop-sf-rf-shriek-preservation proof (iv), using its (ii) and (iii) cases under the retained open-complement hypothesis.",
+  "summary": "Human-requested re-split: three independent statement-only lemmas retain the witnessed adjunction/chart identification, etale closed-support transport, and independent finite-open cohomology/Tor descent. The original theorem statement and all chart constants are unchanged. The parent is a short smooth/closed/local assembly; full previous arguments and ownership are retained in the worker report.",
+  "blueprint": "Current main-20261015 proof Steps 1 and 3 are realized by lem-pur-affine-chart-exceptional-identification; Step 2 by smooth purity, lem-pur-closed-etale-transport-bounds and interval arithmetic; Step 4 by lem-pur-finite-open-interval-descent and the existing lem-sfb-tor-interval-local-detection(i). This follows unit sk-prop-sf-rf-shriek-preservation(iv).",
   "tool_uses": [
    {
-    "node": "thm-nagata-compactification",
-    "why": "Supplies compactifications for the existing exceptional-adjoint theorem; it does not replace any preservation step. No statement of the preservation unit replaces this generic input."
-   },
-   {
-    "node": "lem-kun-dimension-finite-type",
-    "why": "Supplies a finite dimension bound for a compactification, an existence hypothesis of the class-adjoint theorem. No statement of the preservation unit replaces this generic input."
-   },
-   {
-    "node": "lem-sf-proetale-constructible-origin",
-    "why": "Supplies the constructible etale-origin equivalence needed to apply ordinary etale closed-immersion bounds. No statement of the preservation unit replaces this generic input."
-   },
-   {
-    "node": "lem-sf-comparison-pullback-exact",
-    "why": "Supplies cohomology compatibility for the change of sites; no preservation clause for the exceptional functor is inferred from it. No statement of the preservation unit replaces this generic input."
-   },
-   {
-    "node": "thm-weil-pbc-site-comparison",
-    "why": "Supplies full faithfulness and the unit isomorphism used in the formula transporting the etale closed adjoint. No statement of the preservation unit replaces this generic input."
-   },
-   {
-    "node": "prop-weil-pbc-proetale-constant-exact",
-    "why": "Supplies exact open restriction for the cohomology and arbitrary-sheaf Tor gluing steps. No statement of the preservation unit replaces this generic input."
-   },
-   {
-    "node": "lem-pur-derived-pullback-tensor-iso",
-    "why": "Supplies the ambient finite-level tensor comparison for Tor tests by arbitrary pro-etale sheaves. No statement of the preservation unit replaces this generic input."
-   },
-   {
     "node": "sbc-lem-affine-space-smooth",
-    "why": "Supplies smoothness and pure relative dimension of the affine-space projection used by the unit’s smooth-then-closed chart argument. No statement of the preservation unit replaces this generic input."
+    "why": "Identifies the relative dimension of the affine-space projection in the fixed smooth-then-closed chart route."
    },
    {
-    "node": "lem-exc-closed-ambient",
-    "why": "Supplies the ordinary etale closed adjoint used in the unit’s closed-immersion case. No statement of the preservation unit replaces this generic input."
+    "node": "lem-sfb-tor-interval-local-detection",
+    "why": "Step 4: clause (i) is exactly the Zariski-cover descent of Tor amplitude against all degree-zero pro-etale module sheaves; restating it in the new descent node would duplicate it (reviewer FIX)."
    },
    {
-    "node": "lem-exc-closed-amplitude",
-    "why": "Supplies exactly the closed-immersion cohomological interval under the given open-complement condition. No statement of the preservation unit replaces this generic input."
-   },
-   {
-    "node": "prop-exc-closed-tor",
-    "why": "Supplies exactly the closed-immersion Tor interval under the given open-complement condition. No statement of the preservation unit replaces this generic input."
-   },
-   {
-    "node": "lem-weil-pbc-finite-type-over-noetherian",
-    "why": "Verifies the Noetherian and quasi-separated hypotheses of the compactification and class-adjoint inputs and the finite-stratification gluing. This is a generic geometric input, not a substitute for a step of the preservation unit."
-   },
-   {
-    "node": "lem-weil-pbc-locally-noetherian-quasi-separated",
-    "why": "Verifies the Noetherian and quasi-separated hypotheses of the compactification and class-adjoint inputs and the finite-stratification gluing. This is a generic geometric input, not a substitute for a step of the preservation unit."
+    "node": "prop-exc-open-adjoint",
+    "why": "Step 1: the open exceptional adjoint is Lg^*; cited by the blueprint proof itself and by the base proof of this item; no node of the unit states it."
    }
   ]
  },
@@ -362,15 +224,17 @@
   "lem-exc-closed-amplitude",
   "prop-exc-closed-tor",
   "lem-weil-pbc-finite-type-over-noetherian",
-  "lem-weil-pbc-locally-noetherian-quasi-separated"
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-sfb-tor-interval-local-detection",
+  "prop-exc-open-adjoint"
  ],
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q35-363f9299c",
-  "group": "Q35",
+  "reviewer": "NT-cc-Q69-8d3ee3ae3",
+  "group": "Q69",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q35-363f9299c (reviewer sub-agent of L); spot-checked: Reviewed the item, unit/chapter route, source theorem, all 30 cited dependencies and cited source locations. The repaired typed base-change, etale/pro-etale transport, chartwise bounds, empty-chart case, constructibility gluing, and arbitrary-sheaf Tor argument are correct. No new nodes, duplicates, cycles, or weakened targets; review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q69-8d3ee3ae3 (reviewer sub-agent of L); spot-checked: Read the repair note (human, 2026-10-21), the main-20261015 proof (Steps 1–4), the unit, the old 9-step proof and every cited statement. The item's statement, stmt_deps and blueprint/lean fields are byte-identical to live. There are 3 new unsplit nodes; the assembly was 2229 characters (2474 after the fix). Old Steps 1–3 went to the chart-identification node, 5–6 to the closed-transport node and 8 to the descent node; Step 4 (cor-pur-smooth-admissibility) and Step 7 (arithmetic) stay in the parent. No argument was blurred or dropped. Mathematics checked: the lifted adjunction on the witnessed D+ categories goes through the comparison unit; the chart iso holds by Yoneda in D+, and the étale analogue is the same-unit lem-sf-etale-chart-adjoint-comparison; the closed bound [r,s+c+1] uses the triangle i^!→i^*→i^*Rj_*j^* and needs exactly the two clauses of def-exc-open-complement-bound, with Tor bounds via prop-exc-closed-tor and comparison-tor-amplitude (i)/(ii). Zariski descent of D_c^{[r,s]} for arbitrary unbounded F follows from the sheaf-level constructibility definition on Noetherian, possibly non-separated X. Small cases tested: d=0, W=∅, Z=∅, c=0, A=O_E/ϖ², J=∅, overlapping opens. One fault repaired (C5/D1): clause 2 of lem-pur-finite-open-interval-descent is a one-line specialization of the existing reviewed lem-sfb-tor-interval-local-detection (i), since a Zariski cover is a pro-étale covering family. The FIX cuts the descent node to the cohomological/constructible implication plus the X=∅ clause and drops two stmt_deps it no longer cites. Parent Step 4 now cites lem-sfb-tor-interval-local-detection(i). That adds no cycle and no trf node to the item's closure. Tool uses declared and accepted: sbc-lem-affine-space-smooth, prop-exc-open-adjoint (off-route but cited by the blueprint proof and the reviewed base) and lem-sfb-tor-interval-local-detection. Advisory: the closed node's étale Tor meaning should be bridged to the lem-sf-flat-model étale clause in its proof.; 2 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.PurityGeneralAdmissibility",
