@@ -14,7 +14,7 @@
  ],
  "proof": [
   {
-   "text": "If the input list is empty, take the zero subcomplex. Otherwise choose an integer $a\\le b+1$ no greater than every input degree. For each $t\\le b+1$, prove the following strengthened assertion $P(t)$: every finite list of homogeneous elements in degrees at least $t$ is contained in a finite-free subcomplex which vanishes in degrees $n<t$ and $n>b$. Use descending induction, or equivalently induction on the nonnegative integer $b+1-t$. For $t=b+1$, all listed elements are zero because $F^n=0$ for $n>b$, so the zero subcomplex proves $P(b+1)$.",
+   "text": "Choose a lower degree a at most b+1 and at most every input degree, by induction on the input list and taking minima. Strengthen the assertion to P(t): every finite set of homogeneous elements in degrees at least t is contained in a finite-free subcomplex supported in [t,b]. Prove P(t) for t at most b+1 by descending integer induction. At t=b+1 all input elements are zero by the upper vanishing bound, so choose the zero submodules, each isomorphic to A^0.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -32,7 +32,7 @@
    }
   },
   {
-   "text": "Choose coordinates $\\psi:F^{t+1}\\xrightarrow{\\sim}\\bigoplus_{k\\in K}A$ and put $c_k=\\psi^{-1}(\\delta_k)$. Let $K'\\subset K$ be the union, over $i\\in J$, of the finite supports of $\\psi(d_F^t(e_i))$. It is a finite union of finite sets. The coordinate expansion gives $d_F^t(e_i)=\\sum_{k\\in K'}\\psi(d_F^t(e_i))(k)c_k$ for each $i\\in J$; coordinates outside $K'$ vanish by its definition. Hence these images lie in the span of the finite list $(c_k)_{k\\in K'}$.",
+   "text": "Let y be the finite set of basis vectors indexed by J from step 2, so E is the span of y. Form the finite set of homogeneous pairs (t+1,d_F^t(z)) for z in y. Taking these differential images themselves as the inputs to the induction hypothesis replaces the redundant second coordinate expansion in the source proof.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -41,7 +41,7 @@
    }
   },
   {
-   "text": "Apply the induction hypothesis $P(t+1)$ to the finite list consisting of $(t+1,c_k)$ for $k\\in K'$ and all original pairs $(n_j,x_j)$ with $n_j>t$. Every degree in this list is at least $t+1$. Obtain a subcomplex $H$ with finite-free terms, with $H^n=0$ for $n<t+1$ and $n>b$, containing this list. Define submodules $G^n\\subset F^n$ by $G^n=0$ for $n<t$, $G^t=E$, and $G^n=H^n$ for $n>t$. This applies the induction hypothesis only to the preceding value of the natural-number induction parameter, not to the original assertion without a lower bound.",
+   "text": "Apply P(t+1) to the union of the differential-image pairs from step 3 and the original pairs whose degree is strictly greater than t. This is a finite set and all its degrees are at least t+1. Obtain H supported in [t+1,b] with finite-free terms. Define G^t=E and G^n=H^n for n different from t. In particular G is zero below t because H is zero below t+1. This is an application of the descending induction hypothesis only.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -50,7 +50,7 @@
    }
   },
   {
-   "text": "Check differential stability in all degrees. For $n<t$, the domain $G^n$ is zero. For $n=t$, each $v\\in E$ has the expression $v=\\sum_{i\\in J}\\phi(v)(i)e_i$; linearity and step 3 express $d_F^t(v)$ as an $A$-linear combination of the $c_k$, all belonging to $H^{t+1}=G^{t+1}$. For $n>t$, stability is that of $H$. Give $G$ these restricted differentials. The cochain identity in [def-weil-abstract-derived-category] is $d_F^{n+1}d_F^n=0$; applied to an element of $G^n$ it shows the two restricted maps also compose to zero, since equality in a submodule is equality of the underlying elements. Thus $G$ really is a subcomplex.",
+   "text": "For n<t the domain G^n is zero. At n=t, every generator z in y has d_F^t(z) in H^{t+1} by the choice of the induction inputs. Since E is the span of y, the span universal property (equivalently the inverse image of H^{t+1} under the differential) gives d_F^t(E) contained in H^{t+1}. For n>t use the differential stability of H. The cochain identity of [def-weil-abstract-derived-category] is inherited by restricted differentials, as equality of submodule elements is equality in the ambient module.",
    "uses": [
     "def-weil-abstract-derived-category"
    ],
@@ -74,9 +74,11 @@
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "K8",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/more-algebra.tex",
-  "place": "Tag 0FNR, lemma-complex-bounded-above-free-colim-bounded-finite-free, proof"
+  "place": "Tag 0FNR, lemma-complex-bounded-above-free-colim-bounded-finite-free, proof; descending induction, simplified by passing differential images directly to the induction hypothesis"
  },
  "mathlib_searches": [
   {
@@ -171,5 +173,15 @@
   "date": "2026-10-18",
   "existing": false
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K8",
+  "result": "pass",
+  "landing": "20261021T120428-L-3893995",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
