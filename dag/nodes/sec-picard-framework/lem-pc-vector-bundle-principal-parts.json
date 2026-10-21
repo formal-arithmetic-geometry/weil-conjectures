@@ -13,9 +13,119 @@
   "def-sc-relative-differential-sheaf",
   "pqf-def-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For a nonempty open $U$, every section of $E(U)$ has a generic germ in $V$, compatible with restriction; give $j_*V$ its $\\mathcal O_X$-action through the generic germ of a function. On a trivializing neighbourhood $W$ from [def-sc-finite-locally-free-sheaf], the maps $E_x\\to V$ and $E(W)\\to V$ are the coordinatewise maps $\\mathcal O_{X,x}^{r}\\to K^{r}$ and $\\mathcal O_X(W)^{r}\\to K^{r}$. They are injective by [lem-sc-integral-scheme-stalks-in-function-field]. For a section over any $U$ whose generic germ is zero, restrict to each trivializing $W\\subseteq U$; its coordinates vanish by that same injectivity, so the sheaf axiom makes the section zero. This constructs the monomorphism $E\\to j_*V$ and the stated inclusions $E_x\\subseteq V$. Finite direct sums commute with taking germs because finitely many representatives can be restricted to their common neighbourhood.",
+   "uses": [
+    "def-sc-finite-locally-free-sheaf",
+    "lem-sc-integral-scheme-stalks-in-function-field"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, pp. 156–157, exact sequence before Theorem 4; §4, p. 157, divisor variant; explicit finite-locally-free extension of the local argument"
+   }
+  },
+  {
+   "text": "Every $v\\in V=E_\\eta$ is represented by a section over some neighbourhood $W$ of $\\eta$, by the definition of a stalk. Thus $v\\in E_x$ for all $x\\in W$. By [lem-sc-nonempty-open-complement-finite-dim-le-one], $X\\setminus W$ is finite; its hypotheses hold since an integral scheme is irreducible, sober and $T_0$, and the Noetherian scheme has Noetherian underlying space. Its points are closed by [lem-sc-dim-one-point-outside-open-closed]. More generally every $x\\ne\\eta$ is closed: $X\\setminus\\overline{\\{x\\}}$ is a nonempty open (otherwise $x$ would be the unique generic point), and the same closed-point lemma applies. Consequently the pole set of any $v$ is a finite set of closed points.",
+   "uses": [
+    "lem-sc-nonempty-open-complement-finite-dim-le-one",
+    "lem-sc-dim-one-point-outside-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, pp. 156–157, exact sequence before Theorem 4; §4, p. 157, divisor variant; explicit finite-locally-free extension of the local argument"
+   }
+  },
+  {
+   "text": "Put $Q=\\bigoplus_{x\\text{ closed}}i_{x,*}(V/E_x)$, where the skyscraper has value $V/E_x$ on opens containing $x$ and zero on the other opens, with scalar action induced by $\\mathcal O_X(U)\\to\\mathcal O_{X,x}$. Apply [lem-pur-module-sheaf-coproduct-local-support] on the site of opens of $X$ (intersections are its fibre products, and all indexing sets are taken in a fixed encompassing universe). It identifies $Q$ with the subsheaf of the product consisting of families locally supported on finitely many indices. Every open $U$ of a Noetherian space is quasi-compact, so a finite subcover of those neighbourhoods shows that a family in $Q(U)$ has globally finite support. Conversely every finitely supported family is locally finitely supported. Hence $Q(U)=\\bigoplus_{x\\in U,\\ x\\text{ closed}}V/E_x$, and restrictions discard coordinates. They are surjective by extension by zero. Restrictions of $j_*V$ between nonempty opens are identities of $V$, and restriction to the empty open is the map to zero. Thus both sheaves are flasque.",
+   "uses": [
+    "lem-pur-module-sheaf-coproduct-local-support"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, pp. 156–157, exact sequence before Theorem 4; §4, p. 157, divisor variant; explicit finite-locally-free extension of the local argument"
+   }
+  },
+  {
+   "text": "For nonempty $U$, define $\\delta_U(v)=(v\\bmod E_x)_{x\\in U,\\ x\\text{ closed}}$; step 2 makes its support finite. These maps commute with restriction and are $\\mathcal O_X$-linear, since each $E_x$ is an $\\mathcal O_{X,x}$-submodule. If $\\delta_U(v)=0$, then $v\\in E_x$ at every closed $x\\in U$, and also at $\\eta$ because $E_\\eta=V$. By step 2 these are all points of $U$. At every $x$, membership in $E_x$ supplies a section $s_x$ on a neighbourhood of $x$ with generic germ $v$. On overlaps these sections agree by the injectivity proved in step 1, so they glue to a unique section of $E(U)$. Conversely every section of $E(U)$ has zero principal parts. Thus $E$ is the kernel of $\\delta$; the unique lifts just constructed respect addition, scalar multiplication and restriction, so this is the kernel also in $\\mathcal O_X$-modules.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, pp. 156–157, exact sequence before Theorem 4; §4, p. 157, divisor variant; explicit finite-locally-free extension of the local argument"
+   }
+  },
+  {
+   "text": "To prove that $\\delta:j_*V\\to Q$ is an epimorphism, let $s\\in Q(U)$. At a closed $x\\in U$, choose $v\\in V$ representing $s_x\\in V/E_x$. The family $\\delta_U(v)-s$ has finite support by steps 2 and 3, and its $x$-coordinate is zero. Delete its finitely many support points from $U$; they are closed and different from $x$, so this leaves a neighbourhood of $x$ on which $v$ lifts $s$. At $\\eta$, delete the finite support of $s$; zero lifts $s$ on that neighbourhood. Thus the map on every stalk is surjective. By [lem-sc-abelian-sheaf-epi-iff-stalk-epi] it is an epimorphism on underlying abelian sheaves, hence also on module sheaves: two module morphisms equal after composition with it have equal underlying abelian morphisms and are therefore equal. Together with steps 1 and 4 this gives the asserted short exact sequence.",
+   "uses": [
+    "lem-sc-abelian-sheaf-epi-iff-stalk-epi"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, pp. 156–157, exact sequence before Theorem 4; §4, p. 157, divisor variant; explicit finite-locally-free extension of the local argument"
+   }
+  },
+  {
+   "text": "Apply [lem-sc-module-cup-flasque-acyclicity] to the two flasque module sheaves of step 3: their positive module cohomology vanishes. The long exact sequence of [pqf-def-cohomology], whose degree-zero terms are the global sections because $R^0\\Gamma(X,-)\\cong\\Gamma(X,-)$ naturally by [lem-weil-pbc-right-derived-universal-delta-functor], is therefore $0\\to H^0(X,E)\\to V\\xrightarrow{\\delta_X}\\bigoplus_{x\\text{ closed}}V/E_x\\xrightarrow{\\partial}H^1(X,E)\\to0$. Its kernel is precisely the set of $v$ belonging to all $E_x$, and its cokernel is the displayed quotient by the image of $V$. Exactness gives the two asserted identifications, with the second induced by the connecting map.",
+   "uses": [
+    "lem-sc-module-cup-flasque-acyclicity",
+    "pqf-def-cohomology",
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, pp. 156–157, exact sequence before Theorem 4; §4, p. 157, divisor variant; explicit finite-locally-free extension of the local argument"
+   }
+  },
+  {
+   "text": "For a module morphism $f:E\\to F$, its generic map $f_\\eta:E_\\eta\\to F_\\eta$ sends $E_x$ into $F_x$, since a local representative $s$ is sent to $f(s)$. It therefore induces maps on all quotients, with $[v]_x\\mapsto[f_\\eta(v)]_x$, and on their finite-support direct sums. The equality $\\delta_F f_\\eta(v)=([f_\\eta(v)]_x)_x$ gives a morphism of the short exact sequences. By [lem-weil-pbc-right-derived-universal-delta-functor], connecting maps commute with every morphism of short exact sequences. This proves naturality of the cokernel identification; naturality of the intersection identification follows directly from $s_\\eta\\mapsto f_\\eta(s_\\eta)$.",
+   "uses": [
+    "lem-weil-pbc-right-derived-universal-delta-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3, pp. 156–157, exact sequence before Theorem 4; §4, p. 157, divisor variant; explicit finite-locally-free extension of the local argument"
+   }
+  },
+  {
+   "text": "Suppose $X$ is smooth over $k$. By [lem-ag-smooth-relative-differentials-finite-locally-free], $\\Omega^1_{X/k}$ is finite locally free, so the preceding argument applies to it. On an affine neighbourhood $\\operatorname{Spec}A$ of $x$, [def-sc-relative-differential-sheaf] identifies the sheaf with the sheaf associated to $\\Omega_{A/k}$. Taking the stalk at the prime $\\mathfrak p$ of $x$ gives $(\\Omega_{A/k})_\\mathfrak p$ by the definition of the associated module sheaf (germs are represented by $m/s$ with $s\\notin\\mathfrak p$). Applying [lem-weil-pbc-kahler-differentials-localization] first with $A\\setminus\\mathfrak p$ and then with all nonzero elements of the domain $A$ gives $E_x=\\Omega_{\\mathcal O_{X,x}/k}$ and $E_\\eta=\\Omega_{K/k}$. The maps of that node send $\\mathrm da/s$ to $s^{-1}\\mathrm d(a/1)$, so these identifications identify the generic-germ map with the canonical map $\\Omega_{\\mathcal O_{X,x}/k}\\to\\Omega_{K/k}$. Step 1 proves it injective; its image is exactly the lattice used in the statement.",
+   "uses": [
+    "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "def-sc-relative-differential-sheaf",
+    "lem-weil-pbc-kahler-differentials-localization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/morphisms.tex; literature/stacks-project/algebra.tex",
+    "place": "Tag 02G1 (lemma-smooth-omega-finite-locally-free); Tag 00RT (lemma-differentials-localize), part (2); affine differential sheaf as in Tag 01UM"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sc-finite-locally-free-sheaf",
+  "lem-sc-integral-scheme-stalks-in-function-field",
+  "lem-sc-nonempty-open-complement-finite-dim-le-one",
+  "lem-sc-dim-one-point-outside-open-closed",
+  "lem-pur-module-sheaf-coproduct-local-support",
+  "lem-sc-abelian-sheaf-epi-iff-stalk-epi",
+  "lem-sc-module-cup-flasque-acyclicity",
+  "pqf-def-cohomology",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "def-sc-relative-differential-sheaf",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§3, pp. 156–157, exact sequence before Theorem 4; §4, p. 157, divisor variant; explicit finite-locally-free extension of the local argument; vector-bundle and naturality details supplied explicitly, using the cited Stacks results"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -44,10 +154,59 @@
    "results": "8 hits: Algebra.Extension.H1Cotangent, Algebra.H1Cotangent, groupCohomology.shortComplexH1, groupCohomology.H1, Algebra.Extension.cotangentComplex_injective_iff, groupCohomology.coboundaries₁, groupCohomology.shortComplexH1_f, Algebra.Extension.subsingleton_h1Cotangent",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "principalParts|principal.parts|residue.sequence",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of a vector bundle on an integral curve via rational sections modulo stalk lattices",
+   "results": "8 hits: ContMDiffSection.coe_injective, VectorBundle.mk, VectorBundle.casesOn, VectorBundleCore.moduleFiber, IsLocalFrameOn.coeff_congr, IsLocalFrameOn.coeff_apply_zero_at, ContMDiffSection.instAddCommGroup, VectorBundleCore.coordChange_comp",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"principalParts\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Principal parts flasque resolution finite locally free sheaf on integral noetherian curve and cohomology cokernel",
+   "results": "8 hits: SheafOfModules.relationsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree_π",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "IsFlasque|flasque|adelic|stalkLattice",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"flasque\"",
+   "results": "12 hits: TopCat.Presheaf.IsFlasque, TopCat.Sheaf.IsFlasque, TopCat.Presheaf.IsFlasque.pushforward_isFlasque, TopCat.Sheaf.IsFlasque.pushforward_isFlasque, isFlasque_skyscraperSheaf_of_hasZeroObject, isFlasque_skyscraperSheaf_of_epi_from, TopCat.Sheaf.IsFlasque.Under, TopCat.Presheaf.IsFlasque.epi",
+   "date": "2026-10-21",
+   "verdict": "partial match only: flasqueness definitions and skyscraper facts, not the full principal-parts theorem"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "First cohomology of a locally free module on a scheme is the cokernel of rational sections into direct sum of local quotients",
+   "results": "8 hits: SheafOfModules.relationsOfIsCokernelFree, Algebra.H1Cotangent, SheafOfModules.presentationOfIsCokernelFree, SheafOfModules.relationsOfIsCokernelFree_I, SheafOfModules.relationsOfIsCokernelFree_s, SheafOfModules.generatorsOfIsCokernelFree, SheafOfModules.generatorsOfIsCokernelFree_I, SheafOfModules.generatorsOfIsCokernelFree_π",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sk-thm-picard-duality",
@@ -64,5 +223,64 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-vector-bundle-principal-parts",
+  "worker": "stage1",
+  "summary": "Read Tate §3 pp. 156–157 and §4 p. 157, the current blueprint residue-sequence route, and all cited DAG statements. Gave the finite-locally-free generic embedding, finite pole sets, the genuine sheaf coproduct section model, local lifts, flasqueness, cohomology, naturality and the smooth differential specialization explicitly. No change to the statement; no new nodes. Existing Lean covers the abstract principal-parts calculation under assumed generic embedding, not all clauses of this item.",
+  "blueprint": "Realizes sk-thm-picard-duality proof: Cartier picture of divisors (the residue sequence), including the residue-sequence and cokernel assertions in its dimension-one statement.",
+  "tool_uses": [
+   {
+    "node": "lem-sc-nonempty-open-complement-finite-dim-le-one",
+    "why": "Generic topological finite-complement tool for the pole set; it does not replace any step of the Serre-duality unit."
+   },
+   {
+    "node": "lem-sc-dim-one-point-outside-open-closed",
+    "why": "Generic topological closed-point criterion, used only to shrink neighbourhoods and classify points of the curve."
+   },
+   {
+    "node": "lem-pur-module-sheaf-coproduct-local-support",
+    "why": "General sheaf-coproduct description used to identify the principal-parts term sectionwise; this unit has no general coproduct description."
+   },
+   {
+    "node": "lem-sc-abelian-sheaf-epi-iff-stalk-epi",
+    "why": "Generic stalkwise epimorphism criterion, used after explicit local lifts."
+   },
+   {
+    "node": "lem-sc-module-cup-flasque-acyclicity",
+    "why": "General module flasque acyclicity for the module cohomology of pqf-def-cohomology; the unit supplies no alternative acyclicity theorem."
+   },
+   {
+    "node": "lem-weil-pbc-right-derived-universal-delta-functor",
+    "why": "General naturality of connecting homomorphisms, after constructing a morphism of the actual short exact sequences."
+   },
+   {
+    "node": "lem-ag-smooth-relative-differentials-finite-locally-free",
+    "why": "General smooth differential local freeness without constant relative rank; used only for the last specialization."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-localization",
+    "why": "General algebraic localization formula identifying differential stalks and their actual maps to the generic stalk."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sc-nonempty-open-complement-finite-dim-le-one",
+  "lem-sc-dim-one-point-outside-open-closed",
+  "lem-pur-module-sheaf-coproduct-local-support",
+  "lem-sc-abelian-sheaf-epi-iff-stalk-epi",
+  "lem-sc-module-cup-flasque-acyclicity",
+  "lem-weil-pbc-right-derived-universal-delta-functor",
+  "lem-ag-smooth-relative-differentials-finite-locally-free",
+  "lem-weil-pbc-kahler-differentials-localization"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NV-fa6f3cead",
+  "group": "NV",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-fa6f3cead (reviewer sub-agent of L); spot-checked: The mathematics is correct; one citation is missing in step 6. I read the item and all 8 steps in full against every cited statement and against Tate §3 pp.156–157 and §4 p.157. Tate proves the case of O_X and divisor twists, with completed local fields and abelian sheaves. The item proves the finite-locally-free case with uncompleted quotients and module sheaves, and its proof is correctly marked agent-written. The statement is unchanged from base and there are no new nodes. The proof checks: step 1 gets injectivity of the generic-germ map from the trivializations and clause 2 of the integral-scheme leaf. Step 2 gets finite pole sets and shows every non-generic point is closed via uniqueness of generic points. Step 3 turns the locally finite support given by the coproduct lemma into globally finite support by quasi-compactness of opens, and both sheaves are flasque. Steps 4–5 prove the kernel by gluing (overlaps contain η) and stalkwise surjectivity, and an abelian epi is a module epi because the forgetful functor is faithful. Step 6 uses module flasque acyclicity, which is about the same module cohomology as pqf-def-cohomology. Step 7 gives naturality through a morphism of the short exact sequences and the δ-functor clause. Step 8 identifies the differential stalks with Ω_{O_x/k} and Ω_{K/k} by the localization node at A∖p and at A∖0. Small cases: rank 0, a DVR spectrum, A¹ (H¹=0 by partial fractions) and an imperfect k all agree with the statement. There is no duplicate: the closest nodes are regular-curve-divisor-calculus, the étale G_m divisor sequence and generic-kummer-residues, and none states this sequence for finite locally free modules. There is no cycle, no SGA citation, and live/side-live still have the item unsplit. The off-unit tool_uses are generic and I accept them. FIX (C1/C4): step 6 used H^0 = Γ, i.e. R^0Γ ≅ Γ, which pqf-def-cohomology does not state. I added lem-weil-pbc-right-derived-universal-delta-functor (R^0v ≅ v) to step 6's text and uses; it was already in proof_deps and tool_uses. Advisory: the unchanged base statement uses i_{x,*} and the direct sum without citing a definition, but step 3 defines both explicitly.; 1 file(s) fixed by the reviewer"
  }
 }
