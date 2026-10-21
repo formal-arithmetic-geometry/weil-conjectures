@@ -14,11 +14,121 @@
   "def-pur-kinjective-complex",
   "def-pc-tensor-complex-sheaves",
   "def-pur-hom-complex",
-  "def-coef-ringed-tensor-hom-model"
+  "def-coef-ringed-tensor-hom-model",
+  "def-pc-flat-sheaf-modules"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $P$. By [lem-pur-kflat-tensor-quasiiso-independent], $A\\mapsto Q(A\\otimes_R P)$ inverts all quasi-isomorphisms. Thus [lem-weil-pbc-localization-universal-property](1) gives a functor $T_P:D(R)\\to D(R)$ with $T_P(QA)=Q(A\\otimes_R P)$, up to its specified factorization isomorphism. On the full subcategory of K-flat complexes with flat terms, the normalized comparisons $c_{F,P}:Q(F\\otimes P)\\xrightarrow{\\sim}QF\\otimes^{\\mathbf L}QP$ are natural [def-coef-ringed-tensor-hom-model]. The equivalence $W^{-1}\\mathcal P_R\\simeq D(R)$ of [lem-weil-pbc-site-derived-tensor-descent], together with [lem-weil-pbc-localization-universal-property](2), extends this isomorphism uniquely to $T_P\\cong(-\\otimes^{\\mathbf L}QP)$. Denote its component by $c_{A,P}$. Concretely, choose a K-flat flat-term resolution $q:F\\to A$ using [lem-pc-kflat-resolution]. Then\n$$c_{A,P}=(Qq\\otimes^{\\mathbf L}1)\\circ c_{F,P}\\circ Q(q\\otimes1)^{-1}.$$\nBoth inverted maps are isomorphisms by the cited quasi-isomorphism-preservation result and localization. Uniqueness of the extension proves independence of $q$ and naturality in $A$. For a chain map $b:P\\to P'$ between the allowed second factors, naturality in $P$ on K-flat $F$ is part of the normalized comparison; faithfulness of restriction along the same equivalence gives the naturality square for every $A$.",
+   "uses": [
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "lem-weil-pbc-localization-universal-property",
+    "def-coef-ringed-tensor-hom-model",
+    "lem-weil-pbc-site-derived-tensor-descent",
+    "lem-pc-kflat-resolution"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YP (lemma-K-flat-quasi-isomorphism), 06YS (lemma-K-flat-resolution), 06YU (definition-derived-tor and its preceding construction); agent comparison with the fixed normalized tensor."
+   }
+  },
+  {
+   "text": "Construct $\\widetilde f$ on each summand $A^n\\otimes_R P^m$ by the bilinear map $(a,p)\\mapsto f^n(a)^m(p)$. This is compatible with restriction, so the sheafification defining the sheaf tensor and then the direct-sum universal property give a sheaf morphism in every total degree [def-pur-sheaf-tensor-product; def-pc-tensor-complex-sheaves]. The chain-map identity for $f$, with the differential of [def-pur-hom-complex], reads\n$$d_E(f(a)(p))=f(d_Aa)(p)+(-1)^n f(a)(d_Pp).$$\nThis is exactly the total-tensor chain-map identity. Hence these morphisms form $\\widetilde f:A\\otimes P\\to E$, with no additional sign in this order of factors. Each input tensor section is first mapped by the actual sheafification unit and then the actual total-summand inclusion; the formula specifies those generators, rather than asserting that every tensor-sheaf section is a global pure tensor.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A90 (lemma-compose), underlying component calculation with the differentials of Section 0A8X (section-hom-complexes)."
+   }
+  },
+  {
+   "text": "The factor interchange on homogeneous sections is $s(a\\otimes p)=(-1)^{nm}p\\otimes a$ for $a\\in A^n$, $p\\in P^m$, extended by sheafification and direct sums [def-pur-sheaf-tensor-product; def-pc-tensor-complex-sheaves]. In $s\\,d(a\\otimes p)$ the coefficients of $p\\otimes d_Aa$ and $d_Pp\\otimes a$ are respectively $(-1)^{(n+1)m}$ and $(-1)^{n+n(m+1)}=(-1)^{nm}$. In $d\\,s(a\\otimes p)$ they are $(-1)^{nm+m}$ and $(-1)^{nm}$, respectively. Thus $s$ is a chain map; the reversed interchange is its inverse since $(-1)^{2nm}=1$. This proves the asserted interchange sign, and permits use of right-K-flat quasi-isomorphism preservation on either tensor side below.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YU (definition-derived-tor), subsequent commutativity display and its sign convention; expanded direct calculation."
+   }
+  },
+  {
+   "text": "Let $u:E\\to I(E)$ be the fixed functorial K-injective augmentation [prop-pur-kinjective-resolutions-exist; def-coef-hom-representative-evaluation]. Since $E$ and $I(E)$ are K-injective, [lem-pur-rhom-well-defined] with first-variable identity gives a quasi-isomorphism $\\mathcal Hom(P,u)$. The localization factorization of [def-coef-hom-representative-evaluation] consequently identifies $Q\\mathcal Hom(P,E)$ with $H(QP,QE)$: first apply $Q\\mathcal Hom(P,u)$, then the inverse of $H(QP,QE)\\cong Q\\mathcal Hom(P,I(E))$. Write $h:QA\\to H(QP,QE)$ for the image of $Qf$ under this identification. This uses K-injectivity of $E$, not termwise injectivity of $E$; only its chosen replacement is required to have injective terms.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "def-coef-hom-representative-evaluation",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A95 (lemma-RHom-well-defined) and Section 08J7 (section-internal-hom), construction with a chosen K-injective representative."
+   }
+  },
+  {
+   "text": "Let $\\tau$ denote inverse closed transposition from $\\operatorname{Hom}(QA,H(QP,QE))$ to $\\operatorname{Hom}(QA\\otimes^{\\mathbf L}QP,QE)$. Use the resolution $q:F\\to A$ of step 1 and the chain map $\\phi=\\mathcal Hom(P,u)\\circ f\\circ q:F\\to\\mathcal Hom(P,I(E))$. Both $F$ and $P$ are K-flat, so the normalization in [def-coef-ringed-tensor-hom-model] applies. Step 2 identifies its uncurried chain map with $u\\circ\\widetilde f\\circ(q\\otimes1)$, since both send $x\\otimes p$ to $u(f(qx)(p))$. With the fixed inverse localized augmentation of [def-coef-hom-representative-evaluation], normalization says\n$$\\tau(h\\circ Qq)\\circ c_{F,P}=Q(u)^{-1}\\circ Q(u\\circ\\widetilde f\\circ(q\\otimes1))=Q(\\widetilde f)\\circ Q(q\\otimes1).$$\nNaturality of the given adjunction gives $\\tau(h\\circ Qq)=\\tau(h)\\circ(Qq\\otimes^{\\mathbf L}1)$. Substitute $c_{A,P}\\circ Q(q\\otimes1)=(Qq\\otimes^{\\mathbf L}1)\\circ c_{F,P}$ from step 1. Cancel the isomorphism $Q(q\\otimes1)$ to obtain\n$$\\tau(h)\\circ c_{A,P}=Q(\\widetilde f).$$\nThis is the required representative formula for the fixed normalized derived adjunction; it does not introduce a new adjunction.",
+   "uses": [
+    "def-coef-ringed-tensor-hom-model",
+    "def-coef-hom-representative-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J9 (lemma-internal-hom), proof; agent extension of the fixed two-K-flat normalization by a resolution and cancellation."
+   }
+  },
+  {
+   "text": "For chain maps $a:A'\\to A$, $b:P'\\to P$ and $e:E\\to E'$ with $P',P$ K-flat with flat terms and $E,E'$ K-injective, put $f'=\\mathcal Hom(b,e)\\circ f\\circ a$. On a homogeneous generator,\n$$\\widetilde {f'}(x\\otimes y)=e(f(a(x))(b(y)))=(e\\circ\\widetilde f\\circ(a\\otimes b))(x\\otimes y).$$\nThus the two chain maps are equal by the tensor and direct-sum universal properties [def-pur-sheaf-tensor-product; def-pc-tensor-complex-sheaves; def-pur-hom-complex]. The fixed augmentation is natural [prop-pur-kinjective-resolutions-exist], the Hom localization factorization is the fixed one [def-coef-hom-representative-evaluation], and $c$ is natural by step 1. Localizing this equality and using step 5 proves simultaneous naturality of the transpose formula. No sign appears for $a,b,e$, which have degree zero.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves",
+    "def-pur-hom-complex",
+    "prop-pur-kinjective-resolutions-exist",
+    "def-coef-hom-representative-evaluation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0A90 (lemma-compose), functoriality; Tag 08J9 (lemma-internal-hom), functoriality after localization."
+   }
+  },
+  {
+   "text": "For completeness all representative quasi-isomorphisms used in step 6 become invertible on the indicated models. In $A$ this follows directly from [lem-pur-kflat-tensor-quasiiso-independent]. For a quasi-isomorphism $b:P'\\to P$, fix $q:F\\to A$ as in step 1. In the square with top $F\\otimes P'\\xrightarrow{1\\otimes b}F\\otimes P$ and bottom $A\\otimes P'\\xrightarrow{1\\otimes b}A\\otimes P$, both vertical maps $q\\otimes1$ are quasi-isomorphisms by that same lemma. The top map is also one: conjugate it by the signed symmetries of step 3 to $b\\otimes1_F$, and apply the lemma using K-flatness of $F$. After localization the bottom map is a composite of three isomorphisms. Thus the tensor model inverts $b$ without K-flatness of $A$. Quasi-isomorphisms between the allowed $P$ representatives, and between the K-injective $E$ representatives, induce quasi-isomorphisms on the Hom side by [lem-pur-rhom-well-defined]. The equalities of step 6 therefore remain equalities after solving for any of these inverse isomorphisms. Independence of a chosen $q$ is already part of step 1. None of these arguments truncates $A$ or requires its terms to be flat; the total degrees use direct sums and the Hom degrees use products exactly as defined.",
+   "uses": [
+    "lem-pur-kflat-tensor-quasiiso-independent",
+    "lem-pur-rhom-well-defined"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YT (lemma-derived-tor-quasi-isomorphism-other-side), proof square using 06YP; Tag 0A95 (lemma-RHom-well-defined)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-weil-pbc-localization-universal-property",
+  "def-coef-ringed-tensor-hom-model",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pc-kflat-resolution",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-tensor-complex-sheaves",
+  "def-pur-hom-complex",
+  "prop-pur-kinjective-resolutions-exist",
+  "def-coef-hom-representative-evaluation",
+  "lem-pur-rhom-well-defined"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YP, 06YS, 06YT, 06YU, 0A90, 0A95 and 08J9; representative-normalized refinement and explicit chain calculations."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -68,10 +178,38 @@
    "results": "Returned HomologicalComplex.tensorHom, HomologicalComplex.HasTensor, HomologicalComplex.ιTensorObj, HomologicalComplex.tensorObj, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.HasGoodTensor₂₃, CategoryTheory.Tor'_map_app, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
    "date": "2026-10-21",
    "verdict": "no match: these are ordinary module adjunction, Hom/cochain or tensor infrastructure, not this normalized ring-sheaf complex assertion; inspected the relevant source definitions."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Evaluation represents derived tensor Hom transposition using a K-flat complex and K-injective target",
+   "results": "Returned CategoryTheory.exp.ev, CategoryTheory.ihom.ev, FGModuleCat.FGModuleCatEvaluation, transpose_dualTensorHom, ModuleCat.ihom_ev_app, FGModuleCat.FGModuleCatEvaluation_apply', HomologicalComplex.evalCompCoyonedaCorepresentableBySingle_homEquiv_apply, LinearEquiv.trans_dualMap_symm_flip",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary tensor/monoidal and K-injective infrastructure does not state the normalized one-K-flat derived chain transpose for ring-sheaf complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor Hom adjunction for sheaves computed by a K-flat second factor and a K-injective target with arbitrary unbounded first complex",
+   "results": "Returned CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, CategoryTheory.Tor'_map_app, instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite, CategoryTheory.Tor_obj, CategoryTheory.Tor_map, CategoryTheory.Tor'_obj_map",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary tensor/monoidal and K-injective infrastructure does not state the normalized one-K-flat derived chain transpose for ring-sheaf complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective|tensorHom|currying",
+   "results": "Returned Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean, Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary tensor/monoidal and K-injective infrastructure does not state the normalized one-K-flat derived chain transpose for ring-sheaf complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Cochain complex tensor product of a quasi-isomorphism with a K-flat complex preserves quasi-isomorphisms and currying chain maps is evaluation",
+   "results": "Returned HomologicalComplex.HasGoodTensor₁₂, CochainComplex.cm5b.instQuasiIsoIntP, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.HasTensor, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, DerivedCategory.instIsIsoMapCochainComplexIntQ, Module.Flat.rTensor_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match: ordinary tensor/monoidal and K-injective infrastructure does not state the normalized one-K-flat derived chain transpose for ring-sheaf complexes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dc-hom-filtered-colimit",
@@ -90,5 +228,54 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-hom-kflat-chain-transpose",
+  "worker": "stage1",
+  "summary": "Expanded the one-K-flat chain transpose into seven steps: localization and comparison, evaluation chain map, Koszul symmetry, fixed K-injective target comparison, two-K-flat normalization and cancellation, naturality, and inversion of representative quasi-isomorphisms. Reused existing tools throughout; no new nodes and no statement change. Added the definition of flat terms to statement dependencies.",
+  "blueprint": "The final paragraph of lem-sfb-dc-hom-preserves.proof.md, 'by descending to a finite extension E', as refined by lem-sfb-dc-hom-filtered-colimit: its one-K-flat chain-transpose requirement. This supplies representative calculus only, not a new finiteness proof.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Step 1 chooses a flat-term K-flat replacement of an arbitrary unbounded module-sheaf complex; this is a generic ringed-site resolution tool, not a constructibility argument."
+   },
+   {
+    "node": "lem-pur-kflat-tensor-quasiiso-independent",
+    "why": "Steps 1 and 7 tensor a quasi-isomorphism with a fixed K-flat factor. This generic ringed-site tool supplies precisely the one-sided quasi-isomorphism preservation needed for the chain model."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Step 1 factors a quasi-isomorphism-inverting functor and its natural comparison through localization; this is a category-theoretic tool."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "Step 1 uses the equivalence from the localization of flat-term K-flat complexes to the full derived category, to extend the fixed comparison uniquely; no constructibility route is replaced."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Steps 4 and 6 use the fixed natural K-injective augmentation for ordinary ringed-site module complexes."
+   },
+   {
+    "node": "lem-pur-rhom-well-defined",
+    "why": "Steps 4 and 7 compare actual Hom representatives under quasi-isomorphisms into K-injective targets, a generic ringed-site tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-kflat-tensor-quasiiso-independent",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-pur-rhom-well-defined"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q117-72a16c6eb",
+  "group": "Q117",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q117-72a16c6eb (reviewer sub-agent of L); spot-checked: I read the delivery in full. It makes no new nodes, and the statement is byte-identical to side-live; the only stmt_deps change adds def-pc-flat-sheaf-modules for the stated 'flat terms'. The item has no repair note (so it is not a re-split) and is not in the dropped list. No dependency is merged, there is no cycle (closure of 218 nodes), and proof_deps equals the union of the uses. I read Stacks 08J9 and 06YT in the source, and every cited label matches tags/tags. Step 1: the K-flat tensor quasi-iso lemma lets A↦Q(A⊗P) factor through localization (1); the equivalence in the descent node with localization (2)/(3) extends the normalized c_{F,P} uniquely, and c_{A,P}=(Qq⊗1)c_{F,P}Q(q⊗1)^{-1} follows by naturality. Step 2: with d(g)=d_E g−(−1)^n g d_P, f̃ is a chain map with no sign. Step 3: I recomputed the Koszul coefficients ((n+1)m vs nm+m, and nm vs nm) and they agree. Step 4: Hom(P,u) is a quasi-iso by rhom-well-defined with E and I(E) K-injective. Step 5: φ=Hom(P,u)fq meets the normalization of def-coef-ringed-tensor-hom-model with ψ=u f̃(q⊗1); adjunction naturality and cancelling Q(q⊗1) give τ(h)c_{A,P}=Q(f̃), and I checked the algebra. Step 6: the variances are right. Step 7: this is exactly the 06YT square, with the top map handled by the step-3 symmetry and the K-flatness of F. Small cases checked: A=0 or P=0, degree 0 (classical uncurrying), odd degrees (sign −1), and non-flat or unbounded A. The closest duplicate candidates are not duplicates: lem-sf-coefficient-tensor-curry-normalization requires both factors K-flat, and the flat-evaluation-roof and étale chain-transpose nodes are about other maps. I accept the six declared tool uses as generic ringed-site and categorical black boxes: kflat-resolution, kflat-tensor-quasiiso, localization-UP (a Mathlib leaf), site-derived-tensor-descent, kinjective-resolutions-exist and rhom-well-defined. No fixes."
  }
 }
