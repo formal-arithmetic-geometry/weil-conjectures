@@ -20277,3 +20277,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:11 L: merged deliver/NV/lem-fix-reduction-open-etale-origin (reviewer PASS; first push; new nodes: 0)
 - 04:11 L: merged deliver/NU/lem-fix-proper-etale-origin-scalar-isomorphism (reviewer PASS; first push; new nodes: 0)
 - 04:11 L: merged deliver/O4/sk-def-pe-derived-completion (reviewer FIX; after a return; new nodes: 2)
+- 04:11 L: merged deliver/NN/lem-sf-ringed-open-total-tensor-kflat (reviewer PASS; first push; new nodes: 0)

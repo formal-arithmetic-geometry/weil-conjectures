@@ -17,9 +17,87 @@
   "def-pc-kflat-complex",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $T^{p,q}=P^p\\otimes_{R_U}j^*C^q$. The adjunction $j_!\\dashv j^*$ of [lem-pur-site-restriction-module-adjunction-exact] and [lem-weil-pbc-left-adjoint-preserves-colimits] show that the canonical map $\\bigoplus_{p+q=n}j_!T^{p,q}\\longrightarrow j_!(\\bigoplus_{p+q=n}T^{p,q})$ is invertible. The index is the small discrete set $\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$. Direct sums exist by [def-pc-tensor-complex-sheaves]. Compose its inverse with the direct sum of the natural sheaf isomorphisms $\\theta_{p,q}:j_!T^{p,q}\\xrightarrow{\\sim}(j_!P^p)\\otimes_R C^q$ of [lem-weil-pbc-ringed-slice-extension-tensor]. This defines an isomorphism $\\Phi^n$ in each degree. In particular, $\\Phi^n\\circ j_!(\\iota_{p,q})=\\iota_{p,q}\\circ\\theta_{p,q}$, with the target insertion into its total degree.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-weil-pbc-left-adjoint-preserves-colimits",
+    "def-pc-tensor-complex-sheaves",
+    "lem-weil-pbc-ringed-slice-extension-tensor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0E8I (lemma-j-shriek-and-tensor); categories.tex Tag 0038 (lemma-adjoint-exact), applied to the direct sums of Homology Tag 012Z"
+   }
+  },
+  {
+   "text": "Let $J=j_!$. Naturality of $\\theta$ in [lem-weil-pbc-ringed-slice-extension-tensor], first for $(d_P^p,1)$ and then for $(1,d_C^q)$, gives $\\theta_{p+1,q}J(d_P^p\\otimes1)=(Jd_P^p\\otimes1)\\theta_{p,q}$ and $\\theta_{p,q+1}J(1\\otimes j^*d_C^q)=(1\\otimes d_C^q)\\theta_{p,q}$. Since the functors are additive by their exactness [lem-pur-site-restriction-module-adjunction-exact], they preserve the sign $(-1)^p$. Add the two equations and insert into total degree $n+1$ using the differential formula of [def-pc-tensor-complex-sheaves]. The result on every summand is $d\\Phi^nJ(\\iota_{p,q})=\\Phi^{n+1}J(d)J(\\iota_{p,q})$; these maps determine a map out of the coproduct from step 1. Thus $\\Phi$ is a chain isomorphism. Replacing the two differentials in the same naturality equations by the components of arbitrary chain maps proves naturality in both variables. No infinite sum of maps into a fixed summand is used: each source summand has only the two specified differential components.",
+   "uses": [
+    "lem-weil-pbc-ringed-slice-extension-tensor",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z (definition-associated-simple-complex); sites-modules.tex Tag 0E8I, naturality of the sheaf tensor comparison"
+   }
+  },
+  {
+   "text": "We will use the tensor factors in the order of the K-flatness test. For any two complexes $A,B$, the sectionwise map $x\\otimes y\\mapsto y\\otimes x$ is balanced over the commutative coefficient ring and has itself as inverse. It respects restrictions, so sheafification gives the ordinary tensor symmetry [def-pur-sheaf-tensor-product]. On total complexes define $\\tau_{A,B}$ on the $(a,b)$ summand by $x\\otimes y\\mapsto(-1)^{ab}y\\otimes x$ into the $(b,a)$ summand [def-pc-tensor-complex-sheaves]. The coefficient of $d_By\\otimes x$ in both $d\\tau$ and $\\tau d$ is $(-1)^{ab}$, because $a+a(b+1)\\equiv ab\\pmod2$; that of $y\\otimes d_Ax$ is $(-1)^{ab+b}=(-1)^{(a+1)b}$. Hence this is a chain map and $\\tau_{B,A}\\tau_{A,B}=1$. The direct sum universal property makes this a chain isomorphism without boundedness assumptions.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 012Z (definition-associated-simple-complex), explicit signed interchange; sites-modules.tex Tag 03EK (section-tensor-product)"
+   }
+  },
+  {
+   "text": "Suppose $P$ is K-flat, and let $C$ be any acyclic complex of $R$-modules. By exactness of restriction [lem-pur-site-restriction-module-adjunction-exact] and the homology comparison in clause (c) of [lem-sp-exact-functor-preserves-homology], $H^n(j^*C)\\cong j^*H^n(C)=0$. Thus $\\operatorname{Tot}(j^*C\\otimes_{R_U}P)$ is acyclic by [def-pc-kflat-complex]. Step 3 identifies it with $\\operatorname{Tot}(P\\otimes_{R_U}j^*C)$. Exactness of $j_!$ and the same homology comparison show that applying $j_!$ termwise keeps it acyclic. Steps 1 and 2 identify the result with $\\operatorname{Tot}(j_!P\\otimes_R C)$, and step 3 identifies this with $\\operatorname{Tot}(C\\otimes_R j_!P)$. Consequently the latter is acyclic for every acyclic $C$, exactly the assertion that $j_!P$ is K-flat. Exact functors send zero objects to zero objects, so each displayed zero follows from the cited homology comparison.",
+   "uses": [
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sp-exact-functor-preserves-homology",
+    "def-pc-kflat-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat); sites-modules.tex Tag 03DJ (lemma-extension-by-zero-exact); homology.tex Tag 010N (lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "Let $f:P\\to H$ be a K-flat resolution, hence a quasi-isomorphism with $P$ K-flat [def-pc-kflat-complex]. The natural homology comparison of [lem-sp-exact-functor-preserves-homology], applied to the exact functor $j_!$ of [lem-pur-site-restriction-module-adjunction-exact], identifies $H^n(j_!f)$ with $j_!H^n(f)$. The latter is invertible since a functor preserves isomorphisms. Thus $j_!f$ is a quasi-isomorphism, and step 4 makes its source K-flat; it is a K-flat resolution of $j_!H$. All arguments use the localized ring sheaf $R_U$ and countable coproducts, so no constant-coefficient or boundedness hypothesis has entered.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN (definition-K-flat), K-flat resolution terminology of Tag 06YS; homology.tex Tag 010N (lemma-exact-functor)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-weil-pbc-left-adjoint-preserves-colimits",
+  "def-pc-tensor-complex-sheaves",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "def-pur-sheaf-tensor-product",
+  "lem-sp-exact-functor-preserves-homology",
+  "def-pc-kflat-complex"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I (lemma-j-shriek-and-tensor), extended to direct-sum total complexes using categories.tex Tag 0038, homology.tex Tags 012Z and 010N, and the acyclic tensor test of sites-cohomology.tex Tag 06YN. The chain-level refinement and signed interchange are written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -55,10 +133,52 @@
    "results": "8 hits: Module.flat_of_isLocalized_span, CategoryTheory.instIsIsoFromLeftDerivedZero', CategoryTheory.Tor', CategoryTheory.ProjectiveResolution.instIsIsoFromLeftDerivedZero'Self, CategoryTheory.instIsIsoAppFromLeftDerivedZeroOfProjective, CategoryTheory.instIsIsoAppFromLeftDerivedZero, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact. Only flat modules over rings, ordinary projective resolutions and complex-index extensions; no ringed-site total-tensor comparison for extension by zero or preservation of K-flat complexes.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero on a ringed slice site commutes with unbounded total tensor complexes and preserves K-flat resolutions",
+   "results": "8 hits: HomologicalComplex.HasGoodTensor₁₂, CategoryTheory.Tor', CategoryTheory.Tor, Module.Flat.rTensor_shortComplex_exact, Module.Flat.lTensor_shortComplex_exact, ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat, Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_preserves_shortComplex_exact. None states the ringed-site extension total-tensor comparison and K-flat preservation. HasGoodTensor is a condition on associativity of complex tensor, and the other hits concern ordinary flat modules or presheaf tensor structure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|extensionByZero|lowerShriek",
+   "results": "0 hits: none. Search directory Mathlib/Algebra. None states the ringed-site extension total-tensor comparison and K-flat preservation. HasGoodTensor is a condition on associativity of complex tensor, and the other hits concern ordinary flat modules or presheaf tensor structure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The projection formula for extension by zero on a localized ringed site gives an isomorphism on total tensor complexes and preserves K-flat complexes",
+   "results": "8 hits: Module.Flat.of_isLocalizedModule, RingHom.Flat.ofLocalizationSpanTarget, RingHom.Flat.holdsForLocalizationAway, Module.projective_of_isLocalizedModule, Module.Flat.localizedModule, FractionalIdeal.extended_zero, RingHom.Flat.ofLocalizationPrime, Module.Flat.rTensor_shortComplex_exact. None states the ringed-site extension total-tensor comparison and K-flat preservation. HasGoodTensor is a condition on associativity of complex tensor, and the other hits concern ordinary flat modules or presheaf tensor structure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "10 hits: PresheafOfModulesOfCommRing.Monoidal.tensorObj, PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj, PresheafOfModulesOfCommRing.tensorObj_obj, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft, PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight, PresheafOfModulesOfCommRing.Monoidal.tensorHom, PresheafOfModulesOfCommRing.Monoidal.tensorObjMap, PresheafOfModulesOfCommRing.Monoidal.tensorHom_app. None states the ringed-site extension total-tensor comparison and K-flat preservation. HasGoodTensor is a condition on associativity of complex tensor, and the other hits concern ordinary flat modules or presheaf tensor structure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact left adjoint extension of sheaves of modules along a localized site satisfies the tensor projection formula degree by degree and sends homotopically flat complexes to homotopically flat complexes",
+   "results": "8 hits: Module.Flat.lTensor_shortComplex_exact, LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_exact', Module.Flat.iff_lTensor_preserves_shortComplex_exact, Module.Flat.iff_rTensor_exact', Module.Flat.iff_rTensor_preserves_shortComplex_exact, Module.Flat.iff_lTensor_exact. None states the ringed-site extension total-tensor comparison and K-flat preservation. HasGoodTensor is a condition on associativity of complex tensor, and the other hits concern ordinary flat modules or presheaf tensor structure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "HasGoodTensor₁₂|^def tensorObj|^def tensorHom",
+   "results": "5 hits: 68, 81, 111, 112, 113. Search directory Mathlib/Algebra/Homology/Monoidal.lean. None states the ringed-site extension total-tensor comparison and K-flat preservation. HasGoodTensor is a condition on associativity of complex tensor, and the other hits concern ordinary flat modules or presheaf tensor structure.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-integral-compact-support-constructible",
@@ -78,5 +198,29 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sf-ringed-open-total-tensor-kflat",
+  "worker": "stage1",
+  "summary": "Five steps construct the total-degree isomorphisms, verify both differential components and naturality, check signed tensor interchange explicitly, apply the acyclic tensor test, and preserve the resolution quasi-isomorphism. The statement is unchanged; all inputs already have DAG nodes and no new node is created. Actual Mathlib searches are appended from searches.jsonl.",
+  "blueprint": "Serves the integral construction Rf_!K = Rlim_n Res_n Rf_{!,n}K_n in def-weil-integral-rational-qbar-compact-support (current snapshot: sec-six-functors-basics/sk-prop-int-brown), through lem-sf-integral-compact-support-constructible step 2: compute open extension and coefficient reduction on a K-flat representative. No unit route is replaced.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
+    "why": "Generic ringed-site sheaf tensor isomorphism is the degreewise input to the total-complex comparison; this unit has no other general ringed-site projection formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-slice-extension-tensor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NN-4a0a9bfc6",
+  "group": "NN",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-4a0a9bfc6 (reviewer sub-agent of L); spot-checked: I read the item, all 5 steps and every cited statement in full: the adjunction/exactness node, the 0038 colimit leaf, Tot (012Z), the ringed-slice tensor iso (0E8I), the sheaf tensor definition, 010N(c) and K-flat (06YN/06YS). I checked every Stacks tag against tags/tags and read 0E8I and sites-cohomology lemma-restriction-K-flat; the latter is the mirror argument. Step 1: j_! is a left adjoint, so it commutes with the countable sum in each degree, and ⊕θ_{p,q} gives Φ^n with the right types. Step 2: θ is natural in G along d_P and in F along d_C|_U, the sign (−1)^p is the same on both sides, and the check on coproduct injections is legitimate; naturality in chain maps follows the same way. Step 3: I recomputed both Koszul coefficients of the swap: (−1)^{ab} on dy⊗x and (−1)^{(a+1)b} on y⊗dx; τ²=1. Step 4: it puts the acyclic test complex FIRST, as the K-flat definition requires: j^*C is acyclic, so Tot(j^*C⊗P) is acyclic; then swap, j_! is exact, steps 1–2, swap back. Step 5: H^n(j_!f) ≅ j_!H^n(f) is an iso. Edge cases checked: P or C zero, R=0, degree-0 case equals 0E8I, sign at (1,1), unbounded complexes, non-constant ring. The delivery adds no new nodes, so D1/D2 cannot apply; proof_deps equals the union of the uses. Duplicate search found only analogues that are not this statement: étale sum or open extension with constant coefficients (lem-pur-etale-sum-*, lem-coef-etale-open-*, lem-pur-etale-open-derived-tensor), restriction K-flat, and derived scheme projection nodes. Live side node is still unsplit with an identical statement; the item is not dropped and has no repair note. Accepted tool_use: lem-weil-pbc-ringed-slice-extension-tensor, the generic ringed-site 0E8I projection formula; the unit has uses:[] and no in-unit ringed-site equivalent. No SGA. Advisory: step 5 reaches def-pc-quasi-iso-modules only through the K-flat definition. No fixes."
+ }
 }
