@@ -19,9 +19,121 @@
   "def-weil-pbc-inverse-image",
   "lem-weil-pbc-comparison-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-cbc-comparison-pullback-sections] to the underlying set sheaf of $\\mu_{m,T}^{\\mathrm{et}}$. At each weakly etale $f:W\\to T$ it identifies its comparison inverse image with $\\Gamma(W_{\\mathrm{et}},f_{\\mathrm{et}}^{-1}\\mu_{m,T}^{\\mathrm{et}})$. Since $m$ is invertible on $T$, it is invertible on $W$. The root pullback isomorphism of [lem-asd-etale-finite-twist-pullback] identifies the latter group with $\\mu_{m,W}^{\\mathrm{et}}(W)$, exactly the roots in $\\Gamma(W,\\mathcal O_W)^\\times$. Its compatibility with composition identifies restriction along $g:W'\\to W$ with $g^\\sharp$ on those roots. These bijections therefore assemble to $c_{m,T}$ with target [def-pur-roots-of-unity-sheaf]. Multiplication of roots and integer powers are preserved by the root pullback maps; thus this is an abelian-sheaf isomorphism. Both sheaves are killed by $m$, so [lem-pur-torsion-sheaf-constant-module] makes it $(\\mathbf Z/m)$-linear. This establishes the stated sectionwise identification on every test, without an affineness restriction.",
+   "uses": [
+    "lem-cbc-comparison-pullback-sections",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-roots-of-unity-sheaf",
+    "lem-pur-torsion-sheaf-constant-module"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, lemma-describe-pullback-from-etale, applied to the finite etale root sheaf"
+   }
+  },
+  {
+   "text": "For etale $U/T$, the unit clause of [lem-cbc-comparison-pullback-sections] identifies the comparison unit on a root $z$ with that same section over $U$. Restricting along any $T$-map $f:W\\to U$, the restriction calculation of step 1 sends it to $f^\\sharp(z)$. For $m\\mid m'$ put $q=m'/m$. Naturality of that section comparison in the coefficient sheaf, and the power transition in [def-pur-roots-of-unity-sheaf], identify the two composites with $z\\mapsto z^q$ on every weakly etale test. In particular $f^\\sharp(z^q)=f^\\sharp(z)^q$. This proves the unit normalization and the root-only power square.",
+   "uses": [
+    "lem-cbc-comparison-pullback-sections",
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ, naturality of the section formula and its restriction to etale objects"
+   }
+  },
+  {
+   "text": "Put $B=(\\mathbf Z/m)_{T_{\\mathrm{et}}}$. The geometric inverse image of [def-weil-pbc-site-comparison-morphism] transports the ring and module operations by finite products, giving the algebraic inverse-image presentation of [def-weil-pbc-algebraic-inverse-image]. Apply [lem-weil-pbc-algebraic-inverse-image-tensor-comparison] to $M=\\mu_{m,T}^{\\mathrm{et}}$ and $N=A_{T_{\\mathrm{et}}}$ as $B$-modules. By [lem-sf-comparison-pullback-exact](1), with coefficient rings $\\mathbf Z/m$ and $A$, the pulled-back constant rings identify with the corresponding pro-etale constant rings and the fixed-coefficient module pullback is the underlying inverse image. These identifications preserve constant sections: their adjuncts are the constant-section maps defining the comparison. Hence the tensor comparison followed by $c_{m,T}\\otimes1$ gives an $A$-linear isomorphism $\\sigma_{m,T}$. The $A$-action is multiplication on the second tensor factor; naturality of the tensor comparison in that multiplication makes this map $A$-linear. Its generalized pure-tensor formula and step 2 give $z\\otimes a\\mapsto f^\\sharp(z)\\otimes a$ on the unit followed by restriction. This is the asserted balanced-tensor map; no flatness assumption on $A$ over $\\mathbf Z/m$ was used.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "lem-sf-comparison-pullback-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, lemma-tensor-product-pullback; constant-ring identifications and the root comparison"
+   }
+  },
+  {
+   "text": "We check the root-only scheme square with the canonical $\\kappa_v$ of [lem-weil-pbc-comparison-pullback]. The right adjoints of $v_{\\mathrm{proet}}^{-1}\\nu_T^{-1}$ and $\\nu_{T'}^{-1}v_{\\mathrm{et}}^{-1}$ agree: at etale $U/T$ both evaluate a sheaf $G$ as $G(T'\\times_TU)$, by [def-weil-pbc-site-comparison-morphism], [def-weil-pbc-direct-image] and [def-weil-proetale-inverse-image]. By [def-per-site-comparison-pullback-data], the canonical isomorphism $\\nu_{T'}^*v_{\\mathrm{et}}^{-1}\\cong v_{\\mathrm{proet}}^{-1}\\nu_T^*$ of [lem-weil-pbc-comparison-pullback] is defined as the adjunction mate of this sectionwise identification of direct images. With the composite adjunctions of [def-weil-pbc-composite-adjunction], [lem-weil-pbc-conjugate-iso-unit-equation] makes it the unique isomorphism carrying one composite adjunction unit to the other; $\\kappa_v$ is its inverse. Take adjuncts of the two root-square arrows under these composite adjunctions. At $U$, both adjuncts send $z$ to $\\mathrm{pr}_U^\\sharp(z)$: on one side this is the definition [def-pur-roots-of-unity-inverse-image] after step 2; on the other it is the etale root pullback of [lem-asd-etale-finite-twist-pullback], then step 1 on $T'$. Adjunction is a bijection on maps, so the root square commutes. All maps here are $(\\mathbf Z/m)$-linear by their power formulas.",
+   "uses": [
+    "lem-weil-pbc-comparison-pullback",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-proetale-inverse-image",
+    "def-weil-pbc-composite-adjunction",
+    "lem-weil-pbc-conjugate-iso-unit-equation",
+    "def-pur-roots-of-unity-inverse-image",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-weil-pbc-direct-image",
+    "def-per-site-comparison-pullback-data"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 0GLZ together with canonical comparison of the two composite inverse images; adjunction-unit calculation"
+   }
+  },
+  {
+   "text": "For tensor coefficients the pro-etale constant-ring map is the constant-section isomorphism of [prop-weil-pbc-proetale-constant-ring-map], applied to $A$ and $\\mathbf Z/m$. Thus $d_m^v$ is induced by the root map just used and the unchanged scalars. The tensor comparisons for all the geometric inverse images have the normalized formula of [lem-weil-pbc-algebraic-inverse-image-tensor-comparison]; their algebraic lifts are the transported operations in the inverse-image definitions. Take composite adjuncts of the two sides of the desired equation, as in step 4. On every pure section $z\\otimes a$ of $E_{m,T}$ over etale $U/T$ they both give $\\mathrm{pr}_U^\\sharp(z)\\otimes a$: first use the formula for $\\sigma$, then the root-square formula and the constant-section map. A scalar section is locally a constant section by [def-weil-pbc-constant-sheaf], so the equality holds for arbitrary scalar sections too. The tensor universal property [lem-pc-sites-sheaf-tensor-bilinear-universal] shows the adjuncts are equal on the sheaf tensor, hence the original arrows are equal. This proves $d_m^v v_{\\mathrm{proet}}^*\\sigma_{m,T}=\\sigma_{m,T'}\\nu_{T'}^*(e_m^v)\\kappa_v$. Every factor on the right and $v_{\\mathrm{proet}}^*\\sigma_{m,T}$ is invertible, so $d_m^v$ is invertible. Invertibility of $m$ on $T'$ follows by pulling back its inverse.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "def-weil-pbc-constant-sheaf",
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "def-weil-pbc-composite-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, pure-tensor normalization; equality tested after adjunction and bilinear universality"
+   }
+  },
+  {
+   "text": "For an identity scheme map the root formula is $z\\mapsto z$; for $T''\\xrightarrow{w}T'\\xrightarrow{v}T$ the iterated formula is $z\\mapsto\\mathrm{pr}_w^\\sharp(\\mathrm{pr}_v^\\sharp z)$, equal to pullback along the composite under the canonical fibre-product identification. The constant scalar is unchanged. Equality of the corresponding adjuncts, then [lem-pc-sites-sheaf-tensor-bilinear-universal], proves the identity and composition laws for $c$, $d$ and the displayed $\\sigma$ squares. These use exactly the identity/composition comparisons in [lem-weil-pbc-comparison-pullback] and [lem-asd-etale-finite-twist-pullback]. Finally for $m\\mid m'$ the transition is $z\\otimes a\\mapsto z^{m'/m}\\otimes a$. It is balanced over $\\mathbf Z/m'$ into the tensor over $\\mathbf Z/m$ because powers commute with integer multiplication and the action on $A$ factors through $\\mathbf Z/m$. The step-2 root square and the step-3 tensor formula give this same value on both sides of the $\\sigma$ power square; bilinear universality again proves equality. The same calculation commutes with scheme pullback since pullback of units commutes with powers. This proves every coherence assertion, including $m=1$, the zero ring, and the empty scheme.",
+   "uses": [
+    "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "lem-weil-pbc-comparison-pullback",
+    "lem-asd-etale-finite-twist-pullback",
+    "def-pur-roots-of-unity-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL and proetale.tex Tag 0GLZ; explicit identity, composite, and semilinear power calculations"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-cbc-comparison-pullback-sections",
+  "lem-asd-etale-finite-twist-pullback",
+  "def-pur-roots-of-unity-sheaf",
+  "lem-pur-torsion-sheaf-constant-module",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "def-weil-proetale-inverse-image",
+  "def-weil-pbc-composite-adjunction",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "def-pur-roots-of-unity-inverse-image",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "def-weil-pbc-constant-sheaf",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-weil-pbc-direct-image",
+  "def-per-site-comparison-pullback-data"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Tag 0GLZ, lemma-describe-pullback-from-etale; combined with sites-modules.tex Tag 03EL, lemma-tensor-product-pullback, and explicit root/tensor adjunction calculations."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -58,10 +170,46 @@
    "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv_symm_apply\", \"StandardEtalePair.homEquiv_apply_coe\", \"StandardEtalePair.homEquiv\", \"StandardEtalePair.HasMap.map\", \"AlgebraicGeometry.IsEtale.of_comp\", \"AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map\", \"Algebra.IsEtaleAt.comp\", \"StandardEtalePair.lift_X\"]}",
    "date": "2026-10-21",
    "verdict": "no match: the hits concern ordinary ring roots, cyclotomic characters, perfectoid ring projections, direct limits, etale algebras or general pullback; none gives this root-normalized sheaf comparison with its stated coherence."
+  },
+  {
+   "tool": "grep",
+   "query": "rootsOfUnity|roots_of_unity|pro[Ee]tale",
+   "results": "{\"t\": \"2026-10-21T06:41:17Z\", \"tool\": \"grep\", \"query\": \"rootsOfUnity|roots_of_unity|pro[Ee]tale\", \"sub\": \"AlgebraicGeometry\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/ElladicCohomology.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\", \"Mathlib/AlgebraicGeometry/Sites/Proetale.lean\"], \"digest\": \"72abfb007d5a831c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits are ordinary ring roots/cyclotomic characters, etale algebras, or definitions of sites; none states the root-normalized etale/pro-etale sheaf comparison and its coherence.",
+   "sub": "AlgebraicGeometry"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Etale to proetale comparison inverse image of Kummer roots of unity sheaves with scalar extension",
+   "results": "{\"t\": \"2026-10-21T06:41:17Z\", \"tool\": \"leansearch\", \"query\": \"Etale to proetale comparison inverse image of Kummer roots of unity sheaves with scalar extension\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.Etale.comp\", \"autAdjoinRootXPowSubCEquiv_symm_smul\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap\", \"RootPairing.restrictScalars_coe_root\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"4b04f03c052631a3\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits are ordinary ring roots/cyclotomic characters, etale algebras, or definitions of sites; none states the root-normalized etale/pro-etale sheaf comparison and its coherence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rootsOfUnity\", \"Sheaf\"",
+   "results": "{\"t\": \"2026-10-21T06:41:17Z\", \"tool\": \"loogle\", \"query\": \"\\\"rootsOfUnity\\\", \\\"Sheaf\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits are ordinary ring roots/cyclotomic characters, etale algebras, or definitions of sites; none states the root-normalized etale/pro-etale sheaf comparison and its coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The inverse image of the etale roots of unity sheaf on the proetale site is the roots of unity sheaf and commutes with tensoring constant coefficients",
+   "results": "{\"t\": \"2026-10-21T06:41:20Z\", \"tool\": \"leanfinder\", \"query\": \"The inverse image of the etale roots of unity sheaf on the proetale site is the roots of unity sheaf and commutes with tensoring constant coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"restrictRootsOfUnity_coe_apply\", \"rootsOfUnityEquivOfPrimitiveRoots_apply_coe_inv_val\", \"MulEquiv.restrictRootsOfUnity_symm\", \"MulEquiv.restrictRootsOfUnity_coe_apply\", \"MulEquiv.restrictRootsOfUnity\", \"rootsOfUnityEquivNthRoots_apply\", \"cyclotomicCharacter.spec\", \"cyclotomicCharacter.toFun_spec\"], \"digest\": \"b655691a40d468bb\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits are ordinary ring roots/cyclotomic characters, etale algebras, or definitions of sites; none states the root-normalized etale/pro-etale sheaf comparison and its coherence."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The comparison of the small etale and proetale topoi evaluates inverse image by sections of the etale pullback on every weakly etale test scheme",
+   "results": "{\"t\": \"2026-10-21T06:42:07Z\", \"tool\": \"leanfinder\", \"query\": \"The comparison of the small etale and proetale topoi evaluates inverse image by sections of the etale pullback on every weakly etale test scheme\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful\", \"AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget\", \"AlgebraicGeometry.Scheme.instFullEtaleOverForget\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.Etale.forget\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.Scheme.instCategoryEtale\"], \"digest\": \"327dc6dae36458a0\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected hits are ordinary ring roots/cyclotomic characters, etale algebras, or definitions of sites; none states the root-normalized etale/pro-etale sheaf comparison and its coherence."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-amb-finite-tate-site-descent",
@@ -80,5 +228,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-amb-finite-root-site-comparison",
+  "worker": "stage1",
+  "summary": "Preserved the complete statement and all statement dependencies. Derived the root comparison on every weakly etale test from the existing section-comparison and etale-root-pullback nodes; constructed its balanced tensor comparison and proved the scheme, power, identity and composite equations on adjuncts and pure tensors. No new nodes; no attachment covering the whole item.",
+  "blueprint": "thm-amb-vector-bundle-purity proof paragraph 1: the Tate coefficient in the integration formula. Realizes finite-root comparison and coherence formerly in finite-tate-site-descent steps 3, 4 and the root part of 6; no change of the vector-bundle unit route.",
+  "tool_uses": [
+   {
+    "node": "lem-cbc-comparison-pullback-sections",
+    "why": "Uses the general section formula and comparison unit on all weakly etale tests; this is a site-comparison tool, not a vector-bundle purity step."
+   },
+   {
+    "node": "lem-asd-etale-finite-twist-pullback",
+    "why": "Uses the general etale finite-root and root-tensor pullback for arbitrary schemes and exponent; the item concerns comparison of those existing coefficients, not their construction."
+   },
+   {
+    "node": "lem-pur-torsion-sheaf-constant-module",
+    "why": "Uses the generic unique Z/m-module lift of an m-torsion abelian sheaf to justify linearity."
+   },
+   {
+    "node": "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "why": "Uses the generic normalized inverse-image tensor comparison for ring sheaves; no vector-bundle argument is replaced."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Uses only clause (1), the fixed finite constant-ring and module comparison."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-pullback",
+    "why": "Uses the canonical etale/pro-etale pullback square and its identity/composition coherence."
+   },
+   {
+    "node": "lem-weil-pbc-conjugate-iso-unit-equation",
+    "why": "Uses the generic unit normalization and uniqueness of conjugate left-adjoint comparisons."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Uses constant-section-preserving pullback for finite rings on arbitrary schemes, including the empty scheme."
+   },
+   {
+    "node": "lem-pc-sites-sheaf-tensor-bilinear-universal",
+    "why": "Uses the general test for equality of maps out of a sheaf tensor, avoiding any unproved section-generation assertion."
+   },
+   {
+    "node": "def-per-site-comparison-pullback-data",
+    "why": "Reviewer FIX: its statement defines the canonical comparison-pullback isomorphism as the adjunction mate of the direct-image identification, which pins kappa_v in step 4; lem-weil-pbc-comparison-pullback states only existence and coherence."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-cbc-comparison-pullback-sections",
+  "lem-asd-etale-finite-twist-pullback",
+  "lem-pur-torsion-sheaf-constant-module",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-conjugate-iso-unit-equation",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-pc-sites-sheaf-tensor-bilinear-universal",
+  "def-per-site-comparison-pullback-data"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q18-4ffd5e176",
+  "group": "Q18",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q18-4ffd5e176 (reviewer sub-agent of L); spot-checked: I read the whole item (6 steps, no new nodes) and every cited statement. Statement and stmt_deps are byte-identical to the Q41-reviewed version and the live side node, which is still unsplit; no target is weakened. The item is not in route-pivot-dropped, there is no SGA citation, and the dep closure (411 nodes) does not reach the item. The old parent steps 3, 4 and the root part of 6 from the Q41 packet are all carried here, in more detail; nothing is dropped. Sources: Stacks 0GLZ (proetale.tex l.3760, sections Γ(Y_et,f^{-1}F) on every weakly étale Y), which lem-cbc-comparison-pullback-sections states, and 03EL (sites-modules.tex l.3649), whose role is taken by the normalized lem-weil-pbc-algebraic-inverse-image-tensor-comparison. Steps 1–3, 5 and 6 check out: lem-asd gives root pullback for arbitrary v with m invertible, plus composition; the unit clause of lem-cbc; Z/m-linearity via lem-pur-torsion-sheaf-constant-module(2); sf-comparison-pullback-exact(1) with Λ=Z/m and A; prop-weil-pbc-proetale-constant-ring-map for arbitrary maps including ∅; bilinear universality after reducing to locally constant scalars. I recomputed both step-4 adjuncts at étale U: each gives z↦pr_U^♯z. Edge cases tested: m=1/A=0, A=0, T=∅, m=2/m'=4/A=Z/2, non-étale v, disconnected T. No duplicate found: def-pur/def-amb finite-tate comparison data are root-limit predicates, roots-inverse-image-iso covers isomorphisms only, and lem-sp-cartier-reduction builds the same comparison inline. FIX (C3/C4): step 4 said κ_v 'is the comparison underlying' the conjugate of the direct-image identification. That normalization is only in the proof of lem-weil-pbc-comparison-pullback; its statement gives existence plus coherence. Step 4 now cites def-per-site-comparison-pullback-data, whose statement defines the canonical iso as the adjoint mate of the direct-image comparison and whose Lean declarations are the ones lem-weil-pbc-comparison-pullback's statement is built from. It also adds the missing def-weil-pbc-direct-image for the étale direct-image formula. Both added deps are acyclic (closure of 194 nodes). proof_deps are updated, and a tool_uses entry is added for the off-unit definition. I accept the 6 declared tool_uses.; 1 file(s) fixed by the reviewer"
  }
 }
