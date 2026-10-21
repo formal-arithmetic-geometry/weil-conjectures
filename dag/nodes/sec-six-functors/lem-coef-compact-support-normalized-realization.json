@@ -24,7 +24,8 @@
   "def-coef-normalized-dvr-tower",
   "def-weil-abstract-derived-category",
   "def-coef-compact-support-tensor-comparison",
-  "def-weil-pbc-adic-coefficient-datum"
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-coef-compact-support-reduction-maps"
  ],
  "proof": [
   {
@@ -301,5 +302,40 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-448fa36d0 (reviewer sub-agent of L); spot-checked: Q79 448fa36d is a first split of a statement-only node that Q61 created in the 10-21 re-split of its parent. The re-split note is on the parent; this item has none, it is not on the dropped list, no other group has split it on live or side-live, and it cites no SGA source. The statement is unchanged. stmt_deps gains def-coef-compact-support-tensor-comparison and def-weil-pbc-adic-coefficient-datum; the statement uses both. A closure check finds no cycle. I read the master and main lem-coef-integral-compact-support; paragraph 2 is identical in both. The coefficient category and transitions are those of def-weil-integral-rational-qbar-compact-support. Step 1: the representative formulas of lem-sfb-successive-derived-quotient-normalization and the unit normalization of lem-pur-sheaf-ring-derived-coefficient-adjunction give rho = Res(beta) eta and the input cocycle. Step 2: naturality plus the composition clause of lem-sf-compact-support-restriction-of-scalars give the tau cocycle; sigma_nn = 1 follows from the cited statements or formally from the composition clause, so no proof is used. Step 3: I checked the equation for the adjoint, F_n(beta) gamma, against the defining equation of def-coef-compact-support-tensor-comparison and naturality of sigma. Step 4: every hypothesis of lem-finite-compact-support-scalar-comparison holds (upper level m, lower level n; the Lean signature confirms it is the same transpose), and K_m, K_n are constructible by def-weil-derived-complete-integral-detailed. Step 5: the roof induction is correct, with (Res i_n)[t] = tau d[s]. Step 6: the strict complex of towers gives the coherent realization required by def-coef-normalized-dvr-tower. Small cases m=n, K=0, f=id and the point all check. The route uses lem-finite-compact-support-scalar-comparison instead of the blueprint's lem-fix-compact-support-coefficient-change; both are cross-unit tools and the chosen one states exactly this map, so I accept the tool_uses. Advisory: lem-weil-compact-support-reduction-tower-functor already provides the realization and could replace Steps 5-6. Maintainer note: the source.place 'Steps 7--10' of lem-finite-compact-support-scalar-comparison is stale. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompactSupportNormalizedRealization",
+  "declaration": "WeilConjectures.compactSupport_normalized_realization",
+  "declarations": [
+   "WeilConjectures.coefCompactSupportQuotient_eq",
+   "WeilConjectures.coefCompactSupportRestrictionIso",
+   "WeilConjectures.coefCompactSupportBeta",
+   "WeilConjectures.coefCompactSupportInputTau",
+   "WeilConjectures.coefCompactSupportInput_properties",
+   "WeilConjectures.coefCompactSupportTau",
+   "WeilConjectures.coefCompactSupportLevel",
+   "WeilConjectures.coefCompactSupportNormalizedTau",
+   "WeilConjectures.coefCompactSupportAdjoint",
+   "WeilConjectures.coefCompactSupportTau_adjacent",
+   "WeilConjectures.coefCompactSupportTensor",
+   "WeilConjectures.coefCompactSupportCompletedModuleComp",
+   "WeilConjectures.CoefCompactSupportRealization",
+   "WeilConjectures.CoefCompactSupportRealizationSpec",
+   "WeilConjectures.compactSupport_normalized_realization"
+  ],
+  "file": "lean/Sheaf/Paper/CompactSupportNormalizedRealization.lean",
+  "statement": "theorem compactSupport_normalized_realization (D : FiniteFieldDatum.{u}) (hl : l ≠ D.p) {X Y : Scheme.{u}} {f : X ⟶ Y} [X.Over (Spec (.of D.k))] [Y.Over (Spec (.of D.k))] [LocallyOfFiniteType (X ↘ Spec (.of D.k))] [QuasiCompact (X ↘ Spec (.of D.k))] [LocallyOfFiniteType (Y ↘ Spec (.of D.k))] [QuasiCompact (Y ↘ Spec (.of D.k))] [f.IsOver (Spec (.of D.k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (K : DerivedCategory (scalarReductionSource l E X)) (_hK : sfIntegralConstructible l E X K) (a b : ℤ) (_hab : a ≤ b) (_hTor : ∀ n : ℕ, HasProEtaleTorAmplitude X (Padic.coefficientExtensionRing l E (n + 1)) ((scalarReductionDerivedExtension l E X n).obj K) a b) : (∃ R : CoefCompactSupportRealization l E D hl c K, CoefCompactSupportRealizationSpec l E D hl c K R) ∧ (∀ (m n : ℕ) (h : n ≤ m), IsIso (coefCompactSupportBeta l E X h K) ∧ IsIso (coefCompactSupportTensor l E c K h) ∧ IsIso ((sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).map (coefCompactSupportBeta l E X h K)) ∧ coefCompactSupportAdjoint l E c K h = coefCompactSupportTensor l E c K h ≫ (sfIntrinsicCompactSupport c (Padic.coefficientExtensionRing l E (n + 1))).map (coefCompactSupportBeta l E X h K))",
+  "branch": "sheaf-dag",
+  "by": "Q17",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-5d51d8770",
+  "group": "Q17",
+  "result": "pass",
+  "note": "Re-delivery makes exactly the 5b40 RETURN repair. NH's CompactSupportReductionTower module and 11-decl record are untouched (live compactSupportProjection_comp still proved). def-coef-compact-support-reduction-maps is existing:true on that module with the six requested decls, primary compactSupportReductionMap, no file; lean.statement is verbatim live text; no Maps module or new instance. Item Lean is byte-identical to dd28 apart from the public import and the step-6 docstring, which now matches node proof step 6; lean.statement verbatim, all 15 decls present. Item node vs base differs only in lean and stmt_deps (+ new def node); statement, proof and proof_deps are base; no statement_change. Item uses only the 4 defs plus the Finite instance owned by the new node, so the dd28 H2 is resolved. Hypotheses no stronger than the node; all conclusion clauses present; rho and the §1(B) intrinsic tensor comparison are canonical adjuncts; edge cases m=n, n=0, K=0, empty schemes, a=b fine. Report has both required sections. No file changed, no compile. Advisory: shared ownership of the six decls with NH's record (accepted existing:true pattern)."
  }
 }
