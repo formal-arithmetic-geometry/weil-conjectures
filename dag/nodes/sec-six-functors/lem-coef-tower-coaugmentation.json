@@ -3,131 +3,65 @@
  "kind": "statement",
  "proof": [
   {
-   "text": "Set $\\mathcal A_s=\\operatorname{Mod}(R_s)$ and $M_K=\\mathcal T_a^cK$. The strict-tower functor gives $\\operatorname{ev}_nM_K=\\operatorname{Res}_nF_nK_n$ naturally, with exactly the quotient-induced compact-support transitions, including every composite transition. By the integral compact-support definition, interpreted on this specified strict tower, $N_K=Ra_!K=R\\lim M_K$. Here we use the total-limit functor, not an arbitrary choice of a triangulated Roos cone. Thus its projections are the actual compact-support projections $N_K\\to\\operatorname{Res}_nF_nK_n$. The same definition of the transitions applies on morphisms because $\\mathcal T_a^c$ is a functor.",
+   "text": "Put $M=\\mathcal T_a^cK$, $N=Ra_!K=R\\lim M$, and $F=\\Gamma(s,-)$ followed by restriction to $R$. The strict-tower theorem and compact-support definition identify $e_nM=\\operatorname{Res}_nF_nK_n$, including all composite transitions and morphisms, and identify the limit projections with the compact-support projections. Exact point sections and scalar restriction make $F$ exact; tower exactness is levelwise. Exact derived factorization therefore identifies $B_K=F_D^{\\mathrm{Tow}}M$, with $e_nB_K=C_n$ and the specified transitions.",
    "uses": [
     "lem-weil-compact-support-reduction-tower-functor",
     "def-weil-integral-rational-qbar-compact-support",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "lem-weil-point-proetale-sections-exact",
+    "def-pc-sheaf-restrict-scalars",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2, compact-support reduction preceding the third displayed mapping-complex comparison."
+    "place": "Proof paragraph 2, third displayed line: canonical projections from integral compact support to the finite compact-support tower (first part of old step 11).",
+    "note": "Agent-written extraction of the existing item proof; the blueprint supplies the route, and the retained argument is recorded in the delivery report."
    }
   },
   {
-   "text": "Let $F:\\mathcal A_s\\to\\operatorname{Mod}(R)$ be $\\Gamma(s,-)$ followed by restriction along $R\\to\\Gamma(s,R_s)$. Point sections are exact since $k$ is algebraically closed; restriction changes only the scalar action, so preserves kernels and cokernels. Hence $F$ and its levelwise tower functor are exact. The exact-functor factorization identifies their derived functors with termwise application. In particular the separately derived tower sections in the statement give $B_K=F_D^{\\operatorname{Tow}}M_K$, and $\\operatorname{ev}_nB_K=C_n$ with the same transitions. No inverse limit is taken by these tower sections.",
-   "uses": [
-    "lem-weil-point-proetale-sections-exact",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "def-pc-sheaf-restrict-scalars"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0940, section-derived-limits, tower site; exact point sections and exact derived factorization from the cited nodes."
-   }
-  },
-  {
-   "text": "Countable products in $\\mathcal A_s$ are sectionwise and exact by the pro-etale product theorem. In $\\operatorname{Mod}(R)$ they are exact too: the kernel of a product map is the product of its kernels, and a family in the product of targets of surjections has a preimage by choosing one preimage in each coordinate. The canonical product comparison for $F$ is the identity $F(\\prod_iL_i)=\\prod_iF(L_i)$ on sections at $s$, with the restricted $R$-actions. The exact-product-functor strict-limit comparison therefore applies and gives the natural isomorphism\n$$\\lambda_K:C=F_DN_K=F_D R\\lim M_K\\xrightarrow{\\sim}R\\lim F_D^{\\operatorname{Tow}}M_K=R\\lim B_K.$$\nIts stated projection equation says $\\pi_n\\lambda_K=F_D(N_K\\to\\operatorname{Res}_nF_nK_n)$. Thus it identifies the specified projections, not merely the two limit objects.",
+   "text": "Pro-etale module products are sectionwise and exact. Module products are exact by coordinatewise kernels and choosing coordinatewise preimages of surjections. The product comparison for $F$ is the identity on sections with their restricted actions. The normalized exact-product-functor comparison gives $\\lambda_K:C=F_DN\\xrightarrow{\\sim}R\\lim B_K$, naturally in $K$. Its Roos first-map equation, followed by the $n$th product projection, gives $\\pi_n\\lambda_K=F_D(N\\to\\operatorname{Res}_nF_nK_n)$: these are the actual projections.",
    "uses": [
     "lem-weil-proetale-countable-products-exact",
     "lem-cbc-exact-product-functor-strict-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0940 and 0941, section-derived-limits and lemma-derived-limit-is-ok; normalized strict-limit comparison as in the cited existing refinement."
+    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
+    "place": "Proof paragraph 2, third displayed line: canonical projections from integral compact support to the finite compact-support tower (first part of old step 11).",
+    "note": "Agent-written extraction of the existing item proof; the blueprint supplies the route, and the retained argument is recorded in the delivery report."
    }
   },
   {
-   "text": "On $R$-modules, let $\\Delta$ be the constant tower functor and $L$ ordinary inverse limit. The correspondence $h:V\\to LT\\mapsto(\\pi_nh)_n$ identifies module maps into the limit with tower maps $\\Delta V\\to T$; its inverse sends a compatible family to its map into the limit. These are inverse and natural by their coordinate formulas, so $\\Delta\\dashv L$. Moreover $\\Delta$ is additive and exact because tower exactness is levelwise. Its left derived functor is therefore the same termwise constant functor. The total right derived functor of $L$ exists on every tower by the total-limit theorem. Applying the general derived-adjoint theorem gives\n$$\\Delta:D(R)\\ \\dashv\\ R\\lim:D(\\operatorname{Tow}(\\operatorname{Mod}(R))).$$",
+   "text": "Apply the derived-tower counit lemma to $\\operatorname{Mod}(R)$; its total-limit and resolution hypotheses hold by the strict-limit theorem on the trivial ringed site. Set $\\eta_K=\\epsilon_{B_K}\\Delta\\lambda_K$. The lemma gives naturality in the derived tower category and $e_n\\eta_K=\\pi_n\\lambda_K$, the required compact-support projection by Step 2.",
    "uses": [
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-pc-derived-adjoint-functors"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 09T5, lemma-derived-adjoint-functors; tower projection of sites-cohomology.tex Tag 0940."
-   }
-  },
-  {
-   "text": "Write $\\epsilon_B:\\Delta R\\lim B\\to B$ for this derived adjunction's counit. Its normalization can be read on a K-injective tower representative $I$ of $B$: $R\\lim B$ is $\\lim I$, and the counit is the chain map $\\Delta\\lim I\\to I$ with components $\\pi_n$. Indeed the fraction formula for the canonical derived adjunction, taking the identity resolution of the exact left functor and the K-injective resolution for the right functor, sends $1_{\\lim I}$ to the ordinary counit with precisely these components. Consequently $\\operatorname{ev}_n\\epsilon_B$ is the actual total-limit projection, after the resolution identifications. Define\n$$\\eta_K=\\epsilon_{B_K}\\circ\\Delta(\\lambda_K):\\Delta C\\to B_K.$$\nBy Step 3 its $n$th evaluation is exactly the compact-support projection $C\\to C_n$.",
-   "uses": [
-    "lem-pc-pre-derived-adjoint-functors-general",
+    "lem-coef-derived-tower-counit-projections",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 0FND, lemma-pre-derived-adjoint-functors-general, fraction characterization; sites-cohomology.tex Tag 0941, K-injective tower model."
-   }
-  },
-  {
-   "text": "For $f:K\\to K'$ let $b=B(f)$ and $c=C(f)$. Naturality of the comparison in Step 3 gives $(R\\lim b)\\lambda_K=\\lambda_{K'}c$. Naturality of the derived counit gives $b\\epsilon_{B_K}=\\epsilon_{B_{K'}}\\Delta(R\\lim b)$. Substitution yields\n$$b\\eta_K=\\epsilon_{B_{K'}}\\Delta(R\\lim b)\\Delta\\lambda_K=\\epsilon_{B_{K'}}\\Delta\\lambda_{K'}\\Delta c=\\eta_{K'}\\Delta c.$$\nThis equality is in the derived tower category itself. It does not infer equality of tower morphisms from equality of their evaluations.",
-   "uses": [],
-   "elementary": true,
-   "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2, sentence after the displayed calculation asserting that the specified natural maps are identified; elementary counit-naturality calculation."
+    "place": "Proof paragraph 2, third displayed line: canonical projections from integral compact support to the finite compact-support tower (first part of old step 11).",
+    "note": "Agent-written extraction of the existing item proof; the blueprint supplies the route, and the retained argument is recorded in the delivery report."
    }
   },
   {
-   "text": "Apply integral compact-support reduction to $a:X\\to s$ and $K$. The base field, $\\ell\\ne p$, separated finite-type morphism, dimension bound $d\\ge0$, and common Tor interval $[a_0,b_0]$ are exactly its hypotheses. It gives $N_K\\in D^b_c(s,R)$ and the canonical coherent isomorphism $r_n:N_K\\otimes^L_{R_s}(A_n)_s\\xrightarrow{\\sim}F_nK_n$. Apply point-sections derived reduction to this $N_K$. Composing gives a natural isomorphism\n$$\\alpha_n:C\\otimes_R^LA_n\\xrightarrow{\\sim}\\Gamma(s,N_K\\otimes^L_{R_s}(A_n)_s)\\xrightarrow{\\Gamma(s,r_n)}C_n.$$\nThe first arrow concerns modules over the completed sheaf on $s$, with scalar restriction to $R$; it is not an identification with the discrete constant integral sheaf.",
+   "text": "Integral compact-support reduction gives $N\\in D^b_c(s,R)$ and the coherent canonical isomorphism $r_n:N\\otimes^L_{R_s}(A_n)_s\\cong F_nK_n$ under the stated dimension and common Tor bounds. The coefficient DVR is Noetherian since every ideal is principal. Its finite-free quotient resolution and completed-sheaf reduction give $0\\to R_s\\xrightarrow{\\varpi^n}R_s\\to(A_n)_s\\to0$, with the actual coefficient projection. Apply the exact-sections reduction-unit lemma with $t=\\varpi^n$, using exact point sections. Its normalized comparison is the point-sections reduction isomorphism. Compose with $\\Gamma(r_n)$ to obtain $\\alpha_n:C\\otimes_R^LA_n\\cong C_n$. Its adjunct is $\\Gamma$ of the sheaf reduction unit followed by $r_n$, hence the canonical compact-support projection. By Step 3 this is $e_n\\eta_K$; uniqueness of scalar adjuncts proves the last clause.",
    "uses": [
     "lem-coef-integral-compact-support",
+    "lem-weil-l-adic-extension-integers-dvr",
+    "lem-weil-pbc-standard-quotients-perfect",
+    "lem-weil-pbc-completed-constant-sheaf-reduction",
+    "lem-weil-point-proetale-sections-exact",
+    "lem-coef-exact-sections-reduction-unit",
     "lem-pod-point-sections-derived-reduction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2, third displayed comparison: integral compact-support reduction and point sections."
-   }
-  },
-  {
-   "text": "We specify the unit compatibility of the point-sections comparison rather than assuming it from naturality. Put $t=\\varpi^n$ and $A=A_n$. The coefficient DVR is a PID, hence Noetherian since each ideal has one generator. The finite-free resolution $[R\\xrightarrow{t}R]\\to A$ and the completed-constant reduction theorem identify $[R_s\\xrightarrow{t}R_s]$, augmented by the actual coefficient projection, with $(A_n)_s[0]$. Thus $0\\to R_s\\xrightarrow{t}R_s\\to(A_n)_s\\to0$ is exact. Apply the resolution-independence comparison for exact sections with $\\mathcal O=R_s$, $\\mathcal O'=(A_n)_s$ and final object $s$. Its hypotheses are this sequence and exact point sections. On a flat-term K-flat sheaf representative $P$ of $N_K$, it specifies the comparison as $\\theta_Pc_{\\Gamma P}$, where $c$ is the universal ordinary derived-tensor counit and $\\theta_P:\\Gamma P/t\\Gamma P\\to\\Gamma(P/tP)$ sends a quotient of a section to its quotient section. These are the normalized quotient maps underlying the point-sections isomorphism in Step 7.",
-   "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-pbc-standard-quotients-perfect",
-    "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "lem-pod-derived-reduction-sheaf-resolution-independence",
-    "lem-pc-kflat-resolution",
-    "lem-weil-point-proetale-sections-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tags 093M and 093J, completion and constant-sheaf reduction; sites-cohomology.tex Tag 06YS, K-flat models; explicit normalization of the existing point-sections comparison."
-   }
-  },
-  {
-   "text": "Choose a flat-term K-flat ordinary-module resolution $q:Q\\to\\Gamma P$ on the one-object trivial site. The counit's naturality gives $c_{\\Gamma P}L(q)=\\bar q\\,c_Q$, where $\\bar q:Q/tQ\\to\\Gamma P/t\\Gamma P$ is induced by $q$ and $c_Q$ is the K-flat identification. Thus the comparison in Step 8, on the representative $Q/tQ$, is\n$$\\bar x\\longmapsto\\text{the image of }q(x)\\text{ in }\\Gamma(P/tP).$$\nBy the normalized scalar adjunction (on the trivial site for modules and on $s_{\\mathrm{proet}}$ for sheaves), its adjunct is the class of $Q\\to\\Gamma(P/tP)$, $x\\mapsto q(x)\\bmod t$. This is the composite of $q$ with sections of the reduction unit $P\\to P/tP$. All comparisons are therefore normalized with the same unit $x\\mapsto x\\otimes1$; no K-flatness of $\\Gamma P$ is needed.",
-   "uses": [
-    "lem-pc-kflat-resolution",
-    "lem-pc-mixed-tensor-pointwise-left-derived",
-    "lem-pod-derived-reduction-sheaf-resolution-independence",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YS and 07A6, K-flat models and scalar adjunction; ordinary derived-tensor counit naturality as in the cited existing comparison."
-   }
-  },
-  {
-   "text": "Finally compose that point-sections comparison with $\\Gamma(s,r_n)$ from Step 7. Its scalar-extension adjunct is sections of the reduction unit followed by $r_n$, by Step 9. Since $r_n$ is the canonical compact-support coefficient comparison, this composite is the actual compact-support projection $C\\to C_n$. That is exactly $\\operatorname{ev}_n\\eta_K$ by Steps 3 and 5. The scalar adjunction bijection therefore identifies $\\alpha_n$ with the adjunct of $\\operatorname{ev}_n\\eta_K$, proving the last clause, including its specified map.",
-   "uses": [
-    "lem-coef-integral-compact-support",
-    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-    "place": "Proof paragraph 2, third displayed comparison; identification of its specified canonical scalar adjunct."
+    "place": "Proof paragraph 2, third displayed line: canonical projections from integral compact support to the finite compact-support tower (first part of old step 11).",
+    "note": "Agent-written extraction of the existing item proof; the blueprint supplies the route, and the retained argument is recorded in the delivery report."
    }
   }
  ],
@@ -135,14 +69,10 @@
   "def-pc-sheaf-restrict-scalars",
   "def-weil-integral-rational-qbar-compact-support",
   "lem-cbc-exact-product-functor-strict-limit",
+  "lem-coef-derived-tower-counit-projections",
+  "lem-coef-exact-sections-reduction-unit",
   "lem-coef-integral-compact-support",
-  "lem-pc-derived-adjoint-functors",
-  "lem-pc-kflat-resolution",
-  "lem-pc-mixed-tensor-pointwise-left-derived",
-  "lem-pc-pre-derived-adjoint-functors-general",
-  "lem-pod-derived-reduction-sheaf-resolution-independence",
   "lem-pod-point-sections-derived-reduction",
-  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-weil-compact-support-reduction-tower-functor",
   "lem-weil-l-adic-extension-integers-dvr",
   "lem-weil-pbc-completed-constant-sheaf-reduction",
@@ -156,7 +86,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/master/blueprint/sec-six-functors/sk-prop-sf-biduality-general/prop-coef-integral-dualizing.md",
-  "place": "Proof paragraph 2, compact-support reduction and the third displayed comparison; expanded using Stacks Tags 0940, 0941, 09T5 and 0FND and the existing normalized strict-limit comparison."
+  "place": "Proof paragraph 2, third displayed comparison and specified maps; assembly through the two extracted normalized-adjunction lemmas and existing strict-limit comparison."
  },
  "mathlib_match": null,
  "status": "split",
@@ -318,87 +248,63 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-coef-tower-coaugmentation",
   "worker": "stage1",
-  "summary": "Expanded the canonical compact-support tower coaugmentation into ten steps, using existing strict-tower, exact point-sections, normalized limit-comparison, and derived-adjunction nodes; verified naturality as a tower identity and identified the scalar-extension adjunct on normalized K-flat quotient models. Statement unchanged; no new nodes.",
-  "blueprint": "prop-coef-integral-dualizing proof paragraph 2, compact-support reduction before and within the third displayed mapping-complex comparison, and the final identification of the specified natural maps.",
+  "summary": "Human-requested re-split, statement unchanged. Extracted the derived-tower counit normalization/naturality and the exact-sections principal-reduction unit argument as two independent statement-only nodes. The assembly uses the already existing strict-tower and normalized exact-product-functor interfaces. Original ten-step proof and its complete allocation are preserved in report.md.",
+  "blueprint": "prop-coef-integral-dualizing, proof paragraph 2: compact-support reduction, third displayed mapping-complex comparison, and final identification of the specified natural maps.",
   "tool_uses": [
    {
     "node": "def-pc-sheaf-restrict-scalars",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "def-weil-integral-rational-qbar-compact-support",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-cbc-exact-product-functor-strict-limit",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pc-derived-adjoint-functors",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pc-mixed-tensor-pointwise-left-derived",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pc-pre-derived-adjoint-functors-general",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pod-derived-reduction-sheaf-resolution-independence",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-pod-point-sections-derived-reduction",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
-   },
-   {
-    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-weil-compact-support-reduction-tower-functor",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-weil-l-adic-extension-integers-dvr",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-weil-pbc-completed-constant-sheaf-reduction",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-weil-pbc-exact-functor-derived-factorization",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-weil-pbc-standard-quotients-perfect",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-weil-point-proetale-sections-exact",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    },
    {
     "node": "lem-weil-tower-category-levelwise-abelian",
-    "why": "Generic strict-tower, exact-functor, point-sections, coefficient-resolution or derived-adjunction tool used only for its stated interface; the biduality unit has no substitute for this auxiliary construction."
+    "why": "Generic strict-tower, exact-sections or coefficient-reduction interface used in the same route as the original reviewed split; no replacement of the biduality unit route."
    }
   ]
  },
@@ -424,12 +330,12 @@
   "lem-weil-tower-category-levelwise-abelian"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q78-08c8831b7",
-  "group": "Q78",
+  "reviewer": "NT-cc-Q63-39dd8509e",
+  "group": "Q63",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q78-08c8831b7 (reviewer sub-agent of L); spot-checked: Reviewed item, route, report, all cited node statements and sources, hypotheses, coefficient category, canonical base-change maps, edge cases, searches, and all ten proof steps. No new nodes or repairs are needed; review.md records the checks."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-39dd8509e (reviewer sub-agent of L); spot-checked: PASS on the human re-split of 2026-10-21, checked against coord/repair-notes/lem-coef-tower-coaugmentation.json: 2 new statement-only nodes (1736 and 2009 chars, comparable size), assembly 2276 chars (limit 3000), statement unchanged. The item is still unreviewed-split live, not superseded and not dropped. Old steps 1-3 only applied existing nodes and are re-cited in new steps 1-2, with the transitions and the first-map product equation kept. Old 4-6 became lem-coef-derived-tower-counit-projections. Old 8-9 became lem-coef-exact-sections-reduction-unit. Old 7, 10 and the exact-sequence check (DVR, standard quotient, completed-constant reduction) are in step 4. Nothing was dropped. Node A is true: LI is K-injective for a K-injective tower I because Δ is exact, the counit is ΔLI→I with components π_n, π_{n,B} points the right way, and naturality is formal. Sources: Stacks 09T5, 0FND, 0941. Node B is true: t regular gives t-injective flat terms, exact Γ gives θ_P, the cone W/tW is acyclic, and the unit equation comes from the 07A6 Hom bijection. Tested on t a unit, R=0, and R=Z, t=2 with N=Z/2. A zero-divisor t is excluded and no domain hypothesis is needed. Duplicates: lem-trf-point-reduction-unit-normalization case (1) is the exact specialization the item uses, but it is in the trf chapter of a batch-5 item; the base proof also argued inline, so I accept the generic node with a maintainer note. lem-pod-principal-reduction-comparison and lem-pod-derived-reduction-sheaf-resolution-independence lack the unit equation. lem-sfb-resolving-derived-adjunction-normalization is a tool for A's future proof, not a duplicate. The closure of the new stmt_deps (226 nodes) has no trf/pod-theorem nodes and does not reach the item, so there is no cycle. proof_deps equals the union of step uses. No SGA. Stale tool_uses from the old proof remain (maintainer field, harmless). The snapshot's non-sec-six-functors chapter links point to a missing dagsnap b39728cf, so I read the cited statements from side-live. No fixes."
  },
  "lean": {
   "module": "Sheaf.Paper.CoefTowerCoaugmentation",
