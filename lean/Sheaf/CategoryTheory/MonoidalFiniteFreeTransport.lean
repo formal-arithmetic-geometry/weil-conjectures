@@ -93,6 +93,50 @@ theorem monoidalFiniteFreeTransport
         P.map (θ.inv.hom ≫ (biproduct.π (fun _ : Fin n => Mod.regular R) i).hom) ≫
           P.map ((biproduct.ι (fun _ : Fin n => Mod.regular R) i).hom ≫ θ.hom.hom)) =
         𝟙 (P.obj M.X) := by
-  sorry
+  classical
+  let F := P.mapMod R
+  let e : (⨁ fun _ : Fin n => Mod.regular (P.obj R)) ≅ F.obj M :=
+    (F.mapBiproduct (fun _ : Fin n => Mod.regular R)).symm ≪≫ F.mapIso θ
+  refine ⟨e, ?_, ?_, ?_, ?_⟩
+  · intro i
+    change ((biproduct.ι (fun _ : Fin n => Mod.regular (P.obj R)) i) ≫ e.hom).hom = _
+    simp [e, F]
+  · intro i
+    have h : e.inv ≫ biproduct.π _ i = F.map (θ.inv ≫ biproduct.π _ i) := by
+      change ((F.mapIso θ).inv ≫ (F.mapBiproduct _).hom) ≫ _ = _
+      rw [Category.assoc, mapBiproduct_hom]
+      erw [biproduct.lift_π]
+      exact (F.map_comp _ _).symm
+    exact congrArg Mod.Hom.hom h
+  · intro i j
+    have h : (biproduct.ι (fun _ : Fin n => Mod.regular R) j ≫ θ.hom) ≫
+        (θ.inv ≫ biproduct.π _ i) =
+        if i = j then 𝟙 (Mod.regular R) else 0 := by
+      by_cases hij : i = j
+      · subst j
+        simp
+      · simp [Category.assoc, hij, Ne.symm hij]
+    calc
+      _ = P.map (((biproduct.ι (fun _ : Fin n => Mod.regular R) j ≫ θ.hom) ≫
+          (θ.inv ≫ biproduct.π _ i)).hom) := by rw [← P.map_comp]; rfl
+      _ = _ := by rw [h]; split_ifs <;> simp [Mod.regular]
+  · have h : (∑ i : Fin n, (θ.inv ≫ biproduct.π _ i) ≫
+        (biproduct.ι (fun _ : Fin n => Mod.regular R) i ≫ θ.hom)) = 𝟙 M := by
+      calc
+        _ = θ.inv ≫ (∑ i : Fin n, biproduct.π _ i ≫
+            biproduct.ι (fun _ : Fin n => Mod.regular R) i) ≫ θ.hom := by
+          simp only [Preadditive.comp_sum, Preadditive.sum_comp, Category.assoc]
+        _ = _ := by rw [biproduct.total, Category.id_comp, θ.inv_hom_id]
+    let G := Mod.forget R ⋙ P
+    calc
+      _ = G.map (∑ i : Fin n, (θ.inv ≫ biproduct.π _ i) ≫
+          (biproduct.ι (fun _ : Fin n => Mod.regular R) i ≫ θ.hom)) := by
+        rw [G.map_sum]
+        apply Finset.sum_congr rfl
+        intro i hi
+        change P.map (_ ≫ _) ≫ P.map (_ ≫ _) = P.map _
+        rw [← P.map_comp]
+        rfl
+      _ = _ := by rw [h, G.map_id]; rfl
 
 end CategoryTheory.Functor
