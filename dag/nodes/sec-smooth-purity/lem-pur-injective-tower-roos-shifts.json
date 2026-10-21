@@ -13,11 +13,137 @@
   "def-weil-abstract-derived-category",
   "prop-pur-kinjective-resolutions-exist",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "def-weil-derived-limit"
+  "def-weil-derived-limit",
+  "def-sp-injective-resolutions",
+  "def-sp-kinjective-bridge",
+  "def-weil-category-product",
+  "def-weil-triangulated-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix the chosen $I$ and a degree $i$, and put $J=I^i_\\bullet$. For an object $M$ define the prefix tower $E_n(M)$ to have $M$ in levels $1,\\ldots,n$, identity transitions there, and zero above $n$. A map $E_n(M)\\to J$ is determined by its component $M\\to J_n$, the lower components being its composites with the transitions. The map $E_n(J_n)\\to E_{n+1}(J_n)$ which is identity through level $n$ and zero above it is monic by levelwise exactness. Extend the map $E_n(J_n)\\to J$ corresponding to $\\mathrm{id}_{J_n}$ across this monomorphism by the definition of injectivity. The level $n+1$ component of the extension is a map $u_n^i:J_n\\to J_{n+1}$, and its tower compatibility says $t_n^iu_n^i=\\mathrm{id}_{J_n}$. This proves the claimed splitting in every degree without imposing a condition on the original tower.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), injective-transition paragraph; explicit prefix-tower lifting refinement"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-tower-evaluation-kinjective] to $I$ (reindexing positive levels by $n-1$): each $I_n$ is K-injective in $\\mathcal A$. Products of module sheaves are formed sectionwise: the module operations are coordinatewise and the sheaf gluing condition holds in each coordinate, so the sectionwise product has the product universal property. Thus all terms of $P=\\Pi(I)$ exist. Apply [lem-pc-ringed-space-product-kinjective] with the set of positive integers. It states both that this termwise product complex is K-injective and that its image under localization, with the localized projections, is the product in $D(\\mathcal A)$. No assertion about products of arbitrary quasi-isomorphisms is used.",
+   "uses": [
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-pc-ringed-space-product-kinjective",
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-category-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), evaluation and derived-product paragraphs; derived.tex Tag 0BK6 (lemma-product-K-injective)"
+   }
+  },
+  {
+   "text": "The maps $t_n$ commute with the differentials, so $s$ defined by $\\mathrm{pr}_ns=t_n\\mathrm{pr}_{n+1}$ is a chain map and $h=1-s$ is a chain map. The universal property of the product identifies $\\ker h^i$ with compatible families, hence with $(\\lim I_n)^i$; the differential restricts to the termwise limit differential. For completeness $h^i$ has a section as a sheaf morphism: choose the splittings $u_n^i$ from step 1, set $a_1=0:P^i\\to I_1^i$, and recursively set $a_{n+1}=u_n^i(a_n-\\mathrm{pr}_n)$. Then $a_n-t_n^ia_{n+1}=\\mathrm{pr}_n$. The product map $a=(a_n)_n:P^i\\to P^i$ therefore satisfies $h^ia=\\mathrm{id}_{P^i}$. In particular $0\\to\\lim I_n\\xrightarrow{j}P\\xrightarrow{h}P\\to0$ is degreewise short exact. The sections need not commute with the differential; only their degreewise existence has been used.",
+   "uses": [
+    "def-weil-category-product",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), short exact product sequence; explicit split recursion"
+   }
+  },
+  {
+   "text": "Use [lem-weil-degreewise-epi-kernel-cocone-qis] with both complexes equal to $P$ and $f=h$. Step 3 verifies its degreewise epimorphism hypothesis and identifies its kernel with the actual termwise limit. Its displayed differential is exactly $d(y,x)=(-dy-hx,dx)$, and its comparison has components $(0,j)$. Therefore it gives the specified $\\eta_I$, rather than an unspecified isomorphism with a cone, and proves that $\\eta_I$ is a quasi-isomorphism. The actual limit-cone components are $\\mathrm{pr}_n j$, so this comparison also retains every specified projection.",
+   "uses": [
+    "lem-weil-degreewise-epi-kernel-cocone-qis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070M (lemma-difficulty-K-injectives), kernel/shifted-cone comparison made explicit in the cited node; applied to the sequence of sites-cohomology.tex Tag 0941"
+   }
+  },
+  {
+   "text": "Use precisely the cone triangle convention of [def-weil-abstract-derived-category]: $P\\xrightarrow{h}P\\xrightarrow{\\iota}\\operatorname{Cone}(h)\\xrightarrow{-\\operatorname{pr}_2}P[1]$. Its inverse rotation is $C(I)\\xrightarrow{\\alpha}P\\xrightarrow{h}P\\xrightarrow{\\beta}C(I)[1]$, where $\\alpha(y,x)=x$ and $\\beta(b)=(b,0)$ after the canonical shift reindexing. Indeed inverse rotation negates the shifted third arrow, cancelling the minus in $-\\operatorname{pr}_2$. Localize and replace $QC(I)$ by $Q(\\lim I_n)$ using $Q\\eta_I$. The first arrow becomes $Qj$, since $\\alpha\\eta_I=j$, and the second is $Qh=1-s$ on the actual derived product of step 2. By [lem-weil-pbc-ringed-strict-tower-homotopy-limit], $Q(\\lim I_n)$ computes the stated total derived limit on this chosen representative. The resulting distinguished triangle is a Roos triangle in the exact sense of [def-weil-derived-limit]. Its boundary is explicitly $\\delta_I=(Q\\eta_I[1])^{-1}Q\\beta$.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-triangulated-category",
+    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "def-weil-derived-limit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E (definition-cone), rotation convention as fixed in def-weil-abstract-derived-category; sites-cohomology.tex Tag 0941"
+   }
+  },
+  {
+   "text": "Identify $\\Pi(I[r])$ with $P[r]$ by the identity on each product projection. It identifies $h_{I[r]}$ with $h_I[r]$. Apply [lem-pe-endomorphism-fibre-coordinate-calculus] to $(V,s)=(P,h_I)$ and reorder its coordinates $(v,u)$ as $(y,x)=(u,v)$. The resulting comparison is exactly $\\chi_{I,r}(y,x)=((-1)^ry,x)$, its inverse has the same formula, and its zero-shift, additive-coherence and naturality assertions apply. Taking its augmentation $J$ to be the inclusion $j:\\lim I_n\\to P$ gives $\\chi_{I,r}\\eta_{I[r]}=\\eta_I[r]$ under the termwise limit comparison. This comparison is legitimate on the chosen resolutions: $I[r]$ still has injective terms, and is K-injective because a map from an acyclic tower complex into $I[r]$ shifts back to a map from an acyclic tower complex into $I$; shifting a null-homotopy back gives the required null-homotopy. Here acyclicity is preserved by a shift since its cycles and boundaries are merely reindexed, with differentials multiplied by a unit.",
+   "uses": [
+    "lem-pe-endomorphism-fibre-coordinate-calculus",
+    "def-sp-kinjective-bridge",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G (definition-shift-cochain); derived.tex Tag 014E (definition-cone); existing endomorphism-fibre coordinate calculation"
+   }
+  },
+  {
+   "text": "Write $\\alpha_I:C(I)\\to P$ and $\\beta_I:P\\to C(I)[1]$ for step 5's maps. Projection onto $x$ gives $\\pi_r\\alpha_{I[r]}=\\alpha_I[r]\\chi_{I,r}$. Insertion into the $y$ coordinate gives $\\chi_{I,r}[1]\\beta_{I[r]}=(-1)^r\\beta_I[r]\\pi_r$, since both sides send $b$ to $((-1)^rb,0)$. Put $e_I=Q\\eta_I$ and use step 6's identity $Q\\chi_{I,r}\\,e_{I[r]}=e_I[r]\\sigma_r$. Substitution into $p_I=Q\\alpha_I e_I$ proves $\\pi_rp_{I[r]}=p_I[r]\\sigma_r$. Substitution into $\\delta_I=e_I[1]^{-1}Q\\beta_I$ proves $\\sigma_r[1]\\delta_{I[r]}=(-1)^r\\delta_I[r]\\pi_r$, by cancelling the isomorphism $e_I[r][1]$. The reindexings identify $[1][r]$ with $[r][1]$ as stipulated. Thus the boundary sign is computed on its actual insertion map, not inferred from an arbitrary isomorphism of triangles.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-pe-endomorphism-fibre-coordinate-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G (definition-shift-cochain), with derived.tex Tag 014E (definition-cone); explicit projection and insertion calculation"
+   }
+  },
+  {
+   "text": "A strict map $f:I\\to I'$ induces the product map $a$, with $ah_I=h_{I'}a$, and the induced limit map $\\ell$ satisfies $aj=j'\\ell$. The diagonal cone map therefore obeys $C(f)\\eta_I=\\eta_{I'}\\ell$ by [lem-pe-endomorphism-fibre-coordinate-calculus]. To pass to localization use [lem-weil-pbc-kinjective-hom-derived] in the abelian tower category: every derived map between the chosen K-injectives has a chain representative unique up to tower homotopy, and a quasi-isomorphism between them is a homotopy equivalence. The cone maps respect these homotopies by [lem-pur-strict-roos-homotopy-functor]. Termwise limit also respects a tower homotopy: its compatible component homotopies restrict from the product to the limit, and $f-g=dH+Hd$ restricts to the same identity there. Consequently the comparisons and the two arrow identities above are natural after localization. A change of K-injective representative is transported through its homotopy equivalence, and the chain identities survive that transport. The termwise limit shift here is exactly the normalized shift comparison used to compute $L$, while step 6 gives coherence for all successive shifts. This proves all claimed naturality and shift-coherence clauses.",
+   "uses": [
+    "lem-pe-endomorphism-fibre-coordinate-calculus",
+    "lem-weil-pbc-kinjective-hom-derived",
+    "lem-pur-strict-roos-homotopy-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective); strict cone homotopies and shift comparisons of Tag 014E (definition-cone)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-injective-resolutions",
+  "def-sp-kinjective-bridge",
+  "def-weil-abstract-derived-category",
+  "def-weil-category-product",
+  "def-weil-derived-limit",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-triangulated-category",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-pe-endomorphism-fibre-coordinate-calculus",
+  "lem-pur-strict-roos-homotopy-functor",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-tower-evaluation-kinjective"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0941 (lemma-derived-limit-is-ok), module-sheaf variant on the small constant-ring tower site, refined by explicit prefix splittings, the fixed project cone convention, and the signed integer-shift calculation; derived.tex Tags 070I, 08BJ, 0BK6, 014E and homology.tex Tag 011G."
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -53,10 +179,52 @@
    "results": "Hits: CochainComplex.isSplitMono_from_singleFunctor_obj_of_injective, CochainComplex.cm5b.degreewiseEpiWithInjectiveKernel_p, CochainComplex.shift_f_comp_mappingConeHomOfDegreewiseSplitIso_inv, CochainComplex.cm5b, CochainComplex.isSplitEpi_to_singleFunctor_obj_of_projective, CochainComplex.mappingConeHomOfDegreewiseSplitIso_inv_f, DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, LightCondensed.epi_π_app_zero_of_epi. ",
    "date": "2026-10-21",
    "verdict": "no match: generic cone/shift or injectivity infrastructure does not establish the injective-tower limit normalization and signed Roos comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "Roos|mappingCone.*shift|isKInjective.*[Ee]val",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/MappingCocone.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean, Mathlib/Algebra/Homology/HomotopyCategory/DegreewiseSplit.lean.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic injectivity, cone, or shift infrastructure but not all clauses of the normalized injective-tower comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Injective objects in the category of inverse sequences have split epimorphic transition maps and the inverse limit computes the mapping fiber of one minus shift",
+   "results": "Hits: CategoryTheory.isInjective, CategoryTheory.Injective.under, CategoryTheory.Injective, CategoryTheory.Injective.mk, CategoryTheory.Injective.rec, CategoryTheory.ShortComplex.ShortExact.splittingOfInjective, CategoryTheory.EnoughInjectives, InverseSystem.piEquivLim.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic injectivity, cone, or shift infrastructure but not all clauses of the normalized injective-tower comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.mappingCone, CochainComplex.IsKInjective",
+   "results": "Hits: .",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic injectivity, cone, or shift infrastructure but not all clauses of the normalized injective-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a K-injective complex of inverse towers with injective terms the kernel of one minus shift maps quasi-isomorphically to its mapping fiber and this comparison is compatible with every integer shift",
+   "results": "Hits: CochainComplex.cm5b.instQuasiIsoIntP, CochainComplex.mappingCone.quasiIso_descShortComplex, CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.instIsKInjectiveObjIntShiftFunctor, CochainComplex.isKInjective_shift_iff, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.cm5b.instInjectiveXIntMappingConeIdI, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic injectivity, cone, or shift infrastructure but not all clauses of the normalized injective-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The termwise inverse limit of a degreewise injective K-injective tower represents derived inverse limit with the normalized signed cone shift comparison",
+   "results": "Hits: CochainComplex.cm5b.instInjectiveXIntMappingConeIdI, CochainComplex.cm5b, CochainComplex.cm5b.i_f_comp, CochainComplex.cm5b.instQuasiIsoIntP, CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ, CategoryTheory.InjectiveResolution.toRightDerivedZero', DerivedCategory.to_singleFunctor_obj_eq_zero_of_injective, CochainComplex.cm5b.i_f_comp_assoc.",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits provide generic injectivity, cone, or shift infrastructure but not all clauses of the normalized injective-tower comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "quasiIso_descShortComplex|isKInjective_shift_iff",
+   "results": "Hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean, Mathlib/Algebra/Homology/DerivedCategory/Ext/ExtClass.lean. Read mappingCone.quasiIso_descShortComplex at ShortExact.lean:137 and isKInjective_shift_iff at KInjective.lean:95.",
+   "date": "2026-10-21",
+   "verdict": "no match: the former compares the cone of the first map of a short exact sequence with its third term; the latter is shift stability of K-injectivity. Neither states the full item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-reduction-limit-shift-adjunction",
@@ -77,5 +245,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-injective-tower-roos-shifts",
+  "worker": "stage1",
+  "summary": "Eight steps prove the prefix-tower splittings, evaluate K-injectives, construct the degreewise split product sequence, apply the existing normalized kernel/cone comparison, and compute the signed boundary and integer-shift coherence on actual coordinates. All general inputs already exist in the DAG; no new nodes or product-exactness hypothesis were introduced. The statement is unchanged.",
+  "blueprint": "Refines the coefficient-comparison sentence of fix-prop-coherence.proof.md and the total-limit transport step inherited through thm-pur-rational-and-qbar-purity; the existing blueprint.from chain is retained.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-tower-evaluation-kinjective",
+    "why": "Evaluation of a K-injective tower is K-injective for a general abelian category; the compatibility unit has no replacement for this exact-adjoint tool."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Termwise products of K-injectives represent derived products without exactness of products; this is a generic homological algebra tool."
+   },
+   {
+    "node": "lem-weil-degreewise-epi-kernel-cocone-qis",
+    "why": "The specified zero-first-coordinate kernel inclusion is a quasi-isomorphism for a degreewise epi; this generic cone lemma supplies the chain-level normalization."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+    "why": "Identifies termwise limit on the chosen K-injective tower with the total derived-limit functor whose normalization this item refines."
+   },
+   {
+    "node": "lem-pe-endomorphism-fibre-coordinate-calculus",
+    "why": "Generic signed fibre/shift and augmentation identities, with no coefficient or product-exactness assumptions, supply the cone coordinate calculation."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "The K-injective Hom bijection and homotopy-equivalence criterion are needed to descend chain identities to derived morphisms."
+   },
+   {
+    "node": "lem-pur-strict-roos-homotopy-functor",
+    "why": "The explicit cone homotopy for compatible tower homotopies is the generic tool needed for localization naturality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-pe-endomorphism-fibre-coordinate-calculus",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-pur-strict-roos-homotopy-functor"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q106-ef5a0cc04",
+  "group": "Q106",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q106-ef5a0cc04 (reviewer sub-agent of L); spot-checked: Read the item and all 8 steps in full against every cited statement, and Stacks sites-cohomology.tex Tag 0941 (lemma-derived-limit-is-ok, l.5066-5110: injective-term K-injective representative, i_{n,!} prefix tower, termwise limit, product sequence). Not in the 2026-10-19 drop list and no re-split note. Statement unchanged; the 4 added stmt_deps are notions the statement uses. No new nodes. Step 1: the prefix-tower map E_n(J_n)->E_{n+1}(J_n) is a levelwise mono and its extension gives t_n u_n=id. Step 2: the evaluation and product K-injective nodes hold for any abelian category; Mod(A) has products. Step 3: a_n - t_n a_{n+1} = pr_n checked, so h is degreewise split epi. Step 4: the degreewise-epi cocone node gives exactly the differential (-dy-hx,dx) and kappa=(0,iota). Step 5: inverse rotation of the def-weil-abstract-derived-category cone triangle (third arrow -p) under TR2 gives alpha=pr_x and beta=(b,0); (Q eta,id,id) is a triangle isomorphism, so the result is a Roos triangle per def-weil-derived-limit. Step 6: the coordinate swap (v,u)->(y,x) in lem-pe-endomorphism-fibre-coordinate-calculus gives chi=((-1)^r y,x) and chi eta=eta[r]; I rechecked the chain-map identity independently. Step 7: the boundary sign (-1)^r is computed on the actual insertion map. Step 8: the Hom_K=Hom_D bijection plus lem-pur-strict-roos-homotopy-functor (it needs only that countable products exist, which holds) give naturality. Tested r in {0,+-1,2}, char 2, zero ring, and the constant tower. Not a duplicate: lem-a1-normalized-roos-shift-comparison, lem-weil-roos-split-comparison and the strict-roos normalization/comparison nodes all assume countable products or exact products (maintainer note: the a1 node could cite this item). Accepted all 7 generic tool_uses (written by the worker, contrary to C8). Advisory: existence of an injective-term resolution in Tow(Mod(A)) rests on the statement's citation of prop-pur-kinjective-resolutions-exist; it is actually proved in step 1 of lem-weil-pbc-ringed-strict-tower-homotopy-limit, and this framing is inherited from the imported statement. No changes."
  }
 }
