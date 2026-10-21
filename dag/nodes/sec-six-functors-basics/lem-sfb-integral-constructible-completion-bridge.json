@@ -22,113 +22,56 @@
  ],
  "proof": [
   {
-   "text": "Use the coefficient-limit isomorphism to identify $B_T$ with $\\varprojlim_n(A/\\varpi^n)_T$ for $T=Z$ and for every stratum used below. The Cartesian coefficient isomorphisms identify restriction of $B_Z$ with $B_T$, and give exact restriction on modules. The continuous integral coefficient object in the resolution theorem is this same $p_T^*\\underline A$: the norm on $E$ and $A=\\{x:|x|_E\\le1\\}$ are those fixed in the coefficient convention. Thus all the following applications concern the original coefficient ring and ordinary derived category.",
+   "text": "Use the proved integralLfpConstantModelComparison. Its WithAbs coefficient model is transported first to the embedded valuation ring by the proved integralCoefficientIso helper of IntegralConstantModelHeartClosure, and then to DerivedNakayama.integerRing by the proved integerRingSheafIso helper of IntegralCoefficientExtComparison. The composite is an actual ring isomorphism. Restriction of scalars preserves and reflects both general stratified local finite presentation and finite constant local models; use its identity round trip to obtain the two predicates on the original module M.",
    "uses": [
-    "sk-prop-sfb-qlbar-colimit-x",
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-weil-l-adic-coefficient-extension",
-    "def-weil-pbc-continuous-integral-coefficients"
+    "lem-sfb-integral-lfp-constant-model-comparison",
+    "lem-sfb-integral-constant-model-heart-closure",
+    "lem-integral-coefficient-ext-comparison",
+    "lem-weil-pbc-module-constructible-pullback"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "§6.5 coefficient convention; Definition 6.8.10; coefficient identification supplied by the cited DAG statements"
-   }
+   "elementary": false
   },
   {
-   "text": "Every locally closed scheme stratum $S\\hookrightarrow Z$ is again Noetherian, finite-dimensional, and has $\\ell$ invertible. Indeed the minimal-closed-subset property for $Z$ makes its space Noetherian, so every subset is quasi-compact. Factor $S$ as closed in an open $O$; $O$ is Noetherian by the open-subscheme lemma. Intersections with an affine cover of $O$ present $S$ as spectra of quotients of Noetherian rings. Such quotients are Noetherian since ascending chains of their ideals lift to ascending chains of ideals upstairs; quasi-compactness selects finitely many of these affine charts. A strict chain of irreducible closed subsets of $S$ remains strict after closure in $Z$, since intersection back with $S$ recovers it, so the dimension bound persists. Units map to units in every stratum local ring. Also $Z$ is quasi-separated: every intersection of two affine opens is quasi-compact by the same subset property.",
+   "text": "Apply the preceding module equivalence to every cohomology sheaf. Both bounded predicates retain precisely the same standard t-structure boundedness, so conjunction and universal quantifier congruence give (i) iff (iii) without completing K.",
    "uses": [
-    "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-    "lem-sfb-noetherian-space-compact-subsets",
-    "lem-weil-pbc-noetherian-open-subscheme-noetherian"
+    "sk-def-sfb-bounded-constructible",
+    "sk-def-sfb-constructible"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Hypothesis checks for Proposition 6.6.11 and Proposition 6.8.11(3); elementary scheme-stratum reductions"
-   }
+   "elementary": true
   },
   {
-   "text": "Assume (i). Fix a degree $q$ with $H^q(K)≠0$ and a stratum $S$ on which $P=H^q(K)|_S$ is locally finitely presented. Apply the integral locally-free-resolution theorem to $P$ on $S$. It supplies a short exact sequence $0\\to F_1\\to F_0\\to P\\to0$, where each $F_i$ is pro-étale locally finite free over $B_S$. This theorem allows torsion in $P$ and assumes no completeness of $P$. Its topologically Noetherian hypothesis follows from step 2. The two covers for $F_1,F_0$ need not coincide.",
+   "text": "Let S be integralSectionFunctor and let R be restriction along integralDetailedCoefficientComparison.hom. These are additive exact faithful functors. Standard derived exact-functor cohomology isomorphisms identify R(S(H^q K)) with H^q(D(R)(D(S)(K))). The new heart-level scalar-model comparison and invariance under this cohomology isomorphism identify finite constant models degreewise with IsIntegralStratifiedFinitelyPresented. Faithful exact functors preserve and reflect boundedness; replace bounds a,b by min(a,b),b to meet the completed predicate convention. Thus (iii) is IsIntegralBoundedConstructibleCohomology of the transported original K.",
    "uses": [
-    "lem-weil-pbc-integral-lfp-locally-free-resolution"
+    "lem-sfb-integral-section-local-models",
+    "det-prop-integral-criterion-reductions",
+    "lem-weil-pbc-integral-stratified-perfect-characterization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3), finite DVR resolution argument; existing general-ring-object resolution interface"
-   }
+   "elementary": false
   },
   {
-   "text": "For each $i$, $F_i[0]$ satisfies condition (ii) of the stratified-perfect characterization on $S$: use the single stratum $S$ and, on a trivializing cover, the perfect scalar complex $A^{r_i}[0]$. Hence $F_i[0]$ belongs to the completed integral category. The short exact sequence in step 3 gives the distinguished triangle $F_1[0]\\to F_0[0]\\to P[0]\\to F_1[1]$. Closure under cones in that same characterization puts $P[0]$ in the completed category. Its condition (iii) now supplies a finite stratification of $S$ on which $P$ has finite constant scalar local models. This argument uses the theorem on the Noetherian finite-dimensional base $S$, never on the possibly non-Noetherian members of its pro-étale covers.",
+   "text": "Apply the two proved equivalences of integralStratifiedPerfectCharacterization on Z to identify this cohomological predicate with PbcIsBoundedConstructibleComplete. Apply its integralStratifiedPerfectDetailed clause at the canonical integralSectionDerivedEquivalence image of K. These functors are definitionally the two derived exact functors used above. Transitivity gives (iii) iff (ii), and composing with step 2 gives the requested conjunction. The Noetherian, finite-dimensional and ell-invertible hypotheses are exactly those supplied in the theorem; no hypothesis is imposed on cover members.",
    "uses": [
     "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "lem-sf-derived-ses-triangle"
+    "det-prop-integral-criterion-reductions"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11; Proposition 6.8.11(3), triangulated-category argument"
-   }
-  },
-  {
-   "text": "There are only finitely many relevant $q$ and finitely many original strata in (i). Compose each finite refinement from step 4 with its original immersion into $Z$. These give finite locally closed constructible scheme partitions of $Z$, one for each $q$. Apply the open-closed refinement theorem to these finitely many partitions: each resulting leaf has actual morphisms to the input scheme strata. Pull back the local scalar-matrix presentations along those morphisms. Exact coefficient pullback preserves their cokernels and finite free terms; their scalar entries remain the same elements of $A$. The finite-constant-model equivalence therefore gives the required models on every leaf. The bound on the cohomology of $K$ is unchanged. This proves (iii), including a common finite stratification if one is required.",
-   "uses": [
-    "lem-fix-constructible-open-closed-refinement",
-    "sk-prop-sfb-cartesian-coefficients",
-    "det-def-sfb-constructible-local-model"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.8.11(3), finite cohomology and stratification refinement; scalar presentations as in Definition 6.8.10"
-   }
-  },
-  {
-   "text": "Conversely assume (iii). The finite-constant-model lemma expresses each $B_V\\otimes_A P$ as the cokernel of a finite matrix with entries in $A$, hence also of a finite matrix over $B_V$. Thus every cohomology sheaf has a locally finite presentation on its given strata. Together with boundedness this is precisely (i). This direction uses no completeness assumption and no assertion that arbitrary coefficient sections are constant.",
-   "uses": [
-    "det-def-sfb-constructible-local-model",
-    "sk-def-sfb-bounded-constructible"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.8.10; the scalar-presentation implication is the cited finite-constant-model lemma"
-   }
-  },
-  {
-   "text": "Finally apply the stratified-perfect characterization directly on $Z$. Its condition (iii) is exactly the cohomological scalar-model condition (iii) here; its condition (i) is explicitly also the category of the detailed integral definition used in (ii). The theorem retains compatible étale-origin witnesses and a single bound for all derived reductions. Therefore it proves both (ii) implies (iii) and (iii) implies (ii), with precisely these extra clauses, not merely constructibility of each reduction separately. Steps 3–6 identify (i) with (iii), completing all three equivalences.",
-   "uses": [
-    "lem-weil-pbc-integral-stratified-perfect-characterization",
-    "def-weil-derived-complete-integral-detailed"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Definition 6.5.1; Proposition 6.6.11; Proposition 6.8.11(3); compatible-witness and uniform-bound clauses of the cited characterization"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
-  "def-weil-derived-complete-integral-detailed",
-  "def-weil-l-adic-coefficient-extension",
-  "def-weil-pbc-continuous-integral-coefficients",
-  "det-def-sfb-constructible-local-model",
-  "lem-fix-constructible-open-closed-refinement",
-  "lem-sf-derived-ses-triangle",
-  "lem-sfb-noetherian-space-compact-subsets",
-  "lem-weil-pbc-integral-lfp-locally-free-resolution",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
+  "lem-sfb-integral-lfp-constant-model-comparison",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "lem-integral-coefficient-ext-comparison",
+  "lem-weil-pbc-module-constructible-pullback",
   "sk-def-sfb-bounded-constructible",
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-prop-sfb-qlbar-colimit-x"
+  "sk-def-sfb-constructible",
+  "lem-sfb-integral-section-local-models",
+  "det-prop-integral-criterion-reductions",
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Definition 6.5.1; Proposition 6.6.11; Proposition 6.8.11(3). Assembly of existing general-ring-object resolution and integral characterization nodes; not an attribution of local finite presentation to the paper definition."
+  "place": "Definition 6.8.10 and Proposition 6.8.11(3); use the existing proved lfp-to-scalar-model comparison and stratified-perfect characterization, isolating only the ordinary module presentation comparison. Derived assembly and coefficient transports compiled by B5."
  },
  "mathlib_searches": [
   {
@@ -278,16 +221,7 @@
   ]
  },
  "tool_uses": [
-  "det-def-sfb-constructible-local-model",
-  "lem-fix-constructible-open-closed-refinement",
-  "lem-sf-derived-ses-triangle",
-  "lem-sfb-noetherian-space-compact-subsets",
-  "lem-weil-pbc-integral-lfp-locally-free-resolution",
-  "lem-weil-pbc-integral-stratified-perfect-characterization",
-  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
-  "lem-weil-pbc-noetherian-scheme-closed-subsets-minimal",
-  "sk-prop-sfb-cartesian-coefficients",
-  "sk-prop-sfb-qlbar-colimit-x"
+  "lem-weil-pbc-integral-stratified-perfect-characterization"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -316,5 +250,15 @@
   "group": "NV",
   "result": "pass",
   "note": "First S2 delivery; only node.lean changed and lean.statement is verbatim in the file. Hypotheses match the node: IsNoetherian Z = quasi-compact + locally Noetherian; finite topologicalKrullDim; IsUnit l in Γ(Z,⊤) is equivalent to ℓ a unit in every local ring; the arbitrary uniformizer is harmless (same maximal ideal). B_Z = AdicCompletion.ring = condensedRingObj (DerivedNakayama.integerRing), the actual continuous ring. (i) recorded boundedConstructible (ring-object lfp stratified); (ii) recorded sfIntegralConstructible evaluated via the canonical, ∃!-pinned integralSectionDerivedEquivalence, which moves K itself rather than completing it; (iii) recorded constantModelBoundedConstructible (scalar models, qcqs branch); conclusion (i↔ii)∧(i↔iii). ULift only lifts the scalar carrier into universe u; site universes unchanged. Edge cases (empty Z, K=0, torsion, unbounded K) ok. Docstrings carry the source place, blueprint tag and the node's 7 proof steps; proof is sorry; imports exist with no cycle. No compile reproduced and no files changed; worker reports a clean compile (8.1 s / 6.8 s). Advisory only: integralSectionDerivedEquivalence (theorem det-prop-integral-criterion-reductions) and DerivedNakayama.integerRing have owner nodes outside stmt_deps, which are unchanged from base; maintainer note: a def node for the section-action equivalence would help citers."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T155743-L-3435194",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
