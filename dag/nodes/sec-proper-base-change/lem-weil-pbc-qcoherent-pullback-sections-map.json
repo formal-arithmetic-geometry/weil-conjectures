@@ -15,7 +15,7 @@
  ],
  "proof": [
   {
-   "text": "Compose the canonical additive global-section unit, the two normalized tensor composition isomorphisms and equality transport, followed by the additive map induced by psi. Each arrow has the required source and target. This is a real construction from the fixed tensor-pullback adjunctions; it does not select data from a new existence assertion.",
+   "text": "Compose the canonical additive section unit, the normalized tensor composition isomorphisms and equality transport, followed by the additive map induced by psi. Define the structural map as a copy uniquely specified to equal that explicit composition. The equality predicate has a proved unique witness, namely the composition itself. The copy equation proves equality to the former formula and prevents expensive kernel conversion through its data; it selects no arbitrary mathematical object.",
    "uses": [
     "lem-sc-etale-qcoherent-presheaf-functorial"
    ],
@@ -26,9 +26,9 @@
   "lem-sc-etale-qcoherent-presheaf-functorial"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/stacks-project/descent.tex",
-  "place": "Tag 03DR; etale-cohomology.tex Tag 03P2; cohomology.tex Tag 01FD"
+  "by": "F4 worker",
+  "document": "literature/stacks-project/etale-cohomology.tex",
+  "place": "Tags 03DR and 01FD; the unique copy is equality to the same explicit composition."
  },
  "mathlib_searches": [
   {
@@ -94,8 +94,14 @@
   "declaration": "AlgebraicGeometry.Scheme.Modules.qcoherentPullbackSection",
   "statement": "def qcoherentPullbackSection {X Y : Scheme.{u}} (g : Y ⟶ X)\n    (F : X.Modules) (G : Y.Modules) (ψ : (tensorPullback g).obj F ⟶ G)\n    (U : X.Etale) (V : Y.Etale) (p : V.left ⟶ U.left)\n    (h : p ≫ U.hom = V.hom ≫ g) :\n    Γ((tensorPullback U.hom).obj F, ⊤) ⟶ Γ((tensorPullback V.hom).obj G, ⊤)",
   "branch": "sheaf-dag",
-  "by": "Z7",
-  "date": "2026-10-18"
+  "by": "F4",
+  "date": "2026-10-20",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.qcoherentPullbackSection",
+   "AlgebraicGeometry.Scheme.Modules.existsUniqueSectionMapCopy",
+   "AlgebraicGeometry.Scheme.Modules.sectionMapCopy",
+   "AlgebraicGeometry.Scheme.Modules.sectionMapCopy_eq"
+  ]
  },
  "reviewed": {
   "date": "2026-10-18",
@@ -108,13 +114,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-3b9d7",
-  "group": "Z7",
+  "reviewer": "COMPILER",
+  "group": "F4",
   "result": "pass",
-  "landing": "20261018T071246-L-1684153",
+  "landing": "20261021T012358-L-2182839",
   "kind": "interface",
-  "note": "independent cc review: the item theorem's statement (byte-identical to the clone) and its 4-clause proof against the two new sorry theorems and their nodes; the moved qcoherentPullbackSection (verbatim diff) with its change record; the direct importer SmoothCurveEtaleStructureDirectImages compiled against the delivered modules; axioms checked"
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

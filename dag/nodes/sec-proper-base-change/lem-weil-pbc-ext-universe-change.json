@@ -1,0 +1,110 @@
+{
+ "id": "lem-weil-pbc-ext-universe-change",
+ "kind": "statement",
+ "title": "Ext universe change preserves exact transport and composition",
+ "statement": "The canonical equivalence between two Ext universes preserves represented derived morphisms, Yoneda products, degree-zero classes and exact-functor transport. Its composite formula applies to exact transport with a source and a target coefficient morphism.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F7, 010T, 0BDY and 01FD; etale-cohomology.tex Tags 03DR, 03FH and 03P2"
+ },
+ "stmt_deps": [],
+ "proof": [
+  {
+   "text": "Mathlib's direct universe-change equivalence represents the same\nderived morphism in either universe.\n\nApply the injective common derived morphism presentation and use the\nformula for composition and preservation of represented morphisms.\n\nCompute both represented morphisms in the same derived categories.\nThe derived functor formula is independent of the Ext universes, and universe\nchange preserves the represented morphism. Injectivity proves the equality.\n\nBoth classes represent the same derived morphism of degree zero.\n\nPreserve the two Yoneda products and the two degree-zero classes, then\nuse compatibility with exact-functor transport. This proves the composite\nformula with abstract abelian categories, before specializing the objects.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "F4 worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Structural adjunction formulas and simultaneous effacement proof of normalized pullback naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Changing the universe of Ext through its derived category preserves Yoneda products and the extension class of a short exact sequence",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.homEquiv_chgUniv\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"[HasDerivedCategory.{w''} C] (e : Ext.{w} X Y n) : homEquiv.{w'', w'} (chgUniv.{w'} e) = homEquiv.{w'', w} e\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the equivalence between the Ext group $\\\\mathrm{Ext}^n(X, Y)$ and the hom-set in the derived category between shifted single-term complexes\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Map\", \"type\": \"[HasExt.{w} C] [HasExt.{w'} D] {X Y : C} {n : ℕ} (f : Ext.{w} X Y n) : Ext.{w'} (F.obj X) (F.obj Y) n\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\text{Ext}^n(X, Y) \\\\to \\\\text{Ext}\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mapExactFunctor.congr_simp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Map\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C] {D : Type u'}\\n  [inst_2 : CategoryTheory.Category.{v', u'} D] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [inst_5 : CategoryTheory.Limits.PreservesFiniteLimit\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, applying $ F $ to the $ n $-shifted cochain complexes of $ X $ and $ Y $ induce\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.extClass\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass\", \"type\": \": Ext.{w} S.X₃ S.X₁ 1\", \"doc\": \"The Ext group $ \\\\operatorname{Ext}^1(X_3, X_1) $ in an abelian category $ \\\\mathcal{C} $, defined as the hom-set in the derived category between the single-term cochain complex of $ X_3 $ and the 1-shi\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.chgUniv\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \": Ext.{w} X Y n ≃ Ext.{w'} X Y n\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext groups in degree $n$ defined in different universes $w$ and $w'$ are equivalent. This equivalence arises from the equivalence of l\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.mk₀\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Basic\", \"type\": \"(f : X ⟶ Y) : Ext X Y 0\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is defined as the hom-set in the derived category between the $ n $-shifted single-term cochain comple\"}\n  {\"name\": \"CategoryTheory.Functor.mapExtAddHom\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.Map\", \"type\": \"[HasExt.{w} C] [HasExt.{w'} D] (X Y : C) (n : ℕ) : Ext.{w} X Y n →+ Ext.{w'} (F.obj X) (F.obj Y) n\", \"doc\": \"For an exact functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and objects $ X, Y \\\\in \\\\mathcal{C} $, this defines the induced group homomorphism $ \\\\operatorname{Ext}^n(X,Y) \\\\to \\\\op\"}\n  {\"name\": \"CategoryTheory.ShortComplex.ShortExact.extClass.congr_simp\", \"module\": \"Mathlib.Algebra.Homology.DerivedCategory.Ext.ExtClass\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] {S : CategoryTheory.ShortComplex C} (hS : S.ShortExact), hS.extClass = hS.extClass\", \"doc\": \"Given a short exact sequence $0 \\\\to X_1 \\\\to X_2 \\\\to X_3 \\\\to 0$ in an abelian category $\\\\mathcal{C}$, the extension class $\\\\operatorname{Ext}^1(X_3, X_1)$ is defined as the equivalence class of this se\"}\n",
+   "date": "2026-10-21",
+   "verdict": "Mathlib provides Ext.chgUniv and homEquiv_chgUniv; use them for the equivalence and prove compatibility with exact transport and composition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Changing the universe of Ext through its derived category preserves Yoneda products and the extension class of a short exact sequence",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Abelian.Ext.chgUniv\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.HasExt C] →\\n        [inst_3 : CategoryTheory.HasExt C] →\\n          {X Y : C} → {n : ℕ} → CategoryTheory.Abelian.Ext X Y n ≃ CategoryTheory.Abelian.Ext X Y n\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the Ext groups in degree $n$ defined in different universes $w$ and $w'$ are equivalent. This equivalence arises from the equivalence of l\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homEquiv_chgUniv\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] [inst_3 : CategoryTheory.HasExt C] {X Y : C} {n : ℕ}\\n  [inst_4 : HasDerivedCategory C] (e : CategoryTheory.Abelian.Ext X Y n),\\n  CategoryTheory.Abelian.Ext.homEquiv (Cate\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$, the equivalence between the Ext group $\\\\mathrm{Ext}^n(X, Y)$ and the hom-set in the derived category between shifted single-term complexes\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homEquiv\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.HasExt C] →\\n        {X Y : C} →\\n          [inst_3 : HasDerivedCategory C] →\\n            {n : ℕ} →\\n              CategoryTheory.Abelian.Ext X Y n ≃\\n                Cat\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, the Ext group in degree $ n $ is equivalent to the hom-set in the derived category between the $ n $-shifted single-term cochain com\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homAddEquiv\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.HasExt C] →\\n        {X Y : C} →\\n          [inst_3 : HasDerivedCategory C] →\\n            {n : ℕ} →\\n              CategoryTheory.Abelian.Ext X Y n ≃+\\n                Ca\", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ and natural number $n$, the equivalence between the Ext group $\\\\operatorname{Ext}^n(X, Y)$ and the hom-set $\\\\operatorname{Hom}_{D(\\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homLinearEquiv_apply\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear\", \"type\": \"∀ {R : Type t} [inst : Ring R] {C : Type u} [inst_1 : CategoryTheory.Category.{v, u} C]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Linear R C] [inst_4 : CategoryTheory.HasExt C] {X Y : C}\\n  {n : ℕ} [inst_5 : HasDerivedCategory C] (a : CategoryTheory.Abelian.Ext X Y n),\\n  Category\", \"doc\": \"For any element $ a $ in the Ext group $ \\\\operatorname{Ext}^n(X, Y) $, the image under the $ R $-linear equivalence $ \\\\operatorname{homLinearEquiv} $ coincides with the image under the additive equiva\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.hom'\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [inst_2 : CategoryTheory.HasExt C] →\\n        {X Y : C} →\\n          {n : ℕ} →\\n            CategoryTheory.Abelian.Ext X Y n →\\n              CategoryTheory.ShiftedHom ((DerivedCategory.singleFun\", \"doc\": \"For objects $ X $ and $ Y $ in an abelian category $ \\\\mathcal{C} $, this function maps an element of the Ext group $ \\\\text{Ext}^n(X, Y) $ to the hom-set in the derived category between the $ n $-shift\"}\n  {\"name\": \"CategoryTheory.Abelian.extFunctorObj_obj_coe\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] [inst_1 : CategoryTheory.Abelian C]\\n  [inst_2 : CategoryTheory.HasExt C] (X : C) (n : ℕ) (Y : C),\\n  ↑((CategoryTheory.Abelian.extFunctorObj X n).obj Y) = CategoryTheory.Abelian.Ext X Y n\", \"doc\": \"For a fixed object $X$ in an abelian category $\\\\mathcal{C}$ and natural number $n$, applying the Ext functor $\\\\operatorname{Ext}^n(X,-)$ to an object $Y$ yields the Ext group $\\\\operatorname{Ext}^n(X,Y\"}\n  {\"name\": \"CategoryTheory.Abelian.Ext.homLinearEquiv\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Linear\", \"type\": \"{R : Type t} →\\n  [inst : Ring R] →\\n    {C : Type u} →\\n      [inst_1 : CategoryTheory.Category.{v, u} C] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Linear R C] →\\n            [inst_4 : CategoryTheory.HasExt C] →\\n              {X Y : C} →\\n                {n : ℕ} \", \"doc\": \"For objects $X$ and $Y$ in an abelian category $\\\\mathcal{C}$ and integer $n$, the equivalence between the Ext group $\\\\operatorname{Ext}^n(X, Y)$ and the hom-set $\\\\operatorname{Hom}_{D(\\\\mathcal{C})}(X[\"}\n",
+   "date": "2026-10-20",
+   "verdict": "Mathlib provides Ext.chgUniv and homEquiv_chgUniv; use them for the equivalence and prove compatibility with exact transport and composition."
+  },
+  {
+   "tool": "loogle",
+   "query": "Abelian.Ext.comp_hom",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'Abelian.Ext.comp_hom'\n",
+   "date": "2026-10-20",
+   "verdict": "Mathlib provides Ext.chgUniv and homEquiv_chgUniv; use them for the equivalence and prove compatibility with exact transport and composition."
+  },
+  {
+   "tool": "grep",
+   "query": "universeChangeEquiv|homAddEquiv|extClass_hom",
+   "results": "[grep] OK 25 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Linear/Basic.lean\", \"line\": \"112\", \"text\": \"  toAddEquiv := InducedCategory.homAddEquiv\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Basic.lean\", \"line\": \"110\", \"text\": \"def _root_.CategoryTheory.InducedCategory.homAddEquiv\"}\n  {\"file\": \"Mathlib/Algebra/Category/Grp/ForgetCorepresentable.lean\", \"line\": \"92\", \"text\": \"  AddCommGrpCat.homAddEquiv.trans\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Yoneda/Basic.lean\", \"line\": \"168\", \"text\": \"  NatIso.ofComponents fun X ↦ NatIso.ofComponents fun Y ↦ AddCommGrpCat.homAddEquiv.toAddCommGrpIso\"}\n  {\"file\": \"Mathlib/Algebra/Category/Grp/Preadditive.lean\", \"line\": \"67\", \"text\": \"def homAddEquiv : (M ⟶ N) ≃+ (M →+ N) :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Semi.lean\", \"line\": \"322\", \"text\": \"def homAddEquiv : (M ⟶ N) ≃+ (M →ₗ[R] N) :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Semi.lean\", \"line\": \"366\", \"text\": \"  { homAddEquiv with\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Basic.lean\", \"line\": \"372\", \"text\": \"def homAddEquiv : (M ⟶ N) ≃+ (M →ₗ[R] N) :=\"}\n  {\"file\": \"Mathlib/Algebra/Category/ModuleCat/Basic.lean\", \"line\": \"426\", \"text\": \"  { homAddEquiv with\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"line\": \"17\", \"text\": \"  an additive equivalence `Adjunction.homAddEquiv`.\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"line\": \"53\", \"text\": \"def homAddEquiv (X : C) (Y : D) : AddEquiv (F.obj X ⟶ Y) (X ⟶ G.obj Y) :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"line\": \"60\", \"text\": \"lemma homAddEquiv_apply (X : C) (Y : D) (f : F.obj X ⟶ Y) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"line\": \"61\", \"text\": \"    adj.homAddEquiv X Y f = adj.homEquiv X Y f := rfl\"}\n  {\"file\": \"Mathlib/CategoryTheory/Adjunction/Additive.lean\", \"line\": \"64\", \"text\": \"lemma homAddEquiv_symm_apply (X : C) (Y : D) (f : X ⟶ G.obj Y) :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/HomotopyCategory/HomComplexCohomology.lean\", \"line\": \"170\", \"text\": \"noncomputable def homAddEquiv :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/SheafCohomology/Basic.lean\", \"line\": \"107\", \"text\": \"    AddEquiv.trans ((constantSheafAdj J AddCommGrpCat hT).homAddEquiv _ F)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean\", \"line\": \"56\", \"text\": \"    comp_hom, hS.extClass_hom, ShiftedHom.comp]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean\", \"line\": \"75\", \"text\": \"  apply Function.Exact.of_ladder_addEquiv_of_exact' (e₁ := Ext.homAddEquiv)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean\", \"line\": \"76\", \"text\": \"    (e₂ := Ext.homAddEquiv) (e₃ := Ext.homAddEquiv) (H := this)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean\", \"line\": \"96\", \"text\": \"  apply Function.Exact.of_ladder_addEquiv_of_exact' (e₁ := Ext.homAddEquiv)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/ExactSequences.lean\", \"line\": \"97\", \"text\": \"    (e₂ := Ext.homAddEquiv) (e₃ := Ext.homAddEquiv) (H := this)\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"line\": \"388\", \"text\": \"noncomputable def homAddEquiv {n : ℕ} :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Basic.lean\", \"line\": \"395\", \"text\": \"lemma homAddEquiv_apply (α : Ext X Y n) : homAddEquiv α = α.hom := rfl\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"238\", \"text\": \"  rw [Ext.mapExactFunctor_hom, hS.extClass_hom]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/Ext/Map.lean\", \"line\": \"239\", \"text\": \"  exact (hS.mapShiftedHom_singleδ' F).trans (hS.map_of_exact F).extClass_hom.symm\"}\n",
+   "date": "2026-10-20",
+   "verdict": "Mathlib provides Ext.chgUniv and homEquiv_chgUniv; use them for the equivalence and prove compatibility with exact transport and composition."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare",
+  "date": "2026-10-20",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-qcoherent-normalized-pullback-square",
+   "place": "Separate lemma in the direct dimension-shifting proof of pullback compatibility."
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.ExtUniverseChange",
+  "file": "lean/Sheaf/CategoryTheory/ExtUniverseChange.lean",
+  "declaration": "CategoryTheory.Abelian.Ext.universeChangeEquiv_exactComposite",
+  "declarations": [
+   "CategoryTheory.Abelian.Ext.mapExactFunctorWithCoefficients",
+   "CategoryTheory.Abelian.Ext.universeChangeEquiv",
+   "CategoryTheory.Abelian.Ext.universeChangeEquiv_hom",
+   "CategoryTheory.Abelian.Ext.universeChangeEquiv_comp",
+   "CategoryTheory.Abelian.Ext.universeChangeEquiv_mapExactFunctor",
+   "CategoryTheory.Abelian.Ext.universeChangeEquiv_mk₀",
+   "CategoryTheory.Abelian.Ext.universeChangeEquiv_exactComposite"
+  ],
+  "statement": "theorem universeChangeEquiv_exactComposite\n    {A : Type u} [Category.{v} A] [Abelian A]\n    {B : Type c} [Category.{d} B] [Abelian B]\n    [esA : HasExt.{s} A] [etA : HasExt.{t} A]\n    [esB : HasExt.{s} B] [etB : HasExt.{t} B]\n    (L : A ⥤ B) [L.Additive] [PreservesFiniteLimits L] [PreservesFiniteColimits L]\n    {Z F : A} {W G : B} (a : W ⟶ L.obj Z) (b : L.obj F ⟶ G)\n    (q : ℕ) (x : Ext.{s} Z F q) :\n    @universeChangeEquiv B _ _ esB etB W G q\n        (((Ext.mk₀.{s} a).comp (Ext.mapExactFunctor.{s, s} L x) (zero_add q)).comp\n          (Ext.mk₀.{s} b) (add_zero q)) =\n      ((Ext.mk₀.{t} a).comp\n        (Ext.mapExactFunctor.{t, t} L\n          (@universeChangeEquiv A _ _ esA etA Z F q x)) (zero_add q)).comp\n        (Ext.mk₀.{t} b) (add_zero q)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261021T012358-L-2182839",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261021T012358-L-2182839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

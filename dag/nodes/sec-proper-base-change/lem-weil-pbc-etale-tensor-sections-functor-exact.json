@@ -1,0 +1,113 @@
+{
+ "id": "lem-weil-pbc-etale-tensor-sections-functor-exact",
+ "kind": "statement",
+ "title": "Exactness of sheafified tensor sections",
+ "statement": "For every scheme X, the sheafified tensor sections functor on all O_X-modules preserves finite limits and finite colimits. The conventions and constructions are those of [def-pc-scheme], [lem-sc-etale-tensor-sections-right-exact].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F7, 010T, 0BDY and 01FD; etale-cohomology.tex Tags 03DR, 03FH and 03P2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "lem-sc-etale-tensor-sections-right-exact"
+ ],
+ "proof": [
+  {
+   "text": "A monomorphism of modules remains monic after pullback to each étale\nobject, since étale maps are flat. Taking sections preserves monomorphisms,\nso the tensor-section presheaf functor preserves them objectwise. Coefficient\nlift and sheafification preserve monomorphisms, hence so does their composite.\nThe sheafified construction already preserves cokernels: sections of a quotient\nlift locally for the Zariski topology, hence for the étale topology. An additive\nfunctor between abelian categories preserving monomorphisms and cokernels\npreserves exactness and therefore finite limits and finite colimits. Zero\nmodules, empty schemes and arbitrary coefficient modules satisfy the same\nobjectwise argument.",
+   "uses": [
+    "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+    "lem-sc-etale-tensor-sections-right-exact"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-flat-module-pullback-exact-pushforward-injective",
+  "lem-sc-etale-tensor-sections-right-exact"
+ ],
+ "proof_origin": {
+  "by": "F4 worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Structural adjunction formulas and simultaneous effacement proof of normalized pullback naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An additive functor preserving monomorphisms and cokernels preserves finite limits and finite colimits",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteLimits_of_preservesKernels\", \"module\": \"Mathlib.CategoryTheory.Preadditive.LeftExact\", \"type\": \"[HasFiniteProducts C] [HasEqualizers C] [HasZeroObject C] [HasZeroObject D]\\n  [∀ {X Y} (f : X ⟶ Y), PreservesLimit (parallelPair f 0) F] : PreservesFiniteLimits F\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be categories with finite products, equalizers, and zero objects. If a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ preserves the equalizer of every parallel pair $(f,\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteLimits_tfae\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\", \"type\": \":\\n  List.TFAE\\n    [∀ (S : ShortComplex C), S.ShortExact → (S.map F).Exact ∧ Mono (F.map S.f),\\n      ∀ (S : ShortComplex C), S.Exact ∧ Mono S.f → (S.map F).Exact ∧ Mono (F.map S.f),\\n      ∀ ⦃X Y : C⦄ (f : X ⟶ Y), PreservesLimit (parallelPair f 0) F, PreservesFiniteLimits F]\", \"doc\": \"The following are equivalent for a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories:\\n1. For every short exact sequence $S$ in $\\\\mathcal{C}$, the image $F(S)$ is an exact sequence i\"}\n  {\"name\": \"CategoryTheory.instPreservesFiniteColimitsObjFunctorExactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"(F : C ⥤ₑ D) : PreservesFiniteColimits F.obj\", \"doc\": \"Every exact functor between categories preserves finite colimits. That is, if $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is an exact functor (preserving both finite limits and colimits), then $ F $ preserves\"}\n  {\"name\": \"CategoryTheory.exactFunctor\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \": ObjectProperty (C ⥤ D)\", \"doc\": \"A functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ that preserves both finite limits and finite colimits, i.e., it preserves the limit of any finite diagram and the colimit of any finite diagram in $ \\\\math\"}\n  {\"name\": \"CategoryTheory.exactFunctor_iff\", \"module\": \"Mathlib.CategoryTheory.Limits.ExactFunctor\", \"type\": \"(F : C ⥤ D) : exactFunctor C D F ↔ PreservesFiniteLimits F ∧ PreservesFiniteColimits F\", \"doc\": \"A functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ is exact if and only if it preserves finite limits and finite colimits, i.e., $ F $ preserves the limit of any finite diagram and the colimit of any finit\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteColimits_tfae\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\", \"type\": \":\\n  List.TFAE\\n    [∀ (S : ShortComplex C), S.ShortExact → (S.map F).Exact ∧ Epi (F.map S.g),\\n      ∀ (S : ShortComplex C), S.Exact ∧ Epi S.g → (S.map F).Exact ∧ Epi (F.map S.g),\\n      ∀ ⦃X Y : C⦄ (f : X ⟶ Y), PreservesColimit (parallelPair f 0) F, PreservesFiniteColimits F]\", \"doc\": \"The following are equivalent for a functor $ F : C \\to D $ between categories with zero morphisms: (1) For every short exact sequence $ S $ in $ C $, the image $ F(S) $ is exact and $ F(g) $ is an epim\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteColimits_of_preservesHomology\", \"module\": \"Mathlib.Algebra.Homology.ShortComplex.ExactFunctor\", \"type\": \"[HasFiniteCoproducts C] [HasCokernels C] : PreservesFiniteColimits F\", \"doc\": \"If a category $\\\\mathcal{C}$ has finite coproducts and cokernels, then any functor $F$ that preserves homology also preserves finite colimits.\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels\", \"module\": \"Mathlib.CategoryTheory.Preadditive.LeftExact\", \"type\": \"[HasFiniteCoproducts C] [HasCoequalizers C] [HasZeroObject C] [HasZeroObject D]\\n  [∀ {X Y} (f : X ⟶ Y), PreservesColimit (parallelPair f 0) F] : PreservesFiniteColimits F\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be categories with finite coproducts, coequalizers, and zero objects. If a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ preserves the coequalizer of every morphism $f \"}\n",
+   "date": "2026-10-21",
+   "verdict": "The existing primitives are used; no exact theorem of this form was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive functor preserving monomorphisms and cokernels preserves finite limits and finite colimits",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteLimits_tfae\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Abelian C]\\n  [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_4 : F.Additive],\\n  [∀ (S : CategoryTheory.ShortComplex C), \", \"doc\": \"The following are equivalent for a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories:\\n1. For every short exact sequence $S$ in $\\\\mathcal{C}$, the image $F(S)$ is an exact sequence i\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteLimits_of_preservesKernels\", \"module\": \"Mathlib/CategoryTheory/Preadditive/LeftExact\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.Preadditive D] (F : CategoryTheory.Functor C D)\\n  [F.PreservesZeroMorphisms] [CategoryTheory.Limits.HasBinaryBipr\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be categories with finite products, equalizers, and zero objects. If a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ preserves the equalizer of every parallel pair $(f,\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteLimits_iff_forall_exact_map_and_mono\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Abelian C]\\n  [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_4 : F.Additive],\\n  CategoryTheory.Limits.PreservesFiniteLim\", \"doc\": \"For a functor $ F $ between abelian categories, $ F $ preserves finite limits if and only if for every short exact sequence $ S $ in the source category, the image of $ S $ under $ F $ is an exact seq\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteLimits_of_preservesHomology\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Preadditive C]\\n  [inst_3 : CategoryTheory.Preadditive D] (F : CategoryTheory.Functor C D) [inst_4 : F.Additive] [F.PreservesHomology]\\n  [CategoryTh\", \"doc\": \"If a category $\\\\mathcal{C}$ has finite products and kernels, then any functor $F$ that preserves homology also preserves finite limits.\"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteColimits_of_preservesCokernels\", \"module\": \"Mathlib/CategoryTheory/Preadditive/LeftExact\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.Preadditive D] (F : CategoryTheory.Functor C D)\\n  [F.PreservesZeroMorphisms] [CategoryTheory.Limits.HasBinaryBipr\", \"doc\": \"Let $\\\\mathcal{C}$ and $\\\\mathcal{D}$ be categories with finite coproducts, coequalizers, and zero objects. If a functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ preserves the coequalizer of every morphism $f \"}\n  {\"name\": \"CategoryTheory.Functor.preservesFiniteColimits_tfae\", \"module\": \"Mathlib/Algebra/Homology/ShortComplex/ExactFunctor\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] [inst_2 : CategoryTheory.Abelian C]\\n  [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_4 : F.Additive],\\n  [∀ (S : CategoryTheory.ShortComplex C), \", \"doc\": \"The following are equivalent for a functor $ F : C \\to D $ between categories with zero morphisms: (1) For every short exact sequence $ S $ in $ C $, the image $ F(S) $ is exact and $ F(g) $ is an epim\"}\n  {\"name\": \"CategoryTheory.Functor.preservesHomology_of_preservesMonos_and_cokernels\", \"module\": \"Mathlib/CategoryTheory/Abelian/Exact\", \"type\": \"∀ {A : Type u₁} {B : Type u₂} [inst : CategoryTheory.Category.{v₁, u₁} A] [inst_1 : CategoryTheory.Category.{v₂, u₂} B]\\n  [inst_2 : CategoryTheory.Abelian A] [inst_3 : CategoryTheory.Abelian B] (L : CategoryTheory.Functor A B)\\n  [inst_4 : L.PreservesZeroMorphisms] [L.PreservesMonomorphisms]\\n  [∀ {X \", \"doc\": \"If a functor $ L $ preserves zero morphisms, preserves monomorphisms, and preserves the colimit of the parallel pair diagram $ (f, 0) $ for every morphism $ f $, then $ L $ preserves homology in an ab\"}\n  {\"name\": \"CategoryTheory.Functor.preservesEqualizers_of_preservesKernels\", \"module\": \"Mathlib/CategoryTheory/Preadditive/LeftExact\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C] [inst_1 : CategoryTheory.Preadditive C] {D : Type u₂}\\n  [inst_2 : CategoryTheory.Category.{v₂, u₂} D] [inst_3 : CategoryTheory.Preadditive D] (F : CategoryTheory.Functor C D)\\n  [F.PreservesZeroMorphisms] [CategoryTheory.Limits.HasBinaryBipr\", \"doc\": \"In a preadditive category, if a functor $ F $ preserves the kernel of every morphism $ f $ (i.e., the equalizer of $ f $ and the zero morphism $ 0 $), then $ F $ preserves all equalizers (limits of di\"}\n",
+   "date": "2026-10-20",
+   "verdict": "The existing primitives are used; no exact theorem of this form was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.preservesHomology_of_preservesMonos_and_cokernels",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Functor.preservesHomology_of_preservesMonos_and_cokernels\", \"module\": \"Mathlib.CategoryTheory.Abelian.Exact\", \"type\": \" {A : Type u₁} {B : Type u₂} [CategoryTheory.Category.{v₁, u₁} A] [CategoryTheory.Category.{v₂, u₂} B] [CategoryTheory.Abelian A] [CategoryTheory.Abelian B] (L : CategoryTheory.Functor A B) [L.PreservesZeroMorphisms] [L.PreservesMonomorphisms] [∀ {X Y : A} (f : X ⟶ Y), CategoryTheory.Limits.Preserve\", \"doc\": \"A functor preserving zero morphisms, monos, and cokernels preserves homology.\"}\n",
+   "date": "2026-10-20",
+   "verdict": "The existing primitives are used; no exact theorem of this form was found."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesHomology_of_preservesMonos_and_cokernels",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean\", \"line\": \"567\", \"text\": \"    · exact preservesHomology_of_preservesMonos_and_cokernels _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\", \"line\": \"157\", \"text\": \"    (tensorObj G).preservesHomology_of_preservesMonos_and_cokernels\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/Exact.lean\", \"line\": \"294\", \"text\": \"lemma preservesHomology_of_preservesMonos_and_cokernels [PreservesZeroMorphisms L]\"}\n",
+   "date": "2026-10-20",
+   "verdict": "The existing primitives are used; no exact theorem of this form was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare",
+  "date": "2026-10-20",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-qcoherent-normalized-pullback-square",
+   "place": "Separate lemma in the direct dimension-shifting proof of pullback compatibility."
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.EtaleTensorSectionsFunctorExact",
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleTensorSectionsFunctorExact.lean",
+  "declaration": "AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsFunctor_exact",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.Modules.etaleTensorSectionsFunctor_exact"
+  ],
+  "statement": "theorem etaleTensorSectionsFunctor_exact (X : Scheme.{u}) :\n    PreservesFiniteLimits (etaleTensorSectionsFunctor X) ∧\n      PreservesFiniteColimits (etaleTensorSectionsFunctor X)",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261021T012358-L-2182839",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261021T012358-L-2182839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

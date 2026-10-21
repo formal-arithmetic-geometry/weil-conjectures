@@ -1,0 +1,120 @@
+{
+ "id": "lem-weil-pbc-qcqs-quasicoherent-pure-acyclic-embedding",
+ "kind": "statement",
+ "title": "Universally monic quasicoherent acyclic embedding",
+ "statement": "A quasicoherent module on a quasi compact separated scheme embeds into a quasicoherent module with zero positive module cohomology, and this embedding remains monic after every scheme pullback. The conventions and constructions are those of [def-pc-scheme], [pqf-def-coherent], [def-sc-ringed-space-module-cohomology].",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tags 01F7, 010T, 0BDY and 01FD; etale-cohomology.tex Tags 03DR, 03FH and 03P2"
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "pqf-def-coherent",
+  "def-sc-ringed-space-module-cohomology"
+ ],
+ "proof": [
+  {
+   "text": "Choose a finite affine open cover and let j be the map from its disjoint\nunion to X. Embed F into j_*j^*F by the adjunction unit. Separatedness makes\nintersections of affine opens affine, so j is affine; its source is affine.\nAffine pushforward preserves quasicoherence, and the affine cohomology edge\nand affine vanishing give zero positive cohomology of j_*j^*F.\nAfter pulling back along j the unit splits by the triangle identity. For any\nbase change g, the pulled-back open cover has disjoint union k and a map a\ninto the original disjoint union with a followed by j equal to k followed by g.\nPullback composition identifies k^*g^* of the embedding with a^*j^* of it,\nwhich is split monic. Pullback along an open cover is faithful, so g^* of the\nembedding is monic. The empty cover is included by faithfulness.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-cohomology-edge",
+    "lem-pc-affine-morphism-hi",
+    "lem-weil-pbc-quasi-coherent-module-kernel",
+    "lem-sc-flat-cover-module-isomorphism-reflection",
+    "lem-weil-pbc-separated-affine-open-intersection"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-affine-morphism-cohomology-edge",
+  "lem-pc-affine-morphism-hi",
+  "lem-weil-pbc-quasi-coherent-module-kernel",
+  "lem-sc-flat-cover-module-isomorphism-reflection",
+  "lem-weil-pbc-separated-affine-open-intersection"
+ ],
+ "proof_origin": {
+  "by": "F4 worker",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Structural adjunction formulas and simultaneous effacement proof of normalized pullback naturality."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Universally monic acyclic quasicoherent embedding on a quasi compact separated scheme",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"[Mono f] : UniversallyInjective f\", \"doc\": \"Every monomorphism in the category of schemes is universally injective. That is, if $ f : X \\to Y $ is a monomorphism (i.e., a left-cancellative morphism in the category of schemes), then for every bas\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective.mk\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y},\\n  (AlgebraicGeometry.topologically fun {α β} [TopologicalSpace α] [TopologicalSpace β] x =>\\n          Function.Injective x).universally\\n      f →\\n    AlgebraicGeometry.UniversallyInjective f\", \"doc\": \"If for every base change, the induced continuous map on topological spaces is injective, then the morphism $ f: X \\to Y $ of schemes is universally injective.\"}\n  {\"name\": \"AlgebraicGeometry.IsClosedImmersion.iff_isFinite_and_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Finite\", \"type\": \": IsClosedImmersion f ↔ IsFinite f ∧ Mono f\", \"doc\": \"A morphism of schemes is a closed immersion if and only if it is both a finite morphism and a monomorphism in the category of schemes.\"}\n  {\"name\": \"AlgebraicGeometry.UniversallyInjective\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyInjective\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism $ f: X \\to Y $ of schemes is universally injective if for every base change, the induced morphism on the underlying topological spaces is injective.\"}\n  {\"name\": \"AlgebraicGeometry.instQuasiSeparatedOfMonoScheme\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated\", \"type\": \"(f : X ⟶ Y) [Mono f] : QuasiSeparated f\", \"doc\": \"Every monomorphism $ f : X \\to Y $ of schemes is quasi-separated, meaning the diagonal morphism $ X \\to X \\times_Y X $ is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyClosedOfIsClosedImmersion\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.UniversallyClosed\", \"type\": \"[IsClosedImmersion f] : UniversallyClosed f\", \"doc\": \"Every closed immersion of schemes is a universally closed morphism. Specifically, if $ f: X \\to Y $ is a closed immersion (i.e., it induces a homeomorphism of $ X $ onto a closed subset of $ Y $ with s\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.le_monomorphisms\", \"module\": \"Mathlib.AlgebraicGeometry.OpenImmersion\", \"type\": \": IsOpenImmersion ≤ MorphismProperty.monomorphisms Scheme.{u}\", \"doc\": \"Every open immersion of schemes is a monomorphism in the category of schemes, i.e., the property of being an open immersion is contained within the property of being a monomorphism for morphisms in th\"}\n  {\"name\": \"AlgebraicGeometry.IsSeparated.isSeparated_of_mono\", \"module\": \"Mathlib.AlgebraicGeometry.Morphisms.Separated\", \"type\": \"[Mono f] : IsSeparated f\", \"doc\": \"Every monomorphism of schemes is a separated morphism.\"}\n",
+   "date": "2026-10-21",
+   "verdict": "The existing primitives are used; no exact theorem of this form was found."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Universally monic acyclic quasicoherent embedding on a quasi compact separated scheme",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"AlgebraicGeometry.IsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"{X Y : AlgebraicGeometry.Scheme} → (X ⟶ Y) → Prop\", \"doc\": \"A morphism between schemes $ X $ and $ Y $ is an immersion.\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.toIsImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} [self : X.IsQuasiAffine], AlgebraicGeometry.IsImmersion X.toSpecΓ\", \"doc\": \"For any quasi-affine scheme $ X $, the natural morphism from $ X $ to $ \\\\operatorname{Spec}(\\\\Gamma(X)) $ is an immersion, where $ \\\\Gamma(X) $ denotes the ring of global sections of $ X $.\"}\n  {\"name\": \"AlgebraicGeometry.instUniversallyInjectiveOfMonoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/UniversallyInjective\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [CategoryTheory.Mono f], AlgebraicGeometry.UniversallyInjective f\", \"doc\": \"Every monomorphism in the category of schemes is universally injective. That is, if $ f : X \\to Y $ is a monomorphism (i.e., a left-cancellative morphism in the category of schemes), then for every bas\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IdealSheafData.instQuasiCompactSubschemeι\", \"module\": \"Mathlib/AlgebraicGeometry/IdealSheaf/Subscheme\", \"type\": \"∀ {X : AlgebraicGeometry.Scheme} (I : X.IdealSheafData), AlgebraicGeometry.QuasiCompact I.subschemeι\", \"doc\": \"The canonical morphism from the closed subscheme defined by an ideal sheaf to the original scheme is quasi-compact.\"}\n  {\"name\": \"AlgebraicGeometry.IsPreimmersion.instMonoScheme\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Preimmersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [AlgebraicGeometry.IsPreimmersion f], CategoryTheory.Mono f\", \"doc\": \"Every preimmersion between schemes is a monomorphism in the category of schemes, meaning that for any pair of morphisms $ Z \\to X $ with a common domain, if their compositions with the preimmersion $ f\"}\n  {\"name\": \"AlgebraicGeometry.IsImmersion.isImmersion_iff_exists_of_quasiCompact\", \"module\": \"Mathlib/AlgebraicGeometry/Morphisms/Immersion\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} {f : X ⟶ Y} [AlgebraicGeometry.QuasiCompact f],\\n  AlgebraicGeometry.IsImmersion f ↔\\n    ∃ Z g₁ g₂,\\n      AlgebraicGeometry.IsOpenImmersion g₁ ∧\\n        AlgebraicGeometry.IsClosedImmersion g₂ ∧ CategoryTheory.CategoryStruct.comp g₁ g₂ = f\", \"doc\": \"For a quasi-compact morphism $ f: X \\\\to Y $ of schemes, $ f $ is an immersion if and only if there exists a scheme $ Z $ and morphisms $ g_1: X \\\\to Z $ (an open immersion) and $ g_2: Z \\\\to Y $ (a clos\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.IsQuasiAffine.of_isImmersion\", \"module\": \"Mathlib/AlgebraicGeometry/QuasiAffine\", \"type\": \"∀ {X Y : AlgebraicGeometry.Scheme} (f : X ⟶ Y) [Y.IsQuasiAffine] [AlgebraicGeometry.IsImmersion f] [CompactSpace ↥X],\\n  X.IsQuasiAffine\", \"doc\": \"If $ X $ and $ Y $ are schemes, $ f: X \\to Y $ is an immersion, $ Y $ is quasi-affine, and $ X $ is a compact topological space, then $ X $ is a quasi-affine scheme.\"}\n  {\"name\": \"AlgebraicGeometry.IsOpenImmersion.le_monomorphisms\", \"module\": \"Mathlib/AlgebraicGeometry/OpenImmersion\", \"type\": \"AlgebraicGeometry.IsOpenImmersion ≤ CategoryTheory.MorphismProperty.monomorphisms AlgebraicGeometry.Scheme\", \"doc\": \"Every open immersion of schemes is a monomorphism in the category of schemes, i.e., the property of being an open immersion is contained within the property of being a monomorphism for morphisms in th\"}\n",
+   "date": "2026-10-20",
+   "verdict": "The existing primitives are used; no exact theorem of this form was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.unit_app",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'CategoryTheory.Adjunction.unit_app'\n",
+   "date": "2026-10-20",
+   "verdict": "The existing primitives are used; no exact theorem of this form was found."
+  },
+  {
+   "tool": "grep",
+   "query": "affine.*cohomology|cover.*faithful",
+   "results": "[grep] OK 8 hit(s)\n  {\"file\": \"Mathlib/GroupTheory/Perm/Subgroup.lean\", \"line\": \"70\", \"text\": \"recovers the usual statement of Cayley's theorem via `RightCancelMonoid.faithfulSMul` -/\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/Descent/Precoverage.lean\", \"line\": \"348\", \"text\": \"  have := (F.fullyFaithfulToDescentData _ (J.superset_covering h₂ h₁)).faithful\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/CoverLifting.lean\", \"line\": \"106\", \"text\": \"    (h : CoverPreserving J L (F ⋙ G)) [G.IsCocontinuous K L] [G.Full] [G.Faithful] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean\", \"line\": \"15\", \"text\": \"some `X : C`, `T ∩ mor(C)` generates a covering sieve of `X` in `D`. A locally dense fully faithful\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/InducedTopology.lean\", \"line\": \"59\", \"text\": \"theorem pushforward_cover_iff_cover_pullback [G.Full] [G.Faithful] {X : C} (S : Sieve X) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/Basic.lean\", \"line\": \"536\", \"text\": \"if `G` is cover-dense, locally fully-faithful,\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"line\": \"161\", \"text\": \"lemma isDenseSubsite_of_isOneHypercoverDense [F.IsLocallyFull J] [F.IsLocallyFaithful J]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Sites/DenseSubsite/OneHypercoverDense.lean\", \"line\": \"180\", \"text\": \"lemma IsOneHypercoverDense.of_hasPullbacks [HasPullbacks C] [F.Full] [F.Faithful]\"}\n",
+   "date": "2026-10-20",
+   "verdict": "The existing primitives are used; no exact theorem of this form was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.QcoherentNormalizedPullbackSquare",
+  "date": "2026-10-20",
+  "group": "F4"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-weil-pbc-qcoherent-normalized-pullback-square",
+   "place": "Separate lemma in the direct dimension-shifting proof of pullback compatibility."
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.QcqsQuasicoherentAcyclicEmbedding",
+  "file": "lean/Sheaf/AlgebraicGeometry/QcqsQuasicoherentAcyclicEmbedding.lean",
+  "declaration": "AlgebraicGeometry.Scheme.exists_qcqs_quasicoherent_pure_acyclic_embedding",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.exists_qcqs_quasicoherent_pure_acyclic_embedding"
+  ],
+  "statement": "theorem exists_qcqs_quasicoherent_pure_acyclic_embedding (X : Scheme.{u})\n    [CompactSpace X] [X.IsSeparated]\n    (F : X.Modules) [F.IsQuasicoherent] :\n    ∃ F' : X.Modules,\n      F'.IsQuasicoherent ∧ ∃ i : F ⟶ F', Mono i ∧\n        (∀ (Y : Scheme.{u}) (g : Y ⟶ X), Mono ((Modules.pullback g).map i)) ∧\n        ∀ p : ℕ, 1 ≤ p → IsZero ((RingedSpace.moduleCohomology X.toRingedSpace p).obj F')",
+  "branch": "sheaf-dag",
+  "by": "F4",
+  "date": "2026-10-20"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261021T012358-L-2182839",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F4",
+  "result": "pass",
+  "landing": "20261021T012358-L-2182839",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
