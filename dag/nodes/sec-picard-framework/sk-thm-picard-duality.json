@@ -3,40 +3,236 @@
  "blueprint": {
   "is": "sk-thm-picard-duality",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "Serre duality",
- "statement": "Let $X$ be a smooth proper curve over $k$, of pure dimension\n$n\\le1$, and $\\cF$ a finite locally free $\\cO_X$-module. With\n$\\omega_X=\\Omega^n_{X/k}$ the canonical module, let\n$t_X:H^n(X,\\omega_X)\\to k$ be the *trace*: for $n=0$,\n$X=\\Spec A$ with $A$ finite étale over $k$, $\\omega_X=\\cO_X$ and\n$t_X=\\operatorname{Tr}_{A/k}$; for $n=1$ ($X$ integral with function\nfield $K$), the residue sequence\n$0\\to\\omega_X\\to\\underline{\\Omega^1_{K/k}}\\to\\bigoplus_{x}i_{x,*}\\bigl(\\Omega^1_{K/k}/\\omega_{X,x}\\bigr)\\to0$\n($x$ over the closed points; the constant sheaf in the middle is flasque) identifies\n$H^1(X,\\omega_X)$ with the cokernel of\n$\\Omega^1_{K/k}\\to\\bigoplus_x\\Omega^1_{K/k}/\\omega_{X,x}$, and\n$t_X\\bigl((\\eta_x)_x\\bigr)=\\sum_x\\operatorname{res}_x(\\eta_x)$, where\n$\\operatorname{res}_x:\\Omega^1_{K/k}\\to k$ is Tate's $k$-linear residue\nat $x$: it kills $\\omega_{X,x}$, it satisfies the residue theorem\n$\\sum_x\\operatorname{res}_x(\\eta)=0$ for $\\eta\\in\\Omega^1_{K/k}$, and it\nequals $\\operatorname{Tr}_{\\kappa(x)/k}$ of the classical residue\n(computed in $\\widehat{\\cO}_{X,x}\\cong\\kappa(x)[[t]]$) whenever\n$\\kappa(x)/k$ is separable, hence at every $x$ when $k$ is perfect. The residue theorem is exactly what makes\n$t_X$ well defined on the cokernel. (The naive formula\n$\\sum_x\\operatorname{Tr}_{\\kappa(x)/k}\\circ\\operatorname{res}_x$ is not\navailable over imperfect $k$: at a closed point with $\\kappa(x)/k$\ninseparable, $\\widehat{\\cO}_{X,x}$ has no coefficient field containing\n$k$, and $\\operatorname{Tr}_{\\kappa(x)/k}$ vanishes on a purely\ninseparable extension; Tate's residue avoids both problems.) Then the\ntrace pairing\n\n$$\nH^q(X,\\cF)\\otimes_kH^{n-q}(X,\\cF^{\\vee}\\otimes\\omega_X)\n\\xrightarrow{\\ \\cup\\ }H^n(X,\\cF\\otimes\\cF^{\\vee}\\otimes\\omega_X)\n\\xrightarrow{\\ \\mathrm{ev}\\ }H^n(X,\\omega_X)\\xrightarrow{\\ t_X\\ }k\n$$\n\nis perfect for every $q$:\n\n$$\nH^q(X,\\cF)^{\\vee}\\ \\cong\\ H^{n-q}\\bigl(X,\\cF^{\\vee}\\otimes\\omega_X\\bigr),\n$$\n\nand this isomorphism is natural in $\\cF$: for a morphism\n$\\varphi:\\cF\\to\\mathcal G$ of finite locally free modules,\n$\\langle\\varphi_*a,b\\rangle=\\langle a,(\\varphi^{\\vee}\\otimes1)_*b\\rangle$,\ni.e. it carries $H^q(\\varphi)^{\\vee}$ to\n$H^{n-q}(\\varphi^{\\vee}\\otimes1)$. In particular ($n=1$, $q=1$,\n$\\cF=\\cO_X$), $H^1(X,\\cO_X)^{\\vee}\\cong H^0(X,\\Omega^1_{X/k})$: for a\nsmooth proper connected curve over algebraically closed $k$ the genus\n$\\dim_kH^0(C,\\Omega^1_{C/k})$ of [sk-def-curve] equals\n$\\dim_kH^1(C,\\cO_C)$, the genus of the conventions of this section.",
+ "statement": "Let $X$ be a smooth proper curve over $k$, of pure dimension\n$n\\in\\{0,1\\}$, and $\\cF$ a finite locally free $\\cO_X$-module. With\n$\\omega_X=\\Omega^n_{X/k}$ the canonical module, let\n$t_X:H^n(X,\\omega_X)\\to k$ be the *trace*: for $n=0$,\n$X=\\Spec A$ with $A$ finite étale over $k$, $\\omega_X=\\cO_X$ and\n$t_X=\\operatorname{Tr}_{A/k}$; for $n=1$ and $X$ integral with function\nfield $K$, the residue sequence\n$0\\to\\omega_X\\to\\underline{\\Omega^1_{K/k}}\\to\\bigoplus_{x}i_{x,*}\\bigl(\\Omega^1_{K/k}/\\omega_{X,x}\\bigr)\\to0$\n($x$ over the closed points; the constant sheaf in the middle is flasque) identifies\n$H^1(X,\\omega_X)$ with the cokernel of\n$\\Omega^1_{K/k}\\to\\bigoplus_x\\Omega^1_{K/k}/\\omega_{X,x}$, and\n$t_X\\bigl((\\eta_x)_x\\bigr)=\\sum_x\\operatorname{res}_x(\\eta_x)$, where\n$\\operatorname{res}_x:\\Omega^1_{K/k}\\to k$ is Tate's $k$-linear residue\nat $x$: it kills $\\omega_{X,x}$, it satisfies the residue theorem\n$\\sum_x\\operatorname{res}_x(\\eta)=0$ for $\\eta\\in\\Omega^1_{K/k}$, and it\nequals $\\operatorname{Tr}_{\\kappa(x)/k}$ of the classical residue\n(computed in $\\widehat{\\cO}_{X,x}\\cong\\kappa(x)[[t]]$) whenever\n$\\kappa(x)/k$ is separable, hence at every $x$ when $k$ is perfect. The residue theorem is exactly what makes\n$t_X$ well defined on the cokernel. (The naive formula\n$\\sum_x\\operatorname{Tr}_{\\kappa(x)/k}\\circ\\operatorname{res}_x$ is not\navailable over imperfect $k$: at a closed point with $\\kappa(x)/k$\ninseparable, $\\widehat{\\cO}_{X,x}$ has no coefficient field containing\n$k$, and $\\operatorname{Tr}_{\\kappa(x)/k}$ vanishes on a purely\ninseparable extension; Tate's residue avoids both problems.) For a possibly disconnected $X$ of pure dimension one, use this construction on each connected component $X_j$ (each is integral), identify $H^1(X,\\omega_X)=\\bigoplus_j H^1(X_j,\\omega_{X_j})$, and set $t_X=\\sum_jt_{X_j}$. For $X=\\varnothing$ the trace is zero. Cohomology in negative degrees is understood to be zero. Then the\ntrace pairing\n\n$$\nH^q(X,\\cF)\\otimes_kH^{n-q}(X,\\cF^{\\vee}\\otimes\\omega_X)\n\\xrightarrow{\\ \\cup\\ }H^n(X,\\cF\\otimes\\cF^{\\vee}\\otimes\\omega_X)\n\\xrightarrow{\\ \\mathrm{ev}\\ }H^n(X,\\omega_X)\\xrightarrow{\\ t_X\\ }k\n$$\n\nis perfect for every $q$:\n\n$$\nH^q(X,\\cF)^{\\vee}\\ \\cong\\ H^{n-q}\\bigl(X,\\cF^{\\vee}\\otimes\\omega_X\\bigr),\n$$\n\nand this isomorphism is natural in $\\cF$: for a morphism\n$\\varphi:\\cF\\to\\mathcal G$ of finite locally free modules,\n$\\langle\\varphi_*a,b\\rangle=\\langle a,(\\varphi^{\\vee}\\otimes1)_*b\\rangle$,\ni.e. it carries $H^q(\\varphi)^{\\vee}$ to\n$H^{n-q}(\\varphi^{\\vee}\\otimes1)$. In particular ($n=1$, $q=1$,\n$\\cF=\\cO_X$), $H^1(X,\\cO_X)^{\\vee}\\cong H^0(X,\\Omega^1_{X/k})$: for a\nsmooth proper connected curve over algebraically closed $k$ the genus\n$\\dim_kH^0(C,\\Omega^1_{C/k})$ of [sk-def-curve] equals\n$\\dim_kH^1(C,\\cO_C)$, the genus of the conventions of this section.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-duality/_section.md",
   "place": "node sk-thm-picard-duality, order 724"
  },
  "stmt_deps": [
   "sk-def-curve",
-  "sk-def-av-jacobian",
-  "sk-def-av-pic"
+  "def-sc-finite-locally-free-sheaf",
+  "def-sc-relative-differential-sheaf",
+  "def-sc-function-field",
+  "pqf-def-cohomology",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-pc-vector-bundle-principal-parts",
+  "lem-pc-tate-dvr-residue-calculus"
  ],
  "proof": [
   {
-   "text": "For curves it can be deduced from [sk-thm-picard-pn] and\nthe adjunction of the canonical sheaf with the Cartier picture of\ndivisors (the residue sequence). The analogue for a smooth proper\n$X$ of any dimension holds as well. Local freeness cannot be\ndropped in this form: for the skyscraper $\\cF=\\kappa(x)$ at a closed\npoint of $\\mathbf P^1$ one has $H^0(\\cF)^\\vee\\neq0$ but\n$\\cF^\\vee=\\mathcal Hom(\\kappa(x),\\cO)=0$; for coherent $\\cF$ the right\nside must be replaced by $\\operatorname{Ext}^{n-q}(\\cF,\\omega_X)$.",
+   "text": "The structure morphism is of finite type over the Noetherian scheme $\\operatorname{Spec}k$, so $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. By [lem-weil-pbc-smooth-scheme-over-field-regular] its local rings are regular local rings, hence domains by [lem-sc-regular-local-domain]. The connected components are finite in number and open by [lem-sfb-noetherian-connected-components-open]; they are closed since the complement is the union of the other components. Distinct irreducible components cannot meet, since such a local ring would have two minimal primes; thus each nonempty connected component is integral. The categories of module sheaves and their global-sections functors on a finite clopen union are componentwise products: restriction and extension by zero are inverse equivalences, and sections are tuples. Module sheaves have enough injectives by [lem-weil-pbc-scheme-modules-enough-injectives]. A tuple of injectives is injective because any lifting problem extends in each coordinate. Injective resolutions can consequently be taken componentwise, giving $H^q(X,E)=\\bigoplus_jH^q(X_j,E|_{X_j})$. Cup products, evaluation and duals are also componentwise. A finite orthogonal sum of perfect pairings is perfect, with inverse the tuple of the inverses. We may therefore work on a nonempty integral component and sum at the end; the empty case has only zero vector spaces.",
    "uses": [
-    "sk-thm-picard-pn"
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "lem-sc-regular-local-domain",
+    "lem-sfb-noetherian-connected-components-open",
+    "lem-weil-pbc-scheme-modules-enough-injectives"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-duality/sk-thm-picard-duality.proof.md",
+    "place": "Component reduction; fills in the integral parenthesis of the statement without adding a connectedness hypothesis."
+   }
+  },
+  {
+   "text": "For $n=1$, the integral component is a curve over $k$, and [lem-sc-curve-base-change-relative-dimension-one] with $T=\\operatorname{Spec}k$ makes its structure morphism smooth of relative dimension one. Thus [lem-sc-smooth-omega-finite-locally-free] makes $\\omega=\\Omega^1_{X/k}$ locally free of rank one. Set $D(E)=E^\\vee\\otimes\\omega$. Local dual bases show that $D(E)$ is finite locally free and that the evaluation map $D(D(E))\\to E$ is an isomorphism: in a frame it is the usual double-dual identification followed by cancellation of the one-dimensional factor $\\omega^\\vee\\otimes\\omega$. These identifications commute with change of frames and morphisms. For $n=0$ use $\\omega=\\mathcal O_X$ and ordinary double duals. Finite locally free modules are quasi-coherent of finite type in these frames and hence coherent by [pqf-lem-coherent-ft-locnoeth]. Their cohomology is finite-dimensional by [lem-pc-coherent-hi], applied over $\\operatorname{Spec}k$. The dimension bound [lem-sc-noetherian-cohomology-above-dimension] gives $H^q(X,E)=0$ for $q>n$; negative cohomology is zero by convention. These observations apply to $E$, $D(E)$ and $\\mathcal O_X$.",
+   "uses": [
+    "lem-sc-curve-base-change-relative-dimension-one",
+    "lem-sc-smooth-omega-finite-locally-free",
+    "pqf-lem-coherent-ft-locnoeth",
+    "lem-pc-coherent-hi",
+    "lem-sc-noetherian-cohomology-above-dimension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-duality/sk-thm-picard-duality.proof.md",
+    "place": "Canonical module, finite-dimensionality and degrees outside [0,n]."
+   }
+  },
+  {
+   "text": "Suppose $n=0$. By [lem-pc-dim-zero-finite-over-field], $X=\\operatorname{Spec}A$ with $A$ finite-dimensional over $k$. Smoothness of relative dimension zero is étaleness by [def-sbc-smooth-morphisms]. For $P=\\Gamma(X,E)$, [lem-pc-finite-flat-affine-sections-projective] gives a finitely presented projective $A$-module. The affine equivalence [lem-weil-pbc-affine-tilde-gamma-adjunction] identifies $H^0(X,E^\\vee)$ with $\\operatorname{Hom}_A(P,A)$, and evaluation with $(\\lambda,m)\\mapsto\\lambda(m)$. The trace form on $A$ is nondegenerate by [lem-sbc-trace-form-nondegenerate-iff-etale-field]. Hence the form on $A^N$ paired with its $A$-dual by $\\operatorname{Tr}_{A/k}\\sum_i\\lambda_i m_i$ is perfect. Choose a surjection $A^N\\to P$ from finite generators and split it by projectivity, giving a finite projective complement $P'$ with $P\\oplus P'\\cong A^N$. Its dual decomposes as $P^\\vee\\oplus(P')^\\vee$, with cross terms zero; the inverse of the perfect map on $A^N$ respects these two summands, so its restriction proves perfection for $P$. By [lem-sc-scalar-cup-zero-global-sections], the degree-zero cup is the tensor of global sections, so this is exactly the requested trace pairing. Higher cohomology vanishes by step 2. For any $A$-linear $f:P\\to Q$, $\\lambda(f(m))=(\\lambda\\circ f)(m)$ proves its naturality, including after applying the trace.",
+   "uses": [
+    "lem-pc-dim-zero-finite-over-field",
+    "def-sbc-smooth-morphisms",
+    "lem-pc-finite-flat-affine-sections-projective",
+    "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "lem-sbc-trace-form-nondegenerate-iff-etale-field",
+    "lem-sc-scalar-cup-zero-global-sections"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/discriminant.tex",
+    "place": "Dimension zero: finite étale algebra trace."
+   }
+  },
+  {
+   "text": "Now let $n=1$. For every closed point $x$, the local ring $O_x=\\mathcal O_{X,x}$ is a regular local ring of dimension one (the chain from the generic point to $x$ has length one, and no chain can be longer since $\\dim X=1$), hence a DVR by [lem-sc-regular-dim1-dvr]; on an affine neighbourhood the closed point is a maximal ideal of a finitely generated $k$-algebra, so its residue field is finite over $k$ by [lem-weil-pbc-zariski-lemma]. Apply [lem-pc-vector-bundle-principal-parts] first to $\\mathcal O_X$: rational functions lie in almost every $O_x$, the intersection is $H^0(X,\\mathcal O_X)$, and the principal-parts cokernel is $H^1(X,\\mathcal O_X)$. Both are finite-dimensional by step 2. Thus every hypothesis of [lem-pc-tate-adelic-reciprocity] holds and the sum of local Tate residues of a rational differential is zero. Apply the same principal-parts resolution to $\\omega$. By [lem-pc-tate-dvr-residue-calculus] each residue kills $\\omega_x$, so the sum defines a linear map from $\\bigoplus_x\\Omega^1_{K/k}/\\omega_x$ to $k$; reciprocity says that it kills the image of $\\Omega^1_{K/k}$. It therefore descends uniquely to $t_X:H^1(X,\\omega)\\to k$, with exactly the formula in the statement. The last clause of the local-calculus node gives the classical coefficient/field-trace formula precisely when $\\kappa(x)/k$ is separable, with no perfection assumption on $k$.",
+   "uses": [
+    "lem-sc-regular-dim1-dvr",
+    "lem-weil-pbc-zariski-lemma",
+    "lem-pc-vector-bundle-principal-parts",
+    "lem-pc-tate-adelic-reciprocity",
+    "lem-pc-tate-dvr-residue-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "Residue sequence and residue theorem; Tate §3, Theorem 3 and corollary."
+   }
+  },
+  {
+   "text": "The trace just constructed is nonzero. Indeed [lem-pc-dense-separable-points] supplies a closed point $x$ with finite separable $\\kappa(x)/k$, since $X$ is smooth and nonempty. The trace form of this finite étale field algebra is nondegenerate by [lem-sbc-trace-form-nondegenerate-iff-etale-field], so there exists $\\bar u\\in\\kappa(x)$ with $\\operatorname{Tr}_{\\kappa(x)/k}(\\bar u)\\ne0$ (pair with $1\\ne0$). Lift $\\bar u$ to $u\\in O_x$ and take a uniformizer $t$. The principal part $ut^{-1}dt$ at $x$, and zero elsewhere, represents a class of $H^1(X,\\omega)$ by [lem-pc-vector-bundle-principal-parts]. By [lem-pc-tate-dvr-residue-calculus] its trace is $\\operatorname{Tr}_{\\kappa(x)/k}(\\bar u)\\ne0$. This argument uses a separable closed point only for this witness; it does not discard any inseparable points from the residue sum.",
+   "uses": [
+    "lem-pc-dense-separable-points",
+    "lem-sbc-trace-form-nondegenerate-iff-etale-field",
+    "lem-pc-vector-bundle-principal-parts",
+    "lem-pc-tate-dvr-residue-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "Nonzero residue trace: local uniformizer formula; cf. live Curve/ResidueTrace.lean, residueTrace_ne_zero."
+   }
+  },
+  {
+   "text": "We need only the dimension equality supplied by the existing projective-line route, not an identification of its abstract trace. Extend $k$ to an algebraic closure $\\bar k$. The scheme $Y=X_{\\bar k}$ is proper and smooth by [lem-pc-proper-base-change]; the differential comparison [lem-weil-pbc-kahler-differentials-base-change] identifies $\\omega_Y$ with the pullback of $\\omega_X$, and a local frame identifies pullback duals and tensor products with the dual and tensor product of the pullbacks. By [lem-sc-curve-base-change-relative-dimension-one], $Y$ is smooth of relative dimension one. This condition restricts to each open connected component; [lem-sbc-smooth-fixed-dimension-over-field] makes every nonempty such component one-dimensional. Thus each is a proper smooth connected curve, as required below. Apply [thm-sc-serre-duality-curve] over the algebraically closed field $\\bar k$ to each component and add the dimensions using the product calculation of step 1. This yields $\\dim_{\\bar k}H^1(Y,E_{\\bar k})=\\dim_{\\bar k}H^0(Y,D(E)_{\\bar k})$. By [lem-sc-flat-base-change-coherent], both groups are obtained from the corresponding groups on $X$ by tensoring with $\\bar k$. A $k$-basis stays a $\\bar k$-basis after scalar extension, so\n$$\\dim_kH^1(X,E)=\\dim_kH^0(X,D(E)).$$\nAll uses of [thm-sc-serre-duality-curve] occur over $\\bar k$, respecting its current statement rather than silently substituting its newer arbitrary-field blueprint update. That theorem follows the stipulated projective-line duality/cohomology route.",
+   "uses": [
+    "lem-pc-proper-base-change",
+    "lem-weil-pbc-kahler-differentials-base-change",
+    "thm-sc-serre-duality-curve",
+    "lem-sc-flat-base-change-coherent",
+    "lem-sc-curve-base-change-relative-dimension-one",
+    "lem-sbc-smooth-fixed-dimension-over-field"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-duality/sk-thm-picard-duality.proof.md",
+    "place": "Projective-line duality route via the existing curve theorem; flat extension used only for dimensions."
+   }
+  },
+  {
+   "text": "For a nonzero sheaf map $b:E\\to\\omega$, its generic-stalk map is nonzero: in local frames, a map to a line bundle is a row of elements of a domain, and a row vanishing in the fraction field is zero. Write $B=\\operatorname{im}b$, $N=\\ker b$ and $Q=\\operatorname{coker}b$. They are coherent by [lem-weil-pbc-coherent-modules-kernel-cokernel-sum], since $B=\\ker(\\omega\\to Q)$. At the generic point the nonzero map to the one-dimensional space $\\omega_\\eta$ is surjective, so $Q$ is supported on a closed subset of dimension zero: locally the nonvanishing of a row entry makes $Q=0$, and locally the support of $Q$ is the zero set of all row entries, hence is closed. A proper closed subset of an integral one-dimensional space has dimension zero: a strict specialization chain inside it could be prefixed by the generic point and would contradict $\\dim X=1$. By [lem-sc-support-dimension-cohomology-vanishing] and [lem-sc-module-abelian-zariski-cohomology], $H^1(X,Q)=0$. Also $H^2(X,N)=0$ by [lem-sc-noetherian-cohomology-above-dimension]. Module sheaves have enough injectives by [lem-weil-pbc-scheme-modules-enough-injectives] and global sections is additive left exact by [lem-sc-global-sections-left-exact]. The two long exact sequences of [lem-weil-pbc-derived-functor-long-exact] for $0\\to N\\to E\\to B\\to0$ and $0\\to B\\to\\omega\\to Q\\to0$ give surjections $H^1(E)\\to H^1(B)\\to H^1(\\omega)$. Thus $H^1(b)$ is surjective.",
+   "uses": [
+    "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "lem-sc-support-dimension-cohomology-vanishing",
+    "lem-sc-module-abelian-zariski-cohomology",
+    "lem-sc-noetherian-cohomology-above-dimension",
+    "lem-weil-pbc-derived-functor-long-exact",
+    "lem-weil-pbc-scheme-modules-enough-injectives",
+    "lem-sc-global-sections-left-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-duality/sk-thm-picard-duality.proof.md",
+    "place": "Elementary use of two exact sequences and the cited dimension bounds; agent completion of the trace-pairing argument."
+   }
+  },
+  {
+   "text": "Identify $\\operatorname{Hom}_X(E,\\omega)=H^0(X,E^\\vee\\otimes\\omega)$ by [lem-sc-ext-locally-free] in degree zero. The map $b\\mapsto t_X\\circ H^1(b)$ into $H^1(X,E)^\\vee$ is injective: a nonzero $b$ has surjective $H^1(b)$ by step 7, whereas $t_X\\ne0$ by step 5. It is an isomorphism by the finite-dimensional equality of step 6. By both formulas of [lem-sc-scalar-ext-cup-degree-zero], cup with a degree-zero class is the cohomology map of tensoring with that section, on either side; [def-sc-field-linear-module-cohomology-operations] then applies the quotient to tensor over $\\mathcal O_X$. In particular, cup with the global Hom class $b$ followed by evaluation is composition with $b$; evaluation after $s\\mapsto s\\otimes b$ is $s\\mapsto b(s)$. Consequently its evaluated cup on $a\\in H^1(E)$ is $H^1(b)(a)$, so this is precisely the asserted $q=1$ trace pairing. Finite-dimensional duality also makes its transpose perfect. Apply this result to $D(E)$: under $D(D(E))\\cong E$, the transpose is the $q=0$ pairing for $E$. In local dual frames both evaluations send $s\\otimes\\lambda\\otimes w$ to $\\lambda(s)w$; the two degree-zero formulas just cited identify the swapped pairings without a sign. This proves the requested pairing for both remaining degrees.",
+   "uses": [
+    "lem-sc-ext-locally-free",
+    "def-sc-field-linear-module-cohomology-operations",
+    "lem-sc-scalar-ext-cup-degree-zero"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-duality/sk-thm-picard-duality.proof.md",
+    "place": "Elementary assembly of injectivity, dimension equality, cup/evaluation and biduality."
+   }
+  },
+  {
+   "text": "For $\\varphi:E\\to G$ and a class $b$ with values in $G^\\vee\\otimes\\omega$, [lem-sc-scalar-cup-coefficient-naturality] and the identity $\\mathrm{ev}_G\\circ(\\varphi\\otimes1)=\\mathrm{ev}_E\\circ(1\\otimes(\\varphi^\\vee\\otimes1))$ give\n$$t_X\\mathrm{ev}_G(\\varphi_*a\\smile b)=t_X\\mathrm{ev}_E(a\\smile(\\varphi^\\vee\\otimes1)_*b).$$\nThe evaluation identity is checked on a local section $s$ and a functional $\\lambda$: both sides equal $\\lambda(\\varphi(s))$. This is the naturality square for the isomorphism induced by the perfect pairing. The component sum in step 1 preserves this equality. Taking $E=\\mathcal O_X$, $n=q=1$, and identifying $\\mathcal O_X^\\vee\\otimes\\omega_X=\\omega_X$ gives $H^1(X,\\mathcal O_X)^\\vee\\cong H^0(X,\\Omega^1_{X/k})$. Equality of the two genus dimensions follows by taking dimensions and using [sk-def-curve].",
+   "uses": [
+    "lem-sc-scalar-cup-coefficient-naturality",
+    "sk-def-curve"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-duality/sk-thm-picard-duality.proof.md",
+    "place": "Naturality and genus specialization."
+   }
   }
  ],
  "proof_deps": [
-  "sk-thm-picard-pn"
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sc-regular-local-domain",
+  "lem-sfb-noetherian-connected-components-open",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-sc-smooth-omega-finite-locally-free",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-pc-dim-zero-finite-over-field",
+  "def-sbc-smooth-morphisms",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sbc-trace-form-nondegenerate-iff-etale-field",
+  "lem-sc-scalar-cup-zero-global-sections",
+  "lem-sc-regular-dim1-dvr",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-pc-vector-bundle-principal-parts",
+  "lem-pc-tate-adelic-reciprocity",
+  "lem-pc-tate-dvr-residue-calculus",
+  "lem-pc-dense-separable-points",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "thm-sc-serre-duality-curve",
+  "lem-sc-flat-base-change-coherent",
+  "lem-sbc-smooth-fixed-dimension-over-field",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-sc-support-dimension-cohomology-vanishing",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sc-global-sections-left-exact",
+  "lem-sc-ext-locally-free",
+  "def-sc-field-linear-module-cohomology-operations",
+  "lem-sc-scalar-ext-cup-degree-zero",
+  "lem-sc-scalar-cup-coefficient-naturality",
+  "sk-def-curve"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-duality/_section.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-picard-framework/sk-thm-picard-duality/sk-thm-picard-duality.proof.md",
+  "place": "Projective-line route through thm-sc-serre-duality-curve; Tate §§2–3 residue construction; agent completion using dimension equality and the two short exact sequences."
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Serre duality for smooth proper curves trace residue pairing",
+   "results": "8 hits: FractionalIdeal.trace_mem_dual_one, LinearMap.trace_eq_contract', isIntegral_discr_mul_of_mem_traceDual, LinearMap.trace_eq_contract, Module.Basis.trace_traceDual_mul, Module.Basis.trace_mul_traceDual, LinearMap.trace_eq_contract_apply, traceForm_dualSubmodule_adjoin",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"serreDuality\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "serreDuality|residueTrace|TateResidue",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of vector bundles on smooth proper curves is dual via residues",
+   "results": "8 hits: IsLocalRing.instModuleResidueFieldCotangentSpace, Subspace.instModuleDualFiniteDimensional, Algebra.Generators.cotangentRestrict_bijective_of_basis_kaehlerDifferential, Module.Basis.dualBasis, Module.Basis.coe_dualBasis, Module.Basis.toDual_toDual, VectorPrebundle.IsContMDiff, VectorBundleCore.IsContMDiff",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "cites_outside_uses",
@@ -67,5 +263,144 @@
  "blueprint_snapshot": "main-20261015",
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "sk-thm-picard-duality",
+  "worker": "stage1",
+  "summary": "Constructed the explicit Tate residue trace, reduced perfection to an injective Hom-to-dual map and dimension equality supplied by the existing projective-line duality route over an algebraic closure; handled finite étale dimension zero, disconnected curves, all degrees and naturality. Three genuine statement-only residue/principal-parts inputs were isolated. Corrected the missing componentwise trace convention; no Lean written or compiled.",
+  "blueprint": "Realizes the one proof paragraph: projective-space route through the existing thm-sc-serre-duality-curve, and the Cartier/principal-parts residue sequence. The trace normalization over imperfect fields is retained. The dimension-zero and naturality clauses are made explicit.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-finite-type-over-noetherian",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-smooth-scheme-over-field-regular",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-sfb-noetherian-connected-components-open",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "pqf-lem-coherent-ft-locnoeth",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-pc-coherent-hi",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-sc-noetherian-cohomology-above-dimension",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-pc-dim-zero-finite-over-field",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-pc-finite-flat-affine-sections-projective",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-affine-tilde-gamma-adjunction",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-sbc-trace-form-nondegenerate-iff-etale-field",
+    "why": "Generic finite étale algebra trace nondegeneracy is used for dimension zero and for the nonzero local residue witness."
+   },
+   {
+    "node": "lem-weil-pbc-zariski-lemma",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-pc-dense-separable-points",
+    "why": "Density of separable closed points of any smooth scheme supplies one point witnessing a nonzero residue trace."
+   },
+   {
+    "node": "lem-pc-proper-base-change",
+    "why": "Stability of smoothness and properness ensures that the algebraic-closure curve meets the hypotheses of the existing curve-duality theorem."
+   },
+   {
+    "node": "lem-weil-pbc-kahler-differentials-base-change",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-sc-flat-base-change-coherent",
+    "why": "Flat scalar extension of finite-dimensional coherent cohomology is used only to transport dimensions from an algebraic closure, not to replace the projective-line duality route."
+   },
+   {
+    "node": "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-sc-module-abelian-zariski-cohomology",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-derived-functor-long-exact",
+    "why": "Generic structural or cohomological input used with exactly its stated hypotheses; the unit has no replacement for this statement, and its projective-line duality route is retained."
+   },
+   {
+    "node": "lem-sc-scalar-cup-coefficient-naturality",
+    "why": "Generic coefficient naturality of coherent-module cup products proves the final naturality equality."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-modules-enough-injectives",
+    "why": "Generic module-sheaf/cohomology input; its statement supplies exactly the product-resolution, long-exact-sequence or degree-zero cup formula used, and no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-sc-scalar-cup-zero-global-sections",
+    "why": "Generic module-sheaf/cohomology input; its statement supplies exactly the product-resolution, long-exact-sequence or degree-zero cup formula used, and no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-sc-scalar-ext-cup-degree-zero",
+    "why": "Generic module-sheaf/cohomology input; its statement supplies exactly the product-resolution, long-exact-sequence or degree-zero cup formula used, and no theorem of the unit replaces it."
+   },
+   {
+    "node": "lem-sc-curve-base-change-relative-dimension-one",
+    "why": "Generic relative-dimension input ensures that the original integral curve and its algebraic-closure components satisfy exactly the relative-dimension and dimension hypotheses of the differential and curve-duality statements."
+   },
+   {
+    "node": "lem-sbc-smooth-fixed-dimension-over-field",
+    "why": "Generic relative-dimension input ensures that the original integral curve and its algebraic-closure components satisfy exactly the relative-dimension and dimension hypotheses of the differential and curve-duality statements."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-smooth-scheme-over-field-regular",
+  "lem-sfb-noetherian-connected-components-open",
+  "pqf-lem-coherent-ft-locnoeth",
+  "lem-pc-coherent-hi",
+  "lem-sc-noetherian-cohomology-above-dimension",
+  "lem-pc-dim-zero-finite-over-field",
+  "lem-pc-finite-flat-affine-sections-projective",
+  "lem-weil-pbc-affine-tilde-gamma-adjunction",
+  "lem-sbc-trace-form-nondegenerate-iff-etale-field",
+  "lem-weil-pbc-zariski-lemma",
+  "lem-pc-dense-separable-points",
+  "lem-pc-proper-base-change",
+  "lem-weil-pbc-kahler-differentials-base-change",
+  "lem-sc-flat-base-change-coherent",
+  "lem-weil-pbc-coherent-modules-kernel-cokernel-sum",
+  "lem-sc-module-abelian-zariski-cohomology",
+  "lem-weil-pbc-derived-functor-long-exact",
+  "lem-sc-scalar-cup-coefficient-naturality",
+  "lem-weil-pbc-scheme-modules-enough-injectives",
+  "lem-sc-scalar-cup-zero-global-sections",
+  "lem-sc-scalar-ext-cup-degree-zero",
+  "lem-sc-curve-base-change-relative-dimension-one",
+  "lem-sbc-smooth-fixed-dimension-over-field"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NK-0081a5bd5",
+  "group": "NK",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-0081a5bd5 (reviewer sub-agent of L); spot-checked: I read the whole delivery, the cited statements and Tate 1968 pp.149–159. Infrastructure: state/dagsnap/967e9e9 was deleted during the review, so the chapter symlinks broke. The delivered chapter is a real directory and was read from the snapshot; base nodes in other chapters were read from clones/live. Pre-checks: the item is not in route-pivot-dropped, there is no repair note, the live item is still imported, there is no cycle, and the citers det-picard-rr-duality and sk-thm-picard-rr (n=1, q=1) still hold. Statement change: n∈{0,1}, a componentwise trace for disconnected X (components are integral), zero trace for the empty X. This is a reported strengthening, not a weakening. New nodes: (1) principal parts: exact stalkwise, both later sheaves flasque, H^0=∩E_x and H^1=coker; true, regularity is surplus; no duplicate (only flasque-acyclic and ℓ-adic residue-sequence hits). (2) local Tate residue: matches Thm 1, (*), R2, R4 (res(u dt/t)=Tr ū checked) and Thm 2/4 for separable κ; V=K,A=O agrees with Tate's completed version via B/C. (3) adelic reciprocity: Tate's Thm 3 proof via R5 with exactly the finite ∩ and coker hypotheses; true; not a restatement of perfection. Steps: 1 component reduction; 2 relative dimension 1, ω rank 1, D(D(E))≅E, coherence, 02O5, vanishing above dimension; 3 n=0 via 06LH, étale, projective sections, 0BJF trace form, summand splitting; 4 DVRs, Zariski lemma, reciprocity hypotheses checked from step 2, trace descends; 5 separable point (056U) gives t_X≠0 by R4; 6 dimension equality from thm-sc-serre-duality-curve over k̄ (same unit, projective-line route via thm-sc-p1-duality + lem-sc-finite-duality) and flat base change; 7 Q supported in dimension 0 so H^1(Q)=0, H^2(N)=0, H^1(b) surjective; 8 Hom(E,ω)→H^1(E)^∨ injective, then bijective by dimension, q=0 via D(E), cup identification by the degree-zero formulas; 9 naturality by cup coefficient naturality and the evaluation identity, genus clause. Batch 5: all five flagged citations reach sec-poincare-duality only at def-pod-ring-scalar-extension, a general definition of module scalar extension that is no part of the trace formula or PD; accepted. tool_uses: written by the worker (C8), 24 generic tools, none replacing the unit route; accepted. FIX (B2): lem-pc-tate-dvr-residue-calculus used finite-potent without defining it and wrote T^N(K) for an arbitrary vector space; the corrected statement defines finite-potence and Tr_fp on W and notes the commutator is finite-potent on K. No assertion changed; fixes/dag/nodes/sec-picard-framework/lem-pc-tate-dvr-residue-calculus.json.; 1 file(s) fixed by the reviewer"
+ }
 }
