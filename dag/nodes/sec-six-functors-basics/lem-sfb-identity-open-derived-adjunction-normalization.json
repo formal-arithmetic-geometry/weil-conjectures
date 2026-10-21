@@ -22,9 +22,105 @@
   "def-sfb-right-derived-functor",
   "lem-sfb-identity-open-derived-restriction"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the additive exact equivalences $E_T$ of [lem-sfb-internal-module-operations-transport], which identify the specified operations and adjunctions with the sectionwise ringed-site ones. They preserve and reflect K-injectivity: an acyclic complex $C$ in the target pulls back to an acyclic complex $E_T^{-1}C$, and the degreewise equivalence identifies chain maps and their homotopies, giving $\\operatorname{Hom}_K(C,E_TI)\\cong\\operatorname{Hom}_K(E_T^{-1}C,I)=0$ for K-injective $I$; apply the inverse equivalence for reflection. The small-site hypothesis is part of the statement. Thus [prop-pur-kinjective-resolutions-exist] applies to the reconstructed section-ring sheaves and transports K-injective resolutions to the internal categories. The comparison of adjunctions includes their actual units and counits, so this transport does not introduce a different adjunction.",
+   "uses": [
+    "lem-sfb-internal-module-operations-transport",
+    "prop-pur-kinjective-resolutions-exist"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open: sectionwise model; Section 07A5, section-unbounded: existence of K-injective resolutions; transport through the cited exact equivalence"
+   }
+  },
+  {
+   "text": "The module pullbacks $i^*,j^*,h^*$ are exact and additive by [det-prop-sfb-module-pullback-exact-main]. By [lem-weil-pbc-exact-functor-derived-factorization] they preserve quasi-isomorphisms and descend termwise with the canonical localization identifications. For the open $i$, [sk-def-sfb-module-lower-shriek] states both $i_!\\dashv i^*$ and exactness of $i_!$. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to $u=i^*$ and $v=i_!$: both are additive, $v$ is exact, and $u$ is its right adjoint. Hence $i^*I$ is K-injective whenever $I$ is. This uses the open left adjoint, not an assertion about arbitrary non-open inverse images.",
+   "uses": [
+    "det-prop-sfb-module-pullback-exact-main",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "sk-def-sfb-module-lower-shriek",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08FI, lemma-restrict-K-injective-to-open, proof; derived.tex Tag 08BJ, lemma-adjoint-preserve-K-injectives; Tag 015F, lemma-right-derived-exact-functor"
+   }
+  },
+  {
+   "text": "The specified identification $h^{-1}(U)\\cong U$ makes $i$ quasi-compact (it is the base change of $j$, by [lem-pc-quasi-compact-base-change]) and gives $hi=j$ and $h^{-1}(j(U))=i(U)$, so [lem-sfb-identity-open-derived-restriction] applies with $Z'=D,j'=i$. Its sectionwise identity is exactly the prescribed $c_h$. Let $s:P\\to I$ be any K-injective resolution. By [def-sfb-right-derived-functor], $\\gamma_{h,I}$ is invertible, and the canonical evaluation isomorphism is $d_s=\\gamma_{h,I}^{-1}\\circ Rh_*(Qs):Rh_*(QP)\\xrightarrow{\\sim}Q(h_*I)$. The cited restriction lemma says $r_{h,QI}=Q(c_{h,I})\\circ j^*(\\gamma_{h,I})^{-1}$. Naturality of its $r_h$ at $Qs$, followed by inversion of $Q(i^*s)$, therefore gives\n$$r_{h,QP}=Q(i^*s)^{-1}\\circ Q(c_{h,I})\\circ j^*(d_s).$$\nThis is the claimed normalization on every resolution, with $i^*I$ K-injective by step 2; its independence and naturality use the already natural $r_h$, rather than any additional choice of maps between resolutions.",
+   "uses": [
+    "lem-sfb-identity-open-derived-restriction",
+    "def-sfb-right-derived-functor",
+    "lem-pc-quasi-compact-base-change"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6G, lemma-restrict-direct-image-open, K-injective computation; derived.tex Tag 070Y, lemma-K-injective-defined, for evaluation via the canonical comparison unit"
+   }
+  },
+  {
+   "text": "Naturality of the right-derived comparison unit [def-sfb-right-derived-functor] for $s:P\\to I$ gives\n$$Rh_*(Qs)\\circ\\gamma_{h,P}=\\gamma_{h,I}\\circ Q(h_*s),\\qquad d_s\\circ\\gamma_{h,P}=Q(h_*s).$$\nSubstitute this into step 3 and use the termwise naturality equation $c_{h,I}\\circ j^*(h_*s)=i^*(s)\\circ c_{h,P}$. With the exact-functor localization identifications, the result is\n$$r_{h,QP}\\circ j^*(\\gamma_{h,P})=Q(i^*s)^{-1}\\circ Q(i^*s)\\circ Q(c_{h,P})=Q(c_{h,P}).$$\nThe cancellation is valid because $i^*$ preserves quasi-isomorphisms, as in step 2. This holds for arbitrary $P$, which need not itself be K-injective.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070Y, lemma-K-injective-defined, and Tag 015F, lemma-right-derived-exact-functor; explicit naturality computation for the derived comparison unit"
+   }
+  },
+  {
+   "text": "Since $c_h:j^*h_*\\cong i^*$ and $i^*$ is exact, $Q(j^*h_*(-))$ inverts quasi-isomorphisms. The localization universal property [lem-weil-pbc-localization-universal-property] says that its descent $D(i^*)$, with comparison $Q(c_h)$, is a total right derived pair: for every functor $G$ out of the derived category, full faithfulness of precomposition with $Q$ identifies natural transformations $D(i^*)\\to G$ with transformations $D(i^*)Q\\to GQ$; precomposition with the isomorphism $Q(c_h)$ then gives precisely transformations $Q(j^*h_*(-))\\to GQ$. Step 4 identifies the pair $(j^*Rh_*,j^*\\gamma_h)$ with that pair through $r_h$. Consequently $(j^*Rh_*,j^*\\gamma_h)$ has the required total right derived universal property, with the specified unit.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor; localization at quasi-isomorphisms and its fully faithful precomposition, as stated by the cited universal-property node"
+   }
+  },
+  {
+   "text": "Apply [lem-kun-derived-adjoint-square-comparison] with $\\mathcal A=\\Mod_{\\Lambda_D}$, $\\mathcal B=\\Mod_{\\Lambda_Z}$, $\\mathcal A_0=\\mathcal B_0=\\Mod_{\\Lambda_U}$, $(L,R)=(h^*,h_*)$, $(L_0,R_0)=(1,1)$ with the identity adjunction, $V=i^*$, $W=j^*$, $a=a_h$ and $c=c_h$. The specified underived adjunction is [def-sfb-module-upper-lower-adjunction]. Its compatibility condition is exactly the adjunct equation assumed here. Exactness of $L,V,W$ is step 2; $L_0$ is exact. The canonical total derived adjunction for $h$ is [sk-def-sfb-module-derived-pushpull]; its left adjoint $Lh^*$ is the total left derived functor of the exact $h^*$, which the exact-functor clause of [sk-def-sfb-derived-categories] identifies with the termwise $D(h^*)=D(L)$ of the square theorem, so this is the derived adjunction $D(L)\\dashv RR$ of the specified $h^*\\dashv h_*$ that the theorem uses; the identity functor and its identity comparison descend to the identity adjunction. The remaining right-derived hypothesis on $D(W)RR$ is step 5. In this specialization the comparison $b$ is characterized by $b_{QP}j^*(\\gamma_{h,P})=Q(c_{h,P})$. By step 4 and the universal property in step 5, this is precisely $r_h$. The two unit and counit equations of the square theorem, with the identity unit and counit removed, are\n$$r_{h,h^*A}\\circ j^*(\\eta_{h,A})=a_{h,A}^{-1},\\qquad i^*(\\varepsilon_{h,K})=r_{h,K}\\circ a_{h,Rh_*K}.$$\nThat theorem asserts these for the canonical derived adjunctions and as natural equations. It therefore proves both identities for exactly the adjunction specified here.",
+   "uses": [
+    "lem-kun-derived-adjoint-square-comparison",
+    "def-sfb-module-upper-lower-adjunction",
+    "sk-def-sfb-module-derived-pushpull",
+    "sk-def-sfb-derived-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 09T5, lemma-derived-adjoint-functors; specialize the cited compatible derived adjoint-square theorem to the identity adjunction on the open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-right-derived-functor",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-kun-derived-adjoint-square-comparison",
+  "lem-pc-quasi-compact-base-change",
+  "lem-sfb-identity-open-derived-restriction",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-def-sfb-derived-categories",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-lower-shriek"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6G (lemma-restrict-direct-image-open) and 08FI (lemma-restrict-K-injective-to-open); derived.tex Tags 08BJ, 015F, 070Y and 09T5; comparison-unit naturality and specialization of the existing derived adjoint-square theorem written out"
+ },
  "mathlib_searches": [
   {
    "tool": "leansearch",
@@ -74,10 +170,59 @@
    "results": "Scope Mathlib. 1 hits: CategoryTheory.Adjunction.derived_unit",
    "date": "2026-10-21",
    "verdict": "no match: generic derived adjunction/comparison formulas do not supply open restriction, K-injective preservation, or the normalized internal-module comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_unit|derived_counit|rightDerivedFunctorComparison_fac",
+   "results": "Scope CategoryTheory/Functor/Derived. 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived-adjunction formulas and underived Zariski restriction do not state the pro-etale internal-module comparison with its normalized derived unit and K-injective claims"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.derived_unit",
+   "results": "Scope Mathlib. 1 hits: CategoryTheory.Adjunction.derived_unit",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived-adjunction formulas and underived Zariski restriction do not state the pro-etale internal-module comparison with its normalized derived unit and K-injective claims"
+  },
+  {
+   "tool": "leansearch",
+   "query": "unbounded derived module direct image open restriction natural isomorphism compatible with derived adjunction units and counits",
+   "results": "Scope Mathlib. 8 hits: CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derived_counit, CategoryTheory.Adjunction.derivedη.congr_simp, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derivedε.congr_simp, CategoryTheory.Adjunction.derivedη, CategoryTheory.Adjunction.derived'_unit",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived-adjunction formulas and underived Zariski restriction do not state the pro-etale internal-module comparison with its normalized derived unit and K-injective claims"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K injective normalization of restriction of derived direct image to open identity locus preserves derived adjunction unit counit",
+   "results": "Scope Mathlib. 8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.ofRestrict_toLRSHom_c_app, AlgebraicGeometry.Scheme.Modules.restrictAdjunction, AlgebraicGeometry.Scheme.ofRestrict_app, AlgebraicGeometry.Scheme.Hom.preservesLocalization_normalizationDiagramMap",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived-adjunction formulas and underived Zariski restriction do not state the pro-etale internal-module comparison with its normalized derived unit and K-injective claims"
+  },
+  {
+   "tool": "grep",
+   "query": "derived_unit",
+   "results": "Scope CategoryTheory/Functor/Derived. 0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived-adjunction formulas and underived Zariski restriction do not state the pro-etale internal-module comparison with its normalized derived unit and K-injective claims"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "right derived comparison unit exact restriction of pushforward K injective resolution adjoint square",
+   "results": "Scope Mathlib. 8 hits: CategoryTheory.Adjunction.derived'_unit, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison, CategoryTheory.Adjunction.derivedε, CategoryTheory.Adjunction.derived_unit, CategoryTheory.Adjunction.derivedη, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac, CategoryTheory.Adjunction.derivedε_fac_app, CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived-adjunction formulas and underived Zariski restriction do not state the pro-etale internal-module comparison with its normalized derived unit and K-injective claims"
+  },
+  {
+   "tool": "grep",
+   "query": "derivedη_fac_app|derivedε_fac_app",
+   "results": "Scope CategoryTheory/Functor/Derived. 2 hits: Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean, Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic derived-adjunction formulas and underived Zariski restriction do not state the pro-etale internal-module comparison with its normalized derived unit and K-injective claims"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-base-change-identity-open-restriction",
@@ -96,5 +241,79 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-identity-open-derived-adjunction-normalization",
+  "worker": "stage1",
+  "summary": "Six steps: exact internal/sectionwise transport and K-injective resolutions, open restriction preservation, normalized evaluation on every resolution, explicit derived comparison-unit equation, its universal property, and specialization of the existing compatible derived adjoint-square theorem. No statement changes or new nodes. All cited statements read; small sites, exactness, actual adjunctions and the open-preimage condition checked.",
+  "blueprint": "Realizes parent det-sf-comp-composition-base-change proof (3), parenthesis on compatibility with restriction to the open identity locus; fills the K-injective and actual-derived-adjunction normalization used in lem-sfb-base-change-identity-open-restriction, without assuming properness or density.",
+  "tool_uses": [
+   {
+    "node": "def-sfb-module-upper-lower-adjunction",
+    "why": "Generic derived-functor normalization or module adjunction tool; the unit has no statement supplying this fact."
+   },
+   {
+    "node": "def-sfb-right-derived-functor",
+    "why": "Generic derived-functor normalization or module adjunction tool; the unit has no statement supplying this fact."
+   },
+   {
+    "node": "det-prop-sfb-module-pullback-exact-main",
+    "why": "Exact additive module pullbacks for every commutative condensed ring justify the termwise derived functors."
+   },
+   {
+    "node": "lem-kun-derived-adjoint-square-comparison",
+    "why": "Generic compatible adjoint-square theorem supplies the unit and counit identities after the derived-unit hypothesis is proved."
+   },
+   {
+    "node": "lem-sfb-identity-open-derived-restriction",
+    "why": "Canonical sectionwise-normalized open restriction isomorphism, used as a generic tool at the identity open locus."
+   },
+   {
+    "node": "lem-sfb-internal-module-operations-transport",
+    "why": "Exact internal/sectionwise equivalences identify the actual operations and adjunctions; this is a generic coefficient-model tool."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-left-adjoint criterion, applied only to open restriction."
+   },
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "K-injective resolutions on small ringed sites supply unbounded representatives, transported by exact equivalence."
+   },
+   {
+    "node": "sk-def-sfb-module-derived-pushpull",
+    "why": "Generic derived-functor normalization or module adjunction tool; the unit has no statement supplying this fact."
+   },
+   {
+    "node": "sk-def-sfb-module-lower-shriek",
+    "why": "Its statement supplies the exact open left adjoint i_! of i^*, needed to preserve K-injectivity."
+   },
+   {
+    "node": "sk-def-sfb-derived-categories",
+    "why": "Exact-functor clause identifies the derived pullback Lh^* with the termwise D(h^*) required by the adjoint-square theorem."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-sfb-module-upper-lower-adjunction",
+  "def-sfb-right-derived-functor",
+  "det-prop-sfb-module-pullback-exact-main",
+  "lem-kun-derived-adjoint-square-comparison",
+  "lem-sfb-identity-open-derived-restriction",
+  "lem-sfb-internal-module-operations-transport",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "prop-pur-kinjective-resolutions-exist",
+  "sk-def-sfb-module-derived-pushpull",
+  "sk-def-sfb-module-lower-shriek",
+  "sk-def-sfb-derived-categories"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q10-7cc11f680",
+  "group": "Q10",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q10-7cc11f680 (reviewer sub-agent of L); spot-checked: Read the item in full. It has six steps and no new nodes, and its statement is unchanged. Read every cited statement. Stacks 08FI (sites-cohomology l.4313) and 0D6G (l.4373) were read at the cited labels, and the tags match. No repair note applies, the item is in no dropped list, and no existing node states the same thing (I checked lem-sfb-identity-open-derived-restriction, the identity-open underived square node, the normalized-open-refinement node and det-sf-mate-open-restriction). Step 1: E_T preserves and reflects K-injectivity (Hom_K(C,EI) ≅ Hom_K(E^{-1}C,I)), and prop-pur applies to the small site. Step 2: pullbacks are exact; the statement of sk-def-sfb-module-lower-shriek gives exact i_! ⊣ i^*, so the right-adjoint lemma makes i^*I K-injective. This is the 08FI argument. Step 3: i is the base change of j, so the quasi-compact base-change leaf applies. The restriction node's K-injective representative plus naturality at Qs gives r_{QP} = Q(i^*s)^{-1}Q(c_I)j^*(d_s). Step 4: recomputed r_{QP}j^*(γ_P) = Q(c_P); it holds for arbitrary P. Step 5: the localization universal property (2)+(3) gives the right-derived property of (j^*Rh_*, j^*γ). Step 6: the substitution into lem-kun-derived-adjoint-square-comparison type-checks. The item's hypothesis is exactly the adjunct condition, b = r_h by uniqueness, and the unit and counit identities match the statement in their directions. Edge cases checked: U empty, h = id, the fold map excluded. One fault, fixed (C1/C4): step 6 took the adjunction of sk-def-sfb-module-derived-pushpull (Lh^* ⊣ Rh_*) as the square theorem's D(L) ⊣ RR without identifying Lh^* with the termwise D(h^*). The fix cites the exact-functor clause of sk-def-sfb-derived-categories and adds it to uses, proof_deps and tool_uses; it creates no cycle. The declared tool uses are accepted.; 1 file(s) fixed by the reviewer"
  }
 }

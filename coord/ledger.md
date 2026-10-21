@@ -20953,3 +20953,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:09 L: merged deliver/Q115/lem-per-continuous-rational-derived-realization (reviewer PASS; after a return; new nodes: 9)
 - 08:09 L: merged deliver/Q36/lem-sfb-topological-basis-lift-section (reviewer PASS; first push; new nodes: 0)
 - 08:09 L: merged deliver/Q37/lem-pur-finite-clopen-derived-decomposition (reviewer FIX; after a return; new nodes: 5)
+- 08:09 L: merged deliver/Q10/lem-sfb-identity-open-derived-adjunction-normalization (reviewer FIX; first push; new nodes: 0)
