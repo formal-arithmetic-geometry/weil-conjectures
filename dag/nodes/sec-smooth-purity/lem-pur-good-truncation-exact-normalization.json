@@ -15,109 +15,78 @@
  ],
  "proof": [
   {
-   "text": "Put $T_C=\\tau_{\\le0}C$ and $Z_C=\\ker d_C^0$. The map $c_C$ is the identity below zero and the kernel inclusion in degree zero. Define $p_C$ by $q_C:Z_C\\twoheadrightarrow H^0(C)$ in degree zero and zero in other degrees. This is a chain map: at degree $-1$ its chain equation is $q_Cd_C^{-1}=0$, because $q_C$ kills boundaries; all other equations are identities or zero equations. By [def-kun-truncations], $H^a(c_C)$ identifies the retained cohomology with $H^a(C)$ for $a\\le0$ and both sides vanish for $a>0$. The target of $p_C$ has zero cohomology outside zero, as does $T_C$ under the hypothesis on $C$; in degree zero $H^0(p_C)$ is the identity of $Z_C/\\operatorname{im}d_C^{-1}$. Hence both maps are quasi-isomorphisms. Localization [def-weil-abstract-derived-category] makes $e_C=Q(p_C)Q(c_C)^{-1}$ an isomorphism $QC\\to S H^0(C)$. Both $H^0(c_C)$ and $H^0(p_C)$ are the canonical identity on that quotient, so $H^0(e_C)=1$ under $H^0(QC)\\cong H^0(C)$ and $H^0(SB)\\cong B$. These latter single-complex comparisons send $H^0(Sb)$ to $b$, directly from zero differentials.",
+   "text": "Identify the boundary term of the good truncation with cycles and its inclusion with iCycles, by dualizing the canonical truncGE projection formula. Monomorphism cancellation and the chain-map equation identify the incoming differential with the original differential factored through cycles. The homology quotient kills it, so the stipulated goodTruncationProjection is a chain map.",
+   "uses": [
+    "def-kun-truncations"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Use the existing uniquely H⁰-normalized degree-zero identification to define epsilon. Conjugate maps by these identifications and use full faithfulness of the single functor. H⁰ is faithful between single objects because the single-homology comparison identifies its composite with single with the identity. Thus H⁰ is injective between the concentrated objects. Its inverse on Hom sets is b mapped to epsilon_K followed by S(b) followed by epsilon_L inverse. The normalization equations and naturality of the single-homology comparison prove naturality and the unique-b characterization.",
+   "uses": [
+    "lem-amb-derived-degree-zero-normalization",
+    "lem-weil-pbc-derived-single-fully-faithful"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compute H⁰ of the projection by precomposing with the epimorphism from cycles. Naturality of homologyπ and cycles inclusions, and the explicit degree-zero component, show that H⁰(p_A) followed by the single-homology comparison equals H⁰(c_A). Transfer this equality through the localization homology factorization. Vanishing transported along r makes A isLE 0, so c_A is a quasi-isomorphism. H⁰-injectivity from the preceding step identifies the specified roof equation with epsilon_K. All other factors in this equation are isomorphisms, so Q(p_A) is an isomorphism and p_A is a quasi-isomorphism.",
    "uses": [
     "def-kun-truncations",
     "def-weil-abstract-derived-category"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118, section-truncations, canonical cochain truncation and its cohomology; explicit cycles-to-quotient calculation at zero"
-   }
+   "elementary": false
   },
   {
-   "text": "For $K\\in\\mathcal Z_{\\mathcal C}$ choose a representative $C$ and an isomorphism $r:QC\\xrightarrow{\\sim}K$. Transport Step 1 to $e_K=S(H^0r)e_Cr^{-1}:K\\to S H^0K$, inserting the canonical $H^0(QC)\\cong H^0(C)$ comparison. Functoriality gives $H^0(e_K)=1$. Make such choices temporarily for $K,L$. By [lem-weil-pbc-derived-single-fully-faithful], every morphism $e_L a e_K^{-1}:S H^0K\\to S H^0L$ is $S(b)$ for exactly one $b:H^0K\\to H^0L$. Applying $H^0$ and the single-complex comparison from Step 1 gives $b=H^0(a)$. Conversely $b$ is attained by $e_L^{-1}S(b)e_K$. Thus $a\\mapsto H^0(a)$ is bijective on these Hom sets, without yet assuming naturality of the chosen $e$'s.",
+   "text": "For every degree n, use the canonical exact-functor homology comparison. Its source is zero when Hⁿ(K) is zero, because an additive functor preserves zero objects. Hence the derived image stays concentrated in degree zero. Naturality of this comparison is the second asserted exact-functor equation.",
    "uses": [
-    "lem-weil-pbc-derived-single-fully-faithful"
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XS, lemma-negative-exts (2), full faithfulness of the degree-zero single embedding, followed by conjugation with the explicit roof"
-   }
+   "elementary": false
   },
   {
-   "text": "Any two transported roofs $e_K,e'_K$ from Step 2 have the same source $K$, the same target $S H^0K$, and induce the identity on $H^0$. Both objects lie in $\\mathcal Z_{\\mathcal C}$, so injectivity from Step 2 gives $e_K=e'_K$. This proves independence of the complex, of $r$, and of the representatives chosen for kernels and quotients, under their canonical isomorphisms. Denote the result by $\\epsilon_K$. For any $a:K\\to L$, both $\\epsilon_La$ and $S(H^0a)\\epsilon_K$ induce $H^0a$; the same injectivity gives the displayed naturality equation. The calculation in Step 2 now gives the asserted Hom bijection and the equivalent unique-$b$ characterization for these specified $\\epsilon$'s. The inverse family is natural by multiplying the naturality equation by inverses.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 06XS, lemma-negative-exts (2); elementary uniqueness argument from Step 2, with Step 1 fixing the normalization"
-   }
-  },
-  {
-   "text": "For an exact $F$, [lem-weil-pbc-exact-functor-complex-cohomology] supplies $c_C^a:H^a(F C)\\cong F H^a(C)$, natural in every complex and compatible with cycle inclusions and quotient projections. Invert these comparisons. The two functors $F H^a$ and $H^a D(F)$ on derived categories, pulled back along $Q$, identify with these complex-level functors by [lem-weil-pbc-exact-functor-derived-factorization]. They invert quasi-isomorphisms. Apply [lem-weil-pbc-localization-universal-property] (2) to descend $(c_C^a)^{-1}$ to a natural isomorphism $\\chi^a_{F,K}:F H^a(K)\\to H^a(D(F)K)$. At $a=0$ this is exactly the stipulated kernel/image/quotient comparison $\\chi_{F,K}$, and its naturality is $H^0(D(F)a)\\chi_{F,K}=\\chi_{F,L}F(H^0a)$ for every derived morphism. For $a\\ne0$ and $K\\in\\mathcal Z_{\\mathcal C}$ its source is zero, since $F$ preserves the zero object. Thus $D(F)K\\in\\mathcal Z_{\\mathcal D}$. No boundedness or injective-resolution hypothesis is used.",
+   "text": "Apply H⁰-injectivity to the exact-functor normalization formula and postcompose with the single-homology comparison. Use naturality of chi on epsilon_K and compatibility of chi with the single comparison, already proved in the source library. The resulting composite is F(H⁰(epsilon_K) followed by the single-homology comparison) followed by chi_K, hence chi_K. Cancel chi_K to obtain the required formula. No separate construction of a functor-versus-truncation comparison is needed.",
    "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-amb-derived-degree-zero-normalization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For the identity functor the short-complex homology comparison is identity by the canonical homology-map-data equation. The derived identity comparison evaluated at a complex is its localization factorization, by the homotopy-category identity equation. These computations prove the homology identity after precomposition with Q; localization faithfulness descends it. The single identity follows by evaluating the termwise single comparison.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For composition, compare the direct preserved homology data with iterated preservation. Their cycle isomorphisms agree by monomorphism cancellation and their homology isomorphisms by cancellation of the cycles quotient epimorphism. This proves the complex homology comparison composition equation. To descend it, compare the two natural transformations in the displayed derived equation after Q, cancel the factorization isomorphisms, and use naturality of chi and the canonical derived-composition factorization. Localization faithfulness gives the desired equality on every object. The source library single-comparison composition theorem proves the other conjunct. Every argument permits zero objects and zero categories.",
+   "uses": [
+    "lem-sp-exact-functor-preserves-homology",
     "lem-weil-pbc-exact-functor-complex-cohomology",
     "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-localization-universal-property"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; homology.tex Tag 010N, lemma-exact-functor; categories.tex Tag 04VG and the natural-transformation localization enhancement stated in the cited node"
-   }
-  },
-  {
-   "text": "Construct $t_C:F(T_C)\\xrightarrow{\\sim}T_{F C}$ termwise: it is the identity comparison below zero, the preserved-kernel comparison $F Z_C\\cong\\ker F(d_C^0)$ in degree zero, and the canonical zero-object comparison above zero. These are isomorphisms by [lem-sp-exact-functor-preserves-homology] (a). The kernel universal property checks the chain equation at $-1$; elsewhere it is immediate. Let $s_B:F(B[0])\\cong(FB)[0]$ be the termwise single-complex comparison. The first chain-map equation is $c_{F C}t_C=F(c_C)$. The second says that $p_{F C}t_C$ is the composite $F(T_C)\\xrightarrow{F(p_C)}F(H^0C[0])\\xrightarrow{s_{H^0C}}(FH^0C)[0]\\xrightarrow{(\\chi^0_{F,QC})[0]}H^0(F C)[0]$, using the factorization comparisons. At degree zero this is precisely $q_{F C}t_C^0=\\chi^0_{F,QC}F(q_C)$, the projection compatibility in [lem-weil-pbc-exact-functor-complex-cohomology]; all other components vanish. Localize these two equations, replace $Q(c_{F C})^{-1}$ by $Q(t_C)Q(Fc_C)^{-1}$, and cancel $Q(t_C)$. Termwise derived factorization [lem-weil-pbc-exact-functor-derived-factorization] gives\n$$\\epsilon_{D(F)QC}=S_{\\mathcal D}(\\chi_{F,QC})\\,\\sigma_{F,H^0(QC)}\\,D(F)(\\epsilon_{QC}).$$",
-   "uses": [
-    "lem-sp-exact-functor-preserves-homology",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor, preserved kernels and cokernels; Tag 0118, section-truncations; explicit two chain-map equations and their localization"
-   }
-  },
-  {
-   "text": "The comparison $\\sigma_{F,B}$ is natural in $B$: termwise, a map $b:B\\to B'$ gives the same degree-zero map $F(b)$ around both sides of its square and zero maps elsewhere; apply the natural factorization [lem-weil-pbc-exact-functor-derived-factorization]. Step 4 makes $\\chi$ natural on all derived morphisms, and Step 3 makes $\\epsilon$ natural. Thus both sides of the equality in Step 5 are natural in $K\\in\\mathcal Z_{\\mathcal C}$. For any representative isomorphism $r:QC\\to K$, naturality says that each side at $K$, precomposed with $D(F)r$, equals $S(H^0(D(F)r))$ followed after that side at $QC$. Step 5 identifies the latter sides; cancel the isomorphism $D(F)r$. This proves the required exact-functor compatibility for every $K$.",
-   "uses": [
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F, lemma-right-derived-exact-functor; naturality and isomorphism cancellation using Steps 3--5"
-   }
-  },
-  {
-   "text": "For $F=\\operatorname{id}$, the preserved-kernel comparison is the identity by uniqueness of a factorization through the kernel inclusion, and the quotient comparison is the identity by uniqueness after the epimorphism $Z_C\\twoheadrightarrow H^aC$. The termwise single comparison is also the identity. Hence $\\chi$ and $\\sigma$ are identities under $D(\\operatorname{id})\\cong\\operatorname{id}$. For composable exact functors $F,G$, the composite $G F Z_C\\to G Z_{FC}\\to Z_{GFC}$ and the direct preserved-kernel comparison have the same composite with the kernel inclusion; that inclusion is monic, so they agree. The image and quotient comparisons agree by the corresponding mono and epi cancellations [lem-sp-exact-functor-preserves-homology]. Consequently, at complexes, $\\chi_{GF,C}=\\chi_{G,FC}\\,G(\\chi_{F,C})$, and $s_{GF,B}=s_{G,FB}\\,G(s_{F,B})$ termwise. The equality $C(GF)=C(G)C(F)$ gives the canonical derived-composition isomorphism by localization uniqueness [lem-weil-pbc-localization-universal-property] (1),(2). Its part (3) descends these equalities to $\\chi_{GF,K}=\\chi_{G,D(F)K}G(\\chi_{F,K})$ and $\\sigma_{GF,B}=\\sigma_{G,FB}D(G)(\\sigma_{F,B})$ under that isomorphism. Substitution into Step 6 gives exactly the composite compatibility for $\\epsilon$ as well.",
-   "uses": [
-    "lem-sp-exact-functor-preserves-homology",
-    "lem-weil-pbc-localization-universal-property"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 010N, lemma-exact-functor; categories.tex Tag 04VG with the natural-transformation enhancement; uniqueness of kernel/image/quotient comparisons and localized comparisons"
-   }
-  },
-  {
-   "text": "In the zero abelian category every object is zero and every Hom set is a singleton. All displayed maps, their inverses, and their comparisons are its unique maps. The kernel, quotient, and Hom-bijection calculations above still apply, including $\\operatorname{Hom}(0,0)$, so this case requires no nonzero-object assumption.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/homology.tex",
-    "place": "Tag 0118, section-truncations; direct zero-category check"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
   "def-kun-truncations",
-  "def-weil-abstract-derived-category",
+  "lem-amb-derived-degree-zero-normalization",
   "lem-weil-pbc-derived-single-fully-faithful",
+  "def-weil-abstract-derived-category",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-sp-exact-functor-preserves-homology"
+  "lem-sp-exact-functor-preserves-homology",
+  "lem-weil-pbc-localization-universal-property"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/homology.tex",
-  "place": "Tag 0118, section-truncations; derived.tex Tags 06XS and 015F. Agent supplies the normalized roof, conjugation/uniqueness argument, exact comparison equations, and composition coherence."
+  "place": "Tags 0118 and 010N; derived.tex Tags 06XS and 015F; categories.tex Tag 04VG. Z9 implements the quotient calculation, uses the existing normalized heart identification, and proves localization coherence from the canonical comparison APIs."
  },
  "mathlib_searches": [
   {
@@ -295,5 +264,15 @@
   "group": "Q09",
   "result": "fix",
   "note": "H4: existsUnique_goodTruncationNormalization is a sorry restatement of the landed, proved DerivedCategory.existsUnique_iso_single_homology_zero (Sheaf.CategoryTheory.DerivedDegreeZeroNormalization, node lem-amb-derived-degree-zero-normalization). Fix: removed it, imported that module, eps := Classical.choose of the landed theorem; lean-record.json drops the name from declarations and appends a note; nt_compile --json clean (3.9 s, control compile with a misspelled name fails); refit_record gives no refusals. All other clauses checked against the node: projection p via mkHomToSingle with a named chain condition, roof for every A and r with both quasi-isomorphisms, naturality, Hom bijection and unique-b iff, exact preservation, eps/chi/sigma formula and chi naturality, identity and composition coherence via the upstream canonical localized isos; no extra hypotheses, independent universes, zero category covered, statement verbatim, docstrings and sorry proofs ok. Advisories: the new import's node is not in stmt_deps (a stage-2 fix cannot add it, maintainer may); proof-only imports PreservesHomology and Localization.Predicate are redundant."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Z9",
+  "result": "pass",
+  "landing": "20261021T130249-L-2668388",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
