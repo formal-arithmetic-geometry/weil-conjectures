@@ -1,0 +1,125 @@
+{
+ "id": "lem-pod-finite-qc-proetale-abelian-detection",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "sk-def-perfect",
+   "place": "Final equivalence, through lem-pod-condensed-localization-hom: detect homology vanishing on finitely many constructible strata in the cohomological boundedness input.",
+   "via": [
+    "lem-pod-stratified-dualizable-bounded",
+    "lem-pod-condensed-localization-hom"
+   ]
+  },
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite quasi-compact jointly surjective pullbacks detect abelian sheaf morphisms",
+ "statement": "Let $U$ be a scheme [def-pc-scheme], let $I$ be a finite set, and let $g_i:Z_i\\to U$ be quasi-compact scheme morphisms [def-weil-pbc-scheme-conventions] whose images cover $|U|$. For abelian sheaves $F,G$ on the small pro-etale site [def-weil-pbc-proetale-site] and a sheaf morphism $\\varphi:F\\to G$, if $g_i^{-1}(\\varphi)=0$ for every $i\\in I$, where inverse image is [def-weil-proetale-inverse-image], then $\\varphi=0$. No weak-etaleness hypothesis is imposed on the $g_i$. The empty family is allowed when $U$ is empty.",
+ "source": {
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/DetectionAb.lean",
+  "place": "Lines 151-171, AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp; the existing complete proof reduces to section detection in lines 88-147. This node records that adopted source-library declaration, without adding another Lean statement."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof": [
+  {
+   "text": "Use the already proved adopted source declaration AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp in WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.DetectionAb, lines 151–171, with the stated finite quasi-compact jointly surjective family and morphism φ. Its hypotheses and conclusion are exactly this statement. Its complete existing proof applies section detection to every value of φ and uses naturality of the pullback adjunction units; section detection constructs pro-etale neighborhoods where the original section is zero, combines them using QuasiCompactCover.of_comp_factor and concludes by sheaf separatedness. This node attaches the proved source declaration without adding any Lean declaration.",
+   "uses": [
+    "def-pc-scheme",
+    "def-weil-pbc-scheme-conventions",
+    "def-weil-pbc-proetale-site",
+    "def-weil-proetale-inverse-image"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/DetectionAb.lean",
+    "place": "Lines 151-171, AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp; the existing complete proof reduces to section detection in lines 88-147. This node records that adopted source-library declaration, without adding another Lean statement."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-scheme",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "lean/WeilConjectures/SixFunctors/ProEtale/FiniteCoefficient/UpperLowerStar/DetectionAb.lean",
+  "place": "Lines 151-171, AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp; the existing complete proof reduces to section detection in lines 88-147. This node records that adopted source-library declaration, without adding another Lean statement."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Pullbacks along a finite quasi-compact jointly surjective family of schemes jointly detect zero morphisms of pro-etale abelian sheaves",
+   "results": "8 hits: Scheme.Cover.pullbackCoverOver', QuasiCompactCover.of_finite, QuasiCompactCover.instPullback₁Scheme, Scheme.instIsStableUnderBaseChangeJointlySurjectivePrecoverage, Precoverage.ZeroHypercover.isPullback_of_forall_isPullback, and cover constructions.",
+   "date": "2026-10-21",
+   "verdict": "no match in Mathlib; exact proved declaration found in the adopted source library"
+  },
+  {
+   "tool": "loogle",
+   "query": "eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp",
+   "results": "0 hits; unknown identifier 'eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp'",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Pullbacks along a finite quasi compact jointly surjective family of scheme morphisms detect zero morphisms of pro etale abelian sheaves",
+   "results": "8 hits: exists_appTop_map_eq_zero_of_isLimit, QuasiCompactCover.instPullback₁Scheme, exists_app_map_eq_zero_of_isLimit, QuasiCompactCover.instPullback₂Scheme, Scheme.instHasPullbacksEtale, exists_appTop_map_eq_zero_of_isAffine_of_isLimit, ExistsHomHomCompEqCompAux.𝒰D₀, coherentTopology.isLocallySurjective_π_app_zero_of_isLocallySurjective_map.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match"
+  },
+  {
+   "tool": "grep",
+   "query": "eq_zero_of_forall_upperStar_map_eq_zero|jointly.*surjective.*[Ss]heaf",
+   "results": "6 Mathlib hits: Sites.Point.Basic toPresheafFiber_jointly_surjective and related local-surjectivity uses; PresheafedSpace.Gluing 𝖣.ι_jointly_surjective.",
+   "date": "2026-10-21",
+   "verdict": "no Mathlib match; local rg found exact source declaration in DetectionAb.lean"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.StratifiedDualizableBounded",
+  "date": "2026-10-21",
+  "group": "F5"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-def-perfect",
+ "lean": {
+  "module": "WeilConjectures.SixFunctors.ProEtale.FiniteCoefficient.UpperLowerStar.DetectionAb",
+  "declaration": "AlgebraicGeometry.ProEtale.eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp",
+  "statement": "theorem eq_zero_of_forall_upperStar_map_eq_zero_addCommGrp {κ : Type*} [Finite κ]\n    {Z : κ → Scheme.{u}}\n    (g : ∀ k, Z k ⟶ U) [∀ k, QuasiCompact (g k)] (hg : ∀ x, ∃ k, x ∈ Set.range (g k))\n    {F G : Sheaf (Scheme.ProEt.topology U) (Ab.{u + 1})} (φ : F ⟶ G)\n    (h : ∀ k, (g k)^*[Ab.{u + 1}].map φ = 0) : φ = 0",
+  "branch": "slopmaster2",
+  "by": "F5",
+  "date": "2026-10-21",
+  "existing": true
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261021T165817-L-2252376",
+  "kind": "proof",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F5",
+  "result": "pass",
+  "landing": "20261021T165817-L-2252376",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
