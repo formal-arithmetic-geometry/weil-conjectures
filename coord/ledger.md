@@ -20857,3 +20857,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:07 L: merged deliver/N0/lem-weil-pbc-derived-adjunction-top-edge (reviewer PASS; first push; new nodes: 0)
 - 08:07 L: merged deliver/Q83/lem-pur-finite-forward-product-symmetry (reviewer PASS; after a return; new nodes: 2)
 - 08:07 L: merged deliver/N9/lem-sfb-ringed-finite-free-resolution-tensor (reviewer PASS; first push; new nodes: 0)
+- 08:07 L: merged deliver/O2/lem-sfb-etale-stalk-total-tensor-comparison (reviewer PASS; first push; new nodes: 0)

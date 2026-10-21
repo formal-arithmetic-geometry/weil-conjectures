@@ -17,9 +17,97 @@
   "def-pc-tensor-complex-sheaves",
   "def-weil-sheaf-of-modules-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First use the constant sections of $A_T$ to regard every $A_T$-module sheaf as a sheaf of $A$-modules. The two sheaf tensor products agree: an $A$-bilinear map of sheaves is $A_T$-balanced because a section of $A_T$ is locally constant, so the balancing equation reduces on a cover to balancing by an element of $A$ and then glues. This uses the sheafified tensor universal property, not equality of the sectionwise tensor products. Apply clause (1) of lem-pod-etale-stalk-tensor-scalar with $\\Lambda=A$ and invert its isomorphism. It gives precisely $\\gamma_{M,N}:S(M\\otimes_{A_T}N)\\cong SM\\otimes_A SN$, natural in both module sheaves, with the required formula on pure tensor germs. Thus for maps $u:M\\to M'$ and $v:N\\to N'$,\n$\\gamma_{M',N'}S(u\\otimes v)=(Su\\otimes Sv)\\gamma_{M,N}$.\nThe coefficient action is the action of constant germs, so this is the stated $A$-linear comparison.",
+   "uses": [
+    "def-kun-constant-sheaf",
+    "def-pur-sheaf-tensor-product",
+    "lem-pod-etale-stalk-tensor-scalar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EL, label lemma-tensor-product-pullback; sheaf tensor universal property immediately preceding it; geometric-point specialization"
+   }
+  },
+  {
+   "text": "For a small family $(M_i)$, the module-sheaf colimit theorem identifies the underlying abelian sheaf of $\\bigoplus_i M_i$ with the abelian-sheaf coproduct. Apply lem-kun-stalks-commute-colimits to this abelian diagram. Hence the canonical map\n$k:\\bigoplus_i SM_i\\longrightarrow S(\\bigoplus_i M_i)$, with $k j_i=S(\\iota_i)$, is bijective on underlying abelian groups. Its maps are $A$-linear because each stalk map sends $a m_{\\bar t}$ to $a(S\\iota_i)(m_{\\bar t})$; its inverse is therefore $A$-linear as well. Write $\\alpha=k^{-1}$. This explicitly obtains module coproduct preservation from abelian coproduct preservation. Also $S(u+v)=Su+Sv$ and $S(-u)=-Su$: on a germ $m_{\\bar t}$ both sides are respectively $(u(m)+v(m))_{\\bar t}$ and $(-u(m))_{\\bar t}$. Thus $S$ is additive and commutes with the signs used below.",
+   "uses": [
+    "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "lem-kun-stalks-commute-colimits",
+    "def-weil-pbc-geometric-stalks"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DB, label lemma-limits-colimits; Tags 04EN and 04EP, labels lemma-stalk-exact and lemma-stalk-exact-abelian; stalk module operations before Tag 04EQ"
+   }
+  },
+  {
+   "text": "For each $n$, put $I_n=\\{(p,q)\\in\\mathbf Z^2:p+q=n\\}$. Define\n$\\theta^n=(\\bigoplus_{I_n}\\gamma_{C^p,D^q})\\alpha$.\nIt is an isomorphism: its inverse is the map $\\bigoplus_{I_n}SC^p\\otimes_A SD^q\\to S(\\bigoplus_{I_n}C^p\\otimes_{A_T}D^q)$ whose restriction to summand $(p,q)$ is $S(\\iota_{p,q})\\gamma_{C^p,D^q}^{-1}$. The two composites restrict to the identity on every coproduct summand and hence are identities by the colimit universal property. By construction\n$\\theta^n S(\\iota_{p,q})=\\iota'_{p,q}\\gamma_{C^p,D^q}$.\nIn particular the maps $S(\\iota_{p,q})$ jointly determine maps out of the source degree, since $k$ in step 2 is an isomorphism.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, label lemma-pullback-tensor-product, last paragraph: constituents of the total comparison; explicit coproduct construction"
+   }
+  },
+  {
+   "text": "Check the chain equation on the source coprojections. Abbreviate $\\gamma_{C^p,D^q}$ by $\\gamma_{p,q}$, and let $d_{\\rm tot}$ and $d'_{\\rm tot}$ be the two total differentials. For $p+q=n$, additivity from step 2 and the total differential formula give\n\\[\n\\begin{aligned}\n\\theta^{n+1}S(d_{\\rm tot}^n)S(\\iota_{p,q})\n&=\\iota'_{p+1,q}\\gamma_{p+1,q}S(d_C^p\\otimes1)\n +(-1)^p\\iota'_{p,q+1}\\gamma_{p,q+1}S(1\\otimes d_D^q)\\\\\n&=\\iota'_{p+1,q}(S(d_C^p)\\otimes1)\\gamma_{p,q}\n +(-1)^p\\iota'_{p,q+1}(1\\otimes S(d_D^q))\\gamma_{p,q}\\\\\n&=d_{\\rm tot}'{}^n\\iota'_{p,q}\\gamma_{p,q}\n=d_{\\rm tot}'{}^n\\theta^n S(\\iota_{p,q}).\n\\end{aligned}\n\\]\nThe middle equality is ordinary tensor naturality from step 1, separately for $(d_C^p,1)$ and $(1,d_D^q)$. Joint determination from step 3 proves the chain equation. Each $\\theta^n$ is invertible, and multiplying this equation by the degreewise inverses proves that they too form a chain map. Hence $\\theta$ is a chain isomorphism.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pod-etale-stalk-tensor-scalar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, label lemma-pullback-tensor-product, total comparison; expanded check of the signed differential"
+   }
+  },
+  {
+   "text": "For chain maps $f:C\\to C'$ and $g:D\\to D'$, the total tensor map restricts on bidegree $(p,q)$ to $f^p\\otimes g^q$. Therefore\n\\[\n\\begin{aligned}\n\\theta_{C',D'}^n S((f\\otimes g)^n)S(\\iota_{p,q})\n&=\\iota'_{C',D',p,q}\\gamma_{C'^p,D'^q}S(f^p\\otimes g^q)\\\\\n&=\\iota'_{C',D',p,q}(Sf^p\\otimes Sg^q)\\gamma_{C^p,D^q}\\\\\n&=((Sf\\otimes Sg)^n)\\theta_{C,D}^n S(\\iota_{p,q}).\n\\end{aligned}\n\\]\nThe middle equality is exactly step 1's simultaneous naturality. Joint determination gives equality in every degree, hence equality of chain maps. This proves naturality in both complexes with the specified normalization.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pod-etale-stalk-tensor-scalar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, label lemma-pullback-tensor-product, bifunctoriality; expanded coprojection equation"
+   }
+  },
+  {
+   "text": "Any chain isomorphism with the displayed normalization has the same composite with every $S(\\iota_{p,q})$ in each degree as $\\theta$. Step 3 and the coproduct universal property force its degree maps, and consequently the chain map, to equal $\\theta$. The construction uses only the small countable sets $I_n$ (each is indexed by $p\\in\\mathbf Z$ with $q=n-p$). Every differential sends one summand into just the two indicated summands. Thus all formulas define maps on direct sums even for unbounded complexes, and no flatness or boundedness was used.",
+   "uses": [
+    "def-weil-pbc-category-colimit",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 07A4, label lemma-pullback-tensor-product, direct-sum total comparison; uniqueness from normalization"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-kun-constant-sheaf",
+  "def-pur-sheaf-tensor-product",
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful",
+  "lem-kun-stalks-commute-colimits",
+  "def-weil-pbc-geometric-stalks",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 07A4, label lemma-pullback-tensor-product, last paragraph, together with sites-modules.tex Tags 03EL and 03DB. Explicit unbounded cochain normalization, signed differential, two-variable naturality and uniqueness are written out here."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +164,52 @@
    "results": "8 hits: smoothSheafCommRing.ι_forgetStalk_inv, smoothSheafCommRing.ι_forgetStalk_inv_apply, smoothSheafCommRing.ι_forgetStalk_inv_assoc, smoothSheafCommRing.ι_forgetStalk_hom_assoc, smoothSheafCommRing.ι_forgetStalk_hom, smoothSheafCommRing.ι_forgetStalk_hom_apply, smoothSheafCommRing.forgetStalk_inv_comp_eval_apply, AlgebraicGeometry.Scheme.Modules.restrictStalkNatIso",
    "date": "2026-10-21",
    "verdict": "no match: ordinary stalk monoidality and generic total tensor APIs are ingredients; none states the canonical etale total-complex germ comparison and its two-variable chain naturality"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A colimit preserving additive strong monoidal functor commutes with the direct sum total tensor of two unbounded cochain complexes naturally with the signed differential",
+   "results": "8 hits: CochainComplex.ι_mapBifunctorShift₂Iso_hom_f, HomologicalComplex.ιTensorObj, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f, HomologicalComplex.HasGoodTensor₁₂, CochainComplex.ιMapBifunctor, CochainComplex.ι_mapBifunctorShift₂Iso_hom_f_assoc, CochainComplex.ι_mapBifunctorShift₁Iso_hom_f_assoc, HomologicalComplex.HasGoodTensor₂₃",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Point/Monoidal.lean and Mathlib/Algebra/Homology/Monoidal.lean; these give ordinary monoidality and total-tensor definitions, not this normalized etale two-complex chain comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mapBifunctorComparison\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Point/Monoidal.lean and Mathlib/Algebra/Homology/Monoidal.lean; these give ordinary monoidality and total-tensor definitions, not this normalized etale two-complex chain comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctorComparison|mapBifunctor.*NatIso|mapBifunctor.*Iso",
+   "results": "15 hits: Mathlib/Algebra/Homology/Monoidal.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorFlip.lean, Mathlib/Algebra/Homology/BifunctorShift.lean, Mathlib/Algebra/Homology/BifunctorShift.lean (subdirectory Algebra/Homology)",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Point/Monoidal.lean and Mathlib/Algebra/Homology/Monoidal.lean; these give ordinary monoidality and total-tensor definitions, not this normalized etale two-complex chain comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The geometric stalk of the direct sum total tensor product of two unbounded etale module complexes is naturally their tensor product of stalk complexes",
+   "results": "8 hits: TensorProduct.directSumLeft, TensorProduct.finsuppLeft, TensorProduct.finsuppLeft'_apply, Module.rankAtStalk_tensorProduct, PiTensorProduct.ofDirectSumEquiv_tprod_apply, TensorProduct.coe_directSumRight', HomologicalComplex.tensorObj, TensorProduct.directSumRight",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Point/Monoidal.lean and Mathlib/Algebra/Homology/Monoidal.lean; these give ordinary monoidality and total-tensor definitions, not this normalized etale two-complex chain comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiber|tensorHom_comp_toPresheafFiber",
+   "results": "5 hits: 18, 19, 36, 37, 39 (subdirectory CategoryTheory/Sites/Point/Monoidal.lean)",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Point/Monoidal.lean and Mathlib/Algebra/Homology/Monoidal.lean; these give ordinary monoidality and total-tensor definitions, not this normalized etale two-complex chain comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There is a unique natural chain isomorphism from the geometric stalk of the tensor product of two etale module complexes to the tensor of the stalk complexes characterized on each total coproduct summand by the pure tensor germ map",
+   "results": "8 hits: ModuleCat.Tilde.stalkIso_hom, KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply, smoothSheafCommRing.ι_forgetStalk_inv, smoothSheafCommRing.ι_forgetStalk_inv_apply, smoothSheafCommRing.ι_forgetStalk_hom, smoothSheafCommRing.ι_forgetStalk_hom_apply, ModuleCat.Tilde.stalkIso, ModuleCat.Tilde.stalkToFiberLinearMap_germ",
+   "date": "2026-10-21",
+   "verdict": "no match: inspected Mathlib/CategoryTheory/Sites/Point/Monoidal.lean and Mathlib/Algebra/Homology/Monoidal.lean; these give ordinary monoidality and total-tensor definitions, not this normalized etale two-complex chain comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-etale-derived-tensor-stalk",
@@ -98,5 +228,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-etale-stalk-total-tensor-comparison",
+  "worker": "stage1",
+  "summary": "Reused ordinary etale tensor-stalk and abelian stalk-colimit theorems, with the module forgetful colimit theorem to verify the coefficient category. Constructed the degreewise comparison and inverse by coproducts; checked the signed differential, both-variable naturality and uniqueness explicitly. No new nodes or statement changes.",
+  "blueprint": "Realizes det-ctf-finite-proper-tor, proof paragraph From constant modules to all sheaves, tensor products are computed stalkwise; expands lem-sfb-etale-derived-tensor-stalk proof step 2 at the ordinary unbounded chain level.",
+  "tool_uses": [
+   {
+    "node": "lem-pod-etale-stalk-tensor-scalar",
+    "why": "Clause (1) supplies the canonical ordinary etale module tensor-stalk isomorphism and germ formula; this unit does not state that ordinary sheaf tool."
+   },
+   {
+    "node": "lem-kun-stalks-commute-colimits",
+    "why": "Supplies arbitrary abelian etale stalk colimits, used for the total-degree coproducts; the unit itself only invokes stalkwise tensor computation."
+   },
+   {
+    "node": "lem-weil-pbc-module-sheaves-colimits-forgetful",
+    "why": "Clause (3) compares module-sheaf and abelian-sheaf coproducts, preventing an implicit change of coefficient category; no node in this unit supplies it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pod-etale-stalk-tensor-scalar",
+  "lem-kun-stalks-commute-colimits",
+  "lem-weil-pbc-module-sheaves-colimits-forgetful"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O2-119ccd800",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-119ccd800 (reviewer sub-agent of L); spot-checked: PASS: I read the item in full; the split has no new nodes and leaves the statement, stmt_deps, unit and chapter as on base/live. The item is still unsplit live and in side-live, so the delivery is not superseded; there is no repair note and the item is not dropped. Sources read: Stacks 07A4 (lemma-pullback-tensor-product, last paragraph: Tot of the termwise ordinary comparison, where flatness serves only to identify the tensor with the derived one) and 03EL with the bilinear universal property before it. Steps, each checked: (1) A_T-balanced because sections of A_T are locally constant, glued over a cover, then the inverse of lem-pod-etale-stalk-tensor-scalar clause (1) with Lambda=A; that clause has no finiteness hypothesis, is natural in both variables and gives the germ formula. (2) Coproduct stalk for A_T-module sheaves from clause (3) of lem-weil-pbc-module-sheaves-colimits-forgetful plus lem-kun-stalks-commute-colimits (an abelian-sheaf statement), with A-linearity checked on germs, so no silent change of coefficient category; S is additive. (3)-(6) theta^n=(sum of gamma) after k^{-1}, inverse given summand by summand, normalization, joint determination, chain equation with the (-1)^p sign re-derived, two-variable naturality, uniqueness; countable coproducts only. Edge cases: C or D zero, A=0, single-degree complexes including negative odd degree, zero differentials, unbounded complexes. Not duplicates: lem-sfb-ringed-site-point-tensor (existence only) and lem-pc-stalk-tensor-complex-degrees (ringed space). The parent lem-sfb-etale-derived-tensor-stalk uses exactly this normalized theta. Tool uses accepted: lem-pod-etale-stalk-tensor-scalar, lem-kun-stalks-commute-colimits, lem-weil-pbc-module-sheaves-colimits-forgetful. Batch-5 flag on lem-pod-etale-stalk-tensor-scalar: it is the generic statement that stalks commute with sheaf tensor products, neither given by nor a step of Poincare duality or the trace formula. Its 66-node closure contains only itself and def-pod-ring-scalar-extension from sec-poincare-duality, and no trace-formula, sk-thm-trace-transport or nt-assume node, so the citation is accepted. No SGA. No fixes."
  }
 }
