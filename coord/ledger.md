@@ -23871,3 +23871,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 22:04 L: returned deliver/NC/lem-sfb-relative-cyclic-restriction-model (reviewer RETURN: L: independent stage-2 immutable head 86835388efab: A6/A7: head 86835388efab is byte-identical to returned NC head cd552)
 - 22:07 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 22:08 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 22:09 L: returned deliver/NC/lem-sfb-relative-cyclic-restriction-model (reviewer RETURN: L: independent stage-2 immutable head 461dcd41912c: A7/A6: credit-only re-delivery after NB's stage-2 merge (ledger 21:4)
