@@ -23,67 +23,138 @@
  ],
  "proof": [
   {
-   "text": "Apply [sk-lem-brown-hypotheses] to each of the standing schemes and the given admissible coefficient. It asserts essential smallness of $\\Dctf$, compactness of each of its objects in the ambient localizing closure, and generation by any small skeleton. This proves (1), including the size condition required by Brown representability.",
+   "text": "Both schemes are qcqs by the cited affine-base lemma applied to their separated finite-type structure maps to $\\operatorname{Spec}k$.",
+   "uses": [
+    "lem-weil-pbc-qcqs-over-affine"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "(2): qcqs hypotheses for compactification and coherence"
+   }
+  },
+  {
+   "text": "Write $a_X=a_Yf$. Separated cancellation gives $f$ separated; finite-type permanence (f) gives $f$ locally of finite type. Since $X$ is quasi-compact and $Y$ quasi-separated, quasi-compact permanence (1) gives $f$ quasi-compact, hence of finite type.",
+   "uses": [
+    "lem-weil-pbc-separated-cancellation",
+    "lem-weil-pbc-proper-fp-permanence",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "(2): separated finite-type hypothesis; the detailed verification in sk-def-sfb-dc-setting/lem-sfb-compactification-over-base.proof.md"
+   }
+  },
+  {
+   "text": "Brown hypotheses applied to $X$ and $Y$ give their triangulated localizing closures with ambient sums, compactness of $\\Dctf$, and a small skeleton of compact generators. This proves (1).",
    "uses": [
     "sk-lem-brown-hypotheses"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
-    "place": "(1), compactness and generation"
+    "place": "(1): compactness and generation"
    }
   },
   {
-   "text": "By [lem-weil-pbc-qcqs-over-affine], both $X$ and $Y$ are qcqs, since their structure maps to $\\operatorname{Spec}k$ are separated and finite type. The $k$-morphism $f$ is itself separated and of finite type: writing $a_X=a_Y\\circ f$ for the structure maps, $a_X$ is separated, so $f$ is separated by [lem-weil-pbc-separated-cancellation](b); $a_X$ is locally of finite type, so $f$ is locally of finite type by [lem-weil-pbc-proper-fp-permanence](f); and $X$ is quasi-compact while $Y$ is quasi-separated, so $f$ is quasi-compact by [lem-weil-pbc-qcqs-morphism-permanence](1). This is the separated finite-type hypothesis on $f$ required by every cited statement below and in steps 3 and 4. Thus [sk-thm-nagata-compactification] applies to $f$ over the qcqs base $Y$ and supplies a dense compactification $f=p\\circ j$, with $j$ a quasi-compact open immersion and $p$ proper. For this compactification, [det-sf-comp-coherence-single] states that $Rp_*j_!$ restricts to the exact, sum-preserving functor between the two localizing categories and carries $\\Dctf(X,\\Lambda)$ into $\\Dctf(Y,\\Lambda)$. Its qcqs hypothesis on $Y$ has just been checked. Moreover, [det-sf-comp-coherence-cocycle] provides the canonical comparison isomorphisms between compactifications, independent of a common refinement and satisfying the identity and cocycle relations. Use the chosen compactification of the standing setting to obtain $Rf_!$; the comparisons show that it has the asserted compactification interpretation. This proves all of (2), including preservation of $\\Dctf$.",
+   "text": "Nagata applies by steps 1–2. Fix its dense compactification $f=pj$, with $j$ a quasi-compact open immersion and $p$ proper.",
    "uses": [
-    "lem-weil-pbc-qcqs-over-affine",
-    "lem-weil-pbc-separated-cancellation",
-    "lem-weil-pbc-proper-fp-permanence",
-    "lem-weil-pbc-qcqs-morphism-permanence",
-    "sk-thm-nagata-compactification",
-    "det-sf-comp-coherence-single",
+    "sk-thm-nagata-compactification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "(2), and sk-thm-existence.proof.md: Nagata compactification"
+   }
+  },
+  {
+   "text": "For this compactification, the single-compactification theorem restricts $Rp_*j_!$ to an exact functor between these closures, preserving sums and $\\Dctf$. Denote it by $Rf_!$.",
+   "uses": [
+    "det-sf-comp-coherence-single"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
+    "place": "(2): restriction to the localizing categories"
+   }
+  },
+  {
+   "text": "The coherence theorem compares this $Rf_!$ with every other compactification, independently of refinement, with identity and cocycle laws. Thus (2) holds.",
+   "uses": [
     "det-sf-comp-coherence-cocycle"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
-    "place": "(2), restriction, preservation and compactification comparisons"
+    "place": "(2): independence of compactification"
    }
   },
   {
-   "text": "For the same coefficient, morphism, and chosen compactification, [sk-prop-sf-existence] applies Brown representability to the exact coproduct-preserving functor from step 2 on the compactly generated category of step 1. Its conclusion gives the exact right adjoint $f^!$ and natural bijections $\\operatorname{Hom}(Rf_!M,N)\\simeq\\operatorname{Hom}(M,f^!N)$ on the full localizing categories. This is (3); a single application works uniformly for all the admissible coefficients, including arbitrary finite $A$.",
+   "text": "Apply the general existence theorem once to this same compactification functor. Its Brown adjunction gives an exact right adjoint $f^!$, proving (3).",
    "uses": [
     "sk-prop-sf-existence"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
-    "place": "(3), the general Brown adjoint"
+    "place": "(3): single Brown application"
    }
   },
   {
-   "text": "For finite $A$, [sk-prop-sf-rf-shriek-preservation] asserts precisely that the right adjoint from step 3 carries $\\Dctf(Y,A)$ into $\\Dctf(X,A)$ and that the adjunction restricts. For $\\mathcal O_E$, [det-prop-int-brown-adjoint] identifies the integral Brown right adjoint with the $\\Lambda=\\mathcal O_E$ instance of this same general right adjoint, with its adjunction. Hence [sk-thm-int-restriction] gives the required preservation and restricted adjunction for that functor. For $E$ and $\\overline{\\mathbf Q}_\\ell$, [sk-thm-restriction] explicitly refers to the right adjoint of the general existence theorem and gives the same preservation and restricted adjunction. The cases $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ are the cases $\\mathcal O_E$ and $E$ with $E=\\mathbf Q_\\ell$. Thus (4) holds for every listed coefficient.",
+   "text": "For finite $A$, the finite-coefficient preservation theorem applies to this general Brown adjoint and gives $f^!(\\Dctf(Y,A))\\subseteq\\Dctf(X,A)$.",
    "uses": [
-    "sk-prop-sf-rf-shriek-preservation",
+    "sk-prop-sf-rf-shriek-preservation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+    "place": "finite-coefficient bullet"
+   }
+  },
+  {
+   "text": "For $\\Lambda=\\mathcal O_E$, the integral Brown identification identifies this adjunction with the integral one. Integral restriction therefore gives preservation of $\\Dctf$ for the same $f^!$.",
+   "uses": [
     "det-prop-int-brown-adjoint",
-    "sk-thm-int-restriction",
+    "sk-thm-int-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+    "place": "integral-coefficient bullet: identification before restriction"
+   }
+  },
+  {
+   "text": "For $E$ and $\\overline{\\mathbf Q}_\\ell$, rational restriction gives preservation for this general Brown adjoint. The coefficients $\\mathbf Z_\\ell$ and $\\mathbf Q_\\ell$ are the cases $\\mathcal O_E$ (step 9) and $E$ (this step) with $E=\\mathbf Q_\\ell$.",
+   "uses": [
     "sk-thm-restriction"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
-    "place": "Finite, integral and rational restriction cases"
+    "place": "field-coefficient bullet and introductory coefficient specializations"
    }
   },
   {
-   "text": "For the non-finite coefficients only, apply [det-def-localizing-closure-ctf-equals-bc](2) to $X$ and $Y$, which are qcqs by step 2. It gives $\\Dctf=\\Dbc$ as full subcategories of the same module-object derived category, and equality of their localizing closures. Consequently the functors and adjunction already obtained give exactly the asserted $\\Dbc$ version. No such equality is used for a finite nonregular $A$, so no regularity or Gorenstein hypothesis has been imposed on the finite coefficient ring.",
+   "text": "Both functors now preserve the full $\\Dctf$ subcategories. Apply fully faithful adjunction restriction to their inclusions and the identity comparison isomorphisms. The resulting Hom bijections, unit and counit give (4).",
+   "uses": [
+    "lem-sp-fully-faithful-adjunction-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-restriction.proof.md",
+    "place": "final paragraph: formal restriction of the adjunction"
+   }
+  },
+  {
+   "text": "For the five non-finite coefficients, the cited equality theorem applies to the qcqs schemes of step 1: $\\Dctf=\\Dbc$ and their localizing closures agree. Substitution gives the claimed $\\Dbc$ version.",
    "uses": [
     "det-def-localizing-closure-ctf-equals-bc"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-existence/det-existence-localizing.proof.md",
-    "place": "(1), the integral and field category equalities and final coefficient specializations"
+    "place": "(1): integral and field category equalities"
    }
   }
  ],
@@ -92,6 +163,7 @@
   "det-prop-int-brown-adjoint",
   "det-sf-comp-coherence-cocycle",
   "det-sf-comp-coherence-single",
+  "lem-sp-fully-faithful-adjunction-restriction",
   "lem-weil-pbc-proper-fp-permanence",
   "lem-weil-pbc-qcqs-morphism-permanence",
   "lem-weil-pbc-qcqs-over-affine",
@@ -191,47 +263,47 @@
   }
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "sk-thm-existence",
   "worker": "stage1",
-  "summary": "Repair of the reader-approved delivery returned at landing: omit any unit-record edit and deliver only the item and report. Rechecked the current DAG statements and expanded the retained proof to cite compact-support preservation and comparisons, identify the integral Brown adjoint, and cite the actual Dctf=Dbc theorem with its qcqs hypothesis verified. Statement unchanged; no new nodes. Maintainer-reader fix 2026-10-18: step 2 now verifies that f is separated and of finite type (Mathlib leaves lem-weil-pbc-separated-cancellation, lem-weil-pbc-proper-fp-permanence, lem-weil-pbc-qcqs-morphism-permanence) before Nagata and the cited comparison/existence/restriction statements, which all assume it; the blueprint-cited off-unit statements are declared in tool_uses.",
-  "blueprint": "Step 1 realizes compactness/generation; step 2 realizes the compactification paragraph and det-existence-localizing (2); step 3 realizes its Brown application (3); step 4 realizes the finite/integral/field restriction paragraph; step 5 supplies the final Dbc and coefficient-specialization assertions.",
+  "summary": "Q66 repair of the 3733-character proof returned as too coarse: replaced the five compound steps by twelve atomic applications, separating the geometric prerequisites, compactification, single-compactification restriction, coherence, Brown adjunction, each coefficient family, full-subcategory adjunction restriction, and Dctf=Dbc substitution. All non-elementary arguments are already existing nodes, so the required duplicate search leads to reuse rather than new copies. In particular the previously implicit formal adjunction restriction is now an explicit citation of the existing Mathlib leaf lem-sp-fully-faithful-adjunction-restriction. Statement and statement dependencies unchanged; no new nodes; sources and existing searches retained. See report.md for the argument-by-argument return audit.",
+  "blueprint": "Steps 1–7 realize the compactification and compactness/Brown paragraph (unit step 2; det-existence-localizing (1)–(3)); steps 8–11 realize the coefficient restriction paragraph (unit step 3; det-existence-restriction); step 12 realizes the non-finite coefficient specialization. No unit or chapter route changes.",
   "tool_uses": [
    {
     "node": "sk-lem-brown-hypotheses",
-    "why": "step 1: compactness, essential smallness and generation; cited by det-existence-localizing.proof.md (1),(3) of this unit's blueprint proof (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+    "why": "Reused argument from the current unit's own blueprint proof: compactness, essential smallness and generation; cited by det-existence-localizing.proof.md (1),(3) of this unit's blueprint proof (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
    },
    {
     "node": "sk-thm-nagata-compactification",
-    "why": "step 2: existence of a compactification of f; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+    "why": "Reused argument from the current unit's own blueprint proof: existence of a compactification of f; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
    },
    {
     "node": "det-sf-comp-coherence-single",
-    "why": "step 2: Rp_*j_! exact, sum-preserving, Dctf-preserving; the statement of sk-prop-sf-comp-coherence cited by det-existence-localizing.proof.md (2) (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+    "why": "Reused argument from the current unit's own blueprint proof: Rp_*j_! exact, sum-preserving, Dctf-preserving; the statement of sk-prop-sf-comp-coherence cited by det-existence-localizing.proof.md (2) (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
    },
    {
     "node": "det-sf-comp-coherence-cocycle",
-    "why": "step 2: independence of the compactification; sk-prop-sf-comp-coherence, cited by det-existence-localizing.proof.md (2) (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+    "why": "Reused argument from the current unit's own blueprint proof: independence of the compactification; sk-prop-sf-comp-coherence, cited by det-existence-localizing.proof.md (2) (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
    },
    {
     "node": "sk-prop-sf-existence",
-    "why": "step 3: the single Brown application; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+    "why": "Reused argument from the current unit's own blueprint proof: the single Brown application; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
    },
    {
     "node": "sk-prop-sf-rf-shriek-preservation",
-    "why": "step 4: finite-coefficient restriction; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+    "why": "Reused argument from the current unit's own blueprint proof: finite-coefficient restriction; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
    },
    {
     "node": "det-prop-int-brown-adjoint",
-    "why": "step 4: identification of the integral Brown adjoint with the general one; sk-prop-int-brown, cited by det-existence-restriction.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+    "why": "Reused argument from the current unit's own blueprint proof: identification of the integral Brown adjoint with the general one; sk-prop-int-brown, cited by det-existence-restriction.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
    },
    {
     "node": "sk-thm-int-restriction",
-    "why": "step 4: integral restriction; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+    "why": "Reused argument from the current unit's own blueprint proof: integral restriction; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
    },
    {
     "node": "sk-thm-restriction",
-    "why": "step 4: field restriction; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
+    "why": "Reused argument from the current unit's own blueprint proof: field restriction; cited in sk-thm-existence.proof.md (the unit record's uses list only the statement's definitions; these are the units the blueprint proof itself cites, not a departure from the route)"
    }
   ]
  },
@@ -247,12 +319,12 @@
   "sk-thm-restriction"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-NC-4815d2397",
-  "group": "NC",
+  "reviewer": "NT-cc-Q66-de3daf289",
+  "group": "Q66",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-4815d2397 (reviewer sub-agent of L); spot-checked: I read the item and all eleven cited node statements in full, along with the main-20261015 unit proof files (_section, sk-thm-existence.proof, det-existence-localizing.proof, det-existence-restriction.proof). The statement is byte-identical to the unit statement and is not weakened. The coefficient category is the same module-object D(Mod_{Λ_X}) everywhere, with Loc taken using ambient sums. The delivery creates no new nodes and introduces no cycle or SGA citation. Steps 1, 3, 4 and 5 are correct as cited: brown-hypotheses gives (1); sk-prop-sf-existence gives the single Brown application for (3); in step 4, rf-shriek-preservation covers finite A, det-prop-int-brown-adjoint identifies the integral adjoint so that sk-thm-int-restriction applies, and sk-thm-restriction covers E and Q̄_ℓ; in step 5, ctf-equals-bc(2) applies to the non-finite coefficients only, with its qcqs hypothesis checked. One fault (C1/E1): step 2 applied Nagata, comp-coherence-single/-cocycle and later sk-prop-sf-existence/restriction, all of which assume f is separated and of finite type, but it checked only that X and Y are qcqs. I repaired it with the existing Mathlib leaves lem-weil-pbc-separated-cancellation(b), lem-weil-pbc-proper-fp-permanence(f) and lem-weil-pbc-qcqs-morphism-permanence(1). I also declared the off-unit statements cited by the unit's own blueprint proof files in split_report.tool_uses and accepted them. I left the unit's realized fields to maintenance, because the previous landing refused a unit-file edit. Batch 5: the five flagged citations (int-brown-adjoint, comp-coherence-single/-cocycle, brown-hypotheses, int-restriction) are the construction of Rf_!/f^! and Dctf preservation. The Poincaré-duality assumption leaf takes that adjunction as a given notion, and the construction is not a step of the duality or trace-formula proofs. The closure reaches those chapters only through generic tools: the étale stalk tensor lemma, a Mathlib localization leaf, the lisse/π₁ correspondence and the module-object comparison. So the citations are genuinely outside the assumptions.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q66-de3daf289 (reviewer sub-agent of L); spot-checked: Human-ordered re-split (repair note 2026-10-21: 3733 chars too coarse). I diffed the item against the live node: statement, stmt_deps, lean, reviewed, tool_uses and blueprint are identical, and only proof, proof_deps and split_report changed. The proof now has 12 single-citation steps totalling 2118 chars (longest 250), with no new nodes. I checked that every non-elementary argument of the old proof is already the statement of an existing node, so new nodes would have been duplicates (C5/D1); reusing them meets the note. The only newly cited node is the landed Mathlib leaf lem-sp-fully-faithful-adjunction-restriction (Adjunction.restrictFullyFaithful, Restrict.lean), so there is no cycle and no route issue. I read main-20261015 sk-thm-existence.proof.md, det-existence-localizing.proof.md (1)-(3) and det-existence-restriction.proof.md: steps 1-7 realize the localizing part, 8-11 the restriction bullets and the final 'formal' paragraph, 12 the Dctf=Dbc specialization. There is no SGA citation. I checked each step against the statement it cites and the hypotheses in force. (1) qcqs-over-affine gives X and Y qcqs. (2) Separated-cancellation (b), proper-fp-permanence (f) and qcqs-morphism-permanence (1) give f separated of finite type. (3) brown-hypotheses gives clause (1). (4) Nagata applies over qcqs Y and gives a dense compactification with qc open j and proper p. (5) and (6) comp-coherence-single and -cocycle, whose hypotheses all hold, give clause (2). (7) sk-prop-sf-existence gives clause (3). (8) rf-shriek-preservation covers finite A with no regularity hypothesis. (9) det-prop-int-brown-adjoint's identification feeds sk-thm-int-restriction. (10) sk-thm-restriction covers E and Q̄_ℓ. (11) the restriction leaf applies with the full inclusions and identity comparisons, giving clause (4). (12) ctf-equals-bc (2) applies only to the non-finite coefficients. Edge cases checked: f=id, X empty, A=Z/ℓ², E=Q_ℓ. One fault (C4, wording), which I fixed: step 10 credited the Z_ℓ case to sk-thm-restriction, but Z_ℓ=O_{Q_ℓ} is step 9's integral case. The text now says Z_ℓ and Q_ℓ are the O_E (step 9) and E (step 10) cases with E=Q_ℓ (fixes/dag/nodes/sec-six-functors-basics/sk-thm-existence.json; total 2179 chars). The existing tool_uses are unchanged and stay accepted. Maintainer notes: (a) Clause (1) and sk-lem-brown-hypotheses are false over a standing field of infinite ℓ-cd (Q54 957efba8: over iterated Laurent series over F̄_p, F_ℓ is not compact because the pro-étale ⊕F_ℓ[n] equals ΠF_ℓ[n]). I found nothing on it in live HUMAN.md or the ledger, and it needs a human decision; the re-split order correctly kept the statement. (b) The unit realized fields are still empty, unchanged from live.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.ExceptionalInverseImageExistence",
