@@ -18,9 +18,163 @@
   "def-pc-flat-sheaf-modules",
   "lem-pur-homotopy-category-triangulated"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the abelian category $\\operatorname{Mod}(R)$, which exists with the asserted abelian structure because the site is small [def-weil-sheaf-of-modules-category]. Tensor is additive in both variables [lem-pc-sheaf-modules-tensor-closed]. Thus $1\\otimes f$ and $f\\otimes1$, on the direct-sum total complexes of [def-pc-tensor-complex-sheaves], preserve identities, composition and sums, giving the two additive functors. An additive functor distributes over a binary biproduct: tensor the inclusions and projections and use $\\pi_i\\iota_j=\\delta_{ij}$ and $\\sum_i\\iota_i\\pi_i=1$. This gives the distributions over $Y^q\\oplus X^{q+1}$ used below. All component maps below are balanced over $R(U)$ and commute with restriction in $U$. The universal property of module sheafification [def-weil-presheaf-modules-sheafification], applied to the presheaf tensor defining [def-pur-sheaf-tensor-product], therefore gives their sheaf maps and carries the component identities to sheaf identities. Maps on the total direct sums are then specified by their restrictions to summands; only reindexing direct sums and binary distribution are used.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-pc-tensor-complex-sheaves",
+    "def-weil-presheaf-modules-sheafification",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM (lemma-derived-tor-exact); derived.tex Tag 0G6E (remark-double-complex-as-tensor-product-of), bilinearity hypothesis"
+   }
+  },
+  {
+   "text": "For $u-v=d_Yh+hd_X$, define $k_L(a\\otimes x)=(-1)^p a\\otimes h(x)$ for $a\\in A^p$, $x\\in X^q$. Using the total differential of [def-pc-tensor-complex-sheaves], the two expansions are\n$$d k_L(a\\otimes x)=(-1)^p d_Aa\\otimes hx+a\\otimes d_Yhx,$$\n$$k_Ld(a\\otimes x)=(-1)^{p+1}d_Aa\\otimes hx+a\\otimes hd_Xx.$$\nThe first terms cancel, leaving $a\\otimes(u-v)x$. These are identities of balanced maps, hence of sheaf maps by step 1. Thus $k_L$ is the asserted degree $-1$ homotopy.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G6E (remark-double-complex-as-tensor-product-of), compatibility with homotopies, expanded"
+   }
+  },
+  {
+   "text": "For the other tensor order put $k_R(x\\otimes a)=hx\\otimes a$ for $x\\in X^i$, $a\\in A^j$. The total differential [def-pc-tensor-complex-sheaves] gives\n$$d k_R(x\\otimes a)=d_Yhx\\otimes a+(-1)^{i-1}hx\\otimes d_Aa,$$\n$$k_Rd(x\\otimes a)=hd_Xx\\otimes a+(-1)^i hx\\otimes d_Aa.$$\nAgain the mixed terms cancel, giving $(u-v)x\\otimes a$. By steps 2 and 3 the two additive functors send homotopic maps to homotopic maps. Their assignments on morphism classes in $K(R)$ are consequently well defined, preserve composition and identities, and remain additive. Here $K(R)$ has precisely morphisms modulo homotopy as in [lem-pur-homotopy-category-triangulated].",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pur-homotopy-category-triangulated"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G6E (remark-double-complex-as-tensor-product-of), compatibility with homotopies, expanded"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-total-tensor-integer-shifts] to the additive sheaf tensor bifunctor of step 1; the target category has the countable sums appearing in [def-pc-tensor-complex-sheaves]. It gives $s^2_n:H_A(B[n])\\cong H_A(B)[n]$ with summand sign $(-1)^{np}$ and $s^1_n:H^A(B[n])\\cong H^A(B)[n]$ unsigned. Their naturality and zero/addition coherence are part of that cited statement. Passing to homotopy classes preserves these equations, so these are coherent shifts on the induced functors too.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH (item-shift-tensor); derived.tex Tag 0G6E, final paragraph"
+   }
+  },
+  {
+   "text": "Use the cone differential and its inclusion/projection from [def-weil-abstract-derived-category]. Define $\\phi_L$ to be identity on the $Y$ summands and $(-1)^p$ on $A^p\\otimes X^{q+1}$, followed by the degree reindexing into $H_A(X)^{p+q+1}$. It is invertible degreewise by the same signs. On a $Y$ summand its chain identity is immediate. On $a\\otimes x$ with $x\\in X^{q+1}$, applying the source differential and then $\\phi_L$ gives the $Y$ component $(-1)^pa\\otimes ux$ and the $X$ components\n$$(-1)^{p+1}d_Aa\\otimes x-a\\otimes d_Xx.$$\nApplying the target cone differential to $(0,(-1)^pa\\otimes x)$ gives exactly these components: its $X$ component is $-d_{H_A(X)}((-1)^pa\\otimes x)$. Thus $\\phi_L$ is a chain isomorphism. The calculation uses only the explicit total differential [def-pc-tensor-complex-sheaves].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G6E (remark-double-complex-as-tensor-product-of), compatibility with split exact sequences; definition-cone, explicit signed cone check"
+   }
+  },
+  {
+   "text": "Define $\\phi_R$ by binary distribution and reindexing, unsigned on both summands. For $x\\in X^{i+1}$ viewed in cone degree $i$ and $a\\in A^j$, the source differential has $Y$ component $ux\\otimes a$ and $X$ component\n$$-d_Xx\\otimes a+(-1)^i x\\otimes d_Aa.$$\nThe target cone differential gives $ux\\otimes a$ and $-d_{H^A(X)}(x\\otimes a)$; since the degree of $x$ in $X$ is $i+1$, this is $-d_Xx\\otimes a-(-1)^{i+1}x\\otimes d_Aa$, the same expression. The $Y$ components commute with the differential directly. The inverse is the unsigned reverse distribution, so this is a chain isomorphism [def-weil-abstract-derived-category, def-pc-tensor-complex-sheaves].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-pc-tensor-complex-sheaves"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0G6E (remark-double-complex-as-tensor-product-of); definition-cone, first-factor cone check"
+   }
+  },
+  {
+   "text": "For a strictly commuting square of chain maps from $u:X\\to Y$ to $u':X'\\to Y'$, the cone map is diagonal with the maps on $Y$ and $X[1]$. Its degree-zero component maps commute with the signs $(-1)^p$ of $\\phi_L$ and the identity signs of $\\phi_R$. Hence both isomorphisms are natural in $u$. They preserve inclusions because the $Y$ summands are unchanged. On $Y$ both projection composites are zero. On $A^p\\otimes X^{q+1}$ the composite $p_{H_Au}\\phi_L$ has sign $(-1)^p$, which is exactly $s^2_1 H_A(p_u)$ by [lem-weil-pbc-total-tensor-integer-shifts]. On $X^{i+1}\\otimes A^j$ both $p_{H^Au}\\phi_R$ and $s^1_1 H^A(p_u)$ are unsigned. Thus the two projection identities hold. Additivity gives the same identities after negating the projections; the third triangle arrows are consequently the required $-p$, with no extra sign [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "lem-weil-pbc-total-tensor-integer-shifts"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "definition-cone and definition-distinguished-triangle; Tag 0G6E, signed shift comparison"
+   }
+  },
+  {
+   "text": "Every distinguished triangle in $K(R)$ is isomorphic to a cone triangle with third map $-p$ [lem-pur-homotopy-category-triangulated]. For such a triangle, use identity on its first two tensor vertices, $\\phi_L$ or $\\phi_R$ on the third, and the shift comparison of step 4 on the shifted first vertex. The first square is the defining tensor map, and the other two squares commute by step 7. This is an isomorphism to the cone triangle of the tensor map. Its image is therefore distinguished; the same follows for any triangle isomorphic to it. Together with additivity and the coherent shifts, this is exactly exactness of the two functors [def-weil-triangulated-category].",
+   "uses": [
+    "lem-pur-homotopy-category-triangulated",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM (lemma-derived-tor-exact); derived.tex Tag 0G6E, with definition-distinguished-triangle"
+   }
+  },
+  {
+   "text": "For $b\\in B^i$, $a\\in A^j$, set $\\tau(b\\otimes a)=(-1)^{ij}a\\otimes b$. The total differential [def-pc-tensor-complex-sheaves] gives\n$$\\tau d(b\\otimes a)=(-1)^{ij+j}a\\otimes d_Bb+(-1)^{ij}d_Aa\\otimes b=d\\tau(b\\otimes a).$$\nIndeed the two source differential terms have exponents $(i+1)j=ij+j$ and $i+i(j+1)\\equiv ij\\pmod2$. The composite with the reverse signed swap is identity because $(-1)^{ij+ji}=1$. Tensor symmetry on sheaves is the one induced by ordinary module symmetry [lem-pc-sheaf-modules-tensor-closed]; these component maps descend as in step 1 and reindex the direct sums. Degree-zero chain maps preserve $i,j$, so the displayed swap commutes with them, proving naturality.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0GWR (item-flip-tensor-product), signed swap formula"
+   }
+  },
+  {
+   "text": "Let $A$ be K-flat and let $u:X\\to Y$ be any quasi-isomorphism. Its cone is acyclic by [lem-pur-quasi-iso-cone-acyclic], applicable in the abelian category of step 1, with integer cochain indexing. K-flatness [def-pc-kflat-complex] says that $H^A C(u)$ is acyclic. Step 6 identifies this with $C(H^Au)$, so the same cone criterion makes $H^Au$ a quasi-isomorphism. By the natural signed swap of step 9, $H_Au$ is conjugate to $H^Au$ by chain isomorphisms. Applying each cohomology functor to that conjugacy shows $H_Au$ is a quasi-isomorphism as well [def-weil-abstract-derived-category]. Neither endpoint of $u$ was assumed K-flat or bounded.",
+   "uses": [
+    "lem-pur-quasi-iso-cone-acyclic",
+    "def-pc-kflat-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP (lemma-K-flat-quasi-isomorphism), proof by acyclic cones"
+   }
+  },
+  {
+   "text": "For every acyclic $F$ and every integer $n$, the second-factor shift comparison [lem-weil-pbc-total-tensor-integer-shifts] identifies $\\operatorname{Tot}(F\\otimes A[n])$ with $\\operatorname{Tot}(F\\otimes A)[n]$. If $A$ is K-flat the unshifted tensor is acyclic by [def-pc-kflat-complex]. A shift has cohomology $H^r(C[n])=H^{r+n}(C)$: its differential is $(-1)^n d_C$, so its kernel and image are those of the corresponding reindexed differential. Thus this shifted tensor is acyclic and $A[n]$ is K-flat. Separately, if all $A^r$ are flat, then all $(A[n])^r=A^{r+n}$ are flat [def-pc-flat-sheaf-modules]. This last termwise assertion requires no implication from unbounded termwise flatness to K-flatness.",
+   "uses": [
+    "lem-weil-pbc-total-tensor-integer-shifts",
+    "def-pc-kflat-complex",
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0FNH (item-shift-tensor); sites-cohomology.tex definition-K-flat"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "def-pc-tensor-complex-sheaves",
+  "def-weil-presheaf-modules-sheafification",
+  "def-pur-sheaf-tensor-product",
+  "lem-pur-homotopy-category-triangulated",
+  "lem-weil-pbc-total-tensor-integer-shifts",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YM and 06YP, expanded using derived.tex Tag 0G6E and the cone convention, and more-algebra.tex Tags 0FNH and 0GWR"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -56,10 +210,45 @@
    "results": "8 hits: HomologicalComplex.tensorObj, HomologicalComplex₂.total.mapIso, CochainComplex.mappingCone.shiftIso, HomologicalComplex.ιTensorObj, HomologicalComplex₂.total.mapIso_hom, HomologicalComplex₂.hasTotal_of_iso, HomologicalComplex.HasTensor, HomologicalComplex.instHasTensorTensorUnit",
    "date": "2026-10-21",
    "verdict": "no match: hits are good-tensor predicates, generic cone maps for a termwise additive functor, or total-complex constructions; none gives the signed cone projections, tensor homotopies and K-flat consequences for module sheaves on arbitrary small sites."
+  },
+  {
+   "tool": "grep",
+   "query": "mapBifunctor.*[Hh]omotop|[Tt]ensor.*[Hh]omotop|mappingCone.*[Tt]ensor",
+   "results": "5 hits: Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean, Mathlib/Algebra/Homology/BifunctorHomotopy.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: homotopy components are in BifunctorHomotopy and shifts in BifunctorShift, but the hits do not give the signed sheaf tensor cone triangles and all K-flat consequences."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total tensor of cochain complexes is a triangulated functor on homotopy categories",
+   "results": "8 hits: HomotopyCategory.instIsTriangulatedIntUpMapHomotopyCategory, CategoryTheory.Functor.IsTriangulated.instAdditive, HomotopyCategory.instIsTriangulatedIntUp, HomotopyCategory.mappingCone_triangleh_distinguished, HomologicalComplex.tensorObj, HomotopyCategory.instPretriangulatedIntUp, HomologicalComplex₂.total.map_comp, DerivedCategory.instIsTriangulatedHomotopyCategoryIntUpQh",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: homotopy components are in BifunctorHomotopy and shifts in BifunctorShift, but the hits do not give the signed sheaf tensor cone triangles and all K-flat consequences."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"map₂CochainComplex\", \"Homotopy\"",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: homotopy components are in BifunctorHomotopy and shifts in BifunctorShift, but the hits do not give the signed sheaf tensor cone triangles and all K-flat consequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor of unbounded complexes of sheaves preserves homotopies and signed mapping cone triangles",
+   "results": "8 hits: HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.tensorObj, HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, CochainComplex.mappingCone.mapTrianglehIso",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: homotopy components are in BifunctorHomotopy and shifts in BifunctorShift, but the hits do not give the signed sheaf tensor cone triangles and all K-flat consequences."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The tensor product bifunctor on complexes commutes with mapping cones and Koszul braiding and preserves quasi isomorphisms for K flat factors",
+   "results": "8 hits: CategoryTheory.Tor', CategoryTheory.Tor, CategoryTheory.Tor'_obj_obj, HomologicalComplex.HasGoodTensor₁₂, CategoryTheory.Tor_obj, Module.Flat.lTensor_shortComplex_exact, Module.Flat.rTensor_shortComplex_exact, Module.Flat.iff_lTensor_preserves_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "no match for the complete item: homotopy components are in BifunctorHomotopy and shifts in BifunctorShift, but the hits do not give the signed sheaf tensor cone triangles and all K-flat consequences."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-kflat-fixed-tensor-triangulated",
@@ -79,5 +268,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-total-tensor-homotopy-cone-signs",
+  "worker": "stage1",
+  "summary": "Expanded the homotopy, cone and symmetry signs into component calculations, including naturality and the signed projections. Used existing integer-shift and acyclic-cone nodes for coherence and the K-flat consequences. No new nodes; statement unchanged, with the final same-holds clause read as preservation of termwise flatness under shifts.",
+  "blueprint": "Realizes the first paragraph of the current lemma-weil-pbc-perfect-projection-formula proof: tensor is exact triangulated and commutes with shift comparisons in the claims closed under shifts and under cones. Steps 1-8 give that chain-level exactness, steps 9-11 its symmetry and K-flat/shift compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic additive sheaf tensor and module symmetry, not a replacement of the proper-base-change route; no node of this unit supplies the underlying sheaf tensor structure."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "Generic acyclic-cone characterization of quasi-isomorphisms in any abelian category; needed to pass from the explicit cone computation to K-flat preservation, with no geometric route change."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pur-quasi-iso-cone-acyclic"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q21-c0d1d12ec",
+  "group": "Q21",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q21-c0d1d12ec (reviewer sub-agent of L); spot-checked: I read all 11 steps and the 12 cited statements and recomputed every sign by hand. They are correct. Homotopies: k_L=(-1)^p 1⊗h and k_R=h⊗1, and the mixed terms cancel. Cones: phi_L carries (-1)^p on the A^p⊗X^{q+1} summand and agrees with the cone differential of H_A u. phi_R is unsigned, because x has degree i+1 in X but degree i in the cone. Projections: p∘phi_L=s^2_1 H_A(p_u) with sign (-1)^{np} at n=1, matching lem-weil-pbc-total-tensor-integer-shifts. The swap (-1)^{ij} is a chain map, matching Stacks 0GWR. The K-flat argument follows 06YP: the cone is acyclic, then H^A C(u)≅C(H^A u) is acyclic (A is the right factor, as in def-pc-kflat-complex), and H_A u is conjugate to H^A u by the swap. Shift stability comes from s^2_n. I checked the sources: Stacks 06YM, 06YP, definition-K-flat, 0FNH, 0GWR and 0G6E. Compared with clones/live, the statement, stmt_deps and blueprint are unchanged, live is still unsplit, there is no repair note, and the item is not on the drop list. There are no new nodes. lem-pc-mixed-tensor-kflat-quasi-iso is a different setting (modules over rings), not a duplicate. I accept the tool_uses of lem-pc-sheaf-modules-tensor-closed and lem-pur-quasi-iso-cone-acyclic as generic tools. No SGA source is used. No fixes."
  }
 }
