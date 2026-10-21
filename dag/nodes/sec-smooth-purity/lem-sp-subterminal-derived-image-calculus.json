@@ -17,122 +17,95 @@
  ],
  "proof": [
   {
-   "text": "For any $Z=U,V,W$, apply [lem-trf-slice-subtopos-site-presentation] to the underlying set sheaf of a module $F$ on $\\mathcal E/Z$. It gives a sheaf $C\\mapsto F(C\\times Z/Z)$. Give it addition and scalar action by those of $F(C\\times Z/Z)$ and $R(C)\\to R(C\\times Z)$; restriction maps are semilinear, so this is an $R$-module sheaf by [def-weil-sheaf-of-modules-category]. For $\\alpha:j_Z^*M\\to F$, its transpose has component $M(C)\\to M(C\\times Z)\\xrightarrow{\\alpha_{C\\times Z/Z}}F(C\\times Z/Z)$. Conversely restrict a map $M\\to j_{Z*}F$ to $T\\to Z$ and then restrict $F(T\\times Z/Z)$ along the graph $T\\to T\\times Z$. Naturality of the two maps shows that these operations are inverse; both are linear, since the composite $R(T)\\to R(T\\times Z)\\to R(T)$ is the identity. This gives the module adjunction $j_Z^*\\dashv j_{Z*}$. Its unit is restriction along $C\\times Z\\to C$, and its counit is restriction along the graph. The same construction inside $\\mathcal E/U$ and $\\mathcal E/V$ gives $k_{U*},k_{V*}$ using fibre products over the slice base.",
+   "text": "Use Mathlib overPushforwardOverAdj and overMapPushforwardAdj for the actual module restriction and direct-image functors. Apply prop-pur-kinjective-resolutions-exist on the ambient site and each slice. Its Grothendieck-abelian assertion and the source-library HasKInjectiveResolutions instance provide monomorphic K-injective resolutions.",
    "uses": [
-    "lem-trf-slice-subtopos-site-presentation",
-    "def-weil-sheaf-of-modules-category"
+    "def-pur-localized-ringed-site",
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-kinjective-functorial-existence"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CE, lemma-localize-given-products; module-linear specialization of the section formula and graph counit"
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+    "place": "Tags 03CE, 079P"
    }
   },
   {
-   "text": "The categories $\\mathcal E$, $\\mathcal E/U$, $\\mathcal E/V$, $\\mathcal E/W$ are small sites: the objects and arrows of a slice are subsets of sets of pairs from $\\mathcal E$. Apply [prop-pur-kinjective-resolutions-exist] to their restricted ring sheaves to obtain K-injective resolutions of every unbounded complex. By [lem-pur-site-restriction-module-adjunction-exact], every restriction in question is additive exact and has an additive exact left adjoint given by extension by zero. Applying [lem-weil-pbc-right-adjoint-preserves-kinjective] first to extension by zero $\\dashv$ restriction, and then to restriction $\\dashv$ the right adjoint constructed in step 1, proves that both restriction and direct image preserve K-injectives. These applications also take place within each slice.",
+   "text": "Use the existing exactness declarations overFunctor_exact_ofUniverses and overMap_exact_ofUniverses. Apply lem-sp-site-restriction-kinjective-independent-ring and lem-sp-site-relocalization-kinjective-independent-ring to restriction; apply lem-weil-pbc-right-adjoint-preserves-kinjective to each ordinary restriction/direct-image adjunction.",
    "uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-site-restriction-module-adjunction-exact",
+    "lem-sf-site-perfect-restriction-exact",
+    "lem-sf-site-perfect-overmap-exact",
+    "lem-sp-site-restriction-kinjective-independent-ring",
+    "lem-sp-site-relocalization-kinjective-independent-ring",
     "lem-weil-pbc-right-adjoint-preserves-kinjective"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08FI, lemma-restrict-K-injective-to-open; derived.tex Tag 08BJ, lemma-adjoint-preserve-K-injectives"
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+    "place": "Tags 03DJ, 08FI, 08BJ"
    }
   },
   {
-   "text": "Exact restriction induces its termwise triangulated functor by [lem-weil-pbc-exact-functor-derived-factorization]. Apply [lem-weil-pbc-kinjective-total-derived] to direct image on homotopy categories followed by localization: this functor is triangulated, since its additive termwise construction carries the cone matrix and shifts to the same cone matrix and shifts. The resolutions from step 2 give $Rj_{Z*}$ everywhere and $Rj_{Z*}(QI)\\cong Q(j_{Z*}I)$ for K-injective $I$; likewise for $k_U,k_V$. In particular compositions can be computed without a second resolution, since the first direct image remains K-injective by step 2.",
+   "text": "Construct each DerivedPair using source-library mapDerivedCategoryRightDerivedAdjunction, exact restriction mapDerivedCategoryFactors, and rightDerivedFunctorUnit. The latter is invertible on K-injectives. The derived unit factorization derivedη_fac_app and the ordinary termwise adjunction prove the required chain-transpose equation. Transposing the chain counit gives the derived counit normalization.",
    "uses": [
     "lem-weil-pbc-exact-functor-derived-factorization",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 070K, lemma-enough-K-injectives-implies; Tag 014X, lemma-additive-exact-homotopy-category"
-   }
-  },
-  {
-   "text": "For any complex $M$ on $\\mathcal E$ and K-injective $I$ on $\\mathcal E/Z$, [lem-weil-pbc-kinjective-hom-derived] and [lem-weil-pbc-termwise-adjunction-homotopy] give natural bijections\n$$\\operatorname{Hom}_{D(R_Z)}(j_Z^*QM,QI)\\cong\\operatorname{Hom}_{K(R_Z)}(j_Z^*M,I)\\cong\\operatorname{Hom}_{K(R)}(M,j_{Z*}I)\\cong\\operatorname{Hom}_{D(R)}(QM,Qj_{Z*}I).$$\nThe last use of the K-injective Hom bijection is valid by step 2. Every derived object has such representatives by step 2, hence this is $j_Z^*\\dashv Rj_{Z*}$. The homotopy adjunction in the cited statement sends a chain map to its ordinary transpose, so this bijection has exactly the ordinary counit at $QI$. For the unit choose $M$ K-injective as well; then $j_Z^*M$ is K-injective by step 2, so the unit is also represented by the ordinary unit. It is natural in derived morphisms because morphisms between K-injective representatives are homotopy classes and the displayed bijections are natural. The identical argument gives the two $k$ adjunctions.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived",
     "lem-weil-pbc-termwise-adjunction-homotopy"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 070I, lemma-K-injective, and 09T5, lemma-derived-adjoint-functors; explicit Hom-bijection proof"
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+    "place": "Tags 070I, 070K, 09T5; source RightDerivedFunctor.Adjunction"
    }
   },
   {
-   "text": "If $T\\to U$ is an object of $\\mathcal E/U$, the graph $T\\to T\\times U$ is inverse to the first projection: the two maps to $U$ coincide because $U$ is subterminal. Therefore the counit in step 1 identifies $(j_U^*j_{U*}F)(T/U)=F(T\\times U/U)$ with $F(T/U)$. For $G$ on $\\mathcal E/V$, the two expressions $(j_U^*j_{V*}G)(T/U)$ and $(k_{U*}k_V^*G)(T/U)$ are respectively $G(T\\times V/V)$ and $G(T\\times_U W/V)$. Their indexing objects are canonically isomorphic: $T\\times_U(U\\times V)\\cong T\\times V$. For $H$ on $\\mathcal E/W$, $T\\times W\\cong T\\times_U W$ because the map $T\\to U$ is unique. This gives $j_U^*j_{W*}H\\cong k_{U*}H$. Each isomorphism preserves the map from $R(T)$, and it commutes with restriction along $T'\\to T$ by the product projections. Interchanging $U,V$ proves the other three underived comparisons.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tags 03CE, lemma-localize-given-products, and 00Y2, lemma-restrict-back; direct product calculation from step 1"
-   }
-  },
-  {
-   "text": "For $H$ on $\\mathcal E/W$, evaluate $j_{U*}k_{U*}H$ at $C$. Its value is $H((C\\times U)\\times_U W/W)=H(C\\times W/W)$, the value of $j_{W*}H$. The scalar maps from $R(C)$ and all restriction maps agree under this product identification. Thus $j_{U*}k_{U*}\\cong j_{W*}$. Interchanging $U,V$ gives $j_{V*}k_{V*}\\cong j_{W*}$. Iterated restrictions also agree sectionwise, by the relocalization formula of [def-pur-localized-ringed-site].",
+   "text": "Construct the two restriction compositors by exactDerivedRestrictionComposition applied to overFunctorMap. Its factorization equation, with the identity complex compositor cancelled degreewise, proves CompositionNormalization for each independently chosen derived-category universe.",
    "uses": [
-    "def-pur-localized-ringed-site"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Tag 03CE, lemma-localize-given-products, applied within a slice; product associativity"
-   }
-  },
-  {
-   "text": "Represent $A,B,D$ by K-injective complexes $I,J,L$ on $U,V,W$ respectively. In step 5 substitute $I,J,L$ degree by degree. The complex $k_V^*J$ is K-injective by step 2, so $k_{U*}k_V^*J$ computes $Rk_{U*}(k_V^*B)$, whereas $j_U^*j_{V*}J$ computes $j_U^*Rj_{V*}B$. The self and $W$ comparisons follow from the other two formulas in that step, and the $V$ formulas follow by interchange. In step 6, $k_{U*}L$ is K-injective, so the same formula computes the iterated derived direct image and gives $Rj_{U*}Rk_{U*}\\cong Rj_{W*}$; similarly for $V$. These degreewise natural identifications are natural in the derived objects: by [lem-weil-pbc-kinjective-hom-derived] all their morphisms are represented by homotopy classes of chain maps, and additive functors and the product identifications respect chain homotopies. The self comparisons are the counits by step 4 and the graph calculation of step 5.",
-   "uses": [
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-pur-exact-restriction-composition"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DG, lemma-glue, direct-image restriction calculation, made explicit for sites using steps 1–6"
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+    "place": "Functoriality of localization, Tag 014X"
    }
   },
   {
-   "text": "For $A=QI$, the map $r_A$ is represented by the chain map $\\rho_I:j_{U*}I\\to j_{W*}k_U^*I$ whose component at $C$ is restriction $I(C\\times U/U)\\to I(C\\times W/U)$. Indeed, its transpose under step 4 is restriction of this map to $W$ followed by the graph counit of $j_W$; at $T\\to W$ this is the graph counit of $j_U$ restricted to $W$, namely $k_U^*\\epsilon_{U,I}$. Both the source and target of $\\rho_I$ are K-injective by step 2, so the Hom bijection of [lem-weil-pbc-kinjective-hom-derived] identifies this chain calculation with the stated derived transpose, without a choice of a derived lift. For $B=QJ$ the same construction gives $\\rho_J:j_{V*}J\\to j_{W*}k_V^*J$.",
+   "text": "Subterminality makes Over.forget full, hence its adjunction unit is invertible. The module direct-image counit is restriction along this unit, so it is invertible; the normalized derived counit is then invertible on K-injective representatives and hence everywhere. For each cross map apply lem-sp-ringed-topos-ordinary-cross-restriction degreewise. The transpose and compositor normalizations identify the derived overlap on K-injectives with this chain map. Exact restriction transfers the isomorphism to the derived category, and resolutions transfer it to every object.",
    "uses": [
-    "lem-weil-pbc-kinjective-hom-derived"
+    "lem-sp-ringed-topos-ordinary-cross-restriction"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DG, lemma-glue, the obvious overlap map; explicit adjunction transpose calculation"
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG, direct-image intersection calculation"
    }
   },
   {
-   "text": "At $T\\to U$, identify $I(T\\times U/U)$ with $I(T/U)$ by the graph counit. The component of $\\rho_I$ becomes $I(T/U)\\to I(T\\times_U W/U)$, exactly the unit of $k_U^*\\dashv k_{U*}$ from step 1. On the other hand the component of $\\rho_J$ at $T\\to U$ is $J(T\\times V/V)\\to J(T\\times W/V)$. The indexing arrow is an isomorphism, since $T\\to U$ and $U$ is subterminal; under the cross-comparisons of step 5 both sides are the same module $J(T\\times_U W/V)$ and this arrow is its identity. Interchanging $U,V$ yields respectively the unit for $r_B|_V$ and the identity for $r_A|_V$. At $T\\to W$, all graph counits identify the indexing objects with $T$, so both $\\rho_I|_W$ and $\\rho_J|_W$ become identities. These computations are degreewise and natural in $T$, so after localization and the normalized adjunctions of step 4 they prove every asserted unit, counit and overlap-map compatibility.",
+   "text": "Define the W-to-U and W-to-V comparisons as the adjunction mates of inverse restriction composition followed by the W-counit. They are isomorphisms because conjugateIsoEquiv identifies composite right adjoints and the U,V counits are isomorphisms. Define the cross comparisons by restricted overlap followed by these mates. Their explicit mate formulas follow from homEquiv naturality and the defining overlap transpose. Define composite comparisons by conjugateIsoEquiv. The six overlap identities follow from homEquiv inverse identities, naturality, and the adjunction triangle identities. These formal calculations provide every field of Comparisons.",
    "uses": [],
    "elementary": true,
    "source": {
-    "document": "literature/stacks-project/cohomology.tex",
-    "place": "Tag 08DG, lemma-glue; sectionwise calculation of overlap maps and units"
+    "document": "literature/stacks-project/derived.tex; literature/stacks-project/cohomology.tex",
+    "place": "Tag 08DG; adjunction calculus"
    }
   }
  ],
  "proof_deps": [
   "def-pur-localized-ringed-site",
-  "def-weil-sheaf-of-modules-category",
-  "lem-pur-site-restriction-module-adjunction-exact",
-  "lem-trf-slice-subtopos-site-presentation",
-  "lem-weil-pbc-exact-functor-derived-factorization",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-functorial-existence",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-sf-site-perfect-overmap-exact",
+  "lem-sp-site-restriction-kinjective-independent-ring",
+  "lem-sp-site-relocalization-kinjective-independent-ring",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-termwise-adjunction-homotopy",
-  "prop-pur-kinjective-resolutions-exist"
+  "lem-pur-exact-restriction-composition",
+  "lem-sp-ringed-topos-ordinary-cross-restriction"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/stacks-project/cohomology.tex",
-  "place": "Tag 08DG (lemma-glue), direct-image comparison argument; site extension and explicit mate calculations using sites.tex Tags 03CE and 00Y2, sites-cohomology.tex Tag 08FI, derived.tex Tags 08BJ, 070I, 070K, 09T5"
+  "document": "literature/stacks-project/cohomology.tex; literature/stacks-project/derived.tex",
+  "place": "U7 Lean proof: existing ordinary slice adjunctions, exact derived adjunction and compositor, degreewise ordinary overlap isomorphism, and formal adjunction-mate identities. Statement and unit route unchanged."
  },
  "mathlib_searches": [
   {
@@ -259,11 +232,8 @@
   ]
  },
  "tool_uses": [
-  "lem-trf-slice-subtopos-site-presentation",
   "prop-pur-kinjective-resolutions-exist",
-  "lem-pur-site-restriction-module-adjunction-exact",
   "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-kinjective-total-derived",
   "lem-weil-pbc-termwise-adjunction-homotopy"
  ],
  "reviewed": {
@@ -310,5 +280,15 @@
   "group": "Q115",
   "result": "pass",
   "note": "Node unchanged except lean field; lean.statement verbatim; 16 declarations match the file; only the theorem is sorry. Hypotheses match the node exactly (small site, HasFiniteLimits, Subcanonical, subterminal U,V, W=U⨯V, no cover); ring and modules in max u r (small-site size convention), independent HasDerivedCategory universes. All functors and adjunctions are Mathlib's: overFunctor, overMap, pushforwardOver (sections over Z×C, scalar via prod.snd), overPullback, overPushforwardOverAdj, overMapPushforwardAdj. DerivedPair pins left (qF, localization), right (adj), qG (transpose to the termwise mapHomologicalComplex adjunction, plus naturality), and asserts resolutions and K-injective preservation for all four categories; CompositionNormalization pins cU,cV to Q of overFunctorMap.symm. Every Comparisons iso is a pinned mate or counit (selfU/V/W counits; crossUV/VU base-change mates; toUW/VW; compositeU/V), so the content is that canonical maps are isos, not hollow. overlap = W-transpose of cU ≫ kU counit = r_A; the six overlap laws match the unit, cross-identity and W-identity clauses. Docstrings carry source, blueprint and the 9-step proof; both report sections present. Edge cases (U=V, U=V=1, initial U, disjoint, zero ring) covered. No compile run (no file changed); worker's server compile 50.4 s. Advisories: duplicate-pattern sheafification instances under new names; self second reading."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-282c6",
+  "group": "U7",
+  "result": "fix",
+  "landing": "20261021T173346-L-3591234",
+  "kind": "interface",
+  "note": "independent cc review: delivered SubterminalDerivedImageCalculus.lean (byte-identical to 58f40/190f6 heads whose FIXes were lost at landing because the record fix was named <stem>.md) against the published module, node lem-sp-subterminal-derived-image-calculus and change record; theorem proved, axioms clean, importer does not use the namespace"
  }
 }
