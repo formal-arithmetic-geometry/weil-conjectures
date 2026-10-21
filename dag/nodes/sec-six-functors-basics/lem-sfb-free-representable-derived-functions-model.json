@@ -1,0 +1,183 @@
+{
+ "id": "lem-sfb-free-representable-derived-functions-model",
+ "kind": "statement",
+ "title": "Derived functions on a free representable module as sheafified derived sections",
+ "statement": "Let $\\mathcal C$ be a site, small in the sheaf universe [def-weil-size-convention, def-weil-pbc-sites-and-cohomology], with finite products and a subcanonical topology, meaning that every representable $h_P(V)=\\operatorname{Hom}_{\\mathcal C}(V,P)$ is a sheaf. Let $R$ be a sheaf of commutative rings and use ordinary sheaves of $R$-modules [def-weil-sheaf-of-modules-category]. Write $U$ for forgetting an $R$-module sheaf to its abelian sheaf, $\\iota:\\operatorname{Ab}(\\mathcal C)\\to\\operatorname{PAb}(\\mathcal C)$ for inclusion into abelian presheaves, and $a$ for abelian sheafification, the left adjoint of $\\iota$ [def-weil-pbc-sheafification]. Use cochain derived categories [def-weil-abstract-derived-category], with $D^+$ denoting the full subcategory of objects whose cohomology vanishes in all sufficiently negative degrees. The functor $R\\iota:D^+(\\operatorname{Ab}(\\mathcal C))\\to D^+(\\operatorname{PAb}(\\mathcal C))$ is computed by applying $\\iota$ to bounded-below injective resolutions [def-sp-injective-resolutions]. For $P\\in\\mathcal C$, let $R[P]$ be the free $R$-module sheaf on $h_P$, that is, the sheafification of $V\\mapsto\\bigoplus_{h_P(V)}R(V)$, and put $H_P=\\mathcal Hom_R(R[P],-)$ with sheaf Hom as in [def-pur-sheaf-hom]. Derive $H_P$ in its second variable by nonnegative injective resolutions of module sheaves. Let $t_P$ be exact precomposition on abelian presheaves with $V\\mapsto V\\times P$, so $(t_P A)(V)=A(V\\times P)$. For every $R$-module sheaf $M$ there is a canonical isomorphism\n$$D(U)RH_P(M[0])\\ \\cong\\ D(a)D(t_P)R\\iota(UM[0])\\quad\\text{in }D^+(\\operatorname{Ab}(\\mathcal C)).$$\nIt is natural covariantly in $M$ and contravariantly in $P$. Its degree-zero normalization is the canonical identification $H_P(M)(V)=M(V\\times P)$: a section is evaluated on the universal generator of the free module after restriction to the slice over $V$. The isomorphism takes the map induced by any module morphism $M\\to N$ to $D(a)D(t_P)R\\iota$ of its underlying abelian morphism. It is also an isomorphism in the ordinary unbounded derived category under the canonical inclusions of the bounded-below categories. No finite-cover hypothesis on the site, projectivity of $P$, or discreteness of $R$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 08J7 (section-internal-hom), injective Hom-complex construction; Tag 03FD (lemma-cohomology-modules-abelian-agree), including its acyclicity proof. Underived input: sites-modules.tex Tag 03EM (lemma-internal-hom). The combined derived-presheaf formulation is an agent formulation of these constructions."
+ },
+ "stmt_deps": [
+  "def-weil-size-convention",
+  "def-weil-pbc-sites-and-cohomology",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-pbc-sheafification",
+  "def-weil-abstract-derived-category",
+  "def-sp-injective-resolutions",
+  "def-pur-sheaf-hom"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "derived.*(yoneda|representable)|RHom|SheafHom",
+   "results": {
+    "t": "2026-10-21T19:00:22Z",
+    "tool": "grep",
+    "query": "derived.*(yoneda|representable)|RHom|SheafHom",
+    "sub": "CategoryTheory/Sites",
+    "ok": true,
+    "n_hits": 25,
+    "note": "",
+    "top": [
+     "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Skyscraper.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Monoidal.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Monoidal.lean",
+     "Mathlib/CategoryTheory/Sites/Point/Monoidal.lean"
+    ],
+    "digest": "8072ace2be2b608f"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: freeYonedaHomEquiv and ihomPoints describe underived free-representable Hom and sections; sheafificationHomEquiv describes sheafification adjunctions. None states the derived isomorphism with R iota for an arbitrary ring sheaf."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal Hom of a free representable sheaf is the derived sections presheaf on products followed by sheafification",
+   "results": {
+    "t": "2026-10-21T19:00:22Z",
+    "tool": "leansearch",
+    "query": "Derived internal Hom of a free representable sheaf is the derived sections presheaf on products followed by sheafification",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.Sheaf.freeYoneda",
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+     "CategoryTheory.sheafHom",
+     "LightCondensed.ihomPoints",
+     "CategoryTheory.Presheaf.IsSheaf.hom",
+     "PresheafOfModules.freeYoneda",
+     "CategoryTheory.sheafHom'",
+     "SheafOfModules.freeHomEquiv"
+    ],
+    "digest": "046b067879733c67"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: freeYonedaHomEquiv and ihomPoints describe underived free-representable Hom and sections; sheafificationHomEquiv describes sheafification adjunctions. None states the derived isomorphism with R iota for an arbitrary ring sheaf."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafHom\"",
+   "results": {
+    "t": "2026-10-21T19:00:23Z",
+    "tool": "loogle",
+    "query": "\"SheafHom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom",
+     "CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom_naturality",
+     "CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.presheafHom_naturality_assoc",
+     "CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.uliftYonedaEquiv_presheafHom_uliftYoneda_obj",
+     "CategoryTheory.Presheaf.compULiftYonedaIsoULiftYonedaCompLan.uliftYonedaEquiv_ι_presheafHom",
+     "CategoryTheory.Functor.IsCoverDense.Types.presheafHom",
+     "CategoryTheory.Functor.IsCoverDense.sheafHom",
+     "CategoryTheory.Functor.IsCoverDense.sheafHom_eq"
+    ],
+    "digest": "e22a5a38ac04183e"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: freeYonedaHomEquiv and ihomPoints describe underived free-representable Hom and sections; sheafificationHomEquiv describes sheafification adjunctions. None states the derived isomorphism with R iota for an arbitrary ring sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived internal Hom from a free representable module is sheafification of derived sections on products with the representing object",
+   "results": {
+    "t": "2026-10-21T19:00:24Z",
+    "tool": "leanfinder",
+    "query": "The derived internal Hom from a free representable module is sheafification of derived sections on products with the representing object",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihomPoints_apply",
+     "PresheafOfModules.sheafificationHomEquiv",
+     "SheafOfModules.freeHomEquiv",
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "PresheafOfModules.sheafifyHomEquiv",
+     "LightCondensed.ihomPoints",
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv"
+    ],
+    "digest": "9c1308a14157a85e"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: freeYonedaHomEquiv and ihomPoints describe underived free-representable Hom and sections; sheafificationHomEquiv describes sheafification adjunctions. None states the derived isomorphism with R iota for an arbitrary ring sheaf."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a sheaf of rings and a representable sheaf, derived internal Hom from its free module equals sheafification of the derived inclusion to presheaves precomposed with product",
+   "results": {
+    "t": "2026-10-21T19:02:36Z",
+    "tool": "leanfinder",
+    "query": "For a sheaf of rings and a representable sheaf, derived internal Hom from its free module equals sheafification of the derived inclusion to presheaves precomposed with product",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "PresheafOfModules.sheafificationHomEquiv",
+     "SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply",
+     "PresheafOfModules.sheafifyHomEquiv",
+     "CategoryTheory.Sheaf.freeYonedaHomEquiv",
+     "PresheafOfModules.sheafifyHomEquiv'",
+     "PresheafOfModules.sheafificationAdjunction_homEquiv_apply",
+     "SheafOfModules.freeHomEquiv",
+     "PresheafOfModules.sheafificationAdjunction"
+    ],
+    "digest": "7019d5cb29829e7f"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: freeYonedaHomEquiv and ihomPoints describe underived free-representable Hom and sections; sheafificationHomEquiv describes sheafification adjunctions. None states the derived isomorphism with R iota for an arbitrary ring sheaf."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sfb-profinite-derived-functions-filtered-colimit",
+  "date": "2026-10-22",
+  "group": "Q07"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sf-ctf-stability",
+ "blueprint": {
+  "from": {
+   "node": null,
+   "place": "Paragraph (3), open direct image and arithmetic coefficient comparison, via the finite-stage coefficient-topology comparison: continuity of derived functions on profinite parameters. The derived-sections model needed before applying finite-cover cohomological continuity.",
+   "via": [
+    "lem-sfb-profinite-derived-functions-filtered-colimit",
+    "lem-sfb-profinite-algcl-derived-invariants-comparison",
+    "lem-sfb-norm-algcl-cohomology-topology-comparison",
+    "lem-sfb-supported-finite-stage-topology-defect",
+    "lem-sfb-constructible-algcl-topology-comparison",
+    "lem-sfb-continuous-algcl-proper-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-scalar-comparison",
+    "lem-sfb-continuous-algcl-open-finiteness",
+    "lem-sfb-admissible-direct-image"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
