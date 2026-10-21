@@ -21142,3 +21142,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:28 L: merged deliver/NW/lemma-nagata-strict-chart-map-kernel (reviewer PASS; after a return; new nodes: 0)
 - 08:28 L: merged deliver/Q49/lem-weil-pbc-integral-model-open-closed-pieces (reviewer PASS; after a return; new nodes: 1)
 - 08:28 L: merged deliver/Q111/lem-sfb-pasted-mates-counit-normalization (stage 2; reviewer PASS; parallel immutable checks)
+- 08:28 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
