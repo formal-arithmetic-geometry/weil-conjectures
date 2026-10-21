@@ -23975,3 +23975,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 23:13 L: returned deliver/NA/lem-sfb-norm-completion-positive-cohomology-mono (reviewer RETURN: D2 (with D1 and G2): the repaired new node lem-sfb-punctured-norm-class-finite-etale-descent is equivalent to the item o)
 - 23:13 L: returned deliver/NA/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: 17th push of the live item lem-sfb-gabber-global-snc-alteration (the 16 earlier pushes were all RETURNed for the same pa)
 - 23:15 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
+- 23:16 L: returned deliver/N9/sk-thm-groth-ss (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-thm-groth-ss: sk-thm-groth-ss: completed in this pr)
