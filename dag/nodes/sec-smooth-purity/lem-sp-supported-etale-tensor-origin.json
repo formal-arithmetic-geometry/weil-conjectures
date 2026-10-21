@@ -266,5 +266,57 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q61-4a84ce7c0 (reviewer sub-agent of L); spot-checked: Read the full item proof (6 steps, no new nodes) and every cited statement; review.md lists the checks per step. Preliminaries: the item and its deps are not in route-pivot-dropped.txt; side-live still has the item unsplit; there is no re-split note for this item; no SGA source; proof_deps equal the union of the step uses; stmt_deps are unchanged and equal the statement's bracket citations. Step 1: Stacks 09AK holds for an arbitrary scheme, and the sheaf-origin node plus the fixed-module bounded-origin node give a bounded constructible L with nu*L≅M. Step 2: étale and pro-étale j_! are exact, and the 09AF comparison is natural, so it gives a chain isomorphism termwise; nu*K≅N. Step 3: nu*B_et=B_proet as an A-module; the ringed-topoi tensor pullback (07A4) holds unbounded, with Lu*=termwise nu* because nu* is exact. Step 4: the 08FZ definition tests every module sheaf, so B_U is a valid test; no flatness of B is needed. Step 5: projection formula (0GL1), then j^{-1}B_Z=B_U (constant-ring-map node), then Q=Res M_B by the K-flat model of det-sp-scalar-extension-functor(1), then the Res/j_! clause of lem-cbc-proetale-extension-zero; exactness keeps the bound [a,b]. Step 6: nu* is exact and fully faithful on module sheaves (099T), so it reflects zero cohomology and H is bounded. This matches parent det-sp-reduction-direct-image Steps 1 and 3 (D^+ inputs) and blueprint main-20261015 sk-lem-sp-reduction-direct-image Step 1. Edge cases checked: U=∅, B=0, A=B, and Z/ℓ²→F_ℓ (M=A gives bounded Q; M=F_ℓ is excluded by finite Tor). No duplicate of the whole item in the DAG. The declared tool_uses (pbc origin, cbc j_!, sf comparison, ringed-topoi tensor, constant ring map, pe classical) are generic tools and I accept them. Advisory: lem-weil-pbc-finite-ring-constructible-derived-origin alone would give Step 1 and the interval reflection."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.SecSmoothPurity.SupportedEtaleTensorOrigin",
+  "declaration": "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.supported_etale_tensor_origin",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.exactSquare",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.liftedHom",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.fixedRestriction",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.fixedScalar",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.restrictionPresentation",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.scalarPresentation",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.openPresentation",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.comparison",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.etaleOpen",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proOpen",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.openComparison",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.supportedComparison",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proFixedScalar",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proFixedRestriction",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proScalarCoefficientSheaf",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proScalarSheafTensorMap",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proScalarSheafTensorMap_naturality",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proScalarSheafTensorTransformation",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proScalarExtensionRepresentative",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proScalarRestrictedExtensionRepresentative",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proScalarTensorIso_existsUnique",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.proScalarTensorIso",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.openScalarMap",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.etaleTensor",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.etaleScalarTensorFamily",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.tensorScalarSquare",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.fixedScalarComparison",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.fixedRestrictionComparison",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.fixedTensorComparison",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.supportedFixedScalarMap",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.supportedIntrinsicScalarMap",
+   "AlgebraicGeometry.ProEtale.SupportedEtaleTensorOrigin.supported_etale_tensor_origin"
+  ],
+  "file": "lean/Sheaf/SecSmoothPurity/SupportedEtaleTensorOrigin.lean",
+  "statement": "theorem supported_etale_tensor_origin (ℓ : ℕ) (hℓ : Nat.Prime ℓ) {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (f : A →+* B) (hA : ∃ n : ℕ, (ℓ : A) ^ n = 0) (hB : ∃ n : ℕ, (ℓ : B) ^ n = 0) {U Z : Scheme.{u}} (j : U ⟶ Z) [IsOpenImmersion j] (M : DerivedCategory (Sheaf (Scheme.ProEt.topology U) (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (hM : _root_.DerivedCategory.TStructure.t.bounded M) (hc : ∀ q : ℤ, IsConstructibleProEtaleFixedModuleSheaf U (ULift.{u + 1, u} A) ((_root_.DerivedCategory.homologyFunctor _ q).obj M)) (ht : HasFiniteProEtaleTorAmplitude U A ((sfIntrinsicDerivedEquivalence U A).functor.obj M)) : ∃ L : Etale.DerivedCategoryModule (ULift.{u + 1, u} A) U, _root_.DerivedCategory.TStructure.t.bounded L ∧ (∀ q : ℤ, IsConstructibleEtaleModuleSheaf ((_root_.DerivedCategory.homologyFunctor _ q).obj L)) ∧ ∃ e : (comparison A U).obj L ≅ M, _root_.DerivedCategory.TStructure.t.bounded ((etaleOpen A j).obj L) ∧ _root_.DerivedCategory.TStructure.t.bounded (etaleTensor f j L) ∧ _root_.DerivedCategory.TStructure.t.plus ((etaleOpen A j).obj L) ∧ _root_.DerivedCategory.TStructure.t.plus (etaleTensor f j L) ∧ IsIso ((supportedIntrinsicScalarMap f j).app M)",
+  "branch": "newtargets-dag",
+  "by": "Q08",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-aaeb37c75",
+  "group": "Q08",
+  "result": "pass",
+  "note": "Clause-by-clause match of the node with supported_etale_tensor_origin. Hypotheses: arbitrary schemes and open immersion; recorded fixed-module constructibility on every H^q; recorded intrinsic finite Tor amplitude (one interval, all degree-zero module tests); no flatness of B. Conclusion: bounded etale L with constructible cohomology and iso e : nu L ≅ M; K and H bounded and in D+. The identifications are canonical constructed isos: supportedComparison (descended 09AF comparison then j_!(e)) and fixedTensorComparison (tensorScalarSquare typing checked). IsIso is asserted for the mate-based map N⊗B → Res j_!^B scalarExtensionFunctor(E M), whose target is the recorded intrinsic objects; true and non-tautological. proScalarTensorIso is .choose of a true, uniquely pinning ∃! reusing the landed etale normalization; no Nonempty, arbitrary map or opaque. Statement verbatim; declarations list equals the file; only the item's lean field changed; three sorry theorems only; docstrings with source and blueprint; universes bound. Not in route-pivot-dropped; no re-split note. Edge cases covered: zero rings, empty U, M=0, j=id, B of infinite Tor dimension. No compile per instruction. Advisory only: the composite nu H ≅ N⊗B has no declaration of its own; the second-reading section is the worker's self-reading; the pro-etale scalar/tensor helpers duplicate the etale pattern on another site."
+ }
 }
