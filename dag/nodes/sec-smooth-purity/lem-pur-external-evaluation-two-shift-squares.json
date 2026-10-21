@@ -20,13 +20,14 @@
  ],
  "proof": [
   {
-   "text": "First construct the graded pairing and fix an equality test. By the constant-module construction, an element $w\\in U^r$ has a compatible constant section on every object of $\\mathcal C$. Thus $u(w,-)$ and $v(z,-)$ are morphisms of graded sheaves of degrees $r$ and $s$. In bidegree $(q,t)$, the displayed formula is $A_{\\mathcal C}$-balanced in $e,h$, $A$-bilinear in $w,z$, and compatible with every restriction. The presheaf-tensor and sheafification universal properties therefore extend it uniquely to $E^q\\otimes H^t$, and the direct-sum universal property extends it to $G$. Its output has degree $r+s+q+t$. Taking the family of these maps over all $q+t$ defines an element of global $\\operatorname{Hom}^{r+s}(G,J)$. Bilinearity then gives $p$ on $U\\otimes_A V$. The same argument applies to both shifted formulas. These constructions use only finite sums in each tensor input; the Hom target is a product of component maps. Equality can be checked on each homogeneous pure tensor before sheafification: uniqueness of extension and of maps out of the direct sum then gives equality of the sheaf morphisms and all their Hom components.",
+   "text": "First construct the graded pairing and fix an equality test. By the constant-module construction, an element $w\\in U^r$ has a compatible constant section on every object of $\\mathcal C$. Thus $u(w,-)$ and $v(z,-)$ are morphisms of graded sheaves of degrees $r$ and $s$. In bidegree $(q,t)$, the displayed formula is $A_{\\mathcal C}$-balanced in $e,h$, $A$-bilinear in $w,z$, and compatible with every restriction. The presheaf-tensor and sheafification universal properties therefore extend it uniquely to $E^q\\otimes H^t$, and the direct-sum universal property extends it to $G$. Its output has degree $r+s+q+t$. Taking the family of these maps over all $q+t$ defines an element of global $\\operatorname{Hom}^{r+s}(G,J)$. Bilinearity then gives $p$ on $U\\otimes_A V$. The same argument applies to both shifted formulas. These constructions use only finite sums in each tensor input; the Hom target is a product of component maps. Equality can be checked on each homogeneous pure tensor before sheafification: uniqueness of extension and of maps out of the direct sum then gives equality of the sheaf morphisms and all their Hom components. Lean uses the already-proved pure-section tensor API from CochainInverseComparison for sheafification descent and pure-tensor extensionality; the pairing itself is constructed by the coefficient tensor universal property.",
    "uses": [
     "def-sf-site-constant-module-functor",
     "def-pur-sheaf-tensor-product",
     "def-weil-pbc-sheafification",
     "def-pc-tensor-complex-sheaves",
-    "def-pur-hom-complex"
+    "def-pur-hom-complex",
+    "lem-pur-independent-inverse-image-tensor-comparison"
    ],
    "elementary": true,
    "source": {
@@ -35,7 +36,7 @@
    }
   },
   {
-   "text": "Check the differential of $p$ directly. Put $|w|=r$, $|z|=s$, $|e|=q$, $|h|=t$ and $n=r+s$. Suppress the tensor symbol inside the arguments of $u,v$ and write $I(a,b)=i(a\\otimes b)$. Since $u,v,i$ are chain maps, $d_J(p(w,z)(e,h))$ has four terms, in the order obtained by differentiating $w,e,z,h$, with unsigned values\n$$I(u(dw,e),v(z,h)),\\ I(u(w,de),v(z,h)),\\ I(u(w,e),v(dz,h)),\\ I(u(w,e),v(z,dh))$$\nand respective sign exponents\n$$sq,\\quad sq+r,\\quad sq+r+q,\\quad sq+r+q+s.$$\nIn $d_{\\rm Hom}p(w,z)=d_Jp(w,z)-(-1)^n p(w,z)d_G$, the two subtracted terms have unsigned values given by differentiating $e,h$ and exponents $n+s(q+1)$ and $n+sq+q$. These equal $sq+r$ and $sq+r+q+s$ modulo $2$, so cancel the second and fourth terms. The remaining exponents $sq$ and $sq+r+q$ are exactly those of $p(dw,z)$ and $(-1)^rp(w,dz)$. Hence $d_{\\rm Hom}p=p\\,d_{U\\otimes V}$. This calculation applies with shifted complexes as soon as the shifted evaluation maps are chain maps, as checked below.",
+   "text": "Check the differential of $p$ directly. Put $|w|=r$, $|z|=s$, $|e|=q$, $|h|=t$ and $n=r+s$. Suppress the tensor symbol inside the arguments of $u,v$ and write $I(a,b)=i(a\\otimes b)$. Since $u,v,i$ are chain maps, $d_J(p(w,z)(e,h))$ has four terms, in the order obtained by differentiating $w,e,z,h$, with unsigned values\n$$I(u(dw,e),v(z,h)),\\ I(u(w,de),v(z,h)),\\ I(u(w,e),v(dz,h)),\\ I(u(w,e),v(z,dh))$$\nand respective sign exponents\n$$sq,\\quad sq+r,\\quad sq+r+q,\\quad sq+r+q+s.$$\nIn $d_{\\rm Hom}p(w,z)=d_Jp(w,z)-(-1)^n p(w,z)d_G$, the two subtracted terms have unsigned values given by differentiating $e,h$ and exponents $n+s(q+1)$ and $n+sq+q$. These equal $sq+r$ and $sq+r+q+s$ modulo $2$, so cancel the second and fourth terms. The remaining exponents $sq$ and $sq+r+q$ are exactly those of $p(dw,z)$ and $(-1)^rp(w,dz)$. Hence $d_{\\rm Hom}p=p\\,d_{U\\otimes V}$. This calculation applies with shifted complexes as soon as the shifted evaluation maps are chain maps, as checked below. Lean first proves the binary tensor-cochain Leibniz identity and the evaluation-cochain identity, then postcomposes their tensor with i.",
    "uses": [
     "def-pc-cochain-complex-modules",
     "def-pc-tensor-complex-sheaves",
@@ -119,12 +120,13 @@
   "def-pur-sheaf-tensor-product",
   "def-sf-site-constant-module-functor",
   "def-weil-abstract-derived-category",
-  "def-weil-pbc-sheafification"
+  "def-weil-pbc-sheafification",
+  "lem-pur-independent-inverse-image-tensor-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0A8X (section-hom-complexes), Tag 0A90 (lemma-compose); explicit agent calculation for the displayed external pairing and shift conventions."
+  "place": "Tag 0A8X (section-hom-complexes), Tag 0A90 (lemma-compose); explicit agent calculation for the displayed external pairing and shift conventions.; F3 Lean proof: explicit binary tensor-cochain Leibniz rule, Mathlib leftUnshift and mapBifunctorShift comparisons, pure-section extensionality."
  },
  "mathlib_searches": [
   {
@@ -257,8 +259,11 @@
    "CategoryTheory.ExternalEvaluation.Modules",
    "CategoryTheory.ExternalEvaluation.Complex",
    "CategoryTheory.ExternalEvaluation.Coeff",
+   "CategoryTheory.ExternalEvaluation.complexHasTensor",
+   "CategoryTheory.ExternalEvaluation.coefficientHasTensor",
    "CategoryTheory.ExternalEvaluation.constantComplex",
    "CategoryTheory.ExternalEvaluation.underlying",
+   "CategoryTheory.ExternalEvaluation.underlyingCommShift",
    "CategoryTheory.ExternalEvaluation.constantSection",
    "CategoryTheory.ExternalEvaluation.tensorSection",
    "CategoryTheory.ExternalEvaluation.tensorComplex",
@@ -293,5 +298,15 @@
   "group": "Q108",
   "result": "fix",
   "note": "All clauses of the node match the Lean: the existentials θ, ηU/ηV, p/pE/pH and ρE/ρH are each fixed uniquely by IsHomShift, IsBalancingShift, IsExternalPairing (with linearity) and the ρ component equations. Re-derived: p, η and θ are chain maps; square E sign sq+s = s(q+1); square H sign sq+q+r = r+(s-1)q. Mathlib mapBifunctorShift₁ is unsigned and mapBifunctorShift₂ has sign (p*y).negOnePow, as the node says. Global Hom is Mathlib CochainComplex.HomComplex with δ = d_J f - (-1)^n f d_B; the recorded homComplex is the internal Hom, a different object. The added stmt_dep def-sfb-site-derived-constant-module-functor is a landed owner of the decls used (allowed). lean.statement verbatim; declarations = file; one sorry; docstrings with 7 steps; no line over 100; no duplicate (ExternalRHomConePairing is etale-only). H9: import WeilConjectures.Algebra.Homology.HomComplex is unused and outside the transitive closure. FIX: fixes/ExternalEvaluationTwoShiftSquares.lean drops it; nt_compile --json clean, 42.6 s. Advisory: 6 redundant transitive imports; commShiftIso inv.app direction is cosmetic (identity components)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-d324d",
+  "group": "F3",
+  "result": "fix",
+  "landing": "20261021T203457-L-3778950",
+  "kind": "interface",
+  "note": "independent cc review: delivered item module vs clones/live base (abbrev→def plus instances, statement byte-identical) and node lem-pur-external-evaluation-two-shift-squares vs the Lean proof's actual dependencies"
  }
 }
