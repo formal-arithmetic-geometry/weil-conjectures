@@ -19932,3 +19932,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:43 L: merged deliver/NS/lem-pd-section-derived-pushpull-normalization (reviewer FIX; first push; new nodes: 0); claim not held by NS: not your claim
 - 03:43 L: merged deliver/Q08/det-prop-sfb-cartesian-coefficients-twists (reviewer FIX; after a return; new nodes: 4)
 - 03:43 L: merged deliver/Q115/lem-sfb-finite-field-proetale-direct-image (reviewer FIX; first push; new nodes: 0)
+- 2026-10-21T03:43:48Z L: superseded stage-1 delivery Q10/lem-sp-affine-counit-scalar at 7eead15362921282b6b23c5c1ecc19f845dd58e9; current completion retained; packet archived at refs/superseded/Q10/lem-sp-affine-counit-scalar/7eead15362921282b6b23c5c1ecc19f845dd58e9; stale return retired.
