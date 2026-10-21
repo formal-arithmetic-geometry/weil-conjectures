@@ -1,15 +1,14 @@
 # Work queue
 
-128 items; claim with `tools/claim.py next <group> [--stage N]`.
+125 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (4 clusters, 533 modules)
+## Rework: quarantined by the upstream sync (3 clusters, 533 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
 | `Sheaf.Paper.RelativeSupportBottomDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.Sites.FieldHigherDirectImageStalk` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceModel` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
@@ -25,17 +24,17 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
 | `lem-sfb-prime-to-ell-cochain-finite-quotient-descent` | 4013 | none |
 | `lem-sfb-ramified-cartier-supported-purity` | 4013 | none |
-| `lem-sfb-torsion-acyclic-norm-coefficient-test` | 4013 | none |
-| `lem-sfb-finite-subfield-continuous-linear-retraction` | 4014 | none |
-| `lem-sfb-local-norm-algcl-cocycle-descent` | 4014 | none |
-| `lem-sfb-normed-scalar-profinite-cech-exact` | 4014 | none |
-| `lem-sfb-profinite-derived-functions-filtered-colimit` | 4014 | none |
+| `lem-sfb-norm-completion-positive-cohomology-mono` | 4014 | none |
 | `lem-sfb-supported-lattice-norm-projection` | 4014 | none |
+| `lem-sfb-algcl-countable-closed-finite-cover` | 4015 | none |
+| `lem-sfb-finite-valued-cech-cocycle-descent` | 4015 | none |
+| `lem-sfb-free-representable-derived-functions-model` | 4015 | none |
+| `lem-sfb-homogeneous-cocycle-rectangle-detection` | 4015 | none |
 | `lem-sfb-ind-unipotent-procyclic-difference` | 4015 | none |
-| `lem-sfb-topological-homogeneous-cochain-coordinates` | 4015 | none |
+| `lem-sfb-proper-ultrametric-scalar-extension` | 4015 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (40)
+## Stage 2: nodes to state (38)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -44,43 +43,41 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-pur-vector-integration-site-comparison` | 1 | state | 36 |
 | `lem-sfb-condensed-derived-restriction-calculus` | 1 | state | 8 |
 | `det-prop-diagonal-tower-coefficients` | 1 | state | 2 |
-| `lem-sfb-condensed-galois-global-descent` | 1 | state | 2 |
 | `lem-trf-point-system-transport-descent` | 1 | state | 2 |
 | `lem-sfb-root-tower-boundary-acyclicity` | 1 | state | 1 |
+| `det-lem-bounded-continuity-sections` | 1 | state | 0 |
 | `lem-a1-finite-pullback-strict-tower-comparison` | 1 | state | 0 |
 | `lem-coef-compact-support-normalized-realization` | 1 | state | 0 |
-| `lem-fd-local-frobenius-coefficient-extension` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
 | `lem-sf-open-projection-roos-completion` | 1 | state | 0 |
 | `lem-sf-package-compactified-tower-comparisons` | 1 | state | 0 |
-| `lem-sfb-acyclic-hypercover-pullback-normalization` | 1 | state | 0 |
 | `lem-sfb-closed-test-derived-exchange-model` | 1 | state | 0 |
 | `lem-sfb-continuous-cochain-finite-index-transfer` | 1 | state | 0 |
 | `lem-sfb-derived-invariants-normal-subgroup-comparison` | 1 | state | 0 |
-| `lem-sfb-field-profinite-galois-site` | 1 | state | 0 |
-| `lem-sfb-integral-cubical-chain-diagonal` | 1 | state | 0 |
+| `lem-sfb-field-action-derived-section-transport` | 1 | state | 0 |
+| `lem-sfb-finite-subfield-continuous-linear-retraction` | 1 | state | 0 |
+| `lem-sfb-geometric-condensed-finite-scalar-model` | 1 | state | 0 |
 | `lem-sfb-internal-homogeneous-functions-injective` | 1 | state | 0 |
+| `lem-sfb-local-norm-algcl-cocycle-descent` | 1 | state | 0 |
+| `lem-sfb-normed-scalar-profinite-cech-exact` | 1 | state | 0 |
 | `lem-sfb-normed-scalar-profinite-hom-acyclic` | 1 | state | 0 |
-| `lem-sfb-poset-augmented-chain-prism` | 1 | state | 0 |
 | `lem-sfb-prime-to-ell-derived-invariants-reduction` | 1 | state | 0 |
-| `lem-sfb-profinite-action-finite-quotients` | 1 | state | 0 |
-| `lem-sfb-profinite-algcl-derived-invariants-comparison` | 1 | state | 0 |
+| `lem-sfb-profinite-derived-functions-filtered-colimit` | 1 | state | 0 |
 | `lem-sfb-proper-open-boundary-zero` | 1 | state | 0 |
 | `lem-sfb-qcqs-zero-dimensional-affine` | 1 | state | 0 |
-| `lem-sfb-snc-tame-finite-fibre-classification` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
+| `lem-sfb-topological-homogeneous-cochain-coordinates` | 1 | state | 0 |
+| `lem-sfb-torsion-acyclic-norm-coefficient-test` | 1 | state | 0 |
 | `lem-trf-point-sections-completion-cone` | 1 | state | 0 |
 | `lem-trf-point-transport-cone-comparison-descent` | 1 | state | 0 |
-| `lem-trf-point-transport-strict-quotient` | 1 | state | 0 |
 | `lem-zl-classical-weil-filtration-heart-transport` | 1 | state | 0 |
 | `lem-zl-constant-extension-mixed-descent` | 1 | state | 0 |
 | `lem-zl-constant-geometric-stalk-unit` | 1 | state | 0 |
 | `lem-zl-point-weil-heart-flag` | 1 | state | 0 |
-| `lem-zl-reduced-frontier-mixed-gluing` | 1 | state | 0 |
 | `lem-zl-two-point-curve-constituent-purity` | 1 | state | 0 |
 
-Not open yet: 373 nodes that below a finished node, not needed, 110 nodes that wait for a statement dependency (bottom-up), 14 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 373 nodes that below a finished node, not needed, 108 nodes that wait for a statement dependency (bottom-up), 14 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (63)
 
