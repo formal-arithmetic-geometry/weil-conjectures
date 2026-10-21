@@ -1,639 +1,555 @@
 {
-  "id": "lem-sp-et-proet-coefficient-compatibility",
-  "blueprint": {
-    "is": null,
-    "from": {
-      "node": "det-sp-reduction-exceptional",
-      "place": "Charts: transport the ordinary chart counit calculation to the pro-etale category with its named coefficient map; Locality: b is compatible with extension by zero and composite adjunctions. The normalized site, refinement and composition squares used in these two paragraphs.",
-      "via": []
-    },
-    "same_as": []
+ "id": "lem-sp-et-proet-coefficient-compatibility",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "det-sp-reduction-exceptional",
+   "place": "Charts: transport the ordinary chart counit calculation to the pro-etale category with its named coefficient map; Locality: b is compatible with extension by zero and composite adjunctions. The normalized site, refinement and composition squares used in these two paragraphs.",
+   "via": []
   },
-  "kind": "statement",
-  "title": "Finite coefficient compact-support comparison respects site transport, refinement and composition",
-  "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$; all schemes below are separated and of finite type over $k$, and all scheme morphisms are $k$-morphisms [sk-def-sfb-dc-setting]. Let $A\\to B$ be a unital homomorphism of finite commutative rings annihilated by powers of $\\ell$. On the small etale and pro-etale sites use ordinary constant-ring module derived categories [def-weil-pbc-proetale-modules, def-weil-pbc-derived-categories]. A bounded constructible finite-Tor complex means one with constructible cohomology, zero outside a finite interval, whose derived tensor with every degree-zero module sheaf has cohomology in a fixed finite interval [def-weil-pbc-etale-constructible-sheaf, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. Write $T_T=(-)_B=-\\otimes^L_{A_T}B_T$ on either site [det-sp-scalar-extension-functor, lem-weil-pbc-ringed-topoi-derived-tensor-pullback].\n\nFor a separated finite-type map $h:U\\to V$ and a compactification $c=(U\\xrightarrow j\\bar U\\xrightarrow r V)$, define $F_{h,R}^{c,\\mathrm{et}}=Rr_{*,R}^{\\mathrm{et}}j_{!,R}^{\\mathrm{et}}$ and $F_{h,R}^c=Rr_{*,R}j_{!,R}$, for $R=A,B$ [def-amb-etale-compact-support, det-sp-reduction-direct-image]. The canonical coefficient maps $\\beta_h^c:T_VF_{h,A}^{c,\\mathrm{et}}\\to F_{h,B}^{c,\\mathrm{et}}T_U$ and $b_h^c:T_VF_{h,A}^c\\to F_{h,B}^cT_U$ are the proper direct-image coefficient maps followed by the extension-by-zero tensor identifications. Here each proper map is the $B$-linear adjoint transpose of the $A$-counit after coefficient extension, as in [det-sp-reduction-direct-image].\n\nLet $\\nu_T^*$ be the exact site comparison of [lem-sf-comparison-pullback-exact] and let $\\delta_{T,M}:(\\nu_T^*M)_B\\xrightarrow{\\sim}\\nu_T^*(M_B)$ be its canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Define $c_{h,R}^c:\\nu_V^*F_{h,R}^{c,\\mathrm{et}}\\to F_{h,R}^c\\nu_U^*$ by the counit-mate proper comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] followed by the site comparison for extension by zero [lem-cbc-proetale-extension-zero-comparison]. This is the compact-support comparison used to transport counits in [det-sp-et-proet-adjunction-transfer]. On bounded constructible finite-Tor etale input $L$ all these coefficient and site comparisons are isomorphisms and satisfy\n$$\n F_{h,B}^c(\\delta_{U,L})\\circ b_h^c(\\nu_U^*L)\\circ (c_{h,A}^c(L))_B\n =c_{h,B}^c(L_B)\\circ\\nu_V^*(\\beta_h^c(L))\\circ\\delta_{V,F_{h,A}^{c,\\mathrm{et}}L}.\n$$\nThus transport of an etale adjunction counit through this specified $c_{h,R}^c$, with the counit formula of [det-sp-et-proet-adjunction-transfer], carries a coefficient-counit identity using $\\beta_h^c$ to the same identity using the named $b_h^c$.\n\nThe coefficient maps also respect the canonical compactification refinement and composition identifications on this input class. More precisely, on the etale site let $\\phi_{h,R}^{c',c}:F_{h,R}^c\\xrightarrow{\\sim}F_{h,R}^{c'}$ and $\\alpha_{g,f,R}:F_{g,R}F_{f,R}\\xrightarrow{\\sim}F_{gf,R}$ be the canonical refinement and composition maps of [lem-amb-etale-compact-comparisons]; in this paragraph $F$ denotes the functor on the site under consideration. On etale-origin pro-etale objects use their counterparts through the specified $c_{h,R}^c$. These are the canonical compactification maps, and $c$ intertwines their refinement and composition identifications. For $q_h=\\beta_h$ on the etale site and $q_h=b_h$ on the pro-etale site,\n$$\n q_h^{c'}(L)\\circ T_V(\\phi_{h,A}^{c',c}(L))\n =\\phi_{h,B}^{c',c}(L_B)\\circ q_h^c(L),\n$$\nand for composable $X\\xrightarrow fY\\xrightarrow gZ$,\n$$\n q_{gf}(L)\\circ T_Z(\\alpha_{g,f,A}(L))\n =\\alpha_{g,f,B}(L_B)\\circ F_{g,B}(q_f(L))\\circ q_g(F_{f,A}L).\n$$\nFor a separated etale morphism of finite type $e:U\\to V$, let $c_{e,R}:F^{c,\\mathrm{et}}_{e,R}\\xrightarrow{\\sim}De_{\\Sigma!,R}$ be the canonical identification of the compact-support candidate with the exact etale sum extension [def-weil-pbc-etale-sum-extension] given by [lem-asd-etale-compact-support-normalization], and let $\\sigma_e(L):(De_{\\Sigma!,A}L)_B\\xrightarrow{\\sim}De_{\\Sigma!,B}(L_B)$ be the summandwise tensor identification, computed on a K-flat representative of $L$. Then\n$$\n c_{e,B}(L_B)\\circ\\beta_e^c(L)=\\sigma_e(L)\\circ(c_{e,A}(L))_B .\n$$\nThe refinement square also holds for the canonical comparison through any common refinement, and the composition equality respects identities and associativity. All assertions are natural in $L$ and require no flatness or finite projective-dimension hypothesis on $B$ over $A$.",
-  "source": {
+  "same_as": []
+ },
+ "kind": "statement",
+ "title": "Finite coefficient compact-support comparison respects site transport, refinement and composition",
+ "statement": "Fix a field $k$ of characteristic $p>0$ and a prime $\\ell\\ne p$; all schemes below are separated and of finite type over $k$, and all scheme morphisms are $k$-morphisms [sk-def-sfb-dc-setting]. Let $A\\to B$ be a unital homomorphism of finite commutative rings annihilated by powers of $\\ell$. On the small etale and pro-etale sites use ordinary constant-ring module derived categories [def-weil-pbc-proetale-modules, def-weil-pbc-derived-categories]. A bounded constructible finite-Tor complex means one with constructible cohomology, zero outside a finite interval, whose derived tensor with every degree-zero module sheaf has cohomology in a fixed finite interval [def-weil-pbc-etale-constructible-sheaf, def-weil-proetale-constructible-sheaf, def-weil-proetale-tor-amplitude]. Write $T_T=(-)_B=-\\otimes^L_{A_T}B_T$ on either site [det-sp-scalar-extension-functor, lem-weil-pbc-ringed-topoi-derived-tensor-pullback].\n\nFor a separated finite-type map $h:U\\to V$ and a compactification $c=(U\\xrightarrow j\\bar U\\xrightarrow r V)$, define $F_{h,R}^{c,\\mathrm{et}}=Rr_{*,R}^{\\mathrm{et}}j_{!,R}^{\\mathrm{et}}$ and $F_{h,R}^c=Rr_{*,R}j_{!,R}$, for $R=A,B$ [def-amb-etale-compact-support, det-sp-reduction-direct-image]. The canonical coefficient maps $\\beta_h^c:T_VF_{h,A}^{c,\\mathrm{et}}\\to F_{h,B}^{c,\\mathrm{et}}T_U$ and $b_h^c:T_VF_{h,A}^c\\to F_{h,B}^cT_U$ are the proper direct-image coefficient maps followed by the extension-by-zero tensor identifications. Here each proper map is the $B$-linear adjoint transpose of the $A$-counit after coefficient extension, as in [det-sp-reduction-direct-image].\n\nLet $\\nu_T^*$ be the exact site comparison of [lem-sf-comparison-pullback-exact] and let $\\delta_{T,M}:(\\nu_T^*M)_B\\xrightarrow{\\sim}\\nu_T^*(M_B)$ be its canonical tensor comparison [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Define $c_{h,R}^c:\\nu_V^*F_{h,R}^{c,\\mathrm{et}}\\to F_{h,R}^c\\nu_U^*$ by the counit-mate proper comparison [lem-weil-pbc-comparison-direct-image-canonical-mate] followed by the site comparison for extension by zero [lem-cbc-proetale-extension-zero-comparison]. This is the compact-support comparison used to transport counits in [det-sp-et-proet-adjunction-transfer]. On bounded constructible finite-Tor etale input $L$ all these coefficient and site comparisons are isomorphisms and satisfy\n$$\n F_{h,B}^c(\\delta_{U,L})\\circ b_h^c(\\nu_U^*L)\\circ (c_{h,A}^c(L))_B\n =c_{h,B}^c(L_B)\\circ\\nu_V^*(\\beta_h^c(L))\\circ\\delta_{V,F_{h,A}^{c,\\mathrm{et}}L}.\n$$\nThus transport of an etale adjunction counit through this specified $c_{h,R}^c$, with the counit formula of [det-sp-et-proet-adjunction-transfer], carries a coefficient-counit identity using $\\beta_h^c$ to the same identity using the named $b_h^c$.\n\nThe coefficient maps also respect the canonical compactification refinement and composition identifications on this input class. More precisely, on the etale site let $\\phi_{h,R}^{c',c}:F_{h,R}^c\\xrightarrow{\\sim}F_{h,R}^{c'}$ and $\\alpha_{g,f,R}:F_{g,R}F_{f,R}\\xrightarrow{\\sim}F_{gf,R}$ be the canonical refinement and composition maps of [lem-amb-etale-compact-comparisons]; in this paragraph $F$ denotes the functor on the site under consideration. On etale-origin pro-etale objects use their counterparts through the specified $c_{h,R}^c$. These are the canonical compactification maps, and $c$ intertwines their refinement and composition identifications. For $q_h=\\beta_h$ on the etale site and $q_h=b_h$ on the pro-etale site,\n$$\n q_h^{c'}(L)\\circ T_V(\\phi_{h,A}^{c',c}(L))\n =\\phi_{h,B}^{c',c}(L_B)\\circ q_h^c(L),\n$$\nand for composable $X\\xrightarrow fY\\xrightarrow gZ$,\n$$\n q_{gf}(L)\\circ T_Z(\\alpha_{g,f,A}(L))\n =\\alpha_{g,f,B}(L_B)\\circ F_{g,B}(q_f(L))\\circ q_g(F_{f,A}L).\n$$\nFor a separated etale morphism of finite type $e:U\\to V$, let $c_{e,R}:F^{c,\\mathrm{et}}_{e,R}\\xrightarrow{\\sim}De_{\\Sigma!,R}$ be the canonical identification of the compact-support candidate with the exact etale sum extension [def-weil-pbc-etale-sum-extension] given by [lem-asd-etale-compact-support-normalization], and let $\\sigma_e(L):(De_{\\Sigma!,A}L)_B\\xrightarrow{\\sim}De_{\\Sigma!,B}(L_B)$ be the summandwise tensor identification, computed on a K-flat representative of $L$. Then\n$$\n c_{e,B}(L_B)\\circ\\beta_e^c(L)=\\sigma_e(L)\\circ(c_{e,A}(L))_B .\n$$\nThe refinement square also holds for the canonical comparison through any common refinement, and the composition equality respects identities and associativity. All assertions are natural in $L$ and require no flatness or finite projective-dimension hypothesis on $B$ over $A$.",
+ "source": {
+  "document": "literature/stacks-project/more-etale.tex",
+  "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), canonical torsion coefficient comparison; Tag 0F7J (lemma-shriek-composition), canonical composition through compatible compactifications. The displayed site/coefficient and refinement squares are agent-stated coherence for these normalized constructions, expanding the Charts and Locality paragraphs of main-20261015 det-sp-reduction-exceptional.proof.md; neither tag alone states the site square."
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "det-sp-scalar-extension-functor",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-amb-etale-compact-support",
+  "det-sp-reduction-direct-image",
+  "lem-sf-comparison-pullback-exact",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "det-sp-et-proet-adjunction-transfer",
+  "lem-amb-etale-compact-comparisons",
+  "def-weil-pbc-etale-sum-extension",
+  "lem-asd-etale-compact-support-normalization",
+  "def-weil-pbc-witness-compatibility",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sf-proper-open-coefficient-refinement",
+  "lem-sf-class-compact-support-comparison",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-sp-reduction-direct-image-comparison",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "def-sp-et-proet-coefficient-transport"
+ ],
+ "proof": [
+  {
+   "text": "Finite type over k makes the schemes Noetherian. Apply the input-model and compact-support-domain lemmas: L, L_B, and every F_f^et L used in composition, together with their actual B-extensions, lie in the required finite-Tor constructible classes.",
+   "uses": [
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-sp-finite-coefficient-input-models",
+    "lem-sp-finite-compact-support-domains"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0GL6 (remark-Rf-lower-shriek-change-of-rings), canonical torsion coefficient comparison; Tag 0F7J (lemma-shriek-composition), canonical composition through compatible compactifications. The displayed site/coefficient and refinement squares are agent-stated coherence for these normalized constructions, expanding the Charts and Locality paragraphs of main-20261015 det-sp-reduction-exceptional.proof.md; neither tag alone states the site square."
+    "place": "Domains of Tags 0GL6 and 0F7J"
+   }
   },
-  "stmt_deps": [
-    "sk-def-sfb-dc-setting",
-    "def-weil-pbc-proetale-modules",
-    "def-weil-pbc-derived-categories",
-    "def-weil-pbc-etale-constructible-sheaf",
-    "def-weil-proetale-constructible-sheaf",
-    "def-weil-proetale-tor-amplitude",
-    "det-sp-scalar-extension-functor",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-amb-etale-compact-support",
+  {
+   "text": "Apply the proper scalar/site mate square to E=j_!L; its site map beta^R is the counit mate d_r of the canonical-mate theorem, so its boundary uses the same d_r as c and paste the open scalar/site square. Expanding F=Rr_*j_!, c=Rr_*(e_j)d_r and q=Rr_*(t_j)q_r, naturality cancels the middle whiskerings and gives exactly the displayed site/coefficient equality. All factors of c are invertible. The map b is invertible by the reduction-direct-image theorem; the equality makes nu^*beta invertible. Step 1 puts both endpoints of beta in D+. Full faithfulness of site comparison reflects its inverse, so beta is invertible.",
+   "uses": [
+    "lem-sfb-etale-proetale-scalar-mate",
+    "lem-sp-open-scalar-site-coherence",
     "det-sp-reduction-direct-image",
-    "lem-sf-comparison-pullback-exact",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "det-sp-et-proet-adjunction-transfer",
-    "lem-amb-etale-compact-comparisons",
-    "def-weil-pbc-etale-sum-extension",
-    "lem-asd-etale-compact-support-normalization",
-    "def-weil-pbc-witness-compatibility",
-    "lem-pur-etale-scalar-mate-projection",
-    "lem-sf-proper-open-coefficient-refinement",
-    "lem-sf-class-compact-support-comparison",
-    "lem-amb-unbounded-compact-support-comparisons",
-    "def-sp-reduction-direct-image-comparison",
-    "lem-sf-compact-support-restriction-of-scalars",
-    "def-sp-et-proet-coefficient-transport"
-  ],
-  "proof": [
-    {
-      "text": "All the schemes in a compactification are Noetherian: a field is Noetherian, and finite type over it preserves Noetherianity [lem-weil-pbc-finite-type-over-noetherian]. Choose Tor bounds a<=b for L. By [lem-sf-etale-flat-constructible], represent L by a bounded complex P of flat constructible A-module sheaves in [a,b]. The finite stupid filtration of P has flat sheaves as successive shifted quotients; tensoring an acyclic complex with each quotient is acyclic, so induction over this finite filtration proves P is K-flat. The canonical derived pullback/tensor construction of [lem-weil-pbc-ringed-topoi-derived-tensor-pullback] computes coefficient extension and nu^* using these flat terms. Thus nu^*P is bounded and flat termwise; its cohomology is constructible by [lem-weil-pbc-finite-ring-constructible-derived-origin]. In particular nu^*L is in Dctf. By [det-sp-scalar-extension-functor](2), its B-extension is in Dctf, with the same Tor bounds. Monoidality identifies it with nu^*(L_B); reflection of bounded constructibility by the same finite-ring origin theorem shows that L_B is bounded constructible etale. The bounded flat model P tensor_A B also proves its etale finite Tor bound directly, since its terms are flat over B. For any finite-Tor constructible etale input E considered below, the same argument applies. No bound on the projective dimension of B over A has been used.",
-      "uses": [
-        "lem-weil-pbc-finite-type-over-noetherian",
-        "lem-sf-etale-flat-constructible",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "lem-weil-pbc-finite-ring-constructible-derived-origin",
-        "det-sp-scalar-extension-functor"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Domain verification for Tags 0F7I, 0F7J and 0GL6; bounded flat model and exact site comparison"
-      }
-    },
-    {
-      "text": "Write t_j:T j_{!,A}\\to j_{!,B}T for the open coefficient identification. The sheaf tensor comparison of [lem-weil-pbc-ringed-slice-extension-tensor] sends a section in an open-extension summand tensor b to that section tensor b in the same summand. Since open extension is exact on both sites [lem-weil-pbc-extension-by-zero-exact, lem-cbc-proetale-extension-zero], this gives its derived comparison as well: it preserves K-flatness because j_!P tensor N=j_!(P tensor j^*N), and j^* and j_! are exact. Here j^* is restriction to the localized site. The site comparison e_j:nu^*j_!^et\\to j_!^pro nu^* is the natural open-extension identification [lem-cbc-proetale-extension-zero-comparison]. On each summand the two orders of coefficient and site comparison both send x tensor b to nu^*x tensor b; sheafification and degreewise passage preserve this equality. Consequently j_{!,B}(delta_U)t_j(nu_U^*L)T(e_{j,A})=e_{j,B}(L_B)nu^*(t_j(L))delta_X. This proves the open version of the required square, with the named maps and their counits.",
-      "uses": [
-        "lem-weil-pbc-ringed-slice-extension-tensor",
-        "lem-weil-pbc-extension-by-zero-exact",
-        "lem-cbc-proetale-extension-zero",
-        "lem-cbc-proetale-extension-zero-comparison"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0GL6, open-extension constituent; sites-cohomology.tex Tag 0GL1, extension by zero and tensor"
-      }
-    },
-    {
-      "text": "For a proper r:W\\to V, let s_R=Rr_{*,R}, l_R=r_R^*, and epsilon_R:l_Rs_R\\to1 be the ordinary inverse-image/direct-image counit. Write lambda:T_W l_A \\to l_B T_V for the canonical tensor/pullback isomorphism. By the normalization in [det-sp-reduction-direct-image] the coefficient map q_r:T_Vs_A\\to s_BT_W is uniquely determined by epsilon_B(T_W E) l_B(q_r(E)) lambda_{s_AE}=T_W(epsilon_A(E)). Write a_R:nu_W^*l_R^et\\to l_R^pro nu_V^* for the specified comparison [lem-weil-pbc-comparison-pullback]. The site map d_{r,R} has the equally specified equation epsilon_R^pro(nu_W^*E) l_R^pro(d_{r,R}(E)) a_{R,s_R^et E}=nu_W^*(epsilon_R^et(E)), and is invertible on D^+ by [lem-weil-pbc-comparison-direct-image-canonical-mate]. These equations specify actual morphisms, not chosen endpoint isomorphisms. Apply [lem-weil-pbc-mate-pasting](1),(2) to the rectangle with the two coefficient squares and the two site squares. The two left-adjoint pastings coincide: all four pullbacks act on the same underlying inverse images and the tensor identifications only reassociate a tensor x tensor a tensor b, sending it to x tensor ab. This can be computed on K-flat resolutions by [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Equality of their mates therefore gives s_B^pro(delta_W) q_r^pro(nu_W^*E) T_V(d_{r,A}(E))=d_{r,B}(E_B)nu_V^*(q_r^et(E))delta_V for every E such that E and E_B are bounded below. This is the domain of both cited direct-image site mates. All applications here have E=j_!L or a bounded constructible finite-Tor input produced below: Step 2 preserves finite Tor amplitude under j_!, and Step 1 gives boundedness after scalar extension. Merely assuming E bounded below would not suffice when A\\to B is nonflat. This equality itself does not require q_r to be invertible.",
-      "uses": [
-        "det-sp-reduction-direct-image",
-        "lem-weil-pbc-comparison-pullback",
-        "lem-weil-pbc-comparison-direct-image-canonical-mate",
-        "lem-weil-pbc-mate-pasting",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0GL6, proper counit-transpose normalization; generic mate-pasting calculation"
-      }
-    },
-    {
-      "text": "For h=rj, expand c_{h,R} as s_R^pro(e_{j,R}) d_{r,R}(j_!^et-), and q_h as s_B(t_j)q_r(j_{!,A}-). Substitute the proper equality of Step 3 and the open equality of Step 2; naturality of d_r and q_r moves their whiskered e_j and t_j to the right. The resulting equality is precisely F_{h,B}(delta_U)b_h(nu_U^*L)T_V(c_{h,A}(L))=c_{h,B}(L_B)nu_V^*(beta_h(L))delta_V. Both constituents of c are invertible, by the canonical proper mate theorem and the extension-zero comparison. First apply [det-sp-reduction-direct-image] to the identity coefficient map A\\to A: its assertion that the comparison lies in Dctf shows that F_{h,A} nu_U^*L is Dctf. Apply it to B\\to B and L_B to obtain the same assertion over B. Now its A\\to B comparison b_h is invertible on nu_U^*L, with both sides in Dctf. The displayed square now implies that nu_V^*beta_h is invertible. The source and target of beta_h are bounded below: their site pullbacks are isomorphic, via the square and c, to the Dctf objects just obtained; exactness of nu^* identifies cohomology, and full faithfulness on sheaves reflects vanishing. Full faithfulness on D^+ [thm-weil-pbc-site-comparison] then reflects invertibility of beta_h. Indeed lift the inverse by fullness and check the two inverse identities by faithfulness. The finite-ring origin theorem also reflects bounded constructibility of F_h^et L from F_h^pro nu^*L; finite Tor amplitude reflects by testing against etale module sheaves and using monoidality and faithful exact comparison. Thus composition inputs F_f^et L and their pro-etale counterparts remain in the required class.",
-      "uses": [
-        "lem-weil-pbc-comparison-direct-image-canonical-mate",
-        "lem-cbc-proetale-extension-zero-comparison",
-        "det-sp-reduction-direct-image",
-        "lem-sf-comparison-pullback-exact",
-        "thm-weil-pbc-site-comparison",
-        "lem-weil-pbc-finite-ring-constructible-derived-origin",
-        "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0GL6; derive compact-support site/coefficient square and reflect the etale isomorphism"
-      }
-    },
-    {
-      "text": "The same transpose calculation controls the building blocks of refinement and composition. For proper maps r followed by p, take the inverse transpose of the coefficient map for R(pr)_*, using the composite ordinary adjunction. At E its counit is the composite r_A^*p_A^*s_{p,A}s_{r,A}E \\to r_A^*s_{r,A}E \\to E, first r_A^*(epsilon_{p,A}(s_{r,A}E)) and then epsilon_{r,A}(E); hence the transpose of the composite s_{p,B}(q_r)q_p(s_{r,A}-) is T(epsilon_r r^*epsilon_p), which is also the transpose defining q_{pr}. Injectivity of the adjunction bijection gives q_{pr}=s_{p,B}(q_r)q_p(s_{r,A}-), after the canonical direct-image compositors [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. This is [lem-weil-pbc-mate-pasting](2) for the coefficient squares. It applies on either site and also to the site squares. For composable open immersions j_1,j_2, [lem-cbc-extension-zero-composition] identifies j_{2!}j_{1!} with (j_2j_1)_!. Starting with a section x tensor b in the nested extension summand, successive t_{j_2} and j_{2!}(t_{j_1}) put x tensor b in its composite summand; t_{j_2j_1} puts exactly the same section in that summand. The maps agree before sheafification and on the bounded flat complexes of Step 1, so they agree after derived descent. This gives the open-composition coefficient equation, and replacing x tensor b by nu^*x gives the site-composition equation. Identity maps give identity comparisons by the triangle identities, equivalently clause (4) of mate pasting.",
-      "uses": [
-        "lem-weil-pbc-mate-pasting",
-        "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-        "lem-cbc-extension-zero-composition"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tags 0F7I and 0F7J; direct-image and open-extension composition constituents"
-      }
-    },
-    {
-      "text": "For the cartesian proper/open square in the composition tower, apply [lem-sp-proper-open-coefficient-mate]. Its coefficient equation commutes T past the specified Gamma; its site equation intertwines that same open-adjunction map with the canonical direct-image and open-extension comparisons. For the noncartesian refinement square, apply [lem-sp-refinement-coefficient-mate] to u,j_1,j_2. Its alpha_u is exactly the specified refinement map: the open adjunct of the inverse of the three-constituent theta_u. Both equations there therefore apply to the actual refinement map. Step 1 and the finite-Tor arguments of Steps 2 and 4 supply bounded-below input and bounded-below scalar extension in all uses. These are the two building-block squares required in Steps 7--9; no cartesian characterization is applied to a noncartesian refinement.",
-      "uses": [
-        "lem-sp-proper-open-coefficient-mate",
-        "lem-sp-refinement-coefficient-mate"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tags 0F7B, 0F7C, 0F7D (proper/open maps and their pasting); coefficient and site mate calculation"
-      }
-    },
-    {
-      "text": "Use the normalized scalar-coherence refinement clause of [lem-pur-etale-compact-scalar-coherence], which proves the proper-composition and common-refinement calculation described here. Its open normalization identifies the inverse of ExceptionalCoefficients.openIso with properOpenCoefficientOpenInverse. Equality of inverse isomorphisms therefore identifies its compactScalarMap with the specified etaleCoefficientMap. The schemes are Noetherian because they are finite type over a field. The lower bound for the actual scalar extension is supplied by Step 4. Apply the refinement clause to obtain the etale equation. For the pro-etale equation, apply Step 4 to c and d, map the etale refinement equation by exact site comparison, and use naturality of delta on the canonical etale compactification comparison. Precompose with the scalar extension of the inverse c-site comparison. Substitute the two site/coefficient squares and cancel the inverse/hom pairs. The remaining maps are definitionally the two siteRefinement maps. This proves the specified canonical comparison, including the common-refinement independence already contained in the normalized etale refinement clause.",
-      "uses": [
-        "lem-pur-etale-compact-scalar-coherence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0F7I, lemma-shriek-well-defined; explicit refinement and common-refinement calculation"
-      }
-    },
-    {
-      "text": "Choose a compatible compactification tower for f and g [lem-cbc-compactifiable-compatible-tower]: Y\\to Ybar is open i, Ybar\\to Z is proper q, X\\to U is open j, U\\to Xbar is open k, and p:Xbar\\to Ybar is proper, with r:U\\to Y proper and pk=ir cartesian. For R=A,B the ordered composite is Rq_{*,R}i_{!,R}Rr_{*,R}j_{!,R}, while the composite-map model is R(qp)_{*,R}(kj)_{!,R}. Their composition identification is the paste of Rq_*(gamma_R)j_! and the proper/open compositors. Step 6 commutes T past gamma; Step 5 commutes it past the compositors. The outer boundary of this pasted diagram is exactly q_{gf}T(alpha_{g,f,A})=alpha_{g,f,B}F_{g,B}(q_f)q_g(F_{f,A}-). This identifies the actual coefficient map q_{gf}, since its proper/open definition is the upper-right boundary, rather than defining a replacement q_{gf} by the lower-left boundary. The canonical choice independence and associativity of alpha are supplied by [lem-amb-etale-compact-comparisons]; Step 7 passes the equation to the fixed compactifications. Pasting an identity adds only identities (Step 5), and the two three-map pastings have the same outer boundary, by the horizontal and vertical coherence laws in [lem-cbc-proper-open-interchange-coherence]. This proves the identity and associativity assertions.",
-      "uses": [
-        "lem-cbc-compactifiable-compatible-tower",
-        "lem-amb-etale-compact-comparisons",
-        "lem-cbc-proper-open-interchange-coherence"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0F7J, lemma-shriek-composition: compatible tower and its four displayed identifications"
-      }
-    },
-    {
-      "text": "Apply the site version of Steps 5 and 6 to the same tower. It states that c_{gf,R}nu^*(alpha_R) equals alpha_R^pro F_g^pro(c_{f,R}) c_{g,R}(F_f^et-), with the source/target site identifications inserted. Together with the last sentence of Step 7 this proves that the specified c intertwines refinement and composition. On etale-origin objects the pro-etale counterparts in the statement are precisely these transported maps. Substitute the site/coefficient square of Step 4 into the etale refinement equation of Step 7 and cancel the invertible c and delta: the remaining equation is the pro-etale refinement equation with b. Doing the same on the tower equation of Step 8 cancels its intermediate c_f and c_g and yields b_{gf}T(alpha_A)=alpha_B F_{g,B}(b_f)b_g(F_{f,A}-). Naturalness ensures that each cancellation is at the same input complex. Hence the equations hold for the named pro-etale b, and the same cancellation proves common-refinement, identity and associativity compatibility.",
-      "uses": [
-        "lem-weil-pbc-mate-pasting"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tags 0F7I and 0F7J; site-intertwining and conjugation by the fixed compact-support comparisons"
-      }
-    },
-    {
-      "text": "For separated etale e and c=(j,r), [lem-asd-etale-compact-support-normalization] identifies Rr_*j_! with exact sum extension and sends a properly supported section to its labelled sheet components. On every degree-zero sheaf H this implies R^a r_*j_!H=0 for a>0. Let P be the bounded flat model of Step 1. The slice tensor identity [lem-weil-pbc-ringed-slice-extension-tensor], exact sum extension [lem-amb-etale-adjoint-locality], and exact inverse image [prop-weil-pbc-inverse-image-modules-exact] show e_!P is flat termwise and K-flat: tensoring with an acyclic N gives e_!(P tensor e^*N), which is acyclic. Step 2 gives flatness of j_!P. The sheaf normalization identifies r_*j_!P with e_!P termwise; it gives acyclicity also for j_!(P tensor B). Thus [lem-sp-acyclic-flat-proper-coefficient-model] applies to C=j_!P and identifies the proper coefficient map with its sheaf projection map. Compose with the open tensor identification of Step 2. On each summand the resulting map sends (x_s)_s tensor b to (x_s tensor b)_s, while both sheaf normalizations retain the sheet label s. The two routes therefore agree as maps of the representing complexes. This proves c_{e,B}(L_B) beta_e^c(L)=sigma_e(L) T(c_{e,A}(L)). The stalk description [lem-amb-etale-sum-stalks] includes empty fibres; no finiteness of the set of lifts on every test object is assumed.",
-      "uses": [
-        "lem-asd-etale-compact-support-normalization",
-        "lem-weil-pbc-ringed-slice-extension-tensor",
-        "lem-amb-etale-adjoint-locality",
-        "prop-weil-pbc-inverse-image-modules-exact",
-        "lem-sp-acyclic-flat-proper-coefficient-model",
-        "lem-amb-etale-sum-stalks"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/more-etale.tex",
-        "place": "Tag 0GL6 and Tag 0GKM (lemma-Rf-shriek-for-quasi-finite); componentwise etale normalization"
-      }
-    },
-    {
-      "text": "Finally the counit-transport implication is a substitution, valid whenever an etale adjunction counit is transported by the stated formula. This does not require invoking an admissibility theorem for arbitrary finite rings. Write C_R=c_{h,R}, and let a:T_U H_A \\to H_B T_V be a right-functor comparison with etale identity epsilon_B^et F_B^et(a)=T_V(epsilon_A^et)(beta_h(H_A-))^{-1}. The transported counit is nu_V^*(epsilon_R^et)C_R^{-1}, by the formula specified in the statement. Solve Step 4's square for b_h^{-1}: T_V(C_A)^{-1} b_h^{-1}=delta_V^{-1}nu_V^*(beta_h^{-1})C_B^{-1}F_{h,B}(delta_U), at the indicated H_A input. Substitute this into T_V(nu_V^*epsilon_A^et C_A^{-1})b_h^{-1}. Naturality of delta moves T_V(nu^*epsilon_A^et)delta^{-1} to delta^{-1}nu^*(T_V epsilon_A^et); the etale identity then replaces T_V epsilon_A^et beta_h^{-1} by epsilon_B^et F_B^et(a). Naturality of C_B moves nu^*F_B^et(a) across C_B^{-1}. The result is the transported B-counit followed by F_{h,B} of the transported comparison a, which is exactly the coefficient-counit identity with b_h. Every comparison used above is natural, either by its cited statement or as an adjunct of a natural map, so all equations are natural in L. The coefficient change A\\to B was arbitrary throughout; all uses of derived tensor were on K-flat models or by its canonical pullback comparison. The Lean counit proof isolates the categorical transport calculation: apply the site/coefficient square at HA(N), naturality of the B compact-support site comparison on a (viewed in D+), site pullback of the assumed etale counit identity, and naturality of delta at the A-counit; cancel the scalar image of the inverse A-site comparison and the hom/inv pairs. Naturality of the coefficient map is proved directly: transpose the open inverse under the B-open adjunction, use naturality of the A-open unit and scalar/pullback inverse, pass to inverse isomorphisms, and compose with naturality of scalarMate.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-        "place": "Charts and Locality: substitution into the transported counit formula"
-      }
-    }
-  ],
-  "proof_deps": [
-    "det-sp-reduction-direct-image",
-    "det-sp-scalar-extension-functor",
-    "lem-amb-etale-adjoint-locality",
-    "lem-amb-etale-compact-comparisons",
-    "lem-amb-etale-sum-stalks",
-    "lem-asd-etale-compact-support-normalization",
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-cbc-extension-zero-composition",
-    "lem-cbc-proetale-extension-zero",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-cbc-proper-open-interchange-coherence",
-    "lem-pur-etale-compact-scalar-coherence",
-    "lem-sf-comparison-pullback-exact",
-    "lem-sf-etale-flat-constructible",
-    "lem-sp-acyclic-flat-proper-coefficient-model",
-    "lem-sp-proper-open-coefficient-mate",
-    "lem-sp-refinement-coefficient-mate",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "thm-weil-pbc-site-comparison"
-  ],
-  "proof_origin": {
-    "by": "agent",
-    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
-    "place": "Charts and Locality; expanded counit-mate, proper/open, compatible-tower and component calculations, following Stacks Tags 0F7I, 0F7J and 0GL6; Y8 stage 3: normalized scalar refinement and explicit categorical cancellation for refinement/counit, direct open-unit transpose for naturality"
-  },
-  "mathlib_searches": [
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.NatTrans",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares."
-    },
-    {
-      "tool": "grep",
-      "query": "compact.?support.*coefficient|coefficient.*refinement|coefficient.*compactification",
-      "results": "0 hits",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares."
-    },
-    {
-      "tool": "leansearch",
-      "query": "derived extension of finite coefficients commutes with composition of compact support direct image",
-      "results": "8 hits: HasCompactSupport.comp_isClosedEmbedding; CompactlySupportedContinuousMap.coe_comp_to_continuous_fun; PolynomialLaw.comp_toFun'; Pi.comul_coe_finsupp; CompactlySupportedContinuousMap.compLinearMap; CompactlySupportedContinuousMap.compAddMonoidHom; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme; HasCompactMulSupport.comp_isClosedEmbedding",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "finite coefficient compact support comparison commutes with site comparison compactification refinement and composition",
-      "results": "8 hits: CompHausLike.sigmaComparison; CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso; CompHausLike.sigmaComparison_eq_comp_isos; CompHausLike.isIsoSigmaComparison; Profinite.NobelingProof.spanFunctorIsoIndexFunctor_inv_app; CompHausLike.LocallyConstant.incl_of_counitAppApp; Profinite.NobelingProof.spanFunctor; CondensedSet.compactlyGeneratedToCondensedSet",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares."
-    },
-    {
-      "tool": "grep",
-      "query": "compactification|lowerShriek",
-      "results": "0 hits in Mathlib/CategoryTheory (logged query compactification|lowerShriek, sub CategoryTheory)",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares.",
-      "subdirectory": "CategoryTheory"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "derived pushforward with proper support change of rings naturality with composition and common refinements",
-      "results": "8 hits: PresheafOfModules.pushforwardComp; PresheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.pushforwardNatTrans_comp; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardNatTrans",
-      "date": "2026-10-16",
-      "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "mates for a commutative square of adjunctions commute with composition and tensor change of rings",
-      "results": "8 hits: CategoryTheory.mateEquiv_square; CategoryTheory.mateEquiv_apply; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.Bicategory.mateEquiv_square; CategoryTheory.CommSq.left_adjoint; CategoryTheory.mateEquiv; CategoryTheory.iterated_mateEquiv_conjugateEquiv",
-      "date": "2026-10-16",
-      "verdict": "Generic mate-pasting theorem, read Mathlib/CategoryTheory/Adjunction/Mates.lean:245-254; it does not supply invertibility of site/coefficient comparisons or the geometric compactification refinement normalization, so the entire statement is not a one-line specialization."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.counit",
-      "results": "3 hits: CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_counit",
-      "date": "2026-10-16",
-      "verdict": "Composite-adjunction counit formula only; no etale/pro-etale or geometric coefficient comparison."
-    },
-    {
-      "tool": "grep",
-      "query": "mateEquiv_square|change.*[Rr]ing|extension.*[Ss]calar",
-      "results": "25 hits: Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean; Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean; Mathlib/NumberTheory/NumberField/FractionalIdeal.lean; Mathlib/Algebra/Colimit/Ring.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Derivation/BaseChange.lean; Mathlib/Algebra/Lie/BaseChange.lean",
-      "date": "2026-10-16",
-      "verdict": "Algebraic scalar extension and unrelated ring changes; no full geometric derived comparison statement."
-    },
-    {
-      "tool": "grep",
-      "query": "derived.*[Cc]oefficient|[Cc]oefficient.*derived|[Pp]ushforward.*[Tt]ensor|[Tt]ensor.*[Pp]ushforward",
-      "results": "{\"t\": \"2026-10-16T16:49:17Z\", \"tool\": \"grep\", \"query\": \"derived.*[Cc]oefficient|[Cc]oefficient.*derived|[Pp]ushforward.*[Tt]ensor|[Tt]ensor.*[Pp]ushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-16",
-      "verdict": "Independent second-reader search: no exact match. The mateEquiv declarations (Mates.lean:208-220, read) give formal pasting identities; they do not assert the invertibility or geometric normalization of the specified compact-support/site/coefficient comparisons, nor identify the compactification refinement maps."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.mateEquiv",
-      "results": "{\"t\": \"2026-10-16T16:49:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"cbff9b4c3d76920b\"}",
-      "date": "2026-10-16",
-      "verdict": "Independent second-reader search: no exact match. The mateEquiv declarations (Mates.lean:208-220, read) give formal pasting identities; they do not assert the invertibility or geometric normalization of the specified compact-support/site/coefficient comparisons, nor identify the compactification refinement maps."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Beck Chevalley transformations compatibility with horizontal pasting of squares of adjoint functors",
-      "results": "{\"t\": \"2026-10-16T16:49:29Z\", \"tool\": \"leanfinder\", \"query\": \"Beck Chevalley transformations compatibility with horizontal pasting of squares of adjoint functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TwoSquare.hComp\", \"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.Bicategory.mateEquiv_square\", \"CategoryTheory.TwoSquare.vComp\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans_assoc\", \"CategoryTheory.TwoSquare.hCompVCompHComp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"67984a2ef15a44c0\"}",
-      "date": "2026-10-16",
-      "verdict": "Independent second-reader search: no exact match. The mateEquiv declarations (Mates.lean:208-220, read) give formal pasting identities; they do not assert the invertibility or geometric normalization of the specified compact-support/site/coefficient comparisons, nor identify the compactification refinement maps."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "finite coefficient compact support comparison respects site transport refinement and composition",
-      "results": "{\"t\": \"2026-10-16T17:49:23Z\", \"tool\": \"leanfinder\", \"query\": \"finite coefficient compact support comparison respects site transport refinement and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Meq.refine\", \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport\", \"CategoryTheory.Meq.refine_apply\", \"PartitionOfUnity.finsupport_subset_fintsupport\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"CategoryTheory.Meq.pullback_refine\", \"CategoryTheory.CompatiblePreserving\", \"CategoryTheory.compatiblePreservingOfDownwardsClosed\"], \"digest\": \"185f0980de10bb29\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp",
-      "results": "{\"t\": \"2026-10-16T17:49:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_hom_app_left\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_inv_app_left\"], \"digest\": \"2514416ceda3ebb5\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
-    },
-    {
-      "tool": "leansearch",
-      "query": "derived extension of finite coefficients commutes with compact support site comparison and composition",
-      "results": "{\"t\": \"2026-10-16T17:49:24Z\", \"tool\": \"leansearch\", \"query\": \"derived extension of finite coefficients commutes with compact support site comparison and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.comp_isClosedEmbedding\", \"HasCompactMulSupport.comp_isClosedEmbedding\", \"CompactlySupportedContinuousMap.coe_comp_to_continuous_fun\", \"CompactlySupportedContinuousMap.compAddMonoidHom\", \"CompactlySupportedContinuousMap.comp\", \"CompactlySupportedContinuousMap.compLinearMap\", \"CompactlySupportedContinuousMap.instSMulCommClass\", \"CompactlySupportedContinuousMap.compNonUnitalAlgHom\"], \"digest\": \"746a4dd608366b4b\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.mateEquiv_hcomp, CategoryTheory.mateEquiv_vcomp",
-      "results": "{\"t\": \"2026-10-16T18:35:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_hcomp, CategoryTheory.mateEquiv_vcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "finite coefficient compact support comparison respects etale proetale site transport refinement and composition",
-      "results": "{\"t\": \"2026-10-16T18:35:43Z\", \"tool\": \"leanfinder\", \"query\": \"finite coefficient compact support comparison respects etale proetale site transport refinement and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"75dbab03159ffc4e\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "mates of derived pullback and direct image squares commute with scalar extension and composition of adjunctions",
-      "results": "{\"t\": \"2026-10-16T18:36:19Z\", \"tool\": \"leanfinder\", \"query\": \"mates of derived pullback and direct image squares commute with scalar extension and composition of adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"PresheafOfModules.pullback_comp_id\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.ExponentiableMorphism.ev_naturality_assoc\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\"], \"digest\": \"319e33b7f7546d28\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
-    },
-    {
-      "tool": "grep",
-      "query": "shriek|compactSupport|compact_support|changeOfCoefficients",
-      "results": "{\"t\": \"2026-10-16T19:16:00Z\", \"tool\": \"grep\", \"query\": \"shriek|compactSupport|compact_support|changeOfCoefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/FixedPoints/Support.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Analysis/Normed/Lp/SmoothApprox.lean\", \"Mathlib/Analysis/Normed/Lp/SmoothApprox.lean\", \"Mathlib/Analysis/Normed/Lp/SmoothApprox.lean\", \"Mathlib/Analysis/Normed/Lp/SmoothApprox.lean\", \"Mathlib/Analysis/Normed/Lp/SmoothApprox.lean\"], \"digest\": \"84f5ea9931571e42\"}",
-      "date": "2026-10-16",
-      "verdict": "No exact match: generic categorical mates or underived sheaf pushforward comparisons and compactly supported functions, not this normalized derived etale/pro-etale coefficient theorem."
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.mateEquiv_square",
-      "results": "{\"t\": \"2026-10-16T19:16:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_square\"], \"digest\": \"367fe4b246f313df\"}",
-      "date": "2026-10-16",
-      "verdict": "No exact match: generic categorical mates or underived sheaf pushforward comparisons and compactly supported functions, not this normalized derived etale/pro-etale coefficient theorem."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Derived scalar extension commutes with proper pushforward and extension by zero on sheaves of modules",
-      "results": "{\"t\": \"2026-10-16T19:16:02Z\", \"tool\": \"leanfinder\", \"query\": \"Derived scalar extension commutes with proper pushforward and extension by zero on sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforward_assoc\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforward_id_comp\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"], \"digest\": \"586e6a2b863813b8\"}",
-      "date": "2026-10-16",
-      "verdict": "No exact match: generic categorical mates or underived sheaf pushforward comparisons and compactly supported functions, not this normalized derived etale/pro-etale coefficient theorem."
-    },
-    {
-      "tool": "grep",
-      "query": "projectionFormula|projection_formula|scalarExtension",
-      "results": "{\"t\": \"2026-10-16T19:43:32Z\", \"tool\": \"grep\", \"query\": \"projectionFormula|projection_formula|scalarExtension\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: generic mate pasting (Mates.lean:209) and underived sheaf/presheaf naturality do not state the finite-ring derived site/coefficient and compactification squares.",
-      "subdirectory": "CategoryTheory"
-    },
-    {
-      "tool": "loogle",
-      "query": "CategoryTheory.mateEquiv_hcomp",
-      "results": "{\"t\": \"2026-10-16T19:43:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_hcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\"], \"digest\": \"905f2022f5e49ae4\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: generic mate pasting (Mates.lean:209) and underived sheaf/presheaf naturality do not state the finite-ring derived site/coefficient and compactification squares."
-    },
-    {
-      "tool": "leanfinder",
-      "query": "Naturality of projection formula morphisms for shriek direct image under change of scalar rings and geometric morphisms",
-      "results": "{\"t\": \"2026-10-16T19:43:40Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of projection formula morphisms for shriek direct image under change of scalar rings and geometric morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"AlgebraicGeometry.Scheme.Hom.naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pushforwardNatTrans_app_val_app_apply\", \"SheafOfModules.pushforwardNatTrans_app_val_app\", \"AlgebraicGeometry.Scheme.comp_appLE_assoc\", \"AlgebraicGeometry.Scheme.comp_app_assoc\", \"PresheafOfModules.pushforward_obj_map_apply'\"], \"digest\": \"1ac4266ac2eefac3\"}",
-      "date": "2026-10-16",
-      "verdict": "no match: generic mate pasting (Mates.lean:209) and underived sheaf/presheaf naturality do not state the finite-ring derived site/coefficient and compactification squares."
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "det-sp-reduction-exceptional",
-    "date": "2026-10-16",
-    "group": "Q17"
-  },
-  "chapter": "sec-smooth-purity",
-  "unit": "sk-thm-sf-compatibility",
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-sp-et-proet-coefficient-compatibility",
-    "worker": "stage1",
-    "summary": "Repair of the human return: retained the statement and Lean record and the mathematical content of all nine unaffected proof steps; extracted cartesian proper/open coefficient/site naturality, noncartesian refinement theta naturality, and bounded acyclic-flat computation of the proper coefficient map as three statement-only nodes. Steps 6 and 10 cite these narrower lemmas and retain the composition and sheet-component argument. Plain-text arrows were normalized to TeX arrows with explicit command boundaries.",
-    "blueprint": "det-sp-reduction-exceptional Charts and Locality: proper/open interchange, refinement theta construction, and etale sum-extension normalization used to transport the coefficient-counit identity.",
-    "tool_uses": [
-      {
-        "node": "def-kun-unbounded-exchange",
-        "why": "Generic Unbounded derived exchange morphism is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "def-weil-pbc-proper-open-comparison",
-        "why": "Generic Comparison map for a proper map fixing an open is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "det-sp-scalar-extension-functor",
-        "why": "Generic The derived extension-of-coefficients functor and its associativity is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-amb-etale-adjoint-locality",
-        "why": "Generic Etale localization of the ambient adjoint is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-amb-etale-compact-comparisons",
-        "why": "Generic The etale compact-support comparisons is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-amb-etale-sum-stalks",
-        "why": "Generic Geometric stalks of etale sum extension is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-amb-unbounded-proper-open-interchange",
-        "why": "Generic Unbounded torsion-coefficient proper/open interchange with its canonical maps is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-asd-etale-compact-support-normalization",
-        "why": "Generic Normalization of compactified etale support and its exchange is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-cbc-compactifiable-compatible-tower",
-        "why": "Generic Compatible compactification towers with a supplied compactification of the composite is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-cbc-extension-zero-composition",
-        "why": "Generic Composition of open immersions is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-cbc-proetale-extension-zero",
-        "why": "Generic Extension by zero on the pro-etale site is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-cbc-proetale-extension-zero-comparison",
-        "why": "Generic Comparison of extension by zero with the site morphism is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-cbc-proper-open-interchange-coherence",
-        "why": "Generic Proper/open interchange and its base-change and composition equations is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-sf-comparison-pullback-exact",
-        "why": "Generic The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-sf-etale-flat-constructible",
-        "why": "Generic Etale bounded flat constructible model is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
-        "why": "Generic Canonical derived direct-image comparison is the invertible counit mate is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-weil-pbc-comparison-pullback",
-        "why": "Generic Comparison inverse image commutes with scheme pullback is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-weil-pbc-extension-by-zero-exact",
-        "why": "Generic Extension by zero is exact (étale site) is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-weil-pbc-finite-ring-constructible-derived-origin",
-        "why": "Generic Constructible derived comparison for arbitrary finite rings is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-weil-pbc-finite-type-over-noetherian",
-        "why": "Generic A scheme of finite type over a Noetherian scheme is Noetherian (Stacks 01T6) is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-weil-pbc-mate-pasting",
-        "why": "Generic Mates of pasted squares and of conjugate-whiskered squares is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-slice-extension-tensor",
-        "why": "Generic Tensor projection formula for extension by zero on a ringed-site slice is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-        "why": "Generic Canonical composition comparison for unbounded ringed-topos direct images is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-        "why": "Generic Derived tensor comparison for arbitrary ringed topoi is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "thm-weil-pbc-site-comparison",
-        "why": "Generic Bounded-below site comparison is used with the finite rings and schemes of this item; this supplies a construction/domain/coherence tool for the coefficient route, without replacing a step of the smooth-purity unit."
-      },
-      {
-        "node": "prop-weil-pbc-inverse-image-modules-exact",
-        "why": "Exact etale inverse image supplies the acyclicity input in the sum-extension K-flatness calculation; it is a general module-sheaf tool."
-      },
-      {
-        "node": "lemma-weil-pbc-leray-acyclicity",
-        "why": "The bounded acyclic-complex computation and module-category hypotheses justify computing the etale sum-normalization map on the chosen bounded representative."
-      },
-      {
-        "node": "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-        "why": "The bounded acyclic-complex computation and module-category hypotheses justify computing the etale sum-normalization map on the chosen bounded representative."
-      },
-      {
-        "node": "lem-weil-pbc-module-sheaves-enough-injectives",
-        "why": "The bounded acyclic-complex computation and module-category hypotheses justify computing the etale sum-normalization map on the chosen bounded representative."
-      }
-    ]
-  },
-  "tool_uses": [
-    "def-kun-unbounded-exchange",
-    "def-weil-pbc-proper-open-comparison",
-    "det-sp-scalar-extension-functor",
-    "lem-amb-etale-adjoint-locality",
-    "lem-amb-etale-compact-comparisons",
-    "lem-amb-etale-sum-stalks",
-    "lem-amb-unbounded-proper-open-interchange",
-    "lem-asd-etale-compact-support-normalization",
-    "lem-cbc-compactifiable-compatible-tower",
-    "lem-cbc-extension-zero-composition",
-    "lem-cbc-proetale-extension-zero",
-    "lem-cbc-proetale-extension-zero-comparison",
-    "lem-cbc-proper-open-interchange-coherence",
-    "lem-sf-comparison-pullback-exact",
-    "lem-sf-etale-flat-constructible",
-    "lem-weil-pbc-comparison-direct-image-canonical-mate",
-    "lem-weil-pbc-comparison-pullback",
-    "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-finite-ring-constructible-derived-origin",
-    "lem-weil-pbc-finite-type-over-noetherian",
-    "lem-weil-pbc-mate-pasting",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
     "thm-weil-pbc-site-comparison",
-    "prop-weil-pbc-inverse-image-modules-exact",
-    "lemma-weil-pbc-leray-acyclicity",
-    "lem-weil-pbc-module-sheaves-grothendieck-abelian",
-    "lem-weil-pbc-module-sheaves-enough-injectives"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-maint-Q115-9c460269",
-    "group": "Q115",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-maint-Q115-9c460269 (reviewer sub-agent of L); spot-checked: Maintenance validation: statement unchanged; returned steps 6 and 10 split into three narrower statement-only nodes; dry run and delivery passed."
+    "lem-sp-finite-compact-support-domains",
+    "lem-weil-pbc-comparison-direct-image-canonical-mate"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, paste the proper and open squares"
+   }
   },
-  "lean_audit": {
-    "master": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    },
-    "slopmaster2": {
-      "state": "none",
-      "decls": [],
-      "missing": []
-    }
+  {
+   "text": "The scalar-coherence theorem gives the etale refinement and composition equations for the same proper counit mate and open tensor map; its unbounded composition and refinement maps restrict on D^+ to those of the etale compact-comparison theorem by the unbounded-comparisons theorem. Its inverse-open-unit normalization equals t_j inverse, hence its q equals beta. Apply finite-ring site coherence: c intertwines the actual refinement and composition pastes. Substitute Step 2 into each etale equation and cancel adjacent c inverse/c and delta inverse/delta pairs. The remaining boundary is the asserted pro-etale equation for b. Common-refinement independence, identities and associativity follow by the identical cancellation in the canonical compactification coherence equations.",
+   "uses": [
+    "lem-pur-etale-compact-scalar-coherence",
+    "lem-sp-finite-compact-site-coherence",
+    "lem-amb-etale-compact-comparisons",
+    "lem-amb-unbounded-compact-support-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tags 0F7I and 0F7J, coefficient and site pasting"
+   }
   },
-  "blueprint_parent": {
-    "node": "sk-thm-sf-compatibility",
-    "clause": 7,
-    "from_unit": "sk-lem-sp-reduction",
-    "date": "2026-10-17",
-    "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+  {
+   "text": "For etale e choose the bounded flat model P of Step 1. The sheetwise computation represents beta by (x_s) tensor b mapped to (x_s tensor b). Both canonical c_e normalizations retain s. Thus the two representing chain maps agree, proving the displayed equality with sigma_e, including empty fibres.",
+   "uses": [
+    "lem-sp-finite-coefficient-input-models",
+    "lem-sp-etale-sum-coefficient-computation",
+    "lem-asd-etale-compact-support-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-etale.tex",
+    "place": "Tag 0GL6, etale sum normalization"
+   }
   },
-  "reviewed_lean": {
-    "date": "2026-10-18",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-59523c471",
-    "group": "Q31",
-    "result": "pass",
-    "note": "R1 fixed: proEtaleCoefficientMap is now transportedRecordedReductionDirectImageComparison φ c (reductionDirectImageComparison φ c.i c.g). This is the FullyFaithful.whiskeringRight preimage under E_{Y,S} of F̂◁s_Y⁻¹ ≫ a_R⁻¹▷T ≫ E◁b ≫ s_X▷F ≫ T̂◁a_S; b is the middle morphism. s is leftAdjointUniq through the unique section-identity sfRealizationRestriction choice; a is funInvIdAssoc plus rightAdjointUniq through the openSquarePullbackModel choice plus sfIntrinsicDerivedDirectImageComparison. IsIso, the main square, refinement, composition and counit all use it. Aliases, phantom structure and fixed composite removed. R3: def-sp-et-proet-coefficient-transport is genuine; its TeX matches the Lean, its stmt_deps equal its citations, and its fields and docstrings are complete. R2: second reading now accurate. Theorem stmt_deps (scalar-mate-projection, proper-open-coefficient-refinement, class-compact-support-comparison, unbounded-compact-support-comparisons, compact-support-restriction-of-scalars): all cited for theorem-constructed objects (.choose/asIso/constructed iso), so PASS on that point; fixedScalarRestrictionOpenMap is gone. Hypotheses, orientations and edge cases checked. A,B : Type u with ULift excludes no finite ring; sites stay u+1/u. Statement fields verbatim, declaration lists match, lines ≤100, all theorem proofs sorry. Item node changes only lean and stmt_deps (new def node plus landed nodes). nt_compile --json exit 0, clean: transport 3.8 s, item 9.6 s."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.EtaleProEtaleCoefficientCompatibility",
-    "declaration": "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleCoefficientMap",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.proEtaleCoefficientMap",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.sumCoefficientIso",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.siteRefinement",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleCompositor",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.compositionSiteBoundary",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.siteCompositor",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_refinement",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_composition",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.normalizedSumComparison",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_sum",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_counit",
-      "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_naturality"
-    ],
-    "file": "lean/Sheaf/Paper/EtaleProEtaleCoefficientCompatibility.lean",
-    "statement": "theorem etaleProEtaleCoefficientCompatibility {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell) (k : Type u) [Field k] [CharP k p] (_hA : ∃ n : ℕ, ∀ x : A, (ell ^ n) • x = 0) (_hB : ∃ n : ℕ, ∀ x : B, (ell ^ n) • x = 0) (φ : A →+* B) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (_hL : AdjunctionTransfer.etaleProperty (ULift.{u + 1, u} A) X L.obj) : ∃ hLB : DerivedCategory.TStructure.t.plus ((Etale.scalarExtension (uliftRingHom φ) X).obj L.obj), IsIso (etaleCoefficientMap (uliftRingHom φ) c L.obj) ∧ IsIso ((proEtaleCoefficientMap φ c).app ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj L.obj)) ∧ (@pbcFixedScalarExtension.{u} Y.ProEt inferInstance (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology Y) (ULift.{u + 1, u} A) (ULift.{u + 1, u} B) inferInstance inferInstance (uliftRingHom φ)).map ((compactSupportSiteComparison (ULift.{u + 1, u} A) c).inv.app L) ≫ (proEtaleCoefficientMap φ c).app ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj L.obj) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) c).map ((pbcComparisonReduction.{u} X (uliftRingHom φ)).hom.app L.obj) = (pbcComparisonReduction.{u} Y (uliftRingHom φ)).hom.app ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).obj L.obj) ≫ (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) Y).mapDerivedCategory.map (etaleCoefficientMap (uliftRingHom φ) c L.obj) ≫ (compactSupportSiteComparison (ULift.{u + 1, u} B) c).inv.app ⟨(Etale.scalarExtension (uliftRingHom φ) X).obj L.obj, hLB⟩",
-    "branch": "newtargets-dag",
-    "by": "Q31",
-    "date": "2026-10-18",
-    "existing": false,
-    "note": "Repair R1/R2/R3/R4: proEtaleCoefficientMap is now definitionally the genuine transport of reductionDirectImageComparison via normalized scalar/support realization comparisons. Every pro-etale statement uses it. Finite rings are small and their fixed-module presentations use ULift into u+1, leaving site objects u+1 and morphisms u distinct. The unused aliases and independent fixed composite are removed. No mathematical clause changes."
-  },
-  "reviewed_proof": {
-    "date": "2026-10-19",
-    "by": "L",
-    "reviewer": "COMPILER",
-    "group": "Y8",
-    "result": "pass",
-    "landing": "20261019T034406-L-428261",
-    "kind": "proof",
-    "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  {
+   "text": "For the conditional counit assertion write C_R=c_{h,R}. Step 2 gives $T(C_A)^{-1}b^{-1}=\\delta^{-1}N(\\beta^{-1})C_B^{-1}F_B(\\delta)$. Substitute into $T(N\\varepsilon_A C_A^{-1})b^{-1}$. Naturality of $\\delta$ moves $T(N\\varepsilon_A)\\delta^{-1}$ to $\\delta^{-1}N(T\\varepsilon_A)$; the assumed etale identity replaces $T\\varepsilon_A\\beta^{-1}$ by $\\varepsilon_BF_B(a)$. Naturality of $C_B$ then yields the transported B-counit followed by $F_B$ of transported $a$. This is precisely the required identity. All constituents are natural by the cited statements; pasting preserves naturality. No step assumes flatness or finite projective dimension of B/A.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+    "place": "Charts, coefficient-counit identity: elementary substitution of the preceding square"
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-sp-finite-coefficient-input-models",
+  "lem-sp-finite-compact-support-domains",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "lem-sp-open-scalar-site-coherence",
+  "det-sp-reduction-direct-image",
+  "thm-weil-pbc-site-comparison",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-pur-etale-compact-scalar-coherence",
+  "lem-sp-finite-compact-site-coherence",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "lem-sp-etale-sum-coefficient-computation",
+  "lem-asd-etale-compact-support-normalization"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-lem-sp-reduction/sk-lem-sp-reduction-exceptional.proof.md",
+  "place": "Charts and Locality; finer repair of the returned Steps 1--11, retaining the normalized proper/open route with Stacks 0GL6, 0F7I, 0F7J."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv, CategoryTheory.NatTrans",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares."
+  },
+  {
+   "tool": "grep",
+   "query": "compact.?support.*coefficient|coefficient.*refinement|coefficient.*compactification",
+   "results": "0 hits",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension of finite coefficients commutes with composition of compact support direct image",
+   "results": "8 hits: HasCompactSupport.comp_isClosedEmbedding; CompactlySupportedContinuousMap.coe_comp_to_continuous_fun; PolynomialLaw.comp_toFun'; Pi.comul_coe_finsupp; CompactlySupportedContinuousMap.compLinearMap; CompactlySupportedContinuousMap.compAddMonoidHom; AlgebraicGeometry.IsFinite.instIsStableUnderCompositionScheme; HasCompactMulSupport.comp_isClosedEmbedding",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient compact support comparison commutes with site comparison compactification refinement and composition",
+   "results": "8 hits: CompHausLike.sigmaComparison; CompHausLike.LocallyConstant.sigmaComparison_comp_sigmaIso; CompHausLike.sigmaComparison_eq_comp_isos; CompHausLike.isIsoSigmaComparison; Profinite.NobelingProof.spanFunctorIsoIndexFunctor_inv_app; CompHausLike.LocallyConstant.incl_of_counitAppApp; Profinite.NobelingProof.spanFunctor; CondensedSet.compactlyGeneratedToCondensedSet",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares."
+  },
+  {
+   "tool": "grep",
+   "query": "compactification|lowerShriek",
+   "results": "0 hits in Mathlib/CategoryTheory (logged query compactification|lowerShriek, sub CategoryTheory)",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "derived pushforward with proper support change of rings naturality with composition and common refinements",
+   "results": "8 hits: PresheafOfModules.pushforwardComp; PresheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp; AlgebraicGeometry.Scheme.Modules.pushforwardComp; SheafOfModules.pushforwardNatTrans_comp; SheafOfModules.pushforward_assoc; SheafOfModules.pushforwardComp_hom_app_val_app; SheafOfModules.pushforwardNatTrans",
+   "date": "2026-10-16",
+   "verdict": "no match: the returned facts concern ordinary compactly supported functions, finite morphisms or underived pushforward/comparison functors, not the stated derived compact-support site and coefficient squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mates for a commutative square of adjunctions commute with composition and tensor change of rings",
+   "results": "8 hits: CategoryTheory.mateEquiv_square; CategoryTheory.mateEquiv_apply; CategoryTheory.conjugateEquiv_mateEquiv_vcomp; CategoryTheory.mateEquiv_conjugateEquiv_vcomp; CategoryTheory.Bicategory.mateEquiv_square; CategoryTheory.CommSq.left_adjoint; CategoryTheory.mateEquiv; CategoryTheory.iterated_mateEquiv_conjugateEquiv",
+   "date": "2026-10-16",
+   "verdict": "Generic mate-pasting theorem, read Mathlib/CategoryTheory/Adjunction/Mates.lean:245-254; it does not supply invertibility of site/coefficient comparisons or the geometric compactification refinement normalization, so the entire statement is not a one-line specialization."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.comp, CategoryTheory.Adjunction.counit",
+   "results": "3 hits: CategoryTheory.Adjunction.comp_counit_app; CategoryTheory.Adjunction.comp_counit_app_assoc; CategoryTheory.Adjunction.comp_counit",
+   "date": "2026-10-16",
+   "verdict": "Composite-adjunction counit formula only; no etale/pro-etale or geometric coefficient comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "mateEquiv_square|change.*[Rr]ing|extension.*[Ss]calar",
+   "results": "25 hits: Mathlib/NumberTheory/Cyclotomic/CyclotomicCharacter.lean; Mathlib/Algebra/Algebra/Subalgebra/Lattice.lean; Mathlib/NumberTheory/NumberField/FractionalIdeal.lean; Mathlib/Algebra/Colimit/Ring.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Solvable.lean; Mathlib/Algebra/Lie/Derivation/BaseChange.lean; Mathlib/Algebra/Lie/BaseChange.lean",
+   "date": "2026-10-16",
+   "verdict": "Algebraic scalar extension and unrelated ring changes; no full geometric derived comparison statement."
+  },
+  {
+   "tool": "grep",
+   "query": "derived.*[Cc]oefficient|[Cc]oefficient.*derived|[Pp]ushforward.*[Tt]ensor|[Tt]ensor.*[Pp]ushforward",
+   "results": "{\"t\": \"2026-10-16T16:49:17Z\", \"tool\": \"grep\", \"query\": \"derived.*[Cc]oefficient|[Cc]oefficient.*derived|[Pp]ushforward.*[Tt]ensor|[Tt]ensor.*[Pp]ushforward\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: no exact match. The mateEquiv declarations (Mates.lean:208-220, read) give formal pasting identities; they do not assert the invertibility or geometric normalization of the specified compact-support/site/coefficient comparisons, nor identify the compactification refinement maps."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv",
+   "results": "{\"t\": \"2026-10-16T16:49:18Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv\", \"CategoryTheory.mateEquiv_counit\", \"CategoryTheory.mateEquiv_counit_symm\", \"CategoryTheory.unit_mateEquiv\", \"CategoryTheory.unit_mateEquiv_symm\", \"CategoryTheory.conjugateEquiv_mateEquiv_vcomp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"cbff9b4c3d76920b\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: no exact match. The mateEquiv declarations (Mates.lean:208-220, read) give formal pasting identities; they do not assert the invertibility or geometric normalization of the specified compact-support/site/coefficient comparisons, nor identify the compactification refinement maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Beck Chevalley transformations compatibility with horizontal pasting of squares of adjoint functors",
+   "results": "{\"t\": \"2026-10-16T16:49:29Z\", \"tool\": \"leanfinder\", \"query\": \"Beck Chevalley transformations compatibility with horizontal pasting of squares of adjoint functors\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.TwoSquare.hComp\", \"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.Bicategory.mateEquiv_square\", \"CategoryTheory.TwoSquare.vComp\", \"CategoryTheory.Adjunction.leftAdjointCompNatTrans_assoc\", \"CategoryTheory.TwoSquare.hCompVCompHComp\", \"CategoryTheory.mateEquiv_conjugateEquiv_vcomp\", \"CategoryTheory.mateEquiv_vcomp\"], \"digest\": \"67984a2ef15a44c0\"}",
+   "date": "2026-10-16",
+   "verdict": "Independent second-reader search: no exact match. The mateEquiv declarations (Mates.lean:208-220, read) give formal pasting identities; they do not assert the invertibility or geometric normalization of the specified compact-support/site/coefficient comparisons, nor identify the compactification refinement maps."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient compact support comparison respects site transport refinement and composition",
+   "results": "{\"t\": \"2026-10-16T17:49:23Z\", \"tool\": \"leanfinder\", \"query\": \"finite coefficient compact support comparison respects site transport refinement and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Meq.refine\", \"CategoryTheory.GrothendieckTopology.WEqualsLocallyBijective.transport\", \"CategoryTheory.Meq.refine_apply\", \"PartitionOfUnity.finsupport_subset_fintsupport\", \"AlgebraicGeometry.exists_eq_pow_mul_of_is_compact_of_quasi_separated_space_aux_aux\", \"CategoryTheory.Meq.pullback_refine\", \"CategoryTheory.CompatiblePreserving\", \"CategoryTheory.compatiblePreservingOfDownwardsClosed\"], \"digest\": \"185f0980de10bb29\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp",
+   "results": "{\"t\": \"2026-10-16T17:49:23Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv, CategoryTheory.Adjunction.comp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv\", \"CategoryTheory.iterated_mateEquiv_conjugateEquiv_symm\", \"CategoryTheory.mateEquiv_square\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_hom_app_left\", \"CategoryTheory.toOverIteratedSliceForwardIsoPullback_inv_app_left\"], \"digest\": \"2514416ceda3ebb5\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
+  },
+  {
+   "tool": "leansearch",
+   "query": "derived extension of finite coefficients commutes with compact support site comparison and composition",
+   "results": "{\"t\": \"2026-10-16T17:49:24Z\", \"tool\": \"leansearch\", \"query\": \"derived extension of finite coefficients commutes with compact support site comparison and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HasCompactSupport.comp_isClosedEmbedding\", \"HasCompactMulSupport.comp_isClosedEmbedding\", \"CompactlySupportedContinuousMap.coe_comp_to_continuous_fun\", \"CompactlySupportedContinuousMap.compAddMonoidHom\", \"CompactlySupportedContinuousMap.comp\", \"CompactlySupportedContinuousMap.compLinearMap\", \"CompactlySupportedContinuousMap.instSMulCommClass\", \"CompactlySupportedContinuousMap.compNonUnitalAlgHom\"], \"digest\": \"746a4dd608366b4b\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp, CategoryTheory.mateEquiv_vcomp",
+   "results": "{\"t\": \"2026-10-16T18:35:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_hcomp, CategoryTheory.mateEquiv_vcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "finite coefficient compact support comparison respects etale proetale site transport refinement and composition",
+   "results": "{\"t\": \"2026-10-16T18:35:43Z\", \"tool\": \"leanfinder\", \"query\": \"finite coefficient compact support comparison respects etale proetale site transport refinement and composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"AlgebraicGeometry.Scheme.etaleTopology\", \"AlgebraicGeometry.exists_map_preimage_le_map_preimage\", \"AlgebraicGeometry.Scheme.exists_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.Scheme.smallEtalePretopology\", \"AlgebraicGeometry.Scheme.smallEtaleTopology\", \"AlgebraicGeometry.Scheme.exists_hom_hom_comp_eq_comp_of_locallyOfFiniteType\", \"AlgebraicGeometry.exists_map_preimage_eq_map_preimage\", \"AlgebraicGeometry.exists_app_map_eq_zero_of_isLimit\"], \"digest\": \"75dbab03159ffc4e\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "mates of derived pullback and direct image squares commute with scalar extension and composition of adjunctions",
+   "results": "{\"t\": \"2026-10-16T18:36:19Z\", \"tool\": \"leanfinder\", \"query\": \"mates of derived pullback and direct image squares commute with scalar extension and composition of adjunctions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.conjugateEquiv_pullbackComp_inv\", \"PresheafOfModules.pullback_comp_id\", \"PresheafOfModules.pullbackPushforwardAdjunction\", \"CategoryTheory.ExponentiableMorphism.ev_naturality_assoc\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit_assoc\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"CategoryTheory.ExponentiableMorphism.pushforwardComp_hom_counit\"], \"digest\": \"319e33b7f7546d28\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: returned declarations concern underived site/module functors, generic mates or ordinary compactly supported functions; none includes the specified derived finite-ring etale/pro-etale coefficient and compactification normalizations."
+  },
+  {
+   "tool": "grep",
+   "query": "shriek|compactSupport|compact_support|changeOfCoefficients",
+   "results": "{\"t\": \"2026-10-16T19:16:00Z\", \"tool\": \"grep\", \"query\": \"shriek|compactSupport|compact_support|changeOfCoefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Dynamics/FixedPoints/Support.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Topology/Algebra/ConstMulAction.lean\", \"Mathlib/Analysis/Normed/Lp/SmoothApprox.lean\", \"Mathlib/Analysis/Normed/Lp/SmoothApprox.lean\", \"Mathlib/Analysis/Normed/Lp/SmoothApprox.lean\", \"Mathlib/Analysis/Normed/Lp/SmoothApprox.lean\", \"Mathlib/Analysis/Normed/Lp/SmoothApprox.lean\"], \"digest\": \"84f5ea9931571e42\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic categorical mates or underived sheaf pushforward comparisons and compactly supported functions, not this normalized derived etale/pro-etale coefficient theorem."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_square",
+   "results": "{\"t\": \"2026-10-16T19:16:01Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_square\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_square\"], \"digest\": \"367fe4b246f313df\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic categorical mates or underived sheaf pushforward comparisons and compactly supported functions, not this normalized derived etale/pro-etale coefficient theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived scalar extension commutes with proper pushforward and extension by zero on sheaves of modules",
+   "results": "{\"t\": \"2026-10-16T19:16:02Z\", \"tool\": \"leanfinder\", \"query\": \"Derived scalar extension commutes with proper pushforward and extension by zero on sheaves of modules\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pushforwardComp\", \"SheafOfModules.pushforward_assoc\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.pushforwardPushforwardAdj\", \"SheafOfModules.pushforward_map_val\", \"SheafOfModules.pushforward_id_comp\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.instIsRightAdjointPushforwardCompSheafRingCatMapSheafPushforwardContinuous\"], \"digest\": \"586e6a2b863813b8\"}",
+   "date": "2026-10-16",
+   "verdict": "No exact match: generic categorical mates or underived sheaf pushforward comparisons and compactly supported functions, not this normalized derived etale/pro-etale coefficient theorem."
+  },
+  {
+   "tool": "grep",
+   "query": "projectionFormula|projection_formula|scalarExtension",
+   "results": "{\"t\": \"2026-10-16T19:43:32Z\", \"tool\": \"grep\", \"query\": \"projectionFormula|projection_formula|scalarExtension\", \"sub\": \"CategoryTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic mate pasting (Mates.lean:209) and underived sheaf/presheaf naturality do not state the finite-ring derived site/coefficient and compactification squares.",
+   "subdirectory": "CategoryTheory"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.mateEquiv_hcomp",
+   "results": "{\"t\": \"2026-10-16T19:43:33Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.mateEquiv_hcomp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.mateEquiv_hcomp\"], \"digest\": \"905f2022f5e49ae4\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic mate pasting (Mates.lean:209) and underived sheaf/presheaf naturality do not state the finite-ring derived site/coefficient and compactification squares."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of projection formula morphisms for shriek direct image under change of scalar rings and geometric morphisms",
+   "results": "{\"t\": \"2026-10-16T19:43:40Z\", \"tool\": \"leanfinder\", \"query\": \"Naturality of projection formula morphisms for shriek direct image under change of scalar rings and geometric morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackObjFreeIso_hom_naturality\", \"AlgebraicGeometry.Scheme.Hom.naturality_assoc\", \"SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc\", \"SheafOfModules.pushforwardNatTrans_app_val_app_apply\", \"SheafOfModules.pushforwardNatTrans_app_val_app\", \"AlgebraicGeometry.Scheme.comp_appLE_assoc\", \"AlgebraicGeometry.Scheme.comp_app_assoc\", \"PresheafOfModules.pushforward_obj_map_apply'\"], \"digest\": \"1ac4266ac2eefac3\"}",
+   "date": "2026-10-16",
+   "verdict": "no match: generic mate pasting (Mates.lean:209) and underived sheaf/presheaf naturality do not state the finite-ring derived site/coefficient and compactification squares."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "det-sp-reduction-exceptional",
+  "date": "2026-10-16",
+  "group": "Q17"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-thm-sf-compatibility",
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sp-et-proet-coefficient-compatibility",
+  "worker": "stage1",
+  "summary": "Repair of the human granularity return: preserve the exact statement and Lean metadata, shorten the parent to a five-step assembly (2337 characters), reuse existing proper scalar/site and etale scalar-coherence lemmas, and extract five statement-only unsplit children for input models, open coherence, compact-support domains, site compactification coherence and sheetwise proper-coefficient computation. Their arguments and existing search results are retained in report.md; new nodes have no proof steps, as the final route note requires.",
+  "blueprint": "det-sp-reduction-exceptional Charts: coefficient extension and etale sheet counits; Locality: open extension, compactification refinement and composite adjunctions.",
+  "tool_uses": [
+   {
+    "node": "sk-def-sfb-dc-setting",
+    "why": "Generic Setting for $D_{\\mathrm{cons}}$: schemes of finite type over a field is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "def-weil-pbc-proetale-modules",
+    "why": "Generic Finite coefficients on the pro-etale site is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "def-weil-pbc-derived-categories",
+    "why": "Generic Derived categories of etale sheaves is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "def-weil-pbc-etale-constructible-sheaf",
+    "why": "Generic Constructible sheaf of modules on the small etale site is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "def-weil-proetale-constructible-sheaf",
+    "why": "Generic Constructible sheaf of modules on the pro-etale site is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "def-weil-proetale-tor-amplitude",
+    "why": "Generic Tor amplitude of a pro-etale complex is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "det-sp-scalar-extension-functor",
+    "why": "Generic The derived extension-of-coefficients functor and its associativity is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic Derived tensor comparison for arbitrary ringed topoi is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "def-amb-etale-compact-support",
+    "why": "Generic Compact supports on the ordinary etale category is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "det-sp-reduction-direct-image",
+    "why": "Generic Compactly supported direct image commutes with extension of coefficients is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Generic The comparison pullback is exact on sheaves of modules and commutes with cohomology sheaves is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-weil-pbc-comparison-direct-image-canonical-mate",
+    "why": "Generic Canonical derived direct-image comparison is the invertible counit mate is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-cbc-proetale-extension-zero-comparison",
+    "why": "Generic Comparison of extension by zero with the site morphism is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "det-sp-et-proet-adjunction-transfer",
+    "why": "Generic Transfer of adjunctions from étale to pro-étale finite coefficients is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-amb-etale-compact-comparisons",
+    "why": "Generic The etale compact-support comparisons is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "def-weil-pbc-etale-sum-extension",
+    "why": "Generic Extension by zero along an etale map is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-asd-etale-compact-support-normalization",
+    "why": "Generic Normalization of compactified etale support and its exchange is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "def-weil-pbc-witness-compatibility",
+    "why": "Generic Witness compatibility condition is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-pur-etale-scalar-mate-projection",
+    "why": "Generic Restriction of the derived coefficient mate equals the projection morphism is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-sf-proper-open-coefficient-refinement",
+    "why": "Generic Coefficient extension respects the proper/open refinement arrow is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-sf-class-compact-support-comparison",
+    "why": "Generic On the coefficient class the compact-support functor is computed on the étale site is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-amb-unbounded-compact-support-comparisons",
+    "why": "Generic Unbounded ordinary etale compact-support comparisons is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "def-sp-reduction-direct-image-comparison",
+    "why": "Generic Canonical compact-support coefficient comparison and normalized open coordinates is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-sf-compact-support-restriction-of-scalars",
+    "why": "Generic Finite-level compact-support direct image commutes with restriction of scalars is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-sfb-etale-proetale-scalar-mate",
+    "why": "Generic Étale/pro-étale comparison intertwines scalar direct-image mates is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "thm-weil-pbc-site-comparison",
+    "why": "Generic Bounded-below site comparison is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   },
+   {
+    "node": "lem-pur-etale-compact-scalar-coherence",
+    "why": "Generic Ordinary etale compact-support scalar compatibility with projection and composition is used with the stated finite rings and sites; its statement supplies this domain, model, or normalized comparison constituent, preserving the Charts/Locality route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "def-kun-unbounded-exchange",
+  "def-weil-pbc-proper-open-comparison",
+  "det-sp-scalar-extension-functor",
+  "lem-amb-etale-adjoint-locality",
+  "lem-amb-etale-compact-comparisons",
+  "lem-amb-etale-sum-stalks",
+  "lem-amb-unbounded-proper-open-interchange",
+  "lem-asd-etale-compact-support-normalization",
+  "lem-cbc-compactifiable-compatible-tower",
+  "lem-cbc-extension-zero-composition",
+  "lem-cbc-proetale-extension-zero",
+  "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-proper-open-interchange-coherence",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sf-etale-flat-constructible",
+  "lem-weil-pbc-comparison-direct-image-canonical-mate",
+  "lem-weil-pbc-comparison-pullback",
+  "lem-weil-pbc-extension-by-zero-exact",
+  "lem-weil-pbc-finite-ring-constructible-derived-origin",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-mate-pasting",
+  "lem-weil-pbc-ringed-slice-extension-tensor",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "thm-weil-pbc-site-comparison",
+  "prop-weil-pbc-inverse-image-modules-exact",
+  "lemma-weil-pbc-leray-acyclicity",
+  "lem-weil-pbc-module-sheaves-grothendieck-abelian",
+  "lem-weil-pbc-module-sheaves-enough-injectives",
+  "sk-def-sfb-dc-setting",
+  "def-weil-pbc-proetale-modules",
+  "def-weil-pbc-derived-categories",
+  "def-weil-pbc-etale-constructible-sheaf",
+  "def-weil-proetale-constructible-sheaf",
+  "def-weil-proetale-tor-amplitude",
+  "def-amb-etale-compact-support",
+  "det-sp-reduction-direct-image",
+  "det-sp-et-proet-adjunction-transfer",
+  "def-weil-pbc-etale-sum-extension",
+  "def-weil-pbc-witness-compatibility",
+  "lem-pur-etale-scalar-mate-projection",
+  "lem-sf-proper-open-coefficient-refinement",
+  "lem-sf-class-compact-support-comparison",
+  "lem-amb-unbounded-compact-support-comparisons",
+  "def-sp-reduction-direct-image-comparison",
+  "lem-sf-compact-support-restriction-of-scalars",
+  "lem-sfb-etale-proetale-scalar-mate",
+  "lem-pur-etale-compact-scalar-coherence"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q58-57a9af2d8",
+  "group": "Q58",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q58-57a9af2d8 (reviewer sub-agent of L); spot-checked: I read the whole delivery and repaired 3 small citation faults. Context: the item was split and reviewed live (Q115), then re-released by the human 2026-10-21 note. The note asked for a proof of at most 3000 chars and at least 4 statement-only nodes, with every old argument reappearing. The delivery fulfils it. The statement, stmt_deps, Lean record and tool_uses are unchanged; only proof, proof_deps, proof_origin and split_report differ from live. The proof went from 14928 chars to 2337 (2600 after my fix), in 5 steps. The 5 new nodes are unsplit, each with 5 logged searches, created.item set to the item and blueprint.from det-sp-reduction-exceptional via [item]. Mapping: old 1 → input-models; old 2 → open; old 3 → existing lem-sfb-etale-proetale-scalar-mate; old 4 → parent Step 2 + domains; old 5–8 coefficient parts → existing lem-pur-etale-compact-scalar-coherence; old 5/6/9 site parts → site child; old 10 → sum child (it carries the sheet-sum clause on a flat model, accepted because the note asks for each old argument as a node); old 11 → elementary Step 5. I checked all 5 children true: input models via lem-sf-etale-flat-constructible, origin equivalence and det-sp-scalar-extension-functor(2), tested on B=0, L=0 and nonflat Z/ℓ²→Z/ℓ; domains via ctf preservation and the D^+ site comparison; the open square has consistent types and correct nested-open order; site coherence is mate pasting with lem-sp-refinement-coefficient-mate and lem-sp-proper-open-coefficient-mate, and generalizes lem-pur-compact-support-site-coherence (A_{E,n} only), so it is not a duplicate; for the sum model, R^a r_*j_! = 0 follows from lem-asd-etale-compact-support-normalization, flatness from the sheet stalks, and the hypotheses of lem-sp-acyclic-flat-proper-coefficient-model hold. Parent Steps 2–5: I checked the hypotheses (J and T J in D^+, M and Q M in D^+), invertibility of b on Dctf and reflection by full faithfulness on D^+. Sources read: Stacks 0GL6 (more-etale l.3739), 0GL1, 09AF, 0F4L, the 0F7I/0F7J tags, and the blueprint Charts/Locality paragraphs. No SGA, no cycles. Fixes: (1) C1/C4 Step 2 now cites lem-weil-pbc-comparison-direct-image-canonical-mate, which identifies the scalar-mate β^R with d_r; (2) C4 Step 3 now cites lem-amb-unbounded-compact-support-comparisons, whose unbounded α restricts on D^+ to that of lem-amb-etale-compact-comparisons; (3) B3: domains child gains def-weil-pbc-site-comparison-morphism, def-weil-proetale-constructible-sheaf and def-weil-proetale-tor-amplitude, the open child gains the site-comparison def, and the site child names its pro-étale ρ/Γ via def-weil-pbc-proper-open-comparison, lem-sp-refinement-coefficient-mate and lem-sp-proper-open-coefficient-mate. Batch-5: lem-asd-etale-compact-support-normalization was already in the item's stmt_deps and live proof. Its path to lem-pod-lisse-module-sheaves-as-module-objects runs through generic bounded-below proper base change, so it is neither a step of the trace formula nor of Poincaré duality → accepted. Tool uses accepted: scalar-mate, scalar-coherence, unbounded comparisons, site comparison, reduction-direct-image.; 4 file(s) fixed by the reviewer"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  },
+  "slopmaster2": {
+   "state": "none",
+   "decls": [],
+   "missing": []
+  }
+ },
+ "blueprint_parent": {
+  "node": "sk-thm-sf-compatibility",
+  "clause": 7,
+  "from_unit": "sk-lem-sp-reduction",
+  "date": "2026-10-17",
+  "why": "compatibility node re-routed under the central compatibility sketch (blueprint cbac0b347)"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-18",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-59523c471",
+  "group": "Q31",
+  "result": "pass",
+  "note": "R1 fixed: proEtaleCoefficientMap is now transportedRecordedReductionDirectImageComparison φ c (reductionDirectImageComparison φ c.i c.g). This is the FullyFaithful.whiskeringRight preimage under E_{Y,S} of F̂◁s_Y⁻¹ ≫ a_R⁻¹▷T ≫ E◁b ≫ s_X▷F ≫ T̂◁a_S; b is the middle morphism. s is leftAdjointUniq through the unique section-identity sfRealizationRestriction choice; a is funInvIdAssoc plus rightAdjointUniq through the openSquarePullbackModel choice plus sfIntrinsicDerivedDirectImageComparison. IsIso, the main square, refinement, composition and counit all use it. Aliases, phantom structure and fixed composite removed. R3: def-sp-et-proet-coefficient-transport is genuine; its TeX matches the Lean, its stmt_deps equal its citations, and its fields and docstrings are complete. R2: second reading now accurate. Theorem stmt_deps (scalar-mate-projection, proper-open-coefficient-refinement, class-compact-support-comparison, unbounded-compact-support-comparisons, compact-support-restriction-of-scalars): all cited for theorem-constructed objects (.choose/asIso/constructed iso), so PASS on that point; fixedScalarRestrictionOpenMap is gone. Hypotheses, orientations and edge cases checked. A,B : Type u with ULift excludes no finite ring; sites stay u+1/u. Statement fields verbatim, declaration lists match, lines ≤100, all theorem proofs sorry. Item node changes only lean and stmt_deps (new def node plus landed nodes). nt_compile --json exit 0, clean: transport 3.8 s, item 9.6 s."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.EtaleProEtaleCoefficientCompatibility",
+  "declaration": "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleCoefficientMap",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.proEtaleCoefficientMap",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.sumCoefficientIso",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.siteRefinement",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleCompositor",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.compositionSiteBoundary",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.siteCompositor",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_refinement",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_composition",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.normalizedSumComparison",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_sum",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_counit",
+   "AlgebraicGeometry.ProEtale.CoefficientCompatibility.etaleProEtaleCoefficientCompatibility_naturality"
+  ],
+  "file": "lean/Sheaf/Paper/EtaleProEtaleCoefficientCompatibility.lean",
+  "statement": "theorem etaleProEtaleCoefficientCompatibility {A B : Type u} [CommRing A] [CommRing B] [Finite A] [Finite B] (ell p : ℕ) [Fact ell.Prime] (_hp : 0 < p) (_hEll : p ≠ ell) (k : Type u) [Field k] [CharP k p] (_hA : ∃ n : ℕ, ∀ x : A, (ell ^ n) • x = 0) (_hB : ∃ n : ℕ, ∀ x : B, (ell ^ n) • x = 0) (φ : A →+* B) {X Y : Scheme.{u}} [X.Over (Spec (.of k))] [Y.Over (Spec (.of k))] [LocallyOfFiniteType (X ↘ Spec (.of k))] [QuasiCompact (X ↘ Spec (.of k))] [IsSeparated (X ↘ Spec (.of k))] [LocallyOfFiniteType (Y ↘ Spec (.of k))] [QuasiCompact (Y ↘ Spec (.of k))] [IsSeparated (Y ↘ Spec (.of k))] (f : X ⟶ Y) [f.IsOver (Spec (.of k))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (c : Compactification f) (L : DerivedCategory.Plus (Sheaf X.smallEtaleTopology (ModuleCat.{u + 1} (ULift.{u + 1, u} A)))) (_hL : AdjunctionTransfer.etaleProperty (ULift.{u + 1, u} A) X L.obj) : ∃ hLB : DerivedCategory.TStructure.t.plus ((Etale.scalarExtension (uliftRingHom φ) X).obj L.obj), IsIso (etaleCoefficientMap (uliftRingHom φ) c L.obj) ∧ IsIso ((proEtaleCoefficientMap φ c).app ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj L.obj)) ∧ (@pbcFixedScalarExtension.{u} Y.ProEt inferInstance (essentiallySmallSelf.{0, u, u + 1} _) (Scheme.ProEt.topology Y) (ULift.{u + 1, u} A) (ULift.{u + 1, u} B) inferInstance inferInstance (uliftRingHom φ)).map ((compactSupportSiteComparison (ULift.{u + 1, u} A) c).inv.app L) ≫ (proEtaleCoefficientMap φ c).app ((comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) X).mapDerivedCategory.obj L.obj) ≫ (rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) c).map ((pbcComparisonReduction.{u} X (uliftRingHom φ)).hom.app L.obj) = (pbcComparisonReduction.{u} Y (uliftRingHom φ)).hom.app ((Etale.rightDerivedLowerShriekOfCompactification (ModuleCat.{u + 1} (ULift.{u + 1, u} A)) c).obj L.obj) ≫ (comparisonUpperStar (ModuleCat.{u + 1} (ULift.{u + 1, u} B)) Y).mapDerivedCategory.map (etaleCoefficientMap (uliftRingHom φ) c L.obj) ≫ (compactSupportSiteComparison (ULift.{u + 1, u} B) c).inv.app ⟨(Etale.scalarExtension (uliftRingHom φ) X).obj L.obj, hLB⟩",
+  "branch": "newtargets-dag",
+  "by": "Q31",
+  "date": "2026-10-18",
+  "existing": false,
+  "note": "Repair R1/R2/R3/R4: proEtaleCoefficientMap is now definitionally the genuine transport of reductionDirectImageComparison via normalized scalar/support realization comparisons. Every pro-etale statement uses it. Finite rings are small and their fixed-module presentations use ULift into u+1, leaving site objects u+1 and morphisms u distinct. The unused aliases and independent fixed composite are removed. No mathematical clause changes."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-19",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "Y8",
+  "result": "pass",
+  "landing": "20261019T034406-L-428261",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

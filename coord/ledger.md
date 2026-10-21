@@ -19810,3 +19810,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:26 L: merged deliver/Q61/lem-sfb-adic-stratified-perfect (reviewer FIX; after a return; new nodes: 4)
 - 03:26 L: merged deliver/NL/lem-sfb-condensed-subfield-basis (reviewer PASS; first push; new nodes: 0)
 - 03:26 L: merged deliver/Q54/lem-sfb-finite-field-internal-hom-finiteness (reviewer FIX; after a return; new nodes: 4)
+- 03:26 L: merged deliver/Q58/lem-sp-et-proet-coefficient-compatibility (reviewer FIX; after a return; new nodes: 5)
