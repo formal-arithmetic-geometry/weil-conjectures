@@ -16,6 +16,10 @@ public import Mathlib.CategoryTheory.Abelian.Transfer
 public import Mathlib.CategoryTheory.Functor.KanExtension.Basic
 public import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebra
 import Mathlib.CategoryTheory.Functor.KanExtension.Pointwise
+import Mathlib.CategoryTheory.Functor.KanExtension.Preserves
+import Mathlib.CategoryTheory.Limits.Presheaf
+import Mathlib.CategoryTheory.Adjunction.Restrict
+import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraAdjunction
 import WeilConjectures.CategoryTheory.Endofunctor.IsoAlgebraFullyFaithful
 
 /-! # Ambient equivariant ind-sheaves for the recorded common-stage Weil heart
@@ -113,6 +117,8 @@ def zlStagePullIso {X Y : Scheme.{u}} (f : X ⟶ Y)
       (AlgebraicallyClosedCoefficients.Coefficient.{u} l Ω L) Y) :=
   eqToIso (zlStagePull_eq l Ω f L K)
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Descent of the normalized integral composition comparison.
 Source: Stacks 099N(5); blueprint common-stage prescription
 (blueprint: def-zl-weil-ind-sheaf-category).
@@ -247,28 +253,6 @@ def zlWeilPull {X₀ Y₀ : Over (Spec (.of D.k₀))}
         (sfCommonStageWeilForget D l hl Y₀ Ω)).ι ⋙
           IsoAlgebra.mapOfNatIso (zlFrobeniusSquare D l hl Ω f₀))
       (zlWeilPull_mem D l hl Ω f₀)
-
-/-- The actual common-stage Weil heart is abelian.
-Source: blueprint composition proof, abelian fixed-pair category
-(blueprint: def-zl-weil-ind-sheaf-category).
-Proof: geometric Frobenius is an exact autoequivalence of the constructible heart
-by constructible_pullback_t_exact and isomorphism inverse image. Form kernels and
-cokernels in that heart. Exactness transports their universal properties and hence
-induces invertible Frobenius structures. The same properties give the equivariant
-arrows and their universal properties. Images and coimages agree after forgetting,
-so the fixed-pair heart is abelian. No triangulation of fixed pairs is asserted. -/
-theorem zlWeilHeart_abelian (X₀ : Over (Spec (.of D.k₀)))
-    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
-    Nonempty (Abelian (sfCommonStageWeilSheaf D l hl X₀ Ω)) := by
-  sorry
-
-/-- The abelian structure on the recorded category, without changing its arrows.
-Source: blueprint composition proof, abelian fixed-pair category
-(blueprint: def-zl-weil-ind-sheaf-category). -/
-instance zlWeilHeartAbelian (X₀ : Over (Spec (.of D.k₀)))
-    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
-    Abelian (sfCommonStageWeilSheaf D l hl X₀ Ω) :=
-  (zlWeilHeart_abelian D l hl Ω X₀).some
 
 /-- Canonical pullback preserves the underlying constructible heart.
 Source: Bhatt--Scholze 6.8.11(3), blueprint composition proof
@@ -470,7 +454,73 @@ def zlSmallFrobenius (X₀ : Over (Spec (.of D.k₀)))
     zlSmallHeart D l Ω hl X₀ ⥤ zlSmallHeart D l Ω hl X₀ :=
   AsSmall.down ⋙ zlHeartFrobenius D l hl Ω X₀ ⋙ AsSmall.up
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem zlSmallPull_preservesFinite {X₀ Y₀ : Over (Spec (.of D.k₀))}
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :
+    PreservesFiniteLimits (zlSmallPull D l hl Ω f₀) ∧
+      PreservesFiniteColimits (zlSmallPull D l hl Ω f₀) := by
+  let : (D.geometricFiber X₀).left.Over (Spec (.of D.k)) :=
+    ⟨(D.geometricFiber X₀).hom⟩
+  let : LocallyOfFiniteType ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : (D.geometricFiber Y₀).left.Over (Spec (.of D.k)) :=
+    ⟨(D.geometricFiber Y₀).hom⟩
+  let : LocallyOfFiniteType ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd Y₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber Y₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact (pullback.snd Y₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  have hc := (constructible_pullback_t_exact D l hl Ω (Classical.arbitrary _)
+    (W := (D.geometricFiber X₀).left) (X := (D.geometricFiber Y₀).left)
+    (zlFiberMap D f₀)).2
+  dsimp only [ConstructibleCommonStagePullbackComparison] at hc
+  have hX : constructiblePullbackResidueUnits D l hl (D.geometricFiber X₀).left =
+      (fun x ↦ sfWeilPrimeInvertible D l hl X₀ x) := Subsingleton.elim _ _
+  have hY : constructiblePullbackResidueUnits D l hl (D.geometricFiber Y₀).left =
+      (fun y ↦ sfWeilPrimeInvertible D l hl Y₀ y) := Subsingleton.elim _ _
+  rw [hX, hY] at hc
+  obtain ⟨c⟩ := hc
+  let e : c.heart ≅ zlHeartPull D l hl Ω f₀ :=
+    (((sfCommonStageHeartProperty l
+      (D.geometricFiber X₀).left Ω).fullyFaithfulι).whiskeringRight _).preimageIso
+        (eqToIso c.heart_fac)
+  let : PreservesFiniteLimits c.heart := c.heart_limits
+  let : PreservesFiniteColimits c.heart := c.heart_colimits
+  let : PreservesFiniteLimits (zlHeartPull D l hl Ω f₀) :=
+    preservesFiniteLimits_of_natIso e
+  let : PreservesFiniteColimits (zlHeartPull D l hl Ω f₀) :=
+    preservesFiniteColimits_of_natIso e
+  let : (AsSmall.down : zlSmallHeart D l Ω hl Y₀ ⥤ _).IsEquivalence :=
+    inferInstanceAs (AsSmall.equiv (C := sfCommonStageHeart l
+      (D.geometricFiber Y₀).left Ω)).inverse.IsEquivalence
+  let : (AsSmall.up : _ ⥤ zlSmallHeart D l Ω hl X₀).IsEquivalence :=
+    inferInstanceAs (AsSmall.equiv (C := sfCommonStageHeart l
+      (D.geometricFiber X₀).left Ω)).functor.IsEquivalence
+  constructor
+  · change PreservesFiniteLimits
+      (AsSmall.down ⋙ zlHeartPull D l hl Ω f₀ ⋙ AsSmall.up)
+    let : PreservesFiniteLimits (zlHeartPull D l hl Ω f₀ ⋙
+        (AsSmall.up : _ ⥤ zlSmallHeart D l Ω hl X₀)) := comp_preservesFiniteLimits _ _
+    exact comp_preservesFiniteLimits _ _
+  · change PreservesFiniteColimits
+      (AsSmall.down ⋙ zlHeartPull D l hl Ω f₀ ⋙ AsSmall.up)
+    let : PreservesFiniteColimits (zlHeartPull D l hl Ω f₀ ⋙
+        (AsSmall.up : _ ⥤ zlSmallHeart D l Ω hl X₀)) := comp_preservesFiniteColimits _ _
+    exact comp_preservesFiniteColimits _ _
+
 section IndExtension
+-- Avoid backwards searches through arbitrarily factored Kan-extension functors.
+-- Restore these instances after the proofs using explicit preservation witnesses.
+attribute [-instance] Functor.hasLeftKanExtension_of_preserves
+attribute [-instance] Functor.hasPointwiseLeftKanExtension_of_preserves
+attribute [-instance] Functor.PreservesLeftKanExtension.preserves
 universe w
 variable {C B : Type w} [SmallCategory C] [SmallCategory B]
   [Abelian C] [Abelian B]
@@ -518,6 +568,165 @@ def zlIndMapIso (F : C ⥤ B) : Ind.yoneda ⋙ zlIndMap F ≅ F ⋙ Ind.yoneda :
   (asIso (Functor.leftKanExtensionUnit (Ind.yoneda (C := C))
     (F ⋙ Ind.yoneda))).symm
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem zlIndMap_isLeftKanExtension (F : C ⥤ B) :
+    (zlIndMap F).IsLeftKanExtension (zlIndMapIso F).inv := by
+  let := zlIndMap_hasLeftKanExtension F
+  change (Functor.leftKanExtension Ind.yoneda (F ⋙ Ind.yoneda)).IsLeftKanExtension
+    (Functor.leftKanExtensionUnit Ind.yoneda (F ⋙ Ind.yoneda))
+  infer_instance
+
+omit [Abelian C] in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem zlIndInclusion_isLeftKanExtension :
+    (Ind.inclusion C).IsLeftKanExtension (Ind.yonedaCompInclusion (C := C)).inv := by
+  apply Functor.LeftExtension.IsPointwiseLeftKanExtension.isLeftKanExtension
+    (E := Functor.LeftExtension.mk _ Ind.yonedaCompInclusion.inv)
+  intro X
+  let E := (CostructuredArrow.post Ind.yoneda (Ind.inclusion C) X).asEquivalence.trans
+    (CostructuredArrow.mapNatIso Ind.yonedaCompInclusion)
+  let h := (Presheaf.isColimitTautologicalCocone
+    ((Ind.inclusion C).obj X)).whiskerEquivalence E
+  apply IsColimit.ofIsoColimit h
+  exact Cocone.ext (Iso.refl _)
+
+attribute [local irreducible] zlIndMap zlIndMapIso
+
+omit [Abelian C] in
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem zlInd_preservesKan {E : Type*} [Category.{w} E]
+    (L : C ⥤ B) (H : Ind B ⥤ E) [PreservesFilteredColimits H] :
+    H.PreservesLeftKanExtension (L ⋙ Ind.yoneda) Ind.yoneda := by
+  let : H.PreservesPointwiseLeftKanExtension (L ⋙ Ind.yoneda) Ind.yoneda := by
+    intro X
+    let : PreservesColimitsOfShape (CostructuredArrow (Ind.yoneda (C := C)) X) H :=
+      PreservesFilteredColimitsOfSize.preserves_filtered_colimits _
+    let : PreservesColimit
+        (CostructuredArrow.proj (Ind.yoneda (C := C)) X ⋙ L ⋙ Ind.yoneda) H :=
+      PreservesColimitsOfShape.preservesColimit
+    exact Functor.preservesPointwiseLeftKanExtensionAtOfPreservesColimit _ _ _ X
+  let : Functor.HasPointwiseLeftKanExtension (Ind.yoneda (C := C))
+      (L ⋙ Ind.yoneda) := by
+    intro X
+    let : HasColimitsOfShape (CostructuredArrow (Ind.yoneda (C := C)) X)
+        (Ind B) := HasColimitsOfShape.of_small.{w, w} (Ind B) _
+    exact HasColimitsOfShape.has_colimit _
+  exact Functor.preservesPointwiseLKEOfHasPointwiseAndPreservesPointwise _ _ _
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private def zlIndMapCompInclusionIso (F : C ⥤ B) :
+    zlIndMap F ⋙ Ind.inclusion B ≅ Ind.inclusion C ⋙ F.op.lan := by
+  let H : (Cᵒᵖ ⥤ Type w) ⥤ Bᵒᵖ ⥤ Type w := F.op.lan
+  let : PreservesFilteredColimits (Ind.inclusion B) := ⟨fun _ _ _ ↦ inferInstance⟩
+  let : (Ind.inclusion B).PreservesLeftKanExtension (F ⋙ Ind.yoneda) Ind.yoneda :=
+    zlInd_preservesKan F _
+  let α := Functor.whiskerRight (zlIndMapIso F).inv (Ind.inclusion B) ≫
+    (Functor.associator _ _ _).hom
+  let : (zlIndMap F).IsLeftKanExtension (zlIndMapIso F).inv :=
+    zlIndMap_isLeftKanExtension F
+  let : (zlIndMap F ⋙ Ind.inclusion B).IsLeftKanExtension α :=
+    Functor.PreservesLeftKanExtension.preserves _ _
+  let β := (Ind.yonedaCompInclusion (C := C)).inv
+  let : (Ind.inclusion C).IsLeftKanExtension β := zlIndInclusion_isLeftKanExtension
+  let : PreservesColimitsOfSize.{w, w} H :=
+    (Functor.lanAdjunction F.op (Type w)).leftAdjoint_preservesColimits
+  let : Functor.HasPointwiseLeftKanExtension (Ind.yoneda (C := C))
+      (CategoryTheory.yoneda (C := C)) := by
+    intro X
+    let : HasColimitsOfShape (CostructuredArrow (Ind.yoneda (C := C)) X)
+        (Cᵒᵖ ⥤ Type w) := HasColimitsOfShape.of_small.{w, w} _ _
+    exact HasColimitsOfShape.has_colimit _
+  let : H.PreservesPointwiseLeftKanExtension (CategoryTheory.yoneda (C := C))
+      Ind.yoneda := by
+    intro X
+    let : PreservesColimitsOfShape (CostructuredArrow (Ind.yoneda (C := C)) X) H :=
+      PreservesColimitsOfSize.preservesColimitsOfShape
+    let : PreservesColimit
+        (CostructuredArrow.proj (Ind.yoneda (C := C)) X ⋙ CategoryTheory.yoneda) H :=
+      PreservesColimitsOfShape.preservesColimit
+    exact Functor.preservesPointwiseLeftKanExtensionAtOfPreservesColimit _ _ _ X
+  let : H.PreservesLeftKanExtension (CategoryTheory.yoneda (C := C)) Ind.yoneda :=
+    Functor.preservesPointwiseLKEOfHasPointwiseAndPreservesPointwise _ _ _
+  let γ := Functor.whiskerRight β H ≫ (Functor.associator _ _ _).hom
+  let : (Ind.inclusion C ⋙ H).IsLeftKanExtension γ :=
+    Functor.PreservesLeftKanExtension.preserves _ _
+  let e : (F ⋙ Ind.yoneda) ⋙ Ind.inclusion B ≅ CategoryTheory.yoneda ⋙ H :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft F (Ind.yonedaCompInclusion (C := B)) ≪≫
+      Functor.isoWhiskerLeft F uliftYonedaIsoYoneda.{w, w, w}.symm ≪≫
+      Presheaf.compULiftYonedaIsoULiftYonedaCompLan.{w} F ≪≫
+      Functor.isoWhiskerRight uliftYonedaIsoYoneda.{w, w, w} H
+  exact Functor.leftKanExtensionUniqueOfIso _ α e _ γ
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem zlIndMap_preservesFilteredColimits (F : C ⥤ B) :
+    PreservesFilteredColimits (zlIndMap F) := by
+  let H : (Cᵒᵖ ⥤ Type w) ⥤ Bᵒᵖ ⥤ Type w := F.op.lan
+  let : PreservesColimitsOfSize.{w, w} H :=
+    (Functor.lanAdjunction F.op (Type w)).leftAdjoint_preservesColimits
+  refine ⟨fun J _ _ ↦ ?_⟩
+  let : PreservesColimitsOfShape J H :=
+    PreservesColimitsOfSize.preservesColimitsOfShape
+  let : PreservesColimitsOfShape J (Ind.inclusion C) := inferInstance
+  let : PreservesColimitsOfShape J (Ind.inclusion C ⋙ H) :=
+    comp_preservesColimitsOfShape _ _
+  let : PreservesColimitsOfShape J (zlIndMap F ⋙ Ind.inclusion B) :=
+    preservesColimitsOfShape_of_natIso (zlIndMapCompInclusionIso F).symm
+  exact preservesColimitsOfShape_of_reflects_of_preserves (zlIndMap F) (Ind.inclusion B)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+omit [Abelian C] in
+private theorem zlIndMap_preservesKan {A : Type w} [SmallCategory A] [Abelian A]
+    (L : C ⥤ B) (G : B ⥤ A) :
+    (zlIndMap G).PreservesLeftKanExtension (L ⋙ Ind.yoneda) Ind.yoneda := by
+  let := zlIndMap_preservesFilteredColimits G
+  exact zlInd_preservesKan L _
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem zlIndMap_preservesFiniteLimits (F : C ⥤ B) [PreservesFiniteLimits F] :
+    PreservesFiniteLimits (zlIndMap F) := by
+  let H : (Cᵒᵖ ⥤ Type w) ⥤ Bᵒᵖ ⥤ Type w := F.op.lan
+  let : PreservesFiniteLimits H :=
+    lan_preservesFiniteLimits_of_preservesFiniteLimits (Type w) F
+  let : PreservesFiniteLimits (Ind.inclusion C ⋙ H) := comp_preservesFiniteLimits _ _
+  let : PreservesFiniteLimits (zlIndMap F ⋙ Ind.inclusion B) :=
+    preservesFiniteLimits_of_natIso (zlIndMapCompInclusionIso F).symm
+  exact preservesFiniteLimits_of_reflects_of_preserves _ (Ind.inclusion B)
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+private theorem zlIndMap_isLeftAdjoint (F : C ⥤ B) [PreservesFiniteColimits F] :
+    (zlIndMap F).IsLeftAdjoint := by
+  let R' : (Bᵒᵖ ⥤ Type w) ⥤ Cᵒᵖ ⥤ Type w :=
+    (Functor.whiskeringLeft Cᵒᵖ Bᵒᵖ (Type w)).obj F.op
+  have hR (K : Ind B) : IsIndObject ((Ind.inclusion B ⋙ R').obj K) := by
+    change IsIndObject (F.op ⋙ (Ind.inclusion B).obj K)
+    let : PreservesFiniteLimits F.op := preservesFiniteLimits_op F
+    let : PreservesFiniteLimits ((Ind.inclusion B).obj K) :=
+      (isIndObject_iff_preservesFiniteLimits _).mp (Ind.isIndObject_inclusion_obj K)
+    let : PreservesFiniteLimits (F.op ⋙ (Ind.inclusion B).obj K) :=
+      comp_preservesFiniteLimits _ _
+    exact (isIndObject_iff_preservesFiniteLimits _).mpr inferInstance
+  let R₀ := ObjectProperty.lift (IsIndObject (C := C)) (Ind.inclusion B ⋙ R') hR
+  let R := R₀ ⋙ (Ind.equivalence C).inverse
+  let eR : R ⋙ Ind.inclusion C ≅ Ind.inclusion B ⋙ R' :=
+    Functor.associator _ _ _ ≪≫
+      Functor.isoWhiskerLeft R₀ ((Ind.equivalence C).invFunIdAssoc (ObjectProperty.ι _))
+  let adj : zlIndMap F ⊣ R :=
+    (Functor.lanAdjunction F.op (Type w)).restrictFullyFaithful
+      (Ind.inclusion.fullyFaithful (C := C)) (Ind.inclusion.fullyFaithful (C := B))
+      (zlIndMapCompInclusionIso F).symm eR.symm
+  exact { exists_rightAdjoint := ⟨R, ⟨adj⟩⟩ }
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- A square descends uniquely to ind-objects with its given representable components.
 Source: SGA 4, XVII, sheaf resolutions; blueprint Frobenius equivariance
 (blueprint: def-zl-weil-ind-sheaf-category).
@@ -534,7 +743,57 @@ theorem zlIndSquare_existsUnique (L : C ⥤ B) (F : C ⥤ C) (G : B ⥤ B)
             (zlIndMapIso L).hom.app (F.obj A) =
           (zlIndMap G).map ((zlIndMapIso L).hom.app A) ≫
             (zlIndMapIso G).hom.app (L.obj A) ≫ Ind.yoneda.map (e.hom.app A) := by
-  sorry
+  let : (zlIndMap G).PreservesLeftKanExtension (L ⋙ Ind.yoneda) Ind.yoneda :=
+    zlIndMap_preservesKan L G
+  let : (zlIndMap L).PreservesLeftKanExtension (F ⋙ Ind.yoneda) Ind.yoneda :=
+    zlIndMap_preservesKan F L
+  let : (zlIndMap L).IsLeftKanExtension (zlIndMapIso L).inv :=
+    zlIndMap_isLeftKanExtension L
+  let : (zlIndMap F).IsLeftKanExtension (zlIndMapIso F).inv :=
+    zlIndMap_isLeftKanExtension F
+  let P := zlIndMap L ⋙ zlIndMap G
+  let Q := zlIndMap F ⋙ zlIndMap L
+  let αP := Functor.whiskerRight (zlIndMapIso L).inv (zlIndMap G) ≫
+    (Functor.associator _ _ _).hom
+  let αQ := Functor.whiskerRight (zlIndMapIso F).inv (zlIndMap L) ≫
+    (Functor.associator _ _ _).hom
+  let : P.IsLeftKanExtension αP :=
+    Functor.PreservesLeftKanExtension.preserves (zlIndMap L) (zlIndMapIso L).inv
+  let : Q.IsLeftKanExtension αQ :=
+    Functor.PreservesLeftKanExtension.preserves (zlIndMap F) (zlIndMapIso F).inv
+  let i : (L ⋙ Ind.yoneda) ⋙ zlIndMap G ≅ (F ⋙ Ind.yoneda) ⋙ zlIndMap L :=
+    Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft L (zlIndMapIso G) ≪≫
+      (Functor.associator _ _ _).symm ≪≫ Functor.isoWhiskerRight e Ind.yoneda ≪≫
+      Functor.associator _ _ _ ≪≫ Functor.isoWhiskerLeft F (zlIndMapIso L).symm ≪≫
+      (Functor.associator _ _ _).symm
+  let c := Functor.leftKanExtensionUniqueOfIso P αP i Q αQ
+  have hc (A : C) :
+      (zlIndMap G).map ((zlIndMapIso L).inv.app A) ≫
+          c.hom.app (Ind.yoneda.obj A) =
+        (zlIndMapIso G).hom.app (L.obj A) ≫ Ind.yoneda.map (e.hom.app A) ≫
+          (zlIndMapIso L).inv.app (F.obj A) ≫
+            (zlIndMap L).map ((zlIndMapIso F).inv.app A) := by
+    simpa [c, αP, αQ, i] using
+      Functor.descOfIsLeftKanExtension_fac_app P αP Q (i.hom ≫ αQ) A
+  have hc' (A : C) :
+      c.hom.app (Ind.yoneda.obj A) ≫
+          (zlIndMap L).map ((zlIndMapIso F).hom.app A) ≫
+          (zlIndMapIso L).hom.app (F.obj A) =
+        (zlIndMap G).map ((zlIndMapIso L).hom.app A) ≫
+          (zlIndMapIso G).hom.app (L.obj A) ≫ Ind.yoneda.map (e.hom.app A) := by
+    apply (cancel_epi ((zlIndMap G).map ((zlIndMapIso L).inv.app A))).mp
+    rw [← Category.assoc, hc A]
+    simp [Category.assoc, ← Functor.map_comp_assoc]
+  refine ⟨c, hc', ?_⟩
+  intro c' hc''
+  apply Iso.ext
+  apply Functor.hom_ext_of_isLeftKanExtension P αP
+  ext A
+  have h : c'.hom.app (Ind.yoneda.obj A) = c.hom.app (Ind.yoneda.obj A) := by
+    apply (cancel_mono ((zlIndMap L).map ((zlIndMapIso F).hom.app A) ≫
+      (zlIndMapIso L).hom.app (F.obj A))).mp
+    exact (hc'' A).trans (hc' A).symm
+  simp only [NatTrans.comp_app, Functor.whiskerLeft_app, h]
 
 /-- The ind-square with its normalized Yoneda components.
 Source: blueprint Frobenius equivariance
@@ -543,6 +802,11 @@ def zlIndSquare (L : C ⥤ B) (F : C ⥤ C) (G : B ⥤ B) (e : L ⋙ G ≅ F ⋙
   (zlIndSquare_existsUnique L F G e).exists.choose
 
 end IndExtension
+
+attribute [instance] Functor.hasLeftKanExtension_of_preserves
+attribute [instance] Functor.hasPointwiseLeftKanExtension_of_preserves
+attribute [instance] Functor.PreservesLeftKanExtension.preserves
+attribute [local irreducible] zlIndMap zlIndMapIso
 
 /-- The small presentation of the canonical Frobenius square.
 Source: blueprint Frobenius equivariance
@@ -681,6 +945,112 @@ private def zlWeilSmallPairsModel (X₀ : Over (Spec (.of D.k₀)))
       apply ObjectProperty.hom_ext
       rfl }
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
+/-- The actual common-stage Weil heart is abelian.
+Source: blueprint composition proof, abelian fixed-pair category
+(blueprint: def-zl-weil-ind-sheaf-category).
+Proof: constructible_pullback_t_exact makes Frobenius on the constructible heart
+exact. Transport it through AsSmall and apply the abelian fixed-pair construction
+for an exact endofunctor. The explicit fully faithful small-pair model is essentially
+surjective by lowering carriers and structure maps; transfer abelianness along
+this equivalence. No triangulation of fixed pairs is asserted. -/
+theorem zlWeilHeart_abelian (X₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
+    Nonempty (Abelian (sfCommonStageWeilSheaf D l hl X₀ Ω)) := by
+  let : (D.geometricFiber X₀).left.Over (Spec (.of D.k)) :=
+    ⟨(D.geometricFiber X₀).hom⟩
+  let : LocallyOfFiniteType ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (LocallyOfFiniteType (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let : QuasiCompact ((D.geometricFiber X₀).left ↘ Spec (.of D.k)) :=
+    inferInstanceAs (QuasiCompact (pullback.snd X₀.hom
+      (Spec.map (CommRingCat.ofHom (algebraMap D.k₀ D.k)))))
+  let := (sfCommonStageHeart_properties l (D.geometricFiber X₀).left Ω D hl).2.2.some
+  have hc := (constructible_pullback_t_exact D l hl Ω (Classical.arbitrary _)
+    (W := (D.geometricFiber X₀).left) (X := (D.geometricFiber X₀).left)
+    (D.geometricFrobenius X₀).hom).2
+  dsimp only [ConstructibleCommonStagePullbackComparison] at hc
+  have hX : constructiblePullbackResidueUnits D l hl (D.geometricFiber X₀).left =
+      (fun x ↦ sfWeilPrimeInvertible D l hl X₀ x) := Subsingleton.elim _ _
+  rw [hX] at hc
+  obtain ⟨c⟩ := hc
+  let e : c.heart ≅ zlHeartFrobenius D l hl Ω X₀ :=
+    (((sfCommonStageHeartProperty l
+      (D.geometricFiber X₀).left Ω).fullyFaithfulι).whiskeringRight _).preimageIso
+        (eqToIso c.heart_fac)
+  let : PreservesFiniteLimits c.heart := c.heart_limits
+  let : PreservesFiniteColimits c.heart := c.heart_colimits
+  let : PreservesFiniteLimits (zlHeartFrobenius D l hl Ω X₀) :=
+    preservesFiniteLimits_of_natIso e
+  let : PreservesFiniteColimits (zlHeartFrobenius D l hl Ω X₀) :=
+    preservesFiniteColimits_of_natIso e
+  let : (AsSmall.down : zlSmallHeart D l Ω hl X₀ ⥤ _).IsEquivalence :=
+    inferInstanceAs (AsSmall.equiv (C := sfCommonStageHeart l
+      (D.geometricFiber X₀).left Ω)).inverse.IsEquivalence
+  let : (AsSmall.up : _ ⥤ zlSmallHeart D l Ω hl X₀).IsEquivalence :=
+    inferInstanceAs (AsSmall.equiv (C := sfCommonStageHeart l
+      (D.geometricFiber X₀).left Ω)).functor.IsEquivalence
+  let : PreservesFiniteLimits (zlSmallFrobenius D l hl Ω X₀) := by
+    change PreservesFiniteLimits (AsSmall.down ⋙
+      zlHeartFrobenius D l hl Ω X₀ ⋙ AsSmall.up)
+    let : PreservesFiniteLimits (zlHeartFrobenius D l hl Ω X₀ ⋙
+        (AsSmall.up : _ ⥤ zlSmallHeart D l Ω hl X₀)) :=
+      comp_preservesFiniteLimits _ _
+    exact comp_preservesFiniteLimits _ _
+  let : PreservesFiniteColimits (zlSmallFrobenius D l hl Ω X₀) := by
+    change PreservesFiniteColimits (AsSmall.down ⋙
+      zlHeartFrobenius D l hl Ω X₀ ⋙ AsSmall.up)
+    let : PreservesFiniteColimits (zlHeartFrobenius D l hl Ω X₀ ⋙
+        (AsSmall.up : _ ⥤ zlSmallHeart D l Ω hl X₀)) :=
+      comp_preservesFiniteColimits _ _
+    exact comp_preservesFiniteColimits _ _
+  let : (zlSmallFrobenius D l hl Ω X₀).Additive :=
+    Functor.additive_of_preserves_binary_products _
+  let F := zlWeilSmallPairsModel D l hl Ω X₀
+  let ff : F.FullyFaithful :=
+    { preimage := fun g ↦ ObjectProperty.homMk (ObjectProperty.homMk
+        { f := g.hom.f.down.hom
+          h := congrArg (fun f ↦ f.down.hom) g.hom.h })
+      map_preimage := fun g ↦ by
+        apply ObjectProperty.hom_ext
+        apply Algebra.Hom.ext
+        apply ULift.ext
+        apply ObjectProperty.hom_ext
+        rfl
+      preimage_map := fun a ↦ by
+        apply ObjectProperty.hom_ext
+        apply ObjectProperty.hom_ext
+        apply Algebra.Hom.ext
+        rfl }
+  let : F.Full := ff.full
+  let : F.Faithful := ff.faithful
+  let : F.EssSurj := Functor.essSurj_of_surj (by
+    intro K
+    let A : sfCommonStageWeilSheaf D l hl X₀ Ω :=
+      ⟨IsoAlgebra.mk (AsSmall.down.obj K.carrier).obj
+        { hom := K.str.hom.down.hom
+          inv := K.str.inv.down.hom
+          hom_inv_id := congrArg (fun f ↦ f.down.hom) K.str.hom_inv_id
+          inv_hom_id := congrArg (fun f ↦ f.down.hom) K.str.inv_hom_id },
+        (AsSmall.down.obj K.carrier).property⟩
+    refine ⟨A, ?_⟩
+    rfl)
+  let : F.IsEquivalence := {}
+  let : Preadditive (sfCommonStageWeilSheaf D l hl X₀ Ω) :=
+    Preadditive.ofFullyFaithful ff
+  let : HasFiniteProducts (sfCommonStageWeilSheaf D l hl X₀ Ω) :=
+    ⟨fun _ ↦ Adjunction.hasLimitsOfShape_of_equivalence F⟩
+  exact ⟨abelianOfEquivalence F⟩
+
+/-- The abelian structure on the recorded category, without changing its arrows.
+Source: blueprint composition proof, abelian fixed-pair category
+(blueprint: def-zl-weil-ind-sheaf-category). -/
+instance zlWeilHeartAbelian (X₀ : Over (Spec (.of D.k₀)))
+    [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] :
+    Abelian (sfCommonStageWeilSheaf D l hl X₀ Ω) :=
+  (zlWeilHeart_abelian D l hl Ω X₀).some
+
 /-- Passage to the small presentation with literally the same carrier and Weil arrow.
 Source: blueprint fixed-pair convention
 (blueprint: def-zl-weil-ind-sheaf-category).
@@ -757,6 +1127,8 @@ def zlIndWeilPull {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (zlSmallFrobenius D l hl Ω Y₀) (zlSmallFrobenius D l hl Ω X₀)
     (zlSmallSquare D l hl Ω f₀))
 
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- Inverse image has a direct-image right adjoint.
 Source: SGA 4, XVII, compact-support construction
 (blueprint: def-zl-weil-ind-sheaf-category).
@@ -768,7 +1140,18 @@ theorem zlIndWeilPull_isLeftAdjoint {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
     [LocallyOfFiniteType Y₀.hom] [QuasiCompact Y₀.hom] (f₀ : X₀ ⟶ Y₀) :
     (zlIndWeilPull D l hl Ω f₀).IsLeftAdjoint := by
-  sorry
+  let := (zlSmallPull_preservesFinite D l hl Ω f₀).2
+  let L := zlIndMap (zlSmallPull D l hl Ω f₀)
+  let : L.IsLeftAdjoint := zlIndMap_isLeftAdjoint _
+  let := (zlIndFrobenius_exact D l hl Ω X₀).2.2.2
+  let := (zlIndFrobenius_exact D l hl Ω Y₀).2.2.2
+  let e := zlIndSquare (zlSmallPull D l hl Ω f₀)
+    (zlSmallFrobenius D l hl Ω Y₀) (zlSmallFrobenius D l hl Ω X₀)
+    (zlSmallSquare D l hl Ω f₀)
+  let adj := Adjunction.ofIsLeftAdjoint L
+  change (IsoAlgebra.mapOfNatIso e).IsLeftAdjoint
+  exact { exists_rightAdjoint := ⟨_,
+    ⟨IsoAlgebra.mapOfNatIsoAdjunction adj e (IsoAlgebra.mateIso adj e) rfl⟩⟩ }
 
 /-- Ordinary direct image, determined by its adjunction with the prescribed inverse image.
 Source: SGA 4, XVII, compact-support construction
@@ -816,6 +1199,9 @@ def zlIndWeilOpenShriek {X₀ Y₀ : Over (Spec (.of D.k₀))}
     [IsOpenImmersion j₀.left] :=
   letI := zlIndWeilPull_isRightAdjoint D l hl Ω j₀
   (zlIndWeilPull D l hl Ω j₀).leftAdjoint
+
+set_option backward.isDefEq.respectTransparency true in
+set_option backward.isDefEq.respectTransparency.types true in
 /-- The canonical ambient inverse image is exact.
 Source: Bhatt--Scholze 6.8.11(3); blueprint Frobenius equivariance
 (blueprint: def-zl-weil-ind-sheaf-category).
@@ -830,7 +1216,32 @@ theorem zlIndWeilPull_exact {X₀ Y₀ : Over (Spec (.of D.k₀))}
     (zlIndWeilPull D l hl Ω f₀).Additive ∧
       PreservesFiniteLimits (zlIndWeilPull D l hl Ω f₀) ∧
       PreservesFiniteColimits (zlIndWeilPull D l hl Ω f₀) := by
-  sorry
+  let : Preadditive (zlIndWeilHeart D l hl Ω Y₀) :=
+    (zlIndWeilHeartAbelian D l hl Ω Y₀).toPreadditive
+  let : Preadditive (zlIndWeilHeart D l hl Ω X₀) :=
+    (zlIndWeilHeartAbelian D l hl Ω X₀).toPreadditive
+  obtain ⟨hlim, hcolim⟩ := zlSmallPull_preservesFinite D l hl Ω f₀
+  let := hlim
+  let := hcolim
+  let L := zlIndMap (zlSmallPull D l hl Ω f₀)
+  let : PreservesFiniteLimits L := zlIndMap_preservesFiniteLimits _
+  let : L.IsLeftAdjoint := zlIndMap_isLeftAdjoint _
+  let : PreservesFiniteColimits L := inferInstance
+  obtain ⟨hXA, hXL, hXC, _⟩ := zlIndFrobenius_exact D l hl Ω X₀
+  obtain ⟨hYA, hYL, hYC, _⟩ := zlIndFrobenius_exact D l hl Ω Y₀
+  let := hXA
+  let := hXL
+  let := hXC
+  let := hYA
+  let := hYL
+  let := hYC
+  let : PreservesFiniteLimits (zlIndWeilPull D l hl Ω f₀) := by
+    change PreservesFiniteLimits (IsoAlgebra.mapOfNatIso _)
+    exact IsoAlgebra.preservesFiniteLimits_mapOfNatIso _
+  let : PreservesFiniteColimits (zlIndWeilPull D l hl Ω f₀) := by
+    change PreservesFiniteColimits (IsoAlgebra.mapOfNatIso _)
+    exact IsoAlgebra.preservesFiniteColimits_mapOfNatIso _
+  exact ⟨Functor.additive_of_preserves_binary_products _, inferInstance, inferInstance⟩
 
 /-- The adjoint open extension is exact.
 Source: SGA 4, XVII, extension by zero; blueprint compact-support construction
