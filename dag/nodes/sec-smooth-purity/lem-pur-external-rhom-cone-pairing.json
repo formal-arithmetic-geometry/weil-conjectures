@@ -31,90 +31,30 @@
  ],
  "proof": [
   {
-   "text": "The bounded flat complexes $E,H$ are K-flat by the bounded-above-flat lemma for sites. Choose K-injective representatives $I_K,I_L$ using existence of K-injective resolutions. The sections-model theorem gives $C_E=\\operatorname{Hom}^{\\bullet}_X(E,I_K)$ and $D_H=\\operatorname{Hom}^{\\bullet}_Y(H,I_L)$ as representatives of the two global derived Hom objects. Choose flat-term K-flat resolutions $U\\to C_E$, $V\\to D_H$, using the one-object ringed site for $A$-complexes. Constant sheaves are left adjoint to sections by the existing module-valued constant-sheaf node. The constant functor is exact by the constant-projection construction; as pullback from the point ringed topos it preserves flat-term K-flat complexes by the ringed-topos pullback theorem. Scheme inverse images have the same preservation property and are exact on constant-$A$ modules. Thus ordinary pullback computes the required derived pullbacks.",
+   "text": "Apply the global-evaluation flat-lift lemma separately to $(E,K)$ and $(H,L)$. It supplies the K-injective Hom models, flat-term K-flat resolutions $U,V$, evaluation maps and their required homotopy factorizations through $N_K,N_L$. Its pullback assertion applies to $a,b$.",
    "uses": [
-    "lem-pc-bounded-above-flat-kflat-site",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sfb-derived-internal-hom-sections-model",
-    "lem-pc-kflat-resolution",
-    "def-constructible-constant",
-    "def-kun-constant-projection-morphism",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "prop-weil-pbc-inverse-image-modules-exact"
+    "lem-pur-global-hom-evaluation-flat-lift"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 06YQ (lemma-bounded-flat-K-flat), 06YS (lemma-K-flat-resolution), 0G7E (lemma-pullback-K-flat), 08JA (lemma-section-RHom-over-U); section-internal-hom."
+    "place": "Assembly of the four extracted lemmas with lemma-RHom-triangulated; preserves original proof steps 1--10."
    }
   },
   {
-   "text": "Write $C=\\mathsf H_X(E,K)$ and $D=\\mathsf H_Y(H,L)$. Compose the derived global-sections counit with internal evaluation to obtain $\\mathrm{ev}_X:\\underline C_X\\otimes^L E\\to K$ and $\\mathrm{ev}_Y:\\underline D_Y\\otimes^L H\\to L$. The derived constant/sections adjunction is the one specified by the constant-projection node. Its composite with the closed tensor--Hom adjunction gives the bijection\n$$\\operatorname{Hom}_{D(A)}(Q,\\mathsf H_P(G,F))=\\operatorname{Hom}_{D(P,A)}(\\underline Q_P\\otimes^L G,F).$$\nUse it to define $\\lambda$ as the unique transpose of\n$$\\underline{C\\otimes^LD}_P\\otimes^L(a^{-1}E\\otimes^Lb^{-1}H)\\xrightarrow{\\chi}\n(a^{-1}\\underline C_X\\otimes^La^{-1}E)\\otimes^L(b^{-1}\\underline D_Y\\otimes^Lb^{-1}H)\n\\xrightarrow{a^{-1}\\mathrm{ev}_X\\otimes^Lb^{-1}\\mathrm{ev}_Y}F.$$\nHere $\\chi$ uses constant-complex pullback comparisons and moves $\\underline D$ past $a^{-1}E$ with the Koszul symmetry. Constants commute with inverse image degreewise, and strong-monoidal pullback supplies the tensor comparisons. These are derived arrows throughout.",
+   "text": "Define $\\lambda$ by the natural external-evaluation transpose lemma. Its adjunction and interchange are precisely those in the statement; that lemma also gives all four naturalities and both open-restriction squares. The lifted-chain-model lemma identifies its value for every choice in Step 1 with the displayed $(-1)^{sq}$ chain formula into a K-injective resolution of $T$. Thus the specified normalization is independent of choices.",
    "uses": [
-    "def-kun-constant-projection-morphism",
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-sfb-geometric-inverse-image-constant-module",
-    "lem-sfb-ringed-derived-monoidal-comparisons"
+    "lem-pur-external-evaluation-transpose-natural",
+    "lem-pur-lifted-external-evaluation-chain-model"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08J9 (lemma-internal-hom) and section-internal-hom: adjunction and evaluation; agent expansion of blueprint support comparison."
+    "place": "Assembly of the four extracted lemmas with lemma-RHom-triangulated; preserves original proof steps 1--10."
    }
   },
   {
-   "text": "The chain map $t_X:\\underline U_X\\otimes E\\to I_K$ sends $w\\otimes e$ to the evaluation of the image of $w$ in $C_E$. Its differential identity follows from $d(f)=d_If-(-1)^{|f|}fd_E$: the two terms containing $fd_E$ cancel in $t_Xd$. Thus the unsigned evaluation is a chain map. The tensor--Hom isomorphism and the constant-sheaf adjunction identify its localization with $\\mathrm{ev}_X$; likewise for $t_Y$. Its source is K-flat: for any acyclic $Z$, first $E\\otimes Z$ and then $\\underline U\\otimes(E\\otimes Z)$ are acyclic. Its terms are flat: tensor of two flat modules has exact tensor functor by composition, and in each total degree only finitely many terms occur because $E$ is bounded; finite sums preserve flatness. Likewise for $H$. Apply the new factorization lemma to $t_X,t_Y$, including its flat-terms clause, obtaining exactly $u,c_K,v,c_L$ in the statement. Their homotopy identities give $Q(c_K)Q(u)=Q(t_X)$ and $Q(c_L)Q(v)=Q(t_Y)$ after localization.",
-   "uses": [
-    "def-pur-hom-complex",
-    "lem-sc-derived-hom-tensor-total",
-    "def-constructible-constant",
-    "lem-sfb-derived-internal-hom-sections-model",
-    "def-pc-kflat-complex",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-pur-kflat-map-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Section 0A8X (section-hom-complexes), Tag 08J9 (lemma-internal-hom), Tag 0G7D (lemma-factor-through-K-flat)."
-   }
-  },
-  {
-   "text": "The pullbacks of $N_K,N_L$ are K-flat with flat terms. Their ordinary tensor $T$ therefore computes $F$ by the tensor-descent theorem. Choose $i:T\\to J$ K-injective. The composite\n$$\\underline{U\\otimes V}_P\\otimes(a^{-1}E\\otimes b^{-1}H)\\xrightarrow{\\chi}\na^{-1}(\\underline U_X\\otimes E)\\otimes b^{-1}(\\underline V_Y\\otimes H)\n\\xrightarrow{a^{-1}u\\otimes b^{-1}v}T\\xrightarrow{i}J$$\nis a chain map; the interchange contributes exactly $(-1)^{|z||e|}$. Uncurrying/currying gives the displayed chain map from $U\\otimes V$ to the global Hom complex. The latter represents the target by the sections-model theorem. The source represents $C\\otimes_A^LD$ since $U,V$ are K-flat. Under the canonical identifications, $Q(c_K)Q(u)=Q(t_X)$ and $Q(c_L)Q(v)=Q(t_Y)$ imply that its derived uncurrying is precisely the composite of Step 2: tensor these equalities with the derived tensor bifunctor and apply the natural pullback constraints. The adjunction bijection is injective, so this is $\\lambda$. This proves the normalization and independence of all lifts and resolutions. No inverse comparison from $a^{-1}I_K\\otimes b^{-1}I_L$ occurs.",
-   "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-sfb-derived-internal-hom-sections-model",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "def-kun-constant-projection-morphism",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0G7E, 0G7D, 0A90, 08J9; section-hom-complexes. Agent construction of a valid model for the transpose."
-   }
-  },
-  {
-   "text": "The composite in Step 2 is contravariantly natural in $E,H$ and covariantly natural in $K,L$: these are the four naturalities of evaluation and tensor. The adjunction bijection is natural, so its transposes have the same naturalities. For an open restriction of $X$ (or $Y$), use the induced restriction of $P$. Restriction commutes with internal Hom by the exact-restriction theorem, and it commutes with the constant complex and the monoidal pullbacks. The map on global Hom is induced by restriction of global morphisms in the sections model. On an evaluation $f(e)$ its restriction is $(f|)(e|)$; consequently the two uncurried restriction composites agree. Their transposes agree by injectivity of the same bijection. This proves the specified restriction square, without making a natural choice of $u$ or $v$.",
-   "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "def-kun-constant-projection-morphism",
-    "lem-sfb-derived-internal-hom-sections-model",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-sfb-ringed-derived-monoidal-comparisons",
-    "lem-sfb-geometric-inverse-image-constant-module"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08JB (lemma-restriction-RHom-to-U), 08J9, 0A90; evaluation naturality."
-   }
-  },
-  {
-   "text": "For fixed $H,K,L$, both $A(E)=\\mathsf H_X(E,K)\\otimes_A^L\\mathsf H_Y(H,L)$ and $B(E)=\\mathsf H_P(a^{-1}E\\otimes_A^Lb^{-1}H,F)$ are exact contravariant functors. Indeed internal Hom is contravariantly exact, right-derived global sections is triangulated, exact module inverse image is triangulated, and derived tensor is exact in each variable with its canonical shift comparisons. These assertions apply in the ambient unbounded categories; the bounded hypotheses in the item are more than enough for the Hom models. The same reasoning gives exact contravariant functors of $H$ when $E$ is fixed. It remains to show that the natural transformation of Step 5 commutes with their shift comparisons; mere naturality does not imply that. Steps 7--9 check this on the valid model of Step 4.",
+   "text": "For fixed $H$, put $A(E)=\\mathsf H_X(E,K)\\otimes_A^L\\mathsf H_Y(H,L)$ and $B(E)=\\mathsf H_P(a^{-1}E\\otimes_A^Lb^{-1}H,F)$. Internal Hom is contravariantly exact, right-derived sections is triangulated, exact inverse image induces a triangulated functor, and derived tensor is exact in each variable. Hence $A,B$ are exact contravariant functors with their canonical shifts; likewise in $H$.",
    "uses": [
     "lem-weil-pbc-ringed-internal-hom-exact-restriction",
     "lem-pc-right-derived-functor-triangulated",
@@ -125,90 +65,43 @@
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC (lemma-RHom-triangulated); derived tensor and right-derived-functor exactness."
+    "place": "Assembly of the four extracted lemmas with lemma-RHom-triangulated; preserves original proof steps 1--10."
    }
   },
   {
-   "text": "For any complex $B$ and K-injective $I$, the first-variable Hom shift is the chain isomorphism\n$$\\theta_B:\\operatorname{Hom}^{\\bullet}(B[1],I)\\longrightarrow\\operatorname{Hom}^{\\bullet}(B,I)[-1],\\qquad\n(\\theta_B f)^p=(-1)^n f^{p-1}\\quad(|f|=n).$$\nSubstitution in $df=d_If-(-1)^nfd_B$, with $d_{B[1]}=-d_B$, proves the chain identity: both sides have components $(-1)^{n+1}d_If-fd_B$. For the representative $U\\to C_E$, use $U[-1]\\to C_{E[1]}$ defined by $\\theta_E^{-1}$ after the shifted resolution map. On the source of evaluation, the map $\\eta: \\underline{U[-1]}\\otimes E[1]\\to\\underline U\\otimes E$ sends $w\\otimes e$ to $(-1)^r w\\otimes e$ for $w\\in U[-1]^r$. Its two differential components are $(-1)^r d_Uw\\otimes e$ and $-w\\otimes d_Ee$, so it is a chain map. The shifted evaluation is exactly $t_X\\eta$. Therefore $u'=u\\eta$ and the same $c_K,N_K$ factor this evaluation up to homotopy. Use the identical construction with $V,H,v$ for the second variable. These choices let all shift computations land in the same K-flat tensor $T$ and the same $J$.",
+   "text": "Use the common shifted lifts and Hom shift of the chain-model lemma. On $P$, apply the two-shift-squares lemma to the pulled-back lifts and $i:T\\to J$. Its two chain identities give $s_B\\lambda_{E[1]}=\\lambda_E[-1]s_A$ and its $H$ analogue after localization. The comparisons have no sign for the right tensor shift and $(-1)^{\\deg(x)}$ for the left tensor shift, as required.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sfb-derived-internal-hom-sections-model",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction"
+    "lem-pur-lifted-external-evaluation-chain-model",
+    "lem-pur-external-evaluation-two-shift-squares"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Sections 0A8X and 08J7, Tag 08JC: explicit Hom shift and evaluation signs."
+    "place": "Assembly of the four extracted lemmas with lemma-RHom-triangulated; preserves original proof steps 1--10."
    }
   },
   {
-   "text": "For the $E$ shift use $w\\in U[-1]^r$, $z\\in V^s$, $e\\in E[1]^q=E^{q+1}$ and $h\\in H$. In the Step-4 formula for $E[1]$, interchange contributes $(-1)^{sq}$ and the shifted lift $u'$ contributes $(-1)^r$. The coefficient identification $E[1]\\otimes H\\cong(E\\otimes H)[1]$ has no sign. Applying $\\theta_{E\\otimes H}$ to the output Hom map adds $(-1)^{r+s}$, leaving total sign $(-1)^{sq+s}$. In the other composite the source identification $U[-1]\\otimes V\\cong(U\\otimes V)[-1]$ has no sign. The unshifted Step-4 pairing, now evaluated on $e$ of degree $q+1$, has sign $(-1)^{s(q+1)}$. These agree. In both cases the unsigned value is the same $i(a^{-1}u(w\\otimes e)\\otimes b^{-1}v(z\\otimes h))$. The equality holds as chain maps on the tensor summands and hence after localization. This is the shift square for $E$, with the right-tensor shift comparison stated in the item.",
+   "text": "For $E_2\\to E_1\\to E_0\\xrightarrow dE_2[1]$, Step 2 gives the first two naturality squares and $B(d)\\lambda_{E_2[1]}=\\lambda_{E_0}A(d)$. Shift the latter equality by $[1]$ and substitute Step 4. Since the connecting maps are the shifted maps on $d$ composed with inverse shift comparisons, this gives $\\delta_B\\lambda_{E_2}=\\lambda_{E_0}[1]\\delta_A$; the common contravariant rotation sign cancels. The same deduction in $H$ gives its connecting square. Thus the specified maps, including the cone components, form both triangle morphisms.",
    "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pur-sheaf-tensor-product"
+    "def-weil-triangulated-category"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A90 and 08JC; agent calculation on the K-flat lifted evaluation model."
-   }
-  },
-  {
-   "text": "For the $H$ shift use $w\\in U^r$, $z\\in V[-1]^s$, $e\\in E^q$ and $h\\in H[1]$. Interchange contributes $(-1)^{sq}$ and $v'=v\\eta$ adds $(-1)^s$. Identifying the coefficient $E\\otimes H[1]$ with $(E\\otimes H)[1]$ contributes $(-1)^q$ when precomposing the Hom map with the inverse tensor-shift map. Applying the target Hom shift adds $(-1)^{r+s}$. Thus this composite has sign $(-1)^{sq+q+r}$. In the other composite the source identification $U\\otimes V[-1]\\cong(U\\otimes V)[-1]$ contributes $(-1)^r$. The unshifted pairing has second Hom-input degree $s-1$, and contributes $(-1)^{(s-1)q}$. Its total sign is again $(-1)^{sq+q+r}$ and its unsigned value is the same element of $J$. The tensor-shift map is a chain map by substituting $d(x\\otimes y)=dx\\otimes y+(-1)^{|x|}x\\otimes dy$; its sign is $(-1)^{|x|}$ for either shift $[1]$ or $[-1]$. This proves the second-variable shift square on a model of $F$, including precisely the left-tensor sign in the statement.",
-   "uses": [
-    "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sc-derived-hom-tensor-total",
-    "lem-weil-pbc-site-derived-tensor-descent",
-    "def-pur-sheaf-tensor-product"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 0A90 and 08JC; agent calculation on the same K-flat target as Step 8."
-   }
-  },
-  {
-   "text": "Apply the exact functors $A,B$ of Step 6 to $E_2\\to E_1\\to E_0\\xrightarrow d E_2[1]$. Naturality of $\\lambda$ gives the squares for the first two arrows. For clarity write $s_A:A(E[1])\\cong A(E)[-1]$, and similarly $s_B$. The shift square proved in Step 8 is $s_B\\lambda_{E[1]}=\\lambda_E[-1]s_A$. Naturality at $d$ is $B(d)\\lambda_{E_2[1]}=\\lambda_{E_0}A(d)$. Shift this equality by $[1]$ and substitute the shift square. This gives $\\delta_B\\lambda_{E_2}=\\lambda_{E_0}[1]\\delta_A$, because each connecting map is the shifted map on $d$ composed with its inverse shift comparison (with the same conventional contravariant rotation sign on both sides). Thus the connecting square commutes for the specified cone component, not just some completion of two squares. Applying Step 9 and the same argument to a triangle in $H$ proves the other assertion. No change of representatives is required in this deduction; naturality and the already-proved shift identities are equalities in the derived categories.",
-   "uses": [
-    "def-weil-triangulated-category",
-    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
-    "lem-weil-pbc-ringed-projection-mate-exact"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 08JC and the canonical contravariant Hom triangle; agent deduction of both connecting squares."
+    "place": "Assembly of the four extracted lemmas with lemma-RHom-triangulated; preserves original proof steps 1--10."
    }
   }
  ],
  "proof_deps": [
-  "def-constructible-constant",
-  "def-kun-constant-projection-morphism",
-  "def-pc-kflat-complex",
-  "def-pc-tensor-complex-sheaves",
-  "def-pur-hom-complex",
-  "def-pur-sheaf-tensor-product",
   "def-weil-triangulated-category",
-  "lem-pc-bounded-above-flat-kflat-site",
-  "lem-pc-kflat-resolution",
   "lem-pc-right-derived-functor-triangulated",
-  "lem-pur-kflat-map-factorization",
-  "lem-sc-derived-hom-tensor-total",
+  "lem-pur-external-evaluation-transpose-natural",
+  "lem-pur-external-evaluation-two-shift-squares",
+  "lem-pur-global-hom-evaluation-flat-lift",
+  "lem-pur-lifted-external-evaluation-chain-model",
   "lem-sf-exact-functor-derived-triangulated",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sfb-derived-internal-hom-sections-model",
-  "lem-sfb-geometric-inverse-image-constant-module",
-  "lem-sfb-ringed-derived-monoidal-comparisons",
   "lem-weil-pbc-ringed-internal-hom-exact-restriction",
   "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-site-derived-tensor-descent",
-  "prop-pur-kinjective-resolutions-exist",
   "prop-weil-pbc-inverse-image-modules-exact"
  ],
  "proof_origin": {
@@ -275,51 +168,15 @@
   "is": null
  },
  "split_report": {
-  "date": "2026-10-18",
+  "date": "2026-10-21",
   "item": "lem-pur-external-rhom-cone-pairing",
   "worker": "stage1",
-  "summary": "STATEMENT-DISPUTED normalization repaired: use K-flat resolutions of both global Hom complexes and homotopy factorizations of their evaluation maps through K-flat targets (Stacks 0G7D). The lifted Koszul chain pairing now lands in a genuine model of F. Both shift squares are checked on that model, and naturality at the connecting arrow proves both boundary squares. Withdraw the duplicate constant/sections leaf in favor of def-constructible-constant; declare every generic off-unit tool.",
+  "summary": "Human-requested re-split: four independently stated, searched, unsplit argument nodes distribute old steps 1+3, 2+5, 4+7 and 8+9. The unchanged item keeps exactness (old step 6) and the explicit connecting-square deduction (old step 10). Full old arguments and allocation are retained verbatim in report.md; no statement or Lean record is changed.",
   "blueprint": "Realizes lem-pur-kunneth-supported proof paragraphs 1 and 3: the support-triangle tensor comparison and Hom-evaluation identification, with the external RHom cone pairing expanded from the Hom-complex constructions.",
   "tool_uses": [
    {
-    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
-    "why": "Coherent symmetric monoidal pullback constraints used to define the transpose and compare its chain model; generic infrastructure absent from this unit."
-   },
-   {
-    "node": "lem-sfb-geometric-inverse-image-constant-module",
-    "why": "Constants commute with geometric inverse image, degreewise for complexes; generic infrastructure, not a replacement of a purity step."
-   },
-   {
-    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "why": "The tensor--internal-Hom adjunction and its natural evaluation counit on a small ringed site; no node of this unit supplies it."
-   },
-   {
     "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
     "why": "Internal Hom exactness, restriction and its signed shift identification; generic infrastructure needed for coefficient triangles."
-   },
-   {
-    "node": "lem-sfb-derived-internal-hom-sections-model",
-    "why": "Represent D(A)-valued global Hom by global Hom complexes into K-injectives, including all shifts."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "why": "K-flat flat-term complexes remain so under pullback; computes the model T of F and the constant evaluation domains."
-   },
-   {
-    "node": "lem-weil-pbc-site-derived-tensor-descent",
-    "why": "The actual ordinary tensors of K-flat representatives and maps model the derived tensor and its comparisons."
-   },
-   {
-    "node": "lem-pc-bounded-above-flat-kflat-site",
-    "why": "Bounded flat coefficient complexes are K-flat on sites; no ringed-space specialization is used."
-   },
-   {
-    "node": "lem-pc-kflat-resolution",
-    "why": "Resolve the two global Hom A-complexes by K-flat complexes with flat terms."
-   },
-   {
-    "node": "lem-sc-derived-hom-tensor-total",
-    "why": "The chain tensor--Hom adjunction needed to transpose the honest lifted evaluation into J."
    },
    {
     "node": "lem-pc-right-derived-functor-triangulated",
@@ -336,10 +193,6 @@
    {
     "node": "lem-weil-pbc-ringed-projection-mate-exact",
     "why": "Derived tensor is exact in both variables with its canonical shift constraints."
-   },
-   {
-    "node": "prop-pur-kinjective-resolutions-exist",
-    "why": "Existence of K-injective representatives and the Grothendieck module category used for the flat evaluation domains."
    }
   ]
  },
@@ -361,12 +214,12 @@
   "prop-pur-kinjective-resolutions-exist"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q110-0ba5b2d35",
-  "group": "Q110",
+  "reviewer": "NT-cc-Q87-e849f5f2d",
+  "group": "Q87",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-0ba5b2d35 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full, every cited statement, Stacks 0G7D and 08JC, and the blueprint proof of lem-pur-kunneth-supported. Nothing needed fixing. The old raw normalization through a^{-1}I_K⊗b^{-1}I_L really was false: Q/Z is an injective Z-module and Q/Z⊗Q/Z=0, but Q/Z⊗^L Q/Z=Q/Z[1]. The correction keeps every hypothesis and every naturality, cone-term and shift-sign clause, and changes only the chain model: K-flat lifts of the evaluations by 0G7D, then T=a^{-1}N_K⊗b^{-1}N_L, which represents F, resolved by a K-injective J. I recomputed the evaluation chain-map identity, the Hom shift theta, eta and t_Xeta=theta^{-1}-evaluation. The E-shift signs agree (sq+s on both sides), the H-shift signs agree (sq+q+r on both sides), and the Step-10 connecting-square algebra holds. Step 4's identification with the transpose follows from Q(c)Q(u)=Q(t) and injectivity of the adjunction bijection. The new node lem-pur-kflat-map-factorization states 0G7D clause for clause, including the flat-terms clause and the homotopy formula. It is statement-only, self-contained and unsplit, and is not a duplicate: lem-weil-pbc-site-derived-tensor-descent cites 0G7D in its source but states something else, and the blueprint has no match. I accept all 15 declared generic tool_uses, and every tag/label pair matches tags/tags. No SGA is cited. Notes for the maintainer: step 6 of the parent lem-pur-supported-product-localization has a stale degreewise sentence; steps 7 and 8 of the parent use only the transpose and the triangle morphism, which still hold. The item's unit (sk-prop-a1-kummer) is inherited metadata, while its blueprint ancestor is in sk-prop-an."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q87-e849f5f2d (reviewer sub-agent of L); spot-checked: Re-split matches the human note of 2026-10-21. Four new statement-only nodes of comparable size carry old steps 1+3 (global-hom-evaluation-flat-lift), 2+5 (external-evaluation-transpose-natural), 4+7 (lifted-external-evaluation-chain-model) and 8+9 (external-evaluation-two-shift-squares). The item keeps old step 6 (exactness, same 5 generic tool uses, accepted) and old step 10 (connecting-square deduction) as a 2014-character assembly. The item statement, deps and lean records are identical to live. I compared this against the live 10-step proof: no argument was shortened or dropped. I recomputed the mathematics: the t chain map, K-flat flat-term source, 0G7D (sites-cohomology l.3418) with its flat-terms clause, 0G7E pullback, the curry chain map, the Koszul (-1)^{sq}, θ_B chain iso, η chain map, θ^{-1}α[-1] evaluation = t_Xη, the E-shift sign sq+s on both sides and the H-shift sign sq+q+r on both sides. The transpose bijection and restriction square follow from 08J9/08JA/08JB, valid unbounded. Duplicate search (hom-complex-shift-left/right, derived-internal-hom-shift-*, sfb-hom-kflat-chain-transpose, sfb-hom-flat-evaluation-roof, sp-flat-coefficient-chain-transpose, pc-kinjective-scheme-evaluation-models, pur-kflat-map-factorization) found tools only, no duplicates. No new node restates the item. The item is not on the dropped list and has no parallel supersession. No SGA; all Stacks tag/label pairs match. No fixes."
  },
  "lean": {
   "module": "Sheaf.Paper.ExternalRHomConePairing",

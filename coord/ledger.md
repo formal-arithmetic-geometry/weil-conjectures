@@ -21051,3 +21051,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:15 L: merged deliver/Q26/lem-pur-comparison-direct-image-resolution-mate (reviewer PASS; first push; new nodes: 0)
 - 08:15 L: merged deliver/Q34/lem-sfb-exact-scalar-periodic-resolution (reviewer PASS; first push; new nodes: 0)
 - 08:15 L: merged deliver/Q99/lem-weil-isomorphism-comparison-scalar-extension (reviewer PASS; after a return; new nodes: 2)
+- 08:15 L: merged deliver/Q87/lem-pur-external-rhom-cone-pairing (reviewer PASS; after a return; new nodes: 4)
