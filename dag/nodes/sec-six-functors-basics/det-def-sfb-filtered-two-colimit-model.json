@@ -18,16 +18,18 @@
  ],
  "proof": [
   {
-   "text": "For fixed $a=(i,x)$ and $b=(j,y)$ write $J_{ab}=\\{k\\in I:i\\le k,\\ j\\le k\\}$. This is a set, is nonempty by directedness, and any two of its elements have an upper bound still in $J_{ab}$. Its category has at most one arrow between any two objects, so parallel arrows are already equal. Thus it is a small filtered category. For $k\\le n\\le p$, put $A_{a;k,n}=\\tau_{ikn,x}$ and $A_{b;k,n}=\\tau_{jkn,y}$. The cocycle axiom says\n$$A_{b;n,p}T_{np}(A_{b;k,n})=A_{b;k,p}\\tau_{knp,T_{jk}y},$$\nwith the analogous identity for $a$. Consequently\n$$t_{np}(t_{kn}(g))=A_{b;k,p}\\tau_{knp,T_{jk}y}\\,T_{np}T_{kn}(g)\\,\\tau_{knp,T_{ik}x}^{-1}A_{a;k,p}^{-1}=A_{b;k,p}T_{kp}(g)A_{a;k,p}^{-1}=t_{kp}(g),$$\nwhere the middle equality is naturality of $\\tau_{knp}$. Normalization gives $t_{kk}(g)=g$. Hence the displayed Hom sets and transition maps form a diagram of sets indexed by $J_{ab}$.",
-   "uses": [],
-   "elementary": true,
+   "text": "For $a=(i,x),b=(j,y)$ the set $J_{ab}=\\{k:i,j\\le k\\}$ is nonempty by directedness. Two elements have a common upper bound still in it, and parallel arrows are equal by thinness; hence it is small and filtered. Apply [lem-sfb-coherent-hom-transition-laws] to the given normalization and pentagon: its $H_k(a,b)$ and $t^{ab}_{kn}$ are exactly the displayed Hom diagram.",
+   "uses": [
+    "lem-sfb-coherent-hom-transition-laws"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
-    "place": "The colimit is filtered: index category and transition laws"
+    "place": "The colimit is filtered: index and transition laws"
    }
   },
   {
-   "text": "For fixed objects use Mathlib Functor.ColimitType for the Hom diagram, the quotient of the sigma type by the generating transition relation. Functor.ιColimitType_map proves compatibility of the classes. For any cocone on the ULift-valued diagram, descend the map (k,g) ↦ ι_k(ULift.up g) by Quot.lift; cocone naturality respects the generating relation. Factorization is definitional and uniqueness follows by quotient induction. This proves homCocone_isColimit and realizes [def-weil-pbc-category-colimit]. With the filteredness of the common-stage preorder from step 1, Functor.ιColimitType_eq_iff_of_isFiltered gives the common-stage equality criterion directly on this quotient, realizing [lem-weil-pbc-filtered-colimit-sets-elementwise] without a further ULift comparison.",
+   "text": "Take the quotient of the disjoint union of this diagram by its generating transitions. Its classes respect transitions. Any compatible family of maps descends by quotient elimination; its factorization is the prescribed map on each representative and uniqueness follows by quotient induction. This is the universal property in [def-weil-pbc-category-colimit] (lift all stage sets to a common universe if necessary). By [lem-weil-pbc-filtered-colimit-sets-elementwise], every class has a representative and two representatives agree precisely when their transitions agree at a common later stage.",
    "uses": [
     "def-weil-pbc-category-colimit",
     "lem-weil-pbc-filtered-colimit-sets-elementwise"
@@ -35,66 +37,43 @@
    "elementary": true,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
-    "place": "The colimit is filtered: set colimit and equality of classes; Stacks Tag 04AX, section-directed-colimits"
+    "place": "The colimit is filtered: set colimit; Stacks Tag 04AX"
    }
   },
   {
-   "text": "For three fixed objects $a=(i,x)$, $b=(j,y)$, $c=(l,z)$ and a stage $m$ above all three indices, write $g_m:T_{im}x\\to T_{jm}y$ and $h_m:T_{jm}y\\to T_{lm}z$. For $m\\le p$, direct cancellation of the middle isomorphisms gives\n$$t^{ac}_{mp}(h_mg_m)=\\tau_{lmp,z}T_{mp}(h_mg_m)\\tau_{imp,x}^{-1}=\\bigl(\\tau_{lmp,z}T_{mp}(h_m)\\tau_{jmp,y}^{-1}\\bigr)\\bigl(\\tau_{jmp,y}T_{mp}(g_m)\\tau_{imp,x}^{-1}\\bigr)=t^{bc}_{mp}(h_m)t^{ab}_{mp}(g_m).$$\nHere the superscripts specify the pair of objects determining $t$. Likewise $t^{aa}_{mp}(\\mathrm{id}_{T_{im}x})=\\mathrm{id}_{T_{ip}x}$, because a functor preserves identities and conjugating an identity by an isomorphism gives an identity.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
-    "place": "Composition: transition maps preserve composable products and identities"
-   }
-  },
-  {
-   "text": "The helper compAt_transition moves a product to a later stage using steps 1 and 3 and homClass_transition. For two upper bounds m and n choose p above both. Moving each product to p proves compRepresentative_eq_compAt. To descend composition by Quot.liftOn₂ it suffices to respect the generating transition relation separately in each input. Choose a stage above the other input and the later representative; homTransition_comp identifies the two transported inputs there. This proves compRepresentative_rel_right and compRepresentative_rel_left without needing the full eventual-equality criterion.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
-    "place": "Composition: independence of the common stage and representatives"
-   }
-  },
-  {
-   "text": "For three composable classes choose one stage above their three representative stages. By step 4 both bracketings of their composite are represented there by the two bracketings of the same three morphisms in that stage category, and are equal by its associativity. For $a=(i,x)$, normalization $T_{ii}=\\mathrm{Id}$ makes $[i,\\mathrm{id}_x]$ a morphism $a\\to a$; at every later stage $m$ it is represented by $\\tau_{iim,x}T_{im}(\\mathrm{id}_x)\\tau_{iim,x}^{-1}=\\mathrm{id}_{T_{im}x}$. Thus left and right composition with it reduce to the identity laws at a common stage. The pair objects, Hom sets, composition, and identities now define an ordinary category.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
-    "place": "Composition: associativity and identity laws"
-   }
-  },
-  {
-   "text": "For a representative $g\\in H_k$ the map $P_k(g)=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}$ has source $\\Phi_i(x)$ and target $\\Phi_j(y)$ by [det-def-sfb-filtered-two-colimit-cocone]. For $k\\le n$, cocone compatibility, applied to $i\\le k\\le n$ and $j\\le k\\le n$, gives\n$$\\theta_{in,x}^{-1}=\\Phi_n(\\tau_{ikn,x})\\theta_{kn,T_{ik}x}^{-1}\\theta_{ik,x}^{-1},\\qquad\n\\theta_{jn,y}=\\theta_{jk,y}\\theta_{kn,T_{jk}y}\\Phi_n(\\tau_{jkn,y})^{-1}.$$\nSubstitute these and $t_{kn}(g)=\\tau_{jkn,y}T_{kn}(g)\\tau_{ikn,x}^{-1}$. The two pairs of inverse $\\Phi_n(\\tau)$ factors cancel, and naturality of the cocone isomorphism $\\theta_{kn}:\\Phi_nT_{kn}\\Rightarrow\\Phi_k$ gives\n$$P_n(t_{kn}(g))=\\theta_{jk,y}\\theta_{kn,T_{jk}y}\\Phi_nT_{kn}(g)\\theta_{kn,T_{ik}x}^{-1}\\theta_{ik,x}^{-1}=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}=P_k(g).$$\nThe private helper mapHomRepresentative_transition proves this calculation directly from cocone compatibility and naturality. Thus the formula respects each generating transition relation, and Quot.liftOn descends it to all classes without using the full eventual-equality criterion.",
+   "text": "Use [lem-sfb-directed-hom-quotient-composition] with labels $O=\\coprod_i\\operatorname{Ob}(\\mathcal C_i)$, $r(i,x)=i$, stage products the compositions in $\\mathcal C_k$, and $e_{(i,x),k}=\\mathrm{id}_{T_{ik}x}$. The transition and product/identity hypotheses are supplied by step 1; the stage associative and unit laws hold in $\\mathcal C_k$. Its quotient is step 2's Hom set, so the lemma supplies precisely the displayed common-stage composite, its independence in both inputs and upper stage, associativity, and both units. Normalization identifies its unit with $[i,\\mathrm{id}_x]$.",
    "uses": [
-    "det-def-sfb-filtered-two-colimit-cocone"
+    "lem-sfb-directed-hom-quotient-composition"
    ],
-   "elementary": true,
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
-    "place": "The comparison functor: types, compatibility, naturality and descent to classes"
+    "place": "Composition: descent and category laws"
    }
   },
   {
-   "text": "Set $\\Phi(i,x)=\\Phi_i(x)$ on objects. Normalization and functoriality of $\\Phi_i$ give $\\Phi([i,\\mathrm{id}_x])=\\theta_{ii,x}\\Phi_i(\\mathrm{id}_x)\\theta_{ii,x}^{-1}=\\mathrm{id}_{\\Phi_i(x)}$. For a composable pair use step 4 to represent both morphisms at one stage $m$, say $g_m:T_{im}x\\to T_{jm}y$ and $h_m:T_{jm}y\\to T_{lm}z$. Step 6 allows their images to be computed at $m$, and\n$$\\Phi([m,h_m])\\Phi([m,g_m])=\\theta_{lm,z}\\Phi_m(h_m)\\theta_{jm,y}^{-1}\\theta_{jm,y}\\Phi_m(g_m)\\theta_{im,x}^{-1}=\\theta_{lm,z}\\Phi_m(h_mg_m)\\theta_{im,x}^{-1}=\\Phi([m,h_mg_m]).$$\nThis proves that the comparison assignment is a functor.",
-   "uses": [],
-   "elementary": true,
+   "text": "By [lem-sfb-coherent-cocone-evaluation-invariant], the displayed $P_k(g)=\\theta_{jk,y}\\Phi_k(g)\\theta_{ik,x}^{-1}$ respects every generating transition relation. Quotient elimination therefore gives a map on each Hom set. On objects put $\\Phi(i,x)=\\Phi_i(x)$. The lemma's diagonal identity equation proves preservation of identities. Represent a composable pair at a common stage as permitted by step 3; its same-stage product equation and transition invariance prove preservation of composition. These object and Hom maps thus give the stated comparison functor.",
+   "uses": [
+    "lem-sfb-coherent-cocone-evaluation-invariant"
+   ],
+   "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
-    "place": "The comparison functor: preservation of identities and composition"
+    "place": "The comparison functor: invariant evaluation and functor laws"
    }
   }
  ],
  "proof_deps": [
+  "lem-sfb-coherent-hom-transition-laws",
   "def-weil-pbc-category-colimit",
   "lem-weil-pbc-filtered-colimit-sets-elementwise",
-  "det-def-sfb-filtered-two-colimit-cocone"
+  "lem-sfb-directed-hom-quotient-composition",
+  "lem-sfb-coherent-cocone-evaluation-invariant"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-sfb-filtered-two-colimit/det-def-sfb-filtered-two-colimit-model.proof.md",
-  "place": "All three blueprint proof paragraphs, expanded into seven steps; the set-colimit quotient is checked directly using Stacks Tag 04AX (section-directed-colimits); formalized by E1 on 2026-10-21 with Functor.ColimitType and quotient descent for composition and comparison"
+  "place": "Assembly of three independent extracted lemmas, following all three blueprint proof paragraphs; quotient universal property and Stacks Tag 04AX as before"
  },
  "mathlib_searches": [
   {
@@ -189,20 +168,20 @@
  "proof_split_by": "labels",
  "blueprint_snapshot": "main-20261015",
  "split_report": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "item": "det-def-sfb-filtered-two-colimit-model",
   "worker": "stage1",
-  "summary": "Preserved the normalized coherent pseudofunctor model statement. Expanded the three blueprint proof paragraphs into seven explicit steps: transition coherence, a small set-colimit quotient, transition products, representative independence, category laws, comparison descent, and functor laws. Reused two existing Mathlib leaves and the cocone definition; no new nodes. Corrected failed search scopes and retained their diagnostics honestly.",
-  "blueprint": "Steps 1–2 realize “The colimit is filtered”; steps 3–5 realize “Composition”; steps 6–7 realize “The comparison functor” in the current blueprint proof.",
+  "summary": "Human-requested re-split of the existing seven-step proof. Statement and Lean records unchanged. Extracted transition coherence with product laws, abstract directed Hom quotient composition with its category laws, and cocone evaluation invariance with stagewise functor laws into three independent statement-only nodes. Retained the explicit small filtered index and elementary quotient universal-property argument in the assembly. Existing searches, citations and metadata retained.",
+  "blueprint": "Step 1 and transition lemma realize The colimit is filtered; step 2 realizes the quotient universal property and eventual equality; step 3 and quotient-composition lemma realize the entire Composition paragraph; step 4 and evaluation-invariance lemma realize the entire comparison-functor paragraph.",
   "tool_uses": []
  },
  "reviewed": {
-  "date": "2026-10-16",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-Codex-Q34-58be6b44f",
-  "group": "Q34",
+  "reviewer": "NT-cc-ND-524e9cdf2",
+  "group": "ND",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-Codex-Q34-58be6b44f (reviewer sub-agent of L); spot-checked: Read the item, all seven proof steps, cited statements, current blueprint route, and cited Stacks/Mathlib sources in full. Coherence, quotient descent, category laws, and comparison functor calculations check out, including noncommutative S3 tests. No new nodes, cycles, missing citations, or repairs. Detailed review written to review.md."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-ND-524e9cdf2 (reviewer sub-agent of L); spot-checked: Faithful 2026-10-21 re-split. The repair note (released) asks for at least 1 new node and a parent of at most 3000 characters; the delivery has 3 statement-only nodes and a 4-step parent of 2109 characters. The live node is still the base version, so nothing supersedes this delivery. The item statement is unchanged. Every old step is carried. Old steps 1 and 3 (pentagon endpoint identity A_{n,p}T_np(A_{k,n}) = A_{k,p}τ_knp plus τ_knp naturality, and product/identity preservation) are in lem-sfb-coherent-hom-transition-laws. Old steps 4-5 (upper-stage independence, descent in each input, associativity, unit [r(a),e]) are in lem-sfb-directed-hom-quotient-composition. Old steps 6-7 (θ endpoint inverses, Φ_n(τ) cancellation, θ_kn naturality, stagewise functor laws, diagonal identity needing only T_ii = Id) are in lem-sfb-coherent-cocone-evaluation-invariant. Old step 2 stays elementary in the parent with the def-weil-pbc-category-colimit and elementwise leaves. I checked every equation by hand against the blueprint main-20261015 det-def-sfb-filtered-two-colimit-model.proof.md and the unit proof sk-def-sfb-filtered-two-colimit.proof.md. Small cases tried: terminal I, equivalent indices in a preorder, empty O. Duplicate search (rg -L) found no node stating any of the three: filtered-colimit-categories and category-structure are strict systems, coef-category-quotient-relations starts from an existing category, coherent-cocone-normalization changes the cocone, and characterization would be circular. No cycle, no SGA. Advisory only: the new statements embed intermediate calculation equalities, which are true and harmless."
  },
  "chapter": "sec-six-functors-basics",
  "unit": "sk-def-sfb-filtered-two-colimit",
