@@ -20230,3 +20230,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 04:07 L: returned deliver/N0/lem-sfb-scalar-inverse-image-tower-diagram (reviewer RETURN: L: independent stage-2 immutable head 2ac69ad39334: file-only compilation failed: overlay Sheaf.CategoryTheory.RingedSit)
 - 04:07 L: returned deliver/NP/lem-weil-pbc-reduction-pullback-derived-tower (reviewer RETURN: L: independent stage-2 immutable head 4d5a6e80d5ef: file-only compilation failed: overlay WeilConjectures.Mathlib.Linear)
 - 04:07 L: returned deliver/Q25/lem-sp-varying-ring-pullback-unit-coherence (reviewer RETURN: L: independent stage-2 immutable head 737c45d526e3: file-only compilation failed: overlay WeilConjectures.Mathlib.Linear)
+- 04:07 L: returned deliver/Q10/lem-sf-semilinear-clopen-unit-projector (reviewer RETURN: L: independent stage-2 immutable head dcfc7e8e7480: file-only compilation failed: overlay WeilConjectures.Mathlib.Linear)
