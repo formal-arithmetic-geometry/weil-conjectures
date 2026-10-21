@@ -11,7 +11,8 @@
   "def-sfb-continuous-map-condensed-ring",
   "def-weil-size-convention",
   "sk-def-sfb-module-objects",
-  "sk-def-sfb-derived-categories"
+  "sk-def-sfb-derived-categories",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
  ],
  "proof": [
   {
@@ -366,5 +367,29 @@
   "group": "O4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-99abe5825 (reviewer sub-agent of L); spot-checked: I read the item, all four new nodes and the statement of every cited node in full. Source: main-20261015 direct-images.proof.md paragraph (3). It has no analytic content, so the agent mark is right, and there is no SGA. The two earlier returns (4ff896a3 and 7a6a786e, D1/D2/D5/G1) are repaired. The child that carried the whole Omega clause is gone. Steps 4-10 now give the real argument: metrizable reduction; pointwise-finite components e_i=(p_i-p_{i-1})z from norm-one projections, converging uniformly by an epsilon-net in some F_N; a closed (not open) Baire certificate cover A_j of S; locally constant selectors k_i that stabilise at each s; and rectangle replacement. The replacement kills the residual as a whole cochain once i-1>=N_j, so b_i(s,x) becomes a fixed finite sum of evaluations of e_i and the primitive series is pointwise finite with values in Omega. The uniform limit in the completion is then Omega-continuous, and db=lim p_N z=z. I re-derived the averaging signs (dA=(-1)^n m c), the n=1 and K=1 cases, and the step-11 exact-sheafification and quasi-isomorphism argument. The four new nodes are true and none is a duplicate. complete-scalar-integral is unchanged and was accepted before (|1/|Q||=1; fails for Z_ell). Metric quotients: cumulative partitions, closed surjection. Norm-one projection: Ingleton, since a finite extension of Q_ell is spherically complete; it is stronger than the continuous-retraction and continuous-extension nodes. Rectangle replacement: colored join exact through degree n-1, then equivariant chain map and homotopy, dualising res f = delta(f s) + f IU, then transfer c = d((cor tc - kc)/m) + cor(Pc)/m with |1/m|=1; tested on H=G, H=1, and n=1, where homomorphisms vanishing on a coset are 0. All are statement-only, self-contained, with three kinds of search recorded and fresh ids. The item statement is identical to the previous snapshot, is still unsplit on live, has no repair note, and tool_uses=[] is correct. No fixes. Advisory: when the rectangle node is split, it should cite lem-sfb-ordered-join-partial-contraction. Step 3 is reused for the quotient G, which the integral node covers."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.PrimeToEllCochainFiniteQuotientDescent",
+  "declaration": "Profinite.ContinuousScalarCochains.prime_to_ell_cochain_finite_quotient_descent",
+  "declarations": [
+   "Profinite.ContinuousScalarCochains.FactorsThroughFiniteQuotient",
+   "Profinite.ContinuousScalarCochains.HasFiniteQuotientComparison",
+   "Profinite.ContinuousScalarCochains.prime_to_ell_cochain_finite_quotient_descent"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/PrimeToEllCochainFiniteQuotientDescent.lean",
+  "statement": "theorem prime_to_ell_cochain_finite_quotient_descent (ell : ℕ) [Fact ell.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra ℚ_[ell] Ω] [IsAlgClosure ℚ_[ell] Ω] (E : IntermediateField ℚ_[ell] Ω) [FiniteDimensional ℚ_[ell] E] (K : Type u) [Group K] [TopologicalSpace K] [IsTopologicalGroup K] [CompactSpace K] [T2Space K] [TotallyDisconnectedSpace K] (hK : ∀ (Q : Type u) [Group Q] [Fintype Q] [TopologicalSpace Q] [DiscreteTopology Q] (q : K →ₜ* Q), Function.Surjective q → Nat.Coprime (Nat.card Q) ell) : HasFiniteQuotientComparison E K ∧ HasFiniteQuotientComparison Ω K",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Section-coordinate presentation of the explicitly specified complexes and map, including the exact finite-quotient subpresheaf image and actual sheafification counit. The auxiliary Prop has real data and makes no choice from the theorem. The additional landed statement dependency supplies the section-module scalar action without a private reconstruction. No statement or stage-1 split changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-575018653",
+  "group": "NK",
+  "result": "pass",
+  "note": "H3 clause-by-clause match: Omega NormedField+NormedAlgebra Q_ell+IsAlgClosure, no CompleteSpace (extended norm unique); E finite IntermediateField; A_F = recorded continuousMapRingObjOfUniverse; hK over finite discrete Type-u quotients is equivalent to the node's condition; differential = Mathlib trivial-action inhomogeneous d via contractNth (signs and n=0 checked); finite-quotient image via one OpenNormalSubgroup with continuous S-dependence; L = actual presheafToSheaf; iota pinned by the counit equation; IsIso of Q.map(extendMap) in unbounded D. Existential Prop pins C,P,L,iota up to unique iso (coordinates, image, a, counit, monic V(iota)), so not hollow and no free arrow. No duplicate (CondensedBar.cochains abstract; continuousScalarRing is the same ring). The added stmt_dep internal-abelian-sheaf-module-equivalence is landed and used. lean.statement verbatim; docstrings and 12-step proof present; single sorry. Edge cases n=0, n=1, empty S, K=1, negative degrees and universes ok. Advisory: five proof-only imports unused by the statement. No compile (no change)."
  }
 }

@@ -13,7 +13,12 @@
   "def-weil-abstract-derived-category",
   "sk-def-sfb-condensed-ring",
   "def-weil-size-convention",
-  "def-sp-grothendieck-abelian"
+  "def-sp-grothendieck-abelian",
+  "def-sfb-condensed-derived-invariants",
+  "def-sfb-condensed-action-tensor",
+  "def-sfb-condensed-derived-cup",
+  "def-sfb-condensed-scalar-tensor",
+  "def-sfb-condensed-unipotent-class"
  ],
  "proof": [
   {
@@ -401,5 +406,38 @@
   "group": "Q04",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q04-aec3c3378 (reviewer sub-agent of L); spot-checked: Read in full: the item, its 12 steps and every cited statement; the new node lem-sfb-action-topos-geometric-restriction; and the main-20261015 direct-images proof paragraph (3). That paragraph is only about proper/open direct images, so the agent-origin label and the WANTED lines are correct. The item statement is unchanged and not weakened: J is any topological group, R any commutative condensed ring, there is no flatness assumption, and the degree-one normalization is the positive one. No SGA source is cited. This is a first delivery, so no re-split note applies.\n\nBatch-5 flag: lem-trf-bounded-below-derived-mate-model is accepted. It is a generic bounded-below derived-mate comparison. Its closure has 18 nodes; the only other sec-trace-formula node is lem-trf-bounded-below-derived-adjunction, a generic derivedPlus adjunction that is Lean-closed. No thm-trf, Poincaré or nt- node is reachable, so it is neither an assumed statement nor part of a proof of one.\n\nSteps checked:\n- 1: C(S,J) is a sheaf because a closed surjection of compact Hausdorff spaces is a quotient map. The action-site presentation gives a Grothendieck category and creates exactness.\n- 2: the invariant subsheaf and both transposes are elementary.\n- 6–7: d_J is the conjugate of the composite iso P_{h_J}P_{p_J} ≅ P_{p'_J}P_{h_0}, so it is an iso and uses no flatness. Both coefficient-square composites transpose to U(f)∘Uε_J.\n- 8–10: the lax pairing comes from monoidal mates, with monoidal unit and counit, and the result is an algebra map.\n- 11–12: E_a is a valid action since a(jk) = a(j)+a(k), with defect (a(j),0). Naturality of the triangle gives b_u[a] = [a∘u] and c_J[a] = [φ∘a].\n\nThe new node is true. The right adjoint of restriction is coinduction, p_K^{-1} is trivial action with invariants as right adjoint, and the module pullbacks are the identity on underlying modules. I tested trivial K, θ = id, L = 1 and the zero ring. It is self-contained. It is not a duplicate: I compared it with internal-action-site-presentation (module level only), product-action-inflation, geometric-module-transport and the exc/sc representation nodes. It does not restate a clause of the item.\n\nFIX (C4/E1), step 4: the mate-model node is stated for the bounded-below adjunctions, but the item's F_J is the unbounded K-injective functor. I added the bridge: F_J preserves D^+; its restriction is the bounded-below derived functor compatibly with the units α (clause 3 of lem-weil-pbc-right-derived-plus-injective); and the counit on bounded-below injectives is the termwise counit, which is the counit identity of lem-trf-bounded-below-derived-adjunction. I also wrote out how the mate-model node is applied (L = T_J, R = Γ_J, G = id, H = u*, σ = id). Added to uses and proof_deps: lem-sc-bounded-below-injective-resolution, lem-weil-pbc-right-derived-plus-injective, lem-trf-bounded-below-derived-adjunction (also added as a tool use). All other declared tool uses are generic and accepted.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedDerivedRestrictionCalculus",
+  "declaration": "CategoryTheory.CondensedDerivedRestriction.coefficientSquare",
+  "declarations": [
+   "CategoryTheory.CondensedDerivedRestriction.coefficientSquare",
+   "CategoryTheory.CondensedDerivedRestriction.restrictionDegreeZero",
+   "CategoryTheory.CondensedDerivedRestriction.boundedBelowComputation",
+   "CategoryTheory.CondensedDerivedRestriction.identityRestriction",
+   "CategoryTheory.CondensedDerivedRestriction.cupLaws",
+   "CategoryTheory.CondensedDerivedRestriction.restrictionCup",
+   "CategoryTheory.CondensedDerivedRestriction.restrictionClass",
+   "CategoryTheory.CondensedDerivedRestriction.restrictionOrderedProducts",
+   "CategoryTheory.CondensedDerivedRestriction.restrictedCup",
+   "CategoryTheory.CondensedDerivedRestriction.restrictedCupUnit",
+   "CategoryTheory.CondensedDerivedRestriction.coefficientCup",
+   "CategoryTheory.CondensedDerivedRestriction.coefficientClass",
+   "CategoryTheory.CondensedDerivedRestriction.coefficientOrderedProducts"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedDerivedRestrictionCalculus.lean",
+  "statement": "theorem coefficientSquare (a : A ⟶ A') (v : H →ₜ* G) {N : DerivedCategory.{u + 1} (Equivariant A G)} {N' : DerivedCategory.{u + 1} (Equivariant A' G)} (f : N ⟶ (scalarDerived a G).obj N') : (groupMap A v).app N ≫ coefficientMap a ((groupDerived A v).map f ≫ (scalarGroupDerived a v).hom.app N') = coefficientMap a f ≫ (scalarBase a).map ((groupMap A' v).app N')",
+  "branch": "sheaf-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7f5d59fe8",
+  "group": "NI",
+  "result": "fix",
+  "note": "Read the item, 11 stmt_deps, 5 new def nodes and all 6 modules against the node. Every clause is rendered faithfully: exact forget/inflation/restriction/scalar, Grothendieck structure, b_u = rightDerivedPullback of the unique invariant inclusion with unit normalization, CommShift, degree zero, identity case, c_J via a unique unit-normalized scalarComparison (no flatness), coefficientSquare, the unital cup algebra as the mate of the K-flat-pinned strong trivial tensor, the unique UnipotentAction on R⊞R, and the class/product formulas for restriction and coefficient change. Mathlib's cone differential makes singleδ = +snake δ, so [a] has cocycle +a as required. All choices are pinned; no hollow defs; records match; item statement unchanged; stmt_deps only gained new def nodes. Only fault, H8: 5 of 6 modules had no module docstring. FIX adds docstrings only (the item's includes the 12-step proof outline) plus an item lean-record override keeping the statement verbatim. nt_compile --json twice timed out at 60 s on the unchanged sibling CondensedDerivedInvariants at load 153-162; changes are comment-only; the worker compiled all six clean (46.0 s). Notes: overlap with Q02's profinite-only def-sfb-condensed-derived-inflation-arrows (not a duplicate); the new cup def node cites theorem lem-derived-right-exact-tensor-comparison for a plain Prop predicate (advisory); proof-dep imports are not in the item module."
  }
 }

@@ -445,5 +445,23 @@
   "group": "NZ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-d3d009b3e (reviewer sub-agent of L); spot-checked: PASS, no changes and no dropped nodes. I read the item and all three new nodes in full. The item statement is unchanged and true; edge case: if x is in Q_l but transcendental over Q, b=0 works because k(b) contains k. It is not a re-split item: the base had a statement only. L19 Prop 1.1.9 (p.3) only invokes countability, so proof_origin agent is correct. The project theorem PadicAlgCl.exists_isAlgebraic_mem_adjoin_simple is stated for the fixed model only, so it stays as a lean_candidate. Steps: (1) Q_l is complete, nonarchimedean and nontrivial (|l|=1/l), with Q dense in it; lem-trf-spectral-norm-algebraic-extension gives an extending multiplicative norm on Omega. (2) The minimal polynomial has f' != 0 in characteristic 0, so it is separable by lem-trf-irreducible-separable-derivative; lem-pc-separable-polynomial-distinct-roots-alg-closed gives the distinct roots and the splitting. (3) delta is the minimum root gap, with an explicit empty-set branch. (4) I checked the approximation with eps=(delta/M)^n/(n+1). (5) The proximity bound ((n+1)eps)^(1/n)M equals delta. (6) g(b)=0 with g monic, so b is algebraic over Q. (7) Krasner gives x in k(b). Every hypothesis matches the Mathlib source I read: Approximation.lean:43-60 and 111-140, Krasner.lean:40-140 (the of_completeSpace instance needs NontriviallyNormedField, CompleteSpace, IsUltrametricDist, NormedAlgebra and Algebra.IsAlgebraic; IsConjRoot corresponds to the roots of the minimal polynomial). All three new nodes are exact or one-line Mathlib leaves, self-contained, strictly smaller than the item, and none restates a clause of it. The rg -L duplicate search found only lem-per-henselian-krasner-neighbourhood, lem-per-henselian-simple-root-stability and lem-trf-separable-monic-approximation, each a different statement and not a one-line specialization. Batch-5: both trf citations (lem-trf-irreducible-separable-derivative and lem-trf-spectral-norm-algebraic-extension) are general-algebra Mathlib leaves with empty proof_deps. Neither is part of the trace formula or Poincare duality or their proofs, so both are accepted. No SGA citations and no tool_uses needed."
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.RationalAlgebraicGenerator",
+  "declaration": "Padic.exists_isAlgebraic_rat_mem_adjoin_simple_of_isAlgClosure",
+  "file": "lean/Sheaf/NumberTheory/Padics/RationalAlgebraicGenerator.lean",
+  "statement": "theorem exists_isAlgebraic_rat_mem_adjoin_simple_of_isAlgClosure (l : ℕ) [Fact l.Prime] (Ω : Type u) [Field Ω] [Algebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] (x : Ω) : ∃ b : Ω, @IsAlgebraic ℚ Ω _ _ ((algebraMap (Padic l) Ω).comp (algebraMap ℚ (Padic l))).toAlgebra b ∧ x ∈ IntermediateField.adjoin (Padic l) ({b} : Set Ω)",
+  "branch": "sheaf-dag",
+  "by": "NF",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-a6086b7dc",
+  "group": "NF",
+  "result": "pass",
+  "note": "Read item node, 3 stmt_deps (Padic, IsAlgClosure, IsAlgebraic), source Extension.lean PadicAlgCl.exists_isAlgebraic_mem_adjoin_simple, module, report. Clause match exact: arbitrary IsAlgClosure (Padic l) Ω in universe u, ∃ b with IsAlgebraic ℚ b via the composite (unique) ℚ→Ω algebra, x ∈ IntermediateField.adjoin (Padic l) {b}. Edge cases (x in Q_ℓ transcendental over Q → b=0; n=1 δ=1) covered. Node differs from live only in lean; record complete and statement verbatim; existing:true not possible (source theorem is fixed-model only); docstrings carry source, blueprint id and 7 proof steps; lines ≤100; private imports = proof-dep modules. Advisory: extra import of the source theorem's module, harmless. No changes, no compile needed."
  }
 }

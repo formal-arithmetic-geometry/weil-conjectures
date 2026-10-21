@@ -67,7 +67,3 @@ L: independent stage-2 immutable head 3f532b32d618: H4: head 3f532b32 (module by
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-coherence: lem-weil-pbc-proetale-projection-formula-tensor-coherence: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
-## lem-sfb-finite-valued-cech-cocycle-descent (2026-10-21 19:49 UTC, branch head fb828afd6e9)
-
-L: independent stage-2 immutable head fb828afd6e93: H2.2: the delivery adds theorem node lem-weil-pbc-set-cech-nerve-free-resolution to stmt_deps (base: only def-weil-size-convention). The statement uses only plain defs setCechNerve/setCechFace from that theorem's module, not its conclusion, and a FIX cannot change stmt_deps. Repair: add a definition node (e.g. def-sfb-set-cech-nerve) owning AlgebraicTopology.setCechNerve/setCechFace, existing:true on the unchanged module WeilConjectures.AlgebraicTopology.SetCechNerveFreeResolution, and have the item cite it in place of the theorem node. Mathematics otherwise checked: all hypotheses, the subspace topology instance, finite discrete quotients, factorization, and the descended equation on all quotient tuples match the node; edge cases S empty, M=0, n=1 and n=0 excluded; universes independent; docstrings complete; sorry only.
-

@@ -518,5 +518,52 @@
   "group": "NU",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NU-9adfbbe15 (reviewer sub-agent of L); spot-checked: Read all nine steps and every cited statement. The statement, source and blueprint fields are identical to base, and the live node is still unsplit, so no other group superseded this split. The delivery creates no new nodes. Sources checked: Stacks 03FD (sites-cohomology l.1862: any site, ring sheaf and object U, with the proof reducing to H^i(U, I_ab) = 0 for module injectives). This matches lem-sc-injective-module-abelian-acyclic-zariski, which despite its id is stated for an arbitrary ringed site. Also checked 08J7 and 03EM; proof_origin is marked agent. Step 1: enough injectives for Mod(R), Ab and PAb, the last through the trivial topology (00VH axioms checked), and the mono resolution node. Step 2: the slice forgetful functor is continuous and cocontinuous by def-pur-localized-ringed-site, the restriction comparison applies, and Hom_{C/V}((W,a),(V×P,pr)) = Hom(W,P). Step 3: free-Yoneda on C/V with R|_V gives H_P(M)(V) = M(V×P), with the inverse formula taken from the cited statement. Step 4: the exactness inputs U (colimits-forgetful), a and ι (sheafification-exact), t_P (evaluation-exact) and the termwise derived functors match their nodes, and RH_P is computed on I by right-derived-plus-injective (2). Steps 5–6: 03FD gives ι-acyclicity, and the bounded-below clause of sk-thm-acyclicity applies with its hypotheses checked, so c_M exists. Step 7: assembly. Step 8: lift and homotopy uniqueness give naturality in M and independence of the resolution. Step 9: naturality in P, the degree-zero kernel normalization and the D^+→D inclusion. Edge cases checked: zero ring, terminal P, trivial topology, nonflat R (no claim that U preserves injectives). The citer filtered-colimit uses only the stated naturalities. split_report tool_uses (sk-thm-acyclicity, the sc acyclicity node and weil-pbc homological tools) are generic black boxes and I accept them. The two added stmt_deps are used by the statement. Minor point: the report mentions sandbox citations.json and searches.jsonl, which are not in the branch; this is not a fault. No SGA source is used."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.FreeRepresentableDerivedFunctions",
+  "declaration": "CategoryTheory.FreeRepresentableDerivedFunctions.free_representable_derived_functions_model",
+  "declarations": [
+   "CategoryTheory.FreeRepresentableDerivedFunctions.ring",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.modules",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.free",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.generator",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.hom",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.homAdditive",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.modulesEnoughInjectives",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.precomp",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.precompAdditive",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.precompLimits",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.precompColimits",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.sections",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.sectionsAdditive",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.homAbelian",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.homAbelianAdditive",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.leftComplex",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.rightComplex",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.Compatible",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.sheafEvaluationIso",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.comparisonMap",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.leftMap",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.rightMap",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.leftParameterMap",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.precompParameterMap",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.rightParameterMap",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.free_representable_derived_functions_model",
+   "CategoryTheory.FreeRepresentableDerivedFunctions.unboundedComparison"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/FreeRepresentableDerivedFunctions.lean",
+  "statement": "theorem free_representable_derived_functions_model [J.Subcanonical] : ∃ (θ : ∀ P : C, homAbelian J R P ⋙ sheafToPresheaf J AddCommGrpCat.{u} ≅ SheafOfModules.toSheaf (ring J R) ⋙ sheafToPresheaf J AddCommGrpCat.{u} ⋙ precomp P) (E : ∀ (P : C) (M : modules J R) (I : InjectiveResolution M) (T : InjectiveResolution ((SheafOfModules.toSheaf (ring J R)).obj M)), DerivedCategory.Plus.Q.obj (leftComplex J R P I) ≅ DerivedCategory.Plus.Q.obj (rightComplex J P T)), (∀ (P V : C) (M : modules J R) (φ : (SheafOfModules.homObj (R := R) ((free J R).obj P) M).val.obj (op V)), ((θ P).hom.app M).app (op V) φ = φ.app (op (Over.mk (prod.fst : V ⨯ P ⟶ V))) (generator J R P (V ⨯ P) prod.snd)) ∧ (∀ (M : modules J R) (I : InjectiveResolution M) (T : InjectiveResolution ((SheafOfModules.toSheaf (ring J R)).obj M)), ∃ c, Compatible J R I T c) ∧ (∀ (P : C) (M : modules J R) (I : InjectiveResolution M) (T : InjectiveResolution ((SheafOfModules.toSheaf (ring J R)).obj M)) (c : ((SheafOfModules.toSheaf (ring J R)).mapHomologicalComplex (.up ℤ)).obj I.cochainComplex ⟶ T.cochainComplex), Compatible J R I T c → (E P M I T).hom = DerivedCategory.Plus.Q.map (comparisonMap J R P (θ P) I T c)) ∧ (∀ (P : C) (M N : modules J R) (f : M ⟶ N) (I : InjectiveResolution M) (I' : InjectiveResolution N) (T : InjectiveResolution ((SheafOfModules.toSheaf (ring J R)).obj M)) (T' : InjectiveResolution ((SheafOfModules.toSheaf (ring J R)).obj N)) (s : I.Hom I' f) (t : T.Hom T' ((SheafOfModules.toSheaf (ring J R)).map f)), DerivedCategory.Plus.Q.map (leftMap J R P s) ≫ (E P N I' T').hom = (E P M I T).hom ≫ DerivedCategory.Plus.Q.map (rightMap J P t)) ∧ (∀ (P' P : C) (f : P' ⟶ P) (M : modules J R) (I : InjectiveResolution M) (T : InjectiveResolution ((SheafOfModules.toSheaf (ring J R)).obj M)), DerivedCategory.Plus.Q.map (leftParameterMap J R f I) ≫ (E P' M I T).hom = (E P M I T).hom ≫ DerivedCategory.Plus.Q.map (rightParameterMap J f T))",
+  "branch": "newtargets-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-984e69668",
+  "group": "NC",
+  "result": "pass",
+  "note": "Node changes only the lean field; statement verbatim matches file. Objects: ring = forget₂ of CommRingCat sheaf, modules = ringedSiteModules, free = sheafified PresheafOfModules.free∘yoneda with generator via sheafification unit, H_P = SheafOfModules.homFunctor (def-pur-sheaf-hom), t_P = whiskering by (−×P).op, U/ι/a = toSheaf/sheafToPresheaf/presheafToSheaf. leftComplex = U H_P on module-injective resolution, rightComplex = a t_P ι on abelian-injective resolution of UM (no claim that U preserves injectives); E is a D⁺ isomorphism (not per-degree), pinned by E.hom = Q(comparisonMap θ c) for every augmentation-compatible c, with c's existence asserted; θ pinned by generator evaluation at Over.mk fst on gen(snd). Coefficient naturality (all s, t lifts; f=id gives independence of resolutions) and contravariant P-naturality (free.map f vs restriction along 1×f) checked true via 013S homotopy uniqueness and an explicit generator computation; quasi-iso via 03FD acyclicity + 015E. Unbounded clause = Plus.ι.mapIso. Hypotheses: finite products and subcanonical, nothing more; common universe u per size convention. Gates: no hollow defs, only sorry, source and blueprint docstrings with the nine proof steps, all imports present in side-live, citer unaffected. Not recompiled (worker reports clean scompile and dry-run OK)."
  }
 }

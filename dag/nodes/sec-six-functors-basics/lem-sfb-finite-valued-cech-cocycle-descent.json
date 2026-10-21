@@ -8,7 +8,8 @@
   "place": "Tags 08ZY (lemma-profinite), 08ZZ (lemma-profinite-refine-open-covering), and 0A2P (lemma-describe-limits), applied to compatible finite quotient diagrams. Agent-formulated finite Cech cocycle descent, supplying the discrete-coefficient input implicit in Bhatt–Scholze, The pro-etale topology for schemes, Lemma 4.3.9(2), PDF printed page 33; not a verbatim standalone assertion of those tags."
  },
  "stmt_deps": [
-  "def-weil-size-convention"
+  "def-weil-size-convention",
+  "def-sfb-set-cech-nerve"
  ],
  "proof": [
   {
@@ -625,5 +626,28 @@
   "group": "NK",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NK-aedcff480 (reviewer sub-agent of L); spot-checked: I read the item in full. It is a first split, with 0 new nodes; the statement, stmt_deps and blueprint provenance are unchanged, and there is no SGA citation. The only citer, normed-scalar-profinite-cech-exact step 1, needs the cocycle equation on non-liftable quotient tuples (σ(q_0x_0),x), and the item states exactly that strong form. All eight steps are correct. Step 1 takes compactness of T^r and T_S^r from the statement of lem-sfb-finite-quotient-fiber-product; this off-unit tool use is declared, and I accept it. Steps 2 and 5 use the clopen basis (a Mathlib leaf) on T and on S. Steps 3, 6, 7 and 8 are atom-partition algebra, written out. In step 3, each atom meeting U_{l,i} lies inside it, which makes h well defined. The key step is 5: the defect locus D is compact, and it is separated by finitely many clopens W_t, so tuples whose base images lie in one γ-block have e=0. Edge cases checked: S=∅, M=0, n=1, and T=S={u,v} with a coarse base. I read Stacks topology.tex 08ZY and 08ZZ; proof_origin is by agent, which is correct. The duplicate search found that lem-per-finite-quotient-cochain-colimit concerns group cochains, so it is not a duplicate, and nothing else matches. No faults; no fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Topology.FiniteValuedCechCocycleDescent",
+  "declaration": "Topology.finite_valued_cech_cocycle_descent",
+  "declarations": [
+   "AlgebraicTopology.setCechNerveTopologicalSpace",
+   "Topology.finite_valued_cech_cocycle_descent"
+  ],
+  "file": "lean/Sheaf/Topology/FiniteValuedCechCocycleDescent.lean",
+  "statement": "theorem finite_valued_cech_cocycle_descent (T S : Type u) [TopologicalSpace T] [TopologicalSpace S] [CompactSpace T] [CompactSpace S] [T2Space T] [T2Space S] [TotallyDisconnectedSpace T] [TotallyDisconnectedSpace S] (q : C(T, S)) (hq : Function.Surjective q) (M : Type v) [AddCommGroup M] [Finite M] [TopologicalSpace M] [DiscreteTopology M] (n : ℕ) (hn : 1 ≤ n) (c : C(setCechNerve q n, M)) (hc : ∀ x : setCechNerve q (n + 1), ∑ j : Fin (n + 2), (-1 : ℤ) ^ j.val • c (setCechFace q j x) = 0) : ∃ (T₀ S₀ : Type u) (_ : Finite T₀) (_ : Finite S₀) (_ : TopologicalSpace T₀) (_ : TopologicalSpace S₀) (_ : DiscreteTopology T₀) (_ : DiscreteTopology S₀) (a : C(T, T₀)) (b : C(S, S₀)) (q₀ : T₀ → S₀), Function.Surjective a ∧ Function.Surjective b ∧ Function.Surjective q₀ ∧ ∃ (hcomm : ∀ t : T, q₀ (a t) = b (q t)) (c₀ : setCechNerve q₀ n → M), (∀ x : setCechNerve q n, c x = c₀ ⟨fun i ↦ a (x.val i), fun i ↦ (hcomm (x.val i)).trans ((congrArg b (x.property i)).trans (hcomm (x.val 0)).symm)⟩) ∧ (∀ x : setCechNerve q₀ (n + 1), ∑ j : Fin (n + 2), (-1 : ℤ) ^ j.val • c₀ (setCechFace q₀ j x) = 0)",
+  "branch": "newtargets-dag",
+  "by": "NA",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses AlgebraicTopology.setCechNerve and setCechFace through the new definition node def-sfb-set-cech-nerve, bound existing:true to their unchanged upstream module. Supplies their canonical finite-product subspace topology as a fully defined public instance. All quotient tuples satisfy the descended equation, including tuples without a lift."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e7d9c514",
+  "group": "NA",
+  "result": "pass",
+  "note": "Re-delivery of fb828afd6e93 (RETURN H2.2); module byte-identical. stmt_deps now gain only the new def node def-sfb-set-cech-nerve (existing:true on the unchanged WeilConjectures.AlgebraicTopology.SetCechNerveFreeResolution; setCechNerve/setCechFace; statement verbatim from line 28; §5/H12 fields complete; no DAG duplicate; retired Sheaf copy, so no name clash), replacing the spurious theorem node. Clause check: T,S compact T2 totally disconnected, q continuous surjection, M finite discrete abelian (0 allowed), n≥1, c continuous on setCechNerve q n with the subspace-topology helper instance (real induced data, unique), cocycle equation with (-1:ℤ)^j and succAbove faces; conclusion has finite discrete T₀,S₀ in Type u, continuous surjections a,b, surjective q₀, hcomm, factorization, equation on all quotient tuples including unliftable ones; matches the node exactly. Edge cases S=∅, M=0, n=1, n=0 excluded; independent universes. Docstrings carry source, blueprint id and all 8 steps; sorry only; lines ≤100; not on the dropped list. No compile per instructions; worker scompile clean (9.8 s / 10.1 s). Advisory: plain import used only by the proof."
  }
 }

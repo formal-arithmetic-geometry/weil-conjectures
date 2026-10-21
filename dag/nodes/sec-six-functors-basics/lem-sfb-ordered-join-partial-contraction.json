@@ -430,5 +430,43 @@
   "group": "NN",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NN-9149bef5a (reviewer sub-agent of L); spot-checked: Shape: one commit, only the item node and the report, no new nodes. No repair note exists, so this is an ordinary one-level split. The statement is identical to the live and side-live versions (live is still unsplit). No SGA is cited. The null blueprint.from.node is inherited from a chain that ends at a Lean-module item, not a delivery fault. Statement: the citer lem-sfb-homogeneous-cocycle-rectangle-detection uses every clause with X_i=Ha_i, which may be infinite. Math: I checked all 8 steps. Step 1 correctly cites def-weil-pbc-free-module (Stacks 00AQ/00C2) for basis extension. Steps 2-4: deletion sign pairs, and dc_i+c_id=1-R_i for a missing colour (positions a<k and a>=k) and for a present colour (only D_k misses i). Steps 5-6: dR_i=R_id, telescoping to 1-P_r with P_iR_i=P_{i+1}, P_r=0 when q<=r-2, top degree correctly excluded, S_{-1}[∅]=[(0,v_0)]. Step 7: naturality without injectivity. Step 8: subset expansion with sign (-1)^{k+|A|}. My own brute-force script checked the identities for r=1..5 and naturality under all maps {0,1}->{0,1} for r<=3; all passed. Duplicates: none. poset-augmented-chain-prism needs finite posets; power-set-complex uses unrestricted tuples; lem-coef-extra-degeneracy-contraction is a simplicial extra degeneracy; lem-pc-s3 insertion homotopy is about sheaf Čech complexes; the lem-coef joins are infinity-categorical. No fixes, no tool_uses."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicTopology.OrderedJoinPartialContraction",
+  "declaration": "AlgebraicTopology.OrderedJoin.partialContraction",
+  "declarations": [
+   "AlgebraicTopology.OrderedJoin.Face",
+   "AlgebraicTopology.OrderedJoin.Symbol",
+   "AlgebraicTopology.OrderedJoin.Chain",
+   "AlgebraicTopology.OrderedJoin.symbolTerm",
+   "AlgebraicTopology.OrderedJoin.erase",
+   "AlgebraicTopology.OrderedJoin.replaceColors",
+   "AlgebraicTopology.OrderedJoin.insert",
+   "AlgebraicTopology.OrderedJoin.positionSign",
+   "AlgebraicTopology.OrderedJoin.boundary",
+   "AlgebraicTopology.OrderedJoin.insertion",
+   "AlgebraicTopology.OrderedJoin.remainder",
+   "AlgebraicTopology.OrderedJoin.remainderPrefix",
+   "AlgebraicTopology.OrderedJoin.contraction",
+   "AlgebraicTopology.OrderedJoin.mapFace",
+   "AlgebraicTopology.OrderedJoin.chainMap",
+   "AlgebraicTopology.OrderedJoin.expansionRecipe",
+   "AlgebraicTopology.OrderedJoin.partialContraction"
+  ],
+  "file": "lean/Sheaf/AlgebraicTopology/OrderedJoinPartialContraction.lean",
+  "statement": "theorem partialContraction (r : ℕ) (hr : 1 ≤ r) (X : Fin r → Type u) (v : ∀ i : Fin r, X i) : (∀ q : ℤ, (boundary X (q - 1) (q - 2)).comp (boundary X q (q - 1)) = 0) ∧ (∀ q : ℤ, -1 ≤ q → q ≤ (r : ℤ) - 2 → (boundary X (q + 1) q).comp (contraction v q (q + 1)) + (contraction v (q - 1) q).comp (boundary X q (q - 1)) = LinearMap.id) ∧ contraction v (-2) (-1) = 0 ∧ (∀ (Y : Fin r → Type v) (f : ∀ i : Fin r, X i → Y i) (q : ℤ), (chainMap f (q + 1)).comp (contraction v q (q + 1)) = (contraction (fun i ↦ f i (v i)) q (q + 1)).comp (chainMap f q)) ∧ (∀ (q : ℤ) (σ : Symbol X q), contraction v q (q + 1) (Finsupp.single σ 1) = ((expansionRecipe r σ.val.colors).map (fun t ↦ t.1 • symbolTerm X (q + 1) (insert v t.2.1 (replaceColors v t.2.2 σ.val)))).sum)",
+  "branch": "newtargets-dag",
+  "by": "NP",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Face, Symbol, Chain and the explicit boundary, insertion, remainder, ordered prefix, contraction, vertex map and color-only expansion are the constructions specified in this node itself. Chain has the existing specified integer basis Finsupp.basisSingleOne; no additional notion or dependency interface is introduced. The two degree arguments select matrix components and avoid arithmetic type transports."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-80124c6ef",
+  "group": "NP",
+  "result": "pass",
+  "note": "Only the lean field changed and its statement matches the file verbatim; stmt_dep def-weil-pbc-free-module is rendered by the free module Symbol →₀ ℤ with its single-element basis. Face/Symbol give the right J_q (empty face in degree -1, zero groups outside the range); boundary signs = zero-based colour position; insertion c_i, remainder R_i and the R_0∘…∘R_{i-1} prefix (rightmost first) match the node exactly. All five clauses present: d²=0 for all q, dS+Sd=id for -1≤q≤r-2, S_{-2}=0, naturality for arbitrary f into Y : Type v, and the expansion clause via expansionRecipe r C, checked against proof step 8 (sign (-1)^(k+|A|); replace and insert commute since i∉A). Edge cases r=1, top degree, infinite or non-injective cases fine. No hollow defs, only the theorem is sorry, docstrings have source place, blueprint tag and 8 steps; no duplicate in Mathlib or project. Advisory: FreeModule.Basic import unused. No compile run (no changes)."
  }
 }

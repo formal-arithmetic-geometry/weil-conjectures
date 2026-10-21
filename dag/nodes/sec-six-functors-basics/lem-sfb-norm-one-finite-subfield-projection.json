@@ -427,5 +427,23 @@
   "group": "O4",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O4-7ed225f3f (reviewer sub-agent of L); spot-checked: I read the whole item. It has no new nodes and keeps its statement unchanged. The source is main-20261015 sk-thm-sf-ctf-stability-direct-images.proof.md, paragraph (3) (open direct image with Q̄_ℓ coefficients); the proof is an agent proof and Ingleton is WANTED. The 7 steps are a correct Ingleton-type proof, checked line by line. Step 2: the balls B_u nest by radius. Step 3: CompactSpace.iInter_nonempty applies inside the compact ball B_0 (B_0 = B_u at u = 0), and taking A = ∅ gives nonemptiness. Step 4: with v = −a⁻¹u we get a(x−v) = ax+u and g(u)+ab = a(b−g(v)); I checked the signs, and the bound |G| ≤ ‖u+ax‖ holds. Steps 5–6: Zorn applies to the set of graphs in Ω×F, the empty chain is bounded by the identity graph, and the union of a chain is a linear graph. Step 7: the map is 1-Lipschitz. The parent descent node uses exactly F-linearity, identity on F and the norm-one bound. One fault, C4 in step 1: lem-weil-l-adic-extension-proper is stated for E's own extending absolute value, but the step applies it to the restriction of Ω's absolute value. That needs the uniqueness in lem-weil-l-adic-extension-absolute-value, which was not cited. The FIX adds that citation and one clause to step 1 and to proof_deps. All dependencies are Mathlib leaves, so no tool_uses are needed and there is no cycle and no SGA citation. On duplicates: lem-sfb-proper-ultrametric-scalar-extension has no bound, and lem-sfb-finite-subfield-continuous-linear-retraction (NN) is strictly weaker (E-linear and continuous only). Maintainer note: that NN node could cite this item.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.NumberTheory.Padics.NormOneFiniteSubfieldProjection",
+  "declaration": "Padic.exists_normOne_finiteSubfield_projection",
+  "file": "lean/Sheaf/NumberTheory/Padics/NormOneFiniteSubfieldProjection.lean",
+  "statement": "theorem exists_normOne_finiteSubfield_projection (l : ℕ) [Fact l.Prime] (Ω : Type u) [NormedField Ω] [NormedAlgebra (Padic l) Ω] [IsAlgClosure (Padic l) Ω] [IsUltrametricDist Ω] (F : IntermediateField (Padic l) Ω) [FiniteDimensional (Padic l) F] : ∃ p : Ω →L[F] F, (∀ a : F, p (a : Ω) = a) ∧ ∀ x : Ω, ‖p x‖ ≤ ‖x‖",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-021018ff4",
+  "group": "NK",
+  "result": "pass",
+  "note": "Clause-by-clause match of Padic.exists_normOne_finiteSubfield_projection to the node: prime l, Padic l, IsAlgClosure Omega in universe u, NormedField+NormedAlgebra give the extending norm, IsUltrametricDist matches 'nonarchimedean', IntermediateField F with FiniteDimensional and the restricted norm (equal to the recorded abs value by uniqueness), Omega ->L[F] F (node asserts continuity) fixing F with ||p x|| <= ||x||, no CompleteSpace. Statement verbatim in file; node unchanged vs live apart from the lean record; docstrings carry source place, blueprint id and all 7 proof steps; sorry only; no definitions. Not a duplicate: NN's exists_finiteSubfield_continuousLinearRetraction is weaker (no bound). Citer descent node needs only Q_l-linearity, identity on F and the bound. Advisory: IsUltrametricDist is derivable (NN omits it); CoefficientExtensionFinite import is redundant. No compile run: no file changed; worker reports clean compiles and dry run."
  }
 }
