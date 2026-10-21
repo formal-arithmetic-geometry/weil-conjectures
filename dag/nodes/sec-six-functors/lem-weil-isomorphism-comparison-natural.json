@@ -21,11 +21,10 @@
  ],
  "proof": [
   {
-   "text": "At finite level put $A=A_{E,n}$. By [def-weil-inverse-image-pullback-comparison] (a) the specified component on a complex $M$ is the sheafified termwise map $i_M(x)=x\\otimes1$. For a chain map $v:M\\to M\\prime$ and each degree and site object, $((g^{-1}v)\\otimes1)(x\\otimes1)=g^{-1}v(x)\\otimes1=i_{M\\prime}(g^{-1}v(x))$. The restrictions give the same formula. By the tensor construction [def-pur-sheaf-tensor-product] and uniqueness in the sheafification adjunction [def-weil-pbc-sheafification], these equal presheaf composites give equal sheaf composites. The same equation with $v$ replaced by a differential proves the chain-map assertion. The transported scalar action is respected because $i_M(c_A^{-1}(a)x)=c_A^{-1}(a)x\\otimes1=x\\otimes a=a i_M(x)$. Thus the specified maps, rather than merely isomorphic alternatives, are natural on complexes.",
+   "text": "At finite level use the section formula of inverseImageFiniteComparison_existsUnique. For a chain map f, apply naturality of the finite pullback adjunction unit to each f.f i and naturality of the module map along the canonical comma arrow. The resulting equation on every section gives a natural transformation of the two termwise complex functors. No separate tensor-product construction is needed.",
    "uses": [
     "def-weil-inverse-image-pullback-comparison",
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-sheafification"
+    "lem-pur-integral-operations-well-defined"
    ],
    "elementary": true,
    "source": {
@@ -34,12 +33,11 @@
    }
   },
   {
-   "text": "At finite level both exact module functors send quasi-isomorphisms to quasi-isomorphisms: exactness of the transported inverse image and of the module pullback is [prop-weil-pbc-proetale-constant-exact], and cohomology is kernel modulo image as in [def-weil-abstract-derived-category]. Compose the chain-level functors and the transformation of Step 1 with the target localization. Apply clause (2) of [lem-weil-pbc-localization-universal-property] to the source localization at quasi-isomorphisms, with target $D(X,A)$, and with the factorization isomorphisms of the exact induced functors $G$ and $P_g$. It gives a natural transformation whose components are precisely the localized $i_M$, under these comparisons, hence the specified finite $\\kappa$ of [def-weil-inverse-image-pullback-comparison] (a). Explicitly, if $w:M\\to M\\prime$ is a quasi-isomorphism, the chain-map equation becomes $P_g([w])\\kappa_M=\\kappa_{M\\prime}G([w])$; multiplying by the inverses gives $P_g([w])^{-1}\\kappa_{M\\prime}=\\kappa_M G([w])^{-1}$. The localization theorem supplies naturality on every derived morphism and the canonical comparison for any representative, without a boundedness assumption.",
+   "text": "Apply Mathlib Localization.liftNatTrans to this chain transformation whiskered by DerivedCategory.Q. The canonical mapDerivedCategoryFactors isomorphisms are its lifting data. Localization.liftNatTrans_app is exactly the defining finite comparison, on every complex; thus naturality includes arbitrary derived morphisms and inverses of quasi-isomorphisms.",
    "uses": [
-    "prop-weil-pbc-proetale-constant-exact",
+    "def-weil-inverse-image-pullback-comparison",
     "def-weil-abstract-derived-category",
-    "lem-weil-pbc-localization-universal-property",
-    "def-weil-inverse-image-pullback-comparison"
+    "lem-weil-pbc-localization-universal-property"
    ],
    "elementary": false,
    "source": {
@@ -48,21 +46,38 @@
    }
   },
   {
-   "text": "For integral coefficients apply [lem-weil-isomorphism-derived-pullback-comparison-normalization] to the given $g$, $E$ and the fixed small sites. Its hypotheses are exactly the present ones: $g$ is a scheme isomorphism, $\\ell$ is invertible, and the coefficients are the completed quotient-limit sheaves with their specified quotient transitions. The lemma supplies a natural isomorphism $\\theta_g:P_g\\xrightarrow{\\sim}G\\widehat{(-)}$ on the ambient unbounded category, and the entire-cone identity $\\theta_{g,N}\\kappa^g_N=G(u_N)$. In particular $\\kappa^g_N=\\theta_{g,N}^{-1}G(u_N)$ for the actual unit and the chosen comparison, including the zero shifted coordinate. Its statement also gives independence under the canonical resolution comparisons. This invocation uses the stated normalization theorem, not an inference of equality from the finite projections of a derived limit.",
+   "text": "For integral coefficients, naturality of ordinary coefficient reduction on the sheafified pure tensor 1 tensor x and naturality of the finite pullback adjunction unit show that every specified reduction theta is natural on complexes. Product extensionality gives naturality of their product. The mapping-cocone lift has zero shifted coordinate, so its degreewise formula and the diagonal mapping-cocone map give a natural transformation from exact inverse image of complexes to the strict Roos pullback complex functor.",
    "uses": [
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+    "def-weil-inverse-image-pullback-comparison",
+    "def-weil-integral-reduction-tower",
+    "lem-pur-integral-operations-well-defined"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-trace-formula/sk-d-weil/prop-trf-rational-frobenius-integral-model.proof.md",
-    "place": "Clauses (2)-(3), through the explicit entire-cone normalization stated in lem-weil-isomorphism-derived-pullback-comparison-normalization; agent assembly."
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08TC, explicit zero-homotopy mapping-cocone calculation; ordinary sheafified tensor functoriality as in sites-modules.tex Tag 03EK."
    }
   },
   {
-   "text": "Write $\\widehat{(-)}=\\mathcal L_Y\\mathcal R_Y$. By [lem-coef-derived-system-evaluation-calculus], $u$ is the unit of the derived adjunction $\\mathcal R_Y\\dashv\\mathcal L_Y$, so $\\widehat v\\,u_N=u_{N\\prime}v$ for every ambient derived morphism $v:N\\to N\\prime$. Naturality of $\\theta_g$ from [lem-weil-isomorphism-derived-pullback-comparison-normalization] and Step 3 give $$\\theta_{g,N\\prime}P_g(v)\\kappa^g_N=G(\\widehat v)\\theta_{g,N}\\kappa^g_N=G(\\widehat v\\,u_N)=G(u_{N\\prime}v)=\\theta_{g,N\\prime}\\kappa^g_{N\\prime}G(v).$$ Cancel the isomorphism $\\theta_{g,N\\prime}$ to obtain the asserted integral naturality. No inverse of $u_N$ is used, so this calculation also applies to incomplete objects. Step 3 gives the same component identity and this equation under the canonical resolution comparisons.",
+   "text": "The good-complex localization of lem-pur-integral-operations-well-defined is fully faithful on natural transformations. Descend the preceding transformation on good complexes using the canonical exact-functor and integralDerivedPullbackComparison isomorphisms. For every quasi-isomorphism q:P to K, cancel the invertible inverse-image Q(q) in the naturality square. The resulting component is exactly inverseImagePullbackComparison K P q. Unfold the chosen representative and chosen resolution of inverseImagePullbackComparisonDerived and use naturality along the representative isomorphism to identify that derived component with the same natural transformation.",
    "uses": [
-    "lem-coef-derived-system-evaluation-calculus",
-    "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+    "def-weil-inverse-image-pullback-comparison",
+    "lem-pur-integral-operations-well-defined",
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS, 06YT and 0G7E, the good-complex localization already proved in IntegralOperationsWellDefined; cancellation and representative transport are agent calculations."
+   }
+  },
+  {
+   "text": "The zero complex is K-flat, since its tensor total complex is zero. Choose an explicit finite-field datum of prime characteristic p greater than l; its auxiliary characteristic condition holds. All reductions of the zero complex are zero, their product is zero, and their Roos triangle is distinguished. Thus Q(0) is derived complete. Apply lem-weil-isomorphism-derived-pullback-comparison-normalization at this test object, for each given coherent coefficient calculus C, to obtain its ambient natural family theta. Package its naturality as NatIso.ofComponents and multiply the identity kappa_N followed by theta_N equals G(u_N) by theta_N inverse. This proves the required normalization on every ambient object, with no completeness assumption on that object.",
+   "uses": [
+    "def-weil-derived-complete",
+    "def-weil-integral-reduction-tower",
+    "lem-weil-isomorphism-derived-pullback-comparison-normalization",
+    "lem-coef-derived-system-evaluation-calculus"
    ],
    "elementary": true,
    "source": {
@@ -71,7 +86,7 @@
    }
   },
   {
-   "text": "For either coefficient stage define $\\eta_N=S(\\kappa^g_N)\\rho_N$. For a derived morphism $v:N\\to N\\prime$, Steps 2 and 4 and the assumed naturality of $\\rho$ give $$S(P_g(v))\\eta_N=S(P_g(v)\\kappa^g_N)\\rho_N=S(\\kappa^g_{N\\prime})S(G(v))\\rho_N=S(\\kappa^g_{N\\prime})\\rho_{N\\prime}H(v)=\\eta_{N\\prime}H(v).$$ This is exactly the naturality equation for $\\eta:H\\Rightarrow SP_g$.",
+   "text": "In either coefficient case take eta to be rho followed by Functor.whiskerRight kappa S. The composite natural transformation has precisely the specified components, by the definitions of composition and right whiskering.",
    "uses": [],
    "elementary": true,
    "source": {
@@ -82,18 +97,18 @@
  ],
  "proof_deps": [
   "def-weil-inverse-image-pullback-comparison",
-  "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-sheafification",
-  "prop-weil-pbc-proetale-constant-exact",
+  "lem-pur-integral-operations-well-defined",
   "def-weil-abstract-derived-category",
   "lem-weil-pbc-localization-universal-property",
+  "def-weil-integral-reduction-tower",
+  "def-weil-derived-complete",
   "lem-weil-isomorphism-derived-pullback-comparison-normalization",
   "lem-coef-derived-system-evaluation-calculus"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-rf-shriek-preservation/def-weil-global-geometric-frobenius.md",
-  "place": "First ordinary-cohomology transport arrow, made explicit by finite tensor-unit naturality, localization descent, and the existing integral normalization lemma. Deligne (1.1.3), (1.1.7) provides motivation, not this ambient pro-etale theorem."
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "R6 Lean proof: the stated finite localization route; explicit natural Roos chain map and good-complex localization for resolution independence; existing ambient normalization evaluated at the complete zero object."
  },
  "mathlib_searches": [
   {
@@ -207,8 +222,7 @@
  },
  "tool_uses": [
   "lem-weil-isomorphism-derived-pullback-comparison-normalization",
-  "lem-coef-derived-system-evaluation-calculus",
-  "prop-weil-pbc-proetale-constant-exact"
+  "lem-coef-derived-system-evaluation-calculus"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -240,5 +254,15 @@
   "group": "Q119",
   "result": "pass",
   "note": "Read the item, all 10 stmt_dep records and the exact side-clone declarations: the InverseImagePullbackComparison and InverseImagePullbackComparisonDerived modules, IntegralOperationsWellDefined and CoefDerivedSystemEvaluationCalculus. Only the lean record changed against live, and lean.statement is verbatim from the file. Finite κ: P_g = integralOperationsLevelPullback.mapDerivedCategory, the target of the recorded finite comparison, with no Type t restriction. κ is pinned on every Q(K) to inverseImagePullbackComparisonFinite, the sheafified x⊗1 map. Integral κ is pinned on every N to inverseImagePullbackComparisonDerived, so its naturality is real content. It equals inverseImagePullbackComparison for every good resolution, which is the node's resolution-comparison clause and is true. κ = G(u_N) followed by the inverse of a natural iso θ, for every coherent calculus C, with the actual C.adjunction.unit and no completeness assumption. The composition clause ρ_N then S(κ_N) has free universes r and s. Edge cases: n=0 is exponent 1, empty scheme, N=0, g=id, incomplete N; universes t and u independent; no boundedness. No duplicate naturality theorem in the side lean. Docstrings carry the source, blueprint id and node proof steps; plain imports are the stated proof_dep modules. No file changed, so nothing compiled; the worker reports clean scompile runs. Advisory: owners of CoefficientDerivedSystemCalculus and integralOperationsLevelPullback are not in stmt_deps but are reached through the stmt_dep signatures (H2 forbids adding theorem stmt_deps); the docstring names the calculus S while the statement uses C; the second reading is the worker's self-check but is clause-by-clause."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R6",
+  "result": "pass",
+  "landing": "20261021T130133-L-2553582",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
