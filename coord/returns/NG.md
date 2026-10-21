@@ -38,11 +38,6 @@ L: independent stage-2 immutable head 04978822afb4: --apply-fixes: coord/reports
 
 L: approved by the reader, but the landing refused it: NOT MERGED lem-trf-elementary-semistable-chart-globalization: lem-trf-elementary-semistable-chart-globalization: completed in this project's DAG but not in the live DAG the queue reads (side completion never promoted; L promotes it) Rebase the delivery onto the current DAG, re-read every cited node that changed, adjust the split, and push again.
 
+## lem-weil-pbc-ringed-projection-mate-exact (2026-10-21 03:21 UTC, branch head fd956438f3)
 
-
-## lem-weil-pbc-ringed-projection-mate-exact (dedicated repair handoff; head 100b8fa832869045abf34c00f31fca7b56574dfe)
-
-The previous worker ended with: re-split (decision of the human, 2026-10-21): the proof in words is 8001 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a node of its own (statement, source, proof in words) that the step cites, until each node's proof is well under 3000 characters. Keep this node's statement unchanged; its proof becomes the short assembly of the new nodes. Longest steps: step 1 (1085 characters); step 2 (1461 characters); step 3 (1395 characters); step 4 (1735 characters); step 7 (927 characters). Lean module: Sheaf.Paper.ProjectionMateExact.
-
-Compiler messages and attribution:
-re-split (decision of the human, 2026-10-21): the proof in words is 8001 characters. We consider the current split too coarse: a node whose proof is over 3000 characters is rarely proved in one Lean module (stage-3 history: 11 attempts per module on average, more than half blocked). Make the split finer: every argument of the proof that is not elementary becomes a node of its own (statement, source, proof in words) that the step cites, until each node's proof is well under 3000 characters. Keep this node's statement unchanged; its proof becomes the short assembly of the new nodes. Longest steps: step 1 (1085 characters); step 2 (1461 characters); step 3 (1395 characters); step 4 (1735 characters); step 7 (927 characters). Lean module: Sheaf.Paper.ProjectionMateExact.
+re-split (the human, 2026-10-21): the purpose is to spread the work over new nodes other workers can take at once; new node(s) not cited by any step: lem-weil-pbc-total-tensor-integer-shifts. Every argument of the old proof becomes a new statement-only node the step cites; do not shorten or blur the argument.
