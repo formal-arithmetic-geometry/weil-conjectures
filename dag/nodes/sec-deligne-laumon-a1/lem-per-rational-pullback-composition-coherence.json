@@ -23,7 +23,9 @@
   "lem-per-rational-module-realization-functor",
   "lem-per-rational-realization-pullback-comparison",
   "lem-sfb-ringed-derived-monoidal-comparisons",
-  "lem-weil-pbc-constant-completion-equivalence"
+  "lem-weil-pbc-constant-completion-equivalence",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "def-per-proetale-ring-inverse-image-comparisons"
  ],
  "proof": [
   {
@@ -305,5 +307,33 @@
   "group": "Q146",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q146-c0a415ca9 (reviewer sub-agent of L); spot-checked: Read all eight steps in full against every cited statement; no faults, no fixes written. The item statement and stmt_deps are unchanged from side-live; the item is still unsplit live; there are no new nodes, no repair note and no cycle. Source check: Bhatt–Scholze Remark 6.8.15 on p. 62 (f*K = f*_naive K ⊗ Λ_Y) matches P_g and G_g; the Stacks citations 03CB, 0D6D, 07A4, 099J/pushforward-derived-complete-adjoint, 0A0E and 099N(2),(5) were checked against tags and labels. Step 1: both coefficient composites agree on constant sections, by the adjunction-compatible composition of 03CB(3), and joint monicity of the projections of the limit sheaf gives c_{gh}=c_h h^{-1}c_g and c_id=1. Step 2: I traced the generator e''⊗b'⊗k along both paths; both give e''ι(c_h b')⊗k, using the flat-term K-flat preservation lemma and the localization/inverse-image coherence lemma. Step 3: the def of completed pullback states that its comparison is the completion unit; the pushforward-completion lemma allows arbitrary ring maps; together these give P̂ ⊣ Rg_* on complete objects. Step 4: the reflected-compositor lemma applies with d=κ, and a is its conjugate by the adjunction-compatibility clause of the monoidal lemma. Steps 5–7: I re-derived the cancellation and the identity case, and the domains of δ_h at γ_g^{-1} are correct. Step 8: fraction naturality follows by ϖ-linearity; full faithfulness of J is not used. Edge cases checked: identities, the empty scheme, torsion objects. Batch-5 flag on lem-weil-pbc-localization-inverse-image-coherence → lem-trf-geometric-inverse-image-exact: accepted. That node only states exactness of inverse image along a geometric morphism, which is general sheaf theory, and recomputing the target closure with and without the item shows the delivery adds 0 nodes to the batch-5 closure (both nodes are already in it). The worker wrote the eight tool_uses themselves; all are accurate generic interfaces and I accepted them. lem-weil-pbc-realization-completed-pull is a narrower existing node (finite type over a field k), not something this split duplicates."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalPullbackCompositionCoherence",
+  "declaration": "AlgebraicGeometry.Scheme.rationalPullbackCompositionCoherence",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.rationalCoherenceUnit",
+   "AlgebraicGeometry.Scheme.rationalCoherenceScalar",
+   "AlgebraicGeometry.Scheme.rationalCoherenceSmul",
+   "AlgebraicGeometry.Scheme.HasRationalPullbackCompositionCoherence",
+   "AlgebraicGeometry.Scheme.HasRationalPullbackIdentityCoherence",
+   "AlgebraicGeometry.Scheme.rationalPullbackCompositionCoherence",
+   "AlgebraicGeometry.Scheme.rationalPullbackIdentityCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/RationalPullbackCompositionCoherence.lean",
+  "statement": "theorem rationalPullbackCompositionCoherence (g : Y ⟶ X) (h : Z ⟶ Y) (sX : RationalModuleRealization l E X) (sY : RationalModuleRealization l E Y) (sZ : RationalModuleRealization l E Z) (ag : RationalRealizationPullbackComparison l E g sY sX) (ah : RationalRealizationPullbackComparison l E h sZ sY) (ac : RationalRealizationPullbackComparison l E (h ≫ g) sZ sX) : (HasRationalPullbackCompositionCoherence l E g h sX sY sZ ag ah ac)",
+  "branch": "newtargets-dag",
+  "by": "Q16",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The two Has predicates spell out the coefficient, tensor-generator, derived-counit, strict-completion-unit and raw-rational natural-transformation equations. Both the composition and identity are stated for the existing normalized comparison data, without assuming coefficient maps invertible. The three section helpers have real data. No new independent notion or dependency interface is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f52d5e8f3",
+  "group": "Q16",
+  "result": "pass",
+  "note": "Lean module byte-identical to the returned ef2a70e1; re-read all clauses (coefficient equations, generator formula for moduleComp, counit-pinned ambientComp, unit-equation integralComp matching pbcActualCompletedPullCompIso_exists, rawComp on all QK, final equation of natural transformations; identity analogue): faithful to the node, no free arrows, hypotheses not strengthened. The H2 return is repaired: theorem stmt_dep replaced by def-per-proetale-ring-inverse-image-comparisons, existing:true on the unchanged ProfiniteCoefficientInverseImage (proEtaleRingInverseImageComp/Id are real conjugateIsoEquiv mates, directions match the TeX, Stacks 098T(2)/098U, body owners within def-weil-proetale-inverse-image, no cycle, no other owner). check_existing: no failures, one note (noncomputable in lean.statement; advisory per Q83 precedent). Advisory: rationalCoefficientSheaf has only a theorem-node owner, inherited from landed deps. No compile (no file changed)."
  }
 }

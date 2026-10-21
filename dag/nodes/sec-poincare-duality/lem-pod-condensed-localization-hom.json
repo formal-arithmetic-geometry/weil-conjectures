@@ -433,5 +433,47 @@
   "group": "Q82",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q82-b0ed21f12 (reviewer sub-agent of L); spot-checked: Read HRS arXiv:2305.18131: Def 3.3, Lemma 4.10, Cor 4.11, Lemma 5.3(2) with its global-Hom assertion, Rem 5.4 and Prop 5.5 with its proof. The item is the Hom form of Prop 5.5 for t^n on qcqs Y with arbitrary condensed Λ. It is not weakened, includes no essential surjectivity, and is unsplit in live, clones/live and side-live, so not superseded. Steps 1-8 check out: telescope legs t^{-n}η; the new bounded node gives a representative vanishing below a for the uniform lower bound of Rem 5.4; continuity with K=M; module localization; adjunct of η∘f is E(f) by the triangle identity; fraction composition; dual pairs closed under tensor; balanced tensor coherence including the Koszul sign; qcqs pullback. New nodes: lem-pod-stratified-dualizable-bounded (Cor 4.11) and lem-pod-stratified-dualizable-hom-continuity (Lemma 5.3(2) in H^r). Both are statement-only, self-contained and strictly smaller than the item. They are not duplicates: sk-lem-constructible-ext-continuity, the condensed local-piece and integral sheaf Hom continuity nodes, and lem-zl-condensed-* need Noetherian X, specific Λ or finitely many irreducible components. Tool uses accepted: all 8 generic ringed-site and localization tools; no SGA. Fixes, 2 faults: (1) B3: item and both new nodes cited def-weil-derived-tensor, which only defines the tensor over the constant sheaf A_Y. Replaced with sk-def-sfb-derived-tensor-hom (relative derived tensor over Λ_X) in statements and stmt_deps, and added def-weil-constructible-subset for 'constructible'. (2) C1/C3: Step 6 used that restriction to strata is monoidal and preserves dual pairs without citing anything. Added a sentence citing def-weil-proetale-inverse-image, sk-def-sfb-pullback-from-point-comp and lem-weil-pbc-ringed-topoi-derived-tensor-pullback, with uses updated; proof_deps unchanged.; 3 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CondensedLocalizationHom",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedLocalization.condensed_localization_hom",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.D",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.R",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.scalarSection",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.localizedRing",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.localizedRingMap",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.localized",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.localizedComm",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.coefficientLocalizationMap",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.coefficientLocalizationMap_isMonHom",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.coefficientLocalizationMapMon",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.scalarRingMap_existsUnique",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.scalarRingMap",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.stratifiedDualizable",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.extension",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.extensionShiftIso",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.IsScalarAction",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.IsDerivedComparisonNormalized",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.IsExtensionMonoidalNormalized",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.IsHomComparison",
+   "AlgebraicGeometry.ProEtale.CondensedLocalization.condensed_localization_hom"
+  ],
+  "file": "lean/Sheaf/Paper/CondensedLocalizationHom.lean",
+  "statement": "theorem condensed_localization_hom (t : R Λ) : ∃ (k : Localization.Away t →+* R (localized Λ t)) (exactness : ∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap (coefficientLocalizationMap Λ t) X))) (l₀ : ∀ X : Scheme.{u}, Linear (R Λ) (D Λ X)) (l₁ : ∀ X : Scheme.{u}, Linear (Localization.Away t) (D (localized Λ t) X)), k.comp (algebraMap (R Λ) (Localization.Away t)) = scalarRingMap Λ t ∧ (fun [lin₀ : ∀ X : Scheme.{u}, Linear (R Λ) (D Λ X)] [lin₁ : ∀ X : Scheme.{u}, Linear (Localization.Away t) (D (localized Λ t) X)] [ex : ∀ X : Scheme.{u}, PreservesFiniteLimits (Mod.extendScalars (coefficientMap (coefficientLocalizationMap Λ t) X))] ↦ (∀ X : Scheme.{u}, IsScalarAction Λ X (RingHom.id _) ∧ IsScalarAction (localized Λ t) X k) ∧ (∀ (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y], IsHomComparison Λ t Y ∧ stratifiedDualizable Λ Y (𝟙_ (D Λ Y)) ∧ ∀ M N : D Λ Y, stratifiedDualizable Λ Y M → stratifiedDualizable Λ Y N → stratifiedDualizable Λ Y (M ⊗ N)) ∧ (∃ (m : ∀ X : Scheme.{u}, (Mod.extendScalars (coefficientMap (coefficientLocalizationMap Λ t) X)).Monoidal) (n : ∀ X : Scheme.{u}, (extension Λ (coefficientLocalizationMap Λ t) X).Monoidal), (fun [ordM : ∀ X : Scheme.{u}, (Mod.extendScalars (coefficientMap (coefficientLocalizationMap Λ t) X)).Monoidal] [derM : ∀ X : Scheme.{u}, (extension Λ (coefficientLocalizationMap Λ t) X).Monoidal] ↦ (∀ X : Scheme.{u}, IsExtensionMonoidalNormalized Λ (coefficientLocalizationMap Λ t) X ∧ ∀ M N : D Λ X, Functor.LaxMonoidal.μ (extension Λ (coefficientLocalizationMap Λ t) X) M N ≫ (extension Λ (coefficientLocalizationMap Λ t) X).map (β_ M N).hom = (β_ ((extension Λ (coefficientLocalizationMap Λ t) X).obj M) ((extension Λ (coefficientLocalizationMap Λ t) X).obj N)).hom ≫ Functor.LaxMonoidal.μ (extension Λ (coefficientLocalizationMap Λ t) X) N M) ∧ (∀ (Z Y : Scheme.{u}) [CompactSpace Z] [QuasiSeparatedSpace Z] [CompactSpace Y] [QuasiSeparatedSpace Y] (g : Z ⟶ Y), NatTrans.IsMonoidal (CondensedRing.derivedPullIso (coefficientLocalizationMap Λ t) g).hom)) (ordM := m) (derM := n)) ∧ (∀ (Z Y : Scheme.{u}) [CompactSpace Z] [QuasiSeparatedSpace Z] [CompactSpace Y] [QuasiSeparatedSpace Y] (g : Z ⟶ Y) (M : D Λ Y), stratifiedDualizable Λ Y M → stratifiedDualizable Λ Z ((CondensedRing.upperStar Λ.X g).mapDerivedCategory.obj M))) (lin₀ := l₀) (lin₁ := l₁) (ex := exactness)",
+  "branch": "sheaf-dag",
+  "by": "Q18",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Ordinary unbounded internal-module derived category, equivalent to the recorded ringed-site module category. Actual sheafified localization and canonical derived scalar extension; all auxiliary declarations belong to this item. Canonical scalar action reused from the already landed Hom-continuity dependency. Existential linear and monoidal structures are normalized to the fixed actions and balanced tensor representative square, not additional hypotheses. Symmetry is the braiding equation for that normalized derived tensorator; restriction compatibility is NatTrans.IsMonoidal of CondensedRing.derivedPullIso for the canonical monoidal_leftDerivedUpperStar structures (reviewer FIX). No statement change.",
+  "fixed_by": "NT-stage2-cc-0ba687b1b"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0ba687b1b",
+  "group": "Q18",
+  "result": "fix",
+  "note": "Two weak clauses (H3) repaired; everything else matches. (1) Nonempty (Functor.LaxBraided E) carries its own lax structure (LaxBraided extends LaxMonoidal) and says nothing about the normalized tensorator n; replaced by the braiding equation μ M N ≫ E.map β = β ≫ μ N M for n. (2) The pullback monoidal structures p₀, p₁ were free existentials (scalar-unit twists also satisfy the clause); replaced by NatTrans.IsMonoidal (CondensedRing.derivedPullIso (coefficientLocalizationMap Λ t) g).hom for the canonical monoidal_leftDerivedUpperStar instances; restrictionIso removed. fixes/: CondensedLocalizationHom.lean and lem-pod-condensed-localization-hom.lean-record.json (verbatim statement, 20 declarations; refit_record: no notes, no refusals). nt_compile --json on the fixed file: exit 0, clean, 52.7 s at load average about 96 (60 s limit). Checked clean: qcqs hypotheses only, arbitrary commutative condensed Λ, real sheafified localization, stratifiedDualizable via FiniteLocallyClosedStratification + IsConstructible + HasRightDual, Hom equivalence fixed by f⊗a ↦ a•(E f ≫ shiftIso), scalar actions fixed to stratifiedHomScalarMap, k fixed by k ∘ algebraMap = scalarRingMap, raw localization functor full/faithful/additive with no completion, ordinary and derived tensor comparisons canonical, unit/tensor/pullback closure stated, edge cases covered, docstring and sorry gates pass."
  }
 }

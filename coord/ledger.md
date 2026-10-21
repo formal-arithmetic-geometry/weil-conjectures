@@ -22777,3 +22777,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:09 L: merged deliver/V8/Sheaf.Paper.FiniteScalarPerfectRefinement (stage 3; reviewer PASS; first push; landing 20261021T140945-L-2780168 (interface); batch 20261021T140745; modules 4; new nodes 3)
 - 14:09 L: merged deliver/X2/Sheaf.AlgebraicGeometry.SupportQuotientProduct (stage 3; reviewer FIX; after a return; landing 20261021T140949-L-2782083 (interface); batch 20261021T140745; modules 1; new nodes 0; change records: coord/changes/X2-support-quotient-product-elaboration.md)
 - 14:10 L: merged deliver/Y5/Sheaf.Paper.LocalIntegralPerfectModelCohomology (stage 3; reviewer PASS; first push; landing 20261021T141001-L-2789284 (proof); batch 20261021T140745; modules 1; new nodes 0)
+- 14:10 L: merged deliver/Q18/lem-pod-condensed-localization-hom (stage 2; reviewer FIX; parallel immutable checks)
+- 14:10 L: merged deliver/Q16/lem-per-rational-pullback-composition-coherence (stage 2; reviewer PASS; parallel immutable checks)
