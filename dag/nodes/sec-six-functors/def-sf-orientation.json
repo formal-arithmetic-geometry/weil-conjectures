@@ -120,21 +120,26 @@
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-f5e022cf7 (reviewer sub-agent of L); spot-checked: I read every clause of the item against main-20261015 def-sf-orientation.md (order 2391, the same text as master order 2047) and its unit sk-def-sf-orientation. The item has the component family, naturality in Y, composition, étale base change, the coefficient and realization conditions, the affine-line normalization and the a_X reading. Nothing is weakened or added. I checked the directions and types of every map. theta: PF^{-1} (A3), then ε⊗1, transposed under Rf_!⊣Rf^!. beta: Ex_!^{-1} (A2), then Lv^*ε. Composition: twist d+e, θ, Rf^!γ_g, then the mate of (A4). Clause 4 matches main-20261015 def-pur-affine-line-purity-comparison.md (∫_p = t_q∘restriction, then the exceptional adjoint). The item uses def-amb-p1-trace (Noetherian base, N invertible) to allow a nonseparated finite-type Y. Its t_q^p = C(t_q^e)∘(Rq_*τ∘β_q)^{-1} agrees with lem-pur-vector-integration-site-comparison. Small cases checked: d=0 and the identity (γ_id=1), empty X, A^1 (d=1, [2], (1)), n=1 with ramified E, the field stages (no field→finite reduction), and a nonseparated Y. No new nodes, so B1–B7 and D1 do not apply and nothing is dropped. The only orientation nodes besides the item are sk-def-sf-orientation (cites the item; kept in same_as) and its citers. There is no cycle over the full graph, including the dependencies I added. No SGA is used, and no tool_uses are needed (definition with no proof). Two B3-type faults, fixed in fixes/dag/nodes/sec-six-functors/def-sf-orientation.json: (1) the étale components had no cited definition, although the datum's D^b_ctf, Rf^! and twists are pro-étale. I defined γ^e_f: f^*L_Y(d)[2d] ≅ f^×A_Y with f^× from def-weil-exceptional-inverse-image (Rf_n^! = ν^* f^× Rν_*) and the twist from lem-asd-etale-finite-twist-pullback. I wrote t_C = τ^{⊗d}[2d] and w_C = the unit identification explicitly, and added both nodes to stmt_deps. (2) In clause 1, v must be separated of finite type, the domain of (A2)'s Ex_!; this is now stated. review.md has the details.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
-  "branch": "master",
-  "existing": true,
-  "module": "WeilConjectures.SixFunctors.Etale.Derived.OrientationDatum",
-  "declaration": "AlgebraicGeometry.Etale.OrientationComparisonData",
+  "module": "Sheaf.Paper.SixFunctorOrientationFamily",
+  "declaration": "WeilConjectures.SfOrientationDatum",
   "declarations": [
-   "AlgebraicGeometry.Etale.OrientationComparisonData",
-   "AlgebraicGeometry.Etale.OrientationComparisonData.compIso",
-   "AlgebraicGeometry.Etale.OrientationComparisonData.baseChangeIso",
-   "AlgebraicGeometry.Etale.OrientationDatum",
-   "AlgebraicGeometry.Etale.OrientationDatum.nonempty_iso_dualizingComplex",
-   "AlgebraicGeometry.Etale.CoefficientChange",
-   "AlgebraicGeometry.Etale.OrientationDatum.IsCompatibleCoefficientChange",
-   "AlgebraicGeometry.Etale.ProEtaleRealization",
-   "AlgebraicGeometry.Etale.OrientationDatum.IsCompatibleProEtaleRealization"
+   "WeilConjectures.sfOrientationCommonLine",
+   "WeilConjectures.SfOrientationDatum"
   ],
-  "note": "attached by the lead's tool step2_attach.py 2026-10-18 03:19 UTC (L, propagation 2026-10-18), live declaration stated, proof open in WeilConjectures.SixFunctors.Etale.Derived.OrientationDatum: the blueprint item def-sf-orientation's upstream Lean declarations as live states them; their proofs are still `sorry` in live (stage-3 route work)"
+  "file": "lean/Sheaf/Paper/SixFunctorOrientationFamily.lean",
+  "statement": "structure SfOrientationDatum {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {m : ℕ} (S : SixFunctorDatum D C E (m + 1) (Nat.succ_le_succ (Nat.zero_le m)))",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Section 1(B): the recorded OrientationDatum is finite-coefficient only and accepts arbitrary comparison isomorphisms; it has no completed integral/rational/common-stage family or fields enforcing the actual coefficient and site unit comparisons. This module retains all four coefficient stages, all finite-field representatives, canonical counit transposes and scalar/root normalizations, finite etale companions with the unit-induced realization, and the canonical affine-line trace condition. The original signed twist functors and coefficient categories are used unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66388a343",
+  "group": "Q23",
+  "result": "pass",
+  "note": "I read all 13 modules (item, the §1(B) SfOrientationDatum repair of def-sf-orientation, and 11 new def-sf-orientation-* nodes) against sk-def-sf-orientation (main-20261015, order 2487) and def-sf-orientation, clauses 1–4. The Lean component T_{X,d} ≅ f^!(T_{Y,0}) is the form the source permits. theta and beta are counit transposes of the datum's own projection and exchange maps, pinned by HEq; I checked directions against the live SixFunctorExchangeData. Base change, composition, the coefficient equation w∘C(γ)=γ'∘t (rationalization, integral→finite for E and every L, stage transitions, common stage), the realization through the derivedComparisonAdjunction unit, and the affine trace (open counit then projectiveLineTrace; HEq types match at X=A¹) all match the source. All coordinates are pinned; the unique-choice definitions are fixed on root tensors; sorry appears only in documented theorems. Records: statements verbatim; def-sf-orientation differs from live only in lean (replacing the lead's existing:true attachment); item stmt_deps add only the new nodes; no collisions. Edge cases covered: d=0, f=id, empty X, m=0 ramified, all r, nonseparated Noetherian Y. Accepted as equivalent: étale-companion presentation of finite geometry; integral normalization via reductions; no finite→finite field because A5 has none. No compile (no change); worker reports 13 clean compiles and dry run OK. Advisory: author-written second reading; the repair uses new-node declarations not in def-sf-orientation stmt_deps (no cycle); the étale family uses f^× without citing def-weil-exceptional-inverse-image."
  }
 }

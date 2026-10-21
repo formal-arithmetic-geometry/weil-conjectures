@@ -17,7 +17,18 @@
  "stmt_deps": [
   "def-sf-datum",
   "def-coefficient-twists-detailed",
-  "def-sf-orientation"
+  "def-sf-orientation",
+  "def-sf-orientation-geometric-comparisons",
+  "def-sf-orientation-integral-line-comparisons",
+  "def-sf-orientation-scalar-line-comparisons",
+  "def-sf-orientation-finite-line-comparisons",
+  "def-sf-orientation-geometric-family",
+  "def-sf-orientation-finite-realization",
+  "def-sf-orientation-etale-family",
+  "def-sf-orientation-etale-line-comparisons",
+  "def-sf-orientation-finite-reduction-comparisons",
+  "def-sf-orientation-higher-pair",
+  "def-sf-orientation-stage-compatibility"
  ],
  "proof": [],
  "proof_deps": [],
@@ -120,5 +131,33 @@
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NG-417730752 (reviewer sub-agent of L); spot-checked: Read the whole delivery. It has one commit: the item, the unit (only realized/realized_by changed, steps [] since the unit has no proof) and the report with both review sections. No new nodes. Source: main-20261015 sec-six-functors/sk-def-sf-orientation/_section.md (order 2487) and the detailed def-sf-orientation.md (order 2391). The master copy has the same defining text. Clause by clause: (1) the ambient setting (k, l != p, the four stages, finite-type k-schemes, D^b_ctf, a_X, omega = Ra_X^! Lambda) matches def-sf-datum and, through it, def-fix-six-functor-datum. (2) Lambda_S and K(m) match def-coefficient-twists-detailed: completed O_E sheaf, common-stage Qbar_l, l invertible on k-schemes. (3) gamma: Lf^* Lambda_Y(d)[2d] -> Rf^! Lambda_Y is word for word the source and lies in D^b_ctf. (4) Reading an orientation as a component of the def-sf-orientation family, with comparisons only at the stages where A5 defines them, matches the detailed definition and is not a weakening. (5) The affine-line normalization comes from the detailed source and is named in the report. (6) The f = a_X inversion is correct, and X is made separated. (7) The forward pointers thm-pur-finite-coefficient-smooth-purity, thm-pur-cohomological-smoothness and sk-thm-purity-transport say what is claimed. They correctly replace the non-node ids sk-thm-smooth-purity and sk-prop-cohsm and are rightly not stmt_deps. No SGA source is cited. Edge cases checked: d=0 (etale), d=1, X empty, f=id, all four stages. stmt_deps exist, form no cycle, and are used only for their statements. Duplicate check: def-sf-orientation is cited and in same_as; the pur9 and affine-line orientation nodes are different objects. The slopmaster2 Orientation (Orientation.lean:85-175) is finite-coefficient, single-isomorphism and has extra hypotheses, so there is no exact attachment. The eight recorded Mathlib searches cover all three kinds. No fixes and no tool_uses. Maintainer remarks only: consider putting the three forward-pointer ids in the pointers field, and the report's STATEMENT-DISPUTED label is really a context restoration."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "lean": {
+  "module": "Sheaf.Paper.SixFunctorOrientation",
+  "declaration": "WeilConjectures.SixFunctorOrientation",
+  "declarations": [
+   "WeilConjectures.SixFunctorOrientation",
+   "WeilConjectures.SixFunctorOrientation.integralComponent",
+   "WeilConjectures.SixFunctorOrientation.rationalComponent",
+   "WeilConjectures.SixFunctorOrientation.commonComponent",
+   "WeilConjectures.SixFunctorOrientation.integralStructure",
+   "WeilConjectures.SixFunctorOrientation.finiteStructure",
+   "WeilConjectures.SixFunctorOrientation.rationalStructure",
+   "WeilConjectures.SixFunctorOrientation.commonStructure"
+  ],
+  "file": "lean/Sheaf/Paper/SixFunctorOrientation.lean",
+  "statement": "def SixFunctorOrientation {D : FiniteFieldDatum.{u}} {C : D.CoefficientDatum} {E : Type u} [Field E] [Algebra (Padic C.l) E] [FiniteDimensional (Padic C.l) E] {m : ℕ} {S : SixFunctorDatum D C E (m + 1) (Nat.succ_le_succ (Nat.zero_le m))} (O : SfOrientationDatum S) {X Y : SixFunctorSpace D} (f : X ⟶ Y) [IsSeparated f.hom.left] (d : ℕ) [SmoothOfRelativeDimension d f.hom.left] (c : Compactification f.hom.left) : sfOrientationReducedLine D C E m X d ≅ (S.finite.exceptional f c).obj (sfOrientationReducedLine D C E m Y 0)",
+  "branch": "newtargets-dag",
+  "by": "Q23",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-66388a343",
+  "group": "Q23",
+  "result": "pass",
+  "note": "I read all 13 modules (item, the §1(B) SfOrientationDatum repair of def-sf-orientation, and 11 new def-sf-orientation-* nodes) against sk-def-sf-orientation (main-20261015, order 2487) and def-sf-orientation, clauses 1–4. The Lean component T_{X,d} ≅ f^!(T_{Y,0}) is the form the source permits. theta and beta are counit transposes of the datum's own projection and exchange maps, pinned by HEq; I checked directions against the live SixFunctorExchangeData. Base change, composition, the coefficient equation w∘C(γ)=γ'∘t (rationalization, integral→finite for E and every L, stage transitions, common stage), the realization through the derivedComparisonAdjunction unit, and the affine trace (open counit then projectiveLineTrace; HEq types match at X=A¹) all match the source. All coordinates are pinned; the unique-choice definitions are fixed on root tensors; sorry appears only in documented theorems. Records: statements verbatim; def-sf-orientation differs from live only in lean (replacing the lead's existing:true attachment); item stmt_deps add only the new nodes; no collisions. Edge cases covered: d=0, f=id, empty X, m=0 ramified, all r, nonseparated Noetherian Y. Accepted as equivalent: étale-companion presentation of finite geometry; integral normalization via reductions; no finite→finite field because A5 has none. No compile (no change); worker reports 13 clean compiles and dry run OK. Advisory: author-written second reading; the repair uses new-node declarations not in def-sf-orientation stmt_deps (no cycle); the étale family uses f^× without citing def-weil-exceptional-inverse-image."
+ }
 }
