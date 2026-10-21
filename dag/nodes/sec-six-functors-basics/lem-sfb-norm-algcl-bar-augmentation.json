@@ -15,9 +15,134 @@
   "def-sfb-condensed-action-module",
   "lem-sfb-condensed-derived-invariant-bar"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Let $\\mathcal C$ be the small coherent profinite site and write $A$ also for its section-ring sheaf $V\\mapsto C(V,\\Omega)$. By [def-sfb-continuous-map-condensed-ring] this is a sheaf. Apply [lem-weil-pbc-sheaf-tensor-closed] with coefficient category $\\operatorname{Ab}$: abelian sheafification is exact and strong monoidal, its local equivalences are monoidal, and abelian sheaves form a closed symmetric monoidal Grothendieck category. Thus [def-weil-pbc-internal-abelian-sheaf-module-equivalence] identifies internal $A$-modules with sectionwise $A$-module sheaves, preserving sections and maps. The equivalence is exact and monoidal by [lem-pe-internal-section-tensor-comparison]. The tensor right adjoint on the sectionwise side is sheaf Hom by [lem-pc-sheaf-modules-tensor-closed]; uniqueness of right adjoints therefore transports the internal Hom to that sheaf Hom. An exact equivalence preserves injectives, since its inverse carries monomorphisms to monomorphisms and the adjunction bijections preserve the extension property. Consequently it also transports the injective-resolution derived Hom and its augmentation.",
+   "uses": [
+    "def-sfb-continuous-map-condensed-ring",
+    "lem-weil-pbc-sheaf-tensor-closed",
+    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+    "lem-pe-internal-section-tensor-comparison",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03EO, sites-modules.tex lemma-internal-hom-adjoint-tensor; exact internal/sectionwise module transport as cited."
+   }
+  },
+  {
+   "text": "Let $\\mathcal F$ be the underlying abelian sheaf $V\\mapsto C(V,\\Omega)$. Given a defining finite jointly surjective covering family $\\{T_i\\to V\\}$, take $T=\\coprod_i T_i$ and the surjection $q:T\\to V$. Every $T_V^{n+1}$ is the finite disjoint union of the fibre products $T_{i_0}\\times_V\\cdots\\times_VT_{i_n}$. Continuous functions on a finite disjoint union are precisely tuples of continuous functions on its components. Omitting the $j$-th coordinate restricts to the projection omitting the $j$-th component in the corresponding tuple. Thus the complex in [lem-sfb-norm-algcl-profinite-cech-exact] is precisely the covering Cech complex in [def-weil-pbc-site-cech-complex]. The new analytic input gives its exactness in every positive degree. It is applied to $\\Omega$ itself; no completeness premise is supplied or needed by its statement.",
+   "uses": [
+    "lem-sfb-norm-algcl-profinite-cech-exact",
+    "def-weil-pbc-site-cech-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 03AM, 03AO for the covering Cech complex; noncomplete analytic exactness is the separately stated new input, not a consequence of these tags."
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-site-cech-vanishing-criterion] with $\\mathcal B$ all objects and $\\mathrm{Cov}$ all defining finite jointly surjective families. Finite products and fibre products of profinite spaces are profinite; hence every object and fibre product in such a covering belongs to $\\mathcal B$. These families define the coherent topology, so are cofinal among coverings (every covering sieve contains a defining family). Step 2 establishes the required positive Cech vanishing for each family. The criterion gives $H^r(V,\\mathcal F)=0$ for every profinite $V$ and every $r>0$. The internal module category is Grothendieck by [lem-sfb-modobj-grothendieck], using the closed monoidal Grothendieck category from step 1, and has enough injectives by [lem-sp-grothendieck-enough-injectives]. Choose a nonnegative module injective resolution $A\\to J^\\bullet$ and transport it by step 1. Apply [lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison] to the actual ring sheaf $A$, not a constant ring. It identifies the cohomology of $J^\\bullet(V)$ with $H^r(V,\\mathcal F)$ and is the identity in degree zero. Therefore $A(V)[0]\\to J^\\bullet(V)$ is a quasi-isomorphism for every $V$. All objects, covering indices and module values lie in the prescribed common universes.",
+   "uses": [
+    "lem-weil-pbc-site-cech-vanishing-criterion",
+    "lem-sfb-modobj-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 03F9 (lemma-cech-vanish-collection) and Tag 03FD (lemma-cohomology-modules-abelian-agree)."
+   }
+  },
+  {
+   "text": "For any profinite $P$ and module sheaf $N$, [def-pur-sheaf-hom] and the free-module universal property give\n$$\\mathcal Hom_A(A[P],N)(S)=N(S\\times P).$$\nExplicitly $x\\in N(S\\times P)$ sends a generator $p:V\\to P$ over $v:V\\to S$ to $(v,p)^*x$, extended $A(V)$-linearly. Conversely evaluate such a map on the tautological $P$-coordinate over $S\\times P$. Each construction reverses the other, including on generators after base change, and the free sheaf universal property extends these maps uniquely through sheafification. For $N=A$ this is the stated evaluation $C(S\\times P,\\Omega)$, with scalars pulled back from $S$. For $N=J^r$ the same formula identifies the Hom-resolution complex with $J^\\bullet(S\\times P)$, with identical differentials. Every continuous $v:P'\\to P$ acts by pullback along $1_S\\times v$, so these identifications and the resolution augmentations are contravariantly natural in $P$.",
+   "uses": [
+    "def-pur-sheaf-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, section-internal-hom; free-generator evaluation in the slice, written out here."
+   }
+  },
+  {
+   "text": "Apply step 3 to $V=S\\times P$. Step 4 identifies its quasi-isomorphism with the sections of the canonical map\n$$C(-\\times P,\\Omega)[0]\\longrightarrow\\mathcal Hom_A(A[P],J^\\bullet).$$\nIt is a quasi-isomorphism of sheaf complexes: exactness of every section complex identifies each presheaf image with the corresponding kernel sheaf, and hence identifies the sheaf image with that kernel. In degree zero the same statement includes the augmentation. The resolution complex represents $R\\underline{\\operatorname{Hom}}_A(A[P],A[0])$ after the exact transport of step 1. Thus its canonical unit from the underived Hom is an isomorphism in the ordinary derived category [def-weil-abstract-derived-category], naturally under every continuous parameter map as verified in step 4. This proves the needed termwise comparison as an intermediate consequence of the analytic input; the item itself requires only the total comparison.",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 08J7, resolution definition of derived sheaf Hom; sectionwise exactness implies sheaf exactness."
+   }
+  },
+  {
+   "text": "Now take $P=H^q$ for every $q\\geq0$. Use the compatible nonnegative bar-resolution model of [lem-sfb-condensed-derived-invariant-bar]. Each column augmentation $U_A^q[0]\\to R\\underline{\\operatorname{Hom}}_A(A[\\underline H^q],A[0])$ is the canonical unit proved invertible in step 5. Parameter naturality makes it commute with the bar faces: these are deletion of an end coordinate and addition of consecutive coordinates, all continuous on $H$. The first face has no action factor on $A$, since its action is trivial. The alternating sum is exactly the differential displayed in the item, including $d^0=0$. Regard the source as a double complex concentrated in resolution degree zero and the target as the compatible resolution double complex. They are first-quadrant, with finite total diagonals and total sign $d_{\\mathrm{bar}}+(-1)^q d_{\\mathrm{res}}$ as in [def-sp-double-complex-total]. [lem-sc-first-quadrant-total-column-comparison] applies to this double-complex morphism. It makes its total augmentation a quasi-isomorphism. Its $(q,0)$ component is induced by $A\\to I^0$, and all other source components vanish; consequently its localization is exactly the specified $j_A$, which is therefore an isomorphism.",
+   "uses": [
+    "lem-sfb-condensed-derived-invariant-bar",
+    "def-sp-double-complex-total",
+    "lem-sc-first-quadrant-total-column-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0133 (homology.tex, first-quadrant total comparison) with the compatible nonnegative bar model from the cited bar node."
+   }
+  },
+  {
+   "text": "The derived-unit interpretation of each column augmentation is independent of the chosen resolution. More concretely, apply [lem-weil-pbc-injective-resolution-lift-exists] in the equivariant category to the identity of $A$, obtaining a chain map between any two nonnegative equivariant injective resolutions with composite on $A$ equal to the second augmentation. Applying the compatible bar construction makes a map of double complexes commuting with the maps from $U_A^\\bullet$; totalization preserves that equality. The comparison map is a quasi-isomorphism before applying the derived functors, since it induces the identity on the sole cohomology object $A$. The compatible derived model and its naturality identify it with the canonical change of resolution by [lem-sp-derived-injective-resolution-naturality]. Uniqueness follows from [lem-weil-pbc-lift-to-injective-unique-up-to-homotopy]: two augmentation-preserving lifts are homotopic. After the bar functors the homotopy is natural in the parameter and commutes with bar faces; multiplying its component in bar degree $q$ by $(-1)^q$ gives a total homotopy (the two horizontal cross terms cancel). Thus the total morphism from $U_A^\\bullet$ is the same under the canonical resolution identifications.",
+   "uses": [
+    "lem-weil-pbc-injective-resolution-lift-exists",
+    "lem-sp-derived-injective-resolution-naturality",
+    "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 013P (derived.tex lemma-morphisms-lift), 013S (lemma-morphisms-equal-up-to-homotopy); normalized derived-resolution comparisons as cited."
+   }
+  },
+  {
+   "text": "For $q=0$ the parameter $H^0$ is a point, so evaluation is $U_A^0=A$ and the column augmentation is $A[0]\\to I^\\bullet$. Its induced degree-zero map is the identity under $H^0(I^\\bullet)=A$. The group action on $A$ is trivial, so the bar differential out of the constant degree-zero term is zero and this also gives $H^0(j_A)=1_A$, agreeing with the invariant-inclusion normalization of [lem-sfb-condensed-derived-invariant-bar]. For the empty test set all the section groups used above are zero. Negative degrees vanish throughout and no infinite total diagonal is used. The only analytic input was the new all-continuous $\\Omega$-valued Cech exactness statement; the construction of $A$, all maps and all resolutions remain in the ordinary module categories of the item.",
+   "uses": [
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), open direct image: analytic scalar input below the tame-boundary polynomial bar calculation. Degree-zero normalization and empty-parameter check."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-continuous-map-condensed-ring",
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-sfb-norm-algcl-profinite-cech-exact",
+  "def-weil-pbc-site-cech-complex",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-sfb-modobj-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "def-pur-sheaf-hom",
+  "def-weil-abstract-derived-category",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "def-sp-double-complex-total",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-weil-pbc-injective-resolution-lift-exists",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), open direct image: analytic scalar input below the tame-boundary polynomial bar calculation. Agent reduction through a separately stated noncomplete analytic Cech input, Stacks 03F9/03FD/08J7 and first-quadrant total comparison."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -46,10 +171,45 @@
    "results": "{\"t\": \"2026-10-21T19:39:07Z\", \"tool\": \"leanfinder\", \"query\": \"Underived continuous cochains with values in the incomplete norm algebraic closure of Qp compare quasi isomorphically to ordinary internal condensed derived group cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.cm5b.instQuasiIsoIntP\", \"continuousCohomology\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"ContinuousCohomology.continuousCohomologyZeroIso\", \"ContinuousCohomology.homogeneousCochains\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"ContinuousCohomology.MultiInd.complex\", \"groupCohomology.inhomogeneousCochainsIso\"], \"digest\": \"843be58b47f3acab\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits give continuous topological cohomology definitions, abstract Rep resolutions or generic quasi-isomorphisms, not the canonical ordinary internal condensed bar augmentation for incomplete norm scalars."
+  },
+  {
+   "tool": "grep",
+   "query": "(cohomolog|acyclic|derived|quasiIso).*(continuous|condensed)|(continuous|condensed).*(cohomolog|acyclic|derived|quasiIso)",
+   "results": "{\"t\": \"2026-10-21T20:06:24Z\", \"tool\": \"grep\", \"query\": \"(cohomolog|acyclic|derived|quasiIso).*(continuous|condensed)|(continuous|condensed).*(cohomolog|acyclic|derived|quasiIso)\", \"sub\": \"Condensed\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: topological continuous-cohomology constructions and condensed sheaf basic properties do not identify this ordinary internal derived bar augmentation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous cochains compute derived invariants of condensed modules for normed noncomplete algebraic closure p adic field",
+   "results": "{\"t\": \"2026-10-21T20:06:24Z\", \"tool\": \"leansearch\", \"query\": \"Continuous cochains compute derived invariants of condensed modules for normed noncomplete algebraic closure p adic field\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"ContinuousCohomology.MultiInd.complex\", \"continuousCohomology\", \"ContinuousCohomology.homogeneousCochains\", \"PadicAlgCl.normedField\", \"PadicComplex\", \"ContinuousCohomology.I_obj_V_carrier\", \"PadicComplex.nnnorm_extends\", \"Padic.adicCompletionEquiv\"], \"digest\": \"950e7c7cc0049a7b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: topological continuous-cohomology constructions and condensed sheaf basic properties do not identify this ordinary internal derived bar augmentation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"Condensed\", \"Ext\"",
+   "results": "{\"t\": \"2026-10-21T20:06:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"Condensed\\\", \\\"Ext\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"Condensed.hom_ext\", \"Condensed.hom_ext_iff\", \"LightCondensed.hom_ext\", \"LightCondensed.hom_ext_iff\", \"Condensed.lanPresheafExt\", \"LightCondensed.lanPresheafExt\", \"Condensed.lanPresheafExt_hom\", \"Condensed.lanPresheafExt_inv\"], \"digest\": \"97ba9e29249218c7\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: topological continuous-cohomology constructions and condensed sheaf basic properties do not identify this ordinary internal derived bar augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Higher sheaf cohomology of profinite spaces with coefficients in continuous functions to an incomplete nonarchimedean normed vector space vanishes",
+   "results": "{\"t\": \"2026-10-21T20:06:25Z\", \"tool\": \"leanfinder\", \"query\": \"Higher sheaf cohomology of profinite spaces with coefficients in continuous functions to an incomplete nonarchimedean normed vector space vanishes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CondensedMod.ofSheafProfinite\", \"LightCondAb.ofSheafLightProfinite\", \"Condensed.isSheafProfinite\", \"LightCondensed.IsDiscrete\", \"LightCondMod.LocallyConstant.instHasSheafifyLightProfiniteCoherentTopologyModuleCat\", \"LightCondMod.ofSheafLightProfinite\", \"LightProfinite.hasSheafify_type\", \"Condensed.ofSheafForgetProfinite\"], \"digest\": \"f7386089fb16e794\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: topological continuous-cohomology constructions and condensed sheaf basic properties do not identify this ordinary internal derived bar augmentation."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical augmentation continuous group cochains to condensed derived invariants incomplete nonarchimedean normed coefficients",
+   "results": "{\"t\": \"2026-10-21T20:06:27Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical augmentation continuous group cochains to condensed derived invariants incomplete nonarchimedean normed coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"continuousCohomology\", \"ContinuousCohomology.homogeneousCochains\", \"ContinuousCohomology.MultiInd.complex\", \"ContinuousCohomology.const\", \"ContinuousCohomology.MultiInd.functor\", \"ContinuousCohomology.I\", \"ContinuousCohomology.MultiInd.d\", \"ContinuousCohomology.I_obj_V_carrier\"], \"digest\": \"5928df586002616f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: topological continuous-cohomology constructions and condensed sheaf basic properties do not identify this ordinary internal derived bar augmentation."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-ind-unipotent-procyclic-difference",
@@ -77,5 +237,69 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-norm-algcl-bar-augmentation",
+  "worker": "stage1",
+  "summary": "NC reduces the actual augmentation through noncomplete scalar Cech exactness, object cohomology, free-generator Hom evaluation and first-quadrant totalization; gives resolution independence and degree-zero normalization. One analytic statement-only node is new; its exact reference is WANTED. No completion, finite-subextension replacement or use of the complete-field acyclicity lemma.",
+  "blueprint": "Paragraph (3), open direct image: analytic scalar input below the tame-boundary polynomial bar calculation. The blueprint only gives the direct-image preservation route; the analytic scalar input and formal comparison are an explicitly agent-written expansion.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-sheaf-tensor-closed",
+    "why": "Generic sheaf/module or resolution/total-complex tool, used with its stated hypotheses; the unit supplies no alternative to this formal input."
+   },
+   {
+    "node": "lem-pe-internal-section-tensor-comparison",
+    "why": "Generic sheaf/module or resolution/total-complex tool, used with its stated hypotheses; the unit supplies no alternative to this formal input."
+   },
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "Generic sheaf/module or resolution/total-complex tool, used with its stated hypotheses; the unit supplies no alternative to this formal input."
+   },
+   {
+    "node": "lem-weil-pbc-site-cech-vanishing-criterion",
+    "why": "Generic sheaf/module or resolution/total-complex tool, used with its stated hypotheses; the unit supplies no alternative to this formal input."
+   },
+   {
+    "node": "lem-sfb-modobj-grothendieck",
+    "why": "Generic sheaf/module or resolution/total-complex tool, used with its stated hypotheses; the unit supplies no alternative to this formal input."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+    "why": "Generic sheaf/module or resolution/total-complex tool, used with its stated hypotheses; the unit supplies no alternative to this formal input."
+   },
+   {
+    "node": "lem-sc-first-quadrant-total-column-comparison",
+    "why": "Generic sheaf/module or resolution/total-complex tool, used with its stated hypotheses; the unit supplies no alternative to this formal input."
+   },
+   {
+    "node": "lem-sp-derived-injective-resolution-naturality",
+    "why": "Generic sheaf/module or resolution/total-complex tool, used with its stated hypotheses; the unit supplies no alternative to this formal input."
+   },
+   {
+    "node": "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy",
+    "why": "Generic sheaf/module or resolution/total-complex tool, used with its stated hypotheses; the unit supplies no alternative to this formal input."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-sheaf-tensor-closed",
+  "lem-pe-internal-section-tensor-comparison",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-site-cech-vanishing-criterion",
+  "lem-sfb-modobj-grothendieck",
+  "lem-weil-pbc-ringed-site-module-abelian-evaluation-comparison",
+  "lem-sc-first-quadrant-total-column-comparison",
+  "lem-sp-derived-injective-resolution-naturality",
+  "lem-weil-pbc-lift-to-injective-unique-up-to-homotopy"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NC-50b7280a1",
+  "group": "NC",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NC-50b7280a1 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Source: main-20261015 sk-thm-sf-ctf-stability-direct-images paragraph (3), which only gives the direct-image route, so proof_origin=agent and the WANTED lines are right. The item statement is unchanged (same stmt_deps), there is no re-split note for this item, and no SGA is cited. Steps: 1 matches internal and sectionwise modules via sheaf-tensor-closed, the module equivalence and the tensor comparison, with internal Hom moved by uniqueness of adjoints. 2 identifies the Čech complex of a finite family with the fibre powers of one surjection T=⊔T_i, matching def-weil-pbc-site-cech-complex component by component. 3 checks hypotheses (1)–(3) of the site Čech criterion (B = all objects, finite families cofinal), then gets enough injectives from modobj-grothendieck and the ringed evaluation comparison for an arbitrary ring sheaf, giving A(V)[0]→J•(V) quasi-iso. 4 evaluates Hom(A[P],N)(S)=N(S×P) through the slice Hom, correctly elementary. 5 turns sectionwise exactness into a quasi-isomorphism of sheaf complexes. 6 totalizes with the first-quadrant column comparison and gives the actual j_A; I checked the trivial-action bar differential and d^0=0. 7 gives resolution independence by lift, uniqueness up to homotopy and the (−1)^q total-homotopy sign. 8 gives H^0(j_A)=1. New node lem-sfb-norm-algcl-profinite-cech-exact: unsplit and self-contained (B1/B2), strictly smaller than the item, with no group, derived Hom or totalization, so it is not D1/D2. It mirrors the accepted complete-field pair normed-scalar-profinite-hom-acyclic → normed-scalar-profinite-cech-exact. With step 3 it is equivalent to Ω̲-acyclicity on profinite sets, which the DAG already assumes elsewhere (profinite-algcl-derived-invariants-comparison step 2/4; norm-completion-positive-cohomology-mono). Not a duplicate of normed-scalar-profinite-cech-exact (finite E), local-norm-algcl-cocycle-descent, prime-to-ell-cochain-finite-quotient-descent (both group cochains) or procyclic-scalar-cochain-evaluation. Cases I tested, with no counterexample: the empty surjection, split and finite surjections (finite-evaluation contraction), cocycles valued in one finite F, H^1 over V=ℕ∪{∞} via density of Ω-cosets in the completion, and two-sheeted closed covers via a retraction. General truth is not proved here; the node stays honestly WANTED. Advisory B3: neither the new node nor the inherited item cites def-weil-algebraic-closure. The generic tool_uses in split_report are accepted. No changes."
  }
 }
