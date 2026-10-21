@@ -16,11 +16,12 @@
  ],
  "proof": [
   {
-   "text": "Use [lem-sfb-ringed-site-bounded-dual-components] for the given bounded $E$, with exactly the same small ringed site and commutative $R$. Its projection isomorphisms identify $D^q$ with $(E^{-q})^\\vee$, identify its differential with $\\phi\\mapsto(-1)^{q+1}\\phi d_E^{-q-1}$, and give $D^q=0$ outside $[-b,-a]$. Only these clauses are used; the bidual clause is unnecessary. Write $S=\\{i\\in\\mathbf Z:a\\leq i\\leq b\\}$, a finite set, and $T=\\operatorname{Tot}(F\\otimes_R D)$, $H=\\mathcal Hom_R^\\bullet(E,F)$.",
+   "text": "Project the degree-q Hom product for O=R[0] to i=-q. Every other factor has zero target; insert zero maps there to construct the inverse. The product universal property proves the inverse identities. Postcompose with the standard O^0=R isomorphism to obtain exactly dualProjection. Apply the recorded Hom differential equation to this projection: d_O=0 leaves (q+1).negOnePow times precomposition by d_E. This directly proves the projection and differential clauses formerly obtained from lem-sfb-ringed-site-bounded-dual-components; no bidual construction is used.",
    "uses": [
-    "lem-sfb-ringed-site-bounded-dual-components"
+    "def-pur-hom-complex",
+    "def-pur-sheaf-hom"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-cohomology.tex",
     "place": "Tag 08JJ, lemma-dual-perfect-complex, ordinary dual terms in the second paragraph; Tag 0A8X, section-hom-complexes, Hom differential."
@@ -109,7 +110,6 @@
   }
  ],
  "proof_deps": [
-  "lem-sfb-ringed-site-bounded-dual-components",
   "def-pc-tensor-complex-sheaves",
   "def-pur-sheaf-tensor-product",
   "def-weil-presheaf-modules-sheafification",
@@ -120,7 +120,7 @@
  "proof_origin": {
   "by": "document",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 08JJ, lemma-dual-perfect-complex, last three displays and final sentence; Tag 0A8X, section-hom-complexes. Explicit finite-support maps, inverse matrices, and differential calculation fill in the ordinary-complex argument."
+  "place": "Tag 08JJ, lemma-dual-perfect-complex, last three displays and final sentence; Tag 0A8X, section-hom-complexes. Explicit finite-support maps, inverse matrices, and differential calculation fill in the ordinary-complex argument. D5 stage 3: project and invert the one supported Hom factor directly; construct the module evaluation by its slice bilinear formula and descend through sheafification; all eight assembly steps are proved in Lean without using the bidual theorem."
  },
  "mathlib_searches": [
   {
@@ -259,5 +259,15 @@
   "group": "Q114",
   "result": "pass",
   "note": "Statement matches node and Stacks 08JJ final displays clause by clause. Hypotheses: bounded support, ∀ i M IsIso of the canonical θ; θ is uniquely pinned by IsModuleEvaluation on local pure tensors and slices. ε is pinned by the sign-free pure-tensor formula at r+q=0 and zero components elsewhere. Finite-sum identifications s/t/δ are pinned on biproduct ι/π and dualProjection; the diagonal biproduct.map θ identity matches. The differential clause is consistent with the recorded homComplex d; the sign (−1)^{p+q+1} was recomputed. Inverse chain map present. 𝟙_ = SheafOfModules.unit (LocalizedMonoidal), so smul is the R(V)-action. Universes max u v w, the project convention. Edge cases a>b, single degree, unbounded F and R=0 are OK. Docstrings and the 8-step proof are present, nothing hollow, no dropped imports, node unchanged except lean. Not recompiled (none needed): report gives 15.5 s/20.0 s clean. Advisories: homComplexπ (lem-sc-hom-complex-projections) and ringedSiteModules/sheafificationAdjunction are used without being stmt_deps; the dual-components module, landed 16:55 after base, has definitionally equal parallel helpers (complexDual/component) that stage 3 must bridge."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "D5",
+  "result": "pass",
+  "landing": "20261021T193044-L-838948",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
