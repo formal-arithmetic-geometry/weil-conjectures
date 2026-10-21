@@ -16,9 +16,94 @@
   "sk-def-sfb-bounded-constructible",
   "def-sfb-bounded-constructible-extend-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First identify the actual coefficient map, before using any exactness result. In the induced norm, the valuation ring in the statement is $\\mathcal O_E=\\{x\\in E:\\|x\\|\\leq1\\}$, with the subspace topology. On a profinite test object $S$, the map of [def-sfb-integers-to-subfield-point] sends $f\\in C(S,\\mathcal O_E)$ to the same function with values in $E$. This is exactly postcomposition with the continuous inclusion used in [def-weil-pbc-continuous-integral-coefficients]. Both maps on $X$ are obtained by applying the same inverse-image functor $p_X^*$, by [def-sfb-integers-to-subfield]. Thus they agree under the stipulated continuous coefficient identifications. By [sk-def-sfb-derived-extension-of-scalars], $L$ is the total left derived functor of extension along this very map; this is precisely the functor denoted $\\operatorname{integralScalarExtension}$ in [def-weil-pbc-continuous-integral-coefficients].",
+   "uses": [
+    "def-sfb-integers-to-subfield-point",
+    "def-weil-pbc-continuous-integral-coefficients",
+    "def-sfb-integers-to-subfield",
+    "sk-def-sfb-derived-extension-of-scalars"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-integers-to-subfield-point.md",
+    "place": "Continuous inclusion on profinite tests; compare def-sfb-integers-to-subfield and Bhatt–Scholze §6.8"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-continuous-integral-scalar-exact] to the continuous inclusion identified in step 1. Its hypotheses are a prime $\\ell$, a normed $\\mathbf Q_\\ell$-algebra which is a field, and an arbitrary scheme; the present finite normed extension $E$ and $X$ satisfy them. Hence $T$ preserves finite limits. Independently, clause 2 of [sk-def-sfb-change-of-scalars] says that this extension functor preserves finite colimits. Apply [lem-sfb-preserving-colimits-additive] to the two abelian module categories to obtain additivity of $T$. These are exactly the three asserted parts of exactness.",
+   "uses": [
+    "lem-weil-pbc-continuous-integral-scalar-exact",
+    "sk-def-sfb-change-of-scalars",
+    "lem-sfb-preserving-colimits-additive"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "§6.8, continuous integral localization; exactness supplied by the existing continuous-integral-scalar-exact node, and finite-colimit additivity by Stacks 010N (homology.tex, lemma-exact-functor)"
+   }
+  },
+  {
+   "text": "By [def-sfb-left-derived-exact], exactness gives the canonical comparison $\\alpha:L\\xrightarrow{\\sim}D(T)$, for the total left derived functor specified in the statement. Equivalently, if $P\\to K$ is a K-flat resolution, this comparison is induced by the quasi-isomorphism $T(P)\\to T(K)$. By [lem-weil-pbc-exact-functor-derived-factorization], termwise $T$ induces an additive triangulated functor $D(T)$, with its shift comparison and factorization through localization. Give $L$ the transported shift comparison\n$$c^L_K=(\\alpha_K[1])^{-1}\\circ c^{D(T)}_K\\circ\\alpha_{K[1]}.$$\nNaturality of $\\alpha$ identifies its images of the three arrows of each triangle, including the last arrow using this formula. The image triangle under $L$ is therefore isomorphic to its distinguished image under $D(T)$, so is distinguished. Also $\\alpha_B\\circ L(f+g)=D(T)(f+g)\\circ\\alpha_A=\\alpha_B\\circ(L(f)+L(g))$ for $f,g:A\\to B$; cancellation proves additivity of $L$.",
+   "uses": [
+    "def-sfb-left-derived-exact",
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F (lemma-right-derived-exact-functor), termwise exact functors; Tag 014X (lemma-additive-exact-homotopy-category); canonical left-derived comparison as in def-sfb-left-derived-exact"
+   }
+  },
+  {
+   "text": "The continuous integral coefficients identified in step 1 satisfy [lem-weil-pbc-integral-constructible-serre]: for finite normed $E/\\mathbf Q_\\ell$ and topologically Noetherian $X$, the stratified pro-étale locally finitely presented module objects are closed under kernels, cokernels and extensions. They contain zero and are invariant under isomorphism by their definition. Consequently [prop-weil-pbc-module-bounded-constructible-triangulated] applies to this class in the integral module category. Its full subcategory of bounded complexes with such cohomology is exactly $\\mathcal C$ of [sk-def-sfb-bounded-constructible], with no additional derived-completeness condition. Thus $\\mathcal C$ has the inherited triangulated structure and its inclusion $i$ takes distinguished triangles to distinguished ambient triangles.",
+   "uses": [
+    "lem-weil-pbc-integral-constructible-serre",
+    "prop-weil-pbc-module-bounded-constructible-triangulated",
+    "sk-def-sfb-bounded-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Definition 6.8.10 and Proposition 6.8.11(1),(3), pp. 60–61; the existing integral-constructible-serre node supplies the internal-module formulation"
+   }
+  },
+  {
+   "text": "By [def-sfb-bounded-constructible-extend-scalars], the functor $F$ sends $K$ to $L(iK)$ with its constructibility witness, sends $u$ to $L(iu)$, and the specified isomorphism $\\beta:Fj\\xrightarrow{\\sim}iL$ has identity components. Since the inclusions are full, addition of morphisms is ambient addition; hence $jF(u+v)=L(iu+iv)=L(iu)+L(iv)=j(Fu+Fv)$, and faithfulness of $j$ gives additivity of $F$. For a distinguished triangle $K\\to K'\\to K''\\xrightarrow{w}K[1]$ in $\\mathcal C$, step 4 makes its $i$-image distinguished, and step 3 makes its $L$-image distinguished. Use on $Fj$ the shift comparison transported from $iL$ along $\\beta$. Naturality gives $\\beta_{K'}\\circ j(Fu)=L(iu)\\circ\\beta_K$ for each arrow $u$; the transported shift gives the same equation for the final arrow to $K[1]$. Thus $\\beta$ is an isomorphism from the entire $Fj$-image triangle to this distinguished ambient image. This proves exactly the specified triangle compatibility in [def-weil-triangulated-category].",
+   "uses": [
+    "def-sfb-bounded-constructible-extend-scalars",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-sfb-rationalization-comparison/def-sfb-bounded-constructible-extend-scalars.md",
+    "place": "Restriction on objects and morphisms and the identity-component compatibility; compare Proposition 6.8.14(2)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sfb-integers-to-subfield-point",
+  "def-weil-pbc-continuous-integral-coefficients",
+  "def-sfb-integers-to-subfield",
+  "sk-def-sfb-derived-extension-of-scalars",
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "sk-def-sfb-change-of-scalars",
+  "lem-sfb-preserving-colimits-additive",
+  "def-sfb-left-derived-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-weil-triangulated-category",
+  "lem-weil-pbc-integral-constructible-serre",
+  "prop-weil-pbc-module-bounded-constructible-triangulated",
+  "sk-def-sfb-bounded-constructible",
+  "def-sfb-bounded-constructible-extend-scalars"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "§6.8, especially Proposition 6.8.11(1),(3) and the preparation for Proposition 6.8.14(2); assembled from the cited existing DAG statements and Stacks exact-functor localization"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -54,10 +139,38 @@
    "results": "8 hits: localCohomology.diagram, Condensed.profiniteSolid, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, ModuleCat.localizedModule_functor_map_exact, AdicCompletion.map_exact, Condensed.profiniteSolidification, BDeRhamPlus, Profinite.NobelingProof.succ_exact",
    "date": "2026-10-21",
    "verdict": "no match: generic exact-functor instances and ordinary ModuleCat localization do not identify the actual continuous coefficient inclusion, its specified derived functor, or its constructible restriction"
+  },
+  {
+   "tool": "grep",
+   "query": "integralScalarExtension|boundedConstructibleExtendScalars|mapDerivedCategory.*[Ii]sTriangulated",
+   "results": "1 hits: Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic exact-functor results cover the termwise triangulated clause, already cited through lem-weil-pbc-exact-functor-derived-factorization; they do not identify the actual continuous coefficient extension or establish integral constructible Serre closure"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous integral ell adic scalar extension is exact and agrees with termwise derived functor compatibly with bounded constructible inclusion",
+   "results": "8 hits: ContinuousLinearMap.continuous_restrictScalars, ContinuousLinearMap.isEmbedding_restrictScalars, ContinuousLinearMap.isUniformEmbedding_restrictScalars, ContinuousLinearMap.extend, TestFunction.toBoundedContinuousFunctionCLM_eq_of_scalars, ContinuousAlternatingMap.continuous_restrictScalars, ContinuousMultilinearMap.restrictScalarsLinear.congr_simp, hasFDerivAt_of_restrictScalars",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic exact-functor results cover the termwise triangulated clause, already cited through lem-weil-pbc-exact-functor-derived-factorization; they do not identify the actual continuous coefficient extension or establish integral constructible Serre closure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact extension from continuous integral ell adic internal module sheaves to field coefficients and its derived triangulated comparison on bounded constructible categories",
+   "results": "8 hits: localCohomology.diagram, LightCondensed.instIsGrothendieckAbelianLightCondMod, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, Condensed.instAB4StarCondensedMod, Profinite.NobelingProof.succ_exact, CategoryTheory.Abelian.Ext.mapExactFunctor, Condensed.instAB5CondensedMod, CondensedMod.IsSolid",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic exact-functor results cover the termwise triangulated clause, already cited through lem-weil-pbc-exact-functor-derived-factorization; they do not identify the actual continuous coefficient extension or establish integral constructible Serre closure"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive functor between abelian categories induces an additive triangulated functor on unbounded derived categories by applying the functor termwise",
+   "results": "8 hits: CategoryTheory.Functor.instIsTriangulatedDerivedCategoryMapDerivedCategory, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory, CategoryTheory.Functor.map_distinguished_exact",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: generic exact-functor results cover the termwise triangulated clause, already cited through lem-weil-pbc-exact-functor-derived-factorization; they do not identify the actual continuous coefficient extension or establish integral constructible Serre closure"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "thm-sfb-extend-scalars-localization",
@@ -69,10 +182,44 @@
  "blueprint": {
   "from": {
    "node": "thm-sfb-extend-scalars-localization",
-   "place": "Unit rationalization-comparison step 2, triangulated integral source and restricted derived extension; preparation for inverting W in the localization proof",
+   "place": "thm-sfb-extend-scalars-localization: triangulated integral source and ambient/restricted scalar-extension compatibility used in its proof step 1, realizing rationalization-comparison unit step 2",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-integral-derived-extension-comparison",
+  "worker": "stage1",
+  "summary": "Identified the coefficient map on continuous profinite tests and its pullback; combined existing continuous scalar exactness, finite-colimit additivity and canonical left-derived comparison; used the existing integral Serre theorem to justify inherited triangulatedness and wrote out restriction additivity and full triangle compatibility. No new nodes or change of statement.",
+  "blueprint": "Nearest blueprint ancestor thm-sfb-extend-scalars-localization: its triangulated integral source and restricted derived scalar-extension preparation in rationalization-comparison unit step 2. Steps 1–3 supply the actual ambient extension; step 4 the integral source; step 5 the specified compatibility.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-integral-scalar-exact",
+    "why": "Generic exactness of scalar extension for the actual continuous inclusion on any scheme; the unit requires flat integral localization and has no separate exactness theorem for this actual model."
+   },
+   {
+    "node": "lem-weil-pbc-integral-constructible-serre",
+    "why": "Integral internal constructible-module closure under kernels, cokernels and extensions, exactly the hypothesis needed for the unit’s inherited triangulated source."
+   },
+   {
+    "node": "prop-weil-pbc-module-bounded-constructible-triangulated",
+    "why": "Generic implication from constructible Serre closure to a triangulated bounded-cohomology subcategory, without changing the rationalization route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-integral-scalar-exact",
+  "lem-weil-pbc-integral-constructible-serre",
+  "prop-weil-pbc-module-bounded-constructible-triangulated"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q43-2aeebdfe5",
+  "group": "Q43",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q43-2aeebdfe5 (reviewer sub-agent of L); spot-checked: I read all five steps and every cited statement in full. This is the item's first split: it is unsplit and proof-free in live and side-live, has no repair note, and is not on the dropped list. There are no new nodes, the statement is unchanged, nothing cites SGA, and there is no cycle (closure of 682 nodes, containing neither the item nor its parent). Source: Bhatt–Scholze Prop. 6.8.14(2), pp. 61–62, and the first paragraph of the main-20261015 blueprint proof of thm-sfb-extend-scalars-localization ('F is induced by an exact functor, so it is triangulated'). The Lean target is EllAdicRationalization.lean lines 109–141, where the compatibility isomorphism has identity components; this matches def-sfb-bounded-constructible-extend-scalars. Step 1: both coefficient maps are postcomposition with the inclusion of the closed unit ball (C(S,O_E) to C(S,E)), followed by the same pullback along p_X; Lean's integralScalarExtension has the same shape, and the step is genuinely elementary. Step 2: finite limits come from the pbc exactness lemma (Lean integralScalarExtension_exact), whose hypotheses hold for E in Q̄_ℓ with the induced norm. Finite colimits come from clause 2 of sk-def-sfb-change-of-scalars, and additivity from the preserving-colimits node. Abelianness of the module categories comes from clause 4 of that same cited node but is not named in the step (advisory). Step 3: I checked the types of the transported shift c^L = (α_K[1])⁻¹∘c^{D(T)}∘α_{K[1]}, and that α is an isomorphism of triangles including the last arrow. Distinguishedness then follows from the axiom that triangles isomorphic to distinguished ones are distinguished, and additivity by cancelling α. The statement does not fix a shift structure on L, so transporting one is legitimate. Step 4: the integral Serre-closure lemma (finite E, Noetherian space; Lean integralConstructible_serre) is about the same lfp constructible predicate as the sfb definition (both are ProEtale.BoundedConstructible). On a Noetherian space every locally closed stratum is constructible. Citing the pbc triangulated proposition repeats the last paragraph of sk-def-sfb-bounded-constructible but is harmless. No derived completeness enters. Step 5: identity components and full faithfulness give additivity. With the shift transported along β, β is an isomorphism from each Fj-image triangle onto the distinguished L∘i-image triangle, which is exactly the statement's clause. Edge cases (X empty, E = Q_ℓ, the zero complex) are fine. I found no duplicates among the integralScalarExtension and integers-to-subfield citers. I accept the three tool_uses: pbc continuous-integral-scalar-exact, integral-constructible-serre and module-bounded-constructible-triangulated. The unit's own route would use det-prop flatness, but the pbc lemma is the exact assertion about the item's own integralScalarExtension and its closure is clean. Maintainer note: the proof totals 4287 characters, so a later re-split note for proofs over 3000 characters could re-release it."
  }
 }
