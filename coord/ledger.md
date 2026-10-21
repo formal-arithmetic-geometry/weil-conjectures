@@ -19912,3 +19912,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T03:41:21Z L: superseded stage-1 delivery NF/lem-weil-pbc-integral-stratified-perfect-characterization at 1948bc5d1d6b10d78b5f359c6b42419689c79d88; current completion retained; packet archived at refs/superseded/NF/lem-weil-pbc-integral-stratified-perfect-characterization/1948bc5d1d6b10d78b5f359c6b42419689c79d88; stale return retired.
 - 03:41 L: returned deliver/Q33/lem-weil-pbc-ringed-common-quotient-pullback-comparison (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-ringed-common-quotient-pullback-compariso)
 - 03:41 L: merged deliver/Q69/lem-sfb-finite-field-closed-support (reviewer FIX; first push; new nodes: 0)
+- 03:41 L: merged deliver/Q110/lem-sfb-etale-proetale-scalar-pullback-cube (reviewer FIX; first push; new nodes: 0)

@@ -20,9 +20,91 @@
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "sk-thm-pe-direct-image-comparison"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first with ordinary module sheaves. Let $I=f_{\\mathrm{proet}}^{-1}\\nu_Y^{-1}$ and $J=\\nu_X^{-1}f_{\\mathrm{et}}^{-1}$ on sheaves of sets, and let $\\theta:I\\xrightarrow{\\sim}J$ be the specified geometric square. The first assertion of [sk-thm-pe-direct-image-comparison] gives this square for every discrete coefficient ring, without its later qcqs hypothesis. Its module version $d_R^0$ is the lift of this same $\\theta$, not a choice of unrelated isomorphisms for $A$ and $B$. Indeed [def-weil-pbc-site-comparison-morphism] describes the coefficient lift by applying the inverse image to addition and scalar endomorphisms. Naturality with these operations makes $\\theta$ additive and scalar-compatible. The components on constant ring sheaves identify their canonical pullbacks: for each $r\\in R$, use naturality on $r:1\\to\\underline R$; the terminal-object component is the identity. These sections generate the constant sheaf by its sheafification definition [def-weil-pbc-constant-sheaf]. In particular $\\theta_B$ respects $a$ relative to $\\theta_A$, by naturality on $\\underline a$.",
+   "uses": [
+    "sk-thm-pe-direct-image-comparison",
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-constant-sheaf"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, underlying pullback square; ordinary square as specified in sk-thm-pe-direct-image-comparison"
+   }
+  },
+  {
+   "text": "For an ordinary $A_Y$-module $N$, write $Q=B_Y\\otimes_{A_Y}N$ and $q:B_Y\\times N\\to Q$ for the universal balanced pairing. Under the product identifications, $\\theta_{B_Y\\times N}=\\theta_{B_Y}\\times\\theta_N$: composing with either projection gives this by naturality. Naturality on the pairing itself therefore gives\n$$\\theta_Q\\circ I(q)=J(q)\\circ(\\theta_{B_Y}\\times\\theta_N).$$\nUse the ordinary scalar/pullback maps normalized by scalar insertion and the generalized pure-tensor formula [def-weil-pbc-canonical-ringed-tensor-comparison]; such a normalized comparison exists for the module pullbacks along $I$ and $J$ by [lem-weil-pbc-canonical-ringed-tensor-comparison-construction], applied to the $A_Y$-modules $B_Y$ and $N$ and composed with the constant-ring identification of Step 1. Identify $I(Q)$ with $B_X\\otimes_{A_X}I(N)$ and $J(Q)$ with $B_X\\otimes_{A_X}J(N)$ by these maps. Then the equation just written says that the route using $\\theta_Q$ sends $b\\otimes m$ to $b\\otimes\\theta_N(m)$. The route first using scalar/pullback and then $B_X\\otimes\\theta_N$ has exactly that value. The coefficient is $b$ because Step 1 identifies $\\theta_{B_Y}$ with the canonical constant-ring identification. The relation $ba(r)\\otimes m=b\\otimes rm$ goes to $ba(r)\\otimes\\theta_N(m)=b\\otimes r\\theta_N(m)$, so this is an equality of balanced maps. Pure tensors generate each presheaf tensor [def-pur-sheaf-tensor-product], and its maps extend uniquely to its module sheafification [def-weil-presheaf-modules-sheafification]. Thus the two ordinary cube paths are equal as sheaf morphisms, including on generalized sections, not only on global constant sections.",
+   "uses": [
+    "def-weil-pbc-canonical-ringed-tensor-comparison",
+    "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product: tensor represents balanced bilinear maps; Tag 03EL, lemma-tensor-product-pullback, canonical pairing"
+   }
+  },
+  {
+   "text": "Represent $M$ by a complex $K$ and choose a quasi-isomorphism $P\\to K$ with $P$ K-flat and flat in every degree [lem-pc-kflat-resolution]. Regard every geometric inverse image, comparison inverse image, and coefficient extension as a ringed-topos pullback; for coefficient extension the underlying geometric morphism is the identity and the structural ring map is $a$. By [lem-weil-pbc-ringed-topoi-derived-tensor-pullback], ordinary pullback preserves K-flat complexes with flat terms. Consequently every intermediate complex along either path, including $B\\otimes_A P$ and its subsequent geometric pullbacks, is K-flat with flat terms over its current coefficient ring. The representative counits are isomorphisms and identify every iterated derived pullback with the ordinary iterated pullback of this one $P$ [lem-weil-pbc-ringed-topoi-derived-pullback]. For the scalar edges this is also the K-flat computation in [lem-pur-derived-change-of-rings]. Flatness here is a property of the resolving complexes; it imposes no flatness condition on $a$.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "lem-pur-derived-change-of-rings"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; Tag 0G7E, lemma-pullback-K-flat; Tag 06YY, lemma-derived-base-change; Tag 0D6D, lemma-derived-pullback-composition"
+   }
+  },
+  {
+   "text": "Under the representative isomorphisms of Step 3, each of the SIX faces appearing in the requested equation has the ordinary normalization used in Steps 1--2. For $c^e$ this is precisely the defining representative-counit equation of [def-pur-etale-scalar-pullback-iso]. For $c^p$ and $\\delta_X,\\delta_Y$, use the specified ringed scalar/pullback comparisons: composition is computed by ordinary module pullback on flat-term K-flat complexes, and a specified compatible geometric 2-isomorphism induces the corresponding derived pullback isomorphism [lem-sfb-ringed-derived-monoidal-comparisons]. This applies to the identity geometric morphism with structural map $a$ as well as to the geometric/site morphisms. For $d_A,d_B$, [sk-thm-pe-direct-image-comparison] explicitly gives the same ordinary inverse-image square localized to the unbounded derived category, since all four fixed-coefficient inverse images are exact. Thus the ordinary cube equality of Step 2, applied degree by degree to $P$, localizes to the required equality at $\\mathsf Q_A P$. No permutation of homogeneous factors occurs: the coefficient sheaf is in degree zero, and all maps commute with the differential by naturality in $P^n\\to P^{n+1}$.",
+   "uses": [
+    "def-pur-etale-scalar-pullback-iso",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "sk-thm-pe-direct-image-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, proof on one common K-flat representative; Tag 07A4, lemma-pullback-tensor-product, representative normalization"
+   }
+  },
+  {
+   "text": "Let $F=p_BT_Y^pC_Y^A$ and $G=C_X^BT_X^el_A$, and denote the displayed left and right paths by $\\alpha,\\beta:F\\Rightarrow G$. All their factors are natural transformations by their definitions. For the isomorphism $u:\\mathsf Q_AP\\xrightarrow{\\sim}M$ induced by the resolution, naturality gives $\\alpha_M=G(u)\\alpha_{\\mathsf Q_AP}F(u)^{-1}$ and $\\beta_M=G(u)\\beta_{\\mathsf Q_AP}F(u)^{-1}$. Step 4 makes the middle factors equal. This proves exactly\n$$\\delta_{X,l_AM}\\circ T_X^p(d_{A,M})\\circ c^p_{C_Y^AM}=C_X^B(c^e_M)\\circ d_{B,T_Y^eM}\\circ p_B(\\delta_{Y,M}).$$\nBoth paths start at $F(M)$ and end at $G(M)$, so no extra identification of their endpoints is being assumed. The resolution and pullback statements used above apply to arbitrary complexes on the fixed small sites; no geometric finiteness, boundedness, or coefficient-flatness hypothesis has entered.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition, passage from a K-flat representative to an arbitrary derived object"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-etale-scalar-pullback-iso",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-canonical-ringed-tensor-comparison",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-thm-pe-direct-image-comparison"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0D6D, 06YS, 0G7E, 06YY and 07A4, with explicit naturality of the universal balanced pairing from sites-modules.tex Tags 03EK/03EL"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -80,10 +162,53 @@
    "results": "{\"t\": \"2026-10-21T03:03:11Z\", \"tool\": \"leansearch\", \"query\": \"Derived inverse image of sheaves commutes with extension of scalars with coherent composition\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"AlgebraicGeometry.Scheme.Modules.pullbackComp\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.PullbackConstruction.adjunction\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app\", \"SheafOfModules.pushforwardNatIso_inv\", \"SheafOfModules.instIsLeftAdjointPullback\", \"SheafOfModules.pullbackPushforwardAdjunction\"], \"digest\": \"9ed72282b3b6540e\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits concern etale algebras, scheme fiber products, categorical limits or ordinary sheaf pullback composition; none identifies the specified unbounded derived site/scalar cube in one specialization."
+  },
+  {
+   "tool": "grep",
+   "query": "(scalar|tensor).*(proetale|ProEtale)|(proetale|ProEtale).*(scalar|tensor)",
+   "results": "{\"t\": \"2026-10-21T03:28:47Z\", \"tool\": \"grep\", \"query\": \"(scalar|tensor).*(proetale|ProEtale)|(proetale|ProEtale).*(scalar|tensor)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary sheaf pullback composition/coherence, ordinary pushforward natural isomorphisms, abstract category isomorphisms or etale ring algebra, not the specified unbounded derived scalar/site cube."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullbackComp",
+   "results": "{\"t\": \"2026-10-21T03:28:48Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.pullbackComp\", \"sub\": \"\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackComp\", \"SheafOfModules.pullback_comp_id\", \"SheafOfModules.pullback_id_comp\", \"SheafOfModules.pullback_assoc\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\"], \"digest\": \"6d62dd74aaeb25fe\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary sheaf pullback composition/coherence, ordinary pushforward natural isomorphisms, abstract category isomorphisms or etale ring algebra, not the specified unbounded derived scalar/site cube."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived inverse image change of coefficients isomorphisms commute with a natural isomorphism between geometric morphisms",
+   "results": "{\"t\": \"2026-10-21T03:28:48Z\", \"tool\": \"leansearch\", \"query\": \"Derived inverse image change of coefficients isomorphisms commute with a natural isomorphism between geometric morphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Grothendieck.preNatIso\", \"SheafOfModules.pushforwardNatIso_inv\", \"CategoryTheory.Functor.sheafPushforwardContinuousComp'_inv_app_val_app\", \"SheafOfModules.pushforwardNatIso\", \"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\", \"CategoryTheory.NatIso.inv_app_isIso\"], \"digest\": \"55d49eca36a6443d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary sheaf pullback composition/coherence, ordinary pushforward natural isomorphisms, abstract category isomorphisms or etale ring algebra, not the specified unbounded derived scalar/site cube."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical etale to proetale inverse image square commutes with derived extension of scalars on unbounded module complexes",
+   "results": "{\"t\": \"2026-10-21T03:28:49Z\", \"tool\": \"leanfinder\", \"query\": \"Canonical etale to proetale inverse image square commutes with derived extension of scalars on unbounded module complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.homEquiv_symm_apply\", \"KaehlerDifferential.isBaseChange_of_formallyEtale\", \"KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_apply\", \"Algebra.Etale.comp\", \"Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars\", \"Algebra.FormallyEtale.comp\", \"Algebra.Etale.formallyEtale\"], \"digest\": \"efa1a5ba99e1a855\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary sheaf pullback composition/coherence, ordinary pushforward natural isomorphisms, abstract category isomorphisms or etale ring algebra, not the specified unbounded derived scalar/site cube."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackComp|pullback_assoc|pushforwardNatIso",
+   "results": "{\"t\": \"2026-10-21T03:28:59Z\", \"tool\": \"grep\", \"query\": \"pullbackComp|pullback_assoc|pushforwardNatIso\", \"sub\": \"Algebra/Category/ModuleCat/Sheaf\", \"ok\": true, \"n_hits\": 10, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean\"], \"digest\": \"487a151e27b78d5b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary sheaf pullback composition/coherence, ordinary pushforward natural isomorphisms, abstract category isomorphisms or etale ring algebra, not the specified unbounded derived scalar/site cube.",
+   "subdirectory": "Algebra/Category/ModuleCat/Sheaf"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Coherence of K flat derived scalar extension with a two isomorphism of inverse image functors of ringed topoi",
+   "results": "{\"t\": \"2026-10-21T03:29:00Z\", \"tool\": \"leanfinder\", \"query\": \"Coherence of K flat derived scalar extension with a two isomorphism of inverse image functors of ringed topoi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.compatiblePreservingOfFlat\", \"SheafOfModules.pushforwardNatIso\", \"RingHom.Flat.respectsIso\", \"RingHom.FaithfullyFlat.respectsIso\", \"ModuleCat.reflectsIsomorphisms_extendScalars_of_faithfullyFlat\", \"AlgebraicGeometry.Flat.flat_appLE\", \"AlgebraicGeometry.Flat.comp\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\"], \"digest\": \"b0785c81b858b6b5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: returned ordinary sheaf pullback composition/coherence, ordinary pushforward natural isomorphisms, abstract category isomorphisms or etale ring algebra, not the specified unbounded derived scalar/site cube."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-etale-proetale-scalar-mate",
@@ -102,5 +227,60 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-etale-proetale-scalar-pullback-cube",
+  "worker": "stage1",
+  "group": "Q110",
+  "summary": "Proved the specified cube using naturality of the underlying geometric square on the universal balanced pairing, then one common flat-term K-flat representative for all six faces. No new nodes: all resolution, preservation and normalization statements already exist. Kept the statement and its unrestricted hypotheses unchanged; checked exactness only at fixed coefficients, not for nonflat scalar extension.",
+  "blueprint": "det-prop-scalar-six-direct-image, finite-ring ordinary-direct-image paragraph: compatibility of nu* with scalar extension and the pullback square, as exposed by lem-sfb-etale-proetale-scalar-mate. This proves its previously isolated scalar/site cube without using any direct-image comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Existence of unbounded flat-term K-flat resolutions is a generic ringed-site tool, not a replacement of the scalar-six unit route."
+   },
+   {
+    "node": "lem-pur-derived-change-of-rings",
+    "why": "Generic K-flat computation of scalar extension, already named in the item statement."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic normalized ringed-pullback comparison used to compute the specified maps on resolving complexes; the unit supplies no separate normalization theorem."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Generic representative counits identify derived pullback with ordinary pullback on resolving complexes."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "why": "Generic preservation of flat-term K-flat complexes by ringed pullback justifies the common representative."
+   },
+   {
+    "node": "sk-thm-pe-direct-image-comparison",
+    "why": "Only its unconditional inverse-image square and exact localization are used; this is the site-comparison input to the finite coefficient paragraph."
+   },
+   {
+    "node": "lem-weil-pbc-canonical-ringed-tensor-comparison-construction",
+    "why": "Existence of the normalized ordinary inverse-image/tensor comparison with the generalized pure-tensor formula, a generic ringed-site tool; the scalar-six unit supplies no such construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-kflat-resolution",
+  "lem-pur-derived-change-of-rings",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "sk-thm-pe-direct-image-comparison",
+  "lem-weil-pbc-canonical-ringed-tensor-comparison-construction"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q110-31edaafc1",
+  "group": "Q110",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q110-31edaafc1 (reviewer sub-agent of L); spot-checked: Read the full item, every cited statement, the parent's citing step, unit sk-prop-scalar-six, and Stacks 0D6D/06YS/0G7E/06YY/07A4 and 03EK/03EL. This is the first split of an item N5 created on 2026-10-21; its statement and stmt_deps are byte-identical to the creation copy. No new nodes. Both paths have matching types: p_B T^p_Y C^A_Y M → C^B_X T^e_X l_A M. The d and c^e directions match the first assertion of sk-thm-pe-direct-image-comparison and def-pur-etale-scalar-pullback-iso. The statement is true: all six faces compare pullbacks along equal or 2-isomorphic ringed morphisms. Tested a=id, f=id, M=0, the empty scheme, and the non-flat case Z/4→Z/2 with no hidden flatness or boundedness. Step 1 uses the unconditional inverse-image square, the module lift built from the set functors in def-weil-pbc-site-comparison-morphism, and the constant-sheaf generators. Step 2 is naturality on the balanced pairing, then unique extension through sheafification. Step 3: flat-term K-flat resolutions are preserved by u^* (including u=id with ring map a), and their counits are isomorphisms. Step 4 matches each face's own normalization (c^e defining equation, lem-sfb c_{f,g} and its 2-iso clause, exact localization for d). Step 5 is naturality. One C4/C3 fault, repaired: Step 2 cited only the structure definition def-weil-pbc-canonical-ringed-tensor-comparison for the ordinary comparisons with the pure-tensor formula. I added the existence lemma lem-weil-pbc-canonical-ringed-tensor-comparison-construction to the step's text, uses and proof_deps, and declared it in tool_uses; DFS shows no cycle. Off-unit tool uses accepted. Not duplicates: lem-sp-constant-scalar-pullback-cube, lem-fix-direct-image-scalar-exchange. Advisory: the parent defines δ through the tensor-pullback comparison while the item computes it through ringed composition comparisons; the two agree on K-flat representatives, and stage 2 should pin one explicitly.; 1 file(s) fixed by the reviewer"
  }
 }
