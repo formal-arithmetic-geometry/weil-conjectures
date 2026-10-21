@@ -36,222 +36,77 @@
  ],
  "proof": [
   {
-   "text": "The finite quotient rings $P_n$ satisfy the hypotheses of [lem-weil-pbc-profinite-coefficient-inverse-image]. Its comparison $f^{-1}A_Y\\cong A_X$ and its equations for the quotient projections give exactly the ring identification required by [def-weil-pbc-proetale-operations]. In particular the module inverse image $f^*$ is exact and left adjoint to the additive module direct image $f_*$. Apply these functors levelwise to strict towers; the adjunction restricts to compatible families of maps, and exactness is levelwise by [lem-weil-tower-category-levelwise-abelian]. Thus the tower inverse image is exact and left adjoint to levelwise direct image.",
+   "text": "The coefficient isomorphism and quotient equations of [lem-weil-pbc-profinite-coefficient-inverse-image] make $f$ a morphism of the indicated ringed topoi with exact module pullback [def-weil-pbc-proetale-operations]. Apply [lem-weil-ringed-tower-pushforward-limit-comparison]: it supplies $Rf_*^{\\rm Tow}$, all normalized evaluation comparisons and the specified natural isomorphism $a_M:Rf_*R\\lim M\\cong R\\lim Rf_*^{\\rm Tow}M$.",
    "uses": [
     "lem-weil-pbc-profinite-coefficient-inverse-image",
     "def-weil-pbc-proetale-operations",
+    "lem-weil-ringed-tower-pushforward-limit-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
+    "place": "Whole proof: short assembly after the human finer-split return of 2026-10-21"
+   }
+  },
+  {
+   "text": "Countable products of modules over $A_X,A_Y$ are exact by [lem-weil-proetale-countable-products-exact]. Hence [lem-weil-pbc-direct-image-roos-normalization] applies: its product isomorphisms commute with $1-s$ and give $a_M$ on both canonical Roos triangles, including their connecting maps.",
+   "uses": [
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-pbc-direct-image-roos-normalization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
+    "place": "Whole proof: short assembly after the human finer-split return of 2026-10-21"
+   }
+  },
+  {
+   "text": "Set $Q_{T,\\bullet}=((P_n)_T)_n$. The coefficient equations identify its pullback with $Q_{X,\\bullet}$. Use the normalized reduction/pullback comparison [lem-weil-pbc-reduction-pullback-derived-tower] and the augmented diagram mate [lem-weil-pbc-augmented-diagram-projection-mate] to obtain $h_K:(Rf_*K)_\\bullet\\to Rf_*^{\\rm Tow}K_\\bullet$. Its evaluations are precisely $\\pi_n$, invertible and quotient-compatible by [lemma-weil-pbc-perfect-projection-formula]. Since tower cohomology is levelwise [lem-weil-tower-category-levelwise-abelian], the cone of $h_K$ is acyclic at every level and hence acyclic as a tower; therefore $h_K$ is an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-reduction-pullback-derived-tower",
+    "lem-weil-pbc-augmented-diagram-projection-mate",
+    "lemma-weil-pbc-perfect-projection-formula",
     "lem-weil-tower-category-levelwise-abelian"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "First sentence: coefficient identification and tower functors"
+    "place": "Whole proof: short assembly after the human finer-split return of 2026-10-21"
    }
   },
   {
-   "text": "By [def-weil-pbc-adic-coefficient-datum] the tower categories are Grothendieck abelian. Choose functorial K-injective resolutions $C_\\bullet\\to J_\\bullet$ by [lem-weil-pbc-kinjective-functorial-existence]. The additive functor $f_*^{\\operatorname{Tow}}$ applied termwise preserves chain homotopies, shifts, finite sums and the matrices of mapping cones [def-weil-abstract-derived-category], so it induces an exact functor from the homotopy category to the target derived category. The theorem [lem-weil-pbc-kinjective-total-derived] constructs its total right derived functor, computed by $f_*^{\\operatorname{Tow}}J_\\bullet$.",
+   "text": "The strict augmentation identity of [lem-weil-pbc-augmented-diagram-projection-mate] and the constant normalization [lem-weil-pbc-constant-tower-pushforward-normalization], after applying $R\\lim$ and naturality of $a$ from step 1, give\n$$R\\lim(h_K)\\,\\operatorname{comp}_{Rf_*K}=a_{K_\\bullet}\\,Rf_*(\\operatorname{comp}_K).$$\nBy [prop-weil-pbc-koszul-reconstruction], $\\operatorname{comp}_K=c_K\\kappa_K$ with $c_K$ invertible. If $K$ is complete, the right side is invertible; $R\\lim(h_K)$ is invertible by step 3, so $\\operatorname{comp}_{Rf_*K}$ and then $\\kappa_{Rf_*K}$ are invertible. This is derived completeness [def-weil-pbc-intrinsic-completion]. The displayed equality also identifies the claimed completion composite.",
    "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-kinjective-functorial-existence",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "First sentence: existence of the total right derived tower functor"
-   }
-  },
-  {
-   "text": "Evaluation of $J_\\bullet$ is K-injective by [lem-weil-tower-evaluation-kinjective]. Evaluation preserves quasi-isomorphisms, since kernels, cokernels and hence cohomology are levelwise [lem-weil-tower-category-levelwise-abelian]. Therefore $C_n\\to J_n$ is a K-injective resolution and $f_*J_n$ computes $Rf_*M_n$ by [lem-weil-pbc-kinjective-total-derived]. The comparison $\\operatorname{ev}_nRf_*^{\\operatorname{Tow}}M_\\bullet\\cong Rf_*M_n$ is induced by these same resolutions. All transitions are the evaluated maps of $f_*^{\\operatorname{Tow}}J_\\bullet$, so the comparisons respect them. In Lean, compare the two universal right-derived pairs for termwise direct image followed by evaluation. The exact evaluation functor preserves K-injectives. Expanding the two universal units on a K-injective complex gives exactly IsTowerPushEvaluation, and every derived object is isomorphic to the localization of a K-injective complex, proving uniqueness.",
-   "uses": [
-    "lem-weil-tower-evaluation-kinjective",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-kinjective-total-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "First sentence: evaluation comparisons"
-   }
-  },
-  {
-   "text": "By step 1 and [lem-weil-pbc-right-adjoint-preserves-kinjective], both $f_*$ and $f_*^{\\operatorname{Tow}}$ preserve K-injective complexes. Let $\\Delta$ be the constant-tower functor. It is exact by levelwise exactness. The termwise inverse limit is right adjoint to $\\Delta$: a map into the limit is precisely a compatible family. The same K-injective-preservation lemma implies that $\\lim J_\\bullet$ is K-injective. Consequently $Rf_*\\Rlim M_\\bullet$ is computed by $f_*\\lim J_\\bullet$, while $\\Rlim Rf_*^{\\operatorname{Tow}}M_\\bullet$ is computed by $\\lim f_*^{\\operatorname{Tow}}J_\\bullet$, by [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. Underived $f_*$ commutes with this limit: for every module $H$, the adjunction identifies maps $H\\to f_*\\lim J_n$ with compatible maps $f^*H\\to J_n$, and thence with maps $H\\to\\lim f_*J_n$. The resulting chain isomorphism defines the canonical natural comparison $a_M$. K-injective comparison [lem-weil-pbc-kinjective-hom-derived] makes it independent of resolution and natural in the derived tower.",
-   "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-kinjective-hom-derived"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tag 0A07, label lemma-Rf-commutes-with-Rlim; explicit strict-resolution form using the exact identified-coefficient inverse image"
-   }
-  },
-  {
-   "text": "For $H\\in D(Y_{\\Proet},A)$ the adjunction [def-weil-pbc-proetale-operations] and the product property in [def-weil-pbc-derived-inverse-limit] give\n$\\operatorname{Hom}(H,Rf_*R\\!\\prod M_n)=\\operatorname{Hom}(Lf^*H,R\\!\\prod M_n)=\\prod_n\\operatorname{Hom}(Lf^*H,M_n)=\\prod_n\\operatorname{Hom}(H,Rf_*M_n)$.\nThus the map whose $n$-th component is $Rf_*p_n$ is the canonical product isomorphism $\\alpha$. It is natural because each displayed bijection is natural.",
-   "uses": [
-    "def-weil-pbc-proetale-operations",
-    "def-weil-pbc-derived-inverse-limit"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "Product-preservation parenthesis: universal-property calculation"
-   }
-  },
-  {
-   "text": "Set $P=\\prod_nJ_n$. Each $J_n$ is K-injective by step 3. The theorem [lem-pc-ringed-space-product-kinjective] says $P$ is K-injective and represents the derived product; apply it also to the K-injectives $f_*J_n$ from step 4. Products exist here by [def-weil-pbc-derived-inverse-limit]. The ordinary right-adjoint product isomorphism $f_*P\\cong\\prod_nf_*J_n$ has components $f_*p_n$, hence represents $\\alpha$ of step 5. For the shift maps, $p_ns=t_{n+1,n}p_{n+1}$ and $p'_ns'=f_*(t_{n+1,n})p'_{n+1}$. Composing with every $p'_n$ shows $s'\\alpha=\\alpha f_*s$; additivity gives the equality for $1-s$. This is the required actual chain-level square.",
-   "uses": [
-    "lem-pc-ringed-space-product-kinjective",
-    "def-weil-pbc-derived-inverse-limit"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "Roos comparison sentence: product models and shift square"
-   }
-  },
-  {
-   "text": "Countable products of $A_T$-modules are exact by [lem-weil-proetale-countable-products-exact], and the module categories are Grothendieck by [lem-pur-ringed-site-grothendieck-abelian], hence have enough injectives by [lem-sp-grothendieck-enough-injectives]. Thus [lem-weil-derived-limit-roos-complex] applies to $J_\\bullet$ and $f_*^{\\operatorname{Tow}}J_\\bullet$: it identifies their termwise limits with the shifted cones of $1-s$. The shifted cone of a map between K-injectives is K-injective: its Hom complex from an acyclic complex is, up to the cone signs, the shifted cone of a map between two acyclic Hom complexes, so is acyclic by its degreewise split cone sequence [def-weil-abstract-derived-category]. All products in this assertion are K-injective by step 6. Hence these cone models compute the derived functors by [lem-weil-pbc-kinjective-total-derived]. The chain square in step 6 induces their cone isomorphism, since additive $f_*$ preserves the two finite cone summands and cone differential. The map $\\lim J\\to\\operatorname{Cone}(1-s)[-1]$ of [lem-weil-derived-limit-roos-complex] has components $(0,\\iota)$, so this cone isomorphism agrees with $a_M$ of step 4 under those quasi-isomorphisms. This also checks the connecting arrows, rather than merely filling a square of abstract triangles. It proves the claimed compatibility with both canonical Roos triangles.",
-   "uses": [
-    "lem-weil-proetale-countable-products-exact",
-    "lem-weil-derived-limit-roos-complex",
-    "def-weil-abstract-derived-category",
-    "lem-weil-pbc-kinjective-total-derived",
-    "lem-pur-ringed-site-grothendieck-abelian",
-    "lem-sp-grothendieck-enough-injectives"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "Roos comparison sentence: cone isomorphism including boundary maps"
-   }
-  },
-  {
-   "text": "For each $n$, apply [lemma-weil-pbc-perfect-projection-formula] with the given finite perfect $P_n$. It gives the canonical isomorphism $\\pi_n:(Rf_*K)\\otimes^L_{A_Y}(P_n)_Y\\to Rf_*K_n$ and explicitly gives its compatibility with quotient tower maps. Its map is the counit-tensor mate of [def-weil-pbc-projection-formula-map]. No completeness hypothesis is needed for these finite-level isomorphisms.",
-   "uses": [
-    "lemma-weil-pbc-perfect-projection-formula",
-    "def-weil-pbc-projection-formula-map"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "Final sentence: finite-level perfect projection formula"
-   }
-  },
-  {
-   "text": "Construct the ordinary reduction/pullback comparison as the inverse scalar-extension mate of the canonical restriction/pullback comparison. Its unit equation is the mate unit identity. On sheafified pure tensors it sends s tensor x to the pulled-back s tensor the pulled-back x. The naturality of the finite coefficient identifications and the defining formula for completedReductionTransition prove compatibility with consecutive quotient maps; NatTrans.ofOpSequence extends this to every tower map. For the derived comparison, use the subcategory of K-flat complexes and the smaller resolving class of K-flat complexes with flat terms [lem-pc-kflat-resolution]. Pullback sends that smaller class to K-flat complexes [lem-weil-pbc-ringed-topos-kflat-pullback]. The two universal reduction counits and the strict ordinary comparison therefore give invertible natural maps on the smaller class. Right-fraction density [lem-trf-right-fraction-dense-subcategory] makes restriction to the K-flat subcategory a localization. Naturality along a flat-term resolution extends invertibility to every K-flat complex. Full faithfulness of precomposition along this localization descends the comparison uniquely. The localization factor isomorphisms give exactly IsCompletedReductionPullbackComparison. The tensor-generator calculations reuse the general coefficient-change helpers in [lem-sf-cbc-constant-tower-direct-image-normalization], specialized to the actual completed ring rather than its constant-coefficient specialization. The flat-term resolution uses the independent tensor comparison [lem-weil-pbc-independent-sheaf-tensor-colimits]. The K-flat pullback theorem is specialized through the algebraic inverse image [lem-sp-proetale-algebraic-inverse-image] and exact set-sheaf inverse image [det-pe-topos-functoriality-inverse-image]. The normalization equation is expressed by IsDerivedReductionPullbackComparison and specialized in IsCompletedReductionPullbackComparison; this is a definitional factoring of the same equation.",
-   "uses": [
-    "def-weil-pbc-adic-coefficient-datum",
-    "def-weil-pbc-proetale-operations",
-    "lem-pc-kflat-resolution",
-    "lem-weil-pbc-ringed-topos-kflat-pullback",
-    "lem-trf-right-fraction-dense-subcategory",
-    "lem-sf-cbc-constant-tower-direct-image-normalization",
-    "lem-sp-proetale-algebraic-inverse-image",
-    "det-pe-topos-functoriality-inverse-image",
-    "lem-weil-pbc-independent-sheaf-tensor-colimits"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "Strict reduction-tower comparison underlying the final sentence; universal derived-counit implementation following Stacks 06YS and 06YY"
-   }
-  },
-  {
-   "text": "To retain strict-tower coherence, use the ringed diagram sites of [lem-weil-pbc-diagram-site-realization] for $J=\\mathbf N_{\\geq1}^{\\mathrm{op}}$, with ring diagram $\\Delta A_T$. The functors of step 1 are a morphism of these ringed topoi: their set-sheaf adjunction is componentwise and inverse image preserves finite limits componentwise. Put $Q_{T,\\bullet}=((P_n)_T)_n$. Apply the general projection mate of [lem-weil-pbc-ringed-projection-mate-exact] on these sites to $E=\\Delta K$ and $Q_{Y,\\bullet}$. This is a morphism in the derived category of strict towers. The reduction construction in [def-weil-pbc-adic-coefficient-datum] is $\\Delta K\\otimes^L Q_{X,\\bullet}$: if $P$ is K-flat representing $K$, then $\\Delta P$ is K-flat for diagram tensor, since tensor and acyclicity are levelwise, and its tensor with $Q_\\bullet$ is exactly the specified reduction complex. Pullback of $Q_{Y,\\bullet}$ is $Q_{X,\\bullet}$ by the quotient equations of [lem-weil-pbc-profinite-coefficient-inverse-image].",
-   "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "def-weil-pbc-adic-coefficient-datum",
-    "lem-weil-pbc-profinite-coefficient-inverse-image"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "Final sentence: specified strict-tower projection mate"
-   }
-  },
-  {
-   "text": "The constant-tower functor also preserves K-injectives. Indeed $\\operatorname{ev}_1$ is its exact left adjoint: a map $N_\\bullet\\to\\Delta V$ is uniquely determined by $N_1\\to V$, with other components obtained using $N_n\\to N_1$. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] and [lem-weil-tower-category-levelwise-abelian]. Thus a K-injective resolution $K\\to I$ gives the resolution $\\Delta K\\to\\Delta I$, and $Rf_*^{\\operatorname{Tow}}\\Delta K=\\Delta Rf_*K$ under the canonical resolution identifications. With this identification, the mate in step 9 is a map $\\Pi_K:(Rf_*K)_\\bullet\\to Rf_*^{\\operatorname{Tow}}K_\\bullet$. Evaluation is exact inverse image on the diagram sites, and its tensor comparison is [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Consequently evaluating this counit-tensor construction gives exactly $\\pi_n$ of step 8 (evaluation of the counit is its counit, using the same tower resolution as step 3). Every evaluation of its cone is acyclic by step 8; levelwise cohomology [lem-weil-tower-category-levelwise-abelian] makes its cone zero. Hence $\\Pi_K$ is a strict derived-tower isomorphism.",
-   "uses": [
-    "lem-weil-pbc-right-adjoint-preserves-kinjective",
-    "lem-weil-tower-category-levelwise-abelian",
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-    "def-weil-abstract-derived-category"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "Final sentence: constant comparison and detection of the strict projection isomorphism"
-   }
-  },
-  {
-   "text": "Let $u_K:\\Delta K\\to K_\\bullet$ denote the strict reduction unit. Naturality in the coefficient argument and the unit normalization $\\alpha_{\\Delta A_Y}=1$ of [lem-weil-pbc-ringed-projection-mate-exact], applied on the diagram sites to $\\Delta A_Y\\to Q_{Y,\\bullet}$, give the equality\n$\\Pi_K\\,u_{Rf_*K}=Rf_*^{\\operatorname{Tow}}(u_K)$,\nwhere the right-hand source is identified with $\\Delta Rf_*K$ as in step 10. This is an equality of strict derived-tower morphisms. Apply $R\\lim$ of [lem-weil-pbc-ringed-strict-tower-homotopy-limit]. On constant towers its value is the original object: the K-injective representative $\\Delta I$ has limit $I$. The comparison $a_{\\Delta K}$ in step 4 is the identity under these identifications, since the ordinary limit comparison on a constant tower is the identity. Naturality of $a$ for $u_K$ therefore gives\n$R\\lim(\\Pi_K)\\circ\\operatorname{comp}_{Rf_*K}=a_{K_\\bullet}\\circ Rf_*(\\operatorname{comp}_K)$.\nHere the completion units are those induced by the strict quotient maps in [prop-weil-pbc-koszul-reconstruction]. This proves the asserted unit compatibility without assuming evaluation is faithful on morphisms.",
-   "uses": [
-    "lem-weil-pbc-ringed-projection-mate-exact",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "prop-weil-pbc-koszul-reconstruction"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "Final sentence: compatibility with the completion unit"
-   }
-  },
-  {
-   "text": "If $K$ is derived $I$-complete, [prop-weil-pbc-koszul-reconstruction] says $\\operatorname{comp}_K$ is an isomorphism. In the equality of step 11, its right-hand side is an isomorphism by step 4, and $R\\lim(\\Pi_K)$ is an isomorphism by step 10. Therefore $\\operatorname{comp}_{Rf_*K}$ is an isomorphism. The identity $c_{Rf_*K}\\circ\\kappa_{Rf_*K}=\\operatorname{comp}_{Rf_*K}$ with $c_{Rf_*K}$ invertible from [prop-weil-pbc-koszul-reconstruction] makes its Koszul completion unit invertible. By [def-weil-pbc-intrinsic-completion], $Rf_*K$ is derived $I$-complete. Step 11 is exactly the displayed completion composite under the projection isomorphism, and step 8 supplies all transition compatibilities.",
-   "uses": [
+    "lem-weil-pbc-augmented-diagram-projection-mate",
+    "lem-weil-pbc-constant-tower-pushforward-normalization",
     "prop-weil-pbc-koszul-reconstruction",
     "def-weil-pbc-intrinsic-completion"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-    "place": "Final sentence: completeness and the specified completion composite"
+    "place": "Whole proof: short assembly after the human finer-split return of 2026-10-21"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-abstract-derived-category",
-  "def-weil-pbc-adic-coefficient-datum",
-  "def-weil-pbc-derived-inverse-limit",
   "def-weil-pbc-intrinsic-completion",
   "def-weil-pbc-proetale-operations",
-  "def-weil-pbc-projection-formula-map",
-  "det-pe-topos-functoriality-inverse-image",
-  "lem-pc-kflat-resolution",
-  "lem-pc-ringed-space-product-kinjective",
-  "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sf-cbc-constant-tower-direct-image-normalization",
-  "lem-sp-grothendieck-enough-injectives",
-  "lem-sp-proetale-algebraic-inverse-image",
-  "lem-trf-right-fraction-dense-subcategory",
-  "lem-weil-derived-limit-roos-complex",
-  "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-independent-sheaf-tensor-colimits",
-  "lem-weil-pbc-kinjective-functorial-existence",
-  "lem-weil-pbc-kinjective-hom-derived",
-  "lem-weil-pbc-kinjective-total-derived",
+  "lem-weil-pbc-augmented-diagram-projection-mate",
+  "lem-weil-pbc-constant-tower-pushforward-normalization",
+  "lem-weil-pbc-direct-image-roos-normalization",
   "lem-weil-pbc-profinite-coefficient-inverse-image",
-  "lem-weil-pbc-right-adjoint-preserves-kinjective",
-  "lem-weil-pbc-ringed-projection-mate-exact",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-weil-pbc-ringed-topos-kflat-pullback",
+  "lem-weil-pbc-reduction-pullback-derived-tower",
   "lem-weil-proetale-countable-products-exact",
+  "lem-weil-ringed-tower-pushforward-limit-comparison",
   "lem-weil-tower-category-levelwise-abelian",
-  "lem-weil-tower-evaluation-kinjective",
   "lemma-weil-pbc-perfect-projection-formula",
   "prop-weil-pbc-koszul-reconstruction"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-prop-pbc-complete/prop-weil-pbc-direct-image-limits.proof.md",
-  "place": "Whole proof, refined with Stacks Tags 0A07, 0BK6 and the existing ringed strict-tower and projection-mate interfaces; P5: normalized evaluation by uniqueness of derived pairs, and the strict reduction/pullback comparison by tensor units and right-fraction descent on K-flat models"
+  "place": "Whole proof; 2026-10-21 finer split using independent strict-tower normalization lemmas and existing ringed-topos limit comparison (Stacks 0A07)"
  },
  "mathlib_searches": [
   {
@@ -350,45 +205,29 @@
  "chapter": "sec-proper-base-change",
  "unit": "sk-thm-properbasechange",
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "prop-weil-pbc-direct-image-limits",
-  "worker": "stage1",
-  "summary": "Read the current blueprint and retained its K-injective/product/Roos/projection/completion route. Made the ambient completed coefficient data explicit and specified the existing strict-tower Rlim functor. Reused existing evaluation, K-injective preservation, product, cone and diagram-site nodes; no new nodes. Constructed the actual strict tower projection mate and checked its unit identity before applying Rlim, rather than identifying completion maps by their projections. Corrected the source note distinguishing Stacks 099N constant coefficients from the completed-coefficient claim.",
-  "blueprint": "Current main-20261015 proof: steps 1–3 realize its first sentence; steps 4–7 realize the product/Roos/1-s comparison; steps 8–12 realize the finite projection formula, its strict coherence and the completion composite.",
+  "worker": "stage1 NI",
+  "summary": "Human-authorized finer split of the returned 12184-character proof. Statement unchanged. Four assembly steps total 2097 characters. Reuses the existing general ringed tower direct-image/limit comparison and extracts five strictly smaller generic normalization statements, delivered unsplit without proof steps as explicitly required by the 2026-10-21 route note. Prior proof arguments and search records are retained in the report and sandbox.",
+  "blueprint": "First sentence: assembly step 1. Product/Roos sentence: step 2 and the Roos normalization node. Final sentence: steps 3-4 and the reduction, constant-tower and augmented-diagram normalization nodes.",
   "tool_uses": [
    {
+    "node": "lem-weil-ringed-tower-pushforward-limit-comparison",
+    "why": "Generic ringed-topos limit comparison or exact countable-product tool, valid for the specified completed ring sheaves; no geometric route changes."
+   },
+   {
     "node": "lem-weil-proetale-countable-products-exact",
-    "why": "Exact countable products for arbitrary pro-etale module coefficients are the hypothesis of the cited Roos-complex theorem; this is a generic site tool, not a replacement proper-base-change route."
-   },
-   {
-    "node": "lem-pc-ringed-space-product-kinjective",
-    "why": "Generic K-injective product and derived product theorem (Stacks 0BK6), used for the two Roos products."
-   },
-   {
-    "node": "lem-weil-pbc-kinjective-functorial-existence",
-    "why": "Generic Grothendieck-category K-injective resolutions, applied to the tower category."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-projection-mate-exact",
-    "why": "Generic ringed-topos projection mate, including naturality and tensor-unit normalization, applied on diagram sites to specify the strict reduction-tower map."
-   },
-   {
-    "node": "lem-pur-ringed-site-grothendieck-abelian",
-    "why": "Generic module-sheaf Grothendieck theorem used to check the hypotheses of the Roos complex comparison."
-   },
-   {
-    "node": "lem-sp-grothendieck-enough-injectives",
-    "why": "Generic enough-injectives consequence for the module categories in the Roos complex comparison."
+    "why": "Generic ringed-topos limit comparison or exact countable-product tool, valid for the specified completed ring sheaves; no geometric route changes."
    }
   ]
  },
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q06-314f4411d",
-  "group": "Q06",
+  "reviewer": "NT-cc-NI-cbd8962c2",
+  "group": "NI",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-314f4411d (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps and the full statements of all 24 cited nodes; the delivery adds no new nodes. Sources checked: the current blueprint proof (main-20261015, sk-prop-pbc-complete) and the Stacks entries 0A07 (sites-cohomology lemma-Rf-commutes-with-Rlim, which uses the same diagram-site argument as steps 9-10) and 099N (proetale lemma-pushforward-Noetherian-case, constant coefficients; the item's corrected note is accurate). The statement correction only introduces objects the old text used without defining: the adic datum's hypotheses exactly, the completed coefficient sheaf A_T, the canonical identification f^{-1}A_Y=A_X and the functorial strict-tower Rlim. It adds no hypothesis and keeps every displayed clause, so nothing is weakened. Each step's hypotheses were checked against the cited statements: exact f^* and its adjunction; Grothendieck tower category with functorial K-injectives; the total-derived lemma; evaluation preserving K-injectives; right adjoints of exact functors preserving K-injectives for f_*, f_*^Tow and lim; products of K-injectives; the Roos lemma's exact products and enough injectives via the countable-products, Grothendieck and enough-injectives nodes; the perfect projection formula on the same datum; the projection mate on the diagram sites with ev_1 left adjoint to the constant tower; unit naturality and the normalization alpha_{R_Y}=1 giving the completion-unit equality before Rlim; and c kappa = comp for completeness. Small cases tested: f=id, K=0, I=A, I=0 with r=0, and Z_p with I=(p). Duplicate candidate lem-weil-ringed-tower-pushforward-limit-comparison is re-derived in steps 2-4 rather than cited; this creates no node, so it is not a fault. Only step 5 is marked elementary, and it is. No cycle; proof_deps equals the union of the steps' uses. The declared tool_uses are all generic and accepted; the off-route ones are countable-products-exact and ringed-site-grothendieck-abelian. No SGA. The item has a stage-2 Lean record, so it may need a stage-2 recheck against the clarified statement. No fixes."
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-cbd8962c2 (reviewer sub-agent of L); spot-checked: Re-split audit (2026-10-21 spreading rule) against the base 12-step proof (Q06 314f4411): every old argument is now either a citation of an existing node or a self-contained new statement. Old steps 2-4 map to the existing generic lem-weil-ringed-tower-pushforward-limit-comparison (needs only a ring map f^{-1}S->R; same strict-tower Rlim). Old 5-7 map to the new Roos node, old 9 to the reduction-pullback node, old 10-11 to the constant-tower, evaluation-normalization and augmented-mate nodes plus item steps 3-4, old 8 and 12 to item steps 3-4. The item proof is a 4-step assembly. The 5 new nodes are of comparable size, statement-only and unsplit, with 4 kinds of search and correct blueprint.from (via []); none restates the item. The Roos node is the general ringed-topos form of one clause with exact products assumed; item step 2 supplies the products via lem-weil-proetale-countable-products-exact. The statement is unchanged against the base; the route follows the main-20261015 sk-prop-pbc-complete proof. Sources: Stacks 0A07 (sites-cohomology lemma-Rf-commutes-with-Rlim, l.5150) read; tags 0BK6, 07A4, 0B56 match tags/tags; no SGA. Maths checked: ev_1 -| Delta and the exact left adjoint of e_n (both preserve K-injectives); the types of the counit equations; the evaluation of h_K equals pi_{f,K,P_n} of def-weil-pbc-projection-formula-map; B_T = K_bullet of the adic datum by definition. I re-derived Rlim(h)comp = a Rf_*(comp) from h i_Y = G^Tow(i_X) chi, naturality of a and Rlim(chi)^{-1}a_Delta = 1, then completeness via c_K kappa_K = comp_K. Edge cases checked: R=0, f=id, Q constant, Q=0. No cycle; all ids exist and are unmerged. Duplicate check: lem-weil-pbc-ringed-strict-tower-projection-morphism needs finite free complex towers, which (P_n)_Y is not, so it is not a duplicate; lem-sf-cbc-constant-tower-direct-image-normalization is constant-coefficient only. Accepted tool_uses: lem-weil-ringed-tower-pushforward-limit-comparison and lem-weil-proetale-countable-products-exact. FIX (B3, one class of fault, 3 files under fixes/dag/nodes/sec-proper-base-change/): added def-weil-sheaf-of-modules-category, which the text cites, to the stmt_deps of the augmented-mate, constant-normalization and Roos nodes. Added inline citations of stmt_deps the statements use: the mate-exact, diagram-site and evaluation-normalization nodes in the augmented node; the evaluation-normalization and strict-tower homotopy-limit nodes in the constant node; the homotopy-limit node and def-weil-derived-limit for the Roos triangle in the Roos node. No statement content changed.; 3 file(s) fixed by the reviewer"
  },
  "reviewed_lean": {
   "date": "2026-10-16",
@@ -461,7 +300,8 @@
   "lem-weil-pbc-kinjective-functorial-existence",
   "lem-weil-pbc-ringed-projection-mate-exact",
   "lem-pur-ringed-site-grothendieck-abelian",
-  "lem-sp-grothendieck-enough-injectives"
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-weil-ringed-tower-pushforward-limit-comparison"
  ],
  "reviewed_proof": {
   "date": "2026-10-21",
