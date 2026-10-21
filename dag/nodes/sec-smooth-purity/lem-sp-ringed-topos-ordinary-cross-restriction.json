@@ -1,0 +1,120 @@
+{
+ "id": "lem-sp-ringed-topos-ordinary-cross-restriction",
+ "kind": "statement",
+ "title": "Ordinary direct-image cross-restriction for subterminals",
+ "statement": "Let C have a terminal object, pullbacks and binary products; let J be a topology and R a ring sheaf, with arbitrary module universe m. Let U,V be subterminal and let W,tU,tV be any pullback presentation over the terminal object. For any module sheaf M on V, the canonical restriction-adjunction map from the V-direct image to the W-direct image of M restricted to W becomes an isomorphism after restriction to U. The canonical comparison is the inverse of overFunctorMap R (W→V). No cover, sheafification or derived-category hypothesis is used.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DG, right-direct-image and fibre calculation, extended to subterminal slices."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Evaluate on X→U and use the unit formula for the W-adjunction. The component is the composite of two presheaf restriction maps: one from V-star of the W-counit and one from the V-unit on W×X→V.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG and 08BU"
+   }
+  },
+  {
+   "text": "The first underlying arrow is V×(W×X)→V×X. Construct its inverse by inserting the W-coordinate from X→U and the given V-coordinate. Check the two inverse identities using the pullback universal property and monicity of U,V→1.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG and 08BU"
+   }
+  },
+  {
+   "text": "Over.forget V is full by subterminality, hence its adjunction unit is invertible. Both presheaf restriction maps are therefore bijective. The presheaf and module forgetful functors reflect isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG and 08BU"
+   }
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "E9: the proof in the Lean module, with the source argument specialized to the stated slice-site interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction to one subterminal slice of the direct image from another slice agrees with direct image from their intersection",
+   "results": "{\"t\": \"2026-10-20T17:55:25Z\", \"tool\": \"leansearch\", \"query\": \"Restriction to one subterminal slice of the direct image from another slice agrees with direct image from their intersection\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Set.image_restrict\", \"Set.image_image_val_eq_restrict_image\", \"AlgebraicGeometry.morphismRestrictRestrict\", \"Set.MapsTo.restrict\", \"AlgebraicGeometry.Scheme.Opens.ι_app\", \"Set.restrict\", \"AlgebraicGeometry.morphismRestrictRestrictBasicOpen\", \"Set.restrict₂_comp_restrict₂\"], \"digest\": \"1d0c9b7c2ed58db2\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib supplies the adjunction and product formulas. The subterminal cross-restriction isomorphism is proved here from their explicit components."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"overPushforwardOverAdj\"",
+   "results": "{\"t\": \"2026-10-20T17:55:25Z\", \"tool\": \"loogle\", \"query\": \"\\\"overPushforwardOverAdj\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SheafOfModules.overPushforwardOverAdj\"], \"digest\": \"f1021185807aec8e\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib supplies the adjunction and product formulas. The subterminal cross-restriction isomorphism is proved here from their explicit components."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|overPushforwardOverAdj|prod.map",
+   "results": "{\"t\": \"2026-10-20T17:55:25Z\", \"tool\": \"grep\", \"query\": \"overFunctorMap|overPushforwardOverAdj|prod.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\"], \"digest\": \"08dd4f5690279795\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib supplies the adjunction and product formulas. The subterminal cross-restriction isomorphism is proved here from their explicit components."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposBinaryDescent",
+  "date": "2026-10-21",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ringed-topos-binary-descent",
+   "place": "Ordinary direct-image cross-restriction for subterminals",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedToposOrdinaryCrossRestriction",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposOrdinaryCrossRestriction.lean",
+  "declaration": "CategoryTheory.ringedTopos_ordinaryCross_restriction",
+  "statement": "theorem ringedTopos_ordinaryCross_restriction\n    {C : Type u} [Category.{v} C] [HasTerminal C] [HasPullbacks C]\n    [HasBinaryProducts C]\n    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r})\n    (U V W : C) [Mono (terminal.from U)] [Mono (terminal.from V)]\n    (tU : W ⟶ U) (tV : W ⟶ V)\n    (hW : IsPullback tU tV (terminal.from U) (terminal.from V))\n    (M : SheafOfModules.{m} (R.over V)) :\n    IsIso ((SheafOfModules.overFunctor.{m} R U).map\n      ((SheafOfModules.overPushforwardOverAdj (R := R) W).homEquiv _ _\n        ((SheafOfModules.overFunctorMap R tV).inv.app\n              ((SheafOfModules.pushforward (SheafOfModules.pushforwardOver (R := R) V)).obj M) ≫\n          (SheafOfModules.overMap R tV).map\n            ((SheafOfModules.overPushforwardOverAdj (R := R) V).counit.app M))))",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "independent cc review: item ringedTopos_binary_descent (statement unchanged after whitespace normalisation) proved from new nodes fibre/direct-image restriction (proved) and two true sorry lemmas cross-direct-image-restriction and lower-shriek triangle; six helpers moved verbatim to the re-exported Defs module with change record; all 11 modules compile"
+ }
+}

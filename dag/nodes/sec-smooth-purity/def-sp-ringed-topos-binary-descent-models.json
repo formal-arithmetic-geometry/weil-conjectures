@@ -1,0 +1,114 @@
+{
+ "id": "def-sp-ringed-topos-binary-descent-models",
+ "kind": "definition",
+ "title": "Termwise slice restriction models and normalized adjunction map",
+ "statement": "On a site (C,J), for a ring sheaf R, use termwise module restriction to C/U and termwise relocalization along f:U→V. The sectionwise identity gives moduleOverComplexComp. For rW≅rU⋙rUW with right adjoints RU,RW, define the restriction-adjunction map RU A→RW(rUW A) by transposing comp.hom followed by rUW of the U-counit. Small-model sheafification supplies the abelian sheafification instances at the chosen universe. These are the six existing definitions, with unchanged bodies and names.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DG, right-direct-image and fibre calculation, extended to subterminal slices."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use Mathlib small-model sheafification, termwise functors, and overFunctorMap. Define the nested map by the displayed adjunction Hom bijection.",
+   "uses": [
+    "def-pur-localized-ringed-site"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG and 08BU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pur-localized-ringed-site"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "E9: the proof in the Lean module, with the source argument specialized to the stated slice-site interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Termwise restriction of complexes of module sheaves to slice sites and composition of restriction",
+   "results": "{\"t\": \"2026-10-20T17:33:39Z\", \"tool\": \"leansearch\", \"query\": \"Termwise restriction of complexes of module sheaves to slice sites and composition of restriction\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomologicalComplex.restrictionMap_comp\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctorComp\", \"AlgebraicGeometry.Scheme.Modules.restrict\", \"ComplexShape.Embedding.homRestrict_precomp\", \"ModuleCat.Tilde.toOpen_res\", \"HomologicalComplex.restriction\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"HomologicalComplex.restrictionMap\"], \"digest\": \"9963af0de6ec46b3\"}",
+   "date": "2026-10-20",
+   "verdict": "Uses existing termwise functors, slice comparison, and small-model sheafification. This node only records the existing interface moved unchanged."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"overFunctorMap\"",
+   "results": "{\"t\": \"2026-10-20T17:33:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"overFunctorMap\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"SheafOfModules.overFunctorMap\"], \"digest\": \"cdb8ef4e437ff461\"}",
+   "date": "2026-10-20",
+   "verdict": "Uses existing termwise functors, slice comparison, and small-model sheafification. This node only records the existing interface moved unchanged."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|mapHomologicalComplex|hasSheafifyEssentiallySmallSite",
+   "results": "{\"t\": \"2026-10-20T17:33:38Z\", \"tool\": \"grep\", \"query\": \"overFunctorMap|mapHomologicalComplex|hasSheafifyEssentiallySmallSite\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Condensed/Light/Instances.lean\", \"Mathlib/Condensed/Light/Instances.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"Mathlib/AlgebraicTopology/AlternatingFaceMapComplex.lean\", \"Mathlib/AlgebraicTopology/DoldKan/Homotopies.lean\", \"Mathlib/AlgebraicTopology/DoldKan/NReflectsIso.lean\", \"Mathlib/AlgebraicTopology/DoldKan/NReflectsIso.lean\"], \"digest\": \"aadab2b1fd27adf6\"}",
+   "date": "2026-10-20",
+   "verdict": "Uses existing termwise functors, slice comparison, and small-model sheafification. This node only records the existing interface moved unchanged."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposBinaryDescent",
+  "date": "2026-10-21",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ringed-topos-binary-descent",
+   "place": "Termwise slice restriction models and normalized adjunction map",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedToposBinaryDescentDefs",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposBinaryDescentDefs.lean",
+  "declaration": "CategoryTheory.moduleOverComplex",
+  "statement": "def moduleOverComplex {C : Type u} [Category.{v} C]\n    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r}) (U : C)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-21",
+  "declarations": [
+   "CategoryTheory.binaryDescent_hasSheafify",
+   "CategoryTheory.binaryDescent_wEqualsLocallyBijective",
+   "CategoryTheory.moduleOverComplex",
+   "CategoryTheory.moduleOverMapComplex",
+   "CategoryTheory.moduleOverComplexComp",
+   "CategoryTheory.restrictionAdjunctionMap"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "independent cc review: item ringedTopos_binary_descent (statement unchanged after whitespace normalisation) proved from new nodes fibre/direct-image restriction (proved) and two true sorry lemmas cross-direct-image-restriction and lower-shriek triangle; six helpers moved verbatim to the re-exported Defs module with change record; all 11 modules compile"
+ }
+}

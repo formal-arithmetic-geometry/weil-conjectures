@@ -1,29 +1,12 @@
 module
 
 
-public import Sheaf.CategoryTheory.RingedSiteModules
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-public import Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous
-public import Mathlib.CategoryTheory.Triangulated.Pretriangulated
-public import Mathlib.CategoryTheory.Sites.Sheaf
-public import Mathlib.CategoryTheory.Sites.Equivalence
-public import Mathlib.CategoryTheory.Comma.StructuredArrow.Small
-public import WeilConjectures.Algebra.Homology.RhomIntoKInjectiveLocal
+public import Sheaf.CategoryTheory.RingedToposBinaryDescentDefs
 
-import Mathlib.CategoryTheory.Sites.Limits
-import Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
-import Mathlib.CategoryTheory.Sites.CoverLifting
-import Mathlib.Algebra.Category.ModuleCat.Presheaf.Sheafification
-import Mathlib.Algebra.Homology.HomotopyCategory.KInjective
-import Mathlib.Algebra.Homology.DerivedCategory.ShortExact
-import Sheaf.CategoryTheory.SheafSubcategoryComparison
-import WeilConjectures.CategoryTheory.LocalizedModuleAdjunctionExact
-import WeilConjectures.CategoryTheory.ExtensionByZeroPresheaf
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.CategoryTheory.ModulePullbackPushforwardAdjunction
-import Sheaf.CategoryTheory.DerivedCategory.AdjointFunctors
-import Sheaf.CategoryTheory.LocalizedModuleExactForSystems
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Sheaf.Algebra.Homology.SitePerfectModelRestriction
+import Sheaf.CategoryTheory.RingedToposFibreRestriction
+import Sheaf.CategoryTheory.RingedToposBinaryDescentTriangle
 
 /-!
 # Binary derived open descent for modules on a ringed topos
@@ -36,63 +19,137 @@ lem-sp-ringed-topos-binary-descent).
 @[expose] public section
 
 universe u v r w s
-
 open CategoryTheory CategoryTheory.Limits
-
 namespace CategoryTheory
-
 set_option autoImplicit false
 set_option synthInstance.maxSize 4096
 
-/-- Expose Mathlib's small-model abelian sheafification at the chosen site universe.
-Source: Stacks 03CV (blueprint: lem-sp-ringed-topos-binary-descent). -/
-noncomputable instance binaryDescent_hasSheafify {C : Type u} [Category.{v} C]
-    [EssentiallySmall.{s} C] (J : GrothendieckTopology C) :
-    HasSheafify J AddCommGrpCat.{s} :=
-  hasSheafifyEssentiallySmallSite J AddCommGrpCat.{s}
+private theorem binary_module_isZero
+    {C : Type u} [Category.{v} C] [HasTerminal C]
+    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r}) (U V : C)
+    (hcover : Sieve.ofArrows (fun b : Bool ↦ if b then U else V)
+      (fun b ↦ terminal.from (if b then U else V)) ∈ J (⊤_ C))
+    (M : SheafOfModules.{max u v r} R)
+    (hU : IsZero ((SheafOfModules.overFunctor R U).obj M))
+    (hV : IsZero ((SheafOfModules.overFunctor R V).obj M)) : IsZero M := by
+  have hpoint (Y : C) (b : Bool) (k : Y ⟶ if b then U else V) :
+      Subsingleton (M.val.obj (Opposite.op Y)) := by
+    have hz : IsZero ((SheafOfModules.overFunctor R (if b then U else V)).obj M) := by
+      cases b
+      · exact hV
+      · exact hU
+    exact ModuleCat.isZero_iff_subsingleton.mp
+      (((SheafOfModules.forget (R.over (if b then U else V))) ⋙
+        PresheafOfModules.evaluation _ (Opposite.op (Over.mk k))).map_isZero hz)
+  apply (IsZero.iff_id_eq_zero M).mpr
+  ext Y x
+  change x = 0
+  apply M.isSheaf.isSeparated Y.unop
+    ((Sieve.ofArrows (fun b : Bool ↦ if b then U else V)
+      (fun b ↦ terminal.from (if b then U else V))).pullback (terminal.from Y.unop))
+    (J.pullback_stable (terminal.from Y.unop) hcover)
+  intro B b hb
+  obtain ⟨i, k, _⟩ := Sieve.ofArrows.exists hb
+  exact (hpoint B i k).elim _ _
 
-/-- Expose Mathlib's transport of the local criterion for abelian sheafification.
-Source: Stacks 03CV (blueprint: lem-sp-ringed-topos-binary-descent). -/
-noncomputable instance binaryDescent_wEqualsLocallyBijective
-    {C : Type u} [Category.{v} C] [EssentiallySmall.{s} C]
-    (J : GrothendieckTopology C) :
-    J.WEqualsLocallyBijective AddCommGrpCat.{s} :=
-  letI : ∀ X : Cᵒᵖ,
-      HasLimitsOfShape (StructuredArrow X (equivSmallModel.{s} C).inverse.op) AddCommGrpCat.{s} :=
-    fun _ ↦ HasLimitsOfShape.of_small.{s, s} AddCommGrpCat.{s} _
-  GrothendieckTopology.WEqualsLocallyBijective.ofEssentiallySmall J (A := AddCommGrpCat.{s})
+private noncomputable def restriction_homology_iso
+    {A B : Type*} [Category A] [Category B] [Abelian A] [Abelian B]
+    [HasDerivedCategory.{w} A] [HasDerivedCategory.{w} B]
+    (F : A ⥤ B) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (T : DerivedCategory A ⥤ DerivedCategory B)
+    (q : DerivedCategory.Q ⋙ T ≅ F.mapHomologicalComplex (.up ℤ) ⋙ DerivedCategory.Q)
+    (M : DerivedCategory A) (n : ℤ) :
+    F.obj ((DerivedCategory.homologyFunctor A n).obj M) ≅
+      (DerivedCategory.homologyFunctor B n).obj (T.obj M) := by
+  let K := DerivedCategory.Q.objPreimage M
+  let e : F.mapDerivedCategory.obj M ≅ T.obj M :=
+    F.mapDerivedCategory.mapIso (DerivedCategory.Q.objObjPreimageIso M).symm ≪≫
+      F.mapDerivedCategoryFactors.app K ≪≫ (q.app K).symm ≪≫
+        T.mapIso (DerivedCategory.Q.objObjPreimageIso M)
+  exact (F.mapDerivedCategoryHomologyFunctorIso n).app M ≪≫
+    (DerivedCategory.homologyFunctor B n).mapIso e
 
-/-- Termwise restriction to the localized site, using the recorded restriction functor.
-Source: Stacks 03DH and 03DJ (blueprint: lem-sp-ringed-topos-binary-descent). -/
-noncomputable def moduleOverComplex {C : Type u} [Category.{v} C]
-    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r}) (U : C) :=
-  letI := module_overFunctor_preservesZero.{u, v, max u v r, r} R U
-  (SheafOfModules.overFunctor.{max u v r} R U).mapHomologicalComplex (.up ℤ)
+private theorem binary_homology_isZero
+    {C : Type u} [Category.{v} C] [HasTerminal C]
+    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r}) (U V : C)
+    [HasSheafify J AddCommGrpCat.{max u v r}]
+    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}]
+    [HasSheafify (J.over U) AddCommGrpCat.{max u v r}]
+    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v r}]
+    [HasSheafify (J.over V) AddCommGrpCat.{max u v r}]
+    [(J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v r}]
+    (hcover : Sieve.ofArrows (fun b : Bool ↦ if b then U else V)
+      (fun b ↦ terminal.from (if b then U else V)) ∈ J (⊤_ C))
+    [HasDerivedCategory.{w} (SheafOfModules.{max u v r} R)]
+    [HasDerivedCategory.{w} (SheafOfModules.{max u v r} (R.over U))]
+    [HasDerivedCategory.{w} (SheafOfModules.{max u v r} (R.over V))]
+    (rU : DerivedCategory (SheafOfModules.{max u v r} R) ⥤
+      DerivedCategory (SheafOfModules.{max u v r} (R.over U)))
+    (rV : DerivedCategory (SheafOfModules.{max u v r} R) ⥤
+      DerivedCategory (SheafOfModules.{max u v r} (R.over V)))
+    (qU : DerivedCategory.Q ⋙ rU ≅ moduleOverComplex R U ⋙ DerivedCategory.Q)
+    (qV : DerivedCategory.Q ⋙ rV ≅ moduleOverComplex R V ⋙ DerivedCategory.Q)
+    (M : DerivedCategory (SheafOfModules.{max u v r} R)) (n : ℤ)
+    (hU : IsZero ((DerivedCategory.homologyFunctor _ n).obj (rU.obj M)))
+    (hV : IsZero ((DerivedCategory.homologyFunctor _ n).obj (rV.obj M))) :
+    IsZero ((DerivedCategory.homologyFunctor _ n).obj M) := by
+  let FU := SheafOfModules.overFunctor.{max u v r} R U
+  let FV := SheafOfModules.overFunctor.{max u v r} R V
+  let : PreservesFiniteLimits FU := (SheafOfModules.overFunctor_exact_ofUniverses R U).1
+  let : PreservesFiniteColimits FU := (SheafOfModules.overFunctor_exact_ofUniverses R U).2
+  let : PreservesFiniteLimits FV := (SheafOfModules.overFunctor_exact_ofUniverses R V).1
+  let : PreservesFiniteColimits FV := (SheafOfModules.overFunctor_exact_ofUniverses R V).2
+  apply binary_module_isZero R U V hcover
+  · exact hU.of_iso (restriction_homology_iso FU rU qU M n)
+  · exact hV.of_iso (restriction_homology_iso FV rV qV M n)
 
-/-- Termwise relocalization along a map of objects of the site.
-Source: Stacks 03DH (blueprint: lem-sp-ringed-topos-binary-descent). -/
-noncomputable def moduleOverMapComplex {C : Type u} [Category.{v} C] [HasPullbacks C]
-    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r}) {U V : C} (f : U ⟶ V) :=
-  (SheafOfModules.overMap.{max u v r} R f).mapHomologicalComplex (.up ℤ)
-
-/-- The sectionwise identity comparing restriction with iterated restriction on complexes.
-Source: Stacks 03DH (blueprint: lem-sp-ringed-topos-binary-descent). -/
-noncomputable def moduleOverComplexComp {C : Type u} [Category.{v} C] [HasPullbacks C]
-    {J : GrothendieckTopology C} (R : Sheaf J RingCat.{r}) {U V : C} (f : U ⟶ V) :
-    moduleOverComplex R U ≅ moduleOverComplex R V ⋙ moduleOverMapComplex R f :=
-  letI := module_overFunctor_preservesZero.{u, v, max u v r, r} R U
-  letI := module_overFunctor_preservesZero.{u, v, max u v r, r} R V
-  NatIso.mapHomologicalComplex (SheafOfModules.overFunctorMap R f).symm (.up ℤ)
-
-/-- The direct-image restriction map is the adjoint of restriction of the counit.
-Source: Stacks 08DG, cone construction (blueprint: lem-sp-ringed-topos-binary-descent). -/
-noncomputable def restrictionAdjunctionMap
+private theorem restriction_mate
     {D DU DW : Type*} [Category D] [Category DU] [Category DW]
     {rU : D ⥤ DU} {rW : D ⥤ DW} {rUW : DU ⥤ DW}
     {RU : DU ⥤ D} {RW : DW ⥤ D}
-    (adjU : rU ⊣ RU) (adjW : rW ⊣ RW) (comp : rW ≅ rU ⋙ rUW) (A : DU) :
-    RU.obj A ⟶ RW.obj (rUW.obj A) :=
-  (adjW.homEquiv _ _) (comp.hom.app (RU.obj A) ≫ rUW.map (adjU.counit.app A))
+    (adjU : rU ⊣ RU) (adjW : rW ⊣ RW) (comp : rW ≅ rU ⋙ rUW)
+    {G : D} {A : DU} (k : G ⟶ RU.obj A) :
+    (adjW.homEquiv G (rUW.obj A))
+        (comp.hom.app G ≫ rUW.map (rU.map k ≫ adjU.counit.app A)) =
+      k ≫ restrictionAdjunctionMap adjU adjW comp A := by
+  have hn := comp.hom.naturality k
+  change rW.map k ≫ comp.hom.app _ =
+    comp.hom.app G ≫ rUW.map (rU.map k) at hn
+  rw [Functor.map_comp, ← Category.assoc, ← hn, Category.assoc]
+  exact adjW.homEquiv_naturality_left k _
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem fibre_compatibility
+    {D DU DV DW : Type*} [Category D] [Category DU] [Category DV] [Category DW]
+    [Preadditive D] [Preadditive DW] [HasBinaryBiproducts D]
+    {rU : D ⥤ DU} {rV : D ⥤ DV} {rW : D ⥤ DW}
+    {rUW : DU ⥤ DW} {rVW : DV ⥤ DW}
+    {RU : DU ⥤ D} {RV : DV ⥤ D} {RW : DW ⥤ D}
+    (adjU : rU ⊣ RU) (adjV : rV ⊣ RV) (adjW : rW ⊣ RW)
+    (compU : rW ≅ rU ⋙ rUW) (compV : rW ≅ rV ⋙ rVW)
+    {A : DU} {B : DV} (c : rUW.obj A ≅ rVW.obj B)
+    {G : D} (f : G ⟶ RU.obj A ⊞ RV.obj B)
+    (hz : f ≫ biprod.desc
+      (restrictionAdjunctionMap adjU adjW compU A ≫ RW.map c.hom)
+      (-restrictionAdjunctionMap adjV adjW compV B) = 0) :
+    compU.hom.app G ≫
+        rUW.map (rU.map (f ≫ biprod.fst) ≫ adjU.counit.app A) ≫ c.hom =
+      compV.hom.app G ≫
+        rVW.map (rV.map (f ≫ biprod.snd) ≫ adjV.counit.app B) := by
+  apply (adjW.homEquiv G (rVW.obj B)).injective
+  rw [← Category.assoc, adjW.homEquiv_naturality_right]
+  erw [restriction_mate adjU adjW compU (f ≫ biprod.fst),
+    restriction_mate adjV adjW compV (f ≫ biprod.snd)]
+  have hd : biprod.desc
+      (restrictionAdjunctionMap adjU adjW compU A ≫ RW.map c.hom)
+      (-restrictionAdjunctionMap adjV adjW compV B) =
+      biprod.fst ≫ (restrictionAdjunctionMap adjU adjW compU A ≫ RW.map c.hom) -
+        biprod.snd ≫ restrictionAdjunctionMap adjV adjW compV B := by
+    apply biprod.hom_ext'
+    · simp
+    · simp
+  rw [hd, Preadditive.comp_sub, sub_eq_zero] at hz
+  simpa only [Category.assoc] using hz
 
 set_option maxHeartbeats 800000 in
 -- The five localization models require simultaneous universe and instance elaboration.
@@ -375,8 +432,43 @@ theorem ringedTopos_binary_descent
               (bangAdjV.counit.app M))
             (delta.app M) ∈ distTriang _)
     := by
-  sorry
+  let : HasSheafify J AddCommGrpCat.{max u v r} := binaryDescent_hasSheafify.{u, v, max u v r} J
+  let : J.WEqualsLocallyBijective AddCommGrpCat.{max u v r} :=
+    binaryDescent_wEqualsLocallyBijective.{u, v, max u v r} J
+  let : HasSheafify (J.over U) AddCommGrpCat.{max u v r} :=
+    binaryDescent_hasSheafify.{max u v, v, max u v r} (J.over U)
+  let : (J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v r} :=
+    binaryDescent_wEqualsLocallyBijective.{max u v, v, max u v r} (J.over U)
+  let : HasSheafify (J.over V) AddCommGrpCat.{max u v r} :=
+    binaryDescent_hasSheafify.{max u v, v, max u v r} (J.over V)
+  let : (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v r} :=
+    binaryDescent_wEqualsLocallyBijective.{max u v, v, max u v r} (J.over V)
+  constructor
+  · intro A B c
+    let d : RU.obj A ⊞ RV.obj B ⟶ RW.obj (rVW.obj B) := biprod.desc
+      (restrictionAdjunctionMap (rUW := rUW) adjU adjW compU A ≫ RW.map c.hom)
+      (-restrictionAdjunctionMap (rUW := rVW) adjV adjW compV B)
+    obtain ⟨G, f, h, hT⟩ := Pretriangulated.distinguished_cocone_triangle₁ d
+    obtain ⟨hA, hB⟩ := ringedTopos_fibre_restriction.{u, v, r, w} J R U V
+      rU rV rW rUW rVW RU RV RW adjU adjV adjW compU compV
+      qU qV qW qUW qVW compU_on_complexes compV_on_complexes A B c G f h hT
+    let := hA
+    let := hB
+    let a := asIso (rU.map f ≫ rU.map biprod.fst ≫ adjU.counit.app A)
+    let b := asIso (rV.map f ≫ rV.map biprod.snd ≫ adjV.counit.app B)
+    refine ⟨G, f, d, h, rfl, hT, ⟨a, b, rfl, rfl, ?_⟩, ?_⟩
+    · have hz := Pretriangulated.comp_distTriang_mor_zero₁₂ _ hT
+      simpa only [a, b, asIso_hom, Functor.map_comp, Category.assoc] using
+        fibre_compatibility adjU adjV adjW compU compV c f hz
+    · intro a₀ b₀ hU hV n hn
+      apply binary_homology_isZero.{u, v, r, w}
+        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)
+        U V hcover rU rV qU qV G n
+      · exact (hU n hn).of_iso ((DerivedCategory.homologyFunctor _ n).mapIso a)
+      · exact (hV n hn).of_iso ((DerivedCategory.homologyFunctor _ n).mapIso b)
+  · exact ringedTopos_binary_descent_triangle.{u, v, r, w} J R U V hcover
+      rU rV rW rUW rVW lU lV lW bangAdjU bangAdjV bangAdjW compU compV
+      qU qV qW qUW qVW compU_on_complexes compV_on_complexes
 
 end CategoryTheory
-
 end

@@ -1,0 +1,128 @@
+{
+ "id": "lem-sp-module-extension-zero-independent-ring",
+ "kind": "statement",
+ "title": "Exact module extension by zero with an independent ring universe",
+ "statement": "Let C:Type c have Hom universe v, J a topology, R a RingCat.{r}-valued sheaf, and U∈C. Put m=max(c,v,r). Assume abelian sheafification and its locally-bijective criterion on J and J/U in universe m. The concrete functor formed by the direct-sum extension presheaf followed by module sheafification is additive, preserves finite limits and finite colimits, and is left adjoint to module restriction to U. No relation between c,v,r or subterminality is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI and 03DJ; the direct-sum proof with independent site and ring universes."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Define the extension functor by the direct-sum presheaf followed by module sheafification.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 03DJ"
+   }
+  },
+  {
+   "text": "A presheaf map out of a direct sum is a compatible family of maps on the summands. Including the structure-map summand gives the inverse. Check both inverse identities and naturality on each summand; compose with the sheafification Hom equivalence to obtain the adjunction.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI"
+   }
+  },
+  {
+   "text": "Restriction is additive sectionwise, so its left adjoint is additive and preserves finite colimits. Evaluation takes monomorphisms to injections; the direct sum of injections is injective. Presheaf extension and then left exact module sheafification preserve monomorphisms. The abelian exactness criterion for a right exact additive functor preserving monomorphisms gives finite-limit preservation.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DJ"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-extension-by-zero-presheaf"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "E9: the proof in the Lean module, with the source argument specialized to the stated slice-site interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero of sheaves of modules on a localized site is exact and left adjoint to restriction with independent ring universe",
+   "results": "{\"t\": \"2026-10-20T17:50:07Z\", \"tool\": \"leansearch\", \"query\": \"Extension by zero of sheaves of modules on a localized site is exact and left adjoint to restriction with independent ring universe\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.PullbackConstruction.adjunction\", \"AlgebraicGeometry.Scheme.Modules.instIsLeftAdjointRestrictFunctor\", \"PresheafOfModules.sheafificationAdjunction\", \"AlgebraicGeometry.RingedSpace.res_zero\", \"SheafOfModules.instAbelian\", \"ModuleCat.localizedModule_functor_map_exact\", \"AlgebraicGeometry.Scheme.Modules.instIsRightAdjointPresheafOfModulesToPresheafOfModules\", \"SheafOfModules.sheafificationCompPullback\"], \"digest\": \"497a01254108c6b7\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib supplies sheafification and abelian exactness criteria; the direct-sum extension adjunction is constructed here, at independent universes."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafificationHomEquiv\"",
+   "results": "{\"t\": \"2026-10-20T17:50:07Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafificationHomEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationHomEquiv\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv_def\", \"PresheafOfModules.toPresheaf_map_sheafificationHomEquiv\", \"PresheafOfModules.toSheaf_map_sheafificationHomEquiv_symm\"], \"digest\": \"88eb176813ff6a91\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib supplies sheafification and abelian exactness criteria; the direct-sum extension adjunction is constructed here, at independent universes."
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|preservesHomology_of_preservesMonos_and_cokernels",
+   "results": "{\"t\": \"2026-10-20T17:50:07Z\", \"tool\": \"grep\", \"query\": \"extensionByZero|preservesHomology_of_preservesMonos_and_cokernels\", \"sub\": \"\", \"ok\": true, \"n_hits\": 3, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Abelian/GrothendieckAxioms/Basic.lean\", \"Mathlib/CategoryTheory/Abelian/Exact.lean\", \"Mathlib/CategoryTheory/Abelian/GrothendieckCategory/ModuleEmbedding/GabrielPopescu.lean\"], \"digest\": \"57793b9470f1b398\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib supplies sheafification and abelian exactness criteria; the direct-sum extension adjunction is constructed here, at independent universes."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposBinaryDescent",
+  "date": "2026-10-21",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ringed-topos-binary-descent",
+   "place": "Exact module extension by zero with an independent ring universe",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteModuleExtensionByZeroExact",
+  "file": "lean/Sheaf/CategoryTheory/SiteModuleExtensionByZeroExact.lean",
+  "declaration": "SheafOfModules.siteModuleExtensionByZero_exact",
+  "statement": "theorem siteModuleExtensionByZero_exact\n    [HasSheafify (J.over U) AddCommGrpCat.{max c v r}]\n    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max c v r}] :\n    (siteModuleExtensionByZero R U).Additive ∧\n    PreservesFiniteLimits (siteModuleExtensionByZero R U) ∧\n    PreservesFiniteColimits (siteModuleExtensionByZero R U) ∧\n    Nonempty (siteModuleExtensionByZero R U ⊣ overFunctor.{max c v r} R U)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-21",
+  "declarations": [
+   "SheafOfModules.siteModuleExtensionByZero",
+   "SheafOfModules.siteModuleExtensionByZero_exact"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "independent cc review: item ringedTopos_binary_descent (statement unchanged after whitespace normalisation) proved from new nodes fibre/direct-image restriction (proved) and two true sorry lemmas cross-direct-image-restriction and lower-shriek triangle; six helpers moved verbatim to the re-exported Defs module with change record; all 11 modules compile"
+ }
+}

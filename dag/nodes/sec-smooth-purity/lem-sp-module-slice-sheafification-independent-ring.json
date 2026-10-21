@@ -1,0 +1,121 @@
+{
+ "id": "lem-sp-module-slice-sheafification-independent-ring",
+ "kind": "statement",
+ "title": "Module sheafification commutes with restriction at independent universes",
+ "statement": "Let C:Type u₁ and D:Type u₂ have Hom universes v₁,v₂, let J,K be topologies on them, and let F:C→D be continuous and cocontinuous. Let R be a RingCat.{r}-valued sheaf on D, and put m=max(u₁,u₂,v₁,v₂,r). Assume abelian sheafification and its locally-bijective criterion on both sites in universe m. Restrict module presheaves and module sheaves along F, with the restricted coefficient sheaf on C. The canonical module comparison from sheafification after restriction to restriction after sheafification is a natural isomorphism. It is defined by transposing the restricted global unit under the local sheafification adjunction, and hence preserves the sheafification units.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03CY and 03DH, with the naturality argument of Sheaf.Algebra.Homology.SliceModuleSheafification generalized to independent universes."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Construct the canonical module map using the local sheafification Hom equivalence and the restricted global sheafification unit. Naturality follows from both Hom-equivalence naturality identities.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY, 03DH and 04IX"
+   }
+  },
+  {
+   "text": "After forgetting to abelian presheaves, the local unit followed by the comparison is the restricted global unit. Cocontinuity preserves local injectivity and surjectivity. Cancel the locally bijective local unit. The comparison is a locally bijective map of sheaves and therefore an isomorphism.",
+   "uses": [
+    "lem-pc-sites-module-sheafification-interface"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03CY, 03DH and 04IX"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-sites-module-sheafification-interface"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "E9: the proof in the Lean module, with the source argument specialized to the stated slice-site interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction along a continuous cocontinuous site functor commutes with module sheafification with independent ring and site universes",
+   "results": "{\"t\": \"2026-10-20T18:40:10Z\", \"tool\": \"leansearch\", \"query\": \"Restriction along a continuous cocontinuous site functor commutes with module sheafification with independent ring and site universes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafification\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility_hom_app_val\", \"CategoryTheory.Functor.pushforwardContinuousSheafificationCompatibility\", \"AlgebraicGeometry.Scheme.Modules.restrictFunctor\", \"SheafOfModules.PullbackConstruction.adjunction\", \"SheafOfModules.sheafificationCompPullback\", \"PresheafOfModules.sheafifyHomEquiv'\", \"CategoryTheory.Functor.sheafAdjunctionCocontinuous\"], \"digest\": \"b6f383322e578291\"}",
+   "date": "2026-10-20",
+   "verdict": "The ordinary sheafification API is fully general. The adopted slice-module interface fixes all universes together; its unit/local-bijectivity proof is generalized here."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafificationAdjunction_homEquiv_apply\"",
+   "results": "{\"t\": \"2026-10-20T18:40:10Z\", \"tool\": \"loogle\", \"query\": \"\\\"sheafificationAdjunction_homEquiv_apply\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"PresheafOfModules.sheafificationAdjunction_homEquiv_apply\"], \"digest\": \"d5b262c196955b84\"}",
+   "date": "2026-10-20",
+   "verdict": "The ordinary sheafification API is fully general. The adopted slice-module interface fixes all universes together; its unit/local-bijectivity proof is generalized here."
+  },
+  {
+   "tool": "grep",
+   "query": "sliceSheafificationComparison|isLocallyInjective_whisker",
+   "results": "{\"t\": \"2026-10-20T18:40:09Z\", \"tool\": \"grep\", \"query\": \"sliceSheafificationComparison|isLocallyInjective_whisker\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/PreservesLocallyBijective.lean\", \"Mathlib/CategoryTheory/Sites/Equivalence.lean\"], \"digest\": \"0eaf423f030edf5f\"}",
+   "date": "2026-10-20",
+   "verdict": "The ordinary sheafification API is fully general. The adopted slice-module interface fixes all universes together; its unit/local-bijectivity proof is generalized here."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposBinaryDescent",
+  "date": "2026-10-21",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ringed-topos-binary-descent",
+   "place": "Module sheafification commutes with restriction at independent universes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteModuleSliceSheafification",
+  "file": "lean/Sheaf/CategoryTheory/SiteModuleSliceSheafification.lean",
+  "declaration": "SheafOfModules.sliceSheafificationComparisonIndependent_isIso",
+  "statement": "theorem sliceSheafificationComparisonIndependent_isIso :\n    IsIso (sliceSheafificationComparisonIndependent (J := J) F R)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-21",
+  "declarations": [
+   "SheafOfModules.slicePresheafRestrictionIndependent",
+   "SheafOfModules.sliceModuleRestrictionIndependent",
+   "SheafOfModules.sliceSheafificationComparisonIndependent",
+   "SheafOfModules.sliceSheafificationComparisonIndependent_isIso"
+  ]
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "independent cc review: item ringedTopos_binary_descent (statement unchanged after whitespace normalisation) proved from new nodes fibre/direct-image restriction (proved) and two true sorry lemmas cross-direct-image-restriction and lower-shriek triangle; six helpers moved verbatim to the re-exported Defs module with change record; all 11 modules compile"
+ }
+}

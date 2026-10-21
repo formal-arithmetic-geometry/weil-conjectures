@@ -1,0 +1,131 @@
+{
+ "id": "lem-sp-ringed-topos-fibre-restriction",
+ "kind": "statement",
+ "title": "Isomorphisms from the direct-image fibre on both opens",
+ "statement": "With the normalized restriction and right-adjoint data of [lem-sp-ringed-topos-direct-image-restriction], let A,B have an overlap isomorphism c. In any distinguished triangle G→RU A⊕RV B→RW(B|W)→G[1] whose middle map is the canonical adjunction-mate difference, the U-restriction of the first arrow followed by first projection and counit is invertible; the V-restriction followed by second projection and counit is invertible. A cover and left adjoints are not required.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DG, right-direct-image and fibre calculation, extended to subterminal slices."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sp-ringed-topos-binary-descent-models"
+ ],
+ "proof": [
+  {
+   "text": "Lift qU,qV through localization to identify the restrictions with the exact triangulated functors, transporting their shift structures and triangulatedness.",
+   "uses": [
+    "lem-sf-site-perfect-restriction-exact",
+    "def-sp-ringed-topos-binary-descent-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG and 08BU"
+   }
+  },
+  {
+   "text": "In a distinguished triangle G→X⊕Y→Z→G[1] with middle map (a,b) and b invertible, the middle map is split epic, the connecting map is zero, and the first map f is monic. Using f(a,b)=0 shows the X-projection is monic. The graph map (1,-ab^{-1}) is killed by (a,b), so coyoneda exactness factors it through f, yielding a section of the X-projection. It is therefore invertible. Swap summands for the Y-projection version.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG and 08BU"
+   }
+  },
+  {
+   "text": "Apply this argument to each restricted triangle. The cross-restriction lemma makes the required component invertible; the overlap isomorphism c handles the first component on V. Compare mapped biproducts with biproducts of images, then compose with the invertible counits.",
+   "uses": [
+    "lem-sp-ringed-topos-direct-image-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG and 08BU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sf-site-perfect-restriction-exact",
+  "def-sp-ringed-topos-binary-descent-models",
+  "lem-sp-ringed-topos-direct-image-restriction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "E9: the proof in the Lean module, with the source argument specialized to the stated slice-site interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "A fibre of a morphism from a direct sum has invertible first projection when the second component is invertible",
+   "results": "{\"t\": \"2026-10-20T17:33:38Z\", \"tool\": \"leansearch\", \"query\": \"A fibre of a morphism from a direct sum has invertible first projection when the second component is invertible\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"HomotopicalAlgebra.instFibrationFstOfIsFibrant\", \"CategoryTheory.Limits.biprod.fst_epi\", \"CategoryTheory.PreGaloisCategory.fiberPullbackEquiv_symm_fst_apply\", \"AlgebraicGeometry.instIsPreimmersionFiberι\", \"CategoryTheory.Limits.isoBiprodZero_inv\", \"AlgebraicGeometry.Flat.instFstScheme\", \"AlgebraicGeometry.Scheme.Hom.fiberι\", \"AddCommGrpCat.biprodIsoProd_inv_comp_fst_apply\"], \"digest\": \"909de3e3a050deb9\"}",
+   "date": "2026-10-20",
+   "verdict": "The proof uses coyoneda exactness and split morphisms; no specialized fibre-projection theorem was found."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"coyoneda_exact₂\"",
+   "results": "{\"t\": \"2026-10-20T17:33:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"coyoneda_exact₂\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"CategoryTheory.Pretriangulated.Triangle.coyoneda_exact₂\"], \"digest\": \"24a88d4eb163cd4c\"}",
+   "date": "2026-10-20",
+   "verdict": "The proof uses coyoneda exactness and split morphisms; no specialized fibre-projection theorem was found."
+  },
+  {
+   "tool": "grep",
+   "query": "mor₃_eq_zero_of_epi₂|mono₁|coyoneda_exact₂",
+   "results": "{\"t\": \"2026-10-20T17:33:37Z\", \"tool\": \"grep\", \"query\": \"mor₃_eq_zero_of_epi₂|mono₁|coyoneda_exact₂\", \"sub\": \"\", \"ok\": true, \"n_hits\": 19, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Triangulated/Subcategory.lean\", \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"Mathlib/CategoryTheory/Triangulated/Orthogonal.lean\", \"Mathlib/CategoryTheory/Triangulated/Yoneda.lean\", \"Mathlib/CategoryTheory/Triangulated/Adjunction.lean\", \"Mathlib/CategoryTheory/Triangulated/WeakKernels.lean\", \"Mathlib/CategoryTheory/Triangulated/TStructure/TruncLTGE.lean\"], \"digest\": \"02c70a252d36b253\"}",
+   "date": "2026-10-20",
+   "verdict": "The proof uses coyoneda exactness and split morphisms; no specialized fibre-projection theorem was found."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposBinaryDescent",
+  "date": "2026-10-21",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ringed-topos-binary-descent",
+   "place": "Isomorphisms from the direct-image fibre on both opens",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedToposFibreRestriction",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposFibreRestriction.lean",
+  "declaration": "CategoryTheory.ringedTopos_fibre_restriction",
+  "statement": "theorem ringedTopos_fibre_restriction\n    {C : Type u} [Category.{v} C] [HasTerminal C] [HasPullbacks C]\n    (J : GrothendieckTopology C)\n    [J.HasSheafCompose (forget₂ CommRingCat RingCat)]\n    (R : Sheaf J CommRingCat.{r})\n    (U V : C) [Mono (terminal.from U)] [Mono (terminal.from V)]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n        (pullback (terminal.from U) (terminal.from V))))]\n    (rU : DerivedCategory (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)))\n    (rV : DerivedCategory (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)))\n    (rW : DerivedCategory (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n          (pullback (terminal.from U) (terminal.from V)))))\n    (rUW : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n          (pullback (terminal.from U) (terminal.from V)))))\n    (rVW : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n          (pullback (terminal.from U) (terminal.from V)))))\n    (RU : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n    (RV : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n    (RW : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n        (pullback (terminal.from U) (terminal.from V)))) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n    (adjU : rU ⊣ RU) (adjV : rV ⊣ RV) (adjW : rW ⊣ RW)\n    (compU : rW ≅ rU ⋙ rUW) (compV : rW ≅ rV ⋙ rVW)\n    (qU : DerivedCategory.Q ⋙ rU ≅\n      moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U ⋙\n        DerivedCategory.Q)\n    (qV : DerivedCategory.Q ⋙ rV ≅\n      moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) V ⋙\n        DerivedCategory.Q)\n    (qW : DerivedCategory.Q ⋙ rW ≅\n      moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n        (pullback (terminal.from U) (terminal.from V)) ⋙ DerivedCategory.Q)\n    (qUW : DerivedCategory.Q ⋙ rUW ≅\n      moduleOverMapComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n        (pullback.fst (terminal.from U) (terminal.from V)) ⋙ DerivedCategory.Q)\n    (qVW : DerivedCategory.Q ⋙ rVW ≅\n      moduleOverMapComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n        (pullback.snd (terminal.from U) (terminal.from V)) ⋙ DerivedCategory.Q)\n    (compU_on_complexes : ∀ K,\n      compU.hom.app (DerivedCategory.Q.obj K) ≫\n        rUW.map (qU.hom.app K) ≫\n          qUW.hom.app\n            ((moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U).obj K) =\n      qW.hom.app K ≫ DerivedCategory.Q.map\n        ((moduleOverComplexComp ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n          (pullback.fst (terminal.from U) (terminal.from V))).hom.app K))\n    (compV_on_complexes : ∀ K,\n      compV.hom.app (DerivedCategory.Q.obj K) ≫\n        rVW.map (qV.hom.app K) ≫\n          qVW.hom.app\n            ((moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) V).obj K) =\n      qW.hom.app K ≫ DerivedCategory.Q.map\n        ((moduleOverComplexComp ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n          (pullback.snd (terminal.from U) (terminal.from V))).hom.app K))\n    (A : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)))\n    (B : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)))\n    (c : rUW.obj A ≅ rVW.obj B)\n    (G : DerivedCategory (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n    (f : G ⟶ RU.obj A ⊞ RV.obj B)\n    (h : RW.obj (rVW.obj B) ⟶ (shiftFunctor _ (1 : ℤ)).obj G)\n    (hT : Pretriangulated.Triangle.mk f\n      (biprod.desc\n        (restrictionAdjunctionMap (rUW := rUW) adjU adjW compU A ≫ RW.map c.hom)\n        (-restrictionAdjunctionMap (rUW := rVW) adjV adjW compV B)) h ∈ distTriang _) :\n    IsIso (rU.map f ≫ rU.map biprod.fst ≫ adjU.counit.app A) ∧\n      IsIso (rV.map f ≫ rV.map biprod.snd ≫ adjV.counit.app B)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "independent cc review: item ringedTopos_binary_descent (statement unchanged after whitespace normalisation) proved from new nodes fibre/direct-image restriction (proved) and two true sorry lemmas cross-direct-image-restriction and lower-shriek triangle; six helpers moved verbatim to the re-exported Defs module with change record; all 11 modules compile"
+ }
+}

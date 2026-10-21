@@ -1,0 +1,115 @@
+{
+ "id": "lem-sp-site-relocalization-kinjective-independent-ring",
+ "kind": "statement",
+ "title": "Relocalization preserves K-injectives at independent ring universes",
+ "statement": "Let C:Type u have Hom universe v, J a topology, R a RingCat.{r}-valued sheaf, U,V objects, and f:V→U. Put m=max(u,v,r). Assume abelian sheafification with its locally-bijective criterion on J/U and J/V. The relocalization functor overMap.{m} R f preserves K-injective cochain complexes. There is no cover or subterminality hypothesis.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-restrict-K-injective-to-open; the identification of iterated slices is the slice-site universal property."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Regard f as X in C/U. Transport sheafification and its local criterion from C/V to (C/U)/X using the iterated-slice equivalence. Restriction to X preserves K-injectives.",
+   "uses": [
+    "lem-sp-site-restriction-kinjective-independent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-restrict-K-injective-to-open"
+   }
+  },
+  {
+   "text": "The two slice sites and their restricted rings induce an additive equivalence of module categories. Additive equivalences preserve K-injectives. Their composite with restriction is sectionwise the overMap functor. Transport the preservation property through this identity natural isomorphism.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "lemma-restrict-K-injective-to-open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-site-restriction-kinjective-independent-ring"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "E9: the proof in the Lean module, with the source argument specialized to the stated slice-site interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Relocalization along a morphism of site objects preserves K-injective complexes via the iterated slice equivalence",
+   "results": "{\"t\": \"2026-10-20T18:23:59Z\", \"tool\": \"leansearch\", \"query\": \"Relocalization along a morphism of site objects preserves K-injective complexes via the iterated slice equivalence\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.isKInjective_of_iso\", \"HomotopyEquiv.isKInjective\", \"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_iff_of_iso\", \"CochainComplex.IsKInjective.mk\", \"CategoryTheory.instIsDenseSubsiteOverLeftDiscretePUnitOverInverseIteratedSliceEquiv\", \"CategoryTheory.instIsCocontinuousOverLeftDiscretePUnitIteratedSliceForwardOver\", \"CochainComplex.isKInjective_of_injective\"], \"digest\": \"27cccc00c2204fba\"}",
+   "date": "2026-10-20",
+   "verdict": "The iterated-slice equivalence is available. The proof combines it with the proved exact extension and preservation by an additive equivalence."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"iteratedSliceEquiv\"",
+   "results": "{\"t\": \"2026-10-20T18:16:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"iteratedSliceEquiv\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 9, \"note\": \"\", \"top\": [\"CategoryTheory.Over.iteratedSliceEquiv\", \"CategoryTheory.Over.iteratedSliceEquiv_functor\", \"CategoryTheory.Over.iteratedSliceEquiv_inverse\", \"CategoryTheory.Over.iteratedSliceEquivOverMapIso\", \"CategoryTheory.Over.iteratedSliceEquiv_counitIso\", \"CategoryTheory.Over.iteratedSliceEquiv_unitIso\", \"CategoryTheory.Over.iteratedSliceEquivOverMapIso_hom_app_left_left\", \"CategoryTheory.Over.iteratedSliceEquivOverMapIso_inv_app_left_left\"], \"digest\": \"0a296e5885833a46\"}",
+   "date": "2026-10-20",
+   "verdict": "The iterated-slice equivalence is available. The proof combines it with the proved exact extension and preservation by an additive equivalence."
+  },
+  {
+   "tool": "grep",
+   "query": "iteratedSliceEquiv|preservesKInjectiveComplexes_of_iso",
+   "results": "{\"t\": \"2026-10-20T18:16:34Z\", \"tool\": \"grep\", \"query\": \"iteratedSliceEquiv|preservesKInjectiveComplexes_of_iso\", \"sub\": \"\", \"ok\": true, \"n_hits\": 15, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/Subobject/MonoOver.lean\", \"Mathlib/CategoryTheory/LocallyCartesianClosed/Over.lean\", \"Mathlib/CategoryTheory/Sites/Over.lean\"], \"digest\": \"b6a323623c49afe7\"}",
+   "date": "2026-10-20",
+   "verdict": "The iterated-slice equivalence is available. The proof combines it with the proved exact extension and preservation by an additive equivalence."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposBinaryDescent",
+  "date": "2026-10-21",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ringed-topos-binary-descent",
+   "place": "Relocalization preserves K-injectives at independent ring universes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteRelocalizationKInjective",
+  "file": "lean/Sheaf/CategoryTheory/SiteRelocalizationKInjective.lean",
+  "declaration": "SheafOfModules.overMap_preservesKInjectiveComplexes_ofUniverses",
+  "statement": "theorem overMap_preservesKInjectiveComplexes_ofUniverses\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    (R : Sheaf J RingCat.{r}) {U V : C} (f : V ⟶ U)\n    [HasSheafify (J.over U) AddCommGrpCat.{max u v r}]\n    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v r}]\n    [hV : HasSheafify (J.over V) AddCommGrpCat.{max u v r}]\n    [hWV : (J.over V).WEqualsLocallyBijective AddCommGrpCat.{max u v r}] :\n    (overMap.{max u v r} R f).PreservesKInjectiveComplexes",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "independent cc review: item ringedTopos_binary_descent (statement unchanged after whitespace normalisation) proved from new nodes fibre/direct-image restriction (proved) and two true sorry lemmas cross-direct-image-restriction and lower-shriek triangle; six helpers moved verbatim to the re-exported Defs module with change record; all 11 modules compile"
+ }
+}

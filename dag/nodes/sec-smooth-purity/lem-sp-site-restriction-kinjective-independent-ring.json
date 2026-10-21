@@ -1,0 +1,120 @@
+{
+ "id": "lem-sp-site-restriction-kinjective-independent-ring",
+ "kind": "statement",
+ "title": "Slice restriction preserves K-injectives at independent ring universes",
+ "statement": "For C,J,R,U and m=max(u,v,r), with abelian sheafification on the ambient and slice sites, module restriction overFunctor.{m} R U sends every K-injective cochain complex to a K-injective complex. No cover or subterminality is required.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "lemma-restrict-K-injective-to-open, via the exact-left-adjoint acyclic-Hom argument."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category"
+ ],
+ "proof": [
+  {
+   "text": "Use the exact direct-sum extension and its adjunction with restriction.",
+   "uses": [
+    "lem-sp-module-extension-zero-independent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI and 03DJ"
+   }
+  },
+  {
+   "text": "Apply preservation of K-injectives by the right adjoint of an exact additive functor: termwise adjunction transports maps from acyclic complexes and their null-homotopies.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-sf-site-perfect-restriction-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Cohomology on Sites, restriction of K-injectives to an open"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-module-extension-zero-independent-ring",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sf-site-perfect-restriction-exact"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "E9: the proof in the Lean module, with the source argument specialized to the stated slice-site interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "An exact left adjoint implies that the right adjoint preserves K injective complexes",
+   "results": "{\"t\": \"2026-10-20T17:53:33Z\", \"tool\": \"leansearch\", \"query\": \"An exact left adjoint implies that the right adjoint preserves K injective complexes\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\", \"CategoryTheory.Injective.injective_of_adjoint\", \"CategoryTheory.Functor.preservesProjectiveObjects_of_adjunction_of_preservesEpimorphisms\", \"CategoryTheory.Adjunction.map_projective\", \"CategoryTheory.Functor.preservesMonomorphisms_of_adjunction_of_preservesInjectiveObjects\", \"CategoryTheory.Adjunction.map_injective\", \"CategoryTheory.Adjunction.ofIsLeftAdjoint\", \"CategoryTheory.Adjunction.injectivePresentationOfMap\"], \"digest\": \"ea5cd1017b2a4046\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib supplies K-injectives. The adopted source supplies preservation by an exact left adjoint; applying it needs the newly generalized exact extension."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsKInjective\"",
+   "results": "{\"t\": \"2026-10-20T17:53:34Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsKInjective\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CochainComplex.IsKInjective\", \"CochainComplex.isKInjective_of_injective\", \"HomotopyEquiv.isKInjective\", \"CochainComplex.isKInjective_of_iso\", \"CochainComplex.isKInjective_iff_of_iso\", \"CochainComplex.instIsKInjectiveExtendNatIntEmbeddingUpNatOfInjectiveX\", \"CochainComplex.instIsKInjectiveObjIntShiftFunctor\", \"CochainComplex.isKInjective_shift_iff\"], \"digest\": \"71ee57824409744c\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib supplies K-injectives. The adopted source supplies preservation by an exact left adjoint; applying it needs the newly generalized exact extension."
+  },
+  {
+   "tool": "grep",
+   "query": "IsKInjective|preservesKInjective",
+   "results": "{\"t\": \"2026-10-20T17:53:34Z\", \"tool\": \"grep\", \"query\": \"IsKInjective|preservesKInjective\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KProjective.lean\"], \"digest\": \"c05474d49ab7062c\"}",
+   "date": "2026-10-20",
+   "verdict": "Mathlib supplies K-injectives. The adopted source supplies preservation by an exact left adjoint; applying it needs the newly generalized exact extension."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposBinaryDescent",
+  "date": "2026-10-21",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ringed-topos-binary-descent",
+   "place": "Slice restriction preserves K-injectives at independent ring universes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.SiteRestrictionKInjective",
+  "file": "lean/Sheaf/CategoryTheory/SiteRestrictionKInjective.lean",
+  "declaration": "SheafOfModules.overFunctor_preservesKInjectiveComplexes_ofUniverses",
+  "statement": "theorem overFunctor_preservesKInjectiveComplexes_ofUniverses\n    {C : Type u} [Category.{v} C] {J : GrothendieckTopology C}\n    [HasSheafify J AddCommGrpCat.{max u v r}]\n    [J.WEqualsLocallyBijective AddCommGrpCat.{max u v r}]\n    (R : Sheaf J RingCat.{r}) (U : C)\n    [HasSheafify (J.over U) AddCommGrpCat.{max u v r}]\n    [(J.over U).WEqualsLocallyBijective AddCommGrpCat.{max u v r}] :\n    (overFunctor.{max u v r} R U).PreservesKInjectiveComplexes",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "independent cc review: item ringedTopos_binary_descent (statement unchanged after whitespace normalisation) proved from new nodes fibre/direct-image restriction (proved) and two true sorry lemmas cross-direct-image-restriction and lower-shriek triangle; six helpers moved verbatim to the re-exported Defs module with change record; all 11 modules compile"
+ }
+}

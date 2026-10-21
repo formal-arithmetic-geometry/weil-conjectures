@@ -1,0 +1,140 @@
+{
+ "id": "lem-sp-ringed-topos-cross-direct-image-restriction",
+ "kind": "statement",
+ "title": "Cross-restriction of the derived direct-image overlap maps",
+ "statement": "Let (C,J) be a site with a terminal object and pullbacks, R a commutative ring sheaf, and U,V subterminal objects; put W=U×V. The five exact derived restriction models and their composition comparisons are fixed by their termwise-complex identifications, as in [def-sp-ringed-topos-binary-descent-models]. For arbitrary right adjoints RU,RV,RW with specified adjunctions, restricting the canonical map RV B→RW(B|W) to U is an isomorphism for every B; restricting RU A→RW(A|W) to V is an isomorphism for every A. No cover, cohomological bound, glued object, or counit assertion occurs.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08DG, right-direct-image and fibre calculation, extended to subterminal slices."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sp-ringed-topos-binary-descent-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the actual slice direct images. For an object X→U, the arrow W×X→V×X induced by W→V is invertible: its inverse uses X→U and the pullback universal property. Subterminality makes the U-coordinate identity hold. On sections the canonical adjunction mate is precisely pullback along this arrow.",
+   "uses": [
+    "lem-sp-ringed-topos-ordinary-cross-restriction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG and 08BU"
+   }
+  },
+  {
+   "text": "Choose K-injective representatives on the slice. Right direct images preserve K-injectives because restriction is exact. Slice restriction preserves K-injectives because extension by zero is exact. Thus the ordinary sectionwise comparison computes the derived comparison on these representatives.",
+   "uses": [
+    "lem-sp-site-restriction-kinjective-independent-ring",
+    "lem-sp-site-relocalization-kinjective-independent-ring",
+    "lem-sf-site-perfect-restriction-exact",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG and 08BU"
+   }
+  },
+  {
+   "text": "The factorization equations for the derived adjunction identify the computed map with the adjunction mate in the statement. Transport along localization isomorphisms determined by the q maps, and along the unique right-adjoint isomorphisms. The two comparison equations on complexes ensure these are the specified compU,compV. Exchange U and V for the other assertion.",
+   "uses": [
+    "def-sp-ringed-topos-binary-descent-models"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tags 08DG and 08BU"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-ringed-topos-ordinary-cross-restriction",
+  "lem-sp-site-restriction-kinjective-independent-ring",
+  "lem-sp-site-relocalization-kinjective-independent-ring",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "def-sp-ringed-topos-binary-descent-models"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "E9: the proof in the Lean module, with the source argument specialized to the stated slice-site interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Restriction of derived direct images to subterminal slices is fully faithful and satisfies base change",
+   "results": "{\"t\": \"2026-10-20T17:33:38Z\", \"tool\": \"leansearch\", \"query\": \"Restriction of derived direct images to subterminal slices is fully faithful and satisfies base change\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app_assoc\", \"CategoryTheory.Adjunction.map_restrictFullyFaithful_unit_app\", \"CondensedSet.LocallyConstant.functorFullyFaithful\", \"CategoryTheory.Adjunction.restrictFullyFaithful\", \"CategoryTheory.RightExactFunctor.fullyFaithful\", \"CategoryTheory.Equivalence.fullyFaithfulToEssImage\", \"CategoryTheory.Limits.fullyFaithful_reflectsLimits\", \"CategoryTheory.Subobject.instFaithfulPullback\"], \"digest\": \"06f41246a08643bd\"}",
+   "date": "2026-10-20",
+   "verdict": "No exact match: ordinary slice adjunctions exist, but not this derived subterminal comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"overFunctor\"",
+   "results": "{\"t\": \"2026-10-20T17:33:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"overFunctor\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"SheafOfModules.overFunctor\", \"SheafOfModules.overFunctorMap\", \"AlgebraicGeometry.Scheme.Modules.overFunctorEquiv\", \"CategoryTheory.FunctorToTypes.fromOverFunctor\", \"CategoryTheory.FunctorToTypes.instIsCofilteredElementsOverFromOverFunctor\", \"CategoryTheory.FunctorToTypes.fromOverFunctorElementsEquivalence\", \"CategoryTheory.NatTrans.instIsClosedUnderLimitsOfShapeOverFunctorEquifiberedHomOfHasCoproductsOfShapeHom\"], \"digest\": \"2c30e033f8f3e688\"}",
+   "date": "2026-10-20",
+   "verdict": "No exact match: ordinary slice adjunctions exist, but not this derived subterminal comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "overFunctorMap|overPushforwardOverAdj|prod.map",
+   "results": "{\"t\": \"2026-10-20T17:55:25Z\", \"tool\": \"grep\", \"query\": \"overFunctorMap|overPushforwardOverAdj|prod.map\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/MvPolynomial.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\", \"Mathlib/NumberTheory/Height/Basic.lean\"], \"digest\": \"08dd4f5690279795\"}",
+   "date": "2026-10-20",
+   "verdict": "No exact match: ordinary slice adjunctions exist, but not this derived subterminal comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposBinaryDescent",
+  "date": "2026-10-21",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ringed-topos-binary-descent",
+   "place": "Cross-restriction of the derived direct-image overlap maps",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedToposCrossDirectImageRestriction",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposCrossDirectImageRestriction.lean",
+  "declaration": "CategoryTheory.ringedTopos_crossDirectImage_restriction",
+  "statement": "theorem ringedTopos_crossDirectImage_restriction\n    {C : Type u} [Category.{v} C] [HasTerminal C] [HasPullbacks C]\n    (J : GrothendieckTopology C)\n    [J.HasSheafCompose (forget₂ CommRingCat RingCat)]\n    (R : Sheaf J CommRingCat.{r})\n    (U V : C) [Mono (terminal.from U)] [Mono (terminal.from V)]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n        (pullback (terminal.from U) (terminal.from V))))]\n    (rU : DerivedCategory (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)))\n    (rV : DerivedCategory (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)))\n    (rW : DerivedCategory (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n          (pullback (terminal.from U) (terminal.from V)))))\n    (rUW : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n          (pullback (terminal.from U) (terminal.from V)))))\n    (rVW : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n          (pullback (terminal.from U) (terminal.from V)))))\n    (RU : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n    (RV : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n    (RW : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n        (pullback (terminal.from U) (terminal.from V)))) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n    (adjU : rU ⊣ RU) (adjV : rV ⊣ RV) (adjW : rW ⊣ RW)\n    (compU : rW ≅ rU ⋙ rUW) (compV : rW ≅ rV ⋙ rVW)\n    (qU : DerivedCategory.Q ⋙ rU ≅\n      moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U ⋙\n        DerivedCategory.Q)\n    (qV : DerivedCategory.Q ⋙ rV ≅\n      moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) V ⋙\n        DerivedCategory.Q)\n    (qW : DerivedCategory.Q ⋙ rW ≅\n      moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n        (pullback (terminal.from U) (terminal.from V)) ⋙ DerivedCategory.Q)\n    (qUW : DerivedCategory.Q ⋙ rUW ≅\n      moduleOverMapComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n        (pullback.fst (terminal.from U) (terminal.from V)) ⋙ DerivedCategory.Q)\n    (qVW : DerivedCategory.Q ⋙ rVW ≅\n      moduleOverMapComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n        (pullback.snd (terminal.from U) (terminal.from V)) ⋙ DerivedCategory.Q)\n    (compU_on_complexes : ∀ K,\n      compU.hom.app (DerivedCategory.Q.obj K) ≫\n        rUW.map (qU.hom.app K) ≫\n          qUW.hom.app\n            ((moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U).obj K) =\n      qW.hom.app K ≫ DerivedCategory.Q.map\n        ((moduleOverComplexComp ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n          (pullback.fst (terminal.from U) (terminal.from V))).hom.app K))\n    (compV_on_complexes : ∀ K,\n      compV.hom.app (DerivedCategory.Q.obj K) ≫\n        rVW.map (qV.hom.app K) ≫\n          qVW.hom.app\n            ((moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) V).obj K) =\n      qW.hom.app K ≫ DerivedCategory.Q.map\n        ((moduleOverComplexComp ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n          (pullback.snd (terminal.from U) (terminal.from V))).hom.app K)) :\n    (∀ B : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)),\n      IsIso (rU.map (restrictionAdjunctionMap (rUW := rVW) adjV adjW compV B))) ∧\n    (∀ A : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)),\n      IsIso (rV.map (restrictionAdjunctionMap (rUW := rUW) adjU adjW compU A)))",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "independent cc review: item ringedTopos_binary_descent (statement unchanged after whitespace normalisation) proved from new nodes fibre/direct-image restriction (proved) and two true sorry lemmas cross-direct-image-restriction and lower-shriek triangle; six helpers moved verbatim to the re-exported Defs module with change record; all 11 modules compile"
+ }
+}

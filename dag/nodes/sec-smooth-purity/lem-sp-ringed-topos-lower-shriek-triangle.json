@@ -1,0 +1,139 @@
+{
+ "id": "lem-sp-ringed-topos-lower-shriek-triangle",
+ "kind": "statement",
+ "title": "Natural lower-shriek triangle for a binary subterminal cover",
+ "statement": "Let C,J,R,U,V,W and the five normalized exact derived restriction functors be as in [def-sp-ringed-topos-binary-descent-models], and assume U,V cover the terminal object. For any specified left adjoints lU,lV,lW to the three restrictions, there is a single natural transformation delta:Id→rW⋙lW⋙[1] whose components complete lW(M|W)→lU(M|U)⊕lV(M|V)→M to a distinguished triangle for every M. The first arrow is the pair of canonical nested adjunction mates, with negative V-component; the second arrow is the counit pair, exactly as in the Lean statement.",
+ "source": {
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "Tag 08BU, lemma-exact-sequence-lower-shriek; extended from ringed spaces to subterminal slice sites."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-sp-ringed-topos-binary-descent-models"
+ ],
+ "proof": [
+  {
+   "text": "Use the concrete exact sheafified direct-sum extensions and their restriction adjunctions. Restriction commutes with module sheafification. For X→U, maps X→V equal maps X→W. Thus restriction of V-extension to U is extension from W to U after restriction, and self-restriction of extension is the identity. These comparisons preserve units, counits and nested-open maps.",
+   "uses": [
+    "lem-sp-module-extension-zero-independent-ring",
+    "lem-sp-module-slice-sheafification-independent-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03DI, 03DJ, 0F6Z"
+   }
+  },
+  {
+   "text": "For a module F, form the nested maps (iU,-iV) and the counit pair. The composite is zero by transposing both composites under the W-adjunction. On U the sequence is L→F|U⊕L→F|U with maps (i,-1),(1,i); it is split exact. On V it has maps (1,-i),(i,1), also split exact. Exact restriction detects exactness: the homology sheaf vanishes on U,V and separatedness on the pulled-back covering sieve makes it zero globally. Apply degreewise to complexes.",
+   "uses": [
+    "def-sp-ringed-topos-binary-descent-models",
+    "lem-sf-site-perfect-restriction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU"
+   }
+  },
+  {
+   "text": "The SES of complexes gives its canonical distinguished triangle. Naturality of its connecting map for chain maps, and exactness of all vertex functors, descend the connecting natural transformation through the localization Q. Transport through the unique left-adjoint isomorphisms and the q identifications. The composition normalizations identify the transported maps with the displayed mates and counits.",
+   "uses": [
+    "lem-weil-pbc-complex-ses-triangle",
+    "lem-sf-exact-functor-derived-triangulated",
+    "def-sp-ringed-topos-binary-descent-models"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/cohomology.tex",
+    "place": "Tag 08BU and Tag 0152"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-module-extension-zero-independent-ring",
+  "lem-sp-module-slice-sheafification-independent-ring",
+  "def-sp-ringed-topos-binary-descent-models",
+  "lem-sf-site-perfect-restriction-exact",
+  "lem-weil-pbc-complex-ses-triangle",
+  "lem-sf-exact-functor-derived-triangulated"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/cohomology.tex",
+  "place": "E9: the proof in the Lean module, with the source argument specialized to the stated slice-site interface."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Natural Mayer Vietoris distinguished triangle for extension by zero along a binary cover of subterminal slices",
+   "results": "{\"t\": \"2026-10-20T17:33:38Z\", \"tool\": \"leansearch\", \"query\": \"Natural Mayer Vietoris distinguished triangle for extension by zero along a binary cover of subterminal slices\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Opens.mayerVietorisSquare\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.noConfusion\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex\", \"CategoryTheory.Pretriangulated.binaryProductTriangle\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.shortComplex_shortExact\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.mk_of_isPullback_toSquare\", \"CategoryTheory.GrothendieckTopology.MayerVietorisSquare.isPushout\"], \"digest\": \"9b7a28635bb2fd89\"}",
+   "date": "2026-10-20",
+   "verdict": "The SES triangle and its naturality exist; the ringed-site extension-by-zero sequence and its normalized mates are additional."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"triangleOfSESδ_naturality\"",
+   "results": "{\"t\": \"2026-10-20T17:33:38Z\", \"tool\": \"loogle\", \"query\": \"\\\"triangleOfSESδ_naturality\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 2, \"note\": \"\", \"top\": [\"DerivedCategory.triangleOfSESδ_naturality\", \"DerivedCategory.triangleOfSESδ_naturality_assoc\"], \"digest\": \"53c1ef236db1c439\"}",
+   "date": "2026-10-20",
+   "verdict": "The SES triangle and its naturality exist; the ringed-site extension-by-zero sequence and its normalized mates are additional."
+  },
+  {
+   "tool": "grep",
+   "query": "triangleOfSES|MayerVietoris|extensionByZero",
+   "results": "{\"t\": \"2026-10-20T17:33:38Z\", \"tool\": \"grep\", \"query\": \"triangleOfSES|MayerVietoris|extensionByZero\", \"sub\": \"\", \"ok\": true, \"n_hits\": 25, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/TStructure.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/ShortExact.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/SingleTriangle.lean\"], \"digest\": \"8a3af018e1d9bdc6\"}",
+   "date": "2026-10-20",
+   "verdict": "The SES triangle and its naturality exist; the ringed-site extension-by-zero sequence and its normalized mates are additional."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.CategoryTheory.RingedToposBinaryDescent",
+  "date": "2026-10-21",
+  "group": "E9"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sp-ringed-topos-binary-descent",
+   "place": "Natural lower-shriek triangle for a binary subterminal cover",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.CategoryTheory.RingedToposBinaryDescentTriangle",
+  "file": "lean/Sheaf/CategoryTheory/RingedToposBinaryDescentTriangle.lean",
+  "declaration": "CategoryTheory.ringedTopos_binary_descent_triangle",
+  "statement": "theorem ringedTopos_binary_descent_triangle\n    {C : Type u} [Category.{v} C] [HasTerminal C] [HasPullbacks C]\n    (J : GrothendieckTopology C)\n    [J.HasSheafCompose (forget₂ CommRingCat RingCat)]\n    (R : Sheaf J CommRingCat.{r})\n    (U V : C) [Mono (terminal.from U)] [Mono (terminal.from V)]\n    (hcover : Sieve.ofArrows (fun b : Bool => if b then U else V)\n        (fun b => terminal.from (if b then U else V)) ∈ J (⊤_ C))\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V))]\n    [HasDerivedCategory.{w} (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n        (pullback (terminal.from U) (terminal.from V))))]\n    (rU : DerivedCategory (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)))\n    (rV : DerivedCategory (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)))\n    (rW : DerivedCategory (ringedSiteModules.{max u v r}\n      ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n          (pullback (terminal.from U) (terminal.from V)))))\n    (rUW : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n          (pullback (terminal.from U) (terminal.from V)))))\n    (rVW : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n          (pullback (terminal.from U) (terminal.from V)))))\n    (lU : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over U)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n    (lV : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over V)) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n    (lW : DerivedCategory (ringedSiteModules.{max u v r}\n      (((sheafCompose J (forget₂ CommRingCat RingCat)).obj R).over\n        (pullback (terminal.from U) (terminal.from V)))) ⥤\n      DerivedCategory (ringedSiteModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)))\n    (bangAdjU : lU ⊣ rU) (bangAdjV : lV ⊣ rV) (bangAdjW : lW ⊣ rW)\n    (compU : rW ≅ rU ⋙ rUW) (compV : rW ≅ rV ⋙ rVW)\n    (qU : DerivedCategory.Q ⋙ rU ≅\n      moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U ⋙\n        DerivedCategory.Q)\n    (qV : DerivedCategory.Q ⋙ rV ≅\n      moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) V ⋙\n        DerivedCategory.Q)\n    (qW : DerivedCategory.Q ⋙ rW ≅\n      moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n        (pullback (terminal.from U) (terminal.from V)) ⋙ DerivedCategory.Q)\n    (qUW : DerivedCategory.Q ⋙ rUW ≅\n      moduleOverMapComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n        (pullback.fst (terminal.from U) (terminal.from V)) ⋙ DerivedCategory.Q)\n    (qVW : DerivedCategory.Q ⋙ rVW ≅\n      moduleOverMapComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n        (pullback.snd (terminal.from U) (terminal.from V)) ⋙ DerivedCategory.Q)\n    (compU_on_complexes : ∀ K,\n      compU.hom.app (DerivedCategory.Q.obj K) ≫\n        rUW.map (qU.hom.app K) ≫\n          qUW.hom.app\n            ((moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) U).obj K) =\n      qW.hom.app K ≫ DerivedCategory.Q.map\n        ((moduleOverComplexComp ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n          (pullback.fst (terminal.from U) (terminal.from V))).hom.app K))\n    (compV_on_complexes : ∀ K,\n      compV.hom.app (DerivedCategory.Q.obj K) ≫\n        rVW.map (qV.hom.app K) ≫\n          qVW.hom.app\n            ((moduleOverComplex ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R) V).obj K) =\n      qW.hom.app K ≫ DerivedCategory.Q.map\n        ((moduleOverComplexComp ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R)\n          (pullback.snd (terminal.from U) (terminal.from V))).hom.app K))  :\n        (∃ (delta : 𝟭 _ ⟶ rW ⋙ lW ⋙ shiftFunctor _ (1 : ℤ)),\n      ∀ (M : DerivedCategory (ringedSiteModules.{max u v r}\n        ((sheafCompose J (forget₂ CommRingCat RingCat)).obj R))),\n        Pretriangulated.Triangle.mk\n            (biprod.lift\n              ((bangAdjW.homEquiv (rW.obj M) (lU.obj (rU.obj M))).symm\n                (compU.hom.app M ≫ rUW.map (bangAdjU.unit.app (rU.obj M)) ≫\n                  compU.inv.app (lU.obj (rU.obj M))))\n              (-((bangAdjW.homEquiv (rW.obj M) (lV.obj (rV.obj M))).symm\n                (compV.hom.app M ≫ rVW.map (bangAdjV.unit.app (rV.obj M)) ≫\n                  compV.inv.app (lV.obj (rV.obj M))))))\n            (biprod.desc (bangAdjU.counit.app M)\n              (bangAdjV.counit.app M))\n            (delta.app M) ∈ distTriang _)",
+  "branch": "sheaf-dag",
+  "by": "E9",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-73405",
+  "group": "E9",
+  "result": "pass",
+  "landing": "20261021T120351-L-3846158",
+  "kind": "interface",
+  "note": "independent cc review: item ringedTopos_binary_descent (statement unchanged after whitespace normalisation) proved from new nodes fibre/direct-image restriction (proved) and two true sorry lemmas cross-direct-image-restriction and lower-shriek triangle; six helpers moved verbatim to the re-exported Defs module with change record; all 11 modules compile"
+ }
+}
