@@ -42,8 +42,10 @@ cohomology, finite stage `Λ = A_{E,n}`, with a Tate twist.
 
 The cohomology `Hⁱ(Y, Λ(m)) = Hⁱ(RΓ(Y, Λ_Y(m)))` of a scheme `Y` with coefficients in the Tate
 twist `Λ(m)`: the étale cohomology (`AlgebraicGeometry.Etale.cohomology`) of the twisting object
-`Λ_Y(m)` (`AlgebraicGeometry.Etale.tateTwistObject`). -/
-noncomputable def cohomologyTateTwist (Y : Scheme.{u}) (m i : ℤ) : ModuleCat.{u + 1} Λ :=
+`Λ_Y(m)` (`AlgebraicGeometry.Etale.tateTwistObject`). The exponent of `Λ` is assumed invertible on `Y`:
+otherwise `AlgebraicGeometry.Etale.tateTwistObject` is the untwisted `Λ_Y`. -/
+noncomputable def cohomologyTateTwist (Y : Scheme.{u}) [HasInvertibleExponent Λ Y] (m i : ℤ) :
+    ModuleCat.{u + 1} Λ :=
   (cohomology (ModuleCat.{u + 1} Λ) Y i).obj (tateTwistObject Λ Y m)
 
 /-- Blueprint `def-weil-ordinary-compact-cohomology`: Ordinary and compactly supported
@@ -51,9 +53,10 @@ cohomology, finite stage `Λ = A_{E,n}`, with a Tate twist.
 
 The compactly supported cohomology `Hⁱ_c(Y, Λ(m)) = Hⁱ(RΓ(s, Ra_! Λ_Y(m)))` along a morphism
 `a : Y ⟶ s` admitting a compactification: the compactly supported cohomology
-(`AlgebraicGeometry.Etale.compactlySupportedCohomology`) of the twisting object `Λ_Y(m)`. -/
+(`AlgebraicGeometry.Etale.compactlySupportedCohomology`) of the twisting object `Λ_Y(m)`, for
+the exponent of `Λ` invertible on `Y`. -/
 noncomputable def compactlySupportedCohomologyTateTwist {Y s : Scheme.{u}} (a : Y ⟶ s)
-    [HasCompactification a] (m i : ℤ) : ModuleCat.{u + 1} Λ :=
+    [HasCompactification a] [HasInvertibleExponent Λ Y] (m i : ℤ) : ModuleCat.{u + 1} Λ :=
   (compactlySupportedCohomology (ModuleCat.{u + 1} Λ) a i).obj (tateTwistObject Λ Y m)
 
 end AlgebraicGeometry.Etale

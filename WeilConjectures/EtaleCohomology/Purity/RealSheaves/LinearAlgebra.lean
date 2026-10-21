@@ -105,13 +105,15 @@ end EigenvalueWeight
 
 section FrobeniusModule
 
-variable {E : Type*} [Field E] (ι : E →+* ℂ) (q : ℕ) {V : Type*} [AddCommGroup V] [Module E V]
+variable {E : Type*} [Field E] [IsAlgClosed E] (ι : E →+* ℂ) (q : ℕ) {V : Type*} [AddCommGroup V]
+  [Module E V]
 
 /-- Blueprint `def-weil-frobenius-module-weights`: Weights of finite-dimensional Frobenius
 modules.
 
 A vector space `V` with an automorphism `F` is `ι`-pure of weight `w` if every eigenvalue `α`
-of `F` satisfies `|ι α| = q ^ (w / 2)`. -/
+of `F` satisfies `|ι α| = q ^ (w / 2)`. The field `E` is algebraically closed, so that every
+eigenvalue of `F` lies in `E`. -/
 def IsPureFrobeniusModule (F : V ≃ₗ[E] V) (w : ℝ) : Prop :=
   ∀ α : E, Module.End.HasEigenvalue (F : Module.End E V) α → IsOfWeight ι q w α
 

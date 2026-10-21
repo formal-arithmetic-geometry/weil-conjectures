@@ -8565,6 +8565,7 @@ public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerProductBaseCha
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerRelative
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.KummerRelativeBaseChange
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Normalization
+public import WeilConjectures.EtaleCohomology.Purity.Smooth.NormalizedTrace
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.Orientation
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.OrientationGeometricPoint
 public import WeilConjectures.EtaleCohomology.Purity.Smooth.RankOneLocal

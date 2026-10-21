@@ -325,7 +325,7 @@ theorem exists_isPunctuallyPureOfWeight_of_isFourierPartner_weight_zero (ι : Pa
     D.isNonexceptional_twistedDual hne 1
   obtain ⟨E', -, hE'⟩ := exists_middleExtension_fourierTransform ψ⁻¹ hψ' _ hDd hned
   obtain ⟨c'⟩ := nonempty_fourierCorrection ψ⁻¹ hψ' _ E' hDd hned hE'
-  have hreal := isReal_realifiedKernel ψ ι D hw (b := 1) (by simp)
+  have hreal := isReal_realifiedKernel ψ ι D (w := 0) (by rwa [Rat.cast_zero]) (b := 1) (by simp)
   obtain ⟨v, hv⟩ := exists_isPunctuallyPureOfWeight_of_correction c c' hreal hD''
   exact ⟨v, hFT.isPunctuallyPureOfWeight hFT'' hv⟩
 

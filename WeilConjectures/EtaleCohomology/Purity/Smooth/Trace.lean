@@ -43,17 +43,18 @@ respect to the composition isomorphism `R(f ≫ g)^! ≅ Rg^! ⋙ Rf^!` conjugat
 - `AlgebraicGeometry.Etale.smoothPurityTrace_comp`: transitivity of the smooth traces.
 - `AlgebraicGeometry.Etale.smoothPurityTrace_baseChange`: the smooth trace commutes with base
   change.
-- `AlgebraicGeometry.Etale.exists_counit_eq_smoothPurityTrace`: the counit `Ra_! ω_X ⟶ Λ` of a
-  smooth `a : X ⟶ Spec k` is the smooth trace under a purity identification
-  `Λ_X(d)[2d] ≅ ω_X` (blueprint `cor-pur-finite-stage-smooth-dualizing-complex`).
 
 ## Implementation notes
 
 The blueprint's purity map `γ_{f,K}` is the canonical map of `def-pur-smooth-purity-map`. In
 the repository it is `AlgebraicGeometry.Etale.smoothPurityIso`, built from the identifications
 it is composed of, which are only known to exist; the trace is therefore defined for an
-arbitrary isomorphism `γ : Lf^* K(d)[2d] ≅ Rf^! K`, the intended one being
-`smoothPurityIso f K θ φ`. Likewise the composition law of `R_!` is only known to exist
+arbitrary isomorphism `γ : Lf^* K(d)[2d] ≅ Rf^! K`, and the statements of this file hold for
+every purity map satisfying the stated coherences. Two choices of `γ` differ by a unit of
+`H⁰(X, Λ)`, and so do their traces; the canonical purity map and trace over a separably closed
+field, pinned down by the normalization on fundamental classes of points, are
+`AlgebraicGeometry.Etale.normalizedSmoothPurityIso` and `AlgebraicGeometry.Etale.smoothTrace`
+(`WeilConjectures.EtaleCohomology.Purity.Smooth.NormalizedTrace`). Likewise the composition law of `R_!` is only known to exist
 (`AlgebraicGeometry.Etale.nonempty_iso_rightDerivedLowerShriek_comp`), so it is an argument of
 the transitivity statement, and the composition isomorphism of `R^!` is its conjugate, as in
 the blueprint.
@@ -358,31 +359,6 @@ theorem smoothPurityTrace_baseChange {d : ℕ} (sq : IsPullback g f' f v)
     reassoc_of% hβ, smoothPurityTrace, Functor.map_comp]
 
 end BaseChange
-
-section DualizingComplex
-
-/-- Blueprint `cor-pur-finite-stage-smooth-dualizing-complex`: Finite-stage smooth dualizing
-complex
-
-Let `a : X ⟶ Spec k` be smooth separated, locally of finite type, of pure dimension `d`. The
-dualizing complex `ω_X = Ra^! Λ` has an identification `γ : Λ_X(d)[2d] = La^* Λ(d)[2d] ≅ ω_X`
-coming from finite-coefficient smooth purity
-(`AlgebraicGeometry.Etale.nonempty_iso_dualizingComplex_twistShift`), and under it the counit
-`Ra_! ω_X ⟶ Λ` of `Ra_! ⊣ Ra^!` is the smooth trace `Tr^sm_{a,Λ} : RΓ_c(X, Λ(d)[2d]) ⟶ Λ`. -/
-theorem exists_counit_eq_smoothPurityTrace [HasTateTwist.IsNormalized Λ] {k : Type u} [Field k]
-    {X : Scheme.{u}} {d : ℕ} (a : X ⟶ Spec (.of k)) [IsSeparated a] [LocallyOfFiniteType a]
-    [SmoothOfRelativeDimension d a] [HasCompactification a] [HasInvertibleExponent Λ X] :
-    ∃ γ : (twistShift Λ X d).obj
-        ((L((a)^*[ModuleCat.{u + 1} Λ])).obj (constantComplex Λ (Spec (.of k)))) ≅
-      (R(a)^![ModuleCat.{u + 1} Λ]).obj (constantComplex Λ (Spec (.of k))),
-      (rightDerivedUpperShriekAdjunction (ModuleCat.{u + 1} Λ) a).counit.app
-          (constantComplex Λ (Spec (.of k))) =
-        (R(a)_![ModuleCat.{u + 1} Λ]).map γ.inv ≫ smoothPurityTrace Λ d a γ := by
-  obtain ⟨θ⟩ := nonempty_iso_dualizingComplex_twistShift Λ (d := d) a (𝟙 _)
-  exact ⟨(twistShift Λ X d).mapIso (leftDerivedUpperStarConstantComplexIso Λ a) ≪≫ θ.symm,
-    rightDerivedUpperShriekAdjunction_counit_app_eq_smoothPurityTrace _⟩
-
-end DualizingComplex
 
 end Etale
 
