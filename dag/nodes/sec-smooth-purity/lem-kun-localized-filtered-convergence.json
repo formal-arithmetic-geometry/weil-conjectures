@@ -1,0 +1,128 @@
+{
+ "id": "lem-kun-localized-filtered-convergence",
+ "kind": "statement",
+ "title": "Coherent convergence of localized finite filtered pages",
+ "statement": "For any commutative R and any FilteredPageLocalizationData d [def-kun-filtered-page-localization-data], the image filtration in d.Hbar(n)(X) is finite for every localized object X. There are bounds N(X,n,a) at least 1 and isomorphisms gr^a d.Hbar(n)(X) to d.Sbar(X)_t^(a,n-a) for every t at least N. Both differentials vanish there. The comparisons are natural for every localized morphism on any common stationary page, and satisfy the normalized successor equation with iCycles, homology projection and the spectral-sequence successor isomorphism.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H7Y, convergence assertion; Homology Tags 012P and 012W, together with the normalized filtered-page localization interfaces"
+ },
+ "stmt_deps": [
+  "def-kun-filtered-page-localization-data",
+  "def-sp-filtration",
+  "def-sp-spectral-sequence"
+ ],
+ "proof": [
+  {
+   "text": "Restriction to a filtration step commutes with its inclusion, by the defining factorization. Associated-graded maps commute with the cokernel projection, so their identity and composition laws follow by cancellation of this projection. Thus graded piece is a functor. Step restrictions of a filtered isomorphism are isomorphisms, by inclusion cancellation; this transfers finite endpoints.",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "For a finite filtered representative U, invert d.comparison.pageToImage followed by imageToGraded. The two stationary naturality squares in d give the naturality of this composite for every localized morphism between representatives. Its successor equation follows by composing successor_agreement and successor_graded_agreement. The normalized page model abutment specification identifies its finite filtration with the actual image filtration.",
+   "uses": [
+    "def-kun-filtered-page-localization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Every object of the chosen localization retains its finite filtered complex representative. Apply eH and eS at that representative to transport the graded comparison. Take the maximum of the stabilization bound in the normalized page model and d.bound. The page isomorphism transfers vanishing differentials. Conjugating a localized morphism by eH and eS gives exactly finiteFilteredDescendedMap, so the preceding naturality proves the desired square. Cycle-map naturality, homology-projection naturality, and the spectral-sequence morphism square transfer the successor equation.",
+   "uses": [
+    "def-kun-filtered-page-localization-data",
+    "def-sp-spectral-sequence"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-sp-filtration",
+  "def-kun-filtered-page-localization-data",
+  "def-sp-spectral-sequence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tag 0H7Y, convergence assertion; Homology Tags 012P and 012W, together with the normalized filtered-page localization interfaces; expanded into the explicit Lean construction by F2."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedTensorTorSpectralSequence",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-bounded-tensor-tor-spectral-sequence",
+   "place": "Tag 0H7Y, convergence assertion; Homology Tags 012P and 012W, together with the normalized filtered-page localization interfaces",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.LocalizedFilteredConvergence",
+  "file": "lean/Sheaf/Algebra/Homology/LocalizedFilteredConvergence.lean",
+  "declaration": "CategoryTheory.localizedFilteredConvergence",
+  "statement": "theorem localizedFilteredConvergence (R : Type u) [CommRing R]\n    (d : FilteredPageLocalizationData R) : Nonempty (LocalizedFilteredConvergenceData R d)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "spectral.*converg|SpectralSequence.*filtration",
+   "results": "[]",
+   "date": "2026-10-21",
+   "verdict": "The listed APIs supply individual steps, not this combined result."
+  },
+  {
+   "tool": "loogle",
+   "query": "HomologicalComplex.cyclesMap_i",
+   "results": "[\"HomologicalComplex.cyclesMap_i\"]",
+   "date": "2026-10-21",
+   "verdict": "The listed APIs supply individual steps, not this combined result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Finite filtered complex spectral sequence convergence naturality localization associated graded cohomology",
+   "results": "[\"CochainComplex.ConnectData.homologyIsoPos\", \"HomologicalComplex.extendHomologyIso_hom_naturality_assoc\", \"HomologicalComplex.extendCyclesIso_hom_naturality_assoc\", \"CochainComplex.ConnectData.homologyIsoNeg\", \"CochainComplex.isoHomology\\u03c0\\u2080_inv_naturality_assoc\", \"HomologicalComplex.extendCyclesIso_hom_naturality\", \"CochainComplex.ConnectData.homologyMap_map_of_eq_succ\", \"CochainComplex.liftCycles_shift_homology\\u03c0_assoc\"]",
+   "date": "2026-10-21",
+   "verdict": "The listed APIs supply individual steps, not this combined result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Convergence of finite filtered complex spectral sequences is natural under localization at graded quasi isomorphisms",
+   "results": "HomologicalComplexUpToQuasiIso.Q_inverts_homotopyEquivalences (Mathlib.Algebra.Homology.Localization): [(HomologicalComplex.quasiIso C c).HasLocalization] :\n  (HomologicalComplex.homotopyEquivalences C c).IsInvertedBy HomologicalComplexUpToQuasiIso.Q; HomologicalComplexUpToQuasiIso.homologyFunctorFactors (Mathlib.Algebra.Homology.Localization): (i : ι) : Q ⋙ homologyFunctor C c i ≅ HomologicalComplex.homologyFunctor C c i; ComplexShape.quotient_isLocalization (Mathlib.Algebra.Homology.Localization): : (HomotopyCategory.quotient C c).IsLocalization (HomologicalComplex.homotopyEquivalences _ _); CategoryTheory.Functor.mapDerivedCategoryFactorsh (Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor): : DerivedCategory.Qh ⋙ F.mapDerivedCategory ≅ F.mapHomotopyCategory (ComplexShape.up ℤ) ⋙ DerivedCategory.Qh; HomologicalComplexUpToQuasiIso.instIsLocalizationHomotopyCategoryQhQuasiIso (Mathlib.Algebra.Homology.Localization): : HomologicalComplexUpToQuasiIso.Qh.IsLocalization (HomotopyCategory.quasiIso C c); DerivedCategory.instIsIsoMapCochainComplexIntQ (Mathlib.Algebra.Homology.DerivedCategory.Basic): {K L : CochainComplex C ℤ} (f : K ⟶ L) [QuasiIso f] : IsIso (Q.map f); ComplexShape.QFactorsThroughHomotopy.areEqualizedByLocalization (Mathlib.Algebra.Homology.Localization): ∀ {ι : Type u_3} {c : ComplexShape ι} {C : Type u_4} {inst : CategoryTheory.Category.{v_2, u_4} C}\n  {inst_1 : CategoryTheory.Preadditive C} {inst_2 : CategoryTheory.CategoryWithHomology C}\n  [self : c.QFactorsThroughHomotopy C] {K L : HomologicalComplex C c} {f g : K ⟶ L} (h : Homotopy f g),\n  Cate; DerivedCategory.homologyFunctorFactors (Mathlib.Algebra.Homology.DerivedCategory.HomologySequence): (n : ℤ) : Q ⋙ homologyFunctor C n ≅ HomologicalComplex.homologyFunctor _ _ n",
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern ordinary tensor or graded algebra, generic truncations, localization comparisons, or module Tor definitions; none states this normalized filtered-derived result or its simultaneous naturality. The actual source and individual Mathlib APIs are used in the completed Lean proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

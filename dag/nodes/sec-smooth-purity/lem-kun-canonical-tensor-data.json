@@ -1,0 +1,136 @@
+{
+ "id": "lem-kun-canonical-tensor-data",
+ "kind": "statement",
+ "title": "Normalized canonical lift and localized convolution data",
+ "statement": "For a commutative ring R there exist canonical tensor localization data on the finite filtered derived module category [def-kun-finite-filtered-module-homotopy]. These consist of a lift T from bounded derived module objects, a forgetful functor omega, associated graded functors gr^i, and a convolution bifunctor star. There are natural isomorphisms omega T ≅ inclusion and gr^i T ≅ H^-i followed by single in degree zero and shift by i. The functors omega and gr^i are naturally normalized on every finite filtered complex by its ordinary complex and associated graded complex. The underlying star(U,V) is naturally omega(U) tensor^L omega(V). For every a,U,V there is finite support s for the tensors gr^i(U) tensor^L gr^(a-i)(V), and gr^a(star(U,V)) is isomorphic to their finite biproduct. These isomorphisms are natural for maps on a common support. They agree under support enlargement with the inclusion characterized by its biproduct summand inclusions. The record CanonicalTensorLocalizationData states all these equations explicitly.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project More on Algebra Tags 0H7X and 0H7Y; Tag 0H7Z canonical filtered tensor construction"
+ },
+ "stmt_deps": [
+  "def-kun-finite-filtered-module-homotopy",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [
+  {
+   "text": "Take the canonical truncation lift T with its normalized forgetful and grading functors. Independently take the localized filtered tensor construction, retaining its forgetful and grading functors, convolution, tensor comparison, finite support and support extension equations.",
+   "uses": [
+    "lem-kun-derived-canonical-filtration",
+    "lem-kun-filtered-tensor-localization"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Normalize the convolution functors on actual filtered complexes using the localization lifting isomorphisms, their stated object and map equations, and the natural quotient-to-derived comparison. Descend natural isomorphisms comparing these functors to the canonical lift functors, since precomposition with the filtered homotopy quotient and localization is fully faithful. Whisker these comparisons by T and compose with its canonical forgetful and graded comparisons. Package the resulting maps and original convolution equations in the record; no arbitrary unproved construction is used.",
+   "uses": [
+    "lem-kun-derived-canonical-filtration",
+    "lem-kun-filtered-tensor-localization"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-derived-canonical-filtration",
+  "lem-kun-filtered-tensor-localization"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project More on Algebra Tags 0H7X and 0H7Y; Tag 0H7Z canonical filtered tensor construction; detailed naturality formalized by F2."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedTensorTorSpectralSequence",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-bounded-tensor-tor-spectral-sequence",
+   "place": "Stacks Project More on Algebra Tags 0H7X and 0H7Y; Tag 0H7Z canonical filtered tensor construction",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KunnethCanonicalTensorData",
+  "file": "lean/Sheaf/Algebra/Homology/KunnethCanonicalTensorData.lean",
+  "declaration": "DerivedCategory.exists_kunnethCanonicalTensorData",
+  "statement": "theorem exists_kunnethCanonicalTensorData : Nonempty (CanonicalTensorLocalizationData R)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of cohomology of tensor products of shifted derived category objects and canonical graded filtration",
+   "results": [
+    "CategoryTheory.Functor.instCommShiftCochainComplexIntDerivedCategoryHomMapDerivedCategoryFactors",
+    "CochainComplex.mapBifunctorShift₁Iso_hom_naturality₁",
+    "CochainComplex.mapBifunctorShift₂Iso_hom_naturality₂",
+    "CategoryTheory.Functor.instCommShiftHomotopyCategoryIntUpDerivedCategoryHomMapDerivedCategoryFactorsh",
+    "CategoryTheory.Abelian.Ext.hom_comp_singleFunctor_map_shift",
+    "CategoryTheory.Functor.comp_homologySequenceδ_assoc",
+    "CategoryTheory.Functor.comp_homologySequenceδ",
+    "CochainComplex.liftCycles_shift_homologyπ_assoc"
+   ],
+   "date": "2026-10-21",
+   "verdict": "The search returns the coproduct reindex API and individual cohomology-shift facts, not the canonical convolution formula. The proof uses these APIs and the stated localization and canonical lift dependencies."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Sigma.reindex",
+   "results": [
+    "CategoryTheory.Limits.Sigma.reindex",
+    "CategoryTheory.Limits.Sigma.ι_reindex_hom",
+    "CategoryTheory.Limits.Sigma.ι_reindex_inv",
+    "CategoryTheory.Limits.Sigma.ι_reindex_hom_assoc",
+    "CategoryTheory.Limits.Sigma.ι_reindex_inv_assoc"
+   ],
+   "date": "2026-10-21",
+   "verdict": "The search returns the coproduct reindex API and individual cohomology-shift facts, not the canonical convolution formula. The proof uses these APIs and the stated localization and canonical lift dependencies."
+  },
+  {
+   "tool": "grep",
+   "query": "shiftTensorShiftIso",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "The search returns the coproduct reindex API and individual cohomology-shift facts, not the canonical convolution formula. The proof uses these APIs and the stated localization and canonical lift dependencies."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical truncation filtration of bounded derived category objects and localized convolution tensor with natural graded and forgetful comparisons",
+   "results": "CategoryTheory.SimplicialObject.Truncated.trunc (Mathlib.AlgebraicTopology.SimplicialObject.Basic): (C : Type u) →\n  [inst : CategoryTheory.Category.{v, u} C] →\n    (n m : ℕ) →\n      autoParam (m ≤ n) CategoryTheory.SimplicialObject.Truncated.trunc._auto_1 →\n        CategoryTheory.Functor (CategoryTheory.SimplicialObject.Truncated C n)\n          (CategoryTheory.SimplicialObject.Truncated C m); HasDerivedCategory.standard (Mathlib.Algebra.Homology.DerivedCategory.Basic): : HasDerivedCategory.{max u v} C; CategoryTheory.Triangulated.TStructure.ge_antitone (Mathlib.CategoryTheory.Triangulated.TStructure.Basic): : Antitone t.ge; CategoryTheory.Triangulated.TStructure.truncGE (Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE): (n : ℤ) : C ⥤ C; CategoryTheory.Triangulated.TStructure.truncLT (Mathlib.CategoryTheory.Triangulated.TStructure.TruncLTGE): (n : ℤ) : C ⥤ C; CategoryTheory.Triangulated.TStructure.ge (Mathlib.CategoryTheory.Triangulated.TStructure.Basic): {C : Type u_1} →\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\n    [inst_1 : CategoryTheory.Preadditive C] →\n      [inst_2 : CategoryTheory.Limits.HasZeroObject C] →\n        [inst_3 : CategoryTheory.HasShift C ℤ] →\n          [inst_4 : ∀ (n : ℤ), (CategoryTheory.shiftFunctor C n).Additive] →\n    ; CategoryTheory.CosimplicialObject.Truncated.trunc (Mathlib.AlgebraicTopology.SimplicialObject.Basic): (C : Type u) →\n  [inst : CategoryTheory.Category.{v, u} C] →\n    (n m : ℕ) →\n      autoParam (m ≤ n) CategoryTheory.CosimplicialObject.Truncated.trunc._auto_1 →\n        CategoryTheory.Functor (CategoryTheory.CosimplicialObject.Truncated C n)\n          (CategoryTheory.CosimplicialObject.Truncated C m; CategoryTheory.GradedObject.instHasForget (Mathlib.CategoryTheory.GradedObject): : HasForget (GradedObject β C)",
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern ordinary tensor or graded algebra, generic truncations, localization comparisons, or module Tor definitions; none states this normalized filtered-derived result or its simultaneous naturality. The actual source and individual Mathlib APIs are used in the completed Lean proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

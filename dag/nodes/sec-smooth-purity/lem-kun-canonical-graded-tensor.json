@@ -1,0 +1,134 @@
+{
+ "id": "lem-kun-canonical-graded-tensor",
+ "kind": "statement",
+ "title": "Graded cohomology of the canonical convolution tensor",
+ "statement": "For any commutative ring R and bounded derived module objects C,D [def-weil-pbc-bounded-derived-subcategories], there are normalized forgetful and associated-graded functors omega and gr^a from the finite filtered derived category [def-kun-finite-filtered-module-homotopy], a bifunctor U(C,D) to that category, and a natural isomorphism omega U(C,D) ≅ C tensor^L D. For every n,a, H^n(gr^a U(C,D)) is naturally the coproduct over i+j=-a of H^{n+a}(single_0(H^i(C)) tensor^L single_0(H^j(D))) [lem-kun-derived-module-tor-comparison]. Normalization identifies forgetful and grading on every finite filtered complex with its ordinary complex and associated-graded complex. The coproduct map is induced in both arguments by cohomology and derived tensor. No spectral sequence, Tor identification, abutment filtration or convergence is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project More on Algebra Tags 0H7X and 0H7Y; Tag 0H7Z, graded cohomology calculation before Tor and change of spectral-sequence indices"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-kun-finite-filtered-module-homotopy",
+  "lem-kun-derived-module-tor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Take the normalized canonical tensor localization data d. Define U(C,D)=star(T C,T D). Compose its underlying tensor comparison with the two components of omega T ≅ inclusion. Tensor interchange and the naturality of these components give the underlying tensor naturality equation. All normalization equations are fields of d.",
+   "uses": [
+    "lem-kun-canonical-tensor-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the canonical graded cohomology calculation to d. Its coproduct formula and map equation are precisely the required graded comparison for U; retain both as witnesses.",
+   "uses": [
+    "lem-kun-canonical-graded-cohomology"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-canonical-tensor-data",
+  "lem-kun-canonical-graded-cohomology"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project More on Algebra Tag 0H7Z; compose the proved normalized construction with its proved graded cohomology calculation."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedTensorTorSpectralSequence",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-bounded-tensor-tor-spectral-sequence",
+   "place": "Stacks Project More on Algebra Tags 0H7X and 0H7Y; Tag 0H7Z, graded cohomology calculation before Tor and change of spectral-sequence indices",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KunnethCanonicalGradedTensor",
+  "file": "lean/Sheaf/Algebra/Homology/KunnethCanonicalGradedTensor.lean",
+  "declaration": "DerivedCategory.exists_kunnethCanonicalGradedTensor",
+  "statement": "theorem exists_kunnethCanonicalGradedTensor :\n    let P (p q : ℤ) (C D : Bounded (ModuleCat.{u} R)) : ModuleCat.{u} R :=\n      ∐ fun ij : {ij : ℤ × ℤ // ij.1 + ij.2 = q} ↦\n        ((kunnethModuleTensorHomology R p).obj\n          ((homologyFunctor (ModuleCat.{u} R) ij.val.1).obj C.obj)).obj\n          ((homologyFunctor (ModuleCat.{u} R) ij.val.2).obj D.obj)\n    let m (p q : ℤ) {C C' D D' : Bounded (ModuleCat.{u} R)}\n        (f : C ⟶ C') (g : D ⟶ D') : P p q C D ⟶ P p q C' D' :=\n      Limits.Sigma.map fun ij ↦\n        ((kunnethModuleTensorHomology R p).map\n          ((homologyFunctor (ModuleCat.{u} R) ij.val.1).map f.hom)).app\n            ((homologyFunctor (ModuleCat.{u} R) ij.val.2).obj D.obj) ≫\n          ((kunnethModuleTensorHomology R p).obj\n          ((homologyFunctor (ModuleCat.{u} R) ij.val.1).obj C'.obj)).map\n            ((homologyFunctor (ModuleCat.{u} R) ij.val.2).map g.hom)\n    ∃ (omega : finiteFilteredModuleDerivedCategory R ⥤ DerivedCategory (ModuleCat.{u} R))\n      (gr : ℤ → finiteFilteredModuleDerivedCategory R ⥤ DerivedCategory (ModuleCat.{u} R))\n      (eForget : ∀ P : CochainComplex.FiniteFilteredModuleComplex R,\n        omega.obj ((finiteFilteredDerivedQuotient R).obj P) ≅ Q.obj P.obj.obj)\n      (eGrade : ∀ (i : ℤ) (P : CochainComplex.FiniteFilteredModuleComplex R),\n        (gr i).obj ((finiteFilteredDerivedQuotient R).obj P) ≅\n          Q.obj (P.obj.filtration.gradedPiece i))\n      (U : Bounded (ModuleCat.{u} R) ⥤ Bounded (ModuleCat.{u} R) ⥤\n        finiteFilteredModuleDerivedCategory R)\n      (eTensor : ∀ C D : Bounded (ModuleCat.{u} R),\n        omega.obj ((U.obj C).obj D) ≅ C.obj ⊗ D.obj)\n      (eGr : ∀ (C D : Bounded (ModuleCat.{u} R)) (n a : ℤ),\n        (homologyFunctor (ModuleCat.{u} R) n).obj ((gr a).obj ((U.obj C).obj D)) ≅\n          P (n + a) (-a) C D),\n      (∀ {P P' : CochainComplex.FiniteFilteredModuleComplex R} (f : P ⟶ P'),\n        omega.map ((finiteFilteredDerivedQuotient R).map f) ≫ (eForget P').hom =\n          (eForget P).hom ≫ Q.map f.hom.hom) ∧\n      (∀ (i : ℤ) {P P' : CochainComplex.FiniteFilteredModuleComplex R} (f : P ⟶ P'),\n        (gr i).map ((finiteFilteredDerivedQuotient R).map f) ≫ (eGrade i P').hom =\n          (eGrade i P).hom ≫ Q.map (FilteredObject.gradedMapSteps f.hom i)) ∧\n      (∀ (C C' D D' : Bounded (ModuleCat.{u} R)) (f : C ⟶ C') (g : D ⟶ D'),\n        omega.map ((U.map f).app D ≫ (U.obj C').map g) ≫ (eTensor C' D').hom =\n          (eTensor C D).hom ≫ (f.hom ⊗ₘ g.hom)) ∧\n      (∀ (C C' D D' : Bounded (ModuleCat.{u} R)) (f : C ⟶ C') (g : D ⟶ D') (n a : ℤ),\n        (homologyFunctor (ModuleCat.{u} R) n).map\n              ((gr a).map ((U.map f).app D ≫ (U.obj C').map g)) ≫\n            (eGr C' D' n a).hom =\n          (eGr C D n a).hom ≫ m (n + a) (-a) f g)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical filtration convolution associated graded cohomology derived tensor bounded complexes",
+   "results": [
+    "HomologicalComplex.ιTensorObj",
+    "HomologicalComplex.HasGoodTensor₁₂",
+    "HomologicalComplex.HasGoodTensor₂₃",
+    "HomologicalComplex.HasTensor",
+    "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+    "CochainComplex.ιMapBifunctor",
+    "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+    "HomologicalComplex.instHasTensorXTensorUnit_1"
+   ],
+   "date": "2026-10-21",
+   "verdict": "The search supplies individual APIs, not the stated combined result; the actual proof uses the named dependencies and Mathlib functoriality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Sigma.mapIso",
+   "results": [
+    "CategoryTheory.Limits.Sigma.mapIso",
+    "CategoryTheory.Limits.Sigma.ι_mapIso_hom",
+    "CategoryTheory.Limits.Sigma.ι_mapIso_inv",
+    "CategoryTheory.Limits.Sigma.ι_mapIso_hom_assoc",
+    "CategoryTheory.Limits.Sigma.ι_mapIso_inv_assoc"
+   ],
+   "date": "2026-10-21",
+   "verdict": "The search supplies individual APIs, not the stated combined result; the actual proof uses the named dependencies and Mathlib functoriality."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFilteredPageFirstIso",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "The search supplies individual APIs, not the stated combined result; the actual proof uses the named dependencies and Mathlib functoriality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Canonical filtered derived tensor realizes the derived tensor and its graded cohomology is naturally a coproduct over cohomological diagonal indices",
+   "results": "GradedTensorProduct.tmul (Mathlib.LinearAlgebra.TensorProduct.Graded.Internal): (R : Type u_1) →\n  {ι : Type u_2} →\n    {A : Type u_3} →\n      {B : Type u_4} →\n        [inst : CommSemiring ι] →\n          [inst_1 : DecidableEq ι] →\n            [inst_2 : CommRing R] →\n              [inst_3 : Ring A] →\n                [inst_4 : Ring B] →\n                  [inst_5 : Algebra R A] →\n; CoalgCat.MonoidalCategoryAux.tensorObj_comul (Mathlib.Algebra.Category.CoalgCat.ComonEquivalence): (K L : CoalgCat R) :\n  Coalgebra.comul (R := R) (A := (K ⊗ L : CoalgCat R)) =\n    (TensorProduct.tensorTensorTensorComm R K K L L).toLinearMap ∘ₗ TensorProduct.map Coalgebra.comul Coalgebra.comul; TensorProduct.gradedComm (Mathlib.LinearAlgebra.TensorProduct.Graded.External): : (⨁ i, 𝒜 i) ⊗[R] (⨁ i, ℬ i) ≃ₗ[R] (⨁ i, ℬ i) ⊗[R] (⨁ i, 𝒜 i); GradedTensorProduct.of (Mathlib.LinearAlgebra.TensorProduct.Graded.Internal): (R : Type u_1) →\n  {ι : Type u_2} →\n    {A : Type u_3} →\n      {B : Type u_4} →\n        [inst : CommSemiring ι] →\n          [inst_1 : DecidableEq ι] →\n            [inst_2 : CommRing R] →\n              [inst_3 : Ring A] →\n                [inst_4 : Ring B] →\n                  [inst_5 : Algebra R A] →\n; TensorProduct.term_ᵍ⊗[_]_ (Mathlib.LinearAlgebra.TensorProduct.Graded.Internal): : Lean.TrailingParserDescr✝; CategoryTheory.GradedObject.Monoidal.tensorObjDesc (Mathlib.CategoryTheory.GradedObject.Monoidal): {A : C} {k : I} (f : ∀ (i₁ i₂ : I) (_ : i₁ + i₂ = k), X₁ i₁ ⊗ X₂ i₂ ⟶ A) : tensorObj X₁ X₂ k ⟶ A; CommRingCat.coproductCoconeIsColimit (Mathlib.Algebra.Category.Ring.Constructions): : IsColimit (coproductCocone A B); GradedTensorProduct.instAlgebra (Mathlib.LinearAlgebra.TensorProduct.Graded.Internal): {R : Type u_1} →\n  {ι : Type u_2} →\n    {A : Type u_3} →\n      {B : Type u_4} →\n        [inst : CommSemiring ι] →\n          [inst_1 : DecidableEq ι] →\n            [inst_2 : CommRing R] →\n              [inst_3 : Ring A] →\n                [inst_4 : Ring B] →\n                  [inst_5 : Algebra R A] →\n",
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern ordinary tensor or graded algebra, generic truncations, localization comparisons, or module Tor definitions; none states this normalized filtered-derived result or its simultaneous naturality. The actual source and individual Mathlib APIs are used in the completed Lean proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

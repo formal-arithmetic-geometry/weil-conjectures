@@ -1,0 +1,120 @@
+{
+ "id": "lem-kun-filtered-first-page",
+ "kind": "statement",
+ "title": "Tor first page of canonically filtered derived tensor",
+ "statement": "For a commutative ring R, bounded derived module objects C,D [def-weil-pbc-bounded-derived-subcategories], and any normalized filtered-page localization data d [def-kun-filtered-page-localization-data], there is a bifunctor U(C,D) to the finite filtered derived category realizing their ordinary derived tensor. For every n, d.Hbar(n)(U(C,D)) identifies naturally with a filtration of H^n(C tensor^L D), with underlying map H^n(f tensor^L g). Its normalized first page at (-q,p+2q) is naturally the direct sum over i+j=q of Tor_-p(H^i(C),H^j(D)) [def-weil-pbc-tor-modules], extended by zero in negative Tor degrees. On first pages the induced maps are exactly the coproduct of Tor maps. This assertion supplies no convergence, stationary comparisons, or reindexed E2 spectral sequence.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Tags 0H7X and 0H7Y; Tag 0H7Z, the displayed normalized E1 page in the proof before the final change of indices; Algebra Tags 00LY and 00LZ"
+ },
+ "stmt_deps": [
+  "def-weil-pbc-bounded-derived-subcategories",
+  "def-kun-filtered-page-localization-data",
+  "def-weil-pbc-tor-modules",
+  "lem-pc-derived-tensor-second-factor-functor"
+ ],
+ "proof": [
+  {
+   "text": "Apply the canonical convolution first-page result before Tor. Its filtration, filtered cohomology comparison and underlying-map equation already give the required realization and abutment normalization.",
+   "uses": [
+    "lem-kun-canonical-filtered-first-page"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For each integer p choose the natural bifunctor isomorphism identifying module derived tensor cohomology in degree p with Tor in degree -p, including zero in negative Tor degrees. Apply its components to all summands and take Sigma.mapIso. Naturality in both variables follows by pasting the two naturality squares and checking after each coproduct inclusion. Compose with the canonical first-page comparison.",
+   "uses": [
+    "lem-kun-derived-module-tor-comparison"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-canonical-filtered-first-page",
+  "lem-kun-derived-module-tor-comparison"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project Tag 0H7Z first-page computation and Algebra Tags 00LY and 00LZ; formalized by composition of canonical first page and proved natural Tor comparison."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedTensorTorSpectralSequence",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-bounded-tensor-tor-spectral-sequence",
+   "place": "Tags 0H7X and 0H7Y; Tag 0H7Z, the displayed normalized E1 page in the proof before the final change of indices; Algebra Tags 00LY and 00LZ",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KunnethFilteredFirstPage",
+  "file": "lean/Sheaf/Algebra/Homology/KunnethFilteredFirstPage.lean",
+  "declaration": "DerivedCategory.exists_kunnethFilteredFirstPage",
+  "statement": "theorem exists_kunnethFilteredFirstPage (d : FilteredPageLocalizationData R) :\n    let I (k : ℤ) : ModuleCat.{u} R ⥤ ModuleCat.{u} R ⥤ ModuleCat.{u} R :=\n      if k < 0 then\n        (Functor.const (ModuleCat.{u} R)).obj\n          ((Functor.const (ModuleCat.{u} R)).obj (0 : ModuleCat.{u} R))\n      else Tor' (ModuleCat.{u} R) k.toNat\n    let P (p q : ℤ) (C D : Bounded (ModuleCat.{u} R)) : ModuleCat.{u} R :=\n      ∐ fun ij : {ij : ℤ × ℤ // ij.1 + ij.2 = q} ↦\n        ((I (-p)).obj ((homologyFunctor (ModuleCat.{u} R) ij.val.1).obj C.obj)).obj\n          ((homologyFunctor (ModuleCat.{u} R) ij.val.2).obj D.obj)\n    let m (p q : ℤ) {C C' D D' : Bounded (ModuleCat.{u} R)}\n        (f : C ⟶ C') (g : D ⟶ D') : P p q C D ⟶ P p q C' D' :=\n      Limits.Sigma.map fun ij ↦\n        ((I (-p)).map ((homologyFunctor (ModuleCat.{u} R) ij.val.1).map f.hom)).app\n            ((homologyFunctor (ModuleCat.{u} R) ij.val.2).obj D.obj) ≫\n          ((I (-p)).obj ((homologyFunctor (ModuleCat.{u} R) ij.val.1).obj C'.obj)).map\n            ((homologyFunctor (ModuleCat.{u} R) ij.val.2).map g.hom)\n    ∃ (U : Bounded (ModuleCat.{u} R) ⥤ Bounded (ModuleCat.{u} R) ⥤\n          finiteFilteredModuleDerivedCategory R)\n      (F : ∀ (C D : Bounded (ModuleCat.{u} R)) (n : ℤ),\n        DecreasingFiltration ((homologyFunctor (ModuleCat.{u} R) n).obj (C.obj ⊗ D.obj)))\n      (eH : ∀ (C D : Bounded (ModuleCat.{u} R)) (n : ℤ),\n        (d.Hbar n).obj ((U.obj C).obj D) ≅\n          (⟨(homologyFunctor (ModuleCat.{u} R) n).obj (C.obj ⊗ D.obj),\n            F C D n⟩ : FilteredObject (ModuleCat.{u} R)))\n      (e₁ : ∀ (C D : Bounded (ModuleCat.{u} R)) (p q : ℤ),\n        ((d.Sbar.obj ((U.obj C).obj D)).page 1).X (-q, p + 2 * q) ≅ P p q C D),\n      (∀ (C C' D D' : Bounded (ModuleCat.{u} R)) (f : C ⟶ C') (g : D ⟶ D')\n          (p q : ℤ),\n        ((d.Sbar.map ((U.map f).app D ≫ (U.obj C').map g)).hom 1).f (-q, p + 2 * q) ≫\n            (e₁ C' D' p q).hom =\n          (e₁ C D p q).hom ≫ m p q f g) ∧\n      (∀ (C C' D D' : Bounded (ModuleCat.{u} R)) (f : C ⟶ C') (g : D ⟶ D') (n : ℤ),\n        ∃ h : (⟨(homologyFunctor (ModuleCat.{u} R) n).obj (C.obj ⊗ D.obj), F C D n⟩ :\n            FilteredObject (ModuleCat.{u} R)) ⟶\n          ⟨(homologyFunctor (ModuleCat.{u} R) n).obj (C'.obj ⊗ D'.obj), F C' D' n⟩,\n          h.hom = (homologyFunctor (ModuleCat.{u} R) n).map (f.hom ⊗ₘ g.hom) ∧\n          (d.Hbar n).map ((U.map f).app D ≫ (U.obj C').map g) ≫ (eH C' D' n).hom =\n            (eH C D n).hom ≫ h)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "Tor.*[Hh]omology|[Hh]omology.*Tor",
+   "results": "[\"Mathlib/RepresentationTheory/Homological/ContCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/ContCohomology/Functoriality.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/TateCohomology/Basic.lean\", \"Mathlib/RepresentationTheory/Homological/GroupHomology/LongExactSequence.lean\"]",
+   "date": "2026-10-21",
+   "verdict": "The listed APIs supply individual steps, not this combined result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality",
+   "results": "[\"CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_hom_naturality\"]",
+   "date": "2026-10-21",
+   "verdict": "The listed APIs supply individual steps, not this combined result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical truncation filtration tensor product first page direct sum Tor cohomology",
+   "results": "[\"Rep.torIso\", \"HomologicalComplex.HasGoodTensor\\u2081\\u2082\", \"HomologicalComplex.unit_tensor_d\\u2081\", \"HomologicalComplex.\\u03b9TensorObj\", \"HomologicalComplex.HasGoodTensor\\u2082\\u2083\", \"Rep.Tor\", \"CategoryTheory.Tor'_obj_obj\", \"HomologicalComplex.instHasGoodTensor\\u2081\\u2082OfHasGoodTensor\\u2081\\u2082TensorX\"]",
+   "date": "2026-10-21",
+   "verdict": "The listed APIs supply individual steps, not this combined result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First page of the canonical convolution filtration of the derived tensor is naturally a direct sum of Tor of cohomology modules",
+   "results": "TensorProduct.map_convMul_map (Mathlib.RingTheory.Coalgebra.Convolution): {D : Type*} [AddCommMonoid B] [Module R B] [CoalgebraStruct R B] [NonUnitalNonAssocSemiring D] [Module R D]\n  [SMulCommClass R D D] [IsScalarTower R D D] {f h : C →ₗ[R] A} {g k : B →ₗ[R] D} :\n  (f ⊗ₘ g) * (h ⊗ₘ k) = (f * h) ⊗ₘ (g * k); TensorProduct.finsuppLeft (Mathlib.LinearAlgebra.DirectSum.Finsupp): : (ι →₀ M) ⊗[R] N ≃ₗ[S] ι →₀ M ⊗[R] N; TensorProduct.directSumRight (Mathlib.LinearAlgebra.DirectSum.TensorProduct): : (M₁' ⊗[R] ⨁ i, M₂ i) ≃ₗ[R] ⨁ i, M₁' ⊗[R] M₂ i; Ideal.Filtration.casesOn (Mathlib.RingTheory.Filtration): {R : Type u_1} →\n  [inst : CommRing R] →\n    {I : Ideal R} →\n      {M : Type u_3} →\n        [inst_1 : AddCommGroup M] →\n          [inst_2 : Module R M] →\n            {motive : I.Filtration M → Sort u} →\n              (t : I.Filtration M) →\n                ((N : ℕ → Submodule R M) →\n                 ; Ideal.Filtration (Mathlib.RingTheory.Filtration): {R : Type u_1} → [inst : CommRing R] → Ideal R → (M : Type u_3) → [inst_1 : AddCommGroup M] → [Module R M] → Type u_3; Rep.Tor (Mathlib.RepresentationTheory.Homological.GroupHomology.Basic): (n : ℕ) : Rep k G ⥤ Rep k G ⥤ ModuleCat k; IsModuleFiltration.recOn (Mathlib.RingTheory.FilteredAlgebra.Basic): {ι : Type u_1} →\n  {ιM : Type u_2} →\n    {R : Type u_3} →\n      {M : Type u_4} →\n        {σ : Type u_5} →\n          {σM : Type u_6} →\n            [inst : AddMonoid ι] →\n              [inst_1 : PartialOrder ι] →\n                [inst_2 : PartialOrder ιM] →\n                  [inst_3 : VAdd ι ιM] →\n   ; finsuppTensorFinsupp (Mathlib.LinearAlgebra.DirectSum.Finsupp): : (ι →₀ M) ⊗[R] (κ →₀ N) ≃ₗ[S] ι × κ →₀ M ⊗[R] N",
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern ordinary tensor or graded algebra, generic truncations, localization comparisons, or module Tor definitions; none states this normalized filtered-derived result or its simultaneous naturality. The actual source and individual Mathlib APIs are used in the completed Lean proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

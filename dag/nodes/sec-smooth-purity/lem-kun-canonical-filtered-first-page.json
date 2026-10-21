@@ -1,0 +1,152 @@
+{
+ "id": "lem-kun-canonical-filtered-first-page",
+ "kind": "statement",
+ "title": "Canonical convolution first page before identification with Tor",
+ "statement": "For any commutative ring R and normalized filtered-page localization data d [def-kun-filtered-page-localization-data], bounded derived module objects C,D admit a filtered-derived realization U whose filtered cohomology identifies with a filtration on H^n(C tensor^L D). Its underlying map is H^n(f tensor^L g). The normalized page-one object at (-q,p+2q) is naturally the coproduct over i+j=q of H^p(single_0(H^i(C)) tensor^L single_0(H^j(D))) [lem-kun-derived-module-tor-comparison]. The induced first-page map is the coproduct of the two-variable tensor cohomology maps. No Tor or convergence is asserted.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project More on Algebra Tags 0H7X, 0H7Y and 0H7Z, normalized E1 formula before Tor identification"
+ },
+ "stmt_deps": [
+  "def-kun-filtered-page-localization-data",
+  "def-weil-pbc-bounded-derived-subcategories",
+  "lem-kun-derived-module-tor-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Take the canonical graded tensor realization and its normalized forgetful and graded comparisons. Compare d.Hbar followed by forgetting with omega followed by ordinary cohomology: their precompositions by the finite filtered quotient are naturally isomorphic through cochain cohomology. Full faithful precomposition descends this comparison. Compose it with cohomology of the underlying tensor isomorphism.",
+   "uses": [
+    "lem-kun-canonical-graded-tensor",
+    "def-kun-filtered-page-localization-data"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Transport each filtration by the resulting actual module isomorphism, defining its steps as subobjects represented by the old inclusions followed by that isomorphism. Construct the filtered isomorphism using Subobject.underlyingIso. Conjugate d.Hbar of a bifunctor map by these filtered isomorphisms. Naturality of the cohomology comparison and underlying tensor comparison gives exactly H^n(f tensor^L g).",
+   "uses": [
+    "def-sp-filtration"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Define the functor evaluating a spectral sequence at page one and (a,b). Its composite with d.Sbar and the functor gr^a followed by H^{a+b} agree after precomposition with the finite filtered quotient: use d.eS, the normalized finite filtered first-page isomorphism and its chain naturality, graded normalization, and ordinary homologyFunctorFactors. Descend this natural isomorphism by full faithful precomposition. Associated grading is functorial by uniqueness after composing with the cokernel projection.",
+   "uses": [
+    "def-kun-filtered-page-localization-data",
+    "lem-kun-localized-filtered-convergence"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Compose page-one-to-graded-cohomology with the graded tensor formula. Put a=-q and b=p+2q, so a+b+a=p and -a=q. Transport both isomorphisms and their naturality equations along these integer equalities. This produces the required coproduct first-page formula and map equation.",
+   "uses": [
+    "lem-kun-canonical-graded-tensor"
+   ],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-kun-canonical-graded-tensor",
+  "def-kun-filtered-page-localization-data",
+  "def-sp-filtration",
+  "lem-kun-localized-filtered-convergence"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project More on Algebra Tags 0H7X, 0H7Y and 0H7Z, normalized E1 formula before Tor identification; expanded and formalized by F2."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedTensorTorSpectralSequence",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-bounded-tensor-tor-spectral-sequence",
+   "place": "Stacks Project More on Algebra Tags 0H7X, 0H7Y and 0H7Z, normalized E1 formula before Tor identification",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.KunnethCanonicalFirstPage",
+  "file": "lean/Sheaf/Algebra/Homology/KunnethCanonicalFirstPage.lean",
+  "declaration": "DerivedCategory.exists_kunnethCanonicalFirstPage",
+  "statement": "theorem exists_kunnethCanonicalFirstPage (d : FilteredPageLocalizationData R) :\n    let P (p q : ℤ) (C D : Bounded (ModuleCat.{u} R)) : ModuleCat.{u} R :=\n      ∐ fun ij : {ij : ℤ × ℤ // ij.1 + ij.2 = q} ↦\n        ((kunnethModuleTensorHomology R p).obj\n            ((homologyFunctor (ModuleCat.{u} R) ij.val.1).obj C.obj)).obj\n          ((homologyFunctor (ModuleCat.{u} R) ij.val.2).obj D.obj)\n    let m (p q : ℤ) {C C' D D' : Bounded (ModuleCat.{u} R)}\n        (f : C ⟶ C') (g : D ⟶ D') : P p q C D ⟶ P p q C' D' :=\n      Limits.Sigma.map fun ij ↦\n        ((kunnethModuleTensorHomology R p).map\n            ((homologyFunctor (ModuleCat.{u} R) ij.val.1).map f.hom)).app\n            ((homologyFunctor (ModuleCat.{u} R) ij.val.2).obj D.obj) ≫\n          ((kunnethModuleTensorHomology R p).obj\n            ((homologyFunctor (ModuleCat.{u} R) ij.val.1).obj C'.obj)).map\n            ((homologyFunctor (ModuleCat.{u} R) ij.val.2).map g.hom)\n    ∃ (U : Bounded (ModuleCat.{u} R) ⥤ Bounded (ModuleCat.{u} R) ⥤\n          finiteFilteredModuleDerivedCategory R)\n      (F : ∀ (C D : Bounded (ModuleCat.{u} R)) (n : ℤ),\n        DecreasingFiltration ((homologyFunctor (ModuleCat.{u} R) n).obj (C.obj ⊗ D.obj)))\n      (eH : ∀ (C D : Bounded (ModuleCat.{u} R)) (n : ℤ),\n        (d.Hbar n).obj ((U.obj C).obj D) ≅\n          (⟨(homologyFunctor (ModuleCat.{u} R) n).obj (C.obj ⊗ D.obj),\n            F C D n⟩ : FilteredObject (ModuleCat.{u} R)))\n      (e₁ : ∀ (C D : Bounded (ModuleCat.{u} R)) (p q : ℤ),\n        ((d.Sbar.obj ((U.obj C).obj D)).page 1).X (-q, p + 2 * q) ≅ P p q C D),\n      (∀ (C C' D D' : Bounded (ModuleCat.{u} R)) (f : C ⟶ C') (g : D ⟶ D')\n          (p q : ℤ),\n        ((d.Sbar.map ((U.map f).app D ≫ (U.obj C').map g)).hom 1).f (-q, p + 2 * q) ≫\n            (e₁ C' D' p q).hom =\n          (e₁ C D p q).hom ≫ m p q f g) ∧\n      (∀ (C C' D D' : Bounded (ModuleCat.{u} R)) (f : C ⟶ C') (g : D ⟶ D') (n : ℤ),\n        ∃ h : (⟨(homologyFunctor (ModuleCat.{u} R) n).obj (C.obj ⊗ D.obj), F C D n⟩ :\n            FilteredObject (ModuleCat.{u} R)) ⟶\n          ⟨(homologyFunctor (ModuleCat.{u} R) n).obj (C'.obj ⊗ D'.obj), F C' D' n⟩,\n          h.hom = (homologyFunctor (ModuleCat.{u} R) n).map (f.hom ⊗ₘ g.hom) ∧\n          (d.Hbar n).map ((U.map f).app D ≫ (U.obj C').map g) ≫ (eH C' D' n).hom =\n            (eH C D n).hom ≫ h)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical filtration convolution associated graded cohomology derived tensor bounded complexes",
+   "results": [
+    "HomologicalComplex.ιTensorObj",
+    "HomologicalComplex.HasGoodTensor₁₂",
+    "HomologicalComplex.HasGoodTensor₂₃",
+    "HomologicalComplex.HasTensor",
+    "HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX",
+    "CochainComplex.ιMapBifunctor",
+    "HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X",
+    "HomologicalComplex.instHasTensorXTensorUnit_1"
+   ],
+   "date": "2026-10-21",
+   "verdict": "The search supplies individual APIs, not the stated combined result; the actual proof uses the named dependencies and Mathlib functoriality."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Limits.Sigma.mapIso",
+   "results": [
+    "CategoryTheory.Limits.Sigma.mapIso",
+    "CategoryTheory.Limits.Sigma.ι_mapIso_hom",
+    "CategoryTheory.Limits.Sigma.ι_mapIso_inv",
+    "CategoryTheory.Limits.Sigma.ι_mapIso_hom_assoc",
+    "CategoryTheory.Limits.Sigma.ι_mapIso_inv_assoc"
+   ],
+   "date": "2026-10-21",
+   "verdict": "The search supplies individual APIs, not the stated combined result; the actual proof uses the named dependencies and Mathlib functoriality."
+  },
+  {
+   "tool": "grep",
+   "query": "finiteFilteredPageFirstIso",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "The search supplies individual APIs, not the stated combined result; the actual proof uses the named dependencies and Mathlib functoriality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "First page of the canonically filtered derived tensor of bounded complexes is a coproduct of derived tensor cohomology of their cohomology modules",
+   "results": "DerivedCategory.exists_iso_Q_obj_of_isGE_of_isLE (Mathlib.Algebra.Homology.DerivedCategory.TStructure): (X : DerivedCategory C) (a b : ℤ) [X.IsGE a] [X.IsLE b] :\n  ∃ (K : CochainComplex C ℤ) (_ : K.IsStrictlyGE a) (_ : K.IsStrictlyLE b), Nonempty (X ≅ Q.obj K); CommRingCat.coproductCoconeIsColimit (Mathlib.Algebra.Category.Ring.Constructions): : IsColimit (coproductCocone A B); HomologicalComplex.tensorObj (Mathlib.Algebra.Homology.Monoidal): (K₁ K₂ : HomologicalComplex C c) [HasTensor K₁ K₂] : HomologicalComplex C c; HomologicalComplex.biprodXIso_hom_fst (Mathlib.Algebra.Homology.HomologicalComplexBiprod): (i : ι) : (biprodXIso K L i).hom ≫ biprod.fst = (biprod.fst : K ⊞ L ⟶ K).f i; HomologicalComplex.unit_tensor_d₁ (Mathlib.Algebra.Homology.Monoidal): (i₁ i₂ j : I) : mapBifunctor.d₁ (tensorUnit C c) K (curriedTensor C) c i₁ i₂ j = 0; HomologicalComplex.instHasFilteredColimitsOfSize (Mathlib.Algebra.Homology.GrothendieckAbelian): [HasFilteredColimitsOfSize.{w, w'} C] : HasFilteredColimitsOfSize.{w, w'} (HomologicalComplex C c); HomologicalComplex.instHasBinaryBiproduct (Mathlib.Algebra.Homology.HomologicalComplexBiprod): : HasBinaryBiproduct K L; HomologicalComplex.biprodXIso (Mathlib.Algebra.Homology.HomologicalComplexBiprod): (i : ι) : (K ⊞ L).X i ≅ (K.X i) ⊞ (L.X i)",
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern ordinary tensor or graded algebra, generic truncations, localization comparisons, or module Tor definitions; none states this normalized filtered-derived result or its simultaneous naturality. The actual source and individual Mathlib APIs are used in the completed Lean proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

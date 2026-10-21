@@ -1,0 +1,135 @@
+{
+ "id": "lem-kun-derived-module-tor-comparison",
+ "kind": "statement",
+ "title": "Derived tensor cohomology of modules is naturally Tor",
+ "statement": "For any commutative ring R, let B_n(M,N)=H^n(single_0(M) tensor^L single_0(N)), with maps induced by the derived tensor in each variable [lem-pc-derived-tensor-second-factor-functor]. For every integer k, the bifunctor B_{-k} is naturally isomorphic to Tor_k(M,N) when k is nonnegative, and to the constant zero bifunctor when k<0 [def-weil-pbc-tor-modules]. Naturality holds simultaneously in both module variables, without flatness or finite generation assumptions.",
+ "source": {
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project Algebra Tags 00LY and 00LZ; More on Algebra Tag 0H7Z, identification of tensor cohomology with Tor"
+ },
+ "stmt_deps": [
+  "lem-pc-derived-tensor-second-factor-functor",
+  "def-weil-pbc-tor-modules"
+ ],
+ "proof": [
+  {
+   "text": "Extend a projective resolution of M by zero to cochain degrees at most zero. Projective terms are flat and the complex is bounded above, hence K-flat. Its augmentation is a quasi-isomorphism. Use the K-flat tensor comparison and the single-complex tensor comparison to identify single_0(M) tensor^L single_0(N) with the image of the extended termwise tensor complex.",
+   "uses": [
+    "lem-pc-source-kflat-module-tensor-model"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply the ordinary derived cohomology comparison, the map-extend comparison and extend-homology comparison. ProjectiveResolution.isoLeftDerivedObj identifies degree -k with the kth left derived tensor, which is Tor. Prove naturality of the K-flat comparison using the lax monoidal structural map and quotient comparison. Resolution lifts commute with the augmentation and compute the first-variable Tor map; the tensoring-right natural transformation commutes with extension and computes the second-variable map. Compose these equations into an isomorphism of bifunctors.",
+   "uses": [
+    "def-weil-pbc-tor-modules"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "For k<0, derived tensor of the two degree-zero modules is bounded above by zero. Therefore its positive cohomology is zero; use the canonical isomorphism to zero, whose naturality follows from uniqueness of maps to zero. This also covers zero objects and the zero ring.",
+   "uses": [
+    "lem-weil-pbc-source-derived-tensor-upper-bound"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-source-kflat-module-tensor-model",
+  "def-weil-pbc-tor-modules",
+  "lem-weil-pbc-source-derived-tensor-upper-bound"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Stacks Project Algebra Tags 00LY and 00LZ; More on Algebra Tag 0H7Z, identification of tensor cohomology with Tor; expanded and formalized by F2."
+ },
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Algebra.Homology.BoundedTensorTorSpectralSequence",
+  "date": "2026-10-21",
+  "group": "F2"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-kun-bounded-tensor-tor-spectral-sequence",
+   "place": "Stacks Project Algebra Tags 00LY and 00LZ; More on Algebra Tag 0H7Z, identification of tensor cohomology with Tor",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-kunneth-ordinary",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Algebra.Homology.DerivedTensorModuleTorComparison",
+  "file": "lean/Sheaf/Algebra/Homology/DerivedTensorModuleTorComparison.lean",
+  "declaration": "DerivedCategory.kunnethModuleTensorHomology_tor",
+  "statement": "theorem kunnethModuleTensorHomology_tor (k : ℤ) :\n    Nonempty (kunnethModuleTensorHomology R (-k) ≅\n      if k < 0 then\n        (Functor.const (ModuleCat.{u} R)).obj\n          ((Functor.const (ModuleCat.{u} R)).obj (0 : ModuleCat.{u} R))\n      else Tor' (ModuleCat.{u} R) k.toNat)",
+  "branch": "sheaf-dag",
+  "by": "F2",
+  "date": "2026-10-21"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphism between cohomology of derived tensor of modules in degree zero and Tor using projective resolutions",
+   "results": [
+    "Rep.torIso",
+    "CategoryTheory.Tor'_obj_obj",
+    "CategoryTheory.Tor'",
+    "CategoryTheory.Tor",
+    "CategoryTheory.Tor_obj",
+    "CategoryTheory.Tor'_map_app",
+    "CategoryTheory.Tor_map",
+    "CategoryTheory.isZero_Tor'_succ_of_projective"
+   ],
+   "date": "2026-10-21",
+   "verdict": "The search supplies individual APIs, not the stated combined result; the actual proof uses the named dependencies and Mathlib functoriality."
+  },
+  {
+   "tool": "loogle",
+   "query": "ProjectiveResolution.isoLeftDerivedObj_inv_naturality",
+   "results": "[loogle] OK 0 hit(s) | loogle: unknown identifier 'ProjectiveResolution.isoLeftDerivedObj_inv_naturality'",
+   "date": "2026-10-21",
+   "verdict": "The search supplies individual APIs, not the stated combined result; the actual proof uses the named dependencies and Mathlib functoriality."
+  },
+  {
+   "tool": "grep",
+   "query": "QObjTensorSingleFunctorObjIso|Tor._obj_obj",
+   "results": "[grep] OK 0 hit(s)",
+   "date": "2026-10-21",
+   "verdict": "The search supplies individual APIs, not the stated combined result; the actual proof uses the named dependencies and Mathlib functoriality."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Cohomology of the derived tensor product of modules concentrated in degree zero is naturally Tor in both module variables",
+   "results": "CategoryTheory.Tor (Mathlib.CategoryTheory.Monoidal.Tor): (n : ℕ) : C ⥤ C ⥤ C; CategoryTheory.Tor' (Mathlib.CategoryTheory.Monoidal.Tor): (n : ℕ) : C ⥤ C ⥤ C; CategoryTheory.Tor'_obj_obj (Mathlib.CategoryTheory.Monoidal.Tor): ∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) (k j : C),\n  ((CategoryTheory.Tor' C n).obj; TensorProduct.gradedComm_of_zero_tmul (Mathlib.LinearAlgebra.TensorProduct.Graded.External): (a : 𝒜 0) (b : ⨁ i, ℬ i) : gradedComm R 𝒜 ℬ (lof R _ 𝒜 0 a ⊗ₜ b) = b ⊗ₜ lof R _ 𝒜 _ a; TensorProduct.gradedComm_tmul_of_zero (Mathlib.LinearAlgebra.TensorProduct.Graded.External): (a : ⨁ i, 𝒜 i) (b : ℬ 0) : gradedComm R 𝒜 ℬ (a ⊗ₜ lof R _ ℬ 0 b) = lof R _ ℬ _ b ⊗ₜ a; CategoryTheory.isZero_Tor_succ_of_projective (Mathlib.CategoryTheory.Monoidal.Tor): (X Y : C) [Projective Y] (n : ℕ) : IsZero (((Tor C (n + 1)).obj X).obj Y); CategoryTheory.Tor'_map_app (Mathlib.CategoryTheory.Monoidal.Tor): ∀ (C : Type u_1) [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.MonoidalPreadditive C]\n  [inst_4 : CategoryTheory.HasProjectiveResolutions C] (n : ℕ) {X Y : C} (f : X ⟶ Y) (j : C),\n  ((Category; Rep.Tor_obj (Mathlib.RepresentationTheory.Homological.GroupHomology.Basic): ∀ (k G : Type u) [inst : CommRing k] [inst_1 : Group G] (n : ℕ) (X : Rep k G),\n  (Rep.Tor k G n).obj X = ((Rep.coinvariantsTensor k G).obj X).leftDerived n",
+   "date": "2026-10-21",
+   "verdict": "no match: returned signatures concern ordinary tensor or graded algebra, generic truncations, localization comparisons, or module Tor definitions; none states this normalized filtered-derived result or its simultaneous naturality. The actual source and individual Mathlib APIs are used in the completed Lean proof."
+  }
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "F2",
+  "result": "pass",
+  "landing": "20261021T061041-L-1689610",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
