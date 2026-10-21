@@ -10,7 +10,8 @@
  "stmt_deps": [
   "sk-def-sfb-condensed-ring",
   "sk-def-sfb-module-objects",
-  "def-weil-abstract-derived-category"
+  "def-weil-abstract-derived-category",
+  "def-sfb-condensed-equivariant-bar-data"
  ],
  "proof": [
   {
@@ -431,5 +432,26 @@
   "group": "NI",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-6c7ebc499 (reviewer sub-agent of L); spot-checked: Read the item's statement and all nine steps, the new node lem-sfb-condensed-internal-bar-resolution, all 14 cited statements, and paragraph (3) of the main-20261015 direct-images proof. That paragraph does not contain this formal internal argument, so proof_origin agent with a WANTED reference is honest. The item had no proof on the base, has no repair note and is still unsplit live, so it is not superseded. Neither the item nor any cited node is in the 2026-10-18 dropped list, and nothing cites SGA. The statement is unchanged. Small cases checked: G=1, G finite with A=Z, the degree-0 invariants, and that A[G^n]=j_{G^n!}A is representable. Steps 1-7 are correct: inflation gives Grothendieck abelian categories with left exact invariants; A[S] is flat by 03EV; induction A[G]⊗T is left adjoint to forgetting, so forgetting preserves injectives; rows are exact via Hom_E(A[S]⊗P,I); I recomputed the homogeneous-to-inhomogeneous faces; the (-1)^{pq} transpose sign and the (-1)^p total homotopy both check. The new node is true (contraction h[g]=[1,g], also after ⊗T; coordinate change gives the induced module), statement-only, self-contained and strictly smaller than the item. No duplicate: lem-sfb-bar-resolution-cochains is for abstract groups and lem-exc-* for discrete modules. FIX of two faults. Step 8 (C1/C4): flat in degree 0 implies K-flat was not written; it now cites def-pc-kflat-complex and lem-pur-derived-change-of-rings and adds the underived identification Hom_A(A[S],Res M)=Res Hom_{A'}(A'[S],M). Step 9 (E5): it claimed the columns 'compute the derived Homs by step 8', which is only an abstract isomorphism; it now proves the canonical Res J column map is an isomorphism via the evaluation normalization and lem-sp-derived-injective-resolution-naturality, then uses naturality along beta. The worker wrote its own tool_uses (C8); I accept them as generic homological and ringed-site tools.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.CondensedDerivedInvariantBar",
+  "declaration": "CategoryTheory.CondensedBar.condensed_derived_invariant_bar",
+  "declarations": [
+   "CategoryTheory.CondensedBar.condensed_derived_invariant_bar"
+  ],
+  "file": "lean/Sheaf/CategoryTheory/CondensedDerivedInvariantBar.lean",
+  "statement": "theorem condensed_derived_invariant_bar (G : Type u) [Group G] [TopologicalSpace G] [IsTopologicalGroup G] [CompactSpace G] [T2Space G] [TotallyDisconnectedSpace G] : Assertion G",
+  "branch": "sheaf-dag",
+  "by": "NU",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f5f508249",
+  "group": "NU",
+  "result": "fix",
+  "note": "Mathematics correct: every node clause matches the Lean (ring/G/universes, landed ActionModule/Invariants, ihom of the free module with a derived-unit columns clause, nerve faces and degeneracies recomputed, d_bar+(-1)^p d_res total, degree-zero augmentation, derived-category iso normalized by the augmentation, naturality over all lifts, scalar restriction via pinned bar/total isos, beta lifts and the inverted augmentation square). Edge cases n=0, G=1, zero ring, nonflat maps are covered; no hollow defs, only the item sorry, statements verbatim, nothing dropped. Fault H2: new def node def-sfb-condensed-equivariant-bar-data cited theorem lem-sfb-condensed-internal-bar-resolution only for the plain def InternalBar.free. FIX: freeParameter now writes out the defeq composite composeAndSheafify ⋙ Mod.free (fixes/CondensedEquivariantBarData.lean); whole-node JSON swaps that stmt_dep for sk-def-sfb-change-of-scalars (owner of Mod.comap) with matching TeX; check_new_node reports no failures; nt_compile clean in 26.9 s. Advisory: rightDerivedFunctor owner not cited; the second reading is a self-review."
  }
 }
