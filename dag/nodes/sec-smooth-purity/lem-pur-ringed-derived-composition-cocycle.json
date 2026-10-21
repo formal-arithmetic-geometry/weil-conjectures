@@ -15,9 +15,114 @@
   "def-weil-sheaf-of-modules-category",
   "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work first at $Q_0I$ with $I$ K-injective on $X_0$, writing $Q_i$ for localization on $X_i$. The ringed-topos definition supplies additive termwise direct images; use their canonical underived composition identifications throughout. Choose K-injective resolutions $j:f_*I\\to J$, $k:g_*J\\to K$, and $t:g_*f_*I\\to T$, available on the small ringed sites by [prop-pur-kinjective-resolutions-exist]. The normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] says $g_*j$ is a quasi-isomorphism. Thus $k\\circ g_*j$ is also a quasi-isomorphism. Neither $f_*I$ nor $g_*J$ is assumed K-injective.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "Since $T$ and $K$ are K-injective, [lem-weil-pbc-kinjective-hom-derived] represents the derived morphism $Q_2(k\\circ g_*j)\\circ(Q_2t)^{-1}:Q_2T\\to Q_2K$ by a unique homotopy class $u:T\\to K$. Moreover $u\\circ t$ and $k\\circ g_*j$ are homotopic: their images under $Q_2$ agree, and the same cited Hom bijection applies with source $g_*f_*I$ and K-injective target $K$. This is a comparison between actual resolutions, with no claim that termwise direct image preserves K-injectives.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "Compute $(\\kappa_{h,g}R_f)\\circ\\kappa_{hg,f}$ at $Q_0I$. The comparison for $(hg,f)$, using $j$, is represented by $(hg)_*j=h_*g_*j$. The comparison for $(h,g)$ at $R_f(Q_0I)=Q_1J$, using $k$, is represented by $h_*k$. Both assertions are precisely the K-injective normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. Hence this side, in the common source $Q_3(h_*g_*f_*I)$ and target $Q_3(h_*K)$, is $Q_3(h_*(k\\circ g_*j))$. The identifications here are the canonical resolution identifications, not additional choices of the composition isomorphisms.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "For the other side, $\\kappa_{h,gf}$ is represented by $h_*t$, by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The map $\\kappa_{g,f}$ is $Q_2(g_*j)$. Apply [lem-sf-kinjective-derived-map-computation] to $h_*$, to this morphism, and to the resolutions $t:g_*f_*I\\to T$ and $k:g_*J\\to K$. Its representing map between K-injective targets is exactly $u$ from Step 2. Therefore $(R_h\\kappa_{g,f})\\circ\\kappa_{h,gf}$ is $Q_3(h_*u)\\circ Q_3(h_*t)=Q_3(h_*(u\\circ t))$. Termwise application of the additive functor $h_*$ preserves the homotopy of Step 2: apply $h_*$ to the equation $ut-kg_*j=ds+sd$. Thus this equals $Q_3(h_*(k\\circ g_*j))$, the expression in Step 3.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sf-kinjective-derived-map-computation",
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "For any complex $M$ on $X_0$, choose a K-injective resolution $a:M\\to I$. Naturality of the two composites in the cocycle square identifies their components at $Q_0M$ with their components at $Q_0I$ conjugated by the images of the isomorphism $Q_0a$. The equality just proved at $Q_0I$ therefore gives equality at $Q_0M$. Every derived object is represented by a complex (up to the canonical localization equivalence), so the natural transformations agree. Canonical changes of resolution are compatible by the identity and composition formulas of [lem-sf-kinjective-derived-map-computation].",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "Construct the identity comparison explicitly. For $a:N\\to I$ a K-injective resolution on $X$, let $c_a:R_{\\mathrm{id}_X}(QN)\\xrightarrow{\\sim}QI$ be the canonical resolution identification. Set $\\epsilon_{X,QN}=(Qa)^{-1}\\circ c_a$. For a derived morphism $v:QN\\to QN'$ and resolutions $a:N\\to I$, $b:N'\\to J$, [lem-sf-kinjective-derived-map-computation] gives a representing class $w:I\\to J$ with $Qw=Qb\\circ v\\circ(Qa)^{-1}$. Applying its formula for the identity functor gives $\\epsilon_{X,QN'}R_{\\mathrm{id}_X}(v)=v\\epsilon_{X,QN}$. Its change-of-resolution formula proves independence of $a$. Thus these are a natural isomorphism to the identity; they are exactly those induced by termwise identity direct image. In particular at K-injective $I$, choosing $a=1_I$ makes $\\epsilon_{X,QI}$ the identity under the canonical computation.",
+   "uses": [
+    "prop-pur-kinjective-resolutions-exist",
+    "lem-sf-kinjective-derived-map-computation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "For the left unit law evaluate at K-injective $I$ on $X_0$, choose $j:f_*I\\to J$ K-injective, and apply the normalization of [lem-weil-pbc-ringed-topoi-derived-pushforward-composition] with $g=\\mathrm{id}_{X_1}$. It gives $\\kappa_{\\mathrm{id},f}=Q_1j$ in the resolution coordinates. Step 6 gives $\\epsilon_{X_1,Q_1(f_*I)}=(Q_1j)^{-1}$ in the same coordinates, so their product is the identity. For the right unit law the first morphism is $\\mathrm{id}_{X_0}$; use the identity resolution $I\\to I$ of its direct image. The comparison $\\kappa_{f,\\mathrm{id}}$ is then the class of $f_*(1_I)$, while $R_f(\\epsilon_{X_0,Q_0I})$ is the identity by Step 6. The product is again the identity. Transport along resolutions exactly as in Step 5 gives both laws at every derived object.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "An identity-underlying-topos coefficient change is a ringed-topos morphism: its module direct image is restriction of scalars along the structural ring map, as in [def-weil-pbc-ringed-topos-morphism]. All resolutions above are taken in the module category for the ring on the relevant $X_i$; the composition normalization applies to these morphisms as well. No step used an isomorphism or flatness of the structural ring map. Consequently the same calculations give every asserted law when any of $f,g,h$ is such a coefficient change.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6E, lemma-derived-pushforward-composition; explicit coherence calculation using derived.tex Tags 070I (lemma-K-injective) and 070Y (lemma-K-injective-defined)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-ringed-topos-morphism",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-kinjective-derived-map-computation"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Explicit common-resolution proof of coherence for the K-injective normalized comparison of Tag 0D6E; uses derived.tex Tags 070I and 070Y and injectives.tex Tag 079P."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +158,45 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map'\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.liftAux_map\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac'\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄}\\n  {D₂ : Type u₅} [inst_3 : CategoryTheory.Category.{v₄, u₄} D₁] [inst_4 : CategoryTheory.Category.{\", \"doc\": \"Given categories $\\\\mathcal{C}_1, \\\\mathcal{C}_2, \\\\mathcal{H}$ with localizations $L_1: \\\\mathcal{C}_1 \\\\to \\\\mathcal{D}_1$ and $L_2: \\\\mathcal{C}_2 \\\\to \\\\mathcal{D}_2$, a localizer morphism $\\\\Phi: \\\\mathcal{\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄}\\n  {D₂ : Type u₅} [inst_3 : CategoryTheory.Category.{v₄, u₄} D₁] [inst_4 : CategoryTheory.Category.{\", \"doc\": \"For any object $X$ in category $\\\\mathcal{C}_1$, the composition of the natural transformation $\\\\alpha_1$ at $X$ with the component of the right derived functor comparison morphism at $L_1(X)$ equals t\"}\n  {\"name\": \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\", \"module\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived\", \"type\": \"∀ {C₁ : Type u₁} {C₂ : Type u₂} {H : Type u₃} [inst : CategoryTheory.Category.{v₁, u₁} C₁]\\n  [inst_1 : CategoryTheory.Category.{v₂, u₂} C₂] [inst_2 : CategoryTheory.Category.{v₃, u₃} H] {D₁ : Type u₄}\\n  {D₂ : Type u₅} [inst_3 : CategoryTheory.Category.{v₄, u₄} D₁] [inst_4 : CategoryTheory.Category.{\", \"doc\": \"A natural transformation comparing the right derived functor $ RF_1 $ with the composition of the localized functor $ \\\\Phi_{\\\\text{localized}} $ and $ F_2 $, constructed using the universal property of\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits do not state this ringed-topos/coefficient assertion; see report for candidate distinctions"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Associativity and unit coherence for canonical composition isomorphisms of unbounded total right derived direct image for ringed topoi",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.sheafComposeIso_hom_fac_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.HasWeakShea\", \"doc\": \"Given a Grothendieck topology $ J $ on a category $\\\\mathcal{C}$, functors $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $ and $ P : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\mathcal{A} $, and a morphism $ h : \\\\text{sheafify}_\"}\n  {\"name\": \"CategoryTheory.sheafComposeIso_inv_fac_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.HasWeakShea\", \"doc\": \"For a presheaf $ P $ on $ \\\\mathcal{C}^{\\\\text{op}} $ with values in $ \\\\mathcal{A} $ and a functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, the natural isomorphism between $ \\\\text{sheafify}_J(P \\\\circ F) $ a\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} [inst_5 : F.Add\", \"doc\": \"For additive functors $ F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and natural transformations $ \\\\alpha : F \\\\Rightarrow G $, $ \\\\beta : G \\\\Rightarrow H $, the composition of the\"}\n  {\"name\": \"CategoryTheory.sheafComposeIso_hom_fac\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.HasWeakShea\", \"doc\": \"For a presheaf $ P $ on $ \\\\mathcal{C}^\\\\text{op} $ with values in $ \\\\mathcal{A} $ and a functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, there exists a natural isomorphism between the sheafification of the\"}\n  {\"name\": \"CategoryTheory.sheafComposeIso_inv_fac\", \"module\": \"Mathlib/CategoryTheory/Sites/PreservesSheafification\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] (J : CategoryTheory.GrothendieckTopology C) {A : Type u_1}\\n  {B : Type u_2} [inst_1 : CategoryTheory.Category.{v_1, u_1} A] [inst_2 : CategoryTheory.Category.{v_2, u_2} B]\\n  (F : CategoryTheory.Functor A B) [inst_3 : CategoryTheory.HasWeakShea\", \"doc\": \"For a presheaf $ P $ on $ \\\\mathcal{C}^{\\\\text{op}} $ with values in $ \\\\mathcal{A} $ and a functor $ F : \\\\mathcal{A} \\\\to \\\\mathcal{B} $, the composition of the whiskered unit natural transformation $ \\\\et\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_fac_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived\", \"type\": \"∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (α : \", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $RF, G : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, a natural transformation\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_fac_app_assoc\", \"module\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived\", \"type\": \"∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (α : \", \"doc\": \"Given functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, $ RF, G : \\\\mathcal{D} \\\\to \\\\mathcal{H} $, a natural transformation $ \\\\alpha : F \\\\Rightarrow L \\\\circ RF $ witness\"}\n  {\"name\": \"CategoryTheory.RanIsSheafOfIsCocontinuous.fac_assoc\", \"module\": \"Mathlib/CategoryTheory/Sites/CoverLifting\", \"type\": \"∀ {C : Type u_1} {D : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_2, u_2} D] {G : CategoryTheory.Functor C D} {A : Type w}\\n  [inst_2 : CategoryTheory.Category.{w', w} A] {J : CategoryTheory.GrothendieckTopology C}\\n  {K : CategoryTheory.GrothendieckT\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a cocontinuous functor $G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and functors $F : \\\\mathcal{C}^{\\\\text{op}} \\\\to \\\\math\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general rightDerived_ext/fac and natural-transformation functoriality do not supply the non-exact ringed-topos composite comparison, its K-injective normalization, or its cocycle/unit laws; candidate sources read in report."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Total right derived composite functor comparison satisfies associativity and identity laws",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatTrans_comp_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_3} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF RF' RF'' : CategoryTheory.Functor D H) {F F' F'' : CategoryTheory.Functor C H} {L : CategoryTheory.Func\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $RF, RF', RF'' : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, $F, F', F'' : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, a localization $L : \\\\mathcal{C} \\\\to \\\\mathc\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} (α : F ⟶ G) (β \", \"doc\": \"In an abelian category with injective resolutions, the composition of natural transformations between additive functors, when lifted to their right-derived functors mapping to the homotopy category of\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_fac_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (α : \", \"doc\": \"Given functors $ L : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, $ F : \\\\mathcal{C} \\\\to \\\\mathcal{H} $, $ RF, G : \\\\mathcal{D} \\\\to \\\\mathcal{H} $, a natural transformation $ \\\\alpha : F \\\\Rightarrow L \\\\circ RF $ witness\"}\n  {\"name\": \"CategoryTheory.NatTrans.rightDerived_comp_assoc\", \"module\": \"Mathlib.CategoryTheory.Abelian.RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G H : CategoryTheory.Functor C D} [inst_5 : F.Add\", \"doc\": \"For additive functors $ F, G, H : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories and natural transformations $ \\\\alpha : F \\\\Rightarrow G $, $ \\\\beta : G \\\\Rightarrow H $, the composition of the\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_fac_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"∀ {C : Type u_3} {D : Type u_1} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_3} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_1} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n  (α : \", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$, functors $L : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $F : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $RF, G : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, a natural transformation\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatTrans_fac_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_3} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n\", \"doc\": \"Given natural transformations $\\\\alpha: F \\\\Rightarrow L \\\\circ RF$ and $\\\\alpha': F' \\\\Rightarrow L \\\\circ RF'$ witnessing $RF$ and $RF'$ as right derived functors of $F$ and $F'$ via localization $L$ with\"}\n  {\"name\": \"CategoryTheory.Functor.whiskeringRight_obj_comp\", \"module\": \"Mathlib.CategoryTheory.Whiskering\", \"type\": \"{D' : Type u₄} [Category.{v₄} D'] (F : C ⥤ D) (G : D ⥤ D') :\\n  (whiskeringRight E C D).obj F ⋙ (whiskeringRight E D D').obj G = (whiskeringRight E C D').obj (F ⋙ G)\", \"doc\": \"For categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{D}'$ and functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, $G : \\\\mathcal{D} \\\\to \\\\mathcal{D}'$, the composition of the whiskered functors $(\\\\text{whiskering\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerivedNatTrans_app_assoc\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \"∀ {C : Type u_1} {D : Type u_3} {H : Type u_2} [inst : CategoryTheory.Category.{v_1, u_1} C]\\n  [inst_1 : CategoryTheory.Category.{v_3, u_3} D] [inst_2 : CategoryTheory.Category.{v_5, u_2} H]\\n  (RF RF' : CategoryTheory.Functor D H) {F F' : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D}\\n\", \"doc\": \"Given categories $\\\\mathcal{C}, \\\\mathcal{D}, \\\\mathcal{H}$ with category structures, functors $F, F' : \\\\mathcal{C} \\\\to \\\\mathcal{H}$, $RF, RF' : \\\\mathcal{D} \\\\to \\\\mathcal{H}$, and $L : \\\\mathcal{C} \\\\to \\\\ma\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general rightDerived_ext/fac and natural-transformation functoriality do not supply the non-exact ringed-topos composite comparison, its K-injective normalization, or its cocycle/unit laws; candidate sources read in report."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.rightDerived_ext",
+   "results": "[loogle] OK 1 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightDerived_ext\", \"module\": \"Mathlib.CategoryTheory.Functor.Derived.RightDerived\", \"type\": \" {C : Type u_3} {D : Type u_1} {H : Type u_2} [CategoryTheory.Category.{v_1, u_3} C] [CategoryTheory.Category.{v_2, u_1} D] [CategoryTheory.Category.{v_3, u_2} H] (RF : CategoryTheory.Functor D H) {F : CategoryTheory.Functor C H} {L : CategoryTheory.Functor C D} (α : F ⟶ L.comp RF) (W : CategoryTheo\", \"doc\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general rightDerived_ext/fac and natural-transformation functoriality do not supply the non-exact ringed-topos composite comparison, its K-injective normalization, or its cocycle/unit laws; candidate sources read in report."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerived.*[Cc]omp|[Cc]omp.*rightDerived|rightDerived.*[Aa]ssoc",
+   "results": "[grep] OK 20 hit(s)\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"line\": \"36\", \"text\": \"noncomputable def rightDerivedFunctorPlus :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/RightDerivedFunctorPlus.lean\", \"line\": \"45\", \"text\": \"noncomputable def rightDerivedFunctorPlusUnit :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"line\": \"64\", \"text\": \"noncomputable def rightDerivedFunctorComparison :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"line\": \"71\", \"text\": \"lemma rightDerivedFunctorComparison_fac :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"line\": \"72\", \"text\": \"    α₁ ≫ whiskerLeft _ (Φ.rightDerivedFunctorComparison L₁ L₂ F F₁ α₁ F₂ α₂) =\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"line\": \"75\", \"text\": \"  dsimp only [rightDerivedFunctorComparison]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"line\": \"80\", \"text\": \"lemma rightDerivedFunctorComparison_fac_app (X : C₁) :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"77\", \"text\": \"noncomputable def rightDerivedDesc (G : D ⥤ H) (β : F ⟶ L ⋙ G) : RF ⟶ G :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"101\", \"text\": \"noncomputable def rightDerivedNatTrans (τ : F ⟶ F') : RF ⟶ RF' :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"125\", \"text\": \"lemma rightDerivedNatTrans_comp (τ : F ⟶ F') (τ' : F' ⟶ F'') :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"133\", \"text\": \"noncomputable def rightDerivedNatIso (τ : F ≅ F') :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"line\": \"139\", \"text\": \"noncomputable abbrev rightDerivedUnique [RF'.IsRightDerivedFunctor α'₂ W] : RF ≅ RF' :=\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"line\": \"119\", \"text\": \"  (F' ⋙ G').rightDerivedDesc (whiskerRight β G' ≫ (Functor.associator _ _ _).hom) W₂ _\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/Adjunction.lean\", \"line\": \"144\", \"text\": \"noncomputable def derived [G'.IsLeftDerivedFunctor α W₁] [F'.IsRightDerivedFunctor β W₂]\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"line\": \"18\", \"text\": \"`F.rightDerivedToHomotopyCategory : C ⥤ HomotopyCategory D (ComplexShape.up ℕ)` which is\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"line\": \"24\", \"text\": \"Then, the right-derived functors `F.rightDerived n : C ⥤ D` are obtained by composing\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"line\": \"65\", \"text\": \"noncomputable def Functor.rightDerivedToHomotopyCategory (F : C ⥤ D) [F.Additive] :\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"line\": \"70\", \"text\": \"an isomorphism between `F.rightDerivedToHomotopyCategory.obj X` and the complex\"}\n  {\"file\": \"Mathlib/CategoryTheory/Abelian/RightDerived.lean\", \"line\": \"72\", \"text\": \"noncomputable def InjectiveResolution.isoRightDerivedToHomotopyCategoryObj {X : C}\"}\n  {\"file\": \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\", \"line\": \"97\", \"text\": \"noncomputable def isPointwiseLeftKanExtensionOfHasPointwiseRightDerivedFunctor\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general rightDerived_ext/fac and natural-transformation functoriality do not supply the non-exact ringed-topos composite comparison, its K-injective normalization, or its cocycle/unit laws; candidate sources read in report."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "K-injective normalized derived functor composition comparison cocycle law without preservation of K-injectives",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.Functor.rightDerived_map_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : C \\to D $ between abelian categories, natural number $ n $, and morphism $ f : X \\to Y $, the map induced by $ f $ on the $ n $-th right-derived functor $ F^R $ is equal to\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the homotopy category functor with the derived category localization is equivalent to composing the derived category localization with the induced functo\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"A natural isomorphism asserting that composing the derived category localization functor with the induced derived functor is naturally isomorphic to composing the homological complex functor with the \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X : C}\\n  (P : CategoryTheory.InjectiveResolution X) (F : CategoryTheory.Functor C D) [inst_4 : F.Ad\", \"doc\": \"For abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an object $X$ in $\\\\mathcal{C}$, its injective resolution $P$, and an additive functor $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the composition of the c\"}\n  {\"name\": \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"∀ {C₁ : Type u₁} [inst : CategoryTheory.Category.{v₁, u₁} C₁] [inst_1 : CategoryTheory.Abelian C₁]\\n  [inst_2 : HasDerivedCategory C₁] {C₂ : Type u₂} [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂]\\n  [inst_4 : CategoryTheory.Abelian C₂] [inst_5 : HasDerivedCategory C₂] (F : CategoryTheory.Functor C₁ C\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C}_1 \\\\to \\\\mathcal{C}_2 $ between abelian categories, the hom-component of the natural isomorphism asserting that composing the homotopy category functor with the\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addit\", \"doc\": \"For additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories, a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, an object $ X \\\\in \\\\mathcal{C} $, its injective resolutio\"}\n  {\"name\": \"CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory\", \"module\": \"Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor\", \"type\": \"{C₁ : Type u₁} →\\n  [inst : CategoryTheory.Category.{v₁, u₁} C₁] →\\n    [inst_1 : CategoryTheory.Abelian C₁] →\\n      [inst_2 : HasDerivedCategory C₁] →\\n        {C₂ : Type u₂} →\\n          [inst_3 : CategoryTheory.Category.{v₂, u₂} C₂] →\\n            [inst_4 : CategoryTheory.Abelian C₂] →\\n              [\", \"doc\": \"This instance provides the lifting condition for a functor $ F $ from integer-indexed cochain complexes to an abelian category, ensuring compatibility with the derived category localization at quasi-i\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X : C} (I : CategoryTheory.InjectiveResolution X)\\n \", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ I $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the natural transformation from $ F $ to its 0t\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: general rightDerived_ext/fac and natural-transformation functoriality do not supply the non-exact ringed-topos composite comparison, its K-injective normalization, or its cocycle/unit laws; candidate sources read in report."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-completed-coefficient-pushforward-comparison",
@@ -73,5 +213,49 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-ringed-derived-composition-cocycle",
+  "worker": "stage1",
+  "summary": "Proved the associativity and both unit laws by an explicit common-resolution calculation, reusing existing K-injective existence, Hom detection, derived-map computation and normalized composition nodes. No new nodes; statement unchanged. No preservation of K-injectives by module direct image is assumed.",
+  "blueprint": "fix-prop-adjunctions, Proof Step 1 integral derived adjunction / successive coefficient restrictions before reconstruction (via lem-pur-completed-coefficient-pushforward-comparison): coherence of the ordinary unbounded ringed-topos comparison.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Small ringed-site K-injective resolution existence; a resolution tool, not a replacement of the mate-unit route."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "The Hom bijection into K-injectives detects the chain homotopy needed for the common-resolution calculation."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "The arbitrary-derived-morphism and change-of-resolution formulas compute the whiskered comparison; the mate unit does not supply these resolution formulas."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "The existing normalized ordinary unbounded ringed-topos composition theorem is the input comparison whose coherence is proved here."
+   },
+   {
+    "node": "def-weil-pbc-ringed-topos-morphism",
+    "why": "Definition of ringed-topos morphism and its additive module direct image, including coefficient restriction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-pur-kinjective-resolutions-exist",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-sf-kinjective-derived-map-computation",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "def-weil-pbc-ringed-topos-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NR-8888f6f3c",
+  "group": "NR",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-8888f6f3c (reviewer sub-agent of L); spot-checked: Read the item's 8 steps against every cited statement and Stacks 0D6E (sites-cohomology.tex 4011-4030). 0D6E states only Rg_*Rf_*=R(gf)_*, so proof_origin=agent is correct. No new nodes. Statement and stmt_deps are unchanged, proof_deps equals the union of uses, and nothing cites SGA. The item was created by NS on 2026-10-21 with an empty base proof, and no re-split note exists. Cocycle: κ_{h,gf}=h_*t (composition-node normalization), R_hκ_{g,f}=Q(h_*u) (070Y-based map-computation node with resolutions t,k), and ut~k·g_*j (070I Hom bijection, any source, K-injective target K), so LHS=Q(h_*(k·g_*j))=RHS. I checked the coordinates: c_j=c_{1_J}R_g(Qj), and κ_{h,g} at Q(f_*I) is transported along Qj by the node's naturality clause. Units: ε=(Qa)^{-1}c_a equals η^{-1}, κ_{id,f}=Qj cancels, and the identity resolution handles the right unit. Coefficient changes on the identity topos are instances of def-weil-pbc-ringed-topos-morphism; no flatness and no preservation of K-injectives is used (checked against Z→Z/2). Edge cases: all identities, an identity in each position, the zero complex. No duplicate: lem-sf-normalized-derived-comparison-composition (exact change functors), lem-sfb-ringed-derived-{composition,identity}-comparison (pullback lifts) and def-sfb-module-lower-star-comp (underived) state different things. Accepted tool_use: lem-weil-pbc-ringed-topoi-derived-pushforward-composition (off-unit, sk-thm-properbasechange), whose comparison is the item's own subject; the other cited nodes are on the sk-def-sf-operations route or are notions or leaves. No changes."
  }
 }

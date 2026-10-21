@@ -19898,3 +19898,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:40 L: merged deliver/Q89/lem-sfb-constant-field-tor-bounds (reviewer FIX; first push; new nodes: 0); claim not held by Q89: not your claim
 - 03:40 L: merged deliver/Q84/lem-sfb-subfield-flat (reviewer FIX; after a return; new nodes: 1)
 - 03:40 L: merged deliver/Q117/lem-sfb-hom-kflat-chain-transpose (reviewer PASS; first push; new nodes: 0)
+- 03:40 L: merged deliver/NR/lem-pur-ringed-derived-composition-cocycle (reviewer PASS; first push; new nodes: 0)
