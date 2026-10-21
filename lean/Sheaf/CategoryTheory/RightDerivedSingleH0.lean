@@ -236,13 +236,47 @@ private theorem augmentation_homology {C D : Type*}
 namespace CategoryTheory.Functor
 
 variable {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
-  [HasDerivedCategory C] [HasDerivedCategory D] [Abelian.HasKInjectiveResolutions C]
+  [HasDerivedCategory C] [HasDerivedCategory D]
+
+/-- The degree-zero exact/single comparison, with its composite construction cached.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -/
+@[no_expose] def exactSingleComparison (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    DerivedCategory.singleFunctor C 0 ⋙ F.mapDerivedCategory ≅
+      F ⋙ DerivedCategory.singleFunctor D 0 :=
+  F.mapDerivedCategorySingleFunctor 0
+
+/-- The cached exact/single comparison is the canonical localization comparison.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0).
+Proof: this is the defining composite. -/
+theorem exactSingleComparison_def (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    F.exactSingleComparison = F.mapDerivedCategorySingleFunctor 0 := by
+  rfl
+
+/-- The degree-zero exact/homology comparison, with its localization construction cached.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -/
+@[no_expose] def exactH0Comparison (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    DerivedCategory.homologyFunctor C 0 ⋙ F ≅
+      F.mapDerivedCategory ⋙ DerivedCategory.homologyFunctor D 0 :=
+  F.mapDerivedCategoryHomologyFunctorIso 0
+
+/-- The cached exact/homology comparison is the canonical homology comparison.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0).
+Proof: this is the defining localization comparison. -/
+theorem exactH0Comparison_def (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F] [PreservesFiniteColimits F] :
+    F.exactH0Comparison = F.mapDerivedCategoryHomologyFunctorIso 0 := by
+  rfl
+
+variable [Abelian.HasKInjectiveResolutions C]
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in
 /-- The canonical augmentation from `F M[0]` to `RF(M[0])`, natural in `M`.
 Source: Stacks Project, Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -/
-def singleRightDerivedUnit (F : C ⥤ D) [F.Additive] :
+@[no_expose] def singleRightDerivedUnit (F : C ⥤ D) [F.Additive] :
     F ⋙ DerivedCategory.singleFunctor D 0 ⟶
       DerivedCategory.singleFunctor C 0 ⋙ F.rightDerivedFunctor where
   app M := DerivedCategory.Q.map
@@ -263,9 +297,20 @@ def singleRightDerivedUnit (F : C ⥤ D) [F.Additive] :
     exact hu
 
 
+/-- The canonical unit is the localized single-complex comparison followed by the derived unit.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0).
+Proof: this is the defining formula of the canonical natural transformation. -/
+theorem singleRightDerivedUnit_app (F : C ⥤ D) [F.Additive] (M : C) :
+    F.singleRightDerivedUnit.app M =
+      DerivedCategory.Q.map
+        ((HomologicalComplex.singleMapHomologicalComplex F (.up ℤ) 0).inv.app M) ≫
+      F.rightDerivedFunctorUnit.app ((HomotopyCategory.singleFunctor C 0).obj M) := by
+  rfl
+
 /-- The canonical zeroth-homology identification for a left exact functor.
 Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -/
-@[irreducible] def singleRightDerivedH0Iso (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F]
+@[no_expose, irreducible] def singleRightDerivedH0Iso (F : C ⥤ D) [F.Additive]
+    [PreservesFiniteLimits F]
     [EnoughInjectives C] (M : C) :
     (DerivedCategory.homologyFunctor D 0).obj
         (F.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj M)) ≅ F.obj M :=
@@ -283,7 +328,7 @@ theorem singleRightDerivedH0Iso_def (F : C ⥤ D) [F.Additive] [PreservesFiniteL
 
 /-- The canonical zeroth-homology identification after an exact functor.
 Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -/
-@[irreducible] def mapSingleRightDerivedH0Iso
+@[no_expose, irreducible] def mapSingleRightDerivedH0Iso
     {E : Type*} [Category E] [Abelian E] [HasDerivedCategory E]
     (R : C ⥤ D) [R.Additive] [PreservesFiniteLimits R] [EnoughInjectives C]
     (F : D ⥤ E) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
@@ -294,6 +339,64 @@ Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -/
       F.obj (R.obj M) :=
   (F.mapDerivedCategoryHomologyFunctorIso 0).symm.app _ ≪≫
     F.mapIso (R.singleRightDerivedH0Iso M)
+
+/-- The inverse H⁰ identification after an exact functor retains the homology comparison.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0).
+Proof: take the inverse of the composite defining the canonical identification. -/
+theorem mapSingleRightDerivedH0Iso_inv
+    {E : Type*} [Category E] [Abelian E] [HasDerivedCategory E]
+    (R : C ⥤ D) [R.Additive] [PreservesFiniteLimits R] [EnoughInjectives C]
+    (F : D ⥤ E) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (M : C) :
+    (R.mapSingleRightDerivedH0Iso F M).inv =
+      F.map (R.singleRightDerivedH0Iso M).inv ≫
+        F.exactH0Comparison.hom.app
+          (R.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj M)) := by
+  rw [exactH0Comparison_def]
+  delta mapSingleRightDerivedH0Iso
+  rfl
+
+/-- The canonical single/H⁰ comparison, with its construction cached.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -/
+@[no_expose] def singleH0Comparison
+    (E : Type*) [Category E] [Abelian E] [HasDerivedCategory E] :
+    DerivedCategory.singleFunctor E 0 ⋙ DerivedCategory.homologyFunctor E 0 ≅ 𝟭 E :=
+  DerivedCategory.singleFunctorCompHomologyFunctorIso E 0
+
+/-- The cached single/H⁰ comparison is the canonical localization and homology comparison.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0).
+Proof: this is its defining isomorphism. -/
+theorem singleH0Comparison_def
+    (E : Type*) [Category E] [Abelian E] [HasDerivedCategory E] :
+    singleH0Comparison E = DerivedCategory.singleFunctorCompHomologyFunctorIso E 0 := by
+  rfl
+
+/-- The single-object derived unit after an exact functor, with a cached source and target.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0). -/
+@[no_expose] def mapSingleRightDerivedUnit
+    {E : Type*} [Category E] [Abelian E] [HasDerivedCategory E]
+    (R : C ⥤ D) [R.Additive]
+    (F : D ⥤ E) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (M : C) :
+    (DerivedCategory.singleFunctor E 0).obj (F.obj (R.obj M)) ⟶
+      F.mapDerivedCategory.obj
+        (R.rightDerivedFunctor.obj ((DerivedCategory.singleFunctor C 0).obj M)) :=
+  (F.mapDerivedCategorySingleFunctor 0).inv.app (R.obj M) ≫
+    F.mapDerivedCategory.map (R.singleRightDerivedUnit.app M)
+
+/-- The exact-postcomposition unit uses the canonical single comparison and derived unit.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0).
+Proof: this is the defining composite of the cached unit. -/
+theorem mapSingleRightDerivedUnit_def
+    {E : Type*} [Category E] [Abelian E] [HasDerivedCategory E]
+    (R : C ⥤ D) [R.Additive]
+    (F : D ⥤ E) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (M : C) :
+    R.mapSingleRightDerivedUnit F M =
+      F.exactSingleComparison.inv.app (R.obj M) ≫
+        F.mapDerivedCategory.map (R.singleRightDerivedUnit.app M) := by
+  rw [exactSingleComparison_def]
+  rfl
 
 end CategoryTheory.Functor
 
@@ -456,3 +559,36 @@ theorem CategoryTheory.Functor.mapSingleRightDerivedH0Iso_conjugate
       S.mapDerivedCategory.map (R.singleRightDerivedUnit.app X))
     (T.singleRightDerivedUnit.app X) f c
     (R.mapSingleRightDerivedH0Iso S X) (T.singleRightDerivedH0Iso X) hv ht h
+
+/-- Zeroth homology of the cached exact-postcomposition unit is canonically normalized.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0).
+Proof: apply the existing exact-postcomposition normalization to its defining composite. -/
+theorem CategoryTheory.Functor.mapSingleRightDerivedUnit_homology_zero
+    {C D E : Type*} [Category C] [Category D] [Category E]
+    [Abelian C] [Abelian D] [Abelian E]
+    [HasDerivedCategory C] [HasDerivedCategory D] [HasDerivedCategory E]
+    [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]
+    (R : C ⥤ D) [R.Additive] [PreservesFiniteLimits R]
+    (F : D ⥤ E) [F.Additive] [PreservesFiniteLimits F] [PreservesFiniteColimits F]
+    (M : C) :
+    (DerivedCategory.homologyFunctor E 0).map (R.mapSingleRightDerivedUnit F M) ≫
+        (R.mapSingleRightDerivedH0Iso F M).hom =
+      (Functor.singleH0Comparison E).hom.app (F.obj (R.obj M)) := by
+  rw [Functor.mapSingleRightDerivedUnit_def, Functor.exactSingleComparison_def,
+    Functor.singleH0Comparison_def]
+  exact R.rightDerivedFunctorUnit_homology_zero_after_exact F M
+
+/-- The single-object derived unit has the cached canonical single/H⁰ normalization.
+Source: Stacks Tag 05TD (blueprint: lem-kun-right-derived-single-h0).
+Proof: rewrite the cached comparison to the canonical single/homology isomorphism
+and apply the original unit normalization theorem. -/
+theorem CategoryTheory.Functor.singleRightDerivedUnit_homology_zero
+    {C D : Type*} [Category C] [Category D] [Abelian C] [Abelian D]
+    [HasDerivedCategory C] [HasDerivedCategory D]
+    [EnoughInjectives C] [Abelian.HasKInjectiveResolutions C]
+    (F : C ⥤ D) [F.Additive] [PreservesFiniteLimits F] (M : C) :
+    (DerivedCategory.homologyFunctor D 0).map (F.singleRightDerivedUnit.app M) ≫
+        (F.singleRightDerivedH0Iso M).hom =
+      (Functor.singleH0Comparison D).hom.app (F.obj M) := by
+  rw [Functor.singleH0Comparison_def]
+  exact F.rightDerivedFunctorUnit_homology_zero M

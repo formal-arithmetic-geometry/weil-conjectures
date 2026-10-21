@@ -145,6 +145,29 @@ private theorem restriction_underived_mate
     ((ModuleCat.restrictCoextendScalarsAdj.{u + 1, u + 1, u + 1} φ).right_triangle_components
       (M.obj.obj (Opposite.op ((MorphismProperty.Over.pullback @WeaklyEtale ⊤ f).obj U)))).symm
 
+/-- The sectionwise coefficient square, cached with its two explicit composite functor types.
+Source: Stacks Tag 03D6 (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
+@[no_expose] noncomputable def fixedScalarRestrictionDirectImageUnderived
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    lowerStar (ModuleCat.{u + 1} B) f ⋙ Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ ≅
+      Sheaf.restrictScalars (Scheme.ProEt.topology X) φ ⋙ lowerStar (ModuleCat.{u + 1} A) f :=
+  Iso.refl _
+
+/-- Postcomposing the sectionwise square retains the actual section map.
+Source: Stacks Tag 03D6 (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
+Proof: the square is the identity on each direct-image module. -/
+theorem fixedScalarRestrictionDirectImageUnderived_app_comp
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B))
+    {Z : Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)}
+    (a : (Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).obj
+      ((lowerStar (ModuleCat.{u + 1} B) f).obj G) ⟶ Z) :
+    (fixedScalarRestrictionDirectImageUnderived φ f).inv.app G ≫ a = a := by
+  change 𝟙 _ ≫ a = a
+  exact Category.id_comp a
+
 attribute [local irreducible] upperStar
 
 /-- The canonical inverse-image/restriction square, with its published normalization.
@@ -158,7 +181,7 @@ noncomputable abbrev fixedScalarRestrictionPullback
 /-- The inverse-direction direct-image comparison is the mate of the canonical square.
 Source: Stacks Tags 0D6E and 07A6
 (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
-noncomputable def fixedScalarRestrictionDirectImageMap
+@[no_expose] noncomputable def fixedScalarRestrictionDirectImageMap
     {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
     {X Y : Scheme.{u}} (f : X ⟶ Y) :
     R((f)_*[ModuleCat.{u + 1} B]) ⋙
@@ -355,6 +378,43 @@ private theorem restriction_mate_eq
 section ScalarModels
 set_option backward.isDefEq.respectTransparency false
 set_option backward.isDefEq.respectTransparency.types false
+set_option backward.defeqAttrib.useBackward true in
+set_option backward.isDefEq.respectTransparency false in
+set_option backward.isDefEq.respectTransparency.types false in
+/-- The coefficient mate intertwines the canonical chain-level right-derived units.
+Source: Stacks Tags 0D6E and 07A6
+(blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
+Proof: apply the generic derived-mate factorization, replace the derived mate by the
+published comparison, and replace its ordinary mate by the sectionwise identity. -/
+theorem fixedScalarRestrictionDirectImageMap_factors
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] (φ : A →+* B)
+    {X Y : Scheme.{u}} (f : X ⟶ Y)
+    (K : CochainComplex (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) ℤ) :
+    (Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).mapDerivedCategory.map
+        ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctorUnit.app
+          ((HomotopyCategory.quotient _ _).obj K)) ≫
+      (fixedScalarRestrictionDirectImageMap φ f).app (DerivedCategory.Q.obj K) ≫
+      (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor.map
+        ((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapDerivedCategoryFactors.hom.app
+          K) =
+    (Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).mapDerivedCategoryFactors.hom.app
+        (((lowerStar (ModuleCat.{u + 1} B) f).mapHomologicalComplex (.up ℤ)).obj K) ≫
+      DerivedCategory.Q.map ((NatTrans.mapHomologicalComplex
+        (fixedScalarRestrictionDirectImageUnderived φ f).hom (.up ℤ)).app K) ≫
+      (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctorUnit.app
+        ((HomotopyCategory.quotient _ _).obj
+          (((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapHomologicalComplex
+            (.up ℤ)).obj K)) := by
+  have h := simple_derived_mate_factors
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} B) f)
+    (upperStarLowerStarAdjunction (ModuleCat.{u + 1} A) f)
+    (upperStarRestrictScalarsIso φ f) K
+  have hm := NatTrans.congr_app (restriction_mate_eq φ f) (DerivedCategory.Q.obj K)
+  unfold Functor.mapDerivedCategorySquareIso at hm
+  erw [← hm] at h
+  rw [restriction_underived_mate] at h
+  simpa only [fixedScalarRestrictionDirectImageUnderived, Iso.refl_hom] using h
+
 private noncomputable def scalarDiagram {C : Type (u + 1)} [Category.{u} C]
     (A : Type (u + 1)) [Ring A] :
     PresheafOfModules.{u + 1} ((Functor.const Cᵒᵖ).obj (RingCat.of A)) ⥤
@@ -727,7 +787,7 @@ theorem fixedScalarRestrictionDirectImageMap_isIso
 /-- The forward-direction canonical comparison, with the K-injective normalization
 inherited from the named mate theorem. Source: Stacks Tag 0D6E
 (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars). -/
-noncomputable def fixedScalarRestrictionDirectImage
+@[no_expose] noncomputable def fixedScalarRestrictionDirectImage
     {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
     (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
     Sheaf.derivedRestrictScalars (Scheme.ProEt.topology X) φ ⋙
@@ -736,6 +796,16 @@ noncomputable def fixedScalarRestrictionDirectImage
         Sheaf.derivedRestrictScalars (Scheme.ProEt.topology Y) φ :=
   letI := fixedScalarRestrictionDirectImageMap_isIso φ f
   (asIso (fixedScalarRestrictionDirectImageMap φ f)).symm
+
+/-- The inverse of the forward coefficient comparison is the published derived mate.
+Source: Stacks Tag 0D6E (blueprint: lem-weil-proetale-direct-image-restriction-of-scalars).
+Proof: the forward comparison is the symmetric isomorphism associated to this mate. -/
+theorem fixedScalarRestrictionDirectImage_inv
+    {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B]
+    (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) :
+    (fixedScalarRestrictionDirectImage φ f).inv =
+      fixedScalarRestrictionDirectImageMap φ f := by
+  rfl
 
 set_option backward.isDefEq.respectTransparency false in
 set_option backward.isDefEq.respectTransparency.types false in

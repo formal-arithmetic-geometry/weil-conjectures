@@ -1,250 +1,224 @@
 {
-  "id": "lem-pod-constant-tower-transition",
-  "kind": "statement",
-  "title": "Degree-zero direct-image comparison is compatible with coefficient restriction",
-  "statement": "Let $f:X\\to Y$ be a morphism of schemes, $\\varphi:A\\to B$ a homomorphism of finite commutative rings, $F$ a sheaf of $A_X$-modules and $G$ a sheaf of $B_X$-modules on the small pro-etale sites [def-weil-pbc-proetale-site]. Let $u:F\\to\\operatorname{Res}_\\varphi G$ be an $A_X$-linear morphism. Use the K-injective derived direct images $Rf_*^A,Rf_*^B$ and the canonical restriction-of-scalars comparison $c: Rf_*^A\\operatorname{Res}_\\varphi\\xrightarrow{\\sim}\\operatorname{Res}_\\varphi Rf_*^B$ of [lem-weil-proetale-direct-image-restriction-of-scalars]. Under the degree-zero augmentation isomorphisms $f_*F\\cong\\mathcal H^0(Rf_*^A(F[0]))$ and $f_*G\\cong\\mathcal H^0(Rf_*^B(G[0]))$ supplied by [lem-weil-pbc-left-exact-injective-resolution-degree-zero], the morphism\n$$\\mathcal H^0\\bigl(c_{G[0]}\\circ Rf_*^A(u[0])\\bigr):\\mathcal H^0(Rf_*^A(F[0]))\\longrightarrow\\mathcal H^0(\\operatorname{Res}_\\varphi Rf_*^B(G[0]))$$\nis the underived map $f_*u:f_*F\\to f_*\\operatorname{Res}_\\varphi G=\\operatorname{Res}_\\varphi f_*G$ [def-weil-proetale-module-direct-image]. Here restriction of scalars is exact, so commutes with $\\mathcal H^0$, and the augmentation identifications are those obtained from nonnegative injective resolutions. Thus the comparison retains the actual section map, not merely its source and target objects.",
-  "source": {
+ "id": "lem-pod-constant-tower-transition",
+ "kind": "statement",
+ "title": "Degree-zero direct-image comparison is compatible with coefficient restriction",
+ "statement": "Let $f:X\\to Y$ be a morphism of schemes, $\\varphi:A\\to B$ a homomorphism of finite commutative rings, $F$ a sheaf of $A_X$-modules and $G$ a sheaf of $B_X$-modules on the small pro-etale sites [def-weil-pbc-proetale-site]. Let $u:F\\to\\operatorname{Res}_\\varphi G$ be an $A_X$-linear morphism. Use the K-injective derived direct images $Rf_*^A,Rf_*^B$ and the canonical restriction-of-scalars comparison $c: Rf_*^A\\operatorname{Res}_\\varphi\\xrightarrow{\\sim}\\operatorname{Res}_\\varphi Rf_*^B$ of [lem-weil-proetale-direct-image-restriction-of-scalars]. Under the degree-zero augmentation isomorphisms $f_*F\\cong\\mathcal H^0(Rf_*^A(F[0]))$ and $f_*G\\cong\\mathcal H^0(Rf_*^B(G[0]))$ supplied by [lem-weil-pbc-left-exact-injective-resolution-degree-zero], the morphism\n$$\\mathcal H^0\\bigl(c_{G[0]}\\circ Rf_*^A(u[0])\\bigr):\\mathcal H^0(Rf_*^A(F[0]))\\longrightarrow\\mathcal H^0(\\operatorname{Res}_\\varphi Rf_*^B(G[0]))$$\nis the underived map $f_*u:f_*F\\to f_*\\operatorname{Res}_\\varphi G=\\operatorname{Res}_\\varphi f_*G$ [def-weil-proetale-module-direct-image]. Here restriction of scalars is exact, so commutes with $\\mathcal H^0$, and the augmentation identifications are those obtained from nonnegative injective resolutions. Thus the comparison retains the actual section map, not merely its source and target objects.",
+ "source": {
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TD (lemma-left-exact-higher-derived), canonical F -> R^0F; combined with the explicitly stated K-injective representative of lem-weil-proetale-direct-image-restriction-of-scalars. The coefficient-comparison square is written by the worker."
+ },
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
+  "def-weil-proetale-module-direct-image"
+ ],
+ "proof": [
+  {
+   "text": "Write R=f_*^B, T=f_*^A, and r,s for exact scalar restriction on X,Y. The recorded coefficient comparison is inverse to the derived mate m. The underived mate is the identity R s = r T, because both direct images act by the same sectionwise pullback. Apply the proved derived-mate factorization on a complex K: s_D(eta_R(K)) followed by m and RT of the localization comparison equals the localization comparison for s followed by eta_T(rK).",
+   "uses": [
+    "lem-weil-proetale-direct-image-restriction-of-scalars"
+   ],
+   "elementary": false,
+   "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 05TD (lemma-left-exact-higher-derived), canonical F -> R^0F; combined with the explicitly stated K-injective representative of lem-weil-proetale-direct-image-restriction-of-scalars. The coefficient-comparison square is written by the worker."
+    "place": "Tag 05TD (lemma-left-exact-higher-derived), canonical degree-zero augmentation; adjunction-mate normalization of the recorded coefficient comparison."
+   }
   },
-  "stmt_deps": [
-    "def-weil-pbc-proetale-site",
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "def-weil-proetale-module-direct-image"
-  ],
-  "proof": [
-    {
-      "text": "Use the small skeleton and coefficient universe of [def-weil-pbc-proetale-site]. Applied to each constant commutative ring sheaf, [prop-pur-kinjective-resolutions-exist] gives Grothendieck module categories and K-injective resolutions for all complexes. They have enough injectives by [lem-sp-grothendieck-enough-injectives]. Part (1) of [lem-weil-pbc-left-exact-injective-resolution-degree-zero] therefore supplies ordinary injective resolutions $s:F[0]\\to L$, $a:G[0]\\to J$, and $b:(\\operatorname{Res}_\\varphi G)[0]\\to I$, all zero in negative degrees. By [lem-weil-pbc-bounded-below-injectives-kinjective], $L,J,I$ are K-injective. Write $r,s_Y$ for restriction of scalars on $X,Y$, respectively, to distinguish it from the augmentation $s$. By [lem-weil-proetale-direct-image-restriction-of-scalars], these functors are exact and $r(a)$ is a quasi-isomorphism.",
-      "uses": [
-        "def-weil-pbc-proetale-site",
-        "prop-pur-kinjective-resolutions-exist",
-        "lem-sp-grothendieck-enough-injectives",
-        "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-        "lem-weil-pbc-bounded-below-injectives-kinjective",
-        "lem-weil-proetale-direct-image-restriction-of-scalars"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tags 013K (lemma-injective-resolutions-exist), 070J (lemma-bounded-below-injectives-K-injective), and Injectives 079H/079P; applied on the chosen small ringed sites"
-      }
-    },
-    {
-      "text": "By [lem-weil-pbc-kinjective-hom-derived], the derived morphisms $Qb\\,(Qr(a))^{-1}:QrJ\\to QI$ and $Qb\\,Q(u[0])\\,(Qs)^{-1}:QL\\to QI$ lift to chain maps $v:rJ\\to I$ and $h:L\\to I$. The same bijection into the K-injective target $I$ shows $v\\,r(a)$ is homotopic to $b$ and $hs$ is homotopic to $b\\,u[0]$. Each pair consists of maps from a complex concentrated in degree zero to $I$. Its possible homotopy has its only relevant component in $I^{-1}=0$, so the degree-zero maps are actually equal; the other degrees of these source complexes vanish. Thus $v\\,r(a)=b$ and $hs=b\\,u[0]$ as chain maps. Since $b$ and $r(a)$ are quasi-isomorphisms, $v$ is a quasi-isomorphism (apply cohomology and cancel the isomorphism induced by $r(a)$). Consequently $v:rJ\\to I$ is a K-injective resolution, although $rJ$ need not be K-injective.",
-      "uses": [
-        "lem-weil-pbc-kinjective-hom-derived"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 070I (lemma-K-injective), morphisms into a K-injective target; the subsequent homotopy equation is written explicitly"
-      }
-    },
-    {
-      "text": "The functors $f_*^A,f_*^B$ are additive and left exact by [lem-weil-proetale-module-direct-image-left-exact]. Apply part (2) of [lem-weil-pbc-left-exact-injective-resolution-degree-zero] to the three nonnegative resolutions. Denote the resulting isomorphisms by $\\alpha_F:f_*F\\to\\mathcal H^0(f_*^A L)$, $\\alpha_G:f_*G\\to\\mathcal H^0(f_*^B J)$ and $\\alpha_r:f_*rG\\to\\mathcal H^0(f_*^A I)$. Each is induced by applying $f_*$ to the corresponding augmentation. Direct image and coefficient restriction commute on objects and maps by the formula $(f_*M)(V)=M(V\\times_YX)$ in [def-weil-proetale-module-direct-image]: restriction changes only the scalar action, and both actions send a local coefficient through the same constant-ring homomorphism. Hence $f_*^A r=s_Yf_*^B$ on complexes. Exactness of $s_Y$ in [lem-weil-proetale-direct-image-restriction-of-scalars] identifies $\\mathcal H^0(f_*^A rJ)$ with $s_Y\\mathcal H^0(f_*^B J)$; its augmentation is $s_Y\\alpha_G$, abbreviated $\\alpha'_G$.",
-      "uses": [
-        "lem-weil-proetale-module-direct-image-left-exact",
-        "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-        "def-weil-proetale-module-direct-image",
-        "lem-weil-proetale-direct-image-restriction-of-scalars"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 05TD (lemma-left-exact-higher-derived), especially part (3); Sites, Modules 03D6 (definition-pushforward)"
-      }
-    },
-    {
-      "text": "Compute derived morphisms using [lem-sf-kinjective-derived-map-computation] with resolutions $s,b$. Its map formula says $Rf_*^A(u[0])$ is represented by $Q(f_*^A h)$. To compute $c$ at $G[0]$, apply [lem-sf-normalized-derived-comparison-common-resolution] with its source functors $F=f_*^A$, $G=f_*^B$, its exact functors $r,s_Y$, and its successive resolutions $a:G[0]\\to J$, $v:rJ\\to I$. Existence of resolutions was established in Step 1 and the equality $f_*^A r=s_Yf_*^B$ in Step 3. Its normalization hypothesis is exactly the inverse-on-resolutions normalization in [lem-weil-proetale-direct-image-restriction-of-scalars]. Since its composite resolution is $v\\,r(a)=b$, the conclusion says that, under the canonical resolution identifications, $c_{G[0]}$ is $Q(f_*^A v)^{-1}:Q(f_*^A I)\\to Q(f_*^A rJ)$. In particular this inverse exists. Thus the composite in the item is represented by $Q(f_*^A v)^{-1}Q(f_*^A h)$. This calculation uses no claim that restriction of scalars preserves K-injectivity.",
-      "uses": [
-        "lem-sf-kinjective-derived-map-computation",
-        "lem-sf-normalized-derived-comparison-common-resolution",
-        "lem-weil-proetale-direct-image-restriction-of-scalars"
-      ],
-      "elementary": false,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 070Y (lemma-K-injective-defined), through the two cited arbitrary-resolution computation statements and the explicitly normalized coefficient comparison"
-      }
-    },
-    {
-      "text": "Put $V=\\mathcal H^0(f_*^A v)$ and $H=\\mathcal H^0(f_*^A h)$. The strict chain-map equalities in Step 2 give\n$$V\\alpha'_G=\\alpha_r,\\qquad H\\alpha_F=\\alpha_r\\,f_*u.$$\nIndeed compose each proposed equality with the inclusion of degree-zero cycles into the degree-zero term. The resulting equations are respectively $f_*v^0\\,f_*r(a)^0=f_*b^0$ and $f_*h^0\\,f_*s^0=f_*b^0\\,f_*u$, exactly the degree-zero components of those chain-map equalities. All relevant complexes have zero degree-minus-one term, so their degree-zero cohomology is their kernel of $d^0$ and that inclusion is monic. This proves both equations without an additional naturality assertion. By Step 4, $V$ is invertible. Therefore\n$$\\mathcal H^0(c_{G[0]}\\circ Rf_*^A(u[0]))\\,\\alpha_F=V^{-1}H\\alpha_F=V^{-1}\\alpha_r f_*u=\\alpha'_G f_*u.$$\nBoth augmentation maps are isomorphisms by Step 3, so this is precisely the asserted equality with the underived $f_*u$ under the prescribed identifications.",
-      "uses": [],
-      "elementary": true,
-      "source": {
-        "document": "literature/stacks-project/derived.tex",
-        "place": "Tag 05TD (lemma-left-exact-higher-derived), explicit kernel and cancellation calculation from Steps 2--4"
-      }
-    }
-  ],
-  "proof_deps": [
-    "def-weil-pbc-proetale-site",
-    "def-weil-proetale-module-direct-image",
-    "lem-sf-kinjective-derived-map-computation",
-    "lem-sf-normalized-derived-comparison-common-resolution",
-    "lem-sp-grothendieck-enough-injectives",
-    "lem-weil-pbc-bounded-below-injectives-kinjective",
-    "lem-weil-pbc-kinjective-hom-derived",
-    "lem-weil-pbc-left-exact-injective-resolution-degree-zero",
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "lem-weil-proetale-module-direct-image-left-exact",
-    "prop-pur-kinjective-resolutions-exist"
-  ],
-  "proof_origin": {
-    "by": "agent",
+  {
+   "text": "Specialize this factorization to the complex G[0]. The inverse termwise-single comparison for a composite R s is the inverse single comparison for s followed by s of that for R; check degree zero by cancelling the single-object isomorphisms, and all other degrees vanish. Use the exact functor single/localization equations and naturality of eta_T to obtain v_G followed by m at G[0] and RT of the single-restriction comparison equals single of the cached underived coefficient square followed by the canonical single-object unit for T at rG. Here v_G is the inverse single comparison for s followed by s_D of the canonical single-object unit for R.",
+   "uses": [],
+   "elementary": true,
+   "source": {
     "document": "literature/stacks-project/derived.tex",
-    "place": "Tags 05TD, 013K, 070I, 070J, 070Y; explicit coefficient-comparison/augmentation calculation serving main-20261015 prop-cohomological-finiteness proof Step 7."
+    "place": "Tag 05TD (lemma-left-exact-higher-derived), canonical degree-zero augmentation; adjunction-mate normalization of the recorded coefficient comparison."
+   }
   },
-  "mathlib_searches": [
-    {
-      "tool": "leanfinder",
-      "query": "The canonical degree zero derived direct image isomorphism is natural in a map of module sheaves with restriction of scalars along a ring homomorphism",
-      "results": "SheafOfModules.pushforwardNatIso and pushforwardCongr plus free/pullback naturality; these concern underived sheaf pushforward, not the canonical H^0 comparison across coefficient restriction.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leansearch",
-      "query": "degree zero right derived direct image commutes with coefficient restriction and maps of sheaves",
-      "results": "CategoryTheory.Functor.rightDerivedZeroIsoSelf and InjectiveResolution.toRightDerivedZero'_naturality_assoc concern a fixed functor; no compatibility with derived pro-etale restriction-of-scalars comparison. Read RightDerived.lean:280-293.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"toRightDerivedZero\"",
-      "results": "12 hits: generic augmentation, naturality and degree-zero isomorphism declarations. No changing-coefficient comparison.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "grep",
-      "query": "toRightDerivedZero|restrictionOfScalars",
-      "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean:36,263,273,275,277; inspected naturality at 280-293. Fixed-category augmentation only. Subdirectory: CategoryTheory/Abelian.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "loogle",
-      "query": "\"rightDerivedZeroIsoSelf\"",
-      "results": "10 hits for the generic isomorphism of a fixed left exact functor with its zeroth derived functor; no coefficient-change compatibility.",
-      "date": "2026-10-17",
-      "verdict": "no match"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "degree zero derived direct image comparison compatible with restriction of scalars",
-      "results": "PresheafOfModules.restrictScalarsCompToPresheaf; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app; CategoryTheory.instIsIsoAppToRightDerivedZero",
-      "date": "2026-10-17",
-      "verdict": "no match: generic fixed-functor augmentations or localization comparisons do not state the specified pro-etale coefficient-comparison equality on H^0"
-    },
-    {
-      "tool": "loogle",
-      "query": "rightDerivedZeroIsoSelf, restrictionOfScalars",
-      "results": "; loogle: unknown identifier 'rightDerivedZeroIsoSelf'",
-      "date": "2026-10-17",
-      "verdict": "no match: generic fixed-functor augmentations or localization comparisons do not state the specified pro-etale coefficient-comparison equality on H^0"
-    },
-    {
-      "tool": "leansearch",
-      "query": "degree zero right derived direct image commutes with coefficient restriction",
-      "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf.congr_simp; CategoryTheory.Functor.rightDerivedZeroIsoSelf; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
-      "date": "2026-10-17",
-      "verdict": "no match: generic fixed-functor augmentations or localization comparisons do not state the specified pro-etale coefficient-comparison equality on H^0"
-    },
-    {
-      "tool": "leanfinder",
-      "query": "natural augmentation from a left exact functor to zeroth right derived functor compatible with change of rings comparison",
-      "results": "CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.Functor.fromLeftDerivedZero; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc",
-      "date": "2026-10-17",
-      "verdict": "no match: generic fixed-functor augmentations or localization comparisons do not state the specified pro-etale coefficient-comparison equality on H^0"
-    }
-  ],
-  "mathlib_match": null,
-  "status": "split",
-  "created": {
-    "by": "worker",
-    "item": "lem-pod-connected-constant-h0",
-    "date": "2026-10-17",
-    "group": "Q113"
+  {
+   "text": "Since m and the single-restriction comparison are isomorphisms, cancel them to identify the T-unit at rG followed by RT of the inverse single comparison and the forward coefficient comparison with v_G. Naturality of the T single-object unit on u:F -> rG then gives the augmentation square: the T-unit at F followed by the displayed derived morphism equals single(f_*u) followed by v_G.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD (lemma-left-exact-higher-derived), canonical degree-zero augmentation; adjunction-mate normalization of the recorded coefficient comparison."
+   }
   },
-  "chapter": "sec-poincare-duality",
-  "unit": "sk-lem-finite",
-  "blueprint": {
-    "from": {
-      "node": "prop-cohomological-finiteness",
-      "place": "Step 7, passage from the finite-level derived direct-image tower to the coefficient reduction maps on degree-zero sections",
-      "via": []
-    },
-    "same_as": [],
-    "is": null
-  },
-  "split_report": {
-    "date": "2026-10-17",
-    "item": "lem-pod-constant-tower-transition",
-    "worker": "stage1",
-    "summary": "Statement and statement dependencies unchanged. Use three nonnegative resolutions, lift the two maps into a K-injective target, compute the coefficient comparison on these resolutions using the existing normalized-comparison theorem, and prove the two augmentation equations on degree-zero cycles before cancellation. All inputs are existing nodes; no new nodes.",
-    "blueprint": "Current main-20261015 prop-cohomological-finiteness proof Step 7 (constant sheaf), via the finite-level transition identification required in lem-pod-connected-constant-h0 Step 6. This auxiliary node supplies that identification without changing the unit route.",
-    "tool_uses": [
-      {
-        "node": "prop-pur-kinjective-resolutions-exist",
-        "why": "Generic small ringed-site Grothendieck and K-injective existence theorem supplies the hypotheses of the ordinary and unbounded resolution calculations; this unit has no such categorical existence theorem."
-      },
-      {
-        "node": "lem-weil-proetale-module-direct-image-left-exact",
-        "why": "Generic left exactness of pro-etale direct image is needed for the augmentation calculation; this unit has no direct-image exactness theorem."
-      },
-      {
-        "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
-        "why": "The supplied finite-ring comparison and its inverse-on-resolutions normalization are the very comparison named in the item; this unit has no coefficient-comparison construction."
-      },
-      {
-        "node": "lem-sf-kinjective-derived-map-computation",
-        "why": "Generic arbitrary-resolution formula computes the derived map of u on the three chosen resolutions; this unit contains no resolution-map computation theorem."
-      },
-      {
-        "node": "lem-sf-normalized-derived-comparison-common-resolution",
-        "why": "Generic normalized-comparison formula identifies the supplied comparison at G[0] through a and v, without assuming rJ K-injective; this unit contains no such formula."
-      }
-    ]
-  },
-  "tool_uses": [
-    "prop-pur-kinjective-resolutions-exist",
-    "lem-weil-proetale-module-direct-image-left-exact",
-    "lem-weil-proetale-direct-image-restriction-of-scalars",
-    "lem-sf-kinjective-derived-map-computation",
-    "lem-sf-normalized-derived-comparison-common-resolution"
-  ],
-  "reviewed": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-cc-N3-61641c4e6",
-    "group": "N3",
-    "result": "pass",
-    "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-61641c4e6 (reviewer sub-agent of L); spot-checked: I read the full delivery: one commit with the item lem-pod-constant-tower-transition and its report. There are no new nodes, and the statement and stmt_deps are unchanged. I read every cited statement, Stacks 05TD (derived.tex l.5565, part 3), 070I (l.9632), 03D6 (sites-modules l.1146) and blueprint main-20261015 prop-cohomological-finiteness Step 7. Statement: the coefficient categories are the pro-étale A_X/B_X/A_Y module sheaves of def-weil-pbc-proetale-site, and c is exactly the restriction-of-scalars comparison with its stated normalization. I tested phi=id (it reduces to ordinary augmentation naturality), u=0, F=0, G=0, X empty, and nonflat phi such as Z/4->Z/2; the statement is true in each. Step 1: the small skeleton, Grothendieck/K-injective existence, enough injectives and nonnegative resolutions all apply, and L, J, I are K-injective. Step 2: the lifts v and h come from the K-injective Hom bijection. A homotopy from a complex concentrated in degree 0 into I has its only relevant component in I^{-1}=0, so v r(a)=b and hs=b u[0] hold strictly, and v is a quasi-isomorphism. Step 3: f_*^A Res = Res f_*^B on the nose, because both A_Y-actions extend the same constant-presheaf map, which is unique by sheafification. Step 4: every hypothesis of lem-sf-normalized-derived-comparison-common-resolution holds (exact r and s, Fr=sG, the normalization clause, w=b), so c_{G[0]} = Q(f_*v)^{-1}. The map computation gives Rf_*(u[0]) = Q(f_*h). Identifying Rf_* with (RF, eta) goes through def-sfb and lem-weil-pbc-kinjective-total-derived, the same pattern already accepted in review N7. Step 5: the degree-0 cycle calculation is elementary and correct for any choice of resolutions. proof_deps equals the union of uses. Route: sk-def-sf-operations is reached transitively from sk-lem-finite; the only off-route statement is lem-weil-proetale-direct-image-restriction-of-scalars, which the item is about, so I accept all five declared tool_uses. Duplicate search (lem-coef-finite-direct-image, lem-weil-compact-support-reduction-tower-functor, lem-pur-completed-coefficient-pushforward-comparison, lem-sf-compact-support-restriction-of-scalars) found nothing that states this. One cosmetic point, left unfixed: Step 1's source.place names Injectives tags under a derived.tex document. No fixes were written."
-  },
-  "lean": {
-    "module": "Sheaf.Paper.ConstantTowerTransition",
-    "declaration": "AlgebraicGeometry.ProEtale.constantTowerTransition",
-    "declarations": [
-      "AlgebraicGeometry.ProEtale.constantTowerTransitionAugmentation",
-      "AlgebraicGeometry.ProEtale.constantTowerTransition"
-    ],
-    "file": "lean/Sheaf/Paper/ConstantTowerTransition.lean",
-    "statement": "theorem constantTowerTransition {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) (G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) (u : F ⟶ (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).obj G) : (constantTowerTransitionAugmentation A f F).hom ≫ (DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)) 0).map ((lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor.map ((DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) 0).map u) ≫ (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor.map (((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapDerivedCategorySingleFunctor 0).inv.app G) ≫ (fixedScalarRestrictionDirectImage φ f).hom.app ((DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) 0).obj G)) = (lowerStar (ModuleCat.{u + 1} A) f).map u ≫ (Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).map (constantTowerTransitionAugmentation B f G).hom ≫ ((Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).mapDerivedCategoryHomologyFunctorIso 0).hom.app ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) 0).obj G))",
-    "branch": "newtargets-dag",
-    "by": "Q130",
-    "date": "2026-10-17",
-    "existing": false,
-    "note": "f_* is rendered by lowerStar (ModuleCat A) f in the fixed-scalar presentation forced by the recorded comparison fixedScalarRestrictionDirectImage, the counterpart of the unchanged intrinsic record AlgebraicGeometry.Scheme.proEtaleConstantModuleDirectImage for def-weil-proetale-module-direct-image. The intrinsic record retains its sectionwise direct image and rho-action; it is not rebound or repaired here. The lowerStar implementation is in WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs; the FiniteCoefficient module is a compatibility re-export."
-  },
-  "reviewed_lean": {
-    "date": "2026-10-17",
-    "by": "L",
-    "reviewer": "NT-stage2-cc-c9f6f0c1b",
-    "group": "Q130",
-    "result": "pass",
-    "note": "Checked every hypothesis and conclusion clause against the node and its deps: arbitrary f; finite commutative rings A,B in Type (u+1), the universe of the recorded comparison; fixed-scalar module sheaves on Mathlib Scheme.ProEt, with lean.note; c is exactly fixedScalarRestrictionDirectImage at G[0]. Augmentation helper is real canonical data (homologyRightDerivedFunctorObjSingleFunctorIso then rightDerivedZeroIsoSelf, inverted). The directions of mapDerivedCategorySingleFunctor.inv and mapDerivedCategoryHomologyFunctorIso.hom are correct. The conclusion is an equality of maps, so the section map f_*u is kept. Edge cases phi=id, u=0, F=0, G=0, X empty, nonflat Z/4->Z/2 are covered. Proof is sorry only. Docstrings carry source and blueprint. lean.statement is verbatim. Only the node's lean field changed; no new nodes. nt_compile --json exit 0, no messages (sorry warnings are off in the lakefile), 18-22 s. Second-reading section has the standard post-2026-10-17 text, accepted. Cosmetic only: Step 1 source.place lists Injectives tags under derived.tex."
+  {
+   "text": "Apply the canonical zeroth-homology unit identities, including exact postcomposition by s, from lem-kun-right-derived-single-h0. They identify the two vertical maps of the augmentation square with the single/H0 isomorphisms after the exact canonical H0 identifications used in the statement. Apply H0, cancel these isomorphisms, and use their naturality to conclude that the normalized morphism is f_*u. Expanding the exact-postcomposition H0 isomorphism yields precisely the stated augmentation and restriction/homology factors.",
+   "uses": [
+    "lem-kun-right-derived-single-h0"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TD (lemma-left-exact-higher-derived), canonical degree-zero augmentation; adjunction-mate normalization of the recorded coefficient comparison."
+   }
   }
+ ],
+ "proof_deps": [
+  "lem-weil-proetale-direct-image-restriction-of-scalars",
+  "lem-kun-right-derived-single-h0"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tag 05TD (3). H3 proves the generic single-complex composition calculation privately, specializes the existing derived-mate factorization, and applies the canonical unit/H0 identities. The cached underived coefficient square retains its two functor types and is characterized sectionwise by the identity. No split-off theorem is used; statements and the blueprint unit route are unchanged."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The canonical degree zero derived direct image isomorphism is natural in a map of module sheaves with restriction of scalars along a ring homomorphism",
+   "results": "SheafOfModules.pushforwardNatIso and pushforwardCongr plus free/pullback naturality; these concern underived sheaf pushforward, not the canonical H^0 comparison across coefficient restriction.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "degree zero right derived direct image commutes with coefficient restriction and maps of sheaves",
+   "results": "CategoryTheory.Functor.rightDerivedZeroIsoSelf and InjectiveResolution.toRightDerivedZero'_naturality_assoc concern a fixed functor; no compatibility with derived pro-etale restriction-of-scalars comparison. Read RightDerived.lean:280-293.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"toRightDerivedZero\"",
+   "results": "12 hits: generic augmentation, naturality and degree-zero isomorphism declarations. No changing-coefficient comparison.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "toRightDerivedZero|restrictionOfScalars",
+   "results": "Mathlib/CategoryTheory/Abelian/RightDerived.lean:36,263,273,275,277; inspected naturality at 280-293. Fixed-category augmentation only. Subdirectory: CategoryTheory/Abelian.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"rightDerivedZeroIsoSelf\"",
+   "results": "10 hits for the generic isomorphism of a fixed left exact functor with its zeroth derived functor; no coefficient-change compatibility.",
+   "date": "2026-10-17",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "degree zero derived direct image comparison compatible with restriction of scalars",
+   "results": "PresheafOfModules.restrictScalarsCompToPresheaf; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc; AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app; CategoryTheory.instIsIsoAppToRightDerivedZero",
+   "date": "2026-10-17",
+   "verdict": "no match: generic fixed-functor augmentations or localization comparisons do not state the specified pro-etale coefficient-comparison equality on H^0"
+  },
+  {
+   "tool": "loogle",
+   "query": "rightDerivedZeroIsoSelf, restrictionOfScalars",
+   "results": "; loogle: unknown identifier 'rightDerivedZeroIsoSelf'",
+   "date": "2026-10-17",
+   "verdict": "no match: generic fixed-functor augmentations or localization comparisons do not state the specified pro-etale coefficient-comparison equality on H^0"
+  },
+  {
+   "tool": "leansearch",
+   "query": "degree zero right derived direct image commutes with coefficient restriction",
+   "results": "CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc; CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf.congr_simp; CategoryTheory.Functor.rightDerivedZeroIsoSelf; CategoryTheory.InjectiveResolution.toRightDerivedZero_eq",
+   "date": "2026-10-17",
+   "verdict": "no match: generic fixed-functor augmentations or localization comparisons do not state the specified pro-etale coefficient-comparison equality on H^0"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "natural augmentation from a left exact functor to zeroth right derived functor compatible with change of rings comparison",
+   "results": "CategoryTheory.Functor.toRightDerivedZero; CategoryTheory.Functor.fromLeftDerivedZero; CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison; CategoryTheory.Functor.mapDerivedCategoryFactorsh; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc; CategoryTheory.Functor.rightDerivedZeroIsoSelf; CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_assoc",
+   "date": "2026-10-17",
+   "verdict": "no match: generic fixed-functor augmentations or localization comparisons do not state the specified pro-etale coefficient-comparison equality on H^0"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-pod-connected-constant-h0",
+  "date": "2026-10-17",
+  "group": "Q113"
+ },
+ "chapter": "sec-poincare-duality",
+ "unit": "sk-lem-finite",
+ "blueprint": {
+  "from": {
+   "node": "prop-cohomological-finiteness",
+   "place": "Step 7, passage from the finite-level derived direct-image tower to the coefficient reduction maps on degree-zero sections",
+   "via": []
+  },
+  "same_as": [],
+  "is": null
+ },
+ "split_report": {
+  "date": "2026-10-17",
+  "item": "lem-pod-constant-tower-transition",
+  "worker": "stage1",
+  "summary": "Statement and statement dependencies unchanged. Use three nonnegative resolutions, lift the two maps into a K-injective target, compute the coefficient comparison on these resolutions using the existing normalized-comparison theorem, and prove the two augmentation equations on degree-zero cycles before cancellation. All inputs are existing nodes; no new nodes.",
+  "blueprint": "Current main-20261015 prop-cohomological-finiteness proof Step 7 (constant sheaf), via the finite-level transition identification required in lem-pod-connected-constant-h0 Step 6. This auxiliary node supplies that identification without changing the unit route.",
+  "tool_uses": [
+   {
+    "node": "prop-pur-kinjective-resolutions-exist",
+    "why": "Generic small ringed-site Grothendieck and K-injective existence theorem supplies the hypotheses of the ordinary and unbounded resolution calculations; this unit has no such categorical existence theorem."
+   },
+   {
+    "node": "lem-weil-proetale-module-direct-image-left-exact",
+    "why": "Generic left exactness of pro-etale direct image is needed for the augmentation calculation; this unit has no direct-image exactness theorem."
+   },
+   {
+    "node": "lem-weil-proetale-direct-image-restriction-of-scalars",
+    "why": "The supplied finite-ring comparison and its inverse-on-resolutions normalization are the very comparison named in the item; this unit has no coefficient-comparison construction."
+   },
+   {
+    "node": "lem-sf-kinjective-derived-map-computation",
+    "why": "Generic arbitrary-resolution formula computes the derived map of u on the three chosen resolutions; this unit contains no resolution-map computation theorem."
+   },
+   {
+    "node": "lem-sf-normalized-derived-comparison-common-resolution",
+    "why": "Generic normalized-comparison formula identifies the supplied comparison at G[0] through a and v, without assuming rJ K-injective; this unit contains no such formula."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-direct-image-restriction-of-scalars"
+ ],
+ "reviewed": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-cc-N3-61641c4e6",
+  "group": "N3",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N3-61641c4e6 (reviewer sub-agent of L); spot-checked: I read the full delivery: one commit with the item lem-pod-constant-tower-transition and its report. There are no new nodes, and the statement and stmt_deps are unchanged. I read every cited statement, Stacks 05TD (derived.tex l.5565, part 3), 070I (l.9632), 03D6 (sites-modules l.1146) and blueprint main-20261015 prop-cohomological-finiteness Step 7. Statement: the coefficient categories are the pro-étale A_X/B_X/A_Y module sheaves of def-weil-pbc-proetale-site, and c is exactly the restriction-of-scalars comparison with its stated normalization. I tested phi=id (it reduces to ordinary augmentation naturality), u=0, F=0, G=0, X empty, and nonflat phi such as Z/4->Z/2; the statement is true in each. Step 1: the small skeleton, Grothendieck/K-injective existence, enough injectives and nonnegative resolutions all apply, and L, J, I are K-injective. Step 2: the lifts v and h come from the K-injective Hom bijection. A homotopy from a complex concentrated in degree 0 into I has its only relevant component in I^{-1}=0, so v r(a)=b and hs=b u[0] hold strictly, and v is a quasi-isomorphism. Step 3: f_*^A Res = Res f_*^B on the nose, because both A_Y-actions extend the same constant-presheaf map, which is unique by sheafification. Step 4: every hypothesis of lem-sf-normalized-derived-comparison-common-resolution holds (exact r and s, Fr=sG, the normalization clause, w=b), so c_{G[0]} = Q(f_*v)^{-1}. The map computation gives Rf_*(u[0]) = Q(f_*h). Identifying Rf_* with (RF, eta) goes through def-sfb and lem-weil-pbc-kinjective-total-derived, the same pattern already accepted in review N7. Step 5: the degree-0 cycle calculation is elementary and correct for any choice of resolutions. proof_deps equals the union of uses. Route: sk-def-sf-operations is reached transitively from sk-lem-finite; the only off-route statement is lem-weil-proetale-direct-image-restriction-of-scalars, which the item is about, so I accept all five declared tool_uses. Duplicate search (lem-coef-finite-direct-image, lem-weil-compact-support-reduction-tower-functor, lem-pur-completed-coefficient-pushforward-comparison, lem-sf-compact-support-restriction-of-scalars) found nothing that states this. One cosmetic point, left unfixed: Step 1's source.place names Injectives tags under a derived.tex document. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ConstantTowerTransition",
+  "declaration": "AlgebraicGeometry.ProEtale.constantTowerTransition",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.constantTowerTransitionAugmentation",
+   "AlgebraicGeometry.ProEtale.constantTowerTransition"
+  ],
+  "file": "lean/Sheaf/Paper/ConstantTowerTransition.lean",
+  "statement": "theorem constantTowerTransition {A B : Type (u + 1)} [CommRing A] [CommRing B] [Finite A] [Finite B] (φ : A →+* B) {X Y : Scheme.{u}} (f : X ⟶ Y) (F : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) (G : Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) (u : F ⟶ (Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).obj G) : (constantTowerTransitionAugmentation A f F).hom ≫ (DerivedCategory.homologyFunctor (Sheaf (Scheme.ProEt.topology Y) (ModuleCat.{u + 1} A)) 0).map ((lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor.map ((DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} A)) 0).map u) ≫ (lowerStar (ModuleCat.{u + 1} A) f).rightDerivedFunctor.map (((Sheaf.restrictScalars (Scheme.ProEt.topology X) φ).mapDerivedCategorySingleFunctor 0).inv.app G) ≫ (fixedScalarRestrictionDirectImage φ f).hom.app ((DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) 0).obj G)) = (lowerStar (ModuleCat.{u + 1} A) f).map u ≫ (Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).map (constantTowerTransitionAugmentation B f G).hom ≫ ((Sheaf.restrictScalars (Scheme.ProEt.topology Y) φ).mapDerivedCategoryHomologyFunctorIso 0).hom.app ((lowerStar (ModuleCat.{u + 1} B) f).rightDerivedFunctor.obj ((DerivedCategory.singleFunctor (Sheaf (Scheme.ProEt.topology X) (ModuleCat.{u + 1} B)) 0).obj G))",
+  "branch": "newtargets-dag",
+  "by": "Q130",
+  "date": "2026-10-17",
+  "existing": false,
+  "note": "f_* is rendered by lowerStar (ModuleCat A) f in the fixed-scalar presentation forced by the recorded comparison fixedScalarRestrictionDirectImage, the counterpart of the unchanged intrinsic record AlgebraicGeometry.Scheme.proEtaleConstantModuleDirectImage for def-weil-proetale-module-direct-image. The intrinsic record retains its sectionwise direct image and rho-action; it is not rebound or repaired here. The lowerStar implementation is in WeilConjectures.SixFunctors.ProEtale.UpperLowerStar.Defs; the FiniteCoefficient module is a compatibility re-export."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-17",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c9f6f0c1b",
+  "group": "Q130",
+  "result": "pass",
+  "note": "Checked every hypothesis and conclusion clause against the node and its deps: arbitrary f; finite commutative rings A,B in Type (u+1), the universe of the recorded comparison; fixed-scalar module sheaves on Mathlib Scheme.ProEt, with lean.note; c is exactly fixedScalarRestrictionDirectImage at G[0]. Augmentation helper is real canonical data (homologyRightDerivedFunctorObjSingleFunctorIso then rightDerivedZeroIsoSelf, inverted). The directions of mapDerivedCategorySingleFunctor.inv and mapDerivedCategoryHomologyFunctorIso.hom are correct. The conclusion is an equality of maps, so the section map f_*u is kept. Edge cases phi=id, u=0, F=0, G=0, X empty, nonflat Z/4->Z/2 are covered. Proof is sorry only. Docstrings carry source and blueprint. lean.statement is verbatim. Only the node's lean field changed; no new nodes. nt_compile --json exit 0, no messages (sorry warnings are off in the lakefile), 18-22 s. Second-reading section has the standard post-2026-10-17 text, accepted. Cosmetic only: Step 1 source.place lists Injectives tags under derived.tex."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H3",
+  "result": "pass",
+  "landing": "20261021T012403-L-2184098",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }

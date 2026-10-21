@@ -67,6 +67,7 @@ private theorem single_rightDerived_counit_of_formula (a : L ⊣ R)
       erw [CategoryTheory.Functor.map_id, Category.id_comp]
     · exact (L.map_isZero
         (HomologicalComplex.isZero_single_obj_X _ _ _ _ hn)).eq_of_src _ _
+  rw [Functor.singleRightDerivedUnit_app]
   change L.mapDerivedCategory.map (DerivedCategory.Q.map b ≫ _) ≫ _ = _
   rw [Functor.map_comp, Category.assoc]
   erw [hc K, L.mapDerivedCategoryFactors.hom.naturality_assoc]
@@ -180,7 +181,7 @@ theorem single_mapDerivedCategory_counit [PreservesFiniteLimits R]
       R.rightDerivedFunctorIsoMapDerivedCategory.hom.app
         ((DerivedCategory.singleFunctor D 0).obj X) =
       (R.mapDerivedCategorySingleFunctor 0).inv.app X := by
-    dsimp only [Functor.singleRightDerivedUnit, NatTrans.app]
+    rw [Functor.singleRightDerivedUnit_app]
     rw [Category.assoc]
     have hf := congr_app R.rightDerivedFunctorIsoMapDerivedCategory_hom_fac
       ((HomotopyCategory.singleFunctor D 0).obj X)
