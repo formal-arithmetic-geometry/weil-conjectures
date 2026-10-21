@@ -21259,3 +21259,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:43 L: merged deliver/Q61/lem-pur-unrestricted-frobenius-factorization (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/Q21/lem-weil-pbc-total-tensor-homotopy-cone-signs (reviewer PASS; first push; new nodes: 0)
 - 08:43 L: merged deliver/N7/lem-sfb-coefficient-mate-diagonal-graph (reviewer PASS; first push; new nodes: 0)
+- 08:43 L: merged deliver/Q36/lem-sf-constructible-canonical-completeness (reviewer FIX; first push; new nodes: 0)
