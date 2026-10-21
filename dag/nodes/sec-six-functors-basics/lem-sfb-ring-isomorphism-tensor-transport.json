@@ -19,9 +19,170 @@
   "def-sfb-preserves-kflat-quasi-iso",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $C=C_c$ and $B=C_{c^{-1}}$. By restriction of scalars, $r\\in R(U)$ acts on $CM(U)$ as $c_U(r)$, while $s\\in S(U)$ acts on $BF(U)$ as $c_U^{-1}(s)$. Consequently $BCM\\cong M$ and $CBF\\cong F$ by the identity on underlying abelian sheaves, naturally on all module morphisms. These identities obey the triangle identities. Both functors preserve addition of morphisms. They preserve limits and colimits by their universal properties: the natural bijections $\\operatorname{Hom}_R(CM,F)\\cong\\operatorname{Hom}_S(M,BF)$ and $\\operatorname{Hom}_R(F,CM)\\cong\\operatorname{Hom}_S(BF,M)$ identify cones and cocones and their unique factorizations. In particular both functors are exact and preserve all small direct sums. The site-size hypothesis ensures that the module categories are abelian.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-weil-sheaf-of-modules-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Section 03CS, presheaves and sheaves of modules; scalar-coordinate argument for an invertible ring map"
+   }
+  },
+  {
+   "text": "For every $U$, define $t_U:C(M(U)\\otimes_{S(U)}N(U))\\to CM(U)\\otimes_{R(U)}CN(U)$ by $m\\otimes n\\mapsto m\\otimes n$. It is well-defined: for $s\\in S(U)$ write $s=c_U(r)$, so $(sm)\\otimes n=(rm)\\otimes n=m\\otimes(rn)=m\\otimes(sn)$ in the target. The same formula in the reverse direction is $R(U)$-balanced because $r$ acts through $c_U(r)$. Both maps are $R(U)$-linear and inverse on generators. They commute with restriction maps since $c$ and $c^{-1}$ are maps of ring sheaves. Restriction commutes with module sheafification: for any presheaf $P$ of $S$-modules and $R$-module sheaf $F$, maps $CP\\to F$ correspond to maps $P\\to BF$, hence uniquely to maps $P^\\#\\to BF$ and then to maps $C(P^\\#)\\to F$. Thus $C(P^\\#)\\cong(CP)^\\#$ by the sheafification universal property. Sheafifying $t_U$ and its inverse gives the asserted natural tensor isomorphism $t_{M,N}$.",
+   "uses": [
+    "def-pc-sheaf-restrict-scalars",
+    "def-pur-sheaf-tensor-product",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product; Tag 03CY, lemma-sheafification-presheaf-modules; explicit scalar-coordinate argument"
+   }
+  },
+  {
+   "text": "Define $e:CS\\to R$ by $e_U(s)=c_U^{-1}(s)$. It is $R$-linear since $c_U^{-1}(c_U(r)s)=r c_U^{-1}(s)$, and its inverse is $c$. The sheaf tensor constraints are induced by the sectionwise module constraints. In the associator diagram both composites send $(m\\otimes n)\\otimes z$ to $m\\otimes(n\\otimes z)$. In the symmetry diagram both send $m\\otimes n$ to $n\\otimes m$. In the left-unit diagram the path through $t$ and $e$ sends $s\\otimes m$ to $c_U^{-1}(s)\\cdot_Rm=sm$, which is the image under the original $S$-unitor; the right-unit check is $m\\otimes s\\mapsto sm$. Equalities on pure tensors imply equality on presheaf tensors by linearity, and on their sheafifications by uniqueness. This proves coherence, including the specified unit normalization.",
+   "uses": [
+    "lem-pc-sheaf-modules-tensor-closed",
+    "def-weil-presheaf-modules-sheafification"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK, section-tensor-product, associativity formulas; Tag 03EO, lemma-internal-hom-adjoint-tensor"
+   }
+  },
+  {
+   "text": "Apply the exact-functor cohomology comparison to the exact additive functors $C,B$ of step 1. It gives $H^n(CK)\\cong C(H^nK)$ and the analogous comparison for $B$, naturally in chain maps. Since $BC\\cong\\mathrm{id}$ and $CB\\cong\\mathrm{id}$, each functor preserves and reflects zero objects and isomorphisms. Thus each termwise functor preserves and reflects acyclicity and quasi-isomorphisms, with no boundedness condition.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-complex-cohomology",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 010N, lemma-exact-functor, applied to kernels and images in each degree"
+   }
+  },
+  {
+   "text": "Use preservation of direct sums from step 1 and $t$ from step 2 on every summand to define\n$$t^n_{P,Q}:C\\left(\\bigoplus_{p+q=n}P^p\\otimes_SQ^q\\right)\\xrightarrow{\\sim}\\bigoplus_{p+q=n}CP^p\\otimes_RCQ^q.$$\nOn the $(p,q)$ summand it sends $x\\otimes y$ to $x\\otimes y$. The differential on both sides sends this tensor to $d_Px\\otimes y+(-1)^p x\\otimes d_Qy$; additivity of $C$ preserves the sign. Hence $t_{P,Q}$ is a natural chain isomorphism. The total associator is the sum-reindexing map $(x\\otimes y)\\otimes z\\mapsto x\\otimes(y\\otimes z)$; the two bracketings have differential $d_P+(-1)^p d_Q+(-1)^{p+q}d_H$ on degree $(p,q,r)$. The total symmetry is $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$: after differentiating its two terms have signs $(-1)^{pq}$ and $(-1)^{pq+q}$, the same as after applying symmetry to the differential. Thus these are chain maps and the scalar comparison commutes with them, with the unitors, and with their coherence diagrams by the summand checks of step 3. The identical construction works for $B$.",
+   "uses": [
+    "def-pc-tensor-complex-sheaves",
+    "lem-pc-sheaf-modules-tensor-closed"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YM, lemma-derived-tor-exact, total-tensor convention; signed summand calculation"
+   }
+  },
+  {
+   "text": "If $M$ is a flat $S$-module sheaf, let $0\\to F_1\\to F_2\\to F_3\\to0$ be any exact sequence of $R$-module sheaves. Apply the exact $B$, tensor with $M$, and apply the exact $C$. The result is exact; steps 1-2 identify its terms and maps with $F_i\\otimes_R CM$. Thus $CM$ is flat. The same argument with $B$ proves the converse and proves preservation and reflection for both functors.",
+   "uses": [
+    "def-pc-flat-sheaf-modules"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03ER, definition-flat, item (3); exactness and tensor comparison from steps 1-2"
+   }
+  },
+  {
+   "text": "Suppose $P$ is K-flat over $S$ and $F$ is any acyclic $R$-complex. Step 4 makes $BF$ acyclic, so $\\operatorname{Tot}(BF\\otimes_SP)$ is acyclic by K-flatness. Apply $C$ and steps 1 and 5 to identify its image with $\\operatorname{Tot}(F\\otimes_RCP)$, which is acyclic by step 4. Thus $CP$ is K-flat. Interchanging $C,B$ proves preservation in the reverse direction; the natural identities $BC\\cong\\mathrm{id}$ and $CB\\cong\\mathrm{id}$ then prove reflection. This quantifies over all acyclic complexes, not just those originally presented over the other ring.",
+   "uses": [
+    "def-pc-kflat-complex"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YN, definition-K-flat; scalar transport using steps 1, 4 and 5"
+   }
+  },
+  {
+   "text": "Fix either ring sheaf $T=R$ or $S$. If $P$ satisfies the acyclic-tensor definition, signed symmetry from step 5 also makes $\\operatorname{Tot}(P\\otimes_T A)$ acyclic for every acyclic $A$. For any quasi-isomorphism $f:X\\to Y$, its cone is acyclic by the cone criterion. The tensor-cone isomorphism identifies $\\operatorname{Cone}(1_P\\otimes f)$ with $\\operatorname{Tot}(P\\otimes_T\\operatorname{Cone}(f))$, which is acyclic. The cone criterion makes $1_P\\otimes f$ a quasi-isomorphism, and signed symmetry gives the same for $f\\otimes1_P$. Conversely, if both total tensor functors preserve quasi-isomorphisms, apply $-\\otimes_TP$ to $0\\to A$ for every acyclic $A$. Its image has zero source, so its being a quasi-isomorphism means that $\\operatorname{Tot}(A\\otimes_TP)$ is acyclic. This is exactly K-flatness in the acyclic-tensor definition, and proves its equivalence with the two-sided quasi-isomorphism convention.",
+   "uses": [
+    "def-pc-kflat-complex",
+    "def-sfb-preserves-kflat-quasi-iso",
+    "lem-pur-quasi-iso-cone-acyclic",
+    "lem-pc-tensor-mapping-cone-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YP, lemma-K-flat-quasi-isomorphism, proof via Tag 06YM and acyclic cones; converse using the zero map to an acyclic complex"
+   }
+  },
+  {
+   "text": "By step 4 the functor $Q_RC$ on complexes inverts all quasi-isomorphisms, so the localization universal property gives $D(C)$ with $D(C)Q_S\\cong Q_RC$. Likewise it gives $D(B)$. The natural identities from step 1 descend, by full faithfulness of precomposition with localization, to $D(B)D(C)\\cong\\mathrm{id}$ and $D(C)D(B)\\cong\\mathrm{id}$. These specify the induced exact equivalence on unbounded derived categories. On homotopies termwise $C$ preserves $f-g=dh+hd$ by additivity, so these comparisons can equally be computed in the homotopy categories used below. Termwise $C$ commutes with shifts and sends the cone differential matrix $\\left(\\begin{smallmatrix}d_Y&f\\\\0&-d_X\\end{smallmatrix}\\right)$ to the same matrix for $Cf$, using preservation of finite sums and negatives. Thus the descended equivalence preserves the distinguished cone triangles.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tags 04VG and 04VK, localization universal properties; natural-transformation version stated in the cited node"
+   }
+  },
+  {
+   "text": "Choose flat-term K-flat resolutions $P\\to K$ and $Q\\to L$ over $S$, which exist for arbitrary unbounded complexes. By steps 4, 6 and 7 their $C$-images are flat-term K-flat resolutions of $CK,CL$. On such pairs use the canonical total-tensor models of derived tensor and define the comparison as\n$$D(C)(Q_SP\\otimes_S^{\\mathbf L}Q_SQ)\\cong Q_RC\\operatorname{Tot}(P\\otimes_SQ)\\xrightarrow{Q_R(t_{P,Q})}Q_R\\operatorname{Tot}(CP\\otimes_RCQ)\\cong D(C)Q_SP\\otimes_R^{\\mathbf L}D(C)Q_SQ.$$\nThe maps are natural in both homotopy-category variables by step 5 and the model isomorphisms. The resolving-subcategory descent theorem extends this natural isomorphism uniquely to all derived pairs. Its inverse extends the inverse of $t$. In particular it is independent of the chosen resolutions and is computed by the preceding total-complex map on corresponding resolutions.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS, lemma-K-flat-resolution; definition-derived-tor and preceding localization construction following Tag 06YT"
+   }
+  },
+  {
+   "text": "The regular module $T$ is flat because $-\\otimes_TT\\cong\\mathrm{id}$, and $T[0]$ is K-flat because $\\operatorname{Tot}(A\\otimes_TT[0])\\cong A$. The derived associator, unitors and symmetry of $D(T)$ are those of the derived symmetric monoidal structure, induced on total tensor complexes of K-flat representatives by the module constraints and by $x\\otimes y\\mapsto(-1)^{pq}y\\otimes x$; on flat-term K-flat $P,Q$ its tensor is represented by $\\operatorname{Tot}(P\\otimes_TQ)$, the same model as in the tensor-descent theorem. Therefore the derived unit comparison is represented by $e:CS\\to R$. For three flat-term K-flat complexes, their pairwise total tensors are again flat-term K-flat by the total-tensor model lemma. Hence the derived associator diagram is represented by the chain associator diagram of step 5; it commutes on every triple summand. The derived symmetry and unit diagrams are represented by the signed symmetry and scalar-action checks in steps 3 and 5. To obtain equality on arbitrary derived objects, use faithfulness of restriction to flat-term K-flat models from the tensor-descent theorem, for diagrams in three variables first in two variables with the third fixed at a model, then in the remaining variable (the same statement applied to bifunctors constant in one variable). This proves the claimed coherent natural comparison.",
+   "uses": [
+    "def-pc-flat-sheaf-modules",
+    "def-pc-kflat-complex",
+    "lem-pc-sheaf-modules-tensor-closed",
+    "lem-pur-kflat-total-tensor-model",
+    "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "lem-weil-pbc-site-derived-tensor-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YS and definition-derived-tor; lemma-tensor-product-K-flat; signed representative coherence argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-sheaf-restrict-scalars",
+  "def-weil-sheaf-of-modules-category",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-weil-pbc-exact-functor-complex-cohomology",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-flat-sheaf-modules",
+  "def-pc-kflat-complex",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-weil-pbc-localization-universal-property",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Scalar-coordinate proof for a ring-sheaf isomorphism, following Tags 03EK/03CY and 06YN/06YP/06YS and the derived-tor localization construction."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -64,10 +225,45 @@
    "results": "{\"t\": \"2026-10-21T03:04:53Z\", \"tool\": \"leanfinder\", \"query\": \"An equivalence of categories of sheaves of modules induced by invertible coefficient change preserves K flat tensor resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Flat.iff_flat_tensorProduct\", \"Module.Flat.iff_preservesFiniteLimits_tensorLeft\", \"Module.Flat.iff_rTensor_preserves_shortComplex_exact\", \"Module.Flat.iff_lTensor_preserves_shortComplex_exact\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"Module.Flat.of_flat_tensorProduct\", \"Module.Flat.iff_lTensor_exact'\", \"Module.FaithfullyFlat.of_linearEquiv\"], \"digest\": \"5c2c883a56f63fd1\"}",
    "date": "2026-10-21",
    "verdict": "no match: the hits give algebraic flatness, algebraic scalar equivalences, or the ordinary restriction functor; none gives this ring-sheaf tensor/total-complex/K-flat derived comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "restrictScalars.*(Iso|Equivalence|[Tt]ensor)|[Kk]Flat",
+   "results": "{\"t\": \"2026-10-21T03:23:30Z\", \"tool\": \"grep\", \"query\": \"restrictScalars.*(Iso|Equivalence|[Tt]ensor)|[Kk]Flat\", \"sub\": \"Algebra/Category/ModuleCat\", \"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean\", \"Mathlib/Algebra/Category/ModuleCat/Presheaf/ChangeOfRings.lean\"], \"digest\": \"6913d4106cdfd4d5\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: the ring-equivalence hits concern ordinary ModuleCat; presheaf restriction is a construction only."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An invertible change of ring sheaves preserves the unbounded derived tensor product and K flat resolutions",
+   "results": "{\"t\": \"2026-10-21T03:23:31Z\", \"tool\": \"leansearch\", \"query\": \"An invertible change of ring sheaves preserves the unbounded derived tensor product and K flat resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CommRingCat.Under.instPreservesFiniteLimitsUnderTensorProdOfFlatCarrier\", \"ModuleCat.preservesFiniteLimits_tensorLeft_of_ringHomFlat\", \"RingHom.FaithfullyFlat.isStableUnderBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"RingHom.Flat.respectsIso\", \"CommRingCat.Under.instPreservesLimitsOfShapeUnderWalkingParallelPairTensorProdOfFlatCarrier\", \"SheafOfModules.sheafificationCompPullback\", \"SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal\"], \"digest\": \"bb01cc6cf6ec00da\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: ring-level flatness and ordinary sheaf pullback/sheafification comparisons only."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.restrictScalars",
+   "results": "{\"t\": \"2026-10-21T03:23:31Z\", \"tool\": \"loogle\", \"query\": \"SheafOfModules.restrictScalars\", \"sub\": \"\", \"ok\": true, \"n_hits\": 4, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.instAdditiveRestrictScalars\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.restrictScalars_map_val\"], \"digest\": \"e9c522decffc41f9\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction of module sheaves and its additivity only; no tensor or K-flat comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Restriction of scalars along an isomorphism of sheaves of commutative rings is a symmetric monoidal exact equivalence preserving K flat complexes and derived tensor products",
+   "results": "{\"t\": \"2026-10-21T03:23:31Z\", \"tool\": \"leanfinder\", \"query\": \"Restriction of scalars along an isomorphism of sheaves of commutative rings is a symmetric monoidal exact equivalence preserving K flat complexes and derived tensor products\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.restrictScalars\", \"SheafOfModules.pushforwardCongr\", \"SheafOfModules.restrictScalars_obj_val\", \"SheafOfModules.pullbackIso\", \"SheafOfModules.freeFunctorCompPullbackIso\", \"LightCondensed.instMonoidalFunctorOppositeLightProfiniteModuleCatSheafCoherentTopologyPresheafToSheaf\", \"LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat\", \"CategoryTheory.Equivalence.transportIsoSheafToPresheaf\"], \"digest\": \"2e6fe1abeda35706\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction, site/sheaf monoidal constructions or exact derived functors only; no combined ring-sheaf tensor/K-flat theorem."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact additive symmetric monoidal equivalence between categories of sheaves of modules induces an equivalence of derived categories commuting with derived tensor",
+   "results": "{\"t\": \"2026-10-21T03:23:52Z\", \"tool\": \"leanfinder\", \"query\": \"An exact additive symmetric monoidal equivalence between categories of sheaves of modules induces an equivalence of derived categories commuting with derived tensor\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategorySingleFunctor\", \"CategoryTheory.Functor.instCommShiftDerivedCategoryMapDerivedCategoryInt\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Sheaf.monoidalCategory\", \"CategoryTheory.Functor.mapDerivedCategory\", \"CategoryTheory.Abelian.Ext.mapExactFunctor_hom\"], \"digest\": \"032f414e2f9a01ff\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: restriction, site/sheaf monoidal constructions or exact derived functors only; no combined ring-sheaf tensor/K-flat theorem."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sf-module-object-ordinary-coefficient-equivalence",
@@ -79,12 +275,66 @@
  "blueprint": {
   "from": {
    "node": "sk-prop-sf-rf-shriek-preservation",
-   "place": "Coefficient-identification argument of the parent preservation split, step 8: scalar restriction after the internal/section equivalence; extracted from the item proof steps 5-6.",
+   "place": "Coefficient identification in the ancestor preservation split (parent lem-sf-module-object-ordinary-coefficient-equivalence, proof steps 1-2): restriction along the coefficient ring-sheaf isomorphism, total tensor and K-flat derived comparison.",
    "via": [
     "lem-sf-module-object-ordinary-coefficient-equivalence"
    ]
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-ring-isomorphism-tensor-transport",
+  "worker": "stage1",
+  "summary": "N7 checked the unchanged arbitrary-ringed-site statement, wrote all scalar, sheafification, sign, K-flat and descent arguments in eleven steps, and reused existing cone, resolution and localization nodes. No new nodes and no statement dispute. Searches of the project and Mathlib found ingredients but no exact attachment or Mathlib leaf. All cited statements were read, hypotheses checked and verbatim quotations recorded.",
+  "blueprint": "Generic scalar-coordinate tool for coefficient identification in the ancestor preservation split, carried by parent lem-sf-module-object-ordinary-coefficient-equivalence steps 1-2; does not alter the chapter or unit route. The original blueprint unit itself has no numbered step 8; the inherited step-8 description refers to the expanded preservation DAG split.",
+  "tool_uses": [
+   {
+    "node": "lem-pc-sheaf-modules-tensor-closed",
+    "why": "The sectionwise tensor constraints and tensor-Hom structure give the ordinary constraints used in steps 3 and 5; this is a generic ringed-site tool, not a replacement for a unit step."
+   },
+   {
+    "node": "lem-pc-tensor-mapping-cone-iso",
+    "why": "The total tensor identifies a tensor of a cone with the cone of the tensor map in step 8, for arbitrary ringed sites."
+   },
+   {
+    "node": "lem-pur-quasi-iso-cone-acyclic",
+    "why": "The general abelian cone criterion gives both implications between acyclic cones and quasi-isomorphisms in step 8."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Unbounded flat-term K-flat resolutions on an arbitrary ringed site supply the models in step 10."
+   },
+   {
+    "node": "lem-weil-pbc-site-derived-tensor-descent",
+    "why": "The generic ringed-site resolving localization constructs derived tensor, descends a natural comparison and detects its coherence; the finite-coefficient preservation unit does not state this tool."
+   },
+   {
+    "node": "lem-pur-kflat-total-tensor-model",
+    "why": "Pairwise total tensors remain flat-term K-flat, allowing iterated representative models in the associator diagram of step 11."
+   },
+   {
+    "node": "lem-sf-ringed-derived-closed-symmetric-monoidal",
+    "why": "Step 11 takes from its statement the derived associator, unitors and symmetry of D(T) as induced on total tensor complexes of K-flat representatives; no node of the preservation unit defines these derived constraints."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pc-sheaf-modules-tensor-closed",
+  "lem-pc-tensor-mapping-cone-iso",
+  "lem-pur-quasi-iso-cone-acyclic",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-site-derived-tensor-descent",
+  "lem-pur-kflat-total-tensor-model",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N7-c9ffc7d98",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-c9ffc7d98 (reviewer sub-agent of L); spot-checked: I read the whole delivery: one commit, 0 new nodes, 11 steps on an item that was statement-only, and no repair note, so it is not a re-split. Live and side-live still have the item unsplit, and it cites no SGA source. Source check: Stacks sites-cohomology l.3011 (06YP) is proved from 06YM plus the cone characterization of quasi-isomorphisms. Step 8 does exactly that with lem-pc-tensor-mapping-cone-iso and lem-pur-quasi-iso-cone-acyclic, plus the converse that 0→A is a quasi-isomorphism iff A is acyclic. I checked every step against the statements of the nodes it cites. Steps 1-3: since c_U is bijective, balancing over R(U) and over S(U) give the same relations, the unit map is e=c^{-1}, and the unit check s⊗m↦sm holds. Step 4 uses the exact-functor cohomology lemma, and the equivalence reflects zero objects. I recomputed the step-5 symmetry signs: (-1)^{pq} and (-1)^{pq+q} match. Steps 6-7 test every exact sequence and every acyclic complex through B. Step 9 descends C and B by the localization universal property. In step 10, C sends flat-term K-flat complexes over S to such complexes over R, and the descent lemma extends the comparison from those models. Fault (C1/C4): step 11 uses the derived associator, unitors and symmetry of D(T) but cites no node that defines them; the descent lemma gives only the bifunctor and its model isomorphisms. FIX: I added lem-sf-ringed-derived-closed-symmetric-monoidal (constraints induced on K-flat total tensor representatives, symmetry (-1)^{pq}) to step 11's uses and proof_deps, with one sentence saying that on flat-term K-flat models both nodes use Tot(P⊗Q). I declared it in split_report.tool_uses; there is no cycle, since the item is not in its closure. I accept the seven tool_uses: the six declared generic ringed-site tools plus the one added. There is no duplicate: I checked sheaf-scalar-extension-ring-iso, kun-exact-monoidal-equivalence-derived (it needs functorial flat resolutions), scalar-ordinary-tensor-comparison and the etale-module-ring-iso nodes. Edge cases checked: c=id, the zero ring, a conjugation automorphism, a singleton site, and unbounded complexes. Advisory, not changed: the statement's ⊗^L and 'coherent' have no stmt_deps; the proof now pins both.; 1 file(s) fixed by the reviewer"
  }
 }
