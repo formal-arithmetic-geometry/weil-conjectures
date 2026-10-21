@@ -23794,3 +23794,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 21:33 L: returned deliver/NF/lem-sfb-norm-algcl-profinite-cech-exact (reviewer RETURN: L: independent stage-2 immutable head ee367ee8a09a: H1: no Lean module and no lean record (find snapshot -name '*.lean' )
 - 21:34 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 21:35 L: returned deliver/NS/lem-sfb-equivariant-resolution-bar-normalization (reviewer RETURN: L: independent stage-2 immutable head ab4904d3c220: H2: stmt_deps cites theorem node lem-sfb-internal-homogeneous-functi)
+- 21:35 L: returned deliver/N7/lem-sfb-ramified-cartier-supported-purity (reviewer RETURN: C6 + C1/C3: Step 2 depends on lem-per-gabber-regular-pair-purity (ILO XVI 3.1.1) for the isomorphism A_Z≃Ri^!A_T(1)[2]. )
