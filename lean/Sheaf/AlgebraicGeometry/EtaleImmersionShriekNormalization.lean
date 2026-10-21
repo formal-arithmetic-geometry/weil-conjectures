@@ -9,9 +9,6 @@ public import WeilConjectures.AlgebraicGeometry.DerivedCategories
 public import Sheaf.AlgebraicGeometry.EtaleCompactSupportComparisons
 public import WeilConjectures.SixFunctors.Finite.Exact
 public import Mathlib.AlgebraicGeometry.Noetherian
-import Sheaf.AlgebraicGeometry.EtaleConstantModuleDirectImageLeftExact
-import WeilConjectures.AlgebraicGeometry.ModuleSheavesColimitsForgetful
-import Sheaf.CategoryTheory.ExactFunctorDerivedFunctor
 
 /-! # Specified open and closed normalizations of ordinary etale compact support
 
@@ -130,6 +127,40 @@ theorem etaleImmersionShriekNormalization
       rightDerivedLowerShriekOfCompactificationPlusιIso A dc dc' ≪≫
           etaleClosedCompactSupportNormalization A c dc' =
         etaleClosedCompactSupportNormalization A c dc) := by
-  sorry
+  refine ⟨⟨inferInstance, inferInstance⟩, ?_, ?_, ?_, ?_, ?_, ?_⟩
+  · intro m H hH
+    have := hH
+    exact Functor.isGE_mapDerivedCategory_obj _ H m
+  · intro m L hL
+    have := hL
+    exact Functor.isGE_mapDerivedCategory_obj _ L m
+  · intro q
+    exact ⟨(Functor.mapDerivedCategoryHomologyFunctorIso _ q).symm⟩
+  · intro q
+    exact ⟨(Functor.mapDerivedCategoryHomologyFunctorIso _ q).symm⟩
+  · intro dj'
+    unfold etaleOpenCompactSupportNormalization
+    rw [← Iso.trans_assoc]
+    congr 1
+    ext K
+    simp only [rightDerivedLowerShriekOfCompactificationPlusιIso, Iso.trans_hom,
+      Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Category.assoc, Iso.hom_inv_id_app_assoc,
+      ← Functor.map_comp_assoc]
+    rw [← rightDerivedLowerShriekOfCompactificationPlusIso_trans A dj dj'
+      (Compactification.ofIsOpenImmersion j)]
+    simp
+  · intro dc'
+    unfold etaleClosedCompactSupportNormalization
+    rw [← Iso.trans_assoc]
+    congr 1
+    ext K
+    simp only [rightDerivedLowerShriekOfCompactificationPlusιIso, Iso.trans_hom,
+      Iso.symm_hom, NatTrans.comp_app, Functor.isoWhiskerRight_hom,
+      Functor.whiskerRight_app, Category.assoc, Iso.hom_inv_id_app_assoc,
+      ← Functor.map_comp_assoc]
+    rw [← rightDerivedLowerShriekOfCompactificationPlusIso_trans A dc dc'
+      (Compactification.ofIsProper c)]
+    simp
 
 end AlgebraicGeometry.Etale

@@ -22,115 +22,60 @@
  ],
  "proof": [
   {
-   "text": "The closed immersion $c$ is finite by [lem-weil-pbc-closed-immersion-finite]. Hence its direct image on abelian étale sheaves is exact by [lemma-weil-pbc-finite-direct-image-exact]. The module direct image is additive and commutes with forgetting the $A$-module structure by [lem-weil-pbc-module-direct-image-left-exact]. For a short exact sequence of $A_Z$-module sheaves, forget the action, apply the abelian direct image, and obtain a short exact sequence of abelian sheaves. The forgetful functor preserves kernels and cokernels and is faithful by [lem-weil-pbc-module-sheaves-colimits-forgetful]; thus it reflects zero objects (the identity of an object with zero underlying sheaf is zero), and therefore reflects exactness by testing the kernel modulo the image. The resulting module sequence is short exact. This proves exactness of $c_*$ on ordinary étale module sheaves.",
+   "text": "A closed immersion is finite by [lem-weil-pbc-closed-immersion-finite]. The existing finite-direct-image exactness instance [lemma-weil-pbc-finite-direct-image-exact] applies directly to the coefficient category ModuleCat A, not only to abelian groups. Together with the general finite-limit instance for lowerStar this supplies the first conjunct. No transfer through constant-ring module sheaves is needed.",
    "uses": [
     "lem-weil-pbc-closed-immersion-finite",
-    "lemma-weil-pbc-finite-direct-image-exact",
-    "lem-weil-pbc-module-direct-image-left-exact",
-    "lem-weil-pbc-module-sheaves-colimits-forgetful"
+    "lemma-weil-pbc-finite-direct-image-exact"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/etale-cohomology.tex",
-    "place": "Tag 03QP (proposition-finite-higher-direct-image-zero); module transfer: sites-modules.tex Tags 03DA/03DB (lemma-abelian, lemma-limits-colimits)"
-   }
+   "elementary": false
   },
   {
-   "text": "For the open immersion, [lem-weil-pbc-extension-by-zero-exact] gives exactness of $j_!$ on $A$-module sheaves. Apply [lem-weil-pbc-exact-functor-derived-factorization] to this functor and to the exact $c_*$ from step 1. Their termwise functors preserve quasi-isomorphisms and descend to the unbounded derived functors $Dj_!$ and $Dc_*$, with $Dj_!Q_W\\cong Q_T C(j_!)$ and $Dc_*Q_Z\\cong Q_T C(c_*)$, where $C$ denotes termwise application and $Q$ denotes localization. No lower cohomological bound is required for these two descents.",
+   "text": "Extension by zero is exact by [lem-weil-pbc-extension-by-zero-exact], and closed direct image is exact by step 1. Their degreewise derived descents are the existing mapDerivedCategory functors of [lem-weil-pbc-exact-functor-derived-factorization]. Apply isGE_mapDerivedCategory_obj from [lem-weil-pbc-exact-functor-bounded-below] to each supplied IsGE hypothesis, at the same arbitrary integer m. Apply the inverse of mapDerivedCategoryHomologyFunctorIso from that same node for each q; these give precisely the two displayed cohomology isomorphisms.",
    "uses": [
     "lem-weil-pbc-extension-by-zero-exact",
-    "lem-weil-pbc-exact-functor-derived-factorization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor); etale-cohomology.tex Tag 03S5 (proposition-describe-jshriek)"
-   }
-  },
-  {
-   "text": "Apply [lem-weil-pbc-exact-functor-bounded-below] to $j_!$ and $c_*$. It gives the natural isomorphisms $\\mathcal H^q(Dj_!H)\\cong j_!\\mathcal H^q(H)$ and $\\mathcal H^q(Dc_*L)\\cong c_*\\mathcal H^q(L)$ on the unbounded categories. If the input cohomology vanishes in degrees $q<m$, the right sides vanish there because an additive functor sends the zero object to zero. Thus the same integer $m$ works after either functor; in particular bounded-below inputs remain bounded below.",
-   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
     "lem-weil-pbc-exact-functor-bounded-below"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), termwise computation and its cohomology consequence"
-   }
+   "elementary": false
   },
   {
-   "text": "The identity direct image is canonically the identity: in [def-weil-pbc-direct-image] the fibre product $V\\times_T T$ is canonically $V$, with the same restriction maps. The identity open extension is also the identity: in [def-weil-pbc-extension-by-zero] every object factors uniquely through the identity, so its extension presheaf is the original sheaf. Its sheafification is canonically itself by the universal property in [def-weil-pbc-sheafification]: the map back extending the identity and the sheafification map are inverse by uniqueness. These identifications are natural. By [lem-weil-pbc-localization-universal-property], their termwise identifications descend uniquely to $D\\mathrm{id}_*\\cong\\mathrm{id}$ and $D\\mathrm{id}_!\\cong\\mathrm{id}$. Finally [lem-weil-pbc-exact-functor-derived-functor] identifies the right derived functor of the exact identity direct image with its termwise descent, giving the specified $R\\mathrm{id}_*\\cong\\mathrm{id}$.",
+   "text": "Keep the specified etaleOpenCompactSupportNormalization and etaleClosedCompactSupportNormalization definitions unchanged. They already compare the compact-support candidate [def-amb-etale-compact-support] with the trivial compactification through [lem-amb-etale-compact-comparisons]. For the open case the existing rightDerivedLowerStarIdIso removes the identity direct image. For the closed case the existing mapDerivedCategoryOpenImmersionLowerShriekId removes the identity extension, and rightDerivedFunctorLowerStarIsoMapDerivedCategory from [lemma-weil-pbc-finite-direct-image-exact] identifies the derived finite direct image with its exact descent. The trivial closed compactification exists by [lem-weil-pbc-closed-immersion-proper]. Naturality is part of the types of these natural isomorphisms.",
    "uses": [
-    "def-weil-pbc-direct-image",
-    "def-weil-pbc-extension-by-zero",
-    "def-weil-pbc-sheafification",
-    "lem-weil-pbc-localization-universal-property",
-    "lem-weil-pbc-exact-functor-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/derived.tex",
-    "place": "Tag 015F (lemma-right-derived-exact-functor), identity case; extension by zero as in etale-cohomology.tex equation-j-p-shriek"
-   }
-  },
-  {
-   "text": "Use the compactifications $b_j=(j,\\mathrm{id}_T)$ and $b_c=(\\mathrm{id}_Z,c)$. The former has proper second factor since an identity is separated, finite type and universally closed; the latter has proper second factor by [lem-weil-pbc-closed-immersion-proper]. Their candidates, by [def-amb-etale-compact-support], are $R\\mathrm{id}_{T,*}Dj_!$ and $Rc_*D\\mathrm{id}_{Z,!}$. Step 4 supplies a natural isomorphism $e_j:Rj_!^{b_j}\\xrightarrow{\\sim}Dj_!$. For the closed case apply [lem-weil-pbc-exact-functor-derived-functor] to the exact module functor $c_*$ of step 1: the canonical comparison $Dc_*\\to Rc_*$ is invertible on every complex. Its inverse, together with $D\\mathrm{id}_{Z,!}\\cong\\mathrm{id}$ from step 4, supplies $e_c:Rc_!^{b_c}\\xrightarrow{\\sim}Dc_*$. These are precisely the termwise and identity normalizations.",
-   "uses": [
-    "lem-weil-pbc-closed-immersion-proper",
     "def-amb-etale-compact-support",
-    "lem-weil-pbc-exact-functor-derived-functor"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Construction before Tag 0F7I (lemma-shriek-well-defined); derived.tex Tag 015F (lemma-right-derived-exact-functor)"
-   }
-  },
-  {
-   "text": "For $a=j$ or $a=c$, let $d$ be its chosen compactification and let $\\rho_{d,b_a}:Ra_!^d\\xrightarrow{\\sim}Ra_!^{b_a}$ be the canonical comparison on bounded-below inputs from [lem-amb-etale-compact-comparisons]. Define $n_a^d=e_a\\circ\\rho_{d,b_a}$. The hypotheses of that comparison hold: the coefficient ring is finite, both schemes are Noetherian, and the morphism is separated, finite type and compactifiable by assumption. Step 3 ensures that the exact-factor outputs needed in the trivial-compactification computations remain bounded below. Each component of $n_a^d$ is a composite of isomorphisms in the ambient unbounded derived category, since the candidates of [def-amb-etale-compact-support] are functors into that category. This proves the claimed isomorphisms for every bounded-below input.",
-   "uses": [
     "lem-amb-etale-compact-comparisons",
-    "def-amb-etale-compact-support"
+    "lemma-weil-pbc-finite-direct-image-exact",
+    "lem-weil-pbc-closed-immersion-proper",
+    "def-weil-pbc-direct-image",
+    "def-weil-pbc-extension-by-zero"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7I (lemma-shriek-well-defined), canonical comparisons through common refinements"
-   }
+   "elementary": false
   },
   {
-   "text": "Every constituent of $n_a^d$ is natural, so for a morphism $u:H\\to H'$ of bounded-below inputs its square is $D_a(u)\\,n_{a,H}^d=n_{a,H'}^d\\,Ra_!^d(u)$, where $D_j=Dj_!$ and $D_c=Dc_*$. For another chosen compactification $d'$, the cocycle identity in [lem-amb-etale-compact-comparisons] gives $\\rho_{d',b_a}\\rho_{d,d'}=\\rho_{d,b_a}$; hence $n_a^{d'}\\rho_{d,d'}=e_a\\rho_{d',b_a}\\rho_{d,d'}=e_a\\rho_{d,b_a}=n_a^d$. This is compatibility with changing compactifications, including identities and refinements. Only bounded-below inputs were used in these equations.",
+   "text": "For each of the two compatibility equations, unfold only its specified normalization and reassociate the composition of isomorphisms. The final normalization factor is identical on both sides, so it suffices to prove the cocycle for the ambient comparison to the trivial compactification. Evaluate its hom at a bounded-below object K. Unfold rightDerivedLowerShriekOfCompactificationPlusιIso, cancel the middle compatibility isomorphism with its inverse, and combine the two maps under the inclusion functor. The cocycle rightDerivedLowerShriekOfCompactificationPlusIso_trans of [lem-amb-etale-compact-comparisons] identifies the resulting composite with the direct comparison. This proves both equations without any assertion on general unbounded inputs.",
    "uses": [
     "lem-amb-etale-compact-comparisons"
    ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/more-etale.tex",
-    "place": "Tag 0F7I (lemma-shriek-well-defined), final coherence paragraph"
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-closed-immersion-finite",
   "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-exact-functor-derived-factorization",
   "lem-weil-pbc-exact-functor-bounded-below",
-  "def-weil-pbc-direct-image",
-  "def-weil-pbc-extension-by-zero",
-  "def-weil-pbc-sheafification",
-  "lem-weil-pbc-localization-universal-property",
-  "lem-weil-pbc-exact-functor-derived-functor",
-  "lem-weil-pbc-closed-immersion-proper",
   "def-amb-etale-compact-support",
-  "lem-amb-etale-compact-comparisons"
+  "lem-amb-etale-compact-comparisons",
+  "lem-weil-pbc-closed-immersion-proper",
+  "def-weil-pbc-direct-image",
+  "def-weil-pbc-extension-by-zero"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "agent",
+  "group": "U7",
+  "date": "2026-10-21",
   "document": "literature/stacks-project/more-etale.tex",
-  "place": "Tag 0F7I (lemma-shriek-well-defined), specialize to (j,id) and (id,c), with derived.tex Tag 015F and etale-cohomology.tex Tags 03QP/03S5"
+  "place": "Tag 0F7I (lemma-shriek-well-defined), specialized to the two trivial compactifications; existing exact finite direct image and derived cohomology API implement Tags 03QP and 015F."
  },
  "mathlib_searches": [
   {
@@ -264,11 +209,8 @@
  },
  "tool_uses": [
   "lemma-weil-pbc-finite-direct-image-exact",
-  "lem-weil-pbc-module-direct-image-left-exact",
-  "lem-weil-pbc-module-sheaves-colimits-forgetful",
   "lem-weil-pbc-extension-by-zero-exact",
   "lem-weil-pbc-exact-functor-bounded-below",
-  "lem-weil-pbc-exact-functor-derived-functor",
   "lem-amb-etale-compact-comparisons"
  ],
  "reviewed": {
@@ -301,5 +243,15 @@
   "group": "Q17",
   "result": "pass",
   "note": "Node copy differs from side-live only in lean; statement verbatim. Every clause matches the node: finite CommRing A : Type (u+1), Noetherian W/Z/T, open j and closed c, chosen compactifications given as arguments; c_* exact as PreservesFiniteLimits and PreservesFiniteColimits; IsGE m preserved for all m on unbounded inputs; natural H^q isos (Nonempty, not used by citers, accepted); n_j and n_c are real defs built from canonical maps only (PlusιIso to ofIsOpenImmersion or ofIsProper, rightDerivedLowerStarIdIso, mapDerivedCategoryOpenImmersionLowerShriekId, rightDerivedFunctorLowerStarIsoMapDerivedCategory), each opened and checked; naturality comes from the natural-iso type; change-of-compactification equations go in the right direction and follow from the cocycle law. No extra hypotheses (QuasiCompact j inferred). Edge cases A=0, empty schemes, negative m, trivial compactification covered. Only the theorem has sorry; docstrings carry source tags and blueprint id. nt_compile --json clean, 46.5 s of 60 s. Advisory: the citer's ChartAdjointComparison.open/closedNormalization duplicate this item's notion and should be re-pointed at stage 3; Compactification and PlusιIso are decls from outside stmt_deps, inherited through existing deps; unused proof-dep imports."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "U7",
+  "result": "pass",
+  "landing": "20261021T120757-L-3945399",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
