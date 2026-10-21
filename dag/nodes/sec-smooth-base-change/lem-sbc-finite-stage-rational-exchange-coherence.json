@@ -15,9 +15,159 @@
   "prop-weil-pbc-scalar-extension",
   "lem-sbc-coherent-pair-functor-descent"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "On each integral category $\\mathcal B_E(W)$, [lem-sbc-completed-operations-linear-natural-exchange] supplies the actual additive $\\mathcal O_E$-linear functors $P_E^u,D_E^u$ and the natural transformation $\\alpha_E^{\\mathrm{int}}:P_E^fD_E^g\\Rightarrow D_E^hP_E^e$. Its statement supplies naturality on every integral arrow, and identifies this transformation with the completed canonical mate. Thus the integral input here is defined on all derived-complete objects; neither a constructible restriction nor invertibility of the exchange is needed.",
+   "uses": [
+    "lem-sbc-completed-operations-linear-natural-exchange"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1218-1228: integral linear operations and their ambient extensions; specified integral mate"
+   }
+  },
+  {
+   "text": "For fixed $E$, apply the additive/semilinear part of [lem-pur-semilinear-scalar-localization] to each operation, taking $R=S=\\mathcal O_E$, $t=u=\\varpi_E$ and the identity coefficient homomorphism. By [lem-weil-l-adic-integers-localization-uniformizer], the localized coefficient ring is $E$, so its formula is $H^{\\mathrm{raw}}(v\\otimes c)=H(v)\\otimes c$. Apply its natural-transformation clause to $\\alpha_E^{\\mathrm{int}}$. The resulting component is $\\alpha_E^{\\mathrm{int}}(K)\\otimes1$, natural for every raw arrow. Its composition clause identifies the two extended composites with $F_E^{\\mathrm{raw}}$ and $G_E^{\\mathrm{raw}}$.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-l-adic-integers-localization-uniformizer"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1193-1194 and 1218-1228: central localization of integral operations and exchange"
+   }
+  },
+  {
+   "text": "By [prop-weil-pbc-scalar-extension], for each $E\\subset M$ the actual tensor functors $C_{M/E,W}$ preserve ambient completeness and carry the specified natural isomorphisms $p^u,d^u$. That statement gives their compatibility with successive coefficient extensions and identities. Write $H_E:\\mathcal B_E(A)\\to\\mathcal B_E(B)$ for either an individual operation and $b^H_{M/E}:C^B_{M/E}H_E\\to H_MC^A_{M/E}$ for its specified comparison. With integral tensor associators $a^A,a^B$, this successive-extension compatibility reads\n$$b^H_{P/E}(a^B_{P,M,E}H_E)=(H_Pa^A_{P,M,E})(b^H_{P/M}C^A_{M/E})(C^B_{P/M}b^H_{M/E}).$$\nUse the tensor-unit maps to identify $C_{E/E}$ with the identity, as required by [def-sbc-ambient-complete-coefficient-categories]; the identity comparison becomes $1_{H_E}$. The tower equation remains this equation under those identifications, by substitution of the tensor-unit isomorphisms on both sides. These are the specified tensor comparisons, rather than a new choice of isomorphisms.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "def-sbc-ambient-complete-coefficient-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1297-1321: actual integral tensor, tensor-unit normalization and associators"
+   }
+  },
+  {
+   "text": "For $E\\subset M$, integral tensor $C_{M/E,W}$ is semilinear for $\\mathcal O_E\\to\\mathcal O_M$: tensoring $av$ gives the same arrow as multiplication by the image of $a$ on the tensor, by the balancing relation. The image of $\\varpi_E$ is nonzero in the field $M$ and hence invertible; [lem-weil-l-adic-integers-localization-uniformizer] identifies $\\mathcal O_M[1/\\varpi_M]$ with $M$. Apply [lem-pur-semilinear-scalar-localization] to $C$, and to the composite functors at the two ends of $p^u,d^u$. This gives exactly the raw scalar transition of [def-sbc-ambient-complete-coefficient-categories], $v\\otimes c\\mapsto C(v)\\otimes c$ for $c\\in E\\subset M$. The same lemma localizes $p^u,d^u$, their inverses, the tensor associators, the unit equations and the operation tower equations of step 3; its preservation of whiskering and composition ensures these are equations with the actual extended operations.",
+   "uses": [
+    "lem-pur-semilinear-scalar-localization",
+    "lem-weil-l-adic-integers-localization-uniformizer",
+    "def-sbc-ambient-complete-coefficient-categories"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1300-1321: localization between different coefficient rings and normalized coherent comparisons"
+   }
+  },
+  {
+   "text": "Compose the raw operation comparisons to define\n$$b^F=(P_M^f d^g)(p^fD_E^g),\\qquad b^G=(D_M^h p^e)(d^hP_E^e).$$\nThese are the raw extensions of the integral composites, by step 4. The final clause of [prop-weil-pbc-scalar-extension] concerns the exchange $\\gamma\\circ\\Lambda_X(b_K)$ for complete $K$: here $b_K:Lf^*Rg_*K\\to Rh_*Le^*K$ is the ambient mate of [def-weil-pbc-ambient-ringed-exchange], $\\Lambda$ is derived completion with unit $\\kappa$, and $\\gamma:\\Lambda_XRh_*\\xrightarrow{\\sim}Rh_*\\Lambda_Y$ is the arrow of [lem-weil-pbc-ringed-pushforward-completion], so $\\gamma\\kappa=Rh_*(\\kappa)$. We identify it with $\\alpha^{\\mathrm{int}}_E$. By [def-weil-pbc-completed-pullback] $P_u=\\Lambda Lu^*$ with completion unit $k_u$, hence $(\\gamma\\Lambda_X(b_K))k_{f,D_gK}=\\gamma\\kappa b_K=R_h(k_{e,K})b_K$. The canonical composition isomorphisms of step 1 are the conjugates of direct-image composition for $P_u\\dashv D_u$; [lem-sbc-reflected-compositor-unit-normalization] gives $c^ck\\,L(k)=k\\,c$ for each of the two compositors, and composing these identities gives $\\theta^c_Mk_{h,P_fM}L_h(k_{f,M})=k_{e,P_gM}L_e(k_{g,M})\\theta_M$. Thus [lem-sbc-reflector-square-mate-factorization] applies, and its uniqueness clause gives $\\alpha^{\\mathrm{int}}_{E,K}=\\gamma\\Lambda_X(b_K)$; likewise at $M$. Step 2 then identifies the rationalizations. With the square labeled $(f,g,h,e)$, the clause is exactly\n$$\\alpha_M^{\\mathrm{raw}}(T^T_{M/E}K)b^{F,\\mathrm{raw}}_{M/E,K}=b^{G,\\mathrm{raw}}_{M/E,K}T^X_{M/E}(\\alpha_E^{\\mathrm{raw}}(K)).$$\nAll four schemes satisfy that node's noetherian, finite-dimensional and invertible-$\\ell$ hypotheses. Its ambient clause applies without assuming constructible landing.",
+   "uses": [
+    "prop-weil-pbc-scalar-extension",
+    "def-weil-pbc-ambient-ringed-exchange",
+    "lem-weil-pbc-ringed-pushforward-completion",
+    "def-weil-pbc-completed-pullback",
+    "lem-sbc-reflected-compositor-unit-normalization",
+    "lem-sbc-reflector-square-mate-factorization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1218-1228 and 1297-1321: the canonical rationalized exchange and coefficient comparisons"
+   }
+  },
+  {
+   "text": "Here is the finite-stage Karoubi functor calculation, using [def-weil-karoubi-envelope]. For an additive raw functor $H$, set $\\widehat H(K,p)=(HK,H(p))$ and $\\widehat H(v)=H(v)$. We suppress the superscript raw in the next calculations. Since $H(p)^2=H(p^2)=H(p)$ and $v=qvp$ implies $H(v)=H(q)H(v)H(p)$, these are valid objects and arrows. The identity at $(K,p)$ maps to $H(p)$, the required target identity, and $H(wv)=H(w)H(v)$. Additivity on arrows is inherited from $H$. Apply this construction to the operations and the raw transitions. It is the transition construction fixed in [def-sbc-ambient-complete-coefficient-categories], and $\\widehat{JH}=\\widehat J\\widehat H$ on objects and arrows.",
+   "uses": [
+    "def-weil-karoubi-envelope",
+    "def-sbc-ambient-complete-coefficient-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1208-1216, 1218-1228 and 1308-1312: extension on idempotent objects and supported arrows"
+   }
+  },
+  {
+   "text": "For a raw natural transformation $\\eta:H\\Rightarrow J$, put $\\widehat\\eta_{(K,p)}=J(p)\\eta_KH(p)$. It satisfies the support relation of [def-weil-karoubi-envelope]. Naturality for $p$ gives $J(p)\\eta_K=\\eta_KH(p)$, so this arrow is also $J(p)\\eta_K=\\eta_KH(p)$. For $v=qvp:(K,p)\\to(L,q)$, we have $vp=v=qv$ and hence\n$$J(v)\\widehat\\eta_{(K,p)}=J(v)\\eta_K=\\eta_LH(v)=\\widehat\\eta_{(L,q)}H(v).$$\nThis verifies naturality on every Karoubi arrow. In particular, $\\eta=\\alpha_E^{\\mathrm{raw}}$ gives exactly $G_E(p)\\alpha_E^{\\mathrm{raw}}(K)F_E(p)$. At $p=1_K$ it is $\\alpha_E^{\\mathrm{raw}}(K)$, which is precisely the arrow $j_E(\\alpha_E^{\\mathrm{raw}}(K))$ between the identity-idempotent objects.",
+   "uses": [
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1208-1216 and 1218-1228: natural transformations restricted to idempotent summands"
+   }
+  },
+  {
+   "text": "If $\\eta=b:H\\xrightarrow{\\sim}J$, extend $b^{-1}$ by the same rule. The two supported composites are\n$$[H(p)b_K^{-1}J(p)][J(p)b_KH(p)]=H(p),\\qquad [J(p)b_KH(p)][H(p)b_K^{-1}J(p)]=J(p).$$\nFor the first equality use $J(p)b_K=b_KH(p)$, cancel $b_K^{-1}b_K$, and use $H(p)^2=H(p)$; the second uses $H(p)b_K^{-1}=b_K^{-1}J(p)$ and $J(p)^2=J(p)$. By [def-weil-karoubi-envelope] these are the identities of the corresponding Karoubi objects. Thus each localized comparison has the asserted component and inverse. This applies to $p^u,d^u,a$ and their composites.",
+   "uses": [
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1208-1216 and 1313-1321: comparison isomorphisms on summands"
+   }
+  },
+  {
+   "text": "For completeness, the supported formulas preserve the operations forming the coherence equations. At $(K,p)$, the extended identity transformation is $H(p)$, the identity prescribed by [def-weil-karoubi-envelope]. For $\\eta:H\\Rightarrow J$ and $\\zeta:J\\Rightarrow L$, naturality at $p$ gives\n$$[L(p)\\zeta_KJ(p)][J(p)\\eta_KH(p)]=L(p)\\zeta_K\\eta_KH(p)=\\widehat{\\zeta\\eta}_{(K,p)}.$$\nWhiskering on the target by $A$ sends $J(p)\\eta_KH(p)$ to $AJ(p)A(\\eta_K)AH(p)$, exactly the extension of $A\\eta$; whiskering on the source by $B$ evaluates the same formula at $(BK,B(p))$, exactly the extension of $\\eta B$. Together with step 6's equality for composite functors, these formulas show, by induction on compositions and whiskerings, that each raw comparison equation remains the same equation after extension. Equal raw components yield equal supported arrows, since Karoubi arrows are underlying arrows with a support relation.",
+   "uses": [
+    "def-weil-karoubi-envelope"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1208-1216 and 1313-1321: explicit preservation of the finite coherence expressions"
+   }
+  },
+  {
+   "text": "The composite comparisons also satisfy the tower equation. Use notation $U,V,W$ for the raw scalar transitions at the source, middle and target of $H_E:A_E\\to B_E$, $J_E:B_E\\to D_E$. Write $b=b^H$, $c=b^J$, and $k_{M/E}=J_M(b_{M/E})(c_{M/E}H_E)$. This is $b^F$ for $(H,J)=(D^g,P^f)$ and $b^G$ for $(P^e,D^h)$. The prescribed tower equation is that of [lem-sbc-coherent-pair-functor-descent]. Suppress object arguments and write juxtaposition for composition, retaining right whiskerings. Expanding the left side and substituting the individual tower equations from steps 3-4 gives\n$$\n\\begin{aligned}\nk_{P/E}(a^D J_EH_E)\n&=J_P(b_{P/E})(c_{P/E}H_E)(a^DJ_EH_E)\\\\\n&=J_P(b_{P/E}a^B H_E)(c_{P/M}V_{M/E}H_E)(W_{P/M}c_{M/E}H_E)\\\\\n&=J_PH_P(a^A)(J_Pb_{P/M}U_{M/E})(J_PV_{P/M}b_{M/E})\n(c_{P/M}V_{M/E}H_E)(W_{P/M}c_{M/E}H_E).\n\\end{aligned}\n$$\nNaturality of $c_{P/M}$ at $b_{M/E,K}$ replaces the middle product by\n$$(J_PV_{P/M}b_{M/E})(c_{P/M}V_{M/E}H_E)\n=(c_{P/M}H_MU_{M/E})(W_{P/M}J_Mb_{M/E}).$$\nThe resulting expression is exactly\n$$J_PH_P(a^A)(k_{P/M}U_{M/E})(W_{P/M}k_{M/E}),$$\nthe required tower right side. The unit comparison is $(J_E1)(1H_E)=1$. Step 9 now gives these equations on the Karoubi envelopes with the specified scalar associators of [def-sbc-ambient-complete-coefficient-categories].",
+   "uses": [
+    "def-sbc-ambient-complete-coefficient-categories",
+    "lem-sbc-coherent-pair-functor-descent"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1313-1321 and 1347-1359: tower compatibility for the composite operation families"
+   }
+  },
+  {
+   "text": "Finally apply step 9 to the raw exchange equation of step 5. The extension of $\\alpha_M^{\\mathrm{raw}}T^T$ is $\\alpha_MT^T$, the extensions of $b^F,b^G$ are their specified supported composites, and the extension of $T^X\\alpha_E^{\\mathrm{raw}}$ is $T^X\\alpha_E$. Therefore its value at every $(K,p)$ is\n$$\\alpha_M(T^T_{M/E}(K,p))b^F_{M/E,(K,p)}=b^G_{M/E,(K,p)}T^X_{M/E}(\\alpha_E(K,p)).$$\nAll components are the explicitly specified supported arrows in [def-sbc-ambient-complete-coefficient-categories]. Steps 4, 8 and 9 also preserve the individual operation unit and tower equations and the tensor-unit normalizations; step 10 handles the composites. Together with steps 2 and 5 for the raw categories and steps 6-8 for their finite-stage Karoubi envelopes, this proves all the claimed assertions.",
+   "uses": [
+    "def-sbc-ambient-complete-coefficient-categories"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+    "place": "Lines 1218-1228 and 1297-1321: coefficient-compatible canonical exchange on the ambient Karoubi category"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-completed-operations-linear-natural-exchange",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "prop-weil-pbc-scalar-extension",
+  "def-sbc-ambient-complete-coefficient-categories",
+  "def-weil-pbc-ambient-ringed-exchange",
+  "lem-weil-pbc-ringed-pushforward-completion",
+  "def-weil-pbc-completed-pullback",
+  "lem-sbc-reflected-compositor-unit-normalization",
+  "lem-sbc-reflector-square-mate-factorization",
+  "def-weil-karoubi-envelope",
+  "lem-sbc-coherent-pair-functor-descent"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/slopmaster2/src/version/sketch/32_smooth_base_change.tex",
+  "place": "Lines 1191-1228, 1262-1279 and 1291-1321; explicit semilinear localization and supported-idempotent calculations for the finite-stage coherence required in the parent proof"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -53,10 +203,45 @@
    "results": "service unavailable: {\"error\":\"Rate limit exceeded: 60 per 1 minute\"}",
    "date": "2026-10-21",
    "verdict": "unavailable"
+  },
+  {
+   "tool": "grep",
+   "query": "functorExtension|mapNatTrans|mapFunctor",
+   "results": "{\"t\": \"2026-10-21T06:41:23Z\", \"tool\": \"grep\", \"query\": \"functorExtension|mapNatTrans|mapFunctor\", \"sub\": \"CategoryTheory/Idempotents\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean\", \"Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean\", \"Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean\", \"Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean\", \"Mathlib/CategoryTheory/Idempotents/FunctorExtension.lean\"], \"digest\": \"cfed5f67a676b594\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: the hits do not state the completed ambient operations, specified scalar comparisons and rational/Karoubi exchange coherence together"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Linear sheaf operations and scalar coefficient comparisons extend coherently through rational localization and idempotent completion",
+   "results": "{\"t\": \"2026-10-21T06:41:24Z\", \"tool\": \"leansearch\", \"query\": \"Linear sheaf operations and scalar coefficient comparisons extend coherently through rational localization and idempotent completion\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"PresheafOfModules.Sheafify.smul.congr_simp\", \"PresheafOfModules.Sheafify.SMulCandidate.h\", \"LinearMap.extendScalarsOfIsLocalization\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv_apply\", \"LinearEquiv.extendScalarsOfIsLocalizationEquiv\", \"LinearMap.extendScalarsOfIsLocalization_apply\", \"LinearMap.extendScalarsOfIsLocalizationEquiv_apply\", \"Submodule.localizedEquiv\"], \"digest\": \"376a46d7fd38c97a\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: the hits do not state the completed ambient operations, specified scalar comparisons and rational/Karoubi exchange coherence together"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Idempotents.Karoubi",
+   "results": "{\"t\": \"2026-10-21T06:41:25Z\", \"tool\": \"loogle\", \"query\": \"CategoryTheory.Idempotents.Karoubi\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"CategoryTheory.Idempotents.Karoubi\", \"CategoryTheory.Idempotents.Karoubi.X\", \"CategoryTheory.Idempotents.Karoubi.instCategory\", \"CategoryTheory.Idempotents.Karoubi.coe\", \"CategoryTheory.Idempotents.instIsIdempotentCompleteKaroubi\", \"CategoryTheory.Idempotents.Karoubi.Hom\", \"CategoryTheory.Idempotents.toKaroubi\", \"CategoryTheory.Idempotents.instPreadditiveKaroubi\"], \"digest\": \"cbfdcdc8424b6f59\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: the hits do not state the completed ambient operations, specified scalar comparisons and rational/Karoubi exchange coherence together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Completed sheaf pullback pushforward exchange extends to raw rational Hom scalar localization and Karoubi envelopes preserving coefficient tower comparisons",
+   "results": "{\"t\": \"2026-10-21T06:41:26Z\", \"tool\": \"leanfinder\", \"query\": \"Completed sheaf pullback pushforward exchange extends to raw rational Hom scalar localization and Karoubi envelopes preserving coefficient tower comparisons\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_pullbackObjUnitToUnit\", \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"SheafOfModules.pullbackPushforwardAdjunction\", \"SheafOfModules.pullbackComp\", \"SheafOfModules.conjugateEquiv_pullbackComp_inv\", \"SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom\", \"SheafOfModules.pullbackObjUnitToUnit\", \"SheafOfModules.freeFunctorCompPullbackIso\"], \"digest\": \"51ef34b460dc6c49\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: the hits do not state the completed ambient operations, specified scalar comparisons and rational/Karoubi exchange coherence together"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An additive linear functor and natural transformation extend to idempotent completion after scalar localization preserving whiskering and composition equations",
+   "results": "{\"t\": \"2026-10-21T06:41:27Z\", \"tool\": \"leanfinder\", \"query\": \"An additive linear functor and natural transformation extend to idempotent completion after scalar localization preserving whiskering and composition equations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Localization.functor_linear_iff\", \"CategoryTheory.Idempotents.functorExtension₁\", \"CategoryTheory.Idempotents.functorExtension₂\", \"CategoryTheory.Idempotents.FunctorExtension₁.map\", \"CategoryTheory.Idempotents.functorExtension\", \"CategoryTheory.Idempotents.functorExtension_obj_map\", \"CategoryTheory.Idempotents.functorExtension_map_app\", \"CategoryTheory.Idempotents.functorExtension₁_map\"], \"digest\": \"0187052b337eca00\"}",
+   "date": "2026-10-21",
+   "verdict": "no exact match: the hits do not state the completed ambient operations, specified scalar comparisons and rational/Karoubi exchange coherence together"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch",
@@ -73,5 +258,44 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sbc-finite-stage-rational-exchange-coherence",
+  "worker": "stage1",
+  "summary": "Retained the statement. Used the existing integral linear exchange, ambient scalar-comparison package and generic semilinear localization theorem, then wrote out the finite-stage Karoubi functor, naturality, inverse, composition, whiskering, tower and exchange calculations. No new nodes and no constructible landing assumptions.",
+  "blueprint": "Realizes the finite-stage construction required by parent sbc-thm-overline-mathbf-q-ell-coefficient-smooth-base-ch proof step 1 (earlier source steps 1 and 3): sketch32 lines 1191-1228, 1262-1279, 1291-1321. The unit sk-rem-rest includes the pro-etale/adic/rational/Qbar coefficient continuation; its record has no proof steps.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-scalar-extension",
+    "why": "Supplies the specified ambient integral tensor comparisons, successive-extension coherence and rationalized canonical exchange compatibility; the unit provides no separate construction of these scalar comparison tools."
+   },
+   {
+    "node": "lem-pur-semilinear-scalar-localization",
+    "why": "Generic extension of semilinear functors and transformations through raw Hom scalar localization, preserving comparison equations; applies without constructibility and does not replace a smooth base-change argument."
+   },
+   {
+    "node": "lem-weil-l-adic-integers-localization-uniformizer",
+    "why": "Identifies coefficient-ring localization with the finite field and verifies invertibility for the semilinear extension; generic coefficient algebra needed by the raw scalar category."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-pushforward-completion",
+    "why": "Step 5 uses only its defining equation gamma eta = Rf_*(eta) for the direct-image/completion arrow that the statement of prop-weil-pbc-scalar-extension builds into its exchange; generic completion tool, no smooth base-change argument replaced."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-scalar-extension",
+  "lem-pur-semilinear-scalar-localization",
+  "lem-weil-l-adic-integers-localization-uniformizer",
+  "lem-weil-pbc-ringed-pushforward-completion"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q16-a0fb93b6c",
+  "group": "Q16",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q16-a0fb93b6c (reviewer sub-agent of L); spot-checked: Shape: one commit on c1c2047 containing the item and the report, with 0 new nodes. The statement and stmt_deps are unchanged. On side-live the item is still unsplit (not superseded) and it is not in the dropped list. No SGA source is used. I read sketch32 lines 1191-1228, 1262-1279 and 1291-1321. The unit sk-rem-rest has no steps. I read every cited node's statement from clones/side-live, because the snapshot's chapter symlinks were dangling; all of these nodes were landed before the base (NN at 03:50 UTC, Q29 at 06:36 UTC).\n\nWhat checks out:\n- The statement's types check. b^F=(P_M^f d^g)(p^f D^g_E) and b^G=(D_M^h p^e)(d^h P^e_E) are typed T^X F_E→F_M T^T, and the exchange equation has the same type on both sides.\n- The Karoubi formulas J(p)bH(p), with inverse H(p)b^{-1}J(p), are the convention of def-sbc-ambient-complete-coefficient-categories.\n- Step 2: the semilinear localization uses R=S=O_E with O_E[1/ϖ]≅E.\n- Step 4: C is semilinear by balancing and ϖ_E=wϖ_M^e is invertible in M, so the transition v⊗c↦C(v)⊗c follows.\n- Step 3: the tower equation has exactly the shape required by lem-sbc-coherent-pair-functor-descent.\n- Steps 6-9: the supported naturality, inverse products H(p)/J(p), composition and both whiskerings are correct.\n- Step 10: I re-derived the composite tower independently: the c-tower whiskered by H_E, the b-tower under J_P, then naturality of c_{P/M} at b_{M/E}. It gives (J_PH_Pa^A)(k_{P/M}U)(Wk_{M/E}), and k_{E/E}=1.\n- Edge cases checked: M=E, p=1 (gives j_E(α)), p=0, and a nontrivial p.\n- No duplicate: the blueprint search for Karoubi exchange scalar found 8 nodes, none stating this coherence, and def-sbc-ambient-complete-raw-scalar-system defines only the transitions.\n- No cycle: a BFS from the newly cited nodes does not reach the item or its parent.\n\nFault (C3/C4), step 5: the step identified the exchange in the final clause of prop-weil-pbc-scalar-extension (ambient ringed mate, then completion, then the direct-image/completion arrow γ) with α^int 'by step 1'. The statement of lem-sbc-completed-operations-linear-natural-exchange only identifies α with the 'completed exchange from finite-level transformations'; the needed identification exists only in step 4 of its proof.\n\nRepair: step 5 now writes the identification out. By def-weil-pbc-completed-pullback, P=ΛL* with unit k. By lem-weil-pbc-ringed-pushforward-completion, γκ=Rh_*(κ), so (γΛ(b))k=R_h(k_e)b. lem-sbc-reflected-compositor-unit-normalization holds for both compositors, and composing the two identities gives the θ^c/θ hypothesis. The uniqueness clause of lem-sbc-reflector-square-mate-factorization then gives α^int=γΛ(b). proof_deps were updated, and lem-weil-pbc-ringed-pushforward-completion was added to tool_uses as a generic completion tool from sk-thm-properbasechange.\n\nAccepted tool_uses: prop-weil-pbc-scalar-extension, lem-pur-semilinear-scalar-localization, lem-weil-l-adic-integers-localization-uniformizer and the added pushforward-completion node.\n\nAdvisory: these nodes share the convention that the canonical compositors are conjugates of direct-image composition. lem-sbc-completed-operations fixes it only in its proof, not in its statement.; 1 file(s) fixed by the reviewer"
  }
 }
