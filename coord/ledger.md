@@ -23120,3 +23120,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:02 L: merged deliver/NP/lem-sfb-dense-lattice-derived-invariants-comparison (reviewer PASS; first push; new nodes: 3)
 - 17:03 L: returned deliver/O2/lem-sfb-norm-algcl-internal-hom-base-change (reviewer RETURN: D4 circular split, also D1/D2: the only new node restates an ancestor in another form. Steps 3-9 are a sound formal redu)
 - 17:03 L: merged deliver/NK/lem-sfb-derived-cech-image-totalization (stage 2; reviewer PASS; parallel immutable checks)
+- 17:03 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
