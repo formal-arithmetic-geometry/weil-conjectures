@@ -1,0 +1,71 @@
+{
+ "id": "lem-sp-varying-ring-cartesian-comparison-lift-relabelling",
+ "blueprint": {
+  "from": {
+   "node": "det-sp-tower-gluing",
+   "place": "Local pairs paragraph: the proper/open interchange is constructed as an actual map of coefficient towers before evaluation; this node identifies the cartesian open comparison inside that map with the lift relabelling on the extension-by-zero presheaf.",
+   "via": [
+    "lem-sp-varying-ring-proper-open-pasting",
+    "lem-sp-coefficient-tower-shriek-calculus"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ },
+ "kind": "statement",
+ "title": "The cartesian open comparison on varying-ring systems relabels lifts",
+ "statement": "Let $R_n$ be arbitrary commutative rings with maps $\\varphi_n:R_{n+1}\\to R_n$, and use the ordinary semilinear module-system categories $\\mathscr S_X$ on small pro-etale sites [def-weil-pbc-proetale-site] with exact inverse image $f^*_\\bullet$ and open extension by zero $j_{!,\\bullet}$ of [def-sp-varying-ring-operations]. Let $i:S\\hookrightarrow T$ be a quasi-compact open immersion [def-weil-open-immersion, def-weil-finite-type-morphism], let $p:W\\to T$ be a morphism of schemes, put $W'=W\\times_TS$ with projections $b:W'\\hookrightarrow W$ and $q:W'\\to S$ [def-pc-fibre-product], and let $\\beta:p^*_\\bullet i_{!,\\bullet}\\to b_{!,\\bullet}q^*_\\bullet$ be the inverse of the open-adjunction transpose of inverse-image composition after the open unit, as in [def-sp-varying-ring-proper-open-arrows]. Then for every $N\\in\\mathscr S_S$ and every $n$:\n\n(1) the underlying abelian sheaf of $(p^*_\\bullet N')_n$, for any system $N'$ on $T$, is the abelian inverse image $p^{-1}N'_n$ [def-weil-proetale-inverse-image] with the induced $(R_n)_W$-action; the underlying abelian sheaf of $(i_{!,\\bullet}N)_n$ is the sheafification [def-weil-presheaf-modules-sheafification] of the direct-sum presheaf of [def-weil-extension-by-zero-presheaf], whose local sections over an object $U\\to T$ are finite sums $[c,x]$ of a lift $c:U\\to S$ of $U\\to T$ through $i$ and a section $x\\in N_n(U\\xrightarrow{c}S)$; similarly for $b_{!,\\bullet}$ with lifts through $b$. Under these identifications the semilinear transitions of $p^*_\\bullet i_{!,\\bullet}N$ and of $b_{!,\\bullet}q^*_\\bullet N$ send $[c,x]$ to $[c,t_n(x)]$, where $t_n:N_{n+1}\\to\\operatorname{Res}_{n+1,n}N_n$ is the transition of $N$.\n\n(2) $\\beta_n$ sends a local section $[c,x]$, pulled back along $h:H\\to W$ with $c$ a lift of $p\\circ h$ through $i$, to the section $[(h,c),x]$ labelled by the induced lift $(h,c):H\\to W'$ of $h$ through $b$; the inverse sends a lift $a$ through $b$ to $q\\circ a$. Consequently $\\beta$ is an isomorphism of ordinary systems, natural in $N$, commuting with the semilinear transitions. No flatness, finiteness or noetherian hypothesis on the $R_n$ is assumed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 03DI (lemma-extension-by-zero): the direct-sum presheaf description of extension by zero; with literature/stacks-project/more-etale.tex Tag 0F7B (lemma-shriek-proper-and-open), cartesian open case. Agent formulation carrying Steps 2 and 3 of the 2026-10-21 base proof of lem-sp-varying-ring-proper-open-pasting (abelian description of system operations; lift relabelling and transition compatibility of beta), added by the maintainer reviewer of the Q65 re-split."
+ },
+ "stmt_deps": [
+  "def-sp-varying-ring-operations",
+  "def-sp-varying-ring-proper-open-arrows",
+  "def-weil-pbc-proetale-site",
+  "def-weil-open-immersion",
+  "def-weil-finite-type-morphism",
+  "def-pc-fibre-product",
+  "def-weil-proetale-inverse-image",
+  "def-weil-presheaf-modules-sheafification",
+  "def-weil-extension-by-zero-presheaf"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "rg -n 'pullbackPushforwardAdjunction|extendByZero|lowerShriek' -tlean over /home/ubuntu/weil-conjectures-sheaf/lean/.lake/packages/mathlib/Mathlib",
+   "results": "extendByZero only as Function.ExtendByZero (Algebra/Group/Pi/Lemmas.lean:446, LinearAlgebra/Pi.lean:653) for functions; lowerShriek/pullback hits in Topology/Sheaves/{Presheaf,Functors,Stalks}.lean, Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, PullbackFree.lean, Presheaf/Pullback.lean, AlgebraicGeometry/Modules/Sheaf.lean: pullback of module (pre)sheaves along continuous functors, no extension by zero along an open of a site, no pro-etale site, no semilinear systems",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "rg -n -i 'pullback.*(IsOpenImmersion|openImmersion).*Modules|Modules.*restrictFunctor' -tlean Mathlib/AlgebraicGeometry",
+   "results": "AlgebraicGeometry/Modules/Sheaf.lean:564,603 and Modules/Tilde.lean:576-597 (Scheme.Modules.restrictFunctor for Zariski O_X-modules)",
+   "date": "2026-10-21",
+   "verdict": "no match: Zariski O_X-modules only; no base-change of extension by zero"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "merged_into": null,
+ "created": {
+  "by": "worker",
+  "item": "lem-sp-varying-ring-proper-open-pasting",
+  "date": "2026-10-21",
+  "group": "Q65"
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sp-tower-geometric"
+}
