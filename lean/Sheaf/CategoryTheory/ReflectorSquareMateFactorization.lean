@@ -125,6 +125,78 @@ theorem mate_factorization
           ((unit s x Lf).app ((right s t Rg hg).obj K) ≫
             ((mateEquiv acg ach θc.hom).app K).hom) =
         θ.hom.app (Rg.obj K.obj) ≫ Le.map (ag.counit.app K.obj) ≫ (unit t y Le).app K) := by
-  sorry
+  have _ := hcf
+  have _ := hce
+  have hδ (K : t.FullSubcategory) :
+      (unit s t Lg).app ((right s t Rg hg).obj K) ≫ (acg.counit.app K).hom =
+        ag.counit.app K.obj := by
+    apply (ag.homEquiv (Rg.obj K.obj) K.obj).injective
+    erw [← hcg ((right s t Rg hg).obj K) K (acg.counit.app K)]
+    simp only [← Adjunction.homEquiv_symm_id, Equiv.apply_symm_apply,
+      ObjectProperty.FullSubcategory.id_hom]
+    rfl
+  have htrans (K : t.FullSubcategory) :
+      (ah.homEquiv (Lf.obj (Rg.obj K.obj)) ((left t y Le).obj K).obj).symm
+          ((unit s x Lf).app ((right s t Rg hg).obj K) ≫
+            ((mateEquiv acg ach θc.hom).app K).hom) =
+        θ.hom.app (Rg.obj K.obj) ≫ Le.map (ag.counit.app K.obj) ≫
+          (unit t y Le).app K := by
+    let M := (right s t Rg hg).obj K
+    let N := (left t y Le).obj K
+    let α := (mateEquiv acg ach θc.hom).app K
+    have hc : (ah.homEquiv ((left s x Lf).obj M).obj N.obj).symm α.hom =
+        (unit x y Lh).app ((left s x Lf).obj M) ≫
+          ((ach.homEquiv ((left s x Lf).obj M) N).symm α).hom := by
+      apply (ah.homEquiv _ _).injective
+      rw [Equiv.apply_symm_apply, ← hch, Equiv.apply_symm_apply]
+    have hr : (ach.homEquiv ((left s x Lf).obj M) N).symm α =
+        θc.hom.app M ≫ (left t y Le).map (acg.counit.app K) := by
+      rw [Adjunction.homEquiv_counit]
+      exact mateEquiv_counit acg ach θc.hom K
+    rw [hr, ObjectProperty.FullSubcategory.comp_hom] at hc
+    have hn : (unit t y Le).app ((left s t Lg).obj M) ≫
+          ((left t y Le).map (acg.counit.app K)).hom =
+        Le.map (acg.counit.app K).hom ≫ (unit t y Le).app K :=
+      ((unit t y Le).naturality (acg.counit.app K)).symm
+    rw [ah.homEquiv_naturality_left_symm]
+    erw [hc]
+    calc
+      _ = (Lh.map ((unit s x Lf).app M) ≫
+            (unit x y Lh).app ((left s x Lf).obj M) ≫ (θc.hom.app M).hom) ≫
+            ((left t y Le).map (acg.counit.app K)).hom := by
+        simp only [Category.assoc, M]
+      _ = (θ.hom.app M.obj ≫ Le.map ((unit s t Lg).app M) ≫
+            (unit t y Le).app ((left s t Lg).obj M)) ≫
+            ((left t y Le).map (acg.counit.app K)).hom := by rw [hθ M]
+      _ = θ.hom.app M.obj ≫ Le.map ((unit s t Lg).app M) ≫
+            Le.map (acg.counit.app K).hom ≫ (unit t y Le).app K := by
+        simp only [Category.assoc]
+        rw [hn]
+      _ = θ.hom.app M.obj ≫
+            Le.map ((unit s t Lg).app M ≫ (acg.counit.app K).hom) ≫
+            (unit t y Le).app K := by rw [Le.map_comp, Category.assoc]
+      _ = _ := by
+        rw [hδ K]
+        rfl
+  have hfac (K : t.FullSubcategory) :
+      (unit s x Lf).app ((right s t Rg hg).obj K) ≫
+          ((mateEquiv acg ach θc.hom).app K).hom =
+        (mateEquiv ag ah θ.hom).app K.obj ≫ Rh.map ((unit t y Le).app K) := by
+    apply (ah.homEquiv _ _).symm.injective
+    erw [htrans K, ah.homEquiv_naturality_right_symm, Adjunction.homEquiv_counit,
+      mateEquiv_counit]
+    simp only [Category.assoc]
+  constructor
+  · apply NatTrans.ext
+    funext K
+    exact hfac K
+  · intro K
+    refine ⟨?_, htrans K⟩
+    intro a ha
+    apply ObjectProperty.hom_ext
+    apply (unitCompPartialBijectiveAux (i := x.ι)
+      (Lf.obj (Rg.obj K.obj)) ((right x y Rh hh).obj ((left t y Le).obj K))).symm.injective
+    rw [unitCompPartialBijectiveAux_symm_apply, unitCompPartialBijectiveAux_symm_apply]
+    exact ha.trans (hfac K).symm
 
 end CategoryTheory.ReflectorSquare
