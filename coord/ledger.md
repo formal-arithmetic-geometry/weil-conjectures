@@ -23736,3 +23736,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 20:52 L: returned deliver/NI/lem-sfb-gabber-global-snc-alteration (reviewer RETURN: C1/F + C5/B9 + G4. Live item. It is not on the drop list, its citer lem-sfb-nested-open-regular-alteration is live, and )
 - 20:52 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 20:52 L: merged deliver/NO/lem-sfb-root-tower-boundary-acyclicity (stage 2; reviewer PASS; parallel immutable checks)
+- 20:52 L: returned deliver/B2/Sheaf.AlgebraicGeometry.PerfectOverlapHomContinuity (reviewer RETURN: (reviewer C-0c967, head 0c967c08b) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.AlgebraicGeometry.Pe)
