@@ -2,7 +2,7 @@
  "id": "lem-pur-ringed-derived-pullback-linear",
  "kind": "statement",
  "title": "Derived ringed-topos pullback preserves compatible central scalars",
- "statement": "Let $R$ be a commutative ring and let $u:(\\operatorname{Sh}(\\mathcal D),B)\\to(\\operatorname{Sh}(\\mathcal C),A)$ be a morphism of ringed topoi presented by sites small in the module universe [def-weil-size-convention, def-weil-pbc-ringed-topos-morphism]. Suppose given unital homomorphisms $s_A:R\\to\\Gamma(\\mathcal C,A)$ and $s_B:R\\to\\Gamma(\\mathcal D,B)$ such that the structural map $c:u^{-1}A\\to B$ carries $u^{-1}s_A(r)$ to $s_B(r)$ for every $r\\in R$. On module sheaves [def-weil-sheaf-of-modules-category] define $(r f)_U(x)=s_A(r)|_U f_U(x)$, and likewise using $s_B$. Equip the ordinary unbounded derived categories $D(A),D(B)$ [def-weil-abstract-derived-category] with the induced $R$-linear structures [def-weil-linear-category, lem-weil-linear-abelian-derived-category]. The canonical K-flat derived pullback $Lu^*:D(A)\\to D(B)$ of [lem-weil-pbc-ringed-topoi-derived-pullback] is $R$-linear [def-weil-linear-functor]. In particular it sends the endomorphism induced by the actual scalar section $s_A(r)$ to that induced by $s_B(r)$; no flatness of $c$ is assumed.",
+ "statement": "Let $R$ be a commutative ring and let $u:(\\operatorname{Sh}(\\mathcal D),B)\\to(\\operatorname{Sh}(\\mathcal C),A)$ be a morphism of ringed topoi, where $A$ and $B$ are sheaves of commutative unital rings, presented by sites small in the module universe [def-weil-size-convention, def-weil-pbc-ringed-topos-morphism]. Suppose given unital homomorphisms $s_A:R\\to\\Gamma(\\mathcal C,A)$ and $s_B:R\\to\\Gamma(\\mathcal D,B)$ such that the structural map $c:u^{-1}A\\to B$ carries $u^{-1}s_A(r)$ to $s_B(r)$ for every $r\\in R$. On module sheaves [def-weil-sheaf-of-modules-category] define $(r f)_U(x)=s_A(r)|_U f_U(x)$, and likewise using $s_B$. Equip the ordinary unbounded derived categories $D(A),D(B)$ [def-weil-abstract-derived-category] with the induced $R$-linear structures [def-weil-linear-category, lem-weil-linear-abelian-derived-category]. The canonical K-flat derived pullback $Lu^*:D(A)\\to D(B)$ of [lem-weil-pbc-ringed-topoi-derived-pullback] is $R$-linear [def-weil-linear-functor]. In particular it sends the endomorphism induced by the actual scalar section $s_A(r)$ to that induced by $s_B(r)$; no flatness of $c$ is assumed.",
  "source": {
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 06YY (lemma-derived-base-change), K-flat computation and exactness. The compatible-central-scalar assertion is the implicit compatible-central-scalar prerequisite, not a separately stated clause of 06YY."
@@ -17,9 +17,90 @@
   "def-weil-linear-functor",
   "lem-weil-pbc-ringed-topoi-derived-pullback"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For an $A$-module sheaf $M$, write $\\mu^A_M(r)$ for multiplication by $s_A(r)$ on every section. Restrictions commute with this multiplication, and $\\mu^A_M(r)$ is $A$-linear because $A$ is commutative. The same assertions hold for $B$. The ring-homomorphism laws for $s_A$ make the abelian group of module-sheaf morphisms an $R$-module. Sectionwise, $g(s_A(r)f(x))=s_A(r)g(f(x))$ for an $A$-linear $g$, so composition is $R$-bilinear. This verifies the stated $R$-linear structures before passing to complexes. On complexes let $\\mu_P^A(r)$ be the degreewise multiplication chain map; it commutes with the differentials because they are $A$-linear.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-linear-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/conventions.tex",
+    "place": "section-algebra (rings are commutative and modules unitary); sectionwise verification of central scalar actions."
+   }
+  },
+  {
+   "text": "Use $u^*M=B\\otimes_{u^{-1}A}u^{-1}M$ from [lem-weil-pbc-ringed-topoi-derived-pullback]. The algebraic inverse image transports multiplication by $s_A(r)$ to multiplication by $u^{-1}s_A(r)$, by its compatibility with module action and naturality on morphisms [def-weil-pbc-algebraic-inverse-image]. On the presheaf tensor product, for sections $b,m$, the balancing relation and the hypothesis on $c$ give $b\\otimes(u^{-1}s_A(r)m)=b\\,c(u^{-1}s_A(r))\\otimes m=s_B(r)b\\otimes m$. Thus the two morphisms agree on all pure tensors and hence on their finite sums. Sheafifying this equality gives $u^*(\\mu_M^A(r))=\\mu^B_{u^*M}(r)$, since the sheaf tensor product and its module action are induced from the presheaf tensor product [def-pur-sheaf-tensor-product]. Applying this in every degree yields $u^*(\\mu_P^A(r))=\\mu_{u^*P}^B(r)$ for every complex $P$.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D6 (definition-pushforward), pullback formula; scalar equality follows directly from tensor balancing."
+   }
+  },
+  {
+   "text": "Put $F=Lu^*$ and write $Q_A,Q_B$ for localization. The induced structures of [lem-weil-linear-abelian-derived-category] give $Q_A(\\mu_P^A(r))=r\\,\\mathrm{id}_{Q_AP}$ and $Q_B(\\mu_{u^*P}^B(r))=r\\,\\mathrm{id}_{Q_Bu^*P}$. If $P$ is K-flat with flat terms, [lem-weil-pbc-ringed-topoi-derived-pullback] supplies the invertible component $\\epsilon_P:F(Q_AP)\\to Q_Bu^*P$ of a natural transformation on the homotopy category. Apply its naturality to the chain map $\\mu_P^A(r)$ and use step 2: $\\epsilon_P\\circ F(r\\,\\mathrm{id}_{Q_AP})=(r\\,\\mathrm{id}_{Q_Bu^*P})\\circ\\epsilon_P$. Bilinearity of composition makes the right side equal to $\\epsilon_P\\circ(r\\,\\mathrm{id}_{F(Q_AP)})$. Cancel the invertible $\\epsilon_P$ to obtain $F(r\\,\\mathrm{id}_{Q_AP})=r\\,\\mathrm{id}_{F(Q_AP)}$. This uses naturality of the canonical comparison, not an arbitrary objectwise identification.",
+   "uses": [
+    "lem-weil-linear-abelian-derived-category",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-weil-linear-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), canonical natural K-flat comparison; the scalar argument below is supplied by the worker."
+   }
+  },
+  {
+   "text": "For an arbitrary complex $K$, take a quasi-isomorphism $p:P\\to K$ with $P$ K-flat and with flat terms, using [lem-pc-kflat-resolution]. Localization makes $a=Q_Ap$ invertible [def-weil-abstract-derived-category]. In the $R$-linear derived category, $a\\circ(r\\,\\mathrm{id}_{Q_AP})=(r\\,\\mathrm{id}_{Q_AK})\\circ a$ by bilinearity. Apply $F$ to this equality, substitute step 3, and cancel the isomorphism $F(a)$. Bilinearity in $D(B)$ then gives $F(r\\,\\mathrm{id}_{Q_AK})=r\\,\\mathrm{id}_{F(Q_AK)}$. The localization has the complexes as its objects; in any equivalent realization every object is isomorphic to some $Q_AK$. For such an isomorphism $a:Q_AK\\to X$, the identical conjugation calculation gives $F(r\\,\\mathrm{id}_X)=r\\,\\mathrm{id}_{FX}$. No resolution of a general derived morphism, nor functorial choice of resolutions, is required.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "def-weil-abstract-derived-category",
+    "def-weil-linear-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), canonical natural K-flat comparison; the scalar argument below is supplied by the worker."
+   }
+  },
+  {
+   "text": "For every derived morphism $f:X\\to Y$, bilinearity gives $rf=(r\\,\\mathrm{id}_Y)\\circ f$. Consequently step 4 and functoriality imply $F(rf)=F(r\\,\\mathrm{id}_Y)\\circ F(f)=(r\\,\\mathrm{id}_{FY})\\circ F(f)=rF(f)$. Also $F$ is additive: [lem-weil-pbc-ringed-topoi-derived-pullback] says it is exact as a functor of triangulated categories, and exact functors are additive in [def-weil-triangulated-category]. Therefore its maps on all Hom groups are $R$-module homomorphisms, exactly [def-weil-linear-functor]. The special case $f=\\mathrm{id}_X$ is preservation of the endomorphism coming from the actual scalar section. The only tensor equality used was balancing, and the derived comparison holds for arbitrary $c$; flatness of $c$ was never needed.",
+   "uses": [
+    "def-weil-linear-category",
+    "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "def-weil-triangulated-category",
+    "def-weil-linear-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 06YY (lemma-derived-base-change), canonical natural K-flat comparison; the scalar argument below is supplied by the worker."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-linear-category",
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "lem-weil-linear-abelian-derived-category",
+  "lem-pc-kflat-resolution",
+  "def-weil-abstract-derived-category",
+  "def-weil-triangulated-category",
+  "def-weil-linear-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 06YY, lemma-derived-base-change; worker supplies central-scalar computation using the natural comparison, plus sites-modules.tex Tag 03D6 and conventions.tex section-algebra."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -93,10 +174,54 @@
    "results": "0 hits; ",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Linear|linear",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: underived pullback and exact-functor derived maps do not give K-flat derivation for an arbitrary nonflat coefficient-ring map.",
+   "subdirectory": "CategoryTheory/Triangulated/DerivedFunctor"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.Linear, CategoryTheory.Functor.totalLeftDerived",
+   "results": "0 hits; ",
+   "date": "2026-10-21",
+   "verdict": "no match: underived pullback and exact-functor derived maps do not give K-flat derivation for an arbitrary nonflat coefficient-ring map."
+  },
+  {
+   "tool": "leansearch",
+   "query": "A K-flat left derived pullback of sheaves of modules is linear over compatible scalar sections",
+   "results": "8 hits; VectorField.mpullback_smul_apply, SheafOfModules.pullback, Trivialization.pullback_linear, PresheafOfModules.Sheafify.SMulCandidate.h, PresheafOfModules.pullback, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullbackPushforwardAdjunction, PresheafOfModules.Sheafify.SMulCandidate.mk'",
+   "date": "2026-10-21",
+   "verdict": "no match: underived pullback and exact-functor derived maps do not give K-flat derivation for an arbitrary nonflat coefficient-ring map."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived pullback between ringed topoi preserves compatible central scalars over a commutative ring without flatness of the ring map",
+   "results": "8 hits; SheafOfModules.pullbackComp, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackIso, AlgebraicGeometry.Scheme.Modules.pullback, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pullback, SheafOfModules.instIsLeftAdjointPullback, PresheafOfModules.pullbackComp",
+   "date": "2026-10-21",
+   "verdict": "no match: underived pullback and exact-functor derived maps do not give K-flat derivation for an arbitrary nonflat coefficient-ring map."
+  },
+  {
+   "tool": "grep",
+   "query": "Linear|linear",
+   "results": "23 hits; Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/ExactFunctor.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean, Mathlib/Algebra/Homology/DerivedCategory/Linear.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: underived pullback and exact-functor derived maps do not give K-flat derivation for an arbitrary nonflat coefficient-ring map.",
+   "subdirectory": "Algebra/Homology/DerivedCategory"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Total left derived functor of a linear functor preserves scalar multiplication on identity endomorphisms using natural K-flat comparison maps",
+   "results": "8 hits; DerivedCategory.instLinearSingleFunctor, CategoryTheory.Functor.instLinearDerivedCategoryMapDerivedCategory, DerivedCategory.instLinearCochainComplexIntQ, DerivedCategory.instLinear, CategoryTheory.Functor.mapExactFunctor_smul, DerivedCategory.instLinearHomotopyCategoryIntUpQh, CategoryTheory.Functor.mapExtLinearMap_apply, CategoryTheory.Functor.mapExtLinearMap_coe",
+   "date": "2026-10-21",
+   "verdict": "no match: underived pullback and exact-functor derived maps do not give K-flat derivation for an arbitrary nonflat coefficient-ring map."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-compact-support-reduction-tower-functor",
@@ -116,5 +241,44 @@
   "same_as": [],
   "is": null
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-ringed-derived-pullback-linear",
+  "worker": "stage1",
+  "summary": "Q77: five proof steps; no new nodes. Proves compatible scalar preservation directly on tensor generators, uses naturality of the existing K-flat derived comparison for scalar identity maps, extends across resolutions, and deduces full R-linearity from bilinearity and exactness. Makes the source convention that A and B are commutative explicit to remove the noncentral-action ambiguity. Read the cited statements and checked their hypotheses and small cases.",
+  "blueprint": "Realizes the first sentence of the main-20261015 proof of lem-weil-compact-support-representative-independence: linearity of the coefficient-reduction derived pullback used by lem-weil-compact-support-reduction-tower-functor, before open extension. No change to the unit or chapter route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pullback",
+    "why": "Supplies the canonical natural K-flat comparison and exactness for an arbitrary ringed-topos map; the six-operations unit does not reconstruct derived pullback."
+   },
+   {
+    "node": "def-weil-pbc-algebraic-inverse-image",
+    "why": "Specifies transport of the module action along inverse image, needed for the scalar calculation."
+   },
+   {
+    "node": "def-pur-sheaf-tensor-product",
+    "why": "Defines the generic linear, module, tensor, localization or triangulated structure used in the scalar-preservation calculation; this is a tool, not an alternative six-functor route."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Supplies flat-term K-flat resolutions of arbitrary unbounded module-sheaf complexes; no boundedness or flat ring-map hypothesis is available."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ringed-topoi-derived-pullback",
+  "def-weil-pbc-algebraic-inverse-image",
+  "def-pur-sheaf-tensor-product",
+  "lem-pc-kflat-resolution"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q77-53a2f2e46",
+  "group": "Q77",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q77-53a2f2e46 (reviewer sub-agent of L); spot-checked: Read the item's 5 steps and all 12 cited statements in full; the delivery has no new nodes. Statement change: it now says A and B are sheaves of commutative unital rings. This does not weaken anything. The cited Lu^* node (lem-weil-pbc-ringed-topoi-derived-pullback), lem-pc-kflat-resolution, def-pur-sheaf-tensor-product and Stacks conventions section-algebra all assume commutative rings. The report's M_2(k) counterexample checks out: with e_11 as scalar, right multiplication by e_12 times the scalar is not A-linear (e_21 gives 0 against e_22). The only citer, the Q05 reduction-tower functor, applies it to commutative O_E coefficient sheaves. Step 1: multiplication by s_A(r) is A-linear by commutativity, and composition is bilinear. Step 2: the algebraic inverse image carries multiplication by s_A(r) to multiplication by u^{-1}s_A(r) (its scalar-multiplication graph condition). Tensor balancing with the hypothesis on c is checked on pure tensors, then sums, then sheafification. Step 3: naturality of epsilon on K(A) at mu_P, with Q R-linear (mathlib leaf); cancelling the invertible epsilon_P is correct, and the directions match the node. Step 4: conjugation by Q(p) for a K-flat resolution P->K with flat terms. Step 5: scalar preservation for every derived morphism, plus additivity from exactness (definition of exact functor). Edge cases: r=0,1, zero ring, identity morphism, Z->F_2 on a point. Sources: 06YY = sites-cohomology lemma-derived-base-change (line 3585), 06YS, 03D6; no SGA. The DAG scan found no duplicate. The unit sk-def-sf-operations cites no units. Accepted tool_uses: the K-flat derived-pullback comparison and the K-flat resolutions; the two declared definitions are only notions. Not superseded: the item is still unsplit in live and side-live. No fixes."
+ }
 }
