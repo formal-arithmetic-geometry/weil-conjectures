@@ -96,14 +96,15 @@
  "chapter": "sec-picard-framework",
  "unit": "sk-thm-picard-duality",
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.PrincipalOpenCechSubsetHorizontalFaceCoordinate",
-  "file": "lean/Sheaf/AlgebraicGeometry/PrincipalOpenCechSubsetHorizontalFaceCoordinate.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.PrincipalOpenCechSubsetHorizontalFaceCoordinate",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/PrincipalOpenCechSubsetHorizontalFaceCoordinate.lean",
   "declaration": "AlgebraicGeometry.principalSubsetHorizontalFaceCoordinate",
   "statement": "theorem principalSubsetHorizontalFaceCoordinate\n    (A : Type u) [CommRing A] (r : ℕ) (f : Fin r → A)\n    (J : CochainComplex (Spec (.of A)).Modules ℤ) :\n    let V := principalSubsetUnion A r f\n    let U : Fin r → V.toScheme.Opens := fun i ↦ V.ι ⁻¹ᵁ PrimeSpectrum.basicOpen (f i)\n    let D := principalSubsetOpen A r f\n    ∀ (hle : ∀ (S : Finset (Fin r)) (j : Fin r), D S ≤ D (S.erase j))\n      (he : ∀ (S : Finset (Fin r)) (j : Fin r), j ∈ S → ∀ n : ℤ,\n        n + 1 - ((S.erase j).card : ℤ) = n + 1 + 1 - (S.card : ℤ))\n      (n : ℤ) (S₀ : {S : Finset (Fin r) // S.Nonempty})\n      (x : (modulesSpecToSheaf.obj (J.X (n + 1 - (S₀.val.card : ℤ)))).obj.obj\n        (op (D S₀.val))),\n      let p := S₀.val.card - 1\n      let q := n + 1 - (S₀.val.card : ℤ)\n      let P := alternatingCechModulePresheaf.obj ((principalSubsetRestriction A r f J).X q)\n      ∀ (S : {S : Finset (Fin r) // S.Nonempty}) (hcard : S.val.card = p + 2),\n      HEq (((alternatingCechDifferential U P p).hom\n          (Pi.single (principalSubsetTuple r S₀)\n            ((principalSubsetSectionTransport A r f (J.X q) S₀).hom x)))\n          (S.val.orderEmbOfFin hcard))\n        ((principalSubsetSectionTransport A r f\n          (J.X (n + 1 + 1 - (S.val.card : ℤ))) S).hom (\n          ∑ j : S.val, if h : (S.val.erase j.val).Nonempty then\n            (-1 : A) ^ ((S.val.filter (fun i ↦ i < j.val)).card) •\n              (modulesSpecToSheaf.obj (J.X (n + 1 + 1 - (S.val.card : ℤ)))).obj.map\n                (homOfLE (hle S.val j.val)).op\n                ((modulesSpecToSheaf.map\n                  (eqToHom (congrArg J.X (he S.val j.val j.property n)))).hom.app\n                    (op (D (S.val.erase j.val)))\n                    ((Pi.single S₀ x : principalSubsetCoordinates A r f J n)\n                      ⟨S.val.erase j.val, h⟩))\n          else 0))",
   "branch": "sheaf-dag",
-  "by": "B3",
-  "date": "2026-10-14"
+  "by": "P4",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module in favor of the adopted source theorem. The full original statement is accepted verbatim by exact principalSubsetHorizontalFaceCoordinate A r f J; its axioms are propext, Classical.choice and Quot.sound. The parent HorizontalFaces already imports this upstream module. All mathematical dependencies and proof steps are preserved."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -116,14 +117,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-13",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "B3",
+  "reviewer": "C-9dd0c",
+  "group": "P4",
   "result": "pass",
-  "landing": "20261013T181052-L-2597865",
+  "landing": "20261021T111406-L-102852",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retired Sheaf module stub vs live WeilConjectures twin: identical public statement (diff + scratch example closed by the twin, axioms propext/choice/Quot.sound); node lean record = twin signature; no importers of the Sheaf module"
  },
  "lean_audit": {}
 }
