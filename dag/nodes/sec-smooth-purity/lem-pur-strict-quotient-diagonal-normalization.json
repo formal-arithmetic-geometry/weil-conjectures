@@ -22,7 +22,10 @@
   "def-pur-kinjective-complex",
   "def-pur-sheaf-tensor-product",
   "def-pc-flat-sheaf-modules",
-  "def-pc-sheaf-restrict-scalars"
+  "def-pc-sheaf-restrict-scalars",
+  "lem-pur-system-ringed-sequence-site",
+  "def-sfb-constant-completion-coefficient-data",
+  "def-pur-strict-quotient-completion-data"
  ],
  "proof": [
   {
@@ -370,5 +373,36 @@
   "group": "Q80",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q80-cadf7493d (reviewer sub-agent of L); spot-checked: I read the item, its 11 steps and all 22 cited statements in full. The delivery adds no new nodes. The statement is byte-identical to the one in Q75's FIX, which created this item; the three added stmt_deps (sheaf tensor, flat module, restriction of scalars) are notions the statement uses. proof_deps equals the union of the step uses, and there is no cycle (item absent from its 1032-node closure). The four off-unit generic split nodes (K-flat resolution, diagram site, strict-tower R lim, constant completion equivalence) are declared as tool uses, and I accept them. Source checks: Stacks 0941 computes R lim by K-injective termwise limit and uses 08BJ for evaluation; 099M with 0A0E gives the completion reflector; 21 tags match their labels; no SGA source is used. Steps: 1-2 the vertical sheaf condition holds because J^op is a poset, and sheafification and tensor are componentwise; 3 kernels and cokernels are componentwise and U reflects isomorphisms; 4 derived conservativity is proved through a left fraction in K(Mod B), correctly; 5 ΔQ is K-flat with flat terms; 6 lem-pur-derived-change-of-rings gives X_Q=(Q⊗A_n) with the augmentation x↦x⊗1; 7 Δ preserves K-injectives by an explicit homotopy h_n=h p_{n1}, using ev_1 ⊣ Δ with 1 terminal; 8 lim ΔJ=J defines ℓ, natural by Hom into K-injectives; 9 LUR=C uses the same strict model; 10 types checked, [k]=R lim(i_V)ℓ^{-1}; 11 the constant-completion node's unit-respecting Koszul/quotient identification gives η, and naturality follows from the localization universal property. Edge cases I=0, I=A, A=Z with I=(p), V=0 and unbounded V all hold. Duplicate candidates are not duplicates: lem-trf-completion-unit-strict-quotient-model is pro-étale/Roos, lem-weil-pbc-completed-quotient-unit-normalization concerns an adic datum, lem-weil-pbc-constant-tower-pushforward-normalization involves a direct image, lem-coef-derived-tower-counit-projections only gives the counit projections. Advisory only: step 1's source calls 03CS 'restriction of scalars', but 03CS is section-presheaves-modules."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StrictQuotientDiagonalNormalization",
+  "declaration": "CategoryTheory.ConstantCompletion.strictQuotientDiagonalNormalization",
+  "declarations": [
+   "CategoryTheory.ConstantCompletion.strictQuotientTowerHasDerived",
+   "CategoryTheory.ConstantCompletion.strictDiagonalRing",
+   "CategoryTheory.ConstantCompletion.strictQuotientRing",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.restriction",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.diagonalD",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.restrictionD",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.reductionD",
+   "CategoryTheory.ConstantCompletion.StrictQuotientDiagonalPresentation.representative",
+   "CategoryTheory.ConstantCompletion.strictQuotientDiagonalNormalization"
+  ],
+  "file": "lean/Sheaf/Paper/StrictQuotientDiagonalNormalization.lean",
+  "statement": "theorem strictQuotientDiagonalNormalization [IsNoetherianRing A] : ∃ (d : StrictQuotientDiagonalPresentation J A I) (i : (constantTower J (constant J A)).mapDerivedCategory ⟶ d.reductionD ⋙ d.restrictionD) (ell : (constantTower J (constant J A)).mapDerivedCategory ⋙ rlim (constant J A) ≅ 𝟭 (D (constant J A))) (c : d.reductionD ⋙ d.restrictionD ⋙ rlim (constant J A) ≅ completion J A I false) (literalLimit : ∀ P : Cx (constant J A), (ordinaryLimit (constant J A)).obj (((constantTower J (constant J A)).mapHomologicalComplex (.up ℤ)).obj P) ≅ P), (∀ n : ℕ, PreservesFiniteLimits (SheafOfModules.systemSequenceEvaluation (finiteSystem J A I) n) ∧ PreservesFiniteColimits (SheafOfModules.systemSequenceEvaluation (finiteSystem J A I) n)) ∧ PreservesFiniteLimits d.restriction ∧ PreservesFiniteColimits d.restriction ∧ (∀ {V W : D (strictQuotientRing J A I)} (f : V ⟶ W), IsIso (d.restrictionD.map f) → IsIso f) ∧ (∀ P : Cx (constant J A), CochainComplex.IsKFlatIndependentCoefficients (R := constant J A) P → (∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := constant J A) (P.X q)) → (CochainComplex.IsKFlatIndependentCoefficients (R := strictDiagonalRing J A) ((d.diagonal.mapHomologicalComplex (.up ℤ)).obj P) ∧ (∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := WeilConjectures.coefficientSequenceTopology J) (R := strictDiagonalRing J A) (d.diagonal.obj (P.X q))) ∧ IsIso (d.representative P) ∧ i.app ((Q (constant J A)).obj P) ≫ d.representative P = (constantTower J (constant J A)).mapDerivedCategoryFactors.hom.app P ≫ (TQ (constant J A)).map ((NatTrans.mapHomologicalComplex (reductionUnit J A I false) (.up ℤ)).app P))) ∧ (∀ V : D (constant J A), ∃ (P : Cx (constant J A)) (_e : (Q (constant J A)).obj P ≅ V), CochainComplex.IsKFlatIndependentCoefficients (R := constant J A) P ∧ (∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := constant J A) (P.X q))) ∧ (∀ P : Cx (constant J A), P.IsKInjective → CochainComplex.IsKInjective (((constantTower J (constant J A)).mapHomologicalComplex (.up ℤ)).obj P)) ∧ (∀ (P : Cx (constant J A)) (q : ℤ), (literalLimit P).hom.f q = limit.π ((constantTower J (constant J A)).obj (P.X q)) (op 0)) ∧ (∀ P : Cx (constant J A), P.IsKInjective → (limitComparison (constant J A)).app (((constantTower J (constant J A)).mapHomologicalComplex (.up ℤ)).obj P) ≫ (rlim (constant J A)).map ((constantTower J (constant J A)).mapDerivedCategoryFactors.inv.app P) ≫ ell.hom.app ((Q (constant J A)).obj P) = (Q (constant J A)).map (literalLimit P).hom) ∧ (∀ P : Cx (constant J A), CochainComplex.IsKFlatIndependentCoefficients (R := constant J A) P → (∀ q : ℤ, SheafOfModules.IsFlatOnSite (J := J) (R := constant J A) (P.X q)) → c.hom.app ((Q (constant J A)).obj P) ≫ (rlim (constant J A)).map ((quotientPresentation J A I false).comparison.app P) = (rlim (constant J A)).map (d.representative P)) ∧ ell.inv ≫ Functor.whiskerRight i (rlim (constant J A)) ≫ c.hom = completionUnit J A I false",
+  "branch": "sheaf-dag",
+  "by": "NL",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The ordinary presentation is existentially constructed, with all section maps and tensor comparisons normalized. Derived functors use the existing universal scalar extension, exact restriction and strict total derived limit. The canonical representative comparison is real data; its invertibility and the natural completion-unit identity are the single postponed theorem. Positive level n is encoded by n+1."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-1ae4bec2a",
+  "group": "NL",
+  "result": "pass",
+  "note": "Re-delivery of RETURNed 20711db3441d. Theorem signature byte-identical; item Lean delta = dropped CoefficientSequenceGlobalSections import + local standard HasDerivedCategory instance (defeq to TD/TQ's explicit standard instance). H2 corrections done exactly: new existing:true def node def-pur-strict-quotient-completion-data owns the 29 plain ConstantCompletionEquivalence defs (all exist live, none from theorem equivalence; strictLimit/quotientPresentation are choices of universally specified structures), lean.statement verbatim l.1757, TeX matches StrictLimit/QuotientPresentationLaws, all 8 cites live, blueprint via-chain verified; def-sfb-constant-completion-coefficient-data cited unedited, disjoint ownership; global-sections theorem stmt_dep dropped. Mechanical finding on lem-pur-system-ringed-sequence-site: item uses systemSequenceRing (ring sheaf whose sheaf condition is the node's conclusion) and the node's constructed equivalence/evaluation -> PASS on that point. Clauses (1)-(4), pins of d/i/ell/c, edge cases I=0/⊤, A=0, empty site re-checked, no extra hypotheses. No compile (no file changed; worker's clean 51.5 s scompile). Advisory: insertion fields unused; second reading is self-check."
  }
 }
