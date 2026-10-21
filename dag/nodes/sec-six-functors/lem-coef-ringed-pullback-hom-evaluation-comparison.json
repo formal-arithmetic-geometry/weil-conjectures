@@ -18,10 +18,10 @@
  ],
  "proof": [
   {
-   "text": "Put $F=Lf^*$, $H_A=R\\mathcal Hom_A$, $H_B=R\\mathcal Hom_B$, and write $e^A_{P,Q}:H_A(P,Q)\\otimes P\\to Q$ and $e^B$ for evaluation. The ringed-topos pullback theorem supplies the functor $F$ on the unbounded categories. The tensor-pullback theorem supplies a natural isomorphism $c_{X,Y}:FX\\otimes FY\\to F(X\\otimes Y)$, the inverse of its displayed comparison. The closed-structure theorem supplies natural bijections $\\operatorname{tr}_A:\\operatorname{Hom}(X\\otimes P,Q)\\cong\\operatorname{Hom}(X,H_A(P,Q))$ and $\\operatorname{tr}_B$, with inverse $u\\mapsto e(u\\otimes1)$. All later equalities are equalities in these derived categories.",
+   "text": "Use the supplied normalized AdjointLift l, its left functor F, and the two fixed closed structures. Restrict each site tensor model to flat-term K-flat objects by whiskering with the forgetful inclusion. Let c be the inverse natural tensor comparison for these two models. The inverse transpose in either closed structure is tensoring a map with the identity and then evaluating; this follows directly from its adjunction.",
    "uses": [
-    "lem-weil-pbc-ringed-topoi-derived-pullback",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+    "def-sf-ringed-derived-adjoint-lift-data",
+    "def-sfb-ringed-derived-comparison-data",
     "lem-sf-ringed-derived-closed-symmetric-monoidal"
    ],
    "elementary": false,
@@ -31,13 +31,10 @@
    }
   },
   {
-   "text": "The comparison $c$ respects the fixed tensor associators. The normalized adjoint-lift theorem supplies the scalar-extension edge for $f$ between the two canonical site presentations. Its universal derived functor is identified with $F$ by the adjunction-compatible derived comparison; transport the edge along that identification. Apply the existing canonical derived tensor-lift theorem to this edge. Here the presentations use the fixed native derived tensor, and their representative isomorphisms are the canonical simultaneous K-flat comparisons: the derived tensor-Hom adjunction theorem identifies these with the same tensor and closed structure used in step 1. Thus the representative-equality hypothesis of the lift theorem is equality with the chosen comparisons, not an additional assumption on $f$. In the notation of that theorem its inverse tensorator is $c^{-1}$, so $c$ is its tensorator. In particular, suppressing only the displayed canonical associators, $c_{X\\otimes Y,Z}(c_{X,Y}\\otimes1)=c_{X,Y\\otimes Z}(1\\otimes c_{Y,Z})$. This is the coherence used below; no preservation of internal Hom is part of this citation.",
+   "text": "Apply tensorLift_exists to the given edge and the restricted models. Its representative comparison hypotheses are definitional equalities. The resulting monoidal lift has inverse tensorator equal to the specified comparison, so its tensorator is c. Its associativity axiom gives the required associativity identity for c, with the fixed source and target associators.",
    "uses": [
-    "lem-sfb-ringed-derived-adjoint-lift",
     "lem-sfb-ringed-derived-tensor-lift",
-    "def-sfb-ringed-derived-comparison-data",
-    "lem-sf-ringed-derived-tensor-hom-adjunction",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-sfb-ringed-derived-comparison-data"
    ],
    "elementary": false,
    "source": {
@@ -60,7 +57,7 @@
    "text": "For $a:P'\\to P$ and $b:Q\\to Q'$, compare $\\beta_{P',Q'}F(H_A(a,b))$ and $H_B(Fa,Fb)\\beta_{P,Q}$. Their transposes have domain $F H_A(P,Q)\\otimes FP'$. Substitute the evaluation equation of step 3 into both. Naturality of $c$ and the naturality of the closed adjunction in its tensor parameter and target make each transpose equal to $F\\bigl(b\\,e^A_{P,Q}(1\\otimes a)\\bigr)c_{H_A(P,Q),P'}$. Injectivity of $\\operatorname{tr}_B$ gives the desired equality, including the contravariant first variable.",
    "uses": [
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-sfb-ringed-derived-comparison-data"
    ],
    "elementary": true,
    "source": {
@@ -72,7 +69,7 @@
    "text": "Let $t:X\\otimes P\\to Q$ be any derived morphism, and put $\\widehat t=\\operatorname{tr}_A(t)$. Then $\\beta_{P,Q}F(\\widehat t)=\\operatorname{tr}_B(F(t)c_{X,P})$. Indeed, the inverse transpose of its left side is $F(e^A)c_{H_A(P,Q),P}(F\\widehat t\\otimes1)=F\\bigl(e^A(\\widehat t\\otimes1)\\bigr)c_{X,P}=F(t)c_{X,P}$, by naturality of $c$. The inverse transpose of its right side is the same morphism. This gives preservation of transposition for every parameter object $X$, without asserting that beta is invertible.",
    "uses": [
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-sfb-ringed-derived-comparison-data"
    ],
    "elementary": true,
    "source": {
@@ -95,7 +92,7 @@
    "text": "Set $U=H_A(Q,T)$ and $V=H_A(P,Q)$. The composition identity is $\\beta_{P,T}F(m_A)c_{U,V}=m_B(\\beta_{Q,T}\\otimes\\beta_{P,Q})$. Untranspose both sides against $FP$. By step 3, the left side becomes $F(e^A_{P,T})c_{H_A(P,T),P}(F m_A\\otimes1)(c_{U,V}\\otimes1)$. Naturality of $c$, the equation of step 6, and the associativity equation of step 2 rewrite this as the following explicit composite: $F(e^A_{Q,T})c_{U,Q}(1_{FU}\\otimes F(e^A_{P,Q}))(1_{FU}\\otimes c_{V,P})\\alpha_B$. For the right side, step 6 first gives $e^B_{FQ,FT}(\\beta_{Q,T}\\otimes(e^B_{FP,FQ}(\\beta_{P,Q}\\otimes1)))\\alpha_B$. Substituting step 3 for each of the two evaluations gives exactly that same explicit composite. The two transposes are equal, hence the required composition identity follows by the closed bijection.",
    "uses": [
     "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+    "def-sfb-ringed-derived-comparison-data"
    ],
    "elementary": true,
    "source": {
@@ -104,13 +101,14 @@
    }
   },
   {
-   "text": "The representative convention has no extra sign beyond those in the two complexes. For a homogeneous Hom section $h$ of degree $r$ and section $x$ of degree $p$, evaluation is $h\\otimes x\\mapsto h(x)$. Its chain-map equation is $(dh)(x)+(-1)^r h(dx)=d(h(x))$, since $dh=d h-(-1)^r h d$. For homogeneous composable Hom sections $g,h$ of degrees $s,r$, composition is $g\\otimes h\\mapsto gh$, and $d(gh)=(dg)h+(-1)^s g(dh)$ by expanding the same Hom differential. These calculations hold on every summand of the direct-sum total tensor and every Hom product projection. The recorded derived tensor-Hom adjunction supplies the componentwise uncurrying equation on the fixed K-flat/Hom representatives, so this evaluation is the evaluation of the closed structure used above. K-flat resolutions of the Hom factors allow their ordinary evaluation and composition maps to represent the corresponding derived tensor maps; the defined derived Hom is independent of its representative. Thus the formulas compute the representative evaluation and the iterated evaluation defining $m$, and all equations in steps 3–7 concern actual derived morphisms. No flatness of the coefficient map, boundedness of $P,Q$, or inverse to beta has been used.",
+   "text": "For each site, use the uniquely specified composition map of actual signed Hom complexes, which has the component formula g tensor h maps to g composed with h. This directly gives the required composition representative formula after applying a component to a section. To construct evaluation, let O be the coefficient unit concentrated in degree zero. Assemble the specified unit-evaluation maps Hom(O,L)^n to L^n into a chain isomorphism u_L using their differential compatibility and degreewise invertibility. Its map on sections is projection to source degree zero followed by evaluation on the section corresponding to 1. Define evaluation as (identity tensor u_L inverse), then composition Hom(L,M) tensor Hom(O,L) to Hom(O,M), then u_M. Naturality of the sheaf tensor generator and its total-summand inclusion gives its action on a pure tensor. The composition formula makes this h applied to u_L(u_L inverse(x)) = h(x), proving the required evaluation formula without extra signs. All chain maps and signed differentials are those of the given tensor and Hom complexes.",
    "uses": [
+    "lem-sfb-ringed-hom-composition-model",
+    "lem-sc-hom-complex-unit-evaluation-is-iso",
+    "lem-sc-hom-complex-unit-evaluation-comm",
+    "lem-sc-hom-tensor-section-natural",
     "def-pur-hom-complex",
-    "def-pc-tensor-complex-sheaves",
-    "lem-sf-ringed-derived-tensor-hom-adjunction",
-    "lem-pc-kflat-resolution",
-    "def-pur-derived-internal-hom"
+    "def-pc-tensor-complex-sheaves"
    ],
    "elementary": false,
    "source": {
@@ -120,22 +118,21 @@
   }
  ],
  "proof_deps": [
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sfb-ringed-derived-adjoint-lift",
-  "lem-sfb-ringed-derived-tensor-lift",
+  "def-sf-ringed-derived-adjoint-lift-data",
   "def-sfb-ringed-derived-comparison-data",
-  "lem-sf-ringed-derived-tensor-hom-adjunction",
+  "lem-sf-ringed-derived-closed-symmetric-monoidal",
+  "lem-sfb-ringed-derived-tensor-lift",
+  "lem-sfb-ringed-hom-composition-model",
+  "lem-sc-hom-complex-unit-evaluation-is-iso",
+  "lem-sc-hom-complex-unit-evaluation-comm",
+  "lem-sc-hom-tensor-section-natural",
   "def-pur-hom-complex",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-resolution",
-  "def-pur-derived-internal-hom"
+  "def-pc-tensor-complex-sheaves"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tags 07A4 (lemma-pullback-tensor-product), 08J9 (lemma-internal-hom), 0A98 (lemma-internal-hom-composition); explicit agent calculation of evaluation mates. The compatibility identities are written out by the worker, not quoted as assertions of these tags."
+  "place": "Tags 07A4, 08J9 and 0A98: direct evaluation-mate calculation. Signed representatives are constructed from the uniquely specified composition map and canonical evaluation on the coefficient unit, using Tags 0A8X and 0A90."
  },
  "mathlib_searches": [
   {
@@ -284,15 +281,10 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-ringed-topoi-derived-pullback",
-  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "lem-sfb-ringed-derived-tensor-lift",
   "def-sfb-ringed-derived-comparison-data",
   "def-pur-hom-complex",
-  "def-pc-tensor-complex-sheaves",
-  "lem-pc-kflat-resolution",
-  "def-pur-derived-internal-hom",
-  "lem-sfb-ringed-derived-adjoint-lift"
+  "def-pc-tensor-complex-sheaves"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -328,5 +320,15 @@
   "group": "NC",
   "result": "pass",
   "note": "Re-delivery after the H2 RETURN of 6bf4bda2: the Lean module is byte-identical (sha e05236e5). The item's stmt_deps swap the theorem lem-sfb-ringed-derived-adjoint-lift for the new def node def-sf-ringed-derived-adjoint-lift-data (existing:true on the unchanged Sheaf.SixFunctors.RingedDerivedAdjointLift, declaration CategoryTheory.RingedDerivedComparisons.AdjointLift, header verbatim at line 45). Its TeX matches all structure fields: edge, inverse/direct eqs, geometric adjunction, pushforward, structural map, ordinary Hom formula, additivity, eta right-derived/K-injective, epsilon_flat, canonical_adjunction. stmt_deps [def-sfb-ringed-derived-comparison-data]; sources 03D7/06YY/07A6; three search kinds; no duplicate def node in live. The theorem is kept in proof_deps. Re-checked H3: beta = transpose(inverse of the canonical ringedTopoiCanonicalDerivedTensorComparison followed by F(ev)); naturality contravariant in the first input; evaluation, transposition (arbitrary T) and composition (H(Q,T)⊗H(P,Q)) clauses correct; no IsIso. The 6 stmt_dep records are byte-identical to live; lean.statement verbatim; only the theorem has sorry; docstrings ok. nt_compile --json clean in 29.0 s, exit 0. Advisories: RingedHomSignedRepresentatives is not tied to X.closed.evaluation in the statement; the new node reaches the tensor-square presentation only transitively."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "B5",
+  "result": "pass",
+  "landing": "20261021T134303-L-767342",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
