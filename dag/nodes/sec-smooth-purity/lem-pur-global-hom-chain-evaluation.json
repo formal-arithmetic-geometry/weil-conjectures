@@ -1,0 +1,123 @@
+{
+ "id": "lem-pur-global-hom-chain-evaluation",
+ "kind": "statement",
+ "title": "Unsigned chain evaluation from global cochains",
+ "statement": "Let A be a commutative ring, X a scheme [def-pc-scheme], and E,I arbitrary integer complexes of sheaves of A-modules. Let C_E be the A-linear global Hom cochain complex with differential d_I f−(−1)ⁿf d_E [def-pur-hom-complex]. For any A-complex U and chain map α:U→C_E, there is a chain map t:constant(U)⊗E→I, for the direct-sum total tensor [def-pc-tensor-complex-sheaves], whose value on every pure tensor of a sheafification-unit constant w and a section e is α(w)(e), with no sign.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X and 0A90, global cochains, composition and tensor-Hom differential."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-pur-hom-complex",
+  "def-pc-tensor-complex-sheaves"
+ ],
+ "proof": [
+  {
+   "text": "For each r,q, the A-linear map w↦α(w)ᵠ defines a restriction-compatible bilinear pairing. Extend over constant sheafification and the sheaf tensor, using the monoidal sheafification adjunction. The coproduct over r+q=n gives a graded map.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The chain identity for α gives d_I(α(w)(e))=α(dw)(e)+(−1)ʳα(w)(d_E e), exactly the total tensor differential. Equality on constant pure tensors determines each sheaf map and equality on coproduct summands determines the graded map. Thus it is a chain map and has the asserted evaluation formula.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 0A8X and 0A90, global cochains, composition and tensor-Hom differential."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Flat term K flat complexes, flat K flat mapping cone factorization, preservation under constant sheaf realization, and evaluation normalized global Hom complexes",
+   "results": "8 hits: Module.Flat.of_forall_exists_factorization, CategoryTheory.Sheaf.coneΓ, Module.Flat.iff_lTensor_preserves_shortComplex_exact, CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.flat_iff_lan_flat, AlgebraicGeometry.Flat.iff_flat_stalkMap, CochainComplex.cm5b.fac, HomologicalComplex.instPreservesLimitEval",
+   "date": "2026-10-21",
+   "verdict": "No statement with the required module/sheaf complex, flat-term and evaluation normalization interfaces. Generic cone, adjunction and sections APIs are used in the Lean proof."
+  },
+  {
+   "tool": "grep",
+   "query": "KFlat|kFlat|internalHomObj|globalHom",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No statement with the required module/sheaf complex, flat-term and evaluation normalization interfaces. Generic cone, adjunction and sections APIs are used in the Lean proof."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Global sections of internal Hom complexes compute derived global Hom A linearly with evaluation compatible derived adjunction",
+   "results": "8 hits: LightCondensed.ihomPoints, CategoryTheory.Sheaf.Γ, CategoryTheory.ihom.ihom_adjunction_counit, CategoryTheory.ihom.ev, CategoryTheory.exp.ev, CategoryTheory.HasGlobalSectionsFunctor, AlgebraicGeometry.instIsRightAdjointCommRingCatOppositeLocallyRingedSpaceΓ, CategoryTheory.sheafHomSectionsEquiv",
+   "date": "2026-10-21",
+   "verdict": "No statement with the required module/sheaf complex, flat-term and evaluation normalization interfaces. Generic cone, adjunction and sections APIs are used in the Lean proof."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every chain map from a complex into a Hom cochain complex gives an evaluation chain map from the constant sheaf tensor complex",
+   "results": "8 hits: HomologicalComplex.ιTensorObj, ChainComplex.linearYonedaObj, CochainComplex.HomComplex.Cochain.fromSingleMk, CochainComplex.HomComplex.Cochain.toSingleMk, CochainComplex.HomComplex.Cochain.fromSingleMk_v, CochainComplex.HomComplex.Cochain.toSingleMk_v, CategoryTheory.Sheaf.H, CochainComplex.HomComplex",
+   "date": "2026-10-21",
+   "verdict": "No statement with the required module/sheaf complex, flat-term and evaluation normalization interfaces. Generic cone, adjunction and sections APIs are used in the Lean proof."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction.homEquiv",
+   "results": "12 hits: CategoryTheory.Adjunction.homEquiv, CategoryTheory.Adjunction.mk'_homEquiv, CategoryTheory.Adjunction.mkOfHomEquiv_homEquiv, CategoryTheory.Adjunction.corepresentableBy_homEquiv, CategoryTheory.Adjunction.representableBy_homEquiv, CategoryTheory.Adjunction.comp_homEquiv, CategoryTheory.Adjunction.homEquiv_apply, CategoryTheory.Adjunction.homEquiv_unit",
+   "date": "2026-10-21",
+   "verdict": "No statement with the required module/sheaf complex, flat-term and evaluation normalization interfaces. Generic cone, adjunction and sections APIs are used in the Lean proof."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalHomEvaluationFlatLift",
+  "date": "2026-10-21",
+  "group": "V5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kunneth-supported",
+   "place": "Proof paragraphs 1 and 3, support-triangle tensor and exterior-product Hom evaluation. Main item steps 4 and 5, unsigned evaluation on constant pure tensors.",
+   "via": [
+    "lem-pur-global-hom-evaluation-flat-lift",
+    "lem-pur-external-rhom-cone-pairing",
+    "lem-pur-supported-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.GlobalHomChainEvaluation",
+  "file": "lean/Sheaf/Paper/GlobalHomChainEvaluation.lean",
+  "declaration": "AlgebraicGeometry.Etale.ExternalRHom.globalHom_chain_evaluation",
+  "statement": "theorem globalHom_chain_evaluation {X : Scheme.{u}} (E I : Complexes A X)\n    (U : CochainComplex (ModuleCat.{u + 1} A) ℤ) (alpha : U ⟶ homComplex A E I) :\n    ∃ t : chainEvaluationSource A X U E ⟶ I,\n      IsChainEvaluation A E I U alpha t",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261021T152411-L-1933456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261021T152411-L-1933456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

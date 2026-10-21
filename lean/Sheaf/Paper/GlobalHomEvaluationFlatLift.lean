@@ -21,23 +21,17 @@ public import Mathlib.Algebra.Homology.Additive
 public import Mathlib.Algebra.Homology.HomologicalComplex
 public import Mathlib.AlgebraicGeometry.Scheme
 
-import Sheaf.CategoryTheory.RingedSiteKInjectiveResolutionsOfUniverses
-import Sheaf.Paper.EtaleKFlatCriteria
-import Sheaf.Algebra.Homology.KInjectiveHomComplex
-import WeilConjectures.SixFunctors.Etale.Derived.LowerShriek
-import Sheaf.AlgebraicGeometry.RGammaUnboundedWellDefined
-import WeilConjectures.Algebra.Homology.HomComplexGlobalCochains
-import Sheaf.Algebra.Homology.KFlatResolutionIndependentCoefficients
-import Sheaf.CategoryTheory.ConstantModuleKFlat
-import Sheaf.CategoryTheory.ConstantModuleFlat
-import WeilConjectures.CategoryTheory.HomotopyCategory.Adjunction
-import Sheaf.Algebra.Homology.KFlatTotalTensorModel
-import Sheaf.SixFunctors.ResolvingDerivedAdjunction
-import Sheaf.Paper.KFlatMapFactorization
-import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageAlgebraicStructures
-import WeilConjectures.AlgebraicGeometry.EtaleInverseImageModulesExact
-import Sheaf.Paper.KFlatRingedToposPullback
+import Mathlib.Algebra.Homology.DerivedCategory.KInjective
+
+import all Sheaf.Paper.EtaleScalarFlatKFlatComparison
+import all Sheaf.Paper.CoefficientPointFlatKFlatComparison
+import Sheaf.Paper.GlobalHomEvaluationModel
+import Sheaf.Paper.GlobalHomChainEvaluation
+import Sheaf.Algebra.Homology.FlatTermKFlatMapFactorization
+import Sheaf.Algebra.Homology.FlatTermKFlatTensor
+import Sheaf.Algebra.Homology.FlatTermKFlatFunctor
+import WeilConjectures.CategoryTheory.DerivedCategory.LeftDerivedFunctor.MapDerivedCategory
+import WeilConjectures.SixFunctors.Etale.UpperLowerStar.FlatModuleCat
 
 /-! # Flat K-flat lifts of global Hom evaluations
 
@@ -163,6 +157,65 @@ theorem globalHom_evaluation_flat_lift
                 P ∈ [((constantComplex A X).obj U), E, chainEvaluationSource A X U E, N] →
                 IsFlatKFlatEtaleComplex A Z ((pullComplex A f).obj P) ∧
                   IsIso (pullModel A f P) := by
-  sorry
+  have _boundedBelow := hK
+  constructor
+  · obtain ⟨I, hI, ⟨i⟩⟩ := DerivedCategory.exists_iso_Q_obj_of_isKInjective K
+    exact ⟨I, hI, ⟨i.symm⟩⟩
+  · intro I _ _i
+    obtain ⟨m⟩ := globalHom_evaluation_model A E I hE
+    have hfE (n : ℤ) : ObjectProperty.flat (E.X n) :=
+      (ringedRealization_flat_iff A X _).1 (hE.2 n)
+    obtain ⟨lo, hi, hb⟩ := hE.1
+    have : E.IsStrictlyLE hi := (E.isStrictlyLE_iff hi).2
+      (fun n hn ↦ hb n (Or.inr hn))
+    have hkE := CochainComplex.kFlat_of_isStrictlyLE_of_flat E hi hfE
+    have hE' : IsFlatKFlatEtaleComplex A X E :=
+      ringedComplex_flat_kFlat A X E hkE hfE
+    refine ⟨m, ?_, ?_⟩
+    · obtain ⟨U, alpha, hα, hfU, hkU⟩ :=
+        CochainComplex.exists_quasiIso_flat_kFlat (homComplex A E I)
+      exact ⟨U, alpha, hα, pointComplex_flat_kFlat A U hkU hfU⟩
+    · intro U alpha _hα hU
+      obtain ⟨hkU, hfU⟩ := native_flat_kFlat_of_point A U hU.1 hU.2
+      let C := (constantComplex A X).obj U
+      have hkC : (HomologicalComplex.quasiIso (Modules A X) (.up ℤ)).kFlat C :=
+        (constantSheaf X.smallEtaleTopology (ModuleCat A)).kFlat_map_of_flat_terms U hkU hfU
+      have hfC (n : ℤ) : ObjectProperty.flat (C.X n) :=
+        Functor.PreservesFlat.flat_obj (F := constantSheaf X.smallEtaleTopology
+          (ModuleCat A)) (hfU n)
+      have hC : IsFlatKFlatEtaleComplex A X C :=
+        ringedComplex_flat_kFlat A X C hkC hfC
+      obtain ⟨hkD, hfD⟩ := CochainComplex.flat_term_kFlat_tensor C E hkC hkE hfC hfE
+      have hD : IsFlatKFlatEtaleComplex A X (chainEvaluationSource A X U E) :=
+        ringedComplex_flat_kFlat A X _ hkD hfD
+      refine ⟨globalHom_chain_evaluation A E I U alpha, ?_⟩
+      intro t ht
+      refine ⟨hC, hE', hD, (m.property U alpha t ht).symm, ?_⟩
+      obtain ⟨N, v, c, hkN, hfN, hc, ⟨hv⟩⟩ :=
+        CochainComplex.exists_flat_term_kFlat_map_factorization t hkD hfD
+      have hN : IsFlatKFlatEtaleComplex A X N :=
+        ringedComplex_flat_kFlat A X N hkN hfN
+      refine ⟨N, v, c, hN, hc, ⟨hv⟩, ?_, ?_⟩
+      · simpa only [Functor.map_comp] using
+          (DerivedCategory.Q_map_eq_of_homotopy (Modules A X) hv)
+      · intro Z f P hP
+        have hpull (T : Complexes A X)
+            (hkT : (HomologicalComplex.quasiIso (Modules A X) (.up ℤ)).kFlat T)
+            (hfT : ∀ n, ObjectProperty.flat (T.X n)) :
+            IsFlatKFlatEtaleComplex A Z ((pullComplex A f).obj T) ∧
+              IsIso (pullModel A f T) := by
+          constructor
+          · exact ringedComplex_flat_kFlat A Z _
+              ((upperStar (ModuleCat A) f).kFlat_map_of_flat_terms T hkT hfT)
+              (fun n ↦ Functor.PreservesFlat.flat_obj
+                (F := upperStar (ModuleCat A) f) (hfT n))
+          · dsimp only [pullModel]
+            infer_instance
+        simp only [List.mem_cons, List.not_mem_nil, or_false] at hP
+        rcases hP with rfl | rfl | rfl | rfl
+        · exact hpull _ hkC hfC
+        · exact hpull _ hkE hfE
+        · exact hpull _ hkD hfD
+        · exact hpull _ hkN hfN
 
 end AlgebraicGeometry.Etale.ExternalRHom

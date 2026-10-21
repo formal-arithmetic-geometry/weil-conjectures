@@ -1,0 +1,125 @@
+{
+ "id": "lem-pur-etale-scalar-flat-kflat-comparison",
+ "kind": "statement",
+ "title": "Native flat-term K-flat étale complexes in scalar coordinates",
+ "statement": "Let A be a commutative ring and X a scheme [def-pc-scheme]. Let P be an integer complex of sheaves of A-modules on its small étale site. Suppose P is categorically K-flat and each term is categorically flat [def-sfb-preserves-kflat-quasi-iso]. Under the canonical constant-ring scalar realization [def-sfb-site-derived-constant-module-functor], P is K-flat for the independent-coefficients acyclic-tensor test [def-pc-kflat-complex] and every term is flat on the site [def-pc-flat-sheaf-modules].",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 0G7D and 0G7E; constant-scalar realization, flatness and the acyclic-tensor criterion."
+ },
+ "stmt_deps": [
+  "def-pc-scheme",
+  "def-sfb-preserves-kflat-quasi-iso",
+  "def-sfb-site-derived-constant-module-functor",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules"
+ ],
+ "proof": [
+  {
+   "text": "The two canonical constant-ring comparisons are inverse. Thus the realization is the existing tensor realization equivalence; its flatness comparison makes it preserve flat objects and its equivalence makes it preserve integer colimits.",
+   "uses": [
+    "lem-pur-etale-constant-module-flat"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Apply preservation of flat-term K-flat complexes by such additive functors. To obtain the acyclic-tensor test, tensor the quasi-isomorphism 0→Z for an arbitrary acyclic Z; the image of zero is zero.",
+   "uses": [
+    "lem-sfb-flat-term-kflat-functor"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "lem-pur-etale-constant-module-flat",
+  "lem-sfb-flat-term-kflat-functor"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 0G7D and 0G7E; constant-scalar realization, flatness and the acyclic-tensor criterion."
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "constant.*flat|flat.*constant|kFlat_map",
+   "results": "9 hits: Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Spectrum/Prime/FreeLocus.lean, Mathlib/RingTheory/Flat/LocallyFree.lean, Mathlib/RingTheory/Flat/LocallyFree.lean, Mathlib/RingTheory/Flat/Rank.lean",
+   "date": "2026-10-21",
+   "verdict": "No matching flat-term K-flat/scalar-coordinate theorem. Cone compatibility and elementary flatness hits are used as APIs, not as a statement matching the whole result."
+  },
+  {
+   "tool": "loogle",
+   "query": "CochainComplex.exists_quasiIso_flat_kFlat",
+   "results": "0 hits:  (loogle: unknown identifier 'CochainComplex.exists_quasiIso_flat_kFlat')",
+   "date": "2026-10-21",
+   "verdict": "No matching flat-term K-flat/scalar-coordinate theorem. Cone compatibility and elementary flatness hits are used as APIs, not as a statement matching the whole result."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "flat term K-flat complexes preserved by additive functor and mapping cone homotopy factorization",
+   "results": "8 hits: CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.mapTrianglehIso, CochainComplex.mappingCone.map_inr, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.trianglehMapOfHomotopy",
+   "date": "2026-10-21",
+   "verdict": "No matching flat-term K-flat/scalar-coordinate theorem. Cone compatibility and elementary flatness hits are used as APIs, not as a statement matching the whole result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat term K flat complexes, flat K flat mapping cone factorization, preservation under constant sheaf realization, and evaluation normalized global Hom complexes",
+   "results": "8 hits: Module.Flat.of_forall_exists_factorization, CategoryTheory.Sheaf.coneΓ, Module.Flat.iff_lTensor_preserves_shortComplex_exact, CategoryTheory.compatiblePreservingOfFlat, CategoryTheory.flat_iff_lan_flat, AlgebraicGeometry.Flat.iff_flat_stalkMap, CochainComplex.cm5b.fac, HomologicalComplex.instPreservesLimitEval",
+   "date": "2026-10-21",
+   "verdict": "No matching flat-term K-flat/scalar-coordinate theorem. Cone compatibility and elementary flatness hits are used as APIs, not as a statement matching the whole result."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.Paper.GlobalHomEvaluationFlatLift",
+  "date": "2026-10-21",
+  "group": "V5"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-a1-kummer",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-pur-kunneth-supported",
+   "place": "Proof paragraphs 1 and 3, support-triangle tensor and exterior-product Hom evaluation. Main item steps 1, 3, 6, 9 and 10, agreement of flat/K-flat predicates in the two scalar coordinates.",
+   "via": [
+    "lem-pur-global-hom-evaluation-flat-lift",
+    "lem-pur-external-rhom-cone-pairing",
+    "lem-pur-supported-product-localization"
+   ]
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.Paper.EtaleScalarFlatKFlatComparison",
+  "file": "lean/Sheaf/Paper/EtaleScalarFlatKFlatComparison.lean",
+  "declaration": "AlgebraicGeometry.Etale.ExternalRHom.ringedComplex_flat_kFlat",
+  "statement": "theorem ringedComplex_flat_kFlat (P : Complexes A X)\n    (hP : (HomologicalComplex.quasiIso (Modules A X) (.up ℤ)).kFlat P)\n    (hf : ∀ n, ObjectProperty.flat (P.X n)) :\n    CochainComplex.IsKFlatIndependentCoefficients ((ringedComplex A X).obj P) ∧\n      ∀ n, SheafOfModules.IsFlatOnSite\n        (J := X.smallEtaleTopology) (R := realizationRing X.smallEtaleTopology A)\n        ((ringedRealization A X).obj (P.X n))",
+  "branch": "sheaf-dag",
+  "by": "V5",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261021T152411-L-1933456",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "V5",
+  "result": "pass",
+  "landing": "20261021T152411-L-1933456",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}
