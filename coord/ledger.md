@@ -22591,3 +22591,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:35 L: returned deliver/NC/lem-sp-normalized-error-tower-vanishing (reviewer RETURN: L: independent stage-2 immutable head 9b8687c4160d: H2: the delivery added theorem stmt_deps det-sp-coefficient-towers-a)
 - 13:35 L: returned deliver/NK/lem-coef-enriched-sequence-projection-formula (reviewer RETURN: L: independent stage-2 immutable head a8dd21e96468: H13: the delivered §1(B) record of lem-coef-sequence-pushforward-lim)
 - 13:35 L: returned deliver/NJ/lem-a1-roos-intrinsic-unit-comparison (reviewer RETURN: L: independent stage-2 immutable head adc4a78e022e: H2: stmt_deps add theorem nodes lem-a1-principal-koszul-strict-repla)
+- 13:35 L: returned deliver/NF/lem-sf-derived-completed-tensor-bilinearity (reviewer RETURN: L: independent stage-2 immutable head b92b3ac11a59: Item clauses are correct: essentially-small site with independent un)
