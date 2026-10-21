@@ -25,7 +25,7 @@
  ],
  "proof": [
   {
-   "text": "By [lem-weil-pbc-uniform-complete-triangulated], the actual category $\\mathcal C_X$ with its compatible etale-origin witnesses contains zero and is closed under all integer shifts and cones. By [lem-per-rational-module-realization-functor], $F_X$ is triangulated and $J_X(QK)=F_X(K)$. Consequently $J_X(Q0)\\cong0$ and $J_X(Q(K[r]))\\cong J_X(QK)[r]$ for every integer $r$. Composing these isomorphisms with any given image witness proves the zero and shift assertions for the isomorphism-closed essential image.",
+   "text": "By [lem-weil-pbc-uniform-complete-triangulated], the actual category $\\mathcal C_X$ with its compatible etale-origin witnesses contains zero and is closed under all integer shifts and cones. By [lem-per-rational-module-realization-functor], $F_X$ is triangulated and $J_X(QK)=F_X(K)$. Consequently $J_X(Q0)\\cong0$ and $J_X(Q(K[r]))\\cong J_X(QK)[r]$ for every integer $r$. Composing these isomorphisms with any given image witness proves the zero and shift assertions for the isomorphism-closed essential image. For the separate Lean assertion image_closed, there is a shorter route: Mathlib CategoryTheory.Triangulated.Subcategory supplies the triangulated essential image of any full triangulated functor. Apply it directly to the supplied J, including zero and shift closure. The explicit integral cone witnesses remain the content of Steps 2-4.",
    "uses": [
     "lem-weil-pbc-uniform-complete-triangulated",
     "lem-per-rational-module-realization-functor"
@@ -37,7 +37,7 @@
    }
   },
   {
-   "text": "Write $U=J_X(QK_1)$ and $V=J_X(QK_2)$. Use the shift comparison to regard the connecting arrow $\\delta:V\\to U[1]$ as an arrow $J_X(QK_2)\\to J_X(Q(K_1[1]))$. Full faithfulness, which is a hypothesis here, gives a unique arrow $\\alpha:QK_2\\to Q(K_1[1])$ mapping to it. By the definition of the raw rationalization [def-weil-pbc-rational-category], $\\alpha$ is an element of $\\operatorname{Hom}_{\\mathcal C_X}(K_2,K_1[1])\\otimes_A E$, and $Q$ sends an integral arrow $g$ to $g\\otimes1$. Since $E=A[1/\\varpi]$, every element $\\sum_i g_i\\otimes\\varpi^{-n_i}$ of this tensor product equals $f\\otimes\\varpi^{-n}$ with $n=\\max_i n_i\\geq0$ and $f=\\sum_i\\varpi^{n-n_i}g_i:K_2\\to K_1[1]$; hence $\\varpi^n\\alpha=f\\otimes1=Q(f)$, i.e. $\\alpha=f/\\varpi^n$. The $E$-linearity of $J_X$ and the formula $J_X(Qf)=F_X(f)$ of [lem-per-rational-module-realization-functor] give $F_X(f)=\\varpi^n\\delta$ after the same shift identification. Only $\\alpha$ is unique; its numerator and denominator need not be.",
+   "text": "Write $U=J_X(QK_1)$ and $V=J_X(QK_2)$. Use the shift comparison to regard the connecting arrow $\\delta:V\\to U[1]$ as an arrow $J_X(QK_2)\\to J_X(Q(K_1[1]))$. Full faithfulness, which is a hypothesis here, gives a unique arrow $\\alpha:QK_2\\to Q(K_1[1])$ mapping to it. By the definition of the raw rationalization [def-weil-pbc-rational-category], $\\alpha$ is an element of $\\operatorname{Hom}_{\\mathcal C_X}(K_2,K_1[1])\\otimes_A E$, and $Q$ sends an integral arrow $g$ to $g\\otimes1$. Since $E=A[1/\\varpi]$, every element $\\sum_i g_i\\otimes\\varpi^{-n_i}$ of this tensor product equals $f\\otimes\\varpi^{-n}$ with $n=\\max_i n_i\\geq0$ and $f=\\sum_i\\varpi^{n-n_i}g_i:K_2\\to K_1[1]$; hence $\\varpi^n\\alpha=f\\otimes1=Q(f)$, i.e. $\\alpha=f/\\varpi^n$. The $E$-linearity of $J_X$ and the formula $J_X(Qf)=F_X(f)$ of [lem-per-rational-module-realization-functor] give $F_X(f)=\\varpi^n\\delta$ after the same shift identification. Only $\\alpha$ is unique; its numerator and denominator need not be. The Lean proof uses IsLocalizedModule.surj for tensoring with Localization.Away, first as a generic coefficient-ring lemma and then in ScalarLocalization. This keeps the tensor module instances fixed under specialization to the lifted integer ring. The coefficient equivalence sends the algebra-map uniformizer to its field value, so the cleared equation gives exactly the displayed inverse-power representative.",
    "uses": [
     "def-weil-pbc-rational-category",
     "lem-per-rational-module-realization-functor"
@@ -62,7 +62,7 @@
    }
   },
   {
-   "text": "Rotate the given triangle $U\\xrightarrow{i}C\\xrightarrow{p}V\\xrightarrow{\\delta}U[1]$ twice by TR2 of [def-weil-triangulated-category], obtaining $V\\xrightarrow{\\delta}U[1]\\xrightarrow{-i[1]}C[1]\\xrightarrow{-p[1]}V[1]$. Compare this with the image cone triangle of Step 3. On the first two vertices take $a=1_V$ and $b=\\varpi^n1_{U[1]}$. The first square commutes because $b\\delta=\\varpi^n\\delta=F_X(f)a$. Both maps are invertible, with inverses $1_V$ and $\\varpi^{-n}1_{U[1]}$. TR3 completes them to a morphism of distinguished triangles, and [lem-sf-triangle-morphism-iso] makes its third component $c:C[1]\\to F_X(D)$ invertible. Shifting $c$ by $[-1]$ and using the shift comparison for $F_X$ gives $C\\cong F_X(D[-1])=J_X(QK)$. This also proves extension closure when the endpoints are merely isomorphic to image objects, by conjugating their arrows by the given endpoint isomorphisms.",
+   "text": "Rotate the given triangle $U\\xrightarrow{i}C\\xrightarrow{p}V\\xrightarrow{\\delta}U[1]$ twice by TR2 of [def-weil-triangulated-category], obtaining $V\\xrightarrow{\\delta}U[1]\\xrightarrow{-i[1]}C[1]\\xrightarrow{-p[1]}V[1]$. Compare this with the image cone triangle of Step 3. On the first two vertices take $a=1_V$ and $b=\\varpi^n1_{U[1]}$. The first square commutes because $b\\delta=\\varpi^n\\delta=F_X(f)a$. Both maps are invertible, with inverses $1_V$ and $\\varpi^{-n}1_{U[1]}$. TR3 completes them to a morphism of distinguished triangles, and [lem-sf-triangle-morphism-iso] makes its third component $c:C[1]\\to F_X(D)$ invertible. Shifting $c$ by $[-1]$ and using the shift comparison for $F_X$ gives $C\\cong F_X(D[-1])=J_X(QK)$. This also proves extension closure when the endpoints are merely isomorphic to image objects, by conjugating their arrows by the given endpoint isomorphisms. In Lean, the scalar map is inverted already in the raw scalar category by IsLocalization.map_units, and J preserves that isomorphism. completeDistinguishedTriangleMorphism fills the square and isIso₃_of_isIso₁₂ proves the third component invertible. The commShiftIso at -1 followed by shiftFunctorCompIsoId supplies the requested middle-object model.",
    "uses": [
     "def-weil-triangulated-category",
     "lem-sf-triangle-morphism-iso",
@@ -75,7 +75,7 @@
    }
   },
   {
-   "text": "Let $0=F_0\\subset\\cdots\\subset F_m=F$ be any supplied finite filtration and let $M_k[0]\\in\\mathcal C_X$ be its supplied integral quotient models, as in [lem-per-rational-stratum-integral-models]. Exact scalar localization in [lem-per-rational-module-realization-functor] identifies $J_X(Q(M_k[0]))$ with $(F_k/F_{k-1})[0]$. Induct on $k$ with the assertion that an integral object $K_k$ and an isomorphism $J_X(QK_k)\\cong F_k[0]$ have been constructed: take $K_0=0$. The short exact sequence $0\\to F_{k-1}\\to F_k\\to F_k/F_{k-1}\\to0$ gives a distinguished triangle in $D(E_X)$ by [lem-sf-derived-ses-triangle]. Conjugate its endpoints by the inductive isomorphism and the supplied quotient comparison; Steps 2-4 construct $K_k$ by one integral cone and shift. At $k=m$ this gives a model of $F[0]$. For $m=0$ the base case already gives it.",
+   "text": "Let $0=F_0\\subset\\cdots\\subset F_m=F$ be any supplied finite filtration and let $M_k[0]\\in\\mathcal C_X$ be its supplied integral quotient models, as in [lem-per-rational-stratum-integral-models]. Exact scalar localization in [lem-per-rational-module-realization-functor] identifies $J_X(Q(M_k[0]))$ with $(F_k/F_{k-1})[0]$. Induct on $k$ with the assertion that an integral object $K_k$ and an isomorphism $J_X(QK_k)\\cong F_k[0]$ have been constructed: take $K_0=0$. The short exact sequence $0\\to F_{k-1}\\to F_k\\to F_k/F_{k-1}\\to0$ gives a distinguished triangle in $D(E_X)$ by [lem-sf-derived-ses-triangle]. Conjugate its endpoints by the inductive isomorphism and the supplied quotient comparison; Steps 2-4 construct $K_k$ by one integral cone and shift. At $k=m$ this gives a model of $F[0]$. For $m=0$ the base case already gives it. The Lean proof constructs the entire finite path of models simultaneously, with the initial zero assertion included in the stage invariant. Its transition applies the short-exact-sequence singleTriangle, conjugates endpoints by the supplied isomorphisms, and invokes extension_cone. Finite-construction lists are concatenated and a final shifted cone appended, with both input indices strictly earlier. The final inclusion is an isomorphism and gives the comparison to F.",
    "uses": [
     "lem-per-rational-stratum-integral-models",
     "lem-per-rational-module-realization-functor",
@@ -88,7 +88,7 @@
    }
   },
   {
-   "text": "Now let $C$ have constructible cohomology vanishing outside $[a,b]$. By [def-kun-truncations], $\\tau_{\\leq a-1}C$ is acyclic and $\\tau_{\\leq b}C\\to C$ induces isomorphisms on all cohomology. Choose a complex representing $C$. The map $0\\to\\tau_{\\leq a-1}C$ of complexes is a quasi-isomorphism, and the truncation inclusion at $b$ is a quasi-isomorphism. Both become invertible in the derived category by [def-weil-abstract-derived-category]. Hence start the tower with the zero integral model of $\\tau_{\\leq a-1}C$ and end with the indicated isomorphism to $C$. If all cohomology vanishes, the same quasi-isomorphism $0\\to C$ directly gives the zero model, without any tower.",
+   "text": "Let C have cohomology vanishing outside [a,b]. By the homology criteria for the standard derived t-structure [def-kun-truncations, def-weil-abstract-derived-category], C is >=a and <=b. Therefore tau_le(a-1) C is zero. Put N=(b-a+1).toNat. The inequality b<=a-1+N makes the truncation inclusion tau_le(a-1+N) C -> C an isomorphism, including crossed bounds. In acyclic_model, cohomology vanishing places C in degrees <=0 and >=1, so the t-structure zero criterion makes C zero. The integral zero object maps to zero under the full-subcategory inclusion and under the additive realization. Their zero-object isomorphism supplies the model.",
    "uses": [
     "def-kun-truncations",
     "def-weil-abstract-derived-category"
@@ -100,9 +100,10 @@
    }
   },
   {
-   "text": "For each $r=a,\\ldots,b$, the constructible sheaf $\\mathcal H^r(C)$ has an integral degree-zero model by Step 5. Shift that model by $[-r]$. The successive-truncation triangle of [lem-weil-pbc-truncation-triangle] is $\\tau_{\\leq r-1}C\\to\\tau_{\\leq r}C\\to\\mathcal H^r(C)[-r]\\to(\\tau_{\\leq r-1}C)[1]$. Induct on $r$, starting with the zero model from Step 6: if a model of $\\tau_{\\leq r-1}C$ has been constructed, its isomorphism and the shifted sheaf model identify the endpoints of this triangle with image objects, so Steps 2-4 give an integral model of $\\tau_{\\leq r}C$. There are $b-a+1$ steps. The last model realizes $C$ by Step 6. All intermediate integral objects are shifts or cones of previously constructed objects; the sheaf models themselves use finite filtrations. Thus the entire construction is finite and uses no summand extraction or idempotent completion.",
+   "text": "For each r in [a,b], apply filtration_model to the supplied filtration of H^r(C), then shift its integral model by -r. FiniteConstruction is stable under shifts: induct over its finite list, shift each distinguished cone triangle, and conjugate by the shift comparisons; zero and generator cases are immediate. The standard t-structure triangle applied to M=tau_le r C has first vertex canonically isomorphic to tau_le(r-1) C, using the isomorphism induced by M -> C under tau_le(r-1). Its third vertex tau_ge r M is concentrated in degree r, hence isomorphic to Y[r placed as a single object] for some Y. The homology maps of the truncation inclusion and triangle projection are isomorphisms in degree r; together with singleFunctorCompHomologyFunctorIso they identify Y with H^r(C). The singleFunctors shift comparison gives the precise third vertex H^r(C)[-r]. Conjugate by the models of the first and third vertices and apply extension_cone. Concatenate the finite constructions of both endpoints and append the shifted cone. A finite-path induction on j in Fin(N+1) retains the model of tau_le(a-1+j) C, its finite-construction witness, the zero assertion at j=0, and each transition cone. The last model realizes C by Step 6. The proof uses Mathlib standard t-structure lemmas and the proved derived homology comparison API directly, so no cochain-level truncation_triangle theorem is needed.",
    "uses": [
-    "lem-weil-pbc-truncation-triangle"
+    "def-kun-truncations",
+    "def-weil-abstract-derived-category"
    ],
    "elementary": false,
    "source": {
@@ -120,13 +121,12 @@
   "lem-per-rational-stratum-integral-models",
   "lem-sf-derived-ses-triangle",
   "lem-sf-triangle-morphism-iso",
-  "lem-weil-pbc-truncation-triangle",
   "lem-weil-pbc-uniform-complete-triangulated"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.8.14(2), pp. 61-62; explicit expansion of its essential-surjectivity reduction, using Stacks Tags 0145, 014A, 0152, 08J5 and the existing compatible-integral-category interfaces."
+  "place": "Proposition 6.8.14(2), pp. 61-62; S8 complete Lean proof of all six theorems. Generic Mathlib triangulated essential-image closure; raw tensor localization denominator clearing, integral cone and signed TR3 comparison; finite-path filtration induction; standard derived t-structure successive triangles, homology comparisons and finite-path bounded tower; direct t-structure zero criterion for the acyclic case. No new nodes or holes."
  },
  "mathlib_searches": [
   {
@@ -241,8 +241,7 @@
   ]
  },
  "tool_uses": [
-  "lem-weil-pbc-uniform-complete-triangulated",
-  "lem-weil-pbc-truncation-triangle"
+  "lem-weil-pbc-uniform-complete-triangulated"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -284,5 +283,15 @@
   "group": "NI",
   "result": "pass",
   "note": "Read the node, all 14 stmt_dep records, the RationalModuleRealization record source, the PbcRationalCategory, PbcScalarExtension, PbcRationalTransport and IntegralTStructure instances, and the Mathlib TStructure.t and IsTriangulatedClosed₂. Records: lean-only diff vs live and side-live; statement verbatim; all 13 declarations present; no new nodes; not dropped; first S2 delivery; report has both sections. Clauses: binders and hypotheses identical to the dependency records; constructibility uses the same encoding as the realization dependency; full faithfulness and stratum models are explicit hypotheses (the Filtration package is the dependency's output after F_X exactness, not stronger). extension_cone: ∃! α with the fraction in the dependency's `fractions` form, an integral cone with K≅D⟦-1⟧ and J(QK)≅C, and φ from rotate.rotate (signs -i⟦1⟧, -p⟦1⟧) with hom₁=1 and hom₂=ϖⁿ, all components isomorphisms; the square holds independently of the chosen CommShift of Q. Filtration and truncation towers correctly oriented, the truncation tower via Mathlib truncLE. FiniteConstruction is finite, has no retracts, and is neither hollow nor tautological; no Mathlib triangulated closure exists. acyclic_model needs no full faithfulness. Edge cases a>b, a=b, negative degrees, length 0, n=0, δ=0, empty X and universes all fine. Rational shift choices are inherited from the dependency. Docstrings have source and blueprint and carry steps 1-7; only sorry. No compile run (no file changed); worker reports a clean compile and a dry run (bfb515cef53). Advisory: the stratum models are restated as Filtration rather than citing exists_filtration_integral_models, acceptable because the node assumes them."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S8",
+  "result": "pass",
+  "landing": "20261021T190641-L-3711670",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
