@@ -14,9 +14,86 @@
   "def-sfb-continuous-map-condensed-ring",
   "lem-sfb-condensed-derived-restriction-calculus"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Put $A=A_F$. Use the polynomial complex $P_{A,r}$ specified in [lem-sfb-polynomial-derived-bar-comparison]. Its term in degree $n$ is the internal direct sum of $A$ on the monomials in $nr$ variables; its differential is polynomial substitution and addition. The cochain map $i:\\mathcal E_{A,r}\\to P_{A,r}$ of [lem-sfb-rational-polynomial-bar-contraction] sends the summand for $I=\\{i_1<\\cdots<i_q\\}$ to $x_{1,i_1}\\cdots x_{q,i_q}$, and the empty summand to $1$. Here its complex $K_{A,r}$ is exactly the based zero-differential complex $\\mathcal E_{A,r}$ in our statement.",
+   "uses": [
+    "lem-sfb-polynomial-derived-bar-comparison",
+    "lem-sfb-rational-polynomial-bar-contraction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), trivial-representation analytic base case; agent polynomial-bar reduction, step 1"
+   }
+  },
+  {
+   "text": "Extend the rational maps $p,h$ of [lem-sfb-rational-polynomial-bar-contraction] internally to $A$. On a polynomial with coefficient $c\\in A(S)$, apply the finite rational matrix on monomials and multiply the resulting rational coefficients by $c$. Every image of a basis monomial is a finite sum, so these are morphisms from the internal direct sums and require no infinite sums in $F$. The formulas commute with every restriction $S'\\to S$ and with multiplication by sections of $A$. The identities $pi=1$ and $dh+hd=1-ip$ hold on every monomial with every section coefficient, hence hold as internal maps. Thus $i$ is already a chain homotopy equivalence of internal complexes. Its inverse in the derived category is $p$, since the displayed homotopy identifies $ip$ with the identity. This step uses a universal rational contraction, not an exactness claim for scalar extension.",
+   "uses": [
+    "lem-sfb-rational-polynomial-bar-contraction"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), trivial-representation analytic base case; agent polynomial-bar reduction, step 2"
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-polynomial-derived-bar-comparison] to precisely the norm-topological field $F$ and the profinite lattice $L$ of the statement. It gives the isomorphism $\\eta_{F,r}:P_{A,r}\\to\\mathscr B_A(L)$. All polynomial evaluations use the prescribed inclusions $\\mathbf Z_\\ell\\subset\\mathbf Q_\\ell\\subset F$. Combining with the equivalence $i$ just proved gives an isomorphism $\\eta_{F,r}i:\\mathcal E_{A,r}\\to\\mathscr B_A(L)$. In particular this step retains the higher internal-Hom resolutions: no column of the derived bar is asserted to be underived, and no convergence in a completion is used.",
+   "uses": [
+    "lem-sfb-polynomial-derived-bar-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), trivial-representation analytic base case; agent polynomial-bar reduction, step 3"
+   }
+  },
+  {
+   "text": "The group $L$ is profinite, the coefficient $A$ is commutative, and it has the specified trivial action. Therefore [lem-sfb-condensed-derived-invariant-bar], with $N=A$, supplies the normalized augmentation isomorphism $\\epsilon:C_F(L)\\to\\mathscr B_A(L)$. Define $\\theta=\\epsilon^{-1}\\eta_{F,r}i$. Each factor is an isomorphism, so $\\theta:\\mathcal E_{A,r}\\to C_F(L)$ is an isomorphism. All internal modules, injective resolutions and profinite powers are taken in the coefficient universes in the cited statements.",
+   "uses": [
+    "lem-sfb-condensed-derived-invariant-bar"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), trivial-representation analytic base case; agent polynomial-bar reduction, step 4"
+   }
+  },
+  {
+   "text": "For $I=\\{i_1<\\cdots<i_q\\}$, polynomial evaluation sends $i(e_I)$ to the cochain $(g_1,\\ldots,g_q)\\mapsto a_{i_1}(g_1)\\cdots a_{i_q}(g_q)$, and $\\eta_{F,r}$ is evaluation followed by the canonical underived-to-derived map $j$. By [lem-sfb-internal-bar-ordered-cup], applied to $G=L$ and the ordered list $a_{i_1},\\ldots,a_{i_q}$, its map into $\\mathscr B_A(L)$ is $\\varepsilon_q\\,\\epsilon\\circ(\\alpha_{i_1}\\smile\\cdots\\smile\\alpha_{i_q})$, with the connecting-class normalization and derived cup of [lem-sfb-condensed-derived-restriction-calculus] and a sign $\\varepsilon_q=\\pm1$ depending only on $q$. The same lemma with $q=0$ sends the empty monomial to $\\epsilon$ composed with the unit, and $\\varepsilon_0=1$. Compose these equalities with $\\epsilon^{-1}$: $\\theta$ agrees with $\\varepsilon_{|I|}\\chi_{F,r}$ on the summand of $I$. Let $\\sigma$ be the automorphism of $\\mathcal E_{A,r}$ multiplying the summand of $I$ by $\\varepsilon_{|I|}$; it is its own inverse. Maps out of this finite direct sum are determined by their composites with its summand inclusions, so $\\theta=\\chi_{F,r}\\circ\\sigma$. Hence $\\chi_{F,r}=\\theta\\circ\\sigma$ is an isomorphism, being a composite of isomorphisms. This proves the assertion for the actual ordered-cup arrow, with no appeal to equality of its cohomology maps alone, and is independent of the shift sign convention.",
+   "uses": [
+    "lem-sfb-internal-bar-ordered-cup",
+    "lem-sfb-condensed-derived-restriction-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), trivial-representation analytic base case; agent polynomial-bar reduction, step 5"
+   }
+  },
+  {
+   "text": "If $r=0$, $L$ is the one-element group. Every action is forced to be trivial by its identity law, so its invariant-submodule functor and its invariant inclusion are the identity. This functor is exact, so its ordinary derived value on $A[0]$ is $A[0]$ and its unit is the identity. The complex $\\mathcal E_{A,0}$ has just the empty-subset summand $A[0]$, whose map is that unit. Hence $\\chi_{F,0}=1_{A[0]}$, as asserted. Both choices of $F$ were treated using the same polynomial formulas and the same norm-topological comparison.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), trivial-representation analytic base case; agent polynomial-bar reduction, step 6"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-polynomial-derived-bar-comparison",
+  "lem-sfb-rational-polynomial-bar-contraction",
+  "lem-sfb-condensed-derived-invariant-bar",
+  "lem-sfb-internal-bar-ordered-cup",
+  "lem-sfb-condensed-derived-restriction-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3): polynomial derived-bar comparison, universal rational contraction, and ordered-cup normalization; the blueprint does not supply these missing analytic and algebraic proofs."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +129,45 @@
    "results": "[leanfinder] OK 8 hit(s); Profinite.NobelingProof.GoodProducts.Basis, BDeRhamPlus, BDeRham, Algebra.SubmersivePresentation.basisKaehler, Profinite.NobelingProof.spanFinBasis.span, Profinite.NobelingProof.Nobeling_aux, Profinite.NobelingProof.GoodProducts.span, Field.Emb.Cardinal.wellOrderedBasis",
    "date": "2026-10-22",
    "verdict": "no match: the hits give completed period rings, continuous topological cochains, Mahler expansions or unrelated exterior bases; none computes ordinary internal condensed derived invariants with all-continuous noncomplete coefficients"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived internal condensed invariants of the trivial norm topological algebraic closure of Qp under Zp power r are an exterior complex generated by continuous coordinate characters",
+   "results": "{\"t\": \"2026-10-21T17:13:58Z\", \"tool\": \"leanfinder\", \"query\": \"Derived internal condensed invariants of the trivial norm topological algebraic closure of Qp under Zp power r are an exterior complex generated by continuous coordinate characters\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"BDeRhamPlus\", \"BDeRham\", \"Condensed.profiniteFree\", \"Condensed.profiniteSolid\", \"instCommRingBDeRhamPlus\", \"Profinite.NobelingProof.succ_exact\", \"CondensedMod.LocallyConstant.functor\", \"ContinuousCohomology.MultiInd.complex\"], \"digest\": \"f943214697be470d\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no full project attachment or Mathlib calculation of the specified ordinary internal derived cup map with all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "grep",
+   "query": "(exterior|cup|koszul).*(cohomology|invariant)|(cohomology|invariant).*(exterior|cup|koszul)",
+   "results": "{\"t\": \"2026-10-21T17:15:35Z\", \"tool\": \"grep\", \"query\": \"(exterior|cup|koszul).*(cohomology|invariant)|(cohomology|invariant).*(exterior|cup|koszul)\", \"sub\": \"RepresentationTheory\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no full project attachment or Mathlib calculation of the specified ordinary internal derived cup map with all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"continuousCohomology\"",
+   "results": "{\"t\": \"2026-10-21T17:15:36Z\", \"tool\": \"loogle\", \"query\": \"\\\"continuousCohomology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 12, \"note\": \"\", \"top\": [\"continuousCohomology\", \"ContinuousCohomology.cocycles\", \"ContinuousCohomology.π\", \"ContinuousCohomology.cocyclesMap_id\", \"ContinuousCohomology.map_id\", \"ContinuousCohomology.cocyclesMap\", \"ContinuousCohomology.map\", \"ContinuousCohomology.resolutionMap_id\"], \"digest\": \"d0b4f6d4782fce60\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no full project attachment or Mathlib calculation of the specified ordinary internal derived cup map with all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The derived invariants of a p adic lattice with trivial topological p adic field coefficients form the exterior complex on the coordinate homomorphisms",
+   "results": "{\"t\": \"2026-10-21T17:15:36Z\", \"tool\": \"leansearch\", \"query\": \"The derived invariants of a p adic lattice with trivial topological p adic field coefficients form the exterior complex on the coordinate homomorphisms\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Padic.field\", \"LeftInvariantDerivation.instModule\", \"PadicInt.isFractionRing\", \"Padic.instInhabited\", \"PadicInt.instIsAdicCompleteMaximalIdeal\", \"Padic.instRing\", \"Padic.adicCompletionEquiv\", \"PadicInt.Coe.ringHom\"], \"digest\": \"a4632786691bf04a\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no full project attachment or Mathlib calculation of the specified ordinary internal derived cup map with all-continuous noncomplete coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The specified ordered cup product map from the zero differential exterior complex to ordinary internal module derived invariants of Zp power r is an isomorphism for noncomplete norm algebraic closure coefficients",
+   "results": "{\"t\": \"2026-10-21T17:20:18Z\", \"tool\": \"leanfinder\", \"query\": \"The specified ordered cup product map from the zero differential exterior complex to ordinary internal module derived invariants of Zp power r is an isomorphism for noncomplete norm algebraic closure coefficients\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.Extension.H1Cotangent.map_toInfinitesimal_bijective\", \"Rep.standardComplex.instQuasiIsoNatεToSingle₀\", \"Rep.FiniteCyclicGroup.groupCohomologyIsoEven\", \"Rep.standardComplex.quasiIso_forget₂_εToSingle₀\", \"Algebra.Generators.H1Cotangent.δ_comp_equiv\", \"Algebra.H1Cotangent.mapEquiv\", \"Rep.FiniteCyclicGroup.resolution_quasiIso\", \"Algebra.Extension.tensorH1Cotangent\"], \"digest\": \"95ad7a87199042b6\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: no full project attachment or Mathlib calculation of the specified ordinary internal derived cup map with all-continuous noncomplete coefficients."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-dense-lattice-derived-invariants-comparison",
@@ -79,5 +191,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-trivial-ladic-derived-exterior",
+  "worker": "stage1",
+  "summary": "Separated the unresolved polynomial-to-derived-bar analytic comparison, the universal rational polynomial-bar contraction, and the generic internal bar cup normalization; carried out internal scalar extension by explicit finite matrices and identified the specified ordered-cup map. No statement change, completion, filtered-union substitution, or underived-bar acyclicity assertion.",
+  "blueprint": "Realizes the trivial-representation analytic base case under paragraph (3), open direct image, in the cited main-20261015 proof; this case is an agent-created descendant, not a lemma stated in that paragraph.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q09-ba9aae130",
+  "group": "Q09",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q09-ba9aae130 (reviewer sub-agent of L); spot-checked: I read the item and all three new nodes in full. The item statement and its stmt_deps are unchanged from the NP 23a527bb version. The blueprint source is main-20261015 direct-images.proof.md paragraph (3); it only delegates the analytic case, so the new nodes are honestly marked as agent-formulated (WANTED). No SGA source is used. Step checks: (1) P_{A,r} and K_{A,r}=𝓔_{A,r} are the same objects with the same differential and signs in both new nodes. (2) The internal extension of p and h by finite rational matrices is elementary and correct. (3) The analytic node is applied with exactly the item's F (E or Ω) and L. (4) derived-invariant-bar applies: L is profinite, N=A is commutative with trivial action, and it gives the isomorphism ε. (6) r=0 is trivially the identity. New nodes: rational-polynomial-bar-contraction is the Hochschild complex of G_a^r over Q. My own exact-arithmetic script checked d²=0, pd=0, d∘i=0 and pi=1 for r≤4, and computed H^q=binom(r,q) only in polynomial degree q for r≤3 and degrees ≤3, so the statement is true. polynomial-derived-bar-comparison is true for F=E (underline E is a colimit of O_E; condensed H^i of profinite S vanishes; Lazard comparison). For F=Ω it carries the inherited open core: compact subsets of Q̄_ℓ need not lie in a finite extension. It deliberately does not assert acyclicity of U^n, and it is not a restatement of the item, because the exterior algebra and cup content sit elsewhere. internal-bar-ordered-cup: z is a cocycle, and restriction-calculus normalizes [a] to the cocycle +a. Fault repaired: the cup node asserted exact equality j∘z=ε∘(⌣[a_k]), but no cited node fixes the shift convention A[-1]^{⊗q}≅A[-q], so the equality can fail by (−1)^{q(q−1)/2}. The fix states it up to a sign ε_q=±1 depending only on q, with ε_0=ε_1=1. Item step 5 is rewritten so that θ=χ∘σ with σ the diagonal sign automorphism, hence χ is an isomorphism; the item statement is not weakened. Duplicate search (rg -L over polynomial cochain, Lazard, Hochschild, Alexander–Whitney, bar, cup, exterior, continuous cochain, plus the sfb bar/cup/Koszul/lattice nodes) found no duplicate. Changed files: fixes/dag/nodes/sec-six-functors-basics/lem-sfb-internal-bar-ordered-cup.json (statement only) and lem-sfb-trivial-ladic-derived-exterior.json (step 5 only). No tool_uses, no drop_nodes.; 2 file(s) fixed by the reviewer"
  }
 }
