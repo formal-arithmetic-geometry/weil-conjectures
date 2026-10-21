@@ -1,0 +1,79 @@
+{
+ "id": "lem-weil-point-automorphism-restriction-natural",
+ "kind": "statement",
+ "title": "Restriction transport at a geometric point: coefficient normalization and derived naturality",
+ "statement": "Fix the finite-field datum $p,a,q,k_0,k$ [def-weil-finite-field-fiber], a prime $\\ell\\ne p$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$, $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Put $s=\\operatorname{Spec}k$. Let $g:s\\to s$ be any scheme automorphism [def-weil-scheme-morphism-properties], not necessarily one over $k_0$. Use the small pro-etale site [def-weil-pbc-proetale-site] and inverse image $G=g^{-1}$ [def-weil-proetale-inverse-image]. For $\\Lambda=A_{E,n}$ or $\\mathcal O_E$, use the finite constant or completed coefficient sheaf $\\Lambda_s$ [def-weil-completed-integral-coefficients] and the structure isomorphism $c_\\Lambda:G\\Lambda_s\\to\\Lambda_s$ [def-weil-inverse-image-pullback-comparison]. The action on $GM$ is transported by $c_\\Lambda^{-1}$.\n\nWrite $U=(s\\xrightarrow{\\mathrm{id}}s)$ and $V=(s\\xrightarrow g s)$. For a sheaf $M$ of $\\Lambda_s$-modules [def-weil-sheaf-of-modules-category], let $\\operatorname{ins}_{g,M}:M(V)\\to(GM)(U)$ be the coprojection at $(V,(\\mathrm{id},\\mathrm{id}):U\\to u_g(V))$ into the inverse-image colimit of [def-weil-proetale-inverse-image], followed by sheafification. Define $\\sigma^g_M=\\operatorname{ins}_{g,M}\\operatorname{res}_g:M(U)\\to(GM)(U)$. Under the natural evaluation identification $(GM)(U)\\cong M(V)$ of [lem-weil-proetale-isomorphism-inverse-image], $\\operatorname{ins}_{g,M}$ is the identity, so $\\sigma^g_M$ identifies with restriction along $g:V\\to U$. For a constant section $b\\in\\Lambda$ one has $\\sigma^g_{\\Lambda_s}(b)=c_\\Lambda^{-1}(b)$, and $\\sigma^g_M(bx)=c_\\Lambda^{-1}(b)\\sigma^g_M(x)$.\n\nTermwise on any unbounded complex $N$, these maps form a $\\Lambda$-linear chain map $\\sigma^g_N:\\Gamma(s,N)\\to\\Gamma(s,GN)$, natural in chain maps. Here both module actions use constant sections and the target uses $c_\\Lambda^{-1}$. For every derived morphism $v:N\\to N'$ in $D(s_{\\mathrm{proet}},\\Lambda)$ [def-weil-abstract-derived-category], the induced maps satisfy $\\Gamma(s,Gv)\\sigma^g_N=\\sigma^g_{N'}\\Gamma(s,v)$; thus they define a natural transformation on the entire derived category. The sections functor is that of [lem-weil-point-proetale-sections-exact]; no constructibility, boundedness or derived-completeness hypothesis on $N$ is imposed.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "(1.1.3), p. 150 and (1.1.7), pp. 150-151; explicit pro-etale/completed-coefficient argument extracted by Q97 from the returned proof of lem-weil-frobenius-point-transport-natural (agent-written, not a theorem asserted by Deligne)."
+ },
+ "stmt_deps": [
+  "def-weil-finite-field-fiber",
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-proetale-inverse-image",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-sheaf-of-modules-category",
+  "lem-weil-proetale-isomorphism-inverse-image",
+  "def-weil-abstract-derived-category",
+  "lem-weil-point-proetale-sections-exact"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "For an automorphism of an algebraically closed point, pro etale restriction followed by the distinguished inverse image coprojection is linear and natural on complexes and unbounded derived categories",
+   "results": "AlgebraicGeometry.Scheme.restrictFunctorΓ; StandardEtalePair.homEquiv_symm_apply; AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful; AlgebraicGeometry.Scheme.Etale.forget; Algebra.FormallyEtale.of_restrictScalars; Algebra.FormallyEtale.Algebra.FormallyEtale.of_restrictScalars; KaehlerDifferential.tensorKaehlerEquivOfFormallyEtale_symm_D_algebraMap; StandardEtalePair.homEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary presheaf restriction or abstract underived point fibers, not the distinguished pro-etale coprojection, its completed coefficient normalization, and the unbounded derived transformation."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"sheafFiberComapIso\"",
+   "results": "CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso; CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_hom_app; CategoryTheory.GrothendieckTopology.Point.sheafFiberComapIso_inv_app",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary presheaf restriction or abstract underived point fibers, not the distinguished pro-etale coprojection, its completed coefficient normalization, and the unbounded derived transformation."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafFiberComapIso|restriction.*[Nn]at[Tt]rans|sigma.*[Nn]atural",
+   "results": "Mathlib/CategoryTheory/Sites/Point/Comap.lean; Mathlib/CategoryTheory/Generator/Presheaf.lean; Mathlib/CategoryTheory/Comma/Presheaf/Basic.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary presheaf restriction or abstract underived point fibers, not the distinguished pro-etale coprojection, its completed coefficient normalization, and the unbounded derived transformation."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction of sections along a field automorphism induces a natural transformation of derived pro etale module sections with completed integral coefficients",
+   "results": "CategoryTheory.Sheaf.natTransΓRes; PresheafOfModules.restriction_app; CategoryTheory.Sheaf.natTransΓRes_app; PresheafOfModules.restrictScalarsObj; groupCohomology.resNatTrans; ModuleCat.restrictScalars; PresheafOfModules.restrictScalars; ModuleCat.RestrictScalars.obj'",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern ordinary presheaf restriction or abstract underived point fibers, not the distinguished pro-etale coprojection, its completed coefficient normalization, and the unbounded derived transformation."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-frobenius-point-transport-natural",
+  "date": "2026-10-21",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "First transport arrow in both composites of def-weil-global-geometric-frobenius, via point transport: identify its restriction/coprojection map and normalize its coefficient action; returned proof steps 1-2.",
+   "via": [
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}

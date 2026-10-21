@@ -1,0 +1,85 @@
+{
+ "id": "lem-weil-isomorphism-comparison-natural",
+ "kind": "statement",
+ "title": "Naturality of the specified finite and completed inverse-image comparison",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$, its valuation ring $\\mathcal O_E$, a uniformizer $\\varpi_E$, and $A_{E,n}=\\mathcal O_E/\\varpi_E^n$ for $n\\ge1$ [def-weil-l-adic-coefficient-extension]. Let $g:X\\to Y$ be an isomorphism of schemes on which $\\ell$ is invertible [def-weil-scheme-morphism-properties]. Use the small pro-etale sites [def-weil-pbc-proetale-site] in the fixed universes [def-weil-size-convention]. For $W=X,Y$ and $\\Lambda=A_{E,n}$ or $\\mathcal O_E$, let $\\Lambda_W$ be the constant finite coefficient sheaf or the completed sheaf $\\widehat{\\mathcal O}_{E,W}=\\varprojlim_m(A_{E,m})_W$ [def-weil-completed-integral-coefficients], and write $D(W,\\Lambda)$ for the unbounded derived category of its module sheaves [def-weil-abstract-derived-category].\n\nLet $G=g^{-1}:D(Y,\\Lambda)\\to D(X,\\Lambda)$ be the exact module inverse image with action transported through $c_\\Lambda^{-1}$, and let $\\kappa^g_N:GN\\to P_gN$ be exactly the comparison of [def-weil-inverse-image-pullback-comparison], for the chosen representatives and resolutions there. At finite coefficients $P_g=Lg^*$ is the derived module pullback [def-weil-derived-pullback-tensor-hom]; at integral coefficients it is the ambient completed pullback [def-pur-integral-derived-operations]. The specified comparisons form a natural transformation $G\\Rightarrow P_g$ on the entire unbounded derived category: for every derived morphism $v:N\\to N'$,\n$$P_g(v)\\circ\\kappa^g_N=\\kappa^g_{N'}\\circ G(v).$$\nAt finite coefficients the components are the classes of the sheafified maps $x\\mapsto x\\otimes1$, and the equation includes both chain maps and inverses of quasi-isomorphisms. At integral coefficients, write $u_N:N\\to\\widehat N$ for the actual derived-completion unit and $\\theta_{g,N}:P_gN\\xrightarrow{\\sim}G\\widehat N$ for the entire-cone normalization of [lem-weil-isomorphism-derived-pullback-comparison-normalization]. The same specified components satisfy $\\kappa^g_N=\\theta_{g,N}^{-1}G(u_N)$ and the displayed naturality equation under the canonical resolution comparisons, on arbitrary ambient objects, including incomplete ones.\n\nFor any category $\\mathcal T$, functors $S:D(X,\\Lambda)\\to\\mathcal T$, $H:D(Y,\\Lambda)\\to\\mathcal T$, and natural transformation $\\rho:H\\Rightarrow SG$, the components $S(\\kappa^g_N)\\rho_N$ consequently form a natural transformation $H\\Rightarrow SP_g$.",
+ "source": {
+  "document": "literature/deligne-weil-II_PMIHES-1980-52.pdf",
+  "place": "Deligne, Weil II, (1.1.3), p. 150 and (1.1.7), pp. 150-151; explicit pro-etale/completed-coefficient argument extracted by Q97 from original steps 3-6 and 9 of lem-weil-frobenius-point-transport-natural. The normalized comparison and common-stage realization assertions are agent-written, not theorems asserted by Deligne."
+ },
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-scheme-morphism-properties",
+  "def-weil-pbc-proetale-site",
+  "def-weil-size-convention",
+  "def-weil-completed-integral-coefficients",
+  "def-weil-abstract-derived-category",
+  "def-weil-inverse-image-pullback-comparison",
+  "def-weil-derived-pullback-tensor-hom",
+  "def-pur-integral-derived-operations",
+  "lem-weil-isomorphism-derived-pullback-comparison-normalization"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "The specified map from pro etale inverse image to derived pullback along a scheme isomorphism is natural on all derived morphisms for finite and completed integral l adic coefficients",
+   "results": "AlgebraicGeometry.Scheme.instHasPullbacksEtale; AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme; AlgebraicGeometry.Scheme.Etale.forget; AlgebraicGeometry.Scheme.ΓSpecIso_naturality_assoc; AlgebraicGeometry.Scheme.Modules.pullbackComp; AlgebraicGeometry.Scheme.ΓSpecIso_inv_naturality; RingHom.Etale.respectsIso; AlgebraicGeometry.Scheme.OpenCover.pullbackCoverAffineRefinementObjIso_inv_map",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern free sheaves, ordinary scheme module pullback, or derived homology comparison; none identifies the specified finite tensor-unit and completed strict-cone maps as one natural transformation on the ambient pro-etale categories."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"pullback\", \"naturality\"",
+   "results": "SheafOfModules.pullbackObjFreeIso_hom_naturality; SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc; IsOpenMap.pullbackObjIso_hom_naturality; TopCat.Presheaf.pullbackObjObjOfImageOpen_hom_naturality; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.iso_hom_naturality; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.iso_hom_naturality_assoc; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.precomposeObjTransformObjSquare_iso_hom_naturality₂; CategoryTheory.Limits.CategoricalPullback.CatCommSqOver.transformObjPrecomposeObjSquare_iso_hom_naturality₂",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern free sheaves, ordinary scheme module pullback, or derived homology comparison; none identifies the specified finite tensor-unit and completed strict-cone maps as one natural transformation on the ambient pro-etale categories."
+  },
+  {
+   "tool": "grep",
+   "query": "inverseImage.*[Cc]omparison|[Cc]omparison.*inverseImage|completedPullback|kappa.*natur",
+   "results": "0 hits",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern free sheaves, ordinary scheme module pullback, or derived homology comparison; none identifies the specified finite tensor-unit and completed strict-cone maps as one natural transformation on the ambient pro-etale categories."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Naturality of the inverse image tensor unit x maps to x tensor one and of its completed derived inverse limit comparison for scheme isomorphisms",
+   "results": "TensorProduct.directLimitRight_symm_of_tmul; SheafOfModules.instIsIsoPullbackObjUnitToUnitOfFinal; CategoryTheory.ShortComplex.mapHomologyIso'_inv_naturality_assoc; CategoryTheory.ProjectiveResolution.isoLeftDerivedObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality; CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_inv_naturality_assoc; CategoryTheory.ShortComplex.mapHomologyIso_inv_naturality; HomologicalComplex.rightUnitor'_inv",
+   "date": "2026-10-21",
+   "verdict": "no match: the hits concern free sheaves, ordinary scheme module pullback, or derived homology comparison; none identifies the specified finite tensor-unit and completed strict-cone maps as one natural transformation on the ambient pro-etale categories."
+  },
+  {
+   "tool": "grep",
+   "query": "pullbackObjFreeIso_hom_naturality|instIsIsoPullbackObjUnitToUnitOfFinal",
+   "results": "Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: read the returned source; ordinary free-sheaf naturality or formal localization descent alone does not state the completed pro-etale normalized comparison and coefficient realization."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-frobenius-point-transport-natural",
+  "date": "2026-10-21",
+  "group": "Q97"
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-prop-sf-rf-shriek-preservation",
+ "blueprint": {
+  "from": {
+   "node": "def-weil-global-geometric-frobenius",
+   "place": "The first cohomology-transport arrow of def-weil-global-geometric-frobenius, via def-weil-frobenius-cohomology-transport and def-weil-frobenius-point-transport: original point-naturality proof steps 3-5, finite tensor-unit naturality, entire-cone integral naturality, and composition with a natural restriction map.",
+   "via": [
+    "lem-weil-frobenius-point-transport-natural",
+    "def-weil-frobenius-point-transport",
+    "def-weil-frobenius-cohomology-transport"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
