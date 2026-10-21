@@ -34,117 +34,82 @@
  ],
  "proof": [
   {
-   "text": "Choose a K-flat representative P→K with flat terms using [lem-pc-kflat-resolution]. Under [lem-weil-proetale-weakly-etale-localization] (applied with the rings A and P_n), U_proet is the localization X_proet/U and A_X|_U=A_U, (P_n)_X|_U=(P_n)_U, so J_j is the localized-site extension by zero of [lem-pur-site-restriction-module-adjunction-exact]. Exactness of localized-site extension by zero gives a quasi-isomorphism J_jP→J_jK. The ringed-slice tensor comparison [lem-weil-pbc-ringed-slice-extension-tensor], applied with the coefficient sheaf (P_n)_X, identifies J_jP⊗_{A_X}(P_n)_X with J_j(P⊗_{A_U}(P_n)_U). For a flat O_U-module G the functor F↦(J_jG)⊗F≅J_j(G⊗F|_U) is exact, so J_jG is flat. J_j is a left adjoint, so it commutes with the direct sums forming total tensor complexes; since restriction is exact and J_j is exact, tensoring J_jP with any acyclic A_X-complex is the extension by zero of the corresponding acyclic tensor on U. Thus J_jP is again K-flat with flat terms in the sense of [def-pc-kflat-complex], and it computes all derived reductions of J_jK.",
+   "text": "Identify $U_{\\mathrm{proet}}=X_{\\mathrm{proet}}/U$ and both constant coefficient rings by [lem-weil-proetale-weakly-etale-localization]. Choose a flat-term K-flat $P\\to K$ [lem-pc-kflat-resolution]. By [lem-cbc-ringed-open-flat-resolution], $J_jP\\to J_jK$ is again a flat-term K-flat resolution. This proves the preservation assertion without a bound or completeness hypothesis.",
    "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
     "lem-pc-kflat-resolution",
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "def-pc-kflat-complex",
-    "lem-weil-proetale-weakly-etale-localization"
+    "lem-cbc-ringed-open-flat-resolution"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 1, integral open factor: extension by zero and tensor model"
+    "place": "Integral open factor; old Step 1"
    }
   },
   {
-   "text": "Use the diagram-site realization [lem-weil-pbc-diagram-site-realization] to regard the levelwise comparisons as morphisms of strict towers. For every n the preceding tensor comparison gives (J_jK)⊗^L_A P_n ≅ J_j(K⊗^L_A P_n). On a flat-term model it sends a pure tensor to the same extension-by-zero generator, so it commutes with the quotient maps P_{n+1}→P_n. The definition of inverse systems [def-weil-inverse-system] then makes these level maps a natural isomorphism of actual derived strict towers, denoted q^{tens}_{j,K}: R_X(J_jK)≅J_jR_U(K).",
+   "text": "Apply [lem-sf-cbc-localized-strict-tensor-descent] with $R=\\underline A_X$, $V=U$, $S_n=\\underline{P_n}_X$. Its normalized map is $t=q^{\\rm tens}_{j,K}:\\mathcal R_X(J_jK)\\cong J_j\\mathcal R_UK$. It supplies strict quotient compatibility, naturality in $K$, and $P_n$-linear evaluations, all on the model from Step 1.",
    "uses": [
-    "lem-weil-pbc-diagram-site-realization",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "def-weil-inverse-system"
+    "lem-sf-cbc-localized-strict-tensor-descent"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 1, strict diagram and quotient-transition compatibility"
+    "place": "Integral open factor; old Step 2 and scalar-linearity part of Step 5"
    }
   },
   {
-   "text": "Apply [lemma-weil-pbc-adic-completion-reduction] to the object J_jK on X. Its hypotheses are exactly the Noetherian complete-coefficient datum and perfect finite quotients in the statement, and no completeness hypothesis on J_jK is required. Writing C_X(J_jK)=R lim_n R_X(J_jK) [lem-sp-completed-pullback-adjunction], it states that the adjoint a_n of each limit projection p_n is an isomorphism C_X(J_jK)⊗^L_A P_n→(J_jK)⊗^L_A P_n. By [lem-sp-completed-pullback-adjunction] the completion unit η_{J_jK} is the completion map J_jK→R lim_n R_X(J_jK), so p_n∘η_{J_jK} is the canonical reduction J_jK→(J_jK)⊗^L_A P_n, whose adjoint is the identity. Naturality of the scalar-extension adjunction therefore gives a_n∘R_X(η_{J_jK})_n=a_{n}∘(η_{J_jK}⊗^L P_n)=id; as a_n is invertible, the n-th component of R_X(η_{J_jK}) is the isomorphism a_n^{-1}. Exactness in the tower category is levelwise [lem-weil-pbc-ringed-strict-tower-homotopy-limit], so the cone of R_X(η_{J_jK}) is acyclic and R_X(η_{J_jK}) is invertible as a morphism of derived strict towers.",
+   "text": "Use clause (i) of [lem-sf-cbc-completed-pullback-unit-tower] with $g=1_X$, $N=J_jK$: $u=\\mathcal R_X(\\eta_N)$ is invertible in the derived strict-tower category. Its inverse at $n$ is the adjunct $a_n$ of the limit projection. In $D(X_{\\mathrm{proet}},P_n)$ these adjuncts are isomorphisms by [lemma-weil-pbc-adic-completion-reduction]. No completeness of $N$ is required.",
    "uses": [
-    "lemma-weil-pbc-adic-completion-reduction",
+    "lem-sf-cbc-completed-pullback-unit-tower",
+    "lemma-weil-pbc-adic-completion-reduction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
+    "place": "Integral open factor; old Step 3"
+   }
+  },
+  {
+   "text": "Set $q=t\\circ u^{-1}$. Cancellation gives $qu=t$; its finite map is $t_n a_n$, with inverse the reduced unit under $t_n$. These formulas retain naturality and transitions. By [lem-sp-completed-pullback-adjunction], $C_XN$ is complete and equals $R\\lim\\mathcal R_XN$. Apply functorial $R\\lim$ to $t$ [lem-weil-pbc-ringed-strict-tower-homotopy-limit] to obtain the specified $J_j^cK\\cong R\\lim J_j\\mathcal R_UK$.",
+   "uses": [
     "lem-sp-completed-pullback-adjunction",
     "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/blueprint/master/blueprint/sec-proper-base-change/sk-thm-properbasechange/lemma-weil-pbc-adic-completion-reduction.md",
-    "place": "Statement and proof: finite reduction of the derived completion tower"
-   }
-  },
-  {
-   "text": "Define q_{j,K} as the composite of the inverse of R_X(η_{J_jK}) with q^{tens}_{j,K}. Both factors are natural in K, so q_{j,K} is natural and is an isomorphism. By its definition, q_{j,K}∘R_X(η_{J_jK})=q^{tens}_{j,K}. The inverse at level n is the finite reduction of the completion unit, while the forward map is the adjoint of the n-th limit projection, exactly as in the completion-reduction lemma and the specified unit of [lem-sp-completed-pullback-adjunction].",
-   "uses": [
-    "lemma-weil-pbc-adic-completion-reduction",
-    "lem-sp-completed-pullback-adjunction"
-   ],
-   "elementary": false,
-   "source": {
     "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Original split Step 3, paragraph beginning The completion unit"
+    "place": "Integral open factor; old Steps 4, 6 and 7"
    }
   },
   {
-   "text": "Evaluating q_{j,K} at n gives (J_j^cK)⊗^L_A P_n≅J_j(K⊗^L_A P_n), and Step 2 shows that these identifications commute with every quotient transition before R lim [lem-weil-pbc-diagram-site-realization]. For witnesses this iso is needed in D(X_proet,P_n): the inverse of the level-n reduced unit is the adjoint a_n, an isomorphism in D(X_proet,P_n) by [lemma-weil-pbc-adic-completion-reduction], and the level-n tensor comparison of [lem-weil-pbc-ringed-slice-extension-tensor] with F=(P_n)_X is (P_n)_X-linear, by its naturality in F applied to the scalar endomorphisms of (P_n)_X. Since P_n is a finite commutative ring, J_j on P_n-modules is the functor j_!^{proet} of [def-weil-extension-by-zero] (same sheafified extension-by-zero presheaf on X_proet/U). Let K_n have the witness (L_n,α_n), L_n∈D^+(U_et,P_n). Apply [lem-cbc-proetale-extension-zero-comparison] termwise to a bounded-below complex representing L_n; the functors ν^* (exact: a left adjoint preserving finite limits on the underlying sheaves [def-weil-pbc-site-comparison-morphism]), j_!^{et} [lem-weil-pbc-extension-by-zero-exact] and j_!^{proet} [lem-cbc-proetale-extension-zero] are exact and applied degreewise, so the termwise natural isomorphism is an isomorphism ν_X^*(j_!^{et}L_n)≅j_!^{proet}ν_U^*L_n in D^+(X_proet,P_n). Composing with j_!^{proet}(α_n) and the level-n isomorphism above gives ν_X^*(j_!^{et}L_n)≅(J_j^cK)⊗^L_A P_n, so (j_!^{et}L_n, this composite) is the required bounded-below extension-by-zero witness for the n-th reduction of J_j^cK. No transitions between the witnesses are asserted.",
+   "text": "For a retained witness $(L_n,\\alpha_n)$, apply the sheaf comparison [lem-cbc-proetale-extension-zero-comparison] degreewise. Since $P_n$ is a finite ring, $J_j$ on $\\underline{P_n}$-modules is the functor $j_!^{\\rm proet}$ of [def-weil-extension-by-zero] used by the comparison node: both sheafify the same extension-by-zero presheaf on $X_{\\mathrm{proet}}/U$ (Step 1), and the $P_n$-linear $j_{S_n!}$ of Step 2 forgets to $J_j$. The comparison inverse image is exact: it is a finite-limit-preserving left adjoint on module sheaves [def-weil-pbc-site-comparison-morphism]; both extensions are exact [lem-weil-pbc-extension-by-zero-exact, lem-cbc-proetale-extension-zero]. Thus it gives $\\delta_n:\\nu_X^*j_!^{et}L_n\\cong J_j\\nu_U^*L_n$ on bounded-below complexes. The pair $(j_!^{et}L_n,q_n^{-1}J_j(\\alpha_n)\\delta_n)$ is the required witness [def-weil-pbc-etale-origin-witness]. Its maps are $P_n$-linear by Steps 2–3. Each $n$ is independent; no witness transitions or commutation of $J_j$ with limits is used.",
    "uses": [
     "lem-cbc-proetale-extension-zero-comparison",
-    "def-weil-pbc-etale-origin-witness",
-    "lem-weil-pbc-diagram-site-realization",
-    "lemma-weil-pbc-adic-completion-reduction",
-    "lem-weil-pbc-ringed-slice-extension-tensor",
-    "def-weil-extension-by-zero",
-    "lem-cbc-proetale-extension-zero",
+    "def-weil-pbc-site-comparison-morphism",
     "lem-weil-pbc-extension-by-zero-exact",
-    "def-weil-pbc-site-comparison-morphism"
+    "lem-cbc-proetale-extension-zero",
+    "def-weil-pbc-etale-origin-witness",
+    "def-weil-extension-by-zero"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-thm-pe-constructible-comparison/lem-cbc-proetale-extension-zero-comparison.proof.md",
-    "place": "Comparison of etale and pro-etale extension by zero"
-   }
-  },
-  {
-   "text": "By the defining formula for completion in [lem-sp-completed-pullback-adjunction], J_j^cK=C_X(J_jK) is complete and is canonically R lim_n R_X(J_jK). Substituting the strict-tower isomorphism q^{tens}_{j,K} from Step 2 gives the specified natural presentation J_j^cK≅R lim_n(J_jR_UK). This uses only the derived limit of the strict reduction tower; it does not identify J_j(R lim_n R_UK) with R lim_n(J_jR_UK), so no commutation of ordinary J_j with inverse limits is asserted.",
-   "uses": [
-    "lem-sp-completed-pullback-adjunction",
-    "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "lem-weil-pbc-diagram-site-realization"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Steps 1–2, integral open factor: completion presentation"
-   }
-  },
-  {
-   "text": "All constructions above are induced by functorial K-flat replacement, the natural extension/tensor comparison, the quotient maps, and the completion unit. Therefore they respect morphisms of K and all tower transitions. The identity and zero-stalk descriptions of extension by zero are preserved levelwise, and the assertions are unchanged for the edge cases j=id and K=0. The final qualification follows from the construction in Step 6 and is part of the claimed typing.",
-   "uses": [
-    "lem-pur-site-restriction-module-adjunction-exact",
-    "def-weil-inverse-system"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-prop-sf-cbc/fix-lem-exchanges.md",
-    "place": "Proof Step 2, naturality and normalization"
+    "place": "Old Step 5: retained bounded-below etale-origin witness"
    }
   }
  ],
  "proof_deps": [
-  "def-pc-kflat-complex",
   "def-weil-extension-by-zero",
-  "def-weil-inverse-system",
   "def-weil-pbc-etale-origin-witness",
   "def-weil-pbc-site-comparison-morphism",
   "lem-cbc-proetale-extension-zero",
   "lem-cbc-proetale-extension-zero-comparison",
+  "lem-cbc-ringed-open-flat-resolution",
   "lem-pc-kflat-resolution",
-  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-sf-cbc-completed-pullback-unit-tower",
+  "lem-sf-cbc-localized-strict-tensor-descent",
   "lem-sp-completed-pullback-adjunction",
-  "lem-weil-pbc-diagram-site-realization",
   "lem-weil-pbc-extension-by-zero-exact",
-  "lem-weil-pbc-ringed-slice-extension-tensor",
   "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
   "lem-weil-proetale-weakly-etale-localization",
   "lemma-weil-pbc-adic-completion-reduction"
@@ -189,6 +154,62 @@
    "results": "; 8 hits: AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict_hom_ofRestrict_assoc, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.IsOpenImmersion.isoRestrict, AlgebraicGeometry.Scheme.instIsIsoCommRingCatResidueFieldMapOfIsOpenImmersion, UniformSpace.Completion.coeRingHom, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.stalk_iso, SemiNormedGrp.completion.map_zero, AlgebraicGeometry.SheafedSpace.IsOpenImmersion.isoRestrict",
    "date": "2026-10-17",
    "verdict": "no match: inspected the hits; ordinary module completion, scheme restriction and generic adjunction results do not state this derived pro-etale strict-reduction comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "extension.*(kflat|k.flat|tensor)|lowerShriek.*(tensor|kflat)|strict.*tower",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/LinearAlgebra/Matrix/ToLin.lean; Mathlib/LinearAlgebra/Contraction.lean; Mathlib/FieldTheory/PolynomialGaloisGroup.lean; Mathlib/FieldTheory/AlgebraicClosure.lean; Mathlib/FieldTheory/AlgebraicClosure.lean; Mathlib/RingTheory/Derivation/ToSquareZero.lean; Mathlib/Algebra/Algebra/RestrictScalars.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the broad search returned unrelated scalar-tower declarations; the targeted module-category search returned no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero on module sheaves commutes with derived scalar extension in the category of strict inverse systems",
+   "results": "Function.ExtendByZero.linearMap; ModuleCat.ExtendScalars.obj'; DirectLimit.instSMulWithZeroOfMulActionHomClassOfZeroHomClass; PresheafOfModules.Sheafify.zero_smul; DirectLimit.instSMulZeroClassOfMulActionHomClass; Finsupp.supportedEquivFinsupp_symm_apply_coe; DirectLimit.instSMulZeroClassOfMulActionHomClass.congr_simp; PresheafOfModules.Sheafify.SMulCandidate.h",
+   "date": "2026-10-21",
+   "verdict": "no match: function extension by zero, ordinary module scalar extension and algebra localization results do not state the ringed-site derived strict-tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj; PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj; PresheafOfModulesOfCommRing.tensorObj_obj; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight; PresheafOfModulesOfCommRing.Monoidal.tensorHom; PresheafOfModulesOfCommRing.Monoidal.tensorObjMap; PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: presheaf tensor declarations only; no localized derived strict-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localized ringed site extension by zero commutes with derived tensor by an inverse sequence of coefficient algebras as a natural isomorphism in the derived category of strict towers computed on K-flat complexes",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.Tor'; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc; CategoryTheory.Tor; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc; CategoryTheory.Tor'_obj_obj; CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor derived localization and Tor hits do not supply localized extension, strict coefficient transitions, or the scalar-linear normalized comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "jShriek|extensionByZero|lowerShriek|KFlat|derivedCompletion",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: the broad search returned unrelated scalar-tower declarations; the targeted module-category search returned no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor projection formula for exact extension from a localized ringed site compatible with coefficient ring homomorphisms",
+   "results": "IsLocalization.tensor; IsLocalization.tensorProduct_isLocalizedModule; Algebra.tensorH1CotangentOfIsLocalization; LieAlgebra.IsExtension.extension_proj; IsLocalizedModule.rTensor; LieAlgebra.Extension.proj; Algebra.Generators.cotangentCompLocalizationAwayEquiv; IsLocalization.instIsLocalizedModuleTensorProductMap",
+   "date": "2026-10-21",
+   "verdict": "no match: function extension by zero, ordinary module scalar extension and algebra localization results do not state the ringed-site derived strict-tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extend\"",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: presheaf tensor declarations only; no localized derived strict-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived I-adic completion of extension by zero has the same finite quotient reductions and carries bounded below etale origin witnesses",
+   "results": "IsAdicComplete.henselianRing; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top; Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; StandardEtalePresentation; PreTilt.exists_smodEq_untiltAux",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor derived localization and Tor hits do not supply localized extension, strict coefficient transitions, or the scalar-linear normalized comparison"
   }
  ],
  "mathlib_match": null,
@@ -211,31 +232,23 @@
  "merged_into": null,
  "lean_audit": {},
  "split_report": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "item": "lem-sf-cbc-extension-zero-completion",
   "worker": "stage1",
-  "summary": "Audited the strict constant-coefficient open-extension claim. The proof uses a flat-term K-flat model and the ringed-slice tensor comparison, upgrades the levelwise maps to an actual strict tower, applies the existing finite-reduction-of-adic-completion lemma to invert the reduced completion unit, and then derives the normalized q-map, completion presentation, transition compatibility, and etale-origin witness transport. No new nodes were needed. Reviewer FIX (Q99 maintainer reader, 2026-10-17): statement made explicit that each P_n is finite as a set (needed by the pro-etale extension-by-zero comparison and def-weil-extension-by-zero, as in def-weil-pbc-adic-coefficient-datum); Step 3 corrected (the adjoints of the limit projections are the inverses of the reduced unit components); Step 5 completed (P_n-linearity, derived extension of the sheaf-level comparison by exactness, composition with the witness); Step 1 cites the localization lemma; generic tool uses declared.",
-  "blueprint": "Realizes the integral open-factor paragraphs of fix-lem-exchanges: extension/tensor strictness, completion-unit normalization, and the resulting R lim presentation.",
+  "summary": "Human-requested re-split: extracted normalized K-flat descent to actual strict coefficient towers as one statement-only node. Reused existing exact K-flat preservation and completion-unit tower lemmas instead of duplicating them. Kept the statement verbatim and assembled the canonical q-map, completion presentation and explicitly retained coefficient-linear etale-origin witnesses. All old arguments are assigned in report.md. Reviewer FIX (Q52 maintainer reader, 2026-10-21): restored the six base stmt_deps dropped as 'unused' (the reviewed Lean statement uses ConstantCompletion, CompletionMap, AdicCompletionReduction and pro-etale inverse-image declarations); Step 5 again identifies J_j on P_n-modules with j_!^proet of def-weil-extension-by-zero, as the cited comparison requires.",
+  "blueprint": "fix-lem-exchanges Proof Steps 1–2, integral open factor: extension/tensor identification, unit normalization, strict quotient transitions and completion presentation.",
   "tool_uses": [
    {
-    "node": "lemma-weil-pbc-adic-completion-reduction",
-    "why": "Its finite-reduction theorem supplies the non-elementary fact that the derived completion unit becomes invertible after every perfect quotient reduction."
-   },
-   {
     "node": "lem-pc-kflat-resolution",
-    "why": "Generic existence of flat-term K-flat resolutions on a ringed site (Step 1); no node of sk-prop-sf-cbc states it."
+    "why": "Existence of flat-term K-flat resolutions on ringed sites. Generic tool; no replacement of the unit route."
    },
    {
-    "node": "lem-weil-pbc-ringed-slice-extension-tensor",
-    "why": "Generic projection formula j_!(G⊗F|_U)≅j_!G⊗F on a ringed site (Steps 1, 2, 5); no node of the unit states it."
+    "node": "lem-cbc-ringed-open-flat-resolution",
+    "why": "Localized extension preserves flat-term K-flat resolutions, with no scheme or bound restrictions. Generic tool; no replacement of the unit route."
    },
    {
-    "node": "lem-weil-pbc-diagram-site-realization",
-    "why": "Generic identification of strict diagrams of module sheaves with modules on the diagram site (Steps 2, 5, 6)."
-   },
-   {
-    "node": "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
-    "why": "Generic exact R lim on derived strict towers with levelwise exactness (Steps 3, 6)."
+    "node": "lemma-weil-pbc-adic-completion-reduction",
+    "why": "The limit-projection adjunct is invertible in the finite coefficient derived category. Generic tool; no replacement of the unit route."
    }
   ]
  },
@@ -244,15 +257,16 @@
   "lem-pc-kflat-resolution",
   "lem-weil-pbc-ringed-slice-extension-tensor",
   "lem-weil-pbc-diagram-site-realization",
-  "lem-weil-pbc-ringed-strict-tower-homotopy-limit"
+  "lem-weil-pbc-ringed-strict-tower-homotopy-limit",
+  "lem-cbc-ringed-open-flat-resolution"
  ],
  "reviewed": {
-  "date": "2026-10-17",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q99-35b85ca07",
-  "group": "Q99",
+  "reviewer": "NT-cc-Q52-ba402add7",
+  "group": "Q52",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q99-35b85ca07 (reviewer sub-agent of L); spot-checked: I read every step, each cited statement, the blueprint ancestor fix-lem-exchanges (master and main-20261015, same proof text, Proof Step 1, the extension-by-zero identification) and its current DAG Step 6, and Stacks 099M (proetale.tex l.4305). Steps 2, 4, 6 and 7 are correct: naturality in F gives a real strict-tower map, and ordinary J_j is never commuted with R lim. Three faults, all repaired in fixes/: (1) E1/B3: the witness clause and Step 5 use lem-cbc-proetale-extension-zero-comparison, def-weil-extension-by-zero and the module version of nu, which all need a finite ring. The item's 'P_n finite and perfect over A' cites def-weil-pbc-complete-coefficient-datum, which has no finiteness. Counterexample: A=Z_(l)[x], I=(l) meets the datum, but P_n is infinite. The statement now says P_n is finite as a set, as in def-weil-pbc-adic-coefficient-datum. The only user, fix-lem-exchanges Step 6 with A=O_E, meets this, so no citer breaks. (2) E3: Step 3 said the adjoints a_n of the limit projections are the components of R_X(eta). In fact a_n∘R_X(eta)_n=id, so each component is a_n^{-1}; the step is rewritten, with levelwise cones. (3) E5/C1: Step 5 applied a sheaf-level comparison to D^+ complexes and gave no P_n-linear level isomorphism. It now uses exactness of nu^*, j_!^et and j_!^proet, the P_n-linear isomorphism from the reduction lemma and the tensor comparison, the identification of J_j with def-weil-extension-by-zero, and composition with j_!(alpha_n). Step 1 now also cites the localization lemma, and proof_deps is reset. The corrected item is acyclic. No new nodes and no duplicate found. Accepted tool uses: lemma-weil-pbc-adic-completion-reduction (declared by the worker), plus lem-pc-kflat-resolution, lem-weil-pbc-ringed-slice-extension-tensor, lem-weil-pbc-diagram-site-realization and lem-weil-pbc-ringed-strict-tower-homotopy-limit, which I added.; 1 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q52-ba402add7 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node and every cited statement, and compared the base 7-step proof with the delivered steps. Base proof: clones/side-live; repair note: the human's re-split. The statement is unchanged. Allocation of the old steps: old Step 1 → existing lem-cbc-ringed-open-flat-resolution, whose statement is exactly e_! preserving flat-term K-flat resolutions. Old Step 2 → the new node. Old Step 3 → clause (i) of existing lem-sf-cbc-completed-pullback-unit-tower (iso for every N, inverse = projection adjunct); P_n-linearity comes from lemma-weil-pbc-adic-completion-reduction. Old Steps 4, 6 and 7 → elementary assembly. Old Step 5 → retained, with linearity moved into the new node. The item proof is 2182 characters (2487 after the fix). New node lem-sf-cbc-localized-strict-tensor-descent is true: Stacks 0E8I (sites-modules.tex l.4051) applied levelwise on a flat-term K-flat P, plus K-flatness of j_!P and ΔP. It is unique because every K has such a representative, and its S_n-linear evaluation holds because j_! commutes with restriction of scalars. Tested: V final, S_n=0, S_n=R, non-flat R→R/I, K=0. It is not a duplicate of lem-sf-ringed-open-total-tensor-kflat, lem-cbc-localized-extension-zero-linear-derived, lem-cbc-extension-zero-projection-formula, or ringed-slice-extension-tensor. Fault 1 (repaired): the delivery dropped six base stmt_deps as 'five unused', but the reviewed Lean statement module uses declarations of four of them (ConstantCompletion.* from constant-completion-equivalence, adicCompletionMap/adicReductionComplex from completion-map, adicCompletionEvaluation from adic-completion-reduction, proEtaleModelTopology/proEtaleSiteModel from proetale-inverse-image) and publicly imports the modules of the other two; restored the 21 base stmt_deps (a superset of the delivered list; statement text unchanged). Fault 2, E5/C1 (repaired): Step 5 applies lem-cbc-proetale-extension-zero-comparison, which concerns j_!^proet of def-weil-extension-by-zero for a finite ring, but the delivery dropped the base's identification of J_j on P_n-modules with that functor (part of the earlier Q99 FIX). It is now restated and cited, and proof_deps is recomputed. Batch-5: lem-sf-cbc-completed-pullback-unit-tower reaches lem-trf-right-fraction-dense-subcategory, a generic right-fraction localization lemma, not the trace formula or Poincaré duality or a step of their proofs. The base item already reached it through its stmt_dep lem-sp-completion-mate-comparison, and the recomputed closure adds 0 trace-formula, Poincaré-duality or target nodes → accepted. No cycles, no SGA. Accepted tool_uses: lem-pc-kflat-resolution, lemma-weil-pbc-adic-completion-reduction, lem-weil-pbc-ringed-strict-tower-homotopy-limit, lem-weil-proetale-weakly-etale-localization, lem-weil-pbc-extension-by-zero-exact. Maintainer: the snapshot's off-chapter dagsnap symlinks are broken, so I read those nodes from side-live; the item is Lean-closed, but the split is legitimate because the human asked for it.; 1 file(s) fixed by the reviewer"
  },
  "lean": {
   "module": "Sheaf.Paper.SfCbcExtensionZeroCompletion",

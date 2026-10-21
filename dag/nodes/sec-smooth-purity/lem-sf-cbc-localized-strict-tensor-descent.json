@@ -1,0 +1,104 @@
+{
+ "id": "lem-sf-cbc-localized-strict-tensor-descent",
+ "kind": "statement",
+ "title": "K-flat normalized descent of localized extension tensor comparisons to strict coefficient towers",
+ "statement": "Let $\\mathcal C$ be a small Grothendieck site, $R$ a sheaf of commutative rings, and $V\\in\\mathcal C$. Use $R_V=R|_V$ on the localized site $\\mathcal C/V$ [def-pur-localized-ringed-site], module sheaves [def-weil-sheaf-of-modules-category], their ordinary unbounded derived categories with localization functors $Q$ [def-weil-abstract-derived-category], and exact localized-site extension $j_{R!}$ [lem-pur-site-restriction-module-adjunction-exact]. Let $S_\\bullet=(S_n,s_n:S_{n+1}\\to S_n)_{n\\geq1}$ be a strict inverse sequence of sheaves of commutative $R$-algebras; all structural maps preserve $R$ and the unit [def-weil-inverse-system]. On the diagram site of [lem-weil-pbc-diagram-site-realization], write $\\Delta$ for the constant diagram and set\n$$\\mathcal R_S(M)=\\Delta M\\otimes^L_{\\Delta R}S_\\bullet,\\qquad\n\\mathcal R_{S|_V}(K)=\\Delta K\\otimes^L_{\\Delta R_V}(S_\\bullet|_V).$$\nDerived tensor uses sheaf tensor [def-pur-sheaf-tensor-product] and flat-term K-flat representatives [def-pc-kflat-complex, def-pc-flat-sheaf-modules]. Let $J_R$ be termwise $j_{R!}$ on strict $R_V$-module towers and its exact derived functor. For every $K\\in D(R_V)$ there is a unique natural isomorphism\n$$\\rho_K:\\mathcal R_S(j_{R!}K)\\xrightarrow{\\sim}J_R\\mathcal R_{S|_V}(K)$$\nwith the following representative normalization. On every flat-term K-flat complex $P$ representing $K$, after the canonical localization comparisons for exact extension and derived tensor, $\\rho_{QP}$ is $Q$ of the chain isomorphism of strict towers whose level $n$, degree $i$ map is the inverse sheaf projection comparison\n$$j_{R!}P^i\\otimes_R S_n\\xrightarrow{\\sim}j_{R!}(P^i\\otimes_{R_V}S_n|_V).$$\nThese are the tensor comparisons of [lem-weil-pbc-ringed-slice-extension-tensor]. The isomorphism is natural also in morphisms of the $R$-algebra tower, commutes with all $s_n$ before localization, and is independent of the chosen representative under its canonical derived comparisons. Its evaluation at $n$ is the restriction of scalars of the $S_n$-linear isomorphism\n$$(j_{R!}K)\\otimes_R^L S_n\\xrightarrow{\\sim}j_{S_n!}(K\\otimes_{R_V}^L S_n|_V),$$\nwhere $j_{S_n!}$ is localized-site extension with coefficient ring $S_n$. On an ordinary module, the comparison carries the extension of the map $p\\mapsto p\\otimes1$ to that same map after extension. No flatness of $R\\to S_n$, no surjectivity of $s_n$, and no boundedness or completion hypothesis is imposed.",
+ "source": {
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tag 0E8I, label lemma-j-shriek-and-tensor; agent-stated derived strict-diagram descent and coefficient-linear evaluation of this sheaf formula, realizing fix-lem-exchanges Proof Steps 1–2 (integral open factor)."
+ },
+ "stmt_deps": [
+  "def-pur-localized-ringed-site",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "def-weil-inverse-system",
+  "lem-weil-pbc-diagram-site-realization",
+  "def-pur-sheaf-tensor-product",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-ringed-slice-extension-tensor"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "extension.*(kflat|k.flat|tensor)|lowerShriek.*(tensor|kflat)|strict.*tower",
+   "results": "Mathlib/NumberTheory/RamificationInertia/Basic.lean; Mathlib/LinearAlgebra/Matrix/ToLin.lean; Mathlib/LinearAlgebra/Contraction.lean; Mathlib/FieldTheory/PolynomialGaloisGroup.lean; Mathlib/FieldTheory/AlgebraicClosure.lean; Mathlib/FieldTheory/AlgebraicClosure.lean; Mathlib/RingTheory/Derivation/ToSquareZero.lean; Mathlib/Algebra/Algebra/RestrictScalars.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: the broad search returned unrelated scalar-tower declarations; the targeted module-category search returned no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Extension by zero on module sheaves commutes with derived scalar extension in the category of strict inverse systems",
+   "results": "Function.ExtendByZero.linearMap; ModuleCat.ExtendScalars.obj'; DirectLimit.instSMulWithZeroOfMulActionHomClassOfZeroHomClass; PresheafOfModules.Sheafify.zero_smul; DirectLimit.instSMulZeroClassOfMulActionHomClass; Finsupp.supportedEquivFinsupp_symm_apply_coe; DirectLimit.instSMulZeroClassOfMulActionHomClass.congr_simp; PresheafOfModules.Sheafify.SMulCandidate.h",
+   "date": "2026-10-21",
+   "verdict": "no match: function extension by zero, ordinary module scalar extension and algebra localization results do not state the ringed-site derived strict-tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"tensor\"",
+   "results": "PresheafOfModulesOfCommRing.Monoidal.tensorObj; PresheafOfModulesOfCommRing.Monoidal.tensorObj_obj; PresheafOfModulesOfCommRing.tensorObj_obj; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorLeft; PresheafOfModulesOfCommRing.instPreservesColimitsOfSizeTensorRight; PresheafOfModulesOfCommRing.Monoidal.tensorHom; PresheafOfModulesOfCommRing.Monoidal.tensorObjMap; PresheafOfModulesOfCommRing.Monoidal.tensorHom_app",
+   "date": "2026-10-21",
+   "verdict": "no match: presheaf tensor declarations only; no localized derived strict-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A localized ringed site extension by zero commutes with derived tensor by an inverse sequence of coefficient algebras as a natural isomorphism in the derived category of strict towers computed on K-flat complexes",
+   "results": "CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app; CategoryTheory.Functor.leftDerivedZeroIsoSelf_inv_hom_id_assoc; CategoryTheory.Tor'; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_assoc; CategoryTheory.Tor; CategoryTheory.Functor.leftDerivedZeroIsoSelf_hom_inv_id_app_assoc; CategoryTheory.Tor'_obj_obj; CategoryTheory.Functor.mapDerivedCategoryFactorsh",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor derived localization and Tor hits do not supply localized extension, strict coefficient transitions, or the scalar-linear normalized comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "jShriek|extensionByZero|lowerShriek|KFlat|derivedCompletion",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: the broad search returned unrelated scalar-tower declarations; the targeted module-category search returned no hits"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor projection formula for exact extension from a localized ringed site compatible with coefficient ring homomorphisms",
+   "results": "IsLocalization.tensor; IsLocalization.tensorProduct_isLocalizedModule; Algebra.tensorH1CotangentOfIsLocalization; LieAlgebra.IsExtension.extension_proj; IsLocalizedModule.rTensor; LieAlgebra.Extension.proj; Algebra.Generators.cotangentCompLocalizationAwayEquiv; IsLocalization.instIsLocalizedModuleTensorProductMap",
+   "date": "2026-10-21",
+   "verdict": "no match: function extension by zero, ordinary module scalar extension and algebra localization results do not state the ringed-site derived strict-tower assertion"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extend\"",
+   "results": "none",
+   "date": "2026-10-21",
+   "verdict": "no match: presheaf tensor declarations only; no localized derived strict-tower comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The derived I-adic completion of extension by zero has the same finite quotient reductions and carries bounded below etale origin witnesses",
+   "results": "IsAdicComplete.henselianRing; StandardEtalePair.existsUnique_hasMap_of_hasMap_quotient_of_sq_eq_bot; AdicCompletion.exists_smodEq_pow_smul_top_and_mkQ_eq; AdicCompletion.exists_smodEq_pow_smul_top_and_smodEq_pow_add_one_smul_top; Algebra.FormallySmooth.exists_mkₐ_comp_eq_of_isAdicComplete; Algebra.FormallySmooth.exists_adicCompletionEvalOneₐ_comp_eq; StandardEtalePresentation; PreTilt.exists_smodEq_untiltAux",
+   "date": "2026-10-21",
+   "verdict": "no match: exact-functor derived localization and Tor hits do not supply localized extension, strict coefficient transitions, or the scalar-linear normalized comparison"
+  }
+ ],
+ "mathlib_match": null,
+ "status": "unsplit",
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-cbc-extension-zero-completion",
+  "date": "2026-10-21",
+  "group": "Q52"
+ },
+ "chapter": "sec-smooth-purity",
+ "unit": "sk-prop-sf-cbc",
+ "blueprint": {
+  "from": {
+   "node": "fix-lem-exchanges",
+   "place": "Proof Step 1, extension-by-zero identification, and Step 2, naturality: integral open-factor strict quotient tensor comparison; old lem-sf-cbc-extension-zero-completion Steps 1–2 and coefficient-linearity part of Step 5",
+   "via": [
+    "lem-sf-cbc-extension-zero-completion"
+   ]
+  },
+  "same_as": [],
+  "is": null
+ }
+}
