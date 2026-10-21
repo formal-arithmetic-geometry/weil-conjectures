@@ -11,9 +11,89 @@
   "def-sp-abelian",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use biproduct component notation throughout: a tuple denotes the matrix of a morphism into a finite biproduct, not an assumption that objects of $\\mathcal A$ have elements. Finite biproducts and bilinear composition are available by [def-sp-abelian]. The cone and shift definitions [def-weil-abstract-derived-category] give $K(V,r)^q=V^q\\oplus V^{q-1}$ and $d_K(v,u)=(dv,-du-rv)$ after swapping the two summands of $\\operatorname{Cone}(r)[-1]$. Its differential squares to zero because its second component is $dr v-rd v=0$, and its first component is $d^2v=0$. For any chain map $a$ with $ar=r'a$, both $d_KK(a)(v,u)$ and $K(a)d_K(v,u)$ are $(a\\,dv,-a\\,du-r'a v)$. Thus the diagonal maps used below are chain maps. Finally $d_Cc(b,a)=(t\\,db+fs a,-s\\,da)$ and $cd_C(b,a)=(t\\,db+tf a,-s\\,da)$; these agree by $fs=tf$. Hence $c$ is a chain endomorphism and both sides of the proposed isomorphism are complexes.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain; together with Stacks Tag 014E, derived.tex, definition-cone. Explicit component computation for the Cones paragraph of literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md"
+   }
+  },
+  {
+   "text": "Expand the two differentials using [def-weil-abstract-derived-category]. In the stated source order, the differential of $K(C,c)$ is\n$$D_S(b,a,b',a')=(db+fa,-da,-db'-fa'-tb,da'-sa).$$\nIn target order $B^q,B^{q-1},A^{q+1},A^q$, the differential of $\\operatorname{Cone}(K(f))$ is\n$$D_T(b,b',a,h)=(db+fa,-db'-tb+fh,-da,dh+sa).$$\nDefine $\\Phi_f^q(b,a,b',a')=(b,b',a,-a')$ by the indicated signed biproduct permutation [def-sp-abelian]. Substitution gives\n$$D_T\\Phi_f(b,a,b',a')=(db+fa,-db'-tb-fa',-da,-da'+sa)=\\Phi_fD_S(b,a,b',a').$$\nThus the prescribed degree maps form a chain map. All equations are identities of the four component morphisms.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone; Tag 014Q, definition-distinguished-triangle (the following paragraph specifies the boundary -p). Explicit component computation for the Cones paragraph of literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md"
+   }
+  },
+  {
+   "text": "Let $\\Psi_f^q(b,b',a,h)=(b,a,b',-h)$. By the biproduct identities [def-sp-abelian], both $\\Psi_f^q\\Phi_f^q$ and $\\Phi_f^q\\Psi_f^q$ are identities. The chain identity from step 2 implies $D_S\\Psi_f=\\Psi_fD_T$ by multiplying $D_T\\Phi_f=\\Phi_fD_S$ on the left and right by these degreewise inverses. Therefore $\\Psi_f$ is a chain inverse. For a square $\\beta f=\\widetilde f\\alpha$ with $\\alpha s=\\widetilde s\\alpha$ and $\\beta t=\\widetilde t\\beta$, the induced source map is $(b,a,b',a')\\mapsto(\\beta b,\\alpha a,\\beta b',\\alpha a')$, and the induced target map is $(b,b',a,h)\\mapsto(\\beta b,\\beta b',\\alpha a,\\alpha h)$. The square commutes since both composites send $(b,a,b',a')$ to $(\\beta b,\\beta b',\\alpha a,-\\alpha a')$. These diagonal cone maps are chain maps by the cone differential [def-weil-abstract-derived-category] and the three displayed commutation hypotheses. This proves the asserted naturality.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone; Tag 014Q, definition-distinguished-triangle (the following paragraph specifies the boundary -p). Explicit component computation for the Cones paragraph of literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md"
+   }
+  },
+  {
+   "text": "The shift definition [def-weil-abstract-derived-category] gives the differential of $K(A[1],s[1])$ as $(v,u)\\mapsto(-dv,du-sv)$. For $\\sigma_1(v,u)=(v,-u)$, both $d_{K(A,s)[1]}\\sigma_1(v,u)$ and $\\sigma_1d_{K(A[1],s[1])}(v,u)$ are $(-dv,-du+sv)$. This is a chain isomorphism with inverse the same signed formula, by [def-sp-abelian]. The inclusion $i$ intertwines $t,c$, while $-p$ intertwines $c,s[1]$ because $ci=it$ and $(-p)c=s[1](-p)$. Consequently their fibre maps are the diagonal chain maps from step 1. On $(b,b')$, both $\\Phi_fK(i)$ and $i_{K(f)}$ are $(b,b',0,0)$. On $(b,a,b',a')$, the map $K(-p)$ gives $(-a,-a')$, and applying $\\sigma_1$ gives $(-a,a')$. Applying $\\Phi_f$ and then the boundary $-p_{K(f)}$ also gives $(-a,a')$. This proves both triangle identities with the specified negative cone boundaries.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/homology.tex",
+    "place": "Tag 011G, definition-shift-cochain; together with Stacks Tag 014E, derived.tex, definition-cone. Explicit component computation for the Cones paragraph of literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md"
+   }
+  },
+  {
+   "text": "The given $J,J'$ are morphisms of complexes, and $sJ=0$, $tJ'=0$. For each pair $(V,r)$ and chain map $L:M\\to V$ with $rL=0$, the fibre differential gives $d_K(Lm,0)=(L\\,dm,-rLm)=(L\\,dm,0)$. Hence $\\eta_J$ and $\\eta_{J'}$ are chain maps. The identity $fJ=J'g$ gives $K(f)\\eta_J(m)=(fJm,0)=(J'gm,0)=\\eta_{J'}g(m)$, as an identity of biproduct components [def-sp-abelian]. The cone differential [def-weil-abstract-derived-category] gives\n$$d_CJ_C(m',m)=(J'\\,dm'+fJm,-J\\,dm)=(J'(dm'+gm),-J\\,dm)=J_Cd_{\\operatorname{Cone}(g)}(m',m).$$\nThus $J_C$ is a chain map. Also $cJ_C=(tJ',sJ)=0$, so the same fibre calculation proves that $\\eta_{J_C}$ is a chain map.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone; Tag 014Q, definition-distinguished-triangle (the following paragraph specifies the boundary -p). Explicit component computation for the Cones paragraph of literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md"
+   }
+  },
+  {
+   "text": "For the strictly commuting square in step 5, define its cone map by the diagonal formula $(m',m)\\mapsto(\\eta_{J'}m',\\eta_Jm)$. It is a chain map: its differential is $(\\eta_{J'}dm'+K(f)\\eta_Jm,-\\eta_Jdm)=(\\eta_{J'}(dm'+gm),-\\eta_Jdm)$ by step 5, which is the diagonal formula after the source cone differential [def-weil-abstract-derived-category]. Now $\\eta_{J_C}(m',m)$ has source coordinates $(J'm',Jm,0,0)$, so $\\Phi_f\\eta_{J_C}(m',m)=(J'm',0,Jm,0)$. These are exactly the target coordinates of $\\operatorname{Cone}(\\eta_J,\\eta_{J'})(m',m)$. Equality holds by the biproduct component identities [def-sp-abelian]. All constructions and checks are degreewise finite biproduct calculations; they make no assumption about countable products, boundedness, or epimorphisms.",
+   "uses": [
+    "def-sp-abelian",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 014E, definition-cone; Tag 014Q, definition-distinguished-triangle (the following paragraph specifies the boundary -p). Explicit component computation for the Cones paragraph of literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-sp-abelian",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-lem-pe-derived-nakayama/sk-lem-pe-derived-nakayama-first-reduction.proof.md",
+  "place": "Cones paragraph: explicit proof of the signed double-cone interchange, triangle maps and augmentation compatibility omitted from the blueprint, using Stacks Tags 014E, 014Q and 011G for conventions."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -49,10 +129,45 @@
    "results": "8 hits: CochainComplex.mappingConeCompHomotopyEquiv_comm₁, CochainComplex.mappingConeCompHomotopyEquiv_comm₂_assoc, CochainComplex.mappingConeCompHomotopyEquiv_comm₁_assoc, CochainComplex.mappingConeCompHomotopyEquiv_comm₂, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.MappingConeCompHomotopyEquiv.inv, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq Source inspected: MappingCocone.lean 29-60, 209-309; MappingCone.lean 630-648; Pretriangulated.lean 418-465.",
    "date": "2026-10-21",
    "verdict": "no match: additive-functor cone comparisons apply degreewise, not to a fibre mixing two adjacent degrees; composite-cone homotopy equivalences do not state this strict four-coordinate chain isomorphism with its augmentation identity."
+  },
+  {
+   "tool": "grep",
+   "query": "mappingCocone|mapTrianglehIso|mapHomologicalComplexIso",
+   "results": "25 hits: Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/ShortExact.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean, Mathlib/Algebra/Homology/HomotopyCategory/Pretriangulated.lean. Read MappingCocone.lean:29-65,209-242; MappingCone.lean:590-655; Pretriangulated.lean:418-468; Triangulated.lean:34-90.",
+   "date": "2026-10-21",
+   "verdict": "no match: degreewise additive-functor cone comparisons and the homotopy equivalence for composable cones do not give this strict signed interchange for a chain endomorphism fibre, including augmentation compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"mappingCone\", \"mapTriangle\"",
+   "results": "2 hits: CochainComplex.mappingCone.mapTrianglehIso, CochainComplex.mappingCone.mapTriangleIso. Read MappingCocone.lean:29-65,209-242; MappingCone.lean:590-655; Pretriangulated.lean:418-468; Triangulated.lean:34-90.",
+   "date": "2026-10-21",
+   "verdict": "no match: degreewise additive-functor cone comparisons and the homotopy equivalence for composable cones do not give this strict signed interchange for a chain endomorphism fibre, including augmentation compatibility."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The fibre of a chain endomorphism on a mapping cone is isomorphic to the mapping cone of the induced map of fibres with signed coordinate permutation and augmentation compatibility",
+   "results": "8 hits: CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'.congr_simp, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.shiftIso, CochainComplex.mappingCone.mapTrianglehIso, CochainComplex.mappingCone.mapTriangleIso. Read MappingCocone.lean:29-65,209-242; MappingCone.lean:590-655; Pretriangulated.lean:418-468; Triangulated.lean:34-90.",
+   "date": "2026-10-21",
+   "verdict": "no match: degreewise additive-functor cone comparisons and the homotopy equivalence for composable cones do not give this strict signed interchange for a chain endomorphism fibre, including augmentation compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Mapping fibres of commuting chain endomorphisms commute with mapping cones by a signed permutation of four direct summands, naturally with cone boundaries and augmentations",
+   "results": "8 hits: CochainComplex.mappingCone.map_comp, CochainComplex.mappingCone.map_δ, CochainComplex.mappingCone.map_inr, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingConeCompHomotopyEquiv_comm₁_assoc, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingConeCompHomotopyEquiv_comm₁. Read MappingCocone.lean:29-65,209-242; MappingCone.lean:590-655; Pretriangulated.lean:418-468; Triangulated.lean:34-90.",
+   "date": "2026-10-21",
+   "verdict": "no match: degreewise additive-functor cone comparisons and the homotopy equivalence for composable cones do not give this strict signed interchange for a chain endomorphism fibre, including augmentation compatibility."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Interchanging iterated mapping cones of a strictly commuting square of cochain complexes gives a chain isomorphism by negating one of four summands",
+   "results": "8 hits: CochainComplex.mappingConeCompHomotopyEquiv_comm₁, CochainComplex.mappingCone.mapHomologicalComplexXIso'_inv, CochainComplex.mappingCone.mapHomologicalComplexXIso_eq, CochainComplex.mappingCone.mapHomologicalComplexIso, CochainComplex.mappingCone.mapHomologicalComplexXIso'_hom, CochainComplex.mappingCone.mapHomologicalComplexXIso', CochainComplex.mappingCone.mapHomologicalComplexXIso, CochainComplex.MappingConeCompHomotopyEquiv.inv. Read MappingCocone.lean:29-65,209-242; MappingCone.lean:590-655; Pretriangulated.lean:418-468; Triangulated.lean:34-90.",
+   "date": "2026-10-21",
+   "verdict": "no match: degreewise additive-functor cone comparisons and the homotopy equivalence for composable cones do not give this strict signed interchange for a chain endomorphism fibre, including augmentation compatibility."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pe-roos-cone-calculus",
@@ -71,5 +186,21 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pe-endomorphism-fibre-double-cone",
+  "worker": "stage1",
+  "summary": "Expanded the strict endomorphism-fibre/cone interchange into six elementary biproduct-component calculations: well-defined complexes and diagonal maps; signed differential identity; inverse and naturality; shift, inclusion and boundary signs; augmented chain maps; and the cone augmentation identity. The statement is unchanged. No new nodes are needed: every calculation is written out from the two existing definition nodes. Searched the current project source, DAG, blueprint and Mathlib, including two semantic phrasings; no declaration states the complete item.",
+  "blueprint": "Realizes the Cones paragraph of det-pe-derived-nakayama-first-reduction, specifically the canonical commutation with mapping cones and compatibility of canonical comparison maps with distinguished triangles, as isolated from lem-pe-roos-cone-calculus. No unit or chapter route is changed.",
+  "tool_uses": []
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NS-0e1bac8a5",
+  "group": "NS",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NS-0e1bac8a5 (reviewer sub-agent of L); spot-checked: I read the item in full and redid every step by hand, using the cone convention (db+fa,-da), the shift convention (-d, no sign on morphisms) and the -p boundary from def-weil-abstract-derived-category and Stacks 014E/011G. (1) K(V,r) has differential (dv,-du-rv) with square zero, and c=diag(t,s) is a chain map by fs=tf. (2) D_S=(db+fa,-da,-db'-fa'-tb,da'-sa) and D_T=(db+fa,-db'-tb+fh,-da,dh+sa); D_TΦ=ΦD_S. (3) Ψ is the inverse; naturality uses the three square hypotheses. (4) σ1 intertwines (-dv,du-sv) with (-dv,du+sv). ΦK(i)=i_{K(f)}=(b,b',0,0). σ1K(-p) and -p_{K(f)}Φ both give (-a,a'). (5) and (6) η_J is a chain map when sJ=0; J_C is a chain map with cJ_C=0; and Φη_{J_C}=(J'm',0,Jm,0)=Cone(η_J,η_{J'}). Edge cases checked: f=0, s=t=0, Z[0] with identities, characteristic 2. The statement and blueprint fields are unchanged from live, and the item matches the blueprint main-20261015 first-reduction Cones paragraph (lines 10-22) as the parent lem-pe-roos-cone-calculus uses it in its steps 4-5. The item is unsplit in live and side-live and has no repair note of its own, so the re-split rule does not apply. There are no new nodes. Only two Mathlib-leaf definition nodes are cited, so there is no route issue and no SGA. Duplicate check: lem-amb-signed-fibre-cone/-triangulated concern additive functors into Ab, which is a different setting, and lem-pe-principal-reduction-cone-calculus is a different construction. Advisory: steps 1 and 5 recompute pieces of the sibling lem-pe-endomorphism-fibre-coordinate-calculus inline instead of citing it; this is allowed because they are elementary. The report mentions a citations.json that is not in the commit."
  }
 }
