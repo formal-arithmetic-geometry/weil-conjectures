@@ -22812,3 +22812,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 14:32 L: merged deliver/NN/lem-sf-tensor-comparison-localization-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 14:32 L: merged deliver/NI/lem-sf-open-roos-unit-adjunction (stage 2; reviewer PASS; parallel immutable checks)
 - 14:32 L: merged deliver/ND/det-sp-rational-localized-hom (stage 2; reviewer PASS; parallel immutable checks)
+- 14:33 L: merged deliver/NI/lem-per-rational-realization-finite-cone-models (stage 2; reviewer PASS; parallel immutable checks)

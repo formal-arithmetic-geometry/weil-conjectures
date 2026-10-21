@@ -251,5 +251,38 @@
   "group": "Q148",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q148-0e1e0ccad (reviewer sub-agent of L); spot-checked: I read the delivery in full: zero new nodes, statement byte-identical to live, item still unsplit in live and side-live, not on the dropped list, no re-split note, no cycle. The source is Bhatt-Scholze 6.8.13 and 6.8.14(2), pp. 61-62: full faithfulness from 6.8.12, essential surjectivity by reduction to local systems with O_E-structures. The item expands that reduction with full faithfulness and the stratum models as hypotheses. Steps 1, 3 and 4 check against the closure, realization and TR1-TR3 statements; the two rotations V->U[1]->C[1]->V[1] carry the signs -i[1], -p[1]; the rescaling square b=varpi^n commutes and b is invertible; the third map is an isomorphism by the two-of-three Mathlib leaf. Step 5's filtration induction (stratum models, exact localization, ses-triangle leaf) is correct, Step 6 is truly elementary, and Step 7's induction over r=a..b on the successive-truncation triangle is correct. One fault, C4 in step 2: it cited lem-sfb-rationalization-scalar-fractions, whose Q is the Verdier quotient of sk-def-sfb-rationalization, while the item's Q is the raw Hom-tensor-E rationalization of def-weil-pbc-rational-category, and no node identifies the two. FIX: step 2 now derives f/varpi^n from that definition by a common denominator; proof_deps and split_report.tool_uses are updated and the scalar-fractions tool_use is removed. Accepted tool_uses: lem-weil-pbc-uniform-complete-triangulated, lem-weil-pbc-truncation-triangle. Advisory: steps 6-7 could have cited lem-sfb-degreewise-bounded-devissage; inlining keeps the explicit finite-cone description the statement asserts. Edge cases checked: X empty, zero objects, n=0, delta=0, filtration length 0 or 1, a=b, negative degrees, zero cohomology.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.RationalRealizationFiniteConeModels",
+  "declaration": "AlgebraicGeometry.Scheme.RationalConeModels.bounded_model",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.RationalConeModels.Integral",
+   "AlgebraicGeometry.Scheme.RationalConeModels.Modules",
+   "AlgebraicGeometry.Scheme.RationalConeModels.Ambient",
+   "AlgebraicGeometry.Scheme.RationalConeModels.realize",
+   "AlgebraicGeometry.Scheme.RationalConeModels.realizationShift",
+   "AlgebraicGeometry.Scheme.RationalConeModels.FiniteConstruction",
+   "AlgebraicGeometry.Scheme.RationalConeModels.Filtration",
+   "AlgebraicGeometry.Scheme.RationalConeModels.image_closed",
+   "AlgebraicGeometry.Scheme.RationalConeModels.extension_cone",
+   "AlgebraicGeometry.Scheme.RationalConeModels.filtration_model",
+   "AlgebraicGeometry.Scheme.RationalConeModels.sheaf_model",
+   "AlgebraicGeometry.Scheme.RationalConeModels.bounded_model",
+   "AlgebraicGeometry.Scheme.RationalConeModels.acyclic_model"
+  ],
+  "file": "lean/Sheaf/Paper/RationalRealizationFiniteConeModels.lean",
+  "statement": "theorem bounded_model (s : RationalModuleRealization l E X) (_full : s.J.Full) (_faithful : s.J.Faithful) (_models : ∀ F : Modules l E X, (∃ t : FiniteLocallyClosedStratification X, ∀ k : Fin t.n, ((proEtaleModuleInverseImage (t.immersion k) (rationalCoefficientSheaf l X E)).obj F).IsFiniteLocallyFree) → Nonempty (Filtration l E X s F)) (C : Ambient l E X) (a b : ℤ) (_bounded : ∀ r : ℤ, r < a ∨ b < r → IsZero ((DerivedCategory.homologyFunctor (Modules l E X) r).obj C)) (_constructible : ∀ r : ℤ, ∃ t : FiniteLocallyClosedStratification X, ∀ k : Fin t.n, ((proEtaleModuleInverseImage (t.immersion k) (rationalCoefficientSheaf l X E)).obj ((DerivedCategory.homologyFunctor (Modules l E X) r).obj C)).IsFiniteLocallyFree) : ∃ (t : ∀ r : Set.Icc a b, Filtration l E X s ((DerivedCategory.homologyFunctor (Modules l E X) r.val).obj C)) (K : Integral l E X), FiniteConstruction l E X (fun L ↦ ∃ (r : Set.Icc a b) (k : Fin (t r).length), L = (t r).model k) K ∧ Nonempty ((realize l E X s).obj K ≅ C) ∧ ∃ (W : Fin ((b - a + 1).toNat + 1) → Integral l E X), IsZero (W 0).obj ∧ (∀ j, Nonempty ((realize l E X s).obj (W j) ≅ (DerivedCategory.TStructure.t.truncLE (a - 1 + (j.val : ℤ))).obj C)) ∧ Nonempty ((W (Fin.last (b - a + 1).toNat)).obj ≅ K.obj) ∧ (∀ j, FiniteConstruction l E X (fun L ↦ ∃ (r : Set.Icc a b) (k : Fin (t r).length), L = (t r).model k) (W j)) ∧ ∀ j : Fin (b - a + 1).toNat, ∃ (L D : Integral l E X) (f : L ⟶ (W j.castSucc)⟦(1 : ℤ)⟧) (g : (W j.castSucc)⟦(1 : ℤ)⟧ ⟶ D) (h : D ⟶ L⟦(1 : ℤ)⟧), FiniteConstruction l E X (fun M ↦ ∃ (r : Set.Icc a b) (k : Fin (t r).length), M = (t r).model k) L ∧ Nonempty ((realize l E X s).obj L ≅ ((DerivedCategory.singleFunctor (Modules l E X) 0).obj ((DerivedCategory.homologyFunctor (Modules l E X) (a + (j.val : ℤ))).obj C))⟦-(a + (j.val : ℤ))⟧) ∧ Triangle.mk f g h ∈ distTriang (Integral l E X) ∧ Nonempty ((W j.succ).obj ≅ D.obj⟦(-1 : ℤ)⟧)",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-10c9707a1",
+  "group": "NI",
+  "result": "pass",
+  "note": "Read the node, all 14 stmt_dep records, the RationalModuleRealization record source, the PbcRationalCategory, PbcScalarExtension, PbcRationalTransport and IntegralTStructure instances, and the Mathlib TStructure.t and IsTriangulatedClosed₂. Records: lean-only diff vs live and side-live; statement verbatim; all 13 declarations present; no new nodes; not dropped; first S2 delivery; report has both sections. Clauses: binders and hypotheses identical to the dependency records; constructibility uses the same encoding as the realization dependency; full faithfulness and stratum models are explicit hypotheses (the Filtration package is the dependency's output after F_X exactness, not stronger). extension_cone: ∃! α with the fraction in the dependency's `fractions` form, an integral cone with K≅D⟦-1⟧ and J(QK)≅C, and φ from rotate.rotate (signs -i⟦1⟧, -p⟦1⟧) with hom₁=1 and hom₂=ϖⁿ, all components isomorphisms; the square holds independently of the chosen CommShift of Q. Filtration and truncation towers correctly oriented, the truncation tower via Mathlib truncLE. FiniteConstruction is finite, has no retracts, and is neither hollow nor tautological; no Mathlib triangulated closure exists. acyclic_model needs no full faithfulness. Edge cases a>b, a=b, negative degrees, length 0, n=0, δ=0, empty X and universes all fine. Rational shift choices are inherited from the dependency. Docstrings have source and blueprint and carry steps 1-7; only sorry. No compile run (no file changed); worker reports a clean compile and a dry run (bfb515cef53). Advisory: the stratum models are restated as Filtration rather than citing exists_filtration_integral_models, acceptable because the node assumes them."
  }
 }
