@@ -114,11 +114,13 @@
    }
   },
   {
-   "text": "For each etale $W\\to U$, set $C=Z_U\\times_UW$ and $O=W\\setminus C$. Apply [thm-weil-pbc-site-comparison] both on $W$ and on $O$. The derived unit identifies the ordinary etale and pro-etale cohomology of the finite coefficient sheaf $A(r)$ on each, compatibly with restriction. The functorial support long exact sequences on both sites in [thm-pur-with-support-exactness] now form a commutative diagram. In the five-term segment $H^{d-1}(W)\\to H^{d-1}(O)\\to H^d_C(W)\\to H^d(W)\\to H^d(O)$, all four ordinary-cohomology comparison arrows are isomorphisms; the five lemma gives the middle supported comparison. Taking $d=2c$ transfers the edge isomorphism of Step 6 (or Step 1) to the pro-etale left side. Naturality of the unit and support sequences makes this comparison commute with every further etale restriction. The coefficient convention commutes with derived direct image along the open complement by [lem-weil-pbc-module-abelian-derived-direct-image-comparison], so forgetting scalars is compatible with the localization triangles defining this support comparison.",
+   "text": "For each etale object, apply the canonical derived comparison unit [thm-weil-pbc-site-comparison]. Comparison direct image preserves injectives, and its composite with the etale kernel-of-restriction functor is literally the pro-etale support functor. The composition isomorphism for right derived functors and the derived unit identify their derived values on comparison pullbacks. The acyclicity input is [lem-weil-pbc-comparison-grothendieck-injective-acyclicity]. In particular pulled-back injectives are support-acyclic. The ordinary unit map on support kernels is normalized by its inclusion equation and is invertible because the two ordinary evaluation units are invertible. Canonical right-derived base change therefore proves relativeSupportProComparison_isIso in every degree, for every scheme. Combine it with the scalar-forgetting comparison proved below and transport the edge and restriction maps by the specified inverse. This replaces the five-lemma route without adding finite-type or separatedness hypotheses.",
    "uses": [
     "thm-weil-pbc-site-comparison",
-    "thm-pur-with-support-exactness",
-    "lem-weil-pbc-module-abelian-derived-direct-image-comparison"
+    "lem-weil-pbc-comparison-grothendieck-injective-acyclicity",
+    "lem-sbc-injective-module-forget-evaluation-acyclic",
+    "lem-weil-pbc-right-derived-injective-sequence",
+    "lem-weil-pbc-right-derived-zero-transformation"
    ],
    "elementary": true,
    "source": {
@@ -134,6 +136,32 @@
     "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-prop-an/lem-pur-frame-independence.proof.md",
     "place": "Final etale-cover equality consequence."
    }
+  },
+  {
+   "text": "Canonical support/evaluation interfaces (proved): identify the open complement of the pulled-back closed immersion with the pullback of the original open complement. Their ranges agree by the pullback range formula and taking complements. The isomorphism of open immersions gives an isomorphism of etale objects commuting with the restriction arrows. Uniqueness of left adjoints identifies the open adjunction unit with localization restriction. Evaluation preserves kernels, so its kernel fork transports to the localized kernel-of-restriction fork. The unique kernel isomorphisms are natural and have exactly the displayed inclusion equations; cancellation of the kernel monomorphisms proves uniqueness. For terminal evaluation use the same argument, or factor the unit through the restriction to the complement and an isomorphism. Deriving these isomorphisms and using exact etale restriction, whose exact extension-by-zero left adjoint makes it preserve injectives, proves the evaluation-derived and global-derived comparison instances.",
+   "uses": [
+    "def-pur-support-cohomology",
+    "lem-weil-pbc-etale-restriction-injectives"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tags 09XP, 09XQ, 03F3 and 015N; canonical kernel and derived-functor comparisons."
+   }
+  },
+  {
+   "text": "Canonical scalar-forgetting interfaces (proved): scalar forgetting preserves kernels. Its kernel-preservation isomorphism is natural by composing with the target kernel inclusion. The generic pointwise-kernel left-exactness argument of [lem-pur-module-restriction-kernel-comparison] proves left exactness of the supported-section functors. For an injective module sheaf, restriction along the monic open-complement arrow is split epi, and its underlying abelian evaluations have no positive derived cohomology by [lem-sbc-injective-module-forget-evaluation-acyclic]. Apply [lem-weil-pbc-right-derived-injective-sequence] to the support kernel, terminal evaluation and complementary-open evaluation. In degree zero use [lem-weil-pbc-right-derived-zero-transformation] and surjectivity of restriction to kill the first connecting map; in higher degrees both adjacent evaluation groups vanish. The support groups vanish in every positive degree. Exact scalar forgetting and this acyclicity make the specified derived base-change map invertible.",
+   "uses": [
+    "lem-pur-module-restriction-kernel-comparison",
+    "lem-sbc-injective-module-forget-evaluation-acyclic",
+    "lem-weil-pbc-right-derived-injective-sequence",
+    "lem-weil-pbc-right-derived-zero-transformation"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/derived.tex",
+    "place": "Tags 09XP, 09XQ, 03F3 and 015N; canonical kernel and derived-functor comparisons."
+   }
   }
  ],
  "proof_deps": [
@@ -144,24 +172,27 @@
   "lem-pur-etale-supported-kernel-adjunction",
   "lem-pur-first-quadrant-lowest-row-edge",
   "lem-pur-kunneth-supported",
+  "lem-pur-module-restriction-kernel-comparison",
   "lem-pur-relative-support-coordinate-model",
   "lem-pur-smooth-pair-local-coordinates",
   "lem-pur-twist-sheaf-locally-free",
+  "lem-sbc-injective-module-forget-evaluation-acyclic",
   "lem-sp-grothendieck-edge-maps",
   "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-comparison-grothendieck-injective-acyclicity",
   "lem-weil-pbc-direct-image-preserves-injectives",
   "lem-weil-pbc-etale-restriction-injectives",
-  "lem-weil-pbc-module-abelian-derived-direct-image-comparison",
+  "lem-weil-pbc-right-derived-injective-sequence",
+  "lem-weil-pbc-right-derived-zero-transformation",
   "lemma-weil-pbc-geometric-stalk-conservative",
   "thm-pur-rank-one-local-calculation",
-  "thm-pur-with-support-exactness",
   "thm-sp-grothendieck",
   "thm-weil-pbc-site-comparison"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/etale-cohomology.tex; literature/stacks-project/more-morphisms.tex",
-  "place": "Tag 09XP supported local-to-global spectral sequence, Tag 0FUE smooth-pair coordinates, and the affine-line rank-one Kummer route; no SGA 4/4½ trace route."
+  "place": "Tag 09XP supported local-to-global spectral sequence, Tag 0FUE smooth-pair coordinates, and the affine-line rank-one Kummer route; no SGA 4/4½ trace route. W5: canonical kernel evaluation and scalar-forgetting interfaces proved; supported site comparison uses derived direct-image composition and the comparison unit instead of the support five lemma. The final smooth-pair theorem remains postponed."
  },
  "mathlib_searches": [
   {
@@ -543,5 +574,15 @@
   "existing": false,
   "note": "Repair of 0b2496febc1b: the edge uses evaluation on the fixed site of U, kernel-normalized restriction to the recorded supportCohomology groups, and the canonical natural-number/integer derived comparison. Pro-etale comparison derives the published unit-normalized supportComparisonUnit, with the scalar-forgetting comparison. All same-notion helpers and proof obligations are recorded. The final clause tests actual supported classes on arbitrary covering families, including empty covers of the empty scheme. No natural-language statement change."
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "W5",
+  "result": "pass",
+  "landing": "20261021T194508-L-1727104",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
