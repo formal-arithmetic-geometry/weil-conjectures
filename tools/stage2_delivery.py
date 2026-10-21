@@ -32,6 +32,7 @@ Failures are (letter, text) pairs; the letters are the ones of the stage-2 prefl
 """
 from __future__ import annotations
 import gzip, json, os, pathlib, re, shutil, subprocess, sys
+from collections import deque
 
 sys.path.insert(0, str(pathlib.Path(__file__).resolve().parent))
 from node_fields import (changed_fields_except, STAGE2_OWNS, STAGE2_ITEM_ALSO, STAGE2_ITEM_CORRECTION,  # noqa: E402
@@ -214,7 +215,62 @@ def opens(text: str) -> list[str]:
     return out
 
 
-def check_lean_text(text: str, rec: dict, item: str, check_statement: bool = True) -> tuple[list[tuple[str, str]], dict | None]:
+def public_declaration_names(text: str) -> set[str]:
+    """Names exported by this file, respecting module/section/declaration visibility."""
+    masked = mask(text)
+    visible = not is_module(text)
+    stack = []
+    names = set()
+    events = [(x.start(), "scope", x) for x in SCOPE.finditer(masked)]
+    events += [(d["start"], "decl", d) for d in declarations(text)]
+    for _, kind, event in sorted(events, key=lambda e: e[0]):
+        if kind == "scope":
+            if event.group("k") == "end":
+                if stack:
+                    visible = stack.pop()
+            else:
+                stack.append(visible)
+                prefix = masked[event.start():event.start("k")]
+                if re.search(r"\bprivate\b", prefix):
+                    visible = False
+                elif re.search(r"\bpublic\b", prefix):
+                    visible = True
+        else:
+            prefix = masked[event["start"]:event["kw_pos"]]
+            exported = visible or bool(re.search(r"\bpublic\b", prefix))
+            if exported and not re.search(r"\bprivate\b", prefix) and event["name"]:
+                names.add(event["name"])
+    return names
+
+
+def public_project_names(text: str, wanted: set[str], read_module=None) -> set[str]:
+    """Resolve listed names through public project imports, without scanning unrelated files.
+
+    Delivery checks supply a reader of their immutable Git tree (including overrides).
+    Standalone text checks use the published sources. Never fall back to the mutable
+    checkout when a supplied tree reader reports a module absent.
+    """
+    found, seen = set(), set()
+    todo = deque(public_imports(text))
+    while todo and wanted - found:
+        module = todo.popleft()
+        if not module.startswith("Sheaf.") or module in seen:
+            continue
+        seen.add(module)
+        if read_module is None:
+            path = existing_file(module)
+            source = path.read_text(errors="ignore") if path is not None else None
+        else:
+            source = read_module(module)
+        if source is None:
+            continue
+        found.update(wanted & public_declaration_names(source))
+        todo.extend(public_imports(source))
+    return found
+
+
+def check_lean_text(text: str, rec: dict, item: str, check_statement: bool = True,
+                    *, read_module=None) -> tuple[list[tuple[str, str]], dict | None]:
     """Check (c) on the text of the module. Returns (failures, the declaration found or None)."""
     fails = []
     f = lambda s: fails.append(("c", s))  # noqa: E731
@@ -247,12 +303,13 @@ def check_lean_text(text: str, rec: dict, item: str, check_statement: bool = Tru
             f(f"the docstring of {decl} does not contain `(blueprint: {item})`")
         if check_statement and normalize(rec.get("statement")) != found["statement"]:
             f(f"lean.statement differs from the signature in the file:\n      recorded: {normalize(rec.get('statement'))}\n      in file:  {found['statement']}")
+    missing = {n for n in rec.get("declarations") or []
+               if isinstance(n, str) and n not in byname and not upstream_has(n)}
+    exported = public_project_names(text, missing, read_module) if missing else set()
     for extra in rec.get("declarations") or []:
-        if isinstance(extra, str) and extra not in byname:
-            if upstream_has(extra):
-                pass  # an existing Mathlib/source declaration recorded next to the module's own (mixed record, 2026-10-11)
-            else:
-                f(f"lean.declarations names {extra}, which the file does not declare and which neither Mathlib nor the source has")
+        if isinstance(extra, str) and extra in missing - exported:
+            f(f"lean.declarations names {extra}, which the file does not declare and which is absent from "
+              "Mathlib, the source and its public project imports")
     for n in [decl] + [x for x in (rec.get("declarations") or []) if isinstance(x, str)]:
         if isinstance(n, str) and n in byname:
             hit = upstream_has(n)
@@ -1067,7 +1124,8 @@ def read_delivery(git: Git, ref: str, base: str, group: str, item: str, max_comm
             f("c", f"{who}: no file {lf} in {ref}"); continue
         if lf not in lean_files and lf not in over:
             f("c", f"{who}: {lf} is not changed by the commit (the module is part of the delivery)")
-        cf, decl = check_lean_text(text, r, nid)
+        cf, decl = check_lean_text(
+            text, r, nid, read_module=lambda module: show("lean/" + module.replace(".", "/") + ".lean"))
         fails.extend((L, x if role == "item" else f"{lf} ({nid}): {x}") for L, x in cf)
         mods.append({"file": lf, "node": nid, "role": role, "rec": r, "text": text, "decl": decl,
                      "module": r.get("module")})
