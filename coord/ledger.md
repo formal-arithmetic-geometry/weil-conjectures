@@ -21189,3 +21189,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:35 L: merged deliver/Q36/lem-pur-finite-open-interval-descent (stage 2; reviewer PASS; parallel immutable checks)
 - 08:35 L: merged deliver/Q03/lem-pur-normalized-actual-reconstruction-maps (stage 2; reviewer PASS; parallel immutable checks)
 - 08:35 L: merged deliver/Q130/lem-sfb-unit-tensor-braiding (stage 2; reviewer PASS; parallel immutable checks)
+- 08:35 L: returned deliver/Q39/lem-pur-signed-line-derived-base-change (reviewer RETURN: L: independent stage-2 immutable head 8e42368ae648: Findings 1-3 of 808a03a1 are repaired. (1) The new def node def-pur-)
