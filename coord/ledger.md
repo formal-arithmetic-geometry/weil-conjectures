@@ -21465,3 +21465,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T08:55:11Z L: superseded stage-1 delivery Q136/lem-pod-formal-verdier-exchange-equivariance at 498331f57ada41b7428d99c00e8ed876ca5e7314; current completion retained; packet archived at refs/superseded/Q136/lem-pod-formal-verdier-exchange-equivariance/498331f57ada41b7428d99c00e8ed876ca5e7314; stale return retired.
 - 08:55 L: returned deliver/Q32/lem-sfb-monoidal-finite-free-transport (reviewer RETURN: Superseded by live (brief-stage1: live finished nodes win and are never split, superseded deliveries are discarded; B10,)
 - 08:58 L: merged deliver/Q100/lem-sp-normalized-error-tower-vanishing (reviewer PASS; first push; new nodes: 0)
+- 08:58 L: merged deliver/Q23/lem-pur-support-comparison-common-injectives (reviewer FIX; first push; new nodes: 0)

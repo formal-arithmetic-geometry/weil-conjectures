@@ -20,9 +20,94 @@
   "def-weil-open-immersion",
   "def-pur-support-cohomology"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in the common larger universe specified in the statement. Apply the ringed-site Grothendieck theorem to each of the two small sites with its constant sheaf of rings $A$. Both ordinary module-sheaf categories are abelian and Grothendieck, hence have enough injectives. The degree-zero complex $F_p[0]$ is bounded below. The bounded-below resolution-existence theorem therefore supplies a quasi-isomorphism $h:F_p[0]\\to J^\\bullet$ with $J^\\bullet$ bounded below and each $J^n$ injective. This proves the existence clause; fix any such $h$ for the remaining steps.",
+   "uses": [
+    "def-weil-size-convention",
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-sp-grothendieck-enough-injectives",
+    "lem-sc-bounded-below-injective-resolution-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tag 079Q, remark-existence-D, ringed-site example; Tag 01DU, theorem-sheaves-modules-injectives; derived.tex Tag 013K, lemma-injective-resolutions-exist, (1) and (3)."
+   }
+  },
+  {
+   "text": "The comparison inverse image on the stated fixed-$A$ module categories is left adjoint to $\\nu_{T,*}$, and by the comparison-pullback exactness lemma (clause 2) it is additive and exact. Thus the right-adjoint preservation theorem applies to every injective $J^n$: $I^n=\\nu_{T,*}J^n$ is injective. Direct image is additive and sends zero objects to zero objects, so its termwise application gives a complex $I^\\bullet$ with the same lower bound as $J^\\bullet$. The composite $a=\\nu_{T,*}(h)\\circ\\eta_F^0$ is a chain map from $F[0]$. No assertion that direct image is exact is used.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-weil-pbc-proetale-modules",
+    "lem-sf-comparison-pullback-exact",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 09B1, lemma-compare-derived, proof: inverse image is exact; right-adjoint injectivity is the generic statement of lem-sp-right-adjoint-preserves-injectives."
+   }
+  },
+  {
+   "text": "Write $R=R\\nu_{T,*}$ and let $\\alpha_K:Q(\\nu_{T,*}K)\\to R(QK)$ be the natural comparison of the cited injective computation theorem. Since $J^\\bullet$ is bounded below with injective terms, $\\alpha_J$ is invertible; since $h$ is a quasi-isomorphism, $R(Qh)$ is invertible. The canonical injective computation for this resolution is $\\theta=R(Qh)^{-1}\\circ\\alpha_J:QI^\\bullet\\xrightarrow{\\sim}R(F_p[0])$. Apply the comparison-unit injective-model lemma with $\\Lambda=A$, the bounded-below complex $M=F[0]$ and $j=h:\\nu_T^*M=F_p[0]\\to J^\\bullet$; its hypotheses are exactly steps 1 and 2. Its displayed equation reads $R(Qh)\\circ\\eta^D_F=\\alpha_J\\circ Q(\\nu_{T,*}(h)\\circ\\eta_F^0)=\\alpha_J\\circ Qa$, where $\\eta^D$ is the derived adjunction unit of the site-comparison theorem. Hence $\\theta\\circ Qa=\\eta^D_F$. This pins down the augmentation, rather than choosing an arbitrary isomorphism to the derived image.",
+   "uses": [
+    "lem-weil-pbc-right-derived-plus-injective",
+    "lem-pur-comparison-unit-injective-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 05TI, lemma-enough-injectives-right-derived, (2); the unit representative is the statement of lem-pur-comparison-unit-injective-model."
+   }
+  },
+  {
+   "text": "The site-comparison theorem says that this derived unit is an isomorphism for every bounded-below etale module complex; apply it to $F[0]$. By step 3, $\\theta\\circ Qa$ is this unit; as $\\theta$ is an isomorphism, $Qa$ is an isomorphism. The cohomology-sheaf functors on the derived category compute the cohomology of any representing complex, so $H^n(a)$ is an isomorphism for every $n$. Thus $a$ is a quasi-isomorphism, and together with step 2 this makes $a:F[0]\\to I^\\bullet$ a bounded-below injective resolution. The comparison theorem explicitly imposes no constructibility or finiteness on the individual sheaves.",
+   "uses": [
+    "thm-weil-pbc-site-comparison",
+    "def-weil-pbc-derived-categories",
+    "def-sp-injective-resolutions"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tag 099V, lemma-relative-comparison, (2), and Tag 09B1, lemma-compare-derived, (2)."
+   }
+  },
+  {
+   "text": "By the explicit direct-image definition, for every etale $W\\to T$ and every degree $n$ one has $I^n(W)=(\\nu_{T,*}J^n)(W)=J^n(u_T(W))=J^n(W)$. An etale arrow $W_1\\to W_2$ is sent by $u_T$ to the identical scheme arrow, so both restrictions are the same $J^n(W_2)\\to J^n(W_1)$. Likewise the differential on $I^\\bullet(W)$ is $d_J^n(W)$, since direct image acts on a sheaf morphism by its components at $u_T(W)$. Hence these are identical complexes, including all restriction arrows. In particular $T$ and its open $V$ are etale objects, and both maps in the support-kernel formula are the same map of complexes. Their degreewise kernels and kernel inclusions are therefore literally equal. This uses only the kernel-of-restriction convention for supported sections; no comparison of separately chosen kernel models or of derived support functors is needed.",
+   "uses": [
+    "def-weil-pbc-site-comparison-morphism",
+    "def-pur-support-cohomology"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Comparison morphism direct image (restriction along the inclusion of etale objects); explicit formula in def-weil-pbc-site-comparison-morphism; kernel convention in def-pur-support-cohomology."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-size-convention",
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-sp-grothendieck-enough-injectives",
+  "lem-sc-bounded-below-injective-resolution-existence",
+  "def-weil-pbc-site-comparison-morphism",
+  "def-weil-pbc-proetale-modules",
+  "lem-sf-comparison-pullback-exact",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-pbc-right-derived-plus-injective",
+  "lem-pur-comparison-unit-injective-model",
+  "thm-weil-pbc-site-comparison",
+  "def-weil-pbc-derived-categories",
+  "def-sp-injective-resolutions",
+  "def-pur-support-cohomology"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/proetale.tex",
+  "place": "Agent-formulated common-resolution refinement of Tags 099V (lemma-relative-comparison), (2), and 09B1 (lemma-compare-derived), (2), using the generic injective and normalized derived-unit statements cited step by step."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -58,10 +143,52 @@
    "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M U x) : ((pushforwardPushforwardAdj adj φ ψ H₁ H₂).unit.app M).val.app U x = M.val.map (adj.counit.app U.unop).op x\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adju\"}\n  {\"name\": \"CategoryTheory.Adjunction.injectivePresentationOfMap\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Basic\", \"type\": \"(adj : F ⊣ G) [F.PreservesMonomorphisms] [F.ReflectsMonomorphisms] (X : C) (I : InjectivePresentation <| F.obj X) :\\n  InjectivePresentation X\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ where $ F $ preserves and reflects monomorphisms, and an injective presentation $ F(X) \\\\to J $ of $ F\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.Sheaf.adjunction_unit_app_val\", \"module\": \"Mathlib.CategoryTheory.Sites.Adjunction\", \"type\": \"[HasWeakSheafify J D] [HasSheafCompose J F] (adj : G ⊣ F) (X : Sheaf J E) :\\n  ((adjunction J adj).unit.app X).val = (adj.whiskerRight Cᵒᵖ).unit.app _ ≫ whiskerRight (toSheafify J (X.val ⋙ G)) F\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$, and let $\\\\mathcal{D}, \\\\mathcal{E}$ be categories. Let $G: \\\\mathcal{E} \\\\to \\\\mathcal{D}$ and $F: \\\\mathcal{D} \\\\to \\\\mathcal{E}$ be an adjo\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": ((pullbackPushforwardAdjunction.{u} φ).homEquiv _ _).symm (unitToPushforwardObjUnit φ) = pullbackObjUnitToUnit φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (U : Y.Opens) :\\n  ((restrictAdjunction f).unit.app M).app U = M.presheaf.map (homOfLE (f.image_preimage_le U)).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapInjectivePresentation\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Basic\", \"type\": \"(adj : F ⊣ G) [F.PreservesMonomorphisms] (X : D) (I : InjectivePresentation X) : InjectivePresentation (G.obj X)\", \"doc\": \"Given an adjunction $F \\\\dashv G$ where the left adjoint functor $F$ preserves monomorphisms, this function maps an injective presentation $f: X \\\\to J$ of an object $X$ to an injective presentation $G(\"}",
    "date": "2026-10-21",
    "verdict": "no match: generic adjunction, injective-resolution, or sheaf restriction facts do not state the specified etale/proetale section and support comparison model."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For the etale proetale comparison of a scheme with finite ring coefficients, pushing forward an injective resolution of the inverse image sheaf gives an injective resolution whose augmentation represents the derived adjunction unit",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            {X : C} →\\n              (P : CategoryTheory.InjectiveRes\", \"doc\": \"Given an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ P $, and an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this constructs a canonical morphism from $ F(\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X : C} (I : CategoryTheory.InjectiveResolution X)\\n \", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ I $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the natural transformation from $ F $ to its 0t\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addit\", \"doc\": \"For additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories, a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, an object $ X \\\\in \\\\mathcal{C} $, its injective resolutio\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X Y : C} (f : X ⟶ Y)\\n  (P : CategoryTheory.InjectiveResolution X) (Q : CategoryTheory.InjectiveReso\", \"doc\": \"Given abelian category $\\\\mathcal{C}$, objects $X,Y \\\\in \\\\mathcal{C}$, morphism $f:X\\\\to Y$, injective resolutions $P\\\\to X$ and $Q\\\\to Y$, morphism $\\\\phi:P\\\\to Q$ of cochain complexes satisfying $\\\\phi_0 \\\\c\"}\n  {\"name\": \"CategoryTheory.injectiveResolutions\", \"module\": \"Mathlib/CategoryTheory/Abelian/Injective/Resolution\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    [inst_1 : CategoryTheory.Abelian C] →\\n      [CategoryTheory.HasInjectiveResolutions C] → CategoryTheory.Functor C (HomotopyCategory C (ComplexShape.up ℕ))\", \"doc\": \"The functor from an abelian category $\\\\mathcal{C}$ to its homotopy category of cochain complexes, which assigns to each object its injective resolution's cochain complex and to each morphism the homot\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_naturality_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X Y : C} (f : X ⟶ Y)\\n  (P : CategoryTheory.InjectiveResolution X) (Q : CategoryTheory.InjectiveReso\", \"doc\": \"Given abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, objects $X,Y \\\\in \\\\mathcal{C}$, their injective resolutions $P$ and $Q$, a morphism $f : X \\\\to Y$, and an additive functor $F : \\\\mathcal{C} \\\\to\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'_comp_iCycles_assoc\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {D : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} D] [inst_1 : CategoryTheory.Abelian D] {C : Type u_2}\\n  [inst_2 : CategoryTheory.Category.{v_2, u_2} C] [inst_3 : CategoryTheory.Abelian C] {X : C}\\n  (P : CategoryTheory.InjectiveResolution X) (F : CategoryTheory.Functor C D) [inst_4 : F.Ad\", \"doc\": \"For abelian categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$, an object $X$ in $\\\\mathcal{C}$, its injective resolution $P$, and an additive functor $F: \\\\mathcal{C} \\\\to \\\\mathcal{D}$, the composition of the c\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.rightDerivedToHomotopyCategory_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addit\", \"doc\": \"For additive functors $F,G : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ between abelian categories, a natural transformation $\\\\alpha : F \\\\Rightarrow G$, and an object $X \\\\in \\\\mathcal{C}$ with injective resolution $\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits cover generic resolutions, adjunctions or ordinary sheaf pullback only; the etale/proetale comparison and the literal support kernels require the stated argument. Existing Mathlib leaves are used for the generic resolution and injectivity facts."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact inverse image and fully faithful derived comparison give a common injective resolution with identical section complexes on etale objects and support kernels",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n  \", \"doc\": \"Given an object $X$ in an abelian category $\\\\mathcal{C}$ with injective resolution $I$, and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this constructs an isomorphism in $\\\\mathcal{D}$ betwe\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {X : C} (I : CategoryTheory.InjectiveResolution X)\\n \", \"doc\": \"For an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ I $, and an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $, the natural transformation from $ F $ to its 0t\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.HasInjectiveResolutions C] →\\n            [inst_4 : CategoryTheory.Abelian D] →\\n  \", \"doc\": \"For an object $X$ in an abelian category $\\\\mathcal{C}$ with injective resolution $I$, and an additive functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, this constructs an isomorphism in the homotopy category\"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {D : Type u_1} →\\n      [inst_1 : CategoryTheory.Category.{v_1, u_1} D] →\\n        [inst_2 : CategoryTheory.Abelian C] →\\n          [inst_3 : CategoryTheory.Abelian D] →\\n            {X : C} →\\n              (P : CategoryTheory.InjectiveRes\", \"doc\": \"Given an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ P $, and an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $, this constructs a canonical morphism from $ F(\"}\n  {\"name\": \"CategoryTheory.Functor.rightDerived_map_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : C \\to D $ between abelian categories, natural number $ n $, and morphism $ f : X \\to Y $, the map induced by $ f $ on the $ n $-th right-derived functor $ F^R $ is equal to\"}\n  {\"name\": \"CategoryTheory.instIsIsoToRightDerivedZero'\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D)\\n  [inst_4 : F.Additive] [CategoryTheory.Limits.PreservesFiniteLimits F] {\", \"doc\": \"Given an object $ X $ in an abelian category $ \\\\mathcal{C} $, its injective resolution $ P $, and an additive functor $ F: \\\\mathcal{C} \\\\to \\\\mathcal{D} $, there exists a canonical morphism from $ F(X) \"}\n  {\"name\": \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] {F G : CategoryTheory.Functor C D} [inst_5 : F.Addit\", \"doc\": \"For additive functors $ F, G : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories, a natural transformation $ \\\\alpha : F \\\\Rightarrow G $, an object $ X \\\\in \\\\mathcal{C} $, its injective resolutio\"}\n  {\"name\": \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"module\": \"Mathlib/CategoryTheory/Abelian/RightDerived\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {D : Type u_1} [inst_1 : CategoryTheory.Category.{v_1, u_1} D]\\n  [inst_2 : CategoryTheory.Abelian C] [inst_3 : CategoryTheory.HasInjectiveResolutions C]\\n  [inst_4 : CategoryTheory.Abelian D] (F : CategoryTheory.Functor C D) [inst_5 : F.Additiv\", \"doc\": \"For an additive functor $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ between abelian categories with enough injectives, the component of the natural transformation from $ F $ to its 0th right-derived functor $\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits cover generic resolutions, adjunctions or ordinary sheaf pullback only; the etale/proetale comparison and the literal support kernels require the stated argument. Existing Mathlib leaves are used for the generic resolution and injectivity facts."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Injective, CategoryTheory.Adjunction",
+   "results": "[loogle] OK 3 hit(s)\n  {\"name\": \"CategoryTheory.Adjunction.map_injective\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [F.PreservesMonomorphisms] (I : D) (hI : CategoryTheory.Injective I) : CategoryTheory.Injective (G.obj I)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Injective.injective_of_adjoint\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u₂} [CategoryTheory.Category.{v₂, u₂} D] {L : CategoryTheory.Functor C D} {R : CategoryTheory.Functor D C} [L.PreservesMonomorphisms] (adj : L ⊣ R) (J : D) [CategoryTheory.Injective J] : CategoryTheory.Injective (R.obj J)\", \"doc\": \"\"}\n  {\"name\": \"CategoryTheory.Adjunction.injective_of_map_injective\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Basic\", \"type\": \" {C : Type u₁} [CategoryTheory.Category.{v₁, u₁} C] {D : Type u_1} [CategoryTheory.Category.{v_1, u_1} D] {F : CategoryTheory.Functor C D} {G : CategoryTheory.Functor D C} (adj : F ⊣ G) [G.Full] [G.Faithful] (I : D) (hI : CategoryTheory.Injective (G.obj I)) : CategoryTheory.Injective I\", \"doc\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits cover generic resolutions, adjunctions or ordinary sheaf pullback only; the etale/proetale comparison and the literal support kernels require the stated argument. Existing Mathlib leaves are used for the generic resolution and injectivity facts."
+  },
+  {
+   "tool": "grep",
+   "query": "comparison.*[Ii]njective|[Ii]njective.*comparison|[Ee]tale.*[Rr]esolution",
+   "results": "[grep] OK 1 hit(s)\n  {\"file\": \"Mathlib/Condensed/Discrete/LocallyConstant.lean\", \"line\": \"165\", \"text\": \"  apply injective_of_mono (sigmaComparison X (fun a ↦ (fiber f a).1))\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits cover generic resolutions, adjunctions or ordinary sheaf pullback only; the etale/proetale comparison and the literal support kernels require the stated argument. Existing Mathlib leaves are used for the generic resolution and injectivity facts."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The proetale direct image of an injective resolution of the inverse image of an etale module sheaf resolves that sheaf by the adjunction unit",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \"(M U x) : ((pushforwardPushforwardAdj adj φ ψ H₁ H₂).unit.app M).val.app U x = M.val.map (adj.counit.app U.unop).op x\", \"doc\": \"For categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an adju\"}\n  {\"name\": \"CategoryTheory.Adjunction.injectivePresentationOfMap\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Basic\", \"type\": \"(adj : F ⊣ G) [F.PreservesMonomorphisms] [F.ReflectsMonomorphisms] (X : C) (I : InjectivePresentation <| F.obj X) :\\n  InjectivePresentation X\", \"doc\": \"Given adjoint functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{D} \\\\to \\\\mathcal{C} $ where $ F $ preserves and reflects monomorphisms, and an injective presentation $ F(X) \\\\to J $ of $ F\"}\n  {\"name\": \"SheafOfModules.pushforwardPushforwardAdj\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PushforwardContinuous\", \"type\": \": pushforward.{v} φ ⊣ pushforward.{v} ψ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, and continuous functors $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$ and $G : \\\\mathcal{D} \\\\to \\\\mathcal{C}$ forming an ad\"}\n  {\"name\": \"SheafOfModules.PullbackConstruction.adjunction\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackContinuous\", \"type\": \": (forget S ⋙ PresheafOfModules.pullback.{v} φ.val ⋙ PresheafOfModules.sheafification (𝟙 R.val)) ⊣ pushforward.{v} φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and sheaves of rings $S$ on $\\\\mathcal{C}$ and $R$ on \"}\n  {\"name\": \"CategoryTheory.Sheaf.adjunction_unit_app_val\", \"module\": \"Mathlib.CategoryTheory.Sites.Adjunction\", \"type\": \"[HasWeakSheafify J D] [HasSheafCompose J F] (adj : G ⊣ F) (X : Sheaf J E) :\\n  ((adjunction J adj).unit.app X).val = (adj.whiskerRight Cᵒᵖ).unit.app _ ≫ whiskerRight (toSheafify J (X.val ⋙ G)) F\", \"doc\": \"Let $\\\\mathcal{C}$ be a category with a Grothendieck topology $J$, and let $\\\\mathcal{D}, \\\\mathcal{E}$ be categories. Let $G: \\\\mathcal{E} \\\\to \\\\mathcal{D}$ and $F: \\\\mathcal{D} \\\\to \\\\mathcal{E}$ be an adjo\"}\n  {\"name\": \"SheafOfModules.pullbackPushforwardAdjunction_homEquiv_symm_unitToPushforwardObjUnit\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.Sheaf.PullbackFree\", \"type\": \": ((pullbackPushforwardAdjunction.{u} φ).homEquiv _ _).symm (unitToPushforwardObjUnit φ) = pullbackObjUnitToUnit φ\", \"doc\": \"Given categories $\\\\mathcal{C}$ and $\\\\mathcal{D}$ with Grothendieck topologies $J$ and $K$, a continuous functor $F : \\\\mathcal{C} \\\\to \\\\mathcal{D}$, and a natural transformation $\\\\phi : S \\\\to F_*R$ betw\"}\n  {\"name\": \"AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app\", \"module\": \"Mathlib.AlgebraicGeometry.Modules.Sheaf\", \"type\": \"(M : Y.Modules) (U : Y.Opens) :\\n  ((restrictAdjunction f).unit.app M).app U = M.presheaf.map (homOfLE (f.image_preimage_le U)).op\", \"doc\": \"Let $f: X \\\\to Y$ be an open immersion of schemes. Let $f^*: \\\\text{Mod}(Y) \\\\to \\\\text{Mod}(X)$ be the restriction functor and $f_*: \\\\text{Mod}(X) \\\\to \\\\text{Mod}(Y)$ be the pushforward functor on sheaves\"}\n  {\"name\": \"CategoryTheory.Adjunction.mapInjectivePresentation\", \"module\": \"Mathlib.CategoryTheory.Preadditive.Injective.Basic\", \"type\": \"(adj : F ⊣ G) [F.PreservesMonomorphisms] (X : D) (I : InjectivePresentation X) : InjectivePresentation (G.obj X)\", \"doc\": \"Given an adjunction $F \\\\dashv G$ where the left adjoint functor $F$ preserves monomorphisms, this function maps an injective presentation $f: X \\\\to J$ of an object $X$ to an injective presentation $G(\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits cover generic resolutions, adjunctions or ordinary sheaf pullback only; the etale/proetale comparison and the literal support kernels require the stated argument. Existing Mathlib leaves are used for the generic resolution and injectivity facts."
+  },
+  {
+   "tool": "grep",
+   "query": "preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms|exists_quasiIso_injective",
+   "results": "[grep] OK 6 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"line\": \"49\", \"text\": \"theorem Functor.preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\"}\n  {\"file\": \"Mathlib/CategoryTheory/Preadditive/Injective/Preserves.lean\", \"line\": \"56\", \"text\": \"  preservesInjectiveObjects_of_adjunction_of_preservesMonomorphisms\"}\n  {\"file\": \"Mathlib/Algebra/Homology/Factorizations/CM5a.lean\", \"line\": \"668\", \"text\": \"public lemma exists_quasiIso_injective (n : ℤ) [K.IsStrictlyGE n] :\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"line\": \"61\", \"text\": \"lemma exists_quasiIso_injective [EnoughInjectives C]\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"line\": \"66\", \"text\": \"  obtain ⟨L, i, _, _, _⟩ := modelCategoryQuillen.exists_quasiIso_injective K.obj n\"}\n  {\"file\": \"Mathlib/Algebra/Homology/DerivedCategory/DerivabilityStructureInjectives.lean\", \"line\": \"92\", \"text\": \"    CochainComplex.Plus.exists_quasiIso_injective ⟨L, ⟨n, inferInstance⟩⟩ n\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: hits cover generic resolutions, adjunctions or ordinary sheaf pullback only; the etale/proetale comparison and the literal support kernels require the stated argument. Existing Mathlib leaves are used for the generic resolution and injectivity facts."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-support-comparison-boundary",
@@ -80,5 +207,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-support-comparison-common-injectives",
+  "worker": "stage1",
+  "summary": "Q23 retains the statement and gives five steps using only existing nodes: resolution existence, preservation of injective terms, the canonical injective computation with the existing comparison-unit injective model (reviewer FIX: replaces an inline re-derivation of that node), the comparison quasi-isomorphism, and literal evaluation/support kernels. No new nodes or Lean files.",
+  "blueprint": "Realizes the final sentence of the main-20261015 proof of thm-pur-rank-one-local-calculation, 'The pro-etale form is the comparison [thm-weil-pbc-site-comparison]': steps 1-5 give the common injective comparison model extracted through lem-pur-support-comparison-boundary; step 6 identifies the actual restriction and support-kernel complexes.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-comparison-pullback-exact",
+    "why": "Step 2 needs exactness of the module comparison inverse image (clause 2) to apply right-adjoint preservation of injectives; this is the generic DAG statement of that exactness, and no node of sk-prop-a1-kummer states it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-comparison-pullback-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q23-04950963f",
+  "group": "Q23",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q23-04950963f (reviewer sub-agent of L); spot-checked: First split of the Q54-created node, which had an empty proof. No new nodes; statement and stmt_deps unchanged from base and live; no repair note; the live node is still unsplit. I read every step against the cited statements: (1) Grothendieck ringed-site category in universe V gives enough injectives, then the Mathlib exists_quasiIso_injective node gives h. (2) The right adjoint of an exact functor preserves injectives. (3)-(4) The algebra θ·Qa=α_{F_p}·Qη⁰ and the trf unit formula with N=F[0] are correct. (5) Unit iso on D^+ makes Qa iso, so a is a quasi-iso and an injective resolution. (6) Literal evaluation (ν_*G)(U)=G(u_T U) identifies sections, restrictions and kernels. Stacks proetale 099V(2) (l.3953) and 09B1(2) (l.4068) match. Edge cases checked: F=0, C=∅, V=∅, A=0, A=Z/4. FIX 1 (C5): old steps 3-4 re-derived the existing same-unit node lem-pur-comparison-unit-injective-model (R(Qj)η^D=α_J Q(ν_*(j)η⁰_M) for any bounded-below M); they are merged into one step citing it with M=F[0], j=h; no cycle. FIX 2 (C4): ν^* exactness in step 2 rested only on definitions; it now cites lem-sf-comparison-pullback-exact clause 2, recorded in tool_uses. Batch-5 flag lem-trf-bounded-below-derived-adjunction: the generic derivedPlus adjunction (14-node closure, no other trace-formula/Poincaré node), not part of either assumed statement or its proof, so accepted. After the fix it is reached only through the existing unit-model node, which already cites it. Corrected file: fixes/dag/nodes/sec-smooth-purity/lem-pur-support-comparison-common-injectives.json (5 steps, 3529 chars).; 1 file(s) fixed by the reviewer"
  }
 }
