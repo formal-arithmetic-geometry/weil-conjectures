@@ -275,5 +275,23 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-514cd2341 (reviewer sub-agent of L); spot-checked: This is a first one-level split of a Q02-created helper: no re-split note applies and the item is not dropped. I read all 8 steps and every cited statement. Step 1: lem-ce (Stacks 0986, proetale.tex l.2028) makes each B_i w-contractible. det-pe-wlocal-components clause 3 converts the component convention into unique closed specialization. Step 2: the A-generators also generate B_j over B_i, so B_i→B_j is module-finite, hence integral, hence maximal ideals contract to maximal ideals. No injectivity is needed. Steps 3-5: lem-a1 gives the prime-family homeomorphism, and specialization is coordinatewise inclusion. The compatible maximal family above p is built from uniqueness at each stage plus integral contraction, and maximality follows from coordinatewise equality and injectivity. X^c=∩p_i^{-1}(X_i^c) is closed, and the restriction to lim X_i^c is well defined because closed points map to closed points. Step 6: det clause 2 identifications are natural, so the comparison is the canonical π0 map. Step 7: the localization-colimit node applies to a directed poset. The fraction maps are local (numerator test), so the new 04GI node gives strictly henselian B_m. Step 8: D is nonempty and the structure map factors through a stage. Small cases checked: separably closed field with finite products, nonreduced finite stages, zero stages. New node lem-sfb-filtered-colimit-strictly-henselian-local is exactly Stacks 04GI (algebra.tex l.42926, strict case) and is self-contained. It is not a restated item clause. rg -L over dag/nodes found no duplicate: filtered-colimit-henselian-pair gives only the pair statement, without locality or a separably closed residue field. Generic tool_uses accepted; no SGA cited; no changes."
+ },
+ "lean": {
+  "module": "Sheaf.RingTheory.IndfiniteContractibleBaseWStrict",
+  "declaration": "indfiniteContractibleBase_wStrict",
+  "file": "lean/Sheaf/RingTheory/IndfiniteContractibleBaseWStrict.lean",
+  "statement": "theorem indfiniteContractibleBase_wStrict (A : Type u) [CommRing A] [IsWContractibleRing A] (D : Type u) [PartialOrder D] [Nonempty D] (hdir : Directed (· ≤ ·) (id : D → D)) (F : D ⥤ CommAlgCat.{u} A) (hfinite : ∀ d : D, Module.Finite A (F.obj d)) (hfp : ∀ d : D, Algebra.FinitePresentation A (F.obj d)) (c : Cocone F) (hc : IsColimit ((forget₂ (CommAlgCat.{u} A) CommRingCat.{u}).mapCocone c)) : IsWStrictlyLocalRing c.pt ∧ (∀ x : closedPoints (PrimeSpectrum c.pt), PrimeSpectrum.comap (algebraMap A c.pt) x.val ∈ closedPoints (PrimeSpectrum A)) ∧ (∃ e : closedPoints (PrimeSpectrum c.pt) ≃ₜ {p : (d : D) → closedPoints (PrimeSpectrum (F.obj d)) // ∀ (i j : D) (hij : i ≤ j), PrimeSpectrum.comap (F.map (homOfLE hij)).hom.toRingHom (p j).val = (p i).val}, ∀ (x : closedPoints (PrimeSpectrum c.pt)) (d : D), ((e x).val d).val = PrimeSpectrum.comap (c.ι.app d).hom.toRingHom x.val) ∧ (∃ e : ConnectedComponents (PrimeSpectrum c.pt) ≃ₜ {p : (d : D) → ConnectedComponents (PrimeSpectrum (F.obj d)) // ∀ (i j : D) (hij : i ≤ j), (PrimeSpectrum.continuous_comap (F.map (homOfLE hij)).hom.toRingHom).connectedComponentsMap (p j) = p i}, ∀ (x : ConnectedComponents (PrimeSpectrum c.pt)) (d : D), (e x).val d = (PrimeSpectrum.continuous_comap (c.ι.app d).hom.toRingHom).connectedComponentsMap x)",
+  "branch": "sheaf-dag",
+  "by": "NR",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6792baa24",
+  "group": "NR",
+  "result": "pass",
+  "note": "Every node clause matches: IsWContractibleRing base; nonempty directed D : Type u; F : D ⥤ CommAlgCat A with Module.Finite and Algebra.FinitePresentation; colimit as IsColimit of the forget₂ CommRingCat cocone (A-algebra structure forced for nonempty directed D); IsWStrictlyLocalRing c.pt; closed points to closed points of Spec A; homeomorphisms closedPoints ≃ₜ compatible families and ConnectedComponents ≃ₜ compatible families, each pinned to the canonical comparison by a coordinate equation. No extra hypotheses; zero/empty/noninjective cases allowed; no w-contractibility claim. lean.statement verbatim; node differs from live only in lean; no live module collision; docstrings carry source places, blueprint tag and 8 proof steps; sorry only; report sections present. Advisory: unused private imports of stage-3 proof-dep modules (all exist in side-live). Not recompiled per the 2026-10-21 rule."
  }
 }
