@@ -14,9 +14,100 @@
   "def-sfb-finitely-presented-module",
   "sk-def-sfb-change-of-scalars"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the small pro-étale site in [def-weil-pbc-proetale-site], on its chosen $\\mathcal V$-small skeleton. The example $\\mathcal A=\\Ab$ in [sk-def-sfb-sheaf-tensor] satisfies the Grothendieck-abelian coefficient hypotheses of [lem-sfb-grothendieck-sheafification], whose final assertion makes $\\mathcal C$ abelian. The sheaf tensor is symmetric monoidal and preserves colimits in each variable by [sk-def-sfb-sheaf-tensor]. In particular tensoring preserves the zero object and finite coproducts, hence is additive: it preserves the canonical injections and projections and thus the diagonal/codiagonal formula for addition of morphisms. Apply [lem-sfb-modobj-abelian] to $R$ and to $S$; both tensor-left functors preserve finite colimits. Consequently $\\operatorname{Mod}_R(\\mathcal C)$ and $\\operatorname{Mod}_S(\\mathcal C)$ are abelian. Their finite biproducts and cokernels exist by [def-sp-abelian]. Ambient coequalizers also exist, as cokernels of differences of parallel arrows. Thus the braidedness, coequalizer and tensor-colimit-preservation hypotheses for scalar extension and for the mixed-bimodule right unitor below all hold.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "sk-def-sfb-sheaf-tensor",
+    "lem-sfb-grothendieck-sheafification",
+    "lem-sfb-modobj-abelian",
+    "def-sp-abelian"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sfb-sheaf-tensor/_section.md",
+    "place": "Sheaf tensor, examples and clauses 1–2; abelian module-category hypotheses of lem-sfb-modobj-abelian.md"
+   }
+  },
+  {
+   "text": "By [def-sfb-finitely-presented-module], choose finite $m,n$, an $R$-linear map $f:R^m\\to R^n$, its cokernel $q:R^n\\to Q$, and an $R$-module isomorphism $M\\cong Q$. The powers here are finite biproducts of the regular module, and rank zero means the zero object. Write $F=\\operatorname{Ext}_\\varphi$.",
+   "uses": [
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+    "place": "Second sentence: choose the finite-free presentation before tensoring"
+   }
+  },
+  {
+   "text": "The construction [def-sfb-modobj-extension] makes $P=S$ an $S$-$R$-bimodule, with left action $\\mu_S$ and right action $\\rho_P=\\mu_S\\circ(S\\otimes\\varphi)$. For the regular $R$-module its displayed coequalizer is exactly $P\\otimes_R R$: the two maps are $\\rho_P\\otimes R$ and $(S\\otimes\\mu_R)\\circ\\alpha_{S,R,R}$, and the left $S$-action is through the first factor in both constructions. Apply [lem-sfb-mixed-bimodule-right-unitor] to this $P$, then forget its right $R$-action. It gives an $S$-linear isomorphism $e_1:F(R)\\xrightarrow{\\sim}S$. The forward map is induced by $\\rho_P$ and its inverse inserts the unit of $R$ before the coequalizer map. This uses no equality $R=S$ and no flatness.",
+   "uses": [
+    "def-sfb-modobj-extension",
+    "lem-sfb-mixed-bimodule-right-unitor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+    "place": "Second sentence, finite-free terms after tensoring; balanced-tensor right-unit identification"
+   }
+  },
+  {
+   "text": "By [lem-sfb-modobj-extension-right-exact], $F$ preserves finite colimits. In particular it takes the initial object $0$ to an initial object; since the target is abelian, this gives $F(0)\\cong0$. A zero morphism factors through $0$, so its image under $F$ factors through a zero object and is zero. A finite biproduct $R^k$ is also the coproduct of $k$ copies of $R$. Preservation of this finite coproduct and the isomorphism $e_1$ from step 3 give $e_k:F(R^k)\\xrightarrow{\\sim}S^k$: its restriction to the $i$th coproduct inclusion is the $i$th inclusion of $S$ composed with $e_1$. The coproduct universal property [def-weil-pbc-category-colimit] gives the inverse using $e_1^{-1}$, and both composites are identities because they are identities on every inclusion. For $k=0$ this is the initial-object comparison. Thus these are isomorphisms in the module category for all finite ranks, including $m,n$.",
+   "uses": [
+    "lem-sfb-modobj-extension-right-exact",
+    "def-sfb-finitely-presented-module",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact (1), applied to finite discrete and empty diagrams; Tag 002F, definition-colimit, for the comparison maps"
+   }
+  },
+  {
+   "text": "A cokernel of $f$ is precisely a coequalizer of $(f,0)$: its coequalizing equation is $qf=0$, and its factorization property is the cokernel property written in [def-sfb-finitely-presented-module]. This is a finite colimit, so [lem-sfb-modobj-extension-right-exact] makes $F(q):F(R^n)\\to F(Q)$ a cokernel of $F(f)$, since $F(0)=0$ on morphisms by step 4. Set $g=e_n\\circ F(f)\\circ e_m^{-1}:S^m\\to S^n$ and $p=F(q)\\circ e_n^{-1}:S^n\\to F(Q)$. Then $pg=0$. If $h:S^n\\to N$ satisfies $hg=0$, the identity $g e_m=e_n F(f)$ implies $(h e_n)F(f)=0$. There is a unique $u:F(Q)\\to N$ with $uF(q)=h e_n$, hence $up=h$. Conversely $up=h$ implies $uF(q)=h e_n$, so uniqueness is unchanged. Thus $F(Q)$ is a cokernel of $g$. The uniqueness clause for colimits [def-weil-pbc-category-colimit] gives $F(Q)\\cong\\operatorname{coker}(g)$.",
+   "uses": [
+    "def-sfb-finitely-presented-module",
+    "lem-sfb-modobj-extension-right-exact",
+    "def-weil-pbc-category-colimit"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038, lemma-adjoint-exact (1), applied to the finite parallel-pair diagram; Tag 002F, definition-colimit, uniqueness"
+   }
+  },
+  {
+   "text": "Apply the functor $F$ to the chosen isomorphism $M\\cong Q$; the images of its two inverse maps are again inverse by the functor laws. Composing with step 5 gives $F(M)\\cong\\operatorname{coker}(g)$ for an $S$-linear $g:S^m\\to S^n$. This is finite presentation over $S$ by [def-sfb-finitely-presented-module]. Only finite-colimit preservation was used; injectivity of a presentation map and flatness are unnecessary.",
+   "uses": [
+    "def-sfb-finitely-presented-module"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+    "place": "Second sentence, conclusion that tensoring gives a finite presentation (right exactness)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-sheaf-tensor",
+  "lem-sfb-grothendieck-sheafification",
+  "lem-sfb-modobj-abelian",
+  "def-sp-abelian",
+  "def-sfb-finitely-presented-module",
+  "def-sfb-modobj-extension",
+  "lem-sfb-mixed-bimodule-right-unitor",
+  "lem-sfb-modobj-extension-right-exact",
+  "def-weil-pbc-category-colimit"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-qlbar-two-colimit/lem-sfb-extend-subfield-constructible.proof.md",
+  "place": "Expansion of the second sentence, tensoring the finite presentation, using existing internal-module construction, mixed-bimodule right unitor, and finite-colimit preservation; Stacks 0038 and 002F supply the categorical universal-property route."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -73,10 +164,47 @@
    "results": "5 hits: SheafOfModules.Presentation.mapRelations (Quasicoherent.lean:159), mapGenerators (:166), mapRelations_mapGenerators (:169), Presentation.map (:180), its proof (:185); directory Mathlib/Algebra/Category/ModuleCat/Sheaf",
    "date": "2026-10-21",
    "verdict": "no match: read Quasicoherent.lean:146-188; these operate in SheafOfModules rather than internal Mod(C,R). An equivalence between encodings would be additional mathematical work, not one-line specialization."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar extension along a morphism of internal commutative ring objects preserves finite presentations",
+   "results": "{\"t\": \"2026-10-21T03:17:43Z\", \"tool\": \"leansearch\", \"query\": \"Scalar extension along a morphism of internal commutative ring objects preserves finite presentations\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"instFinitePresentationTensorProduct\", \"Algebra.Generators.extendScalars\", \"ModuleCat.ExtendScalars.obj'\", \"ModuleCat.ExtendScalars.map'\", \"ModuleCat.preservesFiniteLimits_extendScalars_of_flat\", \"AlgHom.extendScalars\", \"RingHom.finitePresentation_isStableUnderBaseChange\", \"LinearMap.ltoFun\"], \"digest\": \"5add8be257828474\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: concrete ordinary-module presentation results and SheafOfModules.Presentation.map do not state finite presentation for internal Mod(C,R); identifying the encodings is not a one-line specialization. Internal regular-module results provide only a definition."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of scalars for internal module objects preserves a cokernel presentation by finite sums of the regular module",
+   "results": "{\"t\": \"2026-10-21T03:17:44Z\", \"tool\": \"leanfinder\", \"query\": \"Extension of scalars for internal module objects preserves a cokernel presentation by finite sums of the regular module\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.Presentation.cokernel_R\", \"Module.Presentation.CokernelData.lift\", \"Module.Presentation.cokernel_G\", \"Module.Presentation.ofExact_var\", \"Module.Presentation.cokernel_relation\", \"Module.Presentation.cokernelRelations_R\", \"Module.Presentation.nonempty_cokernelData\", \"Module.Presentation.cokernel\"], \"digest\": \"87e93f896457b28e\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: concrete ordinary-module presentation results and SheafOfModules.Presentation.map do not state finite presentation for internal Mod(C,R); identifying the encodings is not a one-line specialization. Internal regular-module results provide only a definition."
+  },
+  {
+   "tool": "grep",
+   "query": "IsFinitelyPresented|extendScalars|finiteFree",
+   "results": "{\"t\": \"2026-10-21T03:18:06Z\", \"tool\": \"grep\", \"query\": \"IsFinitelyPresented|extendScalars|finiteFree\", \"sub\": \"CategoryTheory/Monoidal\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: concrete ordinary-module presentation results and SheafOfModules.Presentation.map do not state finite presentation for internal Mod(C,R); identifying the encodings is not a one-line specialization. Internal regular-module results provide only a definition.",
+   "subdirectory": "CategoryTheory/Monoidal"
+  },
+  {
+   "tool": "grep",
+   "query": "instFinitePresentationTensorProduct|Presentation.map",
+   "results": "{\"t\": \"2026-10-21T03:18:06Z\", \"tool\": \"grep\", \"query\": \"instFinitePresentationTensorProduct|Presentation.map\", \"sub\": \"Algebra\", \"ok\": true, \"n_hits\": 5, \"note\": \"\", \"top\": [\"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\", \"Mathlib/Algebra/Category/ModuleCat/Sheaf/Quasicoherent.lean\"], \"digest\": \"48befd01f227748c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: concrete ordinary-module presentation results and SheafOfModules.Presentation.map do not state finite presentation for internal Mod(C,R); identifying the encodings is not a one-line specialization. Internal regular-module results provide only a definition.",
+   "subdirectory": "Algebra"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Internal module objects over monoids in an abelian monoidal category finite presentation base change regular module cokernel",
+   "results": "{\"t\": \"2026-10-21T03:18:07Z\", \"tool\": \"leanfinder\", \"query\": \"Internal module objects over monoids in an abelian monoidal category finite presentation base change regular module cokernel\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Mod_.regular\", \"instAB4ModuleCat\", \"instIsGrothendieckAbelianModuleCat\", \"FGModuleCat.instIsMonoidalModuleCatIsFG\", \"instFinitePresentationTensorProduct\", \"CategoryTheory.IsGrothendieckAbelian.tensorObj\", \"ModuleCat.instHasCoequalizers\", \"FGModuleCat.instIsMonoidalClosedModuleCatIsFG\"], \"digest\": \"ae29289b9867163b\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: concrete ordinary-module presentation results and SheafOfModules.Presentation.map do not state finite presentation for internal Mod(C,R); identifying the encodings is not a one-line specialization. Internal regular-module results provide only a definition."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-extend-subfield-constructible",
@@ -88,10 +216,44 @@
  "blueprint": {
   "from": {
    "node": "lem-sfb-extend-subfield-constructible",
-   "place": "proof, tensoring a local finite presentation with F_X: the finite-free and cokernel comparison underlying that argument",
+   "place": "Second sentence of lem-sfb-extend-subfield-constructible.proof.md: tensoring a local finite presentation E_X^m → E_X^n → M → 0 with F_X gives a local finite presentation (right exactness); the internal scalar-extension argument on each cover member.",
    "via": []
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-internal-scalar-extension-finite-presentation",
+  "worker": "stage1",
+  "summary": "Kept the statement and its five statement dependencies unchanged. Expanded the finite-presentation argument into six steps, checking the small-site and abelian hypotheses, identifying the scalar extension of the regular module using the existing mixed-bimodule right unitor, preserving finite coproducts including rank zero, and explicitly proving the conjugated cokernel universal property. Reused all notions and results; no new nodes. Recorded fresh wrapper searches and retained the inherited search records. No exact project declaration or Mathlib match states the item.",
+  "blueprint": "All six steps realize the second sentence of the nearest blueprint ancestor lem-sfb-extend-subfield-constructible.proof.md (local finite presentations tensor to finite presentations by right exactness), within unit sk-thm-sfb-qlbar-two-colimit. The result supplies the global presentation argument on each local cover member.",
+  "tool_uses": [
+   {
+    "node": "lem-sfb-grothendieck-sheafification",
+    "why": "Its final abelianness assertion applies to Ab-valued sheaves on the chosen small pro-etale site. This is generic ambient-category infrastructure, not a replacement of the coefficient-descent route; the unit has no independent abelianness theorem."
+   },
+   {
+    "node": "lem-sfb-modobj-abelian",
+    "why": "Gives abelian module categories for both ring objects from ambient abelianness and tensor right exactness, needed to interpret the finite biproducts and cokernels."
+   },
+   {
+    "node": "lem-sfb-modobj-extension-right-exact",
+    "why": "Preservation of finite colimits is the generic internal scalar-extension tool used by the blueprint finite-presentation sentence; the coefficient-descent unit does not reprove it."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sfb-grothendieck-sheafification",
+  "lem-sfb-modobj-abelian",
+  "lem-sfb-modobj-extension-right-exact"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-N7-495bf1569",
+  "group": "N7",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-495bf1569 (reviewer sub-agent of L); spot-checked: I read the whole item and all 13 cited nodes. There are no new nodes. The statement is unchanged and true. It is the second sentence of main-20261015 lem-sfb-extend-subfield-constructible.proof.md (tensoring a local finite presentation, by right exactness), and it fits the parent's uses in steps 2 and 3 (commutative ring objects E_U, F_U and the coefficient isomorphisms). Small cases tested: m=0, n=0, f=0, S=0, and the non-flat Z→Z/2 with M=Z/2, which gives the zero map on Z/2 with cokernel Z/2. Step 1: the V-small pro-étale skeleton and Ab at universe V meet the hypotheses of lem-sfb-grothendieck-sheafification, so Sh is abelian. Additivity of the tensor follows from its preserving colimits. lem-sfb-modobj-abelian then applies to R and to S, which discharges the hypotheses of def-sfb-modobj-extension and of the mixed unitor. Step 3: at M=R the two coequalizer arrows of def-sfb-modobj-extension are exactly P⊗_R R in lem-sfb-mixed-bimodule-right-unitor with P=S and ρ=μ_S(S⊗φ). That node is the Mathlib leaf Bimod.rightUnitorBimod (Bimod.lean:764), which takes distinct monoids X and Y, so this is correct. Steps 4 and 5: lem-sfb-modobj-extension-right-exact preserves the initial object (so F sends zero morphisms to zero), finite coproducts and the coequalizer of (f,0). The conjugation by e_m and e_n is written out with existence and uniqueness. Steps 2 and 6 are genuinely elementary. No flatness, left exactness or SGA is used, and nothing is circular. I accept the three declared tool uses (grothendieck-sheafification, modobj-abelian, extension-right-exact) as generic black boxes. Maintainer note: lem-sfb-internal-extension-finite-presentation (unsplit) states the same result. Q26 created it the same day for lem-sfb-extend-to-qlbar-constructible, and its review finished at 11:16, after this item's Q53 review at 11:13. Under the stages/1-dag §2 rule the later node should be merged into this item and its citer repointed. Its 'more precisely' clause (Ext R^k≅S^k, coker of the conjugate of Ext f) is proved in steps 3–5 here but is not part of this item's statement; the merge should check whether the citer uses it."
  }
 }
