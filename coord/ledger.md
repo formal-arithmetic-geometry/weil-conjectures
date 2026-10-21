@@ -21394,3 +21394,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:52 L: merged deliver/NL/lem-sfb-integral-bounded-stratum-base-change (reviewer FIX; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q90/lem-weil-isomorphism-comparison-natural (reviewer PASS; first push; new nodes: 0)
 - 08:52 L: merged deliver/Q92/lem-a1-integral-stratum-chart-restrictions (reviewer FIX; first push; new nodes: 0)
+- 08:52 L: merged deliver/Q127/lem-trf-section-rees-base-change-etale (reviewer FIX; first push; new nodes: 0)

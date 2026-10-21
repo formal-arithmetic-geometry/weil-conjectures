@@ -24,9 +24,169 @@
   "def-weil-etale-morphism",
   "def-pc-fibre-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "First check the hypotheses after base change. The morphism $g':V'=V\\times_SS'\\to S'$ is smooth of pure relative dimension $d$ by smooth base-change permanence, and separated of finite type by separated finite-type permanence. The square defining $s'$ is the pullback of $s$ along $V'\\to V$, so $s'$ is closed, and $g's'=1_{S'}$ by the projections. Thus the centred-coordinate and Rees-geometry lemmas apply to $(g',s')$ over the given Noetherian $S'$.",
+   "uses": [
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pod-separated-finite-type-base-change",
+    "lem-weil-pbc-closed-immersion-base-change",
+    "def-pc-fibre-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction; preservation of the section setting. Stacks 01KU (lemma-separated-permanence), 01T4 (lemma-base-change-finite-type), 01QR (lemma-base-change-closed-immersion)."
+   }
+  },
+  {
+   "text": "Choose the affine centred charts of the centred-coordinate lemma, so $P=R[x_1,\\ldots,x_d]\\to B$ is etale and $I=(x_1,\\ldots,x_d)B$, with $B/I=R$ via the section. Cover the inverse images of their base opens in $S'$ by affine opens $\\operatorname{Spec}R'$. Their fibre products with $\\operatorname{Spec}B$ have rings $B'=B\\otimes_RR'$ by the affine fibre-product lemma. Put $P'=R'[x_1,\\ldots,x_d]=P\\otimes_RR'$. The tensor universal property identifies $B'$ with $P'\\otimes_PB$ as a $P'$-algebra, so the etale ring-base-change lemma, applied to the etale $P\\to B$ and to $P\\to P'$, shows that $\\operatorname{Spec}B'\\to\\operatorname{Spec}P'$ is etale. The section quotient is $B'/IB'\\cong R'$: maps out of this quotient are precisely maps out of $B$ and $R'$ agreeing on $R$ and annihilating $I$, by the tensor universal property. Consequently $I'=IB'=(x'_1,\\ldots,x'_d)B'$, and these are again centred charts.",
+   "uses": [
+    "lem-trf-smooth-section-centred-coordinates",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-etale-ring-base-change",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, centred etale charts; Stacks 054L (lemma-smooth-etale-over-affine-space), 02GO (lemma-base-change-etale), 01I4 (lemma-fibre-product-affine-schemes)."
+   }
+  },
+  {
+   "text": "Apply the etale Rees-chart lemma to $P\\to B$ and $P'\\to B'$. Put $C=R[t,u_1,\\ldots,u_d]$, with $x_j$ acting as $tu_j$, and $C'=R'[t,u_1,\\ldots,u_d]$ with the same rule. We obtain $B[t,I/t]\\cong B\\otimes_PC$ and $B'[t,I'/t]\\cong B'\\otimes_{P'}C'$. The tensor universal property gives $(B\\otimes_PC)\\otimes_RR'\\cong (B\\otimes_RR')\\otimes_{P\\otimes_RR'}(C\\otimes_RR')$: both sides classify compatible ring maps out of $B,C,R'$, and the inverse maps on pure tensors are $((b\\otimes c)\\otimes r')\\mapsto(b\\otimes r')\\otimes(c\\otimes1)$ and $(b\\otimes r')\\otimes(c\\otimes r'')\\mapsto(b\\otimes c)\\otimes r'r''$. Identifying the polynomial coefficient extensions with $P'$ and $C'$ proves the displayed algebra isomorphism. It fixes $t$, sends $b$ to $b\\otimes1$, and sends $x_j/t=u_j$ to $x'_j/t=u'_j$. No injection was tensored along $R\\to R'$, so no flatness of that map is used.",
+   "uses": [
+    "lem-pur-dnc-etale-rees-chart",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, x_j=t u_j; explicit arbitrary-base-change calculation using the etale Rees presentation."
+   }
+  },
+  {
+   "text": "The comparison is canonical before choosing coordinates: for a coefficient map $a:B\\to B'$ carrying $I$ into $I'$, apply $a$ coefficientwise to Laurent polynomials; it restricts to $B[t,I/t]\\to B'[t,I'/t]$, sending $t$ to $t$ and $b/t$ to $a(b)/t$. Multiplication with the $R'$-coefficients induces the comparison from $B[t,I/t]\\otimes_RR'$. On centred charts this is exactly Step 3. After inverting $t$, it is the coefficientwise isomorphism $B[t,t^{-1}]\\otimes_RR'\\cong B'[t,t^{-1}]$; its inverse sends a coefficient $\\sum b_i\\otimes r'_i$ at degree $k$ to $\\sum (b_it^k)\\otimes r'_i$. The Rees-geometry lemma says centred deformation opens and the punctured deformation cover the entire family. Relative Spec identifies restrictions to these opens; the affine fibre-product lemma identifies their base changes with the tensors above. The Laurent formulas commute with further open restriction, so morphism gluing assembles the comparisons and their inverses. They give $D_{s'}V'\\cong D_sV\\times_SS'$ over both $V'$ and $\\mathbf A^1_{S'}$.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-trf-section-rees-noetherian-geometry",
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction and punctured trivialization; Stacks 01LX (lemma-spec-properties), 01I4 (lemma-fibre-product-affine-schemes), 01JA (section-glueing-schemes)."
+   }
+  },
+  {
+   "text": "The augmentation is preserved: on a centred chart both composites send $t$ to $t$, every $u_j=x_j/t$ to zero, and $b$ to its section value, then extended to $R'$. These elements generate the chart algebra, so the composites agree. Setting $t=1$ sends $u_j$ to $x_j$ and the comparison becomes $b\\mapsto b\\otimes1$ on $B$; this is the required identification of the pair $(g',s')$ with the base-changed pair $(g,s)$. Inverting $t$ gives the punctured identification with exactly the same coefficient map by Step 4. Thus it preserves the sections and the specified punctured and one-fibre trivializations, not just the underlying spaces.",
+   "uses": [
+    "lem-trf-section-rees-noetherian-geometry"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, augmented sections, x_j=t u_j, and the punctured and one-fibre identifications."
+   }
+  },
+  {
+   "text": "On a centred chart the conormal has basis $[x_1],\\ldots,[x_d]$ over $R$ by the centred-coordinate lemma. On the base-changed chart the classes $[x'_1],\\ldots,[x'_d]$ generate $I'/I'^2$, since $I'=(x'_1,\\ldots,x'_d)B'$ and $B'/I'=R'$ (Step 2). By the centred-coordinate lemma for $(g',s')$ (Step 1), $\\mathcal E'$ is locally free of rank $d$, so $\\operatorname{Spec}R'$ is covered by principal opens $D(f)$ with $(I'/I'^2)_f\\cong R_f'^{\\,d}$. Composing the surjection $R_f'^{\\,d}\\to(I'/I'^2)_f$, $e_j\\mapsto[x'_j]$, with this isomorphism gives a surjective endomorphism of a finite module, bijective by the surjective-endomorphism lemma. So the surjection is injective on every $D(f)$, hence injective, and $[x'_1],\\ldots,[x'_d]$ is a basis over $R'$. The canonical conormal map sends $[x_j]\\otimes1$ to $[x'_j]$, so is an isomorphism, with the inverse specified on these bases. These are the intrinsic maps $[b]\\mapsto[b\\otimes1]$, hence they agree on restrictions and give $v^*\\mathcal E\\cong\\mathcal E'$. A symmetric algebra map on these bases is the coefficient-extension polynomial isomorphism, so the induced normal bundle map is an isomorphism too. At zero the Rees-geometry lemma identifies a homogeneous class $[b]_m$ with $[bt^{-m}]$. The coefficient map takes this to $[(b\\otimes1)t^{-m}]$, the image of $[b\\otimes1]_m$ under the new zero-fibre identification. Since the symmetric-to-graded map is induced by products of degree-one classes, this is exactly the map induced by the conormal map, preserving the zero section. This proves the zero-fibre compatibility.",
+   "uses": [
+    "lem-trf-smooth-section-centred-coordinates",
+    "lem-trf-section-rees-noetherian-geometry",
+    "lem-weil-pbc-finite-module-surjective-endomorphism-bijective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction and normal-cone identification; Stacks 0633 (lemma-affine-conormal-sheaf), degree-one classes and their products."
+   }
+  },
+  {
+   "text": "Apply the Rees-geometry lemma to $(g',s')$, whose hypotheses were checked in Step 1. It supplies smooth separated dimension-$d$ $q'$, the pair at zero $(\\pi',z')$, Noetherian sources and compactifiability of $q'$ and $\\pi'$, including the separated finite-type structural composites in its last clause. Since $\\pi'$ is the fibre of $q'$ along $0:S'\\to\\mathbf A^1_{S'}$, smooth relative-dimension permanence and separated finite-type base-change permanence also give smooth separated dimension-$d$ $\\pi'$. Thus the comparison identifies the base-changed structural maps with maps having the asserted geometry. This uses Noetherianity of $S'$ but no finite-type or flatness hypothesis on $S'\\to S$.",
+   "uses": [
+    "lem-trf-section-rees-noetherian-geometry",
+    "lem-sbc-smooth-relative-dimension-permanence",
+    "lem-pod-separated-finite-type-base-change"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, the new family and bundle have the same Noetherian smooth compactifiable geometry."
+   }
+  },
+  {
+   "text": "Now take an affine restriction $B\\to B_1$ of $h$. Since $h$ is etale it is flat, so the affine flatness criterion makes $B\\to B_1$ a flat ring map, and the Cartesian square of centres gives $I_1=IB_1$. Tensor the inclusion $B[t,I/t]\\hookrightarrow B[t,t^{-1}]$ with the flat $B$-module $B_1$; flat tensor exactness makes the resulting map injective. Coefficientwise multiplication identifies $B_1\\otimes_BB[t,t^{-1}]$ with $B_1[t,t^{-1}]$: the inverse sends $\\sum_k c_kt^k$ to $\\sum_k c_k\\otimes t^k$, and the tensor relations verify the two inverse identities. The image of $B_1\\otimes_BB[t,I/t]$ in it is the $B_1$-subalgebra generated by $t$ and $b/t$ for $b\\in I$. Indeed tensor elements are finite sums of scalar multiples of expressions in those generators. This equals $B_1[t,I_1/t]$: every $c\\in I_1$ is a finite sum $\\sum a_i b_i$, so $c/t=\\sum a_i(b_i/t)$, and the reverse inclusion holds because $I$ maps into $I_1$. Thus the injective map has exactly the claimed image, giving $B_1\\otimes_B B[t,I/t]\\cong B_1[t,I_1/t]$.",
+   "uses": [
+    "def-weil-etale-morphism",
+    "lem-weil-pbc-flat-morphism-affine-criterion",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, flat etale pullback of the Rees subalgebra; Stacks 00HD (lemma-flat), tensor injectivity. This is the explicit algebra argument, not a blow-up base-change assertion."
+   }
+  },
+  {
+   "text": "Relative Spec, affine fibre products and morphism gluing assemble Step 8 into $D_{s_1}V_1\\cong D_sV\\times_VV_1$. Its map to $D_sV$ is the base change of the etale $h$ along $D_sV\\to V$, hence etale by etale base-change stability. The augmentations agree on coefficients and send $b/t$ to zero; at one the coefficient map is $h$. For the zero fibre put $T=B/I$ and $T_1=B_1/I_1$. Flat tensor exactness and the tensor universal property give $T_1\\otimes_T(I^m/I^{m+1})\\cong I_1^m/I_1^{m+1}$, since $(IB_1)^m=I^mB_1$; the map sends $c\\otimes[b]$ to $[c h^\\sharp(b)]$. Products are preserved because both multiply representatives. In degree one this is the conormal pullback isomorphism. The affine centre map $\\operatorname{Spec}T_1\\to\\operatorname{Spec}T$ is a restriction of the identity $S\\to S$ under the Cartesian centres, so these local pullback maps identify the global conormal bundles over the same $S$. The centred-coordinate lemma identifies the original graded algebra with the symmetric algebra on this conormal. In its local bases this is a polynomial algebra; coefficient extension gives the symmetric algebra on the new conormal as well. Finally the general associated-graded Rees lemma identifies $[b]_m$ with $[bt^{-m}]$ on both zero fibres, without smoothness hypotheses. Hence the zero-fibre map is exactly the linear normal-bundle isomorphism induced by $[b]\\mapsto[h^\\sharp b]$, preserving its zero section.",
+   "uses": [
+    "lem-weil-pbc-affine-morphism-relative-spec",
+    "lem-weil-pbc-fibre-product-affine-spectra",
+    "lem-weil-pbc-scheme-morphism-gluing",
+    "lem-weil-pbc-etale-scheme-base-change",
+    "lem-weil-pbc-flat-tensor-exact",
+    "lem-trf-smooth-section-centred-coordinates",
+    "lem-trf-section-rees-noetherian-geometry",
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "lem-pur-rees-associated-graded-chart"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction, etale maps of pairs and the induced normal-bundle map; Stacks 02GO (lemma-base-change-etale), 0633 (lemma-affine-conormal-sheaf), 00HD (lemma-flat)."
+   }
+  },
+  {
+   "text": "Every comparison just constructed is induced by $t\\mapsto t$ and $b/t\\mapsto a(b)/t$, with coefficients mapped by $a$; a composite of coefficient maps gives the composite comparison on these generators. Restrictions are coefficient maps of this kind. The equalities therefore hold on each affine restriction and hence globally by morphism-gluing uniqueness. They include all stated section, punctured, zero- and one-fibre identifications. For $d=0$ the centred ideal is zero, its Rees algebra is $B[t]$, and the conormal is zero, so the same formulas apply with no $u_j$ or conormal basis vectors.",
+   "uses": [
+    "lem-weil-pbc-scheme-morphism-gluing"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+    "place": "Local construction; compatibility on restrictions, compositions, and the empty coordinate sequence."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "def-pc-fibre-product",
+  "lem-trf-smooth-section-centred-coordinates",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-etale-ring-base-change",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-pur-dnc-etale-rees-chart",
+  "lem-trf-section-rees-noetherian-geometry",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-finite-module-surjective-endomorphism-bijective",
+  "def-weil-etale-morphism",
+  "lem-weil-pbc-flat-morphism-affine-criterion",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-weil-pbc-etale-scheme-base-change",
+  "lem-pur-rees-associated-graded-chart"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-smooth-purity/sk-thm-dnc/sk-thm-dnc.proof.md",
+  "place": "Local construction; explicit Rees algebra and generator calculations expanding the base-change and etale-map assertions, using Stacks 00HD, 01I4, 01LX, 02GO and 0633."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -76,10 +236,45 @@
    "results": "[loogle] OK 5 hit(s)\nAlgebra.FormallyEtale.instTensorProduct [Mathlib.RingTheory.Etale.Basic]:  {R : Type u} {A : Type v} {B : Type u_1} [CommRing R] [CommRing A] [Algebra R A] [CommRing B] [Algebra R B] [Algebra.FormallyEtale R A] : Algebra.FormallyEtale B (TensorProduct R B A)\nAlgebra.instIsStandardEtaleTensorProduct [Mathlib.RingTheory.Etale.StandardEtale]:  {R : Type u_1} {S : Type u_2} {T : Type u_3} [CommRing R] [CommRing S] [CommRing T] [Algebra R S] [Algebra R T] [Algebra.IsStandardEtale R S] : Algebra.IsStandardEtale T (TensorProduct R T S)\nAlgebra.Etale.of_etale_tensorProduct_of_faithfullyFlat [Mathlib.RingTheory.Etale.Descent]:  {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] (T : Type u_3) [CommRing T] [Algebra R T] [Module.FaithfullyFlat R T] [Algebra.Etale T (TensorProduct R T S)] : Algebra.Etale R S\nAlgebra.IsFiniteSplit.exists_tensorProduct_of_etale [Mathlib.RingTheory.TotallySplit]:  {R S : Type u} [CommRing R] [CommRing S] [Algebra R S] [Algebra.Etale R S] [Module.Finite R S] {n : ℕ} (hn : Module.rankAtStalk S = ↑n) : ∃ T x x_1, ∃ (_ : Module.FaithfullyFlat R T) (_ : Module.Finite R T) (_ : Algebra.Etale R T), Algebra.IsFiniteSplit T (TensorProduct R T S)\nAlgebra.WeaklyEtale.instTensorProduct [Mathlib.RingTheory.Etale.Weakly]:  {R : Type u_1} {S : Type u_2} [CommRing R] [CommRing S] [Algebra R S] {T : Type u_3} [CommRing T] [Algebra R T] [Algebra.WeaklyEtale R S] : Algebra.WeaklyEtale T (TensorProduct R T S)",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state the section-family assertion; general algebra, sheaf or mate infrastructure only"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extended Rees algebra of a smooth section commutes with arbitrary base extension and flat pullback of ideals",
+   "results": "{\"t\": \"2026-10-21T08:11:38Z\", \"tool\": \"leanfinder\", \"query\": \"Extended Rees algebra of a smooth section commutes with arbitrary base extension and flat pullback of ideals\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Algebra.IsStandardSmooth.baseChange\", \"RingHom.isStandardSmooth_isStableUnderBaseChange\", \"Algebra.IsStandardSmoothOfRelativeDimension.baseChange\", \"RingHom.Smooth.isStableUnderBaseChange\", \"RingHom.isStandardSmoothOfRelativeDimension_isStableUnderBaseChange\", \"Algebra.Smooth.flat\", \"Algebra.Smooth.baseChange\", \"Algebra.IsStandardSmooth.trans\"], \"digest\": \"83d7d38386489e54\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: searched hits give general smooth/flat base-change tools or ordinary Rees Noetherianity, not extended section Rees functoriality and the specified maps"
+  },
+  {
+   "tool": "grep",
+   "query": "extendedReesAlgebra|[Rr]ees.*[Bb]ase[Cc]hange",
+   "results": "{\"t\": \"2026-10-21T08:11:50Z\", \"tool\": \"grep\", \"query\": \"extendedReesAlgebra|[Rr]ees.*[Bb]ase[Cc]hange\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: searched hits give general smooth/flat base-change tools or ordinary Rees Noetherianity, not extended section Rees functoriality and the specified maps"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The extended Rees deformation of a smooth section is compatible with arbitrary base change without flatness",
+   "results": "{\"t\": \"2026-10-21T08:11:51Z\", \"tool\": \"leansearch\", \"query\": \"The extended Rees deformation of a smooth section is compatible with arbitrary base change without flatness\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"IsSMulRegular.of_flat_of_isBaseChange\", \"Algebra.Extension.baseChange\", \"Module.Flat.isBaseChange\", \"RingHom.Flat.isStableUnderBaseChange\", \"Algebra.Smooth.baseChange\", \"AlgebraicGeometry.Flat.isStableUnderBaseChange\", \"AlgebraicGeometry.isSmooth_isStableUnderBaseChange\", \"RingHom.FormallySmooth.isStableUnderBaseChange\"], \"digest\": \"d59647ed78b10182\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: searched hits give general smooth/flat base-change tools or ordinary Rees Noetherianity, not extended section Rees functoriality and the specified maps"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"reesAlgebra\", \"TensorProduct\"",
+   "results": "{\"t\": \"2026-10-21T08:11:51Z\", \"tool\": \"loogle\", \"query\": \"\\\"reesAlgebra\\\", \\\"TensorProduct\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 1, \"note\": \"\", \"top\": [\"tensorProduct_reesAlgebra_isNoetherian_of_fg\"], \"digest\": \"08f8af841538df46\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: searched hits give general smooth/flat base-change tools or ordinary Rees Noetherianity, not extended section Rees functoriality and the specified maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Deformation to the normal bundle of a section preserves etale maps of pairs and the zero and one fibres",
+   "results": "{\"t\": \"2026-10-21T08:11:58Z\", \"tool\": \"leanfinder\", \"query\": \"Deformation to the normal bundle of a section preserves etale maps of pairs and the zero and one fibres\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"StandardEtalePair.instFormallyEtaleRing\", \"Algebra.IsStandardSmoothOfRelativeDimension.exists_etale_mvPolynomial\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertyScheme\", \"AlgebraicGeometry.IsEtale\", \"AlgebraicGeometry.Scheme.Etale\", \"AlgebraicGeometry.IsEtale.instHasOfPostcompPropertySchemeMinMorphismPropertyLocallyOfFiniteTypeFormallyUnramified\", \"AlgebraicGeometry.IsEtale.instIsSmooth\", \"AlgebraicGeometry.IsEtale.instFormallyUnramified\"], \"digest\": \"c5dd47733cbdc69f\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: searched hits give general smooth/flat base-change tools or ordinary Rees Noetherianity, not extended section Rees functoriality and the specified maps"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-finite-ring-section-deformation",
@@ -101,5 +296,74 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-section-rees-base-change-etale",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Proved arbitrary nonflat base change using centred etale polynomial Rees presentations and tensor reassociation; proved etale pullback by flat tensor injectivity and generators. Checked the maps on sections, conormals, normal bundles and both fibres; reused all tools, with no new nodes.",
+  "blueprint": "Realizes lem-trf-local-term-locality proof (2), normal-cone specialization, via the section-deformation extraction: local construction in sk-thm-dnc.proof.md, former Steps 5–6 (arbitrary base change and etale maps of pairs).",
+  "tool_uses": [
+   {
+    "node": "lem-sbc-smooth-relative-dimension-permanence",
+    "why": "Smooth base-change permanence in relative dimension d for g' and for the zero fibre pi'; no node of this unit supplies this general scheme tool."
+   },
+   {
+    "node": "lem-pod-separated-finite-type-base-change",
+    "why": "Generic separated finite-type stability needed to reapply section geometry after arbitrary base change."
+   },
+   {
+    "node": "lem-weil-pbc-closed-immersion-base-change",
+    "why": "Generic closed-immersion stability supplies the closed new section."
+   },
+   {
+    "node": "lem-weil-pbc-fibre-product-affine-spectra",
+    "why": "Generic affine fibre-product/tensor formula identifies the local scheme comparison."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic tensor pushout universal property supplies the explicit reassociation and coefficient extension maps."
+   },
+   {
+    "node": "lem-pur-dnc-etale-rees-chart",
+    "why": "Generic polynomial-coordinate etale Rees presentation, already in the DAG, used as an algebra tool rather than a replacement purity route."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-relative-spec",
+    "why": "Generic relative Spec affine chart and open restriction interface turns local algebra maps into scheme maps."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-morphism-gluing",
+    "why": "Generic gluing and local equality of scheme morphisms assemble the canonical comparisons and inverses."
+   },
+   {
+    "node": "lem-weil-pbc-flat-tensor-exact",
+    "why": "Generic preservation of injections and exact quotients by flat tensoring, used only for the etale coefficient map."
+   },
+   {
+    "node": "lem-pur-rees-associated-graded-chart",
+    "why": "Generic zero-fibre identification of an extended Rees algebra for any ideal, with its explicit homogeneous representative formula; no smoothness or new geometric route is assumed."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sbc-smooth-relative-dimension-permanence",
+  "lem-pod-separated-finite-type-base-change",
+  "lem-weil-pbc-closed-immersion-base-change",
+  "lem-weil-pbc-fibre-product-affine-spectra",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+  "lem-pur-dnc-etale-rees-chart",
+  "lem-weil-pbc-affine-morphism-relative-spec",
+  "lem-weil-pbc-scheme-morphism-gluing",
+  "lem-weil-pbc-flat-tensor-exact",
+  "lem-pur-rees-associated-graded-chart"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q127-a20a6cf51",
+  "group": "Q127",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q127-a20a6cf51 (reviewer sub-agent of L); spot-checked: Read the item, all 10 steps and the statements of all 15 cited nodes. No new nodes. The statement is byte-identical to live, the item is still unsplit live, it was created by the Q58 re-split on 2026-10-21 and is not dropped, and there is no cycle (BFS over 1152 nodes). Source: main-20261015 sk-thm-dnc.proof.md 'Local construction' (lines 13-24), with étale maps of pairs whose square of centres is Cartesian and x_i=t u_i; it matches the item's Cartesian-centre hypothesis. No SGA is used. The base change is an arbitrary morphism of Noetherian schemes, with no flatness used. Accepted tool_uses: smooth permanence, étale Rees chart, Rees associated-graded chart, relative Spec, and the Mathlib-leaf tensor/gluing tools. Checked: Step 3 reassociation (B⊗_P C)⊗_R R'≅B'⊗_{P'}C'; the Step 4 cover, which the geometry node states; Step 8 flat injectivity with image B1[t,I1/t] using I1=IB1; Step 9 gr base change through the general Rees-gr node. Small cases: A^d with the zero section over Z→F_p, d=0, an extra étale component, and non-Cartesian centres, which fail as expected. Fixes, 3 faults: (C4) Steps 2 and 9 obtained étaleness as 'smooth of relative dimension 0' through lem-sbc-smooth-relative-dimension-permanence, but the chart lemma and the statement use def-weil-etale-morphism, which no cited node equates with it; now lem-weil-pbc-etale-ring-base-change (with B'≅P'⊗_P B) and lem-weil-pbc-etale-scheme-base-change. (C1) Step 8 used flatness of B→B1 from étale h without lem-weil-pbc-flat-morphism-affine-criterion, which is now added. (C3) Step 6 applied the centred-coordinate basis to the base-changed chart, which that statement does not cover; added the argument that [x'_j] generate I'/I'^2, E' is locally free of rank d, and a surjective endomorphism of a finite module is bijective (lem-weil-pbc-finite-module-surjective-endomorphism-bijective). proof_deps recomputed and the tool_uses note updated; the corrected file is fixes/dag/nodes/sec-trace-formula/lem-trf-section-rees-base-change-etale.json.; 1 file(s) fixed by the reviewer"
  }
 }
