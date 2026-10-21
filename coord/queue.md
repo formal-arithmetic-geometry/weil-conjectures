@@ -1,21 +1,18 @@
 # Work queue
 
-87 items; claim with `tools/claim.py next <group> [--stage N]`.
+82 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (10 clusters, 381 modules)
+## Rework: quarantined by the upstream sync (7 clusters, 381 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
 | item (root) | modules | other roots | cause of the root |
 |---|---|---|---|
-| `Sheaf.AlgebraicGeometry.PerfectOverlapCompositeObjectPin` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `WeilConjectures.TraceFormula.WeilTrace` | 1 |  | error: WeilConjectures/TraceFormula/WeilTrace.lean: bad import 'WeilConjectures.TraceFormula.Main' |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackTensorSuccessiveNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.GlobalHomBaseChangeExchange` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPullbackCompositionMateUnit` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.DerivedPushforwardSquareMateUnit` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.EllAdicBoundedConstructibleProperAdjoint` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.MixedAffineSectionsPullbackUnitNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectHomOpenMateResolutionNormalization` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
@@ -33,7 +30,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-supported-lattice-norm-projection` | 4014 | none |
 | `def-per-support-condition` | - | none |
 
-## Stage 2: nodes to state (13)
+## Stage 2: nodes to state (11)
 
 | node | distance to Mathlib | kind | blockers |
 |---|---|---|---|
@@ -44,10 +41,8 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-coef-compact-support-normalized-realization` | 1 | state | 0 |
 | `lem-pe-internal-module-sectionwise-short-exact` | 1 | state | 0 |
 | `lem-pur-affine-translation-trace` | 1 | state | 0 |
-| `lem-sfb-equivariant-resolution-bar-normalization` | 1 | state | 0 |
 | `lem-sfb-lattice-koszul-triangulated-cup-comparison` | 1 | state | 0 |
 | `lem-sfb-norm-algcl-profinite-cech-exact` | 1 | state | 0 |
-| `lem-sfb-relative-cyclic-restriction-model` | 1 | state | 0 |
 | `lem-sfb-tame-stratum-kummer-descent` | 1 | state | 0 |
 | `lem-sfb-countable-split-profinite-cover` | 2 | state | 0 |
 
@@ -59,7 +54,6 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 
 | module | distance to a target | sorry | kind | route / steps to the nearest route sorry |
 |---|---|---|---|---|
-| `Sheaf.AlgebraicGeometry.RelativeProjExists` | 10 | 1 | repair | route |
 | `Sheaf.AlgebraicGeometry.EtaleCompactSupportGraphGeometricBaseChange` | 9 | 1 | repair | route |
 | `Sheaf.Paper.RingedTopoiCanonicalTensorPullback` | 4 | 1 | repair | route |
 | `Sheaf.Algebra.Homology.ScalarHomTensorCoherence` | 6 | 1 | repair | route |
@@ -68,31 +62,31 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Derived.BoundedConstructible` | 2 | 2 | proof | route |
 | `Sheaf.Paper.ConstantCompletionEquivalence` | 5 | 10 | proof | route |
 | `Sheaf.Paper.LevelwiseAdicTruncations` | 6 | 5 | proof | route |
-| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | 5 | 5 | proof | 1 |
+| `WeilConjectures.SixFunctors.ProEtale.ModuleObject.Colimit.TwoColimit` | - | 5 | proof | 1 |
 | `Sheaf.Paper.PerfectProjectionFormula` | 3 | 3 | proof | 2 |
 | `Sheaf.Paper.ProjectionMateExact` | 3 | 1 | proof | 2 |
-| `Sheaf.Paper.PbcDescentFunctors` | 9 | 1 | proof | 2 |
-| `Sheaf.Paper.PbcScalarExtension` | 9 | 16 | proof | 2 |
 | `Sheaf.Paper.CompletedCoefficientPushforwardComparison` | - | 1 | proof | 2 |
+| `Sheaf.Paper.PbcDescentFunctors` | - | 1 | proof | 2 |
+| `Sheaf.Paper.PbcScalarExtension` | - | 16 | proof | 2 |
 | `Sheaf.Paper.RingedProjectionRestriction` | 4 | 1 | proof | 3 |
-| `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | 6 | 5 | proof | 3 |
-| `Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated` | 10 | 1 | proof | 3 |
-| `Sheaf.Paper.SbcCompletedOperations` | 10 | 15 | proof | 3 |
+| `Sheaf.Algebra.Homology.KFlatFixedTensorTriangulated` | - | 1 | proof | 3 |
 | `Sheaf.CategoryTheory.FiniteFreeStrictTowerTransport` | - | 1 | proof | 3 |
+| `Sheaf.Paper.FiniteFreeCompletedScalarComparison` | - | 5 | proof | 3 |
 | `Sheaf.Paper.KFlatScalarComparisonNormalization` | - | 3 | proof | 3 |
 | `Sheaf.Paper.PullbackTensorCanonicalShiftUnit` | - | 1 | proof | 3 |
 | `Sheaf.Paper.RoosIntrinsicCompletenessEquivalence` | - | 1 | proof | 3 |
-| `Sheaf.Paper.CompletedPullbackReduction` | 7 | 4 | proof | 4 |
+| `Sheaf.Paper.SbcCompletedOperations` | - | 15 | proof | 3 |
 | `Sheaf.Algebra.Homology.DerivedTensorShiftDescent` | - | 1 | proof | 4 |
 | `Sheaf.Algebra.Homology.TotalTensorHomotopyConeSigns` | - | 1 | proof | 4 |
 | `Sheaf.CategoryTheory.KoszulFibreLinearDescent` | - | 1 | proof | 4 |
+| `Sheaf.Paper.CompletedPullbackReduction` | - | 4 | proof | 4 |
 | `Sheaf.Paper.FiniteFreeQuotientCompletion` | - | 1 | proof | 4 |
-| `Sheaf.Paper.CompletedOpenExchangeTransport` | 6 | 1 | proof | 5 |
-| `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | 11 | 1 | proof | 5 |
+| `Sheaf.Algebra.Homology.RingedSliceNormalizedComparisons` | - | 1 | proof | 5 |
+| `Sheaf.Paper.CompletedOpenExchangeTransport` | - | 1 | proof | 5 |
 | `Sheaf.Paper.PulledReductionNormalizationComparison` | - | 1 | proof | 5 |
 | `Sheaf.Paper.PulledReductionStrictTowerComparison` | - | 1 | proof | 5 |
 | `Sheaf.Paper.SiteDerivedTensorRestriction` | - | 1 | proof | 5 |
-| `Sheaf.Paper.AdicPullbackPresentationTransport` | 7 | 4 | proof | 6 |
+| `Sheaf.Paper.AdicPullbackPresentationTransport` | - | 4 | proof | 6 |
 | `Sheaf.Paper.CompletedRingStrictFiniteExchange` | - | 1 | proof | 6 |
 | `Sheaf.Paper.OrderedExchangeCoefficientComparison` | - | 7 | proof | 6 |
 | `Sheaf.Paper.RingedOpenStrictReduction` | - | 13 | proof | 6 |
@@ -105,6 +99,7 @@ On the sorry route of an open batch, or below a route sorry of one (the human, 2
 | `Sheaf.Paper.StrictQuotientPullbackComputation` | - | 1 | proof | 7 |
 | `Sheaf.AlgebraicGeometry.PrimeCurveArtinSchreierKernel` | - | 1 | proof | 15 |
 | `Sheaf.AlgebraicGeometry.SmoothCurveEtaleStructureDirectImages` | - | 1 | proof | 16 |
+| `Sheaf.AlgebraicGeometry.SmoothLocalAcyclicity` | - | 1 | proof | 16 |
 | `Sheaf.AlgebraicGeometry.AffineCohomologyEtaleModuleRealization` | - | 1 | proof | 17 |
 | `Sheaf.AlgebraicGeometry.CoherentAffineBaseChangeEdge` | - | 1 | proof | 17 |
 | `Sheaf.AlgebraicGeometry.RawRestrictedClassNormalization` | - | 1 | proof | 18 |
