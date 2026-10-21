@@ -60,19 +60,19 @@
  "unit": "sk-lem-failure-field",
  "lean_audit": {},
  "lean": {
-  "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientFactors",
-  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarCoefficientFactors.lean",
+  "existing": true,
+  "module": "WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/RawModuleScalarCoefficientFactors.lean",
   "declaration": "AlgebraicGeometry.Etale.moduleCoefficientFactor",
   "declarations": [
    "AlgebraicGeometry.Etale.moduleCoefficientFactor",
    "AlgebraicGeometry.Etale.abelianCoefficientFactor"
   ],
-  "statement": "noncomputable def moduleCoefficientFactor\n    (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    (A B : Over W) (f : A ⟶ B) :\n    (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.obj\n        ((higherDirectImageRawOverComplex Λ G B)⟦q⟧) ⟶\n      (higherDirectImageRawOverComplex Λ G A)⟦q⟧",
+  "statement": "noncomputable def moduleCoefficientFactor\n    (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}}\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ)\n    (A B : Over W) (f : A ⟶ B) :\n    (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.obj\n        (((DerivedCategory.Plus.singleFunctor _ 0).obj\n          ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G))⟦q⟧) ⟶\n      ((DerivedCategory.Plus.singleFunctor _ 0).obj\n        ((upperStar (ModuleCat.{u + 1} Λ) A.hom).obj G))⟦q⟧",
   "branch": "sheaf-dag",
-  "by": "W4",
-  "date": "2026-10-14",
-  "note": "The module coefficient factor names the existing higherDirectImageRawOverComplex endpoints in its type to keep derived comparisons folded. Its construction is byte-for-byte unchanged, and the endpoint types are definitionally equal to the previous explicit single complexes. No mathematical statement or unit route changes."
+  "by": "V3",
+  "date": "2026-10-21",
+  "note": "Retired the duplicate Sheaf module in favor of its adopted upstream twin. Both coefficient-factor bodies are identical. The upstream module factor states the definitionally equal expanded single-complex endpoints; the abelian signature is identical. The direct consumer now publicly imports the upstream twin. No mathematical dependency or unit route changes."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -85,13 +85,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-de5cc",
-  "group": "G3",
-  "result": "pass",
-  "landing": "20261020T221157-L-4153838",
+  "reviewer": "C-aa2a9",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261021T061739-L-1825145",
   "kind": "interface",
-  "note": "independent cc review: delivered item + adapted RawModuleScalarCoefficientFactors vs live clone and the two node records; recompiled the delivered modules plus all 6 Sheaf users of moduleCoefficientFactor (incl. direct importer RawModuleScalarCoefficientSquare) in sandbox, all RC 0, axioms clean"
+  "note": "independent cc review: retirement of Sheaf RawModuleScalarCoefficientFactors vs WeilConjectures twin (identical bodies), 6 identity-view restatements vs live clone statements and their DAG citers (twin-attached), 10 delivered modules compiled in import order + axioms of 14 decls"
  }
 }

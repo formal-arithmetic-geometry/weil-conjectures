@@ -2,7 +2,7 @@
  "id": "lem-sbc-raw-module-abelian-hom-target-formula",
  "kind": "statement",
  "title": "Abelian expansion of the scalar raw class",
- "statement": "Let Λ be a commutative ring in Type(u+1), W and S schemes in universe u, k:W→S a scheme morphism, G an etale module sheaf on W with coefficients Λ, q a natural number, U an object of S.Etale, A and B objects of Over(W), f:A→B a morphism, and z an element of the module raw derived Hom group at B for (Λ,k,G,q,U). Using the concrete prefix of def-sbc-raw-module-scalar-source-prefix, the abelian raw pullback along f of rawModuleAbelianHomMap at B evaluated on z equals rawModuleScalarSourcePrefix followed by derived abelian inverse image of scalarCoefficientFactor at B and abelianCoefficientFactor. This is a formula for the abelian raw pullback alone, with no assertion relating it to the module raw pullback and no source or coefficient coherence equation.",
+ "statement": "Let Λ be a commutative ring in Type(u+1), W and S schemes in universe u, k:W→S a scheme morphism, G an etale module sheaf on W with coefficients Λ, q a natural number, U an object of S.Etale, A and B objects of Over(W), f:A→B a morphism, and z an element of the module raw derived Hom group at B for (Λ,k,G,q,U). Using the concrete prefix of def-sbc-raw-module-scalar-source-prefix, the abelian raw pullback along f of rawModuleAbelianHomMap at B evaluated on z equals rawModuleScalarSourcePrefix followed by derived abelian inverse image of scalarCoefficientFactor at B and abelianCoefficientFactor. This is a formula for the abelian raw pullback alone, with no assertion relating it to the module raw pullback and no source or coefficient coherence equation. Interpret the raw class values occurring in this equation at their native derived Hom types using the concrete identity views [def-sbc-raw-class-native-morphisms]; the elements and equality are unchanged.",
  "source": {
   "document": "Stacks Project",
   "place": "Tags 03D7 and 03Q8; source, class and coefficient factor calculation of lem-sbc-raw-module-abelian-hom-map-naturality"
@@ -10,7 +10,8 @@
  "stmt_deps": [
   "def-sbc-raw-module-abelian-hom-map",
   "def-sbc-raw-module-scalar-source-prefix",
-  "lem-sbc-raw-scalar-coefficient-square"
+  "lem-sbc-raw-scalar-coefficient-square",
+  "def-sbc-raw-class-native-morphisms"
  ],
  "proof": [
   {
@@ -21,10 +22,11 @@
    "elementary": false
   },
   {
-   "text": "Rewrite the scalar class with rawModuleScalarHom_evaluate, the canonical-factor evaluation theorem proved by the existing evaluation argument. Unfold rawModuleScalarSourcePrefix, distribute the derived abelian inverse-image functor over composition with Functor.map_comp, and reassociate with Category.assoc. This uses no coherence square and holds for zero classes, empty objects, identity arrows and degree zero.",
+   "text": "Rewrite the scalar class with rawModuleScalarHom_evaluate, the canonical-factor evaluation theorem proved by the existing evaluation argument. Unfold rawModuleScalarSourcePrefix, distribute the derived abelian inverse-image functor over composition with Functor.map_comp, and reassociate with Category.assoc. This uses no coherence square and holds for zero classes, empty objects, identity arrows and degree zero. Present raw class inputs and outputs at their native derived Hom types using the concrete identity functions in def-sbc-raw-class-native-morphisms. These return the input element itself; unfolding their identity bodies makes no mathematical change.",
    "uses": [
     "lem-sbc-raw-scalar-hom-evaluation",
-    "def-sbc-raw-module-scalar-source-prefix"
+    "def-sbc-raw-module-scalar-source-prefix",
+    "def-sbc-raw-class-native-morphisms"
    ],
    "elementary": true
   }
@@ -32,12 +34,15 @@
  "proof_deps": [
   "lem-sbc-raw-scalar-pullback-abelian-formula",
   "lem-sbc-raw-scalar-hom-evaluation",
-  "def-sbc-raw-module-scalar-source-prefix"
+  "def-sbc-raw-module-scalar-source-prefix",
+  "def-sbc-raw-class-native-morphisms"
  ],
  "proof_origin": {
-  "by": "N4",
-  "document": "Stacks Project; Mathlib functoriality",
-  "place": "Tags 03FD and 03Q8; evaluation, Functor.map_comp and Category.assoc"
+  "by": "worker",
+  "group": "V3",
+  "date": "2026-10-21",
+  "document": "Stacks Project; existing raw-map calculations with explicit native class values",
+  "place": "Tags 03FD, 03D7 and 03Q8; identity presentation of the same classes and unchanged categorical equations"
  },
  "mathlib_searches": [
   {
@@ -91,10 +96,11 @@
   "module": "Sheaf.AlgebraicGeometry.RawModuleAbelianHomTargetFormula",
   "file": "lean/Sheaf/AlgebraicGeometry/RawModuleAbelianHomTargetFormula.lean",
   "declaration": "AlgebraicGeometry.Etale.rawModuleAbelianHomMap_target_formula",
-  "statement": "theorem rawModuleAbelianHomMap_target_formula\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :\n    abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)\n      (by rw [← Category.assoc, Over.w]) q _ _\n      ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom\n        (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G))\n      U (rawModuleAbelianHomMap Λ k G q U B z) =\n    rawModuleScalarSourcePrefix Λ k G q U A B f z ≫\n      ((upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map\n          (scalarCoefficientFactor Λ B.hom G (q : ℤ)) ≫\n        abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G)\n          (q : ℤ) A B f)",
+  "statement": "theorem rawModuleAbelianHomMap_target_formula\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :\n    rawAbelianClassMorphism (A.hom ≫ k)\n      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U\n      (abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)\n      (by rw [← Category.assoc, Over.w]) q _ _\n      ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom\n        (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G))\n      U (rawModuleAbelianHomMap Λ k G q U B z)) =\n    rawModuleScalarSourcePrefix Λ k G q U A B f z ≫\n      ((upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map\n          (scalarCoefficientFactor Λ B.hom G (q : ℤ)) ≫\n        abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G)\n          (q : ℤ) A B f)",
   "branch": "sheaf-dag",
-  "by": "T3",
-  "date": "2026-10-14"
+  "by": "V3",
+  "date": "2026-10-21",
+  "note": "Presentation repair only: rawModuleClassMorphism and rawAbelianClassMorphism return their inputs at the definitionally equal derived Hom types. The mathematical statement, binders and degree conventions are unchanged."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -107,14 +113,58 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "COMPILER",
-  "group": "N4",
-  "result": "pass",
-  "landing": "20261014T081959-L-3956679",
+  "reviewer": "C-aa2a9",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261021T061739-L-1825145",
   "kind": "interface",
-  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+  "note": "independent cc review: retirement of Sheaf RawModuleScalarCoefficientFactors vs WeilConjectures twin (identical bodies), 6 identity-view restatements vs live clone statements and their DAG citers (twin-attached), 10 delivered modules compiled in import order + axioms of 14 decls"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "V3 stage 2",
+  "old_statement": "Let Λ be a commutative ring in Type(u+1), W and S schemes in universe u, k:W→S a scheme morphism, G an etale module sheaf on W with coefficients Λ, q a natural number, U an object of S.Etale, A and B objects of Over(W), f:A→B a morphism, and z an element of the module raw derived Hom group at B for (Λ,k,G,q,U). Using the concrete prefix of def-sbc-raw-module-scalar-source-prefix, the abelian raw pullback along f of rawModuleAbelianHomMap at B evaluated on z equals rawModuleScalarSourcePrefix followed by derived abelian inverse image of scalarCoefficientFactor at B and abelianCoefficientFactor. This is a formula for the abelian raw pullback alone, with no assertion relating it to the module raw pullback and no source or coefficient coherence equation.",
+  "what": "Presentation repair under stage 3 section 4: the implicit raw-Yoneda carrier conversions were expensive to elaborate and check. Record the same equations with the raw values explicitly interpreted at their definitionally equal derived Hom types. Named module coefficient endpoints use the proved equal canonical coefficient view when present. Every binder, hypothesis, degree and equality is preserved; no target changes.",
+  "source": {
+   "document": "Stacks Project",
+   "place": "Tags 03D7 and 03Q8; source, class and coefficient factor calculation of lem-sbc-raw-module-abelian-hom-map-naturality"
+  },
+  "citers": [
+   {
+    "id": "lem-sbc-raw-module-abelian-hom-map-naturality",
+    "holds": true,
+    "note": "The cited equation has the identical raw class values and canonical coefficient morphism. The identity view definitions and the proved canonical coefficient comparison preserve its use in this categorical expansion or naturality calculation."
+   }
+  ],
+  "old_stmt_deps": [
+   "def-sbc-raw-module-abelian-hom-map",
+   "def-sbc-raw-module-scalar-source-prefix",
+   "lem-sbc-raw-scalar-coefficient-square"
+  ],
+  "old_proof": [
+   {
+    "text": "Apply rawModuleScalar_pullback_abelian_formula to rawModuleAbelianHomMap at B on z.",
+    "uses": [
+     "lem-sbc-raw-scalar-pullback-abelian-formula"
+    ],
+    "elementary": false
+   },
+   {
+    "text": "Rewrite the scalar class with rawModuleScalarHom_evaluate, the canonical-factor evaluation theorem proved by the existing evaluation argument. Unfold rawModuleScalarSourcePrefix, distribute the derived abelian inverse-image functor over composition with Functor.map_comp, and reassociate with Category.assoc. This uses no coherence square and holds for zero classes, empty objects, identity arrows and degree zero.",
+    "uses": [
+     "lem-sbc-raw-scalar-hom-evaluation",
+     "def-sbc-raw-module-scalar-source-prefix"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "lem-sbc-raw-scalar-pullback-abelian-formula",
+   "lem-sbc-raw-scalar-hom-evaluation",
+   "def-sbc-raw-module-scalar-source-prefix"
+  ]
+ }
 }

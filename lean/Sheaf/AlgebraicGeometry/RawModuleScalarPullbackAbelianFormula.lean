@@ -5,9 +5,10 @@ Authors: SHEAF group N4
 -/
 module
 
-public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
+public import WeilConjectures.AlgebraicGeometry.RestrictedOverAbelianComplexData
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
-public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
+public import WeilConjectures.AlgebraicGeometry.RawModuleScalarCoefficientFactors
+public import Sheaf.AlgebraicGeometry.RawModuleScalarClassMorphisms
 
 /-! # Abelian raw pullback factorization
 Source: Stacks Project, Tags 03FD and 03Q8.
@@ -44,13 +45,17 @@ theorem rawModuleScalar_pullback_abelian_formula
     ∀ (x : (abelianHigherDirectImageRawPresheaf (B.hom ≫ k) q
       (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B)).obj
         (op U)),
-      abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)
+      rawAbelianClassMorphism (A.hom ≫ k)
+        (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U
+        (abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)
         (by rw [← Category.assoc, Over.w]) q _ _
         ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom
-          (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G)) U x =
+          (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G)) U x) =
       abelianSourceFactor f.left (B.hom ≫ k) (A.hom ≫ k)
         (by rw [← Category.assoc, Over.w]) (RawModuleScalarComparison.freeAbelian S U) ≫
-      (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map x ≫
+      (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map
+        (rawAbelianClassMorphism (B.hom ≫ k)
+          (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B) q U x) ≫
       abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G)
         (q : ℤ) A B f := by
   intro x

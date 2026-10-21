@@ -1,0 +1,116 @@
+{
+ "id": "def-sbc-raw-class-native-morphisms",
+ "kind": "definition",
+ "title": "Native derived morphisms represented by raw cohomology classes",
+ "statement": "For a commutative ring Λ, a morphism k:W→S, a module sheaf G on W, an integer q, an etale U over S and A over W, read a value z of higherDirectImageRawOverFunctor(Λ,k,G,q,U) at A [def-sbc-higher-image-raw-diagram] as the very same derived morphism from the single of (A.hom≫k)*freeSheaf(Λ,S)(U) to higherDirectImageRawOverComplex(Λ,G,A)[q] [def-sbc-higher-image-raw-over-complex]. Independently, for h:Y→S, an abelian sheaf H on Y, a natural q and U etale over S, read a value x of abelianHigherDirectImageRawPresheaf(h,q,H) [lem-sbc-abelian-higher-direct-image-natural-comparison] as the same morphism from the single of h*freeAbelian(S,U) [def-sbc-raw-module-scalar-pullback-comparison] to H[0][q]. Both maps are the identity on the input under the defining raw Yoneda presentation; no choice, new object or coefficient comparison is made.",
+ "source": {
+  "document": "Stacks Project; existing module and abelian raw Yoneda presheaf definitions",
+  "place": "Tags 03FD and 03Q8; HigherDirectImageRawDiagram, HigherDirectImageRawOverComplex and AbelianHigherDirectImageNaturalComparison"
+ },
+ "stmt_deps": [
+  "def-sbc-higher-image-raw-diagram",
+  "def-sbc-higher-image-raw-over-complex",
+  "lem-sbc-abelian-higher-direct-image-natural-comparison",
+  "def-sbc-raw-module-scalar-pullback-comparison"
+ ],
+ "proof": [
+  {
+   "text": "Construct both functions by returning the input element at its definitionally equal represented derived Hom type. The computation rule rawModuleClassMorphism_heq is heterogeneous reflexivity after unfolding this identity function. All declarations are complete and involve no chosen data.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V3",
+  "date": "2026-10-21",
+  "document": "The concrete raw Yoneda definitions in the adopted source library",
+  "place": "Return the input element at its definitionally equal derived Hom type"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "A raw cohomology class is a morphism from a single free represented sheaf to a shifted coefficient complex in the bounded below derived category",
+   "date": "2026-10-21",
+   "results": "Eight results about Sheaf.H and HomComplex.CohomologyClass, including toSmallShiftedHom and toHom. Those start from Ext or a quotient of cocycles; the project raw classes already are derived morphisms.",
+   "verdict": "The hits provide generic constituents; use the existing project construction at its explicit endpoint type."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.preadditiveYoneda",
+   "date": "2026-10-21",
+   "results": "Twelve hits. preadditiveYoneda and preadditiveYoneda_obj identify the underlying represented Hom-group construction. The two project-specific input types are definitionally these Hom types.",
+   "verdict": "The hits provide generic constituents; use the existing project construction at its explicit endpoint type."
+  },
+  {
+   "tool": "grep",
+   "query": "rawModuleClassMorphism|rawAbelianClassMorphism",
+   "date": "2026-10-21",
+   "results": "No Mathlib hit; local source search found no existing public declaration of either name.",
+   "verdict": "The hits provide generic constituents; use the existing project construction at its explicit endpoint type."
+  },
+  {
+   "tool": "leansearch",
+   "query": "An element of a represented raw cohomology presheaf is the same derived category morphism from its free represented single complex to the shifted coefficient complex",
+   "date": "2026-10-21",
+   "results": "Eight hits, including freeYonedaEquiv, Ext.hom, Sheaf.cohomologyPresheaf and HomComplex.CohomologyClass.toSmallShiftedHom_mk. These convert other cohomology presentations; the project raw values already are the displayed derived morphisms.",
+   "verdict": "No project-specific typed identity view is supplied; use the concrete existing project construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientFactors",
+  "date": "2026-10-21",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-scalar-pullback-formulas",
+   "place": "Explicit presentation of the classes and resulting raw pullbacks as derived morphisms",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarClassMorphisms",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarClassMorphisms.lean",
+  "declaration": "AlgebraicGeometry.Etale.rawModuleClassMorphism",
+  "declarations": [
+   "AlgebraicGeometry.Etale.rawModuleClassMorphism",
+   "AlgebraicGeometry.Etale.rawModuleClassMorphism_heq",
+   "AlgebraicGeometry.Etale.rawAbelianClassMorphism"
+  ],
+  "statement": "def rawModuleClassMorphism (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S) (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (U : S.Etale) (A : Over W) (z : (higherDirectImageRawOverFunctor Λ k G q U).obj (op A)) : (DerivedCategory.Plus.singleFunctor _ 0).obj ((upperStar (ModuleCat.{u + 1} Λ) (A.hom ≫ k)).obj ((freeSheaf Λ S).obj U)) ⟶ (higherDirectImageRawOverComplex Λ G A)⟦q⟧",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-21",
+  "note": "Concrete identity functions at their derived Hom types, with a proved heterogeneous computation rule for module classes. No proof hole or arbitrary witness."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-aa2a9",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261021T061739-L-1825145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-aa2a9",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261021T061739-L-1825145",
+  "kind": "interface",
+  "note": "independent cc review: retirement of Sheaf RawModuleScalarCoefficientFactors vs WeilConjectures twin (identical bodies), 6 identity-view restatements vs live clone statements and their DAG citers (twin-attached), 10 delivered modules compiled in import order + axioms of 14 decls"
+ }
+}

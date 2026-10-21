@@ -1,0 +1,115 @@
+{
+ "id": "def-sbc-module-coefficient-native-endpoints",
+ "kind": "definition",
+ "title": "Canonical coefficient factor at the named raw-complex endpoints",
+ "statement": "For a commutative ring Λ, a module sheaf G on a scheme W, any integer q and an arrow f:A→B over W, give moduleCoefficientFactor(Λ,G,q,A,B,f) [def-sbc-raw-scalar-coefficient-factors] its equivalent type from the derived inverse image under f.left of higherDirectImageRawOverComplex(Λ,G,B)[q] to higherDirectImageRawOverComplex(Λ,G,A)[q] [def-sbc-higher-image-raw-over-complex]. The typed view is an abbreviation of the canonical morphism itself, not a second construction; unfolded, it is the direct inverse-image shift comparison followed by the shifted higherDirectImageRawOverCoefficient [def-sbc-higher-image-raw-over-coefficient]. No new coefficient object, comparison or choice is made. The heterogeneous computation rule identifies this typed view with that canonical morphism.",
+ "source": {
+  "document": "Stacks Project; the existing canonical raw coefficient factor",
+  "place": "Tag 03Q8; moduleCoefficientFactor and higherDirectImageRawOverComplex"
+ },
+ "stmt_deps": [
+  "def-sbc-raw-scalar-coefficient-factors",
+  "def-sbc-higher-image-raw-over-complex",
+  "def-sbc-higher-image-raw-over-coefficient"
+ ],
+ "proof": [
+  {
+   "text": "Define the view as the canonical moduleCoefficientFactor at the named raw-complex endpoint types; these types are definitionally equal to the expanded single-complex endpoints, so the abbreviation typechecks. Heterogeneous reflexivity identifies it with the canonical morphism. Unfolding the abbreviation, moduleCoefficientFactor and the moduleUpperStar abbreviation gives the explicit two-factor computation rule by reflexivity. This works for every integer shift, including zero, identity arrows and zero coefficient sheaves. All data and proofs are complete.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [],
+ "proof_origin": {
+  "by": "worker",
+  "group": "V3",
+  "date": "2026-10-21",
+  "document": "The adopted coefficient-factor construction",
+  "place": "Explicit coefficient part of raw triangle pullback and heterogeneous reflexivity"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "moduleCoefficientFactorNative",
+   "date": "2026-10-21",
+   "results": "No Mathlib hit. The canonical project map already exists; only its named endpoint type is being exposed.",
+   "verdict": "The hits provide generic constituents; use the existing project construction at its explicit endpoint type."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A coefficient morphism from derived pullback of a shifted raw module complex to a shifted coefficient complex",
+   "date": "2026-10-21",
+   "results": "Eight cochain shift and short-complex results, including HomComplex cochain left/right unshift maps. These do not provide the project coefficient map, which is already defined upstream.",
+   "verdict": "The hits provide generic constituents; use the existing project construction at its explicit endpoint type."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift.commShiftIso",
+   "date": "2026-10-21",
+   "results": "Twelve results, including the generic commShiftIso, its zero/add coherence and identity-functor formulas, and NatTrans shift commutation. These are constituents of the existing project coefficient map, not a replacement for its named endpoint presentation.",
+   "verdict": "The hits provide generic constituents; use the existing project construction at its explicit endpoint type."
+  },
+  {
+   "tool": "leansearch",
+   "query": "The coefficient factor for raw pullback is the shift comparison followed by the shifted coefficient morphism",
+   "date": "2026-10-21",
+   "results": "Eight hits about categorical pullbackComparison and PullbackShift/commShiftPullback. They do not state the project raw coefficient composite; the existing canonical construction is reused.",
+   "verdict": "No project-specific typed identity view is supplied; use the concrete existing project construction."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientFactors",
+  "date": "2026-10-21",
+  "group": "V3"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sbc-raw-scalar-pullback-formulas",
+   "place": "Expose the coefficient morphism at the same named complexes used by the raw classes",
+   "via": []
+  },
+  "same_as": []
+ },
+ "chapter": "sec-smooth-base-change",
+ "unit": "sk-lem-failure-field",
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientNative",
+  "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarCoefficientNative.lean",
+  "declaration": "AlgebraicGeometry.Etale.moduleCoefficientFactorNative",
+  "declarations": [
+   "AlgebraicGeometry.Etale.moduleCoefficientFactorNative",
+   "AlgebraicGeometry.Etale.moduleCoefficientFactorNative_heq",
+   "AlgebraicGeometry.Etale.moduleCoefficientFactorNative_eq"
+  ],
+  "statement": "abbrev moduleCoefficientFactorNative (Λ : Type (u + 1)) [CommRing Λ] {W : Scheme.{u}} (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℤ) (A B : Over W) (f : A ⟶ B) : (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.obj ((higherDirectImageRawOverComplex Λ G B)⟦q⟧) ⟶ (higherDirectImageRawOverComplex Λ G A)⟦q⟧",
+  "branch": "sheaf-dag",
+  "by": "V3",
+  "date": "2026-10-21",
+  "note": "Abbreviation of the canonical moduleCoefficientFactor at the named raw-complex endpoints (reviewer fix: of two definitions of one notion the second is an abbrev of the first), with a proved heterogeneous equality and the explicit two-factor computation rule. No proof hole or data choice."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-aa2a9",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261021T061739-L-1825145",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "C-aa2a9",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261021T061739-L-1825145",
+  "kind": "interface",
+  "note": "independent cc review: retirement of Sheaf RawModuleScalarCoefficientFactors vs WeilConjectures twin (identical bodies), 6 identity-view restatements vs live clone statements and their DAG citers (twin-attached), 10 delivered modules compiled in import order + axioms of 14 decls"
+ }
+}

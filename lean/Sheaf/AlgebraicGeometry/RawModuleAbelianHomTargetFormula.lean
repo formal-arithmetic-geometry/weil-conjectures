@@ -8,6 +8,7 @@ module
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourcePrefix
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
+public import Sheaf.AlgebraicGeometry.RawModuleScalarClassMorphisms
 import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackAbelianFormula
 import Sheaf.AlgebraicGeometry.RawModuleScalarHomEvaluation
 
@@ -43,11 +44,13 @@ theorem rawModuleAbelianHomMap_target_formula
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)
     (A B : Over W) (f : A ⟶ B)
     (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :
-    abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)
+    rawAbelianClassMorphism (A.hom ≫ k)
+      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U
+      (abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)
       (by rw [← Category.assoc, Over.w]) q _ _
       ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom
         (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G))
-      U (rawModuleAbelianHomMap Λ k G q U B z) =
+      U (rawModuleAbelianHomMap Λ k G q U B z)) =
     rawModuleScalarSourcePrefix Λ k G q U A B f z ≫
       ((upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map
           (scalarCoefficientFactor Λ B.hom G (q : ℤ)) ≫
@@ -57,5 +60,6 @@ theorem rawModuleAbelianHomMap_target_formula
   rw [rawModuleScalarHom_evaluate]
   dsimp only [rawModuleScalarSourcePrefix]
   simp only [Functor.map_comp, Category.assoc]
+  rfl
 
 end AlgebraicGeometry.Etale

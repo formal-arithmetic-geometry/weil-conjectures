@@ -2,24 +2,29 @@
  "id": "lem-sbc-raw-scalar-pullback-formulas",
  "kind": "statement",
  "title": "Factorization of the two explicit raw pullbacks",
- "statement": "For Λ commutative, k:W→S, G a module sheaf, q a natural degree, U etale over S, A,B over W and f:A→B, the module raw pullback of z equals moduleSourceFactor followed by derived inverse image of z followed by moduleCoefficientFactor. Independently, for every abelian raw class x on B, its abelian raw pullback equals abelianSourceFactor followed by derived inverse image of x followed by abelianCoefficientFactor. No relation between z and x is assumed.",
+ "statement": "For Λ commutative, k:W→S, G a module sheaf, q a natural degree, U etale over S, A,B over W and f:A→B, the module raw pullback of z equals moduleSourceFactor followed by derived inverse image of z followed by moduleCoefficientFactor. Independently, for every abelian raw class x on B, its abelian raw pullback equals abelianSourceFactor followed by derived inverse image of x followed by abelianCoefficientFactor. No relation between z and x is assumed. Interpret the raw class values occurring in this equation at their native derived Hom types using the concrete identity views [def-sbc-raw-class-native-morphisms]; the elements and equality are unchanged. Write the module coefficient morphism at its named raw-complex endpoints using the definitionally equal canonical view [def-sbc-module-coefficient-native-endpoints]. The abelian coefficient sheaf is the pullback of the forgotten sheaf from W [lem-sbc-restricted-over-abelian-complex-data].",
  "source": {
   "document": "Stacks Project; proof of lem-sbc-raw-module-abelian-hom-map-naturality",
   "place": "Tags 03FD and 03Q8; explicit raw-map formula expansion"
  },
  "stmt_deps": [
-  "def-sbc-raw-module-abelian-hom-map",
   "def-sbc-raw-scalar-source-factors",
-  "lem-sbc-raw-scalar-coefficient-square"
+  "def-sbc-raw-scalar-coefficient-factors",
+  "def-sbc-raw-class-native-morphisms",
+  "def-sbc-module-coefficient-native-endpoints",
+  "lem-sbc-restricted-over-abelian-complex-data"
  ],
  "proof": [
   {
-   "text": "Evaluate higherDirectImageRawOverFunctor.map definitionally as the raw triangle pullback. A proved private categorical identity factors rawTriangleMap, after whiskering its source comparison by freeSheaf, as rawTriangleSource followed by the derived image of z and the coefficient map. The identity is symmetric Category.assoc. Instantiate it with the inverse-image, single, and derived inverse-image functors and moduleCoefficientFactor. This coefficient factor now names the existing higherDirectImageRawOverComplex endpoints in its type; its data are unchanged. Over.w_assoc supplies the triangle witnesses. The defining formulas and proof irrelevance identify the required maps, with the canonical derived comparisons kept folded. No scalar-comparison coherence is used.",
+   "text": "Use rawModuleClassMorphism_heq and higherDirectImageRawOverPullbackHom_apply to evaluate the bundled raw functor map as its prescribed raw pullback. Extract the two factors defining moduleSourceFactor and apply symmetric Category.assoc to them and the remaining derived-map/coefficient tail. Checked HEq congruences identify the expanded raw pullback and the displayed factors, using the native-class computation rule, the concrete native coefficient view and the existing raw-complex endpoint equations. Normalize local abbreviations and equivalent universe expressions; memoize congruence proofs and use Lean proof constructors directly, avoiding repeated elaborator unification of already constructed proofs. No scalar-comparison coherence is used.",
    "uses": [
     "def-sbc-higher-image-raw-diagram",
     "sbc-lem-higher-image-raw-triangle-restriction",
     "def-sbc-raw-scalar-source-factors",
-    "def-sbc-raw-scalar-coefficient-factors"
+    "def-sbc-raw-scalar-coefficient-factors",
+    "def-sbc-raw-class-native-morphisms",
+    "def-sbc-higher-image-raw-over-complex",
+    "def-sbc-module-coefficient-native-endpoints"
    ],
    "elementary": true
   },
@@ -36,12 +41,17 @@
   "sbc-lem-higher-image-raw-triangle-restriction",
   "def-sbc-raw-scalar-source-factors",
   "def-sbc-raw-scalar-coefficient-factors",
-  "lem-sbc-raw-scalar-pullback-abelian-formula"
+  "def-sbc-raw-class-native-morphisms",
+  "lem-sbc-raw-scalar-pullback-abelian-formula",
+  "def-sbc-higher-image-raw-over-complex",
+  "def-sbc-module-coefficient-native-endpoints"
  ],
  "proof_origin": {
-  "by": "G3",
-  "document": "Stacks Project; Mathlib category associativity and Over.w_assoc",
-  "place": "Tags 03FD and 03Q8; explicit raw-map calculation using shared coefficient-complex endpoints and the existing independent abelian component"
+  "by": "worker",
+  "group": "V3",
+  "date": "2026-10-21",
+  "document": "Stacks Project; existing raw-map calculations with explicit native class values",
+  "place": "Tags 03FD, 03D7 and 03Q8; identity presentation of the same classes and unchanged categorical equations"
  },
  "mathlib_searches": [
   {
@@ -96,10 +106,11 @@
   "module": "Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas",
   "file": "lean/Sheaf/AlgebraicGeometry/RawModuleScalarPullbackFormulas.lean",
   "declaration": "AlgebraicGeometry.Etale.rawModuleScalar_pullback_formulas",
-  "statement": "theorem rawModuleScalar_pullback_formulas\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :\n    ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z =\n      moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)\n        (Over.w_assoc f k) ((freeSheaf Λ S).obj U) ≫\n      (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z ≫\n        moduleCoefficientFactor Λ G (q : ℤ) A B f) ∧\n    (∀ (x : (abelianHigherDirectImageRawPresheaf (B.hom ≫ k) q\n      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B)).obj\n        (op U)),\n      abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)\n        (Over.w_assoc f k) q _ _\n        ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom\n          (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G)) U x =\n      abelianSourceFactor f.left (B.hom ≫ k) (A.hom ≫ k)\n        (Over.w_assoc f k) (RawModuleScalarComparison.freeAbelian S U) ≫\n      (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map x ≫\n      abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G)\n        (q : ℤ) A B f)",
+  "statement": "theorem rawModuleScalar_pullback_formulas\n    (Λ : Type (u + 1)) [CommRing Λ] {W S : Scheme.{u}} (k : W ⟶ S)\n    (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)\n    (A B : Over W) (f : A ⟶ B)\n    (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :\n    (rawModuleClassMorphism Λ k G (q : ℤ) U A\n      ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z) =\n      moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)\n        (Over.w_assoc f k) ((freeSheaf Λ S).obj U) ≫\n      (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map\n        (rawModuleClassMorphism Λ k G (q : ℤ) U B z) ≫\n        moduleCoefficientFactorNative Λ G (q : ℤ) A B f) ∧\n    (∀ (x : (abelianHigherDirectImageRawPresheaf (B.hom ≫ k) q\n      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B)).obj\n        (op U)),\n      rawAbelianClassMorphism (A.hom ≫ k)\n        (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U\n        (abelianHigherDirectImageRawPullback f.left (B.hom ≫ k) (A.hom ≫ k)\n        (Over.w_assoc f k) q _ _\n        ((upperStarComp AddCommGrpCat.{u + 1} f.left B.hom A.hom\n          (Over.w f).symm).inv.app ((RawModuleScalarComparison.forget Λ W).obj G)) U x) =\n      abelianSourceFactor f.left (B.hom ≫ k) (A.hom ≫ k)\n        (Over.w_assoc f k) (RawModuleScalarComparison.freeAbelian S U) ≫\n      (upperStar AddCommGrpCat.{u + 1} f.left).mapDerivedCategoryPlus.map\n        (rawAbelianClassMorphism (B.hom ≫ k)\n          (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) B) q U x) ≫\n      abelianCoefficientFactor ((RawModuleScalarComparison.forget Λ W).obj G)\n        (q : ℤ) A B f)",
   "branch": "sheaf-dag",
-  "by": "N4",
-  "date": "2026-10-14"
+  "by": "V3",
+  "date": "2026-10-21",
+  "note": "Presentation repair only: rawModuleClassMorphism and rawAbelianClassMorphism return their inputs at the definitionally equal derived Hom types. The mathematical statement, binders and degree conventions are unchanged. The coefficient factor is also presented at the named raw-complex endpoints by moduleCoefficientFactorNative, which returns the canonical factor itself."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -112,14 +123,56 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-de5cc",
-  "group": "G3",
-  "result": "pass",
-  "landing": "20261020T221157-L-4153838",
+  "reviewer": "C-aa2a9",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261021T061739-L-1825145",
   "kind": "interface",
-  "note": "independent cc review: delivered item + adapted RawModuleScalarCoefficientFactors vs live clone and the two node records; recompiled the delivered modules plus all 6 Sheaf users of moduleCoefficientFactor (incl. direct importer RawModuleScalarCoefficientSquare) in sandbox, all RC 0, axioms clean"
+  "note": "independent cc review: retirement of Sheaf RawModuleScalarCoefficientFactors vs WeilConjectures twin (identical bodies), 6 identity-view restatements vs live clone statements and their DAG citers (twin-attached), 10 delivered modules compiled in import order + axioms of 14 decls"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "V3 stage 2",
+  "old_statement": "For Λ commutative, k:W→S, G a module sheaf, q a natural degree, U etale over S, A,B over W and f:A→B, the module raw pullback of z equals moduleSourceFactor followed by derived inverse image of z followed by moduleCoefficientFactor. Independently, for every abelian raw class x on B, its abelian raw pullback equals abelianSourceFactor followed by derived inverse image of x followed by abelianCoefficientFactor. No relation between z and x is assumed.",
+  "what": "Presentation repair under stage 3 section 4: the implicit raw-Yoneda carrier conversions were expensive to elaborate and check. Record the same equations with the raw values explicitly interpreted at their definitionally equal derived Hom types. Named module coefficient endpoints use the proved equal canonical coefficient view when present. Every binder, hypothesis, degree and equality is preserved; no target changes.",
+  "source": {
+   "document": "Stacks Project; proof of lem-sbc-raw-module-abelian-hom-map-naturality",
+   "place": "Tags 03FD and 03Q8; explicit raw-map formula expansion"
+  },
+  "citers": [],
+  "old_stmt_deps": [
+   "def-sbc-raw-module-abelian-hom-map",
+   "def-sbc-raw-scalar-source-factors",
+   "lem-sbc-raw-scalar-coefficient-square"
+  ],
+  "old_proof": [
+   {
+    "text": "Evaluate higherDirectImageRawOverFunctor.map definitionally as the raw triangle pullback. A proved private categorical identity factors rawTriangleMap, after whiskering its source comparison by freeSheaf, as rawTriangleSource followed by the derived image of z and the coefficient map. The identity is symmetric Category.assoc. Instantiate it with the inverse-image, single, and derived inverse-image functors and moduleCoefficientFactor. This coefficient factor now names the existing higherDirectImageRawOverComplex endpoints in its type; its data are unchanged. Over.w_assoc supplies the triangle witnesses. The defining formulas and proof irrelevance identify the required maps, with the canonical derived comparisons kept folded. No scalar-comparison coherence is used.",
+    "uses": [
+     "def-sbc-higher-image-raw-diagram",
+     "sbc-lem-higher-image-raw-triangle-restriction",
+     "def-sbc-raw-scalar-source-factors",
+     "def-sbc-raw-scalar-coefficient-factors"
+    ],
+    "elementary": true
+   },
+   {
+    "text": "Apply rawModuleScalar_pullback_abelian_formula to the independent arbitrary abelian class and combine the two identities by conjunction.",
+    "uses": [
+     "lem-sbc-raw-scalar-pullback-abelian-formula"
+    ],
+    "elementary": true
+   }
+  ],
+  "old_proof_deps": [
+   "def-sbc-higher-image-raw-diagram",
+   "sbc-lem-higher-image-raw-triangle-restriction",
+   "def-sbc-raw-scalar-source-factors",
+   "def-sbc-raw-scalar-coefficient-factors",
+   "lem-sbc-raw-scalar-pullback-abelian-formula"
+  ]
+ }
 }

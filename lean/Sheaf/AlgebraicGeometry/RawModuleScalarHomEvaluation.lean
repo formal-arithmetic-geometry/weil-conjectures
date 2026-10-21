@@ -7,6 +7,7 @@ module
 
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
+public import Sheaf.AlgebraicGeometry.RawModuleScalarClassMorphisms
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 
 /-! # Concrete formulas for raw scalar comparison
@@ -40,11 +41,14 @@ theorem rawModuleScalarHom_evaluate
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)
     (A : Over W)
     (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op A)) :
-    rawModuleAbelianHomMap Λ k G q U A z =
+    rawAbelianClassMorphism (A.hom ≫ k)
+      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U
+      (rawModuleAbelianHomMap Λ k G q U A z) =
       scalarSourceFactor Λ (A.hom ≫ k) ((freeSheaf Λ S).obj U)
         (RawModuleScalarComparison.freeAbelian S U)
         (RawModuleScalarComparison.freeMap Λ S U) ≫
-      (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map z ≫
+      (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map
+        (rawModuleClassMorphism Λ k G (q : ℤ) U A z) ≫
         scalarCoefficientFactor Λ A.hom G (q : ℤ) := by
   rfl
 

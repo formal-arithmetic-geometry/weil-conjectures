@@ -29,22 +29,25 @@
    "elementary": true
   },
   {
-   "text": "Construct the application of shift_square from the typed local expressions using Lean.Meta.mkAppM and zetaReduce. The existing private coefficientStructuralExact helper, imported for proof only from HigherDirectImageOverMapCoefficient, builds ordinary HEq congruences and proof-irrelevance proofs to identify these tails with the goal. It adds no mathematical premise; the Lean kernel checks the final Eq proof. This avoids a single large definitional-equality reduction.",
-   "uses": [],
+   "text": "Construct the generic shift_square application from the actual typed functors and unshifted tails. Use the existing higherDirectImageRawOverComplex_eq equations to compare named raw complexes with their single-complex endpoint presentations. A private congruence helper constructs ordinary HEq congruences, unfolds local abbreviations, instantiates assigned metavariables and matches equivalent universe expressions before expanding large derived-category structures. Proof irrelevance identifies proof fields. The final Eq term is checked by Lean’s kernel and adds no mathematical premise. Build heterogeneous symmetry and transitivity directly with Lean proof constructors, avoiding repeated elaborator unification of the large derived-category endpoints.",
+   "uses": [
+    "def-sbc-higher-image-raw-over-complex"
+   ],
    "elementary": true
   }
  ],
  "proof_deps": [
   "lem-sbc-raw-scalar-derived-pullback-shift",
   "lem-sbc-raw-scalar-coefficient-unshifted",
-  "def-sbc-raw-module-scalar-pullback-comparison"
+  "def-sbc-raw-module-scalar-pullback-comparison",
+  "def-sbc-higher-image-raw-over-complex"
  ],
  "proof_origin": {
-  "by": "agent",
-  "group": "W4",
-  "date": "2026-10-14",
-  "document": "Stacks Project; exact-derived-functor shift API",
-  "place": "Tags 03D7 and 03Q8; generic shift transport applied to the proved unshifted coefficient square"
+  "by": "worker",
+  "group": "V3",
+  "date": "2026-10-21",
+  "document": "Stacks Project; existing categorical calculation and raw-complex endpoint equation",
+  "place": "Tags 03D7 and 03Q8; unchanged mathematical calculation with explicit endpoint congruence"
  },
  "mathlib_searches": [
   {
@@ -119,13 +122,13 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-0967d",
-  "group": "W4",
-  "result": "pass",
-  "landing": "20261014T140639-L-119258",
-  "kind": "proof",
-  "note": "independent Codex review: Delivered module, node statements, proof dependencies, and report matched the stage-3 review rules; delivered Lean file compiled successfully."
+  "reviewer": "C-aa2a9",
+  "group": "V3",
+  "result": "fix",
+  "landing": "20261021T061739-L-1825145",
+  "kind": "interface",
+  "note": "independent cc review: retirement of Sheaf RawModuleScalarCoefficientFactors vs WeilConjectures twin (identical bodies), 6 identity-view restatements vs live clone statements and their DAG citers (twin-attached), 10 delivered modules compiled in import order + axioms of 14 decls"
  }
 }

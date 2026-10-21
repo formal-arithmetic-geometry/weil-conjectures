@@ -8,7 +8,10 @@ module
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourceFactors
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
+public import Sheaf.AlgebraicGeometry.RawModuleScalarClassMorphisms
+public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientNative
 import Sheaf.AlgebraicGeometry.RawModuleScalarHomEvaluation
+import Sheaf.AlgebraicGeometry.RawModuleScalarPullbackFormulas
 
 /-! # The bundled scalar Hom composite
 
@@ -32,19 +35,6 @@ private theorem map_three_factors
   rw [h, Functor.map_comp, Functor.map_comp]
   simp only [Category.assoc]
 
-private theorem raw_triangle_whisker
-    {C C' D E D' E' : Type*}
-    [Category C] [Category C'] [Category D] [Category E] [Category D'] [Category E']
-    [Preadditive D'] [Preadditive E']
-    (L : C ⥤ C') (H : C' ⥤ D) (H' : C' ⥤ E) (P : D ⥤ E)
-    (A : D ⥤ D') (B : E ⥤ E') (F : D' ⥤ E')
-    (c : H' ⟶ H ⋙ P) (e : P ⋙ B ⟶ A ⋙ F) (U : C)
-    {K : D'} {K' : E'} (z : A.obj (H.obj (L.obj U)) ⟶ K) (s : F.obj K ⟶ K') :
-    rawTriangleMap (L ⋙ H) (L ⋙ H') P A B F (Functor.whiskerLeft L c) e U z s =
-      rawTriangleSource H H' P A B F c e (L.obj U) ≫ F.map z ≫ s := by
-  simp only [rawTriangleMap, rawTriangleSource, Functor.comp_obj,
-    Functor.whiskerLeft_app, Category.assoc]
-
 set_option backward.isDefEq.respectTransparency true in
 /-- Expand the scalar map on a raw module pullback, retaining all module factors.
 Source: Stacks Project, Tags 03FD and 03Q8, raw-map expansion.
@@ -66,8 +56,10 @@ theorem rawModuleScalar_hom_composite_formula
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)
     (A B : Over W) (f : A ⟶ B)
     (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :
-    rawModuleAbelianHomMap Λ k G q U A
-      ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z) =
+    rawAbelianClassMorphism (A.hom ≫ k)
+      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U
+      (rawModuleAbelianHomMap Λ k G q U A
+        ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z)) =
       scalarSourceFactor Λ (A.hom ≫ k) ((freeSheaf Λ S).obj U)
         (RawModuleScalarComparison.freeAbelian S U)
         (RawModuleScalarComparison.freeMap Λ S U) ≫
@@ -75,21 +67,13 @@ theorem rawModuleScalar_hom_composite_formula
         (moduleSourceFactor Λ f.left (B.hom ≫ k) (A.hom ≫ k)
           (by rw [← Category.assoc, Over.w]) ((freeSheaf Λ S).obj U)) ≫
       (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map
-        ((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map z) ≫
+        ((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus.map
+          (rawModuleClassMorphism Λ k G (q : ℤ) U B z)) ≫
       (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map
-        (moduleCoefficientFactor Λ G (q : ℤ) A B f) ≫
+        (moduleCoefficientFactorNative Λ G (q : ℤ) A B f) ≫
       scalarCoefficientFactor Λ A.hom G (q : ℤ) := by
   rw [rawModuleScalarHom_evaluate]
   apply map_three_factors
-  exact raw_triangle_whisker (freeSheaf Λ S)
-    (upperStar (ModuleCat.{u + 1} Λ) (B.hom ≫ k))
-    (upperStar (ModuleCat.{u + 1} Λ) (A.hom ≫ k))
-    (upperStar (ModuleCat.{u + 1} Λ) f.left)
-    (DerivedCategory.Plus.singleFunctor _ 0) (DerivedCategory.Plus.singleFunctor _ 0)
-    (upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlus
-    (upperStarComp (ModuleCat.{u + 1} Λ) f.left (B.hom ≫ k) (A.hom ≫ k)
-      (by rw [← Category.assoc, Over.w])).hom
-    ((upperStar (ModuleCat.{u + 1} Λ) f.left).mapDerivedCategoryPlusSingleFunctor 0).inv
-    U z (moduleCoefficientFactor Λ G (q : ℤ) A B f)
+  exact (rawModuleScalar_pullback_formulas Λ k G q U A B f z).1
 
 end AlgebraicGeometry.Etale

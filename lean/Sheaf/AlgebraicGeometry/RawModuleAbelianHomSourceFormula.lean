@@ -8,6 +8,8 @@ module
 public import Sheaf.AlgebraicGeometry.RawModuleAbelianHomMap
 public import Sheaf.AlgebraicGeometry.RawModuleScalarSourcePrefix
 public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientSquare
+public import Sheaf.AlgebraicGeometry.RawModuleScalarClassMorphisms
+public import Sheaf.AlgebraicGeometry.RawModuleScalarCoefficientNative
 import Sheaf.AlgebraicGeometry.RawModuleScalarHomCompositeFormula
 import Sheaf.AlgebraicGeometry.RawModuleScalarSourceClassFormula
 
@@ -46,23 +48,25 @@ theorem rawModuleAbelianHomMap_source_formula
     (G : Sheaf W.smallEtaleTopology (ModuleCat.{u + 1} Λ)) (q : ℕ) (U : S.Etale)
     (A B : Over W) (f : A ⟶ B)
     (z : (higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).obj (op B)) :
-    rawModuleAbelianHomMap Λ k G q U A
-      ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z) =
+    rawAbelianClassMorphism (A.hom ≫ k)
+      (restrictedOverCoefficient ((RawModuleScalarComparison.forget Λ W).obj G) A) q U
+      (rawModuleAbelianHomMap Λ k G q U A
+        ((higherDirectImageRawOverFunctor Λ k G (q : ℤ) U).map f.op z)) =
     rawModuleScalarSourcePrefix Λ k G q U A B f z ≫
       ((RawModuleScalarComparison.derivedPullbackIso Λ f.left).inv.app
           (((DerivedCategory.Plus.singleFunctor _ 0).obj
             ((upperStar (ModuleCat.{u + 1} Λ) B.hom).obj G))⟦(q : ℤ)⟧) ≫
         (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map
-          (moduleCoefficientFactor Λ G (q : ℤ) A B f) ≫
+          (moduleCoefficientFactorNative Λ G (q : ℤ) A B f) ≫
         scalarCoefficientFactor Λ A.hom G (q : ℤ)) := by
   have hs := rawModuleScalar_source_class_formula Λ k G q U A B f z
   have ht := congrArg
     (fun v ↦ v ≫
       (RawModuleScalarComparison.forget Λ A.left).mapDerivedCategoryPlus.map
-        (moduleCoefficientFactor Λ G (q : ℤ) A B f) ≫
+        (moduleCoefficientFactorNative Λ G (q : ℤ) A B f) ≫
       scalarCoefficientFactor Λ A.hom G (q : ℤ)) hs
   have he := rawModuleScalar_hom_composite_formula Λ k G q U A B f z
   apply he.trans
-  simpa only [Category.assoc] using ht
+  simpa only [rawModuleClassMorphism, Category.assoc] using ht
 
 end AlgebraicGeometry.Etale
