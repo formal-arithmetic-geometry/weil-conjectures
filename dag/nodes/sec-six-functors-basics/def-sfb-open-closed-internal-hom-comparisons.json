@@ -2,7 +2,7 @@
  "id": "def-sfb-open-closed-internal-hom-comparisons",
  "kind": "definition",
  "title": "Evaluation-normalized open and closed derived Hom comparison maps",
- "statement": "Let Λ be a commutative condensed ring [sk-def-sfb-condensed-ring]. On schemes use the ordinary unbounded module-object derived categories [sk-def-sfb-derived-categories], tensor and internal Hom [sk-def-sfb-derived-tensor-hom]. For an open immersion j, use supportPullback, its canonical alpha transport, j! and Rj*. Define the open derived adjunction by transport from j! adjoint to upperStar. Define the open projection as the adjoint of tensoring its unit followed by the inverse canonical pullback-tensor comparison [def-sfb-condensed-pullback-tensor-comparison]. For a closed immersion i define the derived pullback/image adjunction termwise and its projection as the unit followed by image of the pullback-tensor comparison and tensor of the closed counit. Define openSupportHomMap by successive open, tensor-Hom and pullback/image transposes of projection followed by evaluation. For complementary i,j with j quasi-compact define closedSupportHomMap, given an inverse-direction closed projection χ, by the same tensor-Hom and two support adjunction transposes [det-lem-formal-closed-support-adjunction]. These are the explicit maps in the source calculation, without any invertibility claim.",
+ "statement": "Let Λ be a commutative condensed ring [sk-def-sfb-condensed-ring]. On schemes use the ordinary unbounded module-object derived categories [sk-def-sfb-derived-categories], tensor and internal Hom [sk-def-sfb-derived-tensor-hom]. For an open immersion j, use supportPullback, its canonical alpha transport, j! and Rj*. Define the open derived adjunction by transport from j! adjoint to upperStar. Define the open projection as the adjoint of tensoring its unit followed by the inverse canonical pullback-tensor comparison [def-sfb-condensed-pullback-tensor-comparison]. For a closed immersion i whose module direct image preserves finite colimits, define the derived pullback/image adjunction termwise and its projection as the unit followed by image of the pullback-tensor comparison and tensor of the closed counit. Define openSupportHomMap by successive open, tensor-Hom and pullback/image transposes of projection followed by evaluation. For complementary i,j with j quasi-compact define closedSupportHomMap, given an inverse-direction closed projection χ, by the same tensor-Hom and two support adjunction transposes [det-lem-formal-closed-support-adjunction]. These are the explicit maps in the source calculation, without any invertibility claim. The termwise closed constructions take this exactness as an explicit typeclass argument. In closedSupportHomMap the complementary quasi-compact open immersion supplies it by closedSupport_lowerStarExact [det-lem-formal-closed-support-adjunction], scoped over the entire type and construction, so that no additional hypothesis is imposed on complementary pairs.",
  "source": {
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
   "place": "Lemma 6.7.13 formal adjunction calculation; original node steps 3, 8--11, definitions of the actual comparison maps."
@@ -84,8 +84,8 @@
   "statement": "def openSupportHomMap {U X : Scheme.{u}} (j : U ⟶ X) [IsOpenImmersion j] (L : DerivedCategory (supportModules Λ U)) (N : DerivedCategory (supportModules Λ X)) : ((derivedHom Λ X).obj (op ((openImmersionLowerShriek Λ j).mapDerivedCategory.obj L))).obj N ⟶ (lowerStar Λ j).rightDerivedFunctor.obj (((derivedHom Λ U).obj (op L)).obj ((supportPullback Λ j).mapDerivedCategory.obj N))",
   "existing": false,
   "branch": "sheaf-dag",
-  "by": "X6",
-  "date": "2026-10-19",
+  "by": "F4",
+  "date": "2026-10-21",
   "declarations": [
    "AlgebraicGeometry.ProEtale.CondensedRing.openSupportDerivedAdjunction",
    "AlgebraicGeometry.ProEtale.CondensedRing.closedPullbackDerivedAdjunction",
@@ -93,7 +93,8 @@
    "AlgebraicGeometry.ProEtale.CondensedRing.closedSupportProjection",
    "AlgebraicGeometry.ProEtale.CondensedRing.openSupportHomMap",
    "AlgebraicGeometry.ProEtale.CondensedRing.closedSupportHomMap"
-  ]
+  ],
+  "note": "Restored from the quarantine recorded in coord/rework.tsv. Closed termwise image is elaborated with explicit finite-colimit preservation; complementary-pair declarations install closedSupport_lowerStarExact in their types and proofs. The projection/evaluation formulas and dependency route are preserved."
  },
  "reviewed": {
   "date": "2026-10-19",
@@ -106,14 +107,41 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-19",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-72cfb",
-  "group": "X6",
-  "result": "pass",
-  "landing": "20261019T122649-L-482400",
+  "reviewer": "C-748b9",
+  "group": "F4",
+  "result": "fix",
+  "landing": "20261021T061103-L-1698743",
   "kind": "interface",
-  "note": "independent cc review: delivered item theorem and six relocated definitions vs live clone text (byte-identical); compiled the 5 delivered modules and the 4 direct importers; #print axioms of the proved declarations vs upstream sorry sources; new node statements and proof_deps vs Lean"
+  "note": "independent cc review: 5 restored modules vs clones/live/quarantine archives (delta = explicit PreservesFiniteColimits(lowerStar) + let closedSupport_lowerStarExact); 4 node files vs live nodes and Lean source signatures; change record vs signatures"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "statement_change": {
+  "date": "2026-10-21",
+  "by": "F4 stage 2",
+  "old_statement": "Let Λ be a commutative condensed ring [sk-def-sfb-condensed-ring]. On schemes use the ordinary unbounded module-object derived categories [sk-def-sfb-derived-categories], tensor and internal Hom [sk-def-sfb-derived-tensor-hom]. For an open immersion j, use supportPullback, its canonical alpha transport, j! and Rj*. Define the open derived adjunction by transport from j! adjoint to upperStar. Define the open projection as the adjoint of tensoring its unit followed by the inverse canonical pullback-tensor comparison [def-sfb-condensed-pullback-tensor-comparison]. For a closed immersion i define the derived pullback/image adjunction termwise and its projection as the unit followed by image of the pullback-tensor comparison and tensor of the closed counit. Define openSupportHomMap by successive open, tensor-Hom and pullback/image transposes of projection followed by evaluation. For complementary i,j with j quasi-compact define closedSupportHomMap, given an inverse-direction closed projection χ, by the same tensor-Hom and two support adjunction transposes [det-lem-formal-closed-support-adjunction]. These are the explicit maps in the source calculation, without any invertibility claim.",
+  "what": "The archived general closed termwise adjunction and projection did not typecheck: mapDerivedCategory requires PreservesFiniteColimits (lowerStar Λ i), which was neither assumed nor supplied. Make that requirement explicit in these two general definitions and supply it from the already proved complementary-pair exactness theorem throughout closedSupportHomMap. No derived input restriction or parent conclusion is changed.",
+  "source": {
+   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+   "place": "Lemma 6.7.13 formal adjunction calculation; closed-support exactness for a complementary quasi-compact open immersion as implemented by closedSupport_lowerStarExact (Stacks Tag 09BM)."
+  },
+  "citers": [
+   {
+    "id": "lem-sfb-condensed-support-derived-localization",
+    "holds": true,
+    "note": "The statement already assumes complementary immersions with quasi-compact open complement. closedSupport_lowerStarExact supplies exactly the explicit direct-image exactness instance; the derived formulas, maps and conclusions are unchanged."
+   },
+   {
+    "id": "lem-sfb-condensed-support-projection-formula",
+    "holds": true,
+    "note": "The statement already assumes complementary immersions with quasi-compact open complement. closedSupport_lowerStarExact supplies exactly the explicit direct-image exactness instance; the derived formulas, maps and conclusions are unchanged."
+   },
+   {
+    "id": "lem-sfb-open-closed-internal-hom-formulas",
+    "holds": true,
+    "note": "The statement already assumes complementary immersions with quasi-compact open complement. closedSupport_lowerStarExact supplies exactly the explicit direct-image exactness instance; the derived formulas, maps and conclusions are unchanged."
+   }
+  ]
+ }
 }
