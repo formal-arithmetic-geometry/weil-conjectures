@@ -14,11 +14,186 @@
   "lem-weil-pbc-kinjective-total-derived",
   "def-weil-tower-transition-endomorphism",
   "def-weil-strict-roos-model",
-  "lem-weil-pbc-exact-products-roos-comparison"
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "def-weil-category-product"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-ring-sheaves-grothendieck] to both small ringed sites, and [lem-weil-pbc-small-module-diagrams-grothendieck] with the small index category $\\mathbf N_{\\geq1}^{\\rm op}$. Thus $\\mathcal A,\\mathcal B$ and both tower categories are Grothendieck abelian, also for noncommutative rings. The existence theorem [lem-pur-kinjective-degreewise-existence] in $\\operatorname{Tow}(\\mathcal A)$ supplies $q:X\\to I$ with exactly the required K-injectivity and injective degree terms. The same theorem applies to the other three categories whenever their resolutions are needed below.",
+   "uses": [
+    "lem-weil-pbc-ring-sheaves-grothendieck",
+    "lem-weil-pbc-small-module-diagrams-grothendieck",
+    "lem-pur-kinjective-degreewise-existence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/injectives.tex",
+    "place": "Tags 079Q (remark-existence-D) and 079P (theorem-K-injective-embedding-grothendieck); small-diagram specialization"
+   }
+  },
+  {
+   "text": "All ordinary products and tower limits used here exist: for module sheaves take sectionwise compatible families with componentwise scalar action. Their matching families glue uniquely component by component, so these presheaves are sheaves and satisfy the limit universal property. The corresponding complex has the induced differential, since each projection commutes with it. This uses only the definition [def-weil-sheaf-of-modules-category] and the product universal property [def-weil-category-product], not exactness of products.",
+   "uses": [
+    "def-weil-sheaf-of-modules-category",
+    "def-weil-category-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), ordinary termwise products and limits; explicit sectionwise construction"
+   }
+  },
+  {
+   "text": "The adjunction $F\\dashv G$ applies pointwise to tower natural transformations: transposing each component preserves the transition equations by naturality of the adjunction bijections, and transposing back is inverse. Hence $F^{\\rm Tow}\\dashv G^{\\rm Tow}$. By [lem-weil-tower-category-levelwise-abelian], a short exact sequence of towers is short exact at every level, so exactness of $F$ makes $F^{\\rm Tow}$ exact. Apply [lem-weil-pbc-right-adjoint-preserves-kinjective] to this adjunction to obtain that $J=G^{\\rm Tow}I$ is K-injective. Apply [lem-sp-right-adjoint-preserves-injectives] to the same exact adjunction to see that every $J^r$ is injective.",
+   "uses": [
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "lem-sp-right-adjoint-preserves-injectives"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives); Homology Tag 015Z (lemma-adjoint-preserve-injectives); pointwise adjunction written out"
+   }
+  },
+  {
+   "text": "Evaluation sends $I$ and $J$ to K-injective complexes by [lem-weil-tower-evaluation-kinjective], giving all $I_n$ and $GI_n$. The constant-tower functor $\\Delta$ is exact by the levelwise criterion [lem-weil-tower-category-levelwise-abelian], and it is left adjoint to ordinary inverse limit: maps $\\Delta M\\to T$ are precisely compatible families $M\\to T_n$. Therefore [lem-weil-pbc-right-adjoint-preserves-kinjective], applied to $\\Delta\\dashv\\lim$ in each category, makes $L_I$ and $L_J$ K-injective. Applying that same lemma to $F\\dashv G$ makes $G(L_I)$ K-injective.",
+   "uses": [
+    "lem-weil-tower-evaluation-kinjective",
+    "lem-weil-tower-category-levelwise-abelian",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 08BJ (lemma-adjoint-preserve-K-injectives); Sites Cohomology Tag 0941 (lemma-derived-limit-is-ok), evaluation and limit adjunctions"
+   }
+  },
+  {
+   "text": "Apply [lem-pc-ringed-space-product-kinjective] to the families $(I_n)_n$ and $(GI_n)_n$ in the abelian categories $\\mathcal A$ and $\\mathcal B$. Its statement is for arbitrary abelian categories, despite its title. The products exist by step 2. It gives both K-injectivity of $P_I,P_J$ and their product universal properties after $Q$, without exact countable products. Applying [lem-weil-pbc-right-adjoint-preserves-kinjective] to $F\\dashv G$ also gives K-injectivity of $G(P_I)$.",
+   "uses": [
+    "lem-pc-ringed-space-product-kinjective",
+    "lem-weil-pbc-right-adjoint-preserves-kinjective"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 0BK6 (lemma-product-K-injective) and Tag 08BJ (lemma-adjoint-preserve-K-injectives)"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-kinjective-total-derived] for termwise $G^{\\rm Tow}$, for each termwise limit, and for termwise $G$, followed by the target localization. These are exact functors on homotopy categories: additivity preserves the finite biproduct matrices defining shifts and cones in [def-weil-abstract-derived-category]. Step 1 supplies enough K-injectives. The lemma says their universal comparison units are invertible on K-injectives. Thus $q$ identifies $QJ$ with $R(G^{\\rm Tow})(QX)$ and $Q(L_I)$ with $R\\lim_{\\mathcal A}(QX)$. Since $J$ and $L_I$ are K-injective, the same unit calculations identify $Q(L_J)$ with $R\\lim_{\\mathcal B}(R(G^{\\rm Tow})(QX))$ and $Q(G(L_I))$ with $RG(R\\lim_{\\mathcal A}(QX))$. These are unit identifications, not arbitrary isomorphisms of the objects.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070K (lemma-enough-K-injectives-implies) and 070Y (lemma-K-injective-defined)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-right-adjoint-preserves-limits] to $F\\dashv G$ and respectively the countable discrete diagram and the tower diagram in each degree. It says the cones with components $G(\\pi_n)$ and $G(\\lambda_n)$ are limiting. The unique maps from these cones to the chosen product and limit cones are therefore isomorphisms $c$ and $\\beta$ with the stated components. Commutation with differentials follows by composing with every projection, and inverse maps then commute with differentials as well. For any strict tower chain map the two naturality composites have equal components, hence are equal. This argument applies to every tower complex and never uses a resolution.",
+   "uses": [
+    "lem-weil-pbc-right-adjoint-preserves-limits"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 0038 (lemma-adjoint-exact), part (2), with degreewise limit uniqueness"
+   }
+  },
+  {
+   "text": "Under the units of step 6, the $n$th component of $Q(c)$ is the morphism represented by $G(P_I)\\xrightarrow{G(\\pi_n)}GI_n$. Naturality of the universal unit for $G$ identifies it with $RG(p_n)$, because both $P_I$ and $I_n$ are K-injective. The product universal property from [lem-pc-ringed-space-product-kinjective] identifies $Q(c)$ with the derived product comparison. Next, by [def-weil-tower-transition-endomorphism], writing $t_n:I_{n+1}\\to I_n$ for a transition, the $n$th components of $cG(s_I)$ and $s_Jc$ are both $G(t_n)G(\\pi_{n+1})$. Product uniqueness gives the first identity. Since $G$ is additive [def-weil-pbc-additive-functor], subtracting this identity from $cG(1)=c$ gives $cG(1-s_I)=(1-s_J)c$.",
+   "uses": [
+    "lem-weil-pbc-kinjective-total-derived",
+    "lem-pc-ringed-space-product-kinjective",
+    "def-weil-tower-transition-endomorphism",
+    "def-weil-pbc-additive-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070Y (lemma-K-injective-defined), 0BK6 (lemma-product-K-injective), 08TC (definition-derived-limit); projection calculation"
+   }
+  },
+  {
+   "text": "The comparisons just constructed commute with chain homotopies: applying an additive functor to $f-g=dh+hd$ gives the same equation for the images, and the product and limit maps satisfy it after each projection. By [lem-weil-pbc-kinjective-hom-derived], every derived morphism between K-injective tower representatives has a chain-map representative unique modulo homotopy, and quasi-isomorphisms between them are homotopy equivalences. Thus the chain naturality from step 7 induces the claimed naturality for localized morphisms, independently of representatives; the same applies to the unit identifications in step 6. No exact-product assumption has appeared in steps 1-9.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070I (lemma-K-injective), Hom bijection and homotopy-equivalence consequence"
+   }
+  },
+  {
+   "text": "Now assume exact countable products in both categories. For $T=I,J$, use [lem-weil-derived-limit-roos-complex] in its respective abelian category: step 1 gives enough injectives, step 2 gives the limits and products, and $T$ is K-injective by construction or step 3. The lemma specifies exactly the differential $d(y,x)=(-dy-(1-s_T)x,dx)$ and the map $j_T=(0,\\lambda)$ of [def-weil-strict-roos-model], and asserts that $j_T$ is a quasi-isomorphism. Thus the asserted map, with its prescribed sign, is a quasi-isomorphism for either $T$.",
+   "uses": [
+    "lem-weil-derived-limit-roos-complex",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 070M (lemma-difficulty-K-injectives), split-envelope generalization recorded in the cited node; Sites Cohomology Tag 0941 (lemma-derived-limit-is-ok)"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-products-roos-comparison] with $RF=R\\lim$ and its universal unit from step 6, separately in $\\mathcal A$ and $\\mathcal B$. The tower category is Grothendieck by step 1; the comparison is invertible on K-injectives by step 6; exact products are now assumed. Write its negative-difference fibre in the same ordered coordinates as [def-weil-strict-roos-model]. Its differential is $d^-(y,x)=(-dy+(1-s_T)x,dx)$. The involution $a(y,x)=(-y,x)$ satisfies $da(y,x)=(dy-(1-s_T)x,dx)=ad^-(y,x)$, so it is a chain isomorphism from that fibre to $H_T$. It takes the ordinary-limit inclusion $(0,\\lambda)$ to $j_T$. If $\\kappa^-Q(j^-)=\\eta^{\\lim}$ is the normalization supplied by the cited lemma, define $\\kappa_T=\\kappa^-Q(a)^{-1}$. Then $\\kappa_TQ(j_T)=\\kappa^-Q(a)^{-1}Q(a)Q(j^-)=\\eta^{\\lim}_T$, as required. The sign map commutes with all diagonal maps of these fibres, so the normalization is natural.",
+   "uses": [
+    "lem-weil-pbc-exact-products-roos-comparison",
+    "def-weil-strict-roos-model"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok); explicit comparison of the minus-difference fibre with the signed strict Roos cone"
+   }
+  },
+  {
+   "text": "With the cone convention in [def-weil-abstract-derived-category], the cone triangle of $u=1-s_T$ has maps $(u,i,-p)$. By the rotation axiom of [def-weil-triangulated-category], its inverse rotation has maps $(p[-1],u,i)$; in the coordinates of [def-weil-strict-roos-model] these are precisely $r(y,x)=x$, $u$, and $b(z)=(z,0)$. Localizing gives a distinguished triangle. Transport its first object along the isomorphism $Q(j_T):Q(L_T)\\to Q(H_T)$ from step 10: its first map becomes $Q(rj_T)=Q(\\lambda)$, and its last map becomes $Q(j_T)[1]^{-1}Q(b)$. Finally the equality $\\kappa_TQ(j_T)=\\eta^{\\lim}_T$ of step 11 identifies its first object with $R\\lim(QT)$ by exactly the derived-limit unit. Thus this transported triangle is the unit-normalized Roos triangle claimed in the statement.",
+   "uses": [
+    "def-weil-abstract-derived-category",
+    "def-weil-strict-roos-model",
+    "def-weil-triangulated-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0941 (lemma-derived-limit-is-ok), short exact sequence triangle; cone convention of Derived Categories Tag 05RU (definition-unbounded-derived-category)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-ring-sheaves-grothendieck",
+  "lem-weil-pbc-small-module-diagrams-grothendieck",
+  "lem-pur-kinjective-degreewise-existence",
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-category-product",
+  "lem-weil-tower-category-levelwise-abelian",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-sp-right-adjoint-preserves-injectives",
+  "lem-weil-tower-evaluation-kinjective",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-pbc-kinjective-total-derived",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-right-adjoint-preserves-limits",
+  "def-weil-tower-transition-endomorphism",
+  "def-weil-pbc-additive-functor",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "lem-weil-derived-limit-roos-complex",
+  "def-weil-strict-roos-model",
+  "lem-weil-pbc-exact-products-roos-comparison",
+  "def-weil-triangulated-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0A07 (lemma-Rf-commutes-with-Rlim), first proof; explicit exact-adjoint specialization using Tags 079P, 08BJ, 0BK6, 070K, 070Y and 0941. The general exact-adjoint and signed unit calculations are written by NI."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -82,10 +257,45 @@
    "results": "{\"top\": [\"CategoryTheory.Adjunction.hasExactLimitsOfShape\", \"Profinite.NobelingProof.succ_exact\", \"Condensed.hasExactLimitsOfShape\", \"CategoryTheory.CountableAB4Star.of_countableAB5Star\", \"CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat\", \"CategoryTheory.CountableAB4Star.of_hasExactLimitsOfShape_nat_and_finite\", \"LightCondensed.instCountableAB4StarLightCondMod\", \"Condensed.instAB4StarCondensedMod\"], \"n_hits\": 8, \"note\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: hits do not state the strict-tower Roos comparison with universal derived-limit unit"
+  },
+  {
+   "tool": "grep",
+   "query": "KInjective|[Rr]oos",
+   "results": "{\"top\": [\"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/DerivedCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\", \"Mathlib/Algebra/Homology/HomotopyCategory/KInjective.lean\"], \"n_hits\": 25, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: separate localization, abstract derived adjunction or bounded-below injective facts do not state the simultaneous unbounded tower models and signed unit-normalized Roos comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Adjunction, CochainComplex.IsKInjective",
+   "results": "{\"top\": [], \"n_hits\": 0, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: separate localization, abstract derived adjunction or bounded-below injective facts do not state the simultaneous unbounded tower models and signed unit-normalized Roos comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Right adjoints of exact functors simultaneous K injective tower models derived products inverse limit Roos cone canonical unit",
+   "results": "{\"top\": [\"CategoryTheory.Functor.totalRightDerivedUnit\", \"CategoryTheory.LiftRightAdjoint.unitEqualises\", \"CategoryTheory.Functor.rightAdjointObjIsDefined_of_isLimit\", \"CategoryTheory.Injective.injective_of_adjoint\", \"CategoryTheory.Limits.instIsRightAdjointFunctorLim\", \"CategoryTheory.Limits.coneOfAdj\", \"CategoryTheory.term_⥤ᵣ_\", \"CategoryTheory.Adjunction.functorialityUnit'_app_hom\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: separate localization, abstract derived adjunction or bounded-below injective facts do not state the simultaneous unbounded tower models and signed unit-normalized Roos comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An exact left adjoint and right adjoint admit simultaneous unbounded K injective tower resolutions computing derived products and inverse limits with normalized Roos triangle",
+   "results": "{\"top\": [\"CategoryTheory.Adjunction.derived\", \"CategoryTheory.Adjunction.derived'\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.InjectiveResolution.rightDerived_app_eq\", \"CategoryTheory.Tor\", \"CategoryTheory.Functor.rightDerived\", \"CategoryTheory.Tor'\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: separate localization, abstract derived adjunction or bounded-below injective facts do not state the simultaneous unbounded tower models and signed unit-normalized Roos comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An unbounded inverse system has a degreewise injective K injective replacement whose ordinary products and inverse limits compute all derived functors of an exact adjunction",
+   "results": "{\"top\": [\"CategoryTheory.Functor.isZero_rightDerived_obj_injective_succ\", \"CochainComplex.cm5b.I_X\", \"CochainComplex.cm5b.instInjectiveXIntI\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero'\", \"CochainComplex.isKInjective_of_injective\", \"CategoryTheory.InjectiveResolution.instIsKInjectiveCochainComplex\", \"CategoryTheory.InjectiveResolution.ofCocomplex\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\"], \"n_hits\": 8, \"note\": \"\"}",
+   "date": "2026-10-21",
+   "verdict": "no match: separate localization, abstract derived adjunction or bounded-below injective facts do not state the simultaneous unbounded tower models and signed unit-normalized Roos comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-direct-image-roos-normalization",
@@ -104,5 +314,45 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-exact-adjoint-tower-models",
+  "worker": "stage1",
+  "group": "NI",
+  "summary": "Twelve proof steps, no new nodes. Reused the existing arbitrary-ring small-diagram Grothendieck theorem, degreewise injective resolution theorem, exact-adjoint K-injectivity, general product theorem, and normalized Roos comparison. Checked the universal units and the negative-difference sign isomorphism explicitly. Statement unchanged.",
+  "blueprint": "Realizes prop-weil-pbc-direct-image-limits.proof.md, the tower-resolution sentence and product/Roos/(1-s) comparison sentence: steps 1-6 give simultaneous models, steps 7-9 give natural comparisons and transition compatibility, steps 10-12 give the ordinary-limit inclusion and unit-normalized signed triangle.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-kinjective-degreewise-existence",
+    "why": "Generic resolution theorem for any Grothendieck abelian category, including the tower category; the unit supplies no alternate resolution theorem with injective terms."
+   },
+   {
+    "node": "lem-pc-ringed-space-product-kinjective",
+    "why": "Generic product theorem for K-injectives in any abelian category, used to compute derived products without imposing exact products."
+   },
+   {
+    "node": "lem-weil-pbc-right-adjoint-preserves-kinjective",
+    "why": "Generic exact-adjoint criterion applied to pointwise G and to ordinary inverse limit."
+   },
+   {
+    "node": "lem-weil-pbc-kinjective-hom-derived",
+    "why": "Generic localization Hom bijection for K-injectives, used to descend strict naturality."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-kinjective-degreewise-existence",
+  "lem-pc-ringed-space-product-kinjective",
+  "lem-weil-pbc-right-adjoint-preserves-kinjective",
+  "lem-weil-pbc-kinjective-hom-derived"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NI-344bad7bb",
+  "group": "NI",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NI-344bad7bb (reviewer sub-agent of L); spot-checked: I read the item, all 12 steps, every cited node's statement, the parent lem-weil-pbc-direct-image-roos-normalization, and the sources: Stacks 0A07, 0941, 0BK6, 08BJ and the main-20261015 proof of prop-weil-pbc-direct-image-limits. Live and side-live still have the item unsplit with no proof, and there is no repair note. The statement is byte-identical to live, there are no new nodes, and the only new stmt_dep is def-weil-category-product, which the products in the statement use. Hypotheses check out step by step. Arbitrary-ring Grothendieck nodes cover Mod and Tow. 079P resolutions have injective terms. 08BJ is applied to the levelwise exact F^Tow and to Δ⊣lim. Tower evaluation gives the evaluated K-injectives. 0BK6 holds for any abelian category with degreewise products and needs no exact products. Total-derived units are invertible on K-injectives, so all four unit identifications follow. I recomputed the shift square: π_n c G(s_I) = G(t_n)G(π_{n+1}) = π_n s_J c. The Roos-complex node gives (y,x)↦(-dy-(1-s)x,dx) and (0,ι), which matches the abstract cone convention. Step 11's fibre of −(1−s) has d^-(y,x) = (-dy+ux, dx), which I checked against Mathlib's mappingCone order. The map a(y,x)=(-y,x) intertwines the differentials and fixes (0,λ), so κ_T Q(j_T) = η^lim exactly. TR2 inverse rotation gives (p[-1],u,i) = (r,u,b). The declared tool uses lem-pur-kinjective-degreewise-existence and lem-pc-ringed-space-product-kinjective are generic black boxes and are accepted. The other cited nodes are on the route through sk-def-exchange or are Mathlib leaves. There is no cycle, the edge cases (zero, identity adjunction, constant and zero-transition towers) are fine, and no fixes were needed."
  }
 }
