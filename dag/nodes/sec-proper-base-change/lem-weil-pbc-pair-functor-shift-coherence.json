@@ -14,9 +14,102 @@
   "def-weil-triangulated-category",
   "def-weil-pbc-additive-functor"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Normalize the same-stage formulas. The unit equations for the scalar associators and their shift compatibility in [prop-weil-pbc-scalar-extension], at three equal fields, give $\\sigma^H_{E/E,1,K}=(\\sigma^H_{E/E,1,K})^2$. Cancel this isomorphism to get $\\sigma^H_{E/E,1,K}=1$; the iterated comparisons at every integer are consequently identity comparisons. The literal $T^H_{E/E}=1$ in [def-weil-pbc-finite-stage-pair-category] and the assumed $\\beta_{E/E}=1$ give, for every stage arrow $v:K\\to L$, $G[E,v]=[E,\\Phi_E(v)]$. Also $[E,v]\\circ[E,w]=[E,v\\circ w]$ and $[E,1]=1$ by the same-stage operations of that definition.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, exactness sentence; explicit stage-shift calculation, compared with lean/Sheaf/Paper/PbcDescentFunctors.lean:172-273"
+   }
+  },
+  {
+   "text": "Unpack the canonical integer shifts of [prop-weil-pbc-common-stage-calculus]. Iterating its displayed $[1]$ formula, or its inverse for negative powers, gives\n$$[M,u][n]=[M,(\\sigma^H_{M/F,n,L})^{-1}u[n]\\sigma^H_{M/E,n,K}].$$\nIndeed, substituting the formula twice concatenates the two scalar comparisons into their iterated comparison; the intervening comparisons cancel. The inverse formula is obtained by shifting the inverse comparison at $K[-1]$, so the same substitution applies to negative powers; the zero power is the identity. At $M=E$ the comparisons of step 1 are identities, so $j_E^H(v)[n]=[E,v[n]]$ and the inclusion shift comparisons have identity components. Write $z^{H,E}$ and $c^{H,E}$ for the zero and addition identifications in $\\mathcal C_E(H)$. The canonical zero and addition identifications in the pair category are, at $(E,K)$, $[E,z^{H,E}_K]$ and $[E,c^{H,E}_{n,m,K}]$: these are the identifications of the iterated powers on the stage object, included by $j_E^H$. Thus all computations involving only stage-$E$ arrows, shifts, zero and addition identifications can be made at $E$.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-scalar-extension"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, exactness sentence; explicit stage-shift calculation, compared with lean/Sheaf/Paper/PbcDescentFunctors.lean:172-273"
+   }
+  },
+  {
+   "text": "Fix $n$ and $f=[M,u]:(E,K)\\to(F,L)$. Abbreviate $A=T^T_{M/E}K$, $B=T^T_{M/F}L$, $t_K=\\sigma^T_{M/E,n,K}$, $t_L=\\sigma^T_{M/F,n,L}$, $q_K=\\sigma^S_{M/E,n,\\Phi_EK}$, $q_L=\\sigma^S_{M/F,n,\\Phi_FL}$, $b_K=\\beta_{M/E,K}$, $b'_K=\\beta_{M/E,K[n]}$, and similarly $b_L,b'_L$. Put $r_K=T^S_{M/E}(s_{E,n,K})$, $r_L=T^S_{M/F}(s_{F,n,L})$. By [def-weil-pbc-finite-stage-pair-category] these are the representatives at $M$ of the proposed components at the two endpoints. The assumed shift equation is exactly\n$$b_K[n]q_Kr_K=s_{M,n,A}\\Phi_M(t_K)b'_K,$$\nand likewise for $L$. Using the integer representative formula of step 2, naturality is the equality at $M$\n$$r_L(b'_L)^{-1}\\Phi_M(t_L^{-1}u[n]t_K)b'_K\n=q_L^{-1}(b_L^{-1}\\Phi_M(u)b_K)[n]q_Kr_K.$$\nPostcompose both sides with $b_L[n]q_L$. The left side becomes $s_{M,n,B}\\Phi_M(u[n])\\Phi_M(t_K)b'_K$; the right side becomes $(\\Phi_Mu)[n]s_{M,n,A}\\Phi_M(t_K)b'_K$. They agree by the given naturality of $s_{M,n}$ at $u:A\\to B$. Cancel the postcomposed isomorphism. Equality of these representatives gives equality of classes by [prop-weil-pbc-common-stage-calculus], proving naturality for every $f$.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, exactness sentence; explicit stage-shift calculation, compared with lean/Sheaf/Paper/PbcDescentFunctors.lean:172-273"
+   }
+  },
+  {
+   "text": "The component $[E,s_{E,n,K}]$ has inverse $[E,s_{E,n,K}^{-1}]$. Their composites are $[E,1]$ by the composition formula of [def-weil-pbc-finite-stage-pair-category]. The inverses are natural: in the naturality equation proved in step 3, multiply on the two ends by the inverse components. Hence the proposed $s_n$ are natural isomorphisms, with the specified components.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, exactness sentence; explicit stage-shift calculation, compared with lean/Sheaf/Paper/PbcDescentFunctors.lean:172-273"
+   }
+  },
+  {
+   "text": "For $X=(E,K)$, steps 1 and 2 express the right side of the required zero equation as\n$$[E,(z^{S,E}_{\\Phi_EK})^{-1}\\circ\\Phi_E(z^{T,E}_K)].$$\nThe assumed zero coherence of $s_{E,0}$ identifies this representative with $s_{E,0,K}$. It therefore represents $s_{0,X}$. Composition and inversion of these stage representatives are the operations of [def-weil-pbc-finite-stage-pair-category]; [prop-weil-pbc-common-stage-calculus] makes the equality an equality in the pair category.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, exactness sentence; explicit stage-shift calculation, compared with lean/Sheaf/Paper/PbcDescentFunctors.lean:172-273"
+   }
+  },
+  {
+   "text": "Fix arbitrary integers $n,m$ and $X=(E,K)$. By steps 1 and 2, every arrow on the right side of the required addition equation has a representative at $E$. Its composite is represented by\n$$(c^{S,E}_{n,m,\\Phi_EK})^{-1}\\circ(s_{E,n,K})[m]\\circ s_{E,m,K[n]}\\circ\\Phi_E(c^{T,E}_{n,m,K}).$$\nThis is $s_{E,n+m,K}$ by the assumed stage addition equation. The same-stage composition law of [def-weil-pbc-finite-stage-pair-category] and equality of classes from [prop-weil-pbc-common-stage-calculus] give the desired equation. No positivity of $n$ or $m$ is used: in particular $m=-n$ uses the canonical comparison $c_{n,-n}$, rather than identifying two shift expressions without it.",
+   "uses": [
+    "def-weil-pbc-finite-stage-pair-category",
+    "prop-weil-pbc-common-stage-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, exactness sentence; explicit stage-shift calculation, compared with lean/Sheaf/Paper/PbcDescentFunctors.lean:172-273"
+   }
+  },
+  {
+   "text": "Both $Gj_E^T$ and $j_E^S\\Phi_E$ send $K$ to $(E,\\Phi_EK)$ and $v$ to $[E,\\Phi_E(v)]$ by step 1 and the inclusion functors of [prop-weil-pbc-common-stage-calculus]. Thus the identity arrows $[E,1_{\\Phi_EK}]$ define the natural isomorphism $\\kappa_E$: its naturality square has the same arrow on both sides, and its inverse also has identity components. The composite shift comparison for $Gj_E^T$ is $s_{n,(E,K)}$ after applying $G$ to the identity inclusion comparison. The composite comparison for $j_E^S\\Phi_E$ is $[E,s_{E,n,K}]$, followed by the identity inclusion comparison. These are the same arrow by the definition of $s_n$ and step 2. Finally $\\kappa_{E,K[n]}$ and $(\\kappa_{E,K})[n]$ are identities (shifts preserve identities), so the required compatibility equation has this arrow on each side. These computations use only the same-stage identities/composition in [def-weil-pbc-finite-stage-pair-category], not preservation of distinguished triangles.",
+   "uses": [
+    "prop-weil-pbc-common-stage-calculus",
+    "def-weil-pbc-finite-stage-pair-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+    "place": "Proof, exactness sentence; explicit stage-shift calculation, compared with lean/Sheaf/Paper/PbcDescentFunctors.lean:172-273"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-finite-stage-pair-category",
+  "prop-weil-pbc-scalar-extension",
+  "prop-weil-pbc-common-stage-calculus"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-proper-base-change/sk-thm-properbasechange/prop-weil-pbc-descent-functors.proof.md",
+  "place": "Proof, exactness sentence; explicit stage-shift calculation, compared with lean/Sheaf/Paper/PbcDescentFunctors.lean:172-273"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +152,59 @@
    "results": "Eight hits in Shift: Adjunction.lean:208, CommShift.lean:147,346,488,503,505, CommShiftTwo.lean:84,173. Read CommShift.lean:138-169 and 470-507 and Induced.lean:20-135. The class specifies precisely the zero/add laws; ofHasShiftOfFullyFaithful assumes a fully faithful functor and changes the source shift, while Induced assumes fully faithful precomposition. Neither is this lemma.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "StageSystem|PairCategory|descendedCommShift|inclusionComp_commShift",
+   "results": "0 hits: . No pair-category or stage-system descent theorem in Mathlib/CategoryTheory.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Descent of natural shift isomorphisms on a directed system of categories with zero and addition coherence",
+   "results": "8 hits: CategoryTheory.Functor.CommShift.isoAdd, CategoryTheory.Functor.ShiftSequence.induced.isoZero, CategoryTheory.Functor.isoShift, CategoryTheory.HasShift.Induced.zero, CategoryTheory.Functor.ShiftSequence.shiftIso_zero, CategoryTheory.Functor.isoShiftZero, CategoryTheory.Functor.ShiftSequence.isoZero, CategoryTheory.shiftFunctorZero. General shift/induced-shift/quotient operations; no prescribed stage-pair functor descent with the displayed components and inclusion compatibility. Read CommShift.lean:138-169,470-507,520-550; Induced.lean:20-145,225-249; Quotient.lean:60-110. Fully faithful transfer changes the shift structure; quotient transfer needs a functor on a fixed category and its relation, not the present varying-stage input.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor.CommShift, CategoryTheory.NatTrans.CommShift",
+   "results": "12 hits: CategoryTheory.NatTrans.CommShift.id, CategoryTheory.NatTrans.CommShift.isoRefl_hom, CategoryTheory.NatTrans.CommShift, CategoryTheory.Functor.CommShift.ofIso_compatibility, CategoryTheory.NatTrans.CommShift.of_core, CategoryTheory.NatTrans.CommShift.leftUnitor, CategoryTheory.NatTrans.CommShift.rightUnitor, CategoryTheory.NatTrans.CommShift.of_iso_inv. General shift/induced-shift/quotient operations; no prescribed stage-pair functor descent with the displayed components and inclusion compatibility. Read CommShift.lean:138-169,470-507,520-550; Induced.lean:20-145,225-249; Quotient.lean:60-110. Fully faithful transfer changes the shift structure; quotient transfer needs a functor on a fixed category and its relation, not the present varying-stage input.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A functor on a filtered pair category inherits coherent integer shift comparisons from stage functors and shift compatible transition isomorphisms",
+   "results": "8 hits: CategoryTheory.Functor.CommShift.ofInduced, CategoryTheory.HasShift.induced, CategoryTheory.Functor.ShiftSequence.induced.shiftIso, CategoryTheory.Functor.CommShift.comp, CategoryTheory.shiftFunctor_of_induced, CategoryTheory.Functor.ShiftSequence.induced, CategoryTheory.Functor.ShiftSequence.induced_shiftMap, CategoryTheory.Functor.ShiftSequence.induced.shiftIso_hom_app_obj. General shift/induced-shift/quotient operations; no prescribed stage-pair functor descent with the displayed components and inclusion compatibility. Read CommShift.lean:138-169,470-507,520-550; Induced.lean:20-145,225-249; Quotient.lean:60-110. Fully faithful transfer changes the shift structure; quotient transfer needs a functor on a fixed category and its relation, not the present varying-stage input.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "def ofInduced|def ofHasShiftOfFullyFaithful|class CommShift|class NatTrans.CommShift",
+   "results": "6 hits: Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/CategoryTheory/Shift/CommShiftTwo.lean, Mathlib/CategoryTheory/Shift/Adjunction.lean. General shift/induced-shift/quotient operations; no prescribed stage-pair functor descent with the displayed components and inclusion compatibility. Read CommShift.lean:138-169,470-507,520-550; Induced.lean:20-145,225-249; Quotient.lean:60-110. Fully faithful transfer changes the shift structure; quotient transfer needs a functor on a fixed category and its relation, not the present varying-stage input.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Natural isomorphisms commuting with shifts descend along the inclusions into a filtered colimit of categories",
+   "results": "8 hits: CategoryTheory.Functor.commShiftIso_eq_ofInduced, CategoryTheory.Functor.ShiftSequence.induced.shiftIso_hom_app_obj, CategoryTheory.Functor.ShiftSequence.induced.shiftIso, CategoryTheory.Functor.ShiftSequence.induced_shiftIso_hom_app_obj, CategoryTheory.Functor.ShiftSequence.induced_shiftIso_hom_app_obj_assoc, CategoryTheory.Functor.ShiftSequence.induced_isoShiftZero_hom_app_obj_assoc, CategoryTheory.Functor.CommShift.OfComp.map_iso_hom_app, CategoryTheory.Quotient.LiftCommShift.iso. General shift/induced-shift/quotient operations; no prescribed stage-pair functor descent with the displayed components and inclusion compatibility. Read CommShift.lean:138-169,470-507,520-550; Induced.lean:20-145,225-249; Quotient.lean:60-110. Fully faithful transfer changes the shift structure; quotient transfer needs a functor on a fixed category and its relation, not the present varying-stage input.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "namespace LiftCommShift|def iso|def ofInduced|commShiftIso_eq_ofInduced|map_iso_hom_app",
+   "results": "17 hits: Mathlib/CategoryTheory/Shift/Induced.lean, Mathlib/CategoryTheory/Shift/Localization.lean, Mathlib/CategoryTheory/Shift/InducedShiftSequence.lean, Mathlib/CategoryTheory/Shift/Quotient.lean, Mathlib/CategoryTheory/Shift/Quotient.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean, Mathlib/CategoryTheory/Shift/CommShift.lean. General shift/induced-shift/quotient operations; no prescribed stage-pair functor descent with the displayed components and inclusion compatibility. Read CommShift.lean:138-169,470-507,520-550; Induced.lean:20-145,225-249; Quotient.lean:60-110. Fully faithful transfer changes the shift structure; quotient transfer needs a functor on a fixed category and its relation, not the present varying-stage input.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "prop-weil-pbc-descent-functors",
@@ -79,5 +221,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-pair-functor-shift-coherence",
+  "worker": "stage1",
+  "summary": "Wrote out naturality on an arbitrary representative using the stated beta/shift equation and naturality at its representing stage; proved invertibility, zero/addition coherence and the identity inclusion comparison at the original stage. No statement change and no new nodes. Read current blueprint and existing DAG statements; upstream StageSystem shifts alone do not state this functor-coherence theorem.",
+  "blueprint": "Realizes the exactness sentence of prop-weil-pbc-descent-functors.proof.md: the omitted descent of shift comparisons, their zero/addition coherence, and shift compatibility of the stage inclusion comparison. The argument stops before distinguished-triangle preservation."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-O2-dcd295b8e",
+  "group": "O2",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-dcd295b8e (reviewer sub-agent of L); spot-checked: Read the item in full, the three cited proof nodes' statements and blueprint_update, and main-20261015 prop-weil-pbc-descent-functors (statement and proof, the 'exact' sentence). The statement and stmt_deps are unchanged against side-live, so the target is not weakened. The item is unsplit in live and side-live and not in route-pivot-dropped, and there is no repair note. Recomputed every step. Step 1: σ/associator compatibility at E=E=E with unit associators and T_{E/E}=id gives σ=σ², so σ_{E/E}=1 and G[E,v]=[E,Φ_E v]. Step 3: naturality checked by hand. With r_L=T_{M/F}(s_F) and the β–σ hypothesis at M/E and M/F, postcomposing with b_L[n]q_L reduces both sides to s_{M,n,B}Φ_M(u[n])Φ_M(t_K)b'_K = Φ_M(u)[n]s_{M,n,A}Φ_M(t_K)b'_K, which is naturality of s_M; all types check. Steps 5 and 6: the zero and addition laws reduce to the stage laws, with c_{n,-n} kept. Step 7: κ has identity components and both composite comparisons are [E,s_{E,n,K}]. Edge cases checked: n=0, n<0, m=-n, Φ=id with β=1, E≠F. No cycle (BFS over 2933 dependency nodes); all cited nodes are in sk-thm-properbasechange; no new nodes; no SGA. Not a duplicate: lem-sbc-coherent-pair-functor-descent has no shifts, and lem-fd-common-stage-comparison-descent and lem-a1-texact-coefficient-stage-descent are other settings. Advisory: step 2 fixes the ℤ-shift zero and addition identifications of P_H as [E,z] and [E,c] itself, because common-stage-calculus states only [1] and [-1]. This is a natural unpacking of the item's 'canonical integer shifts', not a fault."
  }
 }
