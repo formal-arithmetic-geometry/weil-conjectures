@@ -20464,3 +20464,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 06:37 L: returned deliver/Q22/lem-sfb-dc-hom-small-coefficients (reviewer RETURN: RETURN for C5/D1 and D (restated parent clause). This answers the reopened human re-split note of 2026-10-21 for the 120)
 - 06:37 L: returned deliver/Q44/det-ctf-finite-proper-localizing (reviewer RETURN: C5/D1 (unneeded new node) and a misstated citation in step 4. The statement and stmt_deps are byte-identical to the side)
 - 06:37 L: returned deliver/Q57/lem-tw-ordinary-completed-integral-pullback (reviewer RETURN: C5/D1 under the 2026-10-21 re-split note (at least 2 new nodes of comparable size). Base: live and side-live still hold )
+- 06:37 L: returned deliver/NB/lem-weil-pbc-integral-stratified-perfect-characterization (reviewer RETURN: I read the 2026-10-21 human re-split note: ≤3000 chars, ≥4 nodes, every old argument must become a node. It was reopened)
