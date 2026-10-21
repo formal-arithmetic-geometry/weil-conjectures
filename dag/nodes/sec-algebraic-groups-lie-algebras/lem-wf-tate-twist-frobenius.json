@@ -16,7 +16,8 @@
   "def-wf-tate-twist",
   "def-wf-tensor-product",
   "def-wf-internal-hom",
-  "def-weil-local-frobenius-trace"
+  "def-weil-local-frobenius-trace",
+  "def-weil-frobenius-coefficient-twists"
  ],
  "proof": [
   {
@@ -250,19 +251,24 @@
  "lean": {
   "module": "Sheaf.Paper.WeilTateTwistFrobenius",
   "declaration": "WeilConjectures.wfTateTwist_closedFrobenius",
+  "declarations": [
+   "WeilConjectures.wfTateTwistLocalModel",
+   "WeilConjectures.wfTateTwist_closedFrobenius"
+  ],
   "file": "lean/Sheaf/Paper/WeilTateTwistFrobenius.lean",
   "statement": "theorem wfTateTwist_closedFrobenius (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum) (E : Padic.FiniteCoefficientFields c.l c.Qbar) (X₀ : Over (Spec (.of D.k₀))) [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom] (m : ℤ) (x : {x : X₀.left // x ∈ closedPoints X₀.left}) (ι : X₀.left.residueField x.val →+* D.k) (hι : ι.comp (X₀.hom.residueFieldAlgebraMap x.val) = algebraMap D.k₀ D.k) : localClosedFrobeniusCohomology c.l (pbcFiniteField.{u} c.l c.Qbar E) D c.different X₀ (wfTateTwistLocalModel D c X₀ E m) x ι hι 0 = (Nat.card (X₀.left.residueField x.val) : pbcFiniteField.{u} c.l c.Qbar E) ^ (-m) • 𝟙 _",
   "branch": "sheaf-dag",
-  "by": "Q13",
+  "by": "NL",
   "date": "2026-10-21",
-  "existing": false
+  "existing": false,
+  "note": "Repairs the stale missing wfTateTwistLocalModel reference after the signed-line interface changed. The helper is the existing canonical framework rationalWeilLine at the same finite coefficient field, formed on the same integral signed root lattice and root/evaluation-normalized maps, so that the recorded closed-point operator applies. No arbitrary equivalence, line basis, Frobenius map or stable lattice is chosen. The signed-line node is added as an explicit statement dependency; all original dependencies and the mathematical statement are retained."
  },
  "reviewed_lean": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-stage2-cc-b2b750170",
-  "group": "Q13",
+  "reviewer": "NT-stage2-cc-a69db0b65",
+  "group": "NL",
   "result": "pass",
-  "note": "Read the item, all 4 stmt_deps, both delivered modules, the report and the J comparison/system structures. Node files differ from side-live only in lean; statements verbatim; no new nodes; report sections present; no proofs beyond sorry. §1(B) repair of def-wf-tate-twist is legitimate: the old L audit record was slopmaster2 PadicAlgCl constant twists, not finite-E WeilD twists. wfTateTwist transports NA's real root-line framework twist (rationalWeilLine) along the pinned comparison (FdFrobeniusComparison.finite_functors HEq to mapOfNatIso; FdRationalStageComparison integral_identity/objects/tensors), then along the ∃!-normalized pullback comparison (HEq types equal via pbcQbarPullFamily_existsUnique Φ = pbcDescentPullback and pbcRationalIsoPullback). Positive/negative theorems pin E(m) as Weil pairs to wfTensorFrobenius (left-associated) and wfInternalHomFrobenius (inverse in contravariant slot); the functor spec matches u⊗id. No DAG cycle (def-wf-tate-twist not in the comparison node's 11,439-node closure); no duplicate WeilD twist. Item clauses match: every m, every closed point, universal ι/hι, Nat.card residue field ^(-m) • 𝟙 on H^0 (E(m) in degree 0); geometricFrobenius = id×Spec(φ_q⁻¹) gives q⁻¹ on Z_ℓ(1). Edge cases m=0,±1,≤-2, degree ≥2, empty X₀, ℓ=2, ramified E hold. Advisory: the module uses declarations of nodes outside def-wf-tate-twist stmt_deps (def-weil-frobenius-coefficient-twists, lem-fd-rational .choose); citers prop-base-linear and quarantined lem-fd-inversion still use the old Qbar declarations; some imports may be redundant. No compile (no file changed).; reverted the delivery's change of existing node(s) def-wf-tate-twist (--revert-nodes; kept as on sheaf-dag)"
+  "note": "Re-delivery repairs the live item module's reference to the undeclared wfTateTwistLocalModel (Q13's helper was in the reverted def-wf-tate-twist change; Q12's WfTateTwist does not declare it). The helper is rationalWeilLine at pbcFiniteField E: the same integral root lattice and signedLineMaps that WfTateTwist.lineMap is HEq-pinned to, i.e. the node's 'integral twist lattice followed by rationalization'. Not hollow; isomorphic to Q13's passed helper. Added stmt_dep def-weil-frobenius-coefficient-twists is a definition node whose declaration is used. Dependency node files are identical to live; the item node differs only in lean and stmt_deps; statement verbatim; all clauses match (all m, all closed points, universal ι/hι, H^0 endomorphism = Nat.card^(-m) • 𝟙); edge cases m=0, ±1, |m|≥2, degree d≥2, empty X₀, ℓ=2 and ramified E hold; sorry only; docstrings with 8 proof steps; both report sections present. No compile (no file changed). Advisory: no Lean bridge from WfTateTwist.weilLine to rationalWeilLine (proof step 7 via a theorem node); def-wf-tate-twist and def-weil-frobenius-coefficient-twists overlap (pre-existing); redundant public import of WfTateTwist."
  }
 }

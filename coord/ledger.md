@@ -23304,3 +23304,5 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:17 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
 - 2026-10-21T18:18:06Z L: superseded stage-1 delivery NS/lem-weil-boundary-comparison-composition-transport at 0b511ef53ee8d758f38113e460770d0fa2fdef5d; current completion retained; packet archived at refs/superseded/NS/lem-weil-boundary-comparison-composition-transport/0b511ef53ee8d758f38113e460770d0fa2fdef5d; stale return retired.
 - 18:18 L: merged deliver/NW/lem-sfb-internal-bar-ordered-cup (reviewer FIX; first push; new nodes: 2)
+- 18:19 L: merged deliver/NL/lem-wf-tate-twist-frobenius (stage 2; reviewer PASS; parallel immutable checks)
+- 18:19 L: merged deliver/Q21/lem-sf-locally-closed-relative-transpose-normalization (stage 2; reviewer PASS; parallel immutable checks)

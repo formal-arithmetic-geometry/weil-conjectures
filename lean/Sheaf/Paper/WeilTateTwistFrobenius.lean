@@ -1,7 +1,7 @@
 /-
 Copyright (c) 2026 The SHEAF contributors. All rights reserved.
 Released under Apache 2.0 license as described in the file LICENSE.
-Authors: SHEAF group Q13
+Authors: SHEAF group NL
 -/
 module
 
@@ -9,6 +9,9 @@ public import Sheaf.Paper.WfTateTwist
 public import Sheaf.Paper.LocalFrobeniusTrace
 public import Sheaf.Paper.WeilTensorProduct
 public import Sheaf.Paper.WeilInternalHom
+public import Sheaf.Paper.FrobeniusCoefficientTwistsCanonical
+import Sheaf.Paper.WfTateTwistCompatibility
+import Sheaf.Paper.RationalCoefficientCategoryComparison
 import WeilConjectures.Mathlib.RingTheory.RootsOfUnity.AlgebraicallyClosed
 import Sheaf.SixFunctors.FrobeniusPointTransportNatural
 import Sheaf.AlgebraicGeometry.FrobeniusDetailed
@@ -28,12 +31,31 @@ with its root-normalized Weil map. The stalk operator is the existing closed-poi
 operator, including residue-degree iteration and the semilinear point return.
 -/
 
-@[expose] public section
+@[expose] public noncomputable section
 set_option autoImplicit false
 universe u
 open CategoryTheory AlgebraicGeometry AlgebraicGeometry.Scheme
 
 namespace WeilConjectures
+
+/-- The framework presentation of the same integral signed root line, followed by
+rationalization, on which the local closed-point operator is defined. The published
+rationalWeilLine uses the completed-to-ordinary pullback comparison and the signed
+root/evaluation maps. WfTateTwist.line is this same line restricted along the canonical
+completed coefficient isomorphism, and WfTateTwist.lineMap is normalized by HEq to
+these very signed maps. Thus this presentation retains the integral lattice and its
+specified Weil datum, including the unit and negative duals.
+Source: main-20261015, lem-wf-tate-twist-frobenius, interpretation of the stalk;
+def-wf-tate-twist, integral signed lines and rationalization
+(blueprint: lem-wf-tate-twist-frobenius). -/
+def wfTateTwistLocalModel
+    (D : FiniteFieldDatum.{u}) (c : D.CoefficientDatum)
+    (X₀ : Over (Spec (.of D.k₀)))
+    [IsSeparated X₀.hom] [LocallyOfFiniteType X₀.hom] [QuasiCompact X₀.hom]
+    (E : Padic.FiniteCoefficientFields c.l c.Qbar) (m : ℤ) :
+    sfWeilComplex D c.l c.different X₀ (pbcFiniteField.{u} c.l c.Qbar E) :=
+  FrobeniusCoefficientTwists.rationalWeilLine D c.l c.different X₀
+    (pbcFiniteField.{u} c.l c.Qbar E) m
 
 /-- At every closed point, geometric Frobenius on the signed Tate line E(m) acts
 by the negative m-th power of the actual residue-field cardinality.
