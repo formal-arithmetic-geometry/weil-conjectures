@@ -19,7 +19,9 @@
   "def-weil-derived-direct-image",
   "def-compact-support-direct-image-detailed",
   "def-weil-abstract-derived-category",
-  "def-weil-coefficient-cohomology-modules"
+  "def-weil-coefficient-cohomology-modules",
+  "def-pod-integral-completed-comparison-data",
+  "def-weil-constructible-heart"
  ],
  "proof": [
   {
@@ -294,5 +296,41 @@
   "group": "O2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-ead19e1ca (reviewer sub-agent of L); spot-checked: I read the whole item: the unchanged statement, all ten steps, and every cited statement. The statement matches what the creating Q108 delivery wrote. I checked the source (main-20261015 prop-weil-operations, proof sentence 2 and the final cohomology clause) and BBD 1.3.3(ii). The item is still unsplit in live and side-live, so it is not superseded. It is not on the dropped list, has no re-split note, cites no SGA and closes no cycle. Steps 1-8 and 10 are correct; I checked each equation. Step 1: P is t-exact, which comes from prop-constructible-truncations and gives the c± of lem-pod-texact-truncation-comparison. Steps 2-3: the fixed-pair equations for the truncations and for the maps ι and π. Step 4: the shift structure θ[r]s. Steps 5-6: the third arrow, using uniqueness of the whole truncation triangle; the square δ_{PK}c^+=c^-[1]sP(δ) is oriented correctly and gives δθ_V=θ_{U[1]}P(δ). Step 7: the H^i structure e_{i,K}. Step 8: the successive-truncation identifications. Step 9: the point-transport chain is correct and uses lem-weil-frobenius-point-transport-natural (2) as stated. I tested the zero complex, Λ[-j] at every cutoff, negative shifts, W_0=Spec k_0 and non-separated W_0. Fault fixed (C4): at the Q̄_ℓ stage, step 9 takes H^i from def-weil-abstract-derived-category, which only defines H^i on D(A). Fib_s lands in D^b_fd(Q̄_ℓ), whose H^i is the stagewise functor of def-weil-coefficient-cohomology-modules. I added that node to step 9's uses, to proof_deps and to stmt_deps, and reworded the citation; no cycle results. lem-a1-fixed-pair-truncation-orthogonality overlaps only the elementary steps 2-3, so it is not a duplicate. I accept both declared tool uses: lem-weil-heart-short-exact-triangles (1) and lem-weil-frobenius-point-transport-natural (2).; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.FixedPairTruncationCohomology",
+  "declaration": "WeilConjectures.fixedPairRationalTruncationCohomology",
+  "declarations": [
+   "WeilConjectures.FixedPairTruncationCohomologySpec",
+   "WeilConjectures.FixedPairRationalShiftNormalization",
+   "WeilConjectures.fixedPairRationalTStructure",
+   "WeilConjectures.fixedPairCommonStageTStructure",
+   "WeilConjectures.FixedPairCommonShiftNormalization",
+   "WeilConjectures.fixedPairRationalTruncationCohomology",
+   "WeilConjectures.fixedPairCommonTruncationCohomology",
+   "WeilConjectures.fixedPairRationalPointPullback",
+   "WeilConjectures.fixedPairRationalPointTransport",
+   "WeilConjectures.fixedPairRationalPointFrobenius",
+   "WeilConjectures.fixedPairRationalPointCohomology",
+   "WeilConjectures.fixedPairCommonPointPullback",
+   "WeilConjectures.fixedPairCommonPointTransport",
+   "WeilConjectures.fixedPairCommonPointFrobenius",
+   "WeilConjectures.fixedPairCommonPointCohomology"
+  ],
+  "file": "lean/Sheaf/Paper/FixedPairTruncationCohomology.lean",
+  "statement": "theorem fixedPairRationalTruncationCohomology : ∃ s : (sfWeilFrobeniusPullback D l hl Y₀ E).CommShift ℤ, FixedPairRationalShiftNormalization D l hl Y₀ E s ∧ (fun [shift : (sfWeilFrobeniusPullback D l hl Y₀ E).CommShift ℤ] ↦ FixedPairTruncationCohomologySpec (fixedPairRationalTStructure D l hl Y₀ E) (sfWeilFrobeniusPullback D l hl Y₀ E)) (shift := s)",
+  "branch": "newtargets-dag",
+  "by": "Q19",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Four theorem declarations state the rational and common-stage truncation/triangle/cohomology clauses and their point-fibre cohomology equations. Helper predicates retain the canonical signed Roos shift and its localization/inclusion normalization. The unavailable FieldWeilShriekShiftData is not imported; the existing integral comparison is used directly. Repair of H2 at 852730d93a64: the existing comparison structures and field helpers are owned by def-pod-integral-completed-comparison-data; the comparison existence theorem is a proof dependency only. Lean source and mathematical statement are unchanged."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-e43adf107",
+  "group": "Q19",
+  "result": "pass",
+  "note": "Re-delivery after H2 RETURN at 852730d9. Item Lean module byte-identical (sha256 68d0b0fa), so the earlier full substance check holds: c± pinned, mapOfNatIso structures, ι/π/third-arrow equations, H^i, pinned Roos/descent/localization shift, point clauses. Item record changes only stmt_deps (theorem lem-a1-integral-pullback-completed-comparison replaced by new def-pod-integral-completed-comparison-data), proof_deps and Step 4 uses (+theorem), and lean.note; statement and proof verbatim unchanged. New node existing:true on unchanged Sheaf.Paper.IntegralPullbackCompletedComparison: all 21 recorded decls exist; the item uses only Comparison (primary decl). Statement matches ShiftCoordinates/ShiftDescent/Comparison fields (1)-(5), asserts no inhabitation, citations = stmt_deps (6 live nodes); towerIso is the ∃!-choose owned by cited def-weil-pbc-completed-pullback; coefficient nodes reachable transitively. No compile (no file changed); maintainer dry run passed preflight. Advisories: Second reading section is direct-delivery, not independent; Comparison.shifts uses canonical pbcActualCompletedPullShift owned by lem-weil-pbc-ringed-topoi-module-adjunction, outside the new node's stmt_deps (inherited, maintainer note)."
  }
 }

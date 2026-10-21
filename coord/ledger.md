@@ -23051,3 +23051,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 16:30 L: returned deliver/NB/det-lem-stratified-lattice-scheme (reviewer RETURN: L: independent stage-2 immutable head 81e6cb0c0b67: H2: stmt_dep lem-weil-pbc-lattice-pair-image-classification is a the)
 - 2026-10-21T16:32:41Z L: superseded stage-1 delivery Q06/lem-sf-open-exchange-roos-restriction at e06ff2bae0784a8d8f82f82493961cca52df2a2a; current completion retained; packet archived at refs/superseded/Q06/lem-sf-open-exchange-roos-restriction/e06ff2bae0784a8d8f82f82493961cca52df2a2a; stale return retired.
 - 16:33 L: returned deliver/NZ/lem-sfb-snc-tame-finite-fibre-classification (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-sfb-snc-tame-finite-fibre-classification: cited no)
+- 16:34 L: merged deliver/Q19/lem-pod-fixed-pair-truncation-cohomology (stage 2; reviewer PASS; parallel immutable checks)
