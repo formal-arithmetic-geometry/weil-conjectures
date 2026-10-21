@@ -20041,3 +20041,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 03:53 L: returned deliver/NA/lem-weil-pbc-proetale-projection-formula-tensor-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-pbc-proetale-projection-formula-tensor-cohere)
 - 03:53 L: returned deliver/U2/Sheaf.Paper.IntegralScalarExtensionWellDefined (reviewer RETURN: (reviewer C-07128, head 071285055) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.IntegralScalar)
 - 03:54 L: merged deliver/Q13/lem-sfb-closed-support-bounded-continuity (reviewer PASS; first push; new nodes: 0)
+- 03:54 L: merged deliver/Q73/lem-sfb-scalar-inverse-image-tower-diagram (reviewer PASS; first push; new nodes: 0)

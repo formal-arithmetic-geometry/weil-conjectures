@@ -14,9 +14,84 @@
   "def-pur-sheaf-tensor-product",
   "def-weil-abstract-derived-category"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $F=h^{-1}$ on underlying sheaves of sets, and transport ring and module operations by its finite-product comparison [def-weil-pbc-algebraic-inverse-image]. Let $p_{rs}^V:s_V\\times M\\to E_{rs}^VM$ be the sheafified pure pairing and $u_{rs}^V(m)=p_{rs}^V(1,m)$. The normalized inverse-image tensor comparison [lem-weil-pbc-algebraic-inverse-image-tensor-comparison], applied to the $r_Y$-modules $s_Y,M$, gives\n$$\\chi_{h,M}^{rs}F(p_{rs}^Y)=p_{rs}^X$$\nafter the canonical identification $F(s_Y\\times M)=s_X\\times F(M)$. This is the specified balanced-coequalizer comparison: its defining factorization has precisely this equation, which determines the tensor map [def-weil-pbc-ringed-tensor-section-calculus]. The equation is an equality of maps of sheaves, so it applies to arbitrary generalized sections over every test sheaf on $X$. The comparison is $s_X$-linear: multiplication by $z$ on the first input sends either side on $(s,m)$ to $p_{rs}^X(zs,m)$; transport preserves ring multiplication and the module action. Tensor universality gives the action equation on the quotient. In particular $\\chi^{rs}F(u_{rs}^Y)=u_{rs}^X$ since $F$ transports the unit section.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), its bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), normalized comparison; blueprint det-prop-scalar-six-pullback.proof.md (3)"
+   }
+  },
+  {
+   "text": "For $V=X,Y$, the displayed formula for $t_V$ respects both balances. The $B_V$ relation gives the same value $c\\,b_V(\\beta)b_V(b')\\otimes m$ from $c\\,b_V(\\beta)\\otimes(b'\\otimes m)$ and $c\\otimes(\\beta b'\\otimes m)$. The inner $A_V$ relation gives $c\\,b_V(b')b_Va_V(\\alpha)\\otimes m=c\\,b_V(b')\\otimes\\alpha m$. Additivity in each input is distributivity. The inverse insertion respects the $A_V$ relation since $1\\otimes\\alpha m=a_V(\\alpha)\\otimes m$ and the outer $B_V$ balance moves $a_V(\\alpha)$ to $c$. Thus these formulas descend through the balanced tensors and sheafification [def-pur-sheaf-tensor-product, def-weil-pbc-ringed-tensor-section-calculus]. Their composites are identities: one gives $c\\otimes m$, and the other gives $c\\,b_V(b')\\otimes(1\\otimes m)=c\\otimes(b'\\otimes m)$. The maps are $C_V$-linear because their first factor is multiplied by $c$. In particular, putting $w_Y=u_{BC}^Y\\circ u_{AB}^Y$ on underlying sheaves, $t_Yw_Y=u_{AC}^Y$. These verifications use no flatness or invertibility.",
+   "uses": [
+    "def-pur-sheaf-tensor-product",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), its bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), normalized comparison; blueprint det-prop-scalar-six-pullback.proof.md (3)"
+   }
+  },
+  {
+   "text": "Fix $M$ and put $D=C_Y\\otimes_{B_Y}(B_Y\\otimes_{A_Y}M)$ and $P=C_X\\otimes_{A_X}F(M)$. For $C_X$-linear $d,e:F(D)\\to P$, equality follows from $dF(w_Y)=eF(w_Y)$. Indeed, the underlying sheaf adjunction [def-weil-pbc-ringed-topos-morphism] gives adjuncts $\\bar d=h_*d\\circ\\eta_D$ and $\\bar e=h_*e\\circ\\eta_D$. They are $C_Y$-linear: naturality of $\\eta$ for addition and scalar action, with the product comparison, gives $\\eta_D(cz)=\\eta_C(c)\\eta_D(z)$, and $h_*d,h_*e$ respect the transported action [def-weil-pbc-algebraic-inverse-image]. Twice applying the extension/restriction adjunction of [def-weil-pbc-ringed-tensor-section-calculus] shows a $C_Y$-linear map from $D$ is determined by its composite with $w_Y$: the two adjunction units insert $1\\otimes-$ in succession. Naturality of $\\eta$ now gives $\\bar d w_Y=h_*(dF(w_Y))\\eta_M$ and the analogous equation for $e$. Hence the assumed equality implies $\\bar d=\\bar e$, and injectivity of the underlying adjunction implies $d=e$. This is a direct composite of the cited Hom bijections; it does not assume points of the topos or sectionwise surjectivity of a tensor pairing.",
+   "uses": [
+    "def-weil-pbc-ringed-topos-morphism",
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-pbc-ringed-tensor-section-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), its bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), normalized comparison; blueprint det-prop-scalar-six-pullback.proof.md (3)"
+   }
+  },
+  {
+   "text": "Take $d=\\chi_h^{AC}F(t_Y)$ and $e=t_X\\,E_{BC}^X(\\chi_h^{AB})\\,\\chi_h^{BC}$, with the indicated whiskering at $M$. Both are $C_X$-linear by steps 1 and 2. On $F(w_Y)$, the first route is\n$$F(M)\\xrightarrow{F(u_{AC}^Y)}F(C_Y\\otimes_{A_Y}M)\\xrightarrow{\\chi^{AC}}C_X\\otimes_{A_X}F(M),$$\nso its value is $1\\otimes m$. For the second route, step 1 for $B\\to C$ sends the transported outer unit to $1\\otimes F(u_{AB}^Y)(m)$. Extension of scalars of $\\chi^{AB}$ sends this to $1\\otimes\\chi^{AB}F(u_{AB}^Y)(m)=1\\otimes(1\\otimes m)$. Finally $t_X$ sends it to $1\\otimes m$. These are equalities of sheaf maps from $F(M)$, using the unit-normalized comparison in step 1. More generally, on the transported generalized triple $(c,b',m)$ the first route is $c\\,b_X(b')\\otimes m$, while the second is $c\\otimes(b'\\otimes m)\\mapsto c\\,b_X(b')\\otimes m$; $F$ transports multiplication and $b_Y$ to multiplication and $b_X$. Thus the computation uses the actual final-ring action, rather than an unspecified isomorphism. Step 3 proves the required equality on all of $F(D)$.",
+   "uses": [
+    "def-weil-pbc-algebraic-inverse-image",
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), its bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), normalized comparison; blueprint det-prop-scalar-six-pullback.proof.md (3)"
+   }
+  },
+  {
+   "text": "The equality holds for every $A_Y$-module $M$. The comparisons in step 1 are natural; the balancing formulas in step 2 are natural because a module map $v:M\\to N$ changes $c\\,b_V(b')\\otimes m$ to $c\\,b_V(b')\\otimes v(m)$ along either route [def-weil-pbc-ringed-tensor-section-calculus]. Therefore the component equality is the displayed equality of natural transformations. For a cochain complex $M^\\bullet$, apply this equality in each degree. Naturality with respect to each differential $d^n$ says that both component families commute with the differentials, so they are equal maps of complexes by the definition [def-weil-abstract-derived-category]. There is no totalization or exchange of tensor factors, and hence no sign to choose. This proves exactly the termwise assertion, without localization or a K-flat hypothesis.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03EK (section-tensor-product), its bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), normalized comparison; blueprint det-prop-scalar-six-pullback.proof.md (3)"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+  "def-weil-pbc-ringed-tensor-section-calculus",
+  "def-pur-sheaf-tensor-product",
+  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
+  "place": "(3), compatibility of the inverse-image comparison with scalar reassociation; explicit verification using Stacks Tags 03EK, 03EL and 03D2"
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -52,10 +127,46 @@
    "results": "8 hits: SheafOfModules.Presentation.map_π_eq, SheafOfModules.Presentation.mapRelations_mapGenerators_assoc, PresheafOfModules.Monoidal.tensorObj, SheafOfModules.mapFree, PresheafOfModules.Monoidal.tensorObjMap, π_tensor_id_preserves_coequalizer_inv_colimMap_desc, id_tensor_π_preserves_coequalizer_inv_colimMap_desc, TopCat.Sheaf.objSupIsoProdEqLocus_inv_snd",
    "date": "2026-10-21",
    "verdict": "no match: ordinary module scalar associativity and sheaf pullback associativity do not state this equality for sheafified balanced tensor maps and inverse image with a ring-sheaf tower"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For a geometric morphism of sheaf topoi the canonical inverse image tensor comparison commutes with scalar extension associativity for a tower of commutative ring sheaves",
+   "results": "8 hits: SheafOfModules.pullback_assoc, SheafOfModules.pullbackComp, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, SheafOfModules.pushforward_assoc, SheafOfModules.pullbackObjFreeIso_hom_naturality_assoc, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.conjugateEquiv_pullbackComp_inv, SheafOfModules.pullbackObjFreeIso_hom_naturality",
+   "date": "2026-10-21",
+   "verdict": "no match: candidates provide ordinary-module reassociation or continuous-site pullback associativity, not the specified balanced square for an arbitrary geometric morphism of sheaf topoi"
+  },
+  {
+   "tool": "grep",
+   "query": "extendScalarsComp|pullback_assoc|pullback.*tensor",
+   "results": "8 hits: Mathlib/Algebra/Category/ModuleCat/Pseudofunctor.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Presheaf/Pullback.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean, Mathlib/Algebra/Category/ModuleCat/ChangeOfRings.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: candidates provide ordinary-module reassociation or continuous-site pullback associativity, not the specified balanced square for an arbitrary geometric morphism of sheaf topoi",
+   "subdirectory": "Algebra/Category/ModuleCat"
+  },
+  {
+   "tool": "leansearch",
+   "query": "The inverse image of sheaves of modules commutes with the reassociation C tensor B of B tensor A M to C tensor A M for a ring sheaf tower",
+   "results": "8 hits: PresheafOfModules.monoidalCategory, TensorProduct.AlgebraTensorModule.tensorTensorTensorComm, Algebra.TensorProduct.tensorTensorTensorComm_symm_tmul, SheafOfModules.pullback_assoc, Algebra.TensorProduct.assoc_symm_tmul, Bimod.AssociatorBimod.inv, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc, Algebra.TensorProduct.assoc",
+   "date": "2026-10-21",
+   "verdict": "no match: candidates provide ordinary-module reassociation or continuous-site pullback associativity, not the specified balanced square for an arbitrary geometric morphism of sheaf topoi"
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules.pullback, ModuleCat.extendScalarsComp",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "no match: candidates provide ordinary-module reassociation or continuous-site pullback associativity, not the specified balanced square for an arbitrary geometric morphism of sheaf topoi"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of the balanced tensor quotient comparison under a finite product preserving left adjoint and scalar reassociation for three ring sheaves",
+   "results": "8 hits: PresheafOfModules.Monoidal.tensorHom, PresheafOfModules.Monoidal.tensorObjMap, id_tensor_π_preserves_coequalizer_inv_desc, PresheafOfModules.Monoidal.tensorObj, π_tensor_id_preserves_coequalizer_inv_desc, PresheafOfModules.Monoidal.tensorObj_map_tmul, id_tensor_π_preserves_coequalizer_inv_colimMap_desc, π_tensor_id_preserves_coequalizer_inv_colimMap_desc",
+   "date": "2026-10-21",
+   "verdict": "no match: candidates provide ordinary-module reassociation or continuous-site pullback associativity, not the specified balanced square for an arbitrary geometric morphism of sheaf topoi"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-prop-scalar-six-pullback",
@@ -72,5 +183,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-scalar-inverse-image-tower-diagram",
+  "worker": "stage1",
+  "summary": "Statement unchanged. Expanded the specified balanced square into normalized pure-tensor formulas, explicit balancing and coefficient-action checks, an injectivity argument through the geometric adjunction and two scalar adjunctions, and the two composite calculations. Termwise extension follows by naturality. Reused existing nodes; no new nodes.",
+  "blueprint": "Realizes det-prop-scalar-six-pullback.proof.md (3), final sentence that the pullback isomorphisms are compatible with scalar-tower associativity, restricted to the ordinary inverse-image square needed before localization.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "why": "Generic normalized tensor comparison for a finite-limit-preserving geometric inverse image on arbitrary small sites, used only for its specified pure-pairing formula. The scalar-six unit does not reprove that ordinary inverse-image construction."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q73-00f5070a3",
+  "group": "Q73",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q73-00f5070a3 (reviewer sub-agent of L); spot-checked: PASS, no fixes written. The delivery is one commit with no new nodes. The item statement is byte-identical to live side-live, and the item is not in route-pivot-dropped.txt. Live it is still unsplit, so no other group has superseded it. Its parent det-prop-scalar-six-pullback (Q20 re-split) cites it at step 8, and the item has no re-split note of its own. Source checked: blueprint main-20261015 det-prop-scalar-six-pullback.proof.md (3), last sentence (scalar associativity compatibility), supported by Stacks 03EK/03EL; no SGA is used. Step 1: lem-weil-pbc-algebraic-inverse-image-tensor-comparison is applied by its statement to the r-modules s_Y and M. The pure-pairing normalization chi F(p^Y)=p^X identifies the specified coequalizer comparison through the section-calculus uniqueness, and s_X-linearity follows by bilinear universality. Step 2: I re-derived the B and inner A balances for t_V and for its inverse, and both composites are identities; elementary. Step 3: injectivity via the adjunct f_*d after eta_D, which is C_Y-linear by eta naturality and the ringed-topos f_* action. The two extension/restriction units 1 tensor - and eta naturality give d = e; no points and no surjectivity of pure tensors are used. Step 4: both routes send F(w_Y) to u^X_AC. Route e goes through chi^BC at B tensor_A M, then E_BC(chi^AB), then t_X, and the generalized-triple check fixes the orientation. Step 5: naturality, then termwise on complexes by def-weil-abstract-derived-category; no signs. Edge cases checked: h=id, identity coefficient arrows, M=0, zero rings, the nonflat tower Z->Z/4->Z/2 on a point. Duplicate search (reassociation, scalar tower, extendScalarsComp, inverse-image tensor) found none; the closest hits were def-sfb-modobj-extend-restrict-adjunction, lem-sbc-pullback-comparison-comp and lem-sfb-pullback-from-point-comp-monoidal. Accepted tool_use: the off-unit lem-weil-pbc-algebraic-inverse-image-tensor-comparison, recorded in split_report only."
  }
 }
