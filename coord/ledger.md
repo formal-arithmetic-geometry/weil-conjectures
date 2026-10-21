@@ -23528,3 +23528,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 19:36 L: returned deliver/Q10/lem-trf-point-system-transport-descent (reviewer RETURN: L: independent stage-2 immutable head 7023c01703ec: H2/theorem-stmt_dep: the delivery adds lem-weil-point-automorphism-r)
 - 19:36 L: returned deliver/Q18/lem-zl-classical-weil-filtration-heart-transport (reviewer RETURN: L: independent stage-2 immutable head 7824c8832548: H3/H4: ZlClassicalRealization.pullback (l.124) is a free NatIso func)
 - 19:36 L: returned deliver/N0/lem-per-adic-normalized-fibre-comparisons (reviewer RETURN: L: independent stage-2 immutable head 7aee4a4f4eec: Re-delivery of RETURNed 33163f20. Finding 1 (theorem stmt_dep with p)
+- 19:36 L: returned deliver/Q12/lem-sf-package-compactified-tower-comparisons (reviewer RETURN: L: independent stage-2 immutable head 84d348dc42ce: H3/H5: SfPackageSupportCoefficientLaws is verbatim the fields compac)
