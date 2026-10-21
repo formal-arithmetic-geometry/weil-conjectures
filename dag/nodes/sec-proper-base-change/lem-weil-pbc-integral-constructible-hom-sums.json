@@ -21,62 +21,49 @@
  ],
  "proof": [
   {
-   "text": "Use the coefficient-sheaf identification in the statement throughout. Put $B=\\bigoplus_i M_i$ in $D$, write $\\iota_i:M_i\\to B$ for the coprojections, and set $G(N)=R\\operatorname{Hom}_{A_X}(K,N)\\in D(A)$ using the scalar-valued definition of global derived Hom. Apply the existing bounded-below compactness theorem with $T=X$, the same $E,A,\\varpi,K$, and this family. Its scheme and constructibility hypotheses are exactly ours; the given common lower bound is sufficient, and a small countable family is in particular small. It gives an isomorphism $\\alpha:\\bigoplus_iG(M_i)\\to G(B)$ whose composite with the $i$th coprojection is $G(\\iota_i)$. This invokes the stronger, already existing derived-Hom theorem; no compactness assertion for unbounded-below families is used.",
+   "text": "Put N_i=M_i[q] and shift the supplied colimiting cofan by q. The shift functor is an equivalence, so the new cofan is colimiting, and its common lower bound is n-q. Choose a coproduct of the G(N_i) in D(A), where G=adicGlobalRHom(K,-). Such coproducts exist by the termwise module coproduct construction and representatives. Apply integralConstructible_boundedBelow_compactness to N_i and the shifted cofan. Its canonical comparison is an isomorphism, so the cofan with legs G(iota_i[q]) is colimiting.",
    "uses": [
     "lem-weil-pbc-integral-constructible-bounded-below-compactness",
-    "def-weil-pbc-adic-global-derived-hom"
+    "def-weil-pbc-adic-global-derived-hom",
+    "lem-pc-derived-module-direct-sums"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12 (and Lemma 6.8.11(3) for the coefficient-category convention); existing common-lower-bound formulation."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply $H^q:D(A)\\to\\operatorname{Mod}(A)$ to $\\alpha$. The derived-module cohomology-coproduct theorem, with $R=A$ and $E_i=G(M_i)$, identifies $H^q(\\bigoplus_iG(M_i))$ with $\\bigoplus_iH^qG(M_i)$ by the maps induced by its coprojections. It has no boundedness requirement on these $E_i$. Consequently the composite $\\beta:\\bigoplus_iH^qG(M_i)\\to H^qG(B)$ is an isomorphism of $A$-modules, and its $i$th component is $H^qG(\\iota_i)$. This is valid for every integer $q$, including negative $q$, and for the empty family.",
+   "text": "Apply derivedModuleHomology_coproduct in degree zero to that colimiting cofan. Forget the A-module structure and use the additive-group universe-lift functor to put the result in the universe of derived morphisms. Both functors preserve coproducts, so the resulting cofan of additive groups is colimiting. No bound on the global RHom outputs is needed.",
    "uses": [
     "lem-pc-derived-module-homology-coproduct"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/injectives.tex",
-    "place": "Tag 07D9, Lemma lemma-derived-products, clauses (1)-(2); termwise sums and exactness of module sums."
-   }
+   "elementary": false
   },
   {
-   "text": "Apply the ringed-site closed symmetric monoidal theorem to the small site $X_{\\mathrm{proet}}$ and $\\mathcal O=A_X$. Its tensor-Hom adjunction and symmetry make $H_K(N)=R\\mathcal Hom_{A_X}(K,N)$ a right adjoint of $K\\otimes^{\\mathbf L}-$, as required by the sections-model theorem. That theorem gives $\\theta_N:H^qG(N)\\cong\\operatorname{Hom}_D(K,N[q])$ for every $N$, naturally in $N$. To check coefficients, use the definition of $G$: its derived sections are computed on K-injective complexes of $A_X$-modules. Forgetting $A$ from their global-section complexes gives exactly the complexes defining abelian-group-valued derived sections in the model theorem. Kernels and images are unchanged on forgetting scalars, so the displayed cohomology identification applies to the underlying groups of $H^qG(N)$. Multiplication by $a\\in A$ comes from the constant scalar section and is postcomposition by $a\\,1_N$ on the model Hom complex. Naturality of the model identification for that endomorphism shows that $\\theta_N$ is $A$-linear. Its stated naturality on K-injective target maps descends through localization and therefore applies to every derived coprojection $\\iota_i$. No boundedness or flatness of $N$ is required.",
+   "text": "On the pro-etale site, evaluation at the terminal object is naturally the group of maps from the unit sheaf: evaluate a unit map at 1, and extend a section at the terminal object to all objects by restriction. This identifies adicGlobalSections followed by forgetting scalars with the ordinary sections functor. The forgetful functor from modules to additive groups is exact; the standard composition comparison for right derived functors and its homology comparison therefore identify the underlying zeroth cohomology of adicDerivedGlobalSections with zeroth hypercohomology. Apply rhom_global_sectionsOfUniverses to the recorded internal Hom. This gives a natural additive isomorphism from the universe lift of H^0 G(N) to Hom(K,N). Only the additive comparison is needed: the final displayed map is already A-linear, and the module forgetful functor reflects colimits.",
    "uses": [
-    "lem-sf-ringed-derived-closed-symmetric-monoidal",
-    "lem-sfb-derived-internal-hom-sections-model",
-    "def-weil-pbc-adic-global-derived-hom"
+    "def-weil-pbc-adic-global-derived-hom",
+    "lem-pur-rhom-global-sections"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-cohomology.tex",
-    "place": "Tags 08J7 and 08J9 (derived tensor-Hom adjunction), 08JA (global derived Hom), and 0A96 (K-flat/K-injective model); shifted Hom complex in every degree."
-   }
+   "elementary": false
   },
   {
-   "text": "Conjugate $\\beta$ by $\\bigoplus_i\\theta_{M_i}$ and $\\theta_B$. On the $i$th summand, naturality gives $u:K\\to M_i[q]\\mapsto\\iota_i[q]\\circ u:K\\to B[q]$. The universal property of the module direct sum therefore identifies this conjugate with precisely the canonical map in the statement. Since all three maps used in the conjugation are isomorphisms, the required map is an isomorphism. For $I=\\varnothing$, $B=0$ and both sides are zero, in agreement with the same argument.",
+   "text": "Transport the additive colimiting cofan through the natural isomorphism of the preceding step, using its components on every N_i and on the shifted coproduct point. Naturality says that its legs are postcomposition by iota_i[q]. Reflect this colimit along the forgetful functor from A-modules. Compare the resulting module colimit with the concrete direct-sum colimit: its unique comparison is definitionally the DirectSum.toModule map of the statement. The comparison of two colimits is an isomorphism, hence its underlying map is bijective. This argument applies unchanged to the empty family and to negative q.",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 6.8.12, passage to cohomology and the coprojection-induced comparison."
-   }
+   "elementary": true
   }
  ],
  "proof_deps": [
   "lem-weil-pbc-integral-constructible-bounded-below-compactness",
   "def-weil-pbc-adic-global-derived-hom",
+  "lem-pc-derived-module-direct-sums",
   "lem-pc-derived-module-homology-coproduct",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal",
-  "lem-sfb-derived-internal-hom-sections-model"
+  "lem-pur-rhom-global-sections"
  ],
  "proof_origin": {
-  "by": "document",
+  "by": "worker",
+  "group": "T9",
+  "date": "2026-10-21",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.12; its cohomological consequence via Stacks Tags 07D9, 08J7, 08J9 and 08JA."
+  "place": "Lemma 6.8.12, followed by zeroth cohomology after shifting targets; Stacks Tags 07D9 and 08JA.",
+  "description": "Lean proof uses the existing natural zeroth global-RHom comparison and exact scalar forgetting; no new mathematical statements."
  },
  "mathlib_searches": [
   {
@@ -209,9 +196,7 @@
   ]
  },
  "tool_uses": [
-  "lem-pc-derived-module-homology-coproduct",
-  "lem-sfb-derived-internal-hom-sections-model",
-  "lem-sf-ringed-derived-closed-symmetric-monoidal"
+  "lem-pc-derived-module-homology-coproduct"
  ],
  "reviewed": {
   "date": "2026-10-21",
@@ -239,5 +224,15 @@
   "group": "Q53",
   "result": "pass",
   "note": "Clause-by-clause match of integralConstructible_hom_sums against the node: same scheme hypotheses and same category for K (PbcIntegralCategory, the published support of the def-weil-pbc-bounded-constructible-complete record) as the landed compactness theorem. Countable family in Type (u+1) with a common lower bound, any colimit cofan, every integer q. The map is DirectSum.toModule of postcomposition with the shifted coprojections, with the canonical scalar-section module structure, and is stated to be bijective. Empty family, negative q and universes checked. No definitions; proof is sorry only; source, blueprint and proof-step docstrings present, with every named declaration verified to exist. Node record differs from live only by the lean field; lean.statement is verbatim in the file. nt_compile --json clean in 17.5 s. No findings."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T9",
+  "result": "pass",
+  "landing": "20261021T120703-L-3933127",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
