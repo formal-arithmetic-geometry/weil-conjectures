@@ -12,13 +12,97 @@
   "def-weil-abstract-derived-category",
   "def-pc-perfect-ring-complex",
   "def-sc-finitely-presented-module",
-  "def-weil-derived-cohomology-sheaves",
   "def-weil-pbc-projective-module",
-  "pur9-def-thick"
+  "pur9-def-thick",
+  "def-weil-pbc-free-module"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "By [def-pc-perfect-ring-complex], choose a bounded complex $C^\\bullet$ of finitely generated projective $A$-modules representing $P$. Fix any term interval $[a,b]$ for this representative, so $C^q=0$ for $q<a$ or $q>b$. The cohomology functor of [def-weil-abstract-derived-category] gives $H^q(P)\\cong H^q(C^\\bullet)=Z^q/B^q$, with $Z^q=\\ker(d^q:C^q\\to C^{q+1})$ and $B^q=\\operatorname{im}(d^{q-1})\\subseteq Z^q$ because $d^qd^{q-1}=0$. Outside $[a,b]$, the ambient module $C^q$ is zero, so $Z^q=B^q=0$ and $H^q(P)=0$. This works for each bounded finite-projective representative, not merely for the chosen one.",
+   "uses": [
+    "def-pc-perfect-ring-complex",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0657 (definition-perfect), bounded finite-projective representative; cohomology formula from derived.tex, Tag 05RU (definition-derived-category)."
+   }
+  },
+  {
+   "text": "For every $q$, the module $C^q$ is finitely generated. Since $A$ is Noetherian, [lem-weil-pbc-noetherian-submodule-finite] applies to $Z^q\\subseteq C^q$ and makes $Z^q$ finitely generated. If $z_1,\\ldots,z_t$ generate $Z^q$, their images generate $Z^q/B^q$: a class represented by $z=\\sum_j a_jz_j$ equals $\\sum_j a_j[z_j]$. Thus $H^q(C^\\bullet)$ is finitely generated. Apply [lem-sc-noetherian-finite-module-finite-presentation] to this module over the same Noetherian ring $A$. It is finitely presented, and the isomorphism of step 1 gives the assertion for $H^q(P)$: compose a finite presentation onto $H^q(C^\\bullet)$ with that isomorphism; its kernel is unchanged.",
+   "uses": [
+    "lem-weil-pbc-noetherian-submodule-finite",
+    "lem-sc-noetherian-finite-module-finite-presentation"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00IK (lemma-Noetherian-basic), first and second assertions; Tag 00FP (lemma-Noetherian-finite-type-is-finite-presentation), parts (1)-(2)."
+   }
+  },
+  {
+   "text": "Now assume that $A$ is a PID and retain the specified surjection $v:A^r\\to N$. Set $S=\\ker v\\subseteq A^r$. The standard coordinate vectors form a finite basis of $A^r$: a tuple $x$ has the unique expansion $x=\\sum_{j\\in\\operatorname{Fin}(r)}x_j e_j$. Apply [lem-weil-pbc-pid-submodule-finite-basis] to obtain a basis $b_1,\\ldots,b_s$ of $S$, with $s\\geq0$ finite. Define $h:A^s\\to S$ by $h((a_i))=\\sum_i a_i b_i$; uniqueness and existence of basis coordinates say exactly that $h$ is bijective and its inverse is linear. Let $u$ be $h$ followed by the inclusion $S\\hookrightarrow A^r$. Both maps are injective, and $h$ is onto $S$, hence $u$ is injective and $\\operatorname{im}u=S=\\ker v$. In particular $vu=0$. This construction keeps $v$ itself and places no torsion-free assumption on $N$.",
+   "uses": [
+    "lem-weil-pbc-pid-submodule-finite-basis"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ASU (lemma-split-off-free-part), part (1), finite-free submodule argument; exact finite-basis form in Mathlib Submodule.nonempty_basis_of_pid."
+   }
+  },
+  {
+   "text": "Form $F^\\bullet$ with $F^{-1}=A^s$, $F^0=A^r$, differential $d^{-1}=u$, and zero terms elsewhere. The maps $\\varepsilon^0=v$ and $\\varepsilon^q=0$ for $q\\ne0$ define an augmentation $\\varepsilon:F^\\bullet\\to N[0]$, since $vu=0$. Its degree $-1$ cohomology is $\\ker u=0$. Its degree $0$ cohomology is $A^r/\\operatorname{im}u$ and $H^0(\\varepsilon)$ sends $[x]$ to $v(x)$. This map is onto because $v$ is onto; if $v(x)=0$, then $x\\in\\ker v=\\operatorname{im}u$, so $[x]=0$ and the map is injective. In all other degrees both cohomology modules vanish. Thus $H^q(\\varepsilon)$ is an isomorphism for every $q$, exactly the quasi-isomorphism criterion of [def-weil-abstract-derived-category].",
+   "uses": [
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 066Q (lemma-perfect-module), proof of (2) implies (1), written out for the length-one resolution; derived.tex Tag 05RU (definition-derived-category)."
+   }
+  },
+  {
+   "text": "The coordinate vectors give finite bases of $A^s$ and $A^r$, and the zero terms have the empty basis [def-weil-pbc-free-module]. In particular every term of $F^\\bullet$ is finitely generated, and [lem-weil-pbc-free-module-projective] makes every term projective. The complex is bounded in $[-1,0]$, and step 4 identifies its image in $D(A)$ with $N[0]$. By [def-pc-perfect-ring-complex], $N[0]$ is perfect. Empty coordinate sets are allowed throughout, so the same reasoning includes $N=0$, $r=0$ or $s=0$ whenever the given surjection permits them.",
+   "uses": [
+    "def-weil-pbc-free-module",
+    "lem-weil-pbc-free-module-projective",
+    "def-pc-perfect-ring-complex"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0657 (definition-perfect) and Tag 066Q (lemma-perfect-module), proof of (2) implies (1); free modules are projective by algebra.tex Tag 05CF (lemma-characterize-projective)."
+   }
+  },
+  {
+   "text": "Apply [lem-sf-perfect-ring-classical-generator] over the commutative ring $A$. Its statement identifies the perfect objects of $D(A)$ with the thick subcategory generated by $A[0]$, including closure under isomorphisms and direct summands. The perfect object $N[0]$ from step 5 therefore belongs to that thick subcategory, as required.",
+   "uses": [
+    "lem-sf-perfect-ring-classical-generator"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/more-algebra.tex",
+    "place": "Tag 0ATI (lemma-perfect-ring-classical-generator)."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-pc-perfect-ring-complex",
+  "def-weil-abstract-derived-category",
+  "lem-weil-pbc-noetherian-submodule-finite",
+  "lem-sc-noetherian-finite-module-finite-presentation",
+  "lem-weil-pbc-pid-submodule-finite-basis",
+  "def-weil-pbc-free-module",
+  "lem-weil-pbc-free-module-projective",
+  "lem-sf-perfect-ring-classical-generator"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/more-algebra.tex",
+  "place": "Explicit scalar supplement combining Tags 0657, 066Q and 0ATI with algebra.tex Tags 00IK/00FP and more-algebra.tex Tag 0ASU. Motivated by Bhatt–Scholze, Proposition 6.8.11(3), proof paragraph on a finite projective resolution of the scalar module."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -68,10 +152,45 @@
    "results": "{\"t\": \"2026-10-21T06:50:04Z\", \"tool\": \"leansearch\", \"query\": \"Over a principal ideal domain finite presented modules admit two term finite free perfect models while perfect complexes over Noetherian rings have finitely presented cohomology\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.free_iff_isTorsionFree\", \"Module.FinitePresentation.mk\", \"Module.free_of_finite_type_torsion_free\", \"Module.finitePresentation_of_projective_of_exact\", \"instFiniteOfFinitePresentation\", \"Module.FinitePresentation\", \"Module.free_of_finite_type_torsion_free'\", \"Module.finitePresentation_of_finite\"], \"digest\": \"d7f848affee23259\"}",
    "date": "2026-10-21",
    "verdict": "no match: finitePresentation_of_finite and free_iff_isTorsionFree are separate algebra ingredients; no returned declaration supplies both the derived perfect-complex cohomology assertion and the augmented two-term model with its perfect/thick membership"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Perfect complexes over a Noetherian ring have finitely presented cohomology and finite modules over principal ideal domains have length one finite free resolutions",
+   "results": "{\"t\": \"2026-10-21T08:11:59Z\", \"tool\": \"leanfinder\", \"query\": \"Perfect complexes over a Noetherian ring have finitely presented cohomology and finite modules over principal ideal domains have length one finite free resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.HasProjectiveDimensionLE\", \"CategoryTheory.HasProjectiveDimensionLT\", \"CategoryTheory.HasInjectiveDimensionLE\", \"CategoryTheory.HasInjectiveDimensionLT\", \"CochainComplex.IsKProjective\", \"CategoryTheory.HasProjectiveDimensionLT.mk\", \"CategoryTheory.HasProjectiveDimensionLT.mk'\", \"CategoryTheory.hasProjectiveDimensionLT_iff\"], \"digest\": \"a87cb6f24124692c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: returned declarations provide algebra ingredients or generic derived-category/projective-dimension notions; none states both clauses or the specified augmented two-term model"
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsPerfect\", \"homology\"",
+   "results": "{\"t\": \"2026-10-21T08:11:59Z\", \"tool\": \"loogle\", \"query\": \"\\\"IsPerfect\\\", \\\"homology\\\"\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: returned declarations provide algebra ingredients or generic derived-category/projective-dimension notions; none states both clauses or the specified augmented two-term model"
+  },
+  {
+   "tool": "grep",
+   "query": "(perfect|Perfect).*(FinitePresentation|homology)|homology.*(FinitePresentation|perfect)",
+   "results": "{\"t\": \"2026-10-21T08:11:59Z\", \"tool\": \"grep\", \"query\": \"(perfect|Perfect).*(FinitePresentation|homology)|homology.*(FinitePresentation|perfect)\", \"sub\": \"\", \"ok\": true, \"n_hits\": 0, \"note\": \"\", \"top\": [], \"digest\": \"4f53cda18c2baa0c\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: returned declarations provide algebra ingredients or generic derived-category/projective-dimension notions; none states both clauses or the specified augmented two-term model"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Perfect derived complexes over Noetherian rings have bounded finitely presented cohomology and PID modules have two term finite free models",
+   "results": "{\"t\": \"2026-10-21T08:12:37Z\", \"tool\": \"leansearch\", \"query\": \"Perfect derived complexes over Noetherian rings have bounded finitely presented cohomology and PID modules have two term finite free models\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"Module.finitePresentation_of_finite\", \"Module.finitePresentation_iff_finite\", \"HasDerivedCategory.standard\", \"Module.finitePresentation_of_projective\", \"Module.free_iff_isTorsionFree\", \"Module.free_of_flat_of_isLocalRing\", \"DerivedCategory\", \"CategoryTheory.HasExt.instHasSmallLocalizedShiftedHomHomologicalComplexIntUpQuasiIsoOfIsGEOfIsLEOfNat\"], \"digest\": \"c3f9acf646150205\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: returned declarations provide algebra ingredients or generic derived-category/projective-dimension notions; none states both clauses or the specified augmented two-term model"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Every perfect complex has finite cohomology over a Noetherian ring and finite presented modules over PID admit perfect resolutions",
+   "results": "{\"t\": \"2026-10-21T08:12:48Z\", \"tool\": \"leanfinder\", \"query\": \"Every perfect complex has finite cohomology over a Noetherian ring and finite presented modules over PID admit perfect resolutions\", \"sub\": \"\", \"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CochainComplex.IsKProjective\", \"CategoryTheory.HasProjectiveDimensionLT\", \"CategoryTheory.ProjectiveResolution.instIsKProjectiveCochainComplex\", \"CochainComplex.IsKInjective\", \"DerivedCategory.isLE_iff\", \"CategoryTheory.ProjectiveResolution.instIsGECochainComplexOfNatInt\", \"CochainComplex.IsKProjective.leftOrthogonal\", \"CochainComplex.isKProjective_of_projective\"], \"digest\": \"c875695584daa548\"}",
+   "date": "2026-10-21",
+   "verdict": "no match for the whole item: returned declarations provide algebra ingredients or generic derived-category/projective-dimension notions; none states both clauses or the specified augmented two-term model"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-integral-stratified-perfect-characterization",
@@ -92,5 +211,29 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-scalar-perfect-cohomology-and-pid-models",
+  "worker": "stage1",
+  "summary": "Q12: kept the statement, gave six explicit proof steps, replaced the irrelevant sheaf-cohomology statement dependency by the free-module definition, reused the existing Noetherian submodule and finite-presentation leaves and perfect-generator theorem, and created one exact Mathlib finite-basis leaf for arbitrary PIDs. Checked the original surjection is retained and the augmentation on every cohomology degree; all zero-rank cases are included. No Lean written or compiled.",
+  "blueprint": "Realizes the scalar finite-projective-resolution supplement supporting the first sentence, \"Choose an integral lattice for K\", of thm-weil-pbc-finite-extension.proof.md, through lem-weil-pbc-integral-stratified-perfect-characterization; source argument is Bhatt–Scholze Proposition 6.8.11(3), finite projective resolution paragraph.",
+  "tool_uses": [
+   {
+    "node": "lem-sf-perfect-ring-classical-generator",
+    "why": "Uses the general ring-theoretic identity Perf(A) = thick(A[0]) only to obtain thick membership of the constructed module model; the proper-base-change unit supplies no such general scalar characterization."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-sf-perfect-ring-classical-generator"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q12-c76e32530",
+  "group": "Q12",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q12-c76e32530 (reviewer sub-agent of L); spot-checked: I read the item, the new leaf, all twelve cited statements, the sources at their places (Stacks 0657/066Q/0ATI/0ASU(1), Bhatt–Scholze 6.8.11(3) proof 'finite projective resolution', blueprint thm-weil-pbc-finite-extension.proof first sentence), and Mathlib PID.lean:280 Submodule.nonempty_basis_of_pid (CommRing/IsPrincipalIdealRing/IsDomain at lines 98/103/139). The statement is unchanged from live. The item is still unsplit live, has no repair note and is not dropped. The stmt_deps swap (sheaf cohomology def → free-module def) is correct. Steps: (1) vanishing outside any representative's term interval via H^r∘Q≅H^r. (2) Z^q is f.g. by the Noetherian-submodule leaf, the quotient is f.g. (argument written out), and it is f.p. by the 00FP leaf. (3) Basis of ker v from the new leaf gives an injective u with im u = ker v; the given v is kept, with no torsion-free hypothesis. (4) Chain map from vu=0; H^{-1}=0; H^0(ε) is bijective; other degrees vanish. (5) Finite free ⇒ f.g. projective, so N[0] is perfect via the localization. (6) Perf = thick(A[0]). I accept the tool use of lem-sf-perfect-ring-classical-generator: it is a generic ring fact, used as a black box, and no node of the unit gives it. The new node is an exact Mathlib leaf, self-contained, and strictly smaller than the item (no D1). My whole-DAG PID/submodule/basis search finds no duplicate. Edge cases checked: Z→Z/2 gives [Z -2-> Z]; r=0; s=0; N=0; S=⊥; non-PID k[x,y] counterexample confirms the PID hypothesis is needed. No cycle (closure of 72 nodes). Advisory only: existing lem-sc-coherent-ring-perfect-complex-cohomology would also give clause 1's finite presentation; the leaf has no lean_audit key, as 7 of 27 recent mathlib-status nodes on side-live. No fixes."
  }
 }
