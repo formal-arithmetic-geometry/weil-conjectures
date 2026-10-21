@@ -7,9 +7,10 @@ module
 
 public import Sheaf.AlgebraicGeometry.FiniteLocallyClosedStratification
 public import Sheaf.AlgebraicGeometry.NoetherianStratumDetection
-public import Sheaf.CategoryTheory.RingedDerivedRestrictionGeneral
 public import Mathlib.Algebra.Homology.DerivedCategory.HomologySequence
-import Sheaf.CategoryTheory.Sites.GeometricInverseImageExact
+import WeilConjectures.Mathlib.Algebra.Homology.DerivedCategory.ExactFunctor
+import Mathlib.AlgebraicGeometry.Morphisms.QuasiSeparated
+import Mathlib.Data.Finset.Max
 
 /-!
 # Global cohomological bounds from finite stratified local bounds
@@ -94,6 +95,118 @@ theorem exists_global_bounds_of_stratified_local_bounds
         ((∀ α : Fin S.n, m α = 0) → a = 0 ∧ b = 0) ∧
         ∀ q : ℤ, q < a ∨ b < q →
           IsZero ((DerivedCategory.homologyFunctor _ q).obj K) := by
-  sorry
+  classical
+  let (α : Fin S.n) : IsImmersion (S.immersion α) := S.isImmersion α
+  let (α : Fin S.n) : TopologicalSpace.NoetherianSpace (S.domain α) :=
+    (S.immersion α).isEmbedding.noetherianSpace
+  let (α : Fin S.n) : IsLocallyNoetherian (S.domain α) :=
+    LocallyOfFiniteType.isLocallyNoetherian (S.immersion α)
+  -- Compact strata let us refine each cover by finitely many affine opens.
+  have hrefine (α : Fin S.n) := QuasiCompactCover.exists_isAffineOpen_of_isCompact
+    (V α).toPreZeroHypercover
+    (show IsCompact ((⊤ : (S.domain α).Opens) : Set (S.domain α)) from isCompact_univ)
+  choose m label W haff hcov using hrefine
+  have hsurj (α : Fin S.n) (x : S.domain α) :
+      ∃ k y, y ∈ W α k ∧ (V α).f (label α k) y = x := by
+    have hx : x ∈ ⋃ k, (V α).f (label α k) '' (W α k : Set _) := by
+      rw [hcov α]
+      trivial
+    simpa only [Set.mem_iUnion, Set.mem_image, SetLike.mem_coe] using hx
+  let C (α : Fin S.n) : Scheme.Cover (precoverage @WeaklyEtale) (S.domain α) :=
+    Cover.mkOfCovers (Fin (m α)) (fun k ↦ (W α k).toScheme)
+      (fun k ↦ (W α k).ι ≫ (V α).f (label α k))
+      (fun x ↦ by
+        obtain ⟨k, y, hy, heq⟩ := hsurj α x
+        exact ⟨k, ⟨y, hy⟩, heq⟩)
+      (fun k ↦ by
+        have : WeaklyEtale ((V α).f (label α k)) :=
+          (Scheme.ofArrows_mem_precoverage_iff (P := @WeaklyEtale)).1
+            (V α).mem₀.2 |>.2 (label α k)
+        infer_instance)
+  let (α : Fin S.n) (k : Fin (m α)) : IsAffine (W α k).toScheme := haff α k
+  let (α : Fin S.n) (k : (C α).I₀) : QuasiCompact ((C α).f k) := by
+    change Fin (m α) at k
+    change QuasiCompact ((W α k).ι ≫ (V α).f (label α k))
+    exact quasiCompact_of_compactSpace _
+  let (α : Fin S.n) : Finite (C α).I₀ :=
+    inferInstanceAs (Finite (Fin (m α)))
+  let (α : Fin S.n) : QuasiCompactCover (C α).toPreZeroHypercover :=
+    QuasiCompactCover.of_finite
+  have hC (α : Fin S.n) :
+      (C α).presieve₀ ∈ proetalePrecoverage (S.domain α) :=
+    ⟨presieve₀_mem_qcPrecoverage_iff.mpr inferInstance, (C α).mem₀⟩
+  -- The original members selected by these opens still form a pro-etale cover.
+  let E (α : Fin S.n) : PreZeroHypercover (S.domain α) :=
+    { I₀ := Fin (m α)
+      X k := (V α).X (label α k)
+      f k := (V α).f (label α k) }
+  let (α : Fin S.n) : QuasiCompactCover (E α) :=
+    QuasiCompactCover.of_hom (𝒰 := E α) (𝒱 := (C α).toPreZeroHypercover)
+      { s₀ k := k
+        h₀ k := (W α k).ι }
+  let V' (α : Fin S.n) : Scheme.Cover proetalePrecoverage (S.domain α) :=
+    { __ := E α
+      mem₀ := ⟨presieve₀_mem_qcPrecoverage_iff.mpr inferInstance,
+        (ofArrows_mem_precoverage_iff (P := @WeaklyEtale)).mpr ⟨fun x ↦ by
+          obtain ⟨k, y, _, heq⟩ := hsurj α x
+          exact ⟨k, y, heq⟩,
+          fun k ↦ (ofArrows_mem_precoverage_iff (P := @WeaklyEtale)).mp
+            (V α).mem₀.2 |>.2 (label α k)⟩⟩ }
+  let S' := Stratification.ofNoetherianSpace S.n S.stratum S.isLocallyClosed_stratum
+    S.iUnion_stratum_eq_univ S.pairwise_disjoint_stratum S.domain S.immersion
+    S.isImmersion S.range_immersion
+  let R' := (sheafCompose (ProEt.topology X)
+    (forget₂ CommRingCat.{u + 1} RingCat.{u + 1})).obj R
+  -- Detect a cohomology module by viewing it as a derived object in degree zero.
+  have hdetect (q : ℤ)
+      (hq : ∀ (α : Fin S.n) (k : Fin (m α)),
+        q < lower α (label α k) ∨ upper α (label α k) < q) :
+      IsZero ((DerivedCategory.homologyFunctor _ q).obj K) := by
+    let M := (DerivedCategory.homologyFunctor _ q).obj K
+    have hs : IsZero ((DerivedCategory.singleFunctor _ 0).obj M) := by
+      apply (proEtale_derived_stratum_cover_detection X S' V' R').1
+      intro α k
+      let P := proEtaleRingModuleInverseImage ((V α).f (label α k) ≫ S.immersion α) R'
+      have hm : IsZero (P.obj M) :=
+        (hlocal α (label α k) q (hq α k)).of_iso
+          ((P.mapDerivedCategoryHomologyFunctorIso q).app K)
+      exact ((DerivedCategory.singleFunctor _ 0).map_isZero hm).of_iso
+        ((P.mapDerivedCategorySingleFunctor 0).app M)
+    exact ((DerivedCategory.homologyFunctor _ 0).map_isZero hs).of_iso
+      ((DerivedCategory.singleFunctorCompHomologyFunctorIso _ 0).symm.app M)
+  refine ⟨m, label, W, fun α k ↦ (haff α k).isCompact, hC, ?_⟩
+  -- Take attained extrema on the finite family, with [0, 0] for the empty family.
+  let T := Σ α : Fin S.n, Fin (m α)
+  by_cases ht : Nonempty T
+  · let : Nonempty T := ht
+    have huniv : (Finset.univ : Finset T).Nonempty := Finset.univ_nonempty
+    obtain ⟨i, _, hi⟩ := Finset.exists_min_image Finset.univ
+      (fun t : T ↦ lower t.1 (label t.1 t.2)) huniv
+    obtain ⟨j, _, hj⟩ := Finset.exists_max_image Finset.univ
+      (fun t : T ↦ upper t.1 (label t.1 t.2)) huniv
+    have hlo (α : Fin S.n) (k : Fin (m α)) :
+        lower i.1 (label i.1 i.2) ≤ lower α (label α k) := hi ⟨α, k⟩ (Finset.mem_univ _)
+    have hup (α : Fin S.n) (k : Fin (m α)) :
+        upper α (label α k) ≤ upper j.1 (label j.1 j.2) := hj ⟨α, k⟩ (Finset.mem_univ _)
+    refine ⟨lower i.1 (label i.1 i.2), upper j.1 (label j.1 j.2),
+      (hinterval _ _).trans (hup _ _), hlo, hup, ?_, ?_, ?_⟩
+    · exact fun _ ↦ ⟨⟨i.1, i.2, rfl⟩, ⟨j.1, j.2, rfl⟩⟩
+    · intro hempty
+      have hlt := i.2.isLt
+      have hz := hempty i.1
+      omega
+    · intro q hq
+      apply hdetect q
+      intro α k
+      rcases hq with hq | hq
+      · exact Or.inl (hq.trans_le (hlo α k))
+      · exact Or.inr ((hup α k).trans_lt hq)
+  · have hempty (α : Fin S.n) (k : Fin (m α)) : False := ht ⟨⟨α, k⟩⟩
+    refine ⟨0, 0, le_rfl, ?_, ?_, ?_, fun _ ↦ ⟨rfl, rfl⟩, ?_⟩
+    · exact fun α k ↦ (hempty α k).elim
+    · exact fun α k ↦ (hempty α k).elim
+    · rintro ⟨α, ⟨k⟩⟩
+      exact (hempty α k).elim
+    · exact fun q _ ↦ hdetect q (fun α k ↦ (hempty α k).elim)
 
 end AlgebraicGeometry.Scheme

@@ -20,86 +20,53 @@
  ],
  "proof": [
   {
-   "text": "Write the given finite affine covering as $X=\\bigcup_{t=1}^N X_t$, with each coordinate ring Noetherian. Each $|X_t|$ is Noetherian by [lem-sc-affine-noetherian-underlying-space], so every subset of it is quasi-compact by [lem-sfb-noetherian-space-compact-subsets]. An immersion identifies its source homeomorphically with its image, by the closed/open factorization in [def-weil-closed-immersion]. Hence $|S_\\alpha|\\cap |X_t|$ is quasi-compact. Restrict an arbitrary open cover of $S_\\alpha$ to these finitely many intersections, choose a finite subcover on each, and take their union. This proves each $S_\\alpha$ quasi-compact. The same argument with $S_\\alpha$ replaced by $X$ proves $X$ quasi-compact in the sense of [def-weil-pbc-quasi-compact-scheme]. The given affine cover also makes $X$ locally Noetherian by [pqf-def-locnoeth]; thus $X$ satisfies the locally-Noetherian and quasi-compact hypotheses of the detection lemma used below.",
+   "text": "The Noetherian-scheme instances give a Noetherian underlying space and local Noetherianity of X. Install the immersion structures of S. Each stratum embeds in X, hence has Noetherian underlying space and is compact by [lem-sfb-noetherian-space-compact-subsets]. It is locally Noetherian by [pqf-def-locnoeth], since an immersion is locally of finite type [def-weil-closed-immersion]. This also makes each stratum quasi-separated. Thus the compactness convention [def-weil-pbc-quasi-compact-scheme] applies without an extra hypothesis.",
    "uses": [
-    "lem-sc-affine-noetherian-underlying-space",
     "lem-sfb-noetherian-space-compact-subsets",
-    "def-weil-closed-immersion",
     "pqf-def-locnoeth",
+    "def-weil-closed-immersion",
     "def-weil-pbc-quasi-compact-scheme"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/topology.tex",
-    "place": "Tag 04ZA (lemma-Noetherian-quasi-compact), combined with properties.tex Tag 01OZ (lemma-Noetherian-topology), and the given finite affine cover"
-   }
+   "elementary": true
   },
   {
-   "text": "For each $\\alpha$, take an affine open cover of the scheme $S_\\alpha$ and choose a finite subcover $S_\\alpha=\\bigcup_{r=1}^{m_\\alpha}V_{\\alpha r}$ using step 1. Over each affine $V_{\\alpha r}$ the covering condition of [sk-def-pe-site] supplies finitely many indices $j$ and affine opens $W_{\\alpha rk}\\subset U_{\\alpha,j(\\alpha,r,k)}\\times_{S_\\alpha}V_{\\alpha r}$ mapping onto $V_{\\alpha r}$; its affine-target refinement clause says this is a pro-etale covering of $V_{\\alpha r}$. The displayed fibre product is the inverse-image open subscheme of the covering member, so each $W_{\\alpha rk}$ is also an affine, hence quasi-compact, open subscheme of that original member. Zariski covers are pro-etale covers by [sk-def-pe-site]. Covering transitivity, axiom (ii) of [def-weil-pbc-sites-and-cohomology], therefore makes all $W_{\\alpha rk}\\to S_\\alpha$ a covering. There are finitely many selected opens on each of finitely many strata. Empty strata require no selected opens.",
+   "text": "Apply QuasiCompactCover.exists_isAffineOpen_of_isCompact to the top open of each stratum and its given pro-etale cover [sk-def-pe-site]. This gives finitely many labels j and affine opens W in the original covering members, whose images cover the stratum. Their composites are weakly etale; they are quasi-compact because their sources are compact and the stratum is quasi-separated [lem-weil-pbc-qcqs-morphism-permanence]. Therefore the finite family C of selected opens is a pro-etale cover, using QuasiCompactCover.of_finite. It has a refinement morphism to the finite family E of their original covering members. QuasiCompactCover.of_hom transfers quasi-compact covering from C to E, and E is jointly surjective with weakly etale component maps. Consequently E too is a pro-etale cover. This permits using the original local hypotheses directly, without composing derived inverse images along the open inclusions.",
    "uses": [
     "sk-def-pe-site",
-    "def-weil-pbc-sites-and-cohomology"
+    "lem-weil-pbc-qcqs-morphism-permanence"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tag 0989 (definition-fpqc-covering), finite affine refinement; ordinary Zariski covers and the site covering-transitivity axiom"
-   }
+   "elementary": false
   },
   {
-   "text": "Every restriction here uses the actual inverse-image ring, with no extension to a different ring. The inverse-image functors of [def-weil-proetale-inverse-image] are inverse images of the associated geometric morphisms. By [lem-trf-geometric-inverse-image-exact] they are exact also on modules over the inverse-image ring. Applied termwise to a representative of $K$, [lem-weil-pbc-exact-functor-complex-cohomology] identifies their cohomology with inverse image of $H^q(K)$. This calculation is valid for an unbounded complex because kernels and images in a fixed degree use only its three adjacent terms. Iterated inverse image agrees with inverse image along the composite, by the composition clause (4) of [def-weil-pbc-sites-and-cohomology]: the direct images are successive precompositions by base change, and their left adjoints are uniquely isomorphic. Thus restriction of $K|_{U_{\\alpha j}}$ to a selected $W_{\\alpha rk}\\subset U_{\\alpha j}$ is $K|_{W_{\\alpha rk}}$, and it has zero cohomology outside the same original interval $[a_{\\alpha j},b_{\\alpha j}]$. This is also the exact termwise restriction convention of [def-weil-pbc-ringed-derived-restriction].",
-   "uses": [
-    "def-weil-proetale-inverse-image",
-    "lem-trf-geometric-inverse-image-exact",
-    "lem-weil-pbc-exact-functor-complex-cohomology",
-    "def-weil-pbc-ringed-derived-restriction",
-    "def-weil-pbc-sites-and-cohomology"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 04JC (lemma-flat-pullback-exact), transported inverse-image coefficients; homology.tex Tag 010N (lemma-exact-functor) and derived.tex Tag 015F (lemma-right-derived-exact-functor)"
-   }
-  },
-  {
-   "text": "Let $T$ be the finite set of selected triples $(\\alpha,r,k)$, retaining the label $j(\\alpha,r,k)$ of the original covering member. If $T\\ne\\varnothing$, put $a=\\min_{T}a_{\\alpha,j(\\alpha,r,k)}$ and $b=\\max_{T}b_{\\alpha,j(\\alpha,r,k)}$. Since every selected lower bound is at most its upper bound, $a\\le b$. If $q<a$, then $q<a_{\\alpha,j(\\alpha,r,k)}$ for every selected triple; if $q>b$, then $q>b_{\\alpha,j(\\alpha,r,k)}$ for every triple. Step 3 therefore gives $H^q(K|_{W_{\\alpha rk}})=0$ whenever $q\\notin[a,b]$. If $T=\\varnothing$, put $a=b=0$; the same vanishing assertions on selected opens hold vacuously.",
+   "text": "The sigma type of selected pairs (stratum, finite index) is finite. If inhabited, Finset.exists_min_image and Finset.exists_max_image give indices attaining the least selected lower endpoint and greatest selected upper endpoint. Let these be a and b. The original interval at the minimizing index shows a <= b. Every selected lower endpoint is >= a and every selected upper endpoint is <= b, so a degree outside [a,b] is outside every selected original interval. If the sigma type is empty, take a=b=0; the assertions on selected indices and attainment implications are vacuous. In the inhabited case, all m(alpha)=0 is impossible because the minimizing index has a second coordinate in Fin(m(alpha)).",
    "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Proposition 6.6.11, reverse-implication finite-stratification locality argument; elementary finite minimum/maximum bookkeeping made explicit"
-   }
+   "elementary": true
   },
   {
-   "text": "Fix $q\\notin[a,b]$ and let $F$ be the underlying abelian sheaf of $H^q(K)$. Step 3 identifies its inverse image to every selected $W_{\\alpha rk}$ with the underlying sheaf of $H^q(K|_{W_{\\alpha rk}})$, which is zero by step 4. Apply [lem-weil-pbc-noetherian-stratum-detection] to the original finite stratification and to the coverings of its strata constructed in step 2. Its Noetherian hypothesis is verified in step 1, and it imposes no constancy condition on the ring sheaf. It gives $F=0$, hence $H^q(K)=0$: a module sheaf whose underlying abelian sheaf is zero has only the zero module structure. This also treats the empty selected family: the lemma applies to the empty coverings of the necessarily empty strata, so it gives vanishing in every degree. Thus the stated interval works globally, and no flatness, completeness, constructibility or dimension bound was used.",
+   "text": "Convert the finite locally closed stratification to Stratification.ofNoetherianSpace: its strata are constructible because X is Noetherian. Fix a degree q outside the common interval and let M=H^q(K). For each selected original member, exactness over the actual inverse-image ring [def-sfb-proetale-ring-derived-inverse-image] and the exact-functor cohomology comparison [lem-weil-pbc-exact-functor-complex-cohomology] identify the inverse image of M with H^q of the given derived inverse image of K, which is zero by the local hypothesis and the endpoint inequalities. Place M in degree zero. The exact-functor single-object comparison shows that its derived restrictions along the covers E are zero. Apply the unbounded derived zero-detection clause of [lem-weil-pbc-noetherian-stratum-detection]. The resulting global degree-zero object is zero; applying H^0 and the single-object homology isomorphism gives M=0. The same argument handles an empty selected family, since the local premises are then vacuous. This proves exactly the stated global bounds with attained extrema, with no coefficient restriction beyond the original statement.",
    "uses": [
+    "def-sfb-proetale-ring-derived-inverse-image",
+    "lem-weil-pbc-exact-functor-complex-cohomology",
     "lem-weil-pbc-noetherian-stratum-detection"
    ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/proetale.tex",
-    "place": "Tags 09AH (lemma-ses-associated-to-open) and 09AB (lemma-thickening), through the cited finite-stratum detection lemma"
-   }
+   "elementary": false
   }
  ],
  "proof_deps": [
+  "def-sfb-proetale-ring-derived-inverse-image",
   "def-weil-closed-immersion",
   "def-weil-pbc-quasi-compact-scheme",
-  "def-weil-pbc-ringed-derived-restriction",
-  "def-weil-pbc-sites-and-cohomology",
-  "def-weil-proetale-inverse-image",
-  "lem-sc-affine-noetherian-underlying-space",
   "lem-sfb-noetherian-space-compact-subsets",
-  "lem-trf-geometric-inverse-image-exact",
   "lem-weil-pbc-exact-functor-complex-cohomology",
   "lem-weil-pbc-noetherian-stratum-detection",
+  "lem-weil-pbc-qcqs-morphism-permanence",
   "pqf-def-locnoeth",
   "sk-def-pe-site"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 6.6.11 reverse implication, expanded finite-cover argument using Stacks Tags 04ZA, 0989, 04JC, 010N, 09AH and the existing finite-stratum detection lemma. Lemma 6.5.3 is contextual only, not a theorem about arbitrary ring sheaves."
+  "place": "Proposition 6.6.11 reverse-implication locality argument, expanded using the existing finite affine refinement and derived stratum-detection declarations. The Lean proof detects using the selected original covering members, avoiding inverse-image composition along their selected open subschemes. S9, 2026-10-21."
  },
  "mathlib_searches": [
   {
@@ -213,7 +180,6 @@
   ]
  },
  "tool_uses": [
-  "lem-trf-geometric-inverse-image-exact",
   "lem-weil-pbc-noetherian-stratum-detection"
  ],
  "reviewed": {
@@ -243,5 +209,15 @@
   "group": "N7",
   "result": "pass",
   "note": "Re-delivery after the 46b27b34 H2 RETURN. The Lean module is byte-identical; the detection theorem moved from stmt_deps to proof_deps; new def node def-sfb-proetale-ring-derived-inverse-image (existing:true on the unchanged NoetherianStratumDetection) owns proEtaleRingModuleInverseImage, its proved exactness theorem and instances, the HasDerivedCategory.standard instance and the mapDerivedCategory abbreviation. Its statement matches the Lean and Stacks 04JC/015F/05RU; lean.statement verbatim; cites only definitions; no duplicate DAG node. The item's clauses and edge cases were re-checked against the node; item lean.statement verbatim; nt_compile --json clean in 18.5 s. Advisories: possibly unused RingedDerivedRestrictionGeneral import; owned decls' docstrings still name the detection node as blueprint; stage 3 needs detection for FiniteLocallyClosedStratification."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "S9",
+  "result": "pass",
+  "landing": "20261021T120521-L-3905356",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
