@@ -22965,3 +22965,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:42 L: merged deliver/ND/lem-sfb-condensed-product-action-inflation (stage 2; reviewer PASS; parallel immutable checks)
 - 15:43 L: merged deliver/Q04/lem-sfb-tame-root-tower-extension (reviewer PASS; first push; new nodes: 2)
 - 15:45 L: merged deliver/NP/lem-sfb-complete-group-forgetful-automorphisms (stage 2; reviewer PASS; parallel immutable checks)
+- 15:46 L: returned deliver/NK/lem-per-adic-stratified-pullback-texact (reviewer RETURN: (the landing tools, head 2fd4eeb76) the delivery did not land: (merge queue) your landing 20261021T154126-NK-2783326-18 )
