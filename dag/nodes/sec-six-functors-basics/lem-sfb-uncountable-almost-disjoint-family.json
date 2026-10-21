@@ -11,9 +11,70 @@
   "def-sfb-countable-set",
   "def-sfb-finite-infinite-set"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Take $I=\\mathcal P(\\mathbf N)$. By [lem-sfb-cantor-no-powerset-injection] with $X=\\mathbf N$, no function $I\\to\\mathbf N$ is injective. Thus $I$ is uncountable with exactly the meaning of [def-sfb-countable-set].",
+   "uses": [
+    "lem-sfb-cantor-no-powerset-injection",
+    "def-sfb-countable-set"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), combinatorial auxiliary; explicit binary-prefix proof written by NF, not asserted by the blueprint paragraph."
+   }
+  },
+  {
+   "text": "Encode finite words in the digits $\\{0,1\\}$ by $c([])=1$ and $c(b::w)=2c(w)+b$, where $b::w$ is the word with head $b$ and tail $w$. All codes are positive by induction. The code is injective: induct on the sum of the lengths of two words with equal codes. An empty word cannot have the same code as a nonempty word, whose code is at least $2$. For two nonempty words, reduction modulo $2$ gives equal heads, and subtraction and division by $2$ give equal tail codes; the induction hypothesis gives equal tails. This proves equality of the words.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), combinatorial auxiliary; explicit binary-prefix proof written by NF, not asserted by the blueprint paragraph."
+   }
+  },
+  {
+   "text": "For $S\\in I$, define its digit $s(k)$ to be $1$ if $k\\in S$ and $0$ otherwise. Let $w_S(n)=[s(0),\\ldots,s(n-1)]$, including $w_S(0)=[]$, and put $A_S=\\{c(w_S(n)):n\\in\\mathbf N\\}\\subseteq\\mathbf N$. Equality $c(w_S(n))=c(w_T(m))$ implies equality of the two words by step 2, hence $n=m$ and $s(k)=t(k)$ for every $k<n$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), combinatorial auxiliary; explicit binary-prefix proof written by NF, not asserted by the blueprint paragraph."
+   }
+  },
+  {
+   "text": "For each $S$, the function $n\\mapsto c(w_S(n))$ is injective by the equality-of-lengths conclusion of step 3. If $A_S$ were finite, of size $r$, its elements $c(w_S(0)),\\ldots,c(w_S(r))$ would be $r+1$ distinct members of a set of size $r$, a contradiction. Therefore each $A_S$ is infinite in the sense of [def-sfb-finite-infinite-set].",
+   "uses": [
+    "def-sfb-finite-infinite-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), combinatorial auxiliary; explicit binary-prefix proof written by NF, not asserted by the blueprint paragraph."
+   }
+  },
+  {
+   "text": "Let $S\\ne T$ in $I$. Choose $k\\in\\mathbf N$ at which their membership digits differ; such a $k$ exists by extensionality of subsets. If $a\\in A_S\\cap A_T$, write $a=c(w_S(n))=c(w_T(m))$. Step 3 gives $n=m$. If $k<n$, equality of the words gives $s(k)=t(k)$, contradicting the choice of $k$. Thus $n\\le k$, so $A_S\\cap A_T\\subseteq\\{c(w_S(0)),\\ldots,c(w_S(k))\\}$. The right side has at most $k+1$ elements, and hence the intersection is finite as in [def-sfb-finite-infinite-set]. Together with steps 1 and 4 this gives every clause of the statement.",
+   "uses": [
+    "def-sfb-finite-infinite-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), combinatorial auxiliary; explicit binary-prefix proof written by NF, not asserted by the blueprint paragraph."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-cantor-no-powerset-injection",
+  "def-sfb-countable-set",
+  "def-sfb-finite-infinite-set"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent-written combinatorial auxiliary; source paragraph gives the coefficient use, not the combinatorial theorem. The only non-elementary input is the Mathlib Cantor theorem."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -124,10 +185,164 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: inspected hits concern measure-theoretic almost-everywhere disjointness, finite subset selection, Cantor schemes or cardinal pigeonhole, not an uncountable family with finite pairwise intersections."
+  },
+  {
+   "tool": "grep",
+   "query": "almostDisjoint|almost_disjoint|almost disjoint",
+   "results": {
+    "t": "2026-10-21T22:39:42Z",
+    "tool": "grep",
+    "query": "almostDisjoint|almost_disjoint|almost disjoint",
+    "sub": "",
+    "ok": true,
+    "n_hits": 6,
+    "note": "",
+    "top": [
+     "Mathlib/MeasureTheory/Function/AEMeasurableOrder.lean",
+     "Mathlib/MeasureTheory/Function/AEMeasurableOrder.lean",
+     "Mathlib/MeasureTheory/Function/AEMeasurableOrder.lean",
+     "Mathlib/MeasureTheory/Function/AEMeasurableOrder.lean",
+     "Mathlib/MeasureTheory/Function/AEMeasurableOrder.lean",
+     "Mathlib/MeasureTheory/Covering/Differentiation.lean"
+    ],
+    "digest": "51c0c5801fcfd184"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full almost-disjoint-family statement: hits concern finite subset selection, measure-theoretic almost-everywhere disjointness, cardinalities or countability; Cantor theorem is used separately as a leaf, not an exact match for this item."
+  },
+  {
+   "tool": "loogle",
+   "query": "Set.Infinite, Set.Finite",
+   "results": {
+    "t": "2026-10-21T22:39:43Z",
+    "tool": "loogle",
+    "query": "Set.Infinite, Set.Finite",
+    "sub": "",
+    "ok": true,
+    "n_hits": 12,
+    "note": "",
+    "top": [
+     "Set.finite_or_infinite",
+     "Set.infinite_or_finite",
+     "Set.Finite.not_infinite",
+     "Set.Infinite.not_finite",
+     "Set.not_finite",
+     "Set.not_infinite",
+     "Set.infinite_of_finite_compl",
+     "Set.Finite.infinite_compl"
+    ],
+    "digest": "242934cac63cd73d"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full almost-disjoint-family statement: hits concern finite subset selection, measure-theoretic almost-everywhere disjointness, cardinalities or countability; Cantor theorem is used separately as a leaf, not an exact match for this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "There exists an uncountable family of infinite subsets of natural numbers with finite pairwise intersections",
+   "results": {
+    "t": "2026-10-21T22:39:43Z",
+    "tool": "leanfinder",
+    "query": "There exists an uncountable family of infinite subsets of natural numbers with finite pairwise intersections",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Set.Infinite.exists_subset_ncard_eq",
+     "Set.Infinite.exists_union_disjoint_cardinal_eq_of_infinite",
+     "Set.Infinite.exists_subset_card_eq",
+     "Infinite.exists_subset_card_eq",
+     "Set.Infinite.exists_notMem_finite",
+     "Nat.surjective_count_of_infinite_setOf",
+     "Set.Infinite.exists_superset_ncard_eq",
+     "Set.Infinite.exists_notMem_finset"
+    ],
+    "digest": "c6031a2a9f64e7f2"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full almost-disjoint-family statement: hits concern finite subset selection, measure-theoretic almost-everywhere disjointness, cardinalities or countability; Cantor theorem is used separately as a leaf, not an exact match for this item."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Infinite binary sequences are uncountable and finite binary words are countable",
+   "results": {
+    "t": "2026-10-21T22:39:56Z",
+    "tool": "leanfinder",
+    "query": "Infinite binary sequences are uncountable and finite binary words are countable",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "String.infinite",
+     "Bool.countable",
+     "Cardinal.not_countable_real",
+     "not_countable_complex",
+     "Cardinal.mk_set_nat",
+     "Cardinal.mk_list_eq_aleph0",
+     "Uncountable",
+     "Cardinal.instUncountableReal"
+    ],
+    "digest": "3cd2cb476038ca83"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full almost-disjoint-family statement: hits concern finite subset selection, measure-theoretic almost-everywhere disjointness, cardinalities or countability; Cantor theorem is used separately as a leaf, not an exact match for this item."
+  },
+  {
+   "tool": "leansearch",
+   "query": "There exists an uncountable almost disjoint family of infinite subsets of natural numbers",
+   "results": {
+    "t": "2026-10-21T22:39:56Z",
+    "tool": "leansearch",
+    "query": "There exists an uncountable almost disjoint family of infinite subsets of natural numbers",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "Cardinal.not_countable_real",
+     "Cardinal.uncountable",
+     "MeasureTheory.exists_null_pairwise_disjoint_diff",
+     "uncountable_iff_forall_not_surjective",
+     "uncountable_iff_not_countable",
+     "instUncountableNatOrdinal",
+     "MeasureTheory.AEDisjoint.iUnion_left_iff",
+     "uncountable_iff_isEmpty_embedding"
+    ],
+    "digest": "9d85ab299d8f5600"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full almost-disjoint-family statement: hits concern finite subset selection, measure-theoretic almost-everywhere disjointness, cardinalities or countability; Cantor theorem is used separately as a leaf, not an exact match for this item."
+  },
+  {
+   "tool": "grep",
+   "query": "cantor_injective|cantor_surjective|uncountable.*(Bool|bool)|Uncountable.*(Bool|bool)|uncountable_pi|uncountable.*Set",
+   "results": {
+    "t": "2026-10-21T22:40:14Z",
+    "tool": "grep",
+    "query": "cantor_injective|cantor_surjective|uncountable.*(Bool|bool)|Uncountable.*(Bool|bool)|uncountable_pi|uncountable.*Set",
+    "sub": "",
+    "ok": true,
+    "n_hits": 14,
+    "note": "",
+    "top": [
+     "Mathlib/Logic/Function/Basic.lean",
+     "Mathlib/Logic/Function/Basic.lean",
+     "Mathlib/Logic/Function/Basic.lean",
+     "Mathlib/Logic/Function/Basic.lean",
+     "Mathlib/Logic/Function/Basic.lean",
+     "Mathlib/Logic/Small/Defs.lean",
+     "Mathlib/Topology/Perfect.lean",
+     "Mathlib/Data/Set/Countable.lean"
+    ],
+    "digest": "472c5b0b39e3fd8c"
+   },
+   "date": "2026-10-22",
+   "verdict": "no match for the full almost-disjoint-family statement: hits concern finite subset selection, measure-theoretic almost-everywhere disjointness, cardinalities or countability; Cantor theorem is used separately as a leaf, not an exact match for this item."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-countable-endomorphism-module-reconstruction",
@@ -155,5 +370,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-uncountable-almost-disjoint-family",
+  "worker": "stage1",
+  "summary": "Preserved the statement; proved it by the prefix-code construction indexed by the power set of the natural numbers. Added one exact Mathlib Cantor leaf. Gave explicit code injectivity induction, infinitude, and the finite intersection bound; audited all cited statements and small cases.",
+  "blueprint": "Realizes the combinatorial auxiliary supporting Paragraph (3) of sk-thm-sf-ctf-stability-direct-images.proof.md through the inherited coefficient/reconstruction chain. That paragraph does not itself assert this combinatorial input; the proof is marked agent-written and the literature reference remains WANTED."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NF-7b791eb53",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-7b791eb53 (reviewer sub-agent of L); spot-checked: I read the item and the new node in full. The item statement is unchanged and is exactly what its citer (step 4 of lem-sfb-countable-endomorphism-module-reconstruction) uses: an uncountable I, infinite A_i, and finite pairwise intersections. Step 1: I=P(N); Cantor with X=N rules out an injection into N, which is exactly the negation of def-sfb-countable-set. Step 2: the binary code c([])=1, c(b::w)=2c(w)+b is injective. Every code is at least 1, so nonempty words have codes at least 2; mod 2 gives the heads; induction on the total length finishes it. Checked on 2, 3, 4, 5, 6, 7. Step 3: equal codes give equal words, hence equal lengths and agreement below n. Step 4: different n give different lengths, so the codes are injective in n and A_S is infinite, including for S empty and S=N. Step 5: if S and T differ at k, the intersection lies in the k+1 codes of lengths up to k, so it is finite. If they differ at 0 the intersection is {1}. The condition i≠j is needed. Steps 2-5 are genuinely elementary. New node lem-sfb-cantor-no-powerset-injection is a statement-only Mathlib leaf, and I read Function.cantor_injective at Mathlib/Logic/Function/Basic.lean:376-378: it is exact for every type, with no hypotheses, and four searches are recorded. It is strictly smaller than the item (no D1 problem). rg -L over dag/nodes finds no duplicate of the Cantor theorem or the almost-disjoint family. No SGA citation. The blueprint paragraph (3) does not assert the lemma, so the proof is correctly marked by=agent with a literature reference WANTED. There was no prior proof and no re-split note. No off-unit statements or tool_uses, no cycle. No changes made."
  }
 }
