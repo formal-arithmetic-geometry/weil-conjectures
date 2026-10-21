@@ -21,154 +21,94 @@
  ],
  "proof": [
   {
-   "text": "Write $T=\\operatorname{Spec}A$ and $q:|T|\\to P$. By [lem-weil-pbc-qcqs-scheme-spectral] and [lem-pe-spectral-components-profinite], $P$ is profinite. For a profinite $E$ put $D=\\operatorname{LC}(E,A)$. By [lem-weil-pbc-locally-constant-prime-spectrum], $\\operatorname{Spec}D=E\\times|T|$, with the structure map to $T$ given by projection. Each locally constant function has finite image on the compact space $E$ and factors through its finite clopen partition into fibres. Two such presentations agree on their common refinement. Thus $D$ is the filtered colimit of the finite products $A^{E_i}$. These are finite products of the principal localization $A_1$, so $A\\to D$ is ind-Zariski and ind-etale by [def-weil-pbc-ind-etale-algebra].",
+   "text": "Set A = Γ(T, ⊤). For E → π₀(T), transport the base map through T.isoSpec and take the actual graph-restriction algebra B = WContractification.PullbackProfinite A E i. Define T_E = Spec B with its structure map followed by T.isoSpec.inv. The existing fiberHomeo, with swapped factors and the affine-scheme isomorphism, gives |T_E| = |T| ×_{π₀(T)} E and identifies both projections. PullbackProfinite.indZariski implies ind-etaleness and bijectivity of all local-ring maps. Transport these through Spec and the affine isomorphism to obtain the asserted stalk isomorphisms and IndEtaleAcrossUniverses statement.",
    "uses": [
-    "lem-weil-pbc-qcqs-scheme-spectral",
-    "lem-pe-spectral-components-profinite",
-    "lem-weil-pbc-locally-constant-prime-spectrum",
-    "def-weil-pbc-ind-etale-algebra"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 2.2.8; absolute locally constant algebra construction (also Stacks Tag 097D, proetale.tex, lemma-construct-profinite)"
-   }
-  },
-  {
-   "text": "The map $E\\times|T|\\to E\\times P$, $(e,t)\\mapsto(e,q(t))$, is a quotient map: it is a continuous surjection from a quasi-compact space to a Hausdorff space and is closed, since each closed subset of its source is quasi-compact. Its fibres are the connected components of $|T|$. Conversely a connected subset has constant image in each of the totally disconnected spaces $E$ and $P$, so these fibres are exactly the connected components of $E\\times|T|$. Consequently $\\pi_0(\\operatorname{Spec}D)=E\\times P$. For $f:E\\to P$, its graph $G=\\{(e,f(e)):e\\in E\\}$ is closed. Put $Z=\\{(e,t):q(t)=f(e)\\}$, the inverse image of $G$. It is a closed union of components of $\\operatorname{Spec}D$.",
-   "uses": [],
-   "elementary": true,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 2.2.8, more precise statement: the component fibre product"
-   }
-  },
-  {
-   "text": "Let $M$ be the multiplicative set of idempotents $a\\in D$ such that $Z\\subseteq D(a)$, and define the actual algebra $B=M^{-1}D$ and $T_E=\\operatorname{Spec}B$. Products stay in $M$, and $1\\in M$; if $Z=\\varnothing$, $0\\in M$ and $B=0$. By [lem-weil-pbc-spec-clopen-idempotent] and [lem-weil-pbc-profinite-clopen-basis], the intersection of these clopen neighbourhoods is exactly $Z$: a point outside $Z$ maps outside the closed subset $G$ of the profinite space $E\\times P$, so a clopen containing $G$ excludes it. By [lem-weil-pbc-localization-spectrum-embedding], $\\operatorname{Spec}B\\to\\operatorname{Spec}D$ is a homeomorphism onto precisely this intersection. The localization $B$ is the filtered colimit of $D_a$, $a\\in M$, since finitely many denominators combine by multiplication. Therefore $D\\to B$ is ind-Zariski and ind-etale; [lem-weil-pbc-ind-etale-stability] makes $A\\to B$ ind-etale. This constructs the required affine object without choosing unspecified existence data.",
-   "uses": [
-    "lem-weil-pbc-spec-clopen-idempotent",
-    "lem-weil-pbc-profinite-clopen-basis",
-    "lem-weil-pbc-localization-spectrum-embedding",
     "def-weil-pbc-ind-etale-algebra",
-    "lem-weil-pbc-ind-etale-stability"
+    "def-weil-pbc-localization-at-prime"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 2.2.8; Stacks Tags 097C (proetale.tex, lemma-construct) and 097D (lemma-construct-profinite), with the idempotent localization written out"
+    "document": "lean/WeilConjectures/RingTheory/ProEtale/WContractible.lean; lean/WeilConjectures/RingTheory/ProEtale/StalkIso.lean",
+    "place": "WContractification.PullbackProfinite, fiberHomeo, indZariski; Algebra.BijectiveOnStalks; localRingHom_comp_stalkIso; arrowIsoΓSpecOfIsAffine"
    }
   },
   {
-   "text": "At a point $(e,\\mathfrak p)$ of $\\operatorname{Spec}D$, evaluation identifies $D_{(e,\\mathfrak p)}$ with $A_{\\mathfrak p}$. Indeed every locally constant function is constant on a clopen neighbourhood of $e$; its characteristic idempotent is outside the prime and hence becomes $1$ in this local ring. Thus every fraction is the fraction of its two values at $e$; conversely constant functions define the inverse homomorphism. Further localization by $M$ leaves these local rings unchanged at points of $Z$, by the fraction formulas of [def-weil-pbc-localization-at-prime]. Hence the structure morphism induces isomorphisms on all stalks of the inverse-image structure sheaf from $T$. Applying [lem-weil-pbc-sets-sheaf-iso-on-stalks] to the underlying sheaves identifies this structure sheaf with $\\mathcal O_{T_E}$; the inverse maps preserve ring operations because the original maps do. The ringed space is therefore exactly $|T|\\times_P E$ with the inverse-image sheaf specified in the statement.",
+   "text": "The projection |T_E| → E is surjective: lift E.hom e through the surjective component quotient. Each fibre is homeomorphic to a connected component of |T|, hence connected. A connected component maps constantly to the totally disconnected E. Consequently the induced map π₀(T_E) → E is bijective, and compactness and Hausdorffness make it a homeomorphism. This uses the actual quotient topology, including empty spaces.",
    "uses": [
-    "def-weil-pbc-localization-at-prime",
-    "lem-weil-pbc-sets-sheaf-iso-on-stalks"
+    "lem-pe-spectral-components-profinite",
+    "lem-weil-pbc-qcqs-scheme-spectral"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 2.2.8, more precise statement: pullback of the structure sheaf"
+    "document": "Mathlib/Topology/Connected/TotallyDisconnected.lean; Mathlib/Topology/Separation/Profinite.lean",
+    "place": "Continuous.connectedComponentsLift; connectedComponentsLift_injective; Continuous.homeoOfEquivCompactToT2"
    }
   },
   {
-   "text": "The projection $|T_E|\\to E$ is surjective and has connected fibres $q^{-1}(f(e))$. A connected subset has constant image in $E$, so these fibres are exactly the connected components. The space $|T_E|$ is quasi-compact, and its projection to the Hausdorff space $E$ is closed (closed subsets are quasi-compact). It is therefore a quotient map and induces the canonical homeomorphism $\\pi_0(|T_E|)\\cong E$. For any scheme $W\\to T$, a continuous lift $|W|\\to |T|\\times_P E$ over $|T|$ gives a unique scheme map $W\\to T_E$: pull back the given structure-sheaf map of $W\\to T$ through the identified inverse-image sheaf. It is local on stalks because the stalks on the target are those of $T$. Conversely every scheme map gives that lift. If $W$ is qcqs, such lifts are precisely continuous $P$-maps $\\pi_0(|W|)\\to E$, by the quotient topology and total disconnectedness of $E$. This proves the mapping bijection, including its naturality by composition.",
+   "text": "For a ring map A → B inducing isomorphisms on local rings, the existing inverse ringHomOfHomOver constructs an A-algebra map B → C from any continuous Spec C → Spec B over Spec A. Repeat the source injectivity proof without its unused hypothesis that A → C also identifies local rings. This proves the affine mapping property for arbitrary affine W. Cover an arbitrary scheme W by affine opens, use uniqueness on their overlaps, and glue. A map E → E′ therefore gives a unique T-map T_E → T_E′; uniqueness proves the functor laws and the projection formula. The same mapping property gives a natural isomorphism between its covariant Hom functors and Hom in the topological slice. The topological-slice functor preserves finite limits, and coyoneda jointly reflects limits, proving finite-limit preservation.",
    "uses": [],
-   "elementary": true,
+   "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 2.2.8, fully faithful right adjoint in the more precise statement"
+    "document": "lean/WeilConjectures/RingTheory/ProEtale/IdentifiesLocalRings.lean; Mathlib/AlgebraicGeometry/Gluing.lean; Mathlib/CategoryTheory/Limits/Yoneda.lean",
+    "place": "Algebra.BijectiveOnStalks.ringHomOfHomOver, comap_ringHomOfHomOver; Scheme.Cover.glueMorphisms; coyonedaJointlyReflectsLimits"
    }
   },
   {
-   "text": "A continuous $P$-map $E\\to E'$ now gives the unique $T$-map $T_E\\to T_{E'}$ inducing it; uniqueness gives identities and composition. The same mapping description proves preservation of finite limits: maps from any scheme $W\\to T$ into a finite limiting cone correspond to continuous lifts into the corresponding finite limit of profinite spaces over $P$, hence to one unique map to its $T_E$. In particular $T_P=T$ and $T_{E_1\\times_E E_2}=T_{E_1}\\times_{T_E}T_{E_2}$. For a finite jointly surjective family $E_i\\to E$, every point $(t,e)$ lifts to some $(t,e_i)$. Each induced arrow is ind-etale by the last algebra-map clause of [lem-weil-pbc-ind-etale-stability], since both algebras are ind-etale over $A$. It is weakly etale by that node. By [lem-weil-pbc-morphism-affine-schemes-affine], these arrows between affine schemes are affine: over every affine open of the target, their inverse images are affine. They remain jointly surjective over that open. Since the family is finite, these inverse images give exactly the finite affine source opens required by [def-weil-pbc-proetale-site]. This proves preservation of coverings, also when all spaces are empty.",
+   "text": "For a finite jointly surjective family E_i → E, lift each point of |T_E| through the fibre homeomorphisms. Each induced morphism T_Ei → T_E is weakly etale by cancellation against its weakly etale target structure map. It is quasi-compact because it is a map of affine schemes. The finite family is therefore a pro-etale covering. CoverPreserving follows from the effective-epimorphic-family description of the coherent slice topology. Finite-limit preservation gives representable flatness; cover preservation and flatness give continuity.",
    "uses": [
-    "lem-weil-pbc-ind-etale-stability",
     "def-weil-pbc-proetale-site",
     "lem-weil-pbc-morphism-affine-schemes-affine"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Paragraph preceding Lemma 4.2.13: limit preservation and respect for coverings"
+    "document": "WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/CategoryTheory/Sites/Coherent/CoherentTopology.lean; Mathlib/CategoryTheory/Sites/Continuous.lean",
+    "place": "mem_precoverage_iff; QuasiCompactCover.of_finite; coherentTopology.mem_sieves_iff_hasEffectiveEpiFamily; compatiblePreservingOfFlat"
    }
   },
   {
-   "text": "Take the small skeletons and the larger sheaf-value universe of [def-weil-size-convention]. The category of profinite spaces over $P$ has finite limits: they are the usual finite products and closed equalizer subspaces in compact Hausdorff totally disconnected spaces, with terminal object $P\\to P$. Apply [lem-weil-pbc-left-exact-site-inverse-image-tensor] to $u:E\\mapsto T_E$, using step 6. This gives the geometric morphism $\\pi_T$, whose inverse image is presheaf left Kan extension followed by sheafification, and whose direct image is restriction along $u^{op}$. This invocation supplies both the adjunction and left exactness; neither is inferred just from a pointwise formula.",
+   "text": "For qcqs W, the scheme mapping property factors uniquely through π₀(W), giving the natural equivalence Hom_T(W,T_E) = Hom_P(π₀(W),E). The associated costructured-arrow category has a terminal object. Apply its pointwise left Kan colimit to obtain P(F)(W) ≅ F(π₀(W)) and compute its normalization against every map W → T_E. This equivalence is natural in E, W, and F.",
    "uses": [
-    "def-weil-size-convention",
-    "lem-weil-pbc-left-exact-site-inverse-image-tensor"
+    "def-weil-size-convention"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Paragraph preceding Lemma 4.2.13; generic site construction: Stacks Tag 00X6, sites.tex, proposition-get-morphism"
+    "document": "Mathlib/CategoryTheory/Functor/KanExtension/Pointwise.lean; Mathlib/CategoryTheory/Comma/StructuredArrow/Basic.lean",
+    "place": "Functor.LeftExtension.IsPointwiseLeftKanExtension; isIso_ι_app_of_isTerminal; the private componentFactorEquiv, kanTerminal and kanEvaluation proofs"
    }
   },
   {
-   "text": "Let $F$ be a sheaf of sets on $\\mathbf{Prof}/P$ and $W\\to T$ be qcqs. In the Kan formula of [lem-weil-pbc-presheaf-pullback-sets-left-exact], the index category before taking the opposite consists of pairs $(E,W\\to T_E)$. Step 5 gives its initial object $(\\pi_0(|W|)\\to P,W\\to T_{\\pi_0(|W|)})$: the unique arrow to $(E,a)$ is the component map corresponding to $a$. Its opposite is terminal. The colimit is therefore $F(\\pi_0(|W|)\\to P)$: every element represented in $F(E)$ maps there by that unique arrow, and the universal cocone equations force precisely these maps. Composition on $W$ and maps of $F$ preserve the component factorizations, so this identification is natural in both variables. This computes the presheaf inverse image on all qcqs objects, before sheafification.",
+   "text": "The coherent topology of Profinite/P contains its extensive topology: forgetting a finite coproduct cofan gives an effective epimorphic family in Profinite. Hence a sheaf on Profinite/P preserves finite products. Use the qcqs finite-coproduct evaluation theorem to construct the coproduct of a finite qcqs family in the pro-etale site. Its component object is the coproduct in Profinite/P by the quotient universal property. Transport the preceding Kan evaluation isomorphisms along these two coproducts. This proves that P(F) takes finite qcqs disjoint unions to products, also for the empty family.",
    "uses": [
-    "lem-weil-pbc-presheaf-pullback-sets-left-exact"
+    "lem-weil-pbc-proetale-finite-coproduct-evaluation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.13(1), proof, first two sentences: canonical component factorization"
+    "document": "lean/Sheaf/AlgebraicGeometry/Sites/ProEtaleFiniteCoproductEvaluation.lean; Mathlib/CategoryTheory/Sites/Coherent/ExtensiveSheaves.lean",
+    "place": "finite_coproduct_evaluation; Presheaf.isSheaf_iff_preservesFiniteProducts; private component_slice_extensiveTopology and component_finite_products"
    }
   },
   {
-   "text": "Let $K$ be the presheaf Kan inverse image of step 8 and $\\eta:K\\to K^\\#$ its sheafification unit. By [lem-weil-pbc-proetale-qcqs-finite-family-geometry], finite disjoint unions of qcqs objects are qcqs. Connected components commute with finite disjoint unions, directly from their quotient topology. For such a union $V=\\coprod_i V_i$, step 8 and the sheaf axiom of $F$ for the clopen summand cover give $K(V)=F(\\coprod_i\\pi_0(V_i)\\to P)=\\prod_i K(V_i)$, by the restriction maps. The same geometry node states $K^\\#(V)=\\prod_i K^\\#(V_i)$ for the sheaf $K^\\#$. These identifications commute with $\\eta$ by its naturality. This includes the empty family: both presheaves have singleton value on the empty scheme.",
-   "uses": [
-    "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Section 00W1, sheafification; finite-product reduction for the corrected split-cover evaluation"
-   }
-  },
-  {
-   "text": "Every covering of a qcqs $W$ has a finite affine refinement. Namely take a finite affine open cover of $W$; on each affine target open the covering condition of [def-weil-pbc-proetale-site] provides finitely many affine source opens mapping into it and covering it. Their composites give the required refinement, and their sources are qcqs by [lem-weil-pbc-proetale-qcqs-finite-family-geometry]. Hence every covering used to test local equality or local representability of sections at $W$ can be replaced by a finite qcqs covering $\\{W_i\\to W\\}$. By the hypothesis in the corrected statement, $p:V=\\coprod_iW_i\\to W$ then has a section $\\sigma$. This hypothesis is imposed only here, after the general construction and Kan calculation; it is not asserted for arbitrary qcqs schemes.",
+   "text": "A covering sieve on a qcqs W contains a finite affine covering family, by the quasi-compact-cover refinement theorem. Reindex it by Fin n, apply the stated split-cover condition, and transport the scheme section to a section in the pro-etale site. For the sheafification unit η:P(F) → P(F)#, the equalizer sieve of two sections with equal image is covering. On this split finite refinement their restrictions agree; injectivity of the finite-product restriction makes their pullbacks along the coproduct map agree. Pull back by the section to prove injectivity of η_W. The image sieve of any sheafified section is also covering. Lift on each summand, combine by the finite-product bijection, compare the two sheaf sections on the coproduct, and pull back by the section. This proves surjectivity. For a concrete coefficient category the forgetful functor preserves these products and reflects isomorphisms, so η_W is an isomorphism in that category.",
    "uses": [
     "def-weil-pbc-proetale-site",
-    "lem-weil-pbc-proetale-qcqs-finite-family-geometry"
+    "lem-weil-pbc-proetale-finite-coproduct-evaluation"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 00WK (lemma-sections-sheafification), choosing a finite affine refinement"
+    "document": "WeilConjectures/Mathlib/AlgebraicGeometry/Sites/Proetale.lean; Mathlib/CategoryTheory/Sites/LocallySurjective.lean; literature/stacks-project/sites.tex",
+    "place": "Scheme.QuasiCompactCover.exists_hom; Presheaf.equalizerSieve_mem and imageSieve_mem; Stacks Tags 00WB and 00WK"
    }
   },
   {
-   "text": "Suppose $a,b\\in K(W)$ have the same image under $\\eta_W$. By [lem-weil-pbc-site-sheafification-sections-local], they agree after a covering of $W$. Refine as in step 10 to a finite qcqs covering and write $p:V\\to W$, $p\\sigma=\\operatorname{id}_W$. Their pullbacks agree on each summand, so step 9 gives $p^*a=p^*b$ in $K(V)$. Pulling back by $\\sigma$ gives $a=\\sigma^*p^*a=\\sigma^*p^*b=b$. Thus $\\eta_W$ is injective. This uses injectivity of the finite-product restriction of $K$; it does not assume that $K$ is already separated on arbitrary objects.",
+   "text": "Take the canonical inverse image obtained by left Kan extension followed by sheafification, with direct image actual restriction. Representable flatness makes its comma categories filtered. The general-universe flat Kan-extension theorem applies with colimit size (u,u+1); shrink AB5 for Type(u+1), and transfer it through the finite-limit-preserving, filtered-colimit-preserving forgetful functor. This makes inverse image left exact. Compose η_W inverse with the Kan evaluation to get the required evaluation isomorphism. Compute the canonical adjunction unit as the Kan unit followed by η, proving the required normalization. Use the pointwise Kan universal property, factorization naturality, and η naturality to prove the joint naturality in F and W. Apply this single argument directly in Type(u+1), AddCommGrpCat and CommRingCat; its isomorphisms preserve operations by construction.",
    "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local"
+    "lem-weil-pbc-presheaf-pullback-sets-left-exact",
+    "def-weil-size-convention"
    ],
    "elementary": false,
    "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Theorem 00WB (theorem-plus) and Lemma 00WK (lemma-sections-sheafification), local equality for the sheafification unit"
-   }
-  },
-  {
-   "text": "Given $t\\in K^\\#(W)$, [lem-weil-pbc-site-sheafification-sections-local] supplies a cover and local lifts. Refine it by step 10 to finite qcqs $W_i$, with lifts $a_i\\in K(W_i)$ and split $p:V=\\coprod_iW_i\\to W$. By step 9 there is a unique $a\\in K(V)$ restricting to all $a_i$. The two sections $\\eta_V(a)$ and $p^*t$ of $K^\\#(V)$ have the same restrictions on every summand; the sheaf product formula in step 9 implies their equality. Consequently $\\eta_W(\\sigma^*a)=\\sigma^*\\eta_V(a)=\\sigma^*p^*t=t$. Thus $\\eta_W$ is bijective. By step 7, $K^\\#=\\pi_T^{-1}F$; compose $\\eta_W^{-1}$ with step 8 to obtain the asserted formula. Naturality follows from that of $\\eta$ and step 8, for maps between eligible objects. The section $\\sigma$ proves bijectivity only and does not enter this canonical identification.",
-   "uses": [
-    "lem-weil-pbc-site-sheafification-sections-local"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/stacks-project/sites.tex",
-    "place": "Lemma 00WK (lemma-sections-sheafification), local representability, followed by the explicit split-cover argument"
-   }
-  },
-  {
-   "text": "For an abelian-group or ring sheaf, use [lem-weil-pbc-sheaf-algebraic-structures-objects] to regard its operations as maps out of finite powers of its underlying sheaf of sets. The inverse image preserves these powers by step 7. Naturality of the set-valued identification in step 12, applied to addition, zero, negation, multiplication and one, identifies the induced operations with those on $F(\\pi_0(|W|)\\to P)$. For example the addition square identifies the two maps from $F(\\pi_0(|W|))^2$ with the given addition on $F(\\pi_0(|W|))$; the nullary maps similarly give zero and one. The equations for the operations are preserved functorially. Thus the canonical identification is one of abelian groups or rings, and is natural in their sheaves and in eligible $W$.",
-   "uses": [
-    "lem-weil-pbc-sheaf-algebraic-structures-objects"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-    "place": "Lemma 4.2.13(1), extended by finite-product operations; Stacks Section 00YR, sites.tex, section-sheaves-algebraic-structures"
+    "document": "lean/WeilConjectures/Mathlib/CategoryTheory/Functor/Flat.lean; lean/WeilConjectures/Mathlib/CategoryTheory/Sites/Pullback.lean; Mathlib/CategoryTheory/Sites/Pullback.lean",
+    "place": "preservesFiniteLimits_op_lan_of_flat; sheafPullbackConstruction.sheafAdjunctionContinuous; AB5OfSize_shrink; HasExactColimitsOfShape.domain_of_functor; private component_evaluation"
    }
   }
  ],
@@ -178,24 +118,17 @@
   "def-weil-pbc-proetale-site",
   "def-weil-size-convention",
   "lem-pe-spectral-components-profinite",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-localization-spectrum-embedding",
-  "lem-weil-pbc-locally-constant-prime-spectrum",
   "lem-weil-pbc-morphism-affine-schemes-affine",
   "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
-  "lem-weil-pbc-profinite-clopen-basis",
-  "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-weil-pbc-sets-sheaf-iso-on-stalks",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-weil-pbc-spec-clopen-idempotent"
+  "lem-weil-pbc-proetale-finite-coproduct-evaluation",
+  "lem-weil-pbc-qcqs-scheme-spectral"
  ],
  "proof_origin": {
-  "by": "agent",
-  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 2.2.8 and the paragraph preceding Lemma 4.2.13 for construction and site projection; canonical component factorization for presheaf Kan evaluation. The false unrestricted sheaf evaluation in Lemma 4.2.13(1) is replaced by a split-cover computation using Stacks Tags 00WB/00WK (sites.tex, theorem-plus/lemma-sections-sheafification)."
+  "by": "worker",
+  "group": "J4",
+  "date": "2026-10-21",
+  "document": "Existing Mathlib and WeilConjectures proofs; Bhatt–Scholze Lemma 2.2.8 and corrected split-cover form of Lemma 4.2.13(1); Stacks Tags 00WB and 00WK",
+  "place": "Explicit graph-restriction construction reused from WContractible. Scheme mapping property proved from the local-ring correspondence and affine gluing; finite limits, covers, normalized Kan evaluation, finite coproducts, split-cover sheafification and all three coefficient categories proved in this module. No new open lemma and no statement or definition change."
  },
  "mathlib_searches": [
   {
@@ -399,19 +332,9 @@
   "def-weil-pbc-proetale-site",
   "def-weil-size-convention",
   "lem-pe-spectral-components-profinite",
-  "lem-weil-pbc-ind-etale-stability",
-  "lem-weil-pbc-left-exact-site-inverse-image-tensor",
-  "lem-weil-pbc-localization-spectrum-embedding",
-  "lem-weil-pbc-locally-constant-prime-spectrum",
   "lem-weil-pbc-presheaf-pullback-sets-left-exact",
-  "lem-weil-pbc-proetale-qcqs-finite-family-geometry",
-  "lem-weil-pbc-profinite-clopen-basis",
   "lem-weil-pbc-qcqs-scheme-spectral",
-  "lem-weil-pbc-sets-sheaf-iso-on-stalks",
-  "lem-weil-pbc-sheaf-algebraic-structures-objects",
-  "lem-weil-pbc-spec-clopen-idempotent",
-  "lem-weil-pbc-morphism-affine-schemes-affine",
-  "lem-weil-pbc-site-sheafification-sections-local"
+  "lem-weil-pbc-morphism-affine-schemes-affine"
  ],
  "reviewed": {
   "date": "2026-10-18",
@@ -448,5 +371,15 @@
   ],
   "fixed_by": "NT-stage2-cc-73b5236c4"
  },
- "lean_audit": {}
+ "lean_audit": {},
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "J4",
+  "result": "pass",
+  "landing": "20261021T134454-L-1179973",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
 }
