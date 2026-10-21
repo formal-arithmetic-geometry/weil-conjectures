@@ -22317,3 +22317,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T11:41:54Z L: superseded stage-1 delivery NV/lem-pod-stratified-dualizable-hom-continuity at 980659abe5e1084fa5c7597f6291c13246118c41; current completion retained; packet archived at refs/superseded/NV/lem-pod-stratified-dualizable-hom-continuity/980659abe5e1084fa5c7597f6291c13246118c41; stale return retired.
 - 11:42 L: returned deliver/NQ/def-per-support-condition (reviewer RETURN: I read the item in full; the delivery adds no new nodes. Support half (SuppCon ⇔ dim Supp H^{-i}K ≤ i, closed rational-f)
 - 11:43 L: merged deliver/Q34/lem-sf-complete-top-residue-cell-cone (stage 2; reviewer FIX; parallel immutable checks)
+- 11:45 L: returned deliver/N7/lem-pe-scalar-cone-tensor-model (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-pe-scalar-cone-tensor-model: lem-pe-scalar-cone-te)
