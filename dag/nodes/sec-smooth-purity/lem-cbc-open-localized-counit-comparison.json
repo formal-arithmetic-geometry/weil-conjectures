@@ -18,9 +18,92 @@
   "lem-cbc-sieve-slice-sheafification",
   "lem-weil-pbc-localize-ringed-site-morphism"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Use the slice identifications for $j,j'$ and the constant-ring identifications to regard restriction as evaluation on the slices over $U,U'$. The base-change functor defining $g$ sends $U$ to $U'=T'\\times_TU$; its functor on slices is the base-change functor for $g_U$. Apply the ringed localization theorem to obtain the natural isomorphism $\\lambda:g_{U,B}^*j^*\\xrightarrow{\\sim}j'^*g_B^*$. The theorem's localized ring map is the restriction of $c_g$ through the inverse-image comparison. This is the canonical map $c_{g_U}$: after adjunction, both send every constant $b\\in B$ on $(V\\to U)$ to the constant $b$ on $U'\\times_UV=T'\\times_TV$, and hence their maps from the constant presheaf, and then from its sheafification, coincide. Thus $\\lambda$ uses precisely the coefficient maps in the statement, rather than an independently chosen ringed structure.",
+   "uses": [
+    "def-weil-proetale-inverse-image",
+    "lem-weil-proetale-weakly-etale-localization",
+    "prop-weil-pbc-proetale-constant-ring-map",
+    "lem-weil-pbc-localize-ringed-site-morphism"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 04J0, lemma-localize-morphism-ringed-sites, statement and displayed formula for the localized ring map."
+   }
+  },
+  {
+   "text": "Write $a_F:P_F\\to j_!F$ for the sheafification unit. The summand construction and module sheafification give the explicit Hom bijection underlying the stated adjunction: $t:F\\to j^*M$ sends $s\\in F(V\\xrightarrow{\\varphi}U)$ to $t_{(V,\\varphi)}(s)\\in M(V)$, extended additively over the direct sum and uniquely across $a_F$. Conversely $h:j_!F\\to M$ gives $s\\mapsto h_V(a_F(\\iota_\\varphi(s)))$. Both maps respect restrictions and scalars because the summand restriction sends $\\iota_\\varphi(s)$ to $\\iota_{\\varphi v}(s|_{V'})$. Starting with $t$ returns $t$ on every section. Starting with $h$ returns a map equal to $h$ on every summand after precomposing with $a_F$, hence equal to $h$ by the sheafification universal property. These rules also commute with precomposition in $F$ and postcomposition in $M$. This verifies the canonical summand adjunction, including the inverse verifications omitted in the source.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, the two transposition constructions and final inverse verification."
+   }
+  },
+  {
+   "text": "Taking $h=\\mathrm{id}_{j_!F}$ in Step 2 shows that the actual unit $\\eta_F:F\\to j^*j_!F$ is $s\\mapsto a_F(\\iota_\\varphi(s))$. Taking $t=\\mathrm{id}_{j^*M}$ shows that the actual counit $\\epsilon_M:j_!j^*M\\to M$ is the unique sheaf map whose composite with $a_{j^*M}$ sends $\\iota_\\varphi(s)$ to $s\\in M(V)$. In particular these are the unit and counit of the sheafified extension adjunction, with no alternative natural automorphism inserted.",
+   "uses": [
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-pur-site-restriction-module-adjunction-exact"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03DI, lemma-extension-by-zero, transposition applied to identity maps."
+   }
+  },
+  {
+   "text": "Every object $V\\to T$ has at most one map to $U$. On the slice object $(V\\xrightarrow{\\varphi}U)$, the direct sum defining $P_F(V)$ therefore has exactly the single summand $F(V,\\varphi)$; its restrictions are those of $F$. Thus $P_F|_{T_{\\mathrm{proet}}/U}=F$ naturally. Apply the unit-compatible slice-sheafification isomorphism to the underlying abelian presheaf $P_F$. Since $F$ is already a sheaf, its sheafification unit is invertible (its inverse is the unique factorization of $\\mathrm{id}_F$). By Step 3 and unit compatibility this is precisely the underlying map of $\\eta_F:F\\to j^*j_!F$. It is a module isomorphism: $\\eta_F$ is linear, and the inverse of a bijective linear map is linear. Hence $\\eta$ is a natural isomorphism. This uses the abelian-valued case of the slice theorem, so no assumption that the varying ring sheaf $B_T$ is sectionwise the ring $B$ is made.",
+   "uses": [
+    "lem-weil-proetale-weakly-etale-localization",
+    "def-weil-extension-by-zero-presheaf",
+    "def-weil-presheaf-modules-sheafification",
+    "lem-cbc-sieve-slice-sheafification"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 0F6Z, lemma-restrict-back, the subterminal restriction-back situation; unit formula from Tag 03DI. Slice sheafification is supplied by the cited Mathlib leaf."
+   }
+  },
+  {
+   "text": "Define the canonical identification $\\alpha_F:H(F)\\xrightarrow{\\sim}g_{U,B}^*F$ by $\\alpha_F=g_{U,B}^*(\\eta_F^{-1})\\circ\\lambda_{j_!F}^{-1}$. It is natural, with inverse $\\lambda_{j_!F}\\circ g_{U,B}^*(\\eta_F)$. Naturality of $\\lambda$ at $\\epsilon_M$ gives\n$$\\beta_M\\circ\\lambda_{j_!j^*M}=\\lambda_M\\circ g_{U,B}^*(j^*\\epsilon_M).$$\nThe adjunction triangle is $j^*(\\epsilon_M)\\circ\\eta_{j^*M}=\\mathrm{id}_{j^*M}$; Step 4 therefore gives $j^*(\\epsilon_M)=\\eta_{j^*M}^{-1}$. Substitution yields $\\beta_M=\\lambda_M\\circ\\alpha_{j^*M}$. Thus $\\beta$ is invertible and, under the specified identification of $H$, is exactly $\\lambda$, as asserted. Its generator formula is the pullback of the evaluation in Step 3: $\\iota_\\varphi(s)\\mapsto s$ on the open slice. More explicitly, on a presheaf inverse-image generator indexed by $(V,\\psi:W\\to U'\\times_UV)$, followed by a tensor generator with coefficient $b\\in B_{U'}(W)$, it sends $[V,\\psi,\\iota_\\varphi(s)]\\otimes b$ to $[V,\\psi,s]\\otimes b$. The relation maps, balancing relations and subsequent sheafifications are respected because this is the functorial pullback of the linear map of Step 3. This also verifies the formula for sheaf sections without claiming that all sheaf sections are global presheaf generators.",
+   "uses": [
+    "lem-weil-pbc-localize-ringed-site-morphism",
+    "lem-pur-site-restriction-module-adjunction-exact",
+    "def-weil-proetale-inverse-image",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 04J0, lemma-localize-morphism-ringed-sites, naturality of the canonical pullback comparison; 03DI, lemma-extension-by-zero, adjunction triangles and summand evaluation."
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-proetale-inverse-image",
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-localize-ringed-site-morphism",
+  "def-weil-extension-by-zero-presheaf",
+  "def-weil-presheaf-modules-sheafification",
+  "lem-pur-site-restriction-module-adjunction-exact",
+  "lem-cbc-sieve-slice-sheafification",
+  "def-pur-sheaf-tensor-product"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-modules.tex",
+  "place": "Tags 03DI (lemma-extension-by-zero), 0F6Z (lemma-restrict-back), 04J0 (lemma-localize-morphism-ringed-sites). The displayed counit normalization is the explicit naturality/triangle calculation from these constructions."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -63,10 +146,52 @@
    "results": "[grep] OK 0 hit(s), restricted to Algebra/Category/ModuleCat/Sheaf.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "extensionByZero|extension_by_zero|localiz.*counit|counit.*localiz",
+   "results": "0 hits in Mathlib/Algebra/Category/ModuleCat/Sheaf: ",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern structure-sheaf restriction, generic sheaf pullback, or free modules; none states the open pro-etale ringed-module counit normalization and generator clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Restriction to an inverse image open of the pullback of the extension by zero counit is an isomorphism",
+   "results": "8 hits: AlgebraicGeometry.pullbackRestrictIsoRestrict, AlgebraicGeometry.LocallyRingedSpace.ofRestrict_stalkMap_isIso, AlgebraicGeometry.LocallyRingedSpace.IsOpenImmersion.isoRestrict, AlgebraicGeometry.pullbackRestrictIsoRestrict_inv_fst_assoc, AlgebraicGeometry.IsOpenImmersion.isoRestrict, TopCat.Presheaf.pullbackObjObjOfImageOpen, AlgebraicGeometry.morphismRestrictOpensRange, AlgebraicGeometry.instIsIsoSchemeMorphismRestrict",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern structure-sheaf restriction, generic sheaf pullback, or free modules; none states the open pro-etale ringed-module counit normalization and generator clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "SheafOfModules, CategoryTheory.Adjunction.counit",
+   "results": "5 hits: PresheafOfModules.instIsIsoFunctorSheafOfModulesCounitSheafificationAdjunction, PresheafOfModules.toSheaf_map_sheafificationAdjunction_counit_app, SheafOfModules.pushforwardPushforwardAdj, SheafOfModules.pushforwardPushforwardAdj_unit_app_val_app, SheafOfModules.pushforwardPushforwardAdj_counit_app_val_app",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern structure-sheaf restriction, generic sheaf pullback, or free modules; none states the open pro-etale ringed-module counit normalization and generator clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "For an open immersion of ringed sites the restriction of the pulled back extension by zero counit is the canonical localized module pullback comparison",
+   "results": "8 hits: AlgebraicGeometry.Scheme.Modules.restrictAdjunction_counit_app_app, AlgebraicGeometry.Scheme.Modules.restrictFunctorIsoPullback, AlgebraicGeometry.Scheme.Modules.restrictFunctorAdjCounitIso, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, AlgebraicGeometry.Scheme.Modules.restrictAdjunction_unit_app_app, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.pullbackObjUnitToUnit, AlgebraicGeometry.Scheme.Modules.restrictAdjunction",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern structure-sheaf restriction, generic sheaf pullback, or free modules; none states the open pro-etale ringed-module counit normalization and generator clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "sheafificationCompPullback|pullbackIso|pushforwardPushforwardAdj_counit",
+   "results": "5 hits in Mathlib/Algebra/Category/ModuleCat/Sheaf: Mathlib/Algebra/Category/ModuleCat/Sheaf/PushforwardContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackContinuous.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean, Mathlib/Algebra/Category/ModuleCat/Sheaf/PullbackFree.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern structure-sheaf restriction, generic sheaf pullback, or free modules; none states the open pro-etale ringed-module counit normalization and generator clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension by zero along a subterminal object of a ringed site has invertible restriction unit and its counit evaluated on each direct sum generator is the original section",
+   "results": "8 hits: SheafOfModules.ιFree_mapFree_inv, SheafOfModules.unitHomEquiv_symm_freeHomEquiv_apply, SheafOfModules.unitHomEquiv, SheafOfModules.pushforwardSections_unitHomEquiv, SheafOfModules.unitHomEquiv_apply_coe, SheafOfModules.GeneratingSections.opEpi_id, AlgebraicGeometry.Scheme.Modules.instIsIsoFunctorCounitRestrictAdjunction, PresheafOfModules.unitHomEquiv",
+   "date": "2026-10-21",
+   "verdict": "no match: hits concern structure-sheaf restriction, generic sheaf pullback, or free modules; none states the open pro-etale ringed-module counit normalization and generator clauses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-cbc-adic-pullback-presentation-transport",
@@ -85,5 +210,39 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-cbc-open-localized-counit-comparison",
+  "worker": "stage1",
+  "summary": "Q25 expands the canonical summand adjunction, proves its open restriction unit invertible using the existing slice-sheafification leaf, and computes the pulled-back counit by naturality and the adjunction triangle. No statement changes or new nodes. The finite constant ring maps are checked against the localized ringed structure; no adic coefficient identification is used.",
+  "blueprint": "Nearest ancestor lem-cbc-completed-extension-zero-comparison, main-20261015 proof: the finite-reduction exchanges in the sentences beginning \"By def-weil-pbc-completed-pullback its reduction maps are Lg_n^*j_!K_n\". This supplies the finite localized-map/unit/counit normalization used in Step 8 of lem-cbc-adic-pullback-presentation-transport.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-proetale-weakly-etale-localization",
+    "why": "Generic identification of pro-etale slices and constant rings, including the subterminal property for opens; it does not replace any compact-support-base-change step."
+   },
+   {
+    "node": "prop-weil-pbc-proetale-constant-ring-map",
+    "why": "Generic finite constant-coefficient structure maps and their constant-section normalization, needed to identify the localized coefficient map."
+   },
+   {
+    "node": "lem-weil-pbc-localize-ringed-site-morphism",
+    "why": "Generic ringed-site localization comparison, used as the canonical lambda and its naturality; the CBC unit does not supply a separate statement of this site tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-proetale-weakly-etale-localization",
+  "prop-weil-pbc-proetale-constant-ring-map",
+  "lem-weil-pbc-localize-ringed-site-morphism"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q25-c7c8dfc37",
+  "group": "Q25",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q25-c7c8dfc37 (reviewer sub-agent of L); spot-checked: I read all 5 steps of the item and every cited statement in full. I checked them against Stacks sites-modules 03DI (l.2058, both transpositions), 0F6Z (l.2338) and 04J0 (l.2369, the localized ring map j_U^{-1}f^sharp). Step 1: 04J0 applies with u=u_g, V=U, u(U)=U'. On the skeleta, u_V is base change along g_U. The localized ring map equals c^{g_U}_B because both adjuncts send each constant b to b (normalization in prop-weil-pbc-proetale-constant-ring-map). Step 2: the summand Hom bijection is checked in both directions, with restriction and linearity coming from def-weil-extension-by-zero-presheaf. It writes out the inverse verification that 03DI omits, and is properly elementary. It builds the map itself rather than taking it from the adjunction node's proof, so C3 is fine. Step 3: the unit and counit formulas follow from the identities. Step 4: localization (4) gives at most one map to U, so P_F|_U=F. The abelian slice-sheafification leaf with unit compatibility then makes eta_F an isomorphism; this is 0F6Z. Step 5: I recomputed alpha_F=g_U^*(eta^{-1}) composed with lambda^{-1}, naturality of lambda at epsilon, and the triangle identity j^*epsilon=eta^{-1}. These give beta=lambda composed with alpha(j^*), with the right directions. The generator formula is the pullback of epsilon. Edge cases: U=T, U or U' empty, B=0 and g=id all hold, and openness is essential. There are no new nodes. The candidates lem-sf-open-tensor-normalization (a derived beta for j_!), lem-trf-topos-complement-module-stalks and lem-weil-pbc-extension-by-zero-unit-iso (etale) do not duplicate the item. I accept the three generic off-unit tools (localization, constant ring map, ringed-site localization); the maintainer should record them in tool_uses (C8). There is no SGA. The blueprint place exists in the main-20261015 proof. Advisory only: the statement attributes H ≅ g_U^* to the localization node, but the identification also uses eta^{-1); Step 5 pins it exactly and the report names it. The report mentions a citations.json that is not in the commit. Maintainer note: the source string of lem-pur-site-restriction-module-adjunction-exact mixes up the labels of 03DI and 03DJ."
  }
 }
