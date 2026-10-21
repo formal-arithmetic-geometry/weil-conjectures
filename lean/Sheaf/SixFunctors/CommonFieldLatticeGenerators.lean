@@ -17,8 +17,10 @@ public import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
 public import WeilConjectures.CategoryTheory.RingObjects.Condensed.FiniteSubextension
 public import WeilConjectures.NumberTheory.Padics.IntegersFinite
 import Sheaf.Paper.FiniteSubextensionsDirected
-import Sheaf.Algebra.Homology.LocallyFreeDerivedScalars
 import Sheaf.SixFunctors.IntegralModelsGenerators
+import WeilConjectures.CategoryTheory.ModuleObjects.Monoidal
+import Sheaf.SixFunctors.ScalarSixLisseExtensionConstructible
+import Sheaf.SixFunctors.ScalarSixLisseTowerComparison
 
 /-! # Common finite coefficient fields for lattice generators
 
@@ -165,6 +167,63 @@ def latticeComparisonNormalized
     (scalarSixChange (latticeRationalMap ell F) Z.left).map
       (latticeScalarSingleComparison (latticeIntegralMap ell h) Z.left L)
 
+open MonoidalCategory MonObj in
+private noncomputable def latticeExtendRegularIso {X : Scheme.{u}}
+    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (φ : R ⟶ S) [IsMonHom φ] :
+    (Mod.extendScalars φ).obj (Mod.regular R) ≅ Mod.regular S := by
+  let e₀ := Mod.toBimodRegularIso (R := R)
+  let B := Bimod.ofMonHom φ
+  let e₁ : B.tensorBimod ((Mod.toBimod R).obj (Mod.regular R)) ≅
+      B.tensorBimod (Bimod.regular (Mon.mk R)) :=
+    { hom := Bimod.whiskerLeft B e₀.hom
+      inv := Bimod.whiskerLeft B e₀.inv
+      hom_inv_id := by rw [← Bimod.whiskerLeft_comp_bimod, Iso.hom_inv_id];
+                       exact Bimod.whiskerLeft_id_bimod
+      inv_hom_id := by rw [← Bimod.whiskerLeft_comp_bimod, Iso.inv_hom_id];
+                       exact Bimod.whiskerLeft_id_bimod }
+  let e := e₁ ≪≫ Bimod.rightUnitorBimod B
+  exact Mod.isoMk
+    { hom := e.hom.hom
+      inv := e.inv.hom
+      hom_inv_id := congrArg Bimod.Hom.hom e.hom_inv_id
+      inv_hom_id := congrArg Bimod.Hom.hom e.inv_hom_id }
+    e.hom.left_act_hom
+
+
+private theorem latticeFreeExtend {X : Scheme.{u}}
+    {R S : Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}}
+    [MonObj R] [MonObj S] [IsCommMonObj R] [IsCommMonObj S]
+    (φ : R ⟶ S) [IsMonHom φ]
+    {M : Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) R}
+    (hM : Mod.IsFree R M) : Mod.IsFree S ((Mod.extendScalars φ).obj M) := by
+  obtain ⟨n, ⟨e⟩⟩ := hM
+  exact ⟨n, ⟨(Mod.extendScalars φ).mapIso e ≪≫
+    (Mod.extendScalars φ).mapBiproduct (fun _ : Fin n ↦ Mod.regular R) ≪≫
+    biproduct.mapIso (fun _ ↦ latticeExtendRegularIso φ)⟩⟩
+
+private theorem latticeLisseExtend
+    {Λ Λ' : Sheaf (coherentTopology Profinite.{u}) Ab.{u + 1}}
+    [MonObj Λ] [IsCommMonObj Λ] [MonObj Λ'] [IsCommMonObj Λ']
+    (b : Λ ⟶ Λ') [IsMonHom b]
+    {X : Scheme.{u}} (M : ModuleRingedComparison.internalModules Λ X)
+    (hM : IsLisseCoefficientModule Λ M) :
+    letI : IsCommMonObj (condensedRingObj Λ X) :=
+      Functor.isCommMonObj_obj (F := upperStarFromPoint X)
+    letI : IsCommMonObj (condensedRingObj Λ' X) :=
+      Functor.isCommMonObj_obj (F := upperStarFromPoint X)
+    IsLisseCoefficientModule Λ'
+      ((Mod.extendScalars (coefficientMap (Λ := Λ) (Λ' := Λ') b X)).obj M) := by
+  have (Y : Scheme.{u}) : IsCommMonObj (condensedRingObj Λ Y) :=
+    Functor.isCommMonObj_obj (F := upperStarFromPoint Y)
+  have (Y : Scheme.{u}) : IsCommMonObj (condensedRingObj Λ' Y) :=
+    Functor.isCommMonObj_obj (F := upperStarFromPoint Y)
+  obtain ⟨U, hU⟩ := hM
+  refine ⟨U, fun i ↦ ?_⟩
+  obtain ⟨n, ⟨e⟩⟩ := latticeFreeExtend (coefficientMap (Λ := Λ) (Λ' := Λ') b (U.X i)) (hU i)
+  exact ⟨n, ⟨((pullIso b (U.f i)).app M).symm ≪≫ e⟩⟩
+
 /-- Two algebraic-closure lattice generators admit integral models over one common
 finite coefficient field, with the canonically normalized scalar comparisons.
 
@@ -226,6 +285,23 @@ theorem common_field_lattice_generators
           (scalarSixChange (latticeRationalMap ell (E i)) (W i).left).obj
             (latticeExtendedObject H G (latticeIntegralRing ell (E i)) (a i) (L i)),
           latticeComparisonNormalized H D G C ell (h i) (a i) (L i) e := by
-  sorry
+  obtain ⟨F, h₀, h₁⟩ :=
+    (PadicAlgCl.finiteSubextensions_directed ell).2.2.1 (E 0) (E 1)
+  have h : ∀ i : Fin 2, E i ≤ F := by
+    intro i
+    fin_cases i
+    · exact h₀
+    · exact h₁
+  refine ⟨F, h, fun i ↦ ?_⟩
+  have hfree := latticeLisseExtend
+    (Λ := (latticeIntegralRing ell (E i)).X) (Λ' := (latticeIntegralRing ell F).X)
+    (latticeIntegralMap ell (h i)).hom.hom (L i) (hL i)
+  refine ⟨hfree, ?_, ?_⟩
+  · exact normalized_integral_extension_constructible ell p k _hne H _hH G F
+      (W i) (Z i) (a i) _ hfree
+  · obtain ⟨e, he⟩ := lisse_generator_normalized_tower
+      (latticeIntegralMap ell (h i)) (latticeRationalMap ell F) H _hH D G C
+      (W i) (Z i) (a i) (L i) (hL i)
+    exact ⟨e, he⟩
 
 end AlgebraicGeometry.ProEtale.CondensedRing

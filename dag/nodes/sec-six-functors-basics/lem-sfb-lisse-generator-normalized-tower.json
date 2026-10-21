@@ -1,0 +1,125 @@
+{
+ "id": "lem-sfb-lisse-generator-normalized-tower",
+ "kind": "statement",
+ "title": "Normalized coefficient tower on a single lisse generator",
+ "statement": "Let A→B→Q be condensed commutative coefficient rings with the actual composite b followed by c from A to Q. Let a:Z→W be a locally closed immersion of finite-type schemes over a field, with W separated. Fix coherent normalized locally closed extension data H, its termwise derived coherence D, normalized coefficient geometry G and normalized scalar pullback comparisons C, as in [lem-sfb-locally-closed-extension-coherence] and [def-sfb-scalar-six-coefficient-interfaces]. For a lisse finite free A-module M on Z, Q⊗_B^L a_!(B⊗_A M)[0] is canonically isomorphic to Q⊗_A^L a_!M[0]. After restriction to Z, its inverse is the composite of inverse theta, the restriction of the original generator, inverse scalar transitivity, and the canonical derived-counit degree-zero comparison. No flatness of the coefficient maps is assumed.",
+ "source": {
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; Normalized coefficient tower on a single lisse generator"
+ },
+ "stmt_deps": [
+  "sk-def-sfb-dc-setting",
+  "def-weil-l-adic-coefficient-extension",
+  "sk-def-sfb-qlbar-condensed",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-coefficient-change",
+  "sk-def-sfb-bounded-constructible",
+  "def-sfb-lisse-coefficient-module",
+  "lem-sfb-locally-closed-extension-coherence",
+  "def-sfb-scalar-six-coefficient-interfaces"
+ ],
+ "proof": [
+  {
+   "text": "Trivialize M on a pro-etale cover. Its finite free local presentations show\nthat M is flat and its degree-zero complex is K-flat. Thus the universal derived\ncounit for scalar extension along b is invertible on that complex, and composing\nwith the homotopy-localization and single-complex comparisons gives its canonical\nordinary degree-zero scalar comparison. The normalized scalar/extension comparison\nidentifies scalar extension of a_!M with a_! of the derived scalar extension of M.\nThese comparisons apply to the supplied normalized H, G and C: identify their open\nextensions by uniqueness of left adjoints with the prescribed unit, their closed\nextensions by the prescribed direct-image comparison, and use H's coherent gamma\nfor a locally closed factorization. The termwise equations of D identify the\nresulting derived restrictions. Compose with the degree-zero comparison, invert,\nand apply scalar extension along c. Follow this by the scalar-tower\ncomparison. This constructs e for the actual composite coefficient map b followed by c.\nRestrict its inverse to Z. The normalized scalar/extension comparison restricts to\ninverse theta, while scalar transitivity commutes with inverse image by C.tower.\nCancel the two extension restriction isomorphisms. Naturality of the derived\ncounit and of the single-complex comparison leaves precisely the displayed\nequality. No flatness of b or c is required, only local finite freeness of M.\n",
+   "uses": [
+    "lem-sfb-locally-free-derived-scalars",
+    "det-prop-scalar-six-pullback",
+    "lem-sfb-locally-closed-extension-coherence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+    "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-locally-free-derived-scalars",
+  "det-prop-scalar-six-pullback",
+  "lem-sfb-locally-closed-extension-coherence"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
+  "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "leanfinder",
+   "query": "Canonical normalized comparison for extension by zero and a tower of derived coefficient extension functors",
+   "results": "8 hits: localCohomology.diagram, HomologicalComplex.extend.X, CochainComplex.instIsStrictlyLEExtendNatIntEmbeddingDownNatOfNat, HomologicalComplex.extend, ComplexShape.Embedding.extendFunctor, HomologicalComplex.extendFunctor_obj, ComplexShape.Embedding.liftExtend.f, ComplexShape.Embedding.liftExtend",
+   "date": "2026-10-21",
+   "verdict": "Homological complex extension is unrelated to coefficient towers or extension by zero; no match."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Functor, CategoryTheory.IsIso",
+   "results": "12 hits, including Functor.map_isIso, Functor.map_inv, Functor.map_hom_inv, Functor.map_inv_hom, NatTrans.naturality_inv and their associativity variants.",
+   "date": "2026-10-21",
+   "verdict": "General transport identities only; these do not state constructibility or the normalized scalar comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "singleFunctorCompLeftDerivedFunctorIso|leftDerivedFunctorCounit_app_of_kFlat",
+   "results": "0 Mathlib hits; local rg finds the project left-derived counit API.",
+   "date": "2026-10-21",
+   "verdict": "No direct Mathlib statement of the coefficient-specific extension result."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Normalized extension by zero preserves constructibility of a lisse integral sheaf and commutes with derived scalar extension",
+   "results": "8 hits: ContMDiff.extend_zero, Function.ExtendByZero.linearMap, Scheme.Hom.instIsIntegralNormalization, FractionalIdeal.extended_zero, Algebra.normalizedTrace_ne_zero, Scheme.Hom.instIsIntegralHomFromNormalization, Polynomial.integralNormalization_zero, IsLocalization.integerNormalization_eval₂_eq_zero",
+   "date": "2026-10-22",
+   "verdict": "No match: these concern functions, normalization of schemes, ideals, or field traces, not the pro-etale module extension or its scalar comparison."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "Sheaf.SixFunctors.CommonFieldLatticeGenerators",
+  "date": "2026-10-21",
+  "group": "R7"
+ },
+ "chapter": "sec-six-functors-basics",
+ "unit": "sk-thm-sfb-proper-base-change",
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lem-sfb-common-field-lattice-generators",
+   "place": "Normalized coefficient tower on a single lisse generator",
+   "via": []
+  },
+  "same_as": []
+ },
+ "lean": {
+  "existing": false,
+  "module": "Sheaf.SixFunctors.ScalarSixLisseTowerComparison",
+  "file": "lean/Sheaf/SixFunctors/ScalarSixLisseTowerComparison.lean",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.lisse_generator_normalized_tower",
+  "statement": "theorem lisse_generator_normalized_tower\n    {A B Q : ScalarSixRing.{u}}\n    [IsCommMonObj A.X] [IsCommMonObj B.X] [IsCommMonObj Q.X]\n    (b : A ⟶ B) (c : B ⟶ Q)\n    (H : LocallyClosedExtensionData.{u}) (hH : H.Coherent) (D : H.DerivedCoherence)\n    (G : ScalarSixGeometry.{u}) (C : ScalarSixPullbackData.{u})\n    {k : Type u} [Field k] (W Z : Over (Spec (.of k)))\n    [IsCommMonObj (condensedRingObj A.X Z.left)]\n    [IsCommMonObj (condensedRingObj B.X Z.left)]\n    [LocallyOfFiniteType W.hom] [QuasiCompact W.hom] [IsSeparated W.hom]\n    [LocallyOfFiniteType Z.hom] [QuasiCompact Z.hom]\n    (a : Z ⟶ W) [IsImmersion a.left]\n    (M : ModuleRingedComparison.internalModules A.X Z.left)\n    (hM : IsLisseCoefficientModule A.X M) :\n    ∃ e : (scalarSixChange c W.left).obj\n        ((scalarSixExtension H G B a).obj ((DerivedCategory.singleFunctor _ 0).obj\n          ((Mod.extendScalars (coefficientMap (Λ := A.X) (Λ' := B.X) b.hom.hom Z.left)).obj M))) ≅\n      (scalarSixChange (b ≫ c) W.left).obj\n        ((scalarSixExtension H G A a).obj ((DerivedCategory.singleFunctor _ 0).obj M)),\n      (scalarSixPull Q a.left).map e.inv ≫\n          (C.theta c a.left).inv.app _ ≫\n          (scalarSixChange c Z.left).map\n            ((scalarSixRestriction H D G B a).hom.app _) =\n        (C.theta (b ≫ c) a.left).inv.app _ ≫\n          (scalarSixChange (b ≫ c) Z.left).map\n            ((scalarSixRestriction H D G A a).hom.app _) ≫\n          (scalarSixTower b c Z.left).inv.app _ ≫\n          (scalarSixChange c Z.left).map\n            ((Mod.extendScalars (coefficientMap (Λ := A.X) (Λ' := B.X)\n                b.hom.hom Z.left)).leftDerivedFunctorCounit.app\n                ((HomotopyCategory.quotient _ (.up ℤ)).obj\n                  ((HomologicalComplex.single _ (.up ℤ) 0).obj M)) ≫\n              DerivedCategory.Qh.map\n                (((Mod.extendScalars (coefficientMap (Λ := A.X) (Λ' := B.X)\n                    b.hom.hom Z.left)).mapHomotopyCategoryFactors\n                  (.up ℤ)).hom.app ((HomologicalComplex.single _ (.up ℤ) 0).obj M)) ≫\n              (DerivedCategory.quotientCompQhIso\n                (ModuleRingedComparison.internalModules B.X Z.left)).hom.app\n                  (((Mod.extendScalars (coefficientMap (Λ := A.X) (Λ' := B.X)\n                      b.hom.hom Z.left)).mapHomologicalComplex\n                    (.up ℤ)).obj ((HomologicalComplex.single _ (.up ℤ) 0).obj M)) ≫\n              DerivedCategory.Q.map\n                ((HomologicalComplex.singleMapHomologicalComplex\n                  (Mod.extendScalars (coefficientMap (Λ := A.X) (Λ' := B.X) b.hom.hom Z.left))\n                  (.up ℤ) 0).hom.app M))",
+  "branch": "sheaf-dag",
+  "by": "R7",
+  "date": "2026-10-21"
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261021T194237-L-1508122",
+  "kind": "interface",
+  "note": "new node of a stage-3 delivery, read against its source by the reviewer"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261021T194237-L-1508122",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
+ }
+}

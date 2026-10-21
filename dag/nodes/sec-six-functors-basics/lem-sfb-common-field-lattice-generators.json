@@ -43,37 +43,15 @@
    }
   },
   {
-   "text": "For each $i$, apply [lem-sfb-locally-free-derived-scalars] on $(Z_i)_{\\mathrm{pro\\acute et}}$ with $R=\\cO_{E_i,Z_i}$, $B=\\cO_{F,Z_i}$ and $M=L_i$. The hypothesis is exactly the assumed pro-etale local finite freeness: a cover of $Z_i$ restricts to a trivializing cover over every site object. It gives that $L_{i,F}=B\\otimes_R L_i$ is lisse finite free with the same local ranks, and the canonical identification $B\\otimes_R^{\\mathbf L}L_i[0]\\cong L_{i,F}[0]$. In particular this calculation requires no assertion that the whole coefficient-change functor is exact and no uniform bound on local ranks.",
+   "text": "Ordinary scalar extension preserves lisseness directly: on a trivializing cover use pullIso, map the finite biproduct presentation, and identify B tensor_A A with the regular B-module. This includes rank zero. Apply [lem-sfb-normalized-integral-extension-constructible] to each extended lattice over F. Apply [lem-sfb-lisse-generator-normalized-tower] to the inclusion O_Ei→O_F→Qlbar. The composite of the maps is the original inclusion, definitionally on continuous functions. Its normalized equation is exactly latticeComparisonNormalized. Pair these two properties for each i with the common finite field from step 1.",
    "uses": [
-    "lem-sfb-locally-free-derived-scalars"
+    "lem-sfb-normalized-integral-extension-constructible",
+    "lem-sfb-lisse-generator-normalized-tower"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-    "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; common finite field argument, step 3"
-   }
-  },
-  {
-   "text": "Apply clause (3) of [det-lem-integral-models-generators] with coefficient field $F$, ambient standing scheme $W_i$, locally closed immersion $a_i$, and lisse finite free lattice $L_{i,F}$ from step 3. That clause writes $a_{i!}$ as closed direct image after open extension by zero, $a_{i!}=c_*u_!$ for a factorization $a_i=c\\circ u$ with $u$ open and $c$ closed; [lem-sfb-locally-closed-extension-coherence] ($W_i$ is Noetherian, being of finite type over $k$) gives the normalized identification of this functor with the exact locally closed extension by zero of the statement, $a_{i!}\\cong c_*u_!$. Since $\\Dbc(W_i,\\cO_F)$ is closed under isomorphism, it gives $K_{i,F}=a_{i!}L_{i,F}\\in\\Dbc(W_i,\\cO_F)$. These are precisely the hypotheses of that clause; no integral-model existence assertion is needed.",
-   "uses": [
-    "det-lem-integral-models-generators",
-    "lem-sfb-locally-closed-extension-coherence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-    "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; common finite field argument, step 4"
-   }
-  },
-  {
-   "text": "Put $T^V_{A,B}=B_V\\otimes^{\\mathbf L}_{A_V}-$ for coefficient rings in the tower $A=\\cO_{E_i}\\to B=\\cO_F\\to C=\\Qlb$. Clause (2) of [det-prop-scalar-six-pullback], applied to $a_i$ and $L_i[0]$, and the degree-zero comparison of step 3 give $T^{W_i}_{A,B}(a_{i!}L_i)\\cong a_{i!}(T^{Z_i}_{A,B}L_i)\\cong a_{i!}L_{i,F}=K_{i,F}$. Apply $T^{W_i}_{B,C}$ to the inverse of this isomorphism, then clause (3) of the same cited node. The resulting canonical composite is\n$$\\Qlb_{W_i}\\otimes^{\\mathbf L}_{\\cO_{F,W_i}}K_{i,F}\\ \\cong\\ T^{W_i}_{B,C}T^{W_i}_{A,B}(a_{i!}L_i)\\ \\cong\\ T^{W_i}_{A,C}(a_{i!}L_i)=G_i.$$\nThe composite coefficient map is the original inclusion by step 2. The scalar/immersion and tower comparisons in the cited statement are natural, so this is the claimed canonical comparison for each $i$.",
-   "uses": [
-    "det-prop-scalar-six-pullback"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-    "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; common finite field argument, step 5"
+    "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8"
    }
   }
  ],
@@ -81,15 +59,13 @@
   "det-def-sfb-qlbar-condensed-subextensions",
   "def-weil-l-adic-coefficient-extension",
   "sk-def-sfb-coefficient-change",
-  "lem-sfb-locally-free-derived-scalars",
-  "det-lem-integral-models-generators",
-  "lem-sfb-locally-closed-extension-coherence",
-  "det-prop-scalar-six-pullback"
+  "lem-sfb-normalized-integral-extension-constructible",
+  "lem-sfb-lisse-generator-normalized-tower"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sfb-proper-base-change/sk-thm-sfb-proper-base-change-rational.proof.md",
-  "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; explicit common-compositum and coefficient-comparison argument"
+  "place": "paragraph (3), pairs of Qlbar generators before devissage; former step 8; Lean assembly by R7: common field, direct finite-free calculation, and two separate extension/scalar interfaces"
  },
  "mathlib_searches": [
   {
@@ -260,5 +236,15 @@
   "group": "Q09",
   "result": "pass",
   "note": "Re-delivery after landing Return L (28 name collisions from the copied ScalarSixCoefficientInterfaces module on ccd92d734587, which an earlier review had passed). The copied module and the replacement ScalarSixPullback module are withdrawn. def-sfb-scalar-six-coefficient-interfaces now records the published Sheaf.SixFunctors.ScalarSixPullback with existing:true; that module's 28 abbrev/def/structure/instance declarations (lines 55-425) equal lean.declarations name for name, and 'structure ScalarSixPullbackData' is verbatim at line 254. The live det-prop-scalar-six-pullback record (Q17) lists only its theorem, so there is no ownership overlap, no module change and no collision. Item Lean is byte-identical to the previous head apart from replacing the interface import with a public ScalarSixPullback import; the item JSON is identical. The scalar-six names it uses (ScalarSixRing, scalarSixChange/Pull/Tower/Extension/Restriction, ScalarSixGeometry, ScalarSixPullbackData) are all in the recorded list; the theorem is not used and stays in proof_deps. Mathematics re-checked: hypotheses equal to the node, common F before the per-i clauses, ordinary L_{i,F} lisse, K_{i,F} bounded constructible, iso pinned by latticeComparisonNormalized, finite-subextension Qbar model, edge cases and universes fine, docstrings and sorry fine. Advisories: inherited imports from nodes outside the definition node's stmt_deps; three proof-only plain imports. No compile run (no file changed); the worker reports a clean compile in about 23 s and a passing dry run including the existing-declaration probe."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "R7",
+  "result": "pass",
+  "landing": "20261021T194237-L-1508122",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
