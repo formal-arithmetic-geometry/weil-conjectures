@@ -276,5 +276,23 @@
   "group": "Q79",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-f3eb1599c (reviewer sub-agent of L); spot-checked: Read B-S 6.8.13 (first paragraph, p.61), Stacks 03S0/0356 and every cited statement. The item statement and stmt_deps are unchanged from the unsplit base. There are no new nodes, no dropped or superseded ids and no cycle. Step 1: localization (1) plus the ringed-topoi tensor node; slice coefficients agree. Step 2: etale-local lattice gives a nonempty Y_i; affine B. Step 3: open image W; B to W etale; W and B qcqs (all hypotheses of 03S0). Step 4: 03S0 partition. Step 5: the minimal-closed-subfamily argument is correct; edge cases checked (empty strata, one stratum, reducible W). Step 6: reduced U factors through S_a via closed-then-open factorization and 0356, avoiding the E3 set-inclusion trap. Step 7: base change gives finite etale surjective p_U; B_U is open in B. Step 8: U has a noetherian space by the affine-chart and finite-union nodes; finite-etale descent applies; j is quasi-compact. Fault C1/C4: steps 7-8 identify u_i^{-1}L, p_U^{-1}(L|_U) and j^{-1}L (def-weil-proetale-inverse-image, sheafified colimit) with slice restrictions without citation. FIX: steps 7 and 8 now cite lem-sfb-proetale-object-inverse-image-restriction clause (1), with E_X|_Z=E_Z from step 1. It is added to proof_deps and declared in split_report.tool_uses (generic site fact, unit sk-lem-proper-heart-bound); its closure does not reach the item. Advisory: lem-weil-pbc-lattice-pair-restriction states step 1's restriction and could be cited. Accepted tool use: lem-weil-proetale-weakly-etale-localization. The run's dagsnap symlinks went dangling mid-review; all statements had already been read, and the later cycle and route checks used clones/side-live.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.LisseLatticeReducedOpen",
+  "declaration": "AlgebraicGeometry.ProEtale.exists_lisse_lattice_reduced_open",
+  "file": "lean/Sheaf/Paper/LisseLatticeReducedOpen.lean",
+  "statement": "theorem exists_lisse_lattice_reduced_open (l : ℕ) [Fact l.Prime] (E : Type u) [Field E] [Algebra ℚ_[l] E] [FiniteDimensional ℚ_[l] E] (X : Scheme.{u}) [IsNoetherian X] [Nonempty X] [IsReduced X] (_hdim : ∃ n : ℕ, topologicalKrullDim X ≤ n) (_hl : ∀ x : X, IsUnit (l : X.presheaf.stalk x)) (L : ringedSiteModules.{u + 1} (latticeModuleRing X (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)))) (_hL : L.IsFiniteLocallyFree) : ∃ U : X.Opens, Nonempty U ∧ QuasiCompact U.ι ∧ ∃ M : ringedSiteModules.{u + 1} (latticeModuleRing U.toScheme (latticeCoefficientIntegers l E)), M.IsFiniteLocallyFree ∧ Nonempty (SheafOfModules.changeOfRings.{u, u + 1, u + 1} (integralLatticeCoefficientMap U.toScheme l E) M ≅ continuousModulePullback U.ι (WithAbs (Padic.coefficientExtensionAbsoluteValue l E)) L)",
+  "branch": "sheaf-dag",
+  "by": "Q25",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-0b08b67e9",
+  "group": "Q25",
+  "result": "pass",
+  "note": "Single new module Sheaf.Paper.LisseLatticeReducedOpen with theorem exists_lisse_lattice_reduced_open (sorry); node identical to side-live except the lean record; statement field verbatim in the file. Clause check: l prime, E finite/Q_l (E : Type u tied to X by the recorded latticeModuleRing, same as parent citer), A = latticeCoefficientIntegers, IsNoetherian X, topologicalKrullDim bound, l a unit in stalks, Nonempty+IsReduced, L : SheafOfModules over latticeModuleRing X (WithAbs ...) with IsFiniteLocallyFree (read: LocalGeneratorsData in the site-object universe, finite type, varying/zero rank). Conclusion: ∃ U : X.Opens nonempty, QuasiCompact U.ι, ∃ M finite locally free over A_U, Nonempty(changeOfRings integralLatticeCoefficientMap M ≅ continuousModulePullback U.ι K L) = j^{-1}L, since j^{-1}E_X→E_U is iso for an open immersion. No extra hypotheses; edge cases (rank 0, reducible X, dim 0) covered; universes bound. Docstrings carry source and blueprint tags and the node proof (steps 4-5 merged). No definitions, no duplicate found, all 12 imports exist. Not recompiled (2026-10-21 rule). Advisory: the etale-local, finite-etale-descent and item lemmas use three coefficient encodings, which stage 3 must bridge."
  }
 }

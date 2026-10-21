@@ -15,7 +15,13 @@
   "lem-weil-point-proetale-sections-exact",
   "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
   "def-weil-completed-integral-coefficients",
-  "def-pc-tensor-complex-sheaves"
+  "def-pc-tensor-complex-sheaves",
+  "def-sf-point-evaluation-tensor-data",
+  "def-sf-point-evaluation-tensor-coherence",
+  "def-sf-point-evaluation-derived-compatibility",
+  "def-sf-point-evaluation-scalar-data",
+  "def-sf-point-evaluation-scalar-coherence",
+  "def-sfb-ringed-site-point"
  ],
  "proof": [
   {
@@ -346,5 +352,34 @@
   "group": "N8",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N8-0ca408776 (reviewer sub-agent of L); spot-checked: I read the item and every cited statement in full. There are no new nodes. The statement and stmt_deps are byte-equal to the live/side-live unsplit node; the item is not in the drop list, has no repair note, and is not superseded. All 19 citations exist and none is merged; the union of uses equals proof_deps, and there is no cycle (the 402-node closure misses both the item and its parent). No SGA is used. Sources checked: Stacks 0991 (the paragraph before 0993), 03EL, 03D2 and 07A4 (K-flat flat-term total-complex proof); the 0G7E/07A2/06YY/06YS/06YU/04VG tags are correct. Step 1: (s,id) is initial because h∘id=u forces h=u; the topos point comes from lem-fix-geometric-stalk-topos-point. Step 2: p^{-1}B=B(s), and p^*≅Γ_s via the module-pullback formula, which is exact for any ring sheaf. Step 3: in cochain-coherence the inverse formula with s=t=1 gives b^{-1}. Step 4: exact-pullback-signed-comparison applies since F≅Γ_s is exact; η and its representative square pin μ. Steps 5–6: reassociation, signed symmetry and the unitors are in the coherence statement. For the κ-square I took φ'=id, and the compatibility hypothesis holds. The inverse balanced formula (x⊗a)⊗(y⊗b)↦(x⊗y)⊗ab needs no sign. Composites are handled as composites of the ringed morphisms (id,B→B'). Step 7: the identity-topos derived pullback gives K-flat flat-term images for a non-flat B→B'. Step 8: the pro-étale finite-constant-sections node with X=V=s, and A_{E,n} is finite by the dvr + finite-quotient leaves. Step 9: the sectionwise limit and the Cauchy/closed-ball argument are correct. Edge cases checked: B=0, unbounded complexes, odd/odd degrees, a quotient coefficient map, n=1, the zero tuple. I accept all 9 tool uses as generic. Advisory overlaps: lem-zl-contractible-derived-sections-tensor (abstract monoidality only) and lem-weil-point-finite-free-sections-tensor (O_F≅Γ(s,R_F) clause); neither is a duplicate. Advisory: the derived scalar comparisons are pinned only through κ/model formulas, the inherited parent advisory."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.PointRingedEvaluationModel",
+  "declaration": "AlgebraicGeometry.ProEtale.PointEvaluation.point_ringed_evaluation_model",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PointEvaluation.pointedLift",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.PointIdentification",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.constantSection",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.integralSection",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.CoefficientsIdentified",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.UnitNormalized",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.point_ringed_evaluation_model"
+  ],
+  "file": "lean/Sheaf/SixFunctors/PointRingedEvaluationModel.lean",
+  "statement": "theorem point_ringed_evaluation_model (k : Type u) [Field k] [IsAlgClosed k] : (∃ T : ∀ B : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1}, TensorModel B, (∀ B : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1}, PointIdentification B ∧ TensorCoherent B (T B) ∧ (∀ [(pointModuleSections k B).PreservesZeroMorphisms], UnitNormalized B (T B)) ∧ PreservesFiniteLimits (pointModuleSections k B) ∧ PreservesFiniteColimits (pointModuleSections k B) ∧ ∀ [HasDerivedCategory.{u + 2} (ModuleSheaves B)] [HasDerivedCategory.{u + 2} (ModuleCat.{u + 1} (sectionRing k B))] [(pointModuleSections k B).Additive] [PreservesFiniteLimits (pointModuleSections k B)] [PreservesFiniteColimits (pointModuleSections k B)], DerivedCompatible B (T B)) ∧ (∀ (B B' : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1}) (a : B ⟶ B'), ∃ S : ScalarModel a (T B) (T B'), ScalarCoherent a (T B) (T B') S ∧ ∀ [HasDerivedCategory.{u + 2} (ModuleSheaves B)] [HasDerivedCategory.{u + 2} (ModuleSheaves B')] [HasDerivedCategory.{u + 2} (ModuleCat.{u + 1} (sectionRing k B))] [HasDerivedCategory.{u + 2} (ModuleCat.{u + 1} (sectionRing k B'))] [(pointModuleSections k B).Additive] [(pointModuleSections k B').Additive] [PreservesFiniteLimits (pointModuleSections k B)] [PreservesFiniteColimits (pointModuleSections k B)] [PreservesFiniteLimits (pointModuleSections k B')] [PreservesFiniteColimits (pointModuleSections k B')], ScalarDerivedCompatible B a (T B) (T B') S)) ∧ CoefficientsIdentified.{u, e} k",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Supporting definition nodes separate the normalized point comparison data and predicates so each module compiles independently within 60 seconds. Existing site, evaluation, tensor, scalar extension, ringed point and coefficient constructions are reused.",
+  "fixed_by": "NT-stage2-cc-ec9ebf6e4"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec9ebf6e4",
+  "group": "Q66",
+  "result": "fix",
+  "note": "Read the node, all 14 stmt_deps, the report, six modules, five new nodes and the side-live interfaces (RingedSitePoint, GeometricStalkToposPoint, PointProEtaleSectionsExact, KFlatTotalTensorModel, SheafOfModules monoidal unit, CompletedIntegralCoefficients). Every clause is rendered: point identification pinned on colimit injections, RingedSitePoint ring/module pinned via HEq with equal types, exactness, derived sections as the unique left-derived functor, b fixed on every summand and pure tensors, resolving preservation, the unique representative-square derived comparison (true for all presentations; same interface as ringedTopoiCanonicalDerivedTensorPullback, moved to the ModuleCat target), unit/assoc/Koszul braiding/unitors, scalar kappa/epsilon pinned with a balanced rule and no flatness assumed, coefficient constant/limit/transition maps. No hollow data, extra hypotheses or universe restrictions; statement verbatim; stmt_deps gains only the new nodes plus the landed def-sfb-ringed-site-point (allowed); new nodes conform; no duplicate found. FIX (mechanical): H9, moved five plain proof-dep imports from PointEvaluationTensorData to the item module; landing speed-ups, TensorData genInjectivity/genSizeOfSpec/linters off (original timed out at 60 s, fix clean in 46 s side by side at load 150) and TensorCoherence linters off. All six siblings compiled clean via nt_compile --json at load 94 (16.8/18.9/52.0/17.1/5.0/6.9 s). Land at lower load (TensorCoherence about 50 s). Advisories: module docstrings lack a # title; report mislabels the FromJoel kFlat; derived constraint and scalar squares are implied rather than restated."
  }
 }

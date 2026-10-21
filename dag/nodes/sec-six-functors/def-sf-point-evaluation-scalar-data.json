@@ -1,0 +1,101 @@
+{
+ "id": "def-sf-point-evaluation-scalar-data",
+ "kind": "definition",
+ "title": "Balanced scalar comparison for point sections",
+ "status": "split",
+ "statement": "For a field $k$, commutative ring sheaves $B,B\\prime$ on the small pro-etale site of $s=\\operatorname{Spec}k$, $a:B\\to B\\prime$, and normalized tensor models $T,T\\prime$ [def-sf-point-evaluation-tensor-data], define normalized scalar data to comprise a natural chain isomorphism $\\kappa:\\Gamma_s\\circ a^*\\cong(R\\prime\\otimes_R-)\\circ\\Gamma_s$, whose value on the actual sheafification-unit generator $b\\otimes x$ is the ordinary tensor $b\\otimes x$, and the ordinary coefficient tensor comparison $\\epsilon$. Its inverse on every total summand is $(c\\otimes x)\\otimes(d\\otimes y)\\mapsto cd\\otimes(x\\otimes y)$. Here $R=B(s)$, $R\\prime=B\\prime(s)$, the scalar homomorphism is exactly $a_s$, and sheaf scalar extension is the canonical sheafified tensor [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. Mathlib places coefficients first; this is the balanced rule in that convention.",
+ "stmt_deps": [
+  "def-sf-point-evaluation-tensor-data",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "source": {
+  "document": "stacks-project/sites-cohomology.tex; stacks-project/sites-modules.tex",
+  "place": "Tags 07A4 and 03EL; normalized point specialization in the Kunneth proof"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Canonical scalar extension comparison for evaluation at a final object",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"ModuleCat.ExtendScalars.obj'\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} → {S : Type u₂} → [inst : CommRing R] → [inst_1 : CommRing S] → (R →+* S) → ModuleCat R → ModuleCat S\", \"doc\": \"Given a ring homomorphism $ f : R → S $ and an $ R $-module $ M $, this constructs the $ S $-module obtained by extending scalars through $ f $, defined as the tensor product $ M ⊗_R S $ with scalar m\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.toRestrictScalars\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) → (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ R $-linear maps from an $ R $-module $ X $ to the restriction of scalars of an $ S \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (s : S) (g : X ⟶ (ModuleCat.restrictScalars f).obj Y) (x : ↑X),\\n  (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt f s g) x = s • (CategoryTheory.ConcreteCategory.hom g) x\", \"doc\": \"Let $R$ and $S$ be commutative rings, $f: R \\\\to S$ a ring homomorphism, $X$ an $R$-module, and $Y$ an $S$-module. Let $g: X \\\\to Y$ be an $R$-linear map, where $Y$ is viewed as an $R$-module via restri\"}\n  {\"name\": \"CategoryTheory.lanEvaluationIsoColim\", \"module\": \"Mathlib.CategoryTheory.Functor.Flat\", \"type\": \"(F : C ⥤ D) (X : D) [∀ X : D, HasColimitsOfShape (CostructuredArrow F X) E] :\\n  F.lan ⋙ (evaluation D E).obj X ≅ (Functor.whiskeringLeft _ _ E).obj (CostructuredArrow.proj F X) ⋙ colim\", \"doc\": \"For functors $ F : \\\\mathcal{C} \\\\to \\\\mathcal{D} $ and $ G : \\\\mathcal{C} \\\\to \\\\mathcal{E} $, and an object $ X \\\\in \\\\mathcal{D} $, if the comma category $ \\\\text{CostructuredArrow}(F, X) $ admits colimits \"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} →\\n              S →\\n                (X ⟶ (ModuleCat.restrictScalars f).obj Y) →\\n                  have this := Module.compHom \", \"doc\": \"Given a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function evaluates the natural bijection between $ S $-linear maps $ X \\to Y $ (viewed as an $ R $-modul\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat S),\\n  (ModuleCat.ExtendRestrictScalarsAdj.counit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Counit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit of the adjunction between extending scalars from $ R $ to $ S $ and restricting scalar\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.homEquiv\", \"module\": \"Mathlib.Algebra.Category.ModuleCat.ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} → ((ModuleCat.extendScalars f).obj X ⟶ Y) ≃ (X ⟶ (ModuleCat.restrictScalars f).obj Y)\", \"doc\": \"For commutative rings $ R $ and $ S $ with a ring homomorphism $ f : R → S $, there is a natural bijection between $ S $-linear maps from the extension of scalars of an $ R $-module $ X $ to an $ S $-\"}\n  {\"name\": \"IntermediateField.coe_extendScalars\", \"module\": \"Mathlib.FieldTheory.IntermediateField.Basic\", \"type\": \": (extendScalars h : Set L) = (E : Set L)\", \"doc\": \"The canonical coercion of the intermediate field obtained by extending scalars from $ F $ to $ L $ under the condition $ h $ is equal to the subset $ E $ of $ L $. That is, $ \\\\{ e \\\\in L \\\\mid e \\\\in E \\\\\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary algebra or abstract coherence, without normalized point-evaluation maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Canonical scalar extension comparison for evaluation at a final object",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt_apply\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) {X : ModuleCat R}\\n  {Y : ModuleCat S} (s : S) (g : X ⟶ (ModuleCat.restrictScalars f).obj Y) (x : ↑X),\\n  (ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt f s g) x = s • (CategoryTheory.ConcreteCategory.hom g) x\", \"doc\": \"Let $R$ and $S$ be commutative rings, $f: R \\\\to S$ a ring homomorphism, $X$ an $R$-module, and $Y$ an $S$-module. Let $g: X \\\\to Y$ be an $R$-linear map, where $Y$ is viewed as an $R$-module via restri\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.HomEquiv.evalAt\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"{R : Type u₁} →\\n  {S : Type u₂} →\\n    [inst : CommRing R] →\\n      [inst_1 : CommRing S] →\\n        (f : R →+* S) →\\n          {X : ModuleCat R} →\\n            {Y : ModuleCat S} →\\n              S →\\n                (X ⟶ (ModuleCat.restrictScalars f).obj Y) →\\n                  have this := Module.compHom \", \"doc\": \"Given a ring homomorphism $ f : R \\to S $, an $ R $-module $ X $, and an $ S $-module $ Y $, this function evaluates the natural bijection between $ S $-linear maps $ X \\to Y $ (viewed as an $ R $-modul\"}\n  {\"name\": \"ModuleCat.RestrictionCoextensionAdj.counit'_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : Ring R] [inst_1 : Ring S] (f : R →+* S) (X : ModuleCat R),\\n  (ModuleCat.RestrictionCoextensionAdj.counit' f).app X =\\n    ModuleCat.ofHom { toFun := fun g => g.toFun 1, map_add' := ⋯, map_smul' := ⋯ }\", \"doc\": \"Let $R$ and $S$ be rings, and let $f: R \\\\to S$ be a ring homomorphism. The restriction of scalars functor $\\\\mathrm{Res}_f: \\\\mathrm{Mod}_S \\\\to \\\\mathrm{Mod}_R$ is left adjoint to the coextension of scal\"}\n  {\"name\": \"ModuleCat.extendScalars_id_comp_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] (f₁₂ : R₁ →+* R₂)\\n  {Z : CategoryTheory.Functor (ModuleCat R₁) (ModuleCat R₂)} (h : ModuleCat.extendScalars f₁₂ ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.extendScalarsComp (RingHom.id R₁) f₁₂).hom\\n      (CategoryTheory.Categ\", \"doc\": \"For any commutative rings $ R_1 $ and $ R_2 $ and ring homomorphism $ f_{12} : R_1 \\to R_2 $, the composition of the extension of scalars functor for the identity homomorphism $ \\text{id}_{R_1} $ with t\"}\n  {\"name\": \"ModuleCat.extendScalars_comp_id\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] (f₁₂ : R₁ →+* R₂),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.extendScalarsComp f₁₂ (RingHom.id R₂)).hom\\n      (CategoryTheory.CategoryStruct.comp ((ModuleCat.extendScalars f₁₂).whiskerLeft (ModuleCat.extendScalarsId R₂).hom)\\n     \", \"doc\": \"For any commutative ring $ R $, the extension of scalars functor induced by the identity ring homomorphism $ R \\to R $ is naturally isomorphic to the identity functor on the category of left $ R $-modu\"}\n  {\"name\": \"ModuleCat.homEquiv_extendScalarsComp\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ R₃ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] [inst_2 : CommRing R₃] (f₁₂ : R₁ →+* R₂)\\n  (f₂₃ : R₂ →+* R₃) (M : ModuleCat R₁),\\n  ((ModuleCat.extendRestrictScalarsAdj (f₂₃.comp f₁₂)).homEquiv M\\n        (((ModuleCat.extendScalars f₁₂).comp (ModuleCat.extendScalars f₂₃)).obj M))\\n  \", \"doc\": \"For commutative rings $ R_1, R_2, R_3 $ with ring homomorphisms $ f_{12} : R_1 → R_2 $ and $ f_{23} : R_2 → R_3 $, the hom-set equivalence induced by the adjunction between extension and restriction o\"}\n  {\"name\": \"ModuleCat.extendScalars_comp_id_assoc\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R₁ R₂ : Type u₁} [inst : CommRing R₁] [inst_1 : CommRing R₂] (f₁₂ : R₁ →+* R₂)\\n  {Z : CategoryTheory.Functor (ModuleCat R₁) (ModuleCat R₂)} (h : ModuleCat.extendScalars f₁₂ ⟶ Z),\\n  CategoryTheory.CategoryStruct.comp (ModuleCat.extendScalarsComp f₁₂ (RingHom.id R₂)).hom\\n      (CategoryTheory.Categ\", \"doc\": \"For any commutative rings $ R_1, R_2 $, ring homomorphism $ f_{12} : R_1 → R_2 $, and functor $ Z : \\text{ModuleCat}(R_1) → \\text{ModuleCat}(R_2) $, the composition of the extension of scalars functor f\"}\n  {\"name\": \"ModuleCat.ExtendRestrictScalarsAdj.counit_app\", \"module\": \"Mathlib/Algebra/Category/ModuleCat/ChangeOfRings\", \"type\": \"∀ {R : Type u₁} {S : Type u₂} [inst : CommRing R] [inst_1 : CommRing S] (f : R →+* S) (x : ModuleCat S),\\n  (ModuleCat.ExtendRestrictScalarsAdj.counit f).app x = ModuleCat.ExtendRestrictScalarsAdj.Counit.map f\", \"doc\": \"For commutative rings $ R $ and $ S $, a ring homomorphism $ f : R \\\\to S $, and an $ S $-module $ Y $, the counit of the adjunction between extending scalars from $ R $ to $ S $ and restricting scalar\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary tensor/coherence declarations do not supply this point-evaluation interface"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Tt]ensor|point.*[Ss]calar|point.*[Cc]oheren (Mathlib/CategoryTheory); rg on WeilConjectures and Sheaf; DAG point evaluation tensor model",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean\", \"line\": \"69\", \"text\": \"  preservesLimit_of_evaluation _ _ <| fun c ↦ inferInstanceAs (PreservesLimit F (tensorRight c))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean\", \"line\": \"33\", \"text\": \"  (Functor.postcompose₂.obj <| (evaluation _ _).obj <| curriedTensor C).obj <| whiskeringLeft₂ C\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean\", \"line\": \"152\", \"text\": \"  have : tensorLeft F ⋙ (evaluation J C).obj k ≅ (evaluation J C).obj k ⋙ tensorLeft (F.obj k) :=\"}\n\nProject exact-name search stdout:\n\nThe broader project/DAG audit and distinctions are in report.md.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; reuse existing tensor, scalar and ringed-point constructions; add only predicates and presentation data for this evaluation"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-point-ringed-evaluation-model",
+  "date": "2026-10-21",
+  "group": "Q66"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Final compact-support specialization over Spec k, representative-normalized point tensor and coefficient maps",
+   "via": [
+    "lem-sf-point-ringed-evaluation-model",
+    "lem-sf-point-fibre-derived-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "module": "Sheaf.SixFunctors.PointEvaluationScalarTensor",
+  "declaration": "AlgebraicGeometry.ProEtale.PointEvaluation.ScalarModel",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PointEvaluation.scalarMap",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleExtend",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.ScalarModel"
+  ],
+  "file": "lean/Sheaf/SixFunctors/PointEvaluationScalarTensor.lean",
+  "statement": "structure ScalarModel {B' : Sheaf (Scheme.ProEt.topology (Spec (.of k))) CommRingCat.{u + 1}} (a : B ⟶ B') (T : TensorModel B) (T' : TensorModel B')",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec9ebf6e4",
+  "group": "Q66",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec9ebf6e4",
+  "group": "Q66",
+  "result": "fix",
+  "note": "Read the node, all 14 stmt_deps, the report, six modules, five new nodes and the side-live interfaces (RingedSitePoint, GeometricStalkToposPoint, PointProEtaleSectionsExact, KFlatTotalTensorModel, SheafOfModules monoidal unit, CompletedIntegralCoefficients). Every clause is rendered: point identification pinned on colimit injections, RingedSitePoint ring/module pinned via HEq with equal types, exactness, derived sections as the unique left-derived functor, b fixed on every summand and pure tensors, resolving preservation, the unique representative-square derived comparison (true for all presentations; same interface as ringedTopoiCanonicalDerivedTensorPullback, moved to the ModuleCat target), unit/assoc/Koszul braiding/unitors, scalar kappa/epsilon pinned with a balanced rule and no flatness assumed, coefficient constant/limit/transition maps. No hollow data, extra hypotheses or universe restrictions; statement verbatim; stmt_deps gains only the new nodes plus the landed def-sfb-ringed-site-point (allowed); new nodes conform; no duplicate found. FIX (mechanical): H9, moved five plain proof-dep imports from PointEvaluationTensorData to the item module; landing speed-ups, TensorData genInjectivity/genSizeOfSpec/linters off (original timed out at 60 s, fix clean in 46 s side by side at load 150) and TensorCoherence linters off. All six siblings compiled clean via nt_compile --json at load 94 (16.8/18.9/52.0/17.1/5.0/6.9 s). Land at lower load (TensorCoherence about 50 s). Advisories: module docstrings lack a # title; report mislabels the FromJoel kFlat; derived constraint and scalar squares are implied rather than restated."
+ }
+}

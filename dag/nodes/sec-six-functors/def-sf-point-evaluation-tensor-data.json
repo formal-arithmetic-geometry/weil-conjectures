@@ -1,0 +1,122 @@
+{
+ "id": "def-sf-point-evaluation-tensor-data",
+ "kind": "definition",
+ "title": "Normalized tensor presentation for point sections",
+ "status": "split",
+ "statement": "For a field $k$, let $s=\\operatorname{Spec}k$ with its small pro-etale site [def-weil-pbc-proetale-site], and let $B$ be a commutative ring sheaf. Put $R=B(s)$ and let $\\Gamma_s$ be the recorded evaluation functor [lem-weil-point-proetale-sections-exact]. A normalized tensor model comprises module comparisons $\\Gamma_s(M\\otimes_B N)\\cong\\Gamma_sM\\otimes_R\\Gamma_sN$, whose inverse is the actual sheaf section tensor, and natural chain comparisons $b_{P,Q}:\\Gamma_s\\operatorname{Tot}(P\\otimes Q)\\cong\\operatorname{Tot}(\\Gamma_sP\\otimes\\Gamma_sQ)$ [def-pc-tensor-complex-sheaves]. On each bidegree summand the inverse is the module comparison inverse followed by evaluation of the total inclusion. Include the degree-zero unit comparison, the module unit comparison equal to the identity on $R$, additivity and zero-map preservation of evaluation, and preservation of the flat-term K-flat class [def-pc-kflat-complex] and [def-pc-flat-sheaf-modules]. All tensors are the canonical sheaf or ordinary module tensors [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]; no alternative monoidal structure is introduced.",
+ "stmt_deps": [
+  "def-weil-pbc-proetale-site",
+  "lem-weil-point-proetale-sections-exact",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback"
+ ],
+ "source": {
+  "document": "stacks-project/sites-cohomology.tex; stacks-project/sites-modules.tex",
+  "place": "Tags 07A4 and 03EL; normalized point specialization in the Kunneth proof"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Final object evaluation tensor complex model with normalized pure section tensor",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"FGModuleCat.FGModuleCatEvaluation\", \"module\": \"Mathlib.Algebra.Category.FGModuleCat.Basic\", \"type\": \": FGModuleCatDual K V ⊗ V ⟶ 𝟙_ (FGModuleCat K)\", \"doc\": \"The morphism from the tensor product of the dual module $ \\\\text{Hom}_K(V, K) $ and the module $ V $ to the identity endofunctor on the category of finitely generated $ K $-modules, constructed via the\"}\n  {\"name\": \"MvPolynomial.rTensor_apply_tmul_apply\", \"module\": \"Mathlib.RingTheory.TensorProduct.MvPolynomial\", \"type\": \"(p : MvPolynomial σ S) (n : N) (d : σ →₀ ℕ) : rTensor (p ⊗ₜ[R] n) d = (coeff d p) ⊗ₜ[R] n\", \"doc\": \"For any multivariate polynomial $ p $, module element $ n $, and monomial $ d $, the evaluation of the tensor product $ p \\\\otimes_R n $ at $ d $ equals the tensor product of the coefficient of $ d $ i\"}\n  {\"name\": \"PiTensorProduct.toDualContinuousMultilinearMap_apply_apply\", \"module\": \"Mathlib.Analysis.Normed.Module.PiTensorProduct.InjectiveSeminorm\", \"type\": \"∀ {ι : Type uι} [inst : Fintype ι] {𝕜 : Type u𝕜} [inst_1 : NontriviallyNormedField 𝕜] {E : ι → Type uE}\\n  [inst_2 : (i : ι) → SeminormedAddCommGroup (E i)] [inst_3 : (i : ι) → NormedSpace 𝕜 (E i)] (F : Type uF)\\n  [inst_4 : SeminormedAddCommGroup F] [inst_5 : NormedSpace 𝕜 F] (x : PiTensorProduct 𝕜 f\", \"doc\": \"For any finite index type $\\\\iota$, nontrivially normed field $\\\\mathbb{K}$, seminormed abelian groups $E_i$ and normed $\\\\mathbb{K}$-vector space $F$, the evaluation of a tensor product element $x \\\\in \\\\\"}\n  {\"name\": \"HomologicalComplex.tensorUnit\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \": HomologicalComplex C c\", \"doc\": \"The homological complex constructed by placing the unit object $\\\\mathbf{1}_C$ of the monoidal category $C$ at index $0$ and zero objects elsewhere, with all differentials being zero morphisms. This is\"}\n  {\"name\": \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"module\": \"Mathlib.RingTheory.Extension.Presentation.Core\", \"type\": \"(x : MvPolynomial ι R₀) :\\n  P.tensorModelOfHasCoeffsInv R₀ (MvPolynomial.aeval P.val x) = 1 ⊗ₜ[R₀] (Ideal.Quotient.mk _ x)\", \"doc\": \"For any multivariate polynomial $x$ over $R₀$, the composition of the tensor product model homomorphism with the polynomial evaluation map sends $x$ to $1 \\\\otimes_{R₀} \\\\overline{x}$, where $\\\\overline{\"}\n  {\"name\": \"HomologicalComplex.instHasTensorTensorUnit_1\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \": HasTensor K (tensorUnit C c)\", \"doc\": \"Given a homological complex $ K $ in a monoidal category $ \\\\mathcal{C} $ and the tensor unit complex (which places the unit object $ \\\\mathbf{1}_C $ at index 0 and zero objects elsewhere), this instanc\"}\n  {\"name\": \"MvPolynomial.aeval_one_tmul\", \"module\": \"Mathlib.RingTheory.TensorProduct.MvPolynomial\", \"type\": \"(f : σ → S) (p : MvPolynomial σ R) : (aeval fun x ↦ (1 ⊗ₜ[R] f x : N ⊗[R] S)) p = 1 ⊗ₜ[R] (aeval f) p\", \"doc\": \"For any polynomial $ p $ in the multivariate polynomial ring $ R[\\\\sigma] $ and any algebra homomorphism $ f : \\\\sigma \\\\to S $, evaluating $ p $ with variables mapped to $ 1 \\\\otimes f(x) $ in the tensor\"}\n  {\"name\": \"HomologicalComplex.instHasTensorTensorUnit\", \"module\": \"Mathlib.Algebra.Homology.Monoidal\", \"type\": \": HasTensor (tensorUnit C c) K\", \"doc\": \"The tensor unit homological complex in a monoidal category $ \\\\mathcal{C} $, when tensored with any homological complex $ K $, results in a complex that satisfies the total complex condition with respe\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary algebra or abstract coherence, without normalized point-evaluation maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Final object evaluation tensor complex model with normalized pure section tensor",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"HomologicalComplex.instHasTensorTensorUnit_1\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive]\\n  [inst_5 : ∀ (X₁ : C), ((Cat\", \"doc\": \"Given a homological complex $ K $ in a monoidal category $ \\\\mathcal{C} $ and the tensor unit complex (which places the unit object $ \\\\mathbf{1}_C $ at index 0 and zero objects elsewhere), this instanc\"}\n  {\"name\": \"HomologicalComplex.instHasTensorTensorUnit\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C]\\n  [inst_4 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive]\\n  [inst_5 : ∀ (X₁ : C), ((Cat\", \"doc\": \"The tensor unit homological complex in a monoidal category $ \\\\mathcal{C} $, when tensored with any homological complex $ K $, results in a complex that satisfies the total complex condition with respe\"}\n  {\"name\": \"HomologicalComplex.tensorUnit\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"(C : Type u_1) →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [CategoryTheory.Limits.HasZeroObject C] →\\n          {I : Type u_2} → [AddMonoid I] → (c : ComplexShape I) → [DecidableEq I] → Homologic\", \"doc\": \"The homological complex constructed by placing the unit object $\\\\mathbf{1}_C$ of the monoidal category $C$ at index $0$ and zero objects elsewhere, with all differentials being zero morphisms. This is\"}\n  {\"name\": \"HomologicalComplex.ιTensorObj\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a monoidal category $ \\\\mathcal{C} $, and indices $ i_1, i_2, j $ in the additive monoid $ I $ satisfying $ i_1 + i_2 = j $, this morphism maps th\"}\n  {\"name\": \"HomologicalComplex.instHasTensorXTensorUnit\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C] {I : Type u_2}\\n  [inst_4 : AddMonoid I] {c : ComplexShape I} (K : HomologicalComplex C c) [inst_5 : D\", \"doc\": \"The tensor product of the tensor unit homological complex (with the unit object at index 0) and another homological complex $ K $ has a grading where each component at indices $ (i, j) $ is mapped to \"}\n  {\"name\": \"HomologicalComplex.instHasTensorXTensorUnit_1\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"∀ {C : Type u_1} [inst : CategoryTheory.Category.{v_1, u_1} C] [inst_1 : CategoryTheory.MonoidalCategory C]\\n  [inst_2 : CategoryTheory.Preadditive C] [inst_3 : CategoryTheory.Limits.HasZeroObject C] {I : Type u_2}\\n  [inst_4 : AddMonoid I] {c : ComplexShape I} (K : HomologicalComplex C c) [inst_5 : D\", \"doc\": \"The tensor product of the graded object $ K.X $ and the graded object associated to the tensor unit complex $ (\\\\text{tensorUnit} \\\\, C \\\\, c).X $ satisfies the grading compatibility condition. Specifica\"}\n  {\"name\": \"HomologicalComplex.evalCompCoyonedaCorepresentative\", \"module\": \"Mathlib/Algebra/Homology/Double\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.Limits.HasZeroMorphisms C] →\\n      [CategoryTheory.Limits.HasZeroObject C] → {ι : Type u_2} → (c : ComplexShape ι) → C → ι → HomologicalComplex C c\", \"doc\": \"For an object $X$ in category $\\\\mathcal{C}$ and index $j$, this constructs a homological complex of shape $c$ by taking the double complex with identity morphism $\\\\text{id}_X$ at indices $j$ and $k$ (\"}\n  {\"name\": \"HomologicalComplex.tensorObj\", \"module\": \"Mathlib/Algebra/Homology/Monoidal\", \"type\": \"{C : Type u_1} →\\n  [inst : CategoryTheory.Category.{v_1, u_1} C] →\\n    [inst_1 : CategoryTheory.MonoidalCategory C] →\\n      [inst_2 : CategoryTheory.Preadditive C] →\\n        [inst_3 : (CategoryTheory.MonoidalCategory.curriedTensor C).Additive] →\\n          [inst_4 : ∀ (X₁ : C), ((CategoryTheory.Monoi\", \"doc\": \"Given two homological complexes $ K_1 $ and $ K_2 $ in a category $ \\\\mathcal{C} $ equipped with a monoidal structure via the curried tensor product bifunctor, this constructs their tensor product as a\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary tensor/coherence declarations do not supply this point-evaluation interface"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Tt]ensor|point.*[Ss]calar|point.*[Cc]oheren (Mathlib/CategoryTheory); rg on WeilConjectures and Sheaf; DAG point evaluation tensor model",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean\", \"line\": \"69\", \"text\": \"  preservesLimit_of_evaluation _ _ <| fun c ↦ inferInstanceAs (PreservesLimit F (tensorRight c))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean\", \"line\": \"33\", \"text\": \"  (Functor.postcompose₂.obj <| (evaluation _ _).obj <| curriedTensor C).obj <| whiskeringLeft₂ C\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean\", \"line\": \"152\", \"text\": \"  have : tensorLeft F ⋙ (evaluation J C).obj k ≅ (evaluation J C).obj k ⋙ tensorLeft (F.obj k) :=\"}\n\nProject exact-name search stdout:\n\nThe broader project/DAG audit and distinctions are in report.md.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; reuse existing tensor, scalar and ringed-point constructions; add only predicates and presentation data for this evaluation"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-point-ringed-evaluation-model",
+  "date": "2026-10-21",
+  "group": "Q66"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Final compact-support specialization over Spec k, representative-normalized point tensor and coefficient maps",
+   "via": [
+    "lem-sf-point-ringed-evaluation-model",
+    "lem-sf-point-fibre-derived-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "module": "Sheaf.SixFunctors.PointEvaluationTensorData",
+  "declaration": "AlgebraicGeometry.ProEtale.PointEvaluation.TensorModel",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PointEvaluation.finalObject",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.sectionRing",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.complexSections",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.ModuleSheaves",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleMonoidal",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleSymmetric",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleTensorPreadditive",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleLeftColimits",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleRightColimits",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.Complexes",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.sectionTensor",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.resolving",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleResolving",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.totalInclusion",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.totalObj",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleAbelian",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.complexUnit",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleColimits",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleShapeColimits",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.TensorModel"
+  ],
+  "file": "lean/Sheaf/SixFunctors/PointEvaluationTensorData.lean",
+  "statement": "structure TensorModel",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec9ebf6e4",
+  "group": "Q66",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec9ebf6e4",
+  "group": "Q66",
+  "result": "fix",
+  "note": "Read the node, all 14 stmt_deps, the report, six modules, five new nodes and the side-live interfaces (RingedSitePoint, GeometricStalkToposPoint, PointProEtaleSectionsExact, KFlatTotalTensorModel, SheafOfModules monoidal unit, CompletedIntegralCoefficients). Every clause is rendered: point identification pinned on colimit injections, RingedSitePoint ring/module pinned via HEq with equal types, exactness, derived sections as the unique left-derived functor, b fixed on every summand and pure tensors, resolving preservation, the unique representative-square derived comparison (true for all presentations; same interface as ringedTopoiCanonicalDerivedTensorPullback, moved to the ModuleCat target), unit/assoc/Koszul braiding/unitors, scalar kappa/epsilon pinned with a balanced rule and no flatness assumed, coefficient constant/limit/transition maps. No hollow data, extra hypotheses or universe restrictions; statement verbatim; stmt_deps gains only the new nodes plus the landed def-sfb-ringed-site-point (allowed); new nodes conform; no duplicate found. FIX (mechanical): H9, moved five plain proof-dep imports from PointEvaluationTensorData to the item module; landing speed-ups, TensorData genInjectivity/genSizeOfSpec/linters off (original timed out at 60 s, fix clean in 46 s side by side at load 150) and TensorCoherence linters off. All six siblings compiled clean via nt_compile --json at load 94 (16.8/18.9/52.0/17.1/5.0/6.9 s). Land at lower load (TensorCoherence about 50 s). Advisories: module docstrings lack a # title; report mislabels the FromJoel kFlat; derived constraint and scalar squares are implied rather than restated."
+ }
+}

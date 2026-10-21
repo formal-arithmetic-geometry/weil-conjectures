@@ -401,5 +401,29 @@
   "group": "Q06",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q06-41426f997 (reviewer sub-agent of L); spot-checked: Read the item's twelve steps and every cited statement in full, plus HRS Def 6.1, Thm 6.2(2) and Lemma 6.10 (PDF p.15). The statement is unchanged; the base item had no proof and live still has it unsplit. No new nodes, no cycle, proof_deps equal the union of the step uses, no SGA. The coefficient ring is the all-continuous C(-,Qbar_l) ring throughout and is never identified with the finite-subextension ring. Existing generation and heart nodes (det-cor-coefficient-heart-ii-generation, det-lem-coefficient-heart-closure, lem-sfb-finite-field-stratified-generation) are for other rings, so this is not a duplicate. Steps 1-6 check: Lambda(*) is a field, so a finite constant local model is lisse; t-admissibility is trivial for a field; L[0] and M[0] are dualizable and their cone's H^{-1} and H^0 are ker and coker; a local splitting gives extensions; common refinement plus exact pullback make the constructible modules a weak Serre class, and the derived weak-Serre lemma makes B(X) triangulated. Step 7: open/closed identities give a generator with stratum models L, 0, 0. Steps 8, 10 and 11: the filtration node, the SES triangle and truncation triangles give a finite devissage. This re-derives lem-sfb-bounded-finite-model-generation; redundant but correct. Step 12: minimality is fine. Fault C1 in step 9: it used an open-then-closed factorization of a_k = v_k t_k without showing one exists. Fixed: a_k is quasi-compact, so the Mathlib leaf lem-pqf-qc-immersion-open-closed-factor gives a_k = i_k j_k, and its stratum is constructible (def-weil-constructible-subset); both ids added to uses and proof_deps. Batch-5: both zl citations reach only def-trf-geometric-morphism and the generic trf topos/algebra lemmas (slice geometric morphism, inverse-image exactness, abelian presentation, henselian smooth lifting). None is the trace formula, Poincare duality or a step of their proofs, so both are accepted. All 16 declared tool_uses are accepted as generic black boxes.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.ContinuousQbarConstructibleGenerators",
+  "declaration": "AlgebraicGeometry.ProEtale.continuousQbar_constructible_generators",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.continuousQbarLisseGenerator",
+   "AlgebraicGeometry.ProEtale.continuousQbarFiniteConstruction",
+   "AlgebraicGeometry.ProEtale.continuousQbar_constructible_generators"
+  ],
+  "file": "lean/Sheaf/Paper/ContinuousQbarConstructibleGenerators.lean",
+  "statement": "theorem continuousQbar_constructible_generators (ℓ : ℕ) [Fact ℓ.Prime] [NormedAlgebra ℚ_[ℓ] Ω] [IsAlgClosure ℚ_[ℓ] Ω] (X : Scheme.{u}) [IsLocallyNoetherian X] [CompactSpace X] : (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj Ω) X ).IsClosedUnderIsomorphisms ∧ (constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj Ω) X ).IsTriangulated ∧ (∀ K, continuousQbarLisseGenerator Ω X K → constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj Ω) X K) ∧ (∀ P : ObjectProperty (DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology X) Ab.{u + 1}) (condensedRingObj (Profinite.continuousCoefficientRingObj Ω) X))), P.IsClosedUnderIsomorphisms → P.IsTriangulated → (∀ K, continuousQbarLisseGenerator Ω X K → P K) → ∀ K, constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj Ω) X K → P K) ∧ (∀ K, constantModelBoundedConstructible (Profinite.continuousCoefficientRingObj Ω) X K ↔ continuousQbarFiniteConstruction Ω X K)",
+  "branch": "newtargets-dag",
+  "by": "NO",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The two auxiliary predicates spell out this node’s generators and finite construction expressions. The existing continuousCoefficientRingObj is the common-universe presentation of continuousMapRingObjOfUniverse, with identical sections, restrictions, and canonical ring-object structure; it includes all continuous functions. No finite-subextension coefficient ring is used."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-097a81ae6",
+  "group": "NO",
+  "result": "pass",
+  "note": "Clause-by-clause match: Fact ℓ.Prime; NormedField/NormedAlgebra ℚ_[ℓ]/IsAlgClosure gives the unique extended ℓ-adic topology, no completeness; IsLocallyNoetherian+CompactSpace = Noetherian; Λ = all-continuous C(-,Ω) (continuousCoefficientRingObj, read: same presheaf/sheaf/monObj_sheafCompose_obj as the recorded continuousMapRingObjOfUniverse.{u,u}); B(X) = recorded constantModelBoundedConstructible; generators use the actual openImmersionLowerShriek ⋙ lowerStar, open/closed factorization, constructible image, recorded IsLisseCoefficientModule (rank 0 ok); conjuncts: iso-closed, IsTriangulated, contains generators, minimality over all replete triangulated P, ↔ finite construction with strictly earlier indices (no retracts/coproducts). Edge cases X=∅, rank 0, acyclic K, all ℤ shifts covered; universe Ω:Type u harmless. Only the lean field changed; docstrings carry the source place and all 12 steps; sorry only; lines ≤100; plain imports = recorded proof_dep modules. Not an H4 duplicate of bounded_finiteModel_generation (one-direction generic). Advisories: lowerStar owner (def-sfb-module-lower-star) not in stmt_deps; helper ring presentation instead of recorded decl; extra harmless import. No recompile (no file changed)."
  }
 }

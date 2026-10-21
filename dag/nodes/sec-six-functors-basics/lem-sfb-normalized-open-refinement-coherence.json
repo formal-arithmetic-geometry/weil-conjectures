@@ -234,5 +234,33 @@
   "group": "O2",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O2-5b7ec3853 (reviewer sub-agent of L); spot-checked: I read all 7 steps in full and checked their types by hand. Step 1 cites the open derived adjunction of def-sfb-open-closed-internal-hom-comparisons, and the unit is invertible by lem-sfb-condensed-support-derived-localization: every admissible Λ is a commutative condensed ring, and the reduced complement of each quasi-compact j supplies the closed immersion. Steps 2-3: B_h(a)=η'^{-1}(r_h)j^*(a)η_j is the adjunction bijection followed by isomorphisms, so e_h=B^{-1}(1) gives the normalization and uniqueness. Step 4 proves naturality from the naturality of r_h and of η. Step 5 gives the identity case from R1_*≅1 and r_1=id. Steps 6-7: T is injective; naturality of r_h at e_k plus the two normalizations give T(Rh_*e_k∘e_h)=1, and the composition law r_hk=r_k∘(r_h Rk_*)∘j^*κ gives T(κ e_hk)=1. I verified (hk)^{-1}(jU)=j''U and the κ orientation. This matches blueprint main-20261015 det-sf-comp-coherence-refinement (1) and (3); properness is used only in (2), which the item does not assert. Edge cases checked: U empty, Λ=0, j=id (forces j' to be an isomorphism), h or k identity. There is no repair note, the item is not on the drop list, there are no new nodes and no SGA. Maintainer note: the existing det-sf-comp-coherence-refinement restates (1) and (3) in the proper/dense setting; this item is the generalization that det-sf-comp-coherence-cocycle cites, so the overlap was already there and is not a duplicate from this delivery. The worker wrote tool_uses for the generic open-unit invertibility lemma themselves (C8); I accept the use. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.NormalizedOpenRefinementCoherence",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.normalized_open_refinement_coherence",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.normalized_open_refinement_unit_isIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normalizedOpenRefinementUnitIso",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normalizedOpenRefinement",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normalized_open_refinement_coherence",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normalized_open_refinement_naturality",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normalized_open_refinement_id",
+   "AlgebraicGeometry.ProEtale.CondensedRing.normalized_open_refinement_comp"
+  ],
+  "file": "lean/Sheaf/Paper/NormalizedOpenRefinementCoherence.lean",
+  "statement": "theorem normalized_open_refinement_coherence (ℓ : ℕ) [Fact ℓ.Prime] (hΛ : IsLocalizingAdmissibleCoefficient ℓ Λ) {U Z Z' : Scheme.{u}} (j : U ⟶ Z) (j' : U ⟶ Z') [IsOpenImmersion j] [QuasiCompact j] [IsOpenImmersion j'] [QuasiCompact j'] (h : Z' ⟶ Z) (w : j' ≫ h = j) (hw : h ⁻¹' Set.range j = Set.range j') (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology U) AddCommGrpCat.{u + 1}) (condensedRingObj Λ U))) : ((derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit.app K ≫ (upperStar Λ j).mapDerivedCategory.map (normalizedOpenRefinement Λ ℓ hΛ j j' h w hw K) ≫ (identityOpenDerivedRestriction Λ j j' h w).app ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj K) ≫ (normalizedOpenRefinementUnitIso Λ j').inv.app K = 𝟙 K) ∧ (∀ a : (openImmersionLowerShriek Λ j).mapDerivedCategory.obj K ⟶ (lowerStar Λ h).rightDerivedFunctor.obj ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj K), (derivedOpenImmersionLowerShriekUpperStarAdjunction Λ j).unit.app K ≫ (upperStar Λ j).mapDerivedCategory.map a ≫ (identityOpenDerivedRestriction Λ j j' h w).app ((openImmersionLowerShriek Λ j').mapDerivedCategory.obj K) ≫ (normalizedOpenRefinementUnitIso Λ j').inv.app K = 𝟙 K → a = normalizedOpenRefinement Λ ℓ hΛ j j' h w hw K)",
+  "branch": "sheaf-dag",
+  "by": "O3",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The canonical refinement is the specified open adjunction transpose of the existing normalized common-open restriction inverse. The main theorem states the displayed normalization and uniqueness. Companion statements give naturality, identity under moduleDerivedIdentity, and transitivity under moduleDerivedCompositor. The open unit is packaged as asIso of the actual derived adjunction unit, with its invertibility stated separately as the node specifies. All complexes are arbitrary objects of the ordinary unbounded module-object derived category. No statement or dependency changes."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-f9ed72936",
+  "group": "O3",
+  "result": "pass",
+  "note": "Only the item node's lean field and the new module Sheaf/Paper/NormalizedOpenRefinementCoherence.lean differ from side-live; no new nodes, no dependency changes, no repair note, item not dropped. Clauses match the node: admissible Λ binders as in the deps; unbounded D(Mod condensedRingObj) at Scheme.{u}/Ab.{u+1}; qc open immersions j,j',j''; w/hw/w'/hw' with the hk and identity proofs constructed, as in identity_open_derived_restriction_comp/_id; e = (adj_j.homEquiv).symm(η_{j'} ≫ inv r_h), real data; normalization η_j ≫ j^*e ≫ r_h ≫ η_{j'}^{-1} = 𝟙 plus ∀a uniqueness; naturality for all v; e_1 ≫ moduleDerivedIdentity.hom = 𝟙; e_{k≫h} ≫ moduleDerivedCompositor(k,h).hom = e_h ≫ Rh_*(e_k), the node's κ orientation. No properness, density or invertibility of e. Edge cases checked: U empty, Λ=0, h=id, j=id, unbounded K. No duplicate found. lean.statement verbatim; 7 declarations present; sorry-only proofs; docstrings carry source, blueprint id and proof steps; Worker report and Second reading sections present. No compile run, no file changed. Advisory: the unit IsIso theorem is provable by Adjunction.isIso_mapDerivedCategoryAdjunction_unit (framework already uses it); three redundant plain imports."
  }
 }

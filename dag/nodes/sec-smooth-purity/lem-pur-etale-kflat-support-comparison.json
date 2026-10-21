@@ -13,7 +13,8 @@
   "lem-pur-sheaf-ring-derived-coefficient-adjunction",
   "lem-pc-kflat-resolution",
   "lem-pur-kinjective-degreewise-existence",
-  "lem-pur-etale-injective-support-sequence"
+  "lem-pur-etale-injective-support-sequence",
+  "def-pur-etale-kflat-support-data"
  ],
  "proof": [
   {
@@ -312,5 +313,26 @@
   "group": "NV",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NV-77b5635f0 (reviewer sub-agent of L); spot-checked: I read the item in full: unchanged statement and stmt_deps against the N8 base snapshots, 8 steps, no new nodes, and the full statement of every cited node. Admissibility: one commit with the report and item; no repair note for this item; not dropped; no SGA use; the closure (464 nodes) contains neither the item nor its parent, so there is no cycle. The proof expands old parent Step 10 completely and adds a real identification of the right map by transposes, where the old step only asserted it. Step checks: (1) the support-sequence lemma applies to J, which is degreewise-injective and K-injective by lem-pur-kinjective-degreewise-existence in Mod(A_P); the fixed-K-flat lemma covers both tensor orders. (2) Flat Q^p gives exact rows; total sums are exact as filtered colimits of finite biproducts (lem-pc-module-filtered-colimits-tensor). (3) v is the adjunct built from c_j, the counit and j^*a, with no j_* and sums claim. (4, elementary) The triangle identity gives v(1⊗η_I) = η_J a strictly; then the kernel map is u. (5) The naturality of δ in lem-weil-pbc-complex-ses-triangle gives the third square. (6) lem-sp-etale-derived-chain-transpose gives the Hom equation and the counit equation at j^*J and j^*I, both K-injective so α is an iso. j^*Q stays flat-term K-flat, and the step matches the projection-formula definition of PF_j(j^*L,B_P). The step does not cite lem-kun-inverse-image-monoidal for c_j being the canonical comparison; this is definitional on K-flat models and I accept it. (7) The hypotheses of the scalar-mate projection lemma hold at f=j, J=j^*L: J, T_U J and T_P Rj_*j^*L are bounded below; restriction commutes with Rj_* on bounded-below N=j^*TL. (8) Two-of-three isos with naturality from the functorial replacement. Edge cases checked: Z empty, U empty, A=B with Q=A[0], the non-flat map Z/4→Z/2, and unbounded Q. The worker-written tool_uses are all generic homological or coefficient tools and are accepted. The main-20261015 Locality and Charts paragraphs give no support diagram, so proof_origin=agent is correct."
+ },
+ "lean": {
+  "module": "Sheaf.AlgebraicGeometry.EtaleKFlatSupportComparison",
+  "declaration": "AlgebraicGeometry.Etale.KFlatSupportComparison.etale_kflat_support_comparison",
+  "declarations": [
+   "AlgebraicGeometry.Etale.KFlatSupportComparison.etale_kflat_support_comparison"
+  ],
+  "file": "lean/Sheaf/AlgebraicGeometry/EtaleKFlatSupportComparison.lean",
+  "statement": "theorem etale_kflat_support_comparison [Finite A] [Finite B] (φ : A →+* B) (i : Z ⟶ P) [IsClosedImmersion i] (j : U ⟶ P) [IsOpenImmersion j] (hij : Set.range i.base = (Set.range j.base)ᶜ) (L : _root_.DerivedCategory.Plus (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A))) (_hTL : ∃ n : ℤ, ((scalarExtension φ P).obj L.obj).IsGE n) (_hRTL : ∃ n : ℤ, ((R(lowerStar (ModuleCat.{u + 1} B) j)).obj ((D(upperStar (ModuleCat.{u + 1} B) j)).obj ((scalarExtension φ P).obj L.obj))).IsGE n) (_hRL : ∃ n : ℤ, ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj ((D(upperStar (ModuleCat.{u + 1} A) j)).obj L.obj)).IsGE n) (_hTRL : ∃ n : ℤ, ((scalarExtension φ P).obj ((R(lowerStar (ModuleCat.{u + 1} A) j)).obj ((D(upperStar (ModuleCat.{u + 1} A) j)).obj L.obj))).IsGE n) (I : Complex A P) [I.IsKInjective] [∀ n : ℤ, Injective (I.X n)] (e : (localize A P).obj I ≅ L.obj) (Q : Complex A P) (π : Q ⟶ (CochainComplex.singleFunctor (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) 0).obj (scalarCoefficientSheaf φ P)) [QuasiIso π] (hQ : (HomologicalComplex.quasiIso (Sheaf P.smallEtaleTopology (ModuleCat.{u + 1} A)) (.up ℤ)).kFlat Q) (_hQf : ∀ n : ℤ, ObjectProperty.flat (Q.X n)) (F : Complex A P ⥤ Complex A P) (η : 𝟭 _ ⟶ F) [∀ K : Complex A P, (F.obj K).IsKInjective] [∀ (K : Complex A P) (n : ℤ), Injective ((F.obj K).X n)] [∀ K : Complex A P, QuasiIso (η.app K)] : let N := Q ⊗ I let J := F.obj N let a := η.app N let S := totalTensorSequence Q (etaleSupportSequence A i j hij I) let S' := etaleSupportSequence A i j hij J ∃ (hI : CochainComplex.IsKInjective ((pullComplex A j).obj I)) (hJ : CochainComplex.IsKInjective ((pullComplex A j).obj J)) (hTop : S.ShortExact) (hBottom : S'.ShortExact) (m : S ⟶ S'), m.τ₂ = a ∧ IsRightMap j Q I J a m.τ₃ ∧ (∀ m' : S ⟶ S', m'.τ₂ = a → IsRightMap j Q I J a m'.τ₃ → m' = m) ∧ _root_.DerivedCategory.triangleOfSES hTop ∈ distTriang _ ∧ _root_.DerivedCategory.triangleOfSES hBottom ∈ distTriang _ ∧ _root_.DerivedCategory.triangleOfSESδ hTop ≫ ((localize A P).map m.τ₁)⟦1⟧' = (localize A P).map m.τ₃ ≫ _root_.DerivedCategory.triangleOfSESδ hBottom ∧ (tensorModel φ Q π hQ I L.obj e).inv ≫ (localize A P).map m.τ₂ ≫ (replacementIso a (tensorModel φ Q π hQ I L.obj e)).hom = 𝟙 _ ∧ (localize A P).map m.τ₃ ≫ (targetThirdModel φ j J L.obj (replacementIso a (tensorModel φ Q π hQ I L.obj e)) hJ).hom = (sourceThirdModel φ j Q π hQ I L.obj e hI).hom ≫ restrictedProjection φ j L.obj ∧ (IsIso ((localize A P).map m.τ₃) → IsIso ((localize A P).map m.τ₁)) ∧ (∀ (I' : Complex A P) (f : I ⟶ I'), let N' := Q ⊗ I' let J' := F.obj N' let a' := η.app N' let S₁ := totalTensorSequence Q (etaleSupportSequence A i j hij I') let S₂ := etaleSupportSequence A i j hij J' let s : S ⟶ S₁ := totalTensorSequenceMap Q (etaleSupportSequenceMap A i j hij f) let t : S' ⟶ S₂ := etaleSupportSequenceMap A i j hij (F.map ((tensorLeft Q).map f)) ∀ m' : S₁ ⟶ S₂, m'.τ₂ = a' → IsRightMap j Q I' J' a' m'.τ₃ → s ≫ m' = m ≫ t)",
+  "branch": "sheaf-dag",
+  "by": "NK",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-08e7eee60",
+  "group": "NK",
+  "result": "pass",
+  "note": "Every hypothesis and conclusion clause matches the node: five bounded-below hypotheses; degreewise-injective K-injective I; A-linear flat-term K-flat Q→B_P (kFlat = tensor preserves quasi-isos, flat = exact tensor); arbitrary functorial replacement F,η; short exact rows; m with τ₂=a and IsRightMap (bidegree-summand adjunct through the canonical Etale.monoidal_upperStar); uniqueness clause = induced kernel map; distinguished triangles plus δ-square; right-map equation against restrictedProjection (scalarMate + canonical restriction comparisons); IsIso implication; naturality in f:I⟶I'. The middle-identity conjunct holds by construction under the node's own Q(a)⁻¹ convention; content is in the right-map clause (advisory). New def node: 18 real declarations, no sorry, docstrings ok, stmt_deps cover scalarExtension/scalarTensorIso (.choose of the derived-change-of-rings ∃!)/scalarMate/restriction comparisons. Statements verbatim; one sorry; item unchanged and without a Lean record live; no collision; not dropped. Report has Worker report and Second reading by NK. Edge cases Z=∅, U=∅, A=B, zero ring, non-flat φ, unbounded Q all covered. No fix, so no compile."
  }
 }

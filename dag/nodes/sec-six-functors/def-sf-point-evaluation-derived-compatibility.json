@@ -1,0 +1,104 @@
+{
+ "id": "def-sf-point-evaluation-derived-compatibility",
+ "kind": "definition",
+ "title": "Representative-normalized derived point comparisons",
+ "status": "split",
+ "statement": "For a field $k$, a commutative ring sheaf $B$ on the small pro-etale site of $s=\\operatorname{Spec}k$, and normalized tensor data $T$ [def-sf-point-evaluation-tensor-data], assume exactness of $\\Gamma_s$ and fix derived localizations. Define derived compatibility by: each total left-derived presentation of $\\Gamma_s$ is isomorphic to termwise exact sections with the specified localization comparison, and for every pair of derived tensor presentations with resolving representative comparisons there is a unique natural tensor comparison satisfying the representative square obtained by localizing $T.b$ and conjugating the two evaluation localization comparisons [lem-weil-pbc-ringed-topoi-derived-tensor-pullback]. For $a:B\\to B\\prime$ and scalar data $S$ [def-sf-point-evaluation-scalar-data], define scalar derived compatibility by the unique natural comparison between derived scalar extension followed by exact sections and exact sections followed by ordinary derived scalar extension, normalized on every resolving representative by localization of $S.\\kappa$. Include the exact derived sections and its actual localization comparison as aliases of the recorded functor, not independently chosen maps.",
+ "stmt_deps": [
+  "def-sf-point-evaluation-tensor-data",
+  "lem-weil-pbc-ringed-topoi-derived-tensor-pullback",
+  "def-sf-point-evaluation-scalar-data"
+ ],
+ "source": {
+  "document": "stacks-project/sites-cohomology.tex; stacks-project/sites-modules.tex",
+  "place": "Tags 07A4 and 03EL; normalized point specialization in the Kunneth proof"
+ },
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_match": null,
+ "mathlib_searches": [
+  {
+   "tool": "leansearch",
+   "query": "Derived tensor and scalar comparison of exact point evaluation with representative normalization",
+   "results": "[leansearch] OK 8 hit(s)\n  {\"name\": \"Mathlib.Tactic.Module.NF.eval_smul\", \"module\": \"Mathlib.Tactic.Module\", \"type\": \"[AddCommMonoid M] [Semiring R] [Module R M] {l : NF R M} {x : M} (h : x = l.eval) (r : R) : (r • l).eval = r • x\", \"doc\": \"For any scalar $ r $ in a semiring $ R $, normal form $ l $ representing a module element over $ R $, and module element $ x $ equal to the evaluation of $ l $, the evaluation of the scalar multiplica\"}\n  {\"name\": \"MvPolynomial.rTensor_apply_tmul_apply\", \"module\": \"Mathlib.RingTheory.TensorProduct.MvPolynomial\", \"type\": \"(p : MvPolynomial σ S) (n : N) (d : σ →₀ ℕ) : rTensor (p ⊗ₜ[R] n) d = (coeff d p) ⊗ₜ[R] n\", \"doc\": \"For any multivariate polynomial $ p $, module element $ n $, and monomial $ d $, the evaluation of the tensor product $ p \\\\otimes_R n $ at $ d $ equals the tensor product of the coefficient of $ d $ i\"}\n  {\"name\": \"MvPolynomial.scalarRTensor_apply_tmul_apply\", \"module\": \"Mathlib.RingTheory.TensorProduct.MvPolynomial\", \"type\": \"(p : MvPolynomial σ R) (n : N) (d : σ →₀ ℕ) : scalarRTensor (p ⊗ₜ[R] n) d = coeff d p • n\", \"doc\": \"For any polynomial $ p $ in the multivariate polynomial ring $ R[\\\\sigma] $, any element $ n $ in an $ R $-module $ N $, and any finite support function $ d : \\\\sigma \\\\to_0 \\\\mathbb{N} $, the evaluation \"}\n  {\"name\": \"MvPolynomial.scalarRTensor_apply_monomial_tmul\", \"module\": \"Mathlib.RingTheory.TensorProduct.MvPolynomial\", \"type\": \"(e : σ →₀ ℕ) (r : R) (n : N) (d : σ →₀ ℕ) : scalarRTensor (monomial e r ⊗ₜ[R] n) d = if e = d then r • n else 0\", \"doc\": \"For a multivariate polynomial ring $ R[\\\\sigma] $ over a commutative semiring $ R $ and an $ R $-module $ N $, the natural $ R $-module isomorphism $ R[\\\\sigma] \\\\otimes_R N \\\\cong \\\\big(\\\\sigma \\\\to_0 \\\\math\"}\n  {\"name\": \"CategoryTheory.ExactPairing.evaluation\", \"module\": \"Mathlib.CategoryTheory.Monoidal.Rigid.Basic\", \"type\": \": Y ⊗ X ⟶ 𝟙_ C\", \"doc\": \"Given a monoidal category $\\\\mathcal{C}$ and objects $X,Y \\\\in \\\\mathcal{C}$ with an exact pairing, this is the morphism $Y \\\\otimes X \\\\to I$ (where $I$ is the unit object) that constitutes part of the du\"}\n  {\"name\": \"Derivation.tensorProductTo_tmul\", \"module\": \"Mathlib.RingTheory.Kaehler.Basic\", \"type\": \"(D : Derivation R S M) (s t : S) : D.tensorProductTo (s ⊗ₜ t) = s • D t\", \"doc\": \"For any $ R $-derivation $ D : S \\\\to M $ and elements $ s, t \\\\in S $, the action of $ D $ on the tensor product $ s \\\\otimes t $ in $ S \\\\otimes_R S $ satisfies $ D(s \\\\otimes t) = s \\\\cdot D(t) $, where \"}\n  {\"name\": \"LineDeriv.tensorLineDerivTwo.congr_simp\", \"module\": \"Mathlib.Analysis.Distribution.DerivNotation\", \"type\": \"∀ (R : Type u_4) {E : Type u_6} {V₁ : Type u_11} {V₂ : Type u_12} {V₃ : Type u_13} [inst : LineDeriv E V₁ V₂]\\n  [inst_1 : LineDeriv E V₂ V₃] [inst_2 : AddCommGroup V₁] [inst_3 : AddCommGroup V₂] [inst_4 : AddCommGroup V₃]\\n  [inst_5 : CommRing R] [inst_6 : AddCommGroup E] [inst_7 : Module R E] [inst_\", \"doc\": \"If $ f = f_1 $, then the tensor product of linear derivatives satisfies $ \\\\text{tensorLineDerivTwo}_R(f) = \\\\text{tensorLineDerivTwo}_R(f_1) $.\"}\n  {\"name\": \"PiTensorProduct.Eqv.of_smul\", \"module\": \"Mathlib.LinearAlgebra.PiTensorProduct\", \"type\": \"∀ {ι : Type u_1} {R : Type u_4} [inst : CommSemiring R] {s : ι → Type u_7} [inst_1 : (i : ι) → AddCommMonoid (s i)]\\n  [inst_2 : (i : ι) → Module R (s i)] (x : DecidableEq ι) (r : R) (f : (i : ι) → s i) (i : ι) (r' : R),\\n  PiTensorProduct.Eqv R s (FreeAddMonoid.of (r, Function.update f i (r' • f i)))\", \"doc\": \"For any index $i$, scalars $r, r' \\\\in R$, and function $f$, the equivalence relation identifies $r \\\\otimes (\\\\text{update } f \\\\text{ at } i \\\\text{ with } r' \\\\cdot f(i))$ with $(r' r) \\\\otimes f$.\"}\n",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary algebra or abstract coherence, without normalized point-evaluation maps"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Derived tensor and scalar comparison of exact point evaluation with representative normalization",
+   "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"LinearMap.rTensor_exact_iff_lTensor_exact\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"∀ {R : Type u_1} [inst : CommSemiring R] {M : Type u_2} {N : Type u_3} {P : Type u_4} (Q : Type u_5)\\n  [inst_1 : AddCommMonoid M] [inst_2 : AddCommMonoid N] [inst_3 : AddCommMonoid P] [inst_4 : AddCommMonoid Q]\\n  [inst_5 : Module R M] [inst_6 : Module R N] [inst_7 : Module R P] [inst_8 : Module R Q]\", \"doc\": \"For linear maps $ f: N \\\\to P $ and $ g: P \\\\to Q $, the sequence $ M \\\\otimes_R N \\\\xrightarrow{f \\\\otimes \\\\text{id}_M} M \\\\otimes_R P \\\\xrightarrow{g \\\\otimes \\\\text{id}_M} M \\\\otimes_R Q $ is exact if and on\"}\n  {\"name\": \"rTensor_exact\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P} (Q : Type u_5) [inst_7 : AddCommGroup \", \"doc\": \"Given linear maps $ f: N \\\\to P $ and $ g: P \\\\to Q $ forming an exact sequence, the induced tensor product maps $ f \\\\otimes \\\\text{id}_M: N \\\\otimes_R M \\\\to P \\\\otimes_R M $ and $ g \\\\otimes \\\\text{id}_M: P\"}\n  {\"name\": \"rTensor.inverse_apply\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P} (Q : Type u_5) [inst_7 : AddCommGroup \", \"doc\": \"For modules $M, N, P, Q$ over a commutative semiring $R$, given linear maps $f: M \\\\to N$ and $g: N \\\\to P$ forming an exact sequence, and an element $y \\\\in N \\\\otimes_R Q$, applying the inverse of the r\"}\n  {\"name\": \"Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val\", \"module\": \"Mathlib/RingTheory/Extension/Presentation/Core\", \"type\": \"∀ {R : Type u_1} {S : Type u_2} {ι : Type u_3} {σ : Type u_4} [inst : CommRing R] [inst_1 : CommRing S]\\n  [inst_2 : Algebra R S] {P : Algebra.Presentation R S ι σ} (R₀ : Type u_5) [inst_3 : CommRing R₀]\\n  [inst_4 : Algebra R₀ R] [inst_5 : Algebra R₀ S] [inst_6 : IsScalarTower R₀ R S] [inst_7 : P.Has\", \"doc\": \"For any multivariate polynomial $x$ over $R₀$, the composition of the tensor product model homomorphism with the polynomial evaluation map sends $x$ to $1 \\\\otimes_{R₀} \\\\overline{x}$, where $\\\\overline{\"}\n  {\"name\": \"rTensor.toFun\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_2} →\\n    {N : Type u_3} →\\n      {P : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : AddCommGroup P] →\\n                [inst_4 : Module R M] →\\n                  [inst_5 : Mo\", \"doc\": \"Given an exact sequence of `R`-modules $M \\\\xrightarrow{f} N \\\\xrightarrow{g} P$, this defines the canonical `R`-linear map from the cokernel of $f \\\\otimes \\\\text{id}_Q$ to $P \\\\otimes_R Q$. The cokernel,\"}\n  {\"name\": \"lTensor_exact\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P} (Q : Type u_5) [inst_7 : AddCommGroup \", \"doc\": \"If the sequence of linear maps $ f: N \\\\to P $ and $ g: P \\\\to Q $ is exact, then the sequence $ \\\\mathrm{lTensor}\\\\ Q\\\\ f: M \\\\otimes_R N \\\\to M \\\\otimes_R P $ and $ \\\\mathrm{lTensor}\\\\ Q\\\\ g: M \\\\otimes_R P \\\\to\"}\n  {\"name\": \"lTensor.toFun\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"{R : Type u_1} →\\n  {M : Type u_2} →\\n    {N : Type u_3} →\\n      {P : Type u_4} →\\n        [inst : CommRing R] →\\n          [inst_1 : AddCommGroup M] →\\n            [inst_2 : AddCommGroup N] →\\n              [inst_3 : AddCommGroup P] →\\n                [inst_4 : Module R M] →\\n                  [inst_5 : Mo\", \"doc\": \"Given an exact sequence of linear maps $ f: N → P $ and $ g: P → Q $ over a commutative ring $ R $, this constructs the induced linear map from the quotient module $ Q ⊗_R N / \\\\text{im}(\\\\text{id}_Q ⊗ \"}\n  {\"name\": \"lTensor.inverse_apply\", \"module\": \"Mathlib/LinearAlgebra/TensorProduct/RightExactness\", \"type\": \"∀ {R : Type u_1} {M : Type u_2} {N : Type u_3} {P : Type u_4} [inst : CommRing R] [inst_1 : AddCommGroup M]\\n  [inst_2 : AddCommGroup N] [inst_3 : AddCommGroup P] [inst_4 : Module R M] [inst_5 : Module R N] [inst_6 : Module R P]\\n  {f : M →ₗ[R] N} {g : N →ₗ[R] P} (Q : Type u_5) [inst_7 : AddCommGroup \", \"doc\": \"Given a surjective linear map $ f: N → P $ with a right inverse $ g $, this theorem constructs the inverse linear map $ Q ⊗_R P → Q ⊗_R N / \\\\text{im}(Q ⊗_R f) $ induced by tensoring with $ g $, where \"}\n",
+   "date": "2026-10-21",
+   "verdict": "no exact match: ordinary tensor/coherence declarations do not supply this point-evaluation interface"
+  },
+  {
+   "tool": "grep",
+   "query": "evaluation.*[Tt]ensor|point.*[Ss]calar|point.*[Cc]oheren (Mathlib/CategoryTheory); rg on WeilConjectures and Sheaf; DAG point evaluation tensor model",
+   "results": "[grep] OK 3 hit(s)\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Limits/Preserves.lean\", \"line\": \"69\", \"text\": \"  preservesLimit_of_evaluation _ _ <| fun c ↦ inferInstanceAs (PreservesLimit F (tensorRight c))\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/ExternalProduct/Basic.lean\", \"line\": \"33\", \"text\": \"  (Functor.postcompose₂.obj <| (evaluation _ _).obj <| curriedTensor C).obj <| whiskeringLeft₂ C\"}\n  {\"file\": \"Mathlib/CategoryTheory/Monoidal/Cartesian/FunctorCategory.lean\", \"line\": \"152\", \"text\": \"  have : tensorLeft F ⋙ (evaluation J C).obj k ≅ (evaluation J C).obj k ⋙ tensorLeft (F.obj k) :=\"}\n\nProject exact-name search stdout:\n\nThe broader project/DAG audit and distinctions are in report.md.",
+   "date": "2026-10-21",
+   "verdict": "no exact match; reuse existing tensor, scalar and ringed-point constructions; add only predicates and presentation data for this evaluation"
+  }
+ ],
+ "created": {
+  "by": "worker",
+  "item": "lem-sf-point-ringed-evaluation-model",
+  "date": "2026-10-21",
+  "group": "Q66"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "thm-sf-kunneth-relative",
+   "place": "Final compact-support specialization over Spec k, representative-normalized point tensor and coefficient maps",
+   "via": [
+    "lem-sf-point-ringed-evaluation-model",
+    "lem-sf-point-fibre-derived-tensor"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-six-functors",
+ "unit": "sk-thm-sf-kunneth-relative",
+ "lean": {
+  "module": "Sheaf.SixFunctors.PointEvaluationDerivedTensor",
+  "declaration": "AlgebraicGeometry.ProEtale.PointEvaluation.DerivedCompatible",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.PointEvaluation.moduleTotal",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.derivedSections",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.derivedSectionsFactors",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.DerivedCompatible",
+   "AlgebraicGeometry.ProEtale.PointEvaluation.ScalarDerivedCompatible"
+  ],
+  "file": "lean/Sheaf/SixFunctors/PointEvaluationDerivedTensor.lean",
+  "statement": "def DerivedCompatible (T : TensorModel B) [HasDerivedCategory.{u + 2} (ModuleSheaves B)] [HasDerivedCategory.{u + 2} (ModuleCat.{u + 1} (sectionRing k B))] [(pointModuleSections k B).Additive] [PreservesFiniteLimits (pointModuleSections k B)] [PreservesFiniteColimits (pointModuleSections k B)] : Prop",
+  "branch": "newtargets-dag",
+  "by": "Q66",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec9ebf6e4",
+  "group": "Q66",
+  "result": "fix",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ec9ebf6e4",
+  "group": "Q66",
+  "result": "fix",
+  "note": "Read the node, all 14 stmt_deps, the report, six modules, five new nodes and the side-live interfaces (RingedSitePoint, GeometricStalkToposPoint, PointProEtaleSectionsExact, KFlatTotalTensorModel, SheafOfModules monoidal unit, CompletedIntegralCoefficients). Every clause is rendered: point identification pinned on colimit injections, RingedSitePoint ring/module pinned via HEq with equal types, exactness, derived sections as the unique left-derived functor, b fixed on every summand and pure tensors, resolving preservation, the unique representative-square derived comparison (true for all presentations; same interface as ringedTopoiCanonicalDerivedTensorPullback, moved to the ModuleCat target), unit/assoc/Koszul braiding/unitors, scalar kappa/epsilon pinned with a balanced rule and no flatness assumed, coefficient constant/limit/transition maps. No hollow data, extra hypotheses or universe restrictions; statement verbatim; stmt_deps gains only the new nodes plus the landed def-sfb-ringed-site-point (allowed); new nodes conform; no duplicate found. FIX (mechanical): H9, moved five plain proof-dep imports from PointEvaluationTensorData to the item module; landing speed-ups, TensorData genInjectivity/genSizeOfSpec/linters off (original timed out at 60 s, fix clean in 46 s side by side at load 150) and TensorCoherence linters off. All six siblings compiled clean via nt_compile --json at load 94 (16.8/18.9/52.0/17.1/5.0/6.9 s). Land at lower load (TensorCoherence about 50 s). Advisories: module docstrings lack a # title; report mislabels the FromJoel kFlat; derived constraint and scalar squares are implied rather than restated."
+ }
+}

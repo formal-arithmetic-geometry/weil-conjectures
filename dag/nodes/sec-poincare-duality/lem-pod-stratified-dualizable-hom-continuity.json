@@ -21,7 +21,8 @@
   "def-sfb-monoidal-category",
   "def-weil-size-convention",
   "def-weil-pbc-category-colimit",
-  "def-pc-cochain-complex-modules"
+  "def-pc-cochain-complex-modules",
+  "def-zl-condensed-scalar-realization"
  ],
  "proof": [
   {
@@ -496,5 +497,38 @@
   "group": "NP",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NP-119b54f44 (reviewer sub-agent of L); spot-checked: Read the item in full: 11 steps, no new nodes. Statement, stmt_deps and metadata are unchanged from live. The item is unsplit and not landed live, so it is not superseded; there is no repair note; the closure of 1117 nodes is clear of dropped nodes; no cycle; no SGA. Source: HRS 2305.18131 Def. 3.3 (p. 6), Lemma 5.3(2) with its final RΓ assertion, proof and Remark 5.4 (pp. 14-15). The route matches HRS: lisse case (Steps 3-4), i^! via the fibre sequence i_*i^! -> id -> j_*j^* (5-6), the j_! and i_* formulas (7-8), the triangle (9), global sections with the Cor. 4.11 bound (10). Checked each cited statement against its use. The qcqs refinement tree has actual leaf->stratum morphisms (E3 avoided). Pulled-back strata are constructible by 054I; dualizables pull back by the zl locality node. The recollement and formula nodes need j quasi-compact (true at each split). The pushforward node is applied to qcqs j and Y, with uniform bounds c-b_U and a-b; i_* is exact and commutes with filtered colimits on qcqs T. The five-lemma windows in Steps 5 and 9 match the ladder sequences, and the induction has its base (leaves) and step. Edge cases (empty Y, K=0, one stratum, K=B[m], negative r) and Remark 5.4 checked. The 13 generic tool_uses are accepted. FIX (C3/E5): Step 4 said Step 1 replaces Tot(P⊗N) by the internal-Hom models through natural quasi-isomorphisms, but no cited statement supplies these, and Step 3's identification is natural only in D. Rewrote Step 4: under the ladder identification H^q(alpha_A) = colim H^q H(A,iota_s), Step 3's naturality makes it colim H^q Tot(P⊗N_s) -> H^q Tot(P⊗N_inf), which is bijective by the filtered-colimit tensor node and Step 1, and the cohomology criterion finishes. Added uses: lem-sfb-rhom-colimit-cohomology-ladder and lem-weil-pbc-unbounded-derived-iso-cohomology, both already in proof_deps. Nothing else changed.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Paper.StratifiedDualizableHomContinuity",
+  "declaration": "AlgebraicGeometry.ProEtale.stratified_dualizable_hom_continuity",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.stratifiedHomScalarSection",
+   "AlgebraicGeometry.ProEtale.stratifiedHomScalarCenter",
+   "AlgebraicGeometry.ProEtale.stratifiedHomScalarCenter_laws",
+   "AlgebraicGeometry.ProEtale.stratifiedHomScalarMap",
+   "AlgebraicGeometry.ProEtale.stratifiedHomLinear",
+   "CategoryTheory.stratifiedShiftedLinearHom",
+   "CategoryTheory.stratifiedHomComparison",
+   "CategoryTheory.stratifiedHomPrecomp",
+   "CategoryTheory.stratifiedHomComparison_leg",
+   "CategoryTheory.stratifiedHomComparison_diagram_naturality",
+   "CategoryTheory.stratifiedHomComparison_source_naturality",
+   "AlgebraicGeometry.ProEtale.stratified_dualizable_hom_continuity"
+  ],
+  "file": "lean/Sheaf/Paper/StratifiedDualizableHomContinuity.lean",
+  "statement": "theorem stratified_dualizable_hom_continuity (Y : Scheme.{u}) [CompactSpace Y] [QuasiSeparatedSpace Y] (Λ : Profinite.CondensedRing.{u}) [IsCommMonObj Λ.X] (K : DerivedCategory (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ.X Y))) (hK : ∃ S : Y.FiniteLocallyClosedStratification, (∀ i, Topology.IsConstructible (S.stratum i)) ∧ ∀ i, Nonempty (HasRightDual ((CondensedRing.upperStar Λ.X (S.immersion i)).mapDerivedCategory.obj K))) {I : Type (u + 1)} [SmallCategory I] [IsFiltered I] (C : I ⥤ CochainComplex (Mod (Sheaf (Scheme.ProEt.topology Y) Ab.{u + 1}) (condensedRingObj Λ.X Y)) ℤ) (a : ℤ) (ha : ∀ (i : I) (j : ℤ), j < a → IsZero ((C.obj i).X j)) (r : ℤ) : IsIso (stratifiedHomComparison (R := condensedScalarRing Λ.X) K r C)",
+  "branch": "newtargets-dag",
+  "by": "Q20",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The main theorem states invertibility in ModuleCat of Γ(*,Λ), with the ordinary internal-module derived category and original strict termwise colimit. The listed leg and naturality theorems state the remaining clauses. Scalar sections are transported by the actual monoidal inverse image; their central action is the existing regular-module action and its termwise localization. The named scalar laws postpone only proofs needed to package this fixed action. The extra statement dependency is the already landed definition of condensedScalarRing, not a new notion or a statement change."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-7e55d73c9",
+  "group": "Q20",
+  "result": "pass",
+  "note": "Read node, all 15 stmt_dep records, the single module, report, and side-live sources (FiniteLocallyClosedStratification, CondensedScalarRealization, CondensedQbarScalarBasisPushforward, UpperLowerStar.upperStar, Mod.derivedMonoidalCategory). Every clause matches with nothing stronger: qcqs Y; arbitrary commutative condensed Λ; B=condensedRingObj on ProEt; ordinary D(Mod); ∃ finite locally closed stratification with IsConstructible strata and Nonempty HasRightDual of the exact derived restriction (ExactPairing orientation = node); small filtered I : Type(u+1); strict uniform bound IsZero (C i).X j for j<a; comparison = colimit.desc of the mapped colimit cocone through Q⋙[r]⋙linearCoyoneda; leg formula, K-naturality and diagram naturality as separate true theorems; IsIso in ModuleCat Γ(*,Λ). The scalar structure is real data (constant-adjunction section, p_X^* ε, regular action, termwise/localized center); the sorry'd ring laws are true; no existing Γ(*,Λ)-Linear on D(B). Adding stmt_dep def-zl-condensed-scalar-realization (landed, declares condensedScalarRing) is allowed by STMT_DEPS MAY GAIN LANDED NODES. Statement verbatim; 12 declarations present; docstrings carry source and blueprint; only sorry; node diff = lean, stmt_deps. Edge cases ok. No recompile per instructions; no file changed."
  }
 }

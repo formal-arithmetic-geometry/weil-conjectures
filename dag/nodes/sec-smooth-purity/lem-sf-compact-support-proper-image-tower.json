@@ -208,5 +208,39 @@
   "group": "NA",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NA-51d6b12a8 (reviewer sub-agent of L); spot-checked: Read the item in full; it has no new nodes and its statement is unchanged from side-live. Sources checked: Bhatt–Scholze Def 6.7.6 (PDF p.56) and the main-20261015 blueprint ancestor def-weil-integral-rational-qbar-compact-support (order 1849); the tower identity is not in BS, so proof_origin=agent is correct. Step 1: lem-sf-integral-open-reduction-comparison applies to j: X→V, since j is quasi-compact, K is derived complete and ℓ is invertible on X and V via Y→Spec K_0. Its strict quotient-transition clause gives S(α_n)∘d_n = e_n∘J(k_n)∘α_{n+1}; e_n is the same termwise j_!Res=Res j_! identification as in lem-sf-compact-support-restriction-of-scalars. Step 2: v_n is exactly that node's comparison for φ = P_{n+1}→P_n and f̄ = p, in the stated order. Step 3: naturality of C_n along α_n, then substituting Step 1, gives S(b_n)∘u_n = v_n∘b_{n+1}; recomputed and elementary. Step 4: Res_{n+1}∘S_n = Res_n holds on the nose, and applying it gives the def-weil-inverse-system morphism condition; the component inverses also commute. Edge cases checked: K=0, j=id, p=id, X empty, n=1, unbounded K; no boundedness or constructibility is needed anywhere. No cycle: the 3073-node closure does not reach the item. The item is not dropped, has no repair note and cites no SGA. Accepted tool_uses: lem-sf-integral-open-reduction-comparison (declared) and lem-weil-proetale-direct-image-restriction-of-scalars (undeclared; it is already a tool_use of the same-unit lem-sf-compact-support-restriction-of-scalars, so the maintainer should record it at merge). NE delivered the same item in parallel. No fixes written."
+ },
+ "lean": {
+  "module": "Sheaf.SixFunctors.CompactSupportProperImageTower",
+  "declaration": "WeilConjectures.CompactSupportProperImageTower.compactSupportProperImageTower",
+  "declarations": [
+   "WeilConjectures.CompactSupportProperImageTower.DirectData",
+   "WeilConjectures.CompactSupportProperImageTower.OpenData",
+   "WeilConjectures.CompactSupportProperImageTower.openRestriction",
+   "WeilConjectures.CompactSupportProperImageTower.reductionMap",
+   "WeilConjectures.CompactSupportProperImageTower.alpha",
+   "WeilConjectures.CompactSupportProperImageTower.properLevel",
+   "WeilConjectures.CompactSupportProperImageTower.supportLevel",
+   "WeilConjectures.CompactSupportProperImageTower.properTransition",
+   "WeilConjectures.CompactSupportProperImageTower.supportTransition",
+   "WeilConjectures.CompactSupportProperImageTower.beta",
+   "WeilConjectures.CompactSupportProperImageTower.properTower",
+   "WeilConjectures.CompactSupportProperImageTower.supportTower",
+   "WeilConjectures.CompactSupportProperImageTower.compactSupportProperImageTower"
+  ],
+  "file": "lean/Sheaf/SixFunctors/CompactSupportProperImageTower.lean",
+  "statement": "theorem compactSupportProperImageTower (K₀ : Type t) [Field K₀] [X.Over (Spec (.of K₀))] [Y.Over (Spec (.of K₀))] [LocallyOfFiniteType (X ↘ Spec (.of K₀))] [QuasiCompact (X ↘ Spec (.of K₀))] [LocallyOfFiniteType (Y ↘ Spec (.of K₀))] [QuasiCompact (Y ↘ Spec (.of K₀))] (f : X ⟶ Y) [f.IsOver (Spec (.of K₀))] [IsSeparated f] [LocallyOfFiniteType f] [QuasiCompact f] (_hl : IsUnit (l : K₀)) (c : Compactification f) [QuasiCompact c.i] : ∃ (o : IntegralOpenReduction.Operations l E c.i) (SV : CoefficientDerivedSystemCalculus l E c.Z) (SX : CoefficientDerivedSystemCalculus l E X) (tensor : IntegralOpenReduction.TensorComparison l E c.i o) (r : IntegralOpenReduction.Comparison l E c.i o SV SX tensor) (d : DirectData l E c.g) (e : OpenData l E c.i o), ∀ K : (IntegralOpenReduction.complete l E X).FullSubcategory, (∀ n : ℕ, properTransition l E c.i c.g o (d := d) K.obj n ≫ (beta l E c.i c.g o (d := d) SV SX tensor r K n).hom = (beta l E c.i c.g o (d := d) SV SX tensor r K (n+1)).hom ≫ supportTransition l E c.i c.g o (d := d) e K.obj n) ∧ ∃ b : properTower l E c.i c.g o (d := d) K.obj ≅ supportTower l E c.i c.g o (d := d) e K.obj, ∀ n : ℕ, b.hom.app (op n) = (beta l E c.i c.g o (d := d) SV SX tensor r K n).hom",
+  "branch": "newtargets-dag",
+  "by": "NB",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The specified finite quotient transitions and beta components are actual constructions. Canonical section and K-injective normalization data in independent site/coefficient universes are supplied in the conclusion, not assumed. All helper declarations belong to this node; no new notion of compact support, reduction, completeness or inverse system is introduced."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-2d524729f",
+  "group": "NB",
+  "result": "pass",
+  "note": "Only the item's lean field changed; statement verbatim; item not dropped. All hypotheses and clauses match the node, with nothing stronger: field K0, finite-type X/Y, separated finite-type f, upstream Compactification, QuasiCompact c.i, IsUnit l, derived-complete K via IntegralOnSlice.IsComplete none, L_n/K_n via scalarReductionDerivedExtension, beta_n = Res_n Rp_*(alpha_n), equation properTransition n ≫ beta n = beta (n+1) ≫ supportTransition n, and an ofOpSequence iso with components beta. Existential data are all pinned: alpha through Comparison.strictModel and CoefficientReductionPresentation; DirectData through identity-on-sections plus CompactSupportDerivedSquareNormalization (the fixedScalarRestrictionDirectImage_kInjective formula in independent universes); OpenData on every extension generator; reductionMap is the canonical adjunction transpose; supportTransition is not defined by conjugating with beta. Edge cases n=0, K=0, empty X, j=id and unbounded K ok; universes t/u independent. Recorded dependency declarations are in tied universes and fixed ModuleCat, so the normalized helpers are acceptable; no duplicate found. Advisories: helpers owned by def-trf-compact-support-system-evaluation-diagram (not a stmt_dep), unused plain dependency imports, redundant first clause. No compile (no file changed)."
  }
 }

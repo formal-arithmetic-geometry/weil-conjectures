@@ -222,5 +222,32 @@
   "group": "Q100",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q100-116ebaef5 (reviewer sub-agent of L); spot-checked: I read the whole item, the new node, the parent lem-zl-finite-stage-categorical-trace, every cited statement (lem-weil-pbc-profinite-point-pullback, sk-d-trace, sk-def-sfb-module-derived-pushpull, def-sfb-dc-upper-star, the dc-setting, bounded-constructible and Qlbar definitions), the main-20261015 lem-trf-local-frobenius-conjugacy proof parts (1)-(3), and the live Lean in Stalk.lean:120-255 and Braided.lean:61-96. Status: live and side-live have the item unsplit with an identical statement and stmt_deps. It has no repair note, no competing split, is not on any drop list, and contains no SGA reference. The math holds. Step 1: z_{m+j}=z_j follows from commuting powers. Step 2: A_j is built from the pullback comparisons fixed in the statement; z_{m+j}=z_j carries A_{m+j} to A_j. Step 3: the induction is stated for every j, with base r=0 and successor C_{j,r+1}=A_j C_{j+1,r}, from naturality of c_j and the associativity coherence; C_{j,m}=V_{z_j,m}. This is the source's cocycle (2). Step 4: I checked the domains; A_0 V_{z_1,m}=V_{z,m} A_0 uses A_m=A_0, and m=0 is the identity case. This is the source's conjugacy (3). Step 5 applies the new node with P=B_1, Q=B_0, a=A_0. Small cases checked: m=0, m=1, X=s with Psi=id, a period that divides m without equalling it, zero stalk, k not algebraically closed. The parent's use (induction along Phi^i z_x^0, duals from its step 3) matches the item's hypotheses. New node: the braided-category trace conjugacy law is true and is exactly Lean trace_eq_of_iso (Braided.lean:92-96), with the same trace convention as sk-d-trace. It is not a duplicate: prop-trf-trace-formal-laws (1) covers Perf(A) of ordinary modules only, and the DAG grep found no other node stating it. It is not elementary, since cyclicity needs a mate and braiding chase. It does not restate the item, and its form and searches are fine. tool_uses lem-weil-pbc-profinite-point-pullback is accepted as generic pullback coherence whose comparisons the statement already uses. Advisories: attach trace_eq_of_iso to the new node (lean_candidates is empty there); the braided structure on D_s is presupposed by the statement, the same as in the parent; the citations.json named in the report was not delivered, which is harmless."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CondensedStalkFrobeniusOrbitTrace",
+  "declaration": "AlgebraicGeometry.ProEtale.CondensedRing.condensed_stalk_frobenius_orbit_trace",
+  "declarations": [
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedOrbitPointLocallyOfFiniteType",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedOrbitPointQuasiCompact",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedOrbitPointIsSeparated",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedOrbitWeilIterate",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensedOrbitStalkFrobenius",
+   "AlgebraicGeometry.ProEtale.CondensedRing.condensed_stalk_frobenius_orbit_trace"
+  ],
+  "file": "lean/Sheaf/TraceFormula/CondensedStalkFrobeniusOrbitTrace.lean",
+  "statement": "theorem condensed_stalk_frobenius_orbit_trace (m : ℕ) (z : Over.mk (𝟙 (Spec (.of k))) ⟶ X) (hz : z ≫ Ψ ^ m = z) [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ z).obj M)] [HasRightDual ((boundedConstructibleUpperStar (Profinite.padicAlgClRingObj ℓ) ℓ (z ≫ Ψ)).obj M)] : ∃ htranslate : (z ≫ Ψ) ≫ Ψ ^ m = z ≫ Ψ, @trace _ _ _ (boundedConstructibleBraiding (Profinite.padicAlgClRingObj ℓ) (Over.mk (𝟙 (Spec (.of k))))) _ _ (condensedOrbitStalkFrobenius ℓ Ψ M ψ m (z ≫ Ψ) htranslate) = @trace _ _ _ (boundedConstructibleBraiding (Profinite.padicAlgClRingObj ℓ) (Over.mk (𝟙 (Spec (.of k))))) _ _ (condensedOrbitStalkFrobenius ℓ Ψ M ψ m z hz)",
+  "branch": "newtargets-dag",
+  "by": "Q26",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The candidate WeilConjectures.TraceFormula.Slop.Stalk module is absent both locally and from scompile.py --source on the live server. This module gives the canonical iterated Weil maps and fixed stalk operators as real constructions over the published bounded-constructible pullbacks, and states fixedness and trace invariance together. The three point instances only expose existing identity-morphism instances through Over.mk; they add no hypothesis. The trace explicitly uses the canonical restricted Koszul braiding."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-6929eb336",
+  "group": "Q26",
+  "result": "pass",
+  "note": "Clause-by-clause check of condensed_stalk_frobenius_orbit_trace against the node: ell prime, field of prime char p≠ell, s=Over.mk(𝟙 Spec k), separated finite-type X, Dᵇc⟦padicAlgClRingObj ℓ⟧, Ψ : End X (not invertible), ψ, m≥0, fixed z, two HasRightDual stalks; the ∃ htranslate conclusion asserts the translate is fixed and the trace equality. condensedOrbitWeilIterate is exactly ψ∘LΨ*ψ_n (pow_succ gives Ψ≫Ψ^n; boundedConstructibleUpperStarComp/Id restrict leftDerivedUpperStarComp/Id, built from the same underived upperStarComp as the ProfinitePointPullback termwise comparisons). condensedOrbitStalkFrobenius = eqToIso(hz.symm) ≫ Comp ≫ z^*ψ_m. trace = sk-d-trace convention with the explicit non-instance boundedConstructibleBraiding over the same monoidal instance. Edge cases m=0 and empty X checked; universes are the framework's. No duplicate: Slop/Stalk trace_stalkFrobenius_comp is absent everywhere; WeilSheaf stalkFrobenius and LocalFrobeniusTrace localWeilIterate are other categories. Statement verbatim; docstrings with source and blueprint tag; only sorry is the theorem; report sections present. Advisories: plain import ProfinitePointPullback is unused by the statement; lean_candidates names the absent declaration. No recompile, since no file changed."
  }
 }

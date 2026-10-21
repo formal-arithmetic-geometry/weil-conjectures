@@ -279,5 +279,42 @@
   "group": "O3",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-O3-e09fd1e96 (reviewer sub-agent of L); spot-checked: I read the whole item. The statement is unchanged against side-live; there are no new nodes, no cycle (closure checked) and no SGA citation. The tool use of lem-sp-completed-pullback-adjunction is declared and already in the item's statement deps. Step 1: the Koszul reflector on A_T plus koszul-reconstruction (c_K κ_K = comp_K for arbitrary K) give the quotient reflector. Constant reflector from the sp node; flatness of A_T from constant-completion-equivalence; hence restriction is exact, preserves K-injectives and has adjunct-compatible b/d (flat-ringed node). Step 2: λ_{ΔM} r(e^a) = e^0 from λ's stated family-to-family normalization on a K-injective tower. Steps 3–4: checked term by term using the strict augmentation and q·r(τ) = R^0(a)ρ equations quoted from the balancing node, and the model of def-weil-pbc-completed-pullback (r = L^a(τ), τ∘h = ℒ(h)). Step 5: uniqueness by injectivity of precomposition with c^0 into the complete C^0 G_u r_V L. Step 6: Hom bijections match via the flat-ringed adjunct identity (adjunct of r(t)b^{-1} is d r(t^♯)), and direct-image completeness comes from prop-weil-pbc-direct-image-limits. Step 7: the convention that direct-image composition is the conjugate of inverse-image composition matches def-weil-pbc-derived-direct-image-composition; advisory only, since no pro-étale node states it. Steps 8–9 are elementary naturality and substitution. Sources checked: Stacks 099M and 099N (proetale.tex:4305, 4336), tags 099B and 0A0E, and the second paragraph of the blueprint main-20261015 completed-exchange-coherence proof. Edge cases checked: I=A (everything zero), I=0 (φ=a), the identity edge, and r=0 generators."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.CompletedScalarUnitAdjunction",
+  "declaration": "AlgebraicGeometry.Scheme.CompletedScalar.completedScalarUnitAdjunction",
+  "declarations": [
+   "AlgebraicGeometry.Scheme.CompletedScalar.complete",
+   "AlgebraicGeometry.Scheme.CompletedScalar.Complete",
+   "AlgebraicGeometry.Scheme.CompletedScalar.CompletionFacts",
+   "AlgebraicGeometry.Scheme.CompletedScalar.CompletionFacts.restriction",
+   "AlgebraicGeometry.Scheme.CompletedScalar.LimitNormalized",
+   "AlgebraicGeometry.Scheme.CompletedScalar.completionComparison",
+   "AlgebraicGeometry.Scheme.CompletedScalar.Operations",
+   "AlgebraicGeometry.Scheme.CompletedScalar.Operations.ordinary",
+   "AlgebraicGeometry.Scheme.CompletedScalar.Operations.diagrams",
+   "AlgebraicGeometry.Scheme.CompletedScalar.Operations.completedPull",
+   "AlgebraicGeometry.Scheme.CompletedScalar.Operations.reconstruction",
+   "AlgebraicGeometry.Scheme.CompletedScalar.Operations.quotientComparison",
+   "AlgebraicGeometry.Scheme.CompletedScalar.Operations.ComparisonType",
+   "AlgebraicGeometry.Scheme.CompletedScalar.Operations.UnitNormalized",
+   "AlgebraicGeometry.Scheme.CompletedScalar.Comparison",
+   "AlgebraicGeometry.Scheme.CompletedScalar.completedScalarUnitAdjunction"
+  ],
+  "file": "lean/Sheaf/Paper/CompletedScalarUnitAdjunction.lean",
+  "statement": "theorem completedScalarUnitAdjunction (d : AdicCoefficientDatum A) (B : Balancing d) : ∃ H : CompletionFacts d, (∀ T : Scheme.{u}, (H.restriction T).IsEquivalence) ∧ ∃ lambda : ∀ T : Scheme.{u}, rlim (ring T d true) ⋙ dres (scalar T d) ≅ tdres (scalar T d) ⋙ rlim (ring T d false), (∀ T : Scheme.{u}, LimitNormalized T d (lambda T)) ∧ (∀ (T : Scheme.{u}) (L : D (ring T d true)), (dres (scalar T d)).map ((completionUnit (topology T) A d.ideal true).app L) ≫ (completionComparison d B T (lambda T)).hom.app L = (completionUnit (topology T) A d.ideal false).app ((dres (scalar T d)).obj L)) ∧ (∀ (U V : Scheme.{u}) (f : U ⟶ V), Nonempty (Operations d B f)) ∧ ∀ (U V : Scheme.{u}) (f : U ⟶ V) (O : Operations d B f), Nonempty (Comparison O H (lambda U))",
+  "branch": "sheaf-dag",
+  "by": "NH",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the published StrictScalarBalancing small-site model and its actual quotient presentation. The theorem supplies completeness, equivalence, normalized scalar-limit comparison, unit equality and complete adjunction comparison; Operations bundles ordinary adjunction choices and fixes chi as the mate. Comparison includes the full-category mate and transport of adjunction conjugates, as well as explicit unit, counit, reconstruction and change-of-input equations."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-83bbc485c",
+  "group": "NH",
+  "result": "pass",
+  "note": "Read node, report (Worker report + Second reading by NH), the item module and the published declarations it uses (StrictQuotientScalarBalancing PullModel/PullCompatibility/Balancing with their *Computes normalizations; ConstantCompletionEquivalence IsComplete/finiteMap/rlim/limitComparison/completion/completionUnit/limitRestriction/koszul_quotient_reflector). Records: node copy changes only lean; lean.statement verbatim; all 16 declarations present; one sorry; source/blueprint docstrings and all 9 proof steps. Clause check: hypotheses are exactly AdicCoefficientDatum; balancing and operation data are normalized, chi = mate of a^-1 (direction checked); lambda pinned by LimitNormalized; unit identification for every ambient L = Step 3; phi exists, is unique and unit-normalized; the reconstruction equation L0(q) lambda r(r) = r0 phi has its types and order checked; Hom bijections homA/hom0/hom_comparison = Step 6; unit/counit/mate; change_input for any h; pushA covers L = R_f K. Edge cases I=A, I=0, empty scheme, n=0 indexing are fine. Advisories: (1) the composition/identity clause is a generic conjugation field that follows from mate and assumes chi-compatibility of ordinary direct-image composition (Step 7); no pro-etale node defines those maps (same advisory as stage 1) and the only citer uses unconditional clauses; (2) H9: about ten imports are unused by name; (3) lambda is characterized locally, with the same normalization as flatScalarTowerLimitSquare. No compile, since no file was changed."
  }
 }

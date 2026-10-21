@@ -18,7 +18,10 @@
   "lem-weil-finite-free-completed-scalar-comparison",
   "lem-weil-integral-twist-derived-scalar",
   "def-weil-derived-complete-integral-detailed",
-  "def-weil-finite-tor-amplitude"
+  "def-weil-finite-tor-amplitude",
+  "lem-weil-constant-coefficient-objects-constructible",
+  "lem-weil-point-completed-scalar-shift",
+  "lem-pur-completed-line-tensor-coherence"
  ],
  "proof": [
   {
@@ -248,5 +251,34 @@
   "group": "N7",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-N7-2553cf383 (reviewer sub-agent of L); spot-checked: PASS: I read the item in full, with all ten cited statements and the main-20261015 source (Step 2 of thm-pur-rational-and-qbar-purity.proof, Step 3 of sk-thm-purity-transport: transitivity of transport in coefficient extensions). The delivery keeps the statement and stmt_deps byte-identical to side-live and adds no new nodes. proof_deps is exactly the union of the step uses. The dependency closure has no cycle and does not reach the item or its parent. No dropped nodes and no SGA references. Step 1: R_L[0] and J_L=O_L(d)[0] are K-flat with flat terms, since prop-weil-twist-preserves makes the line locally free of rank one, so lem-pur-derived-change-of-rings computes C on these models. Steps 2–3: clause 2 of lem-weil-constant-coefficient-objects-constructible gives reductions (A_{L,j})_S[0] with Tor interval [0,0]; twist preservation keeps it, and the shift moves it to [-2d,-2d] (degree 0 to -2d, checked). Step 4: I recomputed the unit equation on ((x⊗b)⊗c); both sides give ι_{F/E0}(x)ι_{F/E}(b)c. Step 5: from the β chain formula, w=u(d)β is (x⊗l)⊗b ↦ ι(x)b·b(l⊗1); the two paths agree by the tower compatibility that lem-weil-integral-twist-base-change states. Hypotheses hold: ℓ invertible since ℓ≠p, U_L complete constructible by Step 2, d≥0. Step 6: s is the identity on components and the differentials (-1)^n d⊗1 agree; I checked that naturality of s plus α_{P[n]}=α_P[n] gives the shifted equation, with no Koszul sign. Step 7: q is an isomorphism, so iso-closure in lem-weil-integral-ctf-triangulated puts AT_0 in the category. Identity extensions follow because the cited lemmas allow E=F, and the χ identity case is quoted from lem-weil-finite-free-completed-scalar-comparison. Edge cases checked: d=0, repeated fields, S empty, ramified extensions, S a point. Advisory: Step 5 could have cited the existing lem-weil-integral-twist-scalar-coherence (Q53) at C=U_0 instead of redoing the three-line computation. The citation of lem-weil-completed-scalar-chain-shift in Step 6 is correct but not strictly needed. def-pc-kflat-complex (sec-picard-framework) is a definition already in the closure through lem-pur-derived-change-of-rings; record it as a tool use if the route check flags it."
+ },
+ "lean": {
+  "module": "Sheaf.Paper.PurShiftedTateUnitScalarCoherence",
+  "declaration": "WeilConjectures.PurityFiniteSetting.shiftedTateUnitScalarCoherence",
+  "declarations": [
+   "WeilConjectures.PurShiftedTate.unitIso",
+   "WeilConjectures.PurShiftedTate.shiftIso",
+   "WeilConjectures.PurShiftedTate.baseInclusion",
+   "WeilConjectures.PurityFiniteSetting.shiftedTateResidueInverse",
+   "WeilConjectures.PurityFiniteSetting.shiftedTateUnit",
+   "WeilConjectures.PurityFiniteSetting.shiftedTateUnitDomain",
+   "WeilConjectures.PurityFiniteSetting.shiftedTateScalarIso",
+   "WeilConjectures.PurityFiniteSetting.shiftedTateUnitScalarCoherence"
+  ],
+  "file": "lean/Sheaf/Paper/PurShiftedTateUnitScalarCoherence.lean",
+  "statement": "theorem shiftedTateUnitScalarCoherence (d : ℕ) : P.shiftedTateUnitDomain (ULift.{u} (Padic P.coefficients.l)) S d ∧ P.shiftedTateUnitDomain E S d ∧ P.shiftedTateUnitDomain F S d ∧ finiteTorConstructibleIntegral P.coefficients.l E S ((completedDerivedScalarExtension P.coefficients.l (ULift.{u} (Padic P.coefficients.l)) E (PurShiftedTate.baseInclusion P.coefficients.l E) S).obj (P.shiftedTateUnit (ULift.{u} (Padic P.coefficients.l)) S d)) ∧ ((CompletedLineTensor.associatorData P.coefficients.l (ULift.{u} (Padic P.coefficients.l)) S E (PurShiftedTate.baseInclusion P.coefficients.l E) F ι).derived.hom.app (integralConstantCoefficientObject P.coefficients.l (ULift.{u} (Padic P.coefficients.l)) S)) ≫ (PurShiftedTate.unitIso P.coefficients.l (ULift.{u} (Padic P.coefficients.l)) F (ι.comp (PurShiftedTate.baseInclusion P.coefficients.l E)) S P.field P.coefficients.different).hom = (completedDerivedScalarExtension P.coefficients.l E F ι S).map (PurShiftedTate.unitIso P.coefficients.l (ULift.{u} (Padic P.coefficients.l)) E (PurShiftedTate.baseInclusion P.coefficients.l E) S P.field P.coefficients.different).hom ≫ (PurShiftedTate.unitIso P.coefficients.l E F ι S P.field P.coefficients.different).hom ∧ ((CompletedLineTensor.associatorData P.coefficients.l (ULift.{u} (Padic P.coefficients.l)) S E (PurShiftedTate.baseInclusion P.coefficients.l E) F ι).derived.hom.app (P.shiftedTateUnit (ULift.{u} (Padic P.coefficients.l)) S d)) ≫ (P.shiftedTateScalarIso (ULift.{u} (Padic P.coefficients.l)) S F (ι.comp (PurShiftedTate.baseInclusion P.coefficients.l E)) d).hom = (completedDerivedScalarExtension P.coefficients.l E F ι S).map (P.shiftedTateScalarIso (ULift.{u} (Padic P.coefficients.l)) S E (PurShiftedTate.baseInclusion P.coefficients.l E) d).hom ≫ (P.shiftedTateScalarIso E S F ι d).hom",
+  "branch": "sheaf-dag",
+  "by": "Q28",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "The only postponed proof is the node theorem. The helpers assemble the existing coefficient unit, normalized completion unit, natural beta, canonically counit-normalized ordinary shift and balanced derived associator. Three already landed statement interfaces are added to stmt_deps. No mathematical statement is changed."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-c56b6aed2",
+  "group": "Q28",
+  "result": "pass",
+  "note": "Only the item node changed: new lean record and stmt_deps gained 3 landed nodes (allowed by §5); lean.statement is verbatim the signature. All clauses match the node. unitIso = asIso χ followed by the inverse strict unit, which works out to x⊗b ↦ ι(x)b. shiftIso is the eE of completedScalarComparison_commutesWithShift, unique by its ordinary normalization. α = associatorData, the ∃!-choice. β = integralTwistOrdinaryBeta. q = shiftIso.app ≪≫ shift(β ≪≫ twist(u)), the node's (u(d)β)[2d]s. The Tor [0,0] and [-2d,-2d] clauses use the finite-Tor conventions, at E0, E and F. A T0 is ctf at E. Both tower equations have the node's endpoints. Edge cases covered: d=0, identity and repeated fields, empty S, ramified extensions. The ULift Q_l for E0 is a transport, not a restriction. Mechanical finding judged PASS: all three theorem stmt_deps supply theorem-constructed objects (constantCoefficientIntegralScalarIso via ∃!.choose and the isIso theorem; the commShift choose; associatorData ∃!.choose). No duplicate notion; no hollow helpers; docstrings with source place and blueprint tags; 7-step proof docstring; only the theorem is sorry. No compile run (no FIX)."
  }
 }

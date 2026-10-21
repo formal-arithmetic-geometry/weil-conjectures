@@ -21,7 +21,9 @@
   "def-weil-integral-scalar-extension",
   "def-trf-integral-comparison-realization-models",
   "def-weil-derived-complete-integral-detailed",
-  "lem-weil-finite-free-completed-scalar-comparison"
+  "lem-weil-finite-free-completed-scalar-comparison",
+  "lem-trf-quotient-system-mixed-coherence",
+  "lem-pur-completed-line-tensor-coherence"
  ],
  "proof": [
   {
@@ -322,5 +324,47 @@
   "group": "Q104",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q104-3a383bf8b (reviewer sub-agent of L); spot-checked: I read all 11 steps of Q104 3a383bf8 in full, plus the statement of every cited node. The delivery adds no new nodes and keeps the statement, stmt_deps and blueprint identical to the live side, where the item is still unsplit. There is no repair note, nothing is in the dropped list and there is no cycle (1724 transitive deps walked; the only citer is the parent pullback-comparison-realization). Every proof dep lies within the sk-thm-trace-transport route closure, and the six off-chapter tool_uses (coef calculus, DVR effectivity, kflat-resolution, change of rings, quotient scalar descent, kflat change of rings) are acceptable generic tools. I recomputed the mathematics. Step 1: e_C is an isomorphism by effectivity plus joint conservativity of evaluations. Step 2: on the D^b_c domain the effective-models lemma gives normalization and constructibility. Step 3: the naturality identity follows from naturality of b and of the counit. Step 4: the cut formula holds by induction. Step 5: the two-letter substitution expansion checks out. Steps 6–7: composites, inverses and left whiskering hold. Steps 8–11: the scalar associator is the χ-conjugated tensor associator. This follows from the R⊣L adjuncts computed with the cone-counit identity (generator value x⊗ā b̄ c, degree 0, no sign), Hom-bijectivity and transport by e_C. I type-checked the displayed composite and the E=L unit. Sources checked: Stacks 0941 (K-injective limit), BS Def 3.4.10, Prop 3.5.1 and Lemmas 3.5.5/3.5.7, and the blueprint main-20261015 final sentence of prop-trf-karoubi-independence; no SGA is cited. The item duplicates no existing node and restates no clause of lem-trf-effective-comparison-realization-models. Advisory only: the step 7 right-whisker sentence leaves implicit that t̂ extends to all domain objects by conjugation with the completion unit, and step 5's triangle-identity remark is superfluous. No fixes were written."
+ },
+ "lean": {
+  "module": "Sheaf.TraceFormula.CounitRealizationSubstitution",
+  "declaration": "WeilConjectures.CounitRealization.counitRealizationSubstitution",
+  "declarations": [
+   "WeilConjectures.CounitRealization.Coefficient",
+   "WeilConjectures.CounitRealization.Location",
+   "WeilConjectures.CounitRealization.Primitive",
+   "WeilConjectures.CounitRealization.Word",
+   "WeilConjectures.CounitRealization.Models",
+   "WeilConjectures.CounitRealization.Primitive.system",
+   "WeilConjectures.CounitRealization.Primitive.completed",
+   "WeilConjectures.CounitRealization.Primitive.model",
+   "WeilConjectures.CounitRealization.Primitive.comparison",
+   "WeilConjectures.CounitRealization.Word.system",
+   "WeilConjectures.CounitRealization.Word.completed",
+   "WeilConjectures.CounitRealization.Word.comparison",
+   "WeilConjectures.CounitRealization.Word.Allowed",
+   "WeilConjectures.CounitRealization.Word.transport",
+   "WeilConjectures.CounitRealization.Comparison",
+   "WeilConjectures.CounitRealization.Comparison.system",
+   "WeilConjectures.CounitRealization.Word.reductionComparison",
+   "WeilConjectures.CounitRealization.Primitive.reductionComparison",
+   "WeilConjectures.CounitRealization.WordLaws",
+   "WeilConjectures.CounitRealization.scalarWord",
+   "WeilConjectures.CounitRealization.ScalarLaws",
+   "WeilConjectures.CounitRealization.counitRealizationSubstitution"
+  ],
+  "file": "lean/Sheaf/TraceFormula/CounitRealizationSubstitution.lean",
+  "statement": "theorem counitRealizationSubstitution (l : ℕ) [Fact l.Prime] (M : Models.{u} l) : WordLaws M ∧ ScalarLaws M",
+  "branch": "sheaf-dag",
+  "by": "NC",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-65e68d573",
+  "group": "NC",
+  "result": "pass",
+  "note": "Clauses r=b;L(O e_C), invertibility+normalization on Allowed (D^b_c at every intermediate) domain, naturality for arbitrary φ, cut/parenthesization, wholeCounit substitution, ∃! t̂ conjugation, composition/inverse/left/right whisker (hand-checked), chi-conjugated scalar associator and E=L unit match the node in composition order. Models are the dependency's normalized pullback/scalar models (no arbitrary maps). Mechanical theorem-stmt_dep finding: integralComparisonSystemScalarComposition/Unit are .choose of ∃! theorems of lem-trf-quotient-system-mixed-coherence; CompletedLineTensor.associator/unit are built from associatorData/ordinaryUnit .choose, and intrinsic_complete is a theorem; the statement depends on theorem-constructed objects → PASS on that point. Only node change: the two stmt_deps added; both landed, acyclic; lean.statement verbatim. Advisory: the WordLaws.counit clause (proof step 1, supported by effectivity) goes beyond the displayed statement; coefficient universe = scheme universe is forced by the sfIntegralConstructible/intrinsic_complete signatures; the normalized predicate is owned by def-coef-ringed-sequence-site, outside stmt_deps. No compile run; no fixes."
  }
 }
