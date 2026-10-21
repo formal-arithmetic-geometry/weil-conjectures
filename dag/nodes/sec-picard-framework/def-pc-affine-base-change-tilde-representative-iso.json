@@ -115,7 +115,8 @@
   "statement": "def affineBaseChangeTildeRepresentativeIso\n    (A A' : Type u) [CommRing A] [CommRing A'] (φ : A →+* A')\n    (K : schemeDerivedCategory (Spec (.of A)))\n    (M : CochainComplex (ModuleCat.{u} A) ℤ)\n    (e : DerivedCategory.Q.obj\n      (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M) ≅ K)\n    (hc : IsIso ((SingleComplexBaseChange.counit (Spec.map (CommRingCat.ofHom φ))).app\n      ((HomotopyCategory.quotient _ (.up ℤ)).obj\n        (((affineTildeFunctor A).mapHomologicalComplex (.up ℤ)).obj M)))) :\n    DerivedCategory.Q.obj (((affineTildeFunctor A').mapHomologicalComplex (.up ℤ)).obj\n      (((ModuleCat.extendScalars φ).mapHomologicalComplex (.up ℤ)).obj M)) ≅\n      (derivedPullback (Spec.map (CommRingCat.ofHom φ))).obj K",
   "branch": "sheaf-dag",
   "by": "F1",
-  "date": "2026-10-14"
+  "date": "2026-10-14",
+  "note": "The Sheaf compatibility module re-exports the complete adopted implementation WeilConjectures.Algebra.Homology.AffineBaseChangeTildeRepresentative to prevent duplicate constants when importing the restored exchange theorem. All five public declarations and the original Sheaf Lean attachment remain. The old concrete definitions are definitionally equal to the adopted definitions after expanding affineTildeFunctor; no data are chosen or changed."
  },
  "reviewed": {
   "date": "2026-10-14",
@@ -128,14 +129,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-14",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "X-50747",
-  "group": "P1",
+  "reviewer": "C-33e35",
+  "group": "E3",
   "result": "pass",
-  "landing": "20261014T204310-L-2517264",
+  "landing": "20261021T203432-L-3746592",
   "kind": "interface",
-  "note": "independent Codex review: Delivered files matched node statements, compiled cleanly, and adapted direct importers compiled against the changed dependencies."
+  "note": "independent cc review: delivered Sheaf re-export interfaces vs live Sheaf modules and their WeilConjectures counterparts (abbrev affineTildeFunctor = affinePushforwardTilde, unused let renames only); node lean records (note only); 4 direct importers compiled in sandbox with the delivered modules"
  },
  "lean_audit": {}
 }
