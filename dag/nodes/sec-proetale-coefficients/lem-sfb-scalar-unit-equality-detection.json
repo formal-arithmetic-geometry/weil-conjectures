@@ -173,5 +173,23 @@
   "group": "Q33",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q33-76666f7d3 (reviewer sub-agent of L); spot-checked: I read the item, all 4 steps and every cited statement in full: def-weil-preadditive-category, def-weil-pbc-category-colimit, lem-weil-pbc-abelian-groups-forget-filtered-colimits and lem-weil-pbc-filtered-colimit-sets-elementwise. For clause (3) of the last one I checked the Mathlib source, Types.FilteredColimit.isColimit_eq_iff' at Types/Filtered.lean:153. I read the source place, main-20261015 thm-sfb-extend-scalars-localization.proof.md, Full faithfulness. The item states the equality-detection half of that paragraph, with the Hom colimit as an explicit hypothesis. The parent's step 3 supplies it through lem-sfb-integral-localization-hom-colimit and the telescope's zeroth leg = unit, so the citer's use matches the statement. Step 1: unit naturality gives η_B f = η_B g, and no additivity of F or U is used. Step 2: bilinearity makes q_i homomorphisms with q_{i+1}(ah) = q_i(h). ℕ is filtered, and the step forgets Ab→Set by the cited leaf; the universe is handled by a small copy of ℕ. Step 3: the same-index clause (3) gives 0→n. Step 4: induction gives H(0→n) = a^n. Edge cases are fine: a=0, a=1, torsion Hom groups, zero Hom groups. I also checked the statement on a model with Ab and -⊗ℚ. There are no new nodes. A DAG rg search found no duplicate: the legs, integral-denominators, modules-criterion and module-colimit nodes are different statements. The two off-unit citations are Mathlib leaves, so no tool_uses is needed. No SGA is cited. There is no re-split note for this item and it is not in any dropped list. No fixes."
+ },
+ "lean": {
+  "module": "Sheaf.CategoryTheory.ScalarUnitEqualityDetection",
+  "declaration": "CategoryTheory.scalar_unit_equality_detection",
+  "file": "lean/Sheaf/CategoryTheory/ScalarUnitEqualityDetection.lean",
+  "statement": "theorem scalar_unit_equality_detection {A : Type uA} [Category.{vA} A] [Preadditive A] {C : Type uB} [Category.{vB} C] {F : A ⥤ C} {U : C ⥤ A} (adj : F ⊣ U) (a : ℕ) (K B : A) (t : Functor.ofSequence (fun _ : ℕ ↦ a • 𝟙 B) ⟶ (Functor.const ℕ).obj (U.obj (F.obj B))) (hzero : t.app 0 = adj.unit.app B) (hcolimit : IsColimit ((preadditiveCoyoneda.obj (op K)).mapCocone (Cocone.mk (U.obj (F.obj B)) t))) (f g : K ⟶ B) (hfg : F.map f = F.map g) : ∃ n : ℕ, a ^ n • f = a ^ n • g",
+  "branch": "newtargets-dag",
+  "by": "O4",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-ff9704f3f",
+  "group": "O4",
+  "result": "pass",
+  "note": "Statement matches node clause by clause: Preadditive A, arbitrary C, no additivity of the adjoints, cocone legs t with vertex U(F B) and hzero = unit, IsColimit of the preadditiveCoyoneda image (colimit in Ab; a probe confirms transitions h ↦ a•h), conclusion ∃ n, a^n•f = a^n•g; universes independent and bound; edge cases a=0, a=1, n=0 OK. lean.statement verbatim; node unchanged except lean; non-public imports = proof-dep modules (rule 7); docstrings carry source place, blueprint id and 4 proof steps; sorry only; no duplicate in Mathlib or the project; nt_compile --json clean (8.6 s). No findings."
  }
 }
