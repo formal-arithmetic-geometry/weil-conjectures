@@ -23788,3 +23788,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 2026-10-21T21:27:38Z L: superseded stage-1 delivery NE/lem-sfb-internal-bar-roof-adjunction at 4de3ae8238ac76736831c933f8d0506b240b8fda; current completion retained; packet archived at refs/superseded/NE/lem-sfb-internal-bar-roof-adjunction/4de3ae8238ac76736831c933f8d0506b240b8fda; stale return retired.
 - 21:28 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
 - 21:30 L: merged deliver/Q23/sk-def-sf-orientation (stage 2; reviewer PASS; parallel immutable checks)
+- 21:31 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
