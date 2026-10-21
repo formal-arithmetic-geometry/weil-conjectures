@@ -21,9 +21,160 @@
   "def-pur-integral-derived-operations",
   "def-weil-integral-scalar-extension"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Fix $E$, write $R=\\mathcal O_E$, and denote the assumed integral restriction equivalence by $r_E$. Define $R_E:D^b_c(X,E)\\to\\prod_iD^b_c(X_i,E)$ on objects by $r_E$ and on arrows by $f\\otimes a\\mapsto(r_{E,i}(f)\\otimes a)_i$, extended additively. Each $r_{E,i}$ is $R$-linear by hypothesis, so this respects the balancing relation $(cf)\\otimes a=f\\otimes ca$. In the scalar localization composition is $(g\\otimes b)\\circ(f\\otimes a)=(g\\circ f)\\otimes ba$ and the identity is $\\mathrm{id}\\otimes1$. Hence the displayed formula respects identities and composition and defines the rationalized restriction functor.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-linear-scalar-localization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "Hom formula and raw scalar-localization objects; explicit balancing and composition check"
+   }
+  },
+  {
+   "text": "For integral objects $K,M$, the assumed $R$-linear equivalence gives an $R$-linear bijection $h:\\operatorname{Hom}(K,M)\\to\\prod_i H_i$, where $H_i=\\operatorname{Hom}(r_{E,i}K,r_{E,i}M)$. Its inverse is linear: apply the injective linear map $h$ to the additivity and scalar identities for the inverse. Tensor $h$ and its inverse with $E$; the two composites are identities, since this holds on each pure tensor. Now apply [lem-weil-pbc-tensor-finite-product] with $N=E$ and the finite family $H_i$ (enumerate $I$ by $\\{1,\\ldots,t\\}$). This gives the canonical bijection $\\operatorname{Hom}(K,M)\\otimes_R E\\cong\\prod_i(H_i\\otimes_R E)$, sending $f\\otimes a$ to $(r_{E,i}f\\otimes a)_i$. It is exactly the Hom map of step 1. Thus $R_E$ is fully faithful and the isomorphism in the statement has the claimed formula. The tensor-product result includes $t=0$.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-weil-pbc-tensor-finite-product"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-rationalization-karoubi.md",
+    "place": "Hom formula; tensor-finite-product is the existing Mathlib tool TensorProduct.piLeft"
+   }
+  },
+  {
+   "text": "Every tuple of objects in $D^b_c(X_i,E)$ is a tuple of integral objects, because raw rationalization keeps objects unchanged. Essential surjectivity of $r_E$ supplies an integral object $K$ and component isomorphisms $r_{E,i}K\\cong K_i$. Their images under rationalization remain isomorphisms: tensor each isomorphism and its inverse with $1$. Therefore $R_E$ is essentially surjective. Together with step 2, [lem-trf-fully-faithful-ess-surj-equivalence] gives the required equivalence over $E$. Work throughout in a common enlarged universe containing the finitely many categories, as required by that criterion.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "lem-trf-fully-faithful-ess-surj-equivalence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 02C3, lemma-equivalence-categories; rationalization keeps the integral object set"
+   }
+  },
+  {
+   "text": "Define $b^i_{L/E,K}:(j_i^*K)\\otimes_E L\\xrightarrow{\\sim}j_i^*(K\\otimes_E L)$ as the pullback comparison of [lem-pur-integral-operations-scalar-extension] for $f=j_i$, followed by rationalization; it is the comparison $\\theta^{j_i^*}_{E,L}$ used by the common-stage pullback of [def-weil-derived-pullback-tensor-hom]. On $u\\otimes a$ its naturality square is the integral naturality square tensored with $a\\in E\\subset L$, so it commutes on arbitrary arrows by additivity. The identity and tower compatibilities of $b$ are those stated in [lem-pur-integral-operations-scalar-extension], with the scalar-tower identifications of [lem-weil-scalar-extension-composition]. The integral tensor and unit comparisons $\\mu$ of the restrictions also rationalize: on two pure arrows the tensor comparison square is its integral square multiplied by $ab$, since $(u\\otimes a)\\otimes_E^L(v\\otimes b)=(u\\widehat\\otimes^L v)\\otimes ab$. Extend in both variables additively. The integral inverse comparisons rationalize to inverses, so these remain isomorphisms. By the item's hypothesis these comparisons preserve integral scalar extension: under $b$ and the tensor comparison $\\theta^{\\otimes}$ of [lem-pur-integral-operations-scalar-extension], $\\mu$ over $\\mathcal O_L$ corresponds to $\\mu$ over $\\mathcal O_E$ extended to $\\mathcal O_L$, and likewise for units. Rationalization is a functor, so this square holds over $E\\subset L$ too. This proves the coefficient, tensor and unit compatibility at each rational stage and across stages.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-integral-operations-scalar-extension",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-derived-pullback-tensor-hom.md",
+    "place": "Rational level and algebraically closed level, using the explicit formulas in the current DAG definition"
+   }
+  },
+  {
+   "text": "Define common-stage restriction by $(E,K)\\mapsto((E,j_i^*K))_i$. For an arrow represented by $u:K\\otimes_E L\\to M\\otimes_F L$, its $i$th component is represented by $(b^i_{L/F,M})^{-1}\\circ j_i^*(u)\\circ b^i_{L/E,K}$. These source and target identifications have precisely the directions shown: $b$ takes extension of the restricted object to restriction of the extended object. If $u$ is replaced by its extension to $L'$, naturality and the tower identity of step 4 identify the two displayed arrows after extension to $L'$. Representatives equal at a further stage therefore have equal images. At a common stage the middle factors $b\\,(b)^{-1}$ cancel in a composite; identity arrows give $(b)^{-1}b=1$. Hence this prescription is a well-defined functor. This uses the representative and equality rules in [def-weil-algebraically-closed-coefficients] and the common-stage pullback formula in [def-weil-derived-pullback-tensor-hom].",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Displayed Hom colimit and common-stage composition, with the explicit current DAG pullback formula"
+   }
+  },
+  {
+   "text": "Any finite list of coefficient fields has a common finite upper bound: start with $\\mathbf Q_\\ell$, and replace the current field successively by its compositum with the next field. The nonemptiness, finiteness of a binary compositum, and its upper-bound property are stated in [def-weil-finite-subextension-directed-set]. Induction on the length gives a field containing the whole list; the zero-length list uses $\\mathbf Q_\\ell$. Apply this construction whenever the following steps collect finitely many fields. No assertion about an infinite family is used.",
+   "uses": [
+    "def-weil-finite-subextension-directed-set"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Directed coefficient index; finite repetition of the binary upper-bound construction"
+   }
+  },
+  {
+   "text": "Given component objects $(E_i,K_i)$, choose by step 6 a finite $L$ containing all $E_i$. The pair $(E_i,K_i)$ is isomorphic to $(L,K_i\\otimes_{E_i}L)$: both forward and backward arrows are represented at $L$ by the identity of $K_i\\otimes_{E_i}L$, using the identity-extension identifications; their composites are identity classes. Step 3 at $L$ gives $K\\in D^b_c(X,L)$ with $j_i^*K\\cong K_i\\otimes_{E_i}L$ for every $i$. Consequently $(L,K)$ is a preimage up to the specified component isomorphisms. This proves essential surjectivity and the asserted common-field representation of every finite tuple of objects.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Objects are finite-stage pairs; transition objects represent isomorphic common-stage objects"
+   }
+  },
+  {
+   "text": "Fix global objects $A=(E,K)$ and $B=(F,M)$. Each component arrow between their restrictions has a representative $v_i$ over a field $L_i\\supset E,F$. Choose $L$ containing all $L_i$ and $E,F$ by step 6 and extend these arrows to $L$. Conjugate by $b^i_{L/E,K}$ and $b^i_{L/F,M}$ to regard them as arrows $j_i^*(K\\otimes_E L)\\to j_i^*(M\\otimes_F L)$. Fullness of $R_L$, proved in step 2, supplies one global arrow $u:K\\otimes_E L\\to M\\otimes_F L$ with exactly these component arrows. Its common-stage class maps to the given tuple by the formula in step 5. Thus restriction is full, with a simultaneous representative and global preimage over $L$. For arrows between arbitrary component tuples first use the object preimages and their component isomorphisms from step 7, conjugate the arrows by those isomorphisms, and apply this construction; finitely many additional representative fields can be included in $L$.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Hom colimit representatives and common-stage composition; finite-field arrow lifting"
+   }
+  },
+  {
+   "text": "Let two global arrows from $A$ to $B$ have equal component classes. Represent them at fields $L_0,L_1$ and extend both to a common $L$. For each $i$, equality of the two component classes means, by the explicit equality rule in [def-weil-algebraically-closed-coefficients], equality of their representatives at some finite $M_i\\supset L$. Choose one $M$ containing all $M_i$ and $L$ by step 6. Naturality of the scalar comparisons in step 4 makes the restrictions of the two global representatives equal at $M$. Faithfulness of $R_M$ from step 2 then makes the global representatives equal at $M$. Conversely global equality at a common finite extension implies all component equalities there by functoriality. This proves faithfulness and the stated if-and-only-if for eventual global equality. No transition map on Hom groups has been assumed injective.",
+   "uses": [
+    "def-weil-algebraically-closed-coefficients",
+    "lem-weil-scalar-extension-composition"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "Equality of representatives after a further common finite extension"
+   }
+  },
+  {
+   "text": "Steps 7--9 verify essential surjectivity and bijectivity on all Hom sets, so [lem-trf-fully-faithful-ess-surj-equivalence] gives the algebraically closed coefficient equivalence. For tensor compatibility, the common-stage comparison for $(E,M),(E',N)$ is the class at $F=EE'$ of $\\mu_F$ composed with the inverses of the comparisons $b$ for $M$ and $N$ (step 4). To check naturality, represent the finitely many objects, input arrows and their tensor operations over one common $L$ using step 6. By [def-weil-derived-pullback-tensor-hom], the tensor arrow at that stage is $\\theta_{\\mathrm{target},L}^{-1}(u\\otimes_L^L v)\\theta_{\\mathrm{source},L}$, with $\\theta$ the scalar-extension comparison of [lem-pur-integral-operations-scalar-extension]. The cross-stage square of step 4 turns the extension of the comparison at $F$ to $L$ into $\\mu_L$ conjugated by these same $\\theta$ and $b$. At $L$ naturality of $\\mu_L$ (step 4) gives the required square. Naturality and tower compatibility of $\\theta$ and $b$ then make the equality persist at any larger field. Hence it is an equality of common-stage classes, independent of representatives. The coefficient unit is represented at any finite field; its restriction comparison rationalizes by step 4 and is carried along extensions by the unit part of the same cross-stage square. Identities and composition were checked in step 5. The structural equations for these comparisons can each be checked over a common field and are the finite-stage equations of step 4.",
+   "uses": [
+    "lem-trf-fully-faithful-ess-surj-equivalence",
+    "def-weil-derived-pullback-tensor-hom",
+    "lem-pur-integral-operations-scalar-extension"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 02C3, lemma-equivalence-categories; common-stage tensor formulas of def-weil-derived-pullback-tensor-hom"
+   }
+  },
+  {
+   "text": "If $I=\\varnothing$, use $L=\\mathbf Q_\\ell$ for the empty tuple. The assumed integral equivalence with the terminal empty product supplies an object, and every integral Hom module is zero because its underlying set is a singleton. Its tensor product with $E$ is zero, so every rational Hom set is a singleton; the common-stage Hom colimit is again a singleton. In the argument of step 9 take $M=L$, since there are no component equality witnesses to collect, and use the rational Hom bijection of step 2 into the singleton empty product. Thus all arguments include the empty case. Finally [def-weil-finite-tor-amplitude] defines $D^b_{ctf}(Y,E)=D^b_c(Y,E)$ and $D^b_{ctf}(Y,\\overline{\\mathbf Q}_\\ell)=D^b_c(Y,\\overline{\\mathbf Q}_\\ell)$, so the two equivalences apply to those finite-Tor categories without a further theorem. All constructions used integral objects, scalar-localized arrows and finite-stage pairs; none adjoins an idempotent summand.",
+   "uses": [
+    "def-weil-rationalization-karoubi",
+    "def-weil-algebraically-closed-coefficients",
+    "def-weil-finite-tor-amplitude"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-proetale-coefficients/sk-def-sf-operations/def-weil-algebraically-closed-coefficients.md",
+    "place": "No Karoubi completion; empty products and field-stage finite-Tor convention"
+   }
+  }
+ ],
+ "proof_deps": [
+  "def-weil-rationalization-karoubi",
+  "def-weil-linear-scalar-localization",
+  "lem-weil-pbc-tensor-finite-product",
+  "lem-trf-fully-faithful-ess-surj-equivalence",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-scalar-extension-composition",
+  "def-weil-algebraically-closed-coefficients",
+  "def-weil-finite-subextension-directed-set",
+  "def-weil-finite-tor-amplitude"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-def-purity-conv/def-pur-section-invariant.md",
+  "place": "Final invertibility assertion, finite clopen product transport; explicit raw rationalization and common-field pair models of the current DAG definitions. The source assertion is not a proof of these transport details."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -59,10 +210,59 @@
    "results": "[leanfinder] OK 8 hit(s)\n  {\"name\": \"CategoryTheory.PreGaloisCategory.nonempty_fiber_pi_of_nonempty_of_finite\", \"module\": \"Mathlib/CategoryTheory/Galois/Basic\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] (F : CategoryTheory.Functor C FintypeCat)\\n  [inst_1 : CategoryTheory.PreGaloisCategory C] [CategoryTheory.PreGaloisCategory.FiberFunctor F] {ι : Type u_1}\\n  [inst_3 : Finite ι] (X : ι → C) [∀ (i : ι), Nonempty (F.obj (X i)).carrier], Nonemp\", \"doc\": \"In a pre-Galois category $\\\\mathcal{C}$ equipped with a fiber functor $F : \\\\mathcal{C} \\\\to \\\\mathrm{FinType}$, if $\\\\{X_i\\\\}_{i \\\\in I}$ is a finite family of objects such that $F(X_i)$ is non-empty for al\"}\n  {\"name\": \"CategoryTheory.PreGaloisCategory.PointedGaloisObject.instIsCofilteredOrEmpty\", \"module\": \"Mathlib/CategoryTheory/Galois/Prorepresentability\", \"type\": \"∀ {C : Type u₁} [inst : CategoryTheory.Category.{u₂, u₁} C] [inst_1 : CategoryTheory.GaloisCategory C]\\n  (F : CategoryTheory.Functor C FintypeCat) [CategoryTheory.PreGaloisCategory.FiberFunctor F],\\n  CategoryTheory.IsCofilteredOrEmpty (CategoryTheory.PreGaloisCategory.PointedGaloisObject F)\", \"doc\": \"The category of pointed Galois objects associated with a functor $F$ from a pre-Galois category to the category of finite types is either empty or cofiltered, meaning that for any two objects there ex\"}\n  {\"name\": \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinset\", \"module\": \"Mathlib/CategoryTheory/Limits/Constructions/Filtered\", \"type\": \"(C : Type u) →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    (α : Type w) →\\n      [CategoryTheory.Limits.HasFiniteProducts C] →\\n        CategoryTheory.Functor (CategoryTheory.Functor (CategoryTheory.Discrete α) C)\\n          (CategoryTheory.Functor (Finset (CategoryTheory.Discrete α))ᵒᵖ C)\", \"doc\": \"Given a category $\\\\mathcal{C}$ with finite products and a functor $F : \\\\mathrm{Discrete}(\\\\alpha) \\\\to \\\\mathcal{C}$, this defines a functor from the opposite category of finite subsets of $\\\\alpha$ to $\\\\\"}\n  {\"name\": \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinset_obj_obj\", \"module\": \"Mathlib/CategoryTheory/Limits/Constructions/Filtered\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (α : Type w)\\n  [inst_1 : CategoryTheory.Limits.HasFiniteProducts C] (F : CategoryTheory.Functor (CategoryTheory.Discrete α) C)\\n  (s : (Finset (CategoryTheory.Discrete α))ᵒᵖ),\\n  ((CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinset \", \"doc\": \"Given a category $\\\\mathcal{C}$ with finite products and a functor $F : \\\\mathrm{Discrete}(\\\\alpha) \\\\to \\\\mathcal{C}$, the object part of the lifted functor maps each finite subset $S \\\\subseteq \\\\alpha$ (c\"}\n  {\"name\": \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetObj_obj\", \"module\": \"Mathlib/CategoryTheory/Limits/Constructions/Filtered\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {α : Type w}\\n  [inst_1 : CategoryTheory.Limits.HasFiniteProducts C] (F : CategoryTheory.Functor (CategoryTheory.Discrete α) C)\\n  (s : (Finset (CategoryTheory.Discrete α))ᵒᵖ),\\n  (CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetOb\", \"doc\": \"Given a category $\\\\mathcal{C}$ with finite products and a functor $F : \\\\mathrm{Discrete}(\\\\alpha) \\\\to \\\\mathcal{C}$, this defines a functor from the opposite category of finite subsets of $\\\\alpha$ to $\\\\\"}\n  {\"name\": \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetObj\", \"module\": \"Mathlib/CategoryTheory/Limits/Constructions/Filtered\", \"type\": \"{C : Type u} →\\n  [inst : CategoryTheory.Category.{v, u} C] →\\n    {α : Type w} →\\n      [CategoryTheory.Limits.HasFiniteProducts C] →\\n        CategoryTheory.Functor (CategoryTheory.Discrete α) C →\\n          CategoryTheory.Functor (Finset (CategoryTheory.Discrete α))ᵒᵖ C\", \"doc\": \"Given a category $\\\\mathcal{C}$ with finite products and a functor $F : \\\\mathrm{Discrete}(\\\\alpha) \\\\to \\\\mathcal{C}$, this defines a functor from the opposite category of finite subsets of $\\\\alpha$ to $\\\\\"}\n  {\"name\": \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinset_obj_map\", \"module\": \"Mathlib/CategoryTheory/Limits/Constructions/Filtered\", \"type\": \"∀ (C : Type u) [inst : CategoryTheory.Category.{v, u} C] (α : Type w)\\n  [inst_1 : CategoryTheory.Limits.HasFiniteProducts C] (F : CategoryTheory.Functor (CategoryTheory.Discrete α) C)\\n  {Y x : (Finset (CategoryTheory.Discrete α))ᵒᵖ} (h : Y ⟶ x),\\n  ((CategoryTheory.Limits.ProductsFromFiniteCofiltered\", \"doc\": \"Given a category $\\\\mathcal{C}$ with finite products and a functor $F : \\\\mathrm{Discrete}(\\\\alpha) \\\\to \\\\mathcal{C}$, the lifted functor from the opposite category of finite subsets of $\\\\alpha$ to $\\\\math\"}\n  {\"name\": \"CategoryTheory.Limits.ProductsFromFiniteCofiltered.liftToFinsetObj_map\", \"module\": \"Mathlib/CategoryTheory/Limits/Constructions/Filtered\", \"type\": \"∀ {C : Type u} [inst : CategoryTheory.Category.{v, u} C] {α : Type w}\\n  [inst_1 : CategoryTheory.Limits.HasFiniteProducts C] (F : CategoryTheory.Functor (CategoryTheory.Discrete α) C)\\n  {Y x : (Finset (CategoryTheory.Discrete α))ᵒᵖ} (h : Y ⟶ x),\\n  (CategoryTheory.Limits.ProductsFromFiniteCofiltered.\", \"doc\": \"Given a category $\\\\mathcal{C}$ with finite products and a functor $F : \\\\mathrm{Discrete}(\\\\alpha) \\\\to \\\\mathcal{C}$, the action of the lifted functor $\\\\mathrm{liftToFinsetObj}(F)$ on a morphism $h : Y \\\\\"}",
    "date": "2026-10-21",
    "verdict": "No match: IsLocalization.pi handles categorical localization, not common-field pair categories with simultaneous object and arrow descent and coefficient tensor compatibility."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"TensorProduct\", \"pi\"",
+   "results": "Logged 12 hits: TensorProduct.mapIncl, TensorProduct.range_mapIncl, TensorProduct.map₂_eq_range_lift_comp_mapIncl, TensorProduct.range_mapIncl_mono, TensorProduct.instDirectedSystemCoeLinearMapIdLTensor, TensorProduct.instDirectedSystemCoeLinearMapIdRTensor, Module.Flat.tensorProduct_mapIncl_injective_of_left, Module.Flat.tensorProduct_mapIncl_injective_of_right",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. TensorProduct.piLeft is the finite-module product tool already represented by lem-weil-pbc-tensor-finite-product; localization and filtered-colimit hits do not state the rational/common-field category comparison with its object, arrow, equality and tensor/unit clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "An equivalence of integral linear categories with a finite product induces equivalences after tensoring Hom modules with the fraction field and after the filtered common finite coefficient field construction",
+   "results": "Logged 8 hits: instIsEquivalenceFGModuleCatUlift, AdicCompletion.coe_ofTensorProductEquivOfFiniteNoetherian, FGModuleCat.tensorObj_obj, LightCondensed.free_internallyProjective_iff_tensor_condition, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition', LightCondensed.free_internallyProjective_iff_tensor_condition', FGModuleCat.tensorUnit_obj, LightCondensed.free_lightProfinite_internallyProjective_iff_tensor_condition",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. TensorProduct.piLeft is the finite-module product tool already represented by lem-weil-pbc-tensor-finite-product; localization and filtered-colimit hits do not state the rational/common-field category comparison with its object, arrow, equality and tensor/unit clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "piRight|piLeft|tensorPi",
+   "results": "Logged 5 hits: Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean, Mathlib/LinearAlgebra/TensorProduct/Pi.lean; subdirectory LinearAlgebra/TensorProduct",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. TensorProduct.piLeft is the finite-module product tool already represented by lem-weil-pbc-tensor-finite-product; localization and filtered-colimit hits do not state the rational/common-field category comparison with its object, arrow, equality and tensor/unit clauses."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Scalar localization of linear categories commutes with finite products and filtered common field categories",
+   "results": "Logged 8 hits: CategoryTheory.Localization.preservesFiniteProducts, CategoryTheory.Limits.IsIPC.isIso, CategoryTheory.Functor.IsLocalization.prod, CategoryTheory.Limits.ι_colimitPointwiseProductToProductColimit_π_assoc, CategoryTheory.Localization.instPreservesFiniteProductsLocalization'Q', IsLocalizedModule.prodMap, IsLocalizedModule.pi, CategoryTheory.Localization.instPreservesFiniteProductsLocalizationQ",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. TensorProduct.piLeft is the finite-module product tool already represented by lem-weil-pbc-tensor-finite-product; localization and filtered-colimit hits do not state the rational/common-field category comparison with its object, arrow, equality and tensor/unit clauses."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Tensor product distributes over a finite product of modules",
+   "results": "Logged 8 hits: TensorProduct.piLeft, TensorProduct.piRight_apply, TensorProduct.piRight, PiTensorProduct.tmulEquiv_apply, TensorProduct.prodRight_tmul, PiTensorProduct.tmulEquiv, PiTensorProduct.tprod_prod, TensorProduct.prodRight",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. TensorProduct.piLeft is the finite-module product tool already represented by lem-weil-pbc-tensor-finite-product; localization and filtered-colimit hits do not state the rational/common-field category comparison with its object, arrow, equality and tensor/unit clauses."
+  },
+  {
+   "tool": "grep",
+   "query": "common.?stage|finite.?coefficient.?field|rationalization",
+   "results": "Logged 0 hits: ; subdirectory CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. TensorProduct.piLeft is the finite-module product tool already represented by lem-weil-pbc-tensor-finite-product; localization and filtered-colimit hits do not state the rational/common-field category comparison with its object, arrow, equality and tensor/unit clauses."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"IsLocalization\", \"pi\"",
+   "results": "Logged 12 hits: IsLocalization.epi, IsLocalization.tensorProductEquivOfMapIncludeRight, IsLocalization.tensorProductEquivOfMapIncludeRight_tmul, HomotopicalAlgebra.FibrantObject.instIsLocalizationCompιWeakEquivalences, HomotopicalAlgebra.FibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences, HomotopicalAlgebra.FibrantObject.instIsIsoFunctorWhiskerRightHoCatιCompResolutionNatTransOfIsLocalizationWeakEquivalences, HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompιWeakEquivalences, HomotopicalAlgebra.CofibrantObject.instIsLocalizationCompHoCatToHoCatWeakEquivalences",
+   "date": "2026-10-21",
+   "verdict": "No match for the full item. TensorProduct.piLeft is the finite-module product tool already represented by lem-weil-pbc-tensor-finite-product; localization and filtered-colimit hits do not state the rational/common-field category comparison with its object, arrow, equality and tensor/unit clauses."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-pur-finite-clopen-derived-decomposition",
@@ -81,5 +281,34 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pur-finite-product-field-coefficient-descent",
+  "worker": "stage1",
+  "summary": "Proved the conditional product descent directly, reusing the existing tensor-finite-product and equivalence-criterion Mathlib leaves. Wrote simultaneous field, object, arrow and equality descent explicitly, including canonical scalar comparisons, tensor/unit compatibility and the empty product. No new nodes or statement changes.",
+  "blueprint": "Realizes def-pur-section-invariant final invertibility assertion via the rational/common-field portion (old steps 10--11) of lem-pur-finite-clopen-derived-decomposition. The blueprint merely calls the section object invertible; its imported coefficient definitions supply the models used here.",
+  "tool_uses": [
+   {
+    "node": "lem-pur-integral-operations-scalar-extension",
+    "why": "Uses the natural pullback/tensor comparisons with identity and tower compatibility for the fixed restrictions j_i; generic coefficient-operation tool, not an alternate purity route."
+   },
+   {
+    "node": "lem-weil-scalar-extension-composition",
+    "why": "Identifies iterated field extensions in the common-stage representative formulas; generic coefficient-tower tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pur-integral-operations-scalar-extension",
+  "lem-weil-scalar-extension-composition"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q15-ae0fab28a",
+  "group": "Q15",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q15-ae0fab28a (reviewer sub-agent of L); spot-checked: FIX: I read the item's 11 steps and every cited node in full. Steps 1-3: rationalization is well defined, and lem-weil-pbc-tensor-finite-product (any modules, t>=0, so the empty case is included) gives Hom⊗E ≅ Π(H_i⊗E) with the stated formula. Essential surjectivity holds and the 02C3 criterion applies. Steps 5-9 match the representative, equality and composition rules of def-weil-algebraically-closed-coefficients: one finite compositum for each finite tuple, with Q_l for the empty list; (E_i,K_i) ≅ (L,K_i⊗L); fullness at a common L; faithfulness from finitely many equality witnesses, never assuming the transition maps are injective. Step 11 handles the empty cover (singleton Homs), and D^b_ctf=D^b_c at fields holds by definition. One coherence fault, now fixed: step 4 defined b as the item's assumed restriction/scalar-extension comparison but took its tower/identity compatibility from lem-pur-integral-operations-scalar-extension, which states it only for θ^{j*}; step 5 also needs b=θ^{j_i^*} to match the def's common-stage pullback. Step 10 also claimed without proof that step 4 matched μ_L with μ_F⊗L across stages. Step 4 now defines b:=θ^{j_i^*} rationalized and states the cross-stage μ/θ/b square from the item's hypothesis that the comparisons preserve integral scalar extension; step 10 uses that square for naturality and units. Statement, uses and nodes are unchanged. No SGA. No duplicate found in the DAG. Batch-5 citation lem-trf-fully-faithful-ess-surj-equivalence: a general category-theory mathlib leaf (Stacks 02C3) with no proof deps, neither part of nor a step in proving the trace formula or Poincaré duality, so accepted. tool_uses (integral-operations-scalar-extension, scalar-extension-composition) are generic and accepted. Maintainer advisory: the unsplit lem-pur-clopen-roos-integral-descent should make explicit that its tensor/unit comparisons are compatible with integral scalar extension, since the parent relies on it here.; 1 file(s) fixed by the reviewer"
  }
 }
