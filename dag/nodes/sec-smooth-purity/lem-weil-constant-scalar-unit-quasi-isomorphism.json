@@ -22,10 +22,9 @@
  ],
  "proof": [
   {
-   "text": "Apply [lem-weil-l-adic-extension-integers-dvr] to the given finite extension $L/\\mathbf Q_\\ell$. Its valuation ring is a DVR with finite residue field, and the chosen $\\varpi_L$ generates its maximal ideal. Therefore [lem-weil-valued-dvr-finite-quotients], clauses 2 and 3, gives that every $A_{L,m}$ is finite and that $A_{L,m+1}\\to A_{L,m}$ is surjective. These statements use the target field $L$ alone and impose no unramifiedness assumption on $E\\subset L$.",
+   "text": "Apply Padic.finite_coefficientExtensionRing, whose proof uses [lem-weil-l-adic-extension-integers-dvr] and finiteness of powers of a finitely generated ideal. The quotient factor map is surjective by Ideal.Quotient.factor_surjective. This only uses the target field L and also covers n=0 (exponent one).",
    "uses": [
-    "lem-weil-l-adic-extension-integers-dvr",
-    "lem-weil-valued-dvr-finite-quotients"
+    "lem-weil-l-adic-extension-integers-dvr"
    ],
    "elementary": false,
    "source": {
@@ -34,11 +33,9 @@
    }
   },
   {
-   "text": "By [def-weil-pbc-constant-sheaf] the finite coefficient sheaves are sheafifications of constant ring presheaves. By [lem-pe-ring-sheafification-underlying-sets], their underlying sets are the corresponding set-valued sheafifications. Given a section of $(A_{L,m})_Y$ on a site object, [lem-weil-pbc-site-sheafification-sections-local] makes it, on a covering family, the image of elements $a_i\\in A_{L,m}$. Choose lifts $b_i\\in A_{L,m+1}$ using Step 1. Their constant sections are local preimages of the original section under reduction. This proves local surjectivity. As an $R_L$-module map reduction is linear because $\\pi^L_m$ is reduction composed with $\\pi^L_{m+1}$. Its cokernel is zero: every local section of its sectionwise cokernel becomes zero on this covering. The cokernel formula in [def-weil-sheaf-of-modules-category] therefore proves epimorphy in $\\operatorname{Mod}(R_L)$.",
+   "text": "The constant ring-presheaf map induced by the quotient factor map is sectionwise surjective. Mathlib Presheaf.isLocallySurjective_presheafToSheaf_map_iff carries this to the constant ring sheaves. Under the multiplication identifications, the underlying additive-sheaf maps of the tower transitions are these coefficient reductions. Transport local preimages through the degree-zero isomorphisms; local surjectivity implies epimorphy of additive sheaves, and faithful forgetting reflects epimorphy in modules.",
    "uses": [
     "def-weil-pbc-constant-sheaf",
-    "lem-pe-ring-sheafification-underlying-sets",
-    "lem-weil-pbc-site-sheafification-sections-local",
     "def-weil-sheaf-of-modules-category"
    ],
    "elementary": true,
@@ -48,10 +45,9 @@
    }
   },
   {
-   "text": "Use the actual multiplication isomorphisms of [lem-weil-constant-scalar-strict-unit]: $u_m(r\\otimes z)=\\rho_m(r)z$, $u_m^{-1}(z)=1\\otimes z$. They commute with reductions. Thus the tower $T_m$ is, as a strict tower of $R_L$-module complexes, the tower $F_m[0]$ where $F_m=\\operatorname{Res}^L_m(A_{L,m})_Y$. Its product is concentrated in degree zero. By [lem-weil-pbc-module-sheaves-limits-sectionwise], the module limit consists on every $V$ of compatible tuples $(z_m)_m$, with componentwise $R_L(V)$-action. By [def-weil-completed-integral-coefficients] these tuples are exactly $R_L(V)$, with $r\\cdot(z_m)_m=(\\pi^L_m(r)z_m)_m$. This identifies the ordinary module limit with $R_L$, not merely its underlying abelian sheaf. Returning through $u_m^{-1}$ gives the limit projections $u_m^{-1}\\pi^L_m$.",
+   "text": "Use the finite multiplication isomorphisms and inverse tensor formula of [lem-weil-constant-scalar-strict-unit]. The normalized legs have coefficient coordinate exactly pi_n, and the transition formula proves their compatibility. All nonzero degrees vanish. In degree zero, evaluate sheaves of modules at each site object and forget to sets. The termwise multiplication isomorphisms identify this cone with the limit cone defining the completed coefficient ring [def-weil-completed-integral-coefficients]. Mathlib reflection of limits through module forgetting, evaluation, and the fully faithful sheaf inclusion gives the ordinary limit with these exact legs.",
    "uses": [
     "lem-weil-constant-scalar-strict-unit",
-    "lem-weil-pbc-module-sheaves-limits-sectionwise",
     "def-weil-completed-integral-coefficients"
    ],
    "elementary": true,
@@ -72,7 +68,7 @@
    }
   },
   {
-   "text": "Apply [lem-weil-degreewise-epi-kernel-cocone-qis] to $f:B\\to B$ in the abelian category of $R_L$-module sheaves, using Step 4. It gives a quasi-isomorphism $\\kappa:R_L[0]\\to\\operatorname{Cone}(f)[-1]$ whose unshifted-product component is $i$ and whose shifted-product component is zero. In the cited cone coordinates this is $(0,i)$; equivalently, $\\mathrm{fst}\\,\\kappa=i$ and $\\mathrm{snd}\\,\\kappa=0$. Its $m$-th degree-zero coordinate sends $s$ to $u_m^{-1}\\pi^L_m(s)=1\\otimes\\pi^L_m(s)$. These are precisely both normalization conditions of [lem-weil-constant-scalar-strict-unit]. The uniqueness in that statement gives equality of chain maps $\\kappa=\\eta_{E,L}$. Hence the specified $\\eta_{E,L}$ is a quasi-isomorphism, including its sign and zero-component normalization.",
+   "text": "Apply [lem-weil-degreewise-epi-kernel-cocone-qis] to the degreewise epimorphic boundary. The ordinary limit is its kernel, by the product projection equations. Its unique isomorphism to the chosen kernel, followed by the kernel-to-shifted-cone quasi-isomorphism, has the same first and second graded projections as eta: the first is the specified kernel inclusion and the second is zero. Extensionality for the two mapping-cone summands, with the explicit shift-sign formulas, identifies this map with eta. Thus the specified eta is a quasi-isomorphism.",
    "uses": [
     "lem-weil-degreewise-epi-kernel-cocone-qis",
     "lem-weil-constant-scalar-strict-unit"
@@ -84,9 +80,10 @@
    }
   },
   {
-   "text": "Clause 2 of [lem-weil-proetale-surjective-tower-derived-limit], applied to the same $F_m$, says that $(\\prod_mF_m)[0]$ with its projections is the product of the $F_m[0]$ in $D(\\operatorname{Mod}(R_L))$, and gives a distinguished triangle with first arrow the ordinary-limit inclusion and middle arrow $1-s$. Transport this triangle and the product cone through $u_m$ and the limit identification of Step 3. The result is exactly $R_L[0]\\xrightarrow{(u_m^{-1}\\pi^L_m)_m}B\\xrightarrow{1-s}B\\xrightarrow{\\delta}R_L[1]$, for the transported connecting map $\\delta$. Thus the actual termwise $B$ represents the derived product, with its given projections. This is a Roos triangle by [def-weil-derived-limit].",
+   "text": "Use [lem-weil-proetale-countable-products-exact] to obtain CountableAB4Star for the actual completed module category. The proved general theorem [lem-weil-derived-countable-products-core] identifies Q of the termwise product with the product of the Q of its terms, with the actual product projections. Localize the mapping-cocone triangle and transport its first object through Q(eta); its first map is Q(inclusion) and its second map is Q(boundary). This gives the stated distinguished triangle and inverse-projection identities.",
    "uses": [
-    "lem-weil-proetale-surjective-tower-derived-limit",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-countable-products-core",
     "def-weil-derived-limit"
    ],
    "elementary": false,
@@ -109,9 +106,12 @@
    }
   },
   {
-   "text": "For $E=L$, [lem-weil-constant-scalar-strict-unit] identifies the reduction tower computed with $P=R_E[0]$ and $q=\\mathrm{id}$ with the quotient tower, including the equalities $u_m\\gamma_m=\\pi^E_m$. Consequently the first map of the distinguished triangle in Step 6 has exactly the canonical reduction-unit coordinates required in [def-weil-derived-complete]. That definition proves derived completeness of $R_E[0]$. Every preceding application allowed an arbitrary scheme and a general commutative ring sheaf; none assumed connectedness, finite type, quasi-compactness, or an unramified coefficient extension. In particular it applies to disconnected $Y$ and to $Y=\\varnothing$ (where all module sheaves and maps are zero), as well as to the self-extension.",
+   "text": "For the canonical self-reduction tower use the identity K-flat resolution of the regular complex, supplied by [lem-weil-constant-scalar-strict-unit]. Its reductionUnits isomorphisms and inverse tensor formulas identify the unit maps with the literal quotient projections and the transitions with coefficient reduction. Repeat the ordinary-limit and epimorphism arguments. The kernel short exact sequence of complexes supplies its distinguished triangle by Mathlib DerivedCategory.triangleOfSES_distinguished. The termwise product theorem and its projection-compatible product isomorphism transport this to a distinguished Roos triangle. Uniqueness of the legacy tower maps on pure tensors identifies this augmented tower with the one in [def-weil-derived-complete]. Choose a finite field of prime characteristic greater than l to witness the unrestricted predicate; this is auxiliary and imposes no condition on Y. Empty and disconnected Y, identity and ramified extensions are all allowed.",
    "uses": [
     "lem-weil-constant-scalar-strict-unit",
+    "lem-weil-proetale-surjective-tower-derived-limit",
+    "lem-weil-proetale-countable-products-exact",
+    "lem-weil-derived-countable-products-core",
     "def-weil-derived-complete"
    ],
    "elementary": true,
@@ -123,16 +123,14 @@
  ],
  "proof_deps": [
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
   "def-weil-pbc-constant-sheaf",
-  "lem-pe-ring-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local",
   "def-weil-sheaf-of-modules-category",
   "lem-weil-constant-scalar-strict-unit",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
   "def-weil-completed-integral-coefficients",
   "lem-weil-proetale-surjective-tower-derived-limit",
   "lem-weil-degreewise-epi-kernel-cocone-qis",
+  "lem-weil-proetale-countable-products-exact",
+  "lem-weil-derived-countable-products-core",
   "def-weil-derived-limit",
   "def-weil-abstract-derived-category",
   "def-weil-integral-scalar-extension",
@@ -141,7 +139,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Proposition 3.1.10 and its proof, Proposition 3.2.3(1), Proposition 4.2.8, Definition 3.5.2, Lemma 6.8.2(1); the normalized chain comparison is the explicit kernel inclusion, not merely an abstract derived-limit isomorphism."
+  "place": "X3 Lean proof: Propositions 3.1.10, 3.2.3(1), 4.2.8, Definition 3.5.2 and Lemma 6.8.2(1). Uses Mathlib sheafification local-surjectivity and limit-reflection APIs, the existing pro-etale epimorphic-tower and exact-product theorems, the existing kernel-cocone theorem, and Mathlib short-exact-sequence triangles. No change to the statement or unit route."
  },
  "mathlib_searches": [
   {
@@ -292,10 +290,6 @@
  },
  "tool_uses": [
   "lem-weil-l-adic-extension-integers-dvr",
-  "lem-weil-valued-dvr-finite-quotients",
-  "lem-pe-ring-sheafification-underlying-sets",
-  "lem-weil-pbc-site-sheafification-sections-local",
-  "lem-weil-pbc-module-sheaves-limits-sectionwise",
   "lem-weil-degreewise-epi-kernel-cocone-qis"
  ],
  "reviewed": {
@@ -332,5 +326,15 @@
   "group": "NL",
   "result": "fix",
   "note": "H3: clause 2 stated Epi of integralCoefficientSheafTransition in Sheaf RingCat, which is weaker than an epimorphism of sheaves (local surjectivity, which the node's Step 2 proves and Step 4 needs). Fixed to Sheaf.IsLocallySurjective with public import Mathlib.CategoryTheory.Sites.LocallySurjective; fixes/ConstantScalarUnitQuasiIsomorphism.lean plus lean-record.json with the new verbatim statement; refit_record clean; nt_compile --json clean, 11.6 s, against live ConstantScalarStrictUnit. All other clauses match the node: finite quotients, ordinary limit with leg = η≫fst≫pr pinned by quotientCoordinates, QuasiIso η, derived-product IsLimit, Roos triangle with Q(inclusion) and Q(boundary), inverse-projection identity, IsComplete none = IsDerivedCompleteUnrestricted for R_E[0]. η is bound with exactly the normalization the dependency proves unique. Universes d/t/u independent; E=L, ramified, empty or disconnected Y and n=0 covered; helpers not hollow; only sorry; source and blueprint docstrings present. Advisory: the §1(B) ConstantScalarStrictUnit module is code-identical to NM's landed module (docstring and by/note-only differences); base 10:00 predates NM's landing, so the landing will likely revert it; suggest --revert-nodes lem-weil-constant-scalar-strict-unit."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "X3",
+  "result": "pass",
+  "landing": "20261021T162134-L-296773",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
