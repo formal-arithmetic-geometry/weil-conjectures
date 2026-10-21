@@ -22906,3 +22906,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 15:13 L: returned deliver/O3/lem-sfb-field-separable-cech-coordinates (reviewer RETURN: L: independent stage-2 immutable head fa762ddbd371: Item module correct clause by clause: e fixed by vertex equations on)
 - 15:14 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 15:17 L: merged deliver/NM/lem-pur-affine-coordinate-support-stalk-continuity (stage 2; reviewer PASS; parallel immutable checks)
+- 15:19 L: merged deliver/NF/det-lem-stratified-lattice-scheme (reviewer FIX; first push; new nodes: 0)

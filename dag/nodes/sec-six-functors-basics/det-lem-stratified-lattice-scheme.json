@@ -3,46 +3,219 @@
  "blueprint": {
   "is": "det-lem-stratified-lattice-scheme",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "statement",
  "title": "The sheaf of lattices is a separated étale scheme",
- "statement": "Let $X$ be a qcqs scheme and $L$ a lisse $E_X$-module of constant rank $r$. Let $\\mathcal{L}\\mathit{at}$\nbe the sheaf on $X_{\\mathrm{proét}}$ with $\\mathcal{L}\\mathit{at}(U)$ the set of lisse\n$\\cO_{E,U}$-submodules $M\\subseteq L|_U$ with $M[1/\\ell]=L|_U$.\n\n1. If $L|_V\\cong E_V^r$ on $V$, then $\\mathcal{L}\\mathit{at}|_V$ is the constant sheaf on the discrete set\n   $\\GL_r(E)/\\GL_r(\\cO_E)$ of $\\cO_E$-lattices in $E^r$.\n2. $\\mathcal{L}\\mathit{at}$ is represented by a separated étale $X$-scheme $\\mathrm{Lat}(L)\\to X$, which is\n   surjective.\n3. There is a universal lattice $M^{\\mathrm{univ}}\\subseteq q^*L$ on $\\mathrm{Lat}(L)$,\n   $q\\colon\\mathrm{Lat}(L)\\to X$.",
+ "statement": "Fix a prime $\\ell$, a finite extension $E/\\mathbf Q_\\ell$ and its topological valuation ring $A=\\cO_E$ [def-weil-l-adic-coefficient-extension]. Use universes containing the schemes, coefficient rings and the set of lattices below [def-weil-size-convention]. On the small pro-étale site [def-weil-pbc-proetale-site], $E_X$ and $A_X$ are the pullbacks of the condensed topological rings $E$ and $A$ [sk-def-sfb-pulled-back-coefficients]; modules are module objects [sk-def-sfb-module-objects]. Here lisse means pro-étale locally free of finite rank, and a lattice is an embedded lisse $A_X$-module whose localization at $\\ell$ is the ambient rational module. Constant sheaf means sheafification of the constant presheaf [def-weil-pbc-constant-sheaf]. A scheme is qcqs if its underlying space is quasi-compact and its diagonal is quasi-compact [def-weil-pbc-scheme-conventions]. Separated and étale have the meanings of [def-weil-proper-morphism] and [def-weil-etale-morphism].\n\nLet $X$ be a qcqs scheme and $L$ a lisse $E_X$-module of constant rank $r$. Let $\\mathcal{L}\\mathit{at}$\nbe the sheaf on $X_{\\mathrm{proét}}$ with $\\mathcal{L}\\mathit{at}(U)$ the set of lisse\n$\\cO_{E,U}$-submodules $M\\subseteq L|_U$ with $M[1/\\ell]=L|_U$.\n\n1. If $L|_V\\cong E_V^r$ on $V$, then $\\mathcal{L}\\mathit{at}|_V$ is the constant sheaf on the discrete set\n   $\\GL_r(E)/\\GL_r(\\cO_E)$ of $\\cO_E$-lattices in $E^r$.\n2. $\\mathcal{L}\\mathit{at}$ is represented by a separated étale $X$-scheme $\\mathrm{Lat}(L)\\to X$, which is\n   surjective.\n3. There is a universal lattice $M^{\\mathrm{univ}}\\subseteq q^*L$ on $\\mathrm{Lat}(L)$,\n   $q\\colon\\mathrm{Lat}(L)\\to X$.",
  "source": {
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.md",
   "place": "node det-lem-stratified-lattice-scheme, order None"
  },
- "stmt_deps": [],
+ "stmt_deps": [
+  "def-weil-l-adic-coefficient-extension",
+  "def-weil-size-convention",
+  "def-weil-pbc-proetale-site",
+  "sk-def-sfb-pulled-back-coefficients",
+  "sk-def-sfb-module-objects",
+  "def-weil-pbc-constant-sheaf",
+  "def-weil-pbc-scheme-conventions",
+  "def-weil-proper-morphism",
+  "def-weil-etale-morphism"
+ ],
  "proof": [
   {
-   "text": "(1) A lisse $\\cO_{E,U}$-submodule $M\\subseteq E_U^r$ with $M[1/\\ell]=E_U^r$ is, locally on $U$,\nfree with a basis which is a basis of $E_U^r$, i.e. given by a matrix in $\\GL_r(E_U(U'))$ on a\ncover $U'$; $E_U(U')=C(|U'|,E)$ ([det-prop-sfb-qlbar-colimit-x-invert-ell] and the description\nof sections on quasi-compact objects). Two bases define the same submodule iff they differ by a\nmatrix in $\\GL_r(\\cO_{E,U}(U'))$. Hence $M$ corresponds to a continuous map\n$|U'|\\to\\GL_r(E)/\\GL_r(\\cO_E)$, compatible on overlaps. Since $\\GL_r(\\cO_E)$ is open in\n$\\GL_r(E)$ (it is the preimage of an open set under the continuous entry maps, intersected\nwith the open condition $\\det\\in\\cO_E^\\times$), the quotient is discrete, so continuous maps to\nit are locally constant: $\\mathcal{L}\\mathit{at}|_V$ is the constant sheaf.",
+   "text": "By [lem-weil-pbc-continuous-coefficient-realizations], identify the pulled-back coefficients with the continuous-function coefficient sheaves, compatibly with $A\\to E$. The total-disconnectedness hypothesis holds: nonarchimedean clopen balls separate distinct points of $E$, and $A$ has the subspace topology. Module actions and inclusions transport along these ring isomorphisms. By [det-prop-sfb-qlbar-colimit-x-invert-ell], $A_X[1/\\ell]=E_X$. On module sections the localization/tensor comparison is $m/\\ell^n\\mapsto\\ell^{-n}\\otimes m$, with inverse $a/\\ell^n\\otimes m\\mapsto am/\\ell^n$, interpreted locally when necessary. Thus the lattice condition is exactly the scalar-extension condition in the lattice-classification node.",
    "uses": [
+    "lem-weil-pbc-continuous-coefficient-realizations",
     "det-prop-sfb-qlbar-colimit-x-invert-ell"
    ],
-   "elementary": false
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(1), coefficient convention"
+   }
   },
   {
-   "text": "(2) Choose finitely many affine $V_k$ covering $X$ on which $L$ is trivial, with transition\nmatrices $g_{kk'}\\colon|V_k\\times_XV_{k'}|\\to\\GL_r(E)$, continuous. For a lattice $\\Lambda\\subset E^r$\nthe stabilizer of $\\Lambda$ in $\\GL_r(E)$ is open (a conjugate of $\\GL_r(\\cO_E)$), so\n$x\\mapsto g_{kk'}(x)\\Lambda$ is locally constant. Hence the map\n$\\coprod_{\\Lambda}(V_k\\times_XV_{k'})\\to\\coprod_{\\Lambda}(V_k\\times_XV_{k'})$ sending the copy\nindexed by $\\Lambda$ over the open and closed piece where $g_{kk'}\\Lambda=\\Lambda'$ to the copy\nindexed by $\\Lambda'$ is a morphism of schemes, and these maps satisfy the cocycle condition.\nThis is a descent datum for the schemes $T_k=\\coprod_{\\Lambda}V_k$ along the fpqc covering\n$\\coprod_kV_k\\to X$. For affine $V_k=\\Spec B$, $T_k$ is quasi-affine: it is the open subscheme\nof $\\Spec\\prod_\\Lambda B$ which is the union of the principal opens $D(e_\\Lambda)$ of the\ncoordinate idempotents. Descent data for quasi-affine schemes along fpqc coverings are\neffective (\\stacks{0APK}); glue the results over the finitely many affine opens of $X$. The\nresulting $X$-scheme $\\mathrm{Lat}(L)$ represents $\\mathcal{L}\\mathit{at}$ by (1) and descent of morphisms.\nBeing separated and étale is fpqc local on the base (\\stacks{02KU}, \\stacks{02VN}), and\n$T_k\\to V_k$ is a disjoint union of isomorphisms, hence separated and étale. It is surjective\nbecause $T_k\\to V_k$ is (every free module has a lattice, e.g. $\\cO_E^r$).",
-   "uses": [],
-   "elementary": null
+   "text": "An object $(M,\\alpha)$ in [lem-weil-pbc-lattice-sheaf-locally-constant] embeds in $L$ by $m\\mapsto\\alpha(1\\otimes m)$. On free charts this is injective because $A\\hookrightarrow E$ induces an injective map of continuous-function sheaves. Its image is an embedded lisse lattice. Conversely an embedded lattice gives such a pair by its scalar-extension isomorphism. Two pairs have the same image exactly when their unique isomorphism over that image intertwines $\\alpha$. These constructions commute with restriction. Therefore that node's sheaf is precisely $\\mathcal{L}\\mathit{at}$. Its trivial-bundle classification gives clause (1), including the specified coset $g\\operatorname{GL}_r(A)$ corresponding to $gA^r$.",
+   "uses": [
+    "lem-weil-pbc-lattice-sheaf-locally-constant"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(1), basis and lattice-coset identification"
+   }
   },
   {
-   "text": "(3) On $T_k$ the copy indexed by $\\Lambda$ carries the constant lattice $\\Lambda_{V_k}\\subseteq E^r_{V_k}$;\nthese are compatible with the descent datum by construction, and descend to\n$M^{\\mathrm{univ}}\\subseteq q^*L$ by descent of module sheaves.",
+   "text": "Choose a finite affine open cover of the quasi-compact $X$. Over each member, the covering condition in [def-weil-pbc-proetale-site] extracts finitely many affine pieces of a trivializing pro-étale covering of $L$, whose images cover that member. Put $V$ equal to their finite disjoint union and $p:V\\to X$ the induced map; on all pieces choose rank-$r$ trivializations, giving $L|_V\\cong E_V^r$. By [lem-weil-pbc-affine-morphism-permanence], $V$ is affine; by [sk-lem-pe-weakly-etale-stability], $p$ is weakly étale, hence flat. The images cover $X$, so $p$ is surjective. By [lem-weil-pbc-affine-scheme-qcqs] and [lem-weil-pbc-qcqs-morphism-permanence], $p$ is quasi-compact since $X$ is quasi-separated. For every affine open $B\\subset X$, its inverse image is quasi-compact and hence covered by finitely many affine opens; their images cover $B$. This verifies that $\\{p\\}$ is an fpqc and pro-étale covering. The pieces $V_i$ are affine pro-étale objects over $X$, not necessarily Zariski open subschemes of $X$.",
+   "uses": [
+    "def-weil-pbc-proetale-site",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "sk-lem-pe-weakly-etale-stability",
+    "lem-weil-pbc-affine-scheme-qcqs",
+    "lem-weil-pbc-qcqs-morphism-permanence"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), choose finitely many affine trivializing pro-étale charts"
+   }
+  },
+  {
+   "text": "Write $S=\\operatorname{GL}_r(E)/\\operatorname{GL}_r(A)$ and form $T=\\coprod_{s\\in S}V$ using [lem-weil-pbc-scheme-coproduct-family]. By [lem-galois-coproduct-copies-morphisms-clopen], $V$-morphisms $W\\to T$ are exactly locally constant maps $|W|\\to S$. This presheaf is a sheaf for pro-étale coverings by [lem-weil-pbc-fpqc-representable-descent]. The constant-presheaf map sends $s$ to the corresponding component section. Every morphism $W\\to T$ is such a section on each of its open-and-closed inverse images of the components. Consequently its sheafification is exactly this presheaf: extend maps out of the constant presheaf by sheaf gluing on these open pieces, uniquely. Thus $T$ represents $\\underline S_V$, and by step 2 represents $\\mathcal{L}\\mathit{at}|_V$.",
+   "uses": [
+    "lem-weil-pbc-scheme-coproduct-family",
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), disjoint unions representing the locally constant lattice sheaf"
+   }
+  },
+  {
+   "text": "On $R=V\\times_XV$, the two trivializations identify the two pullbacks of $\\mathcal{L}\\mathit{at}$ with $\\underline S_R$. For a fixed source label $s$, their transition sends the constant section $s$ to a section of $\\underline S_R$, hence by step 4 to a clopen decomposition of $R$ indexed by target labels. By [lem-galois-coproduct-copies-morphisms-clopen], this gives a morphism from that copy of $R$ to $\\coprod_S R$. The coproduct universal property assembles these component maps. Applying the inverse sheaf transition gives its inverse. On a triple overlap both composites induce the same sheaf transition; the same clopen descriptions make the scheme maps equal. Hence this is a scheme descent datum on $T/V$ over $V/X$. No continuity assertion about a varying infinite permutation is required beyond its effect on each fixed label.",
+   "uses": [
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), locally constant transition action and cocycle"
+   }
+  },
+  {
+   "text": "Check the exact effectivity hypothesis of [lem-a1-ind-quasi-affine-fpqc-effective-descent]. For any affine open $B\\subset V$ and quasi-compact open $K\\subset T\\times_V B=\\coprod_S B$, finitely many components contain $K$: the intersections with components are an open covering of $K$. Thus $K$ is an open subscheme of a finite disjoint union of copies of $B$, which is affine by [lem-weil-pbc-affine-morphism-permanence]. More precisely $K\\to B$ is quasi-affine: over any affine open $B'\\subset B$, its inverse image $K'$ is the intersection of $K$ with the corresponding finite disjoint union $D'$ of copies of $B'$, again affine. It is open in $D'$, and quasi-compact because $K$ and $D'$ are quasi-compact opens of the affine, hence quasi-separated, finite union of copies of $B$ [lem-weil-pbc-affine-scheme-qcqs]. So $K'$ is a quasi-affine scheme. The datum of step 5 therefore satisfies every hypothesis of the cited singleton-fpqc effectivity theorem (Stacks Tag 0APK). Obtain an $X$-scheme $Y$ and $Y\\times_XV\\cong T$ inducing that datum. No quasi-compactness of $T\\to V$ is used.",
+   "uses": [
+    "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "lem-weil-pbc-affine-morphism-permanence",
+    "lem-weil-pbc-affine-scheme-qcqs"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), effective ind-quasi-affine fpqc descent, Tag 0APK"
+   }
+  },
+  {
+   "text": "The morphism $T\\to V$ is étale, since on each component it is the identity and the affine-ring definition is local on the source. Its diagonal is a closed immersion: $T\\times_VT$ is covered by the pairwise components $V$ indexed by $(s,t)$; the diagonal is the identity on $s=t$ and empty on $s\\ne t$, so its complement is the open union of the off-diagonal components. Thus it is separated. Apply [lem-galois-fpqc-descend-etale] and [lem-weil-pbc-fpqc-descend-separated] to $p:V\\to X$ to conclude that $q:Y\\to X$ is étale and separated. For each $x\\in X$, choose $v\\in V$ above it and the point in the copy of $V$ indexed by the standard lattice $A^r$ above $v$. Its image in $Y$ lies over $x$; hence $q$ is surjective.",
+   "uses": [
+    "lem-galois-fpqc-descend-etale",
+    "lem-weil-pbc-fpqc-descend-separated",
+    "lem-weil-pbc-scheme-coproduct-family"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), separated and étale descent, Tags 02KU and 02VN; surjectivity"
+   }
+  },
+  {
+   "text": "For any $U\\to X$ in $X_{\\mathrm{proét}}$, set $U_V=U\\times_XV$. This is an fpqc covering of $U$ by [lem-galois-fpqc-covering-base-change], and weakly étale by [sk-lem-pe-weakly-etale-stability], hence a pro-étale covering. A section of $\\mathcal{L}\\mathit{at}(U)$ gives on $U_V$ the morphism to $T$ of step 4 and thus a morphism $U_V\\to Y$ over $X$. The two maps on $U_V\\times_UU_V$ agree precisely because the descent datum in step 5 was obtained from this sheaf's restrictions. By [lem-weil-pbc-fpqc-representable-descent] they glue uniquely to $U\\to Y$; the structural equality over $X$ also descends uniquely. Conversely an $X$-map $U\\to Y$ pulls back to a map to $T$, hence a lattice section on $U_V$; its compatibility gives a unique section on $U$ by the sheaf property proved in step 2. The constructions are inverse after the covering and therefore globally, and commute with pullbacks in $U$. Thus $Y$ represents $\\mathcal{L}\\mathit{at}$; define $\\mathrm{Lat}(L)=Y$.",
+   "uses": [
+    "lem-galois-fpqc-covering-base-change",
+    "sk-lem-pe-weakly-etale-stability",
+    "lem-weil-pbc-fpqc-representable-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(2), identify the descended scheme with the original sheaf"
+   }
+  },
+  {
+   "text": "By [det-pe-morphisms-etale-comparison], $q:Y\\to X$ is weakly étale, so $Y$ is itself an object of the pro-étale site (in the containing universe fixed in the statement). Evaluate the representing isomorphism of step 8 on $\\mathrm{id}_Y\\in\\operatorname{Hom}_X(Y,Y)$. This gives a section of $\\mathcal{L}\\mathit{at}(Y)$, namely a lisse embedded lattice $M^{\\mathrm{univ}}\\subseteq L|_Y=q^*L$ with $M^{\\mathrm{univ}}[1/\\ell]=q^*L$. Naturality says that every $f:U\\to Y$ pulls it back to the section classified by $f$, which is the universal property. On the component of $T$ labelled by $g\\operatorname{GL}_r(A)$ its restriction is $gA_V^r$, so this is also the lattice described in the source's local construction. This proves clause (3).",
+   "uses": [
+    "det-pe-morphisms-etale-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(3), universal lattice by the representing section"
+   }
+  },
+  {
+   "text": "The set $S$ is nonempty for every $r\\geq0$, including $r=0$, where it is a singleton and the unique lattice is zero; the construction then gives $Y=X$. If $X$ is empty its site has only empty objects up to isomorphism and its lattice sheaf is terminal, represented by the empty $X$-scheme with the zero universal module. This also follows by using the empty trivializing family throughout. No positive-rank, nonempty-base or Noetherian hypothesis was introduced.",
    "uses": [],
-   "elementary": null
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+    "place": "(1)–(3), edge cases"
+   }
   }
  ],
  "proof_deps": [
-  "det-prop-sfb-qlbar-colimit-x-invert-ell"
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "def-weil-pbc-proetale-site",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+  "lem-galois-fpqc-descend-etale",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-galois-fpqc-covering-base-change",
+  "det-pe-morphisms-etale-comparison"
  ],
  "proof_origin": {
   "by": "agent",
-  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.md",
-  "place": "## Proof"
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-stratified-lattice/sk-lem-stratified-lattice-scheme.proof.md",
+  "place": "(1)–(3), with explicit ind-quasi-affine descent and representing universal section; local classification follows Bhatt–Scholze Proposition 6.8.4(6)"
  },
- "mathlib_searches": [],
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "lattice|locally.constant",
+   "results": "13 hits: Mathlib/AlgebraicGeometry/Limits.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/IdealSheaf/Basic.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean, Mathlib/AlgebraicGeometry/Morphisms/FlatRank.lean.  Read the returned signatures: generic constant-sheaf, coproduct, local Zariski representability or ideal-order-lattice facts; none states this p-adic lattice-sheaf result or specializes to it in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "loogle",
+   "query": "AlgebraicGeometry.Scheme, \"lattice\"",
+   "results": "3 hits: AlgebraicGeometry.Scheme.IdealSheafData.instCompleteLattice, AlgebraicGeometry.Scheme.IdealSheafData.instCompleteSemilatticeSup, AlgebraicGeometry.Scheme.IdealSheafData.instSemilatticeInf.  Read the returned signatures: generic constant-sheaf, coproduct, local Zariski representability or ideal-order-lattice facts; none states this p-adic lattice-sheaf result or specializes to it in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The sheaf of integral lattices in a lisse p-adic local system is represented by a separated surjective etale scheme",
+   "results": "8 hits: BDeRham, BDeRhamPlus, AlgebraicGeometry.Scheme.Etale, AlgebraicGeometry.Scheme.instFaithfulEtaleOverForget, AlgebraicGeometry.Scheme.instFullEtaleOverForget, AlgebraicGeometry.Scheme.Etale.forget, AlgebraicGeometry.Scheme.instCategoryEtale, AlgebraicGeometry.Scheme.Etale.forgetFullyFaithful.  Read the returned signatures: generic constant-sheaf, coproduct, local Zariski representability or ideal-order-lattice facts; none states this p-adic lattice-sheaf result or specializes to it in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "LocallyConstant.*Sheaf|[Ss]heaf.*[Ll]attice|ind.quasi.affine|effective.*descent",
+   "results": "16 hits: Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/Colimit.lean, Mathlib/Condensed/Discrete/LocallyConstant.lean, Mathlib/Condensed/Discrete/Module.lean, Mathlib/Condensed/Discrete/Module.lean.  Read the returned signatures: generic constant-sheaf, coproduct, local Zariski representability or ideal-order-lattice facts; none states this p-adic lattice-sheaf result or specializes to it in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Effective fpqc descent of a disjoint union of copies of a scheme with a descent datum",
+   "results": "8 hits: AlgebraicGeometry.instFinitaryExtensiveScheme, AlgebraicGeometry.instCoproductsOfShapeDisjointSchemeOfSmall, AlgebraicGeometry.Scheme.Cover.sigma_X, AlgebraicGeometry.instHasColimitsOfShapeDiscreteSchemeOfSmall, AlgebraicGeometry.Scheme.GlueData.instHasMulticoequalizerDiagram, AlgebraicGeometry.Scheme.Cover.sigma_f, AlgebraicGeometry.instHasFiniteCoproductsScheme, CategoryTheory.effectiveEpiFamilyStructOfEffectiveEpiDesc.  Read the returned signatures: generic constant-sheaf, coproduct, local Zariski representability or ideal-order-lattice facts; none states this p-adic lattice-sheaf result or specializes to it in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Locally constant sheaves of sets on the pro-etale site are representable by separated etale schemes",
+   "results": "8 hits: CategoryTheory.Sheaf.isConstant_iff_mem_essImage, LightCondSet.mem_locallyConstant_essImage_of_isColimit_mapCocone, CategoryTheory.Presieve.IsSheaf.isSeparated, AlgebraicGeometry.Scheme.LocalRepresentability.isRepresentable, CondensedSet.LocallyConstant.functorFullyFaithful, Condensed.lanSheafProfinite, CategoryTheory.Sheaf.isSheaf_of_isRepresentable, CategoryTheory.Sheaf.IsConstant.mk.  Read the returned signatures: generic constant-sheaf, coproduct, local Zariski representability or ideal-order-lattice facts; none states this p-adic lattice-sheaf result or specializes to it in one line.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "long_proof_few_deps",
@@ -64,5 +237,99 @@
  ],
  "chapter": "sec-six-functors-basics",
  "unit": "sk-lem-stratified-lattice",
- "lean_audit": {}
+ "lean_audit": {},
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "det-lem-stratified-lattice-scheme",
+  "worker": "stage1",
+  "summary": "Made standing coefficient and size conventions explicit without changing the three conclusions or the qcqs scope. Replaced imported uncited arguments by a ten-step split using existing DAG nodes only. Distinguished affine pro-étale charts from affine Zariski opens, verified Tag 0APK in its actual ind-quasi-affine form, constructed the descent cocycle from clopen label decompositions, checked representability by mutually inverse gluing maps and obtained the universal lattice by evaluation. No Lean written or compiled.",
+  "blueprint": "Steps 1–2 realize source (1); steps 3–8 realize source (2), including the fpqc descent datum, effectivity, property descent and representation; steps 9–10 realize (3) and the edge cases. The chapter and unit lattice-scheme → finite étale strata → trace route is unchanged.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-continuous-coefficient-realizations",
+    "why": "Identifies the two coefficient conventions, including the integral inclusion; no lattice-scheme route is replaced."
+   },
+   {
+    "node": "det-prop-sfb-qlbar-colimit-x-invert-ell",
+    "why": "Generic scheme-cover, coproduct, representable-sheaf or weakly-étale calculus used in the stated lattice-scheme descent route; the unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-lattice-sheaf-locally-constant",
+    "why": "The exact local lattice-coset classification; the elementary image/pair comparison allows its reuse without a duplicate of clause (1)."
+   },
+   {
+    "node": "lem-weil-pbc-affine-morphism-permanence",
+    "why": "Generic scheme-cover, coproduct, representable-sheaf or weakly-étale calculus used in the stated lattice-scheme descent route; the unit contains no replacement for this tool."
+   },
+   {
+    "node": "sk-lem-pe-weakly-etale-stability",
+    "why": "Generic scheme-cover, coproduct, representable-sheaf or weakly-étale calculus used in the stated lattice-scheme descent route; the unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-affine-scheme-qcqs",
+    "why": "Generic scheme-cover, coproduct, representable-sheaf or weakly-étale calculus used in the stated lattice-scheme descent route; the unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-qcqs-morphism-permanence",
+    "why": "Generic scheme-cover, coproduct, representable-sheaf or weakly-étale calculus used in the stated lattice-scheme descent route; the unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-scheme-coproduct-family",
+    "why": "Generic scheme-cover, coproduct, representable-sheaf or weakly-étale calculus used in the stated lattice-scheme descent route; the unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-galois-coproduct-copies-morphisms-clopen",
+    "why": "Generic scheme-cover, coproduct, representable-sheaf or weakly-étale calculus used in the stated lattice-scheme descent route; the unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-representable-descent",
+    "why": "Generic scheme-cover, coproduct, representable-sheaf or weakly-étale calculus used in the stated lattice-scheme descent route; the unit contains no replacement for this tool."
+   },
+   {
+    "node": "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+    "why": "Generic scheme descent theorem at exactly the blueprint Tag 0APK; its ind-quasi-affine hypothesis is explicitly checked."
+   },
+   {
+    "node": "lem-galois-fpqc-descend-etale",
+    "why": "Generic Tag 02VN property descent used at the blueprint descent step."
+   },
+   {
+    "node": "lem-weil-pbc-fpqc-descend-separated",
+    "why": "Generic Tag 02KU property descent used at the blueprint descent step."
+   },
+   {
+    "node": "lem-galois-fpqc-covering-base-change",
+    "why": "Generic scheme-cover, coproduct, representable-sheaf or weakly-étale calculus used in the stated lattice-scheme descent route; the unit contains no replacement for this tool."
+   },
+   {
+    "node": "det-pe-morphisms-etale-comparison",
+    "why": "Generic scheme-cover, coproduct, representable-sheaf or weakly-étale calculus used in the stated lattice-scheme descent route; the unit contains no replacement for this tool."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-continuous-coefficient-realizations",
+  "det-prop-sfb-qlbar-colimit-x-invert-ell",
+  "lem-weil-pbc-lattice-sheaf-locally-constant",
+  "lem-weil-pbc-affine-morphism-permanence",
+  "sk-lem-pe-weakly-etale-stability",
+  "lem-weil-pbc-affine-scheme-qcqs",
+  "lem-weil-pbc-qcqs-morphism-permanence",
+  "lem-weil-pbc-scheme-coproduct-family",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-weil-pbc-fpqc-representable-descent",
+  "lem-a1-ind-quasi-affine-fpqc-effective-descent",
+  "lem-galois-fpqc-descend-etale",
+  "lem-weil-pbc-fpqc-descend-separated",
+  "lem-galois-fpqc-covering-base-change",
+  "det-pe-morphisms-etale-comparison"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NF-dadb68c76",
+  "group": "NF",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NF-dadb68c76 (reviewer sub-agent of L); spot-checked: I read the item in full: the statement and all 10 steps, against the main-20261015 blueprint statement and proof (1)-(3), the unit sk-lem-stratified-lattice, and Stacks 0APK/0AP6. The statement is the blueprint's verbatim, with the chapter conventions made explicit; nothing is weakened. No new nodes. Every cited statement says what its step uses. Step 1: totally disconnected comparison plus A[1/l]=E with flatness, so M[1/l]=L iff E⊗M→L is an iso. Step 2: pair↔embedded-lattice bijection reduces clause (1) to lem-weil-pbc-lattice-sheaf-locally-constant. Step 3: the finite affine pro-étale chart p is flat, surjective, quasi-compact (X is quasi-separated) and an fpqc cover. Steps 4-5: clopen labels via 03YW(b) give T representing the constant sheaf and a scheme descent datum, with no continuity gap. Steps 7-9: étale and separated descend by 02VN/02KU, representability follows from 023Q, and M^univ is obtained by evaluating at id_Y. Edge cases r=0, X empty and r=1 (torsor, not quasi-compact) are consistent. No cycle, no duplicate: lem-weil-pbc-continuous-etale-local-lattice is Noetherian-only and asserts no representability. FIX (E1, minor): step 6 checked the 0APK node's hypothesis but omitted quasi-compactness of K∩(finite union of copies of B'), which def-nagata quasi-affine requires. I added it with [lem-weil-pbc-affine-scheme-qcqs]. Batch-5 flag: lem-a1-ind-quasi-affine-fpqc-effective-descent reaches sec-trace-formula only via lem-trf-quasi-affine-base-change (Stacks 01SO) and the quasi-affine embedding lemmas. These are generic scheme facts, not part of the trace formula or Poincaré duality proofs, so I accept the flag. All tool_uses are generic descent/coefficient tools on the unit route; I accept them.; 1 file(s) fixed by the reviewer"
+ }
 }
