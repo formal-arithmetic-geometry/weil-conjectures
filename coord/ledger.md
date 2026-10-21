@@ -20771,3 +20771,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 07:42 L: returned deliver/Q32/lem-sfb-monoidal-finite-free-transport (reviewer RETURN: Superseded by a later stage-3 Lean landing on live (brief l.103/B10, A7, C5). Timeline: (1) Q32 committed this re-split )
 - 07:42 L: returned deliver/NN/lem-sbc-ambient-operations-scalar-linearity (reviewer RETURN: Superseded (A7/B10, brief 'live finished nodes win; never split one'). This re-split was committed 05:52 UTC on base 7ff)
 - 07:43 L: returned deliver/Q25/lem-sfb-cohomology-tor-interval (reviewer RETURN: Superseded by live (B10, A7; brief-stage1 'live finished nodes win; never split one'). The item is finished on live. E2')
+- 07:43 L: returned deliver/Q49/lem-weil-pbc-integral-model-open-closed-pieces (reviewer RETURN: D1/G2: the only new node, lem-weil-pbc-integral-model-immersion-operations, is item clause (a) with only the wording cha)
