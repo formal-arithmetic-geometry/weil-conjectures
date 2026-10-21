@@ -3,25 +3,121 @@
  "blueprint": {
   "is": "def-nagata-strict-chart-to-extended-blowup-chart",
   "from": null,
-  "same_as": null
+  "same_as": []
  },
  "kind": "definition",
  "title": "Map to the blow-up chart of the extended ideal",
- "statement": "Let $J=IB\\subseteq B$, let $b$ be the image of $a$ in $B$, and write\n$B[J/b]$ for the corresponding chart ring. Define\n\n$$\n\\sigma_a\\colon C_a(A,B,I)\\longrightarrow B[J/b]\n$$\n\non pure tensors and chart generators by\n\n$$\n\\sigma_a\\bigl(y\\otimes(x/a)\\bigr)=y\\,\\overline x/b.\n$$",
+ "statement": "Let $f:A\\to B$ be a homomorphism of commutative rings, $I\\subseteq A$ an ideal and $a\\in I$. Put $J=IB=(f(x):x\\in I)\\subseteq B$ and $b=f(a)\\in J$. Use the chart algebras $A[I/a]\\subseteq A_a$ and $B[J/b]\\subseteq B_b$ of [def-nagata-blowup-chart-ring], and put $C_a(A,B,I)=B\\otimes_A A[I/a]$ as in [def-nagata-strict-transform-basechange-chart-ring]. Define $\\sigma_a:C_a(A,B,I)\\to B[J/b]$ as follows: extend $A\\xrightarrow{f}B\\to B_b$ to $A_a\\to B_b$, restrict this map to $A[I/a]\\to B[J/b]$, and take the tensor-product homomorphism with the structural map $B\\to B[J/b]$. Thus $\\sigma_a$ is a homomorphism of $B$-algebras and on pure tensors of chart generators it satisfies\n$$\\sigma_a\\bigl(y\\otimes(x/a)\\bigr)=y\\,f(x)/b\\qquad(y\\in B,\\ x\\in I).$$\nThe localization and tensor-product maps used in this construction are those of [lem-weil-pbc-localization-away-universal-property] and [lem-weil-pbc-algebra-tensor-pushout-universal-property].",
  "source": {
   "document": "literature/blueprint/master/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-strict-chart-to-extended-blowup-chart.md",
   "place": "node def-nagata-strict-chart-to-extended-blowup-chart, order 146"
  },
  "stmt_deps": [
   "def-nagata-blowup-chart-ring",
+  "def-nagata-strict-transform-basechange-chart-ring",
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "proof": [
+  {
+   "text": "Apply [lem-weil-pbc-localization-away-universal-property] to $R=A$, the element $a$, the target $P=B_b$, and the composite $A\\xrightarrow{f}B\\to B_b$. Its value at $a$ is $b/1$, a unit with inverse $1/b$ by the localization relations. It gives a ring map $\\lambda:A_a\\to B_b$ with $\\lambda(x/a^n)=f(x)/b^n$. On coefficients it is the structural map from $A$, so it is an $A$-algebra map. This constructs the first map without choosing representatives of chart elements.",
+   "uses": [
+    "lem-weil-pbc-localization-away-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/algebra.tex",
+    "place": "Tag 00CP, proposition-universal-property-localization; applied to the powers of a"
+   }
+  },
+  {
+   "text": "By [def-nagata-blowup-chart-ring], $A[I/a]$ is generated as an $A$-algebra by $x/a$ for $x\\in I$. The inverse image $\\lambda^{-1}(B[J/b])$ is an $A$-subalgebra of $A_a$: sums and products stay in it because $\\lambda$ is a ring map, and it contains all coefficients. Each generator lies in it since $\\lambda(x/a)=f(x)/b$ and $f(x)\\in J$. Hence it contains the generated subalgebra $A[I/a]$. Restriction of $\\lambda$ therefore defines $g:A[I/a]\\to B[J/b]$ as an $A$-algebra map. This is just the defining smallest-subalgebra property, not a new comparison theorem.",
+   "uses": [
+    "def-nagata-blowup-chart-ring"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-strict-chart-to-extended-blowup-chart.md",
+    "place": "definition of sigma_a by the images of chart generators; elementary expansion of the generated-subalgebra definition"
+   }
+  },
+  {
+   "text": "Use [lem-weil-pbc-algebra-tensor-pushout-universal-property], clause (2), with base ring $A$, factor algebras $B$ and $A[I/a]$, target $B[J/b]$, and maps the structural map $s:B\\to B[J/b]$ and $g$. Both are $A$-algebra maps since $g$ restricts to $s\\circ f$ on $A$. It yields $h:B\\otimes_A A[I/a]\\to B[J/b]$, $h(y\\otimes c)=s(y)g(c)$. In particular $h(y\\otimes1)=s(y)$, so $h$ is a $B$-algebra map for the left-factor $B$-structure on the ring of [def-nagata-strict-transform-basechange-chart-ring]. Define $\\sigma_a=h$. Substituting $c=x/a$ gives precisely $y f(x)/b$. Clause (3) gives uniqueness from the two factor maps; thus no choices enter the construction.",
+   "uses": [
+    "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "def-nagata-strict-transform-basechange-chart-ring"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/schemes.tex",
+    "place": "Tag 01I4, lemma-fibre-product-affine-schemes, proof: universal property of the algebra tensor product; blueprint defining formula"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-localization-away-universal-property",
+  "def-nagata-blowup-chart-ring",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property",
   "def-nagata-strict-transform-basechange-chart-ring"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
- "mathlib_searches": [],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-nagata-compactification/sk-lem-nagata-sketch-blowups/def-nagata-strict-chart-to-extended-blowup-chart.md",
+  "place": "Definition, expanded using Stacks Tags 00CP and 01I4 and the existing chart-algebra definition"
+ },
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "strictChartMap|chartRing|blowupChart",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor, presentation and affine-space maps do not define the restriction to B[IB/b]; the chart-generation argument is still required"
+  },
+  {
+   "tool": "leansearch",
+   "query": "A natural map from the tensor product of an affine blowup chart with a base algebra to the blowup chart of the extended ideal",
+   "results": "Hits: TensorProduct.map, TensorProduct.AlgebraTensorModule.lift, Submodule.tensorToSpan, Subalgebra.mulMap, Submodule.mulMap', Algebra.TensorProduct.productMap, Algebra.TensorProduct.lTensor, TensorProduct.mapOfCompatibleSMul",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor, presentation and affine-space maps do not define the restriction to B[IB/b]; the chart-generation argument is still required"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.lift, AlgHom.codRestrict",
+   "results": "No hits.",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor, presentation and affine-space maps do not define the restriction to B[IB/b]; the chart-generation argument is still required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "The B-algebra homomorphism from B tensor over A with A[I/a] to the blowup chart algebra B[IB/b] sending y tensor x/a to y times the image of x divided by b",
+   "results": "Hits: Algebra.Presentation.tensorModelOfHasCoeffsInv, Algebra.Presentation.tensorModelOfHasCoeffsHom, Algebra.instIsStandardOpenImmersionTensorProduct, Algebra.Presentation.tensorModelOfHasCoeffsInv_aeval_val, AlgebraicGeometry.Proj.lift_awayMapₐ_awayMapₐ_surjective, Algebra.Presentation.tensorModelOfHasCoeffsHom_tmul, Algebra.Presentation.tensorModelOfHasCoeffsEquiv_tmul, Algebra.PreSubmersivePresentation.baseChange",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor, presentation and affine-space maps do not define the restriction to B[IB/b]; the chart-generation argument is still required"
+  },
+  {
+   "tool": "grep",
+   "query": "def lift|def codRestrict|def awayMap",
+   "results": "Hits: Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/AdjoinRoot.lean, Mathlib/RingTheory/Ideal/Maps.lean, Mathlib/RingTheory/Ideal/Maps.lean, Mathlib/RingTheory/Smooth/AdicCompletion.lean, Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/IsAdjoinRoot.lean, Mathlib/RingTheory/IsAdjoinRoot.lean",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor, presentation and affine-space maps do not define the restriction to B[IB/b]; the chart-generation argument is still required"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Naturality of affine blowup algebras under an arbitrary ring homomorphism and scalar extension, sending fractions x/a to f(x)/f(a)",
+   "results": "Hits: AlgebraicGeometry.AffineSpace.map_SpecMap, AlgebraicGeometry.AffineSpace.map_Spec_map, AlgebraicGeometry.AffineSpace.mapSpecMap, AlgebraicGeometry.HasRingHomProperty.appLE, AlgebraicGeometry.Spec_Γ_naturality, AlgebraicGeometry.Spec_Γ_naturality_assoc, AlgebraicGeometry.HasRingHomProperty.appTop, AlgebraicGeometry.AffineSpace.map_over",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor, presentation and affine-space maps do not define the restriction to B[IB/b]; the chart-generation argument is still required"
+  },
+  {
+   "tool": "loogle",
+   "query": "Algebra.TensorProduct.productMap",
+   "results": "Hits: Algebra.TensorProduct.productMap, Algebra.TensorProduct.productMap_right, Algebra.TensorProduct.productMap_left, Algebra.TensorProduct.productMap_range, Algebra.TensorProduct.productMap_left_apply, Algebra.TensorProduct.productMap_right_apply, Algebra.TensorProduct.productMap_apply_tmul, Algebra.TensorProduct.productMap_eq_comp_map",
+   "date": "2026-10-21",
+   "verdict": "no match: generic tensor, presentation and affine-space maps do not define the restriction to B[IB/b]; the chart-generation argument is still required"
+  }
+ ],
  "mathlib_match": null,
- "status": "imported",
+ "status": "split",
  "merged_into": null,
  "import_flags": [
   "bypassed"
@@ -51,5 +147,34 @@
   "statement": "Let $J=IB\\subseteq B$, let $b$ be the image of $a$ in $B$, and write\n$B[J/b]$ for the corresponding chart ring. Define\n\n$$\n\\sigma_a\\colon C_a(A,B,I)\\longrightarrow B[J/b]\n$$\n\non pure tensors and chart generators by\n\n$$\n\\sigma_a\\bigl(y\\otimes(x/a)\\bigr)=y\\,\\overline x/b.\n$$",
   "proof": [],
   "note": "the current blueprint (aligned 2026-10-15 with the six-functors notes) states or proves this differently; a worker who touches the node follows it"
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "def-nagata-strict-chart-to-extended-blowup-chart",
+  "worker": "stage1",
+  "summary": "Q139 expands the definition into localization extension, restriction to the generated chart subalgebra, and the algebra tensor universal map. Makes the inherited commutative ring map, ideal and element context explicit without changing the map or adding hypotheses. Reuses both existing generic Mathlib leaves and both chart definitions; no new nodes. The previously rejected attachment is not resubmitted.",
+  "blueprint": "Current main-20261015 definition of sigma_a: construct its displayed pure-tensor/chart-generator formula; within the unit chart route.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-localization-away-universal-property",
+    "why": "Generic localization universal property used to construct A_a to B_b; no chart-specific replacement of the unit route."
+   },
+   {
+    "node": "lem-weil-pbc-algebra-tensor-pushout-universal-property",
+    "why": "Generic algebra tensor universal property used to assemble the two factor maps; no chart-specific replacement of the unit route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-localization-away-universal-property",
+  "lem-weil-pbc-algebra-tensor-pushout-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q139-379584690",
+  "group": "Q139",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q139-379584690 (reviewer sub-agent of L); spot-checked: Read the item in full; there are no new nodes. The statement keeps the current main-20261015 blueprint formula sigma_a(y⊗x/a)=y f(x)/b. It also makes explicit the context inherited from def-nagata-strict-transform-basechange-chart-ring (f:A→B a map of commutative rings, I an ideal, a∈I). This is the same map, with no hypothesis added or weakened. Step 1: lem-weil-pbc-localization-away-universal-property (a Mathlib leaf) gives lambda:A_a→B_b because f(a)/1=b/1 is a unit; the formula and the A-linearity check out. Step 2 is elementary: the preimage of B[J/b] under lambda is an A-subalgebra containing every generator x/a, since lambda(x/a)=f(x)/b and f(x)∈J; it never cancels a. Step 3: lem-weil-pbc-algebra-tensor-pushout-universal-property (2)/(3) is applied to s:B→B[J/b] and g, which agree on A. This gives a B-algebra map with the formula, unique by clause (3). Sources checked: Stacks 00CP = algebra.tex:1084 and 01I4 = schemes.tex:985. There is no cycle: the item does not cite the well-definedness lemma. Small cases checked: Z→Z/2 with a=2 (target 0), a nilpotent, a a unit, and k[x,y]→k[x,y]/(y) with a=x (sigma sends t to 0; kernel is the x-torsion, matching the kernel and surjectivity citers). The live Lean AffineBlowup.strictChartMap builds the same map. The tool_uses on the two generic Mathlib leaves are accepted. The item is not superseded (imported in live and side-live) and is in no dropped list or repair note. Advisories: A_a is cited only transitively through the localization lemma, and the report names citations.json and searches.jsonl, which are not in the delivery. No changes made."
  }
 }
