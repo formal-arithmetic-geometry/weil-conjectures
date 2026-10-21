@@ -18,81 +18,65 @@
  ],
  "proof": [
   {
-   "text": "Write $F=h^{-1}$ on underlying sheaves of sets, and transport ring and module operations by its finite-product comparison [def-weil-pbc-algebraic-inverse-image]. Let $p_{rs}^V:s_V\\times M\\to E_{rs}^VM$ be the sheafified pure pairing and $u_{rs}^V(m)=p_{rs}^V(1,m)$. The normalized inverse-image tensor comparison [lem-weil-pbc-algebraic-inverse-image-tensor-comparison], applied to the $r_Y$-modules $s_Y,M$, gives\n$$\\chi_{h,M}^{rs}F(p_{rs}^Y)=p_{rs}^X$$\nafter the canonical identification $F(s_Y\\times M)=s_X\\times F(M)$. This is the specified balanced-coequalizer comparison: its defining factorization has precisely this equation, which determines the tensor map [def-weil-pbc-ringed-tensor-section-calculus]. The equation is an equality of maps of sheaves, so it applies to arbitrary generalized sections over every test sheaf on $X$. The comparison is $s_X$-linear: multiplication by $z$ on the first input sends either side on $(s,m)$ to $p_{rs}^X(zs,m)$; transport preserves ring multiplication and the module action. Tensor universality gives the action equation on the quotient. In particular $\\chi^{rs}F(u_{rs}^Y)=u_{rs}^X$ since $F$ transports the unit section.",
+   "text": "Identify restriction along b followed by restriction along a with restriction along a;b, using the sectionwise restriction-of-scalars composition isomorphism. Uniqueness of left adjoints to this composite restriction functor gives scalar reassociation. The left-adjoint uniqueness unit equation gives t(1 tensor (1 tensor m))=1 tensor m. Scalar linearity and the inner balancing relation give t(c tensor (s tensor m))=(c*b(s)) tensor m. Applying the inverse of t gives the inverse insertion formula. All maps are natural module morphisms; neither flatness nor generation by global sections is used.",
+   "uses": [
+    "def-weil-pbc-ringed-tensor-section-calculus",
+    "def-pur-sheaf-tensor-product"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tags 03D7, 03EK and 03EL; blueprint det-prop-scalar-six-pullback.proof.md (3)"
+   }
+  },
+  {
+   "text": "Construct the module direct-image functor P for B_Y and B_X by geometric module transport. Its underlying sheaf is V, and its addition and scalar action obey the transported operation equations. For the supplied presentation I_A, the underlying sheaf adjunction restricts to a natural bijection Hom_AX(I_A M, Res_aX H) = Hom_AY(M, Res_aY P H): addition and scalar linearity correspond under the binary mate equations, and the scalar condition uses the given compatibility of a_Y with a_X. For identity coefficient arrows the same construction gives I_B left adjoint to P. Compose the scalar adjunction with these natural Hom bijections. Both E_aY;I_B and I_A;E_aX are left adjoint to P;Res_aY. Left-adjoint uniqueness gives their comparison e. Its defining Hom equation, followed by the faithful underlying-sheaf functor and the normalized geometric Hom bijection, says e F(u_aY)=u_aX. For an arbitrary generalized pure tensor z=s*u_aY(m), the graph equation for I_B transports this scalar action, and B_X-linearity of e gives precisely the required pure-tensor normalization. Apply this construction to A to B and B to C.",
    "uses": [
     "def-weil-pbc-algebraic-inverse-image",
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
+    "lem-weil-pbc-geometric-module-transport",
     "def-weil-pbc-ringed-tensor-section-calculus"
    ],
    "elementary": false,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), its bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), normalized comparison; blueprint det-prop-scalar-six-pullback.proof.md (3)"
+    "place": "Tags 03D7, 03EK and 03EL; blueprint det-prop-scalar-six-pullback.proof.md (3)"
    }
   },
   {
-   "text": "For $V=X,Y$, the displayed formula for $t_V$ respects both balances. The $B_V$ relation gives the same value $c\\,b_V(\\beta)b_V(b')\\otimes m$ from $c\\,b_V(\\beta)\\otimes(b'\\otimes m)$ and $c\\otimes(\\beta b'\\otimes m)$. The inner $A_V$ relation gives $c\\,b_V(b')b_Va_V(\\alpha)\\otimes m=c\\,b_V(b')\\otimes\\alpha m$. Additivity in each input is distributivity. The inverse insertion respects the $A_V$ relation since $1\\otimes\\alpha m=a_V(\\alpha)\\otimes m$ and the outer $B_V$ balance moves $a_V(\\alpha)$ to $c$. Thus these formulas descend through the balanced tensors and sheafification [def-pur-sheaf-tensor-product, def-weil-pbc-ringed-tensor-section-calculus]. Their composites are identities: one gives $c\\otimes m$, and the other gives $c\\,b_V(b')\\otimes(1\\otimes m)=c\\otimes(b'\\otimes m)$. The maps are $C_V$-linear because their first factor is multiplied by $c$. In particular, putting $w_Y=u_{BC}^Y\\circ u_{AB}^Y$ on underlying sheaves, $t_Yw_Y=u_{AC}^Y$. These verifications use no flatness or invertibility.",
+   "text": "Define the A to C comparison by pasting inverse reassociation over Y, the B to C comparison, extension of the A to B comparison, and reassociation over X. To check its normalization on arbitrary generalized sections, inverse reassociation takes c tensor m to c tensor (1 tensor m). The B to C comparison transports the outer scalar and inner unit. The A to B comparison sends the transported inner unit to 1 tensor m, since the ring presentation preserves 1. Extension of scalars acts on the inner module map, and reassociation over X takes c tensor (1 tensor m) to c tensor m. Naturality of the supplied underlying-sheaf isomorphisms justifies each transport; no pointwise generation assertion is required.",
    "uses": [
-    "def-pur-sheaf-tensor-product",
-    "def-weil-pbc-ringed-tensor-section-calculus"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), its bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), normalized comparison; blueprint det-prop-scalar-six-pullback.proof.md (3)"
-   }
-  },
-  {
-   "text": "Fix $M$ and put $D=C_Y\\otimes_{B_Y}(B_Y\\otimes_{A_Y}M)$ and $P=C_X\\otimes_{A_X}F(M)$. For $C_X$-linear $d,e:F(D)\\to P$, equality follows from $dF(w_Y)=eF(w_Y)$. Indeed, the underlying sheaf adjunction [def-weil-pbc-ringed-topos-morphism] gives adjuncts $\\bar d=h_*d\\circ\\eta_D$ and $\\bar e=h_*e\\circ\\eta_D$. They are $C_Y$-linear: naturality of $\\eta$ for addition and scalar action, with the product comparison, gives $\\eta_D(cz)=\\eta_C(c)\\eta_D(z)$, and $h_*d,h_*e$ respect the transported action [def-weil-pbc-algebraic-inverse-image]. Twice applying the extension/restriction adjunction of [def-weil-pbc-ringed-tensor-section-calculus] shows a $C_Y$-linear map from $D$ is determined by its composite with $w_Y$: the two adjunction units insert $1\\otimes-$ in succession. Naturality of $\\eta$ now gives $\\bar d w_Y=h_*(dF(w_Y))\\eta_M$ and the analogous equation for $e$. Hence the assumed equality implies $\\bar d=\\bar e$, and injectivity of the underlying adjunction implies $d=e$. This is a direct composite of the cited Hom bijections; it does not assume points of the topos or sectionwise surjectivity of a tensor pairing.",
-   "uses": [
-    "def-weil-pbc-ringed-topos-morphism",
     "def-weil-pbc-algebraic-inverse-image",
     "def-weil-pbc-ringed-tensor-section-calculus"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), its bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), normalized comparison; blueprint det-prop-scalar-six-pullback.proof.md (3)"
+    "place": "Tags 03D7, 03EK and 03EL; blueprint det-prop-scalar-six-pullback.proof.md (3)"
    }
   },
   {
-   "text": "Take $d=\\chi_h^{AC}F(t_Y)$ and $e=t_X\\,E_{BC}^X(\\chi_h^{AB})\\,\\chi_h^{BC}$, with the indicated whiskering at $M$. Both are $C_X$-linear by steps 1 and 2. On $F(w_Y)$, the first route is\n$$F(M)\\xrightarrow{F(u_{AC}^Y)}F(C_Y\\otimes_{A_Y}M)\\xrightarrow{\\chi^{AC}}C_X\\otimes_{A_X}F(M),$$\nso its value is $1\\otimes m$. For the second route, step 1 for $B\\to C$ sends the transported outer unit to $1\\otimes F(u_{AB}^Y)(m)$. Extension of scalars of $\\chi^{AB}$ sends this to $1\\otimes\\chi^{AB}F(u_{AB}^Y)(m)=1\\otimes(1\\otimes m)$. Finally $t_X$ sends it to $1\\otimes m$. These are equalities of sheaf maps from $F(M)$, using the unit-normalized comparison in step 1. More generally, on the transported generalized triple $(c,b',m)$ the first route is $c\\,b_X(b')\\otimes m$, while the second is $c\\otimes(b'\\otimes m)\\mapsto c\\,b_X(b')\\otimes m$; $F$ transports multiplication and $b_Y$ to multiplication and $b_X$. Thus the computation uses the actual final-ring action, rather than an unspecified isomorphism. Step 3 proves the required equality on all of $F(D)$.",
+   "text": "The natural-transformation square follows by cancelling the inverse and forward Y reassociation in the definition of the A to C comparison, using functoriality of I_C. Evaluating this equality at the object K.X n of any cochain complex gives exactly the requested termwise equality.",
    "uses": [
-    "def-weil-pbc-algebraic-inverse-image",
-    "def-weil-pbc-ringed-tensor-section-calculus",
-    "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
-   ],
-   "elementary": true,
-   "source": {
-    "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), its bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), normalized comparison; blueprint det-prop-scalar-six-pullback.proof.md (3)"
-   }
-  },
-  {
-   "text": "The equality holds for every $A_Y$-module $M$. The comparisons in step 1 are natural; the balancing formulas in step 2 are natural because a module map $v:M\\to N$ changes $c\\,b_V(b')\\otimes m$ to $c\\,b_V(b')\\otimes v(m)$ along either route [def-weil-pbc-ringed-tensor-section-calculus]. Therefore the component equality is the displayed equality of natural transformations. For a cochain complex $M^\\bullet$, apply this equality in each degree. Naturality with respect to each differential $d^n$ says that both component families commute with the differentials, so they are equal maps of complexes by the definition [def-weil-abstract-derived-category]. There is no totalization or exchange of tensor factors, and hence no sign to choose. This proves exactly the termwise assertion, without localization or a K-flat hypothesis.",
-   "uses": [
-    "def-weil-pbc-ringed-tensor-section-calculus",
     "def-weil-abstract-derived-category"
    ],
    "elementary": true,
    "source": {
     "document": "literature/stacks-project/sites-modules.tex",
-    "place": "Tag 03EK (section-tensor-product), its bilinear universal property; Tag 03EL (lemma-tensor-product-pullback), normalized comparison; blueprint det-prop-scalar-six-pullback.proof.md (3)"
+    "place": "Tags 03D7, 03EK and 03EL; blueprint det-prop-scalar-six-pullback.proof.md (3)"
    }
   }
  ],
  "proof_deps": [
-  "def-weil-pbc-algebraic-inverse-image",
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison",
   "def-weil-pbc-ringed-tensor-section-calculus",
   "def-pur-sheaf-tensor-product",
-  "def-weil-pbc-ringed-topos-morphism",
+  "def-weil-pbc-algebraic-inverse-image",
+  "lem-weil-pbc-geometric-module-transport",
   "def-weil-abstract-derived-category"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-scalar-six/det-prop-scalar-six-pullback.proof.md",
-  "place": "(3), compatibility of the inverse-image comparison with scalar reassociation; explicit verification using Stacks Tags 03EK, 03EL and 03D2"
+  "place": "(3); P8 Lean proof via extension/restriction adjunctions, geometric module transport, and normalized pasting of comparisons (2026-10-21)"
  },
  "mathlib_searches": [
   {
@@ -199,9 +183,7 @@
    }
   ]
  },
- "tool_uses": [
-  "lem-weil-pbc-algebraic-inverse-image-tensor-comparison"
- ],
+ "tool_uses": [],
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
@@ -235,5 +217,15 @@
   "group": "N0",
   "result": "pass",
   "note": "Identical re-delivery of 2ac69ad393 (module byte-identical; node records differ only in lean_audit). The previous landing return was a published-build fault (missing Mathlib oleans, now present). Clause-by-clause match: F⊣V + PreservesFiniteLimits on u-small sites; rings and maps pinned by AlgebraicInverseImage plus _ha/_hb; χ and t pinned uniquely by real pure-tensor formulas (scalarPure = sheafification unit on s⊗m); the square has the node's order and directions; the termwise clause covers all n∈ℤ. Added stmt_deps are landed proof_deps used in the signature; lean.statement verbatim; item not dropped, no repair note. Edge cases: id, identity arrows, M=0, zero rings, empty site, Z→Z/4→Z/2. nt_compile --json clean in 36.5 s. Advisory: unused RingedToposMorphism import, plain proof import, same-universe AlgebraicInverseImage."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "P8",
+  "result": "pass",
+  "landing": "20261021T111421-L-120232",
+  "kind": "interface",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }

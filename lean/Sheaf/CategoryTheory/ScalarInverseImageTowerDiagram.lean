@@ -5,12 +5,13 @@ Authors: SHEAF group N0
 -/
 module
 
-public import Sheaf.CategoryTheory.RingedToposMorphism
-public import Sheaf.CategoryTheory.AlgebraicInverseImageOfUniverses
+public import Sheaf.CategoryTheory.AlgebraicInverseImage
 public import Sheaf.Paper.RingedTopoiTensorSections
-public import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-public import Mathlib.Algebra.Homology.DerivedCategory.Basic
-import Sheaf.Paper.RingedTopoiInverseImageTensorComparison
+public import Mathlib.Algebra.Homology.HomologicalComplex
+import all Sheaf.CategoryTheory.GeometricModuleTransport
+import all Sheaf.CategoryTheory.GeometricModuleConstruction
+import Mathlib.CategoryTheory.Adjunction.Unique
+import Mathlib.CategoryTheory.Adjunction.Limits
 
 /-! # Inverse image and balanced scalar towers
 
@@ -82,28 +83,770 @@ def IsScalarInverseImageComparison
         ((F.map s ≫ IB.ringUnderlying.hom).hom.app W q)
         ((F.map m ≫ IA.moduleUnderlying.inv.app M).hom.app W q)
 
+section ProofHelpers
+
+open SheafOfModules.GeometricConstruction
+
+private theorem towerComposeRing {S : Type u} [SmallCategory S]
+    (J : GrothendieckTopology S) :
+    J.HasSheafCompose (forget₂ CommRingCat.{u} RingCat.{u}) := inferInstance
+
+private theorem towerComposeSets {S : Type u} [SmallCategory S]
+    (J : GrothendieckTopology S) :
+    J.HasSheafCompose (CategoryTheory.forget CommRingCat.{u}) := inferInstance
+
+private theorem towerComposeModules {S : Type u} [SmallCategory S]
+    (J : GrothendieckTopology S) :
+    J.HasSheafCompose (CategoryTheory.forget AddCommGrpCat.{u}) := inferInstance
+
+private noncomputable abbrev towerBinaryProduct
+    {S : Type u} [SmallCategory S] {J : GrothendieckTopology S}
+    (X Y : Sheaf J (Type u)) : HasBinaryProduct X Y := inferInstance
+
+attribute [local instance] towerComposeRing towerComposeSets towerComposeModules towerBinaryProduct
+
+private theorem towerAdjunction
+    {C D : Type*} [Category* C] [Category* D] (L : C ⥤ D) (R : D ⥤ C)
+    (B : ∀ X Y, (L.obj X ⟶ Y) ≃ (X ⟶ R.obj Y))
+    (hL : ∀ {X X'} (a : X ⟶ X') Y f, B X Y (L.map a ≫ f) = a ≫ B X' Y f)
+    (hR : ∀ X {Y Y'} f (b : Y ⟶ Y'), B X Y' (f ≫ b) = B X Y f ≫ R.map b) :
+    ∃ adj : L ⊣ R, adj.homEquiv = B := by
+  refine ⟨Adjunction.mkOfHomEquiv
+    { homEquiv := B
+      homEquiv_naturality_left_symm := ?_
+      homEquiv_naturality_right := fun f b ↦ hR _ f b },
+    Adjunction.mkOfHomEquiv_homEquiv _⟩
+  intro X X' Y a f
+  apply (B X Y).injective
+  rw [Equiv.apply_symm_apply, hL, Equiv.apply_symm_apply]
+
+private theorem towerLeftComparison
+    {CA CB DA DB : Type*} [Category* CA] [Category* CB] [Category* DA] [Category* DB]
+    {TY : CA ⥤ CB} {RY : CB ⥤ CA} (adjY : TY ⊣ RY)
+    {TX : DA ⥤ DB} {RX : DB ⥤ DA} (adjX : TX ⊣ RX)
+    (L : CA ⥤ DA) (LB : CB ⥤ DB) (P : DB ⥤ CB)
+    (BA : ∀ M H, (L.obj M ⟶ RX.obj H) ≃ (M ⟶ RY.obj (P.obj H)))
+    (BB : ∀ N H, (LB.obj N ⟶ H) ≃ (N ⟶ P.obj H))
+    (hAL : ∀ {M N} (a : M ⟶ N) H f, BA M H (L.map a ≫ f) = a ≫ BA N H f)
+    (hAR : ∀ M {H H'} f (b : H ⟶ H'),
+      BA M H' (f ≫ RX.map b) = BA M H f ≫ RY.map (P.map b))
+    (hBL : ∀ {M N} (a : M ⟶ N) H f, BB M H (LB.map a ≫ f) = a ≫ BB N H f)
+    (hBR : ∀ M {H H'} f (b : H ⟶ H'), BB M H' (f ≫ b) = BB M H f ≫ P.map b) :
+    ∃ e : TY ⋙ LB ≅ L ⋙ TX, ∀ M,
+      adjY.homEquiv M (P.obj (TX.obj (L.obj M)))
+        (BB (TY.obj M) (TX.obj (L.obj M)) (e.hom.app M)) =
+      BA M (TX.obj (L.obj M)) (adjX.unit.app (L.obj M)) := by
+  obtain ⟨aB, haB⟩ := towerAdjunction LB P BB hBL hBR
+  let ER : ∀ M H, ((L ⋙ TX).obj M ⟶ H) ≃ (M ⟶ (P ⋙ RY).obj H) :=
+    fun M H ↦ (adjX.homEquiv (L.obj M) H).trans (BA M H)
+  have hERL {M N} (a : M ⟶ N) H (f : (L ⋙ TX).obj N ⟶ H) :
+      ER M H ((L ⋙ TX).map a ≫ f) = a ≫ ER N H f := by
+    change BA M H (adjX.homEquiv _ _ (TX.map (L.map a) ≫ f)) = _
+    rw [adjX.homEquiv_naturality_left, hAL]
+    rfl
+  have hERR M {H H'} (f : (L ⋙ TX).obj M ⟶ H) (b : H ⟶ H') :
+      ER M H' (f ≫ b) = ER M H f ≫ (P ⋙ RY).map b := by
+    change BA M H' (adjX.homEquiv _ _ (f ≫ b)) = _
+    rw [adjX.homEquiv_naturality_right, hAR]
+    rfl
+  obtain ⟨aR, haR⟩ := towerAdjunction (L ⋙ TX) (P ⋙ RY) ER hERL hERR
+  let aL := adjY.comp aB
+  refine ⟨aL.leftAdjointUniq aR, ?_⟩
+  intro M
+  have h := aL.homEquiv_leftAdjointUniq_hom_app aR M
+  rw [← aR.homEquiv_id, haR] at h
+  dsimp only [aL] at h
+  rw [Adjunction.comp_homEquiv, haB] at h
+  change adjY.homEquiv _ _ (BB _ _ ((aL.leftAdjointUniq aR).hom.app M)) =
+    BA M _ (adjX.homEquiv _ _ (𝟙 _)) at h
+  simpa only [Adjunction.homEquiv_id, Functor.comp_obj] using h
+
+/- Elementary operation graphs, used directly without the general tensor or
+K-flat pullback constructions. Source: the operation-transport calculations in
+RingedToposKFlatPullback and RingedTopoiInverseImageTensorPairingIsIso. -/
+
+private theorem binary_of_graph
+    {C D : Type u} [SmallCategory C] [SmallCategory D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (F : Sheaf J (Type u) ⥤ Sheaf K (Type u))
+    {X Y Z : Sheaf J (Type u)} {A B E : Sheaf K (Type u)}
+    (dX : F.obj X ⟶ A) (dY : F.obj Y ⟶ B) (dZ : F.obj Z ⟶ E)
+    (a : X ⨯ Y ⟶ Z) (b : A ⨯ B ⟶ E)
+    (op : ∀ U, X.obj.obj U → Y.obj.obj U → Z.obj.obj U)
+    (op' : ∀ V, A.obj.obj V → B.obj.obj V → E.obj.obj V)
+    (hs : ∀ U p, a.hom.app U p =
+      op U ((prod.fst : X ⨯ Y ⟶ X).hom.app U p)
+        ((prod.snd : X ⨯ Y ⟶ Y).hom.app U p))
+    (ht : ∀ V p, b.hom.app V p =
+      op' V ((prod.fst : A ⨯ B ⟶ A).hom.app V p)
+        ((prod.snd : A ⨯ B ⟶ B).hom.app V p))
+    (hgraph : ∀ (T : Sheaf J (Type u)) (x : T ⟶ X) (y : T ⟶ Y) (z : T ⟶ Z),
+      (∀ U p, z.hom.app U p = op U (x.hom.app U p) (y.hom.app U p)) →
+      ∀ V p, (F.map z ≫ dZ).hom.app V p =
+        op' V ((F.map x ≫ dX).hom.app V p) ((F.map y ≫ dY).hom.app V p)) :
+    F.map a ≫ dZ = prodComparison F X Y ≫ prod.map dX dY ≫ b := by
+  have h₁ : prodComparison F X Y ≫ prod.map dX dY ≫ prod.fst =
+      F.map prod.fst ≫ dX := by simp only [prod.map_fst, prodComparison_fst_assoc]
+  have h₂ : prodComparison F X Y ≫ prod.map dX dY ≫ prod.snd =
+      F.map prod.snd ≫ dY := by simp only [prod.map_snd, prodComparison_snd_assoc]
+  ext V p
+  have h := hgraph (X ⨯ Y) prod.fst prod.snd a hs V p
+  change (F.map a ≫ dZ).hom.app V p = b.hom.app V
+    ((prodComparison F X Y ≫ prod.map dX dY).hom.app V p)
+  rw [ht]
+  have hh₁ := congrArg (fun k ↦ k.hom.app V p) h₁
+  have hh₂ := congrArg (fun k ↦ k.hom.app V p) h₂
+  change (prod.fst : A ⨯ B ⟶ A).hom.app V
+    ((prodComparison F X Y ≫ prod.map dX dY).hom.app V p) = _ at hh₁
+  change (prod.snd : A ⨯ B ⟶ B).hom.app V
+    ((prodComparison F X Y ≫ prod.map dX dY).hom.app V p) = _ at hh₂
+  rw [hh₁, hh₂]
+  exact h
+
+private noncomputable def radd
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{u}) := fromProd (rset R) (rset R) ≫ ringAdd R
+
+private noncomputable def rmul
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{u}) := fromProd (rset R) (rset R) ≫ ringMul R
+
+private noncomputable def madd
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{u}) (M : SheafOfModules.{u, u, u, u} (base R)) :=
+  fromProd ((mset R).obj M) ((mset R).obj M) ≫ addition R M
+private noncomputable def msmul
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{u}) (M : SheafOfModules.{u, u, u, u} (base R)) :=
+  fromProd (rset R) ((mset R).obj M) ≫ action R M
+
+private theorem towerAddSpec
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{u}) (M : SheafOfModules.{u} (ringSheaf R)) :
+    addSpec M (madd R M) := by
+  intro W x
+  rfl
+
+private theorem towerSMulSpec
+    {C : Type u} [SmallCategory C] {J : GrothendieckTopology C}
+    (R : Sheaf J CommRingCat.{u}) (M : SheafOfModules.{u} (ringSheaf R)) :
+    smulSpec M (msmul R M) := by
+  intro W x
+  rfl
+
+attribute [local irreducible] madd msmul
+
+private theorem ringOperations
+    {C D : Type u} [SmallCategory C] [SmallCategory D]
+    {J : GrothendieckTopology C} {K : GrothendieckTopology D}
+    (R : Sheaf J CommRingCat.{u}) (RI : Sheaf K CommRingCat.{u})
+    (F : Sheaf J (Type u) ⥤ Sheaf K (Type u)) [PreservesFiniteLimits F]
+    (I : AlgebraicInverseImage F R RI) :
+    F.map (radd R) =
+      prodComparison F (GeometricConstruction.rset R) (GeometricConstruction.rset R) ≫
+        prod.map I.ringUnderlying.hom I.ringUnderlying.hom ≫ radd RI ≫
+          I.ringUnderlying.inv ∧
+    F.map (rmul R) =
+      prodComparison F (GeometricConstruction.rset R) (GeometricConstruction.rset R) ≫
+        prod.map I.ringUnderlying.hom I.ringUnderlying.hom ≫ rmul RI ≫
+          I.ringUnderlying.inv := by
+  constructor
+  · apply (cancel_mono I.ringUnderlying.hom).mp
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact binary_of_graph F I.ringUnderlying.hom I.ringUnderlying.hom
+      I.ringUnderlying.hom (radd R) (radd RI)
+      (fun U x y ↦ @Add.add (R.obj.obj U) inferInstance x y)
+      (fun U x y ↦ @Add.add (RI.obj.obj U) inferInstance x y)
+      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
+      (fun T x y z hz U t ↦ I.ringAdd T x y z hz U t)
+  · apply (cancel_mono I.ringUnderlying.hom).mp
+    simp only [Category.assoc, Iso.inv_hom_id, Category.comp_id]
+    exact binary_of_graph F I.ringUnderlying.hom I.ringUnderlying.hom
+      I.ringUnderlying.hom (rmul R) (rmul RI)
+      (fun U x y ↦ @Mul.mul (R.obj.obj U) inferInstance x y)
+      (fun U x y ↦ @Mul.mul (RI.obj.obj U) inferInstance x y)
+      (fun _ _ ↦ rfl) (fun _ _ ↦ rfl)
+      (fun T x y z hz U t ↦ I.ringMul T x y z hz U t)
+
+
+section ScalarCalculus
+variable {S : Type u} [SmallCategory S] {J : GrothendieckTopology S}
+  {A B C : Sheaf J CommRingCat.{u}}
+
+private theorem scalarPure_smul (a : A ⟶ B)
+    (M : SheafOfModules.{u} (ringSheaf A)) (W : Sᵒᵖ)
+    (b c : B.obj.obj W) (m : M.val.obj W) :
+    scalarPure a M W (b * c) m = b • scalarPure a M W c m := by
+  let := (a.hom.app W).hom.toAlgebra
+  exact (((PresheafOfModules.sheafificationAdjunction (𝟙 (ringSheaf B).obj)).unit.app
+    (changeOfRingsPresheaf.{u, u, u} a M)).app W).hom.map_smul b
+      (c ⊗ₜ[A.obj.obj W] m)
+
+private theorem scalarPure_one (a : A ⟶ B)
+    (M : SheafOfModules.{u} (ringSheaf A)) (W : Sᵒᵖ)
+    (b : B.obj.obj W) (m : M.val.obj W) :
+    scalarPure a M W b m = b • scalarPure a M W 1 m := by
+  simpa only [mul_one] using scalarPure_smul a M W b 1 m
+
+private theorem scalarPure_map (a : A ⟶ B)
+    {M N : SheafOfModules.{u} (ringSheaf A)} (f : M ⟶ N) (W : Sᵒᵖ)
+    (b : B.obj.obj W) (m : M.val.obj W) :
+    ((tensorFunctor a).map f).val.app W (scalarPure a M W b m) =
+      scalarPure a N W b (f.val.app W m) := by
+  have h := (PresheafOfModules.sheafificationAdjunction
+    (𝟙 (ringSheaf B).obj)).unit.naturality ((tensorPresheafFunctor a).map f)
+  exact (congrArg (fun k ↦ k.app W
+    (b ⊗ₜ[A.obj.obj W, (a.hom.app W).hom] m)) h).symm
+
+private theorem scalarUnit_apply (a : A ⟶ B)
+    (M : SheafOfModules.{u} (ringSheaf A)) (W : Sᵒᵖ) (m : M.val.obj W) :
+    ((tensorAdjunction a).unit.app M).val.app W m = scalarPure a M W 1 m := by
+  rw [← Adjunction.homEquiv_id, tensorAdjunction, Adjunction.mkOfHomEquiv_homEquiv]
+  rfl
+
+private noncomputable def restrictionComp (a : A ⟶ B) (b : B ⟶ C) :
+    restriction b ⋙ restriction a ≅ restriction (a ≫ b) := by
+  refine NatIso.ofComponents (fun M ↦ ?_) ?_
+  · exact (SheafOfModules.fullyFaithfulForget _).preimageIso
+      (PresheafOfModules.isoMk
+        (fun W ↦ (ModuleCat.restrictScalarsComp
+          (a.hom.app W).hom (b.hom.app W).hom).app (M.val.obj W))
+        (by intro W V f; ext m; rfl))
+  · intro M N f
+    ext W m
+    rfl
+
+private noncomputable def scalarReassoc (a : A ⟶ B) (b : B ⟶ C) :
+    tensorFunctor a ⋙ tensorFunctor b ≅ tensorFunctor (a ≫ b) :=
+  ((tensorAdjunction a).comp (tensorAdjunction b)).leftAdjointUniq
+    ((tensorAdjunction (a ≫ b)).ofNatIsoRight (restrictionComp a b).symm)
+
+private theorem scalarPure_balance (a : A ⟶ B)
+    (M : SheafOfModules.{u} (ringSheaf A)) (W : Sᵒᵖ)
+    (b : B.obj.obj W) (r : A.obj.obj W) (m : M.val.obj W) :
+    scalarPure a M W b (r • m) = scalarPure a M W (b * a.hom.app W r) m := by
+  let := (a.hom.app W).hom.toAlgebra
+  unfold scalarPure
+  congr 1
+  rw [TensorProduct.tmul_smul]
+  change ((a.hom.app W r) * b) ⊗ₜ[A.obj.obj W] m = _
+  rw [mul_comm]
+
+private theorem scalarReassoc_unit (a : A ⟶ B) (b : B ⟶ C)
+    (M : SheafOfModules.{u} (ringSheaf A)) (W : Sᵒᵖ) (m : M.val.obj W) :
+    ((scalarReassoc a b).hom.app M).val.app W
+      (scalarPure b ((tensorFunctor a).obj M) W 1 (scalarPure a M W 1 m)) =
+        scalarPure (a ≫ b) M W 1 m := by
+  have h := Adjunction.unit_leftAdjointUniq_hom_app
+    ((tensorAdjunction a).comp (tensorAdjunction b))
+    ((tensorAdjunction (a ≫ b)).ofNatIsoRight (restrictionComp a b).symm) M
+  have he := congrArg (fun f ↦ f.val.app W m) h
+  dsimp only [Adjunction.comp_unit_app] at he
+  change ((scalarReassoc a b).hom.app M).val.app W
+    (((tensorAdjunction b).unit.app ((tensorFunctor a).obj M)).val.app W
+      (((tensorAdjunction a).unit.app M).val.app W m)) =
+    ((tensorAdjunction (a ≫ b)).unit.app M).val.app W m at he
+  simpa only [scalarUnit_apply] using he
+
+private theorem scalarReassoc_normalized (a : A ⟶ B) (b : B ⟶ C) :
+    IsScalarReassociation a b (scalarReassoc a b) := by
+  have hh (M : SheafOfModules.{u} (ringSheaf A)) (W : Sᵒᵖ)
+      (c : C.obj.obj W) (s : B.obj.obj W) (m : M.val.obj W) :
+      ((scalarReassoc a b).hom.app M).val.app W
+        (scalarPure b ((tensorFunctor a).obj M) W c (scalarPure a M W s m)) =
+          scalarPure (a ≫ b) M W (c * b.hom.app W s) m := by
+    rw [scalarPure_one a M W s m, scalarPure_balance,
+      scalarPure_one b _ W (c * b.hom.app W s), map_smul, scalarReassoc_unit]
+    exact (scalarPure_one (a ≫ b) M W _ m).symm
+  refine ⟨hh, ?_⟩
+  intro M W c m
+  have h := hh M W c 1 m
+  rw [map_one, mul_one] at h
+  have he := congrArg (((scalarReassoc a b).inv.app M).val.app W) h
+  have hi := congrArg (fun f ↦ f.val.app W
+    (scalarPure b ((tensorFunctor a).obj M) W c (scalarPure a M W 1 m)))
+    ((scalarReassoc a b).hom_inv_id_app M)
+  exact he.symm.trans hi
+
+end ScalarCalculus
+
+attribute [local irreducible] scalarPure scalarReassoc restrictionComp
+
+set_option backward.isDefEq.respectTransparency true
+set_option backward.isDefEq.respectTransparency.types false
+
+section TransportedHom
+section
+variable {SY SX : Type u} [SmallCategory SY] [SmallCategory SX]
+  {JY : GrothendieckTopology SY} {JX : GrothendieckTopology SX}
+  {AY BY : Sheaf JY CommRingCat.{u}} {AX BX : Sheaf JX CommRingCat.{u}}
+  (F : Sheaf JY (Type u) ⥤ Sheaf JX (Type u))
+  (V : Sheaf JX (Type u) ⥤ Sheaf JY (Type u))
+  (adj : F ⊣ V) [PreservesFiniteLimits F] [PreservesFiniteLimits V]
+  (IA : AlgebraicInverseImage F AY AX)
+  (P : SheafOfModules.{u} (ringSheaf BX) ⥤ SheafOfModules.{u} (ringSheaf BY))
+  (eP : P ⋙ underlying BY ≅ underlying BX ⋙ V)
+  (eB : F.obj ((sheafCompose JY (CategoryTheory.forget CommRingCat)).obj BY) ≅
+    (sheafCompose JX (CategoryTheory.forget CommRingCat)).obj BX)
+  (aY : AY ⟶ BY) (aX : AX ⟶ BX)
+  (ha : F.map ((sheafCompose JY (CategoryTheory.forget CommRingCat)).map aY) ≫
+    eB.hom = IA.ringUnderlying.hom ≫
+      (sheafCompose JX (CategoryTheory.forget CommRingCat)).map aX)
+
+attribute [local irreducible] mateIsoEquiv restrictHomEquiv
+
+include ha in
+private theorem exists_scalarHomEquiv
+  (hOps : ∀ H,
+    madd BY (P.obj H) ≫ eP.hom.app H =
+      prod.map (eP.hom.app H) (eP.hom.app H) ≫
+        inv (prodComparison V ((underlying BX).obj H) ((underlying BX).obj H)) ≫
+          V.map (madd BX H) ∧
+    msmul BY (P.obj H) ≫ eP.hom.app H =
+      prod.map (adj.homEquiv _ _ eB.hom) (eP.hom.app H) ≫
+        inv (prodComparison V (GeometricConstruction.rset BX) ((underlying BX).obj H)) ≫
+          V.map (msmul BX H)) :
+    ∃ B : ∀ M H, (IA.modules.obj M ⟶ (restriction aX).obj H) ≃
+        (M ⟶ (restriction aY).obj (P.obj H)),
+      (∀ M H f, (underlying AY).map (B M H f) ≫ eP.hom.app H =
+        adj.homEquiv ((underlying AY).obj M) ((underlying BX).obj H)
+          (IA.moduleUnderlying.inv.app M ≫ (underlying AX).map f)) ∧
+      (∀ {M N} (a : M ⟶ N) H f, B M H (IA.modules.map a ≫ f) = a ≫ B N H f) ∧
+      (∀ M {H H'} f (b : H ⟶ H'),
+        B M H' (f ≫ (restriction aX).map b) =
+          B M H f ≫ (restriction aY).map (P.map b)) := by
+  let E : ∀ M H,
+      ((underlying AX).obj (IA.modules.obj M) ⟶ (underlying BX).obj H) ≃
+        ((underlying AY).obj M ⟶ (underlying BY).obj (P.obj H)) :=
+    fun M H ↦ mateIsoEquiv adj (IA.moduleUnderlying.app M) (eP.app H)
+  have hImage M H (α : (underlying AX).obj (IA.modules.obj M) ⟶
+      (underlying BX).obj H) :
+      (∃ f : IA.modules.obj M ⟶ (restriction aX).obj H, (underlying AX).map f = α) ↔
+        ∃ g : M ⟶ (restriction aY).obj (P.obj H), (underlying AY).map g = E M H α := by
+    have hLA : F.map (madd AY M) =
+        prodComparison F ((underlying AY).obj M) ((underlying AY).obj M) ≫
+          prod.map (IA.moduleUnderlying.inv.app M) (IA.moduleUnderlying.inv.app M) ≫
+            madd AX (IA.modules.obj M) ≫ IA.moduleUnderlying.hom.app M := by
+      apply (cancel_mono (IA.moduleUnderlying.inv.app M)).mp
+      simp only [Category.assoc, Iso.hom_inv_id_app]
+      exact binary_of_graph F (IA.moduleUnderlying.inv.app M)
+        (IA.moduleUnderlying.inv.app M) (IA.moduleUnderlying.inv.app M)
+        (madd AY M) (madd AX (IA.modules.obj M))
+        (fun U x y ↦ @Add.add (M.val.obj U) inferInstance x y)
+        (fun U x y ↦ @Add.add ((IA.modules.obj M).val.obj U) inferInstance x y)
+        (towerAddSpec AY M) (towerAddSpec AX (IA.modules.obj M))
+        (fun T x y z hz U t ↦ IA.moduleAdd M T x y z hz U t)
+    have hLS : F.map (msmul AY M) =
+        prodComparison F (GeometricConstruction.rset AY) ((underlying AY).obj M) ≫
+          prod.map IA.ringUnderlying.hom (IA.moduleUnderlying.inv.app M) ≫
+            msmul AX (IA.modules.obj M) ≫ IA.moduleUnderlying.hom.app M := by
+      apply (cancel_mono (IA.moduleUnderlying.inv.app M)).mp
+      simp only [Category.assoc, Iso.hom_inv_id_app]
+      exact binary_of_graph F IA.ringUnderlying.hom (IA.moduleUnderlying.inv.app M)
+        (IA.moduleUnderlying.inv.app M) (msmul AY M) (msmul AX (IA.modules.obj M))
+        (fun U x y ↦ @SMul.smul (AY.obj.obj U) (M.val.obj U) inferInstance x y)
+        (fun U x y ↦ @SMul.smul (AX.obj.obj U) ((IA.modules.obj M).val.obj U)
+          inferInstance x y)
+        (towerSMulSpec AY M) (towerSMulSpec AX (IA.modules.obj M))
+        (fun T a x z hz U t ↦ IA.moduleSMul M T a x z hz U t)
+    have hm : adj.homEquiv _ _ (IA.moduleUnderlying.inv.app M ≫ α) =
+        E M H α ≫ eP.hom.app H :=
+      by exact mateIsoEquiv_equation adj (IA.moduleUnderlying.app M) (eP.app H) α
+    have hAdd := binary_mate_iso_iff adj
+      (IA.moduleUnderlying.app M) (IA.moduleUnderlying.app M) (IA.moduleUnderlying.app M)
+      (eP.hom.app H) (eP.hom.app H) (eP.app H)
+      (madd AY M) (madd AX (IA.modules.obj M)) (madd BX H) (madd BY (P.obj H))
+      hLA (hOps H).1 α α α (E M H α) (E M H α) (E M H α) hm hm hm
+    have hr : adj.homEquiv _ _ (IA.ringUnderlying.hom ≫
+        (sheafCompose JX (CategoryTheory.forget CommRingCat)).map aX) =
+        (sheafCompose JY (CategoryTheory.forget CommRingCat)).map aY ≫
+          adj.homEquiv _ _ eB.hom := by
+      rw [← ha, adj.homEquiv_naturality_left]
+    have hSmul := binary_mate_iso_iff adj IA.ringUnderlying.symm
+      (IA.moduleUnderlying.app M) (IA.moduleUnderlying.app M)
+      (adj.homEquiv _ _ eB.hom) (eP.hom.app H) (eP.app H)
+      (msmul AY M) (msmul AX (IA.modules.obj M)) (msmul BX H) (msmul BY (P.obj H))
+      hLS (hOps H).2
+      ((sheafCompose JX (CategoryTheory.forget CommRingCat)).map aX) α α
+      ((sheafCompose JY (CategoryTheory.forget CommRingCat)).map aY)
+      (E M H α) (E M H α) hr hm hm
+    have hX := linear_iff aX (IA.modules.obj M) H
+      (madd AX (IA.modules.obj M)) (madd BX H)
+      (msmul AX (IA.modules.obj M)) (msmul BX H)
+      (towerAddSpec AX (IA.modules.obj M)) (towerAddSpec BX H)
+      (towerSMulSpec AX (IA.modules.obj M)) (towerSMulSpec BX H) α
+    have hY := linear_iff aY M (P.obj H) (madd AY M) (madd BY (P.obj H))
+      (msmul AY M) (msmul BY (P.obj H))
+      (towerAddSpec AY M) (towerAddSpec BY (P.obj H))
+      (towerSMulSpec AY M) (towerSMulSpec BY (P.obj H)) (E M H α)
+    constructor
+    · intro h
+      obtain ⟨ha, hs⟩ := hX.mp h
+      exact hY.mpr ⟨hAdd.mp ha, hSmul.mp hs⟩
+    · intro h
+      obtain ⟨ha, hs⟩ := hY.mp h
+      exact hX.mpr ⟨hAdd.mpr ha, hSmul.mpr hs⟩
+  obtain ⟨B, hB⟩ : ∃ B : ∀ M H,
+      (IA.modules.obj M ⟶ (restriction aX).obj H) ≃
+        (M ⟶ (restriction aY).obj (P.obj H)),
+      ∀ M H f, (underlying AY).map (B M H f) ≫ eP.hom.app H =
+        adj.homEquiv ((underlying AY).obj M) ((underlying BX).obj H)
+          (IA.moduleUnderlying.inv.app M ≫ (underlying AX).map f) := by
+    refine ⟨fun M H ↦ restrictHomEquiv (underlying AX) (underlying AY)
+      (E M H) (hImage M H), ?_⟩
+    intro M H f
+    rw [restrictHomEquiv_map]
+    exact (mateIsoEquiv_equation adj (IA.moduleUnderlying.app M) (eP.app H) _).symm
+  refine ⟨B, hB, ?_, ?_⟩
+  · intro M N a H f
+    apply (underlying AY).map_injective
+    apply (cancel_mono (eP.hom.app H)).mp
+    have hn := IA.moduleUnderlying.inv.naturality a
+    have hp : IA.moduleUnderlying.inv.app M ≫ (underlying AX).map (IA.modules.map a ≫ f) =
+        F.map ((underlying AY).map a) ≫ IA.moduleUnderlying.inv.app N ≫
+          (underlying AX).map f := by
+      erw [(underlying AX).map_comp, ← Category.assoc, ← hn, Category.assoc]
+    calc
+      _ = adj.homEquiv ((underlying AY).obj M) ((underlying BX).obj H)
+          (IA.moduleUnderlying.inv.app M ≫ (underlying AX).map (IA.modules.map a ≫ f)) :=
+        hB M H (IA.modules.map a ≫ f)
+      _ = adj.homEquiv ((underlying AY).obj M) ((underlying BX).obj H)
+          (F.map ((underlying AY).map a) ≫
+          IA.moduleUnderlying.inv.app N ≫ (underlying AX).map f) :=
+        congrArg (adj.homEquiv ((underlying AY).obj M) ((underlying BX).obj H)) hp
+      _ = (underlying AY).map a ≫
+          adj.homEquiv ((underlying AY).obj N) ((underlying BX).obj H)
+          (IA.moduleUnderlying.inv.app N ≫ (underlying AX).map f) :=
+        adj.homEquiv_naturality_left _ _
+      _ = (underlying AY).map a ≫ (underlying AY).map (B N H f) ≫ eP.hom.app H :=
+        congrArg (fun k ↦ (underlying AY).map a ≫ k) (hB N H f).symm
+      _ = _ := (Category.assoc _ _ _).symm.trans
+        (congrArg (fun k ↦ k ≫ eP.hom.app H)
+          ((underlying AY).map_comp a (B N H f)).symm)
+  · intro M H H' f b
+    apply (underlying AY).map_injective
+    apply (cancel_mono (eP.hom.app H')).mp
+    have hp : IA.moduleUnderlying.inv.app M ≫
+        (underlying AX).map (f ≫ (restriction aX).map b) =
+        (IA.moduleUnderlying.inv.app M ≫ (underlying AX).map f) ≫
+          (underlying BX).map b := by
+      change IA.moduleUnderlying.inv.app M ≫
+        ((underlying AX).map f ≫ (underlying BX).map b) = _
+      exact (Category.assoc _ _ _).symm
+    calc
+      _ = adj.homEquiv ((underlying AY).obj M) ((underlying BX).obj H')
+          (IA.moduleUnderlying.inv.app M ≫
+          (underlying AX).map (f ≫ (restriction aX).map b)) :=
+        hB M H' (f ≫ (restriction aX).map b)
+      _ = adj.homEquiv ((underlying AY).obj M) ((underlying BX).obj H')
+          ((IA.moduleUnderlying.inv.app M ≫ (underlying AX).map f) ≫
+          (underlying BX).map b) :=
+        congrArg (adj.homEquiv ((underlying AY).obj M) ((underlying BX).obj H')) hp
+      _ = adj.homEquiv ((underlying AY).obj M) ((underlying BX).obj H)
+          (IA.moduleUnderlying.inv.app M ≫ (underlying AX).map f) ≫
+          V.map ((underlying BX).map b) := adj.homEquiv_naturality_right _ _
+      _ = ((underlying AY).map (B M H f) ≫ eP.hom.app H) ≫
+          V.map ((underlying BX).map b) :=
+        congrArg (fun k ↦ k ≫ V.map ((underlying BX).map b)) (hB M H f).symm
+      _ = (underlying AY).map (B M H f) ≫
+          ((underlying BY).map (P.map b) ≫ eP.hom.app H') := by
+        exact (Category.assoc _ _ _).trans
+          (congrArg (fun k ↦ (underlying AY).map (B M H f) ≫ k)
+            (eP.hom.naturality b).symm)
+      _ = _ := by
+        change (underlying AY).map (B M H f) ≫
+          ((underlying AY).map ((restriction aY).map (P.map b)) ≫ eP.hom.app H') = _
+        exact (Category.assoc _ _ _).symm.trans
+          (congrArg (fun k ↦ k ≫ eP.hom.app H')
+            ((underlying AY).map_comp (B M H f) ((restriction aY).map (P.map b))).symm)
+
+end
+end TransportedHom
+
+attribute [local irreducible] tensorAdjunction tensorFunctor
+
+section
+variable {SY SX : Type u} [SmallCategory SY] [SmallCategory SX]
+  {JY : GrothendieckTopology SY} {JX : GrothendieckTopology SX}
+  {AY BY : Sheaf JY CommRingCat.{u}} {AX BX : Sheaf JX CommRingCat.{u}}
+  (F : Sheaf JY (Type u) ⥤ Sheaf JX (Type u))
+  (V : Sheaf JX (Type u) ⥤ Sheaf JY (Type u))
+  (adj : F ⊣ V) [PreservesFiniteLimits F]
+  (IA : AlgebraicInverseImage F AY AX) (IB : AlgebraicInverseImage F BY BX)
+  (aY : AY ⟶ BY) (aX : AX ⟶ BX)
+  (ha : F.map ((sheafCompose JY (CategoryTheory.forget CommRingCat)).map aY) ≫
+    IB.ringUnderlying.hom = IA.ringUnderlying.hom ≫
+      (sheafCompose JX (CategoryTheory.forget CommRingCat)).map aX)
+
+include V adj ha in
+private theorem exists_scalarComparison :
+    ∃ e : tensorFunctor aY ⋙ IB.modules ≅ IA.modules ⋙ tensorFunctor aX,
+      IsScalarInverseImageComparison F IA IB aY aX e := by
+  classical
+  let : PreservesLimits V := adj.rightAdjoint_preservesLimits
+  have hR := ringOperations BY BX F IB
+  obtain ⟨I', P, eI, eP, hI, hP, B, hBL, hBR, hB⟩ :=
+    geometric_module_transport JY JX F V adj BY BX BX IB.ringUnderlying.symm
+      (radd BY) (rmul BY) (radd BX) (rmul BX)
+      ⟨fun _ _ ↦ rfl, fun _ _ ↦ rfl, fun _ _ ↦ rfl, fun _ _ ↦ rfl, hR⟩ (𝟙 BX)
+  clear I' eI hI B hBL hBR hB
+  have hOps H :
+      madd BY (P.obj H) ≫ eP.hom.app H =
+        prod.map (eP.hom.app H) (eP.hom.app H) ≫
+          inv (prodComparison V ((underlying BX).obj H) ((underlying BX).obj H)) ≫
+            V.map (madd BX H) ∧
+      msmul BY (P.obj H) ≫ eP.hom.app H =
+        prod.map (adj.homEquiv _ _ IB.ringUnderlying.hom) (eP.hom.app H) ≫
+          inv (prodComparison V (GeometricConstruction.rset BX) ((underlying BX).obj H)) ≫
+            V.map (msmul BX H) := by
+    obtain ⟨aH, sH, aP, sP, k, haH, hsH, haP, hsP, hVA, hk₁, hk₂, hk⟩ := hP H
+    have h₁ : aH = madd BX H := by
+      ext U t
+      exact (haH U t).trans (towerAddSpec BX H U t).symm
+    have h₂ : sH = msmul BX H := by
+      ext U t
+      exact (hsH U t).trans (towerSMulSpec BX H U t).symm
+    have h₃ : aP = madd BY (P.obj H) := by
+      ext U t
+      exact (haP U t).trans (towerAddSpec BY (P.obj H) U t).symm
+    have h₄ : sP = msmul BY (P.obj H) := by
+      ext U t
+      exact (hsP U t).trans (towerSMulSpec BY (P.obj H) U t).symm
+    subst aH sH aP sP
+    constructor
+    · exact right_operation V (eP.app H) _ _ hVA
+    · rw [hk]
+      simp only [Iso.symm_inv] at hk₁
+      rw [right_pair V k (adj.homEquiv _ _ IB.ringUnderlying.hom)
+        (eP.hom.app H) hk₁ hk₂]
+      rfl
+  clear hP hR
+  obtain ⟨BA, hBA, hBAL, hBAR⟩ :=
+    exists_scalarHomEquiv F V adj IA P eP IB.ringUnderlying aY aX ha hOps
+  obtain ⟨BB, hBB, hBBL, hBBR⟩ :
+      ∃ BB : ∀ M H, (IB.modules.obj M ⟶ H) ≃ (M ⟶ P.obj H),
+        (∀ M H f, (underlying BY).map (BB M H f) ≫ eP.hom.app H =
+          adj.homEquiv _ _ (IB.moduleUnderlying.inv.app M ≫ (underlying BX).map f)) ∧
+        (∀ {M N} (a : M ⟶ N) H f,
+          BB M H (IB.modules.map a ≫ f) = a ≫ BB N H f) ∧
+        (∀ M {H H'} f (b : H ⟶ H'), BB M H' (f ≫ b) = BB M H f ≫ P.map b) := by
+    obtain ⟨B, hB, hBL, hBR⟩ :=
+      exists_scalarHomEquiv F V adj IB P eP IB.ringUnderlying (𝟙 BY) (𝟙 BX)
+        (by simp) hOps
+    exact ⟨B, hB, hBL, hBR⟩
+  obtain ⟨e, he⟩ := towerLeftComparison (tensorAdjunction aY) (tensorAdjunction aX)
+    IA.modules IB.modules P BA BB hBAL hBAR hBBL hBBR
+  have hu M : F.map (tensorUnit aY M) ≫
+      IB.moduleUnderlying.inv.app ((tensorFunctor aY).obj M) ≫
+        (underlying BX).map (e.hom.app M) =
+      IA.moduleUnderlying.inv.app M ≫ tensorUnit aX (IA.modules.obj M) := by
+    let H := (tensorFunctor aX).obj (IA.modules.obj M)
+    have h := he M
+    have hh := congrArg (fun f ↦ (underlying AY).map f ≫ eP.hom.app H) h
+    rw [Adjunction.homEquiv_unit, (underlying AY).map_comp] at hh
+    change (tensorUnit aY M ≫
+      (underlying BY).map (BB ((tensorFunctor aY).obj M) H (e.hom.app M))) ≫
+        eP.hom.app H =
+      (underlying AY).map (BA M H ((tensorAdjunction aX).unit.app (IA.modules.obj M))) ≫
+        eP.hom.app H at hh
+    apply (adj.homEquiv ((underlying AY).obj M) ((underlying BX).obj H)).injective
+    calc
+      _ = tensorUnit aY M ≫ adj.homEquiv _ _
+          (IB.moduleUnderlying.inv.app ((tensorFunctor aY).obj M) ≫
+            (underlying BX).map (e.hom.app M)) := adj.homEquiv_naturality_left _ _
+      _ = tensorUnit aY M ≫
+          ((underlying BY).map (BB ((tensorFunctor aY).obj M) H (e.hom.app M)) ≫
+            eP.hom.app H) :=
+        congrArg (fun k ↦ tensorUnit aY M ≫ k)
+          (hBB ((tensorFunctor aY).obj M) H (e.hom.app M)).symm
+      _ = (underlying AY).map
+          (BA M H ((tensorAdjunction aX).unit.app (IA.modules.obj M))) ≫
+            eP.hom.app H := (Category.assoc _ _ _).symm.trans hh
+      _ = _ := hBA M H ((tensorAdjunction aX).unit.app (IA.modules.obj M))
+  refine ⟨e, ?_⟩
+  intro M T s m z hz W q
+  have hs := IB.moduleSMul ((tensorFunctor aY).obj M) T s
+    (m ≫ tensorUnit aY M) z (by
+      intro U t
+      exact (hz U t).trans ((scalarPure_one aY M U _ _).trans
+        (congrArg (fun v ↦ s.hom.app U t • v) (scalarUnit_apply aY M U _).symm))) W q
+  let z' : (IB.modules.obj ((tensorFunctor aY).obj M)).val.obj W :=
+    (F.map z ≫ IB.moduleUnderlying.inv.app _).hom.app W q
+  let s' : BX.obj.obj W := (F.map s ≫ IB.ringUnderlying.hom).hom.app W q
+  let m' : (IA.modules.obj M).val.obj W :=
+    (F.map m ≫ IA.moduleUnderlying.inv.app M).hom.app W q
+  let u' : (IB.modules.obj ((tensorFunctor aY).obj M)).val.obj W :=
+    (F.map (m ≫ tensorUnit aY M) ≫ IB.moduleUnderlying.inv.app _).hom.app W q
+  have hs' : z' = s' • u' := hs
+  change (e.hom.app M).val.app W z' = scalarPure aX (IA.modules.obj M) W s' m'
+  have hmMap : (F.map (m ≫ tensorUnit aY M) ≫
+      IB.moduleUnderlying.inv.app _) ≫ (underlying BX).map (e.hom.app M) =
+      (F.map m ≫ IA.moduleUnderlying.inv.app M) ≫ tensorUnit aX (IA.modules.obj M) := by
+    calc
+      _ = F.map m ≫ (F.map (tensorUnit aY M) ≫
+          IB.moduleUnderlying.inv.app _ ≫ (underlying BX).map (e.hom.app M)) := by
+        exact (congrArg (fun f ↦ (f ≫ IB.moduleUnderlying.inv.app _) ≫
+          (underlying BX).map (e.hom.app M)) (F.map_comp m (tensorUnit aY M))).trans
+            ((Category.assoc _ _ _).trans (Category.assoc _ _ _))
+      _ = F.map m ≫ (IA.moduleUnderlying.inv.app M ≫
+          tensorUnit aX (IA.modules.obj M)) := congrArg (fun f ↦ F.map m ≫ f) (hu M)
+      _ = _ := (Category.assoc _ _ _).symm
+  have hmUnit : (e.hom.app M).val.app W u' =
+      ((tensorAdjunction aX).unit.app (IA.modules.obj M)).val.app W m' :=
+    congrArg (fun f ↦ f.hom.app W q) hmMap
+  have hm : (e.hom.app M).val.app W u' = scalarPure aX (IA.modules.obj M) W 1 m' :=
+    hmUnit.trans (scalarUnit_apply aX (IA.modules.obj M) W m')
+  exact (congrArg ((e.hom.app M).val.app W) hs').trans
+    ((((e.hom.app M).val.app W).hom.map_smul s' u').trans
+      ((congrArg (fun v ↦ s' • v) hm).trans
+        (scalarPure_one aX (IA.modules.obj M) W s' m').symm))
+
+end
+
+set_option backward.isDefEq.respectTransparency false
+
+section CompositeComparison
+variable {SY SX : Type u} [SmallCategory SY] [SmallCategory SX]
+  {JY : GrothendieckTopology SY} {JX : GrothendieckTopology SX}
+  {AY BY CY : Sheaf JY CommRingCat.{u}} {AX BX CX : Sheaf JX CommRingCat.{u}}
+  (F : Sheaf JY (Type u) ⥤ Sheaf JX (Type u))
+  (IA : AlgebraicInverseImage F AY AX) (IB : AlgebraicInverseImage F BY BX)
+  (IC : AlgebraicInverseImage F CY CX)
+  (aY : AY ⟶ BY) (bY : BY ⟶ CY) (aX : AX ⟶ BX) (bX : BX ⟶ CX)
+  (tY : tensorFunctor aY ⋙ tensorFunctor bY ≅ tensorFunctor (aY ≫ bY))
+  (tX : tensorFunctor aX ⋙ tensorFunctor bX ≅ tensorFunctor (aX ≫ bX))
+  (χAB : tensorFunctor aY ⋙ IB.modules ≅ IA.modules ⋙ tensorFunctor aX)
+  (χBC : tensorFunctor bY ⋙ IC.modules ≅ IB.modules ⋙ tensorFunctor bX)
+
+private noncomputable def compositeScalarComparison :
+    tensorFunctor (aY ≫ bY) ⋙ IC.modules ≅ IA.modules ⋙ tensorFunctor (aX ≫ bX) :=
+  Functor.isoWhiskerRight tY.symm IC.modules ≪≫
+    Functor.associator (tensorFunctor aY) (tensorFunctor bY) IC.modules ≪≫
+    Functor.isoWhiskerLeft (tensorFunctor aY) χBC ≪≫
+    (Functor.associator (tensorFunctor aY) IB.modules (tensorFunctor bX)).symm ≪≫
+    Functor.isoWhiskerRight χAB (tensorFunctor bX) ≪≫
+    Functor.associator IA.modules (tensorFunctor aX) (tensorFunctor bX) ≪≫
+    Functor.isoWhiskerLeft IA.modules tX
+
+private theorem compositeScalarComparison_app (M : SheafOfModules.{u} (ringSheaf AY)) :
+    (compositeScalarComparison F IA IB IC aY bY aX bX tY tX χAB χBC).hom.app M =
+      IC.modules.map (tY.inv.app M) ≫ χBC.hom.app ((tensorFunctor aY).obj M) ≫
+        (tensorFunctor bX).map (χAB.hom.app M) ≫ tX.hom.app (IA.modules.obj M) := by
+  simp [compositeScalarComparison]
+
+attribute [local irreducible] compositeScalarComparison
+
+private noncomputable def ringOneSection (T : Sheaf JY (Type u)) :
+    T ⟶ (sheafCompose JY (CategoryTheory.forget CommRingCat)).obj BY :=
+  ⟨{ app := fun W ↦ ↾(fun _ ↦ (1 : BY.obj.obj W))
+     naturality := by intro U W f; ext x; exact (map_one (BY.obj.map f).hom).symm }⟩
+
+private theorem compositeScalarComparison_normalized
+    (htY : IsScalarReassociation aY bY tY) (htX : IsScalarReassociation aX bX tX)
+    (hAB : IsScalarInverseImageComparison F IA IB aY aX χAB)
+    (hBC : IsScalarInverseImageComparison F IB IC bY bX χBC) :
+    IsScalarInverseImageComparison F IA IC (aY ≫ bY) (aX ≫ bX)
+      (compositeScalarComparison F IA IB IC aY bY aX bX tY tX χAB χBC) := by
+  intro M T s m z hz W q
+  let m₁ := m ≫ tensorUnit aY M
+  let z₁ := z ≫ (underlying CY).map (tY.inv.app M)
+  have hm₁ U t : m₁.hom.app U t = scalarPure aY M U 1 (m.hom.app U t) :=
+    scalarUnit_apply aY M U (m.hom.app U t)
+  have hz₁ U t : z₁.hom.app U t =
+      scalarPure bY ((tensorFunctor aY).obj M) U (s.hom.app U t) (m₁.hom.app U t) := by
+    change (tY.inv.app M).val.app U (z.hom.app U t) = _
+    rw [hz, htY.2, hm₁]
+  have hb := hBC ((tensorFunctor aY).obj M) T s m₁ z₁ hz₁ W q
+  have hab := hAB M T (ringOneSection (BY := BY) T) m m₁
+    (fun U t ↦ hm₁ U t) W q
+  have hone := IB.ringOne T (ringOneSection (BY := BY) T) (fun _ _ ↦ rfl) W q
+  change (F.map (ringOneSection (BY := BY) T) ≫ IB.ringUnderlying.hom).hom.app W q =
+    (1 : BX.obj.obj W) at hone
+  rw [hone] at hab
+  have hnMap : (F.map z ≫ IC.moduleUnderlying.inv.app _) ≫
+      (underlying CX).map (IC.modules.map (tY.inv.app M)) =
+      F.map z₁ ≫ IC.moduleUnderlying.inv.app _ := by
+    calc
+      _ = F.map z ≫ (IC.moduleUnderlying.inv.app _ ≫
+          (underlying CX).map (IC.modules.map (tY.inv.app M))) := Category.assoc _ _ _
+      _ = F.map z ≫ (F.map ((underlying CY).map (tY.inv.app M)) ≫
+          IC.moduleUnderlying.inv.app _) :=
+        congrArg (fun f ↦ F.map z ≫ f)
+          (IC.moduleUnderlying.inv.naturality (tY.inv.app M)).symm
+      _ = _ := (Category.assoc _ _ _).symm.trans
+        (congrArg (fun f ↦ f ≫ IC.moduleUnderlying.inv.app _)
+          (F.map_comp z ((underlying CY).map (tY.inv.app M))).symm)
+  have hn := congrArg (fun f ↦ f.hom.app W q) hnMap
+  change (IC.modules.map (tY.inv.app M)).val.app W
+    ((F.map z ≫ IC.moduleUnderlying.inv.app _).hom.app W q) =
+    (F.map z₁ ≫ IC.moduleUnderlying.inv.app _).hom.app W q at hn
+  let v₀ : (IC.modules.obj ((tensorFunctor (aY ≫ bY)).obj M)).val.obj W :=
+    (F.map z ≫ IC.moduleUnderlying.inv.app _).hom.app W q
+  let v₁ : (IC.modules.obj ((tensorFunctor bY).obj ((tensorFunctor aY).obj M))).val.obj W :=
+    (F.map z₁ ≫ IC.moduleUnderlying.inv.app _).hom.app W q
+  let v₂ : (IB.modules.obj ((tensorFunctor aY).obj M)).val.obj W :=
+    (F.map m₁ ≫ IB.moduleUnderlying.inv.app _).hom.app W q
+  let c : CX.obj.obj W := (F.map s ≫ IC.ringUnderlying.hom).hom.app W q
+  let m₀ : (IA.modules.obj M).val.obj W :=
+    (F.map m ≫ IA.moduleUnderlying.inv.app M).hom.app W q
+  have h₀ : (IC.modules.map (tY.inv.app M)).val.app W v₀ = v₁ := hn
+  have h₁ : (χBC.hom.app ((tensorFunctor aY).obj M)).val.app W v₁ =
+      scalarPure bX (IB.modules.obj ((tensorFunctor aY).obj M)) W c v₂ := hb
+  have h₂ : (χAB.hom.app M).val.app W v₂ =
+      scalarPure aX (IA.modules.obj M) W 1 m₀ := hab
+  have h₃ : ((tensorFunctor bX).map (χAB.hom.app M)).val.app W
+      (scalarPure bX (IB.modules.obj ((tensorFunctor aY).obj M)) W c v₂) =
+      scalarPure bX ((tensorFunctor aX).obj (IA.modules.obj M)) W c
+        ((χAB.hom.app M).val.app W v₂) := scalarPure_map bX (χAB.hom.app M) W c v₂
+  have h₄ : (tX.hom.app (IA.modules.obj M)).val.app W
+      (scalarPure bX ((tensorFunctor aX).obj (IA.modules.obj M)) W c
+        (scalarPure aX (IA.modules.obj M) W 1 m₀)) =
+      scalarPure (aX ≫ bX) (IA.modules.obj M) W c m₀ := by
+    simpa only [map_one, mul_one] using htX.1 (IA.modules.obj M) W c 1 m₀
+  change ((compositeScalarComparison F IA IB IC aY bY aX bX tY tX χAB χBC).hom.app M).val.app W
+    v₀ = _
+  rw [compositeScalarComparison_app]
+  change (tX.hom.app (IA.modules.obj M)).val.app W
+    (((tensorFunctor bX).map (χAB.hom.app M)).val.app W
+      ((χBC.hom.app ((tensorFunctor aY).obj M)).val.app W
+        ((IC.modules.map (tY.inv.app M)).val.app W v₀))) = _
+  exact (congrArg (fun v ↦ (tX.hom.app (IA.modules.obj M)).val.app W
+    (((tensorFunctor bX).map (χAB.hom.app M)).val.app W
+      ((χBC.hom.app ((tensorFunctor aY).obj M)).val.app W v))) h₀).trans
+    ((congrArg (fun v ↦ (tX.hom.app (IA.modules.obj M)).val.app W
+      (((tensorFunctor bX).map (χAB.hom.app M)).val.app W v)) h₁).trans
+      ((congrArg ((tX.hom.app (IA.modules.obj M)).val.app W) h₃).trans
+        ((congrArg (fun v ↦ (tX.hom.app (IA.modules.obj M)).val.app W
+          (scalarPure bX ((tensorFunctor aX).obj (IA.modules.obj M)) W c v)) h₂).trans h₄)))
+
+end CompositeComparison
+
+end ProofHelpers
+
 /-- The normalized ordinary scalar-tower square, also evaluated termwise on complexes.
 Source: blueprint main-20261015, det-prop-scalar-six-pullback.proof.md (3);
 Stacks 03EK, 03EL (blueprint: lem-sfb-scalar-inverse-image-tower-diagram).
 
-Proof: (1) Apply the normalized algebraic inverse-image tensor comparison to the
-scalar module and M. Transport of multiplication makes the comparison linear over
-the final coefficient ring; its pure-pairing equation also preserves 1 tensor m.
-(2) Descend c tensor (s tensor m) to c*b(s) tensor m through the B-balance and the
-inner A-balance and sheafification. Insertion of 1 gives the inverse. Both maps
-are C-linear, natural, and their composites are identities, by those same balances.
-(3) A C-linear map out of the inverse image of the double extension is determined
-by its restriction along the transported composite of the two scalar-adjunction
-units. To see this, take its mate under the geometric adjunction. Transport of
-action makes that mate C-linear. The two extension/restriction adjunction Hom
-bijections determine it from that composite, and the geometric Hom bijection is
-injective. This argument uses generalized elements, not points of the topos.
-(4) Both routes on the composite unit send m to 1 tensor m: the second first gives
-1 tensor (1 tensor m), then reassociates. On a generalized triple both give
-c*b(s) tensor m, with the actual C-action. Thus (3) gives equality of the routes.
-(5) Naturality makes this an equality of natural transformations. Evaluate it in
-every integer degree of a cochain complex; naturality for its differentials makes
-the same equality one of chain maps. No derived functor or K-flatness is used.
+Proof: (1) Compose the extension/restriction adjunctions. Restriction along a
+composite agrees with successive restriction, so uniqueness of left adjoints gives
+scalar reassociation. Its unit equation, scalar linearity, and balancing give both
+specified pure-tensor formulas.
+(2) Construct the module direct image using geometric module transport. The
+underlying sheaf adjunction restricts to the semilinear Hom bijections for the
+given inverse-image presentations: addition and scalar action correspond by the
+binary mate equations. Both orders of inverse image and scalar extension are
+left adjoint to the same restricted direct image. Uniqueness of left adjoints
+provides a natural comparison carrying the transported scalar unit to the scalar
+unit. The graph equation for scalar action and linearity give its normalization
+on every generalized pure tensor.
+(3) Construct the A-to-C comparison by pasting inverse reassociation over Y, the
+two successive comparisons, and reassociation over X. Its normalization follows
+by inserting 1 in the inner tensor, applying the two comparison formulas, using
+preservation of 1, and reassociating over X. This uses arbitrary test sheaves,
+without assuming that global pure tensors generate the tensor sheaf.
+(4) Cancel reassociation with its inverse to obtain the natural-transformation
+square. Evaluate it at each object K.X n to obtain the termwise equality. No
+derived functor, flatness, or K-flat preservation is used.
 
 The existential isomorphisms are pinned by the displayed quotient formulas, so
 this states the square for the specified comparisons, rather than arbitrary isos.
@@ -147,6 +890,32 @@ theorem scalar_inverseImage_tower_diagram
           χBC.hom.app ((tensorFunctor aY).obj (K.X n)) ≫
             (tensorFunctor bX).map (χAB.hom.app (K.X n)) ≫
               tX.hom.app (IA.modules.obj (K.X n)) := by
-  sorry
+  obtain ⟨χAB, hAB⟩ := exists_scalarComparison F V _adj IA IB aY aX _ha
+  obtain ⟨χBC, hBC⟩ := exists_scalarComparison F V _adj IB IC bY bX _hb
+  let tY := scalarReassoc aY bY
+  let tX := scalarReassoc aX bX
+  let χAC := compositeScalarComparison F IA IB IC aY bY aX bX tY tX χAB χBC
+  have hsq : Functor.whiskerRight tY.hom IC.modules ≫ χAC.hom =
+      (Functor.associator (tensorFunctor aY) (tensorFunctor bY) IC.modules).hom ≫
+        Functor.whiskerLeft (tensorFunctor aY) χBC.hom ≫
+        (Functor.associator (tensorFunctor aY) IB.modules (tensorFunctor bX)).inv ≫
+        Functor.whiskerRight χAB.hom (tensorFunctor bX) ≫
+        (Functor.associator IA.modules (tensorFunctor aX) (tensorFunctor bX)).hom ≫
+        Functor.whiskerLeft IA.modules tX.hom := by
+    apply NatTrans.ext
+    funext M
+    change IC.modules.map (tY.hom.app M) ≫ χAC.hom.app M = _
+    rw [compositeScalarComparison_app]
+    simp only [NatTrans.comp_app, Functor.whiskerLeft_app, Functor.whiskerRight_app,
+      Functor.associator_hom_app, Functor.associator_inv_app,
+      Category.id_comp]
+    rw [← Category.assoc, ← IC.modules.map_comp, tY.hom_inv_id_app, IC.modules.map_id,
+      Category.id_comp]
+  refine ⟨tY, tX, χAB, χBC, χAC, scalarReassoc_normalized aY bY,
+    scalarReassoc_normalized aX bX, hAB, hBC, ?_, hsq, ?_⟩
+  · exact compositeScalarComparison_normalized F IA IB IC aY bY aX bX tY tX χAB χBC
+      (scalarReassoc_normalized aY bY) (scalarReassoc_normalized aX bX) hAB hBC
+  · intro K n
+    simpa using congr_app hsq (K.X n)
 
 end SheafOfModules.RingedTensor
