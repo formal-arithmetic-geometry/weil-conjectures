@@ -14,19 +14,19 @@
  ],
  "proof": [
   {
-   "text": "Write $R$ for the actual integral coefficient ring of [def-weil-pbc-continuous-integral-coefficients], and $Q$ for passage from complexes of $R$-modules to their ordinary derived category. First fix any complex $C$ zero below an integer $a$. Its scalar sequence has a colimit cocone $c$ by [lem-weil-pbc-integral-complex-telescope]. All its stages are $C$, so they share the cohomological lower bound $a$. Good truncation at $a$ changes no stage up to the natural truncation isomorphism, since every term below $a$ is zero; transporting $c$ along this isomorphism gives precisely the indicated good-truncated telescope colimit. We will prove shifted Hom continuity for this cocone before using a representative of $B$.",
+   "text": "For a complex C strictly zero below a, every stage of its scalar sequence is C. The natural projection to good truncation at a is an isomorphism at every stage, by HomologicalComplex.isIso_πTruncGE_iff. Precompose the canonical colimit cocone of the truncated diagram with this natural isomorphism. IsColimit.precomposeHomEquiv proves that condensedContinuityCocone is a colimit cocone for the original lifted sequence. Thus no separate identification of its vertex with scalar extension is needed in this step.",
    "uses": [
     "def-weil-pbc-continuous-integral-coefficients",
-    "lem-weil-pbc-integral-complex-telescope"
+    "def-weil-pbc-integral-localization-telescope"
    ],
-   "elementary": false,
+   "elementary": true,
    "source": {
     "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
     "place": "Lemma 5.3, common lower bound; Bhatt–Scholze Lemma 6.8.2"
    }
   },
   {
-   "text": "Whisker the complex diagram and its cocone by the equivalence $\\operatorname{AsSmall}(\\mathbf N)\\simeq\\mathbf N$. A compatible family out of either diagram is exactly a compatible family out of the other, so the colimit universal property is unchanged; the lower bound is still $a$. For every constructible $R$-module sheaf $M$, [lem-weil-pbc-integral-constructible-sheaf-hom] applies to this cocone and gives $H(QD,Qc)(M[0])$ in the notation of [def-weil-pbc-hom-colimit-property], for every integer target shift. The field, finite-extension, topologically Noetherian and ordinary-coefficient hypotheses are exactly those of the item.",
+   "text": "Whisker the complex diagram and its cocone by AsSmall(ℕ) ≌ ULift(ℕ). IsColimit.whiskerEquivalence preserves the colimit cocone. Every stage is C, whose strict lower bound gives the cohomological lower bound a on Q(C). Apply integralConstructible_sheaf_hom_colimit to each constructible integral module M, for every target shift, on this AsSmall-indexed cocone. IsColimit.ofWhiskerEquivalence then gives the same Hom-colimit property on the original lifted diagram. The coefficient and topological hypotheses are unchanged.",
    "uses": [
     "lem-weil-pbc-integral-constructible-sheaf-hom",
     "def-weil-pbc-hom-colimit-property"
@@ -38,7 +38,7 @@
    }
   },
   {
-   "text": "For this fixed diagram and cocone, put $P(T)=H(QD,Qc)(T)$. It contains zero, since both Hom groups are zero. An isomorphism $T\\simeq T'$ gives isomorphisms of the source Hom diagrams and target groups by precomposition, commuting with all cocone legs, hence transfers $P$. Also $\\operatorname{Hom}(T[m],QD_i[q])\\cong\\operatorname{Hom}(T,QD_i\\lbrack q-m\\rbrack)$, naturally in $i$ and in the cocone legs. Thus $P(T)$ implies $P(T[m])$ for every integer $m$; applying this with $-m$ gives the converse.",
+   "text": "For this fixed diagram and cocone, shifted Hom continuity is invariant under source isomorphisms: preadditiveCoyoneda.mapIso gives an isomorphism of Hom functors, and IsColimit.mapCoconeEquiv transports the colimit property. Shift invariance follows from homColimitProperty_shift, the proved helper of the extension module, using the shift adjunction and shift-add isomorphism. The finite cohomology witness already handles zero and acyclic sources through its cohomology leaves, so a separate zero-closure argument is unnecessary.",
    "uses": [
     "def-weil-pbc-hom-colimit-property"
    ],
@@ -94,7 +94,6 @@
   "def-weil-triangulated-category",
   "lem-sfb-bounded-cohomology-cone-witness",
   "lem-weil-pbc-hom-colimit-extension",
-  "lem-weil-pbc-integral-complex-telescope",
   "lem-weil-pbc-integral-constructible-sheaf-hom",
   "lem-weil-pbc-integral-localization-colimit-transport",
   "lem-weil-pbc-integral-localization-complex-model"
@@ -102,7 +101,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
-  "place": "Lemma 6.8.12, the scalar-localization application in Proposition 6.8.14(2); expanded finite cone induction and strict telescope transport using existing DAG statements. Hemo–Richarz–Scholbach Lemma 5.3 supplies the common-lower-bound formulation."
+  "place": "Lemma 6.8.12, the scalar-localization application in Proposition 6.8.14(2); expanded finite cone induction and strict telescope transport using existing DAG statements. Hemo–Richarz–Scholbach Lemma 5.3 supplies the common-lower-bound formulation. H2: Lean proof uses the truncation projection isomorphism and canonical truncated colimit directly in step 1; finite witness induction and equivalence transport implement the remaining steps."
  },
  "mathlib_searches": [
   {
@@ -251,7 +250,6 @@
   "def-weil-triangulated-category",
   "lem-sfb-bounded-cohomology-cone-witness",
   "lem-weil-pbc-hom-colimit-extension",
-  "lem-weil-pbc-integral-complex-telescope",
   "lem-weil-pbc-integral-constructible-sheaf-hom",
   "lem-weil-pbc-integral-localization-colimit-transport",
   "lem-weil-pbc-integral-localization-complex-model"
@@ -282,5 +280,15 @@
   "group": "NY",
   "result": "pass",
   "note": "Item lean statement matches node clause by clause: Fact ℓ.Prime; E : Type normed finite-dim over ℚ_ℓ (dep convention); Scheme.{u} with NoetherianSpace only; K B : integralConstructible (recorded BoundedConstructible abbrev). The ℕ conjunct ∀ q IsIso colimit.desc of (shift q ⋙ preadditiveCoyoneda K).mapCocone integralLocalizationCocone has stages B, transitions ℓ•𝟙, vertex U L B and legs unit ≫ U.map(inv(ℓ•𝟙)^n), with the colimit in AddCommGrpCat only. The ULift conjunct homColimitProperty on the lifted sequence/cocone uses ULift.{u+1}, matching I : Type (Hom universe). Statement field is verbatim in the file; node unchanged apart from the lean record; first delivery, not dropped. No duplicate: SequentialHom gives factorization only, SheafHom has a sheaf source, LfpHomContinuity has lfp sources, Devissage has a generic Λ, LocalizationContinuity is about pushforward homology. No defs, sorry only, docstrings carry source, blueprint and six steps; proof-only imports exist live. Advisory: redundant Pretriangulated import. Not recompiled per instruction; worker compile clean."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261021T151119-L-1134108",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
