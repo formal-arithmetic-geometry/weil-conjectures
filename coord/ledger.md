@@ -21992,3 +21992,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:46 L: merged deliver/Q63/lem-per-continuous-coefficient-slice-normalization (stage 2; reviewer PASS; parallel immutable checks)
 - 09:46 L: merged deliver/Q72/lem-trf-section-local-dualizing-comparisons (stage 2; reviewer PASS; parallel immutable checks)
 - 09:48 L: returned deliver/NE/lem-weil-pbc-finite-field-stratified-perfect-models (reviewer RETURN: A7/B10 (superseded): the item's Lean is already closed. logs/svc.log l.79670 records 'LANDED 3 M1 Sheaf.Paper.FiniteFiel)
+- 09:48 L: merged deliver/Q29/lem-weil-pbc-derived-tensor-shift-descent (stage 2; reviewer PASS; parallel immutable checks)

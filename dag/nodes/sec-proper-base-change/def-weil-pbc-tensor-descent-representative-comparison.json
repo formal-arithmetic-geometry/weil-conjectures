@@ -1,0 +1,117 @@
+{
+ "id": "def-weil-pbc-tensor-descent-representative-comparison",
+ "kind": "definition",
+ "title": "Published flat-term K-flat representatives and their two-factor tensor comparison",
+ "statement": "Let $\\mathcal C$ be a site essentially small relative to the coefficient universe, $R$ a sheaf of commutative rings, and $\\operatorname{Mod}(R)$ its category of module sheaves [def-weil-sheaf-of-modules-category]. Write $\\operatorname{Ch}(R)$, $K(R)$ and $D(R)$ for its integer-indexed cochain, homotopy and unbounded derived categories, with quotient $q:\\operatorname{Ch}(R)\\to K(R)$ and localizations $Q_h:K(R)\\to D(R)$, $Q:\\operatorname{Ch}(R)\\to D(R)$ [def-weil-abstract-derived-category]. Define $\\operatorname{SiteTensorComplexFunctor}_R(P,S)=\\operatorname{Tot}(P\\otimes_R S)$ using the existing sheaf total tensor [def-pc-tensor-complex-sheaves]. Define $\\operatorname{TensorFlatRepresentative}_R(P)$ to mean that $P$ is K-flat [def-pc-kflat-complex] and every term $P^i$ is flat [def-pc-flat-sheaf-modules].\nUse exactly the chosen resolving predicate $\\mathcal P_R$, homotopy tensor bifunctor $B$, chain-to-homotopy comparison $\\eta:(q\\times q)B\\cong q\\operatorname{Tot}$, published derived tensor $T$, and resolving comparison $\\gamma:Q_hB|_{\\mathcal P_R\\times\\mathcal P_R}\\cong T(Q_h-,Q_h-)$ from the recorded descent construction [lem-weil-pbc-site-derived-tensor-descent]. The wrappers $\\operatorname{tensorDescentClass}$, $\\operatorname{tensorDescentComplexIso}$ and $\\operatorname{tensorDescentDerivedIso}$ are respectively that same $\\mathcal P_R$, $\\eta$ and $\\gamma$, selected from that same descent datum. Define $\\operatorname{siteRestrictionDerivedTensor}$ to be the curry of this specified $T$.\nFor complexes $P,S$ and proofs $h_P,h_S$ of $\\operatorname{TensorFlatRepresentative}_R$, let $\\bar P,\\bar S$ be $qP,qS$ equipped with the resolving-predicate proofs supplied by that datum. Let $\\lambda_X:Q_h(qX)\\cong QX$ be the canonical quotient-localization comparison. Define $\\operatorname{tensorDescentPair}(P,S,h_P,h_S):Q\\operatorname{Tot}(P\\otimes_R S)\\cong T(QP,QS)$ by the composite, in order of application,\n$$\\lambda_{\\operatorname{Tot}(P\\otimes_R S)}^{-1}\\ ;\\ Q_h(\\eta_{P,S}^{-1})\\ ;\\ \\gamma_{\\bar P,\\bar S}\\ ;\\ T(\\lambda_P,\\lambda_S).$$\nThis is a definition of the published representative comparison, without a choice of another tensor bifunctor or an additional assertion about scalar restriction.",
+ "source": {
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS and 06YU, lemma-K-flat-resolution and definition-derived-tor with its preceding construction; published resolving comparison of lem-weil-pbc-site-derived-tensor-descent, exposed in lean/Sheaf/Paper/SiteDerivedTensorRestriction.lean: tensorDescentClass through tensorDescentPair."
+ },
+ "stmt_deps": [
+  "def-weil-sheaf-of-modules-category",
+  "def-weil-abstract-derived-category",
+  "def-pc-tensor-complex-sheaves",
+  "def-pc-kflat-complex",
+  "def-pc-flat-sheaf-modules",
+  "lem-weil-pbc-site-derived-tensor-descent"
+ ],
+ "proof": [],
+ "proof_deps": [],
+ "proof_origin": null,
+ "mathlib_searches": [
+  {
+   "tool": "grep",
+   "query": "TensorFlatRepresentative|tensorDescentPair|SiteTensorComplexFunctor|tensorDescentClass|tensorDescentComplexIso|tensorDescentDerivedIso|siteRestrictionDerivedTensor",
+   "results": "0 hits: ",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match for these chosen site-derived-tensor comparison wrappers; reuse the exact published project declarations with existing: true."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Flat term K flat representatives and the canonical two factor total tensor comparison with the published derived tensor on a ringed site",
+   "results": "8 hits: Module.Flat.tfae_equational_criterion, Module.Flat.iff_flat_tensorProduct, Module.Flat.of_flat_tensorProduct, Module.flat_iff, Module.Flat.instTensorProduct, Module.Flat.iff_lTensor_injectiveₛ, LinearMap.tensorKerEquiv_apply, Module.Flat.iff_rTensor_preserves_shortComplex_exact",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match for these chosen site-derived-tensor comparison wrappers; reuse the exact published project declarations with existing: true."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Curried derived tensor with canonical comparison from total tensor of two K flat complexes with flat terms",
+   "results": "8 hits: HomologicalComplex.instHasGoodTensor₁₂OfHasGoodTensor₁₂TensorX, HomologicalComplex.HasGoodTensor₁₂, HomologicalComplex.instHasGoodTensor₂₃OfHasGoodTensorTensor₂₃X, HomologicalComplex.HasGoodTensor₂₃, HomologicalComplex.ιTensorObj, HomologicalComplex.HasTensor, HomologicalComplex.instHasTensorOfHasTensorX, HomologicalComplex.tensorObj",
+   "date": "2026-10-21",
+   "verdict": "No Mathlib match for these chosen site-derived-tensor comparison wrappers; reuse the exact published project declarations with existing: true."
+  },
+  {
+   "tool": "grep",
+   "query": "TensorFlatRepresentative|tensorDescentPair|SiteTensorComplexFunctor|tensorDescentClass|tensorDescentComplexIso|tensorDescentDerivedIso|siteRestrictionDerivedTensor in dag/nodes, lean/WeilConjectures and lean/Sheaf; blueprint_refs.py search flat-term K-flat",
+   "results": "The seven exact definitions are published in Sheaf.Paper.SiteDerivedTensorRestriction. No match in WeilConjectures or Mathlib. DAG name hits are the restriction theorem record and the cochain-tensor-rigidity theorem statement; neither is a definition node owning these declarations. Blueprint search gives def-cbc-completed-exchange-map and def-wf-tensor-product, neither defining this resolving comparison.",
+   "date": "2026-10-21",
+   "verdict": "Existing declarations, no existing definition owner: add an existing:true definition node without copying Lean."
+  }
+ ],
+ "mathlib_match": null,
+ "status": "split",
+ "created": {
+  "by": "worker",
+  "item": "lem-weil-pbc-derived-tensor-shift-descent",
+  "date": "2026-10-21",
+  "group": "Q29"
+ },
+ "blueprint": {
+  "is": null,
+  "from": {
+   "node": "lemma-weil-pbc-perfect-projection-formula",
+   "place": "Detailed proof, first paragraph: 'closed under shifts' and 'under cones', specifically commutation with shift comparisons for tensor and its fixed-argument transformations (old item Steps 8-9).",
+   "via": [
+    "lem-weil-pbc-derived-tensor-shift-descent",
+    "lem-weil-pbc-kflat-fixed-tensor-triangulated",
+    "lem-weil-pbc-ringed-projection-mate-exact"
+   ]
+  },
+  "same_as": []
+ },
+ "lean_audit": {
+  "master": {
+   "state": "none"
+  },
+  "slopmaster2": {
+   "state": "none"
+  }
+ },
+ "chapter": "sec-proper-base-change",
+ "unit": "sk-thm-properbasechange",
+ "lean": {
+  "module": "Sheaf.Paper.SiteDerivedTensorRestriction",
+  "declaration": "CategoryTheory.tensorDescentPair",
+  "declarations": [
+   "CategoryTheory.SiteTensorComplexFunctor",
+   "CategoryTheory.tensorDescentClass",
+   "CategoryTheory.tensorDescentComplexIso",
+   "CategoryTheory.tensorDescentDerivedIso",
+   "CategoryTheory.TensorFlatRepresentative",
+   "CategoryTheory.siteRestrictionDerivedTensor",
+   "CategoryTheory.tensorDescentPair"
+  ],
+  "statement": "def tensorDescentPair [HasDerivedCategory.{w} (ringedSiteModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R))]\n    (P Q : CochainComplex (ringedSiteModules.{r}\n      ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ)\n    (hP : TensorFlatRepresentative P) (hQ : TensorFlatRepresentative Q) :\n    DerivedCategory.Q.obj (((SiteTensorComplexFunctor R).obj P).obj Q) ≅\n      ((siteRestrictionDerivedTensor (R := R)).obj (DerivedCategory.Q.obj P)).obj\n        (DerivedCategory.Q.obj Q)",
+  "branch": "newtargets-dag",
+  "by": "Q29",
+  "date": "2026-10-21",
+  "existing": true,
+  "note": "Return H2 repair: definition owner for these seven exact published helpers. Their only theorem choice is from the already cited site-derived-tensor-descent datum, not siteDerivedTensorRestriction. No Lean is copied or changed; the helper constructors are real definitions, with the recorded canonical comparison formula."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b88f17d9",
+  "group": "Q29",
+  "result": "pass",
+  "note": "new definition node of a stage-2 delivery, read against its source by the reviewer"
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b88f17d9",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Re-delivery repairing the H2 return of 11346db0. Lean module byte-identical (sha256 dcd98fb9…), so the prior full clause-by-clause substance check stands. Item changes only lean and stmt_deps: the theorem node lem-trf-site-derived-tensor-restriction is replaced by new existing:true def node def-weil-pbc-tensor-descent-representative-comparison, which owns the 7 real defs in Sheaf.Paper.SiteDerivedTensorRestriction (SiteTensorComplexFunctor, tensorDescentClass/ComplexIso/DerivedIso, TensorFlatRepresentative, siteRestrictionDerivedTensor, tensorDescentPair). Their .choose terms come only from the cited descent theorem. Statement signatures verbatim (both nodes); TeX formula matches the Lean body and arrow directions; cited ids = stmt_deps; §5 fields OK; no competing owner or id collision in side-live; the item's used decls are covered. No compile (no file changed). Advisory: heavy import of the restriction module."
+ }
+}

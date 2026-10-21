@@ -15,7 +15,8 @@
   "lem-weil-pbc-site-derived-tensor-descent",
   "def-pc-tensor-complex-sheaves",
   "lem-weil-pbc-total-tensor-integer-shifts",
-  "lem-pur-homotopy-category-triangulated"
+  "lem-pur-homotopy-category-triangulated",
+  "def-weil-pbc-tensor-descent-representative-comparison"
  ],
  "proof": [
   {
@@ -246,5 +247,31 @@
   "group": "Q13",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q13-1b16a6abb (reviewer sub-agent of L); spot-checked: This is the first split of a proofless item; live still has it unsplit, and the statement and stmt_deps are byte-identical to live. There are no new nodes. I read every cited statement: site-derived-tensor-descent (equivalence, c natural on P_R, faithful/unique extension of transformations for any E), total-tensor-integer-shifts (Mathlib leaf; checked against BifunctorShift.lean:95-98 and 199-205, negOnePow(x*y)), homotopy-category-triangulated (CommShift λ), abstract-derived-category, lem-pc-kflat-resolution (= Stacks 06YS, sites-cohomology.tex:3207-3211), and localization-universal-property (1)-(3). I also read Stacks 0FNH (more-algebra.tex:18385-18395): its sign (-1)^{pb} uses the unshifted degree and agrees with the leaf. Steps 1, 2 and 4-8 are correct; I recomputed them myself. The Step 4 summand computation gives (-1)^{bp} versus (-1)^{b(p+a)}, ratio (-1)^{ab}. In Step 6, substituting δ² into α_P cancels to β_P. In Step 7, the resolution r: P→B and v = QH(r[n]) invertible give α_B = β_B by cancellation, with only the varying argument resolved. In Step 8, uniqueness in the universal property identifies t^2(QA,-) with the descended one-variable shift. Edge cases checked: one-point site over a field (Koszul signs), characteristic 2, n=0 and negative shifts, the zero ring, unbounded complexes, and a non-flat B such as Z/2. No duplicate turned up: total-tensor-signed-coherence is chain level only and shifted-tensor-morphism-calculus is a user of a fixed t_{a,b}. The parent kflat-fixed-tensor-triangulated cites the item's unchanged clauses. No SGA is cited and there is no cycle. I accept the declared tool_use lem-pc-kflat-resolution: it is a generic resolution, used in Step 7 only, and already an accepted tool of the descent node. FIX (E5, one point): Step 3 said 'naturality moves c past the shift isomorphisms' without stating the reduction at shifted objects (LP)[a], which are not of the form L(P'). I added one sentence: rewrite by naturality of t^i_b along λ_a(P): L(P[a]) → (LP)[a], with P[a] in P_R, to reach δ^i_b(P[a],S). Step 4 relies on the same reduction through its reference to Step 3. The corrected item is under fixes/dag/nodes/sec-proper-base-change/; all other fields are unchanged.; 1 file(s) fixed by the reviewer"
+ },
+ "lean": {
+  "module": "Sheaf.Algebra.Homology.DerivedTensorShiftDescent",
+  "declaration": "SheafOfModules.derived_tensor_shift_descent",
+  "declarations": [
+   "SheafOfModules.tensorShiftTotal",
+   "SheafOfModules.tensorResolvingShiftCompatible",
+   "SheafOfModules.tensorFixedComparisonsShiftCompatible",
+   "SheafOfModules.tensorShiftComparisonsUnique",
+   "SheafOfModules.derived_tensor_shift_descent"
+  ],
+  "file": "lean/Sheaf/Algebra/Homology/DerivedTensorShiftDescent.lean",
+  "statement": "theorem derived_tensor_shift_descent (stable : ∀ (P : CochainComplex (ringedSiteModules.{r} ((sheafCompose J (forget₂ CommRingCat.{r} RingCat.{r})).obj R)) ℤ), TensorFlatRepresentative (J := J) (R := R) P → ∀ n : ℤ, TensorFlatRepresentative (J := J) (R := R) (P⟦n⟧)) : ∃ s : (siteRestrictionDerivedTensor (J := J) (R := R)).CommShift₂Int, tensorResolvingShiftCompatible (J := J) (R := R) stable s ∧ tensorShiftComparisonsUnique (J := J) (R := R) s ∧ tensorFixedComparisonsShiftCompatible (J := J) (R := R) s",
+  "branch": "sheaf-dag",
+  "by": "Q29",
+  "date": "2026-10-21",
+  "existing": false,
+  "note": "Uses the specified published tensor and its exact representative comparison tensorDescentPair, owned by def-weil-pbc-tensor-descent-representative-comparison. The restriction theorem is not a statement dependency: none of its conclusions is used. The three predicate helpers spell out clauses of this node, with real Prop data; tensorShiftTotal is only a transparent Mathlib total-tensor abbreviation."
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-8b88f17d9",
+  "group": "Q29",
+  "result": "pass",
+  "note": "Re-delivery repairing the H2 return of 11346db0. Lean module byte-identical (sha256 dcd98fb9…), so the prior full clause-by-clause substance check stands. Item changes only lean and stmt_deps: the theorem node lem-trf-site-derived-tensor-restriction is replaced by new existing:true def node def-weil-pbc-tensor-descent-representative-comparison, which owns the 7 real defs in Sheaf.Paper.SiteDerivedTensorRestriction (SiteTensorComplexFunctor, tensorDescentClass/ComplexIso/DerivedIso, TensorFlatRepresentative, siteRestrictionDerivedTensor, tensorDescentPair). Their .choose terms come only from the cited descent theorem. Statement signatures verbatim (both nodes); TeX formula matches the Lean body and arrow directions; cited ids = stmt_deps; §5 fields OK; no competing owner or id collision in side-live; the item's used decls are covered. No compile (no file changed). Advisory: heavy import of the restriction module."
  }
 }
