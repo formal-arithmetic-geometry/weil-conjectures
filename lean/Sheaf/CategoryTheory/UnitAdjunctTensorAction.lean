@@ -9,6 +9,7 @@ public import Mathlib.CategoryTheory.Monoidal.Functor
 public import Mathlib.CategoryTheory.Adjunction.Basic
 public import WeilConjectures.CategoryTheory.Adjunction.ProjectionMap
 public import WeilConjectures.FromJoel.CategoryTheory.Monoidal.Functor
+import WeilConjectures.CategoryTheory.Adjunction.ProjectionMapAssoc
 
 /-!
 # Tensor action of the unit-defined left-adjoint projection
@@ -86,6 +87,39 @@ theorem unitAdjunctTensorAction
         ((adj.projectionMap Q (curriedTensor C) (curriedTensor D)
           (Functor.LaxMonoidal.μNatTrans Q)).app (Q.obj F)).app N ≫
           (adj.counit.app F ⊗ₘ 𝟙 N)) := by
-  sorry
+  let p := adj.projectionMap Q (curriedTensor C) (curriedTensor D)
+    (Functor.LaxMonoidal.μNatTrans Q)
+  refine ⟨?_, ?_, ?_⟩
+  · intro M M' N N' a h
+    have ha := congr_app (p.naturality a) N
+    have hh := (p.app M').naturality h
+    dsimp at ha hh
+    simp only [tensorHom_def, J.map_comp, Category.assoc]
+    rw [hh, ← Category.assoc, ha, Category.assoc]
+    rfl
+  · intro M N₁ N₂
+    have hm (X Y Z : D) :
+        (α_ (Q.obj X) (Q.obj Y) (Q.obj Z)).hom ≫
+          Q.obj X ◁ Functor.LaxMonoidal.μ Q Y Z ≫
+          Functor.LaxMonoidal.μ Q X (Y ⊗ Z) ≫ Q.map (α_ X Y Z).inv =
+        Functor.LaxMonoidal.μ Q X Y ▷ Q.obj Z ≫
+          Functor.LaxMonoidal.μ Q (X ⊗ Y) Z := by
+      rw [Functor.LaxMonoidal.associativity_inv, Iso.hom_inv_id_assoc]
+    simpa only [J.map_comp, id_tensorHom, tensorHom_id, Functor.id_obj, Category.assoc] using
+      (adj.projectionMap_assoc Q (Functor.LaxMonoidal.μNatTrans Q) hm M N₁ N₂).symm
+  · intro F N
+    apply (adj.homEquiv _ _).injective
+    rw [adj.homEquiv_naturality_left, adj.homEquiv_naturality_right]
+    have hp := adj.unit_app_comp_map_projectionMap_app_app Q (curriedTensor C)
+      (curriedTensor D) (Functor.LaxMonoidal.μNatTrans Q) (Q.obj F) N
+    dsimp [projectionMapTranspose] at hp
+    rw [adj.homEquiv_unit, adj.homEquiv_unit, hp]
+    change Functor.LaxMonoidal.μ Q F N ≫ adj.unit.app _ ≫ Q.map (adj.counit.app _) =
+      (adj.unit.app (Q.obj F) ▷ Q.obj N ≫
+        Functor.LaxMonoidal.μ Q (J.obj (Q.obj F)) N) ≫
+          Q.map (adj.counit.app F ⊗ₘ 𝟙 N)
+    simp only [tensorHom_id, Category.assoc]
+    rw [← Functor.LaxMonoidal.μ_natural_left, ← comp_whiskerRight_assoc]
+    simp
 
 end CategoryTheory.Adjunction

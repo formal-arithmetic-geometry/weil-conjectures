@@ -32,7 +32,7 @@
    }
   },
   {
-   "text": "For morphisms $a:M\\to M'$ and $h:N\\to N'$, transpose the proposed naturality equation. Naturality of $m$ and of $v$ gives\n$$T\\bigl((J(a)\\otimes h)\\circ\\kappa_{M,N}\\bigr)\n=Q(J(a)\\otimes h)\\circ m_{JM,N}\\circ(v_M\\otimes1)\n=m_{JM',N'}\\circ(v_{M'}\\otimes1)\\circ(a\\otimes Q(h))\n=T\\bigl(\\kappa_{M',N'}\\circ J(a\\otimes Q(h))\\bigr).$$\nInjectivity of $T$ proves naturality in both arguments. The middle equality uses exactly the tensorator naturality in [def-sfb-strong-monoidal-functor] and $QJ(a)\\circ v_M=v_{M'}\\circ a$ from [lem-weil-pbc-adjunction-of-natural-bijection]; tensor bifunctoriality is [def-sfb-monoidal-category].",
+   "text": "In Lean, use that the existing projectionMap is a natural transformation of bifunctors. Naturality in the first argument, evaluated at N, and naturality in the second argument at M′ give the two squares. Factor a tensor Q(h) into the first-variable and second-variable maps, apply functoriality of J, and compose these squares. This gives the joint naturality equation. The construction of this natural transformation is precisely the adjunction transpose and monoidal naturality described in Step 1.",
    "uses": [
     "def-sfb-strong-monoidal-functor",
     "lem-weil-pbc-adjunction-of-natural-bijection",
@@ -70,7 +70,7 @@
    }
   },
   {
-   "text": "The associativity axiom for the strong monoidal functor $Q$ in [def-sfb-strong-monoidal-functor], applied to $(JM,N_1,N_2)$, is exactly\n$$Q(\\alpha^{\\mathcal D}_{JM,N_1,N_2})\\circ m_{JM\\otimes N_1,N_2}\\circ(m_{JM,N_1}\\otimes1)\n=m_{JM,N_1\\otimes N_2}\\circ(1\\otimes m_{N_1,N_2})\\circ\\alpha^{\\mathcal C}_{QJM,QN_1,QN_2}.$$\nPostcompose with $Q((\\alpha^{\\mathcal D}_{JM,N_1,N_2})^{-1})$ and precompose with $((v_M\\otimes1)\\otimes1)$. Functoriality cancels the inverse associators, giving equality of the expressions for $T(L)$ and $T(R)$ in Steps 3 and 4. Injectivity of the Hom bijection in [lem-weil-pbc-adjunction-of-natural-bijection] proves the first displayed equation of the item, with precisely its specified source and target.",
+   "text": "The associativity axiom for the strong monoidal functor $Q$ in [def-sfb-strong-monoidal-functor], applied to $(JM,N_1,N_2)$, is exactly\n$$Q(\\alpha^{\\mathcal D}_{JM,N_1,N_2})\\circ m_{JM\\otimes N_1,N_2}\\circ(m_{JM,N_1}\\otimes1)\n=m_{JM,N_1\\otimes N_2}\\circ(1\\otimes m_{N_1,N_2})\\circ\\alpha^{\\mathcal C}_{QJM,QN_1,QN_2}.$$\nPostcompose with $Q((\\alpha^{\\mathcal D}_{JM,N_1,N_2})^{-1})$ and precompose with $((v_M\\otimes1)\\otimes1)$. Functoriality cancels the inverse associators, giving equality of the expressions for $T(L)$ and $T(R)$ in Steps 3 and 4. Injectivity of the Hom bijection in [lem-weil-pbc-adjunction-of-natural-bijection] proves the first displayed equation of the item, with precisely its specified source and target. In Lean, specialize the existing proved source-library CategoryTheory.Adjunction.projectionMap_assoc to G′=Q and delta=Functor.LaxMonoidal.μNatTrans Q. Its comparison hypothesis is Functor.LaxMonoidal.associativity_inv followed by cancellation of the source associator and its inverse. This source lemma implements exactly the transpose calculations of Steps 3–5. Rewrite tensoring with identities as whiskering and combine the two J maps by functoriality.",
    "uses": [
     "def-sfb-strong-monoidal-functor",
     "lem-weil-pbc-adjunction-of-natural-bijection"
@@ -114,7 +114,7 @@
  "proof_origin": {
   "by": "agent",
   "document": "literature/stacks-project/sites-cohomology.tex",
-  "place": "Tag 0GL1, lemma-j-shriek-and-tensor, and Tag 0E8I in sites-modules.tex motivate the open tensor map; the seven-step abstract coherence proof is written here from the monoidal axioms and natural Hom bijections."
+  "place": "Tag 0GL1, lemma-j-shriek-and-tensor, and Tag 0E8I in sites-modules.tex motivate the open tensor map; the seven-step abstract coherence proof is written here from the monoidal axioms and natural Hom bijections. Lean proof reuses the proved general projectionMap_assoc for Steps 3–5, bifunctor naturality for Step 2, and proves the counit transpose calculation directly."
  },
  "mathlib_searches": [
   {
@@ -242,5 +242,15 @@
   "group": "Q125",
   "result": "pass",
   "note": "Single-module delivery (UnitAdjunctTensorAction.lean plus the item lean record; node statement byte-identical to live; lean.statement equals the file signature). κ is the canonical Adjunction.projectionMap with δ = LaxMonoidal.μNatTrans Q; its transpose (η⊗1)≫μ is the node's b = μ⁻¹∘(v⊗1). [Q.Monoidal] and adj : J ⊣ Q are the Mathlib encodings of the dependency nodes (CoreMonoidal/mkOfHomEquiv). The three conjuncts match the node's joint naturality, action equation (α_.hom/α_.inv orientation, types J((M⊗QN₁)⊗QN₂)→(JM⊗N₁)⊗N₂) and counit equation exactly, with no extra hypotheses and independent universes. The seven proof steps were checked by hand. No duplicate node or full existing statement: projectionMap_assoc and projectionMap_app_app_comp_map_counit are partial. Docstrings carry source, blueprint and proof steps; proof is sorry only. No compile, as no fix was made. Advisory: the Second-reading section is an author self-check."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "T6",
+  "result": "pass",
+  "landing": "20261021T120606-L-3916367",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
