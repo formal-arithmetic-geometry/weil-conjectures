@@ -1,6 +1,6 @@
 # Work queue
 
-133 items; claim with `tools/claim.py next <group> [--stage N]`.
+135 items; claim with `tools/claim.py next <group> [--stage N]`.
 
 ## Rework: quarantined by the upstream sync (14 clusters, 948 modules)
 
@@ -25,21 +25,23 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 
 Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 90, stage 3 2 items.
 
-## Stage 1: nodes to split (17)
+## Stage 1: nodes to split (19)
 
 | node | distance to a target | Lean state on the done branch |
 |---|---|---|
 | `lem-sfb-qcqs-proper-serre-heart-bound` | 2007 | none |
 | `lem-sfb-lisse-lattice-potential-kummer-tameness` | 4010 | none |
-| `lem-sfb-dense-lattice-derived-invariants-comparison` | 4011 | none |
 | `lem-sfb-discrete-lattice-koszul-resolution` | 4011 | none |
 | `lem-sfb-gabber-global-snc-alteration` | 4011 | none |
 | `lem-sfb-prime-to-ell-derived-invariants-reduction` | 4011 | none |
+| `lem-sfb-condensed-derived-restriction-calculus` | 4012 | none |
+| `lem-sfb-discrete-lattice-cup-exterior` | 4012 | none |
 | `lem-sfb-integral-lisse-closed-base-change` | 4012 | none |
 | `lem-sfb-norm-algcl-cohomology-topology-comparison` | 4012 | none |
 | `lem-sfb-norm-algcl-internal-hom-base-change` | 4012 | none |
 | `lem-sfb-profinite-constant-derived-functions` | 4012 | none |
 | `lem-sfb-root-coordinate-supported-vanishing` | 4012 | none |
+| `lem-sfb-trivial-ladic-derived-exterior` | 4012 | none |
 | `lem-sfb-snc-tame-root-etale-extension` | 4013 | none |
 | `lem-sfb-indfinite-contractible-base-wstrict` | 4014 | none |
 | `lem-sfb-wstrict-lisse-component-cohomology` | 4014 | none |
@@ -61,6 +63,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
 | `lem-sfb-condensed-product-bar-comparison` | 1 | state | 0 |
+| `lem-sfb-dense-lattice-derived-invariants-comparison` | 1 | state | 0 |
 | `lem-sfb-derived-cech-image-totalization` | 1 | state | 0 |
 | `lem-sfb-faithfully-flat-normal-ring-descent` | 1 | state | 0 |
 | `lem-sfb-finite-closed-cover-resolution` | 1 | state | 0 |
@@ -73,7 +76,6 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-root-tower-puncture-invariance` | 1 | state | 0 |
 | `lem-sfb-simplex-lattice-shuffle-boundary` | 1 | state | 0 |
 | `lem-sfb-snc-finite-root-regular-ring` | 1 | state | 0 |
-| `lem-sfb-snc-root-limit-normal-charts` | 1 | state | 0 |
 | `lem-sfb-snc-tame-finite-fibre-classification` | 1 | state | 0 |
 | `lem-sfb-snc-universal-residual-charts` | 1 | state | 0 |
 | `lem-sfb-supported-finite-stage-topology-defect` | 1 | state | 0 |
@@ -83,7 +85,7 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-sfb-integral-quotient-projection-comparison` | 2 | state | 0 |
 | `lem-sfb-tame-inertia-continuous-koszul` | 2 | state | 0 |
 
-Not open yet: 374 nodes that below a finished node, not needed, 102 nodes that wait for a statement dependency (bottom-up), 16 nodes that wait for stage 1 (statement downstream not grounded).
+Not open yet: 374 nodes that below a finished node, not needed, 102 nodes that wait for a statement dependency (bottom-up), 18 nodes that wait for stage 1 (statement downstream not grounded).
 
 ## Stage 3: modules to prove (63)
 
