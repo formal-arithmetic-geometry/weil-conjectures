@@ -18,9 +18,313 @@
   "sk-def-sfb-derived-tensor-hom",
   "sk-def-sfb-constructible"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Work in section-ring module sheaves: [lem-pd-module-ringed-topos-derived-comparison] identifies internal relative derived tensors, geometric functors, and their actual adjunctions, while [lem-sfb-internal-section-scalar-adjunction] identifies scalar extension and its unit. The closed internal Homs agree by the defining right adjunction. Write $T_Y=B_Y\\otimes^L_{A_{E,Y}}-$, $H_R(-,-)=R\\mathcal Hom_R(-,-)$, and $\\phi_{Y;P,M}:T_YH_A(P,M)\\to H_B(T_YP,T_YM)$ for the evaluation transpose. This defines a natural map for arbitrary objects, without asserting its invertibility. The field $k$ is Noetherian (its only ideals are $0,k$), so $X$ is Noetherian by [lem-weil-pbc-finite-type-over-noetherian]. Its open subschemes are Noetherian and quasi-compact by [lem-weil-pbc-noetherian-open-subscheme-noetherian]; its closed subschemes are Noetherian because descending chains of closed subsets stabilize and affine quotient rings inherit the ascending-chain condition on ideals. All supports below thus have quasi-compact open complements. For finite $E$ only, [lem-sfb-adic-constructibility-predicate-comparison] identifies the finite constant local model convention with the bounded-constructible predicate used by the finite-$E$ preservation and generation nodes below; it is never applied to $B$.",
+   "uses": [
+    "lem-pd-module-ringed-topos-derived-comparison",
+    "lem-sfb-internal-section-scalar-adjunction",
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-weil-pbc-finite-type-over-noetherian",
+    "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+    "lem-sfb-adic-constructibility-predicate-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equations (3.3)-(3.4), Lemma 3.4 and the stratified internal-Hom argument in the proof of Lemma 5.3(2); agent adaptation to the specified norm-coefficient map."
+   }
+  },
+  {
+   "text": "For any complementary closed/open pair on such a scheme, scalar extension commutes with open extension by zero by [def-sfb-derived-open-immersion-shriek-iso], and commutes with both inverse images by [lem-sfb-kflat-scalar-comparison-normalization]. It also commutes with exact closed direct image through the normalized $B$-linear map $\\delta$ of [lem-sfb-closed-supported-scalar-comparison]. To check the latter's hypotheses, [lem-weil-pbc-condensed-open-closed-recollement] gives exact sheaf functors and the degree-zero sequence $0\\to j_!j^*M\\to M\\to i_*i^*M\\to0$, while [lem-weil-pbc-proetale-ringed-open-closed] explicitly gives the invertible open unit and closed counit and both zero mixed restrictions. Therefore [lem-sfb-exact-open-closed-unbounded-calculus] applies to both rings. In particular these comparisons are valid even when a scalar extension is unbounded. Their units and counits retain their stated normalizations; no coefficient-flatness assertion was used.",
+   "uses": [
+    "def-sfb-derived-open-immersion-shriek-iso",
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-sfb-closed-supported-scalar-comparison",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-sfb-exact-open-closed-unbounded-calculus",
+    "lem-weil-pbc-proetale-ringed-open-closed"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equations (3.3)-(3.4), Lemma 3.4 and the stratified internal-Hom argument in the proof of Lemma 5.3(2); agent adaptation to the specified norm-coefficient map."
+   }
+  },
+  {
+   "text": "Derived scalar extension takes every bounded constructible finite-$E$ complex on a standing scheme $Y$ to a bounded constructible $B_Y$-complex. Indeed [det-cor-coefficient-heart-ii-generation] gives a finite cone-and-shift construction from $a_!L[0]$ with $L$ finite-rank lisse. By [lem-sfb-locally-free-derived-scalars], $T_SL$ is locally $B_S^r[0]$, including $r=0$. Step 2 identifies $T_Ya_!L$ with $a_!T_SL$. The latter objects generate a triangulated category of bounded finite-constant-model constructible $B$-complexes by [lem-sfb-continuous-qbar-constructible-generators]. Exactness of $T_Y$ carries the finite construction into that category. For the representative used by [det-sf-comp-continuous-algcl-constructible-tor], choose an algebraic-closure isomorphism $\\operatorname{PadicAlgCl}(\\ell)\\cong\\Omega$ by [lem-pc-algebraic-closure-exists-unique]. It is isometric on every finite subextension by [lem-weil-l-adic-extension-absolute-value], hence everywhere. Postcomposition identifies their continuous-function rings. The exact module equivalence carries the displayed finite local models to finite local models. Apply the Tor theorem in its stated representative and transport the resulting finite-Tor constructible object back by [lem-sfb-condensed-coefficient-iso-constructible]. Thus the actual $T_Y$ outputs have finite Tor amplitude. This argument uses finite local models and the all-continuous $B$-generator statement, not an equivalence between $C$ and $B$.",
+   "uses": [
+    "det-cor-coefficient-heart-ii-generation",
+    "lem-sfb-locally-free-derived-scalars",
+    "lem-sfb-continuous-qbar-constructible-generators",
+    "det-sf-comp-continuous-algcl-constructible-tor",
+    "lem-pc-algebraic-closure-exists-unique",
+    "lem-weil-l-adic-extension-absolute-value",
+    "lem-sfb-condensed-coefficient-iso-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent preliminary: constructibility of scalar-extended finite-E inputs by finite supported-lisse generation."
+   }
+  },
+  {
+   "text": "For any $f:Y\\to V$ between standing schemes, define $\\beta_{f,P}:T_VRf_{*,A}P\\to Rf_{*,B}T_YP$ to be the adjunct of $f_B^*T_VRf_{*,A}P\\cong T_Yf_A^*Rf_{*,A}P\\xrightarrow{T_Y\\varepsilon_A}T_YP$. The pullback comparison is exactly the normalized K-flat comparison of [lem-sfb-kflat-scalar-comparison-normalization]. Write $r$ for exact scalar restriction. By [lem-weil-pbc-ring-sheaf-change-adjunction], $r_VRf_{*,B}\\cong Rf_{*,A}r_Y$, preserving the geometric adjunction. Under the scalar adjunction of [lem-pur-sheaf-ring-derived-coefficient-adjunction], $\\beta_{f,P}$ is therefore the adjunct of $Rf_{*,A}(\\eta_P)$, where $\\eta_P:P\\to r_YT_YP$ is $x\\mapsto1\\otimes x$ on a flat-term K-flat resolution. To verify this normalization, transpose $Rf_*(\\eta_P)$ along $f_A^*\\dashv Rf_{*,A}$: the result is $\\eta_P\\varepsilon_A$ by naturality of the counit. Its scalar adjunct is $T_Y\\varepsilon_A$, by the scalar triangle identity and pullback/scalar compatibility. Thus the two prescribed adjuncts agree.",
+   "uses": [
+    "lem-sfb-kflat-scalar-comparison-normalization",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent coefficient-projection normalization; compare Stacks sites-cohomology.tex Tag 07A6, lemma-adjoint, through the cited scalar/adjunction comparison."
+   }
+  },
+  {
+   "text": "For fixed $f$, the two functors in $\\beta_f$ are exact. We need the triangle compatibility only after exact scalar restriction $r$, which reflects isomorphisms by [lem-weil-pbc-ring-sheaf-change-adjunction]. The K-flat formula $x\\otimes a\\mapsto a\\,g(x)$ of [lem-pur-sheaf-ring-derived-coefficient-adjunction] and step 4 identify $r\\beta_f$, with tensor symmetry, with the projection map for $f_A$ and the fixed module $B_V$. The rings are pulled back, so its source-coefficient factor is $f_A^*B_V=B_Y$. [lem-sfb-ringed-projection-first-shift] states precisely that this projection is a transformation of exact functors in $P$, including the connecting arrow. Consequently the locus where $r\\beta_f$ is invertible, equivalently where $\\beta_f$ is invertible, is closed under shifts and distinguished-triangle extensions. No faithfulness assertion for derived scalar restriction on morphisms is needed.",
+   "uses": [
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sfb-ringed-projection-first-shift",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent exactness verification; Stacks sites-cohomology.tex Tag 0B56, equation-projection-formula-map, and the cited first-variable shift statement."
+   }
+  },
+  {
+   "text": "We prove $\\beta_{f,P}$ invertible first for proper $f:Y\\to V$ and bounded constructible $P$ over finite $E$. By clause (2) of [det-thm-sfb-proper-base-change-rational], $Rf_{*,A}P$ is bounded constructible; step 3 makes $T_VRf_{*,A}P$ bounded constructible. Step 3 also makes $T_YP$ bounded constructible of finite Tor amplitude, so [det-sf-comp-continuous-algcl-finiteness] says that each cohomology sheaf of $Rf_{*,B}T_YP$ has finite constant local models. At this point we need no upper bound for that target. Step 3 already identified the PadicAlgCl coefficient representative isometrically with $\\Omega$ and transported its finite-Tor constructible input. Under that exact coefficient equivalence the underlying geometric direct image and its cohomology are unchanged. Hence this finiteness conclusion is about the actual $B$ of the item.",
+   "uses": [
+    "det-thm-sfb-proper-base-change-rational",
+    "det-sf-comp-continuous-algcl-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent independent proper-image argument, part 1: finite-E proper preservation and the separate all-continuous-B cohomological finiteness input."
+   }
+  },
+  {
+   "text": "The increasing finite-field cover of [lem-sfb-algcl-countable-closed-finite-cover] implies that $\\Omega$ has at most countable algebraic dimension over $E$. Apply [lem-sfb-countable-normed-orthogonal-basis] to the normed $E$-space $\\Omega$ with prescribed $b_0=1$. Let $D=\\operatorname{End}^{\\mathrm{cts}}_E(\\Omega)$, let $\\lambda_0$ be the first coordinate, and set $e(v)=\\lambda_0(v)1$. Each $d\\in D$ gives an $A$-linear endomorphism of the underlying $B$-module sheaf by postcomposition on continuous functions. Pullback, tensor with a flat-term K-flat representative of $P$, and $Rf_{*,A}$ give a unital $D$-action on $Rf_{*,A}r_YT_YP$. The idempotent $e$ splits the actual copy of $A$ off $rB$: its inclusion is $E\\hookrightarrow\\Omega$, its retraction is $\\lambda_0$, and their composite is $1_E$. These induce split maps $P\\xrightarrow{\\eta_P}r_YT_YP\\to P$ with composite $1_P$. Their other composite is $e$, including on derived tensors. Thus after direct image and any exact additive fibre, the $e$-summand is precisely the image of $Rf_{*,A}P$ under that fibre. Arbitrary $d$ need only be $A$-linear; no $B$-linearity is asserted for them.",
+   "uses": [
+    "lem-sfb-algcl-countable-closed-finite-cover",
+    "lem-sfb-countable-normed-orthogonal-basis",
+    "lem-sfb-internal-section-scalar-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent independent proper-image argument, part 2: continuous coefficient endomorphisms and a split rank-one idempotent."
+   }
+  },
+  {
+   "text": "Fix a geometric point $y$ of $V$ and an integer $q$, and write $\\Phi_{y,R}$ for the exact fibre functor of [lem-sfb-constructible-normed-geometric-fibres]. Put $H=H^q\\Phi_{y,A}(Rf_{*,A}r_YT_YP)$. Step 4 and the fibre's scalar-restriction compatibility identify this with the underlying $E$-space of $H^q\\Phi_{y,B}(Rf_{*,B}T_YP)$. By step 6 that space is finite-dimensional over $\\Omega$, and hence at most countable-dimensional over $E$. Its $\\Omega$-action agrees with the subalgebra of $D$ consisting of multiplication maps: those maps are $B$-linear, so the scalar-restriction/direct-image comparison is natural for them. Step 7 identifies $eH$ with $H^q\\Phi_{y,A}(Rf_{*,A}P)$. All hypotheses of [lem-sfb-countable-endomorphism-module-reconstruction] now hold, and it gives the isomorphism\n$$\\Omega\\otimes_E H^q\\Phi_{y,A}(Rf_{*,A}P)\\xrightarrow{\\sim}H,\\qquad v\\otimes h\\longmapsto\\theta_vh.$$\nHere $\\theta_v(w)=\\lambda_0(w)v=m_v e(w)$ since $b_0=1$. Thus the displayed map is exactly multiplication by $v$ after the map on cohomology induced by $Rf_{*,A}(\\eta_P)$, not an arbitrary vector-space isomorphism.",
+   "uses": [
+    "lem-sfb-constructible-normed-geometric-fibres",
+    "lem-sfb-countable-endomorphism-module-reconstruction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent independent proper-image argument, part 3: application of the existing countable D-module reconstruction statement."
+   }
+  },
+  {
+   "text": "The scalar/fibre comparison of [lem-sfb-constructible-normed-geometric-fibres] identifies the degree-$q$ fibre of $T_VRf_{*,A}P$ with $\\Omega\\otimes_E H^q\\Phi_{y,A}(Rf_{*,A}P)$; tensor over the abstract field $E$ is exact. By the insertion-of-one normalization in step 4 its map under $\\beta_{f,P}$ is precisely the map in step 8. It is therefore invertible for every $y,q$. Outside a finite interval the source cohomology vanishes, so every fibre of the target cohomology vanishes there. Each target cohomology sheaf is constructible by step 6, and the degree-zero case of constructible fibre conservativity makes those sheaves zero. The target is consequently bounded constructible. Now both endpoints satisfy the bounded constructible conservativity assertion of the same node, proving $\\beta_{f,P}$ invertible. This used proper-image finiteness and the algebraic reconstruction theorem, not any topology-equivalence, open-scalar, or $B$ proper-base-change assertion.",
+   "uses": [
+    "lem-sfb-constructible-normed-geometric-fibres"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent independent proper-image argument, part 4: identify the actual coefficient map on fibres and apply conservativity only after boundedness is established."
+   }
+  },
+  {
+   "text": "For a quasi-compact open immersion $j:U\\hookrightarrow X$, let $\\mathcal C_j$ be the bounded constructible finite-$E$ objects $P$ for which the specified $\\beta_{j,P}$ is invertible. Step 5 and [lem-sf-triangle-two-out-of-three], applied after the conservative exact scalar restriction, make this class closed under shifts and cones. It contains zero and is closed under finite sums and isomorphisms. It is closed under retracts as well: with $F=T_XRj_{*,A}$, $G=Rj_{*,B}T_U$, if $P\\xrightarrow{i}Q\\xrightarrow{r}P$ has $ri=1$ and $\\beta_Q$ is invertible, then $F(r)\\beta_Q^{-1}G(i)$ is the inverse of $\\beta_P$. Multiplying on either side and using the two naturality squares gives $G(r)G(i)=1$ and $F(r)F(i)=1$, respectively.",
+   "uses": [
+    "lem-sf-triangle-two-out-of-three"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent independent open-image argument, part 1: finite thick closure of the locus of invertibility."
+   }
+  },
+  {
+   "text": "Apply [lem-sfb-tame-pair-proper-generators] to $j$. It suffices to consider $G=Rq_{*,A}K$ with $p:Y\\to X$ proper, $V=p^{-1}U$, $q:V\\to U$ proper, $j':V\\hookrightarrow Y$, and $K=b_!L[0]$ for the stated regular strict-normal-crossings tame pair, including its inner extension by zero. The finite-rank lisse $L$ has finite local $E$-models, so [lem-sfb-coefficient-heart-lisse-extension-constructible] makes $K$ bounded constructible. The finite-$E$ case of [lem-sfb-rational-open-direct-image-constructible] makes $Rj'_{*,A}K$ bounded constructible. The independent proper comparison proved in steps 6--9 therefore applies to $(q,K)$ and $(p,Rj'_{*,A}K)$. The $B$-specific boundary input [lem-sfb-continuous-algcl-tame-boundary-comparison] makes $\\beta_{j',K}$ invertible: its regularity, outer components, inner extension, and prime-to-$p$ Kummer-tameness hypotheses are exactly the generator's data. No tameness hypothesis is imposed on the original $P$.",
+   "uses": [
+    "lem-sfb-tame-pair-proper-generators",
+    "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "lem-sfb-rational-open-direct-image-constructible",
+    "lem-sfb-continuous-algcl-tame-boundary-comparison"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent independent open-image argument, part 2: the existing finite-E proper generators and the independent all-continuous tame-boundary comparison."
+   }
+  },
+  {
+   "text": "The equality $jq=pj'$ identifies $Rj_*Rq_*$ with $Rp_*Rj'_*$ in both coefficient categories by [lem-weil-pbc-ringed-topoi-derived-pushforward-composition]. The adjunction-compatible composition and monoidal comparisons of [lem-sfb-ringed-derived-monoidal-comparisons], together with [lem-weil-pbc-mate-pasting], identify the coefficient projections by the equality\n$$Rj_{*,B}(\\beta_{q,K})\\circ\\beta_{j,Rq_{*,A}K}=Rp_{*,B}(\\beta_{j',K})\\circ\\beta_{p,Rj'_{*,A}K},$$\nunder those composition identifications. Indeed each side is the mate of the composed inverse-image/scalar square, and that square is the same by the K-flat coherence in step 2. Every factor on the right is invertible by step 11, as is $Rj_{*,B}(\\beta_{q,K})$. Cancellation proves $G\\in\\mathcal C_j$. The finite thick generation assertion and step 10 give invertibility of $\\beta_{j,P}$ for every bounded constructible finite-$E$ $P$. The map is the exact counit adjunct from step 4 throughout.",
+   "uses": [
+    "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "lem-sfb-ringed-derived-monoidal-comparisons",
+    "lem-weil-pbc-mate-pasting",
+    "lem-sfb-tame-pair-proper-generators"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+    "place": "Paragraph (3), agent independent open-image argument, part 3: counit-normalized mate pasting and cancellation on the finite proper generators."
+   }
+  },
+  {
+   "text": "For complementary $i:Z\\hookrightarrow Y$ and $j:V\\hookrightarrow Y$, and any $M\\in D(A_Y)$, define $\\kappa_{i,M}:T_ZRi_A^!M\\to Ri_B^!T_YM$ by its $i_{*,B}\\dashv Ri_B^!$ adjunct\n$$i_{*,B}T_ZRi_A^!M\\xrightarrow{\\delta_{i,Ri_A^!M}^{-1}}T_Yi_{*,A}Ri_A^!M\\xrightarrow{T_Y\\varepsilon_{A,M}}T_YM.$$\nThe adjunction and support triangles exist on the unbounded category by [det-lem-formal-closed-support-adjunction]; step 2 provides the invertible normalized $\\delta$. In particular the defining counit identity is\n$$\\varepsilon_{B,T_YM}\\circ i_{*,B}(\\kappa_{i,M})\\circ\\delta_{i,Ri_A^!M}=T_Y\\varepsilon_{A,M}.$$\nThis defines a natural transformation; invertibility has not been presumed.",
+   "uses": [
+    "det-lem-formal-closed-support-adjunction"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equations (3.3)-(3.4) and Lemma 3.4; agent definition of the normalized support-coefficient mate."
+   }
+  },
+  {
+   "text": "Now take bounded constructible finite-$E$ $M$. Exact open inverse image preserves its finite local models, so $j_A^*M$ is bounded constructible by [lem-sfb-pullback-constant-model-constructible] and step 2. Compare $T_Y$ of the support triangle of $M$ with the $B$-support triangle of $T_YM$. To construct the comparison, use [lem-weil-pbc-ring-sheaf-change-adjunction] to identify scalar restriction of inverse/direct images and their actual adjunction maps. The fibre formula $Ri^!M=i^*\\operatorname{fib}(M\\to Rj_*j^*M)$ from [det-lem-formal-closed-support-adjunction] then identifies the restricted support triangle. Apply the scalar unit to this triangle, then $T_Y$, then the scalar counit. This gives a triangle morphism, including its connecting arrow. Its middle map is the identity by the scalar triangle identity; its third map is $\\beta_{j,j_A^*M}$ under $j_B^*T_Y\\cong T_Vj_A^*$, since its adjunct is $T_V$ of the open counit. Its first map is $i_{*,B}\\kappa_{i,M}\\circ\\delta_{i,Ri_A^!M}$: the support-counit square is exactly the identity in step 13, which determines that adjunct. The third map is invertible by step 12. Hence [lem-sf-triangle-morphism-iso] makes the first map invertible. Since $\\delta$ is invertible and exact $i_{*,B}$ reflects isomorphisms by its invertible closed counit in step 2, $\\kappa_{i,M}$ is invertible. This proves support change from the independent open argument, without a new support-generator assertion.",
+   "uses": [
+    "lem-sfb-pullback-constant-model-constructible",
+    "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "det-lem-formal-closed-support-adjunction",
+    "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "lem-sf-triangle-morphism-iso"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equations (3.3)-(3.4), Lemma 3.4; agent comparison of the actual support triangles, using the independently proved open comparison."
+   }
+  },
+  {
+   "text": "First compute $\\phi_{S;L,M}$ for a sheaf $L$ with a finite constant local $E$-model and arbitrary $M\\in D(A_{E,S})$. Each scalar model is a finite-dimensional vector space: a finite generating list over a field can be reduced to a basis by deleting dependent vectors. On a trivializing pro-étale cover, $L=A^r$ with finite $r$, including $r=0$. By [lem-sfb-locally-free-derived-scalars], $T_SL=B^r[0]$. The internal Hom calculation [lem-sc-finite-free-internal-hom-exact] is exact and equals the finite power functor, so its right derived functor sends $M$ to $M^r$. The analogous calculation applies to $B^r$. The actual comparison on each such slice is $T_S(M^r)\\to(T_SM)^r$; its evaluation sends $(z\\otimes m_1,\\ldots,z\\otimes m_r)$ and a basis vector $e_s$ to $z\\otimes m_s$. Derived scalar extension is additive, so this map is invertible. Slice restriction commutes with internal Hom by [lem-weil-pbc-ringed-internal-hom-exact-restriction] and with scalar extension by step 2. Joint conservativity of cover restrictions [lem-zl-condensed-cover-restriction-conservative] proves the asserted invertibility on $S$. No finite-type hypothesis is needed on the members of the trivializing cover.",
+   "uses": [
+    "lem-sfb-locally-free-derived-scalars",
+    "lem-sc-finite-free-internal-hom-exact",
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-zl-condensed-cover-restriction-conservative"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equations (3.3)-(3.4), Lemma 3.4 and the stratified internal-Hom argument in the proof of Lemma 5.3(2); agent adaptation to the specified norm-coefficient map."
+   }
+  },
+  {
+   "text": "Let $N$ be bounded constructible over $E$ on $X$, and let $a=h\\circ u:S\\hookrightarrow W\\hookrightarrow X$, with $u$ open into the closure and $h$ closed, and $L$ lisse over $E$ on $S$. Put $F=H_A(L,u^*Rh_A^!N)$. The support finiteness theorem [lem-sfb-rational-closed-support-constructible] makes $Rh_A^!N$ bounded constructible on $W$. Pullback preserves its finite constant local models by [lem-sfb-pullback-constant-model-constructible], and is exact by [lem-weil-pbc-condensed-open-closed-recollement]. The local finite-power formula of step 15 shows that $F$ is bounded constructible: choose a common finite stratification for the finitely many cohomology sheaves of $u^*Rh_A^!N$, then on a trivializing cover for $L$ each $H^q(F)$ is a finite power of its finite local scalar model. Hence [lem-sfb-rational-open-direct-image-constructible] makes $Ru_{*,A}F$ bounded constructible. This finiteness is needed only over $E$.",
+   "uses": [
+    "lem-sfb-rational-closed-support-constructible",
+    "lem-sfb-pullback-constant-model-constructible",
+    "lem-weil-pbc-condensed-open-closed-recollement",
+    "lem-sfb-rational-open-direct-image-constructible"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equations (3.3)-(3.4), Lemma 3.4 and the stratified internal-Hom argument in the proof of Lemma 5.3(2); agent adaptation to the specified norm-coefficient map."
+   }
+  },
+  {
+   "text": "The two formulas of [lem-sfb-open-closed-internal-hom-formulas] identify $H_A(a_!L,N)$ with $h_{*,A}Ru_{*,A}F$. Apply $T_X$ and use step 2 for $h_*$, step 12 for $u$ on the bounded constructible $F$ of step 16, step 15 for $L$, and step 14 for $h$ on $N$. This gives the composite of isomorphisms\n$$T_Xh_{*,A}Ru_{*,A}F\\simeq h_{*,B}T_WRu_{*,A}F\\simeq h_{*,B}Ru_{*,B}T_SF\\simeq h_{*,B}Ru_{*,B}H_B(T_SL,T_Su^*Rh_A^!N)\\simeq h_{*,B}Ru_{*,B}H_B(T_SL,u^*Rh_B^!T_XN).$$\nThe last step also uses the inverse-image comparison of step 2. The $B$ version of the same internal-Hom formulas identifies the last object with $H_B(h_{*,B}u_{!,B}T_SL,T_XN)$, whose first argument is $T_X(a_!L)$ by step 2. All applications to $B$ in these formulas are on ordinary unbounded categories, not a claimed constructible subcategory.",
+   "uses": [
+    "lem-sfb-open-closed-internal-hom-formulas"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equations (3.3)-(3.4), Lemma 3.4 and the stratified internal-Hom argument in the proof of Lemma 5.3(2); agent adaptation to the specified norm-coefficient map."
+   }
+  },
+  {
+   "text": "We check that step 17 gives $\\phi_{X;a_!L,N}$ itself. Set $D=H_A(a_!L,N)$. The internal-Hom formulas are evaluation-compatible. Transpose step 17 under the closed-support adjunction, the open direct-image adjunction, and tensor/Hom adjunction in that order. For the closed step the defining equation is\n$$\\varepsilon_{B,T_XN}\\circ h_{*,B}\\kappa_{h,N}\\circ\\delta_{h,Rh_A^!N}=T_X\\varepsilon_{A,N}.$$\nFor the open step the defining equation is $\\varepsilon_{u,B}\\circ u_B^*\\beta_{u,F}=T_S\\varepsilon_{u,A}$ under inverse-image/scalar comparison, as computed in steps 4 and 12. The remaining lisse step evaluates $e_s$ to the $s$th coordinate, as in step 15. Substituting these three equations into the evaluation-compatible formulas cancels the adjunction units against counits and leaves exactly\n$$T_XD\\otimes^L_{B_X}T_X(a_!L)\\simeq T_X(D\\otimes^L_{A_X}a_!L)\\xrightarrow{T_X\\mathrm{ev}}T_XN.$$\nThe reassociation is the balanced K-flat reassociation, whose monoidal coherence is [lem-sfb-ringed-derived-monoidal-comparisons] for the coefficient ringed-topos morphism. Uniqueness of the tensor/Hom transpose now identifies the actual morphisms. This also proves compatibility with maps of $L$ and $N$.",
+   "uses": [
+    "lem-sfb-open-closed-internal-hom-formulas",
+    "sk-def-sfb-derived-tensor-hom",
+    "lem-sfb-ringed-derived-monoidal-comparisons"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equations (3.3)-(3.4), Lemma 3.4 and the stratified internal-Hom argument in the proof of Lemma 5.3(2); agent adaptation to the specified norm-coefficient map."
+   }
+  },
+  {
+   "text": "For fixed bounded constructible $N$, the class of $K$ for which the specified $\\phi_{X;K,N}$ is invertible contains zero and, by steps 17-18, all supported lisse sheaves. It is closed under shifts and finite triangle extensions: internal Hom is contravariantly exact with its signed shift comparison by [lem-weil-pbc-ringed-internal-hom-exact-restriction], and scalar extension is exact. The evaluation definition of $\\phi$ commutes with these shift comparisons (transpose the shifted evaluation), so it gives a morphism of the reversed triangles including their connecting arrow. Apply [lem-sf-triangle-morphism-iso]. Finite generation [det-cor-coefficient-heart-ii-generation] therefore puts every bounded constructible $K$ in this class. Finally, evaluation and the tensor/Hom adjunction are natural in both variables, so the resulting isomorphism is natural in $K,N$. It is precisely the map in the statement by step 18 and the same evaluation definition throughout the finite cone induction.",
+   "uses": [
+    "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "lem-sf-triangle-morphism-iso",
+    "det-cor-coefficient-heart-ii-generation",
+    "sk-def-sfb-derived-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/hemo-richarz-scholbach-constructible-sheaves_arXiv-2305.18131.pdf",
+    "place": "Equations (3.3)-(3.4), Lemma 3.4 and the stratified internal-Hom argument in the proof of Lemma 5.3(2); agent adaptation to the specified norm-coefficient map."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "sk-def-sfb-derived-tensor-hom",
+  "lem-weil-pbc-finite-type-over-noetherian",
+  "lem-weil-pbc-noetherian-open-subscheme-noetherian",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "def-sfb-derived-open-immersion-shriek-iso",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-closed-supported-scalar-comparison",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "lem-weil-pbc-proetale-ringed-open-closed",
+  "det-cor-coefficient-heart-ii-generation",
+  "lem-sfb-locally-free-derived-scalars",
+  "lem-sfb-continuous-qbar-constructible-generators",
+  "det-sf-comp-continuous-algcl-constructible-tor",
+  "lem-pc-algebraic-closure-exists-unique",
+  "lem-weil-l-adic-extension-absolute-value",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-ringed-projection-first-shift",
+  "det-thm-sfb-proper-base-change-rational",
+  "det-sf-comp-continuous-algcl-finiteness",
+  "lem-sfb-algcl-countable-closed-finite-cover",
+  "lem-sfb-countable-normed-orthogonal-basis",
+  "lem-sfb-constructible-normed-geometric-fibres",
+  "lem-sfb-countable-endomorphism-module-reconstruction",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-sfb-tame-pair-proper-generators",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "lem-sfb-rational-open-direct-image-constructible",
+  "lem-sfb-continuous-algcl-tame-boundary-comparison",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "lem-weil-pbc-mate-pasting",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-sfb-pullback-constant-model-constructible",
+  "lem-sf-triangle-morphism-iso",
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "lem-sfb-rational-closed-support-constructible",
+  "lem-sfb-open-closed-internal-hom-formulas"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-thm-sf-ctf-stability/sk-thm-sf-ctf-stability-direct-images.proof.md",
+  "place": "Paragraph (3), agent coefficient-topology obligation: independent proper projection from all-continuous cohomological finiteness and countable endomorphism-module reconstruction, then tame-pair open comparison; support triangles and the HRS equations (3.3)-(3.4), Lemma 3.4 and Lemma 5.3(2) stratified internal-Hom argument complete the evaluation-normalized proof. No support-generator black box is used."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -158,10 +462,130 @@
    },
    "date": "2026-10-21",
    "verdict": "no match: hits concern underived LightCondensed internal Hom, ordinary linear dual base change, module adjunctions, or scheme module categories; none states this derived sheaf comparison for norm-continuous algebraic-closure coefficients."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extension of coefficients for derived sheaf internal Hom of bounded constructible l adic complexes to norm continuous algebraic closure coefficients",
+   "results": {
+    "t": "2026-10-21T22:40:02Z",
+    "tool": "leanfinder",
+    "query": "Extension of coefficients for derived sheaf internal Hom of bounded constructible l adic complexes to norm continuous algebraic closure coefficients",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "BDeRhamPlus",
+     "LightCondensed.instMonoidalClosedSheafLightProfiniteCoherentTopologyModuleCat",
+     "CategoryTheory.Sheaf.H",
+     "CondensedMod",
+     "instAbelianCondensedMod",
+     "Condensed.profiniteSolid",
+     "localCohomology.diagram",
+     "LightCondMod.ofSheafLightProfinite"
+    ],
+    "digest": "d460e2a120b8b8dc"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned underived sheaf Hom, LightCondensed monoidal structure, ordinary module scalar adjunction, and unrelated algebra; none states this derived constructible internal-Hom comparison."
+  },
+  {
+   "tool": "loogle",
+   "query": "\"SheafOfModules\", \"extendScalars\", \"Hom\"",
+   "results": {
+    "t": "2026-10-21T22:40:21Z",
+    "tool": "loogle",
+    "query": "\"SheafOfModules\", \"extendScalars\", \"Hom\"",
+    "sub": "",
+    "ok": true,
+    "n_hits": 0,
+    "note": "",
+    "top": [],
+    "digest": "4f53cda18c2baa0c"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned underived sheaf Hom, LightCondensed monoidal structure, ordinary module scalar adjunction, and unrelated algebra; none states this derived constructible internal-Hom comparison."
+  },
+  {
+   "tool": "grep",
+   "query": "(internalHom|derivedHom|[Rr]Hom).*(scalar|[Bb]ase[Cc]hange)|[Ee]xtend[Ss]calars.*(internalHom|[Rr]Hom)",
+   "results": {
+    "t": "2026-10-21T22:41:20Z",
+    "tool": "grep",
+    "query": "(internalHom|derivedHom|[Rr]Hom).*(scalar|[Bb]ase[Cc]hange)|[Ee]xtend[Ss]calars.*(internalHom|[Rr]Hom)",
+    "sub": "",
+    "ok": true,
+    "n_hits": 7,
+    "note": "",
+    "top": [
+     "Mathlib/Algebra/TrivSqZeroExt/Basic.lean",
+     "Mathlib/Algebra/TrivSqZeroExt/Basic.lean",
+     "Mathlib/Algebra/TrivSqZeroExt/Basic.lean",
+     "Mathlib/Algebra/TrivSqZeroExt/Basic.lean",
+     "Mathlib/Algebra/TrivSqZeroExt/Basic.lean",
+     "Mathlib/Algebra/Category/ModuleCat/Monoidal/Adjunction.lean",
+     "Mathlib/RingTheory/RingHom/Flat.lean"
+    ],
+    "digest": "cf95ed88a4aad2cf"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned underived sheaf Hom, LightCondensed monoidal structure, ordinary module scalar adjunction, and unrelated algebra; none states this derived constructible internal-Hom comparison."
+  },
+  {
+   "tool": "leansearch",
+   "query": "Derived internal sheaf Hom of constructible complexes commutes with extension of topological l adic coefficient fields",
+   "results": {
+    "t": "2026-10-21T22:41:35Z",
+    "tool": "leansearch",
+    "query": "Derived internal sheaf Hom of constructible complexes commutes with extension of topological l adic coefficient fields",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "CategoryTheory.sheafHom'",
+     "CategoryTheory.Sheaf.H",
+     "CategoryTheory.sheafHom",
+     "SheafOfModules.Hom.ext",
+     "CategoryTheory.Sheaf.Hom.recOn",
+     "CategoryTheory.Sheaf.Hom.casesOn",
+     "SheafOfModules.Hom.ext_iff",
+     "CompHausLike.LocallyConstant.counit_app_val"
+    ],
+    "digest": "0f9bba5bddce0163"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned underived sheaf Hom, LightCondensed monoidal structure, ordinary module scalar adjunction, and unrelated algebra; none states this derived constructible internal-Hom comparison."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Base change for derived internal Hom under extension of coefficients in sheaf categories",
+   "results": {
+    "t": "2026-10-21T22:42:29Z",
+    "tool": "leanfinder",
+    "query": "Base change for derived internal Hom under extension of coefficients in sheaf categories",
+    "sub": "",
+    "ok": true,
+    "n_hits": 8,
+    "note": "",
+    "top": [
+     "LightCondensed.ihom_map_val_app",
+     "SheafOfModules.PullbackConstruction.adjunction",
+     "SheafOfModules.pullbackObjUnitToUnit",
+     "SheafOfModules.pullbackPushforwardAdjunction",
+     "SheafOfModules.pullbackIso",
+     "instMonoidalClosedSheafOfHasSheafifyOfFunctorOpposite",
+     "LightCondensed.ihomPoints_symm_comp",
+     "SheafOfModules.pullback"
+    ],
+    "digest": "169b24a870ccd4c2"
+   },
+   "date": "2026-10-21",
+   "verdict": "no match: returned underived sheaf Hom, LightCondensed monoidal structure, ordinary module scalar adjunction, and unrelated algebra; none states this derived constructible internal-Hom comparison."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-supported-finite-stage-topology-defect",
@@ -173,7 +597,7 @@
  "blueprint": {
   "from": {
    "node": null,
-   "place": "Paragraph (3), agent coefficient-topology obligation: local derived internal-Hom base change for finite-field constructible inputs.",
+   "place": "Paragraph (3), agent coefficient-topology obligation: local derived internal-Hom coefficient change for finite-E inputs; independent proper/open coefficient projections from B finiteness and tame-boundary inputs, then support triangles and stratified internal Hom.",
    "via": [
     "lem-sfb-supported-finite-stage-topology-defect",
     "lem-sfb-constructible-algcl-topology-comparison",
@@ -185,5 +609,169 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-22",
+  "item": "lem-sfb-norm-algcl-internal-hom-base-change",
+  "worker": "stage1",
+  "summary": "Repair of D4/C6, D1/D2 and C5: withdrew the equivalent supported-lisse-costalk node. Kept the exact statement and the accepted formal internal-Hom reduction. Proved the needed proper and open projections in explicit steps from existing independent all-continuous-B finiteness, countable continuous-endomorphism reconstruction and tame-boundary statements, then derived support comparison from its triangle. No new nodes, no ancestor scalar/topology comparison cited, no coefficient completion or flatness assumption.",
+  "blueprint": "The created.item chain still gives blueprint ancestor None, with the last explicit blueprint link det-thm-sf-ctf-stability-direct-images paragraph (3). Its proper-then-open route is retained: steps 3--9 establish proper comparison from independent coefficient finiteness, steps 10--12 use proper tame generators and tame-boundary comparison, and steps 13--19 carry the support/internal-Hom obligation. The blueprint and HRS do not themselves assert the norm-coefficient comparison.",
+  "tool_uses": [
+   {
+    "node": "lem-pd-module-ringed-topos-derived-comparison",
+    "why": "Generic Module-object and ringed-topos derived tensor comparison used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-sfb-internal-section-scalar-adjunction",
+    "why": "Generic Scalar adjunction transport between internal and sectionwise module sheaves used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-sfb-adic-constructibility-predicate-comparison",
+    "why": "Bridge between the two finite-E constructibility predicates used by existing generation/preservation tools; not applied to the all-continuous norm ring."
+   },
+   {
+    "node": "lem-sfb-kflat-scalar-comparison-normalization",
+    "why": "Generic Representative and adjunction normalization of scalar pullback comparison used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-sfb-closed-supported-scalar-comparison",
+    "why": "Generic Supported closed-unit construction and normalization of scalar comparison used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-weil-pbc-condensed-open-closed-recollement",
+    "why": "Generic Open/closed recollement for condensed coefficient modules statement used with its exact hypotheses; it supplies a coefficient or categorical tool rather than replacing the unit proper/open direct-image route."
+   },
+   {
+    "node": "lem-sfb-exact-open-closed-unbounded-calculus",
+    "why": "Generic Unbounded support calculus from exact abelian open/closed localization data used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "det-cor-coefficient-heart-ii-generation",
+    "why": "Generic Generation of $D^b_c(X,\\Lambda)$ by extensions by zero of lisse sheaves used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-sfb-locally-free-derived-scalars",
+    "why": "Generic Derived scalar extension of locally finite free module sheaves used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "det-sf-comp-continuous-algcl-constructible-tor",
+    "why": "Generic Finite Tor amplitude of bounded constructible full continuous algebraic-closure complexes statement used with its exact hypotheses; it supplies a coefficient or categorical tool rather than replacing the unit proper/open direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ring-sheaf-change-adjunction",
+    "why": "Exact scalar restriction commutes with inverse/direct images and preserves their actual adjunctions, giving the normalized localization triangle comparison; a generic ringed-site tool."
+   },
+   {
+    "node": "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+    "why": "Generic scalar-extension/restriction adjunction with its actual K-flat unit, used to identify beta and the support triangle map without coefficient flatness."
+   },
+   {
+    "node": "lem-sfb-ringed-projection-first-shift",
+    "why": "Generic shift compatibility of the counit-defined projection map in its direct-image variable."
+   },
+   {
+    "node": "det-thm-sfb-proper-base-change-rational",
+    "why": "Generic Proper direct image, base change and projection formula for $E$ and $\\overline{\\mathbf Q}_\\ell$ statement used with its exact hypotheses; it supplies a coefficient or categorical tool rather than replacing the unit proper/open direct-image route."
+   },
+   {
+    "node": "det-sf-comp-continuous-algcl-finiteness",
+    "why": "Generic Constructibility of proper images for the full continuous algebraic-closure coefficient statement used with its exact hypotheses; it supplies a coefficient or categorical tool rather than replacing the unit proper/open direct-image route."
+   },
+   {
+    "node": "lem-sfb-condensed-coefficient-iso-constructible",
+    "why": "Generic preservation of Dctf under a genuine coefficient-ring isomorphism, used for the PadicAlgCl representative."
+   },
+   {
+    "node": "lem-sf-triangle-two-out-of-three",
+    "why": "Generic Isomorphism on two terms of a distinguished triangle statement used with its exact hypotheses; it supplies a coefficient or categorical tool rather than replacing the unit proper/open direct-image route."
+   },
+   {
+    "node": "lem-sfb-coefficient-heart-lisse-extension-constructible",
+    "why": "Generic Constructibility of a locally closed lisse coefficient extension statement used with its exact hypotheses; it supplies a coefficient or categorical tool rather than replacing the unit proper/open direct-image route."
+   },
+   {
+    "node": "lem-sfb-rational-open-direct-image-constructible",
+    "why": "Generic Rational open direct image preserves finite-constant-model constructibility used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+    "why": "Generic unbounded derived composition comparison, with no coefficient finiteness conclusion."
+   },
+   {
+    "node": "lem-sfb-ringed-derived-monoidal-comparisons",
+    "why": "Generic Monoidal and adjunction normalization of derived ringed-topos comparisons used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "det-lem-formal-closed-support-adjunction",
+    "why": "Generic Sections with closed support: adjunction and fiber triangle for all coefficients used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-sfb-pullback-constant-model-constructible",
+    "why": "Generic Inverse image preserves constructible modules with finite constant local models used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-sc-finite-free-internal-hom-exact",
+    "why": "Generic Internal Hom from a finite free sheaf is exact statement used with its exact hypotheses; it supplies a coefficient or categorical tool rather than replacing the unit proper/open direct-image route."
+   },
+   {
+    "node": "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+    "why": "Generic Derived internal Hom calculus on small ringed sites statement used with its exact hypotheses; it supplies a coefficient or categorical tool rather than replacing the unit proper/open direct-image route."
+   },
+   {
+    "node": "lem-zl-condensed-cover-restriction-conservative",
+    "why": "Generic Joint conservativity of pro-etale restriction for condensed coefficient complexes used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-sfb-rational-closed-support-constructible",
+    "why": "Generic Rational sections with support preserve finite-constant-model bounded constructibility used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-sfb-open-closed-internal-hom-formulas",
+    "why": "Generic Derived internal Hom for open extension and closed support used for the indicated ringed-site/finite-E step; the item unit supplies no more specific formal tool for this norm-coefficient obligation."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-ringed-open-closed",
+    "why": "Generic ringed pro-etale abelian open/closed localization: its explicit unit, counit, mixed-zero and exact-sequence clauses verify the hypotheses of the unbounded calculus for each coefficient ring."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-pd-module-ringed-topos-derived-comparison",
+  "lem-sfb-internal-section-scalar-adjunction",
+  "lem-sfb-adic-constructibility-predicate-comparison",
+  "lem-sfb-kflat-scalar-comparison-normalization",
+  "lem-sfb-closed-supported-scalar-comparison",
+  "lem-weil-pbc-condensed-open-closed-recollement",
+  "lem-sfb-exact-open-closed-unbounded-calculus",
+  "det-cor-coefficient-heart-ii-generation",
+  "lem-sfb-locally-free-derived-scalars",
+  "det-sf-comp-continuous-algcl-constructible-tor",
+  "lem-weil-pbc-ring-sheaf-change-adjunction",
+  "lem-pur-sheaf-ring-derived-coefficient-adjunction",
+  "lem-sfb-ringed-projection-first-shift",
+  "det-thm-sfb-proper-base-change-rational",
+  "det-sf-comp-continuous-algcl-finiteness",
+  "lem-sfb-condensed-coefficient-iso-constructible",
+  "lem-sf-triangle-two-out-of-three",
+  "lem-sfb-coefficient-heart-lisse-extension-constructible",
+  "lem-sfb-rational-open-direct-image-constructible",
+  "lem-weil-pbc-ringed-topoi-derived-pushforward-composition",
+  "lem-sfb-ringed-derived-monoidal-comparisons",
+  "det-lem-formal-closed-support-adjunction",
+  "lem-sfb-pullback-constant-model-constructible",
+  "lem-sc-finite-free-internal-hom-exact",
+  "lem-weil-pbc-ringed-internal-hom-exact-restriction",
+  "lem-zl-condensed-cover-restriction-conservative",
+  "lem-sfb-rational-closed-support-constructible",
+  "lem-sfb-open-closed-internal-hom-formulas",
+  "lem-weil-pbc-proetale-ringed-open-closed"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NH-f9010c0eb",
+  "group": "NH",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NH-f9010c0eb (reviewer sub-agent of L); spot-checked: I read the item's 19 steps and all 44 cited statements in full. There are no new nodes, and the costalk node returned at NH 093966b5 has been withdrawn. The statement, stmt_deps and created fields are byte-equal to live, and the live item is still unsplit. There is no repair note, nothing in the delivery is on the dropped list, and SGA is not cited. Circularity: a BFS over the snapshot DAG shows that none of the 44 cited nodes reaches the item, and the old circle (open-scalar -> proper-scalar -> topology-comparison -> defect -> item) is no longer cited. The inputs are existing split nodes with their own routes, not WANTED restatements of an ancestor: continuous-algcl finiteness and constructible-tor, the qbar generators, normed geometric fibres, the countable orthogonal basis, countable endomorphism-module reconstruction, the tame-boundary comparison and the tame-pair generators. Steps 6-9 prove the proper B-comparison with no proper base change for B. Proper finiteness makes each fibre H finite-dimensional over Omega, so H is countably dimensional over E. Continuous E-endomorphisms of Omega act A-linearly on B by postcomposition. The idempotent e = eta.rho identifies eH with the fibre of Rf_*P, and the reconstruction gives v(x)h -> v.eta(h), which is exactly the fibre of beta. The target is bounded first by degree-zero conservativity, and only then is bounded-constructible conservativity applied to beta. I checked the reconstruction node itself: the kernel is killed by the functionals phi_mu, and surjectivity follows from the almost-disjoint family. Steps 10-12 give the open case from jq=pj', mate pasting, the tame boundary and thick generation with retracts. Steps 13-14 run from beta to kappa, the non-circular direction. Steps 15-19 are the formal finite-free and internal-Hom formulas, evaluation normalization and cone induction; all hypotheses were checked. Edge cases checked: r=0, H=0, Z empty, Z=X, and the case Y -> Spec kbar with P=E. Batch 5: every flagged reach is a generic foundation (module/ringed-topos comparison, exact-square compositors, section push/pull), a definition (geometric morphism, SNC boundary), field algebra (09H0) or point sheafification. None is a trace-formula or Poincare-duality step, so all are accepted. Notes for the maintainer: (1) steps 6-9 independently prove the statement of lem-sfb-continuous-algcl-proper-scalar-comparison; I recommend re-routing P and O to this argument to break the old circle, after which the item can cite them. (2) det-sf-comp-continuous-algcl-heart-finiteness step 1 ('compute the coefficient comparison termwise on the finite model, extend to the full continuous coefficient') is a terse E5-kind coefficient-change step behind the cited finiteness node. That is the existing node's own obligation; the item cites only its statement. No fixes were needed."
  }
 }
