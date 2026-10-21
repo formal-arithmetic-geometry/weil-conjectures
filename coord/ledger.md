@@ -21333,3 +21333,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 08:47 L: returned deliver/Q42/lem-weil-scalar-pullback-strict-cone-naturality (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-scalar-pullback-strict-cone-naturality: lem-w)
 - 08:47 L: returned deliver/NQ/sk-lem-picard-cech-computes (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED sk-lem-picard-cech-computes: sk-lem-picard-cech-comput)
 - 08:47 L: returned deliver/Q44/lem-sf-etale-module-stalk-cohomology-test (reviewer RETURN: L: independent stage-2 immutable head fa81cbfe6594: H2: stmt_dep lem-sfb-etale-derived-tensor-stalk (theorem) is added o)
+- 08:50 L: merged deliver/Q127/lem-trf-point-system-roos-transport (reviewer PASS; first push; new nodes: 0); claim not held by Q127: not your claim
