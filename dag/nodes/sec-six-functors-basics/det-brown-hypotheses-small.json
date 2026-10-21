@@ -27,10 +27,9 @@
  ],
  "proof": [
   {
-   "text": "Put $\\mathcal M=\\Mod_{\\Lambda_X}$. Sheaf tensor and internal modules make $\\mathcal M$ Grothendieck. Its maps are small sets of sectionwise natural linear families. K-injectives and derived local smallness give small ambient Hom sets in the fixed universe.",
+   "text": "The category of internal modules over the pulled-back condensed ring is Grothendieck abelian. Its underlying sheaves give small Hom sets in the fixed universe. K-injective resolutions therefore make its ambient derived category locally small in the same universe. These are the existing instances used in the bounded-homology smallness theorem.",
    "uses": [
     "def-weil-size-convention",
-    "lem-weil-pbc-sheaf-tensor-closed",
     "lem-sfb-modobj-grothendieck",
     "lem-sfb-grothendieck-k-injective",
     "lem-pc-derived-category-locally-small"
@@ -42,13 +41,13 @@
    }
   },
   {
-   "text": "For finite $A$, the exact coefficient equivalence identifies finite constant local models on every scheme $T$, and its forward functor keeps the underlying abelian sheaf. Internal restriction to a stratum has the inverse image as underlying sheaf, as ordinary restriction does, and the canonical coefficient identifications commute with that restriction; hence the equivalence matches the two constructible hearts on the same stratifications. Finite $A$-modules are finitely presented, since finite free surjections have finite kernels. Ordinary constructible Serre closure therefore gives internal heart closure under kernels, cokernels and extensions.",
+   "text": "For finite discrete A, take the normalized coefficient encoding. Its constructibility comparison identifies bounded internal constructibility with bounded ordinary constructibility. Ordinary stratified constructibility agrees with IsConstructible over the lifted finite ring: lift a small cover index in one direction, and restrict a covering to a small subfamily in the other. The proved fixed-coefficient Serre argument supplies kernels, cokernels and extensions; the rank-zero model supplies zero. Weak-Serre bounded thickness gives ordinary thick bounded constructibility. Pull this property back along the exact termwise derived encoding, a triangulated functor; retracts are preserved by every functor.",
    "uses": [
-    "lem-sf-module-object-ordinary-coefficient-equivalence",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-finite-discrete-coefficient-sections",
-    "lem-weil-constructible-coefficient-serre"
+    "lem-sf-finite-discrete-normalized-encoding",
+    "lem-sf-finite-discrete-encoding-constructibility",
+    "lem-weil-constructible-coefficient-serre",
+    "lem-weil-constructible-coefficient-homology-triangulated",
+    "lem-sfb-weak-serre-bounded-thick"
    ],
    "elementary": false,
    "source": {
@@ -57,12 +56,14 @@
    }
   },
   {
-   "text": "Use rational-heart closure for $E,\\Qlb$ and integral constant-model closure for $\\mathcal O_E$, read in internal modules through the sectionwise equivalence, which keeps underlying sheaves, kernels and cokernels. The case $E=\\mathbf Q_\\ell$ includes $\\mathbf Q_\\ell,\\mathbf Z_\\ell$. Rank-zero models give zero; composing local isomorphisms gives repleteness. Every admissible heart is thus a weak Serre class.",
+   "text": "For integral coefficients the constant-model heart-closure theorem supplies kernel, cokernel and extension closure. Its zero object has the rank-zero finite presentation. Apply weak-Serre bounded thickness. For E and the finite-subextension-valued algebraic closure use the proved coefficient-heart bounded triangulation theorem, including retracts. A coefficient isomorphism induces exact restriction of scalars: its derived functor preserves and reflects boundedness, and its cohomology comparison and the proved constant-model scalar-restriction comparison identify constructibility. Thus thickness passes to the coefficient object in the statement. The normalized bottom-field identifications identify the base p-adic field and its integer ring with the bottom-extension cases.",
    "uses": [
-    "det-lem-coefficient-heart-closure",
     "lem-sfb-integral-constant-model-heart-closure",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "sk-def-sfb-constructible"
+    "det-cor-coefficient-heart-ii-triangulated",
+    "lem-sfb-base-coefficient-condensed-identification",
+    "lem-sfb-weak-serre-bounded-thick",
+    "det-def-sfb-constructible-tor-amplitude",
+    "sk-prop-sfb-cartesian-coefficients"
    ],
    "elementary": false,
    "source": {
@@ -71,9 +72,8 @@
    }
   },
   {
-   "text": "Apply the weak-Serre bounded-thickness lemma to this heart. It gives thick $\\Dbc$, including all ambient retracts. Finite Tor amplitude is thick by its well-definedness theorem, so the intersection $\\Dctf$ is thick.",
+   "text": "The well-definedness theorem gives isomorphism invariance of bounded constructibility and finite Tor amplitude, and triangulation and retract stability of finite Tor amplitude. Intersect it with the thick bounded-constructible property proved above. Intersections of triangulated and replete properties inherit those structures; a retract has both properties because each passes to retracts.",
    "uses": [
-    "lem-sfb-weak-serre-bounded-thick",
     "det-def-sfb-constructible-tor-amplitude",
     "pur9-def-thick"
    ],
@@ -84,45 +84,22 @@
    }
   },
   {
-   "text": "On each stratum finite scalar matrices give a small family of cokernel models. Localization and cartesian coefficients identify covering-object restrictions with slice-site models, and the sectionwise equivalence reads internal modules as module sheaves. Prescribed-local-model smallness gives a small representing family on that stratum.",
+   "text": "Reuse the proved generic stratifiedModelsSmall argument in the coefficient-heart-small module, whose hypotheses allow every commutative condensed coefficient object. Finitely presented scalar modules are cokernels of finite matrices, hence essentially small. On each cover, small local model families and the adjoint-product embedding give a small family of realizations. A finite stratification has finitely many such stratum families; its jointly detecting exact pullbacks again embed realizations into products of pushforwards. Well-poweredness counts subobjects. The small union over finite stratifications gives essential smallness of the heart. A locally Noetherian compact scheme is qcqs, so this is precisely the constant-model constructibility predicate used here.",
    "uses": [
-    "lem-sfb-locally-prescribed-modules-small",
-    "det-def-sfb-constructible-local-model",
-    "lem-weil-proetale-weakly-etale-localization",
-    "sk-prop-sfb-cartesian-coefficients",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence"
-   ],
-   "elementary": false,
-   "source": {
-    "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
-    "place": "Essentially small paragraph: local models and overlap data (original step 5)"
-   }
-  },
-  {
-   "text": "Locally Noetherian $X$ is quasi-separated, hence qcqs, so constructibility uses one global finite stratification. Fix a finite stratification and stratum representatives $B_s$. Exact stratum pullbacks jointly detect zero; the adjoint-model lemma embeds every realizing $F$ into $P=\\prod_s a_{s*}B_s$. Subobjects of $P$ form a set: their image subsheaves are families of subsets of $P(V)$ on the small site. Finite stratifications and tuples form a set in the fixed bound. Their union represents the constructible heart.",
-   "uses": [
-    "lem-sfb-joint-adjunction-model-embedding",
-    "sk-def-sfb-module-pushforward-pullback",
-    "sk-prop-sfb-cartesian-coefficients",
-    "lem-weil-pbc-noetherian-stratum-detection",
-    "def-weil-sheaf-of-modules-category",
-    "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-    "def-constructible-stratification",
+    "det-lem-coefficient-heart-small",
     "sk-def-sfb-constructible",
     "lem-weil-pbc-locally-noetherian-quasi-separated"
    ],
    "elementary": false,
    "source": {
     "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
-    "place": "Essentially small paragraph: stratifications, embeddings, subobjects (original steps 3-7)"
+    "place": "Essentially small paragraph: local models and stratifications (original steps 3, 5-7)"
    }
   },
   {
-   "text": "For fixed $[a,b]$, use ambient truncations $T_q=\\tau_{\\le q}K$: $T_{a-1}\\simeq0$, $T_b\\simeq K$, and $T_{q-1}\\to T_q\\to H^q(K)[-q]\\to T_{q-1}[1]$. The small-extension lemma inductively counts the $T_q$ from the heart representatives and the previous family. Union over integer intervals gives a small family for $\\Dbc$. Retain its finite-Tor representatives; isomorphism invariance covers every $\\Dctf$ object.",
+   "text": "Apply the proved bounded-homology essential-smallness theorem to this heart and its isomorphism invariance. Its proof uses ambient Postnikov truncation triangles and small extension families, then takes the small union over integer intervals. Finally essential smallness passes to the smaller property obtained by imposing finite Tor amplitude.",
    "uses": [
-    "lem-weil-pbc-truncation-triangle",
-    "def-weil-abstract-derived-category",
-    "lem-sfb-small-triangulated-extension-classes",
+    "lem-sfb-bounded-homology-essentially-small",
     "det-def-sfb-constructible-tor-amplitude"
    ],
    "elementary": false,
@@ -134,38 +111,29 @@
  ],
  "proof_deps": [
   "def-weil-size-convention",
-  "lem-weil-pbc-sheaf-tensor-closed",
   "lem-sfb-modobj-grothendieck",
   "lem-sfb-grothendieck-k-injective",
   "lem-pc-derived-category-locally-small",
-  "lem-sf-module-object-ordinary-coefficient-equivalence",
-  "def-weil-pbc-internal-abelian-sheaf-module-equivalence",
-  "sk-prop-sfb-cartesian-coefficients",
-  "lem-weil-pbc-finite-discrete-coefficient-sections",
+  "lem-sf-finite-discrete-normalized-encoding",
+  "lem-sf-finite-discrete-encoding-constructibility",
   "lem-weil-constructible-coefficient-serre",
-  "det-lem-coefficient-heart-closure",
-  "lem-sfb-integral-constant-model-heart-closure",
-  "sk-def-sfb-constructible",
+  "lem-weil-constructible-coefficient-homology-triangulated",
   "lem-sfb-weak-serre-bounded-thick",
+  "lem-sfb-integral-constant-model-heart-closure",
+  "det-cor-coefficient-heart-ii-triangulated",
+  "lem-sfb-base-coefficient-condensed-identification",
   "det-def-sfb-constructible-tor-amplitude",
+  "sk-prop-sfb-cartesian-coefficients",
   "pur9-def-thick",
-  "lem-sfb-locally-prescribed-modules-small",
-  "det-def-sfb-constructible-local-model",
-  "lem-weil-proetale-weakly-etale-localization",
-  "lem-sfb-joint-adjunction-model-embedding",
-  "sk-def-sfb-module-pushforward-pullback",
-  "lem-weil-pbc-noetherian-stratum-detection",
-  "def-weil-sheaf-of-modules-category",
-  "def-constructible-stratification",
+  "det-lem-coefficient-heart-small",
+  "sk-def-sfb-constructible",
   "lem-weil-pbc-locally-noetherian-quasi-separated",
-  "lem-weil-pbc-truncation-triangle",
-  "def-weil-abstract-derived-category",
-  "lem-sfb-small-triangulated-extension-classes"
+  "lem-sfb-bounded-homology-essentially-small"
  ],
  "proof_origin": {
   "by": "agent",
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-lem-brown-hypotheses/sk-lem-brown-hypotheses-small.proof.md",
-  "place": "Both paragraphs, with four statement-only subarguments extracted; old arguments and exact allocation retained in report.md."
+  "place": "A6 stage-3 proof: finite ordinary encoding, integral and field heart closure, uniform proved coefficient-heart counting, and the existing bounded-homology Postnikov theorem. Statement and unit route unchanged."
  },
  "mathlib_searches": [
   {
@@ -362,5 +330,15 @@
   "file": "lean/Sheaf/SixFunctors/BrownHypothesesSmall.lean",
   "note": "Maintainer second-reader fix (NT-cc-Q02 review of 815504937e63): the size conclusion was written `ObjectProperty.EssentiallySmall (…)` with no universe, so Lean generalized it to a fresh universe parameter: the theorem was det_brown_hypotheses_small.{u, u_1} and claimed essential smallness in every universe u_1, including u_1 < u, which is false (e.g. Spec of a field in Type 1 with more quadratic extensions than any Type-0 cardinal has too many rank-one constructible F_3-sheaves). The node asks for smallness in the fixed universe V of def-weil-size-convention, in which derived categories are formed; for X : Scheme.{u} and coefficient sheaves in Ab.{u+1} that is u+1, exactly as in the sibling det-lem-coefficient-heart-small (EssentiallySmall.{u + 1}) and det-brown-hypotheses-ambient (LocallySmall.{u + 1}). The conclusion is now ObjectProperty.EssentiallySmall.{u + 1}; nothing else changed.",
   "fixed_by": "NT-stage2-cc-815504937"
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "A6",
+  "result": "pass",
+  "landing": "20261021T165750-L-2240690",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
