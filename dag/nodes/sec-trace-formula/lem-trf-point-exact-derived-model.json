@@ -23,11 +23,136 @@
   "def-weil-derived-pullback-tensor-hom",
   "prop-weil-pbc-proetale-constant-ring-map",
   "lem-weil-point-proetale-sections-exact",
-  "lem-weil-pbc-exact-functor-derived-factorization"
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-pur-proetale-module-pullback-composition"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For every $r\\geq1$, apply [prop-weil-pbc-proetale-constant-exact] to $u=h^r$ and the finite commutative coefficient ring $A$. Its scalar-transport functor is naturally the ordinary tensor module pullback $H_r$, so $H_r$ is exact. Apply [lem-weil-point-proetale-sections-exact] with $\\mathcal A=A_s$: final-object evaluation is exact to $\\Gamma(s,A_s)$-modules. Restricting scalars along the constant-section map $A\\to\\Gamma(s,A_s)$ leaves underlying abelian groups and kernels and cokernels unchanged, so the stated $A$-module-valued functor $\\Gamma$ is exact as well. This does not assert that all sheaves on the pro-etale point are constant.",
+   "uses": [
+    "prop-weil-pbc-proetale-constant-exact",
+    "lem-weil-point-proetale-sections-exact"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/proetale.tex",
+    "place": "Tags 0982 and 098H (exact point sections); constant-coefficient module inverse image, with the scalar transport of prop-weil-pbc-proetale-constant-exact"
+   }
+  },
+  {
+   "text": "Apply [lem-weil-pbc-exact-functor-derived-factorization] to $H_r$ and to $\\Gamma$. This gives quasi-isomorphism preservation and the natural exact-functor factorization isomorphisms on every cochain complex. By [lem-weil-pbc-exact-functor-derived-functor] the induced functor for $H_r$ is its total left derived functor, with its comparison to the ordinary termwise functor; thus it identifies with the specified $Q_r$ of [def-weil-derived-pullback-tensor-hom]. Denote the resulting comparison by $e_{r,K}:Q_r\\mathsf LK\\xrightarrow{\\sim}\\mathsf LC(H_r)K$ and the evaluation comparison by $v_K:V_{\\mathrm{amb}}\\mathsf LK\\xrightarrow{\\sim}\\mathsf L_AC(\\Gamma)K$. These are the canonical comparisons, not arbitrary isomorphisms of the representing objects. Every $K$ computes these functors; in particular these identifications restrict to their usual K-flat computations.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "lem-weil-pbc-exact-functor-derived-functor",
+    "def-weil-derived-pullback-tensor-hom"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tag 015F, lemma-right-derived-exact-functor, and its left-derived dual; sites-cohomology.tex Tag 06YY, lemma-derived-base-change"
+   }
+  },
+  {
+   "text": "Use [lem-trf-constant-coefficient-composition] for the composable maps $h$ and $h^m$. Its equality $c_{h^m\\circ h}=c_h\\circ h^{-1}(c_{h^m})\\circ\\alpha_{h,h^m,A_s}$ shows that the ring map for $h^{m+1}$ is exactly the composite ring map required by [lem-weil-pbc-proetale-derived-pullback-composition]. The ordinary comparison of [lem-pur-proetale-module-pullback-composition] has direction $H_{m+1}\\to H_1H_m$; its inverse is the $T_m$ in the statement. Consequently the ordinary and derived comparisons being compared use the same actual constant-section maps, rather than merely isomorphic coefficient sheaves.",
+   "uses": [
+    "lem-trf-constant-coefficient-composition",
+    "lem-pur-proetale-module-pullback-composition",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-modules.tex",
+    "place": "Tag 03D8, lemma-push-pull-composition-modules; sites.tex Tags 03CB and 0H7J; sites-cohomology.tex Tag 0D6D"
+   }
+  },
+  {
+   "text": "Fix $m\\geq1$ and an arbitrary complex $K$. Choose $u:P\\to K$ as in [lem-pc-kflat-resolution], so $P$ is K-flat with flat terms and $u$ is a quasi-isomorphism. The K-flat normalization in [lem-weil-pbc-proetale-derived-pullback-composition], applied with first map $h$ and second map $h^m$, says that $c_{h,h^m,\\mathsf LP}$ is the class of the ordinary comparison $H_{m+1}P\\to H_1H_mP$. Taking inverses and using Step 2 identifies $t_{m,\\mathsf LP}$ with $\\mathsf L(C(T_m)_P)$. The cited composition statement includes that $H_mP$ is again K-flat with flat terms, so this computes the iterated derived pullback as well. The resolution is taken in all module sheaves; neither its terms nor $P$ are required to be bounded or constructible.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-proetale-derived-pullback-composition"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tags 06YS (lemma-K-flat-resolution) and 0D6D (lemma-derived-pullback-composition), including its use of pullback of K-flat complexes"
+   }
+  },
+  {
+   "text": "Write $A_K=\\mathsf LC(H_1)C(H_m)K$ and $B_K=\\mathsf LC(H_{m+1})K$, and let $\\widetilde t_K:A_K\\to B_K$ be $t_{m,\\mathsf LK}$ conjugated by the iterated comparisons $e$ of Step 2. Put $b_K=\\mathsf L(C(T_m)_K)$, $a=\\mathsf LC(H_1)C(H_m)(u)$ and $b=\\mathsf LC(H_{m+1})(u)$. Naturality of $t_m$ and of $e$ gives $\\widetilde t_K\\circ a=b\\circ\\widetilde t_P$; ordinary naturality of $T_m$ gives $b_K\\circ a=b\\circ b_P$. Step 4 says $\\widetilde t_P=b_P$, while Step 2 makes $a$ invertible. Cancelling $a$ gives $\\widetilde t_K=b_K$, precisely the required equality on every representative. This is a cancellation of two naturality squares and introduces no new comparison theorem.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/sites-cohomology.tex",
+    "place": "Tag 0D6D, lemma-derived-pullback-composition; elementary naturality and cancellation extending its K-flat computation"
+   }
+  },
+  {
+   "text": "The map $h^r$ is a scheme isomorphism: its inverse is induced by $\\gamma^{-r}$, with $\\gamma$ as in [def-weil-frobenius-detailed]. For a complex whose class belongs to $D^b_c(s,A)$, [lem-weil-isomorphism-derived-pullback] therefore gives that its $Q_r$-image also belongs to $D^b_c(s,A)$. Here $\\ell\\ne p$ ensures that $\\ell$ is invertible on $s$, and $n\\geq1$ is exactly the finite-coefficient case of that lemma. Part 1 of [def-weil-finite-coefficient-point] defines $V$ by these same termwise final-object sections; [lem-weil-point-sections-finiteness] (1) ensures that they land in $D^b_{\\mathrm{fin}}(A)$. Hence restriction of $V_{\\mathrm{amb}}$ is the stated $V$, with the target viewed inside $D(A)$. This is a restriction of the ambient evaluation already constructed, rather than a separate choice of a fiber functor.",
+   "uses": [
+    "def-weil-frobenius-detailed",
+    "lem-weil-isomorphism-derived-pullback",
+    "def-weil-finite-coefficient-point",
+    "lem-weil-point-sections-finiteness"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/blueprint/master/blueprint/sec-smooth-purity/sk-def-sf-admissible/def-weil-finite-coefficient-point.md",
+    "place": "Finite-level point evaluation clause; isomorphism pullback identification in lem-weil-isomorphism-derived-pullback"
+   }
+  },
+  {
+   "text": "Let $\\alpha:\\Gamma\\Rightarrow\\Gamma H_r$ be as in the statement. Naturality for each differential $d_K^i$ gives $\\Gamma H_r(d_K^i)\\alpha_{K^i}=\\alpha_{K^{i+1}}\\Gamma(d_K^i)$, so its degreewise components form a chain map $C(\\alpha)_K:C(\\Gamma)K\\to C(\\Gamma)C(H_r)K$. For a chain map $f:K\\to K'$, degreewise naturality similarly gives $C(\\Gamma)C(H_r)(f)\\circ C(\\alpha)_K=C(\\alpha)_{K'}\\circ C(\\Gamma)(f)$. Thus localization in $A$-modules gives a natural transformation between the two functors on complexes. No additivity in the variable $K$ is required of the family $\\alpha$ beyond its given $A$-linear components and naturality.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization, input natural transformation; elementary degreewise chain-map verification"
+   }
+  },
+  {
+   "text": "Both $F_1=\\mathsf L_AC(\\Gamma)$ and $F_2=\\mathsf L_AC(\\Gamma)C(H_r)$ invert quasi-isomorphisms by Step 2. Their chosen factorizations through $\\mathsf L$ are $V_{\\mathrm{amb}}$ and $V_{\\mathrm{amb}}Q_r$. More explicitly set $w_K=v_{C(H_r)K}\\circ V_{\\mathrm{amb}}(e_{r,K})$. Apply part (2) of [lem-weil-pbc-localization-universal-property] to the natural transformation $\\tau_K=\\mathsf L_A(C(\\alpha)_K)$ constructed in Step 7. It supplies the unique natural transformation on all of $\\mathcal D$ whose component is\n$$\\alpha^D_{\\mathsf LK}=w_K^{-1}\\circ\\tau_K\\circ v_K.$$\nUnder the displayed factorizations this is exactly the component formula in the statement. Full faithfulness in the cited localization result gives uniqueness among all derived natural transformations with those components, including when $\\alpha$ is not an isomorphism.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; natural-transformation enhancement: Mathlib CategoryTheory/Localization/Predicate.lean, fullyFaithfulWhiskeringLeft and liftNatTrans (lines 278 and 326)"
+   }
+  },
+  {
+   "text": "For any derived morphism $f:X\\to Y$, Step 8 gives $(V_{\\mathrm{amb}}Q_r)(f)\\alpha^D_X=\\alpha^D_YV_{\\mathrm{amb}}(f)$. If $f=\\mathsf L(u)$ for a quasi-isomorphism, multiply this equality on the left by $(V_{\\mathrm{amb}}Q_r)(f)^{-1}$ and on the right by $V_{\\mathrm{amb}}(f)^{-1}$ to obtain naturality for $f^{-1}$. Localization is a functor, so it preserves equalities, identities and compositions of chain maps. By Steps 5 and 8 their localized factors are exactly the specified $t_m$ and $\\alpha^D$, after conjugating by the specified factorization isomorphisms; intermediate factorization maps and their inverses cancel in a composite. If such an identity is expressed as an identity of natural transformations, part (3) of [lem-weil-pbc-localization-universal-property] detects it on all $\\mathsf LK$. Finally, Step 6 permits restriction of these functors and transformations to the full subcategory $D^b_c(s,A)$; fullness retains naturality for every morphism there.",
+   "uses": [
+    "lem-weil-pbc-localization-universal-property"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/categories.tex",
+    "place": "Tag 04VG, lemma-properties-left-localization; elementary functoriality and fully faithful precomposition for equalities"
+   }
+  }
+ ],
+ "proof_deps": [
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-trf-constant-coefficient-composition",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pc-kflat-resolution",
+  "def-weil-frobenius-detailed",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tags 06YS, 06YY and 0D6D; exact arbitrary-representative extension by two naturality squares and cancellation; localization of transformations by categories.tex Tag 04VG and Mathlib Localization.Predicate"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -63,10 +188,45 @@
    "results": "8 hits: SheafOfModules.pullbackComp, SheafOfModules.freeFunctorCompPullbackIso, SheafOfModules.pullbackIso, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom, SheafOfModules.sheafificationCompPullback, SheafOfModules.pullbackObjFreeIso_hom_naturality, SheafOfModules.PullbackConstruction.adjunction, SheafOfModules.pullback_map_ιFree_comp_pullbackObjFreeIso_hom_assoc",
    "date": "2026-10-21",
    "verdict": "no match: generic localization and ordinary pullback compositors do not identify the prescribed K-flat-derived point comparison on arbitrary representatives with exact point evaluation and bounded-constructible restriction"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact pullback along an automorphism of an algebraically closed proetale point and exact global sections compute derived functors termwise, with K flat normalized pullback composition and descent of natural transformations",
+   "results": "8 hits: Algebra.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_map_δ, Algebra.Generators.H1Cotangent.exact_δ_map, Algebra.H1Cotangent.exact_δ_mapBaseChange, Algebra.Generators.H1Cotangent.exact_map_δ', Profinite.NobelingProof.succ_exact, AlgebraicGeometry.ExistsHomHomCompEqCompAux.D', Algebra.Generators.Cotangent.exact",
+   "date": "2026-10-21",
+   "verdict": "no match: these generic exact-derived and localization results provide supporting tools, not the combined pro-etale point statement with the prescribed K-flat-normalized comparison"
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.Localization.liftNatTrans",
+   "results": "10 hits: CategoryTheory.Localization.liftNatTrans, CategoryTheory.Localization.liftNatTrans_id, CategoryTheory.Localization.liftNatIso_hom, CategoryTheory.Localization.liftNatIso_inv, CategoryTheory.Localization.comp_liftNatTrans, CategoryTheory.Localization.comp_liftNatTrans_assoc, CategoryTheory.Localization.liftNatTrans_app, CategoryTheory.NatTrans.CommShift.liftNatTrans",
+   "date": "2026-10-21",
+   "verdict": "no match: these generic exact-derived and localization results provide supporting tools, not the combined pro-etale point statement with the prescribed K-flat-normalized comparison"
+  },
+  {
+   "tool": "grep",
+   "query": "mapDerivedCategory|liftNatTrans|pullbackComp",
+   "results": "25 hits: Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/PathCategory/MorphismProperty.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Adjunction.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean, Mathlib/CategoryTheory/Localization/Bifunctor.lean; subdirectory Mathlib/CategoryTheory",
+   "date": "2026-10-21",
+   "verdict": "no match: these generic exact-derived and localization results provide supporting tools, not the combined pro-etale point statement with the prescribed K-flat-normalized comparison"
+  },
+  {
+   "tool": "leansearch",
+   "query": "For exact functors of abelian categories the derived composition isomorphism agrees with the termwise compositor, and arbitrary natural transformations descend to derived localization",
+   "results": "8 hits: CategoryTheory.NatTrans.leftDerived_comp, CategoryTheory.instIsIsoFunctorToRightDerivedZero, CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.NatTrans.rightDerivedToHomotopyCategory_comp, HasDerivedCategory.standard, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, DerivedCategory.singleFunctorIsoCompQ, CategoryTheory.Functor.rightDerivedNatTrans_fac",
+   "date": "2026-10-21",
+   "verdict": "no match: these generic exact-derived and localization results provide supporting tools, not the combined pro-etale point statement with the prescribed K-flat-normalized comparison"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Exact additive functors induce functors on derived categories and natural transformations extend uniquely through localization",
+   "results": "8 hits: CategoryTheory.Abelian.Ext.mapExactFunctor_hom, CategoryTheory.Functor.mapDerivedCategoryFactorsh, CategoryTheory.Functor.mapDerivedCategoryFactors, CategoryTheory.Abelian.Ext.mapExactFunctor, CategoryTheory.Functor.mapDerivedCategory, CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app, CategoryTheory.Functor.mapDerivedCategorySingleFunctor, CategoryTheory.Functor.instLiftingCochainComplexIntDerivedCategoryQQuasiIsoUpCompHomologicalComplexMapHomologicalComplexMapDerivedCategory",
+   "date": "2026-10-21",
+   "verdict": "no match: these generic exact-derived and localization results provide supporting tools, not the combined pro-etale point statement with the prescribed K-flat-normalized comparison"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-trf-point-transport-composition",
@@ -86,5 +246,89 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-trf-point-exact-derived-model",
+  "worker": "stage1",
+  "summary": "Q63: nine-step split with no new nodes. Reuses exact constant module pullback, exact point sections, exact derived factorization, constant-ring composition, ordinary module compositor, K-flat resolution and localization universal property. Proves agreement with the prescribed K-flat-derived compositor on arbitrary complexes by two naturality squares and cancellation. Treats arbitrary (not necessarily invertible) natural transformations and full bounded-constructible restriction. Statement retained unchanged.",
+  "blueprint": "Realizes the main-20261015 proof paragraph of lem-trf-frobenius-operator-compact-description beginning 'That action transports the pair': exact point-model normalization and descent needed by lem-trf-point-transport-composition, old Steps 1,6,7; keeps the compact-support transport route of sk-d-weil.",
+  "tool_uses": [
+   {
+    "node": "prop-weil-pbc-proetale-constant-exact",
+    "why": "Generic Exactness of the pro-etale inverse image for constant coefficients used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "lem-weil-point-proetale-sections-exact",
+    "why": "Generic Sections over an algebraically closed point are exact on the pro-etale site used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-factorization",
+    "why": "Generic The functor induced on derived categories by an exact functor, with its factorization through the localization functors used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-exact-functor-derived-functor",
+    "why": "Generic The functor induced by an exact functor is its own right and left derived functor used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "def-weil-derived-pullback-tensor-hom",
+    "why": "Generic Derived pullback, tensor product, and internal Hom used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "lem-pur-proetale-module-pullback-composition",
+    "why": "Generic Composition of pro-etale module inverse images with canonical constant coefficients used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-proetale-derived-pullback-composition",
+    "why": "Generic Composition of derived pro-etale module pullbacks used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "lem-pc-kflat-resolution",
+    "why": "Generic Existence of K-flat resolutions on a ringed site used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "def-weil-frobenius-detailed",
+    "why": "Generic Arithmetic and geometric Frobenius used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "lem-weil-isomorphism-derived-pullback",
+    "why": "Generic Derived pullback along an isomorphism of schemes is the termwise inverse image used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "def-weil-finite-coefficient-point",
+    "why": "Generic The fibre functor at the geometric point of Spec k used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "lem-weil-point-sections-finiteness",
+    "why": "Generic Sections over the point of constructible complexes have finite cohomology used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   },
+   {
+    "node": "lem-weil-pbc-localization-universal-property",
+    "why": "Generic Universal property of a localization of categories: functors and natural transformations inverting W factor through it used to justify the exact point-model/localization argument; sk-d-weil has no separate node supplying this tool, and its Frobenius transport route is retained."
+   }
+  ]
+ },
+ "tool_uses": [
+  "prop-weil-pbc-proetale-constant-exact",
+  "lem-weil-point-proetale-sections-exact",
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "lem-weil-pbc-exact-functor-derived-functor",
+  "def-weil-derived-pullback-tensor-hom",
+  "lem-pur-proetale-module-pullback-composition",
+  "lem-weil-pbc-proetale-derived-pullback-composition",
+  "lem-pc-kflat-resolution",
+  "def-weil-frobenius-detailed",
+  "lem-weil-isomorphism-derived-pullback",
+  "def-weil-finite-coefficient-point",
+  "lem-weil-point-sections-finiteness",
+  "lem-weil-pbc-localization-universal-property"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q63-ec9dbe8de",
+  "group": "Q63",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q63-ec9dbe8de (reviewer sub-agent of L); spot-checked: Read all nine steps and every cited statement. The statement is byte-identical to the live node. The only stmt_dep added is lem-pur-proetale-module-pullback-composition, which supplies the compositor T_m that the statement uses. There are no new nodes. The item is still unsplit live, with no repair note, so it is not superseded and not a re-split. No SGA source is used. Step 1: prop-weil-pbc-proetale-constant-exact (any morphism, finite ring) plus lem-weil-point-proetale-sections-exact (k algebraically closed) give exactness, with restriction of scalars exact. Step 2: exact-functor factorization plus the derived-functor (Kan extension) node match the K-flat Q_r of def-weil-derived-pullback-tensor-hom. Step 3: lem-trf-constant-coefficient-composition with k=h^m gives exactly the composite ring identification that the derived-composition lemma requires; the direction of the lem-pur compositor (H_{m+1}->H_1H_m) was checked, and T_m is its inverse. Step 4: K-flat flat-term resolution (lem-pc-kflat-resolution), with c_{h,h^m} equal to the termwise class, as in Stacks 0D6D l.3658-3681. Step 5: I rechecked the two naturality squares and the cancellation of the invertible a; it is valid for unbounded, non-K-flat K. Step 6: h^r is an isomorphism, and lem-weil-isomorphism-derived-pullback (ell invertible since ell!=p, n>=1) gives D^b_c preservation; Fib_s clause 1 and point-sections-finiteness (1) give V_amb|D^b_c = V. Steps 7-9: chain maps from naturality, then localization universal property parts (2) and (3), with phi_2 = v∘V(e). This gives a unique alpha^D with the stated components, with no invertibility assumption on alpha. Stacks tags 0D6D/06YS/06YY/015F/03D8/03CB/0H7J/04VG/0982/098H resolve to the named labels. The blueprint 'transports the pair' paragraph exists in the main-20261015 compact-description proof. Edge cases checked: alpha=0, m=1, K=0, n>1. The generic tool_uses are accepted. Minor, no change: Step 9 is marked elementary while citing localization (2)/(3)."
  }
 }
