@@ -15,9 +15,67 @@
   "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
   "place": "Finite-exchange/reduction identification before Rlim; Stacks 03DI, sites-modules.tex, lemma-extension-by-zero; completed-ring strict exchange is an agent-written refinement."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Finiteness is the quotientFinite field. Compose the existing additivity, finite-limit, finite-colimit and zero-morphism instances for finite open extension, finite pullback, coefficient restriction and evaluation. The same argument applies to reduction and strict tower operations.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-cbc-completed-strict-open-exchange",
+    "def-cbc-strict-tower-open-extension",
+    "def-weil-pbc-bounded-constructible-tower",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "The finite coefficient projection commutes with pullback by the projection equation for the completed limit map and cancellation of the fixed constant comparisons. Taking adjuncts gives the direct-image coefficient square. Identity on sections gives inverse linear natural transformations. Equality on every section proves uniqueness.",
+   "uses": [
+    "def-weil-pbc-completed-pullback",
+    "def-weil-pbc-proetale-operations"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Use the proved completed coefficient isomorphism from the completed direct-image construction. The ring-sheaf scalar-change theorem makes the mate of the normalized direct comparison invertible. Uniqueness on sections identifies that comparison with cbcFiniteDirectRes. Uniqueness of left adjoints transfers invertibility to the specified cbcModulePullbackAdjunction.",
+   "uses": [
+    "prop-weil-pbc-direct-image-limits",
+    "lem-weil-pbc-ring-sheaf-change-adjunction"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "At a reduction level the constant-ring comparison followed by its inverse cancels. ModuleCat.restrictScalarsComp'App identifies the successive restricted actions with the original action, by identity on sections. Form a natural isomorphism and use sectionwise extensionality for uniqueness.",
+   "uses": [
+    "def-weil-pbc-adic-coefficient-datum",
+    "def-weil-pbc-bounded-constructible-tower"
+   ],
+   "elementary": true
+  },
+  {
+   "text": "Remaining original open-localization obligations: identify finite pullback with restriction using the site adjunction on inverse-image unit generators, then show its extension mate sends every direct-sum summand identically to itself. These two original theorems remain unfinished.",
+   "uses": [
+    "def-cbc-completed-strict-open-exchange"
+   ],
+   "elementary": false
+  }
+ ],
+ "proof_deps": [
+  "def-weil-pbc-adic-coefficient-datum",
+  "def-cbc-completed-strict-open-exchange",
+  "def-cbc-strict-tower-open-extension",
+  "def-weil-pbc-bounded-constructible-tower",
+  "def-weil-pbc-proetale-operations",
+  "def-weil-pbc-completed-pullback",
+  "prop-weil-pbc-direct-image-limits",
+  "lem-weil-pbc-ring-sheaf-change-adjunction"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "group": "H2",
+  "date": "2026-10-21",
+  "document": "literature/blueprint/main-20261015/blueprint/sec-six-functors-basics/sk-prop-sf-cbc/lem-cbc-completed-extension-zero-comparison.proof.md",
+  "place": "The finite-exchange/reduction identification. Section-normalized direct and reduction coordinates are constructed explicitly; the pullback mate uses the existing scalar-change theorem. Fifteen original holes are proved; two original open-localization holes remain."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -146,5 +204,15 @@
   "group": "NA",
   "result": "pass",
   "note": "Re-delivery after H13 RETURN of e75eae498358: def-weil-pbc-completed-pullback record now byte-identical to live (Q99 PbcQbarCompletedPullback, 4 pbcQbar* decls kept); 3 Lean modules and 2 new def-node records byte-identical to the previously substance-checked delivery; item differs from live only in lean + 2 new def-node stmt_deps; not dropped, not landed elsewhere. Independently re-read: J_j = whiskered cbcOpenShriek (extensionByZeroPresheaf+sheafification), G = completedTowerPullback, b_K on all of D(Mod A_U) via reduction with no Rlim/completeness/qc; strict exchange ∃!-pinned on levelwise K-flat towers against levelwise cbcUnderivedInverseExchange (conjugate of the sectionwise cartesian cbcRightExchange), with types of both sides checked; finite comparisons ∃!-pinned via identity-on-sections and generator-normalized mates; cbcFiniteExchange = inverse of singleBetaInv (j'_! adjunct of gU^* unit then moduleSquareG.inv) restricted through the finite projection; HEq endpoints agree by unfolding; edge cases U empty, g = id, I = A, K = 0, unbounded K, non-qc j, n = 0 not excluded; statements verbatim, declarations present, no hollow def, sorry only. Advisory: redundant first conjunct, cbcStrictOpenModule defeq to cbcCompletedTowerExtension, singleBetaInv module owner outside stmt_deps, parent-module import (listed import-cycle note), unused plain proof-plan imports (H9). No compile (no file changed)."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "H2",
+  "result": "pass",
+  "landing": "20261021T140824-L-2758407",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
