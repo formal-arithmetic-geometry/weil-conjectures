@@ -21766,3 +21766,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 09:14 L: returned deliver/V3/Sheaf.SixFunctors.IntegralOpenReductionComparison (reviewer RETURN: (reviewer C-042aa, head 042aaab61) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.SixFunctors.Integral)
 - 09:15 L: merged deliver/Q137/lem-pc-tate-endomorphism-ideals (reviewer PASS; first push; new nodes: 0)
 - 09:15 L: merged deliver/Q106/lem-pc-tate-residue-lattice-identity (reviewer PASS; first push; new nodes: 0)
+- 09:15 L: merged deliver/Q79/lem-pc-tate-residue-field-extension (reviewer FIX; first push; new nodes: 2)

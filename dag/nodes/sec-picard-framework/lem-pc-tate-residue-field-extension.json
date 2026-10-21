@@ -17,9 +17,93 @@
   "def-weil-residue-field",
   "sk-thm-picard-duality"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Apply [lem-pc-curve-local-scalar-principal-parts]. Write $L=F_K$, $O=\\mathcal O_{C,x}$, $S=\\{y\\mid x\\}$, $A=O\\otimes_kK$, $V=F\\otimes_kK$ and $B=\\bigcap_{y\\in S}O_y$, all inside $L$. Fix a uniformizer $t$ of $O$. This gives $V=A[t^{-1}]$, $L=B[t^{-1}]$, $V\\cap B=A$, the two principal-parts isomorphisms, and finite-dimensional quotients by $t^n$. In particular $S$ is finite, including when the fibre algebra is nonreduced. We first compute on $f\\,dg$ for $f,g\\in F$.",
+   "uses": [
+    "lem-pc-curve-local-scalar-principal-parts"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§3 local lattices, pp. 154–155; agent scalar-extension argument using semilocal principal parts."
+   }
+  },
+  {
+   "text": "Apply [lem-pc-tate-abstract-residue-calculus] to the $k$-algebra $F$, the $F$-module $F$ and the subspace $O$, and to the $K$-algebra $V$, the $V$-module $V$ and the subspace $A$. By [lem-pc-tate-dvr-residue-calculus], $(fO+O)/O$ is finite-dimensional for $f\\in F$, so $O$ is admissible, and for a $k$-linear projection $\\pi:F\\to O$ fixing $O$ and $f,g\\in F$ the operator $T=[\\pi m_f,m_g]$ is finite-potent with $\\operatorname{Tr}_{\\rm fp}(T)=\\operatorname{res}_{x,C/k}(f\\,dg)$. Here $A$ is admissible for $V$ over $K$: every element of $V$ is a finite sum $\\sum c_i(f_i\\otimes1)$ with $c_i\\in K$, each $f_iO$ lies in some $t^{-n_i}O$, so one common $n$ gives $rA\\subset t^{-n}A$, and $t^{-n}A/A\\simeq A/t^nA$ is finite-dimensional by step 1. The map $\\pi\\otimes1:V\\to A$ is a $K$-linear projection fixing $A$, and $m_{f\\otimes1}=m_f\\otimes1$, $m_{g\\otimes1}=m_g\\otimes1$ on $V=F\\otimes_kK$, so $[(\\pi\\otimes1)m_{f\\otimes1},m_{g\\otimes1}]=T\\otimes1$. Choose $N$ and a finite-dimensional $T$-stable $U\\subset F$ containing $T^N(F)$. Then $(T\\otimes1)^N(V)=T^N(F)\\otimes_kK\\subset U\\otimes_kK$, which is $T\\otimes1$-stable and finite-dimensional over $K$; in the basis $u_i\\otimes1$ coming from a $k$-basis $u_i$ of $U$, the matrix of $T\\otimes1$ is $\\iota$ applied to the matrix of $T|_U$, so its trace is $\\iota(\\operatorname{Tr}(T|_U))$. By the projection formula of [lem-pc-tate-abstract-residue-calculus],\n$$\\operatorname{res}_{V,A}((f\\otimes1)\\,d(g\\otimes1))=\\iota(\\operatorname{res}_{x,C/k}(f\\,dg)).$$",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus",
+    "lem-pc-tate-dvr-residue-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1 (T1) and definition of the finite-potent trace, p. 150; §2 Theorem 1, p. 151; scalar extension is the explicit matrix calculation."
+   }
+  },
+  {
+   "text": "For each $r\\in R=V\\subset L$, some $t^n r$ belongs to $B$ since $L=B[t^{-1}]$. Hence $rB\\subset t^{-n}B$, and $t^{-n}B/B\\simeq B/t^nB$ is finite-dimensional by [lem-pc-curve-local-scalar-principal-parts]. Thus $B$ is admissible as a $K$-subspace of the $R$-module $L$. Apply [lem-pc-tate-residue-exact-sequence] to $0\\to V\\to L\\to L/V\\to0$ with lattice $B$. Its inverse-image lattice is $A$ by $V\\cap B=A$. Its image lattice is all of $L/V$: for any $l\\in L$, surjectivity of $V/A\\to L/B$ provides $v\\in V$ with $l-v\\in B$. The residue for the full lattice on $L/V$ is zero by [lem-pc-tate-abstract-residue-calculus], since that lattice is an $R$-submodule. Therefore $\\operatorname{res}_{L,B}=\\operatorname{res}_{V,A}$ on $\\Omega^1_{R/K}$.",
+   "uses": [
+    "lem-pc-curve-local-scalar-principal-parts",
+    "lem-pc-tate-residue-exact-sequence",
+    "lem-pc-tate-abstract-residue-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1 (T2), §2 Theorem 1: exact-sequence comparison with full quotient lattice; agent argument."
+   }
+  },
+  {
+   "text": "Let $W=\\prod_{y\\in S}L$, $P=\\prod_{y\\in S}O_y$ and $j:L\\to W$ the diagonal map. Regard these as $R=V$-modules. Each $O_y$ is admissible: a common power $t^n$ clears the denominator of $r\\in R$ in $O_y$, and $O_y/t^nO_y$ is finite-dimensional by [lem-pc-curve-local-scalar-principal-parts]. The same bound and the finite product give admissibility of $P$. Apply [lem-pc-tate-residue-exact-sequence] to $0\\to L\\xrightarrow{j}W\\to W/j(L)\\to0$. The inverse-image lattice is $B$. The image lattice is the full quotient: given $(l_y)$, the surjection $L/B\\to\\bigoplus_y L/O_y$ gives $l\\in L$ such that $l_y-l\\in O_y$ for all $y$. The full lattice $W/j(L)$ is an $R$-submodule, so its residue is zero by [lem-pc-tate-abstract-residue-calculus]. We obtain $\\operatorname{res}_{W,P}=\\operatorname{res}_{L,B}$.",
+   "uses": [
+    "lem-pc-curve-local-scalar-principal-parts",
+    "lem-pc-tate-residue-exact-sequence",
+    "lem-pc-tate-abstract-residue-calculus"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1 (T2), §2 and §3 finite sum of local residues, pp. 155–156; diagonal exact-sequence argument."
+   }
+  },
+  {
+   "text": "Choose a $K$-linear projection $\\pi_y:L\\to O_y$ in every coordinate and take their product. For $f,g\\in F$, the commutator on $W$ is block diagonal with blocks $[\\pi_y m_f,m_g]$. By [lem-pc-tate-dvr-residue-calculus] (for the DVR $O_y$ over $K$ with fraction field $L$) each block is finite-potent with trace $\\operatorname{res}_{y,C_K/K}(f_K\\,dg_K)$, and by [lem-pc-tate-abstract-residue-calculus] $\\operatorname{res}_{W,P}((f\\otimes1)d(g\\otimes1))$ is the finite-potent trace of the block-diagonal operator for the product projection. Choose a common exponent $N$ and finite-dimensional stable subspaces containing their $N$th images. Their finite product is stable and contains the $N$th image of the block diagonal operator; a concatenation of bases shows its ordinary trace is the sum of the block traces. Thus\n$$\\operatorname{res}_{W,P}((f\\otimes1)d(g\\otimes1))=\\sum_{y\\in S}\\operatorname{res}_{y,C_K/K}(f_K\\,dg_K).$$\nCombining this with steps 2–4 proves the required identity for $f\\,dg$. This uses the same action of $f,g$ whether it is viewed through $R\\to L$ or directly through $L$: the displayed multiplication operators on each coordinate are identical.",
+   "uses": [
+    "lem-pc-tate-abstract-residue-calculus",
+    "lem-pc-tate-dvr-residue-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§1 definition of finite-potent trace and §3 finite-product calculation in Theorem 3, pp. 155–156."
+   }
+  },
+  {
+   "text": "By the definition of Kähler differentials [def-weil-pbc-kahler-differentials], every $\\eta\\in\\Omega^1_{F/k}$ is a finite sum $\\sum_i f_i\\,dg_i$. The induced differential map takes this sum to $\\sum_i f_{i,K}\\,dg_{i,K}$. The local Tate residue maps are linear by [lem-pc-tate-dvr-residue-calculus]. Add the identities of step 5 and interchange the two finite sums. This gives the asserted formula for $\\eta$. Each block in step 5 occurs once for a point of $S$; the trace uses the full quotients $O_y/t^nO_y$, so nilpotent thickness is already present in the operator, without an additional multiplicity on the sum.",
+   "uses": [
+    "def-weil-pbc-kahler-differentials",
+    "lem-pc-tate-dvr-residue-calculus"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+    "place": "§2 Theorem 1, linearity of residues; agent assembly of the scalar-extension identity."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-pc-curve-local-scalar-principal-parts",
+  "lem-pc-tate-abstract-residue-calculus",
+  "lem-pc-tate-dvr-residue-calculus",
+  "lem-pc-tate-residue-exact-sequence",
+  "def-weil-pbc-kahler-differentials"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/tate-residues-of-differentials-on-curves_ASENS-1968.pdf",
+  "place": "§2 formula (*) p. 152 and §3 finite-product residues; explicit scalar-extension and semilocal exact-sequence argument."
+ },
  "mathlib_searches": [
   {
    "tool": "leanfinder",
@@ -55,10 +139,31 @@
    "results": "Read search output: MeromorphicOn.divisor, toMeromorphicNFAt, meromorphicTrailingCoeffAt, toMeromorphicNFOn, meromorphicOrderAt, MeromorphicOn.divisor_apply, meromorphicNFAt_toMeromorphicNFAt, MeromorphicOn.divisor_def. No statement of the algebraic-curve residue/duality assertion; residue-field maps, ordinary algebra traces and analytic meromorphic functions have different objects.",
    "date": "2026-10-21",
    "verdict": "no match"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Sum of Tate residues above a closed point of a smooth curve commutes with arbitrary extension of the ground field",
+   "results": "Read actual hits: AlgebraicGeometry.Scheme.residue_descResidueField_assoc, AlgebraicGeometry.Scheme.residue_descResidueField, WeierstrassCurve.Projective.baseChange_add, AlgebraicGeometry.Scheme.residue_residueFieldMap, Valuation.HasExtension.algebraMap_residue_eq_residue_algebraMap, AlgebraicGeometry.Scheme.residue_residueFieldMap_assoc, WeierstrassCurve.Jacobian.baseChange_add, AlgebraicGeometry.Scheme.Hom.residueFieldMap. Residue-field maps and inseparable-degree results do not state Tate residue scalar compatibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Sum of residues of algebraic curve differentials after inseparable field extension",
+   "results": "Read actual hits: dvd_differentIdeal_of_not_isSeparable, Field.insepDegree, Field.finInsepDegree_mul_finInsepDegree_of_isAlgebraic, Algebra.IsSeparable.finInsepDegree_eq, Algebra.FormallyUnramified.range_eq_top_of_isPurelyInseparable, IsPurelyInseparable.sepDegree_eq_one, separableClosure, Field.insepDegree_eq_of_isSeparable. Residue-field maps and inseparable-degree results do not state Tate residue scalar compatibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
+  },
+  {
+   "tool": "grep",
+   "query": "Tate.*residu|residu.*differential|finite.?potent",
+   "results": "Read actual hits: Mathlib/NumberTheory/LSeries/PrimesInAP.lean. Residue-field maps and inseparable-degree results do not state Tate residue scalar compatibility.",
+   "date": "2026-10-21",
+   "verdict": "no match"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "det-picard-rr-duality",
@@ -75,5 +180,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-pc-tate-residue-field-extension",
+  "worker": "stage1",
+  "summary": "Kept the arbitrary-field statement, with nonreduced fibres and no multiplicity. Split the argument into finite trace scalar extension, two exact-sequence lattice comparisons and a block trace calculation. Created three statement-only prerequisite nodes, one attached to an existing sorry-free project theorem. Checked every cited statement and recorded all Mathlib searches. Maintainer reader Q79 (FIX): the duplicate abstract finite-quotient node of the delivery is dropped in favour of the existing lem-pc-tate-abstract-residue-calculus; step 2 now computes the scalar-extended trace directly on $U\\otimes_kK$.",
+  "blueprint": "Realizes det-picard-rr-duality proof (4), the sentence that residues commute with scalar extension, by proving the local sum identity through Tate finite-terms traces; no change of the unit route."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q79-80601ec48",
+  "group": "Q79",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q79-80601ec48 (reviewer sub-agent of L); spot-checked: Read Tate ASENS 1968 pp.149-156: (T1)-(T5), Prop 1-2, Thm 1, finite-terms formula (*) p.152, (R1)-(R6), and Thm 3 (the lattice argument this item adapts). Item statement is correct and unchanged: arbitrary k, inseparable κ(x), sum over the points of Spec(κ(x)⊗K) with no multiplicity. Checked on the p-test k=F_p(a), T^p=a, K=k(a^{1/p}): the block residue of T^{p-1}dT/(T^p-a) is 1, not p. Not a re-split note item; no SGA used. Fault C5: new node lem-pc-abstract-tate-finite-quotient duplicates the existing lem-pc-tate-abstract-residue-calculus (NS, 2026-10-21): admissible lattice, Tr_fp([π m_f,m_g]), π-independence, zero residue for submodule lattices. The report's 'Not duplicates' list skips that node. Its only extra content, formula (*), is not needed. Fix: dropped the node. Step 2 now computes the trace of T⊗1 directly on U⊗_kK (matrix ι(T|_U), elementary). Steps 3-5 and the exact-sequence node now cite the existing abstract node, and proof_deps was recomputed. Small statement fix: lem-pc-tate-residue-exact-sequence now states that i^{-1}A and q(A) are admissible, without which its residues are undefined. With that change it matches the sorry-free Lean TateResidue.res_eq_add_of_exact (sheaf lean tree, ResidueProperties.lean:52-116). Maintainer note: the report says this declaration is recorded in lean_audit.slopmaster2, but no new node has a lean_audit field and slopmaster2 has no TateResidue directory, so the attachment must be made by hand. Kept lem-pc-curve-local-scalar-principal-parts; every clause checked: geometrically integral, fibre finite and closed, O_y DVR, F⊗K→L injective, Artinian product A/t^n=∏O_y/t^n, B = semilocal normal ring = ∩O_y, B[1/t]=L, V∩B=A, both principal-parts isomorphisms. It is true and has no duplicate under rg -L. Steps 3-4 (exact sequences 0→V→L→L/V and 0→L→∏L→quotient, inverse-image and full image lattices), step 5 (block-diagonal trace without general additivity) and step 6 (linearity over finite sums) are correct. Route stays within sk-thm-picard-rr, which cites sk-thm-picard-duality; no tool_uses needed; no cycle. Two faults in total, within the FIX ceiling. Fixed files are under fixes/dag/nodes/sec-picard-framework/; details in review.md.; 2 file(s) fixed by the reviewer"
  }
 }
