@@ -18,9 +18,234 @@
   "def-pd-separable-closure",
   "lem-sfb-field-separable-cech-coordinates"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Every open subgroup of $G$ is clopen (its complementary cosets are open). The open-subgroup basis and Hausdorff separation therefore separate any two points by a clopen set, so $G$ is totally disconnected. The continuous-function input gives the sheaf $F_G$, its pointwise group operations, and $f^{-1}F_{G,X}\\simeq F_{G,Y}$ for every scheme map. The group-reconstruction input applies when $G$ is compact or complete for its two-sided uniformity and identifies $G$ topologically with $\\operatorname{Aut}(\\omega_G)$ on the small orbit category $\\mathcal O_G$.",
+   "uses": [
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-complete-group-forgetful-automorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 4.2.12; Proposition 7.1.5 and Example 7.1.6."
+   }
+  },
+  {
+   "text": "The fibre of any $F_G$-torsor at $x:\\operatorname{Spec}\\Omega\\to X$ has a point. Indeed pull a trivializing cover back to $\\operatorname{Spec}\\Omega$. Refine to the affine ind-etale basis. Each such affine is $\\Omega[S]$ for a profinite $S$; a covering contains a nonempty one, and choosing $s\\in S$ gives an $\\Omega$-section of that covering object by evaluation $LC(S,\\Omega)\\to\\Omega$. Pulling its torsor section back gives a global point over $\\Omega$. Since $F_G(\\operatorname{Spec}\\Omega)=G$, the torsor identity makes the set of these sections a simply transitive right $G$-set. Fix a point $p$.",
+   "uses": [
+    "lem-weil-pbc-ind-etale-basis",
+    "det-pe-condensed-point-basis",
+    "lem-sfb-totally-disconnected-coefficient-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Section 4.1, Example 4.1.10; Lemma 4.2.12; affine ind-etale basis over a separably closed field."
+   }
+  },
+  {
+   "text": "Choose the pointed profinite etale limit $v:T\\to X$. The hypotheses hold: the Noetherian scheme $X$ is quasi-compact, and local Noetherianness supplies quasi-separatedness by the cited lemma. Thus $T$ is connected and $v$ is a single pro-etale covering, with point $t$ above $x$, splitting every finite etale cover. We will use its component identifications $\\pi_0(T^{q+1}_{/X})=\\Pi_x^q$.",
+   "uses": [
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-weil-pbc-locally-noetherian-quasi-separated"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.3 and Construction 7.4.4; finite-cover inverse-limit construction."
+   }
+  },
+  {
+   "text": "Let $L$ be a pro-etale locally constant set sheaf on $X$ (locally on a pro-etale covering the sheafification of a constant presheaf; for instance $P_S$ of Step 6). Since $X$ is locally Noetherian, the representability theorem gives an etale $q:Z\\to X$ with the valuation lifting property and bijections $L(U)\\simeq\\operatorname{Hom}_X(U,Z)$ natural in $U\\in X_{\\mathrm{proet}}$. As $X$ is nonempty, connected, normal, locally Noetherian and quasi-compact, the geometric-cover component theorem makes each connected component $C_j$ of $Z$ open and closed with $C_j\\to X$ finite etale, and $Z=\\coprod_jC_j$. The etale $X$-scheme $Z$ is itself an object of $X_{\\mathrm{proet}}$, so the Yoneda bijection identifies sheaf maps $L\\to L'$ between two such sheaves, represented by $Z$ and $Z'=\\coprod_kC'_k$, with $X$-morphisms $\\varphi:Z\\to Z'$, compatibly with composition. Each $C_j$ is connected and the $C'_k$ form a clopen partition of $Z'$, so $\\varphi$ maps $C_j$ into a single $C'_k$, by an $X$-morphism of finite etale $X$-schemes.",
+   "uses": [
+    "lem-a1-proetale-local-system-representability",
+    "lem-a1-normal-geometric-cover-components",
+    "lem-galois-yoneda-hom-bijection"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.3.9 and Lemma 7.4.10."
+   }
+  },
+  {
+   "text": "For $L$ as in Step 4 put $E_L=\\coprod_j|(C_j)_x|$, the disjoint union of the finite fibres of the components. By definition $\\Pi_x=\\operatorname{Aut}(F_x)$ acts on each finite fibre $|(C_j)_x|$ continuously, so $E_L$ is a discrete set on which $\\Pi_x$ acts with open point stabilizers; this action is the monodromy of $L$. For $\\varphi$ as in Step 4 the induced map $E_L\\to E_{L'}$ is the union of the fibre maps of the restrictions $C_j\\to C'_k$; it is $\\Pi_x$-equivariant because the elements of $\\Pi_x$ are natural automorphisms of the fibre functor on finite etale $X$-schemes. By Step 3 each $T\\times_XC_j$ splits canonically as $\\coprod_{s\\in|(C_j)_x|}T$, naturally in $C_j$, the section indexed by $s$ taking $t$ to $s$. Taking the union over $j$ gives $T\\times_XZ\\simeq\\coprod_{e\\in E_L}T$ over $T$, naturally in $\\varphi$. Hence for $U\\to T$ in $T_{\\mathrm{proet}}$, $L|_T(U)=\\operatorname{Hom}_X(U,Z)=\\operatorname{Hom}_T(U,\\coprod_{E_L}T)$. By the clopen-coproduct lemma this is the set of maps $|U|\\to E_L$ with open fibres, that is $F_{E_L}(U)$. Thus $L|_T\\simeq F_{E_L}$ is the constant sheaf of $E_L$, naturally in $L$. Its inverse image along $t:\\operatorname{Spec}\\Omega\\to T$, where $x=vt$, is $F_{E_L}$ on $\\operatorname{Spec}\\Omega$ by the coefficient input. So the fibre of $L$ at $x$ is $E_L$, with $e$ the value at $t$ of the section indexed by $e$. All this holds simultaneously for every object of any small diagram of such sheaves; no finite common etale trivializing cover is asserted.",
+   "uses": [
+    "def-galois-fibre-functor",
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-galois-coproduct-copies-morphisms-clopen",
+    "lem-sfb-totally-disconnected-coefficient-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemmas 7.3.9 and 7.4.10; finite fibre functor on the finite etale components and their disjoint union."
+   }
+  },
+  {
+   "text": "For every discrete continuous left $G$-set $S$, construct $P_S=P\\times^{F_G}F_S$ as follows. On a trivialization choose section $a_i$ of $P$; on overlaps write $a_j=a_i b_{ij}$. Glue the constant sheaves $F_S$ by $s\\mapsto b_{ij}s$. This is a sheaf map: the action $G\\times S\\to S$ is continuous since $S$ has open stabilizers, and the continuous-function comparison respects products. The identity $b_{ik}=b_{ij}b_{jk}$ is exactly the gluing cocycle. Effective descent supplies $P_S$ and glues maps induced by equivariant maps of $S$. Equivalently its local symbols satisfy $[a g,s]=[a,gs]$. It is locally constant. Over $x$, $p$ identifies its fibre with $S$ by $s\\mapsto[p,s]$.",
+   "uses": [
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proof of Lemma 7.4.7, pushout to discrete G-sets; explicit gluing by Stacks sites.tex Tags 04TR and 04TQ."
+   }
+  },
+  {
+   "text": "The monodromy of Step 5 on the fibres of the $P_S$, identified with $S$ by $s\\mapsto[p,s]$ (Step 6) and natural for the maps $P_S\\to P_{S'}$ induced by $G$-maps $S\\to S'$ (Step 5), now gives for each $\\gamma\\in\\Pi_x$ a natural automorphism $\\alpha_\\gamma$ of $\\omega_G$ on $\\mathcal O_G$. It is a group homomorphism because each monodromy action is one. It is continuous into the pointwise topology: the inverse image of a basic stabilizer is the intersection of the finitely many open point stabilizers in the discrete $\\Pi_x$-sets $(P_S)_x$. Compose with the inverse of $G\\simeq\\operatorname{Aut}(\\omega_G)$ to obtain a continuous homomorphism $\\rho_P:\\Pi_x\\to G$, characterized by the action $\\gamma[p,s]=[p,\\rho_P(\\gamma)s]$ for all orbit objects $S$.",
+   "uses": [
+    "def-galois-fibre-functor",
+    "lem-sfb-complete-group-forgetful-automorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proof of Lemma 7.4.7; Proposition 7.1.5. Continuity is checked on the displayed point-stabilizer basis."
+   }
+  },
+  {
+   "text": "Here is the recovery of $P$ from its associated sheaves, including local continuity. On any test object $W$ let $Q(W)$ be the set of natural isomorphisms of sheaf-valued functors $(S\\mapsto F_S|_W)\\simeq(S\\mapsto P_S|_W)$ on $\\mathcal O_G$. These sets form a sheaf: component maps and their inverses glue uniquely, and naturality is an equality checked locally. A section $a$ of $P$ defines such an isomorphism by $s\\mapsto[a,s]$. Where $P$ has a section $a_0$, an isomorphism is a family of permutations of $S$ depending on $w\\in|W|$. Each coordinate $w\\mapsto\\beta_S(w)(s)$ and each inverse coordinate is locally constant, because it is the image of the constant section $s$ under a map of constant sheaves. Naturality says pointwise that $\\beta(w)\\in\\operatorname{Aut}(\\omega_G)$. Conversely such continuous families define sheaf maps by evaluation on locally constant sections, which locally are constant. The pointwise topology and group reconstruction identify these families precisely with $C(|W|,G)$. Thus $P\\to Q$ is locally, hence globally, an isomorphism. This uses a small orbit category; no improper product over all sets is taken.",
+   "uses": [
+    "lem-sfb-complete-group-forgetful-automorphisms",
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Proposition 7.1.5 and the pushout construction in Lemma 7.4.7; agent explicit recovery calculation."
+   }
+  },
+  {
+   "text": "Over $T$, Step 5 gives natural trivializations $F_S|_T\\simeq P_S|_T$ with fibre map $s\\mapsto[p,s]$ for every $S\\in\\mathcal O_G$. They define an element of $Q(T)$, hence, by Step 8, a section $a\\in P(T)$ with $t^*a=p$. This section is unique with that value: two sections differ by an element of $F_G(T)=G$, since $T$ is connected and $G$ totally disconnected; evaluating at $t$ forces this element to be $1$. Thus the given torsor becomes trivial on the single cover $T\\to X$.",
+   "uses": [
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-sfb-totally-disconnected-coefficient-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.10, finite-cover trivialization on the pointed limit; recovery in Step 8."
+   }
+  },
+  {
+   "text": "Write $\\mathrm{pr}_2^*a=\\mathrm{pr}_1^*a\\,c$ on $T\\times_XT$. The component and function formulas identify $c$ with a continuous map $c:\\Pi_x\\to G$. On triple products the torsor equality gives $c_{13}=c_{12}c_{23}$; the Cech faces therefore give $c(gh)=c(g)c(h)$. For the associated sheaf, $[\\mathrm{pr}_2^*a,s]=[\\mathrm{pr}_1^*a,c(g)s]$. The finite-fibre normalization of the Cech coordinates and Step 5 identify this action with $\\alpha_g$ of Step 7. Hence $c(g)$ and $\\rho_P(g)$ act equally on every $G/U$. Group reconstruction is injective, so $c=\\rho_P$. This also fixes the side of the action and rules out replacing the homomorphism by its inverse.",
+   "uses": [
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-complete-group-forgetful-automorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.3, limit descent; proof of Lemma 7.4.7; the normalized group-Cech convention."
+   }
+  },
+  {
+   "text": "Conversely let $\\rho:\\Pi_x\\to G$ be continuous. On $T$ take the regular right $F_G$-torsor, with section $a=1$. On the double overlap glue the second copy to the first by left multiplication by $\\rho(g)$, using the Cech label $g$. This is an equivariant map of right torsors. Continuity gives a section of $F_G$ on the overlap; the identity $\\rho(gh)=\\rho(g)\\rho(h)$ gives the triple-overlap gluing condition. Effective sheaf descent glues the sheaf, its action and the local regular-torsor identities to an $F_G$-torsor $P_\\rho$. Since the diagonal label is $1$, the section over the lifted point $t$ supplies a point of its fibre. The cocycle calculation of Step 10 returns exactly $\\rho$. The construction applied to $\\rho_P$ returns $P$, by uniqueness in effective descent with its displayed trivialization.",
+   "uses": [
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.3 and the descent half of Lemma 7.4.7, expanded using Stacks sites.tex Tags 04TR and 04TQ."
+   }
+  },
+  {
+   "text": "For pointed torsors $(P,p)$ and $(P',p')$, use their unique sections $a,a'$ over $T$ taking these fibre values. Any equivariant map $P|_T\\to P'|_T$ has the form $a\\mapsto a' b$ for $b\\in F_G(T)=G$. Its overlap compatibility is exactly $\\rho_{P'}(g)b=b\\rho_P(g)$, as follows by applying the map to $a_2=a_1\\rho_P(g)$ and comparing with $a'_2=a'_1\\rho_{P'}(g)$. The sheaf descent theorem glues exactly those $b$ satisfying this equation. Therefore the unpointed groupoid arrows are precisely the conjugating elements, and a point-preserving arrow exists uniquely when the two representations are equal. Replacing $p$ by $p b$ changes the fibre identifications to $s\\mapsto[p,b s]$, and hence changes $\\rho_P$ to $b^{-1}\\rho_P b$.",
+   "uses": [
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Groupoid convention before Lemma 7.4.3; explicit equivariant descent calculation."
+   }
+  },
+  {
+   "text": "For a pointed morphism $f:(Y,y)\\to(X,x)$, the coefficient comparison identifies the pullback torsor with an $F_{G,Y}$-torsor and identifies its associated discrete sheaves with $f^{-1}P_S$: this is seen on their trivializations and overlap functions $b_{ij}$, where pullback is precomposition. Each $P_S$ is a disjoint union of finite etale sheaves. On every finite summand, the cited fibre-functoriality equation says that $\\gamma\\in\\pi_1(Y,y)$ acts through $f_*(\\gamma)$; the same holds on the union. It follows on every orbit $S$ that the pullback representation acts as $\\rho_P\\circ f_*$. Injectivity in group reconstruction proves equality of the homomorphisms, with the induced point of the fibre. The fibre equations also make this compatibility coherent for identities and composites.",
+   "uses": [
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-galois-pi1-functoriality",
+    "lem-sfb-complete-group-forgetful-automorphisms"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Stacks pione.tex Tag 0BND (3), via Tag 0BN5, lemma-functoriality-galois; coefficient pullback and associated-sheaf gluing."
+   }
+  },
+  {
+   "text": "For a continuous homomorphism $u:G\\to H$, extend the structural group by gluing regular $F_H$-torsors with transition functions $u(b_{ij})$. This is the contracted product $P\\times^{F_G}F_H$, as its local symbols satisfy $[a g,h]=[a,u(g)h]$. It has fibre point $[p,1]$. A discrete continuous left $H$-set $S$ remains a discrete continuous $G$-set via $u$ (the inverse image of each open stabilizer is open). Its associated sheaf for the extended torsor is canonically $P\\times^{F_G}F_S$: locally both are $F_S$, and both overlap maps are $s\\mapsto u(b_{ij})s$. Their fibre monodromy is thus $u(\\rho_P(\\gamma))$ on every $H/U$. Reconstruction for $H$ identifies the extended representation with $u\\circ\\rho_P$. These identifications preserve maps and composition because the same equalities hold on the trivializing cover.",
+   "uses": [
+    "lem-sfb-totally-disconnected-coefficient-realization",
+    "lem-sfb-complete-group-forgetful-automorphisms",
+    "lem-pe-set-sheaf-cover-descent"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.7, pushout construction, with the explicit structural-group gluing calculation."
+   }
+  },
+  {
+   "text": "Over $\\operatorname{Spec}k$, apply Step 2 also to $\\operatorname{Spec}k^s$: its pro-etale affine basis consists of $k^s[S]$, and a nonempty profinite set has a point. Thus any torsor there has a section $a_s$. Its pullback to $\\operatorname{Spec}\\Omega$ is a section $a_\\Omega$, and the two sets of sections identify respectively with $G$ by $g\\mapsto a_sg$ and $g\\mapsto a_\\Omega g$. Restriction is the identity on these $G$-coordinates, hence is a canonical bijection independently of the chosen $a_s$. The separable-Cech input gives the covering $\\operatorname{Spec}k^s\\to\\operatorname{Spec}k$ and its group-nerve coordinates. For an arbitrary $G$, the function-coefficient formula now gives $F_G((\\operatorname{Spec}k^s)^2_{/k})=C(G_k,G)$; it is not an appeal to that input's assertion only for normed-field coefficients.",
+   "uses": [
+    "det-pe-condensed-point-basis",
+    "lem-weil-pbc-ind-etale-basis",
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-totally-disconnected-coefficient-realization"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Example 4.1.10 and Lemma 4.2.12; separable-closure Cech calculation in lem-sfb-field-separable-cech-coordinates."
+   }
+  },
+  {
+   "text": "The section corresponding to $p$ therefore has descent equation $\\mathrm{pr}_2^*p=\\mathrm{pr}_1^*p\\,c$, with $c\\in C(G_k,G)$. The triple Cech product gives $c(gh)=c(g)c(h)$ in the stipulated convention. The associated discrete sheaf $P_S$ has overlap action $s\\mapsto c(g)s$. By Step 5 the monodromy on the fibre of $P_S$ is, on each finite etale component, the finite fibre action. For $X=\\operatorname{Spec}k$ the pointed limit cover is $\\operatorname{Spec}k^s\\subseteq\\Omega$, and its normalization $\\mathrm{pr}_2^*s=\\mathrm{pr}_1^*(gs)$ identifies this finite fibre action with the descent action on each component, hence on their union. The construction in Step 7 consequently associates to $(P,p)$ the element of $\\operatorname{Aut}(\\omega_G)$ acting by $c(g)$ for every $g$. Injectivity of reconstruction gives $\\rho_P=c$. This proves the field normalization as well as the claimed fibre restriction. All indexing categories used above (orbit category, pointed cover system, and descent diagrams) are small in the agreed larger universes.",
+   "uses": [
+    "lem-sfb-field-separable-cech-coordinates",
+    "lem-sfb-pointed-finite-etale-limit-cover",
+    "lem-sfb-complete-group-forgetful-automorphisms",
+    "def-galois-fibre-functor"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+    "place": "Lemma 7.4.3, finite-cover normalization; proof of Lemma 7.4.7 and the separable-Cech convention."
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-sfb-totally-disconnected-coefficient-realization",
+  "lem-sfb-complete-group-forgetful-automorphisms",
+  "lem-weil-pbc-ind-etale-basis",
+  "det-pe-condensed-point-basis",
+  "lem-sfb-pointed-finite-etale-limit-cover",
+  "lem-weil-pbc-locally-noetherian-quasi-separated",
+  "lem-a1-proetale-local-system-representability",
+  "lem-a1-normal-geometric-cover-components",
+  "lem-galois-yoneda-hom-bijection",
+  "def-galois-fibre-functor",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-galois-pi1-functoriality",
+  "lem-sfb-field-separable-cech-coordinates"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/bhatt-scholze-pro-etale-topology_arXiv-1309.1198.pdf",
+  "place": "Proposition 7.1.5, Lemmas 7.3.9 and 7.4.10, and the pushout-to-discrete-sets argument of Lemma 7.4.7; agent expansion for arbitrary complete groups, including recovery of the torsor and all naturality and field-cocycle clauses."
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -56,10 +281,38 @@
    "results": "8 hits: CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, CategoryTheory.PreGaloisCategory.IsFundamentalGroup, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, IsCoveringMap.monodromyFunctor_obj, CategoryTheory.PreGaloisCategory.toAutHomeo_apply, IsCoveringMap.monodromyFunctor, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.continuous_smul, CategoryTheory.PreGaloisCategory.toAutHomeo",
    "date": "2026-10-21",
    "verdict": "no match: these results do not state this geometric continuous-coefficient input"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Complete topological group torsors on a connected normal Noetherian scheme correspond to continuous homomorphisms of the etale fundamental group",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.PreGaloisCategory.IsFundamentalGroup, CategoryTheory.PreGaloisCategory.toAutHomeo_apply, CategoryTheory.PreGaloisCategory.toAutMulEquiv_isHomeomorph, CategoryTheory.PreGaloisCategory.toAutMulEquiv_apply, CategoryTheory.PreGaloisCategory.toAut_bijective, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, CategoryTheory.PreGaloisCategory.toAut_isHomeomorph, CategoryTheory.PreGaloisCategory.toAutHomeo",
+   "date": "2026-10-21",
+   "verdict": "no match: finite Galois categories and topological torsors do not give this pro-etale classification"
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Classify pro etale torsors under a Noohi group using monodromy and associated discrete group sets",
+   "results": "[leanfinder] OK 8 hit(s); CategoryTheory.PreGaloisCategory.IsFundamentalGroup, CategoryTheory.PreGaloisCategory.instIsPretransitiveCarrierObjFintypeCatOfIsConnected, IsCoveringMap.monodromyFunctor, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.toIsNaturalSMul, CategoryTheory.PreGaloisCategory.exists_lift_of_continuous, CategoryTheory.PreGaloisCategory.toAutHomeo_apply, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial, AlgebraicGeometry.Scheme.smallEtaleTopology",
+   "date": "2026-10-21",
+   "verdict": "no match: finite Galois categories and topological torsors do not give this pro-etale classification"
+  },
+  {
+   "tool": "grep",
+   "query": "Noohi|torsor.*complete|complete.*torsor",
+   "results": "[grep] OK 1 hit(s); Mathlib/Analysis/Normed/Operator/Banach.lean:256",
+   "date": "2026-10-21",
+   "verdict": "no match: finite Galois categories and topological torsors do not give this pro-etale classification"
+  },
+  {
+   "tool": "leansearch",
+   "query": "Continuous topological group torsors on the pro etale site classified by fundamental group representations",
+   "results": "[leansearch] OK 8 hit(s); instIsTopologicalAddTorsor, IsTopologicalAddTorsor.toContinuousVAdd, IsTopologicalAddTorsor.to_isTopologicalAddGroup, IsTopologicalAddTorsor, IsTopologicalAddTorsor.mk, CategoryTheory.PreGaloisCategory.IsFundamentalGroup.non_trivial', IsTopologicalGroup.mk, IsTopologicalAddTorsor.recOn",
+   "date": "2026-10-21",
+   "verdict": "no match: finite Galois categories and topological torsors do not give this pro-etale classification"
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-sfb-normal-continuous-algcl-monodromy",
@@ -81,5 +334,59 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-sfb-complete-group-torsor-monodromy",
+  "worker": "stage1",
+  "summary": "Q03: split through the small discrete orbit category of G, associated locally constant set sheaves, and their recovery by continuous natural isomorphisms. The universal finite-etale limit trivializes those sheaves simultaneously, giving a continuous group-Cech cocycle and explicit descent inverse. Wrote out arrows, basepoint conjugation, pointed pullback, change of group, and separable-field normalization. Three new strictly subsidiary statement-only nodes; no statement change, no Lean writing or compilation.",
+  "blueprint": "The inherited det-thm-sf-ctf-stability-direct-images proof paragraph (3), all-continuous coefficient compatibility on normal refinements before finite-field descent, via the four inherited intermediate nodes. The supplied ancestor tool returns None: its blueprint ancestry is detached in the live DAG; retained that node value and the exact inherited route rather than inventing a blueprint id. No blueprint node found with the same torsor statement.",
+  "tool_uses": [
+   {
+    "node": "lem-weil-pbc-ind-etale-basis",
+    "why": "Affine ind-etale basis gives an explicit section of a covering of a separably closed field. The unit gives no more specific torsor input; this does not replace its direct-image route."
+   },
+   {
+    "node": "det-pe-condensed-point-basis",
+    "why": "Identifies basis objects over a separably closed field with profinite sets, so a nonempty object has a rational point. The unit gives no more specific torsor input; this does not replace its direct-image route."
+   },
+   {
+    "node": "lem-a1-proetale-local-system-representability",
+    "why": "Generic representability of pro-etale locally constant set sheaves by geometric coverings. The unit gives no more specific torsor input; this does not replace its direct-image route."
+   },
+   {
+    "node": "lem-a1-normal-geometric-cover-components",
+    "why": "Normal Noetherian geometric coverings are disjoint unions of finite etale covers. The unit gives no more specific torsor input; this does not replace its direct-image route."
+   },
+   {
+    "node": "lem-galois-coproduct-copies-morphisms-clopen",
+    "why": "Identifies the sheaf represented by disjoint copies of T with the constant set sheaf after the finite-cover splittings. The unit gives no more specific torsor input; this does not replace its direct-image route."
+   },
+   {
+    "node": "lem-pe-set-sheaf-cover-descent",
+    "why": "Effective gluing of set sheaves and maps assembles associated sheaves and torsors from explicit cocycles. The unit gives no more specific torsor input; this does not replace its direct-image route."
+   },
+   {
+    "node": "lem-galois-pi1-functoriality",
+    "why": "The finite fibre equation for the pullback fundamental-group homomorphism; only its Stacks 0BND/0BN5 statement is used. The unit gives no more specific torsor input; this does not replace its direct-image route."
+   }
+  ]
+ },
+ "tool_uses": [
+  "lem-weil-pbc-ind-etale-basis",
+  "det-pe-condensed-point-basis",
+  "lem-a1-proetale-local-system-representability",
+  "lem-a1-normal-geometric-cover-components",
+  "lem-galois-coproduct-copies-morphisms-clopen",
+  "lem-pe-set-sheaf-cover-descent",
+  "lem-galois-pi1-functoriality"
+ ],
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-Q03-c4c01f12d",
+  "group": "Q03",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q03-c4c01f12d (reviewer sub-agent of L); spot-checked: Read the item, its 16 steps, the 3 new nodes and every cited statement in full, against Bhatt–Scholze (arXiv 1309.1198): Def 7.1.1/7.1.3, Lemma 7.1.4, Prop 7.1.5, Ex 7.1.6, §7.4 (7.4.1, 7.4.3–7.4.7, 7.4.10) and Lemma 4.2.12. The hypotheses (Hausdorff, open-subgroup basis, compact or two-sided complete) are exactly those under which Prop 7.1.5 makes G Noohi, and Lemma 7.4.10 makes Π the étale π1 for normal X. The statement is unchanged and nothing is added or dropped. I checked the conventions by hand: the right-torsor cocycle c(gh)=c(g)c(h) and the left-monodromy normalization pr2*σ_e=pr1*σ_{g·e} together force c=ρ_P with no inversion; in the field case, k^s⊗k^s→C(G,k^s), a⊗b↦(g↦a·g(b)), gives pr_23 label h and pr2*σ_ψ=pr1*σ_{g∘ψ}, so the two Cech nodes agree. The step 8 recovery is sound: natural isomorphisms are pointwise-continuous maps |W|→Aut(ω_G)=G, using only the small orbit category. Steps 9–15 are correct. The new nodes are true and are not duplicates or restatements: forgetful-automorphisms is BS 7.1.5 on orbits; the limit-cover nerve gives T×Π^q with π0=Π^q; totally-disconnected-realization is BS 4.2.12 plus the realization and pullback clauses, and its overlap with the ring-only continuous-function nodes is noted. Small cases tested: G=1, discrete, profinite, Sym(N), Spec of an algebraically closed field, simply connected X. Batch 5: the closures of lem-a1-proetale-local-system-representability and lem-a1-normal-geometric-cover-components reach only def-trf-valuation-ring and generic trf algebraic-space and fppf-descent lemmas. These are general definitions and descent tools, not trace-formula or Poincaré-duality content, so they are accepted. Route: Steps 5, 7 and 16 cited lem-per-set-local-system-monodromy, which route-pivot-dropped.txt lists at line 1908 (2026-10-19 artin-gabber section), with no justification. The item and its citer are live, and only finite-fibre content was used, so this is one repairable citation fault and not a RETURN. FIX in fixes/dag/nodes/sec-six-functors-basics/lem-sfb-complete-group-torsor-monodromy.json: Step 4 rewritten with the pro-étale Yoneda instead of the étale comparison; Step 5 rewritten (monodromy is the def-galois-fibre-functor action on ⊔|(C_j)_x|, the T-splitting with the clopen-coproduct lemma gives L|_T≅F_{E_L}, and the fibre comes from t^{-1}); Steps 7 and 16 cite def-galois-fibre-functor; proof_deps recomputed and three unused tool_uses removed. The fixed item's closure has no dropped id and no cycle. Also noted for the maintainer: def-weil-pbc-ideal-module-product-stalk, cited deep in the base closure, is missing from the snapshot (not this delivery's fault).; 1 file(s) fixed by the reviewer"
  }
 }
