@@ -23394,3 +23394,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 18:53 L: returned deliver/N2/Sheaf.AlgebraicGeometry.LocalizedCartesianFlatSingleComparison (reviewer RETURN: (the landing tools, head 9e329642c) the delivery did not land: lean/Sheaf/AlgebraicGeometry/StandardFlatSingleBaseChange)
 - 18:53 L: returned deliver/NZ/lem-sfb-integral-cubical-chain-diagonal (reviewer RETURN: L: independent stage-2 immutable head c08bbaa6557b: H13: the delivery rewrites NM's landed record for theorem node lem-s)
 - 18:54 L: returned deliver/Q31/lem-zl-constant-geometric-stalk-unit (reviewer RETURN: L: independent stage-2 immutable head f022a82dfdfe: Theorem stmt_dep lem-pod-canonical-coefficient-pullback-reduction is)
+- 18:54 L: returned deliver/O1/lemma-nagata-separated-valuation-lift-unique (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lemma-nagata-separated-valuation-lift-unique: lemma-na)
