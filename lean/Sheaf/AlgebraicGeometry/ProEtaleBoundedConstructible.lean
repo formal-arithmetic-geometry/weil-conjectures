@@ -74,6 +74,8 @@ lemma isTriangulated_boundedConstructible_of_weakSerre
     [ObjectProperty.IsClosedUnderCokernels (IsConstructibleModuleObject R)]
     [ObjectProperty.IsClosedUnderExtensions (IsConstructibleModuleObject R)] :
     (boundedConstructible R).IsTriangulated := by
-  sorry
+  change (DerivedCategory.TStructure.t.bounded ⊓
+    DerivedCategory.homologyProperty (IsConstructibleModuleObject R)).IsTriangulated
+  infer_instance
 
 end AlgebraicGeometry.ProEtale

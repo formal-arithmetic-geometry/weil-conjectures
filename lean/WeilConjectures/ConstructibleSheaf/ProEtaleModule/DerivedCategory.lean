@@ -89,6 +89,14 @@ abbrev BoundedConstructible : Type _ :=
 
 /-- The bounded constructible complexes on a topologically noetherian scheme form a triangulated
 subcategory. -/
+/- STATEMENT-DISPUTED: topological noetherianity does not give kernel closure for arbitrary R.
+Over a geometric point, take the constant discrete ring B = k ⊕ V with V an infinite-dimensional
+k-vector space and V² = 0. Multiplication by a nonzero v in V between rank-one free modules
+has kernel V, which is not finitely generated. Its cone has nonconstructible cohomology.
+The reviewed weak Serre correction is sk-def-sfb-bounded-constructible; its Lean theorem
+isTriangulated_boundedConstructible_of_weakSerre is in
+Sheaf.AlgebraicGeometry.ProEtaleBoundedConstructible.
+The upstream signature is retained under the source-library boundary. -/
 instance isTriangulated_boundedConstructible [TopologicalSpace.NoetherianSpace X] :
     (boundedConstructible R).IsTriangulated :=
   sorry
