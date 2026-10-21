@@ -14,45 +14,44 @@
  ],
  "proof": [
   {
-   "text": "Obtain the canonical tensor exterior quotient epimorphism for S.g, which is epi by short exactness. The comparison theorem conjugates the official quotient by the canonical exteriorSheafPowerIso tensor isomorphisms, preserving the wedge-section formula.",
+   "text": "Short exactness makes S.g epi. Apply the official exteriorTensor_quotient_exists to obtain an epimorphic exterior tensor quotient with its pure-wedge formula.",
    "uses": [
-    "lem-sc-exterior-sheaf-tensor-quotient-comparison"
+    "new-exterior-tensor-quotient"
    ],
    "elementary": false
   },
   {
-   "text": "Compare the given q with that canonical map on pure wedge tensors using identity lift extensionality, and transport its Epi instance. The retirement compatibility theorem exteriorSheafTensor_lift_hom_ext transports this invocation through the canonical exteriorSheafPowerIso to the official exteriorPower/wedge theorem, preserving the statement.",
+   "text": "Apply exteriorTensor_lift_hom_ext with the identity on S.X2 to compare q with the quotient on pure wedge tensors; transport the Epi instance along their equality.",
    "uses": [
-    "lem-sc-exterior-sheaf-power-comparison"
+    "lem-sc-exterior-tensor-lift-hom-ext"
    ],
    "elementary": false
   },
   {
-   "text": "Tensor the canonical exteriorSheafPowerIso comparisons for the source and target of q, obtaining eB and eC with their forward and inverse pure-wedge formulas. Set q′=eB.inv ≫ q ≫ eC.hom and ψ′=eB.inv ≫ ψ. The given q formula gives the official pure-wedge formula for q′. The inverse formula, the prescribed ψ formula and full-rank wedge vanishing show that ψ′ kills every quotient relation. Apply the official exterior tensor kernel criterion to obtain kernel.ι q′ ≫ ψ′=0. The map kernel.ι q ≫ eB.hom is killed by q′, so lift it to kernel(q′), precompose the vanishing, and cancel eB.hom ≫ eB.inv to obtain kernel.ι q ≫ ψ=0.",
+   "text": "Apply exteriorTensor_kernel_eq_zero_of_relations to q and psi. The psi formula reduces each relation to a full-rank wedge containing one additional S.f image, which exteriorSheaf_rank_wedge_eq_zero kills. This gives kernel.ι q followed by psi equal to zero.",
    "uses": [
-    "new-j1-exterior-sheaf-rank-wedge-zero",
     "new-j1-exterior-tensor-kernel-relations",
-    "lem-sc-exterior-sheaf-power-comparison"
+    "new-j1-exterior-sheaf-rank-wedge-zero"
    ],
    "elementary": false
   },
   {
-   "text": "Descend ψ through the epimorphism q by Abelian.epiDesc and use comp_epiDesc for the defining factorization equation.",
+   "text": "Use Abelian.epiDesc to descend psi through q and comp_epiDesc to obtain the factorization equation.",
    "uses": [],
    "elementary": true
   }
  ],
  "proof_deps": [
-  "lem-sc-exterior-sheaf-tensor-quotient-comparison",
-  "new-j1-exterior-sheaf-rank-wedge-zero",
+  "new-exterior-tensor-quotient",
+  "lem-sc-exterior-tensor-lift-hom-ext",
   "new-j1-exterior-tensor-kernel-relations",
-  "lem-sc-exterior-sheaf-power-comparison"
+  "new-j1-exterior-sheaf-rank-wedge-zero"
  ],
  "proof_origin": {
-  "by": "E5 retirement",
+  "by": "A5 retirement",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph: exterior-power universal properties and independence of quotient lifts",
-  "note": "Replace the retired kernel-criterion copy by its proved official twin; explicit comparison conjugation and kernel.lift transport preserve the consumer public signature and unit route."
+  "note": "Use the complete official theorem verbatim; the exteriorSheaf comparison is now a proved private consumer bridge. The determinant argument and unit route are preserved."
  },
  "mathlib_searches": [
   {
@@ -111,13 +110,14 @@
  "unit": "sk-thm-picard-rr",
  "lean": {
   "existing": false,
-  "module": "Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeQuotientFactor",
-  "file": "lean/Sheaf/AlgebraicGeometry/Modules/DeterminantWedgeQuotientFactor.lean",
+  "module": "WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeQuotientFactor",
+  "file": "lean/WeilConjectures/AlgebraicGeometry/Modules/DeterminantWedgeQuotientFactor.lean",
   "declaration": "AlgebraicGeometry.Scheme.Modules.determinant_wedge_quotient_factor",
-  "statement": "theorem determinant_wedge_quotient_factor {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ)\n    (hr : r₂ = r₁ + r₃) [S.X₁.IsFiniteLocallyFreeOfRank r₁]\n    (q : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶\n      exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃)\n    (ψ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶ exteriorSheaf S.X₂ r₂)\n    (hq : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))\n      (c : Fin r₃ → S.X₂.val.obj (op U)),\n      q.val.app (op U)\n        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)\n          (exteriorSheafSection S.X₂ r₃ U c)) =\n        tmulSection (M := exteriorSheaf S.X₁ r₁)\n          (N := exteriorSheaf S.X₃ r₃) (U := U)\n          (exteriorSheafSection S.X₁ r₁ U a)\n          (exteriorSheafSection S.X₃ r₃ U (fun i ↦ S.g.val.app (op U) (c i))))\n    (hψ : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))\n      (c : Fin r₃ → S.X₂.val.obj (op U)),\n      ψ.val.app (op U)\n        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)\n          (exteriorSheafSection S.X₂ r₃ U c)) =\n        exteriorSheafSection S.X₂ r₂ U\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))) :\n    ∃ φ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ ⟶ exteriorSheaf S.X₂ r₂,\n      q ≫ φ = ψ",
+  "statement": "theorem determinant_wedge_quotient_factor {X : Scheme.{v}}\n    (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ)\n    (hr : r₂ = r₁ + r₃) [S.X₁.IsFiniteLocallyFreeOfRank r₁]\n    (q : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₂ r₃ ⟶\n      exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃)\n    (ψ : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₂ r₃ ⟶ exteriorPower S.X₂ r₂)\n    (hq : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))\n      (c : Fin r₃ → S.X₂.val.obj (op U)),\n      q.val.app (op U)\n        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)\n          (wedge (M := S.X₂) (r := r₃) (U := U) c)) =\n        tmulSection (M := exteriorPower S.X₁ r₁)\n          (N := exteriorPower S.X₃ r₃) (U := U)\n          (wedge (M := S.X₁) (r := r₁) (U := U) a)\n          (wedge (M := S.X₃) (r := r₃) (U := U) (fun i ↦ S.g.val.app (op U) (c i))))\n    (hψ : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))\n      (c : Fin r₃ → S.X₂.val.obj (op U)),\n      ψ.val.app (op U)\n        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)\n          (wedge (M := S.X₂) (r := r₃) (U := U) c)) =\n        wedge (M := S.X₂) (r := r₂) (U := U)\n          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))) :\n    ∃ φ : exteriorPower S.X₁ r₁ ⊗ exteriorPower S.X₃ r₃ ⟶ exteriorPower S.X₂ r₂,\n      q ≫ φ = ψ",
   "branch": "sheaf-dag",
   "by": "H2",
-  "date": "2026-10-13"
+  "date": "2026-10-13",
+  "note": "A5 retirement: the duplicate exteriorSheaf theorem is withdrawn. The proved official exteriorPower theorem is used through fully proved private comparison bridges in both direct consumers; their public signatures are unchanged."
  },
  "reviewed": {
   "date": "2026-10-13",
@@ -130,14 +130,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-be270",
-  "group": "E5",
+  "reviewer": "C-efb71",
+  "group": "A5",
   "result": "pass",
-  "landing": "20261020T233124-L-896660",
+  "landing": "20261021T003458-L-1642022",
   "kind": "interface",
-  "note": "independent cc review: delivered stub + adapted DeterminantWedgeQuotientFactor + 2 node files against live clone, retire-items row 920 and the WC twin statement (verbatim to node lean record); --all compile plus importers DeterminantLiftWedgeKernel/DeterminantWedgeMorphismLocalAt clean; axioms clean"
+  "note": "independent cc review: delivered stub + 2 adapted consumers + 3 node files against the live clone, retire-items row 1047 and the WC twin (node lean.statement verbatim); --all compile clean, importers Glue/Local compile, axioms clean"
  },
  "lean_audit": {
   "master": {

@@ -11,7 +11,8 @@ public import WeilConjectures.Mathlib.Algebra.Category.ModuleCat.Sheaf.LocallyFr
 public import Mathlib.Algebra.Homology.ShortComplex.ShortExact
 public import Mathlib.Algebra.Category.ModuleCat.Sheaf.Abelian
 import WeilConjectures.AlgebraicGeometry.Modules.ExteriorSheafWedgeMapExists
-import Sheaf.AlgebraicGeometry.Modules.DeterminantWedgeQuotientFactor
+import WeilConjectures.AlgebraicGeometry.Modules.DeterminantWedgeQuotientFactor
+import Sheaf.AlgebraicGeometry.Modules.ExteriorSheafPowerComparison
 
 /-!
 # The wedge of lifts annihilates the quotient kernel
@@ -24,6 +25,109 @@ Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph.
 universe v
 open CategoryTheory CategoryTheory.Limits Opposite MonoidalCategory
 namespace AlgebraicGeometry.Scheme.Modules
+
+set_option backward.isDefEq.respectTransparency false in
+private theorem exteriorSheafPowerIso_hom_wedge {X : Scheme.{v}} (M : X.Modules) (n : ℕ)
+    (U : X.Opens) (a : Fin n → M.val.obj (op U)) :
+    (exteriorSheafPowerIso M n).hom.app U
+        (exteriorSheafSection M n U a) = wedge a := by
+  rw [← exteriorSheafPowerIso_inv_wedge M n U a]
+  exact inv_app_hom_app_apply_of_iso (exteriorSheafPowerIso M n).symm _
+
+set_option backward.isDefEq.respectTransparency false in
+/-- Compatibility transport from the official exterior-power factorization theorem to
+`exteriorSheaf`. Conjugate both maps by the canonical comparison isomorphisms,
+apply the upstream theorem, and check the transported factorization on local wedge
+generators. Source: blueprint, Riemann--Roch, proof of (*), determinant paragraph. -/
+private theorem determinant_wedge_quotient_factor_compat {X : Scheme.{v}}
+    (S : ShortComplex X.Modules) (hS : S.ShortExact) (r₁ r₂ r₃ : ℕ)
+    (hr : r₂ = r₁ + r₃) [S.X₁.IsFiniteLocallyFreeOfRank r₁]
+    (q : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶
+      exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃)
+    (ψ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₂ r₃ ⟶ exteriorSheaf S.X₂ r₂)
+    (hq : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))
+      (c : Fin r₃ → S.X₂.val.obj (op U)),
+      q.val.app (op U)
+        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
+          (exteriorSheafSection S.X₂ r₃ U c)) =
+        tmulSection (M := exteriorSheaf S.X₁ r₁)
+          (N := exteriorSheaf S.X₃ r₃) (U := U)
+          (exteriorSheafSection S.X₁ r₁ U a)
+          (exteriorSheafSection S.X₃ r₃ U (fun i ↦ S.g.val.app (op U) (c i))))
+    (hψ : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))
+      (c : Fin r₃ → S.X₂.val.obj (op U)),
+      ψ.val.app (op U)
+        (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
+          (exteriorSheafSection S.X₂ r₃ U c)) =
+        exteriorSheafSection S.X₂ r₂ U
+          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i))) :
+    ∃ φ : exteriorSheaf S.X₁ r₁ ⊗ exteriorSheaf S.X₃ r₃ ⟶ exteriorSheaf S.X₂ r₂,
+      q ≫ φ = ψ := by
+  let eA := exteriorSheafPowerIso S.X₁ r₁
+  let eB := exteriorSheafPowerIso S.X₂ r₃
+  let eC := exteriorSheafPowerIso S.X₃ r₃
+  let eD := exteriorSheafPowerIso S.X₂ r₂
+  let q' := (eA.inv ⊗ₘ eB.inv) ≫ q ≫ (eA.hom ⊗ₘ eC.hom)
+  let ψ' := (eA.inv ⊗ₘ eB.inv) ≫ ψ ≫ eD.hom
+  have hq' : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))
+      (c : Fin r₃ → S.X₂.val.obj (op U)),
+      q'.val.app (op U)
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₂) (r := r₃) (U := U) c)) =
+        tmulSection (M := exteriorPower S.X₁ r₁)
+          (N := exteriorPower S.X₃ r₃) (U := U)
+          (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₃) (r := r₃) (U := U)
+            (fun i ↦ S.g.val.app (op U) (c i))) := by
+    intro U a c
+    change (eA.hom ⊗ₘ eC.hom).app U
+      (q.val.app (op U) ((eA.inv ⊗ₘ eB.inv).app U
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₂) (r := r₃) (U := U) c)))) = _
+    rw [tensorHom_app_tmulSection,
+      exteriorSheafPowerIso_inv_wedge,
+      exteriorSheafPowerIso_inv_wedge]
+    rw [hq U a c]
+    rw [tensorHom_app_tmulSection,
+      exteriorSheafPowerIso_hom_wedge,
+      exteriorSheafPowerIso_hom_wedge]
+  have hψ' : ∀ (U : X.Opens) (a : Fin r₁ → S.X₁.val.obj (op U))
+      (c : Fin r₃ → S.X₂.val.obj (op U)),
+      ψ'.val.app (op U)
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₂) (r := r₃) (U := U) c)) =
+        wedge (M := S.X₂) (r := r₂) (U := U)
+          (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
+    intro U a c
+    change eD.hom.app U
+      (ψ.val.app (op U) ((eA.inv ⊗ₘ eB.inv).app U
+        (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+          (wedge (M := S.X₂) (r := r₃) (U := U) c)))) = _
+    rw [tensorHom_app_tmulSection,
+      exteriorSheafPowerIso_inv_wedge,
+      exteriorSheafPowerIso_inv_wedge]
+    rw [hψ U a c, exteriorSheafPowerIso_hom_wedge]
+  obtain ⟨φ', hφ'⟩ :=
+    determinant_wedge_quotient_factor S hS r₁ r₂ r₃ hr q' ψ' hq' hψ'
+  refine ⟨(eA.hom ⊗ₘ eC.hom) ≫ φ' ≫ eD.inv, ?_⟩
+  apply exteriorSheafTensor_lift_hom_ext (𝟙 S.X₂) r₁ r₃
+  intro U a c
+  change eD.inv.app U (φ'.app U ((eA.hom ⊗ₘ eC.hom).app U
+    (q.val.app (op U)
+      (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
+        (exteriorSheafSection S.X₂ r₃ U c))))) =
+    ψ.val.app (op U)
+      (tmulSection (exteriorSheafSection S.X₁ r₁ U a)
+        (exteriorSheafSection S.X₂ r₃ U c))
+  have H := congrArg (fun z ↦ z.val.app (op U)
+    (tmulSection (wedge (M := S.X₁) (r := r₁) (U := U) a)
+      (wedge (M := S.X₂) (r := r₃) (U := U) c))) hφ'
+  change φ'.app U (q'.val.app (op U) _) = ψ'.val.app (op U) _ at H
+  rw [hq' U a c, hψ' U a c] at H
+  rw [hq U a c, tensorHom_app_tmulSection,
+    exteriorSheafPowerIso_hom_wedge, exteriorSheafPowerIso_hom_wedge,
+    H, exteriorSheafPowerIso_inv_wedge, hψ U a c]
+
 
 -- The two exterior presheaves have the same objects and uniquely determined restrictions.
 set_option backward.isDefEq.respectTransparency false in
@@ -139,7 +243,7 @@ theorem determinant_liftWedge_kernel_exists {X : Scheme.{v}} (S : ShortComplex X
           exteriorSheafSection S.X₂ r₂ U
             (fun i ↦ Fin.append (fun j ↦ S.f.val.app (op U) (a j)) c (Fin.cast hr i)) := by
   obtain ⟨w, hw⟩ := wedgeMap_legacy S.f r₁ r₃ r₂ hr
-  obtain ⟨φ, hφ⟩ := determinant_wedge_quotient_factor S hS r₁ r₂ r₃ hr q w hq hw
+  obtain ⟨φ, hφ⟩ := determinant_wedge_quotient_factor_compat S hS r₁ r₂ r₃ hr q w hq hw
   refine ⟨w, ?_, hw⟩
   rw [← hφ, ← Category.assoc, kernel.condition, zero_comp]
 

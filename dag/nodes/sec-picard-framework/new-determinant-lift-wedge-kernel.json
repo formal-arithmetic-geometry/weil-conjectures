@@ -21,9 +21,10 @@
    "elementary": false
   },
   {
-   "text": "Apply determinant_wedge_quotient_factor to the given q and the constructed w, using hq and the formula for w. The short exactness and locally free rank hypotheses match verbatim. Obtain a morphism phi from the quotient tensor with q followed by phi equal to w.",
+   "text": "Conjugate q by the tensor of canonical exteriorSheafPowerIso maps, and conjugate the pre-quotient wedge by the source tensor inverse and target comparison. tensorHom_app_tmulSection and the inverse and forward comparison formulas verify the official pure-wedge hypotheses. Apply the proved official determinant_wedge_quotient_factor. Transport the resulting factorization back with the target comparison inverse; exteriorSheafTensor_lift_hom_ext checks its equation on pure-wedge generators. This fully proved private bridge preserves the consumer signature and factorization argument.",
    "uses": [
-    "lem-sc-determinant-wedge-quotient-factor"
+    "lem-sc-determinant-wedge-quotient-factor",
+    "lem-sc-exterior-sheaf-power-comparison"
    ],
    "elementary": false
   },
@@ -35,14 +36,15 @@
  ],
  "proof_deps": [
   "lem-sc-exterior-sheaf-wedge-map",
+  "def-sc-sheaf-exterior-power",
   "lem-sc-determinant-wedge-quotient-factor",
-  "def-sc-sheaf-exterior-power"
+  "lem-sc-exterior-sheaf-power-comparison"
  ],
  "proof_origin": {
   "by": "F4 stage3",
   "document": "literature/blueprint/master/blueprint/sec-picard-framework/sk-thm-picard-rr/lem-sc-riemann-roch.md",
   "place": "Proof of (*), determinant paragraph; reuse existing wedge construction and quotient factorization, followed by the categorical kernel condition",
-  "note": "P6 retirement: preserve the existing proof route and statements, transporting the upstream wedge map to the legacy exterior sheaves through fully proved private presheaf/sheaf isomorphisms."
+  "note": "A5 retirement: private proved comparison bridge applies the official exteriorPower quotient-factor theorem and transports its factorization to exteriorSheaf, with no new assumption or change to the public signature."
  },
  "mathlib_searches": [
   {
@@ -108,14 +110,14 @@
   "note": "new node of a stage-3 delivery, read against its source by the reviewer"
  },
  "reviewed_proof": {
-  "date": "2026-10-20",
+  "date": "2026-10-21",
   "by": "L",
-  "reviewer": "C-ca4f8",
-  "group": "P6",
+  "reviewer": "C-efb71",
+  "group": "A5",
   "result": "pass",
-  "landing": "20261020T164814-L-3967578",
+  "landing": "20261021T003458-L-1642022",
   "kind": "interface",
-  "note": "independent cc review: retired item module vs upstream WeilConjectures exteriorSheaf_wedgeMap_exists (node statement verbatim); both adapted consumers' public signatures vs live, compiled with their importers Glue/Local/DeterminantWedgeMorphism; nodes vs live K8 record (C-991b0 fix applied)"
+  "note": "independent cc review: delivered stub + 2 adapted consumers + 3 node files against the live clone, retire-items row 1047 and the WC twin (node lean.statement verbatim); --all compile clean, importers Glue/Local compile, axioms clean"
  },
  "lean_audit": {
   "master": {
