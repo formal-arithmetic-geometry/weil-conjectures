@@ -34,12 +34,9 @@
  ],
  "proof": [
   {
-   "text": "Choose a generator $G$ of $\\mathcal A$ using [def-sp-grothendieck-abelian]. By [lem-coef-grothendieck-locally-presentable], $\\mathcal A$ is locally presentable; applying [lem-coef-object-presentability-rank] to $G$ gives an infinite regular $\\kappa_0\\in\\mathcal V$ for which $\\operatorname{Hom}(G,-)$ preserves $\\kappa_0$-filtered colimits. Apply [lem-coef-small-family-regular-bound] to the two $\\mathcal V$-small sets $\\operatorname{Mor}(\\mathcal C)$ and the initial ordinal of $\\kappa_0$. Obtain an infinite regular $\\kappa$ strictly larger than both cardinalities. A $\\kappa$-filtered category is $\\kappa_0$-filtered directly from the definition, so $G$ is also $\\kappa$-presentable. Thus the generator, presentability and site-size hypotheses of the transfinite construction all hold in the original universe.",
+   "text": "Apply [lem-sfb-presentable-generator-cardinal-bound] with $X=\\operatorname{Mor}(\\mathcal C)$. It gives a generator $G$ and an infinite regular $\\kappa\\in\\mathcal V$ with $G$ $\\kappa$-presentable and $|\\operatorname{Mor}(\\mathcal C)|<\\kappa$. These are precisely the hypotheses required below.",
    "uses": [
-    "def-sp-grothendieck-abelian",
-    "lem-coef-grothendieck-locally-presentable",
-    "lem-coef-object-presentability-rank",
-    "lem-coef-small-family-regular-bound"
+    "lem-sfb-presentable-generator-cardinal-bound"
    ],
    "elementary": false,
    "source": {
@@ -48,7 +45,7 @@
    }
   },
   {
-   "text": "For each presheaf $P$, take the functorial plus iteration $Q_\\kappa(P)$ specified in [lem-sfb-transfinite-plus-sheaf-convergence]: start at $P$, apply the matching-family plus construction at successors and take colimits at limits and at $\\kappa$. This is a real construction, not an object chosen from an existence assertion. By that node, with the $G$ and $\\kappa$ of step 1, its value satisfies exactly the Hom-tested sheaf condition in this item. Corestrict its functor on presheaves to the full subcategory of sheaves and call the resulting functor $a$. On natural transformations it is the same plus iteration; identities and compositions hold because corestriction to a full subcategory does not alter morphisms.",
+   "text": "Use the functorial matching-family plus iteration $Q_\\kappa$ and its canonical unit $\\eta$ specified in [lem-sfb-transfinite-plus-sheaf-convergence]. That node makes every $Q_\\kappa(P)$ a Hom-tested sheaf for the $G,\\kappa$ of step 1. Corestrict this functor to sheaves, calling it $a$. Its object is the explicitly constructed $Q_\\kappa(P)$, and its maps are the same natural transformations; fullness leaves identities and composition unchanged.",
    "uses": [
     "lem-sfb-transfinite-plus-sheaf-convergence"
    ],
@@ -59,7 +56,7 @@
    }
   },
   {
-   "text": "The canonical $\\eta_P:P\\to Q_\\kappa(P)=\\iota a(P)$ of this construction induces, by [lem-sfb-transfinite-plus-sheaf-orthogonality], natural bijections $\\operatorname{Hom}_{\\operatorname{PSh}}(\\iota a(P),\\iota F)\\cong\\operatorname{Hom}_{\\operatorname{PSh}}(P,\\iota F)$ for all sheaves $F$. Since sheaves form a full subcategory, the left side is $\\operatorname{Hom}_{\\operatorname{Sh}}(a(P),F)$. These natural bijections are the adjunction $a\\dashv\\iota$, and assert precisely the universal property of sheafification in [def-weil-pbc-sheafification]. The orthogonality lemma imposes no unproved sheafification-existence assumption.",
+   "text": "By [lem-sfb-transfinite-plus-sheaf-orthogonality], precomposition with $\\eta_P$ gives natural bijections $\\operatorname{Hom}_{\\operatorname{PSh}}(\\iota a(P),\\iota F)\\cong\\operatorname{Hom}_{\\operatorname{PSh}}(P,\\iota F)$ for every sheaf $F$. Fullness identifies the left side with $\\operatorname{Hom}_{\\operatorname{Sh}}(a(P),F)$. These are exactly the adjunction $a\\dashv\\iota$ and the universal property in [def-weil-pbc-sheafification].",
    "uses": [
     "lem-sfb-transfinite-plus-sheaf-orthogonality",
     "def-weil-pbc-sheafification"
@@ -71,7 +68,7 @@
    }
   },
   {
-   "text": "Apply [lem-sfb-transfinite-plus-finite-limits] to the same site, coefficient category, generator and regular cardinal chosen in step 1. Its corestricted functor is the functor $a$ just constructed in step 2, so it preserves finite limits. This is preservation for the actual sheaf-valued functor, not merely for an endofunctor on presheaves; no separate identification of two independently chosen reflectors is required.",
+   "text": "Apply [lem-sfb-transfinite-plus-finite-limits] with the same $G,\\kappa$. Its corestricted functor is exactly the $a$ of step 2, so $a$ preserves finite limits. This uses the same construction throughout, with no identification of independently chosen reflectors.",
    "uses": [
     "lem-sfb-transfinite-plus-finite-limits"
    ],
@@ -82,7 +79,7 @@
    }
   },
   {
-   "text": "The coefficient category $\\mathcal A$ is abelian by [def-sp-grothendieck-abelian]. Steps 3 and 4 give a left adjoint to the sheaf inclusion and its finite-limit preservation. Therefore [lem-sfb-abelian-sheaves-left-exact-reflector], applied with $\\mathcal B=\\mathcal A$ and $L=a$, gives that $\\operatorname{Sh}(\\mathcal C,J;\\mathcal A)$ is abelian. Its sheaf condition is the same Hom-tested condition used in step 2, so this concludes every clause of the item.",
+   "text": "The category $\\mathcal A$ is abelian by [def-sp-grothendieck-abelian]. Apply [lem-sfb-abelian-sheaves-left-exact-reflector] with $\\mathcal B=\\mathcal A$ and $L=a$, using the adjunction and finite-limit preservation from steps 3 and 4. It gives abelianness of the same Hom-tested sheaf category, completing the statement.",
    "uses": [
     "def-sp-grothendieck-abelian",
     "lem-sfb-abelian-sheaves-left-exact-reflector"
@@ -95,14 +92,12 @@
   }
  ],
  "proof_deps": [
-  "def-sp-grothendieck-abelian",
-  "lem-coef-grothendieck-locally-presentable",
-  "lem-coef-object-presentability-rank",
-  "lem-coef-small-family-regular-bound",
+  "lem-sfb-presentable-generator-cardinal-bound",
   "lem-sfb-transfinite-plus-sheaf-convergence",
   "lem-sfb-transfinite-plus-sheaf-orthogonality",
   "def-weil-pbc-sheafification",
   "lem-sfb-transfinite-plus-finite-limits",
+  "def-sp-grothendieck-abelian",
   "lem-sfb-abelian-sheaves-left-exact-reflector"
  ],
  "proof_origin": {
@@ -231,16 +226,17 @@
   "date": "2026-10-21",
   "item": "lem-sfb-grothendieck-sheafification",
   "worker": "stage1",
-  "summary": "Expanded the project transfinite-plus proof into rank choice, convergence, orthogonality/adjunction, left exactness and abelianness. Kept the exact statement and universe. Four searched statement-only helpers, including one conditional Mathlib leaf; reused existing locally-presentable and cardinal-bound nodes. The existing project theorem does not by itself include the final abelianness clause, so no partial attachment is claimed.",
-  "blueprint": "lem-sfb-finite-upper-star-exact, first proof paragraph: the sheafification factor is left exact for arbitrary Grothendieck abelian coefficients. All five steps realize that assertion and its abelian-category setting."
+  "summary": "Retained the accepted human-requested five-step re-split and statement-only presentable-generator cardinal-bound lemma after the maintenance handoff withdrew A6/A7/B10 supersession. Server commit 243a4db5baf repaired stage-1 queue eligibility for released repairs of closed nodes; replay is explicitly authorized. Refreshed all other fields from the current main record, preserving the unchanged statement, Lean interface and P1 proof landing 20261021T061607-L-1797094. All seven literal citation quotes and all six authentic search records remain valid. No mathematical change is claimed for this administrative/tool resolution; the substantive split and complete old argument inventory are retained.",
+  "blueprint": "lem-sfb-finite-upper-star-exact, first proof paragraph: left exact sheafification for arbitrary Grothendieck abelian coefficients. Step 1 supplies the bound for the transfinite construction, steps 2-4 assemble the sheaf-valued left exact reflector, and step 5 gives its abelian category. Unit step 2 and the original route are unchanged.",
+  "tool_uses": []
  },
  "reviewed": {
   "date": "2026-10-21",
   "by": "L",
-  "reviewer": "NT-cc-Q01-5825bdb99",
-  "group": "Q01",
+  "reviewer": "NT-cc-NR-17c49cea9",
+  "group": "NR",
   "result": "pass",
-  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-Q01-5825bdb99 (reviewer sub-agent of L); spot-checked: Read the item, all 4 new nodes and every cited statement (def-sp-grothendieck-abelian, lem-coef-grothendieck-locally-presentable, lem-coef-object-presentability-rank, lem-coef-small-family-regular-bound, def-weil-pbc-sheafification, def-galois-finite-limits-colimits, def-weil-pbc-category-colimit, def-weil-pbc-sites-and-cohomology). Also read the blueprint main-20261015 proof of lem-sfb-finite-upper-star-exact (first paragraph), the project Lean (HasSheafify.lean:54-65; TransfinitePlusSheaf.lean:72-188; TransfinitePlus.lean:55-181) and Mathlib Sites/Abelian.lean:30-42 and Sheafification.lean:40-63. The item statement is verbatim. The five steps are correct and complete. Step 1: the rank κ is larger than κ0 and #Mor C, and κ-filtered implies κ0-filtered. Steps 2-4: convergence, then orthogonality giving the adjunction by fullness, then finite-limit preservation of the same functor. Step 5: the sheafIsAbelian leaf, through HasSheafify.mk'. The new statements are true: convergence by κ-presentability and κ-small matching diagrams, with a generator being a detector in an abelian category; orthogonality for every κ (W_toTransfinitePlus_app); left exactness by AB5 and filtered colimits over covering sieves. None restates an item clause and none is a duplicate (DAG grep for plus construction, transfinite, covering sieve, 03A3, HasSheafify, sheafIsAbelian). Small cases checked: empty C, zero A, coarsest topology, covering empty sieve. FIX (B3): the three transfinite nodes use 'covering sieves J(U)' but cite only def-weil-pbc-sites-and-cohomology, which defines covering families and no sieves. Added [def-weil-pbc-topos] (same unit, no cycle) to their text and stmt_deps; the corrected whole files are in fixes/dag/nodes/sec-proetale-coefficients/. Advisory for the maintainer: (1) the item is covered clause by clause by the sorry-free hasSheafify_of_isGrothendieckAbelian (HasSheafify.lean:61-65) plus Mathlib sheafIsAbelian, so a per-clause attachment is possible; the split is still legitimate because no single declaration states the whole item. (2) The helpers have exact project-Lean candidates: isSheaf_transfinitePlus_obj_of_isSeparator, W_toTransfinitePlus_app, preservesFiniteLimits_transfinitePlusSheaf. (3) The helpers take the existence of V-small limits in Grothendieck abelian A for granted; whoever splits a helper needs a completeness node. No SGA is used and no tool_uses are needed.; 3 file(s) fixed by the reviewer"
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NR-17c49cea9 (reviewer sub-agent of L); spot-checked: I read the item, the new node and every cited statement in full. Supersession no longer applies: in side-live coord/returns/NR.md:103-111 (10:58 UTC maintenance handoff, queue fix 243a4db5baf in Dag.stage1) the A6/A7/B10 objection against efd4316e is withdrawn and one replay is authorized. The repair note is still released and the new node is absent from live and side-live. The new node file is sha-identical to the earlier heads 514560f1/5f255325/b61fd68d/efd4316e, and the item differs from efd4316e only in split_report.summary. Steps: (1) the new bound with X=Mor C gives a faithful Hom(G,-), regular kappa in V with |Mor C|<kappa and G kappa-presentable, exactly the hypotheses of the convergence and finite-limit nodes. (2) Convergence makes every Q_kappa(P) a Hom-tested sheaf; corestricting gives a. (3) Orthogonality (natural, assumes no convergence) plus fullness gives a ⊣ iota, which is the universal property of def-weil-pbc-sheafification. (4) The finite-limit node concerns the same corestriction. (5) A is abelian by def-sp-grothendieck-abelian, so lem-sfb-abelian-sheaves-left-exact-reflector with B=A, L=a gives Sh abelian. All three clauses are covered and the assembly is 1761 characters. Re-split rule: old step 1 (generator, locally presentable, object rank, regular bound, kappa_0<kappa monotonicity) moved entirely into the new node; old steps 2-5 are kept in substance, and the dropped successor/limit wording is part of the cited convergence statement. The new node is true: it composes lem-coef-grothendieck-locally-presentable, lem-coef-object-presentability-rank and lem-coef-small-family-regular-bound, and a kappa-filtered category is kappa_0-filtered. Small cases checked: X empty or finite, A=0, Ab with Z, regular kappa existing inside V. A scan of all statements with generator+presentab finds no duplicate. Stmt_deps and unit are correct, the source is TransfinitePlusSheaf.lean:171-188 plus Stacks 079B, no SGA is cited, searches cover leanfinder/loogle/leansearch/grep, and the node is statement-only. Item edge cases (empty C, coarsest topology, empty covering sieve) are fine. No fixes, no tool_uses. Maintainer: landing should resolve the released note as the 10:58 handoff describes; four earlier identical heads were PASSed and then refused at landing."
  },
  "lean": {
   "module": "Sheaf.CategoryTheory.GrothendieckSheafification",

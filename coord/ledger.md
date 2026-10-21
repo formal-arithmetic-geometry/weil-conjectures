@@ -22452,3 +22452,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 12:10 L: merged deliver/Y9/Sheaf.SixFunctors.FiniteProperClassicalAmplitude (stage 3; reviewer PASS; first push; landing 20261021T121013-L-4040420 (interface); batch 20261021T120309; modules 1; new nodes 0; change records: coord/changes/Y9-finite-proper-classical-amplitude-imports.md)
 - 12:10 L: merged deliver/Z5/Sheaf.AlgebraicGeometry.TensorPullbackQuasiCoherent (stage 3; reviewer PASS; first push; landing 20261021T121017-L-4044150 (proof); batch 20261021T120309; modules 1; new nodes 0)
 - 12:10 L: merged deliver/Z7/Sheaf.AlgebraicGeometry.ProEtaleTorIntervalTriangle (stage 3; reviewer PASS; first push; landing 20261021T121020-L-4047375 (proof); batch 20261021T120309; modules 1; new nodes 0)
+- 12:12 L: merged deliver/NR/lem-sfb-grothendieck-sheafification (reviewer PASS; after a return; new nodes: 1)
