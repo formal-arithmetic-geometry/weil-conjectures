@@ -22027,3 +22027,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 10:02 L: returned deliver/B8/Sheaf.Paper.CommonStageCalculus (reviewer RETURN: (the landing tools, head 3bc2f1e57) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
 - 10:02 L: returned deliver/B9/Sheaf.CategoryTheory.ReflectorSquareMateFactorization (reviewer RETURN: (the landing tools, head f6219c8a0) the delivery did not land: lean/Sheaf/CategoryTheory/ReflectorSquareMateFactorizatio)
 - 10:02 L: returned deliver/B9/Sheaf.Paper.OpenFiniteConstructibilityInterval (reviewer RETURN: (the landing tools, head 90a8da748) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
+- 10:02 L: returned deliver/C6/Sheaf.Paper.ConstantCoefficientScalarNormalization (reviewer RETURN: (the landing tools, head 9db523502) the delivery did not land: refused by tools/import_prune_check.py for lean/Sheaf/Pap)
