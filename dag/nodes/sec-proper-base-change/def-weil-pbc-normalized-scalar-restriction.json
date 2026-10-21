@@ -18,9 +18,51 @@
   "document": "literature/stacks-project/sites-cohomology.tex",
   "place": "Tag 0D6D, lemma-derived-pullback-composition; ordinary adjunction conjugate from sites-modules.tex Tag 03EL, lemma-tensor-product-pullback."
  },
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "For the right-adjoint comparison apply Mathlib SheafOfModules.pushforwardCongr to the coefficient-square equality. Both composites are sectionwise pushforward with the composite ring actions. The comparison is identity on every section, and extensionality proves its uniqueness. Conjugating the ordinary adjunctions and mapping complexes gives the existing ordinary comparison.",
+   "uses": [],
+   "elementary": true
+  },
+  {
+   "text": "The pro-etale module inverse image admits its supplied algebraic presentation. Apply the general ringed-topos K-flat preservation theorem to completedModulePullback, using the object and map equations of reductionChange. Apply the independent-coefficient change-of-rings theorem to pbcExtend. Thus both ordinary first legs send the flat-term K-flat representative to a K-flat complex.",
+   "uses": [
+    "lem-sp-proetale-algebraic-inverse-image",
+    "det-pe-topos-functoriality-inverse-image",
+    "lem-weil-pbc-ringed-pullback-preserves-kflat",
+    "lem-pur-kflat-change-of-rings-independent"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Resolve every homotopy object by an independent-coefficient flat-term K-flat complex. Restriction to those homotopy representatives is a localization, using the restriction-localization argument in the existing representative-whiskering module. The complex-to-homotopy quotient restricts to a full essentially surjective functor; combine their fully faithful precomposition functors and transport by quotientCompQhIso.",
+   "uses": [
+    "lem-pc-kflat-resolution",
+    "lem-weil-pbc-resolving-representative-whiskering",
+    "lem-weil-pbc-independent-sheaf-tensor-colimits"
+   ],
+   "elementary": false
+  },
+  {
+   "text": "Form the two composite natural cochain counits. Each is invertible on the representative class: its first factor is the existing derived counit on a K-flat complex and its second factor is the counit on its K-flat image. Compose the left counit isomorphism, the localization of the specified ordinary complex comparison, and the inverse right counit isomorphism. Fully faithful restriction lifts this natural isomorphism uniquely. Cancel the invertible right counit to obtain exactly the prescribed normalization equation and prove uniqueness.",
+   "uses": [],
+   "elementary": true
+  }
+ ],
+ "proof_deps": [
+  "lem-sp-proetale-algebraic-inverse-image",
+  "det-pe-topos-functoriality-inverse-image",
+  "lem-weil-pbc-ringed-pullback-preserves-kflat",
+  "lem-pur-kflat-change-of-rings-independent",
+  "lem-pc-kflat-resolution",
+  "lem-weil-pbc-resolving-representative-whiskering",
+  "lem-weil-pbc-independent-sheaf-tensor-colimits"
+ ],
+ "proof_origin": {
+  "by": "document",
+  "document": "literature/stacks-project/sites-cohomology.tex",
+  "place": "Tag 0D6D, lemma-derived-pullback-composition; canonical comparison and uniqueness through resolving localization. K4 stage-3 proof, 2026-10-21."
+ },
  "mathlib_match": null,
  "mathlib_searches": [
   {
@@ -113,5 +155,15 @@
   "group": "Q134",
   "result": "fix",
   "note": "Re-delivery of the d04022 H2 RETURN. Item Lean signature and statement are unchanged, and that mathematics was already reviewed. Seven declarations moved byte-identical into FiniteFreeCoefficientTransport, owned by the new def-weil-pbc-actual-finite-coefficient-transport; its H4 check against def-weil-pbc-finite-completed-coefficient-map and WeilConjectures.completedCoefficientMap passes (different coefficient sheaf types). The two theorem stmt_deps are replaced by def-weil-pbc-integer-quotient-inclusions (existing:true integralScalarIntegerInclusion; check_existing note: noncomputable kept) and def-weil-pbc-normalized-scalar-restriction (existing:true pbcActualScalarDerivedPullIso; statement matches the right-iso, conjugate and K-flat equation). check_new_node is clean on all three; no cycle. FIX: the normalized-restriction node's Lean uses pbcExtend, pbcDerivedExtend, pbcScalarAdjunction and pbcComplexCounit, owned by def-weil-pbc-bounded-constructible-tower, which is outside its closure. fixes/def-weil-pbc-normalized-scalar-restriction.json adds that stmt_dep and a citing sentence. Records-only fix, no compile needed. Advisories: finiteFreeCoefficientQuotientMap is defeq to integralScalarQuotientMap; pbcActualDerivedPull and pbcActualStructureMap have no owner record (inherited); the transport node cites the theorem lem-pur-derived-change-of-rings as the item base does; the item imports the theorem module IntegralStratifiedPerfectCharacterization; the second reading is the author's own."
+ },
+ "reviewed_proof": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "COMPILER",
+  "group": "K4",
+  "result": "pass",
+  "landing": "20261021T152325-L-1876825",
+  "kind": "proof",
+  "note": "AUTO: proofs only; landed in a batch after the tools' static checks; compiled with the probe by the group's delivery tool, verified by the global build (compile, axioms, sorry, 60 s per file); not read by a reviewer (stage 3, decision of the human 2026-10-12)"
  }
 }
