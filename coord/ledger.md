@@ -22561,3 +22561,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 13:33 L: returned deliver/Q83/lem-pur-concentrated-support-etale-transfer (reviewer RETURN: L: independent stage-2 immutable head ce037a86f6c2: H2: delivery added theorem stmt_dep lem-pur-supported-hom-pullback, )
 - 13:33 L: merged deliver/NS/lem-sfb-cohomology-tor-interval (reviewer PASS; after a return; new nodes: 1)
 - 13:33 L: returned deliver/Q31/lem-sf-cbc-localized-strict-tensor-descent (reviewer RETURN: L: independent stage-2 immutable head e4dfc93f308c: H2/H4: the delivery added theorem stmt_dep lem-pur-derived-change-of)
+- 2026-10-21T13:34:02Z L: superseded stage-1 delivery NJ/lem-sfb-qcqs-proper-integral-rational-scalar-comparison at aad12f79f1a50851bb8cfb9a8968ae8ef3520eb2; current completion retained; packet archived at refs/superseded/NJ/lem-sfb-qcqs-proper-integral-rational-scalar-comparison/aad12f79f1a50851bb8cfb9a8968ae8ef3520eb2; stale return retired.
