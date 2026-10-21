@@ -350,5 +350,23 @@
   "group": "NJ",
   "result": "pass",
   "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NJ-2970e5b2a (reviewer sub-agent of L); spot-checked: Read the item and all four new nodes in full; no fixes written. Not superseded: the item is unsplit and unreviewed in clones/live and side-live, with no repair note, so the re-split rule does not apply. It was created 2026-10-22 by NC, so it is not on the 2026-10-19 dropped list. The statement is unchanged from side-live and true; tested on H=0, d=1, finite d (matrix Morita via 1=ΣE_jj) and J=ℕ with H=V. Steps 1-4: |λ_j|≤c⁻¹‖v‖, ‖E_ij‖≤C/c, ‖θ_v w‖≤c⁻¹‖v‖‖w‖, matrix-unit identities, θ_{b0}=e so eQ=0, and finite J gives Q=0. Step 5 uses exactly the statement of lem-sfb-uncountable-almost-disjoint-family, with the increasing enumeration written out. Steps 6-8: u_i, r_i bounded by C/c; r_i u_i=1, u_i r_i=p_i; p_i p_j=Σ_{k∈A_i∩A_j}E_kk kills Q; x_i=u_i q are independent. Step 9 cites lem-sfb-independent-family-spanning-cardinality; I checked Mathlib linearIndependent_le_span'' at StrongRankCondition.lean:290-291 and it is a one-line specialization. Step 10: inverse D-linear. Countable (Data/Countable/Defs.lean:41) and Set.Finite/Set.Infinite (Data/Finite/Defs.lean:185/205) are exact leaves. No existing DAG node defines countable or finite sets, states an almost-disjoint family, or bounds an independent family by a spanning set (trf cardinal-dimension bounds by rank; the weil one is finite only). The almost-disjoint node is a real combinatorial lemma, statement-only, notions cited, and true by the binary-prefix construction. All steps stay in unit sk-thm-sf-ctf-stability, so no tool_uses are needed. No SGA source is cited."
+ },
+ "lean": {
+  "module": "Sheaf.LinearAlgebra.CountableEndomorphismModuleReconstruction",
+  "declaration": "Padic.countableEndomorphismModule_reconstruction",
+  "file": "lean/Sheaf/LinearAlgebra/CountableEndomorphismModuleReconstruction.lean",
+  "statement": "theorem countableEndomorphismModule_reconstruction (l : ℕ) [Fact l.Prime] (E : Type u) [NormedField E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E] (_hE : ∀ a : E, ‖a‖ = coefficientExtensionAbsoluteValue l E a) (V : Type v) [NormedAddCommGroup V] [NormedSpace E V] (J : Type t) [Countable J] (j₀ : J) (b : Module.Basis J E V) (c C : ℝ) (_hc : 0 < c) (_hcC : c ≤ C) (_hb : ∀ a : J →₀ E, c * (↑(a.support.sup (fun j ↦ ‖a j‖₊)) : ℝ) ≤ ‖b.repr.symm a‖ ∧ ‖b.repr.symm a‖ ≤ C * (↑(a.support.sup (fun j ↦ ‖a j‖₊)) : ℝ)) : ∃ lam : V →L[E] E, lam.toLinearMap = b.coord j₀ ∧ ∀ (H : Type w) [AddCommGroup H] [Module (V →L[E] V) H] [Module E H] [IsScalarTower E (V →L[E] V) H], (∃ S : Set H, S.Countable ∧ Submodule.span E S = ⊤) → ∃ Φ : (V ⊗[E] LinearMap.range (Module.toModuleEnd E H (lam.smulRight (b j₀)))) ≃ₗ[E] H, (∀ (v₀ : V) (h : LinearMap.range (Module.toModuleEnd E H (lam.smulRight (b j₀)))), Φ (v₀ ⊗ₜ[E] h) = (lam.smulRight v₀) • (h : H)) ∧ (∀ (T : V →L[E] V) (v₀ : V) (h : LinearMap.range (Module.toModuleEnd E H (lam.smulRight (b j₀)))), Φ (T v₀ ⊗ₜ[E] h) = T • Φ (v₀ ⊗ₜ[E] h))",
+  "branch": "newtargets-dag",
+  "by": "NI",
+  "date": "2026-10-21",
+  "existing": false
+ },
+ "reviewed_lean": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-stage2-cc-30413c04c",
+  "group": "NI",
+  "result": "pass",
+  "note": "Node unchanged vs side-live (lean-only delta); lean.statement verbatim. Clause check: Fact l.Prime + finite Padic l-algebra E with NormedField norm pinned to dep coefficientExtensionAbsoluteValue; algebraic Module.Basis J with j₀ (V≠0); Countable J with j₀ equivalent to the node's {0..d-1}/ℕ by relabelling; two-sided bounds on all finitely supported families via support.sup nnnorm (zero family ok); D = V →L[E] V; λ₀ uniquely pinned by lam.toLinearMap = b.coord j₀; e and θ_v via smulRight; H any unital D-module, E-action = restriction via IsScalarTower; countable E-span; eH = range of toModuleEnd e; Φ an E-linear equivalence fixed on pure tensors and intertwining all T on the first factor = D-module iso. Universes u v t w bound. Edge cases H=0, d=1, finite J, J=ℕ without completeness ok. No defs, sorry only, source/blueprint docstrings with the 10 node steps, no existing match. Advisory: unused proof import StrongRankCondition; Set.Countable is the leaf of def-sfb-countable-set, which is not a stmt_dep (stage-1 record question); second reading is the author's own pass. No compile (no changes)."
  }
 }
