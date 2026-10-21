@@ -13,9 +13,82 @@
   "def-sfb-right-derived-functor",
   "lem-weil-pbc-exact-functor-derived-factorization"
  ],
- "proof": [],
- "proof_deps": [],
- "proof_origin": null,
+ "proof": [
+  {
+   "text": "Write $\\lambda_{t,C}:D(t)(QC)\\xrightarrow{\\sim}Q(tC)$ for the natural localization identifications of [lem-weil-pbc-exact-functor-derived-factorization], for $t=r,s$. These exist because $r,s$ are exact additive. For a K-injective $J$ of $\\mathcal A'$, both $J$ and $rJ$ are K-injective by hypothesis. Thus [def-sfb-right-derived-functor] makes $\\eta'_J$ and $\\eta_{rJ}$ invertible. With $V(J)=Q(HrJ)=Q(sH'J)$, the fully typed maps are\n$$a_J=D(s)(\\eta'_J)\\circ\\lambda_{s,H'J}^{-1}:V(J)\\to A(QJ),\\qquad b_J=RH(\\lambda_{r,J}^{-1})\\circ\\eta_{rJ}:V(J)\\to B(QJ).$$\nFunctors preserve inverse pairs, so both maps are isomorphisms. Set $\\delta_J=b_Ja_J^{-1}$. These are exactly the maps in the statement after its canonical localization identifications.",
+   "uses": [
+    "lem-weil-pbc-exact-functor-derived-factorization",
+    "def-sfb-right-derived-functor"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); explicit exact-square comparison and descent argument"
+   }
+  },
+  {
+   "text": "For a homotopy class $h:J\\to J'$ between K-injective complexes, write $V(h)=Q(Hr(h))=Q(sH'(h))$. Additivity makes degreewise functors preserve chain homotopies: applying the functor to $h-h'=dk+kd$ gives $F(h)-F(h')=F(d)F(k)+F(k)F(d)$. Thus all these expressions are defined on homotopy classes. Naturality of the units in [def-sfb-right-derived-functor] and of $\\lambda$ in [lem-weil-pbc-exact-functor-derived-factorization] gives\n$$A(Qh)a_J=a_{J'}V(h),\\qquad B(Qh)b_J=b_{J'}V(h).$$\nMultiplying the first equality by $a_{J'}^{-1}$ on the left and $a_J^{-1}$ on the right, and substituting in the second, gives $B(Qh)\\delta_J=\\delta_{J'}A(Qh)$.",
+   "uses": [
+    "def-sfb-right-derived-functor",
+    "lem-weil-pbc-exact-functor-derived-factorization"
+   ],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); explicit exact-square comparison and descent argument"
+   }
+  },
+  {
+   "text": "By [lem-weil-pbc-kinjective-hom-derived], every derived morphism $t:QJ\\to QJ'$ between K-injectives is $Qh$ for a unique homotopy class $h:J\\to J'$. Step 2 therefore gives\n$$B(t)\\delta_J=\\delta_{J'}A(t)$$\nfor every such $t$, not merely for images of selected resolution maps. Also every $M\\in D(\\mathcal A')$ has an isomorphism $u:M\\xrightarrow{\\sim}QJ$ with $J$ K-injective: represent $M$ by a complex $C$ in the localization [def-weil-abstract-derived-category], choose the assumed quasi-isomorphism $C\\to J$, and compose the representing isomorphism $M\\cong QC$ with its invertible image under $Q$. This uses arbitrary quasi-isomorphisms, not monomorphic resolutions.",
+   "uses": [
+    "lem-weil-pbc-kinjective-hom-derived",
+    "def-weil-abstract-derived-category"
+   ],
+   "elementary": false,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); explicit exact-square comparison and descent argument"
+   }
+  },
+  {
+   "text": "For such $(J,u)$ define $c(M;J,u)=B(u)^{-1}\\delta_JA(u)$. To check independence, let $v:M\\xrightarrow{\\sim}QJ'$ be another choice and put $t=vu^{-1}:QJ\\xrightarrow{\\sim}QJ'$. Step 3 gives $B(t)^{-1}\\delta_{J'}A(t)=\\delta_J$, whence\n$$B(v)^{-1}\\delta_{J'}A(v)=B(u)^{-1}B(t)^{-1}\\delta_{J'}A(t)A(u)=B(u)^{-1}\\delta_JA(u).$$\nHere $v=tu$ and only functoriality and inverse cancellation are used. Define $\\beta_M$ to be this common value; it is an isomorphism because all three factors are isomorphisms.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); explicit exact-square comparison and descent argument"
+   }
+  },
+  {
+   "text": "For $f:M\\to N$ choose $u:M\\xrightarrow{\\sim}QJ$ and $v:N\\xrightarrow{\\sim}QJ'$, and put $t=vfu^{-1}$. Applying step 3 and then functoriality gives\n$$B(f)\\beta_M=B(v)^{-1}B(t)\\delta_JA(u)=B(v)^{-1}\\delta_{J'}A(t)A(u)=\\beta_NA(f).$$\nThus $\\beta:A\\Rightarrow B$ is natural. Its inverse components are natural too, by multiplying this equality on the left by $\\beta_N^{-1}$ and on the right by $\\beta_M^{-1}$; hence it is a natural isomorphism. At $M=QJ$ use the choice $u=1_{QJ}$ to get $\\beta_{QJ}=\\delta_J$, so $\\beta_{QJ}a_J=b_J$, the required normalization. Step 4 supplies the displayed formula of the statement for every $(u,J)$.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); explicit exact-square comparison and descent argument"
+   }
+  },
+  {
+   "text": "Let $\\gamma:A\\Rightarrow B$ be any natural isomorphism satisfying the stated normalization only on K-injectives. Invertibility of $a_J$ gives $\\gamma_{QJ}=b_Ja_J^{-1}=\\delta_J$. For any $u:M\\xrightarrow{\\sim}QJ$, naturality of $\\gamma$ gives\n$$\\gamma_M=B(u)^{-1}\\gamma_{QJ}A(u)=B(u)^{-1}\\delta_JA(u)=\\beta_M.$$\nThus all components agree, proving uniqueness without a normalization assumption on other complexes.",
+   "uses": [],
+   "elementary": true,
+   "source": {
+    "document": "literature/stacks-project/derived.tex",
+    "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); explicit exact-square comparison and descent argument"
+   }
+  }
+ ],
+ "proof_deps": [
+  "lem-weil-pbc-exact-functor-derived-factorization",
+  "def-sfb-right-derived-functor",
+  "lem-weil-pbc-kinjective-hom-derived",
+  "def-weil-abstract-derived-category"
+ ],
+ "proof_origin": {
+  "by": "agent",
+  "document": "literature/stacks-project/derived.tex",
+  "place": "Tags 070I (lemma-K-injective), 070Y (lemma-K-injective-defined), 070K (lemma-enough-K-injectives-implies); explicit exact-square comparison and descent argument"
+ },
  "mathlib_searches": [
   {
    "tool": "grep",
@@ -51,10 +124,45 @@
    "results": "{\"top\": [\"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"CategoryTheory.NatTrans.rightDerived_comp_assoc\"], \"n_hits\": 8, \"note\": \"\"}",
    "date": "2026-10-21",
    "verdict": "no match: rightDerivedUnique assumes both universal pairs and rightDerivedFunctorComparison assumes a derived source pair; their use here requires the K-injective descent and exact-postcomposition arguments, not a one-line specialization"
+  },
+  {
+   "tool": "leansearch",
+   "query": "An exact commuting square preserving K injective complexes induces a unique derived natural isomorphism normalized by the right derived units",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.rightDerivedNatIso\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality_assoc\", \"CategoryTheory.InjectiveResolution.iso_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj_hom_naturality\", \"HomologicalComplex.rightUnitor\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightDerivedNatIso/rightDerivedUnique require both compared functors to be universal derived pairs; rightDerivedFunctorComparison requires the source composite already derived. None supplies the K-injective-preserving square hypotheses, descent and normalization as a one-line specialization. Ordinary injective-resolution hits concern objects or bounded-below complexes."
+  },
+  {
+   "tool": "grep",
+   "query": "rightDerivedFunctorComparison|rightDerivedUnique",
+   "results": "{\"ok\": true, \"n_hits\": 7, \"note\": \"\", \"top\": [\"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Localization/DerivabilityStructure/PointwiseRightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/RightDerived.lean\", \"Mathlib/CategoryTheory/Functor/Derived/PointwiseRightDerived.lean\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightDerivedNatIso/rightDerivedUnique require both compared functors to be universal derived pairs; rightDerivedFunctorComparison requires the source composite already derived. None supplies the K-injective-preserving square hypotheses, descent and normalization as a one-line specialization. Ordinary injective-resolution hits concern objects or bounded-below complexes."
+  },
+  {
+   "tool": "loogle",
+   "query": "CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison",
+   "results": "{\"ok\": true, \"n_hits\": 6, \"note\": \"\", \"top\": [\"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.instIsIsoFunctorRightDerivedFunctorComparison\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_app_assoc\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac\", \"CategoryTheory.LocalizerMorphism.rightDerivedFunctorComparison_fac_assoc\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightDerivedNatIso/rightDerivedUnique require both compared functors to be universal derived pairs; rightDerivedFunctorComparison requires the source composite already derived. None supplies the K-injective-preserving square hypotheses, descent and normalization as a one-line specialization. Ordinary injective-resolution hits concern objects or bounded-below complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "Extend a natural isomorphism from K injective resolutions to all objects of an unbounded derived category",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.InjectiveResolution.isoRightDerivedToHomotopyCategoryObj\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj\", \"CategoryTheory.instIsIsoAppToRightDerivedZeroOfInjective\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality\", \"CategoryTheory.InjectiveResolution.toRightDerivedZero_eq\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_hom_naturality_assoc\", \"CategoryTheory.InjectiveResolution.instIsIsoToRightDerivedZero'Self\", \"CategoryTheory.InjectiveResolution.isoRightDerivedObj_inv_naturality\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightDerivedNatIso/rightDerivedUnique require both compared functors to be universal derived pairs; rightDerivedFunctorComparison requires the source composite already derived. None supplies the K-injective-preserving square hypotheses, descent and normalization as a one-line specialization. Ordinary injective-resolution hits concern objects or bounded-below complexes."
+  },
+  {
+   "tool": "leanfinder",
+   "query": "A commuting square of exact vertical functors and additive horizontal functors preserving K injectives yields a natural right derived isomorphism with unit normalization",
+   "results": "{\"ok\": true, \"n_hits\": 8, \"note\": \"\", \"top\": [\"CategoryTheory.Functor.mapDerivedCategoryFactorsh\", \"CategoryTheory.Functor.mapDerivedCategoryFactors\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_assoc\", \"CategoryTheory.Functor.rightDerived_map_eq\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_inv_hom_id_app_assoc\", \"CategoryTheory.Functor.mapDerivedCategoryFactorsh_hom_app\", \"CategoryTheory.LocalizerMorphism.IsRightDerivabilityStructure.guitartExact'\", \"CategoryTheory.Functor.rightDerivedZeroIsoSelf_hom_inv_id_app_assoc\"]}",
+   "date": "2026-10-21",
+   "verdict": "no match: rightDerivedNatIso/rightDerivedUnique require both compared functors to be universal derived pairs; rightDerivedFunctorComparison requires the source composite already derived. None supplies the K-injective-preserving square hypotheses, descent and normalization as a one-line specialization. Ordinary injective-resolution hits concern objects or bounded-below complexes."
   }
  ],
  "mathlib_match": null,
- "status": "unsplit",
+ "status": "split",
  "created": {
   "by": "worker",
   "item": "lem-weil-pbc-tower-derived-evaluation-normalization",
@@ -73,5 +181,20 @@
   },
   "same_as": [],
   "is": null
+ },
+ "split_report": {
+  "date": "2026-10-21",
+  "item": "lem-weil-pbc-kinjective-exact-square-comparison",
+  "worker": "stage1",
+  "summary": "Kept the statement and all imported data; gave a fully typed comparison on K-injectives, its homotopy naturality, passage to all derived maps using the existing Mathlib Hom-bijection leaf, explicit independence and naturality calculations, and uniqueness from normalization only on K-injectives. No new nodes. Preserved prior recorded searches and appended the current logged searches.",
+  "blueprint": "Realizes the first sentence of prop-weil-pbc-direct-image-limits.proof.md (existence of tower evaluation comparisons), through the parent tower-derived-evaluation-normalization: its old normalization steps 2-4 are the generic exact-square unit normalization and K-injective descent proved here."
+ },
+ "reviewed": {
+  "date": "2026-10-21",
+  "by": "L",
+  "reviewer": "NT-cc-NZ-23ab849fc",
+  "group": "NZ",
+  "result": "pass",
+  "note": "mechanical checks by tools/merge_delivery.py; mathematics reviewed in full by NT-cc-NZ-23ab849fc (reviewer sub-agent of L); spot-checked: This is the item's first split. It is unsplit with no proof in base, live and side-live; there is no repair note and the item is not dropped. The statement and stmt_deps are unchanged, there are no new nodes, and proof_deps equals the union of the step uses. Statement: A=D(s)RH' and B=RH D(r). The identifications suppressed by the statement are exactly the λ_s and λ_r of lem-weil-pbc-exact-functor-derived-factorization, and step 1 types them out. Every hypothesis is used: r and s exact, r preserving K-injectives, K-injective replacements in A' and A, and H, H' only additive. Steps 1-2: invertibility of the unit on K-injectives is a clause of def-sfb-right-derived-functor's statement, and I checked naturality of a, b along homotopy classes by hand from naturality of λ and η. Step 3: the Mathlib leaf lem-weil-pbc-kinjective-hom-derived (Qh_map_bijective) extends naturality to all derived maps between K-injectives, and essential surjectivity of the localization Q gives the existence of u. Steps 4-6: I checked the order of factors in the independence, naturality (t=vfu^{-1}) and uniqueness calculations. Sources: Stacks derived.tex 070I (l.9631), 070Y (l.9747) and 070K (l.9767), and the first sentence of the main-20261015 prop-weil-pbc-direct-image-limits proof. The parent applies the item with r=s=e_n and all hypotheses hold there. Duplicate search: the normalized-comparison identifications and common-resolution nodes take β as given, and the exact-square pasting and composition nodes cover only exact functors, so none is a duplicate. Mathlib's rightDerivedFunctorComparison and rightDerivedUnique are not one-line specializations. All cited nodes are definitions or Mathlib leaves, so there is no route or tool_use issue."
  }
 }
