@@ -1,8 +1,8 @@
 # Work queue
 
-132 items; claim with `tools/claim.py next <group> [--stage N]`.
+130 items; claim with `tools/claim.py next <group> [--stage N]`.
 
-## Rework: quarantined by the upstream sync (14 clusters, 948 modules)
+## Rework: quarantined by the upstream sync (12 clusters, 941 modules)
 
 Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.tsv). One item per cluster: its root (a quarantined module importing no other quarantined one) and the quarantined modules importing it; fix the root, then the dependents as far as possible, deliver every module that compiles.
 
@@ -10,20 +10,18 @@ Priority over every queue (the human, 2026-10-20; tools/rework.py, coord/rework.
 |---|---|---|---|
 | `Sheaf.Paper.IntegralCompactSupportCoefficientComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.FiniteCoefficientDirectImage` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Paper.SitePerfectComplex` | 1 |  | error: Sheaf/Paper/SitePerfectComplex.lean:122:10: failed to synthesize instance of type class |
 | `Sheaf.AlgebraicGeometry.StrictLocalBaseChangeGlobalHomology` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.Paper.IntegralConstructibleCompactness` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.StandardSingleFlatCounitUnionEquation` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
-| `Sheaf.AlgebraicGeometry.DerivedPullbackTensorUnit` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.AlgebraicGeometry.DerivedPullbackMonoidalDescent` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapNestedPullbackSquare` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectOverlapStageTransport` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CoefficientExchangeFromComparisons` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
+| `Sheaf.Algebra.Homology.AffineTildeTensorOrdinaryExchangePreNormalizationChain` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Paper.CondensedQbarPullbackCube` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.Algebra.Homology.AffineBaseChangeSourceRepresentativeIso` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.SingleComplexOpenTermwiseComparison` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 | `Sheaf.AlgebraicGeometry.PerfectGeneratorPullback` | 1 |  | error: failed in the global build after a cluster restore (see the build log) |
 
-Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 90, stage 3 2 items.
+Blocked by rework (not in the queue until the rework items they depend on are fixed): stage 1 0, stage 2 89, stage 3 2 items.
 
 ## Stage 1: nodes to split (19)
 
@@ -61,12 +59,12 @@ Blocked by rework (not in the queue until the rework items they depend on are fi
 | `lem-per-adic-normalized-fibre-comparisons` | 1 | state | 0 |
 | `lem-sfb-cech-localization-unit-totalization` | 1 | state | 0 |
 | `lem-sfb-condensed-derived-invariant-bar` | 1 | state | 0 |
-| `lem-sfb-condensed-product-bar-comparison` | 1 | state | 0 |
 | `lem-sfb-dense-lattice-derived-invariants-comparison` | 1 | state | 0 |
 | `lem-sfb-faithfully-flat-normal-ring-descent` | 1 | state | 0 |
 | `lem-sfb-finite-closed-cover-resolution` | 1 | state | 0 |
 | `lem-sfb-integral-ambient-tower-comparison` | 1 | state | 0 |
 | `lem-sfb-integral-general-lfp-hom-finiteness` | 1 | state | 0 |
+| `lem-sfb-lattice-supported-hom-finite-comparison` | 1 | state | 0 |
 | `lem-sfb-nonnegative-derived-totalization` | 1 | state | 0 |
 | `lem-sfb-partial-kummer-boundary-unit-model` | 1 | state | 0 |
 | `lem-sfb-qlbar-internal-hom-coefficient-comparison` | 1 | state | 0 |
