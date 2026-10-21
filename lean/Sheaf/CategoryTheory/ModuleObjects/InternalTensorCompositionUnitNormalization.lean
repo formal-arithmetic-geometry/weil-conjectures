@@ -7,9 +7,6 @@ module
 
 public import WeilConjectures.CategoryTheory.ModuleObjects.ExtendScalars
 public import Mathlib.CategoryTheory.Adjunction.Mates
-import WeilConjectures.CategoryTheory.RingObjects.RingPresheaf
-import Mathlib.CategoryTheory.Monoidal.Mod
-import Mathlib.CategoryTheory.Limits.HasLimits
 
 /-! # Unit normalization of internal tensor composition
 
@@ -112,6 +109,68 @@ theorem internal_tensor_composition_unit_normalization
       m₀ = (((extendRestrictAdjunction φ).comp (extendRestrictAdjunction ψ)).ofNatIsoRight
         (comapComp φ ψ).symm).leftAdjointUniq (extendRestrictAdjunction (φ ≫ ψ)) ∧
       m₀ = (extendScalarsComp φ ψ).symm := by
-  sorry
+  let adj := ((extendRestrictAdjunction φ).comp (extendRestrictAdjunction ψ)).ofNatIsoRight
+    (comapComp φ ψ).symm
+  let m := adj.leftAdjointUniq (extendRestrictAdjunction (φ ≫ ψ))
+  have hu (M : Mod C R) :=
+    Adjunction.unit_leftAdjointUniq_hom_app adj (extendRestrictAdjunction (φ ≫ ψ)) M
+  have unit_hom {A B : C} [MonObj A] [MonObj B] [IsCommMonObj A]
+      (f : A ⟶ B) [IsMonHom f] (M : Mod C A) :
+      ((extendRestrictAdjunction f).unit.app M).hom = extendUnitHom f M := by
+    change extendUnitHom f M ≫ 𝟙 _ = _
+    exact Category.comp_id _
+  have composite_unit_hom (M : Mod C R) : (adj.unit.app M).hom =
+      extendUnitHom φ M ≫ extendUnitHom ψ ((extendScalars φ).obj M) := by
+    change (((extendRestrictAdjunction φ).comp
+      (extendRestrictAdjunction ψ)).unit.app M).hom ≫ 𝟙 _ = _
+    rw [Category.comp_id, Adjunction.comp_unit_app, comp_hom', comap_map_hom,
+      unit_hom, unit_hom]
+  have hu' (M : Mod C R) :
+      extendUnitHom φ M ≫ extendUnitHom ψ ((extendScalars φ).obj M) ≫
+        (m.hom.app M).hom = extendUnitHom (φ ≫ ψ) M := by
+    have h := congrArg (fun f ↦ f.hom) (hu M)
+    change (adj.unit.app M).hom ≫ (m.hom.app M).hom =
+      ((extendRestrictAdjunction (φ ≫ ψ)).unit.app M).hom at h
+    rw [composite_unit_hom, unit_hom, Category.assoc] at h
+    exact h
+  refine ⟨m, ?_, ?_, hu, rfl, ?_⟩
+  · intro M
+    let h := extendUnit ψ ((extendScalars φ).obj M) ≫ (comap ψ).map (m.hom.app M)
+    have hh : extendπ φ M ≫ h.hom = ψ ▷ M.X ≫ extendπ (φ ≫ ψ) M := by
+      rw [← whiskerLeft_extendUnitHom_smul' φ M, Category.assoc, act_hom h]
+      change S ◁ extendUnitHom φ M ≫ S ◁ h.hom ≫
+        ψ ▷ _ ≫ γ[T,((extendScalars (φ ≫ ψ)).obj M).X] = _
+      rw [← whiskerLeft_comp_assoc]
+      change S ◁ (extendUnitHom φ M ≫ extendUnitHom ψ ((extendScalars φ).obj M) ≫
+        (m.hom.app M).hom) ≫ ψ ▷ _ ≫ _ = _
+      rw [hu']
+      change S ◁ extendUnitHom (φ ≫ ψ) M ≫
+        ψ ▷ (extendScalarsObj (φ ≫ ψ) M).X ≫ γ[T,(extendScalarsObj (φ ≫ ψ) M).X] = _
+      rw [whisker_exchange_assoc, whiskerLeft_extendUnitHom_smul']
+    change T ◁ extendπ φ M ≫ extendπ ψ (extendScalarsObj φ M) ≫
+      (m.hom.app M).hom = _
+    rw [← whiskerLeft_extendUnitHom_smul' ψ (extendScalarsObj φ M),
+      Category.assoc, act_hom (m.hom.app M),
+      ← whiskerLeft_comp_assoc, ← whiskerLeft_comp_assoc]
+    rw [Category.assoc]
+    change T ◁ (extendπ φ M ≫ h.hom) ≫ _ = _
+    rw [hh, whiskerLeft_comp_assoc, whiskerLeft_extendπ_smul,
+      associator_inv_naturality_middle_assoc, ← comp_whiskerRight_assoc]
+  · intro M
+    have hi : extendUnitHom (φ ≫ ψ) M ≫ (m.inv.app M).hom =
+        extendUnitHom φ M ≫ extendUnitHom ψ ((extendScalars φ).obj M) := by
+      rw [← hu', Category.assoc, Category.assoc]
+      have hm : (m.hom.app M).hom ≫ (m.inv.app M).hom = 𝟙 _ := by
+        exact congrArg (fun f ↦ f.hom) (m.hom_inv_id_app M)
+      rw [hm]
+      exact congrArg (extendUnitHom φ M ≫ ·) (Category.comp_id _)
+    change extendπ (φ ≫ ψ) M ≫ (m.inv.app M).hom =
+      T ◁ extendUnitHom φ M ≫ extendπ ψ ((extendScalars φ).obj M)
+    rw [← whiskerLeft_extendUnitHom_smul' (φ ≫ ψ) M, Category.assoc,
+      act_hom (m.inv.app M), ← whiskerLeft_comp_assoc, hi,
+      whiskerLeft_comp_assoc, whiskerLeft_extendUnitHom_smul']
+  · apply Iso.ext
+    ext M
+    rfl
 
 end CategoryTheory.Mod
