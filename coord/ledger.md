@@ -23215,3 +23215,4 @@ error: Sheaf/AlgebraicGeometry/UnboundedDerivedFunctorCohomologicalBound.l
 - 17:37 L: returned deliver/F5/Sheaf.Paper.CompletedOperationTowerSubstitution (reviewer RETURN: (reviewer C-d7fca, head d7fca5d6c) the reviewer passed it, but the landing failed: NOT MERGED Sheaf.Paper.CompletedOpera)
 - 17:39 L: merged deliver/NW/lem-sfb-lattice-supported-hom-finite-comparison (stage 2; reviewer PASS; parallel immutable checks)
 - 17:41 L: merged deliver/Q04/lem-sfb-condensed-derived-restriction-calculus (reviewer FIX; first push; new nodes: 1)
+- 17:41 L: returned deliver/Q85/lem-weil-integral-twist-scalar-coherence (reviewer RETURN: L: approved by the reader, but the landing refused it: NOT MERGED lem-weil-integral-twist-scalar-coherence: lem-weil-int)
