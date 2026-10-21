@@ -8,23 +8,8 @@ module
 public import Sheaf.Paper.ConstantWeilStructure
 public import Sheaf.Paper.IntegralScalarExtensionUniverses
 public import Sheaf.Paper.FiniteFreeCompletedScalarComparison
-import Sheaf.Algebra.Category.ModuleCat.Sheaf.CochainTensorUniverses
-import Sheaf.AlgebraicGeometry.ProEtaleCohomologicalSupport
-import Sheaf.AlgebraicGeometry.ProEtaleConstantSheafStalk
-import Sheaf.AlgebraicGeometry.ProEtaleModuleStalkFunctor
-import Sheaf.AlgebraicGeometry.ProEtaleSurjectiveTowerDerivedLimit
-import Sheaf.NumberTheory.Padics.CoefficientExtensionFinite
-import Sheaf.Paper.CompletedIntegralConstantMapOfUniverses
-import Sheaf.Paper.DerivedCompleteOnSlices
-import Sheaf.Paper.DerivedScalarExtensionRestrictionAdjunction
-import Sheaf.Paper.GeneralAlgebraicallyClosedCoefficients
-import Sheaf.Paper.IntrinsicFiniteTorsionConstructibility
-import Sheaf.Paper.ProEtaleConstructibleSheaf
-import Sheaf.Paper.ProEtaleLocallyConstantSheafOfUniverses
-import Sheaf.Paper.SfCommonStageWeilCohomology
-import Sheaf.Paper.SfIntegralConstructible
-import Sheaf.Paper.SfRationalizationKaroubi
-import WeilConjectures.CategoryTheory.Triangulated.DerivedLimit
+import Sheaf.Paper.ConstantScalarStrictUnit
+import Sheaf.Paper.ConstantScalarUnitQuasiIsomorphism
 
 /-! # Normalized scalar extension of constant coefficient objects
 
@@ -40,6 +25,24 @@ set_option backward.isDefEq.respectTransparency false
 universe u
 open CategoryTheory CategoryTheory.Limits Opposite AlgebraicGeometry
 namespace WeilConjectures
+
+private theorem exists_scalarTestDatum (l : ℕ) :
+    ∃ D : FiniteFieldDatum.{0}, l ≠ D.p := by
+  obtain ⟨p, hpl, hp⟩ := Nat.exists_infinite_primes (l + 1)
+  let : Fact p.Prime := ⟨hp⟩
+  let D : FiniteFieldDatum.{0} := {
+    p := p
+    a := 1
+    q := p
+    prime := hp
+    exponent_pos := le_refl 1
+    cardinality_eq := (pow_one p).symm
+    k₀ := ZMod p
+    card_base := by simp [Nat.card_eq_fintype_card]
+    k := AlgebraicClosure (ZMod p) }
+  refine ⟨D, ?_⟩
+  change l ≠ p
+  omega
 
 variable (l : ℕ) [Fact l.Prime]
   (E : Type u) [Field E] [Algebra (Padic l) E] [FiniteDimensional (Padic l) E]
@@ -74,7 +77,18 @@ theorem constantCoefficientScalarUnit_existsUnique :
         (CochainComplex.mappingCocone.snd
           (completedScalarRoosEndomorphism l E L ι Y
             (constantWeilIntegralComplex l E Y))).v i (i - 1) (by omega) = 0) := by
-  sorry
+  change ∃! η : ConstantScalarStrictUnit.regularComplex l L Y ⟶
+      (integralScalarComplexFunctor l E L ι Y).obj
+        (ConstantScalarStrictUnit.regularComplex l E Y),
+    ConstantScalarStrictUnit.unitCoordinates l E Y L ι η ∧
+      ConstantScalarStrictUnit.zeroSecondComponent l E Y L ι η
+  obtain ⟨D, hl⟩ := exists_scalarTestDatum l
+  obtain ⟨_, _, _, _, hη, hunit⟩ :=
+    ConstantScalarStrictUnit.regular_scalar_strict_unit l E Y L ι D hl
+  obtain ⟨η, hη, huniq⟩ := hη
+  refine ⟨η, ⟨(hunit η).mp hη.1, hη.2⟩, ?_⟩
+  intro η' hη'
+  exact huniq η' ⟨(hunit η').mpr hη'.1, hη'.2⟩
 
 /-- The strict scalar unit, with both cone components determined uniquely.
 Source: blueprint order 1869 (blueprint: lem-weil-constant-coefficient-objects-constructible).
@@ -92,7 +106,18 @@ strict cone with that limit in degree zero. Its comparison is precisely the unit
 as the quotient and shifted coordinates agree. Thus its image under Q is invertible. -/
 theorem constantCoefficientScalarUnit_isIso :
     IsIso (DerivedCategory.Q.map (constantCoefficientScalarUnit l E L ι Y)) := by
-  sorry
+  obtain ⟨D, hl⟩ := exists_scalarTestDatum l
+  have hunit :=
+    (ConstantScalarStrictUnit.regular_scalar_strict_unit l E Y L ι D hl).2.2.2.2.2
+  have hη := (constantCoefficientScalarUnit_existsUnique l E L ι Y).exists.choose_spec
+  have hnorm : ConstantScalarStrictUnit.quotientCoordinates l E Y L ι
+      (constantCoefficientScalarUnit l E L ι Y) ∧
+      ConstantScalarStrictUnit.zeroSecondComponent l E Y L ι
+        (constantCoefficientScalarUnit l E L ι Y) :=
+    ⟨(hunit _).mpr hη.1, hη.2⟩
+  have := (ConstantScalarUnitQuasiIsomorphism.regular_scalar_unit_quasi_isomorphism
+    l E L ι Y D hl (constantCoefficientScalarUnit l E L ι Y) hnorm).2.2.2.1
+  infer_instance
 
 /-- The integral beta is the inverse strict unit after the normalized representative
 comparison. Its inverse sends s to the compatible pi_n(s) and zero shifted coordinate.
